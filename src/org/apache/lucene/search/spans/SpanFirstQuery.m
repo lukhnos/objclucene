@@ -23,15 +23,15 @@
   return self;
 }
 
-- (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum *)acceptPositionWithOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)spans {
+- (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *)acceptPositionWithOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)spans {
   JreAssert(([((OrgApacheLuceneSearchSpansSpans *) nil_chk(spans)) startPosition] != [spans endPosition]), (JreStrcat("$I", @"start equals end: ", [spans startPosition])));
-  if ([spans startPosition] >= end_) return JreLoadStatic(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum, NO_MORE_IN_CURRENT_DOC);
-  else if ([spans endPosition] <= end_) return JreLoadStatic(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum, YES);
-  else return JreLoadStatic(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum, NO);
+  if ([spans startPosition] >= end_) return JreLoadEnum(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus, NO_MORE_IN_CURRENT_DOC);
+  else if ([spans endPosition] <= end_) return JreLoadEnum(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus, YES);
+  else return JreLoadEnum(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus, NO);
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
-  JavaLangStringBuilder *buffer = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_init();
   [buffer appendWithNSString:@"spanFirst("];
   [buffer appendWithNSString:[((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(match_)) toStringWithNSString:field]];
   [buffer appendWithNSString:@", "];
@@ -42,7 +42,7 @@
 }
 
 - (OrgApacheLuceneSearchSpansSpanFirstQuery *)clone {
-  OrgApacheLuceneSearchSpansSpanFirstQuery *spanFirstQuery = [new_OrgApacheLuceneSearchSpansSpanFirstQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withInt_((OrgApacheLuceneSearchSpansSpanQuery *) check_class_cast([((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(match_)) clone], [OrgApacheLuceneSearchSpansSpanQuery class]), end_) autorelease];
+  OrgApacheLuceneSearchSpansSpanFirstQuery *spanFirstQuery = create_OrgApacheLuceneSearchSpansSpanFirstQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withInt_((OrgApacheLuceneSearchSpansSpanQuery *) cast_chk([((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(match_)) clone], [OrgApacheLuceneSearchSpansSpanQuery class]), end_);
   [spanFirstQuery setBoostWithFloat:[self getBoost]];
   return spanFirstQuery;
 }
@@ -65,9 +65,11 @@ void OrgApacheLuceneSearchSpansSpanFirstQuery_initWithOrgApacheLuceneSearchSpans
 }
 
 OrgApacheLuceneSearchSpansSpanFirstQuery *new_OrgApacheLuceneSearchSpansSpanFirstQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withInt_(OrgApacheLuceneSearchSpansSpanQuery *match, jint end) {
-  OrgApacheLuceneSearchSpansSpanFirstQuery *self = [OrgApacheLuceneSearchSpansSpanFirstQuery alloc];
-  OrgApacheLuceneSearchSpansSpanFirstQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withInt_(self, match, end);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSpansSpanFirstQuery, initWithOrgApacheLuceneSearchSpansSpanQuery_withInt_, match, end)
+}
+
+OrgApacheLuceneSearchSpansSpanFirstQuery *create_OrgApacheLuceneSearchSpansSpanFirstQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withInt_(OrgApacheLuceneSearchSpansSpanQuery *match, jint end) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSpansSpanFirstQuery, initWithOrgApacheLuceneSearchSpansSpanQuery_withInt_, match, end)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanFirstQuery)

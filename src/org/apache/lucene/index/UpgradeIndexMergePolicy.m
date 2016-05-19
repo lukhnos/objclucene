@@ -43,20 +43,20 @@ __attribute__((unused)) static void OrgApacheLuceneIndexUpgradeIndexMergePolicy_
 }
 
 - (jboolean)shouldUpgradeSegmentWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)si {
-  return ![((OrgApacheLuceneUtilVersion *) nil_chk(JreLoadStatic(OrgApacheLuceneUtilVersion, LATEST_))) isEqual:[((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(si))->info_)) getVersion]];
+  return ![((OrgApacheLuceneUtilVersion *) nil_chk(JreLoadStatic(OrgApacheLuceneUtilVersion, LATEST))) isEqual:[((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(si))->info_)) getVersion]];
 }
 
-- (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findMergesWithOrgApacheLuceneIndexMergeTriggerEnum:(OrgApacheLuceneIndexMergeTriggerEnum *)mergeTrigger
-                                                                      withOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)segmentInfos
-                                                                       withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer {
-  return [((OrgApacheLuceneIndexMergePolicy *) nil_chk(base_)) findMergesWithOrgApacheLuceneIndexMergeTriggerEnum:nil withOrgApacheLuceneIndexSegmentInfos:segmentInfos withOrgApacheLuceneIndexIndexWriter:writer];
+- (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findMergesWithOrgApacheLuceneIndexMergeTrigger:(OrgApacheLuceneIndexMergeTrigger *)mergeTrigger
+                                                                  withOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)segmentInfos
+                                                                   withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer {
+  return [((OrgApacheLuceneIndexMergePolicy *) nil_chk(base_)) findMergesWithOrgApacheLuceneIndexMergeTrigger:nil withOrgApacheLuceneIndexSegmentInfos:segmentInfos withOrgApacheLuceneIndexIndexWriter:writer];
 }
 
 - (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findForcedMergesWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)segmentInfos
                                                                                                      withInt:(jint)maxSegmentCount
                                                                                              withJavaUtilMap:(id<JavaUtilMap>)segmentsToMerge
                                                                          withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer {
-  id<JavaUtilMap> oldSegments = [new_JavaUtilHashMap_init() autorelease];
+  id<JavaUtilMap> oldSegments = create_JavaUtilHashMap_init();
   for (OrgApacheLuceneIndexSegmentCommitInfo * __strong si in nil_chk(segmentInfos)) {
     JavaLangBoolean *v = [((id<JavaUtilMap>) nil_chk(segmentsToMerge)) getWithId:si];
     if (v != nil && [self shouldUpgradeSegmentWithOrgApacheLuceneIndexSegmentCommitInfo:si]) {
@@ -77,16 +77,16 @@ __attribute__((unused)) static void OrgApacheLuceneIndexUpgradeIndexMergePolicy_
     if (OrgApacheLuceneIndexUpgradeIndexMergePolicy_verboseWithOrgApacheLuceneIndexIndexWriter_(self, writer)) {
       OrgApacheLuceneIndexUpgradeIndexMergePolicy_messageWithNSString_withOrgApacheLuceneIndexIndexWriter_(self, JreStrcat("$$$@", @"findForcedMerges: ", [[base_ getClass] getSimpleName], @" does not want to merge all old segments, merge remaining ones into new segment: ", oldSegments), writer);
     }
-    id<JavaUtilList> newInfos = [new_JavaUtilArrayList_init() autorelease];
+    id<JavaUtilList> newInfos = create_JavaUtilArrayList_init();
     for (OrgApacheLuceneIndexSegmentCommitInfo * __strong si in segmentInfos) {
       if ([oldSegments containsKeyWithId:si]) {
         [newInfos addWithId:si];
       }
     }
     if (spec == nil) {
-      spec = [new_OrgApacheLuceneIndexMergePolicy_MergeSpecification_init() autorelease];
+      spec = create_OrgApacheLuceneIndexMergePolicy_MergeSpecification_init();
     }
-    [((OrgApacheLuceneIndexMergePolicy_MergeSpecification *) nil_chk(spec)) addWithOrgApacheLuceneIndexMergePolicy_OneMerge:[new_OrgApacheLuceneIndexMergePolicy_OneMerge_initWithJavaUtilList_(newInfos) autorelease]];
+    [spec addWithOrgApacheLuceneIndexMergePolicy_OneMerge:create_OrgApacheLuceneIndexMergePolicy_OneMerge_initWithJavaUtilList_(newInfos)];
   }
   return spec;
 }
@@ -124,8 +124,8 @@ withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneIndexMergePolicy:", "UpgradeIndexMergePolicy", NULL, 0x1, NULL, NULL },
     { "shouldUpgradeSegmentWithOrgApacheLuceneIndexSegmentCommitInfo:", "shouldUpgradeSegment", "Z", 0x4, NULL, NULL },
-    { "findMergesWithOrgApacheLuceneIndexMergeTriggerEnum:withOrgApacheLuceneIndexSegmentInfos:withOrgApacheLuceneIndexIndexWriter:", "findMerges", "Lorg.apache.lucene.index.MergePolicy$MergeSpecification;", 0x1, "Ljava.io.IOException;", NULL },
-    { "findForcedMergesWithOrgApacheLuceneIndexSegmentInfos:withInt:withJavaUtilMap:withOrgApacheLuceneIndexIndexWriter:", "findForcedMerges", "Lorg.apache.lucene.index.MergePolicy$MergeSpecification;", 0x1, "Ljava.io.IOException;", NULL },
+    { "findMergesWithOrgApacheLuceneIndexMergeTrigger:withOrgApacheLuceneIndexSegmentInfos:withOrgApacheLuceneIndexIndexWriter:", "findMerges", "Lorg.apache.lucene.index.MergePolicy$MergeSpecification;", 0x1, "Ljava.io.IOException;", NULL },
+    { "findForcedMergesWithOrgApacheLuceneIndexSegmentInfos:withInt:withJavaUtilMap:withOrgApacheLuceneIndexIndexWriter:", "findForcedMerges", "Lorg.apache.lucene.index.MergePolicy$MergeSpecification;", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/SegmentInfos;ILjava/util/Map<Lorg/apache/lucene/index/SegmentCommitInfo;Ljava/lang/Boolean;>;Lorg/apache/lucene/index/IndexWriter;)Lorg/apache/lucene/index/MergePolicy$MergeSpecification;" },
     { "findForcedDeletesMergesWithOrgApacheLuceneIndexSegmentInfos:withOrgApacheLuceneIndexIndexWriter:", "findForcedDeletesMerges", "Lorg.apache.lucene.index.MergePolicy$MergeSpecification;", 0x1, "Ljava.io.IOException;", NULL },
     { "useCompoundFileWithOrgApacheLuceneIndexSegmentInfos:withOrgApacheLuceneIndexSegmentCommitInfo:withOrgApacheLuceneIndexIndexWriter:", "useCompoundFile", "Z", 0x1, "Ljava.io.IOException;", NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
@@ -147,9 +147,11 @@ void OrgApacheLuceneIndexUpgradeIndexMergePolicy_initWithOrgApacheLuceneIndexMer
 }
 
 OrgApacheLuceneIndexUpgradeIndexMergePolicy *new_OrgApacheLuceneIndexUpgradeIndexMergePolicy_initWithOrgApacheLuceneIndexMergePolicy_(OrgApacheLuceneIndexMergePolicy *base) {
-  OrgApacheLuceneIndexUpgradeIndexMergePolicy *self = [OrgApacheLuceneIndexUpgradeIndexMergePolicy alloc];
-  OrgApacheLuceneIndexUpgradeIndexMergePolicy_initWithOrgApacheLuceneIndexMergePolicy_(self, base);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexUpgradeIndexMergePolicy, initWithOrgApacheLuceneIndexMergePolicy_, base)
+}
+
+OrgApacheLuceneIndexUpgradeIndexMergePolicy *create_OrgApacheLuceneIndexUpgradeIndexMergePolicy_initWithOrgApacheLuceneIndexMergePolicy_(OrgApacheLuceneIndexMergePolicy *base) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexUpgradeIndexMergePolicy, initWithOrgApacheLuceneIndexMergePolicy_, base)
 }
 
 jboolean OrgApacheLuceneIndexUpgradeIndexMergePolicy_verboseWithOrgApacheLuceneIndexIndexWriter_(OrgApacheLuceneIndexUpgradeIndexMergePolicy *self, OrgApacheLuceneIndexIndexWriter *writer) {

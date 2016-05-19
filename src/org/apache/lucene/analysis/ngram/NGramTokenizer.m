@@ -45,6 +45,9 @@
 
 - (void)updateLastNonTokenChar;
 
+/*!
+ @brief Consume one code point.
+ */
 - (void)consume;
 
 @end
@@ -64,6 +67,14 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisNgramNGramTokenizer_u
 __attribute__((unused)) static void OrgApacheLuceneAnalysisNgramNGramTokenizer_consume(OrgApacheLuceneAnalysisNgramNGramTokenizer *self);
 
 @implementation OrgApacheLuceneAnalysisNgramNGramTokenizer
+
++ (jint)DEFAULT_MIN_NGRAM_SIZE {
+  return OrgApacheLuceneAnalysisNgramNGramTokenizer_DEFAULT_MIN_NGRAM_SIZE;
+}
+
++ (jint)DEFAULT_MAX_NGRAM_SIZE {
+  return OrgApacheLuceneAnalysisNgramNGramTokenizer_DEFAULT_MAX_NGRAM_SIZE;
+}
 
 - (instancetype)initWithInt:(jint)minGram
                     withInt:(jint)maxGram
@@ -116,7 +127,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       lastNonTokenChar_ -= bufferStart_;
       bufferStart_ = 0;
       exhausted_ = ![((OrgApacheLuceneAnalysisUtilCharacterUtils *) nil_chk(charUtils_)) fillWithOrgApacheLuceneAnalysisUtilCharacterUtils_CharacterBuffer:charBuffer_ withJavaIoReader:input_ withInt:((IOSIntArray *) nil_chk(buffer_))->size_ - bufferEnd_];
-      bufferEnd_ += [charUtils_ toCodePointsWithCharArray:[((OrgApacheLuceneAnalysisUtilCharacterUtils_CharacterBuffer *) nil_chk(charBuffer_)) getBuffer] withInt:0 withInt:[charBuffer_ getLength] withIntArray:buffer_ withInt:bufferEnd_];
+      bufferEnd_ += [((OrgApacheLuceneAnalysisUtilCharacterUtils *) nil_chk(charUtils_)) toCodePointsWithCharArray:[((OrgApacheLuceneAnalysisUtilCharacterUtils_CharacterBuffer *) nil_chk(charBuffer_)) getBuffer] withInt:0 withInt:[((OrgApacheLuceneAnalysisUtilCharacterUtils_CharacterBuffer *) nil_chk(charBuffer_)) getLength] withIntArray:buffer_ withInt:bufferEnd_];
     }
     if (gramSize_ > maxGram_ || (bufferStart_ + gramSize_) > bufferEnd_) {
       if (bufferStart_ + 1 + minGram_ > bufferEnd_) {
@@ -240,9 +251,11 @@ void OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithInt_withInt_withBoolean_
 }
 
 OrgApacheLuceneAnalysisNgramNGramTokenizer *new_OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithInt_withInt_withBoolean_(jint minGram, jint maxGram, jboolean edgesOnly) {
-  OrgApacheLuceneAnalysisNgramNGramTokenizer *self = [OrgApacheLuceneAnalysisNgramNGramTokenizer alloc];
-  OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithInt_withInt_withBoolean_(self, minGram, maxGram, edgesOnly);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisNgramNGramTokenizer, initWithInt_withInt_withBoolean_, minGram, maxGram, edgesOnly)
+}
+
+OrgApacheLuceneAnalysisNgramNGramTokenizer *create_OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithInt_withInt_withBoolean_(jint minGram, jint maxGram, jboolean edgesOnly) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisNgramNGramTokenizer, initWithInt_withInt_withBoolean_, minGram, maxGram, edgesOnly)
 }
 
 void OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithInt_withInt_(OrgApacheLuceneAnalysisNgramNGramTokenizer *self, jint minGram, jint maxGram) {
@@ -250,9 +263,11 @@ void OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithInt_withInt_(OrgApacheLu
 }
 
 OrgApacheLuceneAnalysisNgramNGramTokenizer *new_OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithInt_withInt_(jint minGram, jint maxGram) {
-  OrgApacheLuceneAnalysisNgramNGramTokenizer *self = [OrgApacheLuceneAnalysisNgramNGramTokenizer alloc];
-  OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithInt_withInt_(self, minGram, maxGram);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisNgramNGramTokenizer, initWithInt_withInt_, minGram, maxGram)
+}
+
+OrgApacheLuceneAnalysisNgramNGramTokenizer *create_OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithInt_withInt_(jint minGram, jint maxGram) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisNgramNGramTokenizer, initWithInt_withInt_, minGram, maxGram)
 }
 
 void OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_withBoolean_(OrgApacheLuceneAnalysisNgramNGramTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory, jint minGram, jint maxGram, jboolean edgesOnly) {
@@ -265,9 +280,11 @@ void OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithOrgApacheLuceneUtilAttri
 }
 
 OrgApacheLuceneAnalysisNgramNGramTokenizer *new_OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_withBoolean_(OrgApacheLuceneUtilAttributeFactory *factory, jint minGram, jint maxGram, jboolean edgesOnly) {
-  OrgApacheLuceneAnalysisNgramNGramTokenizer *self = [OrgApacheLuceneAnalysisNgramNGramTokenizer alloc];
-  OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_withBoolean_(self, factory, minGram, maxGram, edgesOnly);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisNgramNGramTokenizer, initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_withBoolean_, factory, minGram, maxGram, edgesOnly)
+}
+
+OrgApacheLuceneAnalysisNgramNGramTokenizer *create_OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_withBoolean_(OrgApacheLuceneUtilAttributeFactory *factory, jint minGram, jint maxGram, jboolean edgesOnly) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisNgramNGramTokenizer, initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_withBoolean_, factory, minGram, maxGram, edgesOnly)
 }
 
 void OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_(OrgApacheLuceneAnalysisNgramNGramTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory, jint minGram, jint maxGram) {
@@ -275,9 +292,11 @@ void OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithOrgApacheLuceneUtilAttri
 }
 
 OrgApacheLuceneAnalysisNgramNGramTokenizer *new_OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_(OrgApacheLuceneUtilAttributeFactory *factory, jint minGram, jint maxGram) {
-  OrgApacheLuceneAnalysisNgramNGramTokenizer *self = [OrgApacheLuceneAnalysisNgramNGramTokenizer alloc];
-  OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_(self, factory, minGram, maxGram);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisNgramNGramTokenizer, initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_, factory, minGram, maxGram)
+}
+
+OrgApacheLuceneAnalysisNgramNGramTokenizer *create_OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_(OrgApacheLuceneUtilAttributeFactory *factory, jint minGram, jint maxGram) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisNgramNGramTokenizer, initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_, factory, minGram, maxGram)
 }
 
 void OrgApacheLuceneAnalysisNgramNGramTokenizer_init(OrgApacheLuceneAnalysisNgramNGramTokenizer *self) {
@@ -285,18 +304,20 @@ void OrgApacheLuceneAnalysisNgramNGramTokenizer_init(OrgApacheLuceneAnalysisNgra
 }
 
 OrgApacheLuceneAnalysisNgramNGramTokenizer *new_OrgApacheLuceneAnalysisNgramNGramTokenizer_init() {
-  OrgApacheLuceneAnalysisNgramNGramTokenizer *self = [OrgApacheLuceneAnalysisNgramNGramTokenizer alloc];
-  OrgApacheLuceneAnalysisNgramNGramTokenizer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisNgramNGramTokenizer, init)
+}
+
+OrgApacheLuceneAnalysisNgramNGramTokenizer *create_OrgApacheLuceneAnalysisNgramNGramTokenizer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisNgramNGramTokenizer, init)
 }
 
 void OrgApacheLuceneAnalysisNgramNGramTokenizer_init__WithInt_withInt_withBoolean_(OrgApacheLuceneAnalysisNgramNGramTokenizer *self, jint minGram, jint maxGram, jboolean edgesOnly) {
   JreStrongAssign(&self->charUtils_, OrgApacheLuceneAnalysisUtilCharacterUtils_getInstance());
   if (minGram < 1) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"minGram must be greater than zero") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"minGram must be greater than zero");
   }
   if (minGram > maxGram) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"minGram must not be greater than maxGram") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"minGram must not be greater than maxGram");
   }
   self->minGram_ = minGram;
   self->maxGram_ = maxGram;

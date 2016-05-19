@@ -173,14 +173,14 @@ J2OBJC_IGNORE_DESIGNATED_END
   return [((JavaUtilLinkedList *) nil_chk(self->processors_)) toArray];
 }
 
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
+  return JreDefaultFastEnumeration(self, state, stackbuf, len);
+}
+
 - (void)dealloc {
   RELEASE_(processors_);
   RELEASE_(queryConfig_);
   [super dealloc];
-}
-
-- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -192,25 +192,25 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "setQueryConfigHandlerWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:", "setQueryConfigHandler", "V", 0x1, NULL, NULL },
     { "addWithId:", "add", "Z", 0x1, NULL, NULL },
     { "addWithInt:withId:", "add", "V", 0x1, NULL, NULL },
-    { "addAllWithJavaUtilCollection:", "addAll", "Z", 0x1, NULL, NULL },
-    { "addAllWithInt:withJavaUtilCollection:", "addAll", "Z", 0x1, NULL, NULL },
+    { "addAllWithJavaUtilCollection:", "addAll", "Z", 0x1, NULL, "(Ljava/util/Collection<+Lorg/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessor;>;)Z" },
+    { "addAllWithInt:withJavaUtilCollection:", "addAll", "Z", 0x1, NULL, "(ILjava/util/Collection<+Lorg/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessor;>;)Z" },
     { "clear", NULL, "V", 0x1, NULL, NULL },
     { "containsWithId:", "contains", "Z", 0x1, NULL, NULL },
-    { "containsAllWithJavaUtilCollection:", "containsAll", "Z", 0x1, NULL, NULL },
+    { "containsAllWithJavaUtilCollection:", "containsAll", "Z", 0x1, NULL, "(Ljava/util/Collection<*>;)Z" },
     { "getWithInt:", "get", "Lorg.apache.lucene.queryparser.flexible.core.processors.QueryNodeProcessor;", 0x1, NULL, NULL },
     { "indexOfWithId:", "indexOf", "I", 0x1, NULL, NULL },
     { "isEmpty", NULL, "Z", 0x1, NULL, NULL },
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, NULL },
+    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<Lorg/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessor;>;" },
     { "lastIndexOfWithId:", "lastIndexOf", "I", 0x1, NULL, NULL },
-    { "listIterator", NULL, "Ljava.util.ListIterator;", 0x1, NULL, NULL },
-    { "listIteratorWithInt:", "listIterator", "Ljava.util.ListIterator;", 0x1, NULL, NULL },
+    { "listIterator", NULL, "Ljava.util.ListIterator;", 0x1, NULL, "()Ljava/util/ListIterator<Lorg/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessor;>;" },
+    { "listIteratorWithInt:", "listIterator", "Ljava.util.ListIterator;", 0x1, NULL, "(I)Ljava/util/ListIterator<Lorg/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessor;>;" },
     { "removeWithId:", "remove", "Z", 0x1, NULL, NULL },
     { "removeWithInt:", "remove", "Lorg.apache.lucene.queryparser.flexible.core.processors.QueryNodeProcessor;", 0x1, NULL, NULL },
-    { "removeAllWithJavaUtilCollection:", "removeAll", "Z", 0x1, NULL, NULL },
-    { "retainAllWithJavaUtilCollection:", "retainAll", "Z", 0x1, NULL, NULL },
+    { "removeAllWithJavaUtilCollection:", "removeAll", "Z", 0x1, NULL, "(Ljava/util/Collection<*>;)Z" },
+    { "retainAllWithJavaUtilCollection:", "retainAll", "Z", 0x1, NULL, "(Ljava/util/Collection<*>;)Z" },
     { "setWithInt:withId:", "set", "Lorg.apache.lucene.queryparser.flexible.core.processors.QueryNodeProcessor;", 0x1, NULL, NULL },
     { "size", NULL, "I", 0x1, NULL, NULL },
-    { "subListWithInt:withInt:", "subList", "Ljava.util.List;", 0x1, NULL, NULL },
+    { "subListWithInt:withInt:", "subList", "Ljava.util.List;", 0x1, NULL, "(II)Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessor;>;" },
     { "toArrayWithNSObjectArray:", "toArray", "[Ljava.lang.Object;", 0x1, NULL, "<T:Ljava/lang/Object;>([TT;)[TT;" },
     { "toArray", NULL, "[Ljava.lang.Object;", 0x1, NULL, NULL },
   };
@@ -230,9 +230,11 @@ void OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline_
 }
 
 OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline *new_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline_init() {
-  OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline *self = [OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline alloc];
-  OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline, init)
+}
+
+OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline *create_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline, init)
 }
 
 void OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline_initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline *self, OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *queryConfigHandler) {
@@ -242,9 +244,11 @@ void OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline_
 }
 
 OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline *new_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline_initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *queryConfigHandler) {
-  OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline *self = [OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline alloc];
-  OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline_initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_(self, queryConfigHandler);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline, initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_, queryConfigHandler)
+}
+
+OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline *create_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline_initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *queryConfigHandler) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline, initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_, queryConfigHandler)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline)

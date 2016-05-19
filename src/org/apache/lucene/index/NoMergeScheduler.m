@@ -19,11 +19,17 @@ __attribute__((unused)) static void OrgApacheLuceneIndexNoMergeScheduler_init(Or
 
 __attribute__((unused)) static OrgApacheLuceneIndexNoMergeScheduler *new_OrgApacheLuceneIndexNoMergeScheduler_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexNoMergeScheduler *create_OrgApacheLuceneIndexNoMergeScheduler_init();
+
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexNoMergeScheduler)
 
-OrgApacheLuceneIndexMergeScheduler *OrgApacheLuceneIndexNoMergeScheduler_INSTANCE_;
+OrgApacheLuceneIndexMergeScheduler *OrgApacheLuceneIndexNoMergeScheduler_INSTANCE;
 
 @implementation OrgApacheLuceneIndexNoMergeScheduler
+
++ (OrgApacheLuceneIndexMergeScheduler *)INSTANCE {
+  return OrgApacheLuceneIndexNoMergeScheduler_INSTANCE;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -36,7 +42,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)mergeWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
-        withOrgApacheLuceneIndexMergeTriggerEnum:(OrgApacheLuceneIndexMergeTriggerEnum *)trigger
+            withOrgApacheLuceneIndexMergeTrigger:(OrgApacheLuceneIndexMergeTrigger *)trigger
                                      withBoolean:(jboolean)newMergesFound {
 }
 
@@ -46,7 +52,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneIndexNoMergeScheduler class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneIndexNoMergeScheduler_INSTANCE_, new_OrgApacheLuceneIndexNoMergeScheduler_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneIndexNoMergeScheduler_INSTANCE, new_OrgApacheLuceneIndexNoMergeScheduler_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexNoMergeScheduler)
   }
 }
@@ -55,11 +61,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   static const J2ObjcMethodInfo methods[] = {
     { "init", "NoMergeScheduler", NULL, 0x2, NULL, NULL },
     { "close", NULL, "V", 0x1, NULL, NULL },
-    { "mergeWithOrgApacheLuceneIndexIndexWriter:withOrgApacheLuceneIndexMergeTriggerEnum:withBoolean:", "merge", "V", 0x1, NULL, NULL },
+    { "mergeWithOrgApacheLuceneIndexIndexWriter:withOrgApacheLuceneIndexMergeTrigger:withBoolean:", "merge", "V", 0x1, NULL, NULL },
     { "clone", NULL, "Lorg.apache.lucene.index.MergeScheduler;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "INSTANCE_", NULL, 0x19, "Lorg.apache.lucene.index.MergeScheduler;", &OrgApacheLuceneIndexNoMergeScheduler_INSTANCE_, NULL, .constantValue.asLong = 0 },
+    { "INSTANCE", "INSTANCE", 0x19, "Lorg.apache.lucene.index.MergeScheduler;", &OrgApacheLuceneIndexNoMergeScheduler_INSTANCE, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneIndexNoMergeScheduler = { 2, "NoMergeScheduler", "org.apache.lucene.index", NULL, 0x11, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexNoMergeScheduler;
@@ -72,9 +78,11 @@ void OrgApacheLuceneIndexNoMergeScheduler_init(OrgApacheLuceneIndexNoMergeSchedu
 }
 
 OrgApacheLuceneIndexNoMergeScheduler *new_OrgApacheLuceneIndexNoMergeScheduler_init() {
-  OrgApacheLuceneIndexNoMergeScheduler *self = [OrgApacheLuceneIndexNoMergeScheduler alloc];
-  OrgApacheLuceneIndexNoMergeScheduler_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexNoMergeScheduler, init)
+}
+
+OrgApacheLuceneIndexNoMergeScheduler *create_OrgApacheLuceneIndexNoMergeScheduler_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexNoMergeScheduler, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexNoMergeScheduler)

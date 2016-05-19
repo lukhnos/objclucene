@@ -49,13 +49,13 @@ withOrgApacheLuceneCodecsCompressingCompressionMode:(OrgApacheLuceneCodecsCompre
                                                        withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)segmentInfo
                                                         withOrgApacheLuceneIndexFieldInfos:(OrgApacheLuceneIndexFieldInfos *)fieldInfos
                                                          withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
-  return [new_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withNSString_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneStoreIOContext_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_(directory, segmentInfo, segmentSuffix_, fieldInfos, context, formatName_, compressionMode_) autorelease];
+  return create_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withNSString_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneStoreIOContext_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_(directory, segmentInfo, segmentSuffix_, fieldInfos, context, formatName_, compressionMode_);
 }
 
 - (OrgApacheLuceneCodecsTermVectorsWriter *)vectorsWriterWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
                                                        withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)segmentInfo
                                                          withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
-  return [new_OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withNSString_withOrgApacheLuceneStoreIOContext_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_withInt_withInt_(directory, segmentInfo, segmentSuffix_, context, formatName_, compressionMode_, chunkSize_, blockSize_) autorelease];
+  return create_OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withNSString_withOrgApacheLuceneStoreIOContext_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_withInt_withInt_(directory, segmentInfo, segmentSuffix_, context, formatName_, compressionMode_, chunkSize_, blockSize_);
 }
 
 - (NSString *)description {
@@ -95,19 +95,21 @@ void OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat_initWithNSStri
   JreStrongAssign(&self->segmentSuffix_, segmentSuffix);
   JreStrongAssign(&self->compressionMode_, compressionMode);
   if (chunkSize < 1) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"chunkSize must be >= 1") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"chunkSize must be >= 1");
   }
   self->chunkSize_ = chunkSize;
   if (blockSize < 1) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"blockSize must be >= 1") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"blockSize must be >= 1");
   }
   self->blockSize_ = blockSize;
 }
 
 OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat *new_OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat_initWithNSString_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_withInt_withInt_(NSString *formatName, NSString *segmentSuffix, OrgApacheLuceneCodecsCompressingCompressionMode *compressionMode, jint chunkSize, jint blockSize) {
-  OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat *self = [OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat alloc];
-  OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat_initWithNSString_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_withInt_withInt_(self, formatName, segmentSuffix, compressionMode, chunkSize, blockSize);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat, initWithNSString_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_withInt_withInt_, formatName, segmentSuffix, compressionMode, chunkSize, blockSize)
+}
+
+OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat *create_OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat_initWithNSString_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_withInt_withInt_(NSString *formatName, NSString *segmentSuffix, OrgApacheLuceneCodecsCompressingCompressionMode *compressionMode, jint chunkSize, jint blockSize) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat, initWithNSString_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_withInt_withInt_, formatName, segmentSuffix, compressionMode, chunkSize, blockSize)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat)

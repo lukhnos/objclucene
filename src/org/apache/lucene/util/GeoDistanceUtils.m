@@ -41,7 +41,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "vincentyDistanceWithDouble:withDouble:withDouble:withDouble:", "vincentyDistance", "D", 0x19, NULL, NULL },
     { "distanceToDegreesLonWithDouble:withDouble:", "distanceToDegreesLon", "D", 0x9, NULL, NULL },
     { "distanceToDegreesLatWithDouble:withDouble:", "distanceToDegreesLat", "D", 0x9, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "GeoDistanceUtils", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneUtilGeoDistanceUtils = { 2, "GeoDistanceUtils", "org.apache.lucene.util", NULL, 0x1, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilGeoDistanceUtils;
@@ -119,9 +119,11 @@ void OrgApacheLuceneUtilGeoDistanceUtils_init(OrgApacheLuceneUtilGeoDistanceUtil
 }
 
 OrgApacheLuceneUtilGeoDistanceUtils *new_OrgApacheLuceneUtilGeoDistanceUtils_init() {
-  OrgApacheLuceneUtilGeoDistanceUtils *self = [OrgApacheLuceneUtilGeoDistanceUtils alloc];
-  OrgApacheLuceneUtilGeoDistanceUtils_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilGeoDistanceUtils, init)
+}
+
+OrgApacheLuceneUtilGeoDistanceUtils *create_OrgApacheLuceneUtilGeoDistanceUtils_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilGeoDistanceUtils, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilGeoDistanceUtils)

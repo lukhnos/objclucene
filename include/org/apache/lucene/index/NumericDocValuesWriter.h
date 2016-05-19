@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexNumericDocValuesWriter_INCLUDE_ALL")
-#if OrgApacheLuceneIndexNumericDocValuesWriter_RESTRICT
-#define OrgApacheLuceneIndexNumericDocValuesWriter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexNumericDocValuesWriter")
+#ifdef RESTRICT_OrgApacheLuceneIndexNumericDocValuesWriter
+#define INCLUDE_ALL_OrgApacheLuceneIndexNumericDocValuesWriter 0
 #else
-#define OrgApacheLuceneIndexNumericDocValuesWriter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexNumericDocValuesWriter 1
 #endif
-#undef OrgApacheLuceneIndexNumericDocValuesWriter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexNumericDocValuesWriter
 
-#if !defined (_OrgApacheLuceneIndexNumericDocValuesWriter_) && (OrgApacheLuceneIndexNumericDocValuesWriter_INCLUDE_ALL || OrgApacheLuceneIndexNumericDocValuesWriter_INCLUDE)
-#define _OrgApacheLuceneIndexNumericDocValuesWriter_
+#if !defined (OrgApacheLuceneIndexNumericDocValuesWriter_) && (INCLUDE_ALL_OrgApacheLuceneIndexNumericDocValuesWriter || defined(INCLUDE_OrgApacheLuceneIndexNumericDocValuesWriter))
+#define OrgApacheLuceneIndexNumericDocValuesWriter_
 
-#define OrgApacheLuceneIndexDocValuesWriter_RESTRICT 1
-#define OrgApacheLuceneIndexDocValuesWriter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexDocValuesWriter 1
+#define INCLUDE_OrgApacheLuceneIndexDocValuesWriter 1
 #include "org/apache/lucene/index/DocValuesWriter.h"
 
 @class OrgApacheLuceneCodecsDocValuesConsumer;
@@ -25,6 +25,10 @@
 @class OrgApacheLuceneIndexSegmentWriteState;
 @class OrgApacheLuceneUtilCounter;
 
+/*!
+ @brief Buffers up pending long per doc, then flushes when
+ segment flushes.
+ */
 @interface OrgApacheLuceneIndexNumericDocValuesWriter : OrgApacheLuceneIndexDocValuesWriter
 
 #pragma mark Public
@@ -48,8 +52,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexNumericDocValuesWriter_initWithOrgApa
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexNumericDocValuesWriter *new_OrgApacheLuceneIndexNumericDocValuesWriter_initWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilCounter_(OrgApacheLuceneIndexFieldInfo *fieldInfo, OrgApacheLuceneUtilCounter *iwBytesUsed) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexNumericDocValuesWriter *create_OrgApacheLuceneIndexNumericDocValuesWriter_initWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilCounter_(OrgApacheLuceneIndexFieldInfo *fieldInfo, OrgApacheLuceneUtilCounter *iwBytesUsed);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexNumericDocValuesWriter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexNumericDocValuesWriter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexNumericDocValuesWriter")

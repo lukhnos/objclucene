@@ -64,9 +64,15 @@ __attribute__((unused)) static void OrgApacheLuceneStoreRAMInputStream_$1_initWi
 
 __attribute__((unused)) static OrgApacheLuceneStoreRAMInputStream_$1 *new_OrgApacheLuceneStoreRAMInputStream_$1_initWithLong_withNSString_withOrgApacheLuceneStoreRAMFile_withLong_(jlong capture$0, NSString *arg$0, OrgApacheLuceneStoreRAMFile *arg$1, jlong arg$2) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneStoreRAMInputStream_$1 *create_OrgApacheLuceneStoreRAMInputStream_$1_initWithLong_withNSString_withOrgApacheLuceneStoreRAMFile_withLong_(jlong capture$0, NSString *arg$0, OrgApacheLuceneStoreRAMFile *arg$1, jlong arg$2);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreRAMInputStream_$1)
 
 @implementation OrgApacheLuceneStoreRAMInputStream
+
++ (jint)BUFFER_SIZE {
+  return OrgApacheLuceneStoreRAMInputStream_BUFFER_SIZE;
+}
 
 - (instancetype)initWithNSString:(NSString *)name
  withOrgApacheLuceneStoreRAMFile:(OrgApacheLuceneStoreRAMFile *)f {
@@ -133,9 +139,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreRAMInputStream_$1)
                                              withLong:(jlong)offset
                                              withLong:(jlong)length {
   if (offset < 0 || length < 0 || offset + length > self->length_) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$@", @"slice() ", sliceDescription, @" out of bounds: ", self)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$@", @"slice() ", sliceDescription, @" out of bounds: ", self));
   }
-  return [new_OrgApacheLuceneStoreRAMInputStream_$1_initWithLong_withNSString_withOrgApacheLuceneStoreRAMFile_withLong_(offset, [self getFullSliceDescriptionWithNSString:sliceDescription], file_, offset + length) autorelease];
+  return create_OrgApacheLuceneStoreRAMInputStream_$1_initWithLong_withNSString_withOrgApacheLuceneStoreRAMFile_withLong_(offset, [self getFullSliceDescriptionWithNSString:sliceDescription], file_, offset + length);
 }
 
 - (void)dealloc {
@@ -178,9 +184,11 @@ void OrgApacheLuceneStoreRAMInputStream_initWithNSString_withOrgApacheLuceneStor
 }
 
 OrgApacheLuceneStoreRAMInputStream *new_OrgApacheLuceneStoreRAMInputStream_initWithNSString_withOrgApacheLuceneStoreRAMFile_(NSString *name, OrgApacheLuceneStoreRAMFile *f) {
-  OrgApacheLuceneStoreRAMInputStream *self = [OrgApacheLuceneStoreRAMInputStream alloc];
-  OrgApacheLuceneStoreRAMInputStream_initWithNSString_withOrgApacheLuceneStoreRAMFile_(self, name, f);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreRAMInputStream, initWithNSString_withOrgApacheLuceneStoreRAMFile_, name, f)
+}
+
+OrgApacheLuceneStoreRAMInputStream *create_OrgApacheLuceneStoreRAMInputStream_initWithNSString_withOrgApacheLuceneStoreRAMFile_(NSString *name, OrgApacheLuceneStoreRAMFile *f) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreRAMInputStream, initWithNSString_withOrgApacheLuceneStoreRAMFile_, name, f)
 }
 
 void OrgApacheLuceneStoreRAMInputStream_initWithNSString_withOrgApacheLuceneStoreRAMFile_withLong_(OrgApacheLuceneStoreRAMInputStream *self, NSString *name, OrgApacheLuceneStoreRAMFile *f, jlong length) {
@@ -188,23 +196,25 @@ void OrgApacheLuceneStoreRAMInputStream_initWithNSString_withOrgApacheLuceneStor
   JreStrongAssign(&self->file_, f);
   self->length_ = length;
   if (length / OrgApacheLuceneStoreRAMInputStream_BUFFER_SIZE >= JavaLangInteger_MAX_VALUE) {
-    @throw [new_JavaIoIOException_initWithNSString_(JreStrcat("$J$$", @"RAMInputStream too large length=", length, @": ", name)) autorelease];
+    @throw create_JavaIoIOException_initWithNSString_(JreStrcat("$J$$", @"RAMInputStream too large length=", length, @": ", name));
   }
   self->currentBufferIndex_ = -1;
   JreStrongAssign(&self->currentBuffer_, nil);
 }
 
 OrgApacheLuceneStoreRAMInputStream *new_OrgApacheLuceneStoreRAMInputStream_initWithNSString_withOrgApacheLuceneStoreRAMFile_withLong_(NSString *name, OrgApacheLuceneStoreRAMFile *f, jlong length) {
-  OrgApacheLuceneStoreRAMInputStream *self = [OrgApacheLuceneStoreRAMInputStream alloc];
-  OrgApacheLuceneStoreRAMInputStream_initWithNSString_withOrgApacheLuceneStoreRAMFile_withLong_(self, name, f, length);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreRAMInputStream, initWithNSString_withOrgApacheLuceneStoreRAMFile_withLong_, name, f, length)
+}
+
+OrgApacheLuceneStoreRAMInputStream *create_OrgApacheLuceneStoreRAMInputStream_initWithNSString_withOrgApacheLuceneStoreRAMFile_withLong_(NSString *name, OrgApacheLuceneStoreRAMFile *f, jlong length) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreRAMInputStream, initWithNSString_withOrgApacheLuceneStoreRAMFile_withLong_, name, f, length)
 }
 
 void OrgApacheLuceneStoreRAMInputStream_switchCurrentBufferWithBoolean_(OrgApacheLuceneStoreRAMInputStream *self, jboolean enforceEOF) {
   self->bufferStart_ = (jlong) OrgApacheLuceneStoreRAMInputStream_BUFFER_SIZE * (jlong) self->currentBufferIndex_;
   if (self->bufferStart_ > self->length_ || self->currentBufferIndex_ >= [((OrgApacheLuceneStoreRAMFile *) nil_chk(self->file_)) numBuffers]) {
     if (enforceEOF) {
-      @throw [new_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"read past EOF: ", self)) autorelease];
+      @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"read past EOF: ", self));
     }
     else {
       self->currentBufferIndex_--;
@@ -212,7 +222,7 @@ void OrgApacheLuceneStoreRAMInputStream_switchCurrentBufferWithBoolean_(OrgApach
     }
   }
   else {
-    JreStrongAssign(&self->currentBuffer_, [self->file_ getBufferWithInt:self->currentBufferIndex_]);
+    JreStrongAssign(&self->currentBuffer_, [((OrgApacheLuceneStoreRAMFile *) nil_chk(self->file_)) getBufferWithInt:self->currentBufferIndex_]);
     self->bufferPosition_ = 0;
     jlong buflen = self->length_ - self->bufferStart_;
     self->bufferLength_ = buflen > OrgApacheLuceneStoreRAMInputStream_BUFFER_SIZE ? OrgApacheLuceneStoreRAMInputStream_BUFFER_SIZE : (jint) buflen;
@@ -225,7 +235,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreRAMInputStream)
 
 - (void)seekWithLong:(jlong)pos {
   if (pos < 0LL) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Seeking to negative position: ", self)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Seeking to negative position: ", self));
   }
   [super seekWithLong:pos + val$offset_];
 }
@@ -279,9 +289,11 @@ void OrgApacheLuceneStoreRAMInputStream_$1_initWithLong_withNSString_withOrgApac
 }
 
 OrgApacheLuceneStoreRAMInputStream_$1 *new_OrgApacheLuceneStoreRAMInputStream_$1_initWithLong_withNSString_withOrgApacheLuceneStoreRAMFile_withLong_(jlong capture$0, NSString *arg$0, OrgApacheLuceneStoreRAMFile *arg$1, jlong arg$2) {
-  OrgApacheLuceneStoreRAMInputStream_$1 *self = [OrgApacheLuceneStoreRAMInputStream_$1 alloc];
-  OrgApacheLuceneStoreRAMInputStream_$1_initWithLong_withNSString_withOrgApacheLuceneStoreRAMFile_withLong_(self, capture$0, arg$0, arg$1, arg$2);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreRAMInputStream_$1, initWithLong_withNSString_withOrgApacheLuceneStoreRAMFile_withLong_, capture$0, arg$0, arg$1, arg$2)
+}
+
+OrgApacheLuceneStoreRAMInputStream_$1 *create_OrgApacheLuceneStoreRAMInputStream_$1_initWithLong_withNSString_withOrgApacheLuceneStoreRAMFile_withLong_(jlong capture$0, NSString *arg$0, OrgApacheLuceneStoreRAMFile *arg$1, jlong arg$2) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreRAMInputStream_$1, initWithLong_withNSString_withOrgApacheLuceneStoreRAMFile_withLong_, capture$0, arg$0, arg$1, arg$2)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreRAMInputStream_$1)

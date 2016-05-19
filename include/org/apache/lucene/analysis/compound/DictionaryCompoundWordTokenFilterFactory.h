@@ -5,33 +5,48 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory_) && (OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory))
+#define OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-#define OrgApacheLuceneAnalysisUtilResourceLoaderAware_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilResourceLoaderAware_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilResourceLoaderAware 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilResourceLoaderAware 1
 #include "org/apache/lucene/analysis/util/ResourceLoaderAware.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol JavaUtilMap;
 @protocol OrgApacheLuceneAnalysisUtilResourceLoader;
 
+/*!
+ @brief Factory for <code>DictionaryCompoundWordTokenFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_dictcomp" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+ &lt;filter class="solr.DictionaryCompoundWordTokenFilterFactory" dictionary="dictionary.txt"
+ minWordSize="5" minSubwordSize="2" maxSubwordSize="15" onlyLongestMatch="true"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilResourceLoaderAware >
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new DictionaryCompoundWordTokenFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -46,8 +61,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordToke
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory *new_OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory *create_OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory")

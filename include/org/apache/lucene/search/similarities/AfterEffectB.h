@@ -5,28 +5,34 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSimilaritiesAfterEffectB_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSimilaritiesAfterEffectB_RESTRICT
-#define OrgApacheLuceneSearchSimilaritiesAfterEffectB_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesAfterEffectB")
+#ifdef RESTRICT_OrgApacheLuceneSearchSimilaritiesAfterEffectB
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesAfterEffectB 0
 #else
-#define OrgApacheLuceneSearchSimilaritiesAfterEffectB_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesAfterEffectB 1
 #endif
-#undef OrgApacheLuceneSearchSimilaritiesAfterEffectB_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSimilaritiesAfterEffectB
 
-#if !defined (_OrgApacheLuceneSearchSimilaritiesAfterEffectB_) && (OrgApacheLuceneSearchSimilaritiesAfterEffectB_INCLUDE_ALL || OrgApacheLuceneSearchSimilaritiesAfterEffectB_INCLUDE)
-#define _OrgApacheLuceneSearchSimilaritiesAfterEffectB_
+#if !defined (OrgApacheLuceneSearchSimilaritiesAfterEffectB_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesAfterEffectB || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesAfterEffectB))
+#define OrgApacheLuceneSearchSimilaritiesAfterEffectB_
 
-#define OrgApacheLuceneSearchSimilaritiesAfterEffect_RESTRICT 1
-#define OrgApacheLuceneSearchSimilaritiesAfterEffect_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSimilaritiesAfterEffect 1
+#define INCLUDE_OrgApacheLuceneSearchSimilaritiesAfterEffect 1
 #include "org/apache/lucene/search/similarities/AfterEffect.h"
 
 @class OrgApacheLuceneSearchExplanation;
 @class OrgApacheLuceneSearchSimilaritiesBasicStats;
 
+/*!
+ @brief Model of the information gain based on the ratio of two Bernoulli processes.
+ */
 @interface OrgApacheLuceneSearchSimilaritiesAfterEffectB : OrgApacheLuceneSearchSimilaritiesAfterEffect
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor: parameter-free
+ */
 - (instancetype)init;
 
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
@@ -45,8 +51,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesAfterEffectB_init(OrgApa
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesAfterEffectB *new_OrgApacheLuceneSearchSimilaritiesAfterEffectB_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesAfterEffectB *create_OrgApacheLuceneSearchSimilaritiesAfterEffectB_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesAfterEffectB)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSimilaritiesAfterEffectB_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesAfterEffectB")

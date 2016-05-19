@@ -75,7 +75,7 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:", "MergedPrefixCodedTermsIterator", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilList:", "MergedPrefixCodedTermsIterator", NULL, 0x1, NULL, "(Ljava/util/List<Lorg/apache/lucene/index/PrefixCodedTerms;>;)V" },
     { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
     { "field", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
     { "delGen", NULL, "J", 0x1, NULL, NULL },
@@ -106,9 +106,11 @@ void OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_initWithJavaUtilList_(Or
 }
 
 OrgApacheLuceneIndexMergedPrefixCodedTermsIterator *new_OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_initWithJavaUtilList_(id<JavaUtilList> termsList) {
-  OrgApacheLuceneIndexMergedPrefixCodedTermsIterator *self = [OrgApacheLuceneIndexMergedPrefixCodedTermsIterator alloc];
-  OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_initWithJavaUtilList_(self, termsList);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMergedPrefixCodedTermsIterator, initWithJavaUtilList_, termsList)
+}
+
+OrgApacheLuceneIndexMergedPrefixCodedTermsIterator *create_OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_initWithJavaUtilList_(id<JavaUtilList> termsList) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMergedPrefixCodedTermsIterator, initWithJavaUtilList_, termsList)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergedPrefixCodedTermsIterator)
@@ -137,7 +139,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergedPrefixCodedTermsItera
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithInt:", "TermMergeQueue", NULL, 0x0, NULL, NULL },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x4, NULL, NULL },
+    { "lessThanWithId:withId:", "lessThan", "Z", 0x4, NULL, "(Lorg/apache/lucene/index/PrefixCodedTerms$TermIterator;Lorg/apache/lucene/index/PrefixCodedTerms$TermIterator;)Z" },
   };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.index.PrefixCodedTerms$TermIterator;"};
   static const J2ObjcClassInfo _OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_TermMergeQueue = { 2, "TermMergeQueue", "org.apache.lucene.index", "MergedPrefixCodedTermsIterator", 0xa, 2, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/index/PrefixCodedTerms$TermIterator;>;" };
@@ -151,9 +153,11 @@ void OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_TermMergeQueue_initWithI
 }
 
 OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_TermMergeQueue *new_OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_TermMergeQueue_initWithInt_(jint size) {
-  OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_TermMergeQueue *self = [OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_TermMergeQueue alloc];
-  OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_TermMergeQueue_initWithInt_(self, size);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_TermMergeQueue, initWithInt_, size)
+}
+
+OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_TermMergeQueue *create_OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_TermMergeQueue_initWithInt_(jint size) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_TermMergeQueue, initWithInt_, size)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_TermMergeQueue)
@@ -173,7 +177,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergedPrefixCodedTermsItera
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithInt:", "FieldMergeQueue", NULL, 0x0, NULL, NULL },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x4, NULL, NULL },
+    { "lessThanWithId:withId:", "lessThan", "Z", 0x4, NULL, "(Lorg/apache/lucene/index/PrefixCodedTerms$TermIterator;Lorg/apache/lucene/index/PrefixCodedTerms$TermIterator;)Z" },
   };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.index.PrefixCodedTerms$TermIterator;"};
   static const J2ObjcClassInfo _OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_FieldMergeQueue = { 2, "FieldMergeQueue", "org.apache.lucene.index", "MergedPrefixCodedTermsIterator", 0xa, 2, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/index/PrefixCodedTerms$TermIterator;>;" };
@@ -187,9 +191,11 @@ void OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_FieldMergeQueue_initWith
 }
 
 OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_FieldMergeQueue *new_OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_FieldMergeQueue_initWithInt_(jint size) {
-  OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_FieldMergeQueue *self = [OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_FieldMergeQueue alloc];
-  OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_FieldMergeQueue_initWithInt_(self, size);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_FieldMergeQueue, initWithInt_, size)
+}
+
+OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_FieldMergeQueue *create_OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_FieldMergeQueue_initWithInt_(jint size) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_FieldMergeQueue, initWithInt_, size)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_FieldMergeQueue)

@@ -5,38 +5,57 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException_INCLUDE_ALL")
-#if OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException_RESTRICT
-#define OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException")
+#ifdef RESTRICT_OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException
+#define INCLUDE_ALL_OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException 0
 #else
-#define OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException 1
 #endif
-#undef OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException
 
-#if !defined (_OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException_) && (OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException_INCLUDE_ALL || OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException_INCLUDE)
-#define _OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException_
+#if !defined (OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException_) && (INCLUDE_ALL_OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException || defined(INCLUDE_OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException))
+#define OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException_
 
-#define JavaLangRuntimeException_RESTRICT 1
-#define JavaLangRuntimeException_INCLUDE 1
+#define RESTRICT_JavaLangRuntimeException 1
+#define INCLUDE_JavaLangRuntimeException 1
 #include "java/lang/RuntimeException.h"
 
 @class OrgApacheLuceneUtilAutomatonAutomaton;
 @class OrgApacheLuceneUtilAutomatonRegExp;
 
+/*!
+ @brief This exception is thrown when determinizing an automaton would result in one
+ has too many states.
+ */
 @interface OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException : JavaLangRuntimeException
 
 #pragma mark Public
 
+/*!
+ @brief Use this constructor when the automaton failed to determinize.
+ */
 - (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton
                                                       withInt:(jint)maxDeterminizedStates;
 
+/*!
+ @brief Use this constructor when the RegExp failed to convert to an automaton.
+ */
 - (instancetype)initWithOrgApacheLuceneUtilAutomatonRegExp:(OrgApacheLuceneUtilAutomatonRegExp *)regExp
 withOrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException:(OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException *)cause;
 
+/*!
+ @brief Returns the automaton that caused this exception, if any.
+ */
 - (OrgApacheLuceneUtilAutomatonAutomaton *)getAutomaton;
 
+/*!
+ @brief Get the maximum number of allowed determinized states.
+ */
 - (jint)getMaxDeterminizedStates;
 
+/*!
+ @brief Return the RegExp that caused this exception if any.
+ */
 - (OrgApacheLuceneUtilAutomatonRegExp *)getRegExp;
 
 @end
@@ -47,12 +66,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeExcept
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException *new_OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException_initWithOrgApacheLuceneUtilAutomatonRegExp_withOrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException_(OrgApacheLuceneUtilAutomatonRegExp *regExp, OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException *cause) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException *create_OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException_initWithOrgApacheLuceneUtilAutomatonRegExp_withOrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException_(OrgApacheLuceneUtilAutomatonRegExp *regExp, OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException *cause);
+
 FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException *self, OrgApacheLuceneUtilAutomatonAutomaton *automaton, jint maxDeterminizedStates);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException *new_OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneUtilAutomatonAutomaton *automaton, jint maxDeterminizedStates) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException *create_OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneUtilAutomatonAutomaton *automaton, jint maxDeterminizedStates);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException")

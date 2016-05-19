@@ -31,14 +31,14 @@
 
 - (OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs *)suggestWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery:(OrgApacheLuceneSearchSuggestDocumentCompletionQuery *)query
                                                                                                                withInt:(jint)n {
-  OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *collector = [new_OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector_initWithInt_(n) autorelease];
+  OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *collector = create_OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector_initWithInt_(n);
   [self suggestWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery:query withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector:collector];
   return [collector get];
 }
 
 - (void)suggestWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery:(OrgApacheLuceneSearchSuggestDocumentCompletionQuery *)query
        withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector:(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *)collector {
-  query = (OrgApacheLuceneSearchSuggestDocumentCompletionQuery *) check_class_cast([((OrgApacheLuceneSearchSuggestDocumentCompletionQuery *) nil_chk(query)) rewriteWithOrgApacheLuceneIndexIndexReader:[self getIndexReader]], [OrgApacheLuceneSearchSuggestDocumentCompletionQuery class]);
+  query = (OrgApacheLuceneSearchSuggestDocumentCompletionQuery *) cast_chk([((OrgApacheLuceneSearchSuggestDocumentCompletionQuery *) nil_chk(query)) rewriteWithOrgApacheLuceneIndexIndexReader:[self getIndexReader]], [OrgApacheLuceneSearchSuggestDocumentCompletionQuery class]);
   OrgApacheLuceneSearchWeight *weight = [((OrgApacheLuceneSearchSuggestDocumentCompletionQuery *) nil_chk(query)) createWeightWithOrgApacheLuceneSearchIndexSearcher:self withBoolean:[((OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *) nil_chk(collector)) needsScores]];
   for (OrgApacheLuceneIndexLeafReaderContext * __strong context in nil_chk([((OrgApacheLuceneIndexIndexReader *) nil_chk([self getIndexReader])) leaves])) {
     OrgApacheLuceneSearchBulkScorer *scorer = [((OrgApacheLuceneSearchWeight *) nil_chk(weight)) bulkScorerWithOrgApacheLuceneIndexLeafReaderContext:context];
@@ -69,9 +69,11 @@ void OrgApacheLuceneSearchSuggestDocumentSuggestIndexSearcher_initWithOrgApacheL
 }
 
 OrgApacheLuceneSearchSuggestDocumentSuggestIndexSearcher *new_OrgApacheLuceneSearchSuggestDocumentSuggestIndexSearcher_initWithOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneIndexIndexReader *reader) {
-  OrgApacheLuceneSearchSuggestDocumentSuggestIndexSearcher *self = [OrgApacheLuceneSearchSuggestDocumentSuggestIndexSearcher alloc];
-  OrgApacheLuceneSearchSuggestDocumentSuggestIndexSearcher_initWithOrgApacheLuceneIndexIndexReader_(self, reader);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentSuggestIndexSearcher, initWithOrgApacheLuceneIndexIndexReader_, reader)
+}
+
+OrgApacheLuceneSearchSuggestDocumentSuggestIndexSearcher *create_OrgApacheLuceneSearchSuggestDocumentSuggestIndexSearcher_initWithOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneIndexIndexReader *reader) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentSuggestIndexSearcher, initWithOrgApacheLuceneIndexIndexReader_, reader)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentSuggestIndexSearcher)

@@ -13,16 +13,28 @@
 #include "org/apache/lucene/util/GeoHashUtils.h"
 #include "org/apache/lucene/util/GeoUtils.h"
 
+inline jshort OrgApacheLuceneUtilGeoHashUtils_get_MORTON_OFFSET();
 #define OrgApacheLuceneUtilGeoHashUtils_MORTON_OFFSET 4
-
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilGeoHashUtils, MORTON_OFFSET, jshort)
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilGeoHashUtils, MORTON_OFFSET, jshort)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilGeoHashUtils)
 
-IOSCharArray *OrgApacheLuceneUtilGeoHashUtils_BASE_32_;
-NSString *OrgApacheLuceneUtilGeoHashUtils_BASE_32_STRING_;
+IOSCharArray *OrgApacheLuceneUtilGeoHashUtils_BASE_32;
+NSString *OrgApacheLuceneUtilGeoHashUtils_BASE_32_STRING;
 
 @implementation OrgApacheLuceneUtilGeoHashUtils
+
++ (IOSCharArray *)BASE_32 {
+  return OrgApacheLuceneUtilGeoHashUtils_BASE_32;
+}
+
++ (NSString *)BASE_32_STRING {
+  return OrgApacheLuceneUtilGeoHashUtils_BASE_32_STRING;
+}
+
++ (jint)PRECISION {
+  return OrgApacheLuceneUtilGeoHashUtils_PRECISION;
+}
 
 + (jlong)longEncodeWithDouble:(jdouble)lon
                    withDouble:(jdouble)lat
@@ -75,8 +87,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilGeoHashUtils class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilGeoHashUtils_BASE_32_, [IOSCharArray newArrayWithChars:(jchar[]){ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'j', 'k', 'm', 'n', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' } count:32]);
-    JreStrongAssign(&OrgApacheLuceneUtilGeoHashUtils_BASE_32_STRING_, [NSString stringWithCharacters:OrgApacheLuceneUtilGeoHashUtils_BASE_32_]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilGeoHashUtils_BASE_32, [IOSCharArray newArrayWithChars:(jchar[]){ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'j', 'k', 'm', 'n', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' } count:32]);
+    JreStrongAssign(&OrgApacheLuceneUtilGeoHashUtils_BASE_32_STRING, [NSString stringWithCharacters:OrgApacheLuceneUtilGeoHashUtils_BASE_32]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilGeoHashUtils)
   }
 }
@@ -92,11 +104,11 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "stringEncodeFromMortonLongWithLong:withInt:", "stringEncodeFromMortonLong", "Ljava.lang.String;", 0x19, NULL, NULL },
     { "mortonEncodeWithNSString:", "mortonEncode", "J", 0x19, NULL, NULL },
     { "mortonEncodeWithLong:", "mortonEncode", "J", 0x19, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "GeoHashUtils", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "BASE_32_", NULL, 0x19, "[C", &OrgApacheLuceneUtilGeoHashUtils_BASE_32_, NULL, .constantValue.asLong = 0 },
-    { "BASE_32_STRING_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneUtilGeoHashUtils_BASE_32_STRING_, NULL, .constantValue.asLong = 0 },
+    { "BASE_32", "BASE_32", 0x19, "[C", &OrgApacheLuceneUtilGeoHashUtils_BASE_32, NULL, .constantValue.asLong = 0 },
+    { "BASE_32_STRING", "BASE_32_STRING", 0x19, "Ljava.lang.String;", &OrgApacheLuceneUtilGeoHashUtils_BASE_32_STRING, NULL, .constantValue.asLong = 0 },
     { "PRECISION", "PRECISION", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilGeoHashUtils_PRECISION },
     { "MORTON_OFFSET", "MORTON_OFFSET", 0x1a, "S", NULL, NULL, .constantValue.asShort = OrgApacheLuceneUtilGeoHashUtils_MORTON_OFFSET },
   };
@@ -123,7 +135,7 @@ jlong OrgApacheLuceneUtilGeoHashUtils_longEncodeWithNSString_(NSString *hash_) {
     jchar const *e__ = b__ + a__->size_;
     while (b__ < e__) {
       jchar c = *b__++;
-      b = (jlong) ([((NSString *) nil_chk(OrgApacheLuceneUtilGeoHashUtils_BASE_32_STRING_)) indexOf:c]);
+      b = (jlong) ([((NSString *) nil_chk(OrgApacheLuceneUtilGeoHashUtils_BASE_32_STRING)) indexOf:c]);
       l |= (JreLShift64(b, (level-- * 5)));
     }
   }
@@ -136,7 +148,7 @@ NSString *OrgApacheLuceneUtilGeoHashUtils_stringEncodeWithLong_(jlong geoHashLon
   JreURShiftAssignLong(&geoHashLong, 4);
   IOSCharArray *chars = [IOSCharArray arrayWithLength:level];
   do {
-    *IOSCharArray_GetRef(chars, --level) = IOSCharArray_Get(nil_chk(OrgApacheLuceneUtilGeoHashUtils_BASE_32_), (jint) (geoHashLong & 31LL));
+    *IOSCharArray_GetRef(chars, --level) = IOSCharArray_Get(nil_chk(OrgApacheLuceneUtilGeoHashUtils_BASE_32), (jint) (geoHashLong & 31LL));
     JreURShiftAssignLong(&geoHashLong, 5);
   }
   while (level > 0);
@@ -151,12 +163,12 @@ NSString *OrgApacheLuceneUtilGeoHashUtils_stringEncodeWithDouble_withDouble_(jdo
 NSString *OrgApacheLuceneUtilGeoHashUtils_stringEncodeWithDouble_withDouble_withInt_(jdouble lon, jdouble lat, jint level) {
   OrgApacheLuceneUtilGeoHashUtils_initialize();
   jlong hashedVal = OrgApacheLuceneUtilBitUtil_flipFlopWithLong_([((JavaLangLong *) nil_chk(OrgApacheLuceneUtilGeoUtils_mortonHashWithDouble_withDouble_(lon, lat))) longLongValue]);
-  JavaLangStringBuilder *geoHash = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *geoHash = create_JavaLangStringBuilder_init();
   jshort precision = 0;
   jshort msf = (JreLShift32(OrgApacheLuceneUtilGeoUtils_BITS, 1)) - 5;
   jlong mask = JreLShift64(31LL, msf);
   do {
-    [geoHash appendWithChar:IOSCharArray_Get(nil_chk(OrgApacheLuceneUtilGeoHashUtils_BASE_32_), (jint) (JreURShift64((mask & hashedVal), (msf - (precision * 5)))))];
+    [geoHash appendWithChar:IOSCharArray_Get(nil_chk(OrgApacheLuceneUtilGeoHashUtils_BASE_32), (jint) (JreURShift64((mask & hashedVal), (msf - (precision * 5)))))];
     JreURShiftAssignLong(&mask, 5);
   }
   while (++precision < level);
@@ -171,12 +183,12 @@ NSString *OrgApacheLuceneUtilGeoHashUtils_stringEncodeFromMortonLongWithLong_(jl
 NSString *OrgApacheLuceneUtilGeoHashUtils_stringEncodeFromMortonLongWithLong_withInt_(jlong hashedVal, jint level) {
   OrgApacheLuceneUtilGeoHashUtils_initialize();
   hashedVal = OrgApacheLuceneUtilBitUtil_flipFlopWithLong_(hashedVal);
-  JavaLangStringBuilder *geoHash = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *geoHash = create_JavaLangStringBuilder_init();
   jshort precision = 0;
   jshort msf = (JreLShift32(OrgApacheLuceneUtilGeoUtils_BITS, 1)) - 5;
   jlong mask = JreLShift64(31LL, msf);
   do {
-    [geoHash appendWithChar:IOSCharArray_Get(nil_chk(OrgApacheLuceneUtilGeoHashUtils_BASE_32_), (jint) (JreURShift64((mask & hashedVal), (msf - (precision * 5)))))];
+    [geoHash appendWithChar:IOSCharArray_Get(nil_chk(OrgApacheLuceneUtilGeoHashUtils_BASE_32), (jint) (JreURShift64((mask & hashedVal), (msf - (precision * 5)))))];
     JreURShiftAssignLong(&mask, 5);
   }
   while (++precision < level);
@@ -194,7 +206,7 @@ jlong OrgApacheLuceneUtilGeoHashUtils_mortonEncodeWithNSString_(NSString *hash_)
     jchar const *e__ = b__ + a__->size_;
     while (b__ < e__) {
       jchar c = *b__++;
-      b = (jlong) ([((NSString *) nil_chk(OrgApacheLuceneUtilGeoHashUtils_BASE_32_STRING_)) indexOf:c]);
+      b = (jlong) ([((NSString *) nil_chk(OrgApacheLuceneUtilGeoHashUtils_BASE_32_STRING)) indexOf:c]);
       l |= (JreLShift64(b, ((level-- * 5) + OrgApacheLuceneUtilGeoHashUtils_MORTON_OFFSET)));
     }
   }
@@ -213,9 +225,11 @@ void OrgApacheLuceneUtilGeoHashUtils_init(OrgApacheLuceneUtilGeoHashUtils *self)
 }
 
 OrgApacheLuceneUtilGeoHashUtils *new_OrgApacheLuceneUtilGeoHashUtils_init() {
-  OrgApacheLuceneUtilGeoHashUtils *self = [OrgApacheLuceneUtilGeoHashUtils alloc];
-  OrgApacheLuceneUtilGeoHashUtils_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilGeoHashUtils, init)
+}
+
+OrgApacheLuceneUtilGeoHashUtils *create_OrgApacheLuceneUtilGeoHashUtils_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilGeoHashUtils, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilGeoHashUtils)

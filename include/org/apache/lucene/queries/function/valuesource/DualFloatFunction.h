@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_RESTRICT
-#define OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction 0
 #else
-#define OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_) && (OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_
+#if !defined (OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction))
+#define OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_
 
-#define OrgApacheLuceneQueriesFunctionValueSource_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionValueSource_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionValueSource 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionValueSource 1
 #include "org/apache/lucene/queries/function/ValueSource.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
@@ -25,6 +25,10 @@
 @class OrgApacheLuceneSearchIndexSearcher;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Abstract <code>ValueSource</code> implementation which wraps two ValueSources
+ and applies an extendible float function to their values.
+ */
 @interface OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction : OrgApacheLuceneQueriesFunctionValueSource {
  @public
   OrgApacheLuceneQueriesFunctionValueSource *a_;
@@ -33,6 +37,10 @@
 
 #pragma mark Public
 
+/*!
+ @param a  the base.
+ @param b  the exponent.
+ */
 - (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)a
                     withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)b;
 
@@ -69,4 +77,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceDualFloatFun
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction")

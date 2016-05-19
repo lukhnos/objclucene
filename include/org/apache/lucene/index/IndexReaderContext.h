@@ -5,35 +5,67 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexIndexReaderContext_INCLUDE_ALL")
-#if OrgApacheLuceneIndexIndexReaderContext_RESTRICT
-#define OrgApacheLuceneIndexIndexReaderContext_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexIndexReaderContext")
+#ifdef RESTRICT_OrgApacheLuceneIndexIndexReaderContext
+#define INCLUDE_ALL_OrgApacheLuceneIndexIndexReaderContext 0
 #else
-#define OrgApacheLuceneIndexIndexReaderContext_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexIndexReaderContext 1
 #endif
-#undef OrgApacheLuceneIndexIndexReaderContext_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexIndexReaderContext
 
-#if !defined (_OrgApacheLuceneIndexIndexReaderContext_) && (OrgApacheLuceneIndexIndexReaderContext_INCLUDE_ALL || OrgApacheLuceneIndexIndexReaderContext_INCLUDE)
-#define _OrgApacheLuceneIndexIndexReaderContext_
+#if !defined (OrgApacheLuceneIndexIndexReaderContext_) && (INCLUDE_ALL_OrgApacheLuceneIndexIndexReaderContext || defined(INCLUDE_OrgApacheLuceneIndexIndexReaderContext))
+#define OrgApacheLuceneIndexIndexReaderContext_
 
 @class OrgApacheLuceneIndexCompositeReaderContext;
 @class OrgApacheLuceneIndexIndexReader;
 @protocol JavaUtilList;
 
+/*!
+ @brief A struct like class that represents a hierarchical relationship between
+ <code>IndexReader</code> instances.
+ */
 @interface OrgApacheLuceneIndexIndexReaderContext : NSObject {
  @public
+  /*!
+   @brief The reader context for this reader's immediate parent, or null if none
+   */
   OrgApacheLuceneIndexCompositeReaderContext *parent_;
+  /*!
+   @brief <code>true</code> if this context struct represents the top level reader within the hierarchical context
+   */
   jboolean isTopLevel_;
+  /*!
+   @brief the doc base for this reader in the parent, <tt>0</tt> if parent is null
+   */
   jint docBaseInParent_;
+  /*!
+   @brief the ord for this reader in the parent, <tt>0</tt> if parent is null
+   */
   jint ordInParent_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief Returns the context's children iff this context is a composite context
+ otherwise <code>null</code>.
+ */
 - (id<JavaUtilList>)children;
 
+/*!
+ @brief Returns the context's leaves if this context is a top-level context.
+ For convenience, if this is an <code>LeafReaderContext</code> this
+ returns itself as the only leaf.
+ <p>Note: this is convenience method since leaves can always be obtained by
+ walking the context tree using <code>children()</code>.
+ @throws UnsupportedOperationException if this is not a top-level context.
+ - seealso: #children()
+ */
 - (id<JavaUtilList>)leaves;
 
+/*!
+ @brief Returns the <code>IndexReader</code>, this context represents.
+ */
 - (OrgApacheLuceneIndexIndexReader *)reader;
 
 #pragma mark Package-Private
@@ -54,4 +86,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexReaderContext)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexIndexReaderContext_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexIndexReaderContext")

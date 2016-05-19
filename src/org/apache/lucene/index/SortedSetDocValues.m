@@ -11,6 +11,10 @@
 
 @implementation OrgApacheLuceneIndexSortedSetDocValues
 
++ (jlong)NO_MORE_ORDS {
+  return OrgApacheLuceneIndexSortedSetDocValues_NO_MORE_ORDS;
+}
+
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexSortedSetDocValues_init(self);
@@ -62,7 +66,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (OrgApacheLuceneIndexTermsEnum *)termsEnum {
-  return [new_OrgApacheLuceneIndexSortedSetDocValuesTermsEnum_initWithOrgApacheLuceneIndexSortedSetDocValues_(self) autorelease];
+  return create_OrgApacheLuceneIndexSortedSetDocValuesTermsEnum_initWithOrgApacheLuceneIndexSortedSetDocValues_(self);
 }
 
 + (const J2ObjcClassInfo *)__metadata {

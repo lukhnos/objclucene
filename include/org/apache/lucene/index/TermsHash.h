@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexTermsHash_INCLUDE_ALL")
-#if OrgApacheLuceneIndexTermsHash_RESTRICT
-#define OrgApacheLuceneIndexTermsHash_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexTermsHash")
+#ifdef RESTRICT_OrgApacheLuceneIndexTermsHash
+#define INCLUDE_ALL_OrgApacheLuceneIndexTermsHash 0
 #else
-#define OrgApacheLuceneIndexTermsHash_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexTermsHash 1
 #endif
-#undef OrgApacheLuceneIndexTermsHash_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexTermsHash
 
-#if !defined (_OrgApacheLuceneIndexTermsHash_) && (OrgApacheLuceneIndexTermsHash_INCLUDE_ALL || OrgApacheLuceneIndexTermsHash_INCLUDE)
-#define _OrgApacheLuceneIndexTermsHash_
+#if !defined (OrgApacheLuceneIndexTermsHash_) && (INCLUDE_ALL_OrgApacheLuceneIndexTermsHash || defined(INCLUDE_OrgApacheLuceneIndexTermsHash))
+#define OrgApacheLuceneIndexTermsHash_
 
 @class OrgApacheLuceneIndexDocumentsWriterPerThread;
 @class OrgApacheLuceneIndexDocumentsWriterPerThread_DocState;
@@ -27,6 +27,15 @@
 @class OrgApacheLuceneUtilIntBlockPool;
 @protocol JavaUtilMap;
 
+/*!
+ @brief This class is passed each token produced by the analyzer
+ on each field during indexing, and it stores these
+ tokens in a hash table, and allocates separate byte
+ streams per token.
+ Consumers of this class, eg <code>FreqProxTermsWriter</code>
+  and <code>TermVectorsConsumer</code>,
+ write their own byte streams under each term. 
+ */
 @interface OrgApacheLuceneIndexTermsHash : NSObject {
  @public
   OrgApacheLuceneIndexTermsHash *nextTermsHash_;
@@ -77,4 +86,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTermsHash)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexTermsHash_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexTermsHash")

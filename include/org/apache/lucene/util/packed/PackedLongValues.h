@@ -5,23 +5,23 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilPackedPackedLongValues_INCLUDE_ALL")
-#if OrgApacheLuceneUtilPackedPackedLongValues_RESTRICT
-#define OrgApacheLuceneUtilPackedPackedLongValues_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedPackedLongValues")
+#ifdef RESTRICT_OrgApacheLuceneUtilPackedPackedLongValues
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackedPackedLongValues 0
 #else
-#define OrgApacheLuceneUtilPackedPackedLongValues_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackedPackedLongValues 1
 #endif
-#undef OrgApacheLuceneUtilPackedPackedLongValues_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilPackedPackedLongValues
 
-#if !defined (_OrgApacheLuceneUtilPackedPackedLongValues_) && (OrgApacheLuceneUtilPackedPackedLongValues_INCLUDE_ALL || OrgApacheLuceneUtilPackedPackedLongValues_INCLUDE)
-#define _OrgApacheLuceneUtilPackedPackedLongValues_
+#if !defined (OrgApacheLuceneUtilPackedPackedLongValues_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedPackedLongValues || defined(INCLUDE_OrgApacheLuceneUtilPackedPackedLongValues))
+#define OrgApacheLuceneUtilPackedPackedLongValues_
 
-#define OrgApacheLuceneUtilLongValues_RESTRICT 1
-#define OrgApacheLuceneUtilLongValues_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilLongValues 1
+#define INCLUDE_OrgApacheLuceneUtilLongValues 1
 #include "org/apache/lucene/util/LongValues.h"
 
-#define OrgApacheLuceneUtilAccountable_RESTRICT 1
-#define OrgApacheLuceneUtilAccountable_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAccountable 1
+#define INCLUDE_OrgApacheLuceneUtilAccountable 1
 #include "org/apache/lucene/util/Accountable.h"
 
 @class IOSLongArray;
@@ -30,20 +30,32 @@
 @class OrgApacheLuceneUtilPackedPackedLongValues_Iterator;
 @protocol JavaUtilCollection;
 
-#define OrgApacheLuceneUtilPackedPackedLongValues_DEFAULT_PAGE_SIZE 1024
-#define OrgApacheLuceneUtilPackedPackedLongValues_MIN_PAGE_SIZE 64
-#define OrgApacheLuceneUtilPackedPackedLongValues_MAX_PAGE_SIZE 1048576
-
+/*!
+ @brief Utility class to compress integers into a <code>LongValues</code> instance.
+ */
 @interface OrgApacheLuceneUtilPackedPackedLongValues : OrgApacheLuceneUtilLongValues < OrgApacheLuceneUtilAccountable > {
  @public
   IOSObjectArray *values_;
   jint pageShift_, pageMask_;
 }
 
++ (jint)DEFAULT_PAGE_SIZE;
+
++ (jint)MIN_PAGE_SIZE;
+
++ (jint)MAX_PAGE_SIZE;
+
 #pragma mark Public
 
+/*!
+ - seealso: #deltaPackedBuilder(int,float)
+ */
 + (OrgApacheLuceneUtilPackedPackedLongValues_Builder *)deltaPackedBuilderWithFloat:(jfloat)acceptableOverheadRatio;
 
+/*!
+ @brief Return a new <code>Builder</code> that will compress efficiently integers that
+ are close to each other.
+ */
 + (OrgApacheLuceneUtilPackedPackedLongValues_Builder *)deltaPackedBuilderWithInt:(jint)pageSize
                                                                        withFloat:(jfloat)acceptableOverheadRatio;
 
@@ -51,20 +63,39 @@
 
 - (id<JavaUtilCollection>)getChildResources;
 
+/*!
+ @brief Return an iterator over the values of this array.
+ */
 - (OrgApacheLuceneUtilPackedPackedLongValues_Iterator *)iterator;
 
+/*!
+ - seealso: #monotonicBuilder(int,float)
+ */
 + (OrgApacheLuceneUtilPackedPackedLongValues_Builder *)monotonicBuilderWithFloat:(jfloat)acceptableOverheadRatio;
 
+/*!
+ @brief Return a new <code>Builder</code> that will compress efficiently integers that
+ would be a monotonic function of their index.
+ */
 + (OrgApacheLuceneUtilPackedPackedLongValues_Builder *)monotonicBuilderWithInt:(jint)pageSize
                                                                      withFloat:(jfloat)acceptableOverheadRatio;
 
+/*!
+ - seealso: #packedBuilder(int,float)
+ */
 + (OrgApacheLuceneUtilPackedPackedLongValues_Builder *)packedBuilderWithFloat:(jfloat)acceptableOverheadRatio;
 
+/*!
+ @brief Return a new <code>Builder</code> that will compress efficiently positive integers.
+ */
 + (OrgApacheLuceneUtilPackedPackedLongValues_Builder *)packedBuilderWithInt:(jint)pageSize
                                                                   withFloat:(jfloat)acceptableOverheadRatio;
 
 - (jlong)ramBytesUsed;
 
+/*!
+ @brief Get the number of values in this array.
+ */
 - (jlong)size;
 
 #pragma mark Package-Private
@@ -87,11 +118,17 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneUtilPackedPackedLongValues)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedPackedLongValues, values_, IOSObjectArray *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilPackedPackedLongValues, DEFAULT_PAGE_SIZE, jint)
+inline jint OrgApacheLuceneUtilPackedPackedLongValues_get_DEFAULT_PAGE_SIZE();
+#define OrgApacheLuceneUtilPackedPackedLongValues_DEFAULT_PAGE_SIZE 1024
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilPackedPackedLongValues, DEFAULT_PAGE_SIZE, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilPackedPackedLongValues, MIN_PAGE_SIZE, jint)
+inline jint OrgApacheLuceneUtilPackedPackedLongValues_get_MIN_PAGE_SIZE();
+#define OrgApacheLuceneUtilPackedPackedLongValues_MIN_PAGE_SIZE 64
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilPackedPackedLongValues, MIN_PAGE_SIZE, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilPackedPackedLongValues, MAX_PAGE_SIZE, jint)
+inline jint OrgApacheLuceneUtilPackedPackedLongValues_get_MAX_PAGE_SIZE();
+#define OrgApacheLuceneUtilPackedPackedLongValues_MAX_PAGE_SIZE 1048576
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilPackedPackedLongValues, MAX_PAGE_SIZE, jint)
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedLongValues_Builder *OrgApacheLuceneUtilPackedPackedLongValues_packedBuilderWithInt_withFloat_(jint pageSize, jfloat acceptableOverheadRatio);
 
@@ -109,16 +146,21 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedPackedLongValues_initWithInt_wit
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedLongValues *new_OrgApacheLuceneUtilPackedPackedLongValues_initWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLong_withLong_(jint pageShift, jint pageMask, IOSObjectArray *values, jlong size, jlong ramBytesUsed) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedLongValues *create_OrgApacheLuceneUtilPackedPackedLongValues_initWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLong_withLong_(jint pageShift, jint pageMask, IOSObjectArray *values, jlong size, jlong ramBytesUsed);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedLongValues)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilPackedPackedLongValues_Iterator_) && (OrgApacheLuceneUtilPackedPackedLongValues_INCLUDE_ALL || OrgApacheLuceneUtilPackedPackedLongValues_Iterator_INCLUDE)
-#define _OrgApacheLuceneUtilPackedPackedLongValues_Iterator_
+#if !defined (OrgApacheLuceneUtilPackedPackedLongValues_Iterator_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedPackedLongValues || defined(INCLUDE_OrgApacheLuceneUtilPackedPackedLongValues_Iterator))
+#define OrgApacheLuceneUtilPackedPackedLongValues_Iterator_
 
 @class IOSLongArray;
 @class OrgApacheLuceneUtilPackedPackedLongValues;
 
+/*!
+ @brief An iterator over long values.
+ */
 @interface OrgApacheLuceneUtilPackedPackedLongValues_Iterator : NSObject {
  @public
   IOSLongArray *currentValues_;
@@ -128,8 +170,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedLongValues)
 
 #pragma mark Public
 
+/*!
+ @brief Whether or not there are remaining values.
+ */
 - (jboolean)hasNext;
 
+/*!
+ @brief Return the next long in the buffer.
+ */
 - (jlong)next;
 
 #pragma mark Package-Private
@@ -146,15 +194,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedPackedLongValues_Iterator_initWi
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedLongValues_Iterator *new_OrgApacheLuceneUtilPackedPackedLongValues_Iterator_initWithOrgApacheLuceneUtilPackedPackedLongValues_(OrgApacheLuceneUtilPackedPackedLongValues *outer$) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedLongValues_Iterator *create_OrgApacheLuceneUtilPackedPackedLongValues_Iterator_initWithOrgApacheLuceneUtilPackedPackedLongValues_(OrgApacheLuceneUtilPackedPackedLongValues *outer$);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedLongValues_Iterator)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilPackedPackedLongValues_Builder_) && (OrgApacheLuceneUtilPackedPackedLongValues_INCLUDE_ALL || OrgApacheLuceneUtilPackedPackedLongValues_Builder_INCLUDE)
-#define _OrgApacheLuceneUtilPackedPackedLongValues_Builder_
+#if !defined (OrgApacheLuceneUtilPackedPackedLongValues_Builder_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedPackedLongValues || defined(INCLUDE_OrgApacheLuceneUtilPackedPackedLongValues_Builder))
+#define OrgApacheLuceneUtilPackedPackedLongValues_Builder_
 
-#define OrgApacheLuceneUtilAccountable_RESTRICT 1
-#define OrgApacheLuceneUtilAccountable_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAccountable 1
+#define INCLUDE_OrgApacheLuceneUtilAccountable 1
 #include "org/apache/lucene/util/Accountable.h"
 
 @class IOSLongArray;
@@ -162,6 +212,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedLongValues_Iterator)
 @class OrgApacheLuceneUtilPackedPackedLongValues;
 @protocol JavaUtilCollection;
 
+/*!
+ @brief A Builder for a <code>PackedLongValues</code> instance.
+ */
 @interface OrgApacheLuceneUtilPackedPackedLongValues_Builder : NSObject < OrgApacheLuceneUtilAccountable > {
  @public
   jint pageShift_, pageMask_;
@@ -176,14 +229,25 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedLongValues_Iterator)
 
 #pragma mark Public
 
+/*!
+ @brief Add a new element to this builder.
+ */
 - (OrgApacheLuceneUtilPackedPackedLongValues_Builder *)addWithLong:(jlong)l;
 
+/*!
+ @brief Build a <code>PackedLongValues</code> instance that contains values that
+ have been added to this builder.
+ This operation is destructive. 
+ */
 - (OrgApacheLuceneUtilPackedPackedLongValues *)build;
 
 - (id<JavaUtilCollection>)getChildResources;
 
 - (jlong)ramBytesUsed;
 
+/*!
+ @brief Return the number of elements that have been added to this builder.
+ */
 - (jlong)size;
 
 #pragma mark Package-Private
@@ -213,8 +277,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedPackedLongValues_Builder_initWit
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedLongValues_Builder *new_OrgApacheLuceneUtilPackedPackedLongValues_Builder_initWithInt_withFloat_(jint pageSize, jfloat acceptableOverheadRatio) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedLongValues_Builder *create_OrgApacheLuceneUtilPackedPackedLongValues_Builder_initWithInt_withFloat_(jint pageSize, jfloat acceptableOverheadRatio);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedLongValues_Builder)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilPackedPackedLongValues_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedPackedLongValues")

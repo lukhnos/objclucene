@@ -5,27 +5,30 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisUtilOpenStringBuilder_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisUtilOpenStringBuilder_RESTRICT
-#define OrgApacheLuceneAnalysisUtilOpenStringBuilder_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilOpenStringBuilder")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisUtilOpenStringBuilder
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisUtilOpenStringBuilder 0
 #else
-#define OrgApacheLuceneAnalysisUtilOpenStringBuilder_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisUtilOpenStringBuilder 1
 #endif
-#undef OrgApacheLuceneAnalysisUtilOpenStringBuilder_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisUtilOpenStringBuilder
 
-#if !defined (_OrgApacheLuceneAnalysisUtilOpenStringBuilder_) && (OrgApacheLuceneAnalysisUtilOpenStringBuilder_INCLUDE_ALL || OrgApacheLuceneAnalysisUtilOpenStringBuilder_INCLUDE)
-#define _OrgApacheLuceneAnalysisUtilOpenStringBuilder_
+#if !defined (OrgApacheLuceneAnalysisUtilOpenStringBuilder_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisUtilOpenStringBuilder || defined(INCLUDE_OrgApacheLuceneAnalysisUtilOpenStringBuilder))
+#define OrgApacheLuceneAnalysisUtilOpenStringBuilder_
 
-#define JavaLangAppendable_RESTRICT 1
-#define JavaLangAppendable_INCLUDE 1
+#define RESTRICT_JavaLangAppendable 1
+#define INCLUDE_JavaLangAppendable 1
 #include "java/lang/Appendable.h"
 
-#define JavaLangCharSequence_RESTRICT 1
-#define JavaLangCharSequence_INCLUDE 1
+#define RESTRICT_JavaLangCharSequence 1
+#define INCLUDE_JavaLangCharSequence 1
 #include "java/lang/CharSequence.h"
 
 @class IOSCharArray;
 
+/*!
+ @brief A StringBuilder that allows one to access the array.
+ */
 @interface OrgApacheLuceneAnalysisUtilOpenStringBuilder : NSObject < JavaLangAppendable, JavaLangCharSequence > {
  @public
   IOSCharArray *buf_;
@@ -116,16 +119,22 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilOpenStringBuilder_init(OrgApac
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilOpenStringBuilder *new_OrgApacheLuceneAnalysisUtilOpenStringBuilder_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilOpenStringBuilder *create_OrgApacheLuceneAnalysisUtilOpenStringBuilder_init();
+
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilOpenStringBuilder_initWithInt_(OrgApacheLuceneAnalysisUtilOpenStringBuilder *self, jint size);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilOpenStringBuilder *new_OrgApacheLuceneAnalysisUtilOpenStringBuilder_initWithInt_(jint size) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilOpenStringBuilder *create_OrgApacheLuceneAnalysisUtilOpenStringBuilder_initWithInt_(jint size);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilOpenStringBuilder_initWithCharArray_withInt_(OrgApacheLuceneAnalysisUtilOpenStringBuilder *self, IOSCharArray *arr, jint len);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilOpenStringBuilder *new_OrgApacheLuceneAnalysisUtilOpenStringBuilder_initWithCharArray_withInt_(IOSCharArray *arr, jint len) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilOpenStringBuilder *create_OrgApacheLuceneAnalysisUtilOpenStringBuilder_initWithCharArray_withInt_(IOSCharArray *arr, jint len);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilOpenStringBuilder)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisUtilOpenStringBuilder_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilOpenStringBuilder")

@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexSortingLeafReader_INCLUDE_ALL")
-#if OrgApacheLuceneIndexSortingLeafReader_RESTRICT
-#define OrgApacheLuceneIndexSortingLeafReader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexSortingLeafReader")
+#ifdef RESTRICT_OrgApacheLuceneIndexSortingLeafReader
+#define INCLUDE_ALL_OrgApacheLuceneIndexSortingLeafReader 0
 #else
-#define OrgApacheLuceneIndexSortingLeafReader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexSortingLeafReader 1
 #endif
-#undef OrgApacheLuceneIndexSortingLeafReader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexSortingLeafReader
 
-#if !defined (_OrgApacheLuceneIndexSortingLeafReader_) && (OrgApacheLuceneIndexSortingLeafReader_INCLUDE_ALL || OrgApacheLuceneIndexSortingLeafReader_INCLUDE)
-#define _OrgApacheLuceneIndexSortingLeafReader_
+#if !defined (OrgApacheLuceneIndexSortingLeafReader_) && (INCLUDE_ALL_OrgApacheLuceneIndexSortingLeafReader || defined(INCLUDE_OrgApacheLuceneIndexSortingLeafReader))
+#define OrgApacheLuceneIndexSortingLeafReader_
 
-#define OrgApacheLuceneIndexFilterLeafReader_RESTRICT 1
-#define OrgApacheLuceneIndexFilterLeafReader_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexFilterLeafReader 1
+#define INCLUDE_OrgApacheLuceneIndexFilterLeafReader 1
 #include "org/apache/lucene/index/FilterLeafReader.h"
 
 @class OrgApacheLuceneIndexBinaryDocValues;
@@ -32,6 +32,21 @@
 @class OrgApacheLuceneSearchSort;
 @protocol OrgApacheLuceneUtilBits;
 
+/*!
+ @brief An <code>org.apache.lucene.index.LeafReader</code> which supports sorting documents by a given
+ <code>Sort</code>.
+ You can use this class to sort an index as follows:
+ <pre class="prettyprint">
+ IndexWriter writer; // writer to which the sorted index will be added
+ DirectoryReader reader; // reader on the input index
+ Sort sort; // determines how the documents are sorted
+ LeafReader sortingReader = SortingLeafReader.wrap(SlowCompositeReaderWrapper.wrap(reader), sort);
+ writer.addIndexes(reader);
+ writer.close();
+ reader.close();
+ 
+@endcode
+ */
 @interface OrgApacheLuceneIndexSortingLeafReader : OrgApacheLuceneIndexFilterLeafReader {
  @public
   OrgApacheLuceneIndexSorter_DocMap *docMap_;
@@ -64,11 +79,20 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 - (NSString *)description;
 
+/*!
+ @brief Return a sorted view of <code>reader</code> according to the order
+ defined by <code>sort</code>.
+ If the reader is already sorted, this
+ method might return the reader as-is. 
+ */
 + (OrgApacheLuceneIndexLeafReader *)wrapWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader
                                              withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort;
 
 #pragma mark Package-Private
 
+/*!
+ @brief Expert: same as <code>wrap(org.apache.lucene.index.LeafReader,Sort)</code> but operates directly on a <code>Sorter.DocMap</code>.
+ */
 + (OrgApacheLuceneIndexLeafReader *)wrapWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader
                                      withOrgApacheLuceneIndexSorter_DocMap:(OrgApacheLuceneIndexSorter_DocMap *)docMap;
 
@@ -86,11 +110,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortingLeafReader)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_) && (OrgApacheLuceneIndexSortingLeafReader_INCLUDE_ALL || OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_INCLUDE)
-#define _OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_
+#if !defined (OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_) && (INCLUDE_ALL_OrgApacheLuceneIndexSortingLeafReader || defined(INCLUDE_OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum))
+#define OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_
 
-#define OrgApacheLuceneIndexFilterLeafReader_RESTRICT 1
-#define OrgApacheLuceneIndexFilterLeafReader_FilterPostingsEnum_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexFilterLeafReader 1
+#define INCLUDE_OrgApacheLuceneIndexFilterLeafReader_FilterPostingsEnum 1
 #include "org/apache/lucene/index/FilterLeafReader.h"
 
 @class OrgApacheLuceneIndexPostingsEnum;
@@ -125,6 +149,9 @@ withOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)inArg
                 withBoolean:(jboolean)withFreqs
 withOrgApacheLuceneIndexSorter_DocMap:(OrgApacheLuceneIndexSorter_DocMap *)docMap;
 
+/*!
+ @brief Returns the wrapped <code>PostingsEnum</code>.
+ */
 - (OrgApacheLuceneIndexPostingsEnum *)getWrapped;
 
 - (jboolean)reusedWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)other;
@@ -137,15 +164,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_ini
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum *new_OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_initWithInt_withOrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_withOrgApacheLuceneIndexPostingsEnum_withBoolean_withOrgApacheLuceneIndexSorter_DocMap_(jint maxDoc, OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum *reuse, OrgApacheLuceneIndexPostingsEnum *inArg, jboolean withFreqs, OrgApacheLuceneIndexSorter_DocMap *docMap) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum *create_OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_initWithInt_withOrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_withOrgApacheLuceneIndexPostingsEnum_withBoolean_withOrgApacheLuceneIndexSorter_DocMap_(jint maxDoc, OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum *reuse, OrgApacheLuceneIndexPostingsEnum *inArg, jboolean withFreqs, OrgApacheLuceneIndexSorter_DocMap *docMap);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_) && (OrgApacheLuceneIndexSortingLeafReader_INCLUDE_ALL || OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_INCLUDE)
-#define _OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_
+#if !defined (OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_) && (INCLUDE_ALL_OrgApacheLuceneIndexSortingLeafReader || defined(INCLUDE_OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum))
+#define OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_
 
-#define OrgApacheLuceneIndexFilterLeafReader_RESTRICT 1
-#define OrgApacheLuceneIndexFilterLeafReader_FilterPostingsEnum_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexFilterLeafReader 1
+#define INCLUDE_OrgApacheLuceneIndexFilterLeafReader_FilterPostingsEnum 1
 #include "org/apache/lucene/index/FilterLeafReader.h"
 
 @class OrgApacheLuceneIndexPostingsEnum;
@@ -180,6 +209,9 @@ withOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)inArg
 withOrgApacheLuceneIndexSorter_DocMap:(OrgApacheLuceneIndexSorter_DocMap *)docMap
                 withBoolean:(jboolean)storeOffsets;
 
+/*!
+ @brief Returns the wrapped <code>PostingsEnum</code>.
+ */
 - (OrgApacheLuceneIndexPostingsEnum *)getWrapped;
 
 - (jboolean)reusedWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)other;
@@ -192,8 +224,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum *new_OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_initWithInt_withOrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_withOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneIndexSorter_DocMap_withBoolean_(jint maxDoc, OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum *reuse, OrgApacheLuceneIndexPostingsEnum *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap, jboolean storeOffsets) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum *create_OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_initWithInt_withOrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_withOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneIndexSorter_DocMap_withBoolean_(jint maxDoc, OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum *reuse, OrgApacheLuceneIndexPostingsEnum *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap, jboolean storeOffsets);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexSortingLeafReader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSortingLeafReader")

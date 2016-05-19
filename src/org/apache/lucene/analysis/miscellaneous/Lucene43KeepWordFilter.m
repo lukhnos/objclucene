@@ -3,10 +3,11 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/miscellaneous/Lucene43KeepWordFilter.java
 //
 
-#include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Deprecated.h"
+#include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/miscellaneous/Lucene43KeepWordFilter.h"
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
@@ -38,14 +39,14 @@ withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArra
   return [((OrgApacheLuceneAnalysisUtilCharArraySet *) nil_chk(words_)) containsWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer] withInt:0 withInt:[termAtt_ length]];
 }
 
++ (IOSObjectArray *)__annotations {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
 - (void)dealloc {
   RELEASE_(termAtt_);
   RELEASE_(words_);
   [super dealloc];
-}
-
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -70,9 +71,11 @@ void OrgApacheLuceneAnalysisMiscellaneousLucene43KeepWordFilter_initWithBoolean_
 }
 
 OrgApacheLuceneAnalysisMiscellaneousLucene43KeepWordFilter *new_OrgApacheLuceneAnalysisMiscellaneousLucene43KeepWordFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(jboolean enablePositionIncrements, OrgApacheLuceneAnalysisTokenStream *inArg, OrgApacheLuceneAnalysisUtilCharArraySet *words) {
-  OrgApacheLuceneAnalysisMiscellaneousLucene43KeepWordFilter *self = [OrgApacheLuceneAnalysisMiscellaneousLucene43KeepWordFilter alloc];
-  OrgApacheLuceneAnalysisMiscellaneousLucene43KeepWordFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(self, enablePositionIncrements, inArg, words);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousLucene43KeepWordFilter, initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_, enablePositionIncrements, inArg, words)
+}
+
+OrgApacheLuceneAnalysisMiscellaneousLucene43KeepWordFilter *create_OrgApacheLuceneAnalysisMiscellaneousLucene43KeepWordFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(jboolean enablePositionIncrements, OrgApacheLuceneAnalysisTokenStream *inArg, OrgApacheLuceneAnalysisUtilCharArraySet *words) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousLucene43KeepWordFilter, initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_, enablePositionIncrements, inArg, words)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousLucene43KeepWordFilter)

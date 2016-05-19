@@ -29,18 +29,25 @@
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder)
 
-static OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder_DEFAULT_SET_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder, DEFAULT_SET_, OrgApacheLuceneAnalysisUtilCharArraySet *)
+inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder_get_DEFAULT_SET();
+static OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder_DEFAULT_SET;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder, DEFAULT_SET, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
 __attribute__((unused)) static void OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder_init(OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder *self);
 
 __attribute__((unused)) static OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder *new_OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder *create_OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder)
 
-NSString *OrgApacheLuceneAnalysisElGreekAnalyzer_DEFAULT_STOPWORD_FILE_ = @"stopwords.txt";
+NSString *OrgApacheLuceneAnalysisElGreekAnalyzer_DEFAULT_STOPWORD_FILE = @"stopwords.txt";
 
 @implementation OrgApacheLuceneAnalysisElGreekAnalyzer
+
++ (NSString *)DEFAULT_STOPWORD_FILE {
+  return OrgApacheLuceneAnalysisElGreekAnalyzer_DEFAULT_STOPWORD_FILE;
+}
 
 + (OrgApacheLuceneAnalysisUtilCharArraySet *)getDefaultStopSet {
   return OrgApacheLuceneAnalysisElGreekAnalyzer_getDefaultStopSet();
@@ -60,17 +67,17 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName {
   OrgApacheLuceneAnalysisTokenizer *source;
-  if ([((OrgApacheLuceneUtilVersion *) nil_chk([self getVersion])) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_7_0_)]) {
-    source = [new_OrgApacheLuceneAnalysisStandardStandardTokenizer_init() autorelease];
+  if ([((OrgApacheLuceneUtilVersion *) nil_chk([self getVersion])) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_7_0)]) {
+    source = create_OrgApacheLuceneAnalysisStandardStandardTokenizer_init();
   }
   else {
-    source = [new_OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40_init() autorelease];
+    source = create_OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40_init();
   }
-  OrgApacheLuceneAnalysisTokenStream *result = [new_OrgApacheLuceneAnalysisElGreekLowerCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(source) autorelease];
-  result = [new_OrgApacheLuceneAnalysisStandardStandardFilter_initWithOrgApacheLuceneAnalysisTokenStream_(result) autorelease];
-  result = [new_OrgApacheLuceneAnalysisCoreStopFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(result, stopwords_) autorelease];
-  result = [new_OrgApacheLuceneAnalysisElGreekStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(result) autorelease];
-  return [new_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(source, result) autorelease];
+  OrgApacheLuceneAnalysisTokenStream *result = create_OrgApacheLuceneAnalysisElGreekLowerCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(source);
+  result = create_OrgApacheLuceneAnalysisStandardStandardFilter_initWithOrgApacheLuceneAnalysisTokenStream_(result);
+  result = create_OrgApacheLuceneAnalysisCoreStopFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(result, stopwords_);
+  result = create_OrgApacheLuceneAnalysisElGreekStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(result);
+  return create_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(source, result);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -81,7 +88,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "createComponentsWithNSString:", "createComponents", "Lorg.apache.lucene.analysis.Analyzer$TokenStreamComponents;", 0x4, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_STOPWORD_FILE_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisElGreekAnalyzer_DEFAULT_STOPWORD_FILE_, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_STOPWORD_FILE", "DEFAULT_STOPWORD_FILE", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisElGreekAnalyzer_DEFAULT_STOPWORD_FILE, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.analysis.el.GreekAnalyzer$DefaultSetHolder;"};
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisElGreekAnalyzer = { 2, "GreekAnalyzer", "org.apache.lucene.analysis.el", NULL, 0x11, 4, methods, 1, fields, 0, NULL, 1, inner_classes, NULL, NULL };
@@ -92,17 +99,19 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisElGreekAnalyzer_getDefaultStopSet() {
   OrgApacheLuceneAnalysisElGreekAnalyzer_initialize();
-  return JreLoadStatic(OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder, DEFAULT_SET_);
+  return JreLoadStatic(OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder, DEFAULT_SET);
 }
 
 void OrgApacheLuceneAnalysisElGreekAnalyzer_init(OrgApacheLuceneAnalysisElGreekAnalyzer *self) {
-  OrgApacheLuceneAnalysisElGreekAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, JreLoadStatic(OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder, DEFAULT_SET_));
+  OrgApacheLuceneAnalysisElGreekAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, JreLoadStatic(OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder, DEFAULT_SET));
 }
 
 OrgApacheLuceneAnalysisElGreekAnalyzer *new_OrgApacheLuceneAnalysisElGreekAnalyzer_init() {
-  OrgApacheLuceneAnalysisElGreekAnalyzer *self = [OrgApacheLuceneAnalysisElGreekAnalyzer alloc];
-  OrgApacheLuceneAnalysisElGreekAnalyzer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisElGreekAnalyzer, init)
+}
+
+OrgApacheLuceneAnalysisElGreekAnalyzer *create_OrgApacheLuceneAnalysisElGreekAnalyzer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisElGreekAnalyzer, init)
 }
 
 void OrgApacheLuceneAnalysisElGreekAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisElGreekAnalyzer *self, OrgApacheLuceneAnalysisUtilCharArraySet *stopwords) {
@@ -110,9 +119,11 @@ void OrgApacheLuceneAnalysisElGreekAnalyzer_initWithOrgApacheLuceneAnalysisUtilC
 }
 
 OrgApacheLuceneAnalysisElGreekAnalyzer *new_OrgApacheLuceneAnalysisElGreekAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopwords) {
-  OrgApacheLuceneAnalysisElGreekAnalyzer *self = [OrgApacheLuceneAnalysisElGreekAnalyzer alloc];
-  OrgApacheLuceneAnalysisElGreekAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, stopwords);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisElGreekAnalyzer, initWithOrgApacheLuceneAnalysisUtilCharArraySet_, stopwords)
+}
+
+OrgApacheLuceneAnalysisElGreekAnalyzer *create_OrgApacheLuceneAnalysisElGreekAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopwords) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisElGreekAnalyzer, initWithOrgApacheLuceneAnalysisUtilCharArraySet_, stopwords)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisElGreekAnalyzer)
@@ -132,10 +143,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   if (self == [OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder class]) {
     {
       @try {
-        JreStrongAssign(&OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder_DEFAULT_SET_, OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_loadStopwordSetWithBoolean_withIOSClass_withNSString_withNSString_(false, OrgApacheLuceneAnalysisElGreekAnalyzer_class_(), OrgApacheLuceneAnalysisElGreekAnalyzer_DEFAULT_STOPWORD_FILE_, @"#"));
+        JreStrongAssign(&OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder_DEFAULT_SET, OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_loadStopwordSetWithBoolean_withIOSClass_withNSString_withNSString_(false, OrgApacheLuceneAnalysisElGreekAnalyzer_class_(), OrgApacheLuceneAnalysisElGreekAnalyzer_DEFAULT_STOPWORD_FILE, @"#"));
       }
       @catch (JavaIoIOException *ex) {
-        @throw [new_JavaLangRuntimeException_initWithNSString_(@"Unable to load default stopword set") autorelease];
+        @throw create_JavaLangRuntimeException_initWithNSString_(@"Unable to load default stopword set");
       }
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder)
@@ -144,10 +155,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", NULL, NULL, 0x2, NULL, NULL },
+    { "init", "DefaultSetHolder", NULL, 0x2, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_SET_", NULL, 0x1a, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder_DEFAULT_SET_, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_SET", "DEFAULT_SET", 0x1a, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder_DEFAULT_SET, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder = { 2, "DefaultSetHolder", "org.apache.lucene.analysis.el", "GreekAnalyzer", 0xa, 1, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder;
@@ -160,9 +171,11 @@ void OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder_init(OrgApacheLucen
 }
 
 OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder *new_OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder_init() {
-  OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder *self = [OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder alloc];
-  OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder, init)
+}
+
+OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder *create_OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder)

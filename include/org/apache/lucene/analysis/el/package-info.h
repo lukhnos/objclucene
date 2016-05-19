@@ -3,14 +3,17 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/el/package-info.java
 //
 
+/*!
+ @brief Analyzer for Greek.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisElPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisElPackage_info_RESTRICT
-#define OrgApacheLuceneAnalysisElPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisElPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisElPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisElPackage_info 0
 #else
-#define OrgApacheLuceneAnalysisElPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisElPackage_info 1
 #endif
-#undef OrgApacheLuceneAnalysisElPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisElPackage_info
 
-#pragma pop_macro("OrgApacheLuceneAnalysisElPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisElPackage_info")

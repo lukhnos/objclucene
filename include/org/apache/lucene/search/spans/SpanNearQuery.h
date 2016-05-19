@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSpansSpanNearQuery_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSpansSpanNearQuery_RESTRICT
-#define OrgApacheLuceneSearchSpansSpanNearQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanNearQuery")
+#ifdef RESTRICT_OrgApacheLuceneSearchSpansSpanNearQuery
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanNearQuery 0
 #else
-#define OrgApacheLuceneSearchSpansSpanNearQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanNearQuery 1
 #endif
-#undef OrgApacheLuceneSearchSpansSpanNearQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSpansSpanNearQuery
 
-#if !defined (_OrgApacheLuceneSearchSpansSpanNearQuery_) && (OrgApacheLuceneSearchSpansSpanNearQuery_INCLUDE_ALL || OrgApacheLuceneSearchSpansSpanNearQuery_INCLUDE)
-#define _OrgApacheLuceneSearchSpansSpanNearQuery_
+#if !defined (OrgApacheLuceneSearchSpansSpanNearQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanNearQuery || defined(INCLUDE_OrgApacheLuceneSearchSpansSpanNearQuery))
+#define OrgApacheLuceneSearchSpansSpanNearQuery_
 
-#define OrgApacheLuceneSearchSpansSpanQuery_RESTRICT 1
-#define OrgApacheLuceneSearchSpansSpanQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSpansSpanQuery 1
+#define INCLUDE_OrgApacheLuceneSearchSpansSpanQuery 1
 #include "org/apache/lucene/search/spans/SpanQuery.h"
 
 @class IOSObjectArray;
@@ -28,6 +28,12 @@
 @class OrgApacheLuceneSearchSpansSpanWeight;
 @protocol JavaUtilList;
 
+/*!
+ @brief Matches spans which are near one another.
+ One can specify <i>slop</i>, the
+ maximum number of intervening unmatched positions, as well as whether
+ matches are required to be in-order.
+ */
 @interface OrgApacheLuceneSearchSpansSpanNearQuery : OrgApacheLuceneSearchSpansSpanQuery < NSCopying > {
  @public
   id<JavaUtilList> clauses_;
@@ -38,10 +44,25 @@
 
 #pragma mark Public
 
+/*!
+ @brief Construct a SpanNearQuery.
+ Matches spans matching a span from each
+ clause, with up to <code>slop</code> total unmatched positions between
+ them.
+ <br>When <code>inOrder</code> is true, the spans from each clause
+ must be in the same order as in <code>clauses</code> and must be non-overlapping.
+ <br>When <code>inOrder</code> is false, the spans from each clause
+ need not be ordered and may overlap.
+ @param clauses the clauses to find near each other, in the same field, at least 2.
+ @param slop The slop value
+ @param inOrder true if order is important
+ */
 - (instancetype)initWithOrgApacheLuceneSearchSpansSpanQueryArray:(IOSObjectArray *)clauses
                                                          withInt:(jint)slop
                                                      withBoolean:(jboolean)inOrder;
 
+/*!
+ */
 - (instancetype)initWithOrgApacheLuceneSearchSpansSpanQueryArray:(IOSObjectArray *)clausesIn
                                                          withInt:(jint)slop
                                                      withBoolean:(jboolean)inOrder
@@ -52,20 +73,38 @@
 - (OrgApacheLuceneSearchSpansSpanWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                                  withBoolean:(jboolean)needsScores;
 
+/*!
+ @brief Returns true iff <code>o</code> is equal to this.
+ */
 - (jboolean)isEqual:(id)o;
 
+/*!
+ @brief Return the clauses whose spans are matched.
+ */
 - (IOSObjectArray *)getClauses;
 
 - (NSString *)getField;
 
+/*!
+ @brief Return the maximum number of intervening unmatched positions permitted.
+ */
 - (jint)getSlop;
 
 - (NSUInteger)hash;
 
+/*!
+ @brief Return true if matches are required to be in-order.
+ */
 - (jboolean)isInOrder;
 
+/*!
+ @brief Returns a <code>Builder</code> for an ordered query on a particular field
+ */
 + (OrgApacheLuceneSearchSpansSpanNearQuery_Builder *)newOrderedNearQueryWithNSString:(NSString *)field OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Returns a <code>Builder</code> for an unordered query on a particular field
+ */
 + (OrgApacheLuceneSearchSpansSpanNearQuery_Builder *)newUnorderedNearQueryWithNSString:(NSString *)field OBJC_METHOD_FAMILY_NONE;
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
@@ -87,33 +126,57 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanNearQuery_initWithOrgApache
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanNearQuery *new_OrgApacheLuceneSearchSpansSpanNearQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_withInt_withBoolean_(IOSObjectArray *clauses, jint slop, jboolean inOrder) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanNearQuery *create_OrgApacheLuceneSearchSpansSpanNearQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_withInt_withBoolean_(IOSObjectArray *clauses, jint slop, jboolean inOrder);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanNearQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_withInt_withBoolean_withBoolean_(OrgApacheLuceneSearchSpansSpanNearQuery *self, IOSObjectArray *clausesIn, jint slop, jboolean inOrder, jboolean collectPayloads);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanNearQuery *new_OrgApacheLuceneSearchSpansSpanNearQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_withInt_withBoolean_withBoolean_(IOSObjectArray *clausesIn, jint slop, jboolean inOrder, jboolean collectPayloads) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanNearQuery *create_OrgApacheLuceneSearchSpansSpanNearQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_withInt_withBoolean_withBoolean_(IOSObjectArray *clausesIn, jint slop, jboolean inOrder, jboolean collectPayloads);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanNearQuery)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchSpansSpanNearQuery_Builder_) && (OrgApacheLuceneSearchSpansSpanNearQuery_INCLUDE_ALL || OrgApacheLuceneSearchSpansSpanNearQuery_Builder_INCLUDE)
-#define _OrgApacheLuceneSearchSpansSpanNearQuery_Builder_
+#if !defined (OrgApacheLuceneSearchSpansSpanNearQuery_Builder_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanNearQuery || defined(INCLUDE_OrgApacheLuceneSearchSpansSpanNearQuery_Builder))
+#define OrgApacheLuceneSearchSpansSpanNearQuery_Builder_
 
 @class OrgApacheLuceneSearchSpansSpanNearQuery;
 @class OrgApacheLuceneSearchSpansSpanQuery;
 
+/*!
+ @brief A builder for SpanNearQueries
+ */
 @interface OrgApacheLuceneSearchSpansSpanNearQuery_Builder : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Construct a new builder
+ @param field the field to search in
+ @param ordered whether or not clauses must be in-order to match
+ */
 - (instancetype)initWithNSString:(NSString *)field
                      withBoolean:(jboolean)ordered;
 
+/*!
+ @brief Add a new clause
+ */
 - (OrgApacheLuceneSearchSpansSpanNearQuery_Builder *)addClauseWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)clause;
 
+/*!
+ @brief Add a gap after the previous clause of a defined width
+ */
 - (OrgApacheLuceneSearchSpansSpanNearQuery_Builder *)addGapWithInt:(jint)width;
 
+/*!
+ @brief Build the query
+ */
 - (OrgApacheLuceneSearchSpansSpanNearQuery *)build;
 
+/*!
+ @brief Set the slop for this query
+ */
 - (OrgApacheLuceneSearchSpansSpanNearQuery_Builder *)setSlopWithInt:(jint)slop;
 
 @end
@@ -124,21 +187,23 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanNearQuery_Builder_initWithN
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanNearQuery_Builder *new_OrgApacheLuceneSearchSpansSpanNearQuery_Builder_initWithNSString_withBoolean_(NSString *field, jboolean ordered) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanNearQuery_Builder *create_OrgApacheLuceneSearchSpansSpanNearQuery_Builder_initWithNSString_withBoolean_(NSString *field, jboolean ordered);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanNearQuery_Builder)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchSpansSpanNearQuery_SpanNearWeight_) && (OrgApacheLuceneSearchSpansSpanNearQuery_INCLUDE_ALL || OrgApacheLuceneSearchSpansSpanNearQuery_SpanNearWeight_INCLUDE)
-#define _OrgApacheLuceneSearchSpansSpanNearQuery_SpanNearWeight_
+#if !defined (OrgApacheLuceneSearchSpansSpanNearQuery_SpanNearWeight_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanNearQuery || defined(INCLUDE_OrgApacheLuceneSearchSpansSpanNearQuery_SpanNearWeight))
+#define OrgApacheLuceneSearchSpansSpanNearQuery_SpanNearWeight_
 
-#define OrgApacheLuceneSearchSpansSpanWeight_RESTRICT 1
-#define OrgApacheLuceneSearchSpansSpanWeight_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSpansSpanWeight 1
+#define INCLUDE_OrgApacheLuceneSearchSpansSpanWeight 1
 #include "org/apache/lucene/search/spans/SpanWeight.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchSpansSpanNearQuery;
-@class OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum;
+@class OrgApacheLuceneSearchSpansSpanWeight_Postings;
 @class OrgApacheLuceneSearchSpansSpans;
 @protocol JavaUtilList;
 @protocol JavaUtilMap;
@@ -161,7 +226,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanNearQuery_Builder)
 - (void)extractTermsWithJavaUtilSet:(id<JavaUtilSet>)terms;
 
 - (OrgApacheLuceneSearchSpansSpans *)getSpansWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                 withOrgApacheLuceneSearchSpansSpanWeight_PostingsEnum:(OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum *)requiredPostings;
+                                     withOrgApacheLuceneSearchSpansSpanWeight_Postings:(OrgApacheLuceneSearchSpansSpanWeight_Postings *)requiredPostings;
 
 @end
 
@@ -173,15 +238,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanNearQuery_SpanNearWeight_in
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanNearQuery_SpanNearWeight *new_OrgApacheLuceneSearchSpansSpanNearQuery_SpanNearWeight_initWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilList_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_(OrgApacheLuceneSearchSpansSpanNearQuery *outer$, id<JavaUtilList> subWeights, OrgApacheLuceneSearchIndexSearcher *searcher, id<JavaUtilMap> terms) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanNearQuery_SpanNearWeight *create_OrgApacheLuceneSearchSpansSpanNearQuery_SpanNearWeight_initWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilList_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_(OrgApacheLuceneSearchSpansSpanNearQuery *outer$, id<JavaUtilList> subWeights, OrgApacheLuceneSearchIndexSearcher *searcher, id<JavaUtilMap> terms);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanNearQuery_SpanNearWeight)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans_) && (OrgApacheLuceneSearchSpansSpanNearQuery_INCLUDE_ALL || OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans_INCLUDE)
-#define _OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans_
+#if !defined (OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanNearQuery || defined(INCLUDE_OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans))
+#define OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans_
 
-#define OrgApacheLuceneSearchSpansSpans_RESTRICT 1
-#define OrgApacheLuceneSearchSpansSpans_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSpansSpans 1
+#define INCLUDE_OrgApacheLuceneSearchSpansSpans 1
 #include "org/apache/lucene/search/spans/Spans.h"
 
 @protocol OrgApacheLuceneSearchSpansSpanCollector;
@@ -227,8 +294,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans_initWith
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans *new_OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans_initWithInt_(jint width) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans *create_OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans_initWithInt_(jint width);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSpansSpanNearQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanNearQuery")

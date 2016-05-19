@@ -51,6 +51,8 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisTokenStreamToAutomato
 
 __attribute__((unused)) static OrgApacheLuceneAnalysisTokenStreamToAutomaton_Position *new_OrgApacheLuceneAnalysisTokenStreamToAutomaton_Position_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneAnalysisTokenStreamToAutomaton_Position *create_OrgApacheLuceneAnalysisTokenStreamToAutomaton_Position_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenStreamToAutomaton_Position)
 
 @interface OrgApacheLuceneAnalysisTokenStreamToAutomaton_Positions : OrgApacheLuceneUtilRollingBuffer
@@ -67,9 +69,19 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisTokenStreamToAutomato
 
 __attribute__((unused)) static OrgApacheLuceneAnalysisTokenStreamToAutomaton_Positions *new_OrgApacheLuceneAnalysisTokenStreamToAutomaton_Positions_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneAnalysisTokenStreamToAutomaton_Positions *create_OrgApacheLuceneAnalysisTokenStreamToAutomaton_Positions_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenStreamToAutomaton_Positions)
 
 @implementation OrgApacheLuceneAnalysisTokenStreamToAutomaton
+
++ (jint)POS_SEP {
+  return OrgApacheLuceneAnalysisTokenStreamToAutomaton_POS_SEP;
+}
+
++ (jint)HOLE {
+  return OrgApacheLuceneAnalysisTokenStreamToAutomaton_HOLE;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -91,14 +103,14 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (OrgApacheLuceneUtilAutomatonAutomaton *)toAutomatonWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg {
-  OrgApacheLuceneUtilAutomatonAutomaton_Builder *builder = [new_OrgApacheLuceneUtilAutomatonAutomaton_Builder_init() autorelease];
+  OrgApacheLuceneUtilAutomatonAutomaton_Builder *builder = create_OrgApacheLuceneUtilAutomatonAutomaton_Builder_init();
   [builder createState];
   id<OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute> termBytesAtt = [((OrgApacheLuceneAnalysisTokenStream *) nil_chk(inArg)) addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_class_()];
   id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute> posIncAtt = [inArg addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_class_()];
   id<OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute> posLengthAtt = [inArg addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute_class_()];
   id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute> offsetAtt = [inArg addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_()];
   [inArg reset];
-  OrgApacheLuceneUtilRollingBuffer *positions = [new_OrgApacheLuceneAnalysisTokenStreamToAutomaton_Positions_init() autorelease];
+  OrgApacheLuceneUtilRollingBuffer *positions = create_OrgApacheLuceneAnalysisTokenStreamToAutomaton_Positions_init();
   jint pos = -1;
   OrgApacheLuceneAnalysisTokenStreamToAutomaton_Position *posData = nil;
   jint maxOffset = 0;
@@ -140,7 +152,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     jint termLen;
     if (unicodeArcs_) {
       NSString *utf16 = [((OrgApacheLuceneUtilBytesRef *) nil_chk(termUTF8)) utf8ToString];
-      termUnicode = [IOSIntArray arrayWithLength:[utf16 codePointCount:0 endIndex:((jint) [((NSString *) nil_chk(utf16)) length])]];
+      termUnicode = [IOSIntArray arrayWithLength:[((NSString *) nil_chk(utf16)) codePointCount:0 endIndex:((jint) [utf16 length])]];
       termLen = termUnicode->size_;
       for (jint cp, i = 0, j = 0; i < ((jint) [utf16 length]); i += JavaLangCharacter_charCountWithInt_(cp)) {
         *IOSIntArray_GetRef(termUnicode, j++) = cp = [utf16 codePointAt:i];
@@ -157,7 +169,7 @@ J2OBJC_IGNORE_DESIGNATED_END
         c = IOSIntArray_Get(nil_chk(termUnicode), byteIDX);
       }
       else {
-        c = IOSByteArray_Get(nil_chk(((OrgApacheLuceneUtilBytesRef *) nil_chk(termUTF8))->bytes_), termUTF8->offset_ + byteIDX) & (jint) 0xff;
+        c = IOSByteArray_Get(nil_chk(termUTF8->bytes_), termUTF8->offset_ + byteIDX) & (jint) 0xff;
       }
       [builder addTransitionWithInt:state withInt:nextState withInt:c];
       state = nextState;
@@ -199,7 +211,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "setUnicodeArcsWithBoolean:", "setUnicodeArcs", "V", 0x1, NULL, NULL },
     { "changeTokenWithOrgApacheLuceneUtilBytesRef:", "changeToken", "Lorg.apache.lucene.util.BytesRef;", 0x4, NULL, NULL },
     { "toAutomatonWithOrgApacheLuceneAnalysisTokenStream:", "toAutomaton", "Lorg.apache.lucene.util.automaton.Automaton;", 0x1, "Ljava.io.IOException;", NULL },
-    { "addHolesWithOrgApacheLuceneUtilAutomatonAutomaton_Builder:withOrgApacheLuceneUtilRollingBuffer:withInt:", "addHoles", "V", 0xa, NULL, NULL },
+    { "addHolesWithOrgApacheLuceneUtilAutomatonAutomaton_Builder:withOrgApacheLuceneUtilRollingBuffer:withInt:", "addHoles", "V", 0xa, NULL, "(Lorg/apache/lucene/util/automaton/Automaton$Builder;Lorg/apache/lucene/util/RollingBuffer<Lorg/apache/lucene/analysis/TokenStreamToAutomaton$Position;>;I)V" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "preservePositionIncrements_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
@@ -220,9 +232,11 @@ void OrgApacheLuceneAnalysisTokenStreamToAutomaton_init(OrgApacheLuceneAnalysisT
 }
 
 OrgApacheLuceneAnalysisTokenStreamToAutomaton *new_OrgApacheLuceneAnalysisTokenStreamToAutomaton_init() {
-  OrgApacheLuceneAnalysisTokenStreamToAutomaton *self = [OrgApacheLuceneAnalysisTokenStreamToAutomaton alloc];
-  OrgApacheLuceneAnalysisTokenStreamToAutomaton_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisTokenStreamToAutomaton, init)
+}
+
+OrgApacheLuceneAnalysisTokenStreamToAutomaton *create_OrgApacheLuceneAnalysisTokenStreamToAutomaton_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisTokenStreamToAutomaton, init)
 }
 
 void OrgApacheLuceneAnalysisTokenStreamToAutomaton_addHolesWithOrgApacheLuceneUtilAutomatonAutomaton_Builder_withOrgApacheLuceneUtilRollingBuffer_withInt_(OrgApacheLuceneUtilAutomatonAutomaton_Builder *builder, OrgApacheLuceneUtilRollingBuffer *positions, jint pos) {
@@ -274,7 +288,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "reset", NULL, "V", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x2, NULL, NULL },
+    { "init", "Position", NULL, 0x2, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "arriving_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
@@ -293,9 +307,11 @@ void OrgApacheLuceneAnalysisTokenStreamToAutomaton_Position_init(OrgApacheLucene
 }
 
 OrgApacheLuceneAnalysisTokenStreamToAutomaton_Position *new_OrgApacheLuceneAnalysisTokenStreamToAutomaton_Position_init() {
-  OrgApacheLuceneAnalysisTokenStreamToAutomaton_Position *self = [OrgApacheLuceneAnalysisTokenStreamToAutomaton_Position alloc];
-  OrgApacheLuceneAnalysisTokenStreamToAutomaton_Position_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisTokenStreamToAutomaton_Position, init)
+}
+
+OrgApacheLuceneAnalysisTokenStreamToAutomaton_Position *create_OrgApacheLuceneAnalysisTokenStreamToAutomaton_Position_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisTokenStreamToAutomaton_Position, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisTokenStreamToAutomaton_Position)
@@ -303,7 +319,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisTokenStreamToAutomaton_P
 @implementation OrgApacheLuceneAnalysisTokenStreamToAutomaton_Positions
 
 - (OrgApacheLuceneAnalysisTokenStreamToAutomaton_Position *)newInstance {
-  return [new_OrgApacheLuceneAnalysisTokenStreamToAutomaton_Position_init() autorelease];
+  return create_OrgApacheLuceneAnalysisTokenStreamToAutomaton_Position_init();
 }
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -315,8 +331,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "newInstance", NULL, "Lorg.apache.lucene.analysis.TokenStreamToAutomaton$Position;", 0x4, NULL, NULL },
-    { "init", NULL, NULL, 0x2, NULL, NULL },
+    { "newInstance", NULL, "Lorg.apache.lucene.analysis.TokenStreamToAutomaton$Position;", 0x4, NULL, "()Lorg/apache/lucene/analysis/TokenStreamToAutomaton$Position;" },
+    { "init", "Positions", NULL, 0x2, NULL, NULL },
   };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.analysis.TokenStreamToAutomaton$Position;"};
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTokenStreamToAutomaton_Positions = { 2, "Positions", "org.apache.lucene.analysis", "TokenStreamToAutomaton", 0xa, 2, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/RollingBuffer<Lorg/apache/lucene/analysis/TokenStreamToAutomaton$Position;>;" };
@@ -330,9 +346,11 @@ void OrgApacheLuceneAnalysisTokenStreamToAutomaton_Positions_init(OrgApacheLucen
 }
 
 OrgApacheLuceneAnalysisTokenStreamToAutomaton_Positions *new_OrgApacheLuceneAnalysisTokenStreamToAutomaton_Positions_init() {
-  OrgApacheLuceneAnalysisTokenStreamToAutomaton_Positions *self = [OrgApacheLuceneAnalysisTokenStreamToAutomaton_Positions alloc];
-  OrgApacheLuceneAnalysisTokenStreamToAutomaton_Positions_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisTokenStreamToAutomaton_Positions, init)
+}
+
+OrgApacheLuceneAnalysisTokenStreamToAutomaton_Positions *create_OrgApacheLuceneAnalysisTokenStreamToAutomaton_Positions_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisTokenStreamToAutomaton_Positions, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisTokenStreamToAutomaton_Positions)

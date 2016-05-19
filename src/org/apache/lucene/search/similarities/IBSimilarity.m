@@ -71,7 +71,7 @@ withOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilariti
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneSearchSimilaritiesDistribution:withOrgApacheLuceneSearchSimilaritiesLambda:withOrgApacheLuceneSearchSimilaritiesNormalization:", "IBSimilarity", NULL, 0x1, NULL, NULL },
     { "scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:withFloat:", "score", "F", 0x4, NULL, NULL },
-    { "explainWithJavaUtilList:withOrgApacheLuceneSearchSimilaritiesBasicStats:withInt:withFloat:withFloat:", "explain", "V", 0x4, NULL, NULL },
+    { "explainWithJavaUtilList:withOrgApacheLuceneSearchSimilaritiesBasicStats:withInt:withFloat:withFloat:", "explain", "V", 0x4, NULL, "(Ljava/util/List<Lorg/apache/lucene/search/Explanation;>;Lorg/apache/lucene/search/similarities/BasicStats;IFF)V" },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "getDistribution", NULL, "Lorg.apache.lucene.search.similarities.Distribution;", 0x1, NULL, NULL },
     { "getLambda", NULL, "Lorg.apache.lucene.search.similarities.Lambda;", 0x1, NULL, NULL },
@@ -96,9 +96,11 @@ void OrgApacheLuceneSearchSimilaritiesIBSimilarity_initWithOrgApacheLuceneSearch
 }
 
 OrgApacheLuceneSearchSimilaritiesIBSimilarity *new_OrgApacheLuceneSearchSimilaritiesIBSimilarity_initWithOrgApacheLuceneSearchSimilaritiesDistribution_withOrgApacheLuceneSearchSimilaritiesLambda_withOrgApacheLuceneSearchSimilaritiesNormalization_(OrgApacheLuceneSearchSimilaritiesDistribution *distribution, OrgApacheLuceneSearchSimilaritiesLambda *lambda, OrgApacheLuceneSearchSimilaritiesNormalization *normalization) {
-  OrgApacheLuceneSearchSimilaritiesIBSimilarity *self = [OrgApacheLuceneSearchSimilaritiesIBSimilarity alloc];
-  OrgApacheLuceneSearchSimilaritiesIBSimilarity_initWithOrgApacheLuceneSearchSimilaritiesDistribution_withOrgApacheLuceneSearchSimilaritiesLambda_withOrgApacheLuceneSearchSimilaritiesNormalization_(self, distribution, lambda, normalization);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSimilaritiesIBSimilarity, initWithOrgApacheLuceneSearchSimilaritiesDistribution_withOrgApacheLuceneSearchSimilaritiesLambda_withOrgApacheLuceneSearchSimilaritiesNormalization_, distribution, lambda, normalization)
+}
+
+OrgApacheLuceneSearchSimilaritiesIBSimilarity *create_OrgApacheLuceneSearchSimilaritiesIBSimilarity_initWithOrgApacheLuceneSearchSimilaritiesDistribution_withOrgApacheLuceneSearchSimilaritiesLambda_withOrgApacheLuceneSearchSimilaritiesNormalization_(OrgApacheLuceneSearchSimilaritiesDistribution *distribution, OrgApacheLuceneSearchSimilaritiesLambda *lambda, OrgApacheLuceneSearchSimilaritiesNormalization *normalization) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSimilaritiesIBSimilarity, initWithOrgApacheLuceneSearchSimilaritiesDistribution_withOrgApacheLuceneSearchSimilaritiesLambda_withOrgApacheLuceneSearchSimilaritiesNormalization_, distribution, lambda, normalization)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSimilaritiesIBSimilarity)

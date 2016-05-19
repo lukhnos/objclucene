@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode_) && (OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode_
+#if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode))
+#define OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode_
 
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode_RESTRICT 1
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode 1
+#define INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/AndQueryNode.h"
 
 @protocol JavaLangCharSequence;
@@ -25,22 +25,42 @@
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;
 
+/*!
+ @brief A <code>AnyQueryNode</code> represents an ANY operator performed on a list of
+ nodes.
+ */
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode
 
 #pragma mark Public
 
+/*!
+ @param clauses
+ - the query nodes to be or'ed
+ */
 - (instancetype)initWithJavaUtilList:(id<JavaUtilList>)clauses
             withJavaLangCharSequence:(id<JavaLangCharSequence>)field
                              withInt:(jint)minimumMatchingElements;
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree;
 
+/*!
+ @brief returns null if the field was not specified
+ @return the field
+ */
 - (id<JavaLangCharSequence>)getField;
 
+/*!
+ @brief returns - null if the field was not specified
+ @return the field as a String
+ */
 - (NSString *)getFieldAsString;
 
 - (jint)getMinimumMatchingElements;
 
+/*!
+ @param field
+ - the field to set
+ */
 - (void)setFieldWithJavaLangCharSequence:(id<JavaLangCharSequence>)field;
 
 - (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escapeSyntaxParser;
@@ -55,8 +75,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode_i
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode_initWithJavaUtilList_withJavaLangCharSequence_withInt_(id<JavaUtilList> clauses, id<JavaLangCharSequence> field, jint minimumMatchingElements) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode *create_OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode_initWithJavaUtilList_withJavaLangCharSequence_withInt_(id<JavaUtilList> clauses, id<JavaLangCharSequence> field, jint minimumMatchingElements);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode")

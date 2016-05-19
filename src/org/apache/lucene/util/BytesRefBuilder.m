@@ -123,15 +123,15 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (OrgApacheLuceneUtilBytesRef *)toBytesRef {
-  return [new_OrgApacheLuceneUtilBytesRef_initWithByteArray_(JavaUtilArrays_copyOfWithByteArray_withInt_(((OrgApacheLuceneUtilBytesRef *) nil_chk(ref_))->bytes_, ref_->length_)) autorelease];
+  return create_OrgApacheLuceneUtilBytesRef_initWithByteArray_(JavaUtilArrays_copyOfWithByteArray_withInt_(((OrgApacheLuceneUtilBytesRef *) nil_chk(ref_))->bytes_, ref_->length_));
 }
 
 - (jboolean)isEqual:(id)obj {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (NSUInteger)hash {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (void)dealloc {
@@ -179,9 +179,11 @@ void OrgApacheLuceneUtilBytesRefBuilder_init(OrgApacheLuceneUtilBytesRefBuilder 
 }
 
 OrgApacheLuceneUtilBytesRefBuilder *new_OrgApacheLuceneUtilBytesRefBuilder_init() {
-  OrgApacheLuceneUtilBytesRefBuilder *self = [OrgApacheLuceneUtilBytesRefBuilder alloc];
-  OrgApacheLuceneUtilBytesRefBuilder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilBytesRefBuilder, init)
+}
+
+OrgApacheLuceneUtilBytesRefBuilder *create_OrgApacheLuceneUtilBytesRefBuilder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilBytesRefBuilder, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBytesRefBuilder)

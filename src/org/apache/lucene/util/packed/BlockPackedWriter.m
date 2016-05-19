@@ -70,9 +70,11 @@ void OrgApacheLuceneUtilPackedBlockPackedWriter_initWithOrgApacheLuceneStoreData
 }
 
 OrgApacheLuceneUtilPackedBlockPackedWriter *new_OrgApacheLuceneUtilPackedBlockPackedWriter_initWithOrgApacheLuceneStoreDataOutput_withInt_(OrgApacheLuceneStoreDataOutput *outArg, jint blockSize) {
-  OrgApacheLuceneUtilPackedBlockPackedWriter *self = [OrgApacheLuceneUtilPackedBlockPackedWriter alloc];
-  OrgApacheLuceneUtilPackedBlockPackedWriter_initWithOrgApacheLuceneStoreDataOutput_withInt_(self, outArg, blockSize);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedBlockPackedWriter, initWithOrgApacheLuceneStoreDataOutput_withInt_, outArg, blockSize)
+}
+
+OrgApacheLuceneUtilPackedBlockPackedWriter *create_OrgApacheLuceneUtilPackedBlockPackedWriter_initWithOrgApacheLuceneStoreDataOutput_withInt_(OrgApacheLuceneStoreDataOutput *outArg, jint blockSize) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedBlockPackedWriter, initWithOrgApacheLuceneStoreDataOutput_withInt_, outArg, blockSize)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedBlockPackedWriter)

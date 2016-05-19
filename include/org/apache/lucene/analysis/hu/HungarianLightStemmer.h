@@ -5,19 +5,26 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisHuHungarianLightStemmer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisHuHungarianLightStemmer_RESTRICT
-#define OrgApacheLuceneAnalysisHuHungarianLightStemmer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisHuHungarianLightStemmer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisHuHungarianLightStemmer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisHuHungarianLightStemmer 0
 #else
-#define OrgApacheLuceneAnalysisHuHungarianLightStemmer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisHuHungarianLightStemmer 1
 #endif
-#undef OrgApacheLuceneAnalysisHuHungarianLightStemmer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisHuHungarianLightStemmer
 
-#if !defined (_OrgApacheLuceneAnalysisHuHungarianLightStemmer_) && (OrgApacheLuceneAnalysisHuHungarianLightStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisHuHungarianLightStemmer_INCLUDE)
-#define _OrgApacheLuceneAnalysisHuHungarianLightStemmer_
+#if !defined (OrgApacheLuceneAnalysisHuHungarianLightStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisHuHungarianLightStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisHuHungarianLightStemmer))
+#define OrgApacheLuceneAnalysisHuHungarianLightStemmer_
 
 @class IOSCharArray;
 
+/*!
+ @brief Light Stemmer for Hungarian.
+ <p>
+ This stemmer implements the "UniNE" algorithm in:
+ <i>Light Stemming Approaches for the French, Portuguese, German and Hungarian Languages</i>
+ Jacques Savoy
+ */
 @interface OrgApacheLuceneAnalysisHuHungarianLightStemmer : NSObject
 
 #pragma mark Public
@@ -35,8 +42,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisHuHungarianLightStemmer_init(OrgAp
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisHuHungarianLightStemmer *new_OrgApacheLuceneAnalysisHuHungarianLightStemmer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisHuHungarianLightStemmer *create_OrgApacheLuceneAnalysisHuHungarianLightStemmer_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisHuHungarianLightStemmer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisHuHungarianLightStemmer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisHuHungarianLightStemmer")

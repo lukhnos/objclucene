@@ -5,23 +5,23 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchCachingWrapperQuery_INCLUDE_ALL")
-#if OrgApacheLuceneSearchCachingWrapperQuery_RESTRICT
-#define OrgApacheLuceneSearchCachingWrapperQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchCachingWrapperQuery")
+#ifdef RESTRICT_OrgApacheLuceneSearchCachingWrapperQuery
+#define INCLUDE_ALL_OrgApacheLuceneSearchCachingWrapperQuery 0
 #else
-#define OrgApacheLuceneSearchCachingWrapperQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchCachingWrapperQuery 1
 #endif
-#undef OrgApacheLuceneSearchCachingWrapperQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchCachingWrapperQuery
 
-#if !defined (_OrgApacheLuceneSearchCachingWrapperQuery_) && (OrgApacheLuceneSearchCachingWrapperQuery_INCLUDE_ALL || OrgApacheLuceneSearchCachingWrapperQuery_INCLUDE)
-#define _OrgApacheLuceneSearchCachingWrapperQuery_
+#if !defined (OrgApacheLuceneSearchCachingWrapperQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchCachingWrapperQuery || defined(INCLUDE_OrgApacheLuceneSearchCachingWrapperQuery))
+#define OrgApacheLuceneSearchCachingWrapperQuery_
 
-#define OrgApacheLuceneSearchQuery_RESTRICT 1
-#define OrgApacheLuceneSearchQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchQuery 1
+#define INCLUDE_OrgApacheLuceneSearchQuery 1
 #include "org/apache/lucene/search/Query.h"
 
-#define OrgApacheLuceneUtilAccountable_RESTRICT 1
-#define OrgApacheLuceneUtilAccountable_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAccountable 1
+#define INCLUDE_OrgApacheLuceneUtilAccountable 1
 #include "org/apache/lucene/util/Accountable.h"
 
 @class OrgApacheLuceneIndexIndexReader;
@@ -33,6 +33,12 @@
 @protocol JavaUtilCollection;
 @protocol OrgApacheLuceneSearchQueryCachingPolicy;
 
+/*!
+ @brief Wraps another <code>Query</code>'s result and caches it when scores are not
+ needed.
+ The purpose is to allow queries to simply care about matching and
+ scoring, and then wrap with this class to add caching.
+ */
 @interface OrgApacheLuceneSearchCachingWrapperQuery : OrgApacheLuceneSearchQuery < OrgApacheLuceneUtilAccountable > {
  @public
   jint hitCount_, missCount_;
@@ -40,8 +46,18 @@
 
 #pragma mark Public
 
+/*!
+ @brief Same as <code>CachingWrapperQuery.CachingWrapperQuery(Query,QueryCachingPolicy)</code>
+ but enforces the use of the
+ <code>QueryCachingPolicy.CacheOnLargeSegments.DEFAULT</code> policy.
+ */
 - (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
 
+/*!
+ @brief Wraps another query's result and caches it according to the provided policy.
+ @param query Query to cache results of
+ @param policy policy defining which filters should be cached on which segments
+ */
 - (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
        withOrgApacheLuceneSearchQueryCachingPolicy:(id<OrgApacheLuceneSearchQueryCachingPolicy>)policy;
 
@@ -56,6 +72,10 @@
 
 - (id<JavaUtilCollection>)getChildResources;
 
+/*!
+ @brief Gets the contained query.
+ @return the contained query.
+ */
 - (OrgApacheLuceneSearchQuery *)getQuery;
 
 - (NSUInteger)hash;
@@ -70,6 +90,9 @@
 
 #pragma mark Protected
 
+/*!
+ @brief Default cache implementation: uses <code>RoaringDocIdSet</code>.
+ */
 - (OrgApacheLuceneSearchDocIdSet *)cacheImplWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iterator
                                                    withOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader;
 
@@ -81,12 +104,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchCachingWrapperQuery_initWithOrgApach
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchCachingWrapperQuery *new_OrgApacheLuceneSearchCachingWrapperQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQueryCachingPolicy_(OrgApacheLuceneSearchQuery *query, id<OrgApacheLuceneSearchQueryCachingPolicy> policy) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchCachingWrapperQuery *create_OrgApacheLuceneSearchCachingWrapperQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQueryCachingPolicy_(OrgApacheLuceneSearchQuery *query, id<OrgApacheLuceneSearchQueryCachingPolicy> policy);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchCachingWrapperQuery_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchCachingWrapperQuery *self, OrgApacheLuceneSearchQuery *query);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchCachingWrapperQuery *new_OrgApacheLuceneSearchCachingWrapperQuery_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchQuery *query) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchCachingWrapperQuery *create_OrgApacheLuceneSearchCachingWrapperQuery_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchQuery *query);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCachingWrapperQuery)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchCachingWrapperQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchCachingWrapperQuery")

@@ -4,10 +4,12 @@
 //
 
 #include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
+#include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/core/Lucene43StopFilter.h"
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
@@ -39,14 +41,14 @@ withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArra
   return ![((OrgApacheLuceneAnalysisUtilCharArraySet *) nil_chk(stopWords_)) containsWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer] withInt:0 withInt:[termAtt_ length]];
 }
 
++ (IOSObjectArray *)__annotations {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
 - (void)dealloc {
   RELEASE_(stopWords_);
   RELEASE_(termAtt_);
   [super dealloc];
-}
-
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -71,9 +73,11 @@ void OrgApacheLuceneAnalysisCoreLucene43StopFilter_initWithBoolean_withOrgApache
 }
 
 OrgApacheLuceneAnalysisCoreLucene43StopFilter *new_OrgApacheLuceneAnalysisCoreLucene43StopFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(jboolean enablePositionIncrements, OrgApacheLuceneAnalysisTokenStream *inArg, OrgApacheLuceneAnalysisUtilCharArraySet *stopWords) {
-  OrgApacheLuceneAnalysisCoreLucene43StopFilter *self = [OrgApacheLuceneAnalysisCoreLucene43StopFilter alloc];
-  OrgApacheLuceneAnalysisCoreLucene43StopFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(self, enablePositionIncrements, inArg, stopWords);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCoreLucene43StopFilter, initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_, enablePositionIncrements, inArg, stopWords)
+}
+
+OrgApacheLuceneAnalysisCoreLucene43StopFilter *create_OrgApacheLuceneAnalysisCoreLucene43StopFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(jboolean enablePositionIncrements, OrgApacheLuceneAnalysisTokenStream *inArg, OrgApacheLuceneAnalysisUtilCharArraySet *stopWords) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCoreLucene43StopFilter, initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_, enablePositionIncrements, inArg, stopWords)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCoreLucene43StopFilter)

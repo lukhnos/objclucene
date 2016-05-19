@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_RESTRICT
-#define OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction 0
 #else
-#define OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_) && (OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_
+#if !defined (OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction))
+#define OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_
 
-#define OrgApacheLuceneQueriesFunctionValuesourceBoolFunction_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionValuesourceBoolFunction_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceBoolFunction 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceBoolFunction 1
 #include "org/apache/lucene/queries/function/valuesource/BoolFunction.h"
 
 @class IOSObjectArray;
@@ -27,6 +27,10 @@
 @protocol JavaUtilList;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Abstract <code>ValueSource</code> implementation which wraps multiple ValueSources
+ and applies an extendible boolean function to their values.
+ */
 @interface OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction : OrgApacheLuceneQueriesFunctionValuesourceBoolFunction {
  @public
   id<JavaUtilList> sources_;
@@ -67,4 +71,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFun
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction")

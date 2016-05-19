@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneStoreNIOFSDirectory_INCLUDE_ALL")
-#if OrgApacheLuceneStoreNIOFSDirectory_RESTRICT
-#define OrgApacheLuceneStoreNIOFSDirectory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneStoreNIOFSDirectory")
+#ifdef RESTRICT_OrgApacheLuceneStoreNIOFSDirectory
+#define INCLUDE_ALL_OrgApacheLuceneStoreNIOFSDirectory 0
 #else
-#define OrgApacheLuceneStoreNIOFSDirectory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneStoreNIOFSDirectory 1
 #endif
-#undef OrgApacheLuceneStoreNIOFSDirectory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneStoreNIOFSDirectory
 
-#if !defined (_OrgApacheLuceneStoreNIOFSDirectory_) && (OrgApacheLuceneStoreNIOFSDirectory_INCLUDE_ALL || OrgApacheLuceneStoreNIOFSDirectory_INCLUDE)
-#define _OrgApacheLuceneStoreNIOFSDirectory_
+#if !defined (OrgApacheLuceneStoreNIOFSDirectory_) && (INCLUDE_ALL_OrgApacheLuceneStoreNIOFSDirectory || defined(INCLUDE_OrgApacheLuceneStoreNIOFSDirectory))
+#define OrgApacheLuceneStoreNIOFSDirectory_
 
-#define OrgApacheLuceneStoreFSDirectory_RESTRICT 1
-#define OrgApacheLuceneStoreFSDirectory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreFSDirectory 1
+#define INCLUDE_OrgApacheLuceneStoreFSDirectory 1
 #include "org/apache/lucene/store/FSDirectory.h"
 
 @class OrgApacheLuceneStoreIOContext;
@@ -25,15 +25,56 @@
 @class OrgApacheLuceneStoreLockFactory;
 @class OrgLukhnosPortmobileFilePath;
 
+/*!
+ @brief An <code>FSDirectory</code> implementation that uses java.nio's FileChannel's
+ positional read, which allows multiple threads to read from the same file
+ without synchronizing.
+ <p>
+ This class only uses FileChannel when reading; writing is achieved with
+ <code>FSDirectory.FSIndexOutput</code>.
+ <p>
+ <b>NOTE</b>: NIOFSDirectory is not recommended on Windows because of a bug in
+ how FileChannel.read is implemented in Sun's JRE. Inside of the
+ implementation the position is apparently synchronized. See <a
+ href="http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6265734">here</a>
+ for details.
+ </p>
+ <p>
+ <b>NOTE:</b> Accessing this class either directly or
+ indirectly from a thread while it's interrupted can close the
+ underlying file descriptor immediately if at the same time the thread is
+ blocked on IO. The file descriptor will remain closed and subsequent access
+ to <code>NIOFSDirectory</code> will throw a <code>ClosedChannelException</code>. If
+ your application uses either <code>Thread.interrupt()</code> or
+ <code>Future.cancel(boolean)</code> you should use the legacy <code>RAFDirectory</code>
+ from the Lucene <code>misc</code> module in favor of <code>NIOFSDirectory</code>.
+ </p>
+ */
 @interface OrgApacheLuceneStoreNIOFSDirectory : OrgApacheLuceneStoreFSDirectory
 
 #pragma mark Public
 
+/*!
+ @brief Create a new NIOFSDirectory for the named location and <code>FSLockFactory.getDefault()</code>.
+ The directory is created at the named location if it does not yet exist.
+ @param path the path of the directory
+ @throws IOException if there is a low-level I/O error
+ */
 - (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path;
 
+/*!
+ @brief Create a new NIOFSDirectory for the named location.
+ The directory is created at the named location if it does not yet exist.
+ @param path the path of the directory
+ @param lockFactory the lock factory to use
+ @throws IOException if there is a low-level I/O error
+ */
 - (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
                  withOrgApacheLuceneStoreLockFactory:(OrgApacheLuceneStoreLockFactory *)lockFactory;
 
+/*!
+ @brief Creates an IndexInput for the file with the given name.
+ */
 - (OrgApacheLuceneStoreIndexInput *)openInputWithNSString:(NSString *)name
                         withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
 
@@ -45,19 +86,23 @@ FOUNDATION_EXPORT void OrgApacheLuceneStoreNIOFSDirectory_initWithOrgLukhnosPort
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreNIOFSDirectory *new_OrgApacheLuceneStoreNIOFSDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_(OrgLukhnosPortmobileFilePath *path, OrgApacheLuceneStoreLockFactory *lockFactory) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneStoreNIOFSDirectory *create_OrgApacheLuceneStoreNIOFSDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_(OrgLukhnosPortmobileFilePath *path, OrgApacheLuceneStoreLockFactory *lockFactory);
+
 FOUNDATION_EXPORT void OrgApacheLuceneStoreNIOFSDirectory_initWithOrgLukhnosPortmobileFilePath_(OrgApacheLuceneStoreNIOFSDirectory *self, OrgLukhnosPortmobileFilePath *path);
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreNIOFSDirectory *new_OrgApacheLuceneStoreNIOFSDirectory_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneStoreNIOFSDirectory *create_OrgApacheLuceneStoreNIOFSDirectory_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreNIOFSDirectory)
 
 #endif
 
-#if !defined (_OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput_) && (OrgApacheLuceneStoreNIOFSDirectory_INCLUDE_ALL || OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput_INCLUDE)
-#define _OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput_
+#if !defined (OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput_) && (INCLUDE_ALL_OrgApacheLuceneStoreNIOFSDirectory || defined(INCLUDE_OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput))
+#define OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput_
 
-#define OrgApacheLuceneStoreBufferedIndexInput_RESTRICT 1
-#define OrgApacheLuceneStoreBufferedIndexInput_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreBufferedIndexInput 1
+#define INCLUDE_OrgApacheLuceneStoreBufferedIndexInput 1
 #include "org/apache/lucene/store/BufferedIndexInput.h"
 
 @class IOSByteArray;
@@ -65,11 +110,26 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreNIOFSDirectory)
 @class OrgApacheLuceneStoreIOContext;
 @class OrgApacheLuceneStoreIndexInput;
 
+/*!
+ @brief Reads bytes with <code>FileChannel.read(ByteBuffer,long)</code>
+ */
 @interface OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput : OrgApacheLuceneStoreBufferedIndexInput {
  @public
+  /*!
+   @brief the file channel we will read from
+   */
   JavaNioChannelsFileChannel *channel_;
+  /*!
+   @brief is this instance a clone and hence does not own the file to close it
+   */
   jboolean isClone_;
+  /*!
+   @brief start offset: non-zero in the slice case
+   */
   jlong off_;
+  /*!
+   @brief end offset (start+length)
+   */
   jlong end_;
 }
 
@@ -115,12 +175,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput_initWi
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput *new_OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput_initWithNSString_withJavaNioChannelsFileChannel_withOrgApacheLuceneStoreIOContext_(NSString *resourceDesc, JavaNioChannelsFileChannel *fc, OrgApacheLuceneStoreIOContext *context) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput *create_OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput_initWithNSString_withJavaNioChannelsFileChannel_withOrgApacheLuceneStoreIOContext_(NSString *resourceDesc, JavaNioChannelsFileChannel *fc, OrgApacheLuceneStoreIOContext *context);
+
 FOUNDATION_EXPORT void OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput_initWithNSString_withJavaNioChannelsFileChannel_withLong_withLong_withInt_(OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput *self, NSString *resourceDesc, JavaNioChannelsFileChannel *fc, jlong off, jlong length, jint bufferSize);
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput *new_OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput_initWithNSString_withJavaNioChannelsFileChannel_withLong_withLong_withInt_(NSString *resourceDesc, JavaNioChannelsFileChannel *fc, jlong off, jlong length, jint bufferSize) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput *create_OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput_initWithNSString_withJavaNioChannelsFileChannel_withLong_withLong_withInt_(NSString *resourceDesc, JavaNioChannelsFileChannel *fc, jlong off, jlong length, jint bufferSize);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneStoreNIOFSDirectory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreNIOFSDirectory")

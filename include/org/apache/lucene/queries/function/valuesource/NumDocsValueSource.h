@@ -5,25 +5,31 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource_RESTRICT
-#define OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource 0
 #else
-#define OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource_) && (OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource_
+#if !defined (OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource))
+#define OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource_
 
-#define OrgApacheLuceneQueriesFunctionValueSource_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionValueSource_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionValueSource 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionValueSource 1
 #include "org/apache/lucene/queries/function/ValueSource.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneQueriesFunctionFunctionValues;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Returns the value of <code>IndexReader.numDocs()</code>
+ for every document.
+ This is the number of documents
+ excluding deletions.
+ */
 @interface OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource : OrgApacheLuceneQueriesFunctionValueSource
 
 #pragma mark Public
@@ -49,8 +55,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSour
 
 FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource *create_OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource")

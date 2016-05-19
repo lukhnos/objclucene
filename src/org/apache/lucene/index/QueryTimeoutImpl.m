@@ -12,6 +12,9 @@
 
 @interface OrgApacheLuceneIndexQueryTimeoutImpl () {
  @public
+  /*!
+   @brief The local variable to store the time beyond which, the processing should exit.
+   */
   JavaLangLong *timeoutAt_;
 }
 
@@ -31,7 +34,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexQueryTimeoutImpl, timeoutAt_, JavaLangLo
 }
 
 - (jboolean)shouldExit {
-  return timeoutAt_ != nil && JavaLangSystem_nanoTime() - [timeoutAt_ longLongValue] > 0;
+  return timeoutAt_ != nil && JavaLangSystem_nanoTime() - [((JavaLangLong *) nil_chk(timeoutAt_)) longLongValue] > 0;
 }
 
 - (void)reset {
@@ -69,13 +72,15 @@ void OrgApacheLuceneIndexQueryTimeoutImpl_initWithLong_(OrgApacheLuceneIndexQuer
   if (timeAllowed < 0LL) {
     timeAllowed = JavaLangLong_MAX_VALUE;
   }
-  JreStrongAssign(&self->timeoutAt_, JavaLangLong_valueOfWithLong_(JavaLangSystem_nanoTime() + [((JavaUtilConcurrentTimeUnitEnum *) nil_chk(JreLoadStatic(JavaUtilConcurrentTimeUnitEnum, NANOSECONDS))) convertWithLong:timeAllowed withJavaUtilConcurrentTimeUnitEnum:JreLoadStatic(JavaUtilConcurrentTimeUnitEnum, MILLISECONDS)]));
+  JreStrongAssign(&self->timeoutAt_, JavaLangLong_valueOfWithLong_(JavaLangSystem_nanoTime() + [((JavaUtilConcurrentTimeUnit *) nil_chk(JreLoadEnum(JavaUtilConcurrentTimeUnit, NANOSECONDS))) convertWithLong:timeAllowed withJavaUtilConcurrentTimeUnit:JreLoadEnum(JavaUtilConcurrentTimeUnit, MILLISECONDS)]));
 }
 
 OrgApacheLuceneIndexQueryTimeoutImpl *new_OrgApacheLuceneIndexQueryTimeoutImpl_initWithLong_(jlong timeAllowed) {
-  OrgApacheLuceneIndexQueryTimeoutImpl *self = [OrgApacheLuceneIndexQueryTimeoutImpl alloc];
-  OrgApacheLuceneIndexQueryTimeoutImpl_initWithLong_(self, timeAllowed);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexQueryTimeoutImpl, initWithLong_, timeAllowed)
+}
+
+OrgApacheLuceneIndexQueryTimeoutImpl *create_OrgApacheLuceneIndexQueryTimeoutImpl_initWithLong_(jlong timeAllowed) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexQueryTimeoutImpl, initWithLong_, timeAllowed)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexQueryTimeoutImpl)

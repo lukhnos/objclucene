@@ -26,10 +26,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (id)getWithIOSClass:(IOSClass *)type {
   if ([((id<JavaUtilMap>) nil_chk(cache_)) containsKeyWithId:type]) {
-    return [cache_ getWithId:type];
+    return [((id<JavaUtilMap>) nil_chk(cache_)) getWithId:type];
   }
   id value = [self computeValueWithIOSClass:type];
-  [cache_ putWithId:type withId:value];
+  [((id<JavaUtilMap>) nil_chk(cache_)) putWithId:type withId:value];
   return value;
 }
 
@@ -48,7 +48,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "init", "ClassValue", NULL, 0x4, NULL, NULL },
     { "computeValueWithIOSClass:", "computeValue", "TT;", 0x404, NULL, "(Ljava/lang/Class<*>;)TT;" },
     { "getWithIOSClass:", "get", "TT;", 0x1, NULL, "(Ljava/lang/Class<*>;)TT;" },
-    { "removeWithIOSClass:", "remove", "V", 0x1, NULL, NULL },
+    { "removeWithIOSClass:", "remove", "V", 0x1, NULL, "(Ljava/lang/Class<*>;)V" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "defaultCached_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },

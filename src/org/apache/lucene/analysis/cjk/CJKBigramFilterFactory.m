@@ -20,12 +20,12 @@
 }
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  return [new_OrgApacheLuceneAnalysisCjkCJKBigramFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_(input, flags_, outputUnigrams_) autorelease];
+  return create_OrgApacheLuceneAnalysisCjkCJKBigramFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_(input, flags_, outputUnigrams_);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "CJKBigramFilterFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "CJKBigramFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenStream;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -56,14 +56,16 @@ void OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory_initWithJavaUtilMap_(OrgAp
   self->flags_ = flags;
   self->outputUnigrams_ = [self getBooleanWithJavaUtilMap:args withNSString:@"outputUnigrams" withBoolean:false];
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory *new_OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory *self = [OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory alloc];
-  OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory *create_OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory)

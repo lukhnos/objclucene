@@ -4,10 +4,12 @@
 //
 
 #include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/StringBuilder.h"
+#include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/index/IndexReader.h"
 #include "org/apache/lucene/index/Term.h"
 #include "org/apache/lucene/queryparser/surround/query/BasicQueryFactory.h"
@@ -50,6 +52,8 @@ __attribute__((unused)) static void OrgApacheLuceneQueryparserSurroundQuerySimpl
 
 __attribute__((unused)) static OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_$1 *new_OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_$1_initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_withOrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory_(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm *outer$, OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory *capture$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_$1 *create_OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_$1_initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_withOrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory_(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm *outer$, OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory *capture$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_$1)
 
 @implementation OrgApacheLuceneQueryparserSurroundQuerySimpleTerm
@@ -78,7 +82,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_$1)
 }
 
 - (jint)compareToWithId:(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm *)ost {
-  check_class_cast(ost, [OrgApacheLuceneQueryparserSurroundQuerySimpleTerm class]);
+  cast_chk(ost, [OrgApacheLuceneQueryparserSurroundQuerySimpleTerm class]);
   return [((NSString *) nil_chk([self toStringUnquoted])) compareToWithId:[((OrgApacheLuceneQueryparserSurroundQuerySimpleTerm *) nil_chk(ost)) toStringUnquoted]];
 }
 
@@ -86,7 +90,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_$1)
 }
 
 - (NSString *)description {
-  JavaLangStringBuilder *r = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *r = create_JavaLangStringBuilder_init();
   if ([self isQuoted]) {
     [r appendWithNSString:[self getQuote]];
   }
@@ -111,16 +115,16 @@ withOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor:(id<Or
 }
 
 - (void)addSpanQueriesWithOrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory:(OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory *)sncf {
-  [self visitMatchingTermsWithOrgApacheLuceneIndexIndexReader:[((OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory *) nil_chk(sncf)) getIndexReader] withNSString:[sncf getFieldName] withOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor:[new_OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_$1_initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_withOrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory_(self, sncf) autorelease]];
+  [self visitMatchingTermsWithOrgApacheLuceneIndexIndexReader:[((OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory *) nil_chk(sncf)) getIndexReader] withNSString:[sncf getFieldName] withOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor:create_OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_$1_initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_withOrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory_(self, sncf)];
 }
 
 - (OrgApacheLuceneSearchQuery *)makeLuceneQueryFieldNoBoostWithNSString:(NSString *)fieldName
            withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)qf {
-  return [new_OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(self, fieldName, qf) autorelease];
+  return create_OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(self, fieldName, qf);
 }
 
 + (IOSObjectArray *)__annotations_compareToWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -210,9 +214,11 @@ void OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_$1_initWithOrgApacheLucen
 }
 
 OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_$1 *new_OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_$1_initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_withOrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory_(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm *outer$, OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory *capture$0) {
-  OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_$1 *self = [OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_$1 alloc];
-  OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_$1_initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_withOrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory_(self, outer$, capture$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_$1, initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_withOrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory_, outer$, capture$0)
+}
+
+OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_$1 *create_OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_$1_initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_withOrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory_(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm *outer$, OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory *capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_$1, initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_withOrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory_, outer$, capture$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_$1)

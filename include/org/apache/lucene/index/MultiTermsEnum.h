@@ -5,36 +5,53 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexMultiTermsEnum_INCLUDE_ALL")
-#if OrgApacheLuceneIndexMultiTermsEnum_RESTRICT
-#define OrgApacheLuceneIndexMultiTermsEnum_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexMultiTermsEnum")
+#ifdef RESTRICT_OrgApacheLuceneIndexMultiTermsEnum
+#define INCLUDE_ALL_OrgApacheLuceneIndexMultiTermsEnum 0
 #else
-#define OrgApacheLuceneIndexMultiTermsEnum_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexMultiTermsEnum 1
 #endif
-#undef OrgApacheLuceneIndexMultiTermsEnum_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexMultiTermsEnum
 
-#if !defined (_OrgApacheLuceneIndexMultiTermsEnum_) && (OrgApacheLuceneIndexMultiTermsEnum_INCLUDE_ALL || OrgApacheLuceneIndexMultiTermsEnum_INCLUDE)
-#define _OrgApacheLuceneIndexMultiTermsEnum_
+#if !defined (OrgApacheLuceneIndexMultiTermsEnum_) && (INCLUDE_ALL_OrgApacheLuceneIndexMultiTermsEnum || defined(INCLUDE_OrgApacheLuceneIndexMultiTermsEnum))
+#define OrgApacheLuceneIndexMultiTermsEnum_
 
-#define OrgApacheLuceneIndexTermsEnum_RESTRICT 1
-#define OrgApacheLuceneIndexTermsEnum_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexTermsEnum 1
+#define INCLUDE_OrgApacheLuceneIndexTermsEnum 1
 #include "org/apache/lucene/index/TermsEnum.h"
 
 @class IOSObjectArray;
 @class OrgApacheLuceneIndexPostingsEnum;
-@class OrgApacheLuceneIndexTermsEnum_SeekStatusEnum;
+@class OrgApacheLuceneIndexTermsEnum_SeekStatus;
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief Exposes <code>TermsEnum</code> API, merged from <code>TermsEnum</code> API of sub-segments.
+ This does a merge sort, by term text, of the sub-readers.
+ */
 @interface OrgApacheLuceneIndexMultiTermsEnum : OrgApacheLuceneIndexTermsEnum
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ @param slices Which sub-reader slices we should
+ merge.
+ */
 - (instancetype)initWithOrgApacheLuceneIndexReaderSliceArray:(IOSObjectArray *)slices;
 
 - (jint)docFreq;
 
+/*!
+ @brief Returns sub-reader slices positioned to the current term.
+ */
 - (IOSObjectArray *)getMatchArray;
 
+/*!
+ @brief Returns how many sub-reader slices contain the current
+ term.
+ @@see #getMatchArray 
+ */
 - (jint)getMatchCount;
 
 - (OrgApacheLuceneUtilBytesRef *)next;
@@ -44,9 +61,13 @@
 - (OrgApacheLuceneIndexPostingsEnum *)postingsWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)reuse
                                                                            withInt:(jint)flags;
 
+/*!
+ @brief The terms array must be newly created TermsEnum, ie
+ <code>TermsEnum.next</code> has not yet been called.
+ */
 - (OrgApacheLuceneIndexTermsEnum *)resetWithOrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndexArray:(IOSObjectArray *)termsEnumsIndex;
 
-- (OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *)seekCeilWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
+- (OrgApacheLuceneIndexTermsEnum_SeekStatus *)seekCeilWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
 
 - (jboolean)seekExactWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
 
@@ -66,12 +87,14 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexMultiTermsEnum_initWithOrgApacheLucen
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexMultiTermsEnum *new_OrgApacheLuceneIndexMultiTermsEnum_initWithOrgApacheLuceneIndexReaderSliceArray_(IOSObjectArray *slices) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexMultiTermsEnum *create_OrgApacheLuceneIndexMultiTermsEnum_initWithOrgApacheLuceneIndexReaderSliceArray_(IOSObjectArray *slices);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiTermsEnum)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex_) && (OrgApacheLuceneIndexMultiTermsEnum_INCLUDE_ALL || OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex_INCLUDE)
-#define _OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex_
+#if !defined (OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex_) && (INCLUDE_ALL_OrgApacheLuceneIndexMultiTermsEnum || defined(INCLUDE_OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex))
+#define OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex_
 
 @class IOSObjectArray;
 @class OrgApacheLuceneIndexTermsEnum;
@@ -81,6 +104,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiTermsEnum)
   jint subIndex_;
   OrgApacheLuceneIndexTermsEnum *termsEnum_;
 }
+
++ (IOSObjectArray *)EMPTY_ARRAY;
 
 #pragma mark Public
 
@@ -93,19 +118,23 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex, termsEnum_, OrgApacheLuceneIndexTermsEnum *)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex_EMPTY_ARRAY_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex, EMPTY_ARRAY_, IOSObjectArray *)
+inline IOSObjectArray *OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex_get_EMPTY_ARRAY();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex_EMPTY_ARRAY;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex, EMPTY_ARRAY, IOSObjectArray *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex_initWithOrgApacheLuceneIndexTermsEnum_withInt_(OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex *self, OrgApacheLuceneIndexTermsEnum *termsEnum, jint subIndex);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex *new_OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex_initWithOrgApacheLuceneIndexTermsEnum_withInt_(OrgApacheLuceneIndexTermsEnum *termsEnum, jint subIndex) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex *create_OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex_initWithOrgApacheLuceneIndexTermsEnum_withInt_(OrgApacheLuceneIndexTermsEnum *termsEnum, jint subIndex);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice_) && (OrgApacheLuceneIndexMultiTermsEnum_INCLUDE_ALL || OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice_INCLUDE)
-#define _OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice_
+#if !defined (OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice_) && (INCLUDE_ALL_OrgApacheLuceneIndexMultiTermsEnum || defined(INCLUDE_OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice))
+#define OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice_
 
 @class OrgApacheLuceneIndexReaderSlice;
 @class OrgApacheLuceneIndexTermsEnum;
@@ -139,8 +168,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice_ini
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *new_OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice_initWithInt_withOrgApacheLuceneIndexReaderSlice_(jint index, OrgApacheLuceneIndexReaderSlice *subSlice) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *create_OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice_initWithInt_withOrgApacheLuceneIndexReaderSlice_(jint index, OrgApacheLuceneIndexReaderSlice *subSlice);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexMultiTermsEnum_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexMultiTermsEnum")

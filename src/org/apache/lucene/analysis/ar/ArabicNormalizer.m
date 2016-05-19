@@ -10,6 +10,74 @@
 
 @implementation OrgApacheLuceneAnalysisArArabicNormalizer
 
++ (jchar)ALEF {
+  return OrgApacheLuceneAnalysisArArabicNormalizer_ALEF;
+}
+
++ (jchar)ALEF_MADDA {
+  return OrgApacheLuceneAnalysisArArabicNormalizer_ALEF_MADDA;
+}
+
++ (jchar)ALEF_HAMZA_ABOVE {
+  return OrgApacheLuceneAnalysisArArabicNormalizer_ALEF_HAMZA_ABOVE;
+}
+
++ (jchar)ALEF_HAMZA_BELOW {
+  return OrgApacheLuceneAnalysisArArabicNormalizer_ALEF_HAMZA_BELOW;
+}
+
++ (jchar)YEH {
+  return OrgApacheLuceneAnalysisArArabicNormalizer_YEH;
+}
+
++ (jchar)DOTLESS_YEH {
+  return OrgApacheLuceneAnalysisArArabicNormalizer_DOTLESS_YEH;
+}
+
++ (jchar)TEH_MARBUTA {
+  return OrgApacheLuceneAnalysisArArabicNormalizer_TEH_MARBUTA;
+}
+
++ (jchar)HEH {
+  return OrgApacheLuceneAnalysisArArabicNormalizer_HEH;
+}
+
++ (jchar)TATWEEL {
+  return OrgApacheLuceneAnalysisArArabicNormalizer_TATWEEL;
+}
+
++ (jchar)FATHATAN {
+  return OrgApacheLuceneAnalysisArArabicNormalizer_FATHATAN;
+}
+
++ (jchar)DAMMATAN {
+  return OrgApacheLuceneAnalysisArArabicNormalizer_DAMMATAN;
+}
+
++ (jchar)KASRATAN {
+  return OrgApacheLuceneAnalysisArArabicNormalizer_KASRATAN;
+}
+
++ (jchar)FATHA {
+  return OrgApacheLuceneAnalysisArArabicNormalizer_FATHA;
+}
+
++ (jchar)DAMMA {
+  return OrgApacheLuceneAnalysisArArabicNormalizer_DAMMA;
+}
+
++ (jchar)KASRA {
+  return OrgApacheLuceneAnalysisArArabicNormalizer_KASRA;
+}
+
++ (jchar)SHADDA {
+  return OrgApacheLuceneAnalysisArArabicNormalizer_SHADDA;
+}
+
++ (jchar)SUKUN {
+  return OrgApacheLuceneAnalysisArArabicNormalizer_SUKUN;
+}
+
 - (jint)normalizeWithCharArray:(IOSCharArray *)s
                        withInt:(jint)len {
   for (jint i = 0; i < len; i++) {
@@ -54,7 +122,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "normalizeWithCharArray:withInt:", "normalize", "I", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "ArabicNormalizer", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "ALEF", "ALEF", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicNormalizer_ALEF },
@@ -86,9 +154,11 @@ void OrgApacheLuceneAnalysisArArabicNormalizer_init(OrgApacheLuceneAnalysisArAra
 }
 
 OrgApacheLuceneAnalysisArArabicNormalizer *new_OrgApacheLuceneAnalysisArArabicNormalizer_init() {
-  OrgApacheLuceneAnalysisArArabicNormalizer *self = [OrgApacheLuceneAnalysisArArabicNormalizer alloc];
-  OrgApacheLuceneAnalysisArArabicNormalizer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisArArabicNormalizer, init)
+}
+
+OrgApacheLuceneAnalysisArArabicNormalizer *create_OrgApacheLuceneAnalysisArArabicNormalizer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisArArabicNormalizer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisArArabicNormalizer)

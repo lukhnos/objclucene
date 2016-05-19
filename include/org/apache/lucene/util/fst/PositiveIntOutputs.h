@@ -5,25 +5,29 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilFstPositiveIntOutputs_INCLUDE_ALL")
-#if OrgApacheLuceneUtilFstPositiveIntOutputs_RESTRICT
-#define OrgApacheLuceneUtilFstPositiveIntOutputs_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstPositiveIntOutputs")
+#ifdef RESTRICT_OrgApacheLuceneUtilFstPositiveIntOutputs
+#define INCLUDE_ALL_OrgApacheLuceneUtilFstPositiveIntOutputs 0
 #else
-#define OrgApacheLuceneUtilFstPositiveIntOutputs_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilFstPositiveIntOutputs 1
 #endif
-#undef OrgApacheLuceneUtilFstPositiveIntOutputs_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilFstPositiveIntOutputs
 
-#if !defined (_OrgApacheLuceneUtilFstPositiveIntOutputs_) && (OrgApacheLuceneUtilFstPositiveIntOutputs_INCLUDE_ALL || OrgApacheLuceneUtilFstPositiveIntOutputs_INCLUDE)
-#define _OrgApacheLuceneUtilFstPositiveIntOutputs_
+#if !defined (OrgApacheLuceneUtilFstPositiveIntOutputs_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstPositiveIntOutputs || defined(INCLUDE_OrgApacheLuceneUtilFstPositiveIntOutputs))
+#define OrgApacheLuceneUtilFstPositiveIntOutputs_
 
-#define OrgApacheLuceneUtilFstOutputs_RESTRICT 1
-#define OrgApacheLuceneUtilFstOutputs_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilFstOutputs 1
+#define INCLUDE_OrgApacheLuceneUtilFstOutputs 1
 #include "org/apache/lucene/util/fst/Outputs.h"
 
 @class JavaLangLong;
 @class OrgApacheLuceneStoreDataInput;
 @class OrgApacheLuceneStoreDataOutput;
 
+/*!
+ @brief An FST <code>Outputs</code> implementation where each output
+ is a non-negative long value.
+ */
 @interface OrgApacheLuceneUtilFstPositiveIntOutputs : OrgApacheLuceneUtilFstOutputs
 
 #pragma mark Public
@@ -62,4 +66,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstPositiveIntOutputs)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilFstPositiveIntOutputs_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstPositiveIntOutputs")

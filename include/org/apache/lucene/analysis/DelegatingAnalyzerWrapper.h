@@ -5,29 +5,50 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper_RESTRICT
-#define OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper 0
 #else
-#define OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper 1
 #endif
-#undef OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper
 
-#if !defined (_OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper_) && (OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper_INCLUDE_ALL || OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper_INCLUDE)
-#define _OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper_
+#if !defined (OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper || defined(INCLUDE_OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper))
+#define OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper_
 
-#define OrgApacheLuceneAnalysisAnalyzerWrapper_RESTRICT 1
-#define OrgApacheLuceneAnalysisAnalyzerWrapper_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisAnalyzerWrapper 1
+#define INCLUDE_OrgApacheLuceneAnalysisAnalyzerWrapper 1
 #include "org/apache/lucene/analysis/AnalyzerWrapper.h"
 
 @class JavaIoReader;
 @class OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy;
 @class OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;
 
+/*!
+ @brief An analyzer wrapper, that doesn't allow to wrap components or readers.
+ By disallowing it, it means that the thread local resources can be delegated
+ to the delegate analyzer, and not also be allocated on this analyzer.
+ This wrapper class is the base class of all analyzers that just delegate to
+ another analyzer, e.g. per field name.
+ <p>This solves the problem of per field analyzer wrapper, where it also
+ maintains a thread local per field token stream components, while it can
+ safely delegate those and not also hold these data structures, which can
+ become expensive memory wise.
+ <p><b>Please note:</b> This analyzer uses a private <code>Analyzer.ReuseStrategy</code>,
+ which is returned by <code>getReuseStrategy()</code>. This strategy is used when
+ delegating. If you wrap this analyzer again and reuse this strategy, no
+ delegation is done and the given fallback is used.
+ */
 @interface OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper : OrgApacheLuceneAnalysisAnalyzerWrapper
 
 #pragma mark Protected
 
+/*!
+ @brief Constructor.
+ @param fallbackStrategy is the strategy to use if delegation is not possible
+ This is to support the common pattern:
+ <code>new OtherWrapper(thisWrapper.getReuseStrategy())</code>
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy:(OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *)fallbackStrategy;
 
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)wrapComponentsWithNSString:(NSString *)fieldName
@@ -46,4 +67,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper")

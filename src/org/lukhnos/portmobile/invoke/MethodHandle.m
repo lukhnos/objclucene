@@ -36,7 +36,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   static const J2ObjcMethodInfo methods[] = {
     { "invokeExact", NULL, "Ljava.lang.Object;", 0x401, NULL, NULL },
     { "asTypeWithOrgLukhnosPortmobileInvokeMethodType:", "asType", "Lorg.lukhnos.portmobile.invoke.MethodHandle;", 0x401, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "MethodHandle", NULL, 0x1, NULL, NULL },
   };
   static const char *inner_classes[] = {"Lorg.lukhnos.portmobile.invoke.MethodHandle$NoArgsConstructor;"};
   static const J2ObjcClassInfo _OrgLukhnosPortmobileInvokeMethodHandle = { 2, "MethodHandle", "org.lukhnos.portmobile.invoke", NULL, 0x401, 3, methods, 0, NULL, 0, NULL, 1, inner_classes, NULL, NULL };
@@ -84,7 +84,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileInvokeMethodHandle)
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithIOSClass:", "NoArgsConstructor", NULL, 0x0, NULL, NULL },
+    { "initWithIOSClass:", "NoArgsConstructor", NULL, 0x0, NULL, "(Ljava/lang/Class<*>;)V" },
     { "invokeExact", NULL, "Ljava.lang.Object;", 0x1, NULL, NULL },
     { "asTypeWithOrgLukhnosPortmobileInvokeMethodType:", "asType", "Lorg.lukhnos.portmobile.invoke.MethodHandle;", 0x1, NULL, NULL },
   };
@@ -103,9 +103,11 @@ void OrgLukhnosPortmobileInvokeMethodHandle_NoArgsConstructor_initWithIOSClass_(
 }
 
 OrgLukhnosPortmobileInvokeMethodHandle_NoArgsConstructor *new_OrgLukhnosPortmobileInvokeMethodHandle_NoArgsConstructor_initWithIOSClass_(IOSClass *clazz) {
-  OrgLukhnosPortmobileInvokeMethodHandle_NoArgsConstructor *self = [OrgLukhnosPortmobileInvokeMethodHandle_NoArgsConstructor alloc];
-  OrgLukhnosPortmobileInvokeMethodHandle_NoArgsConstructor_initWithIOSClass_(self, clazz);
-  return self;
+  J2OBJC_NEW_IMPL(OrgLukhnosPortmobileInvokeMethodHandle_NoArgsConstructor, initWithIOSClass_, clazz)
+}
+
+OrgLukhnosPortmobileInvokeMethodHandle_NoArgsConstructor *create_OrgLukhnosPortmobileInvokeMethodHandle_NoArgsConstructor_initWithIOSClass_(IOSClass *clazz) {
+  J2OBJC_CREATE_IMPL(OrgLukhnosPortmobileInvokeMethodHandle_NoArgsConstructor, initWithIOSClass_, clazz)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileInvokeMethodHandle_NoArgsConstructor)

@@ -5,31 +5,40 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneStoreFSLockFactory_INCLUDE_ALL")
-#if OrgApacheLuceneStoreFSLockFactory_RESTRICT
-#define OrgApacheLuceneStoreFSLockFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneStoreFSLockFactory")
+#ifdef RESTRICT_OrgApacheLuceneStoreFSLockFactory
+#define INCLUDE_ALL_OrgApacheLuceneStoreFSLockFactory 0
 #else
-#define OrgApacheLuceneStoreFSLockFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneStoreFSLockFactory 1
 #endif
-#undef OrgApacheLuceneStoreFSLockFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneStoreFSLockFactory
 
-#if !defined (_OrgApacheLuceneStoreFSLockFactory_) && (OrgApacheLuceneStoreFSLockFactory_INCLUDE_ALL || OrgApacheLuceneStoreFSLockFactory_INCLUDE)
-#define _OrgApacheLuceneStoreFSLockFactory_
+#if !defined (OrgApacheLuceneStoreFSLockFactory_) && (INCLUDE_ALL_OrgApacheLuceneStoreFSLockFactory || defined(INCLUDE_OrgApacheLuceneStoreFSLockFactory))
+#define OrgApacheLuceneStoreFSLockFactory_
 
-#define OrgApacheLuceneStoreLockFactory_RESTRICT 1
-#define OrgApacheLuceneStoreLockFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreLockFactory 1
+#define INCLUDE_OrgApacheLuceneStoreLockFactory 1
 #include "org/apache/lucene/store/LockFactory.h"
 
 @class OrgApacheLuceneStoreDirectory;
 @class OrgApacheLuceneStoreFSDirectory;
 @class OrgApacheLuceneStoreLock;
 
+/*!
+ @brief Base class for file system based locking implementation.
+ This class is explicitly checking that the passed <code>Directory</code>
+ is an <code>FSDirectory</code>.
+ */
 @interface OrgApacheLuceneStoreFSLockFactory : OrgApacheLuceneStoreLockFactory
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @brief Returns the default locking implementation for this platform.
+ This method currently returns always <code>NativeFSLockFactory</code>.
+ */
 + (OrgApacheLuceneStoreFSLockFactory *)getDefault;
 
 - (OrgApacheLuceneStoreLock *)obtainLockWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
@@ -37,6 +46,10 @@
 
 #pragma mark Protected
 
+/*!
+ @brief Implement this method to obtain a lock for a FSDirectory instance.
+ @throws IOException if the lock could not be obtained.
+ */
 - (OrgApacheLuceneStoreLock *)obtainFSLockWithOrgApacheLuceneStoreFSDirectory:(OrgApacheLuceneStoreFSDirectory *)dir
                                                                  withNSString:(NSString *)lockName;
 
@@ -52,4 +65,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreFSLockFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneStoreFSLockFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreFSLockFactory")

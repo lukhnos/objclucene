@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchPayloadsPayloadNearQuery_INCLUDE_ALL")
-#if OrgApacheLuceneSearchPayloadsPayloadNearQuery_RESTRICT
-#define OrgApacheLuceneSearchPayloadsPayloadNearQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPayloadNearQuery")
+#ifdef RESTRICT_OrgApacheLuceneSearchPayloadsPayloadNearQuery
+#define INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPayloadNearQuery 0
 #else
-#define OrgApacheLuceneSearchPayloadsPayloadNearQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPayloadNearQuery 1
 #endif
-#undef OrgApacheLuceneSearchPayloadsPayloadNearQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchPayloadsPayloadNearQuery
 
-#if !defined (_OrgApacheLuceneSearchPayloadsPayloadNearQuery_) && (OrgApacheLuceneSearchPayloadsPayloadNearQuery_INCLUDE_ALL || OrgApacheLuceneSearchPayloadsPayloadNearQuery_INCLUDE)
-#define _OrgApacheLuceneSearchPayloadsPayloadNearQuery_
+#if !defined (OrgApacheLuceneSearchPayloadsPayloadNearQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPayloadNearQuery || defined(INCLUDE_OrgApacheLuceneSearchPayloadsPayloadNearQuery))
+#define OrgApacheLuceneSearchPayloadsPayloadNearQuery_
 
-#define OrgApacheLuceneSearchSpansSpanNearQuery_RESTRICT 1
-#define OrgApacheLuceneSearchSpansSpanNearQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSpansSpanNearQuery 1
+#define INCLUDE_OrgApacheLuceneSearchSpansSpanNearQuery 1
 #include "org/apache/lucene/search/spans/SpanNearQuery.h"
 
 @class IOSObjectArray;
@@ -25,6 +25,19 @@
 @class OrgApacheLuceneSearchPayloadsPayloadFunction;
 @class OrgApacheLuceneSearchSpansSpanWeight;
 
+/*!
+ @brief This class is very similar to
+ <code>org.apache.lucene.search.spans.SpanNearQuery</code> except that it factors
+ in the value of the payloads located at each of the positions where the
+ <code>org.apache.lucene.search.spans.TermSpans</code> occurs.
+ <p>
+ NOTE: In order to take advantage of this with the default scoring implementation
+ (<code>DefaultSimilarity</code>), you must override <code>DefaultSimilarity.scorePayload(int,int,int,BytesRef)</code>,
+ which returns 1 by default.
+ <p>
+ Payload scores are aggregated using a pluggable <code>PayloadFunction</code>.
+ - seealso: org.apache.lucene.search.similarities.Similarity.SimScorer#computePayloadFactor(int,int,int,BytesRef)
+ */
 @interface OrgApacheLuceneSearchPayloadsPayloadNearQuery : OrgApacheLuceneSearchSpansSpanNearQuery {
  @public
   NSString *fieldName_;
@@ -64,19 +77,23 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchPayloadsPayloadNearQuery_initWithOrg
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsPayloadNearQuery *new_OrgApacheLuceneSearchPayloadsPayloadNearQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_withInt_withBoolean_(IOSObjectArray *clauses, jint slop, jboolean inOrder) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsPayloadNearQuery *create_OrgApacheLuceneSearchPayloadsPayloadNearQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_withInt_withBoolean_(IOSObjectArray *clauses, jint slop, jboolean inOrder);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchPayloadsPayloadNearQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_withInt_withBoolean_withOrgApacheLuceneSearchPayloadsPayloadFunction_(OrgApacheLuceneSearchPayloadsPayloadNearQuery *self, IOSObjectArray *clauses, jint slop, jboolean inOrder, OrgApacheLuceneSearchPayloadsPayloadFunction *function);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsPayloadNearQuery *new_OrgApacheLuceneSearchPayloadsPayloadNearQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_withInt_withBoolean_withOrgApacheLuceneSearchPayloadsPayloadFunction_(IOSObjectArray *clauses, jint slop, jboolean inOrder, OrgApacheLuceneSearchPayloadsPayloadFunction *function) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsPayloadNearQuery *create_OrgApacheLuceneSearchPayloadsPayloadNearQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_withInt_withBoolean_withOrgApacheLuceneSearchPayloadsPayloadFunction_(IOSObjectArray *clauses, jint slop, jboolean inOrder, OrgApacheLuceneSearchPayloadsPayloadFunction *function);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsPayloadNearQuery)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanWeight_) && (OrgApacheLuceneSearchPayloadsPayloadNearQuery_INCLUDE_ALL || OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanWeight_INCLUDE)
-#define _OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanWeight_
+#if !defined (OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanWeight_) && (INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPayloadNearQuery || defined(INCLUDE_OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanWeight))
+#define OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanWeight_
 
-#define OrgApacheLuceneSearchSpansSpanNearQuery_RESTRICT 1
-#define OrgApacheLuceneSearchSpansSpanNearQuery_SpanNearWeight_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSpansSpanNearQuery 1
+#define INCLUDE_OrgApacheLuceneSearchSpansSpanNearQuery_SpanNearWeight 1
 #include "org/apache/lucene/search/spans/SpanNearQuery.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
@@ -109,15 +126,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNear
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanWeight *new_OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanWeight_initWithOrgApacheLuceneSearchPayloadsPayloadNearQuery_withJavaUtilList_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_(OrgApacheLuceneSearchPayloadsPayloadNearQuery *outer$, id<JavaUtilList> subWeights, OrgApacheLuceneSearchIndexSearcher *searcher, id<JavaUtilMap> terms) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanWeight *create_OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanWeight_initWithOrgApacheLuceneSearchPayloadsPayloadNearQuery_withJavaUtilList_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_(OrgApacheLuceneSearchPayloadsPayloadNearQuery *outer$, id<JavaUtilList> subWeights, OrgApacheLuceneSearchIndexSearcher *searcher, id<JavaUtilMap> terms);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanWeight)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanScorer_) && (OrgApacheLuceneSearchPayloadsPayloadNearQuery_INCLUDE_ALL || OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanScorer_INCLUDE)
-#define _OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanScorer_
+#if !defined (OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPayloadNearQuery || defined(INCLUDE_OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanScorer))
+#define OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanScorer_
 
-#define OrgApacheLuceneSearchSpansSpanScorer_RESTRICT 1
-#define OrgApacheLuceneSearchSpansSpanScorer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSpansSpanScorer 1
+#define INCLUDE_OrgApacheLuceneSearchSpansSpanScorer 1
 #include "org/apache/lucene/search/spans/SpanScorer.h"
 
 @class OrgApacheLuceneSearchPayloadsPayloadNearQuery;
@@ -149,6 +168,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsPayloadNearQuery_Payload
 
 - (void)doStartCurrentDoc;
 
+/*!
+ @brief By default, uses the <code>PayloadFunction</code> to score the payloads, but
+ can be overridden to do other things.
+ @param payLoads The payloads
+ @param start The start position of the span being scored
+ @param end The end position of the span being scored
+ - seealso: Spans
+ */
 - (void)processPayloadsWithJavaUtilCollection:(id<JavaUtilCollection>)payLoads
                                       withInt:(jint)start
                                       withInt:(jint)end;
@@ -164,8 +191,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNear
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanScorer *new_OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanScorer_initWithOrgApacheLuceneSearchPayloadsPayloadNearQuery_withOrgApacheLuceneSearchSpansSpans_withOrgApacheLuceneSearchSpansSpanWeight_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(OrgApacheLuceneSearchPayloadsPayloadNearQuery *outer$, OrgApacheLuceneSearchSpansSpans *spans, OrgApacheLuceneSearchSpansSpanWeight *weight, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanScorer *create_OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanScorer_initWithOrgApacheLuceneSearchPayloadsPayloadNearQuery_withOrgApacheLuceneSearchSpansSpans_withOrgApacheLuceneSearchSpansSpanWeight_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(OrgApacheLuceneSearchPayloadsPayloadNearQuery *outer$, OrgApacheLuceneSearchSpansSpans *spans, OrgApacheLuceneSearchSpansSpanWeight *weight, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanScorer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchPayloadsPayloadNearQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPayloadNearQuery")

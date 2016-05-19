@@ -5,29 +5,40 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisUtilCharTokenizer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisUtilCharTokenizer_RESTRICT
-#define OrgApacheLuceneAnalysisUtilCharTokenizer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilCharTokenizer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisUtilCharTokenizer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisUtilCharTokenizer 0
 #else
-#define OrgApacheLuceneAnalysisUtilCharTokenizer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisUtilCharTokenizer 1
 #endif
-#undef OrgApacheLuceneAnalysisUtilCharTokenizer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisUtilCharTokenizer
 
-#if !defined (_OrgApacheLuceneAnalysisUtilCharTokenizer_) && (OrgApacheLuceneAnalysisUtilCharTokenizer_INCLUDE_ALL || OrgApacheLuceneAnalysisUtilCharTokenizer_INCLUDE)
-#define _OrgApacheLuceneAnalysisUtilCharTokenizer_
+#if !defined (OrgApacheLuceneAnalysisUtilCharTokenizer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisUtilCharTokenizer || defined(INCLUDE_OrgApacheLuceneAnalysisUtilCharTokenizer))
+#define OrgApacheLuceneAnalysisUtilCharTokenizer_
 
-#define OrgApacheLuceneAnalysisTokenizer_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenizer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenizer 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenizer 1
 #include "org/apache/lucene/analysis/Tokenizer.h"
 
 @class OrgApacheLuceneUtilAttributeFactory;
 
+/*!
+ @brief An abstract base class for simple, character-oriented tokenizers.
+ */
 @interface OrgApacheLuceneAnalysisUtilCharTokenizer : OrgApacheLuceneAnalysisTokenizer
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new <code>CharTokenizer</code> instance
+ */
 - (instancetype)init;
 
+/*!
+ @brief Creates a new <code>CharTokenizer</code> instance
+ @param factory
+ the attribute factory to use for this <code>Tokenizer</code>
+ */
 - (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
 
 - (void)end;
@@ -38,8 +49,21 @@
 
 #pragma mark Protected
 
+/*!
+ @brief Returns true iff a codepoint should be included in a token.
+ This tokenizer
+ generates as tokens adjacent sequences of codepoints which satisfy this
+ predicate. Codepoints for which this is false are used to define token
+ boundaries and are not included in tokens.
+ */
 - (jboolean)isTokenCharWithInt:(jint)c;
 
+/*!
+ @brief Called on each token character to normalize it before it is added to the
+ token.
+ The default implementation does nothing. Subclasses may use this to,
+ e.g., lowercase tokens.
+ */
 - (jint)normalizeWithInt:(jint)c;
 
 @end
@@ -54,4 +78,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilCharTokenizer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisUtilCharTokenizer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilCharTokenizer")

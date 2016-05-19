@@ -5,31 +5,44 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter_RESTRICT
-#define OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter 0
 #else
-#define OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter
 
-#if !defined (_OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter_) && (OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter_
+#if !defined (OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter))
+#define OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief A TokenFilter which filters out Tokens at the same position and Term text as the previous token in the stream.
+ */
 @interface OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new RemoveDuplicatesTokenFilter
+ @param inArg TokenStream that will be filtered
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
 
+/*!
+ 
+ */
 - (jboolean)incrementToken;
 
+/*!
+ 
+ */
 - (void)reset;
 
 @end
@@ -40,8 +53,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesToken
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter *new_OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter *create_OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter")

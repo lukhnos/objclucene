@@ -33,7 +33,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "getQueryWithOrgW3cDomElement:", "getQuery", "Lorg.apache.lucene.search.Query;", 0x1, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "RangeQueryBuilder", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder = { 2, "RangeQueryBuilder", "org.apache.lucene.queryparser.xml.builders", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder;
@@ -46,9 +46,11 @@ void OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder_init(OrgApacheLucene
 }
 
 OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder *new_OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder_init() {
-  OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder *self = [OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder alloc];
-  OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder, init)
+}
+
+OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder *create_OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder)

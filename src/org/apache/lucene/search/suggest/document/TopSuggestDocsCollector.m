@@ -45,19 +45,19 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector,
 withJavaLangCharSequence:(id<JavaLangCharSequence>)key
 withJavaLangCharSequence:(id<JavaLangCharSequence>)context
              withFloat:(jfloat)score {
-  OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc *current = [new_OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc_initWithInt_withJavaLangCharSequence_withJavaLangCharSequence_withFloat_(docBase_ + docID, key, context, score) autorelease];
+  OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc *current = create_OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc_initWithInt_withJavaLangCharSequence_withJavaLangCharSequence_withFloat_(docBase_ + docID, key, context, score);
   if (current == [((OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue *) nil_chk(priorityQueue_)) insertWithOverflowWithId:current]) {
-    @throw [new_OrgApacheLuceneSearchCollectionTerminatedException_init() autorelease];
+    @throw create_OrgApacheLuceneSearchCollectionTerminatedException_init();
   }
 }
 
 - (OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs *)get {
   IOSObjectArray *suggestScoreDocs = [((OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue *) nil_chk(priorityQueue_)) getResults];
   if (((IOSObjectArray *) nil_chk(suggestScoreDocs))->size_ > 0) {
-    return [new_OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_initWithInt_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDocArray_withFloat_(suggestScoreDocs->size_, suggestScoreDocs, ((OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc *) nil_chk(IOSObjectArray_Get(suggestScoreDocs, 0)))->score_) autorelease];
+    return create_OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_initWithInt_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDocArray_withFloat_(suggestScoreDocs->size_, suggestScoreDocs, ((OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc *) nil_chk(IOSObjectArray_Get(suggestScoreDocs, 0)))->score_);
   }
   else {
-    return JreLoadStatic(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs, EMPTY_);
+    return JreLoadStatic(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs, EMPTY);
   }
 }
 
@@ -97,16 +97,18 @@ withJavaLangCharSequence:(id<JavaLangCharSequence>)context
 void OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector_initWithInt_(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *self, jint num) {
   OrgApacheLuceneSearchSimpleCollector_init(self);
   if (num <= 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"'num' must be > 0") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"'num' must be > 0");
   }
   self->num_ = num;
   JreStrongAssignAndConsume(&self->priorityQueue_, new_OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue_initWithInt_(num));
 }
 
 OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *new_OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector_initWithInt_(jint num) {
-  OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *self = [OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector alloc];
-  OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector_initWithInt_(self, num);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector, initWithInt_, num)
+}
+
+OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *create_OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector_initWithInt_(jint num) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector, initWithInt_, num)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector)

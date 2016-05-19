@@ -76,7 +76,7 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPackedGrowableWriter_ensu
 }
 
 - (OrgApacheLuceneUtilPackedGrowableWriter *)resizeWithInt:(jint)newSize {
-  OrgApacheLuceneUtilPackedGrowableWriter *next = [new_OrgApacheLuceneUtilPackedGrowableWriter_initWithInt_withInt_withFloat_([self getBitsPerValue], newSize, acceptableOverheadRatio_) autorelease];
+  OrgApacheLuceneUtilPackedGrowableWriter *next = create_OrgApacheLuceneUtilPackedGrowableWriter_initWithInt_withInt_withFloat_([self getBitsPerValue], newSize, acceptableOverheadRatio_);
   jint limit = JavaLangMath_minWithInt_withInt_([self size], newSize);
   OrgApacheLuceneUtilPackedPackedInts_copy__WithOrgApacheLuceneUtilPackedPackedInts_Reader_withInt_withOrgApacheLuceneUtilPackedPackedInts_Mutable_withInt_withInt_withInt_(current_, 0, next, 0, limit, OrgApacheLuceneUtilPackedPackedInts_DEFAULT_BUFFER_SIZE);
   return next;
@@ -109,7 +109,7 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPackedGrowableWriter_ensu
 }
 
 - (jlong)ramBytesUsed {
-  return OrgApacheLuceneUtilRamUsageEstimator_alignObjectSizeWithLong_(JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER_) + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_) + OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_LONG + OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_FLOAT) + [((OrgApacheLuceneUtilPackedPackedInts_Mutable *) nil_chk(current_)) ramBytesUsed];
+  return OrgApacheLuceneUtilRamUsageEstimator_alignObjectSizeWithLong_(JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER) + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF) + OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_LONG + OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_FLOAT) + [((OrgApacheLuceneUtilPackedPackedInts_Mutable *) nil_chk(current_)) ramBytesUsed];
 }
 
 - (void)saveWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
@@ -158,9 +158,11 @@ void OrgApacheLuceneUtilPackedGrowableWriter_initWithInt_withInt_withFloat_(OrgA
 }
 
 OrgApacheLuceneUtilPackedGrowableWriter *new_OrgApacheLuceneUtilPackedGrowableWriter_initWithInt_withInt_withFloat_(jint startBitsPerValue, jint valueCount, jfloat acceptableOverheadRatio) {
-  OrgApacheLuceneUtilPackedGrowableWriter *self = [OrgApacheLuceneUtilPackedGrowableWriter alloc];
-  OrgApacheLuceneUtilPackedGrowableWriter_initWithInt_withInt_withFloat_(self, startBitsPerValue, valueCount, acceptableOverheadRatio);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedGrowableWriter, initWithInt_withInt_withFloat_, startBitsPerValue, valueCount, acceptableOverheadRatio)
+}
+
+OrgApacheLuceneUtilPackedGrowableWriter *create_OrgApacheLuceneUtilPackedGrowableWriter_initWithInt_withInt_withFloat_(jint startBitsPerValue, jint valueCount, jfloat acceptableOverheadRatio) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedGrowableWriter, initWithInt_withInt_withFloat_, startBitsPerValue, valueCount, acceptableOverheadRatio)
 }
 
 jlong OrgApacheLuceneUtilPackedGrowableWriter_maskWithInt_(jint bitsPerValue) {

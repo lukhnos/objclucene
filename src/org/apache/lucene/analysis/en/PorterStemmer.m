@@ -10,8 +10,6 @@
 #include "org/apache/lucene/util/ArrayUtil.h"
 #include "org/apache/lucene/util/RamUsageEstimator.h"
 
-#define OrgApacheLuceneAnalysisEnPorterStemmer_INITIAL_SIZE 50
-
 @interface OrgApacheLuceneAnalysisEnPorterStemmer () {
  @public
   IOSCharArray *b_;
@@ -47,7 +45,9 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisEnPorterStemmer, b_, IOSCharArray *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisEnPorterStemmer, INITIAL_SIZE, jint)
+inline jint OrgApacheLuceneAnalysisEnPorterStemmer_get_INITIAL_SIZE();
+#define OrgApacheLuceneAnalysisEnPorterStemmer_INITIAL_SIZE 50
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisEnPorterStemmer, INITIAL_SIZE, jint)
 
 __attribute__((unused)) static jboolean OrgApacheLuceneAnalysisEnPorterStemmer_consWithInt_(OrgApacheLuceneAnalysisEnPorterStemmer *self, jint i);
 
@@ -269,9 +269,11 @@ void OrgApacheLuceneAnalysisEnPorterStemmer_init(OrgApacheLuceneAnalysisEnPorter
 }
 
 OrgApacheLuceneAnalysisEnPorterStemmer *new_OrgApacheLuceneAnalysisEnPorterStemmer_init() {
-  OrgApacheLuceneAnalysisEnPorterStemmer *self = [OrgApacheLuceneAnalysisEnPorterStemmer alloc];
-  OrgApacheLuceneAnalysisEnPorterStemmer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisEnPorterStemmer, init)
+}
+
+OrgApacheLuceneAnalysisEnPorterStemmer *create_OrgApacheLuceneAnalysisEnPorterStemmer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisEnPorterStemmer, init)
 }
 
 jboolean OrgApacheLuceneAnalysisEnPorterStemmer_consWithInt_(OrgApacheLuceneAnalysisEnPorterStemmer *self, jint i) {
@@ -349,7 +351,7 @@ void OrgApacheLuceneAnalysisEnPorterStemmer_step1(OrgApacheLuceneAnalysisEnPorte
   if (IOSCharArray_Get(nil_chk(self->b_), self->k_) == 's') {
     if (OrgApacheLuceneAnalysisEnPorterStemmer_endsWithNSString_(self, @"sses")) self->k_ -= 2;
     else if (OrgApacheLuceneAnalysisEnPorterStemmer_endsWithNSString_(self, @"ies")) [self settoWithNSString:@"i"];
-    else if (IOSCharArray_Get(self->b_, self->k_ - 1) != 's') self->k_--;
+    else if (IOSCharArray_Get(nil_chk(self->b_), self->k_ - 1) != 's') self->k_--;
   }
   if (OrgApacheLuceneAnalysisEnPorterStemmer_endsWithNSString_(self, @"eed")) {
     if (OrgApacheLuceneAnalysisEnPorterStemmer_m(self) > 0) self->k_--;
@@ -360,7 +362,7 @@ void OrgApacheLuceneAnalysisEnPorterStemmer_step1(OrgApacheLuceneAnalysisEnPorte
     else if (OrgApacheLuceneAnalysisEnPorterStemmer_endsWithNSString_(self, @"bl")) [self settoWithNSString:@"ble"];
     else if (OrgApacheLuceneAnalysisEnPorterStemmer_endsWithNSString_(self, @"iz")) [self settoWithNSString:@"ize"];
     else if (OrgApacheLuceneAnalysisEnPorterStemmer_doublecWithInt_(self, self->k_)) {
-      jint ch = IOSCharArray_Get(self->b_, self->k_--);
+      jint ch = IOSCharArray_Get(nil_chk(self->b_), self->k_--);
       if (ch == 'l' || ch == 's' || ch == 'z') self->k_++;
     }
     else if (OrgApacheLuceneAnalysisEnPorterStemmer_m(self) == 1 && OrgApacheLuceneAnalysisEnPorterStemmer_cvcWithInt_(self, self->k_)) [self settoWithNSString:@"e"];
@@ -547,7 +549,7 @@ void OrgApacheLuceneAnalysisEnPorterStemmer_step5(OrgApacheLuceneAnalysisEnPorte
     if (OrgApacheLuceneAnalysisEnPorterStemmer_endsWithNSString_(self, @"ent")) break;
     return;
     case 'o':
-    if (OrgApacheLuceneAnalysisEnPorterStemmer_endsWithNSString_(self, @"ion") && self->j_ >= 0 && (IOSCharArray_Get(self->b_, self->j_) == 's' || IOSCharArray_Get(self->b_, self->j_) == 't')) break;
+    if (OrgApacheLuceneAnalysisEnPorterStemmer_endsWithNSString_(self, @"ion") && self->j_ >= 0 && (IOSCharArray_Get(nil_chk(self->b_), self->j_) == 's' || IOSCharArray_Get(self->b_, self->j_) == 't')) break;
     if (OrgApacheLuceneAnalysisEnPorterStemmer_endsWithNSString_(self, @"ou")) break;
     return;
     case 's':
@@ -578,7 +580,7 @@ void OrgApacheLuceneAnalysisEnPorterStemmer_step6(OrgApacheLuceneAnalysisEnPorte
     jint a = OrgApacheLuceneAnalysisEnPorterStemmer_m(self);
     if (a > 1 || (a == 1 && !OrgApacheLuceneAnalysisEnPorterStemmer_cvcWithInt_(self, self->k_ - 1))) self->k_--;
   }
-  if (IOSCharArray_Get(self->b_, self->k_) == 'l' && OrgApacheLuceneAnalysisEnPorterStemmer_doublecWithInt_(self, self->k_) && OrgApacheLuceneAnalysisEnPorterStemmer_m(self) > 1) self->k_--;
+  if (IOSCharArray_Get(nil_chk(self->b_), self->k_) == 'l' && OrgApacheLuceneAnalysisEnPorterStemmer_doublecWithInt_(self, self->k_) && OrgApacheLuceneAnalysisEnPorterStemmer_m(self) > 1) self->k_--;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisEnPorterStemmer)

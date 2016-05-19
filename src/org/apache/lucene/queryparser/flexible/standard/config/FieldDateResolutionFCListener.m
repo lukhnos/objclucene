@@ -29,16 +29,16 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateRes
 }
 
 - (void)buildFieldConfigWithOrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig:(OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *)fieldConfig {
-  OrgApacheLuceneDocumentDateTools_ResolutionEnum *dateRes = nil;
-  id<JavaUtilMap> dateResMap = [((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk(self->config_)) getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, FIELD_DATE_RESOLUTION_MAP_)];
+  OrgApacheLuceneDocumentDateTools_Resolution *dateRes = nil;
+  id<JavaUtilMap> dateResMap = [((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk(self->config_)) getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, FIELD_DATE_RESOLUTION_MAP)];
   if (dateResMap != nil) {
     dateRes = [dateResMap getWithId:[((OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *) nil_chk(fieldConfig)) getField]];
   }
   if (dateRes == nil) {
-    dateRes = [self->config_ getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, DATE_RESOLUTION_)];
+    dateRes = [((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk(self->config_)) getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, DATE_RESOLUTION)];
   }
   if (dateRes != nil) {
-    [((OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *) nil_chk(fieldConfig)) setWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, DATE_RESOLUTION_) withId:dateRes];
+    [((OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *) nil_chk(fieldConfig)) setWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, DATE_RESOLUTION) withId:dateRes];
   }
 }
 
@@ -68,9 +68,11 @@ void OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListen
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener *new_OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener_initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *config) {
-  OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener *self = [OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener_initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_(self, config);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener, initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_, config)
+}
+
+OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener *create_OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener_initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *config) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener, initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_, config)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener)

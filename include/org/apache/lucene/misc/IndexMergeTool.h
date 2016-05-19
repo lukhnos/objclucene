@@ -5,19 +5,23 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneMiscIndexMergeTool_INCLUDE_ALL")
-#if OrgApacheLuceneMiscIndexMergeTool_RESTRICT
-#define OrgApacheLuceneMiscIndexMergeTool_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneMiscIndexMergeTool")
+#ifdef RESTRICT_OrgApacheLuceneMiscIndexMergeTool
+#define INCLUDE_ALL_OrgApacheLuceneMiscIndexMergeTool 0
 #else
-#define OrgApacheLuceneMiscIndexMergeTool_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneMiscIndexMergeTool 1
 #endif
-#undef OrgApacheLuceneMiscIndexMergeTool_RESTRICT
+#undef RESTRICT_OrgApacheLuceneMiscIndexMergeTool
 
-#if !defined (_OrgApacheLuceneMiscIndexMergeTool_) && (OrgApacheLuceneMiscIndexMergeTool_INCLUDE_ALL || OrgApacheLuceneMiscIndexMergeTool_INCLUDE)
-#define _OrgApacheLuceneMiscIndexMergeTool_
+#if !defined (OrgApacheLuceneMiscIndexMergeTool_) && (INCLUDE_ALL_OrgApacheLuceneMiscIndexMergeTool || defined(INCLUDE_OrgApacheLuceneMiscIndexMergeTool))
+#define OrgApacheLuceneMiscIndexMergeTool_
 
 @class IOSObjectArray;
 
+/*!
+ @brief Merges indices specified on the command line into the index
+ specified as the first command line argument.
+ */
 @interface OrgApacheLuceneMiscIndexMergeTool : NSObject
 
 #pragma mark Public
@@ -36,8 +40,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneMiscIndexMergeTool_init(OrgApacheLuceneMis
 
 FOUNDATION_EXPORT OrgApacheLuceneMiscIndexMergeTool *new_OrgApacheLuceneMiscIndexMergeTool_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneMiscIndexMergeTool *create_OrgApacheLuceneMiscIndexMergeTool_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneMiscIndexMergeTool)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneMiscIndexMergeTool_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneMiscIndexMergeTool")

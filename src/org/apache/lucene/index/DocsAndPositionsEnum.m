@@ -4,10 +4,12 @@
 //
 
 #include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/lang/AssertionError.h"
 #include "java/lang/Deprecated.h"
+#include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/index/DocsAndPositionsEnum.h"
 #include "org/apache/lucene/index/DocsEnum.h"
 #include "org/apache/lucene/index/PostingsEnum.h"
@@ -26,6 +28,18 @@
 __attribute__((unused)) static jint OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper_doNextWithInt_(OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper *self, jint doc);
 
 @implementation OrgApacheLuceneIndexDocsAndPositionsEnum
+
++ (jint)FLAG_OFFSETS {
+  return OrgApacheLuceneIndexDocsAndPositionsEnum_FLAG_OFFSETS;
+}
+
++ (jint)FLAG_PAYLOADS {
+  return OrgApacheLuceneIndexDocsAndPositionsEnum_FLAG_PAYLOADS;
+}
+
++ (jshort)OLD_NULL_SEMANTICS {
+  return OrgApacheLuceneIndexDocsAndPositionsEnum_OLD_NULL_SEMANTICS;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -72,11 +86,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_OLD_NULL_SEMANTICS_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -108,32 +122,32 @@ void OrgApacheLuceneIndexDocsAndPositionsEnum_init(OrgApacheLuceneIndexDocsAndPo
 
 OrgApacheLuceneIndexDocsAndPositionsEnum *OrgApacheLuceneIndexDocsAndPositionsEnum_wrapWithOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneUtilBits_(OrgApacheLuceneIndexPostingsEnum *postings, id<OrgApacheLuceneUtilBits> liveDocs) {
   OrgApacheLuceneIndexDocsAndPositionsEnum_initialize();
-  return [new_OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper_initWithOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneUtilBits_(postings, liveDocs) autorelease];
+  return create_OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper_initWithOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneUtilBits_(postings, liveDocs);
 }
 
 OrgApacheLuceneIndexPostingsEnum *OrgApacheLuceneIndexDocsAndPositionsEnum_unwrapWithOrgApacheLuceneIndexDocsEnum_(OrgApacheLuceneIndexDocsEnum *docs) {
   OrgApacheLuceneIndexDocsAndPositionsEnum_initialize();
   if ([docs isKindOfClass:[OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper class]]) {
-    return ((OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper *) nil_chk(((OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper *) check_class_cast(docs, [OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper class]))))->in_;
+    return ((OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper *) nil_chk(((OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper *) cast_chk(docs, [OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper class]))))->in_;
   }
   else if (docs == nil) {
     return nil;
   }
   else {
-    @throw [new_JavaLangAssertionError_init() autorelease];
+    @throw create_JavaLangAssertionError_init();
   }
 }
 
 id<OrgApacheLuceneUtilBits> OrgApacheLuceneIndexDocsAndPositionsEnum_unwrapliveDocsWithOrgApacheLuceneIndexDocsEnum_(OrgApacheLuceneIndexDocsEnum *docs) {
   OrgApacheLuceneIndexDocsAndPositionsEnum_initialize();
   if ([docs isKindOfClass:[OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper class]]) {
-    return ((OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper *) nil_chk(((OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper *) check_class_cast(docs, [OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper class]))))->liveDocs_;
+    return ((OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper *) nil_chk(((OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper *) cast_chk(docs, [OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper class]))))->liveDocs_;
   }
   else if (docs == nil) {
     return nil;
   }
   else {
-    @throw [new_JavaLangAssertionError_init() autorelease];
+    @throw create_JavaLangAssertionError_init();
   }
 }
 
@@ -229,9 +243,11 @@ void OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper_initWi
 }
 
 OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper *new_OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper_initWithOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneUtilBits_(OrgApacheLuceneIndexPostingsEnum *inArg, id<OrgApacheLuceneUtilBits> liveDocs) {
-  OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper *self = [OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper alloc];
-  OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper_initWithOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneUtilBits_(self, inArg, liveDocs);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper, initWithOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneUtilBits_, inArg, liveDocs)
+}
+
+OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper *create_OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper_initWithOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneUtilBits_(OrgApacheLuceneIndexPostingsEnum *inArg, id<OrgApacheLuceneUtilBits> liveDocs) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper, initWithOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneUtilBits_, inArg, liveDocs)
 }
 
 jint OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper_doNextWithInt_(OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper *self, jint doc) {

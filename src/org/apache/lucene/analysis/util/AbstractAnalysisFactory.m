@@ -41,7 +41,13 @@
 
 @interface OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory () {
  @public
+  /*!
+   @brief The original args, before any processing
+   */
   id<JavaUtilMap> originalArgs_;
+  /*!
+   @brief whether the luceneMatchVersion arg is explicitly specified in the serialized schema
+   */
   jboolean isExplicitLuceneMatchVersion_;
 }
 
@@ -49,11 +55,13 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory, originalArgs_, id<JavaUtilMap>)
 
-static JavaUtilRegexPattern *OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_ITEM_PATTERN_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory, ITEM_PATTERN_, JavaUtilRegexPattern *)
+inline JavaUtilRegexPattern *OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_get_ITEM_PATTERN();
+static JavaUtilRegexPattern *OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_ITEM_PATTERN;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory, ITEM_PATTERN, JavaUtilRegexPattern *)
 
-static NSString *OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_CLASS_NAME_ = @"class";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory, CLASS_NAME_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_get_CLASS_NAME();
+static NSString *OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_CLASS_NAME = @"class";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory, CLASS_NAME, NSString *)
 
 __attribute__((unused)) static id<JavaUtilList> OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_getLinesWithOrgApacheLuceneAnalysisUtilResourceLoader_withNSString_(OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory *self, id<OrgApacheLuceneAnalysisUtilResourceLoader> loader, NSString *resource);
 
@@ -61,9 +69,13 @@ __attribute__((unused)) static id<JavaUtilList> OrgApacheLuceneAnalysisUtilAbstr
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory)
 
-NSString *OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_LUCENE_MATCH_VERSION_PARAM_ = @"luceneMatchVersion";
+NSString *OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_LUCENE_MATCH_VERSION_PARAM = @"luceneMatchVersion";
 
 @implementation OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory
+
++ (NSString *)LUCENE_MATCH_VERSION_PARAM {
+  return OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_LUCENE_MATCH_VERSION_PARAM;
+}
 
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args {
   OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_initWithJavaUtilMap_(self, args);
@@ -82,7 +94,7 @@ NSString *OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_LUCENE_MATCH_VERSIO
                         withNSString:(NSString *)name {
   NSString *s = [((id<JavaUtilMap>) nil_chk(args)) removeWithId:name];
   if (s == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$C", @"Configuration Error: missing parameter '", name, '\'')) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$C", @"Configuration Error: missing parameter '", name, '\''));
   }
   return s;
 }
@@ -99,7 +111,7 @@ NSString *OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_LUCENE_MATCH_VERSIO
                          withBoolean:(jboolean)caseSensitive {
   NSString *s = [((id<JavaUtilMap>) nil_chk(args)) removeWithId:name];
   if (s == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$C", @"Configuration Error: missing parameter '", name, '\'')) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$C", @"Configuration Error: missing parameter '", name, '\''));
   }
   else {
     for (NSString * __strong allowedValue in nil_chk(allowedValues)) {
@@ -114,7 +126,7 @@ NSString *OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_LUCENE_MATCH_VERSIO
         }
       }
     }
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$@", @"Configuration Error: '", name, @"' value must be one of ", allowedValues)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$@", @"Configuration Error: '", name, @"' value must be one of ", allowedValues));
   }
 }
 
@@ -165,7 +177,7 @@ NSString *OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_LUCENE_MATCH_VERSIO
         }
       }
     }
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$@", @"Configuration Error: '", name, @"' value must be one of ", allowedValues)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$@", @"Configuration Error: '", name, @"' value must be one of ", allowedValues));
   }
 }
 
@@ -219,7 +231,7 @@ NSString *OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_LUCENE_MATCH_VERSIO
   }
   else {
     if (((jint) [s length]) != 1) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$$", name, @" should be a char. \"", s, @"\" is invalid")) autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$$", name, @" should be a char. \"", s, @"\" is invalid"));
     }
     else {
       return [s charAtWithInt:0];
@@ -235,9 +247,9 @@ NSString *OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_LUCENE_MATCH_VERSIO
   }
   else {
     id<JavaUtilSet> set = nil;
-    JavaUtilRegexMatcher *matcher = [((JavaUtilRegexPattern *) nil_chk(OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_ITEM_PATTERN_)) matcherWithJavaLangCharSequence:s];
+    JavaUtilRegexMatcher *matcher = [((JavaUtilRegexPattern *) nil_chk(OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_ITEM_PATTERN)) matcherWithJavaLangCharSequence:s];
     if ([((JavaUtilRegexMatcher *) nil_chk(matcher)) find]) {
-      set = [new_JavaUtilHashSet_init() autorelease];
+      set = create_JavaUtilHashSet_init();
       [set addWithId:[matcher groupWithInt:0]];
       while ([matcher find]) {
         [set addWithId:[matcher groupWithInt:0]];
@@ -253,7 +265,7 @@ NSString *OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_LUCENE_MATCH_VERSIO
     return JavaUtilRegexPattern_compileWithNSString_([self requireWithJavaUtilMap:args withNSString:name]);
   }
   @catch (JavaUtilRegexPatternSyntaxException *e) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_withJavaLangThrowable_(JreStrcat("$$$$", @"Configuration Error: '", name, @"' can not be parsed in ", [[self getClass] getSimpleName]), e) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_withNSException_(JreStrcat("$$$$", @"Configuration Error: '", name, @"' can not be parsed in ", [[self getClass] getSimpleName]), e);
   }
 }
 
@@ -263,7 +275,7 @@ NSString *OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_LUCENE_MATCH_VERSIO
   id<JavaUtilList> files = OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_splitFileNamesWithNSString_(self, wordFiles);
   OrgApacheLuceneAnalysisUtilCharArraySet *words = nil;
   if ([((id<JavaUtilList>) nil_chk(files)) size] > 0) {
-    words = [new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithInt_withBoolean_([files size] * 10, ignoreCase) autorelease];
+    words = create_OrgApacheLuceneAnalysisUtilCharArraySet_initWithInt_withBoolean_([files size] * 10, ignoreCase);
     for (NSString * __strong file in files) {
       id<JavaUtilList> wlist = OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_getLinesWithOrgApacheLuceneAnalysisUtilResourceLoader_withNSString_(self, loader, [((NSString *) nil_chk(file)) trim]);
       [words addAllWithJavaUtilCollection:OrgApacheLuceneAnalysisCoreStopFilter_makeStopSetWithJavaUtilList_withBoolean_(wlist, ignoreCase)];
@@ -283,14 +295,14 @@ NSString *OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_LUCENE_MATCH_VERSIO
   id<JavaUtilList> files = OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_splitFileNamesWithNSString_(self, wordFiles);
   OrgApacheLuceneAnalysisUtilCharArraySet *words = nil;
   if ([((id<JavaUtilList>) nil_chk(files)) size] > 0) {
-    words = [new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithInt_withBoolean_([files size] * 10, ignoreCase) autorelease];
+    words = create_OrgApacheLuceneAnalysisUtilCharArraySet_initWithInt_withBoolean_([files size] * 10, ignoreCase);
     for (NSString * __strong file in files) {
       JavaIoInputStream *stream = nil;
       JavaIoReader *reader = nil;
       @try {
         stream = [((id<OrgApacheLuceneAnalysisUtilResourceLoader>) nil_chk(loader)) openResourceWithNSString:[((NSString *) nil_chk(file)) trim]];
-        JavaNioCharsetCharsetDecoder *decoder = [((JavaNioCharsetCharsetDecoder *) nil_chk([((JavaNioCharsetCharsetDecoder *) nil_chk([((JavaNioCharsetCharset *) nil_chk(JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8_))) newDecoder])) onMalformedInputWithJavaNioCharsetCodingErrorAction:JreLoadStatic(JavaNioCharsetCodingErrorAction, REPORT_)])) onUnmappableCharacterWithJavaNioCharsetCodingErrorAction:JreLoadStatic(JavaNioCharsetCodingErrorAction, REPORT_)];
-        reader = [new_JavaIoInputStreamReader_initWithJavaIoInputStream_withJavaNioCharsetCharsetDecoder_(stream, decoder) autorelease];
+        JavaNioCharsetCharsetDecoder *decoder = [((JavaNioCharsetCharsetDecoder *) nil_chk([((JavaNioCharsetCharsetDecoder *) nil_chk([((JavaNioCharsetCharset *) nil_chk(JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8))) newDecoder])) onMalformedInputWithJavaNioCharsetCodingErrorAction:JreLoadStatic(JavaNioCharsetCodingErrorAction, REPORT)])) onUnmappableCharacterWithJavaNioCharsetCodingErrorAction:JreLoadStatic(JavaNioCharsetCodingErrorAction, REPORT)];
+        reader = create_JavaIoInputStreamReader_initWithJavaIoInputStream_withJavaNioCharsetCharsetDecoder_(stream, decoder);
         OrgApacheLuceneAnalysisUtilWordlistLoader_getSnowballWordSetWithJavaIoReader_withOrgApacheLuceneAnalysisUtilCharArraySet_(reader, words);
       }
       @finally {
@@ -307,7 +319,7 @@ NSString *OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_LUCENE_MATCH_VERSIO
 
 - (NSString *)getClassArg {
   if (nil != originalArgs_) {
-    NSString *className_ = [originalArgs_ getWithId:OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_CLASS_NAME_];
+    NSString *className_ = [originalArgs_ getWithId:OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_CLASS_NAME];
     if (nil != className_) {
       return className_;
     }
@@ -331,49 +343,49 @@ NSString *OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_LUCENE_MATCH_VERSIO
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory class]) {
-    JreStrongAssign(&OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_ITEM_PATTERN_, JavaUtilRegexPattern_compileWithNSString_(@"[^,\\s]+"));
+    JreStrongAssign(&OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_ITEM_PATTERN, JavaUtilRegexPattern_compileWithNSString_(@"[^,\\s]+"));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory)
   }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "AbstractAnalysisFactory", NULL, 0x4, NULL, NULL },
-    { "getOriginalArgs", NULL, "Ljava.util.Map;", 0x11, NULL, NULL },
+    { "initWithJavaUtilMap:", "AbstractAnalysisFactory", NULL, 0x4, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
+    { "getOriginalArgs", NULL, "Ljava.util.Map;", 0x11, NULL, "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;" },
     { "getLuceneMatchVersion", NULL, "Lorg.apache.lucene.util.Version;", 0x11, NULL, NULL },
-    { "requireWithJavaUtilMap:withNSString:", "require", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "requireWithJavaUtilMap:withNSString:withJavaUtilCollection:", "require", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "requireWithJavaUtilMap:withNSString:withJavaUtilCollection:withBoolean:", "require", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getWithJavaUtilMap:withNSString:", "get", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getWithJavaUtilMap:withNSString:withNSString:", "get", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getWithJavaUtilMap:withNSString:withJavaUtilCollection:", "get", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getWithJavaUtilMap:withNSString:withJavaUtilCollection:withNSString:", "get", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getWithJavaUtilMap:withNSString:withJavaUtilCollection:withNSString:withBoolean:", "get", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "requireIntWithJavaUtilMap:withNSString:", "requireInt", "I", 0x14, NULL, NULL },
-    { "getIntWithJavaUtilMap:withNSString:withInt:", "getInt", "I", 0x14, NULL, NULL },
-    { "requireBooleanWithJavaUtilMap:withNSString:", "requireBoolean", "Z", 0x14, NULL, NULL },
-    { "getBooleanWithJavaUtilMap:withNSString:withBoolean:", "getBoolean", "Z", 0x14, NULL, NULL },
-    { "requireFloatWithJavaUtilMap:withNSString:", "requireFloat", "F", 0x14, NULL, NULL },
-    { "getFloatWithJavaUtilMap:withNSString:withFloat:", "getFloat", "F", 0x14, NULL, NULL },
-    { "requireCharWithJavaUtilMap:withNSString:", "requireChar", "C", 0x1, NULL, NULL },
-    { "getCharWithJavaUtilMap:withNSString:withChar:", "getChar", "C", 0x1, NULL, NULL },
-    { "getSetWithJavaUtilMap:withNSString:", "getSet", "Ljava.util.Set;", 0x1, NULL, NULL },
-    { "getPatternWithJavaUtilMap:withNSString:", "getPattern", "Ljava.util.regex.Pattern;", 0x14, NULL, NULL },
+    { "requireWithJavaUtilMap:withNSString:", "require", "Ljava.lang.String;", 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;Ljava/lang/String;)Ljava/lang/String;" },
+    { "requireWithJavaUtilMap:withNSString:withJavaUtilCollection:", "require", "Ljava.lang.String;", 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;Ljava/lang/String;Ljava/util/Collection<Ljava/lang/String;>;)Ljava/lang/String;" },
+    { "requireWithJavaUtilMap:withNSString:withJavaUtilCollection:withBoolean:", "require", "Ljava.lang.String;", 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;Ljava/lang/String;Ljava/util/Collection<Ljava/lang/String;>;Z)Ljava/lang/String;" },
+    { "getWithJavaUtilMap:withNSString:", "get", "Ljava.lang.String;", 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;Ljava/lang/String;)Ljava/lang/String;" },
+    { "getWithJavaUtilMap:withNSString:withNSString:", "get", "Ljava.lang.String;", 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;" },
+    { "getWithJavaUtilMap:withNSString:withJavaUtilCollection:", "get", "Ljava.lang.String;", 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;Ljava/lang/String;Ljava/util/Collection<Ljava/lang/String;>;)Ljava/lang/String;" },
+    { "getWithJavaUtilMap:withNSString:withJavaUtilCollection:withNSString:", "get", "Ljava.lang.String;", 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;Ljava/lang/String;Ljava/util/Collection<Ljava/lang/String;>;Ljava/lang/String;)Ljava/lang/String;" },
+    { "getWithJavaUtilMap:withNSString:withJavaUtilCollection:withNSString:withBoolean:", "get", "Ljava.lang.String;", 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;Ljava/lang/String;Ljava/util/Collection<Ljava/lang/String;>;Ljava/lang/String;Z)Ljava/lang/String;" },
+    { "requireIntWithJavaUtilMap:withNSString:", "requireInt", "I", 0x14, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;Ljava/lang/String;)I" },
+    { "getIntWithJavaUtilMap:withNSString:withInt:", "getInt", "I", 0x14, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;Ljava/lang/String;I)I" },
+    { "requireBooleanWithJavaUtilMap:withNSString:", "requireBoolean", "Z", 0x14, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;Ljava/lang/String;)Z" },
+    { "getBooleanWithJavaUtilMap:withNSString:withBoolean:", "getBoolean", "Z", 0x14, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;Ljava/lang/String;Z)Z" },
+    { "requireFloatWithJavaUtilMap:withNSString:", "requireFloat", "F", 0x14, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;Ljava/lang/String;)F" },
+    { "getFloatWithJavaUtilMap:withNSString:withFloat:", "getFloat", "F", 0x14, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;Ljava/lang/String;F)F" },
+    { "requireCharWithJavaUtilMap:withNSString:", "requireChar", "C", 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;Ljava/lang/String;)C" },
+    { "getCharWithJavaUtilMap:withNSString:withChar:", "getChar", "C", 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;Ljava/lang/String;C)C" },
+    { "getSetWithJavaUtilMap:withNSString:", "getSet", "Ljava.util.Set;", 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;Ljava/lang/String;)Ljava/util/Set<Ljava/lang/String;>;" },
+    { "getPatternWithJavaUtilMap:withNSString:", "getPattern", "Ljava.util.regex.Pattern;", 0x14, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;Ljava/lang/String;)Ljava/util/regex/Pattern;" },
     { "getWordSetWithOrgApacheLuceneAnalysisUtilResourceLoader:withNSString:withBoolean:", "getWordSet", "Lorg.apache.lucene.analysis.util.CharArraySet;", 0x14, "Ljava.io.IOException;", NULL },
-    { "getLinesWithOrgApacheLuceneAnalysisUtilResourceLoader:withNSString:", "getLines", "Ljava.util.List;", 0x14, "Ljava.io.IOException;", NULL },
+    { "getLinesWithOrgApacheLuceneAnalysisUtilResourceLoader:withNSString:", "getLines", "Ljava.util.List;", 0x14, "Ljava.io.IOException;", "(Lorg/apache/lucene/analysis/util/ResourceLoader;Ljava/lang/String;)Ljava/util/List<Ljava/lang/String;>;" },
     { "getSnowballWordSetWithOrgApacheLuceneAnalysisUtilResourceLoader:withNSString:withBoolean:", "getSnowballWordSet", "Lorg.apache.lucene.analysis.util.CharArraySet;", 0x14, "Ljava.io.IOException;", NULL },
-    { "splitFileNamesWithNSString:", "splitFileNames", "Ljava.util.List;", 0x14, NULL, NULL },
+    { "splitFileNamesWithNSString:", "splitFileNames", "Ljava.util.List;", 0x14, NULL, "(Ljava/lang/String;)Ljava/util/List<Ljava/lang/String;>;" },
     { "getClassArg", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
     { "isExplicitLuceneMatchVersion", NULL, "Z", 0x1, NULL, NULL },
     { "setExplicitLuceneMatchVersionWithBoolean:", "setExplicitLuceneMatchVersion", "V", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "LUCENE_MATCH_VERSION_PARAM_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_LUCENE_MATCH_VERSION_PARAM_, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_MATCH_VERSION_PARAM", "LUCENE_MATCH_VERSION_PARAM", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_LUCENE_MATCH_VERSION_PARAM, NULL, .constantValue.asLong = 0 },
     { "originalArgs_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", .constantValue.asLong = 0 },
     { "luceneMatchVersion_", NULL, 0x14, "Lorg.apache.lucene.util.Version;", NULL, NULL, .constantValue.asLong = 0 },
     { "isExplicitLuceneMatchVersion_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "ITEM_PATTERN_", NULL, 0x1a, "Ljava.util.regex.Pattern;", &OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_ITEM_PATTERN_, NULL, .constantValue.asLong = 0 },
-    { "CLASS_NAME_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_CLASS_NAME_, NULL, .constantValue.asLong = 0 },
+    { "ITEM_PATTERN", "ITEM_PATTERN", 0x1a, "Ljava.util.regex.Pattern;", &OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_ITEM_PATTERN, NULL, .constantValue.asLong = 0 },
+    { "CLASS_NAME", "CLASS_NAME", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_CLASS_NAME, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory = { 2, "AbstractAnalysisFactory", "org.apache.lucene.analysis.util", NULL, 0x401, 28, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory;
@@ -384,31 +396,31 @@ NSString *OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_LUCENE_MATCH_VERSIO
 void OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory *self, id<JavaUtilMap> args) {
   NSObject_init(self);
   self->isExplicitLuceneMatchVersion_ = false;
-  JreStrongAssign(&self->originalArgs_, JavaUtilCollections_unmodifiableMapWithJavaUtilMap_([new_JavaUtilHashMap_initWithJavaUtilMap_(args) autorelease]));
-  NSString *version_ = [self getWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_LUCENE_MATCH_VERSION_PARAM_];
+  JreStrongAssign(&self->originalArgs_, JavaUtilCollections_unmodifiableMapWithJavaUtilMap_(create_JavaUtilHashMap_initWithJavaUtilMap_(args)));
+  NSString *version_ = [self getWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_LUCENE_MATCH_VERSION_PARAM];
   if (version_ == nil) {
-    JreStrongAssign(&self->luceneMatchVersion_, JreLoadStatic(OrgApacheLuceneUtilVersion, LATEST_));
+    JreStrongAssign(&self->luceneMatchVersion_, JreLoadStatic(OrgApacheLuceneUtilVersion, LATEST));
   }
   else {
     @try {
       JreStrongAssign(&self->luceneMatchVersion_, OrgApacheLuceneUtilVersion_parseLenientlyWithNSString_(version_));
     }
     @catch (JavaTextParseException *pe) {
-      @throw [new_JavaLangIllegalArgumentException_initWithJavaLangThrowable_(pe) autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSException_(pe);
     }
   }
-  [((id<JavaUtilMap>) nil_chk(args)) removeWithId:OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_CLASS_NAME_];
+  [((id<JavaUtilMap>) nil_chk(args)) removeWithId:OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_CLASS_NAME];
 }
 
 id<JavaUtilList> OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_getLinesWithOrgApacheLuceneAnalysisUtilResourceLoader_withNSString_(OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory *self, id<OrgApacheLuceneAnalysisUtilResourceLoader> loader, NSString *resource) {
-  return OrgApacheLuceneAnalysisUtilWordlistLoader_getLinesWithJavaIoInputStream_withJavaNioCharsetCharset_([((id<OrgApacheLuceneAnalysisUtilResourceLoader>) nil_chk(loader)) openResourceWithNSString:resource], JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8_));
+  return OrgApacheLuceneAnalysisUtilWordlistLoader_getLinesWithJavaIoInputStream_withJavaNioCharsetCharset_([((id<OrgApacheLuceneAnalysisUtilResourceLoader>) nil_chk(loader)) openResourceWithNSString:resource], JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8));
 }
 
 id<JavaUtilList> OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_splitFileNamesWithNSString_(OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory *self, NSString *fileNames) {
   if (fileNames == nil) return JavaUtilCollections_emptyList();
-  id<JavaUtilList> result = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> result = create_JavaUtilArrayList_init();
   {
-    IOSObjectArray *a__ = [((NSString *) nil_chk(fileNames)) split:@"(?<!\\\\),"];
+    IOSObjectArray *a__ = [fileNames split:@"(?<!\\\\),"];
     NSString * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
     NSString * const *e__ = b__ + a__->size_;
     while (b__ < e__) {

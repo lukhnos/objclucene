@@ -41,6 +41,10 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)b;
 
 - (jint)findHashWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes;
 
+/*!
+ @brief Called when hash is too small (<code>> 50%</code> occupied) or too large (<code>< 20%</code>
+ occupied).
+ */
 - (void)rehashWithInt:(jint)newSize
           withBoolean:(jboolean)hashOnData;
 
@@ -113,9 +117,15 @@ __attribute__((unused)) static void OrgApacheLuceneUtilBytesRefHash_$1_initWithO
 
 __attribute__((unused)) static OrgApacheLuceneUtilBytesRefHash_$1 *new_OrgApacheLuceneUtilBytesRefHash_$1_initWithOrgApacheLuceneUtilBytesRefHash_withIntArray_withJavaUtilComparator_(OrgApacheLuceneUtilBytesRefHash *outer$, IOSIntArray *capture$0, id<JavaUtilComparator> capture$1) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneUtilBytesRefHash_$1 *create_OrgApacheLuceneUtilBytesRefHash_$1_initWithOrgApacheLuceneUtilBytesRefHash_withIntArray_withJavaUtilComparator_(OrgApacheLuceneUtilBytesRefHash *outer$, IOSIntArray *capture$0, id<JavaUtilComparator> capture$1);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBytesRefHash_$1)
 
 @implementation OrgApacheLuceneUtilBytesRefHash
+
++ (jint)DEFAULT_CAPACITY {
+  return OrgApacheLuceneUtilBytesRefHash_DEFAULT_CAPACITY;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -167,7 +177,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (IOSIntArray *)sortWithJavaUtilComparator:(id<JavaUtilComparator>)comp {
   IOSIntArray *compact = [self compact];
-  [((OrgApacheLuceneUtilBytesRefHash_$1 *) [new_OrgApacheLuceneUtilBytesRefHash_$1_initWithOrgApacheLuceneUtilBytesRefHash_withIntArray_withJavaUtilComparator_(self, compact, comp) autorelease]) sortWithInt:0 withInt:count_];
+  [create_OrgApacheLuceneUtilBytesRefHash_$1_initWithOrgApacheLuceneUtilBytesRefHash_withIntArray_withJavaUtilComparator_(self, compact, comp) sortWithInt:0 withInt:count_];
   return compact;
 }
 
@@ -212,7 +222,7 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)b {
     jint len2 = 2 + bytes->length_;
     if (len2 + ((OrgApacheLuceneUtilByteBlockPool *) nil_chk(pool_))->byteUpto_ > OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_SIZE) {
       if (len2 > OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_SIZE) {
-        @throw [new_OrgApacheLuceneUtilBytesRefHash_MaxBytesLengthExceededException_initWithNSString_(JreStrcat("$I$I", @"bytes can be at most ", (OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_SIZE - 2), @" in length; got ", bytes->length_)) autorelease];
+        @throw create_OrgApacheLuceneUtilBytesRefHash_MaxBytesLengthExceededException_initWithNSString_(JreStrcat("$I$I", @"bytes can be at most ", (OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_SIZE - 2), @" in length; got ", bytes->length_));
       }
       [pool_ nextBuffer];
     }
@@ -223,7 +233,7 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)b {
       JreAssert((count_ < ((IOSIntArray *) nil_chk(bytesStart_))->size_ + 1), (JreStrcat("$I$I", @"count: ", count_, @" len: ", bytesStart_->size_)));
     }
     e = count_++;
-    *IOSIntArray_GetRef(nil_chk(bytesStart_), e) = bufferUpto + pool_->byteOffset_;
+    *IOSIntArray_GetRef(bytesStart_, e) = bufferUpto + pool_->byteOffset_;
     if (length < 128) {
       *IOSByteArray_GetRef(nil_chk(buffer), bufferUpto) = (jbyte) length;
       pool_->byteUpto_ += length + 1;
@@ -236,7 +246,7 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)b {
       pool_->byteUpto_ += length + 2;
       JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(bytes->bytes_, bytes->offset_, buffer, bufferUpto + 2, length);
     }
-    JreAssert((IOSIntArray_Get(ids_, hashPos) == -1), (@"org/apache/lucene/util/BytesRefHash.java:319 condition failed: assert ids[hashPos] == -1;"));
+    JreAssert((IOSIntArray_Get(nil_chk(ids_), hashPos) == -1), (@"org/apache/lucene/util/BytesRefHash.java:319 condition failed: assert ids[hashPos] == -1;"));
     *IOSIntArray_GetRef(ids_, hashPos) = e;
     if (count_ == hashHalfSize_) {
       OrgApacheLuceneUtilBytesRefHash_rehashWithInt_withBoolean_(self, 2 * hashSize_, true);
@@ -265,7 +275,7 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)b {
       hashPos = code & hashMask_;
       e = IOSIntArray_Get(ids_, hashPos);
     }
-    while (e != -1 && IOSIntArray_Get(bytesStart_, e) != offset);
+    while (e != -1 && IOSIntArray_Get(nil_chk(bytesStart_), e) != offset);
   }
   if (e == -1) {
     if (count_ >= ((IOSIntArray *) nil_chk(bytesStart_))->size_) {
@@ -273,8 +283,8 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)b {
       JreAssert((count_ < ((IOSIntArray *) nil_chk(bytesStart_))->size_ + 1), (JreStrcat("$I$I", @"count: ", count_, @" len: ", bytesStart_->size_)));
     }
     e = count_++;
-    *IOSIntArray_GetRef(nil_chk(bytesStart_), e) = offset;
-    JreAssert((IOSIntArray_Get(ids_, hashPos) == -1), (@"org/apache/lucene/util/BytesRefHash.java:394 condition failed: assert ids[hashPos] == -1;"));
+    *IOSIntArray_GetRef(bytesStart_, e) = offset;
+    JreAssert((IOSIntArray_Get(nil_chk(ids_), hashPos) == -1), (@"org/apache/lucene/util/BytesRefHash.java:394 condition failed: assert ids[hashPos] == -1;"));
     *IOSIntArray_GetRef(ids_, hashPos) = e;
     if (count_ == hashHalfSize_) {
       OrgApacheLuceneUtilBytesRefHash_rehashWithInt_withBoolean_(self, 2 * hashSize_, false);
@@ -329,7 +339,7 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)b {
     { "size", NULL, "I", 0x1, NULL, NULL },
     { "getWithInt:withOrgApacheLuceneUtilBytesRef:", "get", "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
     { "compact", NULL, "[I", 0x0, NULL, NULL },
-    { "sortWithJavaUtilComparator:", "sort", "[I", 0x1, NULL, NULL },
+    { "sortWithJavaUtilComparator:", "sort", "[I", 0x1, NULL, "(Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;)[I" },
     { "equalsWithInt:withOrgApacheLuceneUtilBytesRef:", "equals", "Z", 0x2, NULL, NULL },
     { "shrinkWithInt:", "shrink", "Z", 0x2, NULL, NULL },
     { "clearWithBoolean:", "clear", "V", 0x1, NULL, NULL },
@@ -366,23 +376,27 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)b {
 @end
 
 void OrgApacheLuceneUtilBytesRefHash_init(OrgApacheLuceneUtilBytesRefHash *self) {
-  OrgApacheLuceneUtilBytesRefHash_initWithOrgApacheLuceneUtilByteBlockPool_(self, [new_OrgApacheLuceneUtilByteBlockPool_initWithOrgApacheLuceneUtilByteBlockPool_Allocator_([new_OrgApacheLuceneUtilByteBlockPool_DirectAllocator_init() autorelease]) autorelease]);
+  OrgApacheLuceneUtilBytesRefHash_initWithOrgApacheLuceneUtilByteBlockPool_(self, create_OrgApacheLuceneUtilByteBlockPool_initWithOrgApacheLuceneUtilByteBlockPool_Allocator_(create_OrgApacheLuceneUtilByteBlockPool_DirectAllocator_init()));
 }
 
 OrgApacheLuceneUtilBytesRefHash *new_OrgApacheLuceneUtilBytesRefHash_init() {
-  OrgApacheLuceneUtilBytesRefHash *self = [OrgApacheLuceneUtilBytesRefHash alloc];
-  OrgApacheLuceneUtilBytesRefHash_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilBytesRefHash, init)
+}
+
+OrgApacheLuceneUtilBytesRefHash *create_OrgApacheLuceneUtilBytesRefHash_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilBytesRefHash, init)
 }
 
 void OrgApacheLuceneUtilBytesRefHash_initWithOrgApacheLuceneUtilByteBlockPool_(OrgApacheLuceneUtilBytesRefHash *self, OrgApacheLuceneUtilByteBlockPool *pool) {
-  OrgApacheLuceneUtilBytesRefHash_initWithOrgApacheLuceneUtilByteBlockPool_withInt_withOrgApacheLuceneUtilBytesRefHash_BytesStartArray_(self, pool, OrgApacheLuceneUtilBytesRefHash_DEFAULT_CAPACITY, [new_OrgApacheLuceneUtilBytesRefHash_DirectBytesStartArray_initWithInt_(OrgApacheLuceneUtilBytesRefHash_DEFAULT_CAPACITY) autorelease]);
+  OrgApacheLuceneUtilBytesRefHash_initWithOrgApacheLuceneUtilByteBlockPool_withInt_withOrgApacheLuceneUtilBytesRefHash_BytesStartArray_(self, pool, OrgApacheLuceneUtilBytesRefHash_DEFAULT_CAPACITY, create_OrgApacheLuceneUtilBytesRefHash_DirectBytesStartArray_initWithInt_(OrgApacheLuceneUtilBytesRefHash_DEFAULT_CAPACITY));
 }
 
 OrgApacheLuceneUtilBytesRefHash *new_OrgApacheLuceneUtilBytesRefHash_initWithOrgApacheLuceneUtilByteBlockPool_(OrgApacheLuceneUtilByteBlockPool *pool) {
-  OrgApacheLuceneUtilBytesRefHash *self = [OrgApacheLuceneUtilBytesRefHash alloc];
-  OrgApacheLuceneUtilBytesRefHash_initWithOrgApacheLuceneUtilByteBlockPool_(self, pool);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilBytesRefHash, initWithOrgApacheLuceneUtilByteBlockPool_, pool)
+}
+
+OrgApacheLuceneUtilBytesRefHash *create_OrgApacheLuceneUtilBytesRefHash_initWithOrgApacheLuceneUtilByteBlockPool_(OrgApacheLuceneUtilByteBlockPool *pool) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilBytesRefHash, initWithOrgApacheLuceneUtilByteBlockPool_, pool)
 }
 
 void OrgApacheLuceneUtilBytesRefHash_initWithOrgApacheLuceneUtilByteBlockPool_withInt_withOrgApacheLuceneUtilBytesRefHash_BytesStartArray_(OrgApacheLuceneUtilBytesRefHash *self, OrgApacheLuceneUtilByteBlockPool *pool, jint capacity, OrgApacheLuceneUtilBytesRefHash_BytesStartArray *bytesStartArray) {
@@ -402,9 +416,11 @@ void OrgApacheLuceneUtilBytesRefHash_initWithOrgApacheLuceneUtilByteBlockPool_wi
 }
 
 OrgApacheLuceneUtilBytesRefHash *new_OrgApacheLuceneUtilBytesRefHash_initWithOrgApacheLuceneUtilByteBlockPool_withInt_withOrgApacheLuceneUtilBytesRefHash_BytesStartArray_(OrgApacheLuceneUtilByteBlockPool *pool, jint capacity, OrgApacheLuceneUtilBytesRefHash_BytesStartArray *bytesStartArray) {
-  OrgApacheLuceneUtilBytesRefHash *self = [OrgApacheLuceneUtilBytesRefHash alloc];
-  OrgApacheLuceneUtilBytesRefHash_initWithOrgApacheLuceneUtilByteBlockPool_withInt_withOrgApacheLuceneUtilBytesRefHash_BytesStartArray_(self, pool, capacity, bytesStartArray);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilBytesRefHash, initWithOrgApacheLuceneUtilByteBlockPool_withInt_withOrgApacheLuceneUtilBytesRefHash_BytesStartArray_, pool, capacity, bytesStartArray)
+}
+
+OrgApacheLuceneUtilBytesRefHash *create_OrgApacheLuceneUtilBytesRefHash_initWithOrgApacheLuceneUtilByteBlockPool_withInt_withOrgApacheLuceneUtilBytesRefHash_BytesStartArray_(OrgApacheLuceneUtilByteBlockPool *pool, jint capacity, OrgApacheLuceneUtilBytesRefHash_BytesStartArray *bytesStartArray) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilBytesRefHash, initWithOrgApacheLuceneUtilByteBlockPool_withInt_withOrgApacheLuceneUtilBytesRefHash_BytesStartArray_, pool, capacity, bytesStartArray)
 }
 
 jboolean OrgApacheLuceneUtilBytesRefHash_equalsWithInt_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRefHash *self, jint id_, OrgApacheLuceneUtilBytesRef *b) {
@@ -440,7 +456,7 @@ jint OrgApacheLuceneUtilBytesRefHash_findHashWithOrgApacheLuceneUtilBytesRef_(Or
     do {
       code++;
       hashPos = code & self->hashMask_;
-      e = IOSIntArray_Get(self->ids_, hashPos);
+      e = IOSIntArray_Get(nil_chk(self->ids_), hashPos);
     }
     while (e != -1 && !OrgApacheLuceneUtilBytesRefHash_equalsWithInt_withOrgApacheLuceneUtilBytesRef_(self, e, bytes));
   }
@@ -488,14 +504,14 @@ void OrgApacheLuceneUtilBytesRefHash_rehashWithInt_withBoolean_(OrgApacheLuceneU
     }
   }
   self->hashMask_ = newMask;
-  [self->bytesUsed_ addAndGetWithLong:OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT * (-((IOSIntArray *) nil_chk(self->ids_))->size_)];
+  [((OrgApacheLuceneUtilCounter *) nil_chk(self->bytesUsed_)) addAndGetWithLong:OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT * (-((IOSIntArray *) nil_chk(self->ids_))->size_)];
   JreStrongAssign(&self->ids_, newHash);
   self->hashSize_ = newSize;
   self->hashHalfSize_ = newSize / 2;
 }
 
 jint OrgApacheLuceneUtilBytesRefHash_doHashWithByteArray_withInt_withInt_(OrgApacheLuceneUtilBytesRefHash *self, IOSByteArray *bytes, jint offset, jint length) {
-  return OrgApacheLuceneUtilStringHelper_murmurhash3_x86_32WithByteArray_withInt_withInt_withInt_(bytes, offset, length, JreLoadStatic(OrgApacheLuceneUtilStringHelper, GOOD_FAST_HASH_SEED_));
+  return OrgApacheLuceneUtilStringHelper_murmurhash3_x86_32WithByteArray_withInt_withInt_withInt_(bytes, offset, length, JreLoadStatic(OrgApacheLuceneUtilStringHelper, GOOD_FAST_HASH_SEED));
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBytesRefHash)
@@ -522,9 +538,11 @@ void OrgApacheLuceneUtilBytesRefHash_MaxBytesLengthExceededException_initWithNSS
 }
 
 OrgApacheLuceneUtilBytesRefHash_MaxBytesLengthExceededException *new_OrgApacheLuceneUtilBytesRefHash_MaxBytesLengthExceededException_initWithNSString_(NSString *message) {
-  OrgApacheLuceneUtilBytesRefHash_MaxBytesLengthExceededException *self = [OrgApacheLuceneUtilBytesRefHash_MaxBytesLengthExceededException alloc];
-  OrgApacheLuceneUtilBytesRefHash_MaxBytesLengthExceededException_initWithNSString_(self, message);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilBytesRefHash_MaxBytesLengthExceededException, initWithNSString_, message)
+}
+
+OrgApacheLuceneUtilBytesRefHash_MaxBytesLengthExceededException *create_OrgApacheLuceneUtilBytesRefHash_MaxBytesLengthExceededException_initWithNSString_(NSString *message) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilBytesRefHash_MaxBytesLengthExceededException, initWithNSString_, message)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBytesRefHash_MaxBytesLengthExceededException)
@@ -568,7 +586,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "grow", NULL, "[I", 0x401, NULL, NULL },
     { "clear", NULL, "[I", 0x401, NULL, NULL },
     { "bytesUsed", NULL, "Lorg.apache.lucene.util.Counter;", 0x401, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "BytesStartArray", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneUtilBytesRefHash_BytesStartArray = { 2, "BytesStartArray", "org.apache.lucene.util", "BytesRefHash", 0x409, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilBytesRefHash_BytesStartArray;
@@ -645,9 +663,11 @@ void OrgApacheLuceneUtilBytesRefHash_DirectBytesStartArray_initWithInt_withOrgAp
 }
 
 OrgApacheLuceneUtilBytesRefHash_DirectBytesStartArray *new_OrgApacheLuceneUtilBytesRefHash_DirectBytesStartArray_initWithInt_withOrgApacheLuceneUtilCounter_(jint initSize, OrgApacheLuceneUtilCounter *counter) {
-  OrgApacheLuceneUtilBytesRefHash_DirectBytesStartArray *self = [OrgApacheLuceneUtilBytesRefHash_DirectBytesStartArray alloc];
-  OrgApacheLuceneUtilBytesRefHash_DirectBytesStartArray_initWithInt_withOrgApacheLuceneUtilCounter_(self, initSize, counter);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilBytesRefHash_DirectBytesStartArray, initWithInt_withOrgApacheLuceneUtilCounter_, initSize, counter)
+}
+
+OrgApacheLuceneUtilBytesRefHash_DirectBytesStartArray *create_OrgApacheLuceneUtilBytesRefHash_DirectBytesStartArray_initWithInt_withOrgApacheLuceneUtilCounter_(jint initSize, OrgApacheLuceneUtilCounter *counter) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilBytesRefHash_DirectBytesStartArray, initWithInt_withOrgApacheLuceneUtilCounter_, initSize, counter)
 }
 
 void OrgApacheLuceneUtilBytesRefHash_DirectBytesStartArray_initWithInt_(OrgApacheLuceneUtilBytesRefHash_DirectBytesStartArray *self, jint initSize) {
@@ -655,9 +675,11 @@ void OrgApacheLuceneUtilBytesRefHash_DirectBytesStartArray_initWithInt_(OrgApach
 }
 
 OrgApacheLuceneUtilBytesRefHash_DirectBytesStartArray *new_OrgApacheLuceneUtilBytesRefHash_DirectBytesStartArray_initWithInt_(jint initSize) {
-  OrgApacheLuceneUtilBytesRefHash_DirectBytesStartArray *self = [OrgApacheLuceneUtilBytesRefHash_DirectBytesStartArray alloc];
-  OrgApacheLuceneUtilBytesRefHash_DirectBytesStartArray_initWithInt_(self, initSize);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilBytesRefHash_DirectBytesStartArray, initWithInt_, initSize)
+}
+
+OrgApacheLuceneUtilBytesRefHash_DirectBytesStartArray *create_OrgApacheLuceneUtilBytesRefHash_DirectBytesStartArray_initWithInt_(jint initSize) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilBytesRefHash_DirectBytesStartArray, initWithInt_, initSize)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBytesRefHash_DirectBytesStartArray)
@@ -676,7 +698,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBytesRefHash_DirectBytesStar
   jint id1 = IOSIntArray_Get(nil_chk(val$compact_), i), id2 = IOSIntArray_Get(val$compact_, j);
   JreAssert((((IOSIntArray *) nil_chk(this$0_->bytesStart_))->size_ > id1 && this$0_->bytesStart_->size_ > id2), (@"org/apache/lucene/util/BytesRefHash.java:176 condition failed: assert bytesStart.length > id1 && bytesStart.length > id2;"));
   [((OrgApacheLuceneUtilByteBlockPool *) nil_chk(this$0_->pool_)) setBytesRefWithOrgApacheLuceneUtilBytesRef:scratch1_ withInt:IOSIntArray_Get(this$0_->bytesStart_, id1)];
-  [this$0_->pool_ setBytesRefWithOrgApacheLuceneUtilBytesRef:scratch2_ withInt:IOSIntArray_Get(this$0_->bytesStart_, id2)];
+  [this$0_->pool_ setBytesRefWithOrgApacheLuceneUtilBytesRef:scratch2_ withInt:IOSIntArray_Get(nil_chk(this$0_->bytesStart_), id2)];
   return [((id<JavaUtilComparator>) nil_chk(val$comp_)) compareWithId:scratch1_ withId:scratch2_];
 }
 
@@ -716,7 +738,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBytesRefHash_DirectBytesStar
     { "compareWithInt:withInt:", "compare", "I", 0x4, NULL, NULL },
     { "setPivotWithInt:", "setPivot", "V", 0x4, NULL, NULL },
     { "comparePivotWithInt:", "comparePivot", "I", 0x4, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilBytesRefHash:withIntArray:withJavaUtilComparator:", "", NULL, 0x0, NULL, NULL },
+    { "initWithOrgApacheLuceneUtilBytesRefHash:withIntArray:withJavaUtilComparator:", "", NULL, 0x0, NULL, "(Lorg/apache/lucene/util/BytesRefHash;[ILjava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;)V" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.util.BytesRefHash;", NULL, NULL, .constantValue.asLong = 0 },
@@ -744,9 +766,11 @@ void OrgApacheLuceneUtilBytesRefHash_$1_initWithOrgApacheLuceneUtilBytesRefHash_
 }
 
 OrgApacheLuceneUtilBytesRefHash_$1 *new_OrgApacheLuceneUtilBytesRefHash_$1_initWithOrgApacheLuceneUtilBytesRefHash_withIntArray_withJavaUtilComparator_(OrgApacheLuceneUtilBytesRefHash *outer$, IOSIntArray *capture$0, id<JavaUtilComparator> capture$1) {
-  OrgApacheLuceneUtilBytesRefHash_$1 *self = [OrgApacheLuceneUtilBytesRefHash_$1 alloc];
-  OrgApacheLuceneUtilBytesRefHash_$1_initWithOrgApacheLuceneUtilBytesRefHash_withIntArray_withJavaUtilComparator_(self, outer$, capture$0, capture$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilBytesRefHash_$1, initWithOrgApacheLuceneUtilBytesRefHash_withIntArray_withJavaUtilComparator_, outer$, capture$0, capture$1)
+}
+
+OrgApacheLuceneUtilBytesRefHash_$1 *create_OrgApacheLuceneUtilBytesRefHash_$1_initWithOrgApacheLuceneUtilBytesRefHash_withIntArray_withJavaUtilComparator_(OrgApacheLuceneUtilBytesRefHash *outer$, IOSIntArray *capture$0, id<JavaUtilComparator> capture$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilBytesRefHash_$1, initWithOrgApacheLuceneUtilBytesRefHash_withIntArray_withJavaUtilComparator_, outer$, capture$0, capture$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBytesRefHash_$1)

@@ -5,31 +5,47 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexSortingMergePolicy_INCLUDE_ALL")
-#if OrgApacheLuceneIndexSortingMergePolicy_RESTRICT
-#define OrgApacheLuceneIndexSortingMergePolicy_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexSortingMergePolicy")
+#ifdef RESTRICT_OrgApacheLuceneIndexSortingMergePolicy
+#define INCLUDE_ALL_OrgApacheLuceneIndexSortingMergePolicy 0
 #else
-#define OrgApacheLuceneIndexSortingMergePolicy_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexSortingMergePolicy 1
 #endif
-#undef OrgApacheLuceneIndexSortingMergePolicy_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexSortingMergePolicy
 
-#if !defined (_OrgApacheLuceneIndexSortingMergePolicy_) && (OrgApacheLuceneIndexSortingMergePolicy_INCLUDE_ALL || OrgApacheLuceneIndexSortingMergePolicy_INCLUDE)
-#define _OrgApacheLuceneIndexSortingMergePolicy_
+#if !defined (OrgApacheLuceneIndexSortingMergePolicy_) && (INCLUDE_ALL_OrgApacheLuceneIndexSortingMergePolicy || defined(INCLUDE_OrgApacheLuceneIndexSortingMergePolicy))
+#define OrgApacheLuceneIndexSortingMergePolicy_
 
-#define OrgApacheLuceneIndexMergePolicy_RESTRICT 1
-#define OrgApacheLuceneIndexMergePolicy_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexMergePolicy 1
+#define INCLUDE_OrgApacheLuceneIndexMergePolicy 1
 #include "org/apache/lucene/index/MergePolicy.h"
 
 @class OrgApacheLuceneIndexIndexWriter;
 @class OrgApacheLuceneIndexLeafReader;
 @class OrgApacheLuceneIndexMergePolicy_MergeSpecification;
-@class OrgApacheLuceneIndexMergeTriggerEnum;
+@class OrgApacheLuceneIndexMergeTrigger;
 @class OrgApacheLuceneIndexSegmentCommitInfo;
 @class OrgApacheLuceneIndexSegmentInfos;
 @class OrgApacheLuceneIndexSorter;
 @class OrgApacheLuceneSearchSort;
 @protocol JavaUtilMap;
 
+/*!
+ @brief A <code>MergePolicy</code> that reorders documents according to a <code>Sort</code>
+ before merging them.
+ As a consequence, all segments resulting from a merge
+ will be sorted while segments resulting from a flush will be in the order
+ in which documents have been added.
+ <p><b>NOTE</b>: Never use this policy if you rely on
+ <code>IndexWriter.addDocuments</code>
+ to have sequentially-assigned doc IDs, this policy will scatter doc IDs.
+ <p><b>NOTE</b>: This policy should only be used with idempotent <code>Sort</code>s 
+ so that the order of segments is predictable. For example, using 
+ <code>Sort.INDEXORDER</code> in reverse (which is not idempotent) will make 
+ the order of documents in a segment depend on the number of times the segment 
+ has been merged.
+  
+ */
 @interface OrgApacheLuceneIndexSortingMergePolicy : OrgApacheLuceneIndexMergePolicy {
  @public
   OrgApacheLuceneIndexMergePolicy *in_;
@@ -37,8 +53,13 @@
   OrgApacheLuceneSearchSort *sort_;
 }
 
++ (NSString *)SORTER_ID_PROP;
+
 #pragma mark Public
 
+/*!
+ @brief Create a new <code>MergePolicy</code> that sorts documents with the given <code>sort</code>.
+ */
 - (instancetype)initWithOrgApacheLuceneIndexMergePolicy:(OrgApacheLuceneIndexMergePolicy *)inArg
                           withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort;
 
@@ -50,12 +71,21 @@
                                                                                              withJavaUtilMap:(id<JavaUtilMap>)segmentsToMerge
                                                                          withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
 
-- (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findMergesWithOrgApacheLuceneIndexMergeTriggerEnum:(OrgApacheLuceneIndexMergeTriggerEnum *)mergeTrigger
-                                                                      withOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)segmentInfos
-                                                                       withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
+- (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findMergesWithOrgApacheLuceneIndexMergeTrigger:(OrgApacheLuceneIndexMergeTrigger *)mergeTrigger
+                                                                  withOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)segmentInfos
+                                                                   withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
 
+/*!
+ @brief Return the <code>Sort</code> order that is used to sort segments when merging.
+ */
 - (OrgApacheLuceneSearchSort *)getSort;
 
+/*!
+ @brief Returns <code>true</code> if the given <code>reader</code> is sorted by the
+ <code>sort</code> given.
+ Typically the given <code>sort</code> would be the
+ <code>SortingMergePolicy.getSort()</code> order of a <code>SortingMergePolicy</code>. 
+ */
 + (jboolean)isSortedWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader
                          withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort;
 
@@ -78,8 +108,14 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSortingMergePolicy, in_, OrgApacheLucene
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSortingMergePolicy, sorter_, OrgApacheLuceneIndexSorter *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSortingMergePolicy, sort_, OrgApacheLuceneSearchSort *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneIndexSortingMergePolicy_SORTER_ID_PROP_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexSortingMergePolicy, SORTER_ID_PROP_, NSString *)
+/*!
+ @brief Put in the <code>diagnostics</code> to denote that
+ this segment is sorted.
+ */
+inline NSString *OrgApacheLuceneIndexSortingMergePolicy_get_SORTER_ID_PROP();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneIndexSortingMergePolicy_SORTER_ID_PROP;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexSortingMergePolicy, SORTER_ID_PROP, NSString *)
 
 FOUNDATION_EXPORT jboolean OrgApacheLuceneIndexSortingMergePolicy_isSortedWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneSearchSort_(OrgApacheLuceneIndexLeafReader *reader, OrgApacheLuceneSearchSort *sort);
 
@@ -87,15 +123,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexSortingMergePolicy_initWithOrgApacheL
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexSortingMergePolicy *new_OrgApacheLuceneIndexSortingMergePolicy_initWithOrgApacheLuceneIndexMergePolicy_withOrgApacheLuceneSearchSort_(OrgApacheLuceneIndexMergePolicy *inArg, OrgApacheLuceneSearchSort *sort) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexSortingMergePolicy *create_OrgApacheLuceneIndexSortingMergePolicy_initWithOrgApacheLuceneIndexMergePolicy_withOrgApacheLuceneSearchSort_(OrgApacheLuceneIndexMergePolicy *inArg, OrgApacheLuceneSearchSort *sort);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortingMergePolicy)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_) && (OrgApacheLuceneIndexSortingMergePolicy_INCLUDE_ALL || OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_INCLUDE)
-#define _OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_
+#if !defined (OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_) && (INCLUDE_ALL_OrgApacheLuceneIndexSortingMergePolicy || defined(INCLUDE_OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge))
+#define OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_
 
-#define OrgApacheLuceneIndexMergePolicy_RESTRICT 1
-#define OrgApacheLuceneIndexMergePolicy_OneMerge_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexMergePolicy 1
+#define INCLUDE_OrgApacheLuceneIndexMergePolicy_OneMerge 1
 #include "org/apache/lucene/index/MergePolicy.h"
 
 @class OrgApacheLuceneIndexLeafReader;
@@ -142,15 +180,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_in
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge *new_OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_initWithOrgApacheLuceneIndexSortingMergePolicy_withJavaUtilList_withOrgApacheLuceneUtilInfoStream_(OrgApacheLuceneIndexSortingMergePolicy *outer$, id<JavaUtilList> segments, OrgApacheLuceneUtilInfoStream *infoStream) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge *create_OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_initWithOrgApacheLuceneIndexSortingMergePolicy_withJavaUtilList_withOrgApacheLuceneUtilInfoStream_(OrgApacheLuceneIndexSortingMergePolicy *outer$, id<JavaUtilList> segments, OrgApacheLuceneUtilInfoStream *infoStream);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexSortingMergePolicy_SortingMergeSpecification_) && (OrgApacheLuceneIndexSortingMergePolicy_INCLUDE_ALL || OrgApacheLuceneIndexSortingMergePolicy_SortingMergeSpecification_INCLUDE)
-#define _OrgApacheLuceneIndexSortingMergePolicy_SortingMergeSpecification_
+#if !defined (OrgApacheLuceneIndexSortingMergePolicy_SortingMergeSpecification_) && (INCLUDE_ALL_OrgApacheLuceneIndexSortingMergePolicy || defined(INCLUDE_OrgApacheLuceneIndexSortingMergePolicy_SortingMergeSpecification))
+#define OrgApacheLuceneIndexSortingMergePolicy_SortingMergeSpecification_
 
-#define OrgApacheLuceneIndexMergePolicy_RESTRICT 1
-#define OrgApacheLuceneIndexMergePolicy_MergeSpecification_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexMergePolicy 1
+#define INCLUDE_OrgApacheLuceneIndexMergePolicy_MergeSpecification 1
 #include "org/apache/lucene/index/MergePolicy.h"
 
 @class OrgApacheLuceneIndexMergePolicy_OneMerge;
@@ -184,8 +224,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexSortingMergePolicy_SortingMergeSpecif
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexSortingMergePolicy_SortingMergeSpecification *new_OrgApacheLuceneIndexSortingMergePolicy_SortingMergeSpecification_initWithOrgApacheLuceneIndexSortingMergePolicy_withOrgApacheLuceneUtilInfoStream_(OrgApacheLuceneIndexSortingMergePolicy *outer$, OrgApacheLuceneUtilInfoStream *infoStream) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexSortingMergePolicy_SortingMergeSpecification *create_OrgApacheLuceneIndexSortingMergePolicy_SortingMergeSpecification_initWithOrgApacheLuceneIndexSortingMergePolicy_withOrgApacheLuceneUtilInfoStream_(OrgApacheLuceneIndexSortingMergePolicy *outer$, OrgApacheLuceneUtilInfoStream *infoStream);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortingMergePolicy_SortingMergeSpecification)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexSortingMergePolicy_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSortingMergePolicy")

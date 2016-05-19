@@ -4,9 +4,11 @@
 //
 
 #include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
+#include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/search/DocIdSet.h"
 #include "org/apache/lucene/search/DocIdSetIterator.h"
 #include "org/apache/lucene/util/BitDocIdSet.h"
@@ -26,8 +28,9 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilBitDocIdSet, set_, OrgApacheLuceneUtilBitSet *)
 
-static jlong OrgApacheLuceneUtilBitDocIdSet_BASE_RAM_BYTES_USED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilBitDocIdSet, BASE_RAM_BYTES_USED_, jlong)
+inline jlong OrgApacheLuceneUtilBitDocIdSet_get_BASE_RAM_BYTES_USED();
+static jlong OrgApacheLuceneUtilBitDocIdSet_BASE_RAM_BYTES_USED;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilBitDocIdSet, BASE_RAM_BYTES_USED, jlong)
 
 @interface OrgApacheLuceneUtilBitDocIdSet_Builder () {
  @public
@@ -59,7 +62,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilBitDocIdSet)
 }
 
 - (OrgApacheLuceneSearchDocIdSetIterator *)iterator {
-  return [new_OrgApacheLuceneUtilBitSetIterator_initWithOrgApacheLuceneUtilBitSet_withLong_(set_, cost_) autorelease];
+  return create_OrgApacheLuceneUtilBitSetIterator_initWithOrgApacheLuceneUtilBitSet_withLong_(set_, cost_);
 }
 
 - (OrgApacheLuceneUtilBitSet *)bits {
@@ -71,7 +74,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilBitDocIdSet)
 }
 
 - (jlong)ramBytesUsed {
-  return OrgApacheLuceneUtilBitDocIdSet_BASE_RAM_BYTES_USED_ + [((OrgApacheLuceneUtilBitSet *) nil_chk(set_)) ramBytesUsed];
+  return OrgApacheLuceneUtilBitDocIdSet_BASE_RAM_BYTES_USED + [((OrgApacheLuceneUtilBitSet *) nil_chk(set_)) ramBytesUsed];
 }
 
 - (NSString *)description {
@@ -85,7 +88,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilBitDocIdSet)
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilBitDocIdSet class]) {
-    OrgApacheLuceneUtilBitDocIdSet_BASE_RAM_BYTES_USED_ = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilBitDocIdSet_class_());
+    OrgApacheLuceneUtilBitDocIdSet_BASE_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilBitDocIdSet_class_());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilBitDocIdSet)
   }
 }
@@ -101,7 +104,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilBitDocIdSet)
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "BASE_RAM_BYTES_USED_", NULL, 0x1a, "J", &OrgApacheLuceneUtilBitDocIdSet_BASE_RAM_BYTES_USED_, NULL, .constantValue.asLong = 0 },
+    { "BASE_RAM_BYTES_USED", "BASE_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneUtilBitDocIdSet_BASE_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
     { "set_", NULL, 0x12, "Lorg.apache.lucene.util.BitSet;", NULL, NULL, .constantValue.asLong = 0 },
     { "cost_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
   };
@@ -119,9 +122,11 @@ void OrgApacheLuceneUtilBitDocIdSet_initWithOrgApacheLuceneUtilBitSet_withLong_(
 }
 
 OrgApacheLuceneUtilBitDocIdSet *new_OrgApacheLuceneUtilBitDocIdSet_initWithOrgApacheLuceneUtilBitSet_withLong_(OrgApacheLuceneUtilBitSet *set, jlong cost) {
-  OrgApacheLuceneUtilBitDocIdSet *self = [OrgApacheLuceneUtilBitDocIdSet alloc];
-  OrgApacheLuceneUtilBitDocIdSet_initWithOrgApacheLuceneUtilBitSet_withLong_(self, set, cost);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilBitDocIdSet, initWithOrgApacheLuceneUtilBitSet_withLong_, set, cost)
+}
+
+OrgApacheLuceneUtilBitDocIdSet *create_OrgApacheLuceneUtilBitDocIdSet_initWithOrgApacheLuceneUtilBitSet_withLong_(OrgApacheLuceneUtilBitSet *set, jlong cost) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilBitDocIdSet, initWithOrgApacheLuceneUtilBitSet_withLong_, set, cost)
 }
 
 void OrgApacheLuceneUtilBitDocIdSet_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitDocIdSet *self, OrgApacheLuceneUtilBitSet *set) {
@@ -129,9 +134,11 @@ void OrgApacheLuceneUtilBitDocIdSet_initWithOrgApacheLuceneUtilBitSet_(OrgApache
 }
 
 OrgApacheLuceneUtilBitDocIdSet *new_OrgApacheLuceneUtilBitDocIdSet_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet *set) {
-  OrgApacheLuceneUtilBitDocIdSet *self = [OrgApacheLuceneUtilBitDocIdSet alloc];
-  OrgApacheLuceneUtilBitDocIdSet_initWithOrgApacheLuceneUtilBitSet_(self, set);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilBitDocIdSet, initWithOrgApacheLuceneUtilBitSet_, set)
+}
+
+OrgApacheLuceneUtilBitDocIdSet *create_OrgApacheLuceneUtilBitDocIdSet_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet *set) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilBitDocIdSet, initWithOrgApacheLuceneUtilBitSet_, set)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBitDocIdSet)
@@ -170,7 +177,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBitDocIdSet)
       JreStrongAssignAndConsume(&denseSet_, new_OrgApacheLuceneUtilFixedBitSet_initWithInt_(maxDoc_));
       [denseSet_ or__WithOrgApacheLuceneSearchDocIdSetIterator:it];
       if (sparseSet_ != nil) {
-        [denseSet_ or__WithOrgApacheLuceneSearchDocIdSetIterator:[new_OrgApacheLuceneUtilBitSetIterator_initWithOrgApacheLuceneUtilBitSet_withLong_(sparseSet_, 0LL) autorelease]];
+        [((OrgApacheLuceneUtilFixedBitSet *) nil_chk(denseSet_)) or__WithOrgApacheLuceneSearchDocIdSetIterator:create_OrgApacheLuceneUtilBitSetIterator_initWithOrgApacheLuceneUtilBitSet_withLong_(sparseSet_, 0LL)];
       }
       return;
     }
@@ -178,7 +185,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBitDocIdSet)
   if (sparseSet_ == nil) {
     JreStrongAssignAndConsume(&sparseSet_, new_OrgApacheLuceneUtilSparseFixedBitSet_initWithInt_(maxDoc_));
   }
-  [((OrgApacheLuceneUtilSparseFixedBitSet *) nil_chk(sparseSet_)) or__WithOrgApacheLuceneSearchDocIdSetIterator:it];
+  [sparseSet_ or__WithOrgApacheLuceneSearchDocIdSetIterator:it];
 }
 
 - (void)and__WithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)it {
@@ -202,10 +209,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBitDocIdSet)
 - (OrgApacheLuceneUtilBitDocIdSet *)build {
   OrgApacheLuceneUtilBitDocIdSet *result;
   if (denseSet_ != nil) {
-    result = [new_OrgApacheLuceneUtilBitDocIdSet_initWithOrgApacheLuceneUtilBitSet_(denseSet_) autorelease];
+    result = create_OrgApacheLuceneUtilBitDocIdSet_initWithOrgApacheLuceneUtilBitSet_(denseSet_);
   }
   else if (sparseSet_ != nil) {
-    result = [new_OrgApacheLuceneUtilBitDocIdSet_initWithOrgApacheLuceneUtilBitSet_(sparseSet_) autorelease];
+    result = create_OrgApacheLuceneUtilBitDocIdSet_initWithOrgApacheLuceneUtilBitSet_(sparseSet_);
   }
   else {
     result = nil;
@@ -216,18 +223,18 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBitDocIdSet)
   return result;
 }
 
++ (IOSObjectArray *)__annotations_and__WithOrgApacheLuceneSearchDocIdSetIterator_ {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
++ (IOSObjectArray *)__annotations_andNotWithOrgApacheLuceneSearchDocIdSetIterator_ {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
 - (void)dealloc {
   RELEASE_(sparseSet_);
   RELEASE_(denseSet_);
   [super dealloc];
-}
-
-+ (IOSObjectArray *)__annotations_and__WithOrgApacheLuceneSearchDocIdSetIterator_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_andNotWithOrgApacheLuceneSearchDocIdSetIterator_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -265,9 +272,11 @@ void OrgApacheLuceneUtilBitDocIdSet_Builder_initWithInt_withBoolean_(OrgApacheLu
 }
 
 OrgApacheLuceneUtilBitDocIdSet_Builder *new_OrgApacheLuceneUtilBitDocIdSet_Builder_initWithInt_withBoolean_(jint maxDoc, jboolean full) {
-  OrgApacheLuceneUtilBitDocIdSet_Builder *self = [OrgApacheLuceneUtilBitDocIdSet_Builder alloc];
-  OrgApacheLuceneUtilBitDocIdSet_Builder_initWithInt_withBoolean_(self, maxDoc, full);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilBitDocIdSet_Builder, initWithInt_withBoolean_, maxDoc, full)
+}
+
+OrgApacheLuceneUtilBitDocIdSet_Builder *create_OrgApacheLuceneUtilBitDocIdSet_Builder_initWithInt_withBoolean_(jint maxDoc, jboolean full) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilBitDocIdSet_Builder, initWithInt_withBoolean_, maxDoc, full)
 }
 
 void OrgApacheLuceneUtilBitDocIdSet_Builder_initWithInt_(OrgApacheLuceneUtilBitDocIdSet_Builder *self, jint maxDoc) {
@@ -275,9 +284,11 @@ void OrgApacheLuceneUtilBitDocIdSet_Builder_initWithInt_(OrgApacheLuceneUtilBitD
 }
 
 OrgApacheLuceneUtilBitDocIdSet_Builder *new_OrgApacheLuceneUtilBitDocIdSet_Builder_initWithInt_(jint maxDoc) {
-  OrgApacheLuceneUtilBitDocIdSet_Builder *self = [OrgApacheLuceneUtilBitDocIdSet_Builder alloc];
-  OrgApacheLuceneUtilBitDocIdSet_Builder_initWithInt_(self, maxDoc);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilBitDocIdSet_Builder, initWithInt_, maxDoc)
+}
+
+OrgApacheLuceneUtilBitDocIdSet_Builder *create_OrgApacheLuceneUtilBitDocIdSet_Builder_initWithInt_(jint maxDoc) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilBitDocIdSet_Builder, initWithInt_, maxDoc)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBitDocIdSet_Builder)

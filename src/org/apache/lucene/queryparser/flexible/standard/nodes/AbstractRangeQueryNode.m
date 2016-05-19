@@ -58,11 +58,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (id)getLowerBound {
-  return (id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode>) check_protocol_cast([((id<JavaUtilList>) nil_chk([self getChildren])) getWithInt:0], OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode_class_());
+  return (id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode>) cast_check([((id<JavaUtilList>) nil_chk([self getChildren])) getWithInt:0], OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode_class_());
 }
 
 - (id)getUpperBound {
-  return (id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode>) check_protocol_cast([((id<JavaUtilList>) nil_chk([self getChildren])) getWithInt:1], OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode_class_());
+  return (id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode>) cast_check([((id<JavaUtilList>) nil_chk([self getChildren])) getWithInt:1], OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode_class_());
 }
 
 - (jboolean)isLowerInclusive {
@@ -81,11 +81,11 @@ J2OBJC_IGNORE_DESIGNATED_END
     NSString *lowerField = OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_toStringWithId_([lower getField]);
     NSString *upperField = OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_toStringWithId_([upper getField]);
     if ((upperField != nil || lowerField != nil) && ((upperField != nil && ![upperField isEqual:lowerField]) || ![((NSString *) nil_chk(lowerField)) isEqual:upperField])) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"lower and upper bounds should have the same field name!") autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"lower and upper bounds should have the same field name!");
     }
     self->lowerInclusive_ = lowerInclusive;
     self->upperInclusive_ = upperInclusive;
-    JavaUtilArrayList *children = [new_JavaUtilArrayList_initWithInt_(2) autorelease];
+    JavaUtilArrayList *children = create_JavaUtilArrayList_initWithInt_(2);
     [children addWithId:lower];
     [children addWithId:upper];
     [self setWithJavaUtilList:children];
@@ -93,7 +93,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escapeSyntaxParser {
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode> lower = [self getLowerBound];
   id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode> upper = [self getUpperBound];
   if (lowerInclusive_) {
@@ -125,7 +125,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (NSString *)description {
-  JavaLangStringBuilder *sb = [((JavaLangStringBuilder *) [new_JavaLangStringBuilder_initWithNSString_(@"<") autorelease]) appendWithNSString:[[self getClass] getCanonicalName]];
+  JavaLangStringBuilder *sb = [create_JavaLangStringBuilder_initWithNSString_(@"<") appendWithNSString:[[self getClass] getCanonicalName]];
   [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk(sb)) appendWithNSString:@" lowerInclusive="])) appendWithBoolean:[self isLowerInclusive]];
   [((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:@" upperInclusive="])) appendWithBoolean:[self isUpperInclusive]];
   [sb appendWithNSString:@">\n\t"];
@@ -165,9 +165,11 @@ void OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode_init(
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode *new_OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode_init() {
-  OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode *self = [OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode, init)
+}
+
+OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode *create_OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode)

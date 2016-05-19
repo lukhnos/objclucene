@@ -29,9 +29,11 @@ void OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException_initWithNSString
 }
 
 OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException *new_OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException_initWithNSString_(NSString *message) {
-  OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException *self = [OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException alloc];
-  OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException_initWithNSString_(self, message);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException, initWithNSString_, message)
+}
+
+OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException *create_OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException_initWithNSString_(NSString *message) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException, initWithNSString_, message)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException)

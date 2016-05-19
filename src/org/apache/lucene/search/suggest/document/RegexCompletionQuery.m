@@ -55,7 +55,7 @@
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores {
-  return [new_OrgApacheLuceneSearchSuggestDocumentCompletionWeight_initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery_withOrgApacheLuceneUtilAutomatonAutomaton_(self, [((OrgApacheLuceneUtilAutomatonRegExp *) [new_OrgApacheLuceneUtilAutomatonRegExp_initWithNSString_withInt_([((OrgApacheLuceneIndexTerm *) nil_chk([self getTerm])) text], flags_) autorelease]) toAutomatonWithInt:maxDeterminizedStates_]) autorelease];
+  return create_OrgApacheLuceneSearchSuggestDocumentCompletionWeight_initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery_withOrgApacheLuceneUtilAutomatonAutomaton_(self, [create_OrgApacheLuceneUtilAutomatonRegExp_initWithNSString_withInt_([((OrgApacheLuceneIndexTerm *) nil_chk([self getTerm])) text], flags_) toAutomatonWithInt:maxDeterminizedStates_]);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -81,9 +81,11 @@ void OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery_initWithOrgApacheL
 }
 
 OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery *new_OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexTerm *term) {
-  OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery *self = [OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery alloc];
-  OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery_initWithOrgApacheLuceneIndexTerm_(self, term);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery, initWithOrgApacheLuceneIndexTerm_, term)
+}
+
+OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery *create_OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexTerm *term) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery, initWithOrgApacheLuceneIndexTerm_, term)
 }
 
 void OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchSuggestBitsProducer_(OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery *self, OrgApacheLuceneIndexTerm *term, OrgApacheLuceneSearchSuggestBitsProducer *filter) {
@@ -91,9 +93,11 @@ void OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery_initWithOrgApacheL
 }
 
 OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery *new_OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchSuggestBitsProducer_(OrgApacheLuceneIndexTerm *term, OrgApacheLuceneSearchSuggestBitsProducer *filter) {
-  OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery *self = [OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery alloc];
-  OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchSuggestBitsProducer_(self, term, filter);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery, initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchSuggestBitsProducer_, term, filter)
+}
+
+OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery *create_OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchSuggestBitsProducer_(OrgApacheLuceneIndexTerm *term, OrgApacheLuceneSearchSuggestBitsProducer *filter) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery, initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchSuggestBitsProducer_, term, filter)
 }
 
 void OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery_initWithOrgApacheLuceneIndexTerm_withInt_withInt_(OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery *self, OrgApacheLuceneIndexTerm *term, jint flags, jint maxDeterminizedStates) {
@@ -101,9 +105,11 @@ void OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery_initWithOrgApacheL
 }
 
 OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery *new_OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery_initWithOrgApacheLuceneIndexTerm_withInt_withInt_(OrgApacheLuceneIndexTerm *term, jint flags, jint maxDeterminizedStates) {
-  OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery *self = [OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery alloc];
-  OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery_initWithOrgApacheLuceneIndexTerm_withInt_withInt_(self, term, flags, maxDeterminizedStates);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery, initWithOrgApacheLuceneIndexTerm_withInt_withInt_, term, flags, maxDeterminizedStates)
+}
+
+OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery *create_OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery_initWithOrgApacheLuceneIndexTerm_withInt_withInt_(OrgApacheLuceneIndexTerm *term, jint flags, jint maxDeterminizedStates) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery, initWithOrgApacheLuceneIndexTerm_withInt_withInt_, term, flags, maxDeterminizedStates)
 }
 
 void OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery_initWithOrgApacheLuceneIndexTerm_withInt_withInt_withOrgApacheLuceneSearchSuggestBitsProducer_(OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery *self, OrgApacheLuceneIndexTerm *term, jint flags, jint maxDeterminizedStates, OrgApacheLuceneSearchSuggestBitsProducer *filter) {
@@ -113,9 +119,11 @@ void OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery_initWithOrgApacheL
 }
 
 OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery *new_OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery_initWithOrgApacheLuceneIndexTerm_withInt_withInt_withOrgApacheLuceneSearchSuggestBitsProducer_(OrgApacheLuceneIndexTerm *term, jint flags, jint maxDeterminizedStates, OrgApacheLuceneSearchSuggestBitsProducer *filter) {
-  OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery *self = [OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery alloc];
-  OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery_initWithOrgApacheLuceneIndexTerm_withInt_withInt_withOrgApacheLuceneSearchSuggestBitsProducer_(self, term, flags, maxDeterminizedStates, filter);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery, initWithOrgApacheLuceneIndexTerm_withInt_withInt_withOrgApacheLuceneSearchSuggestBitsProducer_, term, flags, maxDeterminizedStates, filter)
+}
+
+OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery *create_OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery_initWithOrgApacheLuceneIndexTerm_withInt_withInt_withOrgApacheLuceneSearchSuggestBitsProducer_(OrgApacheLuceneIndexTerm *term, jint flags, jint maxDeterminizedStates, OrgApacheLuceneSearchSuggestBitsProducer *filter) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery, initWithOrgApacheLuceneIndexTerm_withInt_withInt_withOrgApacheLuceneSearchSuggestBitsProducer_, term, flags, maxDeterminizedStates, filter)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentRegexCompletionQuery)

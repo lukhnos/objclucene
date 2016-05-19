@@ -5,23 +5,23 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_RESTRICT
-#define OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader")
+#ifdef RESTRICT_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader
+#define INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader 0
 #else
-#define OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader 1
 #endif
-#undef OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader
 
-#if !defined (_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_) && (OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_INCLUDE_ALL || OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_INCLUDE)
-#define _OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_
+#if !defined (OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_) && (INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader || defined(INCLUDE_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader))
+#define OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_
 
-#define OrgApacheLuceneCodecsTermVectorsReader_RESTRICT 1
-#define OrgApacheLuceneCodecsTermVectorsReader_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneCodecsTermVectorsReader 1
+#define INCLUDE_OrgApacheLuceneCodecsTermVectorsReader 1
 #include "org/apache/lucene/codecs/TermVectorsReader.h"
 
-#define JavaIoCloseable_RESTRICT 1
-#define JavaIoCloseable_INCLUDE 1
+#define RESTRICT_JavaIoCloseable 1
+#define INCLUDE_JavaIoCloseable 1
 #include "java/io/Closeable.h"
 
 @class OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader;
@@ -34,6 +34,9 @@
 @class OrgApacheLuceneStoreIndexInput;
 @protocol JavaUtilCollection;
 
+/*!
+ @brief <code>TermVectorsReader</code> for <code>CompressingTermVectorsFormat</code>.
+ */
 @interface OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader : OrgApacheLuceneCodecsTermVectorsReader < JavaIoCloseable > {
  @public
   OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader *indexReader_;
@@ -42,6 +45,9 @@
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ */
 - (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)d
                   withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)si
                                          withNSString:(NSString *)segmentSuffix
@@ -95,8 +101,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsCompressingCompressingTermVectorsRea
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader *new_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withNSString_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneStoreIOContext_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_(OrgApacheLuceneStoreDirectory *d, OrgApacheLuceneIndexSegmentInfo *si, NSString *segmentSuffix, OrgApacheLuceneIndexFieldInfos *fn, OrgApacheLuceneStoreIOContext *context, NSString *formatName, OrgApacheLuceneCodecsCompressingCompressionMode *compressionMode) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader *create_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withNSString_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneStoreIOContext_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_(OrgApacheLuceneStoreDirectory *d, OrgApacheLuceneIndexSegmentInfo *si, NSString *segmentSuffix, OrgApacheLuceneIndexFieldInfos *fn, OrgApacheLuceneStoreIOContext *context, NSString *formatName, OrgApacheLuceneCodecsCompressingCompressionMode *compressionMode);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader")

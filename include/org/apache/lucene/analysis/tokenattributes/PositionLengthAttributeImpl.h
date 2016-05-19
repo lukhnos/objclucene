@@ -5,31 +5,37 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl_RESTRICT
-#define OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl 0
 #else
-#define OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl 1
 #endif
-#undef OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl
 
-#if !defined (_OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl_) && (OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl_INCLUDE_ALL || OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl_INCLUDE)
-#define _OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl_
+#if !defined (OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl || defined(INCLUDE_OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl))
+#define OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl_
 
-#define OrgApacheLuceneUtilAttributeImpl_RESTRICT 1
-#define OrgApacheLuceneUtilAttributeImpl_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAttributeImpl 1
+#define INCLUDE_OrgApacheLuceneUtilAttributeImpl 1
 #include "org/apache/lucene/util/AttributeImpl.h"
 
-#define OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute 1
 #include "org/apache/lucene/analysis/tokenattributes/PositionLengthAttribute.h"
 
 @protocol OrgApacheLuceneUtilAttributeReflector;
 
+/*!
+ @brief Default implementation of <code>PositionLengthAttribute</code>.
+ */
 @interface OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl : OrgApacheLuceneUtilAttributeImpl < OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute, NSCopying >
 
 #pragma mark Public
 
+/*!
+ @brief Initializes this attribute with position length of 1.
+ */
 - (instancetype)init;
 
 - (void)clear;
@@ -54,8 +60,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisTokenattributesPositionLengthAttri
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl")

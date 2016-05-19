@@ -5,19 +5,24 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilRollingBuffer_INCLUDE_ALL")
-#if OrgApacheLuceneUtilRollingBuffer_RESTRICT
-#define OrgApacheLuceneUtilRollingBuffer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilRollingBuffer")
+#ifdef RESTRICT_OrgApacheLuceneUtilRollingBuffer
+#define INCLUDE_ALL_OrgApacheLuceneUtilRollingBuffer 0
 #else
-#define OrgApacheLuceneUtilRollingBuffer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilRollingBuffer 1
 #endif
-#undef OrgApacheLuceneUtilRollingBuffer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilRollingBuffer
 
-#if !defined (_OrgApacheLuceneUtilRollingBuffer_) && (OrgApacheLuceneUtilRollingBuffer_INCLUDE_ALL || OrgApacheLuceneUtilRollingBuffer_INCLUDE)
-#define _OrgApacheLuceneUtilRollingBuffer_
+#if !defined (OrgApacheLuceneUtilRollingBuffer_) && (INCLUDE_ALL_OrgApacheLuceneUtilRollingBuffer || defined(INCLUDE_OrgApacheLuceneUtilRollingBuffer))
+#define OrgApacheLuceneUtilRollingBuffer_
 
 @protocol OrgApacheLuceneUtilRollingBuffer_Resettable;
 
+/*!
+ @brief Acts like forever growing T[], but internally uses a
+ circular buffer to reuse instances of T.
+  
+ */
 @interface OrgApacheLuceneUtilRollingBuffer : NSObject
 
 #pragma mark Public
@@ -26,8 +31,17 @@
 
 - (void)freeBeforeWithInt:(jint)pos;
 
+/*!
+ @brief Get T instance for this absolute position;
+ this is allowed to be arbitrarily far "in the
+ future" but cannot be before the last freeBefore.
+ */
 - (id)getWithInt:(jint)pos;
 
+/*!
+ @brief Returns the maximum position looked up, or -1 if no
+ position has been looked up sinc reset/init.
+ */
 - (jint)getMaxPos;
 
 - (void)reset;
@@ -46,9 +60,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilRollingBuffer)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilRollingBuffer_Resettable_) && (OrgApacheLuceneUtilRollingBuffer_INCLUDE_ALL || OrgApacheLuceneUtilRollingBuffer_Resettable_INCLUDE)
-#define _OrgApacheLuceneUtilRollingBuffer_Resettable_
+#if !defined (OrgApacheLuceneUtilRollingBuffer_Resettable_) && (INCLUDE_ALL_OrgApacheLuceneUtilRollingBuffer || defined(INCLUDE_OrgApacheLuceneUtilRollingBuffer_Resettable))
+#define OrgApacheLuceneUtilRollingBuffer_Resettable_
 
+/*!
+ @brief Implement to reset an instance
+ */
 @protocol OrgApacheLuceneUtilRollingBuffer_Resettable < NSObject, JavaObject >
 
 - (void)reset;
@@ -61,4 +78,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilRollingBuffer_Resettable)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilRollingBuffer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilRollingBuffer")

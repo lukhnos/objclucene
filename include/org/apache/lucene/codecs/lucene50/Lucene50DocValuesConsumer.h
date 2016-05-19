@@ -5,23 +5,23 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_RESTRICT
-#define OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer")
+#ifdef RESTRICT_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer
+#define INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer 0
 #else
-#define OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer 1
 #endif
-#undef OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer
 
-#if !defined (_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_) && (OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_INCLUDE_ALL || OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_INCLUDE)
-#define _OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_
+#if !defined (OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_) && (INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer || defined(INCLUDE_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer))
+#define OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_
 
-#define OrgApacheLuceneCodecsDocValuesConsumer_RESTRICT 1
-#define OrgApacheLuceneCodecsDocValuesConsumer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneCodecsDocValuesConsumer 1
+#define INCLUDE_OrgApacheLuceneCodecsDocValuesConsumer 1
 #include "org/apache/lucene/codecs/DocValuesConsumer.h"
 
-#define JavaIoCloseable_RESTRICT 1
-#define JavaIoCloseable_INCLUDE 1
+#define RESTRICT_JavaIoCloseable 1
+#define INCLUDE_JavaIoCloseable 1
 #include "java/io/Closeable.h"
 
 @class OrgApacheLuceneIndexFieldInfo;
@@ -29,6 +29,9 @@
 @class OrgApacheLuceneStoreIndexOutput;
 @protocol JavaLangIterable;
 
+/*!
+ @brief writer for <code>Lucene50DocValuesFormat</code>
+ */
 @interface OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer : OrgApacheLuceneCodecsDocValuesConsumer < JavaIoCloseable > {
  @public
   OrgApacheLuceneStoreIndexOutput *data_, *meta_;
@@ -37,6 +40,9 @@
 
 #pragma mark Public
 
+/*!
+ @brief expert: Creates a new writer
+ */
 - (instancetype)initWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state
                                                  withNSString:(NSString *)dataCodec
                                                  withNSString:(NSString *)dataExtension
@@ -83,8 +89,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_in
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer *new_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_initWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneIndexSegmentWriteState *state, NSString *dataCodec, NSString *dataExtension, NSString *metaCodec, NSString *metaExtension) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer *create_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_initWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneIndexSegmentWriteState *state, NSString *dataCodec, NSString *dataExtension, NSString *metaCodec, NSString *metaExtension);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50DocValuesConsumer")

@@ -5,27 +5,42 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_) && (OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_
+#if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode))
+#define OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_
 
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_RESTRICT 1
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode 1
+#define INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.h"
 
 @protocol JavaLangCharSequence;
 
+/*!
+ @brief A query node implements <code>FieldableNode</code> interface to indicate that its
+ children and itself are associated to a specific field.
+ If it has any children which also implements this interface, it must ensure
+ the children are associated to the same field.
+ */
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode < OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode, NSObject, JavaObject >
 
+/*!
+ @brief Returns the field associated to the node and every node under it.
+ @return the field name
+ */
 - (id<JavaLangCharSequence>)getField;
 
+/*!
+ @brief Associates the node to a field.
+ @param fieldName
+ the field name
+ */
 - (void)setFieldWithJavaLangCharSequence:(id<JavaLangCharSequence>)fieldName;
 
 @end
@@ -36,4 +51,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableN
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode")

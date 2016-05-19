@@ -5,23 +5,26 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneBkdtreeLatLonWriter_INCLUDE_ALL")
-#if OrgApacheLuceneBkdtreeLatLonWriter_RESTRICT
-#define OrgApacheLuceneBkdtreeLatLonWriter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneBkdtreeLatLonWriter")
+#ifdef RESTRICT_OrgApacheLuceneBkdtreeLatLonWriter
+#define INCLUDE_ALL_OrgApacheLuceneBkdtreeLatLonWriter 0
 #else
-#define OrgApacheLuceneBkdtreeLatLonWriter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneBkdtreeLatLonWriter 1
 #endif
-#undef OrgApacheLuceneBkdtreeLatLonWriter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneBkdtreeLatLonWriter
 
-#if !defined (_OrgApacheLuceneBkdtreeLatLonWriter_) && (OrgApacheLuceneBkdtreeLatLonWriter_INCLUDE_ALL || OrgApacheLuceneBkdtreeLatLonWriter_INCLUDE)
-#define _OrgApacheLuceneBkdtreeLatLonWriter_
+#if !defined (OrgApacheLuceneBkdtreeLatLonWriter_) && (INCLUDE_ALL_OrgApacheLuceneBkdtreeLatLonWriter || defined(INCLUDE_OrgApacheLuceneBkdtreeLatLonWriter))
+#define OrgApacheLuceneBkdtreeLatLonWriter_
 
-#define JavaIoCloseable_RESTRICT 1
-#define JavaIoCloseable_INCLUDE 1
+#define RESTRICT_JavaIoCloseable 1
+#define INCLUDE_JavaIoCloseable 1
 #include "java/io/Closeable.h"
 
 @protocol OrgApacheLuceneBkdtreeLatLonReader;
 
+/*!
+ @brief Abstracts away whether OfflineSorter or simple arrays in heap are used.
+ */
 @protocol OrgApacheLuceneBkdtreeLatLonWriter < JavaIoCloseable, NSObject, JavaObject >
 
 - (void)appendWithInt:(jint)latEnc
@@ -41,4 +44,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeLatLonWriter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneBkdtreeLatLonWriter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneBkdtreeLatLonWriter")

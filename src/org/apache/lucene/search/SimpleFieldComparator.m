@@ -41,7 +41,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "doSetNextReaderWithOrgApacheLuceneIndexLeafReaderContext:", "doSetNextReader", "V", 0x404, "Ljava.io.IOException;", NULL },
     { "getLeafComparatorWithOrgApacheLuceneIndexLeafReaderContext:", "getLeafComparator", "Lorg.apache.lucene.search.LeafFieldComparator;", 0x11, "Ljava.io.IOException;", NULL },
     { "setScorerWithOrgApacheLuceneSearchScorer:", "setScorer", "V", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "SimpleFieldComparator", NULL, 0x1, NULL, NULL },
   };
   static const char *superclass_type_args[] = {"TT;"};
   static const J2ObjcClassInfo _OrgApacheLuceneSearchSimpleFieldComparator = { 2, "SimpleFieldComparator", "org.apache.lucene.search", NULL, 0x401, 4, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "<T:Ljava/lang/Object;>Lorg/apache/lucene/search/FieldComparator<TT;>;Lorg/apache/lucene/search/LeafFieldComparator;" };

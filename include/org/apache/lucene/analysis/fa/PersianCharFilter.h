@@ -5,24 +5,28 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisFaPersianCharFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisFaPersianCharFilter_RESTRICT
-#define OrgApacheLuceneAnalysisFaPersianCharFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisFaPersianCharFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisFaPersianCharFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisFaPersianCharFilter 0
 #else
-#define OrgApacheLuceneAnalysisFaPersianCharFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisFaPersianCharFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisFaPersianCharFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisFaPersianCharFilter
 
-#if !defined (_OrgApacheLuceneAnalysisFaPersianCharFilter_) && (OrgApacheLuceneAnalysisFaPersianCharFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisFaPersianCharFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisFaPersianCharFilter_
+#if !defined (OrgApacheLuceneAnalysisFaPersianCharFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisFaPersianCharFilter || defined(INCLUDE_OrgApacheLuceneAnalysisFaPersianCharFilter))
+#define OrgApacheLuceneAnalysisFaPersianCharFilter_
 
-#define OrgApacheLuceneAnalysisCharFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisCharFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisCharFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisCharFilter 1
 #include "org/apache/lucene/analysis/CharFilter.h"
 
 @class IOSCharArray;
 @class JavaIoReader;
 
+/*!
+ @brief CharFilter that replaces instances of Zero-width non-joiner with an
+ ordinary space.
+ */
 @interface OrgApacheLuceneAnalysisFaPersianCharFilter : OrgApacheLuceneAnalysisCharFilter
 
 #pragma mark Public
@@ -47,8 +51,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisFaPersianCharFilter_initWithJavaIo
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisFaPersianCharFilter *new_OrgApacheLuceneAnalysisFaPersianCharFilter_initWithJavaIoReader_(JavaIoReader *inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisFaPersianCharFilter *create_OrgApacheLuceneAnalysisFaPersianCharFilter_initWithJavaIoReader_(JavaIoReader *inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisFaPersianCharFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisFaPersianCharFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisFaPersianCharFilter")

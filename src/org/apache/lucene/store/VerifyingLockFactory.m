@@ -9,7 +9,6 @@
 #include "java/io/InputStream.h"
 #include "java/io/OutputStream.h"
 #include "java/lang/IllegalStateException.h"
-#include "java/lang/Throwable.h"
 #include "org/apache/lucene/store/Directory.h"
 #include "org/apache/lucene/store/Lock.h"
 #include "org/apache/lucene/store/LockFactory.h"
@@ -41,6 +40,8 @@ __attribute__((unused)) static void OrgApacheLuceneStoreVerifyingLockFactory_Che
 
 __attribute__((unused)) static OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock *new_OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock_initWithOrgApacheLuceneStoreVerifyingLockFactory_withOrgApacheLuceneStoreLock_(OrgApacheLuceneStoreVerifyingLockFactory *outer$, OrgApacheLuceneStoreLock *lock) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock *create_OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock_initWithOrgApacheLuceneStoreVerifyingLockFactory_withOrgApacheLuceneStoreLock_(OrgApacheLuceneStoreVerifyingLockFactory *outer$, OrgApacheLuceneStoreLock *lock);
+
 __attribute__((unused)) static void OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock_verifyWithByte_(OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock *self, jbyte message);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock)
@@ -56,7 +57,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock)
 
 - (OrgApacheLuceneStoreLock *)obtainLockWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
                                                              withNSString:(NSString *)lockName {
-  return [new_OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock_initWithOrgApacheLuceneStoreVerifyingLockFactory_withOrgApacheLuceneStoreLock_(self, [((OrgApacheLuceneStoreLockFactory *) nil_chk(lf_)) obtainLockWithOrgApacheLuceneStoreDirectory:dir withNSString:lockName]) autorelease];
+  return create_OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock_initWithOrgApacheLuceneStoreVerifyingLockFactory_withOrgApacheLuceneStoreLock_(self, [((OrgApacheLuceneStoreLockFactory *) nil_chk(lf_)) obtainLockWithOrgApacheLuceneStoreDirectory:dir withNSString:lockName]);
 }
 
 - (void)dealloc {
@@ -91,9 +92,11 @@ void OrgApacheLuceneStoreVerifyingLockFactory_initWithOrgApacheLuceneStoreLockFa
 }
 
 OrgApacheLuceneStoreVerifyingLockFactory *new_OrgApacheLuceneStoreVerifyingLockFactory_initWithOrgApacheLuceneStoreLockFactory_withJavaIoInputStream_withJavaIoOutputStream_(OrgApacheLuceneStoreLockFactory *lf, JavaIoInputStream *inArg, JavaIoOutputStream *outArg) {
-  OrgApacheLuceneStoreVerifyingLockFactory *self = [OrgApacheLuceneStoreVerifyingLockFactory alloc];
-  OrgApacheLuceneStoreVerifyingLockFactory_initWithOrgApacheLuceneStoreLockFactory_withJavaIoInputStream_withJavaIoOutputStream_(self, lf, inArg, outArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreVerifyingLockFactory, initWithOrgApacheLuceneStoreLockFactory_withJavaIoInputStream_withJavaIoOutputStream_, lf, inArg, outArg)
+}
+
+OrgApacheLuceneStoreVerifyingLockFactory *create_OrgApacheLuceneStoreVerifyingLockFactory_initWithOrgApacheLuceneStoreLockFactory_withJavaIoInputStream_withJavaIoOutputStream_(OrgApacheLuceneStoreLockFactory *lf, JavaIoInputStream *inArg, JavaIoOutputStream *outArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreVerifyingLockFactory, initWithOrgApacheLuceneStoreLockFactory_withJavaIoInputStream_withJavaIoOutputStream_, lf, inArg, outArg)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreVerifyingLockFactory)
@@ -113,12 +116,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreVerifyingLockFactory)
 - (void)close {
   {
     OrgApacheLuceneStoreLock *l = lock_;
-    JavaLangThrowable *__primaryException1 = nil;
+    NSException *__primaryException1 = nil;
     @try {
       [((OrgApacheLuceneStoreLock *) nil_chk(l)) ensureValid];
       OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock_verifyWithByte_(self, (jbyte) 0);
     }
-    @catch (JavaLangThrowable *e) {
+    @catch (NSException *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -127,8 +130,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreVerifyingLockFactory)
         if (__primaryException1 != nil) {
           @try {
             [l close];
-          } @catch (JavaLangThrowable *e) {
-            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          } @catch (NSException *e) {
+            [__primaryException1 addSuppressedWithNSException:e];
           }
         } else {
           [l close];
@@ -173,9 +176,11 @@ void OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock_initWithOrgApacheLucen
 }
 
 OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock *new_OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock_initWithOrgApacheLuceneStoreVerifyingLockFactory_withOrgApacheLuceneStoreLock_(OrgApacheLuceneStoreVerifyingLockFactory *outer$, OrgApacheLuceneStoreLock *lock) {
-  OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock *self = [OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock alloc];
-  OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock_initWithOrgApacheLuceneStoreVerifyingLockFactory_withOrgApacheLuceneStoreLock_(self, outer$, lock);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock, initWithOrgApacheLuceneStoreVerifyingLockFactory_withOrgApacheLuceneStoreLock_, outer$, lock)
+}
+
+OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock *create_OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock_initWithOrgApacheLuceneStoreVerifyingLockFactory_withOrgApacheLuceneStoreLock_(OrgApacheLuceneStoreVerifyingLockFactory *outer$, OrgApacheLuceneStoreLock *lock) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock, initWithOrgApacheLuceneStoreVerifyingLockFactory_withOrgApacheLuceneStoreLock_, outer$, lock)
 }
 
 void OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock_verifyWithByte_(OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock *self, jbyte message) {
@@ -183,10 +188,10 @@ void OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock_verifyWithByte_(OrgApa
   [self->this$0_->out_ flush];
   jint ret = [((JavaIoInputStream *) nil_chk(self->this$0_->in_)) read];
   if (ret < 0) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"Lock server died because of locking error.") autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"Lock server died because of locking error.");
   }
   if (ret != message) {
-    @throw [new_JavaIoIOException_initWithNSString_(@"Protocol violation.") autorelease];
+    @throw create_JavaIoIOException_initWithNSString_(@"Protocol violation.");
   }
 }
 

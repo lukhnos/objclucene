@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_RESTRICT
-#define OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader")
+#ifdef RESTRICT_OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader
+#define INCLUDE_ALL_OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader 0
 #else
-#define OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader 1
 #endif
-#undef OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader
 
-#if !defined (_OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_) && (OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_INCLUDE_ALL || OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_INCLUDE)
-#define _OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_
+#if !defined (OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_) && (INCLUDE_ALL_OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader || defined(INCLUDE_OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader))
+#define OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_
 
-#define OrgApacheLuceneCodecsFieldsProducer_RESTRICT 1
-#define OrgApacheLuceneCodecsFieldsProducer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneCodecsFieldsProducer 1
+#define INCLUDE_OrgApacheLuceneCodecsFieldsProducer 1
 #include "org/apache/lucene/codecs/FieldsProducer.h"
 
 @class OrgApacheLuceneCodecsPostingsReaderBase;
@@ -28,6 +28,9 @@
 @protocol JavaUtilCollection;
 @protocol JavaUtilIterator;
 
+/*!
+ @brief See <code>VersionBlockTreeTermsWriter</code>.
+ */
 @interface OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader : OrgApacheLuceneCodecsFieldsProducer {
  @public
   OrgApacheLuceneStoreIndexInput *in_;
@@ -36,6 +39,9 @@
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ */
 - (instancetype)initWithOrgApacheLuceneCodecsPostingsReaderBase:(OrgApacheLuceneCodecsPostingsReaderBase *)postingsReader
                        withOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state;
 
@@ -59,7 +65,6 @@
 
 - (NSString *)brToStringWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)b;
 
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader)
@@ -71,8 +76,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader *new_OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_initWithOrgApacheLuceneCodecsPostingsReaderBase_withOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneCodecsPostingsReaderBase *postingsReader, OrgApacheLuceneIndexSegmentReadState *state) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader *create_OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_initWithOrgApacheLuceneCodecsPostingsReaderBase_withOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneCodecsPostingsReaderBase *postingsReader, OrgApacheLuceneIndexSegmentReadState *state);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader")

@@ -5,32 +5,53 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilGeoProjectionUtils_INCLUDE_ALL")
-#if OrgApacheLuceneUtilGeoProjectionUtils_RESTRICT
-#define OrgApacheLuceneUtilGeoProjectionUtils_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilGeoProjectionUtils")
+#ifdef RESTRICT_OrgApacheLuceneUtilGeoProjectionUtils
+#define INCLUDE_ALL_OrgApacheLuceneUtilGeoProjectionUtils 0
 #else
-#define OrgApacheLuceneUtilGeoProjectionUtils_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilGeoProjectionUtils 1
 #endif
-#undef OrgApacheLuceneUtilGeoProjectionUtils_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilGeoProjectionUtils
 
-#if !defined (_OrgApacheLuceneUtilGeoProjectionUtils_) && (OrgApacheLuceneUtilGeoProjectionUtils_INCLUDE_ALL || OrgApacheLuceneUtilGeoProjectionUtils_INCLUDE)
-#define _OrgApacheLuceneUtilGeoProjectionUtils_
+#if !defined (OrgApacheLuceneUtilGeoProjectionUtils_) && (INCLUDE_ALL_OrgApacheLuceneUtilGeoProjectionUtils || defined(INCLUDE_OrgApacheLuceneUtilGeoProjectionUtils))
+#define OrgApacheLuceneUtilGeoProjectionUtils_
 
 @class IOSDoubleArray;
 
-#define OrgApacheLuceneUtilGeoProjectionUtils_SEMIMAJOR_AXIS 6378137.0
-#define OrgApacheLuceneUtilGeoProjectionUtils_FLATTENING 0.0033528106647474805
-#define OrgApacheLuceneUtilGeoProjectionUtils_SEMIMINOR_AXIS 6356752.314245179
-#define OrgApacheLuceneUtilGeoProjectionUtils_PI_OVER_2 1.5707963267948966
-#define OrgApacheLuceneUtilGeoProjectionUtils_SEMIMAJOR_AXIS2 4.0680631590769E13
-#define OrgApacheLuceneUtilGeoProjectionUtils_SEMIMINOR_AXIS2 4.0408299984661445E13
-
+/*!
+ @brief Reusable geo-spatial projection utility methods.
+ */
 @interface OrgApacheLuceneUtilGeoProjectionUtils : NSObject
+
++ (jdouble)SEMIMAJOR_AXIS;
+
++ (jdouble)FLATTENING;
+
++ (jdouble)SEMIMINOR_AXIS;
+
++ (jdouble)ECCENTRICITY;
+
++ (jdouble)PI_OVER_2;
+
++ (jdouble)SEMIMAJOR_AXIS2;
+
++ (jdouble)SEMIMINOR_AXIS2;
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @brief Convert from Earth-Centered-Fixed to Easting, Northing, Up Right Hand System
+ @param x ECF X coordinate (in meters)
+ @param y ECF Y coordinate (in meters)
+ @param z ECF Z coordinate (in meters)
+ @param centerLon ENU origin longitude (in degrees)
+ @param centerLat ENU origin latitude (in degrees)
+ @param centerAlt ENU altitude (in meters)
+ @param enu reusable enu result
+ @return Easting, Northing, Up coordinate
+ */
 + (IOSDoubleArray *)ecfToENUWithDouble:(jdouble)x
                             withDouble:(jdouble)y
                             withDouble:(jdouble)z
@@ -39,11 +60,30 @@
                             withDouble:(jdouble)centerAlt
                        withDoubleArray:(IOSDoubleArray *)enu;
 
+/*!
+ @brief Converts from geocentric earth-centered earth-fixed to geodesic lat/lon/alt
+ @param x Cartesian x coordinate
+ @param y Cartesian y coordinate
+ @param z Cartesian z coordinate
+ @param lla 0: longitude 1: latitude: 2: altitude
+ @return double array as 0: longitude 1: latitude 2: altitude
+ */
 + (IOSDoubleArray *)ecfToLLAWithDouble:(jdouble)x
                             withDouble:(jdouble)y
                             withDouble:(jdouble)z
                        withDoubleArray:(IOSDoubleArray *)lla;
 
+/*!
+ @brief Convert from Easting, Northing, Up Right-Handed system to Earth Centered Fixed system
+ @param x ENU x coordinate (in meters)
+ @param y ENU y coordinate (in meters)
+ @param z ENU z coordinate (in meters)
+ @param centerLon ENU origin longitude (in degrees)
+ @param centerLat ENU origin latitude (in degrees)
+ @param centerAlt ENU origin altitude (in meters)
+ @param ecf reusable ecf result
+ @return ecf result coordinate
+ */
 + (IOSDoubleArray *)enuToECFWithDouble:(jdouble)x
                             withDouble:(jdouble)y
                             withDouble:(jdouble)z
@@ -52,6 +92,17 @@
                             withDouble:(jdouble)centerAlt
                        withDoubleArray:(IOSDoubleArray *)ecf;
 
+/*!
+ @brief Converts from East North Up right-hand rule to lat lon alt in degrees
+ @param x easting (in meters)
+ @param y northing (in meters)
+ @param z up (in meters)
+ @param centerLon reference point longitude (in degrees)
+ @param centerLat reference point latitude (in degrees)
+ @param centerAlt reference point altitude (in meters)
+ @param lla resulting lat, lon, alt point (in degrees)
+ @return lat, lon, alt point (in degrees)
+ */
 + (IOSDoubleArray *)enuToLLAWithDouble:(jdouble)x
                             withDouble:(jdouble)y
                             withDouble:(jdouble)z
@@ -60,11 +111,30 @@
                             withDouble:(jdouble)centerAlt
                        withDoubleArray:(IOSDoubleArray *)lla;
 
+/*!
+ @brief Converts from geodesic lon lat alt to geocentric earth-centered earth-fixed
+ @param lon geodesic longitude
+ @param lat geodesic latitude
+ @param alt geodesic altitude
+ @param ecf reusable earth-centered earth-fixed result
+ @return either a new ecef array or the reusable ecf parameter
+ */
 + (IOSDoubleArray *)llaToECFWithDouble:(jdouble)lon
                             withDouble:(jdouble)lat
                             withDouble:(jdouble)alt
                        withDoubleArray:(IOSDoubleArray *)ecf;
 
+/*!
+ @brief Converts from lat lon alt (in degrees) to East North Up right-hand coordinate system
+ @param lon longitude in degrees
+ @param lat latitude in degrees
+ @param alt altitude in meters
+ @param centerLon reference point longitude in degrees
+ @param centerLat reference point latitude in degrees
+ @param centerAlt reference point altitude in meters
+ @param enu result east, north, up coordinate
+ @return east, north, up coordinate
+ */
 + (IOSDoubleArray *)llaToENUWithDouble:(jdouble)lon
                             withDouble:(jdouble)lat
                             withDouble:(jdouble)alt
@@ -73,6 +143,15 @@
                             withDouble:(jdouble)centerAlt
                        withDoubleArray:(IOSDoubleArray *)enu;
 
+/*!
+ @brief Finds a point along a bearing from a given lon,lat geolocation using vincenty's distance formula
+ @param lon origin longitude in degrees
+ @param lat origin latitude in degrees
+ @param bearing azimuthal bearing in degrees
+ @param dist distance in meters
+ @param pt resulting point
+ @return the point along a bearing at a given distance in meters
+ */
 + (IOSDoubleArray *)pointFromLonLatBearingWithDouble:(jdouble)lon
                                           withDouble:(jdouble)lat
                                           withDouble:(jdouble)bearing
@@ -83,20 +162,34 @@
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilGeoProjectionUtils)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilGeoProjectionUtils, SEMIMAJOR_AXIS, jdouble)
+inline jdouble OrgApacheLuceneUtilGeoProjectionUtils_get_SEMIMAJOR_AXIS();
+#define OrgApacheLuceneUtilGeoProjectionUtils_SEMIMAJOR_AXIS 6378137.0
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilGeoProjectionUtils, SEMIMAJOR_AXIS, jdouble)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilGeoProjectionUtils, FLATTENING, jdouble)
+inline jdouble OrgApacheLuceneUtilGeoProjectionUtils_get_FLATTENING();
+#define OrgApacheLuceneUtilGeoProjectionUtils_FLATTENING 0.0033528106647474805
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilGeoProjectionUtils, FLATTENING, jdouble)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilGeoProjectionUtils, SEMIMINOR_AXIS, jdouble)
+inline jdouble OrgApacheLuceneUtilGeoProjectionUtils_get_SEMIMINOR_AXIS();
+#define OrgApacheLuceneUtilGeoProjectionUtils_SEMIMINOR_AXIS 6356752.314245179
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilGeoProjectionUtils, SEMIMINOR_AXIS, jdouble)
 
-FOUNDATION_EXPORT jdouble OrgApacheLuceneUtilGeoProjectionUtils_ECCENTRICITY_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilGeoProjectionUtils, ECCENTRICITY_, jdouble)
+inline jdouble OrgApacheLuceneUtilGeoProjectionUtils_get_ECCENTRICITY();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT jdouble OrgApacheLuceneUtilGeoProjectionUtils_ECCENTRICITY;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilGeoProjectionUtils, ECCENTRICITY, jdouble)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilGeoProjectionUtils, PI_OVER_2, jdouble)
+inline jdouble OrgApacheLuceneUtilGeoProjectionUtils_get_PI_OVER_2();
+#define OrgApacheLuceneUtilGeoProjectionUtils_PI_OVER_2 1.5707963267948966
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilGeoProjectionUtils, PI_OVER_2, jdouble)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilGeoProjectionUtils, SEMIMAJOR_AXIS2, jdouble)
+inline jdouble OrgApacheLuceneUtilGeoProjectionUtils_get_SEMIMAJOR_AXIS2();
+#define OrgApacheLuceneUtilGeoProjectionUtils_SEMIMAJOR_AXIS2 4.0680631590769E13
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilGeoProjectionUtils, SEMIMAJOR_AXIS2, jdouble)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilGeoProjectionUtils, SEMIMINOR_AXIS2, jdouble)
+inline jdouble OrgApacheLuceneUtilGeoProjectionUtils_get_SEMIMINOR_AXIS2();
+#define OrgApacheLuceneUtilGeoProjectionUtils_SEMIMINOR_AXIS2 4.0408299984661445E13
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilGeoProjectionUtils, SEMIMINOR_AXIS2, jdouble)
 
 FOUNDATION_EXPORT IOSDoubleArray *OrgApacheLuceneUtilGeoProjectionUtils_ecfToLLAWithDouble_withDouble_withDouble_withDoubleArray_(jdouble x, jdouble y, jdouble z, IOSDoubleArray *lla);
 
@@ -116,8 +209,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilGeoProjectionUtils_init(OrgApacheLucen
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilGeoProjectionUtils *new_OrgApacheLuceneUtilGeoProjectionUtils_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilGeoProjectionUtils *create_OrgApacheLuceneUtilGeoProjectionUtils_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilGeoProjectionUtils)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilGeoProjectionUtils_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilGeoProjectionUtils")

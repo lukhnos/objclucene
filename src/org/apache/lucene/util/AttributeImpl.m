@@ -42,6 +42,8 @@ __attribute__((unused)) static void OrgApacheLuceneUtilAttributeImpl_$1_initWith
 
 __attribute__((unused)) static OrgApacheLuceneUtilAttributeImpl_$1 *new_OrgApacheLuceneUtilAttributeImpl_$1_initWithJavaLangStringBuilder_withBoolean_(JavaLangStringBuilder *capture$0, jboolean capture$1) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneUtilAttributeImpl_$1 *create_OrgApacheLuceneUtilAttributeImpl_$1_initWithJavaLangStringBuilder_withBoolean_(JavaLangStringBuilder *capture$0, jboolean capture$1);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAttributeImpl_$1)
 
 @interface OrgApacheLuceneUtilAttributeImpl_$2 : NSObject < JavaSecurityPrivilegedAction > {
@@ -66,6 +68,8 @@ __attribute__((unused)) static void OrgApacheLuceneUtilAttributeImpl_$2_initWith
 
 __attribute__((unused)) static OrgApacheLuceneUtilAttributeImpl_$2 *new_OrgApacheLuceneUtilAttributeImpl_$2_initWithOrgApacheLuceneUtilAttributeImpl_withJavaLangReflectField_(OrgApacheLuceneUtilAttributeImpl *outer$, JavaLangReflectField *capture$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneUtilAttributeImpl_$2 *create_OrgApacheLuceneUtilAttributeImpl_$2_initWithOrgApacheLuceneUtilAttributeImpl_withJavaLangReflectField_(OrgApacheLuceneUtilAttributeImpl *outer$, JavaLangReflectField *capture$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAttributeImpl_$2)
 
 @implementation OrgApacheLuceneUtilAttributeImpl
@@ -76,8 +80,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAttributeImpl_$2)
 }
 
 - (NSString *)reflectAsStringWithBoolean:(jboolean)prependAttClass {
-  JavaLangStringBuilder *buffer = [new_JavaLangStringBuilder_init() autorelease];
-  [self reflectWithWithOrgApacheLuceneUtilAttributeReflector:[new_OrgApacheLuceneUtilAttributeImpl_$1_initWithJavaLangStringBuilder_withBoolean_(buffer, prependAttClass) autorelease]];
+  JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_init();
+  [self reflectWithWithOrgApacheLuceneUtilAttributeReflector:create_OrgApacheLuceneUtilAttributeImpl_$1_initWithJavaLangStringBuilder_withBoolean_(buffer, prependAttClass)];
   return [buffer description];
 }
 
@@ -85,7 +89,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAttributeImpl_$2)
   IOSClass *clazz = [self getClass];
   IOSObjectArray *interfaces = OrgApacheLuceneUtilAttributeSource_getAttributeInterfacesWithIOSClass_(clazz);
   if (((IOSObjectArray *) nil_chk(interfaces))->size_ != 1) {
-    @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(JreStrcat("$$", [clazz getName], @" implements more than one Attribute interface, the default reflectWith() implementation cannot handle this.")) autorelease];
+    @throw create_JavaLangUnsupportedOperationException_initWithNSString_(JreStrcat("$$", [clazz getName], @" implements more than one Attribute interface, the default reflectWith() implementation cannot handle this."));
   }
   IOSClass *interf = IOSObjectArray_Get(interfaces, 0);
   IOSObjectArray *fields = [clazz getDeclaredFields];
@@ -96,7 +100,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAttributeImpl_$2)
     while (b__ < e__) {
       JavaLangReflectField *f = *b__++;
       if (JavaLangReflectModifier_isStaticWithInt_([((JavaLangReflectField *) nil_chk(f)) getModifiers])) continue;
-      [((id<OrgApacheLuceneUtilAttributeReflector>) nil_chk(reflector)) reflectWithIOSClass:interf withNSString:[f getName] withId:JavaSecurityAccessController_doPrivilegedWithJavaSecurityPrivilegedAction_([new_OrgApacheLuceneUtilAttributeImpl_$2_initWithOrgApacheLuceneUtilAttributeImpl_withJavaLangReflectField_(self, f) autorelease])];
+      [((id<OrgApacheLuceneUtilAttributeReflector>) nil_chk(reflector)) reflectWithIOSClass:interf withNSString:[f getName] withId:JavaSecurityAccessController_doPrivilegedWithJavaSecurityPrivilegedAction_(create_OrgApacheLuceneUtilAttributeImpl_$2_initWithOrgApacheLuceneUtilAttributeImpl_withJavaLangReflectField_(self, f))];
     }
   }
 }
@@ -109,10 +113,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAttributeImpl_$2)
 - (OrgApacheLuceneUtilAttributeImpl *)clone {
   OrgApacheLuceneUtilAttributeImpl *clone = nil;
   @try {
-    clone = (OrgApacheLuceneUtilAttributeImpl *) check_class_cast([super clone], [OrgApacheLuceneUtilAttributeImpl class]);
+    clone = (OrgApacheLuceneUtilAttributeImpl *) cast_chk([super clone], [OrgApacheLuceneUtilAttributeImpl class]);
   }
   @catch (JavaLangCloneNotSupportedException *e) {
-    @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(e) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSException_(e);
   }
   return clone;
 }
@@ -135,7 +139,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "reflectWithWithOrgApacheLuceneUtilAttributeReflector:", "reflectWith", "V", 0x1, NULL, NULL },
     { "copyToWithOrgApacheLuceneUtilAttributeImpl:", "copyTo", "V", 0x401, NULL, NULL },
     { "clone", NULL, "Lorg.apache.lucene.util.AttributeImpl;", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "AttributeImpl", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneUtilAttributeImpl = { 2, "AttributeImpl", "org.apache.lucene.util", NULL, 0x401, 6, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilAttributeImpl;
@@ -176,7 +180,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAttributeImpl)
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "reflectWithIOSClass:withNSString:withId:", "reflect", "V", 0x1, NULL, NULL },
+    { "reflectWithIOSClass:withNSString:withId:", "reflect", "V", 0x1, NULL, "(Ljava/lang/Class<+Lorg/apache/lucene/util/Attribute;>;Ljava/lang/String;Ljava/lang/Object;)V" },
     { "initWithJavaLangStringBuilder:withBoolean:", "", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -197,9 +201,11 @@ void OrgApacheLuceneUtilAttributeImpl_$1_initWithJavaLangStringBuilder_withBoole
 }
 
 OrgApacheLuceneUtilAttributeImpl_$1 *new_OrgApacheLuceneUtilAttributeImpl_$1_initWithJavaLangStringBuilder_withBoolean_(JavaLangStringBuilder *capture$0, jboolean capture$1) {
-  OrgApacheLuceneUtilAttributeImpl_$1 *self = [OrgApacheLuceneUtilAttributeImpl_$1 alloc];
-  OrgApacheLuceneUtilAttributeImpl_$1_initWithJavaLangStringBuilder_withBoolean_(self, capture$0, capture$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAttributeImpl_$1, initWithJavaLangStringBuilder_withBoolean_, capture$0, capture$1)
+}
+
+OrgApacheLuceneUtilAttributeImpl_$1 *create_OrgApacheLuceneUtilAttributeImpl_$1_initWithJavaLangStringBuilder_withBoolean_(JavaLangStringBuilder *capture$0, jboolean capture$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAttributeImpl_$1, initWithJavaLangStringBuilder_withBoolean_, capture$0, capture$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAttributeImpl_$1)
@@ -212,7 +218,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAttributeImpl_$1)
     return [val$f_ getWithId:this$0_];
   }
   @catch (JavaLangIllegalAccessException *e) {
-    @throw [new_JavaLangRuntimeException_initWithNSString_withJavaLangThrowable_(@"Cannot access private fields.", e) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSString_withNSException_(@"Cannot access private fields.", e);
   }
 }
 
@@ -251,9 +257,11 @@ void OrgApacheLuceneUtilAttributeImpl_$2_initWithOrgApacheLuceneUtilAttributeImp
 }
 
 OrgApacheLuceneUtilAttributeImpl_$2 *new_OrgApacheLuceneUtilAttributeImpl_$2_initWithOrgApacheLuceneUtilAttributeImpl_withJavaLangReflectField_(OrgApacheLuceneUtilAttributeImpl *outer$, JavaLangReflectField *capture$0) {
-  OrgApacheLuceneUtilAttributeImpl_$2 *self = [OrgApacheLuceneUtilAttributeImpl_$2 alloc];
-  OrgApacheLuceneUtilAttributeImpl_$2_initWithOrgApacheLuceneUtilAttributeImpl_withJavaLangReflectField_(self, outer$, capture$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAttributeImpl_$2, initWithOrgApacheLuceneUtilAttributeImpl_withJavaLangReflectField_, outer$, capture$0)
+}
+
+OrgApacheLuceneUtilAttributeImpl_$2 *create_OrgApacheLuceneUtilAttributeImpl_$2_initWithOrgApacheLuceneUtilAttributeImpl_withJavaLangReflectField_(OrgApacheLuceneUtilAttributeImpl *outer$, JavaLangReflectField *capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAttributeImpl_$2, initWithOrgApacheLuceneUtilAttributeImpl_withJavaLangReflectField_, outer$, capture$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAttributeImpl_$2)

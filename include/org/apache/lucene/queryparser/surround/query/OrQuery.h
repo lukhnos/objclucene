@@ -5,23 +5,23 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserSurroundQueryOrQuery_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserSurroundQueryOrQuery_RESTRICT
-#define OrgApacheLuceneQueryparserSurroundQueryOrQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryOrQuery")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserSurroundQueryOrQuery
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryOrQuery 0
 #else
-#define OrgApacheLuceneQueryparserSurroundQueryOrQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryOrQuery 1
 #endif
-#undef OrgApacheLuceneQueryparserSurroundQueryOrQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserSurroundQueryOrQuery
 
-#if !defined (_OrgApacheLuceneQueryparserSurroundQueryOrQuery_) && (OrgApacheLuceneQueryparserSurroundQueryOrQuery_INCLUDE_ALL || OrgApacheLuceneQueryparserSurroundQueryOrQuery_INCLUDE)
-#define _OrgApacheLuceneQueryparserSurroundQueryOrQuery_
+#if !defined (OrgApacheLuceneQueryparserSurroundQueryOrQuery_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryOrQuery || defined(INCLUDE_OrgApacheLuceneQueryparserSurroundQueryOrQuery))
+#define OrgApacheLuceneQueryparserSurroundQueryOrQuery_
 
-#define OrgApacheLuceneQueryparserSurroundQueryComposedQuery_RESTRICT 1
-#define OrgApacheLuceneQueryparserSurroundQueryComposedQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserSurroundQueryComposedQuery 1
+#define INCLUDE_OrgApacheLuceneQueryparserSurroundQueryComposedQuery 1
 #include "org/apache/lucene/queryparser/surround/query/ComposedQuery.h"
 
-#define OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_RESTRICT 1
-#define OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery 1
+#define INCLUDE_OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery 1
 #include "org/apache/lucene/queryparser/surround/query/DistanceSubQuery.h"
 
 @class OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory;
@@ -29,6 +29,9 @@
 @class OrgApacheLuceneSearchQuery;
 @protocol JavaUtilList;
 
+/*!
+ @brief Factory for disjunctions
+ */
 @interface OrgApacheLuceneQueryparserSurroundQueryOrQuery : OrgApacheLuceneQueryparserSurroundQueryComposedQuery < OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery >
 
 #pragma mark Public
@@ -52,8 +55,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQueryOrQuery_initWithJa
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQueryOrQuery *new_OrgApacheLuceneQueryparserSurroundQueryOrQuery_initWithJavaUtilList_withBoolean_withNSString_(id<JavaUtilList> queries, jboolean infix, NSString *opName) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQueryOrQuery *create_OrgApacheLuceneQueryparserSurroundQueryOrQuery_initWithJavaUtilList_withBoolean_withNSString_(id<JavaUtilList> queries, jboolean infix, NSString *opName);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQueryOrQuery)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserSurroundQueryOrQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryOrQuery")

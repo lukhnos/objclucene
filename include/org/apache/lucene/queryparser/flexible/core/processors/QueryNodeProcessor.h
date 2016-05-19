@@ -5,26 +5,62 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor_) && (OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor_
+#if !defined (OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor))
+#define OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor_
 
 @class OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 
+/*!
+ @brief A <code>QueryNodeProcessor</code> is an interface for classes that process a
+ <code>QueryNode</code> tree.
+ <p>
+ The implementor of this class should perform some operation on a query node
+ tree and return the same or another query node tree.
+ <p>
+ It also may carry a <code>QueryConfigHandler</code> object that contains
+ configuration about the query represented by the query tree or the
+ collection/index where it's intended to be executed.
+ <p>
+ In case there is any <code>QueryConfigHandler</code> associated to the query tree
+ to be processed, it should be set using
+ <code>QueryNodeProcessor.setQueryConfigHandler(QueryConfigHandler)</code> before
+ <code>QueryNodeProcessor.process(QueryNode)</code> is invoked.
+ - seealso: QueryNode
+ - seealso: QueryNodeProcessor
+ - seealso: QueryConfigHandler
+ */
 @protocol OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor < NSObject, JavaObject >
 
+/*!
+ @brief Processes a query node tree.
+ It may return the same or another query tree.
+ I should never return <code>null</code>.
+ @param queryTree
+ tree root node
+ @return the processed query tree
+ */
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryTree;
 
+/*!
+ @brief Sets the <code>QueryConfigHandler</code> associated to the query tree.
+ */
 - (void)setQueryConfigHandlerWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *)queryConfigHandler;
 
+/*!
+ @brief Returns the <code>QueryConfigHandler</code> associated to the query tree if any,
+ otherwise it returns <code>null</code>
+ @return the <code>QueryConfigHandler</code> associated to the query tree if any,
+ otherwise it returns <code>null</code>
+ */
 - (OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *)getQueryConfigHandler;
 
 @end
@@ -35,4 +71,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQuery
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor")

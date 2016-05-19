@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionBoostedQuery_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionBoostedQuery_RESTRICT
-#define OrgApacheLuceneQueriesFunctionBoostedQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionBoostedQuery")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionBoostedQuery
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionBoostedQuery 0
 #else
-#define OrgApacheLuceneQueriesFunctionBoostedQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionBoostedQuery 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionBoostedQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionBoostedQuery
 
-#if !defined (_OrgApacheLuceneQueriesFunctionBoostedQuery_) && (OrgApacheLuceneQueriesFunctionBoostedQuery_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionBoostedQuery_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionBoostedQuery_
+#if !defined (OrgApacheLuceneQueriesFunctionBoostedQuery_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionBoostedQuery || defined(INCLUDE_OrgApacheLuceneQueriesFunctionBoostedQuery))
+#define OrgApacheLuceneQueriesFunctionBoostedQuery_
 
-#define OrgApacheLuceneSearchQuery_RESTRICT 1
-#define OrgApacheLuceneSearchQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchQuery 1
+#define INCLUDE_OrgApacheLuceneSearchQuery 1
 #include "org/apache/lucene/search/Query.h"
 
 @class OrgApacheLuceneIndexIndexReader;
@@ -25,6 +25,9 @@
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchWeight;
 
+/*!
+ @brief Query that is boosted by a ValueSource
+ */
 @interface OrgApacheLuceneQueriesFunctionBoostedQuery : OrgApacheLuceneSearchQuery
 
 #pragma mark Public
@@ -55,8 +58,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionBoostedQuery_initWithOrgApa
 
 FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionBoostedQuery *new_OrgApacheLuceneQueriesFunctionBoostedQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneSearchQuery *subQuery, OrgApacheLuceneQueriesFunctionValueSource *boostVal) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionBoostedQuery *create_OrgApacheLuceneQueriesFunctionBoostedQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneSearchQuery *subQuery, OrgApacheLuceneQueriesFunctionValueSource *boostVal);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionBoostedQuery)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionBoostedQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionBoostedQuery")

@@ -5,23 +5,32 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisGlGalicianStemFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisGlGalicianStemFilter_RESTRICT
-#define OrgApacheLuceneAnalysisGlGalicianStemFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisGlGalicianStemFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisGlGalicianStemFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisGlGalicianStemFilter 0
 #else
-#define OrgApacheLuceneAnalysisGlGalicianStemFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisGlGalicianStemFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisGlGalicianStemFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisGlGalicianStemFilter
 
-#if !defined (_OrgApacheLuceneAnalysisGlGalicianStemFilter_) && (OrgApacheLuceneAnalysisGlGalicianStemFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisGlGalicianStemFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisGlGalicianStemFilter_
+#if !defined (OrgApacheLuceneAnalysisGlGalicianStemFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisGlGalicianStemFilter || defined(INCLUDE_OrgApacheLuceneAnalysisGlGalicianStemFilter))
+#define OrgApacheLuceneAnalysisGlGalicianStemFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief A <code>TokenFilter</code> that applies <code>GalicianStemmer</code> to stem 
+ Galician words.
+ <p>
+ To prevent terms from being stemmed use an instance of
+ <code>SetKeywordMarkerFilter</code> or a custom <code>TokenFilter</code> that sets
+ the <code>KeywordAttribute</code> before this <code>TokenStream</code>.
+ </p>
+ */
 @interface OrgApacheLuceneAnalysisGlGalicianStemFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
@@ -38,8 +47,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisGlGalicianStemFilter_initWithOrgAp
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisGlGalicianStemFilter *new_OrgApacheLuceneAnalysisGlGalicianStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisGlGalicianStemFilter *create_OrgApacheLuceneAnalysisGlGalicianStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisGlGalicianStemFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisGlGalicianStemFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisGlGalicianStemFilter")

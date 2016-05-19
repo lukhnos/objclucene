@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionValuesourceTFValueSource_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionValuesourceTFValueSource_RESTRICT
-#define OrgApacheLuceneQueriesFunctionValuesourceTFValueSource_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceTFValueSource")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceTFValueSource
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceTFValueSource 0
 #else
-#define OrgApacheLuceneQueriesFunctionValuesourceTFValueSource_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceTFValueSource 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionValuesourceTFValueSource_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceTFValueSource
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValuesourceTFValueSource_) && (OrgApacheLuceneQueriesFunctionValuesourceTFValueSource_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValuesourceTFValueSource_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValuesourceTFValueSource_
+#if !defined (OrgApacheLuceneQueriesFunctionValuesourceTFValueSource_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceTFValueSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceTFValueSource))
+#define OrgApacheLuceneQueriesFunctionValuesourceTFValueSource_
 
-#define OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource 1
 #include "org/apache/lucene/queries/function/valuesource/TermFreqValueSource.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
@@ -25,6 +25,14 @@
 @class OrgApacheLuceneUtilBytesRef;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Function that returns <code>TFIDFSimilarity.tf(float)</code>
+ for every document.
+ <p>
+ Note that the configured Similarity for the field must be
+ a subclass of <code>TFIDFSimilarity</code>
+  
+ */
 @interface OrgApacheLuceneQueriesFunctionValuesourceTFValueSource : OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource
 
 #pragma mark Public
@@ -47,8 +55,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceTFValueSource_in
 
 FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceTFValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceTFValueSource_initWithNSString_withNSString_withNSString_withOrgApacheLuceneUtilBytesRef_(NSString *field, NSString *val, NSString *indexedField, OrgApacheLuceneUtilBytesRef *indexedBytes) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceTFValueSource *create_OrgApacheLuceneQueriesFunctionValuesourceTFValueSource_initWithNSString_withNSString_withNSString_withOrgApacheLuceneUtilBytesRef_(NSString *field, NSString *val, NSString *indexedField, OrgApacheLuceneUtilBytesRef *indexedBytes);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceTFValueSource)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionValuesourceTFValueSource_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceTFValueSource")

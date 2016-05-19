@@ -16,14 +16,14 @@
 @implementation OrgApacheLuceneSearchMatchNoDocsQuery
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader {
-  OrgApacheLuceneSearchBooleanQuery_Builder *builder = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
+  OrgApacheLuceneSearchBooleanQuery_Builder *builder = create_OrgApacheLuceneSearchBooleanQuery_Builder_init();
   OrgApacheLuceneSearchQuery *rewritten = [builder build];
   [((OrgApacheLuceneSearchQuery *) nil_chk(rewritten)) setBoostWithFloat:[self getBoost]];
   return rewritten;
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
-  JavaLangStringBuilder *buffer = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_init();
   [buffer appendWithNSString:@""];
   [buffer appendWithNSString:OrgApacheLuceneUtilToStringUtils_boostWithFloat_([self getBoost])];
   return [buffer description];
@@ -40,7 +40,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   static const J2ObjcMethodInfo methods[] = {
     { "rewriteWithOrgApacheLuceneIndexIndexReader:", "rewrite", "Lorg.apache.lucene.search.Query;", 0x1, "Ljava.io.IOException;", NULL },
     { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "MatchNoDocsQuery", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneSearchMatchNoDocsQuery = { 2, "MatchNoDocsQuery", "org.apache.lucene.search", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchMatchNoDocsQuery;
@@ -53,9 +53,11 @@ void OrgApacheLuceneSearchMatchNoDocsQuery_init(OrgApacheLuceneSearchMatchNoDocs
 }
 
 OrgApacheLuceneSearchMatchNoDocsQuery *new_OrgApacheLuceneSearchMatchNoDocsQuery_init() {
-  OrgApacheLuceneSearchMatchNoDocsQuery *self = [OrgApacheLuceneSearchMatchNoDocsQuery alloc];
-  OrgApacheLuceneSearchMatchNoDocsQuery_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchMatchNoDocsQuery, init)
+}
+
+OrgApacheLuceneSearchMatchNoDocsQuery *create_OrgApacheLuceneSearchMatchNoDocsQuery_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchMatchNoDocsQuery, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchMatchNoDocsQuery)

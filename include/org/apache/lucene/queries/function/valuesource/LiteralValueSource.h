@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_RESTRICT
-#define OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource 0
 #else
-#define OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_) && (OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_
+#if !defined (OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource))
+#define OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_
 
-#define OrgApacheLuceneQueriesFunctionValueSource_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionValueSource_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionValueSource 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionValueSource 1
 #include "org/apache/lucene/queries/function/ValueSource.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
@@ -25,11 +25,16 @@
 @class OrgApacheLuceneUtilBytesRef;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Pass a the field value through as a String, no matter the type // Q: doesn't this mean it's a "string"?
+ */
 @interface OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource : OrgApacheLuceneQueriesFunctionValueSource {
  @public
   NSString *string_;
   OrgApacheLuceneUtilBytesRef *bytesRef_;
 }
+
++ (jint)hash_;
 
 #pragma mark Public
 
@@ -39,6 +44,9 @@
 
 - (jboolean)isEqual:(id)o;
 
+/*!
+ @brief returns the literal value
+ */
 - (NSString *)getValue;
 
 - (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
@@ -53,15 +61,19 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource, string_, NSString *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource, bytesRef_, OrgApacheLuceneUtilBytesRef *)
 
-FOUNDATION_EXPORT jint OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_hash__;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource, hash__, jint)
+inline jint OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_get_hash();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT jint OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_hash;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource, hash, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_initWithNSString_(OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource *self, NSString *string);
 
 FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_initWithNSString_(NSString *string) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource *create_OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_initWithNSString_(NSString *string);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource")

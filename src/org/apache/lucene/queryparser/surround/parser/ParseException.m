@@ -13,17 +13,30 @@
 #include "org/apache/lucene/queryparser/surround/parser/ParseException.h"
 #include "org/apache/lucene/queryparser/surround/parser/Token.h"
 
-#define OrgApacheLuceneQueryparserSurroundParserParseException_serialVersionUID 1LL
-
 @interface OrgApacheLuceneQueryparserSurroundParserParseException ()
 
+/*!
+ @brief It uses "currentToken" and "expectedTokenSequences" to generate a parse
+ error message and returns it.
+ If this object has been created
+ due to a parse error, and you do not catch it (it gets thrown
+ from the parser) the correct error message
+ gets displayed.
+ */
 + (NSString *)initialiseWithOrgApacheLuceneQueryparserSurroundParserToken:(OrgApacheLuceneQueryparserSurroundParserToken *)currentToken
                                                             withIntArray2:(IOSObjectArray *)expectedTokenSequences
                                                         withNSStringArray:(IOSObjectArray *)tokenImage OBJC_METHOD_FAMILY_NONE;
 
 @end
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserSurroundParserParseException, serialVersionUID, jlong)
+/*!
+ @brief The version identifier for this Serializable class.
+ Increment only if the <i>serialized</i> form of the
+ class changes.
+ */
+inline jlong OrgApacheLuceneQueryparserSurroundParserParseException_get_serialVersionUID();
+#define OrgApacheLuceneQueryparserSurroundParserParseException_serialVersionUID 1LL
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserSurroundParserParseException, serialVersionUID, jlong)
 
 __attribute__((unused)) static NSString *OrgApacheLuceneQueryparserSurroundParserParseException_initialiseWithOrgApacheLuceneQueryparserSurroundParserToken_withIntArray2_withNSStringArray_(OrgApacheLuceneQueryparserSurroundParserToken *currentToken, IOSObjectArray *expectedTokenSequences, IOSObjectArray *tokenImage);
 
@@ -96,9 +109,11 @@ void OrgApacheLuceneQueryparserSurroundParserParseException_initWithOrgApacheLuc
 }
 
 OrgApacheLuceneQueryparserSurroundParserParseException *new_OrgApacheLuceneQueryparserSurroundParserParseException_initWithOrgApacheLuceneQueryparserSurroundParserToken_withIntArray2_withNSStringArray_(OrgApacheLuceneQueryparserSurroundParserToken *currentTokenVal, IOSObjectArray *expectedTokenSequencesVal, IOSObjectArray *tokenImageVal) {
-  OrgApacheLuceneQueryparserSurroundParserParseException *self = [OrgApacheLuceneQueryparserSurroundParserParseException alloc];
-  OrgApacheLuceneQueryparserSurroundParserParseException_initWithOrgApacheLuceneQueryparserSurroundParserToken_withIntArray2_withNSStringArray_(self, currentTokenVal, expectedTokenSequencesVal, tokenImageVal);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserSurroundParserParseException, initWithOrgApacheLuceneQueryparserSurroundParserToken_withIntArray2_withNSStringArray_, currentTokenVal, expectedTokenSequencesVal, tokenImageVal)
+}
+
+OrgApacheLuceneQueryparserSurroundParserParseException *create_OrgApacheLuceneQueryparserSurroundParserParseException_initWithOrgApacheLuceneQueryparserSurroundParserToken_withIntArray2_withNSStringArray_(OrgApacheLuceneQueryparserSurroundParserToken *currentTokenVal, IOSObjectArray *expectedTokenSequencesVal, IOSObjectArray *tokenImageVal) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserSurroundParserParseException, initWithOrgApacheLuceneQueryparserSurroundParserToken_withIntArray2_withNSStringArray_, currentTokenVal, expectedTokenSequencesVal, tokenImageVal)
 }
 
 void OrgApacheLuceneQueryparserSurroundParserParseException_init(OrgApacheLuceneQueryparserSurroundParserParseException *self) {
@@ -107,9 +122,11 @@ void OrgApacheLuceneQueryparserSurroundParserParseException_init(OrgApacheLucene
 }
 
 OrgApacheLuceneQueryparserSurroundParserParseException *new_OrgApacheLuceneQueryparserSurroundParserParseException_init() {
-  OrgApacheLuceneQueryparserSurroundParserParseException *self = [OrgApacheLuceneQueryparserSurroundParserParseException alloc];
-  OrgApacheLuceneQueryparserSurroundParserParseException_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserSurroundParserParseException, init)
+}
+
+OrgApacheLuceneQueryparserSurroundParserParseException *create_OrgApacheLuceneQueryparserSurroundParserParseException_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserSurroundParserParseException, init)
 }
 
 void OrgApacheLuceneQueryparserSurroundParserParseException_initWithNSString_(OrgApacheLuceneQueryparserSurroundParserParseException *self, NSString *message) {
@@ -118,15 +135,17 @@ void OrgApacheLuceneQueryparserSurroundParserParseException_initWithNSString_(Or
 }
 
 OrgApacheLuceneQueryparserSurroundParserParseException *new_OrgApacheLuceneQueryparserSurroundParserParseException_initWithNSString_(NSString *message) {
-  OrgApacheLuceneQueryparserSurroundParserParseException *self = [OrgApacheLuceneQueryparserSurroundParserParseException alloc];
-  OrgApacheLuceneQueryparserSurroundParserParseException_initWithNSString_(self, message);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserSurroundParserParseException, initWithNSString_, message)
+}
+
+OrgApacheLuceneQueryparserSurroundParserParseException *create_OrgApacheLuceneQueryparserSurroundParserParseException_initWithNSString_(NSString *message) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserSurroundParserParseException, initWithNSString_, message)
 }
 
 NSString *OrgApacheLuceneQueryparserSurroundParserParseException_initialiseWithOrgApacheLuceneQueryparserSurroundParserToken_withIntArray2_withNSStringArray_(OrgApacheLuceneQueryparserSurroundParserToken *currentToken, IOSObjectArray *expectedTokenSequences, IOSObjectArray *tokenImage) {
   OrgApacheLuceneQueryparserSurroundParserParseException_initialize();
   NSString *eol = JavaLangSystem_getPropertyWithNSString_withNSString_(@"line.separator", @"\n");
-  JavaLangStringBuilder *expected = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *expected = create_JavaLangStringBuilder_init();
   jint maxSize = 0;
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(expectedTokenSequences))->size_; i++) {
     if (maxSize < ((IOSIntArray *) nil_chk(IOSObjectArray_Get(expectedTokenSequences, i)))->size_) {
@@ -168,7 +187,7 @@ NSString *OrgApacheLuceneQueryparserSurroundParserParseException_initialiseWithO
 
 NSString *OrgApacheLuceneQueryparserSurroundParserParseException_add_escapesWithNSString_(NSString *str) {
   OrgApacheLuceneQueryparserSurroundParserParseException_initialize();
-  JavaLangStringBuilder *retval = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *retval = create_JavaLangStringBuilder_init();
   jchar ch;
   for (jint i = 0; i < ((jint) [((NSString *) nil_chk(str)) length]); i++) {
     switch ([str charAtWithInt:i]) {

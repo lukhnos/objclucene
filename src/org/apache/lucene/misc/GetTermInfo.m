@@ -56,7 +56,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "mainWithNSStringArray:", "main", "V", 0x9, "Ljava.lang.Exception;", NULL },
     { "getTermInfoWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexTerm:", "getTermInfo", "V", 0x9, "Ljava.lang.Exception;", NULL },
     { "usage", NULL, "V", 0xa, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "GetTermInfo", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneMiscGetTermInfo = { 2, "GetTermInfo", "org.apache.lucene.misc", NULL, 0x1, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneMiscGetTermInfo;
@@ -78,18 +78,18 @@ void OrgApacheLuceneMiscGetTermInfo_mainWithNSStringArray_(IOSObjectArray *args)
     OrgApacheLuceneMiscGetTermInfo_usage();
     JavaLangSystem_exitWithInt_(1);
   }
-  OrgApacheLuceneMiscGetTermInfo_getTermInfoWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexTerm_(dir, [new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(field, inputStr) autorelease]);
+  OrgApacheLuceneMiscGetTermInfo_getTermInfoWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexTerm_(dir, create_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(field, inputStr));
 }
 
 void OrgApacheLuceneMiscGetTermInfo_getTermInfoWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexTerm_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexTerm *term) {
   OrgApacheLuceneMiscGetTermInfo_initialize();
   OrgApacheLuceneIndexIndexReader *reader = OrgApacheLuceneIndexDirectoryReader_openWithOrgApacheLuceneStoreDirectory_(dir);
-  [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out_))) printfWithJavaUtilLocale:JreLoadStatic(JavaUtilLocale, ROOT_) withNSString:@"%s:%s \t totalTF = %,d \t doc freq = %,d \n" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ [((OrgApacheLuceneIndexTerm *) nil_chk(term)) field], [term text], JavaLangLong_valueOfWithLong_([((OrgApacheLuceneIndexIndexReader *) nil_chk(reader)) totalTermFreqWithOrgApacheLuceneIndexTerm:term]), JavaLangInteger_valueOfWithInt_([reader docFreqWithOrgApacheLuceneIndexTerm:term]) } count:4 type:NSObject_class_()]];
+  [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out))) printfWithJavaUtilLocale:JreLoadStatic(JavaUtilLocale, ROOT) withNSString:@"%s:%s \t totalTF = %,d \t doc freq = %,d \n" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ [((OrgApacheLuceneIndexTerm *) nil_chk(term)) field], [term text], JavaLangLong_valueOfWithLong_([((OrgApacheLuceneIndexIndexReader *) nil_chk(reader)) totalTermFreqWithOrgApacheLuceneIndexTerm:term]), JavaLangInteger_valueOfWithInt_([reader docFreqWithOrgApacheLuceneIndexTerm:term]) } count:4 type:NSObject_class_()]];
 }
 
 void OrgApacheLuceneMiscGetTermInfo_usage() {
   OrgApacheLuceneMiscGetTermInfo_initialize();
-  [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out_))) printlnWithNSString:JreStrcat("$$$", @"\n\nusage:\n\tjava ", [OrgApacheLuceneMiscGetTermInfo_class_() getName], @" <index dir> field term \n\n")];
+  [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out))) printlnWithNSString:JreStrcat("$$$", @"\n\nusage:\n\tjava ", [OrgApacheLuceneMiscGetTermInfo_class_() getName], @" <index dir> field term \n\n")];
 }
 
 void OrgApacheLuceneMiscGetTermInfo_init(OrgApacheLuceneMiscGetTermInfo *self) {
@@ -97,9 +97,11 @@ void OrgApacheLuceneMiscGetTermInfo_init(OrgApacheLuceneMiscGetTermInfo *self) {
 }
 
 OrgApacheLuceneMiscGetTermInfo *new_OrgApacheLuceneMiscGetTermInfo_init() {
-  OrgApacheLuceneMiscGetTermInfo *self = [OrgApacheLuceneMiscGetTermInfo alloc];
-  OrgApacheLuceneMiscGetTermInfo_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneMiscGetTermInfo, init)
+}
+
+OrgApacheLuceneMiscGetTermInfo *create_OrgApacheLuceneMiscGetTermInfo_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneMiscGetTermInfo, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneMiscGetTermInfo)

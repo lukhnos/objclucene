@@ -5,21 +5,24 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream_RESTRICT
-#define OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream 0
 #else
-#define OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream 1
 #endif
-#undef OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream
 
-#if !defined (_OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream_) && (OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream_INCLUDE_ALL || OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream_INCLUDE)
-#define _OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream_
+#if !defined (OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream))
+#define OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream_
 
-#define OrgApacheLuceneAnalysisTokenStream_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenStream_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenStream 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenStream 1
 #include "org/apache/lucene/analysis/TokenStream.h"
 
+/*!
+ @brief An always exhausted token stream.
+ */
 @interface OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream : OrgApacheLuceneAnalysisTokenStream
 
 #pragma mark Public
@@ -36,8 +39,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream_init
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream *new_OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream *create_OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream")

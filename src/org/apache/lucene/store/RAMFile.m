@@ -94,8 +94,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (jboolean)isEqual:(id)obj {
   if (self == obj) return true;
   if (obj == nil) return false;
-  if ([self getClass] != [nil_chk(obj) getClass]) return false;
-  OrgApacheLuceneStoreRAMFile *other = (OrgApacheLuceneStoreRAMFile *) check_class_cast(obj, [OrgApacheLuceneStoreRAMFile class]);
+  if ([self getClass] != (id) [obj getClass]) return false;
+  OrgApacheLuceneStoreRAMFile *other = (OrgApacheLuceneStoreRAMFile *) cast_chk(obj, [OrgApacheLuceneStoreRAMFile class]);
   if (length_ != other->length_) return false;
   if ([((JavaUtilArrayList *) nil_chk(buffers_)) size] != [other->buffers_ size]) {
     return false;
@@ -125,13 +125,13 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "numBuffers", NULL, "I", 0x34, NULL, NULL },
     { "newBufferWithInt:", "newBuffer", "[B", 0x4, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x21, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "buffers_", NULL, 0x14, "Ljava.util.ArrayList;", NULL, "Ljava/util/ArrayList<L[B;>;", .constantValue.asLong = 0 },
+    { "buffers_", NULL, 0x14, "Ljava.util.ArrayList;", NULL, "Ljava/util/ArrayList<[LB;>;", .constantValue.asLong = 0 },
     { "length_", NULL, 0x0, "J", NULL, NULL, .constantValue.asLong = 0 },
     { "directory_", NULL, 0x0, "Lorg.apache.lucene.store.RAMDirectory;", NULL, NULL, .constantValue.asLong = 0 },
     { "sizeInBytes_", NULL, 0x4, "J", NULL, NULL, .constantValue.asLong = 0 },
@@ -148,9 +148,11 @@ void OrgApacheLuceneStoreRAMFile_init(OrgApacheLuceneStoreRAMFile *self) {
 }
 
 OrgApacheLuceneStoreRAMFile *new_OrgApacheLuceneStoreRAMFile_init() {
-  OrgApacheLuceneStoreRAMFile *self = [OrgApacheLuceneStoreRAMFile alloc];
-  OrgApacheLuceneStoreRAMFile_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreRAMFile, init)
+}
+
+OrgApacheLuceneStoreRAMFile *create_OrgApacheLuceneStoreRAMFile_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreRAMFile, init)
 }
 
 void OrgApacheLuceneStoreRAMFile_initWithOrgApacheLuceneStoreRAMDirectory_(OrgApacheLuceneStoreRAMFile *self, OrgApacheLuceneStoreRAMDirectory *directory) {
@@ -160,9 +162,11 @@ void OrgApacheLuceneStoreRAMFile_initWithOrgApacheLuceneStoreRAMDirectory_(OrgAp
 }
 
 OrgApacheLuceneStoreRAMFile *new_OrgApacheLuceneStoreRAMFile_initWithOrgApacheLuceneStoreRAMDirectory_(OrgApacheLuceneStoreRAMDirectory *directory) {
-  OrgApacheLuceneStoreRAMFile *self = [OrgApacheLuceneStoreRAMFile alloc];
-  OrgApacheLuceneStoreRAMFile_initWithOrgApacheLuceneStoreRAMDirectory_(self, directory);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreRAMFile, initWithOrgApacheLuceneStoreRAMDirectory_, directory)
+}
+
+OrgApacheLuceneStoreRAMFile *create_OrgApacheLuceneStoreRAMFile_initWithOrgApacheLuceneStoreRAMDirectory_(OrgApacheLuceneStoreRAMDirectory *directory) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreRAMFile, initWithOrgApacheLuceneStoreRAMDirectory_, directory)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreRAMFile)

@@ -5,24 +5,32 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexNoDeletionPolicy_INCLUDE_ALL")
-#if OrgApacheLuceneIndexNoDeletionPolicy_RESTRICT
-#define OrgApacheLuceneIndexNoDeletionPolicy_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexNoDeletionPolicy")
+#ifdef RESTRICT_OrgApacheLuceneIndexNoDeletionPolicy
+#define INCLUDE_ALL_OrgApacheLuceneIndexNoDeletionPolicy 0
 #else
-#define OrgApacheLuceneIndexNoDeletionPolicy_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexNoDeletionPolicy 1
 #endif
-#undef OrgApacheLuceneIndexNoDeletionPolicy_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexNoDeletionPolicy
 
-#if !defined (_OrgApacheLuceneIndexNoDeletionPolicy_) && (OrgApacheLuceneIndexNoDeletionPolicy_INCLUDE_ALL || OrgApacheLuceneIndexNoDeletionPolicy_INCLUDE)
-#define _OrgApacheLuceneIndexNoDeletionPolicy_
+#if !defined (OrgApacheLuceneIndexNoDeletionPolicy_) && (INCLUDE_ALL_OrgApacheLuceneIndexNoDeletionPolicy || defined(INCLUDE_OrgApacheLuceneIndexNoDeletionPolicy))
+#define OrgApacheLuceneIndexNoDeletionPolicy_
 
-#define OrgApacheLuceneIndexIndexDeletionPolicy_RESTRICT 1
-#define OrgApacheLuceneIndexIndexDeletionPolicy_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexIndexDeletionPolicy 1
+#define INCLUDE_OrgApacheLuceneIndexIndexDeletionPolicy 1
 #include "org/apache/lucene/index/IndexDeletionPolicy.h"
 
 @protocol JavaUtilList;
 
+/*!
+ @brief An <code>IndexDeletionPolicy</code> which keeps all index commits around, never
+ deleting them.
+ This class is a singleton and can be accessed by referencing
+ <code>INSTANCE</code>.
+ */
 @interface OrgApacheLuceneIndexNoDeletionPolicy : OrgApacheLuceneIndexIndexDeletionPolicy
+
++ (OrgApacheLuceneIndexIndexDeletionPolicy *)INSTANCE;
 
 #pragma mark Public
 
@@ -36,11 +44,16 @@
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneIndexNoDeletionPolicy)
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexIndexDeletionPolicy *OrgApacheLuceneIndexNoDeletionPolicy_INSTANCE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexNoDeletionPolicy, INSTANCE_, OrgApacheLuceneIndexIndexDeletionPolicy *)
+/*!
+ @brief The single instance of this class.
+ */
+inline OrgApacheLuceneIndexIndexDeletionPolicy *OrgApacheLuceneIndexNoDeletionPolicy_get_INSTANCE();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT OrgApacheLuceneIndexIndexDeletionPolicy *OrgApacheLuceneIndexNoDeletionPolicy_INSTANCE;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexNoDeletionPolicy, INSTANCE, OrgApacheLuceneIndexIndexDeletionPolicy *)
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexNoDeletionPolicy)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexNoDeletionPolicy_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexNoDeletionPolicy")

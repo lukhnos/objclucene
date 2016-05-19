@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter_RESTRICT
-#define OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter 0
 #else
-#define OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter
 
-#if !defined (_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter_) && (OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter_
+#if !defined (OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter || defined(INCLUDE_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter))
+#define OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter_
 
-#define OrgApacheLuceneAnalysisCharfilterBaseCharFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisCharfilterBaseCharFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisCharfilterBaseCharFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisCharfilterBaseCharFilter 1
 #include "org/apache/lucene/analysis/charfilter/BaseCharFilter.h"
 
 @class IOSCharArray;
@@ -25,6 +25,24 @@
 @class JavaUtilRegexPattern;
 @protocol JavaLangCharSequence;
 
+/*!
+ @brief CharFilter that uses a regular expression for the target of replace string.
+ The pattern match will be done in each "block" in char stream.
+ <p>
+ ex1) source="aa&nbsp;&nbsp;bb&nbsp;aa&nbsp;bb", pattern="(aa)\\s+(bb)" replacement="$1#$2"<br>
+ output="aa#bb&nbsp;aa#bb"
+ </p>
+ NOTE: If you produce a phrase that has different length to source string
+ and the field is used for highlighting for a term of the phrase, you will
+ face a trouble.
+ <p>
+ ex2) source="aa123bb", pattern="(aa)\\d+(bb)" replacement="$1&nbsp;$2"<br>
+ output="aa&nbsp;bb"<br>
+ and you want to search bb and highlight it, you will get<br>
+ highlight snippet="aa1&lt;em&gt;23bb&lt;/em&gt;"
+ </p>
+ @since Solr 1.5
+ */
 @interface OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter : OrgApacheLuceneAnalysisCharfilterBaseCharFilter
 
 #pragma mark Public
@@ -45,6 +63,9 @@
 
 #pragma mark Package-Private
 
+/*!
+ @brief Replace pattern in input and mark correction offsets.
+ */
 - (id<JavaLangCharSequence>)processPatternWithJavaLangCharSequence:(id<JavaLangCharSequence>)input;
 
 @end
@@ -55,8 +76,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter_in
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter *new_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter_initWithJavaUtilRegexPattern_withNSString_withJavaIoReader_(JavaUtilRegexPattern *pattern, NSString *replacement, JavaIoReader *inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter *create_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter_initWithJavaUtilRegexPattern_withNSString_withJavaIoReader_(JavaUtilRegexPattern *pattern, NSString *replacement, JavaIoReader *inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter")

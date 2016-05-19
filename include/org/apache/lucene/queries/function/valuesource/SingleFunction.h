@@ -5,24 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionValuesourceSingleFunction_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionValuesourceSingleFunction_RESTRICT
-#define OrgApacheLuceneQueriesFunctionValuesourceSingleFunction_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceSingleFunction")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceSingleFunction
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceSingleFunction 0
 #else
-#define OrgApacheLuceneQueriesFunctionValuesourceSingleFunction_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceSingleFunction 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionValuesourceSingleFunction_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceSingleFunction
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValuesourceSingleFunction_) && (OrgApacheLuceneQueriesFunctionValuesourceSingleFunction_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValuesourceSingleFunction_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValuesourceSingleFunction_
+#if !defined (OrgApacheLuceneQueriesFunctionValuesourceSingleFunction_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceSingleFunction || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceSingleFunction))
+#define OrgApacheLuceneQueriesFunctionValuesourceSingleFunction_
 
-#define OrgApacheLuceneQueriesFunctionValueSource_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionValueSource_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionValueSource 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionValueSource 1
 #include "org/apache/lucene/queries/function/ValueSource.h"
 
 @class OrgApacheLuceneSearchIndexSearcher;
 @protocol JavaUtilMap;
 
+/*!
+ @brief A function with a single argument
+ */
 @interface OrgApacheLuceneQueriesFunctionValuesourceSingleFunction : OrgApacheLuceneQueriesFunctionValueSource {
  @public
   OrgApacheLuceneQueriesFunctionValueSource *source_;
@@ -57,4 +60,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceSingleFuncti
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionValuesourceSingleFunction_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceSingleFunction")

@@ -29,9 +29,9 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithIOSClass:", "MethodType", NULL, 0x0, NULL, NULL },
-    { "methodTypeWithIOSClass:", "methodType", "Lorg.lukhnos.portmobile.invoke.MethodType;", 0x9, NULL, NULL },
-    { "getType", NULL, "Ljava.lang.Class;", 0x1, NULL, NULL },
+    { "initWithIOSClass:", "MethodType", NULL, 0x0, NULL, "(Ljava/lang/Class<*>;)V" },
+    { "methodTypeWithIOSClass:", "methodType", "Lorg.lukhnos.portmobile.invoke.MethodType;", 0x9, NULL, "(Ljava/lang/Class<*>;)Lorg/lukhnos/portmobile/invoke/MethodType;" },
+    { "getType", NULL, "Ljava.lang.Class;", 0x1, NULL, "()Ljava/lang/Class<*>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "clazz_", NULL, 0x0, "Ljava.lang.Class;", NULL, "Ljava/lang/Class<*>;", .constantValue.asLong = 0 },
@@ -48,14 +48,16 @@ void OrgLukhnosPortmobileInvokeMethodType_initWithIOSClass_(OrgLukhnosPortmobile
 }
 
 OrgLukhnosPortmobileInvokeMethodType *new_OrgLukhnosPortmobileInvokeMethodType_initWithIOSClass_(IOSClass *clazz) {
-  OrgLukhnosPortmobileInvokeMethodType *self = [OrgLukhnosPortmobileInvokeMethodType alloc];
-  OrgLukhnosPortmobileInvokeMethodType_initWithIOSClass_(self, clazz);
-  return self;
+  J2OBJC_NEW_IMPL(OrgLukhnosPortmobileInvokeMethodType, initWithIOSClass_, clazz)
+}
+
+OrgLukhnosPortmobileInvokeMethodType *create_OrgLukhnosPortmobileInvokeMethodType_initWithIOSClass_(IOSClass *clazz) {
+  J2OBJC_CREATE_IMPL(OrgLukhnosPortmobileInvokeMethodType, initWithIOSClass_, clazz)
 }
 
 OrgLukhnosPortmobileInvokeMethodType *OrgLukhnosPortmobileInvokeMethodType_methodTypeWithIOSClass_(IOSClass *clazz) {
   OrgLukhnosPortmobileInvokeMethodType_initialize();
-  return [new_OrgLukhnosPortmobileInvokeMethodType_initWithIOSClass_(clazz) autorelease];
+  return create_OrgLukhnosPortmobileInvokeMethodType_initWithIOSClass_(clazz);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileInvokeMethodType)

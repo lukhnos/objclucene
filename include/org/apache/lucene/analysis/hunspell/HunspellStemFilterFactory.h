@@ -5,33 +5,50 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_) && (OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory))
+#define OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-#define OrgApacheLuceneAnalysisUtilResourceLoaderAware_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilResourceLoaderAware_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilResourceLoaderAware 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilResourceLoaderAware 1
 #include "org/apache/lucene/analysis/util/ResourceLoaderAware.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol JavaUtilMap;
 @protocol OrgApacheLuceneAnalysisUtilResourceLoader;
 
+/*!
+ @brief TokenFilterFactory that creates instances of <code>HunspellStemFilter</code>.
+ Example config for British English:
+ <pre class="prettyprint">
+ &lt;filter class=&quot;solr.HunspellStemFilterFactory&quot;
+ dictionary=&quot;en_GB.dic,my_custom.dic&quot;
+ affix=&quot;en_GB.aff&quot; 
+ ignoreCase=&quot;false&quot;
+ 
+@endcode
+ Both parameters dictionary and affix are mandatory.
+ Dictionaries for many languages are available through the OpenOffice project.
+ See <a href="http://wiki.apache.org/solr/Hunspell">http://wiki.apache.org/solr/Hunspell</a>
+ */
 @interface OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilResourceLoaderAware >
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new HunspellStemFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream;
@@ -46,8 +63,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory *new_OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory *create_OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory")

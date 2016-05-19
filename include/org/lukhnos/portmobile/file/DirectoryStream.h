@@ -5,30 +5,30 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgLukhnosPortmobileFileDirectoryStream_INCLUDE_ALL")
-#if OrgLukhnosPortmobileFileDirectoryStream_RESTRICT
-#define OrgLukhnosPortmobileFileDirectoryStream_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgLukhnosPortmobileFileDirectoryStream")
+#ifdef RESTRICT_OrgLukhnosPortmobileFileDirectoryStream
+#define INCLUDE_ALL_OrgLukhnosPortmobileFileDirectoryStream 0
 #else
-#define OrgLukhnosPortmobileFileDirectoryStream_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgLukhnosPortmobileFileDirectoryStream 1
 #endif
-#undef OrgLukhnosPortmobileFileDirectoryStream_RESTRICT
-#if OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream_INCLUDE
-#define OrgLukhnosPortmobileFileDirectoryStream_INCLUDE 1
+#undef RESTRICT_OrgLukhnosPortmobileFileDirectoryStream
+#ifdef INCLUDE_OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream
+#define INCLUDE_OrgLukhnosPortmobileFileDirectoryStream 1
 #endif
 
-#if !defined (_OrgLukhnosPortmobileFileDirectoryStream_) && (OrgLukhnosPortmobileFileDirectoryStream_INCLUDE_ALL || OrgLukhnosPortmobileFileDirectoryStream_INCLUDE)
-#define _OrgLukhnosPortmobileFileDirectoryStream_
+#if !defined (OrgLukhnosPortmobileFileDirectoryStream_) && (INCLUDE_ALL_OrgLukhnosPortmobileFileDirectoryStream || defined(INCLUDE_OrgLukhnosPortmobileFileDirectoryStream))
+#define OrgLukhnosPortmobileFileDirectoryStream_
 
-#define JavaLangAutoCloseable_RESTRICT 1
-#define JavaLangAutoCloseable_INCLUDE 1
+#define RESTRICT_JavaLangAutoCloseable 1
+#define INCLUDE_JavaLangAutoCloseable 1
 #include "java/lang/AutoCloseable.h"
 
-#define JavaIoCloseable_RESTRICT 1
-#define JavaIoCloseable_INCLUDE 1
+#define RESTRICT_JavaIoCloseable 1
+#define INCLUDE_JavaIoCloseable 1
 #include "java/io/Closeable.h"
 
-#define JavaLangIterable_RESTRICT 1
-#define JavaLangIterable_INCLUDE 1
+#define RESTRICT_JavaLangIterable 1
+#define INCLUDE_JavaLangIterable 1
 #include "java/lang/Iterable.h"
 
 @protocol OrgLukhnosPortmobileFileDirectoryStream < JavaLangAutoCloseable, JavaIoCloseable, JavaLangIterable, NSObject, JavaObject >
@@ -41,8 +41,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileFileDirectoryStream)
 
 #endif
 
-#if !defined (_OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream_) && (OrgLukhnosPortmobileFileDirectoryStream_INCLUDE_ALL || OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream_INCLUDE)
-#define _OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream_
+#if !defined (OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream_) && (INCLUDE_ALL_OrgLukhnosPortmobileFileDirectoryStream || defined(INCLUDE_OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream))
+#define OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream_
 
 @protocol JavaUtilIterator;
 @protocol JavaUtilList;
@@ -62,7 +62,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileFileDirectoryStream)
 
 #pragma mark Package-Private
 
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream)
@@ -73,8 +72,10 @@ FOUNDATION_EXPORT void OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectorySt
 
 FOUNDATION_EXPORT OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream *new_OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream_initWithJavaUtilList_(id<JavaUtilList> paths) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream *create_OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream_initWithJavaUtilList_(id<JavaUtilList> paths);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream)
 
 #endif
 
-#pragma pop_macro("OrgLukhnosPortmobileFileDirectoryStream_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileFileDirectoryStream")

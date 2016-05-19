@@ -76,7 +76,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "read", NULL, "I", 0x1, NULL, NULL },
     { "readWithCharArray:withInt:withInt:", "read", "I", 0x1, NULL, NULL },
     { "close", NULL, "V", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x0, NULL, NULL },
+    { "init", "ReusableStringReader", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "pos_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
@@ -97,9 +97,11 @@ void OrgApacheLuceneAnalysisReusableStringReader_init(OrgApacheLuceneAnalysisReu
 }
 
 OrgApacheLuceneAnalysisReusableStringReader *new_OrgApacheLuceneAnalysisReusableStringReader_init() {
-  OrgApacheLuceneAnalysisReusableStringReader *self = [OrgApacheLuceneAnalysisReusableStringReader alloc];
-  OrgApacheLuceneAnalysisReusableStringReader_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisReusableStringReader, init)
+}
+
+OrgApacheLuceneAnalysisReusableStringReader *create_OrgApacheLuceneAnalysisReusableStringReader_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisReusableStringReader, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisReusableStringReader)

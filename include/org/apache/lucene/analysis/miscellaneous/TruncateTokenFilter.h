@@ -5,23 +5,30 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter_RESTRICT
-#define OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter 0
 #else
-#define OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter
 
-#if !defined (_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter_) && (OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter_
+#if !defined (OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter))
+#define OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief A token filter for truncating the terms into a specific length.
+ Fixed prefix truncation, as a stemming method, produces good results on Turkish language.
+ It is reported that F5, using first 5 characters, produced best results in
+ <a href="http://www.users.muohio.edu/canf/papers/JASIST2008offPrint.pdf">
+ Information Retrieval on Turkish Texts</a>
+ */
 @interface OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
@@ -39,8 +46,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter_i
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter *new_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(OrgApacheLuceneAnalysisTokenStream *input, jint length) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter *create_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(OrgApacheLuceneAnalysisTokenStream *input, jint length);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter")

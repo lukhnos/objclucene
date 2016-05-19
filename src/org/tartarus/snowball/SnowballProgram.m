@@ -27,8 +27,9 @@
 
 J2OBJC_FIELD_SETTER(OrgTartarusSnowballSnowballProgram, current_, IOSCharArray *)
 
-static IOSObjectArray *OrgTartarusSnowballSnowballProgram_EMPTY_ARGS_;
-J2OBJC_STATIC_FIELD_GETTER(OrgTartarusSnowballSnowballProgram, EMPTY_ARGS_, IOSObjectArray *)
+inline IOSObjectArray *OrgTartarusSnowballSnowballProgram_get_EMPTY_ARGS();
+static IOSObjectArray *OrgTartarusSnowballSnowballProgram_EMPTY_ARGS;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballSnowballProgram, EMPTY_ARGS, IOSObjectArray *)
 
 J2OBJC_INITIALIZED_DEFN(OrgTartarusSnowballSnowballProgram)
 
@@ -257,7 +258,7 @@ withJavaLangCharSequence:(id<JavaLangCharSequence>)s {
       if (w->method_ == nil) return w->result_;
       jboolean res;
       @try {
-        id resobj = [((JavaLangReflectMethod *) nil_chk(w->method_)) invokeWithId:w->methodobject_ withNSObjectArray:OrgTartarusSnowballSnowballProgram_EMPTY_ARGS_];
+        id resobj = [w->method_ invokeWithId:w->methodobject_ withNSObjectArray:OrgTartarusSnowballSnowballProgram_EMPTY_ARGS];
         res = [((NSString *) nil_chk([nil_chk(resobj) description])) isEqual:@"true"];
       }
       @catch (JavaLangReflectInvocationTargetException *e) {
@@ -320,7 +321,7 @@ withJavaLangCharSequence:(id<JavaLangCharSequence>)s {
       if (w->method_ == nil) return w->result_;
       jboolean res;
       @try {
-        id resobj = [((JavaLangReflectMethod *) nil_chk(w->method_)) invokeWithId:w->methodobject_ withNSObjectArray:OrgTartarusSnowballSnowballProgram_EMPTY_ARGS_];
+        id resobj = [w->method_ invokeWithId:w->methodobject_ withNSObjectArray:OrgTartarusSnowballSnowballProgram_EMPTY_ARGS];
         res = [((NSString *) nil_chk([nil_chk(resobj) description])) isEqual:@"true"];
       }
       @catch (JavaLangReflectInvocationTargetException *e) {
@@ -350,7 +351,7 @@ withJavaLangCharSequence:(id<JavaLangCharSequence>)s {
   if (adjustment != 0 && c_ket < limit_) {
     JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(current_, c_ket, current_, c_bra + [s length], limit_ - c_ket);
   }
-  for (jint i = 0; i < [s length]; i++) *IOSCharArray_GetRef(current_, c_bra + i) = [s charAtWithInt:i];
+  for (jint i = 0; i < [s length]; i++) *IOSCharArray_GetRef(nil_chk(current_), c_bra + i) = [s charAtWithInt:i];
   limit_ += adjustment;
   if (cursor_ >= c_ket) cursor_ += adjustment;
   else if (cursor_ > c_bra) cursor_ = c_bra;
@@ -359,7 +360,7 @@ withJavaLangCharSequence:(id<JavaLangCharSequence>)s {
 
 - (void)slice_check {
   if (bra_ < 0 || bra_ > ket_ || ket_ > limit_) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$I$I", @"faulty slice operation: bra=", bra_, @",ket=", ket_, @",limit=", limit_)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$I$I", @"faulty slice operation: bra=", bra_, @",ket=", ket_, @",limit=", limit_));
   }
 }
 
@@ -401,7 +402,7 @@ withJavaLangCharSequence:(id<JavaLangCharSequence>)s {
 
 + (void)initialize {
   if (self == [OrgTartarusSnowballSnowballProgram class]) {
-    JreStrongAssignAndConsume(&OrgTartarusSnowballSnowballProgram_EMPTY_ARGS_, [IOSObjectArray newArrayWithLength:0 type:NSObject_class_()]);
+    JreStrongAssignAndConsume(&OrgTartarusSnowballSnowballProgram_EMPTY_ARGS, [IOSObjectArray newArrayWithLength:0 type:NSObject_class_()]);
     J2OBJC_SET_INITIALIZED(OrgTartarusSnowballSnowballProgram)
   }
 }
@@ -439,7 +440,7 @@ withJavaLangCharSequence:(id<JavaLangCharSequence>)s {
     { "assign_toWithJavaLangStringBuilder:", "assign_to", "Ljava.lang.StringBuilder;", 0x4, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "EMPTY_ARGS_", NULL, 0x1a, "[Ljava.lang.Object;", &OrgTartarusSnowballSnowballProgram_EMPTY_ARGS_, NULL, .constantValue.asLong = 0 },
+    { "EMPTY_ARGS", "EMPTY_ARGS", 0x1a, "[Ljava.lang.Object;", &OrgTartarusSnowballSnowballProgram_EMPTY_ARGS, NULL, .constantValue.asLong = 0 },
     { "current_", NULL, 0x2, "[C", NULL, NULL, .constantValue.asLong = 0 },
     { "cursor_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "limit_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },

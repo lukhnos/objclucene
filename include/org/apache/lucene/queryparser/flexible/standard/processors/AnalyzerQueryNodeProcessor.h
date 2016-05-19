@@ -5,24 +5,46 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzerQueryNodeProcessor_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzerQueryNodeProcessor_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzerQueryNodeProcessor_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzerQueryNodeProcessor")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzerQueryNodeProcessor
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzerQueryNodeProcessor 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzerQueryNodeProcessor_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzerQueryNodeProcessor 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzerQueryNodeProcessor_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzerQueryNodeProcessor
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzerQueryNodeProcessor_) && (OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzerQueryNodeProcessor_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzerQueryNodeProcessor_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzerQueryNodeProcessor_
+#if !defined (OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzerQueryNodeProcessor_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzerQueryNodeProcessor || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzerQueryNodeProcessor))
+#define OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzerQueryNodeProcessor_
 
-#define OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_RESTRICT 1
-#define OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl 1
+#define INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl 1
 #include "org/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessorImpl.h"
 
 @protocol JavaUtilList;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 
+/*!
+ @brief This processor verifies if <code>ConfigurationKeys.ANALYZER</code>
+ is defined in the <code>QueryConfigHandler</code>.
+ If it is and the analyzer is
+ not <code>null</code>, it looks for every <code>FieldQueryNode</code> that is not
+ <code>WildcardQueryNode</code>, <code>FuzzyQueryNode</code> or
+ <code>RangeQueryNode</code> contained in the query node tree, then it applies
+ the analyzer to that <code>FieldQueryNode</code> object. <br>
+ <br>
+ If the analyzer return only one term, the returned term is set to the
+ <code>FieldQueryNode</code> and it's returned. <br>
+ <br>
+ If the analyzer return more than one term, a <code>TokenizedPhraseQueryNode</code>
+ or <code>MultiPhraseQueryNode</code> is created, whether there is one or more
+ terms at the same position, and it's returned. <br>
+ <br>
+ If no term is returned by the analyzer a <code>NoTokenFoundQueryNode</code> object
+ is returned.
+ - seealso: ConfigurationKeys#ANALYZER
+ - seealso: Analyzer
+ - seealso: TokenStream
+ */
 @interface OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzerQueryNodeProcessor : OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl
 
 #pragma mark Public
@@ -47,8 +69,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnaly
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzerQueryNodeProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzerQueryNodeProcessor_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzerQueryNodeProcessor *create_OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzerQueryNodeProcessor_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzerQueryNodeProcessor)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzerQueryNodeProcessor_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzerQueryNodeProcessor")

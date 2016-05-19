@@ -19,12 +19,12 @@
 }
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  return [new_OrgApacheLuceneAnalysisFrFrenchLightStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(input) autorelease];
+  return create_OrgApacheLuceneAnalysisFrFrenchLightStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(input);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "FrenchLightStemFilterFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "FrenchLightStemFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenStream;", 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisFrFrenchLightStemFilterFactory = { 2, "FrenchLightStemFilterFactory", "org.apache.lucene.analysis.fr", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
@@ -36,14 +36,16 @@
 void OrgApacheLuceneAnalysisFrFrenchLightStemFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisFrFrenchLightStemFilterFactory *self, id<JavaUtilMap> args) {
   OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisFrFrenchLightStemFilterFactory *new_OrgApacheLuceneAnalysisFrFrenchLightStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisFrFrenchLightStemFilterFactory *self = [OrgApacheLuceneAnalysisFrFrenchLightStemFilterFactory alloc];
-  OrgApacheLuceneAnalysisFrFrenchLightStemFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisFrFrenchLightStemFilterFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisFrFrenchLightStemFilterFactory *create_OrgApacheLuceneAnalysisFrFrenchLightStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisFrFrenchLightStemFilterFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisFrFrenchLightStemFilterFactory)

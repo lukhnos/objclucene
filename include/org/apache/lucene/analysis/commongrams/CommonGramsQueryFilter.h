@@ -5,33 +5,65 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter_RESTRICT
-#define OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter 0
 #else
-#define OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter
 
-#if !defined (_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter_) && (OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter_
+#if !defined (OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter || defined(INCLUDE_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter))
+#define OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisCommongramsCommonGramsFilter;
 
+/*!
+ @brief Wrap a CommonGramsFilter optimizing phrase queries by only returning single
+ words when they are not a member of a bigram.
+ Example:
+ <ul>
+ <li>query input to CommonGramsFilter: "the rain in spain falls mainly"
+ <li>output of CommomGramsFilter/input to CommonGramsQueryFilter:
+ |"the, "the-rain"|"rain" "rain-in"|"in, "in-spain"|"spain"|"falls"|"mainly"
+ <li>output of CommonGramsQueryFilter:"the-rain", "rain-in" ,"in-spain",
+ "falls", "mainly"
+ </ul>
+ */
 @interface OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
+/*!
+ @brief Constructs a new CommonGramsQueryFilter based on the provided CommomGramsFilter
+ @param input CommonGramsFilter the QueryFilter will use
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisCommongramsCommonGramsFilter:(OrgApacheLuceneAnalysisCommongramsCommonGramsFilter *)input;
 
+/*!
+ @brief Output bigrams whenever possible to optimize queries.
+ Only output unigrams
+ when they are not a member of a bigram. Example:
+ <ul>
+ <li>input: "the rain in spain falls mainly"
+ <li>output:"the-rain", "rain-in" ,"in-spain", "falls", "mainly"
+ </ul>
+ */
 - (jboolean)incrementToken;
 
+/*!
+ @brief Convenience method to check if the current type is a gram type
+ @return <code>true</code> if the current type is a gram type, <code>false</code> otherwise
+ */
 - (jboolean)isGramType;
 
+/*!
+ 
+ */
 - (void)reset;
 
 @end
@@ -42,8 +74,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter_
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter *new_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter_initWithOrgApacheLuceneAnalysisCommongramsCommonGramsFilter_(OrgApacheLuceneAnalysisCommongramsCommonGramsFilter *input) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter *create_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter_initWithOrgApacheLuceneAnalysisCommongramsCommonGramsFilter_(OrgApacheLuceneAnalysisCommongramsCommonGramsFilter *input);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter")

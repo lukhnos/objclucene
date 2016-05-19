@@ -5,36 +5,62 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchHighlightTokenGroup_INCLUDE_ALL")
-#if OrgApacheLuceneSearchHighlightTokenGroup_RESTRICT
-#define OrgApacheLuceneSearchHighlightTokenGroup_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightTokenGroup")
+#ifdef RESTRICT_OrgApacheLuceneSearchHighlightTokenGroup
+#define INCLUDE_ALL_OrgApacheLuceneSearchHighlightTokenGroup 0
 #else
-#define OrgApacheLuceneSearchHighlightTokenGroup_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchHighlightTokenGroup 1
 #endif
-#undef OrgApacheLuceneSearchHighlightTokenGroup_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchHighlightTokenGroup
 
-#if !defined (_OrgApacheLuceneSearchHighlightTokenGroup_) && (OrgApacheLuceneSearchHighlightTokenGroup_INCLUDE_ALL || OrgApacheLuceneSearchHighlightTokenGroup_INCLUDE)
-#define _OrgApacheLuceneSearchHighlightTokenGroup_
+#if !defined (OrgApacheLuceneSearchHighlightTokenGroup_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightTokenGroup || defined(INCLUDE_OrgApacheLuceneSearchHighlightTokenGroup))
+#define OrgApacheLuceneSearchHighlightTokenGroup_
 
 @class OrgApacheLuceneAnalysisToken;
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief One, or several overlapping tokens, along with the score(s) and the scope of
+ the original text.
+ */
 @interface OrgApacheLuceneSearchHighlightTokenGroup : NSObject
 
 #pragma mark Public
 
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream;
 
+/*!
+ @return the latest end offset in the original text of a matching token in this group (score &gt; 0), or
+ if there are none then <code>getEndOffset()</code>.
+ */
 - (jint)getEndOffset;
 
+/*!
+ @return the number of tokens in this group
+ */
 - (jint)getNumTokens;
 
+/*!
+ @param index a value between 0 and numTokens -1
+ @return the "n"th score
+ */
 - (jfloat)getScoreWithInt:(jint)index;
 
+/*!
+ @return the earliest start offset in the original text of a matching token in this group (score &gt; 0), or
+ if there are none then the earliest offset of any token in the group.
+ */
 - (jint)getStartOffset;
 
+/*!
+ @param index a value between 0 and numTokens -1
+ @return the "n"th token
+ */
 - (OrgApacheLuceneAnalysisToken *)getTokenWithInt:(jint)index;
 
+/*!
+ @return all tokens' scores summed up
+ */
 - (jfloat)getTotalScore;
 
 #pragma mark Package-Private
@@ -53,8 +79,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightTokenGroup_initWithOrgApach
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightTokenGroup *new_OrgApacheLuceneSearchHighlightTokenGroup_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *tokenStream) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightTokenGroup *create_OrgApacheLuceneSearchHighlightTokenGroup_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *tokenStream);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightTokenGroup)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchHighlightTokenGroup_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightTokenGroup")

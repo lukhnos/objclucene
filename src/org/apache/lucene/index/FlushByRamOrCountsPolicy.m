@@ -24,9 +24,9 @@
     }
   }
   if (([self flushOnRAM] && [((OrgApacheLuceneIndexDocumentsWriterFlushControl *) nil_chk(control)) getDeleteBytesUsed] > (1024 * 1024 * [((OrgApacheLuceneIndexLiveIndexWriterConfig *) nil_chk(indexWriterConfig_)) getRAMBufferSizeMB]))) {
-    [control setApplyAllDeletes];
+    [((OrgApacheLuceneIndexDocumentsWriterFlushControl *) nil_chk(control)) setApplyAllDeletes];
     if ([((OrgApacheLuceneUtilInfoStream *) nil_chk(infoStream_)) isEnabledWithNSString:@"FP"]) {
-      [infoStream_ messageWithNSString:@"FP" withNSString:JreStrcat("$J$D", @"force apply deletes bytesUsed=", [control getDeleteBytesUsed], @" vs ramBufferMB=", [indexWriterConfig_ getRAMBufferSizeMB])];
+      [((OrgApacheLuceneUtilInfoStream *) nil_chk(infoStream_)) messageWithNSString:@"FP" withNSString:JreStrcat("$J$D", @"force apply deletes bytesUsed=", [control getDeleteBytesUsed], @" vs ramBufferMB=", [((OrgApacheLuceneIndexLiveIndexWriterConfig *) nil_chk(indexWriterConfig_)) getRAMBufferSizeMB])];
     }
   }
 }
@@ -41,7 +41,7 @@
     jlong totalRam = [((OrgApacheLuceneIndexDocumentsWriterFlushControl *) nil_chk(control)) activeBytes] + [control getDeleteBytesUsed];
     if (totalRam >= limit) {
       if ([((OrgApacheLuceneUtilInfoStream *) nil_chk(infoStream_)) isEnabledWithNSString:@"FP"]) {
-        [infoStream_ messageWithNSString:@"FP" withNSString:JreStrcat("$J$J$J", @"trigger flush: activeBytes=", [control activeBytes], @" deleteBytes=", [control getDeleteBytesUsed], @" vs limit=", limit)];
+        [((OrgApacheLuceneUtilInfoStream *) nil_chk(infoStream_)) messageWithNSString:@"FP" withNSString:JreStrcat("$J$J$J", @"trigger flush: activeBytes=", [control activeBytes], @" deleteBytes=", [control getDeleteBytesUsed], @" vs limit=", limit)];
       }
       [self markLargestWriterPendingWithOrgApacheLuceneIndexDocumentsWriterFlushControl:control withOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:state withLong:totalRam];
     }
@@ -81,7 +81,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "flushOnDocCount", NULL, "Z", 0x4, NULL, NULL },
     { "flushOnDeleteTerms", NULL, "Z", 0x4, NULL, NULL },
     { "flushOnRAM", NULL, "Z", 0x4, NULL, NULL },
-    { "init", NULL, NULL, 0x0, NULL, NULL },
+    { "init", "FlushByRamOrCountsPolicy", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneIndexFlushByRamOrCountsPolicy = { 2, "FlushByRamOrCountsPolicy", "org.apache.lucene.index", NULL, 0x0, 7, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexFlushByRamOrCountsPolicy;
@@ -94,9 +94,11 @@ void OrgApacheLuceneIndexFlushByRamOrCountsPolicy_init(OrgApacheLuceneIndexFlush
 }
 
 OrgApacheLuceneIndexFlushByRamOrCountsPolicy *new_OrgApacheLuceneIndexFlushByRamOrCountsPolicy_init() {
-  OrgApacheLuceneIndexFlushByRamOrCountsPolicy *self = [OrgApacheLuceneIndexFlushByRamOrCountsPolicy alloc];
-  OrgApacheLuceneIndexFlushByRamOrCountsPolicy_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexFlushByRamOrCountsPolicy, init)
+}
+
+OrgApacheLuceneIndexFlushByRamOrCountsPolicy *create_OrgApacheLuceneIndexFlushByRamOrCountsPolicy_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexFlushByRamOrCountsPolicy, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexFlushByRamOrCountsPolicy)

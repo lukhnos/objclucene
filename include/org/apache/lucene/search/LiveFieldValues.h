@@ -5,34 +5,53 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchLiveFieldValues_INCLUDE_ALL")
-#if OrgApacheLuceneSearchLiveFieldValues_RESTRICT
-#define OrgApacheLuceneSearchLiveFieldValues_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchLiveFieldValues")
+#ifdef RESTRICT_OrgApacheLuceneSearchLiveFieldValues
+#define INCLUDE_ALL_OrgApacheLuceneSearchLiveFieldValues 0
 #else
-#define OrgApacheLuceneSearchLiveFieldValues_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchLiveFieldValues 1
 #endif
-#undef OrgApacheLuceneSearchLiveFieldValues_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchLiveFieldValues
 
-#if !defined (_OrgApacheLuceneSearchLiveFieldValues_) && (OrgApacheLuceneSearchLiveFieldValues_INCLUDE_ALL || OrgApacheLuceneSearchLiveFieldValues_INCLUDE)
-#define _OrgApacheLuceneSearchLiveFieldValues_
+#if !defined (OrgApacheLuceneSearchLiveFieldValues_) && (INCLUDE_ALL_OrgApacheLuceneSearchLiveFieldValues || defined(INCLUDE_OrgApacheLuceneSearchLiveFieldValues))
+#define OrgApacheLuceneSearchLiveFieldValues_
 
-#define OrgApacheLuceneSearchReferenceManager_RESTRICT 1
-#define OrgApacheLuceneSearchReferenceManager_RefreshListener_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchReferenceManager 1
+#define INCLUDE_OrgApacheLuceneSearchReferenceManager_RefreshListener 1
 #include "org/apache/lucene/search/ReferenceManager.h"
 
-#define JavaIoCloseable_RESTRICT 1
-#define JavaIoCloseable_INCLUDE 1
+#define RESTRICT_JavaIoCloseable 1
+#define INCLUDE_JavaIoCloseable 1
 #include "java/io/Closeable.h"
 
 @class OrgApacheLuceneSearchReferenceManager;
 
+/*!
+ @brief Tracks live field values across NRT reader reopens.
+ This holds a map for all updated ids since
+ the last reader reopen.  Once the NRT reader is reopened,
+ it prunes the map.  This means you must reopen your NRT
+ reader periodically otherwise the RAM consumption of
+ this class will grow unbounded!
+ <p>NOTE: you must ensure the same id is never updated at
+ the same time by two threads, because in this case you
+ cannot in general know which thread "won". 
+ */
 @interface OrgApacheLuceneSearchLiveFieldValues : NSObject < OrgApacheLuceneSearchReferenceManager_RefreshListener, JavaIoCloseable >
 
 #pragma mark Public
 
+/*!
+ @brief The missingValue must be non-null.
+ */
 - (instancetype)initWithOrgApacheLuceneSearchReferenceManager:(OrgApacheLuceneSearchReferenceManager *)mgr
                                                        withId:(id)missingValue;
 
+/*!
+ @brief Call this after you've successfully added a document
+ to the index, to record what value you just set the
+ field to.
+ */
 - (void)addWithNSString:(NSString *)id_
                  withId:(id)value;
 
@@ -42,14 +61,33 @@
 
 - (void)close;
 
+/*!
+ @brief Call this after you've successfully deleted a document
+ from the index.
+ */
 - (void)delete__WithNSString:(NSString *)id_;
 
+/*!
+ @brief Returns the current value for this id, or null if the
+ id isn't in the index or was deleted.
+ */
 - (id)getWithNSString:(NSString *)id_;
 
+/*!
+ @brief Returns the [approximate] number of id/value pairs
+ buffered in RAM.
+ */
 - (jint)size;
 
 #pragma mark Protected
 
+/*!
+ @brief This is called when the id/value was already flushed and opened
+ in an NRT IndexSearcher.
+ You must implement this to
+ go look up the value (eg, via doc values, field cache,
+ stored fields, etc.). 
+ */
 - (id)lookupFromSearcherWithId:(id)s
                   withNSString:(NSString *)id_;
 
@@ -63,4 +101,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchLiveFieldValues)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchLiveFieldValues_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchLiveFieldValues")

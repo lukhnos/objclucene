@@ -5,23 +5,31 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_RESTRICT
-#define OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter 0
 #else
-#define OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter
 
-#if !defined (_OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_) && (OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_
+#if !defined (OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter))
+#define OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_
 
-#define OrgApacheLuceneAnalysisTokenStream_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenStream_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenStream 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenStream 1
 #include "org/apache/lucene/analysis/TokenStream.h"
 
 @class OrgApacheLuceneAnalysisToken;
 
+/*!
+ @brief Joins two token streams and leaves the last token of the first stream available
+ to be used when updating the token values in the second stream based on that token.
+ The default implementation adds last prefix token end offset to the suffix token start and end offsets.
+ <p>
+ <b>NOTE:</b> This filter might not behave correctly if used with custom Attributes, i.e. Attributes other than
+ the ones located in org.apache.lucene.analysis.tokenattributes. 
+ */
 @interface OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter : OrgApacheLuceneAnalysisTokenStream
 
 #pragma mark Public
@@ -45,6 +53,12 @@
 
 - (void)setSuffixWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)suffix;
 
+/*!
+ @brief The default implementation adds last prefix token end offset to the suffix token start and end offsets.
+ @param suffixToken a token from the suffix stream
+ @param lastPrefixToken the last token from the prefix stream
+ @return consumer token
+ */
 - (OrgApacheLuceneAnalysisToken *)updateSuffixTokenWithOrgApacheLuceneAnalysisToken:(OrgApacheLuceneAnalysisToken *)suffixToken
                                                    withOrgApacheLuceneAnalysisToken:(OrgApacheLuceneAnalysisToken *)lastPrefixToken;
 
@@ -56,8 +70,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilte
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter *new_OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *prefix, OrgApacheLuceneAnalysisTokenStream *suffix) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter *create_OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *prefix, OrgApacheLuceneAnalysisTokenStream *suffix);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter")

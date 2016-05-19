@@ -12,7 +12,6 @@
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Long.h"
 #include "java/lang/Math.h"
-#include "java/lang/Throwable.h"
 #include "java/util/HashMap.h"
 #include "java/util/Map.h"
 #include "java/util/Set.h"
@@ -79,6 +78,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSuggestDocumentCompleti
 
 __attribute__((unused)) static OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionMetaData *new_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionMetaData_initWithLong_withLong_withLong_withByte_(jlong filePointer, jlong minWeight, jlong maxWeight, jbyte type) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionMetaData *create_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionMetaData_initWithLong_withLong_withLong_withByte_(jlong filePointer, jlong minWeight, jlong maxWeight, jbyte type);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionMetaData)
 
 @interface OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionTermWriter : NSObject {
@@ -95,8 +96,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsC
 
 - (instancetype)init;
 
+/*!
+ @brief Stores the built FST in <code>output</code>
+ Returns true if there was anything stored, false otherwise
+ */
 - (jboolean)finishWithOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)output;
 
+/*!
+ @brief Writes all postings (surface form, weight, document id) for <code>term</code>
+ */
 - (void)writeWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term
            withOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)termsEnum;
 
@@ -112,6 +120,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSuggestDocumentCompleti
 
 __attribute__((unused)) static OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionTermWriter *new_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionTermWriter_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionTermWriter *create_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionTermWriter_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionTermWriter)
 
 @implementation OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer
@@ -125,7 +135,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsC
 - (void)writeWithOrgApacheLuceneIndexFields:(OrgApacheLuceneIndexFields *)fields {
   [((OrgApacheLuceneCodecsFieldsConsumer *) nil_chk(delegateFieldsConsumer_)) writeWithOrgApacheLuceneIndexFields:fields];
   for (NSString * __strong field in nil_chk(fields)) {
-    OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionTermWriter *termWriter = [new_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionTermWriter_init() autorelease];
+    OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionTermWriter *termWriter = create_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionTermWriter_init();
     OrgApacheLuceneIndexTerms *terms = [fields termsWithNSString:field];
     OrgApacheLuceneIndexTermsEnum *termsEnum = [((OrgApacheLuceneIndexTerms *) nil_chk(terms)) iterator];
     OrgApacheLuceneUtilBytesRef *term;
@@ -134,7 +144,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsC
     }
     jlong filePointer = [((OrgApacheLuceneStoreIndexOutput *) nil_chk(dictOut_)) getFilePointer];
     if ([termWriter finishWithOrgApacheLuceneStoreIndexOutput:dictOut_]) {
-      [((id<JavaUtilMap>) nil_chk(seenFields_)) putWithId:field withId:[new_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionMetaData_initWithLong_withLong_withLong_withByte_(filePointer, termWriter->minWeight_, termWriter->maxWeight_, termWriter->type_) autorelease]];
+      [((id<JavaUtilMap>) nil_chk(seenFields_)) putWithId:field withId:create_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionMetaData_initWithLong_withLong_withLong_withByte_(filePointer, termWriter->minWeight_, termWriter->maxWeight_, termWriter->type_)];
     }
   }
 }
@@ -144,14 +154,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsC
     return;
   }
   closed_ = true;
-  NSString *indexFile = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentWriteState *) nil_chk(state_))->segmentInfo_))->name_, state_->segmentSuffix_, OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_INDEX_EXTENSION_);
+  NSString *indexFile = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentWriteState *) nil_chk(state_))->segmentInfo_))->name_, state_->segmentSuffix_, OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_INDEX_EXTENSION);
   jboolean success = false;
   @try {
     OrgApacheLuceneStoreIndexOutput *indexOut = [((OrgApacheLuceneStoreDirectory *) nil_chk(state_->directory_)) createOutputWithNSString:indexFile withOrgApacheLuceneStoreIOContext:state_->context_];
-    JavaLangThrowable *__primaryException1 = nil;
+    NSException *__primaryException1 = nil;
     @try {
       [((OrgApacheLuceneCodecsFieldsConsumer *) nil_chk(delegateFieldsConsumer_)) close];
-      OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(indexOut, OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_CODEC_NAME_, OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_COMPLETION_VERSION_CURRENT, [state_->segmentInfo_ getId], state_->segmentSuffix_);
+      OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(indexOut, OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_CODEC_NAME, OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_COMPLETION_VERSION_CURRENT, [state_->segmentInfo_ getId], state_->segmentSuffix_);
       [((OrgApacheLuceneStoreIndexOutput *) nil_chk(indexOut)) writeStringWithNSString:delegatePostingsFormatName_];
       [indexOut writeVIntWithInt:[((id<JavaUtilMap>) nil_chk(seenFields_)) size]];
       for (id<JavaUtilMap_Entry> __strong seenField in nil_chk([seenFields_ entrySet])) {
@@ -168,7 +178,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsC
       OrgApacheLuceneUtilIOUtils_closeWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ dictOut_ } count:1 type:JavaIoCloseable_class_()]);
       success = true;
     }
-    @catch (JavaLangThrowable *e) {
+    @catch (NSException *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -177,8 +187,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsC
         if (__primaryException1 != nil) {
           @try {
             [indexOut close];
-          } @catch (JavaLangThrowable *e) {
-            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          } @catch (NSException *e) {
+            [__primaryException1 addSuppressedWithNSException:e];
           }
         } else {
           [indexOut close];
@@ -229,12 +239,12 @@ void OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_initWithOrgApa
   self->closed_ = false;
   JreStrongAssign(&self->delegatePostingsFormatName_, [((OrgApacheLuceneCodecsPostingsFormat *) nil_chk(delegatePostingsFormat)) getName]);
   JreStrongAssign(&self->state_, state);
-  NSString *dictFile = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentWriteState *) nil_chk(state))->segmentInfo_))->name_, state->segmentSuffix_, OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_DICT_EXTENSION_);
+  NSString *dictFile = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentWriteState *) nil_chk(state))->segmentInfo_))->name_, state->segmentSuffix_, OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_DICT_EXTENSION);
   jboolean success = false;
   @try {
     JreStrongAssign(&self->delegateFieldsConsumer_, [delegatePostingsFormat fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:state]);
     JreStrongAssign(&self->dictOut_, [((OrgApacheLuceneStoreDirectory *) nil_chk(state->directory_)) createOutputWithNSString:dictFile withOrgApacheLuceneStoreIOContext:state->context_]);
-    OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(self->dictOut_, OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_CODEC_NAME_, OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_COMPLETION_VERSION_CURRENT, [state->segmentInfo_ getId], state->segmentSuffix_);
+    OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(self->dictOut_, OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_CODEC_NAME, OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_COMPLETION_VERSION_CURRENT, [state->segmentInfo_ getId], state->segmentSuffix_);
     success = true;
   }
   @finally {
@@ -245,9 +255,11 @@ void OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_initWithOrgApa
 }
 
 OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer *new_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_initWithOrgApacheLuceneCodecsPostingsFormat_withOrgApacheLuceneIndexSegmentWriteState_(OrgApacheLuceneCodecsPostingsFormat *delegatePostingsFormat, OrgApacheLuceneIndexSegmentWriteState *state) {
-  OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer *self = [OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer alloc];
-  OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_initWithOrgApacheLuceneCodecsPostingsFormat_withOrgApacheLuceneIndexSegmentWriteState_(self, delegatePostingsFormat, state);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer, initWithOrgApacheLuceneCodecsPostingsFormat_withOrgApacheLuceneIndexSegmentWriteState_, delegatePostingsFormat, state)
+}
+
+OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer *create_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_initWithOrgApacheLuceneCodecsPostingsFormat_withOrgApacheLuceneIndexSegmentWriteState_(OrgApacheLuceneCodecsPostingsFormat *delegatePostingsFormat, OrgApacheLuceneIndexSegmentWriteState *state) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer, initWithOrgApacheLuceneCodecsPostingsFormat_withOrgApacheLuceneIndexSegmentWriteState_, delegatePostingsFormat, state)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer)
@@ -287,9 +299,11 @@ void OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionMeta
 }
 
 OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionMetaData *new_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionMetaData_initWithLong_withLong_withLong_withByte_(jlong filePointer, jlong minWeight, jlong maxWeight, jbyte type) {
-  OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionMetaData *self = [OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionMetaData alloc];
-  OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionMetaData_initWithLong_withLong_withLong_withByte_(self, filePointer, minWeight, maxWeight, type);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionMetaData, initWithLong_withLong_withLong_withByte_, filePointer, minWeight, maxWeight, type)
+}
+
+OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionMetaData *create_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionMetaData_initWithLong_withLong_withLong_withByte_(jlong filePointer, jlong minWeight, jlong maxWeight, jbyte type) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionMetaData, initWithLong_withLong_withLong_withByte_, filePointer, minWeight, maxWeight, type)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionMetaData)
@@ -318,12 +332,12 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder *) nil_chk(builder_)) startTermWithOrgApacheLuceneUtilBytesRef:term];
   jint docFreq = 0;
   while ([((OrgApacheLuceneIndexPostingsEnum *) nil_chk(postingsEnum_)) nextDoc] != OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS) {
-    jint docID = [postingsEnum_ docID];
-    for (jint i = 0; i < [postingsEnum_ freq]; i++) {
-      [postingsEnum_ nextPosition];
-      JreAssert(([postingsEnum_ getPayload] != nil), (@"org/apache/lucene/search/suggest/document/CompletionFieldsConsumer.java:206 condition failed: assert postingsEnum.getPayload() != null;"));
-      OrgApacheLuceneUtilBytesRef *payload = [postingsEnum_ getPayload];
-      OrgApacheLuceneStoreByteArrayDataInput *input = [new_OrgApacheLuceneStoreByteArrayDataInput_initWithByteArray_withInt_withInt_(((OrgApacheLuceneUtilBytesRef *) nil_chk(payload))->bytes_, payload->offset_, payload->length_) autorelease];
+    jint docID = [((OrgApacheLuceneIndexPostingsEnum *) nil_chk(postingsEnum_)) docID];
+    for (jint i = 0; i < [((OrgApacheLuceneIndexPostingsEnum *) nil_chk(postingsEnum_)) freq]; i++) {
+      [((OrgApacheLuceneIndexPostingsEnum *) nil_chk(postingsEnum_)) nextPosition];
+      JreAssert(([((OrgApacheLuceneIndexPostingsEnum *) nil_chk(postingsEnum_)) getPayload] != nil), (@"org/apache/lucene/search/suggest/document/CompletionFieldsConsumer.java:206 condition failed: assert postingsEnum.getPayload() != null;"));
+      OrgApacheLuceneUtilBytesRef *payload = [((OrgApacheLuceneIndexPostingsEnum *) nil_chk(postingsEnum_)) getPayload];
+      OrgApacheLuceneStoreByteArrayDataInput *input = create_OrgApacheLuceneStoreByteArrayDataInput_initWithByteArray_withInt_withInt_(((OrgApacheLuceneUtilBytesRef *) nil_chk(payload))->bytes_, payload->offset_, payload->length_);
       jint len = [input readVInt];
       [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(scratch_)) growWithInt:len];
       [scratch_ setLengthWithInt:len];
@@ -337,7 +351,7 @@ J2OBJC_IGNORE_DESIGNATED_END
         first_ = false;
       }
       else if (self->type_ != type) {
-        @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"single field name has mixed types") autorelease];
+        @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"single field name has mixed types");
       }
       [builder_ addEntryWithInt:docID withOrgApacheLuceneUtilBytesRef:[scratch_ get] withLong:weight];
     }
@@ -388,9 +402,11 @@ void OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionTerm
 }
 
 OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionTermWriter *new_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionTermWriter_init() {
-  OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionTermWriter *self = [OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionTermWriter alloc];
-  OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionTermWriter_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionTermWriter, init)
+}
+
+OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionTermWriter *create_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionTermWriter_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionTermWriter, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionTermWriter)

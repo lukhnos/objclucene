@@ -5,39 +5,61 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilFstBytesRefFSTEnum_INCLUDE_ALL")
-#if OrgApacheLuceneUtilFstBytesRefFSTEnum_RESTRICT
-#define OrgApacheLuceneUtilFstBytesRefFSTEnum_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstBytesRefFSTEnum")
+#ifdef RESTRICT_OrgApacheLuceneUtilFstBytesRefFSTEnum
+#define INCLUDE_ALL_OrgApacheLuceneUtilFstBytesRefFSTEnum 0
 #else
-#define OrgApacheLuceneUtilFstBytesRefFSTEnum_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilFstBytesRefFSTEnum 1
 #endif
-#undef OrgApacheLuceneUtilFstBytesRefFSTEnum_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilFstBytesRefFSTEnum
 
-#if !defined (_OrgApacheLuceneUtilFstBytesRefFSTEnum_) && (OrgApacheLuceneUtilFstBytesRefFSTEnum_INCLUDE_ALL || OrgApacheLuceneUtilFstBytesRefFSTEnum_INCLUDE)
-#define _OrgApacheLuceneUtilFstBytesRefFSTEnum_
+#if !defined (OrgApacheLuceneUtilFstBytesRefFSTEnum_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstBytesRefFSTEnum || defined(INCLUDE_OrgApacheLuceneUtilFstBytesRefFSTEnum))
+#define OrgApacheLuceneUtilFstBytesRefFSTEnum_
 
-#define OrgApacheLuceneUtilFstFSTEnum_RESTRICT 1
-#define OrgApacheLuceneUtilFstFSTEnum_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilFstFSTEnum 1
+#define INCLUDE_OrgApacheLuceneUtilFstFSTEnum 1
 #include "org/apache/lucene/util/fst/FSTEnum.h"
 
 @class OrgApacheLuceneUtilBytesRef;
 @class OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput;
 @class OrgApacheLuceneUtilFstFST;
 
+/*!
+ @brief Enumerates all input (BytesRef) + output pairs in an
+ FST.
+ */
 @interface OrgApacheLuceneUtilFstBytesRefFSTEnum : OrgApacheLuceneUtilFstFSTEnum
 
 #pragma mark Public
 
+/*!
+ @brief doFloor controls the behavior of advance: if it's true
+ doFloor is true, advance positions to the biggest
+ term before target.
+ */
 - (instancetype)initWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst;
 
 - (OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput *)current;
 
 - (OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput *)next;
 
+/*!
+ @brief Seeks to smallest term that's &gt;= target.
+ */
 - (OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput *)seekCeilWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)target;
 
+/*!
+ @brief Seeks to exactly this term, returning null if the term
+ doesn't exist.
+ This is faster than using <code>seekFloor</code>
+  or <code>seekCeil</code> because it
+ short-circuits as soon the match is not found. 
+ */
 - (OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput *)seekExactWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)target;
 
+/*!
+ @brief Seeks to biggest term that's &lt;= target.
+ */
 - (OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput *)seekFloorWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)target;
 
 #pragma mark Protected
@@ -58,15 +80,20 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilFstBytesRefFSTEnum_initWithOrgApacheLu
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilFstBytesRefFSTEnum *new_OrgApacheLuceneUtilFstBytesRefFSTEnum_initWithOrgApacheLuceneUtilFstFST_(OrgApacheLuceneUtilFstFST *fst) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstBytesRefFSTEnum *create_OrgApacheLuceneUtilFstBytesRefFSTEnum_initWithOrgApacheLuceneUtilFstFST_(OrgApacheLuceneUtilFstFST *fst);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstBytesRefFSTEnum)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput_) && (OrgApacheLuceneUtilFstBytesRefFSTEnum_INCLUDE_ALL || OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput_INCLUDE)
-#define _OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput_
+#if !defined (OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstBytesRefFSTEnum || defined(INCLUDE_OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput))
+#define OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput_
 
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief Holds a single input (BytesRef) + output pair.
+ */
 @interface OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput : NSObject {
  @public
   OrgApacheLuceneUtilBytesRef *input_;
@@ -88,8 +115,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput_init(Or
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput *new_OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput *create_OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilFstBytesRefFSTEnum_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstBytesRefFSTEnum")

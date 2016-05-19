@@ -51,7 +51,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDocValuesTermsQuery, terms_, IOSObjectA
 
 - (instancetype)initWithNSStringArray:(IOSObjectArray *)capture$0;
 
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchDocValuesTermsQuery_$1)
@@ -61,6 +60,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDocValuesTermsQuery_$1, val$terms_, IOS
 __attribute__((unused)) static void OrgApacheLuceneSearchDocValuesTermsQuery_$1_initWithNSStringArray_(OrgApacheLuceneSearchDocValuesTermsQuery_$1 *self, IOSObjectArray *capture$0);
 
 __attribute__((unused)) static OrgApacheLuceneSearchDocValuesTermsQuery_$1 *new_OrgApacheLuceneSearchDocValuesTermsQuery_$1_initWithNSStringArray_(IOSObjectArray *capture$0) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchDocValuesTermsQuery_$1 *create_OrgApacheLuceneSearchDocValuesTermsQuery_$1_initWithNSStringArray_(IOSObjectArray *capture$0);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesTermsQuery_$1)
 
@@ -83,6 +84,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDocValuesTermsQuery_$2, this$0_, OrgApa
 __attribute__((unused)) static void OrgApacheLuceneSearchDocValuesTermsQuery_$2_initWithOrgApacheLuceneSearchDocValuesTermsQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchDocValuesTermsQuery_$2 *self, OrgApacheLuceneSearchDocValuesTermsQuery *outer$, OrgApacheLuceneSearchQuery *arg$0);
 
 __attribute__((unused)) static OrgApacheLuceneSearchDocValuesTermsQuery_$2 *new_OrgApacheLuceneSearchDocValuesTermsQuery_$2_initWithOrgApacheLuceneSearchDocValuesTermsQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchDocValuesTermsQuery *outer$, OrgApacheLuceneSearchQuery *arg$0) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchDocValuesTermsQuery_$2 *create_OrgApacheLuceneSearchDocValuesTermsQuery_$2_initWithOrgApacheLuceneSearchDocValuesTermsQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchDocValuesTermsQuery *outer$, OrgApacheLuceneSearchQuery *arg$0);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesTermsQuery_$2)
 
@@ -113,6 +116,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchDocValuesTermsQuery_$2_
 
 __attribute__((unused)) static OrgApacheLuceneSearchDocValuesTermsQuery_$2_$1 *new_OrgApacheLuceneSearchDocValuesTermsQuery_$2_$1_initWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneUtilLongBitSet_withOrgApacheLuceneIndexLeafReaderContext_(OrgApacheLuceneIndexSortedSetDocValues *capture$0, OrgApacheLuceneUtilLongBitSet *capture$1, OrgApacheLuceneIndexLeafReaderContext *capture$2) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchDocValuesTermsQuery_$2_$1 *create_OrgApacheLuceneSearchDocValuesTermsQuery_$2_$1_initWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneUtilLongBitSet_withOrgApacheLuceneIndexLeafReaderContext_(OrgApacheLuceneIndexSortedSetDocValues *capture$0, OrgApacheLuceneUtilLongBitSet *capture$1, OrgApacheLuceneIndexLeafReaderContext *capture$2);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesTermsQuery_$2_$1)
 
 @implementation OrgApacheLuceneSearchDocValuesTermsQuery
@@ -139,7 +144,7 @@ withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms {
   if ([obj isKindOfClass:[OrgApacheLuceneSearchDocValuesTermsQuery class]] == false) {
     return false;
   }
-  OrgApacheLuceneSearchDocValuesTermsQuery *that = (OrgApacheLuceneSearchDocValuesTermsQuery *) check_class_cast(obj, [OrgApacheLuceneSearchDocValuesTermsQuery class]);
+  OrgApacheLuceneSearchDocValuesTermsQuery *that = (OrgApacheLuceneSearchDocValuesTermsQuery *) cast_chk(obj, [OrgApacheLuceneSearchDocValuesTermsQuery class]);
   if (![super isEqual:obj]) {
     return false;
   }
@@ -154,7 +159,7 @@ withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms {
 }
 
 - (NSString *)toStringWithNSString:(NSString *)defaultField {
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   [((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:field_])) appendWithNSString:@": ["];
   {
     IOSObjectArray *a__ = terms_;
@@ -173,7 +178,7 @@ withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms {
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores {
-  return [new_OrgApacheLuceneSearchDocValuesTermsQuery_$2_initWithOrgApacheLuceneSearchDocValuesTermsQuery_withOrgApacheLuceneSearchQuery_(self, self) autorelease];
+  return create_OrgApacheLuceneSearchDocValuesTermsQuery_$2_initWithOrgApacheLuceneSearchDocValuesTermsQuery_withOrgApacheLuceneSearchQuery_(self, self);
 }
 
 - (void)dealloc {
@@ -184,7 +189,7 @@ withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms {
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withJavaUtilCollection:", "DocValuesTermsQuery", NULL, 0x1, NULL, NULL },
+    { "initWithNSString:withJavaUtilCollection:", "DocValuesTermsQuery", NULL, 0x1, NULL, "(Ljava/lang/String;Ljava/util/Collection<Lorg/apache/lucene/util/BytesRef;>;)V" },
     { "initWithNSString:withOrgApacheLuceneUtilBytesRefArray:", "DocValuesTermsQuery", NULL, 0x81, NULL, NULL },
     { "initWithNSString:withNSStringArray:", "DocValuesTermsQuery", NULL, 0x81, NULL, NULL },
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
@@ -206,14 +211,16 @@ void OrgApacheLuceneSearchDocValuesTermsQuery_initWithNSString_withJavaUtilColle
   OrgApacheLuceneSearchQuery_init(self);
   JreStrongAssign(&self->field_, OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_(field));
   OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_withNSString_(terms, @"Collection of terms must not be null");
-  JreStrongAssign(&self->terms_, [terms toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[((id<JavaUtilCollection>) nil_chk(terms)) size] type:OrgApacheLuceneUtilBytesRef_class_()]]);
+  JreStrongAssign(&self->terms_, [((id<JavaUtilCollection>) nil_chk(terms)) toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[terms size] type:OrgApacheLuceneUtilBytesRef_class_()]]);
   OrgApacheLuceneUtilArrayUtil_timSortWithNSObjectArray_withJavaUtilComparator_(self->terms_, OrgApacheLuceneUtilBytesRef_getUTF8SortedAsUnicodeComparator());
 }
 
 OrgApacheLuceneSearchDocValuesTermsQuery *new_OrgApacheLuceneSearchDocValuesTermsQuery_initWithNSString_withJavaUtilCollection_(NSString *field, id<JavaUtilCollection> terms) {
-  OrgApacheLuceneSearchDocValuesTermsQuery *self = [OrgApacheLuceneSearchDocValuesTermsQuery alloc];
-  OrgApacheLuceneSearchDocValuesTermsQuery_initWithNSString_withJavaUtilCollection_(self, field, terms);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDocValuesTermsQuery, initWithNSString_withJavaUtilCollection_, field, terms)
+}
+
+OrgApacheLuceneSearchDocValuesTermsQuery *create_OrgApacheLuceneSearchDocValuesTermsQuery_initWithNSString_withJavaUtilCollection_(NSString *field, id<JavaUtilCollection> terms) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDocValuesTermsQuery, initWithNSString_withJavaUtilCollection_, field, terms)
 }
 
 void OrgApacheLuceneSearchDocValuesTermsQuery_initWithNSString_withOrgApacheLuceneUtilBytesRefArray_(OrgApacheLuceneSearchDocValuesTermsQuery *self, NSString *field, IOSObjectArray *terms) {
@@ -221,19 +228,23 @@ void OrgApacheLuceneSearchDocValuesTermsQuery_initWithNSString_withOrgApacheLuce
 }
 
 OrgApacheLuceneSearchDocValuesTermsQuery *new_OrgApacheLuceneSearchDocValuesTermsQuery_initWithNSString_withOrgApacheLuceneUtilBytesRefArray_(NSString *field, IOSObjectArray *terms) {
-  OrgApacheLuceneSearchDocValuesTermsQuery *self = [OrgApacheLuceneSearchDocValuesTermsQuery alloc];
-  OrgApacheLuceneSearchDocValuesTermsQuery_initWithNSString_withOrgApacheLuceneUtilBytesRefArray_(self, field, terms);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDocValuesTermsQuery, initWithNSString_withOrgApacheLuceneUtilBytesRefArray_, field, terms)
+}
+
+OrgApacheLuceneSearchDocValuesTermsQuery *create_OrgApacheLuceneSearchDocValuesTermsQuery_initWithNSString_withOrgApacheLuceneUtilBytesRefArray_(NSString *field, IOSObjectArray *terms) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDocValuesTermsQuery, initWithNSString_withOrgApacheLuceneUtilBytesRefArray_, field, terms)
 }
 
 void OrgApacheLuceneSearchDocValuesTermsQuery_initWithNSString_withNSStringArray_(OrgApacheLuceneSearchDocValuesTermsQuery *self, NSString *field, IOSObjectArray *terms) {
-  OrgApacheLuceneSearchDocValuesTermsQuery_initWithNSString_withJavaUtilCollection_(self, field, [new_OrgApacheLuceneSearchDocValuesTermsQuery_$1_initWithNSStringArray_(terms) autorelease]);
+  OrgApacheLuceneSearchDocValuesTermsQuery_initWithNSString_withJavaUtilCollection_(self, field, create_OrgApacheLuceneSearchDocValuesTermsQuery_$1_initWithNSStringArray_(terms));
 }
 
 OrgApacheLuceneSearchDocValuesTermsQuery *new_OrgApacheLuceneSearchDocValuesTermsQuery_initWithNSString_withNSStringArray_(NSString *field, IOSObjectArray *terms) {
-  OrgApacheLuceneSearchDocValuesTermsQuery *self = [OrgApacheLuceneSearchDocValuesTermsQuery alloc];
-  OrgApacheLuceneSearchDocValuesTermsQuery_initWithNSString_withNSStringArray_(self, field, terms);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDocValuesTermsQuery, initWithNSString_withNSStringArray_, field, terms)
+}
+
+OrgApacheLuceneSearchDocValuesTermsQuery *create_OrgApacheLuceneSearchDocValuesTermsQuery_initWithNSString_withNSStringArray_(NSString *field, IOSObjectArray *terms) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDocValuesTermsQuery, initWithNSString_withNSStringArray_, field, terms)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocValuesTermsQuery)
@@ -241,7 +252,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocValuesTermsQuery)
 @implementation OrgApacheLuceneSearchDocValuesTermsQuery_$1
 
 - (OrgApacheLuceneUtilBytesRef *)getWithInt:(jint)index {
-  return [new_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(IOSObjectArray_Get(nil_chk(val$terms_), index)) autorelease];
+  return create_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(IOSObjectArray_Get(nil_chk(val$terms_), index));
 }
 
 - (jint)size {
@@ -253,18 +264,18 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocValuesTermsQuery)
   return self;
 }
 
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
+  return JreDefaultFastEnumeration(self, state, stackbuf, len);
+}
+
 - (void)dealloc {
   RELEASE_(val$terms_);
   [super dealloc];
 }
 
-- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "getWithInt:", "get", "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
+    { "getWithInt:", "get", "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, "(I)Lorg/apache/lucene/util/BytesRef;" },
     { "size", NULL, "I", 0x1, NULL, NULL },
     { "initWithNSStringArray:", "", NULL, 0x0, NULL, NULL },
   };
@@ -285,9 +296,11 @@ void OrgApacheLuceneSearchDocValuesTermsQuery_$1_initWithNSStringArray_(OrgApach
 }
 
 OrgApacheLuceneSearchDocValuesTermsQuery_$1 *new_OrgApacheLuceneSearchDocValuesTermsQuery_$1_initWithNSStringArray_(IOSObjectArray *capture$0) {
-  OrgApacheLuceneSearchDocValuesTermsQuery_$1 *self = [OrgApacheLuceneSearchDocValuesTermsQuery_$1 alloc];
-  OrgApacheLuceneSearchDocValuesTermsQuery_$1_initWithNSStringArray_(self, capture$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDocValuesTermsQuery_$1, initWithNSStringArray_, capture$0)
+}
+
+OrgApacheLuceneSearchDocValuesTermsQuery_$1 *create_OrgApacheLuceneSearchDocValuesTermsQuery_$1_initWithNSStringArray_(IOSObjectArray *capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDocValuesTermsQuery_$1, initWithNSStringArray_, capture$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocValuesTermsQuery_$1)
@@ -296,7 +309,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocValuesTermsQuery_$1)
 
 - (id<OrgApacheLuceneUtilBits>)getMatchingDocsWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
   OrgApacheLuceneIndexSortedSetDocValues *values = OrgApacheLuceneIndexDocValues_getSortedSetWithOrgApacheLuceneIndexLeafReader_withNSString_([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader], this$0_->field_);
-  OrgApacheLuceneUtilLongBitSet *bits = [new_OrgApacheLuceneUtilLongBitSet_initWithLong_([((OrgApacheLuceneIndexSortedSetDocValues *) nil_chk(values)) getValueCount]) autorelease];
+  OrgApacheLuceneUtilLongBitSet *bits = create_OrgApacheLuceneUtilLongBitSet_initWithLong_([((OrgApacheLuceneIndexSortedSetDocValues *) nil_chk(values)) getValueCount]);
   {
     IOSObjectArray *a__ = this$0_->terms_;
     OrgApacheLuceneUtilBytesRef * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
@@ -309,7 +322,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocValuesTermsQuery_$1)
       }
     }
   }
-  return [new_OrgApacheLuceneSearchDocValuesTermsQuery_$2_$1_initWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneUtilLongBitSet_withOrgApacheLuceneIndexLeafReaderContext_(values, bits, context) autorelease];
+  return create_OrgApacheLuceneSearchDocValuesTermsQuery_$2_$1_initWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneUtilLongBitSet_withOrgApacheLuceneIndexLeafReaderContext_(values, bits, context);
 }
 
 - (instancetype)initWithOrgApacheLuceneSearchDocValuesTermsQuery:(OrgApacheLuceneSearchDocValuesTermsQuery *)outer$
@@ -344,9 +357,11 @@ void OrgApacheLuceneSearchDocValuesTermsQuery_$2_initWithOrgApacheLuceneSearchDo
 }
 
 OrgApacheLuceneSearchDocValuesTermsQuery_$2 *new_OrgApacheLuceneSearchDocValuesTermsQuery_$2_initWithOrgApacheLuceneSearchDocValuesTermsQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchDocValuesTermsQuery *outer$, OrgApacheLuceneSearchQuery *arg$0) {
-  OrgApacheLuceneSearchDocValuesTermsQuery_$2 *self = [OrgApacheLuceneSearchDocValuesTermsQuery_$2 alloc];
-  OrgApacheLuceneSearchDocValuesTermsQuery_$2_initWithOrgApacheLuceneSearchDocValuesTermsQuery_withOrgApacheLuceneSearchQuery_(self, outer$, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDocValuesTermsQuery_$2, initWithOrgApacheLuceneSearchDocValuesTermsQuery_withOrgApacheLuceneSearchQuery_, outer$, arg$0)
+}
+
+OrgApacheLuceneSearchDocValuesTermsQuery_$2 *create_OrgApacheLuceneSearchDocValuesTermsQuery_$2_initWithOrgApacheLuceneSearchDocValuesTermsQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchDocValuesTermsQuery *outer$, OrgApacheLuceneSearchQuery *arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDocValuesTermsQuery_$2, initWithOrgApacheLuceneSearchDocValuesTermsQuery_withOrgApacheLuceneSearchQuery_, outer$, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocValuesTermsQuery_$2)
@@ -407,9 +422,11 @@ void OrgApacheLuceneSearchDocValuesTermsQuery_$2_$1_initWithOrgApacheLuceneIndex
 }
 
 OrgApacheLuceneSearchDocValuesTermsQuery_$2_$1 *new_OrgApacheLuceneSearchDocValuesTermsQuery_$2_$1_initWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneUtilLongBitSet_withOrgApacheLuceneIndexLeafReaderContext_(OrgApacheLuceneIndexSortedSetDocValues *capture$0, OrgApacheLuceneUtilLongBitSet *capture$1, OrgApacheLuceneIndexLeafReaderContext *capture$2) {
-  OrgApacheLuceneSearchDocValuesTermsQuery_$2_$1 *self = [OrgApacheLuceneSearchDocValuesTermsQuery_$2_$1 alloc];
-  OrgApacheLuceneSearchDocValuesTermsQuery_$2_$1_initWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneUtilLongBitSet_withOrgApacheLuceneIndexLeafReaderContext_(self, capture$0, capture$1, capture$2);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDocValuesTermsQuery_$2_$1, initWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneUtilLongBitSet_withOrgApacheLuceneIndexLeafReaderContext_, capture$0, capture$1, capture$2)
+}
+
+OrgApacheLuceneSearchDocValuesTermsQuery_$2_$1 *create_OrgApacheLuceneSearchDocValuesTermsQuery_$2_$1_initWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneUtilLongBitSet_withOrgApacheLuceneIndexLeafReaderContext_(OrgApacheLuceneIndexSortedSetDocValues *capture$0, OrgApacheLuceneUtilLongBitSet *capture$1, OrgApacheLuceneIndexLeafReaderContext *capture$2) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDocValuesTermsQuery_$2_$1, initWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneUtilLongBitSet_withOrgApacheLuceneIndexLeafReaderContext_, capture$0, capture$1, capture$2)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocValuesTermsQuery_$2_$1)

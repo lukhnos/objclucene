@@ -21,13 +21,19 @@ __attribute__((unused)) static void OrgApacheLuceneUtilLongValues_$1_init(OrgApa
 
 __attribute__((unused)) static OrgApacheLuceneUtilLongValues_$1 *new_OrgApacheLuceneUtilLongValues_$1_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneUtilLongValues_$1 *create_OrgApacheLuceneUtilLongValues_$1_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilLongValues_$1)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilLongValues)
 
-OrgApacheLuceneUtilLongValues *OrgApacheLuceneUtilLongValues_IDENTITY_;
+OrgApacheLuceneUtilLongValues *OrgApacheLuceneUtilLongValues_IDENTITY;
 
 @implementation OrgApacheLuceneUtilLongValues
+
++ (OrgApacheLuceneUtilLongValues *)IDENTITY {
+  return OrgApacheLuceneUtilLongValues_IDENTITY;
+}
 
 - (jlong)getWithLong:(jlong)index {
   // can't call an abstract method
@@ -48,7 +54,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilLongValues class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilLongValues_IDENTITY_, new_OrgApacheLuceneUtilLongValues_$1_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilLongValues_IDENTITY, new_OrgApacheLuceneUtilLongValues_$1_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilLongValues)
   }
 }
@@ -57,10 +63,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   static const J2ObjcMethodInfo methods[] = {
     { "getWithLong:", "get", "J", 0x401, NULL, NULL },
     { "getWithInt:", "get", "J", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "LongValues", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "IDENTITY_", NULL, 0x19, "Lorg.apache.lucene.util.LongValues;", &OrgApacheLuceneUtilLongValues_IDENTITY_, NULL, .constantValue.asLong = 0 },
+    { "IDENTITY", "IDENTITY", 0x19, "Lorg.apache.lucene.util.LongValues;", &OrgApacheLuceneUtilLongValues_IDENTITY, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneUtilLongValues = { 2, "LongValues", "org.apache.lucene.util", NULL, 0x401, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilLongValues;
@@ -103,9 +109,11 @@ void OrgApacheLuceneUtilLongValues_$1_init(OrgApacheLuceneUtilLongValues_$1 *sel
 }
 
 OrgApacheLuceneUtilLongValues_$1 *new_OrgApacheLuceneUtilLongValues_$1_init() {
-  OrgApacheLuceneUtilLongValues_$1 *self = [OrgApacheLuceneUtilLongValues_$1 alloc];
-  OrgApacheLuceneUtilLongValues_$1_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilLongValues_$1, init)
+}
+
+OrgApacheLuceneUtilLongValues_$1 *create_OrgApacheLuceneUtilLongValues_$1_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilLongValues_$1, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilLongValues_$1)

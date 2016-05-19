@@ -5,25 +5,36 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchFieldComparatorSource_INCLUDE_ALL")
-#if OrgApacheLuceneSearchFieldComparatorSource_RESTRICT
-#define OrgApacheLuceneSearchFieldComparatorSource_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchFieldComparatorSource")
+#ifdef RESTRICT_OrgApacheLuceneSearchFieldComparatorSource
+#define INCLUDE_ALL_OrgApacheLuceneSearchFieldComparatorSource 0
 #else
-#define OrgApacheLuceneSearchFieldComparatorSource_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchFieldComparatorSource 1
 #endif
-#undef OrgApacheLuceneSearchFieldComparatorSource_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchFieldComparatorSource
 
-#if !defined (_OrgApacheLuceneSearchFieldComparatorSource_) && (OrgApacheLuceneSearchFieldComparatorSource_INCLUDE_ALL || OrgApacheLuceneSearchFieldComparatorSource_INCLUDE)
-#define _OrgApacheLuceneSearchFieldComparatorSource_
+#if !defined (OrgApacheLuceneSearchFieldComparatorSource_) && (INCLUDE_ALL_OrgApacheLuceneSearchFieldComparatorSource || defined(INCLUDE_OrgApacheLuceneSearchFieldComparatorSource))
+#define OrgApacheLuceneSearchFieldComparatorSource_
 
 @class OrgApacheLuceneSearchFieldComparator;
 
+/*!
+ @brief Provides a <code>FieldComparator</code> for custom field sorting.
+ */
 @interface OrgApacheLuceneSearchFieldComparatorSource : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @brief Creates a comparator for the field in the given index.
+ @param fieldname
+ Name of the field to create comparator for.
+ @return FieldComparator.
+ @throws IOException
+ If an error occurs reading the index.
+ */
 - (OrgApacheLuceneSearchFieldComparator *)newComparatorWithNSString:(NSString *)fieldname
                                                             withInt:(jint)numHits
                                                             withInt:(jint)sortPos
@@ -39,4 +50,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparatorSource)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchFieldComparatorSource_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchFieldComparatorSource")

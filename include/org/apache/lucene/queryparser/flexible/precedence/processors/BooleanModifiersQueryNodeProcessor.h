@@ -5,24 +5,38 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsBooleanModifiersQueryNodeProcessor_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsBooleanModifiersQueryNodeProcessor_RESTRICT
-#define OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsBooleanModifiersQueryNodeProcessor_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsBooleanModifiersQueryNodeProcessor")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsBooleanModifiersQueryNodeProcessor
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsBooleanModifiersQueryNodeProcessor 0
 #else
-#define OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsBooleanModifiersQueryNodeProcessor_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsBooleanModifiersQueryNodeProcessor 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsBooleanModifiersQueryNodeProcessor_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsBooleanModifiersQueryNodeProcessor
 
-#if !defined (_OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsBooleanModifiersQueryNodeProcessor_) && (OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsBooleanModifiersQueryNodeProcessor_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsBooleanModifiersQueryNodeProcessor_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsBooleanModifiersQueryNodeProcessor_
+#if !defined (OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsBooleanModifiersQueryNodeProcessor_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsBooleanModifiersQueryNodeProcessor || defined(INCLUDE_OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsBooleanModifiersQueryNodeProcessor))
+#define OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsBooleanModifiersQueryNodeProcessor_
 
-#define OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_RESTRICT 1
-#define OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl 1
+#define INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl 1
 #include "org/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessorImpl.h"
 
 @protocol JavaUtilList;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 
+/*!
+ @brief <p>
+ This processor is used to apply the correct <code>ModifierQueryNode</code> to <code>BooleanQueryNode</code>s children.
+ </p>
+ <p>
+ It walks through the query node tree looking for <code>BooleanQueryNode</code>s. If an <code>AndQueryNode</code> is found,
+ every child, which is not a <code>ModifierQueryNode</code> or the <code>ModifierQueryNode</code> 
+ is <code>Modifier.MOD_NONE</code>, becomes a <code>Modifier.MOD_REQ</code>. For any other
+ <code>BooleanQueryNode</code> which is not an <code>OrQueryNode</code>, it checks the default operator is <code>Operator.AND</code>,
+ if it is, the same operation when an <code>AndQueryNode</code> is found is applied to it.
+ </p>
+ - seealso: ConfigurationKeys#DEFAULT_OPERATOR
+ - seealso: PrecedenceQueryParser#setDefaultOperator
+ */
 @interface OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsBooleanModifiersQueryNodeProcessor : OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl
 
 #pragma mark Public
@@ -47,8 +61,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsBoo
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsBooleanModifiersQueryNodeProcessor *new_OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsBooleanModifiersQueryNodeProcessor_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsBooleanModifiersQueryNodeProcessor *create_OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsBooleanModifiersQueryNodeProcessor_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsBooleanModifiersQueryNodeProcessor)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsBooleanModifiersQueryNodeProcessor_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsBooleanModifiersQueryNodeProcessor")

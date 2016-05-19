@@ -14,8 +14,6 @@
 #include "org/apache/lucene/search/highlight/SimpleSpanFragmenter.h"
 #include "org/apache/lucene/search/highlight/WeightedSpanTerm.h"
 
-#define OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_DEFAULT_FRAGMENT_SIZE 100
-
 @interface OrgApacheLuceneSearchHighlightSimpleSpanFragmenter () {
  @public
   jint fragmentSize_;
@@ -36,7 +34,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchHighlightSimpleSpanFragmenter, termAtt_
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchHighlightSimpleSpanFragmenter, posIncAtt_, id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchHighlightSimpleSpanFragmenter, offsetAtt_, id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchHighlightSimpleSpanFragmenter, DEFAULT_FRAGMENT_SIZE, jint)
+inline jint OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_get_DEFAULT_FRAGMENT_SIZE();
+#define OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_DEFAULT_FRAGMENT_SIZE 100
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchHighlightSimpleSpanFragmenter, DEFAULT_FRAGMENT_SIZE, jint)
 
 @implementation OrgApacheLuceneSearchHighlightSimpleSpanFragmenter
 
@@ -69,7 +69,7 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchHighlightSimpleSpanFragmenter, D
       }
     }
   }
-  jboolean isNewFrag = [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) endOffset] >= (fragmentSize_ * currentNumFrags_) && (textSize_ - [offsetAtt_ endOffset]) >= (JreURShift32(fragmentSize_, 1));
+  jboolean isNewFrag = [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) endOffset] >= (fragmentSize_ * currentNumFrags_) && (textSize_ - [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) endOffset]) >= (JreURShift32(fragmentSize_, 1));
   if (isNewFrag) {
     currentNumFrags_++;
   }
@@ -124,9 +124,11 @@ void OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_initWithOrgApacheLuceneS
 }
 
 OrgApacheLuceneSearchHighlightSimpleSpanFragmenter *new_OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_initWithOrgApacheLuceneSearchHighlightQueryScorer_(OrgApacheLuceneSearchHighlightQueryScorer *queryScorer) {
-  OrgApacheLuceneSearchHighlightSimpleSpanFragmenter *self = [OrgApacheLuceneSearchHighlightSimpleSpanFragmenter alloc];
-  OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_initWithOrgApacheLuceneSearchHighlightQueryScorer_(self, queryScorer);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchHighlightSimpleSpanFragmenter, initWithOrgApacheLuceneSearchHighlightQueryScorer_, queryScorer)
+}
+
+OrgApacheLuceneSearchHighlightSimpleSpanFragmenter *create_OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_initWithOrgApacheLuceneSearchHighlightQueryScorer_(OrgApacheLuceneSearchHighlightQueryScorer *queryScorer) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchHighlightSimpleSpanFragmenter, initWithOrgApacheLuceneSearchHighlightQueryScorer_, queryScorer)
 }
 
 void OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_initWithOrgApacheLuceneSearchHighlightQueryScorer_withInt_(OrgApacheLuceneSearchHighlightSimpleSpanFragmenter *self, OrgApacheLuceneSearchHighlightQueryScorer *queryScorer, jint fragmentSize) {
@@ -138,9 +140,11 @@ void OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_initWithOrgApacheLuceneS
 }
 
 OrgApacheLuceneSearchHighlightSimpleSpanFragmenter *new_OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_initWithOrgApacheLuceneSearchHighlightQueryScorer_withInt_(OrgApacheLuceneSearchHighlightQueryScorer *queryScorer, jint fragmentSize) {
-  OrgApacheLuceneSearchHighlightSimpleSpanFragmenter *self = [OrgApacheLuceneSearchHighlightSimpleSpanFragmenter alloc];
-  OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_initWithOrgApacheLuceneSearchHighlightQueryScorer_withInt_(self, queryScorer, fragmentSize);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchHighlightSimpleSpanFragmenter, initWithOrgApacheLuceneSearchHighlightQueryScorer_withInt_, queryScorer, fragmentSize)
+}
+
+OrgApacheLuceneSearchHighlightSimpleSpanFragmenter *create_OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_initWithOrgApacheLuceneSearchHighlightQueryScorer_withInt_(OrgApacheLuceneSearchHighlightQueryScorer *queryScorer, jint fragmentSize) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchHighlightSimpleSpanFragmenter, initWithOrgApacheLuceneSearchHighlightQueryScorer_withInt_, queryScorer, fragmentSize)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchHighlightSimpleSpanFragmenter)

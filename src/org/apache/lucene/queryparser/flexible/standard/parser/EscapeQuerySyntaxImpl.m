@@ -30,35 +30,62 @@
 + (id<JavaLangCharSequence>)escapeTermWithJavaLangCharSequence:(id<JavaLangCharSequence>)term
                                             withJavaUtilLocale:(JavaUtilLocale *)locale;
 
+/*!
+ @brief replace with ignore case
+ @param string
+ string to get replaced
+ @param sequence1
+ the old character sequence in lowercase
+ @param escapeChar
+ the new character to prefix sequence1 in return string.
+ @return the new String
+ */
 + (id<JavaLangCharSequence>)replaceIgnoreCaseWithJavaLangCharSequence:(id<JavaLangCharSequence>)string
                                              withJavaLangCharSequence:(id<JavaLangCharSequence>)sequence1
                                              withJavaLangCharSequence:(id<JavaLangCharSequence>)escapeChar
                                                    withJavaUtilLocale:(JavaUtilLocale *)locale;
 
+/*!
+ @brief escape all tokens that are part of the parser syntax on a given string
+ @param str
+ string to get replaced
+ @param locale
+ locale to be used when performing string compares
+ @return the new String
+ */
 + (id<JavaLangCharSequence>)escapeWhiteCharWithJavaLangCharSequence:(id<JavaLangCharSequence>)str
                                                  withJavaUtilLocale:(JavaUtilLocale *)locale;
 
+/*!
+ @brief Returns the numeric value of the hexadecimal character
+ */
 + (jint)hexToIntWithChar:(jchar)c;
 
 @end
 
-static IOSCharArray *OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_wildcardChars_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl, wildcardChars_, IOSCharArray *)
+inline IOSCharArray *OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_get_wildcardChars();
+static IOSCharArray *OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_wildcardChars;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl, wildcardChars, IOSCharArray *)
 
-static IOSObjectArray *OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableTermExtraFirstChars_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl, escapableTermExtraFirstChars_, IOSObjectArray *)
+inline IOSObjectArray *OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_get_escapableTermExtraFirstChars();
+static IOSObjectArray *OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableTermExtraFirstChars;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl, escapableTermExtraFirstChars, IOSObjectArray *)
 
-static IOSObjectArray *OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableTermChars_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl, escapableTermChars_, IOSObjectArray *)
+inline IOSObjectArray *OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_get_escapableTermChars();
+static IOSObjectArray *OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableTermChars;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl, escapableTermChars, IOSObjectArray *)
 
-static IOSObjectArray *OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableQuotedChars_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl, escapableQuotedChars_, IOSObjectArray *)
+inline IOSObjectArray *OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_get_escapableQuotedChars();
+static IOSObjectArray *OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableQuotedChars;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl, escapableQuotedChars, IOSObjectArray *)
 
-static IOSObjectArray *OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableWhiteChars_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl, escapableWhiteChars_, IOSObjectArray *)
+inline IOSObjectArray *OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_get_escapableWhiteChars();
+static IOSObjectArray *OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableWhiteChars;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl, escapableWhiteChars, IOSObjectArray *)
 
-static IOSObjectArray *OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableWordTokens_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl, escapableWordTokens_, IOSObjectArray *)
+inline IOSObjectArray *OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_get_escapableWordTokens();
+static IOSObjectArray *OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableWordTokens;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl, escapableWordTokens, IOSObjectArray *)
 
 __attribute__((unused)) static id<JavaLangCharSequence> OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapeCharWithJavaLangCharSequence_withJavaUtilLocale_(id<JavaLangCharSequence> str, JavaUtilLocale *locale);
 
@@ -105,15 +132,15 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQu
 
 - (id<JavaLangCharSequence>)escapeWithJavaLangCharSequence:(id<JavaLangCharSequence>)text
                                         withJavaUtilLocale:(JavaUtilLocale *)locale
-withOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum:(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum *)type {
+withOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type:(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type *)type {
   if (text == nil || [text length] == 0) return text;
   if ([text isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence class]]) {
-    text = [((OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *) nil_chk(((OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *) check_class_cast(text, [OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence class])))) toStringEscapedWithCharArray:OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_wildcardChars_];
+    text = [((OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *) cast_chk(text, [OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence class])) toStringEscapedWithCharArray:OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_wildcardChars];
   }
   else {
-    text = [((OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *) [new_OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_initWithJavaLangCharSequence_(text) autorelease]) toStringEscapedWithCharArray:OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_wildcardChars_];
+    text = [create_OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_initWithJavaLangCharSequence_(text) toStringEscapedWithCharArray:OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_wildcardChars];
   }
-  if (type == JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum, STRING)) {
+  if (type == JreLoadEnum(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type, STRING)) {
     return OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapeQuotedWithJavaLangCharSequence_withJavaUtilLocale_(self, text, locale);
   }
   else {
@@ -138,12 +165,12 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_wildcardChars_, [IOSCharArray newArrayWithChars:(jchar[]){ '*', '?' } count:2]);
-    JreStrongAssignAndConsume(&OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableTermExtraFirstChars_, [IOSObjectArray newArrayWithObjects:(id[]){ @"+", @"-", @"@" } count:3 type:NSString_class_()]);
-    JreStrongAssignAndConsume(&OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableTermChars_, [IOSObjectArray newArrayWithObjects:(id[]){ @"\"", @"<", @">", @"=", @"!", @"(", @")", @"^", @"[", @"{", @":", @"]", @"}", @"~", @"/" } count:15 type:NSString_class_()]);
-    JreStrongAssignAndConsume(&OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableQuotedChars_, [IOSObjectArray newArrayWithObjects:(id[]){ @"\"" } count:1 type:NSString_class_()]);
-    JreStrongAssignAndConsume(&OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableWhiteChars_, [IOSObjectArray newArrayWithObjects:(id[]){ @" ", @"\t", @"\n", @"\x0d", @"\x0c", @"\x08", @"\u3000" } count:7 type:NSString_class_()]);
-    JreStrongAssignAndConsume(&OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableWordTokens_, [IOSObjectArray newArrayWithObjects:(id[]){ @"AND", @"OR", @"NOT", @"TO", @"WITHIN", @"SENTENCE", @"PARAGRAPH", @"INORDER" } count:8 type:NSString_class_()]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_wildcardChars, [IOSCharArray newArrayWithChars:(jchar[]){ '*', '?' } count:2]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableTermExtraFirstChars, [IOSObjectArray newArrayWithObjects:(id[]){ @"+", @"-", @"@" } count:3 type:NSString_class_()]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableTermChars, [IOSObjectArray newArrayWithObjects:(id[]){ @"\"", @"<", @">", @"=", @"!", @"(", @")", @"^", @"[", @"{", @":", @"]", @"}", @"~", @"/" } count:15 type:NSString_class_()]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableQuotedChars, [IOSObjectArray newArrayWithObjects:(id[]){ @"\"" } count:1 type:NSString_class_()]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableWhiteChars, [IOSObjectArray newArrayWithObjects:(id[]){ @" ", @"\t", @"\n", @"\x0d", @"\x0c", @"\x08", @"\u3000" } count:7 type:NSString_class_()]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableWordTokens, [IOSObjectArray newArrayWithObjects:(id[]){ @"AND", @"OR", @"NOT", @"TO", @"WITHIN", @"SENTENCE", @"PARAGRAPH", @"INORDER" } count:8 type:NSString_class_()]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl)
   }
 }
@@ -155,18 +182,18 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "escapeTermWithJavaLangCharSequence:withJavaUtilLocale:", "escapeTerm", "Ljava.lang.CharSequence;", 0x1a, NULL, NULL },
     { "replaceIgnoreCaseWithJavaLangCharSequence:withJavaLangCharSequence:withJavaLangCharSequence:withJavaUtilLocale:", "replaceIgnoreCase", "Ljava.lang.CharSequence;", 0xa, NULL, NULL },
     { "escapeWhiteCharWithJavaLangCharSequence:withJavaUtilLocale:", "escapeWhiteChar", "Ljava.lang.CharSequence;", 0x1a, NULL, NULL },
-    { "escapeWithJavaLangCharSequence:withJavaUtilLocale:withOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum:", "escape", "Ljava.lang.CharSequence;", 0x1, NULL, NULL },
+    { "escapeWithJavaLangCharSequence:withJavaUtilLocale:withOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type:", "escape", "Ljava.lang.CharSequence;", 0x1, NULL, NULL },
     { "discardEscapeCharWithJavaLangCharSequence:", "discardEscapeChar", "Lorg.apache.lucene.queryparser.flexible.core.util.UnescapedCharSequence;", 0x9, "Lorg.apache.lucene.queryparser.flexible.standard.parser.ParseException;", NULL },
     { "hexToIntWithChar:", "hexToInt", "I", 0x1a, "Lorg.apache.lucene.queryparser.flexible.standard.parser.ParseException;", NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "EscapeQuerySyntaxImpl", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "wildcardChars_", NULL, 0x1a, "[C", &OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_wildcardChars_, NULL, .constantValue.asLong = 0 },
-    { "escapableTermExtraFirstChars_", NULL, 0x1a, "[Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableTermExtraFirstChars_, NULL, .constantValue.asLong = 0 },
-    { "escapableTermChars_", NULL, 0x1a, "[Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableTermChars_, NULL, .constantValue.asLong = 0 },
-    { "escapableQuotedChars_", NULL, 0x1a, "[Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableQuotedChars_, NULL, .constantValue.asLong = 0 },
-    { "escapableWhiteChars_", NULL, 0x1a, "[Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableWhiteChars_, NULL, .constantValue.asLong = 0 },
-    { "escapableWordTokens_", NULL, 0x1a, "[Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableWordTokens_, NULL, .constantValue.asLong = 0 },
+    { "wildcardChars", "wildcardChars", 0x1a, "[C", &OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_wildcardChars, NULL, .constantValue.asLong = 0 },
+    { "escapableTermExtraFirstChars", "escapableTermExtraFirstChars", 0x1a, "[Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableTermExtraFirstChars, NULL, .constantValue.asLong = 0 },
+    { "escapableTermChars", "escapableTermChars", 0x1a, "[Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableTermChars, NULL, .constantValue.asLong = 0 },
+    { "escapableQuotedChars", "escapableQuotedChars", 0x1a, "[Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableQuotedChars, NULL, .constantValue.asLong = 0 },
+    { "escapableWhiteChars", "escapableWhiteChars", 0x1a, "[Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableWhiteChars, NULL, .constantValue.asLong = 0 },
+    { "escapableWordTokens", "escapableWordTokens", 0x1a, "[Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableWordTokens, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl = { 2, "EscapeQuerySyntaxImpl", "org.apache.lucene.queryparser.flexible.standard.parser", NULL, 0x1, 9, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl;
@@ -178,11 +205,11 @@ id<JavaLangCharSequence> OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQ
   OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_initialize();
   if (str == nil || [str length] == 0) return str;
   id<JavaLangCharSequence> buffer = str;
-  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableTermChars_))->size_; i++) {
-    buffer = OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_replaceIgnoreCaseWithJavaLangCharSequence_withJavaLangCharSequence_withJavaLangCharSequence_withJavaUtilLocale_(buffer, [((NSString *) nil_chk(IOSObjectArray_Get(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableTermChars_, i))) lowercaseStringWithJRELocale:locale], @"\\", locale);
+  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableTermChars))->size_; i++) {
+    buffer = OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_replaceIgnoreCaseWithJavaLangCharSequence_withJavaLangCharSequence_withJavaLangCharSequence_withJavaUtilLocale_(buffer, [((NSString *) nil_chk(IOSObjectArray_Get(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableTermChars, i))) lowercaseStringWithJRELocale:locale], @"\\", locale);
   }
-  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableTermExtraFirstChars_))->size_; i++) {
-    if ([((id<JavaLangCharSequence>) nil_chk(buffer)) charAtWithInt:0] == [((NSString *) nil_chk(IOSObjectArray_Get(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableTermExtraFirstChars_, i))) charAtWithInt:0]) {
+  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableTermExtraFirstChars))->size_; i++) {
+    if ([((id<JavaLangCharSequence>) nil_chk(buffer)) charAtWithInt:0] == [((NSString *) nil_chk(IOSObjectArray_Get(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableTermExtraFirstChars, i))) charAtWithInt:0]) {
       buffer = JreStrcat("CC@", '\\', [buffer charAtWithInt:0], [buffer subSequenceFrom:1 to:[buffer length]]);
       break;
     }
@@ -193,8 +220,8 @@ id<JavaLangCharSequence> OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQ
 id<JavaLangCharSequence> OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapeQuotedWithJavaLangCharSequence_withJavaUtilLocale_(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl *self, id<JavaLangCharSequence> str, JavaUtilLocale *locale) {
   if (str == nil || [str length] == 0) return str;
   id<JavaLangCharSequence> buffer = str;
-  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableQuotedChars_))->size_; i++) {
-    buffer = OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_replaceIgnoreCaseWithJavaLangCharSequence_withJavaLangCharSequence_withJavaLangCharSequence_withJavaUtilLocale_(buffer, [((NSString *) nil_chk(IOSObjectArray_Get(nil_chk(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableTermChars_), i))) lowercaseStringWithJRELocale:locale], @"\\", locale);
+  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableQuotedChars))->size_; i++) {
+    buffer = OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_replaceIgnoreCaseWithJavaLangCharSequence_withJavaLangCharSequence_withJavaLangCharSequence_withJavaUtilLocale_(buffer, [((NSString *) nil_chk(IOSObjectArray_Get(nil_chk(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableTermChars), i))) lowercaseStringWithJRELocale:locale], @"\\", locale);
   }
   return buffer;
 }
@@ -204,19 +231,19 @@ id<JavaLangCharSequence> OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQ
   if (term == nil) return term;
   term = OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapeCharWithJavaLangCharSequence_withJavaUtilLocale_(term, locale);
   term = OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapeWhiteCharWithJavaLangCharSequence_withJavaUtilLocale_(term, locale);
-  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableWordTokens_))->size_; i++) {
-    if ([((NSString *) nil_chk(IOSObjectArray_Get(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableWordTokens_, i))) equalsIgnoreCase:[((id<JavaLangCharSequence>) nil_chk(term)) description]]) return JreStrcat("C@", '\\', term);
+  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableWordTokens))->size_; i++) {
+    if ([((NSString *) nil_chk(IOSObjectArray_Get(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableWordTokens, i))) equalsIgnoreCase:[((id<JavaLangCharSequence>) nil_chk(term)) description]]) return JreStrcat("C@", '\\', term);
   }
   return term;
 }
 
 id<JavaLangCharSequence> OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_replaceIgnoreCaseWithJavaLangCharSequence_withJavaLangCharSequence_withJavaLangCharSequence_withJavaUtilLocale_(id<JavaLangCharSequence> string, id<JavaLangCharSequence> sequence1, id<JavaLangCharSequence> escapeChar, JavaUtilLocale *locale) {
   OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_initialize();
-  if (escapeChar == nil || sequence1 == nil || string == nil) @throw [new_JavaLangNullPointerException_init() autorelease];
-  jint count = [((id<JavaLangCharSequence>) nil_chk(string)) length];
-  jint sequence1Length = [((id<JavaLangCharSequence>) nil_chk(sequence1)) length];
+  if (escapeChar == nil || sequence1 == nil || string == nil) @throw create_JavaLangNullPointerException_init();
+  jint count = [string length];
+  jint sequence1Length = [sequence1 length];
   if (sequence1Length == 0) {
-    JavaLangStringBuilder *result = [new_JavaLangStringBuilder_initWithInt_((count + 1) * [((id<JavaLangCharSequence>) nil_chk(escapeChar)) length]) autorelease];
+    JavaLangStringBuilder *result = create_JavaLangStringBuilder_initWithInt_((count + 1) * [escapeChar length]);
     [result appendWithJavaLangCharSequence:escapeChar];
     for (jint i = 0; i < count; i++) {
       [result appendWithChar:[string charAtWithInt:i]];
@@ -224,7 +251,7 @@ id<JavaLangCharSequence> OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQ
     }
     return [result description];
   }
-  JavaLangStringBuilder *result = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *result = create_JavaLangStringBuilder_init();
   jchar first = [sequence1 charAtWithInt:0];
   jint start = 0, copyStart = 0, firstIndex;
   while (start < count) {
@@ -258,8 +285,8 @@ id<JavaLangCharSequence> OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQ
   OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_initialize();
   if (str == nil || [str length] == 0) return str;
   id<JavaLangCharSequence> buffer = str;
-  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableWhiteChars_))->size_; i++) {
-    buffer = OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_replaceIgnoreCaseWithJavaLangCharSequence_withJavaLangCharSequence_withJavaLangCharSequence_withJavaUtilLocale_(buffer, [((NSString *) nil_chk(IOSObjectArray_Get(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableWhiteChars_, i))) lowercaseStringWithJRELocale:locale], @"\\", locale);
+  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableWhiteChars))->size_; i++) {
+    buffer = OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_replaceIgnoreCaseWithJavaLangCharSequence_withJavaLangCharSequence_withJavaLangCharSequence_withJavaUtilLocale_(buffer, [((NSString *) nil_chk(IOSObjectArray_Get(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_escapableWhiteChars, i))) lowercaseStringWithJRELocale:locale], @"\\", locale);
   }
   return buffer;
 }
@@ -304,12 +331,12 @@ OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *OrgApacheLucene
     }
   }
   if (codePointMultiplier > 0) {
-    @throw [new_OrgApacheLuceneQueryparserFlexibleStandardParserParseException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_([new_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, INVALID_SYNTAX_ESCAPE_UNICODE_TRUNCATION_)) autorelease]) autorelease];
+    @throw create_OrgApacheLuceneQueryparserFlexibleStandardParserParseException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_(create_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, INVALID_SYNTAX_ESCAPE_UNICODE_TRUNCATION)));
   }
   if (lastCharWasEscapeChar) {
-    @throw [new_OrgApacheLuceneQueryparserFlexibleStandardParserParseException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_([new_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, INVALID_SYNTAX_ESCAPE_CHARACTER_)) autorelease]) autorelease];
+    @throw create_OrgApacheLuceneQueryparserFlexibleStandardParserParseException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_(create_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, INVALID_SYNTAX_ESCAPE_CHARACTER)));
   }
-  return [new_OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_initWithCharArray_withBooleanArray_withInt_withInt_(output, wasEscaped, 0, length) autorelease];
+  return create_OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_initWithCharArray_withBooleanArray_withInt_withInt_(output, wasEscaped, 0, length);
 }
 
 jint OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_hexToIntWithChar_(jchar c) {
@@ -324,7 +351,7 @@ jint OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_hexTo
     return c - 'A' + 10;
   }
   else {
-    @throw [new_OrgApacheLuceneQueryparserFlexibleStandardParserParseException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_([new_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, INVALID_SYNTAX_ESCAPE_NONE_HEX_UNICODE_), [IOSObjectArray arrayWithObjects:(id[]){ JavaLangCharacter_valueOfWithChar_(c) } count:1 type:NSObject_class_()]) autorelease]) autorelease];
+    @throw create_OrgApacheLuceneQueryparserFlexibleStandardParserParseException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_(create_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, INVALID_SYNTAX_ESCAPE_NONE_HEX_UNICODE), [IOSObjectArray arrayWithObjects:(id[]){ JavaLangCharacter_valueOfWithChar_(c) } count:1 type:NSObject_class_()]));
   }
 }
 
@@ -333,9 +360,11 @@ void OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_init(
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl *new_OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_init() {
-  OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl *self = [OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl, init)
+}
+
+OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl *create_OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl)

@@ -5,29 +5,42 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory_RESTRICT
-#define OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory 0
 #else
-#define OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory
 
-#if !defined (_OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory_) && (OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory_
+#if !defined (OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory || defined(INCLUDE_OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory))
+#define OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenizerFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenizerFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenizerFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenizerFactory 1
 #include "org/apache/lucene/analysis/util/TokenizerFactory.h"
 
 @class OrgApacheLuceneAnalysisCoreKeywordTokenizer;
 @class OrgApacheLuceneUtilAttributeFactory;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>KeywordTokenizer</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_keyword" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.KeywordTokenizerFactory"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode 
+ */
 @interface OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory : OrgApacheLuceneAnalysisUtilTokenizerFactory
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new KeywordTokenizerFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisCoreKeywordTokenizer *)createWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
@@ -40,8 +53,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory_initWi
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory *new_OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory *create_OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory")

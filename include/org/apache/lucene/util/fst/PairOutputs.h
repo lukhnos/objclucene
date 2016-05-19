@@ -5,25 +5,28 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilFstPairOutputs_INCLUDE_ALL")
-#if OrgApacheLuceneUtilFstPairOutputs_RESTRICT
-#define OrgApacheLuceneUtilFstPairOutputs_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstPairOutputs")
+#ifdef RESTRICT_OrgApacheLuceneUtilFstPairOutputs
+#define INCLUDE_ALL_OrgApacheLuceneUtilFstPairOutputs 0
 #else
-#define OrgApacheLuceneUtilFstPairOutputs_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilFstPairOutputs 1
 #endif
-#undef OrgApacheLuceneUtilFstPairOutputs_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilFstPairOutputs
 
-#if !defined (_OrgApacheLuceneUtilFstPairOutputs_) && (OrgApacheLuceneUtilFstPairOutputs_INCLUDE_ALL || OrgApacheLuceneUtilFstPairOutputs_INCLUDE)
-#define _OrgApacheLuceneUtilFstPairOutputs_
+#if !defined (OrgApacheLuceneUtilFstPairOutputs_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstPairOutputs || defined(INCLUDE_OrgApacheLuceneUtilFstPairOutputs))
+#define OrgApacheLuceneUtilFstPairOutputs_
 
-#define OrgApacheLuceneUtilFstOutputs_RESTRICT 1
-#define OrgApacheLuceneUtilFstOutputs_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilFstOutputs 1
+#define INCLUDE_OrgApacheLuceneUtilFstOutputs 1
 #include "org/apache/lucene/util/fst/Outputs.h"
 
 @class OrgApacheLuceneStoreDataInput;
 @class OrgApacheLuceneStoreDataOutput;
 @class OrgApacheLuceneUtilFstPairOutputs_Pair;
 
+/*!
+ @brief An FST <code>Outputs</code> implementation, holding two other outputs.
+ */
 @interface OrgApacheLuceneUtilFstPairOutputs : OrgApacheLuceneUtilFstOutputs
 
 #pragma mark Public
@@ -39,6 +42,9 @@
 
 - (OrgApacheLuceneUtilFstPairOutputs_Pair *)getNoOutput;
 
+/*!
+ @brief Create a new Pair
+ */
 - (OrgApacheLuceneUtilFstPairOutputs_Pair *)newPairWithId:(id)a
                                                    withId:(id)b OBJC_METHOD_FAMILY_NONE;
 
@@ -66,13 +72,18 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilFstPairOutputs_initWithOrgApacheLucene
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilFstPairOutputs *new_OrgApacheLuceneUtilFstPairOutputs_initWithOrgApacheLuceneUtilFstOutputs_withOrgApacheLuceneUtilFstOutputs_(OrgApacheLuceneUtilFstOutputs *outputs1, OrgApacheLuceneUtilFstOutputs *outputs2) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstPairOutputs *create_OrgApacheLuceneUtilFstPairOutputs_initWithOrgApacheLuceneUtilFstOutputs_withOrgApacheLuceneUtilFstOutputs_(OrgApacheLuceneUtilFstOutputs *outputs1, OrgApacheLuceneUtilFstOutputs *outputs2);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstPairOutputs)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilFstPairOutputs_Pair_) && (OrgApacheLuceneUtilFstPairOutputs_INCLUDE_ALL || OrgApacheLuceneUtilFstPairOutputs_Pair_INCLUDE)
-#define _OrgApacheLuceneUtilFstPairOutputs_Pair_
+#if !defined (OrgApacheLuceneUtilFstPairOutputs_Pair_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstPairOutputs || defined(INCLUDE_OrgApacheLuceneUtilFstPairOutputs_Pair))
+#define OrgApacheLuceneUtilFstPairOutputs_Pair_
 
+/*!
+ @brief Holds a single pair of two outputs.
+ */
 @interface OrgApacheLuceneUtilFstPairOutputs_Pair : NSObject {
  @public
   id output1_;
@@ -98,4 +109,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstPairOutputs_Pair)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilFstPairOutputs_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstPairOutputs")

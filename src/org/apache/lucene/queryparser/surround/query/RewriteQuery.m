@@ -37,8 +37,8 @@
 
 - (jboolean)isEqual:(id)obj {
   if (obj == nil) return false;
-  if (![[self getClass] isEqual:[nil_chk(obj) getClass]]) return false;
-  OrgApacheLuceneQueryparserSurroundQueryRewriteQuery *other = (OrgApacheLuceneQueryparserSurroundQueryRewriteQuery *) check_class_cast(obj, [OrgApacheLuceneQueryparserSurroundQueryRewriteQuery class]);
+  if (![[self getClass] isEqual:[obj getClass]]) return false;
+  OrgApacheLuceneQueryparserSurroundQueryRewriteQuery *other = (OrgApacheLuceneQueryparserSurroundQueryRewriteQuery *) cast_chk(obj, [OrgApacheLuceneQueryparserSurroundQueryRewriteQuery class]);
   return [super isEqual:obj] && [((NSString *) nil_chk(fieldName_)) isEqual:other->fieldName_] && [((OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *) nil_chk(qf_)) isEqual:other->qf_] && [((OrgApacheLuceneQueryparserSurroundQuerySrndQuery *) nil_chk(srndQuery_)) isEqual:other->srndQuery_];
 }
 

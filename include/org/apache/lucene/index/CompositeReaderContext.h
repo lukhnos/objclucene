@@ -5,24 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexCompositeReaderContext_INCLUDE_ALL")
-#if OrgApacheLuceneIndexCompositeReaderContext_RESTRICT
-#define OrgApacheLuceneIndexCompositeReaderContext_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexCompositeReaderContext")
+#ifdef RESTRICT_OrgApacheLuceneIndexCompositeReaderContext
+#define INCLUDE_ALL_OrgApacheLuceneIndexCompositeReaderContext 0
 #else
-#define OrgApacheLuceneIndexCompositeReaderContext_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexCompositeReaderContext 1
 #endif
-#undef OrgApacheLuceneIndexCompositeReaderContext_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexCompositeReaderContext
 
-#if !defined (_OrgApacheLuceneIndexCompositeReaderContext_) && (OrgApacheLuceneIndexCompositeReaderContext_INCLUDE_ALL || OrgApacheLuceneIndexCompositeReaderContext_INCLUDE)
-#define _OrgApacheLuceneIndexCompositeReaderContext_
+#if !defined (OrgApacheLuceneIndexCompositeReaderContext_) && (INCLUDE_ALL_OrgApacheLuceneIndexCompositeReaderContext || defined(INCLUDE_OrgApacheLuceneIndexCompositeReaderContext))
+#define OrgApacheLuceneIndexCompositeReaderContext_
 
-#define OrgApacheLuceneIndexIndexReaderContext_RESTRICT 1
-#define OrgApacheLuceneIndexIndexReaderContext_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexIndexReaderContext 1
+#define INCLUDE_OrgApacheLuceneIndexIndexReaderContext 1
 #include "org/apache/lucene/index/IndexReaderContext.h"
 
 @class OrgApacheLuceneIndexCompositeReader;
 @protocol JavaUtilList;
 
+/*!
+ @brief <code>IndexReaderContext</code> for <code>CompositeReader</code> instance.
+ */
 @interface OrgApacheLuceneIndexCompositeReaderContext : OrgApacheLuceneIndexIndexReaderContext
 
 #pragma mark Public
@@ -35,10 +38,17 @@
 
 #pragma mark Package-Private
 
+/*!
+ @brief Creates a <code>CompositeReaderContext</code> for top-level readers with parent set to <code>null</code>
+ */
 - (instancetype)initWithOrgApacheLuceneIndexCompositeReader:(OrgApacheLuceneIndexCompositeReader *)reader
                                            withJavaUtilList:(id<JavaUtilList>)children
                                            withJavaUtilList:(id<JavaUtilList>)leaves;
 
+/*!
+ @brief Creates a <code>CompositeReaderContext</code> for intermediate readers that aren't
+ not top-level readers in the current context
+ */
 - (instancetype)initWithOrgApacheLuceneIndexCompositeReaderContext:(OrgApacheLuceneIndexCompositeReaderContext *)parent
                            withOrgApacheLuceneIndexCompositeReader:(OrgApacheLuceneIndexCompositeReader *)reader
                                                            withInt:(jint)ordInParent
@@ -57,12 +67,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexCompositeReaderContext_initWithOrgApa
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexCompositeReaderContext *new_OrgApacheLuceneIndexCompositeReaderContext_initWithOrgApacheLuceneIndexCompositeReaderContext_withOrgApacheLuceneIndexCompositeReader_withInt_withInt_withJavaUtilList_(OrgApacheLuceneIndexCompositeReaderContext *parent, OrgApacheLuceneIndexCompositeReader *reader, jint ordInParent, jint docbaseInParent, id<JavaUtilList> children) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexCompositeReaderContext *create_OrgApacheLuceneIndexCompositeReaderContext_initWithOrgApacheLuceneIndexCompositeReaderContext_withOrgApacheLuceneIndexCompositeReader_withInt_withInt_withJavaUtilList_(OrgApacheLuceneIndexCompositeReaderContext *parent, OrgApacheLuceneIndexCompositeReader *reader, jint ordInParent, jint docbaseInParent, id<JavaUtilList> children);
+
 FOUNDATION_EXPORT void OrgApacheLuceneIndexCompositeReaderContext_initWithOrgApacheLuceneIndexCompositeReader_withJavaUtilList_withJavaUtilList_(OrgApacheLuceneIndexCompositeReaderContext *self, OrgApacheLuceneIndexCompositeReader *reader, id<JavaUtilList> children, id<JavaUtilList> leaves);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexCompositeReaderContext *new_OrgApacheLuceneIndexCompositeReaderContext_initWithOrgApacheLuceneIndexCompositeReader_withJavaUtilList_withJavaUtilList_(OrgApacheLuceneIndexCompositeReader *reader, id<JavaUtilList> children, id<JavaUtilList> leaves) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneIndexCompositeReaderContext *create_OrgApacheLuceneIndexCompositeReaderContext_initWithOrgApacheLuceneIndexCompositeReader_withJavaUtilList_withJavaUtilList_(OrgApacheLuceneIndexCompositeReader *reader, id<JavaUtilList> children, id<JavaUtilList> leaves);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCompositeReaderContext)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexCompositeReaderContext_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexCompositeReaderContext")

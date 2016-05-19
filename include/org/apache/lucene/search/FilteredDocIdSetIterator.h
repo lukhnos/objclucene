@@ -5,21 +5,28 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchFilteredDocIdSetIterator_INCLUDE_ALL")
-#if OrgApacheLuceneSearchFilteredDocIdSetIterator_RESTRICT
-#define OrgApacheLuceneSearchFilteredDocIdSetIterator_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchFilteredDocIdSetIterator")
+#ifdef RESTRICT_OrgApacheLuceneSearchFilteredDocIdSetIterator
+#define INCLUDE_ALL_OrgApacheLuceneSearchFilteredDocIdSetIterator 0
 #else
-#define OrgApacheLuceneSearchFilteredDocIdSetIterator_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchFilteredDocIdSetIterator 1
 #endif
-#undef OrgApacheLuceneSearchFilteredDocIdSetIterator_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchFilteredDocIdSetIterator
 
-#if !defined (_OrgApacheLuceneSearchFilteredDocIdSetIterator_) && (OrgApacheLuceneSearchFilteredDocIdSetIterator_INCLUDE_ALL || OrgApacheLuceneSearchFilteredDocIdSetIterator_INCLUDE)
-#define _OrgApacheLuceneSearchFilteredDocIdSetIterator_
+#if !defined (OrgApacheLuceneSearchFilteredDocIdSetIterator_) && (INCLUDE_ALL_OrgApacheLuceneSearchFilteredDocIdSetIterator || defined(INCLUDE_OrgApacheLuceneSearchFilteredDocIdSetIterator))
+#define OrgApacheLuceneSearchFilteredDocIdSetIterator_
 
-#define OrgApacheLuceneSearchDocIdSetIterator_RESTRICT 1
-#define OrgApacheLuceneSearchDocIdSetIterator_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchDocIdSetIterator 1
+#define INCLUDE_OrgApacheLuceneSearchDocIdSetIterator 1
 #include "org/apache/lucene/search/DocIdSetIterator.h"
 
+/*!
+ @brief Abstract decorator class of a DocIdSetIterator
+ implementation that provides on-demand filter/validation
+ mechanism on an underlying DocIdSetIterator.
+ See <code>FilteredDocIdSet</code>
+ .
+ */
 @interface OrgApacheLuceneSearchFilteredDocIdSetIterator : OrgApacheLuceneSearchDocIdSetIterator {
  @public
   OrgApacheLuceneSearchDocIdSetIterator *_innerIter_;
@@ -27,6 +34,10 @@
 
 #pragma mark Public
 
+/*!
+ @brief Constructor.
+ @param innerIter Underlying DocIdSetIterator.
+ */
 - (instancetype)initWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)innerIter;
 
 - (jint)advanceWithInt:(jint)target;
@@ -35,12 +46,21 @@
 
 - (jint)docID;
 
+/*!
+ @brief Return the wrapped <code>DocIdSetIterator</code>.
+ */
 - (OrgApacheLuceneSearchDocIdSetIterator *)getDelegate;
 
 - (jint)nextDoc;
 
 #pragma mark Protected
 
+/*!
+ @brief Validation method to determine whether a docid should be in the result set.
+ @param doc docid to be tested
+ @return true if input docid should be in the result set, false otherwise.
+ - seealso: #FilteredDocIdSetIterator(DocIdSetIterator)
+ */
 - (jboolean)matchWithInt:(jint)doc;
 
 @end
@@ -55,4 +75,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFilteredDocIdSetIterator)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchFilteredDocIdSetIterator_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchFilteredDocIdSetIterator")

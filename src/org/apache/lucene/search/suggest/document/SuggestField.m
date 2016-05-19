@@ -10,7 +10,6 @@
 #include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
-#include "java/lang/Throwable.h"
 #include "org/apache/lucene/analysis/Analyzer.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/document/Field.h"
@@ -43,9 +42,17 @@ __attribute__((unused)) static jboolean OrgApacheLuceneSearchSuggestDocumentSugg
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchSuggestDocumentSuggestField)
 
-OrgApacheLuceneDocumentFieldType *OrgApacheLuceneSearchSuggestDocumentSuggestField_FIELD_TYPE_;
+OrgApacheLuceneDocumentFieldType *OrgApacheLuceneSearchSuggestDocumentSuggestField_FIELD_TYPE;
 
 @implementation OrgApacheLuceneSearchSuggestDocumentSuggestField
+
++ (OrgApacheLuceneDocumentFieldType *)FIELD_TYPE {
+  return OrgApacheLuceneSearchSuggestDocumentSuggestField_FIELD_TYPE;
+}
+
++ (jbyte)TYPE {
+  return OrgApacheLuceneSearchSuggestDocumentSuggestField_TYPE;
+}
 
 - (instancetype)initWithNSString:(NSString *)name
                     withNSString:(NSString *)value
@@ -63,10 +70,10 @@ OrgApacheLuceneDocumentFieldType *OrgApacheLuceneSearchSuggestDocumentSuggestFie
 
 - (OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *)wrapTokenStreamWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)stream {
   if ([stream isKindOfClass:[OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream class]]) {
-    return (OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *) check_class_cast(stream, [OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream class]);
+    return (OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *) cast_chk(stream, [OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream class]);
   }
   else {
-    return [new_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_initWithOrgApacheLuceneAnalysisTokenStream_(stream) autorelease];
+    return create_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_initWithOrgApacheLuceneAnalysisTokenStream_(stream);
   }
 }
 
@@ -89,14 +96,14 @@ OrgApacheLuceneDocumentFieldType *OrgApacheLuceneSearchSuggestDocumentSuggestFie
 
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchSuggestDocumentSuggestField class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneSearchSuggestDocumentSuggestField_FIELD_TYPE_, new_OrgApacheLuceneDocumentFieldType_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneSearchSuggestDocumentSuggestField_FIELD_TYPE, new_OrgApacheLuceneDocumentFieldType_init());
     {
-      [OrgApacheLuceneSearchSuggestDocumentSuggestField_FIELD_TYPE_ setTokenizedWithBoolean:true];
-      [OrgApacheLuceneSearchSuggestDocumentSuggestField_FIELD_TYPE_ setStoredWithBoolean:false];
-      [OrgApacheLuceneSearchSuggestDocumentSuggestField_FIELD_TYPE_ setStoreTermVectorsWithBoolean:false];
-      [OrgApacheLuceneSearchSuggestDocumentSuggestField_FIELD_TYPE_ setOmitNormsWithBoolean:false];
-      [OrgApacheLuceneSearchSuggestDocumentSuggestField_FIELD_TYPE_ setIndexOptionsWithOrgApacheLuceneIndexIndexOptionsEnum:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS)];
-      [OrgApacheLuceneSearchSuggestDocumentSuggestField_FIELD_TYPE_ freeze];
+      [OrgApacheLuceneSearchSuggestDocumentSuggestField_FIELD_TYPE setTokenizedWithBoolean:true];
+      [OrgApacheLuceneSearchSuggestDocumentSuggestField_FIELD_TYPE setStoredWithBoolean:false];
+      [OrgApacheLuceneSearchSuggestDocumentSuggestField_FIELD_TYPE setStoreTermVectorsWithBoolean:false];
+      [OrgApacheLuceneSearchSuggestDocumentSuggestField_FIELD_TYPE setOmitNormsWithBoolean:false];
+      [OrgApacheLuceneSearchSuggestDocumentSuggestField_FIELD_TYPE setIndexOptionsWithOrgApacheLuceneIndexIndexOptions:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS)];
+      [OrgApacheLuceneSearchSuggestDocumentSuggestField_FIELD_TYPE freeze];
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSuggestDocumentSuggestField)
   }
@@ -112,7 +119,7 @@ OrgApacheLuceneDocumentFieldType *OrgApacheLuceneSearchSuggestDocumentSuggestFie
     { "isReservedWithChar:", "isReserved", "Z", 0x2, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "FIELD_TYPE_", NULL, 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneSearchSuggestDocumentSuggestField_FIELD_TYPE_, NULL, .constantValue.asLong = 0 },
+    { "FIELD_TYPE", "FIELD_TYPE", 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneSearchSuggestDocumentSuggestField_FIELD_TYPE, NULL, .constantValue.asLong = 0 },
     { "TYPE", "TYPE", 0x18, "B", NULL, NULL, .constantValue.asChar = OrgApacheLuceneSearchSuggestDocumentSuggestField_TYPE },
     { "surfaceForm_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
     { "weight_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
@@ -124,16 +131,16 @@ OrgApacheLuceneDocumentFieldType *OrgApacheLuceneSearchSuggestDocumentSuggestFie
 @end
 
 void OrgApacheLuceneSearchSuggestDocumentSuggestField_initWithNSString_withNSString_withInt_(OrgApacheLuceneSearchSuggestDocumentSuggestField *self, NSString *name, NSString *value, jint weight) {
-  OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentFieldType_(self, name, value, OrgApacheLuceneSearchSuggestDocumentSuggestField_FIELD_TYPE_);
+  OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentFieldType_(self, name, value, OrgApacheLuceneSearchSuggestDocumentSuggestField_FIELD_TYPE);
   if (weight < 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"weight must be >= 0") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"weight must be >= 0");
   }
   if (((jint) [((NSString *) nil_chk(value)) length]) == 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"value must have a length > 0") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"value must have a length > 0");
   }
   for (jint i = 0; i < ((jint) [value length]); i++) {
     if (OrgApacheLuceneSearchSuggestDocumentSuggestField_isReservedWithChar_(self, [value charAtWithInt:i])) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$$$I$", @"Illegal input [", value, @"] UTF-16 codepoint [0x", JavaLangInteger_toHexStringWithInt_((jint) [value charAtWithInt:i]), @"] at position ", i, @" is a reserved character")) autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$$$I$", @"Illegal input [", value, @"] UTF-16 codepoint [0x", JavaLangInteger_toHexStringWithInt_((jint) [value charAtWithInt:i]), @"] at position ", i, @" is a reserved character"));
     }
   }
   JreStrongAssignAndConsume(&self->surfaceForm_, new_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(value));
@@ -141,23 +148,25 @@ void OrgApacheLuceneSearchSuggestDocumentSuggestField_initWithNSString_withNSStr
 }
 
 OrgApacheLuceneSearchSuggestDocumentSuggestField *new_OrgApacheLuceneSearchSuggestDocumentSuggestField_initWithNSString_withNSString_withInt_(NSString *name, NSString *value, jint weight) {
-  OrgApacheLuceneSearchSuggestDocumentSuggestField *self = [OrgApacheLuceneSearchSuggestDocumentSuggestField alloc];
-  OrgApacheLuceneSearchSuggestDocumentSuggestField_initWithNSString_withNSString_withInt_(self, name, value, weight);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentSuggestField, initWithNSString_withNSString_withInt_, name, value, weight)
+}
+
+OrgApacheLuceneSearchSuggestDocumentSuggestField *create_OrgApacheLuceneSearchSuggestDocumentSuggestField_initWithNSString_withNSString_withInt_(NSString *name, NSString *value, jint weight) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentSuggestField, initWithNSString_withNSString_withInt_, name, value, weight)
 }
 
 OrgApacheLuceneUtilBytesRef *OrgApacheLuceneSearchSuggestDocumentSuggestField_buildSuggestPayload(OrgApacheLuceneSearchSuggestDocumentSuggestField *self) {
-  JavaIoByteArrayOutputStream *byteArrayOutputStream = [new_JavaIoByteArrayOutputStream_init() autorelease];
+  JavaIoByteArrayOutputStream *byteArrayOutputStream = create_JavaIoByteArrayOutputStream_init();
   {
-    OrgApacheLuceneStoreOutputStreamDataOutput *output = [new_OrgApacheLuceneStoreOutputStreamDataOutput_initWithJavaIoOutputStream_(byteArrayOutputStream) autorelease];
-    JavaLangThrowable *__primaryException1 = nil;
+    OrgApacheLuceneStoreOutputStreamDataOutput *output = create_OrgApacheLuceneStoreOutputStreamDataOutput_initWithJavaIoOutputStream_(byteArrayOutputStream);
+    NSException *__primaryException1 = nil;
     @try {
       [output writeVIntWithInt:((OrgApacheLuceneUtilBytesRef *) nil_chk(self->surfaceForm_))->length_];
       [output writeBytesWithByteArray:self->surfaceForm_->bytes_ withInt:self->surfaceForm_->offset_ withInt:self->surfaceForm_->length_];
       [output writeVIntWithInt:self->weight_ + 1];
       [output writeByteWithByte:[self type]];
     }
-    @catch (JavaLangThrowable *e) {
+    @catch (NSException *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -166,8 +175,8 @@ OrgApacheLuceneUtilBytesRef *OrgApacheLuceneSearchSuggestDocumentSuggestField_bu
         if (__primaryException1 != nil) {
           @try {
             [output close];
-          } @catch (JavaLangThrowable *e) {
-            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          } @catch (NSException *e) {
+            [__primaryException1 addSuppressedWithNSException:e];
           }
         } else {
           [output close];
@@ -175,7 +184,7 @@ OrgApacheLuceneUtilBytesRef *OrgApacheLuceneSearchSuggestDocumentSuggestField_bu
       }
     }
   }
-  return [new_OrgApacheLuceneUtilBytesRef_initWithByteArray_([byteArrayOutputStream toByteArray]) autorelease];
+  return create_OrgApacheLuceneUtilBytesRef_initWithByteArray_([byteArrayOutputStream toByteArray]);
 }
 
 jboolean OrgApacheLuceneSearchSuggestDocumentSuggestField_isReservedWithChar_(OrgApacheLuceneSearchSuggestDocumentSuggestField *self, jchar c) {

@@ -5,23 +5,23 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCoreStopFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCoreStopFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisCoreStopFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreStopFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCoreStopFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCoreStopFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisCoreStopFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCoreStopFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisCoreStopFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCoreStopFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisCoreStopFilterFactory_) && (OrgApacheLuceneAnalysisCoreStopFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisCoreStopFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisCoreStopFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisCoreStopFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCoreStopFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisCoreStopFilterFactory))
+#define OrgApacheLuceneAnalysisCoreStopFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-#define OrgApacheLuceneAnalysisUtilResourceLoaderAware_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilResourceLoaderAware_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilResourceLoaderAware 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilResourceLoaderAware 1
 #include "org/apache/lucene/analysis/util/ResourceLoaderAware.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
@@ -29,10 +29,58 @@
 @protocol JavaUtilMap;
 @protocol OrgApacheLuceneAnalysisUtilResourceLoader;
 
+/*!
+ @brief Factory for <code>StopFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_stop" class="solr.TextField" positionIncrementGap="100" autoGeneratePhraseQueries="true"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+ &lt;filter class="solr.StopFilterFactory" ignoreCase="true"
+ words="stopwords.txt" format="wordset"
+ &lt;/analyzer&gt;
+ 
+@endcode
+ <p>
+ All attributes are optional:
+ </p>
+ <ul>
+ <li><code>ignoreCase</code> defaults to <code>false</code></li>
+ <li><code>words</code> should be the name of a stopwords file to parse, if not 
+ specified the factory will use <code>StopAnalyzer.ENGLISH_STOP_WORDS_SET</code>
+ </li>
+ <li><code>format</code> defines how the <code>words</code> file will be parsed, 
+ and defaults to <code>wordset</code>.  If <code>words</code> is not specified, 
+ then <code>format</code> must not be specified.
+ </li>
+ </ul>
+ <p>
+ The valid values for the <code>format</code> option are:
+ </p>
+ <ul>
+ <li><code>wordset</code> - This is the default format, which supports one word per 
+ line (including any intra-word whitespace) and allows whole line comments 
+ begining with the "#" character.  Blank lines are ignored.  See 
+ <code>WordlistLoader.getLines</code> for details.
+ </li>
+ <li><code>snowball</code> - This format allows for multiple words specified on each 
+ line, and trailing comments may be specified using the vertical line ("&#124;"). 
+ Blank lines are ignored.  See 
+ <code>WordlistLoader.getSnowballWordSet</code> 
+ for details.
+ </li>
+ </ul>
+ */
 @interface OrgApacheLuceneAnalysisCoreStopFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilResourceLoaderAware >
+
++ (NSString *)FORMAT_WORDSET;
+
++ (NSString *)FORMAT_SNOWBALL;
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new StopFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -47,18 +95,24 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCoreStopFilterFactory)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisCoreStopFilterFactory_FORMAT_WORDSET_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisCoreStopFilterFactory, FORMAT_WORDSET_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisCoreStopFilterFactory_get_FORMAT_WORDSET();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisCoreStopFilterFactory_FORMAT_WORDSET;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisCoreStopFilterFactory, FORMAT_WORDSET, NSString *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisCoreStopFilterFactory_FORMAT_SNOWBALL_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisCoreStopFilterFactory, FORMAT_SNOWBALL_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisCoreStopFilterFactory_get_FORMAT_SNOWBALL();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisCoreStopFilterFactory_FORMAT_SNOWBALL;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisCoreStopFilterFactory, FORMAT_SNOWBALL, NSString *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreStopFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisCoreStopFilterFactory *self, id<JavaUtilMap> args);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreStopFilterFactory *new_OrgApacheLuceneAnalysisCoreStopFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreStopFilterFactory *create_OrgApacheLuceneAnalysisCoreStopFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreStopFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCoreStopFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreStopFilterFactory")

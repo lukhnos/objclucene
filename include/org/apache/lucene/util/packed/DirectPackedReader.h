@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilPackedDirectPackedReader_INCLUDE_ALL")
-#if OrgApacheLuceneUtilPackedDirectPackedReader_RESTRICT
-#define OrgApacheLuceneUtilPackedDirectPackedReader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedDirectPackedReader")
+#ifdef RESTRICT_OrgApacheLuceneUtilPackedDirectPackedReader
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackedDirectPackedReader 0
 #else
-#define OrgApacheLuceneUtilPackedDirectPackedReader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackedDirectPackedReader 1
 #endif
-#undef OrgApacheLuceneUtilPackedDirectPackedReader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilPackedDirectPackedReader
 
-#if !defined (_OrgApacheLuceneUtilPackedDirectPackedReader_) && (OrgApacheLuceneUtilPackedDirectPackedReader_INCLUDE_ALL || OrgApacheLuceneUtilPackedDirectPackedReader_INCLUDE)
-#define _OrgApacheLuceneUtilPackedDirectPackedReader_
+#if !defined (OrgApacheLuceneUtilPackedDirectPackedReader_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedDirectPackedReader || defined(INCLUDE_OrgApacheLuceneUtilPackedDirectPackedReader))
+#define OrgApacheLuceneUtilPackedDirectPackedReader_
 
-#define OrgApacheLuceneUtilPackedPackedInts_RESTRICT 1
-#define OrgApacheLuceneUtilPackedPackedInts_ReaderImpl_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilPackedPackedInts 1
+#define INCLUDE_OrgApacheLuceneUtilPackedPackedInts_ReaderImpl 1
 #include "org/apache/lucene/util/packed/PackedInts.h"
 
 @class OrgApacheLuceneStoreIndexInput;
@@ -52,8 +52,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedDirectPackedReader_initWithInt_w
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectPackedReader *new_OrgApacheLuceneUtilPackedDirectPackedReader_initWithInt_withInt_withOrgApacheLuceneStoreIndexInput_(jint bitsPerValue, jint valueCount, OrgApacheLuceneStoreIndexInput *inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectPackedReader *create_OrgApacheLuceneUtilPackedDirectPackedReader_initWithInt_withInt_withOrgApacheLuceneStoreIndexInput_(jint bitsPerValue, jint valueCount, OrgApacheLuceneStoreIndexInput *inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirectPackedReader)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilPackedDirectPackedReader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedDirectPackedReader")

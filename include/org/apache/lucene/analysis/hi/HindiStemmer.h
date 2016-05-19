@@ -5,19 +5,28 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisHiHindiStemmer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisHiHindiStemmer_RESTRICT
-#define OrgApacheLuceneAnalysisHiHindiStemmer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisHiHindiStemmer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisHiHindiStemmer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisHiHindiStemmer 0
 #else
-#define OrgApacheLuceneAnalysisHiHindiStemmer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisHiHindiStemmer 1
 #endif
-#undef OrgApacheLuceneAnalysisHiHindiStemmer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisHiHindiStemmer
 
-#if !defined (_OrgApacheLuceneAnalysisHiHindiStemmer_) && (OrgApacheLuceneAnalysisHiHindiStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisHiHindiStemmer_INCLUDE)
-#define _OrgApacheLuceneAnalysisHiHindiStemmer_
+#if !defined (OrgApacheLuceneAnalysisHiHindiStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisHiHindiStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisHiHindiStemmer))
+#define OrgApacheLuceneAnalysisHiHindiStemmer_
 
 @class IOSCharArray;
 
+/*!
+ @brief Light Stemmer for Hindi.
+ <p>
+ Implements the algorithm specified in:
+ <i>A Lightweight Stemmer for Hindi</i>
+ Ananthakrishnan Ramanathan and Durgesh D Rao.
+ http://computing.open.ac.uk/Sites/EACLSouthAsia/Papers/p6-Ramanathan.pdf
+ </p>
+ */
 @interface OrgApacheLuceneAnalysisHiHindiStemmer : NSObject
 
 #pragma mark Public
@@ -35,8 +44,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisHiHindiStemmer_init(OrgApacheLucen
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisHiHindiStemmer *new_OrgApacheLuceneAnalysisHiHindiStemmer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisHiHindiStemmer *create_OrgApacheLuceneAnalysisHiHindiStemmer_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisHiHindiStemmer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisHiHindiStemmer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisHiHindiStemmer")

@@ -24,14 +24,19 @@
 
 @end
 
-static IOSIntArray *OrgApacheLuceneUtilPackedPacked64SingleBlock_SUPPORTED_BITS_PER_VALUE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilPackedPacked64SingleBlock, SUPPORTED_BITS_PER_VALUE_, IOSIntArray *)
+inline IOSIntArray *OrgApacheLuceneUtilPackedPacked64SingleBlock_get_SUPPORTED_BITS_PER_VALUE();
+static IOSIntArray *OrgApacheLuceneUtilPackedPacked64SingleBlock_SUPPORTED_BITS_PER_VALUE;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilPackedPacked64SingleBlock, SUPPORTED_BITS_PER_VALUE, IOSIntArray *)
 
 __attribute__((unused)) static jint OrgApacheLuceneUtilPackedPacked64SingleBlock_requiredCapacityWithInt_withInt_(jint valueCount, jint valuesPerBlock);
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPackedPacked64SingleBlock)
 
 @implementation OrgApacheLuceneUtilPackedPacked64SingleBlock
+
++ (jint)MAX_SUPPORTED_BITS_PER_VALUE {
+  return OrgApacheLuceneUtilPackedPacked64SingleBlock_MAX_SUPPORTED_BITS_PER_VALUE;
+}
 
 + (jboolean)isSupportedWithInt:(jint)bitsPerValue {
   return OrgApacheLuceneUtilPackedPacked64SingleBlock_isSupportedWithInt_(bitsPerValue);
@@ -53,7 +58,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPackedPacked64SingleBlock)
 }
 
 - (jlong)ramBytesUsed {
-  return OrgApacheLuceneUtilRamUsageEstimator_alignObjectSizeWithLong_(JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER_) + 2 * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_)) + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithLongArray_(blocks_);
+  return OrgApacheLuceneUtilRamUsageEstimator_alignObjectSizeWithLong_(JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER) + 2 * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF)) + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithLongArray_(blocks_);
 }
 
 - (jint)getWithInt:(jint)index
@@ -77,7 +82,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPackedPacked64SingleBlock)
     }
   }
   JreAssert((index % valuesPerBlock == 0), (@"org/apache/lucene/util/packed/Packed64SingleBlock.java:93 condition failed: assert index % valuesPerBlock == 0;"));
-  id<OrgApacheLuceneUtilPackedPackedInts_Decoder> decoder = OrgApacheLuceneUtilPackedBulkOperation_ofWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_(JreLoadStatic(OrgApacheLuceneUtilPackedPackedInts_FormatEnum, PACKED_SINGLE_BLOCK), bitsPerValue_);
+  id<OrgApacheLuceneUtilPackedPackedInts_Decoder> decoder = OrgApacheLuceneUtilPackedBulkOperation_ofWithOrgApacheLuceneUtilPackedPackedInts_Format_withInt_(JreLoadEnum(OrgApacheLuceneUtilPackedPackedInts_Format, PACKED_SINGLE_BLOCK), bitsPerValue_);
   JreAssert(([((id<OrgApacheLuceneUtilPackedPackedInts_Decoder>) nil_chk(decoder)) longBlockCount] == 1), (@"org/apache/lucene/util/packed/Packed64SingleBlock.java:95 condition failed: assert decoder.longBlockCount() == 1;"));
   JreAssert(([decoder longValueCount] == valuesPerBlock), (@"org/apache/lucene/util/packed/Packed64SingleBlock.java:96 condition failed: assert decoder.longValueCount() == valuesPerBlock;"));
   jint blockIndex = index / valuesPerBlock;
@@ -116,7 +121,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPackedPacked64SingleBlock)
     }
   }
   JreAssert((index % valuesPerBlock == 0), (@"org/apache/lucene/util/packed/Packed64SingleBlock.java:137 condition failed: assert index % valuesPerBlock == 0;"));
-  OrgApacheLuceneUtilPackedBulkOperation *op = OrgApacheLuceneUtilPackedBulkOperation_ofWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_(JreLoadStatic(OrgApacheLuceneUtilPackedPackedInts_FormatEnum, PACKED_SINGLE_BLOCK), bitsPerValue_);
+  OrgApacheLuceneUtilPackedBulkOperation *op = OrgApacheLuceneUtilPackedBulkOperation_ofWithOrgApacheLuceneUtilPackedPackedInts_Format_withInt_(JreLoadEnum(OrgApacheLuceneUtilPackedPackedInts_Format, PACKED_SINGLE_BLOCK), bitsPerValue_);
   JreAssert(([((OrgApacheLuceneUtilPackedBulkOperation *) nil_chk(op)) longBlockCount] == 1), (@"org/apache/lucene/util/packed/Packed64SingleBlock.java:139 condition failed: assert op.longBlockCount() == 1;"));
   JreAssert(([op longValueCount] == valuesPerBlock), (@"org/apache/lucene/util/packed/Packed64SingleBlock.java:140 condition failed: assert op.longValueCount() == valuesPerBlock;"));
   jint blockIndex = index / valuesPerBlock;
@@ -165,8 +170,8 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPackedPacked64SingleBlock)
   }
 }
 
-- (OrgApacheLuceneUtilPackedPackedInts_FormatEnum *)getFormat {
-  return JreLoadStatic(OrgApacheLuceneUtilPackedPackedInts_FormatEnum, PACKED_SINGLE_BLOCK);
+- (OrgApacheLuceneUtilPackedPackedInts_Format *)getFormat {
+  return JreLoadEnum(OrgApacheLuceneUtilPackedPackedInts_Format, PACKED_SINGLE_BLOCK);
 }
 
 - (NSString *)description {
@@ -191,7 +196,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPackedPacked64SingleBlock)
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilPackedPacked64SingleBlock class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilPackedPacked64SingleBlock_SUPPORTED_BITS_PER_VALUE_, [IOSIntArray newArrayWithInts:(jint[]){ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 16, 21, 32 } count:14]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilPackedPacked64SingleBlock_SUPPORTED_BITS_PER_VALUE, [IOSIntArray newArrayWithInts:(jint[]){ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 16, 21, 32 } count:14]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilPackedPacked64SingleBlock)
   }
 }
@@ -213,7 +218,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPackedPacked64SingleBlock)
   };
   static const J2ObjcFieldInfo fields[] = {
     { "MAX_SUPPORTED_BITS_PER_VALUE", "MAX_SUPPORTED_BITS_PER_VALUE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilPackedPacked64SingleBlock_MAX_SUPPORTED_BITS_PER_VALUE },
-    { "SUPPORTED_BITS_PER_VALUE_", NULL, 0x1a, "[I", &OrgApacheLuceneUtilPackedPacked64SingleBlock_SUPPORTED_BITS_PER_VALUE_, NULL, .constantValue.asLong = 0 },
+    { "SUPPORTED_BITS_PER_VALUE", "SUPPORTED_BITS_PER_VALUE", 0x1a, "[I", &OrgApacheLuceneUtilPackedPacked64SingleBlock_SUPPORTED_BITS_PER_VALUE, NULL, .constantValue.asLong = 0 },
     { "blocks_", NULL, 0x10, "[J", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.packed.Packed64SingleBlock$Packed64SingleBlock1;", "Lorg.apache.lucene.util.packed.Packed64SingleBlock$Packed64SingleBlock2;", "Lorg.apache.lucene.util.packed.Packed64SingleBlock$Packed64SingleBlock3;", "Lorg.apache.lucene.util.packed.Packed64SingleBlock$Packed64SingleBlock4;", "Lorg.apache.lucene.util.packed.Packed64SingleBlock$Packed64SingleBlock5;", "Lorg.apache.lucene.util.packed.Packed64SingleBlock$Packed64SingleBlock6;", "Lorg.apache.lucene.util.packed.Packed64SingleBlock$Packed64SingleBlock7;", "Lorg.apache.lucene.util.packed.Packed64SingleBlock$Packed64SingleBlock8;", "Lorg.apache.lucene.util.packed.Packed64SingleBlock$Packed64SingleBlock9;", "Lorg.apache.lucene.util.packed.Packed64SingleBlock$Packed64SingleBlock10;", "Lorg.apache.lucene.util.packed.Packed64SingleBlock$Packed64SingleBlock12;", "Lorg.apache.lucene.util.packed.Packed64SingleBlock$Packed64SingleBlock16;", "Lorg.apache.lucene.util.packed.Packed64SingleBlock$Packed64SingleBlock21;", "Lorg.apache.lucene.util.packed.Packed64SingleBlock$Packed64SingleBlock32;"};
@@ -225,7 +230,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPackedPacked64SingleBlock)
 
 jboolean OrgApacheLuceneUtilPackedPacked64SingleBlock_isSupportedWithInt_(jint bitsPerValue) {
   OrgApacheLuceneUtilPackedPacked64SingleBlock_initialize();
-  return JavaUtilArrays_binarySearchWithIntArray_withInt_(OrgApacheLuceneUtilPackedPacked64SingleBlock_SUPPORTED_BITS_PER_VALUE_, bitsPerValue) >= 0;
+  return JavaUtilArrays_binarySearchWithIntArray_withInt_(OrgApacheLuceneUtilPackedPacked64SingleBlock_SUPPORTED_BITS_PER_VALUE, bitsPerValue) >= 0;
 }
 
 jint OrgApacheLuceneUtilPackedPacked64SingleBlock_requiredCapacityWithInt_withInt_(jint valueCount, jint valuesPerBlock) {
@@ -253,35 +258,35 @@ OrgApacheLuceneUtilPackedPacked64SingleBlock *OrgApacheLuceneUtilPackedPacked64S
   OrgApacheLuceneUtilPackedPacked64SingleBlock_initialize();
   switch (bitsPerValue) {
     case 1:
-    return [new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock1_initWithInt_(valueCount) autorelease];
+    return create_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock1_initWithInt_(valueCount);
     case 2:
-    return [new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock2_initWithInt_(valueCount) autorelease];
+    return create_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock2_initWithInt_(valueCount);
     case 3:
-    return [new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock3_initWithInt_(valueCount) autorelease];
+    return create_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock3_initWithInt_(valueCount);
     case 4:
-    return [new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock4_initWithInt_(valueCount) autorelease];
+    return create_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock4_initWithInt_(valueCount);
     case 5:
-    return [new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock5_initWithInt_(valueCount) autorelease];
+    return create_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock5_initWithInt_(valueCount);
     case 6:
-    return [new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock6_initWithInt_(valueCount) autorelease];
+    return create_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock6_initWithInt_(valueCount);
     case 7:
-    return [new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock7_initWithInt_(valueCount) autorelease];
+    return create_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock7_initWithInt_(valueCount);
     case 8:
-    return [new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock8_initWithInt_(valueCount) autorelease];
+    return create_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock8_initWithInt_(valueCount);
     case 9:
-    return [new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock9_initWithInt_(valueCount) autorelease];
+    return create_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock9_initWithInt_(valueCount);
     case 10:
-    return [new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock10_initWithInt_(valueCount) autorelease];
+    return create_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock10_initWithInt_(valueCount);
     case 12:
-    return [new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock12_initWithInt_(valueCount) autorelease];
+    return create_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock12_initWithInt_(valueCount);
     case 16:
-    return [new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock16_initWithInt_(valueCount) autorelease];
+    return create_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock16_initWithInt_(valueCount);
     case 21:
-    return [new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock21_initWithInt_(valueCount) autorelease];
+    return create_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock21_initWithInt_(valueCount);
     case 32:
-    return [new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock32_initWithInt_(valueCount) autorelease];
+    return create_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock32_initWithInt_(valueCount);
     default:
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"Unsupported number of bits per value: 32") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"Unsupported number of bits per value: 32");
   }
 }
 
@@ -326,9 +331,11 @@ void OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock1_initWithI
 }
 
 OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock1 *new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock1_initWithInt_(jint valueCount) {
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock1 *self = [OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock1 alloc];
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock1_initWithInt_(self, valueCount);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock1, initWithInt_, valueCount)
+}
+
+OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock1 *create_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock1_initWithInt_(jint valueCount) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock1, initWithInt_, valueCount)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock1)
@@ -372,9 +379,11 @@ void OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock2_initWithI
 }
 
 OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock2 *new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock2_initWithInt_(jint valueCount) {
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock2 *self = [OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock2 alloc];
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock2_initWithInt_(self, valueCount);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock2, initWithInt_, valueCount)
+}
+
+OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock2 *create_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock2_initWithInt_(jint valueCount) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock2, initWithInt_, valueCount)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock2)
@@ -418,9 +427,11 @@ void OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock3_initWithI
 }
 
 OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock3 *new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock3_initWithInt_(jint valueCount) {
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock3 *self = [OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock3 alloc];
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock3_initWithInt_(self, valueCount);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock3, initWithInt_, valueCount)
+}
+
+OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock3 *create_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock3_initWithInt_(jint valueCount) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock3, initWithInt_, valueCount)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock3)
@@ -464,9 +475,11 @@ void OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock4_initWithI
 }
 
 OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock4 *new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock4_initWithInt_(jint valueCount) {
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock4 *self = [OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock4 alloc];
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock4_initWithInt_(self, valueCount);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock4, initWithInt_, valueCount)
+}
+
+OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock4 *create_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock4_initWithInt_(jint valueCount) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock4, initWithInt_, valueCount)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock4)
@@ -510,9 +523,11 @@ void OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock5_initWithI
 }
 
 OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock5 *new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock5_initWithInt_(jint valueCount) {
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock5 *self = [OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock5 alloc];
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock5_initWithInt_(self, valueCount);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock5, initWithInt_, valueCount)
+}
+
+OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock5 *create_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock5_initWithInt_(jint valueCount) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock5, initWithInt_, valueCount)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock5)
@@ -556,9 +571,11 @@ void OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock6_initWithI
 }
 
 OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock6 *new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock6_initWithInt_(jint valueCount) {
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock6 *self = [OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock6 alloc];
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock6_initWithInt_(self, valueCount);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock6, initWithInt_, valueCount)
+}
+
+OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock6 *create_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock6_initWithInt_(jint valueCount) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock6, initWithInt_, valueCount)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock6)
@@ -602,9 +619,11 @@ void OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock7_initWithI
 }
 
 OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock7 *new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock7_initWithInt_(jint valueCount) {
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock7 *self = [OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock7 alloc];
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock7_initWithInt_(self, valueCount);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock7, initWithInt_, valueCount)
+}
+
+OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock7 *create_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock7_initWithInt_(jint valueCount) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock7, initWithInt_, valueCount)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock7)
@@ -648,9 +667,11 @@ void OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock8_initWithI
 }
 
 OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock8 *new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock8_initWithInt_(jint valueCount) {
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock8 *self = [OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock8 alloc];
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock8_initWithInt_(self, valueCount);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock8, initWithInt_, valueCount)
+}
+
+OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock8 *create_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock8_initWithInt_(jint valueCount) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock8, initWithInt_, valueCount)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock8)
@@ -694,9 +715,11 @@ void OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock9_initWithI
 }
 
 OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock9 *new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock9_initWithInt_(jint valueCount) {
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock9 *self = [OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock9 alloc];
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock9_initWithInt_(self, valueCount);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock9, initWithInt_, valueCount)
+}
+
+OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock9 *create_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock9_initWithInt_(jint valueCount) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock9, initWithInt_, valueCount)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock9)
@@ -740,9 +763,11 @@ void OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock10_initWith
 }
 
 OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock10 *new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock10_initWithInt_(jint valueCount) {
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock10 *self = [OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock10 alloc];
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock10_initWithInt_(self, valueCount);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock10, initWithInt_, valueCount)
+}
+
+OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock10 *create_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock10_initWithInt_(jint valueCount) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock10, initWithInt_, valueCount)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock10)
@@ -786,9 +811,11 @@ void OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock12_initWith
 }
 
 OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock12 *new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock12_initWithInt_(jint valueCount) {
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock12 *self = [OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock12 alloc];
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock12_initWithInt_(self, valueCount);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock12, initWithInt_, valueCount)
+}
+
+OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock12 *create_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock12_initWithInt_(jint valueCount) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock12, initWithInt_, valueCount)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock12)
@@ -832,9 +859,11 @@ void OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock16_initWith
 }
 
 OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock16 *new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock16_initWithInt_(jint valueCount) {
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock16 *self = [OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock16 alloc];
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock16_initWithInt_(self, valueCount);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock16, initWithInt_, valueCount)
+}
+
+OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock16 *create_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock16_initWithInt_(jint valueCount) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock16, initWithInt_, valueCount)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock16)
@@ -878,9 +907,11 @@ void OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock21_initWith
 }
 
 OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock21 *new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock21_initWithInt_(jint valueCount) {
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock21 *self = [OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock21 alloc];
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock21_initWithInt_(self, valueCount);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock21, initWithInt_, valueCount)
+}
+
+OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock21 *create_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock21_initWithInt_(jint valueCount) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock21, initWithInt_, valueCount)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock21)
@@ -924,9 +955,11 @@ void OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock32_initWith
 }
 
 OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock32 *new_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock32_initWithInt_(jint valueCount) {
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock32 *self = [OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock32 alloc];
-  OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock32_initWithInt_(self, valueCount);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock32, initWithInt_, valueCount)
+}
+
+OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock32 *create_OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock32_initWithInt_(jint valueCount) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock32, initWithInt_, valueCount)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPacked64SingleBlock_Packed64SingleBlock32)

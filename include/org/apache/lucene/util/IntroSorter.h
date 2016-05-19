@@ -5,25 +5,37 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilIntroSorter_INCLUDE_ALL")
-#if OrgApacheLuceneUtilIntroSorter_RESTRICT
-#define OrgApacheLuceneUtilIntroSorter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilIntroSorter")
+#ifdef RESTRICT_OrgApacheLuceneUtilIntroSorter
+#define INCLUDE_ALL_OrgApacheLuceneUtilIntroSorter 0
 #else
-#define OrgApacheLuceneUtilIntroSorter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilIntroSorter 1
 #endif
-#undef OrgApacheLuceneUtilIntroSorter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilIntroSorter
 
-#if !defined (_OrgApacheLuceneUtilIntroSorter_) && (OrgApacheLuceneUtilIntroSorter_INCLUDE_ALL || OrgApacheLuceneUtilIntroSorter_INCLUDE)
-#define _OrgApacheLuceneUtilIntroSorter_
+#if !defined (OrgApacheLuceneUtilIntroSorter_) && (INCLUDE_ALL_OrgApacheLuceneUtilIntroSorter || defined(INCLUDE_OrgApacheLuceneUtilIntroSorter))
+#define OrgApacheLuceneUtilIntroSorter_
 
-#define OrgApacheLuceneUtilSorter_RESTRICT 1
-#define OrgApacheLuceneUtilSorter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilSorter 1
+#define INCLUDE_OrgApacheLuceneUtilSorter 1
 #include "org/apache/lucene/util/Sorter.h"
 
+/*!
+ @brief <code>Sorter</code> implementation based on a variant of the quicksort algorithm
+ called <a href="http://en.wikipedia.org/wiki/Introsort">introsort</a>: when
+ the recursion level exceeds the log of the length of the array to sort, it
+ falls back to heapsort.
+ This prevents quicksort from running into its
+ worst-case quadratic runtime. Small arrays are sorted with
+ insertion sort.
+ */
 @interface OrgApacheLuceneUtilIntroSorter : OrgApacheLuceneUtilSorter
 
 #pragma mark Public
 
+/*!
+ @brief Create a new <code>IntroSorter</code>.
+ */
 - (instancetype)init;
 
 - (void)sortWithInt:(jint)from
@@ -31,8 +43,16 @@
 
 #pragma mark Protected
 
+/*!
+ @brief Compare the pivot with the slot at <code>j</code>, similarly to
+ <code>compare(i, j)</code>.
+ */
 - (jint)comparePivotWithInt:(jint)j;
 
+/*!
+ @brief Save the value at slot <code>i</code> so that it can later be used as a
+ pivot, see <code>comparePivot(int)</code>.
+ */
 - (void)setPivotWithInt:(jint)i;
 
 #pragma mark Package-Private
@@ -55,4 +75,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilIntroSorter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilIntroSorter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilIntroSorter")

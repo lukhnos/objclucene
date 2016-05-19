@@ -5,21 +5,30 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgTartarusSnowballAmong_INCLUDE_ALL")
-#if OrgTartarusSnowballAmong_RESTRICT
-#define OrgTartarusSnowballAmong_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgTartarusSnowballAmong")
+#ifdef RESTRICT_OrgTartarusSnowballAmong
+#define INCLUDE_ALL_OrgTartarusSnowballAmong 0
 #else
-#define OrgTartarusSnowballAmong_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgTartarusSnowballAmong 1
 #endif
-#undef OrgTartarusSnowballAmong_RESTRICT
+#undef RESTRICT_OrgTartarusSnowballAmong
 
-#if !defined (_OrgTartarusSnowballAmong_) && (OrgTartarusSnowballAmong_INCLUDE_ALL || OrgTartarusSnowballAmong_INCLUDE)
-#define _OrgTartarusSnowballAmong_
+#if !defined (OrgTartarusSnowballAmong_) && (INCLUDE_ALL_OrgTartarusSnowballAmong || defined(INCLUDE_OrgTartarusSnowballAmong))
+#define OrgTartarusSnowballAmong_
 
 @class IOSCharArray;
 @class JavaLangReflectMethod;
 @class OrgTartarusSnowballSnowballProgram;
 
+/*!
+ @brief This is the rev 502 of the Snowball SVN trunk,
+ but modified:
+ made abstract and introduced abstract method stem to avoid expensive reflection in filter class.
+ refactored StringBuffers to StringBuilder
+ uses char[] as buffer instead of StringBuffer/StringBuilder
+ eq_s,eq_s_b,insert,replace_s take CharSequence like eq_v and eq_v_b
+ reflection calls (Lovins, etc) use EMPTY_ARGS/EMPTY_PARAMS
+ */
 @interface OrgTartarusSnowballAmong : NSObject {
  @public
   jint s_size_;
@@ -50,8 +59,10 @@ FOUNDATION_EXPORT void OrgTartarusSnowballAmong_initWithNSString_withInt_withInt
 
 FOUNDATION_EXPORT OrgTartarusSnowballAmong *new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(NSString *s, jint substring_i, jint result, NSString *methodname, OrgTartarusSnowballSnowballProgram *methodobject) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgTartarusSnowballAmong *create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(NSString *s, jint substring_i, jint result, NSString *methodname, OrgTartarusSnowballSnowballProgram *methodobject);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgTartarusSnowballAmong)
 
 #endif
 
-#pragma pop_macro("OrgTartarusSnowballAmong_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgTartarusSnowballAmong")

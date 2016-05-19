@@ -5,24 +5,29 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchDisiPriorityQueue_INCLUDE_ALL")
-#if OrgApacheLuceneSearchDisiPriorityQueue_RESTRICT
-#define OrgApacheLuceneSearchDisiPriorityQueue_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchDisiPriorityQueue")
+#ifdef RESTRICT_OrgApacheLuceneSearchDisiPriorityQueue
+#define INCLUDE_ALL_OrgApacheLuceneSearchDisiPriorityQueue 0
 #else
-#define OrgApacheLuceneSearchDisiPriorityQueue_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchDisiPriorityQueue 1
 #endif
-#undef OrgApacheLuceneSearchDisiPriorityQueue_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchDisiPriorityQueue
 
-#if !defined (_OrgApacheLuceneSearchDisiPriorityQueue_) && (OrgApacheLuceneSearchDisiPriorityQueue_INCLUDE_ALL || OrgApacheLuceneSearchDisiPriorityQueue_INCLUDE)
-#define _OrgApacheLuceneSearchDisiPriorityQueue_
+#if !defined (OrgApacheLuceneSearchDisiPriorityQueue_) && (INCLUDE_ALL_OrgApacheLuceneSearchDisiPriorityQueue || defined(INCLUDE_OrgApacheLuceneSearchDisiPriorityQueue))
+#define OrgApacheLuceneSearchDisiPriorityQueue_
 
-#define JavaLangIterable_RESTRICT 1
-#define JavaLangIterable_INCLUDE 1
+#define RESTRICT_JavaLangIterable 1
+#define INCLUDE_JavaLangIterable 1
 #include "java/lang/Iterable.h"
 
 @class OrgApacheLuceneSearchDisiWrapper;
 @protocol JavaUtilIterator;
 
+/*!
+ @brief A priority queue of DocIdSetIterators that orders by current doc ID.
+ This specialization is needed over <code>PriorityQueue</code> because the
+ pluggable comparison function makes the rebalancing quite slow.
+ */
 @interface OrgApacheLuceneSearchDisiPriorityQueue : NSObject < JavaLangIterable >
 
 #pragma mark Public
@@ -39,6 +44,9 @@
 
 - (OrgApacheLuceneSearchDisiWrapper *)top;
 
+/*!
+ @brief Get the list of scorers which are on the current doc.
+ */
 - (OrgApacheLuceneSearchDisiWrapper *)topList;
 
 - (OrgApacheLuceneSearchDisiWrapper *)updateTop;
@@ -57,7 +65,6 @@
 
 - (void)upHeapWithInt:(jint)i;
 
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchDisiPriorityQueue)
@@ -72,8 +79,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchDisiPriorityQueue_initWithInt_(OrgAp
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchDisiPriorityQueue *new_OrgApacheLuceneSearchDisiPriorityQueue_initWithInt_(jint maxSize) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchDisiPriorityQueue *create_OrgApacheLuceneSearchDisiPriorityQueue_initWithInt_(jint maxSize);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDisiPriorityQueue)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchDisiPriorityQueue_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchDisiPriorityQueue")

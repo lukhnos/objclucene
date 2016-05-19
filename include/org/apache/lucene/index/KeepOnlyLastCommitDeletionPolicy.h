@@ -5,31 +5,47 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy_INCLUDE_ALL")
-#if OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy_RESTRICT
-#define OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy")
+#ifdef RESTRICT_OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy
+#define INCLUDE_ALL_OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy 0
 #else
-#define OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy 1
 #endif
-#undef OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy
 
-#if !defined (_OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy_) && (OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy_INCLUDE_ALL || OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy_INCLUDE)
-#define _OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy_
+#if !defined (OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy_) && (INCLUDE_ALL_OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy || defined(INCLUDE_OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy))
+#define OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy_
 
-#define OrgApacheLuceneIndexIndexDeletionPolicy_RESTRICT 1
-#define OrgApacheLuceneIndexIndexDeletionPolicy_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexIndexDeletionPolicy 1
+#define INCLUDE_OrgApacheLuceneIndexIndexDeletionPolicy 1
 #include "org/apache/lucene/index/IndexDeletionPolicy.h"
 
 @protocol JavaUtilList;
 
+/*!
+ @brief This <code>IndexDeletionPolicy</code> implementation that
+ keeps only the most recent commit and immediately removes
+ all prior commits after a new commit is done.
+ This is
+ the default deletion policy.
+ */
 @interface OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy : OrgApacheLuceneIndexIndexDeletionPolicy
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ */
 - (instancetype)init;
 
+/*!
+ @brief Deletes all commits except the most recent one.
+ */
 - (void)onCommitWithJavaUtilList:(id<JavaUtilList>)commits;
 
+/*!
+ @brief Deletes all commits except the most recent one.
+ */
 - (void)onInitWithJavaUtilList:(id<JavaUtilList>)commits;
 
 @end
@@ -40,8 +56,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy_init
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy *new_OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy *create_OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy")

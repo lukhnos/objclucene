@@ -5,68 +5,121 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexDocValuesType_INCLUDE_ALL")
-#if OrgApacheLuceneIndexDocValuesType_RESTRICT
-#define OrgApacheLuceneIndexDocValuesType_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexDocValuesType")
+#ifdef RESTRICT_OrgApacheLuceneIndexDocValuesType
+#define INCLUDE_ALL_OrgApacheLuceneIndexDocValuesType 0
 #else
-#define OrgApacheLuceneIndexDocValuesType_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexDocValuesType 1
 #endif
-#undef OrgApacheLuceneIndexDocValuesType_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexDocValuesType
 
-#if !defined (_OrgApacheLuceneIndexDocValuesTypeEnum_) && (OrgApacheLuceneIndexDocValuesType_INCLUDE_ALL || OrgApacheLuceneIndexDocValuesTypeEnum_INCLUDE)
-#define _OrgApacheLuceneIndexDocValuesTypeEnum_
+#if !defined (OrgApacheLuceneIndexDocValuesType_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocValuesType || defined(INCLUDE_OrgApacheLuceneIndexDocValuesType))
+#define OrgApacheLuceneIndexDocValuesType_
 
-#define JavaLangEnum_RESTRICT 1
-#define JavaLangEnum_INCLUDE 1
+#define RESTRICT_JavaLangEnum 1
+#define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
 
-typedef NS_ENUM(NSUInteger, OrgApacheLuceneIndexDocValuesType) {
-  OrgApacheLuceneIndexDocValuesType_NONE = 0,
-  OrgApacheLuceneIndexDocValuesType_NUMERIC = 1,
-  OrgApacheLuceneIndexDocValuesType_BINARY = 2,
-  OrgApacheLuceneIndexDocValuesType_SORTED = 3,
-  OrgApacheLuceneIndexDocValuesType_SORTED_NUMERIC = 4,
-  OrgApacheLuceneIndexDocValuesType_SORTED_SET = 5,
+typedef NS_ENUM(NSUInteger, OrgApacheLuceneIndexDocValuesType_Enum) {
+  OrgApacheLuceneIndexDocValuesType_Enum_NONE = 0,
+  OrgApacheLuceneIndexDocValuesType_Enum_NUMERIC = 1,
+  OrgApacheLuceneIndexDocValuesType_Enum_BINARY = 2,
+  OrgApacheLuceneIndexDocValuesType_Enum_SORTED = 3,
+  OrgApacheLuceneIndexDocValuesType_Enum_SORTED_NUMERIC = 4,
+  OrgApacheLuceneIndexDocValuesType_Enum_SORTED_SET = 5,
 };
 
-@interface OrgApacheLuceneIndexDocValuesTypeEnum : JavaLangEnum < NSCopying >
+/*!
+ @brief DocValues types.
+ Note that DocValues is strongly typed, so a
+ field cannot have different types across different documents.
+ */
+@interface OrgApacheLuceneIndexDocValuesType : JavaLangEnum < NSCopying >
+
++ (OrgApacheLuceneIndexDocValuesType *)NONE;
+
++ (OrgApacheLuceneIndexDocValuesType *)NUMERIC;
+
++ (OrgApacheLuceneIndexDocValuesType *)BINARY;
+
++ (OrgApacheLuceneIndexDocValuesType *)SORTED;
+
++ (OrgApacheLuceneIndexDocValuesType *)SORTED_NUMERIC;
+
++ (OrgApacheLuceneIndexDocValuesType *)SORTED_SET;
 
 #pragma mark Package-Private
 
 + (IOSObjectArray *)values;
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneIndexDocValuesTypeEnum_values();
 
-+ (OrgApacheLuceneIndexDocValuesTypeEnum *)valueOfWithNSString:(NSString *)name;
-FOUNDATION_EXPORT OrgApacheLuceneIndexDocValuesTypeEnum *OrgApacheLuceneIndexDocValuesTypeEnum_valueOfWithNSString_(NSString *name);
++ (OrgApacheLuceneIndexDocValuesType *)valueOfWithNSString:(NSString *)name;
 
 - (id)copyWithZone:(NSZone *)zone;
+- (OrgApacheLuceneIndexDocValuesType_Enum)toNSEnum;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneIndexDocValuesTypeEnum)
+J2OBJC_STATIC_INIT(OrgApacheLuceneIndexDocValuesType)
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexDocValuesTypeEnum *OrgApacheLuceneIndexDocValuesTypeEnum_values_[];
+/*! INTERNAL ONLY - Use enum accessors declared below. */
+FOUNDATION_EXPORT OrgApacheLuceneIndexDocValuesType *OrgApacheLuceneIndexDocValuesType_values_[];
 
-#define OrgApacheLuceneIndexDocValuesTypeEnum_NONE OrgApacheLuceneIndexDocValuesTypeEnum_values_[OrgApacheLuceneIndexDocValuesType_NONE]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneIndexDocValuesTypeEnum, NONE)
+/*!
+ @brief No doc values for this field.
+ */
+inline OrgApacheLuceneIndexDocValuesType *OrgApacheLuceneIndexDocValuesType_get_NONE();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexDocValuesType, NONE)
 
-#define OrgApacheLuceneIndexDocValuesTypeEnum_NUMERIC OrgApacheLuceneIndexDocValuesTypeEnum_values_[OrgApacheLuceneIndexDocValuesType_NUMERIC]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneIndexDocValuesTypeEnum, NUMERIC)
+/*!
+ @brief A per-document Number
+ */
+inline OrgApacheLuceneIndexDocValuesType *OrgApacheLuceneIndexDocValuesType_get_NUMERIC();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexDocValuesType, NUMERIC)
 
-#define OrgApacheLuceneIndexDocValuesTypeEnum_BINARY OrgApacheLuceneIndexDocValuesTypeEnum_values_[OrgApacheLuceneIndexDocValuesType_BINARY]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneIndexDocValuesTypeEnum, BINARY)
+/*!
+ @brief A per-document byte[].
+ Values may be larger than
+ 32766 bytes, but different codecs may enforce their own limits.
+ */
+inline OrgApacheLuceneIndexDocValuesType *OrgApacheLuceneIndexDocValuesType_get_BINARY();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexDocValuesType, BINARY)
 
-#define OrgApacheLuceneIndexDocValuesTypeEnum_SORTED OrgApacheLuceneIndexDocValuesTypeEnum_values_[OrgApacheLuceneIndexDocValuesType_SORTED]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneIndexDocValuesTypeEnum, SORTED)
+/*!
+ @brief A pre-sorted byte[].
+ Fields with this type only store distinct byte values 
+ and store an additional offset pointer per document to dereference the shared 
+ byte[]. The stored byte[] is presorted and allows access via document id, 
+ ordinal and by-value.  Values must be <code><= 32766</code> bytes.
+ */
+inline OrgApacheLuceneIndexDocValuesType *OrgApacheLuceneIndexDocValuesType_get_SORTED();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexDocValuesType, SORTED)
 
-#define OrgApacheLuceneIndexDocValuesTypeEnum_SORTED_NUMERIC OrgApacheLuceneIndexDocValuesTypeEnum_values_[OrgApacheLuceneIndexDocValuesType_SORTED_NUMERIC]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneIndexDocValuesTypeEnum, SORTED_NUMERIC)
+/*!
+ @brief A pre-sorted Number[].
+ Fields with this type store numeric values in sorted
+ order according to <code>Long.compare(long,long)</code>.
+ */
+inline OrgApacheLuceneIndexDocValuesType *OrgApacheLuceneIndexDocValuesType_get_SORTED_NUMERIC();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexDocValuesType, SORTED_NUMERIC)
 
-#define OrgApacheLuceneIndexDocValuesTypeEnum_SORTED_SET OrgApacheLuceneIndexDocValuesTypeEnum_values_[OrgApacheLuceneIndexDocValuesType_SORTED_SET]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneIndexDocValuesTypeEnum, SORTED_SET)
+/*!
+ @brief A pre-sorted Set&lt;byte[]&gt;.
+ Fields with this type only store distinct byte values 
+ and store additional offset pointers per document to dereference the shared 
+ byte[]s. The stored byte[] is presorted and allows access via document id, 
+ ordinal and by-value.  Values must be <code><= 32766</code> bytes.
+ */
+inline OrgApacheLuceneIndexDocValuesType *OrgApacheLuceneIndexDocValuesType_get_SORTED_SET();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexDocValuesType, SORTED_SET)
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocValuesTypeEnum)
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneIndexDocValuesType_values();
+
+FOUNDATION_EXPORT OrgApacheLuceneIndexDocValuesType *OrgApacheLuceneIndexDocValuesType_valueOfWithNSString_(NSString *name);
+
+FOUNDATION_EXPORT OrgApacheLuceneIndexDocValuesType *OrgApacheLuceneIndexDocValuesType_fromOrdinal(NSUInteger ordinal);
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocValuesType)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexDocValuesType_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexDocValuesType")

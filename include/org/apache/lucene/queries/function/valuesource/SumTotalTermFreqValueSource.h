@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_RESTRICT
-#define OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource 0
 #else
-#define OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_) && (OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_
+#if !defined (OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource))
+#define OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_
 
-#define OrgApacheLuceneQueriesFunctionValueSource_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionValueSource_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionValueSource 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionValueSource 1
 #include "org/apache/lucene/queries/function/ValueSource.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
@@ -25,6 +25,12 @@
 @class OrgApacheLuceneSearchIndexSearcher;
 @protocol JavaUtilMap;
 
+/*!
+ @brief <code>SumTotalTermFreqValueSource</code> returns the number of tokens.
+ (sum of term freqs across all documents, across all terms).
+ Returns -1 if frequencies were omitted for the field, or if 
+ the codec doesn't support this statistic.
+ */
 @interface OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource : OrgApacheLuceneQueriesFunctionValueSource {
  @public
   NSString *indexedField_;
@@ -58,8 +64,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreq
 
 FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_initWithNSString_(NSString *indexedField) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource *create_OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_initWithNSString_(NSString *indexedField);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource")

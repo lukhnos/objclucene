@@ -31,12 +31,23 @@
 - (void)setPosWithLong:(jlong)pos
                withInt:(jint)bi;
 
+/*!
+ @brief Returns a sliced view from a set of already-existing buffers: 
+ the last buffer's limit() will be correct, but
+ you must deal with offset separately (the first buffer will not be adjusted)
+ */
 - (IOSObjectArray *)buildSliceWithJavaNioByteBufferArray:(IOSObjectArray *)buffers
                                                 withLong:(jlong)offset
                                                 withLong:(jlong)length;
 
+/*!
+ @brief Called to remove all references to byte buffers, so we can throw AlreadyClosed on NPE.
+ */
 - (void)unsetBuffers;
 
+/*!
+ @brief Called when the contents of a buffer will be no longer needed.
+ */
 - (void)freeBufferWithJavaNioByteBuffer:(JavaNioByteBuffer *)b;
 
 @end
@@ -89,16 +100,16 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
     do {
       curBufIndex_++;
       if (curBufIndex_ >= ((IOSObjectArray *) nil_chk(buffers_))->size_) {
-        @throw [new_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"read past EOF: ", self)) autorelease];
+        @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"read past EOF: ", self));
       }
       JreStrongAssign(&curBuf_, IOSObjectArray_Get(buffers_, curBufIndex_));
       [((JavaNioByteBuffer *) nil_chk(curBuf_)) positionWithInt:0];
     }
-    while (![curBuf_ hasRemaining]);
+    while (![((JavaNioByteBuffer *) nil_chk(curBuf_)) hasRemaining]);
     return [((JavaNioByteBuffer *) nil_chk(curBuf_)) get];
   }
   @catch (JavaLangNullPointerException *npe) {
-    @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self)) autorelease];
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self));
   }
 }
 
@@ -111,21 +122,21 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
   @catch (JavaNioBufferUnderflowException *e) {
     jint curAvail = [((JavaNioByteBuffer *) nil_chk(curBuf_)) remaining];
     while (len > curAvail) {
-      [curBuf_ getWithByteArray:b withInt:offset withInt:curAvail];
+      [((JavaNioByteBuffer *) nil_chk(curBuf_)) getWithByteArray:b withInt:offset withInt:curAvail];
       len -= curAvail;
       offset += curAvail;
       curBufIndex_++;
       if (curBufIndex_ >= ((IOSObjectArray *) nil_chk(buffers_))->size_) {
-        @throw [new_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"read past EOF: ", self)) autorelease];
+        @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"read past EOF: ", self));
       }
       JreStrongAssign(&curBuf_, IOSObjectArray_Get(buffers_, curBufIndex_));
       [((JavaNioByteBuffer *) nil_chk(curBuf_)) positionWithInt:0];
-      curAvail = [curBuf_ remaining];
+      curAvail = [((JavaNioByteBuffer *) nil_chk(curBuf_)) remaining];
     }
     [((JavaNioByteBuffer *) nil_chk(curBuf_)) getWithByteArray:b withInt:offset withInt:len];
   }
   @catch (JavaLangNullPointerException *npe) {
-    @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self)) autorelease];
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self));
   }
 }
 
@@ -137,7 +148,7 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
     return [super readShort];
   }
   @catch (JavaLangNullPointerException *npe) {
-    @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self)) autorelease];
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self));
   }
 }
 
@@ -149,7 +160,7 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
     return [super readInt];
   }
   @catch (JavaLangNullPointerException *npe) {
-    @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self)) autorelease];
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self));
   }
 }
 
@@ -161,7 +172,7 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
     return [super readLong];
   }
   @catch (JavaLangNullPointerException *npe) {
-    @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self)) autorelease];
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self));
   }
 }
 
@@ -170,7 +181,7 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
     return (JreLShift64(((jlong) curBufIndex_), chunkSizePower_)) + [((JavaNioByteBuffer *) nil_chk(curBuf_)) position];
   }
   @catch (JavaLangNullPointerException *npe) {
-    @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self)) autorelease];
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self));
   }
 }
 
@@ -188,16 +199,16 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
     }
   }
   @catch (JavaLangArrayIndexOutOfBoundsException *e) {
-    @throw [new_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self)) autorelease];
+    @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self));
   }
   @catch (JavaLangIllegalArgumentException *e) {
-    @throw [new_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self)) autorelease];
+    @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self));
   }
   @catch (JavaLangRuntimeException *e) {
-    @throw [new_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self)) autorelease];
+    @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self));
   }
   @catch (JavaLangNullPointerException *npe) {
-    @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self)) autorelease];
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self));
   }
 }
 
@@ -207,10 +218,10 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
     return [((JavaNioByteBuffer *) nil_chk(IOSObjectArray_Get(nil_chk(buffers_), bi))) getWithInt:(jint) (pos & chunkSizeMask_)];
   }
   @catch (JavaLangIndexOutOfBoundsException *ioobe) {
-    @throw [new_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self)) autorelease];
+    @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self));
   }
   @catch (JavaLangNullPointerException *npe) {
-    @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self)) autorelease];
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self));
   }
 }
 
@@ -229,7 +240,7 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
     return [self readShort];
   }
   @catch (JavaLangNullPointerException *npe) {
-    @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self)) autorelease];
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self));
   }
 }
 
@@ -243,7 +254,7 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
     return [self readInt];
   }
   @catch (JavaLangNullPointerException *npe) {
-    @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self)) autorelease];
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self));
   }
 }
 
@@ -257,7 +268,7 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
     return [self readLong];
   }
   @catch (JavaLangNullPointerException *npe) {
-    @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self)) autorelease];
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self));
   }
 }
 
@@ -271,7 +282,7 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
     [((OrgApacheLuceneStoreByteBufferIndexInput *) nil_chk(clone)) seekWithLong:[self getFilePointer]];
   }
   @catch (JavaIoIOException *ioe) {
-    @throw [new_JavaLangAssertionError_initWithId_(ioe) autorelease];
+    @throw create_JavaLangAssertionError_initWithId_(ioe);
   }
   return clone;
 }
@@ -280,7 +291,7 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
                                                        withLong:(jlong)offset
                                                        withLong:(jlong)length {
   if (offset < 0 || length < 0 || offset + length > self->length_) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$J$J$J$@", @"slice() ", sliceDescription, @" out of bounds: offset=", offset, @",length=", length, @",fileLength=", self->length_, @": ", self)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$J$J$J$@", @"slice() ", sliceDescription, @" out of bounds: offset=", offset, @",length=", length, @",fileLength=", self->length_, @": ", self));
   }
   return [self buildSliceWithNSString:sliceDescription withLong:offset withLong:length];
 }
@@ -289,14 +300,14 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
                                                             withLong:(jlong)offset
                                                             withLong:(jlong)length {
   if (buffers_ == nil) {
-    @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self)) autorelease];
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self));
   }
   IOSObjectArray *newBuffers = OrgApacheLuceneStoreByteBufferIndexInput_buildSliceWithJavaNioByteBufferArray_withLong_withLong_(self, buffers_, offset, length);
   jint ofs = (jint) (offset & chunkSizeMask_);
   OrgApacheLuceneStoreByteBufferIndexInput *clone = [self newCloneInstanceWithNSString:[self getFullSliceDescriptionWithNSString:sliceDescription] withJavaNioByteBufferArray:newBuffers withInt:ofs withLong:length];
   ((OrgApacheLuceneStoreByteBufferIndexInput *) nil_chk(clone))->isClone_ = true;
   if (clones_ != nil) {
-    [self->clones_ putWithId:clone withId:JreLoadStatic(JavaLangBoolean, TRUE__)];
+    [self->clones_ putWithId:clone withId:JreLoadStatic(JavaLangBoolean, TRUE)];
   }
   return clone;
 }
@@ -307,10 +318,10 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
                                                                   withLong:(jlong)length {
   if (((IOSObjectArray *) nil_chk(newBuffers))->size_ == 1) {
     [((JavaNioByteBuffer *) nil_chk(IOSObjectArray_Get(newBuffers, 0))) positionWithInt:offset];
-    return [new_OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl_initWithNSString_withJavaNioByteBuffer_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withOrgApacheLuceneUtilWeakIdentityMap_(newResourceDescription, [((JavaNioByteBuffer *) nil_chk(IOSObjectArray_Get(newBuffers, 0))) slice], length, chunkSizePower_, self->cleaner_, self->clones_) autorelease];
+    return create_OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl_initWithNSString_withJavaNioByteBuffer_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withOrgApacheLuceneUtilWeakIdentityMap_(newResourceDescription, [((JavaNioByteBuffer *) nil_chk(IOSObjectArray_Get(newBuffers, 0))) slice], length, chunkSizePower_, self->cleaner_, self->clones_);
   }
   else {
-    return [new_OrgApacheLuceneStoreByteBufferIndexInput_MultiBufferImpl_initWithNSString_withJavaNioByteBufferArray_withInt_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withOrgApacheLuceneUtilWeakIdentityMap_(newResourceDescription, newBuffers, offset, length, chunkSizePower_, cleaner_, clones_) autorelease];
+    return create_OrgApacheLuceneStoreByteBufferIndexInput_MultiBufferImpl_initWithNSString_withJavaNioByteBufferArray_withInt_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withOrgApacheLuceneUtilWeakIdentityMap_(newResourceDescription, newBuffers, offset, length, chunkSizePower_, cleaner_, clones_);
   }
 }
 
@@ -339,7 +350,7 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
     }
     {
       IOSObjectArray *a__ = bufs;
-      JavaNioByteBuffer * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
+      JavaNioByteBuffer * const *b__ = a__->buffer_;
       JavaNioByteBuffer * const *e__ = b__ + a__->size_;
       while (b__ < e__) {
         JavaNioByteBuffer *b = *b__++;
@@ -371,7 +382,7 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "newInstanceWithNSString:withJavaNioByteBufferArray:withLong:withInt:withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner:withBoolean:", "newInstance", "Lorg.apache.lucene.store.ByteBufferIndexInput;", 0x9, NULL, NULL },
-    { "initWithNSString:withJavaNioByteBufferArray:withLong:withInt:withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner:withOrgApacheLuceneUtilWeakIdentityMap:", "ByteBufferIndexInput", NULL, 0x0, NULL, NULL },
+    { "initWithNSString:withJavaNioByteBufferArray:withLong:withInt:withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner:withOrgApacheLuceneUtilWeakIdentityMap:", "ByteBufferIndexInput", NULL, 0x0, NULL, "(Ljava/lang/String;[Ljava/nio/ByteBuffer;JILorg/apache/lucene/store/ByteBufferIndexInput$BufferCleaner;Lorg/apache/lucene/util/WeakIdentityMap<Lorg/apache/lucene/store/ByteBufferIndexInput;Ljava/lang/Boolean;>;)V" },
     { "readByte", NULL, "B", 0x11, "Ljava.io.IOException;", NULL },
     { "readBytesWithByteArray:withInt:withInt:", "readBytes", "V", 0x11, "Ljava.io.IOException;", NULL },
     { "readShort", NULL, "S", 0x11, "Ljava.io.IOException;", NULL },
@@ -416,10 +427,10 @@ OrgApacheLuceneStoreByteBufferIndexInput *OrgApacheLuceneStoreByteBufferIndexInp
   OrgApacheLuceneStoreByteBufferIndexInput_initialize();
   OrgApacheLuceneUtilWeakIdentityMap *clones = trackClones ? OrgApacheLuceneUtilWeakIdentityMap_newConcurrentHashMap() : nil;
   if (((IOSObjectArray *) nil_chk(buffers))->size_ == 1) {
-    return [new_OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl_initWithNSString_withJavaNioByteBuffer_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withOrgApacheLuceneUtilWeakIdentityMap_(resourceDescription, IOSObjectArray_Get(buffers, 0), length, chunkSizePower, cleaner, clones) autorelease];
+    return create_OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl_initWithNSString_withJavaNioByteBuffer_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withOrgApacheLuceneUtilWeakIdentityMap_(resourceDescription, IOSObjectArray_Get(buffers, 0), length, chunkSizePower, cleaner, clones);
   }
   else {
-    return [new_OrgApacheLuceneStoreByteBufferIndexInput_MultiBufferImpl_initWithNSString_withJavaNioByteBufferArray_withInt_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withOrgApacheLuceneUtilWeakIdentityMap_(resourceDescription, buffers, 0, length, chunkSizePower, cleaner, clones) autorelease];
+    return create_OrgApacheLuceneStoreByteBufferIndexInput_MultiBufferImpl_initWithNSString_withJavaNioByteBufferArray_withInt_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withOrgApacheLuceneUtilWeakIdentityMap_(resourceDescription, buffers, 0, length, chunkSizePower, cleaner, clones);
   }
 }
 
@@ -445,16 +456,16 @@ void OrgApacheLuceneStoreByteBufferIndexInput_setPosWithLong_withInt_(OrgApacheL
     JreStrongAssign(&self->curBuf_, b);
   }
   @catch (JavaLangArrayIndexOutOfBoundsException *aioobe) {
-    @throw [new_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self)) autorelease];
+    @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self));
   }
   @catch (JavaLangIllegalArgumentException *aioobe) {
-    @throw [new_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self)) autorelease];
+    @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self));
   }
   @catch (JavaLangRuntimeException *aioobe) {
-    @throw [new_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self)) autorelease];
+    @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self));
   }
   @catch (JavaLangNullPointerException *npe) {
-    @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self)) autorelease];
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self));
   }
 }
 
@@ -516,14 +527,14 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
   }
   @catch (JavaLangIllegalArgumentException *e) {
     if (pos < 0) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_withJavaLangThrowable_(JreStrcat("$@", @"Seeking to negative position: ", self), e) autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_withNSException_(JreStrcat("$@", @"Seeking to negative position: ", self), e);
     }
     else {
-      @throw [new_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self)) autorelease];
+      @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self));
     }
   }
   @catch (JavaLangNullPointerException *npe) {
-    @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self)) autorelease];
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self));
   }
 }
 
@@ -532,7 +543,7 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
     return [((JavaNioByteBuffer *) nil_chk(curBuf_)) position];
   }
   @catch (JavaLangNullPointerException *npe) {
-    @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self)) autorelease];
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self));
   }
 }
 
@@ -542,14 +553,14 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
   }
   @catch (JavaLangIllegalArgumentException *e) {
     if (pos < 0) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_withJavaLangThrowable_(JreStrcat("$@", @"Seeking to negative position: ", self), e) autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_withNSException_(JreStrcat("$@", @"Seeking to negative position: ", self), e);
     }
     else {
-      @throw [new_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self)) autorelease];
+      @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self));
     }
   }
   @catch (JavaLangNullPointerException *npe) {
-    @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self)) autorelease];
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self));
   }
 }
 
@@ -559,14 +570,14 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
   }
   @catch (JavaLangIllegalArgumentException *e) {
     if (pos < 0) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_withJavaLangThrowable_(JreStrcat("$@", @"Seeking to negative position: ", self), e) autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_withNSException_(JreStrcat("$@", @"Seeking to negative position: ", self), e);
     }
     else {
-      @throw [new_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self)) autorelease];
+      @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self));
     }
   }
   @catch (JavaLangNullPointerException *npe) {
-    @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self)) autorelease];
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self));
   }
 }
 
@@ -576,14 +587,14 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
   }
   @catch (JavaLangIllegalArgumentException *e) {
     if (pos < 0) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_withJavaLangThrowable_(JreStrcat("$@", @"Seeking to negative position: ", self), e) autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_withNSException_(JreStrcat("$@", @"Seeking to negative position: ", self), e);
     }
     else {
-      @throw [new_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self)) autorelease];
+      @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self));
     }
   }
   @catch (JavaLangNullPointerException *npe) {
-    @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self)) autorelease];
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self));
   }
 }
 
@@ -593,20 +604,20 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
   }
   @catch (JavaLangIllegalArgumentException *e) {
     if (pos < 0) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_withJavaLangThrowable_(JreStrcat("$@", @"Seeking to negative position: ", self), e) autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_withNSException_(JreStrcat("$@", @"Seeking to negative position: ", self), e);
     }
     else {
-      @throw [new_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self)) autorelease];
+      @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"seek past EOF: ", self));
     }
   }
   @catch (JavaLangNullPointerException *npe) {
-    @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self)) autorelease];
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Already closed: ", self));
   }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withJavaNioByteBuffer:withLong:withInt:withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner:withOrgApacheLuceneUtilWeakIdentityMap:", "SingleBufferImpl", NULL, 0x0, NULL, NULL },
+    { "initWithNSString:withJavaNioByteBuffer:withLong:withInt:withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner:withOrgApacheLuceneUtilWeakIdentityMap:", "SingleBufferImpl", NULL, 0x0, NULL, "(Ljava/lang/String;Ljava/nio/ByteBuffer;JILorg/apache/lucene/store/ByteBufferIndexInput$BufferCleaner;Lorg/apache/lucene/util/WeakIdentityMap<Lorg/apache/lucene/store/ByteBufferIndexInput;Ljava/lang/Boolean;>;)V" },
     { "seekWithLong:", "seek", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "getFilePointer", NULL, "J", 0x1, NULL, NULL },
     { "readByteWithLong:", "readByte", "B", 0x1, "Ljava.io.IOException;", NULL },
@@ -628,9 +639,11 @@ void OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl_initWithNSString_
 }
 
 OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl *new_OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl_initWithNSString_withJavaNioByteBuffer_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withOrgApacheLuceneUtilWeakIdentityMap_(NSString *resourceDescription, JavaNioByteBuffer *buffer, jlong length, jint chunkSizePower, id<OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner> cleaner, OrgApacheLuceneUtilWeakIdentityMap *clones) {
-  OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl *self = [OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl alloc];
-  OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl_initWithNSString_withJavaNioByteBuffer_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withOrgApacheLuceneUtilWeakIdentityMap_(self, resourceDescription, buffer, length, chunkSizePower, cleaner, clones);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl, initWithNSString_withJavaNioByteBuffer_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withOrgApacheLuceneUtilWeakIdentityMap_, resourceDescription, buffer, length, chunkSizePower, cleaner, clones)
+}
+
+OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl *create_OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl_initWithNSString_withJavaNioByteBuffer_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withOrgApacheLuceneUtilWeakIdentityMap_(NSString *resourceDescription, JavaNioByteBuffer *buffer, jlong length, jint chunkSizePower, id<OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner> cleaner, OrgApacheLuceneUtilWeakIdentityMap *clones) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl, initWithNSString_withJavaNioByteBuffer_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withOrgApacheLuceneUtilWeakIdentityMap_, resourceDescription, buffer, length, chunkSizePower, cleaner, clones)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl)
@@ -681,7 +694,7 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withJavaNioByteBufferArray:withInt:withLong:withInt:withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner:withOrgApacheLuceneUtilWeakIdentityMap:", "MultiBufferImpl", NULL, 0x0, NULL, NULL },
+    { "initWithNSString:withJavaNioByteBufferArray:withInt:withLong:withInt:withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner:withOrgApacheLuceneUtilWeakIdentityMap:", "MultiBufferImpl", NULL, 0x0, NULL, "(Ljava/lang/String;[Ljava/nio/ByteBuffer;IJILorg/apache/lucene/store/ByteBufferIndexInput$BufferCleaner;Lorg/apache/lucene/util/WeakIdentityMap<Lorg/apache/lucene/store/ByteBufferIndexInput;Ljava/lang/Boolean;>;)V" },
     { "seekWithLong:", "seek", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "getFilePointer", NULL, "J", 0x1, NULL, NULL },
     { "readByteWithLong:", "readByte", "B", 0x1, "Ljava.io.IOException;", NULL },
@@ -706,14 +719,16 @@ void OrgApacheLuceneStoreByteBufferIndexInput_MultiBufferImpl_initWithNSString_w
     [self seekWithLong:0LL];
   }
   @catch (JavaIoIOException *ioe) {
-    @throw [new_JavaLangAssertionError_initWithId_(ioe) autorelease];
+    @throw create_JavaLangAssertionError_initWithId_(ioe);
   }
 }
 
 OrgApacheLuceneStoreByteBufferIndexInput_MultiBufferImpl *new_OrgApacheLuceneStoreByteBufferIndexInput_MultiBufferImpl_initWithNSString_withJavaNioByteBufferArray_withInt_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withOrgApacheLuceneUtilWeakIdentityMap_(NSString *resourceDescription, IOSObjectArray *buffers, jint offset, jlong length, jint chunkSizePower, id<OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner> cleaner, OrgApacheLuceneUtilWeakIdentityMap *clones) {
-  OrgApacheLuceneStoreByteBufferIndexInput_MultiBufferImpl *self = [OrgApacheLuceneStoreByteBufferIndexInput_MultiBufferImpl alloc];
-  OrgApacheLuceneStoreByteBufferIndexInput_MultiBufferImpl_initWithNSString_withJavaNioByteBufferArray_withInt_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withOrgApacheLuceneUtilWeakIdentityMap_(self, resourceDescription, buffers, offset, length, chunkSizePower, cleaner, clones);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreByteBufferIndexInput_MultiBufferImpl, initWithNSString_withJavaNioByteBufferArray_withInt_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withOrgApacheLuceneUtilWeakIdentityMap_, resourceDescription, buffers, offset, length, chunkSizePower, cleaner, clones)
+}
+
+OrgApacheLuceneStoreByteBufferIndexInput_MultiBufferImpl *create_OrgApacheLuceneStoreByteBufferIndexInput_MultiBufferImpl_initWithNSString_withJavaNioByteBufferArray_withInt_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withOrgApacheLuceneUtilWeakIdentityMap_(NSString *resourceDescription, IOSObjectArray *buffers, jint offset, jlong length, jint chunkSizePower, id<OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner> cleaner, OrgApacheLuceneUtilWeakIdentityMap *clones) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreByteBufferIndexInput_MultiBufferImpl, initWithNSString_withJavaNioByteBufferArray_withInt_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withOrgApacheLuceneUtilWeakIdentityMap_, resourceDescription, buffers, offset, length, chunkSizePower, cleaner, clones)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreByteBufferIndexInput_MultiBufferImpl)

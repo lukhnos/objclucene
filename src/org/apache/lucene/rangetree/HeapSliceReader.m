@@ -84,9 +84,11 @@ void OrgApacheLuceneRangetreeHeapSliceReader_initWithLongArray_withLongArray_wit
 }
 
 OrgApacheLuceneRangetreeHeapSliceReader *new_OrgApacheLuceneRangetreeHeapSliceReader_initWithLongArray_withLongArray_withIntArray_withInt_withInt_(IOSLongArray *values, IOSLongArray *ords, IOSIntArray *docIDs, jint start, jint end) {
-  OrgApacheLuceneRangetreeHeapSliceReader *self = [OrgApacheLuceneRangetreeHeapSliceReader alloc];
-  OrgApacheLuceneRangetreeHeapSliceReader_initWithLongArray_withLongArray_withIntArray_withInt_withInt_(self, values, ords, docIDs, start, end);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneRangetreeHeapSliceReader, initWithLongArray_withLongArray_withIntArray_withInt_withInt_, values, ords, docIDs, start, end)
+}
+
+OrgApacheLuceneRangetreeHeapSliceReader *create_OrgApacheLuceneRangetreeHeapSliceReader_initWithLongArray_withLongArray_withIntArray_withInt_withInt_(IOSLongArray *values, IOSLongArray *ords, IOSIntArray *docIDs, jint start, jint end) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneRangetreeHeapSliceReader, initWithLongArray_withLongArray_withIntArray_withInt_withInt_, values, ords, docIDs, start, end)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneRangetreeHeapSliceReader)

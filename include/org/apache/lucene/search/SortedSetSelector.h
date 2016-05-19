@@ -5,102 +5,155 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSortedSetSelector_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSortedSetSelector_RESTRICT
-#define OrgApacheLuceneSearchSortedSetSelector_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSortedSetSelector")
+#ifdef RESTRICT_OrgApacheLuceneSearchSortedSetSelector
+#define INCLUDE_ALL_OrgApacheLuceneSearchSortedSetSelector 0
 #else
-#define OrgApacheLuceneSearchSortedSetSelector_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSortedSetSelector 1
 #endif
-#undef OrgApacheLuceneSearchSortedSetSelector_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSortedSetSelector
 
-#if !defined (_OrgApacheLuceneSearchSortedSetSelector_) && (OrgApacheLuceneSearchSortedSetSelector_INCLUDE_ALL || OrgApacheLuceneSearchSortedSetSelector_INCLUDE)
-#define _OrgApacheLuceneSearchSortedSetSelector_
+#if !defined (OrgApacheLuceneSearchSortedSetSelector_) && (INCLUDE_ALL_OrgApacheLuceneSearchSortedSetSelector || defined(INCLUDE_OrgApacheLuceneSearchSortedSetSelector))
+#define OrgApacheLuceneSearchSortedSetSelector_
 
 @class OrgApacheLuceneIndexSortedDocValues;
 @class OrgApacheLuceneIndexSortedSetDocValues;
-@class OrgApacheLuceneSearchSortedSetSelector_TypeEnum;
+@class OrgApacheLuceneSearchSortedSetSelector_Type;
 
+/*!
+ @brief Selects a value from the document's set to use as the representative value
+ */
 @interface OrgApacheLuceneSearchSortedSetSelector : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @brief Wraps a multi-valued SortedSetDocValues as a single-valued view, using the specified selector
+ */
 + (OrgApacheLuceneIndexSortedDocValues *)wrapWithOrgApacheLuceneIndexSortedSetDocValues:(OrgApacheLuceneIndexSortedSetDocValues *)sortedSet
-                                    withOrgApacheLuceneSearchSortedSetSelector_TypeEnum:(OrgApacheLuceneSearchSortedSetSelector_TypeEnum *)selector;
+                                        withOrgApacheLuceneSearchSortedSetSelector_Type:(OrgApacheLuceneSearchSortedSetSelector_Type *)selector;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSortedSetSelector)
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexSortedDocValues *OrgApacheLuceneSearchSortedSetSelector_wrapWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneSearchSortedSetSelector_TypeEnum_(OrgApacheLuceneIndexSortedSetDocValues *sortedSet, OrgApacheLuceneSearchSortedSetSelector_TypeEnum *selector);
+FOUNDATION_EXPORT OrgApacheLuceneIndexSortedDocValues *OrgApacheLuceneSearchSortedSetSelector_wrapWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneSearchSortedSetSelector_Type_(OrgApacheLuceneIndexSortedSetDocValues *sortedSet, OrgApacheLuceneSearchSortedSetSelector_Type *selector);
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSortedSetSelector_init(OrgApacheLuceneSearchSortedSetSelector *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSelector *new_OrgApacheLuceneSearchSortedSetSelector_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSelector *create_OrgApacheLuceneSearchSortedSetSelector_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedSetSelector)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchSortedSetSelector_TypeEnum_) && (OrgApacheLuceneSearchSortedSetSelector_INCLUDE_ALL || OrgApacheLuceneSearchSortedSetSelector_TypeEnum_INCLUDE)
-#define _OrgApacheLuceneSearchSortedSetSelector_TypeEnum_
+#if !defined (OrgApacheLuceneSearchSortedSetSelector_Type_) && (INCLUDE_ALL_OrgApacheLuceneSearchSortedSetSelector || defined(INCLUDE_OrgApacheLuceneSearchSortedSetSelector_Type))
+#define OrgApacheLuceneSearchSortedSetSelector_Type_
 
-#define JavaLangEnum_RESTRICT 1
-#define JavaLangEnum_INCLUDE 1
+#define RESTRICT_JavaLangEnum 1
+#define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
 
-typedef NS_ENUM(NSUInteger, OrgApacheLuceneSearchSortedSetSelector_Type) {
-  OrgApacheLuceneSearchSortedSetSelector_Type_MIN = 0,
-  OrgApacheLuceneSearchSortedSetSelector_Type_MAX = 1,
-  OrgApacheLuceneSearchSortedSetSelector_Type_MIDDLE_MIN = 2,
-  OrgApacheLuceneSearchSortedSetSelector_Type_MIDDLE_MAX = 3,
+typedef NS_ENUM(NSUInteger, OrgApacheLuceneSearchSortedSetSelector_Type_Enum) {
+  OrgApacheLuceneSearchSortedSetSelector_Type_Enum_MIN = 0,
+  OrgApacheLuceneSearchSortedSetSelector_Type_Enum_MAX = 1,
+  OrgApacheLuceneSearchSortedSetSelector_Type_Enum_MIDDLE_MIN = 2,
+  OrgApacheLuceneSearchSortedSetSelector_Type_Enum_MIDDLE_MAX = 3,
 };
 
-@interface OrgApacheLuceneSearchSortedSetSelector_TypeEnum : JavaLangEnum < NSCopying >
+/*!
+ @brief Type of selection to perform.
+ <p>
+ Limitations:
+ <ul>
+ <li>Fields containing <code>Integer.MAX_VALUE</code> or more unique values
+ are unsupported.
+ <li>Selectors other than (<code>Type.MIN</code>) require 
+ optional codec support. However several codecs provided by Lucene, 
+ including the current default codec, support this.
+ </ul>
+ */
+@interface OrgApacheLuceneSearchSortedSetSelector_Type : JavaLangEnum < NSCopying >
+
++ (OrgApacheLuceneSearchSortedSetSelector_Type *)MIN;
+
++ (OrgApacheLuceneSearchSortedSetSelector_Type *)MAX;
+
++ (OrgApacheLuceneSearchSortedSetSelector_Type *)MIDDLE_MIN;
+
++ (OrgApacheLuceneSearchSortedSetSelector_Type *)MIDDLE_MAX;
 
 #pragma mark Package-Private
 
 + (IOSObjectArray *)values;
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneSearchSortedSetSelector_TypeEnum_values();
 
-+ (OrgApacheLuceneSearchSortedSetSelector_TypeEnum *)valueOfWithNSString:(NSString *)name;
-FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSelector_TypeEnum *OrgApacheLuceneSearchSortedSetSelector_TypeEnum_valueOfWithNSString_(NSString *name);
++ (OrgApacheLuceneSearchSortedSetSelector_Type *)valueOfWithNSString:(NSString *)name;
 
 - (id)copyWithZone:(NSZone *)zone;
+- (OrgApacheLuceneSearchSortedSetSelector_Type_Enum)toNSEnum;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSortedSetSelector_TypeEnum)
+J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSortedSetSelector_Type)
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSelector_TypeEnum *OrgApacheLuceneSearchSortedSetSelector_TypeEnum_values_[];
+/*! INTERNAL ONLY - Use enum accessors declared below. */
+FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSelector_Type *OrgApacheLuceneSearchSortedSetSelector_Type_values_[];
 
-#define OrgApacheLuceneSearchSortedSetSelector_TypeEnum_MIN OrgApacheLuceneSearchSortedSetSelector_TypeEnum_values_[OrgApacheLuceneSearchSortedSetSelector_Type_MIN]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneSearchSortedSetSelector_TypeEnum, MIN)
+/*!
+ @brief Selects the minimum value in the set
+ */
+inline OrgApacheLuceneSearchSortedSetSelector_Type *OrgApacheLuceneSearchSortedSetSelector_Type_get_MIN();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSortedSetSelector_Type, MIN)
 
-#define OrgApacheLuceneSearchSortedSetSelector_TypeEnum_MAX OrgApacheLuceneSearchSortedSetSelector_TypeEnum_values_[OrgApacheLuceneSearchSortedSetSelector_Type_MAX]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneSearchSortedSetSelector_TypeEnum, MAX)
+/*!
+ @brief Selects the maximum value in the set
+ */
+inline OrgApacheLuceneSearchSortedSetSelector_Type *OrgApacheLuceneSearchSortedSetSelector_Type_get_MAX();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSortedSetSelector_Type, MAX)
 
-#define OrgApacheLuceneSearchSortedSetSelector_TypeEnum_MIDDLE_MIN OrgApacheLuceneSearchSortedSetSelector_TypeEnum_values_[OrgApacheLuceneSearchSortedSetSelector_Type_MIDDLE_MIN]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneSearchSortedSetSelector_TypeEnum, MIDDLE_MIN)
+/*!
+ @brief Selects the middle value in the set.
+ <p>
+ If the set has an even number of values, the lower of the middle two is chosen.
+ */
+inline OrgApacheLuceneSearchSortedSetSelector_Type *OrgApacheLuceneSearchSortedSetSelector_Type_get_MIDDLE_MIN();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSortedSetSelector_Type, MIDDLE_MIN)
 
-#define OrgApacheLuceneSearchSortedSetSelector_TypeEnum_MIDDLE_MAX OrgApacheLuceneSearchSortedSetSelector_TypeEnum_values_[OrgApacheLuceneSearchSortedSetSelector_Type_MIDDLE_MAX]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneSearchSortedSetSelector_TypeEnum, MIDDLE_MAX)
+/*!
+ @brief Selects the middle value in the set.
+ <p>
+ If the set has an even number of values, the higher of the middle two is chosen
+ */
+inline OrgApacheLuceneSearchSortedSetSelector_Type *OrgApacheLuceneSearchSortedSetSelector_Type_get_MIDDLE_MAX();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSortedSetSelector_Type, MIDDLE_MAX)
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedSetSelector_TypeEnum)
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneSearchSortedSetSelector_Type_values();
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSelector_Type *OrgApacheLuceneSearchSortedSetSelector_Type_valueOfWithNSString_(NSString *name);
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSelector_Type *OrgApacheLuceneSearchSortedSetSelector_Type_fromOrdinal(NSUInteger ordinal);
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedSetSelector_Type)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchSortedSetSelector_MinValue_) && (OrgApacheLuceneSearchSortedSetSelector_INCLUDE_ALL || OrgApacheLuceneSearchSortedSetSelector_MinValue_INCLUDE)
-#define _OrgApacheLuceneSearchSortedSetSelector_MinValue_
+#if !defined (OrgApacheLuceneSearchSortedSetSelector_MinValue_) && (INCLUDE_ALL_OrgApacheLuceneSearchSortedSetSelector || defined(INCLUDE_OrgApacheLuceneSearchSortedSetSelector_MinValue))
+#define OrgApacheLuceneSearchSortedSetSelector_MinValue_
 
-#define OrgApacheLuceneIndexSortedDocValues_RESTRICT 1
-#define OrgApacheLuceneIndexSortedDocValues_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexSortedDocValues 1
+#define INCLUDE_OrgApacheLuceneIndexSortedDocValues 1
 #include "org/apache/lucene/index/SortedDocValues.h"
 
 @class OrgApacheLuceneIndexSortedSetDocValues;
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief Wraps a SortedSetDocValues and returns the first ordinal (min)
+ */
 @interface OrgApacheLuceneSearchSortedSetSelector_MinValue : OrgApacheLuceneIndexSortedDocValues {
  @public
   OrgApacheLuceneIndexSortedSetDocValues *in_;
@@ -130,20 +183,25 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSortedSetSelector_MinValue_initWithO
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSelector_MinValue *new_OrgApacheLuceneSearchSortedSetSelector_MinValue_initWithOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneIndexSortedSetDocValues *inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSelector_MinValue *create_OrgApacheLuceneSearchSortedSetSelector_MinValue_initWithOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneIndexSortedSetDocValues *inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedSetSelector_MinValue)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchSortedSetSelector_MaxValue_) && (OrgApacheLuceneSearchSortedSetSelector_INCLUDE_ALL || OrgApacheLuceneSearchSortedSetSelector_MaxValue_INCLUDE)
-#define _OrgApacheLuceneSearchSortedSetSelector_MaxValue_
+#if !defined (OrgApacheLuceneSearchSortedSetSelector_MaxValue_) && (INCLUDE_ALL_OrgApacheLuceneSearchSortedSetSelector || defined(INCLUDE_OrgApacheLuceneSearchSortedSetSelector_MaxValue))
+#define OrgApacheLuceneSearchSortedSetSelector_MaxValue_
 
-#define OrgApacheLuceneIndexSortedDocValues_RESTRICT 1
-#define OrgApacheLuceneIndexSortedDocValues_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexSortedDocValues 1
+#define INCLUDE_OrgApacheLuceneIndexSortedDocValues 1
 #include "org/apache/lucene/index/SortedDocValues.h"
 
 @class OrgApacheLuceneIndexRandomAccessOrds;
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief Wraps a SortedSetDocValues and returns the last ordinal (max)
+ */
 @interface OrgApacheLuceneSearchSortedSetSelector_MaxValue : OrgApacheLuceneIndexSortedDocValues {
  @public
   OrgApacheLuceneIndexRandomAccessOrds *in_;
@@ -173,20 +231,25 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSortedSetSelector_MaxValue_initWithO
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSelector_MaxValue *new_OrgApacheLuceneSearchSortedSetSelector_MaxValue_initWithOrgApacheLuceneIndexRandomAccessOrds_(OrgApacheLuceneIndexRandomAccessOrds *inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSelector_MaxValue *create_OrgApacheLuceneSearchSortedSetSelector_MaxValue_initWithOrgApacheLuceneIndexRandomAccessOrds_(OrgApacheLuceneIndexRandomAccessOrds *inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedSetSelector_MaxValue)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue_) && (OrgApacheLuceneSearchSortedSetSelector_INCLUDE_ALL || OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue_INCLUDE)
-#define _OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue_
+#if !defined (OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue_) && (INCLUDE_ALL_OrgApacheLuceneSearchSortedSetSelector || defined(INCLUDE_OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue))
+#define OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue_
 
-#define OrgApacheLuceneIndexSortedDocValues_RESTRICT 1
-#define OrgApacheLuceneIndexSortedDocValues_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexSortedDocValues 1
+#define INCLUDE_OrgApacheLuceneIndexSortedDocValues 1
 #include "org/apache/lucene/index/SortedDocValues.h"
 
 @class OrgApacheLuceneIndexRandomAccessOrds;
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief Wraps a SortedSetDocValues and returns the middle ordinal (or min of the two)
+ */
 @interface OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue : OrgApacheLuceneIndexSortedDocValues {
  @public
   OrgApacheLuceneIndexRandomAccessOrds *in_;
@@ -216,20 +279,25 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue_ini
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue *new_OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue_initWithOrgApacheLuceneIndexRandomAccessOrds_(OrgApacheLuceneIndexRandomAccessOrds *inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue *create_OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue_initWithOrgApacheLuceneIndexRandomAccessOrds_(OrgApacheLuceneIndexRandomAccessOrds *inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue_) && (OrgApacheLuceneSearchSortedSetSelector_INCLUDE_ALL || OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue_INCLUDE)
-#define _OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue_
+#if !defined (OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue_) && (INCLUDE_ALL_OrgApacheLuceneSearchSortedSetSelector || defined(INCLUDE_OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue))
+#define OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue_
 
-#define OrgApacheLuceneIndexSortedDocValues_RESTRICT 1
-#define OrgApacheLuceneIndexSortedDocValues_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexSortedDocValues 1
+#define INCLUDE_OrgApacheLuceneIndexSortedDocValues 1
 #include "org/apache/lucene/index/SortedDocValues.h"
 
 @class OrgApacheLuceneIndexRandomAccessOrds;
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief Wraps a SortedSetDocValues and returns the middle ordinal (or max of the two)
+ */
 @interface OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue : OrgApacheLuceneIndexSortedDocValues {
  @public
   OrgApacheLuceneIndexRandomAccessOrds *in_;
@@ -259,8 +327,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue_ini
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue *new_OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue_initWithOrgApacheLuceneIndexRandomAccessOrds_(OrgApacheLuceneIndexRandomAccessOrds *inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue *create_OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue_initWithOrgApacheLuceneIndexRandomAccessOrds_(OrgApacheLuceneIndexRandomAccessOrds *inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSortedSetSelector_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSortedSetSelector")

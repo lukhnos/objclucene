@@ -9,10 +9,18 @@
 
 J2OBJC_INITIALIZED_DEFN(OrgLukhnosPortmobileCharsetStandardCharsets)
 
-JavaNioCharsetCharset *OrgLukhnosPortmobileCharsetStandardCharsets_ISO_8859_1_;
-JavaNioCharsetCharset *OrgLukhnosPortmobileCharsetStandardCharsets_UTF_8_;
+JavaNioCharsetCharset *OrgLukhnosPortmobileCharsetStandardCharsets_ISO_8859_1;
+JavaNioCharsetCharset *OrgLukhnosPortmobileCharsetStandardCharsets_UTF_8;
 
 @implementation OrgLukhnosPortmobileCharsetStandardCharsets
+
++ (JavaNioCharsetCharset *)ISO_8859_1 {
+  return OrgLukhnosPortmobileCharsetStandardCharsets_ISO_8859_1;
+}
+
++ (JavaNioCharsetCharset *)UTF_8 {
+  return OrgLukhnosPortmobileCharsetStandardCharsets_UTF_8;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -23,19 +31,19 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgLukhnosPortmobileCharsetStandardCharsets class]) {
-    JreStrongAssign(&OrgLukhnosPortmobileCharsetStandardCharsets_ISO_8859_1_, JavaNioCharsetCharset_forNameWithNSString_(@"ISO-8859-1"));
-    JreStrongAssign(&OrgLukhnosPortmobileCharsetStandardCharsets_UTF_8_, JavaNioCharsetCharset_forNameWithNSString_(@"UTF-8"));
+    JreStrongAssign(&OrgLukhnosPortmobileCharsetStandardCharsets_ISO_8859_1, JavaNioCharsetCharset_forNameWithNSString_(@"ISO-8859-1"));
+    JreStrongAssign(&OrgLukhnosPortmobileCharsetStandardCharsets_UTF_8, JavaNioCharsetCharset_forNameWithNSString_(@"UTF-8"));
     J2OBJC_SET_INITIALIZED(OrgLukhnosPortmobileCharsetStandardCharsets)
   }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "StandardCharsets", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "ISO_8859_1_", NULL, 0x19, "Ljava.nio.charset.Charset;", &OrgLukhnosPortmobileCharsetStandardCharsets_ISO_8859_1_, NULL, .constantValue.asLong = 0 },
-    { "UTF_8_", NULL, 0x19, "Ljava.nio.charset.Charset;", &OrgLukhnosPortmobileCharsetStandardCharsets_UTF_8_, NULL, .constantValue.asLong = 0 },
+    { "ISO_8859_1", "ISO_8859_1", 0x19, "Ljava.nio.charset.Charset;", &OrgLukhnosPortmobileCharsetStandardCharsets_ISO_8859_1, NULL, .constantValue.asLong = 0 },
+    { "UTF_8", "UTF_8", 0x19, "Ljava.nio.charset.Charset;", &OrgLukhnosPortmobileCharsetStandardCharsets_UTF_8, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgLukhnosPortmobileCharsetStandardCharsets = { 2, "StandardCharsets", "org.lukhnos.portmobile.charset", NULL, 0x1, 1, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgLukhnosPortmobileCharsetStandardCharsets;
@@ -48,9 +56,11 @@ void OrgLukhnosPortmobileCharsetStandardCharsets_init(OrgLukhnosPortmobileCharse
 }
 
 OrgLukhnosPortmobileCharsetStandardCharsets *new_OrgLukhnosPortmobileCharsetStandardCharsets_init() {
-  OrgLukhnosPortmobileCharsetStandardCharsets *self = [OrgLukhnosPortmobileCharsetStandardCharsets alloc];
-  OrgLukhnosPortmobileCharsetStandardCharsets_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgLukhnosPortmobileCharsetStandardCharsets, init)
+}
+
+OrgLukhnosPortmobileCharsetStandardCharsets *create_OrgLukhnosPortmobileCharsetStandardCharsets_init() {
+  J2OBJC_CREATE_IMPL(OrgLukhnosPortmobileCharsetStandardCharsets, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileCharsetStandardCharsets)

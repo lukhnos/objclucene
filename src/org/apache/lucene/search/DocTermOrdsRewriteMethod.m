@@ -4,8 +4,10 @@
 //
 
 #include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Deprecated.h"
+#include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/index/IndexReader.h"
 #include "org/apache/lucene/search/DocTermOrdsRewriteMethod.h"
 #include "org/apache/lucene/search/DocValuesRewriteMethod.h"
@@ -31,7 +33,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDocTermOrdsRewriteMethod, rewriteMethod
 - (jboolean)isEqual:(id)obj {
   if (self == obj) return true;
   if (obj == nil) return false;
-  if ([self getClass] != [nil_chk(obj) getClass]) return false;
+  if ([self getClass] != (id) [obj getClass]) return false;
   return true;
 }
 
@@ -46,13 +48,13 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
++ (IOSObjectArray *)__annotations {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
 - (void)dealloc {
   RELEASE_(rewriteMethod_);
   [super dealloc];
-}
-
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -60,7 +62,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "rewriteWithOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneSearchMultiTermQuery:", "rewrite", "Lorg.apache.lucene.search.Query;", 0x1, NULL, NULL },
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "DocTermOrdsRewriteMethod", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "rewriteMethod_", NULL, 0x12, "Lorg.apache.lucene.search.DocValuesRewriteMethod;", NULL, NULL, .constantValue.asLong = 0 },
@@ -77,9 +79,11 @@ void OrgApacheLuceneSearchDocTermOrdsRewriteMethod_init(OrgApacheLuceneSearchDoc
 }
 
 OrgApacheLuceneSearchDocTermOrdsRewriteMethod *new_OrgApacheLuceneSearchDocTermOrdsRewriteMethod_init() {
-  OrgApacheLuceneSearchDocTermOrdsRewriteMethod *self = [OrgApacheLuceneSearchDocTermOrdsRewriteMethod alloc];
-  OrgApacheLuceneSearchDocTermOrdsRewriteMethod_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDocTermOrdsRewriteMethod, init)
+}
+
+OrgApacheLuceneSearchDocTermOrdsRewriteMethod *create_OrgApacheLuceneSearchDocTermOrdsRewriteMethod_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDocTermOrdsRewriteMethod, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocTermOrdsRewriteMethod)

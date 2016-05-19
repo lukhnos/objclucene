@@ -5,33 +5,39 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode_) && (OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode_
+#if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode))
+#define OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode_
 
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_RESTRICT 1
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl 1
+#define INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNodeImpl.h"
 
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_RESTRICT 1
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode 1
+#define INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/FieldableNode.h"
 
 @protocol JavaLangCharSequence;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;
 
+/*!
+ @brief Query node for <code>PhraseQuery</code>'s slop factor.
+ */
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl < OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode >
 
 #pragma mark Public
 
+/*!
+ @exception QueryNodeError throw in overridden method to disallow
+ */
 - (instancetype)initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)query
                                                                      withInt:(jint)value;
 
@@ -57,8 +63,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQuer
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withInt_(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> query, jint value) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode *create_OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withInt_(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> query, jint value);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode")

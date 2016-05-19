@@ -5,27 +5,42 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter_RESTRICT
-#define OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter 0
 #else
-#define OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter
 
-#if !defined (_OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter_) && (OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter_
+#if !defined (OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter))
+#define OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter_
 
-#define OrgApacheLuceneAnalysisUtilFilteringTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilFilteringTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilFilteringTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilFilteringTokenFilter 1
 #include "org/apache/lucene/analysis/util/FilteringTokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief Removes words that are too long or too short from the stream.
+ <p>
+ Note: Length is calculated as the number of Unicode codepoints.
+ </p>
+ */
 @interface OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter : OrgApacheLuceneAnalysisUtilFilteringTokenFilter
 
 #pragma mark Public
 
+/*!
+ @brief Create a new <code>CodepointCountFilter</code>.
+ This will filter out tokens whose
+ <code>CharTermAttribute</code> is either too short (<code>Character.codePointCount(char[],int,int)</code>
+ &lt; min) or too long (<code>Character.codePointCount(char[],int,int)</code> &gt; max).
+ @param inArg      the <code>TokenStream</code> to consume
+ @param min     the minimum length
+ @param max     the maximum length
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
                                                    withInt:(jint)min
                                                    withInt:(jint)max;
@@ -40,8 +55,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter_
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter *new_OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(OrgApacheLuceneAnalysisTokenStream *inArg, jint min, jint max) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter *create_OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(OrgApacheLuceneAnalysisTokenStream *inArg, jint min, jint max);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter")

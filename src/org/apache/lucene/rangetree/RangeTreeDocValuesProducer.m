@@ -85,13 +85,13 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeRangeTreeDocValuesProducer, delegate
       JavaLangLong *fp = [((id<JavaUtilMap>) nil_chk(fieldToIndexFPs_)) getWithId:JavaLangInteger_valueOfWithInt_(field->number_)];
       JreAssert((fp != nil), (@"org/apache/lucene/rangetree/RangeTreeDocValuesProducer.java:101 condition failed: assert fp != null;"));
       [((OrgApacheLuceneStoreIndexInput *) nil_chk(datIn_)) seekWithLong:[((JavaLangLong *) nil_chk(fp)) longLongValue]];
-      treeReader = [new_OrgApacheLuceneRangetreeRangeTreeReader_initWithOrgApacheLuceneStoreIndexInput_(datIn_) autorelease];
+      treeReader = create_OrgApacheLuceneRangetreeRangeTreeReader_initWithOrgApacheLuceneStoreIndexInput_(datIn_);
       if (merging_ == false) {
         [treeReaders_ putWithId:field->name_ withId:treeReader];
         [((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(ramBytesUsed_)) addAndGetWithLong:[treeReader ramBytesUsed]];
       }
     }
-    return [new_OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues_initWithOrgApacheLuceneRangetreeRangeTreeReader_withOrgApacheLuceneIndexSortedNumericDocValues_(treeReader, [((OrgApacheLuceneCodecsDocValuesProducer *) nil_chk(delegate_)) getSortedNumericWithOrgApacheLuceneIndexFieldInfo:field]) autorelease];
+    return create_OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues_initWithOrgApacheLuceneRangetreeRangeTreeReader_withOrgApacheLuceneIndexSortedNumericDocValues_(treeReader, [((OrgApacheLuceneCodecsDocValuesProducer *) nil_chk(delegate_)) getSortedNumericWithOrgApacheLuceneIndexFieldInfo:field]);
   }
 }
 
@@ -104,15 +104,15 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeRangeTreeDocValuesProducer, delegate
 }
 
 - (OrgApacheLuceneIndexNumericDocValues *)getNumericWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (OrgApacheLuceneIndexBinaryDocValues *)getBinaryWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (OrgApacheLuceneIndexSortedDocValues *)getSortedWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (OrgApacheLuceneIndexSortedSetDocValues *)getSortedSetWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field {
@@ -122,13 +122,13 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeRangeTreeDocValuesProducer, delegate
       JavaLangLong *fp = [((id<JavaUtilMap>) nil_chk(fieldToIndexFPs_)) getWithId:JavaLangInteger_valueOfWithInt_(field->number_)];
       JreAssert((fp != nil), (@"org/apache/lucene/rangetree/RangeTreeDocValuesProducer.java:149 condition failed: assert fp != null;"));
       [((OrgApacheLuceneStoreIndexInput *) nil_chk(datIn_)) seekWithLong:[((JavaLangLong *) nil_chk(fp)) longLongValue]];
-      treeReader = [new_OrgApacheLuceneRangetreeRangeTreeReader_initWithOrgApacheLuceneStoreIndexInput_(datIn_) autorelease];
+      treeReader = create_OrgApacheLuceneRangetreeRangeTreeReader_initWithOrgApacheLuceneStoreIndexInput_(datIn_);
       if (merging_ == false) {
         [treeReaders_ putWithId:field->name_ withId:treeReader];
         [((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(ramBytesUsed_)) addAndGetWithLong:[treeReader ramBytesUsed]];
       }
     }
-    return [new_OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues_initWithOrgApacheLuceneRangetreeRangeTreeReader_withOrgApacheLuceneIndexSortedSetDocValues_(treeReader, [((OrgApacheLuceneCodecsDocValuesProducer *) nil_chk(delegate_)) getSortedSetWithOrgApacheLuceneIndexFieldInfo:field]) autorelease];
+    return create_OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues_initWithOrgApacheLuceneRangetreeRangeTreeReader_withOrgApacheLuceneIndexSortedSetDocValues_(treeReader, [((OrgApacheLuceneCodecsDocValuesProducer *) nil_chk(delegate_)) getSortedSetWithOrgApacheLuceneIndexFieldInfo:field]);
   }
 }
 
@@ -138,7 +138,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeRangeTreeDocValuesProducer, delegate
 
 - (id<JavaUtilCollection>)getChildResources {
   @synchronized(self) {
-    id<JavaUtilList> resources = [new_JavaUtilArrayList_init() autorelease];
+    id<JavaUtilList> resources = create_JavaUtilArrayList_init();
     for (id<JavaUtilMap_Entry> __strong ent in nil_chk([((id<JavaUtilMap>) nil_chk(treeReaders_)) entrySet])) {
       [resources addWithId:OrgApacheLuceneUtilAccountables_namedAccountableWithNSString_withOrgApacheLuceneUtilAccountable_(JreStrcat("$$", @"field ", [((id<JavaUtilMap_Entry>) nil_chk(ent)) getKey]), [ent getValue])];
     }
@@ -149,7 +149,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeRangeTreeDocValuesProducer, delegate
 
 - (OrgApacheLuceneCodecsDocValuesProducer *)getMergeInstance {
   @synchronized(self) {
-    return [new_OrgApacheLuceneRangetreeRangeTreeDocValuesProducer_initWithOrgApacheLuceneRangetreeRangeTreeDocValuesProducer_(self) autorelease];
+    return create_OrgApacheLuceneRangetreeRangeTreeDocValuesProducer_initWithOrgApacheLuceneRangetreeRangeTreeDocValuesProducer_(self);
   }
 }
 
@@ -178,7 +178,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeRangeTreeDocValuesProducer, delegate
     { "getSortedWithOrgApacheLuceneIndexFieldInfo:", "getSorted", "Lorg.apache.lucene.index.SortedDocValues;", 0x1, NULL, NULL },
     { "getSortedSetWithOrgApacheLuceneIndexFieldInfo:", "getSortedSet", "Lorg.apache.lucene.index.SortedSetDocValues;", 0x21, "Ljava.io.IOException;", NULL },
     { "getDocsWithFieldWithOrgApacheLuceneIndexFieldInfo:", "getDocsWithField", "Lorg.apache.lucene.util.Bits;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x21, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x21, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
     { "getMergeInstance", NULL, "Lorg.apache.lucene.codecs.DocValuesProducer;", 0x21, "Ljava.io.IOException;", NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
   };
@@ -201,9 +201,9 @@ void OrgApacheLuceneRangetreeRangeTreeDocValuesProducer_initWithOrgApacheLuceneC
   OrgApacheLuceneCodecsDocValuesProducer_init(self);
   JreStrongAssignAndConsume(&self->treeReaders_, new_JavaUtilHashMap_init());
   JreStrongAssignAndConsume(&self->fieldToIndexFPs_, new_JavaUtilHashMap_init());
-  NSString *metaFileName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentReadState *) nil_chk(state))->segmentInfo_))->name_, state->segmentSuffix_, OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_META_EXTENSION_);
+  NSString *metaFileName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentReadState *) nil_chk(state))->segmentInfo_))->name_, state->segmentSuffix_, OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_META_EXTENSION);
   OrgApacheLuceneStoreChecksumIndexInput *metaIn = [((OrgApacheLuceneStoreDirectory *) nil_chk(state->directory_)) openChecksumInputWithNSString:metaFileName withOrgApacheLuceneStoreIOContext:state->context_];
-  OrgApacheLuceneCodecsCodecUtil_checkIndexHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_withByteArray_withNSString_(metaIn, OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_META_CODEC_NAME_, OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_META_VERSION_START, OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_META_VERSION_CURRENT, [state->segmentInfo_ getId], state->segmentSuffix_);
+  OrgApacheLuceneCodecsCodecUtil_checkIndexHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_withByteArray_withNSString_(metaIn, OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_META_CODEC_NAME, OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_META_VERSION_START, OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_META_VERSION_CURRENT, [state->segmentInfo_ getId], state->segmentSuffix_);
   jint fieldCount = [((OrgApacheLuceneStoreChecksumIndexInput *) nil_chk(metaIn)) readVInt];
   for (jint i = 0; i < fieldCount; i++) {
     jint fieldNumber = [metaIn readVInt];
@@ -212,9 +212,9 @@ void OrgApacheLuceneRangetreeRangeTreeDocValuesProducer_initWithOrgApacheLuceneC
   }
   OrgApacheLuceneCodecsCodecUtil_checkFooterWithOrgApacheLuceneStoreChecksumIndexInput_(metaIn);
   [metaIn close];
-  NSString *datFileName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(state->segmentInfo_->name_, state->segmentSuffix_, OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_DATA_EXTENSION_);
+  NSString *datFileName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(state->segmentInfo_->name_, state->segmentSuffix_, OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_DATA_EXTENSION);
   JreStrongAssign(&self->datIn_, [state->directory_ openInputWithNSString:datFileName withOrgApacheLuceneStoreIOContext:state->context_]);
-  OrgApacheLuceneCodecsCodecUtil_checkIndexHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_withByteArray_withNSString_(self->datIn_, OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_DATA_CODEC_NAME_, OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_DATA_VERSION_START, OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_DATA_VERSION_CURRENT, [state->segmentInfo_ getId], state->segmentSuffix_);
+  OrgApacheLuceneCodecsCodecUtil_checkIndexHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_withByteArray_withNSString_(self->datIn_, OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_DATA_CODEC_NAME, OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_DATA_VERSION_START, OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_DATA_VERSION_CURRENT, [state->segmentInfo_ getId], state->segmentSuffix_);
   JreStrongAssignAndConsume(&self->ramBytesUsed_, new_JavaUtilConcurrentAtomicAtomicLong_initWithLong_(OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_([self getClass])));
   self->maxDoc_ = [state->segmentInfo_ maxDoc];
   JreStrongAssign(&self->delegate_, delegate);
@@ -222,9 +222,11 @@ void OrgApacheLuceneRangetreeRangeTreeDocValuesProducer_initWithOrgApacheLuceneC
 }
 
 OrgApacheLuceneRangetreeRangeTreeDocValuesProducer *new_OrgApacheLuceneRangetreeRangeTreeDocValuesProducer_initWithOrgApacheLuceneCodecsDocValuesProducer_withOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneCodecsDocValuesProducer *delegate, OrgApacheLuceneIndexSegmentReadState *state) {
-  OrgApacheLuceneRangetreeRangeTreeDocValuesProducer *self = [OrgApacheLuceneRangetreeRangeTreeDocValuesProducer alloc];
-  OrgApacheLuceneRangetreeRangeTreeDocValuesProducer_initWithOrgApacheLuceneCodecsDocValuesProducer_withOrgApacheLuceneIndexSegmentReadState_(self, delegate, state);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneRangetreeRangeTreeDocValuesProducer, initWithOrgApacheLuceneCodecsDocValuesProducer_withOrgApacheLuceneIndexSegmentReadState_, delegate, state)
+}
+
+OrgApacheLuceneRangetreeRangeTreeDocValuesProducer *create_OrgApacheLuceneRangetreeRangeTreeDocValuesProducer_initWithOrgApacheLuceneCodecsDocValuesProducer_withOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneCodecsDocValuesProducer *delegate, OrgApacheLuceneIndexSegmentReadState *state) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneRangetreeRangeTreeDocValuesProducer, initWithOrgApacheLuceneCodecsDocValuesProducer_withOrgApacheLuceneIndexSegmentReadState_, delegate, state)
 }
 
 void OrgApacheLuceneRangetreeRangeTreeDocValuesProducer_initWithOrgApacheLuceneRangetreeRangeTreeDocValuesProducer_(OrgApacheLuceneRangetreeRangeTreeDocValuesProducer *self, OrgApacheLuceneRangetreeRangeTreeDocValuesProducer *orig) {
@@ -242,9 +244,11 @@ void OrgApacheLuceneRangetreeRangeTreeDocValuesProducer_initWithOrgApacheLuceneR
 }
 
 OrgApacheLuceneRangetreeRangeTreeDocValuesProducer *new_OrgApacheLuceneRangetreeRangeTreeDocValuesProducer_initWithOrgApacheLuceneRangetreeRangeTreeDocValuesProducer_(OrgApacheLuceneRangetreeRangeTreeDocValuesProducer *orig) {
-  OrgApacheLuceneRangetreeRangeTreeDocValuesProducer *self = [OrgApacheLuceneRangetreeRangeTreeDocValuesProducer alloc];
-  OrgApacheLuceneRangetreeRangeTreeDocValuesProducer_initWithOrgApacheLuceneRangetreeRangeTreeDocValuesProducer_(self, orig);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneRangetreeRangeTreeDocValuesProducer, initWithOrgApacheLuceneRangetreeRangeTreeDocValuesProducer_, orig)
+}
+
+OrgApacheLuceneRangetreeRangeTreeDocValuesProducer *create_OrgApacheLuceneRangetreeRangeTreeDocValuesProducer_initWithOrgApacheLuceneRangetreeRangeTreeDocValuesProducer_(OrgApacheLuceneRangetreeRangeTreeDocValuesProducer *orig) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneRangetreeRangeTreeDocValuesProducer, initWithOrgApacheLuceneRangetreeRangeTreeDocValuesProducer_, orig)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneRangetreeRangeTreeDocValuesProducer)

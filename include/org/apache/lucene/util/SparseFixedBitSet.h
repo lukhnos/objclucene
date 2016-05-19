@@ -5,33 +5,42 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilSparseFixedBitSet_INCLUDE_ALL")
-#if OrgApacheLuceneUtilSparseFixedBitSet_RESTRICT
-#define OrgApacheLuceneUtilSparseFixedBitSet_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilSparseFixedBitSet")
+#ifdef RESTRICT_OrgApacheLuceneUtilSparseFixedBitSet
+#define INCLUDE_ALL_OrgApacheLuceneUtilSparseFixedBitSet 0
 #else
-#define OrgApacheLuceneUtilSparseFixedBitSet_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilSparseFixedBitSet 1
 #endif
-#undef OrgApacheLuceneUtilSparseFixedBitSet_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilSparseFixedBitSet
 
-#if !defined (_OrgApacheLuceneUtilSparseFixedBitSet_) && (OrgApacheLuceneUtilSparseFixedBitSet_INCLUDE_ALL || OrgApacheLuceneUtilSparseFixedBitSet_INCLUDE)
-#define _OrgApacheLuceneUtilSparseFixedBitSet_
+#if !defined (OrgApacheLuceneUtilSparseFixedBitSet_) && (INCLUDE_ALL_OrgApacheLuceneUtilSparseFixedBitSet || defined(INCLUDE_OrgApacheLuceneUtilSparseFixedBitSet))
+#define OrgApacheLuceneUtilSparseFixedBitSet_
 
-#define OrgApacheLuceneUtilBitSet_RESTRICT 1
-#define OrgApacheLuceneUtilBitSet_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilBitSet 1
+#define INCLUDE_OrgApacheLuceneUtilBitSet 1
 #include "org/apache/lucene/util/BitSet.h"
 
-#define OrgApacheLuceneUtilBits_RESTRICT 1
-#define OrgApacheLuceneUtilBits_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilBits 1
+#define INCLUDE_OrgApacheLuceneUtilBits 1
 #include "org/apache/lucene/util/Bits.h"
 
-#define OrgApacheLuceneUtilAccountable_RESTRICT 1
-#define OrgApacheLuceneUtilAccountable_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAccountable 1
+#define INCLUDE_OrgApacheLuceneUtilAccountable 1
 #include "org/apache/lucene/util/Accountable.h"
 
 @class IOSLongArray;
 @class IOSObjectArray;
 @class OrgApacheLuceneSearchDocIdSetIterator;
 
+/*!
+ @brief A bit set that only stores longs that have at least one bit which is set.
+ The way it works is that the space of bits is divided into blocks of
+ 4096 bits, which is 64 longs. Then for each block, we have:<ul>
+ <li>a long[] which stores the non-zero longs for that block</li>
+ <li>a long so that bit <tt>i</tt> being set means that the <code>i-th</code>
+ long of the block is non-null, and its offset in the array of longs is
+ the number of one bits on the right of the <code>i-th</code> bit.</li></ul>
+ */
 @interface OrgApacheLuceneUtilSparseFixedBitSet : OrgApacheLuceneUtilBitSet < OrgApacheLuceneUtilBits, OrgApacheLuceneUtilAccountable > {
  @public
   IOSLongArray *indices_;
@@ -43,6 +52,10 @@
 
 #pragma mark Public
 
+/*!
+ @brief Create a <code>SparseFixedBitSet</code> that can contain bits between
+ <code>0</code> included and <code>length</code> excluded.
+ */
 - (instancetype)initWithInt:(jint)length;
 
 - (void)and__WithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)it;
@@ -51,6 +64,9 @@
 
 - (jint)cardinality;
 
+/*!
+ @brief Clear the bit at index <tt>i</tt>.
+ */
 - (void)clearWithInt:(jint)i;
 
 - (void)clearWithInt:(jint)from
@@ -68,6 +84,9 @@
 
 - (jlong)ramBytesUsed;
 
+/*!
+ @brief Set the bit at index <tt>i</tt>.
+ */
 - (void)setWithInt:(jint)i;
 
 - (NSString *)description;
@@ -83,8 +102,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilSparseFixedBitSet_initWithInt_(OrgApac
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilSparseFixedBitSet *new_OrgApacheLuceneUtilSparseFixedBitSet_initWithInt_(jint length) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilSparseFixedBitSet *create_OrgApacheLuceneUtilSparseFixedBitSet_initWithInt_(jint length);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilSparseFixedBitSet)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilSparseFixedBitSet_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilSparseFixedBitSet")

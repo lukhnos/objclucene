@@ -5,31 +5,48 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory_) && (OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory))
+#define OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory_
 
-#define OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory 1
 #include "org/apache/lucene/analysis/commongrams/CommonGramsFilterFactory.h"
 
 @class OrgApacheLuceneAnalysisTokenFilter;
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Construct <code>CommonGramsQueryFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_cmmngrmsqry" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+ &lt;filter class="solr.CommonGramsQueryFilterFactory" words="commongramsquerystopwords.txt" ignoreCase="false"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory : OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new CommonGramsQueryFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
+/*!
+ @brief Create a CommonGramsFilter and wrap it with a CommonGramsQueryFilter
+ */
 - (OrgApacheLuceneAnalysisTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
 @end
@@ -40,8 +57,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterF
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory *new_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory *create_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory")

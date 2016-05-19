@@ -43,31 +43,31 @@ __attribute__((unused)) static jint OrgApacheLuceneQueriesCommonTermsQuery_minNr
 
 @implementation OrgApacheLuceneQueriesCommonTermsQuery
 
-- (instancetype)initWithOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanClause_OccurEnum *)highFreqOccur
-                    withOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanClause_OccurEnum *)lowFreqOccur
-                                                           withFloat:(jfloat)maxTermFrequency {
-  OrgApacheLuceneQueriesCommonTermsQuery_initWithOrgApacheLuceneSearchBooleanClause_OccurEnum_withOrgApacheLuceneSearchBooleanClause_OccurEnum_withFloat_(self, highFreqOccur, lowFreqOccur, maxTermFrequency);
+- (instancetype)initWithOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause_Occur *)highFreqOccur
+                    withOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause_Occur *)lowFreqOccur
+                                                       withFloat:(jfloat)maxTermFrequency {
+  OrgApacheLuceneQueriesCommonTermsQuery_initWithOrgApacheLuceneSearchBooleanClause_Occur_withOrgApacheLuceneSearchBooleanClause_Occur_withFloat_(self, highFreqOccur, lowFreqOccur, maxTermFrequency);
   return self;
 }
 
-- (instancetype)initWithOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanClause_OccurEnum *)highFreqOccur
-                    withOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanClause_OccurEnum *)lowFreqOccur
-                                                           withFloat:(jfloat)maxTermFrequency
-                                                         withBoolean:(jboolean)disableCoord {
-  OrgApacheLuceneQueriesCommonTermsQuery_initWithOrgApacheLuceneSearchBooleanClause_OccurEnum_withOrgApacheLuceneSearchBooleanClause_OccurEnum_withFloat_withBoolean_(self, highFreqOccur, lowFreqOccur, maxTermFrequency, disableCoord);
+- (instancetype)initWithOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause_Occur *)highFreqOccur
+                    withOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause_Occur *)lowFreqOccur
+                                                       withFloat:(jfloat)maxTermFrequency
+                                                     withBoolean:(jboolean)disableCoord {
+  OrgApacheLuceneQueriesCommonTermsQuery_initWithOrgApacheLuceneSearchBooleanClause_Occur_withOrgApacheLuceneSearchBooleanClause_Occur_withFloat_withBoolean_(self, highFreqOccur, lowFreqOccur, maxTermFrequency, disableCoord);
   return self;
 }
 
 - (void)addWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term {
   if (term == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"Term must not be null") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"Term must not be null");
   }
   [((id<JavaUtilList>) nil_chk(self->terms_)) addWithId:term];
 }
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader {
   if ([((id<JavaUtilList>) nil_chk(self->terms_)) isEmpty]) {
-    return [new_OrgApacheLuceneSearchMatchNoDocsQuery_init() autorelease];
+    return create_OrgApacheLuceneSearchMatchNoDocsQuery_init();
   }
   else if ([self->terms_ size] == 1) {
     OrgApacheLuceneSearchQuery *tq = [self newTermQueryWithOrgApacheLuceneIndexTerm:[self->terms_ getWithInt:0] withOrgApacheLuceneIndexTermContext:nil];
@@ -98,8 +98,8 @@ __attribute__((unused)) static jint OrgApacheLuceneQueriesCommonTermsQuery_minNr
 - (OrgApacheLuceneSearchQuery *)buildQueryWithInt:(jint)maxDoc
          withOrgApacheLuceneIndexTermContextArray:(IOSObjectArray *)contextArray
                 withOrgApacheLuceneIndexTermArray:(IOSObjectArray *)queryTerms {
-  id<JavaUtilList> lowFreqQueries = [new_JavaUtilArrayList_init() autorelease];
-  id<JavaUtilList> highFreqQueries = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> lowFreqQueries = create_JavaUtilArrayList_init();
+  id<JavaUtilList> highFreqQueries = create_JavaUtilArrayList_init();
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(queryTerms))->size_; i++) {
     OrgApacheLuceneIndexTermContext *termContext = IOSObjectArray_Get(nil_chk(contextArray), i);
     if (termContext == nil) {
@@ -116,44 +116,44 @@ __attribute__((unused)) static jint OrgApacheLuceneQueriesCommonTermsQuery_minNr
   }
   jint numLowFreqClauses = [lowFreqQueries size];
   jint numHighFreqClauses = [highFreqQueries size];
-  OrgApacheLuceneSearchBooleanClause_OccurEnum *lowFreqOccur = self->lowFreqOccur_;
-  OrgApacheLuceneSearchBooleanClause_OccurEnum *highFreqOccur = self->highFreqOccur_;
+  OrgApacheLuceneSearchBooleanClause_Occur *lowFreqOccur = self->lowFreqOccur_;
+  OrgApacheLuceneSearchBooleanClause_Occur *highFreqOccur = self->highFreqOccur_;
   jint lowFreqMinShouldMatch = 0;
   jint highFreqMinShouldMatch = 0;
-  if (lowFreqOccur == JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD) && numLowFreqClauses > 0) {
+  if (lowFreqOccur == JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD) && numLowFreqClauses > 0) {
     lowFreqMinShouldMatch = [self calcLowFreqMinimumNumberShouldMatchWithInt:numLowFreqClauses];
   }
-  if (highFreqOccur == JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD) && numHighFreqClauses > 0) {
+  if (highFreqOccur == JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD) && numHighFreqClauses > 0) {
     highFreqMinShouldMatch = [self calcHighFreqMinimumNumberShouldMatchWithInt:numHighFreqClauses];
   }
   if ([lowFreqQueries isEmpty]) {
-    if (highFreqMinShouldMatch == 0 && highFreqOccur != JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, MUST)) {
-      highFreqOccur = JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, MUST);
+    if (highFreqMinShouldMatch == 0 && highFreqOccur != JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, MUST)) {
+      highFreqOccur = JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, MUST);
     }
   }
-  OrgApacheLuceneSearchBooleanQuery_Builder *builder = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
+  OrgApacheLuceneSearchBooleanQuery_Builder *builder = create_OrgApacheLuceneSearchBooleanQuery_Builder_init();
   [builder setDisableCoordWithBoolean:true];
   if ([lowFreqQueries isEmpty] == false) {
-    OrgApacheLuceneSearchBooleanQuery_Builder *lowFreq = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
+    OrgApacheLuceneSearchBooleanQuery_Builder *lowFreq = create_OrgApacheLuceneSearchBooleanQuery_Builder_init();
     [lowFreq setDisableCoordWithBoolean:disableCoord_];
     for (OrgApacheLuceneSearchQuery * __strong query in lowFreqQueries) {
-      [lowFreq addWithOrgApacheLuceneSearchQuery:query withOrgApacheLuceneSearchBooleanClause_OccurEnum:lowFreqOccur];
+      [lowFreq addWithOrgApacheLuceneSearchQuery:query withOrgApacheLuceneSearchBooleanClause_Occur:lowFreqOccur];
     }
     [lowFreq setMinimumNumberShouldMatchWithInt:lowFreqMinShouldMatch];
     OrgApacheLuceneSearchQuery *lowFreqQuery = [lowFreq build];
     [((OrgApacheLuceneSearchQuery *) nil_chk(lowFreqQuery)) setBoostWithFloat:lowFreqBoost_];
-    [builder addWithOrgApacheLuceneSearchQuery:lowFreqQuery withOrgApacheLuceneSearchBooleanClause_OccurEnum:JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, MUST)];
+    [builder addWithOrgApacheLuceneSearchQuery:lowFreqQuery withOrgApacheLuceneSearchBooleanClause_Occur:JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, MUST)];
   }
   if ([highFreqQueries isEmpty] == false) {
-    OrgApacheLuceneSearchBooleanQuery_Builder *highFreq = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
+    OrgApacheLuceneSearchBooleanQuery_Builder *highFreq = create_OrgApacheLuceneSearchBooleanQuery_Builder_init();
     [highFreq setDisableCoordWithBoolean:disableCoord_];
     for (OrgApacheLuceneSearchQuery * __strong query in highFreqQueries) {
-      [highFreq addWithOrgApacheLuceneSearchQuery:query withOrgApacheLuceneSearchBooleanClause_OccurEnum:highFreqOccur];
+      [highFreq addWithOrgApacheLuceneSearchQuery:query withOrgApacheLuceneSearchBooleanClause_Occur:highFreqOccur];
     }
     [highFreq setMinimumNumberShouldMatchWithInt:highFreqMinShouldMatch];
     OrgApacheLuceneSearchQuery *highFreqQuery = [highFreq build];
     [((OrgApacheLuceneSearchQuery *) nil_chk(highFreqQuery)) setBoostWithFloat:highFreqBoost_];
-    [builder addWithOrgApacheLuceneSearchQuery:highFreqQuery withOrgApacheLuceneSearchBooleanClause_OccurEnum:JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD)];
+    [builder addWithOrgApacheLuceneSearchQuery:highFreqQuery withOrgApacheLuceneSearchBooleanClause_Occur:JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD)];
   }
   OrgApacheLuceneSearchQuery *rewritten = [builder build];
   [((OrgApacheLuceneSearchQuery *) nil_chk(rewritten)) setBoostWithFloat:[self getBoost]];
@@ -174,9 +174,9 @@ __attribute__((unused)) static jint OrgApacheLuceneQueriesCommonTermsQuery_minNr
       if (terms == nil) {
         continue;
       }
-      termsEnum = [((OrgApacheLuceneIndexTerms *) nil_chk(terms)) iterator];
+      termsEnum = [terms iterator];
       JreAssert((termsEnum != nil), (@"org/apache/lucene/queries/CommonTermsQuery.java:263 condition failed: assert termsEnum != null;"));
-      if (termsEnum == JreLoadStatic(OrgApacheLuceneIndexTermsEnum, EMPTY_)) continue;
+      if (termsEnum == JreLoadStatic(OrgApacheLuceneIndexTermsEnum, EMPTY)) continue;
       if ([((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) seekExactWithOrgApacheLuceneUtilBytesRef:[term bytes]]) {
         if (termContext == nil) {
           IOSObjectArray_SetAndConsume(contextArray, i, new_OrgApacheLuceneIndexTermContext_initWithOrgApacheLuceneIndexIndexReaderContext_withOrgApacheLuceneIndexTermState_withInt_withInt_withLong_([((OrgApacheLuceneIndexIndexReader *) nil_chk(reader)) getContext], [termsEnum termState], context->ord_, [termsEnum docFreq], [termsEnum totalTermFreq]));
@@ -210,7 +210,7 @@ __attribute__((unused)) static jint OrgApacheLuceneQueriesCommonTermsQuery_minNr
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
-  JavaLangStringBuilder *buffer = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_init();
   jboolean needParens = ([self getBoost] != 1.0) || ([self getLowFreqMinimumNumberShouldMatch] > 0);
   if (needParens) {
     [buffer appendWithNSString:@"("];
@@ -241,21 +241,21 @@ __attribute__((unused)) static jint OrgApacheLuceneQueriesCommonTermsQuery_minNr
   jint result = ((jint) [super hash]);
   result = prime * result + (disableCoord_ ? 1231 : 1237);
   result = prime * result + JavaLangFloat_floatToIntBitsWithFloat_(highFreqBoost_);
-  result = prime * result + ((highFreqOccur_ == nil) ? 0 : ((jint) [highFreqOccur_ hash]));
+  result = prime * result + ((highFreqOccur_ == nil) ? 0 : ((jint) [((OrgApacheLuceneSearchBooleanClause_Occur *) nil_chk(highFreqOccur_)) hash]));
   result = prime * result + JavaLangFloat_floatToIntBitsWithFloat_(lowFreqBoost_);
-  result = prime * result + ((lowFreqOccur_ == nil) ? 0 : ((jint) [lowFreqOccur_ hash]));
+  result = prime * result + ((lowFreqOccur_ == nil) ? 0 : ((jint) [((OrgApacheLuceneSearchBooleanClause_Occur *) nil_chk(lowFreqOccur_)) hash]));
   result = prime * result + JavaLangFloat_floatToIntBitsWithFloat_(maxTermFrequency_);
   result = prime * result + JavaLangFloat_floatToIntBitsWithFloat_(lowFreqMinNrShouldMatch_);
   result = prime * result + JavaLangFloat_floatToIntBitsWithFloat_(highFreqMinNrShouldMatch_);
-  result = prime * result + ((terms_ == nil) ? 0 : ((jint) [terms_ hash]));
+  result = prime * result + ((terms_ == nil) ? 0 : ((jint) [((id<JavaUtilList>) nil_chk(terms_)) hash]));
   return result;
 }
 
 - (jboolean)isEqual:(id)obj {
   if (self == obj) return true;
   if (![super isEqual:obj]) return false;
-  if ([self getClass] != [nil_chk(obj) getClass]) return false;
-  OrgApacheLuceneQueriesCommonTermsQuery *other = (OrgApacheLuceneQueriesCommonTermsQuery *) check_class_cast(obj, [OrgApacheLuceneQueriesCommonTermsQuery class]);
+  if ([self getClass] != (id) [nil_chk(obj) getClass]) return false;
+  OrgApacheLuceneQueriesCommonTermsQuery *other = (OrgApacheLuceneQueriesCommonTermsQuery *) cast_chk(obj, [OrgApacheLuceneQueriesCommonTermsQuery class]);
   if (disableCoord_ != other->disableCoord_) return false;
   if (JavaLangFloat_floatToIntBitsWithFloat_(highFreqBoost_) != JavaLangFloat_floatToIntBitsWithFloat_(other->highFreqBoost_)) return false;
   if (highFreqOccur_ != other->highFreqOccur_) return false;
@@ -273,7 +273,7 @@ __attribute__((unused)) static jint OrgApacheLuceneQueriesCommonTermsQuery_minNr
 
 - (OrgApacheLuceneSearchQuery *)newTermQueryWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
                                      withOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)context {
-  return context == nil ? [new_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_(term) autorelease] : [new_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneIndexTermContext_(term, context) autorelease];
+  return context == nil ? create_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_(term) : create_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneIndexTermContext_(term, context);
 }
 
 - (void)dealloc {
@@ -285,15 +285,15 @@ __attribute__((unused)) static jint OrgApacheLuceneQueriesCommonTermsQuery_minNr
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchBooleanClause_OccurEnum:withOrgApacheLuceneSearchBooleanClause_OccurEnum:withFloat:", "CommonTermsQuery", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchBooleanClause_OccurEnum:withOrgApacheLuceneSearchBooleanClause_OccurEnum:withFloat:withBoolean:", "CommonTermsQuery", NULL, 0x1, NULL, NULL },
+    { "initWithOrgApacheLuceneSearchBooleanClause_Occur:withOrgApacheLuceneSearchBooleanClause_Occur:withFloat:", "CommonTermsQuery", NULL, 0x1, NULL, NULL },
+    { "initWithOrgApacheLuceneSearchBooleanClause_Occur:withOrgApacheLuceneSearchBooleanClause_Occur:withFloat:withBoolean:", "CommonTermsQuery", NULL, 0x1, NULL, NULL },
     { "addWithOrgApacheLuceneIndexTerm:", "add", "V", 0x1, NULL, NULL },
     { "rewriteWithOrgApacheLuceneIndexIndexReader:", "rewrite", "Lorg.apache.lucene.search.Query;", 0x1, "Ljava.io.IOException;", NULL },
     { "calcLowFreqMinimumNumberShouldMatchWithInt:", "calcLowFreqMinimumNumberShouldMatch", "I", 0x4, NULL, NULL },
     { "calcHighFreqMinimumNumberShouldMatchWithInt:", "calcHighFreqMinimumNumberShouldMatch", "I", 0x4, NULL, NULL },
     { "minNrShouldMatchWithFloat:withInt:", "minNrShouldMatch", "I", 0x12, NULL, NULL },
     { "buildQueryWithInt:withOrgApacheLuceneIndexTermContextArray:withOrgApacheLuceneIndexTermArray:", "buildQuery", "Lorg.apache.lucene.search.Query;", 0x4, NULL, NULL },
-    { "collectTermContextWithOrgApacheLuceneIndexIndexReader:withJavaUtilList:withOrgApacheLuceneIndexTermContextArray:withOrgApacheLuceneIndexTermArray:", "collectTermContext", "V", 0x1, "Ljava.io.IOException;", NULL },
+    { "collectTermContextWithOrgApacheLuceneIndexIndexReader:withJavaUtilList:withOrgApacheLuceneIndexTermContextArray:withOrgApacheLuceneIndexTermArray:", "collectTermContext", "V", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/IndexReader;Ljava/util/List<Lorg/apache/lucene/index/LeafReaderContext;>;[Lorg/apache/lucene/index/TermContext;[Lorg/apache/lucene/index/Term;)V" },
     { "isCoordDisabled", NULL, "Z", 0x1, NULL, NULL },
     { "setLowFreqMinimumNumberShouldMatchWithFloat:", "setLowFreqMinimumNumberShouldMatch", "V", 0x1, NULL, NULL },
     { "getLowFreqMinimumNumberShouldMatch", NULL, "F", 0x1, NULL, NULL },
@@ -321,28 +321,30 @@ __attribute__((unused)) static jint OrgApacheLuceneQueriesCommonTermsQuery_minNr
 
 @end
 
-void OrgApacheLuceneQueriesCommonTermsQuery_initWithOrgApacheLuceneSearchBooleanClause_OccurEnum_withOrgApacheLuceneSearchBooleanClause_OccurEnum_withFloat_(OrgApacheLuceneQueriesCommonTermsQuery *self, OrgApacheLuceneSearchBooleanClause_OccurEnum *highFreqOccur, OrgApacheLuceneSearchBooleanClause_OccurEnum *lowFreqOccur, jfloat maxTermFrequency) {
-  OrgApacheLuceneQueriesCommonTermsQuery_initWithOrgApacheLuceneSearchBooleanClause_OccurEnum_withOrgApacheLuceneSearchBooleanClause_OccurEnum_withFloat_withBoolean_(self, highFreqOccur, lowFreqOccur, maxTermFrequency, false);
+void OrgApacheLuceneQueriesCommonTermsQuery_initWithOrgApacheLuceneSearchBooleanClause_Occur_withOrgApacheLuceneSearchBooleanClause_Occur_withFloat_(OrgApacheLuceneQueriesCommonTermsQuery *self, OrgApacheLuceneSearchBooleanClause_Occur *highFreqOccur, OrgApacheLuceneSearchBooleanClause_Occur *lowFreqOccur, jfloat maxTermFrequency) {
+  OrgApacheLuceneQueriesCommonTermsQuery_initWithOrgApacheLuceneSearchBooleanClause_Occur_withOrgApacheLuceneSearchBooleanClause_Occur_withFloat_withBoolean_(self, highFreqOccur, lowFreqOccur, maxTermFrequency, false);
 }
 
-OrgApacheLuceneQueriesCommonTermsQuery *new_OrgApacheLuceneQueriesCommonTermsQuery_initWithOrgApacheLuceneSearchBooleanClause_OccurEnum_withOrgApacheLuceneSearchBooleanClause_OccurEnum_withFloat_(OrgApacheLuceneSearchBooleanClause_OccurEnum *highFreqOccur, OrgApacheLuceneSearchBooleanClause_OccurEnum *lowFreqOccur, jfloat maxTermFrequency) {
-  OrgApacheLuceneQueriesCommonTermsQuery *self = [OrgApacheLuceneQueriesCommonTermsQuery alloc];
-  OrgApacheLuceneQueriesCommonTermsQuery_initWithOrgApacheLuceneSearchBooleanClause_OccurEnum_withOrgApacheLuceneSearchBooleanClause_OccurEnum_withFloat_(self, highFreqOccur, lowFreqOccur, maxTermFrequency);
-  return self;
+OrgApacheLuceneQueriesCommonTermsQuery *new_OrgApacheLuceneQueriesCommonTermsQuery_initWithOrgApacheLuceneSearchBooleanClause_Occur_withOrgApacheLuceneSearchBooleanClause_Occur_withFloat_(OrgApacheLuceneSearchBooleanClause_Occur *highFreqOccur, OrgApacheLuceneSearchBooleanClause_Occur *lowFreqOccur, jfloat maxTermFrequency) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesCommonTermsQuery, initWithOrgApacheLuceneSearchBooleanClause_Occur_withOrgApacheLuceneSearchBooleanClause_Occur_withFloat_, highFreqOccur, lowFreqOccur, maxTermFrequency)
 }
 
-void OrgApacheLuceneQueriesCommonTermsQuery_initWithOrgApacheLuceneSearchBooleanClause_OccurEnum_withOrgApacheLuceneSearchBooleanClause_OccurEnum_withFloat_withBoolean_(OrgApacheLuceneQueriesCommonTermsQuery *self, OrgApacheLuceneSearchBooleanClause_OccurEnum *highFreqOccur, OrgApacheLuceneSearchBooleanClause_OccurEnum *lowFreqOccur, jfloat maxTermFrequency, jboolean disableCoord) {
+OrgApacheLuceneQueriesCommonTermsQuery *create_OrgApacheLuceneQueriesCommonTermsQuery_initWithOrgApacheLuceneSearchBooleanClause_Occur_withOrgApacheLuceneSearchBooleanClause_Occur_withFloat_(OrgApacheLuceneSearchBooleanClause_Occur *highFreqOccur, OrgApacheLuceneSearchBooleanClause_Occur *lowFreqOccur, jfloat maxTermFrequency) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesCommonTermsQuery, initWithOrgApacheLuceneSearchBooleanClause_Occur_withOrgApacheLuceneSearchBooleanClause_Occur_withFloat_, highFreqOccur, lowFreqOccur, maxTermFrequency)
+}
+
+void OrgApacheLuceneQueriesCommonTermsQuery_initWithOrgApacheLuceneSearchBooleanClause_Occur_withOrgApacheLuceneSearchBooleanClause_Occur_withFloat_withBoolean_(OrgApacheLuceneQueriesCommonTermsQuery *self, OrgApacheLuceneSearchBooleanClause_Occur *highFreqOccur, OrgApacheLuceneSearchBooleanClause_Occur *lowFreqOccur, jfloat maxTermFrequency, jboolean disableCoord) {
   OrgApacheLuceneSearchQuery_init(self);
   JreStrongAssignAndConsume(&self->terms_, new_JavaUtilArrayList_init());
   self->lowFreqBoost_ = 1.0f;
   self->highFreqBoost_ = 1.0f;
   self->lowFreqMinNrShouldMatch_ = 0;
   self->highFreqMinNrShouldMatch_ = 0;
-  if (highFreqOccur == JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, MUST_NOT)) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"highFreqOccur should be MUST or SHOULD but was MUST_NOT") autorelease];
+  if (highFreqOccur == JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, MUST_NOT)) {
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"highFreqOccur should be MUST or SHOULD but was MUST_NOT");
   }
-  if (lowFreqOccur == JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, MUST_NOT)) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"lowFreqOccur should be MUST or SHOULD but was MUST_NOT") autorelease];
+  if (lowFreqOccur == JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, MUST_NOT)) {
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"lowFreqOccur should be MUST or SHOULD but was MUST_NOT");
   }
   self->disableCoord_ = disableCoord;
   JreStrongAssign(&self->highFreqOccur_, highFreqOccur);
@@ -350,10 +352,12 @@ void OrgApacheLuceneQueriesCommonTermsQuery_initWithOrgApacheLuceneSearchBoolean
   self->maxTermFrequency_ = maxTermFrequency;
 }
 
-OrgApacheLuceneQueriesCommonTermsQuery *new_OrgApacheLuceneQueriesCommonTermsQuery_initWithOrgApacheLuceneSearchBooleanClause_OccurEnum_withOrgApacheLuceneSearchBooleanClause_OccurEnum_withFloat_withBoolean_(OrgApacheLuceneSearchBooleanClause_OccurEnum *highFreqOccur, OrgApacheLuceneSearchBooleanClause_OccurEnum *lowFreqOccur, jfloat maxTermFrequency, jboolean disableCoord) {
-  OrgApacheLuceneQueriesCommonTermsQuery *self = [OrgApacheLuceneQueriesCommonTermsQuery alloc];
-  OrgApacheLuceneQueriesCommonTermsQuery_initWithOrgApacheLuceneSearchBooleanClause_OccurEnum_withOrgApacheLuceneSearchBooleanClause_OccurEnum_withFloat_withBoolean_(self, highFreqOccur, lowFreqOccur, maxTermFrequency, disableCoord);
-  return self;
+OrgApacheLuceneQueriesCommonTermsQuery *new_OrgApacheLuceneQueriesCommonTermsQuery_initWithOrgApacheLuceneSearchBooleanClause_Occur_withOrgApacheLuceneSearchBooleanClause_Occur_withFloat_withBoolean_(OrgApacheLuceneSearchBooleanClause_Occur *highFreqOccur, OrgApacheLuceneSearchBooleanClause_Occur *lowFreqOccur, jfloat maxTermFrequency, jboolean disableCoord) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesCommonTermsQuery, initWithOrgApacheLuceneSearchBooleanClause_Occur_withOrgApacheLuceneSearchBooleanClause_Occur_withFloat_withBoolean_, highFreqOccur, lowFreqOccur, maxTermFrequency, disableCoord)
+}
+
+OrgApacheLuceneQueriesCommonTermsQuery *create_OrgApacheLuceneQueriesCommonTermsQuery_initWithOrgApacheLuceneSearchBooleanClause_Occur_withOrgApacheLuceneSearchBooleanClause_Occur_withFloat_withBoolean_(OrgApacheLuceneSearchBooleanClause_Occur *highFreqOccur, OrgApacheLuceneSearchBooleanClause_Occur *lowFreqOccur, jfloat maxTermFrequency, jboolean disableCoord) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesCommonTermsQuery, initWithOrgApacheLuceneSearchBooleanClause_Occur_withOrgApacheLuceneSearchBooleanClause_Occur_withFloat_withBoolean_, highFreqOccur, lowFreqOccur, maxTermFrequency, disableCoord)
 }
 
 jint OrgApacheLuceneQueriesCommonTermsQuery_minNrShouldMatchWithFloat_withInt_(OrgApacheLuceneQueriesCommonTermsQuery *self, jfloat minNrShouldMatch, jint numOptional) {

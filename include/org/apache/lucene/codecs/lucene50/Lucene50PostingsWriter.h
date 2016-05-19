@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_RESTRICT
-#define OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter")
+#ifdef RESTRICT_OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter
+#define INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter 0
 #else
-#define OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter 1
 #endif
-#undef OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter
 
-#if !defined (_OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_) && (OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_INCLUDE_ALL || OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_INCLUDE)
-#define _OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_
+#if !defined (OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_) && (INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter || defined(INCLUDE_OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter))
+#define OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_
 
-#define OrgApacheLuceneCodecsPushPostingsWriterBase_RESTRICT 1
-#define OrgApacheLuceneCodecsPushPostingsWriterBase_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneCodecsPushPostingsWriterBase 1
+#define INCLUDE_OrgApacheLuceneCodecsPushPostingsWriterBase 1
 #include "org/apache/lucene/codecs/PushPostingsWriterBase.h"
 
 @class IOSByteArray;
@@ -31,6 +31,12 @@
 @class OrgApacheLuceneStoreIndexOutput;
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief Concrete class that writes docId(maybe frq,pos,offset,payloads) list
+ with postings format.
+ Postings list for each term will be stored separately. 
+ - seealso: Lucene50SkipWriter for details about skipping setting and postings layout.
+ */
 @interface OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter : OrgApacheLuceneCodecsPushPostingsWriterBase {
  @public
   OrgApacheLuceneStoreIndexOutput *docOut_;
@@ -46,8 +52,13 @@
   IOSByteArray *encoded_;
 }
 
++ (OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *)emptyState;
+
 #pragma mark Public
 
+/*!
+ @brief Creates a postings writer
+ */
 - (instancetype)initWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state;
 
 - (void)addPositionWithInt:(jint)position
@@ -65,6 +76,9 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)_
 
 - (void)finishDoc;
 
+/*!
+ @brief Called when we are done adding docs to this term
+ */
 - (void)finishTermWithOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)_state;
 
 - (void)init__WithOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)termsOut
@@ -95,15 +109,19 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter, offsetS
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter, offsetLengthBuffer_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter, encoded_, IOSByteArray *)
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_emptyState_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter, emptyState_, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *)
+inline OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_get_emptyState();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_emptyState;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter, emptyState, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_initWithOrgApacheLuceneIndexSegmentWriteState_(OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter *self, OrgApacheLuceneIndexSegmentWriteState *state);
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter *new_OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_initWithOrgApacheLuceneIndexSegmentWriteState_(OrgApacheLuceneIndexSegmentWriteState *state) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter *create_OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_initWithOrgApacheLuceneIndexSegmentWriteState_(OrgApacheLuceneIndexSegmentWriteState *state);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter")

@@ -5,23 +5,32 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisHuHungarianLightStemFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisHuHungarianLightStemFilter_RESTRICT
-#define OrgApacheLuceneAnalysisHuHungarianLightStemFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisHuHungarianLightStemFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisHuHungarianLightStemFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisHuHungarianLightStemFilter 0
 #else
-#define OrgApacheLuceneAnalysisHuHungarianLightStemFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisHuHungarianLightStemFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisHuHungarianLightStemFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisHuHungarianLightStemFilter
 
-#if !defined (_OrgApacheLuceneAnalysisHuHungarianLightStemFilter_) && (OrgApacheLuceneAnalysisHuHungarianLightStemFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisHuHungarianLightStemFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisHuHungarianLightStemFilter_
+#if !defined (OrgApacheLuceneAnalysisHuHungarianLightStemFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisHuHungarianLightStemFilter || defined(INCLUDE_OrgApacheLuceneAnalysisHuHungarianLightStemFilter))
+#define OrgApacheLuceneAnalysisHuHungarianLightStemFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief A <code>TokenFilter</code> that applies <code>HungarianLightStemmer</code> to stem
+ Hungarian words.
+ <p>
+ To prevent terms from being stemmed use an instance of
+ <code>SetKeywordMarkerFilter</code> or a custom <code>TokenFilter</code> that sets
+ the <code>KeywordAttribute</code> before this <code>TokenStream</code>.
+ </p>
+ */
 @interface OrgApacheLuceneAnalysisHuHungarianLightStemFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
@@ -38,8 +47,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisHuHungarianLightStemFilter_initWit
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisHuHungarianLightStemFilter *new_OrgApacheLuceneAnalysisHuHungarianLightStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisHuHungarianLightStemFilter *create_OrgApacheLuceneAnalysisHuHungarianLightStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisHuHungarianLightStemFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisHuHungarianLightStemFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisHuHungarianLightStemFilter")

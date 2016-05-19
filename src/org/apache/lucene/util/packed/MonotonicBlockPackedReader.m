@@ -35,6 +35,8 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPackedMonotonicBlockPacke
 
 __attribute__((unused)) static OrgApacheLuceneUtilPackedMonotonicBlockPackedReader *new_OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_(OrgApacheLuceneStoreIndexInput *inArg, jint packedIntsVersion, jint blockSize, jlong valueCount, jboolean direct) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneUtilPackedMonotonicBlockPackedReader *create_OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_(OrgApacheLuceneStoreIndexInput *inArg, jint packedIntsVersion, jint blockSize, jlong valueCount, jboolean direct);
+
 @interface OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_$1 : OrgApacheLuceneUtilPackedMonotonicBlockPackedReader
 
 - (jlong)decodeDeltaWithLong:(jlong)delta;
@@ -52,6 +54,8 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_$1)
 __attribute__((unused)) static void OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_$1_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_(OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_$1 *self, OrgApacheLuceneStoreIndexInput *arg$0, jint arg$1, jint arg$2, jlong arg$3, jboolean arg$4);
 
 __attribute__((unused)) static OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_$1 *new_OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_$1_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_(OrgApacheLuceneStoreIndexInput *arg$0, jint arg$1, jint arg$2, jlong arg$3, jboolean arg$4) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_$1 *create_OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_$1_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_(OrgApacheLuceneStoreIndexInput *arg$0, jint arg$1, jint arg$2, jlong arg$3, jboolean arg$4);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_$1)
 
@@ -136,7 +140,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_$
     { "decodeDeltaWithLong:", "decodeDelta", "J", 0x4, NULL, NULL },
     { "size", NULL, "J", 0x1, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -162,9 +166,9 @@ jlong OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_expectedWithLong_withF
 OrgApacheLuceneUtilPackedMonotonicBlockPackedReader *OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_ofWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_(OrgApacheLuceneStoreIndexInput *inArg, jint packedIntsVersion, jint blockSize, jlong valueCount, jboolean direct) {
   OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_initialize();
   if (packedIntsVersion < OrgApacheLuceneUtilPackedPackedInts_VERSION_MONOTONIC_WITHOUT_ZIGZAG) {
-    return [new_OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_$1_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_(inArg, packedIntsVersion, blockSize, valueCount, direct) autorelease];
+    return create_OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_$1_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_(inArg, packedIntsVersion, blockSize, valueCount, direct);
   }
-  return [new_OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_(inArg, packedIntsVersion, blockSize, valueCount, direct) autorelease];
+  return create_OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_(inArg, packedIntsVersion, blockSize, valueCount, direct);
 }
 
 void OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_(OrgApacheLuceneUtilPackedMonotonicBlockPackedReader *self, OrgApacheLuceneStoreIndexInput *inArg, jint packedIntsVersion, jint blockSize, jlong valueCount, jboolean direct) {
@@ -184,11 +188,11 @@ void OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_initWithOrgApacheLucene
     else {
       *IOSLongArray_GetRef(self->minValues_, i) = [((OrgApacheLuceneStoreIndexInput *) nil_chk(inArg)) readZLong];
     }
-    *IOSFloatArray_GetRef(self->averages_, i) = JavaLangFloat_intBitsToFloatWithInt_([((OrgApacheLuceneStoreIndexInput *) nil_chk(inArg)) readInt]);
+    *IOSFloatArray_GetRef(self->averages_, i) = JavaLangFloat_intBitsToFloatWithInt_([inArg readInt]);
     jint bitsPerValue = [inArg readVInt];
     sumBPV += bitsPerValue;
     if (bitsPerValue > 64) {
-      @throw [new_JavaIoIOException_initWithNSString_(@"Corrupted") autorelease];
+      @throw create_JavaIoIOException_initWithNSString_(@"Corrupted");
     }
     if (bitsPerValue == 0) {
       IOSObjectArray_SetAndConsume(self->subReaders_, i, new_OrgApacheLuceneUtilPackedPackedInts_NullReader_initWithInt_(blockSize));
@@ -197,11 +201,11 @@ void OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_initWithOrgApacheLucene
       jint size = (jint) JavaLangMath_minWithLong_withLong_(blockSize, valueCount - (jlong) i * blockSize);
       if (direct) {
         jlong pointer = [inArg getFilePointer];
-        IOSObjectArray_Set(self->subReaders_, i, OrgApacheLuceneUtilPackedPackedInts_getDirectReaderNoHeaderWithOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_withInt_(inArg, JreLoadStatic(OrgApacheLuceneUtilPackedPackedInts_FormatEnum, PACKED), packedIntsVersion, size, bitsPerValue));
-        [inArg seekWithLong:pointer + [((OrgApacheLuceneUtilPackedPackedInts_FormatEnum *) nil_chk(JreLoadStatic(OrgApacheLuceneUtilPackedPackedInts_FormatEnum, PACKED))) byteCountWithInt:packedIntsVersion withInt:size withInt:bitsPerValue]];
+        IOSObjectArray_Set(self->subReaders_, i, OrgApacheLuceneUtilPackedPackedInts_getDirectReaderNoHeaderWithOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneUtilPackedPackedInts_Format_withInt_withInt_withInt_(inArg, JreLoadEnum(OrgApacheLuceneUtilPackedPackedInts_Format, PACKED), packedIntsVersion, size, bitsPerValue));
+        [inArg seekWithLong:pointer + [((OrgApacheLuceneUtilPackedPackedInts_Format *) nil_chk(JreLoadEnum(OrgApacheLuceneUtilPackedPackedInts_Format, PACKED))) byteCountWithInt:packedIntsVersion withInt:size withInt:bitsPerValue]];
       }
       else {
-        IOSObjectArray_Set(self->subReaders_, i, OrgApacheLuceneUtilPackedPackedInts_getReaderNoHeaderWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_withInt_(inArg, JreLoadStatic(OrgApacheLuceneUtilPackedPackedInts_FormatEnum, PACKED), packedIntsVersion, size, bitsPerValue));
+        IOSObjectArray_Set(self->subReaders_, i, OrgApacheLuceneUtilPackedPackedInts_getReaderNoHeaderWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilPackedPackedInts_Format_withInt_withInt_withInt_(inArg, JreLoadEnum(OrgApacheLuceneUtilPackedPackedInts_Format, PACKED), packedIntsVersion, size, bitsPerValue));
       }
     }
   }
@@ -209,9 +213,11 @@ void OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_initWithOrgApacheLucene
 }
 
 OrgApacheLuceneUtilPackedMonotonicBlockPackedReader *new_OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_(OrgApacheLuceneStoreIndexInput *inArg, jint packedIntsVersion, jint blockSize, jlong valueCount, jboolean direct) {
-  OrgApacheLuceneUtilPackedMonotonicBlockPackedReader *self = [OrgApacheLuceneUtilPackedMonotonicBlockPackedReader alloc];
-  OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_(self, inArg, packedIntsVersion, blockSize, valueCount, direct);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedMonotonicBlockPackedReader, initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_, inArg, packedIntsVersion, blockSize, valueCount, direct)
+}
+
+OrgApacheLuceneUtilPackedMonotonicBlockPackedReader *create_OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_(OrgApacheLuceneStoreIndexInput *inArg, jint packedIntsVersion, jint blockSize, jlong valueCount, jboolean direct) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedMonotonicBlockPackedReader, initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_, inArg, packedIntsVersion, blockSize, valueCount, direct)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedMonotonicBlockPackedReader)
@@ -248,9 +254,11 @@ void OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_$1_initWithOrgApacheLuc
 }
 
 OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_$1 *new_OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_$1_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_(OrgApacheLuceneStoreIndexInput *arg$0, jint arg$1, jint arg$2, jlong arg$3, jboolean arg$4) {
-  OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_$1 *self = [OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_$1 alloc];
-  OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_$1_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_(self, arg$0, arg$1, arg$2, arg$3, arg$4);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_$1, initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_, arg$0, arg$1, arg$2, arg$3, arg$4)
+}
+
+OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_$1 *create_OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_$1_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_(OrgApacheLuceneStoreIndexInput *arg$0, jint arg$1, jint arg$2, jlong arg$3, jboolean arg$4) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_$1, initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_, arg$0, arg$1, arg$2, arg$3, arg$4)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_$1)

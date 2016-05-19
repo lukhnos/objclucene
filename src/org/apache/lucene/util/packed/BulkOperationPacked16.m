@@ -36,8 +36,7 @@ J2OBJC_IGNORE_DESIGNATED_END
                     withInt:(jint)valuesOffset
                     withInt:(jint)iterations {
   for (jint j = 0; j < iterations; ++j) {
-    jint unseq$1 = blocksOffset++;
-    *IOSIntArray_GetRef(nil_chk(values), valuesOffset++) = (JreLShift32((IOSByteArray_Get(nil_chk(blocks), unseq$1) & (jint) 0xFF), 8)) | (IOSByteArray_Get(blocks, blocksOffset++) & (jint) 0xFF);
+    *IOSIntArray_GetRef(nil_chk(values), valuesOffset++) = (JreLShift32((IOSByteArray_Get(nil_chk(blocks), blocksOffset++) & (jint) 0xFF), 8)) | (IOSByteArray_Get(blocks, blocksOffset++) & (jint) 0xFF);
   }
 }
 
@@ -60,8 +59,7 @@ J2OBJC_IGNORE_DESIGNATED_END
                     withInt:(jint)valuesOffset
                     withInt:(jint)iterations {
   for (jint j = 0; j < iterations; ++j) {
-    jint unseq$1 = blocksOffset++;
-    *IOSLongArray_GetRef(nil_chk(values), valuesOffset++) = (JreLShift64((IOSByteArray_Get(nil_chk(blocks), unseq$1) & (jlong) 0xFFLL), 8)) | (IOSByteArray_Get(blocks, blocksOffset++) & (jlong) 0xFFLL);
+    *IOSLongArray_GetRef(nil_chk(values), valuesOffset++) = (JreLShift64((IOSByteArray_Get(nil_chk(blocks), blocksOffset++) & (jlong) 0xFFLL), 8)) | (IOSByteArray_Get(blocks, blocksOffset++) & (jlong) 0xFFLL);
   }
 }
 
@@ -84,9 +82,11 @@ void OrgApacheLuceneUtilPackedBulkOperationPacked16_init(OrgApacheLuceneUtilPack
 }
 
 OrgApacheLuceneUtilPackedBulkOperationPacked16 *new_OrgApacheLuceneUtilPackedBulkOperationPacked16_init() {
-  OrgApacheLuceneUtilPackedBulkOperationPacked16 *self = [OrgApacheLuceneUtilPackedBulkOperationPacked16 alloc];
-  OrgApacheLuceneUtilPackedBulkOperationPacked16_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedBulkOperationPacked16, init)
+}
+
+OrgApacheLuceneUtilPackedBulkOperationPacked16 *create_OrgApacheLuceneUtilPackedBulkOperationPacked16_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedBulkOperationPacked16, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedBulkOperationPacked16)

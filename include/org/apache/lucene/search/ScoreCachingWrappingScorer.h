@@ -5,28 +5,43 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchScoreCachingWrappingScorer_INCLUDE_ALL")
-#if OrgApacheLuceneSearchScoreCachingWrappingScorer_RESTRICT
-#define OrgApacheLuceneSearchScoreCachingWrappingScorer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchScoreCachingWrappingScorer")
+#ifdef RESTRICT_OrgApacheLuceneSearchScoreCachingWrappingScorer
+#define INCLUDE_ALL_OrgApacheLuceneSearchScoreCachingWrappingScorer 0
 #else
-#define OrgApacheLuceneSearchScoreCachingWrappingScorer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchScoreCachingWrappingScorer 1
 #endif
-#undef OrgApacheLuceneSearchScoreCachingWrappingScorer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchScoreCachingWrappingScorer
 
-#if !defined (_OrgApacheLuceneSearchScoreCachingWrappingScorer_) && (OrgApacheLuceneSearchScoreCachingWrappingScorer_INCLUDE_ALL || OrgApacheLuceneSearchScoreCachingWrappingScorer_INCLUDE)
-#define _OrgApacheLuceneSearchScoreCachingWrappingScorer_
+#if !defined (OrgApacheLuceneSearchScoreCachingWrappingScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchScoreCachingWrappingScorer || defined(INCLUDE_OrgApacheLuceneSearchScoreCachingWrappingScorer))
+#define OrgApacheLuceneSearchScoreCachingWrappingScorer_
 
-#define OrgApacheLuceneSearchFilterScorer_RESTRICT 1
-#define OrgApacheLuceneSearchFilterScorer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchFilterScorer 1
+#define INCLUDE_OrgApacheLuceneSearchFilterScorer 1
 #include "org/apache/lucene/search/FilterScorer.h"
 
 @class OrgApacheLuceneSearchScorer;
 @protocol JavaUtilCollection;
 
+/*!
+ @brief A <code>Scorer</code> which wraps another scorer and caches the score of the
+ current document.
+ Successive calls to <code>score()</code> will return the same
+ result and will not invoke the wrapped Scorer's score() method, unless the
+ current document has changed.<br>
+ This class might be useful due to the changes done to the <code>Collector</code>
+ interface, in which the score is not computed for a document by default, only
+ if the collector requests it. Some collectors may need to use the score in
+ several places, however all they have in hand is a <code>Scorer</code> object, and
+ might end up computing the score of a document more than once.
+ */
 @interface OrgApacheLuceneSearchScoreCachingWrappingScorer : OrgApacheLuceneSearchFilterScorer
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new instance by wrapping the given scorer.
+ */
 - (instancetype)initWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)scorer;
 
 - (id<JavaUtilCollection>)getChildren;
@@ -41,8 +56,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchScoreCachingWrappingScorer_initWithO
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchScoreCachingWrappingScorer *new_OrgApacheLuceneSearchScoreCachingWrappingScorer_initWithOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *scorer) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchScoreCachingWrappingScorer *create_OrgApacheLuceneSearchScoreCachingWrappingScorer_initWithOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *scorer);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchScoreCachingWrappingScorer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchScoreCachingWrappingScorer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchScoreCachingWrappingScorer")

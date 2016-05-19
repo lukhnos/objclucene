@@ -5,29 +5,44 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory_) && (OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory))
+#define OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
 @class OrgApacheLuceneAnalysisTokenFilter;
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>TrimFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_trm" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.NGramTokenizerFactory"/&gt;
+ &lt;filter class="solr.TrimFilterFactory" /&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ - seealso: TrimFilter
+ */
 @interface OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new TrimFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -40,8 +55,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory_ini
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory *create_OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory")

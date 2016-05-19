@@ -15,20 +15,23 @@
 #include "org/apache/lucene/analysis/tr/TurkishLowerCaseFilter.h"
 #include "org/apache/lucene/util/AttributeSource.h"
 
-#define OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_LATIN_CAPITAL_LETTER_I 73
-#define OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_LATIN_SMALL_LETTER_I 105
-#define OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_LATIN_SMALL_LETTER_DOTLESS_I 305
-#define OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_COMBINING_DOT_ABOVE 775
-
 @interface OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter () {
  @public
   id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt_;
 }
 
+/*!
+ @brief lookahead for a combining dot above.
+ other NSMs may be in between.
+ */
 - (jboolean)isBeforeDotWithCharArray:(IOSCharArray *)s
                              withInt:(jint)pos
                              withInt:(jint)len;
 
+/*!
+ @brief delete a character in-place.
+ rarely happens, only if COMBINING_DOT_ABOVE is found after an i
+ */
 - (jint)delete__WithCharArray:(IOSCharArray *)s
                       withInt:(jint)pos
                       withInt:(jint)len;
@@ -37,13 +40,21 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter, termAtt_, id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter, LATIN_CAPITAL_LETTER_I, jint)
+inline jint OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_get_LATIN_CAPITAL_LETTER_I();
+#define OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_LATIN_CAPITAL_LETTER_I 73
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter, LATIN_CAPITAL_LETTER_I, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter, LATIN_SMALL_LETTER_I, jint)
+inline jint OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_get_LATIN_SMALL_LETTER_I();
+#define OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_LATIN_SMALL_LETTER_I 105
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter, LATIN_SMALL_LETTER_I, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter, LATIN_SMALL_LETTER_DOTLESS_I, jint)
+inline jint OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_get_LATIN_SMALL_LETTER_DOTLESS_I();
+#define OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_LATIN_SMALL_LETTER_DOTLESS_I 305
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter, LATIN_SMALL_LETTER_DOTLESS_I, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter, COMBINING_DOT_ABOVE, jint)
+inline jint OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_get_COMBINING_DOT_ABOVE();
+#define OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_COMBINING_DOT_ABOVE 775
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter, COMBINING_DOT_ABOVE, jint)
 
 __attribute__((unused)) static jboolean OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_isBeforeDotWithCharArray_withInt_withInt_(OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter *self, IOSCharArray *s, jint pos, jint len);
 
@@ -132,9 +143,11 @@ void OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_initWithOrgApacheLuceneAnal
 }
 
 OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter *new_OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) {
-  OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter *self = [OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter alloc];
-  OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter, initWithOrgApacheLuceneAnalysisTokenStream_, inArg)
+}
+
+OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter *create_OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter, initWithOrgApacheLuceneAnalysisTokenStream_, inArg)
 }
 
 jboolean OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_isBeforeDotWithCharArray_withInt_withInt_(OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter *self, IOSCharArray *s, jint pos, jint len) {

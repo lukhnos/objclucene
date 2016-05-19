@@ -39,6 +39,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexPrefixCodedTerms_initWit
 
 __attribute__((unused)) static OrgApacheLuceneIndexPrefixCodedTerms *new_OrgApacheLuceneIndexPrefixCodedTerms_initWithOrgApacheLuceneStoreRAMFile_withLong_(OrgApacheLuceneStoreRAMFile *buffer, jlong size) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexPrefixCodedTerms *create_OrgApacheLuceneIndexPrefixCodedTerms_initWithOrgApacheLuceneStoreRAMFile_withLong_(OrgApacheLuceneStoreRAMFile *buffer, jlong size);
+
 @interface OrgApacheLuceneIndexPrefixCodedTerms_Builder () {
  @public
   OrgApacheLuceneStoreRAMFile *buffer_;
@@ -74,6 +76,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexPrefixCodedTerms_TermIte
 
 __attribute__((unused)) static OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *new_OrgApacheLuceneIndexPrefixCodedTerms_TermIterator_initWithLong_withOrgApacheLuceneStoreRAMFile_(jlong delGen, OrgApacheLuceneStoreRAMFile *buffer) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *create_OrgApacheLuceneIndexPrefixCodedTerms_TermIterator_initWithLong_withOrgApacheLuceneStoreRAMFile_(jlong delGen, OrgApacheLuceneStoreRAMFile *buffer);
+
 __attribute__((unused)) static void OrgApacheLuceneIndexPrefixCodedTerms_TermIterator_readTermBytesWithInt_withInt_(OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *self, jint prefix, jint suffix);
 
 @implementation OrgApacheLuceneIndexPrefixCodedTerms
@@ -97,7 +101,7 @@ __attribute__((unused)) static void OrgApacheLuceneIndexPrefixCodedTerms_TermIte
 }
 
 - (OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *)iterator {
-  return [new_OrgApacheLuceneIndexPrefixCodedTerms_TermIterator_initWithLong_withOrgApacheLuceneStoreRAMFile_(delGen_, buffer_) autorelease];
+  return create_OrgApacheLuceneIndexPrefixCodedTerms_TermIterator_initWithLong_withOrgApacheLuceneStoreRAMFile_(delGen_, buffer_);
 }
 
 - (jlong)size {
@@ -113,8 +117,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexPrefixCodedTerms_TermIte
 - (jboolean)isEqual:(id)obj {
   if (self == obj) return true;
   if (obj == nil) return false;
-  if ([self getClass] != [nil_chk(obj) getClass]) return false;
-  OrgApacheLuceneIndexPrefixCodedTerms *other = (OrgApacheLuceneIndexPrefixCodedTerms *) check_class_cast(obj, [OrgApacheLuceneIndexPrefixCodedTerms class]);
+  if ([self getClass] != (id) [obj getClass]) return false;
+  OrgApacheLuceneIndexPrefixCodedTerms *other = (OrgApacheLuceneIndexPrefixCodedTerms *) cast_chk(obj, [OrgApacheLuceneIndexPrefixCodedTerms class]);
   return [((OrgApacheLuceneStoreRAMFile *) nil_chk(buffer_)) isEqual:other->buffer_] && delGen_ == other->delGen_;
 }
 
@@ -127,7 +131,7 @@ __attribute__((unused)) static void OrgApacheLuceneIndexPrefixCodedTerms_TermIte
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneStoreRAMFile:withLong:", "PrefixCodedTerms", NULL, 0x2, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
     { "setDelGenWithLong:", "setDelGen", "V", 0x1, NULL, NULL },
     { "iterator", NULL, "Lorg.apache.lucene.index.PrefixCodedTerms$TermIterator;", 0x1, NULL, NULL },
     { "size", NULL, "J", 0x1, NULL, NULL },
@@ -153,9 +157,11 @@ void OrgApacheLuceneIndexPrefixCodedTerms_initWithOrgApacheLuceneStoreRAMFile_wi
 }
 
 OrgApacheLuceneIndexPrefixCodedTerms *new_OrgApacheLuceneIndexPrefixCodedTerms_initWithOrgApacheLuceneStoreRAMFile_withLong_(OrgApacheLuceneStoreRAMFile *buffer, jlong size) {
-  OrgApacheLuceneIndexPrefixCodedTerms *self = [OrgApacheLuceneIndexPrefixCodedTerms alloc];
-  OrgApacheLuceneIndexPrefixCodedTerms_initWithOrgApacheLuceneStoreRAMFile_withLong_(self, buffer, size);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexPrefixCodedTerms, initWithOrgApacheLuceneStoreRAMFile_withLong_, buffer, size)
+}
+
+OrgApacheLuceneIndexPrefixCodedTerms *create_OrgApacheLuceneIndexPrefixCodedTerms_initWithOrgApacheLuceneStoreRAMFile_withLong_(OrgApacheLuceneStoreRAMFile *buffer, jlong size) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexPrefixCodedTerms, initWithOrgApacheLuceneStoreRAMFile_withLong_, buffer, size)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexPrefixCodedTerms)
@@ -170,36 +176,36 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)addWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term {
-  JreAssert(([((OrgApacheLuceneIndexTerm *) nil_chk(lastTerm_)) isEqual:[new_OrgApacheLuceneIndexTerm_initWithNSString_(@"") autorelease]] || [((OrgApacheLuceneIndexTerm *) nil_chk(term)) compareToWithId:lastTerm_] > 0), (@"org/apache/lucene/index/PrefixCodedTerms.java:76 condition failed: assert lastTerm.equals(new Term(\"\")) || term.compareTo(lastTerm) > 0;"));
+  JreAssert(([((OrgApacheLuceneIndexTerm *) nil_chk(lastTerm_)) isEqual:create_OrgApacheLuceneIndexTerm_initWithNSString_(@"")] || [((OrgApacheLuceneIndexTerm *) nil_chk(term)) compareToWithId:lastTerm_] > 0), (@"org/apache/lucene/index/PrefixCodedTerms.java:76 condition failed: assert lastTerm.equals(new Term(\"\")) || term.compareTo(lastTerm) > 0;"));
   @try {
-    jint prefix = OrgApacheLuceneIndexPrefixCodedTerms_Builder_sharedPrefixWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(self, lastTerm_->bytes_, ((OrgApacheLuceneIndexTerm *) nil_chk(term))->bytes_);
+    jint prefix = OrgApacheLuceneIndexPrefixCodedTerms_Builder_sharedPrefixWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(self, ((OrgApacheLuceneIndexTerm *) nil_chk(lastTerm_))->bytes_, ((OrgApacheLuceneIndexTerm *) nil_chk(term))->bytes_);
     jint suffix = ((OrgApacheLuceneUtilBytesRef *) nil_chk(term->bytes_))->length_ - prefix;
-    if ([((NSString *) nil_chk(term->field_)) isEqual:lastTerm_->field_]) {
+    if ([((NSString *) nil_chk(term->field_)) isEqual:((OrgApacheLuceneIndexTerm *) nil_chk(lastTerm_))->field_]) {
       [((OrgApacheLuceneStoreRAMOutputStream *) nil_chk(output_)) writeVIntWithInt:JreLShift32(prefix, 1)];
     }
     else {
       [((OrgApacheLuceneStoreRAMOutputStream *) nil_chk(output_)) writeVIntWithInt:(JreLShift32(prefix, 1)) | 1];
-      [output_ writeStringWithNSString:term->field_];
+      [((OrgApacheLuceneStoreRAMOutputStream *) nil_chk(output_)) writeStringWithNSString:term->field_];
     }
     [((OrgApacheLuceneStoreRAMOutputStream *) nil_chk(output_)) writeVIntWithInt:suffix];
-    [output_ writeBytesWithByteArray:term->bytes_->bytes_ withInt:term->bytes_->offset_ + prefix withInt:suffix];
+    [((OrgApacheLuceneStoreRAMOutputStream *) nil_chk(output_)) writeBytesWithByteArray:((OrgApacheLuceneUtilBytesRef *) nil_chk(term->bytes_))->bytes_ withInt:term->bytes_->offset_ + prefix withInt:suffix];
     [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(lastTermBytes_)) copyBytesWithOrgApacheLuceneUtilBytesRef:term->bytes_];
-    JreStrongAssign(&lastTerm_->bytes_, [lastTermBytes_ get]);
-    JreStrongAssign(&lastTerm_->field_, term->field_);
+    JreStrongAssign(&((OrgApacheLuceneIndexTerm *) nil_chk(lastTerm_))->bytes_, [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(lastTermBytes_)) get]);
+    JreStrongAssign(&((OrgApacheLuceneIndexTerm *) nil_chk(lastTerm_))->field_, term->field_);
     size_ += 1;
   }
   @catch (JavaIoIOException *e) {
-    @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(e) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSException_(e);
   }
 }
 
 - (OrgApacheLuceneIndexPrefixCodedTerms *)finish {
   @try {
     [((OrgApacheLuceneStoreRAMOutputStream *) nil_chk(output_)) close];
-    return [new_OrgApacheLuceneIndexPrefixCodedTerms_initWithOrgApacheLuceneStoreRAMFile_withLong_(buffer_, size_) autorelease];
+    return create_OrgApacheLuceneIndexPrefixCodedTerms_initWithOrgApacheLuceneStoreRAMFile_withLong_(buffer_, size_);
   }
   @catch (JavaIoIOException *e) {
-    @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(e) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSException_(e);
   }
 }
 
@@ -245,9 +251,11 @@ void OrgApacheLuceneIndexPrefixCodedTerms_Builder_init(OrgApacheLuceneIndexPrefi
 }
 
 OrgApacheLuceneIndexPrefixCodedTerms_Builder *new_OrgApacheLuceneIndexPrefixCodedTerms_Builder_init() {
-  OrgApacheLuceneIndexPrefixCodedTerms_Builder *self = [OrgApacheLuceneIndexPrefixCodedTerms_Builder alloc];
-  OrgApacheLuceneIndexPrefixCodedTerms_Builder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexPrefixCodedTerms_Builder, init)
+}
+
+OrgApacheLuceneIndexPrefixCodedTerms_Builder *create_OrgApacheLuceneIndexPrefixCodedTerms_Builder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexPrefixCodedTerms_Builder, init)
 }
 
 jint OrgApacheLuceneIndexPrefixCodedTerms_Builder_sharedPrefixWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneIndexPrefixCodedTerms_Builder *self, OrgApacheLuceneUtilBytesRef *term1, OrgApacheLuceneUtilBytesRef *term2) {
@@ -288,7 +296,7 @@ withOrgApacheLuceneStoreRAMFile:(OrgApacheLuceneStoreRAMFile *)buffer {
       return bytes_;
     }
     @catch (JavaIoIOException *e) {
-      @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(e) autorelease];
+      @throw create_JavaLangRuntimeException_initWithNSException_(e);
     }
   }
   else {
@@ -349,16 +357,18 @@ void OrgApacheLuceneIndexPrefixCodedTerms_TermIterator_initWithLong_withOrgApach
     JreStrongAssignAndConsume(&self->input_, new_OrgApacheLuceneStoreRAMInputStream_initWithNSString_withOrgApacheLuceneStoreRAMFile_(@"MergedPrefixCodedTermsIterator", buffer));
   }
   @catch (JavaIoIOException *e) {
-    @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(e) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSException_(e);
   }
   self->end_ = [((OrgApacheLuceneStoreIndexInput *) nil_chk(self->input_)) length];
   self->delGen_ = delGen;
 }
 
 OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *new_OrgApacheLuceneIndexPrefixCodedTerms_TermIterator_initWithLong_withOrgApacheLuceneStoreRAMFile_(jlong delGen, OrgApacheLuceneStoreRAMFile *buffer) {
-  OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *self = [OrgApacheLuceneIndexPrefixCodedTerms_TermIterator alloc];
-  OrgApacheLuceneIndexPrefixCodedTerms_TermIterator_initWithLong_withOrgApacheLuceneStoreRAMFile_(self, delGen, buffer);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexPrefixCodedTerms_TermIterator, initWithLong_withOrgApacheLuceneStoreRAMFile_, delGen, buffer)
+}
+
+OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *create_OrgApacheLuceneIndexPrefixCodedTerms_TermIterator_initWithLong_withOrgApacheLuceneStoreRAMFile_(jlong delGen, OrgApacheLuceneStoreRAMFile *buffer) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexPrefixCodedTerms_TermIterator, initWithLong_withOrgApacheLuceneStoreRAMFile_, delGen, buffer)
 }
 
 void OrgApacheLuceneIndexPrefixCodedTerms_TermIterator_readTermBytesWithInt_withInt_(OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *self, jint prefix, jint suffix) {

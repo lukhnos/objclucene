@@ -5,39 +5,56 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsLucene53Lucene53Codec_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsLucene53Lucene53Codec_RESTRICT
-#define OrgApacheLuceneCodecsLucene53Lucene53Codec_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLucene53Lucene53Codec")
+#ifdef RESTRICT_OrgApacheLuceneCodecsLucene53Lucene53Codec
+#define INCLUDE_ALL_OrgApacheLuceneCodecsLucene53Lucene53Codec 0
 #else
-#define OrgApacheLuceneCodecsLucene53Lucene53Codec_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsLucene53Lucene53Codec 1
 #endif
-#undef OrgApacheLuceneCodecsLucene53Lucene53Codec_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsLucene53Lucene53Codec
 
-#if !defined (_OrgApacheLuceneCodecsLucene53Lucene53Codec_) && (OrgApacheLuceneCodecsLucene53Lucene53Codec_INCLUDE_ALL || OrgApacheLuceneCodecsLucene53Lucene53Codec_INCLUDE)
-#define _OrgApacheLuceneCodecsLucene53Lucene53Codec_
+#if !defined (OrgApacheLuceneCodecsLucene53Lucene53Codec_) && (INCLUDE_ALL_OrgApacheLuceneCodecsLucene53Lucene53Codec || defined(INCLUDE_OrgApacheLuceneCodecsLucene53Lucene53Codec))
+#define OrgApacheLuceneCodecsLucene53Lucene53Codec_
 
-#define OrgApacheLuceneCodecsCodec_RESTRICT 1
-#define OrgApacheLuceneCodecsCodec_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneCodecsCodec 1
+#define INCLUDE_OrgApacheLuceneCodecsCodec 1
 #include "org/apache/lucene/codecs/Codec.h"
 
 @class OrgApacheLuceneCodecsCompoundFormat;
 @class OrgApacheLuceneCodecsDocValuesFormat;
 @class OrgApacheLuceneCodecsFieldInfosFormat;
 @class OrgApacheLuceneCodecsLiveDocsFormat;
-@class OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_ModeEnum;
+@class OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode;
 @class OrgApacheLuceneCodecsNormsFormat;
 @class OrgApacheLuceneCodecsPostingsFormat;
 @class OrgApacheLuceneCodecsSegmentInfoFormat;
 @class OrgApacheLuceneCodecsStoredFieldsFormat;
 @class OrgApacheLuceneCodecsTermVectorsFormat;
 
+/*!
+ @brief Implements the Lucene 5.3 index format, with configurable per-field postings
+ and docvalues formats.
+ <p>
+ If you want to reuse functionality of this codec in another codec, extend
+ <code>FilterCodec</code>.
+ - seealso: org.apache.lucene.codecs.lucene53 package documentation for file format details.
+ */
 @interface OrgApacheLuceneCodecsLucene53Lucene53Codec : OrgApacheLuceneCodecsCodec
 
 #pragma mark Public
 
+/*!
+ @brief Instantiates a new codec.
+ */
 - (instancetype)init;
 
-- (instancetype)initWithOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_ModeEnum:(OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_ModeEnum *)mode;
+/*!
+ @brief Instantiates a new codec, specifying the stored fields compression
+ mode to use.
+ @param mode stored fields compression mode to use for newly 
+ flushed/merged segments.
+ */
+- (instancetype)initWithOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode:(OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode *)mode;
 
 - (OrgApacheLuceneCodecsCompoundFormat *)compoundFormat;
 
@@ -45,8 +62,26 @@
 
 - (OrgApacheLuceneCodecsFieldInfosFormat *)fieldInfosFormat;
 
+/*!
+ @brief Returns the docvalues format that should be used for writing 
+ new segments of <code>field</code>.
+ The default implementation always returns "Lucene50".
+ <p>
+ <b>WARNING:</b> if you subclass, you are responsible for index 
+ backwards compatibility: future version of Lucene are only 
+ guaranteed to be able to read the default implementation. 
+ */
 - (OrgApacheLuceneCodecsDocValuesFormat *)getDocValuesFormatForFieldWithNSString:(NSString *)field;
 
+/*!
+ @brief Returns the postings format that should be used for writing 
+ new segments of <code>field</code>.
+ The default implementation always returns "Lucene50".
+ <p>
+ <b>WARNING:</b> if you subclass, you are responsible for index 
+ backwards compatibility: future version of Lucene are only 
+ guaranteed to be able to read the default implementation. 
+ */
 - (OrgApacheLuceneCodecsPostingsFormat *)getPostingsFormatForFieldWithNSString:(NSString *)field;
 
 - (OrgApacheLuceneCodecsLiveDocsFormat *)liveDocsFormat;
@@ -69,12 +104,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsLucene53Lucene53Codec_init(OrgApache
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene53Lucene53Codec *new_OrgApacheLuceneCodecsLucene53Lucene53Codec_init() NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT void OrgApacheLuceneCodecsLucene53Lucene53Codec_initWithOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_ModeEnum_(OrgApacheLuceneCodecsLucene53Lucene53Codec *self, OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_ModeEnum *mode);
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene53Lucene53Codec *create_OrgApacheLuceneCodecsLucene53Lucene53Codec_init();
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene53Lucene53Codec *new_OrgApacheLuceneCodecsLucene53Lucene53Codec_initWithOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_ModeEnum_(OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_ModeEnum *mode) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT void OrgApacheLuceneCodecsLucene53Lucene53Codec_initWithOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode_(OrgApacheLuceneCodecsLucene53Lucene53Codec *self, OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode *mode);
+
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene53Lucene53Codec *new_OrgApacheLuceneCodecsLucene53Lucene53Codec_initWithOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode_(OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode *mode) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene53Lucene53Codec *create_OrgApacheLuceneCodecsLucene53Lucene53Codec_initWithOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode_(OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode *mode);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene53Lucene53Codec)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsLucene53Lucene53Codec_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLucene53Lucene53Codec")

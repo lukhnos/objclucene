@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSpansSpanTermQuery_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSpansSpanTermQuery_RESTRICT
-#define OrgApacheLuceneSearchSpansSpanTermQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanTermQuery")
+#ifdef RESTRICT_OrgApacheLuceneSearchSpansSpanTermQuery
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanTermQuery 0
 #else
-#define OrgApacheLuceneSearchSpansSpanTermQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanTermQuery 1
 #endif
-#undef OrgApacheLuceneSearchSpansSpanTermQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSpansSpanTermQuery
 
-#if !defined (_OrgApacheLuceneSearchSpansSpanTermQuery_) && (OrgApacheLuceneSearchSpansSpanTermQuery_INCLUDE_ALL || OrgApacheLuceneSearchSpansSpanTermQuery_INCLUDE)
-#define _OrgApacheLuceneSearchSpansSpanTermQuery_
+#if !defined (OrgApacheLuceneSearchSpansSpanTermQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanTermQuery || defined(INCLUDE_OrgApacheLuceneSearchSpansSpanTermQuery))
+#define OrgApacheLuceneSearchSpansSpanTermQuery_
 
-#define OrgApacheLuceneSearchSpansSpanQuery_RESTRICT 1
-#define OrgApacheLuceneSearchSpansSpanQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSpansSpanQuery 1
+#define INCLUDE_OrgApacheLuceneSearchSpansSpanQuery 1
 #include "org/apache/lucene/search/spans/SpanQuery.h"
 
 @class OrgApacheLuceneIndexTerm;
@@ -25,6 +25,10 @@
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchSpansSpanWeight;
 
+/*!
+ @brief Matches spans containing a term.
+ This should not be used for terms that are indexed at position Integer.MAX_VALUE.
+ */
 @interface OrgApacheLuceneSearchSpansSpanTermQuery : OrgApacheLuceneSearchSpansSpanQuery {
  @public
   OrgApacheLuceneIndexTerm *term_;
@@ -33,8 +37,15 @@
 
 #pragma mark Public
 
+/*!
+ @brief Construct a SpanTermQuery matching the named term's spans.
+ */
 - (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
 
+/*!
+ @brief Expert: Construct a SpanTermQuery matching the named term's spans, using
+ the provided TermContext
+ */
 - (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
              withOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)context;
 
@@ -45,6 +56,9 @@
 
 - (NSString *)getField;
 
+/*!
+ @brief Return the term whose spans are matched.
+ */
 - (OrgApacheLuceneIndexTerm *)getTerm;
 
 - (NSUInteger)hash;
@@ -62,26 +76,30 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanTermQuery_initWithOrgApache
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanTermQuery *new_OrgApacheLuceneSearchSpansSpanTermQuery_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexTerm *term) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanTermQuery *create_OrgApacheLuceneSearchSpansSpanTermQuery_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexTerm *term);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneIndexTermContext_(OrgApacheLuceneSearchSpansSpanTermQuery *self, OrgApacheLuceneIndexTerm *term, OrgApacheLuceneIndexTermContext *context);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanTermQuery *new_OrgApacheLuceneSearchSpansSpanTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneIndexTermContext_(OrgApacheLuceneIndexTerm *term, OrgApacheLuceneIndexTermContext *context) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanTermQuery *create_OrgApacheLuceneSearchSpansSpanTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneIndexTermContext_(OrgApacheLuceneIndexTerm *term, OrgApacheLuceneIndexTermContext *context);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanTermQuery)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchSpansSpanTermQuery_SpanTermWeight_) && (OrgApacheLuceneSearchSpansSpanTermQuery_INCLUDE_ALL || OrgApacheLuceneSearchSpansSpanTermQuery_SpanTermWeight_INCLUDE)
-#define _OrgApacheLuceneSearchSpansSpanTermQuery_SpanTermWeight_
+#if !defined (OrgApacheLuceneSearchSpansSpanTermQuery_SpanTermWeight_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanTermQuery || defined(INCLUDE_OrgApacheLuceneSearchSpansSpanTermQuery_SpanTermWeight))
+#define OrgApacheLuceneSearchSpansSpanTermQuery_SpanTermWeight_
 
-#define OrgApacheLuceneSearchSpansSpanWeight_RESTRICT 1
-#define OrgApacheLuceneSearchSpansSpanWeight_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSpansSpanWeight 1
+#define INCLUDE_OrgApacheLuceneSearchSpansSpanWeight 1
 #include "org/apache/lucene/search/spans/SpanWeight.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneIndexTermContext;
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchSpansSpanTermQuery;
-@class OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum;
+@class OrgApacheLuceneSearchSpansSpanWeight_Postings;
 @class OrgApacheLuceneSearchSpansSpans;
 @protocol JavaUtilMap;
 @protocol JavaUtilSet;
@@ -103,7 +121,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanTermQuery)
 - (void)extractTermsWithJavaUtilSet:(id<JavaUtilSet>)terms;
 
 - (OrgApacheLuceneSearchSpansSpans *)getSpansWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                 withOrgApacheLuceneSearchSpansSpanWeight_PostingsEnum:(OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum *)requiredPostings;
+                                     withOrgApacheLuceneSearchSpansSpanWeight_Postings:(OrgApacheLuceneSearchSpansSpanWeight_Postings *)requiredPostings;
 
 @end
 
@@ -115,8 +133,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanTermQuery_SpanTermWeight_in
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanTermQuery_SpanTermWeight *new_OrgApacheLuceneSearchSpansSpanTermQuery_SpanTermWeight_initWithOrgApacheLuceneSearchSpansSpanTermQuery_withOrgApacheLuceneIndexTermContext_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_(OrgApacheLuceneSearchSpansSpanTermQuery *outer$, OrgApacheLuceneIndexTermContext *termContext, OrgApacheLuceneSearchIndexSearcher *searcher, id<JavaUtilMap> terms) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanTermQuery_SpanTermWeight *create_OrgApacheLuceneSearchSpansSpanTermQuery_SpanTermWeight_initWithOrgApacheLuceneSearchSpansSpanTermQuery_withOrgApacheLuceneIndexTermContext_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_(OrgApacheLuceneSearchSpansSpanTermQuery *outer$, OrgApacheLuceneIndexTermContext *termContext, OrgApacheLuceneSearchIndexSearcher *searcher, id<JavaUtilMap> terms);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanTermQuery_SpanTermWeight)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSpansSpanTermQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanTermQuery")

@@ -5,25 +5,36 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilterFactory_) && (OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilterFactory))
+#define OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
 @class OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilter;
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>ScandinavianFoldingFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_scandfold" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+ &lt;filter class="solr.ScandinavianFoldingFilterFactory"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
@@ -40,8 +51,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFi
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilterFactory *create_OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilterFactory")

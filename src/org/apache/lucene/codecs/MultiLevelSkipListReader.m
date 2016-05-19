@@ -23,12 +23,34 @@
   jint numberOfSkipLevels_;
   jint numberOfLevelsToBuffer_;
   jint docCount_;
+  /*!
+   @brief skipStream for each level.
+   */
   IOSObjectArray *skipStream_;
+  /*!
+   @brief The start pointer of each skip level.
+   */
   IOSLongArray *skipPointer_;
+  /*!
+   @brief skipInterval of each level.
+   */
   IOSIntArray *skipInterval_;
+  /*!
+   @brief Number of docs skipped per level.
+   */
   IOSIntArray *numSkipped_;
+  /*!
+   @brief Doc id of last read skip entry with docId &lt;= target.
+   */
   jint lastDoc_;
+  /*!
+   @brief Child pointer of current skip entry per level.
+   */
   IOSLongArray *childPointer_;
+  /*!
+   @brief childPointer of last read skip entry with docId &lt;=
+ target.
+   */
   jlong lastChildPointer_;
   jboolean inputIsBuffered_;
   jint skipMultiplier_;
@@ -36,6 +58,9 @@
 
 - (jboolean)loadNextSkipWithInt:(jint)level;
 
+/*!
+ @brief Loads the skip levels
+ */
 - (void)loadSkipLevels;
 
 @end
@@ -50,6 +75,9 @@ __attribute__((unused)) static jboolean OrgApacheLuceneCodecsMultiLevelSkipListR
 
 __attribute__((unused)) static void OrgApacheLuceneCodecsMultiLevelSkipListReader_loadSkipLevels(OrgApacheLuceneCodecsMultiLevelSkipListReader *self);
 
+/*!
+ @brief used to buffer the top skip levels
+ */
 @interface OrgApacheLuceneCodecsMultiLevelSkipListReader_SkipBuffer : OrgApacheLuceneStoreIndexInput {
  @public
   IOSByteArray *data_;
@@ -87,6 +115,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsMultiLevelSkipListReader_SkipBuffer, da
 __attribute__((unused)) static void OrgApacheLuceneCodecsMultiLevelSkipListReader_SkipBuffer_initWithOrgApacheLuceneStoreIndexInput_withInt_(OrgApacheLuceneCodecsMultiLevelSkipListReader_SkipBuffer *self, OrgApacheLuceneStoreIndexInput *input, jint length);
 
 __attribute__((unused)) static OrgApacheLuceneCodecsMultiLevelSkipListReader_SkipBuffer *new_OrgApacheLuceneCodecsMultiLevelSkipListReader_SkipBuffer_initWithOrgApacheLuceneStoreIndexInput_withInt_(OrgApacheLuceneStoreIndexInput *input, jint length) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneCodecsMultiLevelSkipListReader_SkipBuffer *create_OrgApacheLuceneCodecsMultiLevelSkipListReader_SkipBuffer_initWithOrgApacheLuceneStoreIndexInput_withInt_(OrgApacheLuceneStoreIndexInput *input, jint length);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsMultiLevelSkipListReader_SkipBuffer)
 
@@ -141,7 +171,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsMultiLevelSkipListReader_SkipBuf
   *IOSIntArray_GetRef(nil_chk(numSkipped_), level) = IOSIntArray_Get(numSkipped_, level + 1) - IOSIntArray_Get(nil_chk(skipInterval_), level + 1);
   *IOSIntArray_GetRef(nil_chk(skipDoc_), level) = lastDoc_;
   if (level > 0) {
-    *IOSLongArray_GetRef(nil_chk(childPointer_), level) = [((OrgApacheLuceneStoreIndexInput *) nil_chk(IOSObjectArray_Get(skipStream_, level))) readVLong] + IOSLongArray_Get(nil_chk(skipPointer_), level - 1);
+    *IOSLongArray_GetRef(nil_chk(childPointer_), level) = [((OrgApacheLuceneStoreIndexInput *) nil_chk(IOSObjectArray_Get(nil_chk(skipStream_), level))) readVLong] + IOSLongArray_Get(nil_chk(skipPointer_), level - 1);
   }
 }
 
@@ -162,7 +192,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsMultiLevelSkipListReader_SkipBuf
   JavaUtilArrays_fillWithIntArray_withInt_(numSkipped_, 0);
   JavaUtilArrays_fillWithLongArray_withLong_(childPointer_, 0);
   for (jint i = 1; i < numberOfSkipLevels_; i++) {
-    IOSObjectArray_Set(skipStream_, i, nil);
+    IOSObjectArray_Set(nil_chk(skipStream_), i, nil);
   }
   OrgApacheLuceneCodecsMultiLevelSkipListReader_loadSkipLevels(self);
 }
@@ -263,7 +293,7 @@ jboolean OrgApacheLuceneCodecsMultiLevelSkipListReader_loadNextSkipWithInt_(OrgA
   }
   *IOSIntArray_GetRef(nil_chk(self->skipDoc_), level) += [self readSkipDataWithInt:level withOrgApacheLuceneStoreIndexInput:IOSObjectArray_Get(nil_chk(self->skipStream_), level)];
   if (level != 0) {
-    *IOSLongArray_GetRef(nil_chk(self->childPointer_), level) = [((OrgApacheLuceneStoreIndexInput *) nil_chk(IOSObjectArray_Get(self->skipStream_, level))) readVLong] + IOSLongArray_Get(nil_chk(self->skipPointer_), level - 1);
+    *IOSLongArray_GetRef(nil_chk(self->childPointer_), level) = [((OrgApacheLuceneStoreIndexInput *) nil_chk(IOSObjectArray_Get(nil_chk(self->skipStream_), level))) readVLong] + IOSLongArray_Get(nil_chk(self->skipPointer_), level - 1);
   }
   return true;
 }
@@ -281,21 +311,21 @@ void OrgApacheLuceneCodecsMultiLevelSkipListReader_loadSkipLevels(OrgApacheLucen
   [((OrgApacheLuceneStoreIndexInput *) nil_chk(IOSObjectArray_Get(nil_chk(self->skipStream_), 0))) seekWithLong:IOSLongArray_Get(nil_chk(self->skipPointer_), 0)];
   jint toBuffer = self->numberOfLevelsToBuffer_;
   for (jint i = self->numberOfSkipLevels_ - 1; i > 0; i--) {
-    jlong length = [((OrgApacheLuceneStoreIndexInput *) nil_chk(IOSObjectArray_Get(self->skipStream_, 0))) readVLong];
-    *IOSLongArray_GetRef(self->skipPointer_, i) = [((OrgApacheLuceneStoreIndexInput *) nil_chk(IOSObjectArray_Get(self->skipStream_, 0))) getFilePointer];
+    jlong length = [((OrgApacheLuceneStoreIndexInput *) nil_chk(IOSObjectArray_Get(nil_chk(self->skipStream_), 0))) readVLong];
+    *IOSLongArray_GetRef(nil_chk(self->skipPointer_), i) = [((OrgApacheLuceneStoreIndexInput *) nil_chk(IOSObjectArray_Get(nil_chk(self->skipStream_), 0))) getFilePointer];
     if (toBuffer > 0) {
-      IOSObjectArray_SetAndConsume(self->skipStream_, i, new_OrgApacheLuceneCodecsMultiLevelSkipListReader_SkipBuffer_initWithOrgApacheLuceneStoreIndexInput_withInt_(IOSObjectArray_Get(self->skipStream_, 0), (jint) length));
+      IOSObjectArray_SetAndConsume(nil_chk(self->skipStream_), i, new_OrgApacheLuceneCodecsMultiLevelSkipListReader_SkipBuffer_initWithOrgApacheLuceneStoreIndexInput_withInt_(IOSObjectArray_Get(self->skipStream_, 0), (jint) length));
       toBuffer--;
     }
     else {
-      IOSObjectArray_Set(self->skipStream_, i, [((OrgApacheLuceneStoreIndexInput *) nil_chk(IOSObjectArray_Get(self->skipStream_, 0))) clone]);
+      IOSObjectArray_Set(nil_chk(self->skipStream_), i, [((OrgApacheLuceneStoreIndexInput *) nil_chk(IOSObjectArray_Get(self->skipStream_, 0))) clone]);
       if (self->inputIsBuffered_ && length < OrgApacheLuceneStoreBufferedIndexInput_BUFFER_SIZE) {
-        [((OrgApacheLuceneStoreBufferedIndexInput *) nil_chk(((OrgApacheLuceneStoreBufferedIndexInput *) check_class_cast(IOSObjectArray_Get(self->skipStream_, i), [OrgApacheLuceneStoreBufferedIndexInput class])))) setBufferSizeWithInt:JavaLangMath_maxWithInt_withInt_(OrgApacheLuceneStoreBufferedIndexInput_MIN_BUFFER_SIZE, (jint) length)];
+        [((OrgApacheLuceneStoreBufferedIndexInput *) nil_chk(((OrgApacheLuceneStoreBufferedIndexInput *) cast_chk(IOSObjectArray_Get(nil_chk(self->skipStream_), i), [OrgApacheLuceneStoreBufferedIndexInput class])))) setBufferSizeWithInt:JavaLangMath_maxWithInt_withInt_(OrgApacheLuceneStoreBufferedIndexInput_MIN_BUFFER_SIZE, (jint) length)];
       }
-      [((OrgApacheLuceneStoreIndexInput *) nil_chk(IOSObjectArray_Get(self->skipStream_, 0))) seekWithLong:[((OrgApacheLuceneStoreIndexInput *) nil_chk(IOSObjectArray_Get(self->skipStream_, 0))) getFilePointer] + length];
+      [((OrgApacheLuceneStoreIndexInput *) nil_chk(IOSObjectArray_Get(nil_chk(self->skipStream_), 0))) seekWithLong:[((OrgApacheLuceneStoreIndexInput *) nil_chk(IOSObjectArray_Get(self->skipStream_, 0))) getFilePointer] + length];
     }
   }
-  *IOSLongArray_GetRef(self->skipPointer_, 0) = [((OrgApacheLuceneStoreIndexInput *) nil_chk(IOSObjectArray_Get(self->skipStream_, 0))) getFilePointer];
+  *IOSLongArray_GetRef(nil_chk(self->skipPointer_), 0) = [((OrgApacheLuceneStoreIndexInput *) nil_chk(IOSObjectArray_Get(nil_chk(self->skipStream_), 0))) getFilePointer];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsMultiLevelSkipListReader)
@@ -338,7 +368,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsMultiLevelSkipListReader)
 - (OrgApacheLuceneStoreIndexInput *)sliceWithNSString:(NSString *)sliceDescription
                                              withLong:(jlong)offset
                                              withLong:(jlong)length {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (void)dealloc {
@@ -376,9 +406,11 @@ void OrgApacheLuceneCodecsMultiLevelSkipListReader_SkipBuffer_initWithOrgApacheL
 }
 
 OrgApacheLuceneCodecsMultiLevelSkipListReader_SkipBuffer *new_OrgApacheLuceneCodecsMultiLevelSkipListReader_SkipBuffer_initWithOrgApacheLuceneStoreIndexInput_withInt_(OrgApacheLuceneStoreIndexInput *input, jint length) {
-  OrgApacheLuceneCodecsMultiLevelSkipListReader_SkipBuffer *self = [OrgApacheLuceneCodecsMultiLevelSkipListReader_SkipBuffer alloc];
-  OrgApacheLuceneCodecsMultiLevelSkipListReader_SkipBuffer_initWithOrgApacheLuceneStoreIndexInput_withInt_(self, input, length);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsMultiLevelSkipListReader_SkipBuffer, initWithOrgApacheLuceneStoreIndexInput_withInt_, input, length)
+}
+
+OrgApacheLuceneCodecsMultiLevelSkipListReader_SkipBuffer *create_OrgApacheLuceneCodecsMultiLevelSkipListReader_SkipBuffer_initWithOrgApacheLuceneStoreIndexInput_withInt_(OrgApacheLuceneStoreIndexInput *input, jint length) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsMultiLevelSkipListReader_SkipBuffer, initWithOrgApacheLuceneStoreIndexInput_withInt_, input, length)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsMultiLevelSkipListReader_SkipBuffer)

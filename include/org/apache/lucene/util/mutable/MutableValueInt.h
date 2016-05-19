@@ -5,21 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilMutableMutableValueInt_INCLUDE_ALL")
-#if OrgApacheLuceneUtilMutableMutableValueInt_RESTRICT
-#define OrgApacheLuceneUtilMutableMutableValueInt_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueInt")
+#ifdef RESTRICT_OrgApacheLuceneUtilMutableMutableValueInt
+#define INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueInt 0
 #else
-#define OrgApacheLuceneUtilMutableMutableValueInt_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueInt 1
 #endif
-#undef OrgApacheLuceneUtilMutableMutableValueInt_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilMutableMutableValueInt
 
-#if !defined (_OrgApacheLuceneUtilMutableMutableValueInt_) && (OrgApacheLuceneUtilMutableMutableValueInt_INCLUDE_ALL || OrgApacheLuceneUtilMutableMutableValueInt_INCLUDE)
-#define _OrgApacheLuceneUtilMutableMutableValueInt_
+#if !defined (OrgApacheLuceneUtilMutableMutableValueInt_) && (INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueInt || defined(INCLUDE_OrgApacheLuceneUtilMutableMutableValueInt))
+#define OrgApacheLuceneUtilMutableMutableValueInt_
 
-#define OrgApacheLuceneUtilMutableMutableValue_RESTRICT 1
-#define OrgApacheLuceneUtilMutableMutableValue_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilMutableMutableValue 1
+#define INCLUDE_OrgApacheLuceneUtilMutableMutableValue 1
 #include "org/apache/lucene/util/mutable/MutableValue.h"
 
+/*!
+ @brief <code>MutableValue</code> implementation of type <code>int</code>.
+ When mutating instances of this object, the caller is responsible for ensuring 
+ that any instance where <code>exists</code> is set to <code>false</code> must also 
+ <code>value</code> set to <code>0</code> for proper operation.
+ */
 @interface OrgApacheLuceneUtilMutableMutableValueInt : OrgApacheLuceneUtilMutableMutableValue {
  @public
   jint value_;
@@ -49,8 +55,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilMutableMutableValueInt_init(OrgApacheL
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilMutableMutableValueInt *new_OrgApacheLuceneUtilMutableMutableValueInt_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilMutableMutableValueInt *create_OrgApacheLuceneUtilMutableMutableValueInt_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilMutableMutableValueInt)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilMutableMutableValueInt_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueInt")

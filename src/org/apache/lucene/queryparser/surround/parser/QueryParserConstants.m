@@ -9,13 +9,117 @@
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneQueryparserSurroundParserQueryParserConstants)
 
-IOSObjectArray *OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_tokenImage_;
+IOSObjectArray *OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_tokenImage;
 
 @implementation OrgApacheLuceneQueryparserSurroundParserQueryParserConstants
 
++ (jint)EOF_ {
+  return OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_EOF;
+}
+
++ (jint)_NUM_CHAR {
+  return OrgApacheLuceneQueryparserSurroundParserQueryParserConstants__NUM_CHAR;
+}
+
++ (jint)_TERM_CHAR {
+  return OrgApacheLuceneQueryparserSurroundParserQueryParserConstants__TERM_CHAR;
+}
+
++ (jint)_WHITESPACE {
+  return OrgApacheLuceneQueryparserSurroundParserQueryParserConstants__WHITESPACE;
+}
+
++ (jint)_STAR {
+  return OrgApacheLuceneQueryparserSurroundParserQueryParserConstants__STAR;
+}
+
++ (jint)_ONE_CHAR {
+  return OrgApacheLuceneQueryparserSurroundParserQueryParserConstants__ONE_CHAR;
+}
+
++ (jint)_DISTOP_NUM {
+  return OrgApacheLuceneQueryparserSurroundParserQueryParserConstants__DISTOP_NUM;
+}
+
++ (jint)OR {
+  return OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_OR;
+}
+
++ (jint)AND {
+  return OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_AND;
+}
+
++ (jint)NOT {
+  return OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_NOT;
+}
+
++ (jint)W {
+  return OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_W;
+}
+
++ (jint)N {
+  return OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_N;
+}
+
++ (jint)LPAREN {
+  return OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_LPAREN;
+}
+
++ (jint)RPAREN {
+  return OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_RPAREN;
+}
+
++ (jint)COMMA {
+  return OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_COMMA;
+}
+
++ (jint)COLON {
+  return OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_COLON;
+}
+
++ (jint)CARAT {
+  return OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_CARAT;
+}
+
++ (jint)TRUNCQUOTED {
+  return OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_TRUNCQUOTED;
+}
+
++ (jint)QUOTED {
+  return OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_QUOTED;
+}
+
++ (jint)SUFFIXTERM {
+  return OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_SUFFIXTERM;
+}
+
++ (jint)TRUNCTERM {
+  return OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_TRUNCTERM;
+}
+
++ (jint)TERM {
+  return OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_TERM;
+}
+
++ (jint)NUMBER {
+  return OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_NUMBER;
+}
+
++ (jint)Boost {
+  return OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_Boost;
+}
+
++ (jint)DEFAULT {
+  return OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_DEFAULT;
+}
+
++ (IOSObjectArray *)tokenImage {
+  return OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_tokenImage;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneQueryparserSurroundParserQueryParserConstants class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_tokenImage_, [IOSObjectArray newArrayWithObjects:(id[]){ @"<EOF>", @"<_NUM_CHAR>", @"<_TERM_CHAR>", @"<_WHITESPACE>", @"\"*\"", @"\"?\"", @"<_DISTOP_NUM>", @"<token of kind 7>", @"<OR>", @"<AND>", @"<NOT>", @"<W>", @"<N>", @"\"(\"", @"\")\"", @"\",\"", @"\":\"", @"\"^\"", @"<TRUNCQUOTED>", @"<QUOTED>", @"<SUFFIXTERM>", @"<TRUNCTERM>", @"<TERM>", @"<NUMBER>" } count:24 type:NSString_class_()]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_tokenImage, [IOSObjectArray newArrayWithObjects:(id[]){ @"<EOF>", @"<_NUM_CHAR>", @"<_TERM_CHAR>", @"<_WHITESPACE>", @"\"*\"", @"\"?\"", @"<_DISTOP_NUM>", @"<token of kind 7>", @"<OR>", @"<AND>", @"<NOT>", @"<W>", @"<N>", @"\"(\"", @"\")\"", @"\",\"", @"\":\"", @"\"^\"", @"<TRUNCQUOTED>", @"<QUOTED>", @"<SUFFIXTERM>", @"<TRUNCTERM>", @"<TERM>", @"<NUMBER>" } count:24 type:NSString_class_()]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneQueryparserSurroundParserQueryParserConstants)
   }
 }
@@ -47,7 +151,7 @@ IOSObjectArray *OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_tok
     { "NUMBER", "NUMBER", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_NUMBER },
     { "Boost", "Boost", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_Boost },
     { "DEFAULT", "DEFAULT", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_DEFAULT },
-    { "tokenImage_", NULL, 0x19, "[Ljava.lang.String;", &OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_tokenImage_, NULL, .constantValue.asLong = 0 },
+    { "tokenImage", "tokenImage", 0x19, "[Ljava.lang.String;", &OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_tokenImage, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundParserQueryParserConstants = { 2, "QueryParserConstants", "org.apache.lucene.queryparser.surround.parser", NULL, 0x609, 0, NULL, 26, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserSurroundParserQueryParserConstants;

@@ -42,7 +42,7 @@ withOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)inArg {
     return (JreURShift64(block, (offsetInBlock * bitsPerValue_))) & mask_;
   }
   @catch (JavaIoIOException *e) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_withJavaLangThrowable_(@"failed", e) autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_withNSException_(@"failed", e);
   }
 }
 
@@ -84,9 +84,11 @@ void OrgApacheLuceneUtilPackedDirectPacked64SingleBlockReader_initWithInt_withIn
 }
 
 OrgApacheLuceneUtilPackedDirectPacked64SingleBlockReader *new_OrgApacheLuceneUtilPackedDirectPacked64SingleBlockReader_initWithInt_withInt_withOrgApacheLuceneStoreIndexInput_(jint bitsPerValue, jint valueCount, OrgApacheLuceneStoreIndexInput *inArg) {
-  OrgApacheLuceneUtilPackedDirectPacked64SingleBlockReader *self = [OrgApacheLuceneUtilPackedDirectPacked64SingleBlockReader alloc];
-  OrgApacheLuceneUtilPackedDirectPacked64SingleBlockReader_initWithInt_withInt_withOrgApacheLuceneStoreIndexInput_(self, bitsPerValue, valueCount, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedDirectPacked64SingleBlockReader, initWithInt_withInt_withOrgApacheLuceneStoreIndexInput_, bitsPerValue, valueCount, inArg)
+}
+
+OrgApacheLuceneUtilPackedDirectPacked64SingleBlockReader *create_OrgApacheLuceneUtilPackedDirectPacked64SingleBlockReader_initWithInt_withInt_withOrgApacheLuceneStoreIndexInput_(jint bitsPerValue, jint valueCount, OrgApacheLuceneStoreIndexInput *inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedDirectPacked64SingleBlockReader, initWithInt_withInt_withOrgApacheLuceneStoreIndexInput_, bitsPerValue, valueCount, inArg)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectPacked64SingleBlockReader)

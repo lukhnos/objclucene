@@ -5,29 +5,32 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexDocValuesUpdate_INCLUDE_ALL")
-#if OrgApacheLuceneIndexDocValuesUpdate_RESTRICT
-#define OrgApacheLuceneIndexDocValuesUpdate_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexDocValuesUpdate")
+#ifdef RESTRICT_OrgApacheLuceneIndexDocValuesUpdate
+#define INCLUDE_ALL_OrgApacheLuceneIndexDocValuesUpdate 0
 #else
-#define OrgApacheLuceneIndexDocValuesUpdate_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexDocValuesUpdate 1
 #endif
-#undef OrgApacheLuceneIndexDocValuesUpdate_RESTRICT
-#if OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate_INCLUDE
-#define OrgApacheLuceneIndexDocValuesUpdate_INCLUDE 1
+#undef RESTRICT_OrgApacheLuceneIndexDocValuesUpdate
+#ifdef INCLUDE_OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate
+#define INCLUDE_OrgApacheLuceneIndexDocValuesUpdate 1
 #endif
-#if OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate_INCLUDE
-#define OrgApacheLuceneIndexDocValuesUpdate_INCLUDE 1
+#ifdef INCLUDE_OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate
+#define INCLUDE_OrgApacheLuceneIndexDocValuesUpdate 1
 #endif
 
-#if !defined (_OrgApacheLuceneIndexDocValuesUpdate_) && (OrgApacheLuceneIndexDocValuesUpdate_INCLUDE_ALL || OrgApacheLuceneIndexDocValuesUpdate_INCLUDE)
-#define _OrgApacheLuceneIndexDocValuesUpdate_
+#if !defined (OrgApacheLuceneIndexDocValuesUpdate_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocValuesUpdate || defined(INCLUDE_OrgApacheLuceneIndexDocValuesUpdate))
+#define OrgApacheLuceneIndexDocValuesUpdate_
 
-@class OrgApacheLuceneIndexDocValuesTypeEnum;
+@class OrgApacheLuceneIndexDocValuesType;
 @class OrgApacheLuceneIndexTerm;
 
+/*!
+ @brief An in-place update to a DocValues field.
+ */
 @interface OrgApacheLuceneIndexDocValuesUpdate : NSObject {
  @public
-  OrgApacheLuceneIndexDocValuesTypeEnum *type_;
+  OrgApacheLuceneIndexDocValuesType *type_;
   OrgApacheLuceneIndexTerm *term_;
   NSString *field_;
   id value_;
@@ -40,10 +43,16 @@
 
 #pragma mark Protected
 
-- (instancetype)initWithOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum *)type
-                                 withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                                                 withNSString:(NSString *)field
-                                                       withId:(id)value;
+/*!
+ @brief Constructor.
+ @param term the <code>Term</code> which determines the documents that will be updated
+ @param field the <code>NumericDocValuesField</code> to update
+ @param value the updated value
+ */
+- (instancetype)initWithOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)type
+                             withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
+                                             withNSString:(NSString *)field
+                                                   withId:(id)value;
 
 #pragma mark Package-Private
 
@@ -55,23 +64,26 @@
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneIndexDocValuesUpdate)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocValuesUpdate, type_, OrgApacheLuceneIndexDocValuesTypeEnum *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocValuesUpdate, type_, OrgApacheLuceneIndexDocValuesType *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocValuesUpdate, term_, OrgApacheLuceneIndexTerm *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocValuesUpdate, field_, NSString *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocValuesUpdate, value_, id)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexDocValuesUpdate_initWithOrgApacheLuceneIndexDocValuesTypeEnum_withOrgApacheLuceneIndexTerm_withNSString_withId_(OrgApacheLuceneIndexDocValuesUpdate *self, OrgApacheLuceneIndexDocValuesTypeEnum *type, OrgApacheLuceneIndexTerm *term, NSString *field, id value);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexDocValuesUpdate_initWithOrgApacheLuceneIndexDocValuesType_withOrgApacheLuceneIndexTerm_withNSString_withId_(OrgApacheLuceneIndexDocValuesUpdate *self, OrgApacheLuceneIndexDocValuesType *type, OrgApacheLuceneIndexTerm *term, NSString *field, id value);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocValuesUpdate)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate_) && (OrgApacheLuceneIndexDocValuesUpdate_INCLUDE_ALL || OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate_INCLUDE)
-#define _OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate_
+#if !defined (OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocValuesUpdate || defined(INCLUDE_OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate))
+#define OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate_
 
 @class OrgApacheLuceneIndexTerm;
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief An in-place update to a binary DocValues field
+ */
 @interface OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate : OrgApacheLuceneIndexDocValuesUpdate
 
 #pragma mark Package-Private
@@ -90,16 +102,21 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate *new_OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate_initWithOrgApacheLuceneIndexTerm_withNSString_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneIndexTerm *term, NSString *field, OrgApacheLuceneUtilBytesRef *value) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate *create_OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate_initWithOrgApacheLuceneIndexTerm_withNSString_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneIndexTerm *term, NSString *field, OrgApacheLuceneUtilBytesRef *value);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate_) && (OrgApacheLuceneIndexDocValuesUpdate_INCLUDE_ALL || OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate_INCLUDE)
-#define _OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate_
+#if !defined (OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocValuesUpdate || defined(INCLUDE_OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate))
+#define OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate_
 
 @class JavaLangLong;
 @class OrgApacheLuceneIndexTerm;
 
+/*!
+ @brief An in-place update to a numeric DocValues field
+ */
 @interface OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate : OrgApacheLuceneIndexDocValuesUpdate
 
 #pragma mark Package-Private
@@ -118,8 +135,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdat
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate *new_OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate_initWithOrgApacheLuceneIndexTerm_withNSString_withJavaLangLong_(OrgApacheLuceneIndexTerm *term, NSString *field, JavaLangLong *value) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate *create_OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate_initWithOrgApacheLuceneIndexTerm_withNSString_withJavaLangLong_(OrgApacheLuceneIndexTerm *term, NSString *field, JavaLangLong *value);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexDocValuesUpdate_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexDocValuesUpdate")

@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexFieldInvertState_INCLUDE_ALL")
-#if OrgApacheLuceneIndexFieldInvertState_RESTRICT
-#define OrgApacheLuceneIndexFieldInvertState_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexFieldInvertState")
+#ifdef RESTRICT_OrgApacheLuceneIndexFieldInvertState
+#define INCLUDE_ALL_OrgApacheLuceneIndexFieldInvertState 0
 #else
-#define OrgApacheLuceneIndexFieldInvertState_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexFieldInvertState 1
 #endif
-#undef OrgApacheLuceneIndexFieldInvertState_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexFieldInvertState
 
-#if !defined (_OrgApacheLuceneIndexFieldInvertState_) && (OrgApacheLuceneIndexFieldInvertState_INCLUDE_ALL || OrgApacheLuceneIndexFieldInvertState_INCLUDE)
-#define _OrgApacheLuceneIndexFieldInvertState_
+#if !defined (OrgApacheLuceneIndexFieldInvertState_) && (INCLUDE_ALL_OrgApacheLuceneIndexFieldInvertState || defined(INCLUDE_OrgApacheLuceneIndexFieldInvertState))
+#define OrgApacheLuceneIndexFieldInvertState_
 
 @class OrgApacheLuceneUtilAttributeSource;
 @protocol OrgApacheLuceneAnalysisTokenattributesOffsetAttribute;
@@ -22,6 +22,12 @@
 @protocol OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute;
 @protocol OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute;
 
+/*!
+ @brief This class tracks the number and position / offset parameters of terms
+ being added to the index.
+ The information collected in this class is
+ also used to calculate the normalization factor for a field.
+ */
 @interface OrgApacheLuceneIndexFieldInvertState : NSObject {
  @public
   NSString *name_;
@@ -43,8 +49,16 @@
 
 #pragma mark Public
 
+/*!
+ @brief Creates {code FieldInvertState} for the specified
+ field name.
+ */
 - (instancetype)initWithNSString:(NSString *)name;
 
+/*!
+ @brief Creates {code FieldInvertState} for the specified
+ field name and values for all fields.
+ */
 - (instancetype)initWithNSString:(NSString *)name
                          withInt:(jint)position
                          withInt:(jint)length
@@ -52,34 +66,91 @@
                          withInt:(jint)offset
                        withFloat:(jfloat)boost;
 
+/*!
+ @brief Returns the <code>AttributeSource</code> from the <code>TokenStream</code>
+  that provided the indexed tokens for this
+ field.
+ */
 - (OrgApacheLuceneUtilAttributeSource *)getAttributeSource;
 
+/*!
+ @brief Get boost value.
+ This is the cumulative product of
+ document boost and field boost for all field instances
+ sharing the same field name.
+ @return the boost
+ */
 - (jfloat)getBoost;
 
+/*!
+ @brief Get total number of terms in this field.
+ @return the length
+ */
 - (jint)getLength;
 
+/*!
+ @brief Get the maximum term-frequency encountered for any term in the field.
+ A
+ field containing "the quick brown fox jumps over the lazy dog" would have
+ a value of 2, because "the" appears twice.
+ */
 - (jint)getMaxTermFrequency;
 
+/*!
+ @brief Return the field's name
+ */
 - (NSString *)getName;
 
+/*!
+ @brief Get the number of terms with <code>positionIncrement == 0</code>.
+ @return the numOverlap
+ */
 - (jint)getNumOverlap;
 
+/*!
+ @brief Get end offset of the last processed term.
+ @return the offset
+ */
 - (jint)getOffset;
 
+/*!
+ @brief Get the last processed term position.
+ @return the position
+ */
 - (jint)getPosition;
 
+/*!
+ @brief Return the number of unique terms encountered in this field.
+ */
 - (jint)getUniqueTermCount;
 
+/*!
+ @brief Set boost value.
+ */
 - (void)setBoostWithFloat:(jfloat)boost;
 
+/*!
+ @brief Set length value.
+ */
 - (void)setLengthWithInt:(jint)length;
 
+/*!
+ @brief Set number of terms with <code>positionIncrement ==
+ 0</code>
+ .
+ */
 - (void)setNumOverlapWithInt:(jint)numOverlap;
 
 #pragma mark Package-Private
 
+/*!
+ @brief Re-initialize the state
+ */
 - (void)reset;
 
+/*!
+ @brief Sets attributeSource to a new instance.
+ */
 - (void)setAttributeSourceWithOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)attributeSource;
 
 @end
@@ -97,12 +168,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexFieldInvertState_initWithNSString_(Or
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexFieldInvertState *new_OrgApacheLuceneIndexFieldInvertState_initWithNSString_(NSString *name) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexFieldInvertState *create_OrgApacheLuceneIndexFieldInvertState_initWithNSString_(NSString *name);
+
 FOUNDATION_EXPORT void OrgApacheLuceneIndexFieldInvertState_initWithNSString_withInt_withInt_withInt_withInt_withFloat_(OrgApacheLuceneIndexFieldInvertState *self, NSString *name, jint position, jint length, jint numOverlap, jint offset, jfloat boost);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexFieldInvertState *new_OrgApacheLuceneIndexFieldInvertState_initWithNSString_withInt_withInt_withInt_withInt_withFloat_(NSString *name, jint position, jint length, jint numOverlap, jint offset, jfloat boost) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneIndexFieldInvertState *create_OrgApacheLuceneIndexFieldInvertState_initWithNSString_withInt_withInt_withInt_withInt_withFloat_(NSString *name, jint position, jint length, jint numOverlap, jint offset, jfloat boost);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFieldInvertState)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexFieldInvertState_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexFieldInvertState")

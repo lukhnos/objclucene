@@ -5,22 +5,29 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneDocumentLazyDocument_INCLUDE_ALL")
-#if OrgApacheLuceneDocumentLazyDocument_RESTRICT
-#define OrgApacheLuceneDocumentLazyDocument_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneDocumentLazyDocument")
+#ifdef RESTRICT_OrgApacheLuceneDocumentLazyDocument
+#define INCLUDE_ALL_OrgApacheLuceneDocumentLazyDocument 0
 #else
-#define OrgApacheLuceneDocumentLazyDocument_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneDocumentLazyDocument 1
 #endif
-#undef OrgApacheLuceneDocumentLazyDocument_RESTRICT
+#undef RESTRICT_OrgApacheLuceneDocumentLazyDocument
 
-#if !defined (_OrgApacheLuceneDocumentLazyDocument_) && (OrgApacheLuceneDocumentLazyDocument_INCLUDE_ALL || OrgApacheLuceneDocumentLazyDocument_INCLUDE)
-#define _OrgApacheLuceneDocumentLazyDocument_
+#if !defined (OrgApacheLuceneDocumentLazyDocument_) && (INCLUDE_ALL_OrgApacheLuceneDocumentLazyDocument || defined(INCLUDE_OrgApacheLuceneDocumentLazyDocument))
+#define OrgApacheLuceneDocumentLazyDocument_
 
 @class OrgApacheLuceneDocumentDocument;
 @class OrgApacheLuceneIndexFieldInfo;
 @class OrgApacheLuceneIndexIndexReader;
 @protocol OrgApacheLuceneIndexIndexableField;
 
+/*!
+ @brief Defers actually loading a field's value until you ask
+ for it.
+ You must not use the returned Field instances
+ after the provided reader has been closed. 
+ - seealso: #getField
+ */
 @interface OrgApacheLuceneDocumentLazyDocument : NSObject
 
 #pragma mark Public
@@ -28,10 +35,29 @@
 - (instancetype)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
                                                 withInt:(jint)docID;
 
+/*!
+ @brief Creates an IndexableField whose value will be lazy loaded if and 
+ when it is used.
+ <p>
+ <b>NOTE:</b> This method must be called once for each value of the field 
+ name specified in sequence that the values exist.  This method may not be 
+ used to generate multiple, lazy, IndexableField instances refering to 
+ the same underlying IndexableField instance.
+ </p>
+ <p>
+ The lazy loading of field values from all instances of IndexableField 
+ objects returned by this method are all backed by a single Document 
+ per LazyDocument instance.
+ </p>
+ */
 - (id<OrgApacheLuceneIndexIndexableField>)getFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo;
 
 #pragma mark Package-Private
 
+/*!
+ @brief non-private for test only access
+  
+ */
 - (OrgApacheLuceneDocumentDocument *)getDocument;
 
 @end
@@ -42,15 +68,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneDocumentLazyDocument_initWithOrgApacheLuce
 
 FOUNDATION_EXPORT OrgApacheLuceneDocumentLazyDocument *new_OrgApacheLuceneDocumentLazyDocument_initWithOrgApacheLuceneIndexIndexReader_withInt_(OrgApacheLuceneIndexIndexReader *reader, jint docID) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneDocumentLazyDocument *create_OrgApacheLuceneDocumentLazyDocument_initWithOrgApacheLuceneIndexIndexReader_withInt_(OrgApacheLuceneIndexIndexReader *reader, jint docID);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentLazyDocument)
 
 #endif
 
-#if !defined (_OrgApacheLuceneDocumentLazyDocument_LazyField_) && (OrgApacheLuceneDocumentLazyDocument_INCLUDE_ALL || OrgApacheLuceneDocumentLazyDocument_LazyField_INCLUDE)
-#define _OrgApacheLuceneDocumentLazyDocument_LazyField_
+#if !defined (OrgApacheLuceneDocumentLazyDocument_LazyField_) && (INCLUDE_ALL_OrgApacheLuceneDocumentLazyDocument || defined(INCLUDE_OrgApacheLuceneDocumentLazyDocument_LazyField))
+#define OrgApacheLuceneDocumentLazyDocument_LazyField_
 
-#define OrgApacheLuceneIndexIndexableField_RESTRICT 1
-#define OrgApacheLuceneIndexIndexableField_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexIndexableField 1
+#define INCLUDE_OrgApacheLuceneIndexIndexableField 1
 #include "org/apache/lucene/index/IndexableField.h"
 
 @class JavaIoReader;
@@ -59,6 +87,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentLazyDocument)
 @class OrgApacheLuceneUtilBytesRef;
 @protocol OrgApacheLuceneIndexIndexableFieldType;
 
+/*!
+  
+ */
 @interface OrgApacheLuceneDocumentLazyDocument_LazyField : NSObject < OrgApacheLuceneIndexIndexableField > {
  @public
   volatile_id realValue_;
@@ -72,6 +103,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentLazyDocument)
 
 - (id<OrgApacheLuceneIndexIndexableFieldType>)fieldType;
 
+/*!
+ @brief non-private for test only access
+  
+ */
 - (jboolean)hasBeenLoaded;
 
 - (NSString *)name;
@@ -95,4 +130,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentLazyDocument_LazyField)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneDocumentLazyDocument_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneDocumentLazyDocument")

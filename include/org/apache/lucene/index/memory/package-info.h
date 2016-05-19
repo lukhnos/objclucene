@@ -3,14 +3,17 @@
 //  source: ./memory/src/java/org/apache/lucene/index/memory/package-info.java
 //
 
+/*!
+ @brief High-performance single-document main memory Apache Lucene fulltext search index.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexMemoryPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneIndexMemoryPackage_info_RESTRICT
-#define OrgApacheLuceneIndexMemoryPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexMemoryPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneIndexMemoryPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneIndexMemoryPackage_info 0
 #else
-#define OrgApacheLuceneIndexMemoryPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexMemoryPackage_info 1
 #endif
-#undef OrgApacheLuceneIndexMemoryPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexMemoryPackage_info
 
-#pragma pop_macro("OrgApacheLuceneIndexMemoryPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexMemoryPackage_info")

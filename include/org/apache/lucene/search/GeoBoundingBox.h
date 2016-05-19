@@ -5,17 +5,20 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchGeoBoundingBox_INCLUDE_ALL")
-#if OrgApacheLuceneSearchGeoBoundingBox_RESTRICT
-#define OrgApacheLuceneSearchGeoBoundingBox_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchGeoBoundingBox")
+#ifdef RESTRICT_OrgApacheLuceneSearchGeoBoundingBox
+#define INCLUDE_ALL_OrgApacheLuceneSearchGeoBoundingBox 0
 #else
-#define OrgApacheLuceneSearchGeoBoundingBox_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchGeoBoundingBox 1
 #endif
-#undef OrgApacheLuceneSearchGeoBoundingBox_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchGeoBoundingBox
 
-#if !defined (_OrgApacheLuceneSearchGeoBoundingBox_) && (OrgApacheLuceneSearchGeoBoundingBox_INCLUDE_ALL || OrgApacheLuceneSearchGeoBoundingBox_INCLUDE)
-#define _OrgApacheLuceneSearchGeoBoundingBox_
+#if !defined (OrgApacheLuceneSearchGeoBoundingBox_) && (INCLUDE_ALL_OrgApacheLuceneSearchGeoBoundingBox || defined(INCLUDE_OrgApacheLuceneSearchGeoBoundingBox))
+#define OrgApacheLuceneSearchGeoBoundingBox_
 
+/*!
+ @brief NOTE: package private; just used so <code>GeoPointInPolygonQuery</code> can communicate its bounding box to <code>GeoPointInBBoxQuery</code>.
+ */
 @interface OrgApacheLuceneSearchGeoBoundingBox : NSObject {
  @public
   jdouble minLon_;
@@ -39,8 +42,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchGeoBoundingBox_initWithDouble_withDo
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchGeoBoundingBox *new_OrgApacheLuceneSearchGeoBoundingBox_initWithDouble_withDouble_withDouble_withDouble_(jdouble minLon, jdouble maxLon, jdouble minLat, jdouble maxLat) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchGeoBoundingBox *create_OrgApacheLuceneSearchGeoBoundingBox_initWithDouble_withDouble_withDouble_withDouble_(jdouble minLon, jdouble maxLon, jdouble minLat, jdouble maxLat);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchGeoBoundingBox)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchGeoBoundingBox_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchGeoBoundingBox")

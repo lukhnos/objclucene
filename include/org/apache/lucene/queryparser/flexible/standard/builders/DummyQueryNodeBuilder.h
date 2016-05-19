@@ -5,30 +5,44 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder_) && (OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder_
+#if !defined (OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder))
+#define OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder_
 
-#define OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryBuilder_RESTRICT 1
-#define OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryBuilder_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryBuilder 1
+#define INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryBuilder 1
 #include "org/apache/lucene/queryparser/flexible/standard/builders/StandardQueryBuilder.h"
 
 @class OrgApacheLuceneSearchTermQuery;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 
+/*!
+ @brief This builder does nothing.
+ Commonly used for <code>QueryNode</code> objects that
+ are built by its parent's builder.
+ - seealso: StandardQueryBuilder
+ - seealso: QueryTreeBuilder
+ */
 @interface OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder : NSObject < OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryBuilder >
 
 #pragma mark Public
 
+/*!
+ @brief Constructs a <code>DummyQueryNodeBuilder</code> object.
+ */
 - (instancetype)init;
 
+/*!
+ @brief Always return <code>null</code>.
+ return <code>null</code>
+ */
 - (OrgApacheLuceneSearchTermQuery *)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode;
 
 @end
@@ -39,8 +53,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQu
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder *new_OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder *create_OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardBuildersDummyQueryNodeBuilder")

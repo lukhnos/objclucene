@@ -89,7 +89,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTermVectorsConsumerPerField, termVectors
 
 - (jboolean)startWithOrgApacheLuceneIndexIndexableField:(id<OrgApacheLuceneIndexIndexableField>)field
                                             withBoolean:(jboolean)first {
-  JreAssert(([((id<OrgApacheLuceneIndexIndexableFieldType>) nil_chk([((id<OrgApacheLuceneIndexIndexableField>) nil_chk(field)) fieldType])) indexOptions] != JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE)), (@"org/apache/lucene/index/TermVectorsConsumerPerField.java:114 condition failed: assert field.fieldType().indexOptions() != IndexOptions.NONE;"));
+  JreAssert(([((id<OrgApacheLuceneIndexIndexableFieldType>) nil_chk([((id<OrgApacheLuceneIndexIndexableField>) nil_chk(field)) fieldType])) indexOptions] != JreLoadEnum(OrgApacheLuceneIndexIndexOptions, NONE)), (@"org/apache/lucene/index/TermVectorsConsumerPerField.java:114 condition failed: assert field.fieldType().indexOptions() != IndexOptions.NONE;"));
   if (first) {
     if ([((OrgApacheLuceneUtilBytesRefHash *) nil_chk(bytesHash_)) size] != 0) {
       [self reset];
@@ -107,34 +107,34 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTermVectorsConsumerPerField, termVectors
       else {
         doVectorPayloads_ = false;
         if ([((id<OrgApacheLuceneIndexIndexableFieldType>) nil_chk([field fieldType])) storeTermVectorPayloads]) {
-          @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"cannot index term vector payloads without term vector positions (field=\"", [field name], @"\")")) autorelease];
+          @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"cannot index term vector payloads without term vector positions (field=\"", [field name], @"\")"));
         }
       }
     }
     else {
       if ([((id<OrgApacheLuceneIndexIndexableFieldType>) nil_chk([field fieldType])) storeTermVectorOffsets]) {
-        @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"cannot index term vector offsets when term vectors are not indexed (field=\"", [field name], @"\")")) autorelease];
+        @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"cannot index term vector offsets when term vectors are not indexed (field=\"", [field name], @"\")"));
       }
       if ([((id<OrgApacheLuceneIndexIndexableFieldType>) nil_chk([field fieldType])) storeTermVectorPositions]) {
-        @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"cannot index term vector positions when term vectors are not indexed (field=\"", [field name], @"\")")) autorelease];
+        @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"cannot index term vector positions when term vectors are not indexed (field=\"", [field name], @"\")"));
       }
       if ([((id<OrgApacheLuceneIndexIndexableFieldType>) nil_chk([field fieldType])) storeTermVectorPayloads]) {
-        @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"cannot index term vector payloads when term vectors are not indexed (field=\"", [field name], @"\")")) autorelease];
+        @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"cannot index term vector payloads when term vectors are not indexed (field=\"", [field name], @"\")"));
       }
     }
   }
   else {
     if (doVectors_ != [((id<OrgApacheLuceneIndexIndexableFieldType>) nil_chk([field fieldType])) storeTermVectors]) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"all instances of a given field name must have the same term vectors settings (storeTermVectors changed for field=\"", [field name], @"\")")) autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"all instances of a given field name must have the same term vectors settings (storeTermVectors changed for field=\"", [field name], @"\")"));
     }
     if (doVectorPositions_ != [((id<OrgApacheLuceneIndexIndexableFieldType>) nil_chk([field fieldType])) storeTermVectorPositions]) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"all instances of a given field name must have the same term vectors settings (storeTermVectorPositions changed for field=\"", [field name], @"\")")) autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"all instances of a given field name must have the same term vectors settings (storeTermVectorPositions changed for field=\"", [field name], @"\")"));
     }
     if (doVectorOffsets_ != [((id<OrgApacheLuceneIndexIndexableFieldType>) nil_chk([field fieldType])) storeTermVectorOffsets]) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"all instances of a given field name must have the same term vectors settings (storeTermVectorOffsets changed for field=\"", [field name], @"\")")) autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"all instances of a given field name must have the same term vectors settings (storeTermVectorOffsets changed for field=\"", [field name], @"\")"));
     }
     if (doVectorPayloads_ != [((id<OrgApacheLuceneIndexIndexableFieldType>) nil_chk([field fieldType])) storeTermVectorPayloads]) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"all instances of a given field name must have the same term vectors settings (storeTermVectorPayloads changed for field=\"", [field name], @"\")")) autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"all instances of a given field name must have the same term vectors settings (storeTermVectorPayloads changed for field=\"", [field name], @"\")"));
     }
   }
   if (doVectors_) {
@@ -156,10 +156,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTermVectorsConsumerPerField, termVectors
                                                                                       withInt:(jint)termID {
   if (doVectorOffsets_) {
     jint startOffset = ((OrgApacheLuceneIndexFieldInvertState *) nil_chk(fieldState_))->offset_ + [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAttribute_)) startOffset];
-    jint endOffset = fieldState_->offset_ + [offsetAttribute_ endOffset];
+    jint endOffset = fieldState_->offset_ + [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAttribute_)) endOffset];
     [self writeVIntWithInt:1 withInt:startOffset - IOSIntArray_Get(nil_chk(((OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray *) nil_chk(postings))->lastOffsets_), termID)];
     [self writeVIntWithInt:1 withInt:endOffset - startOffset];
-    *IOSIntArray_GetRef(postings->lastOffsets_, termID) = endOffset;
+    *IOSIntArray_GetRef(nil_chk(postings->lastOffsets_), termID) = endOffset;
   }
   if (doVectorPositions_) {
     OrgApacheLuceneUtilBytesRef *payload;
@@ -179,7 +179,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTermVectorsConsumerPerField, termVectors
     else {
       [self writeVIntWithInt:0 withInt:JreLShift32(pos, 1)];
     }
-    *IOSIntArray_GetRef(postings->lastPositions_, termID) = fieldState_->position_;
+    *IOSIntArray_GetRef(nil_chk(postings->lastPositions_), termID) = fieldState_->position_;
   }
 }
 
@@ -198,11 +198,11 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTermVectorsConsumerPerField, termVectors
 }
 
 - (void)newPostingsArray {
-  JreStrongAssign(&termVectorsPostingsArray_, (OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray *) check_class_cast(postingsArray_, [OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray class]));
+  JreStrongAssign(&termVectorsPostingsArray_, (OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray *) cast_chk(postingsArray_, [OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray class]));
 }
 
 - (OrgApacheLuceneIndexParallelPostingsArray *)createPostingsArrayWithInt:(jint)size {
-  return [new_OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray_initWithInt_(size) autorelease];
+  return create_OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray_initWithInt_(size);
 }
 
 - (void)dealloc {
@@ -249,9 +249,11 @@ void OrgApacheLuceneIndexTermVectorsConsumerPerField_initWithOrgApacheLuceneInde
 }
 
 OrgApacheLuceneIndexTermVectorsConsumerPerField *new_OrgApacheLuceneIndexTermVectorsConsumerPerField_initWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermVectorsConsumer_withOrgApacheLuceneIndexFieldInfo_(OrgApacheLuceneIndexFieldInvertState *invertState, OrgApacheLuceneIndexTermVectorsConsumer *termsWriter, OrgApacheLuceneIndexFieldInfo *fieldInfo) {
-  OrgApacheLuceneIndexTermVectorsConsumerPerField *self = [OrgApacheLuceneIndexTermVectorsConsumerPerField alloc];
-  OrgApacheLuceneIndexTermVectorsConsumerPerField_initWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermVectorsConsumer_withOrgApacheLuceneIndexFieldInfo_(self, invertState, termsWriter, fieldInfo);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexTermVectorsConsumerPerField, initWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermVectorsConsumer_withOrgApacheLuceneIndexFieldInfo_, invertState, termsWriter, fieldInfo)
+}
+
+OrgApacheLuceneIndexTermVectorsConsumerPerField *create_OrgApacheLuceneIndexTermVectorsConsumerPerField_initWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermVectorsConsumer_withOrgApacheLuceneIndexFieldInfo_(OrgApacheLuceneIndexFieldInvertState *invertState, OrgApacheLuceneIndexTermVectorsConsumer *termsWriter, OrgApacheLuceneIndexFieldInfo *fieldInfo) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexTermVectorsConsumerPerField, initWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermVectorsConsumer_withOrgApacheLuceneIndexFieldInfo_, invertState, termsWriter, fieldInfo)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexTermVectorsConsumerPerField)
@@ -264,13 +266,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexTermVectorsConsumerPerField
 }
 
 - (OrgApacheLuceneIndexParallelPostingsArray *)newInstanceWithInt:(jint)size {
-  return [new_OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray_initWithInt_(size) autorelease];
+  return create_OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray_initWithInt_(size);
 }
 
 - (void)copyToWithOrgApacheLuceneIndexParallelPostingsArray:(OrgApacheLuceneIndexParallelPostingsArray *)toArray
                                                     withInt:(jint)numToCopy {
   JreAssert(([toArray isKindOfClass:[OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray class]]), (@"org/apache/lucene/index/TermVectorsConsumerPerField.java:274 condition failed: assert toArray instanceof TermVectorsPostingsArray;"));
-  OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray *to = (OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray *) check_class_cast(toArray, [OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray class]);
+  OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray *to = (OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray *) cast_chk(toArray, [OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray class]);
   [super copyToWithOrgApacheLuceneIndexParallelPostingsArray:toArray withInt:numToCopy];
   JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(freqs_, 0, ((OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray *) nil_chk(to))->freqs_, 0, size_);
   JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(lastOffsets_, 0, to->lastOffsets_, 0, size_);
@@ -314,9 +316,11 @@ void OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray_in
 }
 
 OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray *new_OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray_initWithInt_(jint size) {
-  OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray *self = [OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray alloc];
-  OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray_initWithInt_(self, size);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray, initWithInt_, size)
+}
+
+OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray *create_OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray_initWithInt_(jint size) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray, initWithInt_, size)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray)

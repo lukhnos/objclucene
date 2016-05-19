@@ -27,8 +27,6 @@
 #include "org/apache/lucene/util/Accountables.h"
 #include "org/apache/lucene/util/IOUtils.h"
 
-#define OrgApacheLuceneStoreNRTCachingDirectory_VERBOSE false
-
 @interface OrgApacheLuceneStoreNRTCachingDirectory () {
  @public
   OrgApacheLuceneStoreRAMDirectory *cache_;
@@ -44,7 +42,9 @@
 J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreNRTCachingDirectory, cache_, OrgApacheLuceneStoreRAMDirectory *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreNRTCachingDirectory, uncacheLock_, id)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneStoreNRTCachingDirectory, VERBOSE, jboolean)
+inline jboolean OrgApacheLuceneStoreNRTCachingDirectory_get_VERBOSE();
+#define OrgApacheLuceneStoreNRTCachingDirectory_VERBOSE false
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneStoreNRTCachingDirectory, VERBOSE, jboolean)
 
 __attribute__((unused)) static void OrgApacheLuceneStoreNRTCachingDirectory_unCacheWithNSString_(OrgApacheLuceneStoreNRTCachingDirectory *self, NSString *fileName);
 
@@ -63,7 +63,7 @@ __attribute__((unused)) static void OrgApacheLuceneStoreNRTCachingDirectory_unCa
 
 - (IOSObjectArray *)listAll {
   @synchronized(self) {
-    id<JavaUtilSet> files = [new_JavaUtilHashSet_init() autorelease];
+    id<JavaUtilSet> files = create_JavaUtilHashSet_init();
     {
       IOSObjectArray *a__ = [((OrgApacheLuceneStoreRAMDirectory *) nil_chk(cache_)) listAll];
       NSString * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
@@ -80,7 +80,7 @@ __attribute__((unused)) static void OrgApacheLuceneStoreNRTCachingDirectory_unCa
       while (b__ < e__) {
         NSString *f = *b__++;
         if (![files addWithId:f]) {
-          @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$@$$$$", @"file: ", in_, @" appears both in delegate and in cache: cache=", JavaUtilArrays_toStringWithNSObjectArray_([cache_ listAll]), @",delegate=", JavaUtilArrays_toStringWithNSObjectArray_([in_ listAll]))) autorelease];
+          @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$@$$$$", @"file: ", in_, @" appears both in delegate and in cache: cache=", JavaUtilArrays_toStringWithNSObjectArray_([cache_ listAll]), @",delegate=", JavaUtilArrays_toStringWithNSObjectArray_([in_ listAll])));
         }
       }
     }
@@ -224,14 +224,14 @@ __attribute__((unused)) static void OrgApacheLuceneStoreNRTCachingDirectory_unCa
     { "fileLengthWithNSString:", "fileLength", "J", 0x21, "Ljava.io.IOException;", NULL },
     { "listCachedFiles", NULL, "[Ljava.lang.String;", 0x1, NULL, NULL },
     { "createOutputWithNSString:withOrgApacheLuceneStoreIOContext:", "createOutput", "Lorg.apache.lucene.store.IndexOutput;", 0x1, "Ljava.io.IOException;", NULL },
-    { "syncWithJavaUtilCollection:", "sync", "V", 0x1, "Ljava.io.IOException;", NULL },
+    { "syncWithJavaUtilCollection:", "sync", "V", 0x1, "Ljava.io.IOException;", "(Ljava/util/Collection<Ljava/lang/String;>;)V" },
     { "renameFileWithNSString:withNSString:", "renameFile", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "openInputWithNSString:withOrgApacheLuceneStoreIOContext:", "openInput", "Lorg.apache.lucene.store.IndexInput;", 0x21, "Ljava.io.IOException;", NULL },
     { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
     { "doCacheWriteWithNSString:withOrgApacheLuceneStoreIOContext:", "doCacheWrite", "Z", 0x4, NULL, NULL },
     { "unCacheWithNSString:", "unCache", "V", 0x2, "Ljava.io.IOException;", NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "cache_", NULL, 0x12, "Lorg.apache.lucene.store.RAMDirectory;", NULL, NULL, .constantValue.asLong = 0 },
@@ -255,9 +255,11 @@ void OrgApacheLuceneStoreNRTCachingDirectory_initWithOrgApacheLuceneStoreDirecto
 }
 
 OrgApacheLuceneStoreNRTCachingDirectory *new_OrgApacheLuceneStoreNRTCachingDirectory_initWithOrgApacheLuceneStoreDirectory_withDouble_withDouble_(OrgApacheLuceneStoreDirectory *delegate, jdouble maxMergeSizeMB, jdouble maxCachedMB) {
-  OrgApacheLuceneStoreNRTCachingDirectory *self = [OrgApacheLuceneStoreNRTCachingDirectory alloc];
-  OrgApacheLuceneStoreNRTCachingDirectory_initWithOrgApacheLuceneStoreDirectory_withDouble_withDouble_(self, delegate, maxMergeSizeMB, maxCachedMB);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreNRTCachingDirectory, initWithOrgApacheLuceneStoreDirectory_withDouble_withDouble_, delegate, maxMergeSizeMB, maxCachedMB)
+}
+
+OrgApacheLuceneStoreNRTCachingDirectory *create_OrgApacheLuceneStoreNRTCachingDirectory_initWithOrgApacheLuceneStoreDirectory_withDouble_withDouble_(OrgApacheLuceneStoreDirectory *delegate, jdouble maxMergeSizeMB, jdouble maxCachedMB) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreNRTCachingDirectory, initWithOrgApacheLuceneStoreDirectory_withDouble_withDouble_, delegate, maxMergeSizeMB, maxCachedMB)
 }
 
 void OrgApacheLuceneStoreNRTCachingDirectory_unCacheWithNSString_(OrgApacheLuceneStoreNRTCachingDirectory *self, NSString *fileName) {
@@ -265,7 +267,7 @@ void OrgApacheLuceneStoreNRTCachingDirectory_unCacheWithNSString_(OrgApacheLucen
     if (![((OrgApacheLuceneStoreRAMDirectory *) nil_chk(self->cache_)) fileNameExistsWithNSString:fileName]) {
       return;
     }
-    OrgApacheLuceneStoreIOContext *context = JreLoadStatic(OrgApacheLuceneStoreIOContext, DEFAULT_);
+    OrgApacheLuceneStoreIOContext *context = JreLoadStatic(OrgApacheLuceneStoreIOContext, DEFAULT);
     OrgApacheLuceneStoreIndexOutput *out = [((OrgApacheLuceneStoreDirectory *) nil_chk(self->in_)) createOutputWithNSString:fileName withOrgApacheLuceneStoreIOContext:context];
     OrgApacheLuceneStoreIndexInput *in = nil;
     @try {

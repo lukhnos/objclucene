@@ -17,9 +17,9 @@
 - (OrgApacheLuceneSearchQuery *)getQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)n {
   id<OrgApacheLuceneQueryparserXmlQueryBuilder> builder = [((JavaUtilHashMap *) nil_chk(builders_)) getWithId:[((id<OrgW3cDomElement>) nil_chk(n)) getNodeName]];
   if (builder == nil) {
-    @throw [new_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_(JreStrcat("$$", @"No QueryObjectBuilder defined for node ", [n getNodeName])) autorelease];
+    @throw create_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_(JreStrcat("$$", @"No QueryObjectBuilder defined for node ", [n getNodeName]));
   }
-  return [((id<OrgApacheLuceneQueryparserXmlQueryBuilder>) nil_chk(builder)) getQueryWithOrgW3cDomElement:n];
+  return [builder getQueryWithOrgW3cDomElement:n];
 }
 
 - (void)addBuilderWithNSString:(NSString *)nodeName
@@ -48,7 +48,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "getQueryWithOrgW3cDomElement:", "getQuery", "Lorg.apache.lucene.search.Query;", 0x1, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
     { "addBuilderWithNSString:withOrgApacheLuceneQueryparserXmlQueryBuilder:", "addBuilder", "V", 0x1, NULL, NULL },
     { "getQueryBuilderWithNSString:", "getQueryBuilder", "Lorg.apache.lucene.queryparser.xml.QueryBuilder;", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "QueryBuilderFactory", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "builders_", NULL, 0x0, "Ljava.util.HashMap;", NULL, "Ljava/util/HashMap<Ljava/lang/String;Lorg/apache/lucene/queryparser/xml/QueryBuilder;>;", .constantValue.asLong = 0 },
@@ -65,9 +65,11 @@ void OrgApacheLuceneQueryparserXmlQueryBuilderFactory_init(OrgApacheLuceneQueryp
 }
 
 OrgApacheLuceneQueryparserXmlQueryBuilderFactory *new_OrgApacheLuceneQueryparserXmlQueryBuilderFactory_init() {
-  OrgApacheLuceneQueryparserXmlQueryBuilderFactory *self = [OrgApacheLuceneQueryparserXmlQueryBuilderFactory alloc];
-  OrgApacheLuceneQueryparserXmlQueryBuilderFactory_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserXmlQueryBuilderFactory, init)
+}
+
+OrgApacheLuceneQueryparserXmlQueryBuilderFactory *create_OrgApacheLuceneQueryparserXmlQueryBuilderFactory_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserXmlQueryBuilderFactory, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserXmlQueryBuilderFactory)

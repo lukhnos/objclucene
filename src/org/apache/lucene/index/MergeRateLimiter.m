@@ -16,9 +16,7 @@
 #include "org/apache/lucene/store/RateLimiter.h"
 #include "org/apache/lucene/util/ThreadInterruptedException.h"
 
-@class OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum;
-
-#define OrgApacheLuceneIndexMergeRateLimiter_MIN_PAUSE_CHECK_MSEC 25
+@class OrgApacheLuceneIndexMergeRateLimiter_PauseResult;
 
 @interface OrgApacheLuceneIndexMergeRateLimiter () {
  @public
@@ -27,51 +25,63 @@
   jboolean abort_;
 }
 
-- (OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum *)maybePauseWithLong:(jlong)bytes
-                                                                    withLong:(jlong)curNS;
+/*!
+ @brief Returns NO if no pause happened, STOPPED if pause because rate was 0.0 (merge is stopped), PAUSED if paused with a normal rate limit.
+ */
+- (OrgApacheLuceneIndexMergeRateLimiter_PauseResult *)maybePauseWithLong:(jlong)bytes
+                                                                withLong:(jlong)curNS;
 
 @end
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexMergeRateLimiter, MIN_PAUSE_CHECK_MSEC, jint)
+inline jint OrgApacheLuceneIndexMergeRateLimiter_get_MIN_PAUSE_CHECK_MSEC();
+#define OrgApacheLuceneIndexMergeRateLimiter_MIN_PAUSE_CHECK_MSEC 25
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexMergeRateLimiter, MIN_PAUSE_CHECK_MSEC, jint)
 
-__attribute__((unused)) static OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum *OrgApacheLuceneIndexMergeRateLimiter_maybePauseWithLong_withLong_(OrgApacheLuceneIndexMergeRateLimiter *self, jlong bytes, jlong curNS);
+__attribute__((unused)) static OrgApacheLuceneIndexMergeRateLimiter_PauseResult *OrgApacheLuceneIndexMergeRateLimiter_maybePauseWithLong_withLong_(OrgApacheLuceneIndexMergeRateLimiter *self, jlong bytes, jlong curNS);
 
-typedef NS_ENUM(NSUInteger, OrgApacheLuceneIndexMergeRateLimiter_PauseResult) {
-  OrgApacheLuceneIndexMergeRateLimiter_PauseResult_NO = 0,
-  OrgApacheLuceneIndexMergeRateLimiter_PauseResult_STOPPED = 1,
-  OrgApacheLuceneIndexMergeRateLimiter_PauseResult_PAUSED = 2,
+typedef NS_ENUM(NSUInteger, OrgApacheLuceneIndexMergeRateLimiter_PauseResult_Enum) {
+  OrgApacheLuceneIndexMergeRateLimiter_PauseResult_Enum_NO = 0,
+  OrgApacheLuceneIndexMergeRateLimiter_PauseResult_Enum_STOPPED = 1,
+  OrgApacheLuceneIndexMergeRateLimiter_PauseResult_Enum_PAUSED = 2,
 };
 
-@interface OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum : JavaLangEnum < NSCopying >
+/*!
+ @brief Returned by <code>maybePause</code>.
+ */
+@interface OrgApacheLuceneIndexMergeRateLimiter_PauseResult : JavaLangEnum < NSCopying >
 
 + (IOSObjectArray *)values;
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum_values();
 
-+ (OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum *)valueOfWithNSString:(NSString *)name;
-FOUNDATION_EXPORT OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum *OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum_valueOfWithNSString_(NSString *name);
++ (OrgApacheLuceneIndexMergeRateLimiter_PauseResult *)valueOfWithNSString:(NSString *)name;
 
 - (id)copyWithZone:(NSZone *)zone;
+- (OrgApacheLuceneIndexMergeRateLimiter_PauseResult_Enum)toNSEnum;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum)
+J2OBJC_STATIC_INIT(OrgApacheLuceneIndexMergeRateLimiter_PauseResult)
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum *OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum_values_[];
+/*! INTERNAL ONLY - Use enum accessors declared below. */
+FOUNDATION_EXPORT OrgApacheLuceneIndexMergeRateLimiter_PauseResult *OrgApacheLuceneIndexMergeRateLimiter_PauseResult_values_[];
 
-#define OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum_NO OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum_values_[OrgApacheLuceneIndexMergeRateLimiter_PauseResult_NO]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum, NO)
+inline OrgApacheLuceneIndexMergeRateLimiter_PauseResult *OrgApacheLuceneIndexMergeRateLimiter_PauseResult_get_NO();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexMergeRateLimiter_PauseResult, NO)
 
-#define OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum_STOPPED OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum_values_[OrgApacheLuceneIndexMergeRateLimiter_PauseResult_STOPPED]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum, STOPPED)
+inline OrgApacheLuceneIndexMergeRateLimiter_PauseResult *OrgApacheLuceneIndexMergeRateLimiter_PauseResult_get_STOPPED();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexMergeRateLimiter_PauseResult, STOPPED)
 
-#define OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum_PAUSED OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum_values_[OrgApacheLuceneIndexMergeRateLimiter_PauseResult_PAUSED]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum, PAUSED)
+inline OrgApacheLuceneIndexMergeRateLimiter_PauseResult *OrgApacheLuceneIndexMergeRateLimiter_PauseResult_get_PAUSED();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexMergeRateLimiter_PauseResult, PAUSED)
 
-__attribute__((unused)) static void OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum_initWithNSString_withInt_(OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum *self, NSString *__name, jint __ordinal);
+__attribute__((unused)) static void OrgApacheLuceneIndexMergeRateLimiter_PauseResult_initWithNSString_withInt_(OrgApacheLuceneIndexMergeRateLimiter_PauseResult *self, NSString *__name, jint __ordinal);
 
-__attribute__((unused)) static OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum *new_OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneIndexMergeRateLimiter_PauseResult_values();
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum)
+FOUNDATION_EXPORT OrgApacheLuceneIndexMergeRateLimiter_PauseResult *OrgApacheLuceneIndexMergeRateLimiter_PauseResult_valueOfWithNSString_(NSString *name);
+
+FOUNDATION_EXPORT OrgApacheLuceneIndexMergeRateLimiter_PauseResult *OrgApacheLuceneIndexMergeRateLimiter_PauseResult_fromOrdinal(NSUInteger ordinal);
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergeRateLimiter_PauseResult)
 
 @implementation OrgApacheLuceneIndexMergeRateLimiter
 
@@ -83,7 +93,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum)
 - (void)setMBPerSecWithDouble:(jdouble)mbPerSec {
   @synchronized(self) {
     if (mbPerSec < 0.0) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"mbPerSec must be positive; got: ", mbPerSec)) autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"mbPerSec must be positive; got: ", mbPerSec));
     }
     self->mbPerSec_ = mbPerSec;
     minPauseCheckBytes_ = JavaLangMath_minWithLong_withLong_(1024 * 1024, JreFpToLong(((OrgApacheLuceneIndexMergeRateLimiter_MIN_PAUSE_CHECK_MSEC / 1000.0) * mbPerSec * 1024 * 1024)));
@@ -108,19 +118,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum)
   jlong curNS = startNS;
   jlong pausedNS = 0;
   while (true) {
-    OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum *result = OrgApacheLuceneIndexMergeRateLimiter_maybePauseWithLong_withLong_(self, bytes, curNS);
-    if (result == JreLoadStatic(OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum, NO)) {
+    OrgApacheLuceneIndexMergeRateLimiter_PauseResult *result = OrgApacheLuceneIndexMergeRateLimiter_maybePauseWithLong_withLong_(self, bytes, curNS);
+    if (result == JreLoadEnum(OrgApacheLuceneIndexMergeRateLimiter_PauseResult, NO)) {
       lastNS_ = curNS;
       break;
     }
     curNS = JavaLangSystem_nanoTime();
     jlong ns = curNS - startNS;
     startNS = curNS;
-    if (result == JreLoadStatic(OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum, STOPPED)) {
+    if (result == JreLoadEnum(OrgApacheLuceneIndexMergeRateLimiter_PauseResult, STOPPED)) {
       totalStoppedNS_ += ns;
     }
     else {
-      JreAssert((result == JreLoadStatic(OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum, PAUSED)), (@"org/apache/lucene/index/MergeRateLimiter.java:109 condition failed: assert result == PauseResult.PAUSED;"));
+      JreAssert((result == JreLoadEnum(OrgApacheLuceneIndexMergeRateLimiter_PauseResult, PAUSED)), (@"org/apache/lucene/index/MergeRateLimiter.java:109 condition failed: assert result == PauseResult.PAUSED;"));
       totalPausedNS_ += ns;
     }
     pausedNS += ns;
@@ -140,15 +150,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum)
   }
 }
 
-- (OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum *)maybePauseWithLong:(jlong)bytes
-                                                                    withLong:(jlong)curNS {
+- (OrgApacheLuceneIndexMergeRateLimiter_PauseResult *)maybePauseWithLong:(jlong)bytes
+                                                                withLong:(jlong)curNS {
   return OrgApacheLuceneIndexMergeRateLimiter_maybePauseWithLong_withLong_(self, bytes, curNS);
 }
 
 - (void)checkAbort {
   @synchronized(self) {
     if (abort_) {
-      @throw [new_OrgApacheLuceneIndexMergePolicy_MergeAbortedException_initWithNSString_(JreStrcat("$$", @"merge is aborted: ", [((OrgApacheLuceneIndexMergePolicy_OneMerge *) nil_chk(merge_)) segString])) autorelease];
+      @throw create_OrgApacheLuceneIndexMergePolicy_MergeAbortedException_initWithNSString_(JreStrcat("$$", @"merge is aborted: ", [((OrgApacheLuceneIndexMergePolicy_OneMerge *) nil_chk(merge_)) segString]));
     }
   }
 }
@@ -215,19 +225,21 @@ void OrgApacheLuceneIndexMergeRateLimiter_initWithOrgApacheLuceneIndexMergePolic
 }
 
 OrgApacheLuceneIndexMergeRateLimiter *new_OrgApacheLuceneIndexMergeRateLimiter_initWithOrgApacheLuceneIndexMergePolicy_OneMerge_(OrgApacheLuceneIndexMergePolicy_OneMerge *merge) {
-  OrgApacheLuceneIndexMergeRateLimiter *self = [OrgApacheLuceneIndexMergeRateLimiter alloc];
-  OrgApacheLuceneIndexMergeRateLimiter_initWithOrgApacheLuceneIndexMergePolicy_OneMerge_(self, merge);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMergeRateLimiter, initWithOrgApacheLuceneIndexMergePolicy_OneMerge_, merge)
 }
 
-OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum *OrgApacheLuceneIndexMergeRateLimiter_maybePauseWithLong_withLong_(OrgApacheLuceneIndexMergeRateLimiter *self, jlong bytes, jlong curNS) {
+OrgApacheLuceneIndexMergeRateLimiter *create_OrgApacheLuceneIndexMergeRateLimiter_initWithOrgApacheLuceneIndexMergePolicy_OneMerge_(OrgApacheLuceneIndexMergePolicy_OneMerge *merge) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMergeRateLimiter, initWithOrgApacheLuceneIndexMergePolicy_OneMerge_, merge)
+}
+
+OrgApacheLuceneIndexMergeRateLimiter_PauseResult *OrgApacheLuceneIndexMergeRateLimiter_maybePauseWithLong_withLong_(OrgApacheLuceneIndexMergeRateLimiter *self, jlong bytes, jlong curNS) {
   @synchronized(self) {
     [self checkAbort];
     jdouble secondsToPause = (bytes / 1024. / 1024.) / self->mbPerSec_;
     jlong targetNS = self->lastNS_ + JreFpToLong((1000000000 * secondsToPause));
     jlong curPauseNS = targetNS - curNS;
     if (curPauseNS <= 2000000) {
-      return JreLoadStatic(OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum, NO);
+      return JreLoadEnum(OrgApacheLuceneIndexMergeRateLimiter_PauseResult, NO);
     }
     if (curPauseNS > 250LL * 1000000) {
       curPauseNS = 250LL * 1000000;
@@ -239,48 +251,95 @@ OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum *OrgApacheLuceneIndexMergeR
       [self waitWithLong:sleepMS withInt:sleepNS];
     }
     @catch (JavaLangInterruptedException *ie) {
-      @throw [new_OrgApacheLuceneUtilThreadInterruptedException_initWithJavaLangInterruptedException_(ie) autorelease];
+      @throw create_OrgApacheLuceneUtilThreadInterruptedException_initWithJavaLangInterruptedException_(ie);
     }
     if (rate == 0.0) {
-      return JreLoadStatic(OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum, STOPPED);
+      return JreLoadEnum(OrgApacheLuceneIndexMergeRateLimiter_PauseResult, STOPPED);
     }
     else {
-      return JreLoadStatic(OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum, PAUSED);
+      return JreLoadEnum(OrgApacheLuceneIndexMergeRateLimiter_PauseResult, PAUSED);
     }
   }
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergeRateLimiter)
 
-J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum)
+J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexMergeRateLimiter_PauseResult)
 
-OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum *OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum_values_[3];
+OrgApacheLuceneIndexMergeRateLimiter_PauseResult *OrgApacheLuceneIndexMergeRateLimiter_PauseResult_values_[3];
 
-@implementation OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum
+@implementation OrgApacheLuceneIndexMergeRateLimiter_PauseResult
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
++ (OrgApacheLuceneIndexMergeRateLimiter_PauseResult *)NO_ {
+  return JreEnum(OrgApacheLuceneIndexMergeRateLimiter_PauseResult, NO);
 }
 
-IOSObjectArray *OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum_values() {
-  OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum_initialize();
-  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum_values_ count:3 type:OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum_class_()];
++ (OrgApacheLuceneIndexMergeRateLimiter_PauseResult *)STOPPED {
+  return JreEnum(OrgApacheLuceneIndexMergeRateLimiter_PauseResult, STOPPED);
+}
+
++ (OrgApacheLuceneIndexMergeRateLimiter_PauseResult *)PAUSED {
+  return JreEnum(OrgApacheLuceneIndexMergeRateLimiter_PauseResult, PAUSED);
 }
 
 + (IOSObjectArray *)values {
-  return OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum_values();
+  return OrgApacheLuceneIndexMergeRateLimiter_PauseResult_values();
 }
 
-+ (OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum *)valueOfWithNSString:(NSString *)name {
-  return OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum_valueOfWithNSString_(name);
++ (OrgApacheLuceneIndexMergeRateLimiter_PauseResult *)valueOfWithNSString:(NSString *)name {
+  return OrgApacheLuceneIndexMergeRateLimiter_PauseResult_valueOfWithNSString_(name);
 }
 
-OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum *OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum_valueOfWithNSString_(NSString *name) {
-  OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum_initialize();
+- (OrgApacheLuceneIndexMergeRateLimiter_PauseResult_Enum)toNSEnum {
+  return (OrgApacheLuceneIndexMergeRateLimiter_PauseResult_Enum)[self ordinal];
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+  return self;
+}
+
++ (void)initialize {
+  if (self == [OrgApacheLuceneIndexMergeRateLimiter_PauseResult class]) {
+    size_t objSize = class_getInstanceSize(self);
+    size_t allocSize = 3 * objSize;
+    uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
+    id e;
+    (JreEnum(OrgApacheLuceneIndexMergeRateLimiter_PauseResult, NO) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneIndexMergeRateLimiter_PauseResult_initWithNSString_withInt_(e, @"NO", 0);
+    (JreEnum(OrgApacheLuceneIndexMergeRateLimiter_PauseResult, STOPPED) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneIndexMergeRateLimiter_PauseResult_initWithNSString_withInt_(e, @"STOPPED", 1);
+    (JreEnum(OrgApacheLuceneIndexMergeRateLimiter_PauseResult, PAUSED) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneIndexMergeRateLimiter_PauseResult_initWithNSString_withInt_(e, @"PAUSED", 2);
+    J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexMergeRateLimiter_PauseResult)
+  }
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static const J2ObjcFieldInfo fields[] = {
+    { "NO", "NO", 0x4019, "Lorg.apache.lucene.index.MergeRateLimiter$PauseResult;", &JreEnum(OrgApacheLuceneIndexMergeRateLimiter_PauseResult, NO), NULL, .constantValue.asLong = 0 },
+    { "STOPPED", "STOPPED", 0x4019, "Lorg.apache.lucene.index.MergeRateLimiter$PauseResult;", &JreEnum(OrgApacheLuceneIndexMergeRateLimiter_PauseResult, STOPPED), NULL, .constantValue.asLong = 0 },
+    { "PAUSED", "PAUSED", 0x4019, "Lorg.apache.lucene.index.MergeRateLimiter$PauseResult;", &JreEnum(OrgApacheLuceneIndexMergeRateLimiter_PauseResult, PAUSED), NULL, .constantValue.asLong = 0 },
+  };
+  static const char *superclass_type_args[] = {"Lorg.apache.lucene.index.MergeRateLimiter$PauseResult;"};
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMergeRateLimiter_PauseResult = { 2, "PauseResult", "org.apache.lucene.index", "MergeRateLimiter", 0x401a, 0, NULL, 3, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/index/MergeRateLimiter$PauseResult;>;" };
+  return &_OrgApacheLuceneIndexMergeRateLimiter_PauseResult;
+}
+
+@end
+
+void OrgApacheLuceneIndexMergeRateLimiter_PauseResult_initWithNSString_withInt_(OrgApacheLuceneIndexMergeRateLimiter_PauseResult *self, NSString *__name, jint __ordinal) {
+  JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
+}
+
+IOSObjectArray *OrgApacheLuceneIndexMergeRateLimiter_PauseResult_values() {
+  OrgApacheLuceneIndexMergeRateLimiter_PauseResult_initialize();
+  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneIndexMergeRateLimiter_PauseResult_values_ count:3 type:OrgApacheLuceneIndexMergeRateLimiter_PauseResult_class_()];
+}
+
+OrgApacheLuceneIndexMergeRateLimiter_PauseResult *OrgApacheLuceneIndexMergeRateLimiter_PauseResult_valueOfWithNSString_(NSString *name) {
+  OrgApacheLuceneIndexMergeRateLimiter_PauseResult_initialize();
   for (int i = 0; i < 3; i++) {
-    OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum *e = OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum_values_[i];
+    OrgApacheLuceneIndexMergeRateLimiter_PauseResult *e = OrgApacheLuceneIndexMergeRateLimiter_PauseResult_values_[i];
     if ([name isEqual:[e name]]) {
       return e;
     }
@@ -289,40 +348,12 @@ OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum *OrgApacheLuceneIndexMergeR
   return nil;
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return [self retain];
-}
-
-+ (void)initialize {
-  if (self == [OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum class]) {
-    OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum_NO = new_OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum_initWithNSString_withInt_(@"NO", 0);
-    OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum_STOPPED = new_OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum_initWithNSString_withInt_(@"STOPPED", 1);
-    OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum_PAUSED = new_OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum_initWithNSString_withInt_(@"PAUSED", 2);
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum)
+OrgApacheLuceneIndexMergeRateLimiter_PauseResult *OrgApacheLuceneIndexMergeRateLimiter_PauseResult_fromOrdinal(NSUInteger ordinal) {
+  OrgApacheLuceneIndexMergeRateLimiter_PauseResult_initialize();
+  if (ordinal >= 3) {
+    return nil;
   }
+  return OrgApacheLuceneIndexMergeRateLimiter_PauseResult_values_[ordinal];
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcFieldInfo fields[] = {
-    { "NO", "NO", 0x4019, "Lorg.apache.lucene.index.MergeRateLimiter$PauseResult;", &OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum_NO, NULL, .constantValue.asLong = 0 },
-    { "STOPPED", "STOPPED", 0x4019, "Lorg.apache.lucene.index.MergeRateLimiter$PauseResult;", &OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum_STOPPED, NULL, .constantValue.asLong = 0 },
-    { "PAUSED", "PAUSED", 0x4019, "Lorg.apache.lucene.index.MergeRateLimiter$PauseResult;", &OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum_PAUSED, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.index.MergeRateLimiter$PauseResult;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum = { 2, "PauseResult", "org.apache.lucene.index", "MergeRateLimiter", 0x401a, 0, NULL, 3, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/index/MergeRateLimiter$PauseResult;>;" };
-  return &_OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum;
-}
-
-@end
-
-void OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum_initWithNSString_withInt_(OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum *self, NSString *__name, jint __ordinal) {
-  JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
-}
-
-OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum *new_OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum *self = [OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum alloc];
-  OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum)
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergeRateLimiter_PauseResult)

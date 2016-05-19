@@ -30,6 +30,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilRecyclingIntBlockAllocator, bytesUsed_, O
 
 @implementation OrgApacheLuceneUtilRecyclingIntBlockAllocator
 
++ (jint)DEFAULT_BUFFERED_BLOCKS {
+  return OrgApacheLuceneUtilRecyclingIntBlockAllocator_DEFAULT_BUFFERED_BLOCKS;
+}
+
 - (instancetype)initWithInt:(jint)blockSize
                     withInt:(jint)maxBufferedBlocks
 withOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)bytesUsed {
@@ -66,7 +70,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   jint numBlocks = JavaLangMath_minWithInt_withInt_(maxBufferedBlocks_ - freeBlocks_, end - start);
   jint size = freeBlocks_ + numBlocks;
   if (size >= ((IOSObjectArray *) nil_chk(freeByteBlocks_))->size_) {
-    IOSObjectArray *newBlocks = [IOSObjectArray arrayWithLength:OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(size, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_)) type:IOSClass_intArray(1)];
+    IOSObjectArray *newBlocks = [IOSObjectArray arrayWithLength:OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(size, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF)) type:IOSClass_intArray(1)];
     JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(freeByteBlocks_, 0, newBlocks, 0, freeBlocks_);
     JreStrongAssign(&freeByteBlocks_, newBlocks);
   }
@@ -154,9 +158,11 @@ void OrgApacheLuceneUtilRecyclingIntBlockAllocator_initWithInt_withInt_withOrgAp
 }
 
 OrgApacheLuceneUtilRecyclingIntBlockAllocator *new_OrgApacheLuceneUtilRecyclingIntBlockAllocator_initWithInt_withInt_withOrgApacheLuceneUtilCounter_(jint blockSize, jint maxBufferedBlocks, OrgApacheLuceneUtilCounter *bytesUsed) {
-  OrgApacheLuceneUtilRecyclingIntBlockAllocator *self = [OrgApacheLuceneUtilRecyclingIntBlockAllocator alloc];
-  OrgApacheLuceneUtilRecyclingIntBlockAllocator_initWithInt_withInt_withOrgApacheLuceneUtilCounter_(self, blockSize, maxBufferedBlocks, bytesUsed);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilRecyclingIntBlockAllocator, initWithInt_withInt_withOrgApacheLuceneUtilCounter_, blockSize, maxBufferedBlocks, bytesUsed)
+}
+
+OrgApacheLuceneUtilRecyclingIntBlockAllocator *create_OrgApacheLuceneUtilRecyclingIntBlockAllocator_initWithInt_withInt_withOrgApacheLuceneUtilCounter_(jint blockSize, jint maxBufferedBlocks, OrgApacheLuceneUtilCounter *bytesUsed) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilRecyclingIntBlockAllocator, initWithInt_withInt_withOrgApacheLuceneUtilCounter_, blockSize, maxBufferedBlocks, bytesUsed)
 }
 
 void OrgApacheLuceneUtilRecyclingIntBlockAllocator_initWithInt_withInt_(OrgApacheLuceneUtilRecyclingIntBlockAllocator *self, jint blockSize, jint maxBufferedBlocks) {
@@ -164,9 +170,11 @@ void OrgApacheLuceneUtilRecyclingIntBlockAllocator_initWithInt_withInt_(OrgApach
 }
 
 OrgApacheLuceneUtilRecyclingIntBlockAllocator *new_OrgApacheLuceneUtilRecyclingIntBlockAllocator_initWithInt_withInt_(jint blockSize, jint maxBufferedBlocks) {
-  OrgApacheLuceneUtilRecyclingIntBlockAllocator *self = [OrgApacheLuceneUtilRecyclingIntBlockAllocator alloc];
-  OrgApacheLuceneUtilRecyclingIntBlockAllocator_initWithInt_withInt_(self, blockSize, maxBufferedBlocks);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilRecyclingIntBlockAllocator, initWithInt_withInt_, blockSize, maxBufferedBlocks)
+}
+
+OrgApacheLuceneUtilRecyclingIntBlockAllocator *create_OrgApacheLuceneUtilRecyclingIntBlockAllocator_initWithInt_withInt_(jint blockSize, jint maxBufferedBlocks) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilRecyclingIntBlockAllocator, initWithInt_withInt_, blockSize, maxBufferedBlocks)
 }
 
 void OrgApacheLuceneUtilRecyclingIntBlockAllocator_init(OrgApacheLuceneUtilRecyclingIntBlockAllocator *self) {
@@ -174,9 +182,11 @@ void OrgApacheLuceneUtilRecyclingIntBlockAllocator_init(OrgApacheLuceneUtilRecyc
 }
 
 OrgApacheLuceneUtilRecyclingIntBlockAllocator *new_OrgApacheLuceneUtilRecyclingIntBlockAllocator_init() {
-  OrgApacheLuceneUtilRecyclingIntBlockAllocator *self = [OrgApacheLuceneUtilRecyclingIntBlockAllocator alloc];
-  OrgApacheLuceneUtilRecyclingIntBlockAllocator_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilRecyclingIntBlockAllocator, init)
+}
+
+OrgApacheLuceneUtilRecyclingIntBlockAllocator *create_OrgApacheLuceneUtilRecyclingIntBlockAllocator_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilRecyclingIntBlockAllocator, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilRecyclingIntBlockAllocator)

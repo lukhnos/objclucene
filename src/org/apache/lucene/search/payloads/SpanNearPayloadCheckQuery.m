@@ -3,11 +3,12 @@
 //  source: ./core/src/java/org/apache/lucene/search/payloads/SpanNearPayloadCheckQuery.java
 //
 
-#include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/StringBuilder.h"
+#include "java/lang/annotation/Annotation.h"
 #include "java/util/Collection.h"
 #include "org/apache/lucene/search/Query.h"
 #include "org/apache/lucene/search/payloads/SpanNearPayloadCheckQuery.h"
@@ -25,7 +26,7 @@
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
-  JavaLangStringBuilder *buffer = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_init();
   [buffer appendWithNSString:@"spanPayCheck("];
   [buffer appendWithNSString:[((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(match_)) toStringWithNSString:field]];
   [buffer appendWithNSString:@", payloadRef: "];
@@ -39,7 +40,7 @@
 }
 
 - (OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery *)clone {
-  OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery *result = [new_OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery_initWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilCollection_((OrgApacheLuceneSearchSpansSpanNearQuery *) check_class_cast([((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(match_)) clone], [OrgApacheLuceneSearchSpansSpanNearQuery class]), payloadToMatch_) autorelease];
+  OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery *result = create_OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery_initWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilCollection_((OrgApacheLuceneSearchSpansSpanNearQuery *) cast_chk([((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(match_)) clone], [OrgApacheLuceneSearchSpansSpanNearQuery class]), payloadToMatch_);
   [result setBoostWithFloat:[self getBoost]];
   return result;
 }
@@ -48,7 +49,7 @@
   if (![super isEqual:o]) {
     return false;
   }
-  OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery *other = (OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery *) check_class_cast(o, [OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery class]);
+  OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery *other = (OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery *) cast_chk(o, [OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery class]);
   return [((id<JavaUtilCollection>) nil_chk(self->payloadToMatch_)) isEqual:((OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery *) nil_chk(other))->payloadToMatch_];
 }
 
@@ -59,12 +60,12 @@
 }
 
 + (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSpansSpanNearQuery:withJavaUtilCollection:", "SpanNearPayloadCheckQuery", NULL, 0x1, NULL, NULL },
+    { "initWithOrgApacheLuceneSearchSpansSpanNearQuery:withJavaUtilCollection:", "SpanNearPayloadCheckQuery", NULL, 0x1, NULL, "(Lorg/apache/lucene/search/spans/SpanNearQuery;Ljava/util/Collection<[LB;>;)V" },
     { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "clone", NULL, "Lorg.apache.lucene.search.payloads.SpanNearPayloadCheckQuery;", 0x1, NULL, NULL },
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
@@ -81,9 +82,11 @@ void OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery_initWithOrgApacheLuc
 }
 
 OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery *new_OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery_initWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilCollection_(OrgApacheLuceneSearchSpansSpanNearQuery *match, id<JavaUtilCollection> payloadToMatch) {
-  OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery *self = [OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery alloc];
-  OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery_initWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilCollection_(self, match, payloadToMatch);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery, initWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilCollection_, match, payloadToMatch)
+}
+
+OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery *create_OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery_initWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilCollection_(OrgApacheLuceneSearchSpansSpanNearQuery *match, id<JavaUtilCollection> payloadToMatch) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery, initWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilCollection_, match, payloadToMatch)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery)

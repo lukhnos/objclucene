@@ -13,10 +13,18 @@
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneDocumentTextField)
 
-OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentTextField_TYPE_NOT_STORED_;
-OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentTextField_TYPE_STORED_;
+OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentTextField_TYPE_NOT_STORED;
+OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentTextField_TYPE_STORED;
 
 @implementation OrgApacheLuceneDocumentTextField
+
++ (OrgApacheLuceneDocumentFieldType *)TYPE_NOT_STORED {
+  return OrgApacheLuceneDocumentTextField_TYPE_NOT_STORED;
+}
+
++ (OrgApacheLuceneDocumentFieldType *)TYPE_STORED {
+  return OrgApacheLuceneDocumentTextField_TYPE_STORED;
+}
 
 - (instancetype)initWithNSString:(NSString *)name
                 withJavaIoReader:(JavaIoReader *)reader {
@@ -26,8 +34,8 @@ OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentTextField_TYPE_STORED_;
 
 - (instancetype)initWithNSString:(NSString *)name
                     withNSString:(NSString *)value
-withOrgApacheLuceneDocumentField_StoreEnum:(OrgApacheLuceneDocumentField_StoreEnum *)store {
-  OrgApacheLuceneDocumentTextField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_StoreEnum_(self, name, value, store);
+withOrgApacheLuceneDocumentField_Store:(OrgApacheLuceneDocumentField_Store *)store {
+  OrgApacheLuceneDocumentTextField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_Store_(self, name, value, store);
   return self;
 }
 
@@ -39,16 +47,16 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)str
 
 + (void)initialize {
   if (self == [OrgApacheLuceneDocumentTextField class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneDocumentTextField_TYPE_NOT_STORED_, new_OrgApacheLuceneDocumentFieldType_init());
-    JreStrongAssignAndConsume(&OrgApacheLuceneDocumentTextField_TYPE_STORED_, new_OrgApacheLuceneDocumentFieldType_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneDocumentTextField_TYPE_NOT_STORED, new_OrgApacheLuceneDocumentFieldType_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneDocumentTextField_TYPE_STORED, new_OrgApacheLuceneDocumentFieldType_init());
     {
-      [OrgApacheLuceneDocumentTextField_TYPE_NOT_STORED_ setIndexOptionsWithOrgApacheLuceneIndexIndexOptionsEnum:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS)];
-      [OrgApacheLuceneDocumentTextField_TYPE_NOT_STORED_ setTokenizedWithBoolean:true];
-      [OrgApacheLuceneDocumentTextField_TYPE_NOT_STORED_ freeze];
-      [OrgApacheLuceneDocumentTextField_TYPE_STORED_ setIndexOptionsWithOrgApacheLuceneIndexIndexOptionsEnum:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS)];
-      [OrgApacheLuceneDocumentTextField_TYPE_STORED_ setTokenizedWithBoolean:true];
-      [OrgApacheLuceneDocumentTextField_TYPE_STORED_ setStoredWithBoolean:true];
-      [OrgApacheLuceneDocumentTextField_TYPE_STORED_ freeze];
+      [OrgApacheLuceneDocumentTextField_TYPE_NOT_STORED setIndexOptionsWithOrgApacheLuceneIndexIndexOptions:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS)];
+      [OrgApacheLuceneDocumentTextField_TYPE_NOT_STORED setTokenizedWithBoolean:true];
+      [OrgApacheLuceneDocumentTextField_TYPE_NOT_STORED freeze];
+      [OrgApacheLuceneDocumentTextField_TYPE_STORED setIndexOptionsWithOrgApacheLuceneIndexIndexOptions:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS)];
+      [OrgApacheLuceneDocumentTextField_TYPE_STORED setTokenizedWithBoolean:true];
+      [OrgApacheLuceneDocumentTextField_TYPE_STORED setStoredWithBoolean:true];
+      [OrgApacheLuceneDocumentTextField_TYPE_STORED freeze];
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneDocumentTextField)
   }
@@ -57,12 +65,12 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)str
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithNSString:withJavaIoReader:", "TextField", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withNSString:withOrgApacheLuceneDocumentField_StoreEnum:", "TextField", NULL, 0x1, NULL, NULL },
+    { "initWithNSString:withNSString:withOrgApacheLuceneDocumentField_Store:", "TextField", NULL, 0x1, NULL, NULL },
     { "initWithNSString:withOrgApacheLuceneAnalysisTokenStream:", "TextField", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "TYPE_NOT_STORED_", NULL, 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentTextField_TYPE_NOT_STORED_, NULL, .constantValue.asLong = 0 },
-    { "TYPE_STORED_", NULL, 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentTextField_TYPE_STORED_, NULL, .constantValue.asLong = 0 },
+    { "TYPE_NOT_STORED", "TYPE_NOT_STORED", 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentTextField_TYPE_NOT_STORED, NULL, .constantValue.asLong = 0 },
+    { "TYPE_STORED", "TYPE_STORED", 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentTextField_TYPE_STORED, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneDocumentTextField = { 2, "TextField", "org.apache.lucene.document", NULL, 0x11, 3, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneDocumentTextField;
@@ -71,33 +79,39 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)str
 @end
 
 void OrgApacheLuceneDocumentTextField_initWithNSString_withJavaIoReader_(OrgApacheLuceneDocumentTextField *self, NSString *name, JavaIoReader *reader) {
-  OrgApacheLuceneDocumentField_initWithNSString_withJavaIoReader_withOrgApacheLuceneDocumentFieldType_(self, name, reader, OrgApacheLuceneDocumentTextField_TYPE_NOT_STORED_);
+  OrgApacheLuceneDocumentField_initWithNSString_withJavaIoReader_withOrgApacheLuceneDocumentFieldType_(self, name, reader, OrgApacheLuceneDocumentTextField_TYPE_NOT_STORED);
 }
 
 OrgApacheLuceneDocumentTextField *new_OrgApacheLuceneDocumentTextField_initWithNSString_withJavaIoReader_(NSString *name, JavaIoReader *reader) {
-  OrgApacheLuceneDocumentTextField *self = [OrgApacheLuceneDocumentTextField alloc];
-  OrgApacheLuceneDocumentTextField_initWithNSString_withJavaIoReader_(self, name, reader);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentTextField, initWithNSString_withJavaIoReader_, name, reader)
 }
 
-void OrgApacheLuceneDocumentTextField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_StoreEnum_(OrgApacheLuceneDocumentTextField *self, NSString *name, NSString *value, OrgApacheLuceneDocumentField_StoreEnum *store) {
-  OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentFieldType_(self, name, value, store == JreLoadStatic(OrgApacheLuceneDocumentField_StoreEnum, YES) ? OrgApacheLuceneDocumentTextField_TYPE_STORED_ : OrgApacheLuceneDocumentTextField_TYPE_NOT_STORED_);
+OrgApacheLuceneDocumentTextField *create_OrgApacheLuceneDocumentTextField_initWithNSString_withJavaIoReader_(NSString *name, JavaIoReader *reader) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentTextField, initWithNSString_withJavaIoReader_, name, reader)
 }
 
-OrgApacheLuceneDocumentTextField *new_OrgApacheLuceneDocumentTextField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_StoreEnum_(NSString *name, NSString *value, OrgApacheLuceneDocumentField_StoreEnum *store) {
-  OrgApacheLuceneDocumentTextField *self = [OrgApacheLuceneDocumentTextField alloc];
-  OrgApacheLuceneDocumentTextField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_StoreEnum_(self, name, value, store);
-  return self;
+void OrgApacheLuceneDocumentTextField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_Store_(OrgApacheLuceneDocumentTextField *self, NSString *name, NSString *value, OrgApacheLuceneDocumentField_Store *store) {
+  OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentFieldType_(self, name, value, store == JreLoadEnum(OrgApacheLuceneDocumentField_Store, YES) ? OrgApacheLuceneDocumentTextField_TYPE_STORED : OrgApacheLuceneDocumentTextField_TYPE_NOT_STORED);
+}
+
+OrgApacheLuceneDocumentTextField *new_OrgApacheLuceneDocumentTextField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_Store_(NSString *name, NSString *value, OrgApacheLuceneDocumentField_Store *store) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentTextField, initWithNSString_withNSString_withOrgApacheLuceneDocumentField_Store_, name, value, store)
+}
+
+OrgApacheLuceneDocumentTextField *create_OrgApacheLuceneDocumentTextField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_Store_(NSString *name, NSString *value, OrgApacheLuceneDocumentField_Store *store) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentTextField, initWithNSString_withNSString_withOrgApacheLuceneDocumentField_Store_, name, value, store)
 }
 
 void OrgApacheLuceneDocumentTextField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneDocumentTextField *self, NSString *name, OrgApacheLuceneAnalysisTokenStream *stream) {
-  OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneDocumentFieldType_(self, name, stream, OrgApacheLuceneDocumentTextField_TYPE_NOT_STORED_);
+  OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneDocumentFieldType_(self, name, stream, OrgApacheLuceneDocumentTextField_TYPE_NOT_STORED);
 }
 
 OrgApacheLuceneDocumentTextField *new_OrgApacheLuceneDocumentTextField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_(NSString *name, OrgApacheLuceneAnalysisTokenStream *stream) {
-  OrgApacheLuceneDocumentTextField *self = [OrgApacheLuceneDocumentTextField alloc];
-  OrgApacheLuceneDocumentTextField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_(self, name, stream);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentTextField, initWithNSString_withOrgApacheLuceneAnalysisTokenStream_, name, stream)
+}
+
+OrgApacheLuceneDocumentTextField *create_OrgApacheLuceneDocumentTextField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_(NSString *name, OrgApacheLuceneAnalysisTokenStream *stream) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentTextField, initWithNSString_withOrgApacheLuceneAnalysisTokenStream_, name, stream)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentTextField)

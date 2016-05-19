@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchEarlyTerminatingSortingCollector_INCLUDE_ALL")
-#if OrgApacheLuceneSearchEarlyTerminatingSortingCollector_RESTRICT
-#define OrgApacheLuceneSearchEarlyTerminatingSortingCollector_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchEarlyTerminatingSortingCollector")
+#ifdef RESTRICT_OrgApacheLuceneSearchEarlyTerminatingSortingCollector
+#define INCLUDE_ALL_OrgApacheLuceneSearchEarlyTerminatingSortingCollector 0
 #else
-#define OrgApacheLuceneSearchEarlyTerminatingSortingCollector_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchEarlyTerminatingSortingCollector 1
 #endif
-#undef OrgApacheLuceneSearchEarlyTerminatingSortingCollector_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchEarlyTerminatingSortingCollector
 
-#if !defined (_OrgApacheLuceneSearchEarlyTerminatingSortingCollector_) && (OrgApacheLuceneSearchEarlyTerminatingSortingCollector_INCLUDE_ALL || OrgApacheLuceneSearchEarlyTerminatingSortingCollector_INCLUDE)
-#define _OrgApacheLuceneSearchEarlyTerminatingSortingCollector_
+#if !defined (OrgApacheLuceneSearchEarlyTerminatingSortingCollector_) && (INCLUDE_ALL_OrgApacheLuceneSearchEarlyTerminatingSortingCollector || defined(INCLUDE_OrgApacheLuceneSearchEarlyTerminatingSortingCollector))
+#define OrgApacheLuceneSearchEarlyTerminatingSortingCollector_
 
-#define OrgApacheLuceneSearchFilterCollector_RESTRICT 1
-#define OrgApacheLuceneSearchFilterCollector_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchFilterCollector 1
+#define INCLUDE_OrgApacheLuceneSearchFilterCollector 1
 #include "org/apache/lucene/search/FilterCollector.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
@@ -25,19 +25,76 @@
 @protocol OrgApacheLuceneSearchCollector;
 @protocol OrgApacheLuceneSearchLeafCollector;
 
+/*!
+ @brief A <code>Collector</code> that early terminates collection of documents on a
+ per-segment basis, if the segment was sorted according to the given
+ <code>Sort</code>.
+ <p>
+ <b>NOTE:</b> the <code>Collector</code> detects segments sorted according to a
+ <code>SortingMergePolicy</code>'s <code>Sort</code> and so it's best used in conjunction
+ with a <code>SortingMergePolicy</code>. Also,it collects up to a specified
+ <code>numDocsToCollect</code> from each segment, and therefore is mostly suitable
+ for use in conjunction with collectors such as <code>TopDocsCollector</code>, and
+ not e.g. <code>TotalHitCountCollector</code>.
+ <p>
+ <b>NOTE</b>: If you wrap a <code>TopDocsCollector</code> that sorts in the same
+ order as the index order, the returned <code>TopDocs</code>
+ will be correct. However the total of <code>hit count</code>
+  will be underestimated since not all matching documents will have
+ been collected.
+ <p>
+ <b>NOTE</b>: This <code>Collector</code> uses <code>Sort.toString()</code> to detect
+ whether a segment was sorted with the same <code>Sort</code>. This has
+ two implications:
+ <ul>
+ <li>if a custom comparator is not implemented correctly and returns
+ different identifiers for equivalent instances, this collector will not
+ detect sorted segments,</li>
+ <li>if you suddenly change the <code>IndexWriter</code>'s
+ <code>SortingMergePolicy</code> to sort according to another criterion and if both
+ the old and the new <code>Sort</code>s have the same identifier, this
+ <code>Collector</code> will incorrectly detect sorted segments.</li>
+ </ul>
+ */
 @interface OrgApacheLuceneSearchEarlyTerminatingSortingCollector : OrgApacheLuceneSearchFilterCollector {
  @public
+  /*!
+   @brief Sort used to sort the search results
+   */
   OrgApacheLuceneSearchSort *sort_;
+  /*!
+   @brief Number of documents to collect in each segment
+   */
   jint numDocsToCollect_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief Create a new <code>EarlyTerminatingSortingCollector</code> instance.
+ @param inArg
+ the collector to wrap
+ @param sort
+ the sort you are sorting the search results on
+ @param numDocsToCollect
+ the number of documents to collect on each segment. When wrapping
+ a <code>TopDocsCollector</code>, this number should be the number of
+ hits.
+ @param mergePolicySort
+ the sort your <code>SortingMergePolicy</code> uses
+ @throws IllegalArgumentException if the sort order doesn't allow for early
+ termination with the given merge policy.
+ */
 - (instancetype)initWithOrgApacheLuceneSearchCollector:(id<OrgApacheLuceneSearchCollector>)inArg
                          withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort
                                                withInt:(jint)numDocsToCollect
                          withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)mergePolicySort;
 
+/*!
+ @brief Returns whether collection can be early-terminated if it sorts with the
+ provided <code>Sort</code> and if segments are merged with the provided
+ <code>Sort</code>.
+ */
 + (jboolean)canEarlyTerminateWithOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)searchSort
                              withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)mergePolicySort;
 
@@ -57,8 +114,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchEarlyTerminatingSortingCollector_ini
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchEarlyTerminatingSortingCollector *new_OrgApacheLuceneSearchEarlyTerminatingSortingCollector_initWithOrgApacheLuceneSearchCollector_withOrgApacheLuceneSearchSort_withInt_withOrgApacheLuceneSearchSort_(id<OrgApacheLuceneSearchCollector> inArg, OrgApacheLuceneSearchSort *sort, jint numDocsToCollect, OrgApacheLuceneSearchSort *mergePolicySort) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchEarlyTerminatingSortingCollector *create_OrgApacheLuceneSearchEarlyTerminatingSortingCollector_initWithOrgApacheLuceneSearchCollector_withOrgApacheLuceneSearchSort_withInt_withOrgApacheLuceneSearchSort_(id<OrgApacheLuceneSearchCollector> inArg, OrgApacheLuceneSearchSort *sort, jint numDocsToCollect, OrgApacheLuceneSearchSort *mergePolicySort);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchEarlyTerminatingSortingCollector)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchEarlyTerminatingSortingCollector_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchEarlyTerminatingSortingCollector")

@@ -131,9 +131,11 @@ void OrgApacheLuceneCodecsIdversionSinglePostingsEnum_init(OrgApacheLuceneCodecs
 }
 
 OrgApacheLuceneCodecsIdversionSinglePostingsEnum *new_OrgApacheLuceneCodecsIdversionSinglePostingsEnum_init() {
-  OrgApacheLuceneCodecsIdversionSinglePostingsEnum *self = [OrgApacheLuceneCodecsIdversionSinglePostingsEnum alloc];
-  OrgApacheLuceneCodecsIdversionSinglePostingsEnum_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsIdversionSinglePostingsEnum, init)
+}
+
+OrgApacheLuceneCodecsIdversionSinglePostingsEnum *create_OrgApacheLuceneCodecsIdversionSinglePostingsEnum_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsIdversionSinglePostingsEnum, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsIdversionSinglePostingsEnum)

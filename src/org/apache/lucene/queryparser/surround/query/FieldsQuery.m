@@ -52,17 +52,17 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSurroundQueryFieldsQuery, OrOperat
 
 - (OrgApacheLuceneSearchQuery *)makeLuceneQueryNoBoostWithOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)qf {
   if ([((id<JavaUtilList>) nil_chk(fieldNames_)) size] == 1) {
-    return [((OrgApacheLuceneQueryparserSurroundQuerySrndQuery *) nil_chk(q_)) makeLuceneQueryFieldNoBoostWithNSString:[fieldNames_ getWithInt:0] withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:qf];
+    return [((OrgApacheLuceneQueryparserSurroundQuerySrndQuery *) nil_chk(q_)) makeLuceneQueryFieldNoBoostWithNSString:[((id<JavaUtilList>) nil_chk(fieldNames_)) getWithInt:0] withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:qf];
   }
   else {
-    id<JavaUtilList> queries = [new_JavaUtilArrayList_init() autorelease];
+    id<JavaUtilList> queries = create_JavaUtilArrayList_init();
     id<JavaUtilIterator> fni = [((id<JavaUtilList>) nil_chk([self getFieldNames])) listIterator];
     OrgApacheLuceneQueryparserSurroundQuerySrndQuery *qc;
     while ([((id<JavaUtilIterator>) nil_chk(fni)) hasNext]) {
       qc = [((OrgApacheLuceneQueryparserSurroundQuerySrndQuery *) nil_chk(q_)) clone];
-      [queries addWithId:[new_OrgApacheLuceneQueryparserSurroundQueryFieldsQuery_initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery_withNSString_withChar_(qc, [fni next], fieldOp_) autorelease]];
+      [queries addWithId:create_OrgApacheLuceneQueryparserSurroundQueryFieldsQuery_initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery_withNSString_withChar_(qc, [fni next], fieldOp_)];
     }
-    OrgApacheLuceneQueryparserSurroundQueryOrQuery *oq = [new_OrgApacheLuceneQueryparserSurroundQueryOrQuery_initWithJavaUtilList_withBoolean_withNSString_(queries, true, OrOperatorName_) autorelease];
+    OrgApacheLuceneQueryparserSurroundQueryOrQuery *oq = create_OrgApacheLuceneQueryparserSurroundQueryOrQuery_initWithJavaUtilList_withBoolean_withNSString_(queries, true, OrOperatorName_);
     return [oq makeLuceneQueryFieldWithNSString:nil withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:qf];
   }
 }
@@ -81,7 +81,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSurroundQueryFieldsQuery, OrOperat
 }
 
 - (NSString *)description {
-  JavaLangStringBuilder *r = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *r = create_JavaLangStringBuilder_init();
   [r appendWithNSString:@"("];
   [self fieldNamesToStringWithJavaLangStringBuilder:r];
   [r appendWithNSString:[((OrgApacheLuceneQueryparserSurroundQuerySrndQuery *) nil_chk(q_)) description]];
@@ -106,12 +106,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSurroundQueryFieldsQuery, OrOperat
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery:withJavaUtilList:withChar:", "FieldsQuery", NULL, 0x1, NULL, NULL },
+    { "initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery:withJavaUtilList:withChar:", "FieldsQuery", NULL, 0x1, NULL, "(Lorg/apache/lucene/queryparser/surround/query/SrndQuery;Ljava/util/List<Ljava/lang/String;>;C)V" },
     { "initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery:withNSString:withChar:", "FieldsQuery", NULL, 0x1, NULL, NULL },
     { "isFieldsSubQueryAcceptable", NULL, "Z", 0x1, NULL, NULL },
     { "makeLuceneQueryNoBoostWithOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:", "makeLuceneQueryNoBoost", "Lorg.apache.lucene.search.Query;", 0x1, NULL, NULL },
     { "makeLuceneQueryFieldNoBoostWithNSString:withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:", "makeLuceneQueryFieldNoBoost", "Lorg.apache.lucene.search.Query;", 0x1, NULL, NULL },
-    { "getFieldNames", NULL, "Ljava.util.List;", 0x1, NULL, NULL },
+    { "getFieldNames", NULL, "Ljava.util.List;", 0x1, NULL, "()Ljava/util/List<Ljava/lang/String;>;" },
     { "getFieldOperator", NULL, "C", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "fieldNamesToStringWithJavaLangStringBuilder:", "fieldNamesToString", "V", 0x4, NULL, NULL },
@@ -137,9 +137,11 @@ void OrgApacheLuceneQueryparserSurroundQueryFieldsQuery_initWithOrgApacheLuceneQ
 }
 
 OrgApacheLuceneQueryparserSurroundQueryFieldsQuery *new_OrgApacheLuceneQueryparserSurroundQueryFieldsQuery_initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery_withJavaUtilList_withChar_(OrgApacheLuceneQueryparserSurroundQuerySrndQuery *q, id<JavaUtilList> fieldNames, jchar fieldOp) {
-  OrgApacheLuceneQueryparserSurroundQueryFieldsQuery *self = [OrgApacheLuceneQueryparserSurroundQueryFieldsQuery alloc];
-  OrgApacheLuceneQueryparserSurroundQueryFieldsQuery_initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery_withJavaUtilList_withChar_(self, q, fieldNames, fieldOp);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserSurroundQueryFieldsQuery, initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery_withJavaUtilList_withChar_, q, fieldNames, fieldOp)
+}
+
+OrgApacheLuceneQueryparserSurroundQueryFieldsQuery *create_OrgApacheLuceneQueryparserSurroundQueryFieldsQuery_initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery_withJavaUtilList_withChar_(OrgApacheLuceneQueryparserSurroundQuerySrndQuery *q, id<JavaUtilList> fieldNames, jchar fieldOp) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserSurroundQueryFieldsQuery, initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery_withJavaUtilList_withChar_, q, fieldNames, fieldOp)
 }
 
 void OrgApacheLuceneQueryparserSurroundQueryFieldsQuery_initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery_withNSString_withChar_(OrgApacheLuceneQueryparserSurroundQueryFieldsQuery *self, OrgApacheLuceneQueryparserSurroundQuerySrndQuery *q, NSString *fieldName, jchar fieldOp) {
@@ -152,9 +154,11 @@ void OrgApacheLuceneQueryparserSurroundQueryFieldsQuery_initWithOrgApacheLuceneQ
 }
 
 OrgApacheLuceneQueryparserSurroundQueryFieldsQuery *new_OrgApacheLuceneQueryparserSurroundQueryFieldsQuery_initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery_withNSString_withChar_(OrgApacheLuceneQueryparserSurroundQuerySrndQuery *q, NSString *fieldName, jchar fieldOp) {
-  OrgApacheLuceneQueryparserSurroundQueryFieldsQuery *self = [OrgApacheLuceneQueryparserSurroundQueryFieldsQuery alloc];
-  OrgApacheLuceneQueryparserSurroundQueryFieldsQuery_initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery_withNSString_withChar_(self, q, fieldName, fieldOp);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserSurroundQueryFieldsQuery, initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery_withNSString_withChar_, q, fieldName, fieldOp)
+}
+
+OrgApacheLuceneQueryparserSurroundQueryFieldsQuery *create_OrgApacheLuceneQueryparserSurroundQueryFieldsQuery_initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery_withNSString_withChar_(OrgApacheLuceneQueryparserSurroundQuerySrndQuery *q, NSString *fieldName, jchar fieldOp) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserSurroundQueryFieldsQuery, initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery_withNSString_withChar_, q, fieldName, fieldOp)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserSurroundQueryFieldsQuery)

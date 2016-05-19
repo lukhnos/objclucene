@@ -5,24 +5,24 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgLukhnosPortmobileFileSimpleFileVisitor_INCLUDE_ALL")
-#if OrgLukhnosPortmobileFileSimpleFileVisitor_RESTRICT
-#define OrgLukhnosPortmobileFileSimpleFileVisitor_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgLukhnosPortmobileFileSimpleFileVisitor")
+#ifdef RESTRICT_OrgLukhnosPortmobileFileSimpleFileVisitor
+#define INCLUDE_ALL_OrgLukhnosPortmobileFileSimpleFileVisitor 0
 #else
-#define OrgLukhnosPortmobileFileSimpleFileVisitor_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgLukhnosPortmobileFileSimpleFileVisitor 1
 #endif
-#undef OrgLukhnosPortmobileFileSimpleFileVisitor_RESTRICT
+#undef RESTRICT_OrgLukhnosPortmobileFileSimpleFileVisitor
 
-#if !defined (_OrgLukhnosPortmobileFileSimpleFileVisitor_) && (OrgLukhnosPortmobileFileSimpleFileVisitor_INCLUDE_ALL || OrgLukhnosPortmobileFileSimpleFileVisitor_INCLUDE)
-#define _OrgLukhnosPortmobileFileSimpleFileVisitor_
+#if !defined (OrgLukhnosPortmobileFileSimpleFileVisitor_) && (INCLUDE_ALL_OrgLukhnosPortmobileFileSimpleFileVisitor || defined(INCLUDE_OrgLukhnosPortmobileFileSimpleFileVisitor))
+#define OrgLukhnosPortmobileFileSimpleFileVisitor_
 
-#define OrgLukhnosPortmobileFileFileVisitor_RESTRICT 1
-#define OrgLukhnosPortmobileFileFileVisitor_INCLUDE 1
+#define RESTRICT_OrgLukhnosPortmobileFileFileVisitor 1
+#define INCLUDE_OrgLukhnosPortmobileFileFileVisitor 1
 #include "org/lukhnos/portmobile/file/FileVisitor.h"
 
 @class JavaIoIOException;
 @class OrgLukhnosPortmobileFileAttributeBasicFileAttributes;
-@class OrgLukhnosPortmobileFileFileVisitResultEnum;
+@class OrgLukhnosPortmobileFileFileVisitResult;
 
 @interface OrgLukhnosPortmobileFileSimpleFileVisitor : NSObject < OrgLukhnosPortmobileFileFileVisitor >
 
@@ -30,17 +30,17 @@
 
 - (instancetype)init;
 
-- (OrgLukhnosPortmobileFileFileVisitResultEnum *)postVisitDirectoryWithId:(id)dir
-                                                    withJavaIoIOException:(JavaIoIOException *)exc;
+- (OrgLukhnosPortmobileFileFileVisitResult *)postVisitDirectoryWithId:(id)dir
+                                                withJavaIoIOException:(JavaIoIOException *)exc;
 
-- (OrgLukhnosPortmobileFileFileVisitResultEnum *)preVisitDirectoryWithId:(id)dir
-                withOrgLukhnosPortmobileFileAttributeBasicFileAttributes:(OrgLukhnosPortmobileFileAttributeBasicFileAttributes *)attrs;
+- (OrgLukhnosPortmobileFileFileVisitResult *)preVisitDirectoryWithId:(id)dir
+            withOrgLukhnosPortmobileFileAttributeBasicFileAttributes:(OrgLukhnosPortmobileFileAttributeBasicFileAttributes *)attrs;
 
-- (OrgLukhnosPortmobileFileFileVisitResultEnum *)visitFileWithId:(id)file
-        withOrgLukhnosPortmobileFileAttributeBasicFileAttributes:(OrgLukhnosPortmobileFileAttributeBasicFileAttributes *)attrs;
+- (OrgLukhnosPortmobileFileFileVisitResult *)visitFileWithId:(id)file
+    withOrgLukhnosPortmobileFileAttributeBasicFileAttributes:(OrgLukhnosPortmobileFileAttributeBasicFileAttributes *)attrs;
 
-- (OrgLukhnosPortmobileFileFileVisitResultEnum *)visitFileFailedWithId:(id)file
-                                                 withJavaIoIOException:(JavaIoIOException *)exc;
+- (OrgLukhnosPortmobileFileFileVisitResult *)visitFileFailedWithId:(id)file
+                                             withJavaIoIOException:(JavaIoIOException *)exc;
 
 @end
 
@@ -50,8 +50,10 @@ FOUNDATION_EXPORT void OrgLukhnosPortmobileFileSimpleFileVisitor_init(OrgLukhnos
 
 FOUNDATION_EXPORT OrgLukhnosPortmobileFileSimpleFileVisitor *new_OrgLukhnosPortmobileFileSimpleFileVisitor_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgLukhnosPortmobileFileSimpleFileVisitor *create_OrgLukhnosPortmobileFileSimpleFileVisitor_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileFileSimpleFileVisitor)
 
 #endif
 
-#pragma pop_macro("OrgLukhnosPortmobileFileSimpleFileVisitor_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileFileSimpleFileVisitor")

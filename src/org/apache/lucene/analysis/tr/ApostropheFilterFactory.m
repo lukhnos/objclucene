@@ -19,12 +19,12 @@
 }
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  return [new_OrgApacheLuceneAnalysisTrApostropheFilter_initWithOrgApacheLuceneAnalysisTokenStream_(input) autorelease];
+  return create_OrgApacheLuceneAnalysisTrApostropheFilter_initWithOrgApacheLuceneAnalysisTokenStream_(input);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "ApostropheFilterFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "ApostropheFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenStream;", 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTrApostropheFilterFactory = { 2, "ApostropheFilterFactory", "org.apache.lucene.analysis.tr", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
@@ -36,14 +36,16 @@
 void OrgApacheLuceneAnalysisTrApostropheFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisTrApostropheFilterFactory *self, id<JavaUtilMap> args) {
   OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameter(s): ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameter(s): ", args));
   }
 }
 
 OrgApacheLuceneAnalysisTrApostropheFilterFactory *new_OrgApacheLuceneAnalysisTrApostropheFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisTrApostropheFilterFactory *self = [OrgApacheLuceneAnalysisTrApostropheFilterFactory alloc];
-  OrgApacheLuceneAnalysisTrApostropheFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisTrApostropheFilterFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisTrApostropheFilterFactory *create_OrgApacheLuceneAnalysisTrApostropheFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisTrApostropheFilterFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisTrApostropheFilterFactory)

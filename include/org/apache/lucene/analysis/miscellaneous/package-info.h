@@ -3,14 +3,17 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/miscellaneous/package-info.java
 //
 
+/*!
+ @brief Miscellaneous Tokenstreams.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisMiscellaneousPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisMiscellaneousPackage_info_RESTRICT
-#define OrgApacheLuceneAnalysisMiscellaneousPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousPackage_info 0
 #else
-#define OrgApacheLuceneAnalysisMiscellaneousPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousPackage_info 1
 #endif
-#undef OrgApacheLuceneAnalysisMiscellaneousPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousPackage_info
 
-#pragma pop_macro("OrgApacheLuceneAnalysisMiscellaneousPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousPackage_info")

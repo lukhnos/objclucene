@@ -23,6 +23,9 @@
 
 @interface OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree () {
  @public
+  /*!
+   @brief Temporary map to store interletter values on pattern loading.
+   */
   OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree *ivalues_;
 }
 
@@ -43,7 +46,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   jint i, n = ((jint) [((NSString *) nil_chk(values)) length]);
   jint m = (n & 1) == 1 ? (JreRShift32(n, 1)) + 2 : (JreRShift32(n, 1)) + 1;
   jint offset = [((OrgApacheLuceneAnalysisCompoundHyphenationByteVector *) nil_chk(vspace_)) alloc__WithInt:m];
-  IOSByteArray *va = [vspace_ getArray];
+  IOSByteArray *va = [((OrgApacheLuceneAnalysisCompoundHyphenationByteVector *) nil_chk(vspace_)) getArray];
   for (i = 0; i < n; i++) {
     jint j = JreRShift32(i, 1);
     jbyte v = (jbyte) (([values charAtWithInt:i] - '0' + 1) & (jint) 0x0f);
@@ -59,7 +62,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (NSString *)unpackValuesWithInt:(jint)k {
-  JavaLangStringBuilder *buf = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *buf = create_JavaLangStringBuilder_init();
   jbyte v = [((OrgApacheLuceneAnalysisCompoundHyphenationByteVector *) nil_chk(vspace_)) getWithInt:k++];
   while (v != 0) {
     jchar c = (jchar) ((JreURShift32(v, 4)) - 1 + '0');
@@ -70,13 +73,13 @@ J2OBJC_IGNORE_DESIGNATED_END
     }
     c = (jchar) (c - 1 + '0');
     [buf appendWithChar:c];
-    v = [vspace_ getWithInt:k++];
+    v = [((OrgApacheLuceneAnalysisCompoundHyphenationByteVector *) nil_chk(vspace_)) getWithInt:k++];
   }
   return [buf description];
 }
 
 - (void)loadPatternsWithOrgXmlSaxInputSource:(OrgXmlSaxInputSource *)source {
-  OrgApacheLuceneAnalysisCompoundHyphenationPatternParser *pp = [new_OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_initWithOrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer_(self) autorelease];
+  OrgApacheLuceneAnalysisCompoundHyphenationPatternParser *pp = create_OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_initWithOrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer_(self);
   JreStrongAssignAndConsume(&ivalues_, new_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_init());
   [pp parseWithOrgXmlSaxInputSource:source];
   [self trimToSize];
@@ -109,7 +112,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (IOSByteArray *)getValuesWithInt:(jint)k {
-  JavaLangStringBuilder *buf = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *buf = create_JavaLangStringBuilder_init();
   jbyte v = [((OrgApacheLuceneAnalysisCompoundHyphenationByteVector *) nil_chk(vspace_)) getWithInt:k++];
   while (v != 0) {
     jchar c = (jchar) ((JreURShift32(v, 4)) - 1);
@@ -120,7 +123,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     }
     c = (jchar) (c - 1);
     [buf appendWithChar:c];
-    v = [vspace_ getWithInt:k++];
+    v = [((OrgApacheLuceneAnalysisCompoundHyphenationByteVector *) nil_chk(vspace_)) getWithInt:k++];
   }
   IOSByteArray *res = [IOSByteArray arrayWithLength:[buf length]];
   for (jint i = 0; i < res->size_; i++) {
@@ -232,12 +235,12 @@ J2OBJC_IGNORE_DESIGNATED_END
   jint k = 0;
   NSString *sw = [NSString stringWithCharacters:word offset:1 length:len];
   if ([((JavaUtilHashMap *) nil_chk(stoplist_)) containsKeyWithId:sw]) {
-    JavaUtilArrayList *hw = [stoplist_ getWithId:sw];
+    JavaUtilArrayList *hw = [((JavaUtilHashMap *) nil_chk(stoplist_)) getWithId:sw];
     jint j = 0;
     for (i = 0; i < [((JavaUtilArrayList *) nil_chk(hw)) size]; i++) {
       id o = [hw getWithInt:i];
       if ([o isKindOfClass:[NSString class]]) {
-        j += ((jint) [((NSString *) nil_chk(((NSString *) check_class_cast(o, [NSString class])))) length]);
+        j += ((jint) [((NSString *) nil_chk(((NSString *) cast_chk(o, [NSString class])))) length]);
         if (j >= remainCharCount && j < (len - pushCharCount)) {
           *IOSIntArray_GetRef(result, k++) = j + iIgnoreAtBeginning;
         }
@@ -263,7 +266,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(result, 0, res, 1, k);
     *IOSIntArray_GetRef(res, 0) = 0;
     *IOSIntArray_GetRef(res, k + 1) = len;
-    return [new_OrgApacheLuceneAnalysisCompoundHyphenationHyphenation_initWithIntArray_(res) autorelease];
+    return create_OrgApacheLuceneAnalysisCompoundHyphenationHyphenation_initWithIntArray_(res);
   }
   else {
     return nil;
@@ -292,7 +295,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   jint k = [((OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree *) nil_chk(ivalues_)) findWithNSString:ivalue];
   if (k <= 0) {
     k = [self packValuesWithNSString:ivalue];
-    [ivalues_ insertWithNSString:ivalue withChar:(jchar) k];
+    [((OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree *) nil_chk(ivalues_)) insertWithNSString:ivalue withChar:(jchar) k];
   }
   [self insertWithNSString:pattern withChar:(jchar) k];
 }
@@ -323,7 +326,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "hyphenateWithNSString:withInt:withInt:", "hyphenate", "Lorg.apache.lucene.analysis.compound.hyphenation.Hyphenation;", 0x1, NULL, NULL },
     { "hyphenateWithCharArray:withInt:withInt:withInt:withInt:", "hyphenate", "Lorg.apache.lucene.analysis.compound.hyphenation.Hyphenation;", 0x1, NULL, NULL },
     { "addClassWithNSString:", "addClass", "V", 0x1, NULL, NULL },
-    { "addExceptionWithNSString:withJavaUtilArrayList:", "addException", "V", 0x1, NULL, NULL },
+    { "addExceptionWithNSString:withJavaUtilArrayList:", "addException", "V", 0x1, NULL, "(Ljava/lang/String;Ljava/util/ArrayList<Ljava/lang/Object;>;)V" },
     { "addPatternWithNSString:withNSString:", "addPattern", "V", 0x1, NULL, NULL },
     { "printStatsWithJavaIoPrintStream:", "printStats", "V", 0x1, NULL, NULL },
   };
@@ -348,9 +351,11 @@ void OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree_init(OrgApacheLuc
 }
 
 OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *new_OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree_init() {
-  OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *self = [OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree alloc];
-  OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree, init)
+}
+
+OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *create_OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree)

@@ -5,24 +5,41 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisSnowballSnowballFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisSnowballSnowballFilter_RESTRICT
-#define OrgApacheLuceneAnalysisSnowballSnowballFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisSnowballSnowballFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisSnowballSnowballFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisSnowballSnowballFilter 0
 #else
-#define OrgApacheLuceneAnalysisSnowballSnowballFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisSnowballSnowballFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisSnowballSnowballFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisSnowballSnowballFilter
 
-#if !defined (_OrgApacheLuceneAnalysisSnowballSnowballFilter_) && (OrgApacheLuceneAnalysisSnowballSnowballFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisSnowballSnowballFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisSnowballSnowballFilter_
+#if !defined (OrgApacheLuceneAnalysisSnowballSnowballFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisSnowballSnowballFilter || defined(INCLUDE_OrgApacheLuceneAnalysisSnowballSnowballFilter))
+#define OrgApacheLuceneAnalysisSnowballSnowballFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 @class OrgTartarusSnowballSnowballProgram;
 
+/*!
+ @brief A filter that stems words using a Snowball-generated stemmer.
+ Available stemmers are listed in <code>org.tartarus.snowball.ext</code>.
+ <p><b>NOTE</b>: SnowballFilter expects lowercased text.
+ <ul>
+ <li>For the Turkish language, see <code>TurkishLowerCaseFilter</code>.
+ <li>For other languages, see <code>LowerCaseFilter</code>.
+ </ul>
+ <p>
+ Note: This filter is aware of the <code>KeywordAttribute</code>. To prevent
+ certain terms from being passed to the stemmer
+ <code>KeywordAttribute.isKeyword()</code> should be set to <code>true</code>
+ in a previous <code>TokenStream</code>.
+ Note: For including the original term as well as the stemmed version, see
+ <code>org.apache.lucene.analysis.miscellaneous.KeywordRepeatFilterFactory</code>
+ </p>
+ */
 @interface OrgApacheLuceneAnalysisSnowballSnowballFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
@@ -30,9 +47,20 @@
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
                     withOrgTartarusSnowballSnowballProgram:(OrgTartarusSnowballSnowballProgram *)stemmer;
 
+/*!
+ @brief Construct the named stemming filter.
+ Available stemmers are listed in <code>org.tartarus.snowball.ext</code>.
+ The name of a stemmer is the part of the class name before "Stemmer",
+ e.g., the stemmer in <code>org.tartarus.snowball.ext.EnglishStemmer</code> is named "English".
+ @param inArg the input tokens to stem
+ @param name the name of a stemmer
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
                                               withNSString:(NSString *)name;
 
+/*!
+ @brief Returns the next input Token, after being stemmed
+ */
 - (jboolean)incrementToken;
 
 @end
@@ -43,12 +71,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSnowballSnowballFilter_initWithOrg
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisSnowballSnowballFilter *new_OrgApacheLuceneAnalysisSnowballSnowballFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgTartarusSnowballSnowballProgram_(OrgApacheLuceneAnalysisTokenStream *input, OrgTartarusSnowballSnowballProgram *stemmer) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisSnowballSnowballFilter *create_OrgApacheLuceneAnalysisSnowballSnowballFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgTartarusSnowballSnowballProgram_(OrgApacheLuceneAnalysisTokenStream *input, OrgTartarusSnowballSnowballProgram *stemmer);
+
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSnowballSnowballFilter_initWithOrgApacheLuceneAnalysisTokenStream_withNSString_(OrgApacheLuceneAnalysisSnowballSnowballFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg, NSString *name);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisSnowballSnowballFilter *new_OrgApacheLuceneAnalysisSnowballSnowballFilter_initWithOrgApacheLuceneAnalysisTokenStream_withNSString_(OrgApacheLuceneAnalysisTokenStream *inArg, NSString *name) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisSnowballSnowballFilter *create_OrgApacheLuceneAnalysisSnowballSnowballFilter_initWithOrgApacheLuceneAnalysisTokenStream_withNSString_(OrgApacheLuceneAnalysisTokenStream *inArg, NSString *name);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSnowballSnowballFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisSnowballSnowballFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisSnowballSnowballFilter")

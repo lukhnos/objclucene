@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchJoinTermsQuery_INCLUDE_ALL")
-#if OrgApacheLuceneSearchJoinTermsQuery_RESTRICT
-#define OrgApacheLuceneSearchJoinTermsQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinTermsQuery")
+#ifdef RESTRICT_OrgApacheLuceneSearchJoinTermsQuery
+#define INCLUDE_ALL_OrgApacheLuceneSearchJoinTermsQuery 0
 #else
-#define OrgApacheLuceneSearchJoinTermsQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchJoinTermsQuery 1
 #endif
-#undef OrgApacheLuceneSearchJoinTermsQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchJoinTermsQuery
 
-#if !defined (_OrgApacheLuceneSearchJoinTermsQuery_) && (OrgApacheLuceneSearchJoinTermsQuery_INCLUDE_ALL || OrgApacheLuceneSearchJoinTermsQuery_INCLUDE)
-#define _OrgApacheLuceneSearchJoinTermsQuery_
+#if !defined (OrgApacheLuceneSearchJoinTermsQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinTermsQuery || defined(INCLUDE_OrgApacheLuceneSearchJoinTermsQuery))
+#define OrgApacheLuceneSearchJoinTermsQuery_
 
-#define OrgApacheLuceneSearchMultiTermQuery_RESTRICT 1
-#define OrgApacheLuceneSearchMultiTermQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchMultiTermQuery 1
+#define INCLUDE_OrgApacheLuceneSearchMultiTermQuery 1
 #include "org/apache/lucene/search/MultiTermQuery.h"
 
 @class OrgApacheLuceneIndexTerms;
@@ -26,6 +26,11 @@
 @class OrgApacheLuceneUtilAttributeSource;
 @class OrgApacheLuceneUtilBytesRefHash;
 
+/*!
+ @brief A query that has an array of terms from a specific field.
+ This query will match documents have one or more terms in
+ the specified field that match with the terms specified in the array.
+ */
 @interface OrgApacheLuceneSearchJoinTermsQuery : OrgApacheLuceneSearchMultiTermQuery
 
 #pragma mark Public
@@ -43,6 +48,10 @@
 
 #pragma mark Package-Private
 
+/*!
+ @param field The field that should contain terms that are specified in the previous parameter
+ @param terms The terms that matching documents should have. The terms must be sorted by natural order.
+ */
 - (instancetype)initWithNSString:(NSString *)field
   withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)fromQuery
 withOrgApacheLuceneUtilBytesRefHash:(OrgApacheLuceneUtilBytesRefHash *)terms;
@@ -55,19 +64,21 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinTermsQuery_initWithNSString_with
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsQuery *new_OrgApacheLuceneSearchJoinTermsQuery_initWithNSString_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneUtilBytesRefHash_(NSString *field, OrgApacheLuceneSearchQuery *fromQuery, OrgApacheLuceneUtilBytesRefHash *terms) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsQuery *create_OrgApacheLuceneSearchJoinTermsQuery_initWithNSString_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneUtilBytesRefHash_(NSString *field, OrgApacheLuceneSearchQuery *fromQuery, OrgApacheLuceneUtilBytesRefHash *terms);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsQuery)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchJoinTermsQuery_SeekingTermSetTermsEnum_) && (OrgApacheLuceneSearchJoinTermsQuery_INCLUDE_ALL || OrgApacheLuceneSearchJoinTermsQuery_SeekingTermSetTermsEnum_INCLUDE)
-#define _OrgApacheLuceneSearchJoinTermsQuery_SeekingTermSetTermsEnum_
+#if !defined (OrgApacheLuceneSearchJoinTermsQuery_SeekingTermSetTermsEnum_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinTermsQuery || defined(INCLUDE_OrgApacheLuceneSearchJoinTermsQuery_SeekingTermSetTermsEnum))
+#define OrgApacheLuceneSearchJoinTermsQuery_SeekingTermSetTermsEnum_
 
-#define OrgApacheLuceneIndexFilteredTermsEnum_RESTRICT 1
-#define OrgApacheLuceneIndexFilteredTermsEnum_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexFilteredTermsEnum 1
+#define INCLUDE_OrgApacheLuceneIndexFilteredTermsEnum 1
 #include "org/apache/lucene/index/FilteredTermsEnum.h"
 
 @class IOSIntArray;
-@class OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum;
+@class OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus;
 @class OrgApacheLuceneIndexTermsEnum;
 @class OrgApacheLuceneUtilBytesRef;
 @class OrgApacheLuceneUtilBytesRefHash;
@@ -76,7 +87,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsQuery)
 
 #pragma mark Protected
 
-- (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
+- (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
 
 - (OrgApacheLuceneUtilBytesRef *)nextSeekTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)currentTerm;
 
@@ -94,8 +105,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinTermsQuery_SeekingTermSetTermsEn
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsQuery_SeekingTermSetTermsEnum *new_OrgApacheLuceneSearchJoinTermsQuery_SeekingTermSetTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilBytesRefHash_withIntArray_(OrgApacheLuceneIndexTermsEnum *tenum, OrgApacheLuceneUtilBytesRefHash *terms, IOSIntArray *ords) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsQuery_SeekingTermSetTermsEnum *create_OrgApacheLuceneSearchJoinTermsQuery_SeekingTermSetTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilBytesRefHash_withIntArray_(OrgApacheLuceneIndexTermsEnum *tenum, OrgApacheLuceneUtilBytesRefHash *terms, IOSIntArray *ords);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsQuery_SeekingTermSetTermsEnum)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchJoinTermsQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinTermsQuery")

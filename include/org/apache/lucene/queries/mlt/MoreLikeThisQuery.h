@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesMltMoreLikeThisQuery_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesMltMoreLikeThisQuery_RESTRICT
-#define OrgApacheLuceneQueriesMltMoreLikeThisQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesMltMoreLikeThisQuery")
+#ifdef RESTRICT_OrgApacheLuceneQueriesMltMoreLikeThisQuery
+#define INCLUDE_ALL_OrgApacheLuceneQueriesMltMoreLikeThisQuery 0
 #else
-#define OrgApacheLuceneQueriesMltMoreLikeThisQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesMltMoreLikeThisQuery 1
 #endif
-#undef OrgApacheLuceneQueriesMltMoreLikeThisQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesMltMoreLikeThisQuery
 
-#if !defined (_OrgApacheLuceneQueriesMltMoreLikeThisQuery_) && (OrgApacheLuceneQueriesMltMoreLikeThisQuery_INCLUDE_ALL || OrgApacheLuceneQueriesMltMoreLikeThisQuery_INCLUDE)
-#define _OrgApacheLuceneQueriesMltMoreLikeThisQuery_
+#if !defined (OrgApacheLuceneQueriesMltMoreLikeThisQuery_) && (INCLUDE_ALL_OrgApacheLuceneQueriesMltMoreLikeThisQuery || defined(INCLUDE_OrgApacheLuceneQueriesMltMoreLikeThisQuery))
+#define OrgApacheLuceneQueriesMltMoreLikeThisQuery_
 
-#define OrgApacheLuceneSearchQuery_RESTRICT 1
-#define OrgApacheLuceneSearchQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchQuery 1
+#define INCLUDE_OrgApacheLuceneSearchQuery 1
 #include "org/apache/lucene/search/Query.h"
 
 @class IOSObjectArray;
@@ -25,10 +25,19 @@
 @class OrgApacheLuceneIndexIndexReader;
 @protocol JavaUtilSet;
 
+/*!
+ @brief A simple wrapper for MoreLikeThis for use in scenarios where a Query object is required eg
+ in custom QueryParser extensions.
+ At query.rewrite() time the reader is used to construct the
+ actual MoreLikeThis object and obtain the real Query object.
+ */
 @interface OrgApacheLuceneQueriesMltMoreLikeThisQuery : OrgApacheLuceneSearchQuery
 
 #pragma mark Public
 
+/*!
+ @param moreLikeFields fields used for similarity measure
+ */
 - (instancetype)initWithNSString:(NSString *)likeText
                withNSStringArray:(IOSObjectArray *)moreLikeFields
 withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
@@ -82,8 +91,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueriesMltMoreLikeThisQuery_initWithNSStri
 
 FOUNDATION_EXPORT OrgApacheLuceneQueriesMltMoreLikeThisQuery *new_OrgApacheLuceneQueriesMltMoreLikeThisQuery_initWithNSString_withNSStringArray_withOrgApacheLuceneAnalysisAnalyzer_withNSString_(NSString *likeText, IOSObjectArray *moreLikeFields, OrgApacheLuceneAnalysisAnalyzer *analyzer, NSString *fieldName) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueriesMltMoreLikeThisQuery *create_OrgApacheLuceneQueriesMltMoreLikeThisQuery_initWithNSString_withNSStringArray_withOrgApacheLuceneAnalysisAnalyzer_withNSString_(NSString *likeText, IOSObjectArray *moreLikeFields, OrgApacheLuceneAnalysisAnalyzer *analyzer, NSString *fieldName);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesMltMoreLikeThisQuery)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesMltMoreLikeThisQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesMltMoreLikeThisQuery")

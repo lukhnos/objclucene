@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilFstNodeHash_INCLUDE_ALL")
-#if OrgApacheLuceneUtilFstNodeHash_RESTRICT
-#define OrgApacheLuceneUtilFstNodeHash_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstNodeHash")
+#ifdef RESTRICT_OrgApacheLuceneUtilFstNodeHash
+#define INCLUDE_ALL_OrgApacheLuceneUtilFstNodeHash 0
 #else
-#define OrgApacheLuceneUtilFstNodeHash_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilFstNodeHash 1
 #endif
-#undef OrgApacheLuceneUtilFstNodeHash_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilFstNodeHash
 
-#if !defined (_OrgApacheLuceneUtilFstNodeHash_) && (OrgApacheLuceneUtilFstNodeHash_INCLUDE_ALL || OrgApacheLuceneUtilFstNodeHash_INCLUDE)
-#define _OrgApacheLuceneUtilFstNodeHash_
+#if !defined (OrgApacheLuceneUtilFstNodeHash_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstNodeHash || defined(INCLUDE_OrgApacheLuceneUtilFstNodeHash))
+#define OrgApacheLuceneUtilFstNodeHash_
 
 @class OrgApacheLuceneUtilFstBuilder;
 @class OrgApacheLuceneUtilFstBuilder_UnCompiledNode;
@@ -39,8 +39,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilFstNodeHash_initWithOrgApacheLuceneUti
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilFstNodeHash *new_OrgApacheLuceneUtilFstNodeHash_initWithOrgApacheLuceneUtilFstFST_withOrgApacheLuceneUtilFstFST_BytesReader_(OrgApacheLuceneUtilFstFST *fst, OrgApacheLuceneUtilFstFST_BytesReader *inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstNodeHash *create_OrgApacheLuceneUtilFstNodeHash_initWithOrgApacheLuceneUtilFstFST_withOrgApacheLuceneUtilFstFST_BytesReader_(OrgApacheLuceneUtilFstFST *fst, OrgApacheLuceneUtilFstFST_BytesReader *inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstNodeHash)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilFstNodeHash_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstNodeHash")

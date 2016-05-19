@@ -5,32 +5,32 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilPackedAbstractPagedMutable_INCLUDE_ALL")
-#if OrgApacheLuceneUtilPackedAbstractPagedMutable_RESTRICT
-#define OrgApacheLuceneUtilPackedAbstractPagedMutable_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedAbstractPagedMutable")
+#ifdef RESTRICT_OrgApacheLuceneUtilPackedAbstractPagedMutable
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackedAbstractPagedMutable 0
 #else
-#define OrgApacheLuceneUtilPackedAbstractPagedMutable_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackedAbstractPagedMutable 1
 #endif
-#undef OrgApacheLuceneUtilPackedAbstractPagedMutable_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilPackedAbstractPagedMutable
 
-#if !defined (_OrgApacheLuceneUtilPackedAbstractPagedMutable_) && (OrgApacheLuceneUtilPackedAbstractPagedMutable_INCLUDE_ALL || OrgApacheLuceneUtilPackedAbstractPagedMutable_INCLUDE)
-#define _OrgApacheLuceneUtilPackedAbstractPagedMutable_
+#if !defined (OrgApacheLuceneUtilPackedAbstractPagedMutable_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedAbstractPagedMutable || defined(INCLUDE_OrgApacheLuceneUtilPackedAbstractPagedMutable))
+#define OrgApacheLuceneUtilPackedAbstractPagedMutable_
 
-#define OrgApacheLuceneUtilLongValues_RESTRICT 1
-#define OrgApacheLuceneUtilLongValues_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilLongValues 1
+#define INCLUDE_OrgApacheLuceneUtilLongValues 1
 #include "org/apache/lucene/util/LongValues.h"
 
-#define OrgApacheLuceneUtilAccountable_RESTRICT 1
-#define OrgApacheLuceneUtilAccountable_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAccountable 1
+#define INCLUDE_OrgApacheLuceneUtilAccountable 1
 #include "org/apache/lucene/util/Accountable.h"
 
 @class IOSObjectArray;
 @class OrgApacheLuceneUtilPackedPackedInts_Mutable;
 @protocol JavaUtilCollection;
 
-#define OrgApacheLuceneUtilPackedAbstractPagedMutable_MIN_BLOCK_SIZE 64
-#define OrgApacheLuceneUtilPackedAbstractPagedMutable_MAX_BLOCK_SIZE 1073741824
-
+/*!
+ @brief Base implementation for <code>PagedMutable</code> and <code>PagedGrowableWriter</code>.
+ */
 @interface OrgApacheLuceneUtilPackedAbstractPagedMutable : OrgApacheLuceneUtilLongValues < OrgApacheLuceneUtilAccountable > {
  @public
   jlong size_;
@@ -40,23 +40,45 @@
   jint bitsPerValue_;
 }
 
++ (jint)MIN_BLOCK_SIZE;
+
++ (jint)MAX_BLOCK_SIZE;
+
 #pragma mark Public
 
 - (jlong)getWithLong:(jlong)index;
 
 - (id<JavaUtilCollection>)getChildResources;
 
+/*!
+ @brief Similar to <code>ArrayUtil.grow(long[])</code>.
+ */
 - (id)grow;
 
+/*!
+ @brief Similar to <code>ArrayUtil.grow(long[],int)</code>.
+ */
 - (id)growWithLong:(jlong)minSize;
 
 - (jlong)ramBytesUsed;
 
+/*!
+ @brief Create a new copy of size <code>newSize</code> based on the content of
+ this buffer.
+ This method is much more efficient than creating a new
+ instance and copying values one by one. 
+ */
 - (id)resizeWithLong:(jlong)newSize;
 
+/*!
+ @brief Set value at <code>index</code>.
+ */
 - (void)setWithLong:(jlong)index
            withLong:(jlong)value;
 
+/*!
+ @brief The number of values.
+ */
 - (jlong)size;
 
 - (NSString *)description;
@@ -92,9 +114,13 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilPackedAbstractPagedMutable)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedAbstractPagedMutable, subMutables_, IOSObjectArray *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilPackedAbstractPagedMutable, MIN_BLOCK_SIZE, jint)
+inline jint OrgApacheLuceneUtilPackedAbstractPagedMutable_get_MIN_BLOCK_SIZE();
+#define OrgApacheLuceneUtilPackedAbstractPagedMutable_MIN_BLOCK_SIZE 64
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilPackedAbstractPagedMutable, MIN_BLOCK_SIZE, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilPackedAbstractPagedMutable, MAX_BLOCK_SIZE, jint)
+inline jint OrgApacheLuceneUtilPackedAbstractPagedMutable_get_MAX_BLOCK_SIZE();
+#define OrgApacheLuceneUtilPackedAbstractPagedMutable_MAX_BLOCK_SIZE 1073741824
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilPackedAbstractPagedMutable, MAX_BLOCK_SIZE, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedAbstractPagedMutable_initWithInt_withLong_withInt_(OrgApacheLuceneUtilPackedAbstractPagedMutable *self, jint bitsPerValue, jlong size, jint pageSize);
 
@@ -102,4 +128,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedAbstractPagedMutable)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilPackedAbstractPagedMutable_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedAbstractPagedMutable")

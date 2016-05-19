@@ -5,25 +5,30 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchDocValuesRewriteMethod_INCLUDE_ALL")
-#if OrgApacheLuceneSearchDocValuesRewriteMethod_RESTRICT
-#define OrgApacheLuceneSearchDocValuesRewriteMethod_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchDocValuesRewriteMethod")
+#ifdef RESTRICT_OrgApacheLuceneSearchDocValuesRewriteMethod
+#define INCLUDE_ALL_OrgApacheLuceneSearchDocValuesRewriteMethod 0
 #else
-#define OrgApacheLuceneSearchDocValuesRewriteMethod_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchDocValuesRewriteMethod 1
 #endif
-#undef OrgApacheLuceneSearchDocValuesRewriteMethod_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchDocValuesRewriteMethod
 
-#if !defined (_OrgApacheLuceneSearchDocValuesRewriteMethod_) && (OrgApacheLuceneSearchDocValuesRewriteMethod_INCLUDE_ALL || OrgApacheLuceneSearchDocValuesRewriteMethod_INCLUDE)
-#define _OrgApacheLuceneSearchDocValuesRewriteMethod_
+#if !defined (OrgApacheLuceneSearchDocValuesRewriteMethod_) && (INCLUDE_ALL_OrgApacheLuceneSearchDocValuesRewriteMethod || defined(INCLUDE_OrgApacheLuceneSearchDocValuesRewriteMethod))
+#define OrgApacheLuceneSearchDocValuesRewriteMethod_
 
-#define OrgApacheLuceneSearchMultiTermQuery_RESTRICT 1
-#define OrgApacheLuceneSearchMultiTermQuery_RewriteMethod_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchMultiTermQuery 1
+#define INCLUDE_OrgApacheLuceneSearchMultiTermQuery_RewriteMethod 1
 #include "org/apache/lucene/search/MultiTermQuery.h"
 
 @class OrgApacheLuceneIndexIndexReader;
 @class OrgApacheLuceneSearchMultiTermQuery;
 @class OrgApacheLuceneSearchQuery;
 
+/*!
+ @brief Rewrites MultiTermQueries into a filter, using DocValues for term enumeration.
+ <p>
+ This can be used to perform these queries against an unindexed docvalues field.
+ */
 @interface OrgApacheLuceneSearchDocValuesRewriteMethod : OrgApacheLuceneSearchMultiTermQuery_RewriteMethod
 
 #pragma mark Public
@@ -45,15 +50,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchDocValuesRewriteMethod_init(OrgApach
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchDocValuesRewriteMethod *new_OrgApacheLuceneSearchDocValuesRewriteMethod_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchDocValuesRewriteMethod *create_OrgApacheLuceneSearchDocValuesRewriteMethod_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesRewriteMethod)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_) && (OrgApacheLuceneSearchDocValuesRewriteMethod_INCLUDE_ALL || OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_INCLUDE)
-#define _OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_
+#if !defined (OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_) && (INCLUDE_ALL_OrgApacheLuceneSearchDocValuesRewriteMethod || defined(INCLUDE_OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper))
+#define OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_
 
-#define OrgApacheLuceneSearchQuery_RESTRICT 1
-#define OrgApacheLuceneSearchQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchQuery 1
+#define INCLUDE_OrgApacheLuceneSearchQuery 1
 #include "org/apache/lucene/search/Query.h"
 
 @class OrgApacheLuceneSearchIndexSearcher;
@@ -72,6 +79,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesRewriteMethod)
 
 - (jboolean)isEqual:(id)o;
 
+/*!
+ @brief Returns the field name for this query
+ */
 - (NSString *)getField;
 
 - (NSUInteger)hash;
@@ -80,6 +90,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesRewriteMethod)
 
 #pragma mark Protected
 
+/*!
+ @brief Wrap a <code>MultiTermQuery</code> as a Filter.
+ */
 - (instancetype)initWithOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query;
 
 @end
@@ -92,8 +105,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQuer
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper *new_OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_initWithOrgApacheLuceneSearchMultiTermQuery_(OrgApacheLuceneSearchMultiTermQuery *query) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper *create_OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_initWithOrgApacheLuceneSearchMultiTermQuery_(OrgApacheLuceneSearchMultiTermQuery *query);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchDocValuesRewriteMethod_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchDocValuesRewriteMethod")

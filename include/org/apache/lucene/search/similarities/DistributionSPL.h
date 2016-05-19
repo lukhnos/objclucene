@@ -5,27 +5,37 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSimilaritiesDistributionSPL_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSimilaritiesDistributionSPL_RESTRICT
-#define OrgApacheLuceneSearchSimilaritiesDistributionSPL_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesDistributionSPL")
+#ifdef RESTRICT_OrgApacheLuceneSearchSimilaritiesDistributionSPL
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesDistributionSPL 0
 #else
-#define OrgApacheLuceneSearchSimilaritiesDistributionSPL_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesDistributionSPL 1
 #endif
-#undef OrgApacheLuceneSearchSimilaritiesDistributionSPL_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSimilaritiesDistributionSPL
 
-#if !defined (_OrgApacheLuceneSearchSimilaritiesDistributionSPL_) && (OrgApacheLuceneSearchSimilaritiesDistributionSPL_INCLUDE_ALL || OrgApacheLuceneSearchSimilaritiesDistributionSPL_INCLUDE)
-#define _OrgApacheLuceneSearchSimilaritiesDistributionSPL_
+#if !defined (OrgApacheLuceneSearchSimilaritiesDistributionSPL_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesDistributionSPL || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesDistributionSPL))
+#define OrgApacheLuceneSearchSimilaritiesDistributionSPL_
 
-#define OrgApacheLuceneSearchSimilaritiesDistribution_RESTRICT 1
-#define OrgApacheLuceneSearchSimilaritiesDistribution_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSimilaritiesDistribution 1
+#define INCLUDE_OrgApacheLuceneSearchSimilaritiesDistribution 1
 #include "org/apache/lucene/search/similarities/Distribution.h"
 
 @class OrgApacheLuceneSearchSimilaritiesBasicStats;
 
+/*!
+ @brief The smoothed power-law (SPL) distribution for the information-based framework
+ that is described in the original paper.
+ <p>Unlike for DFR, the natural logarithm is used, as
+ it is faster to compute and the original paper does not express any
+ preference to a specific base.</p>
+ */
 @interface OrgApacheLuceneSearchSimilaritiesDistributionSPL : OrgApacheLuceneSearchSimilaritiesDistribution
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor: parameter-free
+ */
 - (instancetype)init;
 
 - (jfloat)scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
@@ -42,8 +52,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesDistributionSPL_init(Org
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesDistributionSPL *new_OrgApacheLuceneSearchSimilaritiesDistributionSPL_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesDistributionSPL *create_OrgApacheLuceneSearchSimilaritiesDistributionSPL_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesDistributionSPL)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSimilaritiesDistributionSPL_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesDistributionSPL")

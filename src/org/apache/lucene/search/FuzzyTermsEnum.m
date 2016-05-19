@@ -51,8 +51,15 @@
   OrgApacheLuceneUtilBytesRef *queuedBottom_;
 }
 
+/*!
+ @brief initialize levenshtein DFAs up to maxDistance, if possible
+ */
 - (id<JavaUtilList>)initAutomataWithInt:(jint)maxDistance OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief fired when the max non-competitive boost has changed. this is the hook to
+ swap in a smarter actualEnum
+ */
 - (void)bottomChangedWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)lastTerm
                                          withBoolean:(jboolean)init_;
 
@@ -81,6 +88,13 @@ __attribute__((unused)) static jint OrgApacheLuceneSearchFuzzyTermsEnum_initialM
 
 __attribute__((unused)) static jfloat OrgApacheLuceneSearchFuzzyTermsEnum_calculateMaxBoostWithInt_(OrgApacheLuceneSearchFuzzyTermsEnum *self, jint nEdits);
 
+/*!
+ @brief Implement fuzzy enumeration with Terms.intersect.
+ <p>
+ This is the fastest method as opposed to LinearFuzzyTermsEnum:
+ as enumeration is logarithmic to the number of terms (instead of linear)
+ and comparison is linear to length of the term (rather than quadratic)
+ */
 @interface OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFuzzyTermsEnum : OrgApacheLuceneIndexFilteredTermsEnum {
  @public
   OrgApacheLuceneSearchFuzzyTermsEnum *this$0_;
@@ -93,8 +107,14 @@ __attribute__((unused)) static jfloat OrgApacheLuceneSearchFuzzyTermsEnum_calcul
                           withOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)tenum
      withOrgApacheLuceneUtilAutomatonCompiledAutomatonArray:(IOSObjectArray *)compiled;
 
-- (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
+/*!
+ @brief finds the smallest Lev(n) DFA that accepts the term.
+ */
+- (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
 
+/*!
+ @brief returns true if term is within k edits of the query term
+ */
 - (jboolean)matchesWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term
                                            withInt:(jint)k;
 
@@ -110,6 +130,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFuzzyTermsEnum,
 __attribute__((unused)) static void OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFuzzyTermsEnum_initWithOrgApacheLuceneSearchFuzzyTermsEnum_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilAutomatonCompiledAutomatonArray_(OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFuzzyTermsEnum *self, OrgApacheLuceneSearchFuzzyTermsEnum *outer$, OrgApacheLuceneIndexTermsEnum *tenum, IOSObjectArray *compiled);
 
 __attribute__((unused)) static OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFuzzyTermsEnum *new_OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFuzzyTermsEnum_initWithOrgApacheLuceneSearchFuzzyTermsEnum_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilAutomatonCompiledAutomatonArray_(OrgApacheLuceneSearchFuzzyTermsEnum *outer$, OrgApacheLuceneIndexTermsEnum *tenum, IOSObjectArray *compiled) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFuzzyTermsEnum *create_OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFuzzyTermsEnum_initWithOrgApacheLuceneSearchFuzzyTermsEnum_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilAutomatonCompiledAutomatonArray_(OrgApacheLuceneSearchFuzzyTermsEnum *outer$, OrgApacheLuceneIndexTermsEnum *tenum, IOSObjectArray *compiled);
 
 __attribute__((unused)) static jboolean OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFuzzyTermsEnum_matchesWithOrgApacheLuceneUtilBytesRef_withInt_(OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFuzzyTermsEnum *self, OrgApacheLuceneUtilBytesRef *term, jint k);
 
@@ -145,7 +167,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttri
   id<JavaUtilList> runAutomata = OrgApacheLuceneSearchFuzzyTermsEnum_initAutomataWithInt_(self, editDistance);
   if (editDistance < [((id<JavaUtilList>) nil_chk(runAutomata)) size]) {
     OrgApacheLuceneUtilAutomatonCompiledAutomaton *compiled = [runAutomata getWithInt:editDistance];
-    return [new_OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFuzzyTermsEnum_initWithOrgApacheLuceneSearchFuzzyTermsEnum_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilAutomatonCompiledAutomatonArray_(self, [((OrgApacheLuceneIndexTerms *) nil_chk(terms_)) intersectWithOrgApacheLuceneUtilAutomatonCompiledAutomaton:compiled withOrgApacheLuceneUtilBytesRef:lastTerm == nil ? nil : [((OrgApacheLuceneUtilAutomatonCompiledAutomaton *) nil_chk(compiled)) floorWithOrgApacheLuceneUtilBytesRef:lastTerm withOrgApacheLuceneUtilBytesRefBuilder:[new_OrgApacheLuceneUtilBytesRefBuilder_init() autorelease]]], [((id<JavaUtilList>) nil_chk([runAutomata subListWithInt:0 withInt:editDistance + 1])) toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:editDistance + 1 type:OrgApacheLuceneUtilAutomatonCompiledAutomaton_class_()]]) autorelease];
+    return create_OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFuzzyTermsEnum_initWithOrgApacheLuceneSearchFuzzyTermsEnum_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilAutomatonCompiledAutomatonArray_(self, [((OrgApacheLuceneIndexTerms *) nil_chk(terms_)) intersectWithOrgApacheLuceneUtilAutomatonCompiledAutomaton:compiled withOrgApacheLuceneUtilBytesRef:lastTerm == nil ? nil : [((OrgApacheLuceneUtilAutomatonCompiledAutomaton *) nil_chk(compiled)) floorWithOrgApacheLuceneUtilBytesRef:lastTerm withOrgApacheLuceneUtilBytesRefBuilder:create_OrgApacheLuceneUtilBytesRefBuilder_init()]], [((id<JavaUtilList>) nil_chk([runAutomata subListWithInt:0 withInt:editDistance + 1])) toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:editDistance + 1 type:OrgApacheLuceneUtilAutomatonCompiledAutomaton_class_()]]);
   }
   else {
     return nil;
@@ -172,7 +194,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttri
   OrgApacheLuceneIndexTermsEnum *newEnum = [self getAutomatonEnumWithInt:maxEdits withOrgApacheLuceneUtilBytesRef:lastTerm];
   if (newEnum == nil) {
     JreAssert((maxEdits > OrgApacheLuceneUtilAutomatonLevenshteinAutomata_MAXIMUM_SUPPORTED_DISTANCE), (@"org/apache/lucene/search/FuzzyTermsEnum.java:214 condition failed: assert maxEdits > LevenshteinAutomata.MAXIMUM_SUPPORTED_DISTANCE;"));
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"maxEdits cannot be > LevenshteinAutomata.MAXIMUM_SUPPORTED_DISTANCE") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"maxEdits cannot be > LevenshteinAutomata.MAXIMUM_SUPPORTED_DISTANCE");
   }
   [self setEnumWithOrgApacheLuceneIndexTermsEnum:newEnum];
 }
@@ -233,7 +255,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttri
   return [((OrgApacheLuceneIndexTermsEnum *) nil_chk(actualEnum_)) seekExactWithOrgApacheLuceneUtilBytesRef:text];
 }
 
-- (OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *)seekCeilWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)text {
+- (OrgApacheLuceneIndexTermsEnum_SeekStatus *)seekCeilWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)text {
   return [((OrgApacheLuceneIndexTermsEnum *) nil_chk(actualEnum_)) seekCeilWithOrgApacheLuceneUtilBytesRef:text];
 }
 
@@ -272,7 +294,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttri
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneIndexTerms:withOrgApacheLuceneUtilAttributeSource:withOrgApacheLuceneIndexTerm:withFloat:withInt:withBoolean:", "FuzzyTermsEnum", NULL, 0x1, "Ljava.io.IOException;", NULL },
     { "getAutomatonEnumWithInt:withOrgApacheLuceneUtilBytesRef:", "getAutomatonEnum", "Lorg.apache.lucene.index.TermsEnum;", 0x4, "Ljava.io.IOException;", NULL },
-    { "initAutomataWithInt:", "initAutomata", "Ljava.util.List;", 0x2, NULL, NULL },
+    { "initAutomataWithInt:", "initAutomata", "Ljava.util.List;", 0x2, NULL, "(I)Ljava/util/List<Lorg/apache/lucene/util/automaton/CompiledAutomaton;>;" },
     { "setEnumWithOrgApacheLuceneIndexTermsEnum:", "setEnum", "V", 0x4, NULL, NULL },
     { "bottomChangedWithOrgApacheLuceneUtilBytesRef:withBoolean:", "bottomChanged", "V", 0x2, "Ljava.io.IOException;", NULL },
     { "maxEditDistanceChangedWithOrgApacheLuceneUtilBytesRef:withInt:withBoolean:", "maxEditDistanceChanged", "V", 0x4, "Ljava.io.IOException;", NULL },
@@ -325,13 +347,13 @@ void OrgApacheLuceneSearchFuzzyTermsEnum_initWithOrgApacheLuceneIndexTerms_withO
   JreStrongAssign(&self->boostAtt_, [((OrgApacheLuceneUtilAttributeSource *) nil_chk([self attributes])) addAttributeWithIOSClass:OrgApacheLuceneSearchBoostAttribute_class_()]);
   JreStrongAssign(&self->termComparator_, OrgApacheLuceneUtilBytesRef_getUTF8SortedAsUnicodeComparator());
   JreStrongAssign(&self->queuedBottom_, nil);
-  if (minSimilarity >= 1.0f && minSimilarity != JreFpToInt(minSimilarity)) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"fractional edit distances are not allowed") autorelease];
-  if (minSimilarity < 0.0f) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"minimumSimilarity cannot be less than 0") autorelease];
-  if (prefixLength < 0) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"prefixLength cannot be less than 0") autorelease];
+  if (minSimilarity >= 1.0f && minSimilarity != JreFpToInt(minSimilarity)) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"fractional edit distances are not allowed");
+  if (minSimilarity < 0.0f) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"minimumSimilarity cannot be less than 0");
+  if (prefixLength < 0) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"prefixLength cannot be less than 0");
   JreStrongAssign(&self->terms_, terms);
   JreStrongAssign(&self->term_, term);
   NSString *utf16 = [((OrgApacheLuceneIndexTerm *) nil_chk(term)) text];
-  JreStrongAssignAndConsume(&self->termText_, [IOSIntArray newArrayWithLength:[utf16 codePointCount:0 endIndex:((jint) [((NSString *) nil_chk(utf16)) length])]]);
+  JreStrongAssignAndConsume(&self->termText_, [IOSIntArray newArrayWithLength:[((NSString *) nil_chk(utf16)) codePointCount:0 endIndex:((jint) [utf16 length])]]);
   for (jint cp, i = 0, j = 0; i < ((jint) [utf16 length]); i += JavaLangCharacter_charCountWithInt_(cp)) *IOSIntArray_GetRef(self->termText_, j++) = cp = [utf16 codePointAt:i];
   self->termLength_ = self->termText_->size_;
   JreStrongAssign(&self->dfaAtt_, [((OrgApacheLuceneUtilAttributeSource *) nil_chk(atts)) addAttributeWithIOSClass:OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttribute_class_()]);
@@ -347,7 +369,7 @@ void OrgApacheLuceneSearchFuzzyTermsEnum_initWithOrgApacheLuceneIndexTerms_withO
     self->raw_ = false;
   }
   if (transpositions && self->maxEdits_ > OrgApacheLuceneUtilAutomatonLevenshteinAutomata_MAXIMUM_SUPPORTED_DISTANCE) {
-    @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(JreStrcat("$I$", @"with transpositions enabled, distances > ", OrgApacheLuceneUtilAutomatonLevenshteinAutomata_MAXIMUM_SUPPORTED_DISTANCE, @" are not supported ")) autorelease];
+    @throw create_JavaLangUnsupportedOperationException_initWithNSString_(JreStrcat("$I$", @"with transpositions enabled, distances > ", OrgApacheLuceneUtilAutomatonLevenshteinAutomata_MAXIMUM_SUPPORTED_DISTANCE, @" are not supported "));
   }
   self->transpositions_ = transpositions;
   self->scale_factor_ = 1.0f / (1.0f - self->minSimilarity_);
@@ -358,19 +380,21 @@ void OrgApacheLuceneSearchFuzzyTermsEnum_initWithOrgApacheLuceneIndexTerms_withO
 }
 
 OrgApacheLuceneSearchFuzzyTermsEnum *new_OrgApacheLuceneSearchFuzzyTermsEnum_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneUtilAttributeSource_withOrgApacheLuceneIndexTerm_withFloat_withInt_withBoolean_(OrgApacheLuceneIndexTerms *terms, OrgApacheLuceneUtilAttributeSource *atts, OrgApacheLuceneIndexTerm *term, jfloat minSimilarity, jint prefixLength, jboolean transpositions) {
-  OrgApacheLuceneSearchFuzzyTermsEnum *self = [OrgApacheLuceneSearchFuzzyTermsEnum alloc];
-  OrgApacheLuceneSearchFuzzyTermsEnum_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneUtilAttributeSource_withOrgApacheLuceneIndexTerm_withFloat_withInt_withBoolean_(self, terms, atts, term, minSimilarity, prefixLength, transpositions);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFuzzyTermsEnum, initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneUtilAttributeSource_withOrgApacheLuceneIndexTerm_withFloat_withInt_withBoolean_, terms, atts, term, minSimilarity, prefixLength, transpositions)
+}
+
+OrgApacheLuceneSearchFuzzyTermsEnum *create_OrgApacheLuceneSearchFuzzyTermsEnum_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneUtilAttributeSource_withOrgApacheLuceneIndexTerm_withFloat_withInt_withBoolean_(OrgApacheLuceneIndexTerms *terms, OrgApacheLuceneUtilAttributeSource *atts, OrgApacheLuceneIndexTerm *term, jfloat minSimilarity, jint prefixLength, jboolean transpositions) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFuzzyTermsEnum, initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneUtilAttributeSource_withOrgApacheLuceneIndexTerm_withFloat_withInt_withBoolean_, terms, atts, term, minSimilarity, prefixLength, transpositions)
 }
 
 id<JavaUtilList> OrgApacheLuceneSearchFuzzyTermsEnum_initAutomataWithInt_(OrgApacheLuceneSearchFuzzyTermsEnum *self, jint maxDistance) {
   id<JavaUtilList> runAutomata = [((id<OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttribute>) nil_chk(self->dfaAtt_)) automata];
   if ([((id<JavaUtilList>) nil_chk(runAutomata)) size] <= maxDistance && maxDistance <= OrgApacheLuceneUtilAutomatonLevenshteinAutomata_MAXIMUM_SUPPORTED_DISTANCE) {
-    OrgApacheLuceneUtilAutomatonLevenshteinAutomata *builder = [new_OrgApacheLuceneUtilAutomatonLevenshteinAutomata_initWithNSString_withBoolean_(OrgApacheLuceneUtilUnicodeUtil_newStringWithIntArray_withInt_withInt_(self->termText_, self->realPrefixLength_, ((IOSIntArray *) nil_chk(self->termText_))->size_ - self->realPrefixLength_), self->transpositions_) autorelease];
+    OrgApacheLuceneUtilAutomatonLevenshteinAutomata *builder = create_OrgApacheLuceneUtilAutomatonLevenshteinAutomata_initWithNSString_withBoolean_(OrgApacheLuceneUtilUnicodeUtil_newStringWithIntArray_withInt_withInt_(self->termText_, self->realPrefixLength_, ((IOSIntArray *) nil_chk(self->termText_))->size_ - self->realPrefixLength_), self->transpositions_);
     NSString *prefix = OrgApacheLuceneUtilUnicodeUtil_newStringWithIntArray_withInt_withInt_(self->termText_, 0, self->realPrefixLength_);
     for (jint i = [runAutomata size]; i <= maxDistance; i++) {
       OrgApacheLuceneUtilAutomatonAutomaton *a = [builder toAutomatonWithInt:i withNSString:prefix];
-      [runAutomata addWithId:[new_OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withJavaLangBoolean_withBoolean_(a, JavaLangBoolean_valueOfWithBoolean_(true), false) autorelease]];
+      [runAutomata addWithId:create_OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withJavaLangBoolean_withBoolean_(a, JavaLangBoolean_valueOfWithBoolean_(true), false)];
     }
   }
   return runAutomata;
@@ -405,7 +429,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFuzzyTermsEnum)
   return self;
 }
 
-- (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
+- (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
   jint ed = ((IOSObjectArray *) nil_chk(matchers_))->size_ - 1;
   while (ed > 0) {
     if (OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFuzzyTermsEnum_matchesWithOrgApacheLuceneUtilBytesRef_withInt_(self, term, ed - 1)) {
@@ -417,17 +441,17 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFuzzyTermsEnum)
   }
   if (ed == 0) {
     [((id<OrgApacheLuceneSearchBoostAttribute>) nil_chk(boostAtt_)) setBoostWithFloat:1.0f];
-    return JreLoadStatic(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum, YES);
+    return JreLoadEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, YES);
   }
   else {
     jint codePointCount = OrgApacheLuceneUtilUnicodeUtil_codePointCountWithOrgApacheLuceneUtilBytesRef_(term);
     jfloat similarity = 1.0f - ((jfloat) ed / (jfloat) (JavaLangMath_minWithInt_withInt_(codePointCount, this$0_->termLength_)));
     if (similarity > this$0_->minSimilarity_) {
       [((id<OrgApacheLuceneSearchBoostAttribute>) nil_chk(boostAtt_)) setBoostWithFloat:(similarity - this$0_->minSimilarity_) * this$0_->scale_factor_];
-      return JreLoadStatic(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum, YES);
+      return JreLoadEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, YES);
     }
     else {
-      return JreLoadStatic(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum, NO);
+      return JreLoadEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, NO);
     }
   }
 }
@@ -473,9 +497,11 @@ void OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFuzzyTermsEnum_initWithOrgApac
 }
 
 OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFuzzyTermsEnum *new_OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFuzzyTermsEnum_initWithOrgApacheLuceneSearchFuzzyTermsEnum_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilAutomatonCompiledAutomatonArray_(OrgApacheLuceneSearchFuzzyTermsEnum *outer$, OrgApacheLuceneIndexTermsEnum *tenum, IOSObjectArray *compiled) {
-  OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFuzzyTermsEnum *self = [OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFuzzyTermsEnum alloc];
-  OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFuzzyTermsEnum_initWithOrgApacheLuceneSearchFuzzyTermsEnum_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilAutomatonCompiledAutomatonArray_(self, outer$, tenum, compiled);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFuzzyTermsEnum, initWithOrgApacheLuceneSearchFuzzyTermsEnum_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilAutomatonCompiledAutomatonArray_, outer$, tenum, compiled)
+}
+
+OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFuzzyTermsEnum *create_OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFuzzyTermsEnum_initWithOrgApacheLuceneSearchFuzzyTermsEnum_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilAutomatonCompiledAutomatonArray_(OrgApacheLuceneSearchFuzzyTermsEnum *outer$, OrgApacheLuceneIndexTermsEnum *tenum, IOSObjectArray *compiled) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFuzzyTermsEnum, initWithOrgApacheLuceneSearchFuzzyTermsEnum_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilAutomatonCompiledAutomatonArray_, outer$, tenum, compiled)
 }
 
 jboolean OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFuzzyTermsEnum_matchesWithOrgApacheLuceneUtilBytesRef_withInt_(OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFuzzyTermsEnum *self, OrgApacheLuceneUtilBytesRef *term, jint k) {
@@ -488,7 +514,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFuzzyTermsEnum_AutomatonFu
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "automata", NULL, "Ljava.util.List;", 0x401, NULL, NULL },
+    { "automata", NULL, "Ljava.util.List;", 0x401, NULL, "()Ljava/util/List<Lorg/apache/lucene/util/automaton/CompiledAutomaton;>;" },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttribute = { 2, "LevenshteinAutomataAttribute", "org.apache.lucene.search", "FuzzyTermsEnum", 0x609, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttribute;
@@ -515,11 +541,11 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFuzzyTermsEnum_Levensh
 - (jboolean)isEqual:(id)other {
   if (self == other) return true;
   if (!([other isKindOfClass:[OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl class]])) return false;
-  return [((id<JavaUtilList>) nil_chk(automata_)) isEqual:((OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl *) nil_chk(((OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl *) check_class_cast(other, [OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl class]))))->automata_];
+  return [((id<JavaUtilList>) nil_chk(automata_)) isEqual:((OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl *) nil_chk(((OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl *) cast_chk(other, [OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl class]))))->automata_];
 }
 
 - (void)copyToWithOrgApacheLuceneUtilAttributeImpl:(OrgApacheLuceneUtilAttributeImpl *)target {
-  id<JavaUtilList> targetAutomata = [((id<OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttribute>) nil_chk(((id<OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttribute>) check_protocol_cast(target, OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttribute_class_())))) automata];
+  id<JavaUtilList> targetAutomata = [((id<OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttribute>) nil_chk(((id<OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttribute>) cast_check(target, OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttribute_class_())))) automata];
   [((id<JavaUtilList>) nil_chk(targetAutomata)) clear];
   [targetAutomata addAllWithJavaUtilCollection:automata_];
 }
@@ -542,13 +568,13 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "automata", NULL, "Ljava.util.List;", 0x1, NULL, NULL },
+    { "automata", NULL, "Ljava.util.List;", 0x1, NULL, "()Ljava/util/List<Lorg/apache/lucene/util/automaton/CompiledAutomaton;>;" },
     { "clear", NULL, "V", 0x1, NULL, NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
     { "copyToWithOrgApacheLuceneUtilAttributeImpl:", "copyTo", "V", 0x1, NULL, NULL },
     { "reflectWithWithOrgApacheLuceneUtilAttributeReflector:", "reflectWith", "V", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "LevenshteinAutomataAttributeImpl", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "automata_", NULL, 0x12, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/util/automaton/CompiledAutomaton;>;", .constantValue.asLong = 0 },
@@ -565,9 +591,11 @@ void OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl_init(O
 }
 
 OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl *new_OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl_init() {
-  OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl *self = [OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl alloc];
-  OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl, init)
+}
+
+OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl *create_OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttributeImpl)

@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchNGramPhraseQuery_INCLUDE_ALL")
-#if OrgApacheLuceneSearchNGramPhraseQuery_RESTRICT
-#define OrgApacheLuceneSearchNGramPhraseQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchNGramPhraseQuery")
+#ifdef RESTRICT_OrgApacheLuceneSearchNGramPhraseQuery
+#define INCLUDE_ALL_OrgApacheLuceneSearchNGramPhraseQuery 0
 #else
-#define OrgApacheLuceneSearchNGramPhraseQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchNGramPhraseQuery 1
 #endif
-#undef OrgApacheLuceneSearchNGramPhraseQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchNGramPhraseQuery
 
-#if !defined (_OrgApacheLuceneSearchNGramPhraseQuery_) && (OrgApacheLuceneSearchNGramPhraseQuery_INCLUDE_ALL || OrgApacheLuceneSearchNGramPhraseQuery_INCLUDE)
-#define _OrgApacheLuceneSearchNGramPhraseQuery_
+#if !defined (OrgApacheLuceneSearchNGramPhraseQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchNGramPhraseQuery || defined(INCLUDE_OrgApacheLuceneSearchNGramPhraseQuery))
+#define OrgApacheLuceneSearchNGramPhraseQuery_
 
-#define OrgApacheLuceneSearchQuery_RESTRICT 1
-#define OrgApacheLuceneSearchQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchQuery 1
+#define INCLUDE_OrgApacheLuceneSearchQuery 1
 #include "org/apache/lucene/search/Query.h"
 
 @class IOSIntArray;
@@ -25,10 +25,21 @@
 @class OrgApacheLuceneIndexIndexReader;
 @class OrgApacheLuceneSearchPhraseQuery;
 
+/*!
+ @brief This is a <code>PhraseQuery</code> which is optimized for n-gram phrase query.
+ For example, when you query "ABCD" on a 2-gram field, you may want to use
+ NGramPhraseQuery rather than <code>PhraseQuery</code>, because NGramPhraseQuery
+ will <code>rewrite(IndexReader)</code> the query to "AB/0 CD/2", while <code>PhraseQuery</code>
+ will query "AB/0 BC/1 CD/2" (where term/position).
+ */
 @interface OrgApacheLuceneSearchNGramPhraseQuery : OrgApacheLuceneSearchQuery
 
 #pragma mark Public
 
+/*!
+ @brief Constructor that takes gram size.
+ @param n n-gram size
+ */
 - (instancetype)initWithInt:(jint)n
 withOrgApacheLuceneSearchPhraseQuery:(OrgApacheLuceneSearchPhraseQuery *)query;
 
@@ -36,8 +47,14 @@ withOrgApacheLuceneSearchPhraseQuery:(OrgApacheLuceneSearchPhraseQuery *)query;
 
 - (jfloat)getBoost;
 
+/*!
+ @brief Return the list of relative positions that each term should appear at.
+ */
 - (IOSIntArray *)getPositions;
 
+/*!
+ @brief Return the list of terms.
+ */
 - (IOSObjectArray *)getTerms;
 
 - (NSUInteger)hash;
@@ -56,8 +73,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchNGramPhraseQuery_initWithInt_withOrg
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchNGramPhraseQuery *new_OrgApacheLuceneSearchNGramPhraseQuery_initWithInt_withOrgApacheLuceneSearchPhraseQuery_(jint n, OrgApacheLuceneSearchPhraseQuery *query) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchNGramPhraseQuery *create_OrgApacheLuceneSearchNGramPhraseQuery_initWithInt_withOrgApacheLuceneSearchPhraseQuery_(jint n, OrgApacheLuceneSearchPhraseQuery *query);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchNGramPhraseQuery)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchNGramPhraseQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchNGramPhraseQuery")

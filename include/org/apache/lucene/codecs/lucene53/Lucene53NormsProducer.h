@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_RESTRICT
-#define OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer")
+#ifdef RESTRICT_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer
+#define INCLUDE_ALL_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer 0
 #else
-#define OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer 1
 #endif
-#undef OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer
 
-#if !defined (_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_) && (OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_INCLUDE_ALL || OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_INCLUDE)
-#define _OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_
+#if !defined (OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_) && (INCLUDE_ALL_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer || defined(INCLUDE_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer))
+#define OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_
 
-#define OrgApacheLuceneCodecsNormsProducer_RESTRICT 1
-#define OrgApacheLuceneCodecsNormsProducer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneCodecsNormsProducer 1
+#define INCLUDE_OrgApacheLuceneCodecsNormsProducer 1
 #include "org/apache/lucene/codecs/NormsProducer.h"
 
 @class OrgApacheLuceneIndexFieldInfo;
@@ -25,6 +25,9 @@
 @class OrgApacheLuceneIndexSegmentReadState;
 @protocol JavaUtilCollection;
 
+/*!
+ @brief Reader for <code>Lucene53NormsFormat</code>
+ */
 @interface OrgApacheLuceneCodecsLucene53Lucene53NormsProducer : OrgApacheLuceneCodecsNormsProducer
 
 #pragma mark Public
@@ -57,12 +60,14 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_initWi
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene53Lucene53NormsProducer *new_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_initWithOrgApacheLuceneIndexSegmentReadState_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneIndexSegmentReadState *state, NSString *dataCodec, NSString *dataExtension, NSString *metaCodec, NSString *metaExtension) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene53Lucene53NormsProducer *create_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_initWithOrgApacheLuceneIndexSegmentReadState_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneIndexSegmentReadState *state, NSString *dataCodec, NSString *dataExtension, NSString *metaCodec, NSString *metaExtension);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer)
 
 #endif
 
-#if !defined (_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_NormsEntry_) && (OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_INCLUDE_ALL || OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_NormsEntry_INCLUDE)
-#define _OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_NormsEntry_
+#if !defined (OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_NormsEntry_) && (INCLUDE_ALL_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer || defined(INCLUDE_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_NormsEntry))
+#define OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_NormsEntry_
 
 @interface OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_NormsEntry : NSObject {
  @public
@@ -82,8 +87,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_NormsE
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_NormsEntry *new_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_NormsEntry_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_NormsEntry *create_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_NormsEntry_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_NormsEntry)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer")

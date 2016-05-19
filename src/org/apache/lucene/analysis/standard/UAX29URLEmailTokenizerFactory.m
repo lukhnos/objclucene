@@ -31,13 +31,13 @@
 }
 
 - (OrgApacheLuceneAnalysisTokenizer *)createWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory {
-  if ([((OrgApacheLuceneUtilVersion *) nil_chk(luceneMatchVersion_)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_7_0_)]) {
-    OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer *tokenizer = [new_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(factory) autorelease];
+  if ([((OrgApacheLuceneUtilVersion *) nil_chk(luceneMatchVersion_)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_7_0)]) {
+    OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer *tokenizer = create_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(factory);
     [tokenizer setMaxTokenLengthWithInt:maxTokenLength_];
     return tokenizer;
   }
   else {
-    OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40 *tokenizer40 = [new_OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_initWithOrgApacheLuceneUtilAttributeFactory_(factory) autorelease];
+    OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40 *tokenizer40 = create_OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_initWithOrgApacheLuceneUtilAttributeFactory_(factory);
     [tokenizer40 setMaxTokenLengthWithInt:maxTokenLength_];
     return tokenizer40;
   }
@@ -45,7 +45,7 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "UAX29URLEmailTokenizerFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "UAX29URLEmailTokenizerFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "createWithOrgApacheLuceneUtilAttributeFactory:", "create", "Lorg.apache.lucene.analysis.Tokenizer;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -61,14 +61,16 @@ void OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory_initWithJavaUt
   OrgApacheLuceneAnalysisUtilTokenizerFactory_initWithJavaUtilMap_(self, args);
   self->maxTokenLength_ = [self getIntWithJavaUtilMap:args withNSString:@"maxTokenLength" withInt:OrgApacheLuceneAnalysisStandardStandardAnalyzer_DEFAULT_MAX_TOKEN_LENGTH];
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory *new_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory *self = [OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory alloc];
-  OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory *create_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory)

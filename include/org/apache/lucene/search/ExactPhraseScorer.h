@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchExactPhraseScorer_INCLUDE_ALL")
-#if OrgApacheLuceneSearchExactPhraseScorer_RESTRICT
-#define OrgApacheLuceneSearchExactPhraseScorer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchExactPhraseScorer")
+#ifdef RESTRICT_OrgApacheLuceneSearchExactPhraseScorer
+#define INCLUDE_ALL_OrgApacheLuceneSearchExactPhraseScorer 0
 #else
-#define OrgApacheLuceneSearchExactPhraseScorer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchExactPhraseScorer 1
 #endif
-#undef OrgApacheLuceneSearchExactPhraseScorer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchExactPhraseScorer
 
-#if !defined (_OrgApacheLuceneSearchExactPhraseScorer_) && (OrgApacheLuceneSearchExactPhraseScorer_INCLUDE_ALL || OrgApacheLuceneSearchExactPhraseScorer_INCLUDE)
-#define _OrgApacheLuceneSearchExactPhraseScorer_
+#if !defined (OrgApacheLuceneSearchExactPhraseScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchExactPhraseScorer || defined(INCLUDE_OrgApacheLuceneSearchExactPhraseScorer))
+#define OrgApacheLuceneSearchExactPhraseScorer_
 
-#define OrgApacheLuceneSearchScorer_RESTRICT 1
-#define OrgApacheLuceneSearchScorer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchScorer 1
+#define INCLUDE_OrgApacheLuceneSearchScorer 1
 #include "org/apache/lucene/search/Scorer.h"
 
 @class IOSObjectArray;
@@ -60,8 +60,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchExactPhraseScorer_initWithOrgApacheL
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchExactPhraseScorer *new_OrgApacheLuceneSearchExactPhraseScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchPhraseQuery_PostingsAndFreqArray_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_withBoolean_(OrgApacheLuceneSearchWeight *weight, IOSObjectArray *postings, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer, jboolean needsScores) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchExactPhraseScorer *create_OrgApacheLuceneSearchExactPhraseScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchPhraseQuery_PostingsAndFreqArray_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_withBoolean_(OrgApacheLuceneSearchWeight *weight, IOSObjectArray *postings, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer, jboolean needsScores);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchExactPhraseScorer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchExactPhraseScorer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchExactPhraseScorer")

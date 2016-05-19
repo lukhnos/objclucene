@@ -65,7 +65,7 @@ __attribute__((unused)) static IOSLongArray *OrgApacheLuceneRangetreeGrowingHeap
 }
 
 - (id<OrgApacheLuceneRangetreeSliceReader>)getReaderWithLong:(jlong)start {
-  return [new_OrgApacheLuceneRangetreeHeapSliceReader_initWithLongArray_withLongArray_withIntArray_withInt_withInt_(values_, ords_, docIDs_, (jint) start, nextWrite_) autorelease];
+  return create_OrgApacheLuceneRangetreeHeapSliceReader_initWithLongArray_withLongArray_withIntArray_withInt_withInt_(values_, ords_, docIDs_, (jint) start, nextWrite_);
 }
 
 - (void)close {
@@ -118,9 +118,11 @@ void OrgApacheLuceneRangetreeGrowingHeapSliceWriter_initWithInt_(OrgApacheLucene
 }
 
 OrgApacheLuceneRangetreeGrowingHeapSliceWriter *new_OrgApacheLuceneRangetreeGrowingHeapSliceWriter_initWithInt_(jint maxSize) {
-  OrgApacheLuceneRangetreeGrowingHeapSliceWriter *self = [OrgApacheLuceneRangetreeGrowingHeapSliceWriter alloc];
-  OrgApacheLuceneRangetreeGrowingHeapSliceWriter_initWithInt_(self, maxSize);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneRangetreeGrowingHeapSliceWriter, initWithInt_, maxSize)
+}
+
+OrgApacheLuceneRangetreeGrowingHeapSliceWriter *create_OrgApacheLuceneRangetreeGrowingHeapSliceWriter_initWithInt_(jint maxSize) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneRangetreeGrowingHeapSliceWriter, initWithInt_, maxSize)
 }
 
 IOSIntArray *OrgApacheLuceneRangetreeGrowingHeapSliceWriter_growExactWithIntArray_withInt_(OrgApacheLuceneRangetreeGrowingHeapSliceWriter *self, IOSIntArray *arr, jint size) {

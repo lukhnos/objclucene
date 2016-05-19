@@ -5,27 +5,34 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCoreLowerCaseFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCoreLowerCaseFilter_RESTRICT
-#define OrgApacheLuceneAnalysisCoreLowerCaseFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreLowerCaseFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCoreLowerCaseFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCoreLowerCaseFilter 0
 #else
-#define OrgApacheLuceneAnalysisCoreLowerCaseFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCoreLowerCaseFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisCoreLowerCaseFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCoreLowerCaseFilter
 
-#if !defined (_OrgApacheLuceneAnalysisCoreLowerCaseFilter_) && (OrgApacheLuceneAnalysisCoreLowerCaseFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisCoreLowerCaseFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisCoreLowerCaseFilter_
+#if !defined (OrgApacheLuceneAnalysisCoreLowerCaseFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCoreLowerCaseFilter || defined(INCLUDE_OrgApacheLuceneAnalysisCoreLowerCaseFilter))
+#define OrgApacheLuceneAnalysisCoreLowerCaseFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief Normalizes token text to lower case.
+ */
 @interface OrgApacheLuceneAnalysisCoreLowerCaseFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
+/*!
+ @brief Create a new LowerCaseFilter, that normalizes token text to lower case.
+ @param inArg TokenStream to filter
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
 
 - (jboolean)incrementToken;
@@ -38,8 +45,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreLowerCaseFilter_initWithOrgApa
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreLowerCaseFilter *new_OrgApacheLuceneAnalysisCoreLowerCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreLowerCaseFilter *create_OrgApacheLuceneAnalysisCoreLowerCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreLowerCaseFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCoreLowerCaseFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreLowerCaseFilter")

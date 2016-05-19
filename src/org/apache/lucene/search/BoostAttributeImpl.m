@@ -33,7 +33,7 @@
 }
 
 - (void)copyToWithOrgApacheLuceneUtilAttributeImpl:(OrgApacheLuceneUtilAttributeImpl *)target {
-  [((id<OrgApacheLuceneSearchBoostAttribute>) nil_chk(((id<OrgApacheLuceneSearchBoostAttribute>) check_protocol_cast(target, OrgApacheLuceneSearchBoostAttribute_class_())))) setBoostWithFloat:boost_];
+  [((id<OrgApacheLuceneSearchBoostAttribute>) nil_chk(((id<OrgApacheLuceneSearchBoostAttribute>) cast_check(target, OrgApacheLuceneSearchBoostAttribute_class_())))) setBoostWithFloat:boost_];
 }
 
 - (void)reflectWithWithOrgApacheLuceneUtilAttributeReflector:(id<OrgApacheLuceneUtilAttributeReflector>)reflector {
@@ -54,7 +54,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "clear", NULL, "V", 0x1, NULL, NULL },
     { "copyToWithOrgApacheLuceneUtilAttributeImpl:", "copyTo", "V", 0x1, NULL, NULL },
     { "reflectWithWithOrgApacheLuceneUtilAttributeReflector:", "reflectWith", "V", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "BoostAttributeImpl", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "boost_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
@@ -71,9 +71,11 @@ void OrgApacheLuceneSearchBoostAttributeImpl_init(OrgApacheLuceneSearchBoostAttr
 }
 
 OrgApacheLuceneSearchBoostAttributeImpl *new_OrgApacheLuceneSearchBoostAttributeImpl_init() {
-  OrgApacheLuceneSearchBoostAttributeImpl *self = [OrgApacheLuceneSearchBoostAttributeImpl alloc];
-  OrgApacheLuceneSearchBoostAttributeImpl_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchBoostAttributeImpl, init)
+}
+
+OrgApacheLuceneSearchBoostAttributeImpl *create_OrgApacheLuceneSearchBoostAttributeImpl_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchBoostAttributeImpl, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBoostAttributeImpl)

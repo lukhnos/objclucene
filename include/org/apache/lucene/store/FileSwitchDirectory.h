@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneStoreFileSwitchDirectory_INCLUDE_ALL")
-#if OrgApacheLuceneStoreFileSwitchDirectory_RESTRICT
-#define OrgApacheLuceneStoreFileSwitchDirectory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneStoreFileSwitchDirectory")
+#ifdef RESTRICT_OrgApacheLuceneStoreFileSwitchDirectory
+#define INCLUDE_ALL_OrgApacheLuceneStoreFileSwitchDirectory 0
 #else
-#define OrgApacheLuceneStoreFileSwitchDirectory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneStoreFileSwitchDirectory 1
 #endif
-#undef OrgApacheLuceneStoreFileSwitchDirectory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneStoreFileSwitchDirectory
 
-#if !defined (_OrgApacheLuceneStoreFileSwitchDirectory_) && (OrgApacheLuceneStoreFileSwitchDirectory_INCLUDE_ALL || OrgApacheLuceneStoreFileSwitchDirectory_INCLUDE)
-#define _OrgApacheLuceneStoreFileSwitchDirectory_
+#if !defined (OrgApacheLuceneStoreFileSwitchDirectory_) && (INCLUDE_ALL_OrgApacheLuceneStoreFileSwitchDirectory || defined(INCLUDE_OrgApacheLuceneStoreFileSwitchDirectory))
+#define OrgApacheLuceneStoreFileSwitchDirectory_
 
-#define OrgApacheLuceneStoreDirectory_RESTRICT 1
-#define OrgApacheLuceneStoreDirectory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreDirectory 1
+#define INCLUDE_OrgApacheLuceneStoreDirectory 1
 #include "org/apache/lucene/store/Directory.h"
 
 @class IOSObjectArray;
@@ -28,6 +28,19 @@
 @protocol JavaUtilCollection;
 @protocol JavaUtilSet;
 
+/*!
+ @brief Expert: A Directory instance that switches files between
+ two other Directory instances.
+ <p>Files with the specified extensions are placed in the
+ primary directory; others are placed in the secondary
+ directory.  The provided Set must not change once passed
+ to this class, and must allow multiple threads to call
+ contains at once.</p>
+ <p>Locks with a name having the specified extensions are
+ delegated to the primary directory; others are delegated
+ to the secondary directory. Ideally, both Directory
+ instances should use the same lock factory.</p>
+ */
 @interface OrgApacheLuceneStoreFileSwitchDirectory : OrgApacheLuceneStoreDirectory
 
 #pragma mark Public
@@ -46,10 +59,19 @@
 
 - (jlong)fileLengthWithNSString:(NSString *)name;
 
+/*!
+ @brief Utility method to return a file's extension.
+ */
 + (NSString *)getExtensionWithNSString:(NSString *)name;
 
+/*!
+ @brief Return the primary directory
+ */
 - (OrgApacheLuceneStoreDirectory *)getPrimaryDir;
 
+/*!
+ @brief Return the secondary directory
+ */
 - (OrgApacheLuceneStoreDirectory *)getSecondaryDir;
 
 - (IOSObjectArray *)listAll;
@@ -72,10 +94,12 @@ FOUNDATION_EXPORT void OrgApacheLuceneStoreFileSwitchDirectory_initWithJavaUtilS
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreFileSwitchDirectory *new_OrgApacheLuceneStoreFileSwitchDirectory_initWithJavaUtilSet_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withBoolean_(id<JavaUtilSet> primaryExtensions, OrgApacheLuceneStoreDirectory *primaryDir, OrgApacheLuceneStoreDirectory *secondaryDir, jboolean doClose) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneStoreFileSwitchDirectory *create_OrgApacheLuceneStoreFileSwitchDirectory_initWithJavaUtilSet_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withBoolean_(id<JavaUtilSet> primaryExtensions, OrgApacheLuceneStoreDirectory *primaryDir, OrgApacheLuceneStoreDirectory *secondaryDir, jboolean doClose);
+
 FOUNDATION_EXPORT NSString *OrgApacheLuceneStoreFileSwitchDirectory_getExtensionWithNSString_(NSString *name);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreFileSwitchDirectory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneStoreFileSwitchDirectory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreFileSwitchDirectory")

@@ -32,7 +32,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)copyToWithOrgApacheLuceneUtilAttributeImpl:(OrgApacheLuceneUtilAttributeImpl *)target {
-  id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute> attr = (id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>) check_protocol_cast(target, OrgApacheLuceneAnalysisTokenattributesKeywordAttribute_class_());
+  id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute> attr = (id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>) cast_check(target, OrgApacheLuceneAnalysisTokenattributesKeywordAttribute_class_());
   [((id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>) nil_chk(attr)) setKeywordWithBoolean:keyword_];
 }
 
@@ -42,8 +42,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (jboolean)isEqual:(id)obj {
   if (self == obj) return true;
-  if ([self getClass] != [nil_chk(obj) getClass]) return false;
-  OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl *other = (OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl *) check_class_cast(obj, [OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl class]);
+  if ([self getClass] != (id) [nil_chk(obj) getClass]) return false;
+  OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl *other = (OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl *) cast_chk(obj, [OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl class]);
   return keyword_ == other->keyword_;
 }
 
@@ -84,9 +84,11 @@ void OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl_init(OrgApacheLu
 }
 
 OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl_init() {
-  OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl *self = [OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl alloc];
-  OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl, init)
+}
+
+OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl)

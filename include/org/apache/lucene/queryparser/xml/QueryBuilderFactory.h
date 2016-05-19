@@ -5,25 +5,28 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserXmlQueryBuilderFactory_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserXmlQueryBuilderFactory_RESTRICT
-#define OrgApacheLuceneQueryparserXmlQueryBuilderFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlQueryBuilderFactory")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserXmlQueryBuilderFactory
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlQueryBuilderFactory 0
 #else
-#define OrgApacheLuceneQueryparserXmlQueryBuilderFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlQueryBuilderFactory 1
 #endif
-#undef OrgApacheLuceneQueryparserXmlQueryBuilderFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserXmlQueryBuilderFactory
 
-#if !defined (_OrgApacheLuceneQueryparserXmlQueryBuilderFactory_) && (OrgApacheLuceneQueryparserXmlQueryBuilderFactory_INCLUDE_ALL || OrgApacheLuceneQueryparserXmlQueryBuilderFactory_INCLUDE)
-#define _OrgApacheLuceneQueryparserXmlQueryBuilderFactory_
+#if !defined (OrgApacheLuceneQueryparserXmlQueryBuilderFactory_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlQueryBuilderFactory || defined(INCLUDE_OrgApacheLuceneQueryparserXmlQueryBuilderFactory))
+#define OrgApacheLuceneQueryparserXmlQueryBuilderFactory_
 
-#define OrgApacheLuceneQueryparserXmlQueryBuilder_RESTRICT 1
-#define OrgApacheLuceneQueryparserXmlQueryBuilder_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserXmlQueryBuilder 1
+#define INCLUDE_OrgApacheLuceneQueryparserXmlQueryBuilder 1
 #include "org/apache/lucene/queryparser/xml/QueryBuilder.h"
 
 @class JavaUtilHashMap;
 @class OrgApacheLuceneSearchQuery;
 @protocol OrgW3cDomElement;
 
+/*!
+ @brief Factory for <code>QueryBuilder</code>
+ */
 @interface OrgApacheLuceneQueryparserXmlQueryBuilderFactory : NSObject < OrgApacheLuceneQueryparserXmlQueryBuilder > {
  @public
   JavaUtilHashMap *builders_;
@@ -50,8 +53,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlQueryBuilderFactory_init(Org
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlQueryBuilderFactory *new_OrgApacheLuceneQueryparserXmlQueryBuilderFactory_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlQueryBuilderFactory *create_OrgApacheLuceneQueryparserXmlQueryBuilderFactory_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlQueryBuilderFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserXmlQueryBuilderFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlQueryBuilderFactory")

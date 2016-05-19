@@ -5,36 +5,55 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneDocumentDocumentStoredFieldVisitor_INCLUDE_ALL")
-#if OrgApacheLuceneDocumentDocumentStoredFieldVisitor_RESTRICT
-#define OrgApacheLuceneDocumentDocumentStoredFieldVisitor_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneDocumentDocumentStoredFieldVisitor")
+#ifdef RESTRICT_OrgApacheLuceneDocumentDocumentStoredFieldVisitor
+#define INCLUDE_ALL_OrgApacheLuceneDocumentDocumentStoredFieldVisitor 0
 #else
-#define OrgApacheLuceneDocumentDocumentStoredFieldVisitor_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneDocumentDocumentStoredFieldVisitor 1
 #endif
-#undef OrgApacheLuceneDocumentDocumentStoredFieldVisitor_RESTRICT
+#undef RESTRICT_OrgApacheLuceneDocumentDocumentStoredFieldVisitor
 
-#if !defined (_OrgApacheLuceneDocumentDocumentStoredFieldVisitor_) && (OrgApacheLuceneDocumentDocumentStoredFieldVisitor_INCLUDE_ALL || OrgApacheLuceneDocumentDocumentStoredFieldVisitor_INCLUDE)
-#define _OrgApacheLuceneDocumentDocumentStoredFieldVisitor_
+#if !defined (OrgApacheLuceneDocumentDocumentStoredFieldVisitor_) && (INCLUDE_ALL_OrgApacheLuceneDocumentDocumentStoredFieldVisitor || defined(INCLUDE_OrgApacheLuceneDocumentDocumentStoredFieldVisitor))
+#define OrgApacheLuceneDocumentDocumentStoredFieldVisitor_
 
-#define OrgApacheLuceneIndexStoredFieldVisitor_RESTRICT 1
-#define OrgApacheLuceneIndexStoredFieldVisitor_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexStoredFieldVisitor 1
+#define INCLUDE_OrgApacheLuceneIndexStoredFieldVisitor 1
 #include "org/apache/lucene/index/StoredFieldVisitor.h"
 
 @class IOSByteArray;
 @class IOSObjectArray;
 @class OrgApacheLuceneDocumentDocument;
 @class OrgApacheLuceneIndexFieldInfo;
-@class OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum;
+@class OrgApacheLuceneIndexStoredFieldVisitor_Status;
 @protocol JavaUtilSet;
 
+/*!
+ @brief A <code>StoredFieldVisitor</code> that creates a <code>Document</code>
+  containing all stored fields, or only specific
+ requested fields provided to <code>DocumentStoredFieldVisitor(Set)</code>.
+ <p>
+ This is used by <code>IndexReader.document(int)</code> to load a
+ document.
+  
+ */
 @interface OrgApacheLuceneDocumentDocumentStoredFieldVisitor : OrgApacheLuceneIndexStoredFieldVisitor
 
 #pragma mark Public
 
+/*!
+ @brief Load all stored fields.
+ */
 - (instancetype)init;
 
+/*!
+ @brief Load only fields named in the provided <code>Set&lt;String&gt;</code>.
+ @param fieldsToAdd Set of fields to load, or <code>null</code> (all fields).
+ */
 - (instancetype)initWithJavaUtilSet:(id<JavaUtilSet>)fieldsToAdd;
 
+/*!
+ @brief Load only fields named in the provided fields.
+ */
 - (instancetype)initWithNSStringArray:(IOSObjectArray *)fields;
 
 - (void)binaryFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
@@ -46,6 +65,13 @@
 - (void)floatFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
                                           withFloat:(jfloat)value;
 
+/*!
+ @brief Retrieve the visited document.
+ @return Document populated with stored fields. Note that only
+ the stored information in the field instances is valid,
+ data such as boosts, indexing options, term vector options,
+ etc is not set.
+ */
 - (OrgApacheLuceneDocumentDocument *)getDocument;
 
 - (void)intFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
@@ -54,7 +80,7 @@
 - (void)longFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
                                           withLong:(jlong)value;
 
-- (OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum *)needsFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo;
+- (OrgApacheLuceneIndexStoredFieldVisitor_Status *)needsFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo;
 
 - (void)stringFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
                                        withByteArray:(IOSByteArray *)value;
@@ -67,16 +93,22 @@ FOUNDATION_EXPORT void OrgApacheLuceneDocumentDocumentStoredFieldVisitor_initWit
 
 FOUNDATION_EXPORT OrgApacheLuceneDocumentDocumentStoredFieldVisitor *new_OrgApacheLuceneDocumentDocumentStoredFieldVisitor_initWithJavaUtilSet_(id<JavaUtilSet> fieldsToAdd) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneDocumentDocumentStoredFieldVisitor *create_OrgApacheLuceneDocumentDocumentStoredFieldVisitor_initWithJavaUtilSet_(id<JavaUtilSet> fieldsToAdd);
+
 FOUNDATION_EXPORT void OrgApacheLuceneDocumentDocumentStoredFieldVisitor_initWithNSStringArray_(OrgApacheLuceneDocumentDocumentStoredFieldVisitor *self, IOSObjectArray *fields);
 
 FOUNDATION_EXPORT OrgApacheLuceneDocumentDocumentStoredFieldVisitor *new_OrgApacheLuceneDocumentDocumentStoredFieldVisitor_initWithNSStringArray_(IOSObjectArray *fields) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneDocumentDocumentStoredFieldVisitor *create_OrgApacheLuceneDocumentDocumentStoredFieldVisitor_initWithNSStringArray_(IOSObjectArray *fields);
 
 FOUNDATION_EXPORT void OrgApacheLuceneDocumentDocumentStoredFieldVisitor_init(OrgApacheLuceneDocumentDocumentStoredFieldVisitor *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneDocumentDocumentStoredFieldVisitor *new_OrgApacheLuceneDocumentDocumentStoredFieldVisitor_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneDocumentDocumentStoredFieldVisitor *create_OrgApacheLuceneDocumentDocumentStoredFieldVisitor_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentDocumentStoredFieldVisitor)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneDocumentDocumentStoredFieldVisitor_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneDocumentDocumentStoredFieldVisitor")

@@ -5,41 +5,69 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexFilteredTermsEnum_INCLUDE_ALL")
-#if OrgApacheLuceneIndexFilteredTermsEnum_RESTRICT
-#define OrgApacheLuceneIndexFilteredTermsEnum_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexFilteredTermsEnum")
+#ifdef RESTRICT_OrgApacheLuceneIndexFilteredTermsEnum
+#define INCLUDE_ALL_OrgApacheLuceneIndexFilteredTermsEnum 0
 #else
-#define OrgApacheLuceneIndexFilteredTermsEnum_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexFilteredTermsEnum 1
 #endif
-#undef OrgApacheLuceneIndexFilteredTermsEnum_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexFilteredTermsEnum
 
-#if !defined (_OrgApacheLuceneIndexFilteredTermsEnum_) && (OrgApacheLuceneIndexFilteredTermsEnum_INCLUDE_ALL || OrgApacheLuceneIndexFilteredTermsEnum_INCLUDE)
-#define _OrgApacheLuceneIndexFilteredTermsEnum_
+#if !defined (OrgApacheLuceneIndexFilteredTermsEnum_) && (INCLUDE_ALL_OrgApacheLuceneIndexFilteredTermsEnum || defined(INCLUDE_OrgApacheLuceneIndexFilteredTermsEnum))
+#define OrgApacheLuceneIndexFilteredTermsEnum_
 
-#define OrgApacheLuceneIndexTermsEnum_RESTRICT 1
-#define OrgApacheLuceneIndexTermsEnum_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexTermsEnum 1
+#define INCLUDE_OrgApacheLuceneIndexTermsEnum 1
 #include "org/apache/lucene/index/TermsEnum.h"
 
-@class OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum;
+@class OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus;
 @class OrgApacheLuceneIndexPostingsEnum;
 @class OrgApacheLuceneIndexTermState;
-@class OrgApacheLuceneIndexTermsEnum_SeekStatusEnum;
+@class OrgApacheLuceneIndexTermsEnum_SeekStatus;
 @class OrgApacheLuceneUtilAttributeSource;
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief Abstract class for enumerating a subset of all terms.
+ <p>Term enumerations are always ordered by
+ <code>BytesRef.compareTo</code>.  Each term in the enumeration is
+ greater than all that precede it.</p>
+ <p><em>Please note:</em> Consumers of this enum cannot
+ call <code>seek()</code>, it is forward only; it throws
+ <code>UnsupportedOperationException</code> when a seeking method
+ is called.
+ */
 @interface OrgApacheLuceneIndexFilteredTermsEnum : OrgApacheLuceneIndexTermsEnum {
  @public
+  /*!
+   @brief Which term the enum is currently positioned to.
+   */
   OrgApacheLuceneUtilBytesRef *actualTerm_;
+  /*!
+   @brief The delegate <code>TermsEnum</code>.
+   */
   OrgApacheLuceneIndexTermsEnum *tenum_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief Creates a filtered <code>TermsEnum</code> on a terms enum.
+ @param tenum the terms enumeration to filter.
+ */
 - (instancetype)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)tenum;
 
+/*!
+ @brief Creates a filtered <code>TermsEnum</code> on a terms enum.
+ @param tenum the terms enumeration to filter.
+ */
 - (instancetype)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)tenum
                                           withBoolean:(jboolean)startWithSeek;
 
+/*!
+ @brief Returns the related attributes, the returned <code>AttributeSource</code>
+ is shared with the delegate <code>TermsEnum</code>.
+ */
 - (OrgApacheLuceneUtilAttributeSource *)attributes;
 
 - (jint)docFreq;
@@ -51,27 +79,80 @@
 - (OrgApacheLuceneIndexPostingsEnum *)postingsWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)reuse
                                                                            withInt:(jint)flags;
 
-- (OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *)seekCeilWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
+/*!
+ @brief This enum does not support seeking!
+ @throws UnsupportedOperationException In general, subclasses do not
+ support seeking.
+ */
+- (OrgApacheLuceneIndexTermsEnum_SeekStatus *)seekCeilWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
 
+/*!
+ @brief This enum does not support seeking!
+ @throws UnsupportedOperationException In general, subclasses do not
+ support seeking.
+ */
 - (jboolean)seekExactWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
 
+/*!
+ @brief This enum does not support seeking!
+ @throws UnsupportedOperationException In general, subclasses do not
+ support seeking.
+ */
 - (void)seekExactWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term
                withOrgApacheLuceneIndexTermState:(OrgApacheLuceneIndexTermState *)state;
 
+/*!
+ @brief This enum does not support seeking!
+ @throws UnsupportedOperationException In general, subclasses do not
+ support seeking.
+ */
 - (void)seekExactWithLong:(jlong)ord;
 
 - (OrgApacheLuceneUtilBytesRef *)term;
 
+/*!
+ @brief Returns the filtered enums term state
+ */
 - (OrgApacheLuceneIndexTermState *)termState;
 
 - (jlong)totalTermFreq;
 
 #pragma mark Protected
 
-- (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
+/*!
+ @brief Return if term is accepted, not accepted or the iteration should ended
+ (and possibly seek).
+ */
+- (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
 
+/*!
+ @brief On the first call to <code>next</code> or if <code>accept</code> returns
+ <code>AcceptStatus.YES_AND_SEEK</code> or <code>AcceptStatus.NO_AND_SEEK</code>,
+ this method will be called to eventually seek the underlying TermsEnum
+ to a new position.
+ On the first call, <code>currentTerm</code> will be <code>null</code>, later
+ calls will provide the term the underlying enum is positioned at.
+ This method returns per default only one time the initial seek term
+ and then <code>null</code>, so no repositioning is ever done.
+ <p>Override this method, if you want a more sophisticated TermsEnum,
+ that repositions the iterator during enumeration.
+ If this method always returns <code>null</code> the enum is empty.
+ <p><em>Please note:</em> This method should always provide a greater term
+ than the last enumerated term, else the behaviour of this enum
+ violates the contract for TermsEnums.
+ */
 - (OrgApacheLuceneUtilBytesRef *)nextSeekTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)currentTerm;
 
+/*!
+ @brief Use this method to set the initial <code>BytesRef</code>
+ to seek before iterating.
+ This is a convenience method for
+ subclasses that do not override <code>nextSeekTerm</code>.
+ If the initial seek term is <code>null</code> (default),
+ the enum is empty.
+ <P>You can only use this method, if you keep the default
+ implementation of <code>nextSeekTerm</code>.
+ */
 - (void)setInitialSeekTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
 
 @end
@@ -89,56 +170,96 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFilteredTermsEnum)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum_) && (OrgApacheLuceneIndexFilteredTermsEnum_INCLUDE_ALL || OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum_INCLUDE)
-#define _OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum_
+#if !defined (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_) && (INCLUDE_ALL_OrgApacheLuceneIndexFilteredTermsEnum || defined(INCLUDE_OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus))
+#define OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_
 
-#define JavaLangEnum_RESTRICT 1
-#define JavaLangEnum_INCLUDE 1
+#define RESTRICT_JavaLangEnum 1
+#define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
 
-typedef NS_ENUM(NSUInteger, OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus) {
-  OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_YES = 0,
-  OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_YES_AND_SEEK = 1,
-  OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_NO = 2,
-  OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_NO_AND_SEEK = 3,
-  OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_END = 4,
+typedef NS_ENUM(NSUInteger, OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_Enum) {
+  OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_Enum_YES = 0,
+  OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_Enum_YES_AND_SEEK = 1,
+  OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_Enum_NO = 2,
+  OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_Enum_NO_AND_SEEK = 3,
+  OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_Enum_END = 4,
 };
 
-@interface OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum : JavaLangEnum < NSCopying >
+/*!
+ @brief Return value, if term should be accepted or the iteration should
+ <code>END</code>.
+ The <code>*_SEEK</code> values denote, that after handling the current term
+ the enum should call <code>nextSeekTerm</code> and step forward.
+ - seealso: #accept(BytesRef)
+ */
+@interface OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus : JavaLangEnum < NSCopying >
+
++ (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *)YES_;
+
++ (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *)YES_AND_SEEK;
+
++ (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *)NO_;
+
++ (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *)NO_AND_SEEK;
+
++ (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *)END;
 
 #pragma mark Package-Private
 
 + (IOSObjectArray *)values;
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum_values();
 
-+ (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum *)valueOfWithNSString:(NSString *)name;
-FOUNDATION_EXPORT OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum *OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum_valueOfWithNSString_(NSString *name);
++ (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *)valueOfWithNSString:(NSString *)name;
 
 - (id)copyWithZone:(NSZone *)zone;
+- (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_Enum)toNSEnum;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum)
+J2OBJC_STATIC_INIT(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus)
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum *OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum_values_[];
+/*! INTERNAL ONLY - Use enum accessors declared below. */
+FOUNDATION_EXPORT OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_values_[];
 
-#define OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum_YES OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum_values_[OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_YES]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum, YES)
+/*!
+ @brief Accept the term and position the enum at the next term.
+ */
+inline OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_get_YES();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, YES)
 
-#define OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum_YES_AND_SEEK OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum_values_[OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_YES_AND_SEEK]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum, YES_AND_SEEK)
+/*!
+ @brief Accept the term and advance (<code>FilteredTermsEnum.nextSeekTerm(BytesRef)</code>)
+ to the next term.
+ */
+inline OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_get_YES_AND_SEEK();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, YES_AND_SEEK)
 
-#define OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum_NO OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum_values_[OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_NO]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum, NO)
+/*!
+ @brief Reject the term and position the enum at the next term.
+ */
+inline OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_get_NO();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, NO)
 
-#define OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum_NO_AND_SEEK OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum_values_[OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_NO_AND_SEEK]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum, NO_AND_SEEK)
+/*!
+ @brief Reject the term and advance (<code>FilteredTermsEnum.nextSeekTerm(BytesRef)</code>)
+ to the next term.
+ */
+inline OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_get_NO_AND_SEEK();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, NO_AND_SEEK)
 
-#define OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum_END OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum_values_[OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_END]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum, END)
+/*!
+ @brief Reject the term and stop enumerating.
+ */
+inline OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_get_END();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, END)
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum)
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_values();
+
+FOUNDATION_EXPORT OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_valueOfWithNSString_(NSString *name);
+
+FOUNDATION_EXPORT OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_fromOrdinal(NSUInteger ordinal);
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexFilteredTermsEnum_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexFilteredTermsEnum")

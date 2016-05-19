@@ -53,13 +53,23 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisStandardUAX29URLEmail
 
 __attribute__((unused)) static OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_$1 *new_OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_$1_initWithOrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer *outer$, OrgApacheLuceneAnalysisTokenizer *capture$0, OrgApacheLuceneAnalysisTokenizer *arg$0, OrgApacheLuceneAnalysisTokenStream *arg$1) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_$1 *create_OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_$1_initWithOrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer *outer$, OrgApacheLuceneAnalysisTokenizer *capture$0, OrgApacheLuceneAnalysisTokenizer *arg$0, OrgApacheLuceneAnalysisTokenStream *arg$1);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_$1)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer)
 
-OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_STOP_WORDS_SET_;
+OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_STOP_WORDS_SET;
 
 @implementation OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer
+
++ (jint)DEFAULT_MAX_TOKEN_LENGTH {
+  return OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_DEFAULT_MAX_TOKEN_LENGTH;
+}
+
++ (OrgApacheLuceneAnalysisUtilCharArraySet *)STOP_WORDS_SET {
+  return OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_STOP_WORDS_SET;
+}
 
 - (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopWords {
   OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, stopWords);
@@ -88,23 +98,23 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName {
   OrgApacheLuceneAnalysisTokenizer *src;
-  if ([((OrgApacheLuceneUtilVersion *) nil_chk([self getVersion])) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_7_0_)]) {
-    src = [new_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer_init() autorelease];
-    [((OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer *) check_class_cast(src, [OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer class])) setMaxTokenLengthWithInt:maxTokenLength_];
+  if ([((OrgApacheLuceneUtilVersion *) nil_chk([self getVersion])) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_7_0)]) {
+    src = create_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer_init();
+    [((OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer *) cast_chk(src, [OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer class])) setMaxTokenLengthWithInt:maxTokenLength_];
   }
   else {
-    src = [new_OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_init() autorelease];
-    [((OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40 *) check_class_cast(src, [OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40 class])) setMaxTokenLengthWithInt:maxTokenLength_];
+    src = create_OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_init();
+    [((OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40 *) cast_chk(src, [OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40 class])) setMaxTokenLengthWithInt:maxTokenLength_];
   }
-  OrgApacheLuceneAnalysisTokenStream *tok = [new_OrgApacheLuceneAnalysisStandardStandardFilter_initWithOrgApacheLuceneAnalysisTokenStream_(src) autorelease];
-  tok = [new_OrgApacheLuceneAnalysisCoreLowerCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(tok) autorelease];
-  tok = [new_OrgApacheLuceneAnalysisCoreStopFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(tok, stopwords_) autorelease];
-  return [new_OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_$1_initWithOrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(self, src, src, tok) autorelease];
+  OrgApacheLuceneAnalysisTokenStream *tok = create_OrgApacheLuceneAnalysisStandardStandardFilter_initWithOrgApacheLuceneAnalysisTokenStream_(src);
+  tok = create_OrgApacheLuceneAnalysisCoreLowerCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(tok);
+  tok = create_OrgApacheLuceneAnalysisCoreStopFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(tok, stopwords_);
+  return create_OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_$1_initWithOrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(self, src, src, tok);
 }
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer class]) {
-    JreStrongAssign(&OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_STOP_WORDS_SET_, JreLoadStatic(OrgApacheLuceneAnalysisCoreStopAnalyzer, ENGLISH_STOP_WORDS_SET_));
+    JreStrongAssign(&OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_STOP_WORDS_SET, JreLoadStatic(OrgApacheLuceneAnalysisCoreStopAnalyzer, ENGLISH_STOP_WORDS_SET));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer)
   }
 }
@@ -121,7 +131,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   static const J2ObjcFieldInfo fields[] = {
     { "DEFAULT_MAX_TOKEN_LENGTH", "DEFAULT_MAX_TOKEN_LENGTH", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_DEFAULT_MAX_TOKEN_LENGTH },
     { "maxTokenLength_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "STOP_WORDS_SET_", NULL, 0x19, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_STOP_WORDS_SET_, NULL, .constantValue.asLong = 0 },
+    { "STOP_WORDS_SET", "STOP_WORDS_SET", 0x19, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_STOP_WORDS_SET, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer = { 2, "UAX29URLEmailAnalyzer", "org.apache.lucene.analysis.standard", NULL, 0x11, 6, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer;
@@ -135,19 +145,23 @@ void OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_initWithOrgApacheLucen
 }
 
 OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer *new_OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopWords) {
-  OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer *self = [OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer alloc];
-  OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, stopWords);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer, initWithOrgApacheLuceneAnalysisUtilCharArraySet_, stopWords)
+}
+
+OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer *create_OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopWords) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer, initWithOrgApacheLuceneAnalysisUtilCharArraySet_, stopWords)
 }
 
 void OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_init(OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer *self) {
-  OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_STOP_WORDS_SET_);
+  OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_STOP_WORDS_SET);
 }
 
 OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer *new_OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_init() {
-  OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer *self = [OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer alloc];
-  OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer, init)
+}
+
+OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer *create_OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer, init)
 }
 
 void OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_initWithJavaIoReader_(OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer *self, JavaIoReader *stopwords) {
@@ -155,9 +169,11 @@ void OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_initWithJavaIoReader_(
 }
 
 OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer *new_OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_initWithJavaIoReader_(JavaIoReader *stopwords) {
-  OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer *self = [OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer alloc];
-  OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_initWithJavaIoReader_(self, stopwords);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer, initWithJavaIoReader_, stopwords)
+}
+
+OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer *create_OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_initWithJavaIoReader_(JavaIoReader *stopwords) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer, initWithJavaIoReader_, stopwords)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer)
@@ -167,10 +183,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisStandardUAX29URLEmailAna
 - (void)setReaderWithJavaIoReader:(JavaIoReader *)reader {
   jint m = this$0_->maxTokenLength_;
   if ([val$src_ isKindOfClass:[OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer class]]) {
-    [((OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer *) nil_chk(((OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer *) check_class_cast(val$src_, [OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer class])))) setMaxTokenLengthWithInt:m];
+    [((OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer *) nil_chk(((OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer *) cast_chk(val$src_, [OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer class])))) setMaxTokenLengthWithInt:m];
   }
   else {
-    [((OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40 *) nil_chk(((OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40 *) check_class_cast(val$src_, [OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40 class])))) setMaxTokenLengthWithInt:m];
+    [((OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40 *) nil_chk(((OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40 *) cast_chk(val$src_, [OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40 class])))) setMaxTokenLengthWithInt:m];
   }
   [super setReaderWithJavaIoReader:reader];
 }
@@ -212,9 +228,11 @@ void OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_$1_initWithOrgApacheLu
 }
 
 OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_$1 *new_OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_$1_initWithOrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer *outer$, OrgApacheLuceneAnalysisTokenizer *capture$0, OrgApacheLuceneAnalysisTokenizer *arg$0, OrgApacheLuceneAnalysisTokenStream *arg$1) {
-  OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_$1 *self = [OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_$1 alloc];
-  OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_$1_initWithOrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(self, outer$, capture$0, arg$0, arg$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_$1, initWithOrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_, outer$, capture$0, arg$0, arg$1)
+}
+
+OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_$1 *create_OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_$1_initWithOrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer *outer$, OrgApacheLuceneAnalysisTokenizer *capture$0, OrgApacheLuceneAnalysisTokenizer *arg$0, OrgApacheLuceneAnalysisTokenStream *arg$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_$1, initWithOrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_, outer$, capture$0, arg$0, arg$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_$1)

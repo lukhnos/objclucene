@@ -5,25 +5,33 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute_RESTRICT
-#define OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute 0
 #else
-#define OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute 1
 #endif
-#undef OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute
 
-#if !defined (_OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute_) && (OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute_INCLUDE_ALL || OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute_INCLUDE)
-#define _OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute_
+#if !defined (OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute || defined(INCLUDE_OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute))
+#define OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute_
 
-#define OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute 1
 #include "org/apache/lucene/analysis/tokenattributes/TermToBytesRefAttribute.h"
 
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief This attribute can be used if you have the raw term bytes to be indexed.
+ It can be used as replacement for <code>CharTermAttribute</code>, if binary
+ terms should be indexed.
+ */
 @protocol OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute < OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute, NSObject, JavaObject >
 
+/*!
+ @brief Sets the <code>BytesRef</code> of the term
+ */
 - (void)setBytesRefWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes;
 
 @end
@@ -34,4 +42,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenattributesBytesTermAttrib
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute")

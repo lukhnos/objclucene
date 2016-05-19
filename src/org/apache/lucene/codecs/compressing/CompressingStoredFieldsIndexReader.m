@@ -40,8 +40,9 @@
 
 @end
 
-static jlong OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_BASE_RAM_BYTES_USED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader, BASE_RAM_BYTES_USED_, jlong)
+inline jlong OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_get_BASE_RAM_BYTES_USED();
+static jlong OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_BASE_RAM_BYTES_USED;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader, BASE_RAM_BYTES_USED, jlong)
 
 __attribute__((unused)) static jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_blockWithInt_(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader *self, jint docID);
 
@@ -82,7 +83,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsI
 
 - (jlong)getStartPointerWithInt:(jint)docID {
   if (docID < 0 || docID >= maxDoc_) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$I", @"docID out of range [0-", maxDoc_, @"]: ", docID)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$I", @"docID out of range [0-", maxDoc_, @"]: ", docID));
   }
   jint block = OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_blockWithInt_(self, docID);
   jint relativeChunk = OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_relativeChunkWithInt_withInt_(self, block, docID - IOSIntArray_Get(nil_chk(docBases_), block));
@@ -94,7 +95,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsI
 }
 
 - (jlong)ramBytesUsed {
-  jlong res = OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_BASE_RAM_BYTES_USED_;
+  jlong res = OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_BASE_RAM_BYTES_USED;
   res += OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfWithNSObjectArray_(docBasesDeltas_);
   {
     IOSObjectArray *a__ = docBasesDeltas_;
@@ -123,7 +124,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsI
 }
 
 - (id<JavaUtilCollection>)getChildResources {
-  id<JavaUtilList> resources = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> resources = create_JavaUtilArrayList_init();
   jlong docBaseDeltaBytes = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfWithNSObjectArray_(docBasesDeltas_);
   {
     IOSObjectArray *a__ = docBasesDeltas_;
@@ -169,7 +170,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsI
 
 + (void)initialize {
   if (self == [OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader class]) {
-    OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_BASE_RAM_BYTES_USED_ = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_class_());
+    OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_BASE_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_class_());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader)
   }
 }
@@ -184,11 +185,11 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsI
     { "getStartPointerWithInt:", "getStartPointer", "J", 0x0, NULL, NULL },
     { "clone", NULL, "Lorg.apache.lucene.codecs.compressing.CompressingStoredFieldsIndexReader;", 0x1, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "BASE_RAM_BYTES_USED_", NULL, 0x1a, "J", &OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_BASE_RAM_BYTES_USED_, NULL, .constantValue.asLong = 0 },
+    { "BASE_RAM_BYTES_USED", "BASE_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_BASE_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
     { "maxDoc_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "docBases_", NULL, 0x10, "[I", NULL, NULL, .constantValue.asLong = 0 },
     { "startPointers_", NULL, 0x10, "[J", NULL, NULL, .constantValue.asLong = 0 },
@@ -232,16 +233,16 @@ void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_initWith
     *IOSIntArray_GetRef(nil_chk(avgChunkDocs), blockCount) = [fieldsIndexIn readVInt];
     jint bitsPerDocBase = [fieldsIndexIn readVInt];
     if (bitsPerDocBase > 32) {
-      @throw [new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$I", @"Corrupted bitsPerDocBase: ", bitsPerDocBase), fieldsIndexIn) autorelease];
+      @throw create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$I", @"Corrupted bitsPerDocBase: ", bitsPerDocBase), fieldsIndexIn);
     }
-    IOSObjectArray_Set(nil_chk(docBasesDeltas), blockCount, OrgApacheLuceneUtilPackedPackedInts_getReaderNoHeaderWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_withInt_(fieldsIndexIn, JreLoadStatic(OrgApacheLuceneUtilPackedPackedInts_FormatEnum, PACKED), packedIntsVersion, numChunks, bitsPerDocBase));
+    IOSObjectArray_Set(nil_chk(docBasesDeltas), blockCount, OrgApacheLuceneUtilPackedPackedInts_getReaderNoHeaderWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilPackedPackedInts_Format_withInt_withInt_withInt_(fieldsIndexIn, JreLoadEnum(OrgApacheLuceneUtilPackedPackedInts_Format, PACKED), packedIntsVersion, numChunks, bitsPerDocBase));
     *IOSLongArray_GetRef(nil_chk(startPointers), blockCount) = [fieldsIndexIn readVLong];
     *IOSLongArray_GetRef(nil_chk(avgChunkSizes), blockCount) = [fieldsIndexIn readVLong];
     jint bitsPerStartPointer = [fieldsIndexIn readVInt];
     if (bitsPerStartPointer > 64) {
-      @throw [new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$I", @"Corrupted bitsPerStartPointer: ", bitsPerStartPointer), fieldsIndexIn) autorelease];
+      @throw create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$I", @"Corrupted bitsPerStartPointer: ", bitsPerStartPointer), fieldsIndexIn);
     }
-    IOSObjectArray_Set(nil_chk(startPointersDeltas), blockCount, OrgApacheLuceneUtilPackedPackedInts_getReaderNoHeaderWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_withInt_(fieldsIndexIn, JreLoadStatic(OrgApacheLuceneUtilPackedPackedInts_FormatEnum, PACKED), packedIntsVersion, numChunks, bitsPerStartPointer));
+    IOSObjectArray_Set(nil_chk(startPointersDeltas), blockCount, OrgApacheLuceneUtilPackedPackedInts_getReaderNoHeaderWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilPackedPackedInts_Format_withInt_withInt_withInt_(fieldsIndexIn, JreLoadEnum(OrgApacheLuceneUtilPackedPackedInts_Format, PACKED), packedIntsVersion, numChunks, bitsPerStartPointer));
     ++blockCount;
   }
   JreStrongAssign(&self->docBases_, JavaUtilArrays_copyOfWithIntArray_withInt_(docBases, blockCount));
@@ -253,9 +254,11 @@ void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_initWith
 }
 
 OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader *new_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_initWithOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneIndexSegmentInfo_(OrgApacheLuceneStoreIndexInput *fieldsIndexIn, OrgApacheLuceneIndexSegmentInfo *si) {
-  OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader *self = [OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader alloc];
-  OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_initWithOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneIndexSegmentInfo_(self, fieldsIndexIn, si);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader, initWithOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneIndexSegmentInfo_, fieldsIndexIn, si)
+}
+
+OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader *create_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_initWithOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneIndexSegmentInfo_(OrgApacheLuceneStoreIndexInput *fieldsIndexIn, OrgApacheLuceneIndexSegmentInfo *si) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader, initWithOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneIndexSegmentInfo_, fieldsIndexIn, si)
 }
 
 jint OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_blockWithInt_(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader *self, jint docID) {

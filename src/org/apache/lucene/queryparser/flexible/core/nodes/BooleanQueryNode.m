@@ -24,7 +24,7 @@
 
 - (NSString *)description {
   if ([self getChildren] == nil || [((id<JavaUtilList>) nil_chk([self getChildren])) size] == 0) return @"<boolean operation='default'/>";
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   [sb appendWithNSString:@"<boolean operation='default'>"];
   for (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> __strong child in nil_chk([self getChildren])) {
     [sb appendWithNSString:@"\n"];
@@ -36,7 +36,7 @@
 
 - (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escapeSyntaxParser {
   if ([self getChildren] == nil || [((id<JavaUtilList>) nil_chk([self getChildren])) size] == 0) return @"";
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   NSString *filler = @"";
   for (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> __strong child in nil_chk([self getChildren])) {
     [((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:filler])) appendWithJavaLangCharSequence:[((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(child)) toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:escapeSyntaxParser]];
@@ -47,13 +47,13 @@
 }
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode *clone = (OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode *) check_class_cast([super cloneTree], [OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode class]);
+  OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode *clone = (OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode *) cast_chk([super cloneTree], [OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode class]);
   return clone;
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:", "BooleanQueryNode", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilList:", "BooleanQueryNode", NULL, 0x1, NULL, "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;)V" },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:", "toQueryString", "Ljava.lang.CharSequence;", 0x1, NULL, NULL },
     { "cloneTree", NULL, "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x1, "Ljava.lang.CloneNotSupportedException;", NULL },
@@ -72,9 +72,11 @@ void OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode_initWithJavaUti
 }
 
 OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode_initWithJavaUtilList_(id<JavaUtilList> clauses) {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode *self = [OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode alloc];
-  OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode_initWithJavaUtilList_(self, clauses);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode, initWithJavaUtilList_, clauses)
+}
+
+OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode *create_OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode_initWithJavaUtilList_(id<JavaUtilList> clauses) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode, initWithJavaUtilList_, clauses)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode)

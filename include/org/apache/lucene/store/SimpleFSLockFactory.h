@@ -5,25 +5,54 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneStoreSimpleFSLockFactory_INCLUDE_ALL")
-#if OrgApacheLuceneStoreSimpleFSLockFactory_RESTRICT
-#define OrgApacheLuceneStoreSimpleFSLockFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneStoreSimpleFSLockFactory")
+#ifdef RESTRICT_OrgApacheLuceneStoreSimpleFSLockFactory
+#define INCLUDE_ALL_OrgApacheLuceneStoreSimpleFSLockFactory 0
 #else
-#define OrgApacheLuceneStoreSimpleFSLockFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneStoreSimpleFSLockFactory 1
 #endif
-#undef OrgApacheLuceneStoreSimpleFSLockFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneStoreSimpleFSLockFactory
 
-#if !defined (_OrgApacheLuceneStoreSimpleFSLockFactory_) && (OrgApacheLuceneStoreSimpleFSLockFactory_INCLUDE_ALL || OrgApacheLuceneStoreSimpleFSLockFactory_INCLUDE)
-#define _OrgApacheLuceneStoreSimpleFSLockFactory_
+#if !defined (OrgApacheLuceneStoreSimpleFSLockFactory_) && (INCLUDE_ALL_OrgApacheLuceneStoreSimpleFSLockFactory || defined(INCLUDE_OrgApacheLuceneStoreSimpleFSLockFactory))
+#define OrgApacheLuceneStoreSimpleFSLockFactory_
 
-#define OrgApacheLuceneStoreFSLockFactory_RESTRICT 1
-#define OrgApacheLuceneStoreFSLockFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreFSLockFactory 1
+#define INCLUDE_OrgApacheLuceneStoreFSLockFactory 1
 #include "org/apache/lucene/store/FSLockFactory.h"
 
 @class OrgApacheLuceneStoreFSDirectory;
 @class OrgApacheLuceneStoreLock;
 
+/*!
+ @brief <p>Implements <code>LockFactory</code> using <code>Files.createFile</code>
+ .
+ </p>
+ <p>The main downside with using this API for locking is 
+ that the Lucene write lock may not be released when 
+ the JVM exits abnormally.</p>
+ <p>When this happens, an <code>LockObtainFailedException</code>
+ is hit when trying to create a writer, in which case you may
+ need to explicitly clear the lock file first by
+ manually removing the file.  But, first be certain that
+ no writer is in fact writing to the index otherwise you
+ can easily corrupt your index.</p>
+ <p>Special care needs to be taken if you change the locking
+ implementation: First be certain that no writer is in fact
+ writing to the index otherwise you can easily corrupt
+ your index. Be sure to do the LockFactory change all Lucene
+ instances and clean up all leftover lock files before starting
+ the new configuration for the first time. Different implementations
+ can not work together!</p>
+ <p>If you suspect that this or any other LockFactory is
+ not working properly in your environment, you can easily
+ test it by using <code>VerifyingLockFactory</code>, <code>LockVerifyServer</code>
+  and <code>LockStressTest</code>.</p>
+ <p>This is a singleton, you have to use <code>INSTANCE</code>.
+ - seealso: LockFactory
+ */
 @interface OrgApacheLuceneStoreSimpleFSLockFactory : OrgApacheLuceneStoreFSLockFactory
+
++ (OrgApacheLuceneStoreSimpleFSLockFactory *)INSTANCE;
 
 #pragma mark Protected
 
@@ -34,18 +63,23 @@
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneStoreSimpleFSLockFactory)
 
-FOUNDATION_EXPORT OrgApacheLuceneStoreSimpleFSLockFactory *OrgApacheLuceneStoreSimpleFSLockFactory_INSTANCE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneStoreSimpleFSLockFactory, INSTANCE_, OrgApacheLuceneStoreSimpleFSLockFactory *)
+/*!
+ @brief Singleton instance
+ */
+inline OrgApacheLuceneStoreSimpleFSLockFactory *OrgApacheLuceneStoreSimpleFSLockFactory_get_INSTANCE();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT OrgApacheLuceneStoreSimpleFSLockFactory *OrgApacheLuceneStoreSimpleFSLockFactory_INSTANCE;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneStoreSimpleFSLockFactory, INSTANCE, OrgApacheLuceneStoreSimpleFSLockFactory *)
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreSimpleFSLockFactory)
 
 #endif
 
-#if !defined (_OrgApacheLuceneStoreSimpleFSLockFactory_SimpleFSLock_) && (OrgApacheLuceneStoreSimpleFSLockFactory_INCLUDE_ALL || OrgApacheLuceneStoreSimpleFSLockFactory_SimpleFSLock_INCLUDE)
-#define _OrgApacheLuceneStoreSimpleFSLockFactory_SimpleFSLock_
+#if !defined (OrgApacheLuceneStoreSimpleFSLockFactory_SimpleFSLock_) && (INCLUDE_ALL_OrgApacheLuceneStoreSimpleFSLockFactory || defined(INCLUDE_OrgApacheLuceneStoreSimpleFSLockFactory_SimpleFSLock))
+#define OrgApacheLuceneStoreSimpleFSLockFactory_SimpleFSLock_
 
-#define OrgApacheLuceneStoreLock_RESTRICT 1
-#define OrgApacheLuceneStoreLock_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreLock 1
+#define INCLUDE_OrgApacheLuceneStoreLock 1
 #include "org/apache/lucene/store/Lock.h"
 
 @class OrgLukhnosPortmobileFileAttributeFileTime;
@@ -74,8 +108,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneStoreSimpleFSLockFactory_SimpleFSLock_init
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreSimpleFSLockFactory_SimpleFSLock *new_OrgApacheLuceneStoreSimpleFSLockFactory_SimpleFSLock_initWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileAttributeFileTime_(OrgLukhnosPortmobileFilePath *path, OrgLukhnosPortmobileFileAttributeFileTime *creationTime) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneStoreSimpleFSLockFactory_SimpleFSLock *create_OrgApacheLuceneStoreSimpleFSLockFactory_SimpleFSLock_initWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileAttributeFileTime_(OrgLukhnosPortmobileFilePath *path, OrgLukhnosPortmobileFileAttributeFileTime *creationTime);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreSimpleFSLockFactory_SimpleFSLock)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneStoreSimpleFSLockFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreSimpleFSLockFactory")

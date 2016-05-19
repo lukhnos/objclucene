@@ -5,29 +5,43 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory_) && (OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory))
+#define OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
 @class OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter;
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>RemoveDuplicatesTokenFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_rmdup" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+ &lt;filter class="solr.RemoveDuplicatesTokenFilterFactory"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new RemoveDuplicatesTokenFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -40,8 +54,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesToken
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory *create_OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory")

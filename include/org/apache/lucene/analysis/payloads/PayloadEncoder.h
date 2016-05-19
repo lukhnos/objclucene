@@ -5,24 +5,34 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisPayloadsPayloadEncoder_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisPayloadsPayloadEncoder_RESTRICT
-#define OrgApacheLuceneAnalysisPayloadsPayloadEncoder_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsPayloadEncoder")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisPayloadsPayloadEncoder
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsPayloadEncoder 0
 #else
-#define OrgApacheLuceneAnalysisPayloadsPayloadEncoder_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsPayloadEncoder 1
 #endif
-#undef OrgApacheLuceneAnalysisPayloadsPayloadEncoder_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisPayloadsPayloadEncoder
 
-#if !defined (_OrgApacheLuceneAnalysisPayloadsPayloadEncoder_) && (OrgApacheLuceneAnalysisPayloadsPayloadEncoder_INCLUDE_ALL || OrgApacheLuceneAnalysisPayloadsPayloadEncoder_INCLUDE)
-#define _OrgApacheLuceneAnalysisPayloadsPayloadEncoder_
+#if !defined (OrgApacheLuceneAnalysisPayloadsPayloadEncoder_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsPayloadEncoder || defined(INCLUDE_OrgApacheLuceneAnalysisPayloadsPayloadEncoder))
+#define OrgApacheLuceneAnalysisPayloadsPayloadEncoder_
 
 @class IOSCharArray;
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief Mainly for use with the DelimitedPayloadTokenFilter, converts char buffers to
+ <code>BytesRef</code>.
+ <p>
+ NOTE: This interface is subject to change 
+ */
 @protocol OrgApacheLuceneAnalysisPayloadsPayloadEncoder < NSObject, JavaObject >
 
 - (OrgApacheLuceneUtilBytesRef *)encodeWithCharArray:(IOSCharArray *)buffer;
 
+/*!
+ @brief Convert a char array to a <code>BytesRef</code>
+ @return encoded <code>BytesRef</code>
+ */
 - (OrgApacheLuceneUtilBytesRef *)encodeWithCharArray:(IOSCharArray *)buffer
                                              withInt:(jint)offset
                                              withInt:(jint)length;
@@ -35,4 +45,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPayloadsPayloadEncoder)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisPayloadsPayloadEncoder_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsPayloadEncoder")

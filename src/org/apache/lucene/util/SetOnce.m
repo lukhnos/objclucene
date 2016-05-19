@@ -39,7 +39,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     JreVolatileStrongAssign(&self->obj_, obj);
   }
   else {
-    @throw [new_OrgApacheLuceneUtilSetOnce_AlreadySetException_init() autorelease];
+    @throw create_OrgApacheLuceneUtilSetOnce_AlreadySetException_init();
   }
 }
 
@@ -47,15 +47,15 @@ J2OBJC_IGNORE_DESIGNATED_END
   return JreLoadVolatileId(&obj_);
 }
 
+- (void)__javaClone:(OrgApacheLuceneUtilSetOnce *)original {
+  [super __javaClone:original];
+  JreCloneVolatileStrong(&obj_, &original->obj_);
+}
+
 - (void)dealloc {
   JreReleaseVolatile(&obj_);
   RELEASE_(set_);
   [super dealloc];
-}
-
-- (void)__javaClone {
-  [super __javaClone];
-  JreRetainVolatile(&obj_);
 }
 
 - (id)copyWithZone:(NSZone *)zone {
@@ -87,9 +87,11 @@ void OrgApacheLuceneUtilSetOnce_init(OrgApacheLuceneUtilSetOnce *self) {
 }
 
 OrgApacheLuceneUtilSetOnce *new_OrgApacheLuceneUtilSetOnce_init() {
-  OrgApacheLuceneUtilSetOnce *self = [OrgApacheLuceneUtilSetOnce alloc];
-  OrgApacheLuceneUtilSetOnce_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilSetOnce, init)
+}
+
+OrgApacheLuceneUtilSetOnce *create_OrgApacheLuceneUtilSetOnce_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilSetOnce, init)
 }
 
 void OrgApacheLuceneUtilSetOnce_initWithId_(OrgApacheLuceneUtilSetOnce *self, id obj) {
@@ -100,9 +102,11 @@ void OrgApacheLuceneUtilSetOnce_initWithId_(OrgApacheLuceneUtilSetOnce *self, id
 }
 
 OrgApacheLuceneUtilSetOnce *new_OrgApacheLuceneUtilSetOnce_initWithId_(id obj) {
-  OrgApacheLuceneUtilSetOnce *self = [OrgApacheLuceneUtilSetOnce alloc];
-  OrgApacheLuceneUtilSetOnce_initWithId_(self, obj);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilSetOnce, initWithId_, obj)
+}
+
+OrgApacheLuceneUtilSetOnce *create_OrgApacheLuceneUtilSetOnce_initWithId_(id obj) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilSetOnce, initWithId_, obj)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilSetOnce)
@@ -131,9 +135,11 @@ void OrgApacheLuceneUtilSetOnce_AlreadySetException_init(OrgApacheLuceneUtilSetO
 }
 
 OrgApacheLuceneUtilSetOnce_AlreadySetException *new_OrgApacheLuceneUtilSetOnce_AlreadySetException_init() {
-  OrgApacheLuceneUtilSetOnce_AlreadySetException *self = [OrgApacheLuceneUtilSetOnce_AlreadySetException alloc];
-  OrgApacheLuceneUtilSetOnce_AlreadySetException_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilSetOnce_AlreadySetException, init)
+}
+
+OrgApacheLuceneUtilSetOnce_AlreadySetException *create_OrgApacheLuceneUtilSetOnce_AlreadySetException_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilSetOnce_AlreadySetException, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilSetOnce_AlreadySetException)

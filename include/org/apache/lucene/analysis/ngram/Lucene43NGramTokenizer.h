@@ -5,41 +5,63 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_RESTRICT
-#define OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer 0
 #else
-#define OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer 1
 #endif
-#undef OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer
 
-#if !defined (_OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_) && (OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_INCLUDE_ALL || OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_INCLUDE)
-#define _OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_
+#if !defined (OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer || defined(INCLUDE_OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer))
+#define OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_
 
-#define OrgApacheLuceneAnalysisTokenizer_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenizer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenizer 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenizer 1
 #include "org/apache/lucene/analysis/Tokenizer.h"
 
+@class IOSObjectArray;
 @class OrgApacheLuceneUtilAttributeFactory;
 
-#define OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_DEFAULT_MIN_NGRAM_SIZE 1
-#define OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_DEFAULT_MAX_NGRAM_SIZE 2
-
+/*!
+ @brief Old broken version of <code>NGramTokenizer</code>.
+ */
 @interface OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer : OrgApacheLuceneAnalysisTokenizer
+
++ (jint)DEFAULT_MIN_NGRAM_SIZE;
+
++ (jint)DEFAULT_MAX_NGRAM_SIZE;
 
 #pragma mark Public
 
+/*!
+ @brief Creates NGramTokenizer with default min and max n-grams.
+ */
 - (instancetype)init;
 
+/*!
+ @brief Creates NGramTokenizer with given min and max n-grams.
+ @param factory <code>org.apache.lucene.util.AttributeFactory</code> to use
+ @param minGram the smallest n-gram to generate
+ @param maxGram the largest n-gram to generate
+ */
 - (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory
                                                     withInt:(jint)minGram
                                                     withInt:(jint)maxGram;
 
+/*!
+ @brief Creates NGramTokenizer with given min and max n-grams.
+ @param minGram the smallest n-gram to generate
+ @param maxGram the largest n-gram to generate
+ */
 - (instancetype)initWithInt:(jint)minGram
                     withInt:(jint)maxGram;
 
 - (void)end;
 
+/*!
+ @brief Returns the next token in the stream, or null at EOS.
+ */
 - (jboolean)incrementToken;
 
 - (void)reset;
@@ -48,24 +70,34 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer, DEFAULT_MIN_NGRAM_SIZE, jint)
+inline jint OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_get_DEFAULT_MIN_NGRAM_SIZE();
+#define OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_DEFAULT_MIN_NGRAM_SIZE 1
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer, DEFAULT_MIN_NGRAM_SIZE, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer, DEFAULT_MAX_NGRAM_SIZE, jint)
+inline jint OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_get_DEFAULT_MAX_NGRAM_SIZE();
+#define OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_DEFAULT_MAX_NGRAM_SIZE 2
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer, DEFAULT_MAX_NGRAM_SIZE, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_initWithInt_withInt_(OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer *self, jint minGram, jint maxGram);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer *new_OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_initWithInt_withInt_(jint minGram, jint maxGram) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer *create_OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_initWithInt_withInt_(jint minGram, jint maxGram);
+
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_(OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory, jint minGram, jint maxGram);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer *new_OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_(OrgApacheLuceneUtilAttributeFactory *factory, jint minGram, jint maxGram) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer *create_OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_(OrgApacheLuceneUtilAttributeFactory *factory, jint minGram, jint maxGram);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_init(OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer *new_OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer *create_OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer")

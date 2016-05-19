@@ -5,23 +5,26 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction_RESTRICT
-#define OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction 0
 #else
-#define OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction_) && (OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction_
+#if !defined (OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction))
+#define OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction_
 
-#define OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction 1
 #include "org/apache/lucene/queries/function/valuesource/MultiFloatFunction.h"
 
 @class IOSObjectArray;
 
+/*!
+ @brief <code>MinFloatFunction</code> returns the min of its components.
+ */
 @interface OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction : OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction
 
 #pragma mark Public
@@ -30,6 +33,11 @@
 
 #pragma mark Protected
 
+/*!
+ @brief True if <em>any</em> of the specified <code>values</code> 
+ <code>FunctionValues.exists</code> for the specified doc, else false.
+ - seealso: MultiFunction#anyExists
+ */
 - (jboolean)existsWithInt:(jint)doc
 withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)valsArr;
 
@@ -46,8 +54,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction
 
 FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction *new_OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSourceArray_(IOSObjectArray *sources) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction *create_OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSourceArray_(IOSObjectArray *sources);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction")

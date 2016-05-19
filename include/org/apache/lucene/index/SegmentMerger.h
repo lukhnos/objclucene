@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexSegmentMerger_INCLUDE_ALL")
-#if OrgApacheLuceneIndexSegmentMerger_RESTRICT
-#define OrgApacheLuceneIndexSegmentMerger_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexSegmentMerger")
+#ifdef RESTRICT_OrgApacheLuceneIndexSegmentMerger
+#define INCLUDE_ALL_OrgApacheLuceneIndexSegmentMerger 0
 #else
-#define OrgApacheLuceneIndexSegmentMerger_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexSegmentMerger 1
 #endif
-#undef OrgApacheLuceneIndexSegmentMerger_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexSegmentMerger
 
-#if !defined (_OrgApacheLuceneIndexSegmentMerger_) && (OrgApacheLuceneIndexSegmentMerger_INCLUDE_ALL || OrgApacheLuceneIndexSegmentMerger_INCLUDE)
-#define _OrgApacheLuceneIndexSegmentMerger_
+#if !defined (OrgApacheLuceneIndexSegmentMerger_) && (INCLUDE_ALL_OrgApacheLuceneIndexSegmentMerger || defined(INCLUDE_OrgApacheLuceneIndexSegmentMerger))
+#define OrgApacheLuceneIndexSegmentMerger_
 
 @class OrgApacheLuceneIndexFieldInfos_FieldNumbers;
 @class OrgApacheLuceneIndexMergeState;
@@ -24,6 +24,13 @@
 @class OrgApacheLuceneUtilInfoStream;
 @protocol JavaUtilList;
 
+/*!
+ @brief The SegmentMerger class combines two or more Segments, represented by an
+ IndexReader, into a single Segment.
+ Call the merge method to combine the
+ segments.
+ - seealso: #merge
+ */
 @interface OrgApacheLuceneIndexSegmentMerger : NSObject {
  @public
   OrgApacheLuceneIndexMergeState *mergeState_;
@@ -42,8 +49,17 @@
 withOrgApacheLuceneIndexFieldInfos_FieldNumbers:(OrgApacheLuceneIndexFieldInfos_FieldNumbers *)fieldNumbers
    withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
 
+/*!
+ @brief Merges the readers into the directory passed to the constructor
+ @return The number of documents that were merged
+ @throws CorruptIndexException if the index is corrupt
+ @throws IOException if there is a low-level IO error
+ */
 - (OrgApacheLuceneIndexMergeState *)merge;
 
+/*!
+ @brief True if any merging should happen
+ */
 - (jboolean)shouldMerge;
 
 @end
@@ -56,8 +72,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexSegmentMerger_initWithJavaUtilList_wi
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentMerger *new_OrgApacheLuceneIndexSegmentMerger_initWithJavaUtilList_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_FieldNumbers_withOrgApacheLuceneStoreIOContext_(id<JavaUtilList> readers, OrgApacheLuceneIndexSegmentInfo *segmentInfo, OrgApacheLuceneUtilInfoStream *infoStream, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexFieldInfos_FieldNumbers *fieldNumbers, OrgApacheLuceneStoreIOContext *context) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentMerger *create_OrgApacheLuceneIndexSegmentMerger_initWithJavaUtilList_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_FieldNumbers_withOrgApacheLuceneStoreIOContext_(id<JavaUtilList> readers, OrgApacheLuceneIndexSegmentInfo *segmentInfo, OrgApacheLuceneUtilInfoStream *infoStream, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexFieldInfos_FieldNumbers *fieldNumbers, OrgApacheLuceneStoreIOContext *context);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSegmentMerger)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexSegmentMerger_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSegmentMerger")

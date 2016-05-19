@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsIdversionSinglePostingsEnum_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsIdversionSinglePostingsEnum_RESTRICT
-#define OrgApacheLuceneCodecsIdversionSinglePostingsEnum_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsIdversionSinglePostingsEnum")
+#ifdef RESTRICT_OrgApacheLuceneCodecsIdversionSinglePostingsEnum
+#define INCLUDE_ALL_OrgApacheLuceneCodecsIdversionSinglePostingsEnum 0
 #else
-#define OrgApacheLuceneCodecsIdversionSinglePostingsEnum_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsIdversionSinglePostingsEnum 1
 #endif
-#undef OrgApacheLuceneCodecsIdversionSinglePostingsEnum_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsIdversionSinglePostingsEnum
 
-#if !defined (_OrgApacheLuceneCodecsIdversionSinglePostingsEnum_) && (OrgApacheLuceneCodecsIdversionSinglePostingsEnum_INCLUDE_ALL || OrgApacheLuceneCodecsIdversionSinglePostingsEnum_INCLUDE)
-#define _OrgApacheLuceneCodecsIdversionSinglePostingsEnum_
+#if !defined (OrgApacheLuceneCodecsIdversionSinglePostingsEnum_) && (INCLUDE_ALL_OrgApacheLuceneCodecsIdversionSinglePostingsEnum || defined(INCLUDE_OrgApacheLuceneCodecsIdversionSinglePostingsEnum))
+#define OrgApacheLuceneCodecsIdversionSinglePostingsEnum_
 
-#define OrgApacheLuceneIndexPostingsEnum_RESTRICT 1
-#define OrgApacheLuceneIndexPostingsEnum_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexPostingsEnum 1
+#define INCLUDE_OrgApacheLuceneIndexPostingsEnum 1
 #include "org/apache/lucene/index/PostingsEnum.h"
 
 @class OrgApacheLuceneUtilBytesRef;
@@ -44,6 +44,9 @@
 
 - (jint)nextPosition;
 
+/*!
+ @brief For reuse
+ */
 - (void)resetWithInt:(jint)singleDocID
             withLong:(jlong)version_;
 
@@ -57,8 +60,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsIdversionSinglePostingsEnum_init(Org
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsIdversionSinglePostingsEnum *new_OrgApacheLuceneCodecsIdversionSinglePostingsEnum_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsIdversionSinglePostingsEnum *create_OrgApacheLuceneCodecsIdversionSinglePostingsEnum_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsIdversionSinglePostingsEnum)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsIdversionSinglePostingsEnum_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsIdversionSinglePostingsEnum")

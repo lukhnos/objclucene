@@ -5,26 +5,50 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer_RESTRICT
-#define OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer 0
 #else
-#define OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer 1
 #endif
-#undef OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer
 
-#if !defined (_OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer_) && (OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer_INCLUDE_ALL || OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer_INCLUDE)
-#define _OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer_
+#if !defined (OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer || defined(INCLUDE_OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer))
+#define OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer_
 
 @class JavaUtilArrayList;
 
+/*!
+ @brief This interface is used to connect the XML pattern file parser to the
+ hyphenation tree.
+ This class has been taken from the Apache FOP project (http://xmlgraphics.apache.org/fop/). They have been slightly modified.
+ */
 @protocol OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer < NSObject, JavaObject >
 
+/*!
+ @brief Add a character class.
+ A character class defines characters that are
+ considered equivalent for the purpose of hyphenation (e.g. "aA"). It
+ usually means to ignore case.
+ @param chargroup character group
+ */
 - (void)addClassWithNSString:(NSString *)chargroup;
 
+/*!
+ @brief Add a hyphenation exception.
+ An exception replaces the result obtained by
+ the algorithm for cases for which this fails or the user wants to provide
+ his own hyphenation. A hyphenatedword is a vector of alternating String's
+ and <code>Hyphen</code> instances
+ */
 - (void)addExceptionWithNSString:(NSString *)word
            withJavaUtilArrayList:(JavaUtilArrayList *)hyphenatedword;
 
+/*!
+ @brief Add hyphenation patterns.
+ @param pattern the pattern
+ @param values interletter values expressed as a string of digit characters.
+ */
 - (void)addPatternWithNSString:(NSString *)pattern
                   withNSString:(NSString *)values;
 
@@ -36,4 +60,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCompoundHyphenationPatternCons
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer")

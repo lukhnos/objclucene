@@ -99,9 +99,11 @@ void OrgApacheLuceneSearchSimilaritiesAfterEffect_NoAfterEffect_init(OrgApacheLu
 }
 
 OrgApacheLuceneSearchSimilaritiesAfterEffect_NoAfterEffect *new_OrgApacheLuceneSearchSimilaritiesAfterEffect_NoAfterEffect_init() {
-  OrgApacheLuceneSearchSimilaritiesAfterEffect_NoAfterEffect *self = [OrgApacheLuceneSearchSimilaritiesAfterEffect_NoAfterEffect alloc];
-  OrgApacheLuceneSearchSimilaritiesAfterEffect_NoAfterEffect_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSimilaritiesAfterEffect_NoAfterEffect, init)
+}
+
+OrgApacheLuceneSearchSimilaritiesAfterEffect_NoAfterEffect *create_OrgApacheLuceneSearchSimilaritiesAfterEffect_NoAfterEffect_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSimilaritiesAfterEffect_NoAfterEffect, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSimilaritiesAfterEffect_NoAfterEffect)

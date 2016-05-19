@@ -5,29 +5,36 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilBitSetIterator_INCLUDE_ALL")
-#if OrgApacheLuceneUtilBitSetIterator_RESTRICT
-#define OrgApacheLuceneUtilBitSetIterator_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilBitSetIterator")
+#ifdef RESTRICT_OrgApacheLuceneUtilBitSetIterator
+#define INCLUDE_ALL_OrgApacheLuceneUtilBitSetIterator 0
 #else
-#define OrgApacheLuceneUtilBitSetIterator_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilBitSetIterator 1
 #endif
-#undef OrgApacheLuceneUtilBitSetIterator_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilBitSetIterator
 
-#if !defined (_OrgApacheLuceneUtilBitSetIterator_) && (OrgApacheLuceneUtilBitSetIterator_INCLUDE_ALL || OrgApacheLuceneUtilBitSetIterator_INCLUDE)
-#define _OrgApacheLuceneUtilBitSetIterator_
+#if !defined (OrgApacheLuceneUtilBitSetIterator_) && (INCLUDE_ALL_OrgApacheLuceneUtilBitSetIterator || defined(INCLUDE_OrgApacheLuceneUtilBitSetIterator))
+#define OrgApacheLuceneUtilBitSetIterator_
 
-#define OrgApacheLuceneSearchDocIdSetIterator_RESTRICT 1
-#define OrgApacheLuceneSearchDocIdSetIterator_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchDocIdSetIterator 1
+#define INCLUDE_OrgApacheLuceneSearchDocIdSetIterator 1
 #include "org/apache/lucene/search/DocIdSetIterator.h"
 
 @class OrgApacheLuceneUtilBitSet;
 @class OrgApacheLuceneUtilFixedBitSet;
 @class OrgApacheLuceneUtilSparseFixedBitSet;
 
+/*!
+ @brief A <code>DocIdSetIterator</code> which iterates over set bits in a
+ bit set.
+ */
 @interface OrgApacheLuceneUtilBitSetIterator : OrgApacheLuceneSearchDocIdSetIterator
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ */
 - (instancetype)initWithOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)bits
                                          withLong:(jlong)cost;
 
@@ -37,8 +44,14 @@
 
 - (jint)docID;
 
+/*!
+ @brief If the provided iterator wraps a <code>FixedBitSet</code>, returns it, otherwise returns null.
+ */
 + (OrgApacheLuceneUtilFixedBitSet *)getFixedBitSetOrNullWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iterator;
 
+/*!
+ @brief If the provided iterator wraps a <code>SparseFixedBitSet</code>, returns it, otherwise returns null.
+ */
 + (OrgApacheLuceneUtilSparseFixedBitSet *)getSparseFixedBitSetOrNullWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iterator;
 
 - (jint)nextDoc;
@@ -55,8 +68,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilBitSetIterator_initWithOrgApacheLucene
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilBitSetIterator *new_OrgApacheLuceneUtilBitSetIterator_initWithOrgApacheLuceneUtilBitSet_withLong_(OrgApacheLuceneUtilBitSet *bits, jlong cost) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilBitSetIterator *create_OrgApacheLuceneUtilBitSetIterator_initWithOrgApacheLuceneUtilBitSet_withLong_(OrgApacheLuceneUtilBitSet *bits, jlong cost);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBitSetIterator)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilBitSetIterator_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilBitSetIterator")

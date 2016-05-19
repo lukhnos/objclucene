@@ -5,20 +5,25 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserXmlQueryBuilder_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserXmlQueryBuilder_RESTRICT
-#define OrgApacheLuceneQueryparserXmlQueryBuilder_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlQueryBuilder")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserXmlQueryBuilder
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlQueryBuilder 0
 #else
-#define OrgApacheLuceneQueryparserXmlQueryBuilder_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlQueryBuilder 1
 #endif
-#undef OrgApacheLuceneQueryparserXmlQueryBuilder_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserXmlQueryBuilder
 
-#if !defined (_OrgApacheLuceneQueryparserXmlQueryBuilder_) && (OrgApacheLuceneQueryparserXmlQueryBuilder_INCLUDE_ALL || OrgApacheLuceneQueryparserXmlQueryBuilder_INCLUDE)
-#define _OrgApacheLuceneQueryparserXmlQueryBuilder_
+#if !defined (OrgApacheLuceneQueryparserXmlQueryBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlQueryBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserXmlQueryBuilder))
+#define OrgApacheLuceneQueryparserXmlQueryBuilder_
 
 @class OrgApacheLuceneSearchQuery;
 @protocol OrgW3cDomElement;
 
+/*!
+ @brief Implemented by objects that produce Lucene Query objects from XML streams.
+ Implementations are
+ expected to be thread-safe so that they can be used to simultaneously parse multiple XML documents.
+ */
 @protocol OrgApacheLuceneQueryparserXmlQueryBuilder < NSObject, JavaObject >
 
 - (OrgApacheLuceneSearchQuery *)getQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e;
@@ -31,4 +36,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlQueryBuilder)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserXmlQueryBuilder_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlQueryBuilder")

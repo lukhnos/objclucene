@@ -19,12 +19,12 @@
 }
 
 - (OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  return [new_OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(input) autorelease];
+  return create_OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(input);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "TokenOffsetPayloadTokenFilterFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "TokenOffsetPayloadTokenFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.payloads.TokenOffsetPayloadTokenFilter;", 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory = { 2, "TokenOffsetPayloadTokenFilterFactory", "org.apache.lucene.analysis.payloads", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
@@ -36,14 +36,16 @@
 void OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory *self, id<JavaUtilMap> args) {
   OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory *new_OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory *self = [OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory alloc];
-  OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory *create_OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory)

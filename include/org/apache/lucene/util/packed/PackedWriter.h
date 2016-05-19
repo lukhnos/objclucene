@@ -5,31 +5,31 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilPackedPackedWriter_INCLUDE_ALL")
-#if OrgApacheLuceneUtilPackedPackedWriter_RESTRICT
-#define OrgApacheLuceneUtilPackedPackedWriter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedPackedWriter")
+#ifdef RESTRICT_OrgApacheLuceneUtilPackedPackedWriter
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackedPackedWriter 0
 #else
-#define OrgApacheLuceneUtilPackedPackedWriter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackedPackedWriter 1
 #endif
-#undef OrgApacheLuceneUtilPackedPackedWriter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilPackedPackedWriter
 
-#if !defined (_OrgApacheLuceneUtilPackedPackedWriter_) && (OrgApacheLuceneUtilPackedPackedWriter_INCLUDE_ALL || OrgApacheLuceneUtilPackedPackedWriter_INCLUDE)
-#define _OrgApacheLuceneUtilPackedPackedWriter_
+#if !defined (OrgApacheLuceneUtilPackedPackedWriter_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedPackedWriter || defined(INCLUDE_OrgApacheLuceneUtilPackedPackedWriter))
+#define OrgApacheLuceneUtilPackedPackedWriter_
 
-#define OrgApacheLuceneUtilPackedPackedInts_RESTRICT 1
-#define OrgApacheLuceneUtilPackedPackedInts_Writer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilPackedPackedInts 1
+#define INCLUDE_OrgApacheLuceneUtilPackedPackedInts_Writer 1
 #include "org/apache/lucene/util/packed/PackedInts.h"
 
 @class IOSByteArray;
 @class IOSLongArray;
 @class OrgApacheLuceneStoreDataOutput;
 @class OrgApacheLuceneUtilPackedBulkOperation;
-@class OrgApacheLuceneUtilPackedPackedInts_FormatEnum;
+@class OrgApacheLuceneUtilPackedPackedInts_Format;
 
 @interface OrgApacheLuceneUtilPackedPackedWriter : OrgApacheLuceneUtilPackedPackedInts_Writer {
  @public
   jboolean finished_;
-  OrgApacheLuceneUtilPackedPackedInts_FormatEnum *format_;
+  OrgApacheLuceneUtilPackedPackedInts_Format *format_;
   OrgApacheLuceneUtilPackedBulkOperation *encoder_;
   IOSByteArray *nextBlocks_;
   IOSLongArray *nextValues_;
@@ -48,31 +48,33 @@
 
 #pragma mark Protected
 
-- (OrgApacheLuceneUtilPackedPackedInts_FormatEnum *)getFormat;
+- (OrgApacheLuceneUtilPackedPackedInts_Format *)getFormat;
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum:(OrgApacheLuceneUtilPackedPackedInts_FormatEnum *)format
-                                    withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg
-                                                               withInt:(jint)valueCount
-                                                               withInt:(jint)bitsPerValue
-                                                               withInt:(jint)mem;
+- (instancetype)initWithOrgApacheLuceneUtilPackedPackedInts_Format:(OrgApacheLuceneUtilPackedPackedInts_Format *)format
+                                withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg
+                                                           withInt:(jint)valueCount
+                                                           withInt:(jint)bitsPerValue
+                                                           withInt:(jint)mem;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilPackedPackedWriter)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedPackedWriter, format_, OrgApacheLuceneUtilPackedPackedInts_FormatEnum *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedPackedWriter, format_, OrgApacheLuceneUtilPackedPackedInts_Format *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedPackedWriter, encoder_, OrgApacheLuceneUtilPackedBulkOperation *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedPackedWriter, nextBlocks_, IOSByteArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedPackedWriter, nextValues_, IOSLongArray *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedPackedWriter_initWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withOrgApacheLuceneStoreDataOutput_withInt_withInt_withInt_(OrgApacheLuceneUtilPackedPackedWriter *self, OrgApacheLuceneUtilPackedPackedInts_FormatEnum *format, OrgApacheLuceneStoreDataOutput *outArg, jint valueCount, jint bitsPerValue, jint mem);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedPackedWriter_initWithOrgApacheLuceneUtilPackedPackedInts_Format_withOrgApacheLuceneStoreDataOutput_withInt_withInt_withInt_(OrgApacheLuceneUtilPackedPackedWriter *self, OrgApacheLuceneUtilPackedPackedInts_Format *format, OrgApacheLuceneStoreDataOutput *outArg, jint valueCount, jint bitsPerValue, jint mem);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedWriter *new_OrgApacheLuceneUtilPackedPackedWriter_initWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withOrgApacheLuceneStoreDataOutput_withInt_withInt_withInt_(OrgApacheLuceneUtilPackedPackedInts_FormatEnum *format, OrgApacheLuceneStoreDataOutput *outArg, jint valueCount, jint bitsPerValue, jint mem) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedWriter *new_OrgApacheLuceneUtilPackedPackedWriter_initWithOrgApacheLuceneUtilPackedPackedInts_Format_withOrgApacheLuceneStoreDataOutput_withInt_withInt_withInt_(OrgApacheLuceneUtilPackedPackedInts_Format *format, OrgApacheLuceneStoreDataOutput *outArg, jint valueCount, jint bitsPerValue, jint mem) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedWriter *create_OrgApacheLuceneUtilPackedPackedWriter_initWithOrgApacheLuceneUtilPackedPackedInts_Format_withOrgApacheLuceneStoreDataOutput_withInt_withInt_withInt_(OrgApacheLuceneUtilPackedPackedInts_Format *format, OrgApacheLuceneStoreDataOutput *outArg, jint valueCount, jint bitsPerValue, jint mem);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedWriter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilPackedPackedWriter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedPackedWriter")

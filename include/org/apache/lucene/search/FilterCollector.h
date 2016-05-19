@@ -5,24 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchFilterCollector_INCLUDE_ALL")
-#if OrgApacheLuceneSearchFilterCollector_RESTRICT
-#define OrgApacheLuceneSearchFilterCollector_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchFilterCollector")
+#ifdef RESTRICT_OrgApacheLuceneSearchFilterCollector
+#define INCLUDE_ALL_OrgApacheLuceneSearchFilterCollector 0
 #else
-#define OrgApacheLuceneSearchFilterCollector_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchFilterCollector 1
 #endif
-#undef OrgApacheLuceneSearchFilterCollector_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchFilterCollector
 
-#if !defined (_OrgApacheLuceneSearchFilterCollector_) && (OrgApacheLuceneSearchFilterCollector_INCLUDE_ALL || OrgApacheLuceneSearchFilterCollector_INCLUDE)
-#define _OrgApacheLuceneSearchFilterCollector_
+#if !defined (OrgApacheLuceneSearchFilterCollector_) && (INCLUDE_ALL_OrgApacheLuceneSearchFilterCollector || defined(INCLUDE_OrgApacheLuceneSearchFilterCollector))
+#define OrgApacheLuceneSearchFilterCollector_
 
-#define OrgApacheLuceneSearchCollector_RESTRICT 1
-#define OrgApacheLuceneSearchCollector_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchCollector 1
+#define INCLUDE_OrgApacheLuceneSearchCollector 1
 #include "org/apache/lucene/search/Collector.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
 @protocol OrgApacheLuceneSearchLeafCollector;
 
+/*!
+ @brief <code>Collector</code> delegator.
+ */
 @interface OrgApacheLuceneSearchFilterCollector : NSObject < OrgApacheLuceneSearchCollector > {
  @public
   id<OrgApacheLuceneSearchCollector> in_;
@@ -30,6 +33,9 @@
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ */
 - (instancetype)initWithOrgApacheLuceneSearchCollector:(id<OrgApacheLuceneSearchCollector>)inArg;
 
 - (id<OrgApacheLuceneSearchLeafCollector>)getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
@@ -48,8 +54,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchFilterCollector_initWithOrgApacheLuc
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchFilterCollector *new_OrgApacheLuceneSearchFilterCollector_initWithOrgApacheLuceneSearchCollector_(id<OrgApacheLuceneSearchCollector> inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchFilterCollector *create_OrgApacheLuceneSearchFilterCollector_initWithOrgApacheLuceneSearchCollector_(id<OrgApacheLuceneSearchCollector> inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFilterCollector)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchFilterCollector_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchFilterCollector")

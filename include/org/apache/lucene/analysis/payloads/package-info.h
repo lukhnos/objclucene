@@ -3,14 +3,17 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/payloads/package-info.java
 //
 
+/*!
+ @brief Provides various convenience classes for creating payloads on Tokens.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisPayloadsPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisPayloadsPackage_info_RESTRICT
-#define OrgApacheLuceneAnalysisPayloadsPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisPayloadsPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsPackage_info 0
 #else
-#define OrgApacheLuceneAnalysisPayloadsPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsPackage_info 1
 #endif
-#undef OrgApacheLuceneAnalysisPayloadsPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisPayloadsPackage_info
 
-#pragma pop_macro("OrgApacheLuceneAnalysisPayloadsPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsPackage_info")

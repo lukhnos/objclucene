@@ -3,14 +3,17 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/wikipedia/package-info.java
 //
 
+/*!
+ @brief Tokenizer that is aware of Wikipedia syntax.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisWikipediaPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisWikipediaPackage_info_RESTRICT
-#define OrgApacheLuceneAnalysisWikipediaPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisWikipediaPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisWikipediaPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisWikipediaPackage_info 0
 #else
-#define OrgApacheLuceneAnalysisWikipediaPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisWikipediaPackage_info 1
 #endif
-#undef OrgApacheLuceneAnalysisWikipediaPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisWikipediaPackage_info
 
-#pragma pop_macro("OrgApacheLuceneAnalysisWikipediaPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisWikipediaPackage_info")

@@ -72,7 +72,7 @@
 }
 
 - (OrgApacheLuceneUtilBytesRef *)getPayload {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -94,7 +94,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "startOffset", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
     { "endOffset", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
     { "getPayload", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
-    { "init", NULL, NULL, 0x0, NULL, NULL },
+    { "init", "SingleDocsEnum", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "doc_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
@@ -111,9 +111,11 @@ void OrgApacheLuceneCodecsIdversionSingleDocsEnum_init(OrgApacheLuceneCodecsIdve
 }
 
 OrgApacheLuceneCodecsIdversionSingleDocsEnum *new_OrgApacheLuceneCodecsIdversionSingleDocsEnum_init() {
-  OrgApacheLuceneCodecsIdversionSingleDocsEnum *self = [OrgApacheLuceneCodecsIdversionSingleDocsEnum alloc];
-  OrgApacheLuceneCodecsIdversionSingleDocsEnum_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsIdversionSingleDocsEnum, init)
+}
+
+OrgApacheLuceneCodecsIdversionSingleDocsEnum *create_OrgApacheLuceneCodecsIdversionSingleDocsEnum_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsIdversionSingleDocsEnum, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsIdversionSingleDocsEnum)

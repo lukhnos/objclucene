@@ -5,22 +5,31 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchFilterCache_INCLUDE_ALL")
-#if OrgApacheLuceneSearchFilterCache_RESTRICT
-#define OrgApacheLuceneSearchFilterCache_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchFilterCache")
+#ifdef RESTRICT_OrgApacheLuceneSearchFilterCache
+#define INCLUDE_ALL_OrgApacheLuceneSearchFilterCache 0
 #else
-#define OrgApacheLuceneSearchFilterCache_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchFilterCache 1
 #endif
-#undef OrgApacheLuceneSearchFilterCache_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchFilterCache
 
-#if !defined (_OrgApacheLuceneSearchFilterCache_) && (OrgApacheLuceneSearchFilterCache_INCLUDE_ALL || OrgApacheLuceneSearchFilterCache_INCLUDE)
-#define _OrgApacheLuceneSearchFilterCache_
+#if !defined (OrgApacheLuceneSearchFilterCache_) && (INCLUDE_ALL_OrgApacheLuceneSearchFilterCache || defined(INCLUDE_OrgApacheLuceneSearchFilterCache))
+#define OrgApacheLuceneSearchFilterCache_
 
+@class IOSObjectArray;
 @class OrgApacheLuceneSearchFilter;
 @protocol OrgApacheLuceneSearchFilterCachingPolicy;
 
+/*!
+ @brief A cache for filters.
+ - seealso: LRUFilterCache
+ */
 @protocol OrgApacheLuceneSearchFilterCache < NSObject, JavaObject >
 
+/*!
+ @brief Return a wrapper around the provided <code>filter</code> that will cache
+ <code>DocIdSet</code>s per-segment accordingly to the given <code>policy</code>.
+ */
 - (OrgApacheLuceneSearchFilter *)doCacheWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
                            withOrgApacheLuceneSearchFilterCachingPolicy:(id<OrgApacheLuceneSearchFilterCachingPolicy>)policy;
 
@@ -32,4 +41,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFilterCache)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchFilterCache_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchFilterCache")

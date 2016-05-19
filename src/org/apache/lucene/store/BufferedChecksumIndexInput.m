@@ -52,13 +52,13 @@
 }
 
 - (OrgApacheLuceneStoreIndexInput *)clone {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (OrgApacheLuceneStoreIndexInput *)sliceWithNSString:(NSString *)sliceDescription
                                              withLong:(jlong)offset
                                              withLong:(jlong)length {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (void)dealloc {
@@ -92,13 +92,15 @@
 void OrgApacheLuceneStoreBufferedChecksumIndexInput_initWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreBufferedChecksumIndexInput *self, OrgApacheLuceneStoreIndexInput *main) {
   OrgApacheLuceneStoreChecksumIndexInput_initWithNSString_(self, JreStrcat("$@C", @"BufferedChecksumIndexInput(", main, ')'));
   JreStrongAssign(&self->main_, main);
-  JreStrongAssignAndConsume(&self->digest_, new_OrgApacheLuceneStoreBufferedChecksum_initWithJavaUtilZipChecksum_([new_JavaUtilZipCRC32_init() autorelease]));
+  JreStrongAssignAndConsume(&self->digest_, new_OrgApacheLuceneStoreBufferedChecksum_initWithJavaUtilZipChecksum_(create_JavaUtilZipCRC32_init()));
 }
 
 OrgApacheLuceneStoreBufferedChecksumIndexInput *new_OrgApacheLuceneStoreBufferedChecksumIndexInput_initWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput *main) {
-  OrgApacheLuceneStoreBufferedChecksumIndexInput *self = [OrgApacheLuceneStoreBufferedChecksumIndexInput alloc];
-  OrgApacheLuceneStoreBufferedChecksumIndexInput_initWithOrgApacheLuceneStoreIndexInput_(self, main);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreBufferedChecksumIndexInput, initWithOrgApacheLuceneStoreIndexInput_, main)
+}
+
+OrgApacheLuceneStoreBufferedChecksumIndexInput *create_OrgApacheLuceneStoreBufferedChecksumIndexInput_initWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput *main) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreBufferedChecksumIndexInput, initWithOrgApacheLuceneStoreIndexInput_, main)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreBufferedChecksumIndexInput)

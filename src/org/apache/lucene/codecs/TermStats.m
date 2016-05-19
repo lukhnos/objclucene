@@ -35,9 +35,11 @@ void OrgApacheLuceneCodecsTermStats_initWithInt_withLong_(OrgApacheLuceneCodecsT
 }
 
 OrgApacheLuceneCodecsTermStats *new_OrgApacheLuceneCodecsTermStats_initWithInt_withLong_(jint docFreq, jlong totalTermFreq) {
-  OrgApacheLuceneCodecsTermStats *self = [OrgApacheLuceneCodecsTermStats alloc];
-  OrgApacheLuceneCodecsTermStats_initWithInt_withLong_(self, docFreq, totalTermFreq);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsTermStats, initWithInt_withLong_, docFreq, totalTermFreq)
+}
+
+OrgApacheLuceneCodecsTermStats *create_OrgApacheLuceneCodecsTermStats_initWithInt_withLong_(jint docFreq, jlong totalTermFreq) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsTermStats, initWithInt_withLong_, docFreq, totalTermFreq)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsTermStats)

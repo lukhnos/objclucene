@@ -95,18 +95,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchLiveFieldValues, missingValue_, id)
   return 0;
 }
 
+- (void)__javaClone:(OrgApacheLuceneSearchLiveFieldValues *)original {
+  [super __javaClone:original];
+  JreCloneVolatileStrong(&current_, &original->current_);
+  JreCloneVolatileStrong(&old_, &original->old_);
+}
+
 - (void)dealloc {
   JreReleaseVolatile(&current_);
   JreReleaseVolatile(&old_);
   RELEASE_(mgr_);
   RELEASE_(missingValue_);
   [super dealloc];
-}
-
-- (void)__javaClone {
-  [super __javaClone];
-  JreRetainVolatile(&current_);
-  JreRetainVolatile(&old_);
 }
 
 + (const J2ObjcClassInfo *)__metadata {

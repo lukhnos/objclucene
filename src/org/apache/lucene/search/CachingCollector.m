@@ -26,8 +26,6 @@
 
 @class OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector;
 
-#define OrgApacheLuceneSearchCachingCollector_INITIAL_ARRAY_SIZE 128
-
 @interface OrgApacheLuceneSearchCachingCollector () {
  @public
   jboolean cached_;
@@ -37,7 +35,9 @@
 
 @end
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchCachingCollector, INITIAL_ARRAY_SIZE, jint)
+inline jint OrgApacheLuceneSearchCachingCollector_get_INITIAL_ARRAY_SIZE();
+#define OrgApacheLuceneSearchCachingCollector_INITIAL_ARRAY_SIZE 128
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchCachingCollector, INITIAL_ARRAY_SIZE, jint)
 
 __attribute__((unused)) static void OrgApacheLuceneSearchCachingCollector_initWithOrgApacheLuceneSearchCollector_(OrgApacheLuceneSearchCachingCollector *self, id<OrgApacheLuceneSearchCollector> inArg);
 
@@ -70,6 +70,8 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchCachingCollector_CachedScorer)
 __attribute__((unused)) static void OrgApacheLuceneSearchCachingCollector_CachedScorer_init(OrgApacheLuceneSearchCachingCollector_CachedScorer *self);
 
 __attribute__((unused)) static OrgApacheLuceneSearchCachingCollector_CachedScorer *new_OrgApacheLuceneSearchCachingCollector_CachedScorer_init() NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchCachingCollector_CachedScorer *create_OrgApacheLuceneSearchCachingCollector_CachedScorer_init();
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCachingCollector_CachedScorer)
 
@@ -112,6 +114,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchCachingCollector_NoScor
 
 __attribute__((unused)) static OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector *new_OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector_initWithOrgApacheLuceneSearchCollector_withInt_(id<OrgApacheLuceneSearchCollector> inArg, jint maxDocsToCache) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector *create_OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector_initWithOrgApacheLuceneSearchCollector_withInt_(id<OrgApacheLuceneSearchCollector> inArg, jint maxDocsToCache);
+
 __attribute__((unused)) static void OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector_postCollection(OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector)
@@ -141,6 +145,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchCachingCollector_ScoreCachingCollector,
 __attribute__((unused)) static void OrgApacheLuceneSearchCachingCollector_ScoreCachingCollector_initWithOrgApacheLuceneSearchCollector_withInt_(OrgApacheLuceneSearchCachingCollector_ScoreCachingCollector *self, id<OrgApacheLuceneSearchCollector> inArg, jint maxDocsToCache);
 
 __attribute__((unused)) static OrgApacheLuceneSearchCachingCollector_ScoreCachingCollector *new_OrgApacheLuceneSearchCachingCollector_ScoreCachingCollector_initWithOrgApacheLuceneSearchCollector_withInt_(id<OrgApacheLuceneSearchCollector> inArg, jint maxDocsToCache) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchCachingCollector_ScoreCachingCollector *create_OrgApacheLuceneSearchCachingCollector_ScoreCachingCollector_initWithOrgApacheLuceneSearchCollector_withInt_(id<OrgApacheLuceneSearchCollector> inArg, jint maxDocsToCache);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCachingCollector_ScoreCachingCollector)
 
@@ -179,6 +185,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchCachingCollector_NoScor
 
 __attribute__((unused)) static OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector *new_OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector_initWithOrgApacheLuceneSearchCachingCollector_withOrgApacheLuceneSearchLeafCollector_withInt_(OrgApacheLuceneSearchCachingCollector *outer$, id<OrgApacheLuceneSearchLeafCollector> inArg, jint maxDocsToCache) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector *create_OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector_initWithOrgApacheLuceneSearchCachingCollector_withOrgApacheLuceneSearchLeafCollector_withInt_(OrgApacheLuceneSearchCachingCollector *outer$, id<OrgApacheLuceneSearchLeafCollector> inArg, jint maxDocsToCache);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector)
 
 @interface OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector : OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector {
@@ -212,6 +220,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchCachingCollector_ScoreC
 
 __attribute__((unused)) static OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector *new_OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector_initWithOrgApacheLuceneSearchCachingCollector_withOrgApacheLuceneSearchLeafCollector_withInt_(OrgApacheLuceneSearchCachingCollector *outer$, id<OrgApacheLuceneSearchLeafCollector> inArg, jint maxDocsToCache) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector *create_OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector_initWithOrgApacheLuceneSearchCachingCollector_withOrgApacheLuceneSearchLeafCollector_withInt_(OrgApacheLuceneSearchCachingCollector *outer$, id<OrgApacheLuceneSearchLeafCollector> inArg, jint maxDocsToCache);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector)
 
 @interface OrgApacheLuceneSearchCachingCollector_$1 : OrgApacheLuceneSearchSimpleCollector
@@ -229,6 +239,8 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchCachingCollector_$1)
 __attribute__((unused)) static void OrgApacheLuceneSearchCachingCollector_$1_init(OrgApacheLuceneSearchCachingCollector_$1 *self);
 
 __attribute__((unused)) static OrgApacheLuceneSearchCachingCollector_$1 *new_OrgApacheLuceneSearchCachingCollector_$1_init() NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchCachingCollector_$1 *create_OrgApacheLuceneSearchCachingCollector_$1_init();
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCachingCollector_$1)
 
@@ -287,7 +299,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCachingCollector_$1)
 
 OrgApacheLuceneSearchCachingCollector *OrgApacheLuceneSearchCachingCollector_createWithBoolean_withDouble_(jboolean cacheScores, jdouble maxRAMMB) {
   OrgApacheLuceneSearchCachingCollector_initialize();
-  id<OrgApacheLuceneSearchCollector> other = [new_OrgApacheLuceneSearchCachingCollector_$1_init() autorelease];
+  id<OrgApacheLuceneSearchCollector> other = create_OrgApacheLuceneSearchCachingCollector_$1_init();
   return OrgApacheLuceneSearchCachingCollector_createWithOrgApacheLuceneSearchCollector_withBoolean_withDouble_(other, cacheScores, maxRAMMB);
 }
 
@@ -303,7 +315,7 @@ OrgApacheLuceneSearchCachingCollector *OrgApacheLuceneSearchCachingCollector_cre
 
 OrgApacheLuceneSearchCachingCollector *OrgApacheLuceneSearchCachingCollector_createWithOrgApacheLuceneSearchCollector_withBoolean_withInt_(id<OrgApacheLuceneSearchCollector> other, jboolean cacheScores, jint maxDocsToCache) {
   OrgApacheLuceneSearchCachingCollector_initialize();
-  return cacheScores ? [new_OrgApacheLuceneSearchCachingCollector_ScoreCachingCollector_initWithOrgApacheLuceneSearchCollector_withInt_(other, maxDocsToCache) autorelease] : [new_OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector_initWithOrgApacheLuceneSearchCollector_withInt_(other, maxDocsToCache) autorelease];
+  return cacheScores ? create_OrgApacheLuceneSearchCachingCollector_ScoreCachingCollector_initWithOrgApacheLuceneSearchCollector_withInt_(other, maxDocsToCache) : create_OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector_initWithOrgApacheLuceneSearchCollector_withInt_(other, maxDocsToCache);
 }
 
 void OrgApacheLuceneSearchCachingCollector_initWithOrgApacheLuceneSearchCollector_(OrgApacheLuceneSearchCachingCollector *self, id<OrgApacheLuceneSearchCollector> inArg) {
@@ -331,7 +343,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jint)advanceWithInt:(jint)target {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (jint)docID {
@@ -339,11 +351,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jint)freq {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (jint)nextDoc {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (jlong)cost {
@@ -375,9 +387,11 @@ void OrgApacheLuceneSearchCachingCollector_CachedScorer_init(OrgApacheLuceneSear
 }
 
 OrgApacheLuceneSearchCachingCollector_CachedScorer *new_OrgApacheLuceneSearchCachingCollector_CachedScorer_init() {
-  OrgApacheLuceneSearchCachingCollector_CachedScorer *self = [OrgApacheLuceneSearchCachingCollector_CachedScorer alloc];
-  OrgApacheLuceneSearchCachingCollector_CachedScorer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchCachingCollector_CachedScorer, init)
+}
+
+OrgApacheLuceneSearchCachingCollector_CachedScorer *create_OrgApacheLuceneSearchCachingCollector_CachedScorer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchCachingCollector_CachedScorer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchCachingCollector_CachedScorer)
@@ -392,7 +406,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchCachingCollector_CachedSco
 
 - (OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector *)wrapWithOrgApacheLuceneSearchLeafCollector:(id<OrgApacheLuceneSearchLeafCollector>)inArg
                                                                                                           withInt:(jint)maxDocsToCache {
-  return [new_OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector_initWithOrgApacheLuceneSearchCachingCollector_withOrgApacheLuceneSearchLeafCollector_withInt_(self, inArg, maxDocsToCache) autorelease];
+  return create_OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector_initWithOrgApacheLuceneSearchCachingCollector_withOrgApacheLuceneSearchLeafCollector_withInt_(self, inArg, maxDocsToCache);
 }
 
 - (id<OrgApacheLuceneSearchLeafCollector>)getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
@@ -442,11 +456,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchCachingCollector_CachedSco
 - (void)replayWithOrgApacheLuceneSearchCollector:(id<OrgApacheLuceneSearchCollector>)other {
   OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector_postCollection(self);
   if (!OrgApacheLuceneSearchCachingCollector_isCached(self)) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"cannot replay: cache was cleared because too much RAM was required") autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"cannot replay: cache was cleared because too much RAM was required");
   }
   JreAssert(([((id<JavaUtilList>) nil_chk(docs_)) size] == [((id<JavaUtilList>) nil_chk(contexts_)) size]), (@"org/apache/lucene/search/CachingCollector.java:150 condition failed: assert docs.size() == contexts.size();"));
-  for (jint i = 0; i < [contexts_ size]; ++i) {
-    OrgApacheLuceneIndexLeafReaderContext *context = [contexts_ getWithInt:i];
+  for (jint i = 0; i < [((id<JavaUtilList>) nil_chk(contexts_)) size]; ++i) {
+    OrgApacheLuceneIndexLeafReaderContext *context = [((id<JavaUtilList>) nil_chk(contexts_)) getWithInt:i];
     id<OrgApacheLuceneSearchLeafCollector> collector = [((id<OrgApacheLuceneSearchCollector>) nil_chk(other)) getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:context];
     [self collectWithOrgApacheLuceneSearchLeafCollector:collector withInt:i];
   }
@@ -472,7 +486,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchCachingCollector_CachedSco
   };
   static const J2ObjcFieldInfo fields[] = {
     { "contexts_", NULL, 0x0, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/index/LeafReaderContext;>;", .constantValue.asLong = 0 },
-    { "docs_", NULL, 0x0, "Ljava.util.List;", NULL, "Ljava/util/List<L[I;>;", .constantValue.asLong = 0 },
+    { "docs_", NULL, 0x0, "Ljava.util.List;", NULL, "Ljava/util/List<[LI;>;", .constantValue.asLong = 0 },
     { "maxDocsToCache_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "lastCollector_", NULL, 0x0, "Lorg.apache.lucene.search.CachingCollector$NoScoreCachingLeafCollector;", NULL, NULL, .constantValue.asLong = 0 },
   };
@@ -490,9 +504,11 @@ void OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector_initWithOrgAp
 }
 
 OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector *new_OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector_initWithOrgApacheLuceneSearchCollector_withInt_(id<OrgApacheLuceneSearchCollector> inArg, jint maxDocsToCache) {
-  OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector *self = [OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector alloc];
-  OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector_initWithOrgApacheLuceneSearchCollector_withInt_(self, inArg, maxDocsToCache);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector, initWithOrgApacheLuceneSearchCollector_withInt_, inArg, maxDocsToCache)
+}
+
+OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector *create_OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector_initWithOrgApacheLuceneSearchCollector_withInt_(id<OrgApacheLuceneSearchCollector> inArg, jint maxDocsToCache) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector, initWithOrgApacheLuceneSearchCollector_withInt_, inArg, maxDocsToCache)
 }
 
 void OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector_postCollection(OrgApacheLuceneSearchCachingCollector_NoScoreCachingCollector *self) {
@@ -519,11 +535,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchCachingCollector_NoScoreCa
 
 - (OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector *)wrapWithOrgApacheLuceneSearchLeafCollector:(id<OrgApacheLuceneSearchLeafCollector>)inArg
                                                                                                           withInt:(jint)maxDocsToCache {
-  return [new_OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector_initWithOrgApacheLuceneSearchCachingCollector_withOrgApacheLuceneSearchLeafCollector_withInt_(self, inArg, maxDocsToCache) autorelease];
+  return create_OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector_initWithOrgApacheLuceneSearchCachingCollector_withOrgApacheLuceneSearchLeafCollector_withInt_(self, inArg, maxDocsToCache);
 }
 
 - (void)postCollectWithOrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector:(OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector *)collector {
-  OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector *coll = (OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector *) check_class_cast(collector, [OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector class]);
+  OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector *coll = (OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector *) cast_chk(collector, [OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector class]);
   [super postCollectWithOrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector:coll];
   [((id<JavaUtilList>) nil_chk(scores_)) addWithId:[((OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector *) nil_chk(coll)) cachedScores]];
 }
@@ -533,7 +549,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchCachingCollector_NoScoreCa
   IOSIntArray *docs = [((id<JavaUtilList>) nil_chk(self->docs_)) getWithInt:i];
   IOSFloatArray *scores = [((id<JavaUtilList>) nil_chk(self->scores_)) getWithInt:i];
   JreAssert((((IOSIntArray *) nil_chk(docs))->size_ == ((IOSFloatArray *) nil_chk(scores))->size_), (@"org/apache/lucene/search/CachingCollector.java:183 condition failed: assert docs.length == scores.length;"));
-  OrgApacheLuceneSearchCachingCollector_CachedScorer *scorer = [new_OrgApacheLuceneSearchCachingCollector_CachedScorer_init() autorelease];
+  OrgApacheLuceneSearchCachingCollector_CachedScorer *scorer = create_OrgApacheLuceneSearchCachingCollector_CachedScorer_init();
   [((id<OrgApacheLuceneSearchLeafCollector>) nil_chk(collector)) setScorerWithOrgApacheLuceneSearchScorer:scorer];
   for (jint j = 0; j < docs->size_; ++j) {
     scorer->doc_ = IOSIntArray_Get(docs, j);
@@ -555,7 +571,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchCachingCollector_NoScoreCa
     { "collectWithOrgApacheLuceneSearchLeafCollector:withInt:", "collect", "V", 0x4, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "scores_", NULL, 0x0, "Ljava.util.List;", NULL, "Ljava/util/List<L[F;>;", .constantValue.asLong = 0 },
+    { "scores_", NULL, 0x0, "Ljava.util.List;", NULL, "Ljava/util/List<[LF;>;", .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneSearchCachingCollector_ScoreCachingCollector = { 2, "ScoreCachingCollector", "org.apache.lucene.search", "CachingCollector", 0xa, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchCachingCollector_ScoreCachingCollector;
@@ -569,9 +585,11 @@ void OrgApacheLuceneSearchCachingCollector_ScoreCachingCollector_initWithOrgApac
 }
 
 OrgApacheLuceneSearchCachingCollector_ScoreCachingCollector *new_OrgApacheLuceneSearchCachingCollector_ScoreCachingCollector_initWithOrgApacheLuceneSearchCollector_withInt_(id<OrgApacheLuceneSearchCollector> inArg, jint maxDocsToCache) {
-  OrgApacheLuceneSearchCachingCollector_ScoreCachingCollector *self = [OrgApacheLuceneSearchCachingCollector_ScoreCachingCollector alloc];
-  OrgApacheLuceneSearchCachingCollector_ScoreCachingCollector_initWithOrgApacheLuceneSearchCollector_withInt_(self, inArg, maxDocsToCache);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchCachingCollector_ScoreCachingCollector, initWithOrgApacheLuceneSearchCollector_withInt_, inArg, maxDocsToCache)
+}
+
+OrgApacheLuceneSearchCachingCollector_ScoreCachingCollector *create_OrgApacheLuceneSearchCachingCollector_ScoreCachingCollector_initWithOrgApacheLuceneSearchCollector_withInt_(id<OrgApacheLuceneSearchCollector> inArg, jint maxDocsToCache) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchCachingCollector_ScoreCachingCollector, initWithOrgApacheLuceneSearchCollector_withInt_, inArg, maxDocsToCache)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchCachingCollector_ScoreCachingCollector)
@@ -663,9 +681,11 @@ void OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector_initWithO
 }
 
 OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector *new_OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector_initWithOrgApacheLuceneSearchCachingCollector_withOrgApacheLuceneSearchLeafCollector_withInt_(OrgApacheLuceneSearchCachingCollector *outer$, id<OrgApacheLuceneSearchLeafCollector> inArg, jint maxDocsToCache) {
-  OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector *self = [OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector alloc];
-  OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector_initWithOrgApacheLuceneSearchCachingCollector_withOrgApacheLuceneSearchLeafCollector_withInt_(self, outer$, inArg, maxDocsToCache);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector, initWithOrgApacheLuceneSearchCachingCollector_withOrgApacheLuceneSearchLeafCollector_withInt_, outer$, inArg, maxDocsToCache)
+}
+
+OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector *create_OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector_initWithOrgApacheLuceneSearchCachingCollector_withOrgApacheLuceneSearchLeafCollector_withInt_(OrgApacheLuceneSearchCachingCollector *outer$, id<OrgApacheLuceneSearchLeafCollector> inArg, jint maxDocsToCache) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector, initWithOrgApacheLuceneSearchCachingCollector_withOrgApacheLuceneSearchLeafCollector_withInt_, outer$, inArg, maxDocsToCache)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchCachingCollector_NoScoreCachingLeafCollector)
@@ -734,9 +754,11 @@ void OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector_initWithOrg
 }
 
 OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector *new_OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector_initWithOrgApacheLuceneSearchCachingCollector_withOrgApacheLuceneSearchLeafCollector_withInt_(OrgApacheLuceneSearchCachingCollector *outer$, id<OrgApacheLuceneSearchLeafCollector> inArg, jint maxDocsToCache) {
-  OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector *self = [OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector alloc];
-  OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector_initWithOrgApacheLuceneSearchCachingCollector_withOrgApacheLuceneSearchLeafCollector_withInt_(self, outer$, inArg, maxDocsToCache);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector, initWithOrgApacheLuceneSearchCachingCollector_withOrgApacheLuceneSearchLeafCollector_withInt_, outer$, inArg, maxDocsToCache)
+}
+
+OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector *create_OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector_initWithOrgApacheLuceneSearchCachingCollector_withOrgApacheLuceneSearchLeafCollector_withInt_(OrgApacheLuceneSearchCachingCollector *outer$, id<OrgApacheLuceneSearchLeafCollector> inArg, jint maxDocsToCache) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector, initWithOrgApacheLuceneSearchCachingCollector_withOrgApacheLuceneSearchLeafCollector_withInt_, outer$, inArg, maxDocsToCache)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchCachingCollector_ScoreCachingLeafCollector)
@@ -775,9 +797,11 @@ void OrgApacheLuceneSearchCachingCollector_$1_init(OrgApacheLuceneSearchCachingC
 }
 
 OrgApacheLuceneSearchCachingCollector_$1 *new_OrgApacheLuceneSearchCachingCollector_$1_init() {
-  OrgApacheLuceneSearchCachingCollector_$1 *self = [OrgApacheLuceneSearchCachingCollector_$1 alloc];
-  OrgApacheLuceneSearchCachingCollector_$1_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchCachingCollector_$1, init)
+}
+
+OrgApacheLuceneSearchCachingCollector_$1 *create_OrgApacheLuceneSearchCachingCollector_$1_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchCachingCollector_$1, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchCachingCollector_$1)

@@ -5,28 +5,45 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode_) && (OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode_
+#if !defined (OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode))
+#define OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode_
 
-#define OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode_RESTRICT 1
-#define OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode 1
+#define INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode 1
 #include "org/apache/lucene/queryparser/flexible/standard/nodes/WildcardQueryNode.h"
 
 @class OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode;
 @protocol JavaLangCharSequence;
 
+/*!
+ @brief A <code>PrefixWildcardQueryNode</code> represents wildcardquery that matches abc
+ or *.
+ This does not apply to phrases, this is a special case on the original
+ lucene parser. TODO: refactor the code to remove this special case from the
+ parser. and probably do it on a Processor
+ */
 @interface OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode : OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode
 
 #pragma mark Public
 
+/*!
+ @param field
+ - field name
+ @param text
+ - value including the wildcard
+ @param begin
+ - position in the query string
+ @param end
+ - position in the query string
+ */
 - (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)field
                     withJavaLangCharSequence:(id<JavaLangCharSequence>)text
                                      withInt:(jint)begin
@@ -46,12 +63,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWild
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode *new_OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(id<JavaLangCharSequence> field, id<JavaLangCharSequence> text, jint begin, jint end) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode *create_OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(id<JavaLangCharSequence> field, id<JavaLangCharSequence> text, jint begin, jint end);
+
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_(OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode *self, OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *fqn);
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode *new_OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_(OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *fqn) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode *create_OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_(OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *fqn);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode")

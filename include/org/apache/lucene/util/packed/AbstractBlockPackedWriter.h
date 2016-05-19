@@ -5,25 +5,20 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_INCLUDE_ALL")
-#if OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_RESTRICT
-#define OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedAbstractBlockPackedWriter")
+#ifdef RESTRICT_OrgApacheLuceneUtilPackedAbstractBlockPackedWriter
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackedAbstractBlockPackedWriter 0
 #else
-#define OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackedAbstractBlockPackedWriter 1
 #endif
-#undef OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilPackedAbstractBlockPackedWriter
 
-#if !defined (_OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_) && (OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_INCLUDE_ALL || OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_INCLUDE)
-#define _OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_
+#if !defined (OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedAbstractBlockPackedWriter || defined(INCLUDE_OrgApacheLuceneUtilPackedAbstractBlockPackedWriter))
+#define OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_
 
 @class IOSByteArray;
 @class IOSLongArray;
 @class OrgApacheLuceneStoreDataOutput;
-
-#define OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_MIN_BLOCK_SIZE 64
-#define OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_MAX_BLOCK_SIZE 134217728
-#define OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_MIN_VALUE_EQUALS_0 1
-#define OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_BPV_SHIFT 1
 
 @interface OrgApacheLuceneUtilPackedAbstractBlockPackedWriter : NSObject {
  @public
@@ -35,17 +30,45 @@
   jboolean finished_;
 }
 
++ (jint)MIN_BLOCK_SIZE;
+
++ (jint)MAX_BLOCK_SIZE;
+
++ (jint)MIN_VALUE_EQUALS_0;
+
++ (jint)BPV_SHIFT;
+
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ @param blockSize the number of values of a single block, must be a multiple of <tt>64</tt>
+ */
 - (instancetype)initWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg
                                                withInt:(jint)blockSize;
 
+/*!
+ @brief Append a new long.
+ */
 - (void)addWithLong:(jlong)l;
 
+/*!
+ @brief Flush all buffered data to disk.
+ This instance is not usable anymore
+ after this method has been called until <code>reset(DataOutput)</code> has
+ been called. 
+ */
 - (void)finish;
 
+/*!
+ @brief Return the number of values which have been added.
+ */
 - (jlong)ord;
 
+/*!
+ @brief Reset this writer to wrap <code>out</code>.
+ The block size remains unchanged. 
+ */
 - (void)resetWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg;
 
 #pragma mark Protected
@@ -69,13 +92,21 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedAbstractBlockPackedWriter, out_, Or
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedAbstractBlockPackedWriter, values_, IOSLongArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedAbstractBlockPackedWriter, blocks_, IOSByteArray *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilPackedAbstractBlockPackedWriter, MIN_BLOCK_SIZE, jint)
+inline jint OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_get_MIN_BLOCK_SIZE();
+#define OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_MIN_BLOCK_SIZE 64
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilPackedAbstractBlockPackedWriter, MIN_BLOCK_SIZE, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilPackedAbstractBlockPackedWriter, MAX_BLOCK_SIZE, jint)
+inline jint OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_get_MAX_BLOCK_SIZE();
+#define OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_MAX_BLOCK_SIZE 134217728
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilPackedAbstractBlockPackedWriter, MAX_BLOCK_SIZE, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilPackedAbstractBlockPackedWriter, MIN_VALUE_EQUALS_0, jint)
+inline jint OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_get_MIN_VALUE_EQUALS_0();
+#define OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_MIN_VALUE_EQUALS_0 1
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilPackedAbstractBlockPackedWriter, MIN_VALUE_EQUALS_0, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilPackedAbstractBlockPackedWriter, BPV_SHIFT, jint)
+inline jint OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_get_BPV_SHIFT();
+#define OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_BPV_SHIFT 1
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilPackedAbstractBlockPackedWriter, BPV_SHIFT, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_writeVLongWithOrgApacheLuceneStoreDataOutput_withLong_(OrgApacheLuceneStoreDataOutput *outArg, jlong i);
 
@@ -85,4 +116,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedAbstractBlockPackedWriter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedAbstractBlockPackedWriter")

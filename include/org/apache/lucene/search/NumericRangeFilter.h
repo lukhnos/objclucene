@@ -5,46 +5,99 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchNumericRangeFilter_INCLUDE_ALL")
-#if OrgApacheLuceneSearchNumericRangeFilter_RESTRICT
-#define OrgApacheLuceneSearchNumericRangeFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchNumericRangeFilter")
+#ifdef RESTRICT_OrgApacheLuceneSearchNumericRangeFilter
+#define INCLUDE_ALL_OrgApacheLuceneSearchNumericRangeFilter 0
 #else
-#define OrgApacheLuceneSearchNumericRangeFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchNumericRangeFilter 1
 #endif
-#undef OrgApacheLuceneSearchNumericRangeFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchNumericRangeFilter
 
-#if !defined (_OrgApacheLuceneSearchNumericRangeFilter_) && (OrgApacheLuceneSearchNumericRangeFilter_INCLUDE_ALL || OrgApacheLuceneSearchNumericRangeFilter_INCLUDE)
-#define _OrgApacheLuceneSearchNumericRangeFilter_
+#if !defined (OrgApacheLuceneSearchNumericRangeFilter_) && (INCLUDE_ALL_OrgApacheLuceneSearchNumericRangeFilter || defined(INCLUDE_OrgApacheLuceneSearchNumericRangeFilter))
+#define OrgApacheLuceneSearchNumericRangeFilter_
 
-#define OrgApacheLuceneSearchMultiTermQueryWrapperFilter_RESTRICT 1
-#define OrgApacheLuceneSearchMultiTermQueryWrapperFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchMultiTermQueryWrapperFilter 1
+#define INCLUDE_OrgApacheLuceneSearchMultiTermQueryWrapperFilter 1
 #include "org/apache/lucene/search/MultiTermQueryWrapperFilter.h"
 
+@class IOSObjectArray;
 @class JavaLangDouble;
 @class JavaLangFloat;
 @class JavaLangInteger;
 @class JavaLangLong;
 
+/*!
+ @brief A <code>Filter</code> that only accepts numeric values within
+ a specified range.
+ To use this, you must first index the
+ numeric values using <code>IntField</code>, <code>FloatField</code>
+ , <code>LongField</code> or <code>DoubleField</code> (expert: <code>NumericTokenStream</code>
+ ).
+ <p>You create a new NumericRangeFilter with the static
+ factory methods, eg:
+ <pre class="prettyprint">
+ Filter f = NumericRangeFilter.newFloatRange("weight", 0.03f, 0.10f, true, true);
+ 
+@endcode
+ accepts all documents whose float valued "weight" field
+ ranges from 0.03 to 0.10, inclusive.
+ See <code>NumericRangeQuery</code> for details on how Lucene
+ indexes and searches numeric valued fields.
+ @since 2.9
+ */
 @interface OrgApacheLuceneSearchNumericRangeFilter : OrgApacheLuceneSearchMultiTermQueryWrapperFilter
 
 #pragma mark Public
 
+/*!
+ @brief Returns the upper value of this range filter
+ */
 - (id)getMax;
 
+/*!
+ @brief Returns the lower value of this range filter
+ */
 - (id)getMin;
 
+/*!
+ @brief Returns the precision step.
+ */
 - (jint)getPrecisionStep;
 
+/*!
+ @brief Returns <code>true</code> if the upper endpoint is inclusive
+ */
 - (jboolean)includesMax;
 
+/*!
+ @brief Returns <code>true</code> if the lower endpoint is inclusive
+ */
 - (jboolean)includesMin;
 
+/*!
+ @brief Factory that creates a <code>NumericRangeFilter</code>, that queries a <code>double</code>
+ range using the default <code>precisionStep</code> <code>NumericUtils.PRECISION_STEP_DEFAULT</code> (16).
+ You can have half-open ranges (which are in fact &lt;/&le; or &gt;/&ge; queries)
+ by setting the min or max value to <code>null</code>.
+ <code>Double.NaN</code> will never match a half-open range, to hit <code>NaN</code> use a query
+ with <code>min == max == Double.NaN</code>. By setting inclusive to false, it will
+ match all documents excluding the bounds, with inclusive on, the boundaries are hits, too.
+ */
 + (OrgApacheLuceneSearchNumericRangeFilter *)newDoubleRangeWithNSString:(NSString *)field
                                                      withJavaLangDouble:(JavaLangDouble *)min
                                                      withJavaLangDouble:(JavaLangDouble *)max
                                                             withBoolean:(jboolean)minInclusive
                                                             withBoolean:(jboolean)maxInclusive OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Factory that creates a <code>NumericRangeFilter</code>, that filters a <code>double</code>
+ range using the given <a href="NumericRangeQuery.html#precisionStepDesc"><code>precisionStep</code></a>.
+ You can have half-open ranges (which are in fact &lt;/&le; or &gt;/&ge; queries)
+ by setting the min or max value to <code>null</code>.
+ <code>Double.NaN</code> will never match a half-open range, to hit <code>NaN</code> use a query
+ with <code>min == max == Double.NaN</code>. By setting inclusive to false, it will
+ match all documents excluding the bounds, with inclusive on, the boundaries are hits, too.
+ */
 + (OrgApacheLuceneSearchNumericRangeFilter *)newDoubleRangeWithNSString:(NSString *)field
                                                                 withInt:(jint)precisionStep
                                                      withJavaLangDouble:(JavaLangDouble *)min
@@ -52,12 +105,30 @@
                                                             withBoolean:(jboolean)minInclusive
                                                             withBoolean:(jboolean)maxInclusive OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Factory that creates a <code>NumericRangeFilter</code>, that queries a <code>float</code>
+ range using the default <code>precisionStep</code> <code>NumericUtils.PRECISION_STEP_DEFAULT_32</code> (8).
+ You can have half-open ranges (which are in fact &lt;/&le; or &gt;/&ge; queries)
+ by setting the min or max value to <code>null</code>.
+ <code>Float.NaN</code> will never match a half-open range, to hit <code>NaN</code> use a query
+ with <code>min == max == Float.NaN</code>. By setting inclusive to false, it will
+ match all documents excluding the bounds, with inclusive on, the boundaries are hits, too.
+ */
 + (OrgApacheLuceneSearchNumericRangeFilter *)newFloatRangeWithNSString:(NSString *)field
                                                      withJavaLangFloat:(JavaLangFloat *)min
                                                      withJavaLangFloat:(JavaLangFloat *)max
                                                            withBoolean:(jboolean)minInclusive
                                                            withBoolean:(jboolean)maxInclusive OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Factory that creates a <code>NumericRangeFilter</code>, that filters a <code>float</code>
+ range using the given <a href="NumericRangeQuery.html#precisionStepDesc"><code>precisionStep</code></a>.
+ You can have half-open ranges (which are in fact &lt;/&le; or &gt;/&ge; queries)
+ by setting the min or max value to <code>null</code>.
+ <code>Float.NaN</code> will never match a half-open range, to hit <code>NaN</code> use a query
+ with <code>min == max == Float.NaN</code>. By setting inclusive to false, it will
+ match all documents excluding the bounds, with inclusive on, the boundaries are hits, too.
+ */
 + (OrgApacheLuceneSearchNumericRangeFilter *)newFloatRangeWithNSString:(NSString *)field
                                                                withInt:(jint)precisionStep
                                                      withJavaLangFloat:(JavaLangFloat *)min
@@ -65,6 +136,13 @@
                                                            withBoolean:(jboolean)minInclusive
                                                            withBoolean:(jboolean)maxInclusive OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Factory that creates a <code>NumericRangeFilter</code>, that filters a <code>int</code>
+ range using the given <a href="NumericRangeQuery.html#precisionStepDesc"><code>precisionStep</code></a>.
+ You can have half-open ranges (which are in fact &lt;/&le; or &gt;/&ge; queries)
+ by setting the min or max value to <code>null</code>. By setting inclusive to false, it will
+ match all documents excluding the bounds, with inclusive on, the boundaries are hits, too.
+ */
 + (OrgApacheLuceneSearchNumericRangeFilter *)newIntRangeWithNSString:(NSString *)field
                                                              withInt:(jint)precisionStep
                                                  withJavaLangInteger:(JavaLangInteger *)min
@@ -72,12 +150,26 @@
                                                          withBoolean:(jboolean)minInclusive
                                                          withBoolean:(jboolean)maxInclusive OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Factory that creates a <code>NumericRangeFilter</code>, that queries a <code>int</code>
+ range using the default <code>precisionStep</code> <code>NumericUtils.PRECISION_STEP_DEFAULT_32</code> (8).
+ You can have half-open ranges (which are in fact &lt;/&le; or &gt;/&ge; queries)
+ by setting the min or max value to <code>null</code>. By setting inclusive to false, it will
+ match all documents excluding the bounds, with inclusive on, the boundaries are hits, too.
+ */
 + (OrgApacheLuceneSearchNumericRangeFilter *)newIntRangeWithNSString:(NSString *)field
                                                  withJavaLangInteger:(JavaLangInteger *)min
                                                  withJavaLangInteger:(JavaLangInteger *)max
                                                          withBoolean:(jboolean)minInclusive
                                                          withBoolean:(jboolean)maxInclusive OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Factory that creates a <code>NumericRangeFilter</code>, that filters a <code>long</code>
+ range using the given <a href="NumericRangeQuery.html#precisionStepDesc"><code>precisionStep</code></a>.
+ You can have half-open ranges (which are in fact &lt;/&le; or &gt;/&ge; queries)
+ by setting the min or max value to <code>null</code>. By setting inclusive to false, it will
+ match all documents excluding the bounds, with inclusive on, the boundaries are hits, too.
+ */
 + (OrgApacheLuceneSearchNumericRangeFilter *)newLongRangeWithNSString:(NSString *)field
                                                               withInt:(jint)precisionStep
                                                      withJavaLangLong:(JavaLangLong *)min
@@ -85,6 +177,13 @@
                                                           withBoolean:(jboolean)minInclusive
                                                           withBoolean:(jboolean)maxInclusive OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Factory that creates a <code>NumericRangeFilter</code>, that queries a <code>long</code>
+ range using the default <code>precisionStep</code> <code>NumericUtils.PRECISION_STEP_DEFAULT</code> (16).
+ You can have half-open ranges (which are in fact &lt;/&le; or &gt;/&ge; queries)
+ by setting the min or max value to <code>null</code>. By setting inclusive to false, it will
+ match all documents excluding the bounds, with inclusive on, the boundaries are hits, too.
+ */
 + (OrgApacheLuceneSearchNumericRangeFilter *)newLongRangeWithNSString:(NSString *)field
                                                      withJavaLangLong:(JavaLangLong *)min
                                                      withJavaLangLong:(JavaLangLong *)max
@@ -115,4 +214,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchNumericRangeFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchNumericRangeFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchNumericRangeFilter")

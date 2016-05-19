@@ -25,6 +25,9 @@
   jint lastEndOffset_;
 }
 
+/*!
+ @brief Writes the joined unhyphenated term
+ */
 - (void)unhyphenate;
 
 @end
@@ -123,9 +126,11 @@ void OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter_initWithOrgApache
 }
 
 OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter *new_OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) {
-  OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter *self = [OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter alloc];
-  OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter, initWithOrgApacheLuceneAnalysisTokenStream_, inArg)
+}
+
+OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter *create_OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter, initWithOrgApacheLuceneAnalysisTokenStream_, inArg)
 }
 
 void OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter_unhyphenate(OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter *self) {
@@ -138,7 +143,7 @@ void OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter_unhyphenate(OrgAp
   }
   [self->hyphenated_ getCharsWithInt:0 withInt:length withCharArray:term withInt:0];
   [self->termAttribute_ setLengthWithInt:length];
-  [self->offsetAttribute_ setOffsetWithInt:[((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(self->offsetAttribute_)) startOffset] withInt:self->lastEndOffset_];
+  [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(self->offsetAttribute_)) setOffsetWithInt:[self->offsetAttribute_ startOffset] withInt:self->lastEndOffset_];
   [self->hyphenated_ setLengthWithInt:0];
 }
 

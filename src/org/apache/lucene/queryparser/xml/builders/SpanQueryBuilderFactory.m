@@ -37,9 +37,9 @@ withOrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder:(id<OrgApacheLuceneQue
 - (OrgApacheLuceneSearchSpansSpanQuery *)getSpanQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e {
   id<OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder> builder = [((id<JavaUtilMap>) nil_chk(builders_)) getWithId:[((id<OrgW3cDomElement>) nil_chk(e)) getNodeName]];
   if (builder == nil) {
-    @throw [new_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_(JreStrcat("$$", @"No SpanQueryObjectBuilder defined for node ", [e getNodeName])) autorelease];
+    @throw create_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_(JreStrcat("$$", @"No SpanQueryObjectBuilder defined for node ", [e getNodeName]));
   }
-  return [((id<OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder>) nil_chk(builder)) getSpanQueryWithOrgW3cDomElement:e];
+  return [builder getSpanQueryWithOrgW3cDomElement:e];
 }
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -59,7 +59,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "getQueryWithOrgW3cDomElement:", "getQuery", "Lorg.apache.lucene.search.Query;", 0x1, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
     { "addBuilderWithNSString:withOrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder:", "addBuilder", "V", 0x1, NULL, NULL },
     { "getSpanQueryWithOrgW3cDomElement:", "getSpanQuery", "Lorg.apache.lucene.search.spans.SpanQuery;", 0x1, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "SpanQueryBuilderFactory", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "builders_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/queryparser/xml/builders/SpanQueryBuilder;>;", .constantValue.asLong = 0 },
@@ -76,9 +76,11 @@ void OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilderFactory_init(OrgApache
 }
 
 OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilderFactory *new_OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilderFactory_init() {
-  OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilderFactory *self = [OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilderFactory alloc];
-  OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilderFactory_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilderFactory, init)
+}
+
+OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilderFactory *create_OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilderFactory_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilderFactory, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilderFactory)

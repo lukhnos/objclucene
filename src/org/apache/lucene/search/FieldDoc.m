@@ -34,7 +34,7 @@
 }
 
 - (NSString *)description {
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_initWithNSString_([super description]) autorelease];
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_initWithNSString_([super description]);
   [sb appendWithNSString:@" fields="];
   [sb appendWithNSString:JavaUtilArrays_toStringWithNSObjectArray_(fields_)];
   return [sb description];
@@ -66,9 +66,11 @@ void OrgApacheLuceneSearchFieldDoc_initWithInt_withFloat_(OrgApacheLuceneSearchF
 }
 
 OrgApacheLuceneSearchFieldDoc *new_OrgApacheLuceneSearchFieldDoc_initWithInt_withFloat_(jint doc, jfloat score) {
-  OrgApacheLuceneSearchFieldDoc *self = [OrgApacheLuceneSearchFieldDoc alloc];
-  OrgApacheLuceneSearchFieldDoc_initWithInt_withFloat_(self, doc, score);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFieldDoc, initWithInt_withFloat_, doc, score)
+}
+
+OrgApacheLuceneSearchFieldDoc *create_OrgApacheLuceneSearchFieldDoc_initWithInt_withFloat_(jint doc, jfloat score) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFieldDoc, initWithInt_withFloat_, doc, score)
 }
 
 void OrgApacheLuceneSearchFieldDoc_initWithInt_withFloat_withNSObjectArray_(OrgApacheLuceneSearchFieldDoc *self, jint doc, jfloat score, IOSObjectArray *fields) {
@@ -77,9 +79,11 @@ void OrgApacheLuceneSearchFieldDoc_initWithInt_withFloat_withNSObjectArray_(OrgA
 }
 
 OrgApacheLuceneSearchFieldDoc *new_OrgApacheLuceneSearchFieldDoc_initWithInt_withFloat_withNSObjectArray_(jint doc, jfloat score, IOSObjectArray *fields) {
-  OrgApacheLuceneSearchFieldDoc *self = [OrgApacheLuceneSearchFieldDoc alloc];
-  OrgApacheLuceneSearchFieldDoc_initWithInt_withFloat_withNSObjectArray_(self, doc, score, fields);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFieldDoc, initWithInt_withFloat_withNSObjectArray_, doc, score, fields)
+}
+
+OrgApacheLuceneSearchFieldDoc *create_OrgApacheLuceneSearchFieldDoc_initWithInt_withFloat_withNSObjectArray_(jint doc, jfloat score, IOSObjectArray *fields) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFieldDoc, initWithInt_withFloat_withNSObjectArray_, doc, score, fields)
 }
 
 void OrgApacheLuceneSearchFieldDoc_initWithInt_withFloat_withNSObjectArray_withInt_(OrgApacheLuceneSearchFieldDoc *self, jint doc, jfloat score, IOSObjectArray *fields, jint shardIndex) {
@@ -88,9 +92,11 @@ void OrgApacheLuceneSearchFieldDoc_initWithInt_withFloat_withNSObjectArray_withI
 }
 
 OrgApacheLuceneSearchFieldDoc *new_OrgApacheLuceneSearchFieldDoc_initWithInt_withFloat_withNSObjectArray_withInt_(jint doc, jfloat score, IOSObjectArray *fields, jint shardIndex) {
-  OrgApacheLuceneSearchFieldDoc *self = [OrgApacheLuceneSearchFieldDoc alloc];
-  OrgApacheLuceneSearchFieldDoc_initWithInt_withFloat_withNSObjectArray_withInt_(self, doc, score, fields, shardIndex);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFieldDoc, initWithInt_withFloat_withNSObjectArray_withInt_, doc, score, fields, shardIndex)
+}
+
+OrgApacheLuceneSearchFieldDoc *create_OrgApacheLuceneSearchFieldDoc_initWithInt_withFloat_withNSObjectArray_withInt_(jint doc, jfloat score, IOSObjectArray *fields, jint shardIndex) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFieldDoc, initWithInt_withFloat_withNSObjectArray_withInt_, doc, score, fields, shardIndex)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldDoc)

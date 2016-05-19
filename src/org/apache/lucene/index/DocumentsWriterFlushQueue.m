@@ -65,7 +65,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTi
     OrgApacheLuceneIndexDocumentsWriterFlushQueue_incTickets(self);
     jboolean success = false;
     @try {
-      [((id<JavaUtilQueue>) nil_chk(queue_)) addWithId:[new_OrgApacheLuceneIndexDocumentsWriterFlushQueue_GlobalDeletesTicket_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_([((OrgApacheLuceneIndexDocumentsWriterDeleteQueue *) nil_chk(deleteQueue)) freezeGlobalBufferWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue_DeleteSlice:nil]) autorelease]];
+      [((id<JavaUtilQueue>) nil_chk(queue_)) addWithId:create_OrgApacheLuceneIndexDocumentsWriterFlushQueue_GlobalDeletesTicket_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_([((OrgApacheLuceneIndexDocumentsWriterDeleteQueue *) nil_chk(deleteQueue)) freezeGlobalBufferWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue_DeleteSlice:nil])];
       success = true;
     }
     @finally {
@@ -89,7 +89,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTi
     OrgApacheLuceneIndexDocumentsWriterFlushQueue_incTickets(self);
     jboolean success = false;
     @try {
-      OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket *ticket = [new_OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_([((OrgApacheLuceneIndexDocumentsWriterPerThread *) nil_chk(dwpt)) prepareFlush]) autorelease];
+      OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket *ticket = create_OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_([((OrgApacheLuceneIndexDocumentsWriterPerThread *) nil_chk(dwpt)) prepareFlush]);
       [((id<JavaUtilQueue>) nil_chk(queue_)) addWithId:ticket];
       success = true;
       return ticket;
@@ -189,7 +189,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "tryPurgeWithOrgApacheLuceneIndexIndexWriter:", "tryPurge", "I", 0x0, "Ljava.io.IOException;", NULL },
     { "getTicketCount", NULL, "I", 0x1, NULL, NULL },
     { "clear", NULL, "V", 0x20, NULL, NULL },
-    { "init", NULL, NULL, 0x0, NULL, NULL },
+    { "init", "DocumentsWriterFlushQueue", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "queue_", NULL, 0x12, "Ljava.util.Queue;", NULL, "Ljava/util/Queue<Lorg/apache/lucene/index/DocumentsWriterFlushQueue$FlushTicket;>;", .constantValue.asLong = 0 },
@@ -251,9 +251,11 @@ void OrgApacheLuceneIndexDocumentsWriterFlushQueue_init(OrgApacheLuceneIndexDocu
 }
 
 OrgApacheLuceneIndexDocumentsWriterFlushQueue *new_OrgApacheLuceneIndexDocumentsWriterFlushQueue_init() {
-  OrgApacheLuceneIndexDocumentsWriterFlushQueue *self = [OrgApacheLuceneIndexDocumentsWriterFlushQueue alloc];
-  OrgApacheLuceneIndexDocumentsWriterFlushQueue_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexDocumentsWriterFlushQueue, init)
+}
+
+OrgApacheLuceneIndexDocumentsWriterFlushQueue *create_OrgApacheLuceneIndexDocumentsWriterFlushQueue_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexDocumentsWriterFlushQueue, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocumentsWriterFlushQueue)
@@ -382,9 +384,11 @@ void OrgApacheLuceneIndexDocumentsWriterFlushQueue_GlobalDeletesTicket_initWithO
 }
 
 OrgApacheLuceneIndexDocumentsWriterFlushQueue_GlobalDeletesTicket *new_OrgApacheLuceneIndexDocumentsWriterFlushQueue_GlobalDeletesTicket_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_(OrgApacheLuceneIndexFrozenBufferedUpdates *frozenUpdates) {
-  OrgApacheLuceneIndexDocumentsWriterFlushQueue_GlobalDeletesTicket *self = [OrgApacheLuceneIndexDocumentsWriterFlushQueue_GlobalDeletesTicket alloc];
-  OrgApacheLuceneIndexDocumentsWriterFlushQueue_GlobalDeletesTicket_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_(self, frozenUpdates);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexDocumentsWriterFlushQueue_GlobalDeletesTicket, initWithOrgApacheLuceneIndexFrozenBufferedUpdates_, frozenUpdates)
+}
+
+OrgApacheLuceneIndexDocumentsWriterFlushQueue_GlobalDeletesTicket *create_OrgApacheLuceneIndexDocumentsWriterFlushQueue_GlobalDeletesTicket_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_(OrgApacheLuceneIndexFrozenBufferedUpdates *frozenUpdates) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexDocumentsWriterFlushQueue_GlobalDeletesTicket, initWithOrgApacheLuceneIndexFrozenBufferedUpdates_, frozenUpdates)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocumentsWriterFlushQueue_GlobalDeletesTicket)
@@ -445,9 +449,11 @@ void OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket_initWithOr
 }
 
 OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket *new_OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_(OrgApacheLuceneIndexFrozenBufferedUpdates *frozenDeletes) {
-  OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket *self = [OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket alloc];
-  OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_(self, frozenDeletes);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket, initWithOrgApacheLuceneIndexFrozenBufferedUpdates_, frozenDeletes)
+}
+
+OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket *create_OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_(OrgApacheLuceneIndexFrozenBufferedUpdates *frozenDeletes) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket, initWithOrgApacheLuceneIndexFrozenBufferedUpdates_, frozenDeletes)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket)

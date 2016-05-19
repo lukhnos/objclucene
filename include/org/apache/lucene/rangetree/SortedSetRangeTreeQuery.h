@@ -5,25 +5,30 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_INCLUDE_ALL")
-#if OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_RESTRICT
-#define OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery")
+#ifdef RESTRICT_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery
+#define INCLUDE_ALL_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery 0
 #else
-#define OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery 1
 #endif
-#undef OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery
 
-#if !defined (_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_) && (OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_INCLUDE_ALL || OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_INCLUDE)
-#define _OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_
+#if !defined (OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_) && (INCLUDE_ALL_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery || defined(INCLUDE_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery))
+#define OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_
 
-#define OrgApacheLuceneSearchQuery_RESTRICT 1
-#define OrgApacheLuceneSearchQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchQuery 1
+#define INCLUDE_OrgApacheLuceneSearchQuery 1
 #include "org/apache/lucene/search/Query.h"
 
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchWeight;
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief Finds all previously indexed values that fall within the specified <code>BytesRef</code> range.
+ <p>The field must be indexed with <code>RangeTreeDocValuesFormat</code>, and <code>SortedSetDocValuesField</code> added per document.
+  
+ */
 @interface OrgApacheLuceneRangetreeSortedSetRangeTreeQuery : OrgApacheLuceneSearchQuery {
  @public
   NSString *field_;
@@ -35,6 +40,9 @@
 
 #pragma mark Public
 
+/*!
+ @brief Matches all values in the specified <code>BytesRef</code> range.
+ */
 - (instancetype)initWithNSString:(NSString *)field
  withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)minValue
                      withBoolean:(jboolean)minInclusive
@@ -62,8 +70,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_initWithN
 
 FOUNDATION_EXPORT OrgApacheLuceneRangetreeSortedSetRangeTreeQuery *new_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_initWithNSString_withOrgApacheLuceneUtilBytesRef_withBoolean_withOrgApacheLuceneUtilBytesRef_withBoolean_(NSString *field, OrgApacheLuceneUtilBytesRef *minValue, jboolean minInclusive, OrgApacheLuceneUtilBytesRef *maxValue, jboolean maxInclusive) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeSortedSetRangeTreeQuery *create_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_initWithNSString_withOrgApacheLuceneUtilBytesRef_withBoolean_withOrgApacheLuceneUtilBytesRef_withBoolean_(NSString *field, OrgApacheLuceneUtilBytesRef *minValue, jboolean minInclusive, OrgApacheLuceneUtilBytesRef *maxValue, jboolean maxInclusive);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery")

@@ -5,56 +5,84 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSpellSuggestMode_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSpellSuggestMode_RESTRICT
-#define OrgApacheLuceneSearchSpellSuggestMode_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpellSuggestMode")
+#ifdef RESTRICT_OrgApacheLuceneSearchSpellSuggestMode
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpellSuggestMode 0
 #else
-#define OrgApacheLuceneSearchSpellSuggestMode_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpellSuggestMode 1
 #endif
-#undef OrgApacheLuceneSearchSpellSuggestMode_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSpellSuggestMode
 
-#if !defined (_OrgApacheLuceneSearchSpellSuggestModeEnum_) && (OrgApacheLuceneSearchSpellSuggestMode_INCLUDE_ALL || OrgApacheLuceneSearchSpellSuggestModeEnum_INCLUDE)
-#define _OrgApacheLuceneSearchSpellSuggestModeEnum_
+#if !defined (OrgApacheLuceneSearchSpellSuggestMode_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpellSuggestMode || defined(INCLUDE_OrgApacheLuceneSearchSpellSuggestMode))
+#define OrgApacheLuceneSearchSpellSuggestMode_
 
-#define JavaLangEnum_RESTRICT 1
-#define JavaLangEnum_INCLUDE 1
+#define RESTRICT_JavaLangEnum 1
+#define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
 
-typedef NS_ENUM(NSUInteger, OrgApacheLuceneSearchSpellSuggestMode) {
-  OrgApacheLuceneSearchSpellSuggestMode_SUGGEST_WHEN_NOT_IN_INDEX = 0,
-  OrgApacheLuceneSearchSpellSuggestMode_SUGGEST_MORE_POPULAR = 1,
-  OrgApacheLuceneSearchSpellSuggestMode_SUGGEST_ALWAYS = 2,
+typedef NS_ENUM(NSUInteger, OrgApacheLuceneSearchSpellSuggestMode_Enum) {
+  OrgApacheLuceneSearchSpellSuggestMode_Enum_SUGGEST_WHEN_NOT_IN_INDEX = 0,
+  OrgApacheLuceneSearchSpellSuggestMode_Enum_SUGGEST_MORE_POPULAR = 1,
+  OrgApacheLuceneSearchSpellSuggestMode_Enum_SUGGEST_ALWAYS = 2,
 };
 
-@interface OrgApacheLuceneSearchSpellSuggestModeEnum : JavaLangEnum < NSCopying >
+/*!
+ @brief Set of strategies for suggesting related terms
+ */
+@interface OrgApacheLuceneSearchSpellSuggestMode : JavaLangEnum < NSCopying >
+
++ (OrgApacheLuceneSearchSpellSuggestMode *)SUGGEST_WHEN_NOT_IN_INDEX;
+
++ (OrgApacheLuceneSearchSpellSuggestMode *)SUGGEST_MORE_POPULAR;
+
++ (OrgApacheLuceneSearchSpellSuggestMode *)SUGGEST_ALWAYS;
 
 #pragma mark Package-Private
 
 + (IOSObjectArray *)values;
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneSearchSpellSuggestModeEnum_values();
 
-+ (OrgApacheLuceneSearchSpellSuggestModeEnum *)valueOfWithNSString:(NSString *)name;
-FOUNDATION_EXPORT OrgApacheLuceneSearchSpellSuggestModeEnum *OrgApacheLuceneSearchSpellSuggestModeEnum_valueOfWithNSString_(NSString *name);
++ (OrgApacheLuceneSearchSpellSuggestMode *)valueOfWithNSString:(NSString *)name;
 
 - (id)copyWithZone:(NSZone *)zone;
+- (OrgApacheLuceneSearchSpellSuggestMode_Enum)toNSEnum;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSpellSuggestModeEnum)
+J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSpellSuggestMode)
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSpellSuggestModeEnum *OrgApacheLuceneSearchSpellSuggestModeEnum_values_[];
+/*! INTERNAL ONLY - Use enum accessors declared below. */
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpellSuggestMode *OrgApacheLuceneSearchSpellSuggestMode_values_[];
 
-#define OrgApacheLuceneSearchSpellSuggestModeEnum_SUGGEST_WHEN_NOT_IN_INDEX OrgApacheLuceneSearchSpellSuggestModeEnum_values_[OrgApacheLuceneSearchSpellSuggestMode_SUGGEST_WHEN_NOT_IN_INDEX]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneSearchSpellSuggestModeEnum, SUGGEST_WHEN_NOT_IN_INDEX)
+/*!
+ @brief Generate suggestions only for terms not in the index (default)
+ */
+inline OrgApacheLuceneSearchSpellSuggestMode *OrgApacheLuceneSearchSpellSuggestMode_get_SUGGEST_WHEN_NOT_IN_INDEX();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSpellSuggestMode, SUGGEST_WHEN_NOT_IN_INDEX)
 
-#define OrgApacheLuceneSearchSpellSuggestModeEnum_SUGGEST_MORE_POPULAR OrgApacheLuceneSearchSpellSuggestModeEnum_values_[OrgApacheLuceneSearchSpellSuggestMode_SUGGEST_MORE_POPULAR]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneSearchSpellSuggestModeEnum, SUGGEST_MORE_POPULAR)
+/*!
+ @brief Return only suggested words that are as frequent or more frequent than the
+ searched word
+ */
+inline OrgApacheLuceneSearchSpellSuggestMode *OrgApacheLuceneSearchSpellSuggestMode_get_SUGGEST_MORE_POPULAR();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSpellSuggestMode, SUGGEST_MORE_POPULAR)
 
-#define OrgApacheLuceneSearchSpellSuggestModeEnum_SUGGEST_ALWAYS OrgApacheLuceneSearchSpellSuggestModeEnum_values_[OrgApacheLuceneSearchSpellSuggestMode_SUGGEST_ALWAYS]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneSearchSpellSuggestModeEnum, SUGGEST_ALWAYS)
+/*!
+ @brief Always attempt to offer suggestions (however, other parameters may limit
+ suggestions.
+ For example, see
+ <code>DirectSpellChecker.setMaxQueryFrequency(float)</code> ).
+ */
+inline OrgApacheLuceneSearchSpellSuggestMode *OrgApacheLuceneSearchSpellSuggestMode_get_SUGGEST_ALWAYS();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSpellSuggestMode, SUGGEST_ALWAYS)
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellSuggestModeEnum)
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneSearchSpellSuggestMode_values();
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpellSuggestMode *OrgApacheLuceneSearchSpellSuggestMode_valueOfWithNSString_(NSString *name);
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpellSuggestMode *OrgApacheLuceneSearchSpellSuggestMode_fromOrdinal(NSUInteger ordinal);
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellSuggestMode)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSpellSuggestMode_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpellSuggestMode")

@@ -45,9 +45,11 @@ void OrgApacheLuceneSearchSimilaritiesDistributionLL_init(OrgApacheLuceneSearchS
 }
 
 OrgApacheLuceneSearchSimilaritiesDistributionLL *new_OrgApacheLuceneSearchSimilaritiesDistributionLL_init() {
-  OrgApacheLuceneSearchSimilaritiesDistributionLL *self = [OrgApacheLuceneSearchSimilaritiesDistributionLL alloc];
-  OrgApacheLuceneSearchSimilaritiesDistributionLL_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSimilaritiesDistributionLL, init)
+}
+
+OrgApacheLuceneSearchSimilaritiesDistributionLL *create_OrgApacheLuceneSearchSimilaritiesDistributionLL_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSimilaritiesDistributionLL, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSimilaritiesDistributionLL)

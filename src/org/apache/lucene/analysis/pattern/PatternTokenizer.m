@@ -146,13 +146,15 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisPatternPatternTokeniz
 @end
 
 void OrgApacheLuceneAnalysisPatternPatternTokenizer_initWithJavaUtilRegexPattern_withInt_(OrgApacheLuceneAnalysisPatternPatternTokenizer *self, JavaUtilRegexPattern *pattern, jint group) {
-  OrgApacheLuceneAnalysisPatternPatternTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withJavaUtilRegexPattern_withInt_(self, JreLoadStatic(OrgApacheLuceneAnalysisTokenStream, DEFAULT_TOKEN_ATTRIBUTE_FACTORY_), pattern, group);
+  OrgApacheLuceneAnalysisPatternPatternTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withJavaUtilRegexPattern_withInt_(self, JreLoadStatic(OrgApacheLuceneAnalysisTokenStream, DEFAULT_TOKEN_ATTRIBUTE_FACTORY), pattern, group);
 }
 
 OrgApacheLuceneAnalysisPatternPatternTokenizer *new_OrgApacheLuceneAnalysisPatternPatternTokenizer_initWithJavaUtilRegexPattern_withInt_(JavaUtilRegexPattern *pattern, jint group) {
-  OrgApacheLuceneAnalysisPatternPatternTokenizer *self = [OrgApacheLuceneAnalysisPatternPatternTokenizer alloc];
-  OrgApacheLuceneAnalysisPatternPatternTokenizer_initWithJavaUtilRegexPattern_withInt_(self, pattern, group);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPatternPatternTokenizer, initWithJavaUtilRegexPattern_withInt_, pattern, group)
+}
+
+OrgApacheLuceneAnalysisPatternPatternTokenizer *create_OrgApacheLuceneAnalysisPatternPatternTokenizer_initWithJavaUtilRegexPattern_withInt_(JavaUtilRegexPattern *pattern, jint group) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPatternPatternTokenizer, initWithJavaUtilRegexPattern_withInt_, pattern, group)
 }
 
 void OrgApacheLuceneAnalysisPatternPatternTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withJavaUtilRegexPattern_withInt_(OrgApacheLuceneAnalysisPatternPatternTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory, JavaUtilRegexPattern *pattern, jint group) {
@@ -164,14 +166,16 @@ void OrgApacheLuceneAnalysisPatternPatternTokenizer_initWithOrgApacheLuceneUtilA
   self->group_ = group;
   JreStrongAssign(&self->matcher_, [((JavaUtilRegexPattern *) nil_chk(pattern)) matcherWithJavaLangCharSequence:@""]);
   if (group >= 0 && group > [((JavaUtilRegexMatcher *) nil_chk(self->matcher_)) groupCount]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$", @"invalid group specified: pattern only has: ", [self->matcher_ groupCount], @" capturing groups")) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$", @"invalid group specified: pattern only has: ", [((JavaUtilRegexMatcher *) nil_chk(self->matcher_)) groupCount], @" capturing groups"));
   }
 }
 
 OrgApacheLuceneAnalysisPatternPatternTokenizer *new_OrgApacheLuceneAnalysisPatternPatternTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withJavaUtilRegexPattern_withInt_(OrgApacheLuceneUtilAttributeFactory *factory, JavaUtilRegexPattern *pattern, jint group) {
-  OrgApacheLuceneAnalysisPatternPatternTokenizer *self = [OrgApacheLuceneAnalysisPatternPatternTokenizer alloc];
-  OrgApacheLuceneAnalysisPatternPatternTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withJavaUtilRegexPattern_withInt_(self, factory, pattern, group);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPatternPatternTokenizer, initWithOrgApacheLuceneUtilAttributeFactory_withJavaUtilRegexPattern_withInt_, factory, pattern, group)
+}
+
+OrgApacheLuceneAnalysisPatternPatternTokenizer *create_OrgApacheLuceneAnalysisPatternPatternTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withJavaUtilRegexPattern_withInt_(OrgApacheLuceneUtilAttributeFactory *factory, JavaUtilRegexPattern *pattern, jint group) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPatternPatternTokenizer, initWithOrgApacheLuceneUtilAttributeFactory_withJavaUtilRegexPattern_withInt_, factory, pattern, group)
 }
 
 void OrgApacheLuceneAnalysisPatternPatternTokenizer_fillBufferWithJavaLangStringBuilder_withJavaIoReader_(OrgApacheLuceneAnalysisPatternPatternTokenizer *self, JavaLangStringBuilder *sb, JavaIoReader *input) {

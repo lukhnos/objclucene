@@ -15,6 +15,10 @@
 
 @implementation OrgApacheLuceneSearchSpansSpans
 
++ (jint)NO_MORE_POSITIONS {
+  return OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS;
+}
+
 - (jint)nextStartPosition {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
@@ -49,7 +53,7 @@
 }
 
 - (NSString *)description {
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   IOSClass *clazz = [self getClass];
   [sb appendWithNSString:[clazz isAnonymousClass] ? [clazz getName] : [clazz getSimpleName]];
   [((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:@"(doc="])) appendWithInt:[self docID]];
@@ -75,7 +79,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "collectWithOrgApacheLuceneSearchSpansSpanCollector:", "collect", "V", 0x401, "Ljava.io.IOException;", NULL },
     { "asTwoPhaseIterator", NULL, "Lorg.apache.lucene.search.TwoPhaseIterator;", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "Spans", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "NO_MORE_POSITIONS", "NO_MORE_POSITIONS", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS },

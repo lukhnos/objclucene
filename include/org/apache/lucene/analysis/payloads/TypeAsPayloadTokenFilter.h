@@ -5,23 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter_RESTRICT
-#define OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter 0
 #else
-#define OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter
 
-#if !defined (_OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter_) && (OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter_
+#if !defined (OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter || defined(INCLUDE_OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter))
+#define OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief Makes the <code>org.apache.lucene.analysis.Token.type()</code> a payload.
+ Encodes the type using <code>String.getBytes(String)</code> with "UTF-8" as the encoding
+ */
 @interface OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
@@ -38,8 +42,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter_i
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter *new_OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter *create_OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter")

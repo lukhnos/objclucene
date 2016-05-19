@@ -60,9 +60,11 @@ void OrgApacheLuceneSearchDisiWrapper_initWithOrgApacheLuceneSearchDocIdSetItera
 }
 
 OrgApacheLuceneSearchDisiWrapper *new_OrgApacheLuceneSearchDisiWrapper_initWithOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchDocIdSetIterator *iterator) {
-  OrgApacheLuceneSearchDisiWrapper *self = [OrgApacheLuceneSearchDisiWrapper alloc];
-  OrgApacheLuceneSearchDisiWrapper_initWithOrgApacheLuceneSearchDocIdSetIterator_(self, iterator);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDisiWrapper, initWithOrgApacheLuceneSearchDocIdSetIterator_, iterator)
+}
+
+OrgApacheLuceneSearchDisiWrapper *create_OrgApacheLuceneSearchDisiWrapper_initWithOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchDocIdSetIterator *iterator) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDisiWrapper, initWithOrgApacheLuceneSearchDocIdSetIterator_, iterator)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDisiWrapper)

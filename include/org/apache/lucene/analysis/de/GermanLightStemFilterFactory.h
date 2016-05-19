@@ -5,28 +5,43 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisDeGermanLightStemFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisDeGermanLightStemFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisDeGermanLightStemFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanLightStemFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisDeGermanLightStemFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanLightStemFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisDeGermanLightStemFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanLightStemFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisDeGermanLightStemFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisDeGermanLightStemFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisDeGermanLightStemFilterFactory_) && (OrgApacheLuceneAnalysisDeGermanLightStemFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisDeGermanLightStemFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisDeGermanLightStemFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisDeGermanLightStemFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanLightStemFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisDeGermanLightStemFilterFactory))
+#define OrgApacheLuceneAnalysisDeGermanLightStemFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>GermanLightStemFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_delgtstem" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+ &lt;filter class="solr.LowerCaseFilterFactory"/&gt;
+ &lt;filter class="solr.GermanLightStemFilterFactory"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisDeGermanLightStemFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new GermanLightStemFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -39,8 +54,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisDeGermanLightStemFilterFactory_ini
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisDeGermanLightStemFilterFactory *new_OrgApacheLuceneAnalysisDeGermanLightStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisDeGermanLightStemFilterFactory *create_OrgApacheLuceneAnalysisDeGermanLightStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisDeGermanLightStemFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisDeGermanLightStemFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanLightStemFilterFactory")

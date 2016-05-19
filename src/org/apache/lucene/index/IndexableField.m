@@ -3,15 +3,8 @@
 //  source: ./core/src/java/org/apache/lucene/index/IndexableField.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "java/io/Reader.h"
-#include "org/apache/lucene/analysis/Analyzer.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/index/IndexableField.h"
-#include "org/apache/lucene/index/IndexableFieldType.h"
-#include "org/apache/lucene/util/BytesRef.h"
 
 @interface OrgApacheLuceneIndexIndexableField : NSObject
 

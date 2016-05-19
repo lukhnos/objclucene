@@ -5,34 +5,47 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexSerialMergeScheduler_INCLUDE_ALL")
-#if OrgApacheLuceneIndexSerialMergeScheduler_RESTRICT
-#define OrgApacheLuceneIndexSerialMergeScheduler_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexSerialMergeScheduler")
+#ifdef RESTRICT_OrgApacheLuceneIndexSerialMergeScheduler
+#define INCLUDE_ALL_OrgApacheLuceneIndexSerialMergeScheduler 0
 #else
-#define OrgApacheLuceneIndexSerialMergeScheduler_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexSerialMergeScheduler 1
 #endif
-#undef OrgApacheLuceneIndexSerialMergeScheduler_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexSerialMergeScheduler
 
-#if !defined (_OrgApacheLuceneIndexSerialMergeScheduler_) && (OrgApacheLuceneIndexSerialMergeScheduler_INCLUDE_ALL || OrgApacheLuceneIndexSerialMergeScheduler_INCLUDE)
-#define _OrgApacheLuceneIndexSerialMergeScheduler_
+#if !defined (OrgApacheLuceneIndexSerialMergeScheduler_) && (INCLUDE_ALL_OrgApacheLuceneIndexSerialMergeScheduler || defined(INCLUDE_OrgApacheLuceneIndexSerialMergeScheduler))
+#define OrgApacheLuceneIndexSerialMergeScheduler_
 
-#define OrgApacheLuceneIndexMergeScheduler_RESTRICT 1
-#define OrgApacheLuceneIndexMergeScheduler_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexMergeScheduler 1
+#define INCLUDE_OrgApacheLuceneIndexMergeScheduler 1
 #include "org/apache/lucene/index/MergeScheduler.h"
 
 @class OrgApacheLuceneIndexIndexWriter;
-@class OrgApacheLuceneIndexMergeTriggerEnum;
+@class OrgApacheLuceneIndexMergeTrigger;
 
+/*!
+ @brief A <code>MergeScheduler</code> that simply does each merge
+ sequentially, using the current thread.
+ */
 @interface OrgApacheLuceneIndexSerialMergeScheduler : OrgApacheLuceneIndexMergeScheduler
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ */
 - (instancetype)init;
 
 - (void)close;
 
+/*!
+ @brief Just do the merges in sequence.
+ We do this
+ "synchronized" so that even if the application is using
+ multiple threads, only one merge may run at a time. 
+ */
 - (void)mergeWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
-        withOrgApacheLuceneIndexMergeTriggerEnum:(OrgApacheLuceneIndexMergeTriggerEnum *)trigger
+            withOrgApacheLuceneIndexMergeTrigger:(OrgApacheLuceneIndexMergeTrigger *)trigger
                                      withBoolean:(jboolean)newMergesFound;
 
 @end
@@ -43,8 +56,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexSerialMergeScheduler_init(OrgApacheLu
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexSerialMergeScheduler *new_OrgApacheLuceneIndexSerialMergeScheduler_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexSerialMergeScheduler *create_OrgApacheLuceneIndexSerialMergeScheduler_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSerialMergeScheduler)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexSerialMergeScheduler_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSerialMergeScheduler")

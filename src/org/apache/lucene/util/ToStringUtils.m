@@ -15,12 +15,15 @@
 
 @end
 
-static IOSCharArray *OrgApacheLuceneUtilToStringUtils_HEX_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilToStringUtils, HEX_, IOSCharArray *)
+inline IOSCharArray *OrgApacheLuceneUtilToStringUtils_get_HEX();
+static IOSCharArray *OrgApacheLuceneUtilToStringUtils_HEX;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilToStringUtils, HEX, IOSCharArray *)
 
 __attribute__((unused)) static void OrgApacheLuceneUtilToStringUtils_init(OrgApacheLuceneUtilToStringUtils *self);
 
 __attribute__((unused)) static OrgApacheLuceneUtilToStringUtils *new_OrgApacheLuceneUtilToStringUtils_init() NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneUtilToStringUtils *create_OrgApacheLuceneUtilToStringUtils_init();
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilToStringUtils)
 
@@ -48,7 +51,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilToStringUtils class]) {
-    JreStrongAssign(&OrgApacheLuceneUtilToStringUtils_HEX_, [@"0123456789abcdef" toCharArray]);
+    JreStrongAssign(&OrgApacheLuceneUtilToStringUtils_HEX, [@"0123456789abcdef" toCharArray]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilToStringUtils)
   }
 }
@@ -61,7 +64,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "longHexWithLong:", "longHex", "Ljava.lang.String;", 0x9, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "HEX_", NULL, 0x1a, "[C", &OrgApacheLuceneUtilToStringUtils_HEX_, NULL, .constantValue.asLong = 0 },
+    { "HEX", "HEX", 0x1a, "[C", &OrgApacheLuceneUtilToStringUtils_HEX, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneUtilToStringUtils = { 2, "ToStringUtils", "org.apache.lucene.util", NULL, 0x11, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilToStringUtils;
@@ -74,9 +77,11 @@ void OrgApacheLuceneUtilToStringUtils_init(OrgApacheLuceneUtilToStringUtils *sel
 }
 
 OrgApacheLuceneUtilToStringUtils *new_OrgApacheLuceneUtilToStringUtils_init() {
-  OrgApacheLuceneUtilToStringUtils *self = [OrgApacheLuceneUtilToStringUtils alloc];
-  OrgApacheLuceneUtilToStringUtils_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilToStringUtils, init)
+}
+
+OrgApacheLuceneUtilToStringUtils *create_OrgApacheLuceneUtilToStringUtils_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilToStringUtils, init)
 }
 
 NSString *OrgApacheLuceneUtilToStringUtils_boostWithFloat_(jfloat boost) {
@@ -101,7 +106,7 @@ NSString *OrgApacheLuceneUtilToStringUtils_longHexWithLong_(jlong x) {
   OrgApacheLuceneUtilToStringUtils_initialize();
   IOSCharArray *asHex = [IOSCharArray arrayWithLength:16];
   for (jint i = 16; --i >= 0; JreURShiftAssignLong(&x, 4)) {
-    *IOSCharArray_GetRef(asHex, i) = IOSCharArray_Get(nil_chk(OrgApacheLuceneUtilToStringUtils_HEX_), (jint) x & (jint) 0x0F);
+    *IOSCharArray_GetRef(asHex, i) = IOSCharArray_Get(nil_chk(OrgApacheLuceneUtilToStringUtils_HEX), (jint) x & (jint) 0x0F);
   }
   return JreStrcat("$$", @"0x", [NSString stringWithCharacters:asHex]);
 }

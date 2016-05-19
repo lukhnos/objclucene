@@ -5,29 +5,41 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchTermScorer_INCLUDE_ALL")
-#if OrgApacheLuceneSearchTermScorer_RESTRICT
-#define OrgApacheLuceneSearchTermScorer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchTermScorer")
+#ifdef RESTRICT_OrgApacheLuceneSearchTermScorer
+#define INCLUDE_ALL_OrgApacheLuceneSearchTermScorer 0
 #else
-#define OrgApacheLuceneSearchTermScorer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchTermScorer 1
 #endif
-#undef OrgApacheLuceneSearchTermScorer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchTermScorer
 
-#if !defined (_OrgApacheLuceneSearchTermScorer_) && (OrgApacheLuceneSearchTermScorer_INCLUDE_ALL || OrgApacheLuceneSearchTermScorer_INCLUDE)
-#define _OrgApacheLuceneSearchTermScorer_
+#if !defined (OrgApacheLuceneSearchTermScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchTermScorer || defined(INCLUDE_OrgApacheLuceneSearchTermScorer))
+#define OrgApacheLuceneSearchTermScorer_
 
-#define OrgApacheLuceneSearchScorer_RESTRICT 1
-#define OrgApacheLuceneSearchScorer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchScorer 1
+#define INCLUDE_OrgApacheLuceneSearchScorer 1
 #include "org/apache/lucene/search/Scorer.h"
 
 @class OrgApacheLuceneIndexPostingsEnum;
 @class OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer;
 @class OrgApacheLuceneSearchWeight;
 
+/*!
+ @brief Expert: A <code>Scorer</code> for documents matching a <code>Term</code>.
+ */
 @interface OrgApacheLuceneSearchTermScorer : OrgApacheLuceneSearchScorer
 
 #pragma mark Public
 
+/*!
+ @brief Advances to the first match beyond the current whose document number is
+ greater than or equal to a given target.
+ <br>
+ The implementation uses <code>org.apache.lucene.index.PostingsEnum.advance(int)</code>.
+ @param target
+ The target document number.
+ @return the matching document or NO_MORE_DOCS if none exist.
+ */
 - (jint)advanceWithInt:(jint)target;
 
 - (jlong)cost;
@@ -36,14 +48,32 @@
 
 - (jint)freq;
 
+/*!
+ @brief Advances to the next document matching the query.
+ <br>
+ @return the document matching the query or NO_MORE_DOCS if there are no more documents.
+ */
 - (jint)nextDoc;
 
 - (jfloat)score;
 
+/*!
+ @brief Returns a string representation of this <code>TermScorer</code>.
+ */
 - (NSString *)description;
 
 #pragma mark Package-Private
 
+/*!
+ @brief Construct a <code>TermScorer</code>.
+ @param weight
+ The weight of the <code>Term</code> in the query.
+ @param td
+ An iterator over the documents matching the <code>Term</code>.
+ @param docScorer
+ The </code>Similarity.SimScorer</code> implementation
+ to be used for score computations.
+ */
 - (instancetype)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
                withOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)td
 withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:(OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *)docScorer;
@@ -56,8 +86,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchTermScorer_initWithOrgApacheLuceneSe
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchTermScorer *new_OrgApacheLuceneSearchTermScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(OrgApacheLuceneSearchWeight *weight, OrgApacheLuceneIndexPostingsEnum *td, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchTermScorer *create_OrgApacheLuceneSearchTermScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(OrgApacheLuceneSearchWeight *weight, OrgApacheLuceneIndexPostingsEnum *td, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermScorer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchTermScorer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchTermScorer")

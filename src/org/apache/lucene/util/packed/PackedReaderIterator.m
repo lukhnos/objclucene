@@ -26,13 +26,13 @@ __attribute__((unused)) static jint OrgApacheLuceneUtilPackedPackedReaderIterato
 
 @implementation OrgApacheLuceneUtilPackedPackedReaderIterator
 
-- (instancetype)initWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum:(OrgApacheLuceneUtilPackedPackedInts_FormatEnum *)format
-                                                               withInt:(jint)packedIntsVersion
-                                                               withInt:(jint)valueCount
-                                                               withInt:(jint)bitsPerValue
-                                     withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
-                                                               withInt:(jint)mem {
-  OrgApacheLuceneUtilPackedPackedReaderIterator_initWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_withInt_withOrgApacheLuceneStoreDataInput_withInt_(self, format, packedIntsVersion, valueCount, bitsPerValue, inArg, mem);
+- (instancetype)initWithOrgApacheLuceneUtilPackedPackedInts_Format:(OrgApacheLuceneUtilPackedPackedInts_Format *)format
+                                                           withInt:(jint)packedIntsVersion
+                                                           withInt:(jint)valueCount
+                                                           withInt:(jint)bitsPerValue
+                                 withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
+                                                           withInt:(jint)mem {
+  OrgApacheLuceneUtilPackedPackedReaderIterator_initWithOrgApacheLuceneUtilPackedPackedInts_Format_withInt_withInt_withInt_withOrgApacheLuceneStoreDataInput_withInt_(self, format, packedIntsVersion, valueCount, bitsPerValue, inArg, mem);
   return self;
 }
 
@@ -47,11 +47,11 @@ __attribute__((unused)) static jint OrgApacheLuceneUtilPackedPackedReaderIterato
   nextValues_->offset_ += nextValues_->length_;
   jint remaining = valueCount_ - position_ - 1;
   if (remaining <= 0) {
-    @throw [new_JavaIoEOFException_init() autorelease];
+    @throw create_JavaIoEOFException_init();
   }
   count = JavaLangMath_minWithInt_withInt_(remaining, count);
-  if (nextValues_->offset_ == nextValues_->longs_->size_) {
-    jlong remainingBlocks = [((OrgApacheLuceneUtilPackedPackedInts_FormatEnum *) nil_chk(format_)) byteCountWithInt:packedIntsVersion_ withInt:remaining withInt:bitsPerValue_];
+  if (nextValues_->offset_ == ((IOSLongArray *) nil_chk(nextValues_->longs_))->size_) {
+    jlong remainingBlocks = [((OrgApacheLuceneUtilPackedPackedInts_Format *) nil_chk(format_)) byteCountWithInt:packedIntsVersion_ withInt:remaining withInt:bitsPerValue_];
     jint blocksToRead = (jint) JavaLangMath_minWithLong_withLong_(remainingBlocks, ((IOSByteArray *) nil_chk(nextBlocks_))->size_);
     [((OrgApacheLuceneStoreDataInput *) nil_chk(in_)) readBytesWithByteArray:nextBlocks_ withInt:0 withInt:blocksToRead];
     if (blocksToRead < nextBlocks_->size_) {
@@ -60,7 +60,7 @@ __attribute__((unused)) static jint OrgApacheLuceneUtilPackedPackedReaderIterato
     [((OrgApacheLuceneUtilPackedBulkOperation *) nil_chk(bulkOperation_)) decodeWithByteArray:nextBlocks_ withInt:0 withLongArray:nextValues_->longs_ withInt:0 withInt:iterations_];
     nextValues_->offset_ = 0;
   }
-  nextValues_->length_ = JavaLangMath_minWithInt_withInt_(nextValues_->longs_->size_ - nextValues_->offset_, count);
+  nextValues_->length_ = JavaLangMath_minWithInt_withInt_(((IOSLongArray *) nil_chk(nextValues_->longs_))->size_ - nextValues_->offset_, count);
   position_ += nextValues_->length_;
   return nextValues_;
 }
@@ -79,7 +79,7 @@ __attribute__((unused)) static jint OrgApacheLuceneUtilPackedPackedReaderIterato
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum:withInt:withInt:withInt:withOrgApacheLuceneStoreDataInput:withInt:", "PackedReaderIterator", NULL, 0x0, NULL, NULL },
+    { "initWithOrgApacheLuceneUtilPackedPackedInts_Format:withInt:withInt:withInt:withOrgApacheLuceneStoreDataInput:withInt:", "PackedReaderIterator", NULL, 0x0, NULL, NULL },
     { "iterationsWithInt:", "iterations", "I", 0x2, NULL, NULL },
     { "nextWithInt:", "next", "Lorg.apache.lucene.util.LongsRef;", 0x1, "Ljava.io.IOException;", NULL },
     { "ord", NULL, "I", 0x1, NULL, NULL },
@@ -99,11 +99,11 @@ __attribute__((unused)) static jint OrgApacheLuceneUtilPackedPackedReaderIterato
 
 @end
 
-void OrgApacheLuceneUtilPackedPackedReaderIterator_initWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_withInt_withOrgApacheLuceneStoreDataInput_withInt_(OrgApacheLuceneUtilPackedPackedReaderIterator *self, OrgApacheLuceneUtilPackedPackedInts_FormatEnum *format, jint packedIntsVersion, jint valueCount, jint bitsPerValue, OrgApacheLuceneStoreDataInput *inArg, jint mem) {
+void OrgApacheLuceneUtilPackedPackedReaderIterator_initWithOrgApacheLuceneUtilPackedPackedInts_Format_withInt_withInt_withInt_withOrgApacheLuceneStoreDataInput_withInt_(OrgApacheLuceneUtilPackedPackedReaderIterator *self, OrgApacheLuceneUtilPackedPackedInts_Format *format, jint packedIntsVersion, jint valueCount, jint bitsPerValue, OrgApacheLuceneStoreDataInput *inArg, jint mem) {
   OrgApacheLuceneUtilPackedPackedInts_ReaderIteratorImpl_initWithInt_withInt_withOrgApacheLuceneStoreDataInput_(self, valueCount, bitsPerValue, inArg);
   JreStrongAssign(&self->format_, format);
   self->packedIntsVersion_ = packedIntsVersion;
-  JreStrongAssign(&self->bulkOperation_, OrgApacheLuceneUtilPackedBulkOperation_ofWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_(format, bitsPerValue));
+  JreStrongAssign(&self->bulkOperation_, OrgApacheLuceneUtilPackedBulkOperation_ofWithOrgApacheLuceneUtilPackedPackedInts_Format_withInt_(format, bitsPerValue));
   self->iterations_ = OrgApacheLuceneUtilPackedPackedReaderIterator_iterationsWithInt_(self, mem);
   JreAssert((valueCount == 0 || self->iterations_ > 0), (@"org/apache/lucene/util/packed/PackedReaderIterator.java:43 condition failed: assert valueCount == 0 || iterations > 0;"));
   JreStrongAssignAndConsume(&self->nextBlocks_, [IOSByteArray newArrayWithLength:self->iterations_ * [((OrgApacheLuceneUtilPackedBulkOperation *) nil_chk(self->bulkOperation_)) byteBlockCount]]);
@@ -112,10 +112,12 @@ void OrgApacheLuceneUtilPackedPackedReaderIterator_initWithOrgApacheLuceneUtilPa
   self->position_ = -1;
 }
 
-OrgApacheLuceneUtilPackedPackedReaderIterator *new_OrgApacheLuceneUtilPackedPackedReaderIterator_initWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_withInt_withOrgApacheLuceneStoreDataInput_withInt_(OrgApacheLuceneUtilPackedPackedInts_FormatEnum *format, jint packedIntsVersion, jint valueCount, jint bitsPerValue, OrgApacheLuceneStoreDataInput *inArg, jint mem) {
-  OrgApacheLuceneUtilPackedPackedReaderIterator *self = [OrgApacheLuceneUtilPackedPackedReaderIterator alloc];
-  OrgApacheLuceneUtilPackedPackedReaderIterator_initWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_withInt_withOrgApacheLuceneStoreDataInput_withInt_(self, format, packedIntsVersion, valueCount, bitsPerValue, inArg, mem);
-  return self;
+OrgApacheLuceneUtilPackedPackedReaderIterator *new_OrgApacheLuceneUtilPackedPackedReaderIterator_initWithOrgApacheLuceneUtilPackedPackedInts_Format_withInt_withInt_withInt_withOrgApacheLuceneStoreDataInput_withInt_(OrgApacheLuceneUtilPackedPackedInts_Format *format, jint packedIntsVersion, jint valueCount, jint bitsPerValue, OrgApacheLuceneStoreDataInput *inArg, jint mem) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedPackedReaderIterator, initWithOrgApacheLuceneUtilPackedPackedInts_Format_withInt_withInt_withInt_withOrgApacheLuceneStoreDataInput_withInt_, format, packedIntsVersion, valueCount, bitsPerValue, inArg, mem)
+}
+
+OrgApacheLuceneUtilPackedPackedReaderIterator *create_OrgApacheLuceneUtilPackedPackedReaderIterator_initWithOrgApacheLuceneUtilPackedPackedInts_Format_withInt_withInt_withInt_withOrgApacheLuceneStoreDataInput_withInt_(OrgApacheLuceneUtilPackedPackedInts_Format *format, jint packedIntsVersion, jint valueCount, jint bitsPerValue, OrgApacheLuceneStoreDataInput *inArg, jint mem) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedPackedReaderIterator, initWithOrgApacheLuceneUtilPackedPackedInts_Format_withInt_withInt_withInt_withOrgApacheLuceneStoreDataInput_withInt_, format, packedIntsVersion, valueCount, bitsPerValue, inArg, mem)
 }
 
 jint OrgApacheLuceneUtilPackedPackedReaderIterator_iterationsWithInt_(OrgApacheLuceneUtilPackedPackedReaderIterator *self, jint mem) {

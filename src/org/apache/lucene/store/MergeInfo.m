@@ -30,8 +30,8 @@
 - (jboolean)isEqual:(id)obj {
   if (self == obj) return true;
   if (obj == nil) return false;
-  if ([self getClass] != [nil_chk(obj) getClass]) return false;
-  OrgApacheLuceneStoreMergeInfo *other = (OrgApacheLuceneStoreMergeInfo *) check_class_cast(obj, [OrgApacheLuceneStoreMergeInfo class]);
+  if ([self getClass] != (id) [obj getClass]) return false;
+  OrgApacheLuceneStoreMergeInfo *other = (OrgApacheLuceneStoreMergeInfo *) cast_chk(obj, [OrgApacheLuceneStoreMergeInfo class]);
   if (estimatedMergeBytes_ != other->estimatedMergeBytes_) return false;
   if (isExternal_ != other->isExternal_) return false;
   if (mergeMaxNumSegments_ != other->mergeMaxNumSegments_) return false;
@@ -71,9 +71,11 @@ void OrgApacheLuceneStoreMergeInfo_initWithInt_withLong_withBoolean_withInt_(Org
 }
 
 OrgApacheLuceneStoreMergeInfo *new_OrgApacheLuceneStoreMergeInfo_initWithInt_withLong_withBoolean_withInt_(jint totalMaxDoc, jlong estimatedMergeBytes, jboolean isExternal, jint mergeMaxNumSegments) {
-  OrgApacheLuceneStoreMergeInfo *self = [OrgApacheLuceneStoreMergeInfo alloc];
-  OrgApacheLuceneStoreMergeInfo_initWithInt_withLong_withBoolean_withInt_(self, totalMaxDoc, estimatedMergeBytes, isExternal, mergeMaxNumSegments);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreMergeInfo, initWithInt_withLong_withBoolean_withInt_, totalMaxDoc, estimatedMergeBytes, isExternal, mergeMaxNumSegments)
+}
+
+OrgApacheLuceneStoreMergeInfo *create_OrgApacheLuceneStoreMergeInfo_initWithInt_withLong_withBoolean_withInt_(jint totalMaxDoc, jlong estimatedMergeBytes, jboolean isExternal, jint mergeMaxNumSegments) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreMergeInfo, initWithInt_withLong_withBoolean_withInt_, totalMaxDoc, estimatedMergeBytes, isExternal, mergeMaxNumSegments)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreMergeInfo)

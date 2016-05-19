@@ -65,9 +65,11 @@ void OrgApacheLuceneAnalysisTrApostropheFilter_initWithOrgApacheLuceneAnalysisTo
 }
 
 OrgApacheLuceneAnalysisTrApostropheFilter *new_OrgApacheLuceneAnalysisTrApostropheFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) {
-  OrgApacheLuceneAnalysisTrApostropheFilter *self = [OrgApacheLuceneAnalysisTrApostropheFilter alloc];
-  OrgApacheLuceneAnalysisTrApostropheFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisTrApostropheFilter, initWithOrgApacheLuceneAnalysisTokenStream_, inArg)
+}
+
+OrgApacheLuceneAnalysisTrApostropheFilter *create_OrgApacheLuceneAnalysisTrApostropheFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisTrApostropheFilter, initWithOrgApacheLuceneAnalysisTokenStream_, inArg)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisTrApostropheFilter)

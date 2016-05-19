@@ -13,9 +13,13 @@
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
 #include "org/apache/lucene/util/AttributeSource.h"
 
-NSString *OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_DATE_TYPE_ = @"date";
+NSString *OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_DATE_TYPE = @"date";
 
 @implementation OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter
+
++ (NSString *)DATE_TYPE {
+  return OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_DATE_TYPE;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -57,7 +61,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "acceptWithOrgApacheLuceneUtilAttributeSource:", "accept", "Z", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "DATE_TYPE_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_DATE_TYPE_, NULL, .constantValue.asLong = 0 },
+    { "DATE_TYPE", "DATE_TYPE", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_DATE_TYPE, NULL, .constantValue.asLong = 0 },
     { "dateFormat_", NULL, 0x4, "Ljava.text.DateFormat;", NULL, NULL, .constantValue.asLong = 0 },
     { "termAtt_", NULL, 0x4, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
   };
@@ -68,13 +72,15 @@ J2OBJC_IGNORE_DESIGNATED_END
 @end
 
 void OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_init(OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter *self) {
-  OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_initWithJavaTextDateFormat_(self, JavaTextDateFormat_getDateInstanceWithInt_withJavaUtilLocale_(JavaTextDateFormat_DEFAULT, JreLoadStatic(JavaUtilLocale, ROOT_)));
+  OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_initWithJavaTextDateFormat_(self, JavaTextDateFormat_getDateInstanceWithInt_withJavaUtilLocale_(JavaTextDateFormat_DEFAULT, JreLoadStatic(JavaUtilLocale, ROOT)));
 }
 
 OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter *new_OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_init() {
-  OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter *self = [OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter alloc];
-  OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter, init)
+}
+
+OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter *create_OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter, init)
 }
 
 void OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_initWithJavaTextDateFormat_(OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter *self, JavaTextDateFormat *dateFormat) {
@@ -83,9 +89,11 @@ void OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_initWithJavaTextDateFo
 }
 
 OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter *new_OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_initWithJavaTextDateFormat_(JavaTextDateFormat *dateFormat) {
-  OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter *self = [OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter alloc];
-  OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_initWithJavaTextDateFormat_(self, dateFormat);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter, initWithJavaTextDateFormat_, dateFormat)
+}
+
+OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter *create_OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_initWithJavaTextDateFormat_(JavaTextDateFormat *dateFormat) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter, initWithJavaTextDateFormat_, dateFormat)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter)

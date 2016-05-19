@@ -5,33 +5,50 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_RESTRICT
-#define OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreWhitespaceTokenizer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCoreWhitespaceTokenizer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCoreWhitespaceTokenizer 0
 #else
-#define OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCoreWhitespaceTokenizer 1
 #endif
-#undef OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCoreWhitespaceTokenizer
 
-#if !defined (_OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_) && (OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_INCLUDE_ALL || OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_INCLUDE)
-#define _OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_
+#if !defined (OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCoreWhitespaceTokenizer || defined(INCLUDE_OrgApacheLuceneAnalysisCoreWhitespaceTokenizer))
+#define OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_
 
-#define OrgApacheLuceneAnalysisUtilCharTokenizer_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilCharTokenizer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilCharTokenizer 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilCharTokenizer 1
 #include "org/apache/lucene/analysis/util/CharTokenizer.h"
 
 @class OrgApacheLuceneUtilAttributeFactory;
 
+/*!
+ @brief A WhitespaceTokenizer is a tokenizer that divides text at whitespace.
+ Adjacent sequences of non-Whitespace characters form tokens.
+ */
 @interface OrgApacheLuceneAnalysisCoreWhitespaceTokenizer : OrgApacheLuceneAnalysisUtilCharTokenizer
 
 #pragma mark Public
 
+/*!
+ @brief Construct a new WhitespaceTokenizer.
+ */
 - (instancetype)init;
 
+/*!
+ @brief Construct a new WhitespaceTokenizer using a given
+ <code>org.apache.lucene.util.AttributeFactory</code>.
+ @param factory
+ the attribute factory to use for this <code>Tokenizer</code>
+ */
 - (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
 
 #pragma mark Protected
 
+/*!
+ @brief Collects only characters which do not satisfy
+ <code>Character.isWhitespace(int)</code>.
+ */
 - (jboolean)isTokenCharWithInt:(jint)c;
 
 @end
@@ -42,12 +59,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_init(OrgAp
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreWhitespaceTokenizer *new_OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreWhitespaceTokenizer *create_OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_init();
+
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneAnalysisCoreWhitespaceTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreWhitespaceTokenizer *new_OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneUtilAttributeFactory *factory) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreWhitespaceTokenizer *create_OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneUtilAttributeFactory *factory);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreWhitespaceTokenizer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreWhitespaceTokenizer")

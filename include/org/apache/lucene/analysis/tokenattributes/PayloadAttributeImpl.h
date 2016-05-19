@@ -5,34 +5,43 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl_RESTRICT
-#define OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl 0
 #else
-#define OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl 1
 #endif
-#undef OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl
 
-#if !defined (_OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl_) && (OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl_INCLUDE_ALL || OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl_INCLUDE)
-#define _OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl_
+#if !defined (OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl || defined(INCLUDE_OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl))
+#define OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl_
 
-#define OrgApacheLuceneUtilAttributeImpl_RESTRICT 1
-#define OrgApacheLuceneUtilAttributeImpl_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAttributeImpl 1
+#define INCLUDE_OrgApacheLuceneUtilAttributeImpl 1
 #include "org/apache/lucene/util/AttributeImpl.h"
 
-#define OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenattributesPayloadAttribute 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenattributesPayloadAttribute 1
 #include "org/apache/lucene/analysis/tokenattributes/PayloadAttribute.h"
 
 @class OrgApacheLuceneUtilBytesRef;
 @protocol OrgApacheLuceneUtilAttributeReflector;
 
+/*!
+ @brief Default implementation of <code>PayloadAttribute</code>.
+ */
 @interface OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl : OrgApacheLuceneUtilAttributeImpl < OrgApacheLuceneAnalysisTokenattributesPayloadAttribute, NSCopying >
 
 #pragma mark Public
 
+/*!
+ @brief Initialize this attribute with no payload.
+ */
 - (instancetype)init;
 
+/*!
+ @brief Initialize this attribute with the given payload.
+ */
 - (instancetype)initWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload;
 
 - (void)clear;
@@ -59,12 +68,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImp
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl_init();
+
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl_initWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *self, OrgApacheLuceneUtilBytesRef *payload);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl_initWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *payload) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl_initWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *payload);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl")

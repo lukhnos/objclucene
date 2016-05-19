@@ -52,9 +52,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFacto
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory, types_, NSString *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory, protectedWords_, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
-static JavaUtilRegexPattern *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_typePattern_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory, typePattern_, JavaUtilRegexPattern *)
-J2OBJC_STATIC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory, typePattern_, JavaUtilRegexPattern *)
+inline JavaUtilRegexPattern *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_get_typePattern();
+inline JavaUtilRegexPattern *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_set_typePattern(JavaUtilRegexPattern *value);
+static JavaUtilRegexPattern *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_typePattern;
+J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory, typePattern, JavaUtilRegexPattern *)
 
 __attribute__((unused)) static IOSByteArray *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_parseTypesWithJavaUtilList_(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory *self, id<JavaUtilList> rules);
 
@@ -64,10 +65,18 @@ __attribute__((unused)) static NSString *OrgApacheLuceneAnalysisMiscellaneousWor
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory)
 
-NSString *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_PROTECTED_TOKENS_ = @"protected";
-NSString *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_TYPES_ = @"types";
+NSString *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_PROTECTED_TOKENS = @"protected";
+NSString *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_TYPES = @"types";
 
 @implementation OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory
+
++ (NSString *)PROTECTED_TOKENS {
+  return OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_PROTECTED_TOKENS;
+}
+
++ (NSString *)TYPES {
+  return OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_TYPES;
+}
 
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args {
   OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_initWithJavaUtilMap_(self, args);
@@ -80,7 +89,7 @@ NSString *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_TYPES_ 
   }
   if (types_ != nil) {
     id<JavaUtilList> files = [self splitFileNamesWithNSString:types_];
-    id<JavaUtilList> wlist = [new_JavaUtilArrayList_init() autorelease];
+    id<JavaUtilList> wlist = create_JavaUtilArrayList_init();
     for (NSString * __strong file in nil_chk(files)) {
       id<JavaUtilList> lines = [self getLinesWithOrgApacheLuceneAnalysisUtilResourceLoader:loader withNSString:[((NSString *) nil_chk(file)) trim]];
       [wlist addAllWithJavaUtilCollection:lines];
@@ -90,11 +99,11 @@ NSString *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_TYPES_ 
 }
 
 - (OrgApacheLuceneAnalysisTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  if ([((OrgApacheLuceneUtilVersion *) nil_chk(luceneMatchVersion_)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_8_0_)]) {
-    return [new_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_initWithOrgApacheLuceneAnalysisTokenStream_withByteArray_withInt_withOrgApacheLuceneAnalysisUtilCharArraySet_(input, typeTable_ == nil ? JreLoadStatic(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator, DEFAULT_WORD_DELIM_TABLE_) : typeTable_, flags_, protectedWords_) autorelease];
+  if ([((OrgApacheLuceneUtilVersion *) nil_chk(luceneMatchVersion_)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_8_0)]) {
+    return create_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_initWithOrgApacheLuceneAnalysisTokenStream_withByteArray_withInt_withOrgApacheLuceneAnalysisUtilCharArraySet_(input, typeTable_ == nil ? JreLoadStatic(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator, DEFAULT_WORD_DELIM_TABLE) : typeTable_, flags_, protectedWords_);
   }
   else {
-    return [new_OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_initWithOrgApacheLuceneAnalysisTokenStream_withByteArray_withInt_withOrgApacheLuceneAnalysisUtilCharArraySet_(input, typeTable_ == nil ? JreLoadStatic(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator, DEFAULT_WORD_DELIM_TABLE_) : typeTable_, flags_, protectedWords_) autorelease];
+    return create_OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_initWithOrgApacheLuceneAnalysisTokenStream_withByteArray_withInt_withOrgApacheLuceneAnalysisUtilCharArraySet_(input, typeTable_ == nil ? JreLoadStatic(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator, DEFAULT_WORD_DELIM_TABLE) : typeTable_, flags_, protectedWords_);
   }
 }
 
@@ -121,29 +130,29 @@ NSString *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_TYPES_ 
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory class]) {
-    JreStrongAssign(&OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_typePattern_, JavaUtilRegexPattern_compileWithNSString_(@"(.*)\\s*=>\\s*(.*)\\s*$"));
+    JreStrongAssign(&OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_typePattern, JavaUtilRegexPattern_compileWithNSString_(@"(.*)\\s*=>\\s*(.*)\\s*$"));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory)
   }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "WordDelimiterFilterFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "WordDelimiterFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "informWithOrgApacheLuceneAnalysisUtilResourceLoader:", "inform", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenFilter;", 0x1, NULL, NULL },
-    { "parseTypesWithJavaUtilList:", "parseTypes", "[B", 0x2, NULL, NULL },
+    { "parseTypesWithJavaUtilList:", "parseTypes", "[B", 0x2, NULL, "(Ljava/util/List<Ljava/lang/String;>;)[B" },
     { "parseTypeWithNSString:", "parseType", "Ljava.lang.Byte;", 0x2, NULL, NULL },
     { "parseStringWithNSString:", "parseString", "Ljava.lang.String;", 0x2, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "PROTECTED_TOKENS_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_PROTECTED_TOKENS_, NULL, .constantValue.asLong = 0 },
-    { "TYPES_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_TYPES_, NULL, .constantValue.asLong = 0 },
+    { "PROTECTED_TOKENS", "PROTECTED_TOKENS", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_PROTECTED_TOKENS, NULL, .constantValue.asLong = 0 },
+    { "TYPES", "TYPES", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_TYPES, NULL, .constantValue.asLong = 0 },
     { "wordFiles_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
     { "types_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
     { "flags_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "typeTable_", NULL, 0x0, "[B", NULL, NULL, .constantValue.asLong = 0 },
     { "protectedWords_", NULL, 0x2, "Lorg.apache.lucene.analysis.util.CharArraySet;", NULL, NULL, .constantValue.asLong = 0 },
-    { "typePattern_", NULL, 0xa, "Ljava.util.regex.Pattern;", &OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_typePattern_, NULL, .constantValue.asLong = 0 },
+    { "typePattern", "typePattern", 0xa, "Ljava.util.regex.Pattern;", &OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_typePattern, NULL, .constantValue.asLong = 0 },
     { "out_", NULL, 0x0, "[C", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory = { 2, "WordDelimiterFilterFactory", "org.apache.lucene.analysis.miscellaneous", NULL, 0x1, 6, methods, 9, fields, 0, NULL, 0, NULL, NULL, NULL };
@@ -185,32 +194,34 @@ void OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_initWithJava
   if ([self getIntWithJavaUtilMap:args withNSString:@"stemEnglishPossessive" withInt:1] != 0) {
     flags |= OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_STEM_ENGLISH_POSSESSIVE;
   }
-  JreStrongAssign(&self->wordFiles_, [self getWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_PROTECTED_TOKENS_]);
-  JreStrongAssign(&self->types_, [self getWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_TYPES_]);
+  JreStrongAssign(&self->wordFiles_, [self getWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_PROTECTED_TOKENS]);
+  JreStrongAssign(&self->types_, [self getWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_TYPES]);
   self->flags_ = flags;
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory *self = [OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory alloc];
-  OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory *create_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory, initWithJavaUtilMap_, args)
 }
 
 IOSByteArray *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_parseTypesWithJavaUtilList_(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory *self, id<JavaUtilList> rules) {
-  id<JavaUtilSortedMap> typeMap = [new_JavaUtilTreeMap_init() autorelease];
+  id<JavaUtilSortedMap> typeMap = create_JavaUtilTreeMap_init();
   for (NSString * __strong rule in nil_chk(rules)) {
-    JavaUtilRegexMatcher *m = [((JavaUtilRegexPattern *) nil_chk(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_typePattern_)) matcherWithJavaLangCharSequence:rule];
-    if (![((JavaUtilRegexMatcher *) nil_chk(m)) find]) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$C", @"Invalid Mapping Rule : [", rule, ']')) autorelease];
+    JavaUtilRegexMatcher *m = [((JavaUtilRegexPattern *) nil_chk(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_typePattern)) matcherWithJavaLangCharSequence:rule];
+    if (![((JavaUtilRegexMatcher *) nil_chk(m)) find]) @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$C", @"Invalid Mapping Rule : [", rule, ']'));
     NSString *lhs = OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_parseStringWithNSString_(self, [((NSString *) nil_chk([m groupWithInt:1])) trim]);
     JavaLangByte *rhs = OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_parseTypeWithNSString_(self, [((NSString *) nil_chk([m groupWithInt:2])) trim]);
-    if (((jint) [((NSString *) nil_chk(lhs)) length]) != 1) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"Invalid Mapping Rule : [", rule, @"]. Only a single character is allowed.")) autorelease];
-    if (rhs == nil) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"Invalid Mapping Rule : [", rule, @"]. Illegal type.")) autorelease];
+    if (((jint) [((NSString *) nil_chk(lhs)) length]) != 1) @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"Invalid Mapping Rule : [", rule, @"]. Only a single character is allowed."));
+    if (rhs == nil) @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"Invalid Mapping Rule : [", rule, @"]. Illegal type."));
     [typeMap putWithId:JavaLangCharacter_valueOfWithChar_([lhs charAtWithInt:0]) withId:rhs];
   }
-  IOSByteArray *types = [IOSByteArray arrayWithLength:JavaLangMath_maxWithInt_withInt_([((JavaLangCharacter *) nil_chk([typeMap lastKey])) charValue] + 1, ((IOSByteArray *) nil_chk(JreLoadStatic(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator, DEFAULT_WORD_DELIM_TABLE_)))->size_)];
+  IOSByteArray *types = [IOSByteArray arrayWithLength:JavaLangMath_maxWithInt_withInt_([((JavaLangCharacter *) nil_chk([typeMap lastKey])) charValue] + 1, ((IOSByteArray *) nil_chk(JreLoadStatic(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator, DEFAULT_WORD_DELIM_TABLE)))->size_)];
   for (jint i = 0; i < types->size_; i++) *IOSByteArray_GetRef(types, i) = OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_getTypeWithInt_(i);
   for (id<JavaUtilMap_Entry> __strong mapping in nil_chk([typeMap entrySet])) *IOSByteArray_GetRef(types, [((JavaLangCharacter *) nil_chk([((id<JavaUtilMap_Entry>) nil_chk(mapping)) getKey])) charValue]) = [((JavaLangByte *) nil_chk([mapping getValue])) charValue];
   return types;
@@ -233,7 +244,7 @@ NSString *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_parseSt
   while (readPos < len) {
     jchar c = [s charAtWithInt:readPos++];
     if (c == '\\') {
-      if (readPos >= len) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$C", @"Invalid escaped char in [", s, ']')) autorelease];
+      if (readPos >= len) @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$C", @"Invalid escaped char in [", s, ']'));
       c = [s charAtWithInt:readPos++];
       switch (c) {
         case '\\':
@@ -255,7 +266,7 @@ NSString *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_parseSt
         c = 0x000c;
         break;
         case 'u':
-        if (readPos + 3 >= len) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$C", @"Invalid escaped char in [", s, ']')) autorelease];
+        if (readPos + 3 >= len) @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$C", @"Invalid escaped char in [", s, ']'));
         c = (jchar) JavaLangInteger_parseIntWithNSString_withInt_([s substring:readPos endIndex:readPos + 4], 16);
         readPos += 4;
         break;

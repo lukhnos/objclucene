@@ -5,44 +5,81 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSortedSetSortField_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSortedSetSortField_RESTRICT
-#define OrgApacheLuceneSearchSortedSetSortField_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSortedSetSortField")
+#ifdef RESTRICT_OrgApacheLuceneSearchSortedSetSortField
+#define INCLUDE_ALL_OrgApacheLuceneSearchSortedSetSortField 0
 #else
-#define OrgApacheLuceneSearchSortedSetSortField_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSortedSetSortField 1
 #endif
-#undef OrgApacheLuceneSearchSortedSetSortField_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSortedSetSortField
 
-#if !defined (_OrgApacheLuceneSearchSortedSetSortField_) && (OrgApacheLuceneSearchSortedSetSortField_INCLUDE_ALL || OrgApacheLuceneSearchSortedSetSortField_INCLUDE)
-#define _OrgApacheLuceneSearchSortedSetSortField_
+#if !defined (OrgApacheLuceneSearchSortedSetSortField_) && (INCLUDE_ALL_OrgApacheLuceneSearchSortedSetSortField || defined(INCLUDE_OrgApacheLuceneSearchSortedSetSortField))
+#define OrgApacheLuceneSearchSortedSetSortField_
 
-#define OrgApacheLuceneSearchSortField_RESTRICT 1
-#define OrgApacheLuceneSearchSortField_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSortField 1
+#define INCLUDE_OrgApacheLuceneSearchSortField 1
 #include "org/apache/lucene/search/SortField.h"
 
 @class OrgApacheLuceneSearchFieldComparator;
-@class OrgApacheLuceneSearchSortedSetSelector_TypeEnum;
+@class OrgApacheLuceneSearchSortedSetSelector_Type;
 
+/*!
+ @brief SortField for <code>SortedSetDocValues</code>.
+ <p>
+ A SortedSetDocValues contains multiple values for a field, so sorting with
+ this technique "selects" a value as the representative sort value for the document.
+ <p>
+ By default, the minimum value in the set is selected as the sort value, but
+ this can be customized. Selectors other than the default do have some limitations
+ to ensure that all selections happen in constant-time for performance.
+ <p>
+ Like sorting by string, this also supports sorting missing values as first or last,
+ via <code>setMissingValue(Object)</code>.
+ - seealso: SortedSetSelector
+ */
 @interface OrgApacheLuceneSearchSortedSetSortField : OrgApacheLuceneSearchSortField
 
 #pragma mark Public
 
+/*!
+ @brief Creates a sort, possibly in reverse, by the minimum value in the set 
+ for the document.
+ @param field Name of field to sort by.  Must not be null.
+ @param reverse True if natural order should be reversed.
+ */
 - (instancetype)initWithNSString:(NSString *)field
                      withBoolean:(jboolean)reverse;
 
+/*!
+ @brief Creates a sort, possibly in reverse, specifying how the sort value from 
+ the document's set is selected.
+ @param field Name of field to sort by.  Must not be null.
+ @param reverse True if natural order should be reversed.
+ @param selector custom selector type for choosing the sort value from the set.
+ <p>
+ NOTE: selectors other than <code>SortedSetSelector.Type.MIN</code> require optional codec support.
+ */
 - (instancetype)initWithNSString:(NSString *)field
                      withBoolean:(jboolean)reverse
-withOrgApacheLuceneSearchSortedSetSelector_TypeEnum:(OrgApacheLuceneSearchSortedSetSelector_TypeEnum *)selector;
+withOrgApacheLuceneSearchSortedSetSelector_Type:(OrgApacheLuceneSearchSortedSetSelector_Type *)selector;
 
 - (jboolean)isEqual:(id)obj;
 
 - (OrgApacheLuceneSearchFieldComparator *)getComparatorWithInt:(jint)numHits
                                                        withInt:(jint)sortPos;
 
-- (OrgApacheLuceneSearchSortedSetSelector_TypeEnum *)getSelector;
+/*!
+ @brief Returns the selector in use for this sort
+ */
+- (OrgApacheLuceneSearchSortedSetSelector_Type *)getSelector;
 
 - (NSUInteger)hash;
 
+/*!
+ @brief Set how missing values (the empty set) are sorted.
+ <p>
+ Note that this must be <code>STRING_FIRST</code> or <code>STRING_LAST</code>.
+ */
 - (void)setMissingValueWithId:(id)missingValue;
 
 - (NSString *)description;
@@ -55,12 +92,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSortedSetSortField_initWithNSString_
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSortField *new_OrgApacheLuceneSearchSortedSetSortField_initWithNSString_withBoolean_(NSString *field, jboolean reverse) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSortedSetSortField_initWithNSString_withBoolean_withOrgApacheLuceneSearchSortedSetSelector_TypeEnum_(OrgApacheLuceneSearchSortedSetSortField *self, NSString *field, jboolean reverse, OrgApacheLuceneSearchSortedSetSelector_TypeEnum *selector);
+FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSortField *create_OrgApacheLuceneSearchSortedSetSortField_initWithNSString_withBoolean_(NSString *field, jboolean reverse);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSortField *new_OrgApacheLuceneSearchSortedSetSortField_initWithNSString_withBoolean_withOrgApacheLuceneSearchSortedSetSelector_TypeEnum_(NSString *field, jboolean reverse, OrgApacheLuceneSearchSortedSetSelector_TypeEnum *selector) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSortedSetSortField_initWithNSString_withBoolean_withOrgApacheLuceneSearchSortedSetSelector_Type_(OrgApacheLuceneSearchSortedSetSortField *self, NSString *field, jboolean reverse, OrgApacheLuceneSearchSortedSetSelector_Type *selector);
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSortField *new_OrgApacheLuceneSearchSortedSetSortField_initWithNSString_withBoolean_withOrgApacheLuceneSearchSortedSetSelector_Type_(NSString *field, jboolean reverse, OrgApacheLuceneSearchSortedSetSelector_Type *selector) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSortField *create_OrgApacheLuceneSearchSortedSetSortField_initWithNSString_withBoolean_withOrgApacheLuceneSearchSortedSetSelector_Type_(NSString *field, jboolean reverse, OrgApacheLuceneSearchSortedSetSelector_Type *selector);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedSetSortField)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSortedSetSortField_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSortedSetSortField")

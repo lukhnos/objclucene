@@ -5,23 +5,23 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory_) && (OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory))
+#define OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-#define OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent 1
 #include "org/apache/lucene/analysis/util/MultiTermAwareComponent.h"
 
 @class OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter;
@@ -29,10 +29,24 @@
 @class OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>ASCIIFoldingFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_ascii" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+ &lt;filter class="solr.ASCIIFoldingFilterFactory" preserveOriginal="false"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilMultiTermAwareComponent >
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new ASCIIFoldingFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -47,8 +61,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFac
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory *create_OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory")

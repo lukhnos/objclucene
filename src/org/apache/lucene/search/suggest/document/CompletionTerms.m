@@ -31,19 +31,19 @@ withOrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader:(OrgApacheLuceneS
 }
 
 - (jbyte)getType {
-  return (reader_ != nil) ? reader_->type_ : OrgApacheLuceneSearchSuggestDocumentSuggestField_TYPE;
+  return (reader_ != nil) ? ((OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader *) nil_chk(reader_))->type_ : OrgApacheLuceneSearchSuggestDocumentSuggestField_TYPE;
 }
 
 - (jlong)getMinWeight {
-  return (reader_ != nil) ? reader_->minWeight_ : 0;
+  return (reader_ != nil) ? ((OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader *) nil_chk(reader_))->minWeight_ : 0;
 }
 
 - (jlong)getMaxWeight {
-  return (reader_ != nil) ? reader_->maxWeight_ : 0;
+  return (reader_ != nil) ? ((OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader *) nil_chk(reader_))->maxWeight_ : 0;
 }
 
 - (OrgApacheLuceneSearchSuggestDocumentNRTSuggester *)suggester {
-  return (reader_ != nil) ? [reader_ suggester] : nil;
+  return (reader_ != nil) ? [((OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader *) nil_chk(reader_)) suggester] : nil;
 }
 
 - (void)dealloc {
@@ -74,9 +74,11 @@ void OrgApacheLuceneSearchSuggestDocumentCompletionTerms_initWithOrgApacheLucene
 }
 
 OrgApacheLuceneSearchSuggestDocumentCompletionTerms *new_OrgApacheLuceneSearchSuggestDocumentCompletionTerms_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_(OrgApacheLuceneIndexTerms *inArg, OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader *reader) {
-  OrgApacheLuceneSearchSuggestDocumentCompletionTerms *self = [OrgApacheLuceneSearchSuggestDocumentCompletionTerms alloc];
-  OrgApacheLuceneSearchSuggestDocumentCompletionTerms_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_(self, inArg, reader);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionTerms, initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_, inArg, reader)
+}
+
+OrgApacheLuceneSearchSuggestDocumentCompletionTerms *create_OrgApacheLuceneSearchSuggestDocumentCompletionTerms_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_(OrgApacheLuceneIndexTerms *inArg, OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader *reader) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionTerms, initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_, inArg, reader)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentCompletionTerms)

@@ -107,17 +107,17 @@ __attribute__((unused)) static OrgApacheLuceneUtilFstIntsRefFSTEnum_InputOutput 
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilFstFST:", "IntsRefFSTEnum", NULL, 0x1, NULL, NULL },
-    { "current", NULL, "Lorg.apache.lucene.util.fst.IntsRefFSTEnum$InputOutput;", 0x1, NULL, NULL },
-    { "next", NULL, "Lorg.apache.lucene.util.fst.IntsRefFSTEnum$InputOutput;", 0x1, "Ljava.io.IOException;", NULL },
-    { "seekCeilWithOrgApacheLuceneUtilIntsRef:", "seekCeil", "Lorg.apache.lucene.util.fst.IntsRefFSTEnum$InputOutput;", 0x1, "Ljava.io.IOException;", NULL },
-    { "seekFloorWithOrgApacheLuceneUtilIntsRef:", "seekFloor", "Lorg.apache.lucene.util.fst.IntsRefFSTEnum$InputOutput;", 0x1, "Ljava.io.IOException;", NULL },
-    { "seekExactWithOrgApacheLuceneUtilIntsRef:", "seekExact", "Lorg.apache.lucene.util.fst.IntsRefFSTEnum$InputOutput;", 0x1, "Ljava.io.IOException;", NULL },
+    { "initWithOrgApacheLuceneUtilFstFST:", "IntsRefFSTEnum", NULL, 0x1, NULL, "(Lorg/apache/lucene/util/fst/FST<TT;>;)V" },
+    { "current", NULL, "Lorg.apache.lucene.util.fst.IntsRefFSTEnum$InputOutput;", 0x1, NULL, "()Lorg/apache/lucene/util/fst/IntsRefFSTEnum$InputOutput<TT;>;" },
+    { "next", NULL, "Lorg.apache.lucene.util.fst.IntsRefFSTEnum$InputOutput;", 0x1, "Ljava.io.IOException;", "()Lorg/apache/lucene/util/fst/IntsRefFSTEnum$InputOutput<TT;>;" },
+    { "seekCeilWithOrgApacheLuceneUtilIntsRef:", "seekCeil", "Lorg.apache.lucene.util.fst.IntsRefFSTEnum$InputOutput;", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/IntsRef;)Lorg/apache/lucene/util/fst/IntsRefFSTEnum$InputOutput<TT;>;" },
+    { "seekFloorWithOrgApacheLuceneUtilIntsRef:", "seekFloor", "Lorg.apache.lucene.util.fst.IntsRefFSTEnum$InputOutput;", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/IntsRef;)Lorg/apache/lucene/util/fst/IntsRefFSTEnum$InputOutput<TT;>;" },
+    { "seekExactWithOrgApacheLuceneUtilIntsRef:", "seekExact", "Lorg.apache.lucene.util.fst.IntsRefFSTEnum$InputOutput;", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/IntsRef;)Lorg/apache/lucene/util/fst/IntsRefFSTEnum$InputOutput<TT;>;" },
     { "getTargetLabel", NULL, "I", 0x4, NULL, NULL },
     { "getCurrentLabel", NULL, "I", 0x4, NULL, NULL },
     { "setCurrentLabelWithInt:", "setCurrentLabel", "V", 0x4, NULL, NULL },
     { "grow", NULL, "V", 0x4, NULL, NULL },
-    { "setResult", NULL, "Lorg.apache.lucene.util.fst.IntsRefFSTEnum$InputOutput;", 0x2, NULL, NULL },
+    { "setResult", NULL, "Lorg.apache.lucene.util.fst.IntsRefFSTEnum$InputOutput;", 0x2, NULL, "()Lorg/apache/lucene/util/fst/IntsRefFSTEnum$InputOutput<TT;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "current_", NULL, 0x12, "Lorg.apache.lucene.util.IntsRef;", NULL, NULL, .constantValue.asLong = 0 },
@@ -141,9 +141,11 @@ void OrgApacheLuceneUtilFstIntsRefFSTEnum_initWithOrgApacheLuceneUtilFstFST_(Org
 }
 
 OrgApacheLuceneUtilFstIntsRefFSTEnum *new_OrgApacheLuceneUtilFstIntsRefFSTEnum_initWithOrgApacheLuceneUtilFstFST_(OrgApacheLuceneUtilFstFST *fst) {
-  OrgApacheLuceneUtilFstIntsRefFSTEnum *self = [OrgApacheLuceneUtilFstIntsRefFSTEnum alloc];
-  OrgApacheLuceneUtilFstIntsRefFSTEnum_initWithOrgApacheLuceneUtilFstFST_(self, fst);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFstIntsRefFSTEnum, initWithOrgApacheLuceneUtilFstFST_, fst)
+}
+
+OrgApacheLuceneUtilFstIntsRefFSTEnum *create_OrgApacheLuceneUtilFstIntsRefFSTEnum_initWithOrgApacheLuceneUtilFstFST_(OrgApacheLuceneUtilFstFST *fst) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFstIntsRefFSTEnum, initWithOrgApacheLuceneUtilFstFST_, fst)
 }
 
 OrgApacheLuceneUtilFstIntsRefFSTEnum_InputOutput *OrgApacheLuceneUtilFstIntsRefFSTEnum_setResult(OrgApacheLuceneUtilFstIntsRefFSTEnum *self) {
@@ -176,7 +178,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "InputOutput", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "input_", NULL, 0x1, "Lorg.apache.lucene.util.IntsRef;", NULL, NULL, .constantValue.asLong = 0 },
@@ -193,9 +195,11 @@ void OrgApacheLuceneUtilFstIntsRefFSTEnum_InputOutput_init(OrgApacheLuceneUtilFs
 }
 
 OrgApacheLuceneUtilFstIntsRefFSTEnum_InputOutput *new_OrgApacheLuceneUtilFstIntsRefFSTEnum_InputOutput_init() {
-  OrgApacheLuceneUtilFstIntsRefFSTEnum_InputOutput *self = [OrgApacheLuceneUtilFstIntsRefFSTEnum_InputOutput alloc];
-  OrgApacheLuceneUtilFstIntsRefFSTEnum_InputOutput_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFstIntsRefFSTEnum_InputOutput, init)
+}
+
+OrgApacheLuceneUtilFstIntsRefFSTEnum_InputOutput *create_OrgApacheLuceneUtilFstIntsRefFSTEnum_InputOutput_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFstIntsRefFSTEnum_InputOutput, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstIntsRefFSTEnum_InputOutput)

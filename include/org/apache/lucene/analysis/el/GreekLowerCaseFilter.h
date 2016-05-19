@@ -5,27 +5,35 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisElGreekLowerCaseFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisElGreekLowerCaseFilter_RESTRICT
-#define OrgApacheLuceneAnalysisElGreekLowerCaseFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisElGreekLowerCaseFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisElGreekLowerCaseFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisElGreekLowerCaseFilter 0
 #else
-#define OrgApacheLuceneAnalysisElGreekLowerCaseFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisElGreekLowerCaseFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisElGreekLowerCaseFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisElGreekLowerCaseFilter
 
-#if !defined (_OrgApacheLuceneAnalysisElGreekLowerCaseFilter_) && (OrgApacheLuceneAnalysisElGreekLowerCaseFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisElGreekLowerCaseFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisElGreekLowerCaseFilter_
+#if !defined (OrgApacheLuceneAnalysisElGreekLowerCaseFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisElGreekLowerCaseFilter || defined(INCLUDE_OrgApacheLuceneAnalysisElGreekLowerCaseFilter))
+#define OrgApacheLuceneAnalysisElGreekLowerCaseFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief Normalizes token text to lower case, removes some Greek diacritics,
+ and standardizes final sigma to sigma.
+ */
 @interface OrgApacheLuceneAnalysisElGreekLowerCaseFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
+/*!
+ @brief Create a GreekLowerCaseFilter that normalizes Greek token text.
+ @param inArg TokenStream to filter
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
 
 - (jboolean)incrementToken;
@@ -38,8 +46,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisElGreekLowerCaseFilter_initWithOrg
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisElGreekLowerCaseFilter *new_OrgApacheLuceneAnalysisElGreekLowerCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisElGreekLowerCaseFilter *create_OrgApacheLuceneAnalysisElGreekLowerCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisElGreekLowerCaseFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisElGreekLowerCaseFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisElGreekLowerCaseFilter")

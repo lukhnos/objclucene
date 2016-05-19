@@ -15,10 +15,18 @@
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchSort)
 
-OrgApacheLuceneSearchSort *OrgApacheLuceneSearchSort_RELEVANCE_;
-OrgApacheLuceneSearchSort *OrgApacheLuceneSearchSort_INDEXORDER_;
+OrgApacheLuceneSearchSort *OrgApacheLuceneSearchSort_RELEVANCE;
+OrgApacheLuceneSearchSort *OrgApacheLuceneSearchSort_INDEXORDER;
 
 @implementation OrgApacheLuceneSearchSort
+
++ (OrgApacheLuceneSearchSort *)RELEVANCE {
+  return OrgApacheLuceneSearchSort_RELEVANCE;
+}
+
++ (OrgApacheLuceneSearchSort *)INDEXORDER {
+  return OrgApacheLuceneSearchSort_INDEXORDER;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -54,18 +62,18 @@ J2OBJC_IGNORE_DESIGNATED_END
   IOSObjectArray *rewrittenSortFields = [IOSObjectArray arrayWithLength:((IOSObjectArray *) nil_chk(fields_))->size_ type:OrgApacheLuceneSearchSortField_class_()];
   for (jint i = 0; i < fields_->size_; i++) {
     IOSObjectArray_Set(rewrittenSortFields, i, [((OrgApacheLuceneSearchSortField *) nil_chk(IOSObjectArray_Get(fields_, i))) rewriteWithOrgApacheLuceneSearchIndexSearcher:searcher]);
-    if (IOSObjectArray_Get(fields_, i) != IOSObjectArray_Get(rewrittenSortFields, i)) {
+    if (IOSObjectArray_Get(nil_chk(fields_), i) != IOSObjectArray_Get(rewrittenSortFields, i)) {
       changed = true;
     }
   }
-  return (changed) ? [new_OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortFieldArray_(rewrittenSortFields) autorelease] : self;
+  return (changed) ? create_OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortFieldArray_(rewrittenSortFields) : self;
 }
 
 - (NSString *)description {
-  JavaLangStringBuilder *buffer = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_init();
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(fields_))->size_; i++) {
     [buffer appendWithNSString:[((OrgApacheLuceneSearchSortField *) nil_chk(IOSObjectArray_Get(fields_, i))) description]];
-    if ((i + 1) < fields_->size_) [buffer appendWithChar:','];
+    if ((i + 1) < ((IOSObjectArray *) nil_chk(fields_))->size_) [buffer appendWithChar:','];
   }
   return [buffer description];
 }
@@ -73,7 +81,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (jboolean)isEqual:(id)o {
   if (self == o) return true;
   if (!([o isKindOfClass:[OrgApacheLuceneSearchSort class]])) return false;
-  OrgApacheLuceneSearchSort *other = (OrgApacheLuceneSearchSort *) check_class_cast(o, [OrgApacheLuceneSearchSort class]);
+  OrgApacheLuceneSearchSort *other = (OrgApacheLuceneSearchSort *) cast_chk(o, [OrgApacheLuceneSearchSort class]);
   return JavaUtilArrays_equalsWithNSObjectArray_withNSObjectArray_(self->fields_, ((OrgApacheLuceneSearchSort *) nil_chk(other))->fields_);
 }
 
@@ -103,8 +111,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchSort class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneSearchSort_RELEVANCE_, new_OrgApacheLuceneSearchSort_init());
-    JreStrongAssignAndConsume(&OrgApacheLuceneSearchSort_INDEXORDER_, new_OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortField_(JreLoadStatic(OrgApacheLuceneSearchSortField, FIELD_DOC_)));
+    JreStrongAssignAndConsume(&OrgApacheLuceneSearchSort_RELEVANCE, new_OrgApacheLuceneSearchSort_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneSearchSort_INDEXORDER, new_OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortField_(JreLoadStatic(OrgApacheLuceneSearchSortField, FIELD_DOC)));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSort)
   }
 }
@@ -124,8 +132,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "needsScores", NULL, "Z", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "RELEVANCE_", NULL, 0x19, "Lorg.apache.lucene.search.Sort;", &OrgApacheLuceneSearchSort_RELEVANCE_, NULL, .constantValue.asLong = 0 },
-    { "INDEXORDER_", NULL, 0x19, "Lorg.apache.lucene.search.Sort;", &OrgApacheLuceneSearchSort_INDEXORDER_, NULL, .constantValue.asLong = 0 },
+    { "RELEVANCE", "RELEVANCE", 0x19, "Lorg.apache.lucene.search.Sort;", &OrgApacheLuceneSearchSort_RELEVANCE, NULL, .constantValue.asLong = 0 },
+    { "INDEXORDER", "INDEXORDER", 0x19, "Lorg.apache.lucene.search.Sort;", &OrgApacheLuceneSearchSort_INDEXORDER, NULL, .constantValue.asLong = 0 },
     { "fields_", NULL, 0x0, "[Lorg.apache.lucene.search.SortField;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneSearchSort = { 2, "Sort", "org.apache.lucene.search", NULL, 0x1, 11, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
@@ -135,13 +143,15 @@ J2OBJC_IGNORE_DESIGNATED_END
 @end
 
 void OrgApacheLuceneSearchSort_init(OrgApacheLuceneSearchSort *self) {
-  OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortField_(self, JreLoadStatic(OrgApacheLuceneSearchSortField, FIELD_SCORE_));
+  OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortField_(self, JreLoadStatic(OrgApacheLuceneSearchSortField, FIELD_SCORE));
 }
 
 OrgApacheLuceneSearchSort *new_OrgApacheLuceneSearchSort_init() {
-  OrgApacheLuceneSearchSort *self = [OrgApacheLuceneSearchSort alloc];
-  OrgApacheLuceneSearchSort_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSort, init)
+}
+
+OrgApacheLuceneSearchSort *create_OrgApacheLuceneSearchSort_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSort, init)
 }
 
 void OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortField_(OrgApacheLuceneSearchSort *self, OrgApacheLuceneSearchSortField *field) {
@@ -150,9 +160,11 @@ void OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortField_(OrgApache
 }
 
 OrgApacheLuceneSearchSort *new_OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortField_(OrgApacheLuceneSearchSortField *field) {
-  OrgApacheLuceneSearchSort *self = [OrgApacheLuceneSearchSort alloc];
-  OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortField_(self, field);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSort, initWithOrgApacheLuceneSearchSortField_, field)
+}
+
+OrgApacheLuceneSearchSort *create_OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortField_(OrgApacheLuceneSearchSortField *field) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSort, initWithOrgApacheLuceneSearchSortField_, field)
 }
 
 void OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortFieldArray_(OrgApacheLuceneSearchSort *self, IOSObjectArray *fields) {
@@ -161,9 +173,11 @@ void OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortFieldArray_(OrgA
 }
 
 OrgApacheLuceneSearchSort *new_OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortFieldArray_(IOSObjectArray *fields) {
-  OrgApacheLuceneSearchSort *self = [OrgApacheLuceneSearchSort alloc];
-  OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortFieldArray_(self, fields);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSort, initWithOrgApacheLuceneSearchSortFieldArray_, fields)
+}
+
+OrgApacheLuceneSearchSort *create_OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortFieldArray_(IOSObjectArray *fields) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSort, initWithOrgApacheLuceneSearchSortFieldArray_, fields)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSort)

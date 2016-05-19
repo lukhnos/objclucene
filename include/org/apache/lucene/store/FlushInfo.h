@@ -5,17 +5,21 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneStoreFlushInfo_INCLUDE_ALL")
-#if OrgApacheLuceneStoreFlushInfo_RESTRICT
-#define OrgApacheLuceneStoreFlushInfo_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneStoreFlushInfo")
+#ifdef RESTRICT_OrgApacheLuceneStoreFlushInfo
+#define INCLUDE_ALL_OrgApacheLuceneStoreFlushInfo 0
 #else
-#define OrgApacheLuceneStoreFlushInfo_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneStoreFlushInfo 1
 #endif
-#undef OrgApacheLuceneStoreFlushInfo_RESTRICT
+#undef RESTRICT_OrgApacheLuceneStoreFlushInfo
 
-#if !defined (_OrgApacheLuceneStoreFlushInfo_) && (OrgApacheLuceneStoreFlushInfo_INCLUDE_ALL || OrgApacheLuceneStoreFlushInfo_INCLUDE)
-#define _OrgApacheLuceneStoreFlushInfo_
+#if !defined (OrgApacheLuceneStoreFlushInfo_) && (INCLUDE_ALL_OrgApacheLuceneStoreFlushInfo || defined(INCLUDE_OrgApacheLuceneStoreFlushInfo))
+#define OrgApacheLuceneStoreFlushInfo_
 
+/*!
+ @brief <p>A FlushInfo provides information required for a FLUSH context.
+ It is used as part of an <code>IOContext</code> in case of FLUSH context.</p>
+ */
 @interface OrgApacheLuceneStoreFlushInfo : NSObject {
  @public
   jint numDocs_;
@@ -24,6 +28,11 @@
 
 #pragma mark Public
 
+/*!
+ @brief <p>Creates a new <code>FlushInfo</code> instance from
+ the values required for a FLUSH <code>IOContext</code> context.
+ These values are only estimates and are not the actual values.
+ */
 - (instancetype)initWithInt:(jint)numDocs
                    withLong:(jlong)estimatedSegmentSize;
 
@@ -41,8 +50,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneStoreFlushInfo_initWithInt_withLong_(OrgAp
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreFlushInfo *new_OrgApacheLuceneStoreFlushInfo_initWithInt_withLong_(jint numDocs, jlong estimatedSegmentSize) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneStoreFlushInfo *create_OrgApacheLuceneStoreFlushInfo_initWithInt_withLong_(jint numDocs, jlong estimatedSegmentSize);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreFlushInfo)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneStoreFlushInfo_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreFlushInfo")

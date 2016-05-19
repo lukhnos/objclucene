@@ -10,6 +10,42 @@
 
 @implementation OrgApacheLuceneAnalysisFaPersianNormalizer
 
++ (jchar)YEH {
+  return OrgApacheLuceneAnalysisFaPersianNormalizer_YEH;
+}
+
++ (jchar)FARSI_YEH {
+  return OrgApacheLuceneAnalysisFaPersianNormalizer_FARSI_YEH;
+}
+
++ (jchar)YEH_BARREE {
+  return OrgApacheLuceneAnalysisFaPersianNormalizer_YEH_BARREE;
+}
+
++ (jchar)KEHEH {
+  return OrgApacheLuceneAnalysisFaPersianNormalizer_KEHEH;
+}
+
++ (jchar)KAF {
+  return OrgApacheLuceneAnalysisFaPersianNormalizer_KAF;
+}
+
++ (jchar)HAMZA_ABOVE {
+  return OrgApacheLuceneAnalysisFaPersianNormalizer_HAMZA_ABOVE;
+}
+
++ (jchar)HEH_YEH {
+  return OrgApacheLuceneAnalysisFaPersianNormalizer_HEH_YEH;
+}
+
++ (jchar)HEH_GOAL {
+  return OrgApacheLuceneAnalysisFaPersianNormalizer_HEH_GOAL;
+}
+
++ (jchar)HEH {
+  return OrgApacheLuceneAnalysisFaPersianNormalizer_HEH;
+}
+
 - (jint)normalizeWithCharArray:(IOSCharArray *)s
                        withInt:(jint)len {
   for (jint i = 0; i < len; i++) {
@@ -46,7 +82,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "normalizeWithCharArray:withInt:", "normalize", "I", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "PersianNormalizer", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "YEH", "YEH", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisFaPersianNormalizer_YEH },
@@ -70,9 +106,11 @@ void OrgApacheLuceneAnalysisFaPersianNormalizer_init(OrgApacheLuceneAnalysisFaPe
 }
 
 OrgApacheLuceneAnalysisFaPersianNormalizer *new_OrgApacheLuceneAnalysisFaPersianNormalizer_init() {
-  OrgApacheLuceneAnalysisFaPersianNormalizer *self = [OrgApacheLuceneAnalysisFaPersianNormalizer alloc];
-  OrgApacheLuceneAnalysisFaPersianNormalizer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisFaPersianNormalizer, init)
+}
+
+OrgApacheLuceneAnalysisFaPersianNormalizer *create_OrgApacheLuceneAnalysisFaPersianNormalizer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisFaPersianNormalizer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisFaPersianNormalizer)

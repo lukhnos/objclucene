@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgLukhnosPortmobileFileFileAlreadyExistsException_INCLUDE_ALL")
-#if OrgLukhnosPortmobileFileFileAlreadyExistsException_RESTRICT
-#define OrgLukhnosPortmobileFileFileAlreadyExistsException_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgLukhnosPortmobileFileFileAlreadyExistsException")
+#ifdef RESTRICT_OrgLukhnosPortmobileFileFileAlreadyExistsException
+#define INCLUDE_ALL_OrgLukhnosPortmobileFileFileAlreadyExistsException 0
 #else
-#define OrgLukhnosPortmobileFileFileAlreadyExistsException_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgLukhnosPortmobileFileFileAlreadyExistsException 1
 #endif
-#undef OrgLukhnosPortmobileFileFileAlreadyExistsException_RESTRICT
+#undef RESTRICT_OrgLukhnosPortmobileFileFileAlreadyExistsException
 
-#if !defined (_OrgLukhnosPortmobileFileFileAlreadyExistsException_) && (OrgLukhnosPortmobileFileFileAlreadyExistsException_INCLUDE_ALL || OrgLukhnosPortmobileFileFileAlreadyExistsException_INCLUDE)
-#define _OrgLukhnosPortmobileFileFileAlreadyExistsException_
+#if !defined (OrgLukhnosPortmobileFileFileAlreadyExistsException_) && (INCLUDE_ALL_OrgLukhnosPortmobileFileFileAlreadyExistsException || defined(INCLUDE_OrgLukhnosPortmobileFileFileAlreadyExistsException))
+#define OrgLukhnosPortmobileFileFileAlreadyExistsException_
 
-#define JavaIoIOException_RESTRICT 1
-#define JavaIoIOException_INCLUDE 1
+#define RESTRICT_JavaIoIOException 1
+#define INCLUDE_JavaIoIOException 1
 #include "java/io/IOException.h"
 
 @interface OrgLukhnosPortmobileFileFileAlreadyExistsException : JavaIoIOException
@@ -34,8 +34,10 @@ FOUNDATION_EXPORT void OrgLukhnosPortmobileFileFileAlreadyExistsException_init(O
 
 FOUNDATION_EXPORT OrgLukhnosPortmobileFileFileAlreadyExistsException *new_OrgLukhnosPortmobileFileFileAlreadyExistsException_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgLukhnosPortmobileFileFileAlreadyExistsException *create_OrgLukhnosPortmobileFileFileAlreadyExistsException_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileFileFileAlreadyExistsException)
 
 #endif
 
-#pragma pop_macro("OrgLukhnosPortmobileFileFileAlreadyExistsException_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileFileFileAlreadyExistsException")

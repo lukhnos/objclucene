@@ -3,10 +3,11 @@
 //  source: ./core/src/java/org/apache/lucene/search/PrefixFilter.java
 //
 
-#include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/StringBuilder.h"
+#include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/index/Term.h"
 #include "org/apache/lucene/search/MultiTermQueryWrapperFilter.h"
 #include "org/apache/lucene/search/PrefixFilter.h"
@@ -24,7 +25,7 @@
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
-  JavaLangStringBuilder *buffer = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_init();
   [buffer appendWithNSString:@"PrefixFilter("];
   [buffer appendWithNSString:[((OrgApacheLuceneIndexTerm *) nil_chk([self getPrefix])) description]];
   [buffer appendWithNSString:@")"];
@@ -32,7 +33,7 @@
 }
 
 + (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -49,13 +50,15 @@
 @end
 
 void OrgApacheLuceneSearchPrefixFilter_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneSearchPrefixFilter *self, OrgApacheLuceneIndexTerm *prefix) {
-  OrgApacheLuceneSearchMultiTermQueryWrapperFilter_initWithOrgApacheLuceneSearchMultiTermQuery_(self, [new_OrgApacheLuceneSearchPrefixQuery_initWithOrgApacheLuceneIndexTerm_(prefix) autorelease]);
+  OrgApacheLuceneSearchMultiTermQueryWrapperFilter_initWithOrgApacheLuceneSearchMultiTermQuery_(self, create_OrgApacheLuceneSearchPrefixQuery_initWithOrgApacheLuceneIndexTerm_(prefix));
 }
 
 OrgApacheLuceneSearchPrefixFilter *new_OrgApacheLuceneSearchPrefixFilter_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexTerm *prefix) {
-  OrgApacheLuceneSearchPrefixFilter *self = [OrgApacheLuceneSearchPrefixFilter alloc];
-  OrgApacheLuceneSearchPrefixFilter_initWithOrgApacheLuceneIndexTerm_(self, prefix);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchPrefixFilter, initWithOrgApacheLuceneIndexTerm_, prefix)
+}
+
+OrgApacheLuceneSearchPrefixFilter *create_OrgApacheLuceneSearchPrefixFilter_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexTerm *prefix) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchPrefixFilter, initWithOrgApacheLuceneIndexTerm_, prefix)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPrefixFilter)

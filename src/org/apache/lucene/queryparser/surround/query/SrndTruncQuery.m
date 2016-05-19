@@ -71,7 +71,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery, patte
   }
   JreStrongAssign(&prefix_, [truncated_ substring:0 endIndex:i]);
   JreStrongAssignAndConsume(&prefixRef_, new_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(prefix_));
-  JavaLangStringBuilder *re = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *re = create_JavaLangStringBuilder_init();
   while (i < ((jint) [truncated_ length])) {
     [self appendRegExpForCharWithChar:[truncated_ charAtWithInt:i] withJavaLangStringBuilder:re];
     i++;
@@ -88,12 +88,12 @@ withOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor:(id<Or
     JavaUtilRegexMatcher *matcher = [((JavaUtilRegexPattern *) nil_chk(pattern_)) matcherWithJavaLangCharSequence:@""];
     @try {
       OrgApacheLuceneIndexTermsEnum *termsEnum = [terms iterator];
-      OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *status = [((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) seekCeilWithOrgApacheLuceneUtilBytesRef:prefixRef_];
+      OrgApacheLuceneIndexTermsEnum_SeekStatus *status = [((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) seekCeilWithOrgApacheLuceneUtilBytesRef:prefixRef_];
       OrgApacheLuceneUtilBytesRef *text;
-      if (status == JreLoadStatic(OrgApacheLuceneIndexTermsEnum_SeekStatusEnum, FOUND)) {
+      if (status == JreLoadEnum(OrgApacheLuceneIndexTermsEnum_SeekStatus, FOUND)) {
         text = prefixRef_;
       }
-      else if (status == JreLoadStatic(OrgApacheLuceneIndexTermsEnum_SeekStatusEnum, NOT_FOUND)) {
+      else if (status == JreLoadEnum(OrgApacheLuceneIndexTermsEnum_SeekStatus, NOT_FOUND)) {
         text = [termsEnum term];
       }
       else {
@@ -104,7 +104,7 @@ withOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor:(id<Or
           NSString *textString = [text utf8ToString];
           [((JavaUtilRegexMatcher *) nil_chk(matcher)) resetWithJavaLangCharSequence:[((NSString *) nil_chk(textString)) substring:prefixLength]];
           if ([matcher matches]) {
-            [((id<OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor>) nil_chk(mtv)) visitMatchingTermWithOrgApacheLuceneIndexTerm:[new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(fieldName, textString) autorelease]];
+            [((id<OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor>) nil_chk(mtv)) visitMatchingTermWithOrgApacheLuceneIndexTerm:create_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(fieldName, textString)];
           }
         }
         else {
@@ -160,9 +160,11 @@ void OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery_initWithNSString_with
 }
 
 OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery *new_OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery_initWithNSString_withChar_withChar_(NSString *truncated, jchar unlimited, jchar mask) {
-  OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery *self = [OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery alloc];
-  OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery_initWithNSString_withChar_withChar_(self, truncated, unlimited, mask);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery, initWithNSString_withChar_withChar_, truncated, unlimited, mask)
+}
+
+OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery *create_OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery_initWithNSString_withChar_withChar_(NSString *truncated, jchar unlimited, jchar mask) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery, initWithNSString_withChar_withChar_, truncated, unlimited, mask)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery)

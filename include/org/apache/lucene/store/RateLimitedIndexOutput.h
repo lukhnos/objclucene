@@ -5,24 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneStoreRateLimitedIndexOutput_INCLUDE_ALL")
-#if OrgApacheLuceneStoreRateLimitedIndexOutput_RESTRICT
-#define OrgApacheLuceneStoreRateLimitedIndexOutput_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneStoreRateLimitedIndexOutput")
+#ifdef RESTRICT_OrgApacheLuceneStoreRateLimitedIndexOutput
+#define INCLUDE_ALL_OrgApacheLuceneStoreRateLimitedIndexOutput 0
 #else
-#define OrgApacheLuceneStoreRateLimitedIndexOutput_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneStoreRateLimitedIndexOutput 1
 #endif
-#undef OrgApacheLuceneStoreRateLimitedIndexOutput_RESTRICT
+#undef RESTRICT_OrgApacheLuceneStoreRateLimitedIndexOutput
 
-#if !defined (_OrgApacheLuceneStoreRateLimitedIndexOutput_) && (OrgApacheLuceneStoreRateLimitedIndexOutput_INCLUDE_ALL || OrgApacheLuceneStoreRateLimitedIndexOutput_INCLUDE)
-#define _OrgApacheLuceneStoreRateLimitedIndexOutput_
+#if !defined (OrgApacheLuceneStoreRateLimitedIndexOutput_) && (INCLUDE_ALL_OrgApacheLuceneStoreRateLimitedIndexOutput || defined(INCLUDE_OrgApacheLuceneStoreRateLimitedIndexOutput))
+#define OrgApacheLuceneStoreRateLimitedIndexOutput_
 
-#define OrgApacheLuceneStoreIndexOutput_RESTRICT 1
-#define OrgApacheLuceneStoreIndexOutput_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreIndexOutput 1
+#define INCLUDE_OrgApacheLuceneStoreIndexOutput 1
 #include "org/apache/lucene/store/IndexOutput.h"
 
 @class IOSByteArray;
 @class OrgApacheLuceneStoreRateLimiter;
 
+/*!
+ @brief A <code>rate limiting</code> <code>IndexOutput</code>
+ */
 @interface OrgApacheLuceneStoreRateLimitedIndexOutput : OrgApacheLuceneStoreIndexOutput
 
 #pragma mark Public
@@ -50,8 +53,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneStoreRateLimitedIndexOutput_initWithOrgApa
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreRateLimitedIndexOutput *new_OrgApacheLuceneStoreRateLimitedIndexOutput_initWithOrgApacheLuceneStoreRateLimiter_withOrgApacheLuceneStoreIndexOutput_(OrgApacheLuceneStoreRateLimiter *rateLimiter, OrgApacheLuceneStoreIndexOutput *delegate) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneStoreRateLimitedIndexOutput *create_OrgApacheLuceneStoreRateLimitedIndexOutput_initWithOrgApacheLuceneStoreRateLimiter_withOrgApacheLuceneStoreIndexOutput_(OrgApacheLuceneStoreRateLimiter *rateLimiter, OrgApacheLuceneStoreIndexOutput *delegate);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreRateLimitedIndexOutput)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneStoreRateLimitedIndexOutput_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreRateLimitedIndexOutput")

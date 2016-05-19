@@ -20,8 +20,6 @@
 #include "org/apache/lucene/store/IndexOutput.h"
 #include "org/apache/lucene/util/packed/PackedInts.h"
 
-#define OrgApacheLuceneCodecsLucene50ForUtil_ALL_VALUES_EQUAL 0
-
 @interface OrgApacheLuceneCodecsLucene50ForUtil () {
  @public
   IOSIntArray *encodedSizes_;
@@ -30,14 +28,26 @@
   IOSIntArray *iterations_;
 }
 
+/*!
+ @brief Compute the number of iterations required to decode <code>BLOCK_SIZE</code>
+ values with the provided <code>Decoder</code>.
+ */
 + (jint)computeIterationsWithOrgApacheLuceneUtilPackedPackedInts_Decoder:(id<OrgApacheLuceneUtilPackedPackedInts_Decoder>)decoder;
 
-+ (jint)encodedSizeWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum:(OrgApacheLuceneUtilPackedPackedInts_FormatEnum *)format
-                                                              withInt:(jint)packedIntsVersion
-                                                              withInt:(jint)bitsPerValue;
+/*!
+ @brief Compute the number of bytes required to encode a block of values that require
+ <code>bitsPerValue</code> bits per value with format <code>format</code>.
+ */
++ (jint)encodedSizeWithOrgApacheLuceneUtilPackedPackedInts_Format:(OrgApacheLuceneUtilPackedPackedInts_Format *)format
+                                                          withInt:(jint)packedIntsVersion
+                                                          withInt:(jint)bitsPerValue;
 
 + (jboolean)isAllEqualWithIntArray:(IOSIntArray *)data;
 
+/*!
+ @brief Compute the number of bits required to serialize any of the longs in
+ <code>data</code>.
+ */
 + (jint)bitsRequiredWithIntArray:(IOSIntArray *)data;
 
 @end
@@ -47,11 +57,16 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsLucene50ForUtil, encoders_, IOSObjectAr
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsLucene50ForUtil, decoders_, IOSObjectArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsLucene50ForUtil, iterations_, IOSIntArray *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsLucene50ForUtil, ALL_VALUES_EQUAL, jint)
+/*!
+ @brief Special number of bits per value used whenever all values to encode are equal.
+ */
+inline jint OrgApacheLuceneCodecsLucene50ForUtil_get_ALL_VALUES_EQUAL();
+#define OrgApacheLuceneCodecsLucene50ForUtil_ALL_VALUES_EQUAL 0
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsLucene50ForUtil, ALL_VALUES_EQUAL, jint)
 
 __attribute__((unused)) static jint OrgApacheLuceneCodecsLucene50ForUtil_computeIterationsWithOrgApacheLuceneUtilPackedPackedInts_Decoder_(id<OrgApacheLuceneUtilPackedPackedInts_Decoder> decoder);
 
-__attribute__((unused)) static jint OrgApacheLuceneCodecsLucene50ForUtil_encodedSizeWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_(OrgApacheLuceneUtilPackedPackedInts_FormatEnum *format, jint packedIntsVersion, jint bitsPerValue);
+__attribute__((unused)) static jint OrgApacheLuceneCodecsLucene50ForUtil_encodedSizeWithOrgApacheLuceneUtilPackedPackedInts_Format_withInt_withInt_(OrgApacheLuceneUtilPackedPackedInts_Format *format, jint packedIntsVersion, jint bitsPerValue);
 
 __attribute__((unused)) static jboolean OrgApacheLuceneCodecsLucene50ForUtil_isAllEqualWithIntArray_(IOSIntArray *data);
 
@@ -59,18 +74,26 @@ __attribute__((unused)) static jint OrgApacheLuceneCodecsLucene50ForUtil_bitsReq
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneCodecsLucene50ForUtil)
 
-jint OrgApacheLuceneCodecsLucene50ForUtil_MAX_DATA_SIZE_;
+jint OrgApacheLuceneCodecsLucene50ForUtil_MAX_DATA_SIZE;
 
 @implementation OrgApacheLuceneCodecsLucene50ForUtil
+
++ (jint)MAX_ENCODED_SIZE {
+  return OrgApacheLuceneCodecsLucene50ForUtil_MAX_ENCODED_SIZE;
+}
+
++ (jint)MAX_DATA_SIZE {
+  return OrgApacheLuceneCodecsLucene50ForUtil_MAX_DATA_SIZE;
+}
 
 + (jint)computeIterationsWithOrgApacheLuceneUtilPackedPackedInts_Decoder:(id<OrgApacheLuceneUtilPackedPackedInts_Decoder>)decoder {
   return OrgApacheLuceneCodecsLucene50ForUtil_computeIterationsWithOrgApacheLuceneUtilPackedPackedInts_Decoder_(decoder);
 }
 
-+ (jint)encodedSizeWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum:(OrgApacheLuceneUtilPackedPackedInts_FormatEnum *)format
-                                                              withInt:(jint)packedIntsVersion
-                                                              withInt:(jint)bitsPerValue {
-  return OrgApacheLuceneCodecsLucene50ForUtil_encodedSizeWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_(format, packedIntsVersion, bitsPerValue);
++ (jint)encodedSizeWithOrgApacheLuceneUtilPackedPackedInts_Format:(OrgApacheLuceneUtilPackedPackedInts_Format *)format
+                                                          withInt:(jint)packedIntsVersion
+                                                          withInt:(jint)bitsPerValue {
+  return OrgApacheLuceneCodecsLucene50ForUtil_encodedSizeWithOrgApacheLuceneUtilPackedPackedInts_Format_withInt_withInt_(format, packedIntsVersion, bitsPerValue);
 }
 
 - (instancetype)initWithFloat:(jfloat)acceptableOverheadRatio
@@ -155,23 +178,23 @@ withOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)outArg {
       jint maxDataSize = 0;
       for (jint version_ = OrgApacheLuceneUtilPackedPackedInts_VERSION_START; version_ <= OrgApacheLuceneUtilPackedPackedInts_VERSION_CURRENT; version_++) {
         {
-          IOSObjectArray *a__ = OrgApacheLuceneUtilPackedPackedInts_FormatEnum_values();
-          OrgApacheLuceneUtilPackedPackedInts_FormatEnum * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
-          OrgApacheLuceneUtilPackedPackedInts_FormatEnum * const *e__ = b__ + a__->size_;
+          IOSObjectArray *a__ = OrgApacheLuceneUtilPackedPackedInts_Format_values();
+          OrgApacheLuceneUtilPackedPackedInts_Format * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
+          OrgApacheLuceneUtilPackedPackedInts_Format * const *e__ = b__ + a__->size_;
           while (b__ < e__) {
-            OrgApacheLuceneUtilPackedPackedInts_FormatEnum *format = *b__++;
+            OrgApacheLuceneUtilPackedPackedInts_Format *format = *b__++;
             for (jint bpv = 1; bpv <= 32; ++bpv) {
-              if (![((OrgApacheLuceneUtilPackedPackedInts_FormatEnum *) nil_chk(format)) isSupportedWithInt:bpv]) {
+              if (![((OrgApacheLuceneUtilPackedPackedInts_Format *) nil_chk(format)) isSupportedWithInt:bpv]) {
                 continue;
               }
-              id<OrgApacheLuceneUtilPackedPackedInts_Decoder> decoder = OrgApacheLuceneUtilPackedPackedInts_getDecoderWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_(format, version_, bpv);
+              id<OrgApacheLuceneUtilPackedPackedInts_Decoder> decoder = OrgApacheLuceneUtilPackedPackedInts_getDecoderWithOrgApacheLuceneUtilPackedPackedInts_Format_withInt_withInt_(format, version_, bpv);
               jint iterations = OrgApacheLuceneCodecsLucene50ForUtil_computeIterationsWithOrgApacheLuceneUtilPackedPackedInts_Decoder_(decoder);
               maxDataSize = JavaLangMath_maxWithInt_withInt_(maxDataSize, iterations * [((id<OrgApacheLuceneUtilPackedPackedInts_Decoder>) nil_chk(decoder)) byteValueCount]);
             }
           }
         }
       }
-      OrgApacheLuceneCodecsLucene50ForUtil_MAX_DATA_SIZE_ = maxDataSize;
+      OrgApacheLuceneCodecsLucene50ForUtil_MAX_DATA_SIZE = maxDataSize;
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneCodecsLucene50ForUtil)
   }
@@ -180,7 +203,7 @@ withOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)outArg {
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "computeIterationsWithOrgApacheLuceneUtilPackedPackedInts_Decoder:", "computeIterations", "I", 0xa, NULL, NULL },
-    { "encodedSizeWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum:withInt:withInt:", "encodedSize", "I", 0xa, NULL, NULL },
+    { "encodedSizeWithOrgApacheLuceneUtilPackedPackedInts_Format:withInt:withInt:", "encodedSize", "I", 0xa, NULL, NULL },
     { "initWithFloat:withOrgApacheLuceneStoreDataOutput:", "ForUtil", NULL, 0x0, "Ljava.io.IOException;", NULL },
     { "initWithOrgApacheLuceneStoreDataInput:", "ForUtil", NULL, 0x0, "Ljava.io.IOException;", NULL },
     { "writeBlockWithIntArray:withByteArray:withOrgApacheLuceneStoreIndexOutput:", "writeBlock", "V", 0x0, "Ljava.io.IOException;", NULL },
@@ -192,7 +215,7 @@ withOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)outArg {
   static const J2ObjcFieldInfo fields[] = {
     { "ALL_VALUES_EQUAL", "ALL_VALUES_EQUAL", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50ForUtil_ALL_VALUES_EQUAL },
     { "MAX_ENCODED_SIZE", "MAX_ENCODED_SIZE", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50ForUtil_MAX_ENCODED_SIZE },
-    { "MAX_DATA_SIZE_", NULL, 0x18, "I", &OrgApacheLuceneCodecsLucene50ForUtil_MAX_DATA_SIZE_, NULL, .constantValue.asLong = 0 },
+    { "MAX_DATA_SIZE", "MAX_DATA_SIZE", 0x18, "I", &OrgApacheLuceneCodecsLucene50ForUtil_MAX_DATA_SIZE, NULL, .constantValue.asLong = 0 },
     { "encodedSizes_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
     { "encoders_", NULL, 0x12, "[Lorg.apache.lucene.util.packed.PackedInts$Encoder;", NULL, NULL, .constantValue.asLong = 0 },
     { "decoders_", NULL, 0x12, "[Lorg.apache.lucene.util.packed.PackedInts$Decoder;", NULL, NULL, .constantValue.asLong = 0 },
@@ -209,9 +232,9 @@ jint OrgApacheLuceneCodecsLucene50ForUtil_computeIterationsWithOrgApacheLuceneUt
   return JreFpToInt(JavaLangMath_ceilWithDouble_((jfloat) OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_BLOCK_SIZE / [((id<OrgApacheLuceneUtilPackedPackedInts_Decoder>) nil_chk(decoder)) byteValueCount]));
 }
 
-jint OrgApacheLuceneCodecsLucene50ForUtil_encodedSizeWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_(OrgApacheLuceneUtilPackedPackedInts_FormatEnum *format, jint packedIntsVersion, jint bitsPerValue) {
+jint OrgApacheLuceneCodecsLucene50ForUtil_encodedSizeWithOrgApacheLuceneUtilPackedPackedInts_Format_withInt_withInt_(OrgApacheLuceneUtilPackedPackedInts_Format *format, jint packedIntsVersion, jint bitsPerValue) {
   OrgApacheLuceneCodecsLucene50ForUtil_initialize();
-  jlong byteCount = [((OrgApacheLuceneUtilPackedPackedInts_FormatEnum *) nil_chk(format)) byteCountWithInt:packedIntsVersion withInt:OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_BLOCK_SIZE withInt:bitsPerValue];
+  jlong byteCount = [((OrgApacheLuceneUtilPackedPackedInts_Format *) nil_chk(format)) byteCountWithInt:packedIntsVersion withInt:OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_BLOCK_SIZE withInt:bitsPerValue];
   JreAssert((byteCount >= 0 && byteCount <= JavaLangInteger_MAX_VALUE), (JavaLangLong_valueOfWithLong_(byteCount)));
   return (jint) byteCount;
 }
@@ -225,20 +248,22 @@ void OrgApacheLuceneCodecsLucene50ForUtil_initWithFloat_withOrgApacheLuceneStore
   JreStrongAssignAndConsume(&self->iterations_, [IOSIntArray newArrayWithLength:33]);
   for (jint bpv = 1; bpv <= 32; ++bpv) {
     OrgApacheLuceneUtilPackedPackedInts_FormatAndBits *formatAndBits = OrgApacheLuceneUtilPackedPackedInts_fastestFormatAndBitsWithInt_withInt_withFloat_(OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_BLOCK_SIZE, bpv, acceptableOverheadRatio);
-    JreAssert(([((OrgApacheLuceneUtilPackedPackedInts_FormatEnum *) nil_chk(((OrgApacheLuceneUtilPackedPackedInts_FormatAndBits *) nil_chk(formatAndBits))->format_)) isSupportedWithInt:formatAndBits->bitsPerValue_]), (@"org/apache/lucene/codecs/lucene50/ForUtil.java:109 condition failed: assert formatAndBits.format.isSupported(formatAndBits.bitsPerValue);"));
+    JreAssert(([((OrgApacheLuceneUtilPackedPackedInts_Format *) nil_chk(((OrgApacheLuceneUtilPackedPackedInts_FormatAndBits *) nil_chk(formatAndBits))->format_)) isSupportedWithInt:formatAndBits->bitsPerValue_]), (@"org/apache/lucene/codecs/lucene50/ForUtil.java:109 condition failed: assert formatAndBits.format.isSupported(formatAndBits.bitsPerValue);"));
     JreAssert((formatAndBits->bitsPerValue_ <= 32), (@"org/apache/lucene/codecs/lucene50/ForUtil.java:110 condition failed: assert formatAndBits.bitsPerValue <= 32;"));
-    *IOSIntArray_GetRef(self->encodedSizes_, bpv) = OrgApacheLuceneCodecsLucene50ForUtil_encodedSizeWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_(formatAndBits->format_, OrgApacheLuceneUtilPackedPackedInts_VERSION_CURRENT, formatAndBits->bitsPerValue_);
-    IOSObjectArray_Set(self->encoders_, bpv, OrgApacheLuceneUtilPackedPackedInts_getEncoderWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_(formatAndBits->format_, OrgApacheLuceneUtilPackedPackedInts_VERSION_CURRENT, formatAndBits->bitsPerValue_));
-    IOSObjectArray_Set(self->decoders_, bpv, OrgApacheLuceneUtilPackedPackedInts_getDecoderWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_(formatAndBits->format_, OrgApacheLuceneUtilPackedPackedInts_VERSION_CURRENT, formatAndBits->bitsPerValue_));
+    *IOSIntArray_GetRef(self->encodedSizes_, bpv) = OrgApacheLuceneCodecsLucene50ForUtil_encodedSizeWithOrgApacheLuceneUtilPackedPackedInts_Format_withInt_withInt_(formatAndBits->format_, OrgApacheLuceneUtilPackedPackedInts_VERSION_CURRENT, formatAndBits->bitsPerValue_);
+    IOSObjectArray_Set(self->encoders_, bpv, OrgApacheLuceneUtilPackedPackedInts_getEncoderWithOrgApacheLuceneUtilPackedPackedInts_Format_withInt_withInt_(formatAndBits->format_, OrgApacheLuceneUtilPackedPackedInts_VERSION_CURRENT, formatAndBits->bitsPerValue_));
+    IOSObjectArray_Set(self->decoders_, bpv, OrgApacheLuceneUtilPackedPackedInts_getDecoderWithOrgApacheLuceneUtilPackedPackedInts_Format_withInt_withInt_(formatAndBits->format_, OrgApacheLuceneUtilPackedPackedInts_VERSION_CURRENT, formatAndBits->bitsPerValue_));
     *IOSIntArray_GetRef(self->iterations_, bpv) = OrgApacheLuceneCodecsLucene50ForUtil_computeIterationsWithOrgApacheLuceneUtilPackedPackedInts_Decoder_(IOSObjectArray_Get(self->decoders_, bpv));
     [outArg writeVIntWithInt:(JreLShift32([formatAndBits->format_ getId], 5)) | (formatAndBits->bitsPerValue_ - 1)];
   }
 }
 
 OrgApacheLuceneCodecsLucene50ForUtil *new_OrgApacheLuceneCodecsLucene50ForUtil_initWithFloat_withOrgApacheLuceneStoreDataOutput_(jfloat acceptableOverheadRatio, OrgApacheLuceneStoreDataOutput *outArg) {
-  OrgApacheLuceneCodecsLucene50ForUtil *self = [OrgApacheLuceneCodecsLucene50ForUtil alloc];
-  OrgApacheLuceneCodecsLucene50ForUtil_initWithFloat_withOrgApacheLuceneStoreDataOutput_(self, acceptableOverheadRatio, outArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene50ForUtil, initWithFloat_withOrgApacheLuceneStoreDataOutput_, acceptableOverheadRatio, outArg)
+}
+
+OrgApacheLuceneCodecsLucene50ForUtil *create_OrgApacheLuceneCodecsLucene50ForUtil_initWithFloat_withOrgApacheLuceneStoreDataOutput_(jfloat acceptableOverheadRatio, OrgApacheLuceneStoreDataOutput *outArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene50ForUtil, initWithFloat_withOrgApacheLuceneStoreDataOutput_, acceptableOverheadRatio, outArg)
 }
 
 void OrgApacheLuceneCodecsLucene50ForUtil_initWithOrgApacheLuceneStoreDataInput_(OrgApacheLuceneCodecsLucene50ForUtil *self, OrgApacheLuceneStoreDataInput *inArg) {
@@ -253,19 +278,21 @@ void OrgApacheLuceneCodecsLucene50ForUtil_initWithOrgApacheLuceneStoreDataInput_
     jint code = [inArg readVInt];
     jint formatId = JreURShift32(code, 5);
     jint bitsPerValue = (code & 31) + 1;
-    OrgApacheLuceneUtilPackedPackedInts_FormatEnum *format = OrgApacheLuceneUtilPackedPackedInts_FormatEnum_byIdWithInt_(formatId);
-    JreAssert(([((OrgApacheLuceneUtilPackedPackedInts_FormatEnum *) nil_chk(format)) isSupportedWithInt:bitsPerValue]), (@"org/apache/lucene/codecs/lucene50/ForUtil.java:139 condition failed: assert format.isSupported(bitsPerValue);"));
-    *IOSIntArray_GetRef(self->encodedSizes_, bpv) = OrgApacheLuceneCodecsLucene50ForUtil_encodedSizeWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_(format, packedIntsVersion, bitsPerValue);
-    IOSObjectArray_Set(self->encoders_, bpv, OrgApacheLuceneUtilPackedPackedInts_getEncoderWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_(format, packedIntsVersion, bitsPerValue));
-    IOSObjectArray_Set(self->decoders_, bpv, OrgApacheLuceneUtilPackedPackedInts_getDecoderWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_(format, packedIntsVersion, bitsPerValue));
+    OrgApacheLuceneUtilPackedPackedInts_Format *format = OrgApacheLuceneUtilPackedPackedInts_Format_byIdWithInt_(formatId);
+    JreAssert(([((OrgApacheLuceneUtilPackedPackedInts_Format *) nil_chk(format)) isSupportedWithInt:bitsPerValue]), (@"org/apache/lucene/codecs/lucene50/ForUtil.java:139 condition failed: assert format.isSupported(bitsPerValue);"));
+    *IOSIntArray_GetRef(self->encodedSizes_, bpv) = OrgApacheLuceneCodecsLucene50ForUtil_encodedSizeWithOrgApacheLuceneUtilPackedPackedInts_Format_withInt_withInt_(format, packedIntsVersion, bitsPerValue);
+    IOSObjectArray_Set(self->encoders_, bpv, OrgApacheLuceneUtilPackedPackedInts_getEncoderWithOrgApacheLuceneUtilPackedPackedInts_Format_withInt_withInt_(format, packedIntsVersion, bitsPerValue));
+    IOSObjectArray_Set(self->decoders_, bpv, OrgApacheLuceneUtilPackedPackedInts_getDecoderWithOrgApacheLuceneUtilPackedPackedInts_Format_withInt_withInt_(format, packedIntsVersion, bitsPerValue));
     *IOSIntArray_GetRef(self->iterations_, bpv) = OrgApacheLuceneCodecsLucene50ForUtil_computeIterationsWithOrgApacheLuceneUtilPackedPackedInts_Decoder_(IOSObjectArray_Get(self->decoders_, bpv));
   }
 }
 
 OrgApacheLuceneCodecsLucene50ForUtil *new_OrgApacheLuceneCodecsLucene50ForUtil_initWithOrgApacheLuceneStoreDataInput_(OrgApacheLuceneStoreDataInput *inArg) {
-  OrgApacheLuceneCodecsLucene50ForUtil *self = [OrgApacheLuceneCodecsLucene50ForUtil alloc];
-  OrgApacheLuceneCodecsLucene50ForUtil_initWithOrgApacheLuceneStoreDataInput_(self, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene50ForUtil, initWithOrgApacheLuceneStoreDataInput_, inArg)
+}
+
+OrgApacheLuceneCodecsLucene50ForUtil *create_OrgApacheLuceneCodecsLucene50ForUtil_initWithOrgApacheLuceneStoreDataInput_(OrgApacheLuceneStoreDataInput *inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene50ForUtil, initWithOrgApacheLuceneStoreDataInput_, inArg)
 }
 
 jboolean OrgApacheLuceneCodecsLucene50ForUtil_isAllEqualWithIntArray_(IOSIntArray *data) {

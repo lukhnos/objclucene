@@ -5,25 +5,28 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexPrefixCodedTerms_INCLUDE_ALL")
-#if OrgApacheLuceneIndexPrefixCodedTerms_RESTRICT
-#define OrgApacheLuceneIndexPrefixCodedTerms_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexPrefixCodedTerms")
+#ifdef RESTRICT_OrgApacheLuceneIndexPrefixCodedTerms
+#define INCLUDE_ALL_OrgApacheLuceneIndexPrefixCodedTerms 0
 #else
-#define OrgApacheLuceneIndexPrefixCodedTerms_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexPrefixCodedTerms 1
 #endif
-#undef OrgApacheLuceneIndexPrefixCodedTerms_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexPrefixCodedTerms
 
-#if !defined (_OrgApacheLuceneIndexPrefixCodedTerms_) && (OrgApacheLuceneIndexPrefixCodedTerms_INCLUDE_ALL || OrgApacheLuceneIndexPrefixCodedTerms_INCLUDE)
-#define _OrgApacheLuceneIndexPrefixCodedTerms_
+#if !defined (OrgApacheLuceneIndexPrefixCodedTerms_) && (INCLUDE_ALL_OrgApacheLuceneIndexPrefixCodedTerms || defined(INCLUDE_OrgApacheLuceneIndexPrefixCodedTerms))
+#define OrgApacheLuceneIndexPrefixCodedTerms_
 
-#define OrgApacheLuceneUtilAccountable_RESTRICT 1
-#define OrgApacheLuceneUtilAccountable_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAccountable 1
+#define INCLUDE_OrgApacheLuceneUtilAccountable 1
 #include "org/apache/lucene/util/Accountable.h"
 
 @class OrgApacheLuceneIndexPrefixCodedTerms_TermIterator;
 @class OrgApacheLuceneStoreRAMFile;
 @protocol JavaUtilCollection;
 
+/*!
+ @brief Prefix codes term instances (prefixes are shared)
+ */
 @interface OrgApacheLuceneIndexPrefixCodedTerms : NSObject < OrgApacheLuceneUtilAccountable > {
  @public
   OrgApacheLuceneStoreRAMFile *buffer_;
@@ -37,12 +40,21 @@
 
 - (NSUInteger)hash;
 
+/*!
+ @brief Return an iterator over the terms stored in this <code>PrefixCodedTerms</code>.
+ */
 - (OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *)iterator;
 
 - (jlong)ramBytesUsed;
 
+/*!
+ @brief Records del gen for this packet.
+ */
 - (void)setDelGenWithLong:(jlong)delGen;
 
+/*!
+ @brief Return the number of terms stored in this <code>PrefixCodedTerms</code>.
+ */
 - (jlong)size;
 
 @end
@@ -55,20 +67,32 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexPrefixCodedTerms)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexPrefixCodedTerms_Builder_) && (OrgApacheLuceneIndexPrefixCodedTerms_INCLUDE_ALL || OrgApacheLuceneIndexPrefixCodedTerms_Builder_INCLUDE)
-#define _OrgApacheLuceneIndexPrefixCodedTerms_Builder_
+#if !defined (OrgApacheLuceneIndexPrefixCodedTerms_Builder_) && (INCLUDE_ALL_OrgApacheLuceneIndexPrefixCodedTerms || defined(INCLUDE_OrgApacheLuceneIndexPrefixCodedTerms_Builder))
+#define OrgApacheLuceneIndexPrefixCodedTerms_Builder_
 
 @class OrgApacheLuceneIndexPrefixCodedTerms;
 @class OrgApacheLuceneIndexTerm;
 
+/*!
+ @brief Builds a PrefixCodedTerms: call add repeatedly, then finish.
+ */
 @interface OrgApacheLuceneIndexPrefixCodedTerms_Builder : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ */
 - (instancetype)init;
 
+/*!
+ @brief add a term
+ */
 - (void)addWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
 
+/*!
+ @brief return finalized form
+ */
 - (OrgApacheLuceneIndexPrefixCodedTerms *)finish;
 
 @end
@@ -79,21 +103,26 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexPrefixCodedTerms_Builder_init(OrgApac
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexPrefixCodedTerms_Builder *new_OrgApacheLuceneIndexPrefixCodedTerms_Builder_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexPrefixCodedTerms_Builder *create_OrgApacheLuceneIndexPrefixCodedTerms_Builder_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexPrefixCodedTerms_Builder)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexPrefixCodedTerms_TermIterator_) && (OrgApacheLuceneIndexPrefixCodedTerms_INCLUDE_ALL || OrgApacheLuceneIndexPrefixCodedTerms_TermIterator_INCLUDE)
-#define _OrgApacheLuceneIndexPrefixCodedTerms_TermIterator_
+#if !defined (OrgApacheLuceneIndexPrefixCodedTerms_TermIterator_) && (INCLUDE_ALL_OrgApacheLuceneIndexPrefixCodedTerms || defined(INCLUDE_OrgApacheLuceneIndexPrefixCodedTerms_TermIterator))
+#define OrgApacheLuceneIndexPrefixCodedTerms_TermIterator_
 
-#define OrgApacheLuceneIndexFieldTermIterator_RESTRICT 1
-#define OrgApacheLuceneIndexFieldTermIterator_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexFieldTermIterator 1
+#define INCLUDE_OrgApacheLuceneIndexFieldTermIterator 1
 #include "org/apache/lucene/index/FieldTermIterator.h"
 
 @class OrgApacheLuceneStoreIndexInput;
 @class OrgApacheLuceneUtilBytesRef;
 @class OrgApacheLuceneUtilBytesRefBuilder;
 
+/*!
+ @brief An iterator over the list of terms stored in a <code>PrefixCodedTerms</code>.
+ */
 @interface OrgApacheLuceneIndexPrefixCodedTerms_TermIterator : OrgApacheLuceneIndexFieldTermIterator {
  @public
   OrgApacheLuceneStoreIndexInput *input_;
@@ -125,4 +154,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexPrefixCodedTerms_TermIterator)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexPrefixCodedTerms_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexPrefixCodedTerms")

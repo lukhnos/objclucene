@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_RESTRICT
-#define OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum")
+#ifdef RESTRICT_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum
+#define INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum 0
 #else
-#define OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum 1
 #endif
-#undef OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum
 
-#if !defined (_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_) && (OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_INCLUDE_ALL || OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_INCLUDE)
-#define _OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_
+#if !defined (OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_) && (INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum || defined(INCLUDE_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum))
+#define OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_
 
-#define OrgApacheLuceneIndexTermsEnum_RESTRICT 1
-#define OrgApacheLuceneIndexTermsEnum_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexTermsEnum 1
+#define INCLUDE_OrgApacheLuceneIndexTermsEnum 1
 #include "org/apache/lucene/index/TermsEnum.h"
 
 @class OrgApacheLuceneCodecsBlocktreeFieldReader;
@@ -25,12 +25,17 @@
 @class OrgApacheLuceneCodecsBlocktreeStats;
 @class OrgApacheLuceneIndexPostingsEnum;
 @class OrgApacheLuceneIndexTermState;
-@class OrgApacheLuceneIndexTermsEnum_SeekStatusEnum;
+@class OrgApacheLuceneIndexTermsEnum_SeekStatus;
 @class OrgApacheLuceneStoreIndexInput;
 @class OrgApacheLuceneUtilBytesRef;
 @class OrgApacheLuceneUtilBytesRefBuilder;
 @class OrgApacheLuceneUtilFstFST_Arc;
 
+/*!
+ @brief Iterates through terms in this field.
+ This implementation skips
+ any auto-prefix terms it encounters. 
+ */
 @interface OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum : OrgApacheLuceneIndexTermsEnum {
  @public
   OrgApacheLuceneStoreIndexInput *in_;
@@ -44,6 +49,10 @@
 
 - (instancetype)initWithOrgApacheLuceneCodecsBlocktreeFieldReader:(OrgApacheLuceneCodecsBlocktreeFieldReader *)fr;
 
+/*!
+ @brief Runs next() through the entire terms dict,
+ computing aggregate statistics.
+ */
 - (OrgApacheLuceneCodecsBlocktreeStats *)computeBlockStats;
 
 - (jint)docFreq;
@@ -55,7 +64,7 @@
 - (OrgApacheLuceneIndexPostingsEnum *)postingsWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)reuse
                                                                            withInt:(jint)flags;
 
-- (OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *)seekCeilWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)target;
+- (OrgApacheLuceneIndexTermsEnum_SeekStatus *)seekCeilWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)target;
 
 - (jboolean)seekExactWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)target;
 
@@ -95,8 +104,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_initWithOr
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *new_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_initWithOrgApacheLuceneCodecsBlocktreeFieldReader_(OrgApacheLuceneCodecsBlocktreeFieldReader *fr) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *create_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_initWithOrgApacheLuceneCodecsBlocktreeFieldReader_(OrgApacheLuceneCodecsBlocktreeFieldReader *fr);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum")

@@ -29,7 +29,7 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:withBoolean:", "StandardBooleanQueryNode", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilList:withBoolean:", "StandardBooleanQueryNode", NULL, 0x1, NULL, "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;Z)V" },
     { "isDisableCoord", NULL, "Z", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -47,9 +47,11 @@ void OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode_ini
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode *new_OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode_initWithJavaUtilList_withBoolean_(id<JavaUtilList> clauses, jboolean disableCoord) {
-  OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode *self = [OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode_initWithJavaUtilList_withBoolean_(self, clauses, disableCoord);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode, initWithJavaUtilList_withBoolean_, clauses, disableCoord)
+}
+
+OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode *create_OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode_initWithJavaUtilList_withBoolean_(id<JavaUtilList> clauses, jboolean disableCoord) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode, initWithJavaUtilList_withBoolean_, clauses, disableCoord)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode)

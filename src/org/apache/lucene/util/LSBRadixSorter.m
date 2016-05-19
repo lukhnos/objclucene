@@ -10,9 +10,6 @@
 #include "org/apache/lucene/util/ArrayUtil.h"
 #include "org/apache/lucene/util/LSBRadixSorter.h"
 
-#define OrgApacheLuceneUtilLSBRadixSorter_INSERTION_SORT_THRESHOLD 30
-#define OrgApacheLuceneUtilLSBRadixSorter_HISTOGRAM_SIZE 256
-
 @interface OrgApacheLuceneUtilLSBRadixSorter () {
  @public
   IOSIntArray *histogram_;
@@ -52,9 +49,13 @@
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilLSBRadixSorter, histogram_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilLSBRadixSorter, buffer_, IOSIntArray *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilLSBRadixSorter, INSERTION_SORT_THRESHOLD, jint)
+inline jint OrgApacheLuceneUtilLSBRadixSorter_get_INSERTION_SORT_THRESHOLD();
+#define OrgApacheLuceneUtilLSBRadixSorter_INSERTION_SORT_THRESHOLD 30
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilLSBRadixSorter, INSERTION_SORT_THRESHOLD, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilLSBRadixSorter, HISTOGRAM_SIZE, jint)
+inline jint OrgApacheLuceneUtilLSBRadixSorter_get_HISTOGRAM_SIZE();
+#define OrgApacheLuceneUtilLSBRadixSorter_HISTOGRAM_SIZE 256
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilLSBRadixSorter, HISTOGRAM_SIZE, jint)
 
 __attribute__((unused)) static void OrgApacheLuceneUtilLSBRadixSorter_buildHistogramWithIntArray_withInt_withInt_withIntArray_withInt_(IOSIntArray *array, jint off, jint len, IOSIntArray *histogram, jint shift);
 
@@ -154,7 +155,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "sortWithIntArray:withInt:withInt:withIntArray:withInt:withIntArray:withInt:", "sort", "Z", 0xa, NULL, NULL },
     { "insertionSortWithIntArray:withInt:withInt:", "insertionSort", "V", 0xa, NULL, NULL },
     { "sortWithIntArray:withInt:withInt:", "sort", "V", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x0, NULL, NULL },
+    { "init", "LSBRadixSorter", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "INSERTION_SORT_THRESHOLD", "INSERTION_SORT_THRESHOLD", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilLSBRadixSorter_INSERTION_SORT_THRESHOLD },
@@ -230,9 +231,11 @@ void OrgApacheLuceneUtilLSBRadixSorter_init(OrgApacheLuceneUtilLSBRadixSorter *s
 }
 
 OrgApacheLuceneUtilLSBRadixSorter *new_OrgApacheLuceneUtilLSBRadixSorter_init() {
-  OrgApacheLuceneUtilLSBRadixSorter *self = [OrgApacheLuceneUtilLSBRadixSorter alloc];
-  OrgApacheLuceneUtilLSBRadixSorter_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilLSBRadixSorter, init)
+}
+
+OrgApacheLuceneUtilLSBRadixSorter *create_OrgApacheLuceneUtilLSBRadixSorter_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilLSBRadixSorter, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilLSBRadixSorter)

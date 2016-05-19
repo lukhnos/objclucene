@@ -5,31 +5,45 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisUtilElisionFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisUtilElisionFilter_RESTRICT
-#define OrgApacheLuceneAnalysisUtilElisionFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilElisionFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisUtilElisionFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisUtilElisionFilter 0
 #else
-#define OrgApacheLuceneAnalysisUtilElisionFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisUtilElisionFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisUtilElisionFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisUtilElisionFilter
 
-#if !defined (_OrgApacheLuceneAnalysisUtilElisionFilter_) && (OrgApacheLuceneAnalysisUtilElisionFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisUtilElisionFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisUtilElisionFilter_
+#if !defined (OrgApacheLuceneAnalysisUtilElisionFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisUtilElisionFilter || defined(INCLUDE_OrgApacheLuceneAnalysisUtilElisionFilter))
+#define OrgApacheLuceneAnalysisUtilElisionFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 @class OrgApacheLuceneAnalysisUtilCharArraySet;
 
+/*!
+ @brief Removes elisions from a <code>TokenStream</code>.
+ For example, "l'avion" (the plane) will be
+ tokenized as "avion" (plane).
+ - seealso: <a href="http://fr.wikipedia.org/wiki/%C3%89lision">Elision in Wikipedia</a>
+ */
 @interface OrgApacheLuceneAnalysisUtilElisionFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
+/*!
+ @brief Constructs an elision filter with a Set of stop words
+ @param input the source <code>TokenStream</code>
+ @param articles a set of stopword articles
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
                withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)articles;
 
+/*!
+ @brief Increments the <code>TokenStream</code> with a <code>CharTermAttribute</code> without elisioned start
+ */
 - (jboolean)incrementToken;
 
 @end
@@ -40,8 +54,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilElisionFilter_initWithOrgApach
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilElisionFilter *new_OrgApacheLuceneAnalysisUtilElisionFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisUtilCharArraySet *articles) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilElisionFilter *create_OrgApacheLuceneAnalysisUtilElisionFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisUtilCharArraySet *articles);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilElisionFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisUtilElisionFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilElisionFilter")

@@ -48,6 +48,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchFieldValueQuery_$1_init
 
 __attribute__((unused)) static OrgApacheLuceneSearchFieldValueQuery_$1 *new_OrgApacheLuceneSearchFieldValueQuery_$1_initWithOrgApacheLuceneSearchFieldValueQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchFieldValueQuery *outer$, OrgApacheLuceneSearchQuery *arg$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchFieldValueQuery_$1 *create_OrgApacheLuceneSearchFieldValueQuery_$1_initWithOrgApacheLuceneSearchFieldValueQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchFieldValueQuery *outer$, OrgApacheLuceneSearchQuery *arg$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldValueQuery_$1)
 
 @implementation OrgApacheLuceneSearchFieldValueQuery
@@ -61,7 +63,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldValueQuery_$1)
   if ([obj isKindOfClass:[OrgApacheLuceneSearchFieldValueQuery class]] == false) {
     return false;
   }
-  OrgApacheLuceneSearchFieldValueQuery *that = (OrgApacheLuceneSearchFieldValueQuery *) check_class_cast(obj, [OrgApacheLuceneSearchFieldValueQuery class]);
+  OrgApacheLuceneSearchFieldValueQuery *that = (OrgApacheLuceneSearchFieldValueQuery *) cast_chk(obj, [OrgApacheLuceneSearchFieldValueQuery class]);
   return [super isEqual:obj] && [((NSString *) nil_chk(field_)) isEqual:((OrgApacheLuceneSearchFieldValueQuery *) nil_chk(that))->field_];
 }
 
@@ -75,7 +77,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldValueQuery_$1)
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores {
-  return [new_OrgApacheLuceneSearchFieldValueQuery_$1_initWithOrgApacheLuceneSearchFieldValueQuery_withOrgApacheLuceneSearchQuery_(self, self) autorelease];
+  return create_OrgApacheLuceneSearchFieldValueQuery_$1_initWithOrgApacheLuceneSearchFieldValueQuery_withOrgApacheLuceneSearchQuery_(self, self);
 }
 
 - (void)dealloc {
@@ -106,9 +108,11 @@ void OrgApacheLuceneSearchFieldValueQuery_initWithNSString_(OrgApacheLuceneSearc
 }
 
 OrgApacheLuceneSearchFieldValueQuery *new_OrgApacheLuceneSearchFieldValueQuery_initWithNSString_(NSString *field) {
-  OrgApacheLuceneSearchFieldValueQuery *self = [OrgApacheLuceneSearchFieldValueQuery alloc];
-  OrgApacheLuceneSearchFieldValueQuery_initWithNSString_(self, field);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFieldValueQuery, initWithNSString_, field)
+}
+
+OrgApacheLuceneSearchFieldValueQuery *create_OrgApacheLuceneSearchFieldValueQuery_initWithNSString_(NSString *field) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFieldValueQuery, initWithNSString_, field)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldValueQuery)
@@ -151,9 +155,11 @@ void OrgApacheLuceneSearchFieldValueQuery_$1_initWithOrgApacheLuceneSearchFieldV
 }
 
 OrgApacheLuceneSearchFieldValueQuery_$1 *new_OrgApacheLuceneSearchFieldValueQuery_$1_initWithOrgApacheLuceneSearchFieldValueQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchFieldValueQuery *outer$, OrgApacheLuceneSearchQuery *arg$0) {
-  OrgApacheLuceneSearchFieldValueQuery_$1 *self = [OrgApacheLuceneSearchFieldValueQuery_$1 alloc];
-  OrgApacheLuceneSearchFieldValueQuery_$1_initWithOrgApacheLuceneSearchFieldValueQuery_withOrgApacheLuceneSearchQuery_(self, outer$, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFieldValueQuery_$1, initWithOrgApacheLuceneSearchFieldValueQuery_withOrgApacheLuceneSearchQuery_, outer$, arg$0)
+}
+
+OrgApacheLuceneSearchFieldValueQuery_$1 *create_OrgApacheLuceneSearchFieldValueQuery_$1_initWithOrgApacheLuceneSearchFieldValueQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchFieldValueQuery *outer$, OrgApacheLuceneSearchQuery *arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFieldValueQuery_$1, initWithOrgApacheLuceneSearchFieldValueQuery_withOrgApacheLuceneSearchQuery_, outer$, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldValueQuery_$1)

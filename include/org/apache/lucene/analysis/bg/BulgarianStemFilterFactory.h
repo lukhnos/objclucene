@@ -5,28 +5,43 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisBgBulgarianStemFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisBgBulgarianStemFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisBgBulgarianStemFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisBgBulgarianStemFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisBgBulgarianStemFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisBgBulgarianStemFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisBgBulgarianStemFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisBgBulgarianStemFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisBgBulgarianStemFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisBgBulgarianStemFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisBgBulgarianStemFilterFactory_) && (OrgApacheLuceneAnalysisBgBulgarianStemFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisBgBulgarianStemFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisBgBulgarianStemFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisBgBulgarianStemFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisBgBulgarianStemFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisBgBulgarianStemFilterFactory))
+#define OrgApacheLuceneAnalysisBgBulgarianStemFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>BulgarianStemFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_bgstem" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+ &lt;filter class="solr.LowerCaseFilterFactory"/&gt;
+ &lt;filter class="solr.BulgarianStemFilterFactory"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisBgBulgarianStemFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new BulgarianStemFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -39,8 +54,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisBgBulgarianStemFilterFactory_initW
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisBgBulgarianStemFilterFactory *new_OrgApacheLuceneAnalysisBgBulgarianStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisBgBulgarianStemFilterFactory *create_OrgApacheLuceneAnalysisBgBulgarianStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisBgBulgarianStemFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisBgBulgarianStemFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisBgBulgarianStemFilterFactory")

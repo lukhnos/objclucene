@@ -63,9 +63,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (jboolean)isEqual:(id)obj {
   if (self == obj) return true;
-  if (nil == obj || [self getClass] != [obj getClass]) return false;
-  OrgApacheLuceneSearchSpellJaroWinklerDistance *o = (OrgApacheLuceneSearchSpellJaroWinklerDistance *) check_class_cast(obj, [OrgApacheLuceneSearchSpellJaroWinklerDistance class]);
-  return JavaLangFloat_floatToIntBitsWithFloat_(((OrgApacheLuceneSearchSpellJaroWinklerDistance *) nil_chk(o))->threshold_) == JavaLangFloat_floatToIntBitsWithFloat_(self->threshold_);
+  if (nil == obj || [self getClass] != (id) [obj getClass]) return false;
+  OrgApacheLuceneSearchSpellJaroWinklerDistance *o = (OrgApacheLuceneSearchSpellJaroWinklerDistance *) cast_chk(obj, [OrgApacheLuceneSearchSpellJaroWinklerDistance class]);
+  return JavaLangFloat_floatToIntBitsWithFloat_(o->threshold_) == JavaLangFloat_floatToIntBitsWithFloat_(self->threshold_);
 }
 
 - (NSString *)description {
@@ -98,9 +98,11 @@ void OrgApacheLuceneSearchSpellJaroWinklerDistance_init(OrgApacheLuceneSearchSpe
 }
 
 OrgApacheLuceneSearchSpellJaroWinklerDistance *new_OrgApacheLuceneSearchSpellJaroWinklerDistance_init() {
-  OrgApacheLuceneSearchSpellJaroWinklerDistance *self = [OrgApacheLuceneSearchSpellJaroWinklerDistance alloc];
-  OrgApacheLuceneSearchSpellJaroWinklerDistance_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSpellJaroWinklerDistance, init)
+}
+
+OrgApacheLuceneSearchSpellJaroWinklerDistance *create_OrgApacheLuceneSearchSpellJaroWinklerDistance_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSpellJaroWinklerDistance, init)
 }
 
 IOSIntArray *OrgApacheLuceneSearchSpellJaroWinklerDistance_matchesWithNSString_withNSString_(OrgApacheLuceneSearchSpellJaroWinklerDistance *self, NSString *s1, NSString *s2) {
@@ -113,8 +115,8 @@ IOSIntArray *OrgApacheLuceneSearchSpellJaroWinklerDistance_matchesWithNSString_w
     max = s2;
     min = s1;
   }
-  jint range = JavaLangMath_maxWithInt_withInt_(((jint) [((NSString *) nil_chk(max)) length]) / 2 - 1, 0);
-  IOSIntArray *matchIndexes = [IOSIntArray arrayWithLength:((jint) [((NSString *) nil_chk(min)) length])];
+  jint range = JavaLangMath_maxWithInt_withInt_(((jint) [max length]) / 2 - 1, 0);
+  IOSIntArray *matchIndexes = [IOSIntArray arrayWithLength:((jint) [min length])];
   JavaUtilArrays_fillWithIntArray_withInt_(matchIndexes, -1);
   IOSBooleanArray *matchFlags = [IOSBooleanArray arrayWithLength:((jint) [max length])];
   jint matches = 0;

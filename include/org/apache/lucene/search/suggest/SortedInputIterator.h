@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSuggestSortedInputIterator_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSuggestSortedInputIterator_RESTRICT
-#define OrgApacheLuceneSearchSuggestSortedInputIterator_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestSortedInputIterator")
+#ifdef RESTRICT_OrgApacheLuceneSearchSuggestSortedInputIterator
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestSortedInputIterator 0
 #else
-#define OrgApacheLuceneSearchSuggestSortedInputIterator_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestSortedInputIterator 1
 #endif
-#undef OrgApacheLuceneSearchSuggestSortedInputIterator_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSuggestSortedInputIterator
 
-#if !defined (_OrgApacheLuceneSearchSuggestSortedInputIterator_) && (OrgApacheLuceneSearchSuggestSortedInputIterator_INCLUDE_ALL || OrgApacheLuceneSearchSuggestSortedInputIterator_INCLUDE)
-#define _OrgApacheLuceneSearchSuggestSortedInputIterator_
+#if !defined (OrgApacheLuceneSearchSuggestSortedInputIterator_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestSortedInputIterator || defined(INCLUDE_OrgApacheLuceneSearchSuggestSortedInputIterator))
+#define OrgApacheLuceneSearchSuggestSortedInputIterator_
 
-#define OrgApacheLuceneSearchSuggestInputIterator_RESTRICT 1
-#define OrgApacheLuceneSearchSuggestInputIterator_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSuggestInputIterator 1
+#define INCLUDE_OrgApacheLuceneSearchSuggestInputIterator 1
 #include "org/apache/lucene/search/suggest/InputIterator.h"
 
 @class IOSByteArray;
@@ -28,12 +28,24 @@
 @protocol JavaUtilComparator;
 @protocol JavaUtilSet;
 
+/*!
+ @brief This wrapper buffers incoming elements and makes sure they are sorted based on given comparator.
+ */
 @interface OrgApacheLuceneSearchSuggestSortedInputIterator : NSObject < OrgApacheLuceneSearchSuggestInputIterator >
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new sorted wrapper, using <code>BytesRef.getUTF8SortedAsUnicodeComparator</code>
+  for
+ sorting.
+ */
 - (instancetype)initWithOrgApacheLuceneSearchSuggestInputIterator:(id<OrgApacheLuceneSearchSuggestInputIterator>)source;
 
+/*!
+ @brief Creates a new sorted wrapper, sorting by BytesRef
+ (ascending) then cost (ascending).
+ */
 - (instancetype)initWithOrgApacheLuceneSearchSuggestInputIterator:(id<OrgApacheLuceneSearchSuggestInputIterator>)source
                                            withJavaUtilComparator:(id<JavaUtilComparator>)comparator;
 
@@ -51,15 +63,27 @@
 
 #pragma mark Protected
 
+/*!
+ @brief decodes the weight at the current position
+ */
 - (jlong)decodeWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)scratch
     withOrgApacheLuceneStoreByteArrayDataInput:(OrgApacheLuceneStoreByteArrayDataInput *)tmpInput;
 
+/*!
+ @brief decodes the contexts at the current position
+ */
 - (id<JavaUtilSet>)decodeContextsWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)scratch
                       withOrgApacheLuceneStoreByteArrayDataInput:(OrgApacheLuceneStoreByteArrayDataInput *)tmpInput;
 
+/*!
+ @brief decodes the payload at the current position
+ */
 - (OrgApacheLuceneUtilBytesRef *)decodePayloadWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)scratch
                                    withOrgApacheLuceneStoreByteArrayDataInput:(OrgApacheLuceneStoreByteArrayDataInput *)tmpInput;
 
+/*!
+ @brief encodes an entry (bytes+(contexts)+(payload)+weight) to the provided writer
+ */
 - (void)encodeWithOrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter:(OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter *)writer
                            withOrgApacheLuceneStoreByteArrayDataOutput:(OrgApacheLuceneStoreByteArrayDataOutput *)output
                                                          withByteArray:(IOSByteArray *)buffer
@@ -76,12 +100,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestSortedInputIterator_initWithO
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestSortedInputIterator *new_OrgApacheLuceneSearchSuggestSortedInputIterator_initWithOrgApacheLuceneSearchSuggestInputIterator_(id<OrgApacheLuceneSearchSuggestInputIterator> source) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestSortedInputIterator *create_OrgApacheLuceneSearchSuggestSortedInputIterator_initWithOrgApacheLuceneSearchSuggestInputIterator_(id<OrgApacheLuceneSearchSuggestInputIterator> source);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestSortedInputIterator_initWithOrgApacheLuceneSearchSuggestInputIterator_withJavaUtilComparator_(OrgApacheLuceneSearchSuggestSortedInputIterator *self, id<OrgApacheLuceneSearchSuggestInputIterator> source, id<JavaUtilComparator> comparator);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestSortedInputIterator *new_OrgApacheLuceneSearchSuggestSortedInputIterator_initWithOrgApacheLuceneSearchSuggestInputIterator_withJavaUtilComparator_(id<OrgApacheLuceneSearchSuggestInputIterator> source, id<JavaUtilComparator> comparator) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestSortedInputIterator *create_OrgApacheLuceneSearchSuggestSortedInputIterator_initWithOrgApacheLuceneSearchSuggestInputIterator_withJavaUtilComparator_(id<OrgApacheLuceneSearchSuggestInputIterator> source, id<JavaUtilComparator> comparator);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestSortedInputIterator)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSuggestSortedInputIterator_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestSortedInputIterator")

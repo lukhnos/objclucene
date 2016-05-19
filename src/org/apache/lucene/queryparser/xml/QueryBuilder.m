@@ -3,12 +3,8 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/xml/QueryBuilder.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/queryparser/xml/ParserException.h"
 #include "org/apache/lucene/queryparser/xml/QueryBuilder.h"
-#include "org/apache/lucene/search/Query.h"
-#include "org/w3c/dom/Element.h"
 
 @interface OrgApacheLuceneQueryparserXmlQueryBuilder : NSObject
 

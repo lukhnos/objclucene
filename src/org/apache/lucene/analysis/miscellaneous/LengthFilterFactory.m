@@ -22,10 +22,18 @@
 
 @end
 
-NSString *OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory_MIN_KEY_ = @"min";
-NSString *OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory_MAX_KEY_ = @"max";
+NSString *OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory_MIN_KEY = @"min";
+NSString *OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory_MAX_KEY = @"max";
 
 @implementation OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory
+
++ (NSString *)MIN_KEY {
+  return OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory_MIN_KEY;
+}
+
++ (NSString *)MAX_KEY {
+  return OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory_MAX_KEY;
+}
 
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args {
   OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory_initWithJavaUtilMap_(self, args);
@@ -33,25 +41,25 @@ NSString *OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory_MAX_KEY_ = @"m
 }
 
 - (OrgApacheLuceneAnalysisTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  if ([((OrgApacheLuceneUtilVersion *) nil_chk(luceneMatchVersion_)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_4_0_)]) {
-    return [new_OrgApacheLuceneAnalysisMiscellaneousLengthFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(input, min_, max_) autorelease];
+  if ([((OrgApacheLuceneUtilVersion *) nil_chk(luceneMatchVersion_)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_4_0)]) {
+    return create_OrgApacheLuceneAnalysisMiscellaneousLengthFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(input, min_, max_);
   }
   else {
-    OrgApacheLuceneAnalysisTokenFilter *filter = [new_OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(enablePositionIncrements_, input, min_, max_) autorelease];
+    OrgApacheLuceneAnalysisTokenFilter *filter = create_OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(enablePositionIncrements_, input, min_, max_);
     return filter;
   }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "LengthFilterFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "LengthFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenFilter;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "min_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "max_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "MIN_KEY_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory_MIN_KEY_, NULL, .constantValue.asLong = 0 },
-    { "MAX_KEY_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory_MAX_KEY_, NULL, .constantValue.asLong = 0 },
+    { "MIN_KEY", "MIN_KEY", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory_MIN_KEY, NULL, .constantValue.asLong = 0 },
+    { "MAX_KEY", "MAX_KEY", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory_MAX_KEY, NULL, .constantValue.asLong = 0 },
     { "enablePositionIncrements_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory = { 2, "LengthFilterFactory", "org.apache.lucene.analysis.miscellaneous", NULL, 0x1, 2, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
@@ -62,27 +70,29 @@ NSString *OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory_MAX_KEY_ = @"m
 
 void OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory *self, id<JavaUtilMap> args) {
   OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  self->min_ = [self requireIntWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory_MIN_KEY_];
-  self->max_ = [self requireIntWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory_MAX_KEY_];
-  if ([((OrgApacheLuceneUtilVersion *) nil_chk(self->luceneMatchVersion_)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_5_0_0_)] == false) {
-    jboolean defaultValue = [self->luceneMatchVersion_ onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_4_0_)];
+  self->min_ = [self requireIntWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory_MIN_KEY];
+  self->max_ = [self requireIntWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory_MAX_KEY];
+  if ([((OrgApacheLuceneUtilVersion *) nil_chk(self->luceneMatchVersion_)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_5_0_0)] == false) {
+    jboolean defaultValue = [self->luceneMatchVersion_ onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_4_0)];
     self->enablePositionIncrements_ = [self getBooleanWithJavaUtilMap:args withNSString:@"enablePositionIncrements" withBoolean:defaultValue];
-    if (self->enablePositionIncrements_ == false && [self->luceneMatchVersion_ onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_4_0_)]) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"enablePositionIncrements=false is not supported anymore as of Lucene 4.4") autorelease];
+    if (self->enablePositionIncrements_ == false && [self->luceneMatchVersion_ onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_4_0)]) {
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"enablePositionIncrements=false is not supported anymore as of Lucene 4.4");
     }
   }
   else if ([((id<JavaUtilMap>) nil_chk(args)) containsKeyWithId:@"enablePositionIncrements"]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"enablePositionIncrements is not a valid option as of Lucene 5.0") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"enablePositionIncrements is not a valid option as of Lucene 5.0");
   }
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory *self = [OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory alloc];
-  OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory *create_OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory)

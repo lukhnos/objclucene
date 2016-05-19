@@ -19,22 +19,54 @@
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/RamUsageEstimator.h"
 
+inline jboolean OrgApacheLuceneIndexBufferedUpdates_get_VERBOSE_DELETES();
 #define OrgApacheLuceneIndexBufferedUpdates_VERBOSE_DELETES false
-
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexBufferedUpdates, VERBOSE_DELETES, jboolean)
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexBufferedUpdates, VERBOSE_DELETES, jboolean)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexBufferedUpdates)
 
-jint OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_TERM_;
-jint OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_DOCID_;
-jint OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_QUERY_;
-jint OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_NUMERIC_FIELD_ENTRY_;
-jint OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_NUMERIC_UPDATE_ENTRY_;
-jint OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_BINARY_FIELD_ENTRY_;
-jint OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_BINARY_UPDATE_ENTRY_;
-JavaLangInteger *OrgApacheLuceneIndexBufferedUpdates_MAX_INT_;
+jint OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_TERM;
+jint OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_DOCID;
+jint OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_QUERY;
+jint OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_NUMERIC_FIELD_ENTRY;
+jint OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_NUMERIC_UPDATE_ENTRY;
+jint OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_BINARY_FIELD_ENTRY;
+jint OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_BINARY_UPDATE_ENTRY;
+JavaLangInteger *OrgApacheLuceneIndexBufferedUpdates_MAX_INT;
 
 @implementation OrgApacheLuceneIndexBufferedUpdates
+
++ (jint)BYTES_PER_DEL_TERM {
+  return OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_TERM;
+}
+
++ (jint)BYTES_PER_DEL_DOCID {
+  return OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_DOCID;
+}
+
++ (jint)BYTES_PER_DEL_QUERY {
+  return OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_QUERY;
+}
+
++ (jint)BYTES_PER_NUMERIC_FIELD_ENTRY {
+  return OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_NUMERIC_FIELD_ENTRY;
+}
+
++ (jint)BYTES_PER_NUMERIC_UPDATE_ENTRY {
+  return OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_NUMERIC_UPDATE_ENTRY;
+}
+
++ (jint)BYTES_PER_BINARY_FIELD_ENTRY {
+  return OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_BINARY_FIELD_ENTRY;
+}
+
++ (jint)BYTES_PER_BINARY_UPDATE_ENTRY {
+  return OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_BINARY_UPDATE_ENTRY;
+}
+
++ (JavaLangInteger *)MAX_INT {
+  return OrgApacheLuceneIndexBufferedUpdates_MAX_INT;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -72,13 +104,13 @@ J2OBJC_IGNORE_DESIGNATED_END
                                        withInt:(jint)docIDUpto {
   JavaLangInteger *current = [((id<JavaUtilMap>) nil_chk(queries_)) putWithId:query withId:JavaLangInteger_valueOfWithInt_(docIDUpto)];
   if (current == nil) {
-    [((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(bytesUsed_)) addAndGetWithLong:OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_QUERY_];
+    [((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(bytesUsed_)) addAndGetWithLong:OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_QUERY];
   }
 }
 
 - (void)addDocIDWithInt:(jint)docID {
   [((id<JavaUtilList>) nil_chk(docIDs_)) addWithId:JavaLangInteger_valueOfWithInt_(docID)];
-  [((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(bytesUsed_)) addAndGetWithLong:OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_DOCID_];
+  [((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(bytesUsed_)) addAndGetWithLong:OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_DOCID];
 }
 
 - (void)addTermWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
@@ -90,7 +122,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   [terms_ putWithId:term withId:JavaLangInteger_valueOfWithInt_(docIDUpto)];
   [((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(numTermDeletes_)) incrementAndGet];
   if (current == nil) {
-    [((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(bytesUsed_)) addAndGetWithLong:OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_TERM_ + ((OrgApacheLuceneUtilBytesRef *) nil_chk(((OrgApacheLuceneIndexTerm *) nil_chk(term))->bytes_))->length_ + (OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_CHAR * ((jint) [((NSString *) nil_chk([term field])) length]))];
+    [((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(bytesUsed_)) addAndGetWithLong:OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_TERM + ((OrgApacheLuceneUtilBytesRef *) nil_chk(((OrgApacheLuceneIndexTerm *) nil_chk(term))->bytes_))->length_ + (OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_CHAR * ((jint) [((NSString *) nil_chk([term field])) length]))];
   }
 }
 
@@ -98,11 +130,11 @@ J2OBJC_IGNORE_DESIGNATED_END
                                                                                withInt:(jint)docIDUpto {
   JavaUtilLinkedHashMap *fieldUpdates = [((id<JavaUtilMap>) nil_chk(numericUpdates_)) getWithId:((OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate *) nil_chk(update))->field_];
   if (fieldUpdates == nil) {
-    fieldUpdates = [new_JavaUtilLinkedHashMap_init() autorelease];
+    fieldUpdates = create_JavaUtilLinkedHashMap_init();
     [numericUpdates_ putWithId:update->field_ withId:fieldUpdates];
-    [((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(bytesUsed_)) addAndGetWithLong:OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_NUMERIC_FIELD_ENTRY_];
+    [((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(bytesUsed_)) addAndGetWithLong:OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_NUMERIC_FIELD_ENTRY];
   }
-  OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate *current = [((JavaUtilLinkedHashMap *) nil_chk(fieldUpdates)) getWithId:update->term_];
+  OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate *current = [fieldUpdates getWithId:update->term_];
   if (current != nil && docIDUpto < current->docIDUpto_) {
     return;
   }
@@ -113,7 +145,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   [fieldUpdates putWithId:update->term_ withId:update];
   [((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(numNumericUpdates_)) incrementAndGet];
   if (current == nil) {
-    [((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(bytesUsed_)) addAndGetWithLong:OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_NUMERIC_UPDATE_ENTRY_ + [update sizeInBytes]];
+    [((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(bytesUsed_)) addAndGetWithLong:OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_NUMERIC_UPDATE_ENTRY + [update sizeInBytes]];
   }
 }
 
@@ -121,11 +153,11 @@ J2OBJC_IGNORE_DESIGNATED_END
                                                                              withInt:(jint)docIDUpto {
   JavaUtilLinkedHashMap *fieldUpdates = [((id<JavaUtilMap>) nil_chk(binaryUpdates_)) getWithId:((OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate *) nil_chk(update))->field_];
   if (fieldUpdates == nil) {
-    fieldUpdates = [new_JavaUtilLinkedHashMap_init() autorelease];
+    fieldUpdates = create_JavaUtilLinkedHashMap_init();
     [binaryUpdates_ putWithId:update->field_ withId:fieldUpdates];
-    [((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(bytesUsed_)) addAndGetWithLong:OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_BINARY_FIELD_ENTRY_];
+    [((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(bytesUsed_)) addAndGetWithLong:OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_BINARY_FIELD_ENTRY];
   }
-  OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate *current = [((JavaUtilLinkedHashMap *) nil_chk(fieldUpdates)) getWithId:update->term_];
+  OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate *current = [fieldUpdates getWithId:update->term_];
   if (current != nil && docIDUpto < current->docIDUpto_) {
     return;
   }
@@ -136,7 +168,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   [fieldUpdates putWithId:update->term_ withId:update];
   [((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(numBinaryUpdates_)) incrementAndGet];
   if (current == nil) {
-    [((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(bytesUsed_)) addAndGetWithLong:OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_BINARY_UPDATE_ENTRY_ + [update sizeInBytes]];
+    [((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(bytesUsed_)) addAndGetWithLong:OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_BINARY_UPDATE_ENTRY + [update sizeInBytes]];
   }
 }
 
@@ -171,14 +203,14 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneIndexBufferedUpdates class]) {
-    OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_TERM_ = 9 * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_) + 7 * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER_) + 10 * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT;
-    OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_DOCID_ = 2 * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_) + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER_) + OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT;
-    OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_QUERY_ = 5 * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_) + 2 * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER_) + 2 * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT + 24;
-    OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_NUMERIC_FIELD_ENTRY_ = 7 * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_) + 3 * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER_) + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_ARRAY_HEADER_) + 5 * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT + OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_FLOAT;
-    OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_NUMERIC_UPDATE_ENTRY_ = 7 * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_) + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER_) + OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT;
-    OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_BINARY_FIELD_ENTRY_ = 7 * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_) + 3 * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER_) + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_ARRAY_HEADER_) + 5 * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT + OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_FLOAT;
-    OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_BINARY_UPDATE_ENTRY_ = 7 * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_) + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER_) + OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT;
-    JreStrongAssign(&OrgApacheLuceneIndexBufferedUpdates_MAX_INT_, JavaLangInteger_valueOfWithInt_(JavaLangInteger_MAX_VALUE));
+    OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_TERM = 9 * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF) + 7 * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER) + 10 * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT;
+    OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_DOCID = 2 * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF) + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER) + OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT;
+    OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_QUERY = 5 * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF) + 2 * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER) + 2 * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT + 24;
+    OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_NUMERIC_FIELD_ENTRY = 7 * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF) + 3 * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER) + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_ARRAY_HEADER) + 5 * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT + OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_FLOAT;
+    OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_NUMERIC_UPDATE_ENTRY = 7 * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF) + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER) + OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT;
+    OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_BINARY_FIELD_ENTRY = 7 * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF) + 3 * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER) + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_ARRAY_HEADER) + 5 * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT + OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_FLOAT;
+    OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_BINARY_UPDATE_ENTRY = 7 * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF) + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER) + OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT;
+    JreStrongAssign(&OrgApacheLuceneIndexBufferedUpdates_MAX_INT, JavaLangInteger_valueOfWithInt_(JavaLangInteger_MAX_VALUE));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexBufferedUpdates)
   }
 }
@@ -196,13 +228,13 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "any", NULL, "Z", 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "BYTES_PER_DEL_TERM_", NULL, 0x18, "I", &OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_TERM_, NULL, .constantValue.asLong = 0 },
-    { "BYTES_PER_DEL_DOCID_", NULL, 0x18, "I", &OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_DOCID_, NULL, .constantValue.asLong = 0 },
-    { "BYTES_PER_DEL_QUERY_", NULL, 0x18, "I", &OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_QUERY_, NULL, .constantValue.asLong = 0 },
-    { "BYTES_PER_NUMERIC_FIELD_ENTRY_", NULL, 0x18, "I", &OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_NUMERIC_FIELD_ENTRY_, NULL, .constantValue.asLong = 0 },
-    { "BYTES_PER_NUMERIC_UPDATE_ENTRY_", NULL, 0x18, "I", &OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_NUMERIC_UPDATE_ENTRY_, NULL, .constantValue.asLong = 0 },
-    { "BYTES_PER_BINARY_FIELD_ENTRY_", NULL, 0x18, "I", &OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_BINARY_FIELD_ENTRY_, NULL, .constantValue.asLong = 0 },
-    { "BYTES_PER_BINARY_UPDATE_ENTRY_", NULL, 0x18, "I", &OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_BINARY_UPDATE_ENTRY_, NULL, .constantValue.asLong = 0 },
+    { "BYTES_PER_DEL_TERM", "BYTES_PER_DEL_TERM", 0x18, "I", &OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_TERM, NULL, .constantValue.asLong = 0 },
+    { "BYTES_PER_DEL_DOCID", "BYTES_PER_DEL_DOCID", 0x18, "I", &OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_DOCID, NULL, .constantValue.asLong = 0 },
+    { "BYTES_PER_DEL_QUERY", "BYTES_PER_DEL_QUERY", 0x18, "I", &OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_DEL_QUERY, NULL, .constantValue.asLong = 0 },
+    { "BYTES_PER_NUMERIC_FIELD_ENTRY", "BYTES_PER_NUMERIC_FIELD_ENTRY", 0x18, "I", &OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_NUMERIC_FIELD_ENTRY, NULL, .constantValue.asLong = 0 },
+    { "BYTES_PER_NUMERIC_UPDATE_ENTRY", "BYTES_PER_NUMERIC_UPDATE_ENTRY", 0x18, "I", &OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_NUMERIC_UPDATE_ENTRY, NULL, .constantValue.asLong = 0 },
+    { "BYTES_PER_BINARY_FIELD_ENTRY", "BYTES_PER_BINARY_FIELD_ENTRY", 0x18, "I", &OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_BINARY_FIELD_ENTRY, NULL, .constantValue.asLong = 0 },
+    { "BYTES_PER_BINARY_UPDATE_ENTRY", "BYTES_PER_BINARY_UPDATE_ENTRY", 0x18, "I", &OrgApacheLuceneIndexBufferedUpdates_BYTES_PER_BINARY_UPDATE_ENTRY, NULL, .constantValue.asLong = 0 },
     { "numTermDeletes_", NULL, 0x10, "Ljava.util.concurrent.atomic.AtomicInteger;", NULL, NULL, .constantValue.asLong = 0 },
     { "numNumericUpdates_", NULL, 0x10, "Ljava.util.concurrent.atomic.AtomicInteger;", NULL, NULL, .constantValue.asLong = 0 },
     { "numBinaryUpdates_", NULL, 0x10, "Ljava.util.concurrent.atomic.AtomicInteger;", NULL, NULL, .constantValue.asLong = 0 },
@@ -211,7 +243,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "docIDs_", NULL, 0x10, "Ljava.util.List;", NULL, "Ljava/util/List<Ljava/lang/Integer;>;", .constantValue.asLong = 0 },
     { "numericUpdates_", NULL, 0x10, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Ljava/util/LinkedHashMap<Lorg/apache/lucene/index/Term;Lorg/apache/lucene/index/DocValuesUpdate$NumericDocValuesUpdate;>;>;", .constantValue.asLong = 0 },
     { "binaryUpdates_", NULL, 0x10, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Ljava/util/LinkedHashMap<Lorg/apache/lucene/index/Term;Lorg/apache/lucene/index/DocValuesUpdate$BinaryDocValuesUpdate;>;>;", .constantValue.asLong = 0 },
-    { "MAX_INT_", NULL, 0x19, "Ljava.lang.Integer;", &OrgApacheLuceneIndexBufferedUpdates_MAX_INT_, NULL, .constantValue.asLong = 0 },
+    { "MAX_INT", "MAX_INT", 0x19, "Ljava.lang.Integer;", &OrgApacheLuceneIndexBufferedUpdates_MAX_INT, NULL, .constantValue.asLong = 0 },
     { "bytesUsed_", NULL, 0x10, "Ljava.util.concurrent.atomic.AtomicLong;", NULL, NULL, .constantValue.asLong = 0 },
     { "VERBOSE_DELETES", "VERBOSE_DELETES", 0x1a, "Z", NULL, NULL, .constantValue.asBOOL = OrgApacheLuceneIndexBufferedUpdates_VERBOSE_DELETES },
     { "gen_", NULL, 0x0, "J", NULL, NULL, .constantValue.asLong = 0 },
@@ -236,9 +268,11 @@ void OrgApacheLuceneIndexBufferedUpdates_init(OrgApacheLuceneIndexBufferedUpdate
 }
 
 OrgApacheLuceneIndexBufferedUpdates *new_OrgApacheLuceneIndexBufferedUpdates_init() {
-  OrgApacheLuceneIndexBufferedUpdates *self = [OrgApacheLuceneIndexBufferedUpdates alloc];
-  OrgApacheLuceneIndexBufferedUpdates_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexBufferedUpdates, init)
+}
+
+OrgApacheLuceneIndexBufferedUpdates *create_OrgApacheLuceneIndexBufferedUpdates_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexBufferedUpdates, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexBufferedUpdates)

@@ -72,10 +72,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchHighlightWeightedSpanTerm, positionSpan
     { "initWithFloat:withNSString:", "WeightedSpanTerm", NULL, 0x1, NULL, NULL },
     { "initWithFloat:withNSString:withBoolean:", "WeightedSpanTerm", NULL, 0x1, NULL, NULL },
     { "checkPositionWithInt:", "checkPosition", "Z", 0x1, NULL, NULL },
-    { "addPositionSpansWithJavaUtilList:", "addPositionSpans", "V", 0x1, NULL, NULL },
+    { "addPositionSpansWithJavaUtilList:", "addPositionSpans", "V", 0x1, NULL, "(Ljava/util/List<Lorg/apache/lucene/search/highlight/PositionSpan;>;)V" },
     { "isPositionSensitive", NULL, "Z", 0x1, NULL, NULL },
     { "setPositionSensitiveWithBoolean:", "setPositionSensitive", "V", 0x1, NULL, NULL },
-    { "getPositionSpans", NULL, "Ljava.util.List;", 0x1, NULL, NULL },
+    { "getPositionSpans", NULL, "Ljava.util.List;", 0x1, NULL, "()Ljava/util/List<Lorg/apache/lucene/search/highlight/PositionSpan;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "positionSensitive_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
@@ -94,9 +94,11 @@ void OrgApacheLuceneSearchHighlightWeightedSpanTerm_initWithFloat_withNSString_(
 }
 
 OrgApacheLuceneSearchHighlightWeightedSpanTerm *new_OrgApacheLuceneSearchHighlightWeightedSpanTerm_initWithFloat_withNSString_(jfloat weight, NSString *term) {
-  OrgApacheLuceneSearchHighlightWeightedSpanTerm *self = [OrgApacheLuceneSearchHighlightWeightedSpanTerm alloc];
-  OrgApacheLuceneSearchHighlightWeightedSpanTerm_initWithFloat_withNSString_(self, weight, term);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchHighlightWeightedSpanTerm, initWithFloat_withNSString_, weight, term)
+}
+
+OrgApacheLuceneSearchHighlightWeightedSpanTerm *create_OrgApacheLuceneSearchHighlightWeightedSpanTerm_initWithFloat_withNSString_(jfloat weight, NSString *term) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchHighlightWeightedSpanTerm, initWithFloat_withNSString_, weight, term)
 }
 
 void OrgApacheLuceneSearchHighlightWeightedSpanTerm_initWithFloat_withNSString_withBoolean_(OrgApacheLuceneSearchHighlightWeightedSpanTerm *self, jfloat weight, NSString *term, jboolean positionSensitive) {
@@ -106,9 +108,11 @@ void OrgApacheLuceneSearchHighlightWeightedSpanTerm_initWithFloat_withNSString_w
 }
 
 OrgApacheLuceneSearchHighlightWeightedSpanTerm *new_OrgApacheLuceneSearchHighlightWeightedSpanTerm_initWithFloat_withNSString_withBoolean_(jfloat weight, NSString *term, jboolean positionSensitive) {
-  OrgApacheLuceneSearchHighlightWeightedSpanTerm *self = [OrgApacheLuceneSearchHighlightWeightedSpanTerm alloc];
-  OrgApacheLuceneSearchHighlightWeightedSpanTerm_initWithFloat_withNSString_withBoolean_(self, weight, term, positionSensitive);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchHighlightWeightedSpanTerm, initWithFloat_withNSString_withBoolean_, weight, term, positionSensitive)
+}
+
+OrgApacheLuceneSearchHighlightWeightedSpanTerm *create_OrgApacheLuceneSearchHighlightWeightedSpanTerm_initWithFloat_withNSString_withBoolean_(jfloat weight, NSString *term, jboolean positionSensitive) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchHighlightWeightedSpanTerm, initWithFloat_withNSString_withBoolean_, weight, term, positionSensitive)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchHighlightWeightedSpanTerm)

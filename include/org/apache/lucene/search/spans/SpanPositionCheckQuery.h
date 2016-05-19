@@ -5,28 +5,31 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSpansSpanPositionCheckQuery_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSpansSpanPositionCheckQuery_RESTRICT
-#define OrgApacheLuceneSearchSpansSpanPositionCheckQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanPositionCheckQuery")
+#ifdef RESTRICT_OrgApacheLuceneSearchSpansSpanPositionCheckQuery
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanPositionCheckQuery 0
 #else
-#define OrgApacheLuceneSearchSpansSpanPositionCheckQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanPositionCheckQuery 1
 #endif
-#undef OrgApacheLuceneSearchSpansSpanPositionCheckQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSpansSpanPositionCheckQuery
 
-#if !defined (_OrgApacheLuceneSearchSpansSpanPositionCheckQuery_) && (OrgApacheLuceneSearchSpansSpanPositionCheckQuery_INCLUDE_ALL || OrgApacheLuceneSearchSpansSpanPositionCheckQuery_INCLUDE)
-#define _OrgApacheLuceneSearchSpansSpanPositionCheckQuery_
+#if !defined (OrgApacheLuceneSearchSpansSpanPositionCheckQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanPositionCheckQuery || defined(INCLUDE_OrgApacheLuceneSearchSpansSpanPositionCheckQuery))
+#define OrgApacheLuceneSearchSpansSpanPositionCheckQuery_
 
-#define OrgApacheLuceneSearchSpansSpanQuery_RESTRICT 1
-#define OrgApacheLuceneSearchSpansSpanQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSpansSpanQuery 1
+#define INCLUDE_OrgApacheLuceneSearchSpansSpanQuery 1
 #include "org/apache/lucene/search/spans/SpanQuery.h"
 
 @class OrgApacheLuceneIndexIndexReader;
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchQuery;
-@class OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum;
+@class OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus;
 @class OrgApacheLuceneSearchSpansSpanWeight;
 @class OrgApacheLuceneSearchSpansSpans;
 
+/*!
+ @brief Base class for filtering a SpanQuery based on the position of a match.
+ */
 @interface OrgApacheLuceneSearchSpansSpanPositionCheckQuery : OrgApacheLuceneSearchSpansSpanQuery < NSCopying > {
  @public
   OrgApacheLuceneSearchSpansSpanQuery *match_;
@@ -39,10 +42,16 @@
 - (OrgApacheLuceneSearchSpansSpanWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                                  withBoolean:(jboolean)needsScores;
 
+/*!
+ @brief Returns true iff <code>o</code> is equal to this.
+ */
 - (jboolean)isEqual:(id)o;
 
 - (NSString *)getField;
 
+/*!
+ @return the SpanQuery whose matches are filtered.
+ */
 - (OrgApacheLuceneSearchSpansSpanQuery *)getMatch;
 
 - (NSUInteger)hash;
@@ -51,7 +60,16 @@
 
 #pragma mark Protected
 
-- (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum *)acceptPositionWithOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)spans;
+/*!
+ @brief Implementing classes are required to return whether the current position is a match for the passed in
+ "match" <code>SpanQuery</code>.
+ This is only called if the underlying last <code>Spans.nextStartPosition()</code> for the
+ match indicated a valid start position.
+ @param spans The <code>Spans</code> instance, positioned at the spot to check
+ @return whether the match is accepted, rejected, or rejected and should move to the next doc.
+ - seealso: Spans#nextDoc()
+ */
+- (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *)acceptPositionWithOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)spans;
 
 @end
 
@@ -65,17 +83,17 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanPositionCheckQuery)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchSpansSpanPositionCheckQuery_SpanPositionCheckWeight_) && (OrgApacheLuceneSearchSpansSpanPositionCheckQuery_INCLUDE_ALL || OrgApacheLuceneSearchSpansSpanPositionCheckQuery_SpanPositionCheckWeight_INCLUDE)
-#define _OrgApacheLuceneSearchSpansSpanPositionCheckQuery_SpanPositionCheckWeight_
+#if !defined (OrgApacheLuceneSearchSpansSpanPositionCheckQuery_SpanPositionCheckWeight_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanPositionCheckQuery || defined(INCLUDE_OrgApacheLuceneSearchSpansSpanPositionCheckQuery_SpanPositionCheckWeight))
+#define OrgApacheLuceneSearchSpansSpanPositionCheckQuery_SpanPositionCheckWeight_
 
-#define OrgApacheLuceneSearchSpansSpanWeight_RESTRICT 1
-#define OrgApacheLuceneSearchSpansSpanWeight_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSpansSpanWeight 1
+#define INCLUDE_OrgApacheLuceneSearchSpansSpanWeight 1
 #include "org/apache/lucene/search/spans/SpanWeight.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchSpansSpanPositionCheckQuery;
-@class OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum;
+@class OrgApacheLuceneSearchSpansSpanWeight_Postings;
 @class OrgApacheLuceneSearchSpansSpans;
 @protocol JavaUtilMap;
 @protocol JavaUtilSet;
@@ -97,7 +115,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanPositionCheckQuery)
 - (void)extractTermsWithJavaUtilSet:(id<JavaUtilSet>)terms;
 
 - (OrgApacheLuceneSearchSpansSpans *)getSpansWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                 withOrgApacheLuceneSearchSpansSpanWeight_PostingsEnum:(OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum *)requiredPostings;
+                                     withOrgApacheLuceneSearchSpansSpanWeight_Postings:(OrgApacheLuceneSearchSpansSpanWeight_Postings *)requiredPostings;
 
 @end
 
@@ -109,8 +127,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanPositionCheckQuery_SpanPosi
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanPositionCheckQuery_SpanPositionCheckWeight *new_OrgApacheLuceneSearchSpansSpanPositionCheckQuery_SpanPositionCheckWeight_initWithOrgApacheLuceneSearchSpansSpanPositionCheckQuery_withOrgApacheLuceneSearchSpansSpanWeight_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_(OrgApacheLuceneSearchSpansSpanPositionCheckQuery *outer$, OrgApacheLuceneSearchSpansSpanWeight *matchWeight, OrgApacheLuceneSearchIndexSearcher *searcher, id<JavaUtilMap> terms) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanPositionCheckQuery_SpanPositionCheckWeight *create_OrgApacheLuceneSearchSpansSpanPositionCheckQuery_SpanPositionCheckWeight_initWithOrgApacheLuceneSearchSpansSpanPositionCheckQuery_withOrgApacheLuceneSearchSpansSpanWeight_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_(OrgApacheLuceneSearchSpansSpanPositionCheckQuery *outer$, OrgApacheLuceneSearchSpansSpanWeight *matchWeight, OrgApacheLuceneSearchIndexSearcher *searcher, id<JavaUtilMap> terms);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanPositionCheckQuery_SpanPositionCheckWeight)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSpansSpanPositionCheckQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanPositionCheckQuery")

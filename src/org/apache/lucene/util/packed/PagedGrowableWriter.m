@@ -31,11 +31,11 @@
 
 - (OrgApacheLuceneUtilPackedPackedInts_Mutable *)newMutableWithInt:(jint)valueCount
                                                            withInt:(jint)bitsPerValue {
-  return [new_OrgApacheLuceneUtilPackedGrowableWriter_initWithInt_withInt_withFloat_(bitsPerValue, valueCount, acceptableOverheadRatio_) autorelease];
+  return create_OrgApacheLuceneUtilPackedGrowableWriter_initWithInt_withInt_withFloat_(bitsPerValue, valueCount, acceptableOverheadRatio_);
 }
 
 - (OrgApacheLuceneUtilPackedPagedGrowableWriter *)newUnfilledCopyWithLong:(jlong)newSize {
-  return [new_OrgApacheLuceneUtilPackedPagedGrowableWriter_initWithLong_withInt_withInt_withFloat_withBoolean_(newSize, [self pageSize], bitsPerValue_, acceptableOverheadRatio_, false) autorelease];
+  return create_OrgApacheLuceneUtilPackedPagedGrowableWriter_initWithLong_withInt_withInt_withFloat_withBoolean_(newSize, [self pageSize], bitsPerValue_, acceptableOverheadRatio_, false);
 }
 
 - (jlong)baseRamBytesUsed {
@@ -47,7 +47,7 @@
     { "initWithLong:withInt:withInt:withFloat:", "PagedGrowableWriter", NULL, 0x1, NULL, NULL },
     { "initWithLong:withInt:withInt:withFloat:withBoolean:", "PagedGrowableWriter", NULL, 0x0, NULL, NULL },
     { "newMutableWithInt:withInt:", "newMutable", "Lorg.apache.lucene.util.packed.PackedInts$Mutable;", 0x4, NULL, NULL },
-    { "newUnfilledCopyWithLong:", "newUnfilledCopy", "Lorg.apache.lucene.util.packed.PagedGrowableWriter;", 0x4, NULL, NULL },
+    { "newUnfilledCopyWithLong:", "newUnfilledCopy", "Lorg.apache.lucene.util.packed.PagedGrowableWriter;", 0x4, NULL, "(J)Lorg/apache/lucene/util/packed/PagedGrowableWriter;" },
     { "baseRamBytesUsed", NULL, "J", 0x4, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -65,9 +65,11 @@ void OrgApacheLuceneUtilPackedPagedGrowableWriter_initWithLong_withInt_withInt_w
 }
 
 OrgApacheLuceneUtilPackedPagedGrowableWriter *new_OrgApacheLuceneUtilPackedPagedGrowableWriter_initWithLong_withInt_withInt_withFloat_(jlong size, jint pageSize, jint startBitsPerValue, jfloat acceptableOverheadRatio) {
-  OrgApacheLuceneUtilPackedPagedGrowableWriter *self = [OrgApacheLuceneUtilPackedPagedGrowableWriter alloc];
-  OrgApacheLuceneUtilPackedPagedGrowableWriter_initWithLong_withInt_withInt_withFloat_(self, size, pageSize, startBitsPerValue, acceptableOverheadRatio);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedPagedGrowableWriter, initWithLong_withInt_withInt_withFloat_, size, pageSize, startBitsPerValue, acceptableOverheadRatio)
+}
+
+OrgApacheLuceneUtilPackedPagedGrowableWriter *create_OrgApacheLuceneUtilPackedPagedGrowableWriter_initWithLong_withInt_withInt_withFloat_(jlong size, jint pageSize, jint startBitsPerValue, jfloat acceptableOverheadRatio) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedPagedGrowableWriter, initWithLong_withInt_withInt_withFloat_, size, pageSize, startBitsPerValue, acceptableOverheadRatio)
 }
 
 void OrgApacheLuceneUtilPackedPagedGrowableWriter_initWithLong_withInt_withInt_withFloat_withBoolean_(OrgApacheLuceneUtilPackedPagedGrowableWriter *self, jlong size, jint pageSize, jint startBitsPerValue, jfloat acceptableOverheadRatio, jboolean fillPages) {
@@ -79,9 +81,11 @@ void OrgApacheLuceneUtilPackedPagedGrowableWriter_initWithLong_withInt_withInt_w
 }
 
 OrgApacheLuceneUtilPackedPagedGrowableWriter *new_OrgApacheLuceneUtilPackedPagedGrowableWriter_initWithLong_withInt_withInt_withFloat_withBoolean_(jlong size, jint pageSize, jint startBitsPerValue, jfloat acceptableOverheadRatio, jboolean fillPages) {
-  OrgApacheLuceneUtilPackedPagedGrowableWriter *self = [OrgApacheLuceneUtilPackedPagedGrowableWriter alloc];
-  OrgApacheLuceneUtilPackedPagedGrowableWriter_initWithLong_withInt_withInt_withFloat_withBoolean_(self, size, pageSize, startBitsPerValue, acceptableOverheadRatio, fillPages);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedPagedGrowableWriter, initWithLong_withInt_withInt_withFloat_withBoolean_, size, pageSize, startBitsPerValue, acceptableOverheadRatio, fillPages)
+}
+
+OrgApacheLuceneUtilPackedPagedGrowableWriter *create_OrgApacheLuceneUtilPackedPagedGrowableWriter_initWithLong_withInt_withInt_withFloat_withBoolean_(jlong size, jint pageSize, jint startBitsPerValue, jfloat acceptableOverheadRatio, jboolean fillPages) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedPagedGrowableWriter, initWithLong_withInt_withInt_withFloat_withBoolean_, size, pageSize, startBitsPerValue, acceptableOverheadRatio, fillPages)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPagedGrowableWriter)

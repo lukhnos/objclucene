@@ -19,6 +19,9 @@
   jint lastScoredDoc_;
 }
 
+/*!
+ @brief Ensure setFreqCurrentDoc is called, if not already called for the current doc.
+ */
 - (void)ensureFreq;
 
 @end
@@ -133,9 +136,11 @@ void OrgApacheLuceneSearchSpansSpanScorer_initWithOrgApacheLuceneSearchSpansSpan
 }
 
 OrgApacheLuceneSearchSpansSpanScorer *new_OrgApacheLuceneSearchSpansSpanScorer_initWithOrgApacheLuceneSearchSpansSpans_withOrgApacheLuceneSearchSpansSpanWeight_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(OrgApacheLuceneSearchSpansSpans *spans, OrgApacheLuceneSearchSpansSpanWeight *weight, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer) {
-  OrgApacheLuceneSearchSpansSpanScorer *self = [OrgApacheLuceneSearchSpansSpanScorer alloc];
-  OrgApacheLuceneSearchSpansSpanScorer_initWithOrgApacheLuceneSearchSpansSpans_withOrgApacheLuceneSearchSpansSpanWeight_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(self, spans, weight, docScorer);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSpansSpanScorer, initWithOrgApacheLuceneSearchSpansSpans_withOrgApacheLuceneSearchSpansSpanWeight_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_, spans, weight, docScorer)
+}
+
+OrgApacheLuceneSearchSpansSpanScorer *create_OrgApacheLuceneSearchSpansSpanScorer_initWithOrgApacheLuceneSearchSpansSpans_withOrgApacheLuceneSearchSpansSpanWeight_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(OrgApacheLuceneSearchSpansSpans *spans, OrgApacheLuceneSearchSpansSpanWeight *weight, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSpansSpanScorer, initWithOrgApacheLuceneSearchSpansSpans_withOrgApacheLuceneSearchSpansSpanWeight_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_, spans, weight, docScorer)
 }
 
 void OrgApacheLuceneSearchSpansSpanScorer_ensureFreq(OrgApacheLuceneSearchSpansSpanScorer *self) {
@@ -166,7 +171,7 @@ void OrgApacheLuceneSearchSpansSpanScorer_setFreqCurrentDoc(OrgApacheLuceneSearc
       self->freq_ = 1;
       return;
     }
-    JrePlusAssignFloatF(&self->freq_, [((OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *) nil_chk(self->docScorer_)) computeSlopFactorWithInt:[self->spans_ width]]);
+    JrePlusAssignFloatF(&self->freq_, [self->docScorer_ computeSlopFactorWithInt:[self->spans_ width]]);
     [self doCurrentSpans];
     prevStartPos = startPos;
     prevEndPos = endPos;

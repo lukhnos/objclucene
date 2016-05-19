@@ -5,25 +5,32 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSpellLevensteinDistance_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSpellLevensteinDistance_RESTRICT
-#define OrgApacheLuceneSearchSpellLevensteinDistance_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpellLevensteinDistance")
+#ifdef RESTRICT_OrgApacheLuceneSearchSpellLevensteinDistance
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpellLevensteinDistance 0
 #else
-#define OrgApacheLuceneSearchSpellLevensteinDistance_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpellLevensteinDistance 1
 #endif
-#undef OrgApacheLuceneSearchSpellLevensteinDistance_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSpellLevensteinDistance
 
-#if !defined (_OrgApacheLuceneSearchSpellLevensteinDistance_) && (OrgApacheLuceneSearchSpellLevensteinDistance_INCLUDE_ALL || OrgApacheLuceneSearchSpellLevensteinDistance_INCLUDE)
-#define _OrgApacheLuceneSearchSpellLevensteinDistance_
+#if !defined (OrgApacheLuceneSearchSpellLevensteinDistance_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpellLevensteinDistance || defined(INCLUDE_OrgApacheLuceneSearchSpellLevensteinDistance))
+#define OrgApacheLuceneSearchSpellLevensteinDistance_
 
-#define OrgApacheLuceneSearchSpellStringDistance_RESTRICT 1
-#define OrgApacheLuceneSearchSpellStringDistance_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSpellStringDistance 1
+#define INCLUDE_OrgApacheLuceneSearchSpellStringDistance 1
 #include "org/apache/lucene/search/spell/StringDistance.h"
 
+/*!
+ @brief Levenstein edit distance class.
+ */
 @interface OrgApacheLuceneSearchSpellLevensteinDistance : NSObject < OrgApacheLuceneSearchSpellStringDistance >
 
 #pragma mark Public
 
+/*!
+ @brief Optimized to run a bit faster than the static getDistance().
+ In one benchmark times were 5.3sec using ctr vs 8.5sec w/ static method, thus 37% faster.
+ */
 - (instancetype)init;
 
 - (jboolean)isEqual:(id)obj;
@@ -43,8 +50,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSpellLevensteinDistance_init(OrgApac
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSpellLevensteinDistance *new_OrgApacheLuceneSearchSpellLevensteinDistance_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpellLevensteinDistance *create_OrgApacheLuceneSearchSpellLevensteinDistance_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellLevensteinDistance)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSpellLevensteinDistance_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpellLevensteinDistance")

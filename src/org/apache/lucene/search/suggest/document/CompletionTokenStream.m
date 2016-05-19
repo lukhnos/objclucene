@@ -58,6 +58,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream, c
 
 __attribute__((unused)) static OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_replaceSepWithOrgApacheLuceneUtilAutomatonAutomaton_withBoolean_withInt_(OrgApacheLuceneUtilAutomatonAutomaton *a, jboolean preserveSep, jint sepLabel);
 
+/*!
+ @brief Just escapes the 0xff byte (which we still for SEP).
+ */
 @interface OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_EscapingTokenStreamToAutomaton : OrgApacheLuceneAnalysisTokenStreamToAutomaton {
  @public
   OrgApacheLuceneUtilBytesRefBuilder *spare_;
@@ -77,6 +80,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_Es
 __attribute__((unused)) static void OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_EscapingTokenStreamToAutomaton_initWithChar_(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_EscapingTokenStreamToAutomaton *self, jchar sepLabel);
 
 __attribute__((unused)) static OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_EscapingTokenStreamToAutomaton *new_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_EscapingTokenStreamToAutomaton_initWithChar_(jchar sepLabel) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_EscapingTokenStreamToAutomaton *create_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_EscapingTokenStreamToAutomaton_initWithChar_(jchar sepLabel);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_EscapingTokenStreamToAutomaton)
 
@@ -120,14 +125,14 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_By
     OrgApacheLuceneUtilAutomatonAutomaton *automaton = [self toAutomaton];
     JreStrongAssignAndConsume(&finiteStrings_, new_OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(automaton, maxGraphExpansions_));
   }
-  OrgApacheLuceneUtilIntsRef *string = [((OrgApacheLuceneUtilAutomatonFiniteStringsIterator *) nil_chk(finiteStrings_)) next];
+  OrgApacheLuceneUtilIntsRef *string = [finiteStrings_ next];
   if (string == nil) {
     return false;
   }
   OrgApacheLuceneUtilFstUtil_toBytesRefWithOrgApacheLuceneUtilIntsRef_withOrgApacheLuceneUtilBytesRefBuilder_(string, [((id<OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttribute>) nil_chk(bytesAtt_)) builder]);
   if (charTermAttribute_ != nil) {
     [charTermAttribute_ setLengthWithInt:0];
-    [charTermAttribute_ appendWithJavaLangCharSequence:[bytesAtt_ toUTF16]];
+    [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(charTermAttribute_)) appendWithJavaLangCharSequence:[bytesAtt_ toUTF16]];
   }
   if (payload_ != nil) {
     [((id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute>) nil_chk(payloadAttr_)) setPayloadWithOrgApacheLuceneUtilBytesRef:self->payload_];
@@ -165,12 +170,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_By
   @try {
     OrgApacheLuceneAnalysisTokenStreamToAutomaton *tsta;
     if (preserveSep_) {
-      tsta = [new_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_EscapingTokenStreamToAutomaton_initWithChar_((jchar) OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_SEP_LABEL) autorelease];
+      tsta = create_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_EscapingTokenStreamToAutomaton_initWithChar_((jchar) OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_SEP_LABEL);
     }
     else {
-      tsta = [new_OrgApacheLuceneAnalysisTokenStreamToAutomaton_init() autorelease];
+      tsta = create_OrgApacheLuceneAnalysisTokenStreamToAutomaton_init();
     }
-    [((OrgApacheLuceneAnalysisTokenStreamToAutomaton *) nil_chk(tsta)) setPreservePositionIncrementsWithBoolean:preservePositionIncrements_];
+    [tsta setPreservePositionIncrementsWithBoolean:preservePositionIncrements_];
     [tsta setUnicodeArcsWithBoolean:unicodeAware];
     automaton = [tsta toAutomatonWithOrgApacheLuceneAnalysisTokenStream:input_];
   }
@@ -233,9 +238,11 @@ void OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_initWithOrgApache
 }
 
 OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *new_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) {
-  OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *self = [OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream alloc];
-  OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_initWithOrgApacheLuceneAnalysisTokenStream_(self, input);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream, initWithOrgApacheLuceneAnalysisTokenStream_, input)
+}
+
+OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *create_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream, initWithOrgApacheLuceneAnalysisTokenStream_, input)
 }
 
 void OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withBoolean_withInt_(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *self, OrgApacheLuceneAnalysisTokenStream *input, jboolean preserveSep, jboolean preservePositionIncrements, jint maxGraphExpansions) {
@@ -249,20 +256,22 @@ void OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_initWithOrgApache
 }
 
 OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *new_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withBoolean_withInt_(OrgApacheLuceneAnalysisTokenStream *input, jboolean preserveSep, jboolean preservePositionIncrements, jint maxGraphExpansions) {
-  OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *self = [OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream alloc];
-  OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withBoolean_withInt_(self, input, preserveSep, preservePositionIncrements, maxGraphExpansions);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream, initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withBoolean_withInt_, input, preserveSep, preservePositionIncrements, maxGraphExpansions)
+}
+
+OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *create_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withBoolean_withInt_(OrgApacheLuceneAnalysisTokenStream *input, jboolean preserveSep, jboolean preservePositionIncrements, jint maxGraphExpansions) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream, initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withBoolean_withInt_, input, preserveSep, preservePositionIncrements, maxGraphExpansions)
 }
 
 OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_replaceSepWithOrgApacheLuceneUtilAutomatonAutomaton_withBoolean_withInt_(OrgApacheLuceneUtilAutomatonAutomaton *a, jboolean preserveSep, jint sepLabel) {
   OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_initialize();
-  OrgApacheLuceneUtilAutomatonAutomaton *result = [new_OrgApacheLuceneUtilAutomatonAutomaton_init() autorelease];
+  OrgApacheLuceneUtilAutomatonAutomaton *result = create_OrgApacheLuceneUtilAutomatonAutomaton_init();
   jint numStates = [((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(a)) getNumStates];
   for (jint s = 0; s < numStates; s++) {
     [result createState];
     [result setAcceptWithInt:s withBoolean:[a isAcceptWithInt:s]];
   }
-  OrgApacheLuceneUtilAutomatonTransition *t = [new_OrgApacheLuceneUtilAutomatonTransition_init() autorelease];
+  OrgApacheLuceneUtilAutomatonTransition *t = create_OrgApacheLuceneUtilAutomatonTransition_init();
   IOSIntArray *topoSortStates = OrgApacheLuceneUtilAutomatonOperations_topoSortStatesWithOrgApacheLuceneUtilAutomatonAutomaton_(a);
   for (jint i = 0; i < ((IOSIntArray *) nil_chk(topoSortStates))->size_; i++) {
     jint state = IOSIntArray_Get(topoSortStates, topoSortStates->size_ - 1 - i);
@@ -345,9 +354,11 @@ void OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_EscapingTokenStre
 }
 
 OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_EscapingTokenStreamToAutomaton *new_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_EscapingTokenStreamToAutomaton_initWithChar_(jchar sepLabel) {
-  OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_EscapingTokenStreamToAutomaton *self = [OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_EscapingTokenStreamToAutomaton alloc];
-  OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_EscapingTokenStreamToAutomaton_initWithChar_(self, sepLabel);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_EscapingTokenStreamToAutomaton, initWithChar_, sepLabel)
+}
+
+OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_EscapingTokenStreamToAutomaton *create_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_EscapingTokenStreamToAutomaton_initWithChar_(jchar sepLabel) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_EscapingTokenStreamToAutomaton, initWithChar_, sepLabel)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_EscapingTokenStreamToAutomaton)
@@ -389,12 +400,12 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)copyToWithOrgApacheLuceneUtilAttributeImpl:(OrgApacheLuceneUtilAttributeImpl *)target {
-  OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl *other = (OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl *) check_class_cast(target, [OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl class]);
+  OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl *other = (OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl *) cast_chk(target, [OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl class]);
   [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(((OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl *) nil_chk(other))->bytes_)) copyBytesWithOrgApacheLuceneUtilBytesRefBuilder:bytes_];
 }
 
 - (OrgApacheLuceneUtilAttributeImpl *)clone {
-  OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl *other = [new_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl_init() autorelease];
+  OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl *other = create_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl_init();
   [self copyToWithOrgApacheLuceneUtilAttributeImpl:other];
   return other;
 }
@@ -407,8 +418,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   if (charsRef_ == nil) {
     JreStrongAssignAndConsume(&charsRef_, new_OrgApacheLuceneUtilCharsRefBuilder_init());
   }
-  [((OrgApacheLuceneUtilCharsRefBuilder *) nil_chk(charsRef_)) copyUTF8BytesWithOrgApacheLuceneUtilBytesRef:[self getBytesRef]];
-  return [charsRef_ get];
+  [charsRef_ copyUTF8BytesWithOrgApacheLuceneUtilBytesRef:[self getBytesRef]];
+  return [((OrgApacheLuceneUtilCharsRefBuilder *) nil_chk(charsRef_)) get];
 }
 
 - (void)dealloc {
@@ -444,9 +455,11 @@ void OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTe
 }
 
 OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl *new_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl_init() {
-  OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl *self = [OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl alloc];
-  OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl, init)
+}
+
+OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl *create_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl)

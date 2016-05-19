@@ -61,7 +61,7 @@ __attribute__((unused)) static void OrgApacheLuceneIndexMergeReaderWrapper_check
   if (fi == nil) {
     return nil;
   }
-  if ([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fi)) getDocValuesType] != JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, NUMERIC)) {
+  if ([fi getDocValuesType] != JreLoadEnum(OrgApacheLuceneIndexDocValuesType, NUMERIC)) {
     return nil;
   }
   return [((OrgApacheLuceneCodecsDocValuesProducer *) nil_chk(docValues_)) getNumericWithOrgApacheLuceneIndexFieldInfo:fi];
@@ -73,7 +73,7 @@ __attribute__((unused)) static void OrgApacheLuceneIndexMergeReaderWrapper_check
   if (fi == nil) {
     return nil;
   }
-  if ([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fi)) getDocValuesType] != JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, BINARY)) {
+  if ([fi getDocValuesType] != JreLoadEnum(OrgApacheLuceneIndexDocValuesType, BINARY)) {
     return nil;
   }
   return [((OrgApacheLuceneCodecsDocValuesProducer *) nil_chk(docValues_)) getBinaryWithOrgApacheLuceneIndexFieldInfo:fi];
@@ -85,7 +85,7 @@ __attribute__((unused)) static void OrgApacheLuceneIndexMergeReaderWrapper_check
   if (fi == nil) {
     return nil;
   }
-  if ([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fi)) getDocValuesType] != JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, SORTED)) {
+  if ([fi getDocValuesType] != JreLoadEnum(OrgApacheLuceneIndexDocValuesType, SORTED)) {
     return nil;
   }
   return [((OrgApacheLuceneCodecsDocValuesProducer *) nil_chk(docValues_)) getSortedWithOrgApacheLuceneIndexFieldInfo:fi];
@@ -97,7 +97,7 @@ __attribute__((unused)) static void OrgApacheLuceneIndexMergeReaderWrapper_check
   if (fi == nil) {
     return nil;
   }
-  if ([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fi)) getDocValuesType] != JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, SORTED_NUMERIC)) {
+  if ([fi getDocValuesType] != JreLoadEnum(OrgApacheLuceneIndexDocValuesType, SORTED_NUMERIC)) {
     return nil;
   }
   return [((OrgApacheLuceneCodecsDocValuesProducer *) nil_chk(docValues_)) getSortedNumericWithOrgApacheLuceneIndexFieldInfo:fi];
@@ -109,7 +109,7 @@ __attribute__((unused)) static void OrgApacheLuceneIndexMergeReaderWrapper_check
   if (fi == nil) {
     return nil;
   }
-  if ([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fi)) getDocValuesType] != JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, SORTED_SET)) {
+  if ([fi getDocValuesType] != JreLoadEnum(OrgApacheLuceneIndexDocValuesType, SORTED_SET)) {
     return nil;
   }
   return [((OrgApacheLuceneCodecsDocValuesProducer *) nil_chk(docValues_)) getSortedSetWithOrgApacheLuceneIndexFieldInfo:fi];
@@ -121,7 +121,7 @@ __attribute__((unused)) static void OrgApacheLuceneIndexMergeReaderWrapper_check
   if (fi == nil) {
     return nil;
   }
-  if ([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fi)) getDocValuesType] == JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, NONE)) {
+  if ([fi getDocValuesType] == JreLoadEnum(OrgApacheLuceneIndexDocValuesType, NONE)) {
     return nil;
   }
   return [((OrgApacheLuceneCodecsDocValuesProducer *) nil_chk(docValues_)) getDocsWithFieldWithOrgApacheLuceneIndexFieldInfo:fi];
@@ -154,7 +154,7 @@ __attribute__((unused)) static void OrgApacheLuceneIndexMergeReaderWrapper_check
   if (vectors_ == nil) {
     return nil;
   }
-  return [((OrgApacheLuceneCodecsTermVectorsReader *) nil_chk(vectors_)) getWithInt:docID];
+  return [vectors_ getWithInt:docID];
 }
 
 - (jint)numDocs {
@@ -273,14 +273,16 @@ void OrgApacheLuceneIndexMergeReaderWrapper_initWithOrgApacheLuceneIndexSegmentR
 }
 
 OrgApacheLuceneIndexMergeReaderWrapper *new_OrgApacheLuceneIndexMergeReaderWrapper_initWithOrgApacheLuceneIndexSegmentReader_(OrgApacheLuceneIndexSegmentReader *inArg) {
-  OrgApacheLuceneIndexMergeReaderWrapper *self = [OrgApacheLuceneIndexMergeReaderWrapper alloc];
-  OrgApacheLuceneIndexMergeReaderWrapper_initWithOrgApacheLuceneIndexSegmentReader_(self, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMergeReaderWrapper, initWithOrgApacheLuceneIndexSegmentReader_, inArg)
+}
+
+OrgApacheLuceneIndexMergeReaderWrapper *create_OrgApacheLuceneIndexMergeReaderWrapper_initWithOrgApacheLuceneIndexSegmentReader_(OrgApacheLuceneIndexSegmentReader *inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMergeReaderWrapper, initWithOrgApacheLuceneIndexSegmentReader_, inArg)
 }
 
 void OrgApacheLuceneIndexMergeReaderWrapper_checkBoundsWithInt_(OrgApacheLuceneIndexMergeReaderWrapper *self, jint docID) {
   if (docID < 0 || docID >= [self maxDoc]) {
-    @throw [new_JavaLangIndexOutOfBoundsException_initWithNSString_(JreStrcat("$I$IC", @"docID must be >= 0 and < maxDoc=", [self maxDoc], @" (got docID=", docID, ')')) autorelease];
+    @throw create_JavaLangIndexOutOfBoundsException_initWithNSString_(JreStrcat("$I$IC", @"docID must be >= 0 and < maxDoc=", [self maxDoc], @" (got docID=", docID, ')'));
   }
 }
 

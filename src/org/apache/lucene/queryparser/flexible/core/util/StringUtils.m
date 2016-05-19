@@ -22,7 +22,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "toStringWithId:", "toString", "Ljava.lang.String;", 0x9, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "StringUtils", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils = { 2, "StringUtils", "org.apache.lucene.queryparser.flexible.core.util", NULL, 0x11, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils;
@@ -45,9 +45,11 @@ void OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_init(OrgApacheLuceneQ
 }
 
 OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils *new_OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_init() {
-  OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils *self = [OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils alloc];
-  OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils, init)
+}
+
+OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils *create_OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils)

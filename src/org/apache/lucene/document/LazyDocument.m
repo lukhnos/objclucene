@@ -69,6 +69,8 @@ __attribute__((unused)) static void OrgApacheLuceneDocumentLazyDocument_LazyFiel
 
 __attribute__((unused)) static OrgApacheLuceneDocumentLazyDocument_LazyField *new_OrgApacheLuceneDocumentLazyDocument_LazyField_initWithOrgApacheLuceneDocumentLazyDocument_withNSString_withInt_(OrgApacheLuceneDocumentLazyDocument *outer$, NSString *name, jint fieldNum) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneDocumentLazyDocument_LazyField *create_OrgApacheLuceneDocumentLazyDocument_LazyField_initWithOrgApacheLuceneDocumentLazyDocument_withNSString_withInt_(OrgApacheLuceneDocumentLazyDocument *outer$, NSString *name, jint fieldNum);
+
 __attribute__((unused)) static id<OrgApacheLuceneIndexIndexableField> OrgApacheLuceneDocumentLazyDocument_LazyField_getRealValue(OrgApacheLuceneDocumentLazyDocument_LazyField *self);
 
 @implementation OrgApacheLuceneDocumentLazyDocument
@@ -83,11 +85,11 @@ __attribute__((unused)) static id<OrgApacheLuceneIndexIndexableField> OrgApacheL
   [((id<JavaUtilSet>) nil_chk(fieldNames_)) addWithId:((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo))->name_];
   id<JavaUtilList> values = [((id<JavaUtilMap>) nil_chk(fields_)) getWithId:JavaLangInteger_valueOfWithInt_(fieldInfo->number_)];
   if (nil == values) {
-    values = [new_JavaUtilArrayList_init() autorelease];
-    [fields_ putWithId:JavaLangInteger_valueOfWithInt_(fieldInfo->number_) withId:values];
+    values = create_JavaUtilArrayList_init();
+    [((id<JavaUtilMap>) nil_chk(fields_)) putWithId:JavaLangInteger_valueOfWithInt_(fieldInfo->number_) withId:values];
   }
-  OrgApacheLuceneDocumentLazyDocument_LazyField *value = [new_OrgApacheLuceneDocumentLazyDocument_LazyField_initWithOrgApacheLuceneDocumentLazyDocument_withNSString_withInt_(self, fieldInfo->name_, fieldInfo->number_) autorelease];
-  [((id<JavaUtilList>) nil_chk(values)) addWithId:value];
+  OrgApacheLuceneDocumentLazyDocument_LazyField *value = create_OrgApacheLuceneDocumentLazyDocument_LazyField_initWithOrgApacheLuceneDocumentLazyDocument_withNSString_withInt_(self, fieldInfo->name_, fieldInfo->number_);
+  [values addWithId:value];
   @synchronized(self) {
     JreStrongAssign(&doc_, nil);
   }
@@ -101,7 +103,7 @@ __attribute__((unused)) static id<OrgApacheLuceneIndexIndexableField> OrgApacheL
         JreStrongAssign(&doc_, [((OrgApacheLuceneIndexIndexReader *) nil_chk(reader_)) documentWithInt:docID_ withJavaUtilSet:fieldNames_]);
       }
       @catch (JavaIoIOException *ioe) {
-        @throw [new_JavaLangIllegalStateException_initWithNSString_withJavaLangThrowable_(@"unable to load document", ioe) autorelease];
+        @throw create_JavaLangIllegalStateException_initWithNSString_withNSException_(@"unable to load document", ioe);
       }
     }
     return doc_;
@@ -151,9 +153,11 @@ void OrgApacheLuceneDocumentLazyDocument_initWithOrgApacheLuceneIndexIndexReader
 }
 
 OrgApacheLuceneDocumentLazyDocument *new_OrgApacheLuceneDocumentLazyDocument_initWithOrgApacheLuceneIndexIndexReader_withInt_(OrgApacheLuceneIndexIndexReader *reader, jint docID) {
-  OrgApacheLuceneDocumentLazyDocument *self = [OrgApacheLuceneDocumentLazyDocument alloc];
-  OrgApacheLuceneDocumentLazyDocument_initWithOrgApacheLuceneIndexIndexReader_withInt_(self, reader, docID);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentLazyDocument, initWithOrgApacheLuceneIndexIndexReader_withInt_, reader, docID)
+}
+
+OrgApacheLuceneDocumentLazyDocument *create_OrgApacheLuceneDocumentLazyDocument_initWithOrgApacheLuceneIndexIndexReader_withInt_(OrgApacheLuceneIndexIndexReader *reader, jint docID) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentLazyDocument, initWithOrgApacheLuceneIndexIndexReader_withInt_, reader, docID)
 }
 
 void OrgApacheLuceneDocumentLazyDocument_fetchRealValuesWithNSString_withInt_(OrgApacheLuceneDocumentLazyDocument *self, NSString *name, jint fieldNum) {
@@ -221,16 +225,16 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentLazyDocument)
   return [((id<OrgApacheLuceneIndexIndexableField>) nil_chk(OrgApacheLuceneDocumentLazyDocument_LazyField_getRealValue(self))) tokenStreamWithOrgApacheLuceneAnalysisAnalyzer:analyzer withOrgApacheLuceneAnalysisTokenStream:reuse];
 }
 
+- (void)__javaClone:(OrgApacheLuceneDocumentLazyDocument_LazyField *)original {
+  [super __javaClone:original];
+  JreCloneVolatileStrong(&realValue_, &original->realValue_);
+}
+
 - (void)dealloc {
   RELEASE_(this$0_);
   RELEASE_(name_);
   JreReleaseVolatile(&realValue_);
   [super dealloc];
-}
-
-- (void)__javaClone {
-  [super __javaClone];
-  JreRetainVolatile(&realValue_);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -268,9 +272,11 @@ void OrgApacheLuceneDocumentLazyDocument_LazyField_initWithOrgApacheLuceneDocume
 }
 
 OrgApacheLuceneDocumentLazyDocument_LazyField *new_OrgApacheLuceneDocumentLazyDocument_LazyField_initWithOrgApacheLuceneDocumentLazyDocument_withNSString_withInt_(OrgApacheLuceneDocumentLazyDocument *outer$, NSString *name, jint fieldNum) {
-  OrgApacheLuceneDocumentLazyDocument_LazyField *self = [OrgApacheLuceneDocumentLazyDocument_LazyField alloc];
-  OrgApacheLuceneDocumentLazyDocument_LazyField_initWithOrgApacheLuceneDocumentLazyDocument_withNSString_withInt_(self, outer$, name, fieldNum);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentLazyDocument_LazyField, initWithOrgApacheLuceneDocumentLazyDocument_withNSString_withInt_, outer$, name, fieldNum)
+}
+
+OrgApacheLuceneDocumentLazyDocument_LazyField *create_OrgApacheLuceneDocumentLazyDocument_LazyField_initWithOrgApacheLuceneDocumentLazyDocument_withNSString_withInt_(OrgApacheLuceneDocumentLazyDocument *outer$, NSString *name, jint fieldNum) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentLazyDocument_LazyField, initWithOrgApacheLuceneDocumentLazyDocument_withNSString_withInt_, outer$, name, fieldNum)
 }
 
 id<OrgApacheLuceneIndexIndexableField> OrgApacheLuceneDocumentLazyDocument_LazyField_getRealValue(OrgApacheLuceneDocumentLazyDocument_LazyField *self) {
@@ -278,7 +284,7 @@ id<OrgApacheLuceneIndexIndexableField> OrgApacheLuceneDocumentLazyDocument_LazyF
     OrgApacheLuceneDocumentLazyDocument_fetchRealValuesWithNSString_withInt_(self->this$0_, self->name_, self->fieldNum_);
   }
   JreAssert(([self hasBeenLoaded]), (@"field value was not lazy loaded"));
-  JreAssert(([((NSString *) nil_chk([((id<OrgApacheLuceneIndexIndexableField>) nil_chk(JreLoadVolatileId(&self->realValue_))) name])) isEqual:[self name]]), (JreStrcat("$$$$", @"realvalue name != name: ", [((id<OrgApacheLuceneIndexIndexableField>) JreLoadVolatileId(&self->realValue_)) name], @" != ", [self name])));
+  JreAssert(([((NSString *) nil_chk([((id<OrgApacheLuceneIndexIndexableField>) nil_chk(JreLoadVolatileId(&self->realValue_))) name])) isEqual:[self name]]), (JreStrcat("$$$$", @"realvalue name != name: ", [((id<OrgApacheLuceneIndexIndexableField>) nil_chk(JreLoadVolatileId(&self->realValue_))) name], @" != ", [self name])));
   return JreLoadVolatileId(&self->realValue_);
 }
 

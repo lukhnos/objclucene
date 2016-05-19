@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery_RESTRICT
-#define OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery 0
 #else
-#define OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery 1
 #endif
-#undef OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery
 
-#if !defined (_OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery_) && (OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery_INCLUDE_ALL || OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery_INCLUDE)
-#define _OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery_
+#if !defined (OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery || defined(INCLUDE_OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery))
+#define OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery_
 
-#define OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_RESTRICT 1
-#define OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserSurroundQuerySimpleTerm 1
+#define INCLUDE_OrgApacheLuceneQueryparserSurroundQuerySimpleTerm 1
 #include "org/apache/lucene/queryparser/surround/query/SimpleTerm.h"
 
 @class JavaLangStringBuilder;
@@ -25,6 +25,9 @@
 @class OrgApacheLuceneIndexTerm;
 @protocol OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor;
 
+/*!
+ @brief Query that matches String prefixes
+ */
 @interface OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery : OrgApacheLuceneQueryparserSurroundQuerySimpleTerm
 
 #pragma mark Public
@@ -57,8 +60,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery_in
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery *new_OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery_initWithNSString_withBoolean_withChar_(NSString *prefix, jboolean quoted, jchar truncator) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery *create_OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery_initWithNSString_withBoolean_withChar_(NSString *prefix, jboolean quoted, jchar truncator);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery")

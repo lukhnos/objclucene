@@ -5,100 +5,196 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_RESTRICT
-#define OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisStandardClassicTokenizerImpl")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisStandardClassicTokenizerImpl
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisStandardClassicTokenizerImpl 0
 #else
-#define OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisStandardClassicTokenizerImpl 1
 #endif
-#undef OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisStandardClassicTokenizerImpl
 
-#if !defined (_OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_) && (OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_INCLUDE_ALL || OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_INCLUDE)
-#define _OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_
+#if !defined (OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisStandardClassicTokenizerImpl || defined(INCLUDE_OrgApacheLuceneAnalysisStandardClassicTokenizerImpl))
+#define OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_
 
 @class IOSObjectArray;
 @class JavaIoReader;
 @protocol OrgApacheLuceneAnalysisTokenattributesCharTermAttribute;
 
-#define OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_YYEOF -1
-#define OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_YYINITIAL 0
-#define OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_ALPHANUM 0
-#define OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_APOSTROPHE 1
-#define OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_ACRONYM 2
-#define OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_COMPANY 3
-#define OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_EMAIL 4
-#define OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_HOST 5
-#define OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_NUM 6
-#define OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_CJ 7
-#define OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_ACRONYM_DEP 8
-
 @interface OrgApacheLuceneAnalysisStandardClassicTokenizerImpl : NSObject
+
++ (jint)YYEOF;
+
++ (jint)YYINITIAL;
+
++ (jint)ALPHANUM;
+
++ (jint)APOSTROPHE;
+
++ (jint)ACRONYM;
+
++ (jint)COMPANY;
+
++ (jint)EMAIL;
+
++ (jint)HOST;
+
++ (jint)NUM;
+
++ (jint)CJ;
+
++ (jint)ACRONYM_DEP;
+
++ (IOSObjectArray *)TOKEN_TYPES;
 
 #pragma mark Public
 
+/*!
+ @brief Resumes scanning until the next regular expression is matched,
+ the end of input is encountered or an I/O-Error occurs.
+ @return the next token
+ @exception java.io.IOException  if any I/O-Error occurs
+ */
 - (jint)getNextToken;
 
+/*!
+ @brief Fills CharTermAttribute with the current token text.
+ */
 - (void)getTextWithOrgApacheLuceneAnalysisTokenattributesCharTermAttribute:(id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)t;
 
 - (void)setBufferSizeWithInt:(jint)numChars;
 
+/*!
+ @brief Enters a new lexical state
+ @param newState the new lexical state
+ */
 - (void)yybeginWithInt:(jint)newState;
 
 - (jint)yychar;
 
+/*!
+ @brief Returns the character at position <tt>pos</tt> from the 
+ matched text.
+ It is equivalent to yytext().charAt(pos), but faster
+ @param pos the position of the character to fetch. 
+ A value from 0 to yylength()-1.
+ @return the character at position pos
+ */
 - (jchar)yycharatWithInt:(jint)pos;
 
+/*!
+ @brief Closes the input stream.
+ */
 - (void)yyclose;
 
+/*!
+ @brief Returns the length of the matched text region.
+ */
 - (jint)yylength;
 
+/*!
+ @brief Pushes the specified amount of characters back into the input stream.
+ They will be read again by then next call of the scanning method
+ @param number  the number of characters to be read again.
+ This number must not be greater than yylength()!
+ */
 - (void)yypushbackWithInt:(jint)number;
 
+/*!
+ @brief Resets the scanner to read from a new input stream.
+ Does not close the old reader.
+ All internal variables are reset, the old input stream 
+ <b>cannot</b> be reused (internal buffer is discarded and lost).
+ Lexical state is set to <tt>ZZ_INITIAL</tt>.
+ Internal scan buffer is resized down to its initial length, if it has grown.
+ @param reader   the new input stream
+ */
 - (void)yyresetWithJavaIoReader:(JavaIoReader *)reader;
 
+/*!
+ @brief Returns the current lexical state.
+ */
 - (jint)yystate;
 
+/*!
+ @brief Returns the text matched by the current regular expression.
+ */
 - (NSString *)yytext;
 
 #pragma mark Package-Private
 
+/*!
+ @brief Creates a new scanner
+ @param inArg  the java.io.Reader to read input from.
+ */
 - (instancetype)initWithJavaIoReader:(JavaIoReader *)inArg;
 
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisStandardClassicTokenizerImpl)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardClassicTokenizerImpl, YYEOF, jint)
+/*!
+ @brief This character denotes the end of file
+ */
+inline jint OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_get_YYEOF();
+#define OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_YYEOF -1
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardClassicTokenizerImpl, YYEOF, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardClassicTokenizerImpl, YYINITIAL, jint)
+/*!
+ @brief lexical states
+ */
+inline jint OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_get_YYINITIAL();
+#define OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_YYINITIAL 0
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardClassicTokenizerImpl, YYINITIAL, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardClassicTokenizerImpl, ALPHANUM, jint)
+inline jint OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_get_ALPHANUM();
+#define OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_ALPHANUM 0
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardClassicTokenizerImpl, ALPHANUM, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardClassicTokenizerImpl, APOSTROPHE, jint)
+inline jint OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_get_APOSTROPHE();
+#define OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_APOSTROPHE 1
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardClassicTokenizerImpl, APOSTROPHE, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardClassicTokenizerImpl, ACRONYM, jint)
+inline jint OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_get_ACRONYM();
+#define OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_ACRONYM 2
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardClassicTokenizerImpl, ACRONYM, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardClassicTokenizerImpl, COMPANY, jint)
+inline jint OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_get_COMPANY();
+#define OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_COMPANY 3
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardClassicTokenizerImpl, COMPANY, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardClassicTokenizerImpl, EMAIL, jint)
+inline jint OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_get_EMAIL();
+#define OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_EMAIL 4
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardClassicTokenizerImpl, EMAIL, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardClassicTokenizerImpl, HOST, jint)
+inline jint OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_get_HOST();
+#define OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_HOST 5
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardClassicTokenizerImpl, HOST, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardClassicTokenizerImpl, NUM, jint)
+inline jint OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_get_NUM();
+#define OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_NUM 6
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardClassicTokenizerImpl, NUM, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardClassicTokenizerImpl, CJ, jint)
+inline jint OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_get_CJ();
+#define OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_CJ 7
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardClassicTokenizerImpl, CJ, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardClassicTokenizerImpl, ACRONYM_DEP, jint)
+inline jint OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_get_ACRONYM_DEP();
+#define OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_ACRONYM_DEP 8
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardClassicTokenizerImpl, ACRONYM_DEP, jint)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_TOKEN_TYPES_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardClassicTokenizerImpl, TOKEN_TYPES_, IOSObjectArray *)
+inline IOSObjectArray *OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_get_TOKEN_TYPES();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_TOKEN_TYPES;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisStandardClassicTokenizerImpl, TOKEN_TYPES, IOSObjectArray *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_initWithJavaIoReader_(OrgApacheLuceneAnalysisStandardClassicTokenizerImpl *self, JavaIoReader *inArg);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardClassicTokenizerImpl *new_OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_initWithJavaIoReader_(JavaIoReader *inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardClassicTokenizerImpl *create_OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_initWithJavaIoReader_(JavaIoReader *inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisStandardClassicTokenizerImpl)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisStandardClassicTokenizerImpl")

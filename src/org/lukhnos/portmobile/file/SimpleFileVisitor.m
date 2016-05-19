@@ -12,24 +12,24 @@
 
 @implementation OrgLukhnosPortmobileFileSimpleFileVisitor
 
-- (OrgLukhnosPortmobileFileFileVisitResultEnum *)preVisitDirectoryWithId:(id)dir
-                withOrgLukhnosPortmobileFileAttributeBasicFileAttributes:(OrgLukhnosPortmobileFileAttributeBasicFileAttributes *)attrs {
-  return JreLoadStatic(OrgLukhnosPortmobileFileFileVisitResultEnum, CONTINUE);
+- (OrgLukhnosPortmobileFileFileVisitResult *)preVisitDirectoryWithId:(id)dir
+            withOrgLukhnosPortmobileFileAttributeBasicFileAttributes:(OrgLukhnosPortmobileFileAttributeBasicFileAttributes *)attrs {
+  return JreLoadEnum(OrgLukhnosPortmobileFileFileVisitResult, CONTINUE);
 }
 
-- (OrgLukhnosPortmobileFileFileVisitResultEnum *)visitFileWithId:(id)file
-        withOrgLukhnosPortmobileFileAttributeBasicFileAttributes:(OrgLukhnosPortmobileFileAttributeBasicFileAttributes *)attrs {
-  return JreLoadStatic(OrgLukhnosPortmobileFileFileVisitResultEnum, CONTINUE);
+- (OrgLukhnosPortmobileFileFileVisitResult *)visitFileWithId:(id)file
+    withOrgLukhnosPortmobileFileAttributeBasicFileAttributes:(OrgLukhnosPortmobileFileAttributeBasicFileAttributes *)attrs {
+  return JreLoadEnum(OrgLukhnosPortmobileFileFileVisitResult, CONTINUE);
 }
 
-- (OrgLukhnosPortmobileFileFileVisitResultEnum *)visitFileFailedWithId:(id)file
-                                                 withJavaIoIOException:(JavaIoIOException *)exc {
-  return JreLoadStatic(OrgLukhnosPortmobileFileFileVisitResultEnum, CONTINUE);
+- (OrgLukhnosPortmobileFileFileVisitResult *)visitFileFailedWithId:(id)file
+                                             withJavaIoIOException:(JavaIoIOException *)exc {
+  return JreLoadEnum(OrgLukhnosPortmobileFileFileVisitResult, CONTINUE);
 }
 
-- (OrgLukhnosPortmobileFileFileVisitResultEnum *)postVisitDirectoryWithId:(id)dir
-                                                    withJavaIoIOException:(JavaIoIOException *)exc {
-  return JreLoadStatic(OrgLukhnosPortmobileFileFileVisitResultEnum, CONTINUE);
+- (OrgLukhnosPortmobileFileFileVisitResult *)postVisitDirectoryWithId:(id)dir
+                                                withJavaIoIOException:(JavaIoIOException *)exc {
+  return JreLoadEnum(OrgLukhnosPortmobileFileFileVisitResult, CONTINUE);
 }
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -45,7 +45,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "visitFileWithId:withOrgLukhnosPortmobileFileAttributeBasicFileAttributes:", "visitFile", "Lorg.lukhnos.portmobile.file.FileVisitResult;", 0x1, "Ljava.io.IOException;", "(TT;Lorg/lukhnos/portmobile/file/attribute/BasicFileAttributes;)Lorg/lukhnos/portmobile/file/FileVisitResult;" },
     { "visitFileFailedWithId:withJavaIoIOException:", "visitFileFailed", "Lorg.lukhnos.portmobile.file.FileVisitResult;", 0x1, "Ljava.io.IOException;", "(TT;Ljava/io/IOException;)Lorg/lukhnos/portmobile/file/FileVisitResult;" },
     { "postVisitDirectoryWithId:withJavaIoIOException:", "postVisitDirectory", "Lorg.lukhnos.portmobile.file.FileVisitResult;", 0x1, "Ljava.io.IOException;", "(TT;Ljava/io/IOException;)Lorg/lukhnos/portmobile/file/FileVisitResult;" },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "SimpleFileVisitor", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgLukhnosPortmobileFileSimpleFileVisitor = { 2, "SimpleFileVisitor", "org.lukhnos.portmobile.file", NULL, 0x1, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;Lorg/lukhnos/portmobile/file/FileVisitor<TT;>;" };
   return &_OrgLukhnosPortmobileFileSimpleFileVisitor;
@@ -58,9 +58,11 @@ void OrgLukhnosPortmobileFileSimpleFileVisitor_init(OrgLukhnosPortmobileFileSimp
 }
 
 OrgLukhnosPortmobileFileSimpleFileVisitor *new_OrgLukhnosPortmobileFileSimpleFileVisitor_init() {
-  OrgLukhnosPortmobileFileSimpleFileVisitor *self = [OrgLukhnosPortmobileFileSimpleFileVisitor alloc];
-  OrgLukhnosPortmobileFileSimpleFileVisitor_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgLukhnosPortmobileFileSimpleFileVisitor, init)
+}
+
+OrgLukhnosPortmobileFileSimpleFileVisitor *create_OrgLukhnosPortmobileFileSimpleFileVisitor_init() {
+  J2OBJC_CREATE_IMPL(OrgLukhnosPortmobileFileSimpleFileVisitor, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileFileSimpleFileVisitor)

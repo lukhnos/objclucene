@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_INCLUDE_ALL")
-#if OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_RESTRICT
-#define OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl")
+#ifdef RESTRICT_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl
+#define INCLUDE_ALL_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl 0
 #else
-#define OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl 1
 #endif
-#undef OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl
 
-#if !defined (_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_) && (OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_INCLUDE_ALL || OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_INCLUDE)
-#define _OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_
+#if !defined (OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_) && (INCLUDE_ALL_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl || defined(INCLUDE_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl))
+#define OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_
 
-#define OrgApacheLuceneSearchGeoPointTermQuery_RESTRICT 1
-#define OrgApacheLuceneSearchGeoPointTermQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchGeoPointTermQuery 1
+#define INCLUDE_OrgApacheLuceneSearchGeoPointTermQuery 1
 #include "org/apache/lucene/search/GeoPointTermQuery.h"
 
 @class OrgApacheLuceneIndexTerms;
@@ -25,6 +25,9 @@
 @class OrgApacheLuceneSearchMultiTermQuery_RewriteMethod;
 @class OrgApacheLuceneUtilAttributeSource;
 
+/*!
+ @brief Package private implementation for the public facing GeoPointInBBoxQuery delegate class.
+ */
 @interface OrgApacheLuceneSearchGeoPointInBBoxQueryImpl : OrgApacheLuceneSearchGeoPointTermQuery
 
 #pragma mark Public
@@ -44,6 +47,15 @@
 
 #pragma mark Package-Private
 
+/*!
+ @brief Constructs a new GeoBBoxQuery that will match encoded GeoPoint terms that fall within or on the boundary
+ of the bounding box defined by the input parameters
+ @param field the field name
+ @param minLon lower longitude (x) value of the bounding box
+ @param minLat lower latitude (y) value of the bounding box
+ @param maxLon upper longitude (x) value of the bounding box
+ @param maxLat upper latitude (y) value of the bounding box
+ */
 - (instancetype)initWithNSString:(NSString *)field
                       withDouble:(jdouble)minLon
                       withDouble:(jdouble)minLat
@@ -58,15 +70,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_initWithNSSt
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *new_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_initWithNSString_withDouble_withDouble_withDouble_withDouble_(NSString *field, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *create_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_initWithNSString_withDouble_withDouble_withDouble_withDouble_(NSString *field, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchGeoPointInBBoxQueryImpl)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum_) && (OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_INCLUDE_ALL || OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum_INCLUDE)
-#define _OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum_
+#if !defined (OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum_) && (INCLUDE_ALL_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl || defined(INCLUDE_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum))
+#define OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum_
 
-#define OrgApacheLuceneSearchGeoPointTermsEnum_RESTRICT 1
-#define OrgApacheLuceneSearchGeoPointTermsEnum_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchGeoPointTermsEnum 1
+#define INCLUDE_OrgApacheLuceneSearchGeoPointTermsEnum 1
 #include "org/apache/lucene/search/GeoPointTermsEnum.h"
 
 @class OrgApacheLuceneIndexTermsEnum;
@@ -83,6 +97,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchGeoPointInBBoxQueryImpl)
                                                           withDouble:(jdouble)maxLon
                                                           withDouble:(jdouble)maxLat;
 
+/*!
+ @brief Determine whether the quad-cell crosses the shape
+ */
 - (jboolean)cellCrossesWithDouble:(jdouble)minLon
                        withDouble:(jdouble)minLat
                        withDouble:(jdouble)maxLon
@@ -93,6 +110,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchGeoPointInBBoxQueryImpl)
                                withDouble:(jdouble)maxLon
                                withDouble:(jdouble)maxLat;
 
+/*!
+ @brief Determine whether quad-cell is within the shape
+ */
 - (jboolean)cellWithinWithDouble:(jdouble)minLon
                       withDouble:(jdouble)minLat
                       withDouble:(jdouble)maxLon
@@ -109,8 +129,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBB
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum *new_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum_initWithOrgApacheLuceneSearchGeoPointInBBoxQueryImpl_withOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *outer$, OrgApacheLuceneIndexTermsEnum *tenum, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum *create_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum_initWithOrgApacheLuceneSearchGeoPointInBBoxQueryImpl_withOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *outer$, OrgApacheLuceneIndexTermsEnum *tenum, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl")

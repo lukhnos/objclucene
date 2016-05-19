@@ -22,10 +22,20 @@
 
 @interface OrgApacheLuceneIndexSnapshotDeletionPolicy () {
  @public
+  /*!
+   @brief Wrapped <code>IndexDeletionPolicy</code>
+   */
   OrgApacheLuceneIndexIndexDeletionPolicy *primary_;
+  /*!
+   @brief Used to detect misuse
+   */
   jboolean initCalled_;
 }
 
+/*!
+ @brief Wraps each <code>IndexCommit</code> as a <code>SnapshotCommitPoint</code>
+ .
+ */
 - (id<JavaUtilList>)wrapCommitsWithJavaUtilList:(id<JavaUtilList>)commits;
 
 @end
@@ -34,12 +44,23 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSnapshotDeletionPolicy, primary_, OrgApa
 
 __attribute__((unused)) static id<JavaUtilList> OrgApacheLuceneIndexSnapshotDeletionPolicy_wrapCommitsWithJavaUtilList_(OrgApacheLuceneIndexSnapshotDeletionPolicy *self, id<JavaUtilList> commits);
 
+/*!
+ @brief Wraps a provided <code>IndexCommit</code> and prevents it
+ from being deleted.
+ */
 @interface OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCommitPoint : OrgApacheLuceneIndexIndexCommit {
  @public
   OrgApacheLuceneIndexSnapshotDeletionPolicy *this$0_;
+  /*!
+   @brief The <code>IndexCommit</code> we are preventing from deletion.
+   */
   OrgApacheLuceneIndexIndexCommit *cp_;
 }
 
+/*!
+ @brief Creates a <code>SnapshotCommitPoint</code> wrapping the provided
+ <code>IndexCommit</code>.
+ */
 - (instancetype)initWithOrgApacheLuceneIndexSnapshotDeletionPolicy:(OrgApacheLuceneIndexSnapshotDeletionPolicy *)outer$
                                withOrgApacheLuceneIndexIndexCommit:(OrgApacheLuceneIndexIndexCommit *)cp;
 
@@ -72,6 +93,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSnapshotDeletionPolicy_S
 
 __attribute__((unused)) static OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCommitPoint *new_OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCommitPoint_initWithOrgApacheLuceneIndexSnapshotDeletionPolicy_withOrgApacheLuceneIndexIndexCommit_(OrgApacheLuceneIndexSnapshotDeletionPolicy *outer$, OrgApacheLuceneIndexIndexCommit *cp) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCommitPoint *create_OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCommitPoint_initWithOrgApacheLuceneIndexSnapshotDeletionPolicy_withOrgApacheLuceneIndexIndexCommit_(OrgApacheLuceneIndexSnapshotDeletionPolicy *outer$, OrgApacheLuceneIndexIndexCommit *cp);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCommitPoint)
 
 @implementation OrgApacheLuceneIndexSnapshotDeletionPolicy
@@ -84,7 +107,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCo
 - (void)onCommitWithJavaUtilList:(id<JavaUtilList>)commits {
   @synchronized(self) {
     [((OrgApacheLuceneIndexIndexDeletionPolicy *) nil_chk(primary_)) onCommitWithJavaUtilList:OrgApacheLuceneIndexSnapshotDeletionPolicy_wrapCommitsWithJavaUtilList_(self, commits)];
-    JreStrongAssign(&lastCommit_, [commits getWithInt:[((id<JavaUtilList>) nil_chk(commits)) size] - 1]);
+    JreStrongAssign(&lastCommit_, [((id<JavaUtilList>) nil_chk(commits)) getWithInt:[commits size] - 1]);
   }
 }
 
@@ -112,13 +135,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCo
 
 - (void)releaseGenWithLong:(jlong)gen {
   if (!initCalled_) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"this instance is not being used by IndexWriter; be sure to use the instance returned from writer.getConfig().getIndexDeletionPolicy()") autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"this instance is not being used by IndexWriter; be sure to use the instance returned from writer.getConfig().getIndexDeletionPolicy()");
   }
   JavaLangInteger *refCount = [((id<JavaUtilMap>) nil_chk(refCounts_)) getWithId:JavaLangLong_valueOfWithLong_(gen)];
   if (refCount == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$J$", @"commit gen=", gen, @" is not currently snapshotted")) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$J$", @"commit gen=", gen, @" is not currently snapshotted"));
   }
-  jint refCountInt = [((JavaLangInteger *) nil_chk(refCount)) intValue];
+  jint refCountInt = [refCount intValue];
   JreAssert((refCountInt > 0), (@"org/apache/lucene/index/SnapshotDeletionPolicy.java:113 condition failed: assert refCountInt > 0;"));
   refCountInt--;
   if (refCountInt == 0) {
@@ -149,10 +172,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCo
 - (OrgApacheLuceneIndexIndexCommit *)snapshot {
   @synchronized(self) {
     if (!initCalled_) {
-      @throw [new_JavaLangIllegalStateException_initWithNSString_(@"this instance is not being used by IndexWriter; be sure to use the instance returned from writer.getConfig().getIndexDeletionPolicy()") autorelease];
+      @throw create_JavaLangIllegalStateException_initWithNSString_(@"this instance is not being used by IndexWriter; be sure to use the instance returned from writer.getConfig().getIndexDeletionPolicy()");
     }
     if (lastCommit_ == nil) {
-      @throw [new_JavaLangIllegalStateException_initWithNSString_(@"No index commit to snapshot") autorelease];
+      @throw create_JavaLangIllegalStateException_initWithNSString_(@"No index commit to snapshot");
     }
     [self incRefWithOrgApacheLuceneIndexIndexCommit:lastCommit_];
     return lastCommit_;
@@ -161,7 +184,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCo
 
 - (id<JavaUtilList>)getSnapshots {
   @synchronized(self) {
-    return [new_JavaUtilArrayList_initWithJavaUtilCollection_([((id<JavaUtilMap>) nil_chk(indexCommits_)) values]) autorelease];
+    return create_JavaUtilArrayList_initWithJavaUtilCollection_([((id<JavaUtilMap>) nil_chk(indexCommits_)) values]);
   }
 }
 
@@ -196,16 +219,16 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCo
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneIndexIndexDeletionPolicy:", "SnapshotDeletionPolicy", NULL, 0x1, NULL, NULL },
-    { "onCommitWithJavaUtilList:", "onCommit", "V", 0x21, "Ljava.io.IOException;", NULL },
-    { "onInitWithJavaUtilList:", "onInit", "V", 0x21, "Ljava.io.IOException;", NULL },
+    { "onCommitWithJavaUtilList:", "onCommit", "V", 0x21, "Ljava.io.IOException;", "(Ljava/util/List<+Lorg/apache/lucene/index/IndexCommit;>;)V" },
+    { "onInitWithJavaUtilList:", "onInit", "V", 0x21, "Ljava.io.IOException;", "(Ljava/util/List<+Lorg/apache/lucene/index/IndexCommit;>;)V" },
     { "release__WithOrgApacheLuceneIndexIndexCommit:", "release", "V", 0x21, "Ljava.io.IOException;", NULL },
     { "releaseGenWithLong:", "releaseGen", "V", 0x4, "Ljava.io.IOException;", NULL },
     { "incRefWithOrgApacheLuceneIndexIndexCommit:", "incRef", "V", 0x24, NULL, NULL },
     { "snapshot", NULL, "Lorg.apache.lucene.index.IndexCommit;", 0x21, "Ljava.io.IOException;", NULL },
-    { "getSnapshots", NULL, "Ljava.util.List;", 0x21, NULL, NULL },
+    { "getSnapshots", NULL, "Ljava.util.List;", 0x21, NULL, "()Ljava/util/List<Lorg/apache/lucene/index/IndexCommit;>;" },
     { "getSnapshotCount", NULL, "I", 0x21, NULL, NULL },
     { "getIndexCommitWithLong:", "getIndexCommit", "Lorg.apache.lucene.index.IndexCommit;", 0x21, NULL, NULL },
-    { "wrapCommitsWithJavaUtilList:", "wrapCommits", "Ljava.util.List;", 0x2, NULL, NULL },
+    { "wrapCommitsWithJavaUtilList:", "wrapCommits", "Ljava.util.List;", 0x2, NULL, "(Ljava/util/List<+Lorg/apache/lucene/index/IndexCommit;>;)Ljava/util/List<Lorg/apache/lucene/index/IndexCommit;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "refCounts_", NULL, 0x14, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/Long;Ljava/lang/Integer;>;", .constantValue.asLong = 0 },
@@ -229,15 +252,17 @@ void OrgApacheLuceneIndexSnapshotDeletionPolicy_initWithOrgApacheLuceneIndexInde
 }
 
 OrgApacheLuceneIndexSnapshotDeletionPolicy *new_OrgApacheLuceneIndexSnapshotDeletionPolicy_initWithOrgApacheLuceneIndexIndexDeletionPolicy_(OrgApacheLuceneIndexIndexDeletionPolicy *primary) {
-  OrgApacheLuceneIndexSnapshotDeletionPolicy *self = [OrgApacheLuceneIndexSnapshotDeletionPolicy alloc];
-  OrgApacheLuceneIndexSnapshotDeletionPolicy_initWithOrgApacheLuceneIndexIndexDeletionPolicy_(self, primary);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSnapshotDeletionPolicy, initWithOrgApacheLuceneIndexIndexDeletionPolicy_, primary)
+}
+
+OrgApacheLuceneIndexSnapshotDeletionPolicy *create_OrgApacheLuceneIndexSnapshotDeletionPolicy_initWithOrgApacheLuceneIndexIndexDeletionPolicy_(OrgApacheLuceneIndexIndexDeletionPolicy *primary) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSnapshotDeletionPolicy, initWithOrgApacheLuceneIndexIndexDeletionPolicy_, primary)
 }
 
 id<JavaUtilList> OrgApacheLuceneIndexSnapshotDeletionPolicy_wrapCommitsWithJavaUtilList_(OrgApacheLuceneIndexSnapshotDeletionPolicy *self, id<JavaUtilList> commits) {
-  id<JavaUtilList> wrappedCommits = [new_JavaUtilArrayList_initWithInt_([((id<JavaUtilList>) nil_chk(commits)) size]) autorelease];
+  id<JavaUtilList> wrappedCommits = create_JavaUtilArrayList_initWithInt_([((id<JavaUtilList>) nil_chk(commits)) size]);
   for (OrgApacheLuceneIndexIndexCommit * __strong ic in commits) {
-    [wrappedCommits addWithId:[new_OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCommitPoint_initWithOrgApacheLuceneIndexSnapshotDeletionPolicy_withOrgApacheLuceneIndexIndexCommit_(self, ic) autorelease]];
+    [wrappedCommits addWithId:create_OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCommitPoint_initWithOrgApacheLuceneIndexSnapshotDeletionPolicy_withOrgApacheLuceneIndexIndexCommit_(self, ic)];
   }
   return wrappedCommits;
 }
@@ -259,7 +284,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSnapshotDeletionPolicy)
 - (void)delete__ {
   @synchronized(this$0_) {
     if (![((id<JavaUtilMap>) nil_chk(this$0_->refCounts_)) containsKeyWithId:JavaLangLong_valueOfWithLong_([((OrgApacheLuceneIndexIndexCommit *) nil_chk(cp_)) getGeneration])]) {
-      [cp_ delete__];
+      [((OrgApacheLuceneIndexIndexCommit *) nil_chk(cp_)) delete__];
     }
   }
 }
@@ -304,10 +329,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSnapshotDeletionPolicy)
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "delete__", "delete", "V", 0x1, NULL, NULL },
     { "getDirectory", NULL, "Lorg.apache.lucene.store.Directory;", 0x1, NULL, NULL },
-    { "getFileNames", NULL, "Ljava.util.Collection;", 0x1, "Ljava.io.IOException;", NULL },
+    { "getFileNames", NULL, "Ljava.util.Collection;", 0x1, "Ljava.io.IOException;", "()Ljava/util/Collection<Ljava/lang/String;>;" },
     { "getGeneration", NULL, "J", 0x1, NULL, NULL },
     { "getSegmentsFileName", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getUserData", NULL, "Ljava.util.Map;", 0x1, "Ljava.io.IOException;", NULL },
+    { "getUserData", NULL, "Ljava.util.Map;", 0x1, "Ljava.io.IOException;", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;" },
     { "isDeleted", NULL, "Z", 0x1, NULL, NULL },
     { "getSegmentCount", NULL, "I", 0x1, NULL, NULL },
   };
@@ -328,9 +353,11 @@ void OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCommitPoint_initWithOrgA
 }
 
 OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCommitPoint *new_OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCommitPoint_initWithOrgApacheLuceneIndexSnapshotDeletionPolicy_withOrgApacheLuceneIndexIndexCommit_(OrgApacheLuceneIndexSnapshotDeletionPolicy *outer$, OrgApacheLuceneIndexIndexCommit *cp) {
-  OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCommitPoint *self = [OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCommitPoint alloc];
-  OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCommitPoint_initWithOrgApacheLuceneIndexSnapshotDeletionPolicy_withOrgApacheLuceneIndexIndexCommit_(self, outer$, cp);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCommitPoint, initWithOrgApacheLuceneIndexSnapshotDeletionPolicy_withOrgApacheLuceneIndexIndexCommit_, outer$, cp)
+}
+
+OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCommitPoint *create_OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCommitPoint_initWithOrgApacheLuceneIndexSnapshotDeletionPolicy_withOrgApacheLuceneIndexIndexCommit_(OrgApacheLuceneIndexSnapshotDeletionPolicy *outer$, OrgApacheLuceneIndexIndexCommit *cp) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCommitPoint, initWithOrgApacheLuceneIndexSnapshotDeletionPolicy_withOrgApacheLuceneIndexIndexCommit_, outer$, cp)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCommitPoint)

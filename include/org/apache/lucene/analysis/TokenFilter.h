@@ -5,36 +5,69 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisTokenFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisTokenFilter_RESTRICT
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisTokenFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTokenFilter 0
 #else
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTokenFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisTokenFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisTokenFilter
 
-#if !defined (_OrgApacheLuceneAnalysisTokenFilter_) && (OrgApacheLuceneAnalysisTokenFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisTokenFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisTokenFilter_
+#if !defined (OrgApacheLuceneAnalysisTokenFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenFilter || defined(INCLUDE_OrgApacheLuceneAnalysisTokenFilter))
+#define OrgApacheLuceneAnalysisTokenFilter_
 
-#define OrgApacheLuceneAnalysisTokenStream_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenStream_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenStream 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenStream 1
 #include "org/apache/lucene/analysis/TokenStream.h"
 
+/*!
+ @brief A TokenFilter is a TokenStream whose input is another TokenStream.
+ <p>
+ This is an abstract class; subclasses must override <code>incrementToken()</code>.
+ - seealso: TokenStream
+ */
 @interface OrgApacheLuceneAnalysisTokenFilter : OrgApacheLuceneAnalysisTokenStream {
  @public
+  /*!
+   @brief The source of tokens for this filter.
+   */
   OrgApacheLuceneAnalysisTokenStream *input_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief 
+ <p>
+ <b>NOTE:</b> 
+ The default implementation chains the call to the input TokenStream, so
+ be sure to call <code>super.close()</code> when overriding this method.
+ */
 - (void)close;
 
+/*!
+ @brief 
+ <p> 
+ <b>NOTE:</b> 
+ The default implementation chains the call to the input TokenStream, so
+ be sure to call <code>super.end()</code> first when overriding this method.
+ */
 - (void)end;
 
+/*!
+ @brief 
+ <p>
+ <b>NOTE:</b> 
+ The default implementation chains the call to the input TokenStream, so
+ be sure to call <code>super.reset()</code> when overriding this method.
+ */
 - (void)reset;
 
 #pragma mark Protected
 
+/*!
+ @brief Construct a token stream filtering the given input.
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
 @end
@@ -49,4 +82,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisTokenFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenFilter")

@@ -3,14 +3,20 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/surround/parser/package-info.java
 //
 
+/*!
+ @brief This package contains the QueryParser.jj source file for the Surround parser.
+ <p>
+ Parsing the text of a query results in a SrndQuery in the
+ org.apache.lucene.queryparser.surround.query package.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserSurroundParserPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserSurroundParserPackage_info_RESTRICT
-#define OrgApacheLuceneQueryparserSurroundParserPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundParserPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserSurroundParserPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundParserPackage_info 0
 #else
-#define OrgApacheLuceneQueryparserSurroundParserPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundParserPackage_info 1
 #endif
-#undef OrgApacheLuceneQueryparserSurroundParserPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserSurroundParserPackage_info
 
-#pragma pop_macro("OrgApacheLuceneQueryparserSurroundParserPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundParserPackage_info")

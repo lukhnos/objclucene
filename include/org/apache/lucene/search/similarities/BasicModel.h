@@ -5,32 +5,60 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSimilaritiesBasicModel_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSimilaritiesBasicModel_RESTRICT
-#define OrgApacheLuceneSearchSimilaritiesBasicModel_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicModel")
+#ifdef RESTRICT_OrgApacheLuceneSearchSimilaritiesBasicModel
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicModel 0
 #else
-#define OrgApacheLuceneSearchSimilaritiesBasicModel_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicModel 1
 #endif
-#undef OrgApacheLuceneSearchSimilaritiesBasicModel_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSimilaritiesBasicModel
 
-#if !defined (_OrgApacheLuceneSearchSimilaritiesBasicModel_) && (OrgApacheLuceneSearchSimilaritiesBasicModel_INCLUDE_ALL || OrgApacheLuceneSearchSimilaritiesBasicModel_INCLUDE)
-#define _OrgApacheLuceneSearchSimilaritiesBasicModel_
+#if !defined (OrgApacheLuceneSearchSimilaritiesBasicModel_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicModel || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesBasicModel))
+#define OrgApacheLuceneSearchSimilaritiesBasicModel_
 
 @class OrgApacheLuceneSearchExplanation;
 @class OrgApacheLuceneSearchSimilaritiesBasicStats;
 
+/*!
+ @brief This class acts as the base class for the specific <em>basic model</em>
+ implementations in the DFR framework.
+ Basic models compute the
+ <em>informative content Inf<sub>1</sub> = -log<sub>2</sub>Prob<sub>1</sub>
+ </em>.
+ - seealso: DFRSimilarity
+ */
 @interface OrgApacheLuceneSearchSimilaritiesBasicModel : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ (For invocation by subclass 
+ constructors, typically implicit.)
+ */
 - (instancetype)init;
 
+/*!
+ @brief Returns an explanation for the score.
+ <p>Most basic models use the number of documents and the total term
+ frequency to compute Inf<sub>1</sub>. This method provides a generic
+ explanation for such models. Subclasses that use other statistics must
+ override this method.</p>
+ */
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
                                                                                    withFloat:(jfloat)tfn;
 
+/*!
+ @brief Returns the informative content score.
+ */
 - (jfloat)scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
                                                      withFloat:(jfloat)tfn;
 
+/*!
+ @brief Subclasses must override this method to return the code of the
+ basic model formula.
+ Refer to the original paper for the list. 
+ */
 - (NSString *)description;
 
 @end
@@ -43,4 +71,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesBasicModel)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSimilaritiesBasicModel_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicModel")

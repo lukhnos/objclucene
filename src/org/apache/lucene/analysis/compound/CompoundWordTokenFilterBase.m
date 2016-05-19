@@ -31,6 +31,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase, 
 
 @implementation OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase
 
++ (jint)DEFAULT_MIN_WORD_SIZE {
+  return OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_DEFAULT_MIN_WORD_SIZE;
+}
+
++ (jint)DEFAULT_MIN_SUBWORD_SIZE {
+  return OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_DEFAULT_MIN_SUBWORD_SIZE;
+}
+
++ (jint)DEFAULT_MAX_SUBWORD_SIZE {
+  return OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_DEFAULT_MAX_SUBWORD_SIZE;
+}
+
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
                withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)dictionary
                                                withBoolean:(jboolean)onlyLongestMatch {
@@ -146,15 +158,15 @@ void OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_initWithOrgApach
   JreStrongAssign(&self->posIncAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_class_()]);
   JreStrongAssignAndConsume(&self->tokens_, new_JavaUtilLinkedList_init());
   if (minWordSize < 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"minWordSize cannot be negative") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"minWordSize cannot be negative");
   }
   self->minWordSize_ = minWordSize;
   if (minSubwordSize < 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"minSubwordSize cannot be negative") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"minSubwordSize cannot be negative");
   }
   self->minSubwordSize_ = minSubwordSize;
   if (maxSubwordSize < 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"maxSubwordSize cannot be negative") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"maxSubwordSize cannot be negative");
   }
   self->maxSubwordSize_ = maxSubwordSize;
   self->onlyLongestMatch_ = onlyLongestMatch;
@@ -200,9 +212,11 @@ void OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_CompoundToken_in
 }
 
 OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_CompoundToken *new_OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_CompoundToken_initWithOrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_withInt_withInt_(OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase *outer$, jint offset, jint length) {
-  OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_CompoundToken *self = [OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_CompoundToken alloc];
-  OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_CompoundToken_initWithOrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_withInt_withInt_(self, outer$, offset, length);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_CompoundToken, initWithOrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_withInt_withInt_, outer$, offset, length)
+}
+
+OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_CompoundToken *create_OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_CompoundToken_initWithOrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_withInt_withInt_(OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase *outer$, jint offset, jint length) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_CompoundToken, initWithOrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_withInt_withInt_, outer$, offset, length)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_CompoundToken)

@@ -25,6 +25,9 @@
   IOSClass *clazz_;
 }
 
+/*!
+ @brief Checks whether a character is a letter or digit (ascii) which are defined in the spec.
+ */
 + (jboolean)isLetterOrDigitWithChar:(jchar)c;
 
 @end
@@ -52,7 +55,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilNamedSPILoader_isLett
 }
 
 - (void)reloadWithJavaLangClassLoader:(JavaLangClassLoader *)classloader {
-  JavaUtilLinkedHashMap *services = [new_JavaUtilLinkedHashMap_initWithJavaUtilMap_(JreLoadVolatileId(&self->services_)) autorelease];
+  JavaUtilLinkedHashMap *services = create_JavaUtilLinkedHashMap_initWithJavaUtilMap_(JreLoadVolatileId(&self->services_));
   OrgApacheLuceneUtilSPIClassIterator *loader = OrgApacheLuceneUtilSPIClassIterator_getWithIOSClass_withJavaLangClassLoader_(clazz_, classloader);
   while ([((OrgApacheLuceneUtilSPIClassIterator *) nil_chk(loader)) hasNext]) {
     IOSClass *c = [loader next];
@@ -65,7 +68,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilNamedSPILoader_isLett
       }
     }
     @catch (JavaLangException *e) {
-      @throw [new_JavaUtilServiceConfigurationError_initWithNSString_withJavaLangThrowable_(JreStrcat("$$", @"Cannot instantiate SPI class: ", [((IOSClass *) nil_chk(c)) getName]), e) autorelease];
+      @throw create_JavaUtilServiceConfigurationError_initWithNSString_withNSException_(JreStrcat("$$", @"Cannot instantiate SPI class: ", [c getName]), e);
     }
   }
   JreVolatileStrongAssign(&self->services_, JavaUtilCollections_unmodifiableMapWithJavaUtilMap_(services));
@@ -82,7 +85,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilNamedSPILoader_isLett
 - (id)lookupWithNSString:(NSString *)name {
   id<OrgApacheLuceneUtilNamedSPILoader_NamedSPI> service = [((id<JavaUtilMap>) nil_chk(JreLoadVolatileId(&services_))) getWithId:name];
   if (service != nil) return service;
-  @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$$$@", @"An SPI class of type ", [((IOSClass *) nil_chk(clazz_)) getName], @" with name '", name, @"' does not exist.  You need to add the corresponding JAR file supporting this SPI to your classpath.  The current classpath supports the following names: ", [self availableServices])) autorelease];
+  @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$$$@", @"An SPI class of type ", [((IOSClass *) nil_chk(clazz_)) getName], @" with name '", name, @"' does not exist.  You need to add the corresponding JAR file supporting this SPI to your classpath.  The current classpath supports the following names: ", [self availableServices]));
 }
 
 - (id<JavaUtilSet>)availableServices {
@@ -93,31 +96,31 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilNamedSPILoader_isLett
   return [((id<JavaUtilCollection>) nil_chk([((id<JavaUtilMap>) nil_chk(JreLoadVolatileId(&services_))) values])) iterator];
 }
 
-- (void)dealloc {
-  JreReleaseVolatile(&services_);
-  RELEASE_(clazz_);
-  [super dealloc];
-}
-
-- (void)__javaClone {
-  [super __javaClone];
-  JreRetainVolatile(&services_);
+- (void)__javaClone:(OrgApacheLuceneUtilNamedSPILoader *)original {
+  [super __javaClone:original];
+  JreCloneVolatileStrong(&services_, &original->services_);
 }
 
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
   return JreDefaultFastEnumeration(self, state, stackbuf, len);
 }
 
+- (void)dealloc {
+  JreReleaseVolatile(&services_);
+  RELEASE_(clazz_);
+  [super dealloc];
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithIOSClass:", "NamedSPILoader", NULL, 0x1, NULL, NULL },
-    { "initWithIOSClass:withJavaLangClassLoader:", "NamedSPILoader", NULL, 0x1, NULL, NULL },
+    { "initWithIOSClass:", "NamedSPILoader", NULL, 0x1, NULL, "(Ljava/lang/Class<TS;>;)V" },
+    { "initWithIOSClass:withJavaLangClassLoader:", "NamedSPILoader", NULL, 0x1, NULL, "(Ljava/lang/Class<TS;>;Ljava/lang/ClassLoader;)V" },
     { "reloadWithJavaLangClassLoader:", "reload", "V", 0x1, NULL, NULL },
     { "checkServiceNameWithNSString:", "checkServiceName", "V", 0x9, NULL, NULL },
     { "isLetterOrDigitWithChar:", "isLetterOrDigit", "Z", 0xa, NULL, NULL },
     { "lookupWithNSString:", "lookup", "TS;", 0x1, NULL, "(Ljava/lang/String;)TS;" },
-    { "availableServices", NULL, "Ljava.util.Set;", 0x1, NULL, NULL },
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, NULL },
+    { "availableServices", NULL, "Ljava.util.Set;", 0x1, NULL, "()Ljava/util/Set<Ljava/lang/String;>;" },
+    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<TS;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "services_", NULL, 0x42, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;TS;>;", .constantValue.asLong = 0 },
@@ -135,9 +138,11 @@ void OrgApacheLuceneUtilNamedSPILoader_initWithIOSClass_(OrgApacheLuceneUtilName
 }
 
 OrgApacheLuceneUtilNamedSPILoader *new_OrgApacheLuceneUtilNamedSPILoader_initWithIOSClass_(IOSClass *clazz) {
-  OrgApacheLuceneUtilNamedSPILoader *self = [OrgApacheLuceneUtilNamedSPILoader alloc];
-  OrgApacheLuceneUtilNamedSPILoader_initWithIOSClass_(self, clazz);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilNamedSPILoader, initWithIOSClass_, clazz)
+}
+
+OrgApacheLuceneUtilNamedSPILoader *create_OrgApacheLuceneUtilNamedSPILoader_initWithIOSClass_(IOSClass *clazz) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilNamedSPILoader, initWithIOSClass_, clazz)
 }
 
 void OrgApacheLuceneUtilNamedSPILoader_initWithIOSClass_withJavaLangClassLoader_(OrgApacheLuceneUtilNamedSPILoader *self, IOSClass *clazz, JavaLangClassLoader *classloader) {
@@ -152,20 +157,22 @@ void OrgApacheLuceneUtilNamedSPILoader_initWithIOSClass_withJavaLangClassLoader_
 }
 
 OrgApacheLuceneUtilNamedSPILoader *new_OrgApacheLuceneUtilNamedSPILoader_initWithIOSClass_withJavaLangClassLoader_(IOSClass *clazz, JavaLangClassLoader *classloader) {
-  OrgApacheLuceneUtilNamedSPILoader *self = [OrgApacheLuceneUtilNamedSPILoader alloc];
-  OrgApacheLuceneUtilNamedSPILoader_initWithIOSClass_withJavaLangClassLoader_(self, clazz, classloader);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilNamedSPILoader, initWithIOSClass_withJavaLangClassLoader_, clazz, classloader)
+}
+
+OrgApacheLuceneUtilNamedSPILoader *create_OrgApacheLuceneUtilNamedSPILoader_initWithIOSClass_withJavaLangClassLoader_(IOSClass *clazz, JavaLangClassLoader *classloader) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilNamedSPILoader, initWithIOSClass_withJavaLangClassLoader_, clazz, classloader)
 }
 
 void OrgApacheLuceneUtilNamedSPILoader_checkServiceNameWithNSString_(NSString *name) {
   OrgApacheLuceneUtilNamedSPILoader_initialize();
   if (((jint) [((NSString *) nil_chk(name)) length]) >= 128) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"Illegal service name: '", name, @"' is too long (must be < 128 chars).")) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"Illegal service name: '", name, @"' is too long (must be < 128 chars)."));
   }
   for (jint i = 0, len = ((jint) [name length]); i < len; i++) {
     jchar c = [name charAtWithInt:i];
     if (!OrgApacheLuceneUtilNamedSPILoader_isLetterOrDigitWithChar_(c)) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"Illegal service name: '", name, @"' must be simple ascii alphanumeric.")) autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"Illegal service name: '", name, @"' must be simple ascii alphanumeric."));
     }
   }
 }

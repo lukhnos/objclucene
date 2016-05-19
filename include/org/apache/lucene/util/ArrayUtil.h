@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilArrayUtil_INCLUDE_ALL")
-#if OrgApacheLuceneUtilArrayUtil_RESTRICT
-#define OrgApacheLuceneUtilArrayUtil_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilArrayUtil")
+#ifdef RESTRICT_OrgApacheLuceneUtilArrayUtil
+#define INCLUDE_ALL_OrgApacheLuceneUtilArrayUtil 0
 #else
-#define OrgApacheLuceneUtilArrayUtil_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilArrayUtil 1
 #endif
-#undef OrgApacheLuceneUtilArrayUtil_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilArrayUtil
 
-#if !defined (_OrgApacheLuceneUtilArrayUtil_) && (OrgApacheLuceneUtilArrayUtil_INCLUDE_ALL || OrgApacheLuceneUtilArrayUtil_INCLUDE)
-#define _OrgApacheLuceneUtilArrayUtil_
+#if !defined (OrgApacheLuceneUtilArrayUtil_) && (INCLUDE_ALL_OrgApacheLuceneUtilArrayUtil || defined(INCLUDE_OrgApacheLuceneUtilArrayUtil))
+#define OrgApacheLuceneUtilArrayUtil_
 
 @class IOSBooleanArray;
 @class IOSByteArray;
@@ -28,22 +28,57 @@
 @protocol JavaUtilCollection;
 @protocol JavaUtilComparator;
 
+/*!
+ @brief Methods for manipulating arrays.
+ */
 @interface OrgApacheLuceneUtilArrayUtil : NSObject
+
++ (jint)MAX_ARRAY_LENGTH;
 
 #pragma mark Public
 
+/*!
+ @brief See if two array slices are the same.
+ @param left        The left array to compare
+ @param offsetLeft  The offset into the array.  Must be positive
+ @param right       The right array to compare
+ @param offsetRight the offset into the right array.  Must be positive
+ @param length      The length of the section of the array to compare
+ @return true if the two arrays, starting at their respective offsets, are equal
+ - seealso: java.util.Arrays#equals(byte[],byte[])
+ */
 + (jboolean)equalsWithByteArray:(IOSByteArray *)left
                         withInt:(jint)offsetLeft
                   withByteArray:(IOSByteArray *)right
                         withInt:(jint)offsetRight
                         withInt:(jint)length;
 
+/*!
+ @brief See if two array slices are the same.
+ @param left        The left array to compare
+ @param offsetLeft  The offset into the array.  Must be positive
+ @param right       The right array to compare
+ @param offsetRight the offset into the right array.  Must be positive
+ @param length      The length of the section of the array to compare
+ @return true if the two arrays, starting at their respective offsets, are equal
+ - seealso: java.util.Arrays#equals(char[],char[])
+ */
 + (jboolean)equalsWithCharArray:(IOSCharArray *)left
                         withInt:(jint)offsetLeft
                   withCharArray:(IOSCharArray *)right
                         withInt:(jint)offsetRight
                         withInt:(jint)length;
 
+/*!
+ @brief See if two array slices are the same.
+ @param left        The left array to compare
+ @param offsetLeft  The offset into the array.  Must be positive
+ @param right       The right array to compare
+ @param offsetRight the offset into the right array.  Must be positive
+ @param length      The length of the section of the array to compare
+ @return true if the two arrays, starting at their respective offsets, are equal
+ - seealso: java.util.Arrays#equals(char[],char[])
+ */
 + (jboolean)equalsWithIntArray:(IOSIntArray *)left
                        withInt:(jint)offsetLeft
                   withIntArray:(IOSIntArray *)right
@@ -107,39 +142,116 @@
 + (IOSObjectArray *)growWithNSObjectArray:(IOSObjectArray *)array
                                   withInt:(jint)minSize;
 
+/*!
+ @brief Returns hash of bytes in range start (inclusive) to
+ end (inclusive)
+ */
 + (jint)hashCodeWithByteArray:(IOSByteArray *)array
                       withInt:(jint)start
                       withInt:(jint)end;
 
+/*!
+ @brief Returns hash of chars in range start (inclusive) to
+ end (inclusive)
+ */
 + (jint)hashCodeWithCharArray:(IOSCharArray *)array
                       withInt:(jint)start
                       withInt:(jint)end;
 
+/*!
+ @brief Sorts the given array in natural order.
+ This method uses the intro sort
+ algorithm, but falls back to insertion sort for small arrays.
+ */
 + (void)introSortWithJavaLangComparableArray:(IOSObjectArray *)a;
 
+/*!
+ @brief Sorts the given array using the <code>Comparator</code>.
+ This method uses the intro sort
+ algorithm, but falls back to insertion sort for small arrays.
+ */
 + (void)introSortWithNSObjectArray:(IOSObjectArray *)a
             withJavaUtilComparator:(id<JavaUtilComparator>)comp;
 
+/*!
+ @brief Sorts the given array slice in natural order.
+ This method uses the intro sort
+ algorithm, but falls back to insertion sort for small arrays.
+ @param fromIndex start index (inclusive)
+ @param toIndex end index (exclusive)
+ */
 + (void)introSortWithJavaLangComparableArray:(IOSObjectArray *)a
                                      withInt:(jint)fromIndex
                                      withInt:(jint)toIndex;
 
+/*!
+ @brief Sorts the given array slice using the <code>Comparator</code>.
+ This method uses the intro sort
+ algorithm, but falls back to insertion sort for small arrays.
+ @param fromIndex start index (inclusive)
+ @param toIndex end index (exclusive)
+ */
 + (void)introSortWithNSObjectArray:(IOSObjectArray *)a
                            withInt:(jint)fromIndex
                            withInt:(jint)toIndex
             withJavaUtilComparator:(id<JavaUtilComparator>)comp;
 
+/*!
+ @brief Get the natural <code>Comparator</code> for the provided object class.
+ */
 + (id<JavaUtilComparator>)naturalComparator;
 
+/*!
+ @brief Returns an array size &gt;= minTargetSize, generally
+ over-allocating exponentially to achieve amortized
+ linear-time cost as the array grows.
+ NOTE: this was originally borrowed from Python 2.4.2
+ listobject.c sources (attribution in LICENSE.txt), but
+ has now been substantially changed based on
+ discussions from java-dev thread with subject "Dynamic
+ array reallocation algorithms", started on Jan 12
+ 2010.
+ @param minTargetSize Minimum required value to be returned.
+ @param bytesPerElement Bytes used by each element of
+ the array.  See constants in <code>RamUsageEstimator</code>.
+ */
 + (jint)oversizeWithInt:(jint)minTargetSize
                 withInt:(jint)bytesPerElement;
 
+/*!
+ @brief Parses the string argument as if it was an int value and returns the
+ result.
+ Throws NumberFormatException if the string does not represent an
+ int quantity.
+ @param chars a string representation of an int quantity.
+ @return int the value represented by the argument
+ @throws NumberFormatException if the argument could not be parsed as an int quantity.
+ */
 + (jint)parseIntWithCharArray:(IOSCharArray *)chars;
 
+/*!
+ @brief Parses a char array into an int.
+ @param chars the character array
+ @param offset The offset into the array
+ @param len The length
+ @return the int
+ @throws NumberFormatException if it can't parse
+ */
 + (jint)parseIntWithCharArray:(IOSCharArray *)chars
                       withInt:(jint)offset
                       withInt:(jint)len;
 
+/*!
+ @brief Parses the string argument as if it was an int value and returns the
+ result.
+ Throws NumberFormatException if the string does not represent an
+ int quantity. The second argument specifies the radix to use when parsing
+ the value.
+ @param chars a string representation of an int quantity.
+ @param radix the base to use for conversion.
+ @return int the value represented by the argument
+ @throws NumberFormatException if the argument could not be parsed as an int quantity.
+ */
 + (jint)parseIntWithCharArray:(IOSCharArray *)chars
                       withInt:(jint)offset
                       withInt:(jint)len
@@ -169,19 +281,46 @@
 + (IOSShortArray *)shrinkWithShortArray:(IOSShortArray *)array
                                 withInt:(jint)targetSize;
 
+/*!
+ @brief Swap values stored in slots <code>i</code> and <code>j</code>
+ */
 + (void)swapWithNSObjectArray:(IOSObjectArray *)arr
                       withInt:(jint)i
                       withInt:(jint)j;
 
+/*!
+ @brief Sorts the given array in natural order.
+ This method uses the Tim sort
+ algorithm, but falls back to binary sort for small arrays.
+ */
 + (void)timSortWithJavaLangComparableArray:(IOSObjectArray *)a;
 
+/*!
+ @brief Sorts the given array using the <code>Comparator</code>.
+ This method uses the Tim sort
+ algorithm, but falls back to binary sort for small arrays.
+ */
 + (void)timSortWithNSObjectArray:(IOSObjectArray *)a
           withJavaUtilComparator:(id<JavaUtilComparator>)comp;
 
+/*!
+ @brief Sorts the given array slice in natural order.
+ This method uses the Tim sort
+ algorithm, but falls back to binary sort for small arrays.
+ @param fromIndex start index (inclusive)
+ @param toIndex end index (exclusive)
+ */
 + (void)timSortWithJavaLangComparableArray:(IOSObjectArray *)a
                                    withInt:(jint)fromIndex
                                    withInt:(jint)toIndex;
 
+/*!
+ @brief Sorts the given array slice using the <code>Comparator</code>.
+ This method uses the Tim sort
+ algorithm, but falls back to binary sort for small arrays.
+ @param fromIndex start index (inclusive)
+ @param toIndex end index (exclusive)
+ */
 + (void)timSortWithNSObjectArray:(IOSObjectArray *)a
                          withInt:(jint)fromIndex
                          withInt:(jint)toIndex
@@ -193,8 +332,13 @@
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilArrayUtil)
 
-FOUNDATION_EXPORT jint OrgApacheLuceneUtilArrayUtil_MAX_ARRAY_LENGTH_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilArrayUtil, MAX_ARRAY_LENGTH_, jint)
+/*!
+ @brief Maximum length for an array (Integer.MAX_VALUE - RamUsageEstimator.NUM_BYTES_ARRAY_HEADER).
+ */
+inline jint OrgApacheLuceneUtilArrayUtil_get_MAX_ARRAY_LENGTH();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT jint OrgApacheLuceneUtilArrayUtil_MAX_ARRAY_LENGTH;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilArrayUtil, MAX_ARRAY_LENGTH, jint)
 
 FOUNDATION_EXPORT jint OrgApacheLuceneUtilArrayUtil_parseIntWithCharArray_(IOSCharArray *chars);
 
@@ -300,4 +444,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilArrayUtil)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilArrayUtil_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilArrayUtil")

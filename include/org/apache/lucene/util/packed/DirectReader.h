@@ -5,26 +5,45 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilPackedDirectReader_INCLUDE_ALL")
-#if OrgApacheLuceneUtilPackedDirectReader_RESTRICT
-#define OrgApacheLuceneUtilPackedDirectReader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedDirectReader")
+#ifdef RESTRICT_OrgApacheLuceneUtilPackedDirectReader
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackedDirectReader 0
 #else
-#define OrgApacheLuceneUtilPackedDirectReader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackedDirectReader 1
 #endif
-#undef OrgApacheLuceneUtilPackedDirectReader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilPackedDirectReader
 
-#if !defined (_OrgApacheLuceneUtilPackedDirectReader_) && (OrgApacheLuceneUtilPackedDirectReader_INCLUDE_ALL || OrgApacheLuceneUtilPackedDirectReader_INCLUDE)
-#define _OrgApacheLuceneUtilPackedDirectReader_
+#if !defined (OrgApacheLuceneUtilPackedDirectReader_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedDirectReader || defined(INCLUDE_OrgApacheLuceneUtilPackedDirectReader))
+#define OrgApacheLuceneUtilPackedDirectReader_
 
 @class OrgApacheLuceneUtilLongValues;
 @protocol OrgApacheLuceneStoreRandomAccessInput;
 
+/*!
+ @brief Retrieves an instance previously written by <code>DirectWriter</code> 
+ <p>
+ Example usage:
+ <pre class="prettyprint">
+ int bitsPerValue = 100;
+ IndexInput in = dir.openInput("packed", IOContext.DEFAULT);
+ LongValues values = DirectReader.getInstance(in.randomAccessSlice(start, end), bitsPerValue);
+ for (int i = 0; i &lt; numValues; i++) {
+ long value = values.get(i);
+ }
+ 
+@endcode
+ - seealso: DirectWriter
+ */
 @interface OrgApacheLuceneUtilPackedDirectReader : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @brief Retrieves an instance from the specified slice written decoding
+ <code>bitsPerValue</code> for each value
+ */
 + (OrgApacheLuceneUtilLongValues *)getInstanceWithOrgApacheLuceneStoreRandomAccessInput:(id<OrgApacheLuceneStoreRandomAccessInput>)slice
                                                                                 withInt:(jint)bitsPerValue;
 
@@ -38,15 +57,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedDirectReader_init(OrgApacheLucen
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectReader *new_OrgApacheLuceneUtilPackedDirectReader_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectReader *create_OrgApacheLuceneUtilPackedDirectReader_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirectReader)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader1_) && (OrgApacheLuceneUtilPackedDirectReader_INCLUDE_ALL || OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader1_INCLUDE)
-#define _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader1_
+#if !defined (OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader1_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedDirectReader || defined(INCLUDE_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader1))
+#define OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader1_
 
-#define OrgApacheLuceneUtilLongValues_RESTRICT 1
-#define OrgApacheLuceneUtilLongValues_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilLongValues 1
+#define INCLUDE_OrgApacheLuceneUtilLongValues 1
 #include "org/apache/lucene/util/LongValues.h"
 
 @protocol OrgApacheLuceneStoreRandomAccessInput;
@@ -74,15 +95,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader1
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader1 *new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader1_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader1 *create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader1_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader1)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader2_) && (OrgApacheLuceneUtilPackedDirectReader_INCLUDE_ALL || OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader2_INCLUDE)
-#define _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader2_
+#if !defined (OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader2_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedDirectReader || defined(INCLUDE_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader2))
+#define OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader2_
 
-#define OrgApacheLuceneUtilLongValues_RESTRICT 1
-#define OrgApacheLuceneUtilLongValues_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilLongValues 1
+#define INCLUDE_OrgApacheLuceneUtilLongValues 1
 #include "org/apache/lucene/util/LongValues.h"
 
 @protocol OrgApacheLuceneStoreRandomAccessInput;
@@ -110,15 +133,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader2
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader2 *new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader2_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader2 *create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader2_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader2)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader4_) && (OrgApacheLuceneUtilPackedDirectReader_INCLUDE_ALL || OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader4_INCLUDE)
-#define _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader4_
+#if !defined (OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader4_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedDirectReader || defined(INCLUDE_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader4))
+#define OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader4_
 
-#define OrgApacheLuceneUtilLongValues_RESTRICT 1
-#define OrgApacheLuceneUtilLongValues_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilLongValues 1
+#define INCLUDE_OrgApacheLuceneUtilLongValues 1
 #include "org/apache/lucene/util/LongValues.h"
 
 @protocol OrgApacheLuceneStoreRandomAccessInput;
@@ -146,15 +171,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader4
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader4 *new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader4_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader4 *create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader4_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader4)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader8_) && (OrgApacheLuceneUtilPackedDirectReader_INCLUDE_ALL || OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader8_INCLUDE)
-#define _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader8_
+#if !defined (OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader8_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedDirectReader || defined(INCLUDE_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader8))
+#define OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader8_
 
-#define OrgApacheLuceneUtilLongValues_RESTRICT 1
-#define OrgApacheLuceneUtilLongValues_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilLongValues 1
+#define INCLUDE_OrgApacheLuceneUtilLongValues 1
 #include "org/apache/lucene/util/LongValues.h"
 
 @protocol OrgApacheLuceneStoreRandomAccessInput;
@@ -182,15 +209,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader8
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader8 *new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader8_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader8 *create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader8_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader8)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader12_) && (OrgApacheLuceneUtilPackedDirectReader_INCLUDE_ALL || OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader12_INCLUDE)
-#define _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader12_
+#if !defined (OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader12_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedDirectReader || defined(INCLUDE_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader12))
+#define OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader12_
 
-#define OrgApacheLuceneUtilLongValues_RESTRICT 1
-#define OrgApacheLuceneUtilLongValues_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilLongValues 1
+#define INCLUDE_OrgApacheLuceneUtilLongValues 1
 #include "org/apache/lucene/util/LongValues.h"
 
 @protocol OrgApacheLuceneStoreRandomAccessInput;
@@ -218,15 +247,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader1
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader12 *new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader12_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader12 *create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader12_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader12)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader16_) && (OrgApacheLuceneUtilPackedDirectReader_INCLUDE_ALL || OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader16_INCLUDE)
-#define _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader16_
+#if !defined (OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader16_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedDirectReader || defined(INCLUDE_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader16))
+#define OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader16_
 
-#define OrgApacheLuceneUtilLongValues_RESTRICT 1
-#define OrgApacheLuceneUtilLongValues_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilLongValues 1
+#define INCLUDE_OrgApacheLuceneUtilLongValues 1
 #include "org/apache/lucene/util/LongValues.h"
 
 @protocol OrgApacheLuceneStoreRandomAccessInput;
@@ -254,15 +285,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader1
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader16 *new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader16_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader16 *create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader16_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader16)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader20_) && (OrgApacheLuceneUtilPackedDirectReader_INCLUDE_ALL || OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader20_INCLUDE)
-#define _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader20_
+#if !defined (OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader20_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedDirectReader || defined(INCLUDE_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader20))
+#define OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader20_
 
-#define OrgApacheLuceneUtilLongValues_RESTRICT 1
-#define OrgApacheLuceneUtilLongValues_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilLongValues 1
+#define INCLUDE_OrgApacheLuceneUtilLongValues 1
 #include "org/apache/lucene/util/LongValues.h"
 
 @protocol OrgApacheLuceneStoreRandomAccessInput;
@@ -290,15 +323,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader2
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader20 *new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader20_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader20 *create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader20_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader20)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader24_) && (OrgApacheLuceneUtilPackedDirectReader_INCLUDE_ALL || OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader24_INCLUDE)
-#define _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader24_
+#if !defined (OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader24_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedDirectReader || defined(INCLUDE_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader24))
+#define OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader24_
 
-#define OrgApacheLuceneUtilLongValues_RESTRICT 1
-#define OrgApacheLuceneUtilLongValues_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilLongValues 1
+#define INCLUDE_OrgApacheLuceneUtilLongValues 1
 #include "org/apache/lucene/util/LongValues.h"
 
 @protocol OrgApacheLuceneStoreRandomAccessInput;
@@ -326,15 +361,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader2
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader24 *new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader24_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader24 *create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader24_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader24)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader28_) && (OrgApacheLuceneUtilPackedDirectReader_INCLUDE_ALL || OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader28_INCLUDE)
-#define _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader28_
+#if !defined (OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader28_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedDirectReader || defined(INCLUDE_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader28))
+#define OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader28_
 
-#define OrgApacheLuceneUtilLongValues_RESTRICT 1
-#define OrgApacheLuceneUtilLongValues_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilLongValues 1
+#define INCLUDE_OrgApacheLuceneUtilLongValues 1
 #include "org/apache/lucene/util/LongValues.h"
 
 @protocol OrgApacheLuceneStoreRandomAccessInput;
@@ -362,15 +399,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader2
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader28 *new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader28_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader28 *create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader28_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader28)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader32_) && (OrgApacheLuceneUtilPackedDirectReader_INCLUDE_ALL || OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader32_INCLUDE)
-#define _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader32_
+#if !defined (OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader32_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedDirectReader || defined(INCLUDE_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader32))
+#define OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader32_
 
-#define OrgApacheLuceneUtilLongValues_RESTRICT 1
-#define OrgApacheLuceneUtilLongValues_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilLongValues 1
+#define INCLUDE_OrgApacheLuceneUtilLongValues 1
 #include "org/apache/lucene/util/LongValues.h"
 
 @protocol OrgApacheLuceneStoreRandomAccessInput;
@@ -398,15 +437,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader3
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader32 *new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader32_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader32 *create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader32_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader32)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader40_) && (OrgApacheLuceneUtilPackedDirectReader_INCLUDE_ALL || OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader40_INCLUDE)
-#define _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader40_
+#if !defined (OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader40_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedDirectReader || defined(INCLUDE_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader40))
+#define OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader40_
 
-#define OrgApacheLuceneUtilLongValues_RESTRICT 1
-#define OrgApacheLuceneUtilLongValues_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilLongValues 1
+#define INCLUDE_OrgApacheLuceneUtilLongValues 1
 #include "org/apache/lucene/util/LongValues.h"
 
 @protocol OrgApacheLuceneStoreRandomAccessInput;
@@ -434,15 +475,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader4
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader40 *new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader40_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader40 *create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader40_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader40)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader48_) && (OrgApacheLuceneUtilPackedDirectReader_INCLUDE_ALL || OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader48_INCLUDE)
-#define _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader48_
+#if !defined (OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader48_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedDirectReader || defined(INCLUDE_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader48))
+#define OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader48_
 
-#define OrgApacheLuceneUtilLongValues_RESTRICT 1
-#define OrgApacheLuceneUtilLongValues_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilLongValues 1
+#define INCLUDE_OrgApacheLuceneUtilLongValues 1
 #include "org/apache/lucene/util/LongValues.h"
 
 @protocol OrgApacheLuceneStoreRandomAccessInput;
@@ -470,15 +513,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader4
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader48 *new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader48_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader48 *create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader48_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader48)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader56_) && (OrgApacheLuceneUtilPackedDirectReader_INCLUDE_ALL || OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader56_INCLUDE)
-#define _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader56_
+#if !defined (OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader56_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedDirectReader || defined(INCLUDE_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader56))
+#define OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader56_
 
-#define OrgApacheLuceneUtilLongValues_RESTRICT 1
-#define OrgApacheLuceneUtilLongValues_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilLongValues 1
+#define INCLUDE_OrgApacheLuceneUtilLongValues 1
 #include "org/apache/lucene/util/LongValues.h"
 
 @protocol OrgApacheLuceneStoreRandomAccessInput;
@@ -506,15 +551,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader5
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader56 *new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader56_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader56 *create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader56_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader56)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader64_) && (OrgApacheLuceneUtilPackedDirectReader_INCLUDE_ALL || OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader64_INCLUDE)
-#define _OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader64_
+#if !defined (OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader64_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedDirectReader || defined(INCLUDE_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader64))
+#define OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader64_
 
-#define OrgApacheLuceneUtilLongValues_RESTRICT 1
-#define OrgApacheLuceneUtilLongValues_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilLongValues 1
+#define INCLUDE_OrgApacheLuceneUtilLongValues 1
 #include "org/apache/lucene/util/LongValues.h"
 
 @protocol OrgApacheLuceneStoreRandomAccessInput;
@@ -542,8 +589,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader6
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader64 *new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader64_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader64 *create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader64_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader64)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilPackedDirectReader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedDirectReader")

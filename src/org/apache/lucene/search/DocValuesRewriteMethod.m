@@ -47,6 +47,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchDocValuesRewriteMethod_
 
 __attribute__((unused)) static OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1 *new_OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_initWithOrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper *outer$, OrgApacheLuceneSearchQuery *arg$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1 *create_OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_initWithOrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper *outer$, OrgApacheLuceneSearchQuery *arg$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1)
 
 @interface OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_$1 : OrgApacheLuceneIndexTerms {
@@ -84,6 +86,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchDocValuesRewriteMethod_
 
 __attribute__((unused)) static OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_$1 *new_OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_$1_initWithOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneIndexSortedSetDocValues *capture$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_$1 *create_OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_$1_initWithOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneIndexSortedSetDocValues *capture$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_$1)
 
 @interface OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_$2 : NSObject < OrgApacheLuceneUtilBits > {
@@ -113,13 +117,15 @@ __attribute__((unused)) static void OrgApacheLuceneSearchDocValuesRewriteMethod_
 
 __attribute__((unused)) static OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_$2 *new_OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_$2_initWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneUtilLongBitSet_withOrgApacheLuceneIndexLeafReaderContext_(OrgApacheLuceneIndexSortedSetDocValues *capture$0, OrgApacheLuceneUtilLongBitSet *capture$1, OrgApacheLuceneIndexLeafReaderContext *capture$2) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_$2 *create_OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_$2_initWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneUtilLongBitSet_withOrgApacheLuceneIndexLeafReaderContext_(OrgApacheLuceneIndexSortedSetDocValues *capture$0, OrgApacheLuceneUtilLongBitSet *capture$1, OrgApacheLuceneIndexLeafReaderContext *capture$2);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_$2)
 
 @implementation OrgApacheLuceneSearchDocValuesRewriteMethod
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
                                    withOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query {
-  OrgApacheLuceneSearchQuery *result = [new_OrgApacheLuceneSearchConstantScoreQuery_initWithOrgApacheLuceneSearchQuery_([new_OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_initWithOrgApacheLuceneSearchMultiTermQuery_(query) autorelease]) autorelease];
+  OrgApacheLuceneSearchQuery *result = create_OrgApacheLuceneSearchConstantScoreQuery_initWithOrgApacheLuceneSearchQuery_(create_OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_initWithOrgApacheLuceneSearchMultiTermQuery_(query));
   [result setBoostWithFloat:[((OrgApacheLuceneSearchMultiTermQuery *) nil_chk(query)) getBoost]];
   return result;
 }
@@ -127,7 +133,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTerm
 - (jboolean)isEqual:(id)obj {
   if (self == obj) return true;
   if (obj == nil) return false;
-  if ([self getClass] != [nil_chk(obj) getClass]) return false;
+  if ([self getClass] != (id) [obj getClass]) return false;
   return true;
 }
 
@@ -147,7 +153,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "rewriteWithOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneSearchMultiTermQuery:", "rewrite", "Lorg.apache.lucene.search.Query;", 0x1, NULL, NULL },
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "DocValuesRewriteMethod", NULL, 0x1, NULL, NULL },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.DocValuesRewriteMethod$MultiTermQueryDocValuesWrapper;"};
   static const J2ObjcClassInfo _OrgApacheLuceneSearchDocValuesRewriteMethod = { 2, "DocValuesRewriteMethod", "org.apache.lucene.search", NULL, 0x11, 4, methods, 0, NULL, 0, NULL, 1, inner_classes, NULL, NULL };
@@ -161,9 +167,11 @@ void OrgApacheLuceneSearchDocValuesRewriteMethod_init(OrgApacheLuceneSearchDocVa
 }
 
 OrgApacheLuceneSearchDocValuesRewriteMethod *new_OrgApacheLuceneSearchDocValuesRewriteMethod_init() {
-  OrgApacheLuceneSearchDocValuesRewriteMethod *self = [OrgApacheLuceneSearchDocValuesRewriteMethod alloc];
-  OrgApacheLuceneSearchDocValuesRewriteMethod_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDocValuesRewriteMethod, init)
+}
+
+OrgApacheLuceneSearchDocValuesRewriteMethod *create_OrgApacheLuceneSearchDocValuesRewriteMethod_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDocValuesRewriteMethod, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocValuesRewriteMethod)
@@ -182,8 +190,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocValuesRewriteMethod)
 - (jboolean)isEqual:(id)o {
   if (o == self) return true;
   if (o == nil) return false;
-  if ([[self getClass] isEqual:[nil_chk(o) getClass]]) {
-    OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper *that = (OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper *) check_class_cast(o, [OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper class]);
+  if ([[self getClass] isEqual:[o getClass]]) {
+    OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper *that = (OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper *) cast_chk(o, [OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper class]);
     return [((OrgApacheLuceneSearchMultiTermQuery *) nil_chk(self->query_)) isEqual:that->query_] && [self getBoost] == [that getBoost];
   }
   return false;
@@ -199,7 +207,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocValuesRewriteMethod)
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores {
-  return [new_OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_initWithOrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_withOrgApacheLuceneSearchQuery_(self, self) autorelease];
+  return create_OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_initWithOrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_withOrgApacheLuceneSearchQuery_(self, self);
 }
 
 - (void)dealloc {
@@ -231,9 +239,11 @@ void OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_
 }
 
 OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper *new_OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_initWithOrgApacheLuceneSearchMultiTermQuery_(OrgApacheLuceneSearchMultiTermQuery *query) {
-  OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper *self = [OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper alloc];
-  OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_initWithOrgApacheLuceneSearchMultiTermQuery_(self, query);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper, initWithOrgApacheLuceneSearchMultiTermQuery_, query)
+}
+
+OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper *create_OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_initWithOrgApacheLuceneSearchMultiTermQuery_(OrgApacheLuceneSearchMultiTermQuery *query) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper, initWithOrgApacheLuceneSearchMultiTermQuery_, query)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper)
@@ -242,12 +252,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocValuesRewriteMethod_Mul
 
 - (id<OrgApacheLuceneUtilBits>)getMatchingDocsWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
   OrgApacheLuceneIndexSortedSetDocValues *fcsi = OrgApacheLuceneIndexDocValues_getSortedSetWithOrgApacheLuceneIndexLeafReader_withNSString_([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader], ((OrgApacheLuceneSearchMultiTermQuery *) nil_chk(this$0_->query_))->field_);
-  OrgApacheLuceneIndexTermsEnum *termsEnum = [this$0_->query_ getTermsEnumWithOrgApacheLuceneIndexTerms:[new_OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_$1_initWithOrgApacheLuceneIndexSortedSetDocValues_(fcsi) autorelease]];
+  OrgApacheLuceneIndexTermsEnum *termsEnum = [this$0_->query_ getTermsEnumWithOrgApacheLuceneIndexTerms:create_OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_$1_initWithOrgApacheLuceneIndexSortedSetDocValues_(fcsi)];
   JreAssert((termsEnum != nil), (@"org/apache/lucene/search/DocValuesRewriteMethod.java:137 condition failed: assert termsEnum != null;"));
   if ([((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) next] == nil) {
     return nil;
   }
-  OrgApacheLuceneUtilLongBitSet *termSet = [new_OrgApacheLuceneUtilLongBitSet_initWithLong_([((OrgApacheLuceneIndexSortedSetDocValues *) nil_chk(fcsi)) getValueCount]) autorelease];
+  OrgApacheLuceneUtilLongBitSet *termSet = create_OrgApacheLuceneUtilLongBitSet_initWithLong_([((OrgApacheLuceneIndexSortedSetDocValues *) nil_chk(fcsi)) getValueCount]);
   do {
     jlong ord = [termsEnum ord];
     if (ord >= 0) {
@@ -255,7 +265,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocValuesRewriteMethod_Mul
     }
   }
   while ([termsEnum next] != nil);
-  return [new_OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_$2_initWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneUtilLongBitSet_withOrgApacheLuceneIndexLeafReaderContext_(fcsi, termSet, context) autorelease];
+  return create_OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_$2_initWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneUtilLongBitSet_withOrgApacheLuceneIndexLeafReaderContext_(fcsi, termSet, context);
 }
 
 - (instancetype)initWithOrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper:(OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper *)outer$
@@ -290,9 +300,11 @@ void OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_
 }
 
 OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1 *new_OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_initWithOrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper *outer$, OrgApacheLuceneSearchQuery *arg$0) {
-  OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1 *self = [OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1 alloc];
-  OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_initWithOrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_withOrgApacheLuceneSearchQuery_(self, outer$, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1, initWithOrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_withOrgApacheLuceneSearchQuery_, outer$, arg$0)
+}
+
+OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1 *create_OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_initWithOrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper *outer$, OrgApacheLuceneSearchQuery *arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1, initWithOrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_withOrgApacheLuceneSearchQuery_, outer$, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1)
@@ -374,9 +386,11 @@ void OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_
 }
 
 OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_$1 *new_OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_$1_initWithOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneIndexSortedSetDocValues *capture$0) {
-  OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_$1 *self = [OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_$1 alloc];
-  OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_$1_initWithOrgApacheLuceneIndexSortedSetDocValues_(self, capture$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_$1, initWithOrgApacheLuceneIndexSortedSetDocValues_, capture$0)
+}
+
+OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_$1 *create_OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_$1_initWithOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneIndexSortedSetDocValues *capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_$1, initWithOrgApacheLuceneIndexSortedSetDocValues_, capture$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_$1)
@@ -437,9 +451,11 @@ void OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_
 }
 
 OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_$2 *new_OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_$2_initWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneUtilLongBitSet_withOrgApacheLuceneIndexLeafReaderContext_(OrgApacheLuceneIndexSortedSetDocValues *capture$0, OrgApacheLuceneUtilLongBitSet *capture$1, OrgApacheLuceneIndexLeafReaderContext *capture$2) {
-  OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_$2 *self = [OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_$2 alloc];
-  OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_$2_initWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneUtilLongBitSet_withOrgApacheLuceneIndexLeafReaderContext_(self, capture$0, capture$1, capture$2);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_$2, initWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneUtilLongBitSet_withOrgApacheLuceneIndexLeafReaderContext_, capture$0, capture$1, capture$2)
+}
+
+OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_$2 *create_OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_$2_initWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneUtilLongBitSet_withOrgApacheLuceneIndexLeafReaderContext_(OrgApacheLuceneIndexSortedSetDocValues *capture$0, OrgApacheLuceneUtilLongBitSet *capture$1, OrgApacheLuceneIndexLeafReaderContext *capture$2) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_$2, initWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneUtilLongBitSet_withOrgApacheLuceneIndexLeafReaderContext_, capture$0, capture$1, capture$2)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper_$1_$2)

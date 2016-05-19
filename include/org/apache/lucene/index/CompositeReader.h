@@ -5,24 +5,53 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexCompositeReader_INCLUDE_ALL")
-#if OrgApacheLuceneIndexCompositeReader_RESTRICT
-#define OrgApacheLuceneIndexCompositeReader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexCompositeReader")
+#ifdef RESTRICT_OrgApacheLuceneIndexCompositeReader
+#define INCLUDE_ALL_OrgApacheLuceneIndexCompositeReader 0
 #else
-#define OrgApacheLuceneIndexCompositeReader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexCompositeReader 1
 #endif
-#undef OrgApacheLuceneIndexCompositeReader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexCompositeReader
 
-#if !defined (_OrgApacheLuceneIndexCompositeReader_) && (OrgApacheLuceneIndexCompositeReader_INCLUDE_ALL || OrgApacheLuceneIndexCompositeReader_INCLUDE)
-#define _OrgApacheLuceneIndexCompositeReader_
+#if !defined (OrgApacheLuceneIndexCompositeReader_) && (INCLUDE_ALL_OrgApacheLuceneIndexCompositeReader || defined(INCLUDE_OrgApacheLuceneIndexCompositeReader))
+#define OrgApacheLuceneIndexCompositeReader_
 
-#define OrgApacheLuceneIndexIndexReader_RESTRICT 1
-#define OrgApacheLuceneIndexIndexReader_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexIndexReader 1
+#define INCLUDE_OrgApacheLuceneIndexIndexReader 1
 #include "org/apache/lucene/index/IndexReader.h"
 
 @class OrgApacheLuceneIndexCompositeReaderContext;
 @protocol JavaUtilList;
 
+/*!
+ @brief Instances of this reader type can only
+ be used to get stored fields from the underlying LeafReaders,
+ but it is not possible to directly retrieve postings.
+ To do that, get
+ the <code>LeafReaderContext</code> for all sub-readers via <code>leaves()</code>.
+ Alternatively, you can mimic an <code>LeafReader</code> (with a serious slowdown),
+ by wrapping composite readers with <code>SlowCompositeReaderWrapper</code>.
+ <p>IndexReader instances for indexes on disk are usually constructed
+ with a call to one of the static <code>DirectoryReader.open()</code> methods,
+ e.g. <code>DirectoryReader.open(Directory)</code>. <code>DirectoryReader</code> implements
+ the <code>CompositeReader</code> interface, it is not possible to directly get postings.
+ <p> Concrete subclasses of IndexReader are usually constructed with a call to
+ one of the static <code>open()</code> methods, e.g. <code>DirectoryReader.open(Directory)</code>
+ .
+ <p> For efficiency, in this API documents are often referred to via
+ <i>document numbers</i>, non-negative integers which each name a unique
+ document in the index.  These document numbers are ephemeral -- they may change
+ as documents are added to and deleted from an index.  Clients should thus not
+ rely on a given document having the same number between sessions.
+ <p>
+ <a name="thread-safety"></a><p><b>NOTE</b>: <code>IndexReader</code>
+  instances are completely thread
+ safe, meaning multiple threads can call any of its methods,
+ concurrently.  If your application requires external
+ synchronization, you should <b>not</b> synchronize on the
+ <code>IndexReader</code> instance; use your own
+ (non-Lucene) objects instead.
+ */
 @interface OrgApacheLuceneIndexCompositeReader : OrgApacheLuceneIndexIndexReader
 
 #pragma mark Public
@@ -33,8 +62,23 @@
 
 #pragma mark Protected
 
+/*!
+ @brief Sole constructor.
+ (For invocation by subclass 
+ constructors, typically implicit.) 
+ */
 - (instancetype)init;
 
+/*!
+ @brief Expert: returns the sequential sub readers that this
+ reader is logically composed of.
+ This method may not
+ return <code>null</code>.
+ <p><b>NOTE:</b> In contrast to previous Lucene versions this method
+ is no longer public, code that wants to get all <code>LeafReader</code>s
+ this composite is composed of should use <code>IndexReader.leaves()</code>.
+ - seealso: IndexReader#leaves()
+ */
 - (id<JavaUtilList>)getSequentialSubReaders;
 
 @end
@@ -47,4 +91,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCompositeReader)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexCompositeReader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexCompositeReader")

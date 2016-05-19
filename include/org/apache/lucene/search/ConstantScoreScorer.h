@@ -5,33 +5,52 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchConstantScoreScorer_INCLUDE_ALL")
-#if OrgApacheLuceneSearchConstantScoreScorer_RESTRICT
-#define OrgApacheLuceneSearchConstantScoreScorer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchConstantScoreScorer")
+#ifdef RESTRICT_OrgApacheLuceneSearchConstantScoreScorer
+#define INCLUDE_ALL_OrgApacheLuceneSearchConstantScoreScorer 0
 #else
-#define OrgApacheLuceneSearchConstantScoreScorer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchConstantScoreScorer 1
 #endif
-#undef OrgApacheLuceneSearchConstantScoreScorer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchConstantScoreScorer
 
-#if !defined (_OrgApacheLuceneSearchConstantScoreScorer_) && (OrgApacheLuceneSearchConstantScoreScorer_INCLUDE_ALL || OrgApacheLuceneSearchConstantScoreScorer_INCLUDE)
-#define _OrgApacheLuceneSearchConstantScoreScorer_
+#if !defined (OrgApacheLuceneSearchConstantScoreScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchConstantScoreScorer || defined(INCLUDE_OrgApacheLuceneSearchConstantScoreScorer))
+#define OrgApacheLuceneSearchConstantScoreScorer_
 
-#define OrgApacheLuceneSearchScorer_RESTRICT 1
-#define OrgApacheLuceneSearchScorer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchScorer 1
+#define INCLUDE_OrgApacheLuceneSearchScorer 1
 #include "org/apache/lucene/search/Scorer.h"
 
 @class OrgApacheLuceneSearchDocIdSetIterator;
 @class OrgApacheLuceneSearchTwoPhaseIterator;
 @class OrgApacheLuceneSearchWeight;
 
+/*!
+ @brief A constant-scoring <code>Scorer</code>.
+ */
 @interface OrgApacheLuceneSearchConstantScoreScorer : OrgApacheLuceneSearchScorer
 
 #pragma mark Public
 
+/*!
+ @brief Constructor based on a <code>DocIdSetIterator</code> which will be used to
+ drive iteration.
+ Two phase iteration will not be supported.
+ @param weight the parent weight
+ @param score the score to return on each document
+ @param disi the iterator that defines matching documents
+ */
 - (instancetype)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
                                           withFloat:(jfloat)score
           withOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)disi;
 
+/*!
+ @brief Constructor based on a <code>TwoPhaseIterator</code>.
+ In that case the
+ <code>Scorer</code> will support two-phase iteration.
+ @param weight the parent weight
+ @param score the score to return on each document
+ @param twoPhaseIterator the iterator that defines matching documents
+ */
 - (instancetype)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
                                           withFloat:(jfloat)score
           withOrgApacheLuceneSearchTwoPhaseIterator:(OrgApacheLuceneSearchTwoPhaseIterator *)twoPhaseIterator;
@@ -58,12 +77,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchConstantScoreScorer_initWithOrgApach
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchConstantScoreScorer *new_OrgApacheLuceneSearchConstantScoreScorer_initWithOrgApacheLuceneSearchWeight_withFloat_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchWeight *weight, jfloat score, OrgApacheLuceneSearchDocIdSetIterator *disi) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchConstantScoreScorer *create_OrgApacheLuceneSearchConstantScoreScorer_initWithOrgApacheLuceneSearchWeight_withFloat_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchWeight *weight, jfloat score, OrgApacheLuceneSearchDocIdSetIterator *disi);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchConstantScoreScorer_initWithOrgApacheLuceneSearchWeight_withFloat_withOrgApacheLuceneSearchTwoPhaseIterator_(OrgApacheLuceneSearchConstantScoreScorer *self, OrgApacheLuceneSearchWeight *weight, jfloat score, OrgApacheLuceneSearchTwoPhaseIterator *twoPhaseIterator);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchConstantScoreScorer *new_OrgApacheLuceneSearchConstantScoreScorer_initWithOrgApacheLuceneSearchWeight_withFloat_withOrgApacheLuceneSearchTwoPhaseIterator_(OrgApacheLuceneSearchWeight *weight, jfloat score, OrgApacheLuceneSearchTwoPhaseIterator *twoPhaseIterator) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchConstantScoreScorer *create_OrgApacheLuceneSearchConstantScoreScorer_initWithOrgApacheLuceneSearchWeight_withFloat_withOrgApacheLuceneSearchTwoPhaseIterator_(OrgApacheLuceneSearchWeight *weight, jfloat score, OrgApacheLuceneSearchTwoPhaseIterator *twoPhaseIterator);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchConstantScoreScorer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchConstantScoreScorer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchConstantScoreScorer")

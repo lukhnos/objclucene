@@ -20,7 +20,7 @@
 }
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  return [new_OrgApacheLuceneAnalysisCjkCJKWidthFilter_initWithOrgApacheLuceneAnalysisTokenStream_(input) autorelease];
+  return create_OrgApacheLuceneAnalysisCjkCJKWidthFilter_initWithOrgApacheLuceneAnalysisTokenStream_(input);
 }
 
 - (OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory *)getMultiTermComponent {
@@ -29,7 +29,7 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "CJKWidthFilterFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "CJKWidthFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenStream;", 0x1, NULL, NULL },
     { "getMultiTermComponent", NULL, "Lorg.apache.lucene.analysis.util.AbstractAnalysisFactory;", 0x1, NULL, NULL },
   };
@@ -42,14 +42,16 @@
 void OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory *self, id<JavaUtilMap> args) {
   OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory *new_OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory *self = [OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory alloc];
-  OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory *create_OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory)

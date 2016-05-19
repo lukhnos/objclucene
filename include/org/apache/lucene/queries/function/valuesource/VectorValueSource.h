@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_RESTRICT
-#define OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource 0
 #else
-#define OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_) && (OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_
+#if !defined (OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource))
+#define OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_
 
-#define OrgApacheLuceneQueriesFunctionValuesourceMultiValueSource_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionValuesourceMultiValueSource_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceMultiValueSource 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceMultiValueSource 1
 #include "org/apache/lucene/queries/function/valuesource/MultiValueSource.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
@@ -26,6 +26,11 @@
 @protocol JavaUtilList;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Converts individual ValueSource instances to leverage the FunctionValues *Val functions that work with multiple values,
+ i.e.
+ <code>org.apache.lucene.queries.function.FunctionValues.doubleVal(int,double[])</code>
+ */
 @interface OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource : OrgApacheLuceneQueriesFunctionValuesourceMultiValueSource {
  @public
   id<JavaUtilList> sources_;
@@ -63,8 +68,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceVectorValueSourc
 
 FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_initWithJavaUtilList_(id<JavaUtilList> sources) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource *create_OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_initWithJavaUtilList_(id<JavaUtilList> sources);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource")

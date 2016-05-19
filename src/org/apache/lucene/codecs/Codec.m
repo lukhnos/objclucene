@@ -30,6 +30,10 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsCodec, name_, NSString *)
 
+/*!
+ @brief This static holder class prevents classloading deadlock by delaying
+ init of default codecs and available codecs until needed.
+ */
 @interface OrgApacheLuceneCodecsCodec_Holder : NSObject
 
 - (instancetype)init;
@@ -40,16 +44,20 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsCodec, name_, NSString *)
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneCodecsCodec_Holder)
 
-static OrgApacheLuceneUtilNamedSPILoader *OrgApacheLuceneCodecsCodec_Holder_LOADER_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsCodec_Holder, LOADER_, OrgApacheLuceneUtilNamedSPILoader *)
+inline OrgApacheLuceneUtilNamedSPILoader *OrgApacheLuceneCodecsCodec_Holder_get_LOADER();
+static OrgApacheLuceneUtilNamedSPILoader *OrgApacheLuceneCodecsCodec_Holder_LOADER;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsCodec_Holder, LOADER, OrgApacheLuceneUtilNamedSPILoader *)
 
-static OrgApacheLuceneCodecsCodec *OrgApacheLuceneCodecsCodec_Holder_defaultCodec_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsCodec_Holder, defaultCodec_, OrgApacheLuceneCodecsCodec *)
-J2OBJC_STATIC_FIELD_SETTER(OrgApacheLuceneCodecsCodec_Holder, defaultCodec_, OrgApacheLuceneCodecsCodec *)
+inline OrgApacheLuceneCodecsCodec *OrgApacheLuceneCodecsCodec_Holder_get_defaultCodec();
+inline OrgApacheLuceneCodecsCodec *OrgApacheLuceneCodecsCodec_Holder_set_defaultCodec(OrgApacheLuceneCodecsCodec *value);
+static OrgApacheLuceneCodecsCodec *OrgApacheLuceneCodecsCodec_Holder_defaultCodec;
+J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneCodecsCodec_Holder, defaultCodec, OrgApacheLuceneCodecsCodec *)
 
 __attribute__((unused)) static void OrgApacheLuceneCodecsCodec_Holder_init(OrgApacheLuceneCodecsCodec_Holder *self);
 
 __attribute__((unused)) static OrgApacheLuceneCodecsCodec_Holder *new_OrgApacheLuceneCodecsCodec_Holder_init() NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneCodecsCodec_Holder *create_OrgApacheLuceneCodecsCodec_Holder_init();
 
 __attribute__((unused)) static OrgApacheLuceneUtilNamedSPILoader *OrgApacheLuceneCodecsCodec_Holder_getLoader();
 
@@ -163,7 +171,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCodec_Holder)
     { "liveDocsFormat", NULL, "Lorg.apache.lucene.codecs.LiveDocsFormat;", 0x401, NULL, NULL },
     { "compoundFormat", NULL, "Lorg.apache.lucene.codecs.CompoundFormat;", 0x401, NULL, NULL },
     { "forNameWithNSString:", "forName", "Lorg.apache.lucene.codecs.Codec;", 0x9, NULL, NULL },
-    { "availableCodecs", NULL, "Ljava.util.Set;", 0x9, NULL, NULL },
+    { "availableCodecs", NULL, "Ljava.util.Set;", 0x9, NULL, "()Ljava/util/Set<Ljava/lang/String;>;" },
     { "reloadCodecsWithJavaLangClassLoader:", "reloadCodecs", "V", 0x9, NULL, NULL },
     { "getDefault", NULL, "Lorg.apache.lucene.codecs.Codec;", 0x9, NULL, NULL },
     { "setDefaultWithOrgApacheLuceneCodecsCodec:", "setDefault", "V", 0x9, NULL, NULL },
@@ -202,15 +210,15 @@ void OrgApacheLuceneCodecsCodec_reloadCodecsWithJavaLangClassLoader_(JavaLangCla
 
 OrgApacheLuceneCodecsCodec *OrgApacheLuceneCodecsCodec_getDefault() {
   OrgApacheLuceneCodecsCodec_initialize();
-  if (JreLoadStatic(OrgApacheLuceneCodecsCodec_Holder, defaultCodec_) == nil) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"You tried to lookup the default Codec before all Codecs could be initialized. This likely happens if you try to get it from a Codec's ctor.") autorelease];
+  if (JreLoadStatic(OrgApacheLuceneCodecsCodec_Holder, defaultCodec) == nil) {
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"You tried to lookup the default Codec before all Codecs could be initialized. This likely happens if you try to get it from a Codec's ctor.");
   }
-  return JreLoadStatic(OrgApacheLuceneCodecsCodec_Holder, defaultCodec_);
+  return JreLoadStatic(OrgApacheLuceneCodecsCodec_Holder, defaultCodec);
 }
 
 void OrgApacheLuceneCodecsCodec_setDefaultWithOrgApacheLuceneCodecsCodec_(OrgApacheLuceneCodecsCodec *codec) {
   OrgApacheLuceneCodecsCodec_initialize();
-  JreStrongAssign(JreLoadStaticRef(OrgApacheLuceneCodecsCodec_Holder, defaultCodec_), OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_(codec));
+  JreStrongAssign(JreLoadStaticRef(OrgApacheLuceneCodecsCodec_Holder, defaultCodec), OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_(codec));
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCodec)
@@ -232,8 +240,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneCodecsCodec_Holder class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneCodecsCodec_Holder_LOADER_, new_OrgApacheLuceneUtilNamedSPILoader_initWithIOSClass_(OrgApacheLuceneCodecsCodec_class_()));
-    JreStrongAssign(&OrgApacheLuceneCodecsCodec_Holder_defaultCodec_, [OrgApacheLuceneCodecsCodec_Holder_LOADER_ lookupWithNSString:@"Lucene53"]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneCodecsCodec_Holder_LOADER, new_OrgApacheLuceneUtilNamedSPILoader_initWithIOSClass_(OrgApacheLuceneCodecsCodec_class_()));
+    JreStrongAssign(&OrgApacheLuceneCodecsCodec_Holder_defaultCodec, [OrgApacheLuceneCodecsCodec_Holder_LOADER lookupWithNSString:@"Lucene53"]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneCodecsCodec_Holder)
   }
 }
@@ -241,11 +249,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "Holder", NULL, 0x2, NULL, NULL },
-    { "getLoader", NULL, "Lorg.apache.lucene.util.NamedSPILoader;", 0x8, NULL, NULL },
+    { "getLoader", NULL, "Lorg.apache.lucene.util.NamedSPILoader;", 0x8, NULL, "()Lorg/apache/lucene/util/NamedSPILoader<Lorg/apache/lucene/codecs/Codec;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "LOADER_", NULL, 0x1a, "Lorg.apache.lucene.util.NamedSPILoader;", &OrgApacheLuceneCodecsCodec_Holder_LOADER_, "Lorg/apache/lucene/util/NamedSPILoader<Lorg/apache/lucene/codecs/Codec;>;", .constantValue.asLong = 0 },
-    { "defaultCodec_", NULL, 0x8, "Lorg.apache.lucene.codecs.Codec;", &OrgApacheLuceneCodecsCodec_Holder_defaultCodec_, NULL, .constantValue.asLong = 0 },
+    { "LOADER", "LOADER", 0x1a, "Lorg.apache.lucene.util.NamedSPILoader;", &OrgApacheLuceneCodecsCodec_Holder_LOADER, "Lorg/apache/lucene/util/NamedSPILoader<Lorg/apache/lucene/codecs/Codec;>;", .constantValue.asLong = 0 },
+    { "defaultCodec", "defaultCodec", 0x8, "Lorg.apache.lucene.codecs.Codec;", &OrgApacheLuceneCodecsCodec_Holder_defaultCodec, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneCodecsCodec_Holder = { 2, "Holder", "org.apache.lucene.codecs", "Codec", 0x1a, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneCodecsCodec_Holder;
@@ -258,17 +266,19 @@ void OrgApacheLuceneCodecsCodec_Holder_init(OrgApacheLuceneCodecsCodec_Holder *s
 }
 
 OrgApacheLuceneCodecsCodec_Holder *new_OrgApacheLuceneCodecsCodec_Holder_init() {
-  OrgApacheLuceneCodecsCodec_Holder *self = [OrgApacheLuceneCodecsCodec_Holder alloc];
-  OrgApacheLuceneCodecsCodec_Holder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsCodec_Holder, init)
+}
+
+OrgApacheLuceneCodecsCodec_Holder *create_OrgApacheLuceneCodecsCodec_Holder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsCodec_Holder, init)
 }
 
 OrgApacheLuceneUtilNamedSPILoader *OrgApacheLuceneCodecsCodec_Holder_getLoader() {
   OrgApacheLuceneCodecsCodec_Holder_initialize();
-  if (OrgApacheLuceneCodecsCodec_Holder_LOADER_ == nil) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"You tried to lookup a Codec by name before all Codecs could be initialized. This likely happens if you call Codec#forName from a Codec's ctor.") autorelease];
+  if (OrgApacheLuceneCodecsCodec_Holder_LOADER == nil) {
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"You tried to lookup a Codec by name before all Codecs could be initialized. This likely happens if you call Codec#forName from a Codec's ctor.");
   }
-  return OrgApacheLuceneCodecsCodec_Holder_LOADER_;
+  return OrgApacheLuceneCodecsCodec_Holder_LOADER;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCodec_Holder)

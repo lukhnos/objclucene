@@ -8,8 +8,6 @@
 #include "org/apache/lucene/analysis/tokenattributes/OffsetAttribute.h"
 #include "org/apache/lucene/search/highlight/SimpleFragmenter.h"
 
-#define OrgApacheLuceneSearchHighlightSimpleFragmenter_DEFAULT_FRAGMENT_SIZE 100
-
 @interface OrgApacheLuceneSearchHighlightSimpleFragmenter () {
  @public
   jint currentNumFrags_;
@@ -21,7 +19,9 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchHighlightSimpleFragmenter, offsetAtt_, id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchHighlightSimpleFragmenter, DEFAULT_FRAGMENT_SIZE, jint)
+inline jint OrgApacheLuceneSearchHighlightSimpleFragmenter_get_DEFAULT_FRAGMENT_SIZE();
+#define OrgApacheLuceneSearchHighlightSimpleFragmenter_DEFAULT_FRAGMENT_SIZE 100
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchHighlightSimpleFragmenter, DEFAULT_FRAGMENT_SIZE, jint)
 
 @implementation OrgApacheLuceneSearchHighlightSimpleFragmenter
 
@@ -90,9 +90,11 @@ void OrgApacheLuceneSearchHighlightSimpleFragmenter_init(OrgApacheLuceneSearchHi
 }
 
 OrgApacheLuceneSearchHighlightSimpleFragmenter *new_OrgApacheLuceneSearchHighlightSimpleFragmenter_init() {
-  OrgApacheLuceneSearchHighlightSimpleFragmenter *self = [OrgApacheLuceneSearchHighlightSimpleFragmenter alloc];
-  OrgApacheLuceneSearchHighlightSimpleFragmenter_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchHighlightSimpleFragmenter, init)
+}
+
+OrgApacheLuceneSearchHighlightSimpleFragmenter *create_OrgApacheLuceneSearchHighlightSimpleFragmenter_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchHighlightSimpleFragmenter, init)
 }
 
 void OrgApacheLuceneSearchHighlightSimpleFragmenter_initWithInt_(OrgApacheLuceneSearchHighlightSimpleFragmenter *self, jint fragmentSize) {
@@ -101,9 +103,11 @@ void OrgApacheLuceneSearchHighlightSimpleFragmenter_initWithInt_(OrgApacheLucene
 }
 
 OrgApacheLuceneSearchHighlightSimpleFragmenter *new_OrgApacheLuceneSearchHighlightSimpleFragmenter_initWithInt_(jint fragmentSize) {
-  OrgApacheLuceneSearchHighlightSimpleFragmenter *self = [OrgApacheLuceneSearchHighlightSimpleFragmenter alloc];
-  OrgApacheLuceneSearchHighlightSimpleFragmenter_initWithInt_(self, fragmentSize);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchHighlightSimpleFragmenter, initWithInt_, fragmentSize)
+}
+
+OrgApacheLuceneSearchHighlightSimpleFragmenter *create_OrgApacheLuceneSearchHighlightSimpleFragmenter_initWithInt_(jint fragmentSize) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchHighlightSimpleFragmenter, initWithInt_, fragmentSize)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchHighlightSimpleFragmenter)

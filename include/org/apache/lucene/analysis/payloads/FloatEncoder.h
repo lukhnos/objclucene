@@ -5,28 +5,32 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisPayloadsFloatEncoder_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisPayloadsFloatEncoder_RESTRICT
-#define OrgApacheLuceneAnalysisPayloadsFloatEncoder_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsFloatEncoder")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisPayloadsFloatEncoder
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsFloatEncoder 0
 #else
-#define OrgApacheLuceneAnalysisPayloadsFloatEncoder_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsFloatEncoder 1
 #endif
-#undef OrgApacheLuceneAnalysisPayloadsFloatEncoder_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisPayloadsFloatEncoder
 
-#if !defined (_OrgApacheLuceneAnalysisPayloadsFloatEncoder_) && (OrgApacheLuceneAnalysisPayloadsFloatEncoder_INCLUDE_ALL || OrgApacheLuceneAnalysisPayloadsFloatEncoder_INCLUDE)
-#define _OrgApacheLuceneAnalysisPayloadsFloatEncoder_
+#if !defined (OrgApacheLuceneAnalysisPayloadsFloatEncoder_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsFloatEncoder || defined(INCLUDE_OrgApacheLuceneAnalysisPayloadsFloatEncoder))
+#define OrgApacheLuceneAnalysisPayloadsFloatEncoder_
 
-#define OrgApacheLuceneAnalysisPayloadsAbstractEncoder_RESTRICT 1
-#define OrgApacheLuceneAnalysisPayloadsAbstractEncoder_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisPayloadsAbstractEncoder 1
+#define INCLUDE_OrgApacheLuceneAnalysisPayloadsAbstractEncoder 1
 #include "org/apache/lucene/analysis/payloads/AbstractEncoder.h"
 
-#define OrgApacheLuceneAnalysisPayloadsPayloadEncoder_RESTRICT 1
-#define OrgApacheLuceneAnalysisPayloadsPayloadEncoder_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisPayloadsPayloadEncoder 1
+#define INCLUDE_OrgApacheLuceneAnalysisPayloadsPayloadEncoder 1
 #include "org/apache/lucene/analysis/payloads/PayloadEncoder.h"
 
 @class IOSCharArray;
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief Encode a character array Float as a <code>BytesRef</code>.
+ - seealso: org.apache.lucene.analysis.payloads.PayloadHelper#encodeFloat(float,byte[],int)
+ */
 @interface OrgApacheLuceneAnalysisPayloadsFloatEncoder : OrgApacheLuceneAnalysisPayloadsAbstractEncoder < OrgApacheLuceneAnalysisPayloadsPayloadEncoder >
 
 #pragma mark Public
@@ -45,8 +49,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPayloadsFloatEncoder_init(OrgApach
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsFloatEncoder *new_OrgApacheLuceneAnalysisPayloadsFloatEncoder_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsFloatEncoder *create_OrgApacheLuceneAnalysisPayloadsFloatEncoder_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPayloadsFloatEncoder)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisPayloadsFloatEncoder_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsFloatEncoder")

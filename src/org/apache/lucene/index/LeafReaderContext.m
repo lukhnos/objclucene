@@ -43,7 +43,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexLeafReaderContext, leaves_, id<JavaUtilL
 
 - (id<JavaUtilList>)leaves {
   if (!isTopLevel_) {
-    @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(@"This is not a top-level context.") autorelease];
+    @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"This is not a top-level context.");
   }
   JreAssert((leaves_ != nil), (@"org/apache/lucene/index/LeafReaderContext.java:56 condition failed: assert leaves != null;"));
   return leaves_;
@@ -71,8 +71,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexLeafReaderContext, leaves_, id<JavaUtilL
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneIndexCompositeReaderContext:withOrgApacheLuceneIndexLeafReader:withInt:withInt:withInt:withInt:", "LeafReaderContext", NULL, 0x0, NULL, NULL },
     { "initWithOrgApacheLuceneIndexLeafReader:", "LeafReaderContext", NULL, 0x0, NULL, NULL },
-    { "leaves", NULL, "Ljava.util.List;", 0x1, NULL, NULL },
-    { "children", NULL, "Ljava.util.List;", 0x1, NULL, NULL },
+    { "leaves", NULL, "Ljava.util.List;", 0x1, NULL, "()Ljava/util/List<Lorg/apache/lucene/index/LeafReaderContext;>;" },
+    { "children", NULL, "Ljava.util.List;", 0x1, NULL, "()Ljava/util/List<Lorg/apache/lucene/index/IndexReaderContext;>;" },
     { "reader", NULL, "Lorg.apache.lucene.index.LeafReader;", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
@@ -97,9 +97,11 @@ void OrgApacheLuceneIndexLeafReaderContext_initWithOrgApacheLuceneIndexComposite
 }
 
 OrgApacheLuceneIndexLeafReaderContext *new_OrgApacheLuceneIndexLeafReaderContext_initWithOrgApacheLuceneIndexCompositeReaderContext_withOrgApacheLuceneIndexLeafReader_withInt_withInt_withInt_withInt_(OrgApacheLuceneIndexCompositeReaderContext *parent, OrgApacheLuceneIndexLeafReader *reader, jint ord, jint docBase, jint leafOrd, jint leafDocBase) {
-  OrgApacheLuceneIndexLeafReaderContext *self = [OrgApacheLuceneIndexLeafReaderContext alloc];
-  OrgApacheLuceneIndexLeafReaderContext_initWithOrgApacheLuceneIndexCompositeReaderContext_withOrgApacheLuceneIndexLeafReader_withInt_withInt_withInt_withInt_(self, parent, reader, ord, docBase, leafOrd, leafDocBase);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexLeafReaderContext, initWithOrgApacheLuceneIndexCompositeReaderContext_withOrgApacheLuceneIndexLeafReader_withInt_withInt_withInt_withInt_, parent, reader, ord, docBase, leafOrd, leafDocBase)
+}
+
+OrgApacheLuceneIndexLeafReaderContext *create_OrgApacheLuceneIndexLeafReaderContext_initWithOrgApacheLuceneIndexCompositeReaderContext_withOrgApacheLuceneIndexLeafReader_withInt_withInt_withInt_withInt_(OrgApacheLuceneIndexCompositeReaderContext *parent, OrgApacheLuceneIndexLeafReader *reader, jint ord, jint docBase, jint leafOrd, jint leafDocBase) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexLeafReaderContext, initWithOrgApacheLuceneIndexCompositeReaderContext_withOrgApacheLuceneIndexLeafReader_withInt_withInt_withInt_withInt_, parent, reader, ord, docBase, leafOrd, leafDocBase)
 }
 
 void OrgApacheLuceneIndexLeafReaderContext_initWithOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneIndexLeafReaderContext *self, OrgApacheLuceneIndexLeafReader *leafReader) {
@@ -107,9 +109,11 @@ void OrgApacheLuceneIndexLeafReaderContext_initWithOrgApacheLuceneIndexLeafReade
 }
 
 OrgApacheLuceneIndexLeafReaderContext *new_OrgApacheLuceneIndexLeafReaderContext_initWithOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneIndexLeafReader *leafReader) {
-  OrgApacheLuceneIndexLeafReaderContext *self = [OrgApacheLuceneIndexLeafReaderContext alloc];
-  OrgApacheLuceneIndexLeafReaderContext_initWithOrgApacheLuceneIndexLeafReader_(self, leafReader);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexLeafReaderContext, initWithOrgApacheLuceneIndexLeafReader_, leafReader)
+}
+
+OrgApacheLuceneIndexLeafReaderContext *create_OrgApacheLuceneIndexLeafReaderContext_initWithOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneIndexLeafReader *leafReader) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexLeafReaderContext, initWithOrgApacheLuceneIndexLeafReader_, leafReader)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexLeafReaderContext)

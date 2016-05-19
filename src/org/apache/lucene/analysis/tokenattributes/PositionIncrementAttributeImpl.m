@@ -30,7 +30,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setPositionIncrementWithInt:(jint)positionIncrement {
   if (positionIncrement < 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"Increment must be zero or greater: got ", positionIncrement)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"Increment must be zero or greater: got ", positionIncrement));
   }
   self->positionIncrement_ = positionIncrement;
 }
@@ -48,7 +48,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     return true;
   }
   if ([other isKindOfClass:[OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttributeImpl class]]) {
-    OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttributeImpl *_other = (OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttributeImpl *) check_class_cast(other, [OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttributeImpl class]);
+    OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttributeImpl *_other = (OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttributeImpl *) cast_chk(other, [OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttributeImpl class]);
     return positionIncrement_ == ((OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttributeImpl *) nil_chk(_other))->positionIncrement_;
   }
   return false;
@@ -59,7 +59,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)copyToWithOrgApacheLuceneUtilAttributeImpl:(OrgApacheLuceneUtilAttributeImpl *)target {
-  id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute> t = (id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) check_protocol_cast(target, OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_class_());
+  id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute> t = (id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) cast_check(target, OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_class_());
   [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(t)) setPositionIncrementWithInt:positionIncrement_];
 }
 
@@ -93,9 +93,11 @@ void OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttributeImpl_init(O
 }
 
 OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttributeImpl_init() {
-  OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttributeImpl *self = [OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttributeImpl alloc];
-  OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttributeImpl_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttributeImpl, init)
+}
+
+OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttributeImpl_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttributeImpl, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttributeImpl)

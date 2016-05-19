@@ -5,53 +5,110 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisArArabicStemmer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisArArabicStemmer_RESTRICT
-#define OrgApacheLuceneAnalysisArArabicStemmer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisArArabicStemmer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisArArabicStemmer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisArArabicStemmer 0
 #else
-#define OrgApacheLuceneAnalysisArArabicStemmer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisArArabicStemmer 1
 #endif
-#undef OrgApacheLuceneAnalysisArArabicStemmer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisArArabicStemmer
 
-#if !defined (_OrgApacheLuceneAnalysisArArabicStemmer_) && (OrgApacheLuceneAnalysisArArabicStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisArArabicStemmer_INCLUDE)
-#define _OrgApacheLuceneAnalysisArArabicStemmer_
+#if !defined (OrgApacheLuceneAnalysisArArabicStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisArArabicStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisArArabicStemmer))
+#define OrgApacheLuceneAnalysisArArabicStemmer_
 
 @class IOSCharArray;
 @class IOSObjectArray;
 
-#define OrgApacheLuceneAnalysisArArabicStemmer_ALEF 0x0627
-#define OrgApacheLuceneAnalysisArArabicStemmer_BEH 0x0628
-#define OrgApacheLuceneAnalysisArArabicStemmer_TEH_MARBUTA 0x0629
-#define OrgApacheLuceneAnalysisArArabicStemmer_TEH 0x062a
-#define OrgApacheLuceneAnalysisArArabicStemmer_FEH 0x0641
-#define OrgApacheLuceneAnalysisArArabicStemmer_KAF 0x0643
-#define OrgApacheLuceneAnalysisArArabicStemmer_LAM 0x0644
-#define OrgApacheLuceneAnalysisArArabicStemmer_NOON 0x0646
-#define OrgApacheLuceneAnalysisArArabicStemmer_HEH 0x0647
-#define OrgApacheLuceneAnalysisArArabicStemmer_WAW 0x0648
-#define OrgApacheLuceneAnalysisArArabicStemmer_YEH 0x064a
-
+/*!
+ @brief Stemmer for Arabic.
+ <p>
+ Stemming  is done in-place for efficiency, operating on a termbuffer.
+ <p>
+ Stemming is defined as:
+ <ul>
+ <li> Removal of attached definite article, conjunction, and prepositions.
+ <li> Stemming of common suffixes.
+ </ul>
+ */
 @interface OrgApacheLuceneAnalysisArArabicStemmer : NSObject
+
++ (jchar)ALEF;
+
++ (jchar)BEH;
+
++ (jchar)TEH_MARBUTA;
+
++ (jchar)TEH;
+
++ (jchar)FEH;
+
++ (jchar)KAF;
+
++ (jchar)LAM;
+
++ (jchar)NOON;
+
++ (jchar)HEH;
+
++ (jchar)WAW;
+
++ (jchar)YEH;
+
++ (IOSObjectArray *)prefixes;
+
++ (IOSObjectArray *)suffixes;
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @brief Stem an input buffer of Arabic text.
+ @param s input buffer
+ @param len length of input buffer
+ @return length of input buffer after normalization
+ */
 - (jint)stemWithCharArray:(IOSCharArray *)s
                   withInt:(jint)len;
 
+/*!
+ @brief Stem a prefix off an Arabic word.
+ @param s input buffer
+ @param len length of input buffer
+ @return new length of input buffer after stemming.
+ */
 - (jint)stemPrefixWithCharArray:(IOSCharArray *)s
                         withInt:(jint)len;
 
+/*!
+ @brief Stem suffix(es) off an Arabic word.
+ @param s input buffer
+ @param len length of input buffer
+ @return new length of input buffer after stemming
+ */
 - (jint)stemSuffixWithCharArray:(IOSCharArray *)s
                         withInt:(jint)len;
 
 #pragma mark Package-Private
 
+/*!
+ @brief Returns true if the suffix matches and can be stemmed
+ @param s input buffer
+ @param len length of input buffer
+ @param suffix suffix to check
+ @return true if the suffix matches and can be stemmed
+ */
 - (jboolean)endsWithCheckLengthWithCharArray:(IOSCharArray *)s
                                      withInt:(jint)len
                                withCharArray:(IOSCharArray *)suffix;
 
+/*!
+ @brief Returns true if the prefix matches and can be stemmed
+ @param s input buffer
+ @param len length of input buffer
+ @param prefix prefix to check
+ @return true if the prefix matches and can be stemmed
+ */
 - (jboolean)startsWithCheckLengthWithCharArray:(IOSCharArray *)s
                                        withInt:(jint)len
                                  withCharArray:(IOSCharArray *)prefix;
@@ -60,40 +117,68 @@
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisArArabicStemmer)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisArArabicStemmer, ALEF, jchar)
+inline jchar OrgApacheLuceneAnalysisArArabicStemmer_get_ALEF();
+#define OrgApacheLuceneAnalysisArArabicStemmer_ALEF 0x0627
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisArArabicStemmer, ALEF, jchar)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisArArabicStemmer, BEH, jchar)
+inline jchar OrgApacheLuceneAnalysisArArabicStemmer_get_BEH();
+#define OrgApacheLuceneAnalysisArArabicStemmer_BEH 0x0628
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisArArabicStemmer, BEH, jchar)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisArArabicStemmer, TEH_MARBUTA, jchar)
+inline jchar OrgApacheLuceneAnalysisArArabicStemmer_get_TEH_MARBUTA();
+#define OrgApacheLuceneAnalysisArArabicStemmer_TEH_MARBUTA 0x0629
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisArArabicStemmer, TEH_MARBUTA, jchar)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisArArabicStemmer, TEH, jchar)
+inline jchar OrgApacheLuceneAnalysisArArabicStemmer_get_TEH();
+#define OrgApacheLuceneAnalysisArArabicStemmer_TEH 0x062a
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisArArabicStemmer, TEH, jchar)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisArArabicStemmer, FEH, jchar)
+inline jchar OrgApacheLuceneAnalysisArArabicStemmer_get_FEH();
+#define OrgApacheLuceneAnalysisArArabicStemmer_FEH 0x0641
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisArArabicStemmer, FEH, jchar)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisArArabicStemmer, KAF, jchar)
+inline jchar OrgApacheLuceneAnalysisArArabicStemmer_get_KAF();
+#define OrgApacheLuceneAnalysisArArabicStemmer_KAF 0x0643
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisArArabicStemmer, KAF, jchar)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisArArabicStemmer, LAM, jchar)
+inline jchar OrgApacheLuceneAnalysisArArabicStemmer_get_LAM();
+#define OrgApacheLuceneAnalysisArArabicStemmer_LAM 0x0644
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisArArabicStemmer, LAM, jchar)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisArArabicStemmer, NOON, jchar)
+inline jchar OrgApacheLuceneAnalysisArArabicStemmer_get_NOON();
+#define OrgApacheLuceneAnalysisArArabicStemmer_NOON 0x0646
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisArArabicStemmer, NOON, jchar)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisArArabicStemmer, HEH, jchar)
+inline jchar OrgApacheLuceneAnalysisArArabicStemmer_get_HEH();
+#define OrgApacheLuceneAnalysisArArabicStemmer_HEH 0x0647
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisArArabicStemmer, HEH, jchar)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisArArabicStemmer, WAW, jchar)
+inline jchar OrgApacheLuceneAnalysisArArabicStemmer_get_WAW();
+#define OrgApacheLuceneAnalysisArArabicStemmer_WAW 0x0648
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisArArabicStemmer, WAW, jchar)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisArArabicStemmer, YEH, jchar)
+inline jchar OrgApacheLuceneAnalysisArArabicStemmer_get_YEH();
+#define OrgApacheLuceneAnalysisArArabicStemmer_YEH 0x064a
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisArArabicStemmer, YEH, jchar)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneAnalysisArArabicStemmer_prefixes_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisArArabicStemmer, prefixes_, IOSObjectArray *)
+inline IOSObjectArray *OrgApacheLuceneAnalysisArArabicStemmer_get_prefixes();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneAnalysisArArabicStemmer_prefixes;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisArArabicStemmer, prefixes, IOSObjectArray *)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneAnalysisArArabicStemmer_suffixes_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisArArabicStemmer, suffixes_, IOSObjectArray *)
+inline IOSObjectArray *OrgApacheLuceneAnalysisArArabicStemmer_get_suffixes();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneAnalysisArArabicStemmer_suffixes;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisArArabicStemmer, suffixes, IOSObjectArray *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisArArabicStemmer_init(OrgApacheLuceneAnalysisArArabicStemmer *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisArArabicStemmer *new_OrgApacheLuceneAnalysisArArabicStemmer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisArArabicStemmer *create_OrgApacheLuceneAnalysisArArabicStemmer_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisArArabicStemmer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisArArabicStemmer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisArArabicStemmer")

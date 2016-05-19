@@ -5,23 +5,34 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_RESTRICT
-#define OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer 0
 #else
-#define OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer 1
 #endif
-#undef OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer
 
-#if !defined (_OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_) && (OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_INCLUDE)
-#define _OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_
+#if !defined (OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer))
+#define OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_
 
-#define OrgApacheLuceneAnalysisPtRSLPStemmerBase_RESTRICT 1
-#define OrgApacheLuceneAnalysisPtRSLPStemmerBase_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisPtRSLPStemmerBase 1
+#define INCLUDE_OrgApacheLuceneAnalysisPtRSLPStemmerBase 1
 #include "org/apache/lucene/analysis/pt/RSLPStemmerBase.h"
 
 @class IOSCharArray;
 
+/*!
+ @brief Minimal Stemmer for Portuguese
+ <p>
+ This follows the "RSLP-S" algorithm presented in:
+ <i>A study on the Use of Stemming for Monolingual Ad-Hoc Portuguese
+ Information Retrieval</i> (Orengo, et al)
+ which is just the plural reduction step of the RSLP
+ algorithm from <i>A Stemming Algorithm for the Portuguese Language</i>,
+ Orengo et al.
+ - seealso: RSLPStemmerBase
+ */
 @interface OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer : OrgApacheLuceneAnalysisPtRSLPStemmerBase
 
 #pragma mark Public
@@ -39,8 +50,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_init(Or
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer *new_OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer *create_OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer")

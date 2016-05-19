@@ -5,26 +5,29 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_INCLUDE_ALL")
-#if OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_RESTRICT
-#define OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery")
+#ifdef RESTRICT_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery
+#define INCLUDE_ALL_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery 0
 #else
-#define OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery 1
 #endif
-#undef OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery
 
-#if !defined (_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_) && (OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_INCLUDE_ALL || OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_INCLUDE)
-#define _OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_
+#if !defined (OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery || defined(INCLUDE_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery))
+#define OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_
 
-#define OrgApacheLuceneSearchSpansSpanQuery_RESTRICT 1
-#define OrgApacheLuceneSearchSpansSpanQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSpansSpanQuery 1
+#define INCLUDE_OrgApacheLuceneSearchSpansSpanQuery 1
 #include "org/apache/lucene/search/spans/SpanQuery.h"
 
 @class OrgApacheLuceneSearchIndexSearcher;
-@class OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum;
+@class OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus;
 @class OrgApacheLuceneSearchSpansSpanWeight;
 @protocol JavaUtilCollection;
 
+/*!
+ @brief Only return those matches that have a specific payload at the given position.
+ */
 @interface OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery : OrgApacheLuceneSearchSpansSpanQuery {
  @public
   id<JavaUtilCollection> payloadToMatch_;
@@ -33,6 +36,10 @@
 
 #pragma mark Public
 
+/*!
+ @param match The underlying <code>org.apache.lucene.search.spans.SpanQuery</code> to check
+ @param payloadToMatch The <code>java.util.Collection</code> of payloads to match
+ */
 - (instancetype)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)match
                                      withJavaUtilCollection:(id<JavaUtilCollection>)payloadToMatch;
 
@@ -51,7 +58,12 @@
 
 #pragma mark Protected
 
-- (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum *)checkPayloadsWithJavaUtilCollection:(id<JavaUtilCollection>)candidate;
+/*!
+ @brief Check to see if the collected payloads match the required set.
+ @param candidate a collection of payloads from the current Spans
+ @return whether or not the payloads match
+ */
+- (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *)checkPayloadsWithJavaUtilCollection:(id<JavaUtilCollection>)candidate;
 
 @end
 
@@ -64,26 +76,31 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_initWi
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery *new_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withJavaUtilCollection_(OrgApacheLuceneSearchSpansSpanQuery *match, id<JavaUtilCollection> payloadToMatch) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery *create_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withJavaUtilCollection_(OrgApacheLuceneSearchSpansSpanQuery *match, id<JavaUtilCollection> payloadToMatch);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_) && (OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_INCLUDE_ALL || OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_INCLUDE)
-#define _OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_
+#if !defined (OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_) && (INCLUDE_ALL_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery || defined(INCLUDE_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight))
+#define OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_
 
-#define OrgApacheLuceneSearchSpansSpanWeight_RESTRICT 1
-#define OrgApacheLuceneSearchSpansSpanWeight_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSpansSpanWeight 1
+#define INCLUDE_OrgApacheLuceneSearchSpansSpanWeight 1
 #include "org/apache/lucene/search/spans/SpanWeight.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery;
 @class OrgApacheLuceneSearchScorer;
-@class OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum;
+@class OrgApacheLuceneSearchSpansSpanWeight_Postings;
 @class OrgApacheLuceneSearchSpansSpans;
 @protocol JavaUtilMap;
 @protocol JavaUtilSet;
 
+/*!
+ @brief Weight that pulls its Spans using a PayloadSpanCollector
+ */
 @interface OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight : OrgApacheLuceneSearchSpansSpanWeight {
  @public
   OrgApacheLuceneSearchSpansSpanWeight *matchWeight_;
@@ -101,7 +118,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery)
 - (void)extractTermsWithJavaUtilSet:(id<JavaUtilSet>)terms;
 
 - (OrgApacheLuceneSearchSpansSpans *)getSpansWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                 withOrgApacheLuceneSearchSpansSpanWeight_PostingsEnum:(OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum *)requiredPostings;
+                                     withOrgApacheLuceneSearchSpansSpanWeight_Postings:(OrgApacheLuceneSearchSpansSpanWeight_Postings *)requiredPostings;
 
 - (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
@@ -115,8 +132,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPa
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight *new_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_initWithOrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_withOrgApacheLuceneSearchSpansSpanWeight_(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery *outer$, OrgApacheLuceneSearchIndexSearcher *searcher, id<JavaUtilMap> termContexts, OrgApacheLuceneSearchSpansSpanWeight *matchWeight) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight *create_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_initWithOrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_withOrgApacheLuceneSearchSpansSpanWeight_(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery *outer$, OrgApacheLuceneSearchIndexSearcher *searcher, id<JavaUtilMap> termContexts, OrgApacheLuceneSearchSpansSpanWeight *matchWeight);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery")

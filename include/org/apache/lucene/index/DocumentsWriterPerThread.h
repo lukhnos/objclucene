@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexDocumentsWriterPerThread_INCLUDE_ALL")
-#if OrgApacheLuceneIndexDocumentsWriterPerThread_RESTRICT
-#define OrgApacheLuceneIndexDocumentsWriterPerThread_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriterPerThread")
+#ifdef RESTRICT_OrgApacheLuceneIndexDocumentsWriterPerThread
+#define INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriterPerThread 0
 #else
-#define OrgApacheLuceneIndexDocumentsWriterPerThread_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriterPerThread 1
 #endif
-#undef OrgApacheLuceneIndexDocumentsWriterPerThread_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexDocumentsWriterPerThread
 
-#if !defined (_OrgApacheLuceneIndexDocumentsWriterPerThread_) && (OrgApacheLuceneIndexDocumentsWriterPerThread_INCLUDE_ALL || OrgApacheLuceneIndexDocumentsWriterPerThread_INCLUDE)
-#define _OrgApacheLuceneIndexDocumentsWriterPerThread_
+#if !defined (OrgApacheLuceneIndexDocumentsWriterPerThread_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriterPerThread || defined(INCLUDE_OrgApacheLuceneIndexDocumentsWriterPerThread))
+#define OrgApacheLuceneIndexDocumentsWriterPerThread_
 
 @class JavaUtilConcurrentAtomicAtomicLong;
 @class OrgApacheLuceneAnalysisAnalyzer;
@@ -41,9 +41,6 @@
 @protocol JavaLangIterable;
 @protocol JavaUtilSet;
 
-#define OrgApacheLuceneIndexDocumentsWriterPerThread_BYTE_BLOCK_NOT_MASK -32768
-#define OrgApacheLuceneIndexDocumentsWriterPerThread_MAX_TERM_LENGTH_UTF8 32766
-
 @interface OrgApacheLuceneIndexDocumentsWriterPerThread : NSObject {
  @public
   OrgApacheLuceneCodecsCodec *codec_;
@@ -60,6 +57,12 @@
   OrgApacheLuceneUtilIntBlockPool_Allocator *intBlockAllocator_;
 }
 
++ (OrgApacheLuceneIndexDocumentsWriterPerThread_IndexingChain *)defaultIndexingChain;
+
++ (jint)BYTE_BLOCK_NOT_MASK;
+
++ (jint)MAX_TERM_LENGTH_UTF8;
+
 #pragma mark Public
 
 - (instancetype)initWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
@@ -75,8 +78,14 @@
 
 - (OrgApacheLuceneIndexFieldInfos_Builder *)getFieldInfosBuilder;
 
+/*!
+ @brief Returns the number of RAM resident documents in this <code>DocumentsWriterPerThread</code>
+ */
 - (jint)getNumDocsInRAM;
 
+/*!
+ @brief Returns the number of delete terms in this <code>DocumentsWriterPerThread</code>
+ */
 - (jint)numDeleteTerms;
 
 - (id<JavaUtilSet>)pendingFilesToDelete;
@@ -93,18 +102,41 @@
 
 #pragma mark Package-Private
 
+/*!
+ @brief Called if we hit an exception at a bad time (when
+ updating the index files) and must discard all
+ currently buffered docs.
+ This resets our state,
+ discarding any docs added since last flush. 
+ */
 - (void)abort;
 
 - (jlong)bytesUsed;
 
 - (void)deleteDocIDWithInt:(jint)docIDUpto;
 
+/*!
+ @brief Flush all pending docs to a new segment
+ */
 - (OrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment *)flush;
 
+/*!
+ @brief Get current segment info we are writing.
+ */
 - (OrgApacheLuceneIndexSegmentInfo *)getSegmentInfo;
 
+/*!
+ @brief Prepares this DWPT for flushing.
+ This method will freeze and return the
+ <code>DocumentsWriterDeleteQueue</code>s global buffer and apply all pending
+ deletes to this DWPT.
+ */
 - (OrgApacheLuceneIndexFrozenBufferedUpdates *)prepareFlush;
 
+/*!
+ @brief Seals the <code>SegmentInfo</code> for the new flushed segment and persists
+ the deleted documents <code>MutableBits</code>.
+ */
 - (void)sealFlushedSegmentWithOrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment:(OrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment *)flushedSegment;
 
 - (void)testPointWithNSString:(NSString *)message;
@@ -125,27 +157,40 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterPerThread, deleteQueue_, 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterPerThread, byteBlockAllocator_, OrgApacheLuceneUtilByteBlockPool_Allocator *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterPerThread, intBlockAllocator_, OrgApacheLuceneUtilIntBlockPool_Allocator *)
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterPerThread_IndexingChain *OrgApacheLuceneIndexDocumentsWriterPerThread_defaultIndexingChain_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexDocumentsWriterPerThread, defaultIndexingChain_, OrgApacheLuceneIndexDocumentsWriterPerThread_IndexingChain *)
+inline OrgApacheLuceneIndexDocumentsWriterPerThread_IndexingChain *OrgApacheLuceneIndexDocumentsWriterPerThread_get_defaultIndexingChain();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterPerThread_IndexingChain *OrgApacheLuceneIndexDocumentsWriterPerThread_defaultIndexingChain;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexDocumentsWriterPerThread, defaultIndexingChain, OrgApacheLuceneIndexDocumentsWriterPerThread_IndexingChain *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexDocumentsWriterPerThread, BYTE_BLOCK_NOT_MASK, jint)
+inline jint OrgApacheLuceneIndexDocumentsWriterPerThread_get_BYTE_BLOCK_NOT_MASK();
+#define OrgApacheLuceneIndexDocumentsWriterPerThread_BYTE_BLOCK_NOT_MASK -32768
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexDocumentsWriterPerThread, BYTE_BLOCK_NOT_MASK, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexDocumentsWriterPerThread, MAX_TERM_LENGTH_UTF8, jint)
+inline jint OrgApacheLuceneIndexDocumentsWriterPerThread_get_MAX_TERM_LENGTH_UTF8();
+#define OrgApacheLuceneIndexDocumentsWriterPerThread_MAX_TERM_LENGTH_UTF8 32766
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexDocumentsWriterPerThread, MAX_TERM_LENGTH_UTF8, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexDocumentsWriterPerThread_initWithOrgApacheLuceneIndexIndexWriter_withNSString_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneIndexDocumentsWriterDeleteQueue_withOrgApacheLuceneIndexFieldInfos_Builder_withJavaUtilConcurrentAtomicAtomicLong_withBoolean_(OrgApacheLuceneIndexDocumentsWriterPerThread *self, OrgApacheLuceneIndexIndexWriter *writer, NSString *segmentName, OrgApacheLuceneStoreDirectory *directoryOrig, OrgApacheLuceneStoreDirectory *directory, OrgApacheLuceneIndexLiveIndexWriterConfig *indexWriterConfig, OrgApacheLuceneUtilInfoStream *infoStream, OrgApacheLuceneIndexDocumentsWriterDeleteQueue *deleteQueue, OrgApacheLuceneIndexFieldInfos_Builder *fieldInfos, JavaUtilConcurrentAtomicAtomicLong *pendingNumDocs, jboolean enableTestPoints);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterPerThread *new_OrgApacheLuceneIndexDocumentsWriterPerThread_initWithOrgApacheLuceneIndexIndexWriter_withNSString_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneIndexDocumentsWriterDeleteQueue_withOrgApacheLuceneIndexFieldInfos_Builder_withJavaUtilConcurrentAtomicAtomicLong_withBoolean_(OrgApacheLuceneIndexIndexWriter *writer, NSString *segmentName, OrgApacheLuceneStoreDirectory *directoryOrig, OrgApacheLuceneStoreDirectory *directory, OrgApacheLuceneIndexLiveIndexWriterConfig *indexWriterConfig, OrgApacheLuceneUtilInfoStream *infoStream, OrgApacheLuceneIndexDocumentsWriterDeleteQueue *deleteQueue, OrgApacheLuceneIndexFieldInfos_Builder *fieldInfos, JavaUtilConcurrentAtomicAtomicLong *pendingNumDocs, jboolean enableTestPoints) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterPerThread *create_OrgApacheLuceneIndexDocumentsWriterPerThread_initWithOrgApacheLuceneIndexIndexWriter_withNSString_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneIndexDocumentsWriterDeleteQueue_withOrgApacheLuceneIndexFieldInfos_Builder_withJavaUtilConcurrentAtomicAtomicLong_withBoolean_(OrgApacheLuceneIndexIndexWriter *writer, NSString *segmentName, OrgApacheLuceneStoreDirectory *directoryOrig, OrgApacheLuceneStoreDirectory *directory, OrgApacheLuceneIndexLiveIndexWriterConfig *indexWriterConfig, OrgApacheLuceneUtilInfoStream *infoStream, OrgApacheLuceneIndexDocumentsWriterDeleteQueue *deleteQueue, OrgApacheLuceneIndexFieldInfos_Builder *fieldInfos, JavaUtilConcurrentAtomicAtomicLong *pendingNumDocs, jboolean enableTestPoints);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterPerThread)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexDocumentsWriterPerThread_IndexingChain_) && (OrgApacheLuceneIndexDocumentsWriterPerThread_INCLUDE_ALL || OrgApacheLuceneIndexDocumentsWriterPerThread_IndexingChain_INCLUDE)
-#define _OrgApacheLuceneIndexDocumentsWriterPerThread_IndexingChain_
+#if !defined (OrgApacheLuceneIndexDocumentsWriterPerThread_IndexingChain_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriterPerThread || defined(INCLUDE_OrgApacheLuceneIndexDocumentsWriterPerThread_IndexingChain))
+#define OrgApacheLuceneIndexDocumentsWriterPerThread_IndexingChain_
 
 @class OrgApacheLuceneIndexDocConsumer;
 @class OrgApacheLuceneIndexDocumentsWriterPerThread;
 
+/*!
+ @brief The IndexingChain must define the <code>getChain(DocumentsWriterPerThread)</code> method
+ which returns the DocConsumer that the DocumentsWriter calls to process the
+ documents.
+ */
 @interface OrgApacheLuceneIndexDocumentsWriterPerThread_IndexingChain : NSObject
 
 #pragma mark Package-Private
@@ -164,8 +209,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterPerThread_Indexing
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexDocumentsWriterPerThread_DocState_) && (OrgApacheLuceneIndexDocumentsWriterPerThread_INCLUDE_ALL || OrgApacheLuceneIndexDocumentsWriterPerThread_DocState_INCLUDE)
-#define _OrgApacheLuceneIndexDocumentsWriterPerThread_DocState_
+#if !defined (OrgApacheLuceneIndexDocumentsWriterPerThread_DocState_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriterPerThread || defined(INCLUDE_OrgApacheLuceneIndexDocumentsWriterPerThread_DocState))
+#define OrgApacheLuceneIndexDocumentsWriterPerThread_DocState_
 
 @class OrgApacheLuceneAnalysisAnalyzer;
 @class OrgApacheLuceneIndexDocumentsWriterPerThread;
@@ -208,12 +253,14 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexDocumentsWriterPerThread_DocState_ini
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterPerThread_DocState *new_OrgApacheLuceneIndexDocumentsWriterPerThread_DocState_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_withOrgApacheLuceneUtilInfoStream_(OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter, OrgApacheLuceneUtilInfoStream *infoStream) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterPerThread_DocState *create_OrgApacheLuceneIndexDocumentsWriterPerThread_DocState_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_withOrgApacheLuceneUtilInfoStream_(OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter, OrgApacheLuceneUtilInfoStream *infoStream);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterPerThread_DocState)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment_) && (OrgApacheLuceneIndexDocumentsWriterPerThread_INCLUDE_ALL || OrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment_INCLUDE)
-#define _OrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment_
+#if !defined (OrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriterPerThread || defined(INCLUDE_OrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment))
+#define OrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment_
 
 @class OrgApacheLuceneIndexFieldInfos;
 @class OrgApacheLuceneIndexFrozenBufferedUpdates;
@@ -242,4 +289,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterPerThread_FlushedS
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexDocumentsWriterPerThread_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriterPerThread")

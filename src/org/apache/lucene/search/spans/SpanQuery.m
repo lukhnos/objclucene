@@ -49,9 +49,9 @@ J2OBJC_IGNORE_DESIGNATED_END
   static const J2ObjcMethodInfo methods[] = {
     { "getField", NULL, "Ljava.lang.String;", 0x401, NULL, NULL },
     { "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:", "createWeight", "Lorg.apache.lucene.search.spans.SpanWeight;", 0x401, "Ljava.io.IOException;", NULL },
-    { "getTermContextsWithOrgApacheLuceneSearchSpansSpanWeightArray:", "getTermContexts", "Ljava.util.Map;", 0x8c, NULL, NULL },
-    { "getTermContextsWithJavaUtilCollection:", "getTermContexts", "Ljava.util.Map;", 0xc, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "getTermContextsWithOrgApacheLuceneSearchSpansSpanWeightArray:", "getTermContexts", "Ljava.util.Map;", 0x8c, NULL, "([Lorg/apache/lucene/search/spans/SpanWeight;)Ljava/util/Map<Lorg/apache/lucene/index/Term;Lorg/apache/lucene/index/TermContext;>;" },
+    { "getTermContextsWithJavaUtilCollection:", "getTermContexts", "Ljava.util.Map;", 0xc, NULL, "(Ljava/util/Collection<Lorg/apache/lucene/search/spans/SpanWeight;>;)Ljava/util/Map<Lorg/apache/lucene/index/Term;Lorg/apache/lucene/index/TermContext;>;" },
+    { "init", "SpanQuery", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanQuery = { 2, "SpanQuery", "org.apache.lucene.search.spans", NULL, 0x401, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSpansSpanQuery;
@@ -61,7 +61,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 id<JavaUtilMap> OrgApacheLuceneSearchSpansSpanQuery_getTermContextsWithOrgApacheLuceneSearchSpansSpanWeightArray_(IOSObjectArray *weights) {
   OrgApacheLuceneSearchSpansSpanQuery_initialize();
-  id<JavaUtilMap> terms = [new_JavaUtilTreeMap_init() autorelease];
+  id<JavaUtilMap> terms = create_JavaUtilTreeMap_init();
   {
     IOSObjectArray *a__ = weights;
     OrgApacheLuceneSearchSpansSpanWeight * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
@@ -76,7 +76,7 @@ id<JavaUtilMap> OrgApacheLuceneSearchSpansSpanQuery_getTermContextsWithOrgApache
 
 id<JavaUtilMap> OrgApacheLuceneSearchSpansSpanQuery_getTermContextsWithJavaUtilCollection_(id<JavaUtilCollection> weights) {
   OrgApacheLuceneSearchSpansSpanQuery_initialize();
-  id<JavaUtilMap> terms = [new_JavaUtilTreeMap_init() autorelease];
+  id<JavaUtilMap> terms = create_JavaUtilTreeMap_init();
   for (OrgApacheLuceneSearchSpansSpanWeight * __strong w in nil_chk(weights)) {
     [((OrgApacheLuceneSearchSpansSpanWeight *) nil_chk(w)) extractTermContextsWithJavaUtilMap:terms];
   }

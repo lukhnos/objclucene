@@ -3,12 +3,8 @@
 //  source: ./join/src/java/org/apache/lucene/search/join/BitSetProducer.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "org/apache/lucene/index/LeafReaderContext.h"
 #include "org/apache/lucene/search/join/BitSetProducer.h"
-#include "org/apache/lucene/util/BitSet.h"
 
 @interface OrgApacheLuceneSearchJoinBitSetProducer : NSObject
 

@@ -54,7 +54,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode, fie
 }
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode *clone = (OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode *) check_class_cast([super cloneTree], [OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode class]);
+  OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode *clone = (OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode *) cast_chk([super cloneTree], [OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode class]);
   JreStrongAssign(&((OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode *) nil_chk(clone))->field_, self->field_);
   clone->minimumMatchingmElements_ = self->minimumMatchingmElements_;
   return clone;
@@ -62,7 +62,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode, fie
 
 - (NSString *)description {
   if ([self getChildren] == nil || [((id<JavaUtilList>) nil_chk([self getChildren])) size] == 0) return JreStrcat("$@$I$", @"<any field='", self->field_, @"'  matchelements=", self->minimumMatchingmElements_, @"/>");
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   [sb appendWithNSString:JreStrcat("$@$IC", @"<any field='", self->field_, @"'  matchelements=", self->minimumMatchingmElements_, '>')];
   for (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> __strong clause in nil_chk([self getChildren])) {
     [sb appendWithNSString:@"\n"];
@@ -74,7 +74,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode, fie
 
 - (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escapeSyntaxParser {
   NSString *anySTR = JreStrcat("$I", @"ANY ", self->minimumMatchingmElements_);
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   if ([self getChildren] == nil || [((id<JavaUtilList>) nil_chk([self getChildren])) size] == 0) {
   }
   else {
@@ -99,7 +99,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode, fie
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:withJavaLangCharSequence:withInt:", "AnyQueryNode", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilList:withJavaLangCharSequence:withInt:", "AnyQueryNode", NULL, 0x1, NULL, "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;Ljava/lang/CharSequence;I)V" },
     { "getMinimumMatchingElements", NULL, "I", 0x1, NULL, NULL },
     { "getField", NULL, "Ljava.lang.CharSequence;", 0x1, NULL, NULL },
     { "getFieldAsString", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
@@ -128,10 +128,10 @@ void OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode_initWithJavaUtilLis
     for (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> __strong clause in clauses) {
       if ([clause isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode class]]) {
         if ([clause isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl class]]) {
-          ((OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl *) nil_chk(((OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl *) check_class_cast(clause, [OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl class]))))->toQueryStringIgnoreFields_ = true;
+          ((OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl *) nil_chk(((OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl *) cast_chk(clause, [OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl class]))))->toQueryStringIgnoreFields_ = true;
         }
         if ([OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_() isInstance:clause]) {
-          [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) nil_chk(((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) check_protocol_cast(clause, OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_())))) setFieldWithJavaLangCharSequence:field];
+          [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) nil_chk(((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) cast_check(clause, OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_())))) setFieldWithJavaLangCharSequence:field];
         }
       }
     }
@@ -139,9 +139,11 @@ void OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode_initWithJavaUtilLis
 }
 
 OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode_initWithJavaUtilList_withJavaLangCharSequence_withInt_(id<JavaUtilList> clauses, id<JavaLangCharSequence> field, jint minimumMatchingElements) {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode *self = [OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode alloc];
-  OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode_initWithJavaUtilList_withJavaLangCharSequence_withInt_(self, clauses, field, minimumMatchingElements);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode, initWithJavaUtilList_withJavaLangCharSequence_withInt_, clauses, field, minimumMatchingElements)
+}
+
+OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode *create_OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode_initWithJavaUtilList_withJavaLangCharSequence_withInt_(id<JavaUtilList> clauses, id<JavaLangCharSequence> field, jint minimumMatchingElements) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode, initWithJavaUtilList_withJavaLangCharSequence_withInt_, clauses, field, minimumMatchingElements)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode)

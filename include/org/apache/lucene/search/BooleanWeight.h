@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchBooleanWeight_INCLUDE_ALL")
-#if OrgApacheLuceneSearchBooleanWeight_RESTRICT
-#define OrgApacheLuceneSearchBooleanWeight_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchBooleanWeight")
+#ifdef RESTRICT_OrgApacheLuceneSearchBooleanWeight
+#define INCLUDE_ALL_OrgApacheLuceneSearchBooleanWeight 0
 #else
-#define OrgApacheLuceneSearchBooleanWeight_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchBooleanWeight 1
 #endif
-#undef OrgApacheLuceneSearchBooleanWeight_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchBooleanWeight
 
-#if !defined (_OrgApacheLuceneSearchBooleanWeight_) && (OrgApacheLuceneSearchBooleanWeight_INCLUDE_ALL || OrgApacheLuceneSearchBooleanWeight_INCLUDE)
-#define _OrgApacheLuceneSearchBooleanWeight_
+#if !defined (OrgApacheLuceneSearchBooleanWeight_) && (INCLUDE_ALL_OrgApacheLuceneSearchBooleanWeight || defined(INCLUDE_OrgApacheLuceneSearchBooleanWeight))
+#define OrgApacheLuceneSearchBooleanWeight_
 
-#define OrgApacheLuceneSearchWeight_RESTRICT 1
-#define OrgApacheLuceneSearchWeight_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchWeight 1
+#define INCLUDE_OrgApacheLuceneSearchWeight 1
 #include "org/apache/lucene/search/Weight.h"
 
 @class IOSFloatArray;
@@ -32,8 +32,15 @@
 @class OrgApacheLuceneSearchSimilaritiesSimilarity;
 @protocol JavaUtilSet;
 
+/*!
+ @brief Expert: the Weight for BooleanQuery, used to
+ normalize, score and explain these queries.
+ */
 @interface OrgApacheLuceneSearchBooleanWeight : OrgApacheLuceneSearchWeight {
  @public
+  /*!
+   @brief The Similarity implementation.
+   */
   OrgApacheLuceneSearchSimilaritiesSimilarity *similarity_;
   OrgApacheLuceneSearchBooleanQuery *query_;
   JavaUtilArrayList *weights_;
@@ -69,6 +76,11 @@
                                               withBoolean:(jboolean)needsScores
                                               withBoolean:(jboolean)disableCoord;
 
+/*!
+ @brief Try to build a boolean scorer for this weight.
+ Returns null if <code>BooleanScorer</code>
+ cannot be used. 
+ */
 - (OrgApacheLuceneSearchBooleanScorer *)booleanScorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
 @end
@@ -84,8 +96,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchBooleanWeight_initWithOrgApacheLucen
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanWeight *new_OrgApacheLuceneSearchBooleanWeight_initWithOrgApacheLuceneSearchBooleanQuery_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withBoolean_(OrgApacheLuceneSearchBooleanQuery *query, OrgApacheLuceneSearchIndexSearcher *searcher, jboolean needsScores, jboolean disableCoord) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanWeight *create_OrgApacheLuceneSearchBooleanWeight_initWithOrgApacheLuceneSearchBooleanQuery_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withBoolean_(OrgApacheLuceneSearchBooleanQuery *query, OrgApacheLuceneSearchIndexSearcher *searcher, jboolean needsScores, jboolean disableCoord);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanWeight)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchBooleanWeight_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchBooleanWeight")

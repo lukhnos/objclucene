@@ -38,6 +38,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchJoinBaseGlobalOrdinalSc
 
 __attribute__((unused)) static OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_$1 *new_OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_$1_initWithOrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_(OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer *outer$) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_$1 *create_OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_$1_initWithOrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_(OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer *outer$);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_$1)
 
 @implementation OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer
@@ -62,7 +64,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_$1)
 }
 
 - (OrgApacheLuceneSearchTwoPhaseIterator *)asTwoPhaseIterator {
-  OrgApacheLuceneSearchDocIdSetIterator *approximation = [new_OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_$1_initWithOrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_(self) autorelease];
+  OrgApacheLuceneSearchDocIdSetIterator *approximation = create_OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_$1_initWithOrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_(self);
   return [self createTwoPhaseIteratorWithOrgApacheLuceneSearchDocIdSetIterator:approximation];
 }
 
@@ -168,9 +170,11 @@ void OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_$1_initWithOrgApacheLucene
 }
 
 OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_$1 *new_OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_$1_initWithOrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_(OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer *outer$) {
-  OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_$1 *self = [OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_$1 alloc];
-  OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_$1_initWithOrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_(self, outer$);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_$1, initWithOrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_, outer$)
+}
+
+OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_$1 *create_OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_$1_initWithOrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_(OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_$1, initWithOrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_, outer$)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_$1)

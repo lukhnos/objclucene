@@ -34,12 +34,15 @@
 
 @end
 
-static id<JavaUtilComparator> OrgApacheLuceneUtilArrayUtil_NATURAL_COMPARATOR_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilArrayUtil, NATURAL_COMPARATOR_, id<JavaUtilComparator>)
+inline id<JavaUtilComparator> OrgApacheLuceneUtilArrayUtil_get_NATURAL_COMPARATOR();
+static id<JavaUtilComparator> OrgApacheLuceneUtilArrayUtil_NATURAL_COMPARATOR;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilArrayUtil, NATURAL_COMPARATOR, id<JavaUtilComparator>)
 
 __attribute__((unused)) static void OrgApacheLuceneUtilArrayUtil_init(OrgApacheLuceneUtilArrayUtil *self);
 
 __attribute__((unused)) static OrgApacheLuceneUtilArrayUtil *new_OrgApacheLuceneUtilArrayUtil_init() NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneUtilArrayUtil *create_OrgApacheLuceneUtilArrayUtil_init();
 
 __attribute__((unused)) static jint OrgApacheLuceneUtilArrayUtil_parseWithCharArray_withInt_withInt_withInt_withBoolean_(IOSCharArray *chars, jint offset, jint len, jint radix, jboolean negative);
 
@@ -58,13 +61,19 @@ __attribute__((unused)) static void OrgApacheLuceneUtilArrayUtil_NaturalComparat
 
 __attribute__((unused)) static OrgApacheLuceneUtilArrayUtil_NaturalComparator *new_OrgApacheLuceneUtilArrayUtil_NaturalComparator_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneUtilArrayUtil_NaturalComparator *create_OrgApacheLuceneUtilArrayUtil_NaturalComparator_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilArrayUtil_NaturalComparator)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilArrayUtil)
 
-jint OrgApacheLuceneUtilArrayUtil_MAX_ARRAY_LENGTH_;
+jint OrgApacheLuceneUtilArrayUtil_MAX_ARRAY_LENGTH;
 
 @implementation OrgApacheLuceneUtilArrayUtil
+
++ (jint)MAX_ARRAY_LENGTH {
+  return OrgApacheLuceneUtilArrayUtil_MAX_ARRAY_LENGTH;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -340,8 +349,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilArrayUtil class]) {
-    OrgApacheLuceneUtilArrayUtil_MAX_ARRAY_LENGTH_ = JavaLangInteger_MAX_VALUE - JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_ARRAY_HEADER_);
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilArrayUtil_NATURAL_COMPARATOR_, new_OrgApacheLuceneUtilArrayUtil_NaturalComparator_init());
+    OrgApacheLuceneUtilArrayUtil_MAX_ARRAY_LENGTH = JavaLangInteger_MAX_VALUE - JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_ARRAY_HEADER);
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilArrayUtil_NATURAL_COMPARATOR, new_OrgApacheLuceneUtilArrayUtil_NaturalComparator_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilArrayUtil)
   }
 }
@@ -389,7 +398,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "equalsWithCharArray:withInt:withCharArray:withInt:withInt:", "equals", "Z", 0x9, NULL, NULL },
     { "equalsWithByteArray:withInt:withByteArray:withInt:withInt:", "equals", "Z", 0x9, NULL, NULL },
     { "equalsWithIntArray:withInt:withIntArray:withInt:withInt:", "equals", "Z", 0x9, NULL, NULL },
-    { "toIntArrayWithJavaUtilCollection:", "toIntArray", "[I", 0x9, NULL, NULL },
+    { "toIntArrayWithJavaUtilCollection:", "toIntArray", "[I", 0x9, NULL, "(Ljava/util/Collection<Ljava/lang/Integer;>;)[I" },
     { "naturalComparator", NULL, "Ljava.util.Comparator;", 0x9, NULL, "<T::Ljava/lang/Comparable<-TT;>;>()Ljava/util/Comparator<TT;>;" },
     { "swapWithNSObjectArray:withInt:withInt:", "swap", "V", 0x9, NULL, "<T:Ljava/lang/Object;>([TT;II)V" },
     { "introSortWithNSObjectArray:withInt:withInt:withJavaUtilComparator:", "introSort", "V", 0x9, NULL, "<T:Ljava/lang/Object;>([TT;IILjava/util/Comparator<-TT;>;)V" },
@@ -402,8 +411,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "timSortWithJavaLangComparableArray:", "timSort", "V", 0x9, NULL, "<T::Ljava/lang/Comparable<-TT;>;>([TT;)V" },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "MAX_ARRAY_LENGTH_", NULL, 0x19, "I", &OrgApacheLuceneUtilArrayUtil_MAX_ARRAY_LENGTH_, NULL, .constantValue.asLong = 0 },
-    { "NATURAL_COMPARATOR_", NULL, 0x1a, "Ljava.util.Comparator;", &OrgApacheLuceneUtilArrayUtil_NATURAL_COMPARATOR_, "Ljava/util/Comparator<*>;", .constantValue.asLong = 0 },
+    { "MAX_ARRAY_LENGTH", "MAX_ARRAY_LENGTH", 0x19, "I", &OrgApacheLuceneUtilArrayUtil_MAX_ARRAY_LENGTH, NULL, .constantValue.asLong = 0 },
+    { "NATURAL_COMPARATOR", "NATURAL_COMPARATOR", 0x1a, "Ljava.util.Comparator;", &OrgApacheLuceneUtilArrayUtil_NATURAL_COMPARATOR, "Ljava/util/Comparator<*>;", .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.ArrayUtil$NaturalComparator;"};
   static const J2ObjcClassInfo _OrgApacheLuceneUtilArrayUtil = { 2, "ArrayUtil", "org.apache.lucene.util", NULL, 0x11, 52, methods, 2, fields, 0, NULL, 1, inner_classes, NULL, NULL };
@@ -417,9 +426,11 @@ void OrgApacheLuceneUtilArrayUtil_init(OrgApacheLuceneUtilArrayUtil *self) {
 }
 
 OrgApacheLuceneUtilArrayUtil *new_OrgApacheLuceneUtilArrayUtil_init() {
-  OrgApacheLuceneUtilArrayUtil *self = [OrgApacheLuceneUtilArrayUtil alloc];
-  OrgApacheLuceneUtilArrayUtil_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilArrayUtil, init)
+}
+
+OrgApacheLuceneUtilArrayUtil *create_OrgApacheLuceneUtilArrayUtil_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilArrayUtil, init)
 }
 
 jint OrgApacheLuceneUtilArrayUtil_parseIntWithCharArray_(IOSCharArray *chars) {
@@ -435,15 +446,15 @@ jint OrgApacheLuceneUtilArrayUtil_parseIntWithCharArray_withInt_withInt_(IOSChar
 jint OrgApacheLuceneUtilArrayUtil_parseIntWithCharArray_withInt_withInt_withInt_(IOSCharArray *chars, jint offset, jint len, jint radix) {
   OrgApacheLuceneUtilArrayUtil_initialize();
   if (chars == nil || radix < JavaLangCharacter_MIN_RADIX || radix > JavaLangCharacter_MAX_RADIX) {
-    @throw [new_JavaLangNumberFormatException_init() autorelease];
+    @throw create_JavaLangNumberFormatException_init();
   }
   jint i = 0;
   if (len == 0) {
-    @throw [new_JavaLangNumberFormatException_initWithNSString_(@"chars length is 0") autorelease];
+    @throw create_JavaLangNumberFormatException_initWithNSString_(@"chars length is 0");
   }
-  jboolean negative = IOSCharArray_Get(nil_chk(chars), offset + i) == '-';
+  jboolean negative = IOSCharArray_Get(chars, offset + i) == '-';
   if (negative && ++i == len) {
-    @throw [new_JavaLangNumberFormatException_initWithNSString_(@"can't convert to an int") autorelease];
+    @throw create_JavaLangNumberFormatException_initWithNSString_(@"can't convert to an int");
   }
   if (negative == true) {
     offset++;
@@ -459,21 +470,21 @@ jint OrgApacheLuceneUtilArrayUtil_parseWithCharArray_withInt_withInt_withInt_wit
   for (jint i = 0; i < len; i++) {
     jint digit = JavaLangCharacter_digitWithChar_withInt_(IOSCharArray_Get(nil_chk(chars), i + offset), radix);
     if (digit == -1) {
-      @throw [new_JavaLangNumberFormatException_initWithNSString_(@"Unable to parse") autorelease];
+      @throw create_JavaLangNumberFormatException_initWithNSString_(@"Unable to parse");
     }
     if (max > result) {
-      @throw [new_JavaLangNumberFormatException_initWithNSString_(@"Unable to parse") autorelease];
+      @throw create_JavaLangNumberFormatException_initWithNSString_(@"Unable to parse");
     }
     jint next = result * radix - digit;
     if (next > result) {
-      @throw [new_JavaLangNumberFormatException_initWithNSString_(@"Unable to parse") autorelease];
+      @throw create_JavaLangNumberFormatException_initWithNSString_(@"Unable to parse");
     }
     result = next;
   }
   if (!negative) {
     result = -result;
     if (result < 0) {
-      @throw [new_JavaLangNumberFormatException_initWithNSString_(@"Unable to parse") autorelease];
+      @throw create_JavaLangNumberFormatException_initWithNSString_(@"Unable to parse");
     }
   }
   return result;
@@ -482,23 +493,23 @@ jint OrgApacheLuceneUtilArrayUtil_parseWithCharArray_withInt_withInt_withInt_wit
 jint OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(jint minTargetSize, jint bytesPerElement) {
   OrgApacheLuceneUtilArrayUtil_initialize();
   if (minTargetSize < 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"invalid array size ", minTargetSize)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"invalid array size ", minTargetSize));
   }
   if (minTargetSize == 0) {
     return 0;
   }
-  if (minTargetSize > OrgApacheLuceneUtilArrayUtil_MAX_ARRAY_LENGTH_) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$IC", @"requested array size ", minTargetSize, @" exceeds maximum array in java (", OrgApacheLuceneUtilArrayUtil_MAX_ARRAY_LENGTH_, ')')) autorelease];
+  if (minTargetSize > OrgApacheLuceneUtilArrayUtil_MAX_ARRAY_LENGTH) {
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$IC", @"requested array size ", minTargetSize, @" exceeds maximum array in java (", OrgApacheLuceneUtilArrayUtil_MAX_ARRAY_LENGTH, ')'));
   }
   jint extra = JreRShift32(minTargetSize, 3);
   if (extra < 3) {
     extra = 3;
   }
   jint newSize = minTargetSize + extra;
-  if (newSize + 7 < 0 || newSize + 7 > OrgApacheLuceneUtilArrayUtil_MAX_ARRAY_LENGTH_) {
-    return OrgApacheLuceneUtilArrayUtil_MAX_ARRAY_LENGTH_;
+  if (newSize + 7 < 0 || newSize + 7 > OrgApacheLuceneUtilArrayUtil_MAX_ARRAY_LENGTH) {
+    return OrgApacheLuceneUtilArrayUtil_MAX_ARRAY_LENGTH;
   }
-  if (JreLoadStatic(OrgApacheLuceneUtilConstants, JRE_IS_64BIT_)) {
+  if (JreLoadStatic(OrgApacheLuceneUtilConstants, JRE_IS_64BIT)) {
     switch (bytesPerElement) {
       case 4:
       return (newSize + 1) & (jint) 0x7ffffffe;
@@ -536,7 +547,7 @@ IOSObjectArray *OrgApacheLuceneUtilArrayUtil_growWithNSObjectArray_withInt_(IOSO
   OrgApacheLuceneUtilArrayUtil_initialize();
   JreAssert((minSize >= 0), (JreStrcat("$I$", @"size must be positive (got ", minSize, @"): likely integer overflow?")));
   if (((IOSObjectArray *) nil_chk(array))->size_ < minSize) {
-    return JavaUtilArrays_copyOfWithNSObjectArray_withInt_(array, OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(minSize, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_)));
+    return JavaUtilArrays_copyOfWithNSObjectArray_withInt_(array, OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(minSize, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF)));
   }
   else return array;
 }
@@ -745,7 +756,7 @@ IOSObjectArray *OrgApacheLuceneUtilArrayUtil_growWithIntArray2_withInt_(IOSObjec
   OrgApacheLuceneUtilArrayUtil_initialize();
   JreAssert((minSize >= 0), (JreStrcat("$I$", @"size must be positive (got ", minSize, @"): likely integer overflow?")));
   if (((IOSObjectArray *) nil_chk(array))->size_ < minSize) {
-    IOSObjectArray *newArray = [IOSObjectArray arrayWithLength:OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(minSize, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_)) type:IOSClass_intArray(1)];
+    IOSObjectArray *newArray = [IOSObjectArray arrayWithLength:OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(minSize, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF)) type:IOSClass_intArray(1)];
     JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(array, 0, newArray, 0, array->size_);
     return newArray;
   }
@@ -762,7 +773,7 @@ IOSObjectArray *OrgApacheLuceneUtilArrayUtil_growWithIntArray2_(IOSObjectArray *
 IOSObjectArray *OrgApacheLuceneUtilArrayUtil_shrinkWithIntArray2_withInt_(IOSObjectArray *array, jint targetSize) {
   OrgApacheLuceneUtilArrayUtil_initialize();
   JreAssert((targetSize >= 0), (JreStrcat("$I$", @"size must be positive (got ", targetSize, @"): likely integer overflow?")));
-  jint newSize = OrgApacheLuceneUtilArrayUtil_getShrinkSizeWithInt_withInt_withInt_(((IOSObjectArray *) nil_chk(array))->size_, targetSize, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_));
+  jint newSize = OrgApacheLuceneUtilArrayUtil_getShrinkSizeWithInt_withInt_withInt_(((IOSObjectArray *) nil_chk(array))->size_, targetSize, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF));
   if (newSize != array->size_) {
     IOSObjectArray *newArray = [IOSObjectArray arrayWithLength:newSize type:IOSClass_intArray(1)];
     JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(array, 0, newArray, 0, newSize);
@@ -777,7 +788,7 @@ IOSObjectArray *OrgApacheLuceneUtilArrayUtil_growWithFloatArray2_withInt_(IOSObj
   OrgApacheLuceneUtilArrayUtil_initialize();
   JreAssert((minSize >= 0), (JreStrcat("$I$", @"size must be positive (got ", minSize, @"): likely integer overflow?")));
   if (((IOSObjectArray *) nil_chk(array))->size_ < minSize) {
-    IOSObjectArray *newArray = [IOSObjectArray arrayWithLength:OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(minSize, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_)) type:IOSClass_floatArray(1)];
+    IOSObjectArray *newArray = [IOSObjectArray arrayWithLength:OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(minSize, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF)) type:IOSClass_floatArray(1)];
     JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(array, 0, newArray, 0, array->size_);
     return newArray;
   }
@@ -794,7 +805,7 @@ IOSObjectArray *OrgApacheLuceneUtilArrayUtil_growWithFloatArray2_(IOSObjectArray
 IOSObjectArray *OrgApacheLuceneUtilArrayUtil_shrinkWithFloatArray2_withInt_(IOSObjectArray *array, jint targetSize) {
   OrgApacheLuceneUtilArrayUtil_initialize();
   JreAssert((targetSize >= 0), (JreStrcat("$I$", @"size must be positive (got ", targetSize, @"): likely integer overflow?")));
-  jint newSize = OrgApacheLuceneUtilArrayUtil_getShrinkSizeWithInt_withInt_withInt_(((IOSObjectArray *) nil_chk(array))->size_, targetSize, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_));
+  jint newSize = OrgApacheLuceneUtilArrayUtil_getShrinkSizeWithInt_withInt_withInt_(((IOSObjectArray *) nil_chk(array))->size_, targetSize, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF));
   if (newSize != array->size_) {
     IOSObjectArray *newArray = [IOSObjectArray arrayWithLength:newSize type:IOSClass_floatArray(1)];
     JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(array, 0, newArray, 0, newSize);
@@ -823,7 +834,7 @@ jboolean OrgApacheLuceneUtilArrayUtil_equalsWithCharArray_withInt_withCharArray_
   OrgApacheLuceneUtilArrayUtil_initialize();
   if ((offsetLeft + length <= ((IOSCharArray *) nil_chk(left))->size_) && (offsetRight + length <= ((IOSCharArray *) nil_chk(right))->size_)) {
     for (jint i = 0; i < length; i++) {
-      if (IOSCharArray_Get(left, offsetLeft + i) != IOSCharArray_Get(right, offsetRight + i)) {
+      if (IOSCharArray_Get(left, offsetLeft + i) != IOSCharArray_Get(nil_chk(right), offsetRight + i)) {
         return false;
       }
     }
@@ -836,7 +847,7 @@ jboolean OrgApacheLuceneUtilArrayUtil_equalsWithByteArray_withInt_withByteArray_
   OrgApacheLuceneUtilArrayUtil_initialize();
   if ((offsetLeft + length <= ((IOSByteArray *) nil_chk(left))->size_) && (offsetRight + length <= ((IOSByteArray *) nil_chk(right))->size_)) {
     for (jint i = 0; i < length; i++) {
-      if (IOSByteArray_Get(left, offsetLeft + i) != IOSByteArray_Get(right, offsetRight + i)) {
+      if (IOSByteArray_Get(left, offsetLeft + i) != IOSByteArray_Get(nil_chk(right), offsetRight + i)) {
         return false;
       }
     }
@@ -849,7 +860,7 @@ jboolean OrgApacheLuceneUtilArrayUtil_equalsWithIntArray_withInt_withIntArray_wi
   OrgApacheLuceneUtilArrayUtil_initialize();
   if ((offsetLeft + length <= ((IOSIntArray *) nil_chk(left))->size_) && (offsetRight + length <= ((IOSIntArray *) nil_chk(right))->size_)) {
     for (jint i = 0; i < length; i++) {
-      if (IOSIntArray_Get(left, offsetLeft + i) != IOSIntArray_Get(right, offsetRight + i)) {
+      if (IOSIntArray_Get(left, offsetLeft + i) != IOSIntArray_Get(nil_chk(right), offsetRight + i)) {
         return false;
       }
     }
@@ -872,7 +883,7 @@ IOSIntArray *OrgApacheLuceneUtilArrayUtil_toIntArrayWithJavaUtilCollection_(id<J
 
 id<JavaUtilComparator> OrgApacheLuceneUtilArrayUtil_naturalComparator() {
   OrgApacheLuceneUtilArrayUtil_initialize();
-  return (id<JavaUtilComparator>) check_protocol_cast(OrgApacheLuceneUtilArrayUtil_NATURAL_COMPARATOR_, JavaUtilComparator_class_());
+  return OrgApacheLuceneUtilArrayUtil_NATURAL_COMPARATOR;
 }
 
 void OrgApacheLuceneUtilArrayUtil_swapWithNSObjectArray_withInt_withInt_(IOSObjectArray *arr, jint i, jint j) {
@@ -885,7 +896,7 @@ void OrgApacheLuceneUtilArrayUtil_swapWithNSObjectArray_withInt_withInt_(IOSObje
 void OrgApacheLuceneUtilArrayUtil_introSortWithNSObjectArray_withInt_withInt_withJavaUtilComparator_(IOSObjectArray *a, jint fromIndex, jint toIndex, id<JavaUtilComparator> comp) {
   OrgApacheLuceneUtilArrayUtil_initialize();
   if (toIndex - fromIndex <= 1) return;
-  [((OrgApacheLuceneUtilArrayIntroSorter *) [new_OrgApacheLuceneUtilArrayIntroSorter_initWithNSObjectArray_withJavaUtilComparator_(a, comp) autorelease]) sortWithInt:fromIndex withInt:toIndex];
+  [create_OrgApacheLuceneUtilArrayIntroSorter_initWithNSObjectArray_withJavaUtilComparator_(a, comp) sortWithInt:fromIndex withInt:toIndex];
 }
 
 void OrgApacheLuceneUtilArrayUtil_introSortWithNSObjectArray_withJavaUtilComparator_(IOSObjectArray *a, id<JavaUtilComparator> comp) {
@@ -907,7 +918,7 @@ void OrgApacheLuceneUtilArrayUtil_introSortWithJavaLangComparableArray_(IOSObjec
 void OrgApacheLuceneUtilArrayUtil_timSortWithNSObjectArray_withInt_withInt_withJavaUtilComparator_(IOSObjectArray *a, jint fromIndex, jint toIndex, id<JavaUtilComparator> comp) {
   OrgApacheLuceneUtilArrayUtil_initialize();
   if (toIndex - fromIndex <= 1) return;
-  [((OrgApacheLuceneUtilArrayTimSorter *) [new_OrgApacheLuceneUtilArrayTimSorter_initWithNSObjectArray_withJavaUtilComparator_withInt_(a, comp, ((IOSObjectArray *) nil_chk(a))->size_ / 64) autorelease]) sortWithInt:fromIndex withInt:toIndex];
+  [create_OrgApacheLuceneUtilArrayTimSorter_initWithNSObjectArray_withJavaUtilComparator_withInt_(a, comp, ((IOSObjectArray *) nil_chk(a))->size_ / 64) sortWithInt:fromIndex withInt:toIndex];
 }
 
 void OrgApacheLuceneUtilArrayUtil_timSortWithNSObjectArray_withJavaUtilComparator_(IOSObjectArray *a, id<JavaUtilComparator> comp) {
@@ -958,9 +969,11 @@ void OrgApacheLuceneUtilArrayUtil_NaturalComparator_init(OrgApacheLuceneUtilArra
 }
 
 OrgApacheLuceneUtilArrayUtil_NaturalComparator *new_OrgApacheLuceneUtilArrayUtil_NaturalComparator_init() {
-  OrgApacheLuceneUtilArrayUtil_NaturalComparator *self = [OrgApacheLuceneUtilArrayUtil_NaturalComparator alloc];
-  OrgApacheLuceneUtilArrayUtil_NaturalComparator_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilArrayUtil_NaturalComparator, init)
+}
+
+OrgApacheLuceneUtilArrayUtil_NaturalComparator *create_OrgApacheLuceneUtilArrayUtil_NaturalComparator_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilArrayUtil_NaturalComparator, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilArrayUtil_NaturalComparator)

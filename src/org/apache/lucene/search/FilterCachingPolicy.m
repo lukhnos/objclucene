@@ -4,10 +4,12 @@
 //
 
 #include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/IllegalArgumentException.h"
+#include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/index/IndexReader.h"
 #include "org/apache/lucene/index/IndexReaderContext.h"
 #include "org/apache/lucene/index/LeafReader.h"
@@ -42,23 +44,29 @@ __attribute__((unused)) static void OrgApacheLuceneSearchFilterCachingPolicy_$1_
 
 __attribute__((unused)) static OrgApacheLuceneSearchFilterCachingPolicy_$1 *new_OrgApacheLuceneSearchFilterCachingPolicy_$1_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchFilterCachingPolicy_$1 *create_OrgApacheLuceneSearchFilterCachingPolicy_$1_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFilterCachingPolicy_$1)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchFilterCachingPolicy)
 
-id<OrgApacheLuceneSearchFilterCachingPolicy> OrgApacheLuceneSearchFilterCachingPolicy_ALWAYS_CACHE_;
+id<OrgApacheLuceneSearchFilterCachingPolicy> OrgApacheLuceneSearchFilterCachingPolicy_ALWAYS_CACHE;
 
 @implementation OrgApacheLuceneSearchFilterCachingPolicy
 
-+ (void)initialize {
-  if (self == [OrgApacheLuceneSearchFilterCachingPolicy class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneSearchFilterCachingPolicy_ALWAYS_CACHE_, new_OrgApacheLuceneSearchFilterCachingPolicy_$1_init());
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchFilterCachingPolicy)
-  }
++ (id<OrgApacheLuceneSearchFilterCachingPolicy>)ALWAYS_CACHE {
+  return OrgApacheLuceneSearchFilterCachingPolicy_ALWAYS_CACHE;
 }
 
 + (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
++ (void)initialize {
+  if (self == [OrgApacheLuceneSearchFilterCachingPolicy class]) {
+    JreStrongAssignAndConsume(&OrgApacheLuceneSearchFilterCachingPolicy_ALWAYS_CACHE, new_OrgApacheLuceneSearchFilterCachingPolicy_$1_init());
+    J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchFilterCachingPolicy)
+  }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -67,7 +75,7 @@ id<OrgApacheLuceneSearchFilterCachingPolicy> OrgApacheLuceneSearchFilterCachingP
     { "shouldCacheWithOrgApacheLuceneSearchFilter:withOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneSearchDocIdSet:", "shouldCache", "Z", 0x401, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "ALWAYS_CACHE_", NULL, 0x19, "Lorg.apache.lucene.search.FilterCachingPolicy;", &OrgApacheLuceneSearchFilterCachingPolicy_ALWAYS_CACHE_, NULL, .constantValue.asLong = 0 },
+    { "ALWAYS_CACHE", "ALWAYS_CACHE", 0x19, "Lorg.apache.lucene.search.FilterCachingPolicy;", &OrgApacheLuceneSearchFilterCachingPolicy_ALWAYS_CACHE, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.FilterCachingPolicy$CacheOnLargeSegments;"};
   static const J2ObjcClassInfo _OrgApacheLuceneSearchFilterCachingPolicy = { 2, "FilterCachingPolicy", "org.apache.lucene.search", NULL, 0x609, 2, methods, 1, fields, 0, NULL, 1, inner_classes, NULL, NULL };
@@ -80,9 +88,13 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFilterCachingPolicy)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments)
 
-OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments *OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments_DEFAULT_;
+OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments *OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments_DEFAULT;
 
 @implementation OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments
+
++ (OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments *)DEFAULT {
+  return OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments_DEFAULT;
+}
 
 - (instancetype)initWithFloat:(jfloat)minSizeRatio {
   OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments_initWithFloat_(self, minSizeRatio);
@@ -102,7 +114,7 @@ OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments *OrgApacheLuceneSe
 
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments_DEFAULT_, new_OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments_initWithFloat_(0.03f));
+    JreStrongAssignAndConsume(&OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments_DEFAULT, new_OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments_initWithFloat_(0.03f));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments)
   }
 }
@@ -114,7 +126,7 @@ OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments *OrgApacheLuceneSe
     { "shouldCacheWithOrgApacheLuceneSearchFilter:withOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneSearchDocIdSet:", "shouldCache", "Z", 0x1, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_", NULL, 0x19, "Lorg.apache.lucene.search.FilterCachingPolicy$CacheOnLargeSegments;", &OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments_DEFAULT_, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT", "DEFAULT", 0x19, "Lorg.apache.lucene.search.FilterCachingPolicy$CacheOnLargeSegments;", &OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments_DEFAULT, NULL, .constantValue.asLong = 0 },
     { "minSizeRatio_", NULL, 0x12, "F", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments = { 2, "CacheOnLargeSegments", "org.apache.lucene.search", "FilterCachingPolicy", 0x9, 3, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
@@ -126,15 +138,17 @@ OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments *OrgApacheLuceneSe
 void OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments_initWithFloat_(OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments *self, jfloat minSizeRatio) {
   NSObject_init(self);
   if (minSizeRatio <= 0 || minSizeRatio >= 1) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$F", @"minSizeRatio must be in ]0, 1[, got ", minSizeRatio)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$F", @"minSizeRatio must be in ]0, 1[, got ", minSizeRatio));
   }
   self->minSizeRatio_ = minSizeRatio;
 }
 
 OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments *new_OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments_initWithFloat_(jfloat minSizeRatio) {
-  OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments *self = [OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments alloc];
-  OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments_initWithFloat_(self, minSizeRatio);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments, initWithFloat_, minSizeRatio)
+}
+
+OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments *create_OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments_initWithFloat_(jfloat minSizeRatio) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments, initWithFloat_, minSizeRatio)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments)
@@ -174,9 +188,11 @@ void OrgApacheLuceneSearchFilterCachingPolicy_$1_init(OrgApacheLuceneSearchFilte
 }
 
 OrgApacheLuceneSearchFilterCachingPolicy_$1 *new_OrgApacheLuceneSearchFilterCachingPolicy_$1_init() {
-  OrgApacheLuceneSearchFilterCachingPolicy_$1 *self = [OrgApacheLuceneSearchFilterCachingPolicy_$1 alloc];
-  OrgApacheLuceneSearchFilterCachingPolicy_$1_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFilterCachingPolicy_$1, init)
+}
+
+OrgApacheLuceneSearchFilterCachingPolicy_$1 *create_OrgApacheLuceneSearchFilterCachingPolicy_$1_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFilterCachingPolicy_$1, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFilterCachingPolicy_$1)

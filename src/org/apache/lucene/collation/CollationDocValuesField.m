@@ -69,17 +69,19 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCollationCollationDocValuesField, bytes_, Org
 @end
 
 void OrgApacheLuceneCollationCollationDocValuesField_initWithNSString_withJavaTextCollator_(OrgApacheLuceneCollationCollationDocValuesField *self, NSString *name, JavaTextCollator *collator) {
-  OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneDocumentFieldType_(self, name, JreLoadStatic(OrgApacheLuceneDocumentSortedDocValuesField, TYPE_));
+  OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneDocumentFieldType_(self, name, JreLoadStatic(OrgApacheLuceneDocumentSortedDocValuesField, TYPE));
   JreStrongAssignAndConsume(&self->bytes_, new_OrgApacheLuceneUtilBytesRef_init());
   JreStrongAssign(&self->name_CollationDocValuesField_, name);
-  JreStrongAssign(&self->collator_, (JavaTextCollator *) check_class_cast([((JavaTextCollator *) nil_chk(collator)) clone], [JavaTextCollator class]));
+  JreStrongAssign(&self->collator_, (JavaTextCollator *) cast_chk([((JavaTextCollator *) nil_chk(collator)) clone], [JavaTextCollator class]));
   JreStrongAssign(&self->fieldsData_, self->bytes_);
 }
 
 OrgApacheLuceneCollationCollationDocValuesField *new_OrgApacheLuceneCollationCollationDocValuesField_initWithNSString_withJavaTextCollator_(NSString *name, JavaTextCollator *collator) {
-  OrgApacheLuceneCollationCollationDocValuesField *self = [OrgApacheLuceneCollationCollationDocValuesField alloc];
-  OrgApacheLuceneCollationCollationDocValuesField_initWithNSString_withJavaTextCollator_(self, name, collator);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCollationCollationDocValuesField, initWithNSString_withJavaTextCollator_, name, collator)
+}
+
+OrgApacheLuceneCollationCollationDocValuesField *create_OrgApacheLuceneCollationCollationDocValuesField_initWithNSString_withJavaTextCollator_(NSString *name, JavaTextCollator *collator) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCollationCollationDocValuesField, initWithNSString_withJavaTextCollator_, name, collator)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCollationCollationDocValuesField)

@@ -4,12 +4,14 @@
 //
 
 #include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Comparable.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/NullPointerException.h"
 #include "java/lang/StringBuilder.h"
+#include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/analysis/Analyzer.h"
 #include "org/apache/lucene/codecs/Codec.h"
 #include "org/apache/lucene/index/ConcurrentMergeScheduler.h"
@@ -57,7 +59,7 @@ J2OBJC_VOLATILE_FIELD_SETTER(OrgApacheLuceneIndexLiveIndexWriterConfig, mergedSe
 
 - (OrgApacheLuceneIndexLiveIndexWriterConfig *)setMaxBufferedDeleteTermsWithInt:(jint)maxBufferedDeleteTerms {
   if (maxBufferedDeleteTerms != OrgApacheLuceneIndexIndexWriterConfig_DISABLE_AUTO_FLUSH && maxBufferedDeleteTerms < 1) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"maxBufferedDeleteTerms must at least be 1 when enabled") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"maxBufferedDeleteTerms must at least be 1 when enabled");
   }
   JreAssignVolatileInt(&self->maxBufferedDeleteTerms_, maxBufferedDeleteTerms);
   return self;
@@ -70,10 +72,10 @@ J2OBJC_VOLATILE_FIELD_SETTER(OrgApacheLuceneIndexLiveIndexWriterConfig, mergedSe
 - (OrgApacheLuceneIndexLiveIndexWriterConfig *)setRAMBufferSizeMBWithDouble:(jdouble)ramBufferSizeMB {
   @synchronized(self) {
     if (ramBufferSizeMB != OrgApacheLuceneIndexIndexWriterConfig_DISABLE_AUTO_FLUSH && ramBufferSizeMB <= 0.0) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"ramBufferSize should be > 0.0 MB when enabled") autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"ramBufferSize should be > 0.0 MB when enabled");
     }
     if (ramBufferSizeMB == OrgApacheLuceneIndexIndexWriterConfig_DISABLE_AUTO_FLUSH && JreLoadVolatileInt(&maxBufferedDocs_) == OrgApacheLuceneIndexIndexWriterConfig_DISABLE_AUTO_FLUSH) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"at least one of ramBufferSize and maxBufferedDocs must be enabled") autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"at least one of ramBufferSize and maxBufferedDocs must be enabled");
     }
     JreAssignVolatileDouble(&self->ramBufferSizeMB_, ramBufferSizeMB);
     return self;
@@ -87,10 +89,10 @@ J2OBJC_VOLATILE_FIELD_SETTER(OrgApacheLuceneIndexLiveIndexWriterConfig, mergedSe
 - (OrgApacheLuceneIndexLiveIndexWriterConfig *)setMaxBufferedDocsWithInt:(jint)maxBufferedDocs {
   @synchronized(self) {
     if (maxBufferedDocs != OrgApacheLuceneIndexIndexWriterConfig_DISABLE_AUTO_FLUSH && maxBufferedDocs < 2) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"maxBufferedDocs must at least be 2 when enabled") autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"maxBufferedDocs must at least be 2 when enabled");
     }
     if (maxBufferedDocs == OrgApacheLuceneIndexIndexWriterConfig_DISABLE_AUTO_FLUSH && JreLoadVolatileDouble(&ramBufferSizeMB_) == OrgApacheLuceneIndexIndexWriterConfig_DISABLE_AUTO_FLUSH) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"at least one of ramBufferSize and maxBufferedDocs must be enabled") autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"at least one of ramBufferSize and maxBufferedDocs must be enabled");
     }
     JreAssignVolatileInt(&self->maxBufferedDocs_, maxBufferedDocs);
     return self;
@@ -103,7 +105,7 @@ J2OBJC_VOLATILE_FIELD_SETTER(OrgApacheLuceneIndexLiveIndexWriterConfig, mergedSe
 
 - (OrgApacheLuceneIndexLiveIndexWriterConfig *)setMergePolicyWithOrgApacheLuceneIndexMergePolicy:(OrgApacheLuceneIndexMergePolicy *)mergePolicy {
   if (mergePolicy == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"mergePolicy must not be null") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"mergePolicy must not be null");
   }
   JreVolatileStrongAssign(&self->mergePolicy_, mergePolicy);
   return self;
@@ -118,7 +120,7 @@ J2OBJC_VOLATILE_FIELD_SETTER(OrgApacheLuceneIndexLiveIndexWriterConfig, mergedSe
   return JreLoadVolatileId(&mergedSegmentWarmer_);
 }
 
-- (OrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum *)getOpenMode {
+- (OrgApacheLuceneIndexIndexWriterConfig_OpenMode *)getOpenMode {
   return JreLoadVolatileId(&openMode_);
 }
 
@@ -188,7 +190,7 @@ J2OBJC_VOLATILE_FIELD_SETTER(OrgApacheLuceneIndexLiveIndexWriterConfig, mergedSe
 }
 
 - (NSString *)description {
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:@"analyzer="])) appendWithNSString:analyzer_ == nil ? @"null" : [[analyzer_ getClass] getName]])) appendWithNSString:@"\n"];
   [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:@"ramBufferSizeMB="])) appendWithDouble:[self getRAMBufferSizeMB]])) appendWithNSString:@"\n"];
   [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:@"maxBufferedDocs="])) appendWithInt:[self getMaxBufferedDocs]])) appendWithNSString:@"\n"];
@@ -213,6 +215,30 @@ J2OBJC_VOLATILE_FIELD_SETTER(OrgApacheLuceneIndexLiveIndexWriterConfig, mergedSe
   return [sb description];
 }
 
+- (void)__javaClone:(OrgApacheLuceneIndexLiveIndexWriterConfig *)original {
+  [super __javaClone:original];
+  JreCloneVolatileStrong(&mergedSegmentWarmer_, &original->mergedSegmentWarmer_);
+  JreCloneVolatileStrong(&delPolicy_, &original->delPolicy_);
+  JreCloneVolatileStrong(&commit_, &original->commit_);
+  JreCloneVolatileStrong(&openMode_, &original->openMode_);
+  JreCloneVolatileStrong(&similarity_, &original->similarity_);
+  JreCloneVolatileStrong(&mergeScheduler_, &original->mergeScheduler_);
+  JreCloneVolatileStrong(&indexingChain_, &original->indexingChain_);
+  JreCloneVolatileStrong(&codec_, &original->codec_);
+  JreCloneVolatileStrong(&infoStream_, &original->infoStream_);
+  JreCloneVolatileStrong(&mergePolicy_, &original->mergePolicy_);
+  JreCloneVolatileStrong(&indexerThreadPool_, &original->indexerThreadPool_);
+  JreCloneVolatileStrong(&flushPolicy_, &original->flushPolicy_);
+}
+
++ (IOSObjectArray *)__annotations_writeLockTimeout_ {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
++ (IOSObjectArray *)__annotations_getWriteLockTimeout {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
 - (void)dealloc {
   RELEASE_(analyzer_);
   JreReleaseVolatile(&mergedSegmentWarmer_);
@@ -228,30 +254,6 @@ J2OBJC_VOLATILE_FIELD_SETTER(OrgApacheLuceneIndexLiveIndexWriterConfig, mergedSe
   JreReleaseVolatile(&indexerThreadPool_);
   JreReleaseVolatile(&flushPolicy_);
   [super dealloc];
-}
-
-- (void)__javaClone {
-  [super __javaClone];
-  JreRetainVolatile(&mergedSegmentWarmer_);
-  JreRetainVolatile(&delPolicy_);
-  JreRetainVolatile(&commit_);
-  JreRetainVolatile(&openMode_);
-  JreRetainVolatile(&similarity_);
-  JreRetainVolatile(&mergeScheduler_);
-  JreRetainVolatile(&indexingChain_);
-  JreRetainVolatile(&codec_);
-  JreRetainVolatile(&infoStream_);
-  JreRetainVolatile(&mergePolicy_);
-  JreRetainVolatile(&indexerThreadPool_);
-  JreRetainVolatile(&flushPolicy_);
-}
-
-+ (IOSObjectArray *)__annotations_getWriteLockTimeout {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_writeLockTimeout_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -327,14 +329,14 @@ void OrgApacheLuceneIndexLiveIndexWriterConfig_initWithOrgApacheLuceneAnalysisAn
   JreVolatileStrongAssignAndConsume(&self->delPolicy_, new_OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy_init());
   JreVolatileStrongAssign(&self->commit_, nil);
   JreAssignVolatileBoolean(&self->useCompoundFile_, OrgApacheLuceneIndexIndexWriterConfig_DEFAULT_USE_COMPOUND_FILE_SYSTEM);
-  JreVolatileStrongAssign(&self->openMode_, JreLoadStatic(OrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum, CREATE_OR_APPEND));
+  JreVolatileStrongAssign(&self->openMode_, JreLoadEnum(OrgApacheLuceneIndexIndexWriterConfig_OpenMode, CREATE_OR_APPEND));
   JreVolatileStrongAssign(&self->similarity_, OrgApacheLuceneSearchIndexSearcher_getDefaultSimilarity());
   JreVolatileStrongAssignAndConsume(&self->mergeScheduler_, new_OrgApacheLuceneIndexConcurrentMergeScheduler_init());
   JreAssignVolatileLong(&self->writeLockTimeout_, OrgApacheLuceneIndexIndexWriterConfig_WRITE_LOCK_TIMEOUT);
-  JreVolatileStrongAssign(&self->indexingChain_, JreLoadStatic(OrgApacheLuceneIndexDocumentsWriterPerThread, defaultIndexingChain_));
+  JreVolatileStrongAssign(&self->indexingChain_, JreLoadStatic(OrgApacheLuceneIndexDocumentsWriterPerThread, defaultIndexingChain));
   JreVolatileStrongAssign(&self->codec_, OrgApacheLuceneCodecsCodec_getDefault());
   if (JreLoadVolatileId(&self->codec_) == nil) {
-    @throw [new_JavaLangNullPointerException_init() autorelease];
+    @throw create_JavaLangNullPointerException_init();
   }
   JreVolatileStrongAssign(&self->infoStream_, OrgApacheLuceneUtilInfoStream_getDefault());
   JreVolatileStrongAssignAndConsume(&self->mergePolicy_, new_OrgApacheLuceneIndexTieredMergePolicy_init());
@@ -345,9 +347,11 @@ void OrgApacheLuceneIndexLiveIndexWriterConfig_initWithOrgApacheLuceneAnalysisAn
 }
 
 OrgApacheLuceneIndexLiveIndexWriterConfig *new_OrgApacheLuceneIndexLiveIndexWriterConfig_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *analyzer) {
-  OrgApacheLuceneIndexLiveIndexWriterConfig *self = [OrgApacheLuceneIndexLiveIndexWriterConfig alloc];
-  OrgApacheLuceneIndexLiveIndexWriterConfig_initWithOrgApacheLuceneAnalysisAnalyzer_(self, analyzer);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexLiveIndexWriterConfig, initWithOrgApacheLuceneAnalysisAnalyzer_, analyzer)
+}
+
+OrgApacheLuceneIndexLiveIndexWriterConfig *create_OrgApacheLuceneIndexLiveIndexWriterConfig_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *analyzer) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexLiveIndexWriterConfig, initWithOrgApacheLuceneAnalysisAnalyzer_, analyzer)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexLiveIndexWriterConfig)

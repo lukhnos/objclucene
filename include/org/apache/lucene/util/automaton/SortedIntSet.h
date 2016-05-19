@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilAutomatonSortedIntSet_INCLUDE_ALL")
-#if OrgApacheLuceneUtilAutomatonSortedIntSet_RESTRICT
-#define OrgApacheLuceneUtilAutomatonSortedIntSet_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonSortedIntSet")
+#ifdef RESTRICT_OrgApacheLuceneUtilAutomatonSortedIntSet
+#define INCLUDE_ALL_OrgApacheLuceneUtilAutomatonSortedIntSet 0
 #else
-#define OrgApacheLuceneUtilAutomatonSortedIntSet_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilAutomatonSortedIntSet 1
 #endif
-#undef OrgApacheLuceneUtilAutomatonSortedIntSet_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilAutomatonSortedIntSet
 
-#if !defined (_OrgApacheLuceneUtilAutomatonSortedIntSet_) && (OrgApacheLuceneUtilAutomatonSortedIntSet_INCLUDE_ALL || OrgApacheLuceneUtilAutomatonSortedIntSet_INCLUDE)
-#define _OrgApacheLuceneUtilAutomatonSortedIntSet_
+#if !defined (OrgApacheLuceneUtilAutomatonSortedIntSet_) && (INCLUDE_ALL_OrgApacheLuceneUtilAutomatonSortedIntSet || defined(INCLUDE_OrgApacheLuceneUtilAutomatonSortedIntSet))
+#define OrgApacheLuceneUtilAutomatonSortedIntSet_
 
 @class IOSIntArray;
 @class OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet;
@@ -56,12 +56,14 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonSortedIntSet_initWithInt_(Org
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonSortedIntSet *new_OrgApacheLuceneUtilAutomatonSortedIntSet_initWithInt_(jint capacity) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonSortedIntSet *create_OrgApacheLuceneUtilAutomatonSortedIntSet_initWithInt_(jint capacity);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonSortedIntSet)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet_) && (OrgApacheLuceneUtilAutomatonSortedIntSet_INCLUDE_ALL || OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet_INCLUDE)
-#define _OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet_
+#if !defined (OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet_) && (INCLUDE_ALL_OrgApacheLuceneUtilAutomatonSortedIntSet || defined(INCLUDE_OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet))
+#define OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet_
 
 @class IOSIntArray;
 
@@ -97,12 +99,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet_ini
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet *new_OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet_initWithIntArray_withInt_withInt_(IOSIntArray *values, jint hashCode, jint state) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet *create_OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet_initWithIntArray_withInt_withInt_(IOSIntArray *values, jint hashCode, jint state);
+
 FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet_initWithInt_withInt_(OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet *self, jint num, jint state);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet *new_OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet_initWithInt_withInt_(jint num, jint state) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet *create_OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet_initWithInt_withInt_(jint num, jint state);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilAutomatonSortedIntSet_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonSortedIntSet")

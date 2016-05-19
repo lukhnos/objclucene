@@ -59,9 +59,11 @@ void OrgApacheLuceneSearchSimilaritiesNormalizationZ_init(OrgApacheLuceneSearchS
 }
 
 OrgApacheLuceneSearchSimilaritiesNormalizationZ *new_OrgApacheLuceneSearchSimilaritiesNormalizationZ_init() {
-  OrgApacheLuceneSearchSimilaritiesNormalizationZ *self = [OrgApacheLuceneSearchSimilaritiesNormalizationZ alloc];
-  OrgApacheLuceneSearchSimilaritiesNormalizationZ_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSimilaritiesNormalizationZ, init)
+}
+
+OrgApacheLuceneSearchSimilaritiesNormalizationZ *create_OrgApacheLuceneSearchSimilaritiesNormalizationZ_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSimilaritiesNormalizationZ, init)
 }
 
 void OrgApacheLuceneSearchSimilaritiesNormalizationZ_initWithFloat_(OrgApacheLuceneSearchSimilaritiesNormalizationZ *self, jfloat z) {
@@ -70,9 +72,11 @@ void OrgApacheLuceneSearchSimilaritiesNormalizationZ_initWithFloat_(OrgApacheLuc
 }
 
 OrgApacheLuceneSearchSimilaritiesNormalizationZ *new_OrgApacheLuceneSearchSimilaritiesNormalizationZ_initWithFloat_(jfloat z) {
-  OrgApacheLuceneSearchSimilaritiesNormalizationZ *self = [OrgApacheLuceneSearchSimilaritiesNormalizationZ alloc];
-  OrgApacheLuceneSearchSimilaritiesNormalizationZ_initWithFloat_(self, z);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSimilaritiesNormalizationZ, initWithFloat_, z)
+}
+
+OrgApacheLuceneSearchSimilaritiesNormalizationZ *create_OrgApacheLuceneSearchSimilaritiesNormalizationZ_initWithFloat_(jfloat z) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSimilaritiesNormalizationZ, initWithFloat_, z)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSimilaritiesNormalizationZ)

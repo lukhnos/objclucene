@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexMergeReaderWrapper_INCLUDE_ALL")
-#if OrgApacheLuceneIndexMergeReaderWrapper_RESTRICT
-#define OrgApacheLuceneIndexMergeReaderWrapper_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexMergeReaderWrapper")
+#ifdef RESTRICT_OrgApacheLuceneIndexMergeReaderWrapper
+#define INCLUDE_ALL_OrgApacheLuceneIndexMergeReaderWrapper 0
 #else
-#define OrgApacheLuceneIndexMergeReaderWrapper_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexMergeReaderWrapper 1
 #endif
-#undef OrgApacheLuceneIndexMergeReaderWrapper_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexMergeReaderWrapper
 
-#if !defined (_OrgApacheLuceneIndexMergeReaderWrapper_) && (OrgApacheLuceneIndexMergeReaderWrapper_INCLUDE_ALL || OrgApacheLuceneIndexMergeReaderWrapper_INCLUDE)
-#define _OrgApacheLuceneIndexMergeReaderWrapper_
+#if !defined (OrgApacheLuceneIndexMergeReaderWrapper_) && (INCLUDE_ALL_OrgApacheLuceneIndexMergeReaderWrapper || defined(INCLUDE_OrgApacheLuceneIndexMergeReaderWrapper))
+#define OrgApacheLuceneIndexMergeReaderWrapper_
 
-#define OrgApacheLuceneIndexLeafReader_RESTRICT 1
-#define OrgApacheLuceneIndexLeafReader_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexLeafReader 1
+#define INCLUDE_OrgApacheLuceneIndexLeafReader 1
 #include "org/apache/lucene/index/LeafReader.h"
 
 @class OrgApacheLuceneCodecsDocValuesProducer;
@@ -37,6 +37,9 @@
 @protocol OrgApacheLuceneIndexLeafReader_CoreClosedListener;
 @protocol OrgApacheLuceneUtilBits;
 
+/*!
+ @brief this is a hack to make SortingMP fast!
+ */
 @interface OrgApacheLuceneIndexMergeReaderWrapper : OrgApacheLuceneIndexLeafReader {
  @public
   OrgApacheLuceneIndexSegmentReader *in_;
@@ -113,8 +116,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexMergeReaderWrapper_initWithOrgApacheL
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexMergeReaderWrapper *new_OrgApacheLuceneIndexMergeReaderWrapper_initWithOrgApacheLuceneIndexSegmentReader_(OrgApacheLuceneIndexSegmentReader *inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexMergeReaderWrapper *create_OrgApacheLuceneIndexMergeReaderWrapper_initWithOrgApacheLuceneIndexSegmentReader_(OrgApacheLuceneIndexSegmentReader *inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergeReaderWrapper)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexMergeReaderWrapper_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexMergeReaderWrapper")

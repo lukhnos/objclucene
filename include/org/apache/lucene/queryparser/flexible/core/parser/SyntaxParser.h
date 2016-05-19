@@ -5,22 +5,32 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser_) && (OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser_
+#if !defined (OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser))
+#define OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser_
 
 @protocol JavaLangCharSequence;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 
+/*!
+ @brief A parser needs to implement <code>SyntaxParser</code> interface
+ */
 @protocol OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser < NSObject, JavaObject >
 
+/*!
+ @param query
+ - query data to be parsed
+ @param field
+ - default field name
+ @return QueryNode tree
+ */
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)parseWithJavaLangCharSequence:(id<JavaLangCharSequence>)query
                                                                  withJavaLangCharSequence:(id<JavaLangCharSequence>)field;
 
@@ -32,4 +42,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxPar
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser")

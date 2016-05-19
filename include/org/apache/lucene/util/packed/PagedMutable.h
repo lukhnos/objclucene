@@ -5,32 +5,45 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilPackedPagedMutable_INCLUDE_ALL")
-#if OrgApacheLuceneUtilPackedPagedMutable_RESTRICT
-#define OrgApacheLuceneUtilPackedPagedMutable_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedPagedMutable")
+#ifdef RESTRICT_OrgApacheLuceneUtilPackedPagedMutable
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackedPagedMutable 0
 #else
-#define OrgApacheLuceneUtilPackedPagedMutable_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackedPagedMutable 1
 #endif
-#undef OrgApacheLuceneUtilPackedPagedMutable_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilPackedPagedMutable
 
-#if !defined (_OrgApacheLuceneUtilPackedPagedMutable_) && (OrgApacheLuceneUtilPackedPagedMutable_INCLUDE_ALL || OrgApacheLuceneUtilPackedPagedMutable_INCLUDE)
-#define _OrgApacheLuceneUtilPackedPagedMutable_
+#if !defined (OrgApacheLuceneUtilPackedPagedMutable_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedPagedMutable || defined(INCLUDE_OrgApacheLuceneUtilPackedPagedMutable))
+#define OrgApacheLuceneUtilPackedPagedMutable_
 
-#define OrgApacheLuceneUtilPackedAbstractPagedMutable_RESTRICT 1
-#define OrgApacheLuceneUtilPackedAbstractPagedMutable_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilPackedAbstractPagedMutable 1
+#define INCLUDE_OrgApacheLuceneUtilPackedAbstractPagedMutable 1
 #include "org/apache/lucene/util/packed/AbstractPagedMutable.h"
 
+@class OrgApacheLuceneUtilPackedPackedInts_Format;
 @class OrgApacheLuceneUtilPackedPackedInts_FormatAndBits;
-@class OrgApacheLuceneUtilPackedPackedInts_FormatEnum;
 @class OrgApacheLuceneUtilPackedPackedInts_Mutable;
 
+/*!
+ @brief A <code>PagedMutable</code>.
+ This class slices data into fixed-size blocks
+ which have the same number of bits per value. It can be a useful replacement
+ for <code>PackedInts.Mutable</code> to store more than 2B values.
+ */
 @interface OrgApacheLuceneUtilPackedPagedMutable : OrgApacheLuceneUtilPackedAbstractPagedMutable {
  @public
-  OrgApacheLuceneUtilPackedPackedInts_FormatEnum *format_;
+  OrgApacheLuceneUtilPackedPackedInts_Format *format_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief Create a new <code>PagedMutable</code> instance.
+ @param size the number of values to store.
+ @param pageSize the number of values per page
+ @param bitsPerValue the number of bits per value
+ @param acceptableOverheadRatio an acceptable overhead ratio
+ */
 - (instancetype)initWithLong:(jlong)size
                      withInt:(jint)pageSize
                      withInt:(jint)bitsPerValue
@@ -54,28 +67,34 @@ withOrgApacheLuceneUtilPackedPackedInts_FormatAndBits:(OrgApacheLuceneUtilPacked
 - (instancetype)initWithLong:(jlong)size
                      withInt:(jint)pageSize
                      withInt:(jint)bitsPerValue
-withOrgApacheLuceneUtilPackedPackedInts_FormatEnum:(OrgApacheLuceneUtilPackedPackedInts_FormatEnum *)format;
+withOrgApacheLuceneUtilPackedPackedInts_Format:(OrgApacheLuceneUtilPackedPackedInts_Format *)format;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilPackedPagedMutable)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedPagedMutable, format_, OrgApacheLuceneUtilPackedPackedInts_FormatEnum *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedPagedMutable, format_, OrgApacheLuceneUtilPackedPackedInts_Format *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedPagedMutable_initWithLong_withInt_withInt_withFloat_(OrgApacheLuceneUtilPackedPagedMutable *self, jlong size, jint pageSize, jint bitsPerValue, jfloat acceptableOverheadRatio);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPagedMutable *new_OrgApacheLuceneUtilPackedPagedMutable_initWithLong_withInt_withInt_withFloat_(jlong size, jint pageSize, jint bitsPerValue, jfloat acceptableOverheadRatio) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPagedMutable *create_OrgApacheLuceneUtilPackedPagedMutable_initWithLong_withInt_withInt_withFloat_(jlong size, jint pageSize, jint bitsPerValue, jfloat acceptableOverheadRatio);
+
 FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedPagedMutable_initWithLong_withInt_withOrgApacheLuceneUtilPackedPackedInts_FormatAndBits_(OrgApacheLuceneUtilPackedPagedMutable *self, jlong size, jint pageSize, OrgApacheLuceneUtilPackedPackedInts_FormatAndBits *formatAndBits);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPagedMutable *new_OrgApacheLuceneUtilPackedPagedMutable_initWithLong_withInt_withOrgApacheLuceneUtilPackedPackedInts_FormatAndBits_(jlong size, jint pageSize, OrgApacheLuceneUtilPackedPackedInts_FormatAndBits *formatAndBits) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedPagedMutable_initWithLong_withInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_FormatEnum_(OrgApacheLuceneUtilPackedPagedMutable *self, jlong size, jint pageSize, jint bitsPerValue, OrgApacheLuceneUtilPackedPackedInts_FormatEnum *format);
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPagedMutable *create_OrgApacheLuceneUtilPackedPagedMutable_initWithLong_withInt_withOrgApacheLuceneUtilPackedPackedInts_FormatAndBits_(jlong size, jint pageSize, OrgApacheLuceneUtilPackedPackedInts_FormatAndBits *formatAndBits);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPagedMutable *new_OrgApacheLuceneUtilPackedPagedMutable_initWithLong_withInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_FormatEnum_(jlong size, jint pageSize, jint bitsPerValue, OrgApacheLuceneUtilPackedPackedInts_FormatEnum *format) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedPagedMutable_initWithLong_withInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_Format_(OrgApacheLuceneUtilPackedPagedMutable *self, jlong size, jint pageSize, jint bitsPerValue, OrgApacheLuceneUtilPackedPackedInts_Format *format);
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPagedMutable *new_OrgApacheLuceneUtilPackedPagedMutable_initWithLong_withInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_Format_(jlong size, jint pageSize, jint bitsPerValue, OrgApacheLuceneUtilPackedPackedInts_Format *format) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPagedMutable *create_OrgApacheLuceneUtilPackedPagedMutable_initWithLong_withInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_Format_(jlong size, jint pageSize, jint bitsPerValue, OrgApacheLuceneUtilPackedPackedInts_Format *format);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPagedMutable)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilPackedPagedMutable_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedPagedMutable")

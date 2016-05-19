@@ -104,9 +104,11 @@ void OrgApacheLuceneStoreByteArrayDataOutput_initWithByteArray_(OrgApacheLuceneS
 }
 
 OrgApacheLuceneStoreByteArrayDataOutput *new_OrgApacheLuceneStoreByteArrayDataOutput_initWithByteArray_(IOSByteArray *bytes) {
-  OrgApacheLuceneStoreByteArrayDataOutput *self = [OrgApacheLuceneStoreByteArrayDataOutput alloc];
-  OrgApacheLuceneStoreByteArrayDataOutput_initWithByteArray_(self, bytes);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreByteArrayDataOutput, initWithByteArray_, bytes)
+}
+
+OrgApacheLuceneStoreByteArrayDataOutput *create_OrgApacheLuceneStoreByteArrayDataOutput_initWithByteArray_(IOSByteArray *bytes) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreByteArrayDataOutput, initWithByteArray_, bytes)
 }
 
 void OrgApacheLuceneStoreByteArrayDataOutput_initWithByteArray_withInt_withInt_(OrgApacheLuceneStoreByteArrayDataOutput *self, IOSByteArray *bytes, jint offset, jint len) {
@@ -115,20 +117,24 @@ void OrgApacheLuceneStoreByteArrayDataOutput_initWithByteArray_withInt_withInt_(
 }
 
 OrgApacheLuceneStoreByteArrayDataOutput *new_OrgApacheLuceneStoreByteArrayDataOutput_initWithByteArray_withInt_withInt_(IOSByteArray *bytes, jint offset, jint len) {
-  OrgApacheLuceneStoreByteArrayDataOutput *self = [OrgApacheLuceneStoreByteArrayDataOutput alloc];
-  OrgApacheLuceneStoreByteArrayDataOutput_initWithByteArray_withInt_withInt_(self, bytes, offset, len);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreByteArrayDataOutput, initWithByteArray_withInt_withInt_, bytes, offset, len)
+}
+
+OrgApacheLuceneStoreByteArrayDataOutput *create_OrgApacheLuceneStoreByteArrayDataOutput_initWithByteArray_withInt_withInt_(IOSByteArray *bytes, jint offset, jint len) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreByteArrayDataOutput, initWithByteArray_withInt_withInt_, bytes, offset, len)
 }
 
 void OrgApacheLuceneStoreByteArrayDataOutput_init(OrgApacheLuceneStoreByteArrayDataOutput *self) {
   OrgApacheLuceneStoreDataOutput_init(self);
-  [self resetWithByteArray:JreLoadStatic(OrgApacheLuceneUtilBytesRef, EMPTY_BYTES_)];
+  [self resetWithByteArray:JreLoadStatic(OrgApacheLuceneUtilBytesRef, EMPTY_BYTES)];
 }
 
 OrgApacheLuceneStoreByteArrayDataOutput *new_OrgApacheLuceneStoreByteArrayDataOutput_init() {
-  OrgApacheLuceneStoreByteArrayDataOutput *self = [OrgApacheLuceneStoreByteArrayDataOutput alloc];
-  OrgApacheLuceneStoreByteArrayDataOutput_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreByteArrayDataOutput, init)
+}
+
+OrgApacheLuceneStoreByteArrayDataOutput *create_OrgApacheLuceneStoreByteArrayDataOutput_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreByteArrayDataOutput, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreByteArrayDataOutput)

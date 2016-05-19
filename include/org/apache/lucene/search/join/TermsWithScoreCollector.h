@@ -5,35 +5,35 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchJoinTermsWithScoreCollector_INCLUDE_ALL")
-#if OrgApacheLuceneSearchJoinTermsWithScoreCollector_RESTRICT
-#define OrgApacheLuceneSearchJoinTermsWithScoreCollector_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinTermsWithScoreCollector")
+#ifdef RESTRICT_OrgApacheLuceneSearchJoinTermsWithScoreCollector
+#define INCLUDE_ALL_OrgApacheLuceneSearchJoinTermsWithScoreCollector 0
 #else
-#define OrgApacheLuceneSearchJoinTermsWithScoreCollector_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchJoinTermsWithScoreCollector 1
 #endif
-#undef OrgApacheLuceneSearchJoinTermsWithScoreCollector_RESTRICT
-#if OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_Avg_INCLUDE
-#define OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_INCLUDE 1
+#undef RESTRICT_OrgApacheLuceneSearchJoinTermsWithScoreCollector
+#ifdef INCLUDE_OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_Avg
+#define INCLUDE_OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV 1
 #endif
-#if OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_INCLUDE
-#define OrgApacheLuceneSearchJoinTermsWithScoreCollector_INCLUDE 1
+#ifdef INCLUDE_OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV
+#define INCLUDE_OrgApacheLuceneSearchJoinTermsWithScoreCollector 1
 #endif
-#if OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_Avg_INCLUDE
-#define OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_INCLUDE 1
+#ifdef INCLUDE_OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_Avg
+#define INCLUDE_OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV 1
 #endif
-#if OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_INCLUDE
-#define OrgApacheLuceneSearchJoinTermsWithScoreCollector_INCLUDE 1
+#ifdef INCLUDE_OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV
+#define INCLUDE_OrgApacheLuceneSearchJoinTermsWithScoreCollector 1
 #endif
 
-#if !defined (_OrgApacheLuceneSearchJoinTermsWithScoreCollector_) && (OrgApacheLuceneSearchJoinTermsWithScoreCollector_INCLUDE_ALL || OrgApacheLuceneSearchJoinTermsWithScoreCollector_INCLUDE)
-#define _OrgApacheLuceneSearchJoinTermsWithScoreCollector_
+#if !defined (OrgApacheLuceneSearchJoinTermsWithScoreCollector_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinTermsWithScoreCollector || defined(INCLUDE_OrgApacheLuceneSearchJoinTermsWithScoreCollector))
+#define OrgApacheLuceneSearchJoinTermsWithScoreCollector_
 
-#define OrgApacheLuceneSearchSimpleCollector_RESTRICT 1
-#define OrgApacheLuceneSearchSimpleCollector_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSimpleCollector 1
+#define INCLUDE_OrgApacheLuceneSearchSimpleCollector 1
 #include "org/apache/lucene/search/SimpleCollector.h"
 
 @class IOSFloatArray;
-@class OrgApacheLuceneSearchJoinScoreModeEnum;
+@class OrgApacheLuceneSearchJoinScoreMode;
 @class OrgApacheLuceneSearchScorer;
 @class OrgApacheLuceneUtilBytesRefHash;
 
@@ -41,7 +41,7 @@
  @public
   NSString *field_;
   OrgApacheLuceneUtilBytesRefHash *collectedTerms_;
-  OrgApacheLuceneSearchJoinScoreModeEnum *scoreMode_;
+  OrgApacheLuceneSearchJoinScoreMode *scoreMode_;
   OrgApacheLuceneSearchScorer *scorer_;
   IOSFloatArray *scoreSums_;
 }
@@ -59,11 +59,17 @@
 #pragma mark Package-Private
 
 - (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneSearchJoinScoreModeEnum:(OrgApacheLuceneSearchJoinScoreModeEnum *)scoreMode;
+withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)scoreMode;
 
+/*!
+ @brief Chooses the right <code>TermsWithScoreCollector</code> implementation.
+ @param field                     The field to collect terms for
+ @param multipleValuesPerDocument Whether the field to collect terms for has multiple values per document.
+ @return a <code>TermsWithScoreCollector</code> instance
+ */
 + (OrgApacheLuceneSearchJoinTermsWithScoreCollector *)createWithNSString:(NSString *)field
                                                              withBoolean:(jboolean)multipleValuesPerDocument
-                              withOrgApacheLuceneSearchJoinScoreModeEnum:(OrgApacheLuceneSearchJoinScoreModeEnum *)scoreMode;
+                                  withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)scoreMode;
 
 @end
 
@@ -71,24 +77,24 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinTermsWithScoreCollector)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinTermsWithScoreCollector, field_, NSString *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinTermsWithScoreCollector, collectedTerms_, OrgApacheLuceneUtilBytesRefHash *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinTermsWithScoreCollector, scoreMode_, OrgApacheLuceneSearchJoinScoreModeEnum *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinTermsWithScoreCollector, scoreMode_, OrgApacheLuceneSearchJoinScoreMode *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinTermsWithScoreCollector, scorer_, OrgApacheLuceneSearchScorer *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinTermsWithScoreCollector, scoreSums_, IOSFloatArray *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinTermsWithScoreCollector_initWithNSString_withOrgApacheLuceneSearchJoinScoreModeEnum_(OrgApacheLuceneSearchJoinTermsWithScoreCollector *self, NSString *field, OrgApacheLuceneSearchJoinScoreModeEnum *scoreMode);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinTermsWithScoreCollector_initWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(OrgApacheLuceneSearchJoinTermsWithScoreCollector *self, NSString *field, OrgApacheLuceneSearchJoinScoreMode *scoreMode);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsWithScoreCollector *OrgApacheLuceneSearchJoinTermsWithScoreCollector_createWithNSString_withBoolean_withOrgApacheLuceneSearchJoinScoreModeEnum_(NSString *field, jboolean multipleValuesPerDocument, OrgApacheLuceneSearchJoinScoreModeEnum *scoreMode);
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsWithScoreCollector *OrgApacheLuceneSearchJoinTermsWithScoreCollector_createWithNSString_withBoolean_withOrgApacheLuceneSearchJoinScoreMode_(NSString *field, jboolean multipleValuesPerDocument, OrgApacheLuceneSearchJoinScoreMode *scoreMode);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsWithScoreCollector)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_) && (OrgApacheLuceneSearchJoinTermsWithScoreCollector_INCLUDE_ALL || OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_INCLUDE)
-#define _OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_
+#if !defined (OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinTermsWithScoreCollector || defined(INCLUDE_OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV))
+#define OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_
 
 @class OrgApacheLuceneIndexBinaryDocValues;
 @class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneSearchJoinScoreModeEnum;
+@class OrgApacheLuceneSearchJoinScoreMode;
 
 @interface OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV : OrgApacheLuceneSearchJoinTermsWithScoreCollector {
  @public
@@ -106,7 +112,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsWithScoreCollector)
 #pragma mark Package-Private
 
 - (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneSearchJoinScoreModeEnum:(OrgApacheLuceneSearchJoinScoreModeEnum *)scoreMode;
+withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)scoreMode;
 
 @end
 
@@ -114,16 +120,18 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV, fromDocTerms_, OrgApacheLuceneIndexBinaryDocValues *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_initWithNSString_withOrgApacheLuceneSearchJoinScoreModeEnum_(OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV *self, NSString *field, OrgApacheLuceneSearchJoinScoreModeEnum *scoreMode);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_initWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV *self, NSString *field, OrgApacheLuceneSearchJoinScoreMode *scoreMode);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV *new_OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_initWithNSString_withOrgApacheLuceneSearchJoinScoreModeEnum_(NSString *field, OrgApacheLuceneSearchJoinScoreModeEnum *scoreMode) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV *new_OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_initWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(NSString *field, OrgApacheLuceneSearchJoinScoreMode *scoreMode) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV *create_OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_initWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(NSString *field, OrgApacheLuceneSearchJoinScoreMode *scoreMode);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_Avg_) && (OrgApacheLuceneSearchJoinTermsWithScoreCollector_INCLUDE_ALL || OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_Avg_INCLUDE)
-#define _OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_Avg_
+#if !defined (OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_Avg_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinTermsWithScoreCollector || defined(INCLUDE_OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_Avg))
+#define OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_Avg_
 
 @class IOSFloatArray;
 @class IOSIntArray;
@@ -153,16 +161,18 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_Avg_i
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_Avg *new_OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_Avg_initWithNSString_(NSString *field) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_Avg *create_OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_Avg_initWithNSString_(NSString *field);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_Avg)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_) && (OrgApacheLuceneSearchJoinTermsWithScoreCollector_INCLUDE_ALL || OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_INCLUDE)
-#define _OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_
+#if !defined (OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinTermsWithScoreCollector || defined(INCLUDE_OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV))
+#define OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_
 
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneIndexSortedSetDocValues;
-@class OrgApacheLuceneSearchJoinScoreModeEnum;
+@class OrgApacheLuceneSearchJoinScoreMode;
 
 @interface OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV : OrgApacheLuceneSearchJoinTermsWithScoreCollector {
  @public
@@ -180,7 +190,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_A
 #pragma mark Package-Private
 
 - (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneSearchJoinScoreModeEnum:(OrgApacheLuceneSearchJoinScoreModeEnum *)scoreMode;
+withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)scoreMode;
 
 @end
 
@@ -188,16 +198,18 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV, fromDocTermOrds_, OrgApacheLuceneIndexSortedSetDocValues *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_initWithNSString_withOrgApacheLuceneSearchJoinScoreModeEnum_(OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV *self, NSString *field, OrgApacheLuceneSearchJoinScoreModeEnum *scoreMode);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_initWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV *self, NSString *field, OrgApacheLuceneSearchJoinScoreMode *scoreMode);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV *new_OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_initWithNSString_withOrgApacheLuceneSearchJoinScoreModeEnum_(NSString *field, OrgApacheLuceneSearchJoinScoreModeEnum *scoreMode) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV *new_OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_initWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(NSString *field, OrgApacheLuceneSearchJoinScoreMode *scoreMode) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV *create_OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_initWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(NSString *field, OrgApacheLuceneSearchJoinScoreMode *scoreMode);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_Avg_) && (OrgApacheLuceneSearchJoinTermsWithScoreCollector_INCLUDE_ALL || OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_Avg_INCLUDE)
-#define _OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_Avg_
+#if !defined (OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_Avg_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinTermsWithScoreCollector || defined(INCLUDE_OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_Avg))
+#define OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_Avg_
 
 @class IOSFloatArray;
 @class IOSIntArray;
@@ -227,8 +239,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_Avg_i
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_Avg *new_OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_Avg_initWithNSString_(NSString *field) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_Avg *create_OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_Avg_initWithNSString_(NSString *field);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_Avg)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchJoinTermsWithScoreCollector_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinTermsWithScoreCollector")

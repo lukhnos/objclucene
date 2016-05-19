@@ -5,23 +5,23 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsPostingsReaderBase_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsPostingsReaderBase_RESTRICT
-#define OrgApacheLuceneCodecsPostingsReaderBase_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsPostingsReaderBase")
+#ifdef RESTRICT_OrgApacheLuceneCodecsPostingsReaderBase
+#define INCLUDE_ALL_OrgApacheLuceneCodecsPostingsReaderBase 0
 #else
-#define OrgApacheLuceneCodecsPostingsReaderBase_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsPostingsReaderBase 1
 #endif
-#undef OrgApacheLuceneCodecsPostingsReaderBase_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsPostingsReaderBase
 
-#if !defined (_OrgApacheLuceneCodecsPostingsReaderBase_) && (OrgApacheLuceneCodecsPostingsReaderBase_INCLUDE_ALL || OrgApacheLuceneCodecsPostingsReaderBase_INCLUDE)
-#define _OrgApacheLuceneCodecsPostingsReaderBase_
+#if !defined (OrgApacheLuceneCodecsPostingsReaderBase_) && (INCLUDE_ALL_OrgApacheLuceneCodecsPostingsReaderBase || defined(INCLUDE_OrgApacheLuceneCodecsPostingsReaderBase))
+#define OrgApacheLuceneCodecsPostingsReaderBase_
 
-#define JavaIoCloseable_RESTRICT 1
-#define JavaIoCloseable_INCLUDE 1
+#define RESTRICT_JavaIoCloseable 1
+#define INCLUDE_JavaIoCloseable 1
 #include "java/io/Closeable.h"
 
-#define OrgApacheLuceneUtilAccountable_RESTRICT 1
-#define OrgApacheLuceneUtilAccountable_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAccountable 1
+#define INCLUDE_OrgApacheLuceneUtilAccountable 1
 #include "org/apache/lucene/util/Accountable.h"
 
 @class IOSLongArray;
@@ -32,25 +32,59 @@
 @class OrgApacheLuceneStoreDataInput;
 @class OrgApacheLuceneStoreIndexInput;
 
+/*!
+ @brief The core terms dictionaries (BlockTermsReader,
+ BlockTreeTermsReader) interact with a single instance
+ of this class to manage creation of <code>org.apache.lucene.index.PostingsEnum</code> and
+ <code>org.apache.lucene.index.PostingsEnum</code> instances.
+ It provides an
+ IndexInput (termsIn) where this class may read any
+ previously stored data that it had written in its
+ corresponding <code>PostingsWriterBase</code> at indexing
+ time. 
+  
+ */
 @interface OrgApacheLuceneCodecsPostingsReaderBase : NSObject < JavaIoCloseable, OrgApacheLuceneUtilAccountable >
 
 #pragma mark Public
 
+/*!
+ @brief Checks consistency of this reader.
+ <p>
+ Note that this may be costly in terms of I/O, e.g. 
+ may involve computing a checksum value against large data files.
+ */
 - (void)checkIntegrity;
 
 - (void)close;
 
+/*!
+ @brief Actually decode metadata for next term
+ - seealso: PostingsWriterBase#encodeTerm
+ */
 - (void)decodeTermWithLongArray:(IOSLongArray *)longs
 withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
 withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
 withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)state
                     withBoolean:(jboolean)absolute;
 
+/*!
+ @brief Performs any initialization, such as reading and
+ verifying the header from the provided terms
+ dictionary <code>IndexInput</code>.
+ */
 - (void)init__WithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)termsIn
         withOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Return a newly created empty TermState
+ */
 - (OrgApacheLuceneCodecsBlockTermState *)newTermState OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Must fully consume state, since after this call that
+ TermState may be reused.
+ */
 - (OrgApacheLuceneIndexPostingsEnum *)postingsWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
                                         withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)state
                                            withOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)reuse
@@ -58,6 +92,11 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)s
 
 #pragma mark Protected
 
+/*!
+ @brief Sole constructor.
+ (For invocation by subclass 
+ constructors, typically implicit.) 
+ */
 - (instancetype)init;
 
 @end
@@ -70,4 +109,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsPostingsReaderBase)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsPostingsReaderBase_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsPostingsReaderBase")

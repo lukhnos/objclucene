@@ -5,19 +5,26 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisDeGermanLightStemmer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisDeGermanLightStemmer_RESTRICT
-#define OrgApacheLuceneAnalysisDeGermanLightStemmer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanLightStemmer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisDeGermanLightStemmer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanLightStemmer 0
 #else
-#define OrgApacheLuceneAnalysisDeGermanLightStemmer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanLightStemmer 1
 #endif
-#undef OrgApacheLuceneAnalysisDeGermanLightStemmer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisDeGermanLightStemmer
 
-#if !defined (_OrgApacheLuceneAnalysisDeGermanLightStemmer_) && (OrgApacheLuceneAnalysisDeGermanLightStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisDeGermanLightStemmer_INCLUDE)
-#define _OrgApacheLuceneAnalysisDeGermanLightStemmer_
+#if !defined (OrgApacheLuceneAnalysisDeGermanLightStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanLightStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisDeGermanLightStemmer))
+#define OrgApacheLuceneAnalysisDeGermanLightStemmer_
 
 @class IOSCharArray;
 
+/*!
+ @brief Light Stemmer for German.
+ <p>
+ This stemmer implements the "UniNE" algorithm in:
+ <i>Light Stemming Approaches for the French, Portuguese, German and Hungarian Languages</i>
+ Jacques Savoy
+ */
 @interface OrgApacheLuceneAnalysisDeGermanLightStemmer : NSObject
 
 #pragma mark Public
@@ -35,8 +42,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisDeGermanLightStemmer_init(OrgApach
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisDeGermanLightStemmer *new_OrgApacheLuceneAnalysisDeGermanLightStemmer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisDeGermanLightStemmer *create_OrgApacheLuceneAnalysisDeGermanLightStemmer_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisDeGermanLightStemmer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisDeGermanLightStemmer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanLightStemmer")

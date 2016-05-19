@@ -5,29 +5,46 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter_RESTRICT
-#define OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter 0
 #else
-#define OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter
 
-#if !defined (_OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter_) && (OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter_
+#if !defined (OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter || defined(INCLUDE_OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter))
+#define OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief A <code>TokenFilter</code> that applies <code>NorwegianMinimalStemmer</code> to stem Norwegian
+ words.
+ <p>
+ To prevent terms from being stemmed use an instance of
+ <code>SetKeywordMarkerFilter</code> or a custom <code>TokenFilter</code> that sets
+ the <code>KeywordAttribute</code> before this <code>TokenStream</code>.
+ </p>
+ */
 @interface OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
+/*!
+ @brief Calls <code>NorwegianMinimalStemFilter(input, BOKMAAL)</code>
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
+/*!
+ @brief Creates a new NorwegianLightStemFilter
+ @param flags set to <code>NorwegianLightStemmer.BOKMAAL</code>, 
+ <code>NorwegianLightStemmer.NYNORSK</code>, or both.
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
                                                    withInt:(jint)flags;
 
@@ -41,12 +58,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter_initW
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter *new_OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter *create_OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input);
+
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter *self, OrgApacheLuceneAnalysisTokenStream *input, jint flags);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter *new_OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(OrgApacheLuceneAnalysisTokenStream *input, jint flags) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter *create_OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(OrgApacheLuceneAnalysisTokenStream *input, jint flags);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter")

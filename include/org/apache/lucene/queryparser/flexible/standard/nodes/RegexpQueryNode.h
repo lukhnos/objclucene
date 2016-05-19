@@ -5,37 +5,50 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode_) && (OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode_
+#if !defined (OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode))
+#define OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode_
 
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_RESTRICT 1
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl 1
+#define INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNodeImpl.h"
 
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode_RESTRICT 1
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode 1
+#define INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/TextableQueryNode.h"
 
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_RESTRICT 1
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode 1
+#define INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/FieldableNode.h"
 
 @class OrgApacheLuceneUtilBytesRef;
 @protocol JavaLangCharSequence;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;
 
+/*!
+ @brief A <code>RegexpQueryNode</code> represents <code>RegexpQuery</code> query Examples: /[a-z]|[0-9]/
+ */
 @interface OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl < OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode, OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode >
 
 #pragma mark Public
 
+/*!
+ @param field
+ - field name
+ @param text
+ - value that contains a regular expression
+ @param begin
+ - position in the query string
+ @param end
+ - position in the query string
+ */
 - (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)field
                     withJavaLangCharSequence:(id<JavaLangCharSequence>)text
                                      withInt:(jint)begin
@@ -67,8 +80,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQuer
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode *new_OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(id<JavaLangCharSequence> field, id<JavaLangCharSequence> text, jint begin, jint end) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode *create_OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(id<JavaLangCharSequence> field, id<JavaLangCharSequence> text, jint begin, jint end);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode")

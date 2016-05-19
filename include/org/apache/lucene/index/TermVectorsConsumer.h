@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexTermVectorsConsumer_INCLUDE_ALL")
-#if OrgApacheLuceneIndexTermVectorsConsumer_RESTRICT
-#define OrgApacheLuceneIndexTermVectorsConsumer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexTermVectorsConsumer")
+#ifdef RESTRICT_OrgApacheLuceneIndexTermVectorsConsumer
+#define INCLUDE_ALL_OrgApacheLuceneIndexTermVectorsConsumer 0
 #else
-#define OrgApacheLuceneIndexTermVectorsConsumer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexTermVectorsConsumer 1
 #endif
-#undef OrgApacheLuceneIndexTermVectorsConsumer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexTermVectorsConsumer
 
-#if !defined (_OrgApacheLuceneIndexTermVectorsConsumer_) && (OrgApacheLuceneIndexTermVectorsConsumer_INCLUDE_ALL || OrgApacheLuceneIndexTermVectorsConsumer_INCLUDE)
-#define _OrgApacheLuceneIndexTermVectorsConsumer_
+#if !defined (OrgApacheLuceneIndexTermVectorsConsumer_) && (INCLUDE_ALL_OrgApacheLuceneIndexTermVectorsConsumer || defined(INCLUDE_OrgApacheLuceneIndexTermVectorsConsumer))
+#define OrgApacheLuceneIndexTermVectorsConsumer_
 
-#define OrgApacheLuceneIndexTermsHash_RESTRICT 1
-#define OrgApacheLuceneIndexTermsHash_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexTermsHash 1
+#define INCLUDE_OrgApacheLuceneIndexTermsHash 1
 #include "org/apache/lucene/index/TermsHash.h"
 
 @class OrgApacheLuceneCodecsTermVectorsWriter;
@@ -34,8 +34,15 @@
 @interface OrgApacheLuceneIndexTermVectorsConsumer : OrgApacheLuceneIndexTermsHash {
  @public
   OrgApacheLuceneCodecsTermVectorsWriter *writer_;
+  /*!
+   @brief Scratch term used by TermVectorsConsumerPerField.finishDocument.
+   */
   OrgApacheLuceneUtilBytesRef *flushTerm_;
   OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter_;
+  /*!
+   @brief Used by TermVectorsConsumerPerField when serializing
+ the term vectors.
+   */
   OrgApacheLuceneIndexByteSliceReader *vectorSliceReaderPos_;
   OrgApacheLuceneIndexByteSliceReader *vectorSliceReaderOff_;
   jboolean hasVectors_;
@@ -56,6 +63,10 @@
 
 - (void)addFieldToFlushWithOrgApacheLuceneIndexTermVectorsConsumerPerField:(OrgApacheLuceneIndexTermVectorsConsumerPerField *)fieldToFlush;
 
+/*!
+ @brief Fills in no-term-vectors for all docs we haven't seen
+ since the last doc that had term vectors.
+ */
 - (void)fillWithInt:(jint)docID;
 
 - (void)finishDocument;
@@ -81,8 +92,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexTermVectorsConsumer_initWithOrgApache
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexTermVectorsConsumer *new_OrgApacheLuceneIndexTermVectorsConsumer_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_(OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexTermVectorsConsumer *create_OrgApacheLuceneIndexTermVectorsConsumer_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_(OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTermVectorsConsumer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexTermVectorsConsumer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexTermVectorsConsumer")

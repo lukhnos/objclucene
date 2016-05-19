@@ -32,6 +32,8 @@ __attribute__((unused)) static void OrgApacheLuceneUtilCommandLineUtil_init(OrgA
 
 __attribute__((unused)) static OrgApacheLuceneUtilCommandLineUtil *new_OrgApacheLuceneUtilCommandLineUtil_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneUtilCommandLineUtil *create_OrgApacheLuceneUtilCommandLineUtil_init();
+
 __attribute__((unused)) static NSString *OrgApacheLuceneUtilCommandLineUtil_adjustDirectoryClassNameWithNSString_(NSString *clazzName);
 
 @implementation OrgApacheLuceneUtilCommandLineUtil
@@ -82,11 +84,11 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "init", "CommandLineUtil", NULL, 0x2, NULL, NULL },
     { "newFSDirectoryWithNSString:withOrgLukhnosPortmobileFilePath:", "newFSDirectory", "Lorg.apache.lucene.store.FSDirectory;", 0x9, NULL, NULL },
     { "newFSDirectoryWithNSString:withOrgLukhnosPortmobileFilePath:withOrgApacheLuceneStoreLockFactory:", "newFSDirectory", "Lorg.apache.lucene.store.FSDirectory;", 0x9, NULL, NULL },
-    { "loadDirectoryClassWithNSString:", "loadDirectoryClass", "Ljava.lang.Class;", 0x9, "Ljava.lang.ClassNotFoundException;", NULL },
-    { "loadFSDirectoryClassWithNSString:", "loadFSDirectoryClass", "Ljava.lang.Class;", 0x9, "Ljava.lang.ClassNotFoundException;", NULL },
+    { "loadDirectoryClassWithNSString:", "loadDirectoryClass", "Ljava.lang.Class;", 0x9, "Ljava.lang.ClassNotFoundException;", "(Ljava/lang/String;)Ljava/lang/Class<+Lorg/apache/lucene/store/Directory;>;" },
+    { "loadFSDirectoryClassWithNSString:", "loadFSDirectoryClass", "Ljava.lang.Class;", 0x9, "Ljava.lang.ClassNotFoundException;", "(Ljava/lang/String;)Ljava/lang/Class<+Lorg/apache/lucene/store/FSDirectory;>;" },
     { "adjustDirectoryClassNameWithNSString:", "adjustDirectoryClassName", "Ljava.lang.String;", 0xa, NULL, NULL },
-    { "newFSDirectoryWithIOSClass:withOrgLukhnosPortmobileFilePath:", "newFSDirectory", "Lorg.apache.lucene.store.FSDirectory;", 0x9, "Ljava.lang.Exception;", NULL },
-    { "newFSDirectoryWithIOSClass:withOrgLukhnosPortmobileFilePath:withOrgApacheLuceneStoreLockFactory:", "newFSDirectory", "Lorg.apache.lucene.store.FSDirectory;", 0x9, "Ljava.lang.Exception;", NULL },
+    { "newFSDirectoryWithIOSClass:withOrgLukhnosPortmobileFilePath:", "newFSDirectory", "Lorg.apache.lucene.store.FSDirectory;", 0x9, "Ljava.lang.Exception;", "(Ljava/lang/Class<+Lorg/apache/lucene/store/FSDirectory;>;Lorg/lukhnos/portmobile/file/Path;)Lorg/apache/lucene/store/FSDirectory;" },
+    { "newFSDirectoryWithIOSClass:withOrgLukhnosPortmobileFilePath:withOrgApacheLuceneStoreLockFactory:", "newFSDirectory", "Lorg.apache.lucene.store.FSDirectory;", 0x9, "Ljava.lang.Exception;", "(Ljava/lang/Class<+Lorg/apache/lucene/store/FSDirectory;>;Lorg/lukhnos/portmobile/file/Path;Lorg/apache/lucene/store/LockFactory;)Lorg/apache/lucene/store/FSDirectory;" },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneUtilCommandLineUtil = { 2, "CommandLineUtil", "org.apache.lucene.util", NULL, 0x11, 8, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilCommandLineUtil;
@@ -99,9 +101,11 @@ void OrgApacheLuceneUtilCommandLineUtil_init(OrgApacheLuceneUtilCommandLineUtil 
 }
 
 OrgApacheLuceneUtilCommandLineUtil *new_OrgApacheLuceneUtilCommandLineUtil_init() {
-  OrgApacheLuceneUtilCommandLineUtil *self = [OrgApacheLuceneUtilCommandLineUtil alloc];
-  OrgApacheLuceneUtilCommandLineUtil_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilCommandLineUtil, init)
+}
+
+OrgApacheLuceneUtilCommandLineUtil *create_OrgApacheLuceneUtilCommandLineUtil_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilCommandLineUtil, init)
 }
 
 OrgApacheLuceneStoreFSDirectory *OrgApacheLuceneUtilCommandLineUtil_newFSDirectoryWithNSString_withOrgLukhnosPortmobileFilePath_(NSString *clazzName, OrgLukhnosPortmobileFilePath *path) {
@@ -116,16 +120,16 @@ OrgApacheLuceneStoreFSDirectory *OrgApacheLuceneUtilCommandLineUtil_newFSDirecto
     return OrgApacheLuceneUtilCommandLineUtil_newFSDirectoryWithIOSClass_withOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_(clazz, path, lf);
   }
   @catch (JavaLangClassNotFoundException *e) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_withJavaLangThrowable_(JreStrcat("$$$", [OrgApacheLuceneStoreFSDirectory_class_() getSimpleName], @" implementation not found: ", clazzName), e) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_withNSException_(JreStrcat("$$$", [OrgApacheLuceneStoreFSDirectory_class_() getSimpleName], @" implementation not found: ", clazzName), e);
   }
   @catch (JavaLangClassCastException *e) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_withJavaLangThrowable_(JreStrcat("$$$$", clazzName, @" is not a ", [OrgApacheLuceneStoreFSDirectory_class_() getSimpleName], @" implementation"), e) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_withNSException_(JreStrcat("$$$$", clazzName, @" is not a ", [OrgApacheLuceneStoreFSDirectory_class_() getSimpleName], @" implementation"), e);
   }
   @catch (JavaLangNoSuchMethodException *e) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_withJavaLangThrowable_(JreStrcat("$$$$", clazzName, @" constructor with ", [OrgLukhnosPortmobileFilePath_class_() getSimpleName], @" as parameter not found"), e) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_withNSException_(JreStrcat("$$$$", clazzName, @" constructor with ", [OrgLukhnosPortmobileFilePath_class_() getSimpleName], @" as parameter not found"), e);
   }
   @catch (JavaLangException *e) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_withJavaLangThrowable_(JreStrcat("$$$", @"Error creating ", clazzName, @" instance"), e) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_withNSException_(JreStrcat("$$$", @"Error creating ", clazzName, @" instance"), e);
   }
 }
 
@@ -142,9 +146,9 @@ IOSClass *OrgApacheLuceneUtilCommandLineUtil_loadFSDirectoryClassWithNSString_(N
 NSString *OrgApacheLuceneUtilCommandLineUtil_adjustDirectoryClassNameWithNSString_(NSString *clazzName) {
   OrgApacheLuceneUtilCommandLineUtil_initialize();
   if (clazzName == nil || ((jint) [((NSString *) nil_chk([clazzName trim])) length]) == 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"The ", [OrgApacheLuceneStoreFSDirectory_class_() getSimpleName], @" implementation cannot be null or empty")) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"The ", [OrgApacheLuceneStoreFSDirectory_class_() getSimpleName], @" implementation cannot be null or empty"));
   }
-  if ([((NSString *) nil_chk(clazzName)) indexOfString:@"."] == -1) {
+  if ([clazzName indexOfString:@"."] == -1) {
     clazzName = JreStrcat("$C$", [((JavaLangPackage *) nil_chk([OrgApacheLuceneStoreDirectory_class_() getPackage])) getName], '.', clazzName);
   }
   return clazzName;

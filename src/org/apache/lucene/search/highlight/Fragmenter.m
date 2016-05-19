@@ -4,7 +4,6 @@
 //
 
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/search/highlight/Fragmenter.h"
 
 @interface OrgApacheLuceneSearchHighlightFragmenter : NSObject

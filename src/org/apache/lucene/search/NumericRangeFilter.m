@@ -3,13 +3,14 @@
 //  source: ./core/src/java/org/apache/lucene/search/NumericRangeFilter.java
 //
 
-#include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/Double.h"
 #include "java/lang/Float.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Long.h"
+#include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/search/MultiTermQueryWrapperFilter.h"
 #include "org/apache/lucene/search/NumericRangeFilter.h"
 #include "org/apache/lucene/search/NumericRangeQuery.h"
@@ -23,6 +24,8 @@
 __attribute__((unused)) static void OrgApacheLuceneSearchNumericRangeFilter_initWithOrgApacheLuceneSearchNumericRangeQuery_(OrgApacheLuceneSearchNumericRangeFilter *self, OrgApacheLuceneSearchNumericRangeQuery *query);
 
 __attribute__((unused)) static OrgApacheLuceneSearchNumericRangeFilter *new_OrgApacheLuceneSearchNumericRangeFilter_initWithOrgApacheLuceneSearchNumericRangeQuery_(OrgApacheLuceneSearchNumericRangeQuery *query) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchNumericRangeFilter *create_OrgApacheLuceneSearchNumericRangeFilter_initWithOrgApacheLuceneSearchNumericRangeQuery_(OrgApacheLuceneSearchNumericRangeQuery *query);
 
 @implementation OrgApacheLuceneSearchNumericRangeFilter
 
@@ -120,20 +123,20 @@ __attribute__((unused)) static OrgApacheLuceneSearchNumericRangeFilter *new_OrgA
 }
 
 + (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchNumericRangeQuery:", "NumericRangeFilter", NULL, 0x2, NULL, NULL },
-    { "newLongRangeWithNSString:withInt:withJavaLangLong:withJavaLangLong:withBoolean:withBoolean:", "newLongRange", "Lorg.apache.lucene.search.NumericRangeFilter;", 0x9, NULL, NULL },
-    { "newLongRangeWithNSString:withJavaLangLong:withJavaLangLong:withBoolean:withBoolean:", "newLongRange", "Lorg.apache.lucene.search.NumericRangeFilter;", 0x9, NULL, NULL },
-    { "newIntRangeWithNSString:withInt:withJavaLangInteger:withJavaLangInteger:withBoolean:withBoolean:", "newIntRange", "Lorg.apache.lucene.search.NumericRangeFilter;", 0x9, NULL, NULL },
-    { "newIntRangeWithNSString:withJavaLangInteger:withJavaLangInteger:withBoolean:withBoolean:", "newIntRange", "Lorg.apache.lucene.search.NumericRangeFilter;", 0x9, NULL, NULL },
-    { "newDoubleRangeWithNSString:withInt:withJavaLangDouble:withJavaLangDouble:withBoolean:withBoolean:", "newDoubleRange", "Lorg.apache.lucene.search.NumericRangeFilter;", 0x9, NULL, NULL },
-    { "newDoubleRangeWithNSString:withJavaLangDouble:withJavaLangDouble:withBoolean:withBoolean:", "newDoubleRange", "Lorg.apache.lucene.search.NumericRangeFilter;", 0x9, NULL, NULL },
-    { "newFloatRangeWithNSString:withInt:withJavaLangFloat:withJavaLangFloat:withBoolean:withBoolean:", "newFloatRange", "Lorg.apache.lucene.search.NumericRangeFilter;", 0x9, NULL, NULL },
-    { "newFloatRangeWithNSString:withJavaLangFloat:withJavaLangFloat:withBoolean:withBoolean:", "newFloatRange", "Lorg.apache.lucene.search.NumericRangeFilter;", 0x9, NULL, NULL },
+    { "initWithOrgApacheLuceneSearchNumericRangeQuery:", "NumericRangeFilter", NULL, 0x2, NULL, "(Lorg/apache/lucene/search/NumericRangeQuery<TT;>;)V" },
+    { "newLongRangeWithNSString:withInt:withJavaLangLong:withJavaLangLong:withBoolean:withBoolean:", "newLongRange", "Lorg.apache.lucene.search.NumericRangeFilter;", 0x9, NULL, "(Ljava/lang/String;ILjava/lang/Long;Ljava/lang/Long;ZZ)Lorg/apache/lucene/search/NumericRangeFilter<Ljava/lang/Long;>;" },
+    { "newLongRangeWithNSString:withJavaLangLong:withJavaLangLong:withBoolean:withBoolean:", "newLongRange", "Lorg.apache.lucene.search.NumericRangeFilter;", 0x9, NULL, "(Ljava/lang/String;Ljava/lang/Long;Ljava/lang/Long;ZZ)Lorg/apache/lucene/search/NumericRangeFilter<Ljava/lang/Long;>;" },
+    { "newIntRangeWithNSString:withInt:withJavaLangInteger:withJavaLangInteger:withBoolean:withBoolean:", "newIntRange", "Lorg.apache.lucene.search.NumericRangeFilter;", 0x9, NULL, "(Ljava/lang/String;ILjava/lang/Integer;Ljava/lang/Integer;ZZ)Lorg/apache/lucene/search/NumericRangeFilter<Ljava/lang/Integer;>;" },
+    { "newIntRangeWithNSString:withJavaLangInteger:withJavaLangInteger:withBoolean:withBoolean:", "newIntRange", "Lorg.apache.lucene.search.NumericRangeFilter;", 0x9, NULL, "(Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;ZZ)Lorg/apache/lucene/search/NumericRangeFilter<Ljava/lang/Integer;>;" },
+    { "newDoubleRangeWithNSString:withInt:withJavaLangDouble:withJavaLangDouble:withBoolean:withBoolean:", "newDoubleRange", "Lorg.apache.lucene.search.NumericRangeFilter;", 0x9, NULL, "(Ljava/lang/String;ILjava/lang/Double;Ljava/lang/Double;ZZ)Lorg/apache/lucene/search/NumericRangeFilter<Ljava/lang/Double;>;" },
+    { "newDoubleRangeWithNSString:withJavaLangDouble:withJavaLangDouble:withBoolean:withBoolean:", "newDoubleRange", "Lorg.apache.lucene.search.NumericRangeFilter;", 0x9, NULL, "(Ljava/lang/String;Ljava/lang/Double;Ljava/lang/Double;ZZ)Lorg/apache/lucene/search/NumericRangeFilter<Ljava/lang/Double;>;" },
+    { "newFloatRangeWithNSString:withInt:withJavaLangFloat:withJavaLangFloat:withBoolean:withBoolean:", "newFloatRange", "Lorg.apache.lucene.search.NumericRangeFilter;", 0x9, NULL, "(Ljava/lang/String;ILjava/lang/Float;Ljava/lang/Float;ZZ)Lorg/apache/lucene/search/NumericRangeFilter<Ljava/lang/Float;>;" },
+    { "newFloatRangeWithNSString:withJavaLangFloat:withJavaLangFloat:withBoolean:withBoolean:", "newFloatRange", "Lorg.apache.lucene.search.NumericRangeFilter;", 0x9, NULL, "(Ljava/lang/String;Ljava/lang/Float;Ljava/lang/Float;ZZ)Lorg/apache/lucene/search/NumericRangeFilter<Ljava/lang/Float;>;" },
     { "includesMin", NULL, "Z", 0x1, NULL, NULL },
     { "includesMax", NULL, "Z", 0x1, NULL, NULL },
     { "getMin", NULL, "TT;", 0x1, NULL, "()TT;" },
@@ -152,49 +155,51 @@ void OrgApacheLuceneSearchNumericRangeFilter_initWithOrgApacheLuceneSearchNumeri
 }
 
 OrgApacheLuceneSearchNumericRangeFilter *new_OrgApacheLuceneSearchNumericRangeFilter_initWithOrgApacheLuceneSearchNumericRangeQuery_(OrgApacheLuceneSearchNumericRangeQuery *query) {
-  OrgApacheLuceneSearchNumericRangeFilter *self = [OrgApacheLuceneSearchNumericRangeFilter alloc];
-  OrgApacheLuceneSearchNumericRangeFilter_initWithOrgApacheLuceneSearchNumericRangeQuery_(self, query);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchNumericRangeFilter, initWithOrgApacheLuceneSearchNumericRangeQuery_, query)
+}
+
+OrgApacheLuceneSearchNumericRangeFilter *create_OrgApacheLuceneSearchNumericRangeFilter_initWithOrgApacheLuceneSearchNumericRangeQuery_(OrgApacheLuceneSearchNumericRangeQuery *query) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchNumericRangeFilter, initWithOrgApacheLuceneSearchNumericRangeQuery_, query)
 }
 
 OrgApacheLuceneSearchNumericRangeFilter *OrgApacheLuceneSearchNumericRangeFilter_newLongRangeWithNSString_withInt_withJavaLangLong_withJavaLangLong_withBoolean_withBoolean_(NSString *field, jint precisionStep, JavaLangLong *min, JavaLangLong *max, jboolean minInclusive, jboolean maxInclusive) {
   OrgApacheLuceneSearchNumericRangeFilter_initialize();
-  return [new_OrgApacheLuceneSearchNumericRangeFilter_initWithOrgApacheLuceneSearchNumericRangeQuery_(OrgApacheLuceneSearchNumericRangeQuery_newLongRangeWithNSString_withInt_withJavaLangLong_withJavaLangLong_withBoolean_withBoolean_(field, precisionStep, min, max, minInclusive, maxInclusive)) autorelease];
+  return create_OrgApacheLuceneSearchNumericRangeFilter_initWithOrgApacheLuceneSearchNumericRangeQuery_(OrgApacheLuceneSearchNumericRangeQuery_newLongRangeWithNSString_withInt_withJavaLangLong_withJavaLangLong_withBoolean_withBoolean_(field, precisionStep, min, max, minInclusive, maxInclusive));
 }
 
 OrgApacheLuceneSearchNumericRangeFilter *OrgApacheLuceneSearchNumericRangeFilter_newLongRangeWithNSString_withJavaLangLong_withJavaLangLong_withBoolean_withBoolean_(NSString *field, JavaLangLong *min, JavaLangLong *max, jboolean minInclusive, jboolean maxInclusive) {
   OrgApacheLuceneSearchNumericRangeFilter_initialize();
-  return [new_OrgApacheLuceneSearchNumericRangeFilter_initWithOrgApacheLuceneSearchNumericRangeQuery_(OrgApacheLuceneSearchNumericRangeQuery_newLongRangeWithNSString_withJavaLangLong_withJavaLangLong_withBoolean_withBoolean_(field, min, max, minInclusive, maxInclusive)) autorelease];
+  return create_OrgApacheLuceneSearchNumericRangeFilter_initWithOrgApacheLuceneSearchNumericRangeQuery_(OrgApacheLuceneSearchNumericRangeQuery_newLongRangeWithNSString_withJavaLangLong_withJavaLangLong_withBoolean_withBoolean_(field, min, max, minInclusive, maxInclusive));
 }
 
 OrgApacheLuceneSearchNumericRangeFilter *OrgApacheLuceneSearchNumericRangeFilter_newIntRangeWithNSString_withInt_withJavaLangInteger_withJavaLangInteger_withBoolean_withBoolean_(NSString *field, jint precisionStep, JavaLangInteger *min, JavaLangInteger *max, jboolean minInclusive, jboolean maxInclusive) {
   OrgApacheLuceneSearchNumericRangeFilter_initialize();
-  return [new_OrgApacheLuceneSearchNumericRangeFilter_initWithOrgApacheLuceneSearchNumericRangeQuery_(OrgApacheLuceneSearchNumericRangeQuery_newIntRangeWithNSString_withInt_withJavaLangInteger_withJavaLangInteger_withBoolean_withBoolean_(field, precisionStep, min, max, minInclusive, maxInclusive)) autorelease];
+  return create_OrgApacheLuceneSearchNumericRangeFilter_initWithOrgApacheLuceneSearchNumericRangeQuery_(OrgApacheLuceneSearchNumericRangeQuery_newIntRangeWithNSString_withInt_withJavaLangInteger_withJavaLangInteger_withBoolean_withBoolean_(field, precisionStep, min, max, minInclusive, maxInclusive));
 }
 
 OrgApacheLuceneSearchNumericRangeFilter *OrgApacheLuceneSearchNumericRangeFilter_newIntRangeWithNSString_withJavaLangInteger_withJavaLangInteger_withBoolean_withBoolean_(NSString *field, JavaLangInteger *min, JavaLangInteger *max, jboolean minInclusive, jboolean maxInclusive) {
   OrgApacheLuceneSearchNumericRangeFilter_initialize();
-  return [new_OrgApacheLuceneSearchNumericRangeFilter_initWithOrgApacheLuceneSearchNumericRangeQuery_(OrgApacheLuceneSearchNumericRangeQuery_newIntRangeWithNSString_withJavaLangInteger_withJavaLangInteger_withBoolean_withBoolean_(field, min, max, minInclusive, maxInclusive)) autorelease];
+  return create_OrgApacheLuceneSearchNumericRangeFilter_initWithOrgApacheLuceneSearchNumericRangeQuery_(OrgApacheLuceneSearchNumericRangeQuery_newIntRangeWithNSString_withJavaLangInteger_withJavaLangInteger_withBoolean_withBoolean_(field, min, max, minInclusive, maxInclusive));
 }
 
 OrgApacheLuceneSearchNumericRangeFilter *OrgApacheLuceneSearchNumericRangeFilter_newDoubleRangeWithNSString_withInt_withJavaLangDouble_withJavaLangDouble_withBoolean_withBoolean_(NSString *field, jint precisionStep, JavaLangDouble *min, JavaLangDouble *max, jboolean minInclusive, jboolean maxInclusive) {
   OrgApacheLuceneSearchNumericRangeFilter_initialize();
-  return [new_OrgApacheLuceneSearchNumericRangeFilter_initWithOrgApacheLuceneSearchNumericRangeQuery_(OrgApacheLuceneSearchNumericRangeQuery_newDoubleRangeWithNSString_withInt_withJavaLangDouble_withJavaLangDouble_withBoolean_withBoolean_(field, precisionStep, min, max, minInclusive, maxInclusive)) autorelease];
+  return create_OrgApacheLuceneSearchNumericRangeFilter_initWithOrgApacheLuceneSearchNumericRangeQuery_(OrgApacheLuceneSearchNumericRangeQuery_newDoubleRangeWithNSString_withInt_withJavaLangDouble_withJavaLangDouble_withBoolean_withBoolean_(field, precisionStep, min, max, minInclusive, maxInclusive));
 }
 
 OrgApacheLuceneSearchNumericRangeFilter *OrgApacheLuceneSearchNumericRangeFilter_newDoubleRangeWithNSString_withJavaLangDouble_withJavaLangDouble_withBoolean_withBoolean_(NSString *field, JavaLangDouble *min, JavaLangDouble *max, jboolean minInclusive, jboolean maxInclusive) {
   OrgApacheLuceneSearchNumericRangeFilter_initialize();
-  return [new_OrgApacheLuceneSearchNumericRangeFilter_initWithOrgApacheLuceneSearchNumericRangeQuery_(OrgApacheLuceneSearchNumericRangeQuery_newDoubleRangeWithNSString_withJavaLangDouble_withJavaLangDouble_withBoolean_withBoolean_(field, min, max, minInclusive, maxInclusive)) autorelease];
+  return create_OrgApacheLuceneSearchNumericRangeFilter_initWithOrgApacheLuceneSearchNumericRangeQuery_(OrgApacheLuceneSearchNumericRangeQuery_newDoubleRangeWithNSString_withJavaLangDouble_withJavaLangDouble_withBoolean_withBoolean_(field, min, max, minInclusive, maxInclusive));
 }
 
 OrgApacheLuceneSearchNumericRangeFilter *OrgApacheLuceneSearchNumericRangeFilter_newFloatRangeWithNSString_withInt_withJavaLangFloat_withJavaLangFloat_withBoolean_withBoolean_(NSString *field, jint precisionStep, JavaLangFloat *min, JavaLangFloat *max, jboolean minInclusive, jboolean maxInclusive) {
   OrgApacheLuceneSearchNumericRangeFilter_initialize();
-  return [new_OrgApacheLuceneSearchNumericRangeFilter_initWithOrgApacheLuceneSearchNumericRangeQuery_(OrgApacheLuceneSearchNumericRangeQuery_newFloatRangeWithNSString_withInt_withJavaLangFloat_withJavaLangFloat_withBoolean_withBoolean_(field, precisionStep, min, max, minInclusive, maxInclusive)) autorelease];
+  return create_OrgApacheLuceneSearchNumericRangeFilter_initWithOrgApacheLuceneSearchNumericRangeQuery_(OrgApacheLuceneSearchNumericRangeQuery_newFloatRangeWithNSString_withInt_withJavaLangFloat_withJavaLangFloat_withBoolean_withBoolean_(field, precisionStep, min, max, minInclusive, maxInclusive));
 }
 
 OrgApacheLuceneSearchNumericRangeFilter *OrgApacheLuceneSearchNumericRangeFilter_newFloatRangeWithNSString_withJavaLangFloat_withJavaLangFloat_withBoolean_withBoolean_(NSString *field, JavaLangFloat *min, JavaLangFloat *max, jboolean minInclusive, jboolean maxInclusive) {
   OrgApacheLuceneSearchNumericRangeFilter_initialize();
-  return [new_OrgApacheLuceneSearchNumericRangeFilter_initWithOrgApacheLuceneSearchNumericRangeQuery_(OrgApacheLuceneSearchNumericRangeQuery_newFloatRangeWithNSString_withJavaLangFloat_withJavaLangFloat_withBoolean_withBoolean_(field, min, max, minInclusive, maxInclusive)) autorelease];
+  return create_OrgApacheLuceneSearchNumericRangeFilter_initWithOrgApacheLuceneSearchNumericRangeQuery_(OrgApacheLuceneSearchNumericRangeQuery_newFloatRangeWithNSString_withJavaLangFloat_withJavaLangFloat_withBoolean_withBoolean_(field, min, max, minInclusive, maxInclusive));
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchNumericRangeFilter)

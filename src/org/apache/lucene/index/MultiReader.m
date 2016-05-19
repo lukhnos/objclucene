@@ -73,9 +73,11 @@ void OrgApacheLuceneIndexMultiReader_initWithOrgApacheLuceneIndexIndexReaderArra
 }
 
 OrgApacheLuceneIndexMultiReader *new_OrgApacheLuceneIndexMultiReader_initWithOrgApacheLuceneIndexIndexReaderArray_(IOSObjectArray *subReaders) {
-  OrgApacheLuceneIndexMultiReader *self = [OrgApacheLuceneIndexMultiReader alloc];
-  OrgApacheLuceneIndexMultiReader_initWithOrgApacheLuceneIndexIndexReaderArray_(self, subReaders);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiReader, initWithOrgApacheLuceneIndexIndexReaderArray_, subReaders)
+}
+
+OrgApacheLuceneIndexMultiReader *create_OrgApacheLuceneIndexMultiReader_initWithOrgApacheLuceneIndexIndexReaderArray_(IOSObjectArray *subReaders) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiReader, initWithOrgApacheLuceneIndexIndexReaderArray_, subReaders)
 }
 
 void OrgApacheLuceneIndexMultiReader_initWithOrgApacheLuceneIndexIndexReaderArray_withBoolean_(OrgApacheLuceneIndexMultiReader *self, IOSObjectArray *subReaders, jboolean closeSubReaders) {
@@ -89,9 +91,11 @@ void OrgApacheLuceneIndexMultiReader_initWithOrgApacheLuceneIndexIndexReaderArra
 }
 
 OrgApacheLuceneIndexMultiReader *new_OrgApacheLuceneIndexMultiReader_initWithOrgApacheLuceneIndexIndexReaderArray_withBoolean_(IOSObjectArray *subReaders, jboolean closeSubReaders) {
-  OrgApacheLuceneIndexMultiReader *self = [OrgApacheLuceneIndexMultiReader alloc];
-  OrgApacheLuceneIndexMultiReader_initWithOrgApacheLuceneIndexIndexReaderArray_withBoolean_(self, subReaders, closeSubReaders);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiReader, initWithOrgApacheLuceneIndexIndexReaderArray_withBoolean_, subReaders, closeSubReaders)
+}
+
+OrgApacheLuceneIndexMultiReader *create_OrgApacheLuceneIndexMultiReader_initWithOrgApacheLuceneIndexIndexReaderArray_withBoolean_(IOSObjectArray *subReaders, jboolean closeSubReaders) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiReader, initWithOrgApacheLuceneIndexIndexReaderArray_withBoolean_, subReaders, closeSubReaders)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiReader)

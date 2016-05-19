@@ -3,14 +3,17 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/tr/package-info.java
 //
 
+/*!
+ @brief Analyzer for Turkish.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisTrPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisTrPackage_info_RESTRICT
-#define OrgApacheLuceneAnalysisTrPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTrPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisTrPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTrPackage_info 0
 #else
-#define OrgApacheLuceneAnalysisTrPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTrPackage_info 1
 #endif
-#undef OrgApacheLuceneAnalysisTrPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisTrPackage_info
 
-#pragma pop_macro("OrgApacheLuceneAnalysisTrPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTrPackage_info")

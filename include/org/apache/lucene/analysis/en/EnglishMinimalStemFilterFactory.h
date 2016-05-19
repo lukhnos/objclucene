@@ -5,28 +5,43 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisEnEnglishMinimalStemFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisEnEnglishMinimalStemFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisEnEnglishMinimalStemFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisEnEnglishMinimalStemFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisEnEnglishMinimalStemFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisEnEnglishMinimalStemFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisEnEnglishMinimalStemFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisEnEnglishMinimalStemFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisEnEnglishMinimalStemFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisEnEnglishMinimalStemFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisEnEnglishMinimalStemFilterFactory_) && (OrgApacheLuceneAnalysisEnEnglishMinimalStemFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisEnEnglishMinimalStemFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisEnEnglishMinimalStemFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisEnEnglishMinimalStemFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisEnEnglishMinimalStemFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisEnEnglishMinimalStemFilterFactory))
+#define OrgApacheLuceneAnalysisEnEnglishMinimalStemFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>EnglishMinimalStemFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_enminstem" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+ &lt;filter class="solr.LowerCaseFilterFactory"/&gt;
+ &lt;filter class="solr.EnglishMinimalStemFilterFactory"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisEnEnglishMinimalStemFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new EnglishMinimalStemFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -39,8 +54,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisEnEnglishMinimalStemFilterFactory_
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisEnEnglishMinimalStemFilterFactory *new_OrgApacheLuceneAnalysisEnEnglishMinimalStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisEnEnglishMinimalStemFilterFactory *create_OrgApacheLuceneAnalysisEnEnglishMinimalStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisEnEnglishMinimalStemFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisEnEnglishMinimalStemFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisEnEnglishMinimalStemFilterFactory")

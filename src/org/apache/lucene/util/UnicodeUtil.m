@@ -16,53 +16,114 @@
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/UnicodeUtil.h"
 
-#define OrgApacheLuceneUtilUnicodeUtil_UNI_MAX_BMP 65535LL
-#define OrgApacheLuceneUtilUnicodeUtil_HALF_SHIFT 10LL
-#define OrgApacheLuceneUtilUnicodeUtil_HALF_MASK 1023LL
-#define OrgApacheLuceneUtilUnicodeUtil_SURROGATE_OFFSET -56613888
-#define OrgApacheLuceneUtilUnicodeUtil_LEAD_SURROGATE_SHIFT_ 10
-#define OrgApacheLuceneUtilUnicodeUtil_TRAIL_SURROGATE_MASK_ 1023
-#define OrgApacheLuceneUtilUnicodeUtil_TRAIL_SURROGATE_MIN_VALUE 56320
-#define OrgApacheLuceneUtilUnicodeUtil_LEAD_SURROGATE_MIN_VALUE 55296
-#define OrgApacheLuceneUtilUnicodeUtil_SUPPLEMENTARY_MIN_VALUE 65536
-#define OrgApacheLuceneUtilUnicodeUtil_LEAD_SURROGATE_OFFSET_ 55232
-
 @interface OrgApacheLuceneUtilUnicodeUtil ()
 
 - (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilUnicodeUtil, UNI_MAX_BMP, jlong)
+inline jlong OrgApacheLuceneUtilUnicodeUtil_get_UNI_MAX_BMP();
+#define OrgApacheLuceneUtilUnicodeUtil_UNI_MAX_BMP 65535LL
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilUnicodeUtil, UNI_MAX_BMP, jlong)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilUnicodeUtil, HALF_SHIFT, jlong)
+inline jlong OrgApacheLuceneUtilUnicodeUtil_get_HALF_SHIFT();
+#define OrgApacheLuceneUtilUnicodeUtil_HALF_SHIFT 10LL
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilUnicodeUtil, HALF_SHIFT, jlong)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilUnicodeUtil, HALF_MASK, jlong)
+inline jlong OrgApacheLuceneUtilUnicodeUtil_get_HALF_MASK();
+#define OrgApacheLuceneUtilUnicodeUtil_HALF_MASK 1023LL
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilUnicodeUtil, HALF_MASK, jlong)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilUnicodeUtil, SURROGATE_OFFSET, jint)
+inline jint OrgApacheLuceneUtilUnicodeUtil_get_SURROGATE_OFFSET();
+#define OrgApacheLuceneUtilUnicodeUtil_SURROGATE_OFFSET -56613888
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilUnicodeUtil, SURROGATE_OFFSET, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilUnicodeUtil, LEAD_SURROGATE_SHIFT_, jint)
+/*!
+ @brief Shift value for lead surrogate to form a supplementary character.
+ */
+inline jint OrgApacheLuceneUtilUnicodeUtil_get_LEAD_SURROGATE_SHIFT_();
+#define OrgApacheLuceneUtilUnicodeUtil_LEAD_SURROGATE_SHIFT_ 10
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilUnicodeUtil, LEAD_SURROGATE_SHIFT_, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilUnicodeUtil, TRAIL_SURROGATE_MASK_, jint)
+/*!
+ @brief Mask to retrieve the significant value from a trail surrogate.
+ */
+inline jint OrgApacheLuceneUtilUnicodeUtil_get_TRAIL_SURROGATE_MASK_();
+#define OrgApacheLuceneUtilUnicodeUtil_TRAIL_SURROGATE_MASK_ 1023
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilUnicodeUtil, TRAIL_SURROGATE_MASK_, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilUnicodeUtil, TRAIL_SURROGATE_MIN_VALUE, jint)
+/*!
+ @brief Trail surrogate minimum value
+ */
+inline jint OrgApacheLuceneUtilUnicodeUtil_get_TRAIL_SURROGATE_MIN_VALUE();
+#define OrgApacheLuceneUtilUnicodeUtil_TRAIL_SURROGATE_MIN_VALUE 56320
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilUnicodeUtil, TRAIL_SURROGATE_MIN_VALUE, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilUnicodeUtil, LEAD_SURROGATE_MIN_VALUE, jint)
+/*!
+ @brief Lead surrogate minimum value
+ */
+inline jint OrgApacheLuceneUtilUnicodeUtil_get_LEAD_SURROGATE_MIN_VALUE();
+#define OrgApacheLuceneUtilUnicodeUtil_LEAD_SURROGATE_MIN_VALUE 55296
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilUnicodeUtil, LEAD_SURROGATE_MIN_VALUE, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilUnicodeUtil, SUPPLEMENTARY_MIN_VALUE, jint)
+/*!
+ @brief The minimum value for Supplementary code points
+ */
+inline jint OrgApacheLuceneUtilUnicodeUtil_get_SUPPLEMENTARY_MIN_VALUE();
+#define OrgApacheLuceneUtilUnicodeUtil_SUPPLEMENTARY_MIN_VALUE 65536
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilUnicodeUtil, SUPPLEMENTARY_MIN_VALUE, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilUnicodeUtil, LEAD_SURROGATE_OFFSET_, jint)
+/*!
+ @brief Value that all lead surrogate starts with
+ */
+inline jint OrgApacheLuceneUtilUnicodeUtil_get_LEAD_SURROGATE_OFFSET_();
+#define OrgApacheLuceneUtilUnicodeUtil_LEAD_SURROGATE_OFFSET_ 55232
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilUnicodeUtil, LEAD_SURROGATE_OFFSET_, jint)
 
 __attribute__((unused)) static void OrgApacheLuceneUtilUnicodeUtil_init(OrgApacheLuceneUtilUnicodeUtil *self);
 
 __attribute__((unused)) static OrgApacheLuceneUtilUnicodeUtil *new_OrgApacheLuceneUtilUnicodeUtil_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneUtilUnicodeUtil *create_OrgApacheLuceneUtilUnicodeUtil_init();
+
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilUnicodeUtil)
 
-OrgApacheLuceneUtilBytesRef *OrgApacheLuceneUtilUnicodeUtil_BIG_TERM_;
-IOSIntArray *OrgApacheLuceneUtilUnicodeUtil_utf8CodeLength_;
+OrgApacheLuceneUtilBytesRef *OrgApacheLuceneUtilUnicodeUtil_BIG_TERM;
+IOSIntArray *OrgApacheLuceneUtilUnicodeUtil_utf8CodeLength;
 
 @implementation OrgApacheLuceneUtilUnicodeUtil
+
++ (OrgApacheLuceneUtilBytesRef *)BIG_TERM {
+  return OrgApacheLuceneUtilUnicodeUtil_BIG_TERM;
+}
+
++ (jint)UNI_SUR_HIGH_START {
+  return OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_HIGH_START;
+}
+
++ (jint)UNI_SUR_HIGH_END {
+  return OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_HIGH_END;
+}
+
++ (jint)UNI_SUR_LOW_START {
+  return OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_LOW_START;
+}
+
++ (jint)UNI_SUR_LOW_END {
+  return OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_LOW_END;
+}
+
++ (jint)UNI_REPLACEMENT_CHAR {
+  return OrgApacheLuceneUtilUnicodeUtil_UNI_REPLACEMENT_CHAR;
+}
+
++ (jint)MAX_UTF8_BYTES_PER_CHAR {
+  return OrgApacheLuceneUtilUnicodeUtil_MAX_UTF8_BYTES_PER_CHAR;
+}
+
++ (IOSIntArray *)utf8CodeLength {
+  return OrgApacheLuceneUtilUnicodeUtil_utf8CodeLength;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -127,10 +188,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilUnicodeUtil class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilUnicodeUtil_BIG_TERM_, new_OrgApacheLuceneUtilBytesRef_initWithByteArray_([IOSByteArray arrayWithBytes:(jbyte[]){ -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 } count:10]));
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilUnicodeUtil_BIG_TERM, new_OrgApacheLuceneUtilBytesRef_initWithByteArray_([IOSByteArray arrayWithBytes:(jbyte[]){ -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 } count:10]));
     {
       jint v = JavaLangInteger_MIN_VALUE;
-      JreStrongAssignAndConsume(&OrgApacheLuceneUtilUnicodeUtil_utf8CodeLength_, [IOSIntArray newArrayWithInts:(jint[]){ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4 } count:248]);
+      JreStrongAssignAndConsume(&OrgApacheLuceneUtilUnicodeUtil_utf8CodeLength, [IOSIntArray newArrayWithInts:(jint[]){ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, v, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4 } count:248]);
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilUnicodeUtil)
   }
@@ -151,7 +212,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "UTF8toUTF16WithOrgApacheLuceneUtilBytesRef:withCharArray:", "UTF8toUTF16", "I", 0x9, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "BIG_TERM_", NULL, 0x19, "Lorg.apache.lucene.util.BytesRef;", &OrgApacheLuceneUtilUnicodeUtil_BIG_TERM_, NULL, .constantValue.asLong = 0 },
+    { "BIG_TERM", "BIG_TERM", 0x19, "Lorg.apache.lucene.util.BytesRef;", &OrgApacheLuceneUtilUnicodeUtil_BIG_TERM, NULL, .constantValue.asLong = 0 },
     { "UNI_SUR_HIGH_START", "UNI_SUR_HIGH_START", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_HIGH_START },
     { "UNI_SUR_HIGH_END", "UNI_SUR_HIGH_END", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_HIGH_END },
     { "UNI_SUR_LOW_START", "UNI_SUR_LOW_START", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_LOW_START },
@@ -162,7 +223,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "HALF_MASK", "HALF_MASK", 0x1a, "J", NULL, NULL, .constantValue.asLong = OrgApacheLuceneUtilUnicodeUtil_HALF_MASK },
     { "SURROGATE_OFFSET", "SURROGATE_OFFSET", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilUnicodeUtil_SURROGATE_OFFSET },
     { "MAX_UTF8_BYTES_PER_CHAR", "MAX_UTF8_BYTES_PER_CHAR", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilUnicodeUtil_MAX_UTF8_BYTES_PER_CHAR },
-    { "utf8CodeLength_", NULL, 0x18, "[I", &OrgApacheLuceneUtilUnicodeUtil_utf8CodeLength_, NULL, .constantValue.asLong = 0 },
+    { "utf8CodeLength", "utf8CodeLength", 0x18, "[I", &OrgApacheLuceneUtilUnicodeUtil_utf8CodeLength, NULL, .constantValue.asLong = 0 },
     { "LEAD_SURROGATE_SHIFT_", "LEAD_SURROGATE_SHIFT_", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilUnicodeUtil_LEAD_SURROGATE_SHIFT_ },
     { "TRAIL_SURROGATE_MASK_", "TRAIL_SURROGATE_MASK_", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilUnicodeUtil_TRAIL_SURROGATE_MASK_ },
     { "TRAIL_SURROGATE_MIN_VALUE", "TRAIL_SURROGATE_MIN_VALUE", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilUnicodeUtil_TRAIL_SURROGATE_MIN_VALUE },
@@ -181,9 +242,11 @@ void OrgApacheLuceneUtilUnicodeUtil_init(OrgApacheLuceneUtilUnicodeUtil *self) {
 }
 
 OrgApacheLuceneUtilUnicodeUtil *new_OrgApacheLuceneUtilUnicodeUtil_init() {
-  OrgApacheLuceneUtilUnicodeUtil *self = [OrgApacheLuceneUtilUnicodeUtil alloc];
-  OrgApacheLuceneUtilUnicodeUtil_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilUnicodeUtil, init)
+}
+
+OrgApacheLuceneUtilUnicodeUtil *create_OrgApacheLuceneUtilUnicodeUtil_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilUnicodeUtil, init)
 }
 
 jint OrgApacheLuceneUtilUnicodeUtil_UTF16toUTF8WithCharArray_withInt_withInt_withByteArray_(IOSCharArray *source, jint offset, jint length, IOSByteArray *outArg) {
@@ -326,9 +389,9 @@ jint OrgApacheLuceneUtilUnicodeUtil_codePointCountWithOrgApacheLuceneUtilBytesRe
         continue;
       }
     }
-    @throw [new_JavaLangIllegalArgumentException_init() autorelease];
+    @throw create_JavaLangIllegalArgumentException_init();
   }
-  if (pos > limit) @throw [new_JavaLangIllegalArgumentException_init() autorelease];
+  if (pos > limit) @throw create_JavaLangIllegalArgumentException_init();
   return codePointCount;
 }
 
@@ -339,7 +402,7 @@ jint OrgApacheLuceneUtilUnicodeUtil_UTF8toUTF32WithOrgApacheLuceneUtilBytesRef_w
   IOSByteArray *bytes = utf8->bytes_;
   jint utf8Limit = utf8->offset_ + utf8->length_;
   while (utf8Upto < utf8Limit) {
-    jint numBytes = IOSIntArray_Get(nil_chk(OrgApacheLuceneUtilUnicodeUtil_utf8CodeLength_), IOSByteArray_Get(nil_chk(bytes), utf8Upto) & (jint) 0xFF);
+    jint numBytes = IOSIntArray_Get(nil_chk(OrgApacheLuceneUtilUnicodeUtil_utf8CodeLength), IOSByteArray_Get(nil_chk(bytes), utf8Upto) & (jint) 0xFF);
     jint v = 0;
     switch (numBytes) {
       case 1:
@@ -355,7 +418,7 @@ jint OrgApacheLuceneUtilUnicodeUtil_UTF8toUTF32WithOrgApacheLuceneUtilBytesRef_w
       v = IOSByteArray_Get(bytes, utf8Upto++) & 7;
       break;
       default:
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"invalid utf8") autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"invalid utf8");
     }
     jint limit = utf8Upto + numBytes - 1;
     while (utf8Upto < limit) {
@@ -369,14 +432,14 @@ jint OrgApacheLuceneUtilUnicodeUtil_UTF8toUTF32WithOrgApacheLuceneUtilBytesRef_w
 NSString *OrgApacheLuceneUtilUnicodeUtil_newStringWithIntArray_withInt_withInt_(IOSIntArray *codePoints, jint offset, jint count) {
   OrgApacheLuceneUtilUnicodeUtil_initialize();
   if (count < 0) {
-    @throw [new_JavaLangIllegalArgumentException_init() autorelease];
+    @throw create_JavaLangIllegalArgumentException_init();
   }
   IOSCharArray *chars = [IOSCharArray arrayWithLength:count];
   jint w = 0;
   for (jint r = offset, e = offset + count; r < e; ++r) {
     jint cp = IOSIntArray_Get(nil_chk(codePoints), r);
     if (cp < 0 || cp > (jint) 0x10ffff) {
-      @throw [new_JavaLangIllegalArgumentException_init() autorelease];
+      @throw create_JavaLangIllegalArgumentException_init();
     }
     while (true) {
       @try {
@@ -404,7 +467,7 @@ NSString *OrgApacheLuceneUtilUnicodeUtil_newStringWithIntArray_withInt_withInt_(
 
 NSString *OrgApacheLuceneUtilUnicodeUtil_toHexStringWithNSString_(NSString *s) {
   OrgApacheLuceneUtilUnicodeUtil_initialize();
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   for (jint i = 0; i < ((jint) [((NSString *) nil_chk(s)) length]); i++) {
     jchar ch = [s charAtWithInt:i];
     if (i > 0) {

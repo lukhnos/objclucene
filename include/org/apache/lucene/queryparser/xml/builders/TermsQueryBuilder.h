@@ -5,25 +5,28 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder_RESTRICT
-#define OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder 0
 #else
-#define OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder 1
 #endif
-#undef OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder
 
-#if !defined (_OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder_) && (OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder_INCLUDE_ALL || OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder_INCLUDE)
-#define _OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder_
+#if !defined (OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder))
+#define OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder_
 
-#define OrgApacheLuceneQueryparserXmlQueryBuilder_RESTRICT 1
-#define OrgApacheLuceneQueryparserXmlQueryBuilder_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserXmlQueryBuilder 1
+#define INCLUDE_OrgApacheLuceneQueryparserXmlQueryBuilder 1
 #include "org/apache/lucene/queryparser/xml/QueryBuilder.h"
 
 @class OrgApacheLuceneAnalysisAnalyzer;
 @class OrgApacheLuceneSearchQuery;
 @protocol OrgW3cDomElement;
 
+/*!
+ @brief Builds a BooleanQuery from all of the terms found in the XML element using the choice of analyzer
+ */
 @interface OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder : NSObject < OrgApacheLuceneQueryparserXmlQueryBuilder >
 
 #pragma mark Public
@@ -40,8 +43,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder_in
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder *new_OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *analyzer) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder *create_OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *analyzer);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder")

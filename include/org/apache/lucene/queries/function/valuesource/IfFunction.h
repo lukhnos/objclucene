@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionValuesourceIfFunction_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionValuesourceIfFunction_RESTRICT
-#define OrgApacheLuceneQueriesFunctionValuesourceIfFunction_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceIfFunction")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceIfFunction
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceIfFunction 0
 #else
-#define OrgApacheLuceneQueriesFunctionValuesourceIfFunction_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceIfFunction 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionValuesourceIfFunction_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceIfFunction
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValuesourceIfFunction_) && (OrgApacheLuceneQueriesFunctionValuesourceIfFunction_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValuesourceIfFunction_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValuesourceIfFunction_
+#if !defined (OrgApacheLuceneQueriesFunctionValuesourceIfFunction_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceIfFunction || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceIfFunction))
+#define OrgApacheLuceneQueriesFunctionValuesourceIfFunction_
 
-#define OrgApacheLuceneQueriesFunctionValuesourceBoolFunction_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionValuesourceBoolFunction_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceBoolFunction 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceBoolFunction 1
 #include "org/apache/lucene/queries/function/valuesource/BoolFunction.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
@@ -26,6 +26,10 @@
 @class OrgApacheLuceneSearchIndexSearcher;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Depending on the boolean value of the <code>ifSource</code> function,
+ returns the value of the <code>trueSource</code> or <code>falseSource</code> function.
+ */
 @interface OrgApacheLuceneQueriesFunctionValuesourceIfFunction : OrgApacheLuceneQueriesFunctionValuesourceBoolFunction
 
 #pragma mark Public
@@ -54,8 +58,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceIfFunction_initW
 
 FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceIfFunction *new_OrgApacheLuceneQueriesFunctionValuesourceIfFunction_initWithOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValueSource *ifSource, OrgApacheLuceneQueriesFunctionValueSource *trueSource, OrgApacheLuceneQueriesFunctionValueSource *falseSource) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceIfFunction *create_OrgApacheLuceneQueriesFunctionValuesourceIfFunction_initWithOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValueSource *ifSource, OrgApacheLuceneQueriesFunctionValueSource *trueSource, OrgApacheLuceneQueriesFunctionValueSource *falseSource);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceIfFunction)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionValuesourceIfFunction_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceIfFunction")

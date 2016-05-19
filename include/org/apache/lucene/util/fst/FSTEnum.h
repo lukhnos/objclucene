@@ -5,22 +5,25 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilFstFSTEnum_INCLUDE_ALL")
-#if OrgApacheLuceneUtilFstFSTEnum_RESTRICT
-#define OrgApacheLuceneUtilFstFSTEnum_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstFSTEnum")
+#ifdef RESTRICT_OrgApacheLuceneUtilFstFSTEnum
+#define INCLUDE_ALL_OrgApacheLuceneUtilFstFSTEnum 0
 #else
-#define OrgApacheLuceneUtilFstFSTEnum_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilFstFSTEnum 1
 #endif
-#undef OrgApacheLuceneUtilFstFSTEnum_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilFstFSTEnum
 
-#if !defined (_OrgApacheLuceneUtilFstFSTEnum_) && (OrgApacheLuceneUtilFstFSTEnum_INCLUDE_ALL || OrgApacheLuceneUtilFstFSTEnum_INCLUDE)
-#define _OrgApacheLuceneUtilFstFSTEnum_
+#if !defined (OrgApacheLuceneUtilFstFSTEnum_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstFSTEnum || defined(INCLUDE_OrgApacheLuceneUtilFstFSTEnum))
+#define OrgApacheLuceneUtilFstFSTEnum_
 
 @class IOSObjectArray;
 @class OrgApacheLuceneUtilFstFST;
 @class OrgApacheLuceneUtilFstFST_Arc;
 @class OrgApacheLuceneUtilFstFST_BytesReader;
 
+/*!
+ @brief Can next() and advance() through the terms in an FST
+ */
 @interface OrgApacheLuceneUtilFstFSTEnum : NSObject {
  @public
   OrgApacheLuceneUtilFstFST *fst_;
@@ -35,14 +38,28 @@
 
 #pragma mark Protected
 
+/*!
+ @brief doFloor controls the behavior of advance: if it's true
+ doFloor is true, advance positions to the biggest
+ term before target.
+ */
 - (instancetype)initWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst;
 
 - (void)doNext;
 
+/*!
+ @brief Seeks to smallest term that's &gt;= target.
+ */
 - (void)doSeekCeil;
 
+/*!
+ @brief Seeks to exactly target term.
+ */
 - (jboolean)doSeekExact;
 
+/*!
+ @brief Seeks to largest term that's &lt;= target.
+ */
 - (void)doSeekFloor;
 
 - (jint)getCurrentLabel;
@@ -51,6 +68,10 @@
 
 - (void)grow;
 
+/*!
+ @brief Rewinds enum state to match the shared prefix between
+ current term and target term
+ */
 - (void)rewindPrefix;
 
 - (void)setCurrentLabelWithInt:(jint)label;
@@ -72,4 +93,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstFSTEnum)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilFstFSTEnum_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstFSTEnum")

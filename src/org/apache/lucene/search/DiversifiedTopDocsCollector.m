@@ -70,6 +70,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchDiversifiedTopDocsColle
 
 __attribute__((unused)) static OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1 *new_OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1_initWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_withInt_withOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchDiversifiedTopDocsCollector *outer$, jint capture$0, OrgApacheLuceneIndexNumericDocValues *capture$1) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1 *create_OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1_initWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_withInt_withOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchDiversifiedTopDocsCollector *outer$, jint capture$0, OrgApacheLuceneIndexNumericDocValues *capture$1);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1)
 
 @implementation OrgApacheLuceneSearchDiversifiedTopDocsCollector
@@ -93,49 +95,49 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1)
 - (OrgApacheLuceneSearchTopDocs *)newTopDocsWithOrgApacheLuceneSearchScoreDocArray:(IOSObjectArray *)results
                                                                            withInt:(jint)start {
   if (results == nil) {
-    return JreLoadStatic(OrgApacheLuceneSearchTopDocsCollector, EMPTY_TOPDOCS_);
+    return JreLoadStatic(OrgApacheLuceneSearchTopDocsCollector, EMPTY_TOPDOCS);
   }
   jfloat maxScore = JavaLangFloat_NaN;
   if (start == 0) {
-    maxScore = ((OrgApacheLuceneSearchScoreDoc *) nil_chk(IOSObjectArray_Get(nil_chk(results), 0)))->score_;
+    maxScore = ((OrgApacheLuceneSearchScoreDoc *) nil_chk(IOSObjectArray_Get(results, 0)))->score_;
   }
   else {
     for (jint i = [((OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *) nil_chk(globalQueue_)) size]; i > 1; i--) {
-      [globalQueue_ pop];
+      [((OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *) nil_chk(globalQueue_)) pop];
     }
-    maxScore = ((OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *) nil_chk([globalQueue_ pop]))->score_;
+    maxScore = ((OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *) nil_chk([((OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *) nil_chk(globalQueue_)) pop]))->score_;
   }
-  return [new_OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_withFloat_(totalHits_, results, maxScore) autorelease];
+  return create_OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_withFloat_(totalHits_, results, maxScore);
 }
 
 - (OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *)insertWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey:(OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *)addition
                                                                                                                                  withInt:(jint)docBase
                                                                                                 withOrgApacheLuceneIndexNumericDocValues:(OrgApacheLuceneIndexNumericDocValues *)keys {
-  if (([((OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *) nil_chk(globalQueue_)) size] >= numHits_) && (OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue_lessThanWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey_withOrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey_(globalQueue_, addition, [globalQueue_ top]))) {
+  if (([((OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *) nil_chk(globalQueue_)) size] >= numHits_) && (OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue_lessThanWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey_withOrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey_(nil_chk(globalQueue_), addition, [globalQueue_ top]))) {
     return addition;
   }
   JreStrongAssign(&((OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *) nil_chk(addition))->key_, JavaLangLong_valueOfWithLong_([((OrgApacheLuceneIndexNumericDocValues *) nil_chk(keys)) getWithInt:addition->doc_ - docBase]));
   OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *thisKeyQ = [((id<JavaUtilMap>) nil_chk(perKeyQueues_)) getWithId:addition->key_];
   if (thisKeyQ == nil) {
     if ([((JavaUtilStack *) nil_chk(sparePerKeyQueues_)) size] == 0) {
-      thisKeyQ = [new_OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue_initWithInt_(maxNumPerKey_) autorelease];
+      thisKeyQ = create_OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue_initWithInt_(maxNumPerKey_);
     }
     else {
-      thisKeyQ = [sparePerKeyQueues_ pop];
+      thisKeyQ = [((JavaUtilStack *) nil_chk(sparePerKeyQueues_)) pop];
     }
-    [perKeyQueues_ putWithId:addition->key_ withId:thisKeyQ];
+    [((id<JavaUtilMap>) nil_chk(perKeyQueues_)) putWithId:addition->key_ withId:thisKeyQ];
   }
   OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *perKeyOverflow = [((OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *) nil_chk(thisKeyQ)) insertWithOverflowWithId:addition];
   if (perKeyOverflow == addition) {
     return addition;
   }
   if (perKeyOverflow == nil) {
-    OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *globalOverflow = [globalQueue_ insertWithOverflowWithId:addition];
+    OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *globalOverflow = [((OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *) nil_chk(globalQueue_)) insertWithOverflowWithId:addition];
     OrgApacheLuceneSearchDiversifiedTopDocsCollector_perKeyGroupRemoveWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey_(self, globalOverflow);
     return globalOverflow;
   }
-  [globalQueue_ removeWithId:perKeyOverflow];
-  [globalQueue_ addWithId:addition];
+  [((OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *) nil_chk(globalQueue_)) removeWithId:perKeyOverflow];
+  [((OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *) nil_chk(globalQueue_)) addWithId:addition];
   return perKeyOverflow;
 }
 
@@ -146,7 +148,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1)
 - (id<OrgApacheLuceneSearchLeafCollector>)getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
   jint base = ((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context))->docBase_;
   OrgApacheLuceneIndexNumericDocValues *keySource = [self getKeysWithOrgApacheLuceneIndexLeafReaderContext:context];
-  return [new_OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1_initWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_withInt_withOrgApacheLuceneIndexNumericDocValues_(self, base, keySource) autorelease];
+  return create_OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1_initWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_withInt_withOrgApacheLuceneIndexNumericDocValues_(self, base, keySource);
 }
 
 - (void)dealloc {
@@ -184,9 +186,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1)
 @end
 
 void OrgApacheLuceneSearchDiversifiedTopDocsCollector_initWithInt_withInt_(OrgApacheLuceneSearchDiversifiedTopDocsCollector *self, jint numHits, jint maxHitsPerKey) {
-  OrgApacheLuceneSearchTopDocsCollector_initWithOrgApacheLuceneUtilPriorityQueue_(self, [new_OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue_initWithInt_(numHits) autorelease]);
+  OrgApacheLuceneSearchTopDocsCollector_initWithOrgApacheLuceneUtilPriorityQueue_(self, create_OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue_initWithInt_(numHits));
   JreStrongAssignAndConsume(&self->sparePerKeyQueues_, new_JavaUtilStack_init());
-  JreStrongAssign(&self->globalQueue_, (OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *) check_class_cast(self->pq_, [OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue class]));
+  JreStrongAssign(&self->globalQueue_, (OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *) cast_chk(self->pq_, [OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue class]));
   JreStrongAssignAndConsume(&self->perKeyQueues_, new_JavaUtilHashMap_init());
   self->numHits_ = numHits;
   self->maxNumPerKey_ = maxHitsPerKey;
@@ -196,11 +198,11 @@ void OrgApacheLuceneSearchDiversifiedTopDocsCollector_perKeyGroupRemoveWithOrgAp
   if (globalOverflow == nil) {
     return;
   }
-  OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *q = [((id<JavaUtilMap>) nil_chk(self->perKeyQueues_)) getWithId:((OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *) nil_chk(globalOverflow))->key_];
+  OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *q = [((id<JavaUtilMap>) nil_chk(self->perKeyQueues_)) getWithId:globalOverflow->key_];
   OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *perKeyLowest = [((OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *) nil_chk(q)) pop];
   JreAssert((globalOverflow == perKeyLowest), (@"org/apache/lucene/search/DiversifiedTopDocsCollector.java:171 condition failed: assert (globalOverflow == perKeyLowest);"));
   if ([q size] == 0) {
-    [self->perKeyQueues_ removeWithId:globalOverflow->key_];
+    [((id<JavaUtilMap>) nil_chk(self->perKeyQueues_)) removeWithId:globalOverflow->key_];
     [((JavaUtilStack *) nil_chk(self->sparePerKeyQueues_)) pushWithId:q];
   }
 }
@@ -222,7 +224,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDiversifiedTopDocsCollecto
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithInt:", "ScoreDocKeyQueue", NULL, 0x0, NULL, NULL },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x14, NULL, NULL },
+    { "lessThanWithId:withId:", "lessThan", "Z", 0x14, NULL, "(Lorg/apache/lucene/search/DiversifiedTopDocsCollector$ScoreDocKey;Lorg/apache/lucene/search/DiversifiedTopDocsCollector$ScoreDocKey;)Z" },
   };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.DiversifiedTopDocsCollector$ScoreDocKey;"};
   static const J2ObjcClassInfo _OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue = { 2, "ScoreDocKeyQueue", "org.apache.lucene.search", "DiversifiedTopDocsCollector", 0x8, 2, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/search/DiversifiedTopDocsCollector$ScoreDocKey;>;" };
@@ -236,9 +238,11 @@ void OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue_initWithI
 }
 
 OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *new_OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue_initWithInt_(jint size) {
-  OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *self = [OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue alloc];
-  OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue_initWithInt_(self, size);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue, initWithInt_, size)
+}
+
+OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *create_OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue_initWithInt_(jint size) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue, initWithInt_, size)
 }
 
 jboolean OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue_lessThanWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey_withOrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey_(OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *self, OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *hitA, OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *hitB) {
@@ -289,9 +293,11 @@ void OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey_initWithInt_wi
 }
 
 OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *new_OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey_initWithInt_withFloat_(jint doc, jfloat score) {
-  OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *self = [OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey alloc];
-  OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey_initWithInt_withFloat_(self, doc, score);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey, initWithInt_withFloat_, doc, score)
+}
+
+OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *create_OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey_initWithInt_withFloat_(jint doc, jfloat score) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey, initWithInt_withFloat_, doc, score)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey)
@@ -358,9 +364,11 @@ void OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1_initWithOrgApacheLucene
 }
 
 OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1 *new_OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1_initWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_withInt_withOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchDiversifiedTopDocsCollector *outer$, jint capture$0, OrgApacheLuceneIndexNumericDocValues *capture$1) {
-  OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1 *self = [OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1 alloc];
-  OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1_initWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_withInt_withOrgApacheLuceneIndexNumericDocValues_(self, outer$, capture$0, capture$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1, initWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_withInt_withOrgApacheLuceneIndexNumericDocValues_, outer$, capture$0, capture$1)
+}
+
+OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1 *create_OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1_initWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_withInt_withOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchDiversifiedTopDocsCollector *outer$, jint capture$0, OrgApacheLuceneIndexNumericDocValues *capture$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1, initWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_withInt_withOrgApacheLuceneIndexNumericDocValues_, outer$, capture$0, capture$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1)

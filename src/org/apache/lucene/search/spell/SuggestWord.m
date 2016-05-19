@@ -40,9 +40,11 @@ void OrgApacheLuceneSearchSpellSuggestWord_init(OrgApacheLuceneSearchSpellSugges
 }
 
 OrgApacheLuceneSearchSpellSuggestWord *new_OrgApacheLuceneSearchSpellSuggestWord_init() {
-  OrgApacheLuceneSearchSpellSuggestWord *self = [OrgApacheLuceneSearchSpellSuggestWord alloc];
-  OrgApacheLuceneSearchSpellSuggestWord_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSpellSuggestWord, init)
+}
+
+OrgApacheLuceneSearchSpellSuggestWord *create_OrgApacheLuceneSearchSpellSuggestWord_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSpellSuggestWord, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpellSuggestWord)

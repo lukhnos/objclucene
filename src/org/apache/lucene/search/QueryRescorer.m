@@ -49,6 +49,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchQueryRescorer_$1_init(O
 
 __attribute__((unused)) static OrgApacheLuceneSearchQueryRescorer_$1 *new_OrgApacheLuceneSearchQueryRescorer_$1_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchQueryRescorer_$1 *create_OrgApacheLuceneSearchQueryRescorer_$1_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchQueryRescorer_$1)
 
 @interface OrgApacheLuceneSearchQueryRescorer_$2 : NSObject < JavaUtilComparator >
@@ -65,6 +67,8 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchQueryRescorer_$2)
 __attribute__((unused)) static void OrgApacheLuceneSearchQueryRescorer_$2_init(OrgApacheLuceneSearchQueryRescorer_$2 *self);
 
 __attribute__((unused)) static OrgApacheLuceneSearchQueryRescorer_$2 *new_OrgApacheLuceneSearchQueryRescorer_$2_init() NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchQueryRescorer_$2 *create_OrgApacheLuceneSearchQueryRescorer_$2_init();
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchQueryRescorer_$2)
 
@@ -88,6 +92,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchQueryRescorer_$3_initWi
 
 __attribute__((unused)) static OrgApacheLuceneSearchQueryRescorer_$3 *new_OrgApacheLuceneSearchQueryRescorer_$3_initWithDouble_withOrgApacheLuceneSearchQuery_(jdouble capture$0, OrgApacheLuceneSearchQuery *arg$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchQueryRescorer_$3 *create_OrgApacheLuceneSearchQueryRescorer_$3_initWithDouble_withOrgApacheLuceneSearchQuery_(jdouble capture$0, OrgApacheLuceneSearchQuery *arg$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchQueryRescorer_$3)
 
 @implementation OrgApacheLuceneSearchQueryRescorer
@@ -109,7 +115,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchQueryRescorer_$3)
                                                withOrgApacheLuceneSearchTopDocs:(OrgApacheLuceneSearchTopDocs *)firstPassTopDocs
                                                                         withInt:(jint)topN {
   IOSObjectArray *hits = [((IOSObjectArray *) nil_chk(((OrgApacheLuceneSearchTopDocs *) nil_chk(firstPassTopDocs))->scoreDocs_)) clone];
-  JavaUtilArrays_sortWithNSObjectArray_withJavaUtilComparator_(hits, [new_OrgApacheLuceneSearchQueryRescorer_$1_init() autorelease]);
+  JavaUtilArrays_sortWithNSObjectArray_withJavaUtilComparator_(hits, create_OrgApacheLuceneSearchQueryRescorer_$1_init());
   id<JavaUtilList> leaves = [((OrgApacheLuceneIndexIndexReader *) nil_chk([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getIndexReader])) leaves];
   OrgApacheLuceneSearchWeight *weight = [searcher createNormalizedWeightWithOrgApacheLuceneSearchQuery:query_ withBoolean:true];
   jint hitUpto = 0;
@@ -149,13 +155,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchQueryRescorer_$3)
     }
     hitUpto++;
   }
-  JavaUtilArrays_sortWithNSObjectArray_withJavaUtilComparator_(hits, [new_OrgApacheLuceneSearchQueryRescorer_$2_init() autorelease]);
+  JavaUtilArrays_sortWithNSObjectArray_withJavaUtilComparator_(hits, create_OrgApacheLuceneSearchQueryRescorer_$2_init());
   if (topN < hits->size_) {
     IOSObjectArray *subset = [IOSObjectArray arrayWithLength:topN type:OrgApacheLuceneSearchScoreDoc_class_()];
     JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(hits, 0, subset, 0, topN);
     hits = subset;
   }
-  return [new_OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_withFloat_(firstPassTopDocs->totalHits_, hits, ((OrgApacheLuceneSearchScoreDoc *) nil_chk(IOSObjectArray_Get(hits, 0)))->score_) autorelease];
+  return create_OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_withFloat_(firstPassTopDocs->totalHits_, hits, ((OrgApacheLuceneSearchScoreDoc *) nil_chk(IOSObjectArray_Get(hits, 0)))->score_);
 }
 
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
@@ -170,7 +176,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchQueryRescorer_$3)
   else {
     score = [self combineWithFloat:[((OrgApacheLuceneSearchExplanation *) nil_chk(firstPassExplanation)) getValue] withBoolean:true withFloat:[secondPassScore floatValue]];
   }
-  OrgApacheLuceneSearchExplanation *first = OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_([((OrgApacheLuceneSearchExplanation *) nil_chk(firstPassExplanation)) getValue], @"first pass score", [IOSObjectArray arrayWithObjects:(id[]){ firstPassExplanation } count:1 type:OrgApacheLuceneSearchExplanation_class_()]);
+  OrgApacheLuceneSearchExplanation *first = OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_([firstPassExplanation getValue], @"first pass score", [IOSObjectArray arrayWithObjects:(id[]){ firstPassExplanation } count:1 type:OrgApacheLuceneSearchExplanation_class_()]);
   OrgApacheLuceneSearchExplanation *second;
   if (secondPassScore == nil) {
     second = OrgApacheLuceneSearchExplanation_noMatchWithNSString_withOrgApacheLuceneSearchExplanationArray_(@"no second pass score", [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]);
@@ -218,7 +224,7 @@ void OrgApacheLuceneSearchQueryRescorer_initWithOrgApacheLuceneSearchQuery_(OrgA
 
 OrgApacheLuceneSearchTopDocs *OrgApacheLuceneSearchQueryRescorer_rescoreWithOrgApacheLuceneSearchIndexSearcher_withOrgApacheLuceneSearchTopDocs_withOrgApacheLuceneSearchQuery_withDouble_withInt_(OrgApacheLuceneSearchIndexSearcher *searcher, OrgApacheLuceneSearchTopDocs *topDocs, OrgApacheLuceneSearchQuery *query, jdouble weight, jint topN) {
   OrgApacheLuceneSearchQueryRescorer_initialize();
-  return [((OrgApacheLuceneSearchQueryRescorer_$3 *) [new_OrgApacheLuceneSearchQueryRescorer_$3_initWithDouble_withOrgApacheLuceneSearchQuery_(weight, query) autorelease]) rescoreWithOrgApacheLuceneSearchIndexSearcher:searcher withOrgApacheLuceneSearchTopDocs:topDocs withInt:topN];
+  return [create_OrgApacheLuceneSearchQueryRescorer_$3_initWithDouble_withOrgApacheLuceneSearchQuery_(weight, query) rescoreWithOrgApacheLuceneSearchIndexSearcher:searcher withOrgApacheLuceneSearchTopDocs:topDocs withInt:topN];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchQueryRescorer)
@@ -254,9 +260,11 @@ void OrgApacheLuceneSearchQueryRescorer_$1_init(OrgApacheLuceneSearchQueryRescor
 }
 
 OrgApacheLuceneSearchQueryRescorer_$1 *new_OrgApacheLuceneSearchQueryRescorer_$1_init() {
-  OrgApacheLuceneSearchQueryRescorer_$1 *self = [OrgApacheLuceneSearchQueryRescorer_$1 alloc];
-  OrgApacheLuceneSearchQueryRescorer_$1_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchQueryRescorer_$1, init)
+}
+
+OrgApacheLuceneSearchQueryRescorer_$1 *create_OrgApacheLuceneSearchQueryRescorer_$1_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchQueryRescorer_$1, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchQueryRescorer_$1)
@@ -300,9 +308,11 @@ void OrgApacheLuceneSearchQueryRescorer_$2_init(OrgApacheLuceneSearchQueryRescor
 }
 
 OrgApacheLuceneSearchQueryRescorer_$2 *new_OrgApacheLuceneSearchQueryRescorer_$2_init() {
-  OrgApacheLuceneSearchQueryRescorer_$2 *self = [OrgApacheLuceneSearchQueryRescorer_$2 alloc];
-  OrgApacheLuceneSearchQueryRescorer_$2_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchQueryRescorer_$2, init)
+}
+
+OrgApacheLuceneSearchQueryRescorer_$2 *create_OrgApacheLuceneSearchQueryRescorer_$2_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchQueryRescorer_$2, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchQueryRescorer_$2)
@@ -346,9 +356,11 @@ void OrgApacheLuceneSearchQueryRescorer_$3_initWithDouble_withOrgApacheLuceneSea
 }
 
 OrgApacheLuceneSearchQueryRescorer_$3 *new_OrgApacheLuceneSearchQueryRescorer_$3_initWithDouble_withOrgApacheLuceneSearchQuery_(jdouble capture$0, OrgApacheLuceneSearchQuery *arg$0) {
-  OrgApacheLuceneSearchQueryRescorer_$3 *self = [OrgApacheLuceneSearchQueryRescorer_$3 alloc];
-  OrgApacheLuceneSearchQueryRescorer_$3_initWithDouble_withOrgApacheLuceneSearchQuery_(self, capture$0, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchQueryRescorer_$3, initWithDouble_withOrgApacheLuceneSearchQuery_, capture$0, arg$0)
+}
+
+OrgApacheLuceneSearchQueryRescorer_$3 *create_OrgApacheLuceneSearchQueryRescorer_$3_initWithDouble_withOrgApacheLuceneSearchQuery_(jdouble capture$0, OrgApacheLuceneSearchQuery *arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchQueryRescorer_$3, initWithDouble_withOrgApacheLuceneSearchQuery_, capture$0, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchQueryRescorer_$3)

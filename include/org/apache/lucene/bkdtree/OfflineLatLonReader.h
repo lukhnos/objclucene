@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneBkdtreeOfflineLatLonReader_INCLUDE_ALL")
-#if OrgApacheLuceneBkdtreeOfflineLatLonReader_RESTRICT
-#define OrgApacheLuceneBkdtreeOfflineLatLonReader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneBkdtreeOfflineLatLonReader")
+#ifdef RESTRICT_OrgApacheLuceneBkdtreeOfflineLatLonReader
+#define INCLUDE_ALL_OrgApacheLuceneBkdtreeOfflineLatLonReader 0
 #else
-#define OrgApacheLuceneBkdtreeOfflineLatLonReader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneBkdtreeOfflineLatLonReader 1
 #endif
-#undef OrgApacheLuceneBkdtreeOfflineLatLonReader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneBkdtreeOfflineLatLonReader
 
-#if !defined (_OrgApacheLuceneBkdtreeOfflineLatLonReader_) && (OrgApacheLuceneBkdtreeOfflineLatLonReader_INCLUDE_ALL || OrgApacheLuceneBkdtreeOfflineLatLonReader_INCLUDE)
-#define _OrgApacheLuceneBkdtreeOfflineLatLonReader_
+#if !defined (OrgApacheLuceneBkdtreeOfflineLatLonReader_) && (INCLUDE_ALL_OrgApacheLuceneBkdtreeOfflineLatLonReader || defined(INCLUDE_OrgApacheLuceneBkdtreeOfflineLatLonReader))
+#define OrgApacheLuceneBkdtreeOfflineLatLonReader_
 
-#define OrgApacheLuceneBkdtreeLatLonReader_RESTRICT 1
-#define OrgApacheLuceneBkdtreeLatLonReader_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneBkdtreeLatLonReader 1
+#define INCLUDE_OrgApacheLuceneBkdtreeLatLonReader 1
 #include "org/apache/lucene/bkdtree/LatLonReader.h"
 
 @class OrgApacheLuceneStoreInputStreamDataInput;
@@ -59,8 +59,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeOfflineLatLonReader_initWithOrgLukh
 
 FOUNDATION_EXPORT OrgApacheLuceneBkdtreeOfflineLatLonReader *new_OrgApacheLuceneBkdtreeOfflineLatLonReader_initWithOrgLukhnosPortmobileFilePath_withLong_withLong_(OrgLukhnosPortmobileFilePath *tempFile, jlong start, jlong count) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneBkdtreeOfflineLatLonReader *create_OrgApacheLuceneBkdtreeOfflineLatLonReader_initWithOrgLukhnosPortmobileFilePath_withLong_withLong_(OrgLukhnosPortmobileFilePath *tempFile, jlong start, jlong count);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeOfflineLatLonReader)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneBkdtreeOfflineLatLonReader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneBkdtreeOfflineLatLonReader")

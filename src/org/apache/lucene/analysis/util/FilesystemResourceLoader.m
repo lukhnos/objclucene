@@ -92,30 +92,34 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisUtilFilesystemResourceLoader, delegat
 @end
 
 void OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_initWithOrgLukhnosPortmobileFilePath_(OrgApacheLuceneAnalysisUtilFilesystemResourceLoader *self, OrgLukhnosPortmobileFilePath *baseDirectory) {
-  OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneAnalysisUtilResourceLoader_(self, baseDirectory, [new_OrgApacheLuceneAnalysisUtilClasspathResourceLoader_init() autorelease]);
+  OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneAnalysisUtilResourceLoader_(self, baseDirectory, create_OrgApacheLuceneAnalysisUtilClasspathResourceLoader_init());
 }
 
 OrgApacheLuceneAnalysisUtilFilesystemResourceLoader *new_OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *baseDirectory) {
-  OrgApacheLuceneAnalysisUtilFilesystemResourceLoader *self = [OrgApacheLuceneAnalysisUtilFilesystemResourceLoader alloc];
-  OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_initWithOrgLukhnosPortmobileFilePath_(self, baseDirectory);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisUtilFilesystemResourceLoader, initWithOrgLukhnosPortmobileFilePath_, baseDirectory)
+}
+
+OrgApacheLuceneAnalysisUtilFilesystemResourceLoader *create_OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *baseDirectory) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisUtilFilesystemResourceLoader, initWithOrgLukhnosPortmobileFilePath_, baseDirectory)
 }
 
 void OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneAnalysisUtilResourceLoader_(OrgApacheLuceneAnalysisUtilFilesystemResourceLoader *self, OrgLukhnosPortmobileFilePath *baseDirectory, id<OrgApacheLuceneAnalysisUtilResourceLoader> delegate) {
   NSObject_init(self);
   if (baseDirectory == nil) {
-    @throw [new_JavaLangNullPointerException_init() autorelease];
+    @throw create_JavaLangNullPointerException_init();
   }
-  if (!OrgLukhnosPortmobileFileFiles_isDirectoryWithOrgLukhnosPortmobileFilePath_(baseDirectory)) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("@$", baseDirectory, @" is not a directory")) autorelease];
-  if (delegate == nil) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"delegate ResourceLoader may not be null") autorelease];
+  if (!OrgLukhnosPortmobileFileFiles_isDirectoryWithOrgLukhnosPortmobileFilePath_(baseDirectory)) @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("@$", baseDirectory, @" is not a directory"));
+  if (delegate == nil) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"delegate ResourceLoader may not be null");
   JreStrongAssign(&self->baseDirectory_, baseDirectory);
   JreStrongAssign(&self->delegate_, delegate);
 }
 
 OrgApacheLuceneAnalysisUtilFilesystemResourceLoader *new_OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneAnalysisUtilResourceLoader_(OrgLukhnosPortmobileFilePath *baseDirectory, id<OrgApacheLuceneAnalysisUtilResourceLoader> delegate) {
-  OrgApacheLuceneAnalysisUtilFilesystemResourceLoader *self = [OrgApacheLuceneAnalysisUtilFilesystemResourceLoader alloc];
-  OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneAnalysisUtilResourceLoader_(self, baseDirectory, delegate);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisUtilFilesystemResourceLoader, initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneAnalysisUtilResourceLoader_, baseDirectory, delegate)
+}
+
+OrgApacheLuceneAnalysisUtilFilesystemResourceLoader *create_OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneAnalysisUtilResourceLoader_(OrgLukhnosPortmobileFilePath *baseDirectory, id<OrgApacheLuceneAnalysisUtilResourceLoader> delegate) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisUtilFilesystemResourceLoader, initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneAnalysisUtilResourceLoader_, baseDirectory, delegate)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisUtilFilesystemResourceLoader)

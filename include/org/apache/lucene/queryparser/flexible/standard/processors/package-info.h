@@ -3,14 +3,23 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/standard/processors/package-info.java
 //
 
+/*!
+ @brief Lucene Query Node Processors.
+ <h2>Lucene Query Node Processors</h2>
+ <p>
+ The package org.apache.lucene.queryparser.flexible.standard.processors contains every processor needed to assembly a pipeline
+ that modifies the query node tree according to the actual Lucene queries.
+ <p>
+ These processors are already assembled correctly in the StandardQueryNodeProcessorPipeline. 
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleStandardProcessorsPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleStandardProcessorsPackage_info_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleStandardProcessorsPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardProcessorsPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsPackage_info 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleStandardProcessorsPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsPackage_info 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleStandardProcessorsPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardProcessorsPackage_info
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleStandardProcessorsPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsPackage_info")

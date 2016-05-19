@@ -5,50 +5,106 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisFrFrenchAnalyzer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisFrFrenchAnalyzer_RESTRICT
-#define OrgApacheLuceneAnalysisFrFrenchAnalyzer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisFrFrenchAnalyzer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisFrFrenchAnalyzer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisFrFrenchAnalyzer 0
 #else
-#define OrgApacheLuceneAnalysisFrFrenchAnalyzer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisFrFrenchAnalyzer 1
 #endif
-#undef OrgApacheLuceneAnalysisFrFrenchAnalyzer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisFrFrenchAnalyzer
 
-#if !defined (_OrgApacheLuceneAnalysisFrFrenchAnalyzer_) && (OrgApacheLuceneAnalysisFrFrenchAnalyzer_INCLUDE_ALL || OrgApacheLuceneAnalysisFrFrenchAnalyzer_INCLUDE)
-#define _OrgApacheLuceneAnalysisFrFrenchAnalyzer_
+#if !defined (OrgApacheLuceneAnalysisFrFrenchAnalyzer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisFrFrenchAnalyzer || defined(INCLUDE_OrgApacheLuceneAnalysisFrFrenchAnalyzer))
+#define OrgApacheLuceneAnalysisFrFrenchAnalyzer_
 
-#define OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase 1
 #include "org/apache/lucene/analysis/util/StopwordAnalyzerBase.h"
 
 @class OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;
 @class OrgApacheLuceneAnalysisUtilCharArraySet;
 
+/*!
+ @brief <code>Analyzer</code> for French language.
+ <p>
+ Supports an external list of stopwords (words that
+ will not be indexed at all) and an external list of exclusions (word that will
+ not be stemmed, but indexed).
+ A default set of stopwords is used unless an alternative list is specified, but the
+ exclusion list is empty by default.
+ </p>
+ <p><b>NOTE</b>: This class uses the same <code>org.apache.lucene.util.Version</code>
+ dependent settings as <code>StandardAnalyzer</code>.</p>
+ */
 @interface OrgApacheLuceneAnalysisFrFrenchAnalyzer : OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase
+
++ (NSString *)DEFAULT_STOPWORD_FILE;
+
++ (OrgApacheLuceneAnalysisUtilCharArraySet *)DEFAULT_ARTICLES;
 
 #pragma mark Public
 
+/*!
+ @brief Builds an analyzer with the default stop words (<code>getDefaultStopSet</code>).
+ */
 - (instancetype)init;
 
+/*!
+ @brief Builds an analyzer with the given stop words
+ @param stopwords
+ a stopword set
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords;
 
+/*!
+ @brief Builds an analyzer with the given stop words
+ @param stopwords
+ a stopword set
+ @param stemExclutionSet
+ a stemming exclusion set
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords
                     withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stemExclutionSet;
 
+/*!
+ @brief Returns an unmodifiable instance of the default stop-words set.
+ @return an unmodifiable instance of the default stop-words set.
+ */
 + (OrgApacheLuceneAnalysisUtilCharArraySet *)getDefaultStopSet;
 
 #pragma mark Protected
 
+/*!
+ @brief Creates
+ <code>org.apache.lucene.analysis.Analyzer.TokenStreamComponents</code>
+ used to tokenize all the text in the provided <code>Reader</code>.
+ @return <code>org.apache.lucene.analysis.Analyzer.TokenStreamComponents</code>
+ built from a <code>StandardTokenizer</code> filtered with
+ <code>StandardFilter</code>, <code>ElisionFilter</code>,
+ <code>LowerCaseFilter</code>, <code>StopFilter</code>,
+ <code>SetKeywordMarkerFilter</code> if a stem exclusion set is
+ provided, and <code>FrenchLightStemFilter</code>
+ */
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName;
 
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisFrFrenchAnalyzer)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisFrFrenchAnalyzer_DEFAULT_STOPWORD_FILE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisFrFrenchAnalyzer, DEFAULT_STOPWORD_FILE_, NSString *)
+/*!
+ @brief File containing default French stopwords.
+ */
+inline NSString *OrgApacheLuceneAnalysisFrFrenchAnalyzer_get_DEFAULT_STOPWORD_FILE();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisFrFrenchAnalyzer_DEFAULT_STOPWORD_FILE;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisFrFrenchAnalyzer, DEFAULT_STOPWORD_FILE, NSString *)
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisFrFrenchAnalyzer_DEFAULT_ARTICLES_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisFrFrenchAnalyzer, DEFAULT_ARTICLES_, OrgApacheLuceneAnalysisUtilCharArraySet *)
+/*!
+ @brief Default set of articles for ElisionFilter
+ */
+inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisFrFrenchAnalyzer_get_DEFAULT_ARTICLES();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisFrFrenchAnalyzer_DEFAULT_ARTICLES;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisFrFrenchAnalyzer, DEFAULT_ARTICLES, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisFrFrenchAnalyzer_getDefaultStopSet();
 
@@ -56,16 +112,22 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisFrFrenchAnalyzer_init(OrgApacheLuc
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisFrFrenchAnalyzer *new_OrgApacheLuceneAnalysisFrFrenchAnalyzer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisFrFrenchAnalyzer *create_OrgApacheLuceneAnalysisFrFrenchAnalyzer_init();
+
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisFrFrenchAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisFrFrenchAnalyzer *self, OrgApacheLuceneAnalysisUtilCharArraySet *stopwords);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisFrFrenchAnalyzer *new_OrgApacheLuceneAnalysisFrFrenchAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopwords) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisFrFrenchAnalyzer *create_OrgApacheLuceneAnalysisFrFrenchAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopwords);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisFrFrenchAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisFrFrenchAnalyzer *self, OrgApacheLuceneAnalysisUtilCharArraySet *stopwords, OrgApacheLuceneAnalysisUtilCharArraySet *stemExclutionSet);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisFrFrenchAnalyzer *new_OrgApacheLuceneAnalysisFrFrenchAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopwords, OrgApacheLuceneAnalysisUtilCharArraySet *stemExclutionSet) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisFrFrenchAnalyzer *create_OrgApacheLuceneAnalysisFrFrenchAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopwords, OrgApacheLuceneAnalysisUtilCharArraySet *stemExclutionSet);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisFrFrenchAnalyzer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisFrFrenchAnalyzer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisFrFrenchAnalyzer")

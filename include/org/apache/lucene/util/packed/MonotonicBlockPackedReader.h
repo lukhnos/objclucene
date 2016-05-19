@@ -5,23 +5,23 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_INCLUDE_ALL")
-#if OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_RESTRICT
-#define OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedMonotonicBlockPackedReader")
+#ifdef RESTRICT_OrgApacheLuceneUtilPackedMonotonicBlockPackedReader
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackedMonotonicBlockPackedReader 0
 #else
-#define OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackedMonotonicBlockPackedReader 1
 #endif
-#undef OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilPackedMonotonicBlockPackedReader
 
-#if !defined (_OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_) && (OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_INCLUDE_ALL || OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_INCLUDE)
-#define _OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_
+#if !defined (OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedMonotonicBlockPackedReader || defined(INCLUDE_OrgApacheLuceneUtilPackedMonotonicBlockPackedReader))
+#define OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_
 
-#define OrgApacheLuceneUtilLongValues_RESTRICT 1
-#define OrgApacheLuceneUtilLongValues_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilLongValues 1
+#define INCLUDE_OrgApacheLuceneUtilLongValues 1
 #include "org/apache/lucene/util/LongValues.h"
 
-#define OrgApacheLuceneUtilAccountable_RESTRICT 1
-#define OrgApacheLuceneUtilAccountable_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAccountable 1
+#define INCLUDE_OrgApacheLuceneUtilAccountable 1
 #include "org/apache/lucene/util/Accountable.h"
 
 @class IOSFloatArray;
@@ -30,6 +30,10 @@
 @class OrgApacheLuceneStoreIndexInput;
 @protocol JavaUtilCollection;
 
+/*!
+ @brief Provides random access to a stream written with
+ <code>MonotonicBlockPackedWriter</code>.
+ */
 @interface OrgApacheLuceneUtilPackedMonotonicBlockPackedReader : OrgApacheLuceneUtilLongValues < OrgApacheLuceneUtilAccountable > {
  @public
   jint blockShift_, blockMask_;
@@ -46,6 +50,9 @@
 
 - (id<JavaUtilCollection>)getChildResources;
 
+/*!
+ @brief Sole constructor.
+ */
 + (OrgApacheLuceneUtilPackedMonotonicBlockPackedReader *)ofWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)inArg
                                                                                       withInt:(jint)packedIntsVersion
                                                                                       withInt:(jint)blockSize
@@ -54,6 +61,9 @@
 
 - (jlong)ramBytesUsed;
 
+/*!
+ @brief Returns the number of values
+ */
 - (jlong)size;
 
 - (NSString *)description;
@@ -84,4 +94,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedMonotonicBlockPackedReader)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedMonotonicBlockPackedReader")

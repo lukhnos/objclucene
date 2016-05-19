@@ -3,14 +3,22 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/hunspell/package-info.java
 //
 
+/*!
+ @brief Stemming TokenFilter using a Java implementation of the 
+ <a href="http://www.ldc.upenn.edu/Catalog/docs/LDC2008T01/acta04.pdf">Hunspell stemming algorithm.
+ </a>
+ <p>
+ Dictionaries can be found on <a href="http://wiki.services.openoffice.org/wiki/Dictionaries">OpenOffice's wiki</a>
+ </p>
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisHunspellPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisHunspellPackage_info_RESTRICT
-#define OrgApacheLuceneAnalysisHunspellPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisHunspellPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisHunspellPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisHunspellPackage_info 0
 #else
-#define OrgApacheLuceneAnalysisHunspellPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisHunspellPackage_info 1
 #endif
-#undef OrgApacheLuceneAnalysisHunspellPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisHunspellPackage_info
 
-#pragma pop_macro("OrgApacheLuceneAnalysisHunspellPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisHunspellPackage_info")

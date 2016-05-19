@@ -49,9 +49,11 @@ void OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator_init(OrgApacheLuce
 }
 
 OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator *new_OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator_init() {
-  OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator *self = [OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator alloc];
-  OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator, init)
+}
+
+OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator *create_OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator)

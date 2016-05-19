@@ -5,21 +5,26 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchPayloadsMaxPayloadFunction_INCLUDE_ALL")
-#if OrgApacheLuceneSearchPayloadsMaxPayloadFunction_RESTRICT
-#define OrgApacheLuceneSearchPayloadsMaxPayloadFunction_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchPayloadsMaxPayloadFunction")
+#ifdef RESTRICT_OrgApacheLuceneSearchPayloadsMaxPayloadFunction
+#define INCLUDE_ALL_OrgApacheLuceneSearchPayloadsMaxPayloadFunction 0
 #else
-#define OrgApacheLuceneSearchPayloadsMaxPayloadFunction_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchPayloadsMaxPayloadFunction 1
 #endif
-#undef OrgApacheLuceneSearchPayloadsMaxPayloadFunction_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchPayloadsMaxPayloadFunction
 
-#if !defined (_OrgApacheLuceneSearchPayloadsMaxPayloadFunction_) && (OrgApacheLuceneSearchPayloadsMaxPayloadFunction_INCLUDE_ALL || OrgApacheLuceneSearchPayloadsMaxPayloadFunction_INCLUDE)
-#define _OrgApacheLuceneSearchPayloadsMaxPayloadFunction_
+#if !defined (OrgApacheLuceneSearchPayloadsMaxPayloadFunction_) && (INCLUDE_ALL_OrgApacheLuceneSearchPayloadsMaxPayloadFunction || defined(INCLUDE_OrgApacheLuceneSearchPayloadsMaxPayloadFunction))
+#define OrgApacheLuceneSearchPayloadsMaxPayloadFunction_
 
-#define OrgApacheLuceneSearchPayloadsPayloadFunction_RESTRICT 1
-#define OrgApacheLuceneSearchPayloadsPayloadFunction_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchPayloadsPayloadFunction 1
+#define INCLUDE_OrgApacheLuceneSearchPayloadsPayloadFunction 1
 #include "org/apache/lucene/search/payloads/PayloadFunction.h"
 
+/*!
+ @brief Returns the maximum payload score seen, else 1 if there are no payloads on the doc.
+ <p>
+ Is thread safe and completely reusable.
+ */
 @interface OrgApacheLuceneSearchPayloadsMaxPayloadFunction : OrgApacheLuceneSearchPayloadsPayloadFunction
 
 #pragma mark Public
@@ -51,8 +56,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchPayloadsMaxPayloadFunction_init(OrgA
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsMaxPayloadFunction *new_OrgApacheLuceneSearchPayloadsMaxPayloadFunction_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsMaxPayloadFunction *create_OrgApacheLuceneSearchPayloadsMaxPayloadFunction_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsMaxPayloadFunction)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchPayloadsMaxPayloadFunction_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchPayloadsMaxPayloadFunction")

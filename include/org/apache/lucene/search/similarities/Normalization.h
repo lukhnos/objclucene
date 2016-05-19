@@ -5,37 +5,63 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSimilaritiesNormalization_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSimilaritiesNormalization_RESTRICT
-#define OrgApacheLuceneSearchSimilaritiesNormalization_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesNormalization")
+#ifdef RESTRICT_OrgApacheLuceneSearchSimilaritiesNormalization
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesNormalization 0
 #else
-#define OrgApacheLuceneSearchSimilaritiesNormalization_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesNormalization 1
 #endif
-#undef OrgApacheLuceneSearchSimilaritiesNormalization_RESTRICT
-#if OrgApacheLuceneSearchSimilaritiesNormalization_NoNormalization_INCLUDE
-#define OrgApacheLuceneSearchSimilaritiesNormalization_INCLUDE 1
+#undef RESTRICT_OrgApacheLuceneSearchSimilaritiesNormalization
+#ifdef INCLUDE_OrgApacheLuceneSearchSimilaritiesNormalization_NoNormalization
+#define INCLUDE_OrgApacheLuceneSearchSimilaritiesNormalization 1
 #endif
 
-#if !defined (_OrgApacheLuceneSearchSimilaritiesNormalization_) && (OrgApacheLuceneSearchSimilaritiesNormalization_INCLUDE_ALL || OrgApacheLuceneSearchSimilaritiesNormalization_INCLUDE)
-#define _OrgApacheLuceneSearchSimilaritiesNormalization_
+#if !defined (OrgApacheLuceneSearchSimilaritiesNormalization_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesNormalization || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesNormalization))
+#define OrgApacheLuceneSearchSimilaritiesNormalization_
 
 @class OrgApacheLuceneSearchExplanation;
 @class OrgApacheLuceneSearchSimilaritiesBasicStats;
 
+/*!
+ @brief This class acts as the base class for the implementations of the term
+ frequency normalization methods in the DFR framework.
+ - seealso: DFRSimilarity
+ */
 @interface OrgApacheLuceneSearchSimilaritiesNormalization : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ (For invocation by subclass 
+ constructors, typically implicit.)
+ */
 - (instancetype)init;
 
+/*!
+ @brief Returns an explanation for the normalized term frequency.
+ <p>The default normalization methods use the field length of the document
+ and the average field length to compute the normalized term frequency.
+ This method provides a generic explanation for such methods.
+ Subclasses that use other statistics must override this method.</p>
+ */
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
                                                                                    withFloat:(jfloat)tf
                                                                                    withFloat:(jfloat)len;
 
+/*!
+ @brief Returns the normalized term frequency.
+ @param len the field length.
+ */
 - (jfloat)tfnWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
                                                    withFloat:(jfloat)tf
                                                    withFloat:(jfloat)len;
 
+/*!
+ @brief Subclasses must override this method to return the code of the
+ normalization formula.
+ Refer to the original paper for the list. 
+ */
 - (NSString *)description;
 
 @end
@@ -48,16 +74,22 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesNormalization)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchSimilaritiesNormalization_NoNormalization_) && (OrgApacheLuceneSearchSimilaritiesNormalization_INCLUDE_ALL || OrgApacheLuceneSearchSimilaritiesNormalization_NoNormalization_INCLUDE)
-#define _OrgApacheLuceneSearchSimilaritiesNormalization_NoNormalization_
+#if !defined (OrgApacheLuceneSearchSimilaritiesNormalization_NoNormalization_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesNormalization || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesNormalization_NoNormalization))
+#define OrgApacheLuceneSearchSimilaritiesNormalization_NoNormalization_
 
 @class OrgApacheLuceneSearchExplanation;
 @class OrgApacheLuceneSearchSimilaritiesBasicStats;
 
+/*!
+ @brief Implementation used when there is no normalization.
+ */
 @interface OrgApacheLuceneSearchSimilaritiesNormalization_NoNormalization : OrgApacheLuceneSearchSimilaritiesNormalization
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor: parameter-free
+ */
 - (instancetype)init;
 
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
@@ -78,8 +110,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesNormalization_NoNormaliz
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesNormalization_NoNormalization *new_OrgApacheLuceneSearchSimilaritiesNormalization_NoNormalization_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesNormalization_NoNormalization *create_OrgApacheLuceneSearchSimilaritiesNormalization_NoNormalization_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesNormalization_NoNormalization)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSimilaritiesNormalization_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesNormalization")

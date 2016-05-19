@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSpansSpanPositionQueue_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSpansSpanPositionQueue_RESTRICT
-#define OrgApacheLuceneSearchSpansSpanPositionQueue_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanPositionQueue")
+#ifdef RESTRICT_OrgApacheLuceneSearchSpansSpanPositionQueue
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanPositionQueue 0
 #else
-#define OrgApacheLuceneSearchSpansSpanPositionQueue_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanPositionQueue 1
 #endif
-#undef OrgApacheLuceneSearchSpansSpanPositionQueue_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSpansSpanPositionQueue
 
-#if !defined (_OrgApacheLuceneSearchSpansSpanPositionQueue_) && (OrgApacheLuceneSearchSpansSpanPositionQueue_INCLUDE_ALL || OrgApacheLuceneSearchSpansSpanPositionQueue_INCLUDE)
-#define _OrgApacheLuceneSearchSpansSpanPositionQueue_
+#if !defined (OrgApacheLuceneSearchSpansSpanPositionQueue_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanPositionQueue || defined(INCLUDE_OrgApacheLuceneSearchSpansSpanPositionQueue))
+#define OrgApacheLuceneSearchSpansSpanPositionQueue_
 
-#define OrgApacheLuceneUtilPriorityQueue_RESTRICT 1
-#define OrgApacheLuceneUtilPriorityQueue_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilPriorityQueue 1
+#define INCLUDE_OrgApacheLuceneUtilPriorityQueue 1
 #include "org/apache/lucene/util/PriorityQueue.h"
 
 @class OrgApacheLuceneSearchSpansSpans;
@@ -41,8 +41,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanPositionQueue_initWithInt_(
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanPositionQueue *new_OrgApacheLuceneSearchSpansSpanPositionQueue_initWithInt_(jint maxSize) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanPositionQueue *create_OrgApacheLuceneSearchSpansSpanPositionQueue_initWithInt_(jint maxSize);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanPositionQueue)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSpansSpanPositionQueue_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanPositionQueue")

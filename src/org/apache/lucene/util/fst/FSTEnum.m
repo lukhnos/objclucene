@@ -81,7 +81,7 @@ __attribute__((unused)) static OrgApacheLuceneUtilFstFST_Arc *OrgApacheLuceneUti
         return;
       }
     }
-    [((OrgApacheLuceneUtilFstFST *) nil_chk(fst_)) readNextArcWithOrgApacheLuceneUtilFstFST_Arc:IOSObjectArray_Get(arcs_, upto_) withOrgApacheLuceneUtilFstFST_BytesReader:fstReader_];
+    [((OrgApacheLuceneUtilFstFST *) nil_chk(fst_)) readNextArcWithOrgApacheLuceneUtilFstFST_Arc:IOSObjectArray_Get(nil_chk(arcs_), upto_) withOrgApacheLuceneUtilFstFST_BytesReader:fstReader_];
   }
   OrgApacheLuceneUtilFstFSTEnum_pushFirst(self);
 }
@@ -115,7 +115,7 @@ __attribute__((unused)) static OrgApacheLuceneUtilFstFST_Arc *OrgApacheLuceneUti
         [fst_ readNextRealArcWithOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_BytesReader:in];
         JreAssert((arc->arcIdx_ == mid), (@"org/apache/lucene/util/fst/FSTEnum.java:177 condition failed: assert arc.arcIdx == mid;"));
         JreAssert((arc->label_ == targetLabel), (JreStrcat("$I$I$I", @"arc.label=", arc->label_, @" vs targetLabel=", targetLabel, @" mid=", mid)));
-        IOSObjectArray_Set(nil_chk(output_), upto_, [((OrgApacheLuceneUtilFstOutputs *) nil_chk(fst_->outputs_)) addWithId:IOSObjectArray_Get(output_, upto_ - 1) withId:arc->output_]);
+        IOSObjectArray_Set(nil_chk(output_), upto_, [((OrgApacheLuceneUtilFstOutputs *) nil_chk(fst_->outputs_)) addWithId:IOSObjectArray_Get(output_, upto_ - 1) withId:((id) arc->output_)]);
         if (targetLabel == OrgApacheLuceneUtilFstFST_END_LABEL) {
           return;
         }
@@ -153,7 +153,7 @@ __attribute__((unused)) static OrgApacheLuceneUtilFstFST_Arc *OrgApacheLuceneUti
     }
     else {
       if (arc->label_ == targetLabel) {
-        IOSObjectArray_Set(nil_chk(output_), upto_, [((OrgApacheLuceneUtilFstOutputs *) nil_chk(((OrgApacheLuceneUtilFstFST *) nil_chk(fst_))->outputs_)) addWithId:IOSObjectArray_Get(output_, upto_ - 1) withId:arc->output_]);
+        IOSObjectArray_Set(nil_chk(output_), upto_, [((OrgApacheLuceneUtilFstOutputs *) nil_chk(((OrgApacheLuceneUtilFstFST *) nil_chk(fst_))->outputs_)) addWithId:IOSObjectArray_Get(output_, upto_ - 1) withId:((id) arc->output_)]);
         if (targetLabel == OrgApacheLuceneUtilFstFST_END_LABEL) {
           return;
         }
@@ -221,7 +221,7 @@ __attribute__((unused)) static OrgApacheLuceneUtilFstFST_Arc *OrgApacheLuceneUti
         [fst_ readNextRealArcWithOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_BytesReader:in];
         JreAssert((arc->arcIdx_ == mid), (@"org/apache/lucene/util/fst/FSTEnum.java:317 condition failed: assert arc.arcIdx == mid;"));
         JreAssert((arc->label_ == targetLabel), (JreStrcat("$I$I$I", @"arc.label=", arc->label_, @" vs targetLabel=", targetLabel, @" mid=", mid)));
-        IOSObjectArray_Set(nil_chk(output_), upto_, [((OrgApacheLuceneUtilFstOutputs *) nil_chk(fst_->outputs_)) addWithId:IOSObjectArray_Get(output_, upto_ - 1) withId:arc->output_]);
+        IOSObjectArray_Set(nil_chk(output_), upto_, [((OrgApacheLuceneUtilFstOutputs *) nil_chk(fst_->outputs_)) addWithId:IOSObjectArray_Get(output_, upto_ - 1) withId:((id) arc->output_)]);
         if (targetLabel == OrgApacheLuceneUtilFstFST_END_LABEL) {
           return;
         }
@@ -234,7 +234,7 @@ __attribute__((unused)) static OrgApacheLuceneUtilFstFST_Arc *OrgApacheLuceneUti
       else if (high == -1) {
         while (true) {
           [fst_ readFirstTargetArcWithOrgApacheLuceneUtilFstFST_Arc:OrgApacheLuceneUtilFstFSTEnum_getArcWithInt_(self, upto_ - 1) withOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_BytesReader:fstReader_];
-          if (arc->label_ < targetLabel) {
+          if (((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->label_ < targetLabel) {
             while (![arc isLast] && [fst_ readNextArcLabelWithOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_BytesReader:in] < targetLabel) {
               [fst_ readNextArcWithOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_BytesReader:fstReader_];
             }
@@ -260,7 +260,7 @@ __attribute__((unused)) static OrgApacheLuceneUtilFstFST_Arc *OrgApacheLuceneUti
     }
     else {
       if (arc->label_ == targetLabel) {
-        IOSObjectArray_Set(nil_chk(output_), upto_, [((OrgApacheLuceneUtilFstOutputs *) nil_chk(((OrgApacheLuceneUtilFstFST *) nil_chk(fst_))->outputs_)) addWithId:IOSObjectArray_Get(output_, upto_ - 1) withId:arc->output_]);
+        IOSObjectArray_Set(nil_chk(output_), upto_, [((OrgApacheLuceneUtilFstOutputs *) nil_chk(((OrgApacheLuceneUtilFstFST *) nil_chk(fst_))->outputs_)) addWithId:IOSObjectArray_Get(output_, upto_ - 1) withId:((id) arc->output_)]);
         if (targetLabel == OrgApacheLuceneUtilFstFST_END_LABEL) {
           return;
         }
@@ -272,7 +272,7 @@ __attribute__((unused)) static OrgApacheLuceneUtilFstFST_Arc *OrgApacheLuceneUti
       else if (arc->label_ > targetLabel) {
         while (true) {
           [((OrgApacheLuceneUtilFstFST *) nil_chk(fst_)) readFirstTargetArcWithOrgApacheLuceneUtilFstFST_Arc:OrgApacheLuceneUtilFstFSTEnum_getArcWithInt_(self, upto_ - 1) withOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_BytesReader:fstReader_];
-          if (arc->label_ < targetLabel) {
+          if (((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->label_ < targetLabel) {
             while (![arc isLast] && [fst_ readNextArcLabelWithOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_BytesReader:fstReader_] < targetLabel) {
               [fst_ readNextArcWithOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_BytesReader:fstReader_];
             }
@@ -315,7 +315,7 @@ __attribute__((unused)) static OrgApacheLuceneUtilFstFST_Arc *OrgApacheLuceneUti
       [fst_ readFirstTargetArcWithOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_Arc:OrgApacheLuceneUtilFstFSTEnum_getArcWithInt_(self, upto_) withOrgApacheLuceneUtilFstFST_BytesReader:fstReader];
       return false;
     }
-    IOSObjectArray_Set(nil_chk(output_), upto_, [((OrgApacheLuceneUtilFstOutputs *) nil_chk(fst_->outputs_)) addWithId:IOSObjectArray_Get(output_, upto_ - 1) withId:((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(nextArc))->output_]);
+    IOSObjectArray_Set(nil_chk(output_), upto_, [((OrgApacheLuceneUtilFstOutputs *) nil_chk(fst_->outputs_)) addWithId:IOSObjectArray_Get(output_, upto_ - 1) withId:((id) nextArc->output_)]);
     if (targetLabel == OrgApacheLuceneUtilFstFST_END_LABEL) {
       return true;
     }
@@ -354,7 +354,7 @@ __attribute__((unused)) static OrgApacheLuceneUtilFstFST_Arc *OrgApacheLuceneUti
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilFstFST:", "FSTEnum", NULL, 0x4, NULL, NULL },
+    { "initWithOrgApacheLuceneUtilFstFST:", "FSTEnum", NULL, 0x4, NULL, "(Lorg/apache/lucene/util/fst/FST<TT;>;)V" },
     { "getTargetLabel", NULL, "I", 0x404, NULL, NULL },
     { "getCurrentLabel", NULL, "I", 0x404, NULL, NULL },
     { "setCurrentLabelWithInt:", "setCurrentLabel", "V", 0x404, NULL, NULL },
@@ -367,7 +367,7 @@ __attribute__((unused)) static OrgApacheLuceneUtilFstFST_Arc *OrgApacheLuceneUti
     { "incr", NULL, "V", 0x2, NULL, NULL },
     { "pushFirst", NULL, "V", 0x2, "Ljava.io.IOException;", NULL },
     { "pushLast", NULL, "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "getArcWithInt:", "getArc", "Lorg.apache.lucene.util.fst.FST$Arc;", 0x2, NULL, NULL },
+    { "getArcWithInt:", "getArc", "Lorg.apache.lucene.util.fst.FST$Arc;", 0x2, NULL, "(I)Lorg/apache/lucene/util/fst/FST$Arc<TT;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "fst_", NULL, 0x14, "Lorg.apache.lucene.util.fst.FST;", NULL, "Lorg/apache/lucene/util/fst/FST<TT;>;", .constantValue.asLong = 0 },
@@ -388,7 +388,7 @@ __attribute__((unused)) static OrgApacheLuceneUtilFstFST_Arc *OrgApacheLuceneUti
 void OrgApacheLuceneUtilFstFSTEnum_initWithOrgApacheLuceneUtilFstFST_(OrgApacheLuceneUtilFstFSTEnum *self, OrgApacheLuceneUtilFstFST *fst) {
   NSObject_init(self);
   JreStrongAssignAndConsume(&self->arcs_, [IOSObjectArray newArrayWithLength:10 type:OrgApacheLuceneUtilFstFST_Arc_class_()]);
-  JreStrongAssign(&self->output_, (IOSObjectArray *) check_class_cast([IOSObjectArray arrayWithLength:10 type:NSObject_class_()], [IOSObjectArray class]));
+  JreStrongAssign(&self->output_, [IOSObjectArray arrayWithLength:10 type:NSObject_class_()]);
   JreStrongAssignAndConsume(&self->scratchArc_, new_OrgApacheLuceneUtilFstFST_Arc_init());
   JreStrongAssign(&self->fst_, fst);
   JreStrongAssign(&self->fstReader_, [((OrgApacheLuceneUtilFstFST *) nil_chk(fst)) getBytesReader]);
@@ -423,13 +423,13 @@ void OrgApacheLuceneUtilFstFSTEnum_incr(OrgApacheLuceneUtilFstFSTEnum *self) {
   self->upto_++;
   [self grow];
   if (((IOSObjectArray *) nil_chk(self->arcs_))->size_ <= self->upto_) {
-    IOSObjectArray *newArcs = [IOSObjectArray arrayWithLength:OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(1 + self->upto_, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_)) type:OrgApacheLuceneUtilFstFST_Arc_class_()];
-    JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(self->arcs_, 0, newArcs, 0, self->arcs_->size_);
+    IOSObjectArray *newArcs = [IOSObjectArray arrayWithLength:OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(1 + self->upto_, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF)) type:OrgApacheLuceneUtilFstFST_Arc_class_()];
+    JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(self->arcs_, 0, newArcs, 0, ((IOSObjectArray *) nil_chk(self->arcs_))->size_);
     JreStrongAssign(&self->arcs_, newArcs);
   }
   if (((IOSObjectArray *) nil_chk(self->output_))->size_ <= self->upto_) {
-    IOSObjectArray *newOutput = (IOSObjectArray *) check_class_cast([IOSObjectArray arrayWithLength:OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(1 + self->upto_, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_)) type:NSObject_class_()], [IOSObjectArray class]);
-    JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(self->output_, 0, newOutput, 0, self->output_->size_);
+    IOSObjectArray *newOutput = [IOSObjectArray arrayWithLength:OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(1 + self->upto_, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF)) type:NSObject_class_()];
+    JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(self->output_, 0, newOutput, 0, ((IOSObjectArray *) nil_chk(self->output_))->size_);
     JreStrongAssign(&self->output_, newOutput);
   }
 }
@@ -438,7 +438,7 @@ void OrgApacheLuceneUtilFstFSTEnum_pushFirst(OrgApacheLuceneUtilFstFSTEnum *self
   OrgApacheLuceneUtilFstFST_Arc *arc = IOSObjectArray_Get(nil_chk(self->arcs_), self->upto_);
   JreAssert((arc != nil), (@"org/apache/lucene/util/fst/FSTEnum.java:485 condition failed: assert arc != null;"));
   while (true) {
-    IOSObjectArray_Set(nil_chk(self->output_), self->upto_, [((OrgApacheLuceneUtilFstOutputs *) nil_chk(((OrgApacheLuceneUtilFstFST *) nil_chk(self->fst_))->outputs_)) addWithId:IOSObjectArray_Get(self->output_, self->upto_ - 1) withId:((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->output_]);
+    IOSObjectArray_Set(nil_chk(self->output_), self->upto_, [((OrgApacheLuceneUtilFstOutputs *) nil_chk(((OrgApacheLuceneUtilFstFST *) nil_chk(self->fst_))->outputs_)) addWithId:IOSObjectArray_Get(self->output_, self->upto_ - 1) withId:((id) ((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->output_)]);
     if (arc->label_ == OrgApacheLuceneUtilFstFST_END_LABEL) {
       break;
     }
@@ -455,7 +455,7 @@ void OrgApacheLuceneUtilFstFSTEnum_pushLast(OrgApacheLuceneUtilFstFSTEnum *self)
   JreAssert((arc != nil), (@"org/apache/lucene/util/fst/FSTEnum.java:508 condition failed: assert arc != null;"));
   while (true) {
     [self setCurrentLabelWithInt:((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->label_];
-    IOSObjectArray_Set(nil_chk(self->output_), self->upto_, [((OrgApacheLuceneUtilFstOutputs *) nil_chk(((OrgApacheLuceneUtilFstFST *) nil_chk(self->fst_))->outputs_)) addWithId:IOSObjectArray_Get(self->output_, self->upto_ - 1) withId:arc->output_]);
+    IOSObjectArray_Set(nil_chk(self->output_), self->upto_, [((OrgApacheLuceneUtilFstOutputs *) nil_chk(((OrgApacheLuceneUtilFstFST *) nil_chk(self->fst_))->outputs_)) addWithId:IOSObjectArray_Get(self->output_, self->upto_ - 1) withId:((id) arc->output_)]);
     if (arc->label_ == OrgApacheLuceneUtilFstFST_END_LABEL) {
       break;
     }
@@ -468,7 +468,7 @@ OrgApacheLuceneUtilFstFST_Arc *OrgApacheLuceneUtilFstFSTEnum_getArcWithInt_(OrgA
   if (IOSObjectArray_Get(nil_chk(self->arcs_), idx) == nil) {
     IOSObjectArray_SetAndConsume(self->arcs_, idx, new_OrgApacheLuceneUtilFstFST_Arc_init());
   }
-  return IOSObjectArray_Get(self->arcs_, idx);
+  return IOSObjectArray_Get(nil_chk(self->arcs_), idx);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstFSTEnum)

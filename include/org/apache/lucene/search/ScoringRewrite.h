@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchScoringRewrite_INCLUDE_ALL")
-#if OrgApacheLuceneSearchScoringRewrite_RESTRICT
-#define OrgApacheLuceneSearchScoringRewrite_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchScoringRewrite")
+#ifdef RESTRICT_OrgApacheLuceneSearchScoringRewrite
+#define INCLUDE_ALL_OrgApacheLuceneSearchScoringRewrite 0
 #else
-#define OrgApacheLuceneSearchScoringRewrite_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchScoringRewrite 1
 #endif
-#undef OrgApacheLuceneSearchScoringRewrite_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchScoringRewrite
 
-#if !defined (_OrgApacheLuceneSearchScoringRewrite_) && (OrgApacheLuceneSearchScoringRewrite_INCLUDE_ALL || OrgApacheLuceneSearchScoringRewrite_INCLUDE)
-#define _OrgApacheLuceneSearchScoringRewrite_
+#if !defined (OrgApacheLuceneSearchScoringRewrite_) && (INCLUDE_ALL_OrgApacheLuceneSearchScoringRewrite || defined(INCLUDE_OrgApacheLuceneSearchScoringRewrite))
+#define OrgApacheLuceneSearchScoringRewrite_
 
-#define OrgApacheLuceneSearchTermCollectingRewrite_RESTRICT 1
-#define OrgApacheLuceneSearchTermCollectingRewrite_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchTermCollectingRewrite 1
+#define INCLUDE_OrgApacheLuceneSearchTermCollectingRewrite 1
 #include "org/apache/lucene/search/TermCollectingRewrite.h"
 
 @class OrgApacheLuceneIndexIndexReader;
@@ -25,7 +25,17 @@
 @class OrgApacheLuceneSearchMultiTermQuery_RewriteMethod;
 @class OrgApacheLuceneSearchQuery;
 
+/*!
+ @brief Base rewrite method that translates each term into a query, and keeps
+ the scores as computed by the query.
+ <p>
+  Only public to be accessible by spans package. 
+ */
 @interface OrgApacheLuceneSearchScoringRewrite : OrgApacheLuceneSearchTermCollectingRewrite
+
++ (OrgApacheLuceneSearchScoringRewrite *)SCORING_BOOLEAN_REWRITE;
+
++ (OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)CONSTANT_SCORE_BOOLEAN_REWRITE;
 
 #pragma mark Public
 
@@ -36,17 +46,51 @@
 
 #pragma mark Protected
 
+/*!
+ @brief This method is called after every new term to check if the number of max clauses
+ (e.g. in BooleanQuery) is not exceeded.
+ Throws the corresponding <code>RuntimeException</code>. 
+ */
 - (void)checkMaxClauseCountWithInt:(jint)count;
 
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneSearchScoringRewrite)
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchScoringRewrite *OrgApacheLuceneSearchScoringRewrite_SCORING_BOOLEAN_REWRITE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchScoringRewrite, SCORING_BOOLEAN_REWRITE_, OrgApacheLuceneSearchScoringRewrite *)
+/*!
+ @brief A rewrite method that first translates each term into
+ <code>BooleanClause.Occur.SHOULD</code> clause in a
+ BooleanQuery, and keeps the scores as computed by the
+ query.
+ Note that typically such scores are
+ meaningless to the user, and require non-trivial CPU
+ to compute, so it's almost always better to use <code>MultiTermQuery.CONSTANT_SCORE_REWRITE</code>
+  instead.
+ <p><b>NOTE</b>: This rewrite method will hit <code>BooleanQuery.TooManyClauses</code>
+  if the number of terms
+ exceeds <code>BooleanQuery.getMaxClauseCount</code>.
+ - seealso: MultiTermQuery#setRewriteMethod
+ */
+inline OrgApacheLuceneSearchScoringRewrite *OrgApacheLuceneSearchScoringRewrite_get_SCORING_BOOLEAN_REWRITE();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT OrgApacheLuceneSearchScoringRewrite *OrgApacheLuceneSearchScoringRewrite_SCORING_BOOLEAN_REWRITE;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchScoringRewrite, SCORING_BOOLEAN_REWRITE, OrgApacheLuceneSearchScoringRewrite *)
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchScoringRewrite_CONSTANT_SCORE_BOOLEAN_REWRITE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchScoringRewrite, CONSTANT_SCORE_BOOLEAN_REWRITE_, OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)
+/*!
+ @brief Like <code>SCORING_BOOLEAN_REWRITE</code> except
+ scores are not computed.
+ Instead, each matching
+ document receives a constant score equal to the
+ query's boost.
+ <p><b>NOTE</b>: This rewrite method will hit <code>BooleanQuery.TooManyClauses</code>
+  if the number of terms
+ exceeds <code>BooleanQuery.getMaxClauseCount</code>.
+ - seealso: MultiTermQuery#setRewriteMethod
+ */
+inline OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchScoringRewrite_get_CONSTANT_SCORE_BOOLEAN_REWRITE();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchScoringRewrite_CONSTANT_SCORE_BOOLEAN_REWRITE;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchScoringRewrite, CONSTANT_SCORE_BOOLEAN_REWRITE, OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchScoringRewrite_init(OrgApacheLuceneSearchScoringRewrite *self);
 
@@ -54,11 +98,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchScoringRewrite)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchScoringRewrite_ParallelArraysTermCollector_) && (OrgApacheLuceneSearchScoringRewrite_INCLUDE_ALL || OrgApacheLuceneSearchScoringRewrite_ParallelArraysTermCollector_INCLUDE)
-#define _OrgApacheLuceneSearchScoringRewrite_ParallelArraysTermCollector_
+#if !defined (OrgApacheLuceneSearchScoringRewrite_ParallelArraysTermCollector_) && (INCLUDE_ALL_OrgApacheLuceneSearchScoringRewrite || defined(INCLUDE_OrgApacheLuceneSearchScoringRewrite_ParallelArraysTermCollector))
+#define OrgApacheLuceneSearchScoringRewrite_ParallelArraysTermCollector_
 
-#define OrgApacheLuceneSearchTermCollectingRewrite_RESTRICT 1
-#define OrgApacheLuceneSearchTermCollectingRewrite_TermCollector_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchTermCollectingRewrite 1
+#define INCLUDE_OrgApacheLuceneSearchTermCollectingRewrite_TermCollector 1
 #include "org/apache/lucene/search/TermCollectingRewrite.h"
 
 @class OrgApacheLuceneIndexTermsEnum;
@@ -96,21 +140,26 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchScoringRewrite_ParallelArraysTermCol
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchScoringRewrite_ParallelArraysTermCollector *new_OrgApacheLuceneSearchScoringRewrite_ParallelArraysTermCollector_initWithOrgApacheLuceneSearchScoringRewrite_(OrgApacheLuceneSearchScoringRewrite *outer$) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchScoringRewrite_ParallelArraysTermCollector *create_OrgApacheLuceneSearchScoringRewrite_ParallelArraysTermCollector_initWithOrgApacheLuceneSearchScoringRewrite_(OrgApacheLuceneSearchScoringRewrite *outer$);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchScoringRewrite_ParallelArraysTermCollector)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchScoringRewrite_TermFreqBoostByteStart_) && (OrgApacheLuceneSearchScoringRewrite_INCLUDE_ALL || OrgApacheLuceneSearchScoringRewrite_TermFreqBoostByteStart_INCLUDE)
-#define _OrgApacheLuceneSearchScoringRewrite_TermFreqBoostByteStart_
+#if !defined (OrgApacheLuceneSearchScoringRewrite_TermFreqBoostByteStart_) && (INCLUDE_ALL_OrgApacheLuceneSearchScoringRewrite || defined(INCLUDE_OrgApacheLuceneSearchScoringRewrite_TermFreqBoostByteStart))
+#define OrgApacheLuceneSearchScoringRewrite_TermFreqBoostByteStart_
 
-#define OrgApacheLuceneUtilBytesRefHash_RESTRICT 1
-#define OrgApacheLuceneUtilBytesRefHash_DirectBytesStartArray_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilBytesRefHash 1
+#define INCLUDE_OrgApacheLuceneUtilBytesRefHash_DirectBytesStartArray 1
 #include "org/apache/lucene/util/BytesRefHash.h"
 
 @class IOSFloatArray;
 @class IOSIntArray;
 @class IOSObjectArray;
 
+/*!
+ @brief Special implementation of BytesStartArray that keeps parallel arrays for boost and docFreq
+ */
 @interface OrgApacheLuceneSearchScoringRewrite_TermFreqBoostByteStart : OrgApacheLuceneUtilBytesRefHash_DirectBytesStartArray {
  @public
   IOSFloatArray *boost_;
@@ -138,8 +187,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchScoringRewrite_TermFreqBoostByteStar
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchScoringRewrite_TermFreqBoostByteStart *new_OrgApacheLuceneSearchScoringRewrite_TermFreqBoostByteStart_initWithInt_(jint initSize) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchScoringRewrite_TermFreqBoostByteStart *create_OrgApacheLuceneSearchScoringRewrite_TermFreqBoostByteStart_initWithInt_(jint initSize);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchScoringRewrite_TermFreqBoostByteStart)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchScoringRewrite_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchScoringRewrite")

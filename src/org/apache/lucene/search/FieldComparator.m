@@ -120,6 +120,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFieldComparator_TermOrdValComparator, f
   jint missingSortCmp_;
 }
 
+/*!
+ @brief Given a document and a term, return the term itself if it exists or
+ <tt>null</tt> otherwise.
+ */
 - (OrgApacheLuceneUtilBytesRef *)getComparableBytesWithInt:(jint)doc
                            withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
 
@@ -175,7 +179,7 @@ __attribute__((unused)) static OrgApacheLuceneUtilBytesRef *OrgApacheLuceneSearc
     return 1;
   }
   else {
-    return [((id<JavaLangComparable>) check_protocol_cast(first, JavaLangComparable_class_())) compareToWithId:second];
+    return [((id<JavaLangComparable>) cast_check(first, JavaLangComparable_class_())) compareToWithId:second];
   }
 }
 
@@ -193,7 +197,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "valueWithInt:", "value", "TT;", 0x401, NULL, "(I)TT;" },
     { "getLeafComparatorWithOrgApacheLuceneIndexLeafReaderContext:", "getLeafComparator", "Lorg.apache.lucene.search.LeafFieldComparator;", 0x401, "Ljava.io.IOException;", NULL },
     { "compareValuesWithId:withId:", "compareValues", "I", 0x1, NULL, "(TT;TT;)I" },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "FieldComparator", NULL, 0x1, NULL, NULL },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.FieldComparator$NumericComparator;", "Lorg.apache.lucene.search.FieldComparator$DoubleComparator;", "Lorg.apache.lucene.search.FieldComparator$FloatComparator;", "Lorg.apache.lucene.search.FieldComparator$IntComparator;", "Lorg.apache.lucene.search.FieldComparator$LongComparator;", "Lorg.apache.lucene.search.FieldComparator$RelevanceComparator;", "Lorg.apache.lucene.search.FieldComparator$DocComparator;", "Lorg.apache.lucene.search.FieldComparator$TermOrdValComparator;", "Lorg.apache.lucene.search.FieldComparator$TermValComparator;"};
   static const J2ObjcClassInfo _OrgApacheLuceneSearchFieldComparator = { 2, "FieldComparator", "org.apache.lucene.search", NULL, 0x401, 6, methods, 0, NULL, 0, NULL, 9, inner_classes, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
@@ -360,9 +364,11 @@ void OrgApacheLuceneSearchFieldComparator_DoubleComparator_initWithInt_withNSStr
 }
 
 OrgApacheLuceneSearchFieldComparator_DoubleComparator *new_OrgApacheLuceneSearchFieldComparator_DoubleComparator_initWithInt_withNSString_withJavaLangDouble_(jint numHits, NSString *field, JavaLangDouble *missingValue) {
-  OrgApacheLuceneSearchFieldComparator_DoubleComparator *self = [OrgApacheLuceneSearchFieldComparator_DoubleComparator alloc];
-  OrgApacheLuceneSearchFieldComparator_DoubleComparator_initWithInt_withNSString_withJavaLangDouble_(self, numHits, field, missingValue);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFieldComparator_DoubleComparator, initWithInt_withNSString_withJavaLangDouble_, numHits, field, missingValue)
+}
+
+OrgApacheLuceneSearchFieldComparator_DoubleComparator *create_OrgApacheLuceneSearchFieldComparator_DoubleComparator_initWithInt_withNSString_withJavaLangDouble_(jint numHits, NSString *field, JavaLangDouble *missingValue) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFieldComparator_DoubleComparator, initWithInt_withNSString_withJavaLangDouble_, numHits, field, missingValue)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldComparator_DoubleComparator)
@@ -452,9 +458,11 @@ void OrgApacheLuceneSearchFieldComparator_FloatComparator_initWithInt_withNSStri
 }
 
 OrgApacheLuceneSearchFieldComparator_FloatComparator *new_OrgApacheLuceneSearchFieldComparator_FloatComparator_initWithInt_withNSString_withJavaLangFloat_(jint numHits, NSString *field, JavaLangFloat *missingValue) {
-  OrgApacheLuceneSearchFieldComparator_FloatComparator *self = [OrgApacheLuceneSearchFieldComparator_FloatComparator alloc];
-  OrgApacheLuceneSearchFieldComparator_FloatComparator_initWithInt_withNSString_withJavaLangFloat_(self, numHits, field, missingValue);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFieldComparator_FloatComparator, initWithInt_withNSString_withJavaLangFloat_, numHits, field, missingValue)
+}
+
+OrgApacheLuceneSearchFieldComparator_FloatComparator *create_OrgApacheLuceneSearchFieldComparator_FloatComparator_initWithInt_withNSString_withJavaLangFloat_(jint numHits, NSString *field, JavaLangFloat *missingValue) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFieldComparator_FloatComparator, initWithInt_withNSString_withJavaLangFloat_, numHits, field, missingValue)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldComparator_FloatComparator)
@@ -544,9 +552,11 @@ void OrgApacheLuceneSearchFieldComparator_IntComparator_initWithInt_withNSString
 }
 
 OrgApacheLuceneSearchFieldComparator_IntComparator *new_OrgApacheLuceneSearchFieldComparator_IntComparator_initWithInt_withNSString_withJavaLangInteger_(jint numHits, NSString *field, JavaLangInteger *missingValue) {
-  OrgApacheLuceneSearchFieldComparator_IntComparator *self = [OrgApacheLuceneSearchFieldComparator_IntComparator alloc];
-  OrgApacheLuceneSearchFieldComparator_IntComparator_initWithInt_withNSString_withJavaLangInteger_(self, numHits, field, missingValue);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFieldComparator_IntComparator, initWithInt_withNSString_withJavaLangInteger_, numHits, field, missingValue)
+}
+
+OrgApacheLuceneSearchFieldComparator_IntComparator *create_OrgApacheLuceneSearchFieldComparator_IntComparator_initWithInt_withNSString_withJavaLangInteger_(jint numHits, NSString *field, JavaLangInteger *missingValue) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFieldComparator_IntComparator, initWithInt_withNSString_withJavaLangInteger_, numHits, field, missingValue)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldComparator_IntComparator)
@@ -636,9 +646,11 @@ void OrgApacheLuceneSearchFieldComparator_LongComparator_initWithInt_withNSStrin
 }
 
 OrgApacheLuceneSearchFieldComparator_LongComparator *new_OrgApacheLuceneSearchFieldComparator_LongComparator_initWithInt_withNSString_withJavaLangLong_(jint numHits, NSString *field, JavaLangLong *missingValue) {
-  OrgApacheLuceneSearchFieldComparator_LongComparator *self = [OrgApacheLuceneSearchFieldComparator_LongComparator alloc];
-  OrgApacheLuceneSearchFieldComparator_LongComparator_initWithInt_withNSString_withJavaLangLong_(self, numHits, field, missingValue);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFieldComparator_LongComparator, initWithInt_withNSString_withJavaLangLong_, numHits, field, missingValue)
+}
+
+OrgApacheLuceneSearchFieldComparator_LongComparator *create_OrgApacheLuceneSearchFieldComparator_LongComparator_initWithInt_withNSString_withJavaLangLong_(jint numHits, NSString *field, JavaLangLong *missingValue) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFieldComparator_LongComparator, initWithInt_withNSString_withJavaLangLong_, numHits, field, missingValue)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldComparator_LongComparator)
@@ -717,10 +729,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldComparator_LongCompar
     { "copy__WithInt:withInt:", "copy", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "getLeafComparatorWithOrgApacheLuceneIndexLeafReaderContext:", "getLeafComparator", "Lorg.apache.lucene.search.LeafFieldComparator;", 0x1, NULL, NULL },
     { "setBottomWithInt:", "setBottom", "V", 0x1, NULL, NULL },
-    { "setTopValueWithId:", "setTopValue", "V", 0x1, NULL, NULL },
+    { "setTopValueWithId:", "setTopValue", "V", 0x1, NULL, "(Ljava/lang/Float;)V" },
     { "setScorerWithOrgApacheLuceneSearchScorer:", "setScorer", "V", 0x1, NULL, NULL },
-    { "valueWithInt:", "value", "Ljava.lang.Float;", 0x1, NULL, NULL },
-    { "compareValuesWithId:withId:", "compareValues", "I", 0x1, NULL, NULL },
+    { "valueWithInt:", "value", "Ljava.lang.Float;", 0x1, NULL, "(I)Ljava/lang/Float;" },
+    { "compareValuesWithId:withId:", "compareValues", "I", 0x1, NULL, "(Ljava/lang/Float;Ljava/lang/Float;)I" },
     { "compareTopWithInt:", "compareTop", "I", 0x1, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -742,9 +754,11 @@ void OrgApacheLuceneSearchFieldComparator_RelevanceComparator_initWithInt_(OrgAp
 }
 
 OrgApacheLuceneSearchFieldComparator_RelevanceComparator *new_OrgApacheLuceneSearchFieldComparator_RelevanceComparator_initWithInt_(jint numHits) {
-  OrgApacheLuceneSearchFieldComparator_RelevanceComparator *self = [OrgApacheLuceneSearchFieldComparator_RelevanceComparator alloc];
-  OrgApacheLuceneSearchFieldComparator_RelevanceComparator_initWithInt_(self, numHits);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFieldComparator_RelevanceComparator, initWithInt_, numHits)
+}
+
+OrgApacheLuceneSearchFieldComparator_RelevanceComparator *create_OrgApacheLuceneSearchFieldComparator_RelevanceComparator_initWithInt_(jint numHits) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFieldComparator_RelevanceComparator, initWithInt_, numHits)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldComparator_RelevanceComparator)
@@ -808,8 +822,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldComparator_RelevanceC
     { "copy__WithInt:withInt:", "copy", "V", 0x1, NULL, NULL },
     { "getLeafComparatorWithOrgApacheLuceneIndexLeafReaderContext:", "getLeafComparator", "Lorg.apache.lucene.search.LeafFieldComparator;", 0x1, NULL, NULL },
     { "setBottomWithInt:", "setBottom", "V", 0x1, NULL, NULL },
-    { "setTopValueWithId:", "setTopValue", "V", 0x1, NULL, NULL },
-    { "valueWithInt:", "value", "Ljava.lang.Integer;", 0x1, NULL, NULL },
+    { "setTopValueWithId:", "setTopValue", "V", 0x1, NULL, "(Ljava/lang/Integer;)V" },
+    { "valueWithInt:", "value", "Ljava.lang.Integer;", 0x1, NULL, "(I)Ljava/lang/Integer;" },
     { "compareTopWithInt:", "compareTop", "I", 0x1, NULL, NULL },
     { "setScorerWithOrgApacheLuceneSearchScorer:", "setScorer", "V", 0x1, NULL, NULL },
   };
@@ -832,9 +846,11 @@ void OrgApacheLuceneSearchFieldComparator_DocComparator_initWithInt_(OrgApacheLu
 }
 
 OrgApacheLuceneSearchFieldComparator_DocComparator *new_OrgApacheLuceneSearchFieldComparator_DocComparator_initWithInt_(jint numHits) {
-  OrgApacheLuceneSearchFieldComparator_DocComparator *self = [OrgApacheLuceneSearchFieldComparator_DocComparator alloc];
-  OrgApacheLuceneSearchFieldComparator_DocComparator_initWithInt_(self, numHits);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFieldComparator_DocComparator, initWithInt_, numHits)
+}
+
+OrgApacheLuceneSearchFieldComparator_DocComparator *create_OrgApacheLuceneSearchFieldComparator_DocComparator_initWithInt_(jint numHits) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFieldComparator_DocComparator, initWithInt_, numHits)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldComparator_DocComparator)
@@ -870,7 +886,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldComparator_DocCompara
   else if (val2 == nil) {
     return -missingSortCmp_;
   }
-  return [((OrgApacheLuceneUtilBytesRef *) nil_chk(val1)) compareToWithId:val2];
+  return [val1 compareToWithId:val2];
 }
 
 - (jint)compareBottomWithInt:(jint)doc {
@@ -902,7 +918,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldComparator_DocCompara
     if (IOSObjectArray_Get(nil_chk(tempBRs_), slot) == nil) {
       IOSObjectArray_SetAndConsume(tempBRs_, slot, new_OrgApacheLuceneUtilBytesRefBuilder_init());
     }
-    [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(IOSObjectArray_Get(tempBRs_, slot))) copyBytesWithOrgApacheLuceneUtilBytesRef:[termsIndex_ lookupOrdWithInt:ord]];
+    [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(IOSObjectArray_Get(tempBRs_, slot))) copyBytesWithOrgApacheLuceneUtilBytesRef:[((OrgApacheLuceneIndexSortedDocValues *) nil_chk(termsIndex_)) lookupOrdWithInt:ord]];
     IOSObjectArray_Set(nil_chk(values_), slot, [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(IOSObjectArray_Get(tempBRs_, slot))) get]);
   }
   *IOSIntArray_GetRef(nil_chk(ords_), slot) = ord;
@@ -1003,7 +1019,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldComparator_DocCompara
   else if (val2 == nil) {
     return -missingSortCmp_;
   }
-  return [((OrgApacheLuceneUtilBytesRef *) nil_chk(val1)) compareToWithId:val2];
+  return [val1 compareToWithId:val2];
 }
 
 - (void)setScorerWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)scorer {
@@ -1031,10 +1047,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldComparator_DocCompara
     { "getSortedDocValuesWithOrgApacheLuceneIndexLeafReaderContext:withNSString:", "getSortedDocValues", "Lorg.apache.lucene.index.SortedDocValues;", 0x4, "Ljava.io.IOException;", NULL },
     { "getLeafComparatorWithOrgApacheLuceneIndexLeafReaderContext:", "getLeafComparator", "Lorg.apache.lucene.search.LeafFieldComparator;", 0x1, "Ljava.io.IOException;", NULL },
     { "setBottomWithInt:", "setBottom", "V", 0x1, NULL, NULL },
-    { "setTopValueWithId:", "setTopValue", "V", 0x1, NULL, NULL },
-    { "valueWithInt:", "value", "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
+    { "setTopValueWithId:", "setTopValue", "V", 0x1, NULL, "(Lorg/apache/lucene/util/BytesRef;)V" },
+    { "valueWithInt:", "value", "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, "(I)Lorg/apache/lucene/util/BytesRef;" },
     { "compareTopWithInt:", "compareTop", "I", 0x1, NULL, NULL },
-    { "compareValuesWithId:withId:", "compareValues", "I", 0x1, NULL, NULL },
+    { "compareValuesWithId:withId:", "compareValues", "I", 0x1, NULL, "(Lorg/apache/lucene/util/BytesRef;Lorg/apache/lucene/util/BytesRef;)I" },
     { "setScorerWithOrgApacheLuceneSearchScorer:", "setScorer", "V", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -1067,9 +1083,11 @@ void OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_initWithInt_withN
 }
 
 OrgApacheLuceneSearchFieldComparator_TermOrdValComparator *new_OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_initWithInt_withNSString_(jint numHits, NSString *field) {
-  OrgApacheLuceneSearchFieldComparator_TermOrdValComparator *self = [OrgApacheLuceneSearchFieldComparator_TermOrdValComparator alloc];
-  OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_initWithInt_withNSString_(self, numHits, field);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFieldComparator_TermOrdValComparator, initWithInt_withNSString_, numHits, field)
+}
+
+OrgApacheLuceneSearchFieldComparator_TermOrdValComparator *create_OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_initWithInt_withNSString_(jint numHits, NSString *field) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFieldComparator_TermOrdValComparator, initWithInt_withNSString_, numHits, field)
 }
 
 void OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_initWithInt_withNSString_withBoolean_(OrgApacheLuceneSearchFieldComparator_TermOrdValComparator *self, jint numHits, NSString *field, jboolean sortMissingLast) {
@@ -1092,9 +1110,11 @@ void OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_initWithInt_withN
 }
 
 OrgApacheLuceneSearchFieldComparator_TermOrdValComparator *new_OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_initWithInt_withNSString_withBoolean_(jint numHits, NSString *field, jboolean sortMissingLast) {
-  OrgApacheLuceneSearchFieldComparator_TermOrdValComparator *self = [OrgApacheLuceneSearchFieldComparator_TermOrdValComparator alloc];
-  OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_initWithInt_withNSString_withBoolean_(self, numHits, field, sortMissingLast);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFieldComparator_TermOrdValComparator, initWithInt_withNSString_withBoolean_, numHits, field, sortMissingLast)
+}
+
+OrgApacheLuceneSearchFieldComparator_TermOrdValComparator *create_OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_initWithInt_withNSString_withBoolean_(jint numHits, NSString *field, jboolean sortMissingLast) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFieldComparator_TermOrdValComparator, initWithInt_withNSString_withBoolean_, numHits, field, sortMissingLast)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldComparator_TermOrdValComparator)
@@ -1182,7 +1202,7 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
   else if (val2 == nil) {
     return -missingSortCmp_;
   }
-  return [((OrgApacheLuceneUtilBytesRef *) nil_chk(val1)) compareToWithId:val2];
+  return [val1 compareToWithId:val2];
 }
 
 - (jint)compareTopWithInt:(jint)doc {
@@ -1220,9 +1240,9 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
     { "isNullWithInt:withOrgApacheLuceneUtilBytesRef:", "isNull", "Z", 0x4, NULL, NULL },
     { "getLeafComparatorWithOrgApacheLuceneIndexLeafReaderContext:", "getLeafComparator", "Lorg.apache.lucene.search.LeafFieldComparator;", 0x1, "Ljava.io.IOException;", NULL },
     { "setBottomWithInt:", "setBottom", "V", 0x1, NULL, NULL },
-    { "setTopValueWithId:", "setTopValue", "V", 0x1, NULL, NULL },
-    { "valueWithInt:", "value", "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "compareValuesWithId:withId:", "compareValues", "I", 0x1, NULL, NULL },
+    { "setTopValueWithId:", "setTopValue", "V", 0x1, NULL, "(Lorg/apache/lucene/util/BytesRef;)V" },
+    { "valueWithInt:", "value", "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, "(I)Lorg/apache/lucene/util/BytesRef;" },
+    { "compareValuesWithId:withId:", "compareValues", "I", 0x1, NULL, "(Lorg/apache/lucene/util/BytesRef;Lorg/apache/lucene/util/BytesRef;)I" },
     { "compareTopWithInt:", "compareTop", "I", 0x1, NULL, NULL },
     { "getComparableBytesWithInt:withOrgApacheLuceneUtilBytesRef:", "getComparableBytes", "Lorg.apache.lucene.util.BytesRef;", 0x2, NULL, NULL },
     { "setScorerWithOrgApacheLuceneSearchScorer:", "setScorer", "V", 0x1, NULL, NULL },
@@ -1253,9 +1273,11 @@ void OrgApacheLuceneSearchFieldComparator_TermValComparator_initWithInt_withNSSt
 }
 
 OrgApacheLuceneSearchFieldComparator_TermValComparator *new_OrgApacheLuceneSearchFieldComparator_TermValComparator_initWithInt_withNSString_withBoolean_(jint numHits, NSString *field, jboolean sortMissingLast) {
-  OrgApacheLuceneSearchFieldComparator_TermValComparator *self = [OrgApacheLuceneSearchFieldComparator_TermValComparator alloc];
-  OrgApacheLuceneSearchFieldComparator_TermValComparator_initWithInt_withNSString_withBoolean_(self, numHits, field, sortMissingLast);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFieldComparator_TermValComparator, initWithInt_withNSString_withBoolean_, numHits, field, sortMissingLast)
+}
+
+OrgApacheLuceneSearchFieldComparator_TermValComparator *create_OrgApacheLuceneSearchFieldComparator_TermValComparator_initWithInt_withNSString_withBoolean_(jint numHits, NSString *field, jboolean sortMissingLast) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFieldComparator_TermValComparator, initWithInt_withNSString_withBoolean_, numHits, field, sortMissingLast)
 }
 
 OrgApacheLuceneUtilBytesRef *OrgApacheLuceneSearchFieldComparator_TermValComparator_getComparableBytesWithInt_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneSearchFieldComparator_TermValComparator *self, jint doc, OrgApacheLuceneUtilBytesRef *term) {

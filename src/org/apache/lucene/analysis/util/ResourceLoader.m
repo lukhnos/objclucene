@@ -3,10 +3,7 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/util/ResourceLoader.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "java/io/InputStream.h"
 #include "org/apache/lucene/analysis/util/ResourceLoader.h"
 
 @interface OrgApacheLuceneAnalysisUtilResourceLoader : NSObject

@@ -22,10 +22,10 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneSearchFuzzyQuery *)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode *fuzzyNode = (OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode *) check_class_cast(queryNode, [OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode class]);
+  OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode *fuzzyNode = (OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode *) cast_chk(queryNode, [OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode class]);
   NSString *text = [((OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode *) nil_chk(fuzzyNode)) getTextAsString];
-  jint numEdits = OrgApacheLuceneSearchFuzzyQuery_floatToEditsWithFloat_withInt_([fuzzyNode getSimilarity], [text codePointCount:0 endIndex:((jint) [((NSString *) nil_chk(text)) length])]);
-  return [new_OrgApacheLuceneSearchFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withInt_withInt_([new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_([fuzzyNode getFieldAsString], [fuzzyNode getTextAsString]) autorelease], numEdits, [fuzzyNode getPrefixLength]) autorelease];
+  jint numEdits = OrgApacheLuceneSearchFuzzyQuery_floatToEditsWithFloat_withInt_([fuzzyNode getSimilarity], [((NSString *) nil_chk(text)) codePointCount:0 endIndex:((jint) [text length])]);
+  return create_OrgApacheLuceneSearchFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withInt_withInt_(create_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_([fuzzyNode getFieldAsString], [fuzzyNode getTextAsString]), numEdits, [fuzzyNode getPrefixLength]);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -44,9 +44,11 @@ void OrgApacheLuceneQueryparserFlexibleStandardBuildersFuzzyQueryNodeBuilder_ini
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardBuildersFuzzyQueryNodeBuilder *new_OrgApacheLuceneQueryparserFlexibleStandardBuildersFuzzyQueryNodeBuilder_init() {
-  OrgApacheLuceneQueryparserFlexibleStandardBuildersFuzzyQueryNodeBuilder *self = [OrgApacheLuceneQueryparserFlexibleStandardBuildersFuzzyQueryNodeBuilder alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardBuildersFuzzyQueryNodeBuilder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardBuildersFuzzyQueryNodeBuilder, init)
+}
+
+OrgApacheLuceneQueryparserFlexibleStandardBuildersFuzzyQueryNodeBuilder *create_OrgApacheLuceneQueryparserFlexibleStandardBuildersFuzzyQueryNodeBuilder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardBuildersFuzzyQueryNodeBuilder, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleStandardBuildersFuzzyQueryNodeBuilder)

@@ -3,14 +3,20 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/core/util/package-info.java
 //
 
+/*!
+ @brief Utility classes to used with the Query Parser.
+ <h2>Utility classes to used with the Query Parser</h2>
+ <p>
+ This package contains utility classes used with the query parsers.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleCoreUtilPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleCoreUtilPackage_info_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleCoreUtilPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreUtilPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreUtilPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreUtilPackage_info 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleCoreUtilPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreUtilPackage_info 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleCoreUtilPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreUtilPackage_info
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleCoreUtilPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreUtilPackage_info")

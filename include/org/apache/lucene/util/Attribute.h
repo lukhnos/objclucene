@@ -5,17 +5,20 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilAttribute_INCLUDE_ALL")
-#if OrgApacheLuceneUtilAttribute_RESTRICT
-#define OrgApacheLuceneUtilAttribute_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilAttribute")
+#ifdef RESTRICT_OrgApacheLuceneUtilAttribute
+#define INCLUDE_ALL_OrgApacheLuceneUtilAttribute 0
 #else
-#define OrgApacheLuceneUtilAttribute_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilAttribute 1
 #endif
-#undef OrgApacheLuceneUtilAttribute_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilAttribute
 
-#if !defined (_OrgApacheLuceneUtilAttribute_) && (OrgApacheLuceneUtilAttribute_INCLUDE_ALL || OrgApacheLuceneUtilAttribute_INCLUDE)
-#define _OrgApacheLuceneUtilAttribute_
+#if !defined (OrgApacheLuceneUtilAttribute_) && (INCLUDE_ALL_OrgApacheLuceneUtilAttribute || defined(INCLUDE_OrgApacheLuceneUtilAttribute))
+#define OrgApacheLuceneUtilAttribute_
 
+/*!
+ @brief Base interface for attributes.
+ */
 @protocol OrgApacheLuceneUtilAttribute < NSObject, JavaObject >
 
 @end
@@ -26,4 +29,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAttribute)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilAttribute_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAttribute")

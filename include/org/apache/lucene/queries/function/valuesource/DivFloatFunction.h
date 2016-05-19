@@ -5,28 +5,35 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction_RESTRICT
-#define OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction 0
 #else
-#define OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction_) && (OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction_
+#if !defined (OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction))
+#define OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction_
 
-#define OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction 1
 #include "org/apache/lucene/queries/function/valuesource/DualFloatFunction.h"
 
 @class OrgApacheLuceneQueriesFunctionFunctionValues;
 @class OrgApacheLuceneQueriesFunctionValueSource;
 
+/*!
+ @brief Function to divide "a" by "b"
+ */
 @interface OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction : OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction
 
 #pragma mark Public
 
+/*!
+ @param a  the numerator.
+ @param b  the denominator.
+ */
 - (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)a
                     withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)b;
 
@@ -46,8 +53,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction
 
 FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction *new_OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValueSource *a, OrgApacheLuceneQueriesFunctionValueSource *b) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction *create_OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValueSource *a, OrgApacheLuceneQueriesFunctionValueSource *b);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction")

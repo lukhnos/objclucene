@@ -12,6 +12,22 @@
 
 @implementation OrgApacheLuceneUtilTimSorter
 
++ (jint)MINRUN {
+  return OrgApacheLuceneUtilTimSorter_MINRUN;
+}
+
++ (jint)THRESHOLD {
+  return OrgApacheLuceneUtilTimSorter_THRESHOLD;
+}
+
++ (jint)STACKSIZE {
+  return OrgApacheLuceneUtilTimSorter_STACKSIZE;
+}
+
++ (jint)MIN_GALLOP {
+  return OrgApacheLuceneUtilTimSorter_MIN_GALLOP;
+}
+
 - (instancetype)initWithInt:(jint)maxTempSlots {
   OrgApacheLuceneUtilTimSorter_initWithInt_(self, maxTempSlots);
   return self;

@@ -35,9 +35,11 @@ void OrgApacheLuceneSearchHighlightDefaultEncoder_init(OrgApacheLuceneSearchHigh
 }
 
 OrgApacheLuceneSearchHighlightDefaultEncoder *new_OrgApacheLuceneSearchHighlightDefaultEncoder_init() {
-  OrgApacheLuceneSearchHighlightDefaultEncoder *self = [OrgApacheLuceneSearchHighlightDefaultEncoder alloc];
-  OrgApacheLuceneSearchHighlightDefaultEncoder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchHighlightDefaultEncoder, init)
+}
+
+OrgApacheLuceneSearchHighlightDefaultEncoder *create_OrgApacheLuceneSearchHighlightDefaultEncoder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchHighlightDefaultEncoder, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchHighlightDefaultEncoder)

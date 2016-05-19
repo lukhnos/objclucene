@@ -22,16 +22,16 @@
 }
 
 - (OrgApacheLuceneAnalysisCoreLowerCaseTokenizer *)createWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory {
-  return [new_OrgApacheLuceneAnalysisCoreLowerCaseTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(factory) autorelease];
+  return create_OrgApacheLuceneAnalysisCoreLowerCaseTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(factory);
 }
 
 - (OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory *)getMultiTermComponent {
-  return [new_OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory_initWithJavaUtilMap_([new_JavaUtilHashMap_initWithJavaUtilMap_([self getOriginalArgs]) autorelease]) autorelease];
+  return create_OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory_initWithJavaUtilMap_(create_JavaUtilHashMap_initWithJavaUtilMap_([self getOriginalArgs]));
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "LowerCaseTokenizerFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "LowerCaseTokenizerFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "createWithOrgApacheLuceneUtilAttributeFactory:", "create", "Lorg.apache.lucene.analysis.core.LowerCaseTokenizer;", 0x1, NULL, NULL },
     { "getMultiTermComponent", NULL, "Lorg.apache.lucene.analysis.util.AbstractAnalysisFactory;", 0x1, NULL, NULL },
   };
@@ -44,14 +44,16 @@
 void OrgApacheLuceneAnalysisCoreLowerCaseTokenizerFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisCoreLowerCaseTokenizerFactory *self, id<JavaUtilMap> args) {
   OrgApacheLuceneAnalysisUtilTokenizerFactory_initWithJavaUtilMap_(self, args);
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisCoreLowerCaseTokenizerFactory *new_OrgApacheLuceneAnalysisCoreLowerCaseTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisCoreLowerCaseTokenizerFactory *self = [OrgApacheLuceneAnalysisCoreLowerCaseTokenizerFactory alloc];
-  OrgApacheLuceneAnalysisCoreLowerCaseTokenizerFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCoreLowerCaseTokenizerFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisCoreLowerCaseTokenizerFactory *create_OrgApacheLuceneAnalysisCoreLowerCaseTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCoreLowerCaseTokenizerFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCoreLowerCaseTokenizerFactory)

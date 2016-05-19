@@ -32,6 +32,8 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisCharfilterNormalizeCh
 
 __attribute__((unused)) static OrgApacheLuceneAnalysisCharfilterNormalizeCharMap *new_OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_initWithOrgApacheLuceneUtilFstFST_(OrgApacheLuceneUtilFstFST *map) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneAnalysisCharfilterNormalizeCharMap *create_OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_initWithOrgApacheLuceneUtilFstFST_(OrgApacheLuceneUtilFstFST *map);
+
 @interface OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder () {
  @public
   id<JavaUtilMap> pendingPairs_;
@@ -56,7 +58,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder, p
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilFstFST:", "NormalizeCharMap", NULL, 0x2, NULL, NULL },
+    { "initWithOrgApacheLuceneUtilFstFST:", "NormalizeCharMap", NULL, 0x2, NULL, "(Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/CharsRef;>;)V" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "map_", NULL, 0x10, "Lorg.apache.lucene.util.fst.FST;", NULL, "Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/CharsRef;>;", .constantValue.asLong = 0 },
@@ -75,14 +77,14 @@ void OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_initWithOrgApacheLuceneUt
   JreStrongAssign(&self->map_, map);
   if (map != nil) {
     @try {
-      OrgApacheLuceneUtilFstFST_Arc *scratchArc = [new_OrgApacheLuceneUtilFstFST_Arc_init() autorelease];
+      OrgApacheLuceneUtilFstFST_Arc *scratchArc = create_OrgApacheLuceneUtilFstFST_Arc_init();
       OrgApacheLuceneUtilFstFST_BytesReader *fstReader = [map getBytesReader];
       [map getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:scratchArc];
       if (OrgApacheLuceneUtilFstFST_targetHasArcsWithOrgApacheLuceneUtilFstFST_Arc_(scratchArc)) {
         [map readFirstRealTargetArcWithLong:scratchArc->target_ withOrgApacheLuceneUtilFstFST_Arc:scratchArc withOrgApacheLuceneUtilFstFST_BytesReader:fstReader];
         while (true) {
           JreAssert((scratchArc->label_ != OrgApacheLuceneUtilFstFST_END_LABEL), (@"org/apache/lucene/analysis/charfilter/NormalizeCharMap.java:58 condition failed: assert scratchArc.label != FST.END_LABEL;"));
-          [self->cachedRootArcs_ putWithId:JavaLangCharacter_valueOfWithChar_((jchar) scratchArc->label_) withId:[((OrgApacheLuceneUtilFstFST_Arc *) [new_OrgApacheLuceneUtilFstFST_Arc_init() autorelease]) copyFromWithOrgApacheLuceneUtilFstFST_Arc:scratchArc]];
+          [self->cachedRootArcs_ putWithId:JavaLangCharacter_valueOfWithChar_((jchar) scratchArc->label_) withId:[create_OrgApacheLuceneUtilFstFST_Arc_init() copyFromWithOrgApacheLuceneUtilFstFST_Arc:scratchArc]];
           if ([scratchArc isLast]) {
             break;
           }
@@ -91,15 +93,17 @@ void OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_initWithOrgApacheLuceneUt
       }
     }
     @catch (JavaIoIOException *ioe) {
-      @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(ioe) autorelease];
+      @throw create_JavaLangRuntimeException_initWithNSException_(ioe);
     }
   }
 }
 
 OrgApacheLuceneAnalysisCharfilterNormalizeCharMap *new_OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_initWithOrgApacheLuceneUtilFstFST_(OrgApacheLuceneUtilFstFST *map) {
-  OrgApacheLuceneAnalysisCharfilterNormalizeCharMap *self = [OrgApacheLuceneAnalysisCharfilterNormalizeCharMap alloc];
-  OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_initWithOrgApacheLuceneUtilFstFST_(self, map);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCharfilterNormalizeCharMap, initWithOrgApacheLuceneUtilFstFST_, map)
+}
+
+OrgApacheLuceneAnalysisCharfilterNormalizeCharMap *create_OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_initWithOrgApacheLuceneUtilFstFST_(OrgApacheLuceneUtilFstFST *map) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCharfilterNormalizeCharMap, initWithOrgApacheLuceneUtilFstFST_, map)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCharfilterNormalizeCharMap)
@@ -109,10 +113,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCharfilterNormalizeCharM
 - (void)addWithNSString:(NSString *)match
            withNSString:(NSString *)replacement {
   if (((jint) [((NSString *) nil_chk(match)) length]) == 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"cannot match the empty string") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"cannot match the empty string");
   }
   if ([((id<JavaUtilMap>) nil_chk(pendingPairs_)) containsKeyWithId:match]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"match \"", match, @"\" was already added")) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"match \"", match, @"\" was already added"));
   }
   [pendingPairs_ putWithId:match withId:replacement];
 }
@@ -121,18 +125,18 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCharfilterNormalizeCharM
   OrgApacheLuceneUtilFstFST *map;
   @try {
     OrgApacheLuceneUtilFstOutputs *outputs = OrgApacheLuceneUtilFstCharSequenceOutputs_getSingleton();
-    OrgApacheLuceneUtilFstBuilder *builder = [new_OrgApacheLuceneUtilFstBuilder_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_withOrgApacheLuceneUtilFstOutputs_(JreLoadStatic(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum, BYTE2), outputs) autorelease];
-    OrgApacheLuceneUtilIntsRefBuilder *scratch = [new_OrgApacheLuceneUtilIntsRefBuilder_init() autorelease];
+    OrgApacheLuceneUtilFstBuilder *builder = create_OrgApacheLuceneUtilFstBuilder_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE_withOrgApacheLuceneUtilFstOutputs_(JreLoadEnum(OrgApacheLuceneUtilFstFST_INPUT_TYPE, BYTE2), outputs);
+    OrgApacheLuceneUtilIntsRefBuilder *scratch = create_OrgApacheLuceneUtilIntsRefBuilder_init();
     for (id<JavaUtilMap_Entry> __strong ent in nil_chk([((id<JavaUtilMap>) nil_chk(pendingPairs_)) entrySet])) {
-      [builder addWithOrgApacheLuceneUtilIntsRef:OrgApacheLuceneUtilFstUtil_toUTF16WithJavaLangCharSequence_withOrgApacheLuceneUtilIntsRefBuilder_([((id<JavaUtilMap_Entry>) nil_chk(ent)) getKey], scratch) withId:[new_OrgApacheLuceneUtilCharsRef_initWithNSString_([ent getValue]) autorelease]];
+      [builder addWithOrgApacheLuceneUtilIntsRef:OrgApacheLuceneUtilFstUtil_toUTF16WithJavaLangCharSequence_withOrgApacheLuceneUtilIntsRefBuilder_([((id<JavaUtilMap_Entry>) nil_chk(ent)) getKey], scratch) withId:create_OrgApacheLuceneUtilCharsRef_initWithNSString_([ent getValue])];
     }
     map = [builder finish];
     [pendingPairs_ clear];
   }
   @catch (JavaIoIOException *ioe) {
-    @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(ioe) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSException_(ioe);
   }
-  return [new_OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_initWithOrgApacheLuceneUtilFstFST_(map) autorelease];
+  return create_OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_initWithOrgApacheLuceneUtilFstFST_(map);
 }
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -151,7 +155,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   static const J2ObjcMethodInfo methods[] = {
     { "addWithNSString:withNSString:", "add", "V", 0x1, NULL, NULL },
     { "build", NULL, "Lorg.apache.lucene.analysis.charfilter.NormalizeCharMap;", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "Builder", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "pendingPairs_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", .constantValue.asLong = 0 },
@@ -168,9 +172,11 @@ void OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder_init(OrgApacheLuc
 }
 
 OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder *new_OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder_init() {
-  OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder *self = [OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder alloc];
-  OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder, init)
+}
+
+OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder *create_OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder)

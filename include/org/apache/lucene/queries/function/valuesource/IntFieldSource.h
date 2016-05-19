@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionValuesourceIntFieldSource_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionValuesourceIntFieldSource_RESTRICT
-#define OrgApacheLuceneQueriesFunctionValuesourceIntFieldSource_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceIntFieldSource")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceIntFieldSource
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceIntFieldSource 0
 #else
-#define OrgApacheLuceneQueriesFunctionValuesourceIntFieldSource_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceIntFieldSource 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionValuesourceIntFieldSource_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceIntFieldSource
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValuesourceIntFieldSource_) && (OrgApacheLuceneQueriesFunctionValuesourceIntFieldSource_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValuesourceIntFieldSource_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValuesourceIntFieldSource_
+#if !defined (OrgApacheLuceneQueriesFunctionValuesourceIntFieldSource_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceIntFieldSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceIntFieldSource))
+#define OrgApacheLuceneQueriesFunctionValuesourceIntFieldSource_
 
-#define OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource 1
 #include "org/apache/lucene/queries/function/valuesource/FieldCacheSource.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
@@ -25,6 +25,10 @@
 @class OrgApacheLuceneSearchSortField;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Obtains int field values from <code>org.apache.lucene.index.LeafReader.getNumericDocValues</code> and makes those
+ values available as other numeric types, casting as needed.
+ */
 @interface OrgApacheLuceneQueriesFunctionValuesourceIntFieldSource : OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource
 
 #pragma mark Public
@@ -50,8 +54,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceIntFieldSource_i
 
 FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceIntFieldSource *new_OrgApacheLuceneQueriesFunctionValuesourceIntFieldSource_initWithNSString_(NSString *field) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceIntFieldSource *create_OrgApacheLuceneQueriesFunctionValuesourceIntFieldSource_initWithNSString_(NSString *field);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceIntFieldSource)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionValuesourceIntFieldSource_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceIntFieldSource")

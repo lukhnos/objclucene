@@ -5,35 +5,52 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_) && (OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_
+#if !defined (OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError))
+#define OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_
 
-#define JavaLangError_RESTRICT 1
-#define JavaLangError_INCLUDE 1
+#define RESTRICT_JavaLangError 1
+#define INCLUDE_JavaLangError 1
 #include "java/lang/Error.h"
 
-#define OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_LEXICAL_ERROR 0
-#define OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_STATIC_LEXER_ERROR 1
-#define OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_INVALID_LEXICAL_STATE 2
-#define OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_LOOP_DETECTED 3
-
+/*!
+ @brief Token Manager Error.
+ */
 @interface OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError : JavaLangError {
  @public
+  /*!
+   @brief Indicates the reason why the exception is thrown.
+   It will have
+ one of the above 4 values.
+   */
   jint errorCode_;
 }
 
++ (jint)LEXICAL_ERROR;
+
++ (jint)STATIC_LEXER_ERROR;
+
++ (jint)INVALID_LEXICAL_STATE;
+
++ (jint)LOOP_DETECTED;
+
 #pragma mark Public
 
+/*!
+ @brief No arg constructor.
+ */
 - (instancetype)init;
 
+/*!
+ @brief Full Constructor.
+ */
 - (instancetype)initWithBoolean:(jboolean)EOFSeen
                         withInt:(jint)lexState
                         withInt:(jint)errorLine
@@ -42,15 +59,41 @@
                        withChar:(jchar)curChar
                         withInt:(jint)reason;
 
+/*!
+ @brief Constructor with message and reason.
+ */
 - (instancetype)initWithNSString:(NSString *)message
                          withInt:(jint)reason;
 
+/*!
+ @brief You can also modify the body of this method to customize your error messages.
+ For example, cases like LOOP_DETECTED and INVALID_LEXICAL_STATE are not
+ of end-users concern, so you can return something like :
+ "Internal Error : Please file a bug report .... "
+ from this method for such cases in the release version of your parser.
+ */
 - (NSString *)getMessage;
 
 #pragma mark Protected
 
+/*!
+ @brief Replaces unprintable characters by their escaped (or unicode escaped)
+ equivalents in the given string
+ */
 + (NSString *)addEscapesWithNSString:(NSString *)str;
 
+/*!
+ @brief Returns a detailed message for the Error when it is thrown by the
+ token manager to indicate a lexical error.
+ Parameters :
+ EOFSeen     : indicates if EOF caused the lexical error
+ curLexState : lexical state in which this error occurred
+ errorLine   : line number when the error occurred
+ errorColumn : column number when the error occurred
+ errorAfter  : prefix that was seen before this error occurred
+ curchar     : the offending character
+ Note: You can customize the lexical error message by modifying this method.
+ */
 + (NSString *)LexicalErrorWithBoolean:(jboolean)EOFSeen
                               withInt:(jint)lexState
                               withInt:(jint)errorLine
@@ -62,13 +105,33 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError, LEXICAL_ERROR, jint)
+/*!
+ @brief Lexical error occurred.
+ */
+inline jint OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_get_LEXICAL_ERROR();
+#define OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_LEXICAL_ERROR 0
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError, LEXICAL_ERROR, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError, STATIC_LEXER_ERROR, jint)
+/*!
+ @brief An attempt was made to create a second instance of a static token manager.
+ */
+inline jint OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_get_STATIC_LEXER_ERROR();
+#define OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_STATIC_LEXER_ERROR 1
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError, STATIC_LEXER_ERROR, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError, INVALID_LEXICAL_STATE, jint)
+/*!
+ @brief Tried to change to an invalid lexical state.
+ */
+inline jint OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_get_INVALID_LEXICAL_STATE();
+#define OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_INVALID_LEXICAL_STATE 2
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError, INVALID_LEXICAL_STATE, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError, LOOP_DETECTED, jint)
+/*!
+ @brief Detected (and bailed out of) an infinite loop in the token manager.
+ */
+inline jint OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_get_LOOP_DETECTED();
+#define OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_LOOP_DETECTED 3
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError, LOOP_DETECTED, jint)
 
 FOUNDATION_EXPORT NSString *OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_addEscapesWithNSString_(NSString *str);
 
@@ -78,16 +141,22 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrE
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError *new_OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError *create_OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_init();
+
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_initWithNSString_withInt_(OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError *self, NSString *message, jint reason);
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError *new_OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_initWithNSString_withInt_(NSString *message, jint reason) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError *create_OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_initWithNSString_withInt_(NSString *message, jint reason);
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_initWithBoolean_withInt_withInt_withInt_withNSString_withChar_withInt_(OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError *self, jboolean EOFSeen, jint lexState, jint errorLine, jint errorColumn, NSString *errorAfter, jchar curChar, jint reason);
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError *new_OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_initWithBoolean_withInt_withInt_withInt_withNSString_withChar_withInt_(jboolean EOFSeen, jint lexState, jint errorLine, jint errorColumn, NSString *errorAfter, jchar curChar, jint reason) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError *create_OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_initWithBoolean_withInt_withInt_withInt_withNSString_withChar_withInt_(jboolean EOFSeen, jint lexState, jint errorLine, jint errorColumn, NSString *errorAfter, jchar curChar, jint reason);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError")

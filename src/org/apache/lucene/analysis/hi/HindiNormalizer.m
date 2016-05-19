@@ -144,7 +144,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "normalizeWithCharArray:withInt:", "normalize", "I", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "HindiNormalizer", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisHiHindiNormalizer = { 2, "HindiNormalizer", "org.apache.lucene.analysis.hi", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisHiHindiNormalizer;
@@ -157,9 +157,11 @@ void OrgApacheLuceneAnalysisHiHindiNormalizer_init(OrgApacheLuceneAnalysisHiHind
 }
 
 OrgApacheLuceneAnalysisHiHindiNormalizer *new_OrgApacheLuceneAnalysisHiHindiNormalizer_init() {
-  OrgApacheLuceneAnalysisHiHindiNormalizer *self = [OrgApacheLuceneAnalysisHiHindiNormalizer alloc];
-  OrgApacheLuceneAnalysisHiHindiNormalizer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisHiHindiNormalizer, init)
+}
+
+OrgApacheLuceneAnalysisHiHindiNormalizer *create_OrgApacheLuceneAnalysisHiHindiNormalizer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisHiHindiNormalizer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisHiHindiNormalizer)

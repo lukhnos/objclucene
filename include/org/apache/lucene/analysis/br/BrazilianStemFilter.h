@@ -5,27 +5,40 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisBrBrazilianStemFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisBrBrazilianStemFilter_RESTRICT
-#define OrgApacheLuceneAnalysisBrBrazilianStemFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisBrBrazilianStemFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisBrBrazilianStemFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisBrBrazilianStemFilter 0
 #else
-#define OrgApacheLuceneAnalysisBrBrazilianStemFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisBrBrazilianStemFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisBrBrazilianStemFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisBrBrazilianStemFilter
 
-#if !defined (_OrgApacheLuceneAnalysisBrBrazilianStemFilter_) && (OrgApacheLuceneAnalysisBrBrazilianStemFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisBrBrazilianStemFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisBrBrazilianStemFilter_
+#if !defined (OrgApacheLuceneAnalysisBrBrazilianStemFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisBrBrazilianStemFilter || defined(INCLUDE_OrgApacheLuceneAnalysisBrBrazilianStemFilter))
+#define OrgApacheLuceneAnalysisBrBrazilianStemFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief A <code>TokenFilter</code> that applies <code>BrazilianStemmer</code>.
+ <p>
+ To prevent terms from being stemmed use an instance of
+ <code>SetKeywordMarkerFilter</code> or a custom <code>TokenFilter</code> that sets
+ the <code>KeywordAttribute</code> before this <code>TokenStream</code>.
+ </p>
+ - seealso: SetKeywordMarkerFilter
+ */
 @interface OrgApacheLuceneAnalysisBrBrazilianStemFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new BrazilianStemFilter
+ @param inArg the source <code>TokenStream</code>
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
 
 - (jboolean)incrementToken;
@@ -38,8 +51,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisBrBrazilianStemFilter_initWithOrgA
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisBrBrazilianStemFilter *new_OrgApacheLuceneAnalysisBrBrazilianStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisBrBrazilianStemFilter *create_OrgApacheLuceneAnalysisBrBrazilianStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisBrBrazilianStemFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisBrBrazilianStemFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisBrBrazilianStemFilter")

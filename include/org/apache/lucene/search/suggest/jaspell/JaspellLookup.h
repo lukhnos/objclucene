@@ -5,25 +5,26 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSuggestJaspellJaspellLookup_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSuggestJaspellJaspellLookup_RESTRICT
-#define OrgApacheLuceneSearchSuggestJaspellJaspellLookup_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestJaspellJaspellLookup")
+#ifdef RESTRICT_OrgApacheLuceneSearchSuggestJaspellJaspellLookup
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestJaspellJaspellLookup 0
 #else
-#define OrgApacheLuceneSearchSuggestJaspellJaspellLookup_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestJaspellJaspellLookup 1
 #endif
-#undef OrgApacheLuceneSearchSuggestJaspellJaspellLookup_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSuggestJaspellJaspellLookup
 
-#if !defined (_OrgApacheLuceneSearchSuggestJaspellJaspellLookup_) && (OrgApacheLuceneSearchSuggestJaspellJaspellLookup_INCLUDE_ALL || OrgApacheLuceneSearchSuggestJaspellJaspellLookup_INCLUDE)
-#define _OrgApacheLuceneSearchSuggestJaspellJaspellLookup_
+#if !defined (OrgApacheLuceneSearchSuggestJaspellJaspellLookup_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestJaspellJaspellLookup || defined(INCLUDE_OrgApacheLuceneSearchSuggestJaspellJaspellLookup))
+#define OrgApacheLuceneSearchSuggestJaspellJaspellLookup_
 
-#define OrgApacheLuceneSearchSuggestLookup_RESTRICT 1
-#define OrgApacheLuceneSearchSuggestLookup_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSuggestLookup 1
+#define INCLUDE_OrgApacheLuceneSearchSuggestLookup 1
 #include "org/apache/lucene/search/suggest/Lookup.h"
 
-#define OrgApacheLuceneUtilAccountable_RESTRICT 1
-#define OrgApacheLuceneUtilAccountable_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAccountable 1
+#define INCLUDE_OrgApacheLuceneUtilAccountable 1
 #include "org/apache/lucene/util/Accountable.h"
 
+@class IOSObjectArray;
 @class OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie;
 @class OrgApacheLuceneStoreDataInput;
 @class OrgApacheLuceneStoreDataOutput;
@@ -32,6 +33,11 @@
 @protocol JavaUtilSet;
 @protocol OrgApacheLuceneSearchSuggestInputIterator;
 
+/*!
+ @brief Suggest implementation based on 
+ <a href="http://jaspell.sourceforge.net/">JaSpell</a>.
+ - seealso: JaspellTernarySearchTrie
+ */
 @interface OrgApacheLuceneSearchSuggestJaspellJaspellLookup : OrgApacheLuceneSearchSuggestLookup < OrgApacheLuceneUtilAccountable > {
  @public
   OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie *trie_;
@@ -39,13 +45,27 @@
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new empty trie
+ - seealso: #build(InputIterator)
+ */
 - (instancetype)init;
 
+/*!
+ @brief Adds a new node if <code>key</code> already exists,
+ otherwise replaces its value.
+ <p>
+ This method always returns false.
+ */
 - (jboolean)addWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
                                  withId:(id)value;
 
 - (void)buildWithOrgApacheLuceneSearchSuggestInputIterator:(id<OrgApacheLuceneSearchSuggestInputIterator>)iterator;
 
+/*!
+ @brief Returns the value for the specified key, or null
+ if the key does not exist.
+ */
 - (id)getWithJavaLangCharSequence:(id<JavaLangCharSequence>)key;
 
 - (jlong)getCount;
@@ -71,8 +91,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestJaspellJaspellLookup_init(Org
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestJaspellJaspellLookup *new_OrgApacheLuceneSearchSuggestJaspellJaspellLookup_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestJaspellJaspellLookup *create_OrgApacheLuceneSearchSuggestJaspellJaspellLookup_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestJaspellJaspellLookup)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSuggestJaspellJaspellLookup_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestJaspellJaspellLookup")

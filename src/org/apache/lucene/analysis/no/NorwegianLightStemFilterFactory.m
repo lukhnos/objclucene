@@ -28,12 +28,12 @@
 }
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  return [new_OrgApacheLuceneAnalysisNoNorwegianLightStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(input, flags_) autorelease];
+  return create_OrgApacheLuceneAnalysisNoNorwegianLightStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(input, flags_);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "NorwegianLightStemFilterFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "NorwegianLightStemFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenStream;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -58,17 +58,19 @@ void OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory_initWithJavaUtilMa
     self->flags_ = OrgApacheLuceneAnalysisNoNorwegianLightStemmer_BOKMAAL | OrgApacheLuceneAnalysisNoNorwegianLightStemmer_NYNORSK;
   }
   else {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$", @"invalid variant: ", variant)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$", @"invalid variant: ", variant));
   }
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory *new_OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory *self = [OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory alloc];
-  OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory *create_OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory)

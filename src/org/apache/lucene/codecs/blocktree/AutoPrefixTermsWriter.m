@@ -10,7 +10,6 @@
 #include "java/lang/Integer.h"
 #include "java/lang/Math.h"
 #include "java/lang/System.h"
-#include "java/lang/Throwable.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Collections.h"
 #include "java/util/List.h"
@@ -33,6 +32,9 @@
   id<JavaUtilList> pending_;
 }
 
+/*!
+ @brief Pushes the new term to the top of the stack, and writes new blocks.
+ */
 - (void)pushTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)text;
 
 - (void)savePrefixWithInt:(jint)prefixLength
@@ -51,6 +53,11 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsBlocktreeAutoPrefixTerm
 
 @interface OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm ()
 
+/*!
+ @brief Returns the leading term for this prefix term, e.g.
+ "foo" (for
+ the foo* prefix) or "foom" (for the foo[m-z]* case). 
+ */
 + (OrgApacheLuceneUtilBytesRef *)toBytesRefWithByteArray:(IOSByteArray *)prefix
                                                  withInt:(jint)floorLeadStart;
 
@@ -64,7 +71,7 @@ __attribute__((unused)) static OrgApacheLuceneUtilBytesRef *OrgApacheLuceneCodec
   OrgApacheLuceneUtilBytesRef *val$prefixRef_;
 }
 
-- (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
+- (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
 
 - (instancetype)initWithOrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm:(OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm *)outer$
                                                        withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)capture$0
@@ -80,6 +87,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTe
 __attribute__((unused)) static void OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_$1_initWithOrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_$1 *self, OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm *outer$, OrgApacheLuceneUtilBytesRef *capture$0, OrgApacheLuceneIndexTermsEnum *arg$0);
 
 __attribute__((unused)) static OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_$1 *new_OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_$1_initWithOrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm *outer$, OrgApacheLuceneUtilBytesRef *capture$0, OrgApacheLuceneIndexTermsEnum *arg$0) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_$1 *create_OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_$1_initWithOrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm *outer$, OrgApacheLuceneUtilBytesRef *capture$0, OrgApacheLuceneIndexTermsEnum *arg$0);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_$1)
 
@@ -106,38 +115,38 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_P
   jint lastSuffixLeadLabel = -2;
   jint start = [((id<JavaUtilList>) nil_chk(pending_)) size] - count;
   JreAssert((start >= 0), (@"org/apache/lucene/codecs/blocktree/AutoPrefixTermsWriter.java:287 condition failed: assert start >=0;"));
-  id o = [pending_ getWithInt:start];
+  id o = [((id<JavaUtilList>) nil_chk(pending_)) getWithInt:start];
   jboolean skippedEmptyStringSuffix = false;
   if ([o isKindOfClass:[IOSByteArray class]]) {
-    if (((IOSByteArray *) nil_chk(((IOSByteArray *) check_class_cast(o, [IOSByteArray class]))))->size_ == prefixLength) {
+    if (((IOSByteArray *) nil_chk(((IOSByteArray *) cast_chk(o, [IOSByteArray class]))))->size_ == prefixLength) {
       start++;
       count--;
       skippedEmptyStringSuffix = true;
     }
   }
   else {
-    OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm *prefix = (OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm *) check_class_cast(o, [OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm class]);
+    OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm *prefix = (OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm *) cast_chk(o, [OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm class]);
     if (((IOSByteArray *) nil_chk(((OrgApacheLuceneUtilBytesRef *) nil_chk(((OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm *) nil_chk(prefix))->term_))->bytes_))->size_ == prefixLength) {
       start++;
       count--;
       skippedEmptyStringSuffix = true;
     }
   }
-  jint end = [pending_ size];
+  jint end = [((id<JavaUtilList>) nil_chk(pending_)) size];
   jint nextBlockStart = start;
   jint nextFloorLeadLabel = -1;
   jint prefixCount = 0;
   OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm *lastPTEntry = nil;
   for (jint i = start; i < end; i++) {
     IOSByteArray *termBytes;
-    o = [pending_ getWithInt:i];
+    o = [((id<JavaUtilList>) nil_chk(pending_)) getWithInt:i];
     OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm *ptEntry;
     if ([o isKindOfClass:[IOSByteArray class]]) {
       ptEntry = nil;
-      termBytes = (IOSByteArray *) check_class_cast(o, [IOSByteArray class]);
+      termBytes = (IOSByteArray *) cast_chk(o, [IOSByteArray class]);
     }
     else {
-      ptEntry = (OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm *) check_class_cast(o, [OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm class]);
+      ptEntry = (OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm *) cast_chk(o, [OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm class]);
       termBytes = ((OrgApacheLuceneUtilBytesRef *) nil_chk(((OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm *) nil_chk(ptEntry))->term_))->bytes_;
       if (((IOSByteArray *) nil_chk(ptEntry->prefix_))->size_ != prefixLength) {
         JreAssert((ptEntry->prefix_->size_ > prefixLength), (@"org/apache/lucene/codecs/blocktree/AutoPrefixTermsWriter.java:329 condition failed: assert ptEntry.prefix.length > prefixLength;"));
@@ -189,10 +198,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_P
       prefixCount++;
     }
   }
-  [((id<JavaUtilList>) nil_chk([pending_ subListWithInt:[pending_ size] - count withInt:[pending_ size]])) clear];
+  [((id<JavaUtilList>) nil_chk([((id<JavaUtilList>) nil_chk(pending_)) subListWithInt:[pending_ size] - count withInt:[((id<JavaUtilList>) nil_chk(pending_)) size]])) clear];
   for (jint i = 0; i < prefixCount; i++) {
-    OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm *pt = [prefixes_ getWithInt:[((id<JavaUtilList>) nil_chk(prefixes_)) size] - (prefixCount - i)];
-    [pending_ addWithId:pt];
+    OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm *pt = [((id<JavaUtilList>) nil_chk(prefixes_)) getWithInt:[prefixes_ size] - (prefixCount - i)];
+    [((id<JavaUtilList>) nil_chk(pending_)) addWithId:pt];
   }
 }
 
@@ -238,8 +247,8 @@ NSString *OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_brToStringWithOrgA
   @try {
     return JreStrcat("$C@", [((OrgApacheLuceneUtilBytesRef *) nil_chk(b)) utf8ToString], ' ', b);
   }
-  @catch (JavaLangThrowable *t) {
-    return [((OrgApacheLuceneUtilBytesRef *) nil_chk(b)) description];
+  @catch (NSException *t) {
+    return [b description];
   }
 }
 
@@ -259,19 +268,21 @@ void OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_initWithOrgApacheLucene
     }
     OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_pushTermWithOrgApacheLuceneUtilBytesRef_(self, term);
   }
-  if ([self->pending_ size] > 1) {
-    OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_pushTermWithOrgApacheLuceneUtilBytesRef_(self, JreLoadStatic(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter, EMPTY_BYTES_REF_));
-    while ([self->pending_ size] >= minItemsInPrefix) {
-      [self savePrefixesWithInt:0 withInt:[self->pending_ size]];
+  if ([((id<JavaUtilList>) nil_chk(self->pending_)) size] > 1) {
+    OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_pushTermWithOrgApacheLuceneUtilBytesRef_(self, JreLoadStatic(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter, EMPTY_BYTES_REF));
+    while ([((id<JavaUtilList>) nil_chk(self->pending_)) size] >= minItemsInPrefix) {
+      [self savePrefixesWithInt:0 withInt:[((id<JavaUtilList>) nil_chk(self->pending_)) size]];
     }
   }
   JavaUtilCollections_sortWithJavaUtilList_(self->prefixes_);
 }
 
 OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter *new_OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_initWithOrgApacheLuceneIndexTerms_withInt_withInt_(OrgApacheLuceneIndexTerms *terms, jint minItemsInPrefix, jint maxItemsInPrefix) {
-  OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter *self = [OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter alloc];
-  OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_initWithOrgApacheLuceneIndexTerms_withInt_withInt_(self, terms, minItemsInPrefix, maxItemsInPrefix);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter, initWithOrgApacheLuceneIndexTerms_withInt_withInt_, terms, minItemsInPrefix, maxItemsInPrefix)
+}
+
+OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter *create_OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_initWithOrgApacheLuceneIndexTerms_withInt_withInt_(OrgApacheLuceneIndexTerms *terms, jint minItemsInPrefix, jint maxItemsInPrefix) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter, initWithOrgApacheLuceneIndexTerms_withInt_withInt_, terms, minItemsInPrefix, maxItemsInPrefix)
 }
 
 void OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_pushTermWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter *self, OrgApacheLuceneUtilBytesRef *text) {
@@ -284,7 +295,7 @@ void OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_pushTermWithOrgApacheLu
     jint prefixTopSize = [((id<JavaUtilList>) nil_chk(self->pending_)) size] - IOSIntArray_Get(nil_chk(self->prefixStarts_), i);
     while (prefixTopSize >= self->minItemsInPrefix_) {
       [self savePrefixesWithInt:i + 1 withInt:prefixTopSize];
-      prefixTopSize = [self->pending_ size] - IOSIntArray_Get(self->prefixStarts_, i);
+      prefixTopSize = [((id<JavaUtilList>) nil_chk(self->pending_)) size] - IOSIntArray_Get(nil_chk(self->prefixStarts_), i);
     }
   }
   if (((IOSIntArray *) nil_chk(self->prefixStarts_))->size_ < text->length_) {
@@ -306,7 +317,7 @@ void OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_savePrefixWithInt_withI
   JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_([((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(self->lastTerm_)) bytes], 0, prefix, 0, prefixLength);
   JreAssert((floorLeadStart != -1), (@"org/apache/lucene/codecs/blocktree/AutoPrefixTermsWriter.java:429 condition failed: assert floorLeadStart != -1;"));
   JreAssert((floorLeadEnd != -1), (@"org/apache/lucene/codecs/blocktree/AutoPrefixTermsWriter.java:430 condition failed: assert floorLeadEnd != -1;"));
-  OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm *pt = [new_OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_initWithByteArray_withInt_withInt_(prefix, floorLeadStart, floorLeadEnd) autorelease];
+  OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm *pt = create_OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_initWithByteArray_withInt_withInt_(prefix, floorLeadStart, floorLeadEnd);
   [((id<JavaUtilList>) nil_chk(self->prefixes_)) addWithId:pt];
 }
 
@@ -322,7 +333,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWr
 }
 
 - (NSString *)description {
-  NSString *s = OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_brToStringWithOrgApacheLuceneUtilBytesRef_([new_OrgApacheLuceneUtilBytesRef_initWithByteArray_(prefix_) autorelease]);
+  NSString *s = OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_brToStringWithOrgApacheLuceneUtilBytesRef_(create_OrgApacheLuceneUtilBytesRef_initWithByteArray_(prefix_));
   if (floorLeadStart_ == -2) {
     JreStrAppend(&s, "$$C", @"[-", JavaLangInteger_toHexStringWithInt_(floorLeadEnd_), ']');
   }
@@ -333,7 +344,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWr
 }
 
 - (jint)compareToWithId:(OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm *)other {
-  check_class_cast(other, [OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm class]);
+  cast_chk(other, [OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm class]);
   jint cmp = [((OrgApacheLuceneUtilBytesRef *) nil_chk(term_)) compareToWithId:((OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm *) nil_chk(other))->term_];
   if (cmp == 0) {
     if (((IOSByteArray *) nil_chk(prefix_))->size_ != other->prefix_->size_) {
@@ -354,8 +365,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWr
 }
 
 - (OrgApacheLuceneIndexTermsEnum *)getTermsEnumWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)inArg {
-  OrgApacheLuceneUtilBytesRef *prefixRef = [new_OrgApacheLuceneUtilBytesRef_initWithByteArray_(prefix_) autorelease];
-  return [new_OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_$1_initWithOrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneIndexTermsEnum_(self, prefixRef, inArg) autorelease];
+  OrgApacheLuceneUtilBytesRef *prefixRef = create_OrgApacheLuceneUtilBytesRef_initWithByteArray_(prefix_);
+  return create_OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_$1_initWithOrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneIndexTermsEnum_(self, prefixRef, inArg);
 }
 
 - (void)dealloc {
@@ -398,9 +409,11 @@ void OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_initWithByte
 }
 
 OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm *new_OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_initWithByteArray_withInt_withInt_(IOSByteArray *prefix, jint floorLeadStart, jint floorLeadEnd) {
-  OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm *self = [OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm alloc];
-  OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_initWithByteArray_withInt_withInt_(self, prefix, floorLeadStart, floorLeadEnd);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm, initWithByteArray_withInt_withInt_, prefix, floorLeadStart, floorLeadEnd)
+}
+
+OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm *create_OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_initWithByteArray_withInt_withInt_(IOSByteArray *prefix, jint floorLeadStart, jint floorLeadEnd) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm, initWithByteArray_withInt_withInt_, prefix, floorLeadStart, floorLeadEnd)
 }
 
 OrgApacheLuceneUtilBytesRef *OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_toBytesRefWithByteArray_withInt_(IOSByteArray *prefix, jint floorLeadStart) {
@@ -408,12 +421,12 @@ OrgApacheLuceneUtilBytesRef *OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter
   OrgApacheLuceneUtilBytesRef *br;
   if (floorLeadStart != -2) {
     JreAssert((floorLeadStart >= 0), (@"org/apache/lucene/codecs/blocktree/AutoPrefixTermsWriter.java:116 condition failed: assert floorLeadStart >= 0;"));
-    br = [new_OrgApacheLuceneUtilBytesRef_initWithInt_(((IOSByteArray *) nil_chk(prefix))->size_ + 1) autorelease];
+    br = create_OrgApacheLuceneUtilBytesRef_initWithInt_(((IOSByteArray *) nil_chk(prefix))->size_ + 1);
   }
   else {
-    br = [new_OrgApacheLuceneUtilBytesRef_initWithInt_(((IOSByteArray *) nil_chk(prefix))->size_) autorelease];
+    br = create_OrgApacheLuceneUtilBytesRef_initWithInt_(((IOSByteArray *) nil_chk(prefix))->size_);
   }
-  JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(prefix, 0, ((OrgApacheLuceneUtilBytesRef *) nil_chk(br))->bytes_, 0, ((IOSByteArray *) nil_chk(prefix))->size_);
+  JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(prefix, 0, br->bytes_, 0, prefix->size_);
   br->length_ = prefix->size_;
   if (floorLeadStart != -2) {
     JreAssert((floorLeadStart >= 0), (@"org/apache/lucene/codecs/blocktree/AutoPrefixTermsWriter.java:124 condition failed: assert floorLeadStart >= 0;"));
@@ -426,12 +439,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWr
 
 @implementation OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_$1
 
-- (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
+- (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
   if (OrgApacheLuceneUtilStringHelper_startsWithWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(term, val$prefixRef_) && (this$0_->floorLeadEnd_ == -1 || ((OrgApacheLuceneUtilBytesRef *) nil_chk(term))->length_ == ((OrgApacheLuceneUtilBytesRef *) nil_chk(val$prefixRef_))->length_ || (IOSByteArray_Get(nil_chk(term->bytes_), term->offset_ + val$prefixRef_->length_) & (jint) 0xff) <= this$0_->floorLeadEnd_)) {
-    return JreLoadStatic(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum, YES);
+    return JreLoadEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, YES);
   }
   else {
-    return JreLoadStatic(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum, END);
+    return JreLoadEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, END);
   }
 }
 
@@ -474,9 +487,11 @@ void OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_$1_initWithO
 }
 
 OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_$1 *new_OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_$1_initWithOrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm *outer$, OrgApacheLuceneUtilBytesRef *capture$0, OrgApacheLuceneIndexTermsEnum *arg$0) {
-  OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_$1 *self = [OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_$1 alloc];
-  OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_$1_initWithOrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneIndexTermsEnum_(self, outer$, capture$0, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_$1, initWithOrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneIndexTermsEnum_, outer$, capture$0, arg$0)
+}
+
+OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_$1 *create_OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_$1_initWithOrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm *outer$, OrgApacheLuceneUtilBytesRef *capture$0, OrgApacheLuceneIndexTermsEnum *arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_$1, initWithOrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneIndexTermsEnum_, outer$, capture$0, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_$1)

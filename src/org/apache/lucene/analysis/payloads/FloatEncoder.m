@@ -18,7 +18,7 @@
                                              withInt:(jint)length {
   jfloat payload = JavaLangFloat_parseFloatWithNSString_([NSString stringWithCharacters:buffer offset:offset length:length]);
   IOSByteArray *bytes = OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeFloatWithFloat_(payload);
-  OrgApacheLuceneUtilBytesRef *result = [new_OrgApacheLuceneUtilBytesRef_initWithByteArray_(bytes) autorelease];
+  OrgApacheLuceneUtilBytesRef *result = create_OrgApacheLuceneUtilBytesRef_initWithByteArray_(bytes);
   return result;
 }
 
@@ -32,7 +32,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "encodeWithCharArray:withInt:withInt:", "encode", "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "FloatEncoder", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPayloadsFloatEncoder = { 2, "FloatEncoder", "org.apache.lucene.analysis.payloads", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisPayloadsFloatEncoder;
@@ -45,9 +45,11 @@ void OrgApacheLuceneAnalysisPayloadsFloatEncoder_init(OrgApacheLuceneAnalysisPay
 }
 
 OrgApacheLuceneAnalysisPayloadsFloatEncoder *new_OrgApacheLuceneAnalysisPayloadsFloatEncoder_init() {
-  OrgApacheLuceneAnalysisPayloadsFloatEncoder *self = [OrgApacheLuceneAnalysisPayloadsFloatEncoder alloc];
-  OrgApacheLuceneAnalysisPayloadsFloatEncoder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPayloadsFloatEncoder, init)
+}
+
+OrgApacheLuceneAnalysisPayloadsFloatEncoder *create_OrgApacheLuceneAnalysisPayloadsFloatEncoder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPayloadsFloatEncoder, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisPayloadsFloatEncoder)

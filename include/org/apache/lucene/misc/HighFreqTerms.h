@@ -5,29 +5,40 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneMiscHighFreqTerms_INCLUDE_ALL")
-#if OrgApacheLuceneMiscHighFreqTerms_RESTRICT
-#define OrgApacheLuceneMiscHighFreqTerms_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneMiscHighFreqTerms")
+#ifdef RESTRICT_OrgApacheLuceneMiscHighFreqTerms
+#define INCLUDE_ALL_OrgApacheLuceneMiscHighFreqTerms 0
 #else
-#define OrgApacheLuceneMiscHighFreqTerms_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneMiscHighFreqTerms 1
 #endif
-#undef OrgApacheLuceneMiscHighFreqTerms_RESTRICT
+#undef RESTRICT_OrgApacheLuceneMiscHighFreqTerms
 
-#if !defined (_OrgApacheLuceneMiscHighFreqTerms_) && (OrgApacheLuceneMiscHighFreqTerms_INCLUDE_ALL || OrgApacheLuceneMiscHighFreqTerms_INCLUDE)
-#define _OrgApacheLuceneMiscHighFreqTerms_
+#if !defined (OrgApacheLuceneMiscHighFreqTerms_) && (INCLUDE_ALL_OrgApacheLuceneMiscHighFreqTerms || defined(INCLUDE_OrgApacheLuceneMiscHighFreqTerms))
+#define OrgApacheLuceneMiscHighFreqTerms_
 
 @class IOSObjectArray;
 @class OrgApacheLuceneIndexIndexReader;
 @protocol JavaUtilComparator;
 
-#define OrgApacheLuceneMiscHighFreqTerms_DEFAULT_NUMTERMS 100
-
+/*!
+ @brief <code>HighFreqTerms</code> class extracts the top n most frequent terms
+ (by document frequency) from an existing Lucene index and reports their
+ document frequency.
+ <p>
+ If the -t flag is given, both document frequency and total tf (total
+ number of occurrences) are reported, ordered by descending total tf.
+ */
 @interface OrgApacheLuceneMiscHighFreqTerms : NSObject
+
++ (jint)DEFAULT_NUMTERMS;
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @brief Returns TermStats[] ordered by the specified comparator
+ */
 + (IOSObjectArray *)getHighFreqTermsWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
                                                                 withInt:(jint)numTerms
                                                            withNSString:(NSString *)field
@@ -39,7 +50,9 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneMiscHighFreqTerms)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneMiscHighFreqTerms, DEFAULT_NUMTERMS, jint)
+inline jint OrgApacheLuceneMiscHighFreqTerms_get_DEFAULT_NUMTERMS();
+#define OrgApacheLuceneMiscHighFreqTerms_DEFAULT_NUMTERMS 100
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneMiscHighFreqTerms, DEFAULT_NUMTERMS, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneMiscHighFreqTerms_mainWithNSStringArray_(IOSObjectArray *args);
 
@@ -49,19 +62,24 @@ FOUNDATION_EXPORT void OrgApacheLuceneMiscHighFreqTerms_init(OrgApacheLuceneMisc
 
 FOUNDATION_EXPORT OrgApacheLuceneMiscHighFreqTerms *new_OrgApacheLuceneMiscHighFreqTerms_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneMiscHighFreqTerms *create_OrgApacheLuceneMiscHighFreqTerms_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneMiscHighFreqTerms)
 
 #endif
 
-#if !defined (_OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator_) && (OrgApacheLuceneMiscHighFreqTerms_INCLUDE_ALL || OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator_INCLUDE)
-#define _OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator_
+#if !defined (OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator_) && (INCLUDE_ALL_OrgApacheLuceneMiscHighFreqTerms || defined(INCLUDE_OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator))
+#define OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator_
 
-#define JavaUtilComparator_RESTRICT 1
-#define JavaUtilComparator_INCLUDE 1
+#define RESTRICT_JavaUtilComparator 1
+#define INCLUDE_JavaUtilComparator 1
 #include "java/util/Comparator.h"
 
 @class OrgApacheLuceneMiscTermStats;
 
+/*!
+ @brief Compares terms by docTermFreq
+ */
 @interface OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator : NSObject < JavaUtilComparator >
 
 #pragma mark Public
@@ -79,19 +97,24 @@ FOUNDATION_EXPORT void OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator_init(O
 
 FOUNDATION_EXPORT OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator *new_OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator *create_OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator)
 
 #endif
 
-#if !defined (_OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator_) && (OrgApacheLuceneMiscHighFreqTerms_INCLUDE_ALL || OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator_INCLUDE)
-#define _OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator_
+#if !defined (OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator_) && (INCLUDE_ALL_OrgApacheLuceneMiscHighFreqTerms || defined(INCLUDE_OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator))
+#define OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator_
 
-#define JavaUtilComparator_RESTRICT 1
-#define JavaUtilComparator_INCLUDE 1
+#define RESTRICT_JavaUtilComparator 1
+#define INCLUDE_JavaUtilComparator 1
 #include "java/util/Comparator.h"
 
 @class OrgApacheLuceneMiscTermStats;
 
+/*!
+ @brief Compares terms by totalTermFreq
+ */
 @interface OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator : NSObject < JavaUtilComparator >
 
 #pragma mark Public
@@ -109,21 +132,26 @@ FOUNDATION_EXPORT void OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator_
 
 FOUNDATION_EXPORT OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator *new_OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator *create_OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator)
 
 #endif
 
-#if !defined (_OrgApacheLuceneMiscHighFreqTerms_TermStatsQueue_) && (OrgApacheLuceneMiscHighFreqTerms_INCLUDE_ALL || OrgApacheLuceneMiscHighFreqTerms_TermStatsQueue_INCLUDE)
-#define _OrgApacheLuceneMiscHighFreqTerms_TermStatsQueue_
+#if !defined (OrgApacheLuceneMiscHighFreqTerms_TermStatsQueue_) && (INCLUDE_ALL_OrgApacheLuceneMiscHighFreqTerms || defined(INCLUDE_OrgApacheLuceneMiscHighFreqTerms_TermStatsQueue))
+#define OrgApacheLuceneMiscHighFreqTerms_TermStatsQueue_
 
-#define OrgApacheLuceneUtilPriorityQueue_RESTRICT 1
-#define OrgApacheLuceneUtilPriorityQueue_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilPriorityQueue 1
+#define INCLUDE_OrgApacheLuceneUtilPriorityQueue 1
 #include "org/apache/lucene/util/PriorityQueue.h"
 
 @class OrgApacheLuceneIndexTermsEnum;
 @class OrgApacheLuceneMiscTermStats;
 @protocol JavaUtilComparator;
 
+/*!
+ @brief Priority queue for TermStats objects
+ */
 @interface OrgApacheLuceneMiscHighFreqTerms_TermStatsQueue : OrgApacheLuceneUtilPriorityQueue {
  @public
   id<JavaUtilComparator> comparator_;
@@ -152,8 +180,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneMiscHighFreqTerms_TermStatsQueue_initWithI
 
 FOUNDATION_EXPORT OrgApacheLuceneMiscHighFreqTerms_TermStatsQueue *new_OrgApacheLuceneMiscHighFreqTerms_TermStatsQueue_initWithInt_withJavaUtilComparator_(jint size, id<JavaUtilComparator> comparator) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneMiscHighFreqTerms_TermStatsQueue *create_OrgApacheLuceneMiscHighFreqTerms_TermStatsQueue_initWithInt_withJavaUtilComparator_(jint size, id<JavaUtilComparator> comparator);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneMiscHighFreqTerms_TermStatsQueue)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneMiscHighFreqTerms_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneMiscHighFreqTerms")

@@ -4,6 +4,7 @@
 //
 
 #include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
@@ -12,6 +13,7 @@
 #include "java/lang/Error.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Math.h"
+#include "java/lang/annotation/Annotation.h"
 #include "java/util/Collections.h"
 #include "java/util/HashMap.h"
 #include "java/util/HashSet.h"
@@ -22,8 +24,6 @@
 #include "org/apache/lucene/store/DataInput.h"
 #include "org/apache/lucene/util/BitUtil.h"
 #include "org/lukhnos/portmobile/charset/StandardCharsets.h"
-
-#define OrgApacheLuceneStoreDataInput_SKIP_BUFFER_SIZE 1024
 
 @interface OrgApacheLuceneStoreDataInput () {
  @public
@@ -36,7 +36,9 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreDataInput, skipBuffer_, IOSByteArray *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneStoreDataInput, SKIP_BUFFER_SIZE, jint)
+inline jint OrgApacheLuceneStoreDataInput_get_SKIP_BUFFER_SIZE();
+#define OrgApacheLuceneStoreDataInput_SKIP_BUFFER_SIZE 1024
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneStoreDataInput, SKIP_BUFFER_SIZE, jint)
 
 __attribute__((unused)) static jlong OrgApacheLuceneStoreDataInput_readVLongWithBoolean_(OrgApacheLuceneStoreDataInput *self, jboolean allowNegative);
 
@@ -86,7 +88,7 @@ __attribute__((unused)) static jlong OrgApacheLuceneStoreDataInput_readVLongWith
   b = [self readByte];
   i |= JreLShift32((b & (jint) 0x0F), 28);
   if ((b & (jint) 0xF0) == 0) return i;
-  @throw [new_JavaIoIOException_initWithNSString_(@"Invalid vInt detected (too many bits)") autorelease];
+  @throw create_JavaIoIOException_initWithNSString_(@"Invalid vInt detected (too many bits)");
 }
 
 - (jint)readZInt {
@@ -113,20 +115,20 @@ __attribute__((unused)) static jlong OrgApacheLuceneStoreDataInput_readVLongWith
   jint length = [self readVInt];
   IOSByteArray *bytes = [IOSByteArray arrayWithLength:length];
   [self readBytesWithByteArray:bytes withInt:0 withInt:length];
-  return [NSString stringWithBytes:bytes offset:0 length:length charset:JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8_)];
+  return [NSString stringWithBytes:bytes offset:0 length:length charset:JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8)];
 }
 
 - (OrgApacheLuceneStoreDataInput *)clone {
   @try {
-    return (OrgApacheLuceneStoreDataInput *) check_class_cast([super clone], [OrgApacheLuceneStoreDataInput class]);
+    return (OrgApacheLuceneStoreDataInput *) cast_chk([super clone], [OrgApacheLuceneStoreDataInput class]);
   }
   @catch (JavaLangCloneNotSupportedException *e) {
-    @throw [new_JavaLangError_initWithNSString_(@"This cannot happen: Failing to clone DataInput") autorelease];
+    @throw create_JavaLangError_initWithNSString_(@"This cannot happen: Failing to clone DataInput");
   }
 }
 
 - (id<JavaUtilMap>)readStringStringMap {
-  id<JavaUtilMap> map = [new_JavaUtilHashMap_init() autorelease];
+  id<JavaUtilMap> map = create_JavaUtilHashMap_init();
   jint count = [self readInt];
   for (jint i = 0; i < count; i++) {
     NSString *key = [self readString];
@@ -145,7 +147,7 @@ __attribute__((unused)) static jlong OrgApacheLuceneStoreDataInput_readVLongWith
     return JavaUtilCollections_singletonMapWithId_withId_([self readString], [self readString]);
   }
   else {
-    id<JavaUtilMap> map = count > 10 ? [new_JavaUtilHashMap_init() autorelease] : [new_JavaUtilTreeMap_init() autorelease];
+    id<JavaUtilMap> map = count > 10 ? create_JavaUtilHashMap_init() : create_JavaUtilTreeMap_init();
     for (jint i = 0; i < count; i++) {
       NSString *key = [self readString];
       NSString *val = [self readString];
@@ -156,7 +158,7 @@ __attribute__((unused)) static jlong OrgApacheLuceneStoreDataInput_readVLongWith
 }
 
 - (id<JavaUtilSet>)readStringSet {
-  id<JavaUtilSet> set = [new_JavaUtilHashSet_init() autorelease];
+  id<JavaUtilSet> set = create_JavaUtilHashSet_init();
   jint count = [self readInt];
   for (jint i = 0; i < count; i++) {
     [set addWithId:[self readString]];
@@ -173,7 +175,7 @@ __attribute__((unused)) static jlong OrgApacheLuceneStoreDataInput_readVLongWith
     return JavaUtilCollections_singletonWithId_([self readString]);
   }
   else {
-    id<JavaUtilSet> set = count > 10 ? [new_JavaUtilHashSet_init() autorelease] : [new_JavaUtilTreeSet_init() autorelease];
+    id<JavaUtilSet> set = count > 10 ? create_JavaUtilHashSet_init() : create_JavaUtilTreeSet_init();
     for (jint i = 0; i < count; i++) {
       [set addWithId:[self readString]];
     }
@@ -183,12 +185,12 @@ __attribute__((unused)) static jlong OrgApacheLuceneStoreDataInput_readVLongWith
 
 - (void)skipBytesWithLong:(jlong)numBytes {
   if (numBytes < 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$J", @"numBytes must be >= 0, got ", numBytes)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$J", @"numBytes must be >= 0, got ", numBytes));
   }
   if (skipBuffer_ == nil) {
     JreStrongAssignAndConsume(&skipBuffer_, [IOSByteArray newArrayWithLength:OrgApacheLuceneStoreDataInput_SKIP_BUFFER_SIZE]);
   }
-  JreAssert((((IOSByteArray *) nil_chk(skipBuffer_))->size_ == OrgApacheLuceneStoreDataInput_SKIP_BUFFER_SIZE), (@"org/apache/lucene/store/DataInput.java:347 condition failed: assert skipBuffer.length == SKIP_BUFFER_SIZE;"));
+  JreAssert((skipBuffer_->size_ == OrgApacheLuceneStoreDataInput_SKIP_BUFFER_SIZE), (@"org/apache/lucene/store/DataInput.java:347 condition failed: assert skipBuffer.length == SKIP_BUFFER_SIZE;"));
   for (jlong skipped = 0; skipped < numBytes; ) {
     jint step = (jint) JavaLangMath_minWithLong_withLong_(OrgApacheLuceneStoreDataInput_SKIP_BUFFER_SIZE, numBytes - skipped);
     [self readBytesWithByteArray:skipBuffer_ withInt:0 withInt:step withBoolean:false];
@@ -203,6 +205,14 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
++ (IOSObjectArray *)__annotations_readStringStringMap {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
++ (IOSObjectArray *)__annotations_readStringSet {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
 - (void)dealloc {
   RELEASE_(skipBuffer_);
   [super dealloc];
@@ -210,14 +220,6 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (id)copyWithZone:(NSZone *)zone {
   return [[self clone] retain];
-}
-
-+ (IOSObjectArray *)__annotations_readStringStringMap {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_readStringSet {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -235,12 +237,12 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "readZLong", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
     { "readString", NULL, "Ljava.lang.String;", 0x1, "Ljava.io.IOException;", NULL },
     { "clone", NULL, "Lorg.apache.lucene.store.DataInput;", 0x1, NULL, NULL },
-    { "readStringStringMap", NULL, "Ljava.util.Map;", 0x1, "Ljava.io.IOException;", NULL },
-    { "readMapOfStrings", NULL, "Ljava.util.Map;", 0x1, "Ljava.io.IOException;", NULL },
-    { "readStringSet", NULL, "Ljava.util.Set;", 0x1, "Ljava.io.IOException;", NULL },
-    { "readSetOfStrings", NULL, "Ljava.util.Set;", 0x1, "Ljava.io.IOException;", NULL },
+    { "readStringStringMap", NULL, "Ljava.util.Map;", 0x1, "Ljava.io.IOException;", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;" },
+    { "readMapOfStrings", NULL, "Ljava.util.Map;", 0x1, "Ljava.io.IOException;", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;" },
+    { "readStringSet", NULL, "Ljava.util.Set;", 0x1, "Ljava.io.IOException;", "()Ljava/util/Set<Ljava/lang/String;>;" },
+    { "readSetOfStrings", NULL, "Ljava.util.Set;", 0x1, "Ljava.io.IOException;", "()Ljava/util/Set<Ljava/lang/String;>;" },
     { "skipBytesWithLong:", "skipBytes", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "DataInput", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "SKIP_BUFFER_SIZE", "SKIP_BUFFER_SIZE", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneStoreDataInput_SKIP_BUFFER_SIZE },
@@ -284,10 +286,10 @@ jlong OrgApacheLuceneStoreDataInput_readVLongWithBoolean_(OrgApacheLuceneStoreDa
     b = [self readByte];
     i |= JreLShift64((b & (jlong) 0x7FLL), 63);
     if (b == 0 || b == 1) return i;
-    @throw [new_JavaIoIOException_initWithNSString_(@"Invalid vLong detected (more than 64 bits)") autorelease];
+    @throw create_JavaIoIOException_initWithNSString_(@"Invalid vLong detected (more than 64 bits)");
   }
   else {
-    @throw [new_JavaIoIOException_initWithNSString_(@"Invalid vLong detected (negative values disallowed)") autorelease];
+    @throw create_JavaIoIOException_initWithNSString_(@"Invalid vLong detected (negative values disallowed)");
   }
 }
 

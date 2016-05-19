@@ -7,7 +7,6 @@
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
-#include "java/lang/Throwable.h"
 #include "java/util/HashSet.h"
 #include "java/util/Set.h"
 #include "org/apache/lucene/analysis/Analyzer.h"
@@ -20,10 +19,6 @@
 #include "org/apache/lucene/search/Query.h"
 #include "org/w3c/dom/Element.h"
 
-#define OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder_DEFAULT_MAX_QUERY_TERMS 20
-#define OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder_DEFAULT_MIN_TERM_FREQUENCY 1
-#define OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder_DEFAULT_PERCENT_TERMS_TO_MATCH 30.0f
-
 @interface OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder () {
  @public
   OrgApacheLuceneAnalysisAnalyzer *analyzer_;
@@ -35,11 +30,17 @@
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder, analyzer_, OrgApacheLuceneAnalysisAnalyzer *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder, defaultFieldNames_, IOSObjectArray *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder, DEFAULT_MAX_QUERY_TERMS, jint)
+inline jint OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder_get_DEFAULT_MAX_QUERY_TERMS();
+#define OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder_DEFAULT_MAX_QUERY_TERMS 20
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder, DEFAULT_MAX_QUERY_TERMS, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder, DEFAULT_MIN_TERM_FREQUENCY, jint)
+inline jint OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder_get_DEFAULT_MIN_TERM_FREQUENCY();
+#define OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder_DEFAULT_MIN_TERM_FREQUENCY 1
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder, DEFAULT_MIN_TERM_FREQUENCY, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder, DEFAULT_PERCENT_TERMS_TO_MATCH, jfloat)
+inline jfloat OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder_get_DEFAULT_PERCENT_TERMS_TO_MATCH();
+#define OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder_DEFAULT_PERCENT_TERMS_TO_MATCH 30.0f
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder, DEFAULT_PERCENT_TERMS_TO_MATCH, jfloat)
 
 @implementation OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder
 
@@ -52,8 +53,8 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBui
 - (OrgApacheLuceneSearchQuery *)getQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e {
   NSString *fieldsList = [((id<OrgW3cDomElement>) nil_chk(e)) getAttributeWithNSString:@"fieldNames"];
   IOSObjectArray *fields = defaultFieldNames_;
-  if ((fieldsList != nil) && (((jint) [((NSString *) nil_chk([fieldsList trim])) length]) > 0)) {
-    fields = [((NSString *) nil_chk([fieldsList trim])) split:@","];
+  if ((fieldsList != nil) && (((jint) [((NSString *) nil_chk([((NSString *) nil_chk(fieldsList)) trim])) length]) > 0)) {
+    fields = [((NSString *) nil_chk([((NSString *) nil_chk(fieldsList)) trim])) split:@","];
     for (jint i = 0; i < ((IOSObjectArray *) nil_chk(fields))->size_; i++) {
       IOSObjectArray_Set(fields, i, [((NSString *) nil_chk(IOSObjectArray_Get(fields, i))) trim]);
     }
@@ -61,16 +62,16 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBui
   NSString *stopWords = [e getAttributeWithNSString:@"stopWords"];
   id<JavaUtilSet> stopWordsSet = nil;
   if ((stopWords != nil) && (fields != nil)) {
-    stopWordsSet = [new_JavaUtilHashSet_init() autorelease];
+    stopWordsSet = create_JavaUtilHashSet_init();
     {
       IOSObjectArray *a__ = fields;
-      NSString * const *b__ = a__->buffer_;
+      NSString * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
       NSString * const *e__ = b__ + a__->size_;
       while (b__ < e__) {
         NSString *field = *b__++;
         @try {
           OrgApacheLuceneAnalysisTokenStream *ts = [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(analyzer_)) tokenStreamWithNSString:field withNSString:stopWords];
-          JavaLangThrowable *__primaryException1 = nil;
+          NSException *__primaryException1 = nil;
           @try {
             id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt = [((OrgApacheLuceneAnalysisTokenStream *) nil_chk(ts)) addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()];
             [ts reset];
@@ -79,7 +80,7 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBui
             }
             [ts end];
           }
-          @catch (JavaLangThrowable *e) {
+          @catch (NSException *e) {
             __primaryException1 = e;
             @throw e;
           }
@@ -88,8 +89,8 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBui
               if (__primaryException1 != nil) {
                 @try {
                   [ts close];
-                } @catch (JavaLangThrowable *e) {
-                  [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+                } @catch (NSException *e) {
+                  [__primaryException1 addSuppressedWithNSException:e];
                 }
               } else {
                 [ts close];
@@ -98,12 +99,12 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBui
           }
         }
         @catch (JavaIoIOException *ioe) {
-          @throw [new_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_(JreStrcat("$$C$", @"IoException parsing stop words list in ", [[self getClass] getName], ':', [((JavaIoIOException *) nil_chk(ioe)) getLocalizedMessage])) autorelease];
+          @throw create_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_(JreStrcat("$$C$", @"IoException parsing stop words list in ", [[self getClass] getName], ':', [((JavaIoIOException *) nil_chk(ioe)) getLocalizedMessage]));
         }
       }
     }
   }
-  OrgApacheLuceneQueriesMltMoreLikeThisQuery *mlt = [new_OrgApacheLuceneQueriesMltMoreLikeThisQuery_initWithNSString_withNSStringArray_withOrgApacheLuceneAnalysisAnalyzer_withNSString_(OrgApacheLuceneQueryparserXmlDOMUtils_getTextWithOrgW3cDomNode_(e), fields, analyzer_, IOSObjectArray_Get(nil_chk(fields), 0)) autorelease];
+  OrgApacheLuceneQueriesMltMoreLikeThisQuery *mlt = create_OrgApacheLuceneQueriesMltMoreLikeThisQuery_initWithNSString_withNSStringArray_withOrgApacheLuceneAnalysisAnalyzer_withNSString_(OrgApacheLuceneQueryparserXmlDOMUtils_getTextWithOrgW3cDomNode_(e), fields, analyzer_, IOSObjectArray_Get(nil_chk(fields), 0));
   [mlt setMaxQueryTermsWithInt:OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withInt_(e, @"maxQueryTerms", OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder_DEFAULT_MAX_QUERY_TERMS)];
   [mlt setMinTermFrequencyWithInt:OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withInt_(e, @"minTermFrequency", OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder_DEFAULT_MIN_TERM_FREQUENCY)];
   [mlt setPercentTermsToMatchWithFloat:OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withFloat_(e, @"percentTermsToMatch", OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder_DEFAULT_PERCENT_TERMS_TO_MATCH) / 100];
@@ -147,9 +148,11 @@ void OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder_initWithOrgApache
 }
 
 OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder *new_OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_withNSStringArray_(OrgApacheLuceneAnalysisAnalyzer *analyzer, IOSObjectArray *defaultFieldNames) {
-  OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder *self = [OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder alloc];
-  OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_withNSStringArray_(self, analyzer, defaultFieldNames);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder, initWithOrgApacheLuceneAnalysisAnalyzer_withNSStringArray_, analyzer, defaultFieldNames)
+}
+
+OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder *create_OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_withNSStringArray_(OrgApacheLuceneAnalysisAnalyzer *analyzer, IOSObjectArray *defaultFieldNames) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder, initWithOrgApacheLuceneAnalysisAnalyzer_withNSStringArray_, analyzer, defaultFieldNames)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder)

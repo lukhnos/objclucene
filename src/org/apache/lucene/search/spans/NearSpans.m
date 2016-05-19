@@ -24,7 +24,7 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSpansSpanNearQuery:withJavaUtilList:", "NearSpans", NULL, 0x0, NULL, NULL },
+    { "initWithOrgApacheLuceneSearchSpansSpanNearQuery:withJavaUtilList:", "NearSpans", NULL, 0x0, NULL, "(Lorg/apache/lucene/search/spans/SpanNearQuery;Ljava/util/List<Lorg/apache/lucene/search/spans/Spans;>;)V" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "query_", NULL, 0x10, "Lorg.apache.lucene.search.spans.SpanNearQuery;", NULL, NULL, .constantValue.asLong = 0 },

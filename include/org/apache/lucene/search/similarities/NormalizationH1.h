@@ -5,31 +5,52 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSimilaritiesNormalizationH1_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSimilaritiesNormalizationH1_RESTRICT
-#define OrgApacheLuceneSearchSimilaritiesNormalizationH1_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesNormalizationH1")
+#ifdef RESTRICT_OrgApacheLuceneSearchSimilaritiesNormalizationH1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesNormalizationH1 0
 #else
-#define OrgApacheLuceneSearchSimilaritiesNormalizationH1_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesNormalizationH1 1
 #endif
-#undef OrgApacheLuceneSearchSimilaritiesNormalizationH1_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSimilaritiesNormalizationH1
 
-#if !defined (_OrgApacheLuceneSearchSimilaritiesNormalizationH1_) && (OrgApacheLuceneSearchSimilaritiesNormalizationH1_INCLUDE_ALL || OrgApacheLuceneSearchSimilaritiesNormalizationH1_INCLUDE)
-#define _OrgApacheLuceneSearchSimilaritiesNormalizationH1_
+#if !defined (OrgApacheLuceneSearchSimilaritiesNormalizationH1_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesNormalizationH1 || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesNormalizationH1))
+#define OrgApacheLuceneSearchSimilaritiesNormalizationH1_
 
-#define OrgApacheLuceneSearchSimilaritiesNormalization_RESTRICT 1
-#define OrgApacheLuceneSearchSimilaritiesNormalization_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSimilaritiesNormalization 1
+#define INCLUDE_OrgApacheLuceneSearchSimilaritiesNormalization 1
 #include "org/apache/lucene/search/similarities/Normalization.h"
 
 @class OrgApacheLuceneSearchSimilaritiesBasicStats;
 
+/*!
+ @brief Normalization model that assumes a uniform distribution of the term frequency.
+ <p>While this model is parameterless in the
+ <a href="http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.101.742">
+ original article</a>, <a href="http://dl.acm.org/citation.cfm?id=1835490">
+ information-based models</a> (see <code>IBSimilarity</code>) introduced a
+ multiplying factor.
+ The default value for the <code>c</code> parameter is <code>1</code>.</p>
+ */
 @interface OrgApacheLuceneSearchSimilaritiesNormalizationH1 : OrgApacheLuceneSearchSimilaritiesNormalization
 
 #pragma mark Public
 
+/*!
+ @brief Calls <code>NormalizationH1(1)</code>
+ */
 - (instancetype)init;
 
+/*!
+ @brief Creates NormalizationH1 with the supplied parameter <code>c</code>.
+ @param c hyper-parameter that controls the term frequency 
+ normalization with respect to the document length.
+ */
 - (instancetype)initWithFloat:(jfloat)c;
 
+/*!
+ @brief Returns the <code>c</code> parameter.
+ - seealso: #NormalizationH1(float)
+ */
 - (jfloat)getC;
 
 - (jfloat)tfnWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
@@ -46,12 +67,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesNormalizationH1_initWith
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesNormalizationH1 *new_OrgApacheLuceneSearchSimilaritiesNormalizationH1_initWithFloat_(jfloat c) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesNormalizationH1 *create_OrgApacheLuceneSearchSimilaritiesNormalizationH1_initWithFloat_(jfloat c);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesNormalizationH1_init(OrgApacheLuceneSearchSimilaritiesNormalizationH1 *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesNormalizationH1 *new_OrgApacheLuceneSearchSimilaritiesNormalizationH1_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesNormalizationH1 *create_OrgApacheLuceneSearchSimilaritiesNormalizationH1_init();
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesNormalizationH1)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSimilaritiesNormalizationH1_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesNormalizationH1")

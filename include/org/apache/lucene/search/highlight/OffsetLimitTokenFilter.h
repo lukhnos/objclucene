@@ -5,23 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter_INCLUDE_ALL")
-#if OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter_RESTRICT
-#define OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter")
+#ifdef RESTRICT_OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter
+#define INCLUDE_ALL_OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter 0
 #else
-#define OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter 1
 #endif
-#undef OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter
 
-#if !defined (_OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter_) && (OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter_INCLUDE_ALL || OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter_INCLUDE)
-#define _OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter_
+#if !defined (OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter || defined(INCLUDE_OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter))
+#define OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief This TokenFilter limits the number of tokens while indexing by adding up the
+ current offset.
+ */
 @interface OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
@@ -41,8 +45,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter_init
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter *new_OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(OrgApacheLuceneAnalysisTokenStream *input, jint offsetLimit) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter *create_OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(OrgApacheLuceneAnalysisTokenStream *input, jint offsetLimit);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter")

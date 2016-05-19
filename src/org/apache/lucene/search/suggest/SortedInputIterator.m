@@ -39,6 +39,9 @@
   OrgApacheLuceneUtilBytesRefBuilder *scratch_;
   OrgApacheLuceneUtilBytesRef *payload_;
   id<JavaUtilSet> contexts_;
+  /*!
+   @brief Sortes by BytesRef (ascending) then cost (ascending).
+   */
   id<JavaUtilComparator> tieBreakByCostComparator_;
 }
 
@@ -88,6 +91,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSuggestSortedInputItera
 
 __attribute__((unused)) static OrgApacheLuceneSearchSuggestSortedInputIterator_$1 *new_OrgApacheLuceneSearchSuggestSortedInputIterator_$1_initWithOrgApacheLuceneSearchSuggestSortedInputIterator_(OrgApacheLuceneSearchSuggestSortedInputIterator *outer$) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchSuggestSortedInputIterator_$1 *create_OrgApacheLuceneSearchSuggestSortedInputIterator_$1_initWithOrgApacheLuceneSearchSuggestSortedInputIterator_(OrgApacheLuceneSearchSuggestSortedInputIterator *outer$);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestSortedInputIterator_$1)
 
 @implementation OrgApacheLuceneSearchSuggestSortedInputIterator
@@ -109,7 +114,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestSortedInputIterator_$1)
     return nil;
   }
   @try {
-    OrgApacheLuceneStoreByteArrayDataInput *input = [new_OrgApacheLuceneStoreByteArrayDataInput_init() autorelease];
+    OrgApacheLuceneStoreByteArrayDataInput *input = create_OrgApacheLuceneStoreByteArrayDataInput_init();
     if ([((OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *) nil_chk(reader_)) readWithOrgApacheLuceneUtilBytesRefBuilder:scratch_]) {
       OrgApacheLuceneUtilBytesRef *bytes = [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(scratch_)) get];
       weight_ = [self decodeWithOrgApacheLuceneUtilBytesRef:bytes withOrgApacheLuceneStoreByteArrayDataInput:input];
@@ -213,13 +218,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestSortedInputIterator_$1)
   [tmpInput skipBytesWithLong:scratch->length_ - 2];
   jshort ctxSetSize = [tmpInput readShort];
   scratch->length_ -= 2;
-  id<JavaUtilSet> contextSet = [new_JavaUtilHashSet_init() autorelease];
+  id<JavaUtilSet> contextSet = create_JavaUtilHashSet_init();
   for (jshort i = 0; i < ctxSetSize; i++) {
     [tmpInput setPositionWithInt:scratch->length_ - 2];
     jshort curContextLength = [tmpInput readShort];
     scratch->length_ -= 2;
     [tmpInput setPositionWithInt:scratch->length_ - curContextLength];
-    OrgApacheLuceneUtilBytesRef *contextSpare = [new_OrgApacheLuceneUtilBytesRef_initWithInt_(curContextLength) autorelease];
+    OrgApacheLuceneUtilBytesRef *contextSpare = create_OrgApacheLuceneUtilBytesRef_initWithInt_(curContextLength);
     [tmpInput readBytesWithByteArray:contextSpare->bytes_ withInt:0 withInt:curContextLength];
     contextSpare->length_ = curContextLength;
     [contextSet addWithId:contextSpare];
@@ -234,7 +239,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestSortedInputIterator_$1)
   [tmpInput skipBytesWithLong:scratch->length_ - 2];
   jshort payloadLength = [tmpInput readShort];
   [tmpInput setPositionWithInt:scratch->length_ - 2 - payloadLength];
-  OrgApacheLuceneUtilBytesRef *payloadScratch = [new_OrgApacheLuceneUtilBytesRef_initWithInt_(payloadLength) autorelease];
+  OrgApacheLuceneUtilBytesRef *payloadScratch = create_OrgApacheLuceneUtilBytesRef_initWithInt_(payloadLength);
   [tmpInput readBytesWithByteArray:payloadScratch->bytes_ withInt:0 withInt:payloadLength];
   payloadScratch->length_ = payloadLength;
   scratch->length_ -= 2;
@@ -258,18 +263,18 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestSortedInputIterator_$1)
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneSearchSuggestInputIterator:", "SortedInputIterator", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneSearchSuggestInputIterator:withJavaUtilComparator:", "SortedInputIterator", NULL, 0x1, "Ljava.io.IOException;", NULL },
+    { "initWithOrgApacheLuceneSearchSuggestInputIterator:withJavaUtilComparator:", "SortedInputIterator", NULL, 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/search/suggest/InputIterator;Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;)V" },
     { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
     { "weight", NULL, "J", 0x1, NULL, NULL },
     { "payload", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
     { "hasPayloads", NULL, "Z", 0x1, NULL, NULL },
-    { "contexts", NULL, "Ljava.util.Set;", 0x1, NULL, NULL },
+    { "contexts", NULL, "Ljava.util.Set;", 0x1, NULL, "()Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;" },
     { "hasContexts", NULL, "Z", 0x1, NULL, NULL },
     { "sort", NULL, "Lorg.apache.lucene.util.OfflineSorter$ByteSequencesReader;", 0x2, "Ljava.io.IOException;", NULL },
     { "close", NULL, "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "encodeWithOrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter:withOrgApacheLuceneStoreByteArrayDataOutput:withByteArray:withOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:withJavaUtilSet:withLong:", "encode", "V", 0x4, "Ljava.io.IOException;", NULL },
+    { "encodeWithOrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter:withOrgApacheLuceneStoreByteArrayDataOutput:withByteArray:withOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:withJavaUtilSet:withLong:", "encode", "V", 0x4, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/OfflineSorter$ByteSequencesWriter;Lorg/apache/lucene/store/ByteArrayDataOutput;[BLorg/apache/lucene/util/BytesRef;Lorg/apache/lucene/util/BytesRef;Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;J)V" },
     { "decodeWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneStoreByteArrayDataInput:", "decode", "J", 0x4, NULL, NULL },
-    { "decodeContextsWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneStoreByteArrayDataInput:", "decodeContexts", "Ljava.util.Set;", 0x4, NULL, NULL },
+    { "decodeContextsWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneStoreByteArrayDataInput:", "decodeContexts", "Ljava.util.Set;", 0x4, NULL, "(Lorg/apache/lucene/util/BytesRef;Lorg/apache/lucene/store/ByteArrayDataInput;)Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;" },
     { "decodePayloadWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneStoreByteArrayDataInput:", "decodePayload", "Lorg.apache.lucene.util.BytesRef;", 0x4, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -298,9 +303,11 @@ void OrgApacheLuceneSearchSuggestSortedInputIterator_initWithOrgApacheLuceneSear
 }
 
 OrgApacheLuceneSearchSuggestSortedInputIterator *new_OrgApacheLuceneSearchSuggestSortedInputIterator_initWithOrgApacheLuceneSearchSuggestInputIterator_(id<OrgApacheLuceneSearchSuggestInputIterator> source) {
-  OrgApacheLuceneSearchSuggestSortedInputIterator *self = [OrgApacheLuceneSearchSuggestSortedInputIterator alloc];
-  OrgApacheLuceneSearchSuggestSortedInputIterator_initWithOrgApacheLuceneSearchSuggestInputIterator_(self, source);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestSortedInputIterator, initWithOrgApacheLuceneSearchSuggestInputIterator_, source)
+}
+
+OrgApacheLuceneSearchSuggestSortedInputIterator *create_OrgApacheLuceneSearchSuggestSortedInputIterator_initWithOrgApacheLuceneSearchSuggestInputIterator_(id<OrgApacheLuceneSearchSuggestInputIterator> source) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestSortedInputIterator, initWithOrgApacheLuceneSearchSuggestInputIterator_, source)
 }
 
 void OrgApacheLuceneSearchSuggestSortedInputIterator_initWithOrgApacheLuceneSearchSuggestInputIterator_withJavaUtilComparator_(OrgApacheLuceneSearchSuggestSortedInputIterator *self, id<OrgApacheLuceneSearchSuggestInputIterator> source, id<JavaUtilComparator> comparator) {
@@ -318,9 +325,11 @@ void OrgApacheLuceneSearchSuggestSortedInputIterator_initWithOrgApacheLuceneSear
 }
 
 OrgApacheLuceneSearchSuggestSortedInputIterator *new_OrgApacheLuceneSearchSuggestSortedInputIterator_initWithOrgApacheLuceneSearchSuggestInputIterator_withJavaUtilComparator_(id<OrgApacheLuceneSearchSuggestInputIterator> source, id<JavaUtilComparator> comparator) {
-  OrgApacheLuceneSearchSuggestSortedInputIterator *self = [OrgApacheLuceneSearchSuggestSortedInputIterator alloc];
-  OrgApacheLuceneSearchSuggestSortedInputIterator_initWithOrgApacheLuceneSearchSuggestInputIterator_withJavaUtilComparator_(self, source, comparator);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestSortedInputIterator, initWithOrgApacheLuceneSearchSuggestInputIterator_withJavaUtilComparator_, source, comparator)
+}
+
+OrgApacheLuceneSearchSuggestSortedInputIterator *create_OrgApacheLuceneSearchSuggestSortedInputIterator_initWithOrgApacheLuceneSearchSuggestInputIterator_withJavaUtilComparator_(id<OrgApacheLuceneSearchSuggestInputIterator> source, id<JavaUtilComparator> comparator) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestSortedInputIterator, initWithOrgApacheLuceneSearchSuggestInputIterator_withJavaUtilComparator_, source, comparator)
 }
 
 OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *OrgApacheLuceneSearchSuggestSortedInputIterator_sort(OrgApacheLuceneSearchSuggestSortedInputIterator *self) {
@@ -328,18 +337,18 @@ OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *OrgApacheLuceneSearchSugge
   OrgLukhnosPortmobileFilePath *directory = OrgApacheLuceneUtilOfflineSorter_defaultTempDir();
   JreStrongAssign(&self->tempInput_, OrgLukhnosPortmobileFileFiles_createTempFileWithOrgLukhnosPortmobileFilePath_withNSString_withNSString_(directory, prefix, @".input"));
   JreStrongAssign(&self->tempSorted_, OrgLukhnosPortmobileFileFiles_createTempFileWithOrgLukhnosPortmobileFilePath_withNSString_withNSString_(directory, prefix, @".sorted"));
-  OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter *writer = [new_OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter_initWithOrgLukhnosPortmobileFilePath_(self->tempInput_) autorelease];
+  OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter *writer = create_OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter_initWithOrgLukhnosPortmobileFilePath_(self->tempInput_);
   jboolean success = false;
   @try {
     OrgApacheLuceneUtilBytesRef *spare;
     IOSByteArray *buffer = [IOSByteArray arrayWithLength:0];
-    OrgApacheLuceneStoreByteArrayDataOutput *output = [new_OrgApacheLuceneStoreByteArrayDataOutput_initWithByteArray_(buffer) autorelease];
+    OrgApacheLuceneStoreByteArrayDataOutput *output = create_OrgApacheLuceneStoreByteArrayDataOutput_initWithByteArray_(buffer);
     while ((spare = [((id<OrgApacheLuceneSearchSuggestInputIterator>) nil_chk(self->source_)) next]) != nil) {
       [self encodeWithOrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter:writer withOrgApacheLuceneStoreByteArrayDataOutput:output withByteArray:buffer withOrgApacheLuceneUtilBytesRef:spare withOrgApacheLuceneUtilBytesRef:[self->source_ payload] withJavaUtilSet:[self->source_ contexts] withLong:[self->source_ weight]];
     }
     [writer close];
-    [((OrgApacheLuceneUtilOfflineSorter *) [new_OrgApacheLuceneUtilOfflineSorter_initWithJavaUtilComparator_(self->tieBreakByCostComparator_) autorelease]) sortWithOrgLukhnosPortmobileFilePath:self->tempInput_ withOrgLukhnosPortmobileFilePath:self->tempSorted_];
-    OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *reader = [new_OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_initWithOrgLukhnosPortmobileFilePath_(self->tempSorted_) autorelease];
+    [create_OrgApacheLuceneUtilOfflineSorter_initWithJavaUtilComparator_(self->tieBreakByCostComparator_) sortWithOrgLukhnosPortmobileFilePath:self->tempInput_ withOrgLukhnosPortmobileFilePath:self->tempSorted_];
+    OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *reader = create_OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_initWithOrgLukhnosPortmobileFilePath_(self->tempSorted_);
     success = true;
     return reader;
   }
@@ -442,9 +451,11 @@ void OrgApacheLuceneSearchSuggestSortedInputIterator_$1_initWithOrgApacheLuceneS
 }
 
 OrgApacheLuceneSearchSuggestSortedInputIterator_$1 *new_OrgApacheLuceneSearchSuggestSortedInputIterator_$1_initWithOrgApacheLuceneSearchSuggestSortedInputIterator_(OrgApacheLuceneSearchSuggestSortedInputIterator *outer$) {
-  OrgApacheLuceneSearchSuggestSortedInputIterator_$1 *self = [OrgApacheLuceneSearchSuggestSortedInputIterator_$1 alloc];
-  OrgApacheLuceneSearchSuggestSortedInputIterator_$1_initWithOrgApacheLuceneSearchSuggestSortedInputIterator_(self, outer$);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestSortedInputIterator_$1, initWithOrgApacheLuceneSearchSuggestSortedInputIterator_, outer$)
+}
+
+OrgApacheLuceneSearchSuggestSortedInputIterator_$1 *create_OrgApacheLuceneSearchSuggestSortedInputIterator_$1_initWithOrgApacheLuceneSearchSuggestSortedInputIterator_(OrgApacheLuceneSearchSuggestSortedInputIterator *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestSortedInputIterator_$1, initWithOrgApacheLuceneSearchSuggestSortedInputIterator_, outer$)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestSortedInputIterator_$1)

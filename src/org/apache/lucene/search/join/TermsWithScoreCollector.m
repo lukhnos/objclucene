@@ -23,15 +23,15 @@
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/BytesRefHash.h"
 
+inline jint OrgApacheLuceneSearchJoinTermsWithScoreCollector_get_INITIAL_ARRAY_SIZE();
 #define OrgApacheLuceneSearchJoinTermsWithScoreCollector_INITIAL_ARRAY_SIZE 0
-
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchJoinTermsWithScoreCollector, INITIAL_ARRAY_SIZE, jint)
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchJoinTermsWithScoreCollector, INITIAL_ARRAY_SIZE, jint)
 
 @implementation OrgApacheLuceneSearchJoinTermsWithScoreCollector
 
 - (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneSearchJoinScoreModeEnum:(OrgApacheLuceneSearchJoinScoreModeEnum *)scoreMode {
-  OrgApacheLuceneSearchJoinTermsWithScoreCollector_initWithNSString_withOrgApacheLuceneSearchJoinScoreModeEnum_(self, field, scoreMode);
+withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)scoreMode {
+  OrgApacheLuceneSearchJoinTermsWithScoreCollector_initWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(self, field, scoreMode);
   return self;
 }
 
@@ -49,8 +49,8 @@ withOrgApacheLuceneSearchJoinScoreModeEnum:(OrgApacheLuceneSearchJoinScoreModeEn
 
 + (OrgApacheLuceneSearchJoinTermsWithScoreCollector *)createWithNSString:(NSString *)field
                                                              withBoolean:(jboolean)multipleValuesPerDocument
-                              withOrgApacheLuceneSearchJoinScoreModeEnum:(OrgApacheLuceneSearchJoinScoreModeEnum *)scoreMode {
-  return OrgApacheLuceneSearchJoinTermsWithScoreCollector_createWithNSString_withBoolean_withOrgApacheLuceneSearchJoinScoreModeEnum_(field, multipleValuesPerDocument, scoreMode);
+                                  withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)scoreMode {
+  return OrgApacheLuceneSearchJoinTermsWithScoreCollector_createWithNSString_withBoolean_withOrgApacheLuceneSearchJoinScoreMode_(field, multipleValuesPerDocument, scoreMode);
 }
 
 - (jboolean)needsScores {
@@ -68,11 +68,11 @@ withOrgApacheLuceneSearchJoinScoreModeEnum:(OrgApacheLuceneSearchJoinScoreModeEn
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withOrgApacheLuceneSearchJoinScoreModeEnum:", "TermsWithScoreCollector", NULL, 0x0, NULL, NULL },
+    { "initWithNSString:withOrgApacheLuceneSearchJoinScoreMode:", "TermsWithScoreCollector", NULL, 0x0, NULL, NULL },
     { "getCollectedTerms", NULL, "Lorg.apache.lucene.util.BytesRefHash;", 0x1, NULL, NULL },
     { "getScoresPerTerm", NULL, "[F", 0x1, NULL, NULL },
     { "setScorerWithOrgApacheLuceneSearchScorer:", "setScorer", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "createWithNSString:withBoolean:withOrgApacheLuceneSearchJoinScoreModeEnum:", "create", "Lorg.apache.lucene.search.join.TermsWithScoreCollector;", 0x8, NULL, NULL },
+    { "createWithNSString:withBoolean:withOrgApacheLuceneSearchJoinScoreMode:", "create", "Lorg.apache.lucene.search.join.TermsWithScoreCollector;", 0x8, NULL, NULL },
     { "needsScores", NULL, "Z", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -90,36 +90,36 @@ withOrgApacheLuceneSearchJoinScoreModeEnum:(OrgApacheLuceneSearchJoinScoreModeEn
 
 @end
 
-void OrgApacheLuceneSearchJoinTermsWithScoreCollector_initWithNSString_withOrgApacheLuceneSearchJoinScoreModeEnum_(OrgApacheLuceneSearchJoinTermsWithScoreCollector *self, NSString *field, OrgApacheLuceneSearchJoinScoreModeEnum *scoreMode) {
+void OrgApacheLuceneSearchJoinTermsWithScoreCollector_initWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(OrgApacheLuceneSearchJoinTermsWithScoreCollector *self, NSString *field, OrgApacheLuceneSearchJoinScoreMode *scoreMode) {
   OrgApacheLuceneSearchSimpleCollector_init(self);
   JreStrongAssignAndConsume(&self->collectedTerms_, new_OrgApacheLuceneUtilBytesRefHash_init());
   JreStrongAssignAndConsume(&self->scoreSums_, [IOSFloatArray newArrayWithLength:OrgApacheLuceneSearchJoinTermsWithScoreCollector_INITIAL_ARRAY_SIZE]);
   JreStrongAssign(&self->field_, field);
   JreStrongAssign(&self->scoreMode_, scoreMode);
-  if (scoreMode == JreLoadStatic(OrgApacheLuceneSearchJoinScoreModeEnum, Min)) {
+  if (scoreMode == JreLoadEnum(OrgApacheLuceneSearchJoinScoreMode, Min)) {
     JavaUtilArrays_fillWithFloatArray_withFloat_(self->scoreSums_, JavaLangFloat_POSITIVE_INFINITY);
   }
-  else if (scoreMode == JreLoadStatic(OrgApacheLuceneSearchJoinScoreModeEnum, Max)) {
+  else if (scoreMode == JreLoadEnum(OrgApacheLuceneSearchJoinScoreMode, Max)) {
     JavaUtilArrays_fillWithFloatArray_withFloat_(self->scoreSums_, JavaLangFloat_NEGATIVE_INFINITY);
   }
 }
 
-OrgApacheLuceneSearchJoinTermsWithScoreCollector *OrgApacheLuceneSearchJoinTermsWithScoreCollector_createWithNSString_withBoolean_withOrgApacheLuceneSearchJoinScoreModeEnum_(NSString *field, jboolean multipleValuesPerDocument, OrgApacheLuceneSearchJoinScoreModeEnum *scoreMode) {
+OrgApacheLuceneSearchJoinTermsWithScoreCollector *OrgApacheLuceneSearchJoinTermsWithScoreCollector_createWithNSString_withBoolean_withOrgApacheLuceneSearchJoinScoreMode_(NSString *field, jboolean multipleValuesPerDocument, OrgApacheLuceneSearchJoinScoreMode *scoreMode) {
   OrgApacheLuceneSearchJoinTermsWithScoreCollector_initialize();
   if (multipleValuesPerDocument) {
     switch ([scoreMode ordinal]) {
-      case OrgApacheLuceneSearchJoinScoreMode_Avg:
-      return [new_OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_Avg_initWithNSString_(field) autorelease];
+      case OrgApacheLuceneSearchJoinScoreMode_Enum_Avg:
+      return create_OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_Avg_initWithNSString_(field);
       default:
-      return [new_OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_initWithNSString_withOrgApacheLuceneSearchJoinScoreModeEnum_(field, scoreMode) autorelease];
+      return create_OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_initWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(field, scoreMode);
     }
   }
   else {
     switch ([scoreMode ordinal]) {
-      case OrgApacheLuceneSearchJoinScoreMode_Avg:
-      return [new_OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_Avg_initWithNSString_(field) autorelease];
+      case OrgApacheLuceneSearchJoinScoreMode_Enum_Avg:
+      return create_OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_Avg_initWithNSString_(field);
       default:
-      return [new_OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_initWithNSString_withOrgApacheLuceneSearchJoinScoreModeEnum_(field, scoreMode) autorelease];
+      return create_OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_initWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(field, scoreMode);
     }
   }
 }
@@ -129,8 +129,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinTermsWithScoreCollecto
 @implementation OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV
 
 - (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneSearchJoinScoreModeEnum:(OrgApacheLuceneSearchJoinScoreModeEnum *)scoreMode {
-  OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_initWithNSString_withOrgApacheLuceneSearchJoinScoreModeEnum_(self, field, scoreMode);
+withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)scoreMode {
+  OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_initWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(self, field, scoreMode);
   return self;
 }
 
@@ -143,10 +143,10 @@ withOrgApacheLuceneSearchJoinScoreModeEnum:(OrgApacheLuceneSearchJoinScoreModeEn
     if (ord >= ((IOSFloatArray *) nil_chk(scoreSums_))->size_) {
       jint begin = scoreSums_->size_;
       JreStrongAssign(&scoreSums_, OrgApacheLuceneUtilArrayUtil_growWithFloatArray_(scoreSums_));
-      if (scoreMode_ == JreLoadStatic(OrgApacheLuceneSearchJoinScoreModeEnum, Min)) {
+      if (scoreMode_ == JreLoadEnum(OrgApacheLuceneSearchJoinScoreMode, Min)) {
         JavaUtilArrays_fillWithFloatArray_withInt_withInt_withFloat_(scoreSums_, begin, ((IOSFloatArray *) nil_chk(scoreSums_))->size_, JavaLangFloat_POSITIVE_INFINITY);
       }
-      else if (scoreMode_ == JreLoadStatic(OrgApacheLuceneSearchJoinScoreModeEnum, Max)) {
+      else if (scoreMode_ == JreLoadEnum(OrgApacheLuceneSearchJoinScoreMode, Max)) {
         JavaUtilArrays_fillWithFloatArray_withInt_withInt_withFloat_(scoreSums_, begin, ((IOSFloatArray *) nil_chk(scoreSums_))->size_, JavaLangFloat_NEGATIVE_INFINITY);
       }
     }
@@ -154,21 +154,21 @@ withOrgApacheLuceneSearchJoinScoreModeEnum:(OrgApacheLuceneSearchJoinScoreModeEn
   jfloat current = [((OrgApacheLuceneSearchScorer *) nil_chk(scorer_)) score];
   jfloat existing = IOSFloatArray_Get(nil_chk(scoreSums_), ord);
   if (JavaLangFloat_compareWithFloat_withFloat_(existing, 0.0f) == 0) {
-    *IOSFloatArray_GetRef(scoreSums_, ord) = current;
+    *IOSFloatArray_GetRef(nil_chk(scoreSums_), ord) = current;
   }
   else {
     switch ([scoreMode_ ordinal]) {
-      case OrgApacheLuceneSearchJoinScoreMode_Total:
-      *IOSFloatArray_GetRef(scoreSums_, ord) = IOSFloatArray_Get(scoreSums_, ord) + current;
+      case OrgApacheLuceneSearchJoinScoreMode_Enum_Total:
+      *IOSFloatArray_GetRef(nil_chk(scoreSums_), ord) = IOSFloatArray_Get(scoreSums_, ord) + current;
       break;
-      case OrgApacheLuceneSearchJoinScoreMode_Min:
+      case OrgApacheLuceneSearchJoinScoreMode_Enum_Min:
       if (current < existing) {
-        *IOSFloatArray_GetRef(scoreSums_, ord) = current;
+        *IOSFloatArray_GetRef(nil_chk(scoreSums_), ord) = current;
       }
       break;
-      case OrgApacheLuceneSearchJoinScoreMode_Max:
+      case OrgApacheLuceneSearchJoinScoreMode_Enum_Max:
       if (current > existing) {
-        *IOSFloatArray_GetRef(scoreSums_, ord) = current;
+        *IOSFloatArray_GetRef(nil_chk(scoreSums_), ord) = current;
       }
       break;
     }
@@ -186,7 +186,7 @@ withOrgApacheLuceneSearchJoinScoreModeEnum:(OrgApacheLuceneSearchJoinScoreModeEn
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withOrgApacheLuceneSearchJoinScoreModeEnum:", "SV", NULL, 0x0, NULL, NULL },
+    { "initWithNSString:withOrgApacheLuceneSearchJoinScoreMode:", "SV", NULL, 0x0, NULL, NULL },
     { "collectWithInt:", "collect", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "doSetNextReaderWithOrgApacheLuceneIndexLeafReaderContext:", "doSetNextReader", "V", 0x4, "Ljava.io.IOException;", NULL },
   };
@@ -200,14 +200,16 @@ withOrgApacheLuceneSearchJoinScoreModeEnum:(OrgApacheLuceneSearchJoinScoreModeEn
 
 @end
 
-void OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_initWithNSString_withOrgApacheLuceneSearchJoinScoreModeEnum_(OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV *self, NSString *field, OrgApacheLuceneSearchJoinScoreModeEnum *scoreMode) {
-  OrgApacheLuceneSearchJoinTermsWithScoreCollector_initWithNSString_withOrgApacheLuceneSearchJoinScoreModeEnum_(self, field, scoreMode);
+void OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_initWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV *self, NSString *field, OrgApacheLuceneSearchJoinScoreMode *scoreMode) {
+  OrgApacheLuceneSearchJoinTermsWithScoreCollector_initWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(self, field, scoreMode);
 }
 
-OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV *new_OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_initWithNSString_withOrgApacheLuceneSearchJoinScoreModeEnum_(NSString *field, OrgApacheLuceneSearchJoinScoreModeEnum *scoreMode) {
-  OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV *self = [OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV alloc];
-  OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_initWithNSString_withOrgApacheLuceneSearchJoinScoreModeEnum_(self, field, scoreMode);
-  return self;
+OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV *new_OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_initWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(NSString *field, OrgApacheLuceneSearchJoinScoreMode *scoreMode) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV, initWithNSString_withOrgApacheLuceneSearchJoinScoreMode_, field, scoreMode)
+}
+
+OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV *create_OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_initWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(NSString *field, OrgApacheLuceneSearchJoinScoreMode *scoreMode) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV, initWithNSString_withOrgApacheLuceneSearchJoinScoreMode_, field, scoreMode)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV)
@@ -233,11 +235,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinTermsWithScoreCollecto
   jfloat current = [((OrgApacheLuceneSearchScorer *) nil_chk(scorer_)) score];
   jfloat existing = IOSFloatArray_Get(nil_chk(scoreSums_), ord);
   if (JavaLangFloat_compareWithFloat_withFloat_(existing, 0.0f) == 0) {
-    *IOSFloatArray_GetRef(scoreSums_, ord) = current;
+    *IOSFloatArray_GetRef(nil_chk(scoreSums_), ord) = current;
     *IOSIntArray_GetRef(nil_chk(scoreCounts_), ord) = 1;
   }
   else {
-    *IOSFloatArray_GetRef(scoreSums_, ord) = IOSFloatArray_Get(scoreSums_, ord) + current;
+    *IOSFloatArray_GetRef(nil_chk(scoreSums_), ord) = IOSFloatArray_Get(scoreSums_, ord) + current;
     (*IOSIntArray_GetRef(nil_chk(scoreCounts_), ord))++;
   }
 }
@@ -273,14 +275,16 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinTermsWithScoreCollecto
 @end
 
 void OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_Avg_initWithNSString_(OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_Avg *self, NSString *field) {
-  OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_initWithNSString_withOrgApacheLuceneSearchJoinScoreModeEnum_(self, field, JreLoadStatic(OrgApacheLuceneSearchJoinScoreModeEnum, Avg));
+  OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_initWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(self, field, JreLoadEnum(OrgApacheLuceneSearchJoinScoreMode, Avg));
   JreStrongAssignAndConsume(&self->scoreCounts_, [IOSIntArray newArrayWithLength:OrgApacheLuceneSearchJoinTermsWithScoreCollector_INITIAL_ARRAY_SIZE]);
 }
 
 OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_Avg *new_OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_Avg_initWithNSString_(NSString *field) {
-  OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_Avg *self = [OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_Avg alloc];
-  OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_Avg_initWithNSString_(self, field);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_Avg, initWithNSString_, field)
+}
+
+OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_Avg *create_OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_Avg_initWithNSString_(NSString *field) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_Avg, initWithNSString_, field)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinTermsWithScoreCollector_SV_Avg)
@@ -288,16 +292,16 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinTermsWithScoreCollecto
 @implementation OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV
 
 - (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneSearchJoinScoreModeEnum:(OrgApacheLuceneSearchJoinScoreModeEnum *)scoreMode {
-  OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_initWithNSString_withOrgApacheLuceneSearchJoinScoreModeEnum_(self, field, scoreMode);
+withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)scoreMode {
+  OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_initWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(self, field, scoreMode);
   return self;
 }
 
 - (void)collectWithInt:(jint)doc {
   [((OrgApacheLuceneIndexSortedSetDocValues *) nil_chk(fromDocTermOrds_)) setDocumentWithInt:doc];
   jlong ord;
-  while ((ord = [fromDocTermOrds_ nextOrd]) != OrgApacheLuceneIndexSortedSetDocValues_NO_MORE_ORDS) {
-    jint termID = [((OrgApacheLuceneUtilBytesRefHash *) nil_chk(collectedTerms_)) addWithOrgApacheLuceneUtilBytesRef:[fromDocTermOrds_ lookupOrdWithLong:ord]];
+  while ((ord = [((OrgApacheLuceneIndexSortedSetDocValues *) nil_chk(fromDocTermOrds_)) nextOrd]) != OrgApacheLuceneIndexSortedSetDocValues_NO_MORE_ORDS) {
+    jint termID = [((OrgApacheLuceneUtilBytesRefHash *) nil_chk(collectedTerms_)) addWithOrgApacheLuceneUtilBytesRef:[((OrgApacheLuceneIndexSortedSetDocValues *) nil_chk(fromDocTermOrds_)) lookupOrdWithLong:ord]];
     if (termID < 0) {
       termID = -termID - 1;
     }
@@ -305,22 +309,22 @@ withOrgApacheLuceneSearchJoinScoreModeEnum:(OrgApacheLuceneSearchJoinScoreModeEn
       if (termID >= ((IOSFloatArray *) nil_chk(scoreSums_))->size_) {
         jint begin = scoreSums_->size_;
         JreStrongAssign(&scoreSums_, OrgApacheLuceneUtilArrayUtil_growWithFloatArray_(scoreSums_));
-        if (scoreMode_ == JreLoadStatic(OrgApacheLuceneSearchJoinScoreModeEnum, Min)) {
+        if (scoreMode_ == JreLoadEnum(OrgApacheLuceneSearchJoinScoreMode, Min)) {
           JavaUtilArrays_fillWithFloatArray_withInt_withInt_withFloat_(scoreSums_, begin, ((IOSFloatArray *) nil_chk(scoreSums_))->size_, JavaLangFloat_POSITIVE_INFINITY);
         }
-        else if (scoreMode_ == JreLoadStatic(OrgApacheLuceneSearchJoinScoreModeEnum, Max)) {
+        else if (scoreMode_ == JreLoadEnum(OrgApacheLuceneSearchJoinScoreMode, Max)) {
           JavaUtilArrays_fillWithFloatArray_withInt_withInt_withFloat_(scoreSums_, begin, ((IOSFloatArray *) nil_chk(scoreSums_))->size_, JavaLangFloat_NEGATIVE_INFINITY);
         }
       }
     }
     switch ([scoreMode_ ordinal]) {
-      case OrgApacheLuceneSearchJoinScoreMode_Total:
+      case OrgApacheLuceneSearchJoinScoreMode_Enum_Total:
       JrePlusAssignFloatF(IOSFloatArray_GetRef(nil_chk(scoreSums_), termID), [((OrgApacheLuceneSearchScorer *) nil_chk(scorer_)) score]);
       break;
-      case OrgApacheLuceneSearchJoinScoreMode_Min:
+      case OrgApacheLuceneSearchJoinScoreMode_Enum_Min:
       *IOSFloatArray_GetRef(nil_chk(scoreSums_), termID) = JavaLangMath_minWithFloat_withFloat_(IOSFloatArray_Get(scoreSums_, termID), [((OrgApacheLuceneSearchScorer *) nil_chk(scorer_)) score]);
       break;
-      case OrgApacheLuceneSearchJoinScoreMode_Max:
+      case OrgApacheLuceneSearchJoinScoreMode_Enum_Max:
       *IOSFloatArray_GetRef(nil_chk(scoreSums_), termID) = JavaLangMath_maxWithFloat_withFloat_(IOSFloatArray_Get(scoreSums_, termID), [((OrgApacheLuceneSearchScorer *) nil_chk(scorer_)) score]);
       break;
     }
@@ -338,7 +342,7 @@ withOrgApacheLuceneSearchJoinScoreModeEnum:(OrgApacheLuceneSearchJoinScoreModeEn
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withOrgApacheLuceneSearchJoinScoreModeEnum:", "MV", NULL, 0x0, NULL, NULL },
+    { "initWithNSString:withOrgApacheLuceneSearchJoinScoreMode:", "MV", NULL, 0x0, NULL, NULL },
     { "collectWithInt:", "collect", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "doSetNextReaderWithOrgApacheLuceneIndexLeafReaderContext:", "doSetNextReader", "V", 0x4, "Ljava.io.IOException;", NULL },
   };
@@ -352,14 +356,16 @@ withOrgApacheLuceneSearchJoinScoreModeEnum:(OrgApacheLuceneSearchJoinScoreModeEn
 
 @end
 
-void OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_initWithNSString_withOrgApacheLuceneSearchJoinScoreModeEnum_(OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV *self, NSString *field, OrgApacheLuceneSearchJoinScoreModeEnum *scoreMode) {
-  OrgApacheLuceneSearchJoinTermsWithScoreCollector_initWithNSString_withOrgApacheLuceneSearchJoinScoreModeEnum_(self, field, scoreMode);
+void OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_initWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV *self, NSString *field, OrgApacheLuceneSearchJoinScoreMode *scoreMode) {
+  OrgApacheLuceneSearchJoinTermsWithScoreCollector_initWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(self, field, scoreMode);
 }
 
-OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV *new_OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_initWithNSString_withOrgApacheLuceneSearchJoinScoreModeEnum_(NSString *field, OrgApacheLuceneSearchJoinScoreModeEnum *scoreMode) {
-  OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV *self = [OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV alloc];
-  OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_initWithNSString_withOrgApacheLuceneSearchJoinScoreModeEnum_(self, field, scoreMode);
-  return self;
+OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV *new_OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_initWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(NSString *field, OrgApacheLuceneSearchJoinScoreMode *scoreMode) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV, initWithNSString_withOrgApacheLuceneSearchJoinScoreMode_, field, scoreMode)
+}
+
+OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV *create_OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_initWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(NSString *field, OrgApacheLuceneSearchJoinScoreMode *scoreMode) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV, initWithNSString_withOrgApacheLuceneSearchJoinScoreMode_, field, scoreMode)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV)
@@ -374,8 +380,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinTermsWithScoreCollecto
 - (void)collectWithInt:(jint)doc {
   [((OrgApacheLuceneIndexSortedSetDocValues *) nil_chk(fromDocTermOrds_)) setDocumentWithInt:doc];
   jlong ord;
-  while ((ord = [fromDocTermOrds_ nextOrd]) != OrgApacheLuceneIndexSortedSetDocValues_NO_MORE_ORDS) {
-    jint termID = [((OrgApacheLuceneUtilBytesRefHash *) nil_chk(collectedTerms_)) addWithOrgApacheLuceneUtilBytesRef:[fromDocTermOrds_ lookupOrdWithLong:ord]];
+  while ((ord = [((OrgApacheLuceneIndexSortedSetDocValues *) nil_chk(fromDocTermOrds_)) nextOrd]) != OrgApacheLuceneIndexSortedSetDocValues_NO_MORE_ORDS) {
+    jint termID = [((OrgApacheLuceneUtilBytesRefHash *) nil_chk(collectedTerms_)) addWithOrgApacheLuceneUtilBytesRef:[((OrgApacheLuceneIndexSortedSetDocValues *) nil_chk(fromDocTermOrds_)) lookupOrdWithLong:ord]];
     if (termID < 0) {
       termID = -termID - 1;
     }
@@ -421,14 +427,16 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinTermsWithScoreCollecto
 @end
 
 void OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_Avg_initWithNSString_(OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_Avg *self, NSString *field) {
-  OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_initWithNSString_withOrgApacheLuceneSearchJoinScoreModeEnum_(self, field, JreLoadStatic(OrgApacheLuceneSearchJoinScoreModeEnum, Avg));
+  OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_initWithNSString_withOrgApacheLuceneSearchJoinScoreMode_(self, field, JreLoadEnum(OrgApacheLuceneSearchJoinScoreMode, Avg));
   JreStrongAssignAndConsume(&self->scoreCounts_, [IOSIntArray newArrayWithLength:OrgApacheLuceneSearchJoinTermsWithScoreCollector_INITIAL_ARRAY_SIZE]);
 }
 
 OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_Avg *new_OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_Avg_initWithNSString_(NSString *field) {
-  OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_Avg *self = [OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_Avg alloc];
-  OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_Avg_initWithNSString_(self, field);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_Avg, initWithNSString_, field)
+}
+
+OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_Avg *create_OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_Avg_initWithNSString_(NSString *field) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_Avg, initWithNSString_, field)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinTermsWithScoreCollector_MV_Avg)

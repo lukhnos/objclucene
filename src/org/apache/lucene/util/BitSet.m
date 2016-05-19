@@ -4,10 +4,12 @@
 //
 
 #include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/IllegalStateException.h"
+#include "java/lang/annotation/Annotation.h"
 #include "java/util/Collection.h"
 #include "java/util/Collections.h"
 #include "java/util/List.h"
@@ -23,6 +25,9 @@
 
 @interface OrgApacheLuceneUtilBitSet ()
 
+/*!
+ @brief Performs a leap frog between this and the provided iterator in order to find common documents.
+ */
 - (void)leapFrogWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iter
            withOrgApacheLuceneUtilBitSet_LeapFrogCallBack:(OrgApacheLuceneUtilBitSet_LeapFrogCallBack *)callback;
 
@@ -70,6 +75,8 @@ __attribute__((unused)) static void OrgApacheLuceneUtilBitSet_$1_initWithOrgApac
 
 __attribute__((unused)) static OrgApacheLuceneUtilBitSet_$1 *new_OrgApacheLuceneUtilBitSet_$1_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet *outer$) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneUtilBitSet_$1 *create_OrgApacheLuceneUtilBitSet_$1_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet *outer$);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBitSet_$1)
 
 @interface OrgApacheLuceneUtilBitSet_$2 : OrgApacheLuceneUtilBitSet_LeapFrogCallBack {
@@ -90,6 +97,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilBitSet_$2, this$0_, OrgApacheLuceneUtilBi
 __attribute__((unused)) static void OrgApacheLuceneUtilBitSet_$2_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet_$2 *self, OrgApacheLuceneUtilBitSet *outer$);
 
 __attribute__((unused)) static OrgApacheLuceneUtilBitSet_$2 *new_OrgApacheLuceneUtilBitSet_$2_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet *outer$) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneUtilBitSet_$2 *create_OrgApacheLuceneUtilBitSet_$2_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBitSet_$2)
 
@@ -151,12 +160,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBitSet_$2)
 
 - (void)and__WithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iter {
   OrgApacheLuceneUtilBitSet_assertUnpositionedWithOrgApacheLuceneSearchDocIdSetIterator_(self, iter);
-  OrgApacheLuceneUtilBitSet_leapFrogWithOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneUtilBitSet_LeapFrogCallBack_(self, iter, [new_OrgApacheLuceneUtilBitSet_$1_initWithOrgApacheLuceneUtilBitSet_(self) autorelease]);
+  OrgApacheLuceneUtilBitSet_leapFrogWithOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneUtilBitSet_LeapFrogCallBack_(self, iter, create_OrgApacheLuceneUtilBitSet_$1_initWithOrgApacheLuceneUtilBitSet_(self));
 }
 
 - (void)andNotWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iter {
   OrgApacheLuceneUtilBitSet_assertUnpositionedWithOrgApacheLuceneSearchDocIdSetIterator_(self, iter);
-  OrgApacheLuceneUtilBitSet_leapFrogWithOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneUtilBitSet_LeapFrogCallBack_(self, iter, [new_OrgApacheLuceneUtilBitSet_$2_initWithOrgApacheLuceneUtilBitSet_(self) autorelease]);
+  OrgApacheLuceneUtilBitSet_leapFrogWithOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneUtilBitSet_LeapFrogCallBack_(self, iter, create_OrgApacheLuceneUtilBitSet_$2_initWithOrgApacheLuceneUtilBitSet_(self));
 }
 
 - (id<JavaUtilCollection>)getChildResources {
@@ -171,11 +180,11 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 + (IOSObjectArray *)__annotations_and__WithOrgApacheLuceneSearchDocIdSetIterator_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_andNotWithOrgApacheLuceneSearchDocIdSetIterator_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -192,8 +201,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "leapFrogWithOrgApacheLuceneSearchDocIdSetIterator:withOrgApacheLuceneUtilBitSet_LeapFrogCallBack:", "leapFrog", "V", 0x2, "Ljava.io.IOException;", NULL },
     { "and__WithOrgApacheLuceneSearchDocIdSetIterator:", "and", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "andNotWithOrgApacheLuceneSearchDocIdSetIterator:", "andNot", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
+    { "init", "BitSet", NULL, 0x1, NULL, NULL },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.BitSet$LeapFrogCallBack;"};
   static const J2ObjcClassInfo _OrgApacheLuceneUtilBitSet = { 2, "BitSet", "org.apache.lucene.util", NULL, 0x401, 14, methods, 0, NULL, 0, NULL, 1, inner_classes, NULL, NULL };
@@ -208,18 +217,18 @@ OrgApacheLuceneUtilBitSet *OrgApacheLuceneUtilBitSet_ofWithOrgApacheLuceneSearch
   jint threshold = JreURShift32(maxDoc, 7);
   OrgApacheLuceneUtilBitSet *set;
   if (cost < threshold) {
-    set = [new_OrgApacheLuceneUtilSparseFixedBitSet_initWithInt_(maxDoc) autorelease];
+    set = create_OrgApacheLuceneUtilSparseFixedBitSet_initWithInt_(maxDoc);
   }
   else {
-    set = [new_OrgApacheLuceneUtilFixedBitSet_initWithInt_(maxDoc) autorelease];
+    set = create_OrgApacheLuceneUtilFixedBitSet_initWithInt_(maxDoc);
   }
-  [((OrgApacheLuceneUtilBitSet *) nil_chk(set)) or__WithOrgApacheLuceneSearchDocIdSetIterator:it];
+  [set or__WithOrgApacheLuceneSearchDocIdSetIterator:it];
   return set;
 }
 
 void OrgApacheLuceneUtilBitSet_assertUnpositionedWithOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneUtilBitSet *self, OrgApacheLuceneSearchDocIdSetIterator *iter) {
   if ([((OrgApacheLuceneSearchDocIdSetIterator *) nil_chk(iter)) docID] != -1) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I", @"This operation only works with an unpositioned iterator, got current position = ", [iter docID])) autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I", @"This operation only works with an unpositioned iterator, got current position = ", [iter docID]));
   }
 }
 
@@ -273,7 +282,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   static const J2ObjcMethodInfo methods[] = {
     { "onMatchWithInt:", "onMatch", "V", 0x400, NULL, NULL },
     { "finish", NULL, "V", 0x0, NULL, NULL },
-    { "init", NULL, NULL, 0x2, NULL, NULL },
+    { "init", "LeapFrogCallBack", NULL, 0x2, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneUtilBitSet_LeapFrogCallBack = { 2, "LeapFrogCallBack", "org.apache.lucene.util", "BitSet", 0x40a, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilBitSet_LeapFrogCallBack;
@@ -334,9 +343,11 @@ void OrgApacheLuceneUtilBitSet_$1_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLu
 }
 
 OrgApacheLuceneUtilBitSet_$1 *new_OrgApacheLuceneUtilBitSet_$1_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet *outer$) {
-  OrgApacheLuceneUtilBitSet_$1 *self = [OrgApacheLuceneUtilBitSet_$1 alloc];
-  OrgApacheLuceneUtilBitSet_$1_initWithOrgApacheLuceneUtilBitSet_(self, outer$);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilBitSet_$1, initWithOrgApacheLuceneUtilBitSet_, outer$)
+}
+
+OrgApacheLuceneUtilBitSet_$1 *create_OrgApacheLuceneUtilBitSet_$1_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilBitSet_$1, initWithOrgApacheLuceneUtilBitSet_, outer$)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBitSet_$1)
@@ -378,9 +389,11 @@ void OrgApacheLuceneUtilBitSet_$2_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLu
 }
 
 OrgApacheLuceneUtilBitSet_$2 *new_OrgApacheLuceneUtilBitSet_$2_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet *outer$) {
-  OrgApacheLuceneUtilBitSet_$2 *self = [OrgApacheLuceneUtilBitSet_$2 alloc];
-  OrgApacheLuceneUtilBitSet_$2_initWithOrgApacheLuceneUtilBitSet_(self, outer$);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilBitSet_$2, initWithOrgApacheLuceneUtilBitSet_, outer$)
+}
+
+OrgApacheLuceneUtilBitSet_$2 *create_OrgApacheLuceneUtilBitSet_$2_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilBitSet_$2, initWithOrgApacheLuceneUtilBitSet_, outer$)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBitSet_$2)

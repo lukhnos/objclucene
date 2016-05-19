@@ -72,7 +72,6 @@ withOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms;
 
 - (jint)size;
 
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexParallelLeafReader_ParallelFields)
@@ -82,6 +81,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexParallelLeafReader_ParallelFields, field
 __attribute__((unused)) static void OrgApacheLuceneIndexParallelLeafReader_ParallelFields_initWithOrgApacheLuceneIndexParallelLeafReader_(OrgApacheLuceneIndexParallelLeafReader_ParallelFields *self, OrgApacheLuceneIndexParallelLeafReader *outer$);
 
 __attribute__((unused)) static OrgApacheLuceneIndexParallelLeafReader_ParallelFields *new_OrgApacheLuceneIndexParallelLeafReader_ParallelFields_initWithOrgApacheLuceneIndexParallelLeafReader_(OrgApacheLuceneIndexParallelLeafReader *outer$) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexParallelLeafReader_ParallelFields *create_OrgApacheLuceneIndexParallelLeafReader_ParallelFields_initWithOrgApacheLuceneIndexParallelLeafReader_(OrgApacheLuceneIndexParallelLeafReader *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexParallelLeafReader_ParallelFields)
 
@@ -106,7 +107,7 @@ withOrgApacheLuceneIndexLeafReaderArray:(IOSObjectArray *)storedFieldsReaders {
 }
 
 - (NSString *)description {
-  JavaLangStringBuilder *buffer = [new_JavaLangStringBuilder_initWithNSString_(@"ParallelLeafReader(") autorelease];
+  JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_initWithNSString_(@"ParallelLeafReader(");
   for (id<JavaUtilIterator> iter = [((id<JavaUtilSet>) nil_chk(completeReaderSet_)) iterator]; [((id<JavaUtilIterator>) nil_chk(iter)) hasNext]; ) {
     [buffer appendWithId:[iter next]];
     if ([iter hasNext]) [buffer appendWithNSString:@", "];
@@ -166,9 +167,9 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
     OrgApacheLuceneIndexTerms *vector = [((OrgApacheLuceneIndexLeafReader *) nil_chk([ent getValue])) getTermVectorWithInt:docID withNSString:fieldName];
     if (vector != nil) {
       if (fields == nil) {
-        fields = [new_OrgApacheLuceneIndexParallelLeafReader_ParallelFields_initWithOrgApacheLuceneIndexParallelLeafReader_(self) autorelease];
+        fields = create_OrgApacheLuceneIndexParallelLeafReader_ParallelFields_initWithOrgApacheLuceneIndexParallelLeafReader_(self);
       }
-      [((OrgApacheLuceneIndexParallelLeafReader_ParallelFields *) nil_chk(fields)) addFieldWithNSString:fieldName withOrgApacheLuceneIndexTerms:vector];
+      [fields addFieldWithNSString:fieldName withOrgApacheLuceneIndexTerms:vector];
     }
   }
   return fields;
@@ -311,9 +312,11 @@ void OrgApacheLuceneIndexParallelLeafReader_initWithOrgApacheLuceneIndexLeafRead
 }
 
 OrgApacheLuceneIndexParallelLeafReader *new_OrgApacheLuceneIndexParallelLeafReader_initWithOrgApacheLuceneIndexLeafReaderArray_(IOSObjectArray *readers) {
-  OrgApacheLuceneIndexParallelLeafReader *self = [OrgApacheLuceneIndexParallelLeafReader alloc];
-  OrgApacheLuceneIndexParallelLeafReader_initWithOrgApacheLuceneIndexLeafReaderArray_(self, readers);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexParallelLeafReader, initWithOrgApacheLuceneIndexLeafReaderArray_, readers)
+}
+
+OrgApacheLuceneIndexParallelLeafReader *create_OrgApacheLuceneIndexParallelLeafReader_initWithOrgApacheLuceneIndexLeafReaderArray_(IOSObjectArray *readers) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexParallelLeafReader, initWithOrgApacheLuceneIndexLeafReaderArray_, readers)
 }
 
 void OrgApacheLuceneIndexParallelLeafReader_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_(OrgApacheLuceneIndexParallelLeafReader *self, jboolean closeSubReaders, IOSObjectArray *readers) {
@@ -321,19 +324,21 @@ void OrgApacheLuceneIndexParallelLeafReader_initWithBoolean_withOrgApacheLuceneI
 }
 
 OrgApacheLuceneIndexParallelLeafReader *new_OrgApacheLuceneIndexParallelLeafReader_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_(jboolean closeSubReaders, IOSObjectArray *readers) {
-  OrgApacheLuceneIndexParallelLeafReader *self = [OrgApacheLuceneIndexParallelLeafReader alloc];
-  OrgApacheLuceneIndexParallelLeafReader_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_(self, closeSubReaders, readers);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexParallelLeafReader, initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_, closeSubReaders, readers)
+}
+
+OrgApacheLuceneIndexParallelLeafReader *create_OrgApacheLuceneIndexParallelLeafReader_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_(jboolean closeSubReaders, IOSObjectArray *readers) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexParallelLeafReader, initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_, closeSubReaders, readers)
 }
 
 void OrgApacheLuceneIndexParallelLeafReader_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_(OrgApacheLuceneIndexParallelLeafReader *self, jboolean closeSubReaders, IOSObjectArray *readers, IOSObjectArray *storedFieldsReaders) {
   OrgApacheLuceneIndexLeafReader_init(self);
   JreStrongAssignAndConsume(&self->fields_, new_OrgApacheLuceneIndexParallelLeafReader_ParallelFields_initWithOrgApacheLuceneIndexParallelLeafReader_(self));
-  JreStrongAssign(&self->completeReaderSet_, JavaUtilCollections_newSetFromMapWithJavaUtilMap_([new_JavaUtilIdentityHashMap_init() autorelease]));
+  JreStrongAssign(&self->completeReaderSet_, JavaUtilCollections_newSetFromMapWithJavaUtilMap_(create_JavaUtilIdentityHashMap_init()));
   JreStrongAssignAndConsume(&self->fieldToReader_, new_JavaUtilTreeMap_init());
   JreStrongAssignAndConsume(&self->tvFieldToReader_, new_JavaUtilTreeMap_init());
   self->closeSubReaders_ = closeSubReaders;
-  if (((IOSObjectArray *) nil_chk(readers))->size_ == 0 && ((IOSObjectArray *) nil_chk(storedFieldsReaders))->size_ > 0) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"There must be at least one main reader if storedFieldsReaders are used.") autorelease];
+  if (((IOSObjectArray *) nil_chk(readers))->size_ == 0 && ((IOSObjectArray *) nil_chk(storedFieldsReaders))->size_ > 0) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"There must be at least one main reader if storedFieldsReaders are used.");
   JreStrongAssign(&self->parallelReaders_, [readers clone]);
   JreStrongAssign(&self->storedFieldsReaders_, [((IOSObjectArray *) nil_chk(storedFieldsReaders)) clone]);
   if (((IOSObjectArray *) nil_chk(self->parallelReaders_))->size_ > 0) {
@@ -350,10 +355,10 @@ void OrgApacheLuceneIndexParallelLeafReader_initWithBoolean_withOrgApacheLuceneI
   JavaUtilCollections_addAllWithJavaUtilCollection_withNSObjectArray_(self->completeReaderSet_, self->storedFieldsReaders_);
   for (OrgApacheLuceneIndexLeafReader * __strong reader in nil_chk(self->completeReaderSet_)) {
     if ([((OrgApacheLuceneIndexLeafReader *) nil_chk(reader)) maxDoc] != self->maxDoc_) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$I", @"All readers must have same maxDoc: ", self->maxDoc_, @"!=", [reader maxDoc])) autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$I", @"All readers must have same maxDoc: ", self->maxDoc_, @"!=", [reader maxDoc]));
     }
   }
-  OrgApacheLuceneIndexFieldInfos_Builder *builder = [new_OrgApacheLuceneIndexFieldInfos_Builder_init() autorelease];
+  OrgApacheLuceneIndexFieldInfos_Builder *builder = create_OrgApacheLuceneIndexFieldInfos_Builder_init();
   {
     IOSObjectArray *a__ = self->parallelReaders_;
     OrgApacheLuceneIndexLeafReader * const *b__ = a__->buffer_;
@@ -396,9 +401,11 @@ void OrgApacheLuceneIndexParallelLeafReader_initWithBoolean_withOrgApacheLuceneI
 }
 
 OrgApacheLuceneIndexParallelLeafReader *new_OrgApacheLuceneIndexParallelLeafReader_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_(jboolean closeSubReaders, IOSObjectArray *readers, IOSObjectArray *storedFieldsReaders) {
-  OrgApacheLuceneIndexParallelLeafReader *self = [OrgApacheLuceneIndexParallelLeafReader alloc];
-  OrgApacheLuceneIndexParallelLeafReader_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_(self, closeSubReaders, readers, storedFieldsReaders);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexParallelLeafReader, initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_, closeSubReaders, readers, storedFieldsReaders)
+}
+
+OrgApacheLuceneIndexParallelLeafReader *create_OrgApacheLuceneIndexParallelLeafReader_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_(jboolean closeSubReaders, IOSObjectArray *readers, IOSObjectArray *storedFieldsReaders) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexParallelLeafReader, initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_, closeSubReaders, readers, storedFieldsReaders)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexParallelLeafReader)
@@ -427,20 +434,20 @@ withOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms {
   return [((id<JavaUtilMap>) nil_chk(fields_)) size];
 }
 
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
+  return JreDefaultFastEnumeration(self, state, stackbuf, len);
+}
+
 - (void)dealloc {
   RELEASE_(fields_);
   [super dealloc];
-}
-
-- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneIndexParallelLeafReader:", "ParallelFields", NULL, 0x0, NULL, NULL },
     { "addFieldWithNSString:withOrgApacheLuceneIndexTerms:", "addField", "V", 0x0, NULL, NULL },
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, NULL },
+    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<Ljava/lang/String;>;" },
     { "termsWithNSString:", "terms", "Lorg.apache.lucene.index.Terms;", 0x1, NULL, NULL },
     { "size", NULL, "I", 0x1, NULL, NULL },
   };
@@ -459,9 +466,11 @@ void OrgApacheLuceneIndexParallelLeafReader_ParallelFields_initWithOrgApacheLuce
 }
 
 OrgApacheLuceneIndexParallelLeafReader_ParallelFields *new_OrgApacheLuceneIndexParallelLeafReader_ParallelFields_initWithOrgApacheLuceneIndexParallelLeafReader_(OrgApacheLuceneIndexParallelLeafReader *outer$) {
-  OrgApacheLuceneIndexParallelLeafReader_ParallelFields *self = [OrgApacheLuceneIndexParallelLeafReader_ParallelFields alloc];
-  OrgApacheLuceneIndexParallelLeafReader_ParallelFields_initWithOrgApacheLuceneIndexParallelLeafReader_(self, outer$);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexParallelLeafReader_ParallelFields, initWithOrgApacheLuceneIndexParallelLeafReader_, outer$)
+}
+
+OrgApacheLuceneIndexParallelLeafReader_ParallelFields *create_OrgApacheLuceneIndexParallelLeafReader_ParallelFields_initWithOrgApacheLuceneIndexParallelLeafReader_(OrgApacheLuceneIndexParallelLeafReader *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexParallelLeafReader_ParallelFields, initWithOrgApacheLuceneIndexParallelLeafReader_, outer$)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexParallelLeafReader_ParallelFields)

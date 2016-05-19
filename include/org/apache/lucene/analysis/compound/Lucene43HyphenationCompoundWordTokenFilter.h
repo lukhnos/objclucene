@@ -5,37 +5,74 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter_RESTRICT
-#define OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter 0
 #else
-#define OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter
 
-#if !defined (_OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter_) && (OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter_
+#if !defined (OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter || defined(INCLUDE_OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter))
+#define OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter_
 
-#define OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase_RESTRICT 1
-#define OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase 1
+#define INCLUDE_OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase 1
 #include "org/apache/lucene/analysis/compound/Lucene43CompoundWordTokenFilterBase.h"
 
+@class IOSObjectArray;
 @class OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree;
 @class OrgApacheLuceneAnalysisTokenStream;
 @class OrgApacheLuceneAnalysisUtilCharArraySet;
 @class OrgXmlSaxInputSource;
 
+/*!
+ @brief A <code>TokenFilter</code> that decomposes compound words found in many Germanic languages,
+ using pre-4.4 behavior.
+ */
 @interface OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter : OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase
 
 #pragma mark Public
 
+/*!
+ @brief Create a HyphenationCompoundWordTokenFilter with no dictionary.
+ <p>
+ Calls <code>HyphenationCompoundWordTokenFilter(matchVersion, input, hyphenator, 
+ DEFAULT_MIN_WORD_SIZE, DEFAULT_MIN_SUBWORD_SIZE, DEFAULT_MAX_SUBWORD_SIZE</code>
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
 withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree:(OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *)hyphenator;
 
+/*!
+ @brief Creates a new <code>Lucene43HyphenationCompoundWordTokenFilter</code> instance.
+ @param input
+ the <code>TokenStream</code> to process
+ @param hyphenator
+ the hyphenation pattern tree to use for hyphenation
+ @param dictionary
+ the word dictionary to match against.
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
 withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree:(OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *)hyphenator
                withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)dictionary;
 
+/*!
+ @brief Creates a new <code>Lucene43HyphenationCompoundWordTokenFilter</code> instance.
+ @param input
+ the <code>TokenStream</code> to process
+ @param hyphenator
+ the hyphenation pattern tree to use for hyphenation
+ @param dictionary
+ the word dictionary to match against.
+ @param minWordSize
+ only words longer than this get processed
+ @param minSubwordSize
+ only subwords longer than this get to the output stream
+ @param maxSubwordSize
+ only subwords shorter than this get to the output stream
+ @param onlyLongestMatch
+ Add only the longest matching subword to the stream
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
 withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree:(OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *)hyphenator
                withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)dictionary
@@ -44,14 +81,32 @@ withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree:(OrgApacheLuceneAn
                                                    withInt:(jint)maxSubwordSize
                                                withBoolean:(jboolean)onlyLongestMatch;
 
+/*!
+ @brief Create a HyphenationCompoundWordTokenFilter with no dictionary.
+ <p>
+ Calls <code>HyphenationCompoundWordTokenFilter(matchVersion, input, hyphenator,
+ null, minWordSize, minSubwordSize, maxSubwordSize</code>
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
 withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree:(OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *)hyphenator
                                                    withInt:(jint)minWordSize
                                                    withInt:(jint)minSubwordSize
                                                    withInt:(jint)maxSubwordSize;
 
+/*!
+ @brief Create a hyphenator tree
+ @param hyphenationSource the InputSource pointing to the XML grammar
+ @return An object representing the hyphenation patterns
+ @throws IOException If there is a low-level I/O error.
+ */
 + (OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *)getHyphenationTreeWithOrgXmlSaxInputSource:(OrgXmlSaxInputSource *)hyphenationSource;
 
+/*!
+ @brief Create a hyphenator tree
+ @param hyphenationFilename the filename of the XML grammar to load
+ @return An object representing the hyphenation patterns
+ @throws IOException If there is a low-level I/O error.
+ */
 + (OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *)getHyphenationTreeWithNSString:(NSString *)hyphenationFilename;
 
 #pragma mark Protected
@@ -66,17 +121,25 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoun
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter *new_OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *hyphenator, OrgApacheLuceneAnalysisUtilCharArraySet *dictionary) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter *create_OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *hyphenator, OrgApacheLuceneAnalysisUtilCharArraySet *dictionary);
+
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree_withOrgApacheLuceneAnalysisUtilCharArraySet_withInt_withInt_withInt_withBoolean_(OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter *self, OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *hyphenator, OrgApacheLuceneAnalysisUtilCharArraySet *dictionary, jint minWordSize, jint minSubwordSize, jint maxSubwordSize, jboolean onlyLongestMatch);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter *new_OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree_withOrgApacheLuceneAnalysisUtilCharArraySet_withInt_withInt_withInt_withBoolean_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *hyphenator, OrgApacheLuceneAnalysisUtilCharArraySet *dictionary, jint minWordSize, jint minSubwordSize, jint maxSubwordSize, jboolean onlyLongestMatch) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter *create_OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree_withOrgApacheLuceneAnalysisUtilCharArraySet_withInt_withInt_withInt_withBoolean_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *hyphenator, OrgApacheLuceneAnalysisUtilCharArraySet *dictionary, jint minWordSize, jint minSubwordSize, jint maxSubwordSize, jboolean onlyLongestMatch);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree_withInt_withInt_withInt_(OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter *self, OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *hyphenator, jint minWordSize, jint minSubwordSize, jint maxSubwordSize);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter *new_OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree_withInt_withInt_withInt_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *hyphenator, jint minWordSize, jint minSubwordSize, jint maxSubwordSize) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter *create_OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree_withInt_withInt_withInt_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *hyphenator, jint minWordSize, jint minSubwordSize, jint maxSubwordSize);
+
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree_(OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter *self, OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *hyphenator);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter *new_OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *hyphenator) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter *create_OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *hyphenator);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter_getHyphenationTreeWithNSString_(NSString *hyphenationFilename);
 
@@ -86,4 +149,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCompoundLucene43HyphenationCom
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter")

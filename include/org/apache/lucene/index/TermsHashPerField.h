@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexTermsHashPerField_INCLUDE_ALL")
-#if OrgApacheLuceneIndexTermsHashPerField_RESTRICT
-#define OrgApacheLuceneIndexTermsHashPerField_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexTermsHashPerField")
+#ifdef RESTRICT_OrgApacheLuceneIndexTermsHashPerField
+#define INCLUDE_ALL_OrgApacheLuceneIndexTermsHashPerField 0
 #else
-#define OrgApacheLuceneIndexTermsHashPerField_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexTermsHashPerField 1
 #endif
-#undef OrgApacheLuceneIndexTermsHashPerField_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexTermsHashPerField
 
-#if !defined (_OrgApacheLuceneIndexTermsHashPerField_) && (OrgApacheLuceneIndexTermsHashPerField_INCLUDE_ALL || OrgApacheLuceneIndexTermsHashPerField_INCLUDE)
-#define _OrgApacheLuceneIndexTermsHashPerField_
+#if !defined (OrgApacheLuceneIndexTermsHashPerField_) && (INCLUDE_ALL_OrgApacheLuceneIndexTermsHashPerField || defined(INCLUDE_OrgApacheLuceneIndexTermsHashPerField))
+#define OrgApacheLuceneIndexTermsHashPerField_
 
-#define JavaLangComparable_RESTRICT 1
-#define JavaLangComparable_INCLUDE 1
+#define RESTRICT_JavaLangComparable 1
+#define INCLUDE_JavaLangComparable 1
 #include "java/lang/Comparable.h"
 
 @class IOSByteArray;
@@ -56,6 +56,10 @@
 
 #pragma mark Public
 
+/*!
+ @brief streamCount: how many streams this field stores per term.
+ E.g. doc(+freq) is 1 stream, prox+offset is a second. 
+ */
 - (instancetype)initWithInt:(jint)streamCount
 withOrgApacheLuceneIndexFieldInvertState:(OrgApacheLuceneIndexFieldInvertState *)fieldState
 withOrgApacheLuceneIndexTermsHash:(OrgApacheLuceneIndexTermsHash *)termsHash
@@ -70,6 +74,10 @@ withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo;
                                                   withInt:(jint)termID
                                                   withInt:(jint)stream OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Collapse the hash table and sort in-place; also sets
+ this.sortedTermIDs to the results
+ */
 - (IOSIntArray *)sortPostings;
 
 - (void)writeBytesWithInt:(jint)stream
@@ -79,20 +87,48 @@ withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo;
 
 #pragma mark Package-Private
 
+/*!
+ @brief Called once per inverted token.
+ This is the primary
+ entry point (for first TermsHash); postings use this
+ API. 
+ */
 - (void)add;
 
+/*!
+ @brief Called when a previously seen term is seen again.
+ */
 - (void)addTermWithInt:(jint)termID;
 
+/*!
+ @brief Creates a new postings array of the specified size.
+ */
 - (OrgApacheLuceneIndexParallelPostingsArray *)createPostingsArrayWithInt:(jint)size;
 
+/*!
+ @brief Finish adding all instances of this field to the
+ current document.
+ */
 - (void)finish;
 
+/*!
+ @brief Called when the postings array is initialized or
+ resized.
+ */
 - (void)newPostingsArray OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Called when a term is seen for the first time.
+ */
 - (void)newTermWithInt:(jint)termID OBJC_METHOD_FAMILY_NONE;
 
 - (void)reset;
 
+/*!
+ @brief Start adding a new field instance; first is true if
+ this is the first time this field name was seen in the
+ document.
+ */
 - (jboolean)startWithOrgApacheLuceneIndexIndexableField:(id<OrgApacheLuceneIndexIndexableField>)field
                                             withBoolean:(jboolean)first;
 
@@ -126,4 +162,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTermsHashPerField)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexTermsHashPerField_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexTermsHashPerField")

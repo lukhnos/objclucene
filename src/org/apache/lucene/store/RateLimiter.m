@@ -13,8 +13,6 @@
 #include "org/apache/lucene/store/RateLimiter.h"
 #include "org/apache/lucene/util/ThreadInterruptedException.h"
 
-#define OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter_MIN_PAUSE_CHECK_MSEC 5
-
 @interface OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter () {
  @public
   volatile_jdouble mbPerSec_;
@@ -24,7 +22,9 @@
 
 @end
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter, MIN_PAUSE_CHECK_MSEC, jint)
+inline jint OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter_get_MIN_PAUSE_CHECK_MSEC();
+#define OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter_MIN_PAUSE_CHECK_MSEC 5
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter, MIN_PAUSE_CHECK_MSEC, jint)
 
 @implementation OrgApacheLuceneStoreRateLimiter
 
@@ -64,7 +64,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "getMBPerSec", NULL, "D", 0x401, NULL, NULL },
     { "pauseWithLong:", "pause", "J", 0x401, "Ljava.io.IOException;", NULL },
     { "getMinPauseCheckBytes", NULL, "J", 0x401, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "RateLimiter", NULL, 0x1, NULL, NULL },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.store.RateLimiter$SimpleRateLimiter;"};
   static const J2ObjcClassInfo _OrgApacheLuceneStoreRateLimiter = { 2, "RateLimiter", "org.apache.lucene.store", NULL, 0x401, 5, methods, 0, NULL, 0, NULL, 1, inner_classes, NULL, NULL };
@@ -129,7 +129,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreRateLimiter)
         JavaLangThread_sleepWithLong_withInt_(sleepMS, sleepNS);
       }
       @catch (JavaLangInterruptedException *ie) {
-        @throw [new_OrgApacheLuceneUtilThreadInterruptedException_initWithJavaLangInterruptedException_(ie) autorelease];
+        @throw create_OrgApacheLuceneUtilThreadInterruptedException_initWithJavaLangInterruptedException_(ie);
       }
       curNS = JavaLangSystem_nanoTime();
       continue;
@@ -166,9 +166,11 @@ void OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter_initWithDouble_(OrgApache
 }
 
 OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter *new_OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter_initWithDouble_(jdouble mbPerSec) {
-  OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter *self = [OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter alloc];
-  OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter_initWithDouble_(self, mbPerSec);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter, initWithDouble_, mbPerSec)
+}
+
+OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter *create_OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter_initWithDouble_(jdouble mbPerSec) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter, initWithDouble_, mbPerSec)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter)

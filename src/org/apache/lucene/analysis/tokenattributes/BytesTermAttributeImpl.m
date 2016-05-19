@@ -42,12 +42,12 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)copyToWithOrgApacheLuceneUtilAttributeImpl:(OrgApacheLuceneUtilAttributeImpl *)target {
-  OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl *other = (OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl *) check_class_cast(target, [OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl class]);
+  OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl *other = (OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl *) cast_chk(target, [OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl class]);
   JreStrongAssign(&((OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl *) nil_chk(other))->bytes_, OrgApacheLuceneUtilBytesRef_deepCopyOfWithOrgApacheLuceneUtilBytesRef_(bytes_));
 }
 
 - (OrgApacheLuceneUtilAttributeImpl *)clone {
-  OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl *c = (OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl *) check_class_cast([super clone], [OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl class]);
+  OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl *c = (OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl *) cast_chk([super clone], [OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl class]);
   [self copyToWithOrgApacheLuceneUtilAttributeImpl:c];
   return c;
 }
@@ -85,9 +85,11 @@ void OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl_init(OrgApache
 }
 
 OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl_init() {
-  OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl *self = [OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl alloc];
-  OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl, init)
+}
+
+OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl)

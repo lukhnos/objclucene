@@ -5,33 +5,46 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchBooleanClause_INCLUDE_ALL")
-#if OrgApacheLuceneSearchBooleanClause_RESTRICT
-#define OrgApacheLuceneSearchBooleanClause_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchBooleanClause")
+#ifdef RESTRICT_OrgApacheLuceneSearchBooleanClause
+#define INCLUDE_ALL_OrgApacheLuceneSearchBooleanClause 0
 #else
-#define OrgApacheLuceneSearchBooleanClause_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchBooleanClause 1
 #endif
-#undef OrgApacheLuceneSearchBooleanClause_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchBooleanClause
 
-#if !defined (_OrgApacheLuceneSearchBooleanClause_) && (OrgApacheLuceneSearchBooleanClause_INCLUDE_ALL || OrgApacheLuceneSearchBooleanClause_INCLUDE)
-#define _OrgApacheLuceneSearchBooleanClause_
+#if !defined (OrgApacheLuceneSearchBooleanClause_) && (INCLUDE_ALL_OrgApacheLuceneSearchBooleanClause || defined(INCLUDE_OrgApacheLuceneSearchBooleanClause))
+#define OrgApacheLuceneSearchBooleanClause_
 
-@class OrgApacheLuceneSearchBooleanClause_OccurEnum;
+@class IOSObjectArray;
+@class OrgApacheLuceneSearchBooleanClause_Occur;
 @class OrgApacheLuceneSearchQuery;
 
+/*!
+ @brief A clause in a BooleanQuery.
+ */
 @interface OrgApacheLuceneSearchBooleanClause : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Constructs a BooleanClause.
+ */
 - (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-  withOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanClause_OccurEnum *)occur;
+      withOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause_Occur *)occur;
 
+/*!
+ @brief Returns true if <code>o</code> is equal to this.
+ */
 - (jboolean)isEqual:(id)o;
 
-- (OrgApacheLuceneSearchBooleanClause_OccurEnum *)getOccur;
+- (OrgApacheLuceneSearchBooleanClause_Occur *)getOccur;
 
 - (OrgApacheLuceneSearchQuery *)getQuery;
 
+/*!
+ @brief Returns a hash code value for this object.
+ */
 - (NSUInteger)hash;
 
 - (jboolean)isProhibited;
@@ -40,8 +53,14 @@
 
 - (jboolean)isScoring;
 
-- (void)setOccurWithOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanClause_OccurEnum *)occur;
+/*!
+ @brief Set the <code>Occur</code>.
+ */
+- (void)setOccurWithOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause_Occur *)occur;
 
+/*!
+ @brief Set the <code>Query</code>.
+ */
 - (void)setQueryWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
 
 - (NSString *)description;
@@ -50,60 +69,99 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchBooleanClause)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_OccurEnum_(OrgApacheLuceneSearchBooleanClause *self, OrgApacheLuceneSearchQuery *query, OrgApacheLuceneSearchBooleanClause_OccurEnum *occur);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_Occur_(OrgApacheLuceneSearchBooleanClause *self, OrgApacheLuceneSearchQuery *query, OrgApacheLuceneSearchBooleanClause_Occur *occur);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanClause *new_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_OccurEnum_(OrgApacheLuceneSearchQuery *query, OrgApacheLuceneSearchBooleanClause_OccurEnum *occur) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanClause *new_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_Occur_(OrgApacheLuceneSearchQuery *query, OrgApacheLuceneSearchBooleanClause_Occur *occur) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanClause *create_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_Occur_(OrgApacheLuceneSearchQuery *query, OrgApacheLuceneSearchBooleanClause_Occur *occur);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanClause)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchBooleanClause_OccurEnum_) && (OrgApacheLuceneSearchBooleanClause_INCLUDE_ALL || OrgApacheLuceneSearchBooleanClause_OccurEnum_INCLUDE)
-#define _OrgApacheLuceneSearchBooleanClause_OccurEnum_
+#if !defined (OrgApacheLuceneSearchBooleanClause_Occur_) && (INCLUDE_ALL_OrgApacheLuceneSearchBooleanClause || defined(INCLUDE_OrgApacheLuceneSearchBooleanClause_Occur))
+#define OrgApacheLuceneSearchBooleanClause_Occur_
 
-#define JavaLangEnum_RESTRICT 1
-#define JavaLangEnum_INCLUDE 1
+#define RESTRICT_JavaLangEnum 1
+#define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
 
-typedef NS_ENUM(NSUInteger, OrgApacheLuceneSearchBooleanClause_Occur) {
-  OrgApacheLuceneSearchBooleanClause_Occur_MUST = 0,
-  OrgApacheLuceneSearchBooleanClause_Occur_FILTER = 1,
-  OrgApacheLuceneSearchBooleanClause_Occur_SHOULD = 2,
-  OrgApacheLuceneSearchBooleanClause_Occur_MUST_NOT = 3,
+typedef NS_ENUM(NSUInteger, OrgApacheLuceneSearchBooleanClause_Occur_Enum) {
+  OrgApacheLuceneSearchBooleanClause_Occur_Enum_MUST = 0,
+  OrgApacheLuceneSearchBooleanClause_Occur_Enum_FILTER = 1,
+  OrgApacheLuceneSearchBooleanClause_Occur_Enum_SHOULD = 2,
+  OrgApacheLuceneSearchBooleanClause_Occur_Enum_MUST_NOT = 3,
 };
 
-@interface OrgApacheLuceneSearchBooleanClause_OccurEnum : JavaLangEnum < NSCopying >
+/*!
+ @brief Specifies how clauses are to occur in matching documents.
+ */
+@interface OrgApacheLuceneSearchBooleanClause_Occur : JavaLangEnum < NSCopying >
+
++ (OrgApacheLuceneSearchBooleanClause_Occur *)MUST;
+
++ (OrgApacheLuceneSearchBooleanClause_Occur *)FILTER;
+
++ (OrgApacheLuceneSearchBooleanClause_Occur *)SHOULD;
+
++ (OrgApacheLuceneSearchBooleanClause_Occur *)MUST_NOT;
 
 #pragma mark Package-Private
 
 + (IOSObjectArray *)values;
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneSearchBooleanClause_OccurEnum_values();
 
-+ (OrgApacheLuceneSearchBooleanClause_OccurEnum *)valueOfWithNSString:(NSString *)name;
-FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanClause_OccurEnum *OrgApacheLuceneSearchBooleanClause_OccurEnum_valueOfWithNSString_(NSString *name);
++ (OrgApacheLuceneSearchBooleanClause_Occur *)valueOfWithNSString:(NSString *)name;
 
 - (id)copyWithZone:(NSZone *)zone;
+- (OrgApacheLuceneSearchBooleanClause_Occur_Enum)toNSEnum;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneSearchBooleanClause_OccurEnum)
+J2OBJC_STATIC_INIT(OrgApacheLuceneSearchBooleanClause_Occur)
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanClause_OccurEnum *OrgApacheLuceneSearchBooleanClause_OccurEnum_values_[];
+/*! INTERNAL ONLY - Use enum accessors declared below. */
+FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanClause_Occur *OrgApacheLuceneSearchBooleanClause_Occur_values_[];
 
-#define OrgApacheLuceneSearchBooleanClause_OccurEnum_MUST OrgApacheLuceneSearchBooleanClause_OccurEnum_values_[OrgApacheLuceneSearchBooleanClause_Occur_MUST]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneSearchBooleanClause_OccurEnum, MUST)
+/*!
+ @brief Use this operator for clauses that <i>must</i> appear in the matching documents.
+ */
+inline OrgApacheLuceneSearchBooleanClause_Occur *OrgApacheLuceneSearchBooleanClause_Occur_get_MUST();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchBooleanClause_Occur, MUST)
 
-#define OrgApacheLuceneSearchBooleanClause_OccurEnum_FILTER OrgApacheLuceneSearchBooleanClause_OccurEnum_values_[OrgApacheLuceneSearchBooleanClause_Occur_FILTER]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneSearchBooleanClause_OccurEnum, FILTER)
+/*!
+ @brief Like <code>MUST</code> except that these clauses do not participate in scoring.
+ */
+inline OrgApacheLuceneSearchBooleanClause_Occur *OrgApacheLuceneSearchBooleanClause_Occur_get_FILTER();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchBooleanClause_Occur, FILTER)
 
-#define OrgApacheLuceneSearchBooleanClause_OccurEnum_SHOULD OrgApacheLuceneSearchBooleanClause_OccurEnum_values_[OrgApacheLuceneSearchBooleanClause_Occur_SHOULD]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD)
+/*!
+ @brief Use this operator for clauses that <i>should</i> appear in the 
+ matching documents.
+ For a BooleanQuery with no <code>MUST</code> 
+ clauses one or more <code>SHOULD</code> clauses must match a document 
+ for the BooleanQuery to match.
+ - seealso: BooleanQuery.Builder#setMinimumNumberShouldMatch
+ */
+inline OrgApacheLuceneSearchBooleanClause_Occur *OrgApacheLuceneSearchBooleanClause_Occur_get_SHOULD();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD)
 
-#define OrgApacheLuceneSearchBooleanClause_OccurEnum_MUST_NOT OrgApacheLuceneSearchBooleanClause_OccurEnum_values_[OrgApacheLuceneSearchBooleanClause_Occur_MUST_NOT]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneSearchBooleanClause_OccurEnum, MUST_NOT)
+/*!
+ @brief Use this operator for clauses that <i>must not</i> appear in the matching documents.
+ Note that it is not possible to search for queries that only consist
+ of a <code>MUST_NOT</code> clause. These clauses do not contribute to the
+ score of documents. 
+ */
+inline OrgApacheLuceneSearchBooleanClause_Occur *OrgApacheLuceneSearchBooleanClause_Occur_get_MUST_NOT();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchBooleanClause_Occur, MUST_NOT)
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanClause_OccurEnum)
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneSearchBooleanClause_Occur_values();
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanClause_Occur *OrgApacheLuceneSearchBooleanClause_Occur_valueOfWithNSString_(NSString *name);
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanClause_Occur *OrgApacheLuceneSearchBooleanClause_Occur_fromOrdinal(NSUInteger ordinal);
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanClause_Occur)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchBooleanClause_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchBooleanClause")

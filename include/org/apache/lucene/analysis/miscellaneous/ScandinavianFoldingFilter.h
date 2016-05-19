@@ -5,23 +5,46 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilter_RESTRICT
-#define OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilter 0
 #else
-#define OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilter
 
-#if !defined (_OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilter_) && (OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilter_
+#if !defined (OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilter))
+#define OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief This filter folds Scandinavian characters åÅäæÄÆ-&gt;a and öÖøØ-&gt;o.
+ It also discriminate against use of double vowels aa, ae, ao, oe and oo, leaving just the first one.
+ <p>
+ It's a semantically more destructive solution than <code>ScandinavianNormalizationFilter</code> but
+ can in addition help with matching raksmorgas as räksmörgås.
+ <p>
+ blåbærsyltetøj == blåbärsyltetöj == blaabaarsyltetoej == blabarsyltetoj
+ räksmörgås == ræksmørgås == ræksmörgaos == raeksmoergaas == raksmorgas
+ <p>
+ Background:
+ Swedish åäö are in fact the same letters as Norwegian and Danish åæø and thus interchangeable
+ when used between these languages. They are however folded differently when people type
+ them on a keyboard lacking these characters.
+ <p>
+ In that situation almost all Swedish people use a, a, o instead of å, ä, ö.
+ <p>
+ Norwegians and Danes on the other hand usually type aa, ae and oe instead of å, æ and ø.
+ Some do however use a, a, o, oo, ao and sometimes permutations of everything above.
+ <p>
+ This filter solves that mismatch problem, but might also cause new.
+ - seealso: ScandinavianNormalizationFilter
+ */
 @interface OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
@@ -38,8 +61,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFi
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilter *new_OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilter *create_OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldingFilter")

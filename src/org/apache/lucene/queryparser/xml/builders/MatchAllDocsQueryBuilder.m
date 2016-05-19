@@ -14,7 +14,7 @@
 @implementation OrgApacheLuceneQueryparserXmlBuildersMatchAllDocsQueryBuilder
 
 - (OrgApacheLuceneSearchQuery *)getQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e {
-  return [new_OrgApacheLuceneSearchMatchAllDocsQuery_init() autorelease];
+  return create_OrgApacheLuceneSearchMatchAllDocsQuery_init();
 }
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -27,7 +27,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "getQueryWithOrgW3cDomElement:", "getQuery", "Lorg.apache.lucene.search.Query;", 0x1, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "MatchAllDocsQueryBuilder", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersMatchAllDocsQueryBuilder = { 2, "MatchAllDocsQueryBuilder", "org.apache.lucene.queryparser.xml.builders", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserXmlBuildersMatchAllDocsQueryBuilder;
@@ -40,9 +40,11 @@ void OrgApacheLuceneQueryparserXmlBuildersMatchAllDocsQueryBuilder_init(OrgApach
 }
 
 OrgApacheLuceneQueryparserXmlBuildersMatchAllDocsQueryBuilder *new_OrgApacheLuceneQueryparserXmlBuildersMatchAllDocsQueryBuilder_init() {
-  OrgApacheLuceneQueryparserXmlBuildersMatchAllDocsQueryBuilder *self = [OrgApacheLuceneQueryparserXmlBuildersMatchAllDocsQueryBuilder alloc];
-  OrgApacheLuceneQueryparserXmlBuildersMatchAllDocsQueryBuilder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserXmlBuildersMatchAllDocsQueryBuilder, init)
+}
+
+OrgApacheLuceneQueryparserXmlBuildersMatchAllDocsQueryBuilder *create_OrgApacheLuceneQueryparserXmlBuildersMatchAllDocsQueryBuilder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserXmlBuildersMatchAllDocsQueryBuilder, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserXmlBuildersMatchAllDocsQueryBuilder)

@@ -5,27 +5,30 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchBoostAttributeImpl_INCLUDE_ALL")
-#if OrgApacheLuceneSearchBoostAttributeImpl_RESTRICT
-#define OrgApacheLuceneSearchBoostAttributeImpl_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchBoostAttributeImpl")
+#ifdef RESTRICT_OrgApacheLuceneSearchBoostAttributeImpl
+#define INCLUDE_ALL_OrgApacheLuceneSearchBoostAttributeImpl 0
 #else
-#define OrgApacheLuceneSearchBoostAttributeImpl_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchBoostAttributeImpl 1
 #endif
-#undef OrgApacheLuceneSearchBoostAttributeImpl_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchBoostAttributeImpl
 
-#if !defined (_OrgApacheLuceneSearchBoostAttributeImpl_) && (OrgApacheLuceneSearchBoostAttributeImpl_INCLUDE_ALL || OrgApacheLuceneSearchBoostAttributeImpl_INCLUDE)
-#define _OrgApacheLuceneSearchBoostAttributeImpl_
+#if !defined (OrgApacheLuceneSearchBoostAttributeImpl_) && (INCLUDE_ALL_OrgApacheLuceneSearchBoostAttributeImpl || defined(INCLUDE_OrgApacheLuceneSearchBoostAttributeImpl))
+#define OrgApacheLuceneSearchBoostAttributeImpl_
 
-#define OrgApacheLuceneUtilAttributeImpl_RESTRICT 1
-#define OrgApacheLuceneUtilAttributeImpl_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAttributeImpl 1
+#define INCLUDE_OrgApacheLuceneUtilAttributeImpl 1
 #include "org/apache/lucene/util/AttributeImpl.h"
 
-#define OrgApacheLuceneSearchBoostAttribute_RESTRICT 1
-#define OrgApacheLuceneSearchBoostAttribute_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchBoostAttribute 1
+#define INCLUDE_OrgApacheLuceneSearchBoostAttribute 1
 #include "org/apache/lucene/search/BoostAttribute.h"
 
 @protocol OrgApacheLuceneUtilAttributeReflector;
 
+/*!
+ @brief Implementation class for <code>BoostAttribute</code>.
+ */
 @interface OrgApacheLuceneSearchBoostAttributeImpl : OrgApacheLuceneUtilAttributeImpl < OrgApacheLuceneSearchBoostAttribute >
 
 #pragma mark Public
@@ -50,8 +53,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchBoostAttributeImpl_init(OrgApacheLuc
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchBoostAttributeImpl *new_OrgApacheLuceneSearchBoostAttributeImpl_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchBoostAttributeImpl *create_OrgApacheLuceneSearchBoostAttributeImpl_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBoostAttributeImpl)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchBoostAttributeImpl_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchBoostAttributeImpl")

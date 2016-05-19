@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_RESTRICT
-#define OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup")
+#ifdef RESTRICT_OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup 0
 #else
-#define OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup 1
 #endif
-#undef OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup
 
-#if !defined (_OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_) && (OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_INCLUDE_ALL || OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_INCLUDE)
-#define _OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_
+#if !defined (OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup || defined(INCLUDE_OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup))
+#define OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_
 
-#define OrgApacheLuceneSearchSuggestLookup_RESTRICT 1
-#define OrgApacheLuceneSearchSuggestLookup_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSuggestLookup 1
+#define INCLUDE_OrgApacheLuceneSearchSuggestLookup 1
 #include "org/apache/lucene/search/suggest/Lookup.h"
 
 @class OrgApacheLuceneStoreDataInput;
@@ -29,16 +29,41 @@
 @protocol JavaUtilSet;
 @protocol OrgApacheLuceneSearchSuggestInputIterator;
 
+/*!
+ @brief Suggester based on a weighted FST: it first traverses the prefix, 
+ then walks the <i>n</i> shortest paths to retrieve top-ranked
+ suggestions.
+ <p>
+ <b>NOTE</b>:
+ Input weights must be between 0 and <code>Integer.MAX_VALUE</code>, any
+ other values will be rejected.
+ */
 @interface OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup : OrgApacheLuceneSearchSuggestLookup
+
++ (id<JavaUtilComparator>)weightComparator;
 
 #pragma mark Public
 
+/*!
+ @brief Calls <code>WFSTCompletionLookup(true)</code>
+ */
 - (instancetype)init;
 
+/*!
+ @brief Creates a new suggester.
+ @param exactFirst <code>true</code> if suggestions that match the 
+ prefix exactly should always be returned first, regardless
+ of score. This has no performance impact, but could result
+ in low-quality suggestions.
+ */
 - (instancetype)initWithBoolean:(jboolean)exactFirst;
 
 - (void)buildWithOrgApacheLuceneSearchSuggestInputIterator:(id<OrgApacheLuceneSearchSuggestInputIterator>)iterator;
 
+/*!
+ @brief Returns the weight associated with an input string,
+ or null if it does not exist.
+ */
 - (id)getWithJavaLangCharSequence:(id<JavaLangCharSequence>)key;
 
 - (id<JavaUtilCollection>)getChildResources;
@@ -52,6 +77,9 @@
                                        withBoolean:(jboolean)onlyMorePopular
                                            withInt:(jint)num;
 
+/*!
+ @brief Returns byte size of the underlying FST.
+ */
 - (jlong)ramBytesUsed;
 
 - (jboolean)storeWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)output;
@@ -60,19 +88,25 @@
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup)
 
-FOUNDATION_EXPORT id<JavaUtilComparator> OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_weightComparator_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup, weightComparator_, id<JavaUtilComparator>)
+inline id<JavaUtilComparator> OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_get_weightComparator();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT id<JavaUtilComparator> OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_weightComparator;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup, weightComparator, id<JavaUtilComparator>)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_init(OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup *new_OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup *create_OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_init();
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_initWithBoolean_(OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup *self, jboolean exactFirst);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup *new_OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_initWithBoolean_(jboolean exactFirst) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup *create_OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_initWithBoolean_(jboolean exactFirst);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup")

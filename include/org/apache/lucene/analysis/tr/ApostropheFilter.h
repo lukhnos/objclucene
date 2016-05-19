@@ -5,23 +5,33 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisTrApostropheFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisTrApostropheFilter_RESTRICT
-#define OrgApacheLuceneAnalysisTrApostropheFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTrApostropheFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisTrApostropheFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTrApostropheFilter 0
 #else
-#define OrgApacheLuceneAnalysisTrApostropheFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTrApostropheFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisTrApostropheFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisTrApostropheFilter
 
-#if !defined (_OrgApacheLuceneAnalysisTrApostropheFilter_) && (OrgApacheLuceneAnalysisTrApostropheFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisTrApostropheFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisTrApostropheFilter_
+#if !defined (OrgApacheLuceneAnalysisTrApostropheFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTrApostropheFilter || defined(INCLUDE_OrgApacheLuceneAnalysisTrApostropheFilter))
+#define OrgApacheLuceneAnalysisTrApostropheFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief Strips all characters after an apostrophe (including the apostrophe itself).
+ <p>
+ In Turkish, apostrophe is used to separate suffixes from proper names
+ (continent, sea, river, lake, mountain, upland, proper names related to
+ religion and mythology). This filter intended to be used before stem filters.
+ For more information, see <a href="http://www.ipcsit.com/vol57/015-ICNI2012-M021.pdf">
+ Role of Apostrophes in Turkish Information Retrieval</a>
+ </p>
+ */
 @interface OrgApacheLuceneAnalysisTrApostropheFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
@@ -38,8 +48,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisTrApostropheFilter_initWithOrgApac
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisTrApostropheFilter *new_OrgApacheLuceneAnalysisTrApostropheFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisTrApostropheFilter *create_OrgApacheLuceneAnalysisTrApostropheFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTrApostropheFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisTrApostropheFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTrApostropheFilter")

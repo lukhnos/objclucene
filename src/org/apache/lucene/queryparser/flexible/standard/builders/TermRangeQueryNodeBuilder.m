@@ -26,7 +26,7 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneSearchTermRangeQuery *)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode {
-  OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode *rangeNode = (OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode *) check_class_cast(queryNode, [OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode class]);
+  OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode *rangeNode = (OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode *) cast_chk(queryNode, [OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode class]);
   OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *upper = [((OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode *) nil_chk(rangeNode)) getUpperBound];
   OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *lower = [rangeNode getLowerBound];
   NSString *field = OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_toStringWithId_([rangeNode getField]);
@@ -39,7 +39,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     upperText = nil;
   }
   OrgApacheLuceneSearchTermRangeQuery *rangeQuery = OrgApacheLuceneSearchTermRangeQuery_newStringRangeWithNSString_withNSString_withNSString_withBoolean_withBoolean_(field, lowerText, upperText, [rangeNode isLowerInclusive], [rangeNode isUpperInclusive]);
-  OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *method = (OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *) check_class_cast([((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(queryNode)) getTagWithNSString:OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiTermRewriteMethodProcessor_TAG_ID_], [OrgApacheLuceneSearchMultiTermQuery_RewriteMethod class]);
+  OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *method = (OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *) cast_chk([((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(queryNode)) getTagWithNSString:OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiTermRewriteMethodProcessor_TAG_ID], [OrgApacheLuceneSearchMultiTermQuery_RewriteMethod class]);
   if (method != nil) {
     [((OrgApacheLuceneSearchTermRangeQuery *) nil_chk(rangeQuery)) setRewriteMethodWithOrgApacheLuceneSearchMultiTermQuery_RewriteMethod:method];
   }
@@ -62,9 +62,11 @@ void OrgApacheLuceneQueryparserFlexibleStandardBuildersTermRangeQueryNodeBuilder
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardBuildersTermRangeQueryNodeBuilder *new_OrgApacheLuceneQueryparserFlexibleStandardBuildersTermRangeQueryNodeBuilder_init() {
-  OrgApacheLuceneQueryparserFlexibleStandardBuildersTermRangeQueryNodeBuilder *self = [OrgApacheLuceneQueryparserFlexibleStandardBuildersTermRangeQueryNodeBuilder alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardBuildersTermRangeQueryNodeBuilder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardBuildersTermRangeQueryNodeBuilder, init)
+}
+
+OrgApacheLuceneQueryparserFlexibleStandardBuildersTermRangeQueryNodeBuilder *create_OrgApacheLuceneQueryparserFlexibleStandardBuildersTermRangeQueryNodeBuilder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardBuildersTermRangeQueryNodeBuilder, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleStandardBuildersTermRangeQueryNodeBuilder)

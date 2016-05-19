@@ -27,7 +27,7 @@
 
 @interface OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame () {
  @public
-  __weak OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *ite_;
+  __unsafe_unretained OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *ite_;
 }
 
 @end
@@ -213,7 +213,7 @@
   JreAssert((limit > 0), (@"org/apache/lucene/codecs/blocktree/IntersectTermsEnumFrame.java:329 condition failed: assert limit > 0;"));
   while (metaDataUpto_ < limit) {
     ((OrgApacheLuceneCodecsBlockTermState *) nil_chk(termState_))->docFreq_ = [((OrgApacheLuceneStoreByteArrayDataInput *) nil_chk(statsReader_)) readVInt];
-    if ([((OrgApacheLuceneIndexFieldInfo *) nil_chk(((OrgApacheLuceneCodecsBlocktreeFieldReader *) nil_chk(((OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *) nil_chk(ite_))->fr_))->fieldInfo_)) getIndexOptions] != JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS)) {
+    if ([((OrgApacheLuceneIndexFieldInfo *) nil_chk(((OrgApacheLuceneCodecsBlocktreeFieldReader *) nil_chk(((OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *) nil_chk(ite_))->fr_))->fieldInfo_)) getIndexOptions] != JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS)) {
       termState_->totalTermFreq_ = termState_->docFreq_ + [statsReader_ readVLong];
     }
     for (jint i = 0; i < ite_->fr_->longsSize_; i++) {
@@ -224,6 +224,11 @@
     absolute = false;
   }
   ((OrgApacheLuceneCodecsBlockTermState *) nil_chk(termState_))->termBlockOrd_ = metaDataUpto_;
+}
+
+- (void)__javaClone:(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame *)original {
+  [super __javaClone:original];
+  [ite_ release];
 }
 
 - (void)dealloc {
@@ -241,11 +246,6 @@
   RELEASE_(bytesReader_);
   RELEASE_(outputPrefix_);
   [super dealloc];
-}
-
-- (void)__javaClone {
-  [super __javaClone];
-  [ite_ release];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -325,9 +325,11 @@ void OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame_initWithOrgApacheLuce
 }
 
 OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame *new_OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame_initWithOrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_withInt_(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *ite, jint ord) {
-  OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame *self = [OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame alloc];
-  OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame_initWithOrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_withInt_(self, ite, ord);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame, initWithOrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_withInt_, ite, ord)
+}
+
+OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame *create_OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame_initWithOrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_withInt_(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *ite, jint ord) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame, initWithOrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_withInt_, ite, ord)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame)

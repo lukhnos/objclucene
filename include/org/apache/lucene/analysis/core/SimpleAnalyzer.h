@@ -5,27 +5,34 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCoreSimpleAnalyzer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCoreSimpleAnalyzer_RESTRICT
-#define OrgApacheLuceneAnalysisCoreSimpleAnalyzer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreSimpleAnalyzer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCoreSimpleAnalyzer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCoreSimpleAnalyzer 0
 #else
-#define OrgApacheLuceneAnalysisCoreSimpleAnalyzer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCoreSimpleAnalyzer 1
 #endif
-#undef OrgApacheLuceneAnalysisCoreSimpleAnalyzer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCoreSimpleAnalyzer
 
-#if !defined (_OrgApacheLuceneAnalysisCoreSimpleAnalyzer_) && (OrgApacheLuceneAnalysisCoreSimpleAnalyzer_INCLUDE_ALL || OrgApacheLuceneAnalysisCoreSimpleAnalyzer_INCLUDE)
-#define _OrgApacheLuceneAnalysisCoreSimpleAnalyzer_
+#if !defined (OrgApacheLuceneAnalysisCoreSimpleAnalyzer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCoreSimpleAnalyzer || defined(INCLUDE_OrgApacheLuceneAnalysisCoreSimpleAnalyzer))
+#define OrgApacheLuceneAnalysisCoreSimpleAnalyzer_
 
-#define OrgApacheLuceneAnalysisAnalyzer_RESTRICT 1
-#define OrgApacheLuceneAnalysisAnalyzer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisAnalyzer 1
+#define INCLUDE_OrgApacheLuceneAnalysisAnalyzer 1
 #include "org/apache/lucene/analysis/Analyzer.h"
 
 @class OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;
 
+/*!
+ @brief An <code>Analyzer</code> that filters <code>LetterTokenizer</code> 
+ with <code>LowerCaseFilter</code>
+ */
 @interface OrgApacheLuceneAnalysisCoreSimpleAnalyzer : OrgApacheLuceneAnalysisAnalyzer
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new <code>SimpleAnalyzer</code>
+ */
 - (instancetype)init;
 
 #pragma mark Protected
@@ -40,8 +47,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreSimpleAnalyzer_init(OrgApacheL
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreSimpleAnalyzer *new_OrgApacheLuceneAnalysisCoreSimpleAnalyzer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreSimpleAnalyzer *create_OrgApacheLuceneAnalysisCoreSimpleAnalyzer_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreSimpleAnalyzer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCoreSimpleAnalyzer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreSimpleAnalyzer")

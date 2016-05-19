@@ -19,12 +19,12 @@
 }
 
 - (OrgApacheLuceneAnalysisCoreLetterTokenizer *)createWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory {
-  return [new_OrgApacheLuceneAnalysisCoreLetterTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(factory) autorelease];
+  return create_OrgApacheLuceneAnalysisCoreLetterTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(factory);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "LetterTokenizerFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "LetterTokenizerFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "createWithOrgApacheLuceneUtilAttributeFactory:", "create", "Lorg.apache.lucene.analysis.core.LetterTokenizer;", 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreLetterTokenizerFactory = { 2, "LetterTokenizerFactory", "org.apache.lucene.analysis.core", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
@@ -36,14 +36,16 @@
 void OrgApacheLuceneAnalysisCoreLetterTokenizerFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisCoreLetterTokenizerFactory *self, id<JavaUtilMap> args) {
   OrgApacheLuceneAnalysisUtilTokenizerFactory_initWithJavaUtilMap_(self, args);
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisCoreLetterTokenizerFactory *new_OrgApacheLuceneAnalysisCoreLetterTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisCoreLetterTokenizerFactory *self = [OrgApacheLuceneAnalysisCoreLetterTokenizerFactory alloc];
-  OrgApacheLuceneAnalysisCoreLetterTokenizerFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCoreLetterTokenizerFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisCoreLetterTokenizerFactory *create_OrgApacheLuceneAnalysisCoreLetterTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCoreLetterTokenizerFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCoreLetterTokenizerFactory)

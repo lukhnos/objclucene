@@ -3,14 +3,17 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/ro/package-info.java
 //
 
+/*!
+ @brief Analyzer for Romanian.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisRoPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisRoPackage_info_RESTRICT
-#define OrgApacheLuceneAnalysisRoPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisRoPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisRoPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisRoPackage_info 0
 #else
-#define OrgApacheLuceneAnalysisRoPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisRoPackage_info 1
 #endif
-#undef OrgApacheLuceneAnalysisRoPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisRoPackage_info
 
-#pragma pop_macro("OrgApacheLuceneAnalysisRoPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisRoPackage_info")

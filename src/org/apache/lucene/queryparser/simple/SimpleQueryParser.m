@@ -31,7 +31,7 @@
 
 @interface OrgApacheLuceneQueryparserSimpleSimpleQueryParser () {
  @public
-  OrgApacheLuceneSearchBooleanClause_OccurEnum *defaultOperator_;
+  OrgApacheLuceneSearchBooleanClause_Occur *defaultOperator_;
 }
 
 - (void)parseSubQueryWithOrgApacheLuceneQueryparserSimpleSimpleQueryParser_State:(OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State *)state;
@@ -44,18 +44,25 @@
 
 + (OrgApacheLuceneSearchBooleanQuery *)addClauseWithOrgApacheLuceneSearchBooleanQuery:(OrgApacheLuceneSearchBooleanQuery *)bq
                                                        withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                                     withOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanClause_OccurEnum *)occur;
+                                         withOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause_Occur *)occur;
 
 - (void)buildQueryTreeWithOrgApacheLuceneQueryparserSimpleSimpleQueryParser_State:(OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State *)state
                                                    withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)branch;
 
+/*!
+ @brief Helper parsing fuzziness from parsing state
+ @return slop/edit distance, 0 in the case of non-parsing slop/edit string
+ */
 - (jint)parseFuzzinessWithOrgApacheLuceneQueryparserSimpleSimpleQueryParser_State:(OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State *)state;
 
+/*!
+ @brief Helper returning true if the state has reached the end of token.
+ */
 - (jboolean)tokenFinishedWithOrgApacheLuceneQueryparserSimpleSimpleQueryParser_State:(OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State *)state;
 
 @end
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSimpleSimpleQueryParser, defaultOperator_, OrgApacheLuceneSearchBooleanClause_OccurEnum *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSimpleSimpleQueryParser, defaultOperator_, OrgApacheLuceneSearchBooleanClause_Occur *)
 
 __attribute__((unused)) static void OrgApacheLuceneQueryparserSimpleSimpleQueryParser_parseSubQueryWithOrgApacheLuceneQueryparserSimpleSimpleQueryParser_State_(OrgApacheLuceneQueryparserSimpleSimpleQueryParser *self, OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State *state);
 
@@ -65,7 +72,7 @@ __attribute__((unused)) static void OrgApacheLuceneQueryparserSimpleSimpleQueryP
 
 __attribute__((unused)) static void OrgApacheLuceneQueryparserSimpleSimpleQueryParser_consumeTokenWithOrgApacheLuceneQueryparserSimpleSimpleQueryParser_State_(OrgApacheLuceneQueryparserSimpleSimpleQueryParser *self, OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State *state);
 
-__attribute__((unused)) static OrgApacheLuceneSearchBooleanQuery *OrgApacheLuceneQueryparserSimpleSimpleQueryParser_addClauseWithOrgApacheLuceneSearchBooleanQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_OccurEnum_(OrgApacheLuceneSearchBooleanQuery *bq, OrgApacheLuceneSearchQuery *query, OrgApacheLuceneSearchBooleanClause_OccurEnum *occur);
+__attribute__((unused)) static OrgApacheLuceneSearchBooleanQuery *OrgApacheLuceneQueryparserSimpleSimpleQueryParser_addClauseWithOrgApacheLuceneSearchBooleanQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_Occur_(OrgApacheLuceneSearchBooleanQuery *bq, OrgApacheLuceneSearchQuery *query, OrgApacheLuceneSearchBooleanClause_Occur *occur);
 
 __attribute__((unused)) static void OrgApacheLuceneQueryparserSimpleSimpleQueryParser_buildQueryTreeWithOrgApacheLuceneQueryparserSimpleSimpleQueryParser_State_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneQueryparserSimpleSimpleQueryParser *self, OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State *state, OrgApacheLuceneSearchQuery *branch);
 
@@ -74,6 +81,46 @@ __attribute__((unused)) static jint OrgApacheLuceneQueryparserSimpleSimpleQueryP
 __attribute__((unused)) static jboolean OrgApacheLuceneQueryparserSimpleSimpleQueryParser_tokenFinishedWithOrgApacheLuceneQueryparserSimpleSimpleQueryParser_State_(OrgApacheLuceneQueryparserSimpleSimpleQueryParser *self, OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State *state);
 
 @implementation OrgApacheLuceneQueryparserSimpleSimpleQueryParser
+
++ (jint)AND_OPERATOR {
+  return OrgApacheLuceneQueryparserSimpleSimpleQueryParser_AND_OPERATOR;
+}
+
++ (jint)NOT_OPERATOR {
+  return OrgApacheLuceneQueryparserSimpleSimpleQueryParser_NOT_OPERATOR;
+}
+
++ (jint)OR_OPERATOR {
+  return OrgApacheLuceneQueryparserSimpleSimpleQueryParser_OR_OPERATOR;
+}
+
++ (jint)PREFIX_OPERATOR {
+  return OrgApacheLuceneQueryparserSimpleSimpleQueryParser_PREFIX_OPERATOR;
+}
+
++ (jint)PHRASE_OPERATOR {
+  return OrgApacheLuceneQueryparserSimpleSimpleQueryParser_PHRASE_OPERATOR;
+}
+
++ (jint)PRECEDENCE_OPERATORS {
+  return OrgApacheLuceneQueryparserSimpleSimpleQueryParser_PRECEDENCE_OPERATORS;
+}
+
++ (jint)ESCAPE_OPERATOR {
+  return OrgApacheLuceneQueryparserSimpleSimpleQueryParser_ESCAPE_OPERATOR;
+}
+
++ (jint)WHITESPACE_OPERATOR {
+  return OrgApacheLuceneQueryparserSimpleSimpleQueryParser_WHITESPACE_OPERATOR;
+}
+
++ (jint)FUZZY_OPERATOR {
+  return OrgApacheLuceneQueryparserSimpleSimpleQueryParser_FUZZY_OPERATOR;
+}
+
++ (jint)NEAR_OPERATOR {
+  return OrgApacheLuceneQueryparserSimpleSimpleQueryParser_NEAR_OPERATOR;
+}
 
 - (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
                                            withNSString:(NSString *)field {
@@ -97,10 +144,10 @@ __attribute__((unused)) static jboolean OrgApacheLuceneQueryparserSimpleSimpleQu
 - (OrgApacheLuceneSearchQuery *)parseWithNSString:(NSString *)queryText {
   IOSCharArray *data = [((NSString *) nil_chk(queryText)) toCharArray];
   IOSCharArray *buffer = [IOSCharArray arrayWithLength:((IOSCharArray *) nil_chk(data))->size_];
-  OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State *state = [new_OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State_initWithCharArray_withCharArray_withInt_withInt_(data, buffer, 0, data->size_) autorelease];
+  OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State *state = create_OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State_initWithCharArray_withCharArray_withInt_withInt_(data, buffer, 0, data->size_);
   OrgApacheLuceneQueryparserSimpleSimpleQueryParser_parseSubQueryWithOrgApacheLuceneQueryparserSimpleSimpleQueryParser_State_(self, state);
   if (state->top_ == nil) {
-    return [new_OrgApacheLuceneSearchMatchNoDocsQuery_init() autorelease];
+    return create_OrgApacheLuceneSearchMatchNoDocsQuery_init();
   }
   else {
     return state->top_;
@@ -125,8 +172,8 @@ __attribute__((unused)) static jboolean OrgApacheLuceneQueryparserSimpleSimpleQu
 
 + (OrgApacheLuceneSearchBooleanQuery *)addClauseWithOrgApacheLuceneSearchBooleanQuery:(OrgApacheLuceneSearchBooleanQuery *)bq
                                                        withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                                     withOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanClause_OccurEnum *)occur {
-  return OrgApacheLuceneQueryparserSimpleSimpleQueryParser_addClauseWithOrgApacheLuceneSearchBooleanQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_OccurEnum_(bq, query, occur);
+                                         withOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause_Occur *)occur {
+  return OrgApacheLuceneQueryparserSimpleSimpleQueryParser_addClauseWithOrgApacheLuceneSearchBooleanQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_Occur_(bq, query, occur);
 }
 
 - (void)buildQueryTreeWithOrgApacheLuceneQueryparserSimpleSimpleQueryParser_State:(OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State *)state
@@ -143,13 +190,13 @@ __attribute__((unused)) static jboolean OrgApacheLuceneQueryparserSimpleSimpleQu
 }
 
 - (OrgApacheLuceneSearchQuery *)newDefaultQueryWithNSString:(NSString *)text {
-  OrgApacheLuceneSearchBooleanQuery_Builder *bq = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
+  OrgApacheLuceneSearchBooleanQuery_Builder *bq = create_OrgApacheLuceneSearchBooleanQuery_Builder_init();
   [bq setDisableCoordWithBoolean:true];
   for (id<JavaUtilMap_Entry> __strong entry_ in nil_chk([((id<JavaUtilMap>) nil_chk(weights_)) entrySet])) {
-    OrgApacheLuceneSearchQuery *q = [self createBooleanQueryWithNSString:[((id<JavaUtilMap_Entry>) nil_chk(entry_)) getKey] withNSString:text withOrgApacheLuceneSearchBooleanClause_OccurEnum:defaultOperator_];
+    OrgApacheLuceneSearchQuery *q = [self createBooleanQueryWithNSString:[((id<JavaUtilMap_Entry>) nil_chk(entry_)) getKey] withNSString:text withOrgApacheLuceneSearchBooleanClause_Occur:defaultOperator_];
     if (q != nil) {
       [q setBoostWithFloat:[((JavaLangFloat *) nil_chk([entry_ getValue])) floatValue]];
-      [bq addWithOrgApacheLuceneSearchQuery:q withOrgApacheLuceneSearchBooleanClause_OccurEnum:JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD)];
+      [bq addWithOrgApacheLuceneSearchQuery:q withOrgApacheLuceneSearchBooleanClause_Occur:JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD)];
     }
   }
   return [self simplifyWithOrgApacheLuceneSearchBooleanQuery:[bq build]];
@@ -157,13 +204,13 @@ __attribute__((unused)) static jboolean OrgApacheLuceneQueryparserSimpleSimpleQu
 
 - (OrgApacheLuceneSearchQuery *)newFuzzyQueryWithNSString:(NSString *)text
                                                   withInt:(jint)fuzziness {
-  OrgApacheLuceneSearchBooleanQuery_Builder *bq = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
+  OrgApacheLuceneSearchBooleanQuery_Builder *bq = create_OrgApacheLuceneSearchBooleanQuery_Builder_init();
   [bq setDisableCoordWithBoolean:true];
   for (id<JavaUtilMap_Entry> __strong entry_ in nil_chk([((id<JavaUtilMap>) nil_chk(weights_)) entrySet])) {
-    OrgApacheLuceneSearchQuery *q = [new_OrgApacheLuceneSearchFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withInt_([new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_([((id<JavaUtilMap_Entry>) nil_chk(entry_)) getKey], text) autorelease], fuzziness) autorelease];
+    OrgApacheLuceneSearchQuery *q = create_OrgApacheLuceneSearchFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withInt_(create_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_([((id<JavaUtilMap_Entry>) nil_chk(entry_)) getKey], text), fuzziness);
     if (q != nil) {
       [q setBoostWithFloat:[((JavaLangFloat *) nil_chk([entry_ getValue])) floatValue]];
-      [bq addWithOrgApacheLuceneSearchQuery:q withOrgApacheLuceneSearchBooleanClause_OccurEnum:JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD)];
+      [bq addWithOrgApacheLuceneSearchQuery:q withOrgApacheLuceneSearchBooleanClause_Occur:JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD)];
     }
   }
   return [self simplifyWithOrgApacheLuceneSearchBooleanQuery:[bq build]];
@@ -171,25 +218,25 @@ __attribute__((unused)) static jboolean OrgApacheLuceneQueryparserSimpleSimpleQu
 
 - (OrgApacheLuceneSearchQuery *)newPhraseQueryWithNSString:(NSString *)text
                                                    withInt:(jint)slop {
-  OrgApacheLuceneSearchBooleanQuery_Builder *bq = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
+  OrgApacheLuceneSearchBooleanQuery_Builder *bq = create_OrgApacheLuceneSearchBooleanQuery_Builder_init();
   [bq setDisableCoordWithBoolean:true];
   for (id<JavaUtilMap_Entry> __strong entry_ in nil_chk([((id<JavaUtilMap>) nil_chk(weights_)) entrySet])) {
     OrgApacheLuceneSearchQuery *q = [self createPhraseQueryWithNSString:[((id<JavaUtilMap_Entry>) nil_chk(entry_)) getKey] withNSString:text withInt:slop];
     if (q != nil) {
       [q setBoostWithFloat:[((JavaLangFloat *) nil_chk([entry_ getValue])) floatValue]];
-      [bq addWithOrgApacheLuceneSearchQuery:q withOrgApacheLuceneSearchBooleanClause_OccurEnum:JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD)];
+      [bq addWithOrgApacheLuceneSearchQuery:q withOrgApacheLuceneSearchBooleanClause_Occur:JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD)];
     }
   }
   return [self simplifyWithOrgApacheLuceneSearchBooleanQuery:[bq build]];
 }
 
 - (OrgApacheLuceneSearchQuery *)newPrefixQueryWithNSString:(NSString *)text {
-  OrgApacheLuceneSearchBooleanQuery_Builder *bq = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
+  OrgApacheLuceneSearchBooleanQuery_Builder *bq = create_OrgApacheLuceneSearchBooleanQuery_Builder_init();
   [bq setDisableCoordWithBoolean:true];
   for (id<JavaUtilMap_Entry> __strong entry_ in nil_chk([((id<JavaUtilMap>) nil_chk(weights_)) entrySet])) {
-    OrgApacheLuceneSearchPrefixQuery *prefix = [new_OrgApacheLuceneSearchPrefixQuery_initWithOrgApacheLuceneIndexTerm_([new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_([((id<JavaUtilMap_Entry>) nil_chk(entry_)) getKey], text) autorelease]) autorelease];
+    OrgApacheLuceneSearchPrefixQuery *prefix = create_OrgApacheLuceneSearchPrefixQuery_initWithOrgApacheLuceneIndexTerm_(create_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_([((id<JavaUtilMap_Entry>) nil_chk(entry_)) getKey], text));
     [prefix setBoostWithFloat:[((JavaLangFloat *) nil_chk([entry_ getValue])) floatValue]];
-    [bq addWithOrgApacheLuceneSearchQuery:prefix withOrgApacheLuceneSearchBooleanClause_OccurEnum:JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD)];
+    [bq addWithOrgApacheLuceneSearchQuery:prefix withOrgApacheLuceneSearchBooleanClause_Occur:JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD)];
   }
   return [self simplifyWithOrgApacheLuceneSearchBooleanQuery:[bq build]];
 }
@@ -206,13 +253,13 @@ __attribute__((unused)) static jboolean OrgApacheLuceneQueryparserSimpleSimpleQu
   }
 }
 
-- (OrgApacheLuceneSearchBooleanClause_OccurEnum *)getDefaultOperator {
+- (OrgApacheLuceneSearchBooleanClause_Occur *)getDefaultOperator {
   return defaultOperator_;
 }
 
-- (void)setDefaultOperatorWithOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanClause_OccurEnum *)operator_ {
-  if (operator_ != JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD) && operator_ != JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, MUST)) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"invalid operator: only SHOULD or MUST are allowed") autorelease];
+- (void)setDefaultOperatorWithOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause_Occur *)operator_ {
+  if (operator_ != JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD) && operator_ != JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, MUST)) {
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"invalid operator: only SHOULD or MUST are allowed");
   }
   JreStrongAssign(&self->defaultOperator_, operator_);
 }
@@ -226,14 +273,14 @@ __attribute__((unused)) static jboolean OrgApacheLuceneQueryparserSimpleSimpleQu
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneAnalysisAnalyzer:withNSString:", "SimpleQueryParser", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:withJavaUtilMap:", "SimpleQueryParser", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:withJavaUtilMap:withInt:", "SimpleQueryParser", NULL, 0x1, NULL, NULL },
+    { "initWithOrgApacheLuceneAnalysisAnalyzer:withJavaUtilMap:", "SimpleQueryParser", NULL, 0x1, NULL, "(Lorg/apache/lucene/analysis/Analyzer;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Float;>;)V" },
+    { "initWithOrgApacheLuceneAnalysisAnalyzer:withJavaUtilMap:withInt:", "SimpleQueryParser", NULL, 0x1, NULL, "(Lorg/apache/lucene/analysis/Analyzer;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Float;>;I)V" },
     { "parseWithNSString:", "parse", "Lorg.apache.lucene.search.Query;", 0x1, NULL, NULL },
     { "parseSubQueryWithOrgApacheLuceneQueryparserSimpleSimpleQueryParser_State:", "parseSubQuery", "V", 0x2, NULL, NULL },
     { "consumeSubQueryWithOrgApacheLuceneQueryparserSimpleSimpleQueryParser_State:", "consumeSubQuery", "V", 0x2, NULL, NULL },
     { "consumePhraseWithOrgApacheLuceneQueryparserSimpleSimpleQueryParser_State:", "consumePhrase", "V", 0x2, NULL, NULL },
     { "consumeTokenWithOrgApacheLuceneQueryparserSimpleSimpleQueryParser_State:", "consumeToken", "V", 0x2, NULL, NULL },
-    { "addClauseWithOrgApacheLuceneSearchBooleanQuery:withOrgApacheLuceneSearchQuery:withOrgApacheLuceneSearchBooleanClause_OccurEnum:", "addClause", "Lorg.apache.lucene.search.BooleanQuery;", 0xa, NULL, NULL },
+    { "addClauseWithOrgApacheLuceneSearchBooleanQuery:withOrgApacheLuceneSearchQuery:withOrgApacheLuceneSearchBooleanClause_Occur:", "addClause", "Lorg.apache.lucene.search.BooleanQuery;", 0xa, NULL, NULL },
     { "buildQueryTreeWithOrgApacheLuceneQueryparserSimpleSimpleQueryParser_State:withOrgApacheLuceneSearchQuery:", "buildQueryTree", "V", 0x2, NULL, NULL },
     { "parseFuzzinessWithOrgApacheLuceneQueryparserSimpleSimpleQueryParser_State:", "parseFuzziness", "I", 0x2, NULL, NULL },
     { "tokenFinishedWithOrgApacheLuceneQueryparserSimpleSimpleQueryParser_State:", "tokenFinished", "Z", 0x2, NULL, NULL },
@@ -243,7 +290,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneQueryparserSimpleSimpleQu
     { "newPrefixQueryWithNSString:", "newPrefixQuery", "Lorg.apache.lucene.search.Query;", 0x4, NULL, NULL },
     { "simplifyWithOrgApacheLuceneSearchBooleanQuery:", "simplify", "Lorg.apache.lucene.search.Query;", 0x4, NULL, NULL },
     { "getDefaultOperator", NULL, "Lorg.apache.lucene.search.BooleanClause$Occur;", 0x1, NULL, NULL },
-    { "setDefaultOperatorWithOrgApacheLuceneSearchBooleanClause_OccurEnum:", "setDefaultOperator", "V", 0x1, NULL, NULL },
+    { "setDefaultOperatorWithOrgApacheLuceneSearchBooleanClause_Occur:", "setDefaultOperator", "V", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "weights_", NULL, 0x14, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Float;>;", .constantValue.asLong = 0 },
@@ -272,9 +319,11 @@ void OrgApacheLuceneQueryparserSimpleSimpleQueryParser_initWithOrgApacheLuceneAn
 }
 
 OrgApacheLuceneQueryparserSimpleSimpleQueryParser *new_OrgApacheLuceneQueryparserSimpleSimpleQueryParser_initWithOrgApacheLuceneAnalysisAnalyzer_withNSString_(OrgApacheLuceneAnalysisAnalyzer *analyzer, NSString *field) {
-  OrgApacheLuceneQueryparserSimpleSimpleQueryParser *self = [OrgApacheLuceneQueryparserSimpleSimpleQueryParser alloc];
-  OrgApacheLuceneQueryparserSimpleSimpleQueryParser_initWithOrgApacheLuceneAnalysisAnalyzer_withNSString_(self, analyzer, field);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserSimpleSimpleQueryParser, initWithOrgApacheLuceneAnalysisAnalyzer_withNSString_, analyzer, field)
+}
+
+OrgApacheLuceneQueryparserSimpleSimpleQueryParser *create_OrgApacheLuceneQueryparserSimpleSimpleQueryParser_initWithOrgApacheLuceneAnalysisAnalyzer_withNSString_(OrgApacheLuceneAnalysisAnalyzer *analyzer, NSString *field) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserSimpleSimpleQueryParser, initWithOrgApacheLuceneAnalysisAnalyzer_withNSString_, analyzer, field)
 }
 
 void OrgApacheLuceneQueryparserSimpleSimpleQueryParser_initWithOrgApacheLuceneAnalysisAnalyzer_withJavaUtilMap_(OrgApacheLuceneQueryparserSimpleSimpleQueryParser *self, OrgApacheLuceneAnalysisAnalyzer *analyzer, id<JavaUtilMap> weights) {
@@ -282,22 +331,26 @@ void OrgApacheLuceneQueryparserSimpleSimpleQueryParser_initWithOrgApacheLuceneAn
 }
 
 OrgApacheLuceneQueryparserSimpleSimpleQueryParser *new_OrgApacheLuceneQueryparserSimpleSimpleQueryParser_initWithOrgApacheLuceneAnalysisAnalyzer_withJavaUtilMap_(OrgApacheLuceneAnalysisAnalyzer *analyzer, id<JavaUtilMap> weights) {
-  OrgApacheLuceneQueryparserSimpleSimpleQueryParser *self = [OrgApacheLuceneQueryparserSimpleSimpleQueryParser alloc];
-  OrgApacheLuceneQueryparserSimpleSimpleQueryParser_initWithOrgApacheLuceneAnalysisAnalyzer_withJavaUtilMap_(self, analyzer, weights);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserSimpleSimpleQueryParser, initWithOrgApacheLuceneAnalysisAnalyzer_withJavaUtilMap_, analyzer, weights)
+}
+
+OrgApacheLuceneQueryparserSimpleSimpleQueryParser *create_OrgApacheLuceneQueryparserSimpleSimpleQueryParser_initWithOrgApacheLuceneAnalysisAnalyzer_withJavaUtilMap_(OrgApacheLuceneAnalysisAnalyzer *analyzer, id<JavaUtilMap> weights) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserSimpleSimpleQueryParser, initWithOrgApacheLuceneAnalysisAnalyzer_withJavaUtilMap_, analyzer, weights)
 }
 
 void OrgApacheLuceneQueryparserSimpleSimpleQueryParser_initWithOrgApacheLuceneAnalysisAnalyzer_withJavaUtilMap_withInt_(OrgApacheLuceneQueryparserSimpleSimpleQueryParser *self, OrgApacheLuceneAnalysisAnalyzer *analyzer, id<JavaUtilMap> weights, jint flags) {
   OrgApacheLuceneUtilQueryBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_(self, analyzer);
-  JreStrongAssign(&self->defaultOperator_, JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD));
+  JreStrongAssign(&self->defaultOperator_, JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD));
   JreStrongAssign(&self->weights_, weights);
   self->flags_ = flags;
 }
 
 OrgApacheLuceneQueryparserSimpleSimpleQueryParser *new_OrgApacheLuceneQueryparserSimpleSimpleQueryParser_initWithOrgApacheLuceneAnalysisAnalyzer_withJavaUtilMap_withInt_(OrgApacheLuceneAnalysisAnalyzer *analyzer, id<JavaUtilMap> weights, jint flags) {
-  OrgApacheLuceneQueryparserSimpleSimpleQueryParser *self = [OrgApacheLuceneQueryparserSimpleSimpleQueryParser alloc];
-  OrgApacheLuceneQueryparserSimpleSimpleQueryParser_initWithOrgApacheLuceneAnalysisAnalyzer_withJavaUtilMap_withInt_(self, analyzer, weights, flags);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserSimpleSimpleQueryParser, initWithOrgApacheLuceneAnalysisAnalyzer_withJavaUtilMap_withInt_, analyzer, weights, flags)
+}
+
+OrgApacheLuceneQueryparserSimpleSimpleQueryParser *create_OrgApacheLuceneQueryparserSimpleSimpleQueryParser_initWithOrgApacheLuceneAnalysisAnalyzer_withJavaUtilMap_withInt_(OrgApacheLuceneAnalysisAnalyzer *analyzer, id<JavaUtilMap> weights, jint flags) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserSimpleSimpleQueryParser, initWithOrgApacheLuceneAnalysisAnalyzer_withJavaUtilMap_withInt_, analyzer, weights, flags)
 }
 
 void OrgApacheLuceneQueryparserSimpleSimpleQueryParser_parseSubQueryWithOrgApacheLuceneQueryparserSimpleSimpleQueryParser_State_(OrgApacheLuceneQueryparserSimpleSimpleQueryParser *self, OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State *state) {
@@ -313,13 +366,13 @@ void OrgApacheLuceneQueryparserSimpleSimpleQueryParser_parseSubQueryWithOrgApach
     }
     else if (IOSCharArray_Get(state->data_, state->index_) == '+' && (self->flags_ & OrgApacheLuceneQueryparserSimpleSimpleQueryParser_AND_OPERATOR) != 0) {
       if (state->currentOperation_ == nil && state->top_ != nil) {
-        JreStrongAssign(&state->currentOperation_, JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, MUST));
+        JreStrongAssign(&state->currentOperation_, JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, MUST));
       }
       ++state->index_;
     }
     else if (IOSCharArray_Get(state->data_, state->index_) == '|' && (self->flags_ & OrgApacheLuceneQueryparserSimpleSimpleQueryParser_OR_OPERATOR) != 0) {
       if (state->currentOperation_ == nil && state->top_ != nil) {
-        JreStrongAssign(&state->currentOperation_, JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD));
+        JreStrongAssign(&state->currentOperation_, JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD));
       }
       ++state->index_;
     }
@@ -371,7 +424,7 @@ void OrgApacheLuceneQueryparserSimpleSimpleQueryParser_consumeSubQueryWithOrgApa
     ++state->index_;
   }
   else {
-    OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State *subState = [new_OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State_initWithCharArray_withCharArray_withInt_withInt_(state->data_, state->buffer_, start, state->index_) autorelease];
+    OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State *subState = create_OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State_initWithCharArray_withCharArray_withInt_withInt_(state->data_, state->buffer_, start, state->index_);
     OrgApacheLuceneQueryparserSimpleSimpleQueryParser_parseSubQueryWithOrgApacheLuceneQueryparserSimpleSimpleQueryParser_State_(self, subState);
     OrgApacheLuceneQueryparserSimpleSimpleQueryParser_buildQueryTreeWithOrgApacheLuceneQueryparserSimpleSimpleQueryParser_State_withOrgApacheLuceneSearchQuery_(self, state, subState->top_);
     ++state->index_;
@@ -478,24 +531,24 @@ void OrgApacheLuceneQueryparserSimpleSimpleQueryParser_consumeTokenWithOrgApache
   }
 }
 
-OrgApacheLuceneSearchBooleanQuery *OrgApacheLuceneQueryparserSimpleSimpleQueryParser_addClauseWithOrgApacheLuceneSearchBooleanQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_OccurEnum_(OrgApacheLuceneSearchBooleanQuery *bq, OrgApacheLuceneSearchQuery *query, OrgApacheLuceneSearchBooleanClause_OccurEnum *occur) {
+OrgApacheLuceneSearchBooleanQuery *OrgApacheLuceneQueryparserSimpleSimpleQueryParser_addClauseWithOrgApacheLuceneSearchBooleanQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_Occur_(OrgApacheLuceneSearchBooleanQuery *bq, OrgApacheLuceneSearchQuery *query, OrgApacheLuceneSearchBooleanClause_Occur *occur) {
   OrgApacheLuceneQueryparserSimpleSimpleQueryParser_initialize();
-  OrgApacheLuceneSearchBooleanQuery_Builder *newBq = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
+  OrgApacheLuceneSearchBooleanQuery_Builder *newBq = create_OrgApacheLuceneSearchBooleanQuery_Builder_init();
   [newBq setDisableCoordWithBoolean:[((OrgApacheLuceneSearchBooleanQuery *) nil_chk(bq)) isCoordDisabled]];
   [newBq setMinimumNumberShouldMatchWithInt:[bq getMinimumNumberShouldMatch]];
   for (OrgApacheLuceneSearchBooleanClause * __strong clause in bq) {
     [newBq addWithOrgApacheLuceneSearchBooleanClause:clause];
   }
-  [newBq addWithOrgApacheLuceneSearchQuery:query withOrgApacheLuceneSearchBooleanClause_OccurEnum:occur];
+  [newBq addWithOrgApacheLuceneSearchQuery:query withOrgApacheLuceneSearchBooleanClause_Occur:occur];
   return [newBq build];
 }
 
 void OrgApacheLuceneQueryparserSimpleSimpleQueryParser_buildQueryTreeWithOrgApacheLuceneQueryparserSimpleSimpleQueryParser_State_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneQueryparserSimpleSimpleQueryParser *self, OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State *state, OrgApacheLuceneSearchQuery *branch) {
   if (branch != nil) {
     if (((OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State *) nil_chk(state))->not__ % 2 == 1) {
-      OrgApacheLuceneSearchBooleanQuery_Builder *nq = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
-      [nq addWithOrgApacheLuceneSearchQuery:branch withOrgApacheLuceneSearchBooleanClause_OccurEnum:JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, MUST_NOT)];
-      [nq addWithOrgApacheLuceneSearchQuery:[new_OrgApacheLuceneSearchMatchAllDocsQuery_init() autorelease] withOrgApacheLuceneSearchBooleanClause_OccurEnum:JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD)];
+      OrgApacheLuceneSearchBooleanQuery_Builder *nq = create_OrgApacheLuceneSearchBooleanQuery_Builder_init();
+      [nq addWithOrgApacheLuceneSearchQuery:branch withOrgApacheLuceneSearchBooleanClause_Occur:JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, MUST_NOT)];
+      [nq addWithOrgApacheLuceneSearchQuery:create_OrgApacheLuceneSearchMatchAllDocsQuery_init() withOrgApacheLuceneSearchBooleanClause_Occur:JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD)];
       branch = [nq build];
     }
     if (state->top_ == nil) {
@@ -506,11 +559,11 @@ void OrgApacheLuceneQueryparserSimpleSimpleQueryParser_buildQueryTreeWithOrgApac
         JreStrongAssign(&state->currentOperation_, self->defaultOperator_);
       }
       if (state->previousOperation_ != state->currentOperation_) {
-        OrgApacheLuceneSearchBooleanQuery_Builder *bq = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
-        [bq addWithOrgApacheLuceneSearchQuery:state->top_ withOrgApacheLuceneSearchBooleanClause_OccurEnum:state->currentOperation_];
+        OrgApacheLuceneSearchBooleanQuery_Builder *bq = create_OrgApacheLuceneSearchBooleanQuery_Builder_init();
+        [bq addWithOrgApacheLuceneSearchQuery:state->top_ withOrgApacheLuceneSearchBooleanClause_Occur:state->currentOperation_];
         JreStrongAssign(&state->top_, [bq build]);
       }
-      JreStrongAssign(&state->top_, OrgApacheLuceneQueryparserSimpleSimpleQueryParser_addClauseWithOrgApacheLuceneSearchBooleanQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_OccurEnum_((OrgApacheLuceneSearchBooleanQuery *) check_class_cast(state->top_, [OrgApacheLuceneSearchBooleanQuery class]), branch, state->currentOperation_));
+      JreStrongAssign(&state->top_, OrgApacheLuceneQueryparserSimpleSimpleQueryParser_addClauseWithOrgApacheLuceneSearchBooleanQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_Occur_((OrgApacheLuceneSearchBooleanQuery *) cast_chk(state->top_, [OrgApacheLuceneSearchBooleanQuery class]), branch, state->currentOperation_));
       JreStrongAssign(&state->previousOperation_, state->currentOperation_);
     }
     JreStrongAssign(&state->currentOperation_, nil);
@@ -602,9 +655,11 @@ void OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State_initWithCharArray_w
 }
 
 OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State *new_OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State_initWithCharArray_withCharArray_withInt_withInt_(IOSCharArray *data, IOSCharArray *buffer, jint index, jint length) {
-  OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State *self = [OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State alloc];
-  OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State_initWithCharArray_withCharArray_withInt_withInt_(self, data, buffer, index, length);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State, initWithCharArray_withCharArray_withInt_withInt_, data, buffer, index, length)
+}
+
+OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State *create_OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State_initWithCharArray_withCharArray_withInt_withInt_(IOSCharArray *data, IOSCharArray *buffer, jint index, jint length) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State, initWithCharArray_withCharArray_withInt_withInt_, data, buffer, index, length)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State)

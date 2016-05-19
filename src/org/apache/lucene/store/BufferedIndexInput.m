@@ -37,6 +37,9 @@ __attribute__((unused)) static void OrgApacheLuceneStoreBufferedIndexInput_refil
 
 __attribute__((unused)) static jlong OrgApacheLuceneStoreBufferedIndexInput_getFilePointer(OrgApacheLuceneStoreBufferedIndexInput *self);
 
+/*!
+ @brief Implementation of an IndexInput that reads from a portion of a file.
+ */
 @interface OrgApacheLuceneStoreBufferedIndexInput_SlicedIndexInput : OrgApacheLuceneStoreBufferedIndexInput {
  @public
   OrgApacheLuceneStoreIndexInput *base_;
@@ -71,9 +74,23 @@ __attribute__((unused)) static void OrgApacheLuceneStoreBufferedIndexInput_Slice
 
 __attribute__((unused)) static OrgApacheLuceneStoreBufferedIndexInput_SlicedIndexInput *new_OrgApacheLuceneStoreBufferedIndexInput_SlicedIndexInput_initWithNSString_withOrgApacheLuceneStoreIndexInput_withLong_withLong_(NSString *sliceDescription, OrgApacheLuceneStoreIndexInput *base, jlong offset, jlong length) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneStoreBufferedIndexInput_SlicedIndexInput *create_OrgApacheLuceneStoreBufferedIndexInput_SlicedIndexInput_initWithNSString_withOrgApacheLuceneStoreIndexInput_withLong_withLong_(NSString *sliceDescription, OrgApacheLuceneStoreIndexInput *base, jlong offset, jlong length);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreBufferedIndexInput_SlicedIndexInput)
 
 @implementation OrgApacheLuceneStoreBufferedIndexInput
+
++ (jint)BUFFER_SIZE {
+  return OrgApacheLuceneStoreBufferedIndexInput_BUFFER_SIZE;
+}
+
++ (jint)MIN_BUFFER_SIZE {
+  return OrgApacheLuceneStoreBufferedIndexInput_MIN_BUFFER_SIZE;
+}
+
++ (jint)MERGE_BUFFER_SIZE {
+  return OrgApacheLuceneStoreBufferedIndexInput_MERGE_BUFFER_SIZE;
+}
 
 - (jbyte)readByte {
   if (bufferPosition_ >= bufferLength_) OrgApacheLuceneStoreBufferedIndexInput_refill(self);
@@ -144,8 +161,7 @@ withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
 
 - (jshort)readShort {
   if (2 <= (bufferLength_ - bufferPosition_)) {
-    jint unseq$1 = bufferPosition_++;
-    return (jshort) ((JreLShift32((IOSByteArray_Get(nil_chk(buffer_), unseq$1) & (jint) 0xFF), 8)) | (IOSByteArray_Get(buffer_, bufferPosition_++) & (jint) 0xFF));
+    return (jshort) ((JreLShift32((IOSByteArray_Get(nil_chk(buffer_), bufferPosition_++) & (jint) 0xFF), 8)) | (IOSByteArray_Get(buffer_, bufferPosition_++) & (jint) 0xFF));
   }
   else {
     return [super readShort];
@@ -154,10 +170,7 @@ withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
 
 - (jint)readInt {
   if (4 <= (bufferLength_ - bufferPosition_)) {
-    jint unseq$1 = bufferPosition_++;
-    jint unseq$2 = bufferPosition_++;
-    jint unseq$3 = bufferPosition_++;
-    return (JreLShift32((IOSByteArray_Get(nil_chk(buffer_), unseq$1) & (jint) 0xFF), 24)) | (JreLShift32((IOSByteArray_Get(buffer_, unseq$2) & (jint) 0xFF), 16)) | (JreLShift32((IOSByteArray_Get(buffer_, unseq$3) & (jint) 0xFF), 8)) | (IOSByteArray_Get(buffer_, bufferPosition_++) & (jint) 0xFF);
+    return (JreLShift32((IOSByteArray_Get(nil_chk(buffer_), bufferPosition_++) & (jint) 0xFF), 24)) | (JreLShift32((IOSByteArray_Get(buffer_, bufferPosition_++) & (jint) 0xFF), 16)) | (JreLShift32((IOSByteArray_Get(buffer_, bufferPosition_++) & (jint) 0xFF), 8)) | (IOSByteArray_Get(buffer_, bufferPosition_++) & (jint) 0xFF);
   }
   else {
     return [super readInt];
@@ -166,14 +179,8 @@ withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
 
 - (jlong)readLong {
   if (8 <= (bufferLength_ - bufferPosition_)) {
-    jint unseq$1 = bufferPosition_++;
-    jint unseq$2 = bufferPosition_++;
-    jint unseq$3 = bufferPosition_++;
-    jint i1 = (JreLShift32((IOSByteArray_Get(nil_chk(buffer_), unseq$1) & (jint) 0xff), 24)) | (JreLShift32((IOSByteArray_Get(buffer_, unseq$2) & (jint) 0xff), 16)) | (JreLShift32((IOSByteArray_Get(buffer_, unseq$3) & (jint) 0xff), 8)) | (IOSByteArray_Get(buffer_, bufferPosition_++) & (jint) 0xff);
-    jint unseq$4 = bufferPosition_++;
-    jint unseq$5 = bufferPosition_++;
-    jint unseq$6 = bufferPosition_++;
-    jint i2 = (JreLShift32((IOSByteArray_Get(buffer_, unseq$4) & (jint) 0xff), 24)) | (JreLShift32((IOSByteArray_Get(buffer_, unseq$5) & (jint) 0xff), 16)) | (JreLShift32((IOSByteArray_Get(buffer_, unseq$6) & (jint) 0xff), 8)) | (IOSByteArray_Get(buffer_, bufferPosition_++) & (jint) 0xff);
+    jint i1 = (JreLShift32((IOSByteArray_Get(nil_chk(buffer_), bufferPosition_++) & (jint) 0xff), 24)) | (JreLShift32((IOSByteArray_Get(buffer_, bufferPosition_++) & (jint) 0xff), 16)) | (JreLShift32((IOSByteArray_Get(buffer_, bufferPosition_++) & (jint) 0xff), 8)) | (IOSByteArray_Get(buffer_, bufferPosition_++) & (jint) 0xff);
+    jint i2 = (JreLShift32((IOSByteArray_Get(buffer_, bufferPosition_++) & (jint) 0xff), 24)) | (JreLShift32((IOSByteArray_Get(buffer_, bufferPosition_++) & (jint) 0xff), 16)) | (JreLShift32((IOSByteArray_Get(buffer_, bufferPosition_++) & (jint) 0xff), 8)) | (IOSByteArray_Get(buffer_, bufferPosition_++) & (jint) 0xff);
     return (JreLShift64(((jlong) i1), 32)) | (i2 & (jlong) 0xFFFFFFFFLL);
   }
   else {
@@ -198,7 +205,7 @@ withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
     b = IOSByteArray_Get(buffer_, bufferPosition_++);
     i |= JreLShift32((b & (jint) 0x0F), 28);
     if ((b & (jint) 0xF0) == 0) return i;
-    @throw [new_JavaIoIOException_initWithNSString_(@"Invalid vInt detected (too many bits)") autorelease];
+    @throw create_JavaIoIOException_initWithNSString_(@"Invalid vInt detected (too many bits)");
   }
   else {
     return [super readVInt];
@@ -234,7 +241,7 @@ withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
     b = IOSByteArray_Get(buffer_, bufferPosition_++);
     i |= JreLShift64((b & (jlong) 0x7FLL), 56);
     if (b >= 0) return i;
-    @throw [new_JavaIoIOException_initWithNSString_(@"Invalid vLong detected (negative values disallowed)") autorelease];
+    @throw create_JavaIoIOException_initWithNSString_(@"Invalid vLong detected (negative values disallowed)");
   }
   else {
     return [super readVLong];
@@ -326,7 +333,7 @@ withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
 }
 
 - (OrgApacheLuceneStoreBufferedIndexInput *)clone {
-  OrgApacheLuceneStoreBufferedIndexInput *clone = (OrgApacheLuceneStoreBufferedIndexInput *) check_class_cast([super clone], [OrgApacheLuceneStoreBufferedIndexInput class]);
+  OrgApacheLuceneStoreBufferedIndexInput *clone = (OrgApacheLuceneStoreBufferedIndexInput *) cast_chk([super clone], [OrgApacheLuceneStoreBufferedIndexInput class]);
   JreStrongAssign(&((OrgApacheLuceneStoreBufferedIndexInput *) nil_chk(clone))->buffer_, nil);
   clone->bufferLength_ = 0;
   clone->bufferPosition_ = 0;
@@ -437,7 +444,7 @@ void OrgApacheLuceneStoreBufferedIndexInput_initWithNSString_withInt_(OrgApacheL
 }
 
 void OrgApacheLuceneStoreBufferedIndexInput_checkBufferSizeWithInt_(OrgApacheLuceneStoreBufferedIndexInput *self, jint bufferSize) {
-  if (bufferSize < OrgApacheLuceneStoreBufferedIndexInput_MIN_BUFFER_SIZE) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$IC", @"bufferSize must be at least MIN_BUFFER_SIZE (got ", bufferSize, ')')) autorelease];
+  if (bufferSize < OrgApacheLuceneStoreBufferedIndexInput_MIN_BUFFER_SIZE) @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$IC", @"bufferSize must be at least MIN_BUFFER_SIZE (got ", bufferSize, ')'));
 }
 
 void OrgApacheLuceneStoreBufferedIndexInput_readBytesWithByteArray_withInt_withInt_withBoolean_(OrgApacheLuceneStoreBufferedIndexInput *self, IOSByteArray *b, jint offset, jint len, jboolean useBuffer) {
@@ -457,7 +464,7 @@ void OrgApacheLuceneStoreBufferedIndexInput_readBytesWithByteArray_withInt_withI
       OrgApacheLuceneStoreBufferedIndexInput_refill(self);
       if (self->bufferLength_ < len) {
         JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(self->buffer_, 0, b, offset, self->bufferLength_);
-        @throw [new_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"read past EOF: ", self)) autorelease];
+        @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"read past EOF: ", self));
       }
       else {
         JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(self->buffer_, 0, b, offset, len);
@@ -466,7 +473,7 @@ void OrgApacheLuceneStoreBufferedIndexInput_readBytesWithByteArray_withInt_withI
     }
     else {
       jlong after = self->bufferStart_ + self->bufferPosition_ + len;
-      if (after > [self length]) @throw [new_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"read past EOF: ", self)) autorelease];
+      if (after > [self length]) @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"read past EOF: ", self));
       [self readInternalWithByteArray:b withInt:offset withInt:len];
       self->bufferStart_ = after;
       self->bufferPosition_ = 0;
@@ -480,7 +487,7 @@ void OrgApacheLuceneStoreBufferedIndexInput_refill(OrgApacheLuceneStoreBufferedI
   jlong end = start + self->bufferSize_;
   if (end > [self length]) end = [self length];
   jint newLength = (jint) (end - start);
-  if (newLength <= 0) @throw [new_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"read past EOF: ", self)) autorelease];
+  if (newLength <= 0) @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"read past EOF: ", self));
   if (self->buffer_ == nil) {
     [self newBufferWithByteArray:[IOSByteArray arrayWithLength:self->bufferSize_]];
     [self seekInternalWithLong:self->bufferStart_];
@@ -498,7 +505,7 @@ jlong OrgApacheLuceneStoreBufferedIndexInput_getFilePointer(OrgApacheLuceneStore
 jint OrgApacheLuceneStoreBufferedIndexInput_bufferSizeWithOrgApacheLuceneStoreIOContext_(OrgApacheLuceneStoreIOContext *context) {
   OrgApacheLuceneStoreBufferedIndexInput_initialize();
   switch ([((OrgApacheLuceneStoreIOContext *) nil_chk(context))->context_ ordinal]) {
-    case OrgApacheLuceneStoreIOContext_Context_MERGE:
+    case OrgApacheLuceneStoreIOContext_Context_Enum_MERGE:
     return OrgApacheLuceneStoreBufferedIndexInput_MERGE_BUFFER_SIZE;
     default:
     return OrgApacheLuceneStoreBufferedIndexInput_BUFFER_SIZE;
@@ -507,7 +514,7 @@ jint OrgApacheLuceneStoreBufferedIndexInput_bufferSizeWithOrgApacheLuceneStoreIO
 
 OrgApacheLuceneStoreBufferedIndexInput *OrgApacheLuceneStoreBufferedIndexInput_wrapWithNSString_withOrgApacheLuceneStoreIndexInput_withLong_withLong_(NSString *sliceDescription, OrgApacheLuceneStoreIndexInput *other, jlong offset, jlong length) {
   OrgApacheLuceneStoreBufferedIndexInput_initialize();
-  return [new_OrgApacheLuceneStoreBufferedIndexInput_SlicedIndexInput_initWithNSString_withOrgApacheLuceneStoreIndexInput_withLong_withLong_(sliceDescription, other, offset, length) autorelease];
+  return create_OrgApacheLuceneStoreBufferedIndexInput_SlicedIndexInput_initWithNSString_withOrgApacheLuceneStoreIndexInput_withLong_withLong_(sliceDescription, other, offset, length);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreBufferedIndexInput)
@@ -523,7 +530,7 @@ withOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)base
 }
 
 - (OrgApacheLuceneStoreBufferedIndexInput_SlicedIndexInput *)clone {
-  OrgApacheLuceneStoreBufferedIndexInput_SlicedIndexInput *clone = (OrgApacheLuceneStoreBufferedIndexInput_SlicedIndexInput *) check_class_cast([super clone], [OrgApacheLuceneStoreBufferedIndexInput_SlicedIndexInput class]);
+  OrgApacheLuceneStoreBufferedIndexInput_SlicedIndexInput *clone = (OrgApacheLuceneStoreBufferedIndexInput_SlicedIndexInput *) cast_chk([super clone], [OrgApacheLuceneStoreBufferedIndexInput_SlicedIndexInput class]);
   JreStrongAssign(&((OrgApacheLuceneStoreBufferedIndexInput_SlicedIndexInput *) nil_chk(clone))->base_, [((OrgApacheLuceneStoreIndexInput *) nil_chk(base_)) clone]);
   clone->fileOffset_ = fileOffset_;
   clone->length_ = length_;
@@ -535,10 +542,10 @@ withOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)base
                           withInt:(jint)len {
   jlong start = OrgApacheLuceneStoreBufferedIndexInput_getFilePointer(self);
   if (start + len > length_) {
-    @throw [new_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"read past EOF: ", self)) autorelease];
+    @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"read past EOF: ", self));
   }
   [((OrgApacheLuceneStoreIndexInput *) nil_chk(base_)) seekWithLong:fileOffset_ + start];
-  [base_ readBytesWithByteArray:b withInt:offset withInt:len withBoolean:false];
+  [((OrgApacheLuceneStoreIndexInput *) nil_chk(base_)) readBytesWithByteArray:b withInt:offset withInt:len withBoolean:false];
 }
 
 - (void)seekInternalWithLong:(jlong)pos {
@@ -579,18 +586,20 @@ withOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)base
 
 void OrgApacheLuceneStoreBufferedIndexInput_SlicedIndexInput_initWithNSString_withOrgApacheLuceneStoreIndexInput_withLong_withLong_(OrgApacheLuceneStoreBufferedIndexInput_SlicedIndexInput *self, NSString *sliceDescription, OrgApacheLuceneStoreIndexInput *base, jlong offset, jlong length) {
   OrgApacheLuceneStoreBufferedIndexInput_initWithNSString_withInt_(self, (sliceDescription == nil) ? [((OrgApacheLuceneStoreIndexInput *) nil_chk(base)) description] : (JreStrcat("$$$C", [((OrgApacheLuceneStoreIndexInput *) nil_chk(base)) description], @" [slice=", sliceDescription, ']')), OrgApacheLuceneStoreBufferedIndexInput_BUFFER_SIZE);
-  if (offset < 0 || length < 0 || offset + length > [((OrgApacheLuceneStoreIndexInput *) nil_chk(base)) length]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$@", @"slice() ", sliceDescription, @" out of bounds: ", base)) autorelease];
+  if (offset < 0 || length < 0 || offset + length > [base length]) {
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$@", @"slice() ", sliceDescription, @" out of bounds: ", base));
   }
-  JreStrongAssign(&self->base_, [((OrgApacheLuceneStoreIndexInput *) nil_chk(base)) clone]);
+  JreStrongAssign(&self->base_, [base clone]);
   self->fileOffset_ = offset;
   self->length_ = length;
 }
 
 OrgApacheLuceneStoreBufferedIndexInput_SlicedIndexInput *new_OrgApacheLuceneStoreBufferedIndexInput_SlicedIndexInput_initWithNSString_withOrgApacheLuceneStoreIndexInput_withLong_withLong_(NSString *sliceDescription, OrgApacheLuceneStoreIndexInput *base, jlong offset, jlong length) {
-  OrgApacheLuceneStoreBufferedIndexInput_SlicedIndexInput *self = [OrgApacheLuceneStoreBufferedIndexInput_SlicedIndexInput alloc];
-  OrgApacheLuceneStoreBufferedIndexInput_SlicedIndexInput_initWithNSString_withOrgApacheLuceneStoreIndexInput_withLong_withLong_(self, sliceDescription, base, offset, length);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreBufferedIndexInput_SlicedIndexInput, initWithNSString_withOrgApacheLuceneStoreIndexInput_withLong_withLong_, sliceDescription, base, offset, length)
+}
+
+OrgApacheLuceneStoreBufferedIndexInput_SlicedIndexInput *create_OrgApacheLuceneStoreBufferedIndexInput_SlicedIndexInput_initWithNSString_withOrgApacheLuceneStoreIndexInput_withLong_withLong_(NSString *sliceDescription, OrgApacheLuceneStoreIndexInput *base, jlong offset, jlong length) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreBufferedIndexInput_SlicedIndexInput, initWithNSString_withOrgApacheLuceneStoreIndexInput_withLong_withLong_, sliceDescription, base, offset, length)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreBufferedIndexInput_SlicedIndexInput)

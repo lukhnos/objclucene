@@ -16,6 +16,9 @@
 
 @interface OrgApacheLuceneAnalysisDeGermanStemFilter () {
  @public
+  /*!
+   @brief The actual token in the input stream.
+   */
   OrgApacheLuceneAnalysisDeGermanStemmer *stemmer_;
   id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt_;
   id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute> keywordAttr_;
@@ -39,7 +42,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisDeGermanStemFilter, keywordAttr_, id<
     NSString *term = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) description];
     if (![((id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>) nil_chk(keywordAttr_)) isKeyword]) {
       NSString *s = [((OrgApacheLuceneAnalysisDeGermanStemmer *) nil_chk(stemmer_)) stemWithNSString:term];
-      if ((s != nil) && ![s isEqual:term]) [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk([termAtt_ setEmpty])) appendWithNSString:s];
+      if ((s != nil) && ![((NSString *) nil_chk(s)) isEqual:term]) [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk([termAtt_ setEmpty])) appendWithNSString:s];
     }
     return true;
   }
@@ -86,9 +89,11 @@ void OrgApacheLuceneAnalysisDeGermanStemFilter_initWithOrgApacheLuceneAnalysisTo
 }
 
 OrgApacheLuceneAnalysisDeGermanStemFilter *new_OrgApacheLuceneAnalysisDeGermanStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) {
-  OrgApacheLuceneAnalysisDeGermanStemFilter *self = [OrgApacheLuceneAnalysisDeGermanStemFilter alloc];
-  OrgApacheLuceneAnalysisDeGermanStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisDeGermanStemFilter, initWithOrgApacheLuceneAnalysisTokenStream_, inArg)
+}
+
+OrgApacheLuceneAnalysisDeGermanStemFilter *create_OrgApacheLuceneAnalysisDeGermanStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisDeGermanStemFilter, initWithOrgApacheLuceneAnalysisTokenStream_, inArg)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisDeGermanStemFilter)

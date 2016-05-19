@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneRangetreeHeapSliceWriter_INCLUDE_ALL")
-#if OrgApacheLuceneRangetreeHeapSliceWriter_RESTRICT
-#define OrgApacheLuceneRangetreeHeapSliceWriter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneRangetreeHeapSliceWriter")
+#ifdef RESTRICT_OrgApacheLuceneRangetreeHeapSliceWriter
+#define INCLUDE_ALL_OrgApacheLuceneRangetreeHeapSliceWriter 0
 #else
-#define OrgApacheLuceneRangetreeHeapSliceWriter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneRangetreeHeapSliceWriter 1
 #endif
-#undef OrgApacheLuceneRangetreeHeapSliceWriter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneRangetreeHeapSliceWriter
 
-#if !defined (_OrgApacheLuceneRangetreeHeapSliceWriter_) && (OrgApacheLuceneRangetreeHeapSliceWriter_INCLUDE_ALL || OrgApacheLuceneRangetreeHeapSliceWriter_INCLUDE)
-#define _OrgApacheLuceneRangetreeHeapSliceWriter_
+#if !defined (OrgApacheLuceneRangetreeHeapSliceWriter_) && (INCLUDE_ALL_OrgApacheLuceneRangetreeHeapSliceWriter || defined(INCLUDE_OrgApacheLuceneRangetreeHeapSliceWriter))
+#define OrgApacheLuceneRangetreeHeapSliceWriter_
 
-#define OrgApacheLuceneRangetreeSliceWriter_RESTRICT 1
-#define OrgApacheLuceneRangetreeSliceWriter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneRangetreeSliceWriter 1
+#define INCLUDE_OrgApacheLuceneRangetreeSliceWriter 1
 #include "org/apache/lucene/rangetree/SliceWriter.h"
 
 @class IOSIntArray;
@@ -59,8 +59,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneRangetreeHeapSliceWriter_initWithInt_(OrgA
 
 FOUNDATION_EXPORT OrgApacheLuceneRangetreeHeapSliceWriter *new_OrgApacheLuceneRangetreeHeapSliceWriter_initWithInt_(jint count) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeHeapSliceWriter *create_OrgApacheLuceneRangetreeHeapSliceWriter_initWithInt_(jint count);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeHeapSliceWriter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneRangetreeHeapSliceWriter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneRangetreeHeapSliceWriter")

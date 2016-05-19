@@ -5,52 +5,67 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneStoreBufferedIndexInput_INCLUDE_ALL")
-#if OrgApacheLuceneStoreBufferedIndexInput_RESTRICT
-#define OrgApacheLuceneStoreBufferedIndexInput_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneStoreBufferedIndexInput")
+#ifdef RESTRICT_OrgApacheLuceneStoreBufferedIndexInput
+#define INCLUDE_ALL_OrgApacheLuceneStoreBufferedIndexInput 0
 #else
-#define OrgApacheLuceneStoreBufferedIndexInput_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneStoreBufferedIndexInput 1
 #endif
-#undef OrgApacheLuceneStoreBufferedIndexInput_RESTRICT
+#undef RESTRICT_OrgApacheLuceneStoreBufferedIndexInput
 
-#if !defined (_OrgApacheLuceneStoreBufferedIndexInput_) && (OrgApacheLuceneStoreBufferedIndexInput_INCLUDE_ALL || OrgApacheLuceneStoreBufferedIndexInput_INCLUDE)
-#define _OrgApacheLuceneStoreBufferedIndexInput_
+#if !defined (OrgApacheLuceneStoreBufferedIndexInput_) && (INCLUDE_ALL_OrgApacheLuceneStoreBufferedIndexInput || defined(INCLUDE_OrgApacheLuceneStoreBufferedIndexInput))
+#define OrgApacheLuceneStoreBufferedIndexInput_
 
-#define OrgApacheLuceneStoreIndexInput_RESTRICT 1
-#define OrgApacheLuceneStoreIndexInput_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreIndexInput 1
+#define INCLUDE_OrgApacheLuceneStoreIndexInput 1
 #include "org/apache/lucene/store/IndexInput.h"
 
-#define OrgApacheLuceneStoreRandomAccessInput_RESTRICT 1
-#define OrgApacheLuceneStoreRandomAccessInput_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreRandomAccessInput 1
+#define INCLUDE_OrgApacheLuceneStoreRandomAccessInput 1
 #include "org/apache/lucene/store/RandomAccessInput.h"
 
 @class IOSByteArray;
 @class OrgApacheLuceneStoreIOContext;
 @class OrgApacheLuceneStoreIndexOutput;
 
-#define OrgApacheLuceneStoreBufferedIndexInput_BUFFER_SIZE 1024
-#define OrgApacheLuceneStoreBufferedIndexInput_MIN_BUFFER_SIZE 8
-#define OrgApacheLuceneStoreBufferedIndexInput_MERGE_BUFFER_SIZE 4096
-
+/*!
+ @brief Base implementation class for buffered <code>IndexInput</code>.
+ */
 @interface OrgApacheLuceneStoreBufferedIndexInput : OrgApacheLuceneStoreIndexInput < OrgApacheLuceneStoreRandomAccessInput > {
  @public
   IOSByteArray *buffer_;
 }
 
++ (jint)BUFFER_SIZE;
+
++ (jint)MIN_BUFFER_SIZE;
+
++ (jint)MERGE_BUFFER_SIZE;
+
 #pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)resourceDesc;
 
+/*!
+ @brief Inits BufferedIndexInput with a specific bufferSize
+ */
 - (instancetype)initWithNSString:(NSString *)resourceDesc
                          withInt:(jint)bufferSize;
 
 - (instancetype)initWithNSString:(NSString *)resourceDesc
 withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
 
+/*!
+ @brief Returns default buffer sizes for the given <code>IOContext</code>
+ */
 + (jint)bufferSizeWithOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
 
 - (OrgApacheLuceneStoreBufferedIndexInput *)clone;
 
+/*!
+ @brief Returns buffer size.
+ @@see #setBufferSize 
+ */
 - (jint)getBufferSize;
 
 - (jlong)getFilePointer;
@@ -86,12 +101,19 @@ withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
 
 - (void)seekWithLong:(jlong)pos;
 
+/*!
+ @brief Change the buffer size used by this IndexInput
+ */
 - (void)setBufferSizeWithInt:(jint)newSize;
 
 - (OrgApacheLuceneStoreIndexInput *)sliceWithNSString:(NSString *)sliceDescription
                                              withLong:(jlong)offset
                                              withLong:(jlong)length;
 
+/*!
+ @brief Wraps a portion of another IndexInput with buffering.
+ <p><b>Please note:</b> This is in most cases ineffective, because it may double buffer!
+ */
 + (OrgApacheLuceneStoreBufferedIndexInput *)wrapWithNSString:(NSString *)sliceDescription
                           withOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)other
                                                     withLong:(jlong)offset
@@ -99,15 +121,37 @@ withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
 
 #pragma mark Protected
 
+/*!
+ @brief Flushes the in-memory buffer to the given output, copying at most
+ <code>numBytes</code>.
+ <p>
+ <b>NOTE:</b> this method does not refill the buffer, however it does
+ advance the buffer position.
+ @return the number of bytes actually flushed from the in-memory buffer.
+ */
 - (jint)flushBufferWithOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)outArg
                                               withLong:(jlong)numBytes;
 
 - (void)newBufferWithByteArray:(IOSByteArray *)newBuffer OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Expert: implements buffer refill.
+ Reads bytes from the current position
+ in the input.
+ @param b the array to read bytes into
+ @param offset the offset in the array to start storing bytes
+ @param length the number of bytes to read
+ */
 - (void)readInternalWithByteArray:(IOSByteArray *)b
                           withInt:(jint)offset
                           withInt:(jint)length;
 
+/*!
+ @brief Expert: implements seek.
+ Sets current position in this file, where the
+ next <code>readInternal(byte[],int,int)</code> will occur.
+ - seealso: #readInternal(byte[],int,int)
+ */
 - (void)seekInternalWithLong:(jlong)pos;
 
 @end
@@ -116,11 +160,26 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreBufferedIndexInput)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreBufferedIndexInput, buffer_, IOSByteArray *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneStoreBufferedIndexInput, BUFFER_SIZE, jint)
+/*!
+ @brief Default buffer size set to #BUFFER_SIZE.
+ */
+inline jint OrgApacheLuceneStoreBufferedIndexInput_get_BUFFER_SIZE();
+#define OrgApacheLuceneStoreBufferedIndexInput_BUFFER_SIZE 1024
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneStoreBufferedIndexInput, BUFFER_SIZE, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneStoreBufferedIndexInput, MIN_BUFFER_SIZE, jint)
+/*!
+ @brief Minimum buffer size allowed
+ */
+inline jint OrgApacheLuceneStoreBufferedIndexInput_get_MIN_BUFFER_SIZE();
+#define OrgApacheLuceneStoreBufferedIndexInput_MIN_BUFFER_SIZE 8
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneStoreBufferedIndexInput, MIN_BUFFER_SIZE, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneStoreBufferedIndexInput, MERGE_BUFFER_SIZE, jint)
+/*!
+ @brief A buffer size for merges set to #MERGE_BUFFER_SIZE.
+ */
+inline jint OrgApacheLuceneStoreBufferedIndexInput_get_MERGE_BUFFER_SIZE();
+#define OrgApacheLuceneStoreBufferedIndexInput_MERGE_BUFFER_SIZE 4096
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneStoreBufferedIndexInput, MERGE_BUFFER_SIZE, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneStoreBufferedIndexInput_initWithNSString_(OrgApacheLuceneStoreBufferedIndexInput *self, NSString *resourceDesc);
 
@@ -136,4 +195,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreBufferedIndexInput)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneStoreBufferedIndexInput_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreBufferedIndexInput")

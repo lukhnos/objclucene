@@ -59,12 +59,12 @@ withOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)inArg {
       shiftRightBits = 0;
       break;
       default:
-      @throw [new_JavaLangAssertionError_initWithId_(JreStrcat("$I", @"bitsPerValue too large: ", bitsPerValue_)) autorelease];
+      @throw create_JavaLangAssertionError_initWithId_(JreStrcat("$I", @"bitsPerValue too large: ", bitsPerValue_));
     }
     return (JreURShift64(rawValue, shiftRightBits)) & valueMask_;
   }
   @catch (JavaIoIOException *ioe) {
-    @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(ioe) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSException_(ioe);
   }
 }
 
@@ -109,9 +109,11 @@ void OrgApacheLuceneUtilPackedDirectPackedReader_initWithInt_withInt_withOrgApac
 }
 
 OrgApacheLuceneUtilPackedDirectPackedReader *new_OrgApacheLuceneUtilPackedDirectPackedReader_initWithInt_withInt_withOrgApacheLuceneStoreIndexInput_(jint bitsPerValue, jint valueCount, OrgApacheLuceneStoreIndexInput *inArg) {
-  OrgApacheLuceneUtilPackedDirectPackedReader *self = [OrgApacheLuceneUtilPackedDirectPackedReader alloc];
-  OrgApacheLuceneUtilPackedDirectPackedReader_initWithInt_withInt_withOrgApacheLuceneStoreIndexInput_(self, bitsPerValue, valueCount, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedDirectPackedReader, initWithInt_withInt_withOrgApacheLuceneStoreIndexInput_, bitsPerValue, valueCount, inArg)
+}
+
+OrgApacheLuceneUtilPackedDirectPackedReader *create_OrgApacheLuceneUtilPackedDirectPackedReader_initWithInt_withInt_withOrgApacheLuceneStoreIndexInput_(jint bitsPerValue, jint valueCount, OrgApacheLuceneStoreIndexInput *inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedDirectPackedReader, initWithInt_withInt_withOrgApacheLuceneStoreIndexInput_, bitsPerValue, valueCount, inArg)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectPackedReader)

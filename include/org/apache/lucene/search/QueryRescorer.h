@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchQueryRescorer_INCLUDE_ALL")
-#if OrgApacheLuceneSearchQueryRescorer_RESTRICT
-#define OrgApacheLuceneSearchQueryRescorer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchQueryRescorer")
+#ifdef RESTRICT_OrgApacheLuceneSearchQueryRescorer
+#define INCLUDE_ALL_OrgApacheLuceneSearchQueryRescorer 0
 #else
-#define OrgApacheLuceneSearchQueryRescorer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchQueryRescorer 1
 #endif
-#undef OrgApacheLuceneSearchQueryRescorer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchQueryRescorer
 
-#if !defined (_OrgApacheLuceneSearchQueryRescorer_) && (OrgApacheLuceneSearchQueryRescorer_INCLUDE_ALL || OrgApacheLuceneSearchQueryRescorer_INCLUDE)
-#define _OrgApacheLuceneSearchQueryRescorer_
+#if !defined (OrgApacheLuceneSearchQueryRescorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchQueryRescorer || defined(INCLUDE_OrgApacheLuceneSearchQueryRescorer))
+#define OrgApacheLuceneSearchQueryRescorer_
 
-#define OrgApacheLuceneSearchRescorer_RESTRICT 1
-#define OrgApacheLuceneSearchRescorer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchRescorer 1
+#define INCLUDE_OrgApacheLuceneSearchRescorer 1
 #include "org/apache/lucene/search/Rescorer.h"
 
 @class OrgApacheLuceneSearchExplanation;
@@ -25,10 +25,19 @@
 @class OrgApacheLuceneSearchQuery;
 @class OrgApacheLuceneSearchTopDocs;
 
+/*!
+ @brief A <code>Rescorer</code> that uses a provided Query to assign
+ scores to the first-pass hits.
+  
+ */
 @interface OrgApacheLuceneSearchQueryRescorer : OrgApacheLuceneSearchRescorer
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor, passing the 2nd pass query to
+ assign scores to the 1st pass hits.
+ */
 - (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
 
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
@@ -39,6 +48,10 @@
                                                withOrgApacheLuceneSearchTopDocs:(OrgApacheLuceneSearchTopDocs *)firstPassTopDocs
                                                                         withInt:(jint)topN;
 
+/*!
+ @brief Sugar API, calling {#rescore} using a simple linear
+ combination of firstPassScore + weight * secondPassScore
+ */
 + (OrgApacheLuceneSearchTopDocs *)rescoreWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                withOrgApacheLuceneSearchTopDocs:(OrgApacheLuceneSearchTopDocs *)topDocs
                                                  withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
@@ -47,6 +60,14 @@
 
 #pragma mark Protected
 
+/*!
+ @brief Implement this in a subclass to combine the first pass and
+ second pass scores.
+ If secondPassMatches is false then
+ the second pass query failed to match a hit from the
+ first pass query, and you should ignore the
+ secondPassScore.
+ */
 - (jfloat)combineWithFloat:(jfloat)firstPassScore
                withBoolean:(jboolean)secondPassMatches
                  withFloat:(jfloat)secondPassScore;
@@ -63,4 +84,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchQueryRescorer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchQueryRescorer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchQueryRescorer")

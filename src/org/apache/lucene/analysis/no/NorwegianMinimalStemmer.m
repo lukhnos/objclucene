@@ -48,16 +48,18 @@
 void OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer_initWithInt_(OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer *self, jint flags) {
   NSObject_init(self);
   if (flags <= 0 || flags > OrgApacheLuceneAnalysisNoNorwegianLightStemmer_BOKMAAL + OrgApacheLuceneAnalysisNoNorwegianLightStemmer_NYNORSK) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"invalid flags") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"invalid flags");
   }
   self->useBokmaal_ = ((flags & OrgApacheLuceneAnalysisNoNorwegianLightStemmer_BOKMAAL) != 0);
   self->useNynorsk_ = ((flags & OrgApacheLuceneAnalysisNoNorwegianLightStemmer_NYNORSK) != 0);
 }
 
 OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer *new_OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer_initWithInt_(jint flags) {
-  OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer *self = [OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer alloc];
-  OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer_initWithInt_(self, flags);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer, initWithInt_, flags)
+}
+
+OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer *create_OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer_initWithInt_(jint flags) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer, initWithInt_, flags)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer)

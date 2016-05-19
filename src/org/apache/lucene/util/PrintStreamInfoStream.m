@@ -14,8 +14,9 @@
 #include "org/apache/lucene/util/PrintStreamInfoStream.h"
 #include "org/lukhnos/portmobile/file/attribute/FileTime.h"
 
-static JavaUtilConcurrentAtomicAtomicInteger *OrgApacheLuceneUtilPrintStreamInfoStream_MESSAGE_ID_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilPrintStreamInfoStream, MESSAGE_ID_, JavaUtilConcurrentAtomicAtomicInteger *)
+inline JavaUtilConcurrentAtomicAtomicInteger *OrgApacheLuceneUtilPrintStreamInfoStream_get_MESSAGE_ID();
+static JavaUtilConcurrentAtomicAtomicInteger *OrgApacheLuceneUtilPrintStreamInfoStream_MESSAGE_ID;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilPrintStreamInfoStream, MESSAGE_ID, JavaUtilConcurrentAtomicAtomicInteger *)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPrintStreamInfoStream)
 
@@ -48,7 +49,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPrintStreamInfoStream)
 }
 
 - (jboolean)isSystemStream {
-  return stream_ == JreLoadStatic(JavaLangSystem, out_) || stream_ == JreLoadStatic(JavaLangSystem, err_);
+  return stream_ == JreLoadStatic(JavaLangSystem, out) || stream_ == JreLoadStatic(JavaLangSystem, err);
 }
 
 - (NSString *)getTimestamp {
@@ -62,7 +63,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPrintStreamInfoStream)
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilPrintStreamInfoStream class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilPrintStreamInfoStream_MESSAGE_ID_, new_JavaUtilConcurrentAtomicAtomicInteger_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilPrintStreamInfoStream_MESSAGE_ID, new_JavaUtilConcurrentAtomicAtomicInteger_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilPrintStreamInfoStream)
   }
 }
@@ -78,7 +79,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPrintStreamInfoStream)
     { "getTimestamp", NULL, "Ljava.lang.String;", 0x4, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "MESSAGE_ID_", NULL, 0x1a, "Ljava.util.concurrent.atomic.AtomicInteger;", &OrgApacheLuceneUtilPrintStreamInfoStream_MESSAGE_ID_, NULL, .constantValue.asLong = 0 },
+    { "MESSAGE_ID", "MESSAGE_ID", 0x1a, "Ljava.util.concurrent.atomic.AtomicInteger;", &OrgApacheLuceneUtilPrintStreamInfoStream_MESSAGE_ID, NULL, .constantValue.asLong = 0 },
     { "messageID_", NULL, 0x14, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "stream_", NULL, 0x14, "Ljava.io.PrintStream;", NULL, NULL, .constantValue.asLong = 0 },
   };
@@ -89,13 +90,15 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPrintStreamInfoStream)
 @end
 
 void OrgApacheLuceneUtilPrintStreamInfoStream_initWithJavaIoPrintStream_(OrgApacheLuceneUtilPrintStreamInfoStream *self, JavaIoPrintStream *stream) {
-  OrgApacheLuceneUtilPrintStreamInfoStream_initWithJavaIoPrintStream_withInt_(self, stream, [((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(OrgApacheLuceneUtilPrintStreamInfoStream_MESSAGE_ID_)) getAndIncrement]);
+  OrgApacheLuceneUtilPrintStreamInfoStream_initWithJavaIoPrintStream_withInt_(self, stream, [((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(OrgApacheLuceneUtilPrintStreamInfoStream_MESSAGE_ID)) getAndIncrement]);
 }
 
 OrgApacheLuceneUtilPrintStreamInfoStream *new_OrgApacheLuceneUtilPrintStreamInfoStream_initWithJavaIoPrintStream_(JavaIoPrintStream *stream) {
-  OrgApacheLuceneUtilPrintStreamInfoStream *self = [OrgApacheLuceneUtilPrintStreamInfoStream alloc];
-  OrgApacheLuceneUtilPrintStreamInfoStream_initWithJavaIoPrintStream_(self, stream);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPrintStreamInfoStream, initWithJavaIoPrintStream_, stream)
+}
+
+OrgApacheLuceneUtilPrintStreamInfoStream *create_OrgApacheLuceneUtilPrintStreamInfoStream_initWithJavaIoPrintStream_(JavaIoPrintStream *stream) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPrintStreamInfoStream, initWithJavaIoPrintStream_, stream)
 }
 
 void OrgApacheLuceneUtilPrintStreamInfoStream_initWithJavaIoPrintStream_withInt_(OrgApacheLuceneUtilPrintStreamInfoStream *self, JavaIoPrintStream *stream, jint messageID) {
@@ -105,9 +108,11 @@ void OrgApacheLuceneUtilPrintStreamInfoStream_initWithJavaIoPrintStream_withInt_
 }
 
 OrgApacheLuceneUtilPrintStreamInfoStream *new_OrgApacheLuceneUtilPrintStreamInfoStream_initWithJavaIoPrintStream_withInt_(JavaIoPrintStream *stream, jint messageID) {
-  OrgApacheLuceneUtilPrintStreamInfoStream *self = [OrgApacheLuceneUtilPrintStreamInfoStream alloc];
-  OrgApacheLuceneUtilPrintStreamInfoStream_initWithJavaIoPrintStream_withInt_(self, stream, messageID);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPrintStreamInfoStream, initWithJavaIoPrintStream_withInt_, stream, messageID)
+}
+
+OrgApacheLuceneUtilPrintStreamInfoStream *create_OrgApacheLuceneUtilPrintStreamInfoStream_initWithJavaIoPrintStream_withInt_(JavaIoPrintStream *stream, jint messageID) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPrintStreamInfoStream, initWithJavaIoPrintStream_withInt_, stream, messageID)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPrintStreamInfoStream)

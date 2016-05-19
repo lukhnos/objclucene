@@ -5,24 +5,28 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCoreLucene43StopFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCoreLucene43StopFilter_RESTRICT
-#define OrgApacheLuceneAnalysisCoreLucene43StopFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreLucene43StopFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCoreLucene43StopFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCoreLucene43StopFilter 0
 #else
-#define OrgApacheLuceneAnalysisCoreLucene43StopFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCoreLucene43StopFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisCoreLucene43StopFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCoreLucene43StopFilter
 
-#if !defined (_OrgApacheLuceneAnalysisCoreLucene43StopFilter_) && (OrgApacheLuceneAnalysisCoreLucene43StopFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisCoreLucene43StopFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisCoreLucene43StopFilter_
+#if !defined (OrgApacheLuceneAnalysisCoreLucene43StopFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCoreLucene43StopFilter || defined(INCLUDE_OrgApacheLuceneAnalysisCoreLucene43StopFilter))
+#define OrgApacheLuceneAnalysisCoreLucene43StopFilter_
 
-#define OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter 1
 #include "org/apache/lucene/analysis/util/Lucene43FilteringTokenFilter.h"
 
+@class IOSObjectArray;
 @class OrgApacheLuceneAnalysisTokenStream;
 @class OrgApacheLuceneAnalysisUtilCharArraySet;
 
+/*!
+ @brief Backcompat StopFilter for versions 4.3 and before.
+ */
 @interface OrgApacheLuceneAnalysisCoreLucene43StopFilter : OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter
 
 #pragma mark Public
@@ -33,6 +37,9 @@ withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArra
 
 #pragma mark Protected
 
+/*!
+ @brief Returns the next input Token whose term() is not a stop word.
+ */
 - (jboolean)accept;
 
 @end
@@ -43,8 +50,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreLucene43StopFilter_initWithBoo
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreLucene43StopFilter *new_OrgApacheLuceneAnalysisCoreLucene43StopFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(jboolean enablePositionIncrements, OrgApacheLuceneAnalysisTokenStream *inArg, OrgApacheLuceneAnalysisUtilCharArraySet *stopWords) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreLucene43StopFilter *create_OrgApacheLuceneAnalysisCoreLucene43StopFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(jboolean enablePositionIncrements, OrgApacheLuceneAnalysisTokenStream *inArg, OrgApacheLuceneAnalysisUtilCharArraySet *stopWords);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreLucene43StopFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCoreLucene43StopFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreLucene43StopFilter")

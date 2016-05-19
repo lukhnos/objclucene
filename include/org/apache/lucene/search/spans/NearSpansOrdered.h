@@ -5,25 +5,54 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSpansNearSpansOrdered_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSpansNearSpansOrdered_RESTRICT
-#define OrgApacheLuceneSearchSpansNearSpansOrdered_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansNearSpansOrdered")
+#ifdef RESTRICT_OrgApacheLuceneSearchSpansNearSpansOrdered
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansNearSpansOrdered 0
 #else
-#define OrgApacheLuceneSearchSpansNearSpansOrdered_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansNearSpansOrdered 1
 #endif
-#undef OrgApacheLuceneSearchSpansNearSpansOrdered_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSpansNearSpansOrdered
 
-#if !defined (_OrgApacheLuceneSearchSpansNearSpansOrdered_) && (OrgApacheLuceneSearchSpansNearSpansOrdered_INCLUDE_ALL || OrgApacheLuceneSearchSpansNearSpansOrdered_INCLUDE)
-#define _OrgApacheLuceneSearchSpansNearSpansOrdered_
+#if !defined (OrgApacheLuceneSearchSpansNearSpansOrdered_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansNearSpansOrdered || defined(INCLUDE_OrgApacheLuceneSearchSpansNearSpansOrdered))
+#define OrgApacheLuceneSearchSpansNearSpansOrdered_
 
-#define OrgApacheLuceneSearchSpansNearSpans_RESTRICT 1
-#define OrgApacheLuceneSearchSpansNearSpans_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSpansNearSpans 1
+#define INCLUDE_OrgApacheLuceneSearchSpansNearSpans 1
 #include "org/apache/lucene/search/spans/NearSpans.h"
 
 @class OrgApacheLuceneSearchSpansSpanNearQuery;
 @protocol JavaUtilList;
 @protocol OrgApacheLuceneSearchSpansSpanCollector;
 
+/*!
+ @brief A Spans that is formed from the ordered subspans of a SpanNearQuery
+ where the subspans do not overlap and have a maximum slop between them.
+ <p>
+ The formed spans only contains minimum slop matches.<br>
+ The matching slop is computed from the distance(s) between
+ the non overlapping matching Spans.<br>
+ Successive matches are always formed from the successive Spans
+ of the SpanNearQuery.
+ <p>
+ The formed spans may contain overlaps when the slop is at least 1.
+ For example, when querying using
+ @code
+t1 t2 t3
+@endcode
+ with slop at least 1, the fragment:
+ @code
+t1 t2 t1 t3 t2 t3
+@endcode
+ matches twice:
+ @code
+t1 t2 .. t3      
+@endcode
+ @code
+      t1 .. t2 t3
+@endcode
+ Expert:
+ Only public for subclassing.  Most implementations should not need this class
+ */
 @interface OrgApacheLuceneSearchSpansNearSpansOrdered : OrgApacheLuceneSearchSpansNearSpans {
  @public
   jint matchStart_;
@@ -60,8 +89,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansNearSpansOrdered_initWithOrgApa
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSpansNearSpansOrdered *new_OrgApacheLuceneSearchSpansNearSpansOrdered_initWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilList_(OrgApacheLuceneSearchSpansSpanNearQuery *query, id<JavaUtilList> subSpans) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpansNearSpansOrdered *create_OrgApacheLuceneSearchSpansNearSpansOrdered_initWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilList_(OrgApacheLuceneSearchSpansSpanNearQuery *query, id<JavaUtilList> subSpans);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansNearSpansOrdered)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSpansNearSpansOrdered_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansNearSpansOrdered")

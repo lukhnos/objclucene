@@ -3,14 +3,17 @@
 //  source: ./core/src/java/org/apache/lucene/store/package-info.java
 //
 
+/*!
+ @brief Binary i/o API, used for all index data.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneStorePackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneStorePackage_info_RESTRICT
-#define OrgApacheLuceneStorePackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneStorePackage_info")
+#ifdef RESTRICT_OrgApacheLuceneStorePackage_info
+#define INCLUDE_ALL_OrgApacheLuceneStorePackage_info 0
 #else
-#define OrgApacheLuceneStorePackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneStorePackage_info 1
 #endif
-#undef OrgApacheLuceneStorePackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneStorePackage_info
 
-#pragma pop_macro("OrgApacheLuceneStorePackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStorePackage_info")

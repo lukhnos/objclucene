@@ -62,6 +62,8 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsPerfieldPerFieldPosting
 
 __attribute__((unused)) static OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter *new_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter_initWithOrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_withOrgApacheLuceneIndexSegmentWriteState_(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat *outer$, OrgApacheLuceneIndexSegmentWriteState *writeState) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter *create_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter_initWithOrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_withOrgApacheLuceneIndexSegmentWriteState_(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat *outer$, OrgApacheLuceneIndexSegmentWriteState *writeState);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter)
 
 @interface OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter_$1 : OrgApacheLuceneIndexFilterLeafReader_FilterFields {
@@ -74,7 +76,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_F
 - (instancetype)initWithOrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup:(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup *)capture$0
                                                          withOrgApacheLuceneIndexFields:(OrgApacheLuceneIndexFields *)arg$0;
 
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter_$1)
@@ -84,6 +85,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWr
 __attribute__((unused)) static void OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter_$1_initWithOrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup_withOrgApacheLuceneIndexFields_(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter_$1 *self, OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup *capture$0, OrgApacheLuceneIndexFields *arg$0);
 
 __attribute__((unused)) static OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter_$1 *new_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter_$1_initWithOrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup_withOrgApacheLuceneIndexFields_(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup *capture$0, OrgApacheLuceneIndexFields *arg$0) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter_$1 *create_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter_$1_initWithOrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup_withOrgApacheLuceneIndexFields_(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup *capture$0, OrgApacheLuceneIndexFields *arg$0);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter_$1)
 
@@ -116,7 +119,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_F
 
 - (NSString *)description;
 
-
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader)
@@ -125,26 +127,43 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsRe
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader, formats_, id<JavaUtilMap>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader, segment_, NSString *)
 
-static jlong OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_BASE_RAM_BYTES_USED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader, BASE_RAM_BYTES_USED_, jlong)
+inline jlong OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_get_BASE_RAM_BYTES_USED();
+static jlong OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_BASE_RAM_BYTES_USED;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader, BASE_RAM_BYTES_USED, jlong)
 
 __attribute__((unused)) static void OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_initWithOrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader *self, OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader *other);
 
 __attribute__((unused)) static OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader *new_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_initWithOrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader *other) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader *create_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_initWithOrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader *other);
+
 __attribute__((unused)) static void OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_initWithOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader *self, OrgApacheLuceneIndexSegmentReadState *readState);
 
 __attribute__((unused)) static OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader *new_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_initWithOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneIndexSegmentReadState *readState) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader *create_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_initWithOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneIndexSegmentReadState *readState);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat)
 
-NSString *OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_PER_FIELD_NAME_ = @"PerField40";
-NSString *OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_PER_FIELD_FORMAT_KEY_;
-NSString *OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_PER_FIELD_SUFFIX_KEY_;
+NSString *OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_PER_FIELD_NAME = @"PerField40";
+NSString *OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_PER_FIELD_FORMAT_KEY;
+NSString *OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_PER_FIELD_SUFFIX_KEY;
 
 @implementation OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat
+
++ (NSString *)PER_FIELD_NAME {
+  return OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_PER_FIELD_NAME;
+}
+
++ (NSString *)PER_FIELD_FORMAT_KEY {
+  return OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_PER_FIELD_FORMAT_KEY;
+}
+
++ (NSString *)PER_FIELD_SUFFIX_KEY {
+  return OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_PER_FIELD_SUFFIX_KEY;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -165,11 +184,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (OrgApacheLuceneCodecsFieldsConsumer *)fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state {
-  return [new_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter_initWithOrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_withOrgApacheLuceneIndexSegmentWriteState_(self, state) autorelease];
+  return create_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter_initWithOrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_withOrgApacheLuceneIndexSegmentWriteState_(self, state);
 }
 
 - (OrgApacheLuceneCodecsFieldsProducer *)fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state {
-  return [new_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_initWithOrgApacheLuceneIndexSegmentReadState_(state) autorelease];
+  return create_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_initWithOrgApacheLuceneIndexSegmentReadState_(state);
 }
 
 - (OrgApacheLuceneCodecsPostingsFormat *)getPostingsFormatForFieldWithNSString:(NSString *)field {
@@ -180,8 +199,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat class]) {
-    JreStrongAssign(&OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_PER_FIELD_FORMAT_KEY_, JreStrcat("$$", [OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_class_() getSimpleName], @".format"));
-    JreStrongAssign(&OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_PER_FIELD_SUFFIX_KEY_, JreStrcat("$$", [OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_class_() getSimpleName], @".suffix"));
+    JreStrongAssign(&OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_PER_FIELD_FORMAT_KEY, JreStrcat("$$", [OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_class_() getSimpleName], @".format"));
+    JreStrongAssign(&OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_PER_FIELD_SUFFIX_KEY, JreStrcat("$$", [OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_class_() getSimpleName], @".suffix"));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat)
   }
 }
@@ -196,9 +215,9 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "getPostingsFormatForFieldWithNSString:", "getPostingsFormatForField", "Lorg.apache.lucene.codecs.PostingsFormat;", 0x401, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "PER_FIELD_NAME_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_PER_FIELD_NAME_, NULL, .constantValue.asLong = 0 },
-    { "PER_FIELD_FORMAT_KEY_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_PER_FIELD_FORMAT_KEY_, NULL, .constantValue.asLong = 0 },
-    { "PER_FIELD_SUFFIX_KEY_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_PER_FIELD_SUFFIX_KEY_, NULL, .constantValue.asLong = 0 },
+    { "PER_FIELD_NAME", "PER_FIELD_NAME", 0x19, "Ljava.lang.String;", &OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_PER_FIELD_NAME, NULL, .constantValue.asLong = 0 },
+    { "PER_FIELD_FORMAT_KEY", "PER_FIELD_FORMAT_KEY", 0x19, "Ljava.lang.String;", &OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_PER_FIELD_FORMAT_KEY, NULL, .constantValue.asLong = 0 },
+    { "PER_FIELD_SUFFIX_KEY", "PER_FIELD_SUFFIX_KEY", 0x19, "Ljava.lang.String;", &OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_PER_FIELD_SUFFIX_KEY, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.codecs.perfield.PerFieldPostingsFormat$FieldsGroup;", "Lorg.apache.lucene.codecs.perfield.PerFieldPostingsFormat$FieldsWriter;", "Lorg.apache.lucene.codecs.perfield.PerFieldPostingsFormat$FieldsReader;"};
   static const J2ObjcClassInfo _OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat = { 2, "PerFieldPostingsFormat", "org.apache.lucene.codecs.perfield", NULL, 0x401, 6, methods, 3, fields, 0, NULL, 3, inner_classes, NULL, NULL };
@@ -208,7 +227,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 @end
 
 void OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_init(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat *self) {
-  OrgApacheLuceneCodecsPostingsFormat_initWithNSString_(self, OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_PER_FIELD_NAME_);
+  OrgApacheLuceneCodecsPostingsFormat_initWithNSString_(self, OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_PER_FIELD_NAME);
 }
 
 NSString *OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_getSuffixWithNSString_withNSString_(NSString *formatName, NSString *suffix) {
@@ -222,7 +241,7 @@ NSString *OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_getFullSegmentSuff
     return segmentSuffix;
   }
   else {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$", @"cannot embed PerFieldPostingsFormat inside itself (field \"", fieldName, @"\" returned PerFieldPostingsFormat)")) autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$", @"cannot embed PerFieldPostingsFormat inside itself (field \"", fieldName, @"\" returned PerFieldPostingsFormat)"));
   }
 }
 
@@ -245,7 +264,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", NULL, NULL, 0x0, NULL, NULL },
+    { "init", "FieldsGroup", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "fields_", NULL, 0x10, "Ljava.util.Set;", NULL, "Ljava/util/Set<Ljava/lang/String;>;", .constantValue.asLong = 0 },
@@ -264,9 +283,11 @@ void OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup_init(OrgApa
 }
 
 OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup *new_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup_init() {
-  OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup *self = [OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup alloc];
-  OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup, init)
+}
+
+OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup *create_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup)
@@ -280,15 +301,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFo
 }
 
 - (void)writeWithOrgApacheLuceneIndexFields:(OrgApacheLuceneIndexFields *)fields {
-  id<JavaUtilMap> formatToGroups = [new_JavaUtilHashMap_init() autorelease];
-  id<JavaUtilMap> suffixes = [new_JavaUtilHashMap_init() autorelease];
+  id<JavaUtilMap> formatToGroups = create_JavaUtilHashMap_init();
+  id<JavaUtilMap> suffixes = create_JavaUtilHashMap_init();
   for (NSString * __strong field in nil_chk(fields)) {
     OrgApacheLuceneIndexFieldInfo *fieldInfo = [((OrgApacheLuceneIndexFieldInfos *) nil_chk(((OrgApacheLuceneIndexSegmentWriteState *) nil_chk(writeState_))->fieldInfos_)) fieldInfoWithNSString:field];
     OrgApacheLuceneCodecsPostingsFormat *format = [this$0_ getPostingsFormatForFieldWithNSString:field];
     if (format == nil) {
-      @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$C", @"invalid null PostingsFormat for field=\"", field, '"')) autorelease];
+      @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$C", @"invalid null PostingsFormat for field=\"", field, '"'));
     }
-    NSString *formatName = [((OrgApacheLuceneCodecsPostingsFormat *) nil_chk(format)) getName];
+    NSString *formatName = [format getName];
     OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup *group = [formatToGroups getWithId:format];
     if (group == nil) {
       JavaLangInteger *suffix = [suffixes getWithId:formatName];
@@ -299,25 +320,25 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFo
         suffix = JavaLangInteger_valueOfWithInt_([suffix intValue] + 1);
       }
       [suffixes putWithId:formatName withId:suffix];
-      NSString *segmentSuffix = OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_getFullSegmentSuffixWithNSString_withNSString_withNSString_(field, writeState_->segmentSuffix_, OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_getSuffixWithNSString_withNSString_(formatName, JavaLangInteger_toStringWithInt_([((JavaLangInteger *) nil_chk(suffix)) intValue])));
-      group = [new_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup_init() autorelease];
+      NSString *segmentSuffix = OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_getFullSegmentSuffixWithNSString_withNSString_withNSString_(field, writeState_->segmentSuffix_, OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_getSuffixWithNSString_withNSString_(formatName, JavaLangInteger_toStringWithInt_([suffix intValue])));
+      group = create_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup_init();
       JreStrongAssignAndConsume(&group->state_, new_OrgApacheLuceneIndexSegmentWriteState_initWithOrgApacheLuceneIndexSegmentWriteState_withNSString_(writeState_, segmentSuffix));
       group->suffix_ = [suffix intValue];
       [formatToGroups putWithId:format withId:group];
     }
     else {
       if (![suffixes containsKeyWithId:formatName]) {
-        @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$I", @"no suffix for format name: ", formatName, @", expected: ", group->suffix_)) autorelease];
+        @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$I", @"no suffix for format name: ", formatName, @", expected: ", group->suffix_));
       }
     }
-    [((id<JavaUtilSet>) nil_chk(((OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup *) nil_chk(group))->fields_)) addWithId:field];
-    NSString *previousValue = [((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo)) putAttributeWithNSString:JreLoadStatic(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat, PER_FIELD_FORMAT_KEY_) withNSString:formatName];
+    [((id<JavaUtilSet>) nil_chk(group->fields_)) addWithId:field];
+    NSString *previousValue = [((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo)) putAttributeWithNSString:JreLoadStatic(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat, PER_FIELD_FORMAT_KEY) withNSString:formatName];
     if (previousValue != nil) {
-      @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$$$$$$", @"found existing value for ", JreLoadStatic(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat, PER_FIELD_FORMAT_KEY_), @", field=", fieldInfo->name_, @", old=", previousValue, @", new=", formatName)) autorelease];
+      @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$$$$$$", @"found existing value for ", JreLoadStatic(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat, PER_FIELD_FORMAT_KEY), @", field=", fieldInfo->name_, @", old=", previousValue, @", new=", formatName));
     }
-    previousValue = [fieldInfo putAttributeWithNSString:JreLoadStatic(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat, PER_FIELD_SUFFIX_KEY_) withNSString:JavaLangInteger_toStringWithInt_(group->suffix_)];
+    previousValue = [fieldInfo putAttributeWithNSString:JreLoadStatic(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat, PER_FIELD_SUFFIX_KEY) withNSString:JavaLangInteger_toStringWithInt_(group->suffix_)];
     if (previousValue != nil) {
-      @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$$$$$I", @"found existing value for ", JreLoadStatic(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat, PER_FIELD_SUFFIX_KEY_), @", field=", fieldInfo->name_, @", old=", previousValue, @", new=", group->suffix_)) autorelease];
+      @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$$$$$I", @"found existing value for ", JreLoadStatic(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat, PER_FIELD_SUFFIX_KEY), @", field=", fieldInfo->name_, @", old=", previousValue, @", new=", group->suffix_));
     }
   }
   jboolean success = false;
@@ -325,7 +346,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFo
     for (id<JavaUtilMap_Entry> __strong ent in nil_chk([formatToGroups entrySet])) {
       OrgApacheLuceneCodecsPostingsFormat *format = [((id<JavaUtilMap_Entry>) nil_chk(ent)) getKey];
       OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup *group = [ent getValue];
-      OrgApacheLuceneIndexFields *maskedFields = [new_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter_$1_initWithOrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup_withOrgApacheLuceneIndexFields_(group, fields) autorelease];
+      OrgApacheLuceneIndexFields *maskedFields = create_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter_$1_initWithOrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup_withOrgApacheLuceneIndexFields_(group, fields);
       OrgApacheLuceneCodecsFieldsConsumer *consumer = [((OrgApacheLuceneCodecsPostingsFormat *) nil_chk(format)) fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:((OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup *) nil_chk(group))->state_];
       [((id<JavaUtilList>) nil_chk(toClose_)) addWithId:consumer];
       [((OrgApacheLuceneCodecsFieldsConsumer *) nil_chk(consumer)) writeWithOrgApacheLuceneIndexFields:maskedFields];
@@ -375,9 +396,11 @@ void OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter_initWithOr
 }
 
 OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter *new_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter_initWithOrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_withOrgApacheLuceneIndexSegmentWriteState_(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat *outer$, OrgApacheLuceneIndexSegmentWriteState *writeState) {
-  OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter *self = [OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter alloc];
-  OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter_initWithOrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_withOrgApacheLuceneIndexSegmentWriteState_(self, outer$, writeState);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter, initWithOrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_withOrgApacheLuceneIndexSegmentWriteState_, outer$, writeState)
+}
+
+OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter *create_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter_initWithOrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_withOrgApacheLuceneIndexSegmentWriteState_(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat *outer$, OrgApacheLuceneIndexSegmentWriteState *writeState) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter, initWithOrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_withOrgApacheLuceneIndexSegmentWriteState_, outer$, writeState)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter)
@@ -394,18 +417,18 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFo
   return self;
 }
 
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
+  return JreDefaultFastEnumeration(self, state, stackbuf, len);
+}
+
 - (void)dealloc {
   RELEASE_(val$group_);
   [super dealloc];
 }
 
-- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, NULL },
+    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<Ljava/lang/String;>;" },
     { "initWithOrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup:withOrgApacheLuceneIndexFields:", "", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -424,9 +447,11 @@ void OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter_$1_initWit
 }
 
 OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter_$1 *new_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter_$1_initWithOrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup_withOrgApacheLuceneIndexFields_(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup *capture$0, OrgApacheLuceneIndexFields *arg$0) {
-  OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter_$1 *self = [OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter_$1 alloc];
-  OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter_$1_initWithOrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup_withOrgApacheLuceneIndexFields_(self, capture$0, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter_$1, initWithOrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup_withOrgApacheLuceneIndexFields_, capture$0, arg$0)
+}
+
+OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter_$1 *create_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter_$1_initWithOrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup_withOrgApacheLuceneIndexFields_(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup *capture$0, OrgApacheLuceneIndexFields *arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter_$1, initWithOrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup_withOrgApacheLuceneIndexFields_, capture$0, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsWriter_$1)
@@ -463,9 +488,9 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_Fiel
 }
 
 - (jlong)ramBytesUsed {
-  jlong ramBytesUsed = OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_BASE_RAM_BYTES_USED_;
-  ramBytesUsed += [((id<JavaUtilMap>) nil_chk(fields_)) size] * 2LL * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_);
-  ramBytesUsed += [((id<JavaUtilMap>) nil_chk(formats_)) size] * 2LL * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_);
+  jlong ramBytesUsed = OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_BASE_RAM_BYTES_USED;
+  ramBytesUsed += [((id<JavaUtilMap>) nil_chk(fields_)) size] * 2LL * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF);
+  ramBytesUsed += [((id<JavaUtilMap>) nil_chk(formats_)) size] * 2LL * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF);
   for (id<JavaUtilMap_Entry> __strong entry_ in nil_chk([formats_ entrySet])) {
     ramBytesUsed += [((OrgApacheLuceneCodecsFieldsProducer *) nil_chk([((id<JavaUtilMap_Entry>) nil_chk(entry_)) getValue])) ramBytesUsed];
   }
@@ -483,11 +508,15 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_Fiel
 }
 
 - (OrgApacheLuceneCodecsFieldsProducer *)getMergeInstance {
-  return [new_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_initWithOrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_(self) autorelease];
+  return create_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_initWithOrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_(self);
 }
 
 - (NSString *)description {
   return JreStrcat("$$$IC", @"PerFieldPostings(segment=", segment_, @" formats=", [((id<JavaUtilMap>) nil_chk(formats_)) size], ')');
+}
+
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
+  return JreDefaultFastEnumeration(self, state, stackbuf, len);
 }
 
 - (void)dealloc {
@@ -497,13 +526,9 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_Fiel
   [super dealloc];
 }
 
-- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
-}
-
 + (void)initialize {
   if (self == [OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader class]) {
-    OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_BASE_RAM_BYTES_USED_ = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_class_());
+    OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_BASE_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_class_());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader)
   }
 }
@@ -512,18 +537,18 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_Fiel
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader:", "FieldsReader", NULL, 0x0, "Ljava.io.IOException;", NULL },
     { "initWithOrgApacheLuceneIndexSegmentReadState:", "FieldsReader", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, NULL },
+    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<Ljava/lang/String;>;" },
     { "termsWithNSString:", "terms", "Lorg.apache.lucene.index.Terms;", 0x1, "Ljava.io.IOException;", NULL },
     { "size", NULL, "I", 0x1, NULL, NULL },
     { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
     { "checkIntegrity", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
     { "getMergeInstance", NULL, "Lorg.apache.lucene.codecs.FieldsProducer;", 0x1, "Ljava.io.IOException;", NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "BASE_RAM_BYTES_USED_", NULL, 0x1a, "J", &OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_BASE_RAM_BYTES_USED_, NULL, .constantValue.asLong = 0 },
+    { "BASE_RAM_BYTES_USED", "BASE_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_BASE_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
     { "fields_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/codecs/FieldsProducer;>;", .constantValue.asLong = 0 },
     { "formats_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/codecs/FieldsProducer;>;", .constantValue.asLong = 0 },
     { "segment_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
@@ -538,7 +563,7 @@ void OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_initWithOr
   OrgApacheLuceneCodecsFieldsProducer_init(self);
   JreStrongAssignAndConsume(&self->fields_, new_JavaUtilTreeMap_init());
   JreStrongAssignAndConsume(&self->formats_, new_JavaUtilHashMap_init());
-  id<JavaUtilMap> oldToNew = [new_JavaUtilIdentityHashMap_init() autorelease];
+  id<JavaUtilMap> oldToNew = create_JavaUtilIdentityHashMap_init();
   for (id<JavaUtilMap_Entry> __strong ent in nil_chk([((OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader *) nil_chk(other))->formats_ entrySet])) {
     OrgApacheLuceneCodecsFieldsProducer *values = [((OrgApacheLuceneCodecsFieldsProducer *) nil_chk([((id<JavaUtilMap_Entry>) nil_chk(ent)) getValue])) getMergeInstance];
     [self->formats_ putWithId:[ent getKey] withId:values];
@@ -553,9 +578,11 @@ void OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_initWithOr
 }
 
 OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader *new_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_initWithOrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader *other) {
-  OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader *self = [OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader alloc];
-  OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_initWithOrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_(self, other);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader, initWithOrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_, other)
+}
+
+OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader *create_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_initWithOrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader *other) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader, initWithOrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_, other)
 }
 
 void OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_initWithOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader *self, OrgApacheLuceneIndexSegmentReadState *readState) {
@@ -565,18 +592,18 @@ void OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_initWithOr
   jboolean success = false;
   @try {
     for (OrgApacheLuceneIndexFieldInfo * __strong fi in nil_chk(((OrgApacheLuceneIndexSegmentReadState *) nil_chk(readState))->fieldInfos_)) {
-      if ([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fi)) getIndexOptions] != JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE)) {
+      if ([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fi)) getIndexOptions] != JreLoadEnum(OrgApacheLuceneIndexIndexOptions, NONE)) {
         NSString *fieldName = fi->name_;
-        NSString *formatName = [fi getAttributeWithNSString:JreLoadStatic(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat, PER_FIELD_FORMAT_KEY_)];
+        NSString *formatName = [fi getAttributeWithNSString:JreLoadStatic(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat, PER_FIELD_FORMAT_KEY)];
         if (formatName != nil) {
-          NSString *suffix = [fi getAttributeWithNSString:JreLoadStatic(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat, PER_FIELD_SUFFIX_KEY_)];
+          NSString *suffix = [fi getAttributeWithNSString:JreLoadStatic(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat, PER_FIELD_SUFFIX_KEY)];
           if (suffix == nil) {
-            @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$$", @"missing attribute: ", JreLoadStatic(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat, PER_FIELD_SUFFIX_KEY_), @" for field: ", fieldName)) autorelease];
+            @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$$", @"missing attribute: ", JreLoadStatic(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat, PER_FIELD_SUFFIX_KEY), @" for field: ", fieldName));
           }
           OrgApacheLuceneCodecsPostingsFormat *format = OrgApacheLuceneCodecsPostingsFormat_forNameWithNSString_(formatName);
           NSString *segmentSuffix = OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_getSuffixWithNSString_withNSString_(formatName, suffix);
           if (![self->formats_ containsKeyWithId:segmentSuffix]) {
-            [self->formats_ putWithId:segmentSuffix withId:[((OrgApacheLuceneCodecsPostingsFormat *) nil_chk(format)) fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:[new_OrgApacheLuceneIndexSegmentReadState_initWithOrgApacheLuceneIndexSegmentReadState_withNSString_(readState, segmentSuffix) autorelease]]];
+            [self->formats_ putWithId:segmentSuffix withId:[((OrgApacheLuceneCodecsPostingsFormat *) nil_chk(format)) fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:create_OrgApacheLuceneIndexSegmentReadState_initWithOrgApacheLuceneIndexSegmentReadState_withNSString_(readState, segmentSuffix)]];
           }
           [self->fields_ putWithId:fieldName withId:[self->formats_ getWithId:segmentSuffix]];
         }
@@ -589,13 +616,15 @@ void OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_initWithOr
       OrgApacheLuceneUtilIOUtils_closeWhileHandlingExceptionWithJavaLangIterable_([self->formats_ values]);
     }
   }
-  JreStrongAssign(&self->segment_, ((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentReadState *) nil_chk(readState))->segmentInfo_))->name_);
+  JreStrongAssign(&self->segment_, ((OrgApacheLuceneIndexSegmentInfo *) nil_chk(readState->segmentInfo_))->name_);
 }
 
 OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader *new_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_initWithOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneIndexSegmentReadState *readState) {
-  OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader *self = [OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader alloc];
-  OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_initWithOrgApacheLuceneIndexSegmentReadState_(self, readState);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader, initWithOrgApacheLuceneIndexSegmentReadState_, readState)
+}
+
+OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader *create_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_initWithOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneIndexSegmentReadState *readState) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader, initWithOrgApacheLuceneIndexSegmentReadState_, readState)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader)

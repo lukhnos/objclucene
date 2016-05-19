@@ -5,39 +5,62 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSuggestDocumentCompletionTerms_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSuggestDocumentCompletionTerms_RESTRICT
-#define OrgApacheLuceneSearchSuggestDocumentCompletionTerms_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionTerms")
+#ifdef RESTRICT_OrgApacheLuceneSearchSuggestDocumentCompletionTerms
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionTerms 0
 #else
-#define OrgApacheLuceneSearchSuggestDocumentCompletionTerms_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionTerms 1
 #endif
-#undef OrgApacheLuceneSearchSuggestDocumentCompletionTerms_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSuggestDocumentCompletionTerms
 
-#if !defined (_OrgApacheLuceneSearchSuggestDocumentCompletionTerms_) && (OrgApacheLuceneSearchSuggestDocumentCompletionTerms_INCLUDE_ALL || OrgApacheLuceneSearchSuggestDocumentCompletionTerms_INCLUDE)
-#define _OrgApacheLuceneSearchSuggestDocumentCompletionTerms_
+#if !defined (OrgApacheLuceneSearchSuggestDocumentCompletionTerms_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionTerms || defined(INCLUDE_OrgApacheLuceneSearchSuggestDocumentCompletionTerms))
+#define OrgApacheLuceneSearchSuggestDocumentCompletionTerms_
 
-#define OrgApacheLuceneIndexFilterLeafReader_RESTRICT 1
-#define OrgApacheLuceneIndexFilterLeafReader_FilterTerms_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexFilterLeafReader 1
+#define INCLUDE_OrgApacheLuceneIndexFilterLeafReader_FilterTerms 1
 #include "org/apache/lucene/index/FilterLeafReader.h"
 
 @class OrgApacheLuceneIndexTerms;
 @class OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader;
 @class OrgApacheLuceneSearchSuggestDocumentNRTSuggester;
 
+/*!
+ @brief Wrapped <code>org.apache.lucene.index.Terms</code>
+ used by <code>SuggestField</code> and <code>ContextSuggestField</code>
+ to access corresponding suggester and their attributes
+ */
 @interface OrgApacheLuceneSearchSuggestDocumentCompletionTerms : OrgApacheLuceneIndexFilterLeafReader_FilterTerms
 
 #pragma mark Public
 
+/*!
+ @brief Returns the maximum weight of all entries in the weighted FST
+ */
 - (jlong)getMaxWeight;
 
+/*!
+ @brief Returns the minimum weight of all entries in the weighted FST
+ */
 - (jlong)getMinWeight;
 
+/*!
+ @brief Returns the type of FST, either <code>SuggestField.TYPE</code> or
+ <code>ContextSuggestField.TYPE</code>
+ */
 - (jbyte)getType;
 
+/*!
+ @brief Returns a <code>NRTSuggester</code> for the field
+ or <code>null</code> if no FST
+ was indexed for this field
+ */
 - (OrgApacheLuceneSearchSuggestDocumentNRTSuggester *)suggester;
 
 #pragma mark Package-Private
 
+/*!
+ @brief Creates a completionTerms based on <code>CompletionsTermsReader</code>
+ */
 - (instancetype)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)inArg
 withOrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader:(OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader *)reader;
 
@@ -49,8 +72,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentCompletionTerms_initW
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionTerms *new_OrgApacheLuceneSearchSuggestDocumentCompletionTerms_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_(OrgApacheLuceneIndexTerms *inArg, OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader *reader) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionTerms *create_OrgApacheLuceneSearchSuggestDocumentCompletionTerms_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_(OrgApacheLuceneIndexTerms *inArg, OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader *reader);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionTerms)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSuggestDocumentCompletionTerms_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionTerms")

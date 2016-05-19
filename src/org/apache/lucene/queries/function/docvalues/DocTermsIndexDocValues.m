@@ -48,6 +48,8 @@ __attribute__((unused)) static void OrgApacheLuceneQueriesFunctionDocvaluesDocTe
 
 __attribute__((unused)) static OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$1 *new_OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$1_initWithOrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_withInt_withInt_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues *outer$, jint capture$0, jint capture$1, OrgApacheLuceneIndexIndexReader *arg$0, OrgApacheLuceneQueriesFunctionFunctionValues *arg$1) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$1 *create_OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$1_initWithOrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_withInt_withInt_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues *outer$, jint capture$0, jint capture$1, OrgApacheLuceneIndexIndexReader *arg$0, OrgApacheLuceneQueriesFunctionFunctionValues *arg$1);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$1)
 
 @interface OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$2 : OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller {
@@ -72,6 +74,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValue
 __attribute__((unused)) static void OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$2_initWithOrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_(OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$2 *self, OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues *outer$);
 
 __attribute__((unused)) static OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$2 *new_OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$2_initWithOrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_(OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues *outer$) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$2 *create_OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$2_initWithOrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_(OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$2)
 
@@ -143,7 +147,7 @@ withOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)tar
   upperVal = upperVal == nil ? nil : [self toTermWithNSString:upperVal];
   jint lower = JavaLangInteger_MIN_VALUE;
   if (lowerVal != nil) {
-    lower = [((OrgApacheLuceneIndexSortedDocValues *) nil_chk(termsIndex_)) lookupTermWithOrgApacheLuceneUtilBytesRef:[new_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(lowerVal) autorelease]];
+    lower = [((OrgApacheLuceneIndexSortedDocValues *) nil_chk(termsIndex_)) lookupTermWithOrgApacheLuceneUtilBytesRef:create_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(lowerVal)];
     if (lower < 0) {
       lower = -lower - 1;
     }
@@ -153,7 +157,7 @@ withOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)tar
   }
   jint upper = JavaLangInteger_MAX_VALUE;
   if (upperVal != nil) {
-    upper = [((OrgApacheLuceneIndexSortedDocValues *) nil_chk(termsIndex_)) lookupTermWithOrgApacheLuceneUtilBytesRef:[new_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(upperVal) autorelease]];
+    upper = [((OrgApacheLuceneIndexSortedDocValues *) nil_chk(termsIndex_)) lookupTermWithOrgApacheLuceneUtilBytesRef:create_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(upperVal)];
     if (upper < 0) {
       upper = -upper - 2;
     }
@@ -163,7 +167,7 @@ withOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)tar
   }
   jint ll = lower;
   jint uu = upper;
-  return [new_OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$1_initWithOrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_withInt_withInt_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(self, ll, uu, reader, self) autorelease];
+  return create_OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$1_initWithOrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_withInt_withInt_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(self, ll, uu, reader, self);
 }
 
 - (NSString *)toStringWithInt:(jint)doc {
@@ -171,7 +175,7 @@ withOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)tar
 }
 
 - (OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller *)getValueFiller {
-  return [new_OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$2_initWithOrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_(self) autorelease];
+  return create_OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$2_initWithOrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_(self);
 }
 
 + (OrgApacheLuceneIndexSortedDocValues *)openWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
@@ -235,7 +239,7 @@ OrgApacheLuceneIndexSortedDocValues *OrgApacheLuceneQueriesFunctionDocvaluesDocT
     return OrgApacheLuceneIndexDocValues_getSortedWithOrgApacheLuceneIndexLeafReader_withNSString_([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader], field);
   }
   @catch (JavaLangRuntimeException *e) {
-    @throw [new_OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_DocTermsIndexException_initWithNSString_withJavaLangRuntimeException_(field, e) autorelease];
+    @throw create_OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_DocTermsIndexException_initWithNSString_withJavaLangRuntimeException_(field, e);
   }
 }
 
@@ -260,13 +264,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionDocvaluesDocTerms
 @end
 
 void OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_DocTermsIndexException_initWithNSString_withJavaLangRuntimeException_(OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_DocTermsIndexException *self, NSString *fieldName, JavaLangRuntimeException *cause) {
-  JavaLangRuntimeException_initWithNSString_withJavaLangThrowable_(self, JreStrcat("$$", @"Can't initialize DocTermsIndex to generate (function) FunctionValues for field: ", fieldName), cause);
+  JavaLangRuntimeException_initWithNSString_withNSException_(self, JreStrcat("$$", @"Can't initialize DocTermsIndex to generate (function) FunctionValues for field: ", fieldName), cause);
 }
 
 OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_DocTermsIndexException *new_OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_DocTermsIndexException_initWithNSString_withJavaLangRuntimeException_(NSString *fieldName, JavaLangRuntimeException *cause) {
-  OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_DocTermsIndexException *self = [OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_DocTermsIndexException alloc];
-  OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_DocTermsIndexException_initWithNSString_withJavaLangRuntimeException_(self, fieldName, cause);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_DocTermsIndexException, initWithNSString_withJavaLangRuntimeException_, fieldName, cause)
+}
+
+OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_DocTermsIndexException *create_OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_DocTermsIndexException_initWithNSString_withJavaLangRuntimeException_(NSString *fieldName, JavaLangRuntimeException *cause) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_DocTermsIndexException, initWithNSString_withJavaLangRuntimeException_, fieldName, cause)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_DocTermsIndexException)
@@ -317,9 +323,11 @@ void OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$1_initWithOr
 }
 
 OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$1 *new_OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$1_initWithOrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_withInt_withInt_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues *outer$, jint capture$0, jint capture$1, OrgApacheLuceneIndexIndexReader *arg$0, OrgApacheLuceneQueriesFunctionFunctionValues *arg$1) {
-  OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$1 *self = [OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$1 alloc];
-  OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$1_initWithOrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_withInt_withInt_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(self, outer$, capture$0, capture$1, arg$0, arg$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$1, initWithOrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_withInt_withInt_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_, outer$, capture$0, capture$1, arg$0, arg$1)
+}
+
+OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$1 *create_OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$1_initWithOrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_withInt_withInt_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues *outer$, jint capture$0, jint capture$1, OrgApacheLuceneIndexIndexReader *arg$0, OrgApacheLuceneQueriesFunctionFunctionValues *arg$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$1, initWithOrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_withInt_withInt_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_, outer$, capture$0, capture$1, arg$0, arg$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$1)
@@ -335,7 +343,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionDocvaluesDocTerms
   [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(((OrgApacheLuceneUtilMutableMutableValueStr *) nil_chk(mval_))->value_)) clear];
   mval_->exists_ = (ord >= 0);
   if (mval_->exists_) {
-    [mval_->value_ copyBytesWithOrgApacheLuceneUtilBytesRef:[this$0_->termsIndex_ lookupOrdWithInt:ord]];
+    [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(mval_->value_)) copyBytesWithOrgApacheLuceneUtilBytesRef:[this$0_->termsIndex_ lookupOrdWithInt:ord]];
   }
 }
 
@@ -374,9 +382,11 @@ void OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$2_initWithOr
 }
 
 OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$2 *new_OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$2_initWithOrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_(OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues *outer$) {
-  OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$2 *self = [OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$2 alloc];
-  OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$2_initWithOrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_(self, outer$);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$2, initWithOrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_, outer$)
+}
+
+OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$2 *create_OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$2_initWithOrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_(OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$2, initWithOrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_, outer$)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_$2)

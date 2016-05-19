@@ -25,8 +25,6 @@
 #include "org/lukhnos/portmobile/file/Path.h"
 #include "org/lukhnos/portmobile/file/StandardOpenOption.h"
 
-#define OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_CHUNK_SIZE 16384
-
 @interface OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput () {
  @public
   JavaNioByteBuffer *byteBuf_;
@@ -36,7 +34,12 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput, byteBuf_, JavaNioByteBuffer *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput, CHUNK_SIZE, jint)
+/*!
+ @brief The maximum chunk size for reads of 16384 bytes.
+ */
+inline jint OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_get_CHUNK_SIZE();
+#define OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_CHUNK_SIZE 16384
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput, CHUNK_SIZE, jint)
 
 __attribute__((unused)) static jlong OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_length(OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *self);
 
@@ -57,8 +60,8 @@ __attribute__((unused)) static jlong OrgApacheLuceneStoreSimpleFSDirectory_Simpl
                         withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
   [self ensureOpen];
   OrgLukhnosPortmobileFilePath *path = [((OrgLukhnosPortmobileFilePath *) nil_chk(directory_)) resolveWithNSString:name];
-  id<JavaNioChannelsSeekableByteChannel> channel = OrgLukhnosPortmobileFileFiles_newByteChannelWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardOpenOptionEnum_(path, JreLoadStatic(OrgLukhnosPortmobileFileStandardOpenOptionEnum, READ));
-  return [new_OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_initWithNSString_withJavaNioChannelsSeekableByteChannel_withOrgApacheLuceneStoreIOContext_(JreStrcat("$@$", @"SimpleFSIndexInput(path=\"", path, @"\")"), channel, context) autorelease];
+  id<JavaNioChannelsSeekableByteChannel> channel = OrgLukhnosPortmobileFileFiles_newByteChannelWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardOpenOption_(path, JreLoadEnum(OrgLukhnosPortmobileFileStandardOpenOption, READ));
+  return create_OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_initWithNSString_withJavaNioChannelsSeekableByteChannel_withOrgApacheLuceneStoreIOContext_(JreStrcat("$@$", @"SimpleFSIndexInput(path=\"", path, @"\")"), channel, context);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -79,9 +82,11 @@ void OrgApacheLuceneStoreSimpleFSDirectory_initWithOrgLukhnosPortmobileFilePath_
 }
 
 OrgApacheLuceneStoreSimpleFSDirectory *new_OrgApacheLuceneStoreSimpleFSDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_(OrgLukhnosPortmobileFilePath *path, OrgApacheLuceneStoreLockFactory *lockFactory) {
-  OrgApacheLuceneStoreSimpleFSDirectory *self = [OrgApacheLuceneStoreSimpleFSDirectory alloc];
-  OrgApacheLuceneStoreSimpleFSDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_(self, path, lockFactory);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreSimpleFSDirectory, initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_, path, lockFactory)
+}
+
+OrgApacheLuceneStoreSimpleFSDirectory *create_OrgApacheLuceneStoreSimpleFSDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_(OrgLukhnosPortmobileFilePath *path, OrgApacheLuceneStoreLockFactory *lockFactory) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreSimpleFSDirectory, initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_, path, lockFactory)
 }
 
 void OrgApacheLuceneStoreSimpleFSDirectory_initWithOrgLukhnosPortmobileFilePath_(OrgApacheLuceneStoreSimpleFSDirectory *self, OrgLukhnosPortmobileFilePath *path) {
@@ -89,9 +94,11 @@ void OrgApacheLuceneStoreSimpleFSDirectory_initWithOrgLukhnosPortmobileFilePath_
 }
 
 OrgApacheLuceneStoreSimpleFSDirectory *new_OrgApacheLuceneStoreSimpleFSDirectory_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path) {
-  OrgApacheLuceneStoreSimpleFSDirectory *self = [OrgApacheLuceneStoreSimpleFSDirectory alloc];
-  OrgApacheLuceneStoreSimpleFSDirectory_initWithOrgLukhnosPortmobileFilePath_(self, path);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreSimpleFSDirectory, initWithOrgLukhnosPortmobileFilePath_, path)
+}
+
+OrgApacheLuceneStoreSimpleFSDirectory *create_OrgApacheLuceneStoreSimpleFSDirectory_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreSimpleFSDirectory, initWithOrgLukhnosPortmobileFilePath_, path)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreSimpleFSDirectory)
@@ -121,7 +128,7 @@ withJavaNioChannelsSeekableByteChannel:(id<JavaNioChannelsSeekableByteChannel>)c
 }
 
 - (OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *)clone {
-  OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *clone = (OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *) check_class_cast([super clone], [OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput class]);
+  OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *clone = (OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *) cast_chk([super clone], [OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput class]);
   ((OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *) nil_chk(clone))->isClone_ = true;
   return clone;
 }
@@ -130,9 +137,9 @@ withJavaNioChannelsSeekableByteChannel:(id<JavaNioChannelsSeekableByteChannel>)c
                                              withLong:(jlong)offset
                                              withLong:(jlong)length {
   if (offset < 0 || length < 0 || offset + length > OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_length(self)) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$@", @"slice() ", sliceDescription, @" out of bounds: ", self)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$@", @"slice() ", sliceDescription, @" out of bounds: ", self));
   }
-  return [new_OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_initWithNSString_withJavaNioChannelsSeekableByteChannel_withLong_withLong_withInt_([self getFullSliceDescriptionWithNSString:sliceDescription], channel_, off_ + offset, length, [self getBufferSize]) autorelease];
+  return create_OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_initWithNSString_withJavaNioChannelsSeekableByteChannel_withLong_withLong_withInt_([self getFullSliceDescriptionWithNSString:sliceDescription], channel_, off_ + offset, length, [self getBufferSize]);
 }
 
 - (jlong)length {
@@ -159,18 +166,18 @@ withJavaNioChannelsSeekableByteChannel:(id<JavaNioChannelsSeekableByteChannel>)c
   @synchronized(channel_) {
     jlong pos = [self getFilePointer] + off_;
     if (pos + len > end_) {
-      @throw [new_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"read past EOF: ", self)) autorelease];
+      @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"read past EOF: ", self));
     }
     @try {
       [((id<JavaNioChannelsSeekableByteChannel>) nil_chk(channel_)) positionWithLong:pos];
       jint readLength = len;
       while (readLength > 0) {
         jint toRead = JavaLangMath_minWithInt_withInt_(OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_CHUNK_SIZE, readLength);
-        [bb limitWithInt:[((JavaNioByteBuffer *) nil_chk(bb)) position] + toRead];
+        [((JavaNioByteBuffer *) nil_chk(bb)) limitWithInt:[bb position] + toRead];
         JreAssert(([bb remaining] == toRead), (@"org/apache/lucene/store/SimpleFSDirectory.java:176 condition failed: assert bb.remaining() == toRead;"));
         jint i = [channel_ readWithJavaNioByteBuffer:bb];
         if (i < 0) {
-          @throw [new_JavaIoEOFException_initWithNSString_(JreStrcat("$@$I$I$J$I$J", @"read past EOF: ", self, @" off: ", offset, @" len: ", len, @" pos: ", pos, @" chunkLen: ", toRead, @" end: ", end_)) autorelease];
+          @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@$I$I$J$I$J", @"read past EOF: ", self, @" off: ", offset, @" len: ", len, @" pos: ", pos, @" chunkLen: ", toRead, @" end: ", end_));
         }
         JreAssert((i > 0), (@"SeekableByteChannel.read with non zero-length bb.remaining() must always read at least one byte (Channel is in blocking mode, see spec of ReadableByteChannel)"));
         pos += i;
@@ -179,7 +186,7 @@ withJavaNioChannelsSeekableByteChannel:(id<JavaNioChannelsSeekableByteChannel>)c
       JreAssert((readLength == 0), (@"org/apache/lucene/store/SimpleFSDirectory.java:185 condition failed: assert readLength == 0;"));
     }
     @catch (JavaIoIOException *ioe) {
-      @throw [new_JavaIoIOException_initWithNSString_withJavaLangThrowable_(JreStrcat("$$@", [((JavaIoIOException *) nil_chk(ioe)) getMessage], @": ", self), ioe) autorelease];
+      @throw create_JavaIoIOException_initWithNSString_withNSException_(JreStrcat("$$@", [((JavaIoIOException *) nil_chk(ioe)) getMessage], @": ", self), ioe);
     }
   }
 }
@@ -228,9 +235,11 @@ void OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_initWithNSString_w
 }
 
 OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *new_OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_initWithNSString_withJavaNioChannelsSeekableByteChannel_withOrgApacheLuceneStoreIOContext_(NSString *resourceDesc, id<JavaNioChannelsSeekableByteChannel> channel, OrgApacheLuceneStoreIOContext *context) {
-  OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *self = [OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput alloc];
-  OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_initWithNSString_withJavaNioChannelsSeekableByteChannel_withOrgApacheLuceneStoreIOContext_(self, resourceDesc, channel, context);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput, initWithNSString_withJavaNioChannelsSeekableByteChannel_withOrgApacheLuceneStoreIOContext_, resourceDesc, channel, context)
+}
+
+OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *create_OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_initWithNSString_withJavaNioChannelsSeekableByteChannel_withOrgApacheLuceneStoreIOContext_(NSString *resourceDesc, id<JavaNioChannelsSeekableByteChannel> channel, OrgApacheLuceneStoreIOContext *context) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput, initWithNSString_withJavaNioChannelsSeekableByteChannel_withOrgApacheLuceneStoreIOContext_, resourceDesc, channel, context)
 }
 
 void OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_initWithNSString_withJavaNioChannelsSeekableByteChannel_withLong_withLong_withInt_(OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *self, NSString *resourceDesc, id<JavaNioChannelsSeekableByteChannel> channel, jlong off, jlong length, jint bufferSize) {
@@ -243,9 +252,11 @@ void OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_initWithNSString_w
 }
 
 OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *new_OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_initWithNSString_withJavaNioChannelsSeekableByteChannel_withLong_withLong_withInt_(NSString *resourceDesc, id<JavaNioChannelsSeekableByteChannel> channel, jlong off, jlong length, jint bufferSize) {
-  OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *self = [OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput alloc];
-  OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_initWithNSString_withJavaNioChannelsSeekableByteChannel_withLong_withLong_withInt_(self, resourceDesc, channel, off, length, bufferSize);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput, initWithNSString_withJavaNioChannelsSeekableByteChannel_withLong_withLong_withInt_, resourceDesc, channel, off, length, bufferSize)
+}
+
+OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *create_OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_initWithNSString_withJavaNioChannelsSeekableByteChannel_withLong_withLong_withInt_(NSString *resourceDesc, id<JavaNioChannelsSeekableByteChannel> channel, jlong off, jlong length, jint bufferSize) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput, initWithNSString_withJavaNioChannelsSeekableByteChannel_withLong_withLong_withInt_, resourceDesc, channel, off, length, bufferSize)
 }
 
 jlong OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_length(OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *self) {

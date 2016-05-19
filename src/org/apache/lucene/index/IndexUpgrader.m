@@ -11,7 +11,6 @@
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Package.h"
 #include "java/lang/System.h"
-#include "java/lang/Throwable.h"
 #include "java/util/Collection.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
@@ -46,8 +45,9 @@
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexIndexUpgrader, dir_, OrgApacheLuceneStoreDirectory *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexIndexUpgrader, iwc_, OrgApacheLuceneIndexIndexWriterConfig *)
 
-static NSString *OrgApacheLuceneIndexIndexUpgrader_LOG_PREFIX_ = @"IndexUpgrader";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexIndexUpgrader, LOG_PREFIX_, NSString *)
+inline NSString *OrgApacheLuceneIndexIndexUpgrader_get_LOG_PREFIX();
+static NSString *OrgApacheLuceneIndexIndexUpgrader_LOG_PREFIX = @"IndexUpgrader";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexIndexUpgrader, LOG_PREFIX, NSString *)
 
 __attribute__((unused)) static void OrgApacheLuceneIndexIndexUpgrader_printUsage();
 
@@ -86,37 +86,37 @@ __attribute__((unused)) static void OrgApacheLuceneIndexIndexUpgrader_printUsage
 
 - (void)upgrade {
   if (!OrgApacheLuceneIndexDirectoryReader_indexExistsWithOrgApacheLuceneStoreDirectory_(dir_)) {
-    @throw [new_OrgApacheLuceneIndexIndexNotFoundException_initWithNSString_([((OrgApacheLuceneStoreDirectory *) nil_chk(dir_)) description]) autorelease];
+    @throw create_OrgApacheLuceneIndexIndexNotFoundException_initWithNSString_([((OrgApacheLuceneStoreDirectory *) nil_chk(dir_)) description]);
   }
   if (!deletePriorCommits_) {
     id<JavaUtilCollection> commits = OrgApacheLuceneIndexDirectoryReader_listCommitsWithOrgApacheLuceneStoreDirectory_(dir_);
     if ([((id<JavaUtilCollection>) nil_chk(commits)) size] > 1) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"This tool was invoked to not delete prior commit points, but the following commits were found: ", commits)) autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"This tool was invoked to not delete prior commit points, but the following commits were found: ", commits));
     }
   }
-  [iwc_ setMergePolicyWithOrgApacheLuceneIndexMergePolicy:[new_OrgApacheLuceneIndexUpgradeIndexMergePolicy_initWithOrgApacheLuceneIndexMergePolicy_([((OrgApacheLuceneIndexIndexWriterConfig *) nil_chk(iwc_)) getMergePolicy]) autorelease]];
-  [iwc_ setIndexDeletionPolicyWithOrgApacheLuceneIndexIndexDeletionPolicy:[new_OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy_init() autorelease]];
+  [((OrgApacheLuceneIndexIndexWriterConfig *) nil_chk(iwc_)) setMergePolicyWithOrgApacheLuceneIndexMergePolicy:create_OrgApacheLuceneIndexUpgradeIndexMergePolicy_initWithOrgApacheLuceneIndexMergePolicy_([iwc_ getMergePolicy])];
+  [iwc_ setIndexDeletionPolicyWithOrgApacheLuceneIndexIndexDeletionPolicy:create_OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy_init()];
   {
-    OrgApacheLuceneIndexIndexWriter *w = [new_OrgApacheLuceneIndexIndexWriter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_(dir_, iwc_) autorelease];
-    JavaLangThrowable *__primaryException1 = nil;
+    OrgApacheLuceneIndexIndexWriter *w = create_OrgApacheLuceneIndexIndexWriter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_(dir_, iwc_);
+    NSException *__primaryException1 = nil;
     @try {
       OrgApacheLuceneUtilInfoStream *infoStream = [iwc_ getInfoStream];
-      if ([((OrgApacheLuceneUtilInfoStream *) nil_chk(infoStream)) isEnabledWithNSString:OrgApacheLuceneIndexIndexUpgrader_LOG_PREFIX_]) {
-        [infoStream messageWithNSString:OrgApacheLuceneIndexIndexUpgrader_LOG_PREFIX_ withNSString:JreStrcat("$@$@$@$", @"Upgrading all pre-", JreLoadStatic(OrgApacheLuceneUtilVersion, LATEST_), @" segments of index directory '", dir_, @"' to version ", JreLoadStatic(OrgApacheLuceneUtilVersion, LATEST_), @"...")];
+      if ([((OrgApacheLuceneUtilInfoStream *) nil_chk(infoStream)) isEnabledWithNSString:OrgApacheLuceneIndexIndexUpgrader_LOG_PREFIX]) {
+        [infoStream messageWithNSString:OrgApacheLuceneIndexIndexUpgrader_LOG_PREFIX withNSString:JreStrcat("$@$@$@$", @"Upgrading all pre-", JreLoadStatic(OrgApacheLuceneUtilVersion, LATEST), @" segments of index directory '", dir_, @"' to version ", JreLoadStatic(OrgApacheLuceneUtilVersion, LATEST), @"...")];
       }
       [w forceMergeWithInt:1];
-      if ([infoStream isEnabledWithNSString:OrgApacheLuceneIndexIndexUpgrader_LOG_PREFIX_]) {
-        [infoStream messageWithNSString:OrgApacheLuceneIndexIndexUpgrader_LOG_PREFIX_ withNSString:JreStrcat("$@", @"All segments upgraded to version ", JreLoadStatic(OrgApacheLuceneUtilVersion, LATEST_))];
-        [infoStream messageWithNSString:OrgApacheLuceneIndexIndexUpgrader_LOG_PREFIX_ withNSString:@"Enforcing commit to rewrite all index metadata..."];
+      if ([infoStream isEnabledWithNSString:OrgApacheLuceneIndexIndexUpgrader_LOG_PREFIX]) {
+        [infoStream messageWithNSString:OrgApacheLuceneIndexIndexUpgrader_LOG_PREFIX withNSString:JreStrcat("$@", @"All segments upgraded to version ", JreLoadStatic(OrgApacheLuceneUtilVersion, LATEST))];
+        [infoStream messageWithNSString:OrgApacheLuceneIndexIndexUpgrader_LOG_PREFIX withNSString:@"Enforcing commit to rewrite all index metadata..."];
       }
       [w setCommitDataWithJavaUtilMap:[w getCommitData]];
       JreAssert(([w hasUncommittedChanges]), (@"org/apache/lucene/index/IndexUpgrader.java:178 condition failed: assert w.hasUncommittedChanges();"));
       [w commit];
-      if ([infoStream isEnabledWithNSString:OrgApacheLuceneIndexIndexUpgrader_LOG_PREFIX_]) {
-        [infoStream messageWithNSString:OrgApacheLuceneIndexIndexUpgrader_LOG_PREFIX_ withNSString:@"Committed upgraded metadata to index."];
+      if ([infoStream isEnabledWithNSString:OrgApacheLuceneIndexIndexUpgrader_LOG_PREFIX]) {
+        [infoStream messageWithNSString:OrgApacheLuceneIndexIndexUpgrader_LOG_PREFIX withNSString:@"Committed upgraded metadata to index."];
       }
     }
-    @catch (JavaLangThrowable *e) {
+    @catch (NSException *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -125,8 +125,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexIndexUpgrader_printUsage
         if (__primaryException1 != nil) {
           @try {
             [w close];
-          } @catch (JavaLangThrowable *e) {
-            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          } @catch (NSException *e) {
+            [__primaryException1 addSuppressedWithNSException:e];
           }
         } else {
           [w close];
@@ -153,7 +153,7 @@ __attribute__((unused)) static void OrgApacheLuceneIndexIndexUpgrader_printUsage
     { "upgrade", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "LOG_PREFIX_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneIndexIndexUpgrader_LOG_PREFIX_, NULL, .constantValue.asLong = 0 },
+    { "LOG_PREFIX", "LOG_PREFIX", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneIndexIndexUpgrader_LOG_PREFIX, NULL, .constantValue.asLong = 0 },
     { "dir_", NULL, 0x12, "Lorg.apache.lucene.store.Directory;", NULL, NULL, .constantValue.asLong = 0 },
     { "iwc_", NULL, 0x12, "Lorg.apache.lucene.index.IndexWriterConfig;", NULL, NULL, .constantValue.asLong = 0 },
     { "deletePriorCommits_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
@@ -166,15 +166,15 @@ __attribute__((unused)) static void OrgApacheLuceneIndexIndexUpgrader_printUsage
 
 void OrgApacheLuceneIndexIndexUpgrader_printUsage() {
   OrgApacheLuceneIndexIndexUpgrader_initialize();
-  [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, err_))) printlnWithNSString:@"Upgrades an index so all segments created with a previous Lucene version are rewritten."];
-  [JreLoadStatic(JavaLangSystem, err_) printlnWithNSString:@"Usage:"];
-  [JreLoadStatic(JavaLangSystem, err_) printlnWithNSString:JreStrcat("$$$", @"  java ", [OrgApacheLuceneIndexIndexUpgrader_class_() getName], @" [-delete-prior-commits] [-verbose] [-dir-impl X] indexDir")];
-  [JreLoadStatic(JavaLangSystem, err_) printlnWithNSString:@"This tool keeps only the last commit in an index; for this"];
-  [JreLoadStatic(JavaLangSystem, err_) printlnWithNSString:@"reason, if the incoming index has more than one commit, the tool"];
-  [JreLoadStatic(JavaLangSystem, err_) printlnWithNSString:@"refuses to run by default. Specify -delete-prior-commits to override"];
-  [JreLoadStatic(JavaLangSystem, err_) printlnWithNSString:@"this, allowing the tool to delete all but the last commit."];
-  [JreLoadStatic(JavaLangSystem, err_) printlnWithNSString:JreStrcat("$$$$$", @"Specify a ", [OrgApacheLuceneStoreFSDirectory_class_() getSimpleName], @" implementation through the -dir-impl option to force its use. If no package is specified the ", [((JavaLangPackage *) nil_chk([OrgApacheLuceneStoreFSDirectory_class_() getPackage])) getName], @" package will be used.")];
-  [JreLoadStatic(JavaLangSystem, err_) printlnWithNSString:@"WARNING: This tool may reorder document IDs!"];
+  [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, err))) printlnWithNSString:@"Upgrades an index so all segments created with a previous Lucene version are rewritten."];
+  [JreLoadStatic(JavaLangSystem, err) printlnWithNSString:@"Usage:"];
+  [JreLoadStatic(JavaLangSystem, err) printlnWithNSString:JreStrcat("$$$", @"  java ", [OrgApacheLuceneIndexIndexUpgrader_class_() getName], @" [-delete-prior-commits] [-verbose] [-dir-impl X] indexDir")];
+  [JreLoadStatic(JavaLangSystem, err) printlnWithNSString:@"This tool keeps only the last commit in an index; for this"];
+  [JreLoadStatic(JavaLangSystem, err) printlnWithNSString:@"reason, if the incoming index has more than one commit, the tool"];
+  [JreLoadStatic(JavaLangSystem, err) printlnWithNSString:@"refuses to run by default. Specify -delete-prior-commits to override"];
+  [JreLoadStatic(JavaLangSystem, err) printlnWithNSString:@"this, allowing the tool to delete all but the last commit."];
+  [JreLoadStatic(JavaLangSystem, err) printlnWithNSString:JreStrcat("$$$$$", @"Specify a ", [OrgApacheLuceneStoreFSDirectory_class_() getSimpleName], @" implementation through the -dir-impl option to force its use. If no package is specified the ", [((JavaLangPackage *) nil_chk([OrgApacheLuceneStoreFSDirectory_class_() getPackage])) getName], @" package will be used.")];
+  [JreLoadStatic(JavaLangSystem, err) printlnWithNSString:@"WARNING: This tool may reorder document IDs!"];
   JavaLangSystem_exitWithInt_(1);
 }
 
@@ -196,11 +196,11 @@ OrgApacheLuceneIndexIndexUpgrader *OrgApacheLuceneIndexIndexUpgrader_parseArgsWi
       deletePriorCommits = true;
     }
     else if ([@"-verbose" isEqual:arg]) {
-      out = [new_OrgApacheLuceneUtilPrintStreamInfoStream_initWithJavaIoPrintStream_(JreLoadStatic(JavaLangSystem, out_)) autorelease];
+      out = create_OrgApacheLuceneUtilPrintStreamInfoStream_initWithJavaIoPrintStream_(JreLoadStatic(JavaLangSystem, out));
     }
     else if ([@"-dir-impl" isEqual:arg]) {
       if (i == args->size_ - 1) {
-        [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out_))) printlnWithNSString:@"ERROR: missing value for -dir-impl option"];
+        [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out))) printlnWithNSString:@"ERROR: missing value for -dir-impl option"];
         JavaLangSystem_exitWithInt_(1);
       }
       i++;
@@ -225,30 +225,34 @@ OrgApacheLuceneIndexIndexUpgrader *OrgApacheLuceneIndexIndexUpgrader_parseArgsWi
   else {
     dir = OrgApacheLuceneUtilCommandLineUtil_newFSDirectoryWithNSString_withOrgLukhnosPortmobileFilePath_(dirImpl, p);
   }
-  return [new_OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneUtilInfoStream_withBoolean_(dir, out, deletePriorCommits) autorelease];
+  return create_OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneUtilInfoStream_withBoolean_(dir, out, deletePriorCommits);
 }
 
 void OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexIndexUpgrader *self, OrgApacheLuceneStoreDirectory *dir) {
-  OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_withBoolean_(self, dir, [new_OrgApacheLuceneIndexIndexWriterConfig_initWithOrgApacheLuceneAnalysisAnalyzer_(nil) autorelease], false);
+  OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_withBoolean_(self, dir, create_OrgApacheLuceneIndexIndexWriterConfig_initWithOrgApacheLuceneAnalysisAnalyzer_(nil), false);
 }
 
 OrgApacheLuceneIndexIndexUpgrader *new_OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *dir) {
-  OrgApacheLuceneIndexIndexUpgrader *self = [OrgApacheLuceneIndexIndexUpgrader alloc];
-  OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_(self, dir);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexIndexUpgrader, initWithOrgApacheLuceneStoreDirectory_, dir)
+}
+
+OrgApacheLuceneIndexIndexUpgrader *create_OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *dir) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexIndexUpgrader, initWithOrgApacheLuceneStoreDirectory_, dir)
 }
 
 void OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneUtilInfoStream_withBoolean_(OrgApacheLuceneIndexIndexUpgrader *self, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneUtilInfoStream *infoStream, jboolean deletePriorCommits) {
-  OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_withBoolean_(self, dir, [new_OrgApacheLuceneIndexIndexWriterConfig_initWithOrgApacheLuceneAnalysisAnalyzer_(nil) autorelease], deletePriorCommits);
+  OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_withBoolean_(self, dir, create_OrgApacheLuceneIndexIndexWriterConfig_initWithOrgApacheLuceneAnalysisAnalyzer_(nil), deletePriorCommits);
   if (nil != infoStream) {
     [((OrgApacheLuceneIndexIndexWriterConfig *) nil_chk(self->iwc_)) setInfoStreamWithOrgApacheLuceneUtilInfoStream:infoStream];
   }
 }
 
 OrgApacheLuceneIndexIndexUpgrader *new_OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneUtilInfoStream_withBoolean_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneUtilInfoStream *infoStream, jboolean deletePriorCommits) {
-  OrgApacheLuceneIndexIndexUpgrader *self = [OrgApacheLuceneIndexIndexUpgrader alloc];
-  OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneUtilInfoStream_withBoolean_(self, dir, infoStream, deletePriorCommits);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexIndexUpgrader, initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneUtilInfoStream_withBoolean_, dir, infoStream, deletePriorCommits)
+}
+
+OrgApacheLuceneIndexIndexUpgrader *create_OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneUtilInfoStream_withBoolean_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneUtilInfoStream *infoStream, jboolean deletePriorCommits) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexIndexUpgrader, initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneUtilInfoStream_withBoolean_, dir, infoStream, deletePriorCommits)
 }
 
 void OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_withBoolean_(OrgApacheLuceneIndexIndexUpgrader *self, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexIndexWriterConfig *iwc, jboolean deletePriorCommits) {
@@ -259,9 +263,11 @@ void OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_wit
 }
 
 OrgApacheLuceneIndexIndexUpgrader *new_OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_withBoolean_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexIndexWriterConfig *iwc, jboolean deletePriorCommits) {
-  OrgApacheLuceneIndexIndexUpgrader *self = [OrgApacheLuceneIndexIndexUpgrader alloc];
-  OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_withBoolean_(self, dir, iwc, deletePriorCommits);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexIndexUpgrader, initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_withBoolean_, dir, iwc, deletePriorCommits)
+}
+
+OrgApacheLuceneIndexIndexUpgrader *create_OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_withBoolean_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexIndexWriterConfig *iwc, jboolean deletePriorCommits) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexIndexUpgrader, initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_withBoolean_, dir, iwc, deletePriorCommits)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexIndexUpgrader)

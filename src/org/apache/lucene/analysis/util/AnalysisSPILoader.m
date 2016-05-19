@@ -63,7 +63,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisUtilAnalysisSPILoader, suffixes_, IOS
 
 - (void)reloadWithJavaLangClassLoader:(JavaLangClassLoader *)classloader {
   @synchronized(self) {
-    JavaUtilLinkedHashMap *services = [new_JavaUtilLinkedHashMap_initWithJavaUtilMap_(JreLoadVolatileId(&self->services_)) autorelease];
+    JavaUtilLinkedHashMap *services = create_JavaUtilLinkedHashMap_initWithJavaUtilMap_(JreLoadVolatileId(&self->services_));
     OrgApacheLuceneUtilSPIClassIterator *loader = OrgApacheLuceneUtilSPIClassIterator_getWithIOSClass_withJavaLangClassLoader_(clazz_, classloader);
     while ([((OrgApacheLuceneUtilSPIClassIterator *) nil_chk(loader)) hasNext]) {
       IOSClass *service = [loader next];
@@ -76,13 +76,13 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisUtilAnalysisSPILoader, suffixes_, IOS
         while (b__ < e__) {
           NSString *suffix = *b__++;
           if ([((NSString *) nil_chk(clazzName)) hasSuffix:suffix]) {
-            name = [((NSString *) nil_chk([clazzName substring:0 endIndex:((jint) [clazzName length]) - ((jint) [((NSString *) nil_chk(suffix)) length])])) lowercaseStringWithJRELocale:JreLoadStatic(JavaUtilLocale, ROOT_)];
+            name = [((NSString *) nil_chk([clazzName substring:0 endIndex:((jint) [clazzName length]) - ((jint) [((NSString *) nil_chk(suffix)) length])])) lowercaseStringWithJRELocale:JreLoadStatic(JavaUtilLocale, ROOT)];
             break;
           }
         }
       }
       if (name == nil) {
-        @throw [new_JavaUtilServiceConfigurationError_initWithNSString_(JreStrcat("$$$$", @"The class name ", [service getName], @" has wrong suffix, allowed are: ", JavaUtilArrays_toStringWithNSObjectArray_(suffixes_))) autorelease];
+        @throw create_JavaUtilServiceConfigurationError_initWithNSString_(JreStrcat("$$$$", @"The class name ", [service getName], @" has wrong suffix, allowed are: ", JavaUtilArrays_toStringWithNSObjectArray_(suffixes_)));
       }
       if (![services containsKeyWithId:name]) {
         [services putWithId:name withId:service];
@@ -99,22 +99,27 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisUtilAnalysisSPILoader, suffixes_, IOS
     return [((JavaLangReflectConstructor *) nil_chk([((IOSClass *) nil_chk(service)) getConstructor:[IOSObjectArray arrayWithObjects:(id[]){ JavaUtilMap_class_() } count:1 type:IOSClass_class_()]])) newInstanceWithNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ args } count:1 type:NSObject_class_()]];
   }
   @catch (JavaLangException *e) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_withJavaLangThrowable_(JreStrcat("$$$$$$$", @"SPI class of type ", [((IOSClass *) nil_chk(clazz_)) getName], @" with name '", name, @"' cannot be instantiated. This is likely due to a misconfiguration of the java class '", [((IOSClass *) nil_chk(service)) getName], @"': "), e) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_withNSException_(JreStrcat("$$$$$$$", @"SPI class of type ", [((IOSClass *) nil_chk(clazz_)) getName], @" with name '", name, @"' cannot be instantiated. This is likely due to a misconfiguration of the java class '", [service getName], @"': "), e);
   }
 }
 
 - (IOSClass *)lookupClassWithNSString:(NSString *)name {
-  IOSClass *service = [((id<JavaUtilMap>) nil_chk(JreLoadVolatileId(&services_))) getWithId:[((NSString *) nil_chk(name)) lowercaseStringWithJRELocale:JreLoadStatic(JavaUtilLocale, ROOT_)]];
+  IOSClass *service = [((id<JavaUtilMap>) nil_chk(JreLoadVolatileId(&services_))) getWithId:[((NSString *) nil_chk(name)) lowercaseStringWithJRELocale:JreLoadStatic(JavaUtilLocale, ROOT)]];
   if (service != nil) {
     return service;
   }
   else {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$$$@", @"A SPI class of type ", [((IOSClass *) nil_chk(clazz_)) getName], @" with name '", name, @"' does not exist. You need to add the corresponding JAR file supporting this SPI to your classpath. The current classpath supports the following names: ", [self availableServices])) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$$$@", @"A SPI class of type ", [((IOSClass *) nil_chk(clazz_)) getName], @" with name '", name, @"' does not exist. You need to add the corresponding JAR file supporting this SPI to your classpath. The current classpath supports the following names: ", [self availableServices]));
   }
 }
 
 - (id<JavaUtilSet>)availableServices {
   return [((id<JavaUtilMap>) nil_chk(JreLoadVolatileId(&services_))) keySet];
+}
+
+- (void)__javaClone:(OrgApacheLuceneAnalysisUtilAnalysisSPILoader *)original {
+  [super __javaClone:original];
+  JreCloneVolatileStrong(&services_, &original->services_);
 }
 
 - (void)dealloc {
@@ -124,21 +129,16 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisUtilAnalysisSPILoader, suffixes_, IOS
   [super dealloc];
 }
 
-- (void)__javaClone {
-  [super __javaClone];
-  JreRetainVolatile(&services_);
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithIOSClass:", "AnalysisSPILoader", NULL, 0x1, NULL, NULL },
-    { "initWithIOSClass:withJavaLangClassLoader:", "AnalysisSPILoader", NULL, 0x1, NULL, NULL },
-    { "initWithIOSClass:withNSStringArray:", "AnalysisSPILoader", NULL, 0x1, NULL, NULL },
-    { "initWithIOSClass:withNSStringArray:withJavaLangClassLoader:", "AnalysisSPILoader", NULL, 0x1, NULL, NULL },
+    { "initWithIOSClass:", "AnalysisSPILoader", NULL, 0x1, NULL, "(Ljava/lang/Class<TS;>;)V" },
+    { "initWithIOSClass:withJavaLangClassLoader:", "AnalysisSPILoader", NULL, 0x1, NULL, "(Ljava/lang/Class<TS;>;Ljava/lang/ClassLoader;)V" },
+    { "initWithIOSClass:withNSStringArray:", "AnalysisSPILoader", NULL, 0x1, NULL, "(Ljava/lang/Class<TS;>;[Ljava/lang/String;)V" },
+    { "initWithIOSClass:withNSStringArray:withJavaLangClassLoader:", "AnalysisSPILoader", NULL, 0x1, NULL, "(Ljava/lang/Class<TS;>;[Ljava/lang/String;Ljava/lang/ClassLoader;)V" },
     { "reloadWithJavaLangClassLoader:", "reload", "V", 0x21, NULL, NULL },
     { "newInstanceWithNSString:withJavaUtilMap:", "newInstance", "TS;", 0x1, NULL, "(Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)TS;" },
-    { "lookupClassWithNSString:", "lookupClass", "Ljava.lang.Class;", 0x1, NULL, NULL },
-    { "availableServices", NULL, "Ljava.util.Set;", 0x1, NULL, NULL },
+    { "lookupClassWithNSString:", "lookupClass", "Ljava.lang.Class;", 0x1, NULL, "(Ljava/lang/String;)Ljava/lang/Class<+TS;>;" },
+    { "availableServices", NULL, "Ljava.util.Set;", 0x1, NULL, "()Ljava/util/Set<Ljava/lang/String;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "services_", NULL, 0x42, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Class<+TS;>;>;", .constantValue.asLong = 0 },
@@ -156,9 +156,11 @@ void OrgApacheLuceneAnalysisUtilAnalysisSPILoader_initWithIOSClass_(OrgApacheLuc
 }
 
 OrgApacheLuceneAnalysisUtilAnalysisSPILoader *new_OrgApacheLuceneAnalysisUtilAnalysisSPILoader_initWithIOSClass_(IOSClass *clazz) {
-  OrgApacheLuceneAnalysisUtilAnalysisSPILoader *self = [OrgApacheLuceneAnalysisUtilAnalysisSPILoader alloc];
-  OrgApacheLuceneAnalysisUtilAnalysisSPILoader_initWithIOSClass_(self, clazz);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisUtilAnalysisSPILoader, initWithIOSClass_, clazz)
+}
+
+OrgApacheLuceneAnalysisUtilAnalysisSPILoader *create_OrgApacheLuceneAnalysisUtilAnalysisSPILoader_initWithIOSClass_(IOSClass *clazz) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisUtilAnalysisSPILoader, initWithIOSClass_, clazz)
 }
 
 void OrgApacheLuceneAnalysisUtilAnalysisSPILoader_initWithIOSClass_withJavaLangClassLoader_(OrgApacheLuceneAnalysisUtilAnalysisSPILoader *self, IOSClass *clazz, JavaLangClassLoader *loader) {
@@ -166,9 +168,11 @@ void OrgApacheLuceneAnalysisUtilAnalysisSPILoader_initWithIOSClass_withJavaLangC
 }
 
 OrgApacheLuceneAnalysisUtilAnalysisSPILoader *new_OrgApacheLuceneAnalysisUtilAnalysisSPILoader_initWithIOSClass_withJavaLangClassLoader_(IOSClass *clazz, JavaLangClassLoader *loader) {
-  OrgApacheLuceneAnalysisUtilAnalysisSPILoader *self = [OrgApacheLuceneAnalysisUtilAnalysisSPILoader alloc];
-  OrgApacheLuceneAnalysisUtilAnalysisSPILoader_initWithIOSClass_withJavaLangClassLoader_(self, clazz, loader);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisUtilAnalysisSPILoader, initWithIOSClass_withJavaLangClassLoader_, clazz, loader)
+}
+
+OrgApacheLuceneAnalysisUtilAnalysisSPILoader *create_OrgApacheLuceneAnalysisUtilAnalysisSPILoader_initWithIOSClass_withJavaLangClassLoader_(IOSClass *clazz, JavaLangClassLoader *loader) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisUtilAnalysisSPILoader, initWithIOSClass_withJavaLangClassLoader_, clazz, loader)
 }
 
 void OrgApacheLuceneAnalysisUtilAnalysisSPILoader_initWithIOSClass_withNSStringArray_(OrgApacheLuceneAnalysisUtilAnalysisSPILoader *self, IOSClass *clazz, IOSObjectArray *suffixes) {
@@ -176,9 +180,11 @@ void OrgApacheLuceneAnalysisUtilAnalysisSPILoader_initWithIOSClass_withNSStringA
 }
 
 OrgApacheLuceneAnalysisUtilAnalysisSPILoader *new_OrgApacheLuceneAnalysisUtilAnalysisSPILoader_initWithIOSClass_withNSStringArray_(IOSClass *clazz, IOSObjectArray *suffixes) {
-  OrgApacheLuceneAnalysisUtilAnalysisSPILoader *self = [OrgApacheLuceneAnalysisUtilAnalysisSPILoader alloc];
-  OrgApacheLuceneAnalysisUtilAnalysisSPILoader_initWithIOSClass_withNSStringArray_(self, clazz, suffixes);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisUtilAnalysisSPILoader, initWithIOSClass_withNSStringArray_, clazz, suffixes)
+}
+
+OrgApacheLuceneAnalysisUtilAnalysisSPILoader *create_OrgApacheLuceneAnalysisUtilAnalysisSPILoader_initWithIOSClass_withNSStringArray_(IOSClass *clazz, IOSObjectArray *suffixes) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisUtilAnalysisSPILoader, initWithIOSClass_withNSStringArray_, clazz, suffixes)
 }
 
 void OrgApacheLuceneAnalysisUtilAnalysisSPILoader_initWithIOSClass_withNSStringArray_withJavaLangClassLoader_(OrgApacheLuceneAnalysisUtilAnalysisSPILoader *self, IOSClass *clazz, IOSObjectArray *suffixes, JavaLangClassLoader *classloader) {
@@ -194,9 +200,11 @@ void OrgApacheLuceneAnalysisUtilAnalysisSPILoader_initWithIOSClass_withNSStringA
 }
 
 OrgApacheLuceneAnalysisUtilAnalysisSPILoader *new_OrgApacheLuceneAnalysisUtilAnalysisSPILoader_initWithIOSClass_withNSStringArray_withJavaLangClassLoader_(IOSClass *clazz, IOSObjectArray *suffixes, JavaLangClassLoader *classloader) {
-  OrgApacheLuceneAnalysisUtilAnalysisSPILoader *self = [OrgApacheLuceneAnalysisUtilAnalysisSPILoader alloc];
-  OrgApacheLuceneAnalysisUtilAnalysisSPILoader_initWithIOSClass_withNSStringArray_withJavaLangClassLoader_(self, clazz, suffixes, classloader);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisUtilAnalysisSPILoader, initWithIOSClass_withNSStringArray_withJavaLangClassLoader_, clazz, suffixes, classloader)
+}
+
+OrgApacheLuceneAnalysisUtilAnalysisSPILoader *create_OrgApacheLuceneAnalysisUtilAnalysisSPILoader_initWithIOSClass_withNSStringArray_withJavaLangClassLoader_(IOSClass *clazz, IOSObjectArray *suffixes, JavaLangClassLoader *classloader) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisUtilAnalysisSPILoader, initWithIOSClass_withNSStringArray_withJavaLangClassLoader_, clazz, suffixes, classloader)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisUtilAnalysisSPILoader)

@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_RESTRICT
-#define OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory 0
 #else
-#define OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory
 
-#if !defined (_OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_) && (OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_
+#if !defined (OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory || defined(INCLUDE_OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory))
+#define OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_
 
 @class JavaUtilRegexPattern;
 @class OrgApacheLuceneAnalysisUtilCharArraySet;
@@ -25,10 +25,26 @@
 @protocol JavaUtilSet;
 @protocol OrgApacheLuceneAnalysisUtilResourceLoader;
 
+/*!
+ @brief Abstract parent class for analysis factories <code>TokenizerFactory</code>,
+ <code>TokenFilterFactory</code> and <code>CharFilterFactory</code>.
+ <p>
+ The typical lifecycle for a factory consumer is:
+ <ol>
+ <li>Create factory via its constructor (or via XXXFactory.forName)
+ <li>(Optional) If the factory uses resources such as files, <code>ResourceLoaderAware.inform(ResourceLoader)</code> is called to initialize those resources.
+ <li>Consumer calls create() to obtain instances.
+ </ol>
+ */
 @interface OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory : NSObject {
  @public
+  /*!
+   @brief the luceneVersion arg
+   */
   OrgApacheLuceneUtilVersion *luceneMatchVersion_;
 }
+
++ (NSString *)LUCENE_MATCH_VERSION_PARAM;
 
 #pragma mark Public
 
@@ -58,12 +74,19 @@
                    withNSString:(NSString *)name
                        withChar:(jchar)defaultValue;
 
+/*!
+ @return the string used to specify the concrete class name in a serialized representation: the class arg.  
+ If the concrete class name was not specified via a class arg, returns <code>getClass().getName()</code>.
+ */
 - (NSString *)getClassArg;
 
 - (OrgApacheLuceneUtilVersion *)getLuceneMatchVersion;
 
 - (id<JavaUtilMap>)getOriginalArgs;
 
+/*!
+ @brief Returns whitespace- and/or comma-separated set of values, or null if none are found
+ */
 - (id<JavaUtilSet>)getSetWithJavaUtilMap:(id<JavaUtilMap>)args
                             withNSString:(NSString *)name;
 
@@ -88,6 +111,9 @@
 
 #pragma mark Protected
 
+/*!
+ @brief Initialize this factory via a set of key-value pairs.
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (jboolean)getBooleanWithJavaUtilMap:(id<JavaUtilMap>)args
@@ -102,16 +128,30 @@
                  withNSString:(NSString *)name
                       withInt:(jint)defaultVal;
 
+/*!
+ @brief Returns the resource's lines (with content treated as UTF-8)
+ */
 - (id<JavaUtilList>)getLinesWithOrgApacheLuceneAnalysisUtilResourceLoader:(id<OrgApacheLuceneAnalysisUtilResourceLoader>)loader
                                                              withNSString:(NSString *)resource;
 
+/*!
+ @brief Compiles a pattern for the value of the specified argument key <code>name</code>
+ */
 - (JavaUtilRegexPattern *)getPatternWithJavaUtilMap:(id<JavaUtilMap>)args
                                        withNSString:(NSString *)name;
 
+/*!
+ @brief same as <code>getWordSet(ResourceLoader,String,boolean)</code>,
+ except the input is in snowball format.
+ */
 - (OrgApacheLuceneAnalysisUtilCharArraySet *)getSnowballWordSetWithOrgApacheLuceneAnalysisUtilResourceLoader:(id<OrgApacheLuceneAnalysisUtilResourceLoader>)loader
                                                                                                 withNSString:(NSString *)wordFiles
                                                                                                  withBoolean:(jboolean)ignoreCase;
 
+/*!
+ @brief Returns as <code>CharArraySet</code> from wordFiles, which
+ can be a comma-separated list of filenames
+ */
 - (OrgApacheLuceneAnalysisUtilCharArraySet *)getWordSetWithOrgApacheLuceneAnalysisUtilResourceLoader:(id<OrgApacheLuceneAnalysisUtilResourceLoader>)loader
                                                                                         withNSString:(NSString *)wordFiles
                                                                                          withBoolean:(jboolean)ignoreCase;
@@ -125,6 +165,12 @@
 - (jint)requireIntWithJavaUtilMap:(id<JavaUtilMap>)args
                      withNSString:(NSString *)name;
 
+/*!
+ @brief Splits file names separated by comma character.
+ File names can contain comma characters escaped by backslash '\'
+ @param fileNames the string containing file names
+ @return a list of file names with the escaping backslashed removed
+ */
 - (id<JavaUtilList>)splitFileNamesWithNSString:(NSString *)fileNames;
 
 @end
@@ -133,8 +179,10 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory, luceneMatchVersion_, OrgApacheLuceneUtilVersion *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_LUCENE_MATCH_VERSION_PARAM_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory, LUCENE_MATCH_VERSION_PARAM_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_get_LUCENE_MATCH_VERSION_PARAM();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_LUCENE_MATCH_VERSION_PARAM;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory, LUCENE_MATCH_VERSION_PARAM, NSString *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory *self, id<JavaUtilMap> args);
 
@@ -142,4 +190,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory")

@@ -5,23 +5,26 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter_RESTRICT
-#define OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter 0
 #else
-#define OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter
 
-#if !defined (_OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter_) && (OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter_
+#if !defined (OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter || defined(INCLUDE_OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter))
+#define OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief Assigns a payload to a token based on the <code>org.apache.lucene.analysis.Token.type()</code>
+ */
 @interface OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
@@ -40,8 +43,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter_
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter *new_OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withFloat_withNSString_(OrgApacheLuceneAnalysisTokenStream *input, jfloat payload, NSString *typeMatch) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter *create_OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withFloat_withNSString_(OrgApacheLuceneAnalysisTokenStream *input, jfloat payload, NSString *typeMatch);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter")

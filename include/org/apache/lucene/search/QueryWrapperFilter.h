@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchQueryWrapperFilter_INCLUDE_ALL")
-#if OrgApacheLuceneSearchQueryWrapperFilter_RESTRICT
-#define OrgApacheLuceneSearchQueryWrapperFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchQueryWrapperFilter")
+#ifdef RESTRICT_OrgApacheLuceneSearchQueryWrapperFilter
+#define INCLUDE_ALL_OrgApacheLuceneSearchQueryWrapperFilter 0
 #else
-#define OrgApacheLuceneSearchQueryWrapperFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchQueryWrapperFilter 1
 #endif
-#undef OrgApacheLuceneSearchQueryWrapperFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchQueryWrapperFilter
 
-#if !defined (_OrgApacheLuceneSearchQueryWrapperFilter_) && (OrgApacheLuceneSearchQueryWrapperFilter_INCLUDE_ALL || OrgApacheLuceneSearchQueryWrapperFilter_INCLUDE)
-#define _OrgApacheLuceneSearchQueryWrapperFilter_
+#if !defined (OrgApacheLuceneSearchQueryWrapperFilter_) && (INCLUDE_ALL_OrgApacheLuceneSearchQueryWrapperFilter || defined(INCLUDE_OrgApacheLuceneSearchQueryWrapperFilter))
+#define OrgApacheLuceneSearchQueryWrapperFilter_
 
-#define OrgApacheLuceneSearchFilter_RESTRICT 1
-#define OrgApacheLuceneSearchFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchFilter 1
+#define INCLUDE_OrgApacheLuceneSearchFilter 1
 #include "org/apache/lucene/search/Filter.h"
 
 @class OrgApacheLuceneIndexIndexReader;
@@ -26,10 +26,22 @@
 @class OrgApacheLuceneSearchQuery;
 @protocol OrgApacheLuceneUtilBits;
 
+/*!
+ @brief Constrains search results to only match those which also match a provided
+ query.
+ <p> This could be used, for example, with a <code>NumericRangeQuery</code> on a suitably
+ formatted date field to implement date filtering.  One could re-use a single
+ CachingWrapperFilter(QueryWrapperFilter) that matches, e.g., only documents modified 
+ within the last week.  This would only need to be reconstructed once per day.
+ */
 @interface OrgApacheLuceneSearchQueryWrapperFilter : OrgApacheLuceneSearchFilter
 
 #pragma mark Public
 
+/*!
+ @brief Constructs a filter which only matches documents matching
+ <code>query</code>.
+ */
 - (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
 
 - (jboolean)isEqual:(id)o;
@@ -37,6 +49,9 @@
 - (OrgApacheLuceneSearchDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                             withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs;
 
+/*!
+ @brief returns the inner Query
+ */
 - (OrgApacheLuceneSearchQuery *)getQuery;
 
 - (NSUInteger)hash;
@@ -53,8 +68,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchQueryWrapperFilter_initWithOrgApache
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchQueryWrapperFilter *new_OrgApacheLuceneSearchQueryWrapperFilter_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchQuery *query) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchQueryWrapperFilter *create_OrgApacheLuceneSearchQueryWrapperFilter_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchQuery *query);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchQueryWrapperFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchQueryWrapperFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchQueryWrapperFilter")

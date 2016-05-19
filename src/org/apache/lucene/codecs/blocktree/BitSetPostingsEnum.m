@@ -49,7 +49,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum, in_, OrgAp
   if (in_ == nil) {
     JreStrongAssignAndConsume(&in_, new_OrgApacheLuceneUtilBitSetIterator_initWithOrgApacheLuceneUtilBitSet_withLong_(bits_, 0));
   }
-  return [((OrgApacheLuceneSearchDocIdSetIterator *) nil_chk(in_)) nextDoc];
+  return [in_ nextDoc];
 }
 
 - (jint)advanceWithInt:(jint)target {
@@ -69,15 +69,15 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum, in_, OrgAp
 }
 
 - (jint)nextPosition {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (jint)startOffset {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (jint)endOffset {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (void)dealloc {
@@ -117,9 +117,11 @@ void OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_initWithOrgApacheLuceneUti
 }
 
 OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum *new_OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet *bits) {
-  OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum *self = [OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum alloc];
-  OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_initWithOrgApacheLuceneUtilBitSet_(self, bits);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum, initWithOrgApacheLuceneUtilBitSet_, bits)
+}
+
+OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum *create_OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet *bits) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum, initWithOrgApacheLuceneUtilBitSet_, bits)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum)

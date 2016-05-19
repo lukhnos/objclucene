@@ -34,9 +34,15 @@
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFrequencyTrackingRingBuffer, buffer_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFrequencyTrackingRingBuffer, frequencies_, OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag *)
 
-static jlong OrgApacheLuceneUtilFrequencyTrackingRingBuffer_BASE_RAM_BYTES_USED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFrequencyTrackingRingBuffer, BASE_RAM_BYTES_USED_, jlong)
+inline jlong OrgApacheLuceneUtilFrequencyTrackingRingBuffer_get_BASE_RAM_BYTES_USED();
+static jlong OrgApacheLuceneUtilFrequencyTrackingRingBuffer_BASE_RAM_BYTES_USED;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilFrequencyTrackingRingBuffer, BASE_RAM_BYTES_USED, jlong)
 
+/*!
+ @brief A bag of integers.
+ Since in the context of the ring buffer the maximum size is known up-front
+ there is no need to worry about resizing the underlying storage.
+ */
 @interface OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag : NSObject < OrgApacheLuceneUtilAccountable > {
  @public
   IOSIntArray *keys_;
@@ -50,14 +56,31 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFrequencyTrackingRingBuffer, BASE_
 
 - (id<JavaUtilCollection>)getChildResources;
 
+/*!
+ @brief Return the frequency of the give key in the bag.
+ */
 - (jint)frequencyWithInt:(jint)key;
 
+/*!
+ @brief Increment the frequency of the given key by 1 and return its new frequency.
+ */
 - (jint)addWithInt:(jint)key;
 
+/*!
+ @brief Decrement the frequency of the given key by one, or do nothing if the
+ key is not present in the bag.
+ Returns true iff the key was contained
+ in the bag. 
+ */
 - (jboolean)removeWithInt:(jint)key;
 
 - (void)relocateAdjacentKeysWithInt:(jint)freeSlot;
 
+/*!
+ @brief Given a chain of occupied slots between <code>chainStart</code>
+ and <code>chainEnd</code>, return whether <code>slot</code> is
+ between the start and end of the chain.
+ */
 + (jboolean)betweenWithInt:(jint)chainStart
                    withInt:(jint)chainEnd
                    withInt:(jint)slot;
@@ -71,12 +94,15 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag, keys_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag, freqs_, IOSIntArray *)
 
-static jlong OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag_BASE_RAM_BYTES_USED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag, BASE_RAM_BYTES_USED_, jlong)
+inline jlong OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag_get_BASE_RAM_BYTES_USED();
+static jlong OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag_BASE_RAM_BYTES_USED;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag, BASE_RAM_BYTES_USED, jlong)
 
 __attribute__((unused)) static void OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag_initWithInt_(OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag *self, jint maxSize);
 
 __attribute__((unused)) static OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag *new_OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag_initWithInt_(jint maxSize) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag *create_OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag_initWithInt_(jint maxSize);
 
 __attribute__((unused)) static void OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag_relocateAdjacentKeysWithInt_(OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag *self, jint freeSlot);
 
@@ -95,7 +121,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFrequencyTrackingRingBuffer)
 }
 
 - (jlong)ramBytesUsed {
-  return OrgApacheLuceneUtilFrequencyTrackingRingBuffer_BASE_RAM_BYTES_USED_ + [((OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag *) nil_chk(frequencies_)) ramBytesUsed] + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithIntArray_(buffer_);
+  return OrgApacheLuceneUtilFrequencyTrackingRingBuffer_BASE_RAM_BYTES_USED + [((OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag *) nil_chk(frequencies_)) ramBytesUsed] + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithIntArray_(buffer_);
 }
 
 - (id<JavaUtilCollection>)getChildResources {
@@ -130,7 +156,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFrequencyTrackingRingBuffer)
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilFrequencyTrackingRingBuffer class]) {
-    OrgApacheLuceneUtilFrequencyTrackingRingBuffer_BASE_RAM_BYTES_USED_ = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilFrequencyTrackingRingBuffer_class_());
+    OrgApacheLuceneUtilFrequencyTrackingRingBuffer_BASE_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilFrequencyTrackingRingBuffer_class_());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilFrequencyTrackingRingBuffer)
   }
 }
@@ -139,13 +165,13 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFrequencyTrackingRingBuffer)
   static const J2ObjcMethodInfo methods[] = {
     { "initWithInt:withInt:", "FrequencyTrackingRingBuffer", NULL, 0x1, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
     { "addWithInt:", "add", "V", 0x1, NULL, NULL },
     { "frequencyWithInt:", "frequency", "I", 0x1, NULL, NULL },
-    { "asFrequencyMap", NULL, "Ljava.util.Map;", 0x0, NULL, NULL },
+    { "asFrequencyMap", NULL, "Ljava.util.Map;", 0x0, NULL, "()Ljava/util/Map<Ljava/lang/Integer;Ljava/lang/Integer;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "BASE_RAM_BYTES_USED_", NULL, 0x1a, "J", &OrgApacheLuceneUtilFrequencyTrackingRingBuffer_BASE_RAM_BYTES_USED_, NULL, .constantValue.asLong = 0 },
+    { "BASE_RAM_BYTES_USED", "BASE_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneUtilFrequencyTrackingRingBuffer_BASE_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
     { "maxSize_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "buffer_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
     { "position_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
@@ -161,7 +187,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFrequencyTrackingRingBuffer)
 void OrgApacheLuceneUtilFrequencyTrackingRingBuffer_initWithInt_withInt_(OrgApacheLuceneUtilFrequencyTrackingRingBuffer *self, jint maxSize, jint sentinel) {
   NSObject_init(self);
   if (maxSize < 2) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"maxSize must be at least 2") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"maxSize must be at least 2");
   }
   self->maxSize_ = maxSize;
   JreStrongAssignAndConsume(&self->buffer_, [IOSIntArray newArrayWithLength:maxSize]);
@@ -175,9 +201,11 @@ void OrgApacheLuceneUtilFrequencyTrackingRingBuffer_initWithInt_withInt_(OrgApac
 }
 
 OrgApacheLuceneUtilFrequencyTrackingRingBuffer *new_OrgApacheLuceneUtilFrequencyTrackingRingBuffer_initWithInt_withInt_(jint maxSize, jint sentinel) {
-  OrgApacheLuceneUtilFrequencyTrackingRingBuffer *self = [OrgApacheLuceneUtilFrequencyTrackingRingBuffer alloc];
-  OrgApacheLuceneUtilFrequencyTrackingRingBuffer_initWithInt_withInt_(self, maxSize, sentinel);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFrequencyTrackingRingBuffer, initWithInt_withInt_, maxSize, sentinel)
+}
+
+OrgApacheLuceneUtilFrequencyTrackingRingBuffer *create_OrgApacheLuceneUtilFrequencyTrackingRingBuffer_initWithInt_withInt_(jint maxSize, jint sentinel) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFrequencyTrackingRingBuffer, initWithInt_withInt_, maxSize, sentinel)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFrequencyTrackingRingBuffer)
@@ -192,7 +220,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag)
 }
 
 - (jlong)ramBytesUsed {
-  return OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag_BASE_RAM_BYTES_USED_ + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithIntArray_(keys_) + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithIntArray_(freqs_);
+  return OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag_BASE_RAM_BYTES_USED + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithIntArray_(keys_) + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithIntArray_(freqs_);
 }
 
 - (id<JavaUtilCollection>)getChildResources {
@@ -248,7 +276,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag)
 }
 
 - (id<JavaUtilMap>)asMap {
-  id<JavaUtilMap> map = [new_JavaUtilHashMap_init() autorelease];
+  id<JavaUtilMap> map = create_JavaUtilHashMap_init();
   for (jint i = 0; i < ((IOSIntArray *) nil_chk(keys_))->size_; ++i) {
     if (IOSIntArray_Get(nil_chk(freqs_), i) > 0) {
       [map putWithId:JavaLangInteger_valueOfWithInt_(IOSIntArray_Get(keys_, i)) withId:JavaLangInteger_valueOfWithInt_(IOSIntArray_Get(freqs_, i))];
@@ -265,7 +293,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag)
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag class]) {
-    OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag_BASE_RAM_BYTES_USED_ = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag_class_());
+    OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag_BASE_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag_class_());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag)
   }
 }
@@ -274,16 +302,16 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag)
   static const J2ObjcMethodInfo methods[] = {
     { "initWithInt:", "IntBag", NULL, 0x0, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
     { "frequencyWithInt:", "frequency", "I", 0x0, NULL, NULL },
     { "addWithInt:", "add", "I", 0x0, NULL, NULL },
     { "removeWithInt:", "remove", "Z", 0x0, NULL, NULL },
     { "relocateAdjacentKeysWithInt:", "relocateAdjacentKeys", "V", 0x2, NULL, NULL },
     { "betweenWithInt:withInt:withInt:", "between", "Z", 0xa, NULL, NULL },
-    { "asMap", NULL, "Ljava.util.Map;", 0x0, NULL, NULL },
+    { "asMap", NULL, "Ljava.util.Map;", 0x0, NULL, "()Ljava/util/Map<Ljava/lang/Integer;Ljava/lang/Integer;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "BASE_RAM_BYTES_USED_", NULL, 0x1a, "J", &OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag_BASE_RAM_BYTES_USED_, NULL, .constantValue.asLong = 0 },
+    { "BASE_RAM_BYTES_USED", "BASE_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag_BASE_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
     { "keys_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
     { "freqs_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
     { "mask_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
@@ -305,9 +333,11 @@ void OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag_initWithInt_(OrgApach
 }
 
 OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag *new_OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag_initWithInt_(jint maxSize) {
-  OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag *self = [OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag alloc];
-  OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag_initWithInt_(self, maxSize);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag, initWithInt_, maxSize)
+}
+
+OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag *create_OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag_initWithInt_(jint maxSize) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag, initWithInt_, maxSize)
 }
 
 void OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag_relocateAdjacentKeysWithInt_(OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag *self, jint freeSlot) {

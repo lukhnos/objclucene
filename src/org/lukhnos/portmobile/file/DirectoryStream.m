@@ -38,19 +38,19 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileFileDirectoryStream)
 - (void)close {
 }
 
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
+  return JreDefaultFastEnumeration(self, state, stackbuf, len);
+}
+
 - (void)dealloc {
   RELEASE_(paths_);
   [super dealloc];
 }
 
-- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:", "SimpleDirectoryStream", NULL, 0x1, NULL, NULL },
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, NULL },
+    { "initWithJavaUtilList:", "SimpleDirectoryStream", NULL, 0x1, NULL, "(Ljava/util/List<TT;>;)V" },
+    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<TT;>;" },
     { "close", NULL, "V", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -68,9 +68,11 @@ void OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream_initWithJavaU
 }
 
 OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream *new_OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream_initWithJavaUtilList_(id<JavaUtilList> paths) {
-  OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream *self = [OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream alloc];
-  OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream_initWithJavaUtilList_(self, paths);
-  return self;
+  J2OBJC_NEW_IMPL(OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream, initWithJavaUtilList_, paths)
+}
+
+OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream *create_OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream_initWithJavaUtilList_(id<JavaUtilList> paths) {
+  J2OBJC_CREATE_IMPL(OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream, initWithJavaUtilList_, paths)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream)

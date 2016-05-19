@@ -3,14 +3,17 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/sv/package-info.java
 //
 
+/*!
+ @brief Analyzer for Swedish.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisSvPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisSvPackage_info_RESTRICT
-#define OrgApacheLuceneAnalysisSvPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisSvPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisSvPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisSvPackage_info 0
 #else
-#define OrgApacheLuceneAnalysisSvPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisSvPackage_info 1
 #endif
-#undef OrgApacheLuceneAnalysisSvPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisSvPackage_info
 
-#pragma pop_macro("OrgApacheLuceneAnalysisSvPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisSvPackage_info")

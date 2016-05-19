@@ -60,7 +60,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "getDouble", NULL, "D", 0x401, NULL, NULL },
     { "getNumber", NULL, "Ljava.lang.Number;", 0x401, NULL, NULL },
     { "getBool", NULL, "Z", 0x401, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "ConstNumberSource", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource = { 2, "ConstNumberSource", "org.apache.lucene.queries.function.valuesource", NULL, 0x401, 7, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource;

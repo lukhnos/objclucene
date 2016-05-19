@@ -5,23 +5,38 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_RESTRICT
-#define OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50SkipWriter")
+#ifdef RESTRICT_OrgApacheLuceneCodecsLucene50Lucene50SkipWriter
+#define INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50SkipWriter 0
 #else
-#define OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50SkipWriter 1
 #endif
-#undef OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsLucene50Lucene50SkipWriter
 
-#if !defined (_OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_) && (OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_INCLUDE_ALL || OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_INCLUDE)
-#define _OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_
+#if !defined (OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_) && (INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50SkipWriter || defined(INCLUDE_OrgApacheLuceneCodecsLucene50Lucene50SkipWriter))
+#define OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_
 
-#define OrgApacheLuceneCodecsMultiLevelSkipListWriter_RESTRICT 1
-#define OrgApacheLuceneCodecsMultiLevelSkipListWriter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneCodecsMultiLevelSkipListWriter 1
+#define INCLUDE_OrgApacheLuceneCodecsMultiLevelSkipListWriter 1
 #include "org/apache/lucene/codecs/MultiLevelSkipListWriter.h"
 
 @class OrgApacheLuceneStoreIndexOutput;
 
+/*!
+ @brief Write skip lists with multiple levels, and support skip within block ints.
+ Assume that docFreq = 28, skipInterval = blockSize = 12
+ |       block#0       | |      block#1        | |vInts|
+ d d d d d d d d d d d d d d d d d d d d d d d d d d d d (posting list)
+ ^                       ^       (level 0 skip point)
+ Note that skipWriter will ignore first document in block#0, since 
+ it is useless as a skip point.  Also, we'll never skip into the vInts
+ block, only record skip data at the start its start point(if it exist).
+ For each skip point, we will record: 
+ 1. docID in former position, i.e. for position 12, record docID[11], etc.
+ 2. its related file points(position, payload), 
+ 3. related numbers or uptos(position, payload).
+ 4. start offset.
+ */
 @interface OrgApacheLuceneCodecsLucene50Lucene50SkipWriter : OrgApacheLuceneCodecsMultiLevelSkipListWriter {
  @public
   jlong lastDocFP_;
@@ -38,6 +53,9 @@ withOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)docOut
 withOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)posOut
 withOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)payOut;
 
+/*!
+ @brief Sets the values for the current skip data.
+ */
 - (void)bufferSkipWithInt:(jint)doc
                   withInt:(jint)numDocs
                  withLong:(jlong)posFP
@@ -66,8 +84,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_initWithI
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50SkipWriter *new_OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_initWithInt_withInt_withInt_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_(jint maxSkipLevels, jint blockSize, jint docCount, OrgApacheLuceneStoreIndexOutput *docOut, OrgApacheLuceneStoreIndexOutput *posOut, OrgApacheLuceneStoreIndexOutput *payOut) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50SkipWriter *create_OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_initWithInt_withInt_withInt_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_(jint maxSkipLevels, jint blockSize, jint docCount, OrgApacheLuceneStoreIndexOutput *docOut, OrgApacheLuceneStoreIndexOutput *posOut, OrgApacheLuceneStoreIndexOutput *payOut);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50SkipWriter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50SkipWriter")

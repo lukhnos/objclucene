@@ -37,7 +37,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryTree {
   OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *queryConfig = [self getQueryConfigHandler];
   if (queryConfig != nil) {
-    JavaLangInteger *defaultPhraseSlop = [queryConfig getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, PHRASE_SLOP_)];
+    JavaLangInteger *defaultPhraseSlop = [queryConfig getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, PHRASE_SLOP)];
     if (defaultPhraseSlop != nil) {
       self->defaultPhraseSlop_ = [defaultPhraseSlop intValue];
       return [super processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:queryTree];
@@ -48,7 +48,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node {
   if ([node isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode class]] || [node isKindOfClass:[OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode class]]) {
-    return [new_OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withInt_(node, self->defaultPhraseSlop_) autorelease];
+    return create_OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withInt_(node, self->defaultPhraseSlop_);
   }
   return node;
 }
@@ -80,7 +80,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "postProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
     { "preProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "preProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
     { "processChildrenWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "processChildren", "V", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "setChildrenOrderWithJavaUtilList:", "setChildrenOrder", "Ljava.util.List;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
+    { "setChildrenOrderWithJavaUtilList:", "setChildrenOrder", "Ljava.util.List;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;)Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "processChildren_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
@@ -98,9 +98,11 @@ void OrgApacheLuceneQueryparserFlexibleStandardProcessorsDefaultPhraseSlopQueryN
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardProcessorsDefaultPhraseSlopQueryNodeProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsDefaultPhraseSlopQueryNodeProcessor_init() {
-  OrgApacheLuceneQueryparserFlexibleStandardProcessorsDefaultPhraseSlopQueryNodeProcessor *self = [OrgApacheLuceneQueryparserFlexibleStandardProcessorsDefaultPhraseSlopQueryNodeProcessor alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardProcessorsDefaultPhraseSlopQueryNodeProcessor_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardProcessorsDefaultPhraseSlopQueryNodeProcessor, init)
+}
+
+OrgApacheLuceneQueryparserFlexibleStandardProcessorsDefaultPhraseSlopQueryNodeProcessor *create_OrgApacheLuceneQueryparserFlexibleStandardProcessorsDefaultPhraseSlopQueryNodeProcessor_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardProcessorsDefaultPhraseSlopQueryNodeProcessor, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleStandardProcessorsDefaultPhraseSlopQueryNodeProcessor)

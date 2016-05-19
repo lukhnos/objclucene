@@ -5,24 +5,39 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory_) && (OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory))
+#define OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>CJKBigramFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_cjk" class="solr.TextField"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+ &lt;filter class="solr.CJKWidthFilterFactory"/&gt;
+ &lt;filter class="solr.LowerCaseFilterFactory"/&gt;
+ &lt;filter class="solr.CJKBigramFilterFactory" 
+ han="true" hiragana="true" 
+ katakana="true" hangul="true" outputUnigrams="false" /&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory {
  @public
   jint flags_;
@@ -31,6 +46,9 @@
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new CJKBigramFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -43,8 +61,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory_initWith
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory *new_OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory *create_OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory")

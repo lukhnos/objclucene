@@ -14,6 +14,7 @@
 #include "java/lang/Integer.h"
 #include "java/lang/RuntimeException.h"
 #include "java/lang/StringBuilder.h"
+#include "java/lang/annotation/Annotation.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Arrays.h"
 #include "java/util/Collections.h"
@@ -50,12 +51,17 @@ withOrgApacheLuceneSearchBooleanClauseArray:(IOSObjectArray *)clauses;
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchBooleanQuery, clauses_, id<JavaUtilList>)
 
-static jint OrgApacheLuceneSearchBooleanQuery_maxClauseCount_ = 1024;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchBooleanQuery, maxClauseCount_, jint)
-J2OBJC_STATIC_FIELD_REF_GETTER(OrgApacheLuceneSearchBooleanQuery, maxClauseCount_, jint)
+inline jint OrgApacheLuceneSearchBooleanQuery_get_maxClauseCount();
+inline jint OrgApacheLuceneSearchBooleanQuery_set_maxClauseCount(jint value);
+inline jint *OrgApacheLuceneSearchBooleanQuery_getRef_maxClauseCount();
+static jint OrgApacheLuceneSearchBooleanQuery_maxClauseCount = 1024;
+J2OBJC_STATIC_FIELD_PRIMITIVE(OrgApacheLuceneSearchBooleanQuery, maxClauseCount, jint)
+
 __attribute__((unused)) static void OrgApacheLuceneSearchBooleanQuery_initWithBoolean_withInt_withOrgApacheLuceneSearchBooleanClauseArray_(OrgApacheLuceneSearchBooleanQuery *self, jboolean disableCoord, jint minimumNumberShouldMatch, IOSObjectArray *clauses);
 
 __attribute__((unused)) static OrgApacheLuceneSearchBooleanQuery *new_OrgApacheLuceneSearchBooleanQuery_initWithBoolean_withInt_withOrgApacheLuceneSearchBooleanClauseArray_(jboolean disableCoord, jint minimumNumberShouldMatch, IOSObjectArray *clauses) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchBooleanQuery *create_OrgApacheLuceneSearchBooleanQuery_initWithBoolean_withInt_withOrgApacheLuceneSearchBooleanClauseArray_(jboolean disableCoord, jint minimumNumberShouldMatch, IOSObjectArray *clauses);
 
 __attribute__((unused)) static OrgApacheLuceneSearchBooleanQuery *OrgApacheLuceneSearchBooleanQuery_rewriteNoScoring(OrgApacheLuceneSearchBooleanQuery *self);
 
@@ -115,12 +121,12 @@ withOrgApacheLuceneSearchBooleanClauseArray:(IOSObjectArray *)clauses {
   if (needsScores == false) {
     query = OrgApacheLuceneSearchBooleanQuery_rewriteNoScoring(self);
   }
-  return [new_OrgApacheLuceneSearchBooleanWeight_initWithOrgApacheLuceneSearchBooleanQuery_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withBoolean_(query, searcher, needsScores, disableCoord_) autorelease];
+  return create_OrgApacheLuceneSearchBooleanWeight_initWithOrgApacheLuceneSearchBooleanQuery_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withBoolean_(query, searcher, needsScores, disableCoord_);
 }
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader {
   if (minimumNumberShouldMatch_ == 0 && [((id<JavaUtilList>) nil_chk(clauses_)) size] == 1) {
-    OrgApacheLuceneSearchBooleanClause *c = [clauses_ getWithInt:0];
+    OrgApacheLuceneSearchBooleanClause *c = [((id<JavaUtilList>) nil_chk(clauses_)) getWithInt:0];
     if (![((OrgApacheLuceneSearchBooleanClause *) nil_chk(c)) isProhibited]) {
       OrgApacheLuceneSearchQuery *query = [((OrgApacheLuceneSearchQuery *) nil_chk([c getQuery])) rewriteWithOrgApacheLuceneIndexIndexReader:reader];
       if ([c isScoring]) {
@@ -128,17 +134,17 @@ withOrgApacheLuceneSearchBooleanClauseArray:(IOSObjectArray *)clauses {
           if (query == [c getQuery]) {
             query = [((OrgApacheLuceneSearchQuery *) nil_chk(query)) clone];
           }
-          [query setBoostWithFloat:[self getBoost] * [((OrgApacheLuceneSearchQuery *) nil_chk(query)) getBoost]];
+          [((OrgApacheLuceneSearchQuery *) nil_chk(query)) setBoostWithFloat:[self getBoost] * [query getBoost]];
         }
       }
       else {
-        query = [new_OrgApacheLuceneSearchConstantScoreQuery_initWithOrgApacheLuceneSearchQuery_(query) autorelease];
+        query = create_OrgApacheLuceneSearchConstantScoreQuery_initWithOrgApacheLuceneSearchQuery_(query);
         [query setBoostWithFloat:0];
       }
       return query;
     }
   }
-  OrgApacheLuceneSearchBooleanQuery_Builder *builder = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
+  OrgApacheLuceneSearchBooleanQuery_Builder *builder = create_OrgApacheLuceneSearchBooleanQuery_Builder_init();
   [builder setDisableCoordWithBoolean:[self isCoordDisabled]];
   [builder setMinimumNumberShouldMatchWithInt:[self getMinimumNumberShouldMatch]];
   jboolean actuallyRewritten = false;
@@ -148,7 +154,7 @@ withOrgApacheLuceneSearchBooleanClauseArray:(IOSObjectArray *)clauses {
     if (rewritten != query) {
       actuallyRewritten = true;
     }
-    [builder addWithOrgApacheLuceneSearchQuery:rewritten withOrgApacheLuceneSearchBooleanClause_OccurEnum:[clause getOccur]];
+    [builder addWithOrgApacheLuceneSearchQuery:rewritten withOrgApacheLuceneSearchBooleanClause_Occur:[clause getOccur]];
   }
   if (actuallyRewritten) {
     OrgApacheLuceneSearchBooleanQuery *rewritten = [builder build];
@@ -159,14 +165,14 @@ withOrgApacheLuceneSearchBooleanClauseArray:(IOSObjectArray *)clauses {
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
-  JavaLangStringBuilder *buffer = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_init();
   jboolean needParens = [self getBoost] != 1.0 || [self getMinimumNumberShouldMatch] > 0;
   if (needParens) {
     [buffer appendWithNSString:@"("];
   }
   jint i = 0;
   for (OrgApacheLuceneSearchBooleanClause * __strong c in self) {
-    [buffer appendWithNSString:[((OrgApacheLuceneSearchBooleanClause_OccurEnum *) nil_chk([((OrgApacheLuceneSearchBooleanClause *) nil_chk(c)) getOccur])) description]];
+    [buffer appendWithNSString:[((OrgApacheLuceneSearchBooleanClause_Occur *) nil_chk([((OrgApacheLuceneSearchBooleanClause *) nil_chk(c)) getOccur])) description]];
     OrgApacheLuceneSearchQuery *subQuery = [c getQuery];
     if ([subQuery isKindOfClass:[OrgApacheLuceneSearchBooleanQuery class]]) {
       [buffer appendWithNSString:@"("];
@@ -198,7 +204,7 @@ withOrgApacheLuceneSearchBooleanClauseArray:(IOSObjectArray *)clauses {
   if ([super isEqual:o] == false) {
     return false;
   }
-  OrgApacheLuceneSearchBooleanQuery *that = (OrgApacheLuceneSearchBooleanQuery *) check_class_cast(o, [OrgApacheLuceneSearchBooleanQuery class]);
+  OrgApacheLuceneSearchBooleanQuery *that = (OrgApacheLuceneSearchBooleanQuery *) cast_chk(o, [OrgApacheLuceneSearchBooleanQuery class]);
   return [self getMinimumNumberShouldMatch] == [((OrgApacheLuceneSearchBooleanQuery *) nil_chk(that)) getMinimumNumberShouldMatch] && self->disableCoord_ == that->disableCoord_ && [((id<JavaUtilList>) nil_chk(clauses_)) isEqual:that->clauses_];
 }
 
@@ -207,11 +213,11 @@ withOrgApacheLuceneSearchBooleanClauseArray:(IOSObjectArray *)clauses {
 }
 
 - (IOSObjectArray *)getClauses {
-  return [clauses_ toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[((id<JavaUtilList>) nil_chk(clauses_)) size] type:OrgApacheLuceneSearchBooleanClause_class_()]];
+  return [((id<JavaUtilList>) nil_chk(clauses_)) toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[clauses_ size] type:OrgApacheLuceneSearchBooleanClause_class_()]];
 }
 
 - (OrgApacheLuceneSearchBooleanQuery *)clone {
-  OrgApacheLuceneSearchBooleanQuery *clone = (OrgApacheLuceneSearchBooleanQuery *) check_class_cast([super clone], [OrgApacheLuceneSearchBooleanQuery class]);
+  OrgApacheLuceneSearchBooleanQuery *clone = (OrgApacheLuceneSearchBooleanQuery *) cast_chk([super clone], [OrgApacheLuceneSearchBooleanQuery class]);
   JreStrongAssignAndConsume(&((OrgApacheLuceneSearchBooleanQuery *) nil_chk(clone))->clauses_, new_JavaUtilArrayList_initWithJavaUtilCollection_(clauses_));
   return clone;
 }
@@ -238,22 +244,17 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)addWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-withOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanClause_OccurEnum *)occur {
-  [self addWithOrgApacheLuceneSearchBooleanClause:[new_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_OccurEnum_(query, occur) autorelease]];
+withOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause_Occur *)occur {
+  [self addWithOrgApacheLuceneSearchBooleanClause:create_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_Occur_(query, occur)];
 }
 
 - (void)addWithOrgApacheLuceneSearchBooleanClause:(OrgApacheLuceneSearchBooleanClause *)clause {
   OrgApacheLuceneSearchBooleanQuery_ensureMutableWithNSString_(self, @"add");
   OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_withNSString_(clause, @"BooleanClause must not be null");
-  if ([((id<JavaUtilList>) nil_chk(clauses_)) size] >= OrgApacheLuceneSearchBooleanQuery_maxClauseCount_) {
-    @throw [new_OrgApacheLuceneSearchBooleanQuery_TooManyClauses_init() autorelease];
+  if ([((id<JavaUtilList>) nil_chk(clauses_)) size] >= OrgApacheLuceneSearchBooleanQuery_maxClauseCount) {
+    @throw create_OrgApacheLuceneSearchBooleanQuery_TooManyClauses_init();
   }
-  [clauses_ addWithId:clause];
-}
-
-- (void)dealloc {
-  RELEASE_(clauses_);
-  [super dealloc];
+  [((id<JavaUtilList>) nil_chk(clauses_)) addWithId:clause];
 }
 
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
@@ -261,27 +262,32 @@ withOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanCl
 }
 
 + (IOSObjectArray *)__annotations_getClauses {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_init {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_initWithBoolean_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_setMinimumNumberShouldMatchWithInt_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
-+ (IOSObjectArray *)__annotations_addWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_OccurEnum_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
++ (IOSObjectArray *)__annotations_addWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_Occur_ {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_addWithOrgApacheLuceneSearchBooleanClause_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+- (void)dealloc {
+  RELEASE_(clauses_);
+  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -291,8 +297,8 @@ withOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanCl
     { "initWithBoolean:withInt:withOrgApacheLuceneSearchBooleanClauseArray:", "BooleanQuery", NULL, 0x2, NULL, NULL },
     { "isCoordDisabled", NULL, "Z", 0x1, NULL, NULL },
     { "getMinimumNumberShouldMatch", NULL, "I", 0x1, NULL, NULL },
-    { "clauses", NULL, "Ljava.util.List;", 0x1, NULL, NULL },
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x11, NULL, NULL },
+    { "clauses", NULL, "Ljava.util.List;", 0x1, NULL, "()Ljava/util/List<Lorg/apache/lucene/search/BooleanClause;>;" },
+    { "iterator", NULL, "Ljava.util.Iterator;", 0x11, NULL, "()Ljava/util/Iterator<Lorg/apache/lucene/search/BooleanClause;>;" },
     { "rewriteNoScoring", NULL, "Lorg.apache.lucene.search.BooleanQuery;", 0x2, NULL, NULL },
     { "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:", "createWeight", "Lorg.apache.lucene.search.Weight;", 0x1, "Ljava.io.IOException;", NULL },
     { "rewriteWithOrgApacheLuceneIndexIndexReader:", "rewrite", "Lorg.apache.lucene.search.Query;", 0x1, "Ljava.io.IOException;", NULL },
@@ -305,11 +311,11 @@ withOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanCl
     { "initWithBoolean:", "BooleanQuery", NULL, 0x1, NULL, NULL },
     { "ensureMutableWithNSString:", "ensureMutable", "V", 0x2, NULL, NULL },
     { "setMinimumNumberShouldMatchWithInt:", "setMinimumNumberShouldMatch", "V", 0x1, NULL, NULL },
-    { "addWithOrgApacheLuceneSearchQuery:withOrgApacheLuceneSearchBooleanClause_OccurEnum:", "add", "V", 0x1, NULL, NULL },
+    { "addWithOrgApacheLuceneSearchQuery:withOrgApacheLuceneSearchBooleanClause_Occur:", "add", "V", 0x1, NULL, NULL },
     { "addWithOrgApacheLuceneSearchBooleanClause:", "add", "V", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "maxClauseCount_", NULL, 0xa, "I", &OrgApacheLuceneSearchBooleanQuery_maxClauseCount_, NULL, .constantValue.asLong = 0 },
+    { "maxClauseCount", "maxClauseCount", 0xa, "I", &OrgApacheLuceneSearchBooleanQuery_maxClauseCount, NULL, .constantValue.asLong = 0 },
     { "mutable__", "mutable", 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
     { "disableCoord_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
     { "minimumNumberShouldMatch_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
@@ -324,15 +330,15 @@ withOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanCl
 
 jint OrgApacheLuceneSearchBooleanQuery_getMaxClauseCount() {
   OrgApacheLuceneSearchBooleanQuery_initialize();
-  return OrgApacheLuceneSearchBooleanQuery_maxClauseCount_;
+  return OrgApacheLuceneSearchBooleanQuery_maxClauseCount;
 }
 
 void OrgApacheLuceneSearchBooleanQuery_setMaxClauseCountWithInt_(jint maxClauseCount) {
   OrgApacheLuceneSearchBooleanQuery_initialize();
   if (maxClauseCount < 1) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"maxClauseCount must be >= 1") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"maxClauseCount must be >= 1");
   }
-  OrgApacheLuceneSearchBooleanQuery_maxClauseCount_ = maxClauseCount;
+  OrgApacheLuceneSearchBooleanQuery_maxClauseCount = maxClauseCount;
 }
 
 void OrgApacheLuceneSearchBooleanQuery_initWithBoolean_withInt_withOrgApacheLuceneSearchBooleanClauseArray_(OrgApacheLuceneSearchBooleanQuery *self, jboolean disableCoord, jint minimumNumberShouldMatch, IOSObjectArray *clauses) {
@@ -344,17 +350,19 @@ void OrgApacheLuceneSearchBooleanQuery_initWithBoolean_withInt_withOrgApacheLuce
 }
 
 OrgApacheLuceneSearchBooleanQuery *new_OrgApacheLuceneSearchBooleanQuery_initWithBoolean_withInt_withOrgApacheLuceneSearchBooleanClauseArray_(jboolean disableCoord, jint minimumNumberShouldMatch, IOSObjectArray *clauses) {
-  OrgApacheLuceneSearchBooleanQuery *self = [OrgApacheLuceneSearchBooleanQuery alloc];
-  OrgApacheLuceneSearchBooleanQuery_initWithBoolean_withInt_withOrgApacheLuceneSearchBooleanClauseArray_(self, disableCoord, minimumNumberShouldMatch, clauses);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchBooleanQuery, initWithBoolean_withInt_withOrgApacheLuceneSearchBooleanClauseArray_, disableCoord, minimumNumberShouldMatch, clauses)
+}
+
+OrgApacheLuceneSearchBooleanQuery *create_OrgApacheLuceneSearchBooleanQuery_initWithBoolean_withInt_withOrgApacheLuceneSearchBooleanClauseArray_(jboolean disableCoord, jint minimumNumberShouldMatch, IOSObjectArray *clauses) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchBooleanQuery, initWithBoolean_withInt_withOrgApacheLuceneSearchBooleanClauseArray_, disableCoord, minimumNumberShouldMatch, clauses)
 }
 
 OrgApacheLuceneSearchBooleanQuery *OrgApacheLuceneSearchBooleanQuery_rewriteNoScoring(OrgApacheLuceneSearchBooleanQuery *self) {
-  OrgApacheLuceneSearchBooleanQuery_Builder *newQuery = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
+  OrgApacheLuceneSearchBooleanQuery_Builder *newQuery = create_OrgApacheLuceneSearchBooleanQuery_Builder_init();
   [newQuery setMinimumNumberShouldMatchWithInt:[self getMinimumNumberShouldMatch]];
   for (OrgApacheLuceneSearchBooleanClause * __strong clause in nil_chk(self->clauses_)) {
-    if ([((OrgApacheLuceneSearchBooleanClause *) nil_chk(clause)) getOccur] == JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, MUST)) {
-      [newQuery addWithOrgApacheLuceneSearchQuery:[clause getQuery] withOrgApacheLuceneSearchBooleanClause_OccurEnum:JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, FILTER)];
+    if ([((OrgApacheLuceneSearchBooleanClause *) nil_chk(clause)) getOccur] == JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, MUST)) {
+      [newQuery addWithOrgApacheLuceneSearchQuery:[clause getQuery] withOrgApacheLuceneSearchBooleanClause_Occur:JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, FILTER)];
     }
     else {
       [newQuery addWithOrgApacheLuceneSearchBooleanClause:clause];
@@ -368,9 +376,11 @@ void OrgApacheLuceneSearchBooleanQuery_init(OrgApacheLuceneSearchBooleanQuery *s
 }
 
 OrgApacheLuceneSearchBooleanQuery *new_OrgApacheLuceneSearchBooleanQuery_init() {
-  OrgApacheLuceneSearchBooleanQuery *self = [OrgApacheLuceneSearchBooleanQuery alloc];
-  OrgApacheLuceneSearchBooleanQuery_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchBooleanQuery, init)
+}
+
+OrgApacheLuceneSearchBooleanQuery *create_OrgApacheLuceneSearchBooleanQuery_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchBooleanQuery, init)
 }
 
 void OrgApacheLuceneSearchBooleanQuery_initWithBoolean_(OrgApacheLuceneSearchBooleanQuery *self, jboolean disableCoord) {
@@ -382,14 +392,16 @@ void OrgApacheLuceneSearchBooleanQuery_initWithBoolean_(OrgApacheLuceneSearchBoo
 }
 
 OrgApacheLuceneSearchBooleanQuery *new_OrgApacheLuceneSearchBooleanQuery_initWithBoolean_(jboolean disableCoord) {
-  OrgApacheLuceneSearchBooleanQuery *self = [OrgApacheLuceneSearchBooleanQuery alloc];
-  OrgApacheLuceneSearchBooleanQuery_initWithBoolean_(self, disableCoord);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchBooleanQuery, initWithBoolean_, disableCoord)
+}
+
+OrgApacheLuceneSearchBooleanQuery *create_OrgApacheLuceneSearchBooleanQuery_initWithBoolean_(jboolean disableCoord) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchBooleanQuery, initWithBoolean_, disableCoord)
 }
 
 void OrgApacheLuceneSearchBooleanQuery_ensureMutableWithNSString_(OrgApacheLuceneSearchBooleanQuery *self, NSString *method) {
   if (self->mutable__ == false) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$", @"This BooleanQuery has been created with the new BooleanQuery.Builder API. It must not be modified afterwards. The ", method, @" method only exists for backward compatibility")) autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$", @"This BooleanQuery has been created with the new BooleanQuery.Builder API. It must not be modified afterwards. The ", method, @" method only exists for backward compatibility"));
   }
 }
 
@@ -415,13 +427,15 @@ J2OBJC_IGNORE_DESIGNATED_END
 @end
 
 void OrgApacheLuceneSearchBooleanQuery_TooManyClauses_init(OrgApacheLuceneSearchBooleanQuery_TooManyClauses *self) {
-  JavaLangRuntimeException_initWithNSString_(self, JreStrcat("$I", @"maxClauseCount is set to ", JreLoadStatic(OrgApacheLuceneSearchBooleanQuery, maxClauseCount_)));
+  JavaLangRuntimeException_initWithNSString_(self, JreStrcat("$I", @"maxClauseCount is set to ", JreLoadStatic(OrgApacheLuceneSearchBooleanQuery, maxClauseCount)));
 }
 
 OrgApacheLuceneSearchBooleanQuery_TooManyClauses *new_OrgApacheLuceneSearchBooleanQuery_TooManyClauses_init() {
-  OrgApacheLuceneSearchBooleanQuery_TooManyClauses *self = [OrgApacheLuceneSearchBooleanQuery_TooManyClauses alloc];
-  OrgApacheLuceneSearchBooleanQuery_TooManyClauses_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchBooleanQuery_TooManyClauses, init)
+}
+
+OrgApacheLuceneSearchBooleanQuery_TooManyClauses *create_OrgApacheLuceneSearchBooleanQuery_TooManyClauses_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchBooleanQuery_TooManyClauses, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBooleanQuery_TooManyClauses)
@@ -446,21 +460,21 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (OrgApacheLuceneSearchBooleanQuery_Builder *)addWithOrgApacheLuceneSearchBooleanClause:(OrgApacheLuceneSearchBooleanClause *)clause {
-  [self addWithOrgApacheLuceneSearchQuery:[((OrgApacheLuceneSearchBooleanClause *) nil_chk(clause)) getQuery] withOrgApacheLuceneSearchBooleanClause_OccurEnum:[clause getOccur]];
+  [self addWithOrgApacheLuceneSearchQuery:[((OrgApacheLuceneSearchBooleanClause *) nil_chk(clause)) getQuery] withOrgApacheLuceneSearchBooleanClause_Occur:[clause getOccur]];
   return self;
 }
 
 - (OrgApacheLuceneSearchBooleanQuery_Builder *)addWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                                withOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanClause_OccurEnum *)occur {
-  if ([((id<JavaUtilList>) nil_chk(clauses_)) size] >= JreLoadStatic(OrgApacheLuceneSearchBooleanQuery, maxClauseCount_)) {
-    @throw [new_OrgApacheLuceneSearchBooleanQuery_TooManyClauses_init() autorelease];
+                                    withOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause_Occur *)occur {
+  if ([((id<JavaUtilList>) nil_chk(clauses_)) size] >= JreLoadStatic(OrgApacheLuceneSearchBooleanQuery, maxClauseCount)) {
+    @throw create_OrgApacheLuceneSearchBooleanQuery_TooManyClauses_init();
   }
-  [clauses_ addWithId:[new_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_OccurEnum_(query, occur) autorelease]];
+  [clauses_ addWithId:create_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_Occur_(query, occur)];
   return self;
 }
 
 - (OrgApacheLuceneSearchBooleanQuery *)build {
-  return [new_OrgApacheLuceneSearchBooleanQuery_initWithBoolean_withInt_withOrgApacheLuceneSearchBooleanClauseArray_(disableCoord_, minimumNumberShouldMatch_, [((id<JavaUtilList>) nil_chk(clauses_)) toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchBooleanClause_class_()]]) autorelease];
+  return create_OrgApacheLuceneSearchBooleanQuery_initWithBoolean_withInt_withOrgApacheLuceneSearchBooleanClauseArray_(disableCoord_, minimumNumberShouldMatch_, [((id<JavaUtilList>) nil_chk(clauses_)) toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchBooleanClause_class_()]]);
 }
 
 - (void)dealloc {
@@ -474,7 +488,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "setDisableCoordWithBoolean:", "setDisableCoord", "Lorg.apache.lucene.search.BooleanQuery$Builder;", 0x1, NULL, NULL },
     { "setMinimumNumberShouldMatchWithInt:", "setMinimumNumberShouldMatch", "Lorg.apache.lucene.search.BooleanQuery$Builder;", 0x1, NULL, NULL },
     { "addWithOrgApacheLuceneSearchBooleanClause:", "add", "Lorg.apache.lucene.search.BooleanQuery$Builder;", 0x1, NULL, NULL },
-    { "addWithOrgApacheLuceneSearchQuery:withOrgApacheLuceneSearchBooleanClause_OccurEnum:", "add", "Lorg.apache.lucene.search.BooleanQuery$Builder;", 0x1, NULL, NULL },
+    { "addWithOrgApacheLuceneSearchQuery:withOrgApacheLuceneSearchBooleanClause_Occur:", "add", "Lorg.apache.lucene.search.BooleanQuery$Builder;", 0x1, NULL, NULL },
     { "build", NULL, "Lorg.apache.lucene.search.BooleanQuery;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -494,9 +508,11 @@ void OrgApacheLuceneSearchBooleanQuery_Builder_init(OrgApacheLuceneSearchBoolean
 }
 
 OrgApacheLuceneSearchBooleanQuery_Builder *new_OrgApacheLuceneSearchBooleanQuery_Builder_init() {
-  OrgApacheLuceneSearchBooleanQuery_Builder *self = [OrgApacheLuceneSearchBooleanQuery_Builder alloc];
-  OrgApacheLuceneSearchBooleanQuery_Builder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchBooleanQuery_Builder, init)
+}
+
+OrgApacheLuceneSearchBooleanQuery_Builder *create_OrgApacheLuceneSearchBooleanQuery_Builder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchBooleanQuery_Builder, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBooleanQuery_Builder)

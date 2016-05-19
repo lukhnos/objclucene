@@ -29,7 +29,6 @@
 #include "java/lang/RuntimeException.h"
 #include "java/lang/Short.h"
 #include "java/lang/StringBuilder.h"
-#include "java/lang/Throwable.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "java/nio/charset/Charset.h"
 #include "java/nio/charset/CharsetDecoder.h"
@@ -49,7 +48,7 @@
 #include "java/util/regex/Matcher.h"
 #include "java/util/regex/Pattern.h"
 #include "org/apache/lucene/analysis/hunspell/Dictionary.h"
-// disabled by translate.py
+// #include "org/apache/lucene/analysis/hunspell/ISO8859_14Decoder.h" // disabled by translate.py
 #include "org/apache/lucene/store/ByteArrayDataOutput.h"
 #include "org/apache/lucene/util/ArrayUtil.h"
 #include "org/apache/lucene/util/BytesRef.h"
@@ -88,11 +87,27 @@
   IOSCharArray *ignore_;
 }
 
+/*!
+ @brief Reads the affix file through the provided InputStream, building up the prefix and suffix maps
+ @param affixStream InputStream to read the content of the affix file from
+ @param decoder CharsetDecoder to decode the content of the file
+ @throws IOException Can be thrown while reading from the InputStream
+ */
 - (void)readAffixFileWithJavaIoInputStream:(JavaIoInputStream *)affixStream
           withJavaNioCharsetCharsetDecoder:(JavaNioCharsetCharsetDecoder *)decoder;
 
 - (OrgApacheLuceneUtilFstFST *)affixFSTWithJavaUtilTreeMap:(JavaUtilTreeMap *)affixes;
 
+/*!
+ @brief Parses a specific affix rule putting the result into the provided affix map
+ @param affixes Map where the result of the parsing will be put
+ @param header Header line of the affix rule
+ @param reader BufferedReader to read the content of the rule from
+ @param conditionPattern <code>String.format(String,Object...)</code> pattern to be used to generate the condition regex
+ pattern
+ @param seenPatterns map from condition -&gt; index of patterns, for deduplication.
+ @throws IOException Can be thrown while reading the rule
+ */
 - (void)parseAffixWithJavaUtilTreeMap:(JavaUtilTreeMap *)affixes
                          withNSString:(NSString *)header
            withJavaIoLineNumberReader:(JavaIoLineNumberReader *)reader
@@ -103,8 +118,21 @@
 - (OrgApacheLuceneUtilFstFST *)parseConversionsWithJavaIoLineNumberReader:(JavaIoLineNumberReader *)reader
                                                                   withInt:(jint)num;
 
+/*!
+ @brief Retrieves the CharsetDecoder for the given encoding.
+ Note, This isn't perfect as I think ISCII-DEVANAGARI and
+ MICROSOFT-CP1251 etc are allowed...
+ @param encoding Encoding to retrieve the CharsetDecoder for
+ @return CharSetDecoder for the given encoding
+ */
 - (JavaNioCharsetCharsetDecoder *)getJavaEncodingWithNSString:(NSString *)encoding;
 
+/*!
+ @brief Reads the dictionary file through the provided InputStreams, building up the words map
+ @param dictionaries InputStreams to read the dictionary file through
+ @param decoder CharsetDecoder used to decode the contents of the file
+ @throws IOException Can be thrown while reading from the file
+ */
 - (void)readDictionaryFilesWithJavaUtilList:(id<JavaUtilList>)dictionaries
            withJavaNioCharsetCharsetDecoder:(JavaNioCharsetCharsetDecoder *)decoder
           withOrgApacheLuceneUtilFstBuilder:(OrgApacheLuceneUtilFstBuilder *)words;
@@ -126,68 +154,89 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisHunspellDictionary, stemExceptions_, 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisHunspellDictionary, tempDir_, OrgLukhnosPortmobileFilePath *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisHunspellDictionary, ignore_, IOSCharArray *)
 
-static NSString *OrgApacheLuceneAnalysisHunspellDictionary_ALIAS_KEY_ = @"AF";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHunspellDictionary, ALIAS_KEY_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisHunspellDictionary_get_ALIAS_KEY();
+static NSString *OrgApacheLuceneAnalysisHunspellDictionary_ALIAS_KEY = @"AF";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHunspellDictionary, ALIAS_KEY, NSString *)
 
-static NSString *OrgApacheLuceneAnalysisHunspellDictionary_MORPH_ALIAS_KEY_ = @"AM";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHunspellDictionary, MORPH_ALIAS_KEY_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisHunspellDictionary_get_MORPH_ALIAS_KEY();
+static NSString *OrgApacheLuceneAnalysisHunspellDictionary_MORPH_ALIAS_KEY = @"AM";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHunspellDictionary, MORPH_ALIAS_KEY, NSString *)
 
-static NSString *OrgApacheLuceneAnalysisHunspellDictionary_PREFIX_KEY_ = @"PFX";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHunspellDictionary, PREFIX_KEY_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisHunspellDictionary_get_PREFIX_KEY();
+static NSString *OrgApacheLuceneAnalysisHunspellDictionary_PREFIX_KEY = @"PFX";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHunspellDictionary, PREFIX_KEY, NSString *)
 
-static NSString *OrgApacheLuceneAnalysisHunspellDictionary_SUFFIX_KEY_ = @"SFX";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHunspellDictionary, SUFFIX_KEY_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisHunspellDictionary_get_SUFFIX_KEY();
+static NSString *OrgApacheLuceneAnalysisHunspellDictionary_SUFFIX_KEY = @"SFX";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHunspellDictionary, SUFFIX_KEY, NSString *)
 
-static NSString *OrgApacheLuceneAnalysisHunspellDictionary_FLAG_KEY_ = @"FLAG";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHunspellDictionary, FLAG_KEY_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisHunspellDictionary_get_FLAG_KEY();
+static NSString *OrgApacheLuceneAnalysisHunspellDictionary_FLAG_KEY = @"FLAG";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHunspellDictionary, FLAG_KEY, NSString *)
 
-static NSString *OrgApacheLuceneAnalysisHunspellDictionary_COMPLEXPREFIXES_KEY_ = @"COMPLEXPREFIXES";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHunspellDictionary, COMPLEXPREFIXES_KEY_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisHunspellDictionary_get_COMPLEXPREFIXES_KEY();
+static NSString *OrgApacheLuceneAnalysisHunspellDictionary_COMPLEXPREFIXES_KEY = @"COMPLEXPREFIXES";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHunspellDictionary, COMPLEXPREFIXES_KEY, NSString *)
 
-static NSString *OrgApacheLuceneAnalysisHunspellDictionary_CIRCUMFIX_KEY_ = @"CIRCUMFIX";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHunspellDictionary, CIRCUMFIX_KEY_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisHunspellDictionary_get_CIRCUMFIX_KEY();
+static NSString *OrgApacheLuceneAnalysisHunspellDictionary_CIRCUMFIX_KEY = @"CIRCUMFIX";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHunspellDictionary, CIRCUMFIX_KEY, NSString *)
 
-static NSString *OrgApacheLuceneAnalysisHunspellDictionary_IGNORE_KEY_ = @"IGNORE";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHunspellDictionary, IGNORE_KEY_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisHunspellDictionary_get_IGNORE_KEY();
+static NSString *OrgApacheLuceneAnalysisHunspellDictionary_IGNORE_KEY = @"IGNORE";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHunspellDictionary, IGNORE_KEY, NSString *)
 
-static NSString *OrgApacheLuceneAnalysisHunspellDictionary_ICONV_KEY_ = @"ICONV";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHunspellDictionary, ICONV_KEY_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisHunspellDictionary_get_ICONV_KEY();
+static NSString *OrgApacheLuceneAnalysisHunspellDictionary_ICONV_KEY = @"ICONV";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHunspellDictionary, ICONV_KEY, NSString *)
 
-static NSString *OrgApacheLuceneAnalysisHunspellDictionary_OCONV_KEY_ = @"OCONV";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHunspellDictionary, OCONV_KEY_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisHunspellDictionary_get_OCONV_KEY();
+static NSString *OrgApacheLuceneAnalysisHunspellDictionary_OCONV_KEY = @"OCONV";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHunspellDictionary, OCONV_KEY, NSString *)
 
-static NSString *OrgApacheLuceneAnalysisHunspellDictionary_FULLSTRIP_KEY_ = @"FULLSTRIP";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHunspellDictionary, FULLSTRIP_KEY_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisHunspellDictionary_get_FULLSTRIP_KEY();
+static NSString *OrgApacheLuceneAnalysisHunspellDictionary_FULLSTRIP_KEY = @"FULLSTRIP";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHunspellDictionary, FULLSTRIP_KEY, NSString *)
 
-static NSString *OrgApacheLuceneAnalysisHunspellDictionary_LANG_KEY_ = @"LANG";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHunspellDictionary, LANG_KEY_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisHunspellDictionary_get_LANG_KEY();
+static NSString *OrgApacheLuceneAnalysisHunspellDictionary_LANG_KEY = @"LANG";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHunspellDictionary, LANG_KEY, NSString *)
 
-static NSString *OrgApacheLuceneAnalysisHunspellDictionary_KEEPCASE_KEY_ = @"KEEPCASE";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHunspellDictionary, KEEPCASE_KEY_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisHunspellDictionary_get_KEEPCASE_KEY();
+static NSString *OrgApacheLuceneAnalysisHunspellDictionary_KEEPCASE_KEY = @"KEEPCASE";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHunspellDictionary, KEEPCASE_KEY, NSString *)
 
-static NSString *OrgApacheLuceneAnalysisHunspellDictionary_NEEDAFFIX_KEY_ = @"NEEDAFFIX";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHunspellDictionary, NEEDAFFIX_KEY_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisHunspellDictionary_get_NEEDAFFIX_KEY();
+static NSString *OrgApacheLuceneAnalysisHunspellDictionary_NEEDAFFIX_KEY = @"NEEDAFFIX";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHunspellDictionary, NEEDAFFIX_KEY, NSString *)
 
-static NSString *OrgApacheLuceneAnalysisHunspellDictionary_PSEUDOROOT_KEY_ = @"PSEUDOROOT";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHunspellDictionary, PSEUDOROOT_KEY_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisHunspellDictionary_get_PSEUDOROOT_KEY();
+static NSString *OrgApacheLuceneAnalysisHunspellDictionary_PSEUDOROOT_KEY = @"PSEUDOROOT";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHunspellDictionary, PSEUDOROOT_KEY, NSString *)
 
-static NSString *OrgApacheLuceneAnalysisHunspellDictionary_ONLYINCOMPOUND_KEY_ = @"ONLYINCOMPOUND";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHunspellDictionary, ONLYINCOMPOUND_KEY_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisHunspellDictionary_get_ONLYINCOMPOUND_KEY();
+static NSString *OrgApacheLuceneAnalysisHunspellDictionary_ONLYINCOMPOUND_KEY = @"ONLYINCOMPOUND";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHunspellDictionary, ONLYINCOMPOUND_KEY, NSString *)
 
-static NSString *OrgApacheLuceneAnalysisHunspellDictionary_NUM_FLAG_TYPE_ = @"num";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHunspellDictionary, NUM_FLAG_TYPE_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisHunspellDictionary_get_NUM_FLAG_TYPE();
+static NSString *OrgApacheLuceneAnalysisHunspellDictionary_NUM_FLAG_TYPE = @"num";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHunspellDictionary, NUM_FLAG_TYPE, NSString *)
 
-static NSString *OrgApacheLuceneAnalysisHunspellDictionary_UTF8_FLAG_TYPE_ = @"UTF-8";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHunspellDictionary, UTF8_FLAG_TYPE_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisHunspellDictionary_get_UTF8_FLAG_TYPE();
+static NSString *OrgApacheLuceneAnalysisHunspellDictionary_UTF8_FLAG_TYPE = @"UTF-8";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHunspellDictionary, UTF8_FLAG_TYPE, NSString *)
 
-static NSString *OrgApacheLuceneAnalysisHunspellDictionary_LONG_FLAG_TYPE_ = @"long";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHunspellDictionary, LONG_FLAG_TYPE_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisHunspellDictionary_get_LONG_FLAG_TYPE();
+static NSString *OrgApacheLuceneAnalysisHunspellDictionary_LONG_FLAG_TYPE = @"long";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHunspellDictionary, LONG_FLAG_TYPE, NSString *)
 
-static NSString *OrgApacheLuceneAnalysisHunspellDictionary_PREFIX_CONDITION_REGEX_PATTERN_ = @"%s.*";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHunspellDictionary, PREFIX_CONDITION_REGEX_PATTERN_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisHunspellDictionary_get_PREFIX_CONDITION_REGEX_PATTERN();
+static NSString *OrgApacheLuceneAnalysisHunspellDictionary_PREFIX_CONDITION_REGEX_PATTERN = @"%s.*";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHunspellDictionary, PREFIX_CONDITION_REGEX_PATTERN, NSString *)
 
-static NSString *OrgApacheLuceneAnalysisHunspellDictionary_SUFFIX_CONDITION_REGEX_PATTERN_ = @".*%s";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHunspellDictionary, SUFFIX_CONDITION_REGEX_PATTERN_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisHunspellDictionary_get_SUFFIX_CONDITION_REGEX_PATTERN();
+static NSString *OrgApacheLuceneAnalysisHunspellDictionary_SUFFIX_CONDITION_REGEX_PATTERN = @".*%s";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHunspellDictionary, SUFFIX_CONDITION_REGEX_PATTERN, NSString *)
 
 __attribute__((unused)) static void OrgApacheLuceneAnalysisHunspellDictionary_readAffixFileWithJavaIoInputStream_withJavaNioCharsetCharsetDecoder_(OrgApacheLuceneAnalysisHunspellDictionary *self, JavaIoInputStream *affixStream, JavaNioCharsetCharsetDecoder *decoder);
 
@@ -209,6 +258,10 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisHunspellDictionary_pa
 
 __attribute__((unused)) static NSString *OrgApacheLuceneAnalysisHunspellDictionary_parseStemExceptionWithNSString_(OrgApacheLuceneAnalysisHunspellDictionary *self, NSString *morphData);
 
+/*!
+ @brief Simple implementation of <code>FlagParsingStrategy</code> that treats the chars in each String as a individual flags.
+ Can be used with both the ASCII and UTF-8 flag types.
+ */
 @interface OrgApacheLuceneAnalysisHunspellDictionary_SimpleFlagParsingStrategy : OrgApacheLuceneAnalysisHunspellDictionary_FlagParsingStrategy
 
 - (IOSCharArray *)parseFlagsWithNSString:(NSString *)rawFlags;
@@ -223,8 +276,15 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisHunspellDictionary_Si
 
 __attribute__((unused)) static OrgApacheLuceneAnalysisHunspellDictionary_SimpleFlagParsingStrategy *new_OrgApacheLuceneAnalysisHunspellDictionary_SimpleFlagParsingStrategy_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneAnalysisHunspellDictionary_SimpleFlagParsingStrategy *create_OrgApacheLuceneAnalysisHunspellDictionary_SimpleFlagParsingStrategy_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisHunspellDictionary_SimpleFlagParsingStrategy)
 
+/*!
+ @brief Implementation of <code>FlagParsingStrategy</code> that assumes each flag is encoded in its numerical form.
+ In the case
+ of multiple flags, each number is separated by a comma.
+ */
 @interface OrgApacheLuceneAnalysisHunspellDictionary_NumFlagParsingStrategy : OrgApacheLuceneAnalysisHunspellDictionary_FlagParsingStrategy
 
 - (IOSCharArray *)parseFlagsWithNSString:(NSString *)rawFlags;
@@ -239,8 +299,14 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisHunspellDictionary_Nu
 
 __attribute__((unused)) static OrgApacheLuceneAnalysisHunspellDictionary_NumFlagParsingStrategy *new_OrgApacheLuceneAnalysisHunspellDictionary_NumFlagParsingStrategy_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneAnalysisHunspellDictionary_NumFlagParsingStrategy *create_OrgApacheLuceneAnalysisHunspellDictionary_NumFlagParsingStrategy_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisHunspellDictionary_NumFlagParsingStrategy)
 
+/*!
+ @brief Implementation of <code>FlagParsingStrategy</code> that assumes each flag is encoded as two ASCII characters whose codes
+ must be combined into a single character.
+ */
 @interface OrgApacheLuceneAnalysisHunspellDictionary_DoubleASCIIFlagParsingStrategy : OrgApacheLuceneAnalysisHunspellDictionary_FlagParsingStrategy
 
 - (IOSCharArray *)parseFlagsWithNSString:(NSString *)rawFlags;
@@ -254,6 +320,8 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisHunspellDictionary_DoubleASCIIFl
 __attribute__((unused)) static void OrgApacheLuceneAnalysisHunspellDictionary_DoubleASCIIFlagParsingStrategy_init(OrgApacheLuceneAnalysisHunspellDictionary_DoubleASCIIFlagParsingStrategy *self);
 
 __attribute__((unused)) static OrgApacheLuceneAnalysisHunspellDictionary_DoubleASCIIFlagParsingStrategy *new_OrgApacheLuceneAnalysisHunspellDictionary_DoubleASCIIFlagParsingStrategy_init() NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneAnalysisHunspellDictionary_DoubleASCIIFlagParsingStrategy *create_OrgApacheLuceneAnalysisHunspellDictionary_DoubleASCIIFlagParsingStrategy_init();
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisHunspellDictionary_DoubleASCIIFlagParsingStrategy)
 
@@ -281,15 +349,37 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisHunspellDictionary_$1
 
 __attribute__((unused)) static OrgApacheLuceneAnalysisHunspellDictionary_$1 *new_OrgApacheLuceneAnalysisHunspellDictionary_$1_initWithOrgApacheLuceneAnalysisHunspellDictionary_(OrgApacheLuceneAnalysisHunspellDictionary *outer$) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneAnalysisHunspellDictionary_$1 *create_OrgApacheLuceneAnalysisHunspellDictionary_$1_initWithOrgApacheLuceneAnalysisHunspellDictionary_(OrgApacheLuceneAnalysisHunspellDictionary *outer$);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisHunspellDictionary_$1)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisHunspellDictionary)
 
-IOSCharArray *OrgApacheLuceneAnalysisHunspellDictionary_NOFLAGS_;
-JavaUtilRegexPattern *OrgApacheLuceneAnalysisHunspellDictionary_ENCODING_PATTERN_;
-id<JavaUtilMap> OrgApacheLuceneAnalysisHunspellDictionary_CHARSET_ALIASES_;
+IOSCharArray *OrgApacheLuceneAnalysisHunspellDictionary_NOFLAGS;
+JavaUtilRegexPattern *OrgApacheLuceneAnalysisHunspellDictionary_ENCODING_PATTERN;
+id<JavaUtilMap> OrgApacheLuceneAnalysisHunspellDictionary_CHARSET_ALIASES;
 
 @implementation OrgApacheLuceneAnalysisHunspellDictionary
+
++ (IOSCharArray *)NOFLAGS {
+  return OrgApacheLuceneAnalysisHunspellDictionary_NOFLAGS;
+}
+
++ (JavaUtilRegexPattern *)ENCODING_PATTERN {
+  return OrgApacheLuceneAnalysisHunspellDictionary_ENCODING_PATTERN;
+}
+
++ (id<JavaUtilMap>)CHARSET_ALIASES {
+  return OrgApacheLuceneAnalysisHunspellDictionary_CHARSET_ALIASES;
+}
+
++ (jchar)FLAG_SEPARATOR {
+  return OrgApacheLuceneAnalysisHunspellDictionary_FLAG_SEPARATOR;
+}
+
++ (jchar)MORPH_SEPARATOR {
+  return OrgApacheLuceneAnalysisHunspellDictionary_MORPH_SEPARATOR;
+}
 
 - (instancetype)initWithJavaIoInputStream:(JavaIoInputStream *)affix
                     withJavaIoInputStream:(JavaIoInputStream *)dictionary {
@@ -329,8 +419,8 @@ id<JavaUtilMap> OrgApacheLuceneAnalysisHunspellDictionary_CHARSET_ALIASES_;
   if (fst == nil) {
     return nil;
   }
-  OrgApacheLuceneUtilFstFST_BytesReader *bytesReader = [((OrgApacheLuceneUtilFstFST *) nil_chk(fst)) getBytesReader];
-  OrgApacheLuceneUtilFstFST_Arc *arc = [fst getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:[new_OrgApacheLuceneUtilFstFST_Arc_init() autorelease]];
+  OrgApacheLuceneUtilFstFST_BytesReader *bytesReader = [fst getBytesReader];
+  OrgApacheLuceneUtilFstFST_Arc *arc = [fst getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:create_OrgApacheLuceneUtilFstFST_Arc_init()];
   OrgApacheLuceneUtilIntsRef *NO_OUTPUT = [((OrgApacheLuceneUtilFstOutputs *) nil_chk(fst->outputs_)) getNoOutput];
   OrgApacheLuceneUtilIntsRef *output = NO_OUTPUT;
   jint l = offset + length;
@@ -341,21 +431,21 @@ id<JavaUtilMap> OrgApacheLuceneAnalysisHunspellDictionary_CHARSET_ALIASES_;
         return nil;
       }
       else if (((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->output_ != NO_OUTPUT) {
-        output = [fst->outputs_ addWithId:output withId:arc->output_];
+        output = [fst->outputs_ addWithId:output withId:((OrgApacheLuceneUtilIntsRef *) arc->output_)];
       }
     }
     if ([fst findTargetArcWithInt:OrgApacheLuceneUtilFstFST_END_LABEL withOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_BytesReader:bytesReader] == nil) {
       return nil;
     }
     else if (((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->output_ != NO_OUTPUT) {
-      return [fst->outputs_ addWithId:output withId:arc->output_];
+      return [fst->outputs_ addWithId:output withId:((OrgApacheLuceneUtilIntsRef *) arc->output_)];
     }
     else {
       return output;
     }
   }
   @catch (JavaIoIOException *bogus) {
-    @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(bogus) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSException_(bogus);
   }
 }
 
@@ -399,7 +489,7 @@ id<JavaUtilMap> OrgApacheLuceneAnalysisHunspellDictionary_CHARSET_ALIASES_;
 }
 
 - (NSString *)unescapeEntryWithNSString:(NSString *)entry_ {
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   jint end = OrgApacheLuceneAnalysisHunspellDictionary_morphBoundaryWithNSString_(entry_);
   for (jint i = 0; i < end; i++) {
     jchar ch = [((NSString *) nil_chk(entry_)) charAtWithInt:i];
@@ -497,7 +587,7 @@ id<JavaUtilMap> OrgApacheLuceneAnalysisHunspellDictionary_CHARSET_ALIASES_;
       OrgApacheLuceneAnalysisHunspellDictionary_applyMappingsWithOrgApacheLuceneUtilFstFST_withJavaLangStringBuilder_(iconv_, reuse);
     }
     @catch (JavaIoIOException *bogus) {
-      @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(bogus) autorelease];
+      @throw create_JavaLangRuntimeException_initWithNSException_(bogus);
     }
     if (ignoreCase_) {
       for (jint i = 0; i < [reuse length]; i++) {
@@ -553,13 +643,13 @@ id<JavaUtilMap> OrgApacheLuceneAnalysisHunspellDictionary_CHARSET_ALIASES_;
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisHunspellDictionary class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisHunspellDictionary_NOFLAGS_, [IOSCharArray newArrayWithLength:0]);
-    JreStrongAssign(&OrgApacheLuceneAnalysisHunspellDictionary_ENCODING_PATTERN_, JavaUtilRegexPattern_compileWithNSString_(@"^(\u00ef\u00bb\u00bf)?SET\\s+"));
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisHunspellDictionary_NOFLAGS, [IOSCharArray newArrayWithLength:0]);
+    JreStrongAssign(&OrgApacheLuceneAnalysisHunspellDictionary_ENCODING_PATTERN, JavaUtilRegexPattern_compileWithNSString_(@"^(\u00ef\u00bb\u00bf)?SET\\s+"));
     {
-      id<JavaUtilMap> m = [new_JavaUtilHashMap_init() autorelease];
+      id<JavaUtilMap> m = create_JavaUtilHashMap_init();
       [m putWithId:@"microsoft-cp1251" withId:@"windows-1251"];
       [m putWithId:@"TIS620-2533" withId:@"TIS-620"];
-      JreStrongAssign(&OrgApacheLuceneAnalysisHunspellDictionary_CHARSET_ALIASES_, JavaUtilCollections_unmodifiableMapWithJavaUtilMap_(m));
+      JreStrongAssign(&OrgApacheLuceneAnalysisHunspellDictionary_CHARSET_ALIASES, JavaUtilCollections_unmodifiableMapWithJavaUtilMap_(m));
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisHunspellDictionary)
   }
@@ -568,23 +658,23 @@ id<JavaUtilMap> OrgApacheLuceneAnalysisHunspellDictionary_CHARSET_ALIASES_;
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithJavaIoInputStream:withJavaIoInputStream:", "Dictionary", NULL, 0x1, "Ljava.io.IOException;Ljava.text.ParseException;", NULL },
-    { "initWithJavaIoInputStream:withJavaUtilList:withBoolean:", "Dictionary", NULL, 0x1, "Ljava.io.IOException;Ljava.text.ParseException;", NULL },
+    { "initWithJavaIoInputStream:withJavaUtilList:withBoolean:", "Dictionary", NULL, 0x1, "Ljava.io.IOException;Ljava.text.ParseException;", "(Ljava/io/InputStream;Ljava/util/List<Ljava/io/InputStream;>;Z)V" },
     { "lookupWordWithCharArray:withInt:withInt:", "lookupWord", "Lorg.apache.lucene.util.IntsRef;", 0x0, NULL, NULL },
     { "lookupPrefixWithCharArray:withInt:withInt:", "lookupPrefix", "Lorg.apache.lucene.util.IntsRef;", 0x0, NULL, NULL },
     { "lookupSuffixWithCharArray:withInt:withInt:", "lookupSuffix", "Lorg.apache.lucene.util.IntsRef;", 0x0, NULL, NULL },
-    { "lookupWithOrgApacheLuceneUtilFstFST:withCharArray:withInt:withInt:", "lookup", "Lorg.apache.lucene.util.IntsRef;", 0x0, NULL, NULL },
+    { "lookupWithOrgApacheLuceneUtilFstFST:withCharArray:withInt:withInt:", "lookup", "Lorg.apache.lucene.util.IntsRef;", 0x0, NULL, "(Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/IntsRef;>;[CII)Lorg/apache/lucene/util/IntsRef;" },
     { "readAffixFileWithJavaIoInputStream:withJavaNioCharsetCharsetDecoder:", "readAffixFile", "V", 0x2, "Ljava.io.IOException;Ljava.text.ParseException;", NULL },
-    { "affixFSTWithJavaUtilTreeMap:", "affixFST", "Lorg.apache.lucene.util.fst.FST;", 0x2, "Ljava.io.IOException;", NULL },
+    { "affixFSTWithJavaUtilTreeMap:", "affixFST", "Lorg.apache.lucene.util.fst.FST;", 0x2, "Ljava.io.IOException;", "(Ljava/util/TreeMap<Ljava/lang/String;Ljava/util/List<Ljava/lang/Integer;>;>;)Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/IntsRef;>;" },
     { "escapeDashWithNSString:", "escapeDash", "Ljava.lang.String;", 0x8, NULL, NULL },
-    { "parseAffixWithJavaUtilTreeMap:withNSString:withJavaIoLineNumberReader:withNSString:withJavaUtilMap:withJavaUtilMap:", "parseAffix", "V", 0x2, "Ljava.io.IOException;Ljava.text.ParseException;", NULL },
-    { "parseConversionsWithJavaIoLineNumberReader:withInt:", "parseConversions", "Lorg.apache.lucene.util.fst.FST;", 0x2, "Ljava.io.IOException;Ljava.text.ParseException;", NULL },
+    { "parseAffixWithJavaUtilTreeMap:withNSString:withJavaIoLineNumberReader:withNSString:withJavaUtilMap:withJavaUtilMap:", "parseAffix", "V", 0x2, "Ljava.io.IOException;Ljava.text.ParseException;", "(Ljava/util/TreeMap<Ljava/lang/String;Ljava/util/List<Ljava/lang/Integer;>;>;Ljava/lang/String;Ljava/io/LineNumberReader;Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Integer;>;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Integer;>;)V" },
+    { "parseConversionsWithJavaIoLineNumberReader:withInt:", "parseConversions", "Lorg.apache.lucene.util.fst.FST;", 0x2, "Ljava.io.IOException;Ljava.text.ParseException;", "(Ljava/io/LineNumberReader;I)Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/CharsRef;>;" },
     { "getDictionaryEncodingWithJavaIoInputStream:", "getDictionaryEncoding", "Ljava.lang.String;", 0x8, "Ljava.io.IOException;Ljava.text.ParseException;", NULL },
     { "getJavaEncodingWithNSString:", "getJavaEncoding", "Ljava.nio.charset.CharsetDecoder;", 0x2, NULL, NULL },
     { "getFlagParsingStrategyWithNSString:", "getFlagParsingStrategy", "Lorg.apache.lucene.analysis.hunspell.Dictionary$FlagParsingStrategy;", 0x8, NULL, NULL },
     { "unescapeEntryWithNSString:", "unescapeEntry", "Ljava.lang.String;", 0x0, NULL, NULL },
     { "morphBoundaryWithNSString:", "morphBoundary", "I", 0x8, NULL, NULL },
     { "indexOfSpaceOrTabWithNSString:withInt:", "indexOfSpaceOrTab", "I", 0x8, NULL, NULL },
-    { "readDictionaryFilesWithJavaUtilList:withJavaNioCharsetCharsetDecoder:withOrgApacheLuceneUtilFstBuilder:", "readDictionaryFiles", "V", 0x2, "Ljava.io.IOException;", NULL },
+    { "readDictionaryFilesWithJavaUtilList:withJavaNioCharsetCharsetDecoder:withOrgApacheLuceneUtilFstBuilder:", "readDictionaryFiles", "V", 0x2, "Ljava.io.IOException;", "(Ljava/util/List<Ljava/io/InputStream;>;Ljava/nio/charset/CharsetDecoder;Lorg/apache/lucene/util/fst/Builder<Lorg/apache/lucene/util/IntsRef;>;)V" },
     { "decodeFlagsWithOrgApacheLuceneUtilBytesRef:", "decodeFlags", "[C", 0x8, NULL, NULL },
     { "encodeFlagsWithOrgApacheLuceneUtilBytesRefBuilder:withCharArray:", "encodeFlags", "V", 0x8, NULL, NULL },
     { "parseAliasWithNSString:", "parseAlias", "V", 0x2, NULL, NULL },
@@ -595,31 +685,31 @@ id<JavaUtilMap> OrgApacheLuceneAnalysisHunspellDictionary_CHARSET_ALIASES_;
     { "hasFlagWithCharArray:withChar:", "hasFlag", "Z", 0x8, NULL, NULL },
     { "cleanInputWithJavaLangCharSequence:withJavaLangStringBuilder:", "cleanInput", "Ljava.lang.CharSequence;", 0x0, NULL, NULL },
     { "caseFoldWithChar:", "caseFold", "C", 0x0, NULL, NULL },
-    { "applyMappingsWithOrgApacheLuceneUtilFstFST:withJavaLangStringBuilder:", "applyMappings", "V", 0x8, "Ljava.io.IOException;", NULL },
+    { "applyMappingsWithOrgApacheLuceneUtilFstFST:withJavaLangStringBuilder:", "applyMappings", "V", 0x8, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/CharsRef;>;Ljava/lang/StringBuilder;)V" },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "NOFLAGS_", NULL, 0x18, "[C", &OrgApacheLuceneAnalysisHunspellDictionary_NOFLAGS_, NULL, .constantValue.asLong = 0 },
-    { "ALIAS_KEY_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_ALIAS_KEY_, NULL, .constantValue.asLong = 0 },
-    { "MORPH_ALIAS_KEY_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_MORPH_ALIAS_KEY_, NULL, .constantValue.asLong = 0 },
-    { "PREFIX_KEY_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_PREFIX_KEY_, NULL, .constantValue.asLong = 0 },
-    { "SUFFIX_KEY_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_SUFFIX_KEY_, NULL, .constantValue.asLong = 0 },
-    { "FLAG_KEY_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_FLAG_KEY_, NULL, .constantValue.asLong = 0 },
-    { "COMPLEXPREFIXES_KEY_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_COMPLEXPREFIXES_KEY_, NULL, .constantValue.asLong = 0 },
-    { "CIRCUMFIX_KEY_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_CIRCUMFIX_KEY_, NULL, .constantValue.asLong = 0 },
-    { "IGNORE_KEY_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_IGNORE_KEY_, NULL, .constantValue.asLong = 0 },
-    { "ICONV_KEY_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_ICONV_KEY_, NULL, .constantValue.asLong = 0 },
-    { "OCONV_KEY_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_OCONV_KEY_, NULL, .constantValue.asLong = 0 },
-    { "FULLSTRIP_KEY_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_FULLSTRIP_KEY_, NULL, .constantValue.asLong = 0 },
-    { "LANG_KEY_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_LANG_KEY_, NULL, .constantValue.asLong = 0 },
-    { "KEEPCASE_KEY_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_KEEPCASE_KEY_, NULL, .constantValue.asLong = 0 },
-    { "NEEDAFFIX_KEY_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_NEEDAFFIX_KEY_, NULL, .constantValue.asLong = 0 },
-    { "PSEUDOROOT_KEY_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_PSEUDOROOT_KEY_, NULL, .constantValue.asLong = 0 },
-    { "ONLYINCOMPOUND_KEY_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_ONLYINCOMPOUND_KEY_, NULL, .constantValue.asLong = 0 },
-    { "NUM_FLAG_TYPE_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_NUM_FLAG_TYPE_, NULL, .constantValue.asLong = 0 },
-    { "UTF8_FLAG_TYPE_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_UTF8_FLAG_TYPE_, NULL, .constantValue.asLong = 0 },
-    { "LONG_FLAG_TYPE_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_LONG_FLAG_TYPE_, NULL, .constantValue.asLong = 0 },
-    { "PREFIX_CONDITION_REGEX_PATTERN_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_PREFIX_CONDITION_REGEX_PATTERN_, NULL, .constantValue.asLong = 0 },
-    { "SUFFIX_CONDITION_REGEX_PATTERN_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_SUFFIX_CONDITION_REGEX_PATTERN_, NULL, .constantValue.asLong = 0 },
+    { "NOFLAGS", "NOFLAGS", 0x18, "[C", &OrgApacheLuceneAnalysisHunspellDictionary_NOFLAGS, NULL, .constantValue.asLong = 0 },
+    { "ALIAS_KEY", "ALIAS_KEY", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_ALIAS_KEY, NULL, .constantValue.asLong = 0 },
+    { "MORPH_ALIAS_KEY", "MORPH_ALIAS_KEY", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_MORPH_ALIAS_KEY, NULL, .constantValue.asLong = 0 },
+    { "PREFIX_KEY", "PREFIX_KEY", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_PREFIX_KEY, NULL, .constantValue.asLong = 0 },
+    { "SUFFIX_KEY", "SUFFIX_KEY", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_SUFFIX_KEY, NULL, .constantValue.asLong = 0 },
+    { "FLAG_KEY", "FLAG_KEY", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_FLAG_KEY, NULL, .constantValue.asLong = 0 },
+    { "COMPLEXPREFIXES_KEY", "COMPLEXPREFIXES_KEY", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_COMPLEXPREFIXES_KEY, NULL, .constantValue.asLong = 0 },
+    { "CIRCUMFIX_KEY", "CIRCUMFIX_KEY", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_CIRCUMFIX_KEY, NULL, .constantValue.asLong = 0 },
+    { "IGNORE_KEY", "IGNORE_KEY", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_IGNORE_KEY, NULL, .constantValue.asLong = 0 },
+    { "ICONV_KEY", "ICONV_KEY", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_ICONV_KEY, NULL, .constantValue.asLong = 0 },
+    { "OCONV_KEY", "OCONV_KEY", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_OCONV_KEY, NULL, .constantValue.asLong = 0 },
+    { "FULLSTRIP_KEY", "FULLSTRIP_KEY", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_FULLSTRIP_KEY, NULL, .constantValue.asLong = 0 },
+    { "LANG_KEY", "LANG_KEY", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_LANG_KEY, NULL, .constantValue.asLong = 0 },
+    { "KEEPCASE_KEY", "KEEPCASE_KEY", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_KEEPCASE_KEY, NULL, .constantValue.asLong = 0 },
+    { "NEEDAFFIX_KEY", "NEEDAFFIX_KEY", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_NEEDAFFIX_KEY, NULL, .constantValue.asLong = 0 },
+    { "PSEUDOROOT_KEY", "PSEUDOROOT_KEY", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_PSEUDOROOT_KEY, NULL, .constantValue.asLong = 0 },
+    { "ONLYINCOMPOUND_KEY", "ONLYINCOMPOUND_KEY", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_ONLYINCOMPOUND_KEY, NULL, .constantValue.asLong = 0 },
+    { "NUM_FLAG_TYPE", "NUM_FLAG_TYPE", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_NUM_FLAG_TYPE, NULL, .constantValue.asLong = 0 },
+    { "UTF8_FLAG_TYPE", "UTF8_FLAG_TYPE", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_UTF8_FLAG_TYPE, NULL, .constantValue.asLong = 0 },
+    { "LONG_FLAG_TYPE", "LONG_FLAG_TYPE", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_LONG_FLAG_TYPE, NULL, .constantValue.asLong = 0 },
+    { "PREFIX_CONDITION_REGEX_PATTERN", "PREFIX_CONDITION_REGEX_PATTERN", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_PREFIX_CONDITION_REGEX_PATTERN, NULL, .constantValue.asLong = 0 },
+    { "SUFFIX_CONDITION_REGEX_PATTERN", "SUFFIX_CONDITION_REGEX_PATTERN", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellDictionary_SUFFIX_CONDITION_REGEX_PATTERN, NULL, .constantValue.asLong = 0 },
     { "prefixes_", NULL, 0x0, "Lorg.apache.lucene.util.fst.FST;", NULL, "Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/IntsRef;>;", .constantValue.asLong = 0 },
     { "suffixes_", NULL, 0x0, "Lorg.apache.lucene.util.fst.FST;", NULL, "Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/IntsRef;>;", .constantValue.asLong = 0 },
     { "patterns_", NULL, 0x0, "Ljava.util.ArrayList;", NULL, "Ljava/util/ArrayList<Lorg/apache/lucene/util/automaton/CharacterRunAutomaton;>;", .constantValue.asLong = 0 },
@@ -653,8 +743,8 @@ id<JavaUtilMap> OrgApacheLuceneAnalysisHunspellDictionary_CHARSET_ALIASES_;
     { "fullStrip_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
     { "language_", NULL, 0x0, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
     { "alternateCasing_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "ENCODING_PATTERN_", NULL, 0x18, "Ljava.util.regex.Pattern;", &OrgApacheLuceneAnalysisHunspellDictionary_ENCODING_PATTERN_, NULL, .constantValue.asLong = 0 },
-    { "CHARSET_ALIASES_", NULL, 0x18, "Ljava.util.Map;", &OrgApacheLuceneAnalysisHunspellDictionary_CHARSET_ALIASES_, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", .constantValue.asLong = 0 },
+    { "ENCODING_PATTERN", "ENCODING_PATTERN", 0x18, "Ljava.util.regex.Pattern;", &OrgApacheLuceneAnalysisHunspellDictionary_ENCODING_PATTERN, NULL, .constantValue.asLong = 0 },
+    { "CHARSET_ALIASES", "CHARSET_ALIASES", 0x18, "Ljava.util.Map;", &OrgApacheLuceneAnalysisHunspellDictionary_CHARSET_ALIASES, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", .constantValue.asLong = 0 },
     { "FLAG_SEPARATOR", "FLAG_SEPARATOR", 0x10, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisHunspellDictionary_FLAG_SEPARATOR },
     { "MORPH_SEPARATOR", "MORPH_SEPARATOR", 0x10, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisHunspellDictionary_MORPH_SEPARATOR },
   };
@@ -670,9 +760,11 @@ void OrgApacheLuceneAnalysisHunspellDictionary_initWithJavaIoInputStream_withJav
 }
 
 OrgApacheLuceneAnalysisHunspellDictionary *new_OrgApacheLuceneAnalysisHunspellDictionary_initWithJavaIoInputStream_withJavaIoInputStream_(JavaIoInputStream *affix, JavaIoInputStream *dictionary) {
-  OrgApacheLuceneAnalysisHunspellDictionary *self = [OrgApacheLuceneAnalysisHunspellDictionary alloc];
-  OrgApacheLuceneAnalysisHunspellDictionary_initWithJavaIoInputStream_withJavaIoInputStream_(self, affix, dictionary);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisHunspellDictionary, initWithJavaIoInputStream_withJavaIoInputStream_, affix, dictionary)
+}
+
+OrgApacheLuceneAnalysisHunspellDictionary *create_OrgApacheLuceneAnalysisHunspellDictionary_initWithJavaIoInputStream_withJavaIoInputStream_(JavaIoInputStream *affix, JavaIoInputStream *dictionary) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisHunspellDictionary, initWithJavaIoInputStream_withJavaIoInputStream_, affix, dictionary)
 }
 
 void OrgApacheLuceneAnalysisHunspellDictionary_initWithJavaIoInputStream_withJavaUtilList_withBoolean_(OrgApacheLuceneAnalysisHunspellDictionary *self, JavaIoInputStream *affix, id<JavaUtilList> dictionaries, jboolean ignoreCase) {
@@ -694,9 +786,9 @@ void OrgApacheLuceneAnalysisHunspellDictionary_initWithJavaIoInputStream_withJav
   self->ignoreCase_ = ignoreCase;
   self->needsInputCleaning_ = ignoreCase;
   self->needsOutputCleaning_ = false;
-  [self->flagLookup_ addWithOrgApacheLuceneUtilBytesRef:[new_OrgApacheLuceneUtilBytesRef_init() autorelease]];
+  [((OrgApacheLuceneUtilBytesRefHash *) nil_chk(self->flagLookup_)) addWithOrgApacheLuceneUtilBytesRef:create_OrgApacheLuceneUtilBytesRef_init()];
   OrgLukhnosPortmobileFilePath *aff = OrgLukhnosPortmobileFileFiles_createTempFileWithOrgLukhnosPortmobileFilePath_withNSString_withNSString_(self->tempDir_, @"affix", @"aff");
-  JavaIoOutputStream *out = [new_JavaIoBufferedOutputStream_initWithJavaIoOutputStream_(OrgLukhnosPortmobileFileFiles_newOutputStreamWithOrgLukhnosPortmobileFilePath_(aff)) autorelease];
+  JavaIoOutputStream *out = create_JavaIoBufferedOutputStream_initWithJavaIoOutputStream_(OrgLukhnosPortmobileFileFiles_newOutputStreamWithOrgLukhnosPortmobileFilePath_(aff));
   JavaIoInputStream *aff1 = nil;
   JavaIoInputStream *aff2 = nil;
   jboolean success = false;
@@ -707,13 +799,13 @@ void OrgApacheLuceneAnalysisHunspellDictionary_initWithJavaIoInputStream_withJav
       [out writeWithByteArray:buffer withInt:0 withInt:len];
     }
     [out close];
-    aff1 = [new_JavaIoBufferedInputStream_initWithJavaIoInputStream_(OrgLukhnosPortmobileFileFiles_newInputStreamWithOrgLukhnosPortmobileFilePath_(aff)) autorelease];
+    aff1 = create_JavaIoBufferedInputStream_initWithJavaIoInputStream_(OrgLukhnosPortmobileFileFiles_newInputStreamWithOrgLukhnosPortmobileFilePath_(aff));
     NSString *encoding = OrgApacheLuceneAnalysisHunspellDictionary_getDictionaryEncodingWithJavaIoInputStream_(aff1);
     JavaNioCharsetCharsetDecoder *decoder = OrgApacheLuceneAnalysisHunspellDictionary_getJavaEncodingWithNSString_(self, encoding);
-    aff2 = [new_JavaIoBufferedInputStream_initWithJavaIoInputStream_(OrgLukhnosPortmobileFileFiles_newInputStreamWithOrgLukhnosPortmobileFilePath_(aff)) autorelease];
+    aff2 = create_JavaIoBufferedInputStream_initWithJavaIoInputStream_(OrgLukhnosPortmobileFileFiles_newInputStreamWithOrgLukhnosPortmobileFilePath_(aff));
     OrgApacheLuceneAnalysisHunspellDictionary_readAffixFileWithJavaIoInputStream_withJavaNioCharsetCharsetDecoder_(self, aff2, decoder);
     OrgApacheLuceneUtilFstIntSequenceOutputs *o = OrgApacheLuceneUtilFstIntSequenceOutputs_getSingleton();
-    OrgApacheLuceneUtilFstBuilder *b = [new_OrgApacheLuceneUtilFstBuilder_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_withOrgApacheLuceneUtilFstOutputs_(JreLoadStatic(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum, BYTE4), o) autorelease];
+    OrgApacheLuceneUtilFstBuilder *b = create_OrgApacheLuceneUtilFstBuilder_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE_withOrgApacheLuceneUtilFstOutputs_(JreLoadEnum(OrgApacheLuceneUtilFstFST_INPUT_TYPE, BYTE4), o);
     OrgApacheLuceneAnalysisHunspellDictionary_readDictionaryFilesWithJavaUtilList_withJavaNioCharsetCharsetDecoder_withOrgApacheLuceneUtilFstBuilder_(self, dictionaries, decoder, b);
     JreStrongAssign(&self->words_, [b finish]);
     JreStrongAssign(&self->aliases_, nil);
@@ -732,85 +824,87 @@ void OrgApacheLuceneAnalysisHunspellDictionary_initWithJavaIoInputStream_withJav
 }
 
 OrgApacheLuceneAnalysisHunspellDictionary *new_OrgApacheLuceneAnalysisHunspellDictionary_initWithJavaIoInputStream_withJavaUtilList_withBoolean_(JavaIoInputStream *affix, id<JavaUtilList> dictionaries, jboolean ignoreCase) {
-  OrgApacheLuceneAnalysisHunspellDictionary *self = [OrgApacheLuceneAnalysisHunspellDictionary alloc];
-  OrgApacheLuceneAnalysisHunspellDictionary_initWithJavaIoInputStream_withJavaUtilList_withBoolean_(self, affix, dictionaries, ignoreCase);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisHunspellDictionary, initWithJavaIoInputStream_withJavaUtilList_withBoolean_, affix, dictionaries, ignoreCase)
+}
+
+OrgApacheLuceneAnalysisHunspellDictionary *create_OrgApacheLuceneAnalysisHunspellDictionary_initWithJavaIoInputStream_withJavaUtilList_withBoolean_(JavaIoInputStream *affix, id<JavaUtilList> dictionaries, jboolean ignoreCase) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisHunspellDictionary, initWithJavaIoInputStream_withJavaUtilList_withBoolean_, affix, dictionaries, ignoreCase)
 }
 
 void OrgApacheLuceneAnalysisHunspellDictionary_readAffixFileWithJavaIoInputStream_withJavaNioCharsetCharsetDecoder_(OrgApacheLuceneAnalysisHunspellDictionary *self, JavaIoInputStream *affixStream, JavaNioCharsetCharsetDecoder *decoder) {
-  JavaUtilTreeMap *prefixes = [new_JavaUtilTreeMap_init() autorelease];
-  JavaUtilTreeMap *suffixes = [new_JavaUtilTreeMap_init() autorelease];
-  id<JavaUtilMap> seenPatterns = [new_JavaUtilHashMap_init() autorelease];
+  JavaUtilTreeMap *prefixes = create_JavaUtilTreeMap_init();
+  JavaUtilTreeMap *suffixes = create_JavaUtilTreeMap_init();
+  id<JavaUtilMap> seenPatterns = create_JavaUtilHashMap_init();
   [seenPatterns putWithId:@".*" withId:JavaLangInteger_valueOfWithInt_(0)];
   [((JavaUtilArrayList *) nil_chk(self->patterns_)) addWithId:nil];
-  id<JavaUtilMap> seenStrips = [new_JavaUtilLinkedHashMap_init() autorelease];
+  id<JavaUtilMap> seenStrips = create_JavaUtilLinkedHashMap_init();
   [seenStrips putWithId:@"" withId:JavaLangInteger_valueOfWithInt_(0)];
-  JavaIoLineNumberReader *reader = [new_JavaIoLineNumberReader_initWithJavaIoReader_([new_JavaIoInputStreamReader_initWithJavaIoInputStream_withJavaNioCharsetCharsetDecoder_(affixStream, decoder) autorelease]) autorelease];
+  JavaIoLineNumberReader *reader = create_JavaIoLineNumberReader_initWithJavaIoReader_(create_JavaIoInputStreamReader_initWithJavaIoInputStream_withJavaNioCharsetCharsetDecoder_(affixStream, decoder));
   NSString *line = nil;
   while ((line = [reader readLine]) != nil) {
     if ([reader getLineNumber] == 1 && [((NSString *) nil_chk(line)) hasPrefix:@"\ufeff"]) {
-      line = [line substring:1];
+      line = [((NSString *) nil_chk(line)) substring:1];
     }
-    if ([((NSString *) nil_chk(line)) hasPrefix:OrgApacheLuceneAnalysisHunspellDictionary_ALIAS_KEY_]) {
+    if ([((NSString *) nil_chk(line)) hasPrefix:OrgApacheLuceneAnalysisHunspellDictionary_ALIAS_KEY]) {
       OrgApacheLuceneAnalysisHunspellDictionary_parseAliasWithNSString_(self, line);
     }
-    else if ([line hasPrefix:OrgApacheLuceneAnalysisHunspellDictionary_MORPH_ALIAS_KEY_]) {
+    else if ([line hasPrefix:OrgApacheLuceneAnalysisHunspellDictionary_MORPH_ALIAS_KEY]) {
       OrgApacheLuceneAnalysisHunspellDictionary_parseMorphAliasWithNSString_(self, line);
     }
-    else if ([line hasPrefix:OrgApacheLuceneAnalysisHunspellDictionary_PREFIX_KEY_]) {
-      OrgApacheLuceneAnalysisHunspellDictionary_parseAffixWithJavaUtilTreeMap_withNSString_withJavaIoLineNumberReader_withNSString_withJavaUtilMap_withJavaUtilMap_(self, prefixes, line, reader, OrgApacheLuceneAnalysisHunspellDictionary_PREFIX_CONDITION_REGEX_PATTERN_, seenPatterns, seenStrips);
+    else if ([line hasPrefix:OrgApacheLuceneAnalysisHunspellDictionary_PREFIX_KEY]) {
+      OrgApacheLuceneAnalysisHunspellDictionary_parseAffixWithJavaUtilTreeMap_withNSString_withJavaIoLineNumberReader_withNSString_withJavaUtilMap_withJavaUtilMap_(self, prefixes, line, reader, OrgApacheLuceneAnalysisHunspellDictionary_PREFIX_CONDITION_REGEX_PATTERN, seenPatterns, seenStrips);
     }
-    else if ([line hasPrefix:OrgApacheLuceneAnalysisHunspellDictionary_SUFFIX_KEY_]) {
-      OrgApacheLuceneAnalysisHunspellDictionary_parseAffixWithJavaUtilTreeMap_withNSString_withJavaIoLineNumberReader_withNSString_withJavaUtilMap_withJavaUtilMap_(self, suffixes, line, reader, OrgApacheLuceneAnalysisHunspellDictionary_SUFFIX_CONDITION_REGEX_PATTERN_, seenPatterns, seenStrips);
+    else if ([line hasPrefix:OrgApacheLuceneAnalysisHunspellDictionary_SUFFIX_KEY]) {
+      OrgApacheLuceneAnalysisHunspellDictionary_parseAffixWithJavaUtilTreeMap_withNSString_withJavaIoLineNumberReader_withNSString_withJavaUtilMap_withJavaUtilMap_(self, suffixes, line, reader, OrgApacheLuceneAnalysisHunspellDictionary_SUFFIX_CONDITION_REGEX_PATTERN, seenPatterns, seenStrips);
     }
-    else if ([line hasPrefix:OrgApacheLuceneAnalysisHunspellDictionary_FLAG_KEY_]) {
+    else if ([line hasPrefix:OrgApacheLuceneAnalysisHunspellDictionary_FLAG_KEY]) {
       JreStrongAssign(&self->flagParsingStrategy_, OrgApacheLuceneAnalysisHunspellDictionary_getFlagParsingStrategyWithNSString_(line));
     }
-    else if ([line isEqual:OrgApacheLuceneAnalysisHunspellDictionary_COMPLEXPREFIXES_KEY_]) {
+    else if ([line isEqual:OrgApacheLuceneAnalysisHunspellDictionary_COMPLEXPREFIXES_KEY]) {
       self->complexPrefixes_ = true;
     }
-    else if ([line hasPrefix:OrgApacheLuceneAnalysisHunspellDictionary_CIRCUMFIX_KEY_]) {
+    else if ([line hasPrefix:OrgApacheLuceneAnalysisHunspellDictionary_CIRCUMFIX_KEY]) {
       IOSObjectArray *parts = [line split:@"\\s+"];
       if (((IOSObjectArray *) nil_chk(parts))->size_ != 2) {
-        @throw [new_JavaTextParseException_initWithNSString_withInt_(@"Illegal CIRCUMFIX declaration", [reader getLineNumber]) autorelease];
+        @throw create_JavaTextParseException_initWithNSString_withInt_(@"Illegal CIRCUMFIX declaration", [reader getLineNumber]);
       }
       self->circumfix_ = [((OrgApacheLuceneAnalysisHunspellDictionary_FlagParsingStrategy *) nil_chk(self->flagParsingStrategy_)) parseFlagWithNSString:IOSObjectArray_Get(parts, 1)];
     }
-    else if ([line hasPrefix:OrgApacheLuceneAnalysisHunspellDictionary_KEEPCASE_KEY_]) {
+    else if ([line hasPrefix:OrgApacheLuceneAnalysisHunspellDictionary_KEEPCASE_KEY]) {
       IOSObjectArray *parts = [line split:@"\\s+"];
       if (((IOSObjectArray *) nil_chk(parts))->size_ != 2) {
-        @throw [new_JavaTextParseException_initWithNSString_withInt_(@"Illegal KEEPCASE declaration", [reader getLineNumber]) autorelease];
+        @throw create_JavaTextParseException_initWithNSString_withInt_(@"Illegal KEEPCASE declaration", [reader getLineNumber]);
       }
       self->keepcase_ = [((OrgApacheLuceneAnalysisHunspellDictionary_FlagParsingStrategy *) nil_chk(self->flagParsingStrategy_)) parseFlagWithNSString:IOSObjectArray_Get(parts, 1)];
     }
-    else if ([line hasPrefix:OrgApacheLuceneAnalysisHunspellDictionary_NEEDAFFIX_KEY_] || [line hasPrefix:OrgApacheLuceneAnalysisHunspellDictionary_PSEUDOROOT_KEY_]) {
+    else if ([line hasPrefix:OrgApacheLuceneAnalysisHunspellDictionary_NEEDAFFIX_KEY] || [line hasPrefix:OrgApacheLuceneAnalysisHunspellDictionary_PSEUDOROOT_KEY]) {
       IOSObjectArray *parts = [line split:@"\\s+"];
       if (((IOSObjectArray *) nil_chk(parts))->size_ != 2) {
-        @throw [new_JavaTextParseException_initWithNSString_withInt_(@"Illegal NEEDAFFIX declaration", [reader getLineNumber]) autorelease];
+        @throw create_JavaTextParseException_initWithNSString_withInt_(@"Illegal NEEDAFFIX declaration", [reader getLineNumber]);
       }
       self->needaffix_ = [((OrgApacheLuceneAnalysisHunspellDictionary_FlagParsingStrategy *) nil_chk(self->flagParsingStrategy_)) parseFlagWithNSString:IOSObjectArray_Get(parts, 1)];
     }
-    else if ([line hasPrefix:OrgApacheLuceneAnalysisHunspellDictionary_ONLYINCOMPOUND_KEY_]) {
+    else if ([line hasPrefix:OrgApacheLuceneAnalysisHunspellDictionary_ONLYINCOMPOUND_KEY]) {
       IOSObjectArray *parts = [line split:@"\\s+"];
       if (((IOSObjectArray *) nil_chk(parts))->size_ != 2) {
-        @throw [new_JavaTextParseException_initWithNSString_withInt_(@"Illegal ONLYINCOMPOUND declaration", [reader getLineNumber]) autorelease];
+        @throw create_JavaTextParseException_initWithNSString_withInt_(@"Illegal ONLYINCOMPOUND declaration", [reader getLineNumber]);
       }
       self->onlyincompound_ = [((OrgApacheLuceneAnalysisHunspellDictionary_FlagParsingStrategy *) nil_chk(self->flagParsingStrategy_)) parseFlagWithNSString:IOSObjectArray_Get(parts, 1)];
     }
-    else if ([line hasPrefix:OrgApacheLuceneAnalysisHunspellDictionary_IGNORE_KEY_]) {
+    else if ([line hasPrefix:OrgApacheLuceneAnalysisHunspellDictionary_IGNORE_KEY]) {
       IOSObjectArray *parts = [line split:@"\\s+"];
       if (((IOSObjectArray *) nil_chk(parts))->size_ != 2) {
-        @throw [new_JavaTextParseException_initWithNSString_withInt_(@"Illegal IGNORE declaration", [reader getLineNumber]) autorelease];
+        @throw create_JavaTextParseException_initWithNSString_withInt_(@"Illegal IGNORE declaration", [reader getLineNumber]);
       }
       JreStrongAssign(&self->ignore_, [((NSString *) nil_chk(IOSObjectArray_Get(parts, 1))) toCharArray]);
       JavaUtilArrays_sortWithCharArray_(self->ignore_);
       self->needsInputCleaning_ = true;
     }
-    else if ([line hasPrefix:OrgApacheLuceneAnalysisHunspellDictionary_ICONV_KEY_] || [line hasPrefix:OrgApacheLuceneAnalysisHunspellDictionary_OCONV_KEY_]) {
+    else if ([line hasPrefix:OrgApacheLuceneAnalysisHunspellDictionary_ICONV_KEY] || [line hasPrefix:OrgApacheLuceneAnalysisHunspellDictionary_OCONV_KEY]) {
       IOSObjectArray *parts = [line split:@"\\s+"];
       NSString *type = IOSObjectArray_Get(nil_chk(parts), 0);
       if (parts->size_ != 2) {
-        @throw [new_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$$$", @"Illegal ", type, @" declaration"), [reader getLineNumber]) autorelease];
+        @throw create_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$$$", @"Illegal ", type, @" declaration"), [reader getLineNumber]);
       }
       jint num = JavaLangInteger_parseIntWithNSString_(IOSObjectArray_Get(parts, 1));
       OrgApacheLuceneUtilFstFST *res = OrgApacheLuceneAnalysisHunspellDictionary_parseConversionsWithJavaIoLineNumberReader_withInt_(self, reader, num);
@@ -823,11 +917,11 @@ void OrgApacheLuceneAnalysisHunspellDictionary_readAffixFileWithJavaIoInputStrea
         self->needsOutputCleaning_ |= (self->oconv_ != nil);
       }
     }
-    else if ([line hasPrefix:OrgApacheLuceneAnalysisHunspellDictionary_FULLSTRIP_KEY_]) {
+    else if ([line hasPrefix:OrgApacheLuceneAnalysisHunspellDictionary_FULLSTRIP_KEY]) {
       self->fullStrip_ = true;
     }
-    else if ([line hasPrefix:OrgApacheLuceneAnalysisHunspellDictionary_LANG_KEY_]) {
-      JreStrongAssign(&self->language_, [((NSString *) nil_chk([line substring:((jint) [((NSString *) nil_chk(OrgApacheLuceneAnalysisHunspellDictionary_LANG_KEY_)) length])])) trim]);
+    else if ([line hasPrefix:OrgApacheLuceneAnalysisHunspellDictionary_LANG_KEY]) {
+      JreStrongAssign(&self->language_, [((NSString *) nil_chk([line substring:((jint) [((NSString *) nil_chk(OrgApacheLuceneAnalysisHunspellDictionary_LANG_KEY)) length])])) trim]);
       self->alternateCasing_ = ([@"tr_TR" isEqual:self->language_] || [@"az_AZ" isEqual:self->language_]);
     }
   }
@@ -842,22 +936,22 @@ void OrgApacheLuceneAnalysisHunspellDictionary_readAffixFileWithJavaIoInputStrea
   jint currentOffset = 0;
   jint currentIndex = 0;
   for (NSString * __strong strip in nil_chk([seenStrips keySet])) {
-    *IOSIntArray_GetRef(self->stripOffsets_, currentIndex++) = currentOffset;
-    [strip getChars:0 sourceEnd:((jint) [((NSString *) nil_chk(strip)) length]) destination:self->stripData_ destinationBegin:currentOffset];
+    *IOSIntArray_GetRef(nil_chk(self->stripOffsets_), currentIndex++) = currentOffset;
+    [((NSString *) nil_chk(strip)) getChars:0 sourceEnd:((jint) [strip length]) destination:self->stripData_ destinationBegin:currentOffset];
     currentOffset += ((jint) [strip length]);
   }
   JreAssert((currentIndex == [seenStrips size]), (@"org/apache/lucene/analysis/hunspell/Dictionary.java:403 condition failed: assert currentIndex == seenStrips.size();"));
-  *IOSIntArray_GetRef(self->stripOffsets_, currentIndex) = currentOffset;
+  *IOSIntArray_GetRef(nil_chk(self->stripOffsets_), currentIndex) = currentOffset;
 }
 
 OrgApacheLuceneUtilFstFST *OrgApacheLuceneAnalysisHunspellDictionary_affixFSTWithJavaUtilTreeMap_(OrgApacheLuceneAnalysisHunspellDictionary *self, JavaUtilTreeMap *affixes) {
   OrgApacheLuceneUtilFstIntSequenceOutputs *outputs = OrgApacheLuceneUtilFstIntSequenceOutputs_getSingleton();
-  OrgApacheLuceneUtilFstBuilder *builder = [new_OrgApacheLuceneUtilFstBuilder_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_withOrgApacheLuceneUtilFstOutputs_(JreLoadStatic(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum, BYTE4), outputs) autorelease];
-  OrgApacheLuceneUtilIntsRefBuilder *scratch = [new_OrgApacheLuceneUtilIntsRefBuilder_init() autorelease];
+  OrgApacheLuceneUtilFstBuilder *builder = create_OrgApacheLuceneUtilFstBuilder_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE_withOrgApacheLuceneUtilFstOutputs_(JreLoadEnum(OrgApacheLuceneUtilFstFST_INPUT_TYPE, BYTE4), outputs);
+  OrgApacheLuceneUtilIntsRefBuilder *scratch = create_OrgApacheLuceneUtilIntsRefBuilder_init();
   for (id<JavaUtilMap_Entry> __strong entry_ in nil_chk([((JavaUtilTreeMap *) nil_chk(affixes)) entrySet])) {
     OrgApacheLuceneUtilFstUtil_toUTF32WithJavaLangCharSequence_withOrgApacheLuceneUtilIntsRefBuilder_([((id<JavaUtilMap_Entry>) nil_chk(entry_)) getKey], scratch);
     id<JavaUtilList> entries = [entry_ getValue];
-    OrgApacheLuceneUtilIntsRef *output = [new_OrgApacheLuceneUtilIntsRef_initWithInt_([((id<JavaUtilList>) nil_chk(entries)) size]) autorelease];
+    OrgApacheLuceneUtilIntsRef *output = create_OrgApacheLuceneUtilIntsRef_initWithInt_([((id<JavaUtilList>) nil_chk(entries)) size]);
     for (JavaLangInteger * __strong c in entries) {
       *IOSIntArray_GetRef(nil_chk(output->ints_), output->length_++) = [((JavaLangInteger *) nil_chk(c)) intValue];
     }
@@ -868,7 +962,7 @@ OrgApacheLuceneUtilFstFST *OrgApacheLuceneAnalysisHunspellDictionary_affixFSTWit
 
 NSString *OrgApacheLuceneAnalysisHunspellDictionary_escapeDashWithNSString_(NSString *re) {
   OrgApacheLuceneAnalysisHunspellDictionary_initialize();
-  JavaLangStringBuilder *escaped = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *escaped = create_JavaLangStringBuilder_init();
   for (jint i = 0; i < ((jint) [((NSString *) nil_chk(re)) length]); i++) {
     jchar c = [re charAtWithInt:i];
     if (c == '-') {
@@ -886,20 +980,20 @@ NSString *OrgApacheLuceneAnalysisHunspellDictionary_escapeDashWithNSString_(NSSt
 }
 
 void OrgApacheLuceneAnalysisHunspellDictionary_parseAffixWithJavaUtilTreeMap_withNSString_withJavaIoLineNumberReader_withNSString_withJavaUtilMap_withJavaUtilMap_(OrgApacheLuceneAnalysisHunspellDictionary *self, JavaUtilTreeMap *affixes, NSString *header, JavaIoLineNumberReader *reader, NSString *conditionPattern, id<JavaUtilMap> seenPatterns, id<JavaUtilMap> seenStrips) {
-  OrgApacheLuceneUtilBytesRefBuilder *scratch = [new_OrgApacheLuceneUtilBytesRefBuilder_init() autorelease];
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+  OrgApacheLuceneUtilBytesRefBuilder *scratch = create_OrgApacheLuceneUtilBytesRefBuilder_init();
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   IOSObjectArray *args = [((NSString *) nil_chk(header)) split:@"\\s+"];
   jboolean crossProduct = [((NSString *) nil_chk(IOSObjectArray_Get(nil_chk(args), 2))) isEqual:@"Y"];
-  jboolean isSuffix = conditionPattern == OrgApacheLuceneAnalysisHunspellDictionary_SUFFIX_CONDITION_REGEX_PATTERN_;
+  jboolean isSuffix = conditionPattern == OrgApacheLuceneAnalysisHunspellDictionary_SUFFIX_CONDITION_REGEX_PATTERN;
   jint numLines = JavaLangInteger_parseIntWithNSString_(IOSObjectArray_Get(args, 3));
   JreStrongAssign(&self->affixData_, OrgApacheLuceneUtilArrayUtil_growWithByteArray_withInt_(self->affixData_, (JreLShift32(self->currentAffix_, 3)) + (JreLShift32(numLines, 3))));
-  OrgApacheLuceneStoreByteArrayDataOutput *affixWriter = [new_OrgApacheLuceneStoreByteArrayDataOutput_initWithByteArray_withInt_withInt_(self->affixData_, JreLShift32(self->currentAffix_, 3), JreLShift32(numLines, 3)) autorelease];
+  OrgApacheLuceneStoreByteArrayDataOutput *affixWriter = create_OrgApacheLuceneStoreByteArrayDataOutput_initWithByteArray_withInt_withInt_(self->affixData_, JreLShift32(self->currentAffix_, 3), JreLShift32(numLines, 3));
   for (jint i = 0; i < numLines; i++) {
     JreAssert(([affixWriter getPosition] == JreLShift32(self->currentAffix_, 3)), (@"org/apache/lucene/analysis/hunspell/Dictionary.java:472 condition failed: assert affixWriter.getPosition() == currentAffix << 3;"));
     NSString *line = [((JavaIoLineNumberReader *) nil_chk(reader)) readLine];
     IOSObjectArray *ruleArgs = [((NSString *) nil_chk(line)) split:@"\\s+"];
     if (((IOSObjectArray *) nil_chk(ruleArgs))->size_ < 4) {
-      @throw [new_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$$", @"The affix file contains a rule with less than four elements: ", line), [reader getLineNumber]) autorelease];
+      @throw create_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$$", @"The affix file contains a rule with less than four elements: ", line), [reader getLineNumber]);
     }
     jchar flag = [((OrgApacheLuceneAnalysisHunspellDictionary_FlagParsingStrategy *) nil_chk(self->flagParsingStrategy_)) parseFlagWithNSString:IOSObjectArray_Get(ruleArgs, 1)];
     NSString *strip = [((NSString *) nil_chk(IOSObjectArray_Get(ruleArgs, 2))) isEqual:@"0"] ? @"" : IOSObjectArray_Get(ruleArgs, 2);
@@ -912,7 +1006,7 @@ void OrgApacheLuceneAnalysisHunspellDictionary_parseAffixWithJavaUtilTreeMap_wit
       if (self->aliasCount_ > 0) {
         flagPart = OrgApacheLuceneAnalysisHunspellDictionary_getAliasValueWithInt_(self, JavaLangInteger_parseIntWithNSString_(flagPart));
       }
-      appendFlags = [self->flagParsingStrategy_ parseFlagsWithNSString:flagPart];
+      appendFlags = [((OrgApacheLuceneAnalysisHunspellDictionary_FlagParsingStrategy *) nil_chk(self->flagParsingStrategy_)) parseFlagsWithNSString:flagPart];
       JavaUtilArrays_sortWithCharArray_(appendFlags);
       self->twoStageAffix_ = true;
     }
@@ -934,28 +1028,28 @@ void OrgApacheLuceneAnalysisHunspellDictionary_parseAffixWithJavaUtilTreeMap_wit
       regex = @".*";
     }
     else {
-      regex = NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT_), conditionPattern, [IOSObjectArray arrayWithObjects:(id[]){ condition } count:1 type:NSObject_class_()]);
+      regex = NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), conditionPattern, [IOSObjectArray arrayWithObjects:(id[]){ condition } count:1 type:NSObject_class_()]);
     }
     JavaLangInteger *patternIndex = [((id<JavaUtilMap>) nil_chk(seenPatterns)) getWithId:regex];
     if (patternIndex == nil) {
       patternIndex = JavaLangInteger_valueOfWithInt_([((JavaUtilArrayList *) nil_chk(self->patterns_)) size]);
       if ([patternIndex intValue] > JavaLangShort_MAX_VALUE) {
-        @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(@"Too many patterns, please report this to dev@lucene.apache.org") autorelease];
+        @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"Too many patterns, please report this to dev@lucene.apache.org");
       }
       [seenPatterns putWithId:regex withId:patternIndex];
-      OrgApacheLuceneUtilAutomatonCharacterRunAutomaton *pattern = [new_OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_([((OrgApacheLuceneUtilAutomatonRegExp *) [new_OrgApacheLuceneUtilAutomatonRegExp_initWithNSString_withInt_(regex, OrgApacheLuceneUtilAutomatonRegExp_NONE) autorelease]) toAutomaton]) autorelease];
-      [self->patterns_ addWithId:pattern];
+      OrgApacheLuceneUtilAutomatonCharacterRunAutomaton *pattern = create_OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_([create_OrgApacheLuceneUtilAutomatonRegExp_initWithNSString_withInt_(regex, OrgApacheLuceneUtilAutomatonRegExp_NONE) toAutomaton]);
+      [((JavaUtilArrayList *) nil_chk(self->patterns_)) addWithId:pattern];
     }
     JavaLangInteger *stripOrd = [((id<JavaUtilMap>) nil_chk(seenStrips)) getWithId:strip];
     if (stripOrd == nil) {
       stripOrd = JavaLangInteger_valueOfWithInt_([seenStrips size]);
       [seenStrips putWithId:strip withId:stripOrd];
       if ([stripOrd intValue] > JavaLangCharacter_MAX_VALUE) {
-        @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(@"Too many unique strips, please report this to dev@lucene.apache.org") autorelease];
+        @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"Too many unique strips, please report this to dev@lucene.apache.org");
       }
     }
     if (appendFlags == nil) {
-      appendFlags = OrgApacheLuceneAnalysisHunspellDictionary_NOFLAGS_;
+      appendFlags = OrgApacheLuceneAnalysisHunspellDictionary_NOFLAGS;
     }
     OrgApacheLuceneAnalysisHunspellDictionary_encodeFlagsWithOrgApacheLuceneUtilBytesRefBuilder_withCharArray_(scratch, appendFlags);
     jint appendFlagsOrd = [((OrgApacheLuceneUtilBytesRefHash *) nil_chk(self->flagLookup_)) addWithOrgApacheLuceneUtilBytesRef:[scratch get]];
@@ -963,11 +1057,11 @@ void OrgApacheLuceneAnalysisHunspellDictionary_parseAffixWithJavaUtilTreeMap_wit
       appendFlagsOrd = (-appendFlagsOrd) - 1;
     }
     else if (appendFlagsOrd > JavaLangShort_MAX_VALUE) {
-      @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(@"Too many unique append flags, please report this to dev@lucene.apache.org") autorelease];
+      @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"Too many unique append flags, please report this to dev@lucene.apache.org");
     }
     [affixWriter writeShortWithShort:(jshort) flag];
-    [affixWriter writeShortWithShort:(jshort) [((JavaLangInteger *) nil_chk(stripOrd)) intValue]];
-    jint patternOrd = (JreLShift32([((JavaLangInteger *) nil_chk(patternIndex)) intValue], 1)) | (crossProduct ? 1 : 0);
+    [affixWriter writeShortWithShort:(jshort) [stripOrd intValue]];
+    jint patternOrd = (JreLShift32([patternIndex intValue], 1)) | (crossProduct ? 1 : 0);
     [affixWriter writeShortWithShort:(jshort) patternOrd];
     [affixWriter writeShortWithShort:(jshort) appendFlagsOrd];
     if (self->needsInputCleaning_) {
@@ -975,43 +1069,43 @@ void OrgApacheLuceneAnalysisHunspellDictionary_parseAffixWithJavaUtilTreeMap_wit
       affixArg = [((id<JavaLangCharSequence>) nil_chk(cleaned)) description];
     }
     if (isSuffix) {
-      affixArg = [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) [new_JavaLangStringBuilder_initWithNSString_(affixArg) autorelease]) reverse])) description];
+      affixArg = [((JavaLangStringBuilder *) nil_chk([create_JavaLangStringBuilder_initWithNSString_(affixArg) reverse])) description];
     }
     id<JavaUtilList> list = [((JavaUtilTreeMap *) nil_chk(affixes)) getWithId:affixArg];
     if (list == nil) {
-      list = [new_JavaUtilArrayList_init() autorelease];
+      list = create_JavaUtilArrayList_init();
       [affixes putWithId:affixArg withId:list];
     }
-    [((id<JavaUtilList>) nil_chk(list)) addWithId:JavaLangInteger_valueOfWithInt_(self->currentAffix_)];
+    [list addWithId:JavaLangInteger_valueOfWithInt_(self->currentAffix_)];
     self->currentAffix_++;
   }
 }
 
 OrgApacheLuceneUtilFstFST *OrgApacheLuceneAnalysisHunspellDictionary_parseConversionsWithJavaIoLineNumberReader_withInt_(OrgApacheLuceneAnalysisHunspellDictionary *self, JavaIoLineNumberReader *reader, jint num) {
-  id<JavaUtilMap> mappings = [new_JavaUtilTreeMap_init() autorelease];
+  id<JavaUtilMap> mappings = create_JavaUtilTreeMap_init();
   for (jint i = 0; i < num; i++) {
     NSString *line = [((JavaIoLineNumberReader *) nil_chk(reader)) readLine];
     IOSObjectArray *parts = [((NSString *) nil_chk(line)) split:@"\\s+"];
     if (((IOSObjectArray *) nil_chk(parts))->size_ != 3) {
-      @throw [new_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$$", @"invalid syntax: ", line), [reader getLineNumber]) autorelease];
+      @throw create_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$$", @"invalid syntax: ", line), [reader getLineNumber]);
     }
     if ([mappings putWithId:IOSObjectArray_Get(parts, 1) withId:IOSObjectArray_Get(parts, 2)] != nil) {
-      @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$", @"duplicate mapping specified for: ", IOSObjectArray_Get(parts, 1))) autorelease];
+      @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$", @"duplicate mapping specified for: ", IOSObjectArray_Get(parts, 1)));
     }
   }
   OrgApacheLuceneUtilFstOutputs *outputs = OrgApacheLuceneUtilFstCharSequenceOutputs_getSingleton();
-  OrgApacheLuceneUtilFstBuilder *builder = [new_OrgApacheLuceneUtilFstBuilder_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_withOrgApacheLuceneUtilFstOutputs_(JreLoadStatic(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum, BYTE2), outputs) autorelease];
-  OrgApacheLuceneUtilIntsRefBuilder *scratchInts = [new_OrgApacheLuceneUtilIntsRefBuilder_init() autorelease];
+  OrgApacheLuceneUtilFstBuilder *builder = create_OrgApacheLuceneUtilFstBuilder_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE_withOrgApacheLuceneUtilFstOutputs_(JreLoadEnum(OrgApacheLuceneUtilFstFST_INPUT_TYPE, BYTE2), outputs);
+  OrgApacheLuceneUtilIntsRefBuilder *scratchInts = create_OrgApacheLuceneUtilIntsRefBuilder_init();
   for (id<JavaUtilMap_Entry> __strong entry_ in nil_chk([mappings entrySet])) {
     OrgApacheLuceneUtilFstUtil_toUTF16WithJavaLangCharSequence_withOrgApacheLuceneUtilIntsRefBuilder_([((id<JavaUtilMap_Entry>) nil_chk(entry_)) getKey], scratchInts);
-    [builder addWithOrgApacheLuceneUtilIntsRef:[scratchInts get] withId:[new_OrgApacheLuceneUtilCharsRef_initWithNSString_([entry_ getValue]) autorelease]];
+    [builder addWithOrgApacheLuceneUtilIntsRef:[scratchInts get] withId:create_OrgApacheLuceneUtilCharsRef_initWithNSString_([entry_ getValue])];
   }
   return [builder finish];
 }
 
 NSString *OrgApacheLuceneAnalysisHunspellDictionary_getDictionaryEncodingWithJavaIoInputStream_(JavaIoInputStream *affix) {
   OrgApacheLuceneAnalysisHunspellDictionary_initialize();
-  JavaLangStringBuilder *encoding = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *encoding = create_JavaLangStringBuilder_init();
   for (; ; ) {
     [encoding setLengthWithInt:0];
     jint ch;
@@ -1025,11 +1119,11 @@ NSString *OrgApacheLuceneAnalysisHunspellDictionary_getDictionaryEncodingWithJav
     }
     if ([encoding length] == 0 || [encoding charAtWithInt:0] == '#' || ((jint) [((NSString *) nil_chk([((NSString *) nil_chk([encoding description])) trim])) length]) == 0) {
       if (ch < 0) {
-        @throw [new_JavaTextParseException_initWithNSString_withInt_(@"Unexpected end of affix file.", 0) autorelease];
+        @throw create_JavaTextParseException_initWithNSString_withInt_(@"Unexpected end of affix file.", 0);
       }
       continue;
     }
-    JavaUtilRegexMatcher *matcher = [((JavaUtilRegexPattern *) nil_chk(OrgApacheLuceneAnalysisHunspellDictionary_ENCODING_PATTERN_)) matcherWithJavaLangCharSequence:encoding];
+    JavaUtilRegexMatcher *matcher = [((JavaUtilRegexPattern *) nil_chk(OrgApacheLuceneAnalysisHunspellDictionary_ENCODING_PATTERN)) matcherWithJavaLangCharSequence:encoding];
     if ([((JavaUtilRegexMatcher *) nil_chk(matcher)) find]) {
       jint last = [matcher end];
       return [((NSString *) nil_chk([encoding substringWithInt:last])) trim];
@@ -1041,31 +1135,31 @@ JavaNioCharsetCharsetDecoder *OrgApacheLuceneAnalysisHunspellDictionary_getJavaE
   if ([@"ISO8859-14" isEqual:encoding]) {
     @throw [new_JavaLangRuntimeException_initWithNSString_(@"Not translated to Objective-C") autorelease];  // disabled by translate.py
   }
-  NSString *canon = [((id<JavaUtilMap>) nil_chk(OrgApacheLuceneAnalysisHunspellDictionary_CHARSET_ALIASES_)) getWithId:encoding];
+  NSString *canon = [((id<JavaUtilMap>) nil_chk(OrgApacheLuceneAnalysisHunspellDictionary_CHARSET_ALIASES)) getWithId:encoding];
   if (canon != nil) {
     encoding = canon;
   }
   JavaNioCharsetCharset *charset = JavaNioCharsetCharset_forNameWithNSString_(encoding);
-  return [((JavaNioCharsetCharsetDecoder *) nil_chk([((JavaNioCharsetCharset *) nil_chk(charset)) newDecoder])) onMalformedInputWithJavaNioCharsetCodingErrorAction:JreLoadStatic(JavaNioCharsetCodingErrorAction, REPLACE_)];
+  return [((JavaNioCharsetCharsetDecoder *) nil_chk([((JavaNioCharsetCharset *) nil_chk(charset)) newDecoder])) onMalformedInputWithJavaNioCharsetCodingErrorAction:JreLoadStatic(JavaNioCharsetCodingErrorAction, REPLACE)];
 }
 
 OrgApacheLuceneAnalysisHunspellDictionary_FlagParsingStrategy *OrgApacheLuceneAnalysisHunspellDictionary_getFlagParsingStrategyWithNSString_(NSString *flagLine) {
   OrgApacheLuceneAnalysisHunspellDictionary_initialize();
   IOSObjectArray *parts = [((NSString *) nil_chk(flagLine)) split:@"\\s+"];
   if (((IOSObjectArray *) nil_chk(parts))->size_ != 2) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$", @"Illegal FLAG specification: ", flagLine)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$", @"Illegal FLAG specification: ", flagLine));
   }
   NSString *flagType = IOSObjectArray_Get(parts, 1);
-  if ([((NSString *) nil_chk(OrgApacheLuceneAnalysisHunspellDictionary_NUM_FLAG_TYPE_)) isEqual:flagType]) {
-    return [new_OrgApacheLuceneAnalysisHunspellDictionary_NumFlagParsingStrategy_init() autorelease];
+  if ([((NSString *) nil_chk(OrgApacheLuceneAnalysisHunspellDictionary_NUM_FLAG_TYPE)) isEqual:flagType]) {
+    return create_OrgApacheLuceneAnalysisHunspellDictionary_NumFlagParsingStrategy_init();
   }
-  else if ([((NSString *) nil_chk(OrgApacheLuceneAnalysisHunspellDictionary_UTF8_FLAG_TYPE_)) isEqual:flagType]) {
-    return [new_OrgApacheLuceneAnalysisHunspellDictionary_SimpleFlagParsingStrategy_init() autorelease];
+  else if ([((NSString *) nil_chk(OrgApacheLuceneAnalysisHunspellDictionary_UTF8_FLAG_TYPE)) isEqual:flagType]) {
+    return create_OrgApacheLuceneAnalysisHunspellDictionary_SimpleFlagParsingStrategy_init();
   }
-  else if ([((NSString *) nil_chk(OrgApacheLuceneAnalysisHunspellDictionary_LONG_FLAG_TYPE_)) isEqual:flagType]) {
-    return [new_OrgApacheLuceneAnalysisHunspellDictionary_DoubleASCIIFlagParsingStrategy_init() autorelease];
+  else if ([((NSString *) nil_chk(OrgApacheLuceneAnalysisHunspellDictionary_LONG_FLAG_TYPE)) isEqual:flagType]) {
+    return create_OrgApacheLuceneAnalysisHunspellDictionary_DoubleASCIIFlagParsingStrategy_init();
   }
-  @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$", @"Unknown flag type: ", flagType)) autorelease];
+  @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$", @"Unknown flag type: ", flagType));
 }
 
 jint OrgApacheLuceneAnalysisHunspellDictionary_morphBoundaryWithNSString_(NSString *line) {
@@ -1099,16 +1193,16 @@ jint OrgApacheLuceneAnalysisHunspellDictionary_indexOfSpaceOrTabWithNSString_wit
 }
 
 void OrgApacheLuceneAnalysisHunspellDictionary_readDictionaryFilesWithJavaUtilList_withJavaNioCharsetCharsetDecoder_withOrgApacheLuceneUtilFstBuilder_(OrgApacheLuceneAnalysisHunspellDictionary *self, id<JavaUtilList> dictionaries, JavaNioCharsetCharsetDecoder *decoder, OrgApacheLuceneUtilFstBuilder *words) {
-  OrgApacheLuceneUtilBytesRefBuilder *flagsScratch = [new_OrgApacheLuceneUtilBytesRefBuilder_init() autorelease];
-  OrgApacheLuceneUtilIntsRefBuilder *scratchInts = [new_OrgApacheLuceneUtilIntsRefBuilder_init() autorelease];
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+  OrgApacheLuceneUtilBytesRefBuilder *flagsScratch = create_OrgApacheLuceneUtilBytesRefBuilder_init();
+  OrgApacheLuceneUtilIntsRefBuilder *scratchInts = create_OrgApacheLuceneUtilIntsRefBuilder_init();
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   OrgLukhnosPortmobileFilePath *unsorted = OrgLukhnosPortmobileFileFiles_createTempFileWithOrgLukhnosPortmobileFilePath_withNSString_withNSString_(self->tempDir_, @"unsorted", @"dat");
   {
-    OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter *writer = [new_OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter_initWithOrgLukhnosPortmobileFilePath_(unsorted) autorelease];
-    JavaLangThrowable *__primaryException1 = nil;
+    OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter *writer = create_OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter_initWithOrgLukhnosPortmobileFilePath_(unsorted);
+    NSException *__primaryException1 = nil;
     @try {
       for (JavaIoInputStream * __strong dictionary in nil_chk(dictionaries)) {
-        JavaIoBufferedReader *lines = [new_JavaIoBufferedReader_initWithJavaIoReader_([new_JavaIoInputStreamReader_initWithJavaIoInputStream_withJavaNioCharsetCharsetDecoder_(dictionary, decoder) autorelease]) autorelease];
+        JavaIoBufferedReader *lines = create_JavaIoBufferedReader_initWithJavaIoReader_(create_JavaIoInputStreamReader_initWithJavaIoInputStream_withJavaNioCharsetCharsetDecoder_(dictionary, decoder));
         NSString *line = [lines readLine];
         while ((line = [lines readLine]) != nil) {
           if ([((NSString *) nil_chk(line)) isEmpty] || [line charAtWithInt:0] == '/' || [line charAtWithInt:0] == '#' || [line charAtWithInt:0] == 0x0009) {
@@ -1128,7 +1222,7 @@ void OrgApacheLuceneAnalysisHunspellDictionary_readDictionaryFilesWithJavaUtilLi
             }
             if (flagSep == -1) {
               id<JavaLangCharSequence> cleansed = [self cleanInputWithJavaLangCharSequence:line withJavaLangStringBuilder:sb];
-              [writer writeWithByteArray:[((NSString *) nil_chk([((id<JavaLangCharSequence>) nil_chk(cleansed)) description])) getBytesWithCharset:JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8_)]];
+              [writer writeWithByteArray:[((NSString *) nil_chk([((id<JavaLangCharSequence>) nil_chk(cleansed)) description])) getBytesWithCharset:JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8)]];
             }
             else {
               NSString *text = [line substring:0 endIndex:flagSep];
@@ -1138,16 +1232,16 @@ void OrgApacheLuceneAnalysisHunspellDictionary_readDictionaryFilesWithJavaUtilLi
                 [sb appendWithJavaLangCharSequence:cleansed];
               }
               [sb appendWithNSString:[line substring:flagSep]];
-              [writer writeWithByteArray:[((NSString *) nil_chk([sb description])) getBytesWithCharset:JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8_)]];
+              [writer writeWithByteArray:[((NSString *) nil_chk([sb description])) getBytesWithCharset:JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8)]];
             }
           }
           else {
-            [writer writeWithByteArray:[((NSString *) nil_chk(line)) getBytesWithCharset:JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8_)]];
+            [writer writeWithByteArray:[((NSString *) nil_chk(line)) getBytesWithCharset:JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8)]];
           }
         }
       }
     }
-    @catch (JavaLangThrowable *e) {
+    @catch (NSException *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -1156,8 +1250,8 @@ void OrgApacheLuceneAnalysisHunspellDictionary_readDictionaryFilesWithJavaUtilLi
         if (__primaryException1 != nil) {
           @try {
             [writer close];
-          } @catch (JavaLangThrowable *e) {
-            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          } @catch (NSException *e) {
+            [__primaryException1 addSuppressedWithNSException:e];
           }
         } else {
           [writer close];
@@ -1166,7 +1260,7 @@ void OrgApacheLuceneAnalysisHunspellDictionary_readDictionaryFilesWithJavaUtilLi
     }
   }
   OrgLukhnosPortmobileFilePath *sorted = OrgLukhnosPortmobileFileFiles_createTempFileWithOrgLukhnosPortmobileFilePath_withNSString_withNSString_(self->tempDir_, @"sorted", @"dat");
-  OrgApacheLuceneUtilOfflineSorter *sorter = [new_OrgApacheLuceneUtilOfflineSorter_initWithJavaUtilComparator_([new_OrgApacheLuceneAnalysisHunspellDictionary_$1_initWithOrgApacheLuceneAnalysisHunspellDictionary_(self) autorelease]) autorelease];
+  OrgApacheLuceneUtilOfflineSorter *sorter = create_OrgApacheLuceneUtilOfflineSorter_initWithJavaUtilComparator_(create_OrgApacheLuceneAnalysisHunspellDictionary_$1_initWithOrgApacheLuceneAnalysisHunspellDictionary_(self));
   jboolean success = false;
   @try {
     [sorter sortWithOrgLukhnosPortmobileFilePath:unsorted withOrgLukhnosPortmobileFilePath:sorted];
@@ -1181,11 +1275,11 @@ void OrgApacheLuceneAnalysisHunspellDictionary_readDictionaryFilesWithJavaUtilLi
     }
   }
   jboolean success2 = false;
-  OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *reader = [new_OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_initWithOrgLukhnosPortmobileFilePath_(sorted) autorelease];
+  OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *reader = create_OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_initWithOrgLukhnosPortmobileFilePath_(sorted);
   @try {
-    OrgApacheLuceneUtilBytesRefBuilder *scratchLine = [new_OrgApacheLuceneUtilBytesRefBuilder_init() autorelease];
+    OrgApacheLuceneUtilBytesRefBuilder *scratchLine = create_OrgApacheLuceneUtilBytesRefBuilder_init();
     NSString *currentEntry = nil;
-    OrgApacheLuceneUtilIntsRefBuilder *currentOrds = [new_OrgApacheLuceneUtilIntsRefBuilder_init() autorelease];
+    OrgApacheLuceneUtilIntsRefBuilder *currentOrds = create_OrgApacheLuceneUtilIntsRefBuilder_init();
     NSString *line;
     while ([reader readWithOrgApacheLuceneUtilBytesRefBuilder:scratchLine]) {
       line = [((OrgApacheLuceneUtilBytesRef *) nil_chk([scratchLine get])) utf8ToString];
@@ -1194,7 +1288,7 @@ void OrgApacheLuceneAnalysisHunspellDictionary_readDictionaryFilesWithJavaUtilLi
       jint end;
       jint flagSep = [((NSString *) nil_chk(line)) indexOf:OrgApacheLuceneAnalysisHunspellDictionary_FLAG_SEPARATOR];
       if (flagSep == -1) {
-        wordForm = OrgApacheLuceneAnalysisHunspellDictionary_NOFLAGS_;
+        wordForm = OrgApacheLuceneAnalysisHunspellDictionary_NOFLAGS;
         end = [line indexOf:OrgApacheLuceneAnalysisHunspellDictionary_MORPH_SEPARATOR];
         entry_ = [line substring:0 endIndex:end];
       }
@@ -1213,7 +1307,7 @@ void OrgApacheLuceneAnalysisHunspellDictionary_readDictionaryFilesWithJavaUtilLi
         NSString *stemException = OrgApacheLuceneAnalysisHunspellDictionary_parseStemExceptionWithNSString_(self, [line substring:end + 1]);
         if (stemException != nil) {
           if (self->stemExceptionCount_ == ((IOSObjectArray *) nil_chk(self->stemExceptions_))->size_) {
-            jint newSize = OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(self->stemExceptionCount_ + 1, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_));
+            jint newSize = OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(self->stemExceptionCount_ + 1, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF));
             JreStrongAssign(&self->stemExceptions_, JavaUtilArrays_copyOfWithNSObjectArray_withInt_(self->stemExceptions_, newSize));
           }
           stemExceptionID = self->stemExceptionCount_ + 1;
@@ -1222,7 +1316,7 @@ void OrgApacheLuceneAnalysisHunspellDictionary_readDictionaryFilesWithJavaUtilLi
       }
       jint cmp = currentEntry == nil ? 1 : [((NSString *) nil_chk(entry_)) compareToWithId:currentEntry];
       if (cmp < 0) {
-        @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$$", @"out of order: ", entry_, @" < ", currentEntry)) autorelease];
+        @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$$", @"out of order: ", entry_, @" < ", currentEntry));
       }
       else {
         OrgApacheLuceneAnalysisHunspellDictionary_encodeFlagsWithOrgApacheLuceneUtilBytesRefBuilder_withCharArray_(flagsScratch, wordForm);
@@ -1236,7 +1330,7 @@ void OrgApacheLuceneAnalysisHunspellDictionary_readDictionaryFilesWithJavaUtilLi
         }
         if (cmp > 0 || currentEntry == nil) {
           currentEntry = entry_;
-          currentOrds = [new_OrgApacheLuceneUtilIntsRefBuilder_init() autorelease];
+          currentOrds = create_OrgApacheLuceneUtilIntsRefBuilder_init();
         }
         if (self->hasStemExceptions_) {
           [currentOrds appendWithInt:ord];
@@ -1265,7 +1359,7 @@ void OrgApacheLuceneAnalysisHunspellDictionary_readDictionaryFilesWithJavaUtilLi
 IOSCharArray *OrgApacheLuceneAnalysisHunspellDictionary_decodeFlagsWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *b) {
   OrgApacheLuceneAnalysisHunspellDictionary_initialize();
   if (((OrgApacheLuceneUtilBytesRef *) nil_chk(b))->length_ == 0) {
-    return JreLoadStatic(OrgApacheLuceneUtilCharsRef, EMPTY_CHARS_);
+    return JreLoadStatic(OrgApacheLuceneUtilCharsRef, EMPTY_CHARS);
   }
   jint len = JreURShift32(b->length_, 1);
   IOSCharArray *flags = [IOSCharArray arrayWithLength:len];
@@ -1306,7 +1400,7 @@ NSString *OrgApacheLuceneAnalysisHunspellDictionary_getAliasValueWithInt_(OrgApa
     return IOSObjectArray_Get(nil_chk(self->aliases_), id_ - 1);
   }
   @catch (JavaLangIndexOutOfBoundsException *ex) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_withJavaLangThrowable_(JreStrcat("$I", @"Bad flag alias number:", id_), ex) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_withNSException_(JreStrcat("$I", @"Bad flag alias number:", id_), ex);
   }
 }
 
@@ -1317,7 +1411,7 @@ void OrgApacheLuceneAnalysisHunspellDictionary_parseMorphAliasWithNSString_(OrgA
   }
   else {
     NSString *arg = [((NSString *) nil_chk(line)) substring:2];
-    IOSObjectArray_Set(self->morphAliases_, self->morphAliasCount_++, arg);
+    IOSObjectArray_Set(nil_chk(self->morphAliases_), self->morphAliasCount_++, arg);
   }
 }
 
@@ -1352,9 +1446,9 @@ jboolean OrgApacheLuceneAnalysisHunspellDictionary_hasFlagWithCharArray_withChar
 void OrgApacheLuceneAnalysisHunspellDictionary_applyMappingsWithOrgApacheLuceneUtilFstFST_withJavaLangStringBuilder_(OrgApacheLuceneUtilFstFST *fst, JavaLangStringBuilder *sb) {
   OrgApacheLuceneAnalysisHunspellDictionary_initialize();
   OrgApacheLuceneUtilFstFST_BytesReader *bytesReader = [((OrgApacheLuceneUtilFstFST *) nil_chk(fst)) getBytesReader];
-  OrgApacheLuceneUtilFstFST_Arc *firstArc = [fst getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:[new_OrgApacheLuceneUtilFstFST_Arc_init() autorelease]];
+  OrgApacheLuceneUtilFstFST_Arc *firstArc = [fst getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:create_OrgApacheLuceneUtilFstFST_Arc_init()];
   OrgApacheLuceneUtilCharsRef *NO_OUTPUT = [((OrgApacheLuceneUtilFstOutputs *) nil_chk(fst->outputs_)) getNoOutput];
-  OrgApacheLuceneUtilFstFST_Arc *arc = [new_OrgApacheLuceneUtilFstFST_Arc_init() autorelease];
+  OrgApacheLuceneUtilFstFST_Arc *arc = create_OrgApacheLuceneUtilFstFST_Arc_init();
   jint longestMatch;
   OrgApacheLuceneUtilCharsRef *longestOutput;
   for (jint i = 0; i < [((JavaLangStringBuilder *) nil_chk(sb)) length]; i++) {
@@ -1368,10 +1462,10 @@ void OrgApacheLuceneAnalysisHunspellDictionary_applyMappingsWithOrgApacheLuceneU
         break;
       }
       else {
-        output = [fst->outputs_ addWithId:output withId:arc->output_];
+        output = [fst->outputs_ addWithId:output withId:((OrgApacheLuceneUtilCharsRef *) arc->output_)];
       }
       if ([arc isFinal]) {
-        longestOutput = [fst->outputs_ addWithId:output withId:arc->nextFinalOutput_];
+        longestOutput = [fst->outputs_ addWithId:output withId:((OrgApacheLuceneUtilCharsRef *) arc->nextFinalOutput_)];
         longestMatch = j;
       }
     }
@@ -1390,7 +1484,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisHunspellDictionary)
 - (jchar)parseFlagWithNSString:(NSString *)rawFlag {
   IOSCharArray *flags = [self parseFlagsWithNSString:rawFlag];
   if (((IOSCharArray *) nil_chk(flags))->size_ != 1) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$", @"expected only one flag, got: ", rawFlag)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$", @"expected only one flag, got: ", rawFlag));
   }
   return IOSCharArray_Get(flags, 0);
 }
@@ -1412,7 +1506,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   static const J2ObjcMethodInfo methods[] = {
     { "parseFlagWithNSString:", "parseFlag", "C", 0x0, NULL, NULL },
     { "parseFlagsWithNSString:", "parseFlags", "[C", 0x400, NULL, NULL },
-    { "init", NULL, NULL, 0x0, NULL, NULL },
+    { "init", "FlagParsingStrategy", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisHunspellDictionary_FlagParsingStrategy = { 2, "FlagParsingStrategy", "org.apache.lucene.analysis.hunspell", "Dictionary", 0x408, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisHunspellDictionary_FlagParsingStrategy;
@@ -1442,7 +1536,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "parseFlagsWithNSString:", "parseFlags", "[C", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x2, NULL, NULL },
+    { "init", "SimpleFlagParsingStrategy", NULL, 0x2, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisHunspellDictionary_SimpleFlagParsingStrategy = { 2, "SimpleFlagParsingStrategy", "org.apache.lucene.analysis.hunspell", "Dictionary", 0xa, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisHunspellDictionary_SimpleFlagParsingStrategy;
@@ -1455,9 +1549,11 @@ void OrgApacheLuceneAnalysisHunspellDictionary_SimpleFlagParsingStrategy_init(Or
 }
 
 OrgApacheLuceneAnalysisHunspellDictionary_SimpleFlagParsingStrategy *new_OrgApacheLuceneAnalysisHunspellDictionary_SimpleFlagParsingStrategy_init() {
-  OrgApacheLuceneAnalysisHunspellDictionary_SimpleFlagParsingStrategy *self = [OrgApacheLuceneAnalysisHunspellDictionary_SimpleFlagParsingStrategy alloc];
-  OrgApacheLuceneAnalysisHunspellDictionary_SimpleFlagParsingStrategy_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisHunspellDictionary_SimpleFlagParsingStrategy, init)
+}
+
+OrgApacheLuceneAnalysisHunspellDictionary_SimpleFlagParsingStrategy *create_OrgApacheLuceneAnalysisHunspellDictionary_SimpleFlagParsingStrategy_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisHunspellDictionary_SimpleFlagParsingStrategy, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisHunspellDictionary_SimpleFlagParsingStrategy)
@@ -1491,7 +1587,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "parseFlagsWithNSString:", "parseFlags", "[C", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x2, NULL, NULL },
+    { "init", "NumFlagParsingStrategy", NULL, 0x2, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisHunspellDictionary_NumFlagParsingStrategy = { 2, "NumFlagParsingStrategy", "org.apache.lucene.analysis.hunspell", "Dictionary", 0xa, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisHunspellDictionary_NumFlagParsingStrategy;
@@ -1504,9 +1600,11 @@ void OrgApacheLuceneAnalysisHunspellDictionary_NumFlagParsingStrategy_init(OrgAp
 }
 
 OrgApacheLuceneAnalysisHunspellDictionary_NumFlagParsingStrategy *new_OrgApacheLuceneAnalysisHunspellDictionary_NumFlagParsingStrategy_init() {
-  OrgApacheLuceneAnalysisHunspellDictionary_NumFlagParsingStrategy *self = [OrgApacheLuceneAnalysisHunspellDictionary_NumFlagParsingStrategy alloc];
-  OrgApacheLuceneAnalysisHunspellDictionary_NumFlagParsingStrategy_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisHunspellDictionary_NumFlagParsingStrategy, init)
+}
+
+OrgApacheLuceneAnalysisHunspellDictionary_NumFlagParsingStrategy *create_OrgApacheLuceneAnalysisHunspellDictionary_NumFlagParsingStrategy_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisHunspellDictionary_NumFlagParsingStrategy, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisHunspellDictionary_NumFlagParsingStrategy)
@@ -1517,15 +1615,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisHunspellDictionary_NumFl
   if (((jint) [((NSString *) nil_chk(rawFlags)) length]) == 0) {
     return [IOSCharArray arrayWithLength:0];
   }
-  JavaLangStringBuilder *builder = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *builder = create_JavaLangStringBuilder_init();
   if (((jint) [rawFlags length]) % 2 == 1) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$", @"Invalid flags (should be even number of characters): ", rawFlags)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$", @"Invalid flags (should be even number of characters): ", rawFlags));
   }
   for (jint i = 0; i < ((jint) [rawFlags length]); i += 2) {
     jchar f1 = [rawFlags charAtWithInt:i];
     jchar f2 = [rawFlags charAtWithInt:i + 1];
     if (f1 >= 256 || f2 >= 256) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$", @"Invalid flags (LONG flags must be double ASCII): ", rawFlags)) autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$", @"Invalid flags (LONG flags must be double ASCII): ", rawFlags));
     }
     jchar combined = (jchar) ((JreLShift32(f1, 8)) | f2);
     [builder appendWithChar:combined];
@@ -1545,7 +1643,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "parseFlagsWithNSString:", "parseFlags", "[C", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x2, NULL, NULL },
+    { "init", "DoubleASCIIFlagParsingStrategy", NULL, 0x2, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisHunspellDictionary_DoubleASCIIFlagParsingStrategy = { 2, "DoubleASCIIFlagParsingStrategy", "org.apache.lucene.analysis.hunspell", "Dictionary", 0xa, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisHunspellDictionary_DoubleASCIIFlagParsingStrategy;
@@ -1558,9 +1656,11 @@ void OrgApacheLuceneAnalysisHunspellDictionary_DoubleASCIIFlagParsingStrategy_in
 }
 
 OrgApacheLuceneAnalysisHunspellDictionary_DoubleASCIIFlagParsingStrategy *new_OrgApacheLuceneAnalysisHunspellDictionary_DoubleASCIIFlagParsingStrategy_init() {
-  OrgApacheLuceneAnalysisHunspellDictionary_DoubleASCIIFlagParsingStrategy *self = [OrgApacheLuceneAnalysisHunspellDictionary_DoubleASCIIFlagParsingStrategy alloc];
-  OrgApacheLuceneAnalysisHunspellDictionary_DoubleASCIIFlagParsingStrategy_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisHunspellDictionary_DoubleASCIIFlagParsingStrategy, init)
+}
+
+OrgApacheLuceneAnalysisHunspellDictionary_DoubleASCIIFlagParsingStrategy *create_OrgApacheLuceneAnalysisHunspellDictionary_DoubleASCIIFlagParsingStrategy_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisHunspellDictionary_DoubleASCIIFlagParsingStrategy, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisHunspellDictionary_DoubleASCIIFlagParsingStrategy)
@@ -1633,9 +1733,11 @@ void OrgApacheLuceneAnalysisHunspellDictionary_$1_initWithOrgApacheLuceneAnalysi
 }
 
 OrgApacheLuceneAnalysisHunspellDictionary_$1 *new_OrgApacheLuceneAnalysisHunspellDictionary_$1_initWithOrgApacheLuceneAnalysisHunspellDictionary_(OrgApacheLuceneAnalysisHunspellDictionary *outer$) {
-  OrgApacheLuceneAnalysisHunspellDictionary_$1 *self = [OrgApacheLuceneAnalysisHunspellDictionary_$1 alloc];
-  OrgApacheLuceneAnalysisHunspellDictionary_$1_initWithOrgApacheLuceneAnalysisHunspellDictionary_(self, outer$);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisHunspellDictionary_$1, initWithOrgApacheLuceneAnalysisHunspellDictionary_, outer$)
+}
+
+OrgApacheLuceneAnalysisHunspellDictionary_$1 *create_OrgApacheLuceneAnalysisHunspellDictionary_$1_initWithOrgApacheLuceneAnalysisHunspellDictionary_(OrgApacheLuceneAnalysisHunspellDictionary *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisHunspellDictionary_$1, initWithOrgApacheLuceneAnalysisHunspellDictionary_, outer$)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisHunspellDictionary_$1)

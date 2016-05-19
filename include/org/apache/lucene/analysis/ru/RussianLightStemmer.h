@@ -5,19 +5,26 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisRuRussianLightStemmer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisRuRussianLightStemmer_RESTRICT
-#define OrgApacheLuceneAnalysisRuRussianLightStemmer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisRuRussianLightStemmer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisRuRussianLightStemmer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisRuRussianLightStemmer 0
 #else
-#define OrgApacheLuceneAnalysisRuRussianLightStemmer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisRuRussianLightStemmer 1
 #endif
-#undef OrgApacheLuceneAnalysisRuRussianLightStemmer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisRuRussianLightStemmer
 
-#if !defined (_OrgApacheLuceneAnalysisRuRussianLightStemmer_) && (OrgApacheLuceneAnalysisRuRussianLightStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisRuRussianLightStemmer_INCLUDE)
-#define _OrgApacheLuceneAnalysisRuRussianLightStemmer_
+#if !defined (OrgApacheLuceneAnalysisRuRussianLightStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisRuRussianLightStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisRuRussianLightStemmer))
+#define OrgApacheLuceneAnalysisRuRussianLightStemmer_
 
 @class IOSCharArray;
 
+/*!
+ @brief Light Stemmer for Russian.
+ <p>
+ This stemmer implements the following algorithm:
+ <i>Indexing and Searching Strategies for the Russian Language.</i>
+ Ljiljana Dolamic and Jacques Savoy.
+ */
 @interface OrgApacheLuceneAnalysisRuRussianLightStemmer : NSObject
 
 #pragma mark Public
@@ -35,8 +42,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisRuRussianLightStemmer_init(OrgApac
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisRuRussianLightStemmer *new_OrgApacheLuceneAnalysisRuRussianLightStemmer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisRuRussianLightStemmer *create_OrgApacheLuceneAnalysisRuRussianLightStemmer_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisRuRussianLightStemmer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisRuRussianLightStemmer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisRuRussianLightStemmer")

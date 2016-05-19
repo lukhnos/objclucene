@@ -5,24 +5,45 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilMergedIterator_INCLUDE_ALL")
-#if OrgApacheLuceneUtilMergedIterator_RESTRICT
-#define OrgApacheLuceneUtilMergedIterator_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilMergedIterator")
+#ifdef RESTRICT_OrgApacheLuceneUtilMergedIterator
+#define INCLUDE_ALL_OrgApacheLuceneUtilMergedIterator 0
 #else
-#define OrgApacheLuceneUtilMergedIterator_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilMergedIterator 1
 #endif
-#undef OrgApacheLuceneUtilMergedIterator_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilMergedIterator
 
-#if !defined (_OrgApacheLuceneUtilMergedIterator_) && (OrgApacheLuceneUtilMergedIterator_INCLUDE_ALL || OrgApacheLuceneUtilMergedIterator_INCLUDE)
-#define _OrgApacheLuceneUtilMergedIterator_
+#if !defined (OrgApacheLuceneUtilMergedIterator_) && (INCLUDE_ALL_OrgApacheLuceneUtilMergedIterator || defined(INCLUDE_OrgApacheLuceneUtilMergedIterator))
+#define OrgApacheLuceneUtilMergedIterator_
 
-#define JavaUtilIterator_RESTRICT 1
-#define JavaUtilIterator_INCLUDE 1
+#define RESTRICT_JavaUtilIterator 1
+#define INCLUDE_JavaUtilIterator 1
 #include "java/util/Iterator.h"
 
 @class IOSObjectArray;
 @protocol JavaLangComparable;
 
+/*!
+ @brief Provides a merged sorted view from several sorted iterators.
+ <p>
+ If built with <code>removeDuplicates</code> set to true and an element
+ appears in multiple iterators then it is deduplicated, that is this iterator
+ returns the sorted union of elements.
+ <p>
+ If built with <code>removeDuplicates</code> set to false then all elements
+ in all iterators are returned.
+ <p>
+ Caveats:
+ <ul>
+ <li>The behavior is undefined if the iterators are not actually sorted.
+ <li>Null elements are unsupported.
+ <li>If removeDuplicates is set to true and if a single iterator contains
+ duplicates then they will not be deduplicated.
+ <li>When elements are deduplicated it is not defined which one is returned.
+ <li>If removeDuplicates is set to false then the order in which duplicates
+ are returned isn't defined.
+ </ul>
+ */
 @interface OrgApacheLuceneUtilMergedIterator : NSObject < JavaUtilIterator >
 
 #pragma mark Public
@@ -46,12 +67,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilMergedIterator_initWithJavaUtilIterato
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilMergedIterator *new_OrgApacheLuceneUtilMergedIterator_initWithJavaUtilIteratorArray_(IOSObjectArray *iterators) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilMergedIterator *create_OrgApacheLuceneUtilMergedIterator_initWithJavaUtilIteratorArray_(IOSObjectArray *iterators);
+
 FOUNDATION_EXPORT void OrgApacheLuceneUtilMergedIterator_initWithBoolean_withJavaUtilIteratorArray_(OrgApacheLuceneUtilMergedIterator *self, jboolean removeDuplicates, IOSObjectArray *iterators);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilMergedIterator *new_OrgApacheLuceneUtilMergedIterator_initWithBoolean_withJavaUtilIteratorArray_(jboolean removeDuplicates, IOSObjectArray *iterators) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilMergedIterator *create_OrgApacheLuceneUtilMergedIterator_initWithBoolean_withJavaUtilIteratorArray_(jboolean removeDuplicates, IOSObjectArray *iterators);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilMergedIterator)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilMergedIterator_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilMergedIterator")

@@ -39,17 +39,19 @@ __attribute__((unused)) static void OrgApacheLuceneSearchMatchAllDocsQuery_$1_in
 
 __attribute__((unused)) static OrgApacheLuceneSearchMatchAllDocsQuery_$1 *new_OrgApacheLuceneSearchMatchAllDocsQuery_$1_initWithOrgApacheLuceneSearchMatchAllDocsQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchMatchAllDocsQuery *outer$, OrgApacheLuceneSearchQuery *arg$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchMatchAllDocsQuery_$1 *create_OrgApacheLuceneSearchMatchAllDocsQuery_$1_initWithOrgApacheLuceneSearchMatchAllDocsQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchMatchAllDocsQuery *outer$, OrgApacheLuceneSearchQuery *arg$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMatchAllDocsQuery_$1)
 
 @implementation OrgApacheLuceneSearchMatchAllDocsQuery
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores {
-  return [new_OrgApacheLuceneSearchMatchAllDocsQuery_$1_initWithOrgApacheLuceneSearchMatchAllDocsQuery_withOrgApacheLuceneSearchQuery_(self, self) autorelease];
+  return create_OrgApacheLuceneSearchMatchAllDocsQuery_$1_initWithOrgApacheLuceneSearchMatchAllDocsQuery_withOrgApacheLuceneSearchQuery_(self, self);
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
-  JavaLangStringBuilder *buffer = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_init();
   [buffer appendWithNSString:@"*:*"];
   [buffer appendWithNSString:OrgApacheLuceneUtilToStringUtils_boostWithFloat_([self getBoost])];
   return [buffer description];
@@ -66,7 +68,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   static const J2ObjcMethodInfo methods[] = {
     { "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:", "createWeight", "Lorg.apache.lucene.search.Weight;", 0x1, NULL, NULL },
     { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "MatchAllDocsQuery", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneSearchMatchAllDocsQuery = { 2, "MatchAllDocsQuery", "org.apache.lucene.search", NULL, 0x11, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchMatchAllDocsQuery;
@@ -79,9 +81,11 @@ void OrgApacheLuceneSearchMatchAllDocsQuery_init(OrgApacheLuceneSearchMatchAllDo
 }
 
 OrgApacheLuceneSearchMatchAllDocsQuery *new_OrgApacheLuceneSearchMatchAllDocsQuery_init() {
-  OrgApacheLuceneSearchMatchAllDocsQuery *self = [OrgApacheLuceneSearchMatchAllDocsQuery alloc];
-  OrgApacheLuceneSearchMatchAllDocsQuery_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchMatchAllDocsQuery, init)
+}
+
+OrgApacheLuceneSearchMatchAllDocsQuery *create_OrgApacheLuceneSearchMatchAllDocsQuery_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchMatchAllDocsQuery, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchMatchAllDocsQuery)
@@ -89,7 +93,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchMatchAllDocsQuery)
 @implementation OrgApacheLuceneSearchMatchAllDocsQuery_$1
 
 - (id<OrgApacheLuceneUtilBits>)getMatchingDocsWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
-  return [new_OrgApacheLuceneUtilBits_MatchAllBits_initWithInt_([((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) maxDoc]) autorelease];
+  return create_OrgApacheLuceneUtilBits_MatchAllBits_initWithInt_([((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) maxDoc]);
 }
 
 - (NSString *)description {
@@ -129,9 +133,11 @@ void OrgApacheLuceneSearchMatchAllDocsQuery_$1_initWithOrgApacheLuceneSearchMatc
 }
 
 OrgApacheLuceneSearchMatchAllDocsQuery_$1 *new_OrgApacheLuceneSearchMatchAllDocsQuery_$1_initWithOrgApacheLuceneSearchMatchAllDocsQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchMatchAllDocsQuery *outer$, OrgApacheLuceneSearchQuery *arg$0) {
-  OrgApacheLuceneSearchMatchAllDocsQuery_$1 *self = [OrgApacheLuceneSearchMatchAllDocsQuery_$1 alloc];
-  OrgApacheLuceneSearchMatchAllDocsQuery_$1_initWithOrgApacheLuceneSearchMatchAllDocsQuery_withOrgApacheLuceneSearchQuery_(self, outer$, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchMatchAllDocsQuery_$1, initWithOrgApacheLuceneSearchMatchAllDocsQuery_withOrgApacheLuceneSearchQuery_, outer$, arg$0)
+}
+
+OrgApacheLuceneSearchMatchAllDocsQuery_$1 *create_OrgApacheLuceneSearchMatchAllDocsQuery_$1_initWithOrgApacheLuceneSearchMatchAllDocsQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchMatchAllDocsQuery *outer$, OrgApacheLuceneSearchQuery *arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchMatchAllDocsQuery_$1, initWithOrgApacheLuceneSearchMatchAllDocsQuery_withOrgApacheLuceneSearchQuery_, outer$, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchMatchAllDocsQuery_$1)

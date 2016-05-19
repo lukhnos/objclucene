@@ -5,21 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilMutableMutableValueBool_INCLUDE_ALL")
-#if OrgApacheLuceneUtilMutableMutableValueBool_RESTRICT
-#define OrgApacheLuceneUtilMutableMutableValueBool_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueBool")
+#ifdef RESTRICT_OrgApacheLuceneUtilMutableMutableValueBool
+#define INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueBool 0
 #else
-#define OrgApacheLuceneUtilMutableMutableValueBool_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueBool 1
 #endif
-#undef OrgApacheLuceneUtilMutableMutableValueBool_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilMutableMutableValueBool
 
-#if !defined (_OrgApacheLuceneUtilMutableMutableValueBool_) && (OrgApacheLuceneUtilMutableMutableValueBool_INCLUDE_ALL || OrgApacheLuceneUtilMutableMutableValueBool_INCLUDE)
-#define _OrgApacheLuceneUtilMutableMutableValueBool_
+#if !defined (OrgApacheLuceneUtilMutableMutableValueBool_) && (INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueBool || defined(INCLUDE_OrgApacheLuceneUtilMutableMutableValueBool))
+#define OrgApacheLuceneUtilMutableMutableValueBool_
 
-#define OrgApacheLuceneUtilMutableMutableValue_RESTRICT 1
-#define OrgApacheLuceneUtilMutableMutableValue_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilMutableMutableValue 1
+#define INCLUDE_OrgApacheLuceneUtilMutableMutableValue 1
 #include "org/apache/lucene/util/mutable/MutableValue.h"
 
+/*!
+ @brief <code>MutableValue</code> implementation of type <code>boolean</code>.
+ When mutating instances of this object, the caller is responsible for ensuring 
+ that any instance where <code>exists</code> is set to <code>false</code> must also 
+ <code>value</code> set to <code>false</code> for proper operation.
+ */
 @interface OrgApacheLuceneUtilMutableMutableValueBool : OrgApacheLuceneUtilMutableMutableValue {
  @public
   jboolean value_;
@@ -49,8 +55,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilMutableMutableValueBool_init(OrgApache
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilMutableMutableValueBool *new_OrgApacheLuceneUtilMutableMutableValueBool_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilMutableMutableValueBool *create_OrgApacheLuceneUtilMutableMutableValueBool_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilMutableMutableValueBool)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilMutableMutableValueBool_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueBool")

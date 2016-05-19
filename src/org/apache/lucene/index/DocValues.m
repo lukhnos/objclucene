@@ -31,7 +31,7 @@
 
 + (void)checkFieldWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)inArg
                                         withNSString:(NSString *)field
-      withOrgApacheLuceneIndexDocValuesTypeEnumArray:(IOSObjectArray *)expected;
+          withOrgApacheLuceneIndexDocValuesTypeArray:(IOSObjectArray *)expected;
 
 @end
 
@@ -39,7 +39,9 @@ __attribute__((unused)) static void OrgApacheLuceneIndexDocValues_init(OrgApache
 
 __attribute__((unused)) static OrgApacheLuceneIndexDocValues *new_OrgApacheLuceneIndexDocValues_init() NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static void OrgApacheLuceneIndexDocValues_checkFieldWithOrgApacheLuceneIndexLeafReader_withNSString_withOrgApacheLuceneIndexDocValuesTypeEnumArray_(OrgApacheLuceneIndexLeafReader *inArg, NSString *field, IOSObjectArray *expected);
+__attribute__((unused)) static OrgApacheLuceneIndexDocValues *create_OrgApacheLuceneIndexDocValues_init();
+
+__attribute__((unused)) static void OrgApacheLuceneIndexDocValues_checkFieldWithOrgApacheLuceneIndexLeafReader_withNSString_withOrgApacheLuceneIndexDocValuesTypeArray_(OrgApacheLuceneIndexLeafReader *inArg, NSString *field, IOSObjectArray *expected);
 
 @interface OrgApacheLuceneIndexDocValues_$1 : OrgApacheLuceneIndexBinaryDocValues {
  @public
@@ -60,6 +62,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexDocValues_$1_initWithOrg
 
 __attribute__((unused)) static OrgApacheLuceneIndexDocValues_$1 *new_OrgApacheLuceneIndexDocValues_$1_initWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *capture$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexDocValues_$1 *create_OrgApacheLuceneIndexDocValues_$1_initWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *capture$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocValues_$1)
 
 @interface OrgApacheLuceneIndexDocValues_$2 : OrgApacheLuceneIndexNumericDocValues
@@ -75,6 +79,8 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexDocValues_$2)
 __attribute__((unused)) static void OrgApacheLuceneIndexDocValues_$2_init(OrgApacheLuceneIndexDocValues_$2 *self);
 
 __attribute__((unused)) static OrgApacheLuceneIndexDocValues_$2 *new_OrgApacheLuceneIndexDocValues_$2_init() NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexDocValues_$2 *create_OrgApacheLuceneIndexDocValues_$2_init();
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocValues_$2)
 
@@ -101,6 +107,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexDocValues_$3_initWithOrg
 
 __attribute__((unused)) static OrgApacheLuceneIndexDocValues_$3 *new_OrgApacheLuceneIndexDocValues_$3_initWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *capture$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexDocValues_$3 *create_OrgApacheLuceneIndexDocValues_$3_initWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *capture$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocValues_$3)
 
 @interface OrgApacheLuceneIndexDocValues_$4 : NSObject < OrgApacheLuceneUtilBits > {
@@ -125,6 +133,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocValues_$4, val$dv_, OrgApacheLuceneIn
 __attribute__((unused)) static void OrgApacheLuceneIndexDocValues_$4_initWithOrgApacheLuceneIndexSortedDocValues_withInt_(OrgApacheLuceneIndexDocValues_$4 *self, OrgApacheLuceneIndexSortedDocValues *capture$0, jint capture$1);
 
 __attribute__((unused)) static OrgApacheLuceneIndexDocValues_$4 *new_OrgApacheLuceneIndexDocValues_$4_initWithOrgApacheLuceneIndexSortedDocValues_withInt_(OrgApacheLuceneIndexSortedDocValues *capture$0, jint capture$1) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexDocValues_$4 *create_OrgApacheLuceneIndexDocValues_$4_initWithOrgApacheLuceneIndexSortedDocValues_withInt_(OrgApacheLuceneIndexSortedDocValues *capture$0, jint capture$1);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocValues_$4)
 
@@ -151,6 +161,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexDocValues_$5_initWithOrg
 
 __attribute__((unused)) static OrgApacheLuceneIndexDocValues_$5 *new_OrgApacheLuceneIndexDocValues_$5_initWithOrgApacheLuceneIndexSortedSetDocValues_withInt_(OrgApacheLuceneIndexSortedSetDocValues *capture$0, jint capture$1) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexDocValues_$5 *create_OrgApacheLuceneIndexDocValues_$5_initWithOrgApacheLuceneIndexSortedSetDocValues_withInt_(OrgApacheLuceneIndexSortedSetDocValues *capture$0, jint capture$1);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocValues_$5)
 
 @interface OrgApacheLuceneIndexDocValues_$6 : NSObject < OrgApacheLuceneUtilBits > {
@@ -175,6 +187,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocValues_$6, val$dv_, OrgApacheLuceneIn
 __attribute__((unused)) static void OrgApacheLuceneIndexDocValues_$6_initWithOrgApacheLuceneIndexSortedNumericDocValues_withInt_(OrgApacheLuceneIndexDocValues_$6 *self, OrgApacheLuceneIndexSortedNumericDocValues *capture$0, jint capture$1);
 
 __attribute__((unused)) static OrgApacheLuceneIndexDocValues_$6 *new_OrgApacheLuceneIndexDocValues_$6_initWithOrgApacheLuceneIndexSortedNumericDocValues_withInt_(OrgApacheLuceneIndexSortedNumericDocValues *capture$0, jint capture$1) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexDocValues_$6 *create_OrgApacheLuceneIndexDocValues_$6_initWithOrgApacheLuceneIndexSortedNumericDocValues_withInt_(OrgApacheLuceneIndexSortedNumericDocValues *capture$0, jint capture$1);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocValues_$6)
 
@@ -245,8 +259,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)checkFieldWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)inArg
                                         withNSString:(NSString *)field
-      withOrgApacheLuceneIndexDocValuesTypeEnumArray:(IOSObjectArray *)expected {
-  OrgApacheLuceneIndexDocValues_checkFieldWithOrgApacheLuceneIndexLeafReader_withNSString_withOrgApacheLuceneIndexDocValuesTypeEnumArray_(inArg, field, expected);
+          withOrgApacheLuceneIndexDocValuesTypeArray:(IOSObjectArray *)expected {
+  OrgApacheLuceneIndexDocValues_checkFieldWithOrgApacheLuceneIndexLeafReader_withNSString_withOrgApacheLuceneIndexDocValuesTypeArray_(inArg, field, expected);
 }
 
 + (OrgApacheLuceneIndexNumericDocValues *)getNumericWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader
@@ -295,7 +309,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "docsWithValueWithOrgApacheLuceneIndexSortedDocValues:withInt:", "docsWithValue", "Lorg.apache.lucene.util.Bits;", 0x9, NULL, NULL },
     { "docsWithValueWithOrgApacheLuceneIndexSortedSetDocValues:withInt:", "docsWithValue", "Lorg.apache.lucene.util.Bits;", 0x9, NULL, NULL },
     { "docsWithValueWithOrgApacheLuceneIndexSortedNumericDocValues:withInt:", "docsWithValue", "Lorg.apache.lucene.util.Bits;", 0x9, NULL, NULL },
-    { "checkFieldWithOrgApacheLuceneIndexLeafReader:withNSString:withOrgApacheLuceneIndexDocValuesTypeEnumArray:", "checkField", "V", 0x8a, NULL, NULL },
+    { "checkFieldWithOrgApacheLuceneIndexLeafReader:withNSString:withOrgApacheLuceneIndexDocValuesTypeArray:", "checkField", "V", 0x8a, NULL, NULL },
     { "getNumericWithOrgApacheLuceneIndexLeafReader:withNSString:", "getNumeric", "Lorg.apache.lucene.index.NumericDocValues;", 0x9, "Ljava.io.IOException;", NULL },
     { "getBinaryWithOrgApacheLuceneIndexLeafReader:withNSString:", "getBinary", "Lorg.apache.lucene.index.BinaryDocValues;", 0x9, "Ljava.io.IOException;", NULL },
     { "getSortedWithOrgApacheLuceneIndexLeafReader:withNSString:", "getSorted", "Lorg.apache.lucene.index.SortedDocValues;", 0x9, "Ljava.io.IOException;", NULL },
@@ -314,31 +328,33 @@ void OrgApacheLuceneIndexDocValues_init(OrgApacheLuceneIndexDocValues *self) {
 }
 
 OrgApacheLuceneIndexDocValues *new_OrgApacheLuceneIndexDocValues_init() {
-  OrgApacheLuceneIndexDocValues *self = [OrgApacheLuceneIndexDocValues alloc];
-  OrgApacheLuceneIndexDocValues_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexDocValues, init)
+}
+
+OrgApacheLuceneIndexDocValues *create_OrgApacheLuceneIndexDocValues_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexDocValues, init)
 }
 
 OrgApacheLuceneIndexBinaryDocValues *OrgApacheLuceneIndexDocValues_emptyBinary() {
   OrgApacheLuceneIndexDocValues_initialize();
-  OrgApacheLuceneUtilBytesRef *empty = [new_OrgApacheLuceneUtilBytesRef_init() autorelease];
-  return [new_OrgApacheLuceneIndexDocValues_$1_initWithOrgApacheLuceneUtilBytesRef_(empty) autorelease];
+  OrgApacheLuceneUtilBytesRef *empty = create_OrgApacheLuceneUtilBytesRef_init();
+  return create_OrgApacheLuceneIndexDocValues_$1_initWithOrgApacheLuceneUtilBytesRef_(empty);
 }
 
 OrgApacheLuceneIndexNumericDocValues *OrgApacheLuceneIndexDocValues_emptyNumeric() {
   OrgApacheLuceneIndexDocValues_initialize();
-  return [new_OrgApacheLuceneIndexDocValues_$2_init() autorelease];
+  return create_OrgApacheLuceneIndexDocValues_$2_init();
 }
 
 OrgApacheLuceneIndexSortedDocValues *OrgApacheLuceneIndexDocValues_emptySorted() {
   OrgApacheLuceneIndexDocValues_initialize();
-  OrgApacheLuceneUtilBytesRef *empty = [new_OrgApacheLuceneUtilBytesRef_init() autorelease];
-  return [new_OrgApacheLuceneIndexDocValues_$3_initWithOrgApacheLuceneUtilBytesRef_(empty) autorelease];
+  OrgApacheLuceneUtilBytesRef *empty = create_OrgApacheLuceneUtilBytesRef_init();
+  return create_OrgApacheLuceneIndexDocValues_$3_initWithOrgApacheLuceneUtilBytesRef_(empty);
 }
 
 OrgApacheLuceneIndexSortedNumericDocValues *OrgApacheLuceneIndexDocValues_emptySortedNumericWithInt_(jint maxDoc) {
   OrgApacheLuceneIndexDocValues_initialize();
-  return OrgApacheLuceneIndexDocValues_singletonWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_(OrgApacheLuceneIndexDocValues_emptyNumeric(), [new_OrgApacheLuceneUtilBits_MatchNoBits_initWithInt_(maxDoc) autorelease]);
+  return OrgApacheLuceneIndexDocValues_singletonWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_(OrgApacheLuceneIndexDocValues_emptyNumeric(), create_OrgApacheLuceneUtilBits_MatchNoBits_initWithInt_(maxDoc));
 }
 
 OrgApacheLuceneIndexRandomAccessOrds *OrgApacheLuceneIndexDocValues_emptySortedSet() {
@@ -348,13 +364,13 @@ OrgApacheLuceneIndexRandomAccessOrds *OrgApacheLuceneIndexDocValues_emptySortedS
 
 OrgApacheLuceneIndexRandomAccessOrds *OrgApacheLuceneIndexDocValues_singletonWithOrgApacheLuceneIndexSortedDocValues_(OrgApacheLuceneIndexSortedDocValues *dv) {
   OrgApacheLuceneIndexDocValues_initialize();
-  return [new_OrgApacheLuceneIndexSingletonSortedSetDocValues_initWithOrgApacheLuceneIndexSortedDocValues_(dv) autorelease];
+  return create_OrgApacheLuceneIndexSingletonSortedSetDocValues_initWithOrgApacheLuceneIndexSortedDocValues_(dv);
 }
 
 OrgApacheLuceneIndexSortedDocValues *OrgApacheLuceneIndexDocValues_unwrapSingletonWithOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneIndexSortedSetDocValues *dv) {
   OrgApacheLuceneIndexDocValues_initialize();
   if ([dv isKindOfClass:[OrgApacheLuceneIndexSingletonSortedSetDocValues class]]) {
-    return [((OrgApacheLuceneIndexSingletonSortedSetDocValues *) nil_chk(((OrgApacheLuceneIndexSingletonSortedSetDocValues *) check_class_cast(dv, [OrgApacheLuceneIndexSingletonSortedSetDocValues class])))) getSortedDocValues];
+    return [((OrgApacheLuceneIndexSingletonSortedSetDocValues *) nil_chk(((OrgApacheLuceneIndexSingletonSortedSetDocValues *) cast_chk(dv, [OrgApacheLuceneIndexSingletonSortedSetDocValues class])))) getSortedDocValues];
   }
   else {
     return nil;
@@ -364,7 +380,7 @@ OrgApacheLuceneIndexSortedDocValues *OrgApacheLuceneIndexDocValues_unwrapSinglet
 OrgApacheLuceneIndexNumericDocValues *OrgApacheLuceneIndexDocValues_unwrapSingletonWithOrgApacheLuceneIndexSortedNumericDocValues_(OrgApacheLuceneIndexSortedNumericDocValues *dv) {
   OrgApacheLuceneIndexDocValues_initialize();
   if ([dv isKindOfClass:[OrgApacheLuceneIndexSingletonSortedNumericDocValues class]]) {
-    return [((OrgApacheLuceneIndexSingletonSortedNumericDocValues *) nil_chk(((OrgApacheLuceneIndexSingletonSortedNumericDocValues *) check_class_cast(dv, [OrgApacheLuceneIndexSingletonSortedNumericDocValues class])))) getNumericDocValues];
+    return [((OrgApacheLuceneIndexSingletonSortedNumericDocValues *) nil_chk(((OrgApacheLuceneIndexSingletonSortedNumericDocValues *) cast_chk(dv, [OrgApacheLuceneIndexSingletonSortedNumericDocValues class])))) getNumericDocValues];
   }
   else {
     return nil;
@@ -374,7 +390,7 @@ OrgApacheLuceneIndexNumericDocValues *OrgApacheLuceneIndexDocValues_unwrapSingle
 id<OrgApacheLuceneUtilBits> OrgApacheLuceneIndexDocValues_unwrapSingletonBitsWithOrgApacheLuceneIndexSortedNumericDocValues_(OrgApacheLuceneIndexSortedNumericDocValues *dv) {
   OrgApacheLuceneIndexDocValues_initialize();
   if ([dv isKindOfClass:[OrgApacheLuceneIndexSingletonSortedNumericDocValues class]]) {
-    return [((OrgApacheLuceneIndexSingletonSortedNumericDocValues *) nil_chk(((OrgApacheLuceneIndexSingletonSortedNumericDocValues *) check_class_cast(dv, [OrgApacheLuceneIndexSingletonSortedNumericDocValues class])))) getDocsWithField];
+    return [((OrgApacheLuceneIndexSingletonSortedNumericDocValues *) nil_chk(((OrgApacheLuceneIndexSingletonSortedNumericDocValues *) cast_chk(dv, [OrgApacheLuceneIndexSingletonSortedNumericDocValues class])))) getDocsWithField];
   }
   else {
     return nil;
@@ -383,30 +399,30 @@ id<OrgApacheLuceneUtilBits> OrgApacheLuceneIndexDocValues_unwrapSingletonBitsWit
 
 OrgApacheLuceneIndexSortedNumericDocValues *OrgApacheLuceneIndexDocValues_singletonWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_(OrgApacheLuceneIndexNumericDocValues *dv, id<OrgApacheLuceneUtilBits> docsWithField) {
   OrgApacheLuceneIndexDocValues_initialize();
-  return [new_OrgApacheLuceneIndexSingletonSortedNumericDocValues_initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_(dv, docsWithField) autorelease];
+  return create_OrgApacheLuceneIndexSingletonSortedNumericDocValues_initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_(dv, docsWithField);
 }
 
 id<OrgApacheLuceneUtilBits> OrgApacheLuceneIndexDocValues_docsWithValueWithOrgApacheLuceneIndexSortedDocValues_withInt_(OrgApacheLuceneIndexSortedDocValues *dv, jint maxDoc) {
   OrgApacheLuceneIndexDocValues_initialize();
-  return [new_OrgApacheLuceneIndexDocValues_$4_initWithOrgApacheLuceneIndexSortedDocValues_withInt_(dv, maxDoc) autorelease];
+  return create_OrgApacheLuceneIndexDocValues_$4_initWithOrgApacheLuceneIndexSortedDocValues_withInt_(dv, maxDoc);
 }
 
 id<OrgApacheLuceneUtilBits> OrgApacheLuceneIndexDocValues_docsWithValueWithOrgApacheLuceneIndexSortedSetDocValues_withInt_(OrgApacheLuceneIndexSortedSetDocValues *dv, jint maxDoc) {
   OrgApacheLuceneIndexDocValues_initialize();
-  return [new_OrgApacheLuceneIndexDocValues_$5_initWithOrgApacheLuceneIndexSortedSetDocValues_withInt_(dv, maxDoc) autorelease];
+  return create_OrgApacheLuceneIndexDocValues_$5_initWithOrgApacheLuceneIndexSortedSetDocValues_withInt_(dv, maxDoc);
 }
 
 id<OrgApacheLuceneUtilBits> OrgApacheLuceneIndexDocValues_docsWithValueWithOrgApacheLuceneIndexSortedNumericDocValues_withInt_(OrgApacheLuceneIndexSortedNumericDocValues *dv, jint maxDoc) {
   OrgApacheLuceneIndexDocValues_initialize();
-  return [new_OrgApacheLuceneIndexDocValues_$6_initWithOrgApacheLuceneIndexSortedNumericDocValues_withInt_(dv, maxDoc) autorelease];
+  return create_OrgApacheLuceneIndexDocValues_$6_initWithOrgApacheLuceneIndexSortedNumericDocValues_withInt_(dv, maxDoc);
 }
 
-void OrgApacheLuceneIndexDocValues_checkFieldWithOrgApacheLuceneIndexLeafReader_withNSString_withOrgApacheLuceneIndexDocValuesTypeEnumArray_(OrgApacheLuceneIndexLeafReader *inArg, NSString *field, IOSObjectArray *expected) {
+void OrgApacheLuceneIndexDocValues_checkFieldWithOrgApacheLuceneIndexLeafReader_withNSString_withOrgApacheLuceneIndexDocValuesTypeArray_(OrgApacheLuceneIndexLeafReader *inArg, NSString *field, IOSObjectArray *expected) {
   OrgApacheLuceneIndexDocValues_initialize();
   OrgApacheLuceneIndexFieldInfo *fi = [((OrgApacheLuceneIndexFieldInfos *) nil_chk([((OrgApacheLuceneIndexLeafReader *) nil_chk(inArg)) getFieldInfos])) fieldInfoWithNSString:field];
   if (fi != nil) {
-    OrgApacheLuceneIndexDocValuesTypeEnum *actual = [fi getDocValuesType];
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$@$$$$$", @"unexpected docvalues type ", actual, @" for field '", field, @"' ", (((IOSObjectArray *) nil_chk(expected))->size_ == 1 ? JreStrcat("$@", @"(expected=", IOSObjectArray_Get(expected, 0)) : JreStrcat("$$", @"(expected one of ", JavaUtilArrays_toStringWithNSObjectArray_(expected))), @"). Use UninvertingReader or index with docvalues.")) autorelease];
+    OrgApacheLuceneIndexDocValuesType *actual = [fi getDocValuesType];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$@$$$$$", @"unexpected docvalues type ", actual, @" for field '", field, @"' ", (((IOSObjectArray *) nil_chk(expected))->size_ == 1 ? JreStrcat("$@", @"(expected=", IOSObjectArray_Get(expected, 0)) : JreStrcat("$$", @"(expected one of ", JavaUtilArrays_toStringWithNSObjectArray_(expected))), @"). Use UninvertingReader or index with docvalues."));
   }
 }
 
@@ -414,7 +430,7 @@ OrgApacheLuceneIndexNumericDocValues *OrgApacheLuceneIndexDocValues_getNumericWi
   OrgApacheLuceneIndexDocValues_initialize();
   OrgApacheLuceneIndexNumericDocValues *dv = [((OrgApacheLuceneIndexLeafReader *) nil_chk(reader)) getNumericDocValuesWithNSString:field];
   if (dv == nil) {
-    OrgApacheLuceneIndexDocValues_checkFieldWithOrgApacheLuceneIndexLeafReader_withNSString_withOrgApacheLuceneIndexDocValuesTypeEnumArray_(reader, field, [IOSObjectArray arrayWithObjects:(id[]){ JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, NUMERIC) } count:1 type:OrgApacheLuceneIndexDocValuesTypeEnum_class_()]);
+    OrgApacheLuceneIndexDocValues_checkFieldWithOrgApacheLuceneIndexLeafReader_withNSString_withOrgApacheLuceneIndexDocValuesTypeArray_(reader, field, [IOSObjectArray arrayWithObjects:(id[]){ JreLoadEnum(OrgApacheLuceneIndexDocValuesType, NUMERIC) } count:1 type:OrgApacheLuceneIndexDocValuesType_class_()]);
     return OrgApacheLuceneIndexDocValues_emptyNumeric();
   }
   else {
@@ -428,7 +444,7 @@ OrgApacheLuceneIndexBinaryDocValues *OrgApacheLuceneIndexDocValues_getBinaryWith
   if (dv == nil) {
     dv = [reader getSortedDocValuesWithNSString:field];
     if (dv == nil) {
-      OrgApacheLuceneIndexDocValues_checkFieldWithOrgApacheLuceneIndexLeafReader_withNSString_withOrgApacheLuceneIndexDocValuesTypeEnumArray_(reader, field, [IOSObjectArray arrayWithObjects:(id[]){ JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, BINARY), JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, SORTED) } count:2 type:OrgApacheLuceneIndexDocValuesTypeEnum_class_()]);
+      OrgApacheLuceneIndexDocValues_checkFieldWithOrgApacheLuceneIndexLeafReader_withNSString_withOrgApacheLuceneIndexDocValuesTypeArray_(reader, field, [IOSObjectArray arrayWithObjects:(id[]){ JreLoadEnum(OrgApacheLuceneIndexDocValuesType, BINARY), JreLoadEnum(OrgApacheLuceneIndexDocValuesType, SORTED) } count:2 type:OrgApacheLuceneIndexDocValuesType_class_()]);
       return OrgApacheLuceneIndexDocValues_emptyBinary();
     }
   }
@@ -439,7 +455,7 @@ OrgApacheLuceneIndexSortedDocValues *OrgApacheLuceneIndexDocValues_getSortedWith
   OrgApacheLuceneIndexDocValues_initialize();
   OrgApacheLuceneIndexSortedDocValues *dv = [((OrgApacheLuceneIndexLeafReader *) nil_chk(reader)) getSortedDocValuesWithNSString:field];
   if (dv == nil) {
-    OrgApacheLuceneIndexDocValues_checkFieldWithOrgApacheLuceneIndexLeafReader_withNSString_withOrgApacheLuceneIndexDocValuesTypeEnumArray_(reader, field, [IOSObjectArray arrayWithObjects:(id[]){ JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, SORTED) } count:1 type:OrgApacheLuceneIndexDocValuesTypeEnum_class_()]);
+    OrgApacheLuceneIndexDocValues_checkFieldWithOrgApacheLuceneIndexLeafReader_withNSString_withOrgApacheLuceneIndexDocValuesTypeArray_(reader, field, [IOSObjectArray arrayWithObjects:(id[]){ JreLoadEnum(OrgApacheLuceneIndexDocValuesType, SORTED) } count:1 type:OrgApacheLuceneIndexDocValuesType_class_()]);
     return OrgApacheLuceneIndexDocValues_emptySorted();
   }
   else {
@@ -453,7 +469,7 @@ OrgApacheLuceneIndexSortedNumericDocValues *OrgApacheLuceneIndexDocValues_getSor
   if (dv == nil) {
     OrgApacheLuceneIndexNumericDocValues *single = [reader getNumericDocValuesWithNSString:field];
     if (single == nil) {
-      OrgApacheLuceneIndexDocValues_checkFieldWithOrgApacheLuceneIndexLeafReader_withNSString_withOrgApacheLuceneIndexDocValuesTypeEnumArray_(reader, field, [IOSObjectArray arrayWithObjects:(id[]){ JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, SORTED_NUMERIC), JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, NUMERIC) } count:2 type:OrgApacheLuceneIndexDocValuesTypeEnum_class_()]);
+      OrgApacheLuceneIndexDocValues_checkFieldWithOrgApacheLuceneIndexLeafReader_withNSString_withOrgApacheLuceneIndexDocValuesTypeArray_(reader, field, [IOSObjectArray arrayWithObjects:(id[]){ JreLoadEnum(OrgApacheLuceneIndexDocValuesType, SORTED_NUMERIC), JreLoadEnum(OrgApacheLuceneIndexDocValuesType, NUMERIC) } count:2 type:OrgApacheLuceneIndexDocValuesType_class_()]);
       return OrgApacheLuceneIndexDocValues_emptySortedNumericWithInt_([reader maxDoc]);
     }
     id<OrgApacheLuceneUtilBits> bits = [reader getDocsWithFieldWithNSString:field];
@@ -468,7 +484,7 @@ OrgApacheLuceneIndexSortedSetDocValues *OrgApacheLuceneIndexDocValues_getSortedS
   if (dv == nil) {
     OrgApacheLuceneIndexSortedDocValues *sorted = [reader getSortedDocValuesWithNSString:field];
     if (sorted == nil) {
-      OrgApacheLuceneIndexDocValues_checkFieldWithOrgApacheLuceneIndexLeafReader_withNSString_withOrgApacheLuceneIndexDocValuesTypeEnumArray_(reader, field, [IOSObjectArray arrayWithObjects:(id[]){ JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, SORTED), JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, SORTED_SET) } count:2 type:OrgApacheLuceneIndexDocValuesTypeEnum_class_()]);
+      OrgApacheLuceneIndexDocValues_checkFieldWithOrgApacheLuceneIndexLeafReader_withNSString_withOrgApacheLuceneIndexDocValuesTypeArray_(reader, field, [IOSObjectArray arrayWithObjects:(id[]){ JreLoadEnum(OrgApacheLuceneIndexDocValuesType, SORTED), JreLoadEnum(OrgApacheLuceneIndexDocValuesType, SORTED_SET) } count:2 type:OrgApacheLuceneIndexDocValuesType_class_()]);
       return OrgApacheLuceneIndexDocValues_emptySortedSet();
     }
     return OrgApacheLuceneIndexDocValues_singletonWithOrgApacheLuceneIndexSortedDocValues_(sorted);
@@ -480,9 +496,9 @@ id<OrgApacheLuceneUtilBits> OrgApacheLuceneIndexDocValues_getDocsWithFieldWithOr
   OrgApacheLuceneIndexDocValues_initialize();
   id<OrgApacheLuceneUtilBits> dv = [((OrgApacheLuceneIndexLeafReader *) nil_chk(reader)) getDocsWithFieldWithNSString:field];
   if (dv == nil) {
-    JreAssert((((IOSObjectArray *) nil_chk(OrgApacheLuceneIndexDocValuesTypeEnum_values()))->size_ == 6), (@"org/apache/lucene/index/DocValues.java:323 condition failed: assert DocValuesType.values().length == 6;"));
-    OrgApacheLuceneIndexDocValues_checkFieldWithOrgApacheLuceneIndexLeafReader_withNSString_withOrgApacheLuceneIndexDocValuesTypeEnumArray_(reader, field, [IOSObjectArray arrayWithObjects:(id[]){ JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, BINARY), JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, NUMERIC), JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, SORTED), JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, SORTED_NUMERIC), JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, SORTED_SET) } count:5 type:OrgApacheLuceneIndexDocValuesTypeEnum_class_()]);
-    return [new_OrgApacheLuceneUtilBits_MatchNoBits_initWithInt_([reader maxDoc]) autorelease];
+    JreAssert((((IOSObjectArray *) nil_chk(OrgApacheLuceneIndexDocValuesType_values()))->size_ == 6), (@"org/apache/lucene/index/DocValues.java:323 condition failed: assert DocValuesType.values().length == 6;"));
+    OrgApacheLuceneIndexDocValues_checkFieldWithOrgApacheLuceneIndexLeafReader_withNSString_withOrgApacheLuceneIndexDocValuesTypeArray_(reader, field, [IOSObjectArray arrayWithObjects:(id[]){ JreLoadEnum(OrgApacheLuceneIndexDocValuesType, BINARY), JreLoadEnum(OrgApacheLuceneIndexDocValuesType, NUMERIC), JreLoadEnum(OrgApacheLuceneIndexDocValuesType, SORTED), JreLoadEnum(OrgApacheLuceneIndexDocValuesType, SORTED_NUMERIC), JreLoadEnum(OrgApacheLuceneIndexDocValuesType, SORTED_SET) } count:5 type:OrgApacheLuceneIndexDocValuesType_class_()]);
+    return create_OrgApacheLuceneUtilBits_MatchNoBits_initWithInt_([reader maxDoc]);
   }
   else {
     return dv;
@@ -528,9 +544,11 @@ void OrgApacheLuceneIndexDocValues_$1_initWithOrgApacheLuceneUtilBytesRef_(OrgAp
 }
 
 OrgApacheLuceneIndexDocValues_$1 *new_OrgApacheLuceneIndexDocValues_$1_initWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *capture$0) {
-  OrgApacheLuceneIndexDocValues_$1 *self = [OrgApacheLuceneIndexDocValues_$1 alloc];
-  OrgApacheLuceneIndexDocValues_$1_initWithOrgApacheLuceneUtilBytesRef_(self, capture$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexDocValues_$1, initWithOrgApacheLuceneUtilBytesRef_, capture$0)
+}
+
+OrgApacheLuceneIndexDocValues_$1 *create_OrgApacheLuceneIndexDocValues_$1_initWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexDocValues_$1, initWithOrgApacheLuceneUtilBytesRef_, capture$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocValues_$1)
@@ -565,9 +583,11 @@ void OrgApacheLuceneIndexDocValues_$2_init(OrgApacheLuceneIndexDocValues_$2 *sel
 }
 
 OrgApacheLuceneIndexDocValues_$2 *new_OrgApacheLuceneIndexDocValues_$2_init() {
-  OrgApacheLuceneIndexDocValues_$2 *self = [OrgApacheLuceneIndexDocValues_$2 alloc];
-  OrgApacheLuceneIndexDocValues_$2_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexDocValues_$2, init)
+}
+
+OrgApacheLuceneIndexDocValues_$2 *create_OrgApacheLuceneIndexDocValues_$2_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexDocValues_$2, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocValues_$2)
@@ -619,9 +639,11 @@ void OrgApacheLuceneIndexDocValues_$3_initWithOrgApacheLuceneUtilBytesRef_(OrgAp
 }
 
 OrgApacheLuceneIndexDocValues_$3 *new_OrgApacheLuceneIndexDocValues_$3_initWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *capture$0) {
-  OrgApacheLuceneIndexDocValues_$3 *self = [OrgApacheLuceneIndexDocValues_$3 alloc];
-  OrgApacheLuceneIndexDocValues_$3_initWithOrgApacheLuceneUtilBytesRef_(self, capture$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexDocValues_$3, initWithOrgApacheLuceneUtilBytesRef_, capture$0)
+}
+
+OrgApacheLuceneIndexDocValues_$3 *create_OrgApacheLuceneIndexDocValues_$3_initWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexDocValues_$3, initWithOrgApacheLuceneUtilBytesRef_, capture$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocValues_$3)
@@ -671,9 +693,11 @@ void OrgApacheLuceneIndexDocValues_$4_initWithOrgApacheLuceneIndexSortedDocValue
 }
 
 OrgApacheLuceneIndexDocValues_$4 *new_OrgApacheLuceneIndexDocValues_$4_initWithOrgApacheLuceneIndexSortedDocValues_withInt_(OrgApacheLuceneIndexSortedDocValues *capture$0, jint capture$1) {
-  OrgApacheLuceneIndexDocValues_$4 *self = [OrgApacheLuceneIndexDocValues_$4 alloc];
-  OrgApacheLuceneIndexDocValues_$4_initWithOrgApacheLuceneIndexSortedDocValues_withInt_(self, capture$0, capture$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexDocValues_$4, initWithOrgApacheLuceneIndexSortedDocValues_withInt_, capture$0, capture$1)
+}
+
+OrgApacheLuceneIndexDocValues_$4 *create_OrgApacheLuceneIndexDocValues_$4_initWithOrgApacheLuceneIndexSortedDocValues_withInt_(OrgApacheLuceneIndexSortedDocValues *capture$0, jint capture$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexDocValues_$4, initWithOrgApacheLuceneIndexSortedDocValues_withInt_, capture$0, capture$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocValues_$4)
@@ -724,9 +748,11 @@ void OrgApacheLuceneIndexDocValues_$5_initWithOrgApacheLuceneIndexSortedSetDocVa
 }
 
 OrgApacheLuceneIndexDocValues_$5 *new_OrgApacheLuceneIndexDocValues_$5_initWithOrgApacheLuceneIndexSortedSetDocValues_withInt_(OrgApacheLuceneIndexSortedSetDocValues *capture$0, jint capture$1) {
-  OrgApacheLuceneIndexDocValues_$5 *self = [OrgApacheLuceneIndexDocValues_$5 alloc];
-  OrgApacheLuceneIndexDocValues_$5_initWithOrgApacheLuceneIndexSortedSetDocValues_withInt_(self, capture$0, capture$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexDocValues_$5, initWithOrgApacheLuceneIndexSortedSetDocValues_withInt_, capture$0, capture$1)
+}
+
+OrgApacheLuceneIndexDocValues_$5 *create_OrgApacheLuceneIndexDocValues_$5_initWithOrgApacheLuceneIndexSortedSetDocValues_withInt_(OrgApacheLuceneIndexSortedSetDocValues *capture$0, jint capture$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexDocValues_$5, initWithOrgApacheLuceneIndexSortedSetDocValues_withInt_, capture$0, capture$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocValues_$5)
@@ -777,9 +803,11 @@ void OrgApacheLuceneIndexDocValues_$6_initWithOrgApacheLuceneIndexSortedNumericD
 }
 
 OrgApacheLuceneIndexDocValues_$6 *new_OrgApacheLuceneIndexDocValues_$6_initWithOrgApacheLuceneIndexSortedNumericDocValues_withInt_(OrgApacheLuceneIndexSortedNumericDocValues *capture$0, jint capture$1) {
-  OrgApacheLuceneIndexDocValues_$6 *self = [OrgApacheLuceneIndexDocValues_$6 alloc];
-  OrgApacheLuceneIndexDocValues_$6_initWithOrgApacheLuceneIndexSortedNumericDocValues_withInt_(self, capture$0, capture$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexDocValues_$6, initWithOrgApacheLuceneIndexSortedNumericDocValues_withInt_, capture$0, capture$1)
+}
+
+OrgApacheLuceneIndexDocValues_$6 *create_OrgApacheLuceneIndexDocValues_$6_initWithOrgApacheLuceneIndexSortedNumericDocValues_withInt_(OrgApacheLuceneIndexSortedNumericDocValues *capture$0, jint capture$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexDocValues_$6, initWithOrgApacheLuceneIndexSortedNumericDocValues_withInt_, capture$0, capture$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocValues_$6)

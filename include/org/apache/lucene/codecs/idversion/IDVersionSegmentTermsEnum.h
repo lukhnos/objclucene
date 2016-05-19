@@ -5,32 +5,38 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum_RESTRICT
-#define OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum")
+#ifdef RESTRICT_OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum
+#define INCLUDE_ALL_OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum 0
 #else
-#define OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum 1
 #endif
-#undef OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum
 
-#if !defined (_OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum_) && (OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum_INCLUDE_ALL || OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum_INCLUDE)
-#define _OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum_
+#if !defined (OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum_) && (INCLUDE_ALL_OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum || defined(INCLUDE_OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum))
+#define OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum_
 
-#define OrgApacheLuceneIndexTermsEnum_RESTRICT 1
-#define OrgApacheLuceneIndexTermsEnum_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexTermsEnum 1
+#define INCLUDE_OrgApacheLuceneIndexTermsEnum 1
 #include "org/apache/lucene/index/TermsEnum.h"
 
 @class OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame;
 @class OrgApacheLuceneCodecsIdversionVersionFieldReader;
 @class OrgApacheLuceneIndexPostingsEnum;
 @class OrgApacheLuceneIndexTermState;
-@class OrgApacheLuceneIndexTermsEnum_SeekStatusEnum;
+@class OrgApacheLuceneIndexTermsEnum_SeekStatus;
 @class OrgApacheLuceneStoreIndexInput;
 @class OrgApacheLuceneUtilBytesRef;
 @class OrgApacheLuceneUtilBytesRefBuilder;
 @class OrgApacheLuceneUtilFstFST_Arc;
 @class OrgApacheLuceneUtilFstPairOutputs_Pair;
 
+/*!
+ @brief Iterates through terms in this field; this class is public so users
+ can cast it to call <code>seekExact(BytesRef,long)</code> for
+ optimistic-concurreny, and also <code>getVersion</code> to get the
+ version of the currently seek'd term.
+ */
 @interface OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum : OrgApacheLuceneIndexTermsEnum {
  @public
   OrgApacheLuceneStoreIndexInput *in_;
@@ -44,6 +50,10 @@
 
 - (jint)docFreq;
 
+/*!
+ @brief Get the version of the currently seek'd term; only valid if we are
+ positioned.
+ */
 - (jlong)getVersion;
 
 - (OrgApacheLuceneUtilBytesRef *)next;
@@ -53,10 +63,18 @@
 - (OrgApacheLuceneIndexPostingsEnum *)postingsWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)reuse
                                                                            withInt:(jint)flags;
 
-- (OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *)seekCeilWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)target;
+- (OrgApacheLuceneIndexTermsEnum_SeekStatus *)seekCeilWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)target;
 
 - (jboolean)seekExactWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)target;
 
+/*!
+ @brief Optimized version of <code>seekExact(BytesRef)</code> that can
+ sometimes fail-fast if the version indexed with the requested ID
+ is less than the specified minIDVersion.
+ Applications that index
+ a monotonically increasing global version with each document can
+ use this for fast optimistic concurrency. 
+ */
 - (jboolean)seekExactWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)target
                                             withLong:(jlong)minIDVersion;
 
@@ -102,10 +120,12 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum_i
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum *new_OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum_initWithOrgApacheLuceneCodecsIdversionVersionFieldReader_(OrgApacheLuceneCodecsIdversionVersionFieldReader *fr) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum *create_OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum_initWithOrgApacheLuceneCodecsIdversionVersionFieldReader_(OrgApacheLuceneCodecsIdversionVersionFieldReader *fr);
+
 FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum_brToStringWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *b);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum")

@@ -18,7 +18,7 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName {
-  return [new_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_([new_OrgApacheLuceneAnalysisCoreLowerCaseTokenizer_init() autorelease]) autorelease];
+  return create_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_(create_OrgApacheLuceneAnalysisCoreLowerCaseTokenizer_init());
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -37,9 +37,11 @@ void OrgApacheLuceneAnalysisCoreSimpleAnalyzer_init(OrgApacheLuceneAnalysisCoreS
 }
 
 OrgApacheLuceneAnalysisCoreSimpleAnalyzer *new_OrgApacheLuceneAnalysisCoreSimpleAnalyzer_init() {
-  OrgApacheLuceneAnalysisCoreSimpleAnalyzer *self = [OrgApacheLuceneAnalysisCoreSimpleAnalyzer alloc];
-  OrgApacheLuceneAnalysisCoreSimpleAnalyzer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCoreSimpleAnalyzer, init)
+}
+
+OrgApacheLuceneAnalysisCoreSimpleAnalyzer *create_OrgApacheLuceneAnalysisCoreSimpleAnalyzer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCoreSimpleAnalyzer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCoreSimpleAnalyzer)

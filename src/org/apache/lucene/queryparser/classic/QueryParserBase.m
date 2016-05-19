@@ -14,7 +14,6 @@
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/RuntimeException.h"
 #include "java/lang/StringBuilder.h"
-#include "java/lang/Throwable.h"
 #include "java/text/DateFormat.h"
 #include "java/util/Calendar.h"
 #include "java/util/Date.h"
@@ -65,10 +64,42 @@ __attribute__((unused)) static OrgApacheLuceneUtilBytesRef *OrgApacheLuceneQuery
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneQueryparserClassicQueryParserBase)
 
-OrgApacheLuceneQueryparserClassicQueryParser_OperatorEnum *OrgApacheLuceneQueryparserClassicQueryParserBase_AND_OPERATOR_;
-OrgApacheLuceneQueryparserClassicQueryParser_OperatorEnum *OrgApacheLuceneQueryparserClassicQueryParserBase_OR_OPERATOR_;
+OrgApacheLuceneQueryparserClassicQueryParser_Operator *OrgApacheLuceneQueryparserClassicQueryParserBase_AND_OPERATOR;
+OrgApacheLuceneQueryparserClassicQueryParser_Operator *OrgApacheLuceneQueryparserClassicQueryParserBase_OR_OPERATOR;
 
 @implementation OrgApacheLuceneQueryparserClassicQueryParserBase
+
++ (jint)CONJ_NONE {
+  return OrgApacheLuceneQueryparserClassicQueryParserBase_CONJ_NONE;
+}
+
++ (jint)CONJ_AND {
+  return OrgApacheLuceneQueryparserClassicQueryParserBase_CONJ_AND;
+}
+
++ (jint)CONJ_OR {
+  return OrgApacheLuceneQueryparserClassicQueryParserBase_CONJ_OR;
+}
+
++ (jint)MOD_NONE {
+  return OrgApacheLuceneQueryparserClassicQueryParserBase_MOD_NONE;
+}
+
++ (jint)MOD_NOT {
+  return OrgApacheLuceneQueryparserClassicQueryParserBase_MOD_NOT;
+}
+
++ (jint)MOD_REQ {
+  return OrgApacheLuceneQueryparserClassicQueryParserBase_MOD_REQ;
+}
+
++ (OrgApacheLuceneQueryparserClassicQueryParser_Operator *)AND_OPERATOR {
+  return OrgApacheLuceneQueryparserClassicQueryParserBase_AND_OPERATOR;
+}
+
++ (OrgApacheLuceneQueryparserClassicQueryParser_Operator *)OR_OPERATOR {
+  return OrgApacheLuceneQueryparserClassicQueryParserBase_OR_OPERATOR;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -96,29 +127,29 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)a {
 }
 
 - (OrgApacheLuceneSearchQuery *)parseWithNSString:(NSString *)query {
-  [self ReInitWithOrgApacheLuceneQueryparserClassicCharStream:[new_OrgApacheLuceneQueryparserClassicFastCharStream_initWithJavaIoReader_([new_JavaIoStringReader_initWithNSString_(query) autorelease]) autorelease]];
+  [self ReInitWithOrgApacheLuceneQueryparserClassicCharStream:create_OrgApacheLuceneQueryparserClassicFastCharStream_initWithJavaIoReader_(create_JavaIoStringReader_initWithNSString_(query))];
   @try {
     OrgApacheLuceneSearchQuery *res = [self TopLevelQueryWithNSString:field_];
     return res != nil ? res : [((OrgApacheLuceneSearchBooleanQuery_Builder *) nil_chk([self newBooleanQueryWithBoolean:false])) build];
   }
   @catch (OrgApacheLuceneQueryparserClassicParseException *tme) {
-    OrgApacheLuceneQueryparserClassicParseException *e = [new_OrgApacheLuceneQueryparserClassicParseException_initWithNSString_(JreStrcat("$$$$", @"Cannot parse '", query, @"': ", [((JavaLangThrowable *) nil_chk(tme)) getMessage])) autorelease];
-    [e initCauseWithJavaLangThrowable:tme];
+    OrgApacheLuceneQueryparserClassicParseException *e = create_OrgApacheLuceneQueryparserClassicParseException_initWithNSString_(JreStrcat("$$$$", @"Cannot parse '", query, @"': ", [((NSException *) nil_chk(tme)) getMessage]));
+    [e initCauseWithNSException:tme];
     @throw e;
   }
   @catch (OrgApacheLuceneQueryparserClassicTokenMgrError *tme) {
-    OrgApacheLuceneQueryparserClassicParseException *e = [new_OrgApacheLuceneQueryparserClassicParseException_initWithNSString_(JreStrcat("$$$$", @"Cannot parse '", query, @"': ", [((JavaLangThrowable *) nil_chk(tme)) getMessage])) autorelease];
-    [e initCauseWithJavaLangThrowable:tme];
+    OrgApacheLuceneQueryparserClassicParseException *e = create_OrgApacheLuceneQueryparserClassicParseException_initWithNSString_(JreStrcat("$$$$", @"Cannot parse '", query, @"': ", [((NSException *) nil_chk(tme)) getMessage]));
+    [e initCauseWithNSException:tme];
     @throw e;
   }
-  @catch (JavaLangThrowable *tme) {
-    OrgApacheLuceneQueryparserClassicParseException *e = [new_OrgApacheLuceneQueryparserClassicParseException_initWithNSString_(JreStrcat("$$$$", @"Cannot parse '", query, @"': ", [((JavaLangThrowable *) nil_chk(tme)) getMessage])) autorelease];
-    [e initCauseWithJavaLangThrowable:tme];
+  @catch (NSException *tme) {
+    OrgApacheLuceneQueryparserClassicParseException *e = create_OrgApacheLuceneQueryparserClassicParseException_initWithNSString_(JreStrcat("$$$$", @"Cannot parse '", query, @"': ", [((NSException *) nil_chk(tme)) getMessage]));
+    [e initCauseWithNSException:tme];
     @throw e;
   }
   @catch (OrgApacheLuceneSearchBooleanQuery_TooManyClauses *tmc) {
-    OrgApacheLuceneQueryparserClassicParseException *e = [new_OrgApacheLuceneQueryparserClassicParseException_initWithNSString_(JreStrcat("$$$", @"Cannot parse '", query, @"': too many boolean clauses")) autorelease];
-    [e initCauseWithJavaLangThrowable:tmc];
+    OrgApacheLuceneQueryparserClassicParseException *e = create_OrgApacheLuceneQueryparserClassicParseException_initWithNSString_(JreStrcat("$$$", @"Cannot parse '", query, @"': too many boolean clauses"));
+    [e initCauseWithNSException:tmc];
     @throw e;
   }
 }
@@ -167,11 +198,11 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)a {
   return allowLeadingWildcard_;
 }
 
-- (void)setDefaultOperatorWithOrgApacheLuceneQueryparserClassicQueryParser_OperatorEnum:(OrgApacheLuceneQueryparserClassicQueryParser_OperatorEnum *)op {
+- (void)setDefaultOperatorWithOrgApacheLuceneQueryparserClassicQueryParser_Operator:(OrgApacheLuceneQueryparserClassicQueryParser_Operator *)op {
   JreStrongAssign(&self->operator__, op);
 }
 
-- (OrgApacheLuceneQueryparserClassicQueryParser_OperatorEnum *)getDefaultOperator {
+- (OrgApacheLuceneQueryparserClassicQueryParser_Operator *)getDefaultOperator {
   return operator__;
 }
 
@@ -207,29 +238,29 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)a {
   return timeZone_;
 }
 
-- (void)setDateResolutionWithOrgApacheLuceneDocumentDateTools_ResolutionEnum:(OrgApacheLuceneDocumentDateTools_ResolutionEnum *)dateResolution {
+- (void)setDateResolutionWithOrgApacheLuceneDocumentDateTools_Resolution:(OrgApacheLuceneDocumentDateTools_Resolution *)dateResolution {
   JreStrongAssign(&self->dateResolution_, dateResolution);
 }
 
 - (void)setDateResolutionWithNSString:(NSString *)fieldName
-withOrgApacheLuceneDocumentDateTools_ResolutionEnum:(OrgApacheLuceneDocumentDateTools_ResolutionEnum *)dateResolution {
+withOrgApacheLuceneDocumentDateTools_Resolution:(OrgApacheLuceneDocumentDateTools_Resolution *)dateResolution {
   if (fieldName == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"Field cannot be null.") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"Field cannot be null.");
   }
   if (fieldToDateResolution_ == nil) {
     JreStrongAssignAndConsume(&fieldToDateResolution_, new_JavaUtilHashMap_init());
   }
-  [((id<JavaUtilMap>) nil_chk(fieldToDateResolution_)) putWithId:fieldName withId:dateResolution];
+  [fieldToDateResolution_ putWithId:fieldName withId:dateResolution];
 }
 
-- (OrgApacheLuceneDocumentDateTools_ResolutionEnum *)getDateResolutionWithNSString:(NSString *)fieldName {
+- (OrgApacheLuceneDocumentDateTools_Resolution *)getDateResolutionWithNSString:(NSString *)fieldName {
   if (fieldName == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"Field cannot be null.") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"Field cannot be null.");
   }
   if (fieldToDateResolution_ == nil) {
     return self->dateResolution_;
   }
-  OrgApacheLuceneDocumentDateTools_ResolutionEnum *resolution = [((id<JavaUtilMap>) nil_chk(fieldToDateResolution_)) getWithId:fieldName];
+  OrgApacheLuceneDocumentDateTools_Resolution *resolution = [fieldToDateResolution_ getWithId:fieldName];
   if (resolution == nil) {
     resolution = self->dateResolution_;
   }
@@ -259,14 +290,14 @@ withOrgApacheLuceneDocumentDateTools_ResolutionEnum:(OrgApacheLuceneDocumentDate
   jboolean required, prohibited;
   if ([((id<JavaUtilList>) nil_chk(clauses)) size] > 0 && conj == OrgApacheLuceneQueryparserClassicQueryParserBase_CONJ_AND) {
     OrgApacheLuceneSearchBooleanClause *c = [clauses getWithInt:[clauses size] - 1];
-    if (![((OrgApacheLuceneSearchBooleanClause *) nil_chk(c)) isProhibited]) [clauses setWithInt:[clauses size] - 1 withId:[new_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_OccurEnum_([c getQuery], JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, MUST)) autorelease]];
+    if (![((OrgApacheLuceneSearchBooleanClause *) nil_chk(c)) isProhibited]) [clauses setWithInt:[clauses size] - 1 withId:create_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_Occur_([c getQuery], JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, MUST))];
   }
-  if ([clauses size] > 0 && operator__ == OrgApacheLuceneQueryparserClassicQueryParserBase_AND_OPERATOR_ && conj == OrgApacheLuceneQueryparserClassicQueryParserBase_CONJ_OR) {
+  if ([clauses size] > 0 && operator__ == OrgApacheLuceneQueryparserClassicQueryParserBase_AND_OPERATOR && conj == OrgApacheLuceneQueryparserClassicQueryParserBase_CONJ_OR) {
     OrgApacheLuceneSearchBooleanClause *c = [clauses getWithInt:[clauses size] - 1];
-    if (![((OrgApacheLuceneSearchBooleanClause *) nil_chk(c)) isProhibited]) [clauses setWithInt:[clauses size] - 1 withId:[new_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_OccurEnum_([c getQuery], JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD)) autorelease]];
+    if (![((OrgApacheLuceneSearchBooleanClause *) nil_chk(c)) isProhibited]) [clauses setWithInt:[clauses size] - 1 withId:create_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_Occur_([c getQuery], JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD))];
   }
   if (q == nil) return;
-  if (operator__ == OrgApacheLuceneQueryparserClassicQueryParserBase_OR_OPERATOR_) {
+  if (operator__ == OrgApacheLuceneQueryparserClassicQueryParserBase_OR_OPERATOR) {
     prohibited = (mods == OrgApacheLuceneQueryparserClassicQueryParserBase_MOD_NOT);
     required = (mods == OrgApacheLuceneQueryparserClassicQueryParserBase_MOD_REQ);
     if (conj == OrgApacheLuceneQueryparserClassicQueryParserBase_CONJ_AND && !prohibited) {
@@ -277,10 +308,10 @@ withOrgApacheLuceneDocumentDateTools_ResolutionEnum:(OrgApacheLuceneDocumentDate
     prohibited = (mods == OrgApacheLuceneQueryparserClassicQueryParserBase_MOD_NOT);
     required = (!prohibited && conj != OrgApacheLuceneQueryparserClassicQueryParserBase_CONJ_OR);
   }
-  if (required && !prohibited) [clauses addWithId:[self newBooleanClauseWithOrgApacheLuceneSearchQuery:q withOrgApacheLuceneSearchBooleanClause_OccurEnum:JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, MUST)]];
-  else if (!required && !prohibited) [clauses addWithId:[self newBooleanClauseWithOrgApacheLuceneSearchQuery:q withOrgApacheLuceneSearchBooleanClause_OccurEnum:JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD)]];
-  else if (!required && prohibited) [clauses addWithId:[self newBooleanClauseWithOrgApacheLuceneSearchQuery:q withOrgApacheLuceneSearchBooleanClause_OccurEnum:JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, MUST_NOT)]];
-  else @throw [new_JavaLangRuntimeException_initWithNSString_(@"Clause cannot be both required and prohibited") autorelease];
+  if (required && !prohibited) [clauses addWithId:[self newBooleanClauseWithOrgApacheLuceneSearchQuery:q withOrgApacheLuceneSearchBooleanClause_Occur:JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, MUST)]];
+  else if (!required && !prohibited) [clauses addWithId:[self newBooleanClauseWithOrgApacheLuceneSearchQuery:q withOrgApacheLuceneSearchBooleanClause_Occur:JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD)]];
+  else if (!required && prohibited) [clauses addWithId:[self newBooleanClauseWithOrgApacheLuceneSearchQuery:q withOrgApacheLuceneSearchBooleanClause_Occur:JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, MUST_NOT)]];
+  else @throw create_JavaLangRuntimeException_initWithNSString_(@"Clause cannot be both required and prohibited");
 }
 
 - (OrgApacheLuceneSearchQuery *)getFieldQueryWithNSString:(NSString *)field
@@ -293,8 +324,8 @@ withOrgApacheLuceneDocumentDateTools_ResolutionEnum:(OrgApacheLuceneDocumentDate
                                                                     withNSString:(NSString *)field
                                                                     withNSString:(NSString *)queryText
                                                                      withBoolean:(jboolean)quoted {
-  OrgApacheLuceneSearchBooleanClause_OccurEnum *occur = operator__ == JreLoadStatic(OrgApacheLuceneQueryparserClassicQueryParser_OperatorEnum, AND) ? JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, MUST) : JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD);
-  return [self createFieldQueryWithOrgApacheLuceneAnalysisAnalyzer:analyzer withOrgApacheLuceneSearchBooleanClause_OccurEnum:occur withNSString:field withNSString:queryText withBoolean:quoted || autoGeneratePhraseQueries_ withInt:phraseSlop_];
+  OrgApacheLuceneSearchBooleanClause_Occur *occur = operator__ == JreLoadEnum(OrgApacheLuceneQueryparserClassicQueryParser_Operator, AND) ? JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, MUST) : JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD);
+  return [self createFieldQueryWithOrgApacheLuceneAnalysisAnalyzer:analyzer withOrgApacheLuceneSearchBooleanClause_Occur:occur withNSString:field withNSString:queryText withBoolean:quoted || autoGeneratePhraseQueries_ withInt:phraseSlop_];
 }
 
 - (OrgApacheLuceneSearchQuery *)getFieldQueryWithNSString:(NSString *)field
@@ -302,9 +333,9 @@ withOrgApacheLuceneDocumentDateTools_ResolutionEnum:(OrgApacheLuceneDocumentDate
                                                   withInt:(jint)slop {
   OrgApacheLuceneSearchQuery *query = [self getFieldQueryWithNSString:field withNSString:queryText withBoolean:true];
   if ([query isKindOfClass:[OrgApacheLuceneSearchPhraseQuery class]]) {
-    OrgApacheLuceneSearchPhraseQuery_Builder *builder = [new_OrgApacheLuceneSearchPhraseQuery_Builder_init() autorelease];
+    OrgApacheLuceneSearchPhraseQuery_Builder *builder = create_OrgApacheLuceneSearchPhraseQuery_Builder_init();
     [builder setSlopWithInt:slop];
-    OrgApacheLuceneSearchPhraseQuery *pq = (OrgApacheLuceneSearchPhraseQuery *) check_class_cast(query, [OrgApacheLuceneSearchPhraseQuery class]);
+    OrgApacheLuceneSearchPhraseQuery *pq = (OrgApacheLuceneSearchPhraseQuery *) cast_chk(query, [OrgApacheLuceneSearchPhraseQuery class]);
     IOSObjectArray *terms = [((OrgApacheLuceneSearchPhraseQuery *) nil_chk(pq)) getTerms];
     IOSIntArray *positions = [pq getPositions];
     for (jint i = 0; i < ((IOSObjectArray *) nil_chk(terms))->size_; ++i) {
@@ -314,7 +345,7 @@ withOrgApacheLuceneDocumentDateTools_ResolutionEnum:(OrgApacheLuceneDocumentDate
     [((OrgApacheLuceneSearchQuery *) nil_chk(query)) setBoostWithFloat:[pq getBoost]];
   }
   if ([query isKindOfClass:[OrgApacheLuceneSearchMultiPhraseQuery class]]) {
-    [((OrgApacheLuceneSearchMultiPhraseQuery *) nil_chk(((OrgApacheLuceneSearchMultiPhraseQuery *) check_class_cast(query, [OrgApacheLuceneSearchMultiPhraseQuery class])))) setSlopWithInt:slop];
+    [((OrgApacheLuceneSearchMultiPhraseQuery *) nil_chk(((OrgApacheLuceneSearchMultiPhraseQuery *) cast_chk(query, [OrgApacheLuceneSearchMultiPhraseQuery class])))) setSlopWithInt:slop];
   }
   return query;
 }
@@ -330,9 +361,9 @@ withOrgApacheLuceneDocumentDateTools_ResolutionEnum:(OrgApacheLuceneDocumentDate
   }
   JavaTextDateFormat *df = JavaTextDateFormat_getDateInstanceWithInt_withJavaUtilLocale_(JavaTextDateFormat_SHORT, locale_);
   [((JavaTextDateFormat *) nil_chk(df)) setLenientWithBoolean:true];
-  OrgApacheLuceneDocumentDateTools_ResolutionEnum *resolution = [self getDateResolutionWithNSString:field];
+  OrgApacheLuceneDocumentDateTools_Resolution *resolution = [self getDateResolutionWithNSString:field];
   @try {
-    part1 = OrgApacheLuceneDocumentDateTools_dateToStringWithJavaUtilDate_withOrgApacheLuceneDocumentDateTools_ResolutionEnum_([df parseWithNSString:part1], resolution);
+    part1 = OrgApacheLuceneDocumentDateTools_dateToStringWithJavaUtilDate_withOrgApacheLuceneDocumentDateTools_Resolution_([df parseWithNSString:part1], resolution);
   }
   @catch (JavaLangException *e) {
   }
@@ -347,7 +378,7 @@ withOrgApacheLuceneDocumentDateTools_ResolutionEnum:(OrgApacheLuceneDocumentDate
       [cal setWithInt:JavaUtilCalendar_MILLISECOND withInt:999];
       d2 = [cal getTime];
     }
-    part2 = OrgApacheLuceneDocumentDateTools_dateToStringWithJavaUtilDate_withOrgApacheLuceneDocumentDateTools_ResolutionEnum_(d2, resolution);
+    part2 = OrgApacheLuceneDocumentDateTools_dateToStringWithJavaUtilDate_withOrgApacheLuceneDocumentDateTools_Resolution_(d2, resolution);
   }
   @catch (JavaLangException *e) {
   }
@@ -355,18 +386,18 @@ withOrgApacheLuceneDocumentDateTools_ResolutionEnum:(OrgApacheLuceneDocumentDate
 }
 
 - (OrgApacheLuceneSearchBooleanClause *)newBooleanClauseWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)q
-                                      withOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanClause_OccurEnum *)occur {
-  return [new_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_OccurEnum_(q, occur) autorelease];
+                                          withOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause_Occur *)occur {
+  return create_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_Occur_(q, occur);
 }
 
 - (OrgApacheLuceneSearchQuery *)newPrefixQueryWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)prefix {
-  OrgApacheLuceneSearchPrefixQuery *query = [new_OrgApacheLuceneSearchPrefixQuery_initWithOrgApacheLuceneIndexTerm_(prefix) autorelease];
+  OrgApacheLuceneSearchPrefixQuery *query = create_OrgApacheLuceneSearchPrefixQuery_initWithOrgApacheLuceneIndexTerm_(prefix);
   [query setRewriteMethodWithOrgApacheLuceneSearchMultiTermQuery_RewriteMethod:multiTermRewriteMethod_];
   return query;
 }
 
 - (OrgApacheLuceneSearchQuery *)newRegexpQueryWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)regexp {
-  OrgApacheLuceneSearchRegexpQuery *query = [new_OrgApacheLuceneSearchRegexpQuery_initWithOrgApacheLuceneIndexTerm_withInt_withInt_(regexp, OrgApacheLuceneUtilAutomatonRegExp_ALL, maxDeterminizedStates_) autorelease];
+  OrgApacheLuceneSearchRegexpQuery *query = create_OrgApacheLuceneSearchRegexpQuery_initWithOrgApacheLuceneIndexTerm_withInt_withInt_(regexp, OrgApacheLuceneUtilAutomatonRegExp_ALL, maxDeterminizedStates_);
   [query setRewriteMethodWithOrgApacheLuceneSearchMultiTermQuery_RewriteMethod:multiTermRewriteMethod_];
   return query;
 }
@@ -375,8 +406,8 @@ withOrgApacheLuceneDocumentDateTools_ResolutionEnum:(OrgApacheLuceneDocumentDate
                                                                 withFloat:(jfloat)minimumSimilarity
                                                                   withInt:(jint)prefixLength {
   NSString *text = [((OrgApacheLuceneIndexTerm *) nil_chk(term)) text];
-  jint numEdits = OrgApacheLuceneSearchFuzzyQuery_floatToEditsWithFloat_withInt_(minimumSimilarity, [text codePointCount:0 endIndex:((jint) [((NSString *) nil_chk(text)) length])]);
-  return [new_OrgApacheLuceneSearchFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withInt_withInt_(term, numEdits, prefixLength) autorelease];
+  jint numEdits = OrgApacheLuceneSearchFuzzyQuery_floatToEditsWithFloat_withInt_(minimumSimilarity, [((NSString *) nil_chk(text)) codePointCount:0 endIndex:((jint) [text length])]);
+  return create_OrgApacheLuceneSearchFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withInt_withInt_(term, numEdits, prefixLength);
 }
 
 - (OrgApacheLuceneUtilBytesRef *)analyzeMultitermTermWithNSString:(NSString *)field
@@ -390,17 +421,17 @@ withOrgApacheLuceneDocumentDateTools_ResolutionEnum:(OrgApacheLuceneDocumentDate
   if (analyzerIn == nil) analyzerIn = [self getAnalyzer];
   @try {
     OrgApacheLuceneAnalysisTokenStream *source = [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(analyzerIn)) tokenStreamWithNSString:field withNSString:part];
-    JavaLangThrowable *__primaryException1 = nil;
+    NSException *__primaryException1 = nil;
     @try {
       [((OrgApacheLuceneAnalysisTokenStream *) nil_chk(source)) reset];
       id<OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute> termAtt = [source getAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_class_()];
-      if (![source incrementToken]) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$", @"analyzer returned no terms for multiTerm term: ", part)) autorelease];
+      if (![source incrementToken]) @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$", @"analyzer returned no terms for multiTerm term: ", part));
       OrgApacheLuceneUtilBytesRef *bytes = OrgApacheLuceneUtilBytesRef_deepCopyOfWithOrgApacheLuceneUtilBytesRef_([((id<OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute>) nil_chk(termAtt)) getBytesRef]);
-      if ([source incrementToken]) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$", @"analyzer returned too many terms for multiTerm term: ", part)) autorelease];
+      if ([source incrementToken]) @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$", @"analyzer returned too many terms for multiTerm term: ", part));
       [source end];
       return bytes;
     }
-    @catch (JavaLangThrowable *e) {
+    @catch (NSException *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -409,8 +440,8 @@ withOrgApacheLuceneDocumentDateTools_ResolutionEnum:(OrgApacheLuceneDocumentDate
         if (__primaryException1 != nil) {
           @try {
             [source close];
-          } @catch (JavaLangThrowable *e) {
-            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          } @catch (NSException *e) {
+            [__primaryException1 addSuppressedWithNSException:e];
           }
         } else {
           [source close];
@@ -419,7 +450,7 @@ withOrgApacheLuceneDocumentDateTools_ResolutionEnum:(OrgApacheLuceneDocumentDate
     }
   }
   @catch (JavaIoIOException *e) {
-    @throw [new_JavaLangRuntimeException_initWithNSString_withJavaLangThrowable_(JreStrcat("$$", @"Error analyzing multiTerm term: ", part), e) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSString_withNSException_(JreStrcat("$$", @"Error analyzing multiTerm term: ", part), e);
   }
 }
 
@@ -434,25 +465,25 @@ withOrgApacheLuceneDocumentDateTools_ResolutionEnum:(OrgApacheLuceneDocumentDate
     start = nil;
   }
   else {
-    start = analyzeRangeTerms_ ? OrgApacheLuceneQueryparserClassicQueryParserBase_analyzeMultitermTermWithNSString_withNSString_(self, field, part1) : [new_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(part1) autorelease];
+    start = analyzeRangeTerms_ ? OrgApacheLuceneQueryparserClassicQueryParserBase_analyzeMultitermTermWithNSString_withNSString_(self, field, part1) : create_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(part1);
   }
   if (part2 == nil) {
     end = nil;
   }
   else {
-    end = analyzeRangeTerms_ ? OrgApacheLuceneQueryparserClassicQueryParserBase_analyzeMultitermTermWithNSString_withNSString_(self, field, part2) : [new_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(part2) autorelease];
+    end = analyzeRangeTerms_ ? OrgApacheLuceneQueryparserClassicQueryParserBase_analyzeMultitermTermWithNSString_withNSString_(self, field, part2) : create_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(part2);
   }
-  OrgApacheLuceneSearchTermRangeQuery *query = [new_OrgApacheLuceneSearchTermRangeQuery_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(field, start, end, startInclusive, endInclusive) autorelease];
+  OrgApacheLuceneSearchTermRangeQuery *query = create_OrgApacheLuceneSearchTermRangeQuery_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(field, start, end, startInclusive, endInclusive);
   [query setRewriteMethodWithOrgApacheLuceneSearchMultiTermQuery_RewriteMethod:multiTermRewriteMethod_];
   return query;
 }
 
 - (OrgApacheLuceneSearchQuery *)newMatchAllDocsQuery {
-  return [new_OrgApacheLuceneSearchMatchAllDocsQuery_init() autorelease];
+  return create_OrgApacheLuceneSearchMatchAllDocsQuery_init();
 }
 
 - (OrgApacheLuceneSearchQuery *)newWildcardQueryWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)t {
-  OrgApacheLuceneSearchWildcardQuery *query = [new_OrgApacheLuceneSearchWildcardQuery_initWithOrgApacheLuceneIndexTerm_withInt_(t, maxDeterminizedStates_) autorelease];
+  OrgApacheLuceneSearchWildcardQuery *query = create_OrgApacheLuceneSearchWildcardQuery_initWithOrgApacheLuceneIndexTerm_withInt_(t, maxDeterminizedStates_);
   [query setRewriteMethodWithOrgApacheLuceneSearchMultiTermQuery_RewriteMethod:multiTermRewriteMethod_];
   return query;
 }
@@ -478,11 +509,11 @@ withOrgApacheLuceneDocumentDateTools_ResolutionEnum:(OrgApacheLuceneDocumentDate
   if ([@"*" isEqual:field]) {
     if ([@"*" isEqual:termStr]) return [self newMatchAllDocsQuery];
   }
-  if (!allowLeadingWildcard_ && ([((NSString *) nil_chk(termStr)) hasPrefix:@"*"] || [termStr hasPrefix:@"?"])) @throw [new_OrgApacheLuceneQueryparserClassicParseException_initWithNSString_(@"'*' or '?' not allowed as first character in WildcardQuery") autorelease];
+  if (!allowLeadingWildcard_ && ([((NSString *) nil_chk(termStr)) hasPrefix:@"*"] || [termStr hasPrefix:@"?"])) @throw create_OrgApacheLuceneQueryparserClassicParseException_initWithNSString_(@"'*' or '?' not allowed as first character in WildcardQuery");
   if (lowercaseExpandedTerms_) {
     termStr = [((NSString *) nil_chk(termStr)) lowercaseStringWithJRELocale:locale_];
   }
-  OrgApacheLuceneIndexTerm *t = [new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(field, termStr) autorelease];
+  OrgApacheLuceneIndexTerm *t = create_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(field, termStr);
   return [self newWildcardQueryWithOrgApacheLuceneIndexTerm:t];
 }
 
@@ -491,17 +522,17 @@ withOrgApacheLuceneDocumentDateTools_ResolutionEnum:(OrgApacheLuceneDocumentDate
   if (lowercaseExpandedTerms_) {
     termStr = [((NSString *) nil_chk(termStr)) lowercaseStringWithJRELocale:locale_];
   }
-  OrgApacheLuceneIndexTerm *t = [new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(field, termStr) autorelease];
+  OrgApacheLuceneIndexTerm *t = create_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(field, termStr);
   return [self newRegexpQueryWithOrgApacheLuceneIndexTerm:t];
 }
 
 - (OrgApacheLuceneSearchQuery *)getPrefixQueryWithNSString:(NSString *)field
                                               withNSString:(NSString *)termStr {
-  if (!allowLeadingWildcard_ && [((NSString *) nil_chk(termStr)) hasPrefix:@"*"]) @throw [new_OrgApacheLuceneQueryparserClassicParseException_initWithNSString_(@"'*' not allowed as first character in PrefixQuery") autorelease];
+  if (!allowLeadingWildcard_ && [((NSString *) nil_chk(termStr)) hasPrefix:@"*"]) @throw create_OrgApacheLuceneQueryparserClassicParseException_initWithNSString_(@"'*' not allowed as first character in PrefixQuery");
   if (lowercaseExpandedTerms_) {
     termStr = [((NSString *) nil_chk(termStr)) lowercaseStringWithJRELocale:locale_];
   }
-  OrgApacheLuceneIndexTerm *t = [new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(field, termStr) autorelease];
+  OrgApacheLuceneIndexTerm *t = create_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(field, termStr);
   return [self newPrefixQueryWithOrgApacheLuceneIndexTerm:t];
 }
 
@@ -511,7 +542,7 @@ withOrgApacheLuceneDocumentDateTools_ResolutionEnum:(OrgApacheLuceneDocumentDate
   if (lowercaseExpandedTerms_) {
     termStr = [((NSString *) nil_chk(termStr)) lowercaseStringWithJRELocale:locale_];
   }
-  OrgApacheLuceneIndexTerm *t = [new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(field, termStr) autorelease];
+  OrgApacheLuceneIndexTerm *t = create_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(field, termStr);
   return [self newFuzzyQueryWithOrgApacheLuceneIndexTerm:t withFloat:minSimilarity withInt:fuzzyPrefixLength_];
 }
 
@@ -528,10 +559,10 @@ withOrgApacheLuceneDocumentDateTools_ResolutionEnum:(OrgApacheLuceneDocumentDate
     q = [self getWildcardQueryWithNSString:qfield withNSString:term->image_];
   }
   else if (prefix) {
-    q = [self getPrefixQueryWithNSString:qfield withNSString:[self discardEscapeCharWithNSString:[term->image_ substring:0 endIndex:((jint) [((NSString *) nil_chk(term->image_)) length]) - 1]]];
+    q = [self getPrefixQueryWithNSString:qfield withNSString:[self discardEscapeCharWithNSString:[((NSString *) nil_chk(term->image_)) substring:0 endIndex:((jint) [term->image_ length]) - 1]]];
   }
   else if (regexp) {
-    q = [self getRegexpQueryWithNSString:qfield withNSString:[term->image_ substring:1 endIndex:((jint) [((NSString *) nil_chk(term->image_)) length]) - 1]];
+    q = [self getRegexpQueryWithNSString:qfield withNSString:[((NSString *) nil_chk(term->image_)) substring:1 endIndex:((jint) [term->image_ length]) - 1]];
   }
   else if (fuzzy) {
     q = [self handleBareFuzzyWithNSString:qfield withOrgApacheLuceneQueryparserClassicToken:fuzzySlop withNSString:termImage];
@@ -548,15 +579,15 @@ withOrgApacheLuceneDocumentDateTools_ResolutionEnum:(OrgApacheLuceneDocumentDate
   OrgApacheLuceneSearchQuery *q;
   jfloat fms = fuzzyMinSim_;
   @try {
-    fms = [JavaLangFloat_valueOfWithNSString_([((NSString *) nil_chk(((OrgApacheLuceneQueryparserClassicToken *) nil_chk(fuzzySlop))->image_)) substring:1]) floatValue];
+    fms = [((JavaLangFloat *) nil_chk(JavaLangFloat_valueOfWithNSString_([((NSString *) nil_chk(((OrgApacheLuceneQueryparserClassicToken *) nil_chk(fuzzySlop))->image_)) substring:1]))) floatValue];
   }
   @catch (JavaLangException *ignored) {
   }
   if (fms < 0.0f) {
-    @throw [new_OrgApacheLuceneQueryparserClassicParseException_initWithNSString_(@"Minimum similarity for a FuzzyQuery has to be between 0.0f and 1.0f !") autorelease];
+    @throw create_OrgApacheLuceneQueryparserClassicParseException_initWithNSString_(@"Minimum similarity for a FuzzyQuery has to be between 0.0f and 1.0f !");
   }
   else if (fms >= 1.0f && fms != JreFpToInt(fms)) {
-    @throw [new_OrgApacheLuceneQueryparserClassicParseException_initWithNSString_(@"Fractional edit distances are not allowed!") autorelease];
+    @throw create_OrgApacheLuceneQueryparserClassicParseException_initWithNSString_(@"Fractional edit distances are not allowed!");
   }
   q = [self getFuzzyQueryWithNSString:qfield withNSString:termImage withFloat:fms];
   return q;
@@ -568,12 +599,12 @@ withOrgApacheLuceneDocumentDateTools_ResolutionEnum:(OrgApacheLuceneDocumentDate
   jint s = phraseSlop_;
   if (fuzzySlop != nil) {
     @try {
-      s = [JavaLangFloat_valueOfWithNSString_([((NSString *) nil_chk(fuzzySlop->image_)) substring:1]) intValue];
+      s = [((JavaLangFloat *) nil_chk(JavaLangFloat_valueOfWithNSString_([((NSString *) nil_chk(fuzzySlop->image_)) substring:1]))) intValue];
     }
     @catch (JavaLangException *ignored) {
     }
   }
-  return [self getFieldQueryWithNSString:qfield withNSString:[self discardEscapeCharWithNSString:[((OrgApacheLuceneQueryparserClassicToken *) nil_chk(term))->image_ substring:1 endIndex:((jint) [((NSString *) nil_chk(term->image_)) length]) - 1]] withInt:s];
+  return [self getFieldQueryWithNSString:qfield withNSString:[self discardEscapeCharWithNSString:[((NSString *) nil_chk(((OrgApacheLuceneQueryparserClassicToken *) nil_chk(term))->image_)) substring:1 endIndex:((jint) [term->image_ length]) - 1]] withInt:s];
 }
 
 - (OrgApacheLuceneSearchQuery *)handleBoostWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)q
@@ -581,7 +612,7 @@ withOrgApacheLuceneDocumentDateTools_ResolutionEnum:(OrgApacheLuceneDocumentDate
   if (boost != nil) {
     jfloat f = (jfloat) 1.0;
     @try {
-      f = [JavaLangFloat_valueOfWithNSString_(boost->image_) floatValue];
+      f = [((JavaLangFloat *) nil_chk(JavaLangFloat_valueOfWithNSString_(boost->image_))) floatValue];
     }
     @catch (JavaLangException *ignored) {
     }
@@ -629,10 +660,10 @@ withOrgApacheLuceneDocumentDateTools_ResolutionEnum:(OrgApacheLuceneDocumentDate
     }
   }
   if (codePointMultiplier > 0) {
-    @throw [new_OrgApacheLuceneQueryparserClassicParseException_initWithNSString_(@"Truncated unicode escape sequence.") autorelease];
+    @throw create_OrgApacheLuceneQueryparserClassicParseException_initWithNSString_(@"Truncated unicode escape sequence.");
   }
   if (lastCharWasEscapeChar) {
-    @throw [new_OrgApacheLuceneQueryparserClassicParseException_initWithNSString_(@"Term can not end with escape character.") autorelease];
+    @throw create_OrgApacheLuceneQueryparserClassicParseException_initWithNSString_(@"Term can not end with escape character.");
   }
   return [NSString stringWithCharacters:output offset:0 length:length];
 }
@@ -658,8 +689,8 @@ withOrgApacheLuceneDocumentDateTools_ResolutionEnum:(OrgApacheLuceneDocumentDate
 
 + (void)initialize {
   if (self == [OrgApacheLuceneQueryparserClassicQueryParserBase class]) {
-    JreStrongAssign(&OrgApacheLuceneQueryparserClassicQueryParserBase_AND_OPERATOR_, JreLoadStatic(OrgApacheLuceneQueryparserClassicQueryParser_OperatorEnum, AND));
-    JreStrongAssign(&OrgApacheLuceneQueryparserClassicQueryParserBase_OR_OPERATOR_, JreLoadStatic(OrgApacheLuceneQueryparserClassicQueryParser_OperatorEnum, OR));
+    JreStrongAssign(&OrgApacheLuceneQueryparserClassicQueryParserBase_AND_OPERATOR, JreLoadEnum(OrgApacheLuceneQueryparserClassicQueryParser_Operator, AND));
+    JreStrongAssign(&OrgApacheLuceneQueryparserClassicQueryParserBase_OR_OPERATOR, JreLoadEnum(OrgApacheLuceneQueryparserClassicQueryParser_Operator, OR));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneQueryparserClassicQueryParserBase)
   }
 }
@@ -682,7 +713,7 @@ withOrgApacheLuceneDocumentDateTools_ResolutionEnum:(OrgApacheLuceneDocumentDate
     { "getPhraseSlop", NULL, "I", 0x1, NULL, NULL },
     { "setAllowLeadingWildcardWithBoolean:", "setAllowLeadingWildcard", "V", 0x1, NULL, NULL },
     { "getAllowLeadingWildcard", NULL, "Z", 0x1, NULL, NULL },
-    { "setDefaultOperatorWithOrgApacheLuceneQueryparserClassicQueryParser_OperatorEnum:", "setDefaultOperator", "V", 0x1, NULL, NULL },
+    { "setDefaultOperatorWithOrgApacheLuceneQueryparserClassicQueryParser_Operator:", "setDefaultOperator", "V", 0x1, NULL, NULL },
     { "getDefaultOperator", NULL, "Lorg.apache.lucene.queryparser.classic.QueryParser$Operator;", 0x1, NULL, NULL },
     { "setLowercaseExpandedTermsWithBoolean:", "setLowercaseExpandedTerms", "V", 0x1, NULL, NULL },
     { "getLowercaseExpandedTerms", NULL, "Z", 0x1, NULL, NULL },
@@ -692,19 +723,19 @@ withOrgApacheLuceneDocumentDateTools_ResolutionEnum:(OrgApacheLuceneDocumentDate
     { "getLocale", NULL, "Ljava.util.Locale;", 0x1, NULL, NULL },
     { "setTimeZoneWithJavaUtilTimeZone:", "setTimeZone", "V", 0x1, NULL, NULL },
     { "getTimeZone", NULL, "Ljava.util.TimeZone;", 0x1, NULL, NULL },
-    { "setDateResolutionWithOrgApacheLuceneDocumentDateTools_ResolutionEnum:", "setDateResolution", "V", 0x1, NULL, NULL },
-    { "setDateResolutionWithNSString:withOrgApacheLuceneDocumentDateTools_ResolutionEnum:", "setDateResolution", "V", 0x1, NULL, NULL },
+    { "setDateResolutionWithOrgApacheLuceneDocumentDateTools_Resolution:", "setDateResolution", "V", 0x1, NULL, NULL },
+    { "setDateResolutionWithNSString:withOrgApacheLuceneDocumentDateTools_Resolution:", "setDateResolution", "V", 0x1, NULL, NULL },
     { "getDateResolutionWithNSString:", "getDateResolution", "Lorg.apache.lucene.document.DateTools$Resolution;", 0x1, NULL, NULL },
     { "setAnalyzeRangeTermsWithBoolean:", "setAnalyzeRangeTerms", "V", 0x1, NULL, NULL },
     { "getAnalyzeRangeTerms", NULL, "Z", 0x1, NULL, NULL },
     { "setMaxDeterminizedStatesWithInt:", "setMaxDeterminizedStates", "V", 0x1, NULL, NULL },
     { "getMaxDeterminizedStates", NULL, "I", 0x1, NULL, NULL },
-    { "addClauseWithJavaUtilList:withInt:withInt:withOrgApacheLuceneSearchQuery:", "addClause", "V", 0x4, NULL, NULL },
+    { "addClauseWithJavaUtilList:withInt:withInt:withOrgApacheLuceneSearchQuery:", "addClause", "V", 0x4, NULL, "(Ljava/util/List<Lorg/apache/lucene/search/BooleanClause;>;IILorg/apache/lucene/search/Query;)V" },
     { "getFieldQueryWithNSString:withNSString:withBoolean:", "getFieldQuery", "Lorg.apache.lucene.search.Query;", 0x4, "Lorg.apache.lucene.queryparser.classic.ParseException;", NULL },
     { "newFieldQueryWithOrgApacheLuceneAnalysisAnalyzer:withNSString:withNSString:withBoolean:", "newFieldQuery", "Lorg.apache.lucene.search.Query;", 0x4, "Lorg.apache.lucene.queryparser.classic.ParseException;", NULL },
     { "getFieldQueryWithNSString:withNSString:withInt:", "getFieldQuery", "Lorg.apache.lucene.search.Query;", 0x4, "Lorg.apache.lucene.queryparser.classic.ParseException;", NULL },
     { "getRangeQueryWithNSString:withNSString:withNSString:withBoolean:withBoolean:", "getRangeQuery", "Lorg.apache.lucene.search.Query;", 0x4, "Lorg.apache.lucene.queryparser.classic.ParseException;", NULL },
-    { "newBooleanClauseWithOrgApacheLuceneSearchQuery:withOrgApacheLuceneSearchBooleanClause_OccurEnum:", "newBooleanClause", "Lorg.apache.lucene.search.BooleanClause;", 0x4, NULL, NULL },
+    { "newBooleanClauseWithOrgApacheLuceneSearchQuery:withOrgApacheLuceneSearchBooleanClause_Occur:", "newBooleanClause", "Lorg.apache.lucene.search.BooleanClause;", 0x4, NULL, NULL },
     { "newPrefixQueryWithOrgApacheLuceneIndexTerm:", "newPrefixQuery", "Lorg.apache.lucene.search.Query;", 0x4, NULL, NULL },
     { "newRegexpQueryWithOrgApacheLuceneIndexTerm:", "newRegexpQuery", "Lorg.apache.lucene.search.Query;", 0x4, NULL, NULL },
     { "newFuzzyQueryWithOrgApacheLuceneIndexTerm:withFloat:withInt:", "newFuzzyQuery", "Lorg.apache.lucene.search.Query;", 0x4, NULL, NULL },
@@ -713,8 +744,8 @@ withOrgApacheLuceneDocumentDateTools_ResolutionEnum:(OrgApacheLuceneDocumentDate
     { "newRangeQueryWithNSString:withNSString:withNSString:withBoolean:withBoolean:", "newRangeQuery", "Lorg.apache.lucene.search.Query;", 0x4, NULL, NULL },
     { "newMatchAllDocsQuery", NULL, "Lorg.apache.lucene.search.Query;", 0x4, NULL, NULL },
     { "newWildcardQueryWithOrgApacheLuceneIndexTerm:", "newWildcardQuery", "Lorg.apache.lucene.search.Query;", 0x4, NULL, NULL },
-    { "getBooleanQueryWithJavaUtilList:", "getBooleanQuery", "Lorg.apache.lucene.search.Query;", 0x4, "Lorg.apache.lucene.queryparser.classic.ParseException;", NULL },
-    { "getBooleanQueryWithJavaUtilList:withBoolean:", "getBooleanQuery", "Lorg.apache.lucene.search.Query;", 0x4, "Lorg.apache.lucene.queryparser.classic.ParseException;", NULL },
+    { "getBooleanQueryWithJavaUtilList:", "getBooleanQuery", "Lorg.apache.lucene.search.Query;", 0x4, "Lorg.apache.lucene.queryparser.classic.ParseException;", "(Ljava/util/List<Lorg/apache/lucene/search/BooleanClause;>;)Lorg/apache/lucene/search/Query;" },
+    { "getBooleanQueryWithJavaUtilList:withBoolean:", "getBooleanQuery", "Lorg.apache.lucene.search.Query;", 0x4, "Lorg.apache.lucene.queryparser.classic.ParseException;", "(Ljava/util/List<Lorg/apache/lucene/search/BooleanClause;>;Z)Lorg/apache/lucene/search/Query;" },
     { "getWildcardQueryWithNSString:withNSString:", "getWildcardQuery", "Lorg.apache.lucene.search.Query;", 0x4, "Lorg.apache.lucene.queryparser.classic.ParseException;", NULL },
     { "getRegexpQueryWithNSString:withNSString:", "getRegexpQuery", "Lorg.apache.lucene.search.Query;", 0x4, "Lorg.apache.lucene.queryparser.classic.ParseException;", NULL },
     { "getPrefixQueryWithNSString:withNSString:", "getPrefixQuery", "Lorg.apache.lucene.search.Query;", 0x4, "Lorg.apache.lucene.queryparser.classic.ParseException;", NULL },
@@ -734,8 +765,8 @@ withOrgApacheLuceneDocumentDateTools_ResolutionEnum:(OrgApacheLuceneDocumentDate
     { "MOD_NONE", "MOD_NONE", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserClassicQueryParserBase_MOD_NONE },
     { "MOD_NOT", "MOD_NOT", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserClassicQueryParserBase_MOD_NOT },
     { "MOD_REQ", "MOD_REQ", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserClassicQueryParserBase_MOD_REQ },
-    { "AND_OPERATOR_", NULL, 0x19, "Lorg.apache.lucene.queryparser.classic.QueryParser$Operator;", &OrgApacheLuceneQueryparserClassicQueryParserBase_AND_OPERATOR_, NULL, .constantValue.asLong = 0 },
-    { "OR_OPERATOR_", NULL, 0x19, "Lorg.apache.lucene.queryparser.classic.QueryParser$Operator;", &OrgApacheLuceneQueryparserClassicQueryParserBase_OR_OPERATOR_, NULL, .constantValue.asLong = 0 },
+    { "AND_OPERATOR", "AND_OPERATOR", 0x19, "Lorg.apache.lucene.queryparser.classic.QueryParser$Operator;", &OrgApacheLuceneQueryparserClassicQueryParserBase_AND_OPERATOR, NULL, .constantValue.asLong = 0 },
+    { "OR_OPERATOR", "OR_OPERATOR", 0x19, "Lorg.apache.lucene.queryparser.classic.QueryParser$Operator;", &OrgApacheLuceneQueryparserClassicQueryParserBase_OR_OPERATOR, NULL, .constantValue.asLong = 0 },
     { "operator__", "operator", 0x0, "Lorg.apache.lucene.queryparser.classic.QueryParser$Operator;", NULL, NULL, .constantValue.asLong = 0 },
     { "lowercaseExpandedTerms_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
     { "multiTermRewriteMethod_", NULL, 0x0, "Lorg.apache.lucene.search.MultiTermQuery$RewriteMethod;", NULL, NULL, .constantValue.asLong = 0 },
@@ -761,9 +792,9 @@ withOrgApacheLuceneDocumentDateTools_ResolutionEnum:(OrgApacheLuceneDocumentDate
 
 void OrgApacheLuceneQueryparserClassicQueryParserBase_init(OrgApacheLuceneQueryparserClassicQueryParserBase *self) {
   OrgApacheLuceneUtilQueryBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_(self, nil);
-  JreStrongAssign(&self->operator__, OrgApacheLuceneQueryparserClassicQueryParserBase_OR_OPERATOR_);
+  JreStrongAssign(&self->operator__, OrgApacheLuceneQueryparserClassicQueryParserBase_OR_OPERATOR);
   self->lowercaseExpandedTerms_ = true;
-  JreStrongAssign(&self->multiTermRewriteMethod_, JreLoadStatic(OrgApacheLuceneSearchMultiTermQuery, CONSTANT_SCORE_REWRITE_));
+  JreStrongAssign(&self->multiTermRewriteMethod_, JreLoadStatic(OrgApacheLuceneSearchMultiTermQuery, CONSTANT_SCORE_REWRITE));
   self->allowLeadingWildcard_ = false;
   self->phraseSlop_ = 0;
   self->fuzzyMinSim_ = OrgApacheLuceneSearchFuzzyQuery_defaultMinSimilarity;
@@ -796,13 +827,13 @@ jint OrgApacheLuceneQueryparserClassicQueryParserBase_hexToIntWithChar_(jchar c)
     return c - 'A' + 10;
   }
   else {
-    @throw [new_OrgApacheLuceneQueryparserClassicParseException_initWithNSString_(JreStrcat("$C", @"Non-hex character in Unicode escape sequence: ", c)) autorelease];
+    @throw create_OrgApacheLuceneQueryparserClassicParseException_initWithNSString_(JreStrcat("$C", @"Non-hex character in Unicode escape sequence: ", c));
   }
 }
 
 NSString *OrgApacheLuceneQueryparserClassicQueryParserBase_escapeWithNSString_(NSString *s) {
   OrgApacheLuceneQueryparserClassicQueryParserBase_initialize();
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   for (jint i = 0; i < ((jint) [((NSString *) nil_chk(s)) length]); i++) {
     jchar c = [s charAtWithInt:i];
     if (c == '\\' || c == '+' || c == '-' || c == '!' || c == '(' || c == ')' || c == ':' || c == '^' || c == '[' || c == ']' || c == '"' || c == '{' || c == '}' || c == '~' || c == '*' || c == '?' || c == '|' || c == '&' || c == '/') {
@@ -826,7 +857,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "MethodRemovedUseAnother", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneQueryparserClassicQueryParserBase_MethodRemovedUseAnother = { 2, "MethodRemovedUseAnother", "org.apache.lucene.queryparser.classic", "QueryParserBase", 0x9, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserClassicQueryParserBase_MethodRemovedUseAnother;
@@ -835,13 +866,15 @@ J2OBJC_IGNORE_DESIGNATED_END
 @end
 
 void OrgApacheLuceneQueryparserClassicQueryParserBase_MethodRemovedUseAnother_init(OrgApacheLuceneQueryparserClassicQueryParserBase_MethodRemovedUseAnother *self) {
-  JavaLangThrowable_init(self);
+  NSException_init(self);
 }
 
 OrgApacheLuceneQueryparserClassicQueryParserBase_MethodRemovedUseAnother *new_OrgApacheLuceneQueryparserClassicQueryParserBase_MethodRemovedUseAnother_init() {
-  OrgApacheLuceneQueryparserClassicQueryParserBase_MethodRemovedUseAnother *self = [OrgApacheLuceneQueryparserClassicQueryParserBase_MethodRemovedUseAnother alloc];
-  OrgApacheLuceneQueryparserClassicQueryParserBase_MethodRemovedUseAnother_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserClassicQueryParserBase_MethodRemovedUseAnother, init)
+}
+
+OrgApacheLuceneQueryparserClassicQueryParserBase_MethodRemovedUseAnother *create_OrgApacheLuceneQueryparserClassicQueryParserBase_MethodRemovedUseAnother_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserClassicQueryParserBase_MethodRemovedUseAnother, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserClassicQueryParserBase_MethodRemovedUseAnother)

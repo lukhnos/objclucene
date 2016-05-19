@@ -38,7 +38,7 @@ withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
 }
 
 - (jlong)ramBytesUsed {
-  return OrgApacheLuceneUtilRamUsageEstimator_alignObjectSizeWithLong_(JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER_) + 2 * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_)) + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithShortArray_(values_);
+  return OrgApacheLuceneUtilRamUsageEstimator_alignObjectSizeWithLong_(JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER) + 2 * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF)) + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithShortArray_(values_);
 }
 
 - (void)clear {
@@ -112,9 +112,11 @@ void OrgApacheLuceneUtilPackedDirect16_initWithInt_(OrgApacheLuceneUtilPackedDir
 }
 
 OrgApacheLuceneUtilPackedDirect16 *new_OrgApacheLuceneUtilPackedDirect16_initWithInt_(jint valueCount) {
-  OrgApacheLuceneUtilPackedDirect16 *self = [OrgApacheLuceneUtilPackedDirect16 alloc];
-  OrgApacheLuceneUtilPackedDirect16_initWithInt_(self, valueCount);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedDirect16, initWithInt_, valueCount)
+}
+
+OrgApacheLuceneUtilPackedDirect16 *create_OrgApacheLuceneUtilPackedDirect16_initWithInt_(jint valueCount) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedDirect16, initWithInt_, valueCount)
 }
 
 void OrgApacheLuceneUtilPackedDirect16_initWithInt_withOrgApacheLuceneStoreDataInput_withInt_(OrgApacheLuceneUtilPackedDirect16 *self, jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount) {
@@ -122,16 +124,18 @@ void OrgApacheLuceneUtilPackedDirect16_initWithInt_withOrgApacheLuceneStoreDataI
   for (jint i = 0; i < valueCount; ++i) {
     *IOSShortArray_GetRef(nil_chk(self->values_), i) = [((OrgApacheLuceneStoreDataInput *) nil_chk(inArg)) readShort];
   }
-  jint remaining = (jint) ([((OrgApacheLuceneUtilPackedPackedInts_FormatEnum *) nil_chk(JreLoadStatic(OrgApacheLuceneUtilPackedPackedInts_FormatEnum, PACKED))) byteCountWithInt:packedIntsVersion withInt:valueCount withInt:16] - 2LL * valueCount);
+  jint remaining = (jint) ([((OrgApacheLuceneUtilPackedPackedInts_Format *) nil_chk(JreLoadEnum(OrgApacheLuceneUtilPackedPackedInts_Format, PACKED))) byteCountWithInt:packedIntsVersion withInt:valueCount withInt:16] - 2LL * valueCount);
   for (jint i = 0; i < remaining; ++i) {
     [((OrgApacheLuceneStoreDataInput *) nil_chk(inArg)) readByte];
   }
 }
 
 OrgApacheLuceneUtilPackedDirect16 *new_OrgApacheLuceneUtilPackedDirect16_initWithInt_withOrgApacheLuceneStoreDataInput_withInt_(jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount) {
-  OrgApacheLuceneUtilPackedDirect16 *self = [OrgApacheLuceneUtilPackedDirect16 alloc];
-  OrgApacheLuceneUtilPackedDirect16_initWithInt_withOrgApacheLuceneStoreDataInput_withInt_(self, packedIntsVersion, inArg, valueCount);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedDirect16, initWithInt_withOrgApacheLuceneStoreDataInput_withInt_, packedIntsVersion, inArg, valueCount)
+}
+
+OrgApacheLuceneUtilPackedDirect16 *create_OrgApacheLuceneUtilPackedDirect16_initWithInt_withOrgApacheLuceneStoreDataInput_withInt_(jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedDirect16, initWithInt_withOrgApacheLuceneStoreDataInput_withInt_, packedIntsVersion, inArg, valueCount)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirect16)

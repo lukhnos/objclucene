@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilPagedBytes_INCLUDE_ALL")
-#if OrgApacheLuceneUtilPagedBytes_RESTRICT
-#define OrgApacheLuceneUtilPagedBytes_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilPagedBytes")
+#ifdef RESTRICT_OrgApacheLuceneUtilPagedBytes
+#define INCLUDE_ALL_OrgApacheLuceneUtilPagedBytes 0
 #else
-#define OrgApacheLuceneUtilPagedBytes_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilPagedBytes 1
 #endif
-#undef OrgApacheLuceneUtilPagedBytes_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilPagedBytes
 
-#if !defined (_OrgApacheLuceneUtilPagedBytes_) && (OrgApacheLuceneUtilPagedBytes_INCLUDE_ALL || OrgApacheLuceneUtilPagedBytes_INCLUDE)
-#define _OrgApacheLuceneUtilPagedBytes_
+#if !defined (OrgApacheLuceneUtilPagedBytes_) && (INCLUDE_ALL_OrgApacheLuceneUtilPagedBytes || defined(INCLUDE_OrgApacheLuceneUtilPagedBytes))
+#define OrgApacheLuceneUtilPagedBytes_
 
-#define OrgApacheLuceneUtilAccountable_RESTRICT 1
-#define OrgApacheLuceneUtilAccountable_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAccountable 1
+#define INCLUDE_OrgApacheLuceneUtilAccountable 1
 #include "org/apache/lucene/util/Accountable.h"
 
 @class OrgApacheLuceneStoreIndexInput;
@@ -27,26 +27,63 @@
 @class OrgApacheLuceneUtilPagedBytes_Reader;
 @protocol JavaUtilCollection;
 
+/*!
+ @brief Represents a logical byte[] as a series of pages.
+ You
+ can write-once into the logical byte[] (append only),
+ using copy, and then retrieve slices (BytesRef) into it
+ using fill.
+ */
 @interface OrgApacheLuceneUtilPagedBytes : NSObject < OrgApacheLuceneUtilAccountable >
 
 #pragma mark Public
 
+/*!
+ @brief 1&lt;&lt;blockBits must be bigger than biggest single
+ BytesRef slice that will be pulled
+ */
 - (instancetype)initWithInt:(jint)blockBits;
 
+/*!
+ @brief Copy BytesRef in, setting BytesRef out to the result.
+ Do not use this if you will use freeze(true).
+ This only supports bytes.length &lt;= blockSize 
+ */
 - (void)copy__WithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes
               withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)outArg OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Read this many bytes from in
+ */
 - (void)copy__WithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)inArg
                                         withLong:(jlong)byteCount OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Copy bytes in, writing the length as a 1 or 2 byte
+ vInt prefix.
+ */
 - (jlong)copyUsingLengthPrefixWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Commits final byte[], trimming it if necessary and if trim=true
+ */
 - (OrgApacheLuceneUtilPagedBytes_Reader *)freezeWithBoolean:(jboolean)trim;
 
 - (id<JavaUtilCollection>)getChildResources;
 
+/*!
+ @brief Returns a DataInput to read values from this
+ PagedBytes instance.
+ */
 - (OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput *)getDataInput;
 
+/*!
+ @brief Returns a DataOutput that you may use to write into
+ this PagedBytes instance.
+ If you do this, you should
+ not call the other writing methods (eg, copy);
+ results are undefined. 
+ */
 - (OrgApacheLuceneUtilPagedBytes_PagedBytesDataOutput *)getDataOutput;
 
 - (jlong)getPointer;
@@ -61,27 +98,51 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilPagedBytes_initWithInt_(OrgApacheLucen
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPagedBytes *new_OrgApacheLuceneUtilPagedBytes_initWithInt_(jint blockBits) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilPagedBytes *create_OrgApacheLuceneUtilPagedBytes_initWithInt_(jint blockBits);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPagedBytes)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilPagedBytes_Reader_) && (OrgApacheLuceneUtilPagedBytes_INCLUDE_ALL || OrgApacheLuceneUtilPagedBytes_Reader_INCLUDE)
-#define _OrgApacheLuceneUtilPagedBytes_Reader_
+#if !defined (OrgApacheLuceneUtilPagedBytes_Reader_) && (INCLUDE_ALL_OrgApacheLuceneUtilPagedBytes || defined(INCLUDE_OrgApacheLuceneUtilPagedBytes_Reader))
+#define OrgApacheLuceneUtilPagedBytes_Reader_
 
-#define OrgApacheLuceneUtilAccountable_RESTRICT 1
-#define OrgApacheLuceneUtilAccountable_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAccountable 1
+#define INCLUDE_OrgApacheLuceneUtilAccountable 1
 #include "org/apache/lucene/util/Accountable.h"
 
 @class OrgApacheLuceneUtilBytesRef;
 @protocol JavaUtilCollection;
 
+/*!
+ @brief Provides methods to read BytesRefs from a frozen
+ PagedBytes.
+ - seealso: #freeze
+ */
 @interface OrgApacheLuceneUtilPagedBytes_Reader : NSObject < OrgApacheLuceneUtilAccountable >
 
 #pragma mark Public
 
+/*!
+ @brief Reads length as 1 or 2 byte vInt prefix, starting at <i>start</i>.
+ <p>
+ <b>Note:</b> this method does not support slices spanning across block
+ borders.
+ </p>
+ */
 - (void)fillWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)b
                                    withLong:(jlong)start;
 
+/*!
+ @brief Gets a slice out of <code>PagedBytes</code> starting at <i>start</i> with a
+ given length.
+ Iff the slice spans across a block border this method will
+ allocate sufficient resources and copy the paged data.
+ <p>
+ Slices spanning more than two blocks are not supported.
+ </p>
+  
+ */
 - (void)fillSliceWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)b
                                         withLong:(jlong)start
                                          withInt:(jint)length;
@@ -100,11 +161,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPagedBytes_Reader)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput_) && (OrgApacheLuceneUtilPagedBytes_INCLUDE_ALL || OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput_INCLUDE)
-#define _OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput_
+#if !defined (OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput_) && (INCLUDE_ALL_OrgApacheLuceneUtilPagedBytes || defined(INCLUDE_OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput))
+#define OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput_
 
-#define OrgApacheLuceneStoreDataInput_RESTRICT 1
-#define OrgApacheLuceneStoreDataInput_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreDataInput 1
+#define INCLUDE_OrgApacheLuceneStoreDataInput 1
 #include "org/apache/lucene/store/DataInput.h"
 
 @class IOSByteArray;
@@ -116,6 +177,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPagedBytes_Reader)
 
 - (OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput *)clone;
 
+/*!
+ @brief Returns the current byte position.
+ */
 - (jlong)getPosition;
 
 - (jbyte)readByte;
@@ -124,6 +188,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPagedBytes_Reader)
                        withInt:(jint)offset
                        withInt:(jint)len;
 
+/*!
+ @brief Seek to a position previously obtained from
+ <code>getPosition</code>.
+ */
 - (void)setPositionWithLong:(jlong)pos;
 
 #pragma mark Package-Private
@@ -138,15 +206,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput_initWit
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput *new_OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput_initWithOrgApacheLuceneUtilPagedBytes_(OrgApacheLuceneUtilPagedBytes *outer$) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput *create_OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput_initWithOrgApacheLuceneUtilPagedBytes_(OrgApacheLuceneUtilPagedBytes *outer$);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilPagedBytes_PagedBytesDataOutput_) && (OrgApacheLuceneUtilPagedBytes_INCLUDE_ALL || OrgApacheLuceneUtilPagedBytes_PagedBytesDataOutput_INCLUDE)
-#define _OrgApacheLuceneUtilPagedBytes_PagedBytesDataOutput_
+#if !defined (OrgApacheLuceneUtilPagedBytes_PagedBytesDataOutput_) && (INCLUDE_ALL_OrgApacheLuceneUtilPagedBytes || defined(INCLUDE_OrgApacheLuceneUtilPagedBytes_PagedBytesDataOutput))
+#define OrgApacheLuceneUtilPagedBytes_PagedBytesDataOutput_
 
-#define OrgApacheLuceneStoreDataOutput_RESTRICT 1
-#define OrgApacheLuceneStoreDataOutput_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreDataOutput 1
+#define INCLUDE_OrgApacheLuceneStoreDataOutput 1
 #include "org/apache/lucene/store/DataOutput.h"
 
 @class IOSByteArray;
@@ -156,6 +226,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput)
 
 #pragma mark Public
 
+- (instancetype)initWithOrgApacheLuceneUtilPagedBytes:(OrgApacheLuceneUtilPagedBytes *)outer$;
+
+/*!
+ @brief Return the current byte position.
+ */
 - (jlong)getPosition;
 
 - (void)writeByteWithByte:(jbyte)b;
@@ -163,10 +238,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput)
 - (void)writeBytesWithByteArray:(IOSByteArray *)b
                         withInt:(jint)offset
                         withInt:(jint)length;
-
-#pragma mark Package-Private
-
-- (instancetype)initWithOrgApacheLuceneUtilPagedBytes:(OrgApacheLuceneUtilPagedBytes *)outer$;
 
 @end
 
@@ -176,8 +247,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilPagedBytes_PagedBytesDataOutput_initWi
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPagedBytes_PagedBytesDataOutput *new_OrgApacheLuceneUtilPagedBytes_PagedBytesDataOutput_initWithOrgApacheLuceneUtilPagedBytes_(OrgApacheLuceneUtilPagedBytes *outer$) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilPagedBytes_PagedBytesDataOutput *create_OrgApacheLuceneUtilPagedBytes_PagedBytesDataOutput_initWithOrgApacheLuceneUtilPagedBytes_(OrgApacheLuceneUtilPagedBytes *outer$);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPagedBytes_PagedBytesDataOutput)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilPagedBytes_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPagedBytes")

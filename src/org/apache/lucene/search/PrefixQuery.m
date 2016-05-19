@@ -33,7 +33,7 @@
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
-  JavaLangStringBuilder *buffer = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_init();
   if (![((NSString *) nil_chk([self getField])) isEqual:field]) {
     [buffer appendWithNSString:[self getField]];
     [buffer appendWithNSString:@":"];
@@ -58,7 +58,7 @@
   if (![super isEqual:obj]) {
     return false;
   }
-  OrgApacheLuceneSearchPrefixQuery *other = (OrgApacheLuceneSearchPrefixQuery *) check_class_cast(obj, [OrgApacheLuceneSearchPrefixQuery class]);
+  OrgApacheLuceneSearchPrefixQuery *other = (OrgApacheLuceneSearchPrefixQuery *) cast_chk(obj, [OrgApacheLuceneSearchPrefixQuery class]);
   if (![((OrgApacheLuceneIndexTerm *) nil_chk(term_)) isEqual:((OrgApacheLuceneSearchPrefixQuery *) nil_chk(other))->term_]) {
     return false;
   }
@@ -83,19 +83,21 @@
 void OrgApacheLuceneSearchPrefixQuery_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneSearchPrefixQuery *self, OrgApacheLuceneIndexTerm *prefix) {
   OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_withInt_withBoolean_(self, prefix, OrgApacheLuceneSearchPrefixQuery_toAutomatonWithOrgApacheLuceneUtilBytesRef_([((OrgApacheLuceneIndexTerm *) nil_chk(prefix)) bytes]), JavaLangInteger_MAX_VALUE, true);
   if (prefix == nil) {
-    @throw [new_JavaLangNullPointerException_initWithNSString_(@"prefix cannot be null") autorelease];
+    @throw create_JavaLangNullPointerException_initWithNSString_(@"prefix cannot be null");
   }
 }
 
 OrgApacheLuceneSearchPrefixQuery *new_OrgApacheLuceneSearchPrefixQuery_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexTerm *prefix) {
-  OrgApacheLuceneSearchPrefixQuery *self = [OrgApacheLuceneSearchPrefixQuery alloc];
-  OrgApacheLuceneSearchPrefixQuery_initWithOrgApacheLuceneIndexTerm_(self, prefix);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchPrefixQuery, initWithOrgApacheLuceneIndexTerm_, prefix)
+}
+
+OrgApacheLuceneSearchPrefixQuery *create_OrgApacheLuceneSearchPrefixQuery_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexTerm *prefix) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchPrefixQuery, initWithOrgApacheLuceneIndexTerm_, prefix)
 }
 
 OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneSearchPrefixQuery_toAutomatonWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *prefix) {
   OrgApacheLuceneSearchPrefixQuery_initialize();
-  OrgApacheLuceneUtilAutomatonAutomaton *automaton = [new_OrgApacheLuceneUtilAutomatonAutomaton_init() autorelease];
+  OrgApacheLuceneUtilAutomatonAutomaton *automaton = create_OrgApacheLuceneUtilAutomatonAutomaton_init();
   jint lastState = [automaton createState];
   for (jint i = 0; i < ((OrgApacheLuceneUtilBytesRef *) nil_chk(prefix))->length_; i++) {
     jint state = [automaton createState];

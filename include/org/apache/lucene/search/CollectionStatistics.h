@@ -5,17 +5,20 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchCollectionStatistics_INCLUDE_ALL")
-#if OrgApacheLuceneSearchCollectionStatistics_RESTRICT
-#define OrgApacheLuceneSearchCollectionStatistics_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchCollectionStatistics")
+#ifdef RESTRICT_OrgApacheLuceneSearchCollectionStatistics
+#define INCLUDE_ALL_OrgApacheLuceneSearchCollectionStatistics 0
 #else
-#define OrgApacheLuceneSearchCollectionStatistics_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchCollectionStatistics 1
 #endif
-#undef OrgApacheLuceneSearchCollectionStatistics_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchCollectionStatistics
 
-#if !defined (_OrgApacheLuceneSearchCollectionStatistics_) && (OrgApacheLuceneSearchCollectionStatistics_INCLUDE_ALL || OrgApacheLuceneSearchCollectionStatistics_INCLUDE)
-#define _OrgApacheLuceneSearchCollectionStatistics_
+#if !defined (OrgApacheLuceneSearchCollectionStatistics_) && (INCLUDE_ALL_OrgApacheLuceneSearchCollectionStatistics || defined(INCLUDE_OrgApacheLuceneSearchCollectionStatistics))
+#define OrgApacheLuceneSearchCollectionStatistics_
 
+/*!
+ @brief Contains statistics for a collection (field)
+ */
 @interface OrgApacheLuceneSearchCollectionStatistics : NSObject
 
 #pragma mark Public
@@ -26,14 +29,35 @@
                         withLong:(jlong)sumTotalTermFreq
                         withLong:(jlong)sumDocFreq;
 
+/*!
+ @brief returns the total number of documents that
+ have at least one term for this field.
+ - seealso: Terms#getDocCount()
+ */
 - (jlong)docCount;
 
+/*!
+ @brief returns the field name
+ */
 - (NSString *)field;
 
+/*!
+ @brief returns the total number of documents, regardless of 
+ whether they all contain values for this field.
+ - seealso: IndexReader#maxDoc()
+ */
 - (jlong)maxDoc;
 
+/*!
+ @brief returns the total number of postings for this field
+ - seealso: Terms#getSumDocFreq()
+ */
 - (jlong)sumDocFreq;
 
+/*!
+ @brief returns the total number of tokens for this field
+ - seealso: Terms#getSumTotalTermFreq()
+ */
 - (jlong)sumTotalTermFreq;
 
 @end
@@ -44,8 +68,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchCollectionStatistics_initWithNSStrin
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchCollectionStatistics *new_OrgApacheLuceneSearchCollectionStatistics_initWithNSString_withLong_withLong_withLong_withLong_(NSString *field, jlong maxDoc, jlong docCount, jlong sumTotalTermFreq, jlong sumDocFreq) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchCollectionStatistics *create_OrgApacheLuceneSearchCollectionStatistics_initWithNSString_withLong_withLong_withLong_withLong_(NSString *field, jlong maxDoc, jlong docCount, jlong sumTotalTermFreq, jlong sumDocFreq);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCollectionStatistics)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchCollectionStatistics_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchCollectionStatistics")

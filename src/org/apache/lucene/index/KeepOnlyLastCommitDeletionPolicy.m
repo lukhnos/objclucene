@@ -32,8 +32,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "KeepOnlyLastCommitDeletionPolicy", NULL, 0x1, NULL, NULL },
-    { "onInitWithJavaUtilList:", "onInit", "V", 0x1, NULL, NULL },
-    { "onCommitWithJavaUtilList:", "onCommit", "V", 0x1, NULL, NULL },
+    { "onInitWithJavaUtilList:", "onInit", "V", 0x1, NULL, "(Ljava/util/List<+Lorg/apache/lucene/index/IndexCommit;>;)V" },
+    { "onCommitWithJavaUtilList:", "onCommit", "V", 0x1, NULL, "(Ljava/util/List<+Lorg/apache/lucene/index/IndexCommit;>;)V" },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy = { 2, "KeepOnlyLastCommitDeletionPolicy", "org.apache.lucene.index", NULL, 0x11, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy;
@@ -46,9 +46,11 @@ void OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy_init(OrgApacheLuceneIn
 }
 
 OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy *new_OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy_init() {
-  OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy *self = [OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy alloc];
-  OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy, init)
+}
+
+OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy *create_OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy)

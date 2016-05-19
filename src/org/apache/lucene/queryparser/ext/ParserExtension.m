@@ -28,7 +28,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "parseWithOrgApacheLuceneQueryparserExtExtensionQuery:", "parse", "Lorg.apache.lucene.search.Query;", 0x401, "Lorg.apache.lucene.queryparser.classic.ParseException;", NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "ParserExtension", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneQueryparserExtParserExtension = { 2, "ParserExtension", "org.apache.lucene.queryparser.ext", NULL, 0x401, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserExtParserExtension;

@@ -5,23 +5,23 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsBlocktreeFieldReader_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsBlocktreeFieldReader_RESTRICT
-#define OrgApacheLuceneCodecsBlocktreeFieldReader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeFieldReader")
+#ifdef RESTRICT_OrgApacheLuceneCodecsBlocktreeFieldReader
+#define INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeFieldReader 0
 #else
-#define OrgApacheLuceneCodecsBlocktreeFieldReader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeFieldReader 1
 #endif
-#undef OrgApacheLuceneCodecsBlocktreeFieldReader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsBlocktreeFieldReader
 
-#if !defined (_OrgApacheLuceneCodecsBlocktreeFieldReader_) && (OrgApacheLuceneCodecsBlocktreeFieldReader_INCLUDE_ALL || OrgApacheLuceneCodecsBlocktreeFieldReader_INCLUDE)
-#define _OrgApacheLuceneCodecsBlocktreeFieldReader_
+#if !defined (OrgApacheLuceneCodecsBlocktreeFieldReader_) && (INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeFieldReader || defined(INCLUDE_OrgApacheLuceneCodecsBlocktreeFieldReader))
+#define OrgApacheLuceneCodecsBlocktreeFieldReader_
 
-#define OrgApacheLuceneIndexTerms_RESTRICT 1
-#define OrgApacheLuceneIndexTerms_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexTerms 1
+#define INCLUDE_OrgApacheLuceneIndexTerms 1
 #include "org/apache/lucene/index/Terms.h"
 
-#define OrgApacheLuceneUtilAccountable_RESTRICT 1
-#define OrgApacheLuceneUtilAccountable_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAccountable 1
+#define INCLUDE_OrgApacheLuceneUtilAccountable 1
 #include "org/apache/lucene/util/Accountable.h"
 
 @class OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader;
@@ -34,6 +34,9 @@
 @class OrgApacheLuceneUtilFstFST;
 @protocol JavaUtilCollection;
 
+/*!
+ @brief BlockTree's implementation of <code>Terms</code>.
+ */
 @interface OrgApacheLuceneCodecsBlocktreeFieldReader : OrgApacheLuceneIndexTerms < OrgApacheLuceneUtilAccountable > {
  @public
   jlong numTerms_;
@@ -47,7 +50,7 @@
   OrgApacheLuceneUtilBytesRef *minTerm_;
   OrgApacheLuceneUtilBytesRef *maxTerm_;
   jint longsSize_;
-  __weak OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader *parent_;
+  __unsafe_unretained OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader *parent_;
   OrgApacheLuceneUtilFstFST *index_;
 }
 
@@ -61,6 +64,9 @@
 
 - (OrgApacheLuceneUtilBytesRef *)getMin;
 
+/*!
+ @brief For debugging -- used by CheckIndex too
+ */
 - (OrgApacheLuceneCodecsBlocktreeStats *)getStats;
 
 - (jlong)getSumDocFreq;
@@ -115,8 +121,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsBlocktreeFieldReader_initWithOrgApac
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeFieldReader *new_OrgApacheLuceneCodecsBlocktreeFieldReader_initWithOrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_withOrgApacheLuceneIndexFieldInfo_withLong_withOrgApacheLuceneUtilBytesRef_withLong_withLong_withInt_withLong_withInt_withOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader *parent, OrgApacheLuceneIndexFieldInfo *fieldInfo, jlong numTerms, OrgApacheLuceneUtilBytesRef *rootCode, jlong sumTotalTermFreq, jlong sumDocFreq, jint docCount, jlong indexStartFP, jint longsSize, OrgApacheLuceneStoreIndexInput *indexIn, OrgApacheLuceneUtilBytesRef *minTerm, OrgApacheLuceneUtilBytesRef *maxTerm) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeFieldReader *create_OrgApacheLuceneCodecsBlocktreeFieldReader_initWithOrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_withOrgApacheLuceneIndexFieldInfo_withLong_withOrgApacheLuceneUtilBytesRef_withLong_withLong_withInt_withLong_withInt_withOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader *parent, OrgApacheLuceneIndexFieldInfo *fieldInfo, jlong numTerms, OrgApacheLuceneUtilBytesRef *rootCode, jlong sumTotalTermFreq, jlong sumDocFreq, jint docCount, jlong indexStartFP, jint longsSize, OrgApacheLuceneStoreIndexInput *indexIn, OrgApacheLuceneUtilBytesRef *minTerm, OrgApacheLuceneUtilBytesRef *maxTerm);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsBlocktreeFieldReader)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsBlocktreeFieldReader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeFieldReader")

@@ -5,25 +5,28 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder_RESTRICT
-#define OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder 0
 #else
-#define OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder 1
 #endif
-#undef OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder
 
-#if !defined (_OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder_) && (OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder_INCLUDE_ALL || OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder_INCLUDE)
-#define _OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder_
+#if !defined (OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder))
+#define OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder_
 
-#define OrgApacheLuceneQueryparserXmlFilterBuilder_RESTRICT 1
-#define OrgApacheLuceneQueryparserXmlFilterBuilder_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserXmlFilterBuilder 1
+#define INCLUDE_OrgApacheLuceneQueryparserXmlFilterBuilder 1
 #include "org/apache/lucene/queryparser/xml/FilterBuilder.h"
 
 @class OrgApacheLuceneAnalysisAnalyzer;
 @class OrgApacheLuceneSearchFilter;
 @protocol OrgW3cDomElement;
 
+/*!
+ @brief Builder for <code>TermsFilter</code>
+ */
 @interface OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder : NSObject < OrgApacheLuceneQueryparserXmlFilterBuilder >
 
 #pragma mark Public
@@ -40,8 +43,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder_i
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder *new_OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *analyzer) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder *create_OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *analyzer);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder")

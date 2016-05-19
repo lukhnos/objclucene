@@ -5,21 +5,25 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilFilterIterator_INCLUDE_ALL")
-#if OrgApacheLuceneUtilFilterIterator_RESTRICT
-#define OrgApacheLuceneUtilFilterIterator_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilFilterIterator")
+#ifdef RESTRICT_OrgApacheLuceneUtilFilterIterator
+#define INCLUDE_ALL_OrgApacheLuceneUtilFilterIterator 0
 #else
-#define OrgApacheLuceneUtilFilterIterator_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilFilterIterator 1
 #endif
-#undef OrgApacheLuceneUtilFilterIterator_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilFilterIterator
 
-#if !defined (_OrgApacheLuceneUtilFilterIterator_) && (OrgApacheLuceneUtilFilterIterator_INCLUDE_ALL || OrgApacheLuceneUtilFilterIterator_INCLUDE)
-#define _OrgApacheLuceneUtilFilterIterator_
+#if !defined (OrgApacheLuceneUtilFilterIterator_) && (INCLUDE_ALL_OrgApacheLuceneUtilFilterIterator || defined(INCLUDE_OrgApacheLuceneUtilFilterIterator))
+#define OrgApacheLuceneUtilFilterIterator_
 
-#define JavaUtilIterator_RESTRICT 1
-#define JavaUtilIterator_INCLUDE 1
+#define RESTRICT_JavaUtilIterator 1
+#define INCLUDE_JavaUtilIterator 1
 #include "java/util/Iterator.h"
 
+/*!
+ @brief An <code>Iterator</code> implementation that filters elements with a boolean predicate.
+ - seealso: #predicateFunction
+ */
 @interface OrgApacheLuceneUtilFilterIterator : NSObject < JavaUtilIterator >
 
 #pragma mark Public
@@ -34,6 +38,9 @@
 
 #pragma mark Protected
 
+/*!
+ @brief returns true, if this element should be returned by <code>next()</code>.
+ */
 - (jboolean)predicateFunctionWithId:(id)object;
 
 @end
@@ -46,4 +53,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFilterIterator)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilFilterIterator_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilFilterIterator")

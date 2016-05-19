@@ -24,15 +24,15 @@
 - (OrgApacheLuceneSearchQuery *)makeLuceneQueryFieldNoBoostWithNSString:(NSString *)fieldName
            withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)qf {
   id<JavaUtilList> luceneSubQueries = [self makeLuceneSubQueriesFieldWithNSString:fieldName withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:qf];
-  OrgApacheLuceneSearchBooleanQuery_Builder *bq = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
-  [bq addWithOrgApacheLuceneSearchQuery:[((id<JavaUtilList>) nil_chk(luceneSubQueries)) getWithInt:0] withOrgApacheLuceneSearchBooleanClause_OccurEnum:JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, MUST)];
-  OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery_addQueriesToBooleanWithOrgApacheLuceneSearchBooleanQuery_Builder_withJavaUtilList_withOrgApacheLuceneSearchBooleanClause_OccurEnum_(bq, [luceneSubQueries subListWithInt:1 withInt:[luceneSubQueries size]], JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, MUST_NOT));
+  OrgApacheLuceneSearchBooleanQuery_Builder *bq = create_OrgApacheLuceneSearchBooleanQuery_Builder_init();
+  [bq addWithOrgApacheLuceneSearchQuery:[((id<JavaUtilList>) nil_chk(luceneSubQueries)) getWithInt:0] withOrgApacheLuceneSearchBooleanClause_Occur:JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, MUST)];
+  OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery_addQueriesToBooleanWithOrgApacheLuceneSearchBooleanQuery_Builder_withJavaUtilList_withOrgApacheLuceneSearchBooleanClause_Occur_(bq, [luceneSubQueries subListWithInt:1 withInt:[luceneSubQueries size]], JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, MUST_NOT));
   return [bq build];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:withNSString:", "NotQuery", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilList:withNSString:", "NotQuery", NULL, 0x1, NULL, "(Ljava/util/List<Lorg/apache/lucene/queryparser/surround/query/SrndQuery;>;Ljava/lang/String;)V" },
     { "makeLuceneQueryFieldNoBoostWithNSString:withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:", "makeLuceneQueryFieldNoBoost", "Lorg.apache.lucene.search.Query;", 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundQueryNotQuery = { 2, "NotQuery", "org.apache.lucene.queryparser.surround.query", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
@@ -46,9 +46,11 @@ void OrgApacheLuceneQueryparserSurroundQueryNotQuery_initWithJavaUtilList_withNS
 }
 
 OrgApacheLuceneQueryparserSurroundQueryNotQuery *new_OrgApacheLuceneQueryparserSurroundQueryNotQuery_initWithJavaUtilList_withNSString_(id<JavaUtilList> queries, NSString *opName) {
-  OrgApacheLuceneQueryparserSurroundQueryNotQuery *self = [OrgApacheLuceneQueryparserSurroundQueryNotQuery alloc];
-  OrgApacheLuceneQueryparserSurroundQueryNotQuery_initWithJavaUtilList_withNSString_(self, queries, opName);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserSurroundQueryNotQuery, initWithJavaUtilList_withNSString_, queries, opName)
+}
+
+OrgApacheLuceneQueryparserSurroundQueryNotQuery *create_OrgApacheLuceneQueryparserSurroundQueryNotQuery_initWithJavaUtilList_withNSString_(id<JavaUtilList> queries, NSString *opName) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserSurroundQueryNotQuery, initWithJavaUtilList_withNSString_, queries, opName)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserSurroundQueryNotQuery)

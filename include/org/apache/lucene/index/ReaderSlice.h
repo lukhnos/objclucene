@@ -5,28 +5,45 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexReaderSlice_INCLUDE_ALL")
-#if OrgApacheLuceneIndexReaderSlice_RESTRICT
-#define OrgApacheLuceneIndexReaderSlice_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexReaderSlice")
+#ifdef RESTRICT_OrgApacheLuceneIndexReaderSlice
+#define INCLUDE_ALL_OrgApacheLuceneIndexReaderSlice 0
 #else
-#define OrgApacheLuceneIndexReaderSlice_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexReaderSlice 1
 #endif
-#undef OrgApacheLuceneIndexReaderSlice_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexReaderSlice
 
-#if !defined (_OrgApacheLuceneIndexReaderSlice_) && (OrgApacheLuceneIndexReaderSlice_INCLUDE_ALL || OrgApacheLuceneIndexReaderSlice_INCLUDE)
-#define _OrgApacheLuceneIndexReaderSlice_
+#if !defined (OrgApacheLuceneIndexReaderSlice_) && (INCLUDE_ALL_OrgApacheLuceneIndexReaderSlice || defined(INCLUDE_OrgApacheLuceneIndexReaderSlice))
+#define OrgApacheLuceneIndexReaderSlice_
 
 @class IOSObjectArray;
 
+/*!
+ @brief Subreader slice from a parent composite reader.
+ */
 @interface OrgApacheLuceneIndexReaderSlice : NSObject {
  @public
+  /*!
+   @brief Document ID this slice starts from.
+   */
   jint start_;
+  /*!
+   @brief Number of documents in this slice.
+   */
   jint length_;
+  /*!
+   @brief Sub-reader index for this slice.
+   */
   jint readerIndex_;
 }
 
++ (IOSObjectArray *)EMPTY_ARRAY;
+
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ */
 - (instancetype)initWithInt:(jint)start
                     withInt:(jint)length
                     withInt:(jint)readerIndex;
@@ -37,15 +54,22 @@
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneIndexReaderSlice)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneIndexReaderSlice_EMPTY_ARRAY_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexReaderSlice, EMPTY_ARRAY_, IOSObjectArray *)
+/*!
+ @brief Zero-length <code>ReaderSlice</code> array.
+ */
+inline IOSObjectArray *OrgApacheLuceneIndexReaderSlice_get_EMPTY_ARRAY();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneIndexReaderSlice_EMPTY_ARRAY;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexReaderSlice, EMPTY_ARRAY, IOSObjectArray *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexReaderSlice_initWithInt_withInt_withInt_(OrgApacheLuceneIndexReaderSlice *self, jint start, jint length, jint readerIndex);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexReaderSlice *new_OrgApacheLuceneIndexReaderSlice_initWithInt_withInt_withInt_(jint start, jint length, jint readerIndex) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexReaderSlice *create_OrgApacheLuceneIndexReaderSlice_initWithInt_withInt_withInt_(jint start, jint length, jint readerIndex);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexReaderSlice)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexReaderSlice_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexReaderSlice")

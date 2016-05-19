@@ -58,9 +58,11 @@ void OrgApacheLuceneMiscTermStats_initWithNSString_withOrgApacheLuceneUtilBytesR
 }
 
 OrgApacheLuceneMiscTermStats *new_OrgApacheLuceneMiscTermStats_initWithNSString_withOrgApacheLuceneUtilBytesRef_withInt_withLong_(NSString *field, OrgApacheLuceneUtilBytesRef *termtext, jint df, jlong tf) {
-  OrgApacheLuceneMiscTermStats *self = [OrgApacheLuceneMiscTermStats alloc];
-  OrgApacheLuceneMiscTermStats_initWithNSString_withOrgApacheLuceneUtilBytesRef_withInt_withLong_(self, field, termtext, df, tf);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneMiscTermStats, initWithNSString_withOrgApacheLuceneUtilBytesRef_withInt_withLong_, field, termtext, df, tf)
+}
+
+OrgApacheLuceneMiscTermStats *create_OrgApacheLuceneMiscTermStats_initWithNSString_withOrgApacheLuceneUtilBytesRef_withInt_withLong_(NSString *field, OrgApacheLuceneUtilBytesRef *termtext, jint df, jlong tf) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneMiscTermStats, initWithNSString_withOrgApacheLuceneUtilBytesRef_withInt_withLong_, field, termtext, df, tf)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneMiscTermStats)

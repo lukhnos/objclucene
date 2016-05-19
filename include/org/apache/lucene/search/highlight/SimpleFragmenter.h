@@ -5,35 +5,48 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchHighlightSimpleFragmenter_INCLUDE_ALL")
-#if OrgApacheLuceneSearchHighlightSimpleFragmenter_RESTRICT
-#define OrgApacheLuceneSearchHighlightSimpleFragmenter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightSimpleFragmenter")
+#ifdef RESTRICT_OrgApacheLuceneSearchHighlightSimpleFragmenter
+#define INCLUDE_ALL_OrgApacheLuceneSearchHighlightSimpleFragmenter 0
 #else
-#define OrgApacheLuceneSearchHighlightSimpleFragmenter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchHighlightSimpleFragmenter 1
 #endif
-#undef OrgApacheLuceneSearchHighlightSimpleFragmenter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchHighlightSimpleFragmenter
 
-#if !defined (_OrgApacheLuceneSearchHighlightSimpleFragmenter_) && (OrgApacheLuceneSearchHighlightSimpleFragmenter_INCLUDE_ALL || OrgApacheLuceneSearchHighlightSimpleFragmenter_INCLUDE)
-#define _OrgApacheLuceneSearchHighlightSimpleFragmenter_
+#if !defined (OrgApacheLuceneSearchHighlightSimpleFragmenter_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightSimpleFragmenter || defined(INCLUDE_OrgApacheLuceneSearchHighlightSimpleFragmenter))
+#define OrgApacheLuceneSearchHighlightSimpleFragmenter_
 
-#define OrgApacheLuceneSearchHighlightFragmenter_RESTRICT 1
-#define OrgApacheLuceneSearchHighlightFragmenter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchHighlightFragmenter 1
+#define INCLUDE_OrgApacheLuceneSearchHighlightFragmenter 1
 #include "org/apache/lucene/search/highlight/Fragmenter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief <code>Fragmenter</code> implementation which breaks text up into same-size
+ fragments with no concerns over spotting sentence boundaries.
+ */
 @interface OrgApacheLuceneSearchHighlightSimpleFragmenter : NSObject < OrgApacheLuceneSearchHighlightFragmenter >
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @param fragmentSize size in number of characters of each fragment
+ */
 - (instancetype)initWithInt:(jint)fragmentSize;
 
+/*!
+ @return size in number of characters of each fragment
+ */
 - (jint)getFragmentSize;
 
 - (jboolean)isNewFragment;
 
+/*!
+ @param size size in characters of each fragment
+ */
 - (void)setFragmentSizeWithInt:(jint)size;
 
 - (void)startWithNSString:(NSString *)originalText
@@ -47,12 +60,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightSimpleFragmenter_init(OrgAp
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightSimpleFragmenter *new_OrgApacheLuceneSearchHighlightSimpleFragmenter_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightSimpleFragmenter *create_OrgApacheLuceneSearchHighlightSimpleFragmenter_init();
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightSimpleFragmenter_initWithInt_(OrgApacheLuceneSearchHighlightSimpleFragmenter *self, jint fragmentSize);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightSimpleFragmenter *new_OrgApacheLuceneSearchHighlightSimpleFragmenter_initWithInt_(jint fragmentSize) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightSimpleFragmenter *create_OrgApacheLuceneSearchHighlightSimpleFragmenter_initWithInt_(jint fragmentSize);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightSimpleFragmenter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchHighlightSimpleFragmenter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightSimpleFragmenter")

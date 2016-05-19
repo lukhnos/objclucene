@@ -5,21 +5,24 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException_INCLUDE_ALL")
-#if OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException_RESTRICT
-#define OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException")
+#ifdef RESTRICT_OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException
+#define INCLUDE_ALL_OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException 0
 #else
-#define OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException 1
 #endif
-#undef OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException
 
-#if !defined (_OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException_) && (OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException_INCLUDE_ALL || OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException_INCLUDE)
-#define _OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException_
+#if !defined (OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException || defined(INCLUDE_OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException))
+#define OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException_
 
-#define JavaLangException_RESTRICT 1
-#define JavaLangException_INCLUDE 1
+#define RESTRICT_JavaLangException 1
+#define INCLUDE_JavaLangException 1
 #include "java/lang/Exception.h"
 
+/*!
+ @brief Exception thrown if TokenStream Tokens are incompatible with provided text
+ */
 @interface OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException : JavaLangException
 
 #pragma mark Public
@@ -34,8 +37,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightInvalidTokenOffsetsExceptio
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException *new_OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException_initWithNSString_(NSString *message) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException *create_OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException_initWithNSString_(NSString *message);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException")

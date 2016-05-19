@@ -55,6 +55,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchQueryWrapperFilter_$1_i
 
 __attribute__((unused)) static OrgApacheLuceneSearchQueryWrapperFilter_$1 *new_OrgApacheLuceneSearchQueryWrapperFilter_$1_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexLeafReaderContext_(OrgApacheLuceneSearchWeight *capture$0, OrgApacheLuceneIndexLeafReaderContext *capture$1) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchQueryWrapperFilter_$1 *create_OrgApacheLuceneSearchQueryWrapperFilter_$1_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexLeafReaderContext_(OrgApacheLuceneSearchWeight *capture$0, OrgApacheLuceneIndexLeafReaderContext *capture$1);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchQueryWrapperFilter_$1)
 
 @implementation OrgApacheLuceneSearchQueryWrapperFilter
@@ -65,7 +67,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchQueryWrapperFilter_$1)
 }
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader {
-  OrgApacheLuceneSearchConstantScoreQuery *rewritten = [new_OrgApacheLuceneSearchConstantScoreQuery_initWithOrgApacheLuceneSearchQuery_(query_) autorelease];
+  OrgApacheLuceneSearchConstantScoreQuery *rewritten = create_OrgApacheLuceneSearchConstantScoreQuery_initWithOrgApacheLuceneSearchQuery_(query_);
   [rewritten setBoostWithFloat:0];
   return rewritten;
 }
@@ -77,8 +79,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchQueryWrapperFilter_$1)
 - (OrgApacheLuceneSearchDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                             withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs {
   OrgApacheLuceneIndexLeafReaderContext *privateContext = [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) getContext];
-  OrgApacheLuceneSearchWeight *weight = [((OrgApacheLuceneSearchIndexSearcher *) [new_OrgApacheLuceneSearchIndexSearcher_initWithOrgApacheLuceneIndexIndexReaderContext_(privateContext) autorelease]) createNormalizedWeightWithOrgApacheLuceneSearchQuery:query_ withBoolean:false];
-  OrgApacheLuceneSearchDocIdSet *set = [new_OrgApacheLuceneSearchQueryWrapperFilter_$1_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexLeafReaderContext_(weight, privateContext) autorelease];
+  OrgApacheLuceneSearchWeight *weight = [create_OrgApacheLuceneSearchIndexSearcher_initWithOrgApacheLuceneIndexIndexReaderContext_(privateContext) createNormalizedWeightWithOrgApacheLuceneSearchQuery:query_ withBoolean:false];
+  OrgApacheLuceneSearchDocIdSet *set = create_OrgApacheLuceneSearchQueryWrapperFilter_$1_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexLeafReaderContext_(weight, privateContext);
   return OrgApacheLuceneSearchBitsFilteredDocIdSet_wrapWithOrgApacheLuceneSearchDocIdSet_withOrgApacheLuceneUtilBits_(set, acceptDocs);
 }
 
@@ -90,7 +92,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchQueryWrapperFilter_$1)
   if ([super isEqual:o] == false) {
     return false;
   }
-  return [((OrgApacheLuceneSearchQuery *) nil_chk(self->query_)) isEqual:((OrgApacheLuceneSearchQueryWrapperFilter *) nil_chk(((OrgApacheLuceneSearchQueryWrapperFilter *) check_class_cast(o, [OrgApacheLuceneSearchQueryWrapperFilter class]))))->query_];
+  return [((OrgApacheLuceneSearchQuery *) nil_chk(self->query_)) isEqual:((OrgApacheLuceneSearchQueryWrapperFilter *) nil_chk(((OrgApacheLuceneSearchQueryWrapperFilter *) cast_chk(o, [OrgApacheLuceneSearchQueryWrapperFilter class]))))->query_];
 }
 
 - (NSUInteger)hash {
@@ -123,14 +125,16 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchQueryWrapperFilter_$1)
 
 void OrgApacheLuceneSearchQueryWrapperFilter_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchQueryWrapperFilter *self, OrgApacheLuceneSearchQuery *query) {
   OrgApacheLuceneSearchFilter_init(self);
-  if (query == nil) @throw [new_JavaLangNullPointerException_initWithNSString_(@"Query may not be null") autorelease];
+  if (query == nil) @throw create_JavaLangNullPointerException_initWithNSString_(@"Query may not be null");
   JreStrongAssign(&self->query_, query);
 }
 
 OrgApacheLuceneSearchQueryWrapperFilter *new_OrgApacheLuceneSearchQueryWrapperFilter_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchQuery *query) {
-  OrgApacheLuceneSearchQueryWrapperFilter *self = [OrgApacheLuceneSearchQueryWrapperFilter alloc];
-  OrgApacheLuceneSearchQueryWrapperFilter_initWithOrgApacheLuceneSearchQuery_(self, query);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchQueryWrapperFilter, initWithOrgApacheLuceneSearchQuery_, query)
+}
+
+OrgApacheLuceneSearchQueryWrapperFilter *create_OrgApacheLuceneSearchQueryWrapperFilter_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchQuery *query) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchQueryWrapperFilter, initWithOrgApacheLuceneSearchQuery_, query)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchQueryWrapperFilter)
@@ -181,9 +185,11 @@ void OrgApacheLuceneSearchQueryWrapperFilter_$1_initWithOrgApacheLuceneSearchWei
 }
 
 OrgApacheLuceneSearchQueryWrapperFilter_$1 *new_OrgApacheLuceneSearchQueryWrapperFilter_$1_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexLeafReaderContext_(OrgApacheLuceneSearchWeight *capture$0, OrgApacheLuceneIndexLeafReaderContext *capture$1) {
-  OrgApacheLuceneSearchQueryWrapperFilter_$1 *self = [OrgApacheLuceneSearchQueryWrapperFilter_$1 alloc];
-  OrgApacheLuceneSearchQueryWrapperFilter_$1_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexLeafReaderContext_(self, capture$0, capture$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchQueryWrapperFilter_$1, initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexLeafReaderContext_, capture$0, capture$1)
+}
+
+OrgApacheLuceneSearchQueryWrapperFilter_$1 *create_OrgApacheLuceneSearchQueryWrapperFilter_$1_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexLeafReaderContext_(OrgApacheLuceneSearchWeight *capture$0, OrgApacheLuceneIndexLeafReaderContext *capture$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchQueryWrapperFilter_$1, initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexLeafReaderContext_, capture$0, capture$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchQueryWrapperFilter_$1)

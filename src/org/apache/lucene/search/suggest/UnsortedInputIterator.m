@@ -46,7 +46,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestUnsortedInputIterator, payloadSp
 - (OrgApacheLuceneUtilBytesRef *)next {
   if (++curPos_ < [((OrgApacheLuceneUtilBytesRefArray *) nil_chk(entries_)) size]) {
     currentOrd_ = IOSIntArray_Get(nil_chk(ords_), curPos_);
-    return [entries_ getWithOrgApacheLuceneUtilBytesRefBuilder:spare_UnsortedInputIterator_ withInt:currentOrd_];
+    return [((OrgApacheLuceneUtilBytesRefArray *) nil_chk(entries_)) getWithOrgApacheLuceneUtilBytesRefBuilder:spare_UnsortedInputIterator_ withInt:currentOrd_];
   }
   return nil;
 }
@@ -54,7 +54,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestUnsortedInputIterator, payloadSp
 - (OrgApacheLuceneUtilBytesRef *)payload {
   if ([self hasPayloads] && curPos_ < [((OrgApacheLuceneUtilBytesRefArray *) nil_chk(payloads_)) size]) {
     JreAssert((currentOrd_ == IOSIntArray_Get(nil_chk(ords_), curPos_)), (@"org/apache/lucene/search/suggest/UnsortedInputIterator.java:75 condition failed: assert currentOrd == ords[curPos];"));
-    return [payloads_ getWithOrgApacheLuceneUtilBytesRefBuilder:payloadSpare_UnsortedInputIterator_ withInt:currentOrd_];
+    return [((OrgApacheLuceneUtilBytesRefArray *) nil_chk(payloads_)) getWithOrgApacheLuceneUtilBytesRefBuilder:payloadSpare_UnsortedInputIterator_ withInt:currentOrd_];
   }
   return nil;
 }
@@ -62,7 +62,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestUnsortedInputIterator, payloadSp
 - (id<JavaUtilSet>)contexts {
   if ([self hasContexts] && curPos_ < [((id<JavaUtilList>) nil_chk(contextSets_)) size]) {
     JreAssert((currentOrd_ == IOSIntArray_Get(nil_chk(ords_), curPos_)), (@"org/apache/lucene/search/suggest/UnsortedInputIterator.java:84 condition failed: assert currentOrd == ords[curPos];"));
-    return [contextSets_ getWithInt:currentOrd_];
+    return [((id<JavaUtilList>) nil_chk(contextSets_)) getWithInt:currentOrd_];
   }
   return nil;
 }
@@ -80,7 +80,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestUnsortedInputIterator, payloadSp
     { "weight", NULL, "J", 0x1, NULL, NULL },
     { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
     { "payload", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "contexts", NULL, "Ljava.util.Set;", 0x1, NULL, NULL },
+    { "contexts", NULL, "Ljava.util.Set;", 0x1, NULL, "()Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "ords_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
@@ -100,7 +100,7 @@ void OrgApacheLuceneSearchSuggestUnsortedInputIterator_initWithOrgApacheLuceneSe
   JreStrongAssignAndConsume(&self->spare_UnsortedInputIterator_, new_OrgApacheLuceneUtilBytesRefBuilder_init());
   JreStrongAssignAndConsume(&self->payloadSpare_UnsortedInputIterator_, new_OrgApacheLuceneUtilBytesRefBuilder_init());
   JreStrongAssignAndConsume(&self->ords_, [IOSIntArray newArrayWithLength:[((OrgApacheLuceneUtilBytesRefArray *) nil_chk(self->entries_)) size]]);
-  JavaUtilRandom *random = [new_JavaUtilRandom_init() autorelease];
+  JavaUtilRandom *random = create_JavaUtilRandom_init();
   for (jint i = 0; i < self->ords_->size_; i++) {
     *IOSIntArray_GetRef(self->ords_, i) = i;
   }
@@ -113,9 +113,11 @@ void OrgApacheLuceneSearchSuggestUnsortedInputIterator_initWithOrgApacheLuceneSe
 }
 
 OrgApacheLuceneSearchSuggestUnsortedInputIterator *new_OrgApacheLuceneSearchSuggestUnsortedInputIterator_initWithOrgApacheLuceneSearchSuggestInputIterator_(id<OrgApacheLuceneSearchSuggestInputIterator> source) {
-  OrgApacheLuceneSearchSuggestUnsortedInputIterator *self = [OrgApacheLuceneSearchSuggestUnsortedInputIterator alloc];
-  OrgApacheLuceneSearchSuggestUnsortedInputIterator_initWithOrgApacheLuceneSearchSuggestInputIterator_(self, source);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestUnsortedInputIterator, initWithOrgApacheLuceneSearchSuggestInputIterator_, source)
+}
+
+OrgApacheLuceneSearchSuggestUnsortedInputIterator *create_OrgApacheLuceneSearchSuggestUnsortedInputIterator_initWithOrgApacheLuceneSearchSuggestInputIterator_(id<OrgApacheLuceneSearchSuggestInputIterator> source) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestUnsortedInputIterator, initWithOrgApacheLuceneSearchSuggestInputIterator_, source)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestUnsortedInputIterator)

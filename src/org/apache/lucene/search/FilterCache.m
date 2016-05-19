@@ -3,12 +3,11 @@
 //  source: ./core/src/java/org/apache/lucene/search/FilterCache.java
 //
 
-#include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Deprecated.h"
-#include "org/apache/lucene/search/Filter.h"
+#include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/search/FilterCache.h"
-#include "org/apache/lucene/search/FilterCachingPolicy.h"
 
 @interface OrgApacheLuceneSearchFilterCache : NSObject
 
@@ -17,7 +16,7 @@
 @implementation OrgApacheLuceneSearchFilterCache
 
 + (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {

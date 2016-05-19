@@ -13,8 +13,9 @@
 #include "org/tartarus/snowball/Among.h"
 #include "org/tartarus/snowball/SnowballProgram.h"
 
-static IOSObjectArray *OrgTartarusSnowballAmong_EMPTY_PARAMS_;
-J2OBJC_STATIC_FIELD_GETTER(OrgTartarusSnowballAmong, EMPTY_PARAMS_, IOSObjectArray *)
+inline IOSObjectArray *OrgTartarusSnowballAmong_get_EMPTY_PARAMS();
+static IOSObjectArray *OrgTartarusSnowballAmong_EMPTY_PARAMS;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballAmong, EMPTY_PARAMS, IOSObjectArray *)
 
 J2OBJC_INITIALIZED_DEFN(OrgTartarusSnowballAmong)
 
@@ -38,7 +39,7 @@ withOrgTartarusSnowballSnowballProgram:(OrgTartarusSnowballSnowballProgram *)met
 
 + (void)initialize {
   if (self == [OrgTartarusSnowballAmong class]) {
-    JreStrongAssignAndConsume(&OrgTartarusSnowballAmong_EMPTY_PARAMS_, [IOSObjectArray newArrayWithLength:0 type:IOSClass_class_()]);
+    JreStrongAssignAndConsume(&OrgTartarusSnowballAmong_EMPTY_PARAMS, [IOSObjectArray newArrayWithLength:0 type:IOSClass_class_()]);
     J2OBJC_SET_INITIALIZED(OrgTartarusSnowballAmong)
   }
 }
@@ -48,7 +49,7 @@ withOrgTartarusSnowballSnowballProgram:(OrgTartarusSnowballSnowballProgram *)met
     { "initWithNSString:withInt:withInt:withNSString:withOrgTartarusSnowballSnowballProgram:", "Among", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "EMPTY_PARAMS_", NULL, 0x1a, "[Ljava.lang.Class;", &OrgTartarusSnowballAmong_EMPTY_PARAMS_, "[Ljava/lang/Class<*>;", .constantValue.asLong = 0 },
+    { "EMPTY_PARAMS", "EMPTY_PARAMS", 0x1a, "[Ljava.lang.Class;", &OrgTartarusSnowballAmong_EMPTY_PARAMS, "[Ljava/lang/Class<*>;", .constantValue.asLong = 0 },
     { "s_size_", NULL, 0x11, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "s_", NULL, 0x11, "[C", NULL, NULL, .constantValue.asLong = 0 },
     { "substring_i_", NULL, 0x11, "I", NULL, NULL, .constantValue.asLong = 0 },
@@ -74,18 +75,20 @@ void OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_with
   }
   else {
     @try {
-      JreStrongAssign(&self->method_, [[((OrgTartarusSnowballSnowballProgram *) nil_chk(methodobject)) getClass] getDeclaredMethod:methodname parameterTypes:OrgTartarusSnowballAmong_EMPTY_PARAMS_]);
+      JreStrongAssign(&self->method_, [[((OrgTartarusSnowballSnowballProgram *) nil_chk(methodobject)) getClass] getDeclaredMethod:methodname parameterTypes:OrgTartarusSnowballAmong_EMPTY_PARAMS]);
     }
     @catch (JavaLangNoSuchMethodException *e) {
-      @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(e) autorelease];
+      @throw create_JavaLangRuntimeException_initWithNSException_(e);
     }
   }
 }
 
 OrgTartarusSnowballAmong *new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(NSString *s, jint substring_i, jint result, NSString *methodname, OrgTartarusSnowballSnowballProgram *methodobject) {
-  OrgTartarusSnowballAmong *self = [OrgTartarusSnowballAmong alloc];
-  OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(self, s, substring_i, result, methodname, methodobject);
-  return self;
+  J2OBJC_NEW_IMPL(OrgTartarusSnowballAmong, initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_, s, substring_i, result, methodname, methodobject)
+}
+
+OrgTartarusSnowballAmong *create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(NSString *s, jint substring_i, jint result, NSString *methodname, OrgTartarusSnowballSnowballProgram *methodobject) {
+  J2OBJC_CREATE_IMPL(OrgTartarusSnowballAmong, initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_, s, substring_i, result, methodname, methodobject)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgTartarusSnowballAmong)

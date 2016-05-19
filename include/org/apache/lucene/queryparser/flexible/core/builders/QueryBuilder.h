@@ -5,21 +5,32 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder_) && (OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder_
+#if !defined (OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder))
+#define OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder_
 
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 
+/*!
+ @brief This interface is used by implementors classes that builds some kind of
+ object from a query tree.
+ - seealso: QueryTreeBuilder
+ */
 @protocol OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder < NSObject, JavaObject >
 
+/*!
+ @brief Builds some kind of object from a query tree.
+ @param queryNode
+ the query tree root node
+ @return some object generated from the query tree
+ */
 - (id)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode;
 
 @end
@@ -30,4 +41,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBu
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder")

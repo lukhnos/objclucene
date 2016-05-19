@@ -5,25 +5,28 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery_RESTRICT
-#define OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery 0
 #else
-#define OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery 1
 #endif
-#undef OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery
 
-#if !defined (_OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery_) && (OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery_INCLUDE_ALL || OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery_INCLUDE)
-#define _OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery_
+#if !defined (OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery || defined(INCLUDE_OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery))
+#define OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery_
 
-#define OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_RESTRICT 1
-#define OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserSurroundQuerySimpleTerm 1
+#define INCLUDE_OrgApacheLuceneQueryparserSurroundQuerySimpleTerm 1
 #include "org/apache/lucene/queryparser/surround/query/SimpleTerm.h"
 
 @class OrgApacheLuceneIndexIndexReader;
 @class OrgApacheLuceneIndexTerm;
 @protocol OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor;
 
+/*!
+ @brief Simple single-term clause
+ */
 @interface OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery : OrgApacheLuceneQueryparserSurroundQuerySimpleTerm
 
 #pragma mark Public
@@ -49,8 +52,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery_init
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery *new_OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery_initWithNSString_withBoolean_(NSString *termText, jboolean quoted) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery *create_OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery_initWithNSString_withBoolean_(NSString *termText, jboolean quoted);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery")

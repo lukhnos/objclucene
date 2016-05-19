@@ -32,12 +32,12 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 
 - (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
                                  withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext {
-  OrgApacheLuceneSearchIndexSearcher *searcher = (OrgApacheLuceneSearchIndexSearcher *) check_class_cast([((id<JavaUtilMap>) nil_chk(context)) getWithId:@"searcher"], [OrgApacheLuceneSearchIndexSearcher class]);
-  return [new_OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues_initWithInt_withOrgApacheLuceneQueriesFunctionValueSource_([((OrgApacheLuceneIndexIndexReader *) nil_chk([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getIndexReader])) maxDoc], self) autorelease];
+  OrgApacheLuceneSearchIndexSearcher *searcher = (OrgApacheLuceneSearchIndexSearcher *) cast_chk([((id<JavaUtilMap>) nil_chk(context)) getWithId:@"searcher"], [OrgApacheLuceneSearchIndexSearcher class]);
+  return create_OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues_initWithInt_withOrgApacheLuceneQueriesFunctionValueSource_([((OrgApacheLuceneIndexIndexReader *) nil_chk([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getIndexReader])) maxDoc], self);
 }
 
 - (jboolean)isEqual:(id)o {
-  return [self getClass] == [nil_chk(o) getClass];
+  return [self getClass] == (id) [nil_chk(o) getClass];
 }
 
 - (NSUInteger)hash {
@@ -59,7 +59,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:", "getValues", "Lorg.apache.lucene.queries.function.FunctionValues;", 0x1, "Ljava.io.IOException;", NULL },
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "MaxDocValueSource", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource = { 2, "MaxDocValueSource", "org.apache.lucene.queries.function.valuesource", NULL, 0x1, 7, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource;
@@ -72,9 +72,11 @@ void OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource_init(OrgApacheLu
 }
 
 OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource_init() {
-  OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource *self = [OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource alloc];
-  OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource, init)
+}
+
+OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource *create_OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource)

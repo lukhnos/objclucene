@@ -74,10 +74,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   for (j = 1; j <= tl; j++) {
     if (j < n_) {
       for (jint ti = 0; ti < n_ - j; ti++) {
-        *IOSCharArray_GetRef(t_j, ti) = 0;
+        *IOSCharArray_GetRef(nil_chk(t_j), ti) = 0;
       }
       for (jint ti = n_ - j; ti < n_; ti++) {
-        *IOSCharArray_GetRef(t_j, ti) = [target charAtWithInt:ti - (n_ - j)];
+        *IOSCharArray_GetRef(nil_chk(t_j), ti) = [target charAtWithInt:ti - (n_ - j)];
       }
     }
     else {
@@ -111,9 +111,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (jboolean)isEqual:(id)obj {
   if (self == obj) return true;
-  if (nil == obj || [self getClass] != [obj getClass]) return false;
-  OrgApacheLuceneSearchSpellNGramDistance *o = (OrgApacheLuceneSearchSpellNGramDistance *) check_class_cast(obj, [OrgApacheLuceneSearchSpellNGramDistance class]);
-  return ((OrgApacheLuceneSearchSpellNGramDistance *) nil_chk(o))->n_ == self->n_;
+  if (nil == obj || [self getClass] != (id) [obj getClass]) return false;
+  OrgApacheLuceneSearchSpellNGramDistance *o = (OrgApacheLuceneSearchSpellNGramDistance *) cast_chk(obj, [OrgApacheLuceneSearchSpellNGramDistance class]);
+  return o->n_ == self->n_;
 }
 
 - (NSString *)description {
@@ -144,9 +144,11 @@ void OrgApacheLuceneSearchSpellNGramDistance_initWithInt_(OrgApacheLuceneSearchS
 }
 
 OrgApacheLuceneSearchSpellNGramDistance *new_OrgApacheLuceneSearchSpellNGramDistance_initWithInt_(jint size) {
-  OrgApacheLuceneSearchSpellNGramDistance *self = [OrgApacheLuceneSearchSpellNGramDistance alloc];
-  OrgApacheLuceneSearchSpellNGramDistance_initWithInt_(self, size);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSpellNGramDistance, initWithInt_, size)
+}
+
+OrgApacheLuceneSearchSpellNGramDistance *create_OrgApacheLuceneSearchSpellNGramDistance_initWithInt_(jint size) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSpellNGramDistance, initWithInt_, size)
 }
 
 void OrgApacheLuceneSearchSpellNGramDistance_init(OrgApacheLuceneSearchSpellNGramDistance *self) {
@@ -154,9 +156,11 @@ void OrgApacheLuceneSearchSpellNGramDistance_init(OrgApacheLuceneSearchSpellNGra
 }
 
 OrgApacheLuceneSearchSpellNGramDistance *new_OrgApacheLuceneSearchSpellNGramDistance_init() {
-  OrgApacheLuceneSearchSpellNGramDistance *self = [OrgApacheLuceneSearchSpellNGramDistance alloc];
-  OrgApacheLuceneSearchSpellNGramDistance_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSpellNGramDistance, init)
+}
+
+OrgApacheLuceneSearchSpellNGramDistance *create_OrgApacheLuceneSearchSpellNGramDistance_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSpellNGramDistance, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpellNGramDistance)

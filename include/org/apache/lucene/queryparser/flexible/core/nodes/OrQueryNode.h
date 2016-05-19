@@ -5,29 +5,37 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode_) && (OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode_
+#if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode))
+#define OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode_
 
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode_RESTRICT 1
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode 1
+#define INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/BooleanQueryNode.h"
 
 @protocol JavaLangCharSequence;
 @protocol JavaUtilList;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;
 
+/*!
+ @brief A <code>OrQueryNode</code> represents an OR boolean operation performed on a list
+ of nodes.
+ */
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode
 
 #pragma mark Public
 
+/*!
+ @param clauses
+ - the query nodes to be or'ed
+ */
 - (instancetype)initWithJavaUtilList:(id<JavaUtilList>)clauses;
 
 - (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escapeSyntaxParser;
@@ -42,8 +50,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode_in
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode_initWithJavaUtilList_(id<JavaUtilList> clauses) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode *create_OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode_initWithJavaUtilList_(id<JavaUtilList> clauses);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode")

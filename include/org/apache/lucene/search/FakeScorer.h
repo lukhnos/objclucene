@@ -5,24 +5,28 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchFakeScorer_INCLUDE_ALL")
-#if OrgApacheLuceneSearchFakeScorer_RESTRICT
-#define OrgApacheLuceneSearchFakeScorer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchFakeScorer")
+#ifdef RESTRICT_OrgApacheLuceneSearchFakeScorer
+#define INCLUDE_ALL_OrgApacheLuceneSearchFakeScorer 0
 #else
-#define OrgApacheLuceneSearchFakeScorer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchFakeScorer 1
 #endif
-#undef OrgApacheLuceneSearchFakeScorer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchFakeScorer
 
-#if !defined (_OrgApacheLuceneSearchFakeScorer_) && (OrgApacheLuceneSearchFakeScorer_INCLUDE_ALL || OrgApacheLuceneSearchFakeScorer_INCLUDE)
-#define _OrgApacheLuceneSearchFakeScorer_
+#if !defined (OrgApacheLuceneSearchFakeScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchFakeScorer || defined(INCLUDE_OrgApacheLuceneSearchFakeScorer))
+#define OrgApacheLuceneSearchFakeScorer_
 
-#define OrgApacheLuceneSearchScorer_RESTRICT 1
-#define OrgApacheLuceneSearchScorer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchScorer 1
+#define INCLUDE_OrgApacheLuceneSearchScorer 1
 #include "org/apache/lucene/search/Scorer.h"
 
 @class OrgApacheLuceneSearchWeight;
 @protocol JavaUtilCollection;
 
+/*!
+ @brief Used by <code>BulkScorer</code>s that need to pass a <code>Scorer</code>
+  to <code>LeafCollector.setScorer</code>.
+ */
 @interface OrgApacheLuceneSearchFakeScorer : OrgApacheLuceneSearchScorer {
  @public
   jfloat score_;
@@ -58,8 +62,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchFakeScorer_init(OrgApacheLuceneSearc
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchFakeScorer *new_OrgApacheLuceneSearchFakeScorer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchFakeScorer *create_OrgApacheLuceneSearchFakeScorer_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFakeScorer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchFakeScorer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchFakeScorer")

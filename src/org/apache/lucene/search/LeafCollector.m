@@ -3,11 +3,8 @@
 //  source: ./core/src/java/org/apache/lucene/search/LeafCollector.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/search/LeafCollector.h"
-#include "org/apache/lucene/search/Scorer.h"
 
 @interface OrgApacheLuceneSearchLeafCollector : NSObject
 

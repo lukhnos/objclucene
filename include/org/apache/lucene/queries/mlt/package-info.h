@@ -3,14 +3,17 @@
 //  source: ./queries/src/java/org/apache/lucene/queries/mlt/package-info.java
 //
 
+/*!
+ @brief Document similarity query generators.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesMltPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesMltPackage_info_RESTRICT
-#define OrgApacheLuceneQueriesMltPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesMltPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneQueriesMltPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneQueriesMltPackage_info 0
 #else
-#define OrgApacheLuceneQueriesMltPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesMltPackage_info 1
 #endif
-#undef OrgApacheLuceneQueriesMltPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesMltPackage_info
 
-#pragma pop_macro("OrgApacheLuceneQueriesMltPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesMltPackage_info")

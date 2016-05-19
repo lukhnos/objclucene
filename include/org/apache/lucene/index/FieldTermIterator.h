@@ -5,29 +5,46 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexFieldTermIterator_INCLUDE_ALL")
-#if OrgApacheLuceneIndexFieldTermIterator_RESTRICT
-#define OrgApacheLuceneIndexFieldTermIterator_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexFieldTermIterator")
+#ifdef RESTRICT_OrgApacheLuceneIndexFieldTermIterator
+#define INCLUDE_ALL_OrgApacheLuceneIndexFieldTermIterator 0
 #else
-#define OrgApacheLuceneIndexFieldTermIterator_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexFieldTermIterator 1
 #endif
-#undef OrgApacheLuceneIndexFieldTermIterator_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexFieldTermIterator
 
-#if !defined (_OrgApacheLuceneIndexFieldTermIterator_) && (OrgApacheLuceneIndexFieldTermIterator_INCLUDE_ALL || OrgApacheLuceneIndexFieldTermIterator_INCLUDE)
-#define _OrgApacheLuceneIndexFieldTermIterator_
+#if !defined (OrgApacheLuceneIndexFieldTermIterator_) && (INCLUDE_ALL_OrgApacheLuceneIndexFieldTermIterator || defined(INCLUDE_OrgApacheLuceneIndexFieldTermIterator))
+#define OrgApacheLuceneIndexFieldTermIterator_
 
-#define OrgApacheLuceneUtilBytesRefIterator_RESTRICT 1
-#define OrgApacheLuceneUtilBytesRefIterator_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilBytesRefIterator 1
+#define INCLUDE_OrgApacheLuceneUtilBytesRefIterator 1
 #include "org/apache/lucene/util/BytesRefIterator.h"
 
+/*!
+ @brief Iterates over terms in across multiple fields.
+ The caller must
+ check <code>field</code> after each <code>next</code> to see if the field
+ changed, but <code>==</code> can be used since the iterator
+ implementation ensures it will use the same String instance for
+ a given field. 
+ */
 @interface OrgApacheLuceneIndexFieldTermIterator : NSObject < OrgApacheLuceneUtilBytesRefIterator >
 
 #pragma mark Package-Private
 
 - (instancetype)init;
 
+/*!
+ @brief Del gen of the current term.
+ */
 - (jlong)delGen;
 
+/*!
+ @brief Returns current field.
+ This method should not be called
+ after iteration is done.  Note that you may use == to
+ detect a change in field. 
+ */
 - (NSString *)field;
 
 @end
@@ -40,4 +57,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFieldTermIterator)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexFieldTermIterator_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexFieldTermIterator")

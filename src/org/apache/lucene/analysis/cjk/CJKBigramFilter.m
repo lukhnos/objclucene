@@ -38,16 +38,41 @@
   OrgApacheLuceneUtilAttributeSource_State *loneState_;
 }
 
+/*!
+ @brief looks at next input token, returning false is none is available
+ */
 - (jboolean)doNext;
 
+/*!
+ @brief refills buffers with new data from the current token.
+ */
 - (void)refill;
 
+/*!
+ @brief Flushes a bigram token to output from our buffer 
+ This is the normal case, e.g.
+ ABC -&gt; AB BC
+ */
 - (void)flushBigram;
 
+/*!
+ @brief Flushes a unigram token to output from our buffer.
+ This happens when we encounter isolated CJK characters, either the whole
+ CJK string is a single character, or we encounter a CJK character surrounded 
+ by space, punctuation, english, etc, but not beside any other CJK.
+ */
 - (void)flushUnigram;
 
+/*!
+ @brief True if we have multiple codepoints sitting in our buffer
+ */
 - (jboolean)hasBufferedBigram;
 
+/*!
+ @brief True if we have a single codepoint sitting in our buffer, where its future
+ (whether it is emitted as unigram or forms a bigram) depends upon not-yet-seen
+ inputs.
+ */
 - (jboolean)hasBufferedUnigram;
 
 @end
@@ -63,20 +88,25 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCjkCJKBigramFilter, posIncAtt_, id<Or
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCjkCJKBigramFilter, posLengthAtt_, id<OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCjkCJKBigramFilter, loneState_, OrgApacheLuceneUtilAttributeSource_State *)
 
-static NSString *OrgApacheLuceneAnalysisCjkCJKBigramFilter_HAN_TYPE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisCjkCJKBigramFilter, HAN_TYPE_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisCjkCJKBigramFilter_get_HAN_TYPE();
+static NSString *OrgApacheLuceneAnalysisCjkCJKBigramFilter_HAN_TYPE;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisCjkCJKBigramFilter, HAN_TYPE, NSString *)
 
-static NSString *OrgApacheLuceneAnalysisCjkCJKBigramFilter_HIRAGANA_TYPE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisCjkCJKBigramFilter, HIRAGANA_TYPE_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisCjkCJKBigramFilter_get_HIRAGANA_TYPE();
+static NSString *OrgApacheLuceneAnalysisCjkCJKBigramFilter_HIRAGANA_TYPE;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisCjkCJKBigramFilter, HIRAGANA_TYPE, NSString *)
 
-static NSString *OrgApacheLuceneAnalysisCjkCJKBigramFilter_KATAKANA_TYPE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisCjkCJKBigramFilter, KATAKANA_TYPE_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisCjkCJKBigramFilter_get_KATAKANA_TYPE();
+static NSString *OrgApacheLuceneAnalysisCjkCJKBigramFilter_KATAKANA_TYPE;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisCjkCJKBigramFilter, KATAKANA_TYPE, NSString *)
 
-static NSString *OrgApacheLuceneAnalysisCjkCJKBigramFilter_HANGUL_TYPE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisCjkCJKBigramFilter, HANGUL_TYPE_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisCjkCJKBigramFilter_get_HANGUL_TYPE();
+static NSString *OrgApacheLuceneAnalysisCjkCJKBigramFilter_HANGUL_TYPE;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisCjkCJKBigramFilter, HANGUL_TYPE, NSString *)
 
-static id OrgApacheLuceneAnalysisCjkCJKBigramFilter_NO__;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisCjkCJKBigramFilter, NO__, id)
+inline id OrgApacheLuceneAnalysisCjkCJKBigramFilter_get_NO();
+static id OrgApacheLuceneAnalysisCjkCJKBigramFilter_NO;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisCjkCJKBigramFilter, NO, id)
 
 __attribute__((unused)) static jboolean OrgApacheLuceneAnalysisCjkCJKBigramFilter_doNext(OrgApacheLuceneAnalysisCjkCJKBigramFilter *self);
 
@@ -92,10 +122,34 @@ __attribute__((unused)) static jboolean OrgApacheLuceneAnalysisCjkCJKBigramFilte
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisCjkCJKBigramFilter)
 
-NSString *OrgApacheLuceneAnalysisCjkCJKBigramFilter_DOUBLE_TYPE_ = @"<DOUBLE>";
-NSString *OrgApacheLuceneAnalysisCjkCJKBigramFilter_SINGLE_TYPE_ = @"<SINGLE>";
+NSString *OrgApacheLuceneAnalysisCjkCJKBigramFilter_DOUBLE_TYPE = @"<DOUBLE>";
+NSString *OrgApacheLuceneAnalysisCjkCJKBigramFilter_SINGLE_TYPE = @"<SINGLE>";
 
 @implementation OrgApacheLuceneAnalysisCjkCJKBigramFilter
+
++ (jint)HAN {
+  return OrgApacheLuceneAnalysisCjkCJKBigramFilter_HAN;
+}
+
++ (jint)HIRAGANA {
+  return OrgApacheLuceneAnalysisCjkCJKBigramFilter_HIRAGANA;
+}
+
++ (jint)KATAKANA {
+  return OrgApacheLuceneAnalysisCjkCJKBigramFilter_KATAKANA;
+}
+
++ (jint)HANGUL {
+  return OrgApacheLuceneAnalysisCjkCJKBigramFilter_HANGUL;
+}
+
++ (NSString *)DOUBLE_TYPE {
+  return OrgApacheLuceneAnalysisCjkCJKBigramFilter_DOUBLE_TYPE;
+}
+
++ (NSString *)SINGLE_TYPE {
+  return OrgApacheLuceneAnalysisCjkCJKBigramFilter_SINGLE_TYPE;
+}
 
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg {
   OrgApacheLuceneAnalysisCjkCJKBigramFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, inArg);
@@ -219,11 +273,11 @@ NSString *OrgApacheLuceneAnalysisCjkCJKBigramFilter_SINGLE_TYPE_ = @"<SINGLE>";
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisCjkCJKBigramFilter class]) {
-    JreStrongAssign(&OrgApacheLuceneAnalysisCjkCJKBigramFilter_HAN_TYPE_, IOSObjectArray_Get(nil_chk(JreLoadStatic(OrgApacheLuceneAnalysisStandardStandardTokenizer, TOKEN_TYPES_)), OrgApacheLuceneAnalysisStandardStandardTokenizer_IDEOGRAPHIC));
-    JreStrongAssign(&OrgApacheLuceneAnalysisCjkCJKBigramFilter_HIRAGANA_TYPE_, IOSObjectArray_Get(JreLoadStatic(OrgApacheLuceneAnalysisStandardStandardTokenizer, TOKEN_TYPES_), OrgApacheLuceneAnalysisStandardStandardTokenizer_HIRAGANA));
-    JreStrongAssign(&OrgApacheLuceneAnalysisCjkCJKBigramFilter_KATAKANA_TYPE_, IOSObjectArray_Get(JreLoadStatic(OrgApacheLuceneAnalysisStandardStandardTokenizer, TOKEN_TYPES_), OrgApacheLuceneAnalysisStandardStandardTokenizer_KATAKANA));
-    JreStrongAssign(&OrgApacheLuceneAnalysisCjkCJKBigramFilter_HANGUL_TYPE_, IOSObjectArray_Get(JreLoadStatic(OrgApacheLuceneAnalysisStandardStandardTokenizer, TOKEN_TYPES_), OrgApacheLuceneAnalysisStandardStandardTokenizer_HANGUL));
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisCjkCJKBigramFilter_NO__, new_NSObject_init());
+    JreStrongAssign(&OrgApacheLuceneAnalysisCjkCJKBigramFilter_HAN_TYPE, IOSObjectArray_Get(nil_chk(JreLoadStatic(OrgApacheLuceneAnalysisStandardStandardTokenizer, TOKEN_TYPES)), OrgApacheLuceneAnalysisStandardStandardTokenizer_IDEOGRAPHIC));
+    JreStrongAssign(&OrgApacheLuceneAnalysisCjkCJKBigramFilter_HIRAGANA_TYPE, IOSObjectArray_Get(JreLoadStatic(OrgApacheLuceneAnalysisStandardStandardTokenizer, TOKEN_TYPES), OrgApacheLuceneAnalysisStandardStandardTokenizer_HIRAGANA));
+    JreStrongAssign(&OrgApacheLuceneAnalysisCjkCJKBigramFilter_KATAKANA_TYPE, IOSObjectArray_Get(JreLoadStatic(OrgApacheLuceneAnalysisStandardStandardTokenizer, TOKEN_TYPES), OrgApacheLuceneAnalysisStandardStandardTokenizer_KATAKANA));
+    JreStrongAssign(&OrgApacheLuceneAnalysisCjkCJKBigramFilter_HANGUL_TYPE, IOSObjectArray_Get(JreLoadStatic(OrgApacheLuceneAnalysisStandardStandardTokenizer, TOKEN_TYPES), OrgApacheLuceneAnalysisStandardStandardTokenizer_HANGUL));
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisCjkCJKBigramFilter_NO, new_NSObject_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisCjkCJKBigramFilter)
   }
 }
@@ -247,13 +301,13 @@ NSString *OrgApacheLuceneAnalysisCjkCJKBigramFilter_SINGLE_TYPE_ = @"<SINGLE>";
     { "HIRAGANA", "HIRAGANA", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisCjkCJKBigramFilter_HIRAGANA },
     { "KATAKANA", "KATAKANA", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisCjkCJKBigramFilter_KATAKANA },
     { "HANGUL", "HANGUL", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisCjkCJKBigramFilter_HANGUL },
-    { "DOUBLE_TYPE_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisCjkCJKBigramFilter_DOUBLE_TYPE_, NULL, .constantValue.asLong = 0 },
-    { "SINGLE_TYPE_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisCjkCJKBigramFilter_SINGLE_TYPE_, NULL, .constantValue.asLong = 0 },
-    { "HAN_TYPE_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisCjkCJKBigramFilter_HAN_TYPE_, NULL, .constantValue.asLong = 0 },
-    { "HIRAGANA_TYPE_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisCjkCJKBigramFilter_HIRAGANA_TYPE_, NULL, .constantValue.asLong = 0 },
-    { "KATAKANA_TYPE_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisCjkCJKBigramFilter_KATAKANA_TYPE_, NULL, .constantValue.asLong = 0 },
-    { "HANGUL_TYPE_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisCjkCJKBigramFilter_HANGUL_TYPE_, NULL, .constantValue.asLong = 0 },
-    { "NO__", "NO", 0x1a, "Ljava.lang.Object;", &OrgApacheLuceneAnalysisCjkCJKBigramFilter_NO__, NULL, .constantValue.asLong = 0 },
+    { "DOUBLE_TYPE", "DOUBLE_TYPE", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisCjkCJKBigramFilter_DOUBLE_TYPE, NULL, .constantValue.asLong = 0 },
+    { "SINGLE_TYPE", "SINGLE_TYPE", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisCjkCJKBigramFilter_SINGLE_TYPE, NULL, .constantValue.asLong = 0 },
+    { "HAN_TYPE", "HAN_TYPE", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisCjkCJKBigramFilter_HAN_TYPE, NULL, .constantValue.asLong = 0 },
+    { "HIRAGANA_TYPE", "HIRAGANA_TYPE", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisCjkCJKBigramFilter_HIRAGANA_TYPE, NULL, .constantValue.asLong = 0 },
+    { "KATAKANA_TYPE", "KATAKANA_TYPE", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisCjkCJKBigramFilter_KATAKANA_TYPE, NULL, .constantValue.asLong = 0 },
+    { "HANGUL_TYPE", "HANGUL_TYPE", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisCjkCJKBigramFilter_HANGUL_TYPE, NULL, .constantValue.asLong = 0 },
+    { "NO", "NO", 0x1a, "Ljava.lang.Object;", &OrgApacheLuceneAnalysisCjkCJKBigramFilter_NO, NULL, .constantValue.asLong = 0 },
     { "doHan_", NULL, 0x12, "Ljava.lang.Object;", NULL, NULL, .constantValue.asLong = 0 },
     { "doHiragana_", NULL, 0x12, "Ljava.lang.Object;", NULL, NULL, .constantValue.asLong = 0 },
     { "doKatakana_", NULL, 0x12, "Ljava.lang.Object;", NULL, NULL, .constantValue.asLong = 0 },
@@ -285,9 +339,11 @@ void OrgApacheLuceneAnalysisCjkCJKBigramFilter_initWithOrgApacheLuceneAnalysisTo
 }
 
 OrgApacheLuceneAnalysisCjkCJKBigramFilter *new_OrgApacheLuceneAnalysisCjkCJKBigramFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) {
-  OrgApacheLuceneAnalysisCjkCJKBigramFilter *self = [OrgApacheLuceneAnalysisCjkCJKBigramFilter alloc];
-  OrgApacheLuceneAnalysisCjkCJKBigramFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCjkCJKBigramFilter, initWithOrgApacheLuceneAnalysisTokenStream_, inArg)
+}
+
+OrgApacheLuceneAnalysisCjkCJKBigramFilter *create_OrgApacheLuceneAnalysisCjkCJKBigramFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCjkCJKBigramFilter, initWithOrgApacheLuceneAnalysisTokenStream_, inArg)
 }
 
 void OrgApacheLuceneAnalysisCjkCJKBigramFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(OrgApacheLuceneAnalysisCjkCJKBigramFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg, jint flags) {
@@ -295,9 +351,11 @@ void OrgApacheLuceneAnalysisCjkCJKBigramFilter_initWithOrgApacheLuceneAnalysisTo
 }
 
 OrgApacheLuceneAnalysisCjkCJKBigramFilter *new_OrgApacheLuceneAnalysisCjkCJKBigramFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(OrgApacheLuceneAnalysisTokenStream *inArg, jint flags) {
-  OrgApacheLuceneAnalysisCjkCJKBigramFilter *self = [OrgApacheLuceneAnalysisCjkCJKBigramFilter alloc];
-  OrgApacheLuceneAnalysisCjkCJKBigramFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(self, inArg, flags);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCjkCJKBigramFilter, initWithOrgApacheLuceneAnalysisTokenStream_withInt_, inArg, flags)
+}
+
+OrgApacheLuceneAnalysisCjkCJKBigramFilter *create_OrgApacheLuceneAnalysisCjkCJKBigramFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(OrgApacheLuceneAnalysisTokenStream *inArg, jint flags) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCjkCJKBigramFilter, initWithOrgApacheLuceneAnalysisTokenStream_withInt_, inArg, flags)
 }
 
 void OrgApacheLuceneAnalysisCjkCJKBigramFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_(OrgApacheLuceneAnalysisCjkCJKBigramFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg, jint flags, jboolean outputUnigrams) {
@@ -310,17 +368,19 @@ void OrgApacheLuceneAnalysisCjkCJKBigramFilter_initWithOrgApacheLuceneAnalysisTo
   JreStrongAssignAndConsume(&self->buffer_, [IOSIntArray newArrayWithLength:8]);
   JreStrongAssignAndConsume(&self->startOffset_, [IOSIntArray newArrayWithLength:8]);
   JreStrongAssignAndConsume(&self->endOffset_, [IOSIntArray newArrayWithLength:8]);
-  JreStrongAssign(&self->doHan_, (flags & OrgApacheLuceneAnalysisCjkCJKBigramFilter_HAN) == 0 ? OrgApacheLuceneAnalysisCjkCJKBigramFilter_NO__ : OrgApacheLuceneAnalysisCjkCJKBigramFilter_HAN_TYPE_);
-  JreStrongAssign(&self->doHiragana_, (flags & OrgApacheLuceneAnalysisCjkCJKBigramFilter_HIRAGANA) == 0 ? OrgApacheLuceneAnalysisCjkCJKBigramFilter_NO__ : OrgApacheLuceneAnalysisCjkCJKBigramFilter_HIRAGANA_TYPE_);
-  JreStrongAssign(&self->doKatakana_, (flags & OrgApacheLuceneAnalysisCjkCJKBigramFilter_KATAKANA) == 0 ? OrgApacheLuceneAnalysisCjkCJKBigramFilter_NO__ : OrgApacheLuceneAnalysisCjkCJKBigramFilter_KATAKANA_TYPE_);
-  JreStrongAssign(&self->doHangul_, (flags & OrgApacheLuceneAnalysisCjkCJKBigramFilter_HANGUL) == 0 ? OrgApacheLuceneAnalysisCjkCJKBigramFilter_NO__ : OrgApacheLuceneAnalysisCjkCJKBigramFilter_HANGUL_TYPE_);
+  JreStrongAssign(&self->doHan_, (flags & OrgApacheLuceneAnalysisCjkCJKBigramFilter_HAN) == 0 ? OrgApacheLuceneAnalysisCjkCJKBigramFilter_NO : OrgApacheLuceneAnalysisCjkCJKBigramFilter_HAN_TYPE);
+  JreStrongAssign(&self->doHiragana_, (flags & OrgApacheLuceneAnalysisCjkCJKBigramFilter_HIRAGANA) == 0 ? OrgApacheLuceneAnalysisCjkCJKBigramFilter_NO : OrgApacheLuceneAnalysisCjkCJKBigramFilter_HIRAGANA_TYPE);
+  JreStrongAssign(&self->doKatakana_, (flags & OrgApacheLuceneAnalysisCjkCJKBigramFilter_KATAKANA) == 0 ? OrgApacheLuceneAnalysisCjkCJKBigramFilter_NO : OrgApacheLuceneAnalysisCjkCJKBigramFilter_KATAKANA_TYPE);
+  JreStrongAssign(&self->doHangul_, (flags & OrgApacheLuceneAnalysisCjkCJKBigramFilter_HANGUL) == 0 ? OrgApacheLuceneAnalysisCjkCJKBigramFilter_NO : OrgApacheLuceneAnalysisCjkCJKBigramFilter_HANGUL_TYPE);
   self->outputUnigrams_ = outputUnigrams;
 }
 
 OrgApacheLuceneAnalysisCjkCJKBigramFilter *new_OrgApacheLuceneAnalysisCjkCJKBigramFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_(OrgApacheLuceneAnalysisTokenStream *inArg, jint flags, jboolean outputUnigrams) {
-  OrgApacheLuceneAnalysisCjkCJKBigramFilter *self = [OrgApacheLuceneAnalysisCjkCJKBigramFilter alloc];
-  OrgApacheLuceneAnalysisCjkCJKBigramFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_(self, inArg, flags, outputUnigrams);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCjkCJKBigramFilter, initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_, inArg, flags, outputUnigrams)
+}
+
+OrgApacheLuceneAnalysisCjkCJKBigramFilter *create_OrgApacheLuceneAnalysisCjkCJKBigramFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_(OrgApacheLuceneAnalysisTokenStream *inArg, jint flags, jboolean outputUnigrams) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCjkCJKBigramFilter, initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_, inArg, flags, outputUnigrams)
 }
 
 jboolean OrgApacheLuceneAnalysisCjkCJKBigramFilter_doNext(OrgApacheLuceneAnalysisCjkCJKBigramFilter *self) {
@@ -384,10 +444,10 @@ void OrgApacheLuceneAnalysisCjkCJKBigramFilter_flushBigram(OrgApacheLuceneAnalys
   [self clearAttributes];
   IOSCharArray *termBuffer = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(self->termAtt_)) resizeBufferWithInt:4];
   jint len1 = JavaLangCharacter_toCharsWithInt_withCharArray_withInt_(IOSIntArray_Get(nil_chk(self->buffer_), self->index_), termBuffer, 0);
-  jint len2 = len1 + JavaLangCharacter_toCharsWithInt_withCharArray_withInt_(IOSIntArray_Get(self->buffer_, self->index_ + 1), termBuffer, len1);
+  jint len2 = len1 + JavaLangCharacter_toCharsWithInt_withCharArray_withInt_(IOSIntArray_Get(nil_chk(self->buffer_), self->index_ + 1), termBuffer, len1);
   [self->termAtt_ setLengthWithInt:len2];
   [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(self->offsetAtt_)) setOffsetWithInt:IOSIntArray_Get(nil_chk(self->startOffset_), self->index_) withInt:IOSIntArray_Get(nil_chk(self->endOffset_), self->index_ + 1)];
-  [((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(self->typeAtt_)) setTypeWithNSString:OrgApacheLuceneAnalysisCjkCJKBigramFilter_DOUBLE_TYPE_];
+  [((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(self->typeAtt_)) setTypeWithNSString:OrgApacheLuceneAnalysisCjkCJKBigramFilter_DOUBLE_TYPE];
   if (self->outputUnigrams_) {
     [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(self->posIncAtt_)) setPositionIncrementWithInt:0];
     [((id<OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute>) nil_chk(self->posLengthAtt_)) setPositionLengthWithInt:2];
@@ -401,7 +461,7 @@ void OrgApacheLuceneAnalysisCjkCJKBigramFilter_flushUnigram(OrgApacheLuceneAnaly
   jint len = JavaLangCharacter_toCharsWithInt_withCharArray_withInt_(IOSIntArray_Get(nil_chk(self->buffer_), self->index_), termBuffer, 0);
   [self->termAtt_ setLengthWithInt:len];
   [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(self->offsetAtt_)) setOffsetWithInt:IOSIntArray_Get(nil_chk(self->startOffset_), self->index_) withInt:IOSIntArray_Get(nil_chk(self->endOffset_), self->index_)];
-  [((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(self->typeAtt_)) setTypeWithNSString:OrgApacheLuceneAnalysisCjkCJKBigramFilter_SINGLE_TYPE_];
+  [((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(self->typeAtt_)) setTypeWithNSString:OrgApacheLuceneAnalysisCjkCJKBigramFilter_SINGLE_TYPE];
   self->index_++;
 }
 

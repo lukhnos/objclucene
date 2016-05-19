@@ -5,25 +5,29 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSpansSpanPositionRangeQuery_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSpansSpanPositionRangeQuery_RESTRICT
-#define OrgApacheLuceneSearchSpansSpanPositionRangeQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanPositionRangeQuery")
+#ifdef RESTRICT_OrgApacheLuceneSearchSpansSpanPositionRangeQuery
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanPositionRangeQuery 0
 #else
-#define OrgApacheLuceneSearchSpansSpanPositionRangeQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanPositionRangeQuery 1
 #endif
-#undef OrgApacheLuceneSearchSpansSpanPositionRangeQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSpansSpanPositionRangeQuery
 
-#if !defined (_OrgApacheLuceneSearchSpansSpanPositionRangeQuery_) && (OrgApacheLuceneSearchSpansSpanPositionRangeQuery_INCLUDE_ALL || OrgApacheLuceneSearchSpansSpanPositionRangeQuery_INCLUDE)
-#define _OrgApacheLuceneSearchSpansSpanPositionRangeQuery_
+#if !defined (OrgApacheLuceneSearchSpansSpanPositionRangeQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanPositionRangeQuery || defined(INCLUDE_OrgApacheLuceneSearchSpansSpanPositionRangeQuery))
+#define OrgApacheLuceneSearchSpansSpanPositionRangeQuery_
 
-#define OrgApacheLuceneSearchSpansSpanPositionCheckQuery_RESTRICT 1
-#define OrgApacheLuceneSearchSpansSpanPositionCheckQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSpansSpanPositionCheckQuery 1
+#define INCLUDE_OrgApacheLuceneSearchSpansSpanPositionCheckQuery 1
 #include "org/apache/lucene/search/spans/SpanPositionCheckQuery.h"
 
-@class OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum;
+@class OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus;
 @class OrgApacheLuceneSearchSpansSpanQuery;
 @class OrgApacheLuceneSearchSpansSpans;
 
+/*!
+ @brief Checks to see if the <code>getMatch()</code> lies between a start and end position
+ See <code>SpanFirstQuery</code> for a derivation that is optimized for the case where start position is 0.
+ */
 @interface OrgApacheLuceneSearchSpansSpanPositionRangeQuery : OrgApacheLuceneSearchSpansSpanPositionCheckQuery {
  @public
   jint start_;
@@ -40,8 +44,14 @@
 
 - (jboolean)isEqual:(id)o;
 
+/*!
+ @return the maximum end position permitted in a match.
+ */
 - (jint)getEnd;
 
+/*!
+ @return The minimum position permitted in a match
+ */
 - (jint)getStart;
 
 - (NSUInteger)hash;
@@ -50,7 +60,7 @@
 
 #pragma mark Protected
 
-- (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum *)acceptPositionWithOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)spans;
+- (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *)acceptPositionWithOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)spans;
 
 @end
 
@@ -60,8 +70,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanPositionRangeQuery_initWith
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanPositionRangeQuery *new_OrgApacheLuceneSearchSpansSpanPositionRangeQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withInt_withInt_(OrgApacheLuceneSearchSpansSpanQuery *match, jint start, jint end) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanPositionRangeQuery *create_OrgApacheLuceneSearchSpansSpanPositionRangeQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withInt_withInt_(OrgApacheLuceneSearchSpansSpanQuery *match, jint start, jint end);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanPositionRangeQuery)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSpansSpanPositionRangeQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanPositionRangeQuery")

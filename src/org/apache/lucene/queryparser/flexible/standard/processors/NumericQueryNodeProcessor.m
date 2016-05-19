@@ -44,10 +44,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   if ([node isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode class]] && !([OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode_class_() isInstance:[((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(node)) getParent]])) {
     OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *config = [self getQueryConfigHandler];
     if (config != nil) {
-      OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *fieldNode = (OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) check_class_cast(node, [OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode class]);
-      OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *fieldConfig = [config getFieldConfigWithNSString:[fieldNode getFieldAsString]];
+      OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *fieldNode = (OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) cast_chk(node, [OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode class]);
+      OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *fieldConfig = [config getFieldConfigWithNSString:[((OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) nil_chk(fieldNode)) getFieldAsString]];
       if (fieldConfig != nil) {
-        OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *numericConfig = [fieldConfig getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, NUMERIC_CONFIG_)];
+        OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *numericConfig = [fieldConfig getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, NUMERIC_CONFIG)];
         if (numericConfig != nil) {
           JavaTextNumberFormat *numberFormat = [numericConfig getNumberFormat];
           NSString *text = [fieldNode getTextAsString];
@@ -57,28 +57,28 @@ J2OBJC_IGNORE_DESIGNATED_END
               number = [((JavaTextNumberFormat *) nil_chk(numberFormat)) parseWithNSString:text];
             }
             @catch (JavaTextParseException *e) {
-              @throw [new_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeParseException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_withJavaLangThrowable_([new_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, COULD_NOT_PARSE_NUMBER_), [IOSObjectArray arrayWithObjects:(id[]){ [fieldNode getTextAsString], [[((JavaTextNumberFormat *) nil_chk(numberFormat)) getClass] getCanonicalName] } count:2 type:NSObject_class_()]) autorelease], e) autorelease];
+              @throw create_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeParseException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_withNSException_(create_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, COULD_NOT_PARSE_NUMBER), [IOSObjectArray arrayWithObjects:(id[]){ [fieldNode getTextAsString], [[numberFormat getClass] getCanonicalName] } count:2 type:NSObject_class_()]), e);
             }
             switch ([[numericConfig getType] ordinal]) {
-              case OrgApacheLuceneDocumentFieldType_NumericType_LONG:
+              case OrgApacheLuceneDocumentFieldType_NumericType_Enum_LONG:
               number = JavaLangLong_valueOfWithLong_([((NSNumber *) nil_chk(number)) longLongValue]);
               break;
-              case OrgApacheLuceneDocumentFieldType_NumericType_INT:
+              case OrgApacheLuceneDocumentFieldType_NumericType_Enum_INT:
               number = JavaLangInteger_valueOfWithInt_([((NSNumber *) nil_chk(number)) intValue]);
               break;
-              case OrgApacheLuceneDocumentFieldType_NumericType_DOUBLE:
+              case OrgApacheLuceneDocumentFieldType_NumericType_Enum_DOUBLE:
               number = JavaLangDouble_valueOfWithDouble_([((NSNumber *) nil_chk(number)) doubleValue]);
               break;
-              case OrgApacheLuceneDocumentFieldType_NumericType_FLOAT:
+              case OrgApacheLuceneDocumentFieldType_NumericType_Enum_FLOAT:
               number = JavaLangFloat_valueOfWithFloat_([((NSNumber *) nil_chk(number)) floatValue]);
             }
           }
           else {
-            @throw [new_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeParseException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_([new_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, NUMERIC_CANNOT_BE_EMPTY_), [IOSObjectArray arrayWithObjects:(id[]){ [fieldNode getFieldAsString] } count:1 type:NSObject_class_()]) autorelease]) autorelease];
+            @throw create_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeParseException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_(create_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, NUMERIC_CANNOT_BE_EMPTY), [IOSObjectArray arrayWithObjects:(id[]){ [fieldNode getFieldAsString] } count:1 type:NSObject_class_()]));
           }
-          OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *lowerNode = [new_OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode_initWithJavaLangCharSequence_withNSNumber_withJavaTextNumberFormat_([fieldNode getField], number, numberFormat) autorelease];
-          OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *upperNode = [new_OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode_initWithJavaLangCharSequence_withNSNumber_withJavaTextNumberFormat_([fieldNode getField], number, numberFormat) autorelease];
-          return [new_OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode_initWithOrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode_withOrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode_withBoolean_withBoolean_withOrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig_(lowerNode, upperNode, true, true, numericConfig) autorelease];
+          OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *lowerNode = create_OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode_initWithJavaLangCharSequence_withNSNumber_withJavaTextNumberFormat_([fieldNode getField], number, numberFormat);
+          OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *upperNode = create_OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode_initWithJavaLangCharSequence_withNSNumber_withJavaTextNumberFormat_([fieldNode getField], number, numberFormat);
+          return create_OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode_initWithOrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode_withOrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode_withBoolean_withBoolean_withOrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig_(lowerNode, upperNode, true, true, numericConfig);
         }
       }
     }
@@ -99,7 +99,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "init", "NumericQueryNodeProcessor", NULL, 0x1, NULL, NULL },
     { "postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "postProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
     { "preProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "preProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "setChildrenOrderWithJavaUtilList:", "setChildrenOrder", "Ljava.util.List;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
+    { "setChildrenOrderWithJavaUtilList:", "setChildrenOrder", "Ljava.util.List;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;)Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;" },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor = { 2, "NumericQueryNodeProcessor", "org.apache.lucene.queryparser.flexible.standard.processors", NULL, 0x1, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor;
@@ -112,9 +112,11 @@ void OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcess
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor_init() {
-  OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor *self = [OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor, init)
+}
+
+OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor *create_OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor)

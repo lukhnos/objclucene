@@ -5,48 +5,85 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilGeoHashUtils_INCLUDE_ALL")
-#if OrgApacheLuceneUtilGeoHashUtils_RESTRICT
-#define OrgApacheLuceneUtilGeoHashUtils_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilGeoHashUtils")
+#ifdef RESTRICT_OrgApacheLuceneUtilGeoHashUtils
+#define INCLUDE_ALL_OrgApacheLuceneUtilGeoHashUtils 0
 #else
-#define OrgApacheLuceneUtilGeoHashUtils_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilGeoHashUtils 1
 #endif
-#undef OrgApacheLuceneUtilGeoHashUtils_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilGeoHashUtils
 
-#if !defined (_OrgApacheLuceneUtilGeoHashUtils_) && (OrgApacheLuceneUtilGeoHashUtils_INCLUDE_ALL || OrgApacheLuceneUtilGeoHashUtils_INCLUDE)
-#define _OrgApacheLuceneUtilGeoHashUtils_
+#if !defined (OrgApacheLuceneUtilGeoHashUtils_) && (INCLUDE_ALL_OrgApacheLuceneUtilGeoHashUtils || defined(INCLUDE_OrgApacheLuceneUtilGeoHashUtils))
+#define OrgApacheLuceneUtilGeoHashUtils_
 
 @class IOSCharArray;
 
-#define OrgApacheLuceneUtilGeoHashUtils_PRECISION 12
-
+/*!
+ @brief Utilities for converting to/from the GeoHash standard
+ The geohash long format is represented as lon/lat (x/y) interleaved with the 4 least significant bits
+ representing the level (1-12) [xyxy...xyxyllll]
+ This differs from a morton encoded value which interleaves lat/lon (y/x).
+ */
 @interface OrgApacheLuceneUtilGeoHashUtils : NSObject
+
++ (IOSCharArray *)BASE_32;
+
++ (NSString *)BASE_32_STRING;
+
++ (jint)PRECISION;
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @brief Encode lon/lat to the geohash based long format (lon/lat interleaved, 4 least significant bits = level)
+ */
 + (jlong)longEncodeWithDouble:(jdouble)lon
                    withDouble:(jdouble)lat
                       withInt:(jint)level;
 
+/*!
+ @brief Encode from geohash string to the geohash based long format (lon/lat interleaved, 4 least significant bits = level)
+ */
 + (jlong)longEncodeWithNSString:(NSString *)hash_;
 
+/*!
+ @brief Encode to a morton long value from a given geohash long value
+ */
 + (jlong)mortonEncodeWithLong:(jlong)geoHashLong;
 
+/*!
+ @brief Encode to a morton long value from a given geohash string
+ */
 + (jlong)mortonEncodeWithNSString:(NSString *)hash_;
 
+/*!
+ @brief Encode to a geohash string from full resolution longitude, latitude)
+ */
 + (NSString *)stringEncodeWithDouble:(jdouble)lon
                           withDouble:(jdouble)lat;
 
+/*!
+ @brief Encode to a level specific geohash string from full resolution longitude, latitude
+ */
 + (NSString *)stringEncodeWithDouble:(jdouble)lon
                           withDouble:(jdouble)lat
                              withInt:(jint)level;
 
+/*!
+ @brief Encode to a geohash string from the geohash based long format
+ */
 + (NSString *)stringEncodeWithLong:(jlong)geoHashLong;
 
+/*!
+ @brief Encode to a full precision geohash string from a given morton encoded long value
+ */
 + (NSString *)stringEncodeFromMortonLongWithLong:(jlong)hashedVal;
 
+/*!
+ @brief Encode to a geohash string at a given level from a morton long
+ */
 + (NSString *)stringEncodeFromMortonLongWithLong:(jlong)hashedVal
                                          withInt:(jint)level;
 
@@ -54,13 +91,19 @@
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilGeoHashUtils)
 
-FOUNDATION_EXPORT IOSCharArray *OrgApacheLuceneUtilGeoHashUtils_BASE_32_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilGeoHashUtils, BASE_32_, IOSCharArray *)
+inline IOSCharArray *OrgApacheLuceneUtilGeoHashUtils_get_BASE_32();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT IOSCharArray *OrgApacheLuceneUtilGeoHashUtils_BASE_32;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilGeoHashUtils, BASE_32, IOSCharArray *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneUtilGeoHashUtils_BASE_32_STRING_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilGeoHashUtils, BASE_32_STRING_, NSString *)
+inline NSString *OrgApacheLuceneUtilGeoHashUtils_get_BASE_32_STRING();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneUtilGeoHashUtils_BASE_32_STRING;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilGeoHashUtils, BASE_32_STRING, NSString *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilGeoHashUtils, PRECISION, jint)
+inline jint OrgApacheLuceneUtilGeoHashUtils_get_PRECISION();
+#define OrgApacheLuceneUtilGeoHashUtils_PRECISION 12
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilGeoHashUtils, PRECISION, jint)
 
 FOUNDATION_EXPORT jlong OrgApacheLuceneUtilGeoHashUtils_longEncodeWithDouble_withDouble_withInt_(jdouble lon, jdouble lat, jint level);
 
@@ -84,8 +127,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilGeoHashUtils_init(OrgApacheLuceneUtilG
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilGeoHashUtils *new_OrgApacheLuceneUtilGeoHashUtils_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilGeoHashUtils *create_OrgApacheLuceneUtilGeoHashUtils_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilGeoHashUtils)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilGeoHashUtils_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilGeoHashUtils")

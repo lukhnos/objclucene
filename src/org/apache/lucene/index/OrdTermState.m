@@ -19,7 +19,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)copyFromWithOrgApacheLuceneIndexTermState:(OrgApacheLuceneIndexTermState *)other {
   JreAssert(([other isKindOfClass:[OrgApacheLuceneIndexOrdTermState class]]), (JreStrcat("$$", @"can not copy from ", [[((OrgApacheLuceneIndexTermState *) nil_chk(other)) getClass] getName])));
-  self->ord_ = ((OrgApacheLuceneIndexOrdTermState *) check_class_cast(other, [OrgApacheLuceneIndexOrdTermState class]))->ord_;
+  self->ord_ = ((OrgApacheLuceneIndexOrdTermState *) cast_chk(other, [OrgApacheLuceneIndexOrdTermState class]))->ord_;
 }
 
 - (NSString *)description {
@@ -46,9 +46,11 @@ void OrgApacheLuceneIndexOrdTermState_init(OrgApacheLuceneIndexOrdTermState *sel
 }
 
 OrgApacheLuceneIndexOrdTermState *new_OrgApacheLuceneIndexOrdTermState_init() {
-  OrgApacheLuceneIndexOrdTermState *self = [OrgApacheLuceneIndexOrdTermState alloc];
-  OrgApacheLuceneIndexOrdTermState_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexOrdTermState, init)
+}
+
+OrgApacheLuceneIndexOrdTermState *create_OrgApacheLuceneIndexOrdTermState_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexOrdTermState, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexOrdTermState)

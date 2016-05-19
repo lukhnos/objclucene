@@ -5,25 +5,58 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_RESTRICT
-#define OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute 0
 #else
-#define OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute 1
 #endif
-#undef OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute
 
-#if !defined (_OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_) && (OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_INCLUDE_ALL || OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_INCLUDE)
-#define _OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_
+#if !defined (OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute || defined(INCLUDE_OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute))
+#define OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_
 
-#define OrgApacheLuceneUtilAttribute_RESTRICT 1
-#define OrgApacheLuceneUtilAttribute_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAttribute 1
+#define INCLUDE_OrgApacheLuceneUtilAttribute 1
 #include "org/apache/lucene/util/Attribute.h"
 
+/*!
+ @brief Determines the position of this token
+ relative to the previous Token in a TokenStream, used in phrase
+ searching.
+ <p>The default value is one.
+ <p>Some common uses for this are:<ul>
+ <li>Set it to zero to put multiple terms in the same position.  This is
+ useful if, e.g., a word has multiple stems.  Searches for phrases
+ including either stem will match.  In this case, all but the first stem's
+ increment should be set to zero: the increment of the first instance
+ should be one.  Repeating a token with an increment of zero can also be
+ used to boost the scores of matches on that token.
+ <li>Set it to values greater than one to inhibit exact phrase matches.
+ If, for example, one does not want phrases to match across removed stop
+ words, then one could build a stop word filter that removes stop words and
+ also sets the increment to the number of stop words removed before each
+ non-stop word.  Then exact phrase queries will only match when the terms
+ occur with no intervening stop words.
+ </ul>
+ - seealso: org.apache.lucene.index.PostingsEnum
+ */
 @protocol OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute < OrgApacheLuceneUtilAttribute, NSObject, JavaObject >
 
+/*!
+ @brief Set the position increment.
+ The default value is one.
+ @param positionIncrement the distance from the prior term
+ @throws IllegalArgumentException if <code>positionIncrement</code> 
+ is negative.
+ - seealso: #getPositionIncrement()
+ */
 - (void)setPositionIncrementWithInt:(jint)positionIncrement;
 
+/*!
+ @brief Returns the position increment of this Token.
+ - seealso: #setPositionIncrement(int)
+ */
 - (jint)getPositionIncrement;
 
 @end
@@ -34,4 +67,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenattributesPositionIncreme
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute")

@@ -63,24 +63,24 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisSrSerbianNormalizationFilter, termAtt
         length++;
         break;
         case 0x0435:
-        *IOSCharArray_GetRef(nil_chk(buffer), i) = 'e';
+        *IOSCharArray_GetRef(buffer, i) = 'e';
         break;
         case 0x0436:
         case 0x0437:
         case 0x017e:
-        *IOSCharArray_GetRef(nil_chk(buffer), i) = 'z';
+        *IOSCharArray_GetRef(buffer, i) = 'z';
         break;
         case 0x0438:
-        *IOSCharArray_GetRef(nil_chk(buffer), i) = 'i';
+        *IOSCharArray_GetRef(buffer, i) = 'i';
         break;
         case 0x0458:
-        *IOSCharArray_GetRef(nil_chk(buffer), i) = 'j';
+        *IOSCharArray_GetRef(buffer, i) = 'j';
         break;
         case 0x043a:
-        *IOSCharArray_GetRef(nil_chk(buffer), i) = 'k';
+        *IOSCharArray_GetRef(buffer, i) = 'k';
         break;
         case 0x043b:
-        *IOSCharArray_GetRef(nil_chk(buffer), i) = 'l';
+        *IOSCharArray_GetRef(buffer, i) = 'l';
         break;
         case 0x0459:
         buffer = [termAtt_ resizeBufferWithInt:1 + length];
@@ -92,10 +92,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisSrSerbianNormalizationFilter, termAtt
         length++;
         break;
         case 0x043c:
-        *IOSCharArray_GetRef(nil_chk(buffer), i) = 'm';
+        *IOSCharArray_GetRef(buffer, i) = 'm';
         break;
         case 0x043d:
-        *IOSCharArray_GetRef(nil_chk(buffer), i) = 'n';
+        *IOSCharArray_GetRef(buffer, i) = 'n';
         break;
         case 0x045a:
         buffer = [termAtt_ resizeBufferWithInt:1 + length];
@@ -107,35 +107,35 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisSrSerbianNormalizationFilter, termAtt
         length++;
         break;
         case 0x043e:
-        *IOSCharArray_GetRef(nil_chk(buffer), i) = 'o';
+        *IOSCharArray_GetRef(buffer, i) = 'o';
         break;
         case 0x043f:
-        *IOSCharArray_GetRef(nil_chk(buffer), i) = 'p';
+        *IOSCharArray_GetRef(buffer, i) = 'p';
         break;
         case 0x0440:
-        *IOSCharArray_GetRef(nil_chk(buffer), i) = 'r';
+        *IOSCharArray_GetRef(buffer, i) = 'r';
         break;
         case 0x0441:
-        *IOSCharArray_GetRef(nil_chk(buffer), i) = 's';
+        *IOSCharArray_GetRef(buffer, i) = 's';
         break;
         case 0x0442:
-        *IOSCharArray_GetRef(nil_chk(buffer), i) = 't';
+        *IOSCharArray_GetRef(buffer, i) = 't';
         break;
         case 0x045b:
         case 0x0446:
         case 0x0447:
         case 0x010d:
         case 0x0107:
-        *IOSCharArray_GetRef(nil_chk(buffer), i) = 'c';
+        *IOSCharArray_GetRef(buffer, i) = 'c';
         break;
         case 0x0443:
-        *IOSCharArray_GetRef(nil_chk(buffer), i) = 'u';
+        *IOSCharArray_GetRef(buffer, i) = 'u';
         break;
         case 0x0444:
-        *IOSCharArray_GetRef(nil_chk(buffer), i) = 'f';
+        *IOSCharArray_GetRef(buffer, i) = 'f';
         break;
         case 0x0445:
-        *IOSCharArray_GetRef(nil_chk(buffer), i) = 'h';
+        *IOSCharArray_GetRef(buffer, i) = 'h';
         break;
         case 0x045f:
         buffer = [termAtt_ resizeBufferWithInt:1 + length];
@@ -148,7 +148,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisSrSerbianNormalizationFilter, termAtt
         break;
         case 0x0448:
         case 0x0161:
-        *IOSCharArray_GetRef(nil_chk(buffer), i) = 's';
+        *IOSCharArray_GetRef(buffer, i) = 's';
         break;
         default:
         break;
@@ -187,9 +187,11 @@ void OrgApacheLuceneAnalysisSrSerbianNormalizationFilter_initWithOrgApacheLucene
 }
 
 OrgApacheLuceneAnalysisSrSerbianNormalizationFilter *new_OrgApacheLuceneAnalysisSrSerbianNormalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) {
-  OrgApacheLuceneAnalysisSrSerbianNormalizationFilter *self = [OrgApacheLuceneAnalysisSrSerbianNormalizationFilter alloc];
-  OrgApacheLuceneAnalysisSrSerbianNormalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, input);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisSrSerbianNormalizationFilter, initWithOrgApacheLuceneAnalysisTokenStream_, input)
+}
+
+OrgApacheLuceneAnalysisSrSerbianNormalizationFilter *create_OrgApacheLuceneAnalysisSrSerbianNormalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisSrSerbianNormalizationFilter, initWithOrgApacheLuceneAnalysisTokenStream_, input)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisSrSerbianNormalizationFilter)

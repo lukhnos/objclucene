@@ -60,7 +60,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (jboolean)isEqual:(id)other {
   if ([other isKindOfClass:[OrgApacheLuceneIndexIndexCommit class]]) {
-    OrgApacheLuceneIndexIndexCommit *otherCommit = (OrgApacheLuceneIndexIndexCommit *) check_class_cast(other, [OrgApacheLuceneIndexIndexCommit class]);
+    OrgApacheLuceneIndexIndexCommit *otherCommit = (OrgApacheLuceneIndexIndexCommit *) cast_chk(other, [OrgApacheLuceneIndexIndexCommit class]);
     return [((OrgApacheLuceneIndexIndexCommit *) nil_chk(otherCommit)) getDirectory] == [self getDirectory] && [otherCommit getGeneration] == [self getGeneration];
   }
   else {
@@ -85,9 +85,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jint)compareToWithId:(OrgApacheLuceneIndexIndexCommit *)commit {
-  check_class_cast(commit, [OrgApacheLuceneIndexIndexCommit class]);
+  cast_chk(commit, [OrgApacheLuceneIndexIndexCommit class]);
   if ([self getDirectory] != [((OrgApacheLuceneIndexIndexCommit *) nil_chk(commit)) getDirectory]) {
-    @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(@"cannot compare IndexCommits from different Directory instances") autorelease];
+    @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"cannot compare IndexCommits from different Directory instances");
   }
   jlong gen = [self getGeneration];
   jlong comgen = [commit getGeneration];
@@ -101,7 +101,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "getSegmentsFileName", NULL, "Ljava.lang.String;", 0x401, NULL, NULL },
-    { "getFileNames", NULL, "Ljava.util.Collection;", 0x401, "Ljava.io.IOException;", NULL },
+    { "getFileNames", NULL, "Ljava.util.Collection;", 0x401, "Ljava.io.IOException;", "()Ljava/util/Collection<Ljava/lang/String;>;" },
     { "getDirectory", NULL, "Lorg.apache.lucene.store.Directory;", 0x401, NULL, NULL },
     { "delete__", "delete", "V", 0x401, NULL, NULL },
     { "isDeleted", NULL, "Z", 0x401, NULL, NULL },
@@ -110,7 +110,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
     { "getGeneration", NULL, "J", 0x401, NULL, NULL },
-    { "getUserData", NULL, "Ljava.util.Map;", 0x401, "Ljava.io.IOException;", NULL },
+    { "getUserData", NULL, "Ljava.util.Map;", 0x401, "Ljava.io.IOException;", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;" },
     { "compareToWithId:", "compareTo", "I", 0x1, NULL, NULL },
     { "getReader", NULL, "Lorg.apache.lucene.index.StandardDirectoryReader;", 0x0, NULL, NULL },
   };

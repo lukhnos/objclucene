@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchPhraseQuery_INCLUDE_ALL")
-#if OrgApacheLuceneSearchPhraseQuery_RESTRICT
-#define OrgApacheLuceneSearchPhraseQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchPhraseQuery")
+#ifdef RESTRICT_OrgApacheLuceneSearchPhraseQuery
+#define INCLUDE_ALL_OrgApacheLuceneSearchPhraseQuery 0
 #else
-#define OrgApacheLuceneSearchPhraseQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchPhraseQuery 1
 #endif
-#undef OrgApacheLuceneSearchPhraseQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchPhraseQuery
 
-#if !defined (_OrgApacheLuceneSearchPhraseQuery_) && (OrgApacheLuceneSearchPhraseQuery_INCLUDE_ALL || OrgApacheLuceneSearchPhraseQuery_INCLUDE)
-#define _OrgApacheLuceneSearchPhraseQuery_
+#if !defined (OrgApacheLuceneSearchPhraseQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchPhraseQuery || defined(INCLUDE_OrgApacheLuceneSearchPhraseQuery))
+#define OrgApacheLuceneSearchPhraseQuery_
 
-#define OrgApacheLuceneSearchQuery_RESTRICT 1
-#define OrgApacheLuceneSearchQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchQuery 1
+#define INCLUDE_OrgApacheLuceneSearchQuery 1
 #include "org/apache/lucene/search/Query.h"
 
 @class IOSIntArray;
@@ -27,48 +27,141 @@
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchWeight;
 
+/*!
+ @brief A Query that matches documents containing a particular sequence of terms.
+ A PhraseQuery is built by QueryParser for input like <code>"new york"</code>.
+ <p>This query may be combined with other terms or queries with a <code>BooleanQuery</code>.
+ <b>NOTE</b>: Leading holes don't have any particular meaning for this query
+ and will be ignored. For instance this query:
+ <pre class="prettyprint">
+ PhraseQuery.Builder builder = new PhraseQuery.Builder();
+ builder.add(new Term("body", "one"), 4);
+ builder.add(new Term("body", "two"), 5);
+ PhraseQuery pq = builder.build();
+ 
+@endcode
+ is equivalent to the below query:
+ <pre class="prettyprint">
+ PhraseQuery.Builder builder = new PhraseQuery.Builder();
+ builder.add(new Term("body", "one"), 0);
+ builder.add(new Term("body", "two"), 1);
+ PhraseQuery pq = builder.build();
+ 
+@endcode
+ */
 @interface OrgApacheLuceneSearchPhraseQuery : OrgApacheLuceneSearchQuery
 
 #pragma mark Public
 
+/*!
+ @brief Constructs an empty phrase query.
+ */
 - (instancetype)init;
 
+/*!
+ @brief Create a phrase query which will match documents that contain the given
+ list of terms at consecutive positions in <code>field</code>, and at a
+ maximum edit distance of <code>slop</code>.
+ For more complicated use-cases,
+ use <code>PhraseQuery.Builder</code>.
+ - seealso: #getSlop()
+ */
 - (instancetype)initWithInt:(jint)slop
                withNSString:(NSString *)field
 withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms;
 
+/*!
+ @brief Create a phrase query which will match documents that contain the given
+ list of terms at consecutive positions in <code>field</code>, and at a
+ maximum edit distance of <code>slop</code>.
+ For more complicated use-cases,
+ use <code>PhraseQuery.Builder</code>.
+ - seealso: #getSlop()
+ */
 - (instancetype)initWithInt:(jint)slop
                withNSString:(NSString *)field
           withNSStringArray:(IOSObjectArray *)terms;
 
+/*!
+ @brief Create a phrase query which will match documents that contain the given
+ list of terms at consecutive positions in <code>field</code>.
+ */
 - (instancetype)initWithNSString:(NSString *)field
 withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms;
 
+/*!
+ @brief Create a phrase query which will match documents that contain the given
+ list of terms at consecutive positions in <code>field</code>.
+ */
 - (instancetype)initWithNSString:(NSString *)field
                withNSStringArray:(IOSObjectArray *)terms;
 
+/*!
+ @brief Adds a term to the end of the query phrase.
+ The relative position of the term is the one immediately after the last term added.
+ */
 - (void)addWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
 
+/*!
+ @brief Adds a term to the end of the query phrase.
+ The relative position of the term within the phrase is specified explicitly.
+ This allows e.g. phrases with more than one term at the same position
+ or phrases with gaps (e.g. in connection with stopwords).
+ */
 - (void)addWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
                                 withInt:(jint)position;
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores;
 
+/*!
+ @brief Returns true iff <code>o</code> is equal to this.
+ */
 - (jboolean)isEqual:(id)o;
 
+/*!
+ @brief Returns the relative positions of terms in this phrase.
+ */
 - (IOSIntArray *)getPositions;
 
+/*!
+ @brief Return the slop for this <code>PhraseQuery</code>.
+ <p>The slop is an edit distance between respective positions of terms as
+ defined in this <code>PhraseQuery</code> and the positions of terms in a
+ document.
+ <p>For instance, when searching for <code>"quick fox"</code>, it is expected that
+ the difference between the positions of <code>fox</code> and <code>quick</code> is 1.
+ So <code>"a quick brown fox"</code> would be at an edit distance of 1 since the
+ difference of the positions of <code>fox</code> and <code>quick</code> is 2.
+ Similarly, <code>"the fox is quick"</code> would be at an edit distance of 3
+ since the difference of the positions of <code>fox</code> and <code>quick</code> is -2.
+ The slop defines the maximum edit distance for a document to match.
+ <p>More exact matches are scored higher than sloppier matches, thus search
+ results are sorted by exactness.
+ */
 - (jint)getSlop;
 
+/*!
+ @brief Returns the list of terms in this phrase.
+ */
 - (IOSObjectArray *)getTerms;
 
+/*!
+ @brief Returns a hash code value for this object.
+ */
 - (NSUInteger)hash;
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
 
+/*!
+ @brief Set the slop.
+ - seealso: #getSlop()
+ */
 - (void)setSlopWithInt:(jint)s;
 
+/*!
+ @brief Prints a user-readable version of this query.
+ */
 - (NSString *)toStringWithNSString:(NSString *)f;
 
 @end
@@ -79,45 +172,78 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchPhraseQuery_initWithInt_withNSString
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchPhraseQuery *new_OrgApacheLuceneSearchPhraseQuery_initWithInt_withNSString_withNSStringArray_(jint slop, NSString *field, IOSObjectArray *terms) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchPhraseQuery *create_OrgApacheLuceneSearchPhraseQuery_initWithInt_withNSString_withNSStringArray_(jint slop, NSString *field, IOSObjectArray *terms);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchPhraseQuery_initWithNSString_withNSStringArray_(OrgApacheLuceneSearchPhraseQuery *self, NSString *field, IOSObjectArray *terms);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchPhraseQuery *new_OrgApacheLuceneSearchPhraseQuery_initWithNSString_withNSStringArray_(NSString *field, IOSObjectArray *terms) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchPhraseQuery *create_OrgApacheLuceneSearchPhraseQuery_initWithNSString_withNSStringArray_(NSString *field, IOSObjectArray *terms);
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchPhraseQuery_initWithInt_withNSString_withOrgApacheLuceneUtilBytesRefArray_(OrgApacheLuceneSearchPhraseQuery *self, jint slop, NSString *field, IOSObjectArray *terms);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchPhraseQuery *new_OrgApacheLuceneSearchPhraseQuery_initWithInt_withNSString_withOrgApacheLuceneUtilBytesRefArray_(jint slop, NSString *field, IOSObjectArray *terms) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchPhraseQuery *create_OrgApacheLuceneSearchPhraseQuery_initWithInt_withNSString_withOrgApacheLuceneUtilBytesRefArray_(jint slop, NSString *field, IOSObjectArray *terms);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchPhraseQuery_initWithNSString_withOrgApacheLuceneUtilBytesRefArray_(OrgApacheLuceneSearchPhraseQuery *self, NSString *field, IOSObjectArray *terms);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchPhraseQuery *new_OrgApacheLuceneSearchPhraseQuery_initWithNSString_withOrgApacheLuceneUtilBytesRefArray_(NSString *field, IOSObjectArray *terms) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchPhraseQuery *create_OrgApacheLuceneSearchPhraseQuery_initWithNSString_withOrgApacheLuceneUtilBytesRefArray_(NSString *field, IOSObjectArray *terms);
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchPhraseQuery_init(OrgApacheLuceneSearchPhraseQuery *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchPhraseQuery *new_OrgApacheLuceneSearchPhraseQuery_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchPhraseQuery *create_OrgApacheLuceneSearchPhraseQuery_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPhraseQuery)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchPhraseQuery_Builder_) && (OrgApacheLuceneSearchPhraseQuery_INCLUDE_ALL || OrgApacheLuceneSearchPhraseQuery_Builder_INCLUDE)
-#define _OrgApacheLuceneSearchPhraseQuery_Builder_
+#if !defined (OrgApacheLuceneSearchPhraseQuery_Builder_) && (INCLUDE_ALL_OrgApacheLuceneSearchPhraseQuery || defined(INCLUDE_OrgApacheLuceneSearchPhraseQuery_Builder))
+#define OrgApacheLuceneSearchPhraseQuery_Builder_
 
 @class OrgApacheLuceneIndexTerm;
 @class OrgApacheLuceneSearchPhraseQuery;
 
+/*!
+ @brief A builder for phrase queries.
+ */
 @interface OrgApacheLuceneSearchPhraseQuery_Builder : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ */
 - (instancetype)init;
 
+/*!
+ @brief Adds a term to the end of the query phrase.
+ The relative position of the term is the one immediately after the last term added.
+ */
 - (OrgApacheLuceneSearchPhraseQuery_Builder *)addWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
 
+/*!
+ @brief Adds a term to the end of the query phrase.
+ The relative position of the term within the phrase is specified explicitly.
+ This allows e.g. phrases with more than one term at the same position
+ or phrases with gaps (e.g. in connection with stopwords).
+ */
 - (OrgApacheLuceneSearchPhraseQuery_Builder *)addWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
                                                                       withInt:(jint)position;
 
+/*!
+ @brief Build a phrase query based on the terms that have been added.
+ */
 - (OrgApacheLuceneSearchPhraseQuery *)build;
 
+/*!
+ @brief Set the slop.
+ - seealso: PhraseQuery#getSlop()
+ */
 - (OrgApacheLuceneSearchPhraseQuery_Builder *)setSlopWithInt:(jint)slop;
 
 @end
@@ -128,15 +254,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchPhraseQuery_Builder_init(OrgApacheLu
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchPhraseQuery_Builder *new_OrgApacheLuceneSearchPhraseQuery_Builder_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchPhraseQuery_Builder *create_OrgApacheLuceneSearchPhraseQuery_Builder_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPhraseQuery_Builder)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchPhraseQuery_PostingsAndFreq_) && (OrgApacheLuceneSearchPhraseQuery_INCLUDE_ALL || OrgApacheLuceneSearchPhraseQuery_PostingsAndFreq_INCLUDE)
-#define _OrgApacheLuceneSearchPhraseQuery_PostingsAndFreq_
+#if !defined (OrgApacheLuceneSearchPhraseQuery_PostingsAndFreq_) && (INCLUDE_ALL_OrgApacheLuceneSearchPhraseQuery || defined(INCLUDE_OrgApacheLuceneSearchPhraseQuery_PostingsAndFreq))
+#define OrgApacheLuceneSearchPhraseQuery_PostingsAndFreq_
 
-#define JavaLangComparable_RESTRICT 1
-#define JavaLangComparable_INCLUDE 1
+#define RESTRICT_JavaLangComparable 1
+#define INCLUDE_JavaLangComparable 1
 #include "java/lang/Comparable.h"
 
 @class IOSObjectArray;
@@ -173,8 +301,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchPhraseQuery_PostingsAndFreq_initWith
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchPhraseQuery_PostingsAndFreq *new_OrgApacheLuceneSearchPhraseQuery_PostingsAndFreq_initWithOrgApacheLuceneIndexPostingsEnum_withInt_withOrgApacheLuceneIndexTermArray_(OrgApacheLuceneIndexPostingsEnum *postings, jint position, IOSObjectArray *terms) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchPhraseQuery_PostingsAndFreq *create_OrgApacheLuceneSearchPhraseQuery_PostingsAndFreq_initWithOrgApacheLuceneIndexPostingsEnum_withInt_withOrgApacheLuceneIndexTermArray_(OrgApacheLuceneIndexPostingsEnum *postings, jint position, IOSObjectArray *terms);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPhraseQuery_PostingsAndFreq)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchPhraseQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchPhraseQuery")

@@ -5,27 +5,36 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSimilaritiesBasicModelG_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSimilaritiesBasicModelG_RESTRICT
-#define OrgApacheLuceneSearchSimilaritiesBasicModelG_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicModelG")
+#ifdef RESTRICT_OrgApacheLuceneSearchSimilaritiesBasicModelG
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicModelG 0
 #else
-#define OrgApacheLuceneSearchSimilaritiesBasicModelG_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicModelG 1
 #endif
-#undef OrgApacheLuceneSearchSimilaritiesBasicModelG_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSimilaritiesBasicModelG
 
-#if !defined (_OrgApacheLuceneSearchSimilaritiesBasicModelG_) && (OrgApacheLuceneSearchSimilaritiesBasicModelG_INCLUDE_ALL || OrgApacheLuceneSearchSimilaritiesBasicModelG_INCLUDE)
-#define _OrgApacheLuceneSearchSimilaritiesBasicModelG_
+#if !defined (OrgApacheLuceneSearchSimilaritiesBasicModelG_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicModelG || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesBasicModelG))
+#define OrgApacheLuceneSearchSimilaritiesBasicModelG_
 
-#define OrgApacheLuceneSearchSimilaritiesBasicModel_RESTRICT 1
-#define OrgApacheLuceneSearchSimilaritiesBasicModel_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSimilaritiesBasicModel 1
+#define INCLUDE_OrgApacheLuceneSearchSimilaritiesBasicModel 1
 #include "org/apache/lucene/search/similarities/BasicModel.h"
 
 @class OrgApacheLuceneSearchSimilaritiesBasicStats;
 
+/*!
+ @brief Geometric as limiting form of the Bose-Einstein model.
+ The formula used in Lucene differs
+ slightly from the one in the original paper: <code>F</code> is increased by <code>1</code>
+ and <code>N</code> is increased by <code>F</code>.
+ */
 @interface OrgApacheLuceneSearchSimilaritiesBasicModelG : OrgApacheLuceneSearchSimilaritiesBasicModel
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor: parameter-free
+ */
 - (instancetype)init;
 
 - (jfloat)scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
@@ -41,8 +50,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesBasicModelG_init(OrgApac
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesBasicModelG *new_OrgApacheLuceneSearchSimilaritiesBasicModelG_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesBasicModelG *create_OrgApacheLuceneSearchSimilaritiesBasicModelG_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesBasicModelG)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSimilaritiesBasicModelG_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicModelG")

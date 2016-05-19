@@ -3,10 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/analysis/tokenattributes/CharTermAttribute.java
 //
 
-#include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/lang/CharSequence.h"
-#include "java/lang/StringBuilder.h"
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
 
 @interface OrgApacheLuceneAnalysisTokenattributesCharTermAttribute : NSObject

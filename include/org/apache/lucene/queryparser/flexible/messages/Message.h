@@ -5,20 +5,24 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleMessagesMessage_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleMessagesMessage_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleMessagesMessage_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleMessagesMessage")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleMessagesMessage
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleMessagesMessage 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleMessagesMessage_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleMessagesMessage 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleMessagesMessage_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleMessagesMessage
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleMessagesMessage_) && (OrgApacheLuceneQueryparserFlexibleMessagesMessage_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleMessagesMessage_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleMessagesMessage_
+#if !defined (OrgApacheLuceneQueryparserFlexibleMessagesMessage_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleMessagesMessage || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleMessagesMessage))
+#define OrgApacheLuceneQueryparserFlexibleMessagesMessage_
 
 @class IOSObjectArray;
 @class JavaUtilLocale;
 
+/*!
+ @brief Message Interface for a lazy loading.
+ For Native Language Support (NLS), system of software internationalization.
+ */
 @protocol OrgApacheLuceneQueryparserFlexibleMessagesMessage < NSObject, JavaObject >
 
 - (NSString *)getKey;
@@ -37,4 +41,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleMessagesMessage)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleMessagesMessage_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleMessagesMessage")

@@ -3,9 +3,10 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/miscellaneous/SingleTokenTokenStream.java
 //
 
-#include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Deprecated.h"
+#include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/analysis/Token.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/miscellaneous/SingleTokenTokenStream.h"
@@ -57,14 +58,14 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousSingleTokenTokenStream, 
   JreStrongAssign(&self->singleToken_, [((OrgApacheLuceneAnalysisToken *) nil_chk(token)) clone]);
 }
 
++ (IOSObjectArray *)__annotations {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
 - (void)dealloc {
   RELEASE_(singleToken_);
   RELEASE_(tokenAtt_);
   [super dealloc];
-}
-
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -87,18 +88,20 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousSingleTokenTokenStream, 
 @end
 
 void OrgApacheLuceneAnalysisMiscellaneousSingleTokenTokenStream_initWithOrgApacheLuceneAnalysisToken_(OrgApacheLuceneAnalysisMiscellaneousSingleTokenTokenStream *self, OrgApacheLuceneAnalysisToken *token) {
-  OrgApacheLuceneAnalysisTokenStream_initWithOrgApacheLuceneUtilAttributeFactory_(self, JreLoadStatic(OrgApacheLuceneAnalysisToken, TOKEN_ATTRIBUTE_FACTORY_));
+  OrgApacheLuceneAnalysisTokenStream_initWithOrgApacheLuceneUtilAttributeFactory_(self, JreLoadStatic(OrgApacheLuceneAnalysisToken, TOKEN_ATTRIBUTE_FACTORY));
   self->exhausted_ = false;
   JreAssert((token != nil), (@"org/apache/lucene/analysis/miscellaneous/SingleTokenTokenStream.java:41 condition failed: assert token != null;"));
   JreStrongAssign(&self->singleToken_, [((OrgApacheLuceneAnalysisToken *) nil_chk(token)) clone]);
-  JreStrongAssign(&self->tokenAtt_, (OrgApacheLuceneUtilAttributeImpl *) check_class_cast([self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()], [OrgApacheLuceneUtilAttributeImpl class]));
+  JreStrongAssign(&self->tokenAtt_, (OrgApacheLuceneUtilAttributeImpl *) cast_chk([self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()], [OrgApacheLuceneUtilAttributeImpl class]));
   JreAssert((([self->tokenAtt_ isKindOfClass:[OrgApacheLuceneAnalysisToken class]])), (@"org/apache/lucene/analysis/miscellaneous/SingleTokenTokenStream.java:45 condition failed: assert (tokenAtt instanceof Token);"));
 }
 
 OrgApacheLuceneAnalysisMiscellaneousSingleTokenTokenStream *new_OrgApacheLuceneAnalysisMiscellaneousSingleTokenTokenStream_initWithOrgApacheLuceneAnalysisToken_(OrgApacheLuceneAnalysisToken *token) {
-  OrgApacheLuceneAnalysisMiscellaneousSingleTokenTokenStream *self = [OrgApacheLuceneAnalysisMiscellaneousSingleTokenTokenStream alloc];
-  OrgApacheLuceneAnalysisMiscellaneousSingleTokenTokenStream_initWithOrgApacheLuceneAnalysisToken_(self, token);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousSingleTokenTokenStream, initWithOrgApacheLuceneAnalysisToken_, token)
+}
+
+OrgApacheLuceneAnalysisMiscellaneousSingleTokenTokenStream *create_OrgApacheLuceneAnalysisMiscellaneousSingleTokenTokenStream_initWithOrgApacheLuceneAnalysisToken_(OrgApacheLuceneAnalysisToken *token) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousSingleTokenTokenStream, initWithOrgApacheLuceneAnalysisToken_, token)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousSingleTokenTokenStream)

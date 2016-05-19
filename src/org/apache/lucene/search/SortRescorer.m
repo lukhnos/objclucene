@@ -52,6 +52,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSortRescorer_$1_init(Or
 
 __attribute__((unused)) static OrgApacheLuceneSearchSortRescorer_$1 *new_OrgApacheLuceneSearchSortRescorer_$1_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchSortRescorer_$1 *create_OrgApacheLuceneSearchSortRescorer_$1_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortRescorer_$1)
 
 @implementation OrgApacheLuceneSearchSortRescorer
@@ -65,7 +67,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortRescorer_$1)
                                                withOrgApacheLuceneSearchTopDocs:(OrgApacheLuceneSearchTopDocs *)firstPassTopDocs
                                                                         withInt:(jint)topN {
   IOSObjectArray *hits = [((IOSObjectArray *) nil_chk(((OrgApacheLuceneSearchTopDocs *) nil_chk(firstPassTopDocs))->scoreDocs_)) clone];
-  JavaUtilArrays_sortWithNSObjectArray_withJavaUtilComparator_(hits, [new_OrgApacheLuceneSearchSortRescorer_$1_init() autorelease]);
+  JavaUtilArrays_sortWithNSObjectArray_withJavaUtilComparator_(hits, create_OrgApacheLuceneSearchSortRescorer_$1_init());
   id<JavaUtilList> leaves = [((OrgApacheLuceneIndexIndexReader *) nil_chk([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getIndexReader])) leaves];
   OrgApacheLuceneSearchTopFieldCollector *collector = OrgApacheLuceneSearchTopFieldCollector_createWithOrgApacheLuceneSearchSort_withInt_withBoolean_withBoolean_withBoolean_(sort_, topN, true, true, true);
   jint hitUpto = 0;
@@ -73,7 +75,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortRescorer_$1)
   jint endDoc = 0;
   jint docBase = 0;
   id<OrgApacheLuceneSearchLeafCollector> leafCollector = nil;
-  OrgApacheLuceneSearchFakeScorer *fakeScorer = [new_OrgApacheLuceneSearchFakeScorer_init() autorelease];
+  OrgApacheLuceneSearchFakeScorer *fakeScorer = create_OrgApacheLuceneSearchFakeScorer_init();
   while (hitUpto < ((IOSObjectArray *) nil_chk(hits))->size_) {
     OrgApacheLuceneSearchScoreDoc *hit = IOSObjectArray_Get(hits, hitUpto);
     jint docID = ((OrgApacheLuceneSearchScoreDoc *) nil_chk(hit))->doc_;
@@ -99,13 +101,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortRescorer_$1)
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                withOrgApacheLuceneSearchExplanation:(OrgApacheLuceneSearchExplanation *)firstPassExplanation
                                                                             withInt:(jint)docID {
-  OrgApacheLuceneSearchTopDocs *oneHit = [new_OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_(1, [IOSObjectArray arrayWithObjects:(id[]){ [new_OrgApacheLuceneSearchScoreDoc_initWithInt_withFloat_(docID, [((OrgApacheLuceneSearchExplanation *) nil_chk(firstPassExplanation)) getValue]) autorelease] } count:1 type:OrgApacheLuceneSearchScoreDoc_class_()]) autorelease];
+  OrgApacheLuceneSearchTopDocs *oneHit = create_OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_(1, [IOSObjectArray arrayWithObjects:(id[]){ create_OrgApacheLuceneSearchScoreDoc_initWithInt_withFloat_(docID, [((OrgApacheLuceneSearchExplanation *) nil_chk(firstPassExplanation)) getValue]) } count:1 type:OrgApacheLuceneSearchScoreDoc_class_()]);
   OrgApacheLuceneSearchTopDocs *hits = [self rescoreWithOrgApacheLuceneSearchIndexSearcher:searcher withOrgApacheLuceneSearchTopDocs:oneHit withInt:1];
   JreAssert((((OrgApacheLuceneSearchTopDocs *) nil_chk(hits))->totalHits_ == 1), (@"org/apache/lucene/search/SortRescorer.java:100 condition failed: assert hits.totalHits == 1;"));
-  id<JavaUtilList> subs = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> subs = create_JavaUtilArrayList_init();
   OrgApacheLuceneSearchExplanation *first = OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_([firstPassExplanation getValue], @"first pass score", [IOSObjectArray arrayWithObjects:(id[]){ firstPassExplanation } count:1 type:OrgApacheLuceneSearchExplanation_class_()]);
   [subs addWithId:first];
-  OrgApacheLuceneSearchFieldDoc *fieldDoc = (OrgApacheLuceneSearchFieldDoc *) check_class_cast(IOSObjectArray_Get(nil_chk(hits->scoreDocs_), 0), [OrgApacheLuceneSearchFieldDoc class]);
+  OrgApacheLuceneSearchFieldDoc *fieldDoc = (OrgApacheLuceneSearchFieldDoc *) cast_chk(IOSObjectArray_Get(nil_chk(hits->scoreDocs_), 0), [OrgApacheLuceneSearchFieldDoc class]);
   IOSObjectArray *sortFields = [((OrgApacheLuceneSearchSort *) nil_chk(sort_)) getSort];
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(sortFields))->size_; i++) {
     [subs addWithId:OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_(0.0f, JreStrcat("$$$@", @"sort field ", [((OrgApacheLuceneSearchSortField *) nil_chk(IOSObjectArray_Get(sortFields, i))) description], @" value=", IOSObjectArray_Get(nil_chk(((OrgApacheLuceneSearchFieldDoc *) nil_chk(fieldDoc))->fields_), i)), [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()])];
@@ -139,9 +141,11 @@ void OrgApacheLuceneSearchSortRescorer_initWithOrgApacheLuceneSearchSort_(OrgApa
 }
 
 OrgApacheLuceneSearchSortRescorer *new_OrgApacheLuceneSearchSortRescorer_initWithOrgApacheLuceneSearchSort_(OrgApacheLuceneSearchSort *sort) {
-  OrgApacheLuceneSearchSortRescorer *self = [OrgApacheLuceneSearchSortRescorer alloc];
-  OrgApacheLuceneSearchSortRescorer_initWithOrgApacheLuceneSearchSort_(self, sort);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSortRescorer, initWithOrgApacheLuceneSearchSort_, sort)
+}
+
+OrgApacheLuceneSearchSortRescorer *create_OrgApacheLuceneSearchSortRescorer_initWithOrgApacheLuceneSearchSort_(OrgApacheLuceneSearchSort *sort) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSortRescorer, initWithOrgApacheLuceneSearchSort_, sort)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSortRescorer)
@@ -177,9 +181,11 @@ void OrgApacheLuceneSearchSortRescorer_$1_init(OrgApacheLuceneSearchSortRescorer
 }
 
 OrgApacheLuceneSearchSortRescorer_$1 *new_OrgApacheLuceneSearchSortRescorer_$1_init() {
-  OrgApacheLuceneSearchSortRescorer_$1 *self = [OrgApacheLuceneSearchSortRescorer_$1 alloc];
-  OrgApacheLuceneSearchSortRescorer_$1_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSortRescorer_$1, init)
+}
+
+OrgApacheLuceneSearchSortRescorer_$1 *create_OrgApacheLuceneSearchSortRescorer_$1_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSortRescorer_$1, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSortRescorer_$1)

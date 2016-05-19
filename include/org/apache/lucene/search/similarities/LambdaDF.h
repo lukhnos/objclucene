@@ -5,28 +5,34 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSimilaritiesLambdaDF_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSimilaritiesLambdaDF_RESTRICT
-#define OrgApacheLuceneSearchSimilaritiesLambdaDF_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesLambdaDF")
+#ifdef RESTRICT_OrgApacheLuceneSearchSimilaritiesLambdaDF
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesLambdaDF 0
 #else
-#define OrgApacheLuceneSearchSimilaritiesLambdaDF_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesLambdaDF 1
 #endif
-#undef OrgApacheLuceneSearchSimilaritiesLambdaDF_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSimilaritiesLambdaDF
 
-#if !defined (_OrgApacheLuceneSearchSimilaritiesLambdaDF_) && (OrgApacheLuceneSearchSimilaritiesLambdaDF_INCLUDE_ALL || OrgApacheLuceneSearchSimilaritiesLambdaDF_INCLUDE)
-#define _OrgApacheLuceneSearchSimilaritiesLambdaDF_
+#if !defined (OrgApacheLuceneSearchSimilaritiesLambdaDF_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesLambdaDF || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesLambdaDF))
+#define OrgApacheLuceneSearchSimilaritiesLambdaDF_
 
-#define OrgApacheLuceneSearchSimilaritiesLambda_RESTRICT 1
-#define OrgApacheLuceneSearchSimilaritiesLambda_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSimilaritiesLambda 1
+#define INCLUDE_OrgApacheLuceneSearchSimilaritiesLambda 1
 #include "org/apache/lucene/search/similarities/Lambda.h"
 
 @class OrgApacheLuceneSearchExplanation;
 @class OrgApacheLuceneSearchSimilaritiesBasicStats;
 
+/*!
+ @brief Computes lambda as <code>docFreq+1 / numberOfDocuments+1</code>.
+ */
 @interface OrgApacheLuceneSearchSimilaritiesLambdaDF : OrgApacheLuceneSearchSimilaritiesLambda
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor: parameter-free
+ */
 - (instancetype)init;
 
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats;
@@ -43,8 +49,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesLambdaDF_init(OrgApacheL
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesLambdaDF *new_OrgApacheLuceneSearchSimilaritiesLambdaDF_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesLambdaDF *create_OrgApacheLuceneSearchSimilaritiesLambdaDF_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesLambdaDF)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSimilaritiesLambdaDF_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesLambdaDF")

@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgLukhnosPortmobileFileAttributeFileTime_INCLUDE_ALL")
-#if OrgLukhnosPortmobileFileAttributeFileTime_RESTRICT
-#define OrgLukhnosPortmobileFileAttributeFileTime_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgLukhnosPortmobileFileAttributeFileTime")
+#ifdef RESTRICT_OrgLukhnosPortmobileFileAttributeFileTime
+#define INCLUDE_ALL_OrgLukhnosPortmobileFileAttributeFileTime 0
 #else
-#define OrgLukhnosPortmobileFileAttributeFileTime_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgLukhnosPortmobileFileAttributeFileTime 1
 #endif
-#undef OrgLukhnosPortmobileFileAttributeFileTime_RESTRICT
+#undef RESTRICT_OrgLukhnosPortmobileFileAttributeFileTime
 
-#if !defined (_OrgLukhnosPortmobileFileAttributeFileTime_) && (OrgLukhnosPortmobileFileAttributeFileTime_INCLUDE_ALL || OrgLukhnosPortmobileFileAttributeFileTime_INCLUDE)
-#define _OrgLukhnosPortmobileFileAttributeFileTime_
+#if !defined (OrgLukhnosPortmobileFileAttributeFileTime_) && (INCLUDE_ALL_OrgLukhnosPortmobileFileAttributeFileTime || defined(INCLUDE_OrgLukhnosPortmobileFileAttributeFileTime))
+#define OrgLukhnosPortmobileFileAttributeFileTime_
 
-#define JavaLangComparable_RESTRICT 1
-#define JavaLangComparable_INCLUDE 1
+#define RESTRICT_JavaLangComparable 1
+#define INCLUDE_JavaLangComparable 1
 #include "java/lang/Comparable.h"
 
 @interface OrgLukhnosPortmobileFileAttributeFileTime : NSObject < JavaLangComparable > {
@@ -47,10 +47,12 @@ FOUNDATION_EXPORT void OrgLukhnosPortmobileFileAttributeFileTime_initWithLong_(O
 
 FOUNDATION_EXPORT OrgLukhnosPortmobileFileAttributeFileTime *new_OrgLukhnosPortmobileFileAttributeFileTime_initWithLong_(jlong time) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgLukhnosPortmobileFileAttributeFileTime *create_OrgLukhnosPortmobileFileAttributeFileTime_initWithLong_(jlong time);
+
 FOUNDATION_EXPORT OrgLukhnosPortmobileFileAttributeFileTime *OrgLukhnosPortmobileFileAttributeFileTime_fromMillisWithLong_(jlong value);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileFileAttributeFileTime)
 
 #endif
 
-#pragma pop_macro("OrgLukhnosPortmobileFileAttributeFileTime_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileFileAttributeFileTime")

@@ -37,6 +37,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchRandomAccessWeight_$1_i
 
 __attribute__((unused)) static OrgApacheLuceneSearchRandomAccessWeight_$1 *new_OrgApacheLuceneSearchRandomAccessWeight_$1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchDocIdSetIterator_(id<OrgApacheLuceneUtilBits> capture$0, OrgApacheLuceneSearchDocIdSetIterator *arg$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchRandomAccessWeight_$1 *create_OrgApacheLuceneSearchRandomAccessWeight_$1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchDocIdSetIterator_(id<OrgApacheLuceneUtilBits> capture$0, OrgApacheLuceneSearchDocIdSetIterator *arg$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchRandomAccessWeight_$1)
 
 @implementation OrgApacheLuceneSearchRandomAccessWeight
@@ -58,8 +60,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchRandomAccessWeight_$1)
     return nil;
   }
   OrgApacheLuceneSearchDocIdSetIterator *approximation = OrgApacheLuceneSearchDocIdSetIterator_allWithInt_([((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) maxDoc]);
-  OrgApacheLuceneSearchTwoPhaseIterator *twoPhase = [new_OrgApacheLuceneSearchRandomAccessWeight_$1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchDocIdSetIterator_(matchingDocs, approximation) autorelease];
-  return [new_OrgApacheLuceneSearchConstantScoreScorer_initWithOrgApacheLuceneSearchWeight_withFloat_withOrgApacheLuceneSearchTwoPhaseIterator_(self, [self score], twoPhase) autorelease];
+  OrgApacheLuceneSearchTwoPhaseIterator *twoPhase = create_OrgApacheLuceneSearchRandomAccessWeight_$1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchDocIdSetIterator_(matchingDocs, approximation);
+  return create_OrgApacheLuceneSearchConstantScoreScorer_initWithOrgApacheLuceneSearchWeight_withFloat_withOrgApacheLuceneSearchTwoPhaseIterator_(self, [self score], twoPhase);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -119,9 +121,11 @@ void OrgApacheLuceneSearchRandomAccessWeight_$1_initWithOrgApacheLuceneUtilBits_
 }
 
 OrgApacheLuceneSearchRandomAccessWeight_$1 *new_OrgApacheLuceneSearchRandomAccessWeight_$1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchDocIdSetIterator_(id<OrgApacheLuceneUtilBits> capture$0, OrgApacheLuceneSearchDocIdSetIterator *arg$0) {
-  OrgApacheLuceneSearchRandomAccessWeight_$1 *self = [OrgApacheLuceneSearchRandomAccessWeight_$1 alloc];
-  OrgApacheLuceneSearchRandomAccessWeight_$1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchDocIdSetIterator_(self, capture$0, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchRandomAccessWeight_$1, initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchDocIdSetIterator_, capture$0, arg$0)
+}
+
+OrgApacheLuceneSearchRandomAccessWeight_$1 *create_OrgApacheLuceneSearchRandomAccessWeight_$1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchDocIdSetIterator_(id<OrgApacheLuceneUtilBits> capture$0, OrgApacheLuceneSearchDocIdSetIterator *arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchRandomAccessWeight_$1, initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchDocIdSetIterator_, capture$0, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchRandomAccessWeight_$1)

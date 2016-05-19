@@ -32,12 +32,12 @@ J2OBJC_IGNORE_DESIGNATED_END
                                              withInt:(jint)length {
   JavaNioByteBuffer *bb = [((JavaNioCharsetCharset *) nil_chk(charset_)) encodeWithJavaNioCharBuffer:JavaNioCharBuffer_wrapWithCharArray_withInt_withInt_(buffer, offset, length)];
   if ([((JavaNioByteBuffer *) nil_chk(bb)) hasArray]) {
-    return [new_OrgApacheLuceneUtilBytesRef_initWithByteArray_withInt_withInt_([bb array], [bb arrayOffset] + [bb position], [bb remaining]) autorelease];
+    return create_OrgApacheLuceneUtilBytesRef_initWithByteArray_withInt_withInt_([bb array], [bb arrayOffset] + [bb position], [bb remaining]);
   }
   else {
     IOSByteArray *b = [IOSByteArray arrayWithLength:[bb remaining]];
     [bb getWithByteArray:b];
-    return [new_OrgApacheLuceneUtilBytesRef_initWithByteArray_(b) autorelease];
+    return create_OrgApacheLuceneUtilBytesRef_initWithByteArray_(b);
   }
 }
 
@@ -63,25 +63,29 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 void OrgApacheLuceneAnalysisPayloadsIdentityEncoder_init(OrgApacheLuceneAnalysisPayloadsIdentityEncoder *self) {
   OrgApacheLuceneAnalysisPayloadsAbstractEncoder_init(self);
-  JreStrongAssign(&self->charset_, JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8_));
+  JreStrongAssign(&self->charset_, JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8));
 }
 
 OrgApacheLuceneAnalysisPayloadsIdentityEncoder *new_OrgApacheLuceneAnalysisPayloadsIdentityEncoder_init() {
-  OrgApacheLuceneAnalysisPayloadsIdentityEncoder *self = [OrgApacheLuceneAnalysisPayloadsIdentityEncoder alloc];
-  OrgApacheLuceneAnalysisPayloadsIdentityEncoder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPayloadsIdentityEncoder, init)
+}
+
+OrgApacheLuceneAnalysisPayloadsIdentityEncoder *create_OrgApacheLuceneAnalysisPayloadsIdentityEncoder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPayloadsIdentityEncoder, init)
 }
 
 void OrgApacheLuceneAnalysisPayloadsIdentityEncoder_initWithJavaNioCharsetCharset_(OrgApacheLuceneAnalysisPayloadsIdentityEncoder *self, JavaNioCharsetCharset *charset) {
   OrgApacheLuceneAnalysisPayloadsAbstractEncoder_init(self);
-  JreStrongAssign(&self->charset_, JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8_));
+  JreStrongAssign(&self->charset_, JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8));
   JreStrongAssign(&self->charset_, charset);
 }
 
 OrgApacheLuceneAnalysisPayloadsIdentityEncoder *new_OrgApacheLuceneAnalysisPayloadsIdentityEncoder_initWithJavaNioCharsetCharset_(JavaNioCharsetCharset *charset) {
-  OrgApacheLuceneAnalysisPayloadsIdentityEncoder *self = [OrgApacheLuceneAnalysisPayloadsIdentityEncoder alloc];
-  OrgApacheLuceneAnalysisPayloadsIdentityEncoder_initWithJavaNioCharsetCharset_(self, charset);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPayloadsIdentityEncoder, initWithJavaNioCharsetCharset_, charset)
+}
+
+OrgApacheLuceneAnalysisPayloadsIdentityEncoder *create_OrgApacheLuceneAnalysisPayloadsIdentityEncoder_initWithJavaNioCharsetCharset_(JavaNioCharsetCharset *charset) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPayloadsIdentityEncoder, initWithJavaNioCharsetCharset_, charset)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisPayloadsIdentityEncoder)

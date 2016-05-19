@@ -5,24 +5,36 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisTrApostropheFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisTrApostropheFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisTrApostropheFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTrApostropheFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisTrApostropheFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTrApostropheFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisTrApostropheFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTrApostropheFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisTrApostropheFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisTrApostropheFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisTrApostropheFilterFactory_) && (OrgApacheLuceneAnalysisTrApostropheFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisTrApostropheFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisTrApostropheFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisTrApostropheFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTrApostropheFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisTrApostropheFilterFactory))
+#define OrgApacheLuceneAnalysisTrApostropheFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>ApostropheFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_tr_lower_apostrophes" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+ &lt;filter class="solr.ApostropheFilterFactory"/&gt;
+ &lt;filter class="solr.TurkishLowerCaseFilterFactory"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisTrApostropheFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
@@ -39,8 +51,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisTrApostropheFilterFactory_initWith
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisTrApostropheFilterFactory *new_OrgApacheLuceneAnalysisTrApostropheFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisTrApostropheFilterFactory *create_OrgApacheLuceneAnalysisTrApostropheFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTrApostropheFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisTrApostropheFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTrApostropheFilterFactory")

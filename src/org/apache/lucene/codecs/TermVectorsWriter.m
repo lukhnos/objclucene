@@ -98,9 +98,9 @@ withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)offsets {
       if ((code & 1) != 0) {
         jint payloadLength = [positions readVInt];
         if (payload == nil) {
-          payload = [new_OrgApacheLuceneUtilBytesRefBuilder_init() autorelease];
+          payload = create_OrgApacheLuceneUtilBytesRefBuilder_init();
         }
-        [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(payload)) growWithInt:payloadLength];
+        [payload growWithInt:payloadLength];
         [positions readBytesWithByteArray:[payload bytes] withInt:0 withInt:payloadLength];
         [payload setLengthWithInt:payloadLength];
         thisPayload = [payload get];
@@ -192,7 +192,7 @@ void OrgApacheLuceneCodecsTermVectorsWriter_addAllDocVectorsWithOrgApacheLuceneI
     [self finishDocument];
     return;
   }
-  jint numFields = [((OrgApacheLuceneIndexFields *) nil_chk(vectors)) size];
+  jint numFields = [vectors size];
   if (numFields == -1) {
     numFields = 0;
     for (id<JavaUtilIterator> it = [vectors iterator]; [((id<JavaUtilIterator>) nil_chk(it)) hasNext]; ) {
@@ -214,7 +214,7 @@ void OrgApacheLuceneCodecsTermVectorsWriter_addAllDocVectorsWithOrgApacheLuceneI
     if (terms == nil) {
       continue;
     }
-    jboolean hasPositions = [((OrgApacheLuceneIndexTerms *) nil_chk(terms)) hasPositions];
+    jboolean hasPositions = [terms hasPositions];
     jboolean hasOffsets = [terms hasOffsets];
     jboolean hasPayloads = [terms hasPayloads];
     JreAssert((!hasPayloads || hasPositions), (@"org/apache/lucene/codecs/TermVectorsWriter.java:246 condition failed: assert !hasPayloads || hasPositions;"));

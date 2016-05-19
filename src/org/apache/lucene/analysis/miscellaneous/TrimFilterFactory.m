@@ -30,18 +30,18 @@
 }
 
 - (OrgApacheLuceneAnalysisTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  if ([((OrgApacheLuceneUtilVersion *) nil_chk(luceneMatchVersion_)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_4_0_)]) {
-    return [new_OrgApacheLuceneAnalysisMiscellaneousTrimFilter_initWithOrgApacheLuceneAnalysisTokenStream_(input) autorelease];
+  if ([((OrgApacheLuceneUtilVersion *) nil_chk(luceneMatchVersion_)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_4_0)]) {
+    return create_OrgApacheLuceneAnalysisMiscellaneousTrimFilter_initWithOrgApacheLuceneAnalysisTokenStream_(input);
   }
   else {
-    OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter *filter = [new_OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_(input, updateOffsets_) autorelease];
+    OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter *filter = create_OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_(input, updateOffsets_);
     return filter;
   }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "TrimFilterFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "TrimFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenFilter;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -55,24 +55,26 @@
 
 void OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory *self, id<JavaUtilMap> args) {
   OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  if ([((OrgApacheLuceneUtilVersion *) nil_chk(self->luceneMatchVersion_)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_5_0_0_)] == false) {
+  if ([((OrgApacheLuceneUtilVersion *) nil_chk(self->luceneMatchVersion_)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_5_0_0)] == false) {
     self->updateOffsets_ = [self getBooleanWithJavaUtilMap:args withNSString:@"updateOffsets" withBoolean:false];
-    if (self->updateOffsets_ && [self->luceneMatchVersion_ onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_4_0_)]) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"updateOffsets=true is not supported anymore as of Lucene 4.4") autorelease];
+    if (self->updateOffsets_ && [self->luceneMatchVersion_ onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_4_0)]) {
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"updateOffsets=true is not supported anymore as of Lucene 4.4");
     }
   }
   else if ([((id<JavaUtilMap>) nil_chk(args)) containsKeyWithId:@"updateOffsets"]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"updateOffsets is not a valid option as of Lucene 5.0") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"updateOffsets is not a valid option as of Lucene 5.0");
   }
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory *self = [OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory alloc];
-  OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory *create_OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory)

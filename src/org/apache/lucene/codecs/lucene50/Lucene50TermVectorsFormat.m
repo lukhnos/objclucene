@@ -28,13 +28,15 @@ J2OBJC_IGNORE_DESIGNATED_END
 @end
 
 void OrgApacheLuceneCodecsLucene50Lucene50TermVectorsFormat_init(OrgApacheLuceneCodecsLucene50Lucene50TermVectorsFormat *self) {
-  OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat_initWithNSString_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_withInt_withInt_(self, @"Lucene50TermVectors", @"", JreLoadStatic(OrgApacheLuceneCodecsCompressingCompressionMode, FAST_), JreLShift32(1, 12), 1024);
+  OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat_initWithNSString_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_withInt_withInt_(self, @"Lucene50TermVectors", @"", JreLoadStatic(OrgApacheLuceneCodecsCompressingCompressionMode, FAST), JreLShift32(1, 12), 1024);
 }
 
 OrgApacheLuceneCodecsLucene50Lucene50TermVectorsFormat *new_OrgApacheLuceneCodecsLucene50Lucene50TermVectorsFormat_init() {
-  OrgApacheLuceneCodecsLucene50Lucene50TermVectorsFormat *self = [OrgApacheLuceneCodecsLucene50Lucene50TermVectorsFormat alloc];
-  OrgApacheLuceneCodecsLucene50Lucene50TermVectorsFormat_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene50Lucene50TermVectorsFormat, init)
+}
+
+OrgApacheLuceneCodecsLucene50Lucene50TermVectorsFormat *create_OrgApacheLuceneCodecsLucene50Lucene50TermVectorsFormat_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene50Lucene50TermVectorsFormat, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50TermVectorsFormat)

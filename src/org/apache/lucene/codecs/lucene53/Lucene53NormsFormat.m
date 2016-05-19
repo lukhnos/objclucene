@@ -15,19 +15,31 @@
 #include "org/apache/lucene/index/SegmentReadState.h"
 #include "org/apache/lucene/index/SegmentWriteState.h"
 
-static NSString *OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_DATA_CODEC_ = @"Lucene53NormsData";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsLucene53Lucene53NormsFormat, DATA_CODEC_, NSString *)
+inline NSString *OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_get_DATA_CODEC();
+static NSString *OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_DATA_CODEC = @"Lucene53NormsData";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsLucene53Lucene53NormsFormat, DATA_CODEC, NSString *)
 
-static NSString *OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_DATA_EXTENSION_ = @"nvd";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsLucene53Lucene53NormsFormat, DATA_EXTENSION_, NSString *)
+inline NSString *OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_get_DATA_EXTENSION();
+static NSString *OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_DATA_EXTENSION = @"nvd";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsLucene53Lucene53NormsFormat, DATA_EXTENSION, NSString *)
 
-static NSString *OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_METADATA_CODEC_ = @"Lucene53NormsMetadata";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsLucene53Lucene53NormsFormat, METADATA_CODEC_, NSString *)
+inline NSString *OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_get_METADATA_CODEC();
+static NSString *OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_METADATA_CODEC = @"Lucene53NormsMetadata";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsLucene53Lucene53NormsFormat, METADATA_CODEC, NSString *)
 
-static NSString *OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_METADATA_EXTENSION_ = @"nvm";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsLucene53Lucene53NormsFormat, METADATA_EXTENSION_, NSString *)
+inline NSString *OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_get_METADATA_EXTENSION();
+static NSString *OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_METADATA_EXTENSION = @"nvm";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsLucene53Lucene53NormsFormat, METADATA_EXTENSION, NSString *)
 
 @implementation OrgApacheLuceneCodecsLucene53Lucene53NormsFormat
+
++ (jint)VERSION_START {
+  return OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_VERSION_START;
+}
+
++ (jint)VERSION_CURRENT {
+  return OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_VERSION_CURRENT;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -37,11 +49,11 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneCodecsNormsConsumer *)normsConsumerWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state {
-  return [new_OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_initWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_(state, OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_DATA_CODEC_, OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_DATA_EXTENSION_, OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_METADATA_CODEC_, OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_METADATA_EXTENSION_) autorelease];
+  return create_OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_initWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_(state, OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_DATA_CODEC, OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_DATA_EXTENSION, OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_METADATA_CODEC, OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_METADATA_EXTENSION);
 }
 
 - (OrgApacheLuceneCodecsNormsProducer *)normsProducerWithOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state {
-  return [new_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_initWithOrgApacheLuceneIndexSegmentReadState_withNSString_withNSString_withNSString_withNSString_(state, OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_DATA_CODEC_, OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_DATA_EXTENSION_, OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_METADATA_CODEC_, OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_METADATA_EXTENSION_) autorelease];
+  return create_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_initWithOrgApacheLuceneIndexSegmentReadState_withNSString_withNSString_withNSString_withNSString_(state, OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_DATA_CODEC, OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_DATA_EXTENSION, OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_METADATA_CODEC, OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_METADATA_EXTENSION);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -51,10 +63,10 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "normsProducerWithOrgApacheLuceneIndexSegmentReadState:", "normsProducer", "Lorg.apache.lucene.codecs.NormsProducer;", 0x1, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "DATA_CODEC_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_DATA_CODEC_, NULL, .constantValue.asLong = 0 },
-    { "DATA_EXTENSION_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_DATA_EXTENSION_, NULL, .constantValue.asLong = 0 },
-    { "METADATA_CODEC_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_METADATA_CODEC_, NULL, .constantValue.asLong = 0 },
-    { "METADATA_EXTENSION_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_METADATA_EXTENSION_, NULL, .constantValue.asLong = 0 },
+    { "DATA_CODEC", "DATA_CODEC", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_DATA_CODEC, NULL, .constantValue.asLong = 0 },
+    { "DATA_EXTENSION", "DATA_EXTENSION", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_DATA_EXTENSION, NULL, .constantValue.asLong = 0 },
+    { "METADATA_CODEC", "METADATA_CODEC", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_METADATA_CODEC, NULL, .constantValue.asLong = 0 },
+    { "METADATA_EXTENSION", "METADATA_EXTENSION", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_METADATA_EXTENSION, NULL, .constantValue.asLong = 0 },
     { "VERSION_START", "VERSION_START", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_VERSION_START },
     { "VERSION_CURRENT", "VERSION_CURRENT", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_VERSION_CURRENT },
   };
@@ -69,9 +81,11 @@ void OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_init(OrgApacheLuceneCodecs
 }
 
 OrgApacheLuceneCodecsLucene53Lucene53NormsFormat *new_OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_init() {
-  OrgApacheLuceneCodecsLucene53Lucene53NormsFormat *self = [OrgApacheLuceneCodecsLucene53Lucene53NormsFormat alloc];
-  OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene53Lucene53NormsFormat, init)
+}
+
+OrgApacheLuceneCodecsLucene53Lucene53NormsFormat *create_OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene53Lucene53NormsFormat, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene53Lucene53NormsFormat)

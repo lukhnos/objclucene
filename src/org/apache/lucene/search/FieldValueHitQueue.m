@@ -27,6 +27,10 @@
 
 __attribute__((unused)) static void OrgApacheLuceneSearchFieldValueHitQueue_initWithOrgApacheLuceneSearchSortFieldArray_withInt_(OrgApacheLuceneSearchFieldValueHitQueue *self, IOSObjectArray *fields, jint size);
 
+/*!
+ @brief An implementation of <code>FieldValueHitQueue</code> which is optimized in case
+ there is just one comparator.
+ */
 @interface OrgApacheLuceneSearchFieldValueHitQueue_OneComparatorFieldValueHitQueue : OrgApacheLuceneSearchFieldValueHitQueue {
  @public
   jint oneReverseMul_;
@@ -36,6 +40,12 @@ __attribute__((unused)) static void OrgApacheLuceneSearchFieldValueHitQueue_init
 - (instancetype)initWithOrgApacheLuceneSearchSortFieldArray:(IOSObjectArray *)fields
                                                     withInt:(jint)size;
 
+/*!
+ @brief Returns whether <code>hitA</code> is less relevant than <code>hitB</code>.
+ @param hitA Entry
+ @param hitB Entry
+ @return <code>true</code> if document <code>hitA</code> should be sorted after document <code>hitB</code>.
+ */
 - (jboolean)lessThanWithId:(OrgApacheLuceneSearchFieldValueHitQueue_Entry *)hitA
                     withId:(OrgApacheLuceneSearchFieldValueHitQueue_Entry *)hitB;
 
@@ -49,8 +59,14 @@ __attribute__((unused)) static void OrgApacheLuceneSearchFieldValueHitQueue_OneC
 
 __attribute__((unused)) static OrgApacheLuceneSearchFieldValueHitQueue_OneComparatorFieldValueHitQueue *new_OrgApacheLuceneSearchFieldValueHitQueue_OneComparatorFieldValueHitQueue_initWithOrgApacheLuceneSearchSortFieldArray_withInt_(IOSObjectArray *fields, jint size) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchFieldValueHitQueue_OneComparatorFieldValueHitQueue *create_OrgApacheLuceneSearchFieldValueHitQueue_OneComparatorFieldValueHitQueue_initWithOrgApacheLuceneSearchSortFieldArray_withInt_(IOSObjectArray *fields, jint size);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldValueHitQueue_OneComparatorFieldValueHitQueue)
 
+/*!
+ @brief An implementation of <code>FieldValueHitQueue</code> which is optimized in case
+ there is more than one comparator.
+ */
 @interface OrgApacheLuceneSearchFieldValueHitQueue_MultiComparatorsFieldValueHitQueue : OrgApacheLuceneSearchFieldValueHitQueue
 
 - (instancetype)initWithOrgApacheLuceneSearchSortFieldArray:(IOSObjectArray *)fields
@@ -66,6 +82,8 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchFieldValueHitQueue_MultiComparator
 __attribute__((unused)) static void OrgApacheLuceneSearchFieldValueHitQueue_MultiComparatorsFieldValueHitQueue_initWithOrgApacheLuceneSearchSortFieldArray_withInt_(OrgApacheLuceneSearchFieldValueHitQueue_MultiComparatorsFieldValueHitQueue *self, IOSObjectArray *fields, jint size);
 
 __attribute__((unused)) static OrgApacheLuceneSearchFieldValueHitQueue_MultiComparatorsFieldValueHitQueue *new_OrgApacheLuceneSearchFieldValueHitQueue_MultiComparatorsFieldValueHitQueue_initWithOrgApacheLuceneSearchSortFieldArray_withInt_(IOSObjectArray *fields, jint size) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchFieldValueHitQueue_MultiComparatorsFieldValueHitQueue *create_OrgApacheLuceneSearchFieldValueHitQueue_MultiComparatorsFieldValueHitQueue_initWithOrgApacheLuceneSearchSortFieldArray_withInt_(IOSObjectArray *fields, jint size);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldValueHitQueue_MultiComparatorsFieldValueHitQueue)
 
@@ -111,7 +129,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldValueHitQueue_MultiComparat
   for (jint i = 0; i < n; ++i) {
     IOSObjectArray_Set(fields, i, [((OrgApacheLuceneSearchFieldComparator *) nil_chk(IOSObjectArray_Get(comparators_, i))) valueWithInt:((OrgApacheLuceneSearchFieldValueHitQueue_Entry *) nil_chk(entry_))->slot_]);
   }
-  return [new_OrgApacheLuceneSearchFieldDoc_initWithInt_withFloat_withNSObjectArray_(((OrgApacheLuceneSearchFieldValueHitQueue_Entry *) nil_chk(entry_))->doc_, entry_->score_, fields) autorelease];
+  return create_OrgApacheLuceneSearchFieldDoc_initWithInt_withFloat_withNSObjectArray_(((OrgApacheLuceneSearchFieldValueHitQueue_Entry *) nil_chk(entry_))->doc_, entry_->score_, fields);
 }
 
 - (IOSObjectArray *)getFields {
@@ -132,7 +150,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldValueHitQueue_MultiComparat
     { "getComparators", NULL, "[Lorg.apache.lucene.search.FieldComparator;", 0x1, NULL, NULL },
     { "getReverseMul", NULL, "[I", 0x1, NULL, NULL },
     { "getComparatorsWithOrgApacheLuceneIndexLeafReaderContext:", "getComparators", "[Lorg.apache.lucene.search.LeafFieldComparator;", 0x1, "Ljava.io.IOException;", NULL },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x404, NULL, NULL },
+    { "lessThanWithId:withId:", "lessThan", "Z", 0x404, NULL, "(Lorg/apache/lucene/search/FieldValueHitQueue$Entry;Lorg/apache/lucene/search/FieldValueHitQueue$Entry;)Z" },
     { "fillFieldsWithOrgApacheLuceneSearchFieldValueHitQueue_Entry:", "fillFields", "Lorg.apache.lucene.search.FieldDoc;", 0x0, NULL, NULL },
     { "getFields", NULL, "[Lorg.apache.lucene.search.SortField;", 0x0, NULL, NULL },
   };
@@ -165,13 +183,13 @@ void OrgApacheLuceneSearchFieldValueHitQueue_initWithOrgApacheLuceneSearchSortFi
 OrgApacheLuceneSearchFieldValueHitQueue *OrgApacheLuceneSearchFieldValueHitQueue_createWithOrgApacheLuceneSearchSortFieldArray_withInt_(IOSObjectArray *fields, jint size) {
   OrgApacheLuceneSearchFieldValueHitQueue_initialize();
   if (((IOSObjectArray *) nil_chk(fields))->size_ == 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"Sort must contain at least one field") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"Sort must contain at least one field");
   }
   if (fields->size_ == 1) {
-    return [new_OrgApacheLuceneSearchFieldValueHitQueue_OneComparatorFieldValueHitQueue_initWithOrgApacheLuceneSearchSortFieldArray_withInt_(fields, size) autorelease];
+    return create_OrgApacheLuceneSearchFieldValueHitQueue_OneComparatorFieldValueHitQueue_initWithOrgApacheLuceneSearchSortFieldArray_withInt_(fields, size);
   }
   else {
-    return [new_OrgApacheLuceneSearchFieldValueHitQueue_MultiComparatorsFieldValueHitQueue_initWithOrgApacheLuceneSearchSortFieldArray_withInt_(fields, size) autorelease];
+    return create_OrgApacheLuceneSearchFieldValueHitQueue_MultiComparatorsFieldValueHitQueue_initWithOrgApacheLuceneSearchSortFieldArray_withInt_(fields, size);
   }
 }
 
@@ -210,9 +228,11 @@ void OrgApacheLuceneSearchFieldValueHitQueue_Entry_initWithInt_withInt_withFloat
 }
 
 OrgApacheLuceneSearchFieldValueHitQueue_Entry *new_OrgApacheLuceneSearchFieldValueHitQueue_Entry_initWithInt_withInt_withFloat_(jint slot, jint doc, jfloat score) {
-  OrgApacheLuceneSearchFieldValueHitQueue_Entry *self = [OrgApacheLuceneSearchFieldValueHitQueue_Entry alloc];
-  OrgApacheLuceneSearchFieldValueHitQueue_Entry_initWithInt_withInt_withFloat_(self, slot, doc, score);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFieldValueHitQueue_Entry, initWithInt_withInt_withFloat_, slot, doc, score)
+}
+
+OrgApacheLuceneSearchFieldValueHitQueue_Entry *create_OrgApacheLuceneSearchFieldValueHitQueue_Entry_initWithInt_withInt_withFloat_(jint slot, jint doc, jfloat score) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFieldValueHitQueue_Entry, initWithInt_withInt_withFloat_, slot, doc, score)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldValueHitQueue_Entry)
@@ -244,7 +264,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldValueHitQueue_Entry)
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneSearchSortFieldArray:withInt:", "OneComparatorFieldValueHitQueue", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x4, NULL, NULL },
+    { "lessThanWithId:withId:", "lessThan", "Z", 0x4, NULL, "(Lorg/apache/lucene/search/FieldValueHitQueue$Entry;Lorg/apache/lucene/search/FieldValueHitQueue$Entry;)Z" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "oneReverseMul_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
@@ -265,9 +285,11 @@ void OrgApacheLuceneSearchFieldValueHitQueue_OneComparatorFieldValueHitQueue_ini
 }
 
 OrgApacheLuceneSearchFieldValueHitQueue_OneComparatorFieldValueHitQueue *new_OrgApacheLuceneSearchFieldValueHitQueue_OneComparatorFieldValueHitQueue_initWithOrgApacheLuceneSearchSortFieldArray_withInt_(IOSObjectArray *fields, jint size) {
-  OrgApacheLuceneSearchFieldValueHitQueue_OneComparatorFieldValueHitQueue *self = [OrgApacheLuceneSearchFieldValueHitQueue_OneComparatorFieldValueHitQueue alloc];
-  OrgApacheLuceneSearchFieldValueHitQueue_OneComparatorFieldValueHitQueue_initWithOrgApacheLuceneSearchSortFieldArray_withInt_(self, fields, size);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFieldValueHitQueue_OneComparatorFieldValueHitQueue, initWithOrgApacheLuceneSearchSortFieldArray_withInt_, fields, size)
+}
+
+OrgApacheLuceneSearchFieldValueHitQueue_OneComparatorFieldValueHitQueue *create_OrgApacheLuceneSearchFieldValueHitQueue_OneComparatorFieldValueHitQueue_initWithOrgApacheLuceneSearchSortFieldArray_withInt_(IOSObjectArray *fields, jint size) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFieldValueHitQueue_OneComparatorFieldValueHitQueue, initWithOrgApacheLuceneSearchSortFieldArray_withInt_, fields, size)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldValueHitQueue_OneComparatorFieldValueHitQueue)
@@ -297,7 +319,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldValueHitQueue_OneComp
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneSearchSortFieldArray:withInt:", "MultiComparatorsFieldValueHitQueue", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x4, NULL, NULL },
+    { "lessThanWithId:withId:", "lessThan", "Z", 0x4, NULL, "(Lorg/apache/lucene/search/FieldValueHitQueue$Entry;Lorg/apache/lucene/search/FieldValueHitQueue$Entry;)Z" },
   };
   static const char *superclass_type_args[] = {"TT;"};
   static const J2ObjcClassInfo _OrgApacheLuceneSearchFieldValueHitQueue_MultiComparatorsFieldValueHitQueue = { 2, "MultiComparatorsFieldValueHitQueue", "org.apache.lucene.search", "FieldValueHitQueue", 0x1a, 2, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "<T:Lorg/apache/lucene/search/FieldValueHitQueue$Entry;>Lorg/apache/lucene/search/FieldValueHitQueue<TT;>;" };
@@ -311,9 +333,11 @@ void OrgApacheLuceneSearchFieldValueHitQueue_MultiComparatorsFieldValueHitQueue_
 }
 
 OrgApacheLuceneSearchFieldValueHitQueue_MultiComparatorsFieldValueHitQueue *new_OrgApacheLuceneSearchFieldValueHitQueue_MultiComparatorsFieldValueHitQueue_initWithOrgApacheLuceneSearchSortFieldArray_withInt_(IOSObjectArray *fields, jint size) {
-  OrgApacheLuceneSearchFieldValueHitQueue_MultiComparatorsFieldValueHitQueue *self = [OrgApacheLuceneSearchFieldValueHitQueue_MultiComparatorsFieldValueHitQueue alloc];
-  OrgApacheLuceneSearchFieldValueHitQueue_MultiComparatorsFieldValueHitQueue_initWithOrgApacheLuceneSearchSortFieldArray_withInt_(self, fields, size);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFieldValueHitQueue_MultiComparatorsFieldValueHitQueue, initWithOrgApacheLuceneSearchSortFieldArray_withInt_, fields, size)
+}
+
+OrgApacheLuceneSearchFieldValueHitQueue_MultiComparatorsFieldValueHitQueue *create_OrgApacheLuceneSearchFieldValueHitQueue_MultiComparatorsFieldValueHitQueue_initWithOrgApacheLuceneSearchSortFieldArray_withInt_(IOSObjectArray *fields, jint size) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFieldValueHitQueue_MultiComparatorsFieldValueHitQueue, initWithOrgApacheLuceneSearchSortFieldArray_withInt_, fields, size)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldValueHitQueue_MultiComparatorsFieldValueHitQueue)

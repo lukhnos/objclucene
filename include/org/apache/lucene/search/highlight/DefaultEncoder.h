@@ -5,21 +5,24 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchHighlightDefaultEncoder_INCLUDE_ALL")
-#if OrgApacheLuceneSearchHighlightDefaultEncoder_RESTRICT
-#define OrgApacheLuceneSearchHighlightDefaultEncoder_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightDefaultEncoder")
+#ifdef RESTRICT_OrgApacheLuceneSearchHighlightDefaultEncoder
+#define INCLUDE_ALL_OrgApacheLuceneSearchHighlightDefaultEncoder 0
 #else
-#define OrgApacheLuceneSearchHighlightDefaultEncoder_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchHighlightDefaultEncoder 1
 #endif
-#undef OrgApacheLuceneSearchHighlightDefaultEncoder_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchHighlightDefaultEncoder
 
-#if !defined (_OrgApacheLuceneSearchHighlightDefaultEncoder_) && (OrgApacheLuceneSearchHighlightDefaultEncoder_INCLUDE_ALL || OrgApacheLuceneSearchHighlightDefaultEncoder_INCLUDE)
-#define _OrgApacheLuceneSearchHighlightDefaultEncoder_
+#if !defined (OrgApacheLuceneSearchHighlightDefaultEncoder_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightDefaultEncoder || defined(INCLUDE_OrgApacheLuceneSearchHighlightDefaultEncoder))
+#define OrgApacheLuceneSearchHighlightDefaultEncoder_
 
-#define OrgApacheLuceneSearchHighlightEncoder_RESTRICT 1
-#define OrgApacheLuceneSearchHighlightEncoder_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchHighlightEncoder 1
+#define INCLUDE_OrgApacheLuceneSearchHighlightEncoder 1
 #include "org/apache/lucene/search/highlight/Encoder.h"
 
+/*!
+ @brief Simple <code>Encoder</code> implementation that does not modify the output
+ */
 @interface OrgApacheLuceneSearchHighlightDefaultEncoder : NSObject < OrgApacheLuceneSearchHighlightEncoder >
 
 #pragma mark Public
@@ -36,8 +39,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightDefaultEncoder_init(OrgApac
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightDefaultEncoder *new_OrgApacheLuceneSearchHighlightDefaultEncoder_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightDefaultEncoder *create_OrgApacheLuceneSearchHighlightDefaultEncoder_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightDefaultEncoder)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchHighlightDefaultEncoder_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightDefaultEncoder")

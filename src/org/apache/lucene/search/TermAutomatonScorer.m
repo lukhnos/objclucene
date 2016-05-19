@@ -42,8 +42,14 @@
   jint freq_;
 }
 
+/*!
+ @brief Pops all enums positioned on the current (minimum) doc
+ */
 - (void)popCurrentDoc;
 
+/*!
+ @brief Pushes all previously pop'd enums back into the docIDQueue
+ */
 - (void)pushCurrentDoc;
 
 - (jint)doNext;
@@ -77,6 +83,10 @@ __attribute__((unused)) static void OrgApacheLuceneSearchTermAutomatonScorer_shi
 
 __attribute__((unused)) static void OrgApacheLuceneSearchTermAutomatonScorer_countMatches(OrgApacheLuceneSearchTermAutomatonScorer *self);
 
+/*!
+ @brief Sorts by docID so we can quickly pull out all scorers that are on
+ the same (lowest) docID.
+ */
 @interface OrgApacheLuceneSearchTermAutomatonScorer_DocIDQueue : OrgApacheLuceneUtilPriorityQueue
 
 - (instancetype)initWithInt:(jint)maxSize;
@@ -92,8 +102,14 @@ __attribute__((unused)) static void OrgApacheLuceneSearchTermAutomatonScorer_Doc
 
 __attribute__((unused)) static OrgApacheLuceneSearchTermAutomatonScorer_DocIDQueue *new_OrgApacheLuceneSearchTermAutomatonScorer_DocIDQueue_initWithInt_(jint maxSize) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchTermAutomatonScorer_DocIDQueue *create_OrgApacheLuceneSearchTermAutomatonScorer_DocIDQueue_initWithInt_(jint maxSize);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermAutomatonScorer_DocIDQueue)
 
+/*!
+ @brief Sorts by position so we can visit all scorers on one doc, by
+ position.
+ */
 @interface OrgApacheLuceneSearchTermAutomatonScorer_PositionQueue : OrgApacheLuceneUtilPriorityQueue
 
 - (instancetype)initWithInt:(jint)maxSize;
@@ -108,6 +124,8 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchTermAutomatonScorer_PositionQueue)
 __attribute__((unused)) static void OrgApacheLuceneSearchTermAutomatonScorer_PositionQueue_initWithInt_(OrgApacheLuceneSearchTermAutomatonScorer_PositionQueue *self, jint maxSize);
 
 __attribute__((unused)) static OrgApacheLuceneSearchTermAutomatonScorer_PositionQueue *new_OrgApacheLuceneSearchTermAutomatonScorer_PositionQueue_initWithInt_(jint maxSize) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchTermAutomatonScorer_PositionQueue *create_OrgApacheLuceneSearchTermAutomatonScorer_PositionQueue_initWithInt_(jint maxSize);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermAutomatonScorer_PositionQueue)
 
@@ -130,6 +148,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTermAutomatonScorer_PosState, states_, 
 __attribute__((unused)) static void OrgApacheLuceneSearchTermAutomatonScorer_PosState_init(OrgApacheLuceneSearchTermAutomatonScorer_PosState *self);
 
 __attribute__((unused)) static OrgApacheLuceneSearchTermAutomatonScorer_PosState *new_OrgApacheLuceneSearchTermAutomatonScorer_PosState_init() NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchTermAutomatonScorer_PosState *create_OrgApacheLuceneSearchTermAutomatonScorer_PosState_init();
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermAutomatonScorer_PosState)
 
@@ -236,7 +256,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermAutomatonScorer_PosState)
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight:withOrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorerArray:withInt:withJavaUtilMap:withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:", "TermAutomatonScorer", NULL, 0x1, "Ljava.io.IOException;", NULL },
+    { "initWithOrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight:withOrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorerArray:withInt:withJavaUtilMap:withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:", "TermAutomatonScorer", NULL, 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/search/TermAutomatonQuery$TermAutomatonWeight;[Lorg/apache/lucene/search/TermAutomatonQuery$EnumAndScorer;ILjava/util/Map<Ljava/lang/Integer;Lorg/apache/lucene/util/BytesRef;>;Lorg/apache/lucene/search/similarities/Similarity$SimScorer;)V" },
     { "popCurrentDoc", NULL, "V", 0x2, NULL, NULL },
     { "pushCurrentDoc", NULL, "V", 0x2, NULL, NULL },
     { "nextDoc", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
@@ -286,7 +306,7 @@ void OrgApacheLuceneSearchTermAutomatonScorer_initWithOrgApacheLuceneSearchTermA
   self->anyTermID_ = anyTermID;
   JreStrongAssignAndConsume(&self->subsOnDoc_, [IOSObjectArray newArrayWithLength:subs->size_ type:OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer_class_()]);
   JreStrongAssignAndConsume(&self->positions_, [IOSObjectArray newArrayWithLength:4 type:OrgApacheLuceneSearchTermAutomatonScorer_PosState_class_()]);
-  for (jint i = 0; i < self->positions_->size_; i++) {
+  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(self->positions_))->size_; i++) {
     IOSObjectArray_SetAndConsume(self->positions_, i, new_OrgApacheLuceneSearchTermAutomatonScorer_PosState_init());
   }
   jlong cost = 0;
@@ -306,9 +326,11 @@ void OrgApacheLuceneSearchTermAutomatonScorer_initWithOrgApacheLuceneSearchTermA
 }
 
 OrgApacheLuceneSearchTermAutomatonScorer *new_OrgApacheLuceneSearchTermAutomatonScorer_initWithOrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight_withOrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorerArray_withInt_withJavaUtilMap_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight *weight, IOSObjectArray *subs, jint anyTermID, id<JavaUtilMap> idToTerm, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer) {
-  OrgApacheLuceneSearchTermAutomatonScorer *self = [OrgApacheLuceneSearchTermAutomatonScorer alloc];
-  OrgApacheLuceneSearchTermAutomatonScorer_initWithOrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight_withOrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorerArray_withInt_withJavaUtilMap_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(self, weight, subs, anyTermID, idToTerm, docScorer);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTermAutomatonScorer, initWithOrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight_withOrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorerArray_withInt_withJavaUtilMap_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_, weight, subs, anyTermID, idToTerm, docScorer)
+}
+
+OrgApacheLuceneSearchTermAutomatonScorer *create_OrgApacheLuceneSearchTermAutomatonScorer_initWithOrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight_withOrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorerArray_withInt_withJavaUtilMap_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight *weight, IOSObjectArray *subs, jint anyTermID, id<JavaUtilMap> idToTerm, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTermAutomatonScorer, initWithOrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight_withOrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorerArray_withInt_withJavaUtilMap_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_, weight, subs, anyTermID, idToTerm, docScorer)
 }
 
 void OrgApacheLuceneSearchTermAutomatonScorer_popCurrentDoc(OrgApacheLuceneSearchTermAutomatonScorer *self) {
@@ -377,9 +399,9 @@ void OrgApacheLuceneSearchTermAutomatonScorer_countMatches(OrgApacheLuceneSearch
       self->posShift_ = pos;
     }
     if (pos + 1 - self->posShift_ >= ((IOSObjectArray *) nil_chk(self->positions_))->size_) {
-      IOSObjectArray *newPositions = [IOSObjectArray arrayWithLength:OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(pos + 1 - self->posShift_, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_)) type:OrgApacheLuceneSearchTermAutomatonScorer_PosState_class_()];
-      JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(self->positions_, 0, newPositions, 0, self->positions_->size_);
-      for (jint i = self->positions_->size_; i < newPositions->size_; i++) {
+      IOSObjectArray *newPositions = [IOSObjectArray arrayWithLength:OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(pos + 1 - self->posShift_, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF)) type:OrgApacheLuceneSearchTermAutomatonScorer_PosState_class_()];
+      JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(self->positions_, 0, newPositions, 0, ((IOSObjectArray *) nil_chk(self->positions_))->size_);
+      for (jint i = ((IOSObjectArray *) nil_chk(self->positions_))->size_; i < newPositions->size_; i++) {
         IOSObjectArray_SetAndConsume(newPositions, i, new_OrgApacheLuceneSearchTermAutomatonScorer_PosState_init());
       }
       JreStrongAssign(&self->positions_, newPositions);
@@ -459,7 +481,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTermAutomatonScorer)
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithInt:", "DocIDQueue", NULL, 0x1, NULL, NULL },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x4, NULL, NULL },
+    { "lessThanWithId:withId:", "lessThan", "Z", 0x4, NULL, "(Lorg/apache/lucene/search/TermAutomatonQuery$EnumAndScorer;Lorg/apache/lucene/search/TermAutomatonQuery$EnumAndScorer;)Z" },
   };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.TermAutomatonQuery$EnumAndScorer;"};
   static const J2ObjcClassInfo _OrgApacheLuceneSearchTermAutomatonScorer_DocIDQueue = { 2, "DocIDQueue", "org.apache.lucene.search", "TermAutomatonScorer", 0xa, 2, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/search/TermAutomatonQuery$EnumAndScorer;>;" };
@@ -473,9 +495,11 @@ void OrgApacheLuceneSearchTermAutomatonScorer_DocIDQueue_initWithInt_(OrgApacheL
 }
 
 OrgApacheLuceneSearchTermAutomatonScorer_DocIDQueue *new_OrgApacheLuceneSearchTermAutomatonScorer_DocIDQueue_initWithInt_(jint maxSize) {
-  OrgApacheLuceneSearchTermAutomatonScorer_DocIDQueue *self = [OrgApacheLuceneSearchTermAutomatonScorer_DocIDQueue alloc];
-  OrgApacheLuceneSearchTermAutomatonScorer_DocIDQueue_initWithInt_(self, maxSize);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTermAutomatonScorer_DocIDQueue, initWithInt_, maxSize)
+}
+
+OrgApacheLuceneSearchTermAutomatonScorer_DocIDQueue *create_OrgApacheLuceneSearchTermAutomatonScorer_DocIDQueue_initWithInt_(jint maxSize) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTermAutomatonScorer_DocIDQueue, initWithInt_, maxSize)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTermAutomatonScorer_DocIDQueue)
@@ -495,7 +519,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTermAutomatonScorer_DocIDQ
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithInt:", "PositionQueue", NULL, 0x1, NULL, NULL },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x4, NULL, NULL },
+    { "lessThanWithId:withId:", "lessThan", "Z", 0x4, NULL, "(Lorg/apache/lucene/search/TermAutomatonQuery$EnumAndScorer;Lorg/apache/lucene/search/TermAutomatonQuery$EnumAndScorer;)Z" },
   };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.TermAutomatonQuery$EnumAndScorer;"};
   static const J2ObjcClassInfo _OrgApacheLuceneSearchTermAutomatonScorer_PositionQueue = { 2, "PositionQueue", "org.apache.lucene.search", "TermAutomatonScorer", 0xa, 2, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/search/TermAutomatonQuery$EnumAndScorer;>;" };
@@ -509,9 +533,11 @@ void OrgApacheLuceneSearchTermAutomatonScorer_PositionQueue_initWithInt_(OrgApac
 }
 
 OrgApacheLuceneSearchTermAutomatonScorer_PositionQueue *new_OrgApacheLuceneSearchTermAutomatonScorer_PositionQueue_initWithInt_(jint maxSize) {
-  OrgApacheLuceneSearchTermAutomatonScorer_PositionQueue *self = [OrgApacheLuceneSearchTermAutomatonScorer_PositionQueue alloc];
-  OrgApacheLuceneSearchTermAutomatonScorer_PositionQueue_initWithInt_(self, maxSize);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTermAutomatonScorer_PositionQueue, initWithInt_, maxSize)
+}
+
+OrgApacheLuceneSearchTermAutomatonScorer_PositionQueue *create_OrgApacheLuceneSearchTermAutomatonScorer_PositionQueue_initWithInt_(jint maxSize) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTermAutomatonScorer_PositionQueue, initWithInt_, maxSize)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTermAutomatonScorer_PositionQueue)
@@ -539,9 +565,11 @@ void OrgApacheLuceneSearchTermAutomatonScorer_TermRunAutomaton_initWithOrgApache
 }
 
 OrgApacheLuceneSearchTermAutomatonScorer_TermRunAutomaton *new_OrgApacheLuceneSearchTermAutomatonScorer_TermRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneUtilAutomatonAutomaton *a, jint termCount) {
-  OrgApacheLuceneSearchTermAutomatonScorer_TermRunAutomaton *self = [OrgApacheLuceneSearchTermAutomatonScorer_TermRunAutomaton alloc];
-  OrgApacheLuceneSearchTermAutomatonScorer_TermRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(self, a, termCount);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTermAutomatonScorer_TermRunAutomaton, initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_, a, termCount)
+}
+
+OrgApacheLuceneSearchTermAutomatonScorer_TermRunAutomaton *create_OrgApacheLuceneSearchTermAutomatonScorer_TermRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneUtilAutomatonAutomaton *a, jint termCount) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTermAutomatonScorer_TermRunAutomaton, initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_, a, termCount)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTermAutomatonScorer_TermRunAutomaton)
@@ -570,7 +598,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "addWithInt:", "add", "V", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x2, NULL, NULL },
+    { "init", "PosState", NULL, 0x2, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "states_", NULL, 0x0, "[I", NULL, NULL, .constantValue.asLong = 0 },
@@ -588,9 +616,11 @@ void OrgApacheLuceneSearchTermAutomatonScorer_PosState_init(OrgApacheLuceneSearc
 }
 
 OrgApacheLuceneSearchTermAutomatonScorer_PosState *new_OrgApacheLuceneSearchTermAutomatonScorer_PosState_init() {
-  OrgApacheLuceneSearchTermAutomatonScorer_PosState *self = [OrgApacheLuceneSearchTermAutomatonScorer_PosState alloc];
-  OrgApacheLuceneSearchTermAutomatonScorer_PosState_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTermAutomatonScorer_PosState, init)
+}
+
+OrgApacheLuceneSearchTermAutomatonScorer_PosState *create_OrgApacheLuceneSearchTermAutomatonScorer_PosState_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTermAutomatonScorer_PosState, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTermAutomatonScorer_PosState)

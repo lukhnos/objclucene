@@ -63,6 +63,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexMergeState_DocMap_$1_ini
 
 __attribute__((unused)) static OrgApacheLuceneIndexMergeState_DocMap_$1 *new_OrgApacheLuceneIndexMergeState_DocMap_$1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneUtilPackedPackedLongValues_withInt_withInt_(id<OrgApacheLuceneUtilBits> capture$0, OrgApacheLuceneUtilPackedPackedLongValues *capture$1, jint capture$2, jint capture$3) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexMergeState_DocMap_$1 *create_OrgApacheLuceneIndexMergeState_DocMap_$1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneUtilPackedPackedLongValues_withInt_withInt_(id<OrgApacheLuceneUtilBits> capture$0, OrgApacheLuceneUtilPackedPackedLongValues *capture$1, jint capture$2, jint capture$3);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergeState_DocMap_$1)
 
 @interface OrgApacheLuceneIndexMergeState_NoDelDocMap : OrgApacheLuceneIndexMergeState_DocMap {
@@ -85,6 +87,8 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMergeState_NoDelDocMap)
 __attribute__((unused)) static void OrgApacheLuceneIndexMergeState_NoDelDocMap_initWithInt_(OrgApacheLuceneIndexMergeState_NoDelDocMap *self, jint maxDoc);
 
 __attribute__((unused)) static OrgApacheLuceneIndexMergeState_NoDelDocMap *new_OrgApacheLuceneIndexMergeState_NoDelDocMap_initWithInt_(jint maxDoc) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexMergeState_NoDelDocMap *create_OrgApacheLuceneIndexMergeState_NoDelDocMap_initWithInt_(jint maxDoc);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergeState_NoDelDocMap)
 
@@ -120,8 +124,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergeState_NoDelDocMap)
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneUtilInfoStream:", "MergeState", NULL, 0x0, "Ljava.io.IOException;", NULL },
-    { "setDocMapsWithJavaUtilList:", "setDocMaps", "V", 0x2, "Ljava.io.IOException;", NULL },
+    { "initWithJavaUtilList:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneUtilInfoStream:", "MergeState", NULL, 0x0, "Ljava.io.IOException;", "(Ljava/util/List<Lorg/apache/lucene/index/CodecReader;>;Lorg/apache/lucene/index/SegmentInfo;Lorg/apache/lucene/util/InfoStream;)V" },
+    { "setDocMapsWithJavaUtilList:", "setDocMaps", "V", 0x2, "Ljava.io.IOException;", "(Ljava/util/List<Lorg/apache/lucene/index/CodecReader;>;)V" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "segmentInfo_", NULL, 0x11, "Lorg.apache.lucene.index.SegmentInfo;", NULL, NULL, .constantValue.asLong = 0 },
@@ -187,9 +191,11 @@ void OrgApacheLuceneIndexMergeState_initWithJavaUtilList_withOrgApacheLuceneInde
 }
 
 OrgApacheLuceneIndexMergeState *new_OrgApacheLuceneIndexMergeState_initWithJavaUtilList_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneUtilInfoStream_(id<JavaUtilList> readers, OrgApacheLuceneIndexSegmentInfo *segmentInfo, OrgApacheLuceneUtilInfoStream *infoStream) {
-  OrgApacheLuceneIndexMergeState *self = [OrgApacheLuceneIndexMergeState alloc];
-  OrgApacheLuceneIndexMergeState_initWithJavaUtilList_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneUtilInfoStream_(self, readers, segmentInfo, infoStream);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMergeState, initWithJavaUtilList_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneUtilInfoStream_, readers, segmentInfo, infoStream)
+}
+
+OrgApacheLuceneIndexMergeState *create_OrgApacheLuceneIndexMergeState_initWithJavaUtilList_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneUtilInfoStream_(id<JavaUtilList> readers, OrgApacheLuceneIndexSegmentInfo *segmentInfo, OrgApacheLuceneUtilInfoStream *infoStream) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMergeState, initWithJavaUtilList_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneUtilInfoStream_, readers, segmentInfo, infoStream)
 }
 
 void OrgApacheLuceneIndexMergeState_setDocMapsWithJavaUtilList_(OrgApacheLuceneIndexMergeState *self, id<JavaUtilList> readers) {
@@ -280,7 +286,7 @@ OrgApacheLuceneIndexMergeState_DocMap *OrgApacheLuceneIndexMergeState_DocMap_bui
   OrgApacheLuceneIndexMergeState_DocMap_initialize();
   jint maxDoc = [((OrgApacheLuceneIndexCodecReader *) nil_chk(reader)) maxDoc];
   if (![reader hasDeletions]) {
-    return [new_OrgApacheLuceneIndexMergeState_NoDelDocMap_initWithInt_(maxDoc) autorelease];
+    return create_OrgApacheLuceneIndexMergeState_NoDelDocMap_initWithInt_(maxDoc);
   }
   id<OrgApacheLuceneUtilBits> liveDocs = [reader getLiveDocs];
   return OrgApacheLuceneIndexMergeState_DocMap_buildWithInt_withOrgApacheLuceneUtilBits_(maxDoc, liveDocs);
@@ -300,7 +306,7 @@ OrgApacheLuceneIndexMergeState_DocMap *OrgApacheLuceneIndexMergeState_DocMap_bui
   OrgApacheLuceneUtilPackedPackedLongValues *docMap = [((OrgApacheLuceneUtilPackedPackedLongValues_Builder *) nil_chk(docMapBuilder)) build];
   jint numDeletedDocs = del;
   JreAssert(([((OrgApacheLuceneUtilPackedPackedLongValues *) nil_chk(docMap)) size] == maxDoc), (@"org/apache/lucene/index/MergeState.java:195 condition failed: assert docMap.size() == maxDoc;"));
-  return [new_OrgApacheLuceneIndexMergeState_DocMap_$1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneUtilPackedPackedLongValues_withInt_withInt_(liveDocs, docMap, maxDoc, numDeletedDocs) autorelease];
+  return create_OrgApacheLuceneIndexMergeState_DocMap_$1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneUtilPackedPackedLongValues_withInt_withInt_(liveDocs, docMap, maxDoc, numDeletedDocs);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergeState_DocMap)
@@ -365,9 +371,11 @@ void OrgApacheLuceneIndexMergeState_DocMap_$1_initWithOrgApacheLuceneUtilBits_wi
 }
 
 OrgApacheLuceneIndexMergeState_DocMap_$1 *new_OrgApacheLuceneIndexMergeState_DocMap_$1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneUtilPackedPackedLongValues_withInt_withInt_(id<OrgApacheLuceneUtilBits> capture$0, OrgApacheLuceneUtilPackedPackedLongValues *capture$1, jint capture$2, jint capture$3) {
-  OrgApacheLuceneIndexMergeState_DocMap_$1 *self = [OrgApacheLuceneIndexMergeState_DocMap_$1 alloc];
-  OrgApacheLuceneIndexMergeState_DocMap_$1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneUtilPackedPackedLongValues_withInt_withInt_(self, capture$0, capture$1, capture$2, capture$3);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMergeState_DocMap_$1, initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneUtilPackedPackedLongValues_withInt_withInt_, capture$0, capture$1, capture$2, capture$3)
+}
+
+OrgApacheLuceneIndexMergeState_DocMap_$1 *create_OrgApacheLuceneIndexMergeState_DocMap_$1_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneUtilPackedPackedLongValues_withInt_withInt_(id<OrgApacheLuceneUtilBits> capture$0, OrgApacheLuceneUtilPackedPackedLongValues *capture$1, jint capture$2, jint capture$3) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMergeState_DocMap_$1, initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneUtilPackedPackedLongValues_withInt_withInt_, capture$0, capture$1, capture$2, capture$3)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergeState_DocMap_$1)
@@ -413,9 +421,11 @@ void OrgApacheLuceneIndexMergeState_NoDelDocMap_initWithInt_(OrgApacheLuceneInde
 }
 
 OrgApacheLuceneIndexMergeState_NoDelDocMap *new_OrgApacheLuceneIndexMergeState_NoDelDocMap_initWithInt_(jint maxDoc) {
-  OrgApacheLuceneIndexMergeState_NoDelDocMap *self = [OrgApacheLuceneIndexMergeState_NoDelDocMap alloc];
-  OrgApacheLuceneIndexMergeState_NoDelDocMap_initWithInt_(self, maxDoc);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMergeState_NoDelDocMap, initWithInt_, maxDoc)
+}
+
+OrgApacheLuceneIndexMergeState_NoDelDocMap *create_OrgApacheLuceneIndexMergeState_NoDelDocMap_initWithInt_(jint maxDoc) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMergeState_NoDelDocMap, initWithInt_, maxDoc)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergeState_NoDelDocMap)

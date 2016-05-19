@@ -5,26 +5,44 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilAutomatonFiniteStringsIterator_INCLUDE_ALL")
-#if OrgApacheLuceneUtilAutomatonFiniteStringsIterator_RESTRICT
-#define OrgApacheLuceneUtilAutomatonFiniteStringsIterator_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonFiniteStringsIterator")
+#ifdef RESTRICT_OrgApacheLuceneUtilAutomatonFiniteStringsIterator
+#define INCLUDE_ALL_OrgApacheLuceneUtilAutomatonFiniteStringsIterator 0
 #else
-#define OrgApacheLuceneUtilAutomatonFiniteStringsIterator_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilAutomatonFiniteStringsIterator 1
 #endif
-#undef OrgApacheLuceneUtilAutomatonFiniteStringsIterator_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilAutomatonFiniteStringsIterator
 
-#if !defined (_OrgApacheLuceneUtilAutomatonFiniteStringsIterator_) && (OrgApacheLuceneUtilAutomatonFiniteStringsIterator_INCLUDE_ALL || OrgApacheLuceneUtilAutomatonFiniteStringsIterator_INCLUDE)
-#define _OrgApacheLuceneUtilAutomatonFiniteStringsIterator_
+#if !defined (OrgApacheLuceneUtilAutomatonFiniteStringsIterator_) && (INCLUDE_ALL_OrgApacheLuceneUtilAutomatonFiniteStringsIterator || defined(INCLUDE_OrgApacheLuceneUtilAutomatonFiniteStringsIterator))
+#define OrgApacheLuceneUtilAutomatonFiniteStringsIterator_
 
 @class OrgApacheLuceneUtilAutomatonAutomaton;
 @class OrgApacheLuceneUtilIntsRef;
 
+/*!
+ @brief Iterates all accepted strings.
+ <p>If the <code>Automaton</code> has cycles then this iterator may throw an <code>IllegalArgumentException</code>
+ , but this is not guaranteed!
+ <p>Be aware that the iteration order is implementation dependent
+ and may change across releases.
+ <p>If the automaton is not determinized then it's possible this iterator
+ will return duplicates.
+ */
 @interface OrgApacheLuceneUtilAutomatonFiniteStringsIterator : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Constructor.
+ @param a Automaton to create finite string from.
+ */
 - (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a;
 
+/*!
+ @brief Generate next finite string.
+ The return value is just valid until the next call of this method!
+ @return Finite string or null, if no more finite strings are available.
+ */
 - (OrgApacheLuceneUtilIntsRef *)next;
 
 @end
@@ -35,8 +53,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonFiniteStringsIterator_initWit
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonFiniteStringsIterator *new_OrgApacheLuceneUtilAutomatonFiniteStringsIterator_initWithOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonAutomaton *a) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonFiniteStringsIterator *create_OrgApacheLuceneUtilAutomatonFiniteStringsIterator_initWithOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonAutomaton *a);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonFiniteStringsIterator)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilAutomatonFiniteStringsIterator_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonFiniteStringsIterator")

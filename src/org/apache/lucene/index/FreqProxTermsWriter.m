@@ -69,17 +69,17 @@ __attribute__((unused)) static void OrgApacheLuceneIndexFreqProxTermsWriter_appl
 - (void)flushWithJavaUtilMap:(id<JavaUtilMap>)fieldsToFlush
 withOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state {
   [super flushWithJavaUtilMap:fieldsToFlush withOrgApacheLuceneIndexSegmentWriteState:state];
-  id<JavaUtilList> allFields = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> allFields = create_JavaUtilArrayList_init();
   for (OrgApacheLuceneIndexTermsHashPerField * __strong f in nil_chk([((id<JavaUtilMap>) nil_chk(fieldsToFlush)) values])) {
-    OrgApacheLuceneIndexFreqProxTermsWriterPerField *perField = (OrgApacheLuceneIndexFreqProxTermsWriterPerField *) check_class_cast(f, [OrgApacheLuceneIndexFreqProxTermsWriterPerField class]);
+    OrgApacheLuceneIndexFreqProxTermsWriterPerField *perField = (OrgApacheLuceneIndexFreqProxTermsWriterPerField *) cast_chk(f, [OrgApacheLuceneIndexFreqProxTermsWriterPerField class]);
     if ([((OrgApacheLuceneUtilBytesRefHash *) nil_chk(((OrgApacheLuceneIndexFreqProxTermsWriterPerField *) nil_chk(perField))->bytesHash_)) size] > 0) {
       [perField sortPostings];
-      JreAssert(([((OrgApacheLuceneIndexFieldInfo *) nil_chk(perField->fieldInfo_)) getIndexOptions] != JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE)), (@"org/apache/lucene/index/FreqProxTermsWriter.java:92 condition failed: assert perField.fieldInfo.getIndexOptions() != IndexOptions.NONE;"));
+      JreAssert(([((OrgApacheLuceneIndexFieldInfo *) nil_chk(perField->fieldInfo_)) getIndexOptions] != JreLoadEnum(OrgApacheLuceneIndexIndexOptions, NONE)), (@"org/apache/lucene/index/FreqProxTermsWriter.java:92 condition failed: assert perField.fieldInfo.getIndexOptions() != IndexOptions.NONE;"));
       [allFields addWithId:perField];
     }
   }
   OrgApacheLuceneUtilCollectionUtil_introSortWithJavaUtilList_(allFields);
-  OrgApacheLuceneIndexFields *fields = [new_OrgApacheLuceneIndexFreqProxFields_initWithJavaUtilList_(allFields) autorelease];
+  OrgApacheLuceneIndexFields *fields = create_OrgApacheLuceneIndexFreqProxFields_initWithJavaUtilList_(allFields);
   OrgApacheLuceneIndexFreqProxTermsWriter_applyDeletesWithOrgApacheLuceneIndexSegmentWriteState_withOrgApacheLuceneIndexFields_(self, state, fields);
   OrgApacheLuceneCodecsFieldsConsumer *consumer = [((OrgApacheLuceneCodecsPostingsFormat *) nil_chk([((OrgApacheLuceneCodecsCodec *) nil_chk([((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentWriteState *) nil_chk(state))->segmentInfo_)) getCodec])) postingsFormat])) fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:state];
   jboolean success = false;
@@ -99,14 +99,14 @@ withOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState
 
 - (OrgApacheLuceneIndexTermsHashPerField *)addFieldWithOrgApacheLuceneIndexFieldInvertState:(OrgApacheLuceneIndexFieldInvertState *)invertState
                                                           withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo {
-  return [new_OrgApacheLuceneIndexFreqProxTermsWriterPerField_initWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermsHash_withOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneIndexTermsHashPerField_(invertState, self, fieldInfo, [((OrgApacheLuceneIndexTermsHash *) nil_chk(nextTermsHash_)) addFieldWithOrgApacheLuceneIndexFieldInvertState:invertState withOrgApacheLuceneIndexFieldInfo:fieldInfo]) autorelease];
+  return create_OrgApacheLuceneIndexFreqProxTermsWriterPerField_initWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermsHash_withOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneIndexTermsHashPerField_(invertState, self, fieldInfo, [((OrgApacheLuceneIndexTermsHash *) nil_chk(nextTermsHash_)) addFieldWithOrgApacheLuceneIndexFieldInvertState:invertState withOrgApacheLuceneIndexFieldInfo:fieldInfo]);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneIndexDocumentsWriterPerThread:withOrgApacheLuceneIndexTermsHash:", "FreqProxTermsWriter", NULL, 0x1, NULL, NULL },
     { "applyDeletesWithOrgApacheLuceneIndexSegmentWriteState:withOrgApacheLuceneIndexFields:", "applyDeletes", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "flushWithJavaUtilMap:withOrgApacheLuceneIndexSegmentWriteState:", "flush", "V", 0x1, "Ljava.io.IOException;", NULL },
+    { "flushWithJavaUtilMap:withOrgApacheLuceneIndexSegmentWriteState:", "flush", "V", 0x1, "Ljava.io.IOException;", "(Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/index/TermsHashPerField;>;Lorg/apache/lucene/index/SegmentWriteState;)V" },
     { "addFieldWithOrgApacheLuceneIndexFieldInvertState:withOrgApacheLuceneIndexFieldInfo:", "addField", "Lorg.apache.lucene.index.TermsHashPerField;", 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneIndexFreqProxTermsWriter = { 2, "FreqProxTermsWriter", "org.apache.lucene.index", NULL, 0x10, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
@@ -120,15 +120,17 @@ void OrgApacheLuceneIndexFreqProxTermsWriter_initWithOrgApacheLuceneIndexDocumen
 }
 
 OrgApacheLuceneIndexFreqProxTermsWriter *new_OrgApacheLuceneIndexFreqProxTermsWriter_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_withOrgApacheLuceneIndexTermsHash_(OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter, OrgApacheLuceneIndexTermsHash *termVectors) {
-  OrgApacheLuceneIndexFreqProxTermsWriter *self = [OrgApacheLuceneIndexFreqProxTermsWriter alloc];
-  OrgApacheLuceneIndexFreqProxTermsWriter_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_withOrgApacheLuceneIndexTermsHash_(self, docWriter, termVectors);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexFreqProxTermsWriter, initWithOrgApacheLuceneIndexDocumentsWriterPerThread_withOrgApacheLuceneIndexTermsHash_, docWriter, termVectors)
+}
+
+OrgApacheLuceneIndexFreqProxTermsWriter *create_OrgApacheLuceneIndexFreqProxTermsWriter_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_withOrgApacheLuceneIndexTermsHash_(OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter, OrgApacheLuceneIndexTermsHash *termVectors) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexFreqProxTermsWriter, initWithOrgApacheLuceneIndexDocumentsWriterPerThread_withOrgApacheLuceneIndexTermsHash_, docWriter, termVectors)
 }
 
 void OrgApacheLuceneIndexFreqProxTermsWriter_applyDeletesWithOrgApacheLuceneIndexSegmentWriteState_withOrgApacheLuceneIndexFields_(OrgApacheLuceneIndexFreqProxTermsWriter *self, OrgApacheLuceneIndexSegmentWriteState *state, OrgApacheLuceneIndexFields *fields) {
   if (((OrgApacheLuceneIndexSegmentWriteState *) nil_chk(state))->segUpdates_ != nil && [((id<JavaUtilMap>) nil_chk(state->segUpdates_->terms_)) size] > 0) {
     id<JavaUtilMap> segDeletes = state->segUpdates_->terms_;
-    id<JavaUtilList> deleteTerms = [new_JavaUtilArrayList_initWithJavaUtilCollection_([segDeletes keySet]) autorelease];
+    id<JavaUtilList> deleteTerms = create_JavaUtilArrayList_initWithJavaUtilCollection_([((id<JavaUtilMap>) nil_chk(segDeletes)) keySet]);
     JavaUtilCollections_sortWithJavaUtilList_(deleteTerms);
     NSString *lastField = nil;
     OrgApacheLuceneIndexTermsEnum *termsEnum = nil;
@@ -156,7 +158,7 @@ void OrgApacheLuceneIndexFreqProxTermsWriter_applyDeletesWithOrgApacheLuceneInde
             }
             if ([((id<OrgApacheLuceneUtilMutableBits>) nil_chk(state->liveDocs_)) getWithInt:doc]) {
               state->delCountOnFlush_++;
-              [state->liveDocs_ clearWithInt:doc];
+              [((id<OrgApacheLuceneUtilMutableBits>) nil_chk(state->liveDocs_)) clearWithInt:doc];
             }
           }
           else {

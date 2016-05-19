@@ -16,6 +16,9 @@
 
 @interface OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity () {
  @public
+  /*!
+   @brief The &lambda; parameter.
+   */
   jfloat lambda_;
 }
 
@@ -37,7 +40,7 @@
 - (jfloat)scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
                                                      withFloat:(jfloat)freq
                                                      withFloat:(jfloat)docLen {
-  return [((OrgApacheLuceneSearchSimilaritiesBasicStats *) nil_chk(stats)) getTotalBoost] * (jfloat) JavaLangMath_logWithDouble_(1 + ((1 - lambda_) * freq / docLen) / (lambda_ * [((OrgApacheLuceneSearchSimilaritiesLMSimilarity_LMStats *) check_class_cast(stats, [OrgApacheLuceneSearchSimilaritiesLMSimilarity_LMStats class])) getCollectionProbability]));
+  return [((OrgApacheLuceneSearchSimilaritiesBasicStats *) nil_chk(stats)) getTotalBoost] * (jfloat) JavaLangMath_logWithDouble_(1 + ((1 - lambda_) * freq / docLen) / (lambda_ * [((OrgApacheLuceneSearchSimilaritiesLMSimilarity_LMStats *) cast_chk(stats, [OrgApacheLuceneSearchSimilaritiesLMSimilarity_LMStats class])) getCollectionProbability]));
 }
 
 - (void)explainWithJavaUtilList:(id<JavaUtilList>)subs
@@ -57,7 +60,7 @@ withOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilariti
 }
 
 - (NSString *)getName {
-  return NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT_), @"Jelinek-Mercer(%f)", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangFloat_valueOfWithFloat_([self getLambda]) } count:1 type:NSObject_class_()]);
+  return NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"Jelinek-Mercer(%f)", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangFloat_valueOfWithFloat_([self getLambda]) } count:1 type:NSObject_class_()]);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -65,7 +68,7 @@ withOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilariti
     { "initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel:withFloat:", "LMJelinekMercerSimilarity", NULL, 0x1, NULL, NULL },
     { "initWithFloat:", "LMJelinekMercerSimilarity", NULL, 0x1, NULL, NULL },
     { "scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:withFloat:", "score", "F", 0x4, NULL, NULL },
-    { "explainWithJavaUtilList:withOrgApacheLuceneSearchSimilaritiesBasicStats:withInt:withFloat:withFloat:", "explain", "V", 0x4, NULL, NULL },
+    { "explainWithJavaUtilList:withOrgApacheLuceneSearchSimilaritiesBasicStats:withInt:withFloat:withFloat:", "explain", "V", 0x4, NULL, "(Ljava/util/List<Lorg/apache/lucene/search/Explanation;>;Lorg/apache/lucene/search/similarities/BasicStats;IFF)V" },
     { "getLambda", NULL, "F", 0x1, NULL, NULL },
     { "getName", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
   };
@@ -84,9 +87,11 @@ void OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity_initWithOrgApach
 }
 
 OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity *new_OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity_initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel_withFloat_(id<OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel> collectionModel, jfloat lambda) {
-  OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity *self = [OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity alloc];
-  OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity_initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel_withFloat_(self, collectionModel, lambda);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity, initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel_withFloat_, collectionModel, lambda)
+}
+
+OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity *create_OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity_initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel_withFloat_(id<OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel> collectionModel, jfloat lambda) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity, initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel_withFloat_, collectionModel, lambda)
 }
 
 void OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity_initWithFloat_(OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity *self, jfloat lambda) {
@@ -95,9 +100,11 @@ void OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity_initWithFloat_(O
 }
 
 OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity *new_OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity_initWithFloat_(jfloat lambda) {
-  OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity *self = [OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity alloc];
-  OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity_initWithFloat_(self, lambda);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity, initWithFloat_, lambda)
+}
+
+OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity *create_OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity_initWithFloat_(jfloat lambda) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity, initWithFloat_, lambda)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity)

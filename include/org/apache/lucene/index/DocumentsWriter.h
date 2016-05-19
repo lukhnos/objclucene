@@ -5,23 +5,23 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexDocumentsWriter_INCLUDE_ALL")
-#if OrgApacheLuceneIndexDocumentsWriter_RESTRICT
-#define OrgApacheLuceneIndexDocumentsWriter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriter")
+#ifdef RESTRICT_OrgApacheLuceneIndexDocumentsWriter
+#define INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriter 0
 #else
-#define OrgApacheLuceneIndexDocumentsWriter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriter 1
 #endif
-#undef OrgApacheLuceneIndexDocumentsWriter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexDocumentsWriter
 
-#if !defined (_OrgApacheLuceneIndexDocumentsWriter_) && (OrgApacheLuceneIndexDocumentsWriter_INCLUDE_ALL || OrgApacheLuceneIndexDocumentsWriter_INCLUDE)
-#define _OrgApacheLuceneIndexDocumentsWriter_
+#if !defined (OrgApacheLuceneIndexDocumentsWriter_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriter || defined(INCLUDE_OrgApacheLuceneIndexDocumentsWriter))
+#define OrgApacheLuceneIndexDocumentsWriter_
 
-#define JavaIoCloseable_RESTRICT 1
-#define JavaIoCloseable_INCLUDE 1
+#define RESTRICT_JavaIoCloseable 1
+#define INCLUDE_JavaIoCloseable 1
 #include "java/io/Closeable.h"
 
-#define OrgApacheLuceneUtilAccountable_RESTRICT 1
-#define OrgApacheLuceneUtilAccountable_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAccountable 1
+#define INCLUDE_OrgApacheLuceneUtilAccountable 1
 #include "org/apache/lucene/util/Accountable.h"
 
 @class IOSObjectArray;
@@ -38,6 +38,54 @@
 @protocol JavaUtilCollection;
 @protocol JavaUtilQueue;
 
+/*!
+ @brief This class accepts multiple added documents and directly
+ writes segment files.
+ Each added document is passed to the indexing chain,
+ which in turn processes the document into the different
+ codec formats.  Some formats write bytes to files
+ immediately, e.g. stored fields and term vectors, while
+ others are buffered by the indexing chain and written
+ only on flush.
+ Once we have used our allowed RAM buffer, or the number
+ of added docs is large enough (in the case we are
+ flushing by doc count instead of RAM usage), we create a
+ real segment and flush it to the Directory.
+ Threads:
+ Multiple threads are allowed into addDocument at once.
+ There is an initial synchronized call to getThreadState
+ which allocates a ThreadState for this thread.  The same
+ thread will get the same ThreadState over time (thread
+ affinity) so that if there are consistent patterns (for
+ example each thread is indexing a different content
+ source) then we make better use of RAM.  Then
+ processDocument is called on that ThreadState without
+ synchronization (most of the "heavy lifting" is in this
+ call).  Finally the synchronized "finishDocument" is
+ called to flush changes to the directory.
+ When flush is called by IndexWriter we forcefully idle
+ all threads and flush only once they are all idle.  This
+ means you can call flush with a given thread even while
+ other threads are actively adding/deleting documents.
+ Exceptions:
+ Because this class directly updates in-memory posting
+ lists, and flushes stored fields and term vectors
+ directly to files in the directory, there are certain
+ limited times when an exception can corrupt this state.
+ For example, a disk full while flushing stored fields
+ leaves this file in a corrupt state.  Or, an OOM
+ exception while appending to the in-memory posting lists
+ can corrupt that posting list.  We call such exceptions
+ "aborting exceptions".  In these cases we must call
+ abort() to discard all docs added since the last flush.
+ All other exceptions ("non-aborting exceptions") can
+ still partially update the index structures.  These
+ updates are consistent, but, they represent only a part
+ of the document seen up until the exception was hit.
+ When this happens, we immediately mark the document as
+ deleted so that the document is always atomically ("all
+ or none") added to the index.
+ */
 @interface OrgApacheLuceneIndexDocumentsWriter : NSObject < JavaIoCloseable, OrgApacheLuceneUtilAccountable > {
  @public
   volatile_id deleteQueue_;
@@ -71,6 +119,13 @@
                       withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directoryOrig
                       withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory;
 
+/*!
+ @brief Called if we hit an exception at a bad time (when
+ updating the index files) and must discard all
+ currently buffered docs.
+ This resets our state,
+ discarding any docs added since last flush. 
+ */
 - (void)abortWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
 
 - (jboolean)anyChanges;
@@ -86,8 +141,14 @@
 
 - (jboolean)flushAllThreads;
 
+/*!
+ @brief Returns how many docs are currently buffered in RAM.
+ */
 - (jint)getNumDocs;
 
+/*!
+ @brief Returns how many documents were aborted.
+ */
 - (jlong)lockAndAbortAllWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)indexWriter;
 
 - (jint)purgeBufferWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
@@ -120,20 +181,24 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexDocumentsWriter_initWithOrgApacheLuce
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriter *new_OrgApacheLuceneIndexDocumentsWriter_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexLiveIndexWriterConfig *config, OrgApacheLuceneStoreDirectory *directoryOrig, OrgApacheLuceneStoreDirectory *directory) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriter *create_OrgApacheLuceneIndexDocumentsWriter_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexLiveIndexWriterConfig *config, OrgApacheLuceneStoreDirectory *directoryOrig, OrgApacheLuceneStoreDirectory *directory);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriter)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent_) && (OrgApacheLuceneIndexDocumentsWriter_INCLUDE_ALL || OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent_INCLUDE)
-#define _OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent_
+#if !defined (OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriter || defined(INCLUDE_OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent))
+#define OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent_
 
-#define OrgApacheLuceneIndexIndexWriter_RESTRICT 1
-#define OrgApacheLuceneIndexIndexWriter_Event_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexIndexWriter 1
+#define INCLUDE_OrgApacheLuceneIndexIndexWriter_Event 1
 #include "org/apache/lucene/index/IndexWriter.h"
 
 @class OrgApacheLuceneIndexIndexWriter;
 
 @interface OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent : NSObject < OrgApacheLuceneIndexIndexWriter_Event >
+
++ (id<OrgApacheLuceneIndexIndexWriter_Event>)INSTANCE;
 
 #pragma mark Public
 
@@ -145,23 +210,27 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriter)
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent)
 
-FOUNDATION_EXPORT id<OrgApacheLuceneIndexIndexWriter_Event> OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent_INSTANCE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent, INSTANCE_, id<OrgApacheLuceneIndexIndexWriter_Event>)
+inline id<OrgApacheLuceneIndexIndexWriter_Event> OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent_get_INSTANCE();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT id<OrgApacheLuceneIndexIndexWriter_Event> OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent_INSTANCE;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent, INSTANCE, id<OrgApacheLuceneIndexIndexWriter_Event>)
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent_) && (OrgApacheLuceneIndexDocumentsWriter_INCLUDE_ALL || OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent_INCLUDE)
-#define _OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent_
+#if !defined (OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriter || defined(INCLUDE_OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent))
+#define OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent_
 
-#define OrgApacheLuceneIndexIndexWriter_RESTRICT 1
-#define OrgApacheLuceneIndexIndexWriter_Event_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexIndexWriter 1
+#define INCLUDE_OrgApacheLuceneIndexIndexWriter_Event 1
 #include "org/apache/lucene/index/IndexWriter.h"
 
 @class OrgApacheLuceneIndexIndexWriter;
 
 @interface OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent : NSObject < OrgApacheLuceneIndexIndexWriter_Event >
+
++ (id<OrgApacheLuceneIndexIndexWriter_Event>)INSTANCE;
 
 #pragma mark Public
 
@@ -173,23 +242,27 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriter_ApplyDeletesEvent
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent)
 
-FOUNDATION_EXPORT id<OrgApacheLuceneIndexIndexWriter_Event> OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent_INSTANCE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent, INSTANCE_, id<OrgApacheLuceneIndexIndexWriter_Event>)
+inline id<OrgApacheLuceneIndexIndexWriter_Event> OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent_get_INSTANCE();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT id<OrgApacheLuceneIndexIndexWriter_Event> OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent_INSTANCE;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent, INSTANCE, id<OrgApacheLuceneIndexIndexWriter_Event>)
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent_) && (OrgApacheLuceneIndexDocumentsWriter_INCLUDE_ALL || OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent_INCLUDE)
-#define _OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent_
+#if !defined (OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriter || defined(INCLUDE_OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent))
+#define OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent_
 
-#define OrgApacheLuceneIndexIndexWriter_RESTRICT 1
-#define OrgApacheLuceneIndexIndexWriter_Event_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexIndexWriter 1
+#define INCLUDE_OrgApacheLuceneIndexIndexWriter_Event 1
 #include "org/apache/lucene/index/IndexWriter.h"
 
 @class OrgApacheLuceneIndexIndexWriter;
 
 @interface OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent : NSObject < OrgApacheLuceneIndexIndexWriter_Event >
+
++ (id<OrgApacheLuceneIndexIndexWriter_Event>)INSTANCE;
 
 #pragma mark Public
 
@@ -201,18 +274,20 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriter_MergePendingEvent
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent)
 
-FOUNDATION_EXPORT id<OrgApacheLuceneIndexIndexWriter_Event> OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent_INSTANCE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent, INSTANCE_, id<OrgApacheLuceneIndexIndexWriter_Event>)
+inline id<OrgApacheLuceneIndexIndexWriter_Event> OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent_get_INSTANCE();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT id<OrgApacheLuceneIndexIndexWriter_Event> OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent_INSTANCE;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent, INSTANCE, id<OrgApacheLuceneIndexIndexWriter_Event>)
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriter_ForcedPurgeEvent)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexDocumentsWriter_FlushFailedEvent_) && (OrgApacheLuceneIndexDocumentsWriter_INCLUDE_ALL || OrgApacheLuceneIndexDocumentsWriter_FlushFailedEvent_INCLUDE)
-#define _OrgApacheLuceneIndexDocumentsWriter_FlushFailedEvent_
+#if !defined (OrgApacheLuceneIndexDocumentsWriter_FlushFailedEvent_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriter || defined(INCLUDE_OrgApacheLuceneIndexDocumentsWriter_FlushFailedEvent))
+#define OrgApacheLuceneIndexDocumentsWriter_FlushFailedEvent_
 
-#define OrgApacheLuceneIndexIndexWriter_RESTRICT 1
-#define OrgApacheLuceneIndexIndexWriter_Event_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexIndexWriter 1
+#define INCLUDE_OrgApacheLuceneIndexIndexWriter_Event 1
 #include "org/apache/lucene/index/IndexWriter.h"
 
 @class OrgApacheLuceneIndexIndexWriter;
@@ -236,15 +311,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexDocumentsWriter_FlushFailedEvent_init
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriter_FlushFailedEvent *new_OrgApacheLuceneIndexDocumentsWriter_FlushFailedEvent_initWithOrgApacheLuceneIndexSegmentInfo_(OrgApacheLuceneIndexSegmentInfo *info) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriter_FlushFailedEvent *create_OrgApacheLuceneIndexDocumentsWriter_FlushFailedEvent_initWithOrgApacheLuceneIndexSegmentInfo_(OrgApacheLuceneIndexSegmentInfo *info);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriter_FlushFailedEvent)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexDocumentsWriter_DeleteNewFilesEvent_) && (OrgApacheLuceneIndexDocumentsWriter_INCLUDE_ALL || OrgApacheLuceneIndexDocumentsWriter_DeleteNewFilesEvent_INCLUDE)
-#define _OrgApacheLuceneIndexDocumentsWriter_DeleteNewFilesEvent_
+#if !defined (OrgApacheLuceneIndexDocumentsWriter_DeleteNewFilesEvent_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriter || defined(INCLUDE_OrgApacheLuceneIndexDocumentsWriter_DeleteNewFilesEvent))
+#define OrgApacheLuceneIndexDocumentsWriter_DeleteNewFilesEvent_
 
-#define OrgApacheLuceneIndexIndexWriter_RESTRICT 1
-#define OrgApacheLuceneIndexIndexWriter_Event_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexIndexWriter 1
+#define INCLUDE_OrgApacheLuceneIndexIndexWriter_Event 1
 #include "org/apache/lucene/index/IndexWriter.h"
 
 @class OrgApacheLuceneIndexIndexWriter;
@@ -268,8 +345,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexDocumentsWriter_DeleteNewFilesEvent_i
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriter_DeleteNewFilesEvent *new_OrgApacheLuceneIndexDocumentsWriter_DeleteNewFilesEvent_initWithJavaUtilCollection_(id<JavaUtilCollection> files) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriter_DeleteNewFilesEvent *create_OrgApacheLuceneIndexDocumentsWriter_DeleteNewFilesEvent_initWithJavaUtilCollection_(id<JavaUtilCollection> files);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriter_DeleteNewFilesEvent)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexDocumentsWriter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriter")

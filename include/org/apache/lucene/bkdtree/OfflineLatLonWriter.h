@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneBkdtreeOfflineLatLonWriter_INCLUDE_ALL")
-#if OrgApacheLuceneBkdtreeOfflineLatLonWriter_RESTRICT
-#define OrgApacheLuceneBkdtreeOfflineLatLonWriter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneBkdtreeOfflineLatLonWriter")
+#ifdef RESTRICT_OrgApacheLuceneBkdtreeOfflineLatLonWriter
+#define INCLUDE_ALL_OrgApacheLuceneBkdtreeOfflineLatLonWriter 0
 #else
-#define OrgApacheLuceneBkdtreeOfflineLatLonWriter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneBkdtreeOfflineLatLonWriter 1
 #endif
-#undef OrgApacheLuceneBkdtreeOfflineLatLonWriter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneBkdtreeOfflineLatLonWriter
 
-#if !defined (_OrgApacheLuceneBkdtreeOfflineLatLonWriter_) && (OrgApacheLuceneBkdtreeOfflineLatLonWriter_INCLUDE_ALL || OrgApacheLuceneBkdtreeOfflineLatLonWriter_INCLUDE)
-#define _OrgApacheLuceneBkdtreeOfflineLatLonWriter_
+#if !defined (OrgApacheLuceneBkdtreeOfflineLatLonWriter_) && (INCLUDE_ALL_OrgApacheLuceneBkdtreeOfflineLatLonWriter || defined(INCLUDE_OrgApacheLuceneBkdtreeOfflineLatLonWriter))
+#define OrgApacheLuceneBkdtreeOfflineLatLonWriter_
 
-#define OrgApacheLuceneBkdtreeLatLonWriter_RESTRICT 1
-#define OrgApacheLuceneBkdtreeLatLonWriter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneBkdtreeLatLonWriter 1
+#define INCLUDE_OrgApacheLuceneBkdtreeLatLonWriter 1
 #include "org/apache/lucene/bkdtree/LatLonWriter.h"
 
 @class IOSByteArray;
@@ -66,8 +66,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeOfflineLatLonWriter_initWithOrgLukh
 
 FOUNDATION_EXPORT OrgApacheLuceneBkdtreeOfflineLatLonWriter *new_OrgApacheLuceneBkdtreeOfflineLatLonWriter_initWithOrgLukhnosPortmobileFilePath_withLong_(OrgLukhnosPortmobileFilePath *tempDir, jlong count) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneBkdtreeOfflineLatLonWriter *create_OrgApacheLuceneBkdtreeOfflineLatLonWriter_initWithOrgLukhnosPortmobileFilePath_withLong_(OrgLukhnosPortmobileFilePath *tempDir, jlong count);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeOfflineLatLonWriter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneBkdtreeOfflineLatLonWriter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneBkdtreeOfflineLatLonWriter")

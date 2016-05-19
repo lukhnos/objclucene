@@ -5,34 +5,43 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_) && (OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_
+#if !defined (OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence))
+#define OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_
 
-#define JavaLangCharSequence_RESTRICT 1
-#define JavaLangCharSequence_INCLUDE 1
+#define RESTRICT_JavaLangCharSequence 1
+#define INCLUDE_JavaLangCharSequence 1
 #include "java/lang/CharSequence.h"
 
 @class IOSBooleanArray;
 @class IOSCharArray;
 @class JavaUtilLocale;
 
+/*!
+ @brief CharsSequence with escaped chars information.
+ */
 @interface OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence : NSObject < JavaLangCharSequence >
 
 #pragma mark Public
 
+/*!
+ @brief Create a escaped CharSequence
+ */
 - (instancetype)initWithCharArray:(IOSCharArray *)chars
                  withBooleanArray:(IOSBooleanArray *)wasEscaped
                           withInt:(jint)offset
                           withInt:(jint)length;
 
+/*!
+ @brief Create a non-escaped CharSequence
+ */
 - (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)text;
 
 - (jchar)charAtWithInt:(jint)index;
@@ -47,8 +56,18 @@
 
 - (NSString *)description;
 
+/*!
+ @brief Return a escaped String
+ @return a escaped String
+ */
 - (NSString *)toStringEscaped;
 
+/*!
+ @brief Return a escaped String
+ @param enabledChars
+ - array of chars to be escaped
+ @return a escaped String
+ */
 - (NSString *)toStringEscapedWithCharArray:(IOSCharArray *)enabledChars;
 
 + (jboolean)wasEscapedWithJavaLangCharSequence:(id<JavaLangCharSequence>)text
@@ -64,9 +83,13 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSe
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *new_OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_initWithCharArray_withBooleanArray_withInt_withInt_(IOSCharArray *chars, IOSBooleanArray *wasEscaped, jint offset, jint length) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *create_OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_initWithCharArray_withBooleanArray_withInt_withInt_(IOSCharArray *chars, IOSBooleanArray *wasEscaped, jint offset, jint length);
+
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_initWithJavaLangCharSequence_(OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *self, id<JavaLangCharSequence> text);
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *new_OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_initWithJavaLangCharSequence_(id<JavaLangCharSequence> text) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *create_OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_initWithJavaLangCharSequence_(id<JavaLangCharSequence> text);
 
 FOUNDATION_EXPORT jboolean OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_wasEscapedWithJavaLangCharSequence_withInt_(id<JavaLangCharSequence> text, jint index);
 
@@ -76,4 +99,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCh
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence")

@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneStoreRAMFile_INCLUDE_ALL")
-#if OrgApacheLuceneStoreRAMFile_RESTRICT
-#define OrgApacheLuceneStoreRAMFile_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneStoreRAMFile")
+#ifdef RESTRICT_OrgApacheLuceneStoreRAMFile
+#define INCLUDE_ALL_OrgApacheLuceneStoreRAMFile 0
 #else
-#define OrgApacheLuceneStoreRAMFile_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneStoreRAMFile 1
 #endif
-#undef OrgApacheLuceneStoreRAMFile_RESTRICT
+#undef RESTRICT_OrgApacheLuceneStoreRAMFile
 
-#if !defined (_OrgApacheLuceneStoreRAMFile_) && (OrgApacheLuceneStoreRAMFile_INCLUDE_ALL || OrgApacheLuceneStoreRAMFile_INCLUDE)
-#define _OrgApacheLuceneStoreRAMFile_
+#if !defined (OrgApacheLuceneStoreRAMFile_) && (INCLUDE_ALL_OrgApacheLuceneStoreRAMFile || defined(INCLUDE_OrgApacheLuceneStoreRAMFile))
+#define OrgApacheLuceneStoreRAMFile_
 
-#define OrgApacheLuceneUtilAccountable_RESTRICT 1
-#define OrgApacheLuceneUtilAccountable_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAccountable 1
+#define INCLUDE_OrgApacheLuceneUtilAccountable 1
 #include "org/apache/lucene/util/Accountable.h"
 
 @class IOSByteArray;
@@ -25,6 +25,10 @@
 @class OrgApacheLuceneStoreRAMDirectory;
 @protocol JavaUtilCollection;
 
+/*!
+ @brief Represents a file in RAM as a list of byte[] buffers.
+  
+ */
 @interface OrgApacheLuceneStoreRAMFile : NSObject < OrgApacheLuceneUtilAccountable > {
  @public
   JavaUtilArrayList *buffers_;
@@ -55,6 +59,12 @@
 
 - (IOSByteArray *)getBufferWithInt:(jint)index;
 
+/*!
+ @brief Expert: allocate a new buffer.
+ Subclasses can allocate differently. 
+ @param size size of allocated buffer.
+ @return allocated buffer.
+ */
 - (IOSByteArray *)newBufferWithInt:(jint)size OBJC_METHOD_FAMILY_NONE;
 
 - (jint)numBuffers;
@@ -76,12 +86,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneStoreRAMFile_init(OrgApacheLuceneStoreRAMF
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreRAMFile *new_OrgApacheLuceneStoreRAMFile_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneStoreRAMFile *create_OrgApacheLuceneStoreRAMFile_init();
+
 FOUNDATION_EXPORT void OrgApacheLuceneStoreRAMFile_initWithOrgApacheLuceneStoreRAMDirectory_(OrgApacheLuceneStoreRAMFile *self, OrgApacheLuceneStoreRAMDirectory *directory);
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreRAMFile *new_OrgApacheLuceneStoreRAMFile_initWithOrgApacheLuceneStoreRAMDirectory_(OrgApacheLuceneStoreRAMDirectory *directory) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneStoreRAMFile *create_OrgApacheLuceneStoreRAMFile_initWithOrgApacheLuceneStoreRAMDirectory_(OrgApacheLuceneStoreRAMDirectory *directory);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreRAMFile)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneStoreRAMFile_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreRAMFile")

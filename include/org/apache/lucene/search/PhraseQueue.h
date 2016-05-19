@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchPhraseQueue_INCLUDE_ALL")
-#if OrgApacheLuceneSearchPhraseQueue_RESTRICT
-#define OrgApacheLuceneSearchPhraseQueue_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchPhraseQueue")
+#ifdef RESTRICT_OrgApacheLuceneSearchPhraseQueue
+#define INCLUDE_ALL_OrgApacheLuceneSearchPhraseQueue 0
 #else
-#define OrgApacheLuceneSearchPhraseQueue_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchPhraseQueue 1
 #endif
-#undef OrgApacheLuceneSearchPhraseQueue_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchPhraseQueue
 
-#if !defined (_OrgApacheLuceneSearchPhraseQueue_) && (OrgApacheLuceneSearchPhraseQueue_INCLUDE_ALL || OrgApacheLuceneSearchPhraseQueue_INCLUDE)
-#define _OrgApacheLuceneSearchPhraseQueue_
+#if !defined (OrgApacheLuceneSearchPhraseQueue_) && (INCLUDE_ALL_OrgApacheLuceneSearchPhraseQueue || defined(INCLUDE_OrgApacheLuceneSearchPhraseQueue))
+#define OrgApacheLuceneSearchPhraseQueue_
 
-#define OrgApacheLuceneUtilPriorityQueue_RESTRICT 1
-#define OrgApacheLuceneUtilPriorityQueue_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilPriorityQueue 1
+#define INCLUDE_OrgApacheLuceneUtilPriorityQueue 1
 #include "org/apache/lucene/util/PriorityQueue.h"
 
 @class OrgApacheLuceneSearchPhrasePositions;
@@ -41,8 +41,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchPhraseQueue_initWithInt_(OrgApacheLu
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchPhraseQueue *new_OrgApacheLuceneSearchPhraseQueue_initWithInt_(jint size) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchPhraseQueue *create_OrgApacheLuceneSearchPhraseQueue_initWithInt_(jint size);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPhraseQueue)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchPhraseQueue_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchPhraseQueue")

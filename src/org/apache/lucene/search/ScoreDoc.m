@@ -47,9 +47,11 @@ void OrgApacheLuceneSearchScoreDoc_initWithInt_withFloat_(OrgApacheLuceneSearchS
 }
 
 OrgApacheLuceneSearchScoreDoc *new_OrgApacheLuceneSearchScoreDoc_initWithInt_withFloat_(jint doc, jfloat score) {
-  OrgApacheLuceneSearchScoreDoc *self = [OrgApacheLuceneSearchScoreDoc alloc];
-  OrgApacheLuceneSearchScoreDoc_initWithInt_withFloat_(self, doc, score);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchScoreDoc, initWithInt_withFloat_, doc, score)
+}
+
+OrgApacheLuceneSearchScoreDoc *create_OrgApacheLuceneSearchScoreDoc_initWithInt_withFloat_(jint doc, jfloat score) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchScoreDoc, initWithInt_withFloat_, doc, score)
 }
 
 void OrgApacheLuceneSearchScoreDoc_initWithInt_withFloat_withInt_(OrgApacheLuceneSearchScoreDoc *self, jint doc, jfloat score, jint shardIndex) {
@@ -60,9 +62,11 @@ void OrgApacheLuceneSearchScoreDoc_initWithInt_withFloat_withInt_(OrgApacheLucen
 }
 
 OrgApacheLuceneSearchScoreDoc *new_OrgApacheLuceneSearchScoreDoc_initWithInt_withFloat_withInt_(jint doc, jfloat score, jint shardIndex) {
-  OrgApacheLuceneSearchScoreDoc *self = [OrgApacheLuceneSearchScoreDoc alloc];
-  OrgApacheLuceneSearchScoreDoc_initWithInt_withFloat_withInt_(self, doc, score, shardIndex);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchScoreDoc, initWithInt_withFloat_withInt_, doc, score, shardIndex)
+}
+
+OrgApacheLuceneSearchScoreDoc *create_OrgApacheLuceneSearchScoreDoc_initWithInt_withFloat_withInt_(jint doc, jfloat score, jint shardIndex) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchScoreDoc, initWithInt_withFloat_withInt_, doc, score, shardIndex)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchScoreDoc)

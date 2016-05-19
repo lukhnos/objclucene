@@ -5,28 +5,48 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisPatternPatternReplaceFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisPatternPatternReplaceFilter_RESTRICT
-#define OrgApacheLuceneAnalysisPatternPatternReplaceFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternReplaceFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisPatternPatternReplaceFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternReplaceFilter 0
 #else
-#define OrgApacheLuceneAnalysisPatternPatternReplaceFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternReplaceFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisPatternPatternReplaceFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisPatternPatternReplaceFilter
 
-#if !defined (_OrgApacheLuceneAnalysisPatternPatternReplaceFilter_) && (OrgApacheLuceneAnalysisPatternPatternReplaceFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisPatternPatternReplaceFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisPatternPatternReplaceFilter_
+#if !defined (OrgApacheLuceneAnalysisPatternPatternReplaceFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternReplaceFilter || defined(INCLUDE_OrgApacheLuceneAnalysisPatternPatternReplaceFilter))
+#define OrgApacheLuceneAnalysisPatternPatternReplaceFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class JavaUtilRegexPattern;
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief A TokenFilter which applies a Pattern to each token in the stream,
+ replacing match occurances with the specified replacement string.
+ <p>
+ <b>Note:</b> Depending on the input and the pattern used and the input
+ TokenStream, this TokenFilter may produce Tokens whose text is the empty
+ string.
+ </p>
+ - seealso: Pattern
+ */
 @interface OrgApacheLuceneAnalysisPatternPatternReplaceFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
+/*!
+ @brief Constructs an instance to replace either the first, or all occurances
+ @param inArg the TokenStream to process
+ @param p the patterm to apply to each Token
+ @param replacement the "replacement string" to substitute, if null a
+ blank string will be used. Note that this is not the literal
+ string that will be used, '$' and '\' have special meaning.
+ @param all if true, all matches will be replaced otherwise just the first match.
+ - seealso: Matcher#quoteReplacement
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
                                   withJavaUtilRegexPattern:(JavaUtilRegexPattern *)p
                                               withNSString:(NSString *)replacement
@@ -42,8 +62,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPatternPatternReplaceFilter_initWi
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisPatternPatternReplaceFilter *new_OrgApacheLuceneAnalysisPatternPatternReplaceFilter_initWithOrgApacheLuceneAnalysisTokenStream_withJavaUtilRegexPattern_withNSString_withBoolean_(OrgApacheLuceneAnalysisTokenStream *inArg, JavaUtilRegexPattern *p, NSString *replacement, jboolean all) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPatternPatternReplaceFilter *create_OrgApacheLuceneAnalysisPatternPatternReplaceFilter_initWithOrgApacheLuceneAnalysisTokenStream_withJavaUtilRegexPattern_withNSString_withBoolean_(OrgApacheLuceneAnalysisTokenStream *inArg, JavaUtilRegexPattern *p, NSString *replacement, jboolean all);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPatternPatternReplaceFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisPatternPatternReplaceFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternReplaceFilter")

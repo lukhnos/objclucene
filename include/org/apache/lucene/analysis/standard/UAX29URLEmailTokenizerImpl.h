@@ -5,97 +5,230 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_RESTRICT
-#define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl 0
 #else
-#define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl 1
 #endif
-#undef OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl
 
-#if !defined (_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_) && (OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_INCLUDE_ALL || OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_INCLUDE)
-#define _OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_
+#if !defined (OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl || defined(INCLUDE_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl))
+#define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_
 
 @class JavaIoReader;
 @protocol OrgApacheLuceneAnalysisTokenattributesCharTermAttribute;
 
-#define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_YYEOF -1
-#define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_YYINITIAL 0
-#define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_AVOID_BAD_URL 2
-#define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_WORD_TYPE 0
-#define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_NUMERIC_TYPE 1
-#define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_SOUTH_EAST_ASIAN_TYPE 2
-#define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_IDEOGRAPHIC_TYPE 3
-#define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_HIRAGANA_TYPE 4
-#define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_KATAKANA_TYPE 5
-#define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_HANGUL_TYPE 6
-#define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_EMAIL_TYPE 8
-#define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_URL_TYPE 7
-
+/*!
+ @brief This class implements Word Break rules from the Unicode Text Segmentation 
+ algorithm, as specified in 
+ <a href="http://unicode.org/reports/tr29/">Unicode Standard Annex #29</a> 
+ URLs and email addresses are also tokenized according to the relevant RFCs.
+ <p>
+ Tokens produced are of the following types:
+ <ul>
+ <li>&lt;ALPHANUM&gt;: A sequence of alphabetic and numeric characters</li>
+ <li>&lt;NUM&gt;: A number</li>
+ <li>&lt;URL&gt;: A URL</li>
+ <li>&lt;EMAIL&gt;: An email address</li>
+ <li>&lt;SOUTHEAST_ASIAN&gt;: A sequence of characters from South and Southeast
+ Asian languages, including Thai, Lao, Myanmar, and Khmer</li>
+ <li>&lt;IDEOGRAPHIC&gt;: A single CJKV ideographic character</li>
+ <li>&lt;HIRAGANA&gt;: A single hiragana character</li>
+ <li>&lt;KATAKANA&gt;: A sequence of katakana characters</li>
+ <li>&lt;HANGUL&gt;: A sequence of Hangul characters</li>
+ </ul>
+ */
 @interface OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl : NSObject
+
++ (jint)YYEOF;
+
++ (jint)YYINITIAL;
+
++ (jint)AVOID_BAD_URL;
+
++ (jint)WORD_TYPE;
+
++ (jint)NUMERIC_TYPE;
+
++ (jint)SOUTH_EAST_ASIAN_TYPE;
+
++ (jint)IDEOGRAPHIC_TYPE;
+
++ (jint)HIRAGANA_TYPE;
+
++ (jint)KATAKANA_TYPE;
+
++ (jint)HANGUL_TYPE;
+
++ (jint)EMAIL_TYPE;
+
++ (jint)URL_TYPE;
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new scanner
+ @param inArg  the java.io.Reader to read input from.
+ */
 - (instancetype)initWithJavaIoReader:(JavaIoReader *)inArg;
 
+/*!
+ @brief Resumes scanning until the next regular expression is matched,
+ the end of input is encountered or an I/O-Error occurs.
+ @return the next token
+ @exception java.io.IOException  if any I/O-Error occurs
+ */
 - (jint)getNextToken;
 
+/*!
+ @brief Fills CharTermAttribute with the current token text.
+ */
 - (void)getTextWithOrgApacheLuceneAnalysisTokenattributesCharTermAttribute:(id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)t;
 
+/*!
+ @brief Sets the scanner buffer size in chars
+ */
 - (void)setBufferSizeWithInt:(jint)numChars;
 
+/*!
+ @brief Enters a new lexical state
+ @param newState the new lexical state
+ */
 - (void)yybeginWithInt:(jint)newState;
 
 - (jint)yychar;
 
+/*!
+ @brief Returns the character at position <tt>pos</tt> from the 
+ matched text.
+ It is equivalent to yytext().charAt(pos), but faster
+ @param pos the position of the character to fetch. 
+ A value from 0 to yylength()-1.
+ @return the character at position pos
+ */
 - (jchar)yycharatWithInt:(jint)pos;
 
+/*!
+ @brief Closes the input stream.
+ */
 - (void)yyclose;
 
+/*!
+ @brief Returns the length of the matched text region.
+ */
 - (jint)yylength;
 
+/*!
+ @brief Pushes the specified amount of characters back into the input stream.
+ They will be read again by then next call of the scanning method
+ @param number  the number of characters to be read again.
+ This number must not be greater than yylength()!
+ */
 - (void)yypushbackWithInt:(jint)number;
 
+/*!
+ @brief Resets the scanner to read from a new input stream.
+ Does not close the old reader.
+ All internal variables are reset, the old input stream 
+ <b>cannot</b> be reused (internal buffer is discarded and lost).
+ Lexical state is set to <tt>ZZ_INITIAL</tt>.
+ Internal scan buffer is resized down to its initial length, if it has grown.
+ @param reader   the new input stream
+ */
 - (void)yyresetWithJavaIoReader:(JavaIoReader *)reader;
 
+/*!
+ @brief Returns the current lexical state.
+ */
 - (jint)yystate;
 
+/*!
+ @brief Returns the text matched by the current regular expression.
+ */
 - (NSString *)yytext;
 
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, YYEOF, jint)
+/*!
+ @brief This character denotes the end of file
+ */
+inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_get_YYEOF();
+#define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_YYEOF -1
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, YYEOF, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, YYINITIAL, jint)
+/*!
+ @brief lexical states
+ */
+inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_get_YYINITIAL();
+#define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_YYINITIAL 0
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, YYINITIAL, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, AVOID_BAD_URL, jint)
+inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_get_AVOID_BAD_URL();
+#define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_AVOID_BAD_URL 2
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, AVOID_BAD_URL, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, WORD_TYPE, jint)
+/*!
+ @brief Alphanumeric sequences
+ */
+inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_get_WORD_TYPE();
+#define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_WORD_TYPE 0
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, WORD_TYPE, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, NUMERIC_TYPE, jint)
+/*!
+ @brief Numbers
+ */
+inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_get_NUMERIC_TYPE();
+#define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_NUMERIC_TYPE 1
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, NUMERIC_TYPE, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, SOUTH_EAST_ASIAN_TYPE, jint)
+/*!
+ @brief Chars in class \p{Line_Break = Complex_Context} are from South East Asian
+ scripts (Thai, Lao, Myanmar, Khmer, etc.).
+ Sequences of these are kept 
+ together as as a single token rather than broken up, because the logic
+ required to break them at word boundaries is too complex for UAX#29.
+ <p>
+ See Unicode Line Breaking Algorithm: http://www.unicode.org/reports/tr14/#SA
+ */
+inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_get_SOUTH_EAST_ASIAN_TYPE();
+#define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_SOUTH_EAST_ASIAN_TYPE 2
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, SOUTH_EAST_ASIAN_TYPE, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, IDEOGRAPHIC_TYPE, jint)
+inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_get_IDEOGRAPHIC_TYPE();
+#define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_IDEOGRAPHIC_TYPE 3
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, IDEOGRAPHIC_TYPE, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, HIRAGANA_TYPE, jint)
+inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_get_HIRAGANA_TYPE();
+#define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_HIRAGANA_TYPE 4
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, HIRAGANA_TYPE, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, KATAKANA_TYPE, jint)
+inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_get_KATAKANA_TYPE();
+#define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_KATAKANA_TYPE 5
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, KATAKANA_TYPE, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, HANGUL_TYPE, jint)
+inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_get_HANGUL_TYPE();
+#define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_HANGUL_TYPE 6
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, HANGUL_TYPE, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, EMAIL_TYPE, jint)
+inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_get_EMAIL_TYPE();
+#define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_EMAIL_TYPE 8
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, EMAIL_TYPE, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, URL_TYPE, jint)
+inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_get_URL_TYPE();
+#define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_URL_TYPE 7
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, URL_TYPE, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_initWithJavaIoReader_(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl *self, JavaIoReader *inArg);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl *new_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_initWithJavaIoReader_(JavaIoReader *inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl *create_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_initWithJavaIoReader_(JavaIoReader *inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl")

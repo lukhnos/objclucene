@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSpansSpanScorer_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSpansSpanScorer_RESTRICT
-#define OrgApacheLuceneSearchSpansSpanScorer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanScorer")
+#ifdef RESTRICT_OrgApacheLuceneSearchSpansSpanScorer
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanScorer 0
 #else
-#define OrgApacheLuceneSearchSpansSpanScorer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanScorer 1
 #endif
-#undef OrgApacheLuceneSearchSpansSpanScorer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSpansSpanScorer
 
-#if !defined (_OrgApacheLuceneSearchSpansSpanScorer_) && (OrgApacheLuceneSearchSpansSpanScorer_INCLUDE_ALL || OrgApacheLuceneSearchSpansSpanScorer_INCLUDE)
-#define _OrgApacheLuceneSearchSpansSpanScorer_
+#if !defined (OrgApacheLuceneSearchSpansSpanScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanScorer || defined(INCLUDE_OrgApacheLuceneSearchSpansSpanScorer))
+#define OrgApacheLuceneSearchSpansSpanScorer_
 
-#define OrgApacheLuceneSearchScorer_RESTRICT 1
-#define OrgApacheLuceneSearchScorer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchScorer 1
+#define INCLUDE_OrgApacheLuceneSearchScorer 1
 #include "org/apache/lucene/search/Scorer.h"
 
 @class OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer;
@@ -25,16 +25,34 @@
 @class OrgApacheLuceneSearchSpansSpans;
 @class OrgApacheLuceneSearchTwoPhaseIterator;
 
+/*!
+ @brief Public for extension only.
+ */
 @interface OrgApacheLuceneSearchSpansSpanScorer : OrgApacheLuceneSearchScorer {
  @public
+  /*!
+   @brief underlying spans we are scoring from
+   */
   OrgApacheLuceneSearchSpansSpans *spans_;
+  /*!
+   @brief similarity used in default score impl
+   */
   OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer_;
+  /*!
+   @brief accumulated sloppy freq (computed in setFreqCurrentDoc)
+   */
   jfloat freq_;
+  /*!
+   @brief number of matches (computed in setFreqCurrentDoc)
+   */
   jint numMatches_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new SpanScorer
+ */
 - (instancetype)initWithOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)spans
                withOrgApacheLuceneSearchSpansSpanWeight:(OrgApacheLuceneSearchSpansSpanWeight *)weight
 withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:(OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *)docScorer;
@@ -53,16 +71,36 @@ withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:(OrgApacheLuceneSearch
 
 - (jfloat)score;
 
+/*!
+ @brief Returns the intermediate "sloppy freq" adjusted for edit distance
+  
+ */
 - (jfloat)sloppyFreq;
 
 #pragma mark Protected
 
+/*!
+ @brief Called each time the scorer's Spans is advanced during frequency calculation
+ */
 - (void)doCurrentSpans;
 
+/*!
+ @brief Called before the current doc's frequency is calculated
+ */
 - (void)doStartCurrentDoc;
 
+/*!
+ @brief Score the current doc.
+ The default implementation scores the doc 
+ with the similarity using the slop-adjusted <code>freq</code>.
+ */
 - (jfloat)scoreCurrentDoc;
 
+/*!
+ @brief Sets <code>freq</code> and <code>numMatches</code> for the current document.
+ <p>
+ This will be called at most once per document.
+ */
 - (void)setFreqCurrentDoc;
 
 @end
@@ -76,8 +114,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanScorer_initWithOrgApacheLuc
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanScorer *new_OrgApacheLuceneSearchSpansSpanScorer_initWithOrgApacheLuceneSearchSpansSpans_withOrgApacheLuceneSearchSpansSpanWeight_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(OrgApacheLuceneSearchSpansSpans *spans, OrgApacheLuceneSearchSpansSpanWeight *weight, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanScorer *create_OrgApacheLuceneSearchSpansSpanScorer_initWithOrgApacheLuceneSearchSpansSpans_withOrgApacheLuceneSearchSpansSpanWeight_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(OrgApacheLuceneSearchSpansSpans *spans, OrgApacheLuceneSearchSpansSpanWeight *weight, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanScorer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSpansSpanScorer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanScorer")

@@ -67,7 +67,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "removeCaseWithCharArray:withInt:", "removeCase", "I", 0x2, NULL, NULL },
     { "removePossessivesWithCharArray:withInt:", "removePossessives", "I", 0x2, NULL, NULL },
     { "normalizeWithCharArray:withInt:", "normalize", "I", 0x2, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "CzechStemmer", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCzCzechStemmer = { 2, "CzechStemmer", "org.apache.lucene.analysis.cz", NULL, 0x1, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisCzCzechStemmer;
@@ -142,9 +142,11 @@ void OrgApacheLuceneAnalysisCzCzechStemmer_init(OrgApacheLuceneAnalysisCzCzechSt
 }
 
 OrgApacheLuceneAnalysisCzCzechStemmer *new_OrgApacheLuceneAnalysisCzCzechStemmer_init() {
-  OrgApacheLuceneAnalysisCzCzechStemmer *self = [OrgApacheLuceneAnalysisCzCzechStemmer alloc];
-  OrgApacheLuceneAnalysisCzCzechStemmer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCzCzechStemmer, init)
+}
+
+OrgApacheLuceneAnalysisCzCzechStemmer *create_OrgApacheLuceneAnalysisCzCzechStemmer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCzCzechStemmer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCzCzechStemmer)

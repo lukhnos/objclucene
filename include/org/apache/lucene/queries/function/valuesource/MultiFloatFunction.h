@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_RESTRICT
-#define OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction 0
 #else
-#define OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_) && (OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_
+#if !defined (OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction))
+#define OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_
 
-#define OrgApacheLuceneQueriesFunctionValueSource_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionValueSource_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionValueSource 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionValueSource 1
 #include "org/apache/lucene/queries/function/ValueSource.h"
 
 @class IOSObjectArray;
@@ -26,6 +26,10 @@
 @class OrgApacheLuceneSearchIndexSearcher;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Abstract <code>ValueSource</code> implementation which wraps multiple ValueSources
+ and applies an extendible float function to their values.
+ */
 @interface OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction : OrgApacheLuceneQueriesFunctionValueSource {
  @public
   IOSObjectArray *sources_;
@@ -49,6 +53,13 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 
 #pragma mark Protected
 
+/*!
+ @brief Called by <code>FunctionValues.exists</code> for each document.
+ Default impl returns true if <em>all</em> of the specified <code>values</code> 
+ <code>FunctionValues.exists</code> for the specified doc, else false.
+ - seealso: FunctionValues#exists
+ - seealso: MultiFunction#allExists
+ */
 - (jboolean)existsWithInt:(jint)doc
 withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)valsArr;
 
@@ -69,4 +80,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFu
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction")

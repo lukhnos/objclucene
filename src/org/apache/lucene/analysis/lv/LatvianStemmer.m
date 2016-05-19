@@ -11,9 +11,22 @@
 
 @interface OrgApacheLuceneAnalysisLvLatvianStemmer ()
 
+/*!
+ @brief Most cases are handled except for the ambiguous ones:
+ <ul>
+ <li> s -&gt; š
+ <li> t -&gt; š
+ <li> d -&gt; ž
+ <li> z -&gt; ž
+ </ul>
+ */
 - (jint)unpalatalizeWithCharArray:(IOSCharArray *)s
                           withInt:(jint)len;
 
+/*!
+ @brief Count the vowels in the string, we always require at least
+ one in the remaining stem to accept it.
+ */
 - (jint)numVowelsWithCharArray:(IOSCharArray *)s
                        withInt:(jint)len;
 
@@ -25,17 +38,21 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisLvLatvianStemmer_numV
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisLvLatvianStemmer)
 
-IOSObjectArray *OrgApacheLuceneAnalysisLvLatvianStemmer_affixes_;
+IOSObjectArray *OrgApacheLuceneAnalysisLvLatvianStemmer_affixes;
 
 @implementation OrgApacheLuceneAnalysisLvLatvianStemmer
+
++ (IOSObjectArray *)affixes {
+  return OrgApacheLuceneAnalysisLvLatvianStemmer_affixes;
+}
 
 - (jint)stemWithCharArray:(IOSCharArray *)s
                   withInt:(jint)len {
   jint numVowels = OrgApacheLuceneAnalysisLvLatvianStemmer_numVowelsWithCharArray_withInt_(self, s, len);
-  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(OrgApacheLuceneAnalysisLvLatvianStemmer_affixes_))->size_; i++) {
-    OrgApacheLuceneAnalysisLvLatvianStemmer_Affix *affix = IOSObjectArray_Get(OrgApacheLuceneAnalysisLvLatvianStemmer_affixes_, i);
+  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(OrgApacheLuceneAnalysisLvLatvianStemmer_affixes))->size_; i++) {
+    OrgApacheLuceneAnalysisLvLatvianStemmer_Affix *affix = IOSObjectArray_Get(OrgApacheLuceneAnalysisLvLatvianStemmer_affixes, i);
     if (numVowels > ((OrgApacheLuceneAnalysisLvLatvianStemmer_Affix *) nil_chk(affix))->vc_ && len >= ((IOSCharArray *) nil_chk(affix->affix_))->size_ + 3 && OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withCharArray_(s, len, affix->affix_)) {
-      len -= affix->affix_->size_;
+      len -= ((IOSCharArray *) nil_chk(affix->affix_))->size_;
       return affix->palatalizes_ ? OrgApacheLuceneAnalysisLvLatvianStemmer_unpalatalizeWithCharArray_withInt_(self, s, len) : len;
     }
   }
@@ -61,7 +78,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisLvLatvianStemmer class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisLvLatvianStemmer_affixes_, [IOSObjectArray newArrayWithObjects:(id[]){ [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"ajiem", 3, false) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"ajai", 3, false) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"ajam", 2, false) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"aj\u0101m", 2, false) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"ajos", 2, false) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"aj\u0101s", 2, false) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"iem", 2, true) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"aj\u0101", 2, false) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"ais", 2, false) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"ai", 2, false) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"ei", 2, false) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"\u0101m", 1, false) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"am", 1, false) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"\u0113m", 1, false) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"\u012bm", 1, false) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"im", 1, false) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"um", 1, false) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"us", 1, true) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"as", 1, false) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"\u0101s", 1, false) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"es", 1, false) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"os", 1, true) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"ij", 1, false) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"\u012bs", 1, false) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"\u0113s", 1, false) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"is", 1, false) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"ie", 1, false) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"u", 1, true) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"a", 1, true) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"i", 1, true) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"e", 1, false) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"\u0101", 1, false) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"\u0113", 1, false) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"\u012b", 1, false) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"\u016b", 1, false) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"o", 1, false) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"s", 0, false) autorelease], [new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"\u0161", 0, false) autorelease] } count:38 type:OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_class_()]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisLvLatvianStemmer_affixes, [IOSObjectArray newArrayWithObjects:(id[]){ create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"ajiem", 3, false), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"ajai", 3, false), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"ajam", 2, false), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"aj\u0101m", 2, false), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"ajos", 2, false), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"aj\u0101s", 2, false), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"iem", 2, true), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"aj\u0101", 2, false), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"ais", 2, false), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"ai", 2, false), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"ei", 2, false), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"\u0101m", 1, false), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"am", 1, false), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"\u0113m", 1, false), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"\u012bm", 1, false), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"im", 1, false), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"um", 1, false), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"us", 1, true), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"as", 1, false), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"\u0101s", 1, false), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"es", 1, false), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"os", 1, true), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"ij", 1, false), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"\u012bs", 1, false), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"\u0113s", 1, false), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"is", 1, false), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"ie", 1, false), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"u", 1, true), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"a", 1, true), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"i", 1, true), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"e", 1, false), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"\u0101", 1, false), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"\u0113", 1, false), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"\u012b", 1, false), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"\u016b", 1, false), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"o", 1, false), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"s", 0, false), create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(@"\u0161", 0, false) } count:38 type:OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_class_()]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisLvLatvianStemmer)
   }
 }
@@ -71,10 +88,10 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "stemWithCharArray:withInt:", "stem", "I", 0x1, NULL, NULL },
     { "unpalatalizeWithCharArray:withInt:", "unpalatalize", "I", 0x2, NULL, NULL },
     { "numVowelsWithCharArray:withInt:", "numVowels", "I", 0x2, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "LatvianStemmer", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "affixes_", NULL, 0x18, "[Lorg.apache.lucene.analysis.lv.LatvianStemmer$Affix;", &OrgApacheLuceneAnalysisLvLatvianStemmer_affixes_, NULL, .constantValue.asLong = 0 },
+    { "affixes", "affixes", 0x18, "[Lorg.apache.lucene.analysis.lv.LatvianStemmer$Affix;", &OrgApacheLuceneAnalysisLvLatvianStemmer_affixes, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.analysis.lv.LatvianStemmer$Affix;"};
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisLvLatvianStemmer = { 2, "LatvianStemmer", "org.apache.lucene.analysis.lv", NULL, 0x1, 4, methods, 1, fields, 0, NULL, 1, inner_classes, NULL, NULL };
@@ -169,9 +186,11 @@ void OrgApacheLuceneAnalysisLvLatvianStemmer_init(OrgApacheLuceneAnalysisLvLatvi
 }
 
 OrgApacheLuceneAnalysisLvLatvianStemmer *new_OrgApacheLuceneAnalysisLvLatvianStemmer_init() {
-  OrgApacheLuceneAnalysisLvLatvianStemmer *self = [OrgApacheLuceneAnalysisLvLatvianStemmer alloc];
-  OrgApacheLuceneAnalysisLvLatvianStemmer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisLvLatvianStemmer, init)
+}
+
+OrgApacheLuceneAnalysisLvLatvianStemmer *create_OrgApacheLuceneAnalysisLvLatvianStemmer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisLvLatvianStemmer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisLvLatvianStemmer)
@@ -213,9 +232,11 @@ void OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_with
 }
 
 OrgApacheLuceneAnalysisLvLatvianStemmer_Affix *new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(NSString *affix, jint vc, jboolean palatalizes) {
-  OrgApacheLuceneAnalysisLvLatvianStemmer_Affix *self = [OrgApacheLuceneAnalysisLvLatvianStemmer_Affix alloc];
-  OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(self, affix, vc, palatalizes);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisLvLatvianStemmer_Affix, initWithNSString_withInt_withBoolean_, affix, vc, palatalizes)
+}
+
+OrgApacheLuceneAnalysisLvLatvianStemmer_Affix *create_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(NSString *affix, jint vc, jboolean palatalizes) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisLvLatvianStemmer_Affix, initWithNSString_withInt_withBoolean_, affix, vc, palatalizes)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisLvLatvianStemmer_Affix)

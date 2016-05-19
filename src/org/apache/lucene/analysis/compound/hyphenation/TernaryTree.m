@@ -17,6 +17,9 @@
 
 @interface OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree ()
 
+/*!
+ @brief The actual insertion function, recursive version.
+ */
 - (jchar)insertWithChar:(jchar)p
           withCharArray:(IOSCharArray *)key
                 withInt:(jint)start
@@ -41,8 +44,14 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisCompoundHyphenationTe
   OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree *this$0_;
 }
 
+/*!
+ @brief traverse upwards
+ */
 - (jint)up;
 
+/*!
+ @brief traverse the tree to find next key
+ */
 - (jint)run;
 
 @end
@@ -78,13 +87,21 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisCompoundHyphenationTe
 
 __attribute__((unused)) static OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item *new_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item_initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator *outer$) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item *create_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item_initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator *outer$);
+
 __attribute__((unused)) static void OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item_initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_withChar_withChar_(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item *self, OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator *outer$, jchar p, jchar c);
 
 __attribute__((unused)) static OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item *new_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item_initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_withChar_withChar_(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator *outer$, jchar p, jchar c) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item *create_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item_initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_withChar_withChar_(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator *outer$, jchar p, jchar c);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item)
 
 @implementation OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree
+
++ (jint)BLOCK_SIZE {
+  return OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_BLOCK_SIZE;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -217,7 +234,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree *)clone {
-  OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree *t = [new_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_init() autorelease];
+  OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree *t = create_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_init();
   JreStrongAssign(&t->lo_, [((IOSCharArray *) nil_chk(self->lo_)) clone]);
   JreStrongAssign(&t->hi_, [((IOSCharArray *) nil_chk(self->hi_)) clone]);
   JreStrongAssign(&t->eq_, [((IOSCharArray *) nil_chk(self->eq_)) clone]);
@@ -247,7 +264,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   jint i = 0, n = length_;
   IOSObjectArray *k = [IOSObjectArray arrayWithLength:n type:NSString_class_()];
   IOSCharArray *v = [IOSCharArray arrayWithLength:n];
-  OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator *iter = [new_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_(self) autorelease];
+  OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator *iter = create_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_(self);
   while ([iter hasMoreElements]) {
     *IOSCharArray_GetRef(v, i) = [iter getValue];
     IOSObjectArray_Set(k, i++, [iter nextElement]);
@@ -259,9 +276,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)trimToSize {
   [self balance];
   OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_redimNodeArraysWithInt_(self, freenode_);
-  OrgApacheLuceneAnalysisCompoundHyphenationCharVector *kx = [new_OrgApacheLuceneAnalysisCompoundHyphenationCharVector_init() autorelease];
+  OrgApacheLuceneAnalysisCompoundHyphenationCharVector *kx = create_OrgApacheLuceneAnalysisCompoundHyphenationCharVector_init();
   [kx alloc__WithInt:1];
-  OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree *map = [new_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_init() autorelease];
+  OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree *map = create_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_init();
   OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_compactWithOrgApacheLuceneAnalysisCompoundHyphenationCharVector_withOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_withChar_(self, kx, map, root_);
   JreStrongAssign(&kv_, kx);
   [kv_ trimToSize];
@@ -274,7 +291,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (id<JavaUtilEnumeration>)keys {
-  return [new_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_(self) autorelease];
+  return create_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_(self);
 }
 
 - (void)printStatsWithJavaIoPrintStream:(JavaIoPrintStream *)outArg {
@@ -318,7 +335,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "balance", NULL, "V", 0x1, NULL, NULL },
     { "trimToSize", NULL, "V", 0x1, NULL, NULL },
     { "compactWithOrgApacheLuceneAnalysisCompoundHyphenationCharVector:withOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree:withChar:", "compact", "V", 0x2, NULL, NULL },
-    { "keys", NULL, "Ljava.util.Enumeration;", 0x1, NULL, NULL },
+    { "keys", NULL, "Ljava.util.Enumeration;", 0x1, NULL, "()Ljava/util/Enumeration<Ljava/lang/String;>;" },
     { "printStatsWithJavaIoPrintStream:", "printStats", "V", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -345,9 +362,11 @@ void OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_init(OrgApacheLuceneA
 }
 
 OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree *new_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_init() {
-  OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree *self = [OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree alloc];
-  OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree, init)
+}
+
+OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree *create_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree, init)
 }
 
 jchar OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_insertWithChar_withCharArray_withInt_withChar_(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree *self, jchar p, IOSCharArray *key, jint start, jchar val) {
@@ -360,7 +379,7 @@ jchar OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_insertWithChar_withC
     if (len > 0) {
       *IOSCharArray_GetRef(nil_chk(self->sc_), p) = (jint) 0xFFFF;
       *IOSCharArray_GetRef(nil_chk(self->lo_), p) = (jchar) [((OrgApacheLuceneAnalysisCompoundHyphenationCharVector *) nil_chk(self->kv_)) alloc__WithInt:len + 1];
-      OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_strcpyWithCharArray_withInt_withCharArray_withInt_([self->kv_ getArray], IOSCharArray_Get(self->lo_, p), key, start);
+      OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_strcpyWithCharArray_withInt_withCharArray_withInt_([((OrgApacheLuceneAnalysisCompoundHyphenationCharVector *) nil_chk(self->kv_)) getArray], IOSCharArray_Get(nil_chk(self->lo_), p), key, start);
     }
     else {
       *IOSCharArray_GetRef(nil_chk(self->sc_), p) = 0;
@@ -375,15 +394,15 @@ jchar OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_insertWithChar_withC
     *IOSCharArray_GetRef(self->lo_, p) = 0;
     if (len > 0) {
       *IOSCharArray_GetRef(self->sc_, p) = [((OrgApacheLuceneAnalysisCompoundHyphenationCharVector *) nil_chk(self->kv_)) getWithInt:IOSCharArray_Get(self->lo_, pp)];
-      *IOSCharArray_GetRef(self->eq_, p) = pp;
-      (*IOSCharArray_GetRef(self->lo_, pp))++;
-      if ([self->kv_ getWithInt:IOSCharArray_Get(self->lo_, pp)] == 0) {
-        *IOSCharArray_GetRef(self->lo_, pp) = 0;
-        *IOSCharArray_GetRef(self->sc_, pp) = 0;
+      *IOSCharArray_GetRef(nil_chk(self->eq_), p) = pp;
+      (*IOSCharArray_GetRef(nil_chk(self->lo_), pp))++;
+      if ([((OrgApacheLuceneAnalysisCompoundHyphenationCharVector *) nil_chk(self->kv_)) getWithInt:IOSCharArray_Get(self->lo_, pp)] == 0) {
+        *IOSCharArray_GetRef(nil_chk(self->lo_), pp) = 0;
+        *IOSCharArray_GetRef(nil_chk(self->sc_), pp) = 0;
         *IOSCharArray_GetRef(nil_chk(self->hi_), pp) = 0;
       }
       else {
-        *IOSCharArray_GetRef(self->sc_, pp) = (jint) 0xFFFF;
+        *IOSCharArray_GetRef(nil_chk(self->sc_), pp) = (jint) 0xFFFF;
       }
     }
     else {
@@ -487,15 +506,15 @@ void OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_compactWithOrgApacheL
   if (IOSCharArray_Get(nil_chk(self->sc_), p) == (jint) 0xFFFF) {
     k = [((OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree *) nil_chk(map)) findWithCharArray:[((OrgApacheLuceneAnalysisCompoundHyphenationCharVector *) nil_chk(self->kv_)) getArray] withInt:IOSCharArray_Get(nil_chk(self->lo_), p)];
     if (k < 0) {
-      k = [((OrgApacheLuceneAnalysisCompoundHyphenationCharVector *) nil_chk(kx)) alloc__WithInt:OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_strlenWithCharArray_withInt_([self->kv_ getArray], IOSCharArray_Get(self->lo_, p)) + 1];
-      OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_strcpyWithCharArray_withInt_withCharArray_withInt_([kx getArray], k, [self->kv_ getArray], IOSCharArray_Get(self->lo_, p));
+      k = [((OrgApacheLuceneAnalysisCompoundHyphenationCharVector *) nil_chk(kx)) alloc__WithInt:OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_strlenWithCharArray_withInt_([((OrgApacheLuceneAnalysisCompoundHyphenationCharVector *) nil_chk(self->kv_)) getArray], IOSCharArray_Get(nil_chk(self->lo_), p)) + 1];
+      OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_strcpyWithCharArray_withInt_withCharArray_withInt_([kx getArray], k, [((OrgApacheLuceneAnalysisCompoundHyphenationCharVector *) nil_chk(self->kv_)) getArray], IOSCharArray_Get(nil_chk(self->lo_), p));
       [map insertWithCharArray:[kx getArray] withInt:k withChar:(jchar) k];
     }
-    *IOSCharArray_GetRef(self->lo_, p) = (jchar) k;
+    *IOSCharArray_GetRef(nil_chk(self->lo_), p) = (jchar) k;
   }
   else {
     OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_compactWithOrgApacheLuceneAnalysisCompoundHyphenationCharVector_withOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_withChar_(self, kx, map, IOSCharArray_Get(nil_chk(self->lo_), p));
-    if (IOSCharArray_Get(self->sc_, p) != 0) {
+    if (IOSCharArray_Get(nil_chk(self->sc_), p) != 0) {
       OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_compactWithOrgApacheLuceneAnalysisCompoundHyphenationCharVector_withOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_withChar_(self, kx, map, IOSCharArray_Get(nil_chk(self->eq_), p));
     }
     OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_compactWithOrgApacheLuceneAnalysisCompoundHyphenationCharVector_withOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_withChar_(self, kx, map, IOSCharArray_Get(nil_chk(self->hi_), p));
@@ -586,13 +605,15 @@ void OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_initWithOrgA
 }
 
 OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator *new_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree *outer$) {
-  OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator *self = [OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator alloc];
-  OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_(self, outer$);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator, initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_, outer$)
+}
+
+OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator *create_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator, initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_, outer$)
 }
 
 jint OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_up(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator *self) {
-  OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item *i = [new_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item_initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_(self) autorelease];
+  OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item *i = create_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item_initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_(self);
   jint res = 0;
   if ([((JavaUtilStack *) nil_chk(self->ns_)) empty]) {
     return -1;
@@ -602,32 +623,32 @@ jint OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_up(OrgApache
   }
   jboolean climb = true;
   while (climb) {
-    i = [self->ns_ pop];
+    i = [((JavaUtilStack *) nil_chk(self->ns_)) pop];
     ((OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item *) nil_chk(i))->child_++;
     switch (i->child_) {
       case 1:
       if (IOSCharArray_Get(nil_chk(self->this$0_->sc_), i->parent_) != 0) {
         res = IOSCharArray_Get(nil_chk(self->this$0_->eq_), i->parent_);
-        [self->ns_ pushWithId:[i clone]];
-        [((JavaLangStringBuilder *) nil_chk(self->ks_)) appendWithChar:IOSCharArray_Get(self->this$0_->sc_, i->parent_)];
+        [((JavaUtilStack *) nil_chk(self->ns_)) pushWithId:[i clone]];
+        [((JavaLangStringBuilder *) nil_chk(self->ks_)) appendWithChar:IOSCharArray_Get(nil_chk(self->this$0_->sc_), i->parent_)];
       }
       else {
         i->child_++;
-        [self->ns_ pushWithId:[i clone]];
+        [((JavaUtilStack *) nil_chk(self->ns_)) pushWithId:[i clone]];
         res = IOSCharArray_Get(nil_chk(self->this$0_->hi_), i->parent_);
       }
       climb = false;
       break;
       case 2:
       res = IOSCharArray_Get(nil_chk(self->this$0_->hi_), i->parent_);
-      [self->ns_ pushWithId:[i clone]];
+      [((JavaUtilStack *) nil_chk(self->ns_)) pushWithId:[i clone]];
       if ([((JavaLangStringBuilder *) nil_chk(self->ks_)) length] > 0) {
-        [self->ks_ setLengthWithInt:[self->ks_ length] - 1];
+        [((JavaLangStringBuilder *) nil_chk(self->ks_)) setLengthWithInt:[self->ks_ length] - 1];
       }
       climb = false;
       break;
       default:
-      if ([self->ns_ empty]) {
+      if ([((JavaUtilStack *) nil_chk(self->ns_)) empty]) {
         return -1;
       }
       climb = true;
@@ -648,8 +669,8 @@ jint OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_run(OrgApach
         leaf = true;
         break;
       }
-      [((JavaUtilStack *) nil_chk(self->ns_)) pushWithId:[new_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item_initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_withChar_withChar_(self, (jchar) self->cur_, 0x0000) autorelease]];
-      if (IOSCharArray_Get(self->this$0_->sc_, self->cur_) == 0) {
+      [((JavaUtilStack *) nil_chk(self->ns_)) pushWithId:create_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item_initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_withChar_withChar_(self, (jchar) self->cur_, 0x0000)];
+      if (IOSCharArray_Get(nil_chk(self->this$0_->sc_), self->cur_) == 0) {
         leaf = true;
         break;
       }
@@ -663,11 +684,11 @@ jint OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_run(OrgApach
       return -1;
     }
   }
-  JavaLangStringBuilder *buf = [new_JavaLangStringBuilder_initWithNSString_([((JavaLangStringBuilder *) nil_chk(self->ks_)) description]) autorelease];
+  JavaLangStringBuilder *buf = create_JavaLangStringBuilder_initWithNSString_([((JavaLangStringBuilder *) nil_chk(self->ks_)) description]);
   if (IOSCharArray_Get(nil_chk(self->this$0_->sc_), self->cur_) == (jint) 0xFFFF) {
     jint p = IOSCharArray_Get(nil_chk(self->this$0_->lo_), self->cur_);
     while ([((OrgApacheLuceneAnalysisCompoundHyphenationCharVector *) nil_chk(self->this$0_->kv_)) getWithInt:p] != 0) {
-      [buf appendWithChar:[self->this$0_->kv_ getWithInt:p++]];
+      [buf appendWithChar:[((OrgApacheLuceneAnalysisCompoundHyphenationCharVector *) nil_chk(self->this$0_->kv_)) getWithInt:p++]];
     }
   }
   JreStrongAssign(&self->curkey_, [buf description]);
@@ -691,7 +712,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCompoundHyphenationTerna
 }
 
 - (OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item *)clone {
-  return [new_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item_initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_withChar_withChar_(this$0_, parent_, child_) autorelease];
+  return create_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item_initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_withChar_withChar_(this$0_, parent_, child_);
 }
 
 - (void)dealloc {
@@ -728,9 +749,11 @@ void OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item_initWit
 }
 
 OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item *new_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item_initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator *outer$) {
-  OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item *self = [OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item alloc];
-  OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item_initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_(self, outer$);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item, initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_, outer$)
+}
+
+OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item *create_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item_initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item, initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_, outer$)
 }
 
 void OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item_initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_withChar_withChar_(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item *self, OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator *outer$, jchar p, jchar c) {
@@ -741,9 +764,11 @@ void OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item_initWit
 }
 
 OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item *new_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item_initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_withChar_withChar_(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator *outer$, jchar p, jchar c) {
-  OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item *self = [OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item alloc];
-  OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item_initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_withChar_withChar_(self, outer$, p, c);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item, initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_withChar_withChar_, outer$, p, c)
+}
+
+OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item *create_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item_initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_withChar_withChar_(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator *outer$, jchar p, jchar c) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item, initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_withChar_withChar_, outer$, p, c)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item)

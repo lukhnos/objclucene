@@ -21,6 +21,11 @@
   jint numWords_;
 }
 
+/*!
+ @brief Checks if the bits past numBits are clear.
+ Some methods rely on this implicit assumption: search for "Depends on the ghost bits being clear!" 
+ @return true if the bits past numBits are clear.
+ */
 - (jboolean)verifyGhostBitsClear;
 
 @end
@@ -262,7 +267,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilLongBitSet_verifyGhos
 - (OrgApacheLuceneUtilLongBitSet *)clone {
   IOSLongArray *bits = [IOSLongArray arrayWithLength:((IOSLongArray *) nil_chk(self->bits_))->size_];
   JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(self->bits_, 0, bits, 0, numWords_);
-  return [new_OrgApacheLuceneUtilLongBitSet_initWithLongArray_withLong_(bits, numBits_) autorelease];
+  return create_OrgApacheLuceneUtilLongBitSet_initWithLongArray_withLong_(bits, numBits_);
 }
 
 - (jboolean)isEqual:(id)o {
@@ -272,7 +277,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilLongBitSet_verifyGhos
   if (!([o isKindOfClass:[OrgApacheLuceneUtilLongBitSet class]])) {
     return false;
   }
-  OrgApacheLuceneUtilLongBitSet *other = (OrgApacheLuceneUtilLongBitSet *) check_class_cast(o, [OrgApacheLuceneUtilLongBitSet class]);
+  OrgApacheLuceneUtilLongBitSet *other = (OrgApacheLuceneUtilLongBitSet *) cast_chk(o, [OrgApacheLuceneUtilLongBitSet class]);
   if (numBits_ != ((OrgApacheLuceneUtilLongBitSet *) nil_chk(other))->numBits_) {
     return false;
   }
@@ -346,7 +351,7 @@ OrgApacheLuceneUtilLongBitSet *OrgApacheLuceneUtilLongBitSet_ensureCapacityWithO
     if (numWords >= ((IOSLongArray *) nil_chk(arr))->size_) {
       arr = OrgApacheLuceneUtilArrayUtil_growWithLongArray_withInt_(arr, numWords + 1);
     }
-    return [new_OrgApacheLuceneUtilLongBitSet_initWithLongArray_withLong_(arr, JreLShift64((jlong) ((IOSLongArray *) nil_chk(arr))->size_, 6)) autorelease];
+    return create_OrgApacheLuceneUtilLongBitSet_initWithLongArray_withLong_(arr, JreLShift64((jlong) ((IOSLongArray *) nil_chk(arr))->size_, 6));
   }
 }
 
@@ -363,16 +368,18 @@ void OrgApacheLuceneUtilLongBitSet_initWithLong_(OrgApacheLuceneUtilLongBitSet *
 }
 
 OrgApacheLuceneUtilLongBitSet *new_OrgApacheLuceneUtilLongBitSet_initWithLong_(jlong numBits) {
-  OrgApacheLuceneUtilLongBitSet *self = [OrgApacheLuceneUtilLongBitSet alloc];
-  OrgApacheLuceneUtilLongBitSet_initWithLong_(self, numBits);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilLongBitSet, initWithLong_, numBits)
+}
+
+OrgApacheLuceneUtilLongBitSet *create_OrgApacheLuceneUtilLongBitSet_initWithLong_(jlong numBits) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilLongBitSet, initWithLong_, numBits)
 }
 
 void OrgApacheLuceneUtilLongBitSet_initWithLongArray_withLong_(OrgApacheLuceneUtilLongBitSet *self, IOSLongArray *storedBits, jlong numBits) {
   NSObject_init(self);
   self->numWords_ = OrgApacheLuceneUtilLongBitSet_bits2wordsWithLong_(numBits);
   if (self->numWords_ > ((IOSLongArray *) nil_chk(storedBits))->size_) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$J$", @"The given long array is too small  to hold ", numBits, @" bits")) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$J$", @"The given long array is too small  to hold ", numBits, @" bits"));
   }
   self->numBits_ = numBits;
   JreStrongAssign(&self->bits_, storedBits);
@@ -380,9 +387,11 @@ void OrgApacheLuceneUtilLongBitSet_initWithLongArray_withLong_(OrgApacheLuceneUt
 }
 
 OrgApacheLuceneUtilLongBitSet *new_OrgApacheLuceneUtilLongBitSet_initWithLongArray_withLong_(IOSLongArray *storedBits, jlong numBits) {
-  OrgApacheLuceneUtilLongBitSet *self = [OrgApacheLuceneUtilLongBitSet alloc];
-  OrgApacheLuceneUtilLongBitSet_initWithLongArray_withLong_(self, storedBits, numBits);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilLongBitSet, initWithLongArray_withLong_, storedBits, numBits)
+}
+
+OrgApacheLuceneUtilLongBitSet *create_OrgApacheLuceneUtilLongBitSet_initWithLongArray_withLong_(IOSLongArray *storedBits, jlong numBits) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilLongBitSet, initWithLongArray_withLong_, storedBits, numBits)
 }
 
 jboolean OrgApacheLuceneUtilLongBitSet_verifyGhostBitsClear(OrgApacheLuceneUtilLongBitSet *self) {

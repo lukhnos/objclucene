@@ -59,10 +59,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenF
   @try {
     if (dictFile_ != nil) JreStrongAssign(&dictionary_, [self getWordSetWithOrgApacheLuceneAnalysisUtilResourceLoader:loader withNSString:dictFile_ withBoolean:false]);
     stream = [((id<OrgApacheLuceneAnalysisUtilResourceLoader>) nil_chk(loader)) openResourceWithNSString:hypFile_];
-    OrgXmlSaxInputSource *is = [new_OrgXmlSaxInputSource_initWithJavaIoInputStream_(stream) autorelease];
+    OrgXmlSaxInputSource *is = create_OrgXmlSaxInputSource_initWithJavaIoInputStream_(stream);
     [is setEncodingWithNSString:encoding_];
     [is setSystemIdWithNSString:hypFile_];
-    if ([((OrgApacheLuceneUtilVersion *) nil_chk(luceneMatchVersion_)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_4_0_)]) {
+    if ([((OrgApacheLuceneUtilVersion *) nil_chk(luceneMatchVersion_)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_4_0)]) {
       JreStrongAssign(&hyphenator_, OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenFilter_getHyphenationTreeWithOrgXmlSaxInputSource_(is));
     }
     else {
@@ -75,10 +75,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenF
 }
 
 - (OrgApacheLuceneAnalysisTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  if ([((OrgApacheLuceneUtilVersion *) nil_chk(luceneMatchVersion_)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_4_0_)]) {
-    return [new_OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree_withOrgApacheLuceneAnalysisUtilCharArraySet_withInt_withInt_withInt_withBoolean_(input, hyphenator_, dictionary_, minWordSize_, minSubwordSize_, maxSubwordSize_, onlyLongestMatch_) autorelease];
+  if ([((OrgApacheLuceneUtilVersion *) nil_chk(luceneMatchVersion_)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_4_0)]) {
+    return create_OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree_withOrgApacheLuceneAnalysisUtilCharArraySet_withInt_withInt_withInt_withBoolean_(input, hyphenator_, dictionary_, minWordSize_, minSubwordSize_, maxSubwordSize_, onlyLongestMatch_);
   }
-  return [new_OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree_withOrgApacheLuceneAnalysisUtilCharArraySet_withInt_withInt_withInt_withBoolean_(input, hyphenator_, dictionary_, minWordSize_, minSubwordSize_, maxSubwordSize_, onlyLongestMatch_) autorelease];
+  return create_OrgApacheLuceneAnalysisCompoundLucene43HyphenationCompoundWordTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree_withOrgApacheLuceneAnalysisUtilCharArraySet_withInt_withInt_withInt_withBoolean_(input, hyphenator_, dictionary_, minWordSize_, minSubwordSize_, maxSubwordSize_, onlyLongestMatch_);
 }
 
 - (void)dealloc {
@@ -92,7 +92,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenF
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "HyphenationCompoundWordTokenFilterFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "HyphenationCompoundWordTokenFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "informWithOrgApacheLuceneAnalysisUtilResourceLoader:", "inform", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenFilter;", 0x1, NULL, NULL },
   };
@@ -123,14 +123,16 @@ void OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenFilterFactory_in
   self->maxSubwordSize_ = [self getIntWithJavaUtilMap:args withNSString:@"maxSubwordSize" withInt:OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_DEFAULT_MAX_SUBWORD_SIZE];
   self->onlyLongestMatch_ = [self getBooleanWithJavaUtilMap:args withNSString:@"onlyLongestMatch" withBoolean:false];
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenFilterFactory *new_OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenFilterFactory *self = [OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenFilterFactory alloc];
-  OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenFilterFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenFilterFactory *create_OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenFilterFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenFilterFactory)

@@ -43,6 +43,8 @@ __attribute__((unused)) static void OrgApacheLuceneStoreRAMDirectory_initWithOrg
 
 __attribute__((unused)) static OrgApacheLuceneStoreRAMDirectory *new_OrgApacheLuceneStoreRAMDirectory_initWithOrgApacheLuceneStoreFSDirectory_withBoolean_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneStoreFSDirectory *dir, jboolean closeDir, OrgApacheLuceneStoreIOContext *context) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneStoreRAMDirectory *create_OrgApacheLuceneStoreRAMDirectory_initWithOrgApacheLuceneStoreFSDirectory_withBoolean_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneStoreFSDirectory *dir, jboolean closeDir, OrgApacheLuceneStoreIOContext *context);
+
 @implementation OrgApacheLuceneStoreRAMDirectory
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -73,7 +75,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (IOSObjectArray *)listAll {
   [self ensureOpen];
   id<JavaUtilSet> fileNames = [((id<JavaUtilMap>) nil_chk(fileMap_)) keySet];
-  id<JavaUtilList> names = [new_JavaUtilArrayList_initWithInt_([((id<JavaUtilSet>) nil_chk(fileNames)) size]) autorelease];
+  id<JavaUtilList> names = create_JavaUtilArrayList_initWithInt_([((id<JavaUtilSet>) nil_chk(fileNames)) size]);
   for (NSString * __strong name in fileNames) [names addWithId:name];
   return [names toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[names size] type:NSString_class_()]];
 }
@@ -87,9 +89,9 @@ J2OBJC_IGNORE_DESIGNATED_END
   [self ensureOpen];
   OrgApacheLuceneStoreRAMFile *file = [((id<JavaUtilMap>) nil_chk(fileMap_)) getWithId:name];
   if (file == nil) {
-    @throw [new_JavaIoFileNotFoundException_initWithNSString_(name) autorelease];
+    @throw create_JavaIoFileNotFoundException_initWithNSString_(name);
   }
-  return [((OrgApacheLuceneStoreRAMFile *) nil_chk(file)) getLength];
+  return [file getLength];
 }
 
 - (jlong)ramBytesUsed {
@@ -109,7 +111,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     [((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(sizeInBytes_)) addAndGetWithLong:-file->sizeInBytes_];
   }
   else {
-    @throw [new_JavaIoFileNotFoundException_initWithNSString_(name) autorelease];
+    @throw create_JavaIoFileNotFoundException_initWithNSString_(name);
   }
 }
 
@@ -123,11 +125,11 @@ J2OBJC_IGNORE_DESIGNATED_END
     JreStrongAssign(&existing->directory_, nil);
   }
   [fileMap_ putWithId:name withId:file];
-  return [new_OrgApacheLuceneStoreRAMOutputStream_initWithNSString_withOrgApacheLuceneStoreRAMFile_withBoolean_(name, file, true) autorelease];
+  return create_OrgApacheLuceneStoreRAMOutputStream_initWithNSString_withOrgApacheLuceneStoreRAMFile_withBoolean_(name, file, true);
 }
 
 - (OrgApacheLuceneStoreRAMFile *)newRAMFile {
-  return [new_OrgApacheLuceneStoreRAMFile_initWithOrgApacheLuceneStoreRAMDirectory_(self) autorelease];
+  return create_OrgApacheLuceneStoreRAMFile_initWithOrgApacheLuceneStoreRAMDirectory_(self);
 }
 
 - (void)syncWithJavaUtilCollection:(id<JavaUtilCollection>)names {
@@ -138,7 +140,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   [self ensureOpen];
   OrgApacheLuceneStoreRAMFile *file = [((id<JavaUtilMap>) nil_chk(fileMap_)) getWithId:source];
   if (file == nil) {
-    @throw [new_JavaIoFileNotFoundException_initWithNSString_(source) autorelease];
+    @throw create_JavaIoFileNotFoundException_initWithNSString_(source);
   }
   [fileMap_ putWithId:dest withId:file];
   [fileMap_ removeWithId:source];
@@ -149,9 +151,9 @@ J2OBJC_IGNORE_DESIGNATED_END
   [self ensureOpen];
   OrgApacheLuceneStoreRAMFile *file = [((id<JavaUtilMap>) nil_chk(fileMap_)) getWithId:name];
   if (file == nil) {
-    @throw [new_JavaIoFileNotFoundException_initWithNSString_(name) autorelease];
+    @throw create_JavaIoFileNotFoundException_initWithNSString_(name);
   }
-  return [new_OrgApacheLuceneStoreRAMInputStream_initWithNSString_withOrgApacheLuceneStoreRAMFile_(name, file) autorelease];
+  return create_OrgApacheLuceneStoreRAMInputStream_initWithNSString_withOrgApacheLuceneStoreRAMFile_(name, file);
 }
 
 - (void)close {
@@ -175,11 +177,11 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "fileNameExistsWithNSString:", "fileNameExists", "Z", 0x11, NULL, NULL },
     { "fileLengthWithNSString:", "fileLength", "J", 0x11, "Ljava.io.IOException;", NULL },
     { "ramBytesUsed", NULL, "J", 0x11, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
     { "deleteFileWithNSString:", "deleteFile", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "createOutputWithNSString:withOrgApacheLuceneStoreIOContext:", "createOutput", "Lorg.apache.lucene.store.IndexOutput;", 0x1, "Ljava.io.IOException;", NULL },
     { "newRAMFile", NULL, "Lorg.apache.lucene.store.RAMFile;", 0x4, NULL, NULL },
-    { "syncWithJavaUtilCollection:", "sync", "V", 0x1, "Ljava.io.IOException;", NULL },
+    { "syncWithJavaUtilCollection:", "sync", "V", 0x1, "Ljava.io.IOException;", "(Ljava/util/Collection<Ljava/lang/String;>;)V" },
     { "renameFileWithNSString:withNSString:", "renameFile", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "openInputWithNSString:withOrgApacheLuceneStoreIOContext:", "openInput", "Lorg.apache.lucene.store.IndexInput;", 0x1, "Ljava.io.IOException;", NULL },
     { "close", NULL, "V", 0x1, NULL, NULL },
@@ -195,13 +197,15 @@ J2OBJC_IGNORE_DESIGNATED_END
 @end
 
 void OrgApacheLuceneStoreRAMDirectory_init(OrgApacheLuceneStoreRAMDirectory *self) {
-  OrgApacheLuceneStoreRAMDirectory_initWithOrgApacheLuceneStoreLockFactory_(self, [new_OrgApacheLuceneStoreSingleInstanceLockFactory_init() autorelease]);
+  OrgApacheLuceneStoreRAMDirectory_initWithOrgApacheLuceneStoreLockFactory_(self, create_OrgApacheLuceneStoreSingleInstanceLockFactory_init());
 }
 
 OrgApacheLuceneStoreRAMDirectory *new_OrgApacheLuceneStoreRAMDirectory_init() {
-  OrgApacheLuceneStoreRAMDirectory *self = [OrgApacheLuceneStoreRAMDirectory alloc];
-  OrgApacheLuceneStoreRAMDirectory_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreRAMDirectory, init)
+}
+
+OrgApacheLuceneStoreRAMDirectory *create_OrgApacheLuceneStoreRAMDirectory_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreRAMDirectory, init)
 }
 
 void OrgApacheLuceneStoreRAMDirectory_initWithOrgApacheLuceneStoreLockFactory_(OrgApacheLuceneStoreRAMDirectory *self, OrgApacheLuceneStoreLockFactory *lockFactory) {
@@ -211,9 +215,11 @@ void OrgApacheLuceneStoreRAMDirectory_initWithOrgApacheLuceneStoreLockFactory_(O
 }
 
 OrgApacheLuceneStoreRAMDirectory *new_OrgApacheLuceneStoreRAMDirectory_initWithOrgApacheLuceneStoreLockFactory_(OrgApacheLuceneStoreLockFactory *lockFactory) {
-  OrgApacheLuceneStoreRAMDirectory *self = [OrgApacheLuceneStoreRAMDirectory alloc];
-  OrgApacheLuceneStoreRAMDirectory_initWithOrgApacheLuceneStoreLockFactory_(self, lockFactory);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreRAMDirectory, initWithOrgApacheLuceneStoreLockFactory_, lockFactory)
+}
+
+OrgApacheLuceneStoreRAMDirectory *create_OrgApacheLuceneStoreRAMDirectory_initWithOrgApacheLuceneStoreLockFactory_(OrgApacheLuceneStoreLockFactory *lockFactory) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreRAMDirectory, initWithOrgApacheLuceneStoreLockFactory_, lockFactory)
 }
 
 void OrgApacheLuceneStoreRAMDirectory_initWithOrgApacheLuceneStoreFSDirectory_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneStoreRAMDirectory *self, OrgApacheLuceneStoreFSDirectory *dir, OrgApacheLuceneStoreIOContext *context) {
@@ -221,9 +227,11 @@ void OrgApacheLuceneStoreRAMDirectory_initWithOrgApacheLuceneStoreFSDirectory_wi
 }
 
 OrgApacheLuceneStoreRAMDirectory *new_OrgApacheLuceneStoreRAMDirectory_initWithOrgApacheLuceneStoreFSDirectory_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneStoreFSDirectory *dir, OrgApacheLuceneStoreIOContext *context) {
-  OrgApacheLuceneStoreRAMDirectory *self = [OrgApacheLuceneStoreRAMDirectory alloc];
-  OrgApacheLuceneStoreRAMDirectory_initWithOrgApacheLuceneStoreFSDirectory_withOrgApacheLuceneStoreIOContext_(self, dir, context);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreRAMDirectory, initWithOrgApacheLuceneStoreFSDirectory_withOrgApacheLuceneStoreIOContext_, dir, context)
+}
+
+OrgApacheLuceneStoreRAMDirectory *create_OrgApacheLuceneStoreRAMDirectory_initWithOrgApacheLuceneStoreFSDirectory_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneStoreFSDirectory *dir, OrgApacheLuceneStoreIOContext *context) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreRAMDirectory, initWithOrgApacheLuceneStoreFSDirectory_withOrgApacheLuceneStoreIOContext_, dir, context)
 }
 
 void OrgApacheLuceneStoreRAMDirectory_initWithOrgApacheLuceneStoreFSDirectory_withBoolean_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneStoreRAMDirectory *self, OrgApacheLuceneStoreFSDirectory *dir, jboolean closeDir, OrgApacheLuceneStoreIOContext *context) {
@@ -245,9 +253,11 @@ void OrgApacheLuceneStoreRAMDirectory_initWithOrgApacheLuceneStoreFSDirectory_wi
 }
 
 OrgApacheLuceneStoreRAMDirectory *new_OrgApacheLuceneStoreRAMDirectory_initWithOrgApacheLuceneStoreFSDirectory_withBoolean_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneStoreFSDirectory *dir, jboolean closeDir, OrgApacheLuceneStoreIOContext *context) {
-  OrgApacheLuceneStoreRAMDirectory *self = [OrgApacheLuceneStoreRAMDirectory alloc];
-  OrgApacheLuceneStoreRAMDirectory_initWithOrgApacheLuceneStoreFSDirectory_withBoolean_withOrgApacheLuceneStoreIOContext_(self, dir, closeDir, context);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreRAMDirectory, initWithOrgApacheLuceneStoreFSDirectory_withBoolean_withOrgApacheLuceneStoreIOContext_, dir, closeDir, context)
+}
+
+OrgApacheLuceneStoreRAMDirectory *create_OrgApacheLuceneStoreRAMDirectory_initWithOrgApacheLuceneStoreFSDirectory_withBoolean_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneStoreFSDirectory *dir, jboolean closeDir, OrgApacheLuceneStoreIOContext *context) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreRAMDirectory, initWithOrgApacheLuceneStoreFSDirectory_withBoolean_withOrgApacheLuceneStoreIOContext_, dir, closeDir, context)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreRAMDirectory)

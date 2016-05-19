@@ -67,7 +67,7 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPriorityQueue_downHeapWit
     return nil;
   }
   else if (size_ > 0 && ![self lessThanWithId:element withId:IOSObjectArray_Get(nil_chk(heap_), 1)]) {
-    id ret = IOSObjectArray_Get(heap_, 1);
+    id ret = IOSObjectArray_Get(nil_chk(heap_), 1);
     IOSObjectArray_Set(heap_, 1, element);
     OrgApacheLuceneUtilPriorityQueue_updateTop(self);
     return ret;
@@ -192,11 +192,11 @@ void OrgApacheLuceneUtilPriorityQueue_initWithInt_withBoolean_(OrgApacheLuceneUt
   }
   else {
     heapSize = maxSize + 1;
-    if (heapSize > JreLoadStatic(OrgApacheLuceneUtilArrayUtil, MAX_ARRAY_LENGTH_)) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$I", @"maxSize must be <= ", (JreLoadStatic(OrgApacheLuceneUtilArrayUtil, MAX_ARRAY_LENGTH_) - 1), @"; got: ", maxSize)) autorelease];
+    if (heapSize > JreLoadStatic(OrgApacheLuceneUtilArrayUtil, MAX_ARRAY_LENGTH)) {
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$I", @"maxSize must be <= ", (JreLoadStatic(OrgApacheLuceneUtilArrayUtil, MAX_ARRAY_LENGTH) - 1), @"; got: ", maxSize));
     }
   }
-  IOSObjectArray *h = (IOSObjectArray *) check_class_cast([IOSObjectArray arrayWithLength:heapSize type:NSObject_class_()], [IOSObjectArray class]);
+  IOSObjectArray *h = [IOSObjectArray arrayWithLength:heapSize type:NSObject_class_()];
   JreStrongAssign(&self->heap_, h);
   self->maxSize_ = maxSize;
   if (prepopulate) {

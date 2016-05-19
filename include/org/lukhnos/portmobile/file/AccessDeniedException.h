@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgLukhnosPortmobileFileAccessDeniedException_INCLUDE_ALL")
-#if OrgLukhnosPortmobileFileAccessDeniedException_RESTRICT
-#define OrgLukhnosPortmobileFileAccessDeniedException_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgLukhnosPortmobileFileAccessDeniedException")
+#ifdef RESTRICT_OrgLukhnosPortmobileFileAccessDeniedException
+#define INCLUDE_ALL_OrgLukhnosPortmobileFileAccessDeniedException 0
 #else
-#define OrgLukhnosPortmobileFileAccessDeniedException_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgLukhnosPortmobileFileAccessDeniedException 1
 #endif
-#undef OrgLukhnosPortmobileFileAccessDeniedException_RESTRICT
+#undef RESTRICT_OrgLukhnosPortmobileFileAccessDeniedException
 
-#if !defined (_OrgLukhnosPortmobileFileAccessDeniedException_) && (OrgLukhnosPortmobileFileAccessDeniedException_INCLUDE_ALL || OrgLukhnosPortmobileFileAccessDeniedException_INCLUDE)
-#define _OrgLukhnosPortmobileFileAccessDeniedException_
+#if !defined (OrgLukhnosPortmobileFileAccessDeniedException_) && (INCLUDE_ALL_OrgLukhnosPortmobileFileAccessDeniedException || defined(INCLUDE_OrgLukhnosPortmobileFileAccessDeniedException))
+#define OrgLukhnosPortmobileFileAccessDeniedException_
 
-#define JavaIoIOException_RESTRICT 1
-#define JavaIoIOException_INCLUDE 1
+#define RESTRICT_JavaIoIOException 1
+#define INCLUDE_JavaIoIOException 1
 #include "java/io/IOException.h"
 
 @interface OrgLukhnosPortmobileFileAccessDeniedException : JavaIoIOException
@@ -34,8 +34,10 @@ FOUNDATION_EXPORT void OrgLukhnosPortmobileFileAccessDeniedException_init(OrgLuk
 
 FOUNDATION_EXPORT OrgLukhnosPortmobileFileAccessDeniedException *new_OrgLukhnosPortmobileFileAccessDeniedException_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgLukhnosPortmobileFileAccessDeniedException *create_OrgLukhnosPortmobileFileAccessDeniedException_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileFileAccessDeniedException)
 
 #endif
 
-#pragma pop_macro("OrgLukhnosPortmobileFileAccessDeniedException_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileFileAccessDeniedException")

@@ -62,7 +62,7 @@ withOrgApacheLuceneSearchTermCollectingRewrite_TermCollector:(OrgApacheLuceneSea
     }
     OrgApacheLuceneIndexTermsEnum *termsEnum = [self getTermsEnumWithOrgApacheLuceneSearchMultiTermQuery:query withOrgApacheLuceneIndexTerms:terms withOrgApacheLuceneUtilAttributeSource:((OrgApacheLuceneSearchTermCollectingRewrite_TermCollector *) nil_chk(collector))->attributes_];
     JreAssert((termsEnum != nil), (@"org/apache/lucene/search/TermCollectingRewrite.java:59 condition failed: assert termsEnum != null;"));
-    if (termsEnum == JreLoadStatic(OrgApacheLuceneIndexTermsEnum, EMPTY_)) continue;
+    if (termsEnum == JreLoadStatic(OrgApacheLuceneIndexTermsEnum, EMPTY)) continue;
     [collector setReaderContextWithOrgApacheLuceneIndexIndexReaderContext:topReaderContext withOrgApacheLuceneIndexLeafReaderContext:context];
     [collector setNextEnumWithOrgApacheLuceneIndexTermsEnum:termsEnum];
     OrgApacheLuceneUtilBytesRef *bytes;
@@ -86,7 +86,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "addClauseWithId:withOrgApacheLuceneIndexTerm:withInt:withFloat:", "addClause", "V", 0x14, "Ljava.io.IOException;", "(TB;Lorg/apache/lucene/index/Term;IF)V" },
     { "addClauseWithId:withOrgApacheLuceneIndexTerm:withInt:withFloat:withOrgApacheLuceneIndexTermContext:", "addClause", "V", 0x404, "Ljava.io.IOException;", "(TB;Lorg/apache/lucene/index/Term;IFLorg/apache/lucene/index/TermContext;)V" },
     { "collectTermsWithOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneSearchMultiTermQuery:withOrgApacheLuceneSearchTermCollectingRewrite_TermCollector:", "collectTerms", "V", 0x10, "Ljava.io.IOException;", NULL },
-    { "init", NULL, NULL, 0x0, NULL, NULL },
+    { "init", "TermCollectingRewrite", NULL, 0x0, NULL, NULL },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.TermCollectingRewrite$TermCollector;"};
   static const J2ObjcClassInfo _OrgApacheLuceneSearchTermCollectingRewrite = { 2, "TermCollectingRewrite", "org.apache.lucene.search", NULL, 0x400, 6, methods, 0, NULL, 0, NULL, 1, inner_classes, NULL, "<B:Ljava/lang/Object;>Lorg/apache/lucene/search/MultiTermQuery$RewriteMethod;" };
@@ -139,7 +139,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "setReaderContextWithOrgApacheLuceneIndexIndexReaderContext:withOrgApacheLuceneIndexLeafReaderContext:", "setReaderContext", "V", 0x1, NULL, NULL },
     { "collectWithOrgApacheLuceneUtilBytesRef:", "collect", "Z", 0x401, "Ljava.io.IOException;", NULL },
     { "setNextEnumWithOrgApacheLuceneIndexTermsEnum:", "setNextEnum", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "init", NULL, NULL, 0x0, NULL, NULL },
+    { "init", "TermCollector", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "readerContext_", NULL, 0x4, "Lorg.apache.lucene.index.LeafReaderContext;", NULL, NULL, .constantValue.asLong = 0 },

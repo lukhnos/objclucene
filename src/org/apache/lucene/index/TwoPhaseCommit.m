@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/index/TwoPhaseCommit.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/index/TwoPhaseCommit.h"
 
 @interface OrgApacheLuceneIndexTwoPhaseCommit : NSObject

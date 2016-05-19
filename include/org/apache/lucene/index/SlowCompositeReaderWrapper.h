@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexSlowCompositeReaderWrapper_INCLUDE_ALL")
-#if OrgApacheLuceneIndexSlowCompositeReaderWrapper_RESTRICT
-#define OrgApacheLuceneIndexSlowCompositeReaderWrapper_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexSlowCompositeReaderWrapper")
+#ifdef RESTRICT_OrgApacheLuceneIndexSlowCompositeReaderWrapper
+#define INCLUDE_ALL_OrgApacheLuceneIndexSlowCompositeReaderWrapper 0
 #else
-#define OrgApacheLuceneIndexSlowCompositeReaderWrapper_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexSlowCompositeReaderWrapper 1
 #endif
-#undef OrgApacheLuceneIndexSlowCompositeReaderWrapper_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexSlowCompositeReaderWrapper
 
-#if !defined (_OrgApacheLuceneIndexSlowCompositeReaderWrapper_) && (OrgApacheLuceneIndexSlowCompositeReaderWrapper_INCLUDE_ALL || OrgApacheLuceneIndexSlowCompositeReaderWrapper_INCLUDE)
-#define _OrgApacheLuceneIndexSlowCompositeReaderWrapper_
+#if !defined (OrgApacheLuceneIndexSlowCompositeReaderWrapper_) && (INCLUDE_ALL_OrgApacheLuceneIndexSlowCompositeReaderWrapper || defined(INCLUDE_OrgApacheLuceneIndexSlowCompositeReaderWrapper))
+#define OrgApacheLuceneIndexSlowCompositeReaderWrapper_
 
-#define OrgApacheLuceneIndexLeafReader_RESTRICT 1
-#define OrgApacheLuceneIndexLeafReader_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexLeafReader 1
+#define INCLUDE_OrgApacheLuceneIndexLeafReader 1
 #include "org/apache/lucene/index/LeafReader.h"
 
 @class OrgApacheLuceneIndexBinaryDocValues;
@@ -33,6 +33,21 @@
 @protocol OrgApacheLuceneIndexLeafReader_CoreClosedListener;
 @protocol OrgApacheLuceneUtilBits;
 
+/*!
+ @brief This class forces a composite reader (eg a <code>MultiReader</code>
+  or <code>DirectoryReader</code>) to emulate a
+ <code>LeafReader</code>.
+ This requires implementing the postings
+ APIs on-the-fly, using the static methods in <code>MultiFields</code>
+ , <code>MultiDocValues</code>, by stepping through
+ the sub-readers to merge fields/terms, appending docs, etc.
+ <p><b>NOTE</b>: this class almost always results in a
+ performance hit.  If this is important to your use case,
+ you'll get better performance by gathering the sub readers using
+ <code>IndexReader.getContext()</code> to get the
+ leaves and then operate per-LeafReader,
+ instead of using this class.
+ */
 @interface OrgApacheLuceneIndexSlowCompositeReaderWrapper : OrgApacheLuceneIndexLeafReader
 
 #pragma mark Public
@@ -78,6 +93,12 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 - (NSString *)description;
 
+/*!
+ @brief This method is sugar for getting an <code>LeafReader</code> from
+ an <code>IndexReader</code> of any kind.
+ If the reader is already atomic,
+ it is returned unchanged, otherwise wrapped by this class.
+ */
 + (OrgApacheLuceneIndexLeafReader *)wrapWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
 
 #pragma mark Protected
@@ -99,8 +120,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexSlowCompositeReaderWrapper_initWithOr
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexSlowCompositeReaderWrapper *new_OrgApacheLuceneIndexSlowCompositeReaderWrapper_initWithOrgApacheLuceneIndexCompositeReader_withBoolean_(OrgApacheLuceneIndexCompositeReader *reader, jboolean merging) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexSlowCompositeReaderWrapper *create_OrgApacheLuceneIndexSlowCompositeReaderWrapper_initWithOrgApacheLuceneIndexCompositeReader_withBoolean_(OrgApacheLuceneIndexCompositeReader *reader, jboolean merging);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSlowCompositeReaderWrapper)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexSlowCompositeReaderWrapper_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSlowCompositeReaderWrapper")

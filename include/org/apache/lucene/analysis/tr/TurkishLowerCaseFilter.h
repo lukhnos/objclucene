@@ -5,27 +5,41 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_RESTRICT
-#define OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter 0
 #else
-#define OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter
 
-#if !defined (_OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_) && (OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_
+#if !defined (OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter || defined(INCLUDE_OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter))
+#define OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief Normalizes Turkish token text to lower case.
+ <p>
+ Turkish and Azeri have unique casing behavior for some characters. This
+ filter applies Turkish lowercase rules. For more information, see <a
+ href="http://en.wikipedia.org/wiki/Turkish_dotted_and_dotless_I"
+ >http://en.wikipedia.org/wiki/Turkish_dotted_and_dotless_I</a>
+ </p>
+ */
 @interface OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
+/*!
+ @brief Create a new TurkishLowerCaseFilter, that normalizes Turkish token text 
+ to lower case.
+ @param inArg TokenStream to filter
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
 
 - (jboolean)incrementToken;
@@ -38,8 +52,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_initWithO
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter *new_OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter *create_OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter")

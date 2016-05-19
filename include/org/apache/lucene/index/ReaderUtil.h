@@ -5,30 +5,45 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexReaderUtil_INCLUDE_ALL")
-#if OrgApacheLuceneIndexReaderUtil_RESTRICT
-#define OrgApacheLuceneIndexReaderUtil_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexReaderUtil")
+#ifdef RESTRICT_OrgApacheLuceneIndexReaderUtil
+#define INCLUDE_ALL_OrgApacheLuceneIndexReaderUtil 0
 #else
-#define OrgApacheLuceneIndexReaderUtil_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexReaderUtil 1
 #endif
-#undef OrgApacheLuceneIndexReaderUtil_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexReaderUtil
 
-#if !defined (_OrgApacheLuceneIndexReaderUtil_) && (OrgApacheLuceneIndexReaderUtil_INCLUDE_ALL || OrgApacheLuceneIndexReaderUtil_INCLUDE)
-#define _OrgApacheLuceneIndexReaderUtil_
+#if !defined (OrgApacheLuceneIndexReaderUtil_) && (INCLUDE_ALL_OrgApacheLuceneIndexReaderUtil || defined(INCLUDE_OrgApacheLuceneIndexReaderUtil))
+#define OrgApacheLuceneIndexReaderUtil_
 
 @class IOSIntArray;
 @class OrgApacheLuceneIndexIndexReaderContext;
 @protocol JavaUtilList;
 
+/*!
+ @brief Common util methods for dealing with <code>IndexReader</code>s and <code>IndexReaderContext</code>s.
+ */
 @interface OrgApacheLuceneIndexReaderUtil : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Walks up the reader tree and return the given context's top level reader
+ context, or in other words the reader tree's root context.
+ */
 + (OrgApacheLuceneIndexIndexReaderContext *)getTopLevelContextWithOrgApacheLuceneIndexIndexReaderContext:(OrgApacheLuceneIndexIndexReaderContext *)context;
 
+/*!
+ @brief Returns index of the searcher/reader for document <code>n</code> in the
+ array used to construct this searcher/reader.
+ */
 + (jint)subIndexWithInt:(jint)n
            withIntArray:(IOSIntArray *)docStarts;
 
+/*!
+ @brief Returns index of the searcher/reader for document <code>n</code> in the
+ array used to construct this searcher/reader.
+ */
 + (jint)subIndexWithInt:(jint)n
        withJavaUtilList:(id<JavaUtilList>)leaves;
 
@@ -46,4 +61,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexReaderUtil)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexReaderUtil_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexReaderUtil")

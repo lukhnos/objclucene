@@ -64,19 +64,21 @@
 void OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter_initWithInt_withInt_(OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter *self, jint lower, jint upper) {
   OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter_init(self);
   if (lower < 1) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"lower must be greater than zero") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"lower must be greater than zero");
   }
   if (lower > upper) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"lower must not be greater than upper") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"lower must not be greater than upper");
   }
   self->lower_ = lower;
   self->upper_ = upper;
 }
 
 OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter *new_OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter_initWithInt_withInt_(jint lower, jint upper) {
-  OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter *self = [OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter alloc];
-  OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter_initWithInt_withInt_(self, lower, upper);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter, initWithInt_withInt_, lower, upper)
+}
+
+OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter *create_OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter_initWithInt_withInt_(jint lower, jint upper) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter, initWithInt_withInt_, lower, upper)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter)

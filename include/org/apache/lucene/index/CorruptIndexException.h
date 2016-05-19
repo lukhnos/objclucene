@@ -5,52 +5,79 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexCorruptIndexException_INCLUDE_ALL")
-#if OrgApacheLuceneIndexCorruptIndexException_RESTRICT
-#define OrgApacheLuceneIndexCorruptIndexException_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexCorruptIndexException")
+#ifdef RESTRICT_OrgApacheLuceneIndexCorruptIndexException
+#define INCLUDE_ALL_OrgApacheLuceneIndexCorruptIndexException 0
 #else
-#define OrgApacheLuceneIndexCorruptIndexException_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexCorruptIndexException 1
 #endif
-#undef OrgApacheLuceneIndexCorruptIndexException_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexCorruptIndexException
 
-#if !defined (_OrgApacheLuceneIndexCorruptIndexException_) && (OrgApacheLuceneIndexCorruptIndexException_INCLUDE_ALL || OrgApacheLuceneIndexCorruptIndexException_INCLUDE)
-#define _OrgApacheLuceneIndexCorruptIndexException_
+#if !defined (OrgApacheLuceneIndexCorruptIndexException_) && (INCLUDE_ALL_OrgApacheLuceneIndexCorruptIndexException || defined(INCLUDE_OrgApacheLuceneIndexCorruptIndexException))
+#define OrgApacheLuceneIndexCorruptIndexException_
 
-#define JavaIoIOException_RESTRICT 1
-#define JavaIoIOException_INCLUDE 1
+#define RESTRICT_JavaIoIOException 1
+#define INCLUDE_JavaIoIOException 1
 #include "java/io/IOException.h"
 
-@class JavaLangThrowable;
 @class OrgApacheLuceneStoreDataInput;
 @class OrgApacheLuceneStoreDataOutput;
 
+/*!
+ @brief This exception is thrown when Lucene detects
+ an inconsistency in the index.
+ */
 @interface OrgApacheLuceneIndexCorruptIndexException : JavaIoIOException
 
 #pragma mark Public
 
+/*!
+ @brief Create exception with a message only
+ */
 - (instancetype)initWithNSString:(NSString *)message
 withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)input;
 
+/*!
+ @brief Create exception with message and root cause.
+ */
 - (instancetype)initWithNSString:(NSString *)message
 withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)input
-           withJavaLangThrowable:(JavaLangThrowable *)cause;
+                 withNSException:(NSException *)cause;
 
+/*!
+ @brief Create exception with a message only
+ */
 - (instancetype)initWithNSString:(NSString *)message
 withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)output;
 
+/*!
+ @brief Create exception with message and root cause.
+ */
 - (instancetype)initWithNSString:(NSString *)message
 withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)output
-           withJavaLangThrowable:(JavaLangThrowable *)cause;
+                 withNSException:(NSException *)cause;
 
+/*!
+ @brief Create exception with a message only
+ */
 - (instancetype)initWithNSString:(NSString *)message
                     withNSString:(NSString *)resourceDescription;
 
+/*!
+ @brief Create exception with message and root cause.
+ */
 - (instancetype)initWithNSString:(NSString *)message
                     withNSString:(NSString *)resourceDescription
-           withJavaLangThrowable:(JavaLangThrowable *)cause;
+                 withNSException:(NSException *)cause;
 
+/*!
+ @brief Returns the original exception message without the corrupted file description.
+ */
 - (NSString *)getOriginalMessage;
 
+/*!
+ @brief Returns a description of the file that was corrupted
+ */
 - (NSString *)getResourceDescription;
 
 @end
@@ -61,28 +88,40 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexCorruptIndexException_initWithNSStrin
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexCorruptIndexException *new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(NSString *message, OrgApacheLuceneStoreDataInput *input) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexCorruptIndexException *create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(NSString *message, OrgApacheLuceneStoreDataInput *input);
+
 FOUNDATION_EXPORT void OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataOutput_(OrgApacheLuceneIndexCorruptIndexException *self, NSString *message, OrgApacheLuceneStoreDataOutput *output);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexCorruptIndexException *new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataOutput_(NSString *message, OrgApacheLuceneStoreDataOutput *output) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_withJavaLangThrowable_(OrgApacheLuceneIndexCorruptIndexException *self, NSString *message, OrgApacheLuceneStoreDataInput *input, JavaLangThrowable *cause);
+FOUNDATION_EXPORT OrgApacheLuceneIndexCorruptIndexException *create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataOutput_(NSString *message, OrgApacheLuceneStoreDataOutput *output);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexCorruptIndexException *new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_withJavaLangThrowable_(NSString *message, OrgApacheLuceneStoreDataInput *input, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT void OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_withNSException_(OrgApacheLuceneIndexCorruptIndexException *self, NSString *message, OrgApacheLuceneStoreDataInput *input, NSException *cause);
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataOutput_withJavaLangThrowable_(OrgApacheLuceneIndexCorruptIndexException *self, NSString *message, OrgApacheLuceneStoreDataOutput *output, JavaLangThrowable *cause);
+FOUNDATION_EXPORT OrgApacheLuceneIndexCorruptIndexException *new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_withNSException_(NSString *message, OrgApacheLuceneStoreDataInput *input, NSException *cause) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexCorruptIndexException *new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataOutput_withJavaLangThrowable_(NSString *message, OrgApacheLuceneStoreDataOutput *output, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexCorruptIndexException *create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_withNSException_(NSString *message, OrgApacheLuceneStoreDataInput *input, NSException *cause);
+
+FOUNDATION_EXPORT void OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataOutput_withNSException_(OrgApacheLuceneIndexCorruptIndexException *self, NSString *message, OrgApacheLuceneStoreDataOutput *output, NSException *cause);
+
+FOUNDATION_EXPORT OrgApacheLuceneIndexCorruptIndexException *new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataOutput_withNSException_(NSString *message, OrgApacheLuceneStoreDataOutput *output, NSException *cause) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneIndexCorruptIndexException *create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataOutput_withNSException_(NSString *message, OrgApacheLuceneStoreDataOutput *output, NSException *cause);
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withNSString_(OrgApacheLuceneIndexCorruptIndexException *self, NSString *message, NSString *resourceDescription);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexCorruptIndexException *new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withNSString_(NSString *message, NSString *resourceDescription) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withNSString_withJavaLangThrowable_(OrgApacheLuceneIndexCorruptIndexException *self, NSString *message, NSString *resourceDescription, JavaLangThrowable *cause);
+FOUNDATION_EXPORT OrgApacheLuceneIndexCorruptIndexException *create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withNSString_(NSString *message, NSString *resourceDescription);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexCorruptIndexException *new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withNSString_withJavaLangThrowable_(NSString *message, NSString *resourceDescription, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT void OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withNSString_withNSException_(OrgApacheLuceneIndexCorruptIndexException *self, NSString *message, NSString *resourceDescription, NSException *cause);
+
+FOUNDATION_EXPORT OrgApacheLuceneIndexCorruptIndexException *new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withNSString_withNSException_(NSString *message, NSString *resourceDescription, NSException *cause) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneIndexCorruptIndexException *create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withNSString_withNSException_(NSString *message, NSString *resourceDescription, NSException *cause);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCorruptIndexException)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexCorruptIndexException_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexCorruptIndexException")

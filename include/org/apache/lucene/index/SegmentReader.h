@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexSegmentReader_INCLUDE_ALL")
-#if OrgApacheLuceneIndexSegmentReader_RESTRICT
-#define OrgApacheLuceneIndexSegmentReader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexSegmentReader")
+#ifdef RESTRICT_OrgApacheLuceneIndexSegmentReader
+#define INCLUDE_ALL_OrgApacheLuceneIndexSegmentReader 0
 #else
-#define OrgApacheLuceneIndexSegmentReader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexSegmentReader 1
 #endif
-#undef OrgApacheLuceneIndexSegmentReader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexSegmentReader
 
-#if !defined (_OrgApacheLuceneIndexSegmentReader_) && (OrgApacheLuceneIndexSegmentReader_INCLUDE_ALL || OrgApacheLuceneIndexSegmentReader_INCLUDE)
-#define _OrgApacheLuceneIndexSegmentReader_
+#if !defined (OrgApacheLuceneIndexSegmentReader_) && (INCLUDE_ALL_OrgApacheLuceneIndexSegmentReader || defined(INCLUDE_OrgApacheLuceneIndexSegmentReader))
+#define OrgApacheLuceneIndexSegmentReader_
 
-#define OrgApacheLuceneIndexCodecReader_RESTRICT 1
-#define OrgApacheLuceneIndexCodecReader_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexCodecReader 1
+#define INCLUDE_OrgApacheLuceneIndexCodecReader 1
 #include "org/apache/lucene/index/CodecReader.h"
 
 @class OrgApacheLuceneCodecsDocValuesProducer;
@@ -34,6 +34,12 @@
 @protocol OrgApacheLuceneIndexLeafReader_CoreClosedListener;
 @protocol OrgApacheLuceneUtilBits;
 
+/*!
+ @brief IndexReader implementation over a single segment.
+ <p>
+ Instances pointing to the same segment (but with different deletes, etc)
+ may share the same core data.
+ */
 @interface OrgApacheLuceneIndexSegmentReader : OrgApacheLuceneIndexCodecReader {
  @public
   OrgApacheLuceneIndexSegmentCoreReaders *core_;
@@ -44,11 +50,19 @@
 
 #pragma mark Public
 
+/*!
+ @brief Constructs a new SegmentReader with a new core.
+ @throws CorruptIndexException if the index is corrupt
+ @throws IOException if there is a low-level IO error
+ */
 - (instancetype)initWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)si
                             withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
 
 - (void)addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener;
 
+/*!
+ @brief Returns the directory this index resides in.
+ */
 - (OrgApacheLuceneStoreDirectory *)directory;
 
 - (id)getCombinedCoreAndDeletesKey;
@@ -67,8 +81,14 @@
 
 - (OrgApacheLuceneCodecsFieldsProducer *)getPostingsReader;
 
+/*!
+ @brief Return the SegmentInfoPerCommit of the segment this reader is reading.
+ */
 - (OrgApacheLuceneIndexSegmentCommitInfo *)getSegmentInfo;
 
+/*!
+ @brief Return the name of the segment this reader is reading.
+ */
 - (NSString *)getSegmentName;
 
 - (OrgApacheLuceneCodecsTermVectorsReader *)getTermVectorsReader;
@@ -87,9 +107,22 @@
 
 #pragma mark Package-Private
 
+/*!
+ @brief Create new SegmentReader sharing core from a previous
+ SegmentReader and loading new live docs from a new
+ deletes file.
+ Used by openIfChanged. 
+ */
 - (instancetype)initWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)si
                         withOrgApacheLuceneIndexSegmentReader:(OrgApacheLuceneIndexSegmentReader *)sr;
 
+/*!
+ @brief Create new SegmentReader sharing core from a previous
+ SegmentReader and using the provided in-memory
+ liveDocs.
+ Used by IndexWriter to provide a new NRT
+ reader 
+ */
 - (instancetype)initWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)si
                         withOrgApacheLuceneIndexSegmentReader:(OrgApacheLuceneIndexSegmentReader *)sr
                                   withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)liveDocs
@@ -108,16 +141,22 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLucene
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentReader *new_OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneStoreIOContext *context) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentReader *create_OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneStoreIOContext *context);
+
 FOUNDATION_EXPORT void OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneIndexSegmentReader_(OrgApacheLuceneIndexSegmentReader *self, OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneIndexSegmentReader *sr);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentReader *new_OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneIndexSegmentReader_(OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneIndexSegmentReader *sr) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentReader *create_OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneIndexSegmentReader_(OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneIndexSegmentReader *sr);
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneIndexSegmentReader_withOrgApacheLuceneUtilBits_withInt_(OrgApacheLuceneIndexSegmentReader *self, OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneIndexSegmentReader *sr, id<OrgApacheLuceneUtilBits> liveDocs, jint numDocs);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentReader *new_OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneIndexSegmentReader_withOrgApacheLuceneUtilBits_withInt_(OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneIndexSegmentReader *sr, id<OrgApacheLuceneUtilBits> liveDocs, jint numDocs) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentReader *create_OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneIndexSegmentReader_withOrgApacheLuceneUtilBits_withInt_(OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneIndexSegmentReader *sr, id<OrgApacheLuceneUtilBits> liveDocs, jint numDocs);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSegmentReader)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexSegmentReader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSegmentReader")

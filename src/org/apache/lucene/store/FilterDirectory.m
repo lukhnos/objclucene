@@ -87,7 +87,7 @@
     { "deleteFileWithNSString:", "deleteFile", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "fileLengthWithNSString:", "fileLength", "J", 0x1, "Ljava.io.IOException;", NULL },
     { "createOutputWithNSString:withOrgApacheLuceneStoreIOContext:", "createOutput", "Lorg.apache.lucene.store.IndexOutput;", 0x1, "Ljava.io.IOException;", NULL },
-    { "syncWithJavaUtilCollection:", "sync", "V", 0x1, "Ljava.io.IOException;", NULL },
+    { "syncWithJavaUtilCollection:", "sync", "V", 0x1, "Ljava.io.IOException;", "(Ljava/util/Collection<Ljava/lang/String;>;)V" },
     { "renameFileWithNSString:withNSString:", "renameFile", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "openInputWithNSString:withOrgApacheLuceneStoreIOContext:", "openInput", "Lorg.apache.lucene.store.IndexInput;", 0x1, "Ljava.io.IOException;", NULL },
     { "obtainLockWithNSString:", "obtainLock", "Lorg.apache.lucene.store.Lock;", 0x1, "Ljava.io.IOException;", NULL },
@@ -106,7 +106,7 @@
 OrgApacheLuceneStoreDirectory *OrgApacheLuceneStoreFilterDirectory_unwrapWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *dir) {
   OrgApacheLuceneStoreFilterDirectory_initialize();
   while ([dir isKindOfClass:[OrgApacheLuceneStoreFilterDirectory class]]) {
-    dir = ((OrgApacheLuceneStoreFilterDirectory *) nil_chk(((OrgApacheLuceneStoreFilterDirectory *) check_class_cast(dir, [OrgApacheLuceneStoreFilterDirectory class]))))->in_;
+    dir = ((OrgApacheLuceneStoreFilterDirectory *) nil_chk(((OrgApacheLuceneStoreFilterDirectory *) cast_chk(dir, [OrgApacheLuceneStoreFilterDirectory class]))))->in_;
   }
   return dir;
 }
@@ -117,9 +117,11 @@ void OrgApacheLuceneStoreFilterDirectory_initWithOrgApacheLuceneStoreDirectory_(
 }
 
 OrgApacheLuceneStoreFilterDirectory *new_OrgApacheLuceneStoreFilterDirectory_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *inArg) {
-  OrgApacheLuceneStoreFilterDirectory *self = [OrgApacheLuceneStoreFilterDirectory alloc];
-  OrgApacheLuceneStoreFilterDirectory_initWithOrgApacheLuceneStoreDirectory_(self, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreFilterDirectory, initWithOrgApacheLuceneStoreDirectory_, inArg)
+}
+
+OrgApacheLuceneStoreFilterDirectory *create_OrgApacheLuceneStoreFilterDirectory_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreFilterDirectory, initWithOrgApacheLuceneStoreDirectory_, inArg)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreFilterDirectory)

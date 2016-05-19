@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_RESTRICT
-#define OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter")
+#ifdef RESTRICT_OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter
+#define INCLUDE_ALL_OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter 0
 #else
-#define OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter 1
 #endif
-#undef OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter
 
-#if !defined (_OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_) && (OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_INCLUDE_ALL || OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_INCLUDE)
-#define _OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_
+#if !defined (OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_) && (INCLUDE_ALL_OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter || defined(INCLUDE_OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter))
+#define OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_
 
-#define OrgApacheLuceneCodecsPushPostingsWriterBase_RESTRICT 1
-#define OrgApacheLuceneCodecsPushPostingsWriterBase_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneCodecsPushPostingsWriterBase 1
+#define INCLUDE_OrgApacheLuceneCodecsPushPostingsWriterBase 1
 #include "org/apache/lucene/codecs/PushPostingsWriterBase.h"
 
 @class IOSLongArray;
@@ -30,14 +30,19 @@
 @class OrgApacheLuceneUtilBytesRef;
 @protocol OrgApacheLuceneUtilBits;
 
-#define OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_VERSION_START 1
-#define OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_VERSION_CURRENT 1
-
 @interface OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter : OrgApacheLuceneCodecsPushPostingsWriterBase {
  @public
   OrgApacheLuceneCodecsIdversionIDVersionTermState *lastState_;
   jint lastDocID_;
 }
+
++ (NSString *)TERMS_CODEC;
+
++ (jint)VERSION_START;
+
++ (jint)VERSION_CURRENT;
+
++ (OrgApacheLuceneCodecsIdversionIDVersionTermState *)emptyState;
 
 #pragma mark Public
 
@@ -58,6 +63,9 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)_
 
 - (void)finishDoc;
 
+/*!
+ @brief Called when we are done adding docs to this term
+ */
 - (void)finishTermWithOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)_state;
 
 - (void)init__WithOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)termsOut
@@ -78,22 +86,32 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter, lastState_, OrgApacheLuceneCodecsIdversionIDVersionTermState *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_TERMS_CODEC_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter, TERMS_CODEC_, NSString *)
+inline NSString *OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_get_TERMS_CODEC();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_TERMS_CODEC;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter, TERMS_CODEC, NSString *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter, VERSION_START, jint)
+inline jint OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_get_VERSION_START();
+#define OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_VERSION_START 1
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter, VERSION_START, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter, VERSION_CURRENT, jint)
+inline jint OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_get_VERSION_CURRENT();
+#define OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_VERSION_CURRENT 1
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter, VERSION_CURRENT, jint)
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsIdversionIDVersionTermState *OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_emptyState_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter, emptyState_, OrgApacheLuceneCodecsIdversionIDVersionTermState *)
+inline OrgApacheLuceneCodecsIdversionIDVersionTermState *OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_get_emptyState();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT OrgApacheLuceneCodecsIdversionIDVersionTermState *OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_emptyState;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter, emptyState, OrgApacheLuceneCodecsIdversionIDVersionTermState *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_initWithOrgApacheLuceneUtilBits_(OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter *self, id<OrgApacheLuceneUtilBits> liveDocs);
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter *new_OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_initWithOrgApacheLuceneUtilBits_(id<OrgApacheLuceneUtilBits> liveDocs) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter *create_OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_initWithOrgApacheLuceneUtilBits_(id<OrgApacheLuceneUtilBits> liveDocs);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter")

@@ -5,23 +5,23 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_) && (OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory))
+#define OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-#define OrgApacheLuceneAnalysisUtilResourceLoaderAware_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilResourceLoaderAware_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilResourceLoaderAware 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilResourceLoaderAware 1
 #include "org/apache/lucene/analysis/util/ResourceLoaderAware.h"
 
 @class IOSByteArray;
@@ -31,14 +31,36 @@
 @protocol JavaUtilMap;
 @protocol OrgApacheLuceneAnalysisUtilResourceLoader;
 
+/*!
+ @brief Factory for <code>WordDelimiterFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_wd" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+ &lt;filter class="solr.WordDelimiterFilterFactory" protected="protectedword.txt"
+ preserveOriginal="0" splitOnNumerics="1" splitOnCaseChange="1"
+ catenateWords="0" catenateNumbers="0" catenateAll="0"
+ generateWordParts="1" generateNumberParts="1" stemEnglishPossessive="1"
+ types="wdfftypes.txt" /&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilResourceLoaderAware > {
  @public
   IOSByteArray *typeTable_;
   IOSCharArray *out_;
 }
 
++ (NSString *)PROTECTED_TOKENS;
+
++ (NSString *)TYPES;
+
 #pragma mark Public
 
+/*!
+ @brief Creates a new WordDelimiterFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -52,18 +74,24 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactor
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory, typeTable_, IOSByteArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory, out_, IOSCharArray *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_PROTECTED_TOKENS_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory, PROTECTED_TOKENS_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_get_PROTECTED_TOKENS();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_PROTECTED_TOKENS;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory, PROTECTED_TOKENS, NSString *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_TYPES_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory, TYPES_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_get_TYPES();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_TYPES;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory, TYPES, NSString *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory *self, id<JavaUtilMap> args);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory *create_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory")

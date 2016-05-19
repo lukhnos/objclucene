@@ -5,21 +5,32 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_) && (OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_
+#if !defined (OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey))
+#define OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_
 
+/*!
+ @brief An instance of this class represents a key that is used to retrieve a value
+ from <code>AbstractQueryConfig</code>.
+ It also holds the value's type, which is
+ defined in the generic argument.
+ - seealso: AbstractQueryConfig
+ */
 @interface OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new instance.
+ @return a new instance
+ */
 + (OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey *)newInstance OBJC_METHOD_FAMILY_NONE;
 
 @end
@@ -32,4 +43,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreConfigConfigura
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey")

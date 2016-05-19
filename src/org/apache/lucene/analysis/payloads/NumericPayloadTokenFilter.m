@@ -81,16 +81,18 @@ void OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter_initWithOrgApacheL
   JreStrongAssign(&self->payloadAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_class_()]);
   JreStrongAssign(&self->typeAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesTypeAttribute_class_()]);
   if (typeMatch == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"typeMatch cannot be null") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"typeMatch cannot be null");
   }
   JreStrongAssignAndConsume(&self->thePayload_, new_OrgApacheLuceneUtilBytesRef_initWithByteArray_(OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeFloatWithFloat_(payload)));
   JreStrongAssign(&self->typeMatch_, typeMatch);
 }
 
 OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter *new_OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withFloat_withNSString_(OrgApacheLuceneAnalysisTokenStream *input, jfloat payload, NSString *typeMatch) {
-  OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter *self = [OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter alloc];
-  OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withFloat_withNSString_(self, input, payload, typeMatch);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_withFloat_withNSString_, input, payload, typeMatch)
+}
+
+OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter *create_OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withFloat_withNSString_(OrgApacheLuceneAnalysisTokenStream *input, jfloat payload, NSString *typeMatch) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_withFloat_withNSString_, input, payload, typeMatch)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter)

@@ -19,6 +19,12 @@
 
 - (jboolean)unpositioned;
 
+/*!
+ @brief Order the subSpans within the same document by using nextStartPosition on all subSpans
+ after the first as little as necessary.
+ Return true when the subSpans could be ordered in this way,
+ otherwise at least one is exhausted in the current doc.
+ */
 - (jboolean)stretchToOrder;
 
 + (jint)advancePositionWithOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)spans
@@ -108,7 +114,7 @@ __attribute__((unused)) static jint OrgApacheLuceneSearchSpansNearSpansOrdered_a
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSpansSpanNearQuery:withJavaUtilList:", "NearSpansOrdered", NULL, 0x1, "Ljava.io.IOException;", NULL },
+    { "initWithOrgApacheLuceneSearchSpansSpanNearQuery:withJavaUtilList:", "NearSpansOrdered", NULL, 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/search/spans/SpanNearQuery;Ljava/util/List<Lorg/apache/lucene/search/spans/Spans;>;)V" },
     { "twoPhaseCurrentDocMatches", NULL, "Z", 0x0, "Ljava.io.IOException;", NULL },
     { "unpositioned", NULL, "Z", 0x2, NULL, NULL },
     { "nextStartPosition", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
@@ -140,9 +146,11 @@ void OrgApacheLuceneSearchSpansNearSpansOrdered_initWithOrgApacheLuceneSearchSpa
 }
 
 OrgApacheLuceneSearchSpansNearSpansOrdered *new_OrgApacheLuceneSearchSpansNearSpansOrdered_initWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilList_(OrgApacheLuceneSearchSpansSpanNearQuery *query, id<JavaUtilList> subSpans) {
-  OrgApacheLuceneSearchSpansNearSpansOrdered *self = [OrgApacheLuceneSearchSpansNearSpansOrdered alloc];
-  OrgApacheLuceneSearchSpansNearSpansOrdered_initWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilList_(self, query, subSpans);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSpansNearSpansOrdered, initWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilList_, query, subSpans)
+}
+
+OrgApacheLuceneSearchSpansNearSpansOrdered *create_OrgApacheLuceneSearchSpansNearSpansOrdered_initWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilList_(OrgApacheLuceneSearchSpansSpanNearQuery *query, id<JavaUtilList> subSpans) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSpansNearSpansOrdered, initWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilList_, query, subSpans)
 }
 
 jboolean OrgApacheLuceneSearchSpansNearSpansOrdered_unpositioned(OrgApacheLuceneSearchSpansNearSpansOrdered *self) {
@@ -182,7 +190,7 @@ jboolean OrgApacheLuceneSearchSpansNearSpansOrdered_stretchToOrder(OrgApacheLuce
 jint OrgApacheLuceneSearchSpansNearSpansOrdered_advancePositionWithOrgApacheLuceneSearchSpansSpans_withInt_(OrgApacheLuceneSearchSpansSpans *spans, jint position) {
   OrgApacheLuceneSearchSpansNearSpansOrdered_initialize();
   if ([spans isKindOfClass:[OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans class]]) {
-    return [((OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans *) nil_chk(((OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans *) check_class_cast(spans, [OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans class])))) skipToPositionWithInt:position];
+    return [((OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans *) nil_chk(((OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans *) cast_chk(spans, [OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans class])))) skipToPositionWithInt:position];
   }
   while ([((OrgApacheLuceneSearchSpansSpans *) nil_chk(spans)) startPosition] < position) {
     [spans nextStartPosition];

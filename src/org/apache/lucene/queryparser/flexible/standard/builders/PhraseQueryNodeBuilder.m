@@ -27,13 +27,13 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneSearchQuery *)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode *phraseNode = (OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode *) check_class_cast(queryNode, [OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode class]);
-  OrgApacheLuceneSearchPhraseQuery_Builder *builder = [new_OrgApacheLuceneSearchPhraseQuery_Builder_init() autorelease];
+  OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode *phraseNode = (OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode *) cast_chk(queryNode, [OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode class]);
+  OrgApacheLuceneSearchPhraseQuery_Builder *builder = create_OrgApacheLuceneSearchPhraseQuery_Builder_init();
   id<JavaUtilList> children = [((OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode *) nil_chk(phraseNode)) getChildren];
   if (children != nil) {
     for (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> __strong child in children) {
-      OrgApacheLuceneSearchTermQuery *termQuery = (OrgApacheLuceneSearchTermQuery *) check_class_cast([((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(child)) getTagWithNSString:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder, QUERY_TREE_BUILDER_TAGID_)], [OrgApacheLuceneSearchTermQuery class]);
-      OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *termNode = (OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) check_class_cast(child, [OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode class]);
+      OrgApacheLuceneSearchTermQuery *termQuery = (OrgApacheLuceneSearchTermQuery *) cast_chk([((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(child)) getTagWithNSString:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder, QUERY_TREE_BUILDER_TAGID)], [OrgApacheLuceneSearchTermQuery class]);
+      OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *termNode = (OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) cast_chk(child, [OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode class]);
       [builder addWithOrgApacheLuceneIndexTerm:[((OrgApacheLuceneSearchTermQuery *) nil_chk(termQuery)) getTerm] withInt:[termNode getPositionIncrement]];
     }
   }
@@ -56,9 +56,11 @@ void OrgApacheLuceneQueryparserFlexibleStandardBuildersPhraseQueryNodeBuilder_in
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardBuildersPhraseQueryNodeBuilder *new_OrgApacheLuceneQueryparserFlexibleStandardBuildersPhraseQueryNodeBuilder_init() {
-  OrgApacheLuceneQueryparserFlexibleStandardBuildersPhraseQueryNodeBuilder *self = [OrgApacheLuceneQueryparserFlexibleStandardBuildersPhraseQueryNodeBuilder alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardBuildersPhraseQueryNodeBuilder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardBuildersPhraseQueryNodeBuilder, init)
+}
+
+OrgApacheLuceneQueryparserFlexibleStandardBuildersPhraseQueryNodeBuilder *create_OrgApacheLuceneQueryparserFlexibleStandardBuildersPhraseQueryNodeBuilder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardBuildersPhraseQueryNodeBuilder, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleStandardBuildersPhraseQueryNodeBuilder)

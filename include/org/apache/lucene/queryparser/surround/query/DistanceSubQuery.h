@@ -5,21 +5,31 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_RESTRICT
-#define OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery 0
 #else
-#define OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery 1
 #endif
-#undef OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery
 
-#if !defined (_OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_) && (OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_INCLUDE_ALL || OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_INCLUDE)
-#define _OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_
+#if !defined (OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery || defined(INCLUDE_OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery))
+#define OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_
 
 @class OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory;
 
+/*!
+ @brief Interface for queries that can be nested as subqueries
+ into a span near.
+ */
 @protocol OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery < NSObject, JavaObject >
 
+/*!
+ @brief When distanceSubQueryNotAllowed() returns non null, the reason why the subquery
+ is not allowed as a distance subquery is returned.
+ <br>When distanceSubQueryNotAllowed() returns null addSpanNearQueries() can be used
+ in the creation of the span near clause for the subquery.
+ */
 - (NSString *)distanceSubQueryNotAllowed;
 
 - (void)addSpanQueriesWithOrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory:(OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory *)sncf;
@@ -32,4 +42,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQueryDistanceSubQue
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery")

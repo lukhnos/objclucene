@@ -8,14 +8,6 @@
 #include "org/apache/lucene/analysis/id/IndonesianStemmer.h"
 #include "org/apache/lucene/analysis/util/StemmerUtil.h"
 
-#define OrgApacheLuceneAnalysisIdIndonesianStemmer_REMOVED_KE 1
-#define OrgApacheLuceneAnalysisIdIndonesianStemmer_REMOVED_PENG 2
-#define OrgApacheLuceneAnalysisIdIndonesianStemmer_REMOVED_DI 4
-#define OrgApacheLuceneAnalysisIdIndonesianStemmer_REMOVED_MENG 8
-#define OrgApacheLuceneAnalysisIdIndonesianStemmer_REMOVED_TER 16
-#define OrgApacheLuceneAnalysisIdIndonesianStemmer_REMOVED_BER 32
-#define OrgApacheLuceneAnalysisIdIndonesianStemmer_REMOVED_PE 64
-
 @interface OrgApacheLuceneAnalysisIdIndonesianStemmer () {
  @public
   jint numSyllables_;
@@ -44,19 +36,33 @@
 
 @end
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisIdIndonesianStemmer, REMOVED_KE, jint)
+inline jint OrgApacheLuceneAnalysisIdIndonesianStemmer_get_REMOVED_KE();
+#define OrgApacheLuceneAnalysisIdIndonesianStemmer_REMOVED_KE 1
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisIdIndonesianStemmer, REMOVED_KE, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisIdIndonesianStemmer, REMOVED_PENG, jint)
+inline jint OrgApacheLuceneAnalysisIdIndonesianStemmer_get_REMOVED_PENG();
+#define OrgApacheLuceneAnalysisIdIndonesianStemmer_REMOVED_PENG 2
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisIdIndonesianStemmer, REMOVED_PENG, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisIdIndonesianStemmer, REMOVED_DI, jint)
+inline jint OrgApacheLuceneAnalysisIdIndonesianStemmer_get_REMOVED_DI();
+#define OrgApacheLuceneAnalysisIdIndonesianStemmer_REMOVED_DI 4
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisIdIndonesianStemmer, REMOVED_DI, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisIdIndonesianStemmer, REMOVED_MENG, jint)
+inline jint OrgApacheLuceneAnalysisIdIndonesianStemmer_get_REMOVED_MENG();
+#define OrgApacheLuceneAnalysisIdIndonesianStemmer_REMOVED_MENG 8
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisIdIndonesianStemmer, REMOVED_MENG, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisIdIndonesianStemmer, REMOVED_TER, jint)
+inline jint OrgApacheLuceneAnalysisIdIndonesianStemmer_get_REMOVED_TER();
+#define OrgApacheLuceneAnalysisIdIndonesianStemmer_REMOVED_TER 16
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisIdIndonesianStemmer, REMOVED_TER, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisIdIndonesianStemmer, REMOVED_BER, jint)
+inline jint OrgApacheLuceneAnalysisIdIndonesianStemmer_get_REMOVED_BER();
+#define OrgApacheLuceneAnalysisIdIndonesianStemmer_REMOVED_BER 32
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisIdIndonesianStemmer, REMOVED_BER, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisIdIndonesianStemmer, REMOVED_PE, jint)
+inline jint OrgApacheLuceneAnalysisIdIndonesianStemmer_get_REMOVED_PE();
+#define OrgApacheLuceneAnalysisIdIndonesianStemmer_REMOVED_PE 64
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisIdIndonesianStemmer, REMOVED_PE, jint)
 
 __attribute__((unused)) static jint OrgApacheLuceneAnalysisIdIndonesianStemmer_stemDerivationalWithCharArray_withInt_(OrgApacheLuceneAnalysisIdIndonesianStemmer *self, IOSCharArray *text, jint length);
 
@@ -137,7 +143,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "removeFirstOrderPrefixWithCharArray:withInt:", "removeFirstOrderPrefix", "I", 0x2, NULL, NULL },
     { "removeSecondOrderPrefixWithCharArray:withInt:", "removeSecondOrderPrefix", "I", 0x2, NULL, NULL },
     { "removeSuffixWithCharArray:withInt:", "removeSuffix", "I", 0x2, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "IndonesianStemmer", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "numSyllables_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
@@ -212,7 +218,7 @@ jint OrgApacheLuceneAnalysisIdIndonesianStemmer_removeFirstOrderPrefixWithCharAr
   }
   if (OrgApacheLuceneAnalysisUtilStemmerUtil_startsWithWithCharArray_withInt_withNSString_(text, length, @"meny") && length > 4 && OrgApacheLuceneAnalysisIdIndonesianStemmer_isVowelWithChar_(self, IOSCharArray_Get(nil_chk(text), 4))) {
     self->flags_ |= OrgApacheLuceneAnalysisIdIndonesianStemmer_REMOVED_MENG;
-    *IOSCharArray_GetRef(text, 3) = 's';
+    *IOSCharArray_GetRef(nil_chk(text), 3) = 's';
     self->numSyllables_--;
     return OrgApacheLuceneAnalysisUtilStemmerUtil_deleteNWithCharArray_withInt_withInt_withInt_(text, 0, length, 3);
   }
@@ -238,7 +244,7 @@ jint OrgApacheLuceneAnalysisIdIndonesianStemmer_removeFirstOrderPrefixWithCharAr
   }
   if (OrgApacheLuceneAnalysisUtilStemmerUtil_startsWithWithCharArray_withInt_withNSString_(text, length, @"peny") && length > 4 && OrgApacheLuceneAnalysisIdIndonesianStemmer_isVowelWithChar_(self, IOSCharArray_Get(nil_chk(text), 4))) {
     self->flags_ |= OrgApacheLuceneAnalysisIdIndonesianStemmer_REMOVED_PENG;
-    *IOSCharArray_GetRef(text, 3) = 's';
+    *IOSCharArray_GetRef(nil_chk(text), 3) = 's';
     self->numSyllables_--;
     return OrgApacheLuceneAnalysisUtilStemmerUtil_deleteNWithCharArray_withInt_withInt_withInt_(text, 0, length, 3);
   }
@@ -249,7 +255,7 @@ jint OrgApacheLuceneAnalysisIdIndonesianStemmer_removeFirstOrderPrefixWithCharAr
   }
   if (OrgApacheLuceneAnalysisUtilStemmerUtil_startsWithWithCharArray_withInt_withNSString_(text, length, @"pen") && length > 3 && OrgApacheLuceneAnalysisIdIndonesianStemmer_isVowelWithChar_(self, IOSCharArray_Get(nil_chk(text), 3))) {
     self->flags_ |= OrgApacheLuceneAnalysisIdIndonesianStemmer_REMOVED_PENG;
-    *IOSCharArray_GetRef(text, 2) = 't';
+    *IOSCharArray_GetRef(nil_chk(text), 2) = 't';
     self->numSyllables_--;
     return OrgApacheLuceneAnalysisUtilStemmerUtil_deleteNWithCharArray_withInt_withInt_withInt_(text, 0, length, 2);
   }
@@ -334,9 +340,11 @@ void OrgApacheLuceneAnalysisIdIndonesianStemmer_init(OrgApacheLuceneAnalysisIdIn
 }
 
 OrgApacheLuceneAnalysisIdIndonesianStemmer *new_OrgApacheLuceneAnalysisIdIndonesianStemmer_init() {
-  OrgApacheLuceneAnalysisIdIndonesianStemmer *self = [OrgApacheLuceneAnalysisIdIndonesianStemmer alloc];
-  OrgApacheLuceneAnalysisIdIndonesianStemmer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisIdIndonesianStemmer, init)
+}
+
+OrgApacheLuceneAnalysisIdIndonesianStemmer *create_OrgApacheLuceneAnalysisIdIndonesianStemmer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisIdIndonesianStemmer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisIdIndonesianStemmer)

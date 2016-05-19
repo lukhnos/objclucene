@@ -44,7 +44,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "doSetNextReaderWithOrgApacheLuceneIndexLeafReaderContext:", "doSetNextReader", "V", 0x4, "Ljava.io.IOException;", NULL },
     { "setScorerWithOrgApacheLuceneSearchScorer:", "setScorer", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "collectWithInt:", "collect", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "SimpleCollector", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneSearchSimpleCollector = { 2, "SimpleCollector", "org.apache.lucene.search", NULL, 0x401, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSimpleCollector;

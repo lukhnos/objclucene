@@ -36,9 +36,13 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory, 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory, stemClass_, IOSClass *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory, protectedWords_, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
-NSString *OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory_PROTECTED_TOKENS_ = @"protected";
+NSString *OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory_PROTECTED_TOKENS = @"protected";
 
 @implementation OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory
+
++ (NSString *)PROTECTED_TOKENS {
+  return OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory_PROTECTED_TOKENS;
+}
 
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args {
   OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory_initWithJavaUtilMap_(self, args);
@@ -59,10 +63,10 @@ NSString *OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory_PROTECTED_T
     program = [((IOSClass *) nil_chk(stemClass_)) newInstance];
   }
   @catch (JavaLangException *e) {
-    @throw [new_JavaLangRuntimeException_initWithNSString_withJavaLangThrowable_(JreStrcat("$$$@", @"Error instantiating stemmer for language ", language_, @"from class ", stemClass_), e) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSString_withNSException_(JreStrcat("$$$@", @"Error instantiating stemmer for language ", language_, @"from class ", stemClass_), e);
   }
-  if (protectedWords_ != nil) input = [new_OrgApacheLuceneAnalysisMiscellaneousSetKeywordMarkerFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(input, protectedWords_) autorelease];
-  return [new_OrgApacheLuceneAnalysisSnowballSnowballFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgTartarusSnowballSnowballProgram_(input, program) autorelease];
+  if (protectedWords_ != nil) input = create_OrgApacheLuceneAnalysisMiscellaneousSetKeywordMarkerFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(input, protectedWords_);
+  return create_OrgApacheLuceneAnalysisSnowballSnowballFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgTartarusSnowballSnowballProgram_(input, program);
 }
 
 - (void)dealloc {
@@ -75,12 +79,12 @@ NSString *OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory_PROTECTED_T
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "SnowballPorterFilterFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "SnowballPorterFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "informWithOrgApacheLuceneAnalysisUtilResourceLoader:", "inform", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenFilter;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "PROTECTED_TOKENS_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory_PROTECTED_TOKENS_, NULL, .constantValue.asLong = 0 },
+    { "PROTECTED_TOKENS", "PROTECTED_TOKENS", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory_PROTECTED_TOKENS, NULL, .constantValue.asLong = 0 },
     { "language_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
     { "wordFiles_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
     { "stemClass_", NULL, 0x2, "Ljava.lang.Class;", NULL, "Ljava/lang/Class<+Lorg/tartarus/snowball/SnowballProgram;>;", .constantValue.asLong = 0 },
@@ -96,16 +100,18 @@ void OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory_initWithJavaUtil
   OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
   JreStrongAssign(&self->protectedWords_, nil);
   JreStrongAssign(&self->language_, [self getWithJavaUtilMap:args withNSString:@"language" withNSString:@"English"]);
-  JreStrongAssign(&self->wordFiles_, [self getWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory_PROTECTED_TOKENS_]);
+  JreStrongAssign(&self->wordFiles_, [self getWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory_PROTECTED_TOKENS]);
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory *new_OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory *self = [OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory alloc];
-  OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory *create_OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory)

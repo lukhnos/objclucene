@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSuggestDocumentContextSuggestField_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSuggestDocumentContextSuggestField_RESTRICT
-#define OrgApacheLuceneSearchSuggestDocumentContextSuggestField_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentContextSuggestField")
+#ifdef RESTRICT_OrgApacheLuceneSearchSuggestDocumentContextSuggestField
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentContextSuggestField 0
 #else
-#define OrgApacheLuceneSearchSuggestDocumentContextSuggestField_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentContextSuggestField 1
 #endif
-#undef OrgApacheLuceneSearchSuggestDocumentContextSuggestField_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSuggestDocumentContextSuggestField
 
-#if !defined (_OrgApacheLuceneSearchSuggestDocumentContextSuggestField_) && (OrgApacheLuceneSearchSuggestDocumentContextSuggestField_INCLUDE_ALL || OrgApacheLuceneSearchSuggestDocumentContextSuggestField_INCLUDE)
-#define _OrgApacheLuceneSearchSuggestDocumentContextSuggestField_
+#if !defined (OrgApacheLuceneSearchSuggestDocumentContextSuggestField_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentContextSuggestField || defined(INCLUDE_OrgApacheLuceneSearchSuggestDocumentContextSuggestField))
+#define OrgApacheLuceneSearchSuggestDocumentContextSuggestField_
 
-#define OrgApacheLuceneSearchSuggestDocumentSuggestField_RESTRICT 1
-#define OrgApacheLuceneSearchSuggestDocumentSuggestField_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSuggestDocumentSuggestField 1
+#define INCLUDE_OrgApacheLuceneSearchSuggestDocumentSuggestField 1
 #include "org/apache/lucene/search/suggest/document/SuggestField.h"
 
 @class IOSObjectArray;
@@ -25,13 +25,38 @@
 @class OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream;
 @protocol JavaLangIterable;
 
-#define OrgApacheLuceneSearchSuggestDocumentContextSuggestField_CONTEXT_SEPARATOR 29
-#define OrgApacheLuceneSearchSuggestDocumentContextSuggestField_TYPE 1
-
+/*!
+ @brief <code>SuggestField</code> which additionally takes in a set of
+ contexts.
+ Example usage of adding a suggestion with contexts is as follows:
+ <pre class="prettyprint">
+ document.add(
+ new ContextSuggestField(name, "suggestion", Arrays.asList("context1", "context2"),  4));
+ 
+@endcode
+ Use <code>ContextQuery</code> to boost and/or filter suggestions
+ at query-time. Use <code>PrefixCompletionQuery</code>, <code>RegexCompletionQuery</code>
+ or <code>FuzzyCompletionQuery</code> if context boost/filtering
+ are not needed.
+ */
 @interface OrgApacheLuceneSearchSuggestDocumentContextSuggestField : OrgApacheLuceneSearchSuggestDocumentSuggestField
+
++ (jint)CONTEXT_SEPARATOR;
+
++ (jbyte)TYPE;
 
 #pragma mark Public
 
+/*!
+ @brief Creates a context-enabled suggest field
+ @param name field name
+ @param value field value to get suggestion on
+ @param weight field weight
+ @param contexts associated contexts
+ @throws IllegalArgumentException if either the name or value is null,
+ if value is an empty string, if the weight is negative, if value or
+ contexts contains any reserved characters
+ */
 - (instancetype)initWithNSString:(NSString *)name
                     withNSString:(NSString *)value
                          withInt:(jint)weight
@@ -39,6 +64,10 @@
 
 #pragma mark Protected
 
+/*!
+ @brief Expert: Sub-classes can inject contexts at
+ index-time
+ */
 - (id<JavaLangIterable>)contexts;
 
 - (jbyte)type;
@@ -49,16 +78,25 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestDocumentContextSuggestField)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSuggestDocumentContextSuggestField, CONTEXT_SEPARATOR, jint)
+/*!
+ @brief Separator used between context value and the suggest field value
+ */
+inline jint OrgApacheLuceneSearchSuggestDocumentContextSuggestField_get_CONTEXT_SEPARATOR();
+#define OrgApacheLuceneSearchSuggestDocumentContextSuggestField_CONTEXT_SEPARATOR 29
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestDocumentContextSuggestField, CONTEXT_SEPARATOR, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSuggestDocumentContextSuggestField, TYPE, jbyte)
+inline jbyte OrgApacheLuceneSearchSuggestDocumentContextSuggestField_get_TYPE();
+#define OrgApacheLuceneSearchSuggestDocumentContextSuggestField_TYPE 1
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestDocumentContextSuggestField, TYPE, jbyte)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentContextSuggestField_initWithNSString_withNSString_withInt_withJavaLangCharSequenceArray_(OrgApacheLuceneSearchSuggestDocumentContextSuggestField *self, NSString *name, NSString *value, jint weight, IOSObjectArray *contexts);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentContextSuggestField *new_OrgApacheLuceneSearchSuggestDocumentContextSuggestField_initWithNSString_withNSString_withInt_withJavaLangCharSequenceArray_(NSString *name, NSString *value, jint weight, IOSObjectArray *contexts) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentContextSuggestField *create_OrgApacheLuceneSearchSuggestDocumentContextSuggestField_initWithNSString_withNSString_withInt_withJavaLangCharSequenceArray_(NSString *name, NSString *value, jint weight, IOSObjectArray *contexts);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentContextSuggestField)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSuggestDocumentContextSuggestField_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentContextSuggestField")

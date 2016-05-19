@@ -5,28 +5,41 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter_RESTRICT
-#define OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter 0
 #else
-#define OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter
 
-#if !defined (_OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter_) && (OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter_
+#if !defined (OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter))
+#define OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter_
 
-#define OrgApacheLuceneAnalysisUtilFilteringTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilFilteringTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilFilteringTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilFilteringTokenFilter 1
 #include "org/apache/lucene/analysis/util/FilteringTokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 @class OrgApacheLuceneAnalysisUtilCharArraySet;
 
+/*!
+ @brief A TokenFilter that only keeps tokens with text contained in the
+ required words.
+ This filter behaves like the inverse of StopFilter.
+ @since solr 1.3
+ */
 @interface OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter : OrgApacheLuceneAnalysisUtilFilteringTokenFilter
 
 #pragma mark Public
 
+/*!
+ @brief Create a new <code>KeepWordFilter</code>.
+ <p><b>NOTE</b>: The words set passed to this constructor will be directly
+ used by this filter and should not be modified.
+ @param inArg      the <code>TokenStream</code> to consume
+ @param words   the words to keep
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
                withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)words;
 
@@ -40,8 +53,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter_initWi
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter *new_OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisTokenStream *inArg, OrgApacheLuceneAnalysisUtilCharArraySet *words) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter *create_OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisTokenStream *inArg, OrgApacheLuceneAnalysisUtilCharArraySet *words);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter")

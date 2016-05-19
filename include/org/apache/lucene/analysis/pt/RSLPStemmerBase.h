@@ -5,26 +5,72 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisPtRSLPStemmerBase_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisPtRSLPStemmerBase_RESTRICT
-#define OrgApacheLuceneAnalysisPtRSLPStemmerBase_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPtRSLPStemmerBase")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisPtRSLPStemmerBase
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPtRSLPStemmerBase 0
 #else
-#define OrgApacheLuceneAnalysisPtRSLPStemmerBase_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPtRSLPStemmerBase 1
 #endif
-#undef OrgApacheLuceneAnalysisPtRSLPStemmerBase_RESTRICT
-#if OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions_INCLUDE
-#define OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule_INCLUDE 1
+#undef RESTRICT_OrgApacheLuceneAnalysisPtRSLPStemmerBase
+#ifdef INCLUDE_OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions
+#define INCLUDE_OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule 1
 #endif
-#if OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions_INCLUDE
-#define OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule_INCLUDE 1
+#ifdef INCLUDE_OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions
+#define INCLUDE_OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule 1
 #endif
 
-#if !defined (_OrgApacheLuceneAnalysisPtRSLPStemmerBase_) && (OrgApacheLuceneAnalysisPtRSLPStemmerBase_INCLUDE_ALL || OrgApacheLuceneAnalysisPtRSLPStemmerBase_INCLUDE)
-#define _OrgApacheLuceneAnalysisPtRSLPStemmerBase_
+#if !defined (OrgApacheLuceneAnalysisPtRSLPStemmerBase_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPtRSLPStemmerBase || defined(INCLUDE_OrgApacheLuceneAnalysisPtRSLPStemmerBase))
+#define OrgApacheLuceneAnalysisPtRSLPStemmerBase_
 
 @class IOSClass;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Base class for stemmers that use a set of RSLP-like stemming steps.
+ <p>
+ RSLP (Removedor de Sufixos da Lingua Portuguesa) is an algorithm designed
+ originally for stemming the Portuguese language, described in the paper
+ <i>A Stemming Algorithm for the Portuguese Language</i>, Orengo et. al.
+ <p>
+ Since this time a plural-only modification (RSLP-S) as well as a modification
+ for the Galician language have been implemented. This class parses a configuration
+ file that describes <code>Step</code>s, where each Step contains a set of <code>Rule</code>s.
+ <p>
+ The general rule format is: 
+ <blockquote>{ "suffix", N, "replacement", { "exception1", "exception2", ...}}</blockquote>
+ where:
+ <ul>
+ <li><code>suffix</code> is the suffix to be removed (such as "inho").
+ <li><code>N</code> is the min stem size, where stem is defined as the candidate stem 
+ after removing the suffix (but before appending the replacement!)
+ <li><code>replacement</code> is an optimal string to append after removing the suffix.
+ This can be the empty string.
+ <li><code>exceptions</code> is an optional list of exceptions, patterns that should 
+ not be stemmed. These patterns can be specified as whole word or suffix (ends-with) 
+ patterns, depending upon the exceptions format flag in the step header.
+ </ul>
+ <p>
+ A step is an ordered list of rules, with a structure in this format:
+ <blockquote>{ "name", N, B, { "cond1", "cond2", ... }
+ ... rules ... };
+ </blockquote>
+ where:
+ <ul>
+ <li><code>name</code> is a name for the step (such as "Plural").
+ <li><code>N</code> is the min word size. Words that are less than this length bypass
+ the step completely, as an optimization. Note: N can be zero, in this case this 
+ implementation will automatically calculate the appropriate value from the underlying 
+ rules.
+ <li><code>B</code> is a "boolean" flag specifying how exceptions in the rules are matched.
+ A value of 1 indicates whole-word pattern matching, a value of 0 indicates that 
+ exceptions are actually suffixes and should be matched with ends-with.
+ <li><code>conds</code> are an optional list of conditions to enter the step at all. If
+ the list is non-empty, then a word must end with one of these conditions or it will
+ bypass the step completely as an optimization.
+ </ul>
+ <p>
+ - seealso: <a href="http://www.inf.ufrgs.br/~viviane/rslp/index.htm">RSLP description</a>
+ */
 @interface OrgApacheLuceneAnalysisPtRSLPStemmerBase : NSObject
 
 #pragma mark Public
@@ -33,6 +79,10 @@
 
 #pragma mark Protected
 
+/*!
+ @brief Parse a resource file into an RSLP stemmer description.
+ @return a Map containing the named Steps in this description.
+ */
 + (id<JavaUtilMap>)parseWithIOSClass:(IOSClass *)clazz
                         withNSString:(NSString *)resource;
 
@@ -48,11 +98,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPtRSLPStemmerBase)
 
 #endif
 
-#if !defined (_OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule_) && (OrgApacheLuceneAnalysisPtRSLPStemmerBase_INCLUDE_ALL || OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule_INCLUDE)
-#define _OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule_
+#if !defined (OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPtRSLPStemmerBase || defined(INCLUDE_OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule))
+#define OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule_
 
 @class IOSCharArray;
 
+/*!
+ @brief A basic rule, with no exceptions.
+ */
 @interface OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule : NSObject {
  @public
   IOSCharArray *suffix_;
@@ -62,13 +115,25 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPtRSLPStemmerBase)
 
 #pragma mark Public
 
+/*!
+ @brief Create a rule.
+ @param suffix suffix to remove
+ @param min minimum stem length
+ @param replacement replacement string
+ */
 - (instancetype)initWithNSString:(NSString *)suffix
                          withInt:(jint)min
                     withNSString:(NSString *)replacement;
 
+/*!
+ @return true if the word matches this rule.
+ */
 - (jboolean)matchesWithCharArray:(IOSCharArray *)s
                          withInt:(jint)len;
 
+/*!
+ @return new valid length of the string after firing this rule.
+ */
 - (jint)replaceWithCharArray:(IOSCharArray *)s
                      withInt:(jint)len;
 
@@ -83,17 +148,22 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule_initWithNSS
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule *new_OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule_initWithNSString_withInt_withNSString_(NSString *suffix, jint min, NSString *replacement) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule *create_OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule_initWithNSString_withInt_withNSString_(NSString *suffix, jint min, NSString *replacement);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule)
 
 #endif
 
-#if !defined (_OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions_) && (OrgApacheLuceneAnalysisPtRSLPStemmerBase_INCLUDE_ALL || OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions_INCLUDE)
-#define _OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions_
+#if !defined (OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPtRSLPStemmerBase || defined(INCLUDE_OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions))
+#define OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions_
 
 @class IOSCharArray;
 @class IOSObjectArray;
 @class OrgApacheLuceneAnalysisUtilCharArraySet;
 
+/*!
+ @brief A rule with a set of whole-word exceptions.
+ */
 @interface OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions : OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule {
  @public
   OrgApacheLuceneAnalysisUtilCharArraySet *exceptions_;
@@ -119,16 +189,21 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExcep
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions *new_OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions_initWithNSString_withInt_withNSString_withNSStringArray_(NSString *suffix, jint min, NSString *replacement, IOSObjectArray *exceptions) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions *create_OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions_initWithNSString_withInt_withNSString_withNSStringArray_(NSString *suffix, jint min, NSString *replacement, IOSObjectArray *exceptions);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions)
 
 #endif
 
-#if !defined (_OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions_) && (OrgApacheLuceneAnalysisPtRSLPStemmerBase_INCLUDE_ALL || OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions_INCLUDE)
-#define _OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions_
+#if !defined (OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPtRSLPStemmerBase || defined(INCLUDE_OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions))
+#define OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions_
 
 @class IOSCharArray;
 @class IOSObjectArray;
 
+/*!
+ @brief A rule with a set of exceptional suffixes.
+ */
 @interface OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions : OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule {
  @public
   IOSObjectArray *exceptions_;
@@ -154,16 +229,21 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixEx
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions *new_OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions_initWithNSString_withInt_withNSString_withNSStringArray_(NSString *suffix, jint min, NSString *replacement, IOSObjectArray *exceptions) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions *create_OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions_initWithNSString_withInt_withNSString_withNSStringArray_(NSString *suffix, jint min, NSString *replacement, IOSObjectArray *exceptions);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions)
 
 #endif
 
-#if !defined (_OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step_) && (OrgApacheLuceneAnalysisPtRSLPStemmerBase_INCLUDE_ALL || OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step_INCLUDE)
-#define _OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step_
+#if !defined (OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPtRSLPStemmerBase || defined(INCLUDE_OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step))
+#define OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step_
 
 @class IOSCharArray;
 @class IOSObjectArray;
 
+/*!
+ @brief A step containing a list of rules.
+ */
 @interface OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step : NSObject {
  @public
   NSString *name_;
@@ -174,11 +254,21 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuff
 
 #pragma mark Public
 
+/*!
+ @brief Create a new step
+ @param name Step's name.
+ @param rules an ordered list of rules.
+ @param min minimum word size. if this is 0 it is automatically calculated.
+ @param suffixes optional list of conditional suffixes. may be null.
+ */
 - (instancetype)initWithNSString:(NSString *)name
 withOrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleArray:(IOSObjectArray *)rules
                          withInt:(jint)min
                withNSStringArray:(IOSObjectArray *)suffixes;
 
+/*!
+ @return new valid length of the string after applying the entire step.
+ */
 - (jint)applyWithCharArray:(IOSCharArray *)s
                    withInt:(jint)len;
 
@@ -194,8 +284,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step_initWithNSS
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *new_OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step_initWithNSString_withOrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleArray_withInt_withNSStringArray_(NSString *name, IOSObjectArray *rules, jint min, IOSObjectArray *suffixes) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *create_OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step_initWithNSString_withOrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleArray_withInt_withNSStringArray_(NSString *name, IOSObjectArray *rules, jint min, IOSObjectArray *suffixes);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisPtRSLPStemmerBase_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPtRSLPStemmerBase")

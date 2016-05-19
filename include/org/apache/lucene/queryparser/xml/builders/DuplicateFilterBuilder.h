@@ -5,24 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserXmlBuildersDuplicateFilterBuilder_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserXmlBuildersDuplicateFilterBuilder_RESTRICT
-#define OrgApacheLuceneQueryparserXmlBuildersDuplicateFilterBuilder_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersDuplicateFilterBuilder")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersDuplicateFilterBuilder
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersDuplicateFilterBuilder 0
 #else
-#define OrgApacheLuceneQueryparserXmlBuildersDuplicateFilterBuilder_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersDuplicateFilterBuilder 1
 #endif
-#undef OrgApacheLuceneQueryparserXmlBuildersDuplicateFilterBuilder_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersDuplicateFilterBuilder
 
-#if !defined (_OrgApacheLuceneQueryparserXmlBuildersDuplicateFilterBuilder_) && (OrgApacheLuceneQueryparserXmlBuildersDuplicateFilterBuilder_INCLUDE_ALL || OrgApacheLuceneQueryparserXmlBuildersDuplicateFilterBuilder_INCLUDE)
-#define _OrgApacheLuceneQueryparserXmlBuildersDuplicateFilterBuilder_
+#if !defined (OrgApacheLuceneQueryparserXmlBuildersDuplicateFilterBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersDuplicateFilterBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserXmlBuildersDuplicateFilterBuilder))
+#define OrgApacheLuceneQueryparserXmlBuildersDuplicateFilterBuilder_
 
-#define OrgApacheLuceneQueryparserXmlFilterBuilder_RESTRICT 1
-#define OrgApacheLuceneQueryparserXmlFilterBuilder_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserXmlFilterBuilder 1
+#define INCLUDE_OrgApacheLuceneQueryparserXmlFilterBuilder 1
 #include "org/apache/lucene/queryparser/xml/FilterBuilder.h"
 
 @class OrgApacheLuceneSearchFilter;
 @protocol OrgW3cDomElement;
 
+/*!
+ @brief Builder for <code>DuplicateFilter</code>
+ */
 @interface OrgApacheLuceneQueryparserXmlBuildersDuplicateFilterBuilder : NSObject < OrgApacheLuceneQueryparserXmlFilterBuilder >
 
 #pragma mark Public
@@ -39,8 +42,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersDuplicateFilterBuild
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersDuplicateFilterBuilder *new_OrgApacheLuceneQueryparserXmlBuildersDuplicateFilterBuilder_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersDuplicateFilterBuilder *create_OrgApacheLuceneQueryparserXmlBuildersDuplicateFilterBuilder_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersDuplicateFilterBuilder)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserXmlBuildersDuplicateFilterBuilder_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersDuplicateFilterBuilder")

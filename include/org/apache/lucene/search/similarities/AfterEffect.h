@@ -5,35 +5,60 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSimilaritiesAfterEffect_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSimilaritiesAfterEffect_RESTRICT
-#define OrgApacheLuceneSearchSimilaritiesAfterEffect_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesAfterEffect")
+#ifdef RESTRICT_OrgApacheLuceneSearchSimilaritiesAfterEffect
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesAfterEffect 0
 #else
-#define OrgApacheLuceneSearchSimilaritiesAfterEffect_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesAfterEffect 1
 #endif
-#undef OrgApacheLuceneSearchSimilaritiesAfterEffect_RESTRICT
-#if OrgApacheLuceneSearchSimilaritiesAfterEffect_NoAfterEffect_INCLUDE
-#define OrgApacheLuceneSearchSimilaritiesAfterEffect_INCLUDE 1
+#undef RESTRICT_OrgApacheLuceneSearchSimilaritiesAfterEffect
+#ifdef INCLUDE_OrgApacheLuceneSearchSimilaritiesAfterEffect_NoAfterEffect
+#define INCLUDE_OrgApacheLuceneSearchSimilaritiesAfterEffect 1
 #endif
 
-#if !defined (_OrgApacheLuceneSearchSimilaritiesAfterEffect_) && (OrgApacheLuceneSearchSimilaritiesAfterEffect_INCLUDE_ALL || OrgApacheLuceneSearchSimilaritiesAfterEffect_INCLUDE)
-#define _OrgApacheLuceneSearchSimilaritiesAfterEffect_
+#if !defined (OrgApacheLuceneSearchSimilaritiesAfterEffect_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesAfterEffect || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesAfterEffect))
+#define OrgApacheLuceneSearchSimilaritiesAfterEffect_
 
 @class OrgApacheLuceneSearchExplanation;
 @class OrgApacheLuceneSearchSimilaritiesBasicStats;
 
+/*!
+ @brief This class acts as the base class for the implementations of the <em>first
+ normalization of the informative content</em> in the DFR framework.
+ This
+ component is also called the <em>after effect</em> and is defined by the
+ formula <em>Inf<sub>2</sub> = 1 - Prob<sub>2</sub></em>, where
+ <em>Prob<sub>2</sub></em> measures the <em>information gain</em>.
+ - seealso: DFRSimilarity
+ */
 @interface OrgApacheLuceneSearchSimilaritiesAfterEffect : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ (For invocation by subclass 
+ constructors, typically implicit.)
+ */
 - (instancetype)init;
 
+/*!
+ @brief Returns an explanation for the score.
+ */
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
                                                                                    withFloat:(jfloat)tfn;
 
+/*!
+ @brief Returns the aftereffect score.
+ */
 - (jfloat)scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
                                                      withFloat:(jfloat)tfn;
 
+/*!
+ @brief Subclasses must override this method to return the code of the
+ after effect formula.
+ Refer to the original paper for the list. 
+ */
 - (NSString *)description;
 
 @end
@@ -46,16 +71,22 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesAfterEffect)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchSimilaritiesAfterEffect_NoAfterEffect_) && (OrgApacheLuceneSearchSimilaritiesAfterEffect_INCLUDE_ALL || OrgApacheLuceneSearchSimilaritiesAfterEffect_NoAfterEffect_INCLUDE)
-#define _OrgApacheLuceneSearchSimilaritiesAfterEffect_NoAfterEffect_
+#if !defined (OrgApacheLuceneSearchSimilaritiesAfterEffect_NoAfterEffect_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesAfterEffect || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesAfterEffect_NoAfterEffect))
+#define OrgApacheLuceneSearchSimilaritiesAfterEffect_NoAfterEffect_
 
 @class OrgApacheLuceneSearchExplanation;
 @class OrgApacheLuceneSearchSimilaritiesBasicStats;
 
+/*!
+ @brief Implementation used when there is no aftereffect.
+ */
 @interface OrgApacheLuceneSearchSimilaritiesAfterEffect_NoAfterEffect : OrgApacheLuceneSearchSimilaritiesAfterEffect
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor: parameter-free
+ */
 - (instancetype)init;
 
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
@@ -74,8 +105,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesAfterEffect_NoAfterEffec
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesAfterEffect_NoAfterEffect *new_OrgApacheLuceneSearchSimilaritiesAfterEffect_NoAfterEffect_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesAfterEffect_NoAfterEffect *create_OrgApacheLuceneSearchSimilaritiesAfterEffect_NoAfterEffect_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesAfterEffect_NoAfterEffect)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSimilaritiesAfterEffect_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesAfterEffect")

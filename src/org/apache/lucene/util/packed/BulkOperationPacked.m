@@ -55,8 +55,7 @@
   for (jint i = 0; i < longValueCount_ * iterations; ++i) {
     bitsLeft -= bitsPerValue_;
     if (bitsLeft < 0) {
-      jint unseq$1 = blocksOffset++;
-      *IOSLongArray_GetRef(nil_chk(values), valuesOffset++) = (JreLShift64((IOSLongArray_Get(nil_chk(blocks), unseq$1) & ((JreLShift64(1LL, (bitsPerValue_ + bitsLeft))) - 1)), -bitsLeft)) | (JreURShift64(IOSLongArray_Get(blocks, blocksOffset), (64 + bitsLeft)));
+      *IOSLongArray_GetRef(nil_chk(values), valuesOffset++) = (JreLShift64((IOSLongArray_Get(nil_chk(blocks), blocksOffset++) & ((JreLShift64(1LL, (bitsPerValue_ + bitsLeft))) - 1)), -bitsLeft)) | (JreURShift64(IOSLongArray_Get(blocks, blocksOffset), (64 + bitsLeft)));
       bitsLeft += 64;
     }
     else {
@@ -98,14 +97,13 @@
                     withInt:(jint)valuesOffset
                     withInt:(jint)iterations {
   if (bitsPerValue_ > 32) {
-    @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(JreStrcat("$I$", @"Cannot decode ", bitsPerValue_, @"-bits values into an int[]")) autorelease];
+    @throw create_JavaLangUnsupportedOperationException_initWithNSString_(JreStrcat("$I$", @"Cannot decode ", bitsPerValue_, @"-bits values into an int[]"));
   }
   jint bitsLeft = 64;
   for (jint i = 0; i < longValueCount_ * iterations; ++i) {
     bitsLeft -= bitsPerValue_;
     if (bitsLeft < 0) {
-      jint unseq$1 = blocksOffset++;
-      *IOSIntArray_GetRef(nil_chk(values), valuesOffset++) = (jint) ((JreLShift64((IOSLongArray_Get(nil_chk(blocks), unseq$1) & ((JreLShift64(1LL, (bitsPerValue_ + bitsLeft))) - 1)), -bitsLeft)) | (JreURShift64(IOSLongArray_Get(blocks, blocksOffset), (64 + bitsLeft))));
+      *IOSIntArray_GetRef(nil_chk(values), valuesOffset++) = (jint) ((JreLShift64((IOSLongArray_Get(nil_chk(blocks), blocksOffset++) & ((JreLShift64(1LL, (bitsPerValue_ + bitsLeft))) - 1)), -bitsLeft)) | (JreURShift64(IOSLongArray_Get(blocks, blocksOffset), (64 + bitsLeft))));
       bitsLeft += 64;
     }
     else {
@@ -311,9 +309,11 @@ void OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(OrgApacheLuceneUt
 }
 
 OrgApacheLuceneUtilPackedBulkOperationPacked *new_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(jint bitsPerValue) {
-  OrgApacheLuceneUtilPackedBulkOperationPacked *self = [OrgApacheLuceneUtilPackedBulkOperationPacked alloc];
-  OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(self, bitsPerValue);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedBulkOperationPacked, initWithInt_, bitsPerValue)
+}
+
+OrgApacheLuceneUtilPackedBulkOperationPacked *create_OrgApacheLuceneUtilPackedBulkOperationPacked_initWithInt_(jint bitsPerValue) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedBulkOperationPacked, initWithInt_, bitsPerValue)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedBulkOperationPacked)

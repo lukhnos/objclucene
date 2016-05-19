@@ -5,23 +5,23 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSuggestFstExternalRefSorter_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSuggestFstExternalRefSorter_RESTRICT
-#define OrgApacheLuceneSearchSuggestFstExternalRefSorter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestFstExternalRefSorter")
+#ifdef RESTRICT_OrgApacheLuceneSearchSuggestFstExternalRefSorter
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestFstExternalRefSorter 0
 #else
-#define OrgApacheLuceneSearchSuggestFstExternalRefSorter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestFstExternalRefSorter 1
 #endif
-#undef OrgApacheLuceneSearchSuggestFstExternalRefSorter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSuggestFstExternalRefSorter
 
-#if !defined (_OrgApacheLuceneSearchSuggestFstExternalRefSorter_) && (OrgApacheLuceneSearchSuggestFstExternalRefSorter_INCLUDE_ALL || OrgApacheLuceneSearchSuggestFstExternalRefSorter_INCLUDE)
-#define _OrgApacheLuceneSearchSuggestFstExternalRefSorter_
+#if !defined (OrgApacheLuceneSearchSuggestFstExternalRefSorter_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestFstExternalRefSorter || defined(INCLUDE_OrgApacheLuceneSearchSuggestFstExternalRefSorter))
+#define OrgApacheLuceneSearchSuggestFstExternalRefSorter_
 
-#define OrgApacheLuceneSearchSuggestFstBytesRefSorter_RESTRICT 1
-#define OrgApacheLuceneSearchSuggestFstBytesRefSorter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSuggestFstBytesRefSorter 1
+#define INCLUDE_OrgApacheLuceneSearchSuggestFstBytesRefSorter 1
 #include "org/apache/lucene/search/suggest/fst/BytesRefSorter.h"
 
-#define JavaIoCloseable_RESTRICT 1
-#define JavaIoCloseable_INCLUDE 1
+#define RESTRICT_JavaIoCloseable 1
+#define INCLUDE_JavaIoCloseable 1
 #include "java/io/Closeable.h"
 
 @class OrgApacheLuceneUtilBytesRef;
@@ -29,14 +29,23 @@
 @protocol JavaUtilComparator;
 @protocol OrgApacheLuceneUtilBytesRefIterator;
 
+/*!
+ @brief Builds and iterates over sequences stored on disk.
+ */
 @interface OrgApacheLuceneSearchSuggestFstExternalRefSorter : NSObject < OrgApacheLuceneSearchSuggestFstBytesRefSorter, JavaIoCloseable >
 
 #pragma mark Public
 
+/*!
+ @brief Will buffer all sequences to a temporary file and then sort (all on-disk).
+ */
 - (instancetype)initWithOrgApacheLuceneUtilOfflineSorter:(OrgApacheLuceneUtilOfflineSorter *)sort;
 
 - (void)addWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)utf8;
 
+/*!
+ @brief Removes any written temporary files.
+ */
 - (void)close;
 
 - (id<JavaUtilComparator>)getComparator;
@@ -51,21 +60,26 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestFstExternalRefSorter_initWith
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstExternalRefSorter *new_OrgApacheLuceneSearchSuggestFstExternalRefSorter_initWithOrgApacheLuceneUtilOfflineSorter_(OrgApacheLuceneUtilOfflineSorter *sort) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstExternalRefSorter *create_OrgApacheLuceneSearchSuggestFstExternalRefSorter_initWithOrgApacheLuceneUtilOfflineSorter_(OrgApacheLuceneUtilOfflineSorter *sort);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestFstExternalRefSorter)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator_) && (OrgApacheLuceneSearchSuggestFstExternalRefSorter_INCLUDE_ALL || OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator_INCLUDE)
-#define _OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator_
+#if !defined (OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestFstExternalRefSorter || defined(INCLUDE_OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator))
+#define OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator_
 
-#define OrgApacheLuceneUtilBytesRefIterator_RESTRICT 1
-#define OrgApacheLuceneUtilBytesRefIterator_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilBytesRefIterator 1
+#define INCLUDE_OrgApacheLuceneUtilBytesRefIterator 1
 #include "org/apache/lucene/util/BytesRefIterator.h"
 
 @class OrgApacheLuceneSearchSuggestFstExternalRefSorter;
 @class OrgApacheLuceneUtilBytesRef;
 @class OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader;
 
+/*!
+ @brief Iterate over byte refs in a file.
+ */
 @interface OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator : NSObject < OrgApacheLuceneUtilBytesRefIterator >
 
 #pragma mark Public
@@ -83,8 +97,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequ
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator *new_OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator_initWithOrgApacheLuceneSearchSuggestFstExternalRefSorter_withOrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_(OrgApacheLuceneSearchSuggestFstExternalRefSorter *outer$, OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *reader) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator *create_OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator_initWithOrgApacheLuceneSearchSuggestFstExternalRefSorter_withOrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_(OrgApacheLuceneSearchSuggestFstExternalRefSorter *outer$, OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *reader);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSuggestFstExternalRefSorter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestFstExternalRefSorter")

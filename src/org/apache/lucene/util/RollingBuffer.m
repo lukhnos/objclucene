@@ -74,13 +74,13 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (id)getWithInt:(jint)pos {
   while (pos >= nextPos_) {
     if (count_ == ((IOSObjectArray *) nil_chk(buffer_))->size_) {
-      IOSObjectArray *newBuffer = (IOSObjectArray *) check_class_cast([IOSObjectArray arrayWithLength:OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(1 + count_, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_)) type:OrgApacheLuceneUtilRollingBuffer_Resettable_class_()], [IOSObjectArray class]);
-      JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(buffer_, nextWrite_, newBuffer, 0, buffer_->size_ - nextWrite_);
-      JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(buffer_, 0, newBuffer, buffer_->size_ - nextWrite_, nextWrite_);
-      for (jint i = buffer_->size_; i < newBuffer->size_; i++) {
+      IOSObjectArray *newBuffer = [IOSObjectArray arrayWithLength:OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(1 + count_, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF)) type:OrgApacheLuceneUtilRollingBuffer_Resettable_class_()];
+      JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(buffer_, nextWrite_, newBuffer, 0, ((IOSObjectArray *) nil_chk(buffer_))->size_ - nextWrite_);
+      JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(buffer_, 0, newBuffer, ((IOSObjectArray *) nil_chk(buffer_))->size_ - nextWrite_, nextWrite_);
+      for (jint i = ((IOSObjectArray *) nil_chk(buffer_))->size_; i < newBuffer->size_; i++) {
         IOSObjectArray_Set(newBuffer, i, [self newInstance]);
       }
-      nextWrite_ = buffer_->size_;
+      nextWrite_ = ((IOSObjectArray *) nil_chk(buffer_))->size_;
       JreStrongAssign(&buffer_, newBuffer);
     }
     if (nextWrite_ == buffer_->size_) {
@@ -148,7 +148,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 void OrgApacheLuceneUtilRollingBuffer_init(OrgApacheLuceneUtilRollingBuffer *self) {
   NSObject_init(self);
-  JreStrongAssign(&self->buffer_, (IOSObjectArray *) check_class_cast([IOSObjectArray arrayWithLength:8 type:OrgApacheLuceneUtilRollingBuffer_Resettable_class_()], [IOSObjectArray class]));
+  JreStrongAssign(&self->buffer_, [IOSObjectArray arrayWithLength:8 type:OrgApacheLuceneUtilRollingBuffer_Resettable_class_()]);
   for (jint idx = 0; idx < ((IOSObjectArray *) nil_chk(self->buffer_))->size_; idx++) {
     IOSObjectArray_Set(self->buffer_, idx, [self newInstance]);
   }

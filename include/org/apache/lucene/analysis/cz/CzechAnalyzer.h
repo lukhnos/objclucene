@@ -5,47 +5,92 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCzCzechAnalyzer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCzCzechAnalyzer_RESTRICT
-#define OrgApacheLuceneAnalysisCzCzechAnalyzer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCzCzechAnalyzer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCzCzechAnalyzer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCzCzechAnalyzer 0
 #else
-#define OrgApacheLuceneAnalysisCzCzechAnalyzer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCzCzechAnalyzer 1
 #endif
-#undef OrgApacheLuceneAnalysisCzCzechAnalyzer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCzCzechAnalyzer
 
-#if !defined (_OrgApacheLuceneAnalysisCzCzechAnalyzer_) && (OrgApacheLuceneAnalysisCzCzechAnalyzer_INCLUDE_ALL || OrgApacheLuceneAnalysisCzCzechAnalyzer_INCLUDE)
-#define _OrgApacheLuceneAnalysisCzCzechAnalyzer_
+#if !defined (OrgApacheLuceneAnalysisCzCzechAnalyzer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCzCzechAnalyzer || defined(INCLUDE_OrgApacheLuceneAnalysisCzCzechAnalyzer))
+#define OrgApacheLuceneAnalysisCzCzechAnalyzer_
 
-#define OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase 1
 #include "org/apache/lucene/analysis/util/StopwordAnalyzerBase.h"
 
 @class OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;
 @class OrgApacheLuceneAnalysisUtilCharArraySet;
 
+/*!
+ @brief <code>Analyzer</code> for Czech language.
+ <p>
+ Supports an external list of stopwords (words that will not be indexed at
+ all). A default set of stopwords is used unless an alternative list is
+ specified.
+ </p>
+ */
 @interface OrgApacheLuceneAnalysisCzCzechAnalyzer : OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase
+
++ (NSString *)DEFAULT_STOPWORD_FILE;
 
 #pragma mark Public
 
+/*!
+ @brief Builds an analyzer with the default stop words (<code>getDefaultStopSet()</code>).
+ */
 - (instancetype)init;
 
+/*!
+ @brief Builds an analyzer with the given stop words.
+ @param stopwords a stopword set
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords;
 
+/*!
+ @brief Builds an analyzer with the given stop words and a set of work to be
+ excluded from the <code>CzechStemFilter</code>.
+ @param stopwords a stopword set
+ @param stemExclusionTable a stemming exclusion set
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords
                     withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stemExclusionTable;
 
+/*!
+ @brief Returns a set of default Czech-stopwords
+ @return a set of default Czech-stopwords
+ */
 + (OrgApacheLuceneAnalysisUtilCharArraySet *)getDefaultStopSet;
 
 #pragma mark Protected
 
+/*!
+ @brief Creates
+ <code>org.apache.lucene.analysis.Analyzer.TokenStreamComponents</code>
+ used to tokenize all the text in the provided <code>Reader</code>.
+ @return <code>org.apache.lucene.analysis.Analyzer.TokenStreamComponents</code>
+ built from a <code>StandardTokenizer</code> filtered with
+ <code>StandardFilter</code>, <code>LowerCaseFilter</code>, <code>StopFilter</code>
+ , and <code>CzechStemFilter</code> (only if version is &gt;= LUCENE_31). If
+ a stem exclusion set is provided via
+ <code>CzechAnalyzer(CharArraySet,CharArraySet)</code> a
+ <code>SetKeywordMarkerFilter</code> is added before
+ <code>CzechStemFilter</code>.
+ */
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCzCzechAnalyzer)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisCzCzechAnalyzer_DEFAULT_STOPWORD_FILE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisCzCzechAnalyzer, DEFAULT_STOPWORD_FILE_, NSString *)
+/*!
+ @brief File containing default Czech stopwords.
+ */
+inline NSString *OrgApacheLuceneAnalysisCzCzechAnalyzer_get_DEFAULT_STOPWORD_FILE();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisCzCzechAnalyzer_DEFAULT_STOPWORD_FILE;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisCzCzechAnalyzer, DEFAULT_STOPWORD_FILE, NSString *)
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisCzCzechAnalyzer_getDefaultStopSet();
 
@@ -53,16 +98,22 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCzCzechAnalyzer_init(OrgApacheLuce
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCzCzechAnalyzer *new_OrgApacheLuceneAnalysisCzCzechAnalyzer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCzCzechAnalyzer *create_OrgApacheLuceneAnalysisCzCzechAnalyzer_init();
+
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCzCzechAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisCzCzechAnalyzer *self, OrgApacheLuceneAnalysisUtilCharArraySet *stopwords);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCzCzechAnalyzer *new_OrgApacheLuceneAnalysisCzCzechAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopwords) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCzCzechAnalyzer *create_OrgApacheLuceneAnalysisCzCzechAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopwords);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCzCzechAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisCzCzechAnalyzer *self, OrgApacheLuceneAnalysisUtilCharArraySet *stopwords, OrgApacheLuceneAnalysisUtilCharArraySet *stemExclusionTable);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCzCzechAnalyzer *new_OrgApacheLuceneAnalysisCzCzechAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopwords, OrgApacheLuceneAnalysisUtilCharArraySet *stemExclusionTable) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCzCzechAnalyzer *create_OrgApacheLuceneAnalysisCzCzechAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopwords, OrgApacheLuceneAnalysisUtilCharArraySet *stemExclusionTable);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCzCzechAnalyzer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCzCzechAnalyzer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCzCzechAnalyzer")

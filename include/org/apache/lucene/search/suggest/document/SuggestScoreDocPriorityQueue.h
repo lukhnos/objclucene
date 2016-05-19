@@ -5,30 +5,41 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue_RESTRICT
-#define OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue")
+#ifdef RESTRICT_OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue 0
 #else
-#define OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue 1
 #endif
-#undef OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue
 
-#if !defined (_OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue_) && (OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue_INCLUDE_ALL || OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue_INCLUDE)
-#define _OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue_
+#if !defined (OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue || defined(INCLUDE_OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue))
+#define OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue_
 
-#define OrgApacheLuceneUtilPriorityQueue_RESTRICT 1
-#define OrgApacheLuceneUtilPriorityQueue_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilPriorityQueue 1
+#define INCLUDE_OrgApacheLuceneUtilPriorityQueue 1
 #include "org/apache/lucene/util/PriorityQueue.h"
 
 @class IOSObjectArray;
 @class OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc;
 
+/*!
+ @brief Bounded priority queue for <code>SuggestScoreDoc</code>s.
+ Priority is based on <code>SuggestScoreDoc.score</code> and tie
+ is broken by <code>SuggestScoreDoc.doc</code>
+ */
 @interface OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue : OrgApacheLuceneUtilPriorityQueue
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new priority queue of the specified size.
+ */
 - (instancetype)initWithInt:(jint)size;
 
+/*!
+ @brief Returns the top N results in descending order.
+ */
 - (IOSObjectArray *)getResults;
 
 #pragma mark Protected
@@ -44,8 +55,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriori
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue *new_OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue_initWithInt_(jint size) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue *create_OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue_initWithInt_(jint size);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue")

@@ -41,49 +41,43 @@
 
 __attribute__((unused)) static OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight *OrgApacheLuceneSearchSpansSpanWeight_buildSimWeightWithOrgApacheLuceneSearchSpansSpanQuery_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_(OrgApacheLuceneSearchSpansSpanWeight *self, OrgApacheLuceneSearchSpansSpanQuery *query, OrgApacheLuceneSearchIndexSearcher *searcher, id<JavaUtilMap> termContexts);
 
-__attribute__((unused)) static void OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum_initWithNSString_withInt_(OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum *self, NSString *__name, jint __ordinal);
+__attribute__((unused)) static void OrgApacheLuceneSearchSpansSpanWeight_Postings_initWithNSString_withInt_(OrgApacheLuceneSearchSpansSpanWeight_Postings *self, NSString *__name, jint __ordinal);
 
-@interface OrgApacheLuceneSearchSpansSpanWeight_Postings_$1Enum : OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum < NSCopying >
-
-- (jint)getRequiredPostings;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpansSpanWeight_Postings_$1Enum)
-
-__attribute__((unused)) static void OrgApacheLuceneSearchSpansSpanWeight_Postings_$1Enum_initWithNSString_withInt_(OrgApacheLuceneSearchSpansSpanWeight_Postings_$1Enum *self, NSString *__name, jint __ordinal);
-
-__attribute__((unused)) static OrgApacheLuceneSearchSpansSpanWeight_Postings_$1Enum *new_OrgApacheLuceneSearchSpansSpanWeight_Postings_$1Enum_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanWeight_Postings_$1Enum)
-
-@interface OrgApacheLuceneSearchSpansSpanWeight_Postings_$2Enum : OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum < NSCopying >
+@interface OrgApacheLuceneSearchSpansSpanWeight_Postings_$1 : OrgApacheLuceneSearchSpansSpanWeight_Postings < NSCopying >
 
 - (jint)getRequiredPostings;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpansSpanWeight_Postings_$2Enum)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpansSpanWeight_Postings_$1)
 
-__attribute__((unused)) static void OrgApacheLuceneSearchSpansSpanWeight_Postings_$2Enum_initWithNSString_withInt_(OrgApacheLuceneSearchSpansSpanWeight_Postings_$2Enum *self, NSString *__name, jint __ordinal);
+__attribute__((unused)) static void OrgApacheLuceneSearchSpansSpanWeight_Postings_$1_initWithNSString_withInt_(OrgApacheLuceneSearchSpansSpanWeight_Postings_$1 *self, NSString *__name, jint __ordinal);
 
-__attribute__((unused)) static OrgApacheLuceneSearchSpansSpanWeight_Postings_$2Enum *new_OrgApacheLuceneSearchSpansSpanWeight_Postings_$2Enum_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanWeight_Postings_$1)
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanWeight_Postings_$2Enum)
-
-@interface OrgApacheLuceneSearchSpansSpanWeight_Postings_$3Enum : OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum < NSCopying >
+@interface OrgApacheLuceneSearchSpansSpanWeight_Postings_$2 : OrgApacheLuceneSearchSpansSpanWeight_Postings < NSCopying >
 
 - (jint)getRequiredPostings;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpansSpanWeight_Postings_$3Enum)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpansSpanWeight_Postings_$2)
 
-__attribute__((unused)) static void OrgApacheLuceneSearchSpansSpanWeight_Postings_$3Enum_initWithNSString_withInt_(OrgApacheLuceneSearchSpansSpanWeight_Postings_$3Enum *self, NSString *__name, jint __ordinal);
+__attribute__((unused)) static void OrgApacheLuceneSearchSpansSpanWeight_Postings_$2_initWithNSString_withInt_(OrgApacheLuceneSearchSpansSpanWeight_Postings_$2 *self, NSString *__name, jint __ordinal);
 
-__attribute__((unused)) static OrgApacheLuceneSearchSpansSpanWeight_Postings_$3Enum *new_OrgApacheLuceneSearchSpansSpanWeight_Postings_$3Enum_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanWeight_Postings_$2)
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanWeight_Postings_$3Enum)
+@interface OrgApacheLuceneSearchSpansSpanWeight_Postings_$3 : OrgApacheLuceneSearchSpansSpanWeight_Postings < NSCopying >
+
+- (jint)getRequiredPostings;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpansSpanWeight_Postings_$3)
+
+__attribute__((unused)) static void OrgApacheLuceneSearchSpansSpanWeight_Postings_$3_initWithNSString_withInt_(OrgApacheLuceneSearchSpansSpanWeight_Postings_$3 *self, NSString *__name, jint __ordinal);
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanWeight_Postings_$3)
 
 @implementation OrgApacheLuceneSearchSpansSpanWeight
 
@@ -106,7 +100,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanWeight_Postings_$3Enum)
 }
 
 - (OrgApacheLuceneSearchSpansSpans *)getSpansWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)ctx
-                                 withOrgApacheLuceneSearchSpansSpanWeight_PostingsEnum:(OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum *)requiredPostings {
+                                     withOrgApacheLuceneSearchSpansSpanWeight_Postings:(OrgApacheLuceneSearchSpansSpanWeight_Postings *)requiredPostings {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
   return 0;
@@ -129,11 +123,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanWeight_Postings_$3Enum)
   }
   OrgApacheLuceneIndexTerms *terms = [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) termsWithNSString:field_];
   if (terms != nil && [terms hasPositions] == false) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$@C", @"field \"", field_, @"\" was indexed without position data; cannot run SpanQuery (query=", parentQuery_, ')')) autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$@C", @"field \"", field_, @"\" was indexed without position data; cannot run SpanQuery (query=", parentQuery_, ')'));
   }
-  OrgApacheLuceneSearchSpansSpans *spans = [self getSpansWithOrgApacheLuceneIndexLeafReaderContext:context withOrgApacheLuceneSearchSpansSpanWeight_PostingsEnum:JreLoadStatic(OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum, POSITIONS)];
+  OrgApacheLuceneSearchSpansSpans *spans = [self getSpansWithOrgApacheLuceneIndexLeafReaderContext:context withOrgApacheLuceneSearchSpansSpanWeight_Postings:JreLoadEnum(OrgApacheLuceneSearchSpansSpanWeight_Postings, POSITIONS)];
   OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *simScorer = [self getSimScorerWithOrgApacheLuceneIndexLeafReaderContext:context];
-  return (spans == nil) ? nil : [new_OrgApacheLuceneSearchSpansSpanScorer_initWithOrgApacheLuceneSearchSpansSpans_withOrgApacheLuceneSearchSpansSpanWeight_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(spans, self, simScorer) autorelease];
+  return (spans == nil) ? nil : create_OrgApacheLuceneSearchSpansSpanScorer_initWithOrgApacheLuceneSearchSpansSpans_withOrgApacheLuceneSearchSpansSpanWeight_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(spans, self, simScorer);
 }
 
 - (OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *)getSimScorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
@@ -142,7 +136,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanWeight_Postings_$3Enum)
 
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                                withInt:(jint)doc {
-  OrgApacheLuceneSearchSpansSpanScorer *scorer = (OrgApacheLuceneSearchSpansSpanScorer *) check_class_cast([self scorerWithOrgApacheLuceneIndexLeafReaderContext:context], [OrgApacheLuceneSearchSpansSpanScorer class]);
+  OrgApacheLuceneSearchSpansSpanScorer *scorer = (OrgApacheLuceneSearchSpansSpanScorer *) cast_chk([self scorerWithOrgApacheLuceneIndexLeafReaderContext:context], [OrgApacheLuceneSearchSpansSpanScorer class]);
   if (scorer != nil) {
     jint newDoc = [scorer advanceWithInt:doc];
     if (newDoc == doc) {
@@ -165,10 +159,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanWeight_Postings_$3Enum)
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSpansSpanQuery:withOrgApacheLuceneSearchIndexSearcher:withJavaUtilMap:", "SpanWeight", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "buildSimWeightWithOrgApacheLuceneSearchSpansSpanQuery:withOrgApacheLuceneSearchIndexSearcher:withJavaUtilMap:", "buildSimWeight", "Lorg.apache.lucene.search.similarities.Similarity$SimWeight;", 0x2, "Ljava.io.IOException;", NULL },
-    { "extractTermContextsWithJavaUtilMap:", "extractTermContexts", "V", 0x401, NULL, NULL },
-    { "getSpansWithOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneSearchSpansSpanWeight_PostingsEnum:", "getSpans", "Lorg.apache.lucene.search.spans.Spans;", 0x401, "Ljava.io.IOException;", NULL },
+    { "initWithOrgApacheLuceneSearchSpansSpanQuery:withOrgApacheLuceneSearchIndexSearcher:withJavaUtilMap:", "SpanWeight", NULL, 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/search/spans/SpanQuery;Lorg/apache/lucene/search/IndexSearcher;Ljava/util/Map<Lorg/apache/lucene/index/Term;Lorg/apache/lucene/index/TermContext;>;)V" },
+    { "buildSimWeightWithOrgApacheLuceneSearchSpansSpanQuery:withOrgApacheLuceneSearchIndexSearcher:withJavaUtilMap:", "buildSimWeight", "Lorg.apache.lucene.search.similarities.Similarity$SimWeight;", 0x2, "Ljava.io.IOException;", "(Lorg/apache/lucene/search/spans/SpanQuery;Lorg/apache/lucene/search/IndexSearcher;Ljava/util/Map<Lorg/apache/lucene/index/Term;Lorg/apache/lucene/index/TermContext;>;)Lorg/apache/lucene/search/similarities/Similarity$SimWeight;" },
+    { "extractTermContextsWithJavaUtilMap:", "extractTermContexts", "V", 0x401, NULL, "(Ljava/util/Map<Lorg/apache/lucene/index/Term;Lorg/apache/lucene/index/TermContext;>;)V" },
+    { "getSpansWithOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneSearchSpansSpanWeight_Postings:", "getSpans", "Lorg.apache.lucene.search.spans.Spans;", 0x401, "Ljava.io.IOException;", NULL },
     { "getValueForNormalization", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
     { "normalizeWithFloat:withFloat:", "normalize", "V", 0x1, NULL, NULL },
     { "scorerWithOrgApacheLuceneIndexLeafReaderContext:", "scorer", "Lorg.apache.lucene.search.Scorer;", 0x1, "Ljava.io.IOException;", NULL },
@@ -196,7 +190,7 @@ void OrgApacheLuceneSearchSpansSpanWeight_initWithOrgApacheLuceneSearchSpansSpan
 
 OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight *OrgApacheLuceneSearchSpansSpanWeight_buildSimWeightWithOrgApacheLuceneSearchSpansSpanQuery_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_(OrgApacheLuceneSearchSpansSpanWeight *self, OrgApacheLuceneSearchSpansSpanQuery *query, OrgApacheLuceneSearchIndexSearcher *searcher, id<JavaUtilMap> termContexts) {
   if (termContexts == nil || [termContexts size] == 0 || [((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(query)) getField] == nil) return nil;
-  IOSObjectArray *termStats = [IOSObjectArray arrayWithLength:[((id<JavaUtilMap>) nil_chk(termContexts)) size] type:OrgApacheLuceneSearchTermStatistics_class_()];
+  IOSObjectArray *termStats = [IOSObjectArray arrayWithLength:[termContexts size] type:OrgApacheLuceneSearchTermStatistics_class_()];
   jint i = 0;
   for (OrgApacheLuceneIndexTerm * __strong term in nil_chk([termContexts keySet])) {
     IOSObjectArray_Set(termStats, i, [((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) termStatisticsWithOrgApacheLuceneIndexTerm:term withOrgApacheLuceneIndexTermContext:[termContexts getWithId:term]]);
@@ -208,11 +202,23 @@ OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight *OrgApacheLuceneSearchSpan
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanWeight)
 
-J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum)
+J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchSpansSpanWeight_Postings)
 
-OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum *OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum_values_[3];
+OrgApacheLuceneSearchSpansSpanWeight_Postings *OrgApacheLuceneSearchSpansSpanWeight_Postings_values_[3];
 
-@implementation OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum
+@implementation OrgApacheLuceneSearchSpansSpanWeight_Postings
+
++ (OrgApacheLuceneSearchSpansSpanWeight_Postings *)POSITIONS {
+  return JreEnum(OrgApacheLuceneSearchSpansSpanWeight_Postings, POSITIONS);
+}
+
++ (OrgApacheLuceneSearchSpansSpanWeight_Postings *)PAYLOADS {
+  return JreEnum(OrgApacheLuceneSearchSpansSpanWeight_Postings, PAYLOADS);
+}
+
++ (OrgApacheLuceneSearchSpansSpanWeight_Postings *)OFFSETS {
+  return JreEnum(OrgApacheLuceneSearchSpansSpanWeight_Postings, OFFSETS);
+}
 
 - (jint)getRequiredPostings {
   // can't call an abstract method
@@ -220,34 +226,78 @@ OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum *OrgApacheLuceneSearchSpansSpa
   return 0;
 }
 
-- (OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum *)atLeastWithOrgApacheLuceneSearchSpansSpanWeight_PostingsEnum:(OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum *)postings {
-  if ([((OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum *) nil_chk(postings)) compareToWithId:self] > 0) return postings;
+- (OrgApacheLuceneSearchSpansSpanWeight_Postings *)atLeastWithOrgApacheLuceneSearchSpansSpanWeight_Postings:(OrgApacheLuceneSearchSpansSpanWeight_Postings *)postings {
+  if ([((OrgApacheLuceneSearchSpansSpanWeight_Postings *) nil_chk(postings)) compareToWithId:self] > 0) return postings;
   return self;
-}
-
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
-}
-
-IOSObjectArray *OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum_values() {
-  OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum_initialize();
-  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum_values_ count:3 type:OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum_class_()];
 }
 
 + (IOSObjectArray *)values {
-  return OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum_values();
+  return OrgApacheLuceneSearchSpansSpanWeight_Postings_values();
 }
 
-+ (OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum *)valueOfWithNSString:(NSString *)name {
-  return OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum_valueOfWithNSString_(name);
++ (OrgApacheLuceneSearchSpansSpanWeight_Postings *)valueOfWithNSString:(NSString *)name {
+  return OrgApacheLuceneSearchSpansSpanWeight_Postings_valueOfWithNSString_(name);
 }
 
-OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum *OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum_valueOfWithNSString_(NSString *name) {
-  OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum_initialize();
+- (OrgApacheLuceneSearchSpansSpanWeight_Postings_Enum)toNSEnum {
+  return (OrgApacheLuceneSearchSpansSpanWeight_Postings_Enum)[self ordinal];
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+  return self;
+}
+
++ (void)initialize {
+  if (self == [OrgApacheLuceneSearchSpansSpanWeight_Postings class]) {
+    size_t allocSize = 0;
+    size_t objSize_POSITIONS = class_getInstanceSize([OrgApacheLuceneSearchSpansSpanWeight_Postings_$1 class]);
+    allocSize += objSize_POSITIONS;
+    size_t objSize_PAYLOADS = class_getInstanceSize([OrgApacheLuceneSearchSpansSpanWeight_Postings_$2 class]);
+    allocSize += objSize_PAYLOADS;
+    size_t objSize_OFFSETS = class_getInstanceSize([OrgApacheLuceneSearchSpansSpanWeight_Postings_$3 class]);
+    allocSize += objSize_OFFSETS;
+    uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
+    id e;
+    (JreEnum(OrgApacheLuceneSearchSpansSpanWeight_Postings, POSITIONS) = e = objc_constructInstance([OrgApacheLuceneSearchSpansSpanWeight_Postings_$1 class], (void *)ptr), ptr += objSize_POSITIONS);
+    OrgApacheLuceneSearchSpansSpanWeight_Postings_$1_initWithNSString_withInt_(e, @"POSITIONS", 0);
+    (JreEnum(OrgApacheLuceneSearchSpansSpanWeight_Postings, PAYLOADS) = e = objc_constructInstance([OrgApacheLuceneSearchSpansSpanWeight_Postings_$2 class], (void *)ptr), ptr += objSize_PAYLOADS);
+    OrgApacheLuceneSearchSpansSpanWeight_Postings_$2_initWithNSString_withInt_(e, @"PAYLOADS", 1);
+    (JreEnum(OrgApacheLuceneSearchSpansSpanWeight_Postings, OFFSETS) = e = objc_constructInstance([OrgApacheLuceneSearchSpansSpanWeight_Postings_$3 class], (void *)ptr), ptr += objSize_OFFSETS);
+    OrgApacheLuceneSearchSpansSpanWeight_Postings_$3_initWithNSString_withInt_(e, @"OFFSETS", 2);
+    J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSpansSpanWeight_Postings)
+  }
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static const J2ObjcMethodInfo methods[] = {
+    { "getRequiredPostings", NULL, "I", 0x401, NULL, NULL },
+    { "atLeastWithOrgApacheLuceneSearchSpansSpanWeight_Postings:", "atLeast", "Lorg.apache.lucene.search.spans.SpanWeight$Postings;", 0x1, NULL, NULL },
+  };
+  static const J2ObjcFieldInfo fields[] = {
+    { "POSITIONS", "POSITIONS", 0x4019, "Lorg.apache.lucene.search.spans.SpanWeight$Postings;", &JreEnum(OrgApacheLuceneSearchSpansSpanWeight_Postings, POSITIONS), NULL, .constantValue.asLong = 0 },
+    { "PAYLOADS", "PAYLOADS", 0x4019, "Lorg.apache.lucene.search.spans.SpanWeight$Postings;", &JreEnum(OrgApacheLuceneSearchSpansSpanWeight_Postings, PAYLOADS), NULL, .constantValue.asLong = 0 },
+    { "OFFSETS", "OFFSETS", 0x4019, "Lorg.apache.lucene.search.spans.SpanWeight$Postings;", &JreEnum(OrgApacheLuceneSearchSpansSpanWeight_Postings, OFFSETS), NULL, .constantValue.asLong = 0 },
+  };
+  static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.spans.SpanWeight$Postings;"};
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanWeight_Postings = { 2, "Postings", "org.apache.lucene.search.spans", "SpanWeight", 0x4409, 2, methods, 3, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/search/spans/SpanWeight$Postings;>;" };
+  return &_OrgApacheLuceneSearchSpansSpanWeight_Postings;
+}
+
+@end
+
+void OrgApacheLuceneSearchSpansSpanWeight_Postings_initWithNSString_withInt_(OrgApacheLuceneSearchSpansSpanWeight_Postings *self, NSString *__name, jint __ordinal) {
+  JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
+}
+
+IOSObjectArray *OrgApacheLuceneSearchSpansSpanWeight_Postings_values() {
+  OrgApacheLuceneSearchSpansSpanWeight_Postings_initialize();
+  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneSearchSpansSpanWeight_Postings_values_ count:3 type:OrgApacheLuceneSearchSpansSpanWeight_Postings_class_()];
+}
+
+OrgApacheLuceneSearchSpansSpanWeight_Postings *OrgApacheLuceneSearchSpansSpanWeight_Postings_valueOfWithNSString_(NSString *name) {
+  OrgApacheLuceneSearchSpansSpanWeight_Postings_initialize();
   for (int i = 0; i < 3; i++) {
-    OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum *e = OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum_values_[i];
+    OrgApacheLuceneSearchSpansSpanWeight_Postings *e = OrgApacheLuceneSearchSpansSpanWeight_Postings_values_[i];
     if ([name isEqual:[e name]]) {
       return e;
     }
@@ -256,140 +306,93 @@ OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum *OrgApacheLuceneSearchSpansSpa
   return nil;
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return [self retain];
-}
-
-+ (void)initialize {
-  if (self == [OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum class]) {
-    OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum_POSITIONS = new_OrgApacheLuceneSearchSpansSpanWeight_Postings_$1Enum_initWithNSString_withInt_(@"POSITIONS", 0);
-    OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum_PAYLOADS = new_OrgApacheLuceneSearchSpansSpanWeight_Postings_$2Enum_initWithNSString_withInt_(@"PAYLOADS", 1);
-    OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum_OFFSETS = new_OrgApacheLuceneSearchSpansSpanWeight_Postings_$3Enum_initWithNSString_withInt_(@"OFFSETS", 2);
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum)
+OrgApacheLuceneSearchSpansSpanWeight_Postings *OrgApacheLuceneSearchSpansSpanWeight_Postings_fromOrdinal(NSUInteger ordinal) {
+  OrgApacheLuceneSearchSpansSpanWeight_Postings_initialize();
+  if (ordinal >= 3) {
+    return nil;
   }
+  return OrgApacheLuceneSearchSpansSpanWeight_Postings_values_[ordinal];
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getRequiredPostings", NULL, "I", 0x401, NULL, NULL },
-    { "atLeastWithOrgApacheLuceneSearchSpansSpanWeight_PostingsEnum:", "atLeast", "Lorg.apache.lucene.search.spans.SpanWeight$Postings;", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "POSITIONS", "POSITIONS", 0x4019, "Lorg.apache.lucene.search.spans.SpanWeight$Postings;", &OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum_POSITIONS, NULL, .constantValue.asLong = 0 },
-    { "PAYLOADS", "PAYLOADS", 0x4019, "Lorg.apache.lucene.search.spans.SpanWeight$Postings;", &OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum_PAYLOADS, NULL, .constantValue.asLong = 0 },
-    { "OFFSETS", "OFFSETS", 0x4019, "Lorg.apache.lucene.search.spans.SpanWeight$Postings;", &OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum_OFFSETS, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.spans.SpanWeight$Postings;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum = { 2, "Postings", "org.apache.lucene.search.spans", "SpanWeight", 0x4409, 2, methods, 3, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/search/spans/SpanWeight$Postings;>;" };
-  return &_OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum;
-}
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanWeight_Postings)
 
-@end
-
-void OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum_initWithNSString_withInt_(OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum *self, NSString *__name, jint __ordinal) {
-  JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum)
-
-@implementation OrgApacheLuceneSearchSpansSpanWeight_Postings_$1Enum
+@implementation OrgApacheLuceneSearchSpansSpanWeight_Postings_$1
 
 - (jint)getRequiredPostings {
   return OrgApacheLuceneIndexPostingsEnum_POSITIONS;
 }
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgApacheLuceneSearchSpansSpanWeight_Postings_$1Enum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
+- (void)dealloc {
+  JreCheckFinalize(self, [OrgApacheLuceneSearchSpansSpanWeight_Postings_$1 class]);
+  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "getRequiredPostings", NULL, "I", 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanWeight_Postings_$1Enum = { 2, "", "org.apache.lucene.search.spans", "SpanWeight$Postings", 0xc018, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneSearchSpansSpanWeight_Postings_$1Enum;
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanWeight_Postings_$1 = { 2, "", "org.apache.lucene.search.spans", "SpanWeight$Postings", 0xc018, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  return &_OrgApacheLuceneSearchSpansSpanWeight_Postings_$1;
 }
 
 @end
 
-void OrgApacheLuceneSearchSpansSpanWeight_Postings_$1Enum_initWithNSString_withInt_(OrgApacheLuceneSearchSpansSpanWeight_Postings_$1Enum *self, NSString *__name, jint __ordinal) {
-  OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum_initWithNSString_withInt_(self, __name, __ordinal);
+void OrgApacheLuceneSearchSpansSpanWeight_Postings_$1_initWithNSString_withInt_(OrgApacheLuceneSearchSpansSpanWeight_Postings_$1 *self, NSString *__name, jint __ordinal) {
+  OrgApacheLuceneSearchSpansSpanWeight_Postings_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
-OrgApacheLuceneSearchSpansSpanWeight_Postings_$1Enum *new_OrgApacheLuceneSearchSpansSpanWeight_Postings_$1Enum_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  OrgApacheLuceneSearchSpansSpanWeight_Postings_$1Enum *self = [OrgApacheLuceneSearchSpansSpanWeight_Postings_$1Enum alloc];
-  OrgApacheLuceneSearchSpansSpanWeight_Postings_$1Enum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
-}
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanWeight_Postings_$1)
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanWeight_Postings_$1Enum)
-
-@implementation OrgApacheLuceneSearchSpansSpanWeight_Postings_$2Enum
+@implementation OrgApacheLuceneSearchSpansSpanWeight_Postings_$2
 
 - (jint)getRequiredPostings {
   return OrgApacheLuceneIndexPostingsEnum_PAYLOADS;
 }
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgApacheLuceneSearchSpansSpanWeight_Postings_$2Enum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
+- (void)dealloc {
+  JreCheckFinalize(self, [OrgApacheLuceneSearchSpansSpanWeight_Postings_$2 class]);
+  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "getRequiredPostings", NULL, "I", 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanWeight_Postings_$2Enum = { 2, "", "org.apache.lucene.search.spans", "SpanWeight$Postings", 0xc018, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneSearchSpansSpanWeight_Postings_$2Enum;
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanWeight_Postings_$2 = { 2, "", "org.apache.lucene.search.spans", "SpanWeight$Postings", 0xc018, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  return &_OrgApacheLuceneSearchSpansSpanWeight_Postings_$2;
 }
 
 @end
 
-void OrgApacheLuceneSearchSpansSpanWeight_Postings_$2Enum_initWithNSString_withInt_(OrgApacheLuceneSearchSpansSpanWeight_Postings_$2Enum *self, NSString *__name, jint __ordinal) {
-  OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum_initWithNSString_withInt_(self, __name, __ordinal);
+void OrgApacheLuceneSearchSpansSpanWeight_Postings_$2_initWithNSString_withInt_(OrgApacheLuceneSearchSpansSpanWeight_Postings_$2 *self, NSString *__name, jint __ordinal) {
+  OrgApacheLuceneSearchSpansSpanWeight_Postings_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
-OrgApacheLuceneSearchSpansSpanWeight_Postings_$2Enum *new_OrgApacheLuceneSearchSpansSpanWeight_Postings_$2Enum_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  OrgApacheLuceneSearchSpansSpanWeight_Postings_$2Enum *self = [OrgApacheLuceneSearchSpansSpanWeight_Postings_$2Enum alloc];
-  OrgApacheLuceneSearchSpansSpanWeight_Postings_$2Enum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
-}
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanWeight_Postings_$2)
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanWeight_Postings_$2Enum)
-
-@implementation OrgApacheLuceneSearchSpansSpanWeight_Postings_$3Enum
+@implementation OrgApacheLuceneSearchSpansSpanWeight_Postings_$3
 
 - (jint)getRequiredPostings {
   return OrgApacheLuceneIndexPostingsEnum_PAYLOADS | OrgApacheLuceneIndexPostingsEnum_OFFSETS;
 }
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgApacheLuceneSearchSpansSpanWeight_Postings_$3Enum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
+- (void)dealloc {
+  JreCheckFinalize(self, [OrgApacheLuceneSearchSpansSpanWeight_Postings_$3 class]);
+  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "getRequiredPostings", NULL, "I", 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanWeight_Postings_$3Enum = { 2, "", "org.apache.lucene.search.spans", "SpanWeight$Postings", 0xc018, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneSearchSpansSpanWeight_Postings_$3Enum;
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanWeight_Postings_$3 = { 2, "", "org.apache.lucene.search.spans", "SpanWeight$Postings", 0xc018, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  return &_OrgApacheLuceneSearchSpansSpanWeight_Postings_$3;
 }
 
 @end
 
-void OrgApacheLuceneSearchSpansSpanWeight_Postings_$3Enum_initWithNSString_withInt_(OrgApacheLuceneSearchSpansSpanWeight_Postings_$3Enum *self, NSString *__name, jint __ordinal) {
-  OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum_initWithNSString_withInt_(self, __name, __ordinal);
+void OrgApacheLuceneSearchSpansSpanWeight_Postings_$3_initWithNSString_withInt_(OrgApacheLuceneSearchSpansSpanWeight_Postings_$3 *self, NSString *__name, jint __ordinal) {
+  OrgApacheLuceneSearchSpansSpanWeight_Postings_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
-OrgApacheLuceneSearchSpansSpanWeight_Postings_$3Enum *new_OrgApacheLuceneSearchSpansSpanWeight_Postings_$3Enum_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  OrgApacheLuceneSearchSpansSpanWeight_Postings_$3Enum *self = [OrgApacheLuceneSearchSpansSpanWeight_Postings_$3Enum alloc];
-  OrgApacheLuceneSearchSpansSpanWeight_Postings_$3Enum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanWeight_Postings_$3Enum)
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanWeight_Postings_$3)

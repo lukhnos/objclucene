@@ -5,31 +5,40 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisEnKStemData4_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisEnKStemData4_RESTRICT
-#define OrgApacheLuceneAnalysisEnKStemData4_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisEnKStemData4")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisEnKStemData4
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisEnKStemData4 0
 #else
-#define OrgApacheLuceneAnalysisEnKStemData4_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisEnKStemData4 1
 #endif
-#undef OrgApacheLuceneAnalysisEnKStemData4_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisEnKStemData4
 
-#if !defined (_OrgApacheLuceneAnalysisEnKStemData4_) && (OrgApacheLuceneAnalysisEnKStemData4_INCLUDE_ALL || OrgApacheLuceneAnalysisEnKStemData4_INCLUDE)
-#define _OrgApacheLuceneAnalysisEnKStemData4_
+#if !defined (OrgApacheLuceneAnalysisEnKStemData4_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisEnKStemData4 || defined(INCLUDE_OrgApacheLuceneAnalysisEnKStemData4))
+#define OrgApacheLuceneAnalysisEnKStemData4_
 
 @class IOSObjectArray;
 
+/*!
+ @brief A list of words used by Kstem
+ */
 @interface OrgApacheLuceneAnalysisEnKStemData4 : NSObject
+
++ (IOSObjectArray *)data;
+
++ (void)setData:(IOSObjectArray *)value;
 
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisEnKStemData4)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneAnalysisEnKStemData4_data_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisEnKStemData4, data_, IOSObjectArray *)
-J2OBJC_STATIC_FIELD_SETTER(OrgApacheLuceneAnalysisEnKStemData4, data_, IOSObjectArray *)
+inline IOSObjectArray *OrgApacheLuceneAnalysisEnKStemData4_get_data();
+inline IOSObjectArray *OrgApacheLuceneAnalysisEnKStemData4_set_data(IOSObjectArray *value);
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneAnalysisEnKStemData4_data;
+J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneAnalysisEnKStemData4, data, IOSObjectArray *)
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisEnKStemData4)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisEnKStemData4_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisEnKStemData4")

@@ -5,24 +5,31 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchJoinCheckJoinIndex_INCLUDE_ALL")
-#if OrgApacheLuceneSearchJoinCheckJoinIndex_RESTRICT
-#define OrgApacheLuceneSearchJoinCheckJoinIndex_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinCheckJoinIndex")
+#ifdef RESTRICT_OrgApacheLuceneSearchJoinCheckJoinIndex
+#define INCLUDE_ALL_OrgApacheLuceneSearchJoinCheckJoinIndex 0
 #else
-#define OrgApacheLuceneSearchJoinCheckJoinIndex_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchJoinCheckJoinIndex 1
 #endif
-#undef OrgApacheLuceneSearchJoinCheckJoinIndex_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchJoinCheckJoinIndex
 
-#if !defined (_OrgApacheLuceneSearchJoinCheckJoinIndex_) && (OrgApacheLuceneSearchJoinCheckJoinIndex_INCLUDE_ALL || OrgApacheLuceneSearchJoinCheckJoinIndex_INCLUDE)
-#define _OrgApacheLuceneSearchJoinCheckJoinIndex_
+#if !defined (OrgApacheLuceneSearchJoinCheckJoinIndex_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinCheckJoinIndex || defined(INCLUDE_OrgApacheLuceneSearchJoinCheckJoinIndex))
+#define OrgApacheLuceneSearchJoinCheckJoinIndex_
 
 @class OrgApacheLuceneIndexIndexReader;
 @protocol OrgApacheLuceneSearchJoinBitSetProducer;
 
+/*!
+ @brief Utility class to check a block join index.
+ */
 @interface OrgApacheLuceneSearchJoinCheckJoinIndex : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Check that the given index is good to use for block joins.
+ @throws IllegalStateException if the index does not have an appropriate structure
+ */
 + (void)checkWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
      withOrgApacheLuceneSearchJoinBitSetProducer:(id<OrgApacheLuceneSearchJoinBitSetProducer>)parentsFilter;
 
@@ -36,4 +43,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinCheckJoinIndex)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchJoinCheckJoinIndex_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinCheckJoinIndex")

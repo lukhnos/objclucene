@@ -5,19 +5,22 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilLSBRadixSorter_INCLUDE_ALL")
-#if OrgApacheLuceneUtilLSBRadixSorter_RESTRICT
-#define OrgApacheLuceneUtilLSBRadixSorter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilLSBRadixSorter")
+#ifdef RESTRICT_OrgApacheLuceneUtilLSBRadixSorter
+#define INCLUDE_ALL_OrgApacheLuceneUtilLSBRadixSorter 0
 #else
-#define OrgApacheLuceneUtilLSBRadixSorter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilLSBRadixSorter 1
 #endif
-#undef OrgApacheLuceneUtilLSBRadixSorter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilLSBRadixSorter
 
-#if !defined (_OrgApacheLuceneUtilLSBRadixSorter_) && (OrgApacheLuceneUtilLSBRadixSorter_INCLUDE_ALL || OrgApacheLuceneUtilLSBRadixSorter_INCLUDE)
-#define _OrgApacheLuceneUtilLSBRadixSorter_
+#if !defined (OrgApacheLuceneUtilLSBRadixSorter_) && (INCLUDE_ALL_OrgApacheLuceneUtilLSBRadixSorter || defined(INCLUDE_OrgApacheLuceneUtilLSBRadixSorter))
+#define OrgApacheLuceneUtilLSBRadixSorter_
 
 @class IOSIntArray;
 
+/*!
+ @brief A LSB Radix sorter for unsigned int values.
+ */
 @interface OrgApacheLuceneUtilLSBRadixSorter : NSObject
 
 #pragma mark Public
@@ -38,8 +41,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilLSBRadixSorter_init(OrgApacheLuceneUti
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilLSBRadixSorter *new_OrgApacheLuceneUtilLSBRadixSorter_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilLSBRadixSorter *create_OrgApacheLuceneUtilLSBRadixSorter_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilLSBRadixSorter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilLSBRadixSorter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilLSBRadixSorter")

@@ -5,22 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisHunspellStemmer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisHunspellStemmer_RESTRICT
-#define OrgApacheLuceneAnalysisHunspellStemmer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisHunspellStemmer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisHunspellStemmer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisHunspellStemmer 0
 #else
-#define OrgApacheLuceneAnalysisHunspellStemmer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisHunspellStemmer 1
 #endif
-#undef OrgApacheLuceneAnalysisHunspellStemmer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisHunspellStemmer
 
-#if !defined (_OrgApacheLuceneAnalysisHunspellStemmer_) && (OrgApacheLuceneAnalysisHunspellStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisHunspellStemmer_INCLUDE)
-#define _OrgApacheLuceneAnalysisHunspellStemmer_
+#if !defined (OrgApacheLuceneAnalysisHunspellStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisHunspellStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisHunspellStemmer))
+#define OrgApacheLuceneAnalysisHunspellStemmer_
 
 @class IOSCharArray;
 @class IOSObjectArray;
 @class OrgApacheLuceneAnalysisHunspellDictionary;
 @protocol JavaUtilList;
 
+/*!
+ @brief Stemmer uses the affix rules declared in the Dictionary to generate one or more stems for a word.
+ It
+ conforms to the algorithm in the original hunspell algorithm, including recursive suffix stripping.
+ */
 @interface OrgApacheLuceneAnalysisHunspellStemmer : NSObject {
  @public
   IOSObjectArray *prefixReaders_;
@@ -31,18 +36,48 @@
 
 #pragma mark Public
 
+/*!
+ @brief Constructs a new Stemmer which will use the provided Dictionary to create its stems.
+ @param dictionary Dictionary that will be used to create the stems
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisHunspellDictionary:(OrgApacheLuceneAnalysisHunspellDictionary *)dictionary;
 
+/*!
+ @brief Find the stem(s) of the provided word
+ @param word Word to find the stems for
+ @return List of stems for the word
+ */
 - (id<JavaUtilList>)stemWithCharArray:(IOSCharArray *)word
                               withInt:(jint)length;
 
+/*!
+ @brief Find the stem(s) of the provided word.
+ @param word Word to find the stems for
+ @return List of stems for the word
+ */
 - (id<JavaUtilList>)stemWithNSString:(NSString *)word;
 
+/*!
+ @brief Find the unique stem(s) of the provided word
+ @param word Word to find the stems for
+ @return List of stems for the word
+ */
 - (id<JavaUtilList>)uniqueStemsWithCharArray:(IOSCharArray *)word
                                      withInt:(jint)length;
 
 #pragma mark Package-Private
 
+/*!
+ @brief Applies the affix rule to the given word, producing a list of stems if any are found
+ @param strippedWord Word the affix has been removed and the strip added
+ @param length valid length of stripped word
+ @param affix HunspellAffix representing the affix rule itself
+ @param prefixFlag when we already stripped a prefix, we cant simply recurse and check the suffix, unless both are compatible
+ so we must check dictionary form against both to add it as a stem!
+ @param recursionDepth current recursion depth
+ @param prefix true if we are removing a prefix (false if it's a suffix)
+ @return List of stems for the word, or an empty list if none are found
+ */
 - (id<JavaUtilList>)applyAffixWithCharArray:(IOSCharArray *)strippedWord
                                     withInt:(jint)length
                                     withInt:(jint)affix
@@ -65,8 +100,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisHunspellStemmer_initWithOrgApacheL
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisHunspellStemmer *new_OrgApacheLuceneAnalysisHunspellStemmer_initWithOrgApacheLuceneAnalysisHunspellDictionary_(OrgApacheLuceneAnalysisHunspellDictionary *dictionary) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisHunspellStemmer *create_OrgApacheLuceneAnalysisHunspellStemmer_initWithOrgApacheLuceneAnalysisHunspellDictionary_(OrgApacheLuceneAnalysisHunspellDictionary *dictionary);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisHunspellStemmer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisHunspellStemmer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisHunspellStemmer")

@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilNamedSPILoader_INCLUDE_ALL")
-#if OrgApacheLuceneUtilNamedSPILoader_RESTRICT
-#define OrgApacheLuceneUtilNamedSPILoader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilNamedSPILoader")
+#ifdef RESTRICT_OrgApacheLuceneUtilNamedSPILoader
+#define INCLUDE_ALL_OrgApacheLuceneUtilNamedSPILoader 0
 #else
-#define OrgApacheLuceneUtilNamedSPILoader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilNamedSPILoader 1
 #endif
-#undef OrgApacheLuceneUtilNamedSPILoader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilNamedSPILoader
 
-#if !defined (_OrgApacheLuceneUtilNamedSPILoader_) && (OrgApacheLuceneUtilNamedSPILoader_INCLUDE_ALL || OrgApacheLuceneUtilNamedSPILoader_INCLUDE)
-#define _OrgApacheLuceneUtilNamedSPILoader_
+#if !defined (OrgApacheLuceneUtilNamedSPILoader_) && (INCLUDE_ALL_OrgApacheLuceneUtilNamedSPILoader || defined(INCLUDE_OrgApacheLuceneUtilNamedSPILoader))
+#define OrgApacheLuceneUtilNamedSPILoader_
 
-#define JavaLangIterable_RESTRICT 1
-#define JavaLangIterable_INCLUDE 1
+#define RESTRICT_JavaLangIterable 1
+#define INCLUDE_JavaLangIterable 1
 #include "java/lang/Iterable.h"
 
 @class IOSClass;
@@ -26,6 +26,10 @@
 @protocol JavaUtilSet;
 @protocol OrgApacheLuceneUtilNamedSPILoader_NamedSPI;
 
+/*!
+ @brief Helper class for loading named SPIs from classpath (e.g.
+ Codec, PostingsFormat).
+ */
 @interface OrgApacheLuceneUtilNamedSPILoader : NSObject < JavaLangIterable >
 
 #pragma mark Public
@@ -37,16 +41,27 @@
 
 - (id<JavaUtilSet>)availableServices;
 
+/*!
+ @brief Validates that a service name meets the requirements of <code>NamedSPI</code>
+ */
 + (void)checkServiceNameWithNSString:(NSString *)name;
 
 - (id<JavaUtilIterator>)iterator;
 
 - (id)lookupWithNSString:(NSString *)name;
 
+/*!
+ @brief Reloads the internal SPI list from the given <code>ClassLoader</code>.
+ Changes to the service list are visible after the method ends, all
+ iterators (<code>iterator()</code>,...) stay consistent. 
+ <p><b>NOTE:</b> Only new service providers are added, existing ones are
+ never removed or replaced.
+ <p><em>This method is expensive and should only be called for discovery
+ of new service providers on the given classpath/classloader!</em>
+ */
 - (void)reloadWithJavaLangClassLoader:(JavaLangClassLoader *)classloader;
 
 #pragma mark Package-Private
-
 
 @end
 
@@ -56,9 +71,13 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilNamedSPILoader_initWithIOSClass_(OrgAp
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilNamedSPILoader *new_OrgApacheLuceneUtilNamedSPILoader_initWithIOSClass_(IOSClass *clazz) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilNamedSPILoader *create_OrgApacheLuceneUtilNamedSPILoader_initWithIOSClass_(IOSClass *clazz);
+
 FOUNDATION_EXPORT void OrgApacheLuceneUtilNamedSPILoader_initWithIOSClass_withJavaLangClassLoader_(OrgApacheLuceneUtilNamedSPILoader *self, IOSClass *clazz, JavaLangClassLoader *classloader);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilNamedSPILoader *new_OrgApacheLuceneUtilNamedSPILoader_initWithIOSClass_withJavaLangClassLoader_(IOSClass *clazz, JavaLangClassLoader *classloader) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilNamedSPILoader *create_OrgApacheLuceneUtilNamedSPILoader_initWithIOSClass_withJavaLangClassLoader_(IOSClass *clazz, JavaLangClassLoader *classloader);
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilNamedSPILoader_checkServiceNameWithNSString_(NSString *name);
 
@@ -66,9 +85,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilNamedSPILoader)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilNamedSPILoader_NamedSPI_) && (OrgApacheLuceneUtilNamedSPILoader_INCLUDE_ALL || OrgApacheLuceneUtilNamedSPILoader_NamedSPI_INCLUDE)
-#define _OrgApacheLuceneUtilNamedSPILoader_NamedSPI_
+#if !defined (OrgApacheLuceneUtilNamedSPILoader_NamedSPI_) && (INCLUDE_ALL_OrgApacheLuceneUtilNamedSPILoader || defined(INCLUDE_OrgApacheLuceneUtilNamedSPILoader_NamedSPI))
+#define OrgApacheLuceneUtilNamedSPILoader_NamedSPI_
 
+/*!
+ @brief Interface to support <code>NamedSPILoader.lookup(String)</code> by name.
+ <p>
+ Names must be all ascii alphanumeric, and less than 128 characters in length.
+ */
 @protocol OrgApacheLuceneUtilNamedSPILoader_NamedSPI < NSObject, JavaObject >
 
 - (NSString *)getName;
@@ -81,4 +105,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilNamedSPILoader_NamedSPI)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilNamedSPILoader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilNamedSPILoader")

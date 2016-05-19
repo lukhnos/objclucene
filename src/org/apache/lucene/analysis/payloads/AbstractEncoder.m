@@ -27,7 +27,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "encodeWithCharArray:", "encode", "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "AbstractEncoder", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPayloadsAbstractEncoder = { 2, "AbstractEncoder", "org.apache.lucene.analysis.payloads", NULL, 0x401, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisPayloadsAbstractEncoder;

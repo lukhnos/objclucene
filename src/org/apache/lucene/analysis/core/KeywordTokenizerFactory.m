@@ -19,12 +19,12 @@
 }
 
 - (OrgApacheLuceneAnalysisCoreKeywordTokenizer *)createWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory {
-  return [new_OrgApacheLuceneAnalysisCoreKeywordTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_(factory, OrgApacheLuceneAnalysisCoreKeywordTokenizer_DEFAULT_BUFFER_SIZE) autorelease];
+  return create_OrgApacheLuceneAnalysisCoreKeywordTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_(factory, OrgApacheLuceneAnalysisCoreKeywordTokenizer_DEFAULT_BUFFER_SIZE);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "KeywordTokenizerFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "KeywordTokenizerFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "createWithOrgApacheLuceneUtilAttributeFactory:", "create", "Lorg.apache.lucene.analysis.core.KeywordTokenizer;", 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory = { 2, "KeywordTokenizerFactory", "org.apache.lucene.analysis.core", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
@@ -36,14 +36,16 @@
 void OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory *self, id<JavaUtilMap> args) {
   OrgApacheLuceneAnalysisUtilTokenizerFactory_initWithJavaUtilMap_(self, args);
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory *new_OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory *self = [OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory alloc];
-  OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory *create_OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory)

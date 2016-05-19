@@ -58,7 +58,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchBitsFilteredDocIdSet, acceptDocs_, id<O
 
 OrgApacheLuceneSearchDocIdSet *OrgApacheLuceneSearchBitsFilteredDocIdSet_wrapWithOrgApacheLuceneSearchDocIdSet_withOrgApacheLuceneUtilBits_(OrgApacheLuceneSearchDocIdSet *set, id<OrgApacheLuceneUtilBits> acceptDocs) {
   OrgApacheLuceneSearchBitsFilteredDocIdSet_initialize();
-  return (set == nil || acceptDocs == nil) ? set : [new_OrgApacheLuceneSearchBitsFilteredDocIdSet_initWithOrgApacheLuceneSearchDocIdSet_withOrgApacheLuceneUtilBits_(set, acceptDocs) autorelease];
+  return (set == nil || acceptDocs == nil) ? set : create_OrgApacheLuceneSearchBitsFilteredDocIdSet_initWithOrgApacheLuceneSearchDocIdSet_withOrgApacheLuceneUtilBits_(set, acceptDocs);
 }
 
 void OrgApacheLuceneSearchBitsFilteredDocIdSet_initWithOrgApacheLuceneSearchDocIdSet_withOrgApacheLuceneUtilBits_(OrgApacheLuceneSearchBitsFilteredDocIdSet *self, OrgApacheLuceneSearchDocIdSet *innerSet, id<OrgApacheLuceneUtilBits> acceptDocs) {
@@ -67,9 +67,11 @@ void OrgApacheLuceneSearchBitsFilteredDocIdSet_initWithOrgApacheLuceneSearchDocI
 }
 
 OrgApacheLuceneSearchBitsFilteredDocIdSet *new_OrgApacheLuceneSearchBitsFilteredDocIdSet_initWithOrgApacheLuceneSearchDocIdSet_withOrgApacheLuceneUtilBits_(OrgApacheLuceneSearchDocIdSet *innerSet, id<OrgApacheLuceneUtilBits> acceptDocs) {
-  OrgApacheLuceneSearchBitsFilteredDocIdSet *self = [OrgApacheLuceneSearchBitsFilteredDocIdSet alloc];
-  OrgApacheLuceneSearchBitsFilteredDocIdSet_initWithOrgApacheLuceneSearchDocIdSet_withOrgApacheLuceneUtilBits_(self, innerSet, acceptDocs);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchBitsFilteredDocIdSet, initWithOrgApacheLuceneSearchDocIdSet_withOrgApacheLuceneUtilBits_, innerSet, acceptDocs)
+}
+
+OrgApacheLuceneSearchBitsFilteredDocIdSet *create_OrgApacheLuceneSearchBitsFilteredDocIdSet_initWithOrgApacheLuceneSearchDocIdSet_withOrgApacheLuceneUtilBits_(OrgApacheLuceneSearchDocIdSet *innerSet, id<OrgApacheLuceneUtilBits> acceptDocs) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchBitsFilteredDocIdSet, initWithOrgApacheLuceneSearchDocIdSet_withOrgApacheLuceneUtilBits_, innerSet, acceptDocs)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBitsFilteredDocIdSet)

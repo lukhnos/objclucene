@@ -3,14 +3,19 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/core/messages/package-info.java
 //
 
+/*!
+ @brief Messages usually used by query parser implementations.
+ <h2>Query Parser Messages</h2>
+ Messages for the Flexible Query Parser, they use <tt>org.apache.lucene.messages.NLS</tt> API.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleCoreMessagesPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleCoreMessagesPackage_info_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleCoreMessagesPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreMessagesPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreMessagesPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreMessagesPackage_info 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleCoreMessagesPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreMessagesPackage_info 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleCoreMessagesPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreMessagesPackage_info
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleCoreMessagesPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreMessagesPackage_info")

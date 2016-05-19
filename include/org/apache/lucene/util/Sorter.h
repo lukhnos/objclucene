@@ -5,33 +5,52 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilSorter_INCLUDE_ALL")
-#if OrgApacheLuceneUtilSorter_RESTRICT
-#define OrgApacheLuceneUtilSorter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilSorter")
+#ifdef RESTRICT_OrgApacheLuceneUtilSorter
+#define INCLUDE_ALL_OrgApacheLuceneUtilSorter 0
 #else
-#define OrgApacheLuceneUtilSorter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilSorter 1
 #endif
-#undef OrgApacheLuceneUtilSorter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilSorter
 
-#if !defined (_OrgApacheLuceneUtilSorter_) && (OrgApacheLuceneUtilSorter_INCLUDE_ALL || OrgApacheLuceneUtilSorter_INCLUDE)
-#define _OrgApacheLuceneUtilSorter_
+#if !defined (OrgApacheLuceneUtilSorter_) && (INCLUDE_ALL_OrgApacheLuceneUtilSorter || defined(INCLUDE_OrgApacheLuceneUtilSorter))
+#define OrgApacheLuceneUtilSorter_
 
-#define OrgApacheLuceneUtilSorter_THRESHOLD 20
-
+/*!
+ @brief Base class for sorting algorithms implementations.
+  
+ */
 @interface OrgApacheLuceneUtilSorter : NSObject
+
++ (jint)THRESHOLD;
 
 #pragma mark Public
 
+/*!
+ @brief Sort the slice which starts at <code>from</code> (inclusive) and ends at
+ <code>to</code> (exclusive).
+ */
 - (void)sortWithInt:(jint)from
             withInt:(jint)to;
 
 #pragma mark Protected
 
+/*!
+ @brief Sole constructor, used for inheritance.
+ */
 - (instancetype)init;
 
+/*!
+ @brief Compare entries found in slots <code>i</code> and <code>j</code>.
+ The contract for the returned value is the same as
+ <code>Comparator.compare(Object,Object)</code>. 
+ */
 - (jint)compareWithInt:(jint)i
                withInt:(jint)j;
 
+/*!
+ @brief Swap values at slots <code>i</code> and <code>j</code>.
+ */
 - (void)swapWithInt:(jint)i
             withInt:(jint)j;
 
@@ -101,7 +120,9 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilSorter)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSorter, THRESHOLD, jint)
+inline jint OrgApacheLuceneUtilSorter_get_THRESHOLD();
+#define OrgApacheLuceneUtilSorter_THRESHOLD 20
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilSorter, THRESHOLD, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilSorter_init(OrgApacheLuceneUtilSorter *self);
 
@@ -113,4 +134,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilSorter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilSorter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilSorter")

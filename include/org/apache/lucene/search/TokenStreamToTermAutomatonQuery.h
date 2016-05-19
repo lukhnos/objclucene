@@ -5,28 +5,48 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery_INCLUDE_ALL")
-#if OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery_RESTRICT
-#define OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery")
+#ifdef RESTRICT_OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery
+#define INCLUDE_ALL_OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery 0
 #else
-#define OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery 1
 #endif
-#undef OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery
 
-#if !defined (_OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery_) && (OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery_INCLUDE_ALL || OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery_INCLUDE)
-#define _OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery_
+#if !defined (OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery || defined(INCLUDE_OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery))
+#define OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery_
 
 @class OrgApacheLuceneAnalysisTokenStream;
 @class OrgApacheLuceneSearchTermAutomatonQuery;
 
+/*!
+ @brief Consumes a TokenStream and creates an <code>TermAutomatonQuery</code>
+ where the transition labels are tokens from the <code>TermToBytesRefAttribute</code>
+ .
+ <p>This code is very new and likely has exciting bugs!
+  
+ */
 @interface OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ */
 - (instancetype)init;
 
+/*!
+ @brief Whether to generate holes in the automaton for missing positions, <code>true</code> by default.
+ */
 - (void)setPreservePositionIncrementsWithBoolean:(jboolean)enablePositionIncrements;
 
+/*!
+ @brief Pulls the graph (including <code>PositionLengthAttribute</code>
+ ) from the provided <code>TokenStream</code>
+ , and creates the corresponding
+ automaton where arcs are bytes (or Unicode code points 
+ if unicodeArcs = true) from each term.
+ */
 - (OrgApacheLuceneSearchTermAutomatonQuery *)toQueryWithNSString:(NSString *)field
                           withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
 
@@ -38,8 +58,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery_init
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery *new_OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery *create_OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery")

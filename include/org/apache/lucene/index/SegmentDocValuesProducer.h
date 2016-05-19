@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexSegmentDocValuesProducer_INCLUDE_ALL")
-#if OrgApacheLuceneIndexSegmentDocValuesProducer_RESTRICT
-#define OrgApacheLuceneIndexSegmentDocValuesProducer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexSegmentDocValuesProducer")
+#ifdef RESTRICT_OrgApacheLuceneIndexSegmentDocValuesProducer
+#define INCLUDE_ALL_OrgApacheLuceneIndexSegmentDocValuesProducer 0
 #else
-#define OrgApacheLuceneIndexSegmentDocValuesProducer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexSegmentDocValuesProducer 1
 #endif
-#undef OrgApacheLuceneIndexSegmentDocValuesProducer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexSegmentDocValuesProducer
 
-#if !defined (_OrgApacheLuceneIndexSegmentDocValuesProducer_) && (OrgApacheLuceneIndexSegmentDocValuesProducer_INCLUDE_ALL || OrgApacheLuceneIndexSegmentDocValuesProducer_INCLUDE)
-#define _OrgApacheLuceneIndexSegmentDocValuesProducer_
+#if !defined (OrgApacheLuceneIndexSegmentDocValuesProducer_) && (INCLUDE_ALL_OrgApacheLuceneIndexSegmentDocValuesProducer || defined(INCLUDE_OrgApacheLuceneIndexSegmentDocValuesProducer))
+#define OrgApacheLuceneIndexSegmentDocValuesProducer_
 
-#define OrgApacheLuceneCodecsDocValuesProducer_RESTRICT 1
-#define OrgApacheLuceneCodecsDocValuesProducer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneCodecsDocValuesProducer 1
+#define INCLUDE_OrgApacheLuceneCodecsDocValuesProducer 1
 #include "org/apache/lucene/codecs/DocValuesProducer.h"
 
 @class OrgApacheLuceneIndexBinaryDocValues;
@@ -36,6 +36,9 @@
 @protocol JavaUtilSet;
 @protocol OrgApacheLuceneUtilBits;
 
+/*!
+ @brief Encapsulates multiple producers when there are docvalues updates as one producer
+ */
 @interface OrgApacheLuceneIndexSegmentDocValuesProducer : OrgApacheLuceneCodecsDocValuesProducer {
  @public
   id<JavaUtilMap> dvProducersByField_;
@@ -69,6 +72,14 @@
 
 #pragma mark Package-Private
 
+/*!
+ @brief Creates a new producer that handles updated docvalues fields
+ @param si commit point
+ @param dir directory
+ @param coreInfos fieldinfos for the segment
+ @param allInfos all fieldinfos including updated ones
+ @param segDocValues producer map
+ */
 - (instancetype)initWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)si
                             withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
                            withOrgApacheLuceneIndexFieldInfos:(OrgApacheLuceneIndexFieldInfos *)coreInfos
@@ -87,8 +98,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexSegmentDocValuesProducer_initWithOrgA
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentDocValuesProducer *new_OrgApacheLuceneIndexSegmentDocValuesProducer_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexSegmentDocValues_(OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexFieldInfos *coreInfos, OrgApacheLuceneIndexFieldInfos *allInfos, OrgApacheLuceneIndexSegmentDocValues *segDocValues) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentDocValuesProducer *create_OrgApacheLuceneIndexSegmentDocValuesProducer_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexSegmentDocValues_(OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexFieldInfos *coreInfos, OrgApacheLuceneIndexFieldInfos *allInfos, OrgApacheLuceneIndexSegmentDocValues *segDocValues);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSegmentDocValuesProducer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexSegmentDocValuesProducer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSegmentDocValuesProducer")

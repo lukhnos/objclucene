@@ -5,23 +5,26 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter_RESTRICT
-#define OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter 0
 #else
-#define OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter
 
-#if !defined (_OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter_) && (OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter_
+#if !defined (OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter || defined(INCLUDE_OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter))
+#define OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter_
 
-#define OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter 1
 #include "org/apache/lucene/analysis/sinks/TeeSinkTokenFilter.h"
 
 @class OrgApacheLuceneUtilAttributeSource;
 
+/*!
+ @brief Adds a token to the sink if it has a specific type.
+ */
 @interface OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter : OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter
 
 #pragma mark Public
@@ -38,8 +41,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter_initWithN
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter *new_OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter_initWithNSString_(NSString *typeToMatch) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter *create_OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter_initWithNSString_(NSString *typeToMatch);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter")

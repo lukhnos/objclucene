@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsIdversionIDVersionTermState_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsIdversionIDVersionTermState_RESTRICT
-#define OrgApacheLuceneCodecsIdversionIDVersionTermState_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsIdversionIDVersionTermState")
+#ifdef RESTRICT_OrgApacheLuceneCodecsIdversionIDVersionTermState
+#define INCLUDE_ALL_OrgApacheLuceneCodecsIdversionIDVersionTermState 0
 #else
-#define OrgApacheLuceneCodecsIdversionIDVersionTermState_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsIdversionIDVersionTermState 1
 #endif
-#undef OrgApacheLuceneCodecsIdversionIDVersionTermState_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsIdversionIDVersionTermState
 
-#if !defined (_OrgApacheLuceneCodecsIdversionIDVersionTermState_) && (OrgApacheLuceneCodecsIdversionIDVersionTermState_INCLUDE_ALL || OrgApacheLuceneCodecsIdversionIDVersionTermState_INCLUDE)
-#define _OrgApacheLuceneCodecsIdversionIDVersionTermState_
+#if !defined (OrgApacheLuceneCodecsIdversionIDVersionTermState_) && (INCLUDE_ALL_OrgApacheLuceneCodecsIdversionIDVersionTermState || defined(INCLUDE_OrgApacheLuceneCodecsIdversionIDVersionTermState))
+#define OrgApacheLuceneCodecsIdversionIDVersionTermState_
 
-#define OrgApacheLuceneCodecsBlockTermState_RESTRICT 1
-#define OrgApacheLuceneCodecsBlockTermState_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneCodecsBlockTermState 1
+#define INCLUDE_OrgApacheLuceneCodecsBlockTermState 1
 #include "org/apache/lucene/codecs/BlockTermState.h"
 
 @class OrgApacheLuceneIndexTermState;
@@ -46,8 +46,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsIdversionIDVersionTermState_init(Org
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsIdversionIDVersionTermState *new_OrgApacheLuceneCodecsIdversionIDVersionTermState_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsIdversionIDVersionTermState *create_OrgApacheLuceneCodecsIdversionIDVersionTermState_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsIdversionIDVersionTermState)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsIdversionIDVersionTermState_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsIdversionIDVersionTermState")

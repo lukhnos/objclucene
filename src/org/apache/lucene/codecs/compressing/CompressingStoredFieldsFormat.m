@@ -60,13 +60,13 @@ withOrgApacheLuceneCodecsCompressingCompressionMode:(OrgApacheLuceneCodecsCompre
                                                        withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)si
                                                         withOrgApacheLuceneIndexFieldInfos:(OrgApacheLuceneIndexFieldInfos *)fn
                                                          withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
-  return [new_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withNSString_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneStoreIOContext_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_(directory, si, segmentSuffix_, fn, context, formatName_, compressionMode_) autorelease];
+  return create_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withNSString_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneStoreIOContext_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_(directory, si, segmentSuffix_, fn, context, formatName_, compressionMode_);
 }
 
 - (OrgApacheLuceneCodecsStoredFieldsWriter *)fieldsWriterWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
                                                        withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)si
                                                          withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
-  return [new_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withNSString_withOrgApacheLuceneStoreIOContext_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_withInt_withInt_withInt_(directory, si, segmentSuffix_, context, formatName_, compressionMode_, chunkSize_, maxDocsPerChunk_, blockSize_) autorelease];
+  return create_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withNSString_withOrgApacheLuceneStoreIOContext_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_withInt_withInt_withInt_(directory, si, segmentSuffix_, context, formatName_, compressionMode_, chunkSize_, maxDocsPerChunk_, blockSize_);
 }
 
 - (NSString *)description {
@@ -107,9 +107,11 @@ void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat_initWithNSStr
 }
 
 OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat *new_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat_initWithNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_withInt_withInt_withInt_(NSString *formatName, OrgApacheLuceneCodecsCompressingCompressionMode *compressionMode, jint chunkSize, jint maxDocsPerChunk, jint blockSize) {
-  OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat *self = [OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat alloc];
-  OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat_initWithNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_withInt_withInt_withInt_(self, formatName, compressionMode, chunkSize, maxDocsPerChunk, blockSize);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat, initWithNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_withInt_withInt_withInt_, formatName, compressionMode, chunkSize, maxDocsPerChunk, blockSize)
+}
+
+OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat *create_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat_initWithNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_withInt_withInt_withInt_(NSString *formatName, OrgApacheLuceneCodecsCompressingCompressionMode *compressionMode, jint chunkSize, jint maxDocsPerChunk, jint blockSize) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat, initWithNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_withInt_withInt_withInt_, formatName, compressionMode, chunkSize, maxDocsPerChunk, blockSize)
 }
 
 void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat_initWithNSString_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_withInt_withInt_withInt_(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat *self, NSString *formatName, NSString *segmentSuffix, OrgApacheLuceneCodecsCompressingCompressionMode *compressionMode, jint chunkSize, jint maxDocsPerChunk, jint blockSize) {
@@ -118,23 +120,25 @@ void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat_initWithNSStr
   JreStrongAssign(&self->segmentSuffix_, segmentSuffix);
   JreStrongAssign(&self->compressionMode_, compressionMode);
   if (chunkSize < 1) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"chunkSize must be >= 1") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"chunkSize must be >= 1");
   }
   self->chunkSize_ = chunkSize;
   if (maxDocsPerChunk < 1) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"maxDocsPerChunk must be >= 1") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"maxDocsPerChunk must be >= 1");
   }
   self->maxDocsPerChunk_ = maxDocsPerChunk;
   if (blockSize < 1) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"blockSize must be >= 1") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"blockSize must be >= 1");
   }
   self->blockSize_ = blockSize;
 }
 
 OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat *new_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat_initWithNSString_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_withInt_withInt_withInt_(NSString *formatName, NSString *segmentSuffix, OrgApacheLuceneCodecsCompressingCompressionMode *compressionMode, jint chunkSize, jint maxDocsPerChunk, jint blockSize) {
-  OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat *self = [OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat alloc];
-  OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat_initWithNSString_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_withInt_withInt_withInt_(self, formatName, segmentSuffix, compressionMode, chunkSize, maxDocsPerChunk, blockSize);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat, initWithNSString_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_withInt_withInt_withInt_, formatName, segmentSuffix, compressionMode, chunkSize, maxDocsPerChunk, blockSize)
+}
+
+OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat *create_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat_initWithNSString_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_withInt_withInt_withInt_(NSString *formatName, NSString *segmentSuffix, OrgApacheLuceneCodecsCompressingCompressionMode *compressionMode, jint chunkSize, jint maxDocsPerChunk, jint blockSize) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat, initWithNSString_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_withInt_withInt_withInt_, formatName, segmentSuffix, compressionMode, chunkSize, maxDocsPerChunk, blockSize)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat)

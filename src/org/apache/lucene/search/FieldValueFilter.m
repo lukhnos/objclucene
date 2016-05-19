@@ -4,9 +4,11 @@
 //
 
 #include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
+#include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/index/DocValues.h"
 #include "org/apache/lucene/index/LeafReader.h"
 #include "org/apache/lucene/index/LeafReaderContext.h"
@@ -50,6 +52,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchFieldValueFilter_$1_ini
 
 __attribute__((unused)) static OrgApacheLuceneSearchFieldValueFilter_$1 *new_OrgApacheLuceneSearchFieldValueFilter_$1_initWithOrgApacheLuceneUtilBits_withInt_withOrgApacheLuceneUtilBits_(id<OrgApacheLuceneUtilBits> capture$0, jint arg$0, id<OrgApacheLuceneUtilBits> arg$1) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchFieldValueFilter_$1 *create_OrgApacheLuceneSearchFieldValueFilter_$1_initWithOrgApacheLuceneUtilBits_withInt_withOrgApacheLuceneUtilBits_(id<OrgApacheLuceneUtilBits> capture$0, jint arg$0, id<OrgApacheLuceneUtilBits> arg$1);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldValueFilter_$1)
 
 @interface OrgApacheLuceneSearchFieldValueFilter_$2 : OrgApacheLuceneSearchDocValuesDocIdSet {
@@ -72,6 +76,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFieldValueFilter_$2, val$docsWithField_
 __attribute__((unused)) static void OrgApacheLuceneSearchFieldValueFilter_$2_initWithOrgApacheLuceneUtilBits_withInt_withOrgApacheLuceneUtilBits_(OrgApacheLuceneSearchFieldValueFilter_$2 *self, id<OrgApacheLuceneUtilBits> capture$0, jint arg$0, id<OrgApacheLuceneUtilBits> arg$1);
 
 __attribute__((unused)) static OrgApacheLuceneSearchFieldValueFilter_$2 *new_OrgApacheLuceneSearchFieldValueFilter_$2_initWithOrgApacheLuceneUtilBits_withInt_withOrgApacheLuceneUtilBits_(id<OrgApacheLuceneUtilBits> capture$0, jint arg$0, id<OrgApacheLuceneUtilBits> arg$1) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchFieldValueFilter_$2 *create_OrgApacheLuceneSearchFieldValueFilter_$2_initWithOrgApacheLuceneUtilBits_withInt_withOrgApacheLuceneUtilBits_(id<OrgApacheLuceneUtilBits> capture$0, jint arg$0, id<OrgApacheLuceneUtilBits> arg$1);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldValueFilter_$2)
 
@@ -103,23 +109,23 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldValueFilter_$2)
     if ([docsWithField isKindOfClass:[OrgApacheLuceneUtilBits_MatchAllBits class]]) {
       return nil;
     }
-    return [new_OrgApacheLuceneSearchFieldValueFilter_$1_initWithOrgApacheLuceneUtilBits_withInt_withOrgApacheLuceneUtilBits_(docsWithField, [((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) maxDoc], acceptDocs) autorelease];
+    return create_OrgApacheLuceneSearchFieldValueFilter_$1_initWithOrgApacheLuceneUtilBits_withInt_withOrgApacheLuceneUtilBits_(docsWithField, [((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) maxDoc], acceptDocs);
   }
   else {
     if ([docsWithField isKindOfClass:[OrgApacheLuceneUtilBits_MatchNoBits class]]) {
       return nil;
     }
     if ([docsWithField isKindOfClass:[OrgApacheLuceneUtilBitSet class]]) {
-      return OrgApacheLuceneSearchBitsFilteredDocIdSet_wrapWithOrgApacheLuceneSearchDocIdSet_withOrgApacheLuceneUtilBits_([new_OrgApacheLuceneUtilBitDocIdSet_initWithOrgApacheLuceneUtilBitSet_((OrgApacheLuceneUtilBitSet *) check_class_cast(docsWithField, [OrgApacheLuceneUtilBitSet class])) autorelease], acceptDocs);
+      return OrgApacheLuceneSearchBitsFilteredDocIdSet_wrapWithOrgApacheLuceneSearchDocIdSet_withOrgApacheLuceneUtilBits_(create_OrgApacheLuceneUtilBitDocIdSet_initWithOrgApacheLuceneUtilBitSet_((OrgApacheLuceneUtilBitSet *) cast_chk(docsWithField, [OrgApacheLuceneUtilBitSet class])), acceptDocs);
     }
-    return [new_OrgApacheLuceneSearchFieldValueFilter_$2_initWithOrgApacheLuceneUtilBits_withInt_withOrgApacheLuceneUtilBits_(docsWithField, [((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) maxDoc], acceptDocs) autorelease];
+    return create_OrgApacheLuceneSearchFieldValueFilter_$2_initWithOrgApacheLuceneUtilBits_withInt_withOrgApacheLuceneUtilBits_(docsWithField, [((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) maxDoc], acceptDocs);
   }
 }
 
 - (NSUInteger)hash {
   jint prime = 31;
   jint result = ((jint) [super hash]);
-  result = prime * result + ((field_ == nil) ? 0 : ((jint) [field_ hash]));
+  result = prime * result + ((field_ == nil) ? 0 : ((jint) [((NSString *) nil_chk(field_)) hash]));
   result = prime * result + (negate_ ? 1231 : 1237);
   return result;
 }
@@ -129,12 +135,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldValueFilter_$2)
   if ([super isEqual:obj] == false) {
     return false;
   }
-  OrgApacheLuceneSearchFieldValueFilter *other = (OrgApacheLuceneSearchFieldValueFilter *) check_class_cast(obj, [OrgApacheLuceneSearchFieldValueFilter class]);
+  OrgApacheLuceneSearchFieldValueFilter *other = (OrgApacheLuceneSearchFieldValueFilter *) cast_chk(obj, [OrgApacheLuceneSearchFieldValueFilter class]);
   if (field_ == nil) {
     if (((OrgApacheLuceneSearchFieldValueFilter *) nil_chk(other))->field_ != nil) return false;
   }
   else if (![field_ isEqual:((OrgApacheLuceneSearchFieldValueFilter *) nil_chk(other))->field_]) return false;
-  if (negate_ != ((OrgApacheLuceneSearchFieldValueFilter *) nil_chk(other))->negate_) return false;
+  if (negate_ != other->negate_) return false;
   return true;
 }
 
@@ -142,13 +148,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldValueFilter_$2)
   return JreStrcat("$$$ZC", @"FieldValueFilter [field=", field_, @", negate=", negate_, ']');
 }
 
++ (IOSObjectArray *)__annotations {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
 - (void)dealloc {
   RELEASE_(field_);
   [super dealloc];
-}
-
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -177,9 +183,11 @@ void OrgApacheLuceneSearchFieldValueFilter_initWithNSString_(OrgApacheLuceneSear
 }
 
 OrgApacheLuceneSearchFieldValueFilter *new_OrgApacheLuceneSearchFieldValueFilter_initWithNSString_(NSString *field) {
-  OrgApacheLuceneSearchFieldValueFilter *self = [OrgApacheLuceneSearchFieldValueFilter alloc];
-  OrgApacheLuceneSearchFieldValueFilter_initWithNSString_(self, field);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFieldValueFilter, initWithNSString_, field)
+}
+
+OrgApacheLuceneSearchFieldValueFilter *create_OrgApacheLuceneSearchFieldValueFilter_initWithNSString_(NSString *field) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFieldValueFilter, initWithNSString_, field)
 }
 
 void OrgApacheLuceneSearchFieldValueFilter_initWithNSString_withBoolean_(OrgApacheLuceneSearchFieldValueFilter *self, NSString *field, jboolean negate) {
@@ -189,9 +197,11 @@ void OrgApacheLuceneSearchFieldValueFilter_initWithNSString_withBoolean_(OrgApac
 }
 
 OrgApacheLuceneSearchFieldValueFilter *new_OrgApacheLuceneSearchFieldValueFilter_initWithNSString_withBoolean_(NSString *field, jboolean negate) {
-  OrgApacheLuceneSearchFieldValueFilter *self = [OrgApacheLuceneSearchFieldValueFilter alloc];
-  OrgApacheLuceneSearchFieldValueFilter_initWithNSString_withBoolean_(self, field, negate);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFieldValueFilter, initWithNSString_withBoolean_, field, negate)
+}
+
+OrgApacheLuceneSearchFieldValueFilter *create_OrgApacheLuceneSearchFieldValueFilter_initWithNSString_withBoolean_(NSString *field, jboolean negate) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFieldValueFilter, initWithNSString_withBoolean_, field, negate)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldValueFilter)
@@ -235,9 +245,11 @@ void OrgApacheLuceneSearchFieldValueFilter_$1_initWithOrgApacheLuceneUtilBits_wi
 }
 
 OrgApacheLuceneSearchFieldValueFilter_$1 *new_OrgApacheLuceneSearchFieldValueFilter_$1_initWithOrgApacheLuceneUtilBits_withInt_withOrgApacheLuceneUtilBits_(id<OrgApacheLuceneUtilBits> capture$0, jint arg$0, id<OrgApacheLuceneUtilBits> arg$1) {
-  OrgApacheLuceneSearchFieldValueFilter_$1 *self = [OrgApacheLuceneSearchFieldValueFilter_$1 alloc];
-  OrgApacheLuceneSearchFieldValueFilter_$1_initWithOrgApacheLuceneUtilBits_withInt_withOrgApacheLuceneUtilBits_(self, capture$0, arg$0, arg$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFieldValueFilter_$1, initWithOrgApacheLuceneUtilBits_withInt_withOrgApacheLuceneUtilBits_, capture$0, arg$0, arg$1)
+}
+
+OrgApacheLuceneSearchFieldValueFilter_$1 *create_OrgApacheLuceneSearchFieldValueFilter_$1_initWithOrgApacheLuceneUtilBits_withInt_withOrgApacheLuceneUtilBits_(id<OrgApacheLuceneUtilBits> capture$0, jint arg$0, id<OrgApacheLuceneUtilBits> arg$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFieldValueFilter_$1, initWithOrgApacheLuceneUtilBits_withInt_withOrgApacheLuceneUtilBits_, capture$0, arg$0, arg$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldValueFilter_$1)
@@ -281,9 +293,11 @@ void OrgApacheLuceneSearchFieldValueFilter_$2_initWithOrgApacheLuceneUtilBits_wi
 }
 
 OrgApacheLuceneSearchFieldValueFilter_$2 *new_OrgApacheLuceneSearchFieldValueFilter_$2_initWithOrgApacheLuceneUtilBits_withInt_withOrgApacheLuceneUtilBits_(id<OrgApacheLuceneUtilBits> capture$0, jint arg$0, id<OrgApacheLuceneUtilBits> arg$1) {
-  OrgApacheLuceneSearchFieldValueFilter_$2 *self = [OrgApacheLuceneSearchFieldValueFilter_$2 alloc];
-  OrgApacheLuceneSearchFieldValueFilter_$2_initWithOrgApacheLuceneUtilBits_withInt_withOrgApacheLuceneUtilBits_(self, capture$0, arg$0, arg$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFieldValueFilter_$2, initWithOrgApacheLuceneUtilBits_withInt_withOrgApacheLuceneUtilBits_, capture$0, arg$0, arg$1)
+}
+
+OrgApacheLuceneSearchFieldValueFilter_$2 *create_OrgApacheLuceneSearchFieldValueFilter_$2_initWithOrgApacheLuceneUtilBits_withInt_withOrgApacheLuceneUtilBits_(id<OrgApacheLuceneUtilBits> capture$0, jint arg$0, id<OrgApacheLuceneUtilBits> arg$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFieldValueFilter_$2, initWithOrgApacheLuceneUtilBits_withInt_withOrgApacheLuceneUtilBits_, capture$0, arg$0, arg$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldValueFilter_$2)

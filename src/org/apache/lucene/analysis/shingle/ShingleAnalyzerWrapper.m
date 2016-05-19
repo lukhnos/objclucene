@@ -104,14 +104,14 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)wrapComponentsWithNSString:(NSString *)fieldName
                             withOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents:(OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)components {
-  OrgApacheLuceneAnalysisShingleShingleFilter *filter = [new_OrgApacheLuceneAnalysisShingleShingleFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_([((OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *) nil_chk(components)) getTokenStream], minShingleSize_, maxShingleSize_) autorelease];
+  OrgApacheLuceneAnalysisShingleShingleFilter *filter = create_OrgApacheLuceneAnalysisShingleShingleFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_([((OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *) nil_chk(components)) getTokenStream], minShingleSize_, maxShingleSize_);
   [filter setMinShingleSizeWithInt:minShingleSize_];
   [filter setMaxShingleSizeWithInt:maxShingleSize_];
   [filter setTokenSeparatorWithNSString:tokenSeparator_];
   [filter setOutputUnigramsWithBoolean:outputUnigrams_];
   [filter setOutputUnigramsIfNoShinglesWithBoolean:outputUnigramsIfNoShingles_];
   [filter setFillerTokenWithNSString:fillerToken_];
-  return [new_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_([components getTokenizer], filter) autorelease];
+  return create_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_([components getTokenizer], filter);
 }
 
 - (void)dealloc {
@@ -158,9 +158,11 @@ void OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_initWithOrgApacheLucen
 }
 
 OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper *new_OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *defaultAnalyzer) {
-  OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper *self = [OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper alloc];
-  OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_(self, defaultAnalyzer);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper, initWithOrgApacheLuceneAnalysisAnalyzer_, defaultAnalyzer)
+}
+
+OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper *create_OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *defaultAnalyzer) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper, initWithOrgApacheLuceneAnalysisAnalyzer_, defaultAnalyzer)
 }
 
 void OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_withInt_(OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper *self, OrgApacheLuceneAnalysisAnalyzer *defaultAnalyzer, jint maxShingleSize) {
@@ -168,33 +170,37 @@ void OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_initWithOrgApacheLucen
 }
 
 OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper *new_OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_withInt_(OrgApacheLuceneAnalysisAnalyzer *defaultAnalyzer, jint maxShingleSize) {
-  OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper *self = [OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper alloc];
-  OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_withInt_(self, defaultAnalyzer, maxShingleSize);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper, initWithOrgApacheLuceneAnalysisAnalyzer_withInt_, defaultAnalyzer, maxShingleSize)
+}
+
+OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper *create_OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_withInt_(OrgApacheLuceneAnalysisAnalyzer *defaultAnalyzer, jint maxShingleSize) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper, initWithOrgApacheLuceneAnalysisAnalyzer_withInt_, defaultAnalyzer, maxShingleSize)
 }
 
 void OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_withInt_withInt_(OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper *self, OrgApacheLuceneAnalysisAnalyzer *defaultAnalyzer, jint minShingleSize, jint maxShingleSize) {
-  OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_withInt_withInt_withNSString_withBoolean_withBoolean_withNSString_(self, defaultAnalyzer, minShingleSize, maxShingleSize, OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_TOKEN_SEPARATOR_, true, false, OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_FILLER_TOKEN_);
+  OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_withInt_withInt_withNSString_withBoolean_withBoolean_withNSString_(self, defaultAnalyzer, minShingleSize, maxShingleSize, OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_TOKEN_SEPARATOR, true, false, OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_FILLER_TOKEN);
 }
 
 OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper *new_OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_withInt_withInt_(OrgApacheLuceneAnalysisAnalyzer *defaultAnalyzer, jint minShingleSize, jint maxShingleSize) {
-  OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper *self = [OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper alloc];
-  OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_withInt_withInt_(self, defaultAnalyzer, minShingleSize, maxShingleSize);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper, initWithOrgApacheLuceneAnalysisAnalyzer_withInt_withInt_, defaultAnalyzer, minShingleSize, maxShingleSize)
+}
+
+OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper *create_OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_withInt_withInt_(OrgApacheLuceneAnalysisAnalyzer *defaultAnalyzer, jint minShingleSize, jint maxShingleSize) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper, initWithOrgApacheLuceneAnalysisAnalyzer_withInt_withInt_, defaultAnalyzer, minShingleSize, maxShingleSize)
 }
 
 void OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_withInt_withInt_withNSString_withBoolean_withBoolean_withNSString_(OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper *self, OrgApacheLuceneAnalysisAnalyzer *delegate, jint minShingleSize, jint maxShingleSize, NSString *tokenSeparator, jboolean outputUnigrams, jboolean outputUnigramsIfNoShingles, NSString *fillerToken) {
   OrgApacheLuceneAnalysisAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_(self, [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(delegate)) getReuseStrategy]);
   JreStrongAssign(&self->delegate_, delegate);
   if (maxShingleSize < 2) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"Max shingle size must be >= 2") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"Max shingle size must be >= 2");
   }
   self->maxShingleSize_ = maxShingleSize;
   if (minShingleSize < 2) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"Min shingle size must be >= 2") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"Min shingle size must be >= 2");
   }
   if (minShingleSize > maxShingleSize) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"Min shingle size must be <= max shingle size") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"Min shingle size must be <= max shingle size");
   }
   self->minShingleSize_ = minShingleSize;
   JreStrongAssign(&self->tokenSeparator_, (tokenSeparator == nil ? @"" : tokenSeparator));
@@ -204,9 +210,11 @@ void OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_initWithOrgApacheLucen
 }
 
 OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper *new_OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_withInt_withInt_withNSString_withBoolean_withBoolean_withNSString_(OrgApacheLuceneAnalysisAnalyzer *delegate, jint minShingleSize, jint maxShingleSize, NSString *tokenSeparator, jboolean outputUnigrams, jboolean outputUnigramsIfNoShingles, NSString *fillerToken) {
-  OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper *self = [OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper alloc];
-  OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_withInt_withInt_withNSString_withBoolean_withBoolean_withNSString_(self, delegate, minShingleSize, maxShingleSize, tokenSeparator, outputUnigrams, outputUnigramsIfNoShingles, fillerToken);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper, initWithOrgApacheLuceneAnalysisAnalyzer_withInt_withInt_withNSString_withBoolean_withBoolean_withNSString_, delegate, minShingleSize, maxShingleSize, tokenSeparator, outputUnigrams, outputUnigramsIfNoShingles, fillerToken)
+}
+
+OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper *create_OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_withInt_withInt_withNSString_withBoolean_withBoolean_withNSString_(OrgApacheLuceneAnalysisAnalyzer *delegate, jint minShingleSize, jint maxShingleSize, NSString *tokenSeparator, jboolean outputUnigrams, jboolean outputUnigramsIfNoShingles, NSString *fillerToken) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper, initWithOrgApacheLuceneAnalysisAnalyzer_withInt_withInt_withNSString_withBoolean_withBoolean_withNSString_, delegate, minShingleSize, maxShingleSize, tokenSeparator, outputUnigrams, outputUnigramsIfNoShingles, fillerToken)
 }
 
 void OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_init(OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper *self) {
@@ -214,19 +222,23 @@ void OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_init(OrgApacheLuceneAn
 }
 
 OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper *new_OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_init() {
-  OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper *self = [OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper alloc];
-  OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper, init)
+}
+
+OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper *create_OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper, init)
 }
 
 void OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_initWithInt_withInt_(OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper *self, jint minShingleSize, jint maxShingleSize) {
-  OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_withInt_withInt_(self, [new_OrgApacheLuceneAnalysisStandardStandardAnalyzer_init() autorelease], minShingleSize, maxShingleSize);
+  OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_withInt_withInt_(self, create_OrgApacheLuceneAnalysisStandardStandardAnalyzer_init(), minShingleSize, maxShingleSize);
 }
 
 OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper *new_OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_initWithInt_withInt_(jint minShingleSize, jint maxShingleSize) {
-  OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper *self = [OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper alloc];
-  OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_initWithInt_withInt_(self, minShingleSize, maxShingleSize);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper, initWithInt_withInt_, minShingleSize, maxShingleSize)
+}
+
+OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper *create_OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_initWithInt_withInt_(jint minShingleSize, jint maxShingleSize) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper, initWithInt_withInt_, minShingleSize, maxShingleSize)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper)

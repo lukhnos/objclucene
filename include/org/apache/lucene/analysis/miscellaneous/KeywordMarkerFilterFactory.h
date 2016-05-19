@@ -5,33 +5,51 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_) && (OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory))
+#define OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-#define OrgApacheLuceneAnalysisUtilResourceLoaderAware_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilResourceLoaderAware_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilResourceLoaderAware 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilResourceLoaderAware 1
 #include "org/apache/lucene/analysis/util/ResourceLoaderAware.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol JavaUtilMap;
 @protocol OrgApacheLuceneAnalysisUtilResourceLoader;
 
+/*!
+ @brief Factory for <code>KeywordMarkerFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_keyword" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+ &lt;filter class="solr.KeywordMarkerFilterFactory" protected="protectedkeyword.txt" pattern="^.+er$" ignoreCase="false"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilResourceLoaderAware >
+
++ (NSString *)PROTECTED_TOKENS;
+
++ (NSString *)PATTERN;
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new KeywordMarkerFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -44,18 +62,24 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_PROTECTED_TOKENS_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory, PROTECTED_TOKENS_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_get_PROTECTED_TOKENS();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_PROTECTED_TOKENS;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory, PROTECTED_TOKENS, NSString *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_PATTERN_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory, PATTERN_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_get_PATTERN();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_PATTERN;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory, PATTERN, NSString *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory *self, id<JavaUtilMap> args);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory *create_OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory")

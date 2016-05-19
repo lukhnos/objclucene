@@ -5,31 +5,58 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter_RESTRICT
-#define OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter 0
 #else
-#define OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter
 
-#if !defined (_OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter_) && (OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter_
+#if !defined (OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter || defined(INCLUDE_OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter))
+#define OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter_
 
-#define OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase_RESTRICT 1
-#define OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase 1
+#define INCLUDE_OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase 1
 #include "org/apache/lucene/analysis/compound/Lucene43CompoundWordTokenFilterBase.h"
 
+@class IOSObjectArray;
 @class OrgApacheLuceneAnalysisTokenStream;
 @class OrgApacheLuceneAnalysisUtilCharArraySet;
 
+/*!
+ @brief A <code>TokenFilter</code> that decomposes compound words found in many Germanic languages, using
+ pre-4.4 behavior.
+ */
 @interface OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter : OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new <code>Lucene43DictionaryCompoundWordTokenFilter</code>
+ @param input
+ the <code>TokenStream</code> to process
+ @param dictionary
+ the word dictionary to match against.
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
                withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)dictionary;
 
+/*!
+ @brief Creates a new <code>Lucene43DictionaryCompoundWordTokenFilter</code>
+ @param input
+ the <code>TokenStream</code> to process
+ @param dictionary
+ the word dictionary to match against.
+ @param minWordSize
+ only words longer than this get processed
+ @param minSubwordSize
+ only subwords longer than this get to the output stream
+ @param maxSubwordSize
+ only subwords shorter than this get to the output stream
+ @param onlyLongestMatch
+ Add only the longest matching subword to the stream
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
                withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)dictionary
                                                    withInt:(jint)minWordSize
@@ -49,12 +76,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompound
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter *new_OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisUtilCharArraySet *dictionary) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter *create_OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisUtilCharArraySet *dictionary);
+
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_withInt_withInt_withInt_withBoolean_(OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter *self, OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisUtilCharArraySet *dictionary, jint minWordSize, jint minSubwordSize, jint maxSubwordSize, jboolean onlyLongestMatch);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter *new_OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_withInt_withInt_withInt_withBoolean_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisUtilCharArraySet *dictionary, jint minWordSize, jint minSubwordSize, jint maxSubwordSize, jboolean onlyLongestMatch) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter *create_OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_withInt_withInt_withInt_withBoolean_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisUtilCharArraySet *dictionary, jint minWordSize, jint minSubwordSize, jint maxSubwordSize, jboolean onlyLongestMatch);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter")

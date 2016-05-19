@@ -5,28 +5,40 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilPackedGrowableWriter_INCLUDE_ALL")
-#if OrgApacheLuceneUtilPackedGrowableWriter_RESTRICT
-#define OrgApacheLuceneUtilPackedGrowableWriter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedGrowableWriter")
+#ifdef RESTRICT_OrgApacheLuceneUtilPackedGrowableWriter
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackedGrowableWriter 0
 #else
-#define OrgApacheLuceneUtilPackedGrowableWriter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackedGrowableWriter 1
 #endif
-#undef OrgApacheLuceneUtilPackedGrowableWriter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilPackedGrowableWriter
 
-#if !defined (_OrgApacheLuceneUtilPackedGrowableWriter_) && (OrgApacheLuceneUtilPackedGrowableWriter_INCLUDE_ALL || OrgApacheLuceneUtilPackedGrowableWriter_INCLUDE)
-#define _OrgApacheLuceneUtilPackedGrowableWriter_
+#if !defined (OrgApacheLuceneUtilPackedGrowableWriter_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedGrowableWriter || defined(INCLUDE_OrgApacheLuceneUtilPackedGrowableWriter))
+#define OrgApacheLuceneUtilPackedGrowableWriter_
 
-#define OrgApacheLuceneUtilPackedPackedInts_RESTRICT 1
-#define OrgApacheLuceneUtilPackedPackedInts_Mutable_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilPackedPackedInts 1
+#define INCLUDE_OrgApacheLuceneUtilPackedPackedInts_Mutable 1
 #include "org/apache/lucene/util/packed/PackedInts.h"
 
 @class IOSLongArray;
 @class OrgApacheLuceneStoreDataOutput;
 
+/*!
+ @brief Implements <code>PackedInts.Mutable</code>, but grows the
+ bit count of the underlying packed ints on-demand.
+ <p>Beware that this class will accept to set negative values but in order
+ to do this, it will grow the number of bits per value to 64.
+ <p>@@lucene.internal</p>
+ */
 @interface OrgApacheLuceneUtilPackedGrowableWriter : OrgApacheLuceneUtilPackedPackedInts_Mutable
 
 #pragma mark Public
 
+/*!
+ @param startBitsPerValue       the initial number of bits per value, may grow depending on the data
+ @param valueCount              the number of values
+ @param acceptableOverheadRatio an acceptable overhead ratio
+ */
 - (instancetype)initWithInt:(jint)startBitsPerValue
                     withInt:(jint)valueCount
                   withFloat:(jfloat)acceptableOverheadRatio;
@@ -72,8 +84,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedGrowableWriter_initWithInt_withI
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedGrowableWriter *new_OrgApacheLuceneUtilPackedGrowableWriter_initWithInt_withInt_withFloat_(jint startBitsPerValue, jint valueCount, jfloat acceptableOverheadRatio) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedGrowableWriter *create_OrgApacheLuceneUtilPackedGrowableWriter_initWithInt_withInt_withFloat_(jint startBitsPerValue, jint valueCount, jfloat acceptableOverheadRatio);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedGrowableWriter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilPackedGrowableWriter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedGrowableWriter")

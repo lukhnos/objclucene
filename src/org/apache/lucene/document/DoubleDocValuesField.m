@@ -22,7 +22,7 @@
 }
 
 - (void)setLongValueWithLong:(jlong)value {
-  @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"cannot change value type from Double to Long") autorelease];
+  @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"cannot change value type from Double to Long");
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -42,9 +42,11 @@ void OrgApacheLuceneDocumentDoubleDocValuesField_initWithNSString_withDouble_(Or
 }
 
 OrgApacheLuceneDocumentDoubleDocValuesField *new_OrgApacheLuceneDocumentDoubleDocValuesField_initWithNSString_withDouble_(NSString *name, jdouble value) {
-  OrgApacheLuceneDocumentDoubleDocValuesField *self = [OrgApacheLuceneDocumentDoubleDocValuesField alloc];
-  OrgApacheLuceneDocumentDoubleDocValuesField_initWithNSString_withDouble_(self, name, value);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentDoubleDocValuesField, initWithNSString_withDouble_, name, value)
+}
+
+OrgApacheLuceneDocumentDoubleDocValuesField *create_OrgApacheLuceneDocumentDoubleDocValuesField_initWithNSString_withDouble_(NSString *name, jdouble value) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentDoubleDocValuesField, initWithNSString_withDouble_, name, value)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentDoubleDocValuesField)

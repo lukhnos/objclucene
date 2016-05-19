@@ -5,38 +5,97 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsBlocktreeStats_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsBlocktreeStats_RESTRICT
-#define OrgApacheLuceneCodecsBlocktreeStats_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeStats")
+#ifdef RESTRICT_OrgApacheLuceneCodecsBlocktreeStats
+#define INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeStats 0
 #else
-#define OrgApacheLuceneCodecsBlocktreeStats_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeStats 1
 #endif
-#undef OrgApacheLuceneCodecsBlocktreeStats_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsBlocktreeStats
 
-#if !defined (_OrgApacheLuceneCodecsBlocktreeStats_) && (OrgApacheLuceneCodecsBlocktreeStats_INCLUDE_ALL || OrgApacheLuceneCodecsBlocktreeStats_INCLUDE)
-#define _OrgApacheLuceneCodecsBlocktreeStats_
+#if !defined (OrgApacheLuceneCodecsBlocktreeStats_) && (INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeStats || defined(INCLUDE_OrgApacheLuceneCodecsBlocktreeStats))
+#define OrgApacheLuceneCodecsBlocktreeStats_
 
 @class IOSIntArray;
 @class OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame;
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief BlockTree statistics for a single field 
+ returned by <code>FieldReader.getStats()</code>.
+ */
 @interface OrgApacheLuceneCodecsBlocktreeStats : NSObject {
  @public
+  /*!
+   @brief Byte size of the index.
+   */
   jlong indexNumBytes_;
+  /*!
+   @brief Total number of terms in the field.
+   */
   jlong totalTermCount_;
+  /*!
+   @brief Total number of bytes (sum of term lengths) across all terms in the field.
+   */
   jlong totalTermBytes_;
+  /*!
+   @brief The number of normal (non-floor) blocks in the terms file.
+   */
   jint nonFloorBlockCount_;
+  /*!
+   @brief The number of floor blocks (meta-blocks larger than the
+ allowed <code>maxItemsPerBlock</code>) in the terms file.
+   */
   jint floorBlockCount_;
+  /*!
+   @brief The number of sub-blocks within the floor blocks.
+   */
   jint floorSubBlockCount_;
+  /*!
+   @brief The number of "internal" blocks (that have both
+ terms and sub-blocks).
+   */
   jint mixedBlockCount_;
+  /*!
+   @brief The number of "leaf" blocks (blocks that have only
+ terms).
+   */
   jint termsOnlyBlockCount_;
+  /*!
+   @brief The number of "internal" blocks that do not contain
+ terms (have only sub-blocks).
+   */
   jint subBlocksOnlyBlockCount_;
+  /*!
+   @brief Total number of blocks.
+   */
   jint totalBlockCount_;
+  /*!
+   @brief Number of blocks at each prefix depth.
+   */
   IOSIntArray *blockCountByPrefixLen_;
+  /*!
+   @brief Total number of bytes used to store term suffixes.
+   */
   jlong totalBlockSuffixBytes_;
+  /*!
+   @brief Total number of bytes used to store term stats (not
+ including what the <code>PostingsReaderBase</code>
+ stores.
+   */
   jlong totalBlockStatsBytes_;
+  /*!
+   @brief Total bytes stored by the <code>PostingsReaderBase</code>,
+ plus the other few vInts stored in the frame.
+   */
   jlong totalBlockOtherBytes_;
+  /*!
+   @brief Segment name.
+   */
   NSString *segment_;
+  /*!
+   @brief Field name.
+   */
   NSString *field_;
 }
 
@@ -70,8 +129,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsBlocktreeStats_initWithNSString_with
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeStats *new_OrgApacheLuceneCodecsBlocktreeStats_initWithNSString_withNSString_(NSString *segment, NSString *field) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeStats *create_OrgApacheLuceneCodecsBlocktreeStats_initWithNSString_withNSString_(NSString *segment, NSString *field);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsBlocktreeStats)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsBlocktreeStats_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeStats")

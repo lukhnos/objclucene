@@ -5,36 +5,56 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilBytesRefIterator_INCLUDE_ALL")
-#if OrgApacheLuceneUtilBytesRefIterator_RESTRICT
-#define OrgApacheLuceneUtilBytesRefIterator_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilBytesRefIterator")
+#ifdef RESTRICT_OrgApacheLuceneUtilBytesRefIterator
+#define INCLUDE_ALL_OrgApacheLuceneUtilBytesRefIterator 0
 #else
-#define OrgApacheLuceneUtilBytesRefIterator_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilBytesRefIterator 1
 #endif
-#undef OrgApacheLuceneUtilBytesRefIterator_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilBytesRefIterator
 
-#if !defined (_OrgApacheLuceneUtilBytesRefIterator_) && (OrgApacheLuceneUtilBytesRefIterator_INCLUDE_ALL || OrgApacheLuceneUtilBytesRefIterator_INCLUDE)
-#define _OrgApacheLuceneUtilBytesRefIterator_
+#if !defined (OrgApacheLuceneUtilBytesRefIterator_) && (INCLUDE_ALL_OrgApacheLuceneUtilBytesRefIterator || defined(INCLUDE_OrgApacheLuceneUtilBytesRefIterator))
+#define OrgApacheLuceneUtilBytesRefIterator_
 
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief A simple iterator interface for <code>BytesRef</code> iteration.
+ */
 @protocol OrgApacheLuceneUtilBytesRefIterator < NSObject, JavaObject >
 
+/*!
+ @brief Increments the iteration to the next <code>BytesRef</code> in the iterator.
+ Returns the resulting <code>BytesRef</code> or <code>null</code> if the end of
+ the iterator is reached. The returned BytesRef may be re-used across calls
+ to next. After this method returns null, do not call it again: the results
+ are undefined.
+ @return the next <code>BytesRef</code> in the iterator or <code>null</code> if
+ the end of the iterator is reached.
+ @throws IOException If there is a low-level I/O error.
+ */
 - (OrgApacheLuceneUtilBytesRef *)next;
 
 @end
 
 @interface OrgApacheLuceneUtilBytesRefIterator : NSObject
 
++ (id<OrgApacheLuceneUtilBytesRefIterator>)EMPTY;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilBytesRefIterator)
 
-FOUNDATION_EXPORT id<OrgApacheLuceneUtilBytesRefIterator> OrgApacheLuceneUtilBytesRefIterator_EMPTY_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilBytesRefIterator, EMPTY_, id<OrgApacheLuceneUtilBytesRefIterator>)
+/*!
+ @brief Singleton BytesRefIterator that iterates over 0 BytesRefs.
+ */
+inline id<OrgApacheLuceneUtilBytesRefIterator> OrgApacheLuceneUtilBytesRefIterator_get_EMPTY();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT id<OrgApacheLuceneUtilBytesRefIterator> OrgApacheLuceneUtilBytesRefIterator_EMPTY;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilBytesRefIterator, EMPTY, id<OrgApacheLuceneUtilBytesRefIterator>)
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBytesRefIterator)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilBytesRefIterator_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilBytesRefIterator")

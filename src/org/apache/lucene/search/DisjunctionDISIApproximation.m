@@ -34,7 +34,7 @@
     top = [subIterators_ updateTop];
   }
   while (((OrgApacheLuceneSearchDisiWrapper *) nil_chk(top))->doc_ == doc);
-  return ((OrgApacheLuceneSearchDisiWrapper *) nil_chk(top))->doc_;
+  return top->doc_;
 }
 
 - (jint)advanceWithInt:(jint)target {
@@ -44,7 +44,7 @@
     top = [subIterators_ updateTop];
   }
   while (((OrgApacheLuceneSearchDisiWrapper *) nil_chk(top))->doc_ < target);
-  return ((OrgApacheLuceneSearchDisiWrapper *) nil_chk(top))->doc_;
+  return top->doc_;
 }
 
 - (void)dealloc {
@@ -54,7 +54,7 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchDisiPriorityQueue:", "DisjunctionDISIApproximation", NULL, 0x1, NULL, NULL },
+    { "initWithOrgApacheLuceneSearchDisiPriorityQueue:", "DisjunctionDISIApproximation", NULL, 0x1, NULL, "(Lorg/apache/lucene/search/DisiPriorityQueue<TIter;>;)V" },
     { "cost", NULL, "J", 0x1, NULL, NULL },
     { "docID", NULL, "I", 0x1, NULL, NULL },
     { "nextDoc", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
@@ -81,9 +81,11 @@ void OrgApacheLuceneSearchDisjunctionDISIApproximation_initWithOrgApacheLuceneSe
 }
 
 OrgApacheLuceneSearchDisjunctionDISIApproximation *new_OrgApacheLuceneSearchDisjunctionDISIApproximation_initWithOrgApacheLuceneSearchDisiPriorityQueue_(OrgApacheLuceneSearchDisiPriorityQueue *subIterators) {
-  OrgApacheLuceneSearchDisjunctionDISIApproximation *self = [OrgApacheLuceneSearchDisjunctionDISIApproximation alloc];
-  OrgApacheLuceneSearchDisjunctionDISIApproximation_initWithOrgApacheLuceneSearchDisiPriorityQueue_(self, subIterators);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDisjunctionDISIApproximation, initWithOrgApacheLuceneSearchDisiPriorityQueue_, subIterators)
+}
+
+OrgApacheLuceneSearchDisjunctionDISIApproximation *create_OrgApacheLuceneSearchDisjunctionDISIApproximation_initWithOrgApacheLuceneSearchDisiPriorityQueue_(OrgApacheLuceneSearchDisiPriorityQueue *subIterators) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDisjunctionDISIApproximation, initWithOrgApacheLuceneSearchDisiPriorityQueue_, subIterators)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDisjunctionDISIApproximation)

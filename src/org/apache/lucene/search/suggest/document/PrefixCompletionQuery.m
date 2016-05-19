@@ -36,8 +36,8 @@
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores {
-  OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *stream = (OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *) check_class_cast([((OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer *) nil_chk(analyzer_)) tokenStreamWithNSString:[self getField] withNSString:[((OrgApacheLuceneIndexTerm *) nil_chk([self getTerm])) text]], [OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream class]);
-  return [new_OrgApacheLuceneSearchSuggestDocumentCompletionWeight_initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery_withOrgApacheLuceneUtilAutomatonAutomaton_(self, [((OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *) nil_chk(stream)) toAutomaton]) autorelease];
+  OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *stream = (OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *) cast_chk([((OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer *) nil_chk(analyzer_)) tokenStreamWithNSString:[self getField] withNSString:[((OrgApacheLuceneIndexTerm *) nil_chk([self getTerm])) text]], [OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream class]);
+  return create_OrgApacheLuceneSearchSuggestDocumentCompletionWeight_initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery_withOrgApacheLuceneUtilAutomatonAutomaton_(self, [((OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *) nil_chk(stream)) toAutomaton]);
 }
 
 - (void)dealloc {
@@ -65,9 +65,11 @@ void OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery_initWithOrgApache
 }
 
 OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery *new_OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_(OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneIndexTerm *term) {
-  OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery *self = [OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery alloc];
-  OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_(self, analyzer, term);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery, initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_, analyzer, term)
+}
+
+OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery *create_OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_(OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneIndexTerm *term) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery, initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_, analyzer, term)
 }
 
 void OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchSuggestBitsProducer_(OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery *self, OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneIndexTerm *term, OrgApacheLuceneSearchSuggestBitsProducer *filter) {
@@ -76,14 +78,16 @@ void OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery_initWithOrgApache
     JreStrongAssignAndConsume(&self->analyzer_, new_OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_(analyzer));
   }
   else {
-    JreStrongAssign(&self->analyzer_, (OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer *) check_class_cast(analyzer, [OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer class]));
+    JreStrongAssign(&self->analyzer_, (OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer *) cast_chk(analyzer, [OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer class]));
   }
 }
 
 OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery *new_OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchSuggestBitsProducer_(OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneIndexTerm *term, OrgApacheLuceneSearchSuggestBitsProducer *filter) {
-  OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery *self = [OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery alloc];
-  OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchSuggestBitsProducer_(self, analyzer, term, filter);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery, initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchSuggestBitsProducer_, analyzer, term, filter)
+}
+
+OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery *create_OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchSuggestBitsProducer_(OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneIndexTerm *term, OrgApacheLuceneSearchSuggestBitsProducer *filter) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery, initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchSuggestBitsProducer_, analyzer, term, filter)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery)

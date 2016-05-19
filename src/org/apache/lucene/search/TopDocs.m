@@ -22,9 +22,17 @@
 
 @interface OrgApacheLuceneSearchTopDocs () {
  @public
+  /*!
+   @brief Stores the maximum score value encountered, needed for normalizing.
+   */
   jfloat maxScore_;
 }
 
+/*!
+ @brief Auxiliary method used by the <code>merge</code> impls.
+ A sort value of null
+ is used to indicate that docs should be sorted by score. 
+ */
 + (OrgApacheLuceneSearchTopDocs *)mergeAuxWithOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort
                                                                 withInt:(jint)start
                                                                 withInt:(jint)size
@@ -52,6 +60,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchTopDocs_ShardRef_initWi
 
 __attribute__((unused)) static OrgApacheLuceneSearchTopDocs_ShardRef *new_OrgApacheLuceneSearchTopDocs_ShardRef_initWithInt_(jint shardIndex) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchTopDocs_ShardRef *create_OrgApacheLuceneSearchTopDocs_ShardRef_initWithInt_(jint shardIndex);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopDocs_ShardRef)
 
 @interface OrgApacheLuceneSearchTopDocs_ScoreMergeSortQueue : OrgApacheLuceneUtilPriorityQueue {
@@ -73,6 +83,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTopDocs_ScoreMergeSortQueue, shardHits_
 __attribute__((unused)) static void OrgApacheLuceneSearchTopDocs_ScoreMergeSortQueue_initWithOrgApacheLuceneSearchTopDocsArray_(OrgApacheLuceneSearchTopDocs_ScoreMergeSortQueue *self, IOSObjectArray *shardHits);
 
 __attribute__((unused)) static OrgApacheLuceneSearchTopDocs_ScoreMergeSortQueue *new_OrgApacheLuceneSearchTopDocs_ScoreMergeSortQueue_initWithOrgApacheLuceneSearchTopDocsArray_(IOSObjectArray *shardHits) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchTopDocs_ScoreMergeSortQueue *create_OrgApacheLuceneSearchTopDocs_ScoreMergeSortQueue_initWithOrgApacheLuceneSearchTopDocsArray_(IOSObjectArray *shardHits);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopDocs_ScoreMergeSortQueue)
 
@@ -100,6 +112,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTopDocs_MergeSortQueue, reverseMul_, IO
 __attribute__((unused)) static void OrgApacheLuceneSearchTopDocs_MergeSortQueue_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchTopDocsArray_(OrgApacheLuceneSearchTopDocs_MergeSortQueue *self, OrgApacheLuceneSearchSort *sort, IOSObjectArray *shardHits);
 
 __attribute__((unused)) static OrgApacheLuceneSearchTopDocs_MergeSortQueue *new_OrgApacheLuceneSearchTopDocs_MergeSortQueue_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchTopDocsArray_(OrgApacheLuceneSearchSort *sort, IOSObjectArray *shardHits) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchTopDocs_MergeSortQueue *create_OrgApacheLuceneSearchTopDocs_MergeSortQueue_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchTopDocsArray_(OrgApacheLuceneSearchSort *sort, IOSObjectArray *shardHits);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopDocs_MergeSortQueue)
 
@@ -191,9 +205,11 @@ void OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuceneSearchScoreDocA
 }
 
 OrgApacheLuceneSearchTopDocs *new_OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_(jint totalHits, IOSObjectArray *scoreDocs) {
-  OrgApacheLuceneSearchTopDocs *self = [OrgApacheLuceneSearchTopDocs alloc];
-  OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_(self, totalHits, scoreDocs);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTopDocs, initWithInt_withOrgApacheLuceneSearchScoreDocArray_, totalHits, scoreDocs)
+}
+
+OrgApacheLuceneSearchTopDocs *create_OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_(jint totalHits, IOSObjectArray *scoreDocs) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTopDocs, initWithInt_withOrgApacheLuceneSearchScoreDocArray_, totalHits, scoreDocs)
 }
 
 void OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_withFloat_(OrgApacheLuceneSearchTopDocs *self, jint totalHits, IOSObjectArray *scoreDocs, jfloat maxScore) {
@@ -204,9 +220,11 @@ void OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuceneSearchScoreDocA
 }
 
 OrgApacheLuceneSearchTopDocs *new_OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_withFloat_(jint totalHits, IOSObjectArray *scoreDocs, jfloat maxScore) {
-  OrgApacheLuceneSearchTopDocs *self = [OrgApacheLuceneSearchTopDocs alloc];
-  OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_withFloat_(self, totalHits, scoreDocs, maxScore);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTopDocs, initWithInt_withOrgApacheLuceneSearchScoreDocArray_withFloat_, totalHits, scoreDocs, maxScore)
+}
+
+OrgApacheLuceneSearchTopDocs *create_OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_withFloat_(jint totalHits, IOSObjectArray *scoreDocs, jfloat maxScore) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTopDocs, initWithInt_withOrgApacheLuceneSearchScoreDocArray_withFloat_, totalHits, scoreDocs, maxScore)
 }
 
 OrgApacheLuceneSearchTopDocs *OrgApacheLuceneSearchTopDocs_mergeWithInt_withOrgApacheLuceneSearchTopDocsArray_(jint topN, IOSObjectArray *shardHits) {
@@ -227,19 +245,19 @@ OrgApacheLuceneSearchTopFieldDocs *OrgApacheLuceneSearchTopDocs_mergeWithOrgApac
 OrgApacheLuceneSearchTopFieldDocs *OrgApacheLuceneSearchTopDocs_mergeWithOrgApacheLuceneSearchSort_withInt_withInt_withOrgApacheLuceneSearchTopFieldDocsArray_(OrgApacheLuceneSearchSort *sort, jint start, jint topN, IOSObjectArray *shardHits) {
   OrgApacheLuceneSearchTopDocs_initialize();
   if (sort == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"sort must be non-null when merging field-docs") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"sort must be non-null when merging field-docs");
   }
-  return (OrgApacheLuceneSearchTopFieldDocs *) check_class_cast(OrgApacheLuceneSearchTopDocs_mergeAuxWithOrgApacheLuceneSearchSort_withInt_withInt_withOrgApacheLuceneSearchTopDocsArray_(sort, start, topN, shardHits), [OrgApacheLuceneSearchTopFieldDocs class]);
+  return (OrgApacheLuceneSearchTopFieldDocs *) cast_chk(OrgApacheLuceneSearchTopDocs_mergeAuxWithOrgApacheLuceneSearchSort_withInt_withInt_withOrgApacheLuceneSearchTopDocsArray_(sort, start, topN, shardHits), [OrgApacheLuceneSearchTopFieldDocs class]);
 }
 
 OrgApacheLuceneSearchTopDocs *OrgApacheLuceneSearchTopDocs_mergeAuxWithOrgApacheLuceneSearchSort_withInt_withInt_withOrgApacheLuceneSearchTopDocsArray_(OrgApacheLuceneSearchSort *sort, jint start, jint size, IOSObjectArray *shardHits) {
   OrgApacheLuceneSearchTopDocs_initialize();
   OrgApacheLuceneUtilPriorityQueue *queue;
   if (sort == nil) {
-    queue = [new_OrgApacheLuceneSearchTopDocs_ScoreMergeSortQueue_initWithOrgApacheLuceneSearchTopDocsArray_(shardHits) autorelease];
+    queue = create_OrgApacheLuceneSearchTopDocs_ScoreMergeSortQueue_initWithOrgApacheLuceneSearchTopDocsArray_(shardHits);
   }
   else {
-    queue = [new_OrgApacheLuceneSearchTopDocs_MergeSortQueue_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchTopDocsArray_(sort, shardHits) autorelease];
+    queue = create_OrgApacheLuceneSearchTopDocs_MergeSortQueue_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchTopDocsArray_(sort, shardHits);
   }
   jint totalHitCount = 0;
   jint availHitCount = 0;
@@ -249,7 +267,7 @@ OrgApacheLuceneSearchTopDocs *OrgApacheLuceneSearchTopDocs_mergeAuxWithOrgApache
     totalHitCount += ((OrgApacheLuceneSearchTopDocs *) nil_chk(shard))->totalHits_;
     if (shard->scoreDocs_ != nil && shard->scoreDocs_->size_ > 0) {
       availHitCount += shard->scoreDocs_->size_;
-      [((OrgApacheLuceneUtilPriorityQueue *) nil_chk(queue)) addWithId:[new_OrgApacheLuceneSearchTopDocs_ShardRef_initWithInt_(shardIDX) autorelease]];
+      [queue addWithId:create_OrgApacheLuceneSearchTopDocs_ShardRef_initWithInt_(shardIDX)];
       maxScore = JavaLangMath_maxWithFloat_withFloat_(maxScore, [shard getMaxScore]);
     }
   }
@@ -266,7 +284,7 @@ OrgApacheLuceneSearchTopDocs *OrgApacheLuceneSearchTopDocs_mergeAuxWithOrgApache
     jint numIterOnHits = JavaLangMath_minWithInt_withInt_(availHitCount, requestedResultWindow);
     jint hitUpto = 0;
     while (hitUpto < numIterOnHits) {
-      JreAssert(([((OrgApacheLuceneUtilPriorityQueue *) nil_chk(queue)) size] > 0), (@"org/apache/lucene/search/TopDocs.java:274 condition failed: assert queue.size() > 0;"));
+      JreAssert(([queue size] > 0), (@"org/apache/lucene/search/TopDocs.java:274 condition failed: assert queue.size() > 0;"));
       OrgApacheLuceneSearchTopDocs_ShardRef *ref = [queue pop];
       OrgApacheLuceneSearchScoreDoc *hit = IOSObjectArray_Get(nil_chk(((OrgApacheLuceneSearchTopDocs *) nil_chk(IOSObjectArray_Get(shardHits, ((OrgApacheLuceneSearchTopDocs_ShardRef *) nil_chk(ref))->shardIndex_)))->scoreDocs_), ref->hitIndex_++);
       ((OrgApacheLuceneSearchScoreDoc *) nil_chk(hit))->shardIndex_ = ref->shardIndex_;
@@ -280,10 +298,10 @@ OrgApacheLuceneSearchTopDocs *OrgApacheLuceneSearchTopDocs_mergeAuxWithOrgApache
     }
   }
   if (sort == nil) {
-    return [new_OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_withFloat_(totalHitCount, hits, maxScore) autorelease];
+    return create_OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_withFloat_(totalHitCount, hits, maxScore);
   }
   else {
-    return [new_OrgApacheLuceneSearchTopFieldDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_withOrgApacheLuceneSearchSortFieldArray_withFloat_(totalHitCount, hits, [sort getSort], maxScore) autorelease];
+    return create_OrgApacheLuceneSearchTopFieldDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_withOrgApacheLuceneSearchSortFieldArray_withFloat_(totalHitCount, hits, [sort getSort], maxScore);
   }
 }
 
@@ -321,9 +339,11 @@ void OrgApacheLuceneSearchTopDocs_ShardRef_initWithInt_(OrgApacheLuceneSearchTop
 }
 
 OrgApacheLuceneSearchTopDocs_ShardRef *new_OrgApacheLuceneSearchTopDocs_ShardRef_initWithInt_(jint shardIndex) {
-  OrgApacheLuceneSearchTopDocs_ShardRef *self = [OrgApacheLuceneSearchTopDocs_ShardRef alloc];
-  OrgApacheLuceneSearchTopDocs_ShardRef_initWithInt_(self, shardIndex);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTopDocs_ShardRef, initWithInt_, shardIndex)
+}
+
+OrgApacheLuceneSearchTopDocs_ShardRef *create_OrgApacheLuceneSearchTopDocs_ShardRef_initWithInt_(jint shardIndex) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTopDocs_ShardRef, initWithInt_, shardIndex)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopDocs_ShardRef)
@@ -368,7 +388,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopDocs_ShardRef)
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneSearchTopDocsArray:", "ScoreMergeSortQueue", NULL, 0x1, NULL, NULL },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x1, NULL, NULL },
+    { "lessThanWithId:withId:", "lessThan", "Z", 0x1, NULL, "(Lorg/apache/lucene/search/TopDocs$ShardRef;Lorg/apache/lucene/search/TopDocs$ShardRef;)Z" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "shardHits_", NULL, 0x10, "[[Lorg.apache.lucene.search.ScoreDoc;", NULL, NULL, .constantValue.asLong = 0 },
@@ -389,9 +409,11 @@ void OrgApacheLuceneSearchTopDocs_ScoreMergeSortQueue_initWithOrgApacheLuceneSea
 }
 
 OrgApacheLuceneSearchTopDocs_ScoreMergeSortQueue *new_OrgApacheLuceneSearchTopDocs_ScoreMergeSortQueue_initWithOrgApacheLuceneSearchTopDocsArray_(IOSObjectArray *shardHits) {
-  OrgApacheLuceneSearchTopDocs_ScoreMergeSortQueue *self = [OrgApacheLuceneSearchTopDocs_ScoreMergeSortQueue alloc];
-  OrgApacheLuceneSearchTopDocs_ScoreMergeSortQueue_initWithOrgApacheLuceneSearchTopDocsArray_(self, shardHits);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTopDocs_ScoreMergeSortQueue, initWithOrgApacheLuceneSearchTopDocsArray_, shardHits)
+}
+
+OrgApacheLuceneSearchTopDocs_ScoreMergeSortQueue *create_OrgApacheLuceneSearchTopDocs_ScoreMergeSortQueue_initWithOrgApacheLuceneSearchTopDocsArray_(IOSObjectArray *shardHits) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTopDocs_ScoreMergeSortQueue, initWithOrgApacheLuceneSearchTopDocsArray_, shardHits)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopDocs_ScoreMergeSortQueue)
@@ -407,8 +429,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopDocs_ScoreMergeSortQueu
 - (jboolean)lessThanWithId:(OrgApacheLuceneSearchTopDocs_ShardRef *)first
                     withId:(OrgApacheLuceneSearchTopDocs_ShardRef *)second {
   JreAssert((first != second), (@"org/apache/lucene/search/TopDocs.java:161 condition failed: assert first != second;"));
-  OrgApacheLuceneSearchFieldDoc *firstFD = (OrgApacheLuceneSearchFieldDoc *) check_class_cast(IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(nil_chk(shardHits_), ((OrgApacheLuceneSearchTopDocs_ShardRef *) nil_chk(first))->shardIndex_)), first->hitIndex_), [OrgApacheLuceneSearchFieldDoc class]);
-  OrgApacheLuceneSearchFieldDoc *secondFD = (OrgApacheLuceneSearchFieldDoc *) check_class_cast(IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(shardHits_, ((OrgApacheLuceneSearchTopDocs_ShardRef *) nil_chk(second))->shardIndex_)), second->hitIndex_), [OrgApacheLuceneSearchFieldDoc class]);
+  OrgApacheLuceneSearchFieldDoc *firstFD = (OrgApacheLuceneSearchFieldDoc *) cast_chk(IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(nil_chk(shardHits_), ((OrgApacheLuceneSearchTopDocs_ShardRef *) nil_chk(first))->shardIndex_)), first->hitIndex_), [OrgApacheLuceneSearchFieldDoc class]);
+  OrgApacheLuceneSearchFieldDoc *secondFD = (OrgApacheLuceneSearchFieldDoc *) cast_chk(IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(shardHits_, ((OrgApacheLuceneSearchTopDocs_ShardRef *) nil_chk(second))->shardIndex_)), second->hitIndex_), [OrgApacheLuceneSearchFieldDoc class]);
   for (jint compIDX = 0; compIDX < ((IOSObjectArray *) nil_chk(comparators_))->size_; compIDX++) {
     OrgApacheLuceneSearchFieldComparator *comp = IOSObjectArray_Get(comparators_, compIDX);
     jint cmp = IOSIntArray_Get(nil_chk(reverseMul_), compIDX) * [((OrgApacheLuceneSearchFieldComparator *) nil_chk(comp)) compareValuesWithId:IOSObjectArray_Get(nil_chk(((OrgApacheLuceneSearchFieldDoc *) nil_chk(firstFD))->fields_), compIDX) withId:IOSObjectArray_Get(((OrgApacheLuceneSearchFieldDoc *) nil_chk(secondFD))->fields_, compIDX)];
@@ -438,7 +460,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopDocs_ScoreMergeSortQueu
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneSearchSort:withOrgApacheLuceneSearchTopDocsArray:", "MergeSortQueue", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x1, NULL, NULL },
+    { "lessThanWithId:withId:", "lessThan", "Z", 0x1, NULL, "(Lorg/apache/lucene/search/TopDocs$ShardRef;Lorg/apache/lucene/search/TopDocs$ShardRef;)Z" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "shardHits_", NULL, 0x10, "[[Lorg.apache.lucene.search.ScoreDoc;", NULL, NULL, .constantValue.asLong = 0 },
@@ -462,11 +484,11 @@ void OrgApacheLuceneSearchTopDocs_MergeSortQueue_initWithOrgApacheLuceneSearchSo
       for (jint hitIDX = 0; hitIDX < shard->size_; hitIDX++) {
         OrgApacheLuceneSearchScoreDoc *sd = IOSObjectArray_Get(shard, hitIDX);
         if (!([sd isKindOfClass:[OrgApacheLuceneSearchFieldDoc class]])) {
-          @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$", @"shard ", shardIDX, @" was not sorted by the provided Sort (expected FieldDoc but got ScoreDoc)")) autorelease];
+          @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$", @"shard ", shardIDX, @" was not sorted by the provided Sort (expected FieldDoc but got ScoreDoc)"));
         }
-        OrgApacheLuceneSearchFieldDoc *fd = (OrgApacheLuceneSearchFieldDoc *) check_class_cast(sd, [OrgApacheLuceneSearchFieldDoc class]);
+        OrgApacheLuceneSearchFieldDoc *fd = (OrgApacheLuceneSearchFieldDoc *) cast_chk(sd, [OrgApacheLuceneSearchFieldDoc class]);
         if (((OrgApacheLuceneSearchFieldDoc *) nil_chk(fd))->fields_ == nil) {
-          @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$", @"shard ", shardIDX, @" did not set sort field values (FieldDoc.fields is null); you must pass fillFields=true to IndexSearcher.search on each shard")) autorelease];
+          @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$", @"shard ", shardIDX, @" did not set sort field values (FieldDoc.fields is null); you must pass fillFields=true to IndexSearcher.search on each shard"));
         }
       }
     }
@@ -482,9 +504,11 @@ void OrgApacheLuceneSearchTopDocs_MergeSortQueue_initWithOrgApacheLuceneSearchSo
 }
 
 OrgApacheLuceneSearchTopDocs_MergeSortQueue *new_OrgApacheLuceneSearchTopDocs_MergeSortQueue_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchTopDocsArray_(OrgApacheLuceneSearchSort *sort, IOSObjectArray *shardHits) {
-  OrgApacheLuceneSearchTopDocs_MergeSortQueue *self = [OrgApacheLuceneSearchTopDocs_MergeSortQueue alloc];
-  OrgApacheLuceneSearchTopDocs_MergeSortQueue_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchTopDocsArray_(self, sort, shardHits);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTopDocs_MergeSortQueue, initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchTopDocsArray_, sort, shardHits)
+}
+
+OrgApacheLuceneSearchTopDocs_MergeSortQueue *create_OrgApacheLuceneSearchTopDocs_MergeSortQueue_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchTopDocsArray_(OrgApacheLuceneSearchSort *sort, IOSObjectArray *shardHits) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTopDocs_MergeSortQueue, initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchTopDocsArray_, sort, shardHits)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopDocs_MergeSortQueue)

@@ -25,7 +25,6 @@
 #include "java/lang/RuntimeException.h"
 #include "java/lang/System.h"
 #include "java/lang/Thread.h"
-#include "java/lang/Throwable.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "java/text/NumberFormat.h"
 #include "java/util/ArrayList.h"
@@ -108,6 +107,10 @@
 + (void)msgWithJavaIoPrintStream:(JavaIoPrintStream *)outArg
                     withNSString:(NSString *)msg;
 
+/*!
+ @brief Visits all terms in the range minTerm (inclusive) to maxTerm (exclusive), marking all doc IDs encountered into allDocsSeen, and
+ returning the total number of terms visited.
+ */
 + (jlong)getDocsFromTermRangeWithNSString:(NSString *)field
                                   withInt:(jint)maxDoc
         withOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)termsEnum
@@ -116,6 +119,11 @@
           withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)maxTerm
                               withBoolean:(jboolean)isIntersect;
 
+/*!
+ @brief Test Terms.intersect on this range, and validates that it returns the same doc ids as using non-intersect TermsEnum.
+ Returns true if
+ any fake terms were seen. 
+ */
 + (jboolean)checkSingleTermRangeWithNSString:(NSString *)field
                                      withInt:(jint)maxDoc
                withOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms
@@ -124,11 +132,22 @@
           withOrgApacheLuceneUtilFixedBitSet:(OrgApacheLuceneUtilFixedBitSet *)normalDocs
           withOrgApacheLuceneUtilFixedBitSet:(OrgApacheLuceneUtilFixedBitSet *)intersectDocs;
 
+/*!
+ @brief Make an effort to visit "fake" (e.g. auto-prefix) terms.
+ We do this by running term range intersections across an initially wide
+ interval of terms, at different boundaries, and then gradually decrease the interval.  This is not guaranteed to hit all non-real
+ terms (doing that in general is non-trivial), but it should hit many of them, and validate their postings against the postings for the
+ real terms. 
+ */
 + (void)checkTermRangesWithNSString:(NSString *)field
                             withInt:(jint)maxDoc
       withOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms
                            withLong:(jlong)numTerms;
 
+/*!
+ @brief checks Fields api is consistent with itself.
+ searcher is optional, to verify with queries. Can be null.
+ */
 + (OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *)checkFieldsWithOrgApacheLuceneIndexFields:(OrgApacheLuceneIndexFields *)fields
                                                                          withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)liveDocs
                                                                                              withInt:(jint)maxDoc
@@ -183,9 +202,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex, infoStream_, JavaIoPrintStre
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex, dir_, OrgApacheLuceneStoreDirectory *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex, writeLock_, OrgApacheLuceneStoreLock *)
 
+inline jboolean OrgApacheLuceneIndexCheckIndex_get_assertsOn_();
+inline jboolean OrgApacheLuceneIndexCheckIndex_set_assertsOn_(jboolean value);
+inline jboolean *OrgApacheLuceneIndexCheckIndex_getRef_assertsOn_();
 static jboolean OrgApacheLuceneIndexCheckIndex_assertsOn_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexCheckIndex, assertsOn_, jboolean)
-J2OBJC_STATIC_FIELD_REF_GETTER(OrgApacheLuceneIndexCheckIndex, assertsOn_, jboolean)
+J2OBJC_STATIC_FIELD_PRIMITIVE(OrgApacheLuceneIndexCheckIndex, assertsOn_, jboolean)
+
 __attribute__((unused)) static void OrgApacheLuceneIndexCheckIndex_ensureOpen(OrgApacheLuceneIndexCheckIndex *self);
 
 __attribute__((unused)) static void OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(JavaIoPrintStream *outArg, NSString *msg);
@@ -228,6 +250,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexCheckIndex_Status_LiveDo
 
 __attribute__((unused)) static OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus *new_OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus *create_OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus_init();
+
 @interface OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus ()
 
 - (instancetype)init;
@@ -238,6 +262,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexCheckIndex_Status_FieldI
 
 __attribute__((unused)) static OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus *new_OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus *create_OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus_init();
+
 @interface OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus ()
 
 - (instancetype)init;
@@ -247,6 +273,8 @@ __attribute__((unused)) static OrgApacheLuceneIndexCheckIndex_Status_FieldInfoSt
 __attribute__((unused)) static void OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus_init(OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus *self);
 
 __attribute__((unused)) static OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus *new_OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus_init() NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus *create_OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus_init();
 
 @implementation OrgApacheLuceneIndexCheckIndex
 
@@ -316,25 +344,25 @@ __attribute__((unused)) static OrgApacheLuceneIndexCheckIndex_Status_FieldNormSt
 - (OrgApacheLuceneIndexCheckIndex_Status *)checkIndexWithJavaUtilList:(id<JavaUtilList>)onlySegments {
   OrgApacheLuceneIndexCheckIndex_ensureOpen(self);
   jlong startNS = JavaLangSystem_nanoTime();
-  JavaTextNumberFormat *nf = JavaTextNumberFormat_getInstanceWithJavaUtilLocale_(JreLoadStatic(JavaUtilLocale, ROOT_));
+  JavaTextNumberFormat *nf = JavaTextNumberFormat_getInstanceWithJavaUtilLocale_(JreLoadStatic(JavaUtilLocale, ROOT));
   OrgApacheLuceneIndexSegmentInfos *sis = nil;
-  OrgApacheLuceneIndexCheckIndex_Status *result = [new_OrgApacheLuceneIndexCheckIndex_Status_init() autorelease];
+  OrgApacheLuceneIndexCheckIndex_Status *result = create_OrgApacheLuceneIndexCheckIndex_Status_init();
   JreStrongAssign(&result->dir_, dir_);
   IOSObjectArray *files = [((OrgApacheLuceneStoreDirectory *) nil_chk(dir_)) listAll];
   NSString *lastSegmentsFile = OrgApacheLuceneIndexSegmentInfos_getLastCommitSegmentsFileNameWithNSStringArray_(files);
   if (lastSegmentsFile == nil) {
-    @throw [new_OrgApacheLuceneIndexIndexNotFoundException_initWithNSString_(JreStrcat("$@$$", @"no segments* file found in ", dir_, @": files: ", JavaUtilArrays_toStringWithNSObjectArray_(files))) autorelease];
+    @throw create_OrgApacheLuceneIndexIndexNotFoundException_initWithNSString_(JreStrcat("$@$$", @"no segments* file found in ", dir_, @": files: ", JavaUtilArrays_toStringWithNSObjectArray_(files)));
   }
   @try {
     sis = OrgApacheLuceneIndexSegmentInfos_readCommitWithOrgApacheLuceneStoreDirectory_withNSString_(dir_, lastSegmentsFile);
   }
-  @catch (JavaLangThrowable *t) {
+  @catch (NSException *t) {
     if (failFast_) {
-      OrgApacheLuceneUtilIOUtils_reThrowWithJavaLangThrowable_(t);
+      OrgApacheLuceneUtilIOUtils_reThrowWithNSException_(t);
     }
     OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream_, @"ERROR: could not read any segments file in directory");
     result->missingSegments_ = true;
-    if (infoStream_ != nil) [((JavaLangThrowable *) nil_chk(t)) printStackTraceWithJavaIoPrintStream:infoStream_];
+    if (infoStream_ != nil) [((NSException *) nil_chk(t)) printStackTraceWithJavaIoPrintStream:infoStream_];
     return result;
   }
   OrgApacheLuceneUtilVersion *oldest = nil;
@@ -358,26 +386,26 @@ __attribute__((unused)) static OrgApacheLuceneIndexCheckIndex_Status_FieldNormSt
   NSString *segmentsFileName = [sis getSegmentsFileName];
   OrgApacheLuceneStoreIndexInput *input = nil;
   @try {
-    input = [dir_ openInputWithNSString:segmentsFileName withOrgApacheLuceneStoreIOContext:JreLoadStatic(OrgApacheLuceneStoreIOContext, READONCE_)];
+    input = [((OrgApacheLuceneStoreDirectory *) nil_chk(dir_)) openInputWithNSString:segmentsFileName withOrgApacheLuceneStoreIOContext:JreLoadStatic(OrgApacheLuceneStoreIOContext, READONCE)];
   }
-  @catch (JavaLangThrowable *t) {
+  @catch (NSException *t) {
     if (failFast_) {
-      OrgApacheLuceneUtilIOUtils_reThrowWithJavaLangThrowable_(t);
+      OrgApacheLuceneUtilIOUtils_reThrowWithNSException_(t);
     }
     OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream_, @"ERROR: could not open segments file in directory");
-    if (infoStream_ != nil) [((JavaLangThrowable *) nil_chk(t)) printStackTraceWithJavaIoPrintStream:infoStream_];
+    if (infoStream_ != nil) [((NSException *) nil_chk(t)) printStackTraceWithJavaIoPrintStream:infoStream_];
     result->cantOpenSegments_ = true;
     return result;
   }
   @try {
     [((OrgApacheLuceneStoreIndexInput *) nil_chk(input)) readInt];
   }
-  @catch (JavaLangThrowable *t) {
+  @catch (NSException *t) {
     if (failFast_) {
-      OrgApacheLuceneUtilIOUtils_reThrowWithJavaLangThrowable_(t);
+      OrgApacheLuceneUtilIOUtils_reThrowWithNSException_(t);
     }
     OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream_, @"ERROR: could not read segment file version in directory");
-    if (infoStream_ != nil) [((JavaLangThrowable *) nil_chk(t)) printStackTraceWithJavaIoPrintStream:infoStream_];
+    if (infoStream_ != nil) [((NSException *) nil_chk(t)) printStackTraceWithJavaIoPrintStream:infoStream_];
     result->missingSegmentVersion_ = true;
     return result;
   }
@@ -414,7 +442,7 @@ __attribute__((unused)) static OrgApacheLuceneIndexCheckIndex_Status_FieldNormSt
     if (infoStream_ != nil) {
       [infoStream_ printWithNSString:@"\nChecking only these segments:"];
       for (NSString * __strong s in onlySegments) {
-        [infoStream_ printWithNSString:JreStrcat("C$", ' ', s)];
+        [((JavaIoPrintStream *) nil_chk(infoStream_)) printWithNSString:JreStrcat("C$", ' ', s)];
       }
     }
     [((id<JavaUtilList>) nil_chk(result->segmentsChecked_)) addAllWithJavaUtilCollection:onlySegments];
@@ -437,14 +465,14 @@ __attribute__((unused)) static OrgApacheLuceneIndexCheckIndex_Status_FieldNormSt
     if (onlySegments != nil && ![onlySegments containsWithId:info->info_->name_]) {
       continue;
     }
-    OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus *segInfoStat = [new_OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus_init() autorelease];
+    OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus *segInfoStat = create_OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus_init();
     [((id<JavaUtilList>) nil_chk(result->segmentInfos_)) addWithId:segInfoStat];
     OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream_, JreStrcat("$I$I$$$I", @"  ", (1 + i), @" of ", numSegments, @": name=", info->info_->name_, @" maxDoc=", [info->info_ maxDoc]));
     JreStrongAssign(&segInfoStat->name_, info->info_->name_);
     segInfoStat->maxDoc_ = [info->info_ maxDoc];
     JreStrongAssign(&segInfoStat->version__, [info->info_ getVersion]);
-    if ([info->info_ maxDoc] <= 0 && [((OrgApacheLuceneUtilVersion *) nil_chk(segInfoStat->version__)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_5_0_)]) {
-      @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I", @"illegal number of documents: maxDoc=", [info->info_ maxDoc])) autorelease];
+    if ([info->info_ maxDoc] <= 0 && [((OrgApacheLuceneUtilVersion *) nil_chk(segInfoStat->version__)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_5_0)]) {
+      @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I", @"illegal number of documents: maxDoc=", [info->info_ maxDoc]));
     }
     jint toLoseDocCount = [info->info_ maxDoc];
     OrgApacheLuceneIndexSegmentReader *reader = nil;
@@ -476,32 +504,32 @@ __attribute__((unused)) static OrgApacheLuceneIndexCheckIndex_Status_FieldNormSt
       }
       jlong startOpenReaderNS = JavaLangSystem_nanoTime();
       if (infoStream_ != nil) [infoStream_ printWithNSString:@"    test: open reader........."];
-      reader = [new_OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreIOContext_(info, JreLoadStatic(OrgApacheLuceneStoreIOContext, DEFAULT_)) autorelease];
-      OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream_, NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT_), @"OK [took %.3f sec]", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_(OrgApacheLuceneIndexCheckIndex_nsToSecWithLong_(JavaLangSystem_nanoTime() - startOpenReaderNS)) } count:1 type:NSObject_class_()]));
+      reader = create_OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreIOContext_(info, JreLoadStatic(OrgApacheLuceneStoreIOContext, DEFAULT));
+      OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream_, NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"OK [took %.3f sec]", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_(OrgApacheLuceneIndexCheckIndex_nsToSecWithLong_(JavaLangSystem_nanoTime() - startOpenReaderNS)) } count:1 type:NSObject_class_()]));
       segInfoStat->openReaderPassed_ = true;
       jlong startIntegrityNS = JavaLangSystem_nanoTime();
       if (infoStream_ != nil) [infoStream_ printWithNSString:@"    test: check integrity....."];
       [reader checkIntegrity];
-      OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream_, NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT_), @"OK [took %.3f sec]", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_(OrgApacheLuceneIndexCheckIndex_nsToSecWithLong_(JavaLangSystem_nanoTime() - startIntegrityNS)) } count:1 type:NSObject_class_()]));
+      OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream_, NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"OK [took %.3f sec]", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_(OrgApacheLuceneIndexCheckIndex_nsToSecWithLong_(JavaLangSystem_nanoTime() - startIntegrityNS)) } count:1 type:NSObject_class_()]));
       if ([reader maxDoc] != [info->info_ maxDoc]) {
-        @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$I", @"SegmentReader.maxDoc() ", [reader maxDoc], @" != SegmentInfo.maxDoc ", [info->info_ maxDoc])) autorelease];
+        @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$I", @"SegmentReader.maxDoc() ", [reader maxDoc], @" != SegmentInfo.maxDoc ", [info->info_ maxDoc]));
       }
       jint numDocs = [reader numDocs];
       toLoseDocCount = numDocs;
       if ([reader hasDeletions]) {
         if ([reader numDocs] != [info->info_ maxDoc] - [info getDelCount]) {
-          @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$I", @"delete count mismatch: info=", ([info->info_ maxDoc] - [info getDelCount]), @" vs reader=", [reader numDocs])) autorelease];
+          @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$I", @"delete count mismatch: info=", ([info->info_ maxDoc] - [info getDelCount]), @" vs reader=", [reader numDocs]));
         }
         if (([info->info_ maxDoc] - [reader numDocs]) > [reader maxDoc]) {
-          @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$I", @"too many deleted docs: maxDoc()=", [reader maxDoc], @" vs del count=", ([info->info_ maxDoc] - [reader numDocs]))) autorelease];
+          @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$I", @"too many deleted docs: maxDoc()=", [reader maxDoc], @" vs del count=", ([info->info_ maxDoc] - [reader numDocs])));
         }
         if ([info->info_ maxDoc] - [reader numDocs] != [info getDelCount]) {
-          @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$I", @"delete count mismatch: info=", [info getDelCount], @" vs reader=", ([info->info_ maxDoc] - [reader numDocs]))) autorelease];
+          @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$I", @"delete count mismatch: info=", [info getDelCount], @" vs reader=", ([info->info_ maxDoc] - [reader numDocs])));
         }
       }
       else {
         if ([info getDelCount] != 0) {
-          @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$I", @"delete count mismatch: info=", [info getDelCount], @" vs reader=", ([info->info_ maxDoc] - [reader numDocs]))) autorelease];
+          @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$I", @"delete count mismatch: info=", [info getDelCount], @" vs reader=", ([info->info_ maxDoc] - [reader numDocs])));
         }
       }
       if (checksumsOnly_ == false) {
@@ -513,25 +541,25 @@ __attribute__((unused)) static OrgApacheLuceneIndexCheckIndex_Status_FieldNormSt
         JreStrongAssign(&segInfoStat->termVectorStatus_, OrgApacheLuceneIndexCheckIndex_testTermVectorsWithOrgApacheLuceneIndexCodecReader_withJavaIoPrintStream_withBoolean_withBoolean_withBoolean_(reader, infoStream_, verbose_, crossCheckTermVectors_, failFast_));
         JreStrongAssign(&segInfoStat->docValuesStatus_, OrgApacheLuceneIndexCheckIndex_testDocValuesWithOrgApacheLuceneIndexCodecReader_withJavaIoPrintStream_withBoolean_(reader, infoStream_, failFast_));
         if (((OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus *) nil_chk(segInfoStat->liveDocStatus_))->error_ != nil) {
-          @throw [new_JavaLangRuntimeException_initWithNSString_(@"Live docs test failed") autorelease];
+          @throw create_JavaLangRuntimeException_initWithNSString_(@"Live docs test failed");
         }
         else if (((OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus *) nil_chk(segInfoStat->fieldInfoStatus_))->error_ != nil) {
-          @throw [new_JavaLangRuntimeException_initWithNSString_(@"Field Info test failed") autorelease];
+          @throw create_JavaLangRuntimeException_initWithNSString_(@"Field Info test failed");
         }
         else if (((OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus *) nil_chk(segInfoStat->fieldNormStatus_))->error_ != nil) {
-          @throw [new_JavaLangRuntimeException_initWithNSString_(@"Field Norm test failed") autorelease];
+          @throw create_JavaLangRuntimeException_initWithNSString_(@"Field Norm test failed");
         }
         else if (((OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *) nil_chk(segInfoStat->termIndexStatus_))->error_ != nil) {
-          @throw [new_JavaLangRuntimeException_initWithNSString_(@"Term Index test failed") autorelease];
+          @throw create_JavaLangRuntimeException_initWithNSString_(@"Term Index test failed");
         }
         else if (((OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus *) nil_chk(segInfoStat->storedFieldStatus_))->error_ != nil) {
-          @throw [new_JavaLangRuntimeException_initWithNSString_(@"Stored Field test failed") autorelease];
+          @throw create_JavaLangRuntimeException_initWithNSString_(@"Stored Field test failed");
         }
         else if (((OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus *) nil_chk(segInfoStat->termVectorStatus_))->error_ != nil) {
-          @throw [new_JavaLangRuntimeException_initWithNSString_(@"Term Vector test failed") autorelease];
+          @throw create_JavaLangRuntimeException_initWithNSString_(@"Term Vector test failed");
         }
         else if (((OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus *) nil_chk(segInfoStat->docValuesStatus_))->error_ != nil) {
-          @throw [new_JavaLangRuntimeException_initWithNSString_(@"DocValues test failed") autorelease];
+          @throw create_JavaLangRuntimeException_initWithNSString_(@"DocValues test failed");
         }
       }
       OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream_, @"");
@@ -540,15 +568,15 @@ __attribute__((unused)) static OrgApacheLuceneIndexCheckIndex_Status_FieldNormSt
         OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream_, OrgApacheLuceneUtilAccountables_toStringWithOrgApacheLuceneUtilAccountable_(reader));
       }
     }
-    @catch (JavaLangThrowable *t) {
+    @catch (NSException *t) {
       if (failFast_) {
-        OrgApacheLuceneUtilIOUtils_reThrowWithJavaLangThrowable_(t);
+        OrgApacheLuceneUtilIOUtils_reThrowWithNSException_(t);
       }
       OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream_, @"FAILED");
       NSString *comment;
       comment = @"exorciseIndex() would remove reference to this segment";
       OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream_, JreStrcat("$$$", @"    WARNING: ", comment, @"; full exception:"));
-      if (infoStream_ != nil) [((JavaLangThrowable *) nil_chk(t)) printStackTraceWithJavaIoPrintStream:infoStream_];
+      if (infoStream_ != nil) [((NSException *) nil_chk(t)) printStackTraceWithJavaIoPrintStream:infoStream_];
       OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream_, @"");
       result->totLoseDocCount_ += toLoseDocCount;
       result->numBadSegments_++;
@@ -557,7 +585,7 @@ __attribute__((unused)) static OrgApacheLuceneIndexCheckIndex_Status_FieldNormSt
     @finally {
       if (reader != nil) [reader close];
     }
-    [result->newSegments_ addWithOrgApacheLuceneIndexSegmentCommitInfo:[info clone]];
+    [((OrgApacheLuceneIndexSegmentInfos *) nil_chk(result->newSegments_)) addWithOrgApacheLuceneIndexSegmentCommitInfo:[info clone]];
   }
   if (0 == result->numBadSegments_) {
     result->clean_ = true;
@@ -565,15 +593,15 @@ __attribute__((unused)) static OrgApacheLuceneIndexCheckIndex_Status_FieldNormSt
   else OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream_, JreStrcat("$I$I$", @"WARNING: ", result->numBadSegments_, @" broken segments (containing ", result->totLoseDocCount_, @" documents) detected"));
   if (!(result->validCounter_ = (result->maxSegmentName_ < sis->counter_))) {
     result->clean_ = false;
-    result->newSegments_->counter_ = result->maxSegmentName_ + 1;
+    ((OrgApacheLuceneIndexSegmentInfos *) nil_chk(result->newSegments_))->counter_ = result->maxSegmentName_ + 1;
     OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream_, JreStrcat("$I$I", @"ERROR: Next segment name counter ", sis->counter_, @" is not greater than max segment name ", result->maxSegmentName_));
   }
   if ([self getChecksumsOnly]) {
     jboolean old = false;
     jboolean ancient = false;
     for (OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus * __strong segment in nil_chk(result->segmentInfos_)) {
-      old |= ![((OrgApacheLuceneUtilVersion *) nil_chk(((OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus *) nil_chk(segment))->version__)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_5_0_0_)];
-      ancient |= ![segment->version__ onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_8_0_)];
+      old |= ![((OrgApacheLuceneUtilVersion *) nil_chk(((OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus *) nil_chk(segment))->version__)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_5_0_0)];
+      ancient |= ![((OrgApacheLuceneUtilVersion *) nil_chk(segment->version__)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_8_0)];
     }
     if (ancient) {
       OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream_, @"WARNING: Some segments are older than 4.8 and have no checksums. Run checkindex without -fast for full verification.");
@@ -585,7 +613,7 @@ __attribute__((unused)) static OrgApacheLuceneIndexCheckIndex_Status_FieldNormSt
   if (result->clean_) {
     OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream_, @"No problems were detected with this index.\n");
   }
-  OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream_, NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT_), @"Took %.3f sec total.", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_(OrgApacheLuceneIndexCheckIndex_nsToSecWithLong_(JavaLangSystem_nanoTime() - startNS)) } count:1 type:NSObject_class_()]));
+  OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream_, NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"Took %.3f sec total.", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_(OrgApacheLuceneIndexCheckIndex_nsToSecWithLong_(JavaLangSystem_nanoTime() - startNS)) } count:1 type:NSObject_class_()]));
   return result;
 }
 
@@ -727,9 +755,9 @@ withOrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus:(OrgApacheLuceneIndexC
 
 - (void)exorciseIndexWithOrgApacheLuceneIndexCheckIndex_Status:(OrgApacheLuceneIndexCheckIndex_Status *)result {
   OrgApacheLuceneIndexCheckIndex_ensureOpen(self);
-  if (((OrgApacheLuceneIndexCheckIndex_Status *) nil_chk(result))->partial_) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"can only exorcise an index that was fully checked (this status checked a subset of segments)") autorelease];
+  if (((OrgApacheLuceneIndexCheckIndex_Status *) nil_chk(result))->partial_) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"can only exorcise an index that was fully checked (this status checked a subset of segments)");
   [((OrgApacheLuceneIndexSegmentInfos *) nil_chk(result->newSegments_)) changed];
-  [result->newSegments_ commitWithOrgApacheLuceneStoreDirectory:result->dir_];
+  [((OrgApacheLuceneIndexSegmentInfos *) nil_chk(result->newSegments_)) commitWithOrgApacheLuceneStoreDirectory:result->dir_];
 }
 
 + (jboolean)testAsserts {
@@ -775,7 +803,7 @@ withOrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus:(OrgApacheLuceneIndexC
     { "setInfoStreamWithJavaIoPrintStream:", "setInfoStream", "V", 0x1, NULL, NULL },
     { "msgWithJavaIoPrintStream:withNSString:", "msg", "V", 0xa, NULL, NULL },
     { "checkIndex", NULL, "Lorg.apache.lucene.index.CheckIndex$Status;", 0x1, "Ljava.io.IOException;", NULL },
-    { "checkIndexWithJavaUtilList:", "checkIndex", "Lorg.apache.lucene.index.CheckIndex$Status;", 0x1, "Ljava.io.IOException;", NULL },
+    { "checkIndexWithJavaUtilList:", "checkIndex", "Lorg.apache.lucene.index.CheckIndex$Status;", 0x1, "Ljava.io.IOException;", "(Ljava/util/List<Ljava/lang/String;>;)Lorg/apache/lucene/index/CheckIndex$Status;" },
     { "testLiveDocsWithOrgApacheLuceneIndexCodecReader:withJavaIoPrintStream:withBoolean:", "testLiveDocs", "Lorg.apache.lucene.index.CheckIndex$Status$LiveDocStatus;", 0x9, "Ljava.io.IOException;", NULL },
     { "testFieldInfosWithOrgApacheLuceneIndexCodecReader:withJavaIoPrintStream:withBoolean:", "testFieldInfos", "Lorg.apache.lucene.index.CheckIndex$Status$FieldInfoStatus;", 0x9, "Ljava.io.IOException;", NULL },
     { "testFieldNormsWithOrgApacheLuceneIndexCodecReader:withJavaIoPrintStream:withBoolean:", "testFieldNorms", "Lorg.apache.lucene.index.CheckIndex$Status$FieldNormStatus;", 0x9, "Ljava.io.IOException;", NULL },
@@ -821,13 +849,15 @@ withOrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus:(OrgApacheLuceneIndexC
 @end
 
 void OrgApacheLuceneIndexCheckIndex_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexCheckIndex *self, OrgApacheLuceneStoreDirectory *dir) {
-  OrgApacheLuceneIndexCheckIndex_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreLock_(self, dir, [((OrgApacheLuceneStoreDirectory *) nil_chk(dir)) obtainLockWithNSString:OrgApacheLuceneIndexIndexWriter_WRITE_LOCK_NAME_]);
+  OrgApacheLuceneIndexCheckIndex_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreLock_(self, dir, [((OrgApacheLuceneStoreDirectory *) nil_chk(dir)) obtainLockWithNSString:OrgApacheLuceneIndexIndexWriter_WRITE_LOCK_NAME]);
 }
 
 OrgApacheLuceneIndexCheckIndex *new_OrgApacheLuceneIndexCheckIndex_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *dir) {
-  OrgApacheLuceneIndexCheckIndex *self = [OrgApacheLuceneIndexCheckIndex alloc];
-  OrgApacheLuceneIndexCheckIndex_initWithOrgApacheLuceneStoreDirectory_(self, dir);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexCheckIndex, initWithOrgApacheLuceneStoreDirectory_, dir)
+}
+
+OrgApacheLuceneIndexCheckIndex *create_OrgApacheLuceneIndexCheckIndex_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *dir) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexCheckIndex, initWithOrgApacheLuceneStoreDirectory_, dir)
 }
 
 void OrgApacheLuceneIndexCheckIndex_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreLock_(OrgApacheLuceneIndexCheckIndex *self, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneStoreLock *writeLock) {
@@ -838,14 +868,16 @@ void OrgApacheLuceneIndexCheckIndex_initWithOrgApacheLuceneStoreDirectory_withOr
 }
 
 OrgApacheLuceneIndexCheckIndex *new_OrgApacheLuceneIndexCheckIndex_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreLock_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneStoreLock *writeLock) {
-  OrgApacheLuceneIndexCheckIndex *self = [OrgApacheLuceneIndexCheckIndex alloc];
-  OrgApacheLuceneIndexCheckIndex_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreLock_(self, dir, writeLock);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexCheckIndex, initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreLock_, dir, writeLock)
+}
+
+OrgApacheLuceneIndexCheckIndex *create_OrgApacheLuceneIndexCheckIndex_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreLock_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneStoreLock *writeLock) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexCheckIndex, initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreLock_, dir, writeLock)
 }
 
 void OrgApacheLuceneIndexCheckIndex_ensureOpen(OrgApacheLuceneIndexCheckIndex *self) {
   if (JreLoadVolatileBoolean(&self->closed_)) {
-    @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(@"this instance is closed") autorelease];
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(@"this instance is closed");
   }
 }
 
@@ -857,14 +889,14 @@ void OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(JavaI
 OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus *OrgApacheLuceneIndexCheckIndex_testLiveDocsWithOrgApacheLuceneIndexCodecReader_withJavaIoPrintStream_withBoolean_(OrgApacheLuceneIndexCodecReader *reader, JavaIoPrintStream *infoStream, jboolean failFast) {
   OrgApacheLuceneIndexCheckIndex_initialize();
   jlong startNS = JavaLangSystem_nanoTime();
-  OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus *status = [new_OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus_init() autorelease];
+  OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus *status = create_OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus_init();
   @try {
     if (infoStream != nil) [infoStream printWithNSString:@"    test: check live docs....."];
     jint numDocs = [((OrgApacheLuceneIndexCodecReader *) nil_chk(reader)) numDocs];
     if ([reader hasDeletions]) {
       id<OrgApacheLuceneUtilBits> liveDocs = [reader getLiveDocs];
       if (liveDocs == nil) {
-        @throw [new_JavaLangRuntimeException_initWithNSString_(@"segment should have deletions, but liveDocs is null") autorelease];
+        @throw create_JavaLangRuntimeException_initWithNSString_(@"segment should have deletions, but liveDocs is null");
       }
       else {
         jint numLive = 0;
@@ -874,29 +906,29 @@ OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus *OrgApacheLuceneIndexCheckIn
           }
         }
         if (numLive != numDocs) {
-          @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$I", @"liveDocs count mismatch: info=", numDocs, @", vs bits=", numLive)) autorelease];
+          @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$I", @"liveDocs count mismatch: info=", numDocs, @", vs bits=", numLive));
         }
       }
       status->numDeleted_ = [reader numDeletedDocs];
-      OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream, NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT_), @"OK [%d deleted docs] [took %.3f sec]", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangInteger_valueOfWithInt_(status->numDeleted_), JavaLangDouble_valueOfWithDouble_(OrgApacheLuceneIndexCheckIndex_nsToSecWithLong_(JavaLangSystem_nanoTime() - startNS)) } count:2 type:NSObject_class_()]));
+      OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream, NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"OK [%d deleted docs] [took %.3f sec]", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangInteger_valueOfWithInt_(status->numDeleted_), JavaLangDouble_valueOfWithDouble_(OrgApacheLuceneIndexCheckIndex_nsToSecWithLong_(JavaLangSystem_nanoTime() - startNS)) } count:2 type:NSObject_class_()]));
     }
     else {
       id<OrgApacheLuceneUtilBits> liveDocs = [reader getLiveDocs];
       if (liveDocs != nil) {
         for (jint j = 0; j < [liveDocs length]; j++) {
           if (![liveDocs getWithInt:j]) {
-            @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$", @"liveDocs mismatch: info says no deletions but doc ", j, @" is deleted.")) autorelease];
+            @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$", @"liveDocs mismatch: info says no deletions but doc ", j, @" is deleted."));
           }
         }
       }
-      OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream, NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT_), @"OK [took %.3f sec]", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_((OrgApacheLuceneIndexCheckIndex_nsToSecWithLong_(JavaLangSystem_nanoTime() - startNS))) } count:1 type:NSObject_class_()]));
+      OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream, NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"OK [took %.3f sec]", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_((OrgApacheLuceneIndexCheckIndex_nsToSecWithLong_(JavaLangSystem_nanoTime() - startNS))) } count:1 type:NSObject_class_()]));
     }
   }
-  @catch (JavaLangThrowable *e) {
+  @catch (NSException *e) {
     if (failFast) {
-      OrgApacheLuceneUtilIOUtils_reThrowWithJavaLangThrowable_(e);
+      OrgApacheLuceneUtilIOUtils_reThrowWithNSException_(e);
     }
-    OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream, JreStrcat("$$C", @"ERROR [", NSString_valueOf_([((JavaLangThrowable *) nil_chk(e)) getMessage]), ']'));
+    OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream, JreStrcat("$$C", @"ERROR [", NSString_valueOf_([((NSException *) nil_chk(e)) getMessage]), ']'));
     JreStrongAssign(&status->error_, e);
     if (infoStream != nil) {
       [e printStackTraceWithJavaIoPrintStream:infoStream];
@@ -908,7 +940,7 @@ OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus *OrgApacheLuceneIndexCheckIn
 OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus *OrgApacheLuceneIndexCheckIndex_testFieldInfosWithOrgApacheLuceneIndexCodecReader_withJavaIoPrintStream_withBoolean_(OrgApacheLuceneIndexCodecReader *reader, JavaIoPrintStream *infoStream, jboolean failFast) {
   OrgApacheLuceneIndexCheckIndex_initialize();
   jlong startNS = JavaLangSystem_nanoTime();
-  OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus *status = [new_OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus_init() autorelease];
+  OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus *status = create_OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus_init();
   @try {
     if (infoStream != nil) {
       [infoStream printWithNSString:@"    test: field infos........."];
@@ -917,14 +949,14 @@ OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus *OrgApacheLuceneIndexCheck
     for (OrgApacheLuceneIndexFieldInfo * __strong f in nil_chk(fieldInfos)) {
       [((OrgApacheLuceneIndexFieldInfo *) nil_chk(f)) checkConsistency];
     }
-    OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream, NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT_), @"OK [%d fields] [took %.3f sec]", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangInteger_valueOfWithInt_([fieldInfos size]), JavaLangDouble_valueOfWithDouble_(OrgApacheLuceneIndexCheckIndex_nsToSecWithLong_(JavaLangSystem_nanoTime() - startNS)) } count:2 type:NSObject_class_()]));
+    OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream, NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"OK [%d fields] [took %.3f sec]", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangInteger_valueOfWithInt_([fieldInfos size]), JavaLangDouble_valueOfWithDouble_(OrgApacheLuceneIndexCheckIndex_nsToSecWithLong_(JavaLangSystem_nanoTime() - startNS)) } count:2 type:NSObject_class_()]));
     status->totFields_ = [fieldInfos size];
   }
-  @catch (JavaLangThrowable *e) {
+  @catch (NSException *e) {
     if (failFast) {
-      OrgApacheLuceneUtilIOUtils_reThrowWithJavaLangThrowable_(e);
+      OrgApacheLuceneUtilIOUtils_reThrowWithNSException_(e);
     }
-    OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream, JreStrcat("$$C", @"ERROR [", NSString_valueOf_([((JavaLangThrowable *) nil_chk(e)) getMessage]), ']'));
+    OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream, JreStrcat("$$C", @"ERROR [", NSString_valueOf_([((NSException *) nil_chk(e)) getMessage]), ']'));
     JreStrongAssign(&status->error_, e);
     if (infoStream != nil) {
       [e printStackTraceWithJavaIoPrintStream:infoStream];
@@ -936,7 +968,7 @@ OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus *OrgApacheLuceneIndexCheck
 OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus *OrgApacheLuceneIndexCheckIndex_testFieldNormsWithOrgApacheLuceneIndexCodecReader_withJavaIoPrintStream_withBoolean_(OrgApacheLuceneIndexCodecReader *reader, JavaIoPrintStream *infoStream, jboolean failFast) {
   OrgApacheLuceneIndexCheckIndex_initialize();
   jlong startNS = JavaLangSystem_nanoTime();
-  OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus *status = [new_OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus_init() autorelease];
+  OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus *status = create_OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus_init();
   @try {
     if (infoStream != nil) {
       [infoStream printWithNSString:@"    test: field norms........."];
@@ -947,17 +979,17 @@ OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus *OrgApacheLuceneIndexCheck
     }
     for (OrgApacheLuceneIndexFieldInfo * __strong info in nil_chk([reader getFieldInfos])) {
       if ([((OrgApacheLuceneIndexFieldInfo *) nil_chk(info)) hasNorms]) {
-        OrgApacheLuceneIndexCheckIndex_checkNumericDocValuesWithNSString_withInt_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_(info->name_, [reader maxDoc], [((OrgApacheLuceneCodecsNormsProducer *) nil_chk(normsReader)) getNormsWithOrgApacheLuceneIndexFieldInfo:info], [new_OrgApacheLuceneUtilBits_MatchAllBits_initWithInt_([reader maxDoc]) autorelease]);
+        OrgApacheLuceneIndexCheckIndex_checkNumericDocValuesWithNSString_withInt_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_(info->name_, [reader maxDoc], [((OrgApacheLuceneCodecsNormsProducer *) nil_chk(normsReader)) getNormsWithOrgApacheLuceneIndexFieldInfo:info], create_OrgApacheLuceneUtilBits_MatchAllBits_initWithInt_([reader maxDoc]));
         ++status->totFields_;
       }
     }
-    OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream, NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT_), @"OK [%d fields] [took %.3f sec]", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangLong_valueOfWithLong_(status->totFields_), JavaLangDouble_valueOfWithDouble_(OrgApacheLuceneIndexCheckIndex_nsToSecWithLong_(JavaLangSystem_nanoTime() - startNS)) } count:2 type:NSObject_class_()]));
+    OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream, NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"OK [%d fields] [took %.3f sec]", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangLong_valueOfWithLong_(status->totFields_), JavaLangDouble_valueOfWithDouble_(OrgApacheLuceneIndexCheckIndex_nsToSecWithLong_(JavaLangSystem_nanoTime() - startNS)) } count:2 type:NSObject_class_()]));
   }
-  @catch (JavaLangThrowable *e) {
+  @catch (NSException *e) {
     if (failFast) {
-      OrgApacheLuceneUtilIOUtils_reThrowWithJavaLangThrowable_(e);
+      OrgApacheLuceneUtilIOUtils_reThrowWithNSException_(e);
     }
-    OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream, JreStrcat("$$C", @"ERROR [", NSString_valueOf_([((JavaLangThrowable *) nil_chk(e)) getMessage]), ']'));
+    OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream, JreStrcat("$$C", @"ERROR [", NSString_valueOf_([((NSException *) nil_chk(e)) getMessage]), ']'));
     JreStrongAssign(&status->error_, e);
     if (infoStream != nil) {
       [e printStackTraceWithJavaIoPrintStream:infoStream];
@@ -968,7 +1000,7 @@ OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus *OrgApacheLuceneIndexCheck
 
 jlong OrgApacheLuceneIndexCheckIndex_getDocsFromTermRangeWithNSString_withInt_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilFixedBitSet_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_(NSString *field, jint maxDoc, OrgApacheLuceneIndexTermsEnum *termsEnum, OrgApacheLuceneUtilFixedBitSet *docsSeen, OrgApacheLuceneUtilBytesRef *minTerm, OrgApacheLuceneUtilBytesRef *maxTerm, jboolean isIntersect) {
   OrgApacheLuceneIndexCheckIndex_initialize();
-  [docsSeen clearWithInt:0 withInt:[((OrgApacheLuceneUtilFixedBitSet *) nil_chk(docsSeen)) length]];
+  [((OrgApacheLuceneUtilFixedBitSet *) nil_chk(docsSeen)) clearWithInt:0 withInt:[docsSeen length]];
   jlong termCount = 0;
   OrgApacheLuceneIndexPostingsEnum *postingsEnum = nil;
   OrgApacheLuceneUtilBytesRefBuilder *lastTerm = nil;
@@ -982,23 +1014,23 @@ jlong OrgApacheLuceneIndexCheckIndex_getDocsFromTermRangeWithNSString_withInt_wi
     }
     if (term == nil) {
       if (isIntersect == false) {
-        @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$@", @"didn't see max term field=", field, @" term=", maxTerm)) autorelease];
+        @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$@", @"didn't see max term field=", field, @" term=", maxTerm));
       }
       return termCount;
     }
-    JreAssert(([((OrgApacheLuceneUtilBytesRef *) nil_chk(term)) isValid]), (@"org/apache/lucene/index/CheckIndex.java:950 condition failed: assert term.isValid();"));
+    JreAssert(([term isValid]), (@"org/apache/lucene/index/CheckIndex.java:950 condition failed: assert term.isValid();"));
     if (lastTerm == nil) {
-      lastTerm = [new_OrgApacheLuceneUtilBytesRefBuilder_init() autorelease];
+      lastTerm = create_OrgApacheLuceneUtilBytesRefBuilder_init();
       [lastTerm copyBytesWithOrgApacheLuceneUtilBytesRef:term];
     }
     else {
       if ([((OrgApacheLuceneUtilBytesRef *) nil_chk([lastTerm get])) compareToWithId:term] >= 0) {
-        @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$@", @"terms out of order: lastTerm=", lastTerm, @" term=", term)) autorelease];
+        @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$@", @"terms out of order: lastTerm=", lastTerm, @" term=", term));
       }
       [lastTerm copyBytesWithOrgApacheLuceneUtilBytesRef:term];
     }
     if ([term compareToWithId:minTerm] < 0) {
-      @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$@", @"saw term before min term field=", field, @" term=", minTerm)) autorelease];
+      @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$@", @"saw term before min term field=", field, @" term=", minTerm));
     }
     if (isIntersect == false) {
       jint cmp = [term compareToWithId:maxTerm];
@@ -1006,10 +1038,10 @@ jlong OrgApacheLuceneIndexCheckIndex_getDocsFromTermRangeWithNSString_withInt_wi
         return termCount;
       }
       else if (cmp > 0) {
-        @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$@", @"didn't see end term field=", field, @" term=", maxTerm)) autorelease];
+        @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$@", @"didn't see end term field=", field, @" term=", maxTerm));
       }
     }
-    postingsEnum = [((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) postingsWithOrgApacheLuceneIndexPostingsEnum:postingsEnum withInt:0];
+    postingsEnum = [termsEnum postingsWithOrgApacheLuceneIndexPostingsEnum:postingsEnum withInt:0];
     jint lastDoc = -1;
     while (true) {
       jint doc = [((OrgApacheLuceneIndexPostingsEnum *) nil_chk(postingsEnum)) nextDoc];
@@ -1017,10 +1049,10 @@ jlong OrgApacheLuceneIndexCheckIndex_getDocsFromTermRangeWithNSString_withInt_wi
         break;
       }
       if (doc <= lastDoc) {
-        @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I", @"term ", term, @": doc ", doc, @" <= lastDoc ", lastDoc)) autorelease];
+        @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I", @"term ", term, @": doc ", doc, @" <= lastDoc ", lastDoc));
       }
       if (doc >= maxDoc) {
-        @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I", @"term ", term, @": doc ", doc, @" >= maxDoc ", maxDoc)) autorelease];
+        @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I", @"term ", term, @": doc ", doc, @" >= maxDoc ", maxDoc));
       }
       [docsSeen setWithInt:doc];
       lastDoc = doc;
@@ -1033,17 +1065,17 @@ jboolean OrgApacheLuceneIndexCheckIndex_checkSingleTermRangeWithNSString_withInt
   OrgApacheLuceneIndexCheckIndex_initialize();
   JreAssert(([((OrgApacheLuceneUtilBytesRef *) nil_chk(minTerm)) compareToWithId:maxTerm] <= 0), (@"org/apache/lucene/index/CheckIndex.java:1009 condition failed: assert minTerm.compareTo(maxTerm) <= 0;"));
   OrgApacheLuceneIndexTermsEnum *termsEnum = [((OrgApacheLuceneIndexTerms *) nil_chk(terms)) iterator];
-  OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *status = [((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) seekCeilWithOrgApacheLuceneUtilBytesRef:minTerm];
-  if (status != JreLoadStatic(OrgApacheLuceneIndexTermsEnum_SeekStatusEnum, FOUND)) {
-    @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$@", @"failed to seek to existing term field=", field, @" term=", minTerm)) autorelease];
+  OrgApacheLuceneIndexTermsEnum_SeekStatus *status = [((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) seekCeilWithOrgApacheLuceneUtilBytesRef:minTerm];
+  if (status != JreLoadEnum(OrgApacheLuceneIndexTermsEnum_SeekStatus, FOUND)) {
+    @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$@", @"failed to seek to existing term field=", field, @" term=", minTerm));
   }
   jlong normalTermCount = OrgApacheLuceneIndexCheckIndex_getDocsFromTermRangeWithNSString_withInt_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilFixedBitSet_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_(field, maxDoc, termsEnum, normalDocs, minTerm, maxTerm, false);
-  jlong intersectTermCount = OrgApacheLuceneIndexCheckIndex_getDocsFromTermRangeWithNSString_withInt_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilFixedBitSet_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_(field, maxDoc, [terms intersectWithOrgApacheLuceneUtilAutomatonCompiledAutomaton:[new_OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withJavaLangBoolean_withBoolean_withInt_withBoolean_(OrgApacheLuceneUtilAutomatonAutomata_makeBinaryIntervalWithOrgApacheLuceneUtilBytesRef_withBoolean_withOrgApacheLuceneUtilBytesRef_withBoolean_(minTerm, true, maxTerm, false), JavaLangBoolean_valueOfWithBoolean_(true), false, JavaLangInteger_MAX_VALUE, true) autorelease] withOrgApacheLuceneUtilBytesRef:nil], intersectDocs, minTerm, maxTerm, true);
+  jlong intersectTermCount = OrgApacheLuceneIndexCheckIndex_getDocsFromTermRangeWithNSString_withInt_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilFixedBitSet_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_(field, maxDoc, [terms intersectWithOrgApacheLuceneUtilAutomatonCompiledAutomaton:create_OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withJavaLangBoolean_withBoolean_withInt_withBoolean_(OrgApacheLuceneUtilAutomatonAutomata_makeBinaryIntervalWithOrgApacheLuceneUtilBytesRef_withBoolean_withOrgApacheLuceneUtilBytesRef_withBoolean_(minTerm, true, maxTerm, false), JavaLangBoolean_valueOfWithBoolean_(true), false, JavaLangInteger_MAX_VALUE, true) withOrgApacheLuceneUtilBytesRef:nil], intersectDocs, minTerm, maxTerm, true);
   if (intersectTermCount > normalTermCount) {
-    @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$J$J", @"intersect returned too many terms: field=", field, @" intersectTermCount=", intersectTermCount, @" normalTermCount=", normalTermCount)) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$J$J", @"intersect returned too many terms: field=", field, @" intersectTermCount=", intersectTermCount, @" normalTermCount=", normalTermCount));
   }
   if ([((OrgApacheLuceneUtilFixedBitSet *) nil_chk(normalDocs)) isEqual:intersectDocs] == false) {
-    @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$I$@$@", @"intersect visited different docs than straight terms enum: ", [normalDocs cardinality], @" for straight enum, vs ", [((OrgApacheLuceneUtilFixedBitSet *) nil_chk(intersectDocs)) cardinality], @" for intersect, minTerm=", minTerm, @" maxTerm=", maxTerm)) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$I$@$@", @"intersect visited different docs than straight terms enum: ", [normalDocs cardinality], @" for straight enum, vs ", [((OrgApacheLuceneUtilFixedBitSet *) nil_chk(intersectDocs)) cardinality], @" for intersect, minTerm=", minTerm, @" maxTerm=", maxTerm));
   }
   return intersectTermCount != normalTermCount;
 }
@@ -1051,12 +1083,12 @@ jboolean OrgApacheLuceneIndexCheckIndex_checkSingleTermRangeWithNSString_withInt
 void OrgApacheLuceneIndexCheckIndex_checkTermRangesWithNSString_withInt_withOrgApacheLuceneIndexTerms_withLong_(NSString *field, jint maxDoc, OrgApacheLuceneIndexTerms *terms, jlong numTerms) {
   OrgApacheLuceneIndexCheckIndex_initialize();
   jdouble currentInterval = numTerms;
-  OrgApacheLuceneUtilFixedBitSet *normalDocs = [new_OrgApacheLuceneUtilFixedBitSet_initWithInt_(maxDoc) autorelease];
-  OrgApacheLuceneUtilFixedBitSet *intersectDocs = [new_OrgApacheLuceneUtilFixedBitSet_initWithInt_(maxDoc) autorelease];
+  OrgApacheLuceneUtilFixedBitSet *normalDocs = create_OrgApacheLuceneUtilFixedBitSet_initWithInt_(maxDoc);
+  OrgApacheLuceneUtilFixedBitSet *intersectDocs = create_OrgApacheLuceneUtilFixedBitSet_initWithInt_(maxDoc);
   while (currentInterval >= 10.0) {
     OrgApacheLuceneIndexTermsEnum *termsEnum = [((OrgApacheLuceneIndexTerms *) nil_chk(terms)) iterator];
     jlong termCount = 0;
-    id<JavaUtilDeque> termBounds = [new_JavaUtilLinkedList_init() autorelease];
+    id<JavaUtilDeque> termBounds = create_JavaUtilLinkedList_init();
     jlong lastTermAdded = JavaLangLong_MIN_VALUE;
     OrgApacheLuceneUtilBytesRefBuilder *lastTerm = nil;
     while (true) {
@@ -1075,12 +1107,12 @@ void OrgApacheLuceneIndexCheckIndex_checkTermRangesWithNSString_withInt_withOrgA
       }
       termCount++;
       if (lastTerm == nil) {
-        lastTerm = [new_OrgApacheLuceneUtilBytesRefBuilder_init() autorelease];
+        lastTerm = create_OrgApacheLuceneUtilBytesRefBuilder_init();
         [lastTerm copyBytesWithOrgApacheLuceneUtilBytesRef:term];
       }
       else {
         if ([((OrgApacheLuceneUtilBytesRef *) nil_chk([lastTerm get])) compareToWithId:term] >= 0) {
-          @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$@", @"terms out of order: lastTerm=", lastTerm, @" term=", term)) autorelease];
+          @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$@", @"terms out of order: lastTerm=", lastTerm, @" term=", term));
         }
         [lastTerm copyBytesWithOrgApacheLuceneUtilBytesRef:term];
       }
@@ -1103,28 +1135,28 @@ OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *OrgApacheLuceneIndexCheck
   else {
     startNS = 0;
   }
-  OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *status = [new_OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus_init() autorelease];
+  OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *status = create_OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus_init();
   jint computedFieldCount = 0;
   OrgApacheLuceneIndexPostingsEnum *postings = nil;
   NSString *lastField = nil;
   for (NSString * __strong field in nil_chk(fields)) {
     if (lastField != nil && [((NSString *) nil_chk(field)) compareToWithId:lastField] <= 0) {
-      @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$$", @"fields out of order: lastField=", lastField, @" field=", field)) autorelease];
+      @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$$", @"fields out of order: lastField=", lastField, @" field=", field));
     }
     lastField = field;
     OrgApacheLuceneIndexFieldInfo *fieldInfo = [((OrgApacheLuceneIndexFieldInfos *) nil_chk(fieldInfos)) fieldInfoWithNSString:field];
     if (fieldInfo == nil) {
-      @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$", @"fieldsEnum inconsistent with fieldInfos, no fieldInfos for: ", field)) autorelease];
+      @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$", @"fieldsEnum inconsistent with fieldInfos, no fieldInfos for: ", field));
     }
-    if ([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo)) getIndexOptions] == JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE)) {
-      @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$", @"fieldsEnum inconsistent with fieldInfos, isIndexed == false for: ", field)) autorelease];
+    if ([fieldInfo getIndexOptions] == JreLoadEnum(OrgApacheLuceneIndexIndexOptions, NONE)) {
+      @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$", @"fieldsEnum inconsistent with fieldInfos, isIndexed == false for: ", field));
     }
     computedFieldCount++;
     OrgApacheLuceneIndexTerms *terms = [fields termsWithNSString:field];
     if (terms == nil) {
       continue;
     }
-    jboolean hasFreqs = [((OrgApacheLuceneIndexTerms *) nil_chk(terms)) hasFreqs];
+    jboolean hasFreqs = [terms hasFreqs];
     jboolean hasPositions = [terms hasPositions];
     jboolean hasPayloads = [terms hasPayloads];
     jboolean hasOffsets = [terms hasOffsets];
@@ -1148,37 +1180,37 @@ OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *OrgApacheLuceneIndexCheck
         JreAssert(([bb isValid]), (@"org/apache/lucene/index/CheckIndex.java:1172 condition failed: assert bb.isValid();"));
         maxTerm = OrgApacheLuceneUtilBytesRef_deepCopyOfWithOrgApacheLuceneUtilBytesRef_(bb);
         if (minTerm == nil) {
-          @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$", @"field \"", field, @"\" has null minTerm but non-null maxTerm")) autorelease];
+          @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$", @"field \"", field, @"\" has null minTerm but non-null maxTerm"));
         }
       }
       else {
         maxTerm = nil;
         if (minTerm != nil) {
-          @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$", @"field \"", field, @"\" has non-null minTerm but null maxTerm")) autorelease];
+          @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$", @"field \"", field, @"\" has non-null minTerm but null maxTerm"));
         }
       }
     }
-    jboolean expectedHasFreqs = (isVectors || [((OrgApacheLuceneIndexIndexOptionsEnum *) nil_chk([fieldInfo getIndexOptions])) compareToWithId:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS)] >= 0);
+    jboolean expectedHasFreqs = (isVectors || [((OrgApacheLuceneIndexIndexOptions *) nil_chk([fieldInfo getIndexOptions])) compareToWithId:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS)] >= 0);
     if (hasFreqs != expectedHasFreqs) {
-      @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$Z$Z", @"field \"", field, @"\" should have hasFreqs=", expectedHasFreqs, @" but got ", hasFreqs)) autorelease];
+      @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$Z$Z", @"field \"", field, @"\" should have hasFreqs=", expectedHasFreqs, @" but got ", hasFreqs));
     }
     if (hasFreqs == false) {
       if ([terms getSumTotalTermFreq] != -1) {
-        @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$J$", @"field \"", field, @"\" hasFreqs is false, but Terms.getSumTotalTermFreq()=", [terms getSumTotalTermFreq], @" (should be -1)")) autorelease];
+        @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$J$", @"field \"", field, @"\" hasFreqs is false, but Terms.getSumTotalTermFreq()=", [terms getSumTotalTermFreq], @" (should be -1)"));
       }
     }
     if (!isVectors) {
-      jboolean expectedHasPositions = [((OrgApacheLuceneIndexIndexOptionsEnum *) nil_chk([fieldInfo getIndexOptions])) compareToWithId:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS)] >= 0;
+      jboolean expectedHasPositions = [((OrgApacheLuceneIndexIndexOptions *) nil_chk([fieldInfo getIndexOptions])) compareToWithId:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS)] >= 0;
       if (hasPositions != expectedHasPositions) {
-        @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$Z$Z", @"field \"", field, @"\" should have hasPositions=", expectedHasPositions, @" but got ", hasPositions)) autorelease];
+        @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$Z$Z", @"field \"", field, @"\" should have hasPositions=", expectedHasPositions, @" but got ", hasPositions));
       }
       jboolean expectedHasPayloads = [fieldInfo hasPayloads];
       if (hasPayloads != expectedHasPayloads) {
-        @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$Z$Z", @"field \"", field, @"\" should have hasPayloads=", expectedHasPayloads, @" but got ", hasPayloads)) autorelease];
+        @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$Z$Z", @"field \"", field, @"\" should have hasPayloads=", expectedHasPayloads, @" but got ", hasPayloads));
       }
-      jboolean expectedHasOffsets = [((OrgApacheLuceneIndexIndexOptionsEnum *) nil_chk([fieldInfo getIndexOptions])) compareToWithId:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS)] >= 0;
+      jboolean expectedHasOffsets = [((OrgApacheLuceneIndexIndexOptions *) nil_chk([fieldInfo getIndexOptions])) compareToWithId:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS)] >= 0;
       if (hasOffsets != expectedHasOffsets) {
-        @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$Z$Z", @"field \"", field, @"\" should have hasOffsets=", expectedHasOffsets, @" but got ", hasOffsets)) autorelease];
+        @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$Z$Z", @"field \"", field, @"\" should have hasOffsets=", expectedHasOffsets, @" but got ", hasOffsets));
       }
     }
     OrgApacheLuceneIndexTermsEnum *termsEnum = [terms iterator];
@@ -1187,44 +1219,44 @@ OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *OrgApacheLuceneIndexCheck
     OrgApacheLuceneUtilBytesRefBuilder *lastTerm = nil;
     jlong sumTotalTermFreq = 0;
     jlong sumDocFreq = 0;
-    OrgApacheLuceneUtilFixedBitSet *visitedDocs = [new_OrgApacheLuceneUtilFixedBitSet_initWithInt_(maxDoc) autorelease];
+    OrgApacheLuceneUtilFixedBitSet *visitedDocs = create_OrgApacheLuceneUtilFixedBitSet_initWithInt_(maxDoc);
     while (true) {
       OrgApacheLuceneUtilBytesRef *term = [((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) next];
       if (term == nil) {
         break;
       }
-      JreAssert(([((OrgApacheLuceneUtilBytesRef *) nil_chk(term)) isValid]), (@"org/apache/lucene/index/CheckIndex.java:1233 condition failed: assert term.isValid();"));
+      JreAssert(([term isValid]), (@"org/apache/lucene/index/CheckIndex.java:1233 condition failed: assert term.isValid();"));
       if (lastTerm == nil) {
-        lastTerm = [new_OrgApacheLuceneUtilBytesRefBuilder_init() autorelease];
+        lastTerm = create_OrgApacheLuceneUtilBytesRefBuilder_init();
         [lastTerm copyBytesWithOrgApacheLuceneUtilBytesRef:term];
       }
       else {
         if ([((OrgApacheLuceneUtilBytesRef *) nil_chk([lastTerm get])) compareToWithId:term] >= 0) {
-          @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$@", @"terms out of order: lastTerm=", lastTerm, @" term=", term)) autorelease];
+          @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$@", @"terms out of order: lastTerm=", lastTerm, @" term=", term));
         }
         [lastTerm copyBytesWithOrgApacheLuceneUtilBytesRef:term];
       }
       if (isVectors == false) {
         if (minTerm == nil) {
           JreAssert((maxTerm == nil), (@"org/apache/lucene/index/CheckIndex.java:1250 condition failed: assert maxTerm == null;"));
-          @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$@$@", @"field=\"", field, @"\": invalid term: term=", term, @", minTerm=", minTerm)) autorelease];
+          @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$@$@", @"field=\"", field, @"\": invalid term: term=", term, @", minTerm=", minTerm));
         }
         if ([term compareToWithId:minTerm] < 0) {
-          @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$@$@", @"field=\"", field, @"\": invalid term: term=", term, @", minTerm=", minTerm)) autorelease];
+          @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$@$@", @"field=\"", field, @"\": invalid term: term=", term, @", minTerm=", minTerm));
         }
         if ([term compareToWithId:maxTerm] > 0) {
-          @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$@$@", @"field=\"", field, @"\": invalid term: term=", term, @", maxTerm=", maxTerm)) autorelease];
+          @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$@$@", @"field=\"", field, @"\": invalid term: term=", term, @", maxTerm=", maxTerm));
         }
       }
       jint docFreq = [termsEnum docFreq];
       if (docFreq <= 0) {
-        @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$", @"docfreq: ", docFreq, @" is out of bounds")) autorelease];
+        @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$", @"docfreq: ", docFreq, @" is out of bounds"));
       }
       sumDocFreq += docFreq;
       postings = [termsEnum postingsWithOrgApacheLuceneIndexPostingsEnum:postings withInt:OrgApacheLuceneIndexPostingsEnum_ALL];
       if (hasFreqs == false) {
         if ([termsEnum totalTermFreq] != -1) {
-          @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$J$", @"field \"", field, @"\" hasFreqs is false, but TermsEnum.totalTermFreq()=", [termsEnum totalTermFreq], @" (should be -1)")) autorelease];
+          @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$J$", @"field \"", field, @"\" hasFreqs is false, but TermsEnum.totalTermFreq()=", [termsEnum totalTermFreq], @" (should be -1)"));
         }
       }
       if (hasOrd) {
@@ -1238,7 +1270,7 @@ OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *OrgApacheLuceneIndexCheck
         if (hasOrd) {
           jlong ordExpected = status->delTermCount_ + status->termCount_ - termCountStart;
           if (ord != ordExpected) {
-            @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$J$J", @"ord mismatch: TermsEnum has ord=", ord, @" vs actual=", ordExpected)) autorelease];
+            @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$J$J", @"ord mismatch: TermsEnum has ord=", ord, @" vs actual=", ordExpected));
           }
         }
       }
@@ -1256,13 +1288,13 @@ OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *OrgApacheLuceneIndexCheck
         if (hasFreqs) {
           freq = [postings freq];
           if (freq <= 0) {
-            @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I$", @"term ", term, @": doc ", doc, @": freq ", freq, @" is out of bounds")) autorelease];
+            @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I$", @"term ", term, @": doc ", doc, @": freq ", freq, @" is out of bounds"));
           }
           totalTermFreq += freq;
         }
         else {
           if ([postings freq] != 1) {
-            @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I$", @"term ", term, @": doc ", doc, @": freq ", freq, @" != 1 when Terms.hasFreqs() is false")) autorelease];
+            @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I$", @"term ", term, @": doc ", doc, @": freq ", freq, @" != 1 when Terms.hasFreqs() is false"));
           }
         }
         if (liveDocs == nil || [liveDocs getWithInt:doc]) {
@@ -1274,10 +1306,10 @@ OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *OrgApacheLuceneIndexCheck
         }
         docCount++;
         if (doc <= lastDoc) {
-          @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I", @"term ", term, @": doc ", doc, @" <= lastDoc ", lastDoc)) autorelease];
+          @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I", @"term ", term, @": doc ", doc, @" <= lastDoc ", lastDoc));
         }
         if (doc >= maxDoc) {
-          @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I", @"term ", term, @": doc ", doc, @" >= maxDoc ", maxDoc)) autorelease];
+          @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I", @"term ", term, @": doc ", doc, @" >= maxDoc ", maxDoc));
         }
         lastDoc = doc;
         jint lastPos = -1;
@@ -1286,13 +1318,13 @@ OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *OrgApacheLuceneIndexCheck
           for (jint j = 0; j < freq; j++) {
             jint pos = [postings nextPosition];
             if (pos < 0) {
-              @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I$", @"term ", term, @": doc ", doc, @": pos ", pos, @" is out of bounds")) autorelease];
+              @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I$", @"term ", term, @": doc ", doc, @": pos ", pos, @" is out of bounds"));
             }
             if (pos > OrgApacheLuceneIndexIndexWriter_MAX_POSITION) {
-              @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I$I", @"term ", term, @": doc ", doc, @": pos ", pos, @" > IndexWriter.MAX_POSITION=", OrgApacheLuceneIndexIndexWriter_MAX_POSITION)) autorelease];
+              @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I$I", @"term ", term, @": doc ", doc, @": pos ", pos, @" > IndexWriter.MAX_POSITION=", OrgApacheLuceneIndexIndexWriter_MAX_POSITION));
             }
             if (pos < lastPos) {
-              @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I$I", @"term ", term, @": doc ", doc, @": pos ", pos, @" < lastPos ", lastPos)) autorelease];
+              @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I$I", @"term ", term, @": doc ", doc, @": pos ", pos, @" < lastPos ", lastPos));
             }
             lastPos = pos;
             OrgApacheLuceneUtilBytesRef *payload = [postings getPayload];
@@ -1300,23 +1332,23 @@ OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *OrgApacheLuceneIndexCheck
               JreAssert(([payload isValid]), (@"org/apache/lucene/index/CheckIndex.java:1354 condition failed: assert payload.isValid();"));
             }
             if (payload != nil && payload->length_ < 1) {
-              @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I$I", @"term ", term, @": doc ", doc, @": pos ", pos, @" payload length is out of bounds ", payload->length_)) autorelease];
+              @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I$I", @"term ", term, @": doc ", doc, @": pos ", pos, @" payload length is out of bounds ", payload->length_));
             }
             if (hasOffsets) {
               jint startOffset = [postings startOffset];
               jint endOffset = [postings endOffset];
               if (!isVectors) {
                 if (startOffset < 0) {
-                  @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I$I$", @"term ", term, @": doc ", doc, @": pos ", pos, @": startOffset ", startOffset, @" is out of bounds")) autorelease];
+                  @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I$I$", @"term ", term, @": doc ", doc, @": pos ", pos, @": startOffset ", startOffset, @" is out of bounds"));
                 }
                 if (startOffset < lastOffset) {
-                  @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I$I$I", @"term ", term, @": doc ", doc, @": pos ", pos, @": startOffset ", startOffset, @" < lastStartOffset ", lastOffset)) autorelease];
+                  @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I$I$I", @"term ", term, @": doc ", doc, @": pos ", pos, @": startOffset ", startOffset, @" < lastStartOffset ", lastOffset));
                 }
                 if (endOffset < 0) {
-                  @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I$I$", @"term ", term, @": doc ", doc, @": pos ", pos, @": endOffset ", endOffset, @" is out of bounds")) autorelease];
+                  @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I$I$", @"term ", term, @": doc ", doc, @": pos ", pos, @": endOffset ", endOffset, @" is out of bounds"));
                 }
                 if (endOffset < startOffset) {
-                  @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I$I$I", @"term ", term, @": doc ", doc, @": pos ", pos, @": endOffset ", endOffset, @" < startOffset ", startOffset)) autorelease];
+                  @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I$I$I", @"term ", term, @": doc ", doc, @": pos ", pos, @": endOffset ", endOffset, @" < startOffset ", startOffset));
                 }
               }
               lastOffset = startOffset;
@@ -1333,15 +1365,15 @@ OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *OrgApacheLuceneIndexCheck
       jlong totalTermFreq2 = [termsEnum totalTermFreq];
       jboolean hasTotalTermFreq = hasFreqs && totalTermFreq2 != -1;
       if (docCount != docFreq) {
-        @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I", @"term ", term, @" docFreq=", docFreq, @" != tot docs w/o deletions ", docCount)) autorelease];
+        @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I", @"term ", term, @" docFreq=", docFreq, @" != tot docs w/o deletions ", docCount));
       }
       if (hasTotalTermFreq) {
         if (totalTermFreq2 <= 0) {
-          @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$J$", @"totalTermFreq: ", totalTermFreq2, @" is out of bounds")) autorelease];
+          @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$J$", @"totalTermFreq: ", totalTermFreq2, @" is out of bounds"));
         }
         sumTotalTermFreq += totalTermFreq;
         if (totalTermFreq != totalTermFreq2) {
-          @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$J$J", @"term ", term, @" totalTermFreq=", totalTermFreq2, @" != recomputed totalTermFreq=", totalTermFreq)) autorelease];
+          @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$J$J", @"term ", term, @" totalTermFreq=", totalTermFreq2, @" != recomputed totalTermFreq=", totalTermFreq));
         }
       }
       if (hasPositions) {
@@ -1354,21 +1386,21 @@ OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *OrgApacheLuceneIndexCheck
           }
           else {
             if (docID < skipDocID) {
-              @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I", @"term ", term, @": advance(docID=", skipDocID, @") returned docID=", docID)) autorelease];
+              @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I", @"term ", term, @": advance(docID=", skipDocID, @") returned docID=", docID));
             }
             jint freq = [postings freq];
             if (freq <= 0) {
-              @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$", @"termFreq ", freq, @" is out of bounds")) autorelease];
+              @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$", @"termFreq ", freq, @" is out of bounds"));
             }
             jint lastPosition = -1;
             jint lastOffset = 0;
             for (jint posUpto = 0; posUpto < freq; posUpto++) {
               jint pos = [postings nextPosition];
               if (pos < 0) {
-                @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$", @"position ", pos, @" is out of bounds")) autorelease];
+                @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$", @"position ", pos, @" is out of bounds"));
               }
               if (pos < lastPosition) {
-                @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$I", @"position ", pos, @" is < lastPosition ", lastPosition)) autorelease];
+                @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$I", @"position ", pos, @" is < lastPosition ", lastPosition));
               }
               lastPosition = pos;
               if (hasOffsets) {
@@ -1376,16 +1408,16 @@ OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *OrgApacheLuceneIndexCheck
                 jint endOffset = [postings endOffset];
                 if (!isVectors) {
                   if (startOffset < 0) {
-                    @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I$I$", @"term ", term, @": doc ", docID, @": pos ", pos, @": startOffset ", startOffset, @" is out of bounds")) autorelease];
+                    @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I$I$", @"term ", term, @": doc ", docID, @": pos ", pos, @": startOffset ", startOffset, @" is out of bounds"));
                   }
                   if (startOffset < lastOffset) {
-                    @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I$I$I", @"term ", term, @": doc ", docID, @": pos ", pos, @": startOffset ", startOffset, @" < lastStartOffset ", lastOffset)) autorelease];
+                    @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I$I$I", @"term ", term, @": doc ", docID, @": pos ", pos, @": startOffset ", startOffset, @" < lastStartOffset ", lastOffset));
                   }
                   if (endOffset < 0) {
-                    @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I$I$", @"term ", term, @": doc ", docID, @": pos ", pos, @": endOffset ", endOffset, @" is out of bounds")) autorelease];
+                    @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I$I$", @"term ", term, @": doc ", docID, @": pos ", pos, @": endOffset ", endOffset, @" is out of bounds"));
                   }
                   if (endOffset < startOffset) {
-                    @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I$I$I", @"term ", term, @": doc ", docID, @": pos ", pos, @": endOffset ", endOffset, @" < startOffset ", startOffset)) autorelease];
+                    @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I$I$I", @"term ", term, @": doc ", docID, @": pos ", pos, @": endOffset ", endOffset, @" < startOffset ", startOffset));
                   }
                 }
                 lastOffset = startOffset;
@@ -1396,7 +1428,7 @@ OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *OrgApacheLuceneIndexCheck
               break;
             }
             if (nextDocID <= docID) {
-              @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I$I", @"term ", term, @": advance(docID=", skipDocID, @"), then .next() returned docID=", nextDocID, @" vs prev docID=", docID)) autorelease];
+              @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I$I", @"term ", term, @": advance(docID=", skipDocID, @"), then .next() returned docID=", nextDocID, @" vs prev docID=", docID));
             }
           }
           if (isVectors) {
@@ -1414,14 +1446,14 @@ OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *OrgApacheLuceneIndexCheck
           }
           else {
             if (docID < skipDocID) {
-              @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I", @"term ", term, @": advance(docID=", skipDocID, @") returned docID=", docID)) autorelease];
+              @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I", @"term ", term, @": advance(docID=", skipDocID, @") returned docID=", docID));
             }
             jint nextDocID = [postings nextDoc];
             if (nextDocID == OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS) {
               break;
             }
             if (nextDocID <= docID) {
-              @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I$I", @"term ", term, @": advance(docID=", skipDocID, @"), then .next() returned docID=", nextDocID, @" vs prev docID=", docID)) autorelease];
+              @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$I$I$I", @"term ", term, @": advance(docID=", skipDocID, @"), then .next() returned docID=", nextDocID, @" vs prev docID=", docID));
             }
           }
           if (isVectors) {
@@ -1431,7 +1463,7 @@ OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *OrgApacheLuceneIndexCheck
       }
     }
     if (minTerm != nil && status->termCount_ + status->delTermCount_ == 0) {
-      @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$@", @"field=\"", field, @"\": minTerm is non-null yet we saw no terms: ", minTerm)) autorelease];
+      @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$@", @"field=\"", field, @"\": minTerm is non-null yet we saw no terms: ", minTerm));
     }
     OrgApacheLuceneIndexTerms *fieldTerms = [fields termsWithNSString:field];
     if (fieldTerms == nil) {
@@ -1443,29 +1475,29 @@ OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *OrgApacheLuceneIndexCheck
       if (status->blockTreeStats_ == nil) {
         JreStrongAssignAndConsume(&status->blockTreeStats_, new_JavaUtilHashMap_init());
       }
-      [((id<JavaUtilMap>) nil_chk(status->blockTreeStats_)) putWithId:field withId:stats];
+      [status->blockTreeStats_ putWithId:field withId:stats];
       if (sumTotalTermFreq != 0) {
         jlong v = [((OrgApacheLuceneIndexTerms *) nil_chk([fields termsWithNSString:field])) getSumTotalTermFreq];
         if (v != -1 && sumTotalTermFreq != v) {
-          @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$CJ$J", @"sumTotalTermFreq for field ", field, '=', v, @" != recomputed sumTotalTermFreq=", sumTotalTermFreq)) autorelease];
+          @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$CJ$J", @"sumTotalTermFreq for field ", field, '=', v, @" != recomputed sumTotalTermFreq=", sumTotalTermFreq));
         }
       }
       if (sumDocFreq != 0) {
         jlong v = [((OrgApacheLuceneIndexTerms *) nil_chk([fields termsWithNSString:field])) getSumDocFreq];
         if (v != -1 && sumDocFreq != v) {
-          @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$CJ$J", @"sumDocFreq for field ", field, '=', v, @" != recomputed sumDocFreq=", sumDocFreq)) autorelease];
+          @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$CJ$J", @"sumDocFreq for field ", field, '=', v, @" != recomputed sumDocFreq=", sumDocFreq));
         }
       }
       jint v = [fieldTerms getDocCount];
       if (v != -1 && [visitedDocs cardinality] != v) {
-        @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$CI$I", @"docCount for field ", field, '=', v, @" != recomputed docCount=", [visitedDocs cardinality])) autorelease];
+        @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$CI$I", @"docCount for field ", field, '=', v, @" != recomputed docCount=", [visitedDocs cardinality]));
       }
       if (lastTerm != nil) {
-        if ([((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) seekCeilWithOrgApacheLuceneUtilBytesRef:[lastTerm get]] != JreLoadStatic(OrgApacheLuceneIndexTermsEnum_SeekStatusEnum, FOUND)) {
-          @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$", @"seek to last term ", lastTerm, @" failed")) autorelease];
+        if ([((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) seekCeilWithOrgApacheLuceneUtilBytesRef:[lastTerm get]] != JreLoadEnum(OrgApacheLuceneIndexTermsEnum_SeekStatus, FOUND)) {
+          @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$", @"seek to last term ", lastTerm, @" failed"));
         }
         if ([((OrgApacheLuceneUtilBytesRef *) nil_chk([termsEnum term])) isEqual:[lastTerm get]] == false) {
-          @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$@", @"seek to last term ", [lastTerm get], @" returned FOUND but seeked to the wrong term ", [termsEnum term])) autorelease];
+          @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$@", @"seek to last term ", [lastTerm get], @" returned FOUND but seeked to the wrong term ", [termsEnum term]));
         }
         jint expectedDocFreq = [termsEnum docFreq];
         OrgApacheLuceneIndexPostingsEnum *d = [termsEnum postingsWithOrgApacheLuceneIndexPostingsEnum:nil withInt:OrgApacheLuceneIndexPostingsEnum_NONE];
@@ -1474,14 +1506,14 @@ OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *OrgApacheLuceneIndexCheck
           docFreq++;
         }
         if (docFreq != expectedDocFreq) {
-          @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@CI$I", @"docFreq for last term ", [lastTerm toBytesRef], '=', expectedDocFreq, @" != recomputed docFreq=", docFreq)) autorelease];
+          @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@CI$I", @"docFreq for last term ", [lastTerm toBytesRef], '=', expectedDocFreq, @" != recomputed docFreq=", docFreq));
         }
       }
       jlong termCount = -1;
       if (fieldTermCount > 0) {
         termCount = [((OrgApacheLuceneIndexTerms *) nil_chk([fields termsWithNSString:field])) size];
         if (termCount != -1 && termCount != fieldTermCount) {
-          @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$J$J", @"termCount mismatch ", termCount, @" vs ", fieldTermCount)) autorelease];
+          @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$J$J", @"termCount mismatch ", termCount, @" vs ", fieldTermCount));
         }
       }
       if (hasOrd && status->termCount_ - termCountStart > 0) {
@@ -1493,20 +1525,20 @@ OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *OrgApacheLuceneIndexCheck
             [((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) seekExactWithLong:ord];
             jlong actualOrd = [termsEnum ord];
             if (actualOrd != ord) {
-              @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$J$J", @"seek to ord ", ord, @" returned ord ", actualOrd)) autorelease];
+              @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$J$J", @"seek to ord ", ord, @" returned ord ", actualOrd));
             }
             IOSObjectArray_Set(seekTerms, i, OrgApacheLuceneUtilBytesRef_deepCopyOfWithOrgApacheLuceneUtilBytesRef_([termsEnum term]));
           }
           for (jint i = seekCount - 1; i >= 0; i--) {
-            if ([((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) seekCeilWithOrgApacheLuceneUtilBytesRef:IOSObjectArray_Get(seekTerms, i)] != JreLoadStatic(OrgApacheLuceneIndexTermsEnum_SeekStatusEnum, FOUND)) {
-              @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$", @"seek to existing term ", IOSObjectArray_Get(seekTerms, i), @" failed")) autorelease];
+            if ([((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) seekCeilWithOrgApacheLuceneUtilBytesRef:IOSObjectArray_Get(seekTerms, i)] != JreLoadEnum(OrgApacheLuceneIndexTermsEnum_SeekStatus, FOUND)) {
+              @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$", @"seek to existing term ", IOSObjectArray_Get(seekTerms, i), @" failed"));
             }
             if ([((OrgApacheLuceneUtilBytesRef *) nil_chk([termsEnum term])) isEqual:IOSObjectArray_Get(seekTerms, i)] == false) {
-              @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$@", @"seek to existing term ", IOSObjectArray_Get(seekTerms, i), @" returned FOUND but seeked to the wrong term ", [termsEnum term])) autorelease];
+              @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$@", @"seek to existing term ", IOSObjectArray_Get(seekTerms, i), @" returned FOUND but seeked to the wrong term ", [termsEnum term]));
             }
             postings = [termsEnum postingsWithOrgApacheLuceneIndexPostingsEnum:postings withInt:OrgApacheLuceneIndexPostingsEnum_NONE];
             if (postings == nil) {
-              @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@", @"null DocsEnum from to existing term ", IOSObjectArray_Get(seekTerms, i))) autorelease];
+              @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@", @"null DocsEnum from to existing term ", IOSObjectArray_Get(seekTerms, i)));
             }
           }
         }
@@ -1516,14 +1548,14 @@ OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *OrgApacheLuceneIndexCheck
   jint fieldCount = [fields size];
   if (fieldCount != -1) {
     if (fieldCount < 0) {
-      @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I", @"invalid fieldCount: ", fieldCount)) autorelease];
+      @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I", @"invalid fieldCount: ", fieldCount));
     }
     if (fieldCount != computedFieldCount) {
-      @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$I", @"fieldCount mismatch ", fieldCount, @" vs recomputed field count ", computedFieldCount)) autorelease];
+      @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$I", @"fieldCount mismatch ", fieldCount, @" vs recomputed field count ", computedFieldCount));
     }
   }
   if (doPrint) {
-    OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream, NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT_), @"OK [%d terms; %d terms/docs pairs; %d tokens] [took %.3f sec]", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangLong_valueOfWithLong_(status->termCount_), JavaLangLong_valueOfWithLong_(status->totFreq_), JavaLangLong_valueOfWithLong_(status->totPos_), JavaLangDouble_valueOfWithDouble_(OrgApacheLuceneIndexCheckIndex_nsToSecWithLong_(JavaLangSystem_nanoTime() - startNS)) } count:4 type:NSObject_class_()]));
+    OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream, NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"OK [%d terms; %d terms/docs pairs; %d tokens] [took %.3f sec]", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangLong_valueOfWithLong_(status->termCount_), JavaLangLong_valueOfWithLong_(status->totFreq_), JavaLangLong_valueOfWithLong_(status->totPos_), JavaLangDouble_valueOfWithDouble_(OrgApacheLuceneIndexCheckIndex_nsToSecWithLong_(JavaLangSystem_nanoTime() - startNS)) } count:4 type:NSObject_class_()]));
   }
   if (verbose && status->blockTreeStats_ != nil && infoStream != nil && status->termCount_ > 0) {
     for (id<JavaUtilMap_Entry> __strong ent in nil_chk([status->blockTreeStats_ entrySet])) {
@@ -1551,15 +1583,15 @@ OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *OrgApacheLuceneIndexCheck
     OrgApacheLuceneIndexFieldInfos *fieldInfos = [reader getFieldInfos];
     status = OrgApacheLuceneIndexCheckIndex_checkFieldsWithOrgApacheLuceneIndexFields_withOrgApacheLuceneUtilBits_withInt_withOrgApacheLuceneIndexFieldInfos_withBoolean_withBoolean_withJavaIoPrintStream_withBoolean_(fields, [reader getLiveDocs], maxDoc, fieldInfos, true, false, infoStream, verbose);
   }
-  @catch (JavaLangThrowable *e) {
+  @catch (NSException *e) {
     if (failFast) {
-      OrgApacheLuceneUtilIOUtils_reThrowWithJavaLangThrowable_(e);
+      OrgApacheLuceneUtilIOUtils_reThrowWithNSException_(e);
     }
     OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream, JreStrcat("$@", @"ERROR: ", e));
-    status = [new_OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus_init() autorelease];
+    status = create_OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus_init();
     JreStrongAssign(&status->error_, e);
     if (infoStream != nil) {
-      [((JavaLangThrowable *) nil_chk(e)) printStackTraceWithJavaIoPrintStream:infoStream];
+      [((NSException *) nil_chk(e)) printStackTraceWithJavaIoPrintStream:infoStream];
     }
   }
   return status;
@@ -1568,7 +1600,7 @@ OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *OrgApacheLuceneIndexCheck
 OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus *OrgApacheLuceneIndexCheckIndex_testStoredFieldsWithOrgApacheLuceneIndexCodecReader_withJavaIoPrintStream_withBoolean_(OrgApacheLuceneIndexCodecReader *reader, JavaIoPrintStream *infoStream, jboolean failFast) {
   OrgApacheLuceneIndexCheckIndex_initialize();
   jlong startNS = JavaLangSystem_nanoTime();
-  OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus *status = [new_OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus_init() autorelease];
+  OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus *status = create_OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus_init();
   @try {
     if (infoStream != nil) {
       [infoStream printWithNSString:@"    test: stored fields......."];
@@ -1576,7 +1608,7 @@ OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus *OrgApacheLuceneIndexChe
     id<OrgApacheLuceneUtilBits> liveDocs = [((OrgApacheLuceneIndexCodecReader *) nil_chk(reader)) getLiveDocs];
     OrgApacheLuceneCodecsStoredFieldsReader *storedFields = [((OrgApacheLuceneCodecsStoredFieldsReader *) nil_chk([reader getFieldsReader])) getMergeInstance];
     for (jint j = 0; j < [reader maxDoc]; ++j) {
-      OrgApacheLuceneDocumentDocumentStoredFieldVisitor *visitor = [new_OrgApacheLuceneDocumentDocumentStoredFieldVisitor_init() autorelease];
+      OrgApacheLuceneDocumentDocumentStoredFieldVisitor *visitor = create_OrgApacheLuceneDocumentDocumentStoredFieldVisitor_init();
       [((OrgApacheLuceneCodecsStoredFieldsReader *) nil_chk(storedFields)) visitDocumentWithInt:j withOrgApacheLuceneIndexStoredFieldVisitor:visitor];
       OrgApacheLuceneDocumentDocument *doc = [visitor getDocument];
       if (liveDocs == nil || [liveDocs getWithInt:j]) {
@@ -1585,15 +1617,15 @@ OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus *OrgApacheLuceneIndexChe
       }
     }
     if (status->docCount_ != [reader numDocs]) {
-      @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$I$", @"docCount=", status->docCount_, @" but saw ", status->docCount_, @" undeleted docs")) autorelease];
+      @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$I$", @"docCount=", status->docCount_, @" but saw ", status->docCount_, @" undeleted docs"));
     }
-    OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream, NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT_), @"OK [%d total field count; avg %.1f fields per doc] [took %.3f sec]", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangLong_valueOfWithLong_(status->totFields_), JavaLangFloat_valueOfWithFloat_((((jfloat) status->totFields_) / status->docCount_)), JavaLangDouble_valueOfWithDouble_(OrgApacheLuceneIndexCheckIndex_nsToSecWithLong_(JavaLangSystem_nanoTime() - startNS)) } count:3 type:NSObject_class_()]));
+    OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream, NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"OK [%d total field count; avg %.1f fields per doc] [took %.3f sec]", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangLong_valueOfWithLong_(status->totFields_), JavaLangFloat_valueOfWithFloat_((((jfloat) status->totFields_) / status->docCount_)), JavaLangDouble_valueOfWithDouble_(OrgApacheLuceneIndexCheckIndex_nsToSecWithLong_(JavaLangSystem_nanoTime() - startNS)) } count:3 type:NSObject_class_()]));
   }
-  @catch (JavaLangThrowable *e) {
+  @catch (NSException *e) {
     if (failFast) {
-      OrgApacheLuceneUtilIOUtils_reThrowWithJavaLangThrowable_(e);
+      OrgApacheLuceneUtilIOUtils_reThrowWithNSException_(e);
     }
-    OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream, JreStrcat("$$C", @"ERROR [", NSString_valueOf_([((JavaLangThrowable *) nil_chk(e)) getMessage]), ']'));
+    OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream, JreStrcat("$$C", @"ERROR [", NSString_valueOf_([((NSException *) nil_chk(e)) getMessage]), ']'));
     JreStrongAssign(&status->error_, e);
     if (infoStream != nil) {
       [e printStackTraceWithJavaIoPrintStream:infoStream];
@@ -1605,7 +1637,7 @@ OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus *OrgApacheLuceneIndexChe
 OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus *OrgApacheLuceneIndexCheckIndex_testDocValuesWithOrgApacheLuceneIndexCodecReader_withJavaIoPrintStream_withBoolean_(OrgApacheLuceneIndexCodecReader *reader, JavaIoPrintStream *infoStream, jboolean failFast) {
   OrgApacheLuceneIndexCheckIndex_initialize();
   jlong startNS = JavaLangSystem_nanoTime();
-  OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus *status = [new_OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus_init() autorelease];
+  OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus *status = create_OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus_init();
   @try {
     if (infoStream != nil) {
       [infoStream printWithNSString:@"    test: docvalues..........."];
@@ -1615,18 +1647,18 @@ OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus *OrgApacheLuceneIndexCheck
       dvReader = [dvReader getMergeInstance];
     }
     for (OrgApacheLuceneIndexFieldInfo * __strong fieldInfo in nil_chk([reader getFieldInfos])) {
-      if ([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo)) getDocValuesType] != JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, NONE)) {
+      if ([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo)) getDocValuesType] != JreLoadEnum(OrgApacheLuceneIndexDocValuesType, NONE)) {
         status->totalValueFields_++;
         OrgApacheLuceneIndexCheckIndex_checkDocValuesWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneCodecsDocValuesProducer_withInt_withJavaIoPrintStream_withOrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus_(fieldInfo, dvReader, [reader maxDoc], infoStream, status);
       }
     }
-    OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream, NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT_), @"OK [%d docvalues fields; %d BINARY; %d NUMERIC; %d SORTED; %d SORTED_NUMERIC; %d SORTED_SET] [took %.3f sec]", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangLong_valueOfWithLong_(status->totalValueFields_), JavaLangLong_valueOfWithLong_(status->totalBinaryFields_), JavaLangLong_valueOfWithLong_(status->totalNumericFields_), JavaLangLong_valueOfWithLong_(status->totalSortedFields_), JavaLangLong_valueOfWithLong_(status->totalSortedNumericFields_), JavaLangLong_valueOfWithLong_(status->totalSortedSetFields_), JavaLangDouble_valueOfWithDouble_(OrgApacheLuceneIndexCheckIndex_nsToSecWithLong_(JavaLangSystem_nanoTime() - startNS)) } count:7 type:NSObject_class_()]));
+    OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream, NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"OK [%d docvalues fields; %d BINARY; %d NUMERIC; %d SORTED; %d SORTED_NUMERIC; %d SORTED_SET] [took %.3f sec]", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangLong_valueOfWithLong_(status->totalValueFields_), JavaLangLong_valueOfWithLong_(status->totalBinaryFields_), JavaLangLong_valueOfWithLong_(status->totalNumericFields_), JavaLangLong_valueOfWithLong_(status->totalSortedFields_), JavaLangLong_valueOfWithLong_(status->totalSortedNumericFields_), JavaLangLong_valueOfWithLong_(status->totalSortedSetFields_), JavaLangDouble_valueOfWithDouble_(OrgApacheLuceneIndexCheckIndex_nsToSecWithLong_(JavaLangSystem_nanoTime() - startNS)) } count:7 type:NSObject_class_()]));
   }
-  @catch (JavaLangThrowable *e) {
+  @catch (NSException *e) {
     if (failFast) {
-      OrgApacheLuceneUtilIOUtils_reThrowWithJavaLangThrowable_(e);
+      OrgApacheLuceneUtilIOUtils_reThrowWithNSException_(e);
     }
-    OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream, JreStrcat("$$C", @"ERROR [", NSString_valueOf_([((JavaLangThrowable *) nil_chk(e)) getMessage]), ']'));
+    OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream, JreStrcat("$$C", @"ERROR [", NSString_valueOf_([((NSException *) nil_chk(e)) getMessage]), ']'));
     JreStrongAssign(&status->error_, e);
     if (infoStream != nil) {
       [e printStackTraceWithJavaIoPrintStream:infoStream];
@@ -1641,7 +1673,7 @@ void OrgApacheLuceneIndexCheckIndex_checkBinaryDocValuesWithNSString_withInt_wit
     OrgApacheLuceneUtilBytesRef *term = [((OrgApacheLuceneIndexBinaryDocValues *) nil_chk(dv)) getWithInt:i];
     JreAssert(([((OrgApacheLuceneUtilBytesRef *) nil_chk(term)) isValid]), (@"org/apache/lucene/index/CheckIndex.java:1782 condition failed: assert term.isValid();"));
     if ([((id<OrgApacheLuceneUtilBits>) nil_chk(docsWithField)) getWithInt:i] == false && term->length_ > 0) {
-      @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$@$I", @"dv for field: ", fieldName, @" is missing but has value=", term, @" for doc: ", i)) autorelease];
+      @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$@$I", @"dv for field: ", fieldName, @" is missing but has value=", term, @" for doc: ", i));
     }
   }
 }
@@ -1650,31 +1682,31 @@ void OrgApacheLuceneIndexCheckIndex_checkSortedDocValuesWithNSString_withInt_wit
   OrgApacheLuceneIndexCheckIndex_initialize();
   OrgApacheLuceneIndexCheckIndex_checkBinaryDocValuesWithNSString_withInt_withOrgApacheLuceneIndexBinaryDocValues_withOrgApacheLuceneUtilBits_(fieldName, maxDoc, dv, docsWithField);
   jint maxOrd = [((OrgApacheLuceneIndexSortedDocValues *) nil_chk(dv)) getValueCount] - 1;
-  OrgApacheLuceneUtilFixedBitSet *seenOrds = [new_OrgApacheLuceneUtilFixedBitSet_initWithInt_([dv getValueCount]) autorelease];
+  OrgApacheLuceneUtilFixedBitSet *seenOrds = create_OrgApacheLuceneUtilFixedBitSet_initWithInt_([dv getValueCount]);
   jint maxOrd2 = -1;
   for (jint i = 0; i < maxDoc; i++) {
     jint ord = [dv getOrdWithInt:i];
     if (ord == -1) {
       if ([((id<OrgApacheLuceneUtilBits>) nil_chk(docsWithField)) getWithInt:i]) {
-        @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$I", @"dv for field: ", fieldName, @" has -1 ord but is not marked missing for doc: ", i)) autorelease];
+        @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$I", @"dv for field: ", fieldName, @" has -1 ord but is not marked missing for doc: ", i));
       }
     }
     else if (ord < -1 || ord > maxOrd) {
-      @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I", @"ord out of bounds: ", ord)) autorelease];
+      @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I", @"ord out of bounds: ", ord));
     }
     else {
       if (![((id<OrgApacheLuceneUtilBits>) nil_chk(docsWithField)) getWithInt:i]) {
-        @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$I$I", @"dv for field: ", fieldName, @" is missing but has ord=", ord, @" for doc: ", i)) autorelease];
+        @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$I$I", @"dv for field: ", fieldName, @" is missing but has ord=", ord, @" for doc: ", i));
       }
       maxOrd2 = JavaLangMath_maxWithInt_withInt_(maxOrd2, ord);
       [seenOrds setWithInt:ord];
     }
   }
   if (maxOrd != maxOrd2) {
-    @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$I$I", @"dv for field: ", fieldName, @" reports wrong maxOrd=", maxOrd, @" but this is not the case: ", maxOrd2)) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$I$I", @"dv for field: ", fieldName, @" reports wrong maxOrd=", maxOrd, @" but this is not the case: ", maxOrd2));
   }
   if ([seenOrds cardinality] != [dv getValueCount]) {
-    @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$I$I", @"dv for field: ", fieldName, @" has holes in its ords, valueCount=", [dv getValueCount], @" but only used: ", [seenOrds cardinality])) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$I$I", @"dv for field: ", fieldName, @" has holes in its ords, valueCount=", [dv getValueCount], @" but only used: ", [seenOrds cardinality]));
   }
   OrgApacheLuceneUtilBytesRef *lastValue = nil;
   for (jint i = 0; i <= maxOrd; i++) {
@@ -1682,7 +1714,7 @@ void OrgApacheLuceneIndexCheckIndex_checkSortedDocValuesWithNSString_withInt_wit
     JreAssert(([((OrgApacheLuceneUtilBytesRef *) nil_chk(term)) isValid]), (@"org/apache/lucene/index/CheckIndex.java:1819 condition failed: assert term.isValid();"));
     if (lastValue != nil) {
       if ([term compareToWithId:lastValue] <= 0) {
-        @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$@$@", @"dv for field: ", fieldName, @" has ords out of order: ", lastValue, @" >=", term)) autorelease];
+        @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$@$@", @"dv for field: ", fieldName, @" has ords out of order: ", lastValue, @" >=", term));
       }
     }
     lastValue = OrgApacheLuceneUtilBytesRef_deepCopyOfWithOrgApacheLuceneUtilBytesRef_(term);
@@ -1692,7 +1724,7 @@ void OrgApacheLuceneIndexCheckIndex_checkSortedDocValuesWithNSString_withInt_wit
 void OrgApacheLuceneIndexCheckIndex_checkSortedSetDocValuesWithNSString_withInt_withOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneUtilBits_(NSString *fieldName, jint maxDoc, OrgApacheLuceneIndexSortedSetDocValues *dv, id<OrgApacheLuceneUtilBits> docsWithField) {
   OrgApacheLuceneIndexCheckIndex_initialize();
   jlong maxOrd = [((OrgApacheLuceneIndexSortedSetDocValues *) nil_chk(dv)) getValueCount] - 1;
-  OrgApacheLuceneUtilLongBitSet *seenOrds = [new_OrgApacheLuceneUtilLongBitSet_initWithLong_([dv getValueCount]) autorelease];
+  OrgApacheLuceneUtilLongBitSet *seenOrds = create_OrgApacheLuceneUtilLongBitSet_initWithLong_([dv getValueCount]);
   jlong maxOrd2 = -1;
   for (jint i = 0; i < maxDoc; i++) {
     [dv setDocumentWithInt:i];
@@ -1702,15 +1734,15 @@ void OrgApacheLuceneIndexCheckIndex_checkSortedSetDocValuesWithNSString_withInt_
       jint ordCount = 0;
       while ((ord = [dv nextOrd]) != OrgApacheLuceneIndexSortedSetDocValues_NO_MORE_ORDS) {
         if (ord <= lastOrd) {
-          @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$J$J$I", @"ords out of order: ", ord, @" <= ", lastOrd, @" for doc: ", i)) autorelease];
+          @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$J$J$I", @"ords out of order: ", ord, @" <= ", lastOrd, @" for doc: ", i));
         }
         if (ord < 0 || ord > maxOrd) {
-          @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$J", @"ord out of bounds: ", ord)) autorelease];
+          @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$J", @"ord out of bounds: ", ord));
         }
         if ([dv isKindOfClass:[OrgApacheLuceneIndexRandomAccessOrds class]]) {
-          jlong ord2 = [((OrgApacheLuceneIndexRandomAccessOrds *) check_class_cast(dv, [OrgApacheLuceneIndexRandomAccessOrds class])) ordAtWithInt:ordCount];
+          jlong ord2 = [((OrgApacheLuceneIndexRandomAccessOrds *) cast_chk(dv, [OrgApacheLuceneIndexRandomAccessOrds class])) ordAtWithInt:ordCount];
           if (ord != ord2) {
-            @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$J$J$I", @"ordAt(", ordCount, @") inconsistent, expected=", ord, @",got=", ord2, @" for doc: ", i)) autorelease];
+            @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$J$J$I", @"ordAt(", ordCount, @") inconsistent, expected=", ord, @",got=", ord2, @" for doc: ", i));
           }
         }
         lastOrd = ord;
@@ -1719,33 +1751,33 @@ void OrgApacheLuceneIndexCheckIndex_checkSortedSetDocValuesWithNSString_withInt_
         ordCount++;
       }
       if (ordCount == 0) {
-        @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$I", @"dv for field: ", fieldName, @" has no ordinals but is not marked missing for doc: ", i)) autorelease];
+        @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$I", @"dv for field: ", fieldName, @" has no ordinals but is not marked missing for doc: ", i));
       }
       if ([dv isKindOfClass:[OrgApacheLuceneIndexRandomAccessOrds class]]) {
-        jlong ordCount2 = [((OrgApacheLuceneIndexRandomAccessOrds *) check_class_cast(dv, [OrgApacheLuceneIndexRandomAccessOrds class])) cardinality];
+        jlong ordCount2 = [((OrgApacheLuceneIndexRandomAccessOrds *) cast_chk(dv, [OrgApacheLuceneIndexRandomAccessOrds class])) cardinality];
         if (ordCount != ordCount2) {
-          @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$J$I", @"cardinality inconsistent, expected=", ordCount, @",got=", ordCount2, @" for doc: ", i)) autorelease];
+          @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$J$I", @"cardinality inconsistent, expected=", ordCount, @",got=", ordCount2, @" for doc: ", i));
         }
       }
     }
     else {
       jlong o = [dv nextOrd];
       if (o != OrgApacheLuceneIndexSortedSetDocValues_NO_MORE_ORDS) {
-        @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$J$I", @"dv for field: ", fieldName, @" is marked missing but has ord=", o, @" for doc: ", i)) autorelease];
+        @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$J$I", @"dv for field: ", fieldName, @" is marked missing but has ord=", o, @" for doc: ", i));
       }
       if ([dv isKindOfClass:[OrgApacheLuceneIndexRandomAccessOrds class]]) {
-        jlong ordCount2 = [((OrgApacheLuceneIndexRandomAccessOrds *) check_class_cast(dv, [OrgApacheLuceneIndexRandomAccessOrds class])) cardinality];
+        jlong ordCount2 = [((OrgApacheLuceneIndexRandomAccessOrds *) cast_chk(dv, [OrgApacheLuceneIndexRandomAccessOrds class])) cardinality];
         if (ordCount2 != 0) {
-          @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$J$I", @"dv for field: ", fieldName, @" is marked missing but has cardinality ", ordCount2, @" for doc: ", i)) autorelease];
+          @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$J$I", @"dv for field: ", fieldName, @" is marked missing but has cardinality ", ordCount2, @" for doc: ", i));
         }
       }
     }
   }
   if (maxOrd != maxOrd2) {
-    @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$J$J", @"dv for field: ", fieldName, @" reports wrong maxOrd=", maxOrd, @" but this is not the case: ", maxOrd2)) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$J$J", @"dv for field: ", fieldName, @" reports wrong maxOrd=", maxOrd, @" but this is not the case: ", maxOrd2));
   }
   if ([seenOrds cardinality] != [dv getValueCount]) {
-    @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$J$J", @"dv for field: ", fieldName, @" has holes in its ords, valueCount=", [dv getValueCount], @" but only used: ", [seenOrds cardinality])) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$J$J", @"dv for field: ", fieldName, @" has holes in its ords, valueCount=", [dv getValueCount], @" but only used: ", [seenOrds cardinality]));
   }
   OrgApacheLuceneUtilBytesRef *lastValue = nil;
   for (jlong i = 0; i <= maxOrd; i++) {
@@ -1753,7 +1785,7 @@ void OrgApacheLuceneIndexCheckIndex_checkSortedSetDocValuesWithNSString_withInt_
     JreAssert(([((OrgApacheLuceneUtilBytesRef *) nil_chk(term)) isValid]), (@"org/apache/lucene/index/CheckIndex.java:1889 condition failed: assert term.isValid();"));
     if (lastValue != nil) {
       if ([term compareToWithId:lastValue] <= 0) {
-        @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$@$@", @"dv for field: ", fieldName, @" has ords out of order: ", lastValue, @" >=", term)) autorelease];
+        @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$@$@", @"dv for field: ", fieldName, @" has ords out of order: ", lastValue, @" >=", term));
       }
     }
     lastValue = OrgApacheLuceneUtilBytesRef_deepCopyOfWithOrgApacheLuceneUtilBytesRef_(term);
@@ -1767,20 +1799,20 @@ void OrgApacheLuceneIndexCheckIndex_checkSortedNumericDocValuesWithNSString_with
     jint count = [ndv count];
     if ([((id<OrgApacheLuceneUtilBits>) nil_chk(docsWithField)) getWithInt:i]) {
       if (count == 0) {
-        @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$I", @"dv for field: ", fieldName, @" is not marked missing but has zero count for doc: ", i)) autorelease];
+        @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$I", @"dv for field: ", fieldName, @" is not marked missing but has zero count for doc: ", i));
       }
       jlong previous = JavaLangLong_MIN_VALUE;
       for (jint j = 0; j < count; j++) {
         jlong value = [ndv valueAtWithInt:j];
         if (value < previous) {
-          @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$J$J$I", @"values out of order: ", value, @" < ", previous, @" for doc: ", i)) autorelease];
+          @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$J$J$I", @"values out of order: ", value, @" < ", previous, @" for doc: ", i));
         }
         previous = value;
       }
     }
     else {
       if (count != 0) {
-        @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$I$I", @"dv for field: ", fieldName, @" is marked missing but has count=", count, @" for doc: ", i)) autorelease];
+        @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$I$I", @"dv for field: ", fieldName, @" is marked missing but has count=", count, @" for doc: ", i));
       }
     }
   }
@@ -1791,7 +1823,7 @@ void OrgApacheLuceneIndexCheckIndex_checkNumericDocValuesWithNSString_withInt_wi
   for (jint i = 0; i < maxDoc; i++) {
     jlong value = [((OrgApacheLuceneIndexNumericDocValues *) nil_chk(ndv)) getWithInt:i];
     if ([((id<OrgApacheLuceneUtilBits>) nil_chk(docsWithField)) getWithInt:i] == false && value != 0) {
-      @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$J$I", @"dv for field: ", fieldName, @" is marked missing but has value=", value, @" for doc: ", i)) autorelease];
+      @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$J$I", @"dv for field: ", fieldName, @" is marked missing but has value=", value, @" for doc: ", i));
     }
   }
 }
@@ -1800,34 +1832,34 @@ void OrgApacheLuceneIndexCheckIndex_checkDocValuesWithOrgApacheLuceneIndexFieldI
   OrgApacheLuceneIndexCheckIndex_initialize();
   id<OrgApacheLuceneUtilBits> docsWithField = [((OrgApacheLuceneCodecsDocValuesProducer *) nil_chk(dvReader)) getDocsWithFieldWithOrgApacheLuceneIndexFieldInfo:fi];
   if (docsWithField == nil) {
-    @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$", ((OrgApacheLuceneIndexFieldInfo *) nil_chk(fi))->name_, @" docsWithField does not exist")) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$", ((OrgApacheLuceneIndexFieldInfo *) nil_chk(fi))->name_, @" docsWithField does not exist"));
   }
   else if ([docsWithField length] != maxDoc) {
-    @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$I$I", ((OrgApacheLuceneIndexFieldInfo *) nil_chk(fi))->name_, @" docsWithField has incorrect length: ", [docsWithField length], @",expected: ", maxDoc)) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$I$I", ((OrgApacheLuceneIndexFieldInfo *) nil_chk(fi))->name_, @" docsWithField has incorrect length: ", [docsWithField length], @",expected: ", maxDoc));
   }
   switch ([[((OrgApacheLuceneIndexFieldInfo *) nil_chk(fi)) getDocValuesType] ordinal]) {
-    case OrgApacheLuceneIndexDocValuesType_SORTED:
+    case OrgApacheLuceneIndexDocValuesType_Enum_SORTED:
     ((OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus *) nil_chk(status))->totalSortedFields_++;
     OrgApacheLuceneIndexCheckIndex_checkSortedDocValuesWithNSString_withInt_withOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneUtilBits_(fi->name_, maxDoc, [dvReader getSortedWithOrgApacheLuceneIndexFieldInfo:fi], docsWithField);
     break;
-    case OrgApacheLuceneIndexDocValuesType_SORTED_NUMERIC:
+    case OrgApacheLuceneIndexDocValuesType_Enum_SORTED_NUMERIC:
     ((OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus *) nil_chk(status))->totalSortedNumericFields_++;
     OrgApacheLuceneIndexCheckIndex_checkSortedNumericDocValuesWithNSString_withInt_withOrgApacheLuceneIndexSortedNumericDocValues_withOrgApacheLuceneUtilBits_(fi->name_, maxDoc, [dvReader getSortedNumericWithOrgApacheLuceneIndexFieldInfo:fi], docsWithField);
     break;
-    case OrgApacheLuceneIndexDocValuesType_SORTED_SET:
+    case OrgApacheLuceneIndexDocValuesType_Enum_SORTED_SET:
     ((OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus *) nil_chk(status))->totalSortedSetFields_++;
     OrgApacheLuceneIndexCheckIndex_checkSortedSetDocValuesWithNSString_withInt_withOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneUtilBits_(fi->name_, maxDoc, [dvReader getSortedSetWithOrgApacheLuceneIndexFieldInfo:fi], docsWithField);
     break;
-    case OrgApacheLuceneIndexDocValuesType_BINARY:
+    case OrgApacheLuceneIndexDocValuesType_Enum_BINARY:
     ((OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus *) nil_chk(status))->totalBinaryFields_++;
     OrgApacheLuceneIndexCheckIndex_checkBinaryDocValuesWithNSString_withInt_withOrgApacheLuceneIndexBinaryDocValues_withOrgApacheLuceneUtilBits_(fi->name_, maxDoc, [dvReader getBinaryWithOrgApacheLuceneIndexFieldInfo:fi], docsWithField);
     break;
-    case OrgApacheLuceneIndexDocValuesType_NUMERIC:
+    case OrgApacheLuceneIndexDocValuesType_Enum_NUMERIC:
     ((OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus *) nil_chk(status))->totalNumericFields_++;
     OrgApacheLuceneIndexCheckIndex_checkNumericDocValuesWithNSString_withInt_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_(fi->name_, maxDoc, [dvReader getNumericWithOrgApacheLuceneIndexFieldInfo:fi], docsWithField);
     break;
     default:
-    @throw [new_JavaLangAssertionError_init() autorelease];
+    @throw create_JavaLangAssertionError_init();
   }
 }
 
@@ -1839,7 +1871,7 @@ OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus *OrgApacheLuceneIndexChec
 OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus *OrgApacheLuceneIndexCheckIndex_testTermVectorsWithOrgApacheLuceneIndexCodecReader_withJavaIoPrintStream_withBoolean_withBoolean_withBoolean_(OrgApacheLuceneIndexCodecReader *reader, JavaIoPrintStream *infoStream, jboolean verbose, jboolean crossCheckTermVectors, jboolean failFast) {
   OrgApacheLuceneIndexCheckIndex_initialize();
   jlong startNS = JavaLangSystem_nanoTime();
-  OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus *status = [new_OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus_init() autorelease];
+  OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus *status = create_OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus_init();
   OrgApacheLuceneIndexFieldInfos *fieldInfos = [((OrgApacheLuceneIndexCodecReader *) nil_chk(reader)) getFieldInfos];
   @try {
     if (infoStream != nil) {
@@ -1872,41 +1904,41 @@ OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus *OrgApacheLuceneIndexChec
             }
             OrgApacheLuceneIndexFieldInfo *fieldInfo = [((OrgApacheLuceneIndexFieldInfos *) nil_chk(fieldInfos)) fieldInfoWithNSString:field];
             if (![((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo)) hasVectors]) {
-              @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$$$", @"docID=", j, @" has term vectors for field=", field, @" but FieldInfo has storeTermVector=false")) autorelease];
+              @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$$$", @"docID=", j, @" has term vectors for field=", field, @" but FieldInfo has storeTermVector=false"));
             }
             if (crossCheckTermVectors) {
               OrgApacheLuceneIndexTerms *terms = [tfv termsWithNSString:field];
               OrgApacheLuceneIndexTermsEnum *termsEnum = [((OrgApacheLuceneIndexTerms *) nil_chk(terms)) iterator];
-              jboolean postingsHasFreq = [((OrgApacheLuceneIndexIndexOptionsEnum *) nil_chk([fieldInfo getIndexOptions])) compareToWithId:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS)] >= 0;
+              jboolean postingsHasFreq = [((OrgApacheLuceneIndexIndexOptions *) nil_chk([fieldInfo getIndexOptions])) compareToWithId:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS)] >= 0;
               jboolean postingsHasPayload = [fieldInfo hasPayloads];
               jboolean vectorsHasPayload = [terms hasPayloads];
               OrgApacheLuceneIndexTerms *postingsTerms = [((OrgApacheLuceneIndexFields *) nil_chk(postingsFields)) termsWithNSString:field];
               if (postingsTerms == nil) {
-                @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$I", @"vector field=", field, @" does not exist in postings; doc=", j)) autorelease];
+                @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$I", @"vector field=", field, @" does not exist in postings; doc=", j));
               }
-              OrgApacheLuceneIndexTermsEnum *postingsTermsEnum = [((OrgApacheLuceneIndexTerms *) nil_chk(postingsTerms)) iterator];
+              OrgApacheLuceneIndexTermsEnum *postingsTermsEnum = [postingsTerms iterator];
               jboolean hasProx = [terms hasOffsets] || [terms hasPositions];
               OrgApacheLuceneUtilBytesRef *term = nil;
               while ((term = [((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) next]) != nil) {
                 postings = [termsEnum postingsWithOrgApacheLuceneIndexPostingsEnum:postings withInt:OrgApacheLuceneIndexPostingsEnum_ALL];
                 JreAssert((postings != nil), (@"org/apache/lucene/index/CheckIndex.java:2056 condition failed: assert postings != null;"));
                 if (![((OrgApacheLuceneIndexTermsEnum *) nil_chk(postingsTermsEnum)) seekExactWithOrgApacheLuceneUtilBytesRef:term]) {
-                  @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$$$I", @"vector term=", term, @" field=", field, @" does not exist in postings; doc=", j)) autorelease];
+                  @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$$$I", @"vector term=", term, @" field=", field, @" does not exist in postings; doc=", j));
                 }
                 postingsDocs = [postingsTermsEnum postingsWithOrgApacheLuceneIndexPostingsEnum:postingsDocs withInt:OrgApacheLuceneIndexPostingsEnum_ALL];
                 JreAssert((postingsDocs != nil), (@"org/apache/lucene/index/CheckIndex.java:2064 condition failed: assert postingsDocs != null;"));
                 jint advanceDoc = [((OrgApacheLuceneIndexPostingsEnum *) nil_chk(postingsDocs)) advanceWithInt:j];
                 if (advanceDoc != j) {
-                  @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$$$I$IC", @"vector term=", term, @" field=", field, @": doc=", j, @" was not found in postings (got: ", advanceDoc, ')')) autorelease];
+                  @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$$$I$IC", @"vector term=", term, @" field=", field, @": doc=", j, @" was not found in postings (got: ", advanceDoc, ')'));
                 }
                 jint doc = [((OrgApacheLuceneIndexPostingsEnum *) nil_chk(postings)) nextDoc];
                 if (doc != 0) {
-                  @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$I", @"vector for doc ", j, @" didn't return docID=0: got docID=", doc)) autorelease];
+                  @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$I", @"vector for doc ", j, @" didn't return docID=0: got docID=", doc));
                 }
                 if (postingsHasFreq) {
                   jint tf = [postings freq];
                   if (postingsHasFreq && [postingsDocs freq] != tf) {
-                    @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$$$I$I$I", @"vector term=", term, @" field=", field, @" doc=", j, @": freq=", tf, @" differs from postings freq=", [postingsDocs freq])) autorelease];
+                    @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$$$I$I$I", @"vector term=", term, @" field=", field, @" doc=", j, @": freq=", tf, @" differs from postings freq=", [postingsDocs freq]));
                   }
                   if (hasProx) {
                     for (jint i = 0; i < tf; i++) {
@@ -1914,7 +1946,7 @@ OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus *OrgApacheLuceneIndexChec
                       if ([postingsTerms hasPositions]) {
                         jint postingsPos = [postingsDocs nextPosition];
                         if ([terms hasPositions] && pos != postingsPos) {
-                          @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$$$I$I$I", @"vector term=", term, @" field=", field, @" doc=", j, @": pos=", pos, @" differs from postings pos=", postingsPos)) autorelease];
+                          @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$$$I$I$I", @"vector term=", term, @" field=", field, @" doc=", j, @": pos=", pos, @" differs from postings pos=", postingsPos));
                         }
                       }
                       jint startOffset = [postings startOffset];
@@ -1923,10 +1955,10 @@ OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus *OrgApacheLuceneIndexChec
                         jint postingsStartOffset = [postingsDocs startOffset];
                         jint postingsEndOffset = [postingsDocs endOffset];
                         if (startOffset != postingsStartOffset) {
-                          @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$$$I$I$I", @"vector term=", term, @" field=", field, @" doc=", j, @": startOffset=", startOffset, @" differs from postings startOffset=", postingsStartOffset)) autorelease];
+                          @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$$$I$I$I", @"vector term=", term, @" field=", field, @" doc=", j, @": startOffset=", startOffset, @" differs from postings startOffset=", postingsStartOffset));
                         }
                         if (endOffset != postingsEndOffset) {
-                          @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$$$I$I$I", @"vector term=", term, @" field=", field, @" doc=", j, @": endOffset=", endOffset, @" differs from postings endOffset=", postingsEndOffset)) autorelease];
+                          @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$$$I$I$I", @"vector term=", term, @" field=", field, @" doc=", j, @": endOffset=", endOffset, @" differs from postings endOffset=", postingsEndOffset));
                         }
                       }
                       OrgApacheLuceneUtilBytesRef *payload = [postings getPayload];
@@ -1936,16 +1968,16 @@ OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus *OrgApacheLuceneIndexChec
                       if (postingsHasPayload && vectorsHasPayload) {
                         if (payload == nil) {
                           if ([postingsDocs getPayload] != nil) {
-                            @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$$$I$@", @"vector term=", term, @" field=", field, @" doc=", j, @" has no payload but postings does: ", [postingsDocs getPayload])) autorelease];
+                            @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$$$I$@", @"vector term=", term, @" field=", field, @" doc=", j, @" has no payload but postings does: ", [postingsDocs getPayload]));
                           }
                         }
                         else {
                           if ([postingsDocs getPayload] == nil) {
-                            @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$$$I$@$", @"vector term=", term, @" field=", field, @" doc=", j, @" has payload=", payload, @" but postings does not.")) autorelease];
+                            @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$$$I$@$", @"vector term=", term, @" field=", field, @" doc=", j, @" has payload=", payload, @" but postings does not."));
                           }
                           OrgApacheLuceneUtilBytesRef *postingsPayload = [postingsDocs getPayload];
                           if (![payload isEqual:postingsPayload]) {
-                            @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$$$I$@$@", @"vector term=", term, @" field=", field, @" doc=", j, @" has payload=", payload, @" but differs from postings payload=", postingsPayload)) autorelease];
+                            @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@$$$I$@$@", @"vector term=", term, @" field=", field, @" doc=", j, @" has payload=", payload, @" but differs from postings payload=", postingsPayload));
                           }
                         }
                       }
@@ -1959,13 +1991,13 @@ OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus *OrgApacheLuceneIndexChec
       }
     }
     jfloat vectorAvg = status->docCount_ == 0 ? 0 : status->totVectors_ / (jfloat) status->docCount_;
-    OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream, NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT_), @"OK [%d total term vector count; avg %.1f term/freq vector fields per doc] [took %.3f sec]", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangLong_valueOfWithLong_(status->totVectors_), JavaLangFloat_valueOfWithFloat_(vectorAvg), JavaLangDouble_valueOfWithDouble_(OrgApacheLuceneIndexCheckIndex_nsToSecWithLong_(JavaLangSystem_nanoTime() - startNS)) } count:3 type:NSObject_class_()]));
+    OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream, NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"OK [%d total term vector count; avg %.1f term/freq vector fields per doc] [took %.3f sec]", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangLong_valueOfWithLong_(status->totVectors_), JavaLangFloat_valueOfWithFloat_(vectorAvg), JavaLangDouble_valueOfWithDouble_(OrgApacheLuceneIndexCheckIndex_nsToSecWithLong_(JavaLangSystem_nanoTime() - startNS)) } count:3 type:NSObject_class_()]));
   }
-  @catch (JavaLangThrowable *e) {
+  @catch (NSException *e) {
     if (failFast) {
-      OrgApacheLuceneUtilIOUtils_reThrowWithJavaLangThrowable_(e);
+      OrgApacheLuceneUtilIOUtils_reThrowWithNSException_(e);
     }
-    OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream, JreStrcat("$$C", @"ERROR [", NSString_valueOf_([((JavaLangThrowable *) nil_chk(e)) getMessage]), ']'));
+    OrgApacheLuceneIndexCheckIndex_msgWithJavaIoPrintStream_withNSString_(infoStream, JreStrcat("$$C", @"ERROR [", NSString_valueOf_([((NSException *) nil_chk(e)) getMessage]), ']'));
     JreStrongAssign(&status->error_, e);
     if (infoStream != nil) {
       [e printStackTraceWithJavaIoPrintStream:infoStream];
@@ -1998,7 +2030,7 @@ jint OrgApacheLuceneIndexCheckIndex_doMainWithNSStringArray_(IOSObjectArray *arg
   jboolean doCrossCheckTermVectors = false;
   jboolean verbose = false;
   jboolean doChecksumsOnly = false;
-  id<JavaUtilList> onlySegments = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> onlySegments = create_JavaUtilArrayList_init();
   NSString *indexPath = nil;
   NSString *dirImpl = nil;
   jint i = 0;
@@ -2018,7 +2050,7 @@ jint OrgApacheLuceneIndexCheckIndex_doMainWithNSStringArray_(IOSObjectArray *arg
     }
     else if ([arg isEqual:@"-segment"]) {
       if (i == args->size_ - 1) {
-        [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out_))) printlnWithNSString:@"ERROR: missing name for -segment option"];
+        [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out))) printlnWithNSString:@"ERROR: missing name for -segment option"];
         return 1;
       }
       i++;
@@ -2026,7 +2058,7 @@ jint OrgApacheLuceneIndexCheckIndex_doMainWithNSStringArray_(IOSObjectArray *arg
     }
     else if ([@"-dir-impl" isEqual:arg]) {
       if (i == args->size_ - 1) {
-        [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out_))) printlnWithNSString:@"ERROR: missing value for -dir-impl option"];
+        [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out))) printlnWithNSString:@"ERROR: missing value for -dir-impl option"];
         return 1;
       }
       i++;
@@ -2034,7 +2066,7 @@ jint OrgApacheLuceneIndexCheckIndex_doMainWithNSStringArray_(IOSObjectArray *arg
     }
     else {
       if (indexPath != nil) {
-        [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out_))) printlnWithNSString:JreStrcat("$$C", @"ERROR: unexpected extra argument '", IOSObjectArray_Get(args, i), '\'')];
+        [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out))) printlnWithNSString:JreStrcat("$$C", @"ERROR: unexpected extra argument '", IOSObjectArray_Get(args, i), '\'')];
         return 1;
       }
       indexPath = IOSObjectArray_Get(args, i);
@@ -2042,21 +2074,21 @@ jint OrgApacheLuceneIndexCheckIndex_doMainWithNSStringArray_(IOSObjectArray *arg
     i++;
   }
   if (indexPath == nil) {
-    [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out_))) printlnWithNSString:@"\nERROR: index path not specified"];
-    [JreLoadStatic(JavaLangSystem, out_) printlnWithNSString:JreStrcat("$$$$$", @"\nUsage: java org.apache.lucene.index.CheckIndex pathToIndex [-exorcise] [-crossCheckTermVectors] [-segment X] [-segment Y] [-dir-impl X]\n\n  -exorcise: actually write a new segments_N file, removing any problematic segments\n  -fast: just verify file checksums, omitting logical integrity checks\n  -crossCheckTermVectors: verifies that term vectors match postings; THIS IS VERY SLOW!\n  -codec X: when exorcising, codec to write the new segments_N file with\n  -verbose: print additional details\n  -segment X: only check the specified segments.  This can be specified multiple\n              times, to check more than one segment, eg '-segment _2 -segment _a'.\n              You can't use this with the -exorcise option\n  -dir-impl X: use a specific ", [OrgApacheLuceneStoreFSDirectory_class_() getSimpleName], @" implementation. If no package is specified the ", [((JavaLangPackage *) nil_chk([OrgApacheLuceneStoreFSDirectory_class_() getPackage])) getName], @" package will be used.\n\n**WARNING**: -exorcise *LOSES DATA*. This should only be used on an emergency basis as it will cause\ndocuments (perhaps many) to be permanently removed from the index.  Always make\na backup copy of your index before running this!  Do not run this tool on an index\nthat is actively being written to.  You have been warned!\n\nRun without -exorcise, this tool will open the index, report version information\nand report any exceptions it hits and what action it would take if -exorcise were\nspecified.  With -exorcise, this tool will remove any segments that have issues and\nwrite a new segments_N file.  This means all documents contained in the affected\nsegments will be removed.\n\nThis tool exits with exit code 1 if the index cannot be opened or has any\ncorruption, else 0.\n")];
+    [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out))) printlnWithNSString:@"\nERROR: index path not specified"];
+    [JreLoadStatic(JavaLangSystem, out) printlnWithNSString:JreStrcat("$$$$$", @"\nUsage: java org.apache.lucene.index.CheckIndex pathToIndex [-exorcise] [-crossCheckTermVectors] [-segment X] [-segment Y] [-dir-impl X]\n\n  -exorcise: actually write a new segments_N file, removing any problematic segments\n  -fast: just verify file checksums, omitting logical integrity checks\n  -crossCheckTermVectors: verifies that term vectors match postings; THIS IS VERY SLOW!\n  -codec X: when exorcising, codec to write the new segments_N file with\n  -verbose: print additional details\n  -segment X: only check the specified segments.  This can be specified multiple\n              times, to check more than one segment, eg '-segment _2 -segment _a'.\n              You can't use this with the -exorcise option\n  -dir-impl X: use a specific ", [OrgApacheLuceneStoreFSDirectory_class_() getSimpleName], @" implementation. If no package is specified the ", [((JavaLangPackage *) nil_chk([OrgApacheLuceneStoreFSDirectory_class_() getPackage])) getName], @" package will be used.\n\n**WARNING**: -exorcise *LOSES DATA*. This should only be used on an emergency basis as it will cause\ndocuments (perhaps many) to be permanently removed from the index.  Always make\na backup copy of your index before running this!  Do not run this tool on an index\nthat is actively being written to.  You have been warned!\n\nRun without -exorcise, this tool will open the index, report version information\nand report any exceptions it hits and what action it would take if -exorcise were\nspecified.  With -exorcise, this tool will remove any segments that have issues and\nwrite a new segments_N file.  This means all documents contained in the affected\nsegments will be removed.\n\nThis tool exits with exit code 1 if the index cannot be opened or has any\ncorruption, else 0.\n")];
     return 1;
   }
-  if (!OrgApacheLuceneIndexCheckIndex_assertsOn()) [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out_))) printlnWithNSString:@"\nNOTE: testing will be more thorough if you run java with '-ea:org.apache.lucene...', so assertions are enabled"];
+  if (!OrgApacheLuceneIndexCheckIndex_assertsOn()) [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out))) printlnWithNSString:@"\nNOTE: testing will be more thorough if you run java with '-ea:org.apache.lucene...', so assertions are enabled"];
   if ([onlySegments size] == 0) onlySegments = nil;
   else if (doExorcise) {
-    [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out_))) printlnWithNSString:@"ERROR: cannot specify both -exorcise and -segment"];
+    [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out))) printlnWithNSString:@"ERROR: cannot specify both -exorcise and -segment"];
     return 1;
   }
   if (doChecksumsOnly && doCrossCheckTermVectors) {
-    [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out_))) printlnWithNSString:@"ERROR: cannot specify both -fast and -crossCheckTermVectors"];
+    [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out))) printlnWithNSString:@"ERROR: cannot specify both -fast and -crossCheckTermVectors"];
     return 1;
   }
-  [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out_))) printlnWithNSString:JreStrcat("$$C", @"\nOpening index @ ", indexPath, 0x000a)];
+  [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out))) printlnWithNSString:JreStrcat("$$C", @"\nOpening index @ ", indexPath, 0x000a)];
   OrgApacheLuceneStoreDirectory *directory = nil;
   OrgLukhnosPortmobileFilePath *path = OrgLukhnosPortmobileFilePaths_getWithNSString_(indexPath);
   @try {
@@ -2067,43 +2099,43 @@ jint OrgApacheLuceneIndexCheckIndex_doMainWithNSStringArray_(IOSObjectArray *arg
       directory = OrgApacheLuceneUtilCommandLineUtil_newFSDirectoryWithNSString_withOrgLukhnosPortmobileFilePath_(dirImpl, path);
     }
   }
-  @catch (JavaLangThrowable *t) {
-    [JreLoadStatic(JavaLangSystem, out_) printlnWithNSString:JreStrcat("$$$", @"ERROR: could not open directory \"", indexPath, @"\"; exiting")];
-    [((JavaLangThrowable *) nil_chk(t)) printStackTraceWithJavaIoPrintStream:JreLoadStatic(JavaLangSystem, out_)];
+  @catch (NSException *t) {
+    [JreLoadStatic(JavaLangSystem, out) printlnWithNSString:JreStrcat("$$$", @"ERROR: could not open directory \"", indexPath, @"\"; exiting")];
+    [((NSException *) nil_chk(t)) printStackTraceWithJavaIoPrintStream:JreLoadStatic(JavaLangSystem, out)];
     return 1;
   }
   {
     OrgApacheLuceneStoreDirectory *dir = directory;
-    JavaLangThrowable *__primaryException2 = nil;
+    NSException *__primaryException2 = nil;
     @try {
-      OrgApacheLuceneIndexCheckIndex *checker = [new_OrgApacheLuceneIndexCheckIndex_initWithOrgApacheLuceneStoreDirectory_(dir) autorelease];
-      JavaLangThrowable *__primaryException1 = nil;
+      OrgApacheLuceneIndexCheckIndex *checker = create_OrgApacheLuceneIndexCheckIndex_initWithOrgApacheLuceneStoreDirectory_(dir);
+      NSException *__primaryException1 = nil;
       @try {
         [checker setCrossCheckTermVectorsWithBoolean:doCrossCheckTermVectors];
         [checker setChecksumsOnlyWithBoolean:doChecksumsOnly];
-        [checker setInfoStreamWithJavaIoPrintStream:JreLoadStatic(JavaLangSystem, out_) withBoolean:verbose];
+        [checker setInfoStreamWithJavaIoPrintStream:JreLoadStatic(JavaLangSystem, out) withBoolean:verbose];
         OrgApacheLuceneIndexCheckIndex_Status *result = [checker checkIndexWithJavaUtilList:onlySegments];
         if (((OrgApacheLuceneIndexCheckIndex_Status *) nil_chk(result))->missingSegments_) {
           return 1;
         }
         if (!result->clean_) {
           if (!doExorcise) {
-            [JreLoadStatic(JavaLangSystem, out_) printlnWithNSString:JreStrcat("$I$", @"WARNING: would write new segments file, and ", result->totLoseDocCount_, @" documents would be lost, if -exorcise were specified\n")];
+            [JreLoadStatic(JavaLangSystem, out) printlnWithNSString:JreStrcat("$I$", @"WARNING: would write new segments file, and ", result->totLoseDocCount_, @" documents would be lost, if -exorcise were specified\n")];
           }
           else {
-            [JreLoadStatic(JavaLangSystem, out_) printlnWithNSString:JreStrcat("$I$", @"WARNING: ", result->totLoseDocCount_, @" documents will be lost\n")];
-            [JreLoadStatic(JavaLangSystem, out_) printlnWithNSString:JreStrcat("$I$", @"NOTE: will write new segments file in 5 seconds; this will remove ", result->totLoseDocCount_, @" docs from the index. YOU WILL LOSE DATA. THIS IS YOUR LAST CHANCE TO CTRL+C!")];
+            [JreLoadStatic(JavaLangSystem, out) printlnWithNSString:JreStrcat("$I$", @"WARNING: ", result->totLoseDocCount_, @" documents will be lost\n")];
+            [JreLoadStatic(JavaLangSystem, out) printlnWithNSString:JreStrcat("$I$", @"NOTE: will write new segments file in 5 seconds; this will remove ", result->totLoseDocCount_, @" docs from the index. YOU WILL LOSE DATA. THIS IS YOUR LAST CHANCE TO CTRL+C!")];
             for (jint s = 0; s < 5; s++) {
               JavaLangThread_sleepWithLong_(1000);
-              [JreLoadStatic(JavaLangSystem, out_) printlnWithNSString:JreStrcat("$I$", @"  ", (5 - s), @"...")];
+              [JreLoadStatic(JavaLangSystem, out) printlnWithNSString:JreStrcat("$I$", @"  ", (5 - s), @"...")];
             }
-            [JreLoadStatic(JavaLangSystem, out_) printlnWithNSString:@"Writing..."];
+            [JreLoadStatic(JavaLangSystem, out) printlnWithNSString:@"Writing..."];
             [checker exorciseIndexWithOrgApacheLuceneIndexCheckIndex_Status:result];
-            [JreLoadStatic(JavaLangSystem, out_) printlnWithNSString:@"OK"];
-            [JreLoadStatic(JavaLangSystem, out_) printlnWithNSString:JreStrcat("$$C", @"Wrote new segments file \"", [((OrgApacheLuceneIndexSegmentInfos *) nil_chk(result->newSegments_)) getSegmentsFileName], '"')];
+            [JreLoadStatic(JavaLangSystem, out) printlnWithNSString:@"OK"];
+            [JreLoadStatic(JavaLangSystem, out) printlnWithNSString:JreStrcat("$$C", @"Wrote new segments file \"", [((OrgApacheLuceneIndexSegmentInfos *) nil_chk(result->newSegments_)) getSegmentsFileName], '"')];
           }
         }
-        [JreLoadStatic(JavaLangSystem, out_) printlnWithNSString:@""];
+        [JreLoadStatic(JavaLangSystem, out) printlnWithNSString:@""];
         if (result->clean_ == true) {
           return 0;
         }
@@ -2111,7 +2143,7 @@ jint OrgApacheLuceneIndexCheckIndex_doMainWithNSStringArray_(IOSObjectArray *arg
           return 1;
         }
       }
-      @catch (JavaLangThrowable *e) {
+      @catch (NSException *e) {
         __primaryException1 = e;
         @throw e;
       }
@@ -2120,8 +2152,8 @@ jint OrgApacheLuceneIndexCheckIndex_doMainWithNSStringArray_(IOSObjectArray *arg
           if (__primaryException1 != nil) {
             @try {
               [checker close];
-            } @catch (JavaLangThrowable *e) {
-              [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+            } @catch (NSException *e) {
+              [__primaryException1 addSuppressedWithNSException:e];
             }
           } else {
             [checker close];
@@ -2129,7 +2161,7 @@ jint OrgApacheLuceneIndexCheckIndex_doMainWithNSStringArray_(IOSObjectArray *arg
         }
       }
     }
-    @catch (JavaLangThrowable *e) {
+    @catch (NSException *e) {
       __primaryException2 = e;
       @throw e;
     }
@@ -2138,8 +2170,8 @@ jint OrgApacheLuceneIndexCheckIndex_doMainWithNSStringArray_(IOSObjectArray *arg
         if (__primaryException2 != nil) {
           @try {
             [dir close];
-          } @catch (JavaLangThrowable *e) {
-            [__primaryException2 addSuppressedWithJavaLangThrowable:e];
+          } @catch (NSException *e) {
+            [__primaryException2 addSuppressedWithNSException:e];
           }
         } else {
           [dir close];
@@ -2212,9 +2244,11 @@ void OrgApacheLuceneIndexCheckIndex_Status_init(OrgApacheLuceneIndexCheckIndex_S
 }
 
 OrgApacheLuceneIndexCheckIndex_Status *new_OrgApacheLuceneIndexCheckIndex_Status_init() {
-  OrgApacheLuceneIndexCheckIndex_Status *self = [OrgApacheLuceneIndexCheckIndex_Status alloc];
-  OrgApacheLuceneIndexCheckIndex_Status_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexCheckIndex_Status, init)
+}
+
+OrgApacheLuceneIndexCheckIndex_Status *create_OrgApacheLuceneIndexCheckIndex_Status_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexCheckIndex_Status, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexCheckIndex_Status)
@@ -2278,9 +2312,11 @@ void OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus_init(OrgApacheLucen
 }
 
 OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus *new_OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus_init() {
-  OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus *self = [OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus alloc];
-  OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus, init)
+}
+
+OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus *create_OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus)
@@ -2319,9 +2355,11 @@ void OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus_init(OrgApacheLuceneInd
 }
 
 OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus *new_OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus_init() {
-  OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus *self = [OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus alloc];
-  OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus, init)
+}
+
+OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus *create_OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus)
@@ -2361,9 +2399,11 @@ void OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus_init(OrgApacheLuceneI
 }
 
 OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus *new_OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus_init() {
-  OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus *self = [OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus alloc];
-  OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus, init)
+}
+
+OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus *create_OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus)
@@ -2403,9 +2443,11 @@ void OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus_init(OrgApacheLuceneI
 }
 
 OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus *new_OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus_init() {
-  OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus *self = [OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus alloc];
-  OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus, init)
+}
+
+OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus *create_OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus)
@@ -2454,9 +2496,11 @@ void OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus_init(OrgApacheLuceneI
 }
 
 OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *new_OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus_init() {
-  OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *self = [OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus alloc];
-  OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus, init)
+}
+
+OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *create_OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus)
@@ -2498,9 +2542,11 @@ void OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus_init(OrgApacheLucen
 }
 
 OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus *new_OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus_init() {
-  OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus *self = [OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus alloc];
-  OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus, init)
+}
+
+OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus *create_OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus)
@@ -2542,9 +2588,11 @@ void OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus_init(OrgApacheLucene
 }
 
 OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus *new_OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus_init() {
-  OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus *self = [OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus alloc];
-  OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus, init)
+}
+
+OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus *create_OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus)
@@ -2588,9 +2636,11 @@ void OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus_init(OrgApacheLuceneI
 }
 
 OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus *new_OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus_init() {
-  OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus *self = [OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus alloc];
-  OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus, init)
+}
+
+OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus *create_OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus)

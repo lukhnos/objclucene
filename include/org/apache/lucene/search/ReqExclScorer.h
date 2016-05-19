@@ -5,28 +5,40 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchReqExclScorer_INCLUDE_ALL")
-#if OrgApacheLuceneSearchReqExclScorer_RESTRICT
-#define OrgApacheLuceneSearchReqExclScorer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchReqExclScorer")
+#ifdef RESTRICT_OrgApacheLuceneSearchReqExclScorer
+#define INCLUDE_ALL_OrgApacheLuceneSearchReqExclScorer 0
 #else
-#define OrgApacheLuceneSearchReqExclScorer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchReqExclScorer 1
 #endif
-#undef OrgApacheLuceneSearchReqExclScorer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchReqExclScorer
 
-#if !defined (_OrgApacheLuceneSearchReqExclScorer_) && (OrgApacheLuceneSearchReqExclScorer_INCLUDE_ALL || OrgApacheLuceneSearchReqExclScorer_INCLUDE)
-#define _OrgApacheLuceneSearchReqExclScorer_
+#if !defined (OrgApacheLuceneSearchReqExclScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchReqExclScorer || defined(INCLUDE_OrgApacheLuceneSearchReqExclScorer))
+#define OrgApacheLuceneSearchReqExclScorer_
 
-#define OrgApacheLuceneSearchScorer_RESTRICT 1
-#define OrgApacheLuceneSearchScorer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchScorer 1
+#define INCLUDE_OrgApacheLuceneSearchScorer 1
 #include "org/apache/lucene/search/Scorer.h"
 
 @class OrgApacheLuceneSearchTwoPhaseIterator;
 @protocol JavaUtilCollection;
 
+/*!
+ @brief A Scorer for queries with a required subscorer
+ and an excluding (prohibited) sub <code>Scorer</code>.
+ <br>
+ This <code>Scorer</code> implements <code>Scorer.advance(int)</code>,
+ and it uses the advance() on the given scorers.
+ */
 @interface OrgApacheLuceneSearchReqExclScorer : OrgApacheLuceneSearchScorer
 
 #pragma mark Public
 
+/*!
+ @brief Construct a <code>ReqExclScorer</code>.
+ @param reqScorer The scorer that must match, except where
+ @param exclScorer indicates exclusion.
+ */
 - (instancetype)initWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)reqScorer
                     withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)exclScorer;
 
@@ -54,8 +66,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchReqExclScorer_initWithOrgApacheLucen
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchReqExclScorer *new_OrgApacheLuceneSearchReqExclScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *reqScorer, OrgApacheLuceneSearchScorer *exclScorer) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchReqExclScorer *create_OrgApacheLuceneSearchReqExclScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *reqScorer, OrgApacheLuceneSearchScorer *exclScorer);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchReqExclScorer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchReqExclScorer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchReqExclScorer")

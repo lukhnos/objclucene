@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_) && (OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_
+#if !defined (OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager))
+#define OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_
 
-#define OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_RESTRICT 1
-#define OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants 1
+#define INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants 1
 #include "org/apache/lucene/queryparser/flexible/standard/parser/StandardSyntaxParserConstants.h"
 
 @class IOSIntArray;
@@ -26,6 +26,9 @@
 @class OrgApacheLuceneQueryparserFlexibleStandardParserToken;
 @protocol OrgApacheLuceneQueryparserFlexibleStandardParserCharStream;
 
+/*!
+ @brief Token Manager.
+ */
 @interface OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager : NSObject < OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants > {
  @public
   id<OrgApacheLuceneQueryparserFlexibleStandardParserCharStream> input_stream_;
@@ -38,20 +41,58 @@
   jint jjmatchedKind_;
 }
 
++ (IOSLongArray *)jjbitVec0;
+
++ (IOSLongArray *)jjbitVec1;
+
++ (IOSLongArray *)jjbitVec3;
+
++ (IOSLongArray *)jjbitVec4;
+
++ (IOSIntArray *)jjnextStates;
+
++ (IOSObjectArray *)jjstrLiteralImages;
+
++ (IOSObjectArray *)lexStateNames;
+
++ (IOSIntArray *)jjnewLexState;
+
++ (IOSLongArray *)jjtoToken;
+
++ (IOSLongArray *)jjtoSkip;
+
 #pragma mark Public
 
+/*!
+ @brief Constructor.
+ */
 - (instancetype)initWithOrgApacheLuceneQueryparserFlexibleStandardParserCharStream:(id<OrgApacheLuceneQueryparserFlexibleStandardParserCharStream>)stream;
 
+/*!
+ @brief Constructor.
+ */
 - (instancetype)initWithOrgApacheLuceneQueryparserFlexibleStandardParserCharStream:(id<OrgApacheLuceneQueryparserFlexibleStandardParserCharStream>)stream
                                                                            withInt:(jint)lexState;
 
+/*!
+ @brief Get the next Token.
+ */
 - (OrgApacheLuceneQueryparserFlexibleStandardParserToken *)getNextToken;
 
+/*!
+ @brief Reinitialise parser.
+ */
 - (void)ReInitWithOrgApacheLuceneQueryparserFlexibleStandardParserCharStream:(id<OrgApacheLuceneQueryparserFlexibleStandardParserCharStream>)stream;
 
+/*!
+ @brief Reinitialise parser.
+ */
 - (void)ReInitWithOrgApacheLuceneQueryparserFlexibleStandardParserCharStream:(id<OrgApacheLuceneQueryparserFlexibleStandardParserCharStream>)stream
                                                                      withInt:(jint)lexState;
 
+/*!
+ @brief Switch to specified lex state.
+ */
 - (void)SwitchToWithInt:(jint)lexState;
 
 #pragma mark Protected
@@ -64,46 +105,79 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSynta
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager, input_stream_, id<OrgApacheLuceneQueryparserFlexibleStandardParserCharStream>)
 
-FOUNDATION_EXPORT IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_jjbitVec0_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager, jjbitVec0_, IOSLongArray *)
+inline IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_get_jjbitVec0();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_jjbitVec0;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager, jjbitVec0, IOSLongArray *)
 
-FOUNDATION_EXPORT IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_jjbitVec1_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager, jjbitVec1_, IOSLongArray *)
+inline IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_get_jjbitVec1();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_jjbitVec1;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager, jjbitVec1, IOSLongArray *)
 
-FOUNDATION_EXPORT IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_jjbitVec3_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager, jjbitVec3_, IOSLongArray *)
+inline IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_get_jjbitVec3();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_jjbitVec3;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager, jjbitVec3, IOSLongArray *)
 
-FOUNDATION_EXPORT IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_jjbitVec4_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager, jjbitVec4_, IOSLongArray *)
+inline IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_get_jjbitVec4();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_jjbitVec4;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager, jjbitVec4, IOSLongArray *)
 
-FOUNDATION_EXPORT IOSIntArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_jjnextStates_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager, jjnextStates_, IOSIntArray *)
+inline IOSIntArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_get_jjnextStates();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT IOSIntArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_jjnextStates;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager, jjnextStates, IOSIntArray *)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_jjstrLiteralImages_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager, jjstrLiteralImages_, IOSObjectArray *)
+/*!
+ @brief Token literal values.
+ */
+inline IOSObjectArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_get_jjstrLiteralImages();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_jjstrLiteralImages;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager, jjstrLiteralImages, IOSObjectArray *)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_lexStateNames_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager, lexStateNames_, IOSObjectArray *)
+/*!
+ @brief Lexer state names.
+ */
+inline IOSObjectArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_get_lexStateNames();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_lexStateNames;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager, lexStateNames, IOSObjectArray *)
 
-FOUNDATION_EXPORT IOSIntArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_jjnewLexState_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager, jjnewLexState_, IOSIntArray *)
+/*!
+ @brief Lex State array.
+ */
+inline IOSIntArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_get_jjnewLexState();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT IOSIntArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_jjnewLexState;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager, jjnewLexState, IOSIntArray *)
 
-FOUNDATION_EXPORT IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_jjtoToken_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager, jjtoToken_, IOSLongArray *)
+inline IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_get_jjtoToken();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_jjtoToken;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager, jjtoToken, IOSLongArray *)
 
-FOUNDATION_EXPORT IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_jjtoSkip_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager, jjtoSkip_, IOSLongArray *)
+inline IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_get_jjtoSkip();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_jjtoSkip;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager, jjtoSkip, IOSLongArray *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_initWithOrgApacheLuceneQueryparserFlexibleStandardParserCharStream_(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager *self, id<OrgApacheLuceneQueryparserFlexibleStandardParserCharStream> stream);
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager *new_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_initWithOrgApacheLuceneQueryparserFlexibleStandardParserCharStream_(id<OrgApacheLuceneQueryparserFlexibleStandardParserCharStream> stream) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager *create_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_initWithOrgApacheLuceneQueryparserFlexibleStandardParserCharStream_(id<OrgApacheLuceneQueryparserFlexibleStandardParserCharStream> stream);
+
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_initWithOrgApacheLuceneQueryparserFlexibleStandardParserCharStream_withInt_(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager *self, id<OrgApacheLuceneQueryparserFlexibleStandardParserCharStream> stream, jint lexState);
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager *new_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_initWithOrgApacheLuceneQueryparserFlexibleStandardParserCharStream_withInt_(id<OrgApacheLuceneQueryparserFlexibleStandardParserCharStream> stream, jint lexState) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager *create_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_initWithOrgApacheLuceneQueryparserFlexibleStandardParserCharStream_withInt_(id<OrgApacheLuceneQueryparserFlexibleStandardParserCharStream> stream, jint lexState);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager")

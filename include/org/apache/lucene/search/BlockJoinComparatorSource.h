@@ -5,25 +5,35 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchBlockJoinComparatorSource_INCLUDE_ALL")
-#if OrgApacheLuceneSearchBlockJoinComparatorSource_RESTRICT
-#define OrgApacheLuceneSearchBlockJoinComparatorSource_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchBlockJoinComparatorSource")
+#ifdef RESTRICT_OrgApacheLuceneSearchBlockJoinComparatorSource
+#define INCLUDE_ALL_OrgApacheLuceneSearchBlockJoinComparatorSource 0
 #else
-#define OrgApacheLuceneSearchBlockJoinComparatorSource_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchBlockJoinComparatorSource 1
 #endif
-#undef OrgApacheLuceneSearchBlockJoinComparatorSource_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchBlockJoinComparatorSource
 
-#if !defined (_OrgApacheLuceneSearchBlockJoinComparatorSource_) && (OrgApacheLuceneSearchBlockJoinComparatorSource_INCLUDE_ALL || OrgApacheLuceneSearchBlockJoinComparatorSource_INCLUDE)
-#define _OrgApacheLuceneSearchBlockJoinComparatorSource_
+#if !defined (OrgApacheLuceneSearchBlockJoinComparatorSource_) && (INCLUDE_ALL_OrgApacheLuceneSearchBlockJoinComparatorSource || defined(INCLUDE_OrgApacheLuceneSearchBlockJoinComparatorSource))
+#define OrgApacheLuceneSearchBlockJoinComparatorSource_
 
-#define OrgApacheLuceneSearchFieldComparatorSource_RESTRICT 1
-#define OrgApacheLuceneSearchFieldComparatorSource_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchFieldComparatorSource 1
+#define INCLUDE_OrgApacheLuceneSearchFieldComparatorSource 1
 #include "org/apache/lucene/search/FieldComparatorSource.h"
 
 @class OrgApacheLuceneSearchFieldComparator;
 @class OrgApacheLuceneSearchFilter;
 @class OrgApacheLuceneSearchSort;
 
+/*!
+ @brief Helper class to sort readers that contain blocks of documents.
+ <p>
+ Note that this class is intended to used with <code>SortingMergePolicy</code>,
+ and for other purposes has some limitations:
+ <ul>
+ <li>Cannot yet be used with <code>IndexSearcher.searchAfter</code>
+ <li>Filling sort field values is not yet supported.
+ </ul>
+ */
 @interface OrgApacheLuceneSearchBlockJoinComparatorSource : OrgApacheLuceneSearchFieldComparatorSource {
  @public
   OrgApacheLuceneSearchFilter *parentsFilter_;
@@ -33,9 +43,22 @@
 
 #pragma mark Public
 
+/*!
+ @brief Create a new BlockJoinComparatorSource, sorting only blocks of documents
+ with <code>parentSort</code> and not reordering children with a block.
+ @param parentsFilter Filter identifying parent documents
+ @param parentSort Sort for parent documents
+ */
 - (instancetype)initWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)parentsFilter
                       withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)parentSort;
 
+/*!
+ @brief Create a new BlockJoinComparatorSource, specifying the sort order for both
+ blocks of documents and children within a block.
+ @param parentsFilter Filter identifying parent documents
+ @param parentSort Sort for parent documents
+ @param childSort Sort for child documents in the same block
+ */
 - (instancetype)initWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)parentsFilter
                       withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)parentSort
                       withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)childSort;
@@ -59,12 +82,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchBlockJoinComparatorSource_initWithOr
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchBlockJoinComparatorSource *new_OrgApacheLuceneSearchBlockJoinComparatorSource_initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchSort_(OrgApacheLuceneSearchFilter *parentsFilter, OrgApacheLuceneSearchSort *parentSort) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchBlockJoinComparatorSource *create_OrgApacheLuceneSearchBlockJoinComparatorSource_initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchSort_(OrgApacheLuceneSearchFilter *parentsFilter, OrgApacheLuceneSearchSort *parentSort);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchBlockJoinComparatorSource_initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchSort_(OrgApacheLuceneSearchBlockJoinComparatorSource *self, OrgApacheLuceneSearchFilter *parentsFilter, OrgApacheLuceneSearchSort *parentSort, OrgApacheLuceneSearchSort *childSort);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchBlockJoinComparatorSource *new_OrgApacheLuceneSearchBlockJoinComparatorSource_initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchSort_(OrgApacheLuceneSearchFilter *parentsFilter, OrgApacheLuceneSearchSort *parentSort, OrgApacheLuceneSearchSort *childSort) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchBlockJoinComparatorSource *create_OrgApacheLuceneSearchBlockJoinComparatorSource_initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchSort_(OrgApacheLuceneSearchFilter *parentsFilter, OrgApacheLuceneSearchSort *parentSort, OrgApacheLuceneSearchSort *childSort);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBlockJoinComparatorSource)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchBlockJoinComparatorSource_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchBlockJoinComparatorSource")

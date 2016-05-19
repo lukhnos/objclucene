@@ -39,7 +39,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "processDocument", NULL, "V", 0x400, "Ljava.io.IOException;Lorg.apache.lucene.index.AbortingException;", NULL },
     { "flushWithOrgApacheLuceneIndexSegmentWriteState:", "flush", "V", 0x400, "Ljava.io.IOException;Lorg.apache.lucene.index.AbortingException;", NULL },
     { "abort", NULL, "V", 0x400, NULL, NULL },
-    { "init", NULL, NULL, 0x0, NULL, NULL },
+    { "init", "DocConsumer", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneIndexDocConsumer = { 2, "DocConsumer", "org.apache.lucene.index", NULL, 0x400, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexDocConsumer;

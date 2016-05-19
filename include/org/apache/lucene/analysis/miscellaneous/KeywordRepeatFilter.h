@@ -5,27 +5,36 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilter_RESTRICT
-#define OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilter 0
 #else
-#define OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilter
 
-#if !defined (_OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilter_) && (OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilter_
+#if !defined (OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilter))
+#define OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief This TokenFilter emits each incoming token twice once as keyword and once non-keyword, in other words once with
+ <code>KeywordAttribute.setKeyword(boolean)</code> set to <code>true</code> and once set to <code>false</code>.
+ This is useful if used with a stem filter that respects the <code>KeywordAttribute</code> to index the stemmed and the
+ un-stemmed version of a term into the same field.
+ */
 @interface OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
+/*!
+ @brief Construct a token stream filtering the given input.
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
 - (jboolean)incrementToken;
@@ -40,8 +49,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilter_i
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilter *new_OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilter *create_OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilter")

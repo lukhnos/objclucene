@@ -5,23 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter_RESTRICT
-#define OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter 0
 #else
-#define OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter
 
-#if !defined (_OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter_) && (OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter_
+#if !defined (OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter || defined(INCLUDE_OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter))
+#define OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
+@class IOSObjectArray;
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief Backcompat FilteringTokenFilter for versions 4.3 and before.
+ */
 @interface OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
@@ -35,6 +39,9 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inp
 
 #pragma mark Protected
 
+/*!
+ @brief Override this method and return if the current input token should be returned by <code>incrementToken</code>.
+ */
 - (jboolean)accept;
 
 @end
@@ -47,4 +54,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilt
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter")

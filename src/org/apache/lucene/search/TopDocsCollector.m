@@ -17,9 +17,13 @@
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchTopDocsCollector)
 
-OrgApacheLuceneSearchTopDocs *OrgApacheLuceneSearchTopDocsCollector_EMPTY_TOPDOCS_;
+OrgApacheLuceneSearchTopDocs *OrgApacheLuceneSearchTopDocsCollector_EMPTY_TOPDOCS;
 
 @implementation OrgApacheLuceneSearchTopDocsCollector
+
++ (OrgApacheLuceneSearchTopDocs *)EMPTY_TOPDOCS {
+  return OrgApacheLuceneSearchTopDocsCollector_EMPTY_TOPDOCS;
+}
 
 - (instancetype)initWithOrgApacheLuceneUtilPriorityQueue:(OrgApacheLuceneUtilPriorityQueue *)pq {
   OrgApacheLuceneSearchTopDocsCollector_initWithOrgApacheLuceneUtilPriorityQueue_(self, pq);
@@ -35,7 +39,7 @@ OrgApacheLuceneSearchTopDocs *OrgApacheLuceneSearchTopDocsCollector_EMPTY_TOPDOC
 
 - (OrgApacheLuceneSearchTopDocs *)newTopDocsWithOrgApacheLuceneSearchScoreDocArray:(IOSObjectArray *)results
                                                                            withInt:(jint)start {
-  return results == nil ? OrgApacheLuceneSearchTopDocsCollector_EMPTY_TOPDOCS_ : [new_OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_(totalHits_, results) autorelease];
+  return results == nil ? OrgApacheLuceneSearchTopDocsCollector_EMPTY_TOPDOCS : create_OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_(totalHits_, results);
 }
 
 - (jint)getTotalHits {
@@ -43,7 +47,7 @@ OrgApacheLuceneSearchTopDocs *OrgApacheLuceneSearchTopDocsCollector_EMPTY_TOPDOC
 }
 
 - (jint)topDocsSize {
-  return totalHits_ < [((OrgApacheLuceneUtilPriorityQueue *) nil_chk(pq_)) size] ? totalHits_ : [pq_ size];
+  return totalHits_ < [((OrgApacheLuceneUtilPriorityQueue *) nil_chk(pq_)) size] ? totalHits_ : [((OrgApacheLuceneUtilPriorityQueue *) nil_chk(pq_)) size];
 }
 
 - (OrgApacheLuceneSearchTopDocs *)topDocs {
@@ -63,7 +67,7 @@ OrgApacheLuceneSearchTopDocs *OrgApacheLuceneSearchTopDocsCollector_EMPTY_TOPDOC
   howMany = JavaLangMath_minWithInt_withInt_(size - start, howMany);
   IOSObjectArray *results = [IOSObjectArray arrayWithLength:howMany type:OrgApacheLuceneSearchScoreDoc_class_()];
   for (jint i = [((OrgApacheLuceneUtilPriorityQueue *) nil_chk(pq_)) size] - start - howMany; i > 0; i--) {
-    [pq_ pop];
+    [((OrgApacheLuceneUtilPriorityQueue *) nil_chk(pq_)) pop];
   }
   [self populateResultsWithOrgApacheLuceneSearchScoreDocArray:results withInt:howMany];
   return [self newTopDocsWithOrgApacheLuceneSearchScoreDocArray:results withInt:start];
@@ -76,14 +80,14 @@ OrgApacheLuceneSearchTopDocs *OrgApacheLuceneSearchTopDocsCollector_EMPTY_TOPDOC
 
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchTopDocsCollector class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneSearchTopDocsCollector_EMPTY_TOPDOCS_, new_OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_withFloat_(0, [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchScoreDoc_class_()], JavaLangFloat_NaN));
+    JreStrongAssignAndConsume(&OrgApacheLuceneSearchTopDocsCollector_EMPTY_TOPDOCS, new_OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_withFloat_(0, [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchScoreDoc_class_()], JavaLangFloat_NaN));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchTopDocsCollector)
   }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilPriorityQueue:", "TopDocsCollector", NULL, 0x4, NULL, NULL },
+    { "initWithOrgApacheLuceneUtilPriorityQueue:", "TopDocsCollector", NULL, 0x4, NULL, "(Lorg/apache/lucene/util/PriorityQueue<TT;>;)V" },
     { "populateResultsWithOrgApacheLuceneSearchScoreDocArray:withInt:", "populateResults", "V", 0x4, NULL, NULL },
     { "newTopDocsWithOrgApacheLuceneSearchScoreDocArray:withInt:", "newTopDocs", "Lorg.apache.lucene.search.TopDocs;", 0x4, NULL, NULL },
     { "getTotalHits", NULL, "I", 0x1, NULL, NULL },
@@ -93,7 +97,7 @@ OrgApacheLuceneSearchTopDocs *OrgApacheLuceneSearchTopDocsCollector_EMPTY_TOPDOC
     { "topDocsWithInt:withInt:", "topDocs", "Lorg.apache.lucene.search.TopDocs;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "EMPTY_TOPDOCS_", NULL, 0x1c, "Lorg.apache.lucene.search.TopDocs;", &OrgApacheLuceneSearchTopDocsCollector_EMPTY_TOPDOCS_, NULL, .constantValue.asLong = 0 },
+    { "EMPTY_TOPDOCS", "EMPTY_TOPDOCS", 0x1c, "Lorg.apache.lucene.search.TopDocs;", &OrgApacheLuceneSearchTopDocsCollector_EMPTY_TOPDOCS, NULL, .constantValue.asLong = 0 },
     { "pq_", NULL, 0x4, "Lorg.apache.lucene.util.PriorityQueue;", NULL, "Lorg/apache/lucene/util/PriorityQueue<TT;>;", .constantValue.asLong = 0 },
     { "totalHits_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
   };

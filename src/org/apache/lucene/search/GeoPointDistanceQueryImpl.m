@@ -55,6 +55,13 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchGeoPointDistanceQueryImpl, query_, OrgA
                                withDouble:(jdouble)maxLon
                                withDouble:(jdouble)maxLat;
 
+/*!
+ @brief The two-phase query approach.
+ The parent <code>org.apache.lucene.search.GeoPointTermsEnum</code> class matches
+ encoded terms that fall within the minimum bounding box of the point-radius circle. Those documents that pass
+ the initial bounding box filter are then post filter compared to the provided distance using the
+ <code>org.apache.lucene.util.SloppyMath.haversin</code> method.
+ */
 - (jboolean)postFilterWithDouble:(jdouble)lon
                       withDouble:(jdouble)lat;
 
@@ -67,6 +74,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchGeoPointDistanceQueryImpl_GeoPointRadiu
 __attribute__((unused)) static void OrgApacheLuceneSearchGeoPointDistanceQueryImpl_GeoPointRadiusTermsEnum_initWithOrgApacheLuceneSearchGeoPointDistanceQueryImpl_withOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoPointDistanceQueryImpl_GeoPointRadiusTermsEnum *self, OrgApacheLuceneSearchGeoPointDistanceQueryImpl *outer$, OrgApacheLuceneIndexTermsEnum *tenum, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat);
 
 __attribute__((unused)) static OrgApacheLuceneSearchGeoPointDistanceQueryImpl_GeoPointRadiusTermsEnum *new_OrgApacheLuceneSearchGeoPointDistanceQueryImpl_GeoPointRadiusTermsEnum_initWithOrgApacheLuceneSearchGeoPointDistanceQueryImpl_withOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoPointDistanceQueryImpl *outer$, OrgApacheLuceneIndexTermsEnum *tenum, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchGeoPointDistanceQueryImpl_GeoPointRadiusTermsEnum *create_OrgApacheLuceneSearchGeoPointDistanceQueryImpl_GeoPointRadiusTermsEnum_initWithOrgApacheLuceneSearchGeoPointDistanceQueryImpl_withOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoPointDistanceQueryImpl *outer$, OrgApacheLuceneIndexTermsEnum *tenum, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchGeoPointDistanceQueryImpl_GeoPointRadiusTermsEnum)
 
@@ -81,18 +90,18 @@ withOrgApacheLuceneSearchGeoBoundingBox:(OrgApacheLuceneSearchGeoBoundingBox *)b
 
 - (OrgApacheLuceneIndexTermsEnum *)getTermsEnumWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms
                                       withOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)atts {
-  return [new_OrgApacheLuceneSearchGeoPointDistanceQueryImpl_GeoPointRadiusTermsEnum_initWithOrgApacheLuceneSearchGeoPointDistanceQueryImpl_withOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_(self, [((OrgApacheLuceneIndexTerms *) nil_chk(terms)) iterator], self->minLon_, self->minLat_, self->maxLon_, self->maxLat_) autorelease];
+  return create_OrgApacheLuceneSearchGeoPointDistanceQueryImpl_GeoPointRadiusTermsEnum_initWithOrgApacheLuceneSearchGeoPointDistanceQueryImpl_withOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_(self, [((OrgApacheLuceneIndexTerms *) nil_chk(terms)) iterator], self->minLon_, self->minLat_, self->maxLon_, self->maxLat_);
 }
 
 - (void)setRewriteMethodWithOrgApacheLuceneSearchMultiTermQuery_RewriteMethod:(OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)method {
-  @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(@"cannot change rewrite method") autorelease];
+  @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"cannot change rewrite method");
 }
 
 - (jboolean)isEqual:(id)o {
   if (self == o) return true;
   if (!([o isKindOfClass:[OrgApacheLuceneSearchGeoPointDistanceQueryImpl class]])) return false;
   if (![super isEqual:o]) return false;
-  OrgApacheLuceneSearchGeoPointDistanceQueryImpl *that = (OrgApacheLuceneSearchGeoPointDistanceQueryImpl *) check_class_cast(o, [OrgApacheLuceneSearchGeoPointDistanceQueryImpl class]);
+  OrgApacheLuceneSearchGeoPointDistanceQueryImpl *that = (OrgApacheLuceneSearchGeoPointDistanceQueryImpl *) cast_chk(o, [OrgApacheLuceneSearchGeoPointDistanceQueryImpl class]);
   if (![((OrgApacheLuceneSearchGeoPointDistanceQuery *) nil_chk(query_)) isEqual:((OrgApacheLuceneSearchGeoPointDistanceQueryImpl *) nil_chk(that))->query_]) return false;
   return true;
 }
@@ -132,9 +141,11 @@ void OrgApacheLuceneSearchGeoPointDistanceQueryImpl_initWithNSString_withOrgApac
 }
 
 OrgApacheLuceneSearchGeoPointDistanceQueryImpl *new_OrgApacheLuceneSearchGeoPointDistanceQueryImpl_initWithNSString_withOrgApacheLuceneSearchGeoPointDistanceQuery_withOrgApacheLuceneSearchGeoBoundingBox_(NSString *field, OrgApacheLuceneSearchGeoPointDistanceQuery *q, OrgApacheLuceneSearchGeoBoundingBox *bbox) {
-  OrgApacheLuceneSearchGeoPointDistanceQueryImpl *self = [OrgApacheLuceneSearchGeoPointDistanceQueryImpl alloc];
-  OrgApacheLuceneSearchGeoPointDistanceQueryImpl_initWithNSString_withOrgApacheLuceneSearchGeoPointDistanceQuery_withOrgApacheLuceneSearchGeoBoundingBox_(self, field, q, bbox);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchGeoPointDistanceQueryImpl, initWithNSString_withOrgApacheLuceneSearchGeoPointDistanceQuery_withOrgApacheLuceneSearchGeoBoundingBox_, field, q, bbox)
+}
+
+OrgApacheLuceneSearchGeoPointDistanceQueryImpl *create_OrgApacheLuceneSearchGeoPointDistanceQueryImpl_initWithNSString_withOrgApacheLuceneSearchGeoPointDistanceQuery_withOrgApacheLuceneSearchGeoBoundingBox_(NSString *field, OrgApacheLuceneSearchGeoPointDistanceQuery *q, OrgApacheLuceneSearchGeoBoundingBox *bbox) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchGeoPointDistanceQueryImpl, initWithNSString_withOrgApacheLuceneSearchGeoPointDistanceQuery_withOrgApacheLuceneSearchGeoBoundingBox_, field, q, bbox)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchGeoPointDistanceQueryImpl)
@@ -205,9 +216,11 @@ void OrgApacheLuceneSearchGeoPointDistanceQueryImpl_GeoPointRadiusTermsEnum_init
 }
 
 OrgApacheLuceneSearchGeoPointDistanceQueryImpl_GeoPointRadiusTermsEnum *new_OrgApacheLuceneSearchGeoPointDistanceQueryImpl_GeoPointRadiusTermsEnum_initWithOrgApacheLuceneSearchGeoPointDistanceQueryImpl_withOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoPointDistanceQueryImpl *outer$, OrgApacheLuceneIndexTermsEnum *tenum, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat) {
-  OrgApacheLuceneSearchGeoPointDistanceQueryImpl_GeoPointRadiusTermsEnum *self = [OrgApacheLuceneSearchGeoPointDistanceQueryImpl_GeoPointRadiusTermsEnum alloc];
-  OrgApacheLuceneSearchGeoPointDistanceQueryImpl_GeoPointRadiusTermsEnum_initWithOrgApacheLuceneSearchGeoPointDistanceQueryImpl_withOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_(self, outer$, tenum, minLon, minLat, maxLon, maxLat);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchGeoPointDistanceQueryImpl_GeoPointRadiusTermsEnum, initWithOrgApacheLuceneSearchGeoPointDistanceQueryImpl_withOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_, outer$, tenum, minLon, minLat, maxLon, maxLat)
+}
+
+OrgApacheLuceneSearchGeoPointDistanceQueryImpl_GeoPointRadiusTermsEnum *create_OrgApacheLuceneSearchGeoPointDistanceQueryImpl_GeoPointRadiusTermsEnum_initWithOrgApacheLuceneSearchGeoPointDistanceQueryImpl_withOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoPointDistanceQueryImpl *outer$, OrgApacheLuceneIndexTermsEnum *tenum, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchGeoPointDistanceQueryImpl_GeoPointRadiusTermsEnum, initWithOrgApacheLuceneSearchGeoPointDistanceQueryImpl_withOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_, outer$, tenum, minLon, minLat, maxLon, maxLat)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchGeoPointDistanceQueryImpl_GeoPointRadiusTermsEnum)

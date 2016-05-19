@@ -3,14 +3,17 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/analyzing/package-info.java
 //
 
+/*!
+ @brief QueryParser that passes Fuzzy-, Prefix-, Range-, and WildcardQuerys through the given analyzer.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserAnalyzingPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserAnalyzingPackage_info_RESTRICT
-#define OrgApacheLuceneQueryparserAnalyzingPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserAnalyzingPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserAnalyzingPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserAnalyzingPackage_info 0
 #else
-#define OrgApacheLuceneQueryparserAnalyzingPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserAnalyzingPackage_info 1
 #endif
-#undef OrgApacheLuceneQueryparserAnalyzingPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserAnalyzingPackage_info
 
-#pragma pop_macro("OrgApacheLuceneQueryparserAnalyzingPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserAnalyzingPackage_info")

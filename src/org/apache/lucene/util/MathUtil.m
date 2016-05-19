@@ -20,6 +20,8 @@ __attribute__((unused)) static void OrgApacheLuceneUtilMathUtil_init(OrgApacheLu
 
 __attribute__((unused)) static OrgApacheLuceneUtilMathUtil *new_OrgApacheLuceneUtilMathUtil_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneUtilMathUtil *create_OrgApacheLuceneUtilMathUtil_init();
+
 @implementation OrgApacheLuceneUtilMathUtil
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -77,15 +79,17 @@ void OrgApacheLuceneUtilMathUtil_init(OrgApacheLuceneUtilMathUtil *self) {
 }
 
 OrgApacheLuceneUtilMathUtil *new_OrgApacheLuceneUtilMathUtil_init() {
-  OrgApacheLuceneUtilMathUtil *self = [OrgApacheLuceneUtilMathUtil alloc];
-  OrgApacheLuceneUtilMathUtil_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilMathUtil, init)
+}
+
+OrgApacheLuceneUtilMathUtil *create_OrgApacheLuceneUtilMathUtil_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilMathUtil, init)
 }
 
 jint OrgApacheLuceneUtilMathUtil_logWithLong_withInt_(jlong x, jint base) {
   OrgApacheLuceneUtilMathUtil_initialize();
   if (base <= 1) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"base must be > 1") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"base must be > 1");
   }
   jint ret = 0;
   while (x >= base) {

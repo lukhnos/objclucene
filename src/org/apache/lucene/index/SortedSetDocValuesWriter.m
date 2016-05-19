@@ -96,6 +96,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSortedSetDocValuesWriter
 
 __attribute__((unused)) static OrgApacheLuceneIndexSortedSetDocValuesWriter_ValuesIterator *new_OrgApacheLuceneIndexSortedSetDocValuesWriter_ValuesIterator_initWithIntArray_withInt_withOrgApacheLuceneUtilBytesRefHash_(IOSIntArray *sortedValues, jint valueCount, OrgApacheLuceneUtilBytesRefHash *hash_) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexSortedSetDocValuesWriter_ValuesIterator *create_OrgApacheLuceneIndexSortedSetDocValuesWriter_ValuesIterator_initWithIntArray_withInt_withOrgApacheLuceneUtilBytesRefHash_(IOSIntArray *sortedValues, jint valueCount, OrgApacheLuceneUtilBytesRefHash *hash_);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortedSetDocValuesWriter_ValuesIterator)
 
 @interface OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdsIterator : NSObject < JavaUtilIterator > {
@@ -134,6 +136,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSortedSetDocValuesWriter
 
 __attribute__((unused)) static OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdsIterator *new_OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdsIterator_initWithIntArray_withInt_withOrgApacheLuceneUtilPackedPackedLongValues_withOrgApacheLuceneUtilPackedPackedLongValues_(IOSIntArray *ordMap, jint maxCount, OrgApacheLuceneUtilPackedPackedLongValues *ords, OrgApacheLuceneUtilPackedPackedLongValues *ordCounts) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdsIterator *create_OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdsIterator_initWithIntArray_withInt_withOrgApacheLuceneUtilPackedPackedLongValues_withOrgApacheLuceneUtilPackedPackedLongValues_(IOSIntArray *ordMap, jint maxCount, OrgApacheLuceneUtilPackedPackedLongValues *ords, OrgApacheLuceneUtilPackedPackedLongValues *ordCounts);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdsIterator)
 
 @interface OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdCountIterator : NSObject < JavaUtilIterator > {
@@ -162,6 +166,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSortedSetDocValuesWriter
 
 __attribute__((unused)) static OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdCountIterator *new_OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdCountIterator_initWithInt_withOrgApacheLuceneUtilPackedPackedLongValues_(jint maxDoc, OrgApacheLuceneUtilPackedPackedLongValues *ordCounts) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdCountIterator *create_OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdCountIterator_initWithInt_withOrgApacheLuceneUtilPackedPackedLongValues_(jint maxDoc, OrgApacheLuceneUtilPackedPackedLongValues *ordCounts);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdCountIterator)
 
 @interface OrgApacheLuceneIndexSortedSetDocValuesWriter_$1 : NSObject < JavaLangIterable > {
@@ -177,7 +183,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdCount
                                                         withIntArray:(IOSIntArray *)capture$0
                                                              withInt:(jint)capture$1;
 
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexSortedSetDocValuesWriter_$1)
@@ -188,6 +193,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSortedSetDocValuesWriter_$1, val$sortedV
 __attribute__((unused)) static void OrgApacheLuceneIndexSortedSetDocValuesWriter_$1_initWithOrgApacheLuceneIndexSortedSetDocValuesWriter_withIntArray_withInt_(OrgApacheLuceneIndexSortedSetDocValuesWriter_$1 *self, OrgApacheLuceneIndexSortedSetDocValuesWriter *outer$, IOSIntArray *capture$0, jint capture$1);
 
 __attribute__((unused)) static OrgApacheLuceneIndexSortedSetDocValuesWriter_$1 *new_OrgApacheLuceneIndexSortedSetDocValuesWriter_$1_initWithOrgApacheLuceneIndexSortedSetDocValuesWriter_withIntArray_withInt_(OrgApacheLuceneIndexSortedSetDocValuesWriter *outer$, IOSIntArray *capture$0, jint capture$1) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexSortedSetDocValuesWriter_$1 *create_OrgApacheLuceneIndexSortedSetDocValuesWriter_$1_initWithOrgApacheLuceneIndexSortedSetDocValuesWriter_withIntArray_withInt_(OrgApacheLuceneIndexSortedSetDocValuesWriter *outer$, IOSIntArray *capture$0, jint capture$1);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortedSetDocValuesWriter_$1)
 
@@ -202,7 +209,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortedSetDocValuesWriter_$1)
 - (instancetype)initWithInt:(jint)capture$0
 withOrgApacheLuceneUtilPackedPackedLongValues:(OrgApacheLuceneUtilPackedPackedLongValues *)capture$1;
 
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexSortedSetDocValuesWriter_$2)
@@ -212,6 +218,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSortedSetDocValuesWriter_$2, val$ordCoun
 __attribute__((unused)) static void OrgApacheLuceneIndexSortedSetDocValuesWriter_$2_initWithInt_withOrgApacheLuceneUtilPackedPackedLongValues_(OrgApacheLuceneIndexSortedSetDocValuesWriter_$2 *self, jint capture$0, OrgApacheLuceneUtilPackedPackedLongValues *capture$1);
 
 __attribute__((unused)) static OrgApacheLuceneIndexSortedSetDocValuesWriter_$2 *new_OrgApacheLuceneIndexSortedSetDocValuesWriter_$2_initWithInt_withOrgApacheLuceneUtilPackedPackedLongValues_(jint capture$0, OrgApacheLuceneUtilPackedPackedLongValues *capture$1) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexSortedSetDocValuesWriter_$2 *create_OrgApacheLuceneIndexSortedSetDocValuesWriter_$2_initWithInt_withOrgApacheLuceneUtilPackedPackedLongValues_(jint capture$0, OrgApacheLuceneUtilPackedPackedLongValues *capture$1);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortedSetDocValuesWriter_$2)
 
@@ -230,7 +238,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortedSetDocValuesWriter_$2)
 withOrgApacheLuceneUtilPackedPackedLongValues:(OrgApacheLuceneUtilPackedPackedLongValues *)capture$2
 withOrgApacheLuceneUtilPackedPackedLongValues:(OrgApacheLuceneUtilPackedPackedLongValues *)capture$3;
 
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexSortedSetDocValuesWriter_$3)
@@ -242,6 +249,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSortedSetDocValuesWriter_$3, val$ordCoun
 __attribute__((unused)) static void OrgApacheLuceneIndexSortedSetDocValuesWriter_$3_initWithIntArray_withInt_withOrgApacheLuceneUtilPackedPackedLongValues_withOrgApacheLuceneUtilPackedPackedLongValues_(OrgApacheLuceneIndexSortedSetDocValuesWriter_$3 *self, IOSIntArray *capture$0, jint capture$1, OrgApacheLuceneUtilPackedPackedLongValues *capture$2, OrgApacheLuceneUtilPackedPackedLongValues *capture$3);
 
 __attribute__((unused)) static OrgApacheLuceneIndexSortedSetDocValuesWriter_$3 *new_OrgApacheLuceneIndexSortedSetDocValuesWriter_$3_initWithIntArray_withInt_withOrgApacheLuceneUtilPackedPackedLongValues_withOrgApacheLuceneUtilPackedPackedLongValues_(IOSIntArray *capture$0, jint capture$1, OrgApacheLuceneUtilPackedPackedLongValues *capture$2, OrgApacheLuceneUtilPackedPackedLongValues *capture$3) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexSortedSetDocValuesWriter_$3 *create_OrgApacheLuceneIndexSortedSetDocValuesWriter_$3_initWithIntArray_withInt_withOrgApacheLuceneUtilPackedPackedLongValues_withOrgApacheLuceneUtilPackedPackedLongValues_(IOSIntArray *capture$0, jint capture$1, OrgApacheLuceneUtilPackedPackedLongValues *capture$2, OrgApacheLuceneUtilPackedPackedLongValues *capture$3);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortedSetDocValuesWriter_$3)
 
@@ -256,10 +265,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortedSetDocValuesWriter_$3)
 - (void)addValueWithInt:(jint)docID
 withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)value {
   if (value == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"field \"", ((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo_))->name_, @"\": null value not allowed")) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"field \"", ((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo_))->name_, @"\": null value not allowed"));
   }
-  if (((OrgApacheLuceneUtilBytesRef *) nil_chk(value))->length_ > (OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_SIZE - 2)) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$I", @"DocValuesField \"", ((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo_))->name_, @"\" is too large, must be <= ", (OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_SIZE - 2))) autorelease];
+  if (value->length_ > (OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_SIZE - 2)) {
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$I", @"DocValuesField \"", ((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo_))->name_, @"\" is too large, must be <= ", (OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_SIZE - 2)));
   }
   if (docID != currentDoc_) {
     OrgApacheLuceneIndexSortedSetDocValuesWriter_finishCurrentDoc(self);
@@ -298,13 +307,13 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)value {
   JreAssert(([((OrgApacheLuceneUtilPackedPackedLongValues_Builder *) nil_chk(pendingCounts_)) size] == maxDoc), (@"org/apache/lucene/index/SortedSetDocValuesWriter.java:152 condition failed: assert pendingCounts.size() == maxDoc;"));
   jint valueCount = [((OrgApacheLuceneUtilBytesRefHash *) nil_chk(hash__)) size];
   OrgApacheLuceneUtilPackedPackedLongValues *ords = [((OrgApacheLuceneUtilPackedPackedLongValues_Builder *) nil_chk(pending_)) build];
-  OrgApacheLuceneUtilPackedPackedLongValues *ordCounts = [pendingCounts_ build];
+  OrgApacheLuceneUtilPackedPackedLongValues *ordCounts = [((OrgApacheLuceneUtilPackedPackedLongValues_Builder *) nil_chk(pendingCounts_)) build];
   IOSIntArray *sortedValues = [hash__ sortWithJavaUtilComparator:OrgApacheLuceneUtilBytesRef_getUTF8SortedAsUnicodeComparator()];
   IOSIntArray *ordMap = [IOSIntArray arrayWithLength:valueCount];
   for (jint ord = 0; ord < valueCount; ord++) {
     *IOSIntArray_GetRef(ordMap, IOSIntArray_Get(nil_chk(sortedValues), ord)) = ord;
   }
-  [((OrgApacheLuceneCodecsDocValuesConsumer *) nil_chk(dvConsumer)) addSortedSetFieldWithOrgApacheLuceneIndexFieldInfo:fieldInfo_ withJavaLangIterable:[new_OrgApacheLuceneIndexSortedSetDocValuesWriter_$1_initWithOrgApacheLuceneIndexSortedSetDocValuesWriter_withIntArray_withInt_(self, sortedValues, valueCount) autorelease] withJavaLangIterable:[new_OrgApacheLuceneIndexSortedSetDocValuesWriter_$2_initWithInt_withOrgApacheLuceneUtilPackedPackedLongValues_(maxDoc, ordCounts) autorelease] withJavaLangIterable:[new_OrgApacheLuceneIndexSortedSetDocValuesWriter_$3_initWithIntArray_withInt_withOrgApacheLuceneUtilPackedPackedLongValues_withOrgApacheLuceneUtilPackedPackedLongValues_(ordMap, maxCountPerDoc, ords, ordCounts) autorelease]];
+  [((OrgApacheLuceneCodecsDocValuesConsumer *) nil_chk(dvConsumer)) addSortedSetFieldWithOrgApacheLuceneIndexFieldInfo:fieldInfo_ withJavaLangIterable:create_OrgApacheLuceneIndexSortedSetDocValuesWriter_$1_initWithOrgApacheLuceneIndexSortedSetDocValuesWriter_withIntArray_withInt_(self, sortedValues, valueCount) withJavaLangIterable:create_OrgApacheLuceneIndexSortedSetDocValuesWriter_$2_initWithInt_withOrgApacheLuceneUtilPackedPackedLongValues_(maxDoc, ordCounts) withJavaLangIterable:create_OrgApacheLuceneIndexSortedSetDocValuesWriter_$3_initWithIntArray_withInt_withOrgApacheLuceneUtilPackedPackedLongValues_withOrgApacheLuceneUtilPackedPackedLongValues_(ordMap, maxCountPerDoc, ords, ordCounts)];
 }
 
 - (void)dealloc {
@@ -353,7 +362,7 @@ void OrgApacheLuceneIndexSortedSetDocValuesWriter_initWithOrgApacheLuceneIndexFi
   self->maxCount_ = 0;
   JreStrongAssign(&self->fieldInfo_, fieldInfo);
   JreStrongAssign(&self->iwBytesUsed_, iwBytesUsed);
-  JreStrongAssignAndConsume(&self->hash__, new_OrgApacheLuceneUtilBytesRefHash_initWithOrgApacheLuceneUtilByteBlockPool_withInt_withOrgApacheLuceneUtilBytesRefHash_BytesStartArray_([new_OrgApacheLuceneUtilByteBlockPool_initWithOrgApacheLuceneUtilByteBlockPool_Allocator_([new_OrgApacheLuceneUtilByteBlockPool_DirectTrackingAllocator_initWithOrgApacheLuceneUtilCounter_(iwBytesUsed) autorelease]) autorelease], OrgApacheLuceneUtilBytesRefHash_DEFAULT_CAPACITY, [new_OrgApacheLuceneUtilBytesRefHash_DirectBytesStartArray_initWithInt_withOrgApacheLuceneUtilCounter_(OrgApacheLuceneUtilBytesRefHash_DEFAULT_CAPACITY, iwBytesUsed) autorelease]));
+  JreStrongAssignAndConsume(&self->hash__, new_OrgApacheLuceneUtilBytesRefHash_initWithOrgApacheLuceneUtilByteBlockPool_withInt_withOrgApacheLuceneUtilBytesRefHash_BytesStartArray_(create_OrgApacheLuceneUtilByteBlockPool_initWithOrgApacheLuceneUtilByteBlockPool_Allocator_(create_OrgApacheLuceneUtilByteBlockPool_DirectTrackingAllocator_initWithOrgApacheLuceneUtilCounter_(iwBytesUsed)), OrgApacheLuceneUtilBytesRefHash_DEFAULT_CAPACITY, create_OrgApacheLuceneUtilBytesRefHash_DirectBytesStartArray_initWithInt_withOrgApacheLuceneUtilCounter_(OrgApacheLuceneUtilBytesRefHash_DEFAULT_CAPACITY, iwBytesUsed)));
   JreStrongAssign(&self->pending_, OrgApacheLuceneUtilPackedPackedLongValues_packedBuilderWithFloat_(OrgApacheLuceneUtilPackedPackedInts_COMPACT));
   JreStrongAssign(&self->pendingCounts_, OrgApacheLuceneUtilPackedPackedLongValues_deltaPackedBuilderWithFloat_(OrgApacheLuceneUtilPackedPackedInts_COMPACT));
   self->bytesUsed_ = [((OrgApacheLuceneUtilPackedPackedLongValues_Builder *) nil_chk(self->pending_)) ramBytesUsed] + [((OrgApacheLuceneUtilPackedPackedLongValues_Builder *) nil_chk(self->pendingCounts_)) ramBytesUsed];
@@ -361,9 +370,11 @@ void OrgApacheLuceneIndexSortedSetDocValuesWriter_initWithOrgApacheLuceneIndexFi
 }
 
 OrgApacheLuceneIndexSortedSetDocValuesWriter *new_OrgApacheLuceneIndexSortedSetDocValuesWriter_initWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilCounter_(OrgApacheLuceneIndexFieldInfo *fieldInfo, OrgApacheLuceneUtilCounter *iwBytesUsed) {
-  OrgApacheLuceneIndexSortedSetDocValuesWriter *self = [OrgApacheLuceneIndexSortedSetDocValuesWriter alloc];
-  OrgApacheLuceneIndexSortedSetDocValuesWriter_initWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilCounter_(self, fieldInfo, iwBytesUsed);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSortedSetDocValuesWriter, initWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilCounter_, fieldInfo, iwBytesUsed)
+}
+
+OrgApacheLuceneIndexSortedSetDocValuesWriter *create_OrgApacheLuceneIndexSortedSetDocValuesWriter_initWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilCounter_(OrgApacheLuceneIndexFieldInfo *fieldInfo, OrgApacheLuceneUtilCounter *iwBytesUsed) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSortedSetDocValuesWriter, initWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilCounter_, fieldInfo, iwBytesUsed)
 }
 
 void OrgApacheLuceneIndexSortedSetDocValuesWriter_finishCurrentDoc(OrgApacheLuceneIndexSortedSetDocValuesWriter *self) {
@@ -423,7 +434,7 @@ withOrgApacheLuceneUtilBytesRefHash:(OrgApacheLuceneUtilBytesRefHash *)hash_ {
 
 - (OrgApacheLuceneUtilBytesRef *)next {
   if (![self hasNext]) {
-    @throw [new_JavaUtilNoSuchElementException_init() autorelease];
+    @throw create_JavaUtilNoSuchElementException_init();
   }
   [((OrgApacheLuceneUtilBytesRefHash *) nil_chk(hash__)) getWithInt:IOSIntArray_Get(nil_chk(sortedValues_), ordUpto_) withOrgApacheLuceneUtilBytesRef:scratch_];
   ordUpto_++;
@@ -431,7 +442,7 @@ withOrgApacheLuceneUtilBytesRefHash:(OrgApacheLuceneUtilBytesRefHash *)hash_ {
 }
 
 - (void)remove {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (void)dealloc {
@@ -470,9 +481,11 @@ void OrgApacheLuceneIndexSortedSetDocValuesWriter_ValuesIterator_initWithIntArra
 }
 
 OrgApacheLuceneIndexSortedSetDocValuesWriter_ValuesIterator *new_OrgApacheLuceneIndexSortedSetDocValuesWriter_ValuesIterator_initWithIntArray_withInt_withOrgApacheLuceneUtilBytesRefHash_(IOSIntArray *sortedValues, jint valueCount, OrgApacheLuceneUtilBytesRefHash *hash_) {
-  OrgApacheLuceneIndexSortedSetDocValuesWriter_ValuesIterator *self = [OrgApacheLuceneIndexSortedSetDocValuesWriter_ValuesIterator alloc];
-  OrgApacheLuceneIndexSortedSetDocValuesWriter_ValuesIterator_initWithIntArray_withInt_withOrgApacheLuceneUtilBytesRefHash_(self, sortedValues, valueCount, hash_);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSortedSetDocValuesWriter_ValuesIterator, initWithIntArray_withInt_withOrgApacheLuceneUtilBytesRefHash_, sortedValues, valueCount, hash_)
+}
+
+OrgApacheLuceneIndexSortedSetDocValuesWriter_ValuesIterator *create_OrgApacheLuceneIndexSortedSetDocValuesWriter_ValuesIterator_initWithIntArray_withInt_withOrgApacheLuceneUtilBytesRefHash_(IOSIntArray *sortedValues, jint valueCount, OrgApacheLuceneUtilBytesRefHash *hash_) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSortedSetDocValuesWriter_ValuesIterator, initWithIntArray_withInt_withOrgApacheLuceneUtilBytesRefHash_, sortedValues, valueCount, hash_)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortedSetDocValuesWriter_ValuesIterator)
@@ -493,7 +506,7 @@ withOrgApacheLuceneUtilPackedPackedLongValues:(OrgApacheLuceneUtilPackedPackedLo
 
 - (NSNumber *)next {
   if (![self hasNext]) {
-    @throw [new_JavaUtilNoSuchElementException_init() autorelease];
+    @throw create_JavaUtilNoSuchElementException_init();
   }
   while (currentUpto_ == currentLength_) {
     currentUpto_ = 0;
@@ -510,7 +523,7 @@ withOrgApacheLuceneUtilPackedPackedLongValues:(OrgApacheLuceneUtilPackedPackedLo
 }
 
 - (void)remove {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (void)dealloc {
@@ -554,9 +567,11 @@ void OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdsIterator_initWithIntArray_
 }
 
 OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdsIterator *new_OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdsIterator_initWithIntArray_withInt_withOrgApacheLuceneUtilPackedPackedLongValues_withOrgApacheLuceneUtilPackedPackedLongValues_(IOSIntArray *ordMap, jint maxCount, OrgApacheLuceneUtilPackedPackedLongValues *ords, OrgApacheLuceneUtilPackedPackedLongValues *ordCounts) {
-  OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdsIterator *self = [OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdsIterator alloc];
-  OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdsIterator_initWithIntArray_withInt_withOrgApacheLuceneUtilPackedPackedLongValues_withOrgApacheLuceneUtilPackedPackedLongValues_(self, ordMap, maxCount, ords, ordCounts);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdsIterator, initWithIntArray_withInt_withOrgApacheLuceneUtilPackedPackedLongValues_withOrgApacheLuceneUtilPackedPackedLongValues_, ordMap, maxCount, ords, ordCounts)
+}
+
+OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdsIterator *create_OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdsIterator_initWithIntArray_withInt_withOrgApacheLuceneUtilPackedPackedLongValues_withOrgApacheLuceneUtilPackedPackedLongValues_(IOSIntArray *ordMap, jint maxCount, OrgApacheLuceneUtilPackedPackedLongValues *ords, OrgApacheLuceneUtilPackedPackedLongValues *ordCounts) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdsIterator, initWithIntArray_withInt_withOrgApacheLuceneUtilPackedPackedLongValues_withOrgApacheLuceneUtilPackedPackedLongValues_, ordMap, maxCount, ords, ordCounts)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdsIterator)
@@ -575,14 +590,14 @@ withOrgApacheLuceneUtilPackedPackedLongValues:(OrgApacheLuceneUtilPackedPackedLo
 
 - (NSNumber *)next {
   if (![self hasNext]) {
-    @throw [new_JavaUtilNoSuchElementException_init() autorelease];
+    @throw create_JavaUtilNoSuchElementException_init();
   }
   docUpto_++;
   return JavaLangLong_valueOfWithLong_([((OrgApacheLuceneUtilPackedPackedLongValues_Iterator *) nil_chk(iter_)) next]);
 }
 
 - (void)remove {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (void)dealloc {
@@ -616,9 +631,11 @@ void OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdCountIterator_initWithInt_w
 }
 
 OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdCountIterator *new_OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdCountIterator_initWithInt_withOrgApacheLuceneUtilPackedPackedLongValues_(jint maxDoc, OrgApacheLuceneUtilPackedPackedLongValues *ordCounts) {
-  OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdCountIterator *self = [OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdCountIterator alloc];
-  OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdCountIterator_initWithInt_withOrgApacheLuceneUtilPackedPackedLongValues_(self, maxDoc, ordCounts);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdCountIterator, initWithInt_withOrgApacheLuceneUtilPackedPackedLongValues_, maxDoc, ordCounts)
+}
+
+OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdCountIterator *create_OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdCountIterator_initWithInt_withOrgApacheLuceneUtilPackedPackedLongValues_(jint maxDoc, OrgApacheLuceneUtilPackedPackedLongValues *ordCounts) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdCountIterator, initWithInt_withOrgApacheLuceneUtilPackedPackedLongValues_, maxDoc, ordCounts)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdCountIterator)
@@ -626,7 +643,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortedSetDocValuesWriter_Or
 @implementation OrgApacheLuceneIndexSortedSetDocValuesWriter_$1
 
 - (id<JavaUtilIterator>)iterator {
-  return [new_OrgApacheLuceneIndexSortedSetDocValuesWriter_ValuesIterator_initWithIntArray_withInt_withOrgApacheLuceneUtilBytesRefHash_(val$sortedValues_, val$valueCount_, this$0_->hash__) autorelease];
+  return create_OrgApacheLuceneIndexSortedSetDocValuesWriter_ValuesIterator_initWithIntArray_withInt_withOrgApacheLuceneUtilBytesRefHash_(val$sortedValues_, val$valueCount_, this$0_->hash__);
 }
 
 - (instancetype)initWithOrgApacheLuceneIndexSortedSetDocValuesWriter:(OrgApacheLuceneIndexSortedSetDocValuesWriter *)outer$
@@ -636,19 +653,19 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortedSetDocValuesWriter_Or
   return self;
 }
 
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
+  return JreDefaultFastEnumeration(self, state, stackbuf, len);
+}
+
 - (void)dealloc {
   RELEASE_(this$0_);
   RELEASE_(val$sortedValues_);
   [super dealloc];
 }
 
-- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, NULL },
+    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<Lorg/apache/lucene/util/BytesRef;>;" },
     { "initWithOrgApacheLuceneIndexSortedSetDocValuesWriter:withIntArray:withInt:", "", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -671,9 +688,11 @@ void OrgApacheLuceneIndexSortedSetDocValuesWriter_$1_initWithOrgApacheLuceneInde
 }
 
 OrgApacheLuceneIndexSortedSetDocValuesWriter_$1 *new_OrgApacheLuceneIndexSortedSetDocValuesWriter_$1_initWithOrgApacheLuceneIndexSortedSetDocValuesWriter_withIntArray_withInt_(OrgApacheLuceneIndexSortedSetDocValuesWriter *outer$, IOSIntArray *capture$0, jint capture$1) {
-  OrgApacheLuceneIndexSortedSetDocValuesWriter_$1 *self = [OrgApacheLuceneIndexSortedSetDocValuesWriter_$1 alloc];
-  OrgApacheLuceneIndexSortedSetDocValuesWriter_$1_initWithOrgApacheLuceneIndexSortedSetDocValuesWriter_withIntArray_withInt_(self, outer$, capture$0, capture$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSortedSetDocValuesWriter_$1, initWithOrgApacheLuceneIndexSortedSetDocValuesWriter_withIntArray_withInt_, outer$, capture$0, capture$1)
+}
+
+OrgApacheLuceneIndexSortedSetDocValuesWriter_$1 *create_OrgApacheLuceneIndexSortedSetDocValuesWriter_$1_initWithOrgApacheLuceneIndexSortedSetDocValuesWriter_withIntArray_withInt_(OrgApacheLuceneIndexSortedSetDocValuesWriter *outer$, IOSIntArray *capture$0, jint capture$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSortedSetDocValuesWriter_$1, initWithOrgApacheLuceneIndexSortedSetDocValuesWriter_withIntArray_withInt_, outer$, capture$0, capture$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortedSetDocValuesWriter_$1)
@@ -681,7 +700,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortedSetDocValuesWriter_$1
 @implementation OrgApacheLuceneIndexSortedSetDocValuesWriter_$2
 
 - (id<JavaUtilIterator>)iterator {
-  return [new_OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdCountIterator_initWithInt_withOrgApacheLuceneUtilPackedPackedLongValues_(val$maxDoc_, val$ordCounts_) autorelease];
+  return create_OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdCountIterator_initWithInt_withOrgApacheLuceneUtilPackedPackedLongValues_(val$maxDoc_, val$ordCounts_);
 }
 
 - (instancetype)initWithInt:(jint)capture$0
@@ -690,18 +709,18 @@ withOrgApacheLuceneUtilPackedPackedLongValues:(OrgApacheLuceneUtilPackedPackedLo
   return self;
 }
 
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
+  return JreDefaultFastEnumeration(self, state, stackbuf, len);
+}
+
 - (void)dealloc {
   RELEASE_(val$ordCounts_);
   [super dealloc];
 }
 
-- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, NULL },
+    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<Ljava/lang/Number;>;" },
     { "initWithInt:withOrgApacheLuceneUtilPackedPackedLongValues:", "", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -722,9 +741,11 @@ void OrgApacheLuceneIndexSortedSetDocValuesWriter_$2_initWithInt_withOrgApacheLu
 }
 
 OrgApacheLuceneIndexSortedSetDocValuesWriter_$2 *new_OrgApacheLuceneIndexSortedSetDocValuesWriter_$2_initWithInt_withOrgApacheLuceneUtilPackedPackedLongValues_(jint capture$0, OrgApacheLuceneUtilPackedPackedLongValues *capture$1) {
-  OrgApacheLuceneIndexSortedSetDocValuesWriter_$2 *self = [OrgApacheLuceneIndexSortedSetDocValuesWriter_$2 alloc];
-  OrgApacheLuceneIndexSortedSetDocValuesWriter_$2_initWithInt_withOrgApacheLuceneUtilPackedPackedLongValues_(self, capture$0, capture$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSortedSetDocValuesWriter_$2, initWithInt_withOrgApacheLuceneUtilPackedPackedLongValues_, capture$0, capture$1)
+}
+
+OrgApacheLuceneIndexSortedSetDocValuesWriter_$2 *create_OrgApacheLuceneIndexSortedSetDocValuesWriter_$2_initWithInt_withOrgApacheLuceneUtilPackedPackedLongValues_(jint capture$0, OrgApacheLuceneUtilPackedPackedLongValues *capture$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSortedSetDocValuesWriter_$2, initWithInt_withOrgApacheLuceneUtilPackedPackedLongValues_, capture$0, capture$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortedSetDocValuesWriter_$2)
@@ -732,7 +753,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortedSetDocValuesWriter_$2
 @implementation OrgApacheLuceneIndexSortedSetDocValuesWriter_$3
 
 - (id<JavaUtilIterator>)iterator {
-  return [new_OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdsIterator_initWithIntArray_withInt_withOrgApacheLuceneUtilPackedPackedLongValues_withOrgApacheLuceneUtilPackedPackedLongValues_(val$ordMap_, val$maxCountPerDoc_, val$ords_, val$ordCounts_) autorelease];
+  return create_OrgApacheLuceneIndexSortedSetDocValuesWriter_OrdsIterator_initWithIntArray_withInt_withOrgApacheLuceneUtilPackedPackedLongValues_withOrgApacheLuceneUtilPackedPackedLongValues_(val$ordMap_, val$maxCountPerDoc_, val$ords_, val$ordCounts_);
 }
 
 - (instancetype)initWithIntArray:(IOSIntArray *)capture$0
@@ -743,6 +764,10 @@ withOrgApacheLuceneUtilPackedPackedLongValues:(OrgApacheLuceneUtilPackedPackedLo
   return self;
 }
 
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
+  return JreDefaultFastEnumeration(self, state, stackbuf, len);
+}
+
 - (void)dealloc {
   RELEASE_(val$ordMap_);
   RELEASE_(val$ords_);
@@ -750,13 +775,9 @@ withOrgApacheLuceneUtilPackedPackedLongValues:(OrgApacheLuceneUtilPackedPackedLo
   [super dealloc];
 }
 
-- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, NULL },
+    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<Ljava/lang/Number;>;" },
     { "initWithIntArray:withInt:withOrgApacheLuceneUtilPackedPackedLongValues:withOrgApacheLuceneUtilPackedPackedLongValues:", "", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -781,9 +802,11 @@ void OrgApacheLuceneIndexSortedSetDocValuesWriter_$3_initWithIntArray_withInt_wi
 }
 
 OrgApacheLuceneIndexSortedSetDocValuesWriter_$3 *new_OrgApacheLuceneIndexSortedSetDocValuesWriter_$3_initWithIntArray_withInt_withOrgApacheLuceneUtilPackedPackedLongValues_withOrgApacheLuceneUtilPackedPackedLongValues_(IOSIntArray *capture$0, jint capture$1, OrgApacheLuceneUtilPackedPackedLongValues *capture$2, OrgApacheLuceneUtilPackedPackedLongValues *capture$3) {
-  OrgApacheLuceneIndexSortedSetDocValuesWriter_$3 *self = [OrgApacheLuceneIndexSortedSetDocValuesWriter_$3 alloc];
-  OrgApacheLuceneIndexSortedSetDocValuesWriter_$3_initWithIntArray_withInt_withOrgApacheLuceneUtilPackedPackedLongValues_withOrgApacheLuceneUtilPackedPackedLongValues_(self, capture$0, capture$1, capture$2, capture$3);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSortedSetDocValuesWriter_$3, initWithIntArray_withInt_withOrgApacheLuceneUtilPackedPackedLongValues_withOrgApacheLuceneUtilPackedPackedLongValues_, capture$0, capture$1, capture$2, capture$3)
+}
+
+OrgApacheLuceneIndexSortedSetDocValuesWriter_$3 *create_OrgApacheLuceneIndexSortedSetDocValuesWriter_$3_initWithIntArray_withInt_withOrgApacheLuceneUtilPackedPackedLongValues_withOrgApacheLuceneUtilPackedPackedLongValues_(IOSIntArray *capture$0, jint capture$1, OrgApacheLuceneUtilPackedPackedLongValues *capture$2, OrgApacheLuceneUtilPackedPackedLongValues *capture$3) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSortedSetDocValuesWriter_$3, initWithIntArray_withInt_withOrgApacheLuceneUtilPackedPackedLongValues_withOrgApacheLuceneUtilPackedPackedLongValues_, capture$0, capture$1, capture$2, capture$3)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortedSetDocValuesWriter_$3)

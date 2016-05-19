@@ -5,20 +5,23 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserXmlFilterBuilder_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserXmlFilterBuilder_RESTRICT
-#define OrgApacheLuceneQueryparserXmlFilterBuilder_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlFilterBuilder")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserXmlFilterBuilder
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlFilterBuilder 0
 #else
-#define OrgApacheLuceneQueryparserXmlFilterBuilder_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlFilterBuilder 1
 #endif
-#undef OrgApacheLuceneQueryparserXmlFilterBuilder_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserXmlFilterBuilder
 
-#if !defined (_OrgApacheLuceneQueryparserXmlFilterBuilder_) && (OrgApacheLuceneQueryparserXmlFilterBuilder_INCLUDE_ALL || OrgApacheLuceneQueryparserXmlFilterBuilder_INCLUDE)
-#define _OrgApacheLuceneQueryparserXmlFilterBuilder_
+#if !defined (OrgApacheLuceneQueryparserXmlFilterBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlFilterBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserXmlFilterBuilder))
+#define OrgApacheLuceneQueryparserXmlFilterBuilder_
 
 @class OrgApacheLuceneSearchFilter;
 @protocol OrgW3cDomElement;
 
+/*!
+ @brief Interface for building <code>Filter</code>s
+ */
 @protocol OrgApacheLuceneQueryparserXmlFilterBuilder < NSObject, JavaObject >
 
 - (OrgApacheLuceneSearchFilter *)getFilterWithOrgW3cDomElement:(id<OrgW3cDomElement>)e;
@@ -31,4 +34,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlFilterBuilder)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserXmlFilterBuilder_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlFilterBuilder")

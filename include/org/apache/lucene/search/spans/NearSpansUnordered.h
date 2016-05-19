@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSpansNearSpansUnordered_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSpansNearSpansUnordered_RESTRICT
-#define OrgApacheLuceneSearchSpansNearSpansUnordered_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansNearSpansUnordered")
+#ifdef RESTRICT_OrgApacheLuceneSearchSpansNearSpansUnordered
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansNearSpansUnordered 0
 #else
-#define OrgApacheLuceneSearchSpansNearSpansUnordered_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansNearSpansUnordered 1
 #endif
-#undef OrgApacheLuceneSearchSpansNearSpansUnordered_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSpansNearSpansUnordered
 
-#if !defined (_OrgApacheLuceneSearchSpansNearSpansUnordered_) && (OrgApacheLuceneSearchSpansNearSpansUnordered_INCLUDE_ALL || OrgApacheLuceneSearchSpansNearSpansUnordered_INCLUDE)
-#define _OrgApacheLuceneSearchSpansNearSpansUnordered_
+#if !defined (OrgApacheLuceneSearchSpansNearSpansUnordered_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansNearSpansUnordered || defined(INCLUDE_OrgApacheLuceneSearchSpansNearSpansUnordered))
+#define OrgApacheLuceneSearchSpansNearSpansUnordered_
 
-#define OrgApacheLuceneSearchSpansNearSpans_RESTRICT 1
-#define OrgApacheLuceneSearchSpansNearSpans_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSpansNearSpans 1
+#define INCLUDE_OrgApacheLuceneSearchSpansNearSpans 1
 #include "org/apache/lucene/search/spans/NearSpans.h"
 
 @class OrgApacheLuceneSearchSpansSpanNearQuery;
@@ -25,6 +25,11 @@
 @protocol JavaUtilList;
 @protocol OrgApacheLuceneSearchSpansSpanCollector;
 
+/*!
+ @brief Similar to <code>NearSpansOrdered</code>, but for the unordered case.
+ Expert:
+ Only public for subclassing.  Most implementations should not need this class
+ */
 @interface OrgApacheLuceneSearchSpansNearSpansUnordered : OrgApacheLuceneSearchSpansNearSpans
 
 #pragma mark Public
@@ -46,6 +51,12 @@
 
 #pragma mark Package-Private
 
+/*!
+ @brief Check whether two Spans in the same document are ordered with possible overlap.
+ @return true iff spans1 starts before spans2
+ or the spans start at the same position,
+ and spans1 ends before spans2.
+ */
 + (jboolean)positionsOrderedWithOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)spans1
                             withOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)spans2;
 
@@ -59,10 +70,12 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansNearSpansUnordered_initWithOrgA
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSpansNearSpansUnordered *new_OrgApacheLuceneSearchSpansNearSpansUnordered_initWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilList_(OrgApacheLuceneSearchSpansSpanNearQuery *query, id<JavaUtilList> subSpans) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpansNearSpansUnordered *create_OrgApacheLuceneSearchSpansNearSpansUnordered_initWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilList_(OrgApacheLuceneSearchSpansSpanNearQuery *query, id<JavaUtilList> subSpans);
+
 FOUNDATION_EXPORT jboolean OrgApacheLuceneSearchSpansNearSpansUnordered_positionsOrderedWithOrgApacheLuceneSearchSpansSpans_withOrgApacheLuceneSearchSpansSpans_(OrgApacheLuceneSearchSpansSpans *spans1, OrgApacheLuceneSearchSpansSpans *spans2);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansNearSpansUnordered)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSpansNearSpansUnordered_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansNearSpansUnordered")

@@ -5,19 +5,30 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSpellStringDistance_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSpellStringDistance_RESTRICT
-#define OrgApacheLuceneSearchSpellStringDistance_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpellStringDistance")
+#ifdef RESTRICT_OrgApacheLuceneSearchSpellStringDistance
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpellStringDistance 0
 #else
-#define OrgApacheLuceneSearchSpellStringDistance_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpellStringDistance 1
 #endif
-#undef OrgApacheLuceneSearchSpellStringDistance_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSpellStringDistance
 
-#if !defined (_OrgApacheLuceneSearchSpellStringDistance_) && (OrgApacheLuceneSearchSpellStringDistance_INCLUDE_ALL || OrgApacheLuceneSearchSpellStringDistance_INCLUDE)
-#define _OrgApacheLuceneSearchSpellStringDistance_
+#if !defined (OrgApacheLuceneSearchSpellStringDistance_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpellStringDistance || defined(INCLUDE_OrgApacheLuceneSearchSpellStringDistance))
+#define OrgApacheLuceneSearchSpellStringDistance_
 
+/*!
+ @brief Interface for string distances.
+ */
 @protocol OrgApacheLuceneSearchSpellStringDistance < NSObject, JavaObject >
 
+/*!
+ @brief Returns a float between 0 and 1 based on how similar the specified strings are to one another.
+ Returning a value of 1 means the specified strings are identical and 0 means the
+ string are maximally different.
+ @param s1 The first string.
+ @param s2 The second string.
+ @return a float between 0 and 1 based on how similar the specified strings are to one another.
+ */
 - (jfloat)getDistanceWithNSString:(NSString *)s1
                      withNSString:(NSString *)s2;
 
@@ -29,4 +40,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellStringDistance)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSpellStringDistance_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpellStringDistance")

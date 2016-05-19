@@ -22,7 +22,7 @@
 }
 
 - (void)setLongValueWithLong:(jlong)value {
-  @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"cannot change value type from Float to Long") autorelease];
+  @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"cannot change value type from Float to Long");
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -42,9 +42,11 @@ void OrgApacheLuceneDocumentFloatDocValuesField_initWithNSString_withFloat_(OrgA
 }
 
 OrgApacheLuceneDocumentFloatDocValuesField *new_OrgApacheLuceneDocumentFloatDocValuesField_initWithNSString_withFloat_(NSString *name, jfloat value) {
-  OrgApacheLuceneDocumentFloatDocValuesField *self = [OrgApacheLuceneDocumentFloatDocValuesField alloc];
-  OrgApacheLuceneDocumentFloatDocValuesField_initWithNSString_withFloat_(self, name, value);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentFloatDocValuesField, initWithNSString_withFloat_, name, value)
+}
+
+OrgApacheLuceneDocumentFloatDocValuesField *create_OrgApacheLuceneDocumentFloatDocValuesField_initWithNSString_withFloat_(NSString *name, jfloat value) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentFloatDocValuesField, initWithNSString_withFloat_, name, value)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentFloatDocValuesField)

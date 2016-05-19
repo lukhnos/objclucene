@@ -110,7 +110,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTermContext, states_, IOSObjectArray *)
 }
 
 - (NSString *)description {
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   [sb appendWithNSString:@"TermContext\n"];
   {
     IOSObjectArray *a__ = states_;
@@ -176,9 +176,11 @@ void OrgApacheLuceneIndexTermContext_initWithOrgApacheLuceneIndexIndexReaderCont
 }
 
 OrgApacheLuceneIndexTermContext *new_OrgApacheLuceneIndexTermContext_initWithOrgApacheLuceneIndexIndexReaderContext_(OrgApacheLuceneIndexIndexReaderContext *context) {
-  OrgApacheLuceneIndexTermContext *self = [OrgApacheLuceneIndexTermContext alloc];
-  OrgApacheLuceneIndexTermContext_initWithOrgApacheLuceneIndexIndexReaderContext_(self, context);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexTermContext, initWithOrgApacheLuceneIndexIndexReaderContext_, context)
+}
+
+OrgApacheLuceneIndexTermContext *create_OrgApacheLuceneIndexTermContext_initWithOrgApacheLuceneIndexIndexReaderContext_(OrgApacheLuceneIndexIndexReaderContext *context) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexTermContext, initWithOrgApacheLuceneIndexIndexReaderContext_, context)
 }
 
 void OrgApacheLuceneIndexTermContext_initWithOrgApacheLuceneIndexIndexReaderContext_withOrgApacheLuceneIndexTermState_withInt_withInt_withLong_(OrgApacheLuceneIndexTermContext *self, OrgApacheLuceneIndexIndexReaderContext *context, OrgApacheLuceneIndexTermState *state, jint ord, jint docFreq, jlong totalTermFreq) {
@@ -187,9 +189,11 @@ void OrgApacheLuceneIndexTermContext_initWithOrgApacheLuceneIndexIndexReaderCont
 }
 
 OrgApacheLuceneIndexTermContext *new_OrgApacheLuceneIndexTermContext_initWithOrgApacheLuceneIndexIndexReaderContext_withOrgApacheLuceneIndexTermState_withInt_withInt_withLong_(OrgApacheLuceneIndexIndexReaderContext *context, OrgApacheLuceneIndexTermState *state, jint ord, jint docFreq, jlong totalTermFreq) {
-  OrgApacheLuceneIndexTermContext *self = [OrgApacheLuceneIndexTermContext alloc];
-  OrgApacheLuceneIndexTermContext_initWithOrgApacheLuceneIndexIndexReaderContext_withOrgApacheLuceneIndexTermState_withInt_withInt_withLong_(self, context, state, ord, docFreq, totalTermFreq);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexTermContext, initWithOrgApacheLuceneIndexIndexReaderContext_withOrgApacheLuceneIndexTermState_withInt_withInt_withLong_, context, state, ord, docFreq, totalTermFreq)
+}
+
+OrgApacheLuceneIndexTermContext *create_OrgApacheLuceneIndexTermContext_initWithOrgApacheLuceneIndexIndexReaderContext_withOrgApacheLuceneIndexTermState_withInt_withInt_withLong_(OrgApacheLuceneIndexIndexReaderContext *context, OrgApacheLuceneIndexTermState *state, jint ord, jint docFreq, jlong totalTermFreq) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexTermContext, initWithOrgApacheLuceneIndexIndexReaderContext_withOrgApacheLuceneIndexTermState_withInt_withInt_withLong_, context, state, ord, docFreq, totalTermFreq)
 }
 
 OrgApacheLuceneIndexTermContext *OrgApacheLuceneIndexTermContext_buildWithOrgApacheLuceneIndexIndexReaderContext_withOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexIndexReaderContext *context, OrgApacheLuceneIndexTerm *term) {
@@ -197,7 +201,7 @@ OrgApacheLuceneIndexTermContext *OrgApacheLuceneIndexTermContext_buildWithOrgApa
   JreAssert((context != nil && context->isTopLevel_), (@"org/apache/lucene/index/TermContext.java:84 condition failed: assert context != null && context.isTopLevel;"));
   NSString *field = [((OrgApacheLuceneIndexTerm *) nil_chk(term)) field];
   OrgApacheLuceneUtilBytesRef *bytes = [term bytes];
-  OrgApacheLuceneIndexTermContext *perReaderTermState = [new_OrgApacheLuceneIndexTermContext_initWithOrgApacheLuceneIndexIndexReaderContext_(context) autorelease];
+  OrgApacheLuceneIndexTermContext *perReaderTermState = create_OrgApacheLuceneIndexTermContext_initWithOrgApacheLuceneIndexIndexReaderContext_(context);
   for (OrgApacheLuceneIndexLeafReaderContext * __strong ctx in nil_chk([((OrgApacheLuceneIndexIndexReaderContext *) nil_chk(context)) leaves])) {
     OrgApacheLuceneIndexTerms *terms = [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(ctx)) reader])) termsWithNSString:field];
     if (terms != nil) {

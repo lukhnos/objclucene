@@ -16,11 +16,6 @@
 #include "org/w3c/dom/Node.h"
 #include "org/w3c/dom/NodeList.h"
 
-#define OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder_DEFAULT_MAX_NUM_TERMS 50
-#define OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder_DEFAULT_MIN_SIMILARITY 2.0f
-#define OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder_DEFAULT_PREFIX_LENGTH 1
-#define OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder_DEFAULT_IGNORE_TF false
-
 @interface OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder () {
  @public
   OrgApacheLuceneAnalysisAnalyzer *analyzer_;
@@ -30,13 +25,21 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder, analyzer_, OrgApacheLuceneAnalysisAnalyzer *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder, DEFAULT_MAX_NUM_TERMS, jint)
+inline jint OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder_get_DEFAULT_MAX_NUM_TERMS();
+#define OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder_DEFAULT_MAX_NUM_TERMS 50
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder, DEFAULT_MAX_NUM_TERMS, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder, DEFAULT_MIN_SIMILARITY, jfloat)
+inline jfloat OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder_get_DEFAULT_MIN_SIMILARITY();
+#define OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder_DEFAULT_MIN_SIMILARITY 2.0f
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder, DEFAULT_MIN_SIMILARITY, jfloat)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder, DEFAULT_PREFIX_LENGTH, jint)
+inline jint OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder_get_DEFAULT_PREFIX_LENGTH();
+#define OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder_DEFAULT_PREFIX_LENGTH 1
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder, DEFAULT_PREFIX_LENGTH, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder, DEFAULT_IGNORE_TF, jboolean)
+inline jboolean OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder_get_DEFAULT_IGNORE_TF();
+#define OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder_DEFAULT_IGNORE_TF false
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder, DEFAULT_IGNORE_TF, jboolean)
 
 @implementation OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder
 
@@ -48,10 +51,10 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQue
 - (OrgApacheLuceneSearchQuery *)getQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e {
   id<OrgW3cDomNodeList> nl = [((id<OrgW3cDomElement>) nil_chk(e)) getElementsByTagNameWithNSString:@"Field"];
   jint maxNumTerms = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withInt_(e, @"maxNumTerms", OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder_DEFAULT_MAX_NUM_TERMS);
-  OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery *fbq = [new_OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_initWithInt_withOrgApacheLuceneAnalysisAnalyzer_(maxNumTerms, analyzer_) autorelease];
+  OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery *fbq = create_OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_initWithInt_withOrgApacheLuceneAnalysisAnalyzer_(maxNumTerms, analyzer_);
   [fbq setIgnoreTFWithBoolean:OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withBoolean_(e, @"ignoreTF", OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder_DEFAULT_IGNORE_TF)];
   for (jint i = 0; i < [((id<OrgW3cDomNodeList>) nil_chk(nl)) getLength]; i++) {
-    id<OrgW3cDomElement> fieldElem = (id<OrgW3cDomElement>) check_protocol_cast([nl itemWithInt:i], OrgW3cDomElement_class_());
+    id<OrgW3cDomElement> fieldElem = (id<OrgW3cDomElement>) cast_check([nl itemWithInt:i], OrgW3cDomElement_class_());
     jfloat minSimilarity = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withFloat_(fieldElem, @"minSimilarity", OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder_DEFAULT_MIN_SIMILARITY);
     jint prefixLength = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withInt_(fieldElem, @"prefixLength", OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder_DEFAULT_PREFIX_LENGTH);
     NSString *fieldName = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithInheritanceWithOrgW3cDomElement_withNSString_(fieldElem, @"fieldName");
@@ -91,9 +94,11 @@ void OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder_initWithOrgA
 }
 
 OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder *new_OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *analyzer) {
-  OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder *self = [OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder alloc];
-  OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_(self, analyzer);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder, initWithOrgApacheLuceneAnalysisAnalyzer_, analyzer)
+}
+
+OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder *create_OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *analyzer) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder, initWithOrgApacheLuceneAnalysisAnalyzer_, analyzer)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder)

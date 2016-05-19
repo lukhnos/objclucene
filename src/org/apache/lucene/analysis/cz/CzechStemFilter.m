@@ -79,9 +79,11 @@ void OrgApacheLuceneAnalysisCzCzechStemFilter_initWithOrgApacheLuceneAnalysisTok
 }
 
 OrgApacheLuceneAnalysisCzCzechStemFilter *new_OrgApacheLuceneAnalysisCzCzechStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) {
-  OrgApacheLuceneAnalysisCzCzechStemFilter *self = [OrgApacheLuceneAnalysisCzCzechStemFilter alloc];
-  OrgApacheLuceneAnalysisCzCzechStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, input);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCzCzechStemFilter, initWithOrgApacheLuceneAnalysisTokenStream_, input)
+}
+
+OrgApacheLuceneAnalysisCzCzechStemFilter *create_OrgApacheLuceneAnalysisCzCzechStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCzCzechStemFilter, initWithOrgApacheLuceneAnalysisTokenStream_, input)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCzCzechStemFilter)

@@ -5,19 +5,26 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisItItalianLightStemmer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisItItalianLightStemmer_RESTRICT
-#define OrgApacheLuceneAnalysisItItalianLightStemmer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisItItalianLightStemmer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisItItalianLightStemmer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisItItalianLightStemmer 0
 #else
-#define OrgApacheLuceneAnalysisItItalianLightStemmer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisItItalianLightStemmer 1
 #endif
-#undef OrgApacheLuceneAnalysisItItalianLightStemmer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisItItalianLightStemmer
 
-#if !defined (_OrgApacheLuceneAnalysisItItalianLightStemmer_) && (OrgApacheLuceneAnalysisItItalianLightStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisItItalianLightStemmer_INCLUDE)
-#define _OrgApacheLuceneAnalysisItItalianLightStemmer_
+#if !defined (OrgApacheLuceneAnalysisItItalianLightStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisItItalianLightStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisItItalianLightStemmer))
+#define OrgApacheLuceneAnalysisItItalianLightStemmer_
 
 @class IOSCharArray;
 
+/*!
+ @brief Light Stemmer for Italian.
+ <p>
+ This stemmer implements the algorithm described in:
+ <i>Report on CLEF-2001 Experiments</i>
+ Jacques Savoy
+ */
 @interface OrgApacheLuceneAnalysisItItalianLightStemmer : NSObject
 
 #pragma mark Public
@@ -35,8 +42,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisItItalianLightStemmer_init(OrgApac
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisItItalianLightStemmer *new_OrgApacheLuceneAnalysisItItalianLightStemmer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisItItalianLightStemmer *create_OrgApacheLuceneAnalysisItItalianLightStemmer_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisItItalianLightStemmer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisItItalianLightStemmer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisItItalianLightStemmer")

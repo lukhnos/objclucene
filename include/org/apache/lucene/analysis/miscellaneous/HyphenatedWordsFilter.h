@@ -5,31 +5,71 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter_RESTRICT
-#define OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter 0
 #else
-#define OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter
 
-#if !defined (_OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter_) && (OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter_
+#if !defined (OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter))
+#define OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief When the plain text is extracted from documents, we will often have many words hyphenated and broken into
+ two lines.
+ This is often the case with documents where narrow text columns are used, such as newsletters.
+ In order to increase search efficiency, this filter puts hyphenated words broken into two lines back together.
+ This filter should be used on indexing time only.
+ Example field definition in schema.xml:
+ <pre class="prettyprint">
+ &lt;fieldtype name="text" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer type="index"&gt;
+ &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+ &lt;filter class="solr.SynonymFilterFactory" synonyms="index_synonyms.txt" ignoreCase="true" expand="false"/&gt;
+ &lt;filter class="solr.StopFilterFactory" ignoreCase="true"/&gt;
+ &lt;filter class="solr.HyphenatedWordsFilterFactory"/&gt;
+ &lt;filter class="solr.WordDelimiterFilterFactory" generateWordParts="1" generateNumberParts="1" catenateWords="1" catenateNumbers="1" catenateAll="0"/&gt;
+ &lt;filter class="solr.LowerCaseFilterFactory"/&gt;
+ &lt;filter class="solr.RemoveDuplicatesTokenFilterFactory"/&gt;
+ &lt;/analyzer&gt;
+ &lt;analyzer type="query"&gt;
+ &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+ &lt;filter class="solr.SynonymFilterFactory" synonyms="synonyms.txt" ignoreCase="true" expand="true"/&gt;
+ &lt;filter class="solr.StopFilterFactory" ignoreCase="true"/&gt;
+ &lt;filter class="solr.WordDelimiterFilterFactory" generateWordParts="1" generateNumberParts="1" catenateWords="0" catenateNumbers="0" catenateAll="0"/&gt;
+ &lt;filter class="solr.LowerCaseFilterFactory"/&gt;
+ &lt;filter class="solr.RemoveDuplicatesTokenFilterFactory"/&gt;
+ &lt;/analyzer&gt;
+ &lt;/fieldtype&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new HyphenatedWordsFilter
+ @param inArg TokenStream that will be filtered
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
 
+/*!
+ 
+ */
 - (jboolean)incrementToken;
 
+/*!
+ 
+ */
 - (void)reset;
 
 @end
@@ -40,8 +80,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter *new_OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter *create_OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter")

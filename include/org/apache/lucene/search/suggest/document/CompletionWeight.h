@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSuggestDocumentCompletionWeight_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSuggestDocumentCompletionWeight_RESTRICT
-#define OrgApacheLuceneSearchSuggestDocumentCompletionWeight_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionWeight")
+#ifdef RESTRICT_OrgApacheLuceneSearchSuggestDocumentCompletionWeight
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionWeight 0
 #else
-#define OrgApacheLuceneSearchSuggestDocumentCompletionWeight_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionWeight 1
 #endif
-#undef OrgApacheLuceneSearchSuggestDocumentCompletionWeight_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSuggestDocumentCompletionWeight
 
-#if !defined (_OrgApacheLuceneSearchSuggestDocumentCompletionWeight_) && (OrgApacheLuceneSearchSuggestDocumentCompletionWeight_INCLUDE_ALL || OrgApacheLuceneSearchSuggestDocumentCompletionWeight_INCLUDE)
-#define _OrgApacheLuceneSearchSuggestDocumentCompletionWeight_
+#if !defined (OrgApacheLuceneSearchSuggestDocumentCompletionWeight_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionWeight || defined(INCLUDE_OrgApacheLuceneSearchSuggestDocumentCompletionWeight))
+#define OrgApacheLuceneSearchSuggestDocumentCompletionWeight_
 
-#define OrgApacheLuceneSearchWeight_RESTRICT 1
-#define OrgApacheLuceneSearchWeight_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchWeight 1
+#define INCLUDE_OrgApacheLuceneSearchWeight 1
 #include "org/apache/lucene/search/Weight.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
@@ -30,10 +30,22 @@
 @protocol JavaLangCharSequence;
 @protocol JavaUtilSet;
 
+/*!
+ @brief Expert: the Weight for CompletionQuery, used to
+ score and explain these queries.
+ Subclasses can override <code>setNextMatch(IntsRef)</code>,
+ <code>boost()</code> and <code>context()</code>
+ to calculate the boost and extract the context of
+ a matched path prefix.
+ */
 @interface OrgApacheLuceneSearchSuggestDocumentCompletionWeight : OrgApacheLuceneSearchWeight
 
 #pragma mark Public
 
+/*!
+ @brief Creates a weight for <code>query</code> with an <code>automaton</code>,
+ using the <code>reader</code> for index stats
+ */
 - (instancetype)initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery:(OrgApacheLuceneSearchSuggestDocumentCompletionQuery *)query
                                   withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton;
 
@@ -44,6 +56,11 @@
 
 - (void)extractTermsWithJavaUtilSet:(id<JavaUtilSet>)terms;
 
+/*!
+ @brief Returns the automaton specified
+ by the <code>CompletionQuery</code>
+ @return query automaton
+ */
 - (OrgApacheLuceneUtilAutomatonAutomaton *)getAutomaton;
 
 - (jfloat)getValueForNormalization;
@@ -55,10 +72,25 @@
 
 #pragma mark Protected
 
+/*!
+ @brief Returns the boost of the partial path set by <code>setNextMatch(IntsRef)</code>
+ @return suggestion query-time boost
+ */
 - (jfloat)boost;
 
+/*!
+ @brief Returns the context of the partial path set by <code>setNextMatch(IntsRef)</code>
+ @return suggestion context
+ */
 - (id<JavaLangCharSequence>)context;
 
+/*!
+ @brief Set for every partial path in the index that matched the query
+ automaton.
+ Subclasses should override <code>boost()</code> and <code>context()</code>
+ to return an appropriate value with respect to the current pathPrefix.
+ @param pathPrefix the prefix of a matched path
+ */
 - (void)setNextMatchWithOrgApacheLuceneUtilIntsRef:(OrgApacheLuceneUtilIntsRef *)pathPrefix;
 
 @end
@@ -69,8 +101,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentCompletionWeight_init
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionWeight *new_OrgApacheLuceneSearchSuggestDocumentCompletionWeight_initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery_withOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneSearchSuggestDocumentCompletionQuery *query, OrgApacheLuceneUtilAutomatonAutomaton *automaton) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionWeight *create_OrgApacheLuceneSearchSuggestDocumentCompletionWeight_initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery_withOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneSearchSuggestDocumentCompletionQuery *query, OrgApacheLuceneUtilAutomatonAutomaton *automaton);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionWeight)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSuggestDocumentCompletionWeight_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionWeight")

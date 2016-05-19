@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexMergeState_INCLUDE_ALL")
-#if OrgApacheLuceneIndexMergeState_RESTRICT
-#define OrgApacheLuceneIndexMergeState_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexMergeState")
+#ifdef RESTRICT_OrgApacheLuceneIndexMergeState
+#define INCLUDE_ALL_OrgApacheLuceneIndexMergeState 0
 #else
-#define OrgApacheLuceneIndexMergeState_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexMergeState 1
 #endif
-#undef OrgApacheLuceneIndexMergeState_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexMergeState
 
-#if !defined (_OrgApacheLuceneIndexMergeState_) && (OrgApacheLuceneIndexMergeState_INCLUDE_ALL || OrgApacheLuceneIndexMergeState_INCLUDE)
-#define _OrgApacheLuceneIndexMergeState_
+#if !defined (OrgApacheLuceneIndexMergeState_) && (INCLUDE_ALL_OrgApacheLuceneIndexMergeState || defined(INCLUDE_OrgApacheLuceneIndexMergeState))
+#define OrgApacheLuceneIndexMergeState_
 
 @class IOSIntArray;
 @class IOSObjectArray;
@@ -23,25 +23,71 @@
 @class OrgApacheLuceneUtilInfoStream;
 @protocol JavaUtilList;
 
+/*!
+ @brief Holds common state used during segment merging.
+  
+ */
 @interface OrgApacheLuceneIndexMergeState : NSObject {
  @public
+  /*!
+   @brief <code>SegmentInfo</code> of the newly merged segment.
+   */
   OrgApacheLuceneIndexSegmentInfo *segmentInfo_;
+  /*!
+   @brief <code>FieldInfos</code> of the newly merged segment.
+   */
   OrgApacheLuceneIndexFieldInfos *mergeFieldInfos_;
+  /*!
+   @brief Stored field producers being merged
+   */
   IOSObjectArray *storedFieldsReaders_;
+  /*!
+   @brief Term vector producers being merged
+   */
   IOSObjectArray *termVectorsReaders_;
+  /*!
+   @brief Norms producers being merged
+   */
   IOSObjectArray *normsProducers_;
+  /*!
+   @brief DocValues producers being merged
+   */
   IOSObjectArray *docValuesProducers_;
+  /*!
+   @brief FieldInfos being merged
+   */
   IOSObjectArray *fieldInfos_;
+  /*!
+   @brief Live docs for each reader
+   */
   IOSObjectArray *liveDocs_;
+  /*!
+   @brief Maps docIDs around deletions.
+   */
   IOSObjectArray *docMaps_;
+  /*!
+   @brief Postings to merge
+   */
   IOSObjectArray *fieldsProducers_;
+  /*!
+   @brief New docID base per reader.
+   */
   IOSIntArray *docBase_;
+  /*!
+   @brief Max docs per reader
+   */
   IOSIntArray *maxDocs_;
+  /*!
+   @brief InfoStream for debugging messages.
+   */
   OrgApacheLuceneUtilInfoStream *infoStream_;
 }
 
 #pragma mark Package-Private
 
+/*!
+ @brief Sole constructor.
+ */
 - (instancetype)initWithJavaUtilList:(id<JavaUtilList>)readers
  withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)segmentInfo
    withOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream;
@@ -68,30 +114,55 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexMergeState_initWithJavaUtilList_withO
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexMergeState *new_OrgApacheLuceneIndexMergeState_initWithJavaUtilList_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneUtilInfoStream_(id<JavaUtilList> readers, OrgApacheLuceneIndexSegmentInfo *segmentInfo, OrgApacheLuceneUtilInfoStream *infoStream) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexMergeState *create_OrgApacheLuceneIndexMergeState_initWithJavaUtilList_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneUtilInfoStream_(id<JavaUtilList> readers, OrgApacheLuceneIndexSegmentInfo *segmentInfo, OrgApacheLuceneUtilInfoStream *infoStream);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergeState)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexMergeState_DocMap_) && (OrgApacheLuceneIndexMergeState_INCLUDE_ALL || OrgApacheLuceneIndexMergeState_DocMap_INCLUDE)
-#define _OrgApacheLuceneIndexMergeState_DocMap_
+#if !defined (OrgApacheLuceneIndexMergeState_DocMap_) && (INCLUDE_ALL_OrgApacheLuceneIndexMergeState || defined(INCLUDE_OrgApacheLuceneIndexMergeState_DocMap))
+#define OrgApacheLuceneIndexMergeState_DocMap_
 
 @class OrgApacheLuceneIndexCodecReader;
 @protocol OrgApacheLuceneUtilBits;
 
+/*!
+ @brief Remaps docids around deletes during merge
+ */
 @interface OrgApacheLuceneIndexMergeState_DocMap : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Creates a <code>DocMap</code> instance appropriate for
+ this reader.
+ */
 + (OrgApacheLuceneIndexMergeState_DocMap *)buildWithOrgApacheLuceneIndexCodecReader:(OrgApacheLuceneIndexCodecReader *)reader;
 
+/*!
+ @brief Returns the mapped docID corresponding to the provided one.
+ */
 - (jint)getWithInt:(jint)docID;
 
+/*!
+ @brief Returns true if there are any deletions.
+ */
 - (jboolean)hasDeletions;
 
+/*!
+ @brief Returns the total number of documents, ignoring
+ deletions.
+ */
 - (jint)maxDoc;
 
+/*!
+ @brief Returns the number of deleted documents.
+ */
 - (jint)numDeletedDocs;
 
+/*!
+ @brief Returns the number of not-deleted documents.
+ */
 - (jint)numDocs;
 
 #pragma mark Package-Private
@@ -115,4 +186,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergeState_DocMap)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexMergeState_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexMergeState")

@@ -33,18 +33,18 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)mergeWithOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState {
-  id<JavaUtilList> fields = [new_JavaUtilArrayList_init() autorelease];
-  id<JavaUtilList> slices = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> fields = create_JavaUtilArrayList_init();
+  id<JavaUtilList> slices = create_JavaUtilArrayList_init();
   jint docBase = 0;
   for (jint readerIndex = 0; readerIndex < ((IOSObjectArray *) nil_chk(((OrgApacheLuceneIndexMergeState *) nil_chk(mergeState))->fieldsProducers_))->size_; readerIndex++) {
     OrgApacheLuceneCodecsFieldsProducer *f = IOSObjectArray_Get(mergeState->fieldsProducers_, readerIndex);
     jint maxDoc = IOSIntArray_Get(nil_chk(mergeState->maxDocs_), readerIndex);
     [((OrgApacheLuceneCodecsFieldsProducer *) nil_chk(f)) checkIntegrity];
-    [slices addWithId:[new_OrgApacheLuceneIndexReaderSlice_initWithInt_withInt_withInt_(docBase, maxDoc, readerIndex) autorelease]];
+    [slices addWithId:create_OrgApacheLuceneIndexReaderSlice_initWithInt_withInt_withInt_(docBase, maxDoc, readerIndex)];
     [fields addWithId:f];
     docBase += maxDoc;
   }
-  OrgApacheLuceneIndexFields *mergedFields = [new_OrgApacheLuceneIndexMappedMultiFields_initWithOrgApacheLuceneIndexMergeState_withOrgApacheLuceneIndexMultiFields_(mergeState, [new_OrgApacheLuceneIndexMultiFields_initWithOrgApacheLuceneIndexFieldsArray_withOrgApacheLuceneIndexReaderSliceArray_([fields toArrayWithNSObjectArray:JreLoadStatic(OrgApacheLuceneIndexFields, EMPTY_ARRAY_)], [slices toArrayWithNSObjectArray:JreLoadStatic(OrgApacheLuceneIndexReaderSlice, EMPTY_ARRAY_)]) autorelease]) autorelease];
+  OrgApacheLuceneIndexFields *mergedFields = create_OrgApacheLuceneIndexMappedMultiFields_initWithOrgApacheLuceneIndexMergeState_withOrgApacheLuceneIndexMultiFields_(mergeState, create_OrgApacheLuceneIndexMultiFields_initWithOrgApacheLuceneIndexFieldsArray_withOrgApacheLuceneIndexReaderSliceArray_([fields toArrayWithNSObjectArray:JreLoadStatic(OrgApacheLuceneIndexFields, EMPTY_ARRAY)], [slices toArrayWithNSObjectArray:JreLoadStatic(OrgApacheLuceneIndexReaderSlice, EMPTY_ARRAY)]));
   [self writeWithOrgApacheLuceneIndexFields:mergedFields];
 }
 

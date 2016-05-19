@@ -76,7 +76,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreTrackingDirectoryWrapper, createdFileNam
     { "createOutputWithNSString:withOrgApacheLuceneStoreIOContext:", "createOutput", "Lorg.apache.lucene.store.IndexOutput;", 0x1, "Ljava.io.IOException;", NULL },
     { "copyFromWithOrgApacheLuceneStoreDirectory:withNSString:withNSString:withOrgApacheLuceneStoreIOContext:", "copyFrom", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "renameFileWithNSString:withNSString:", "renameFile", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "getCreatedFiles", NULL, "Ljava.util.Set;", 0x1, NULL, NULL },
+    { "getCreatedFiles", NULL, "Ljava.util.Set;", 0x1, NULL, "()Ljava/util/Set<Ljava/lang/String;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "createdFileNames_", NULL, 0x12, "Ljava.util.Set;", NULL, "Ljava/util/Set<Ljava/lang/String;>;", .constantValue.asLong = 0 },
@@ -89,13 +89,15 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreTrackingDirectoryWrapper, createdFileNam
 
 void OrgApacheLuceneStoreTrackingDirectoryWrapper_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreTrackingDirectoryWrapper *self, OrgApacheLuceneStoreDirectory *inArg) {
   OrgApacheLuceneStoreFilterDirectory_initWithOrgApacheLuceneStoreDirectory_(self, inArg);
-  JreStrongAssign(&self->createdFileNames_, JavaUtilCollections_synchronizedSetWithJavaUtilSet_([new_JavaUtilHashSet_init() autorelease]));
+  JreStrongAssign(&self->createdFileNames_, JavaUtilCollections_synchronizedSetWithJavaUtilSet_(create_JavaUtilHashSet_init()));
 }
 
 OrgApacheLuceneStoreTrackingDirectoryWrapper *new_OrgApacheLuceneStoreTrackingDirectoryWrapper_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *inArg) {
-  OrgApacheLuceneStoreTrackingDirectoryWrapper *self = [OrgApacheLuceneStoreTrackingDirectoryWrapper alloc];
-  OrgApacheLuceneStoreTrackingDirectoryWrapper_initWithOrgApacheLuceneStoreDirectory_(self, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreTrackingDirectoryWrapper, initWithOrgApacheLuceneStoreDirectory_, inArg)
+}
+
+OrgApacheLuceneStoreTrackingDirectoryWrapper *create_OrgApacheLuceneStoreTrackingDirectoryWrapper_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreTrackingDirectoryWrapper, initWithOrgApacheLuceneStoreDirectory_, inArg)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreTrackingDirectoryWrapper)

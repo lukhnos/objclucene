@@ -24,22 +24,20 @@
   jboolean storeTermVectorPositions_;
   jboolean storeTermVectorPayloads_;
   jboolean omitNorms_;
-  OrgApacheLuceneIndexIndexOptionsEnum *indexOptions_;
-  OrgApacheLuceneDocumentFieldType_NumericTypeEnum *numericType_;
+  OrgApacheLuceneIndexIndexOptions *indexOptions_;
+  OrgApacheLuceneDocumentFieldType_NumericType *numericType_;
   jboolean frozen_;
   jint numericPrecisionStep_;
-  OrgApacheLuceneIndexDocValuesTypeEnum *docValuesType_;
+  OrgApacheLuceneIndexDocValuesType *docValuesType_;
 }
 
 @end
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneDocumentFieldType, indexOptions_, OrgApacheLuceneIndexIndexOptionsEnum *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneDocumentFieldType, numericType_, OrgApacheLuceneDocumentFieldType_NumericTypeEnum *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneDocumentFieldType, docValuesType_, OrgApacheLuceneIndexDocValuesTypeEnum *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneDocumentFieldType, indexOptions_, OrgApacheLuceneIndexIndexOptions *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneDocumentFieldType, numericType_, OrgApacheLuceneDocumentFieldType_NumericType *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneDocumentFieldType, docValuesType_, OrgApacheLuceneIndexDocValuesType *)
 
-__attribute__((unused)) static void OrgApacheLuceneDocumentFieldType_NumericTypeEnum_initWithNSString_withInt_(OrgApacheLuceneDocumentFieldType_NumericTypeEnum *self, NSString *__name, jint __ordinal);
-
-__attribute__((unused)) static OrgApacheLuceneDocumentFieldType_NumericTypeEnum *new_OrgApacheLuceneDocumentFieldType_NumericTypeEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
+__attribute__((unused)) static void OrgApacheLuceneDocumentFieldType_NumericType_initWithNSString_withInt_(OrgApacheLuceneDocumentFieldType_NumericType *self, NSString *__name, jint __ordinal);
 
 @implementation OrgApacheLuceneDocumentFieldType
 
@@ -57,7 +55,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)checkIfFrozen {
   if (frozen_) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"this FieldType is already frozen and cannot be changed") autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"this FieldType is already frozen and cannot be changed");
   }
 }
 
@@ -128,31 +126,31 @@ J2OBJC_IGNORE_DESIGNATED_END
   self->omitNorms_ = value;
 }
 
-- (OrgApacheLuceneIndexIndexOptionsEnum *)indexOptions {
+- (OrgApacheLuceneIndexIndexOptions *)indexOptions {
   return self->indexOptions_;
 }
 
-- (void)setIndexOptionsWithOrgApacheLuceneIndexIndexOptionsEnum:(OrgApacheLuceneIndexIndexOptionsEnum *)value {
+- (void)setIndexOptionsWithOrgApacheLuceneIndexIndexOptions:(OrgApacheLuceneIndexIndexOptions *)value {
   [self checkIfFrozen];
   if (value == nil) {
-    @throw [new_JavaLangNullPointerException_initWithNSString_(@"IndexOptions cannot be null") autorelease];
+    @throw create_JavaLangNullPointerException_initWithNSString_(@"IndexOptions cannot be null");
   }
   JreStrongAssign(&self->indexOptions_, value);
 }
 
-- (void)setNumericTypeWithOrgApacheLuceneDocumentFieldType_NumericTypeEnum:(OrgApacheLuceneDocumentFieldType_NumericTypeEnum *)type {
+- (void)setNumericTypeWithOrgApacheLuceneDocumentFieldType_NumericType:(OrgApacheLuceneDocumentFieldType_NumericType *)type {
   [self checkIfFrozen];
   JreStrongAssign(&numericType_, type);
 }
 
-- (OrgApacheLuceneDocumentFieldType_NumericTypeEnum *)numericType {
+- (OrgApacheLuceneDocumentFieldType_NumericType *)numericType {
   return numericType_;
 }
 
 - (void)setNumericPrecisionStepWithInt:(jint)precisionStep {
   [self checkIfFrozen];
   if (precisionStep < 1) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$IC", @"precisionStep must be >= 1 (got ", precisionStep, ')')) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$IC", @"precisionStep must be >= 1 (got ", precisionStep, ')'));
   }
   self->numericPrecisionStep_ = precisionStep;
 }
@@ -162,11 +160,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (NSString *)description {
-  JavaLangStringBuilder *result = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *result = create_JavaLangStringBuilder_init();
   if ([self stored]) {
     [result appendWithNSString:@"stored"];
   }
-  if (indexOptions_ != JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE)) {
+  if (indexOptions_ != JreLoadEnum(OrgApacheLuceneIndexIndexOptions, NONE)) {
     if ([result length] > 0) [result appendWithNSString:@","];
     [result appendWithNSString:@"indexed"];
     if ([self tokenized]) {
@@ -187,7 +185,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     if ([self omitNorms]) {
       [result appendWithNSString:@",omitNorms"];
     }
-    if (indexOptions_ != JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS)) {
+    if (indexOptions_ != JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS)) {
       [result appendWithNSString:@",indexOptions="];
       [result appendWithId:indexOptions_];
     }
@@ -198,7 +196,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       [result appendWithInt:numericPrecisionStep_];
     }
   }
-  if (docValuesType_ != JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, NONE)) {
+  if (docValuesType_ != JreLoadEnum(OrgApacheLuceneIndexDocValuesType, NONE)) {
     if ([result length] > 0) {
       [result appendWithNSString:@","];
     }
@@ -208,14 +206,14 @@ J2OBJC_IGNORE_DESIGNATED_END
   return [result description];
 }
 
-- (OrgApacheLuceneIndexDocValuesTypeEnum *)docValuesType {
+- (OrgApacheLuceneIndexDocValuesType *)docValuesType {
   return docValuesType_;
 }
 
-- (void)setDocValuesTypeWithOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum *)type {
+- (void)setDocValuesTypeWithOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)type {
   [self checkIfFrozen];
   if (type == nil) {
-    @throw [new_JavaLangNullPointerException_initWithNSString_(@"DocValuesType cannot be null") autorelease];
+    @throw create_JavaLangNullPointerException_initWithNSString_(@"DocValuesType cannot be null");
   }
   JreStrongAssign(&docValuesType_, type);
 }
@@ -223,10 +221,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (NSUInteger)hash {
   jint prime = 31;
   jint result = 1;
-  result = prime * result + ((docValuesType_ == nil) ? 0 : ((jint) [docValuesType_ hash]));
-  result = prime * result + ((jint) [((OrgApacheLuceneIndexIndexOptionsEnum *) nil_chk(indexOptions_)) hash]);
+  result = prime * result + ((docValuesType_ == nil) ? 0 : ((jint) [((OrgApacheLuceneIndexDocValuesType *) nil_chk(docValuesType_)) hash]));
+  result = prime * result + ((jint) [((OrgApacheLuceneIndexIndexOptions *) nil_chk(indexOptions_)) hash]);
   result = prime * result + numericPrecisionStep_;
-  result = prime * result + ((numericType_ == nil) ? 0 : ((jint) [numericType_ hash]));
+  result = prime * result + ((numericType_ == nil) ? 0 : ((jint) [((OrgApacheLuceneDocumentFieldType_NumericType *) nil_chk(numericType_)) hash]));
   result = prime * result + (omitNorms_ ? 1231 : 1237);
   result = prime * result + (storeTermVectorOffsets_ ? 1231 : 1237);
   result = prime * result + (storeTermVectorPayloads_ ? 1231 : 1237);
@@ -240,8 +238,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (jboolean)isEqual:(id)obj {
   if (self == obj) return true;
   if (obj == nil) return false;
-  if ([self getClass] != [nil_chk(obj) getClass]) return false;
-  OrgApacheLuceneDocumentFieldType *other = (OrgApacheLuceneDocumentFieldType *) check_class_cast(obj, [OrgApacheLuceneDocumentFieldType class]);
+  if ([self getClass] != (id) [obj getClass]) return false;
+  OrgApacheLuceneDocumentFieldType *other = (OrgApacheLuceneDocumentFieldType *) cast_chk(obj, [OrgApacheLuceneDocumentFieldType class]);
   if (docValuesType_ != other->docValuesType_) return false;
   if (indexOptions_ != other->indexOptions_) return false;
   if (numericPrecisionStep_ != other->numericPrecisionStep_) return false;
@@ -284,14 +282,14 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "omitNorms", NULL, "Z", 0x1, NULL, NULL },
     { "setOmitNormsWithBoolean:", "setOmitNorms", "V", 0x1, NULL, NULL },
     { "indexOptions", NULL, "Lorg.apache.lucene.index.IndexOptions;", 0x1, NULL, NULL },
-    { "setIndexOptionsWithOrgApacheLuceneIndexIndexOptionsEnum:", "setIndexOptions", "V", 0x1, NULL, NULL },
-    { "setNumericTypeWithOrgApacheLuceneDocumentFieldType_NumericTypeEnum:", "setNumericType", "V", 0x1, NULL, NULL },
+    { "setIndexOptionsWithOrgApacheLuceneIndexIndexOptions:", "setIndexOptions", "V", 0x1, NULL, NULL },
+    { "setNumericTypeWithOrgApacheLuceneDocumentFieldType_NumericType:", "setNumericType", "V", 0x1, NULL, NULL },
     { "numericType", NULL, "Lorg.apache.lucene.document.FieldType$NumericType;", 0x1, NULL, NULL },
     { "setNumericPrecisionStepWithInt:", "setNumericPrecisionStep", "V", 0x1, NULL, NULL },
     { "numericPrecisionStep", NULL, "I", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x11, NULL, NULL },
     { "docValuesType", NULL, "Lorg.apache.lucene.index.DocValuesType;", 0x1, NULL, NULL },
-    { "setDocValuesTypeWithOrgApacheLuceneIndexDocValuesTypeEnum:", "setDocValuesType", "V", 0x1, NULL, NULL },
+    { "setDocValuesTypeWithOrgApacheLuceneIndexDocValuesType:", "setDocValuesType", "V", 0x1, NULL, NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
   };
@@ -319,9 +317,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 void OrgApacheLuceneDocumentFieldType_initWithOrgApacheLuceneDocumentFieldType_(OrgApacheLuceneDocumentFieldType *self, OrgApacheLuceneDocumentFieldType *ref) {
   NSObject_init(self);
   self->tokenized_ = true;
-  JreStrongAssign(&self->indexOptions_, JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE));
+  JreStrongAssign(&self->indexOptions_, JreLoadEnum(OrgApacheLuceneIndexIndexOptions, NONE));
   self->numericPrecisionStep_ = OrgApacheLuceneUtilNumericUtils_PRECISION_STEP_DEFAULT;
-  JreStrongAssign(&self->docValuesType_, JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, NONE));
+  JreStrongAssign(&self->docValuesType_, JreLoadEnum(OrgApacheLuceneIndexDocValuesType, NONE));
   self->stored_ = [((OrgApacheLuceneDocumentFieldType *) nil_chk(ref)) stored];
   self->tokenized_ = [ref tokenized];
   self->storeTermVectors_ = [ref storeTermVectors];
@@ -336,56 +334,114 @@ void OrgApacheLuceneDocumentFieldType_initWithOrgApacheLuceneDocumentFieldType_(
 }
 
 OrgApacheLuceneDocumentFieldType *new_OrgApacheLuceneDocumentFieldType_initWithOrgApacheLuceneDocumentFieldType_(OrgApacheLuceneDocumentFieldType *ref) {
-  OrgApacheLuceneDocumentFieldType *self = [OrgApacheLuceneDocumentFieldType alloc];
-  OrgApacheLuceneDocumentFieldType_initWithOrgApacheLuceneDocumentFieldType_(self, ref);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentFieldType, initWithOrgApacheLuceneDocumentFieldType_, ref)
+}
+
+OrgApacheLuceneDocumentFieldType *create_OrgApacheLuceneDocumentFieldType_initWithOrgApacheLuceneDocumentFieldType_(OrgApacheLuceneDocumentFieldType *ref) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentFieldType, initWithOrgApacheLuceneDocumentFieldType_, ref)
 }
 
 void OrgApacheLuceneDocumentFieldType_init(OrgApacheLuceneDocumentFieldType *self) {
   NSObject_init(self);
   self->tokenized_ = true;
-  JreStrongAssign(&self->indexOptions_, JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE));
+  JreStrongAssign(&self->indexOptions_, JreLoadEnum(OrgApacheLuceneIndexIndexOptions, NONE));
   self->numericPrecisionStep_ = OrgApacheLuceneUtilNumericUtils_PRECISION_STEP_DEFAULT;
-  JreStrongAssign(&self->docValuesType_, JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, NONE));
+  JreStrongAssign(&self->docValuesType_, JreLoadEnum(OrgApacheLuceneIndexDocValuesType, NONE));
 }
 
 OrgApacheLuceneDocumentFieldType *new_OrgApacheLuceneDocumentFieldType_init() {
-  OrgApacheLuceneDocumentFieldType *self = [OrgApacheLuceneDocumentFieldType alloc];
-  OrgApacheLuceneDocumentFieldType_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentFieldType, init)
+}
+
+OrgApacheLuceneDocumentFieldType *create_OrgApacheLuceneDocumentFieldType_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentFieldType, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentFieldType)
 
-J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneDocumentFieldType_NumericTypeEnum)
+J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneDocumentFieldType_NumericType)
 
-OrgApacheLuceneDocumentFieldType_NumericTypeEnum *OrgApacheLuceneDocumentFieldType_NumericTypeEnum_values_[4];
+OrgApacheLuceneDocumentFieldType_NumericType *OrgApacheLuceneDocumentFieldType_NumericType_values_[4];
 
-@implementation OrgApacheLuceneDocumentFieldType_NumericTypeEnum
+@implementation OrgApacheLuceneDocumentFieldType_NumericType
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgApacheLuceneDocumentFieldType_NumericTypeEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
++ (OrgApacheLuceneDocumentFieldType_NumericType *)INT {
+  return JreEnum(OrgApacheLuceneDocumentFieldType_NumericType, INT);
 }
 
-IOSObjectArray *OrgApacheLuceneDocumentFieldType_NumericTypeEnum_values() {
-  OrgApacheLuceneDocumentFieldType_NumericTypeEnum_initialize();
-  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneDocumentFieldType_NumericTypeEnum_values_ count:4 type:OrgApacheLuceneDocumentFieldType_NumericTypeEnum_class_()];
++ (OrgApacheLuceneDocumentFieldType_NumericType *)LONG {
+  return JreEnum(OrgApacheLuceneDocumentFieldType_NumericType, LONG);
+}
+
++ (OrgApacheLuceneDocumentFieldType_NumericType *)FLOAT {
+  return JreEnum(OrgApacheLuceneDocumentFieldType_NumericType, FLOAT);
+}
+
++ (OrgApacheLuceneDocumentFieldType_NumericType *)DOUBLE {
+  return JreEnum(OrgApacheLuceneDocumentFieldType_NumericType, DOUBLE);
 }
 
 + (IOSObjectArray *)values {
-  return OrgApacheLuceneDocumentFieldType_NumericTypeEnum_values();
+  return OrgApacheLuceneDocumentFieldType_NumericType_values();
 }
 
-+ (OrgApacheLuceneDocumentFieldType_NumericTypeEnum *)valueOfWithNSString:(NSString *)name {
-  return OrgApacheLuceneDocumentFieldType_NumericTypeEnum_valueOfWithNSString_(name);
++ (OrgApacheLuceneDocumentFieldType_NumericType *)valueOfWithNSString:(NSString *)name {
+  return OrgApacheLuceneDocumentFieldType_NumericType_valueOfWithNSString_(name);
 }
 
-OrgApacheLuceneDocumentFieldType_NumericTypeEnum *OrgApacheLuceneDocumentFieldType_NumericTypeEnum_valueOfWithNSString_(NSString *name) {
-  OrgApacheLuceneDocumentFieldType_NumericTypeEnum_initialize();
+- (OrgApacheLuceneDocumentFieldType_NumericType_Enum)toNSEnum {
+  return (OrgApacheLuceneDocumentFieldType_NumericType_Enum)[self ordinal];
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+  return self;
+}
+
++ (void)initialize {
+  if (self == [OrgApacheLuceneDocumentFieldType_NumericType class]) {
+    size_t objSize = class_getInstanceSize(self);
+    size_t allocSize = 4 * objSize;
+    uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
+    id e;
+    (JreEnum(OrgApacheLuceneDocumentFieldType_NumericType, INT) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneDocumentFieldType_NumericType_initWithNSString_withInt_(e, @"INT", 0);
+    (JreEnum(OrgApacheLuceneDocumentFieldType_NumericType, LONG) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneDocumentFieldType_NumericType_initWithNSString_withInt_(e, @"LONG", 1);
+    (JreEnum(OrgApacheLuceneDocumentFieldType_NumericType, FLOAT) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneDocumentFieldType_NumericType_initWithNSString_withInt_(e, @"FLOAT", 2);
+    (JreEnum(OrgApacheLuceneDocumentFieldType_NumericType, DOUBLE) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneDocumentFieldType_NumericType_initWithNSString_withInt_(e, @"DOUBLE", 3);
+    J2OBJC_SET_INITIALIZED(OrgApacheLuceneDocumentFieldType_NumericType)
+  }
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static const J2ObjcFieldInfo fields[] = {
+    { "INT", "INT", 0x4019, "Lorg.apache.lucene.document.FieldType$NumericType;", &JreEnum(OrgApacheLuceneDocumentFieldType_NumericType, INT), NULL, .constantValue.asLong = 0 },
+    { "LONG", "LONG", 0x4019, "Lorg.apache.lucene.document.FieldType$NumericType;", &JreEnum(OrgApacheLuceneDocumentFieldType_NumericType, LONG), NULL, .constantValue.asLong = 0 },
+    { "FLOAT", "FLOAT", 0x4019, "Lorg.apache.lucene.document.FieldType$NumericType;", &JreEnum(OrgApacheLuceneDocumentFieldType_NumericType, FLOAT), NULL, .constantValue.asLong = 0 },
+    { "DOUBLE", "DOUBLE", 0x4019, "Lorg.apache.lucene.document.FieldType$NumericType;", &JreEnum(OrgApacheLuceneDocumentFieldType_NumericType, DOUBLE), NULL, .constantValue.asLong = 0 },
+  };
+  static const char *superclass_type_args[] = {"Lorg.apache.lucene.document.FieldType$NumericType;"};
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentFieldType_NumericType = { 2, "NumericType", "org.apache.lucene.document", "FieldType", 0x4019, 0, NULL, 4, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/document/FieldType$NumericType;>;" };
+  return &_OrgApacheLuceneDocumentFieldType_NumericType;
+}
+
+@end
+
+void OrgApacheLuceneDocumentFieldType_NumericType_initWithNSString_withInt_(OrgApacheLuceneDocumentFieldType_NumericType *self, NSString *__name, jint __ordinal) {
+  JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
+}
+
+IOSObjectArray *OrgApacheLuceneDocumentFieldType_NumericType_values() {
+  OrgApacheLuceneDocumentFieldType_NumericType_initialize();
+  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneDocumentFieldType_NumericType_values_ count:4 type:OrgApacheLuceneDocumentFieldType_NumericType_class_()];
+}
+
+OrgApacheLuceneDocumentFieldType_NumericType *OrgApacheLuceneDocumentFieldType_NumericType_valueOfWithNSString_(NSString *name) {
+  OrgApacheLuceneDocumentFieldType_NumericType_initialize();
   for (int i = 0; i < 4; i++) {
-    OrgApacheLuceneDocumentFieldType_NumericTypeEnum *e = OrgApacheLuceneDocumentFieldType_NumericTypeEnum_values_[i];
+    OrgApacheLuceneDocumentFieldType_NumericType *e = OrgApacheLuceneDocumentFieldType_NumericType_values_[i];
     if ([name isEqual:[e name]]) {
       return e;
     }
@@ -394,42 +450,12 @@ OrgApacheLuceneDocumentFieldType_NumericTypeEnum *OrgApacheLuceneDocumentFieldTy
   return nil;
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return [self retain];
-}
-
-+ (void)initialize {
-  if (self == [OrgApacheLuceneDocumentFieldType_NumericTypeEnum class]) {
-    OrgApacheLuceneDocumentFieldType_NumericTypeEnum_INT = new_OrgApacheLuceneDocumentFieldType_NumericTypeEnum_initWithNSString_withInt_(@"INT", 0);
-    OrgApacheLuceneDocumentFieldType_NumericTypeEnum_LONG = new_OrgApacheLuceneDocumentFieldType_NumericTypeEnum_initWithNSString_withInt_(@"LONG", 1);
-    OrgApacheLuceneDocumentFieldType_NumericTypeEnum_FLOAT = new_OrgApacheLuceneDocumentFieldType_NumericTypeEnum_initWithNSString_withInt_(@"FLOAT", 2);
-    OrgApacheLuceneDocumentFieldType_NumericTypeEnum_DOUBLE = new_OrgApacheLuceneDocumentFieldType_NumericTypeEnum_initWithNSString_withInt_(@"DOUBLE", 3);
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneDocumentFieldType_NumericTypeEnum)
+OrgApacheLuceneDocumentFieldType_NumericType *OrgApacheLuceneDocumentFieldType_NumericType_fromOrdinal(NSUInteger ordinal) {
+  OrgApacheLuceneDocumentFieldType_NumericType_initialize();
+  if (ordinal >= 4) {
+    return nil;
   }
+  return OrgApacheLuceneDocumentFieldType_NumericType_values_[ordinal];
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcFieldInfo fields[] = {
-    { "INT", "INT", 0x4019, "Lorg.apache.lucene.document.FieldType$NumericType;", &OrgApacheLuceneDocumentFieldType_NumericTypeEnum_INT, NULL, .constantValue.asLong = 0 },
-    { "LONG", "LONG", 0x4019, "Lorg.apache.lucene.document.FieldType$NumericType;", &OrgApacheLuceneDocumentFieldType_NumericTypeEnum_LONG, NULL, .constantValue.asLong = 0 },
-    { "FLOAT", "FLOAT", 0x4019, "Lorg.apache.lucene.document.FieldType$NumericType;", &OrgApacheLuceneDocumentFieldType_NumericTypeEnum_FLOAT, NULL, .constantValue.asLong = 0 },
-    { "DOUBLE", "DOUBLE", 0x4019, "Lorg.apache.lucene.document.FieldType$NumericType;", &OrgApacheLuceneDocumentFieldType_NumericTypeEnum_DOUBLE, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.document.FieldType$NumericType;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentFieldType_NumericTypeEnum = { 2, "NumericType", "org.apache.lucene.document", "FieldType", 0x4019, 0, NULL, 4, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/document/FieldType$NumericType;>;" };
-  return &_OrgApacheLuceneDocumentFieldType_NumericTypeEnum;
-}
-
-@end
-
-void OrgApacheLuceneDocumentFieldType_NumericTypeEnum_initWithNSString_withInt_(OrgApacheLuceneDocumentFieldType_NumericTypeEnum *self, NSString *__name, jint __ordinal) {
-  JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
-}
-
-OrgApacheLuceneDocumentFieldType_NumericTypeEnum *new_OrgApacheLuceneDocumentFieldType_NumericTypeEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  OrgApacheLuceneDocumentFieldType_NumericTypeEnum *self = [OrgApacheLuceneDocumentFieldType_NumericTypeEnum alloc];
-  OrgApacheLuceneDocumentFieldType_NumericTypeEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentFieldType_NumericTypeEnum)
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentFieldType_NumericType)

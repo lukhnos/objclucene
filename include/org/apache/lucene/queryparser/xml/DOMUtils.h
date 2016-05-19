@@ -5,22 +5,25 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserXmlDOMUtils_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserXmlDOMUtils_RESTRICT
-#define OrgApacheLuceneQueryparserXmlDOMUtils_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlDOMUtils")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserXmlDOMUtils
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlDOMUtils 0
 #else
-#define OrgApacheLuceneQueryparserXmlDOMUtils_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlDOMUtils 1
 #endif
-#undef OrgApacheLuceneQueryparserXmlDOMUtils_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserXmlDOMUtils
 
-#if !defined (_OrgApacheLuceneQueryparserXmlDOMUtils_) && (OrgApacheLuceneQueryparserXmlDOMUtils_INCLUDE_ALL || OrgApacheLuceneQueryparserXmlDOMUtils_INCLUDE)
-#define _OrgApacheLuceneQueryparserXmlDOMUtils_
+#if !defined (OrgApacheLuceneQueryparserXmlDOMUtils_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlDOMUtils || defined(INCLUDE_OrgApacheLuceneQueryparserXmlDOMUtils))
+#define OrgApacheLuceneQueryparserXmlDOMUtils_
 
 @class JavaIoReader;
 @protocol OrgW3cDomDocument;
 @protocol OrgW3cDomElement;
 @protocol OrgW3cDomNode;
 
+/*!
+ @brief Helper methods for parsing XML
+ */
 @interface OrgApacheLuceneQueryparserXmlDOMUtils : NSObject
 
 #pragma mark Public
@@ -46,6 +49,10 @@
 + (NSString *)getAttributeOrFailWithOrgW3cDomElement:(id<OrgW3cDomElement>)e
                                         withNSString:(NSString *)name;
 
+/*!
+ @brief Returns an attribute value from this node, or first parent node with this attribute defined
+ @return A non-zero-length value if defined, otherwise null
+ */
 + (NSString *)getAttributeWithInheritanceWithOrgW3cDomElement:(id<OrgW3cDomElement>)element
                                                  withNSString:(NSString *)attributeName;
 
@@ -73,6 +80,11 @@
                                            withNSString:(NSString *)tagName
                                            withNSString:(NSString *)text;
 
+/*!
+ @brief Helper method to parse an XML file into a DOM tree, given a reader.
+ @param is reader of the XML file to be parsed
+ @return an org.w3c.dom.Document object
+ */
 + (id<OrgW3cDomDocument>)loadXMLWithJavaIoReader:(JavaIoReader *)is;
 
 @end
@@ -115,8 +127,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlDOMUtils_init(OrgApacheLucen
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlDOMUtils *new_OrgApacheLuceneQueryparserXmlDOMUtils_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlDOMUtils *create_OrgApacheLuceneQueryparserXmlDOMUtils_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlDOMUtils)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserXmlDOMUtils_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlDOMUtils")

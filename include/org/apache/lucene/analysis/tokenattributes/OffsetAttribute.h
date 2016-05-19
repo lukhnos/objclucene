@@ -5,28 +5,55 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_RESTRICT
-#define OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesOffsetAttribute")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisTokenattributesOffsetAttribute
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesOffsetAttribute 0
 #else
-#define OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesOffsetAttribute 1
 #endif
-#undef OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisTokenattributesOffsetAttribute
 
-#if !defined (_OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_) && (OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_INCLUDE_ALL || OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_INCLUDE)
-#define _OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_
+#if !defined (OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesOffsetAttribute || defined(INCLUDE_OrgApacheLuceneAnalysisTokenattributesOffsetAttribute))
+#define OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_
 
-#define OrgApacheLuceneUtilAttribute_RESTRICT 1
-#define OrgApacheLuceneUtilAttribute_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAttribute 1
+#define INCLUDE_OrgApacheLuceneUtilAttribute 1
 #include "org/apache/lucene/util/Attribute.h"
 
+/*!
+ @brief The start and end character offset of a Token.
+ */
 @protocol OrgApacheLuceneAnalysisTokenattributesOffsetAttribute < OrgApacheLuceneUtilAttribute, NSObject, JavaObject >
 
+/*!
+ @brief Returns this Token's starting offset, the position of the first character
+ corresponding to this token in the source text.
+ <p>
+ Note that the difference between <code>endOffset()</code> and <code>startOffset()</code> 
+ may not be equal to termText.length(), as the term text may have been altered by a
+ stemmer or some other filter.
+ - seealso: #setOffset(int,int)
+ */
 - (jint)startOffset;
 
+/*!
+ @brief Set the starting and ending offset.
+ @throws IllegalArgumentException If <code>startOffset</code> or <code>endOffset</code>
+ are negative, or if <code>startOffset</code> is greater than 
+ <code>endOffset</code>
+ - seealso: #startOffset()
+ - seealso: #endOffset()
+ */
 - (void)setOffsetWithInt:(jint)startOffset
                  withInt:(jint)endOffset;
 
+/*!
+ @brief Returns this Token's ending offset, one greater than the position of the
+ last character corresponding to this token in the source text.
+ The length
+ of the token in the source text is (<code>endOffset()</code> - <code>startOffset()</code>). 
+ - seealso: #setOffset(int,int)
+ */
 - (jint)endOffset;
 
 @end
@@ -37,4 +64,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenattributesOffsetAttribute
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesOffsetAttribute")

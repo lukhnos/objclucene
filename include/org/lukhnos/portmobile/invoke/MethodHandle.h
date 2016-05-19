@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgLukhnosPortmobileInvokeMethodHandle_INCLUDE_ALL")
-#if OrgLukhnosPortmobileInvokeMethodHandle_RESTRICT
-#define OrgLukhnosPortmobileInvokeMethodHandle_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgLukhnosPortmobileInvokeMethodHandle")
+#ifdef RESTRICT_OrgLukhnosPortmobileInvokeMethodHandle
+#define INCLUDE_ALL_OrgLukhnosPortmobileInvokeMethodHandle 0
 #else
-#define OrgLukhnosPortmobileInvokeMethodHandle_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgLukhnosPortmobileInvokeMethodHandle 1
 #endif
-#undef OrgLukhnosPortmobileInvokeMethodHandle_RESTRICT
-#if OrgLukhnosPortmobileInvokeMethodHandle_NoArgsConstructor_INCLUDE
-#define OrgLukhnosPortmobileInvokeMethodHandle_INCLUDE 1
+#undef RESTRICT_OrgLukhnosPortmobileInvokeMethodHandle
+#ifdef INCLUDE_OrgLukhnosPortmobileInvokeMethodHandle_NoArgsConstructor
+#define INCLUDE_OrgLukhnosPortmobileInvokeMethodHandle 1
 #endif
 
-#if !defined (_OrgLukhnosPortmobileInvokeMethodHandle_) && (OrgLukhnosPortmobileInvokeMethodHandle_INCLUDE_ALL || OrgLukhnosPortmobileInvokeMethodHandle_INCLUDE)
-#define _OrgLukhnosPortmobileInvokeMethodHandle_
+#if !defined (OrgLukhnosPortmobileInvokeMethodHandle_) && (INCLUDE_ALL_OrgLukhnosPortmobileInvokeMethodHandle || defined(INCLUDE_OrgLukhnosPortmobileInvokeMethodHandle))
+#define OrgLukhnosPortmobileInvokeMethodHandle_
 
 @class OrgLukhnosPortmobileInvokeMethodType;
 
@@ -41,8 +41,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileInvokeMethodHandle)
 
 #endif
 
-#if !defined (_OrgLukhnosPortmobileInvokeMethodHandle_NoArgsConstructor_) && (OrgLukhnosPortmobileInvokeMethodHandle_INCLUDE_ALL || OrgLukhnosPortmobileInvokeMethodHandle_NoArgsConstructor_INCLUDE)
-#define _OrgLukhnosPortmobileInvokeMethodHandle_NoArgsConstructor_
+#if !defined (OrgLukhnosPortmobileInvokeMethodHandle_NoArgsConstructor_) && (INCLUDE_ALL_OrgLukhnosPortmobileInvokeMethodHandle || defined(INCLUDE_OrgLukhnosPortmobileInvokeMethodHandle_NoArgsConstructor))
+#define OrgLukhnosPortmobileInvokeMethodHandle_NoArgsConstructor_
 
 @class IOSClass;
 @class OrgLukhnosPortmobileInvokeMethodHandle;
@@ -73,8 +73,10 @@ FOUNDATION_EXPORT void OrgLukhnosPortmobileInvokeMethodHandle_NoArgsConstructor_
 
 FOUNDATION_EXPORT OrgLukhnosPortmobileInvokeMethodHandle_NoArgsConstructor *new_OrgLukhnosPortmobileInvokeMethodHandle_NoArgsConstructor_initWithIOSClass_(IOSClass *clazz) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgLukhnosPortmobileInvokeMethodHandle_NoArgsConstructor *create_OrgLukhnosPortmobileInvokeMethodHandle_NoArgsConstructor_initWithIOSClass_(IOSClass *clazz);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileInvokeMethodHandle_NoArgsConstructor)
 
 #endif
 
-#pragma pop_macro("OrgLukhnosPortmobileInvokeMethodHandle_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileInvokeMethodHandle")

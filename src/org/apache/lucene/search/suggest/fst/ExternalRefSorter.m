@@ -57,8 +57,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenc
 }
 
 - (void)addWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)utf8 {
-  if (writer_ == nil) @throw [new_JavaLangIllegalStateException_init() autorelease];
-  [((OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter *) nil_chk(writer_)) writeWithOrgApacheLuceneUtilBytesRef:utf8];
+  if (writer_ == nil) @throw create_JavaLangIllegalStateException_init();
+  [writer_ writeWithOrgApacheLuceneUtilBytesRef:utf8];
 }
 
 - (id<OrgApacheLuceneUtilBytesRefIterator>)iterator {
@@ -80,7 +80,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenc
     }
     JreStrongAssign(&input_, nil);
   }
-  return [new_OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator_initWithOrgApacheLuceneSearchSuggestFstExternalRefSorter_withOrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_(self, [new_OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_initWithOrgLukhnosPortmobileFilePath_(sorted_) autorelease]) autorelease];
+  return create_OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator_initWithOrgApacheLuceneSearchSuggestFstExternalRefSorter_withOrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_(self, create_OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_initWithOrgLukhnosPortmobileFilePath_(sorted_));
 }
 
 - (void)closeWriter {
@@ -122,7 +122,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenc
     { "iterator", NULL, "Lorg.apache.lucene.util.BytesRefIterator;", 0x1, "Ljava.io.IOException;", NULL },
     { "closeWriter", NULL, "V", 0x2, "Ljava.io.IOException;", NULL },
     { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "getComparator", NULL, "Ljava.util.Comparator;", 0x1, NULL, NULL },
+    { "getComparator", NULL, "Ljava.util.Comparator;", 0x1, NULL, "()Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "sort_", NULL, 0x12, "Lorg.apache.lucene.util.OfflineSorter;", NULL, NULL, .constantValue.asLong = 0 },
@@ -145,9 +145,11 @@ void OrgApacheLuceneSearchSuggestFstExternalRefSorter_initWithOrgApacheLuceneUti
 }
 
 OrgApacheLuceneSearchSuggestFstExternalRefSorter *new_OrgApacheLuceneSearchSuggestFstExternalRefSorter_initWithOrgApacheLuceneUtilOfflineSorter_(OrgApacheLuceneUtilOfflineSorter *sort) {
-  OrgApacheLuceneSearchSuggestFstExternalRefSorter *self = [OrgApacheLuceneSearchSuggestFstExternalRefSorter alloc];
-  OrgApacheLuceneSearchSuggestFstExternalRefSorter_initWithOrgApacheLuceneUtilOfflineSorter_(self, sort);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestFstExternalRefSorter, initWithOrgApacheLuceneUtilOfflineSorter_, sort)
+}
+
+OrgApacheLuceneSearchSuggestFstExternalRefSorter *create_OrgApacheLuceneSearchSuggestFstExternalRefSorter_initWithOrgApacheLuceneUtilOfflineSorter_(OrgApacheLuceneUtilOfflineSorter *sort) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestFstExternalRefSorter, initWithOrgApacheLuceneUtilOfflineSorter_, sort)
 }
 
 void OrgApacheLuceneSearchSuggestFstExternalRefSorter_closeWriter(OrgApacheLuceneSearchSuggestFstExternalRefSorter *self) {
@@ -221,9 +223,11 @@ void OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator_initW
 }
 
 OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator *new_OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator_initWithOrgApacheLuceneSearchSuggestFstExternalRefSorter_withOrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_(OrgApacheLuceneSearchSuggestFstExternalRefSorter *outer$, OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *reader) {
-  OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator *self = [OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator alloc];
-  OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator_initWithOrgApacheLuceneSearchSuggestFstExternalRefSorter_withOrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_(self, outer$, reader);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator, initWithOrgApacheLuceneSearchSuggestFstExternalRefSorter_withOrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_, outer$, reader)
+}
+
+OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator *create_OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator_initWithOrgApacheLuceneSearchSuggestFstExternalRefSorter_withOrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_(OrgApacheLuceneSearchSuggestFstExternalRefSorter *outer$, OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *reader) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator, initWithOrgApacheLuceneSearchSuggestFstExternalRefSorter_withOrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_, outer$, reader)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator)

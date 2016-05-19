@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_RESTRICT
-#define OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource 0
 #else
-#define OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_) && (OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_
+#if !defined (OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource))
+#define OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_
 
-#define OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource 1
 #include "org/apache/lucene/queries/function/valuesource/FieldCacheSource.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
@@ -25,6 +25,10 @@
 @class OrgApacheLuceneSearchSortField;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Obtains double field values from <code>org.apache.lucene.index.LeafReader.getNumericDocValues</code> and makes
+ those values available as other numeric types, casting as needed.
+ */
 @interface OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource : OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource
 
 #pragma mark Public
@@ -50,8 +54,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSourc
 
 FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource *new_OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_initWithNSString_(NSString *field) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource *create_OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_initWithNSString_(NSString *field);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource")

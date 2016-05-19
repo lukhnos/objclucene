@@ -5,23 +5,28 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCoreKeywordAnalyzer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCoreKeywordAnalyzer_RESTRICT
-#define OrgApacheLuceneAnalysisCoreKeywordAnalyzer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreKeywordAnalyzer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCoreKeywordAnalyzer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCoreKeywordAnalyzer 0
 #else
-#define OrgApacheLuceneAnalysisCoreKeywordAnalyzer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCoreKeywordAnalyzer 1
 #endif
-#undef OrgApacheLuceneAnalysisCoreKeywordAnalyzer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCoreKeywordAnalyzer
 
-#if !defined (_OrgApacheLuceneAnalysisCoreKeywordAnalyzer_) && (OrgApacheLuceneAnalysisCoreKeywordAnalyzer_INCLUDE_ALL || OrgApacheLuceneAnalysisCoreKeywordAnalyzer_INCLUDE)
-#define _OrgApacheLuceneAnalysisCoreKeywordAnalyzer_
+#if !defined (OrgApacheLuceneAnalysisCoreKeywordAnalyzer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCoreKeywordAnalyzer || defined(INCLUDE_OrgApacheLuceneAnalysisCoreKeywordAnalyzer))
+#define OrgApacheLuceneAnalysisCoreKeywordAnalyzer_
 
-#define OrgApacheLuceneAnalysisAnalyzer_RESTRICT 1
-#define OrgApacheLuceneAnalysisAnalyzer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisAnalyzer 1
+#define INCLUDE_OrgApacheLuceneAnalysisAnalyzer 1
 #include "org/apache/lucene/analysis/Analyzer.h"
 
 @class OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;
 
+/*!
+ @brief "Tokenizes" the entire stream as a single token.
+ This is useful
+ for data like zip codes, ids, and some product names.
+ */
 @interface OrgApacheLuceneAnalysisCoreKeywordAnalyzer : OrgApacheLuceneAnalysisAnalyzer
 
 #pragma mark Public
@@ -40,8 +45,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreKeywordAnalyzer_init(OrgApache
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreKeywordAnalyzer *new_OrgApacheLuceneAnalysisCoreKeywordAnalyzer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreKeywordAnalyzer *create_OrgApacheLuceneAnalysisCoreKeywordAnalyzer_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreKeywordAnalyzer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCoreKeywordAnalyzer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreKeywordAnalyzer")

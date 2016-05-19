@@ -5,31 +5,34 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilPackedPacked16ThreeBlocks_INCLUDE_ALL")
-#if OrgApacheLuceneUtilPackedPacked16ThreeBlocks_RESTRICT
-#define OrgApacheLuceneUtilPackedPacked16ThreeBlocks_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedPacked16ThreeBlocks")
+#ifdef RESTRICT_OrgApacheLuceneUtilPackedPacked16ThreeBlocks
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackedPacked16ThreeBlocks 0
 #else
-#define OrgApacheLuceneUtilPackedPacked16ThreeBlocks_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackedPacked16ThreeBlocks 1
 #endif
-#undef OrgApacheLuceneUtilPackedPacked16ThreeBlocks_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilPackedPacked16ThreeBlocks
 
-#if !defined (_OrgApacheLuceneUtilPackedPacked16ThreeBlocks_) && (OrgApacheLuceneUtilPackedPacked16ThreeBlocks_INCLUDE_ALL || OrgApacheLuceneUtilPackedPacked16ThreeBlocks_INCLUDE)
-#define _OrgApacheLuceneUtilPackedPacked16ThreeBlocks_
+#if !defined (OrgApacheLuceneUtilPackedPacked16ThreeBlocks_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedPacked16ThreeBlocks || defined(INCLUDE_OrgApacheLuceneUtilPackedPacked16ThreeBlocks))
+#define OrgApacheLuceneUtilPackedPacked16ThreeBlocks_
 
-#define OrgApacheLuceneUtilPackedPackedInts_RESTRICT 1
-#define OrgApacheLuceneUtilPackedPackedInts_MutableImpl_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilPackedPackedInts 1
+#define INCLUDE_OrgApacheLuceneUtilPackedPackedInts_MutableImpl 1
 #include "org/apache/lucene/util/packed/PackedInts.h"
 
 @class IOSLongArray;
 @class IOSShortArray;
 @class OrgApacheLuceneStoreDataInput;
 
-#define OrgApacheLuceneUtilPackedPacked16ThreeBlocks_MAX_SIZE 715827882
-
+/*!
+ @brief Packs integers into 3 shorts (48 bits per value).
+ */
 @interface OrgApacheLuceneUtilPackedPacked16ThreeBlocks : OrgApacheLuceneUtilPackedPackedInts_MutableImpl {
  @public
   IOSShortArray *blocks_;
 }
+
++ (jint)MAX_SIZE;
 
 #pragma mark Public
 
@@ -72,18 +75,24 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilPackedPacked16ThreeBlocks)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedPacked16ThreeBlocks, blocks_, IOSShortArray *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilPackedPacked16ThreeBlocks, MAX_SIZE, jint)
+inline jint OrgApacheLuceneUtilPackedPacked16ThreeBlocks_get_MAX_SIZE();
+#define OrgApacheLuceneUtilPackedPacked16ThreeBlocks_MAX_SIZE 715827882
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilPackedPacked16ThreeBlocks, MAX_SIZE, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedPacked16ThreeBlocks_initWithInt_(OrgApacheLuceneUtilPackedPacked16ThreeBlocks *self, jint valueCount);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPacked16ThreeBlocks *new_OrgApacheLuceneUtilPackedPacked16ThreeBlocks_initWithInt_(jint valueCount) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPacked16ThreeBlocks *create_OrgApacheLuceneUtilPackedPacked16ThreeBlocks_initWithInt_(jint valueCount);
+
 FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedPacked16ThreeBlocks_initWithInt_withOrgApacheLuceneStoreDataInput_withInt_(OrgApacheLuceneUtilPackedPacked16ThreeBlocks *self, jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPacked16ThreeBlocks *new_OrgApacheLuceneUtilPackedPacked16ThreeBlocks_initWithInt_withOrgApacheLuceneStoreDataInput_withInt_(jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPacked16ThreeBlocks *create_OrgApacheLuceneUtilPackedPacked16ThreeBlocks_initWithInt_withOrgApacheLuceneStoreDataInput_withInt_(jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPacked16ThreeBlocks)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilPackedPacked16ThreeBlocks_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedPacked16ThreeBlocks")

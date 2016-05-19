@@ -5,30 +5,46 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy_INCLUDE_ALL")
-#if OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy_RESTRICT
-#define OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy")
+#ifdef RESTRICT_OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy
+#define INCLUDE_ALL_OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy 0
 #else
-#define OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy 1
 #endif
-#undef OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy
 
-#if !defined (_OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy_) && (OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy_INCLUDE_ALL || OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy_INCLUDE)
-#define _OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy_
+#if !defined (OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy_) && (INCLUDE_ALL_OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy || defined(INCLUDE_OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy))
+#define OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy_
 
-#define OrgApacheLuceneSearchQueryCachingPolicy_RESTRICT 1
-#define OrgApacheLuceneSearchQueryCachingPolicy_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchQueryCachingPolicy 1
+#define INCLUDE_OrgApacheLuceneSearchQueryCachingPolicy 1
 #include "org/apache/lucene/search/QueryCachingPolicy.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneSearchQuery;
 
+/*!
+ @brief A <code>QueryCachingPolicy</code> that tracks usage statistics of recently-used
+ filters in order to decide on which filters are worth caching.
+ It also uses some heuristics on segments, filters and the doc id sets that
+ they produce in order to cache more aggressively when the execution cost
+ significantly outweighs the caching overhead.
+ */
 @interface OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy : NSObject < OrgApacheLuceneSearchQueryCachingPolicy >
 
 #pragma mark Public
 
+/*!
+ @brief Create a new instance with an history size of 256.
+ */
 - (instancetype)init;
 
+/*!
+ @brief Create a new instance.
+ @param minIndexSize              the minimum size of the top-level index
+ @param minSizeRatio              the minimum size ratio for segments to be cached, see <code>QueryCachingPolicy.CacheOnLargeSegments</code>
+ @param historySize               the number of recently used filters to track
+ */
 - (instancetype)initWithInt:(jint)minIndexSize
                   withFloat:(jfloat)minSizeRatio
                     withInt:(jint)historySize;
@@ -40,6 +56,10 @@
 
 #pragma mark Protected
 
+/*!
+ @brief For a given query, return how many times it should appear in the history
+ before being cached.
+ */
 - (jint)minFrequencyToCacheWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
 
 #pragma mark Package-Private
@@ -62,12 +82,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy_init
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy *new_OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy_initWithInt_withFloat_withInt_(jint minIndexSize, jfloat minSizeRatio, jint historySize) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy *create_OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy_initWithInt_withFloat_withInt_(jint minIndexSize, jfloat minSizeRatio, jint historySize);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy_init(OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy *new_OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy *create_OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy_init();
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy")

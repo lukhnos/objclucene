@@ -5,28 +5,34 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSimilaritiesBasicModelIn_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSimilaritiesBasicModelIn_RESTRICT
-#define OrgApacheLuceneSearchSimilaritiesBasicModelIn_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicModelIn")
+#ifdef RESTRICT_OrgApacheLuceneSearchSimilaritiesBasicModelIn
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicModelIn 0
 #else
-#define OrgApacheLuceneSearchSimilaritiesBasicModelIn_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicModelIn 1
 #endif
-#undef OrgApacheLuceneSearchSimilaritiesBasicModelIn_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSimilaritiesBasicModelIn
 
-#if !defined (_OrgApacheLuceneSearchSimilaritiesBasicModelIn_) && (OrgApacheLuceneSearchSimilaritiesBasicModelIn_INCLUDE_ALL || OrgApacheLuceneSearchSimilaritiesBasicModelIn_INCLUDE)
-#define _OrgApacheLuceneSearchSimilaritiesBasicModelIn_
+#if !defined (OrgApacheLuceneSearchSimilaritiesBasicModelIn_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicModelIn || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesBasicModelIn))
+#define OrgApacheLuceneSearchSimilaritiesBasicModelIn_
 
-#define OrgApacheLuceneSearchSimilaritiesBasicModel_RESTRICT 1
-#define OrgApacheLuceneSearchSimilaritiesBasicModel_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSimilaritiesBasicModel 1
+#define INCLUDE_OrgApacheLuceneSearchSimilaritiesBasicModel 1
 #include "org/apache/lucene/search/similarities/BasicModel.h"
 
 @class OrgApacheLuceneSearchExplanation;
 @class OrgApacheLuceneSearchSimilaritiesBasicStats;
 
+/*!
+ @brief The basic tf-idf model of randomness.
+ */
 @interface OrgApacheLuceneSearchSimilaritiesBasicModelIn : OrgApacheLuceneSearchSimilaritiesBasicModel
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor: parameter-free
+ */
 - (instancetype)init;
 
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
@@ -45,8 +51,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesBasicModelIn_init(OrgApa
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesBasicModelIn *new_OrgApacheLuceneSearchSimilaritiesBasicModelIn_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesBasicModelIn *create_OrgApacheLuceneSearchSimilaritiesBasicModelIn_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesBasicModelIn)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSimilaritiesBasicModelIn_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicModelIn")

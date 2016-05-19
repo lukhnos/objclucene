@@ -26,8 +26,6 @@
 #include "org/lukhnos/portmobile/file/Path.h"
 #include "org/lukhnos/portmobile/file/StandardOpenOption.h"
 
-#define OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput_CHUNK_SIZE 16384
-
 @interface OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput () {
  @public
   JavaNioByteBuffer *byteBuf_;
@@ -37,7 +35,12 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput, byteBuf_, JavaNioByteBuffer *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput, CHUNK_SIZE, jint)
+/*!
+ @brief The maximum chunk size for reads of 16384 bytes.
+ */
+inline jint OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput_get_CHUNK_SIZE();
+#define OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput_CHUNK_SIZE 16384
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput, CHUNK_SIZE, jint)
 
 __attribute__((unused)) static jlong OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput_length(OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput *self);
 
@@ -58,8 +61,8 @@ __attribute__((unused)) static jlong OrgApacheLuceneStoreNIOFSDirectory_NIOFSInd
                         withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
   [self ensureOpen];
   OrgLukhnosPortmobileFilePath *path = [((OrgLukhnosPortmobileFilePath *) nil_chk([self getDirectory])) resolveWithNSString:name];
-  JavaNioChannelsFileChannel *fc = OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_openWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardOpenOptionEnumArray_(path, [IOSObjectArray arrayWithObjects:(id[]){ JreLoadStatic(OrgLukhnosPortmobileFileStandardOpenOptionEnum, READ) } count:1 type:OrgLukhnosPortmobileFileStandardOpenOptionEnum_class_()]);
-  return [new_OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput_initWithNSString_withJavaNioChannelsFileChannel_withOrgApacheLuceneStoreIOContext_(JreStrcat("$@$", @"NIOFSIndexInput(path=\"", path, @"\")"), fc, context) autorelease];
+  JavaNioChannelsFileChannel *fc = OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_openWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardOpenOptionArray_(path, [IOSObjectArray arrayWithObjects:(id[]){ JreLoadEnum(OrgLukhnosPortmobileFileStandardOpenOption, READ) } count:1 type:OrgLukhnosPortmobileFileStandardOpenOption_class_()]);
+  return create_OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput_initWithNSString_withJavaNioChannelsFileChannel_withOrgApacheLuceneStoreIOContext_(JreStrcat("$@$", @"NIOFSIndexInput(path=\"", path, @"\")"), fc, context);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -80,9 +83,11 @@ void OrgApacheLuceneStoreNIOFSDirectory_initWithOrgLukhnosPortmobileFilePath_wit
 }
 
 OrgApacheLuceneStoreNIOFSDirectory *new_OrgApacheLuceneStoreNIOFSDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_(OrgLukhnosPortmobileFilePath *path, OrgApacheLuceneStoreLockFactory *lockFactory) {
-  OrgApacheLuceneStoreNIOFSDirectory *self = [OrgApacheLuceneStoreNIOFSDirectory alloc];
-  OrgApacheLuceneStoreNIOFSDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_(self, path, lockFactory);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreNIOFSDirectory, initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_, path, lockFactory)
+}
+
+OrgApacheLuceneStoreNIOFSDirectory *create_OrgApacheLuceneStoreNIOFSDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_(OrgLukhnosPortmobileFilePath *path, OrgApacheLuceneStoreLockFactory *lockFactory) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreNIOFSDirectory, initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_, path, lockFactory)
 }
 
 void OrgApacheLuceneStoreNIOFSDirectory_initWithOrgLukhnosPortmobileFilePath_(OrgApacheLuceneStoreNIOFSDirectory *self, OrgLukhnosPortmobileFilePath *path) {
@@ -90,9 +95,11 @@ void OrgApacheLuceneStoreNIOFSDirectory_initWithOrgLukhnosPortmobileFilePath_(Or
 }
 
 OrgApacheLuceneStoreNIOFSDirectory *new_OrgApacheLuceneStoreNIOFSDirectory_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path) {
-  OrgApacheLuceneStoreNIOFSDirectory *self = [OrgApacheLuceneStoreNIOFSDirectory alloc];
-  OrgApacheLuceneStoreNIOFSDirectory_initWithOrgLukhnosPortmobileFilePath_(self, path);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreNIOFSDirectory, initWithOrgLukhnosPortmobileFilePath_, path)
+}
+
+OrgApacheLuceneStoreNIOFSDirectory *create_OrgApacheLuceneStoreNIOFSDirectory_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreNIOFSDirectory, initWithOrgLukhnosPortmobileFilePath_, path)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreNIOFSDirectory)
@@ -122,7 +129,7 @@ withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
 }
 
 - (OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput *)clone {
-  OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput *clone = (OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput *) check_class_cast([super clone], [OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput class]);
+  OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput *clone = (OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput *) cast_chk([super clone], [OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput class]);
   ((OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput *) nil_chk(clone))->isClone_ = true;
   return clone;
 }
@@ -131,9 +138,9 @@ withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
                                              withLong:(jlong)offset
                                              withLong:(jlong)length {
   if (offset < 0 || length < 0 || offset + length > OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput_length(self)) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$@", @"slice() ", sliceDescription, @" out of bounds: ", self)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$@", @"slice() ", sliceDescription, @" out of bounds: ", self));
   }
-  return [new_OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput_initWithNSString_withJavaNioChannelsFileChannel_withLong_withLong_withInt_([self getFullSliceDescriptionWithNSString:sliceDescription], channel_, off_ + offset, length, [self getBufferSize]) autorelease];
+  return create_OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput_initWithNSString_withJavaNioChannelsFileChannel_withLong_withLong_withInt_([self getFullSliceDescriptionWithNSString:sliceDescription], channel_, off_ + offset, length, [self getBufferSize]);
 }
 
 - (jlong)length {
@@ -159,17 +166,17 @@ withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
   }
   jlong pos = [self getFilePointer] + off_;
   if (pos + len > end_) {
-    @throw [new_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"read past EOF: ", self)) autorelease];
+    @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"read past EOF: ", self));
   }
   @try {
     jint readLength = len;
     while (readLength > 0) {
       jint toRead = JavaLangMath_minWithInt_withInt_(OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput_CHUNK_SIZE, readLength);
-      [bb limitWithInt:[((JavaNioByteBuffer *) nil_chk(bb)) position] + toRead];
+      [((JavaNioByteBuffer *) nil_chk(bb)) limitWithInt:[bb position] + toRead];
       JreAssert(([bb remaining] == toRead), (@"org/apache/lucene/store/NIOFSDirectory.java:182 condition failed: assert bb.remaining() == toRead;"));
       jint i = [((JavaNioChannelsFileChannel *) nil_chk(channel_)) readWithJavaNioByteBuffer:bb withLong:pos];
       if (i < 0) {
-        @throw [new_JavaIoEOFException_initWithNSString_(JreStrcat("$@$I$I$J$I$J", @"read past EOF: ", self, @" off: ", offset, @" len: ", len, @" pos: ", pos, @" chunkLen: ", toRead, @" end: ", end_)) autorelease];
+        @throw create_JavaIoEOFException_initWithNSString_(JreStrcat("$@$I$I$J$I$J", @"read past EOF: ", self, @" off: ", offset, @" len: ", len, @" pos: ", pos, @" chunkLen: ", toRead, @" end: ", end_));
       }
       JreAssert((i > 0), (@"FileChannel.read with non zero-length bb.remaining() must always read at least one byte (FileChannel is in blocking mode, see spec of ReadableByteChannel)"));
       pos += i;
@@ -178,7 +185,7 @@ withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
     JreAssert((readLength == 0), (@"org/apache/lucene/store/NIOFSDirectory.java:191 condition failed: assert readLength == 0;"));
   }
   @catch (JavaIoIOException *ioe) {
-    @throw [new_JavaIoIOException_initWithNSString_withJavaLangThrowable_(JreStrcat("$$@", [((JavaIoIOException *) nil_chk(ioe)) getMessage], @": ", self), ioe) autorelease];
+    @throw create_JavaIoIOException_initWithNSString_withNSException_(JreStrcat("$$@", [((JavaIoIOException *) nil_chk(ioe)) getMessage], @": ", self), ioe);
   }
 }
 
@@ -226,9 +233,11 @@ void OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput_initWithNSString_withJav
 }
 
 OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput *new_OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput_initWithNSString_withJavaNioChannelsFileChannel_withOrgApacheLuceneStoreIOContext_(NSString *resourceDesc, JavaNioChannelsFileChannel *fc, OrgApacheLuceneStoreIOContext *context) {
-  OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput *self = [OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput alloc];
-  OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput_initWithNSString_withJavaNioChannelsFileChannel_withOrgApacheLuceneStoreIOContext_(self, resourceDesc, fc, context);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput, initWithNSString_withJavaNioChannelsFileChannel_withOrgApacheLuceneStoreIOContext_, resourceDesc, fc, context)
+}
+
+OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput *create_OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput_initWithNSString_withJavaNioChannelsFileChannel_withOrgApacheLuceneStoreIOContext_(NSString *resourceDesc, JavaNioChannelsFileChannel *fc, OrgApacheLuceneStoreIOContext *context) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput, initWithNSString_withJavaNioChannelsFileChannel_withOrgApacheLuceneStoreIOContext_, resourceDesc, fc, context)
 }
 
 void OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput_initWithNSString_withJavaNioChannelsFileChannel_withLong_withLong_withInt_(OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput *self, NSString *resourceDesc, JavaNioChannelsFileChannel *fc, jlong off, jlong length, jint bufferSize) {
@@ -241,9 +250,11 @@ void OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput_initWithNSString_withJav
 }
 
 OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput *new_OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput_initWithNSString_withJavaNioChannelsFileChannel_withLong_withLong_withInt_(NSString *resourceDesc, JavaNioChannelsFileChannel *fc, jlong off, jlong length, jint bufferSize) {
-  OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput *self = [OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput alloc];
-  OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput_initWithNSString_withJavaNioChannelsFileChannel_withLong_withLong_withInt_(self, resourceDesc, fc, off, length, bufferSize);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput, initWithNSString_withJavaNioChannelsFileChannel_withLong_withLong_withInt_, resourceDesc, fc, off, length, bufferSize)
+}
+
+OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput *create_OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput_initWithNSString_withJavaNioChannelsFileChannel_withLong_withLong_withInt_(NSString *resourceDesc, JavaNioChannelsFileChannel *fc, jlong off, jlong length, jint bufferSize) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput, initWithNSString_withJavaNioChannelsFileChannel_withLong_withLong_withInt_, resourceDesc, fc, off, length, bufferSize)
 }
 
 jlong OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput_length(OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput *self) {

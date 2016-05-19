@@ -5,31 +5,41 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsFieldInfosFormat_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsFieldInfosFormat_RESTRICT
-#define OrgApacheLuceneCodecsFieldInfosFormat_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsFieldInfosFormat")
+#ifdef RESTRICT_OrgApacheLuceneCodecsFieldInfosFormat
+#define INCLUDE_ALL_OrgApacheLuceneCodecsFieldInfosFormat 0
 #else
-#define OrgApacheLuceneCodecsFieldInfosFormat_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsFieldInfosFormat 1
 #endif
-#undef OrgApacheLuceneCodecsFieldInfosFormat_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsFieldInfosFormat
 
-#if !defined (_OrgApacheLuceneCodecsFieldInfosFormat_) && (OrgApacheLuceneCodecsFieldInfosFormat_INCLUDE_ALL || OrgApacheLuceneCodecsFieldInfosFormat_INCLUDE)
-#define _OrgApacheLuceneCodecsFieldInfosFormat_
+#if !defined (OrgApacheLuceneCodecsFieldInfosFormat_) && (INCLUDE_ALL_OrgApacheLuceneCodecsFieldInfosFormat || defined(INCLUDE_OrgApacheLuceneCodecsFieldInfosFormat))
+#define OrgApacheLuceneCodecsFieldInfosFormat_
 
 @class OrgApacheLuceneIndexFieldInfos;
 @class OrgApacheLuceneIndexSegmentInfo;
 @class OrgApacheLuceneStoreDirectory;
 @class OrgApacheLuceneStoreIOContext;
 
+/*!
+ @brief Encodes/decodes <code>FieldInfos</code>
+ */
 @interface OrgApacheLuceneCodecsFieldInfosFormat : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Read the <code>FieldInfos</code> previously written with <code>write</code>.
+ */
 - (OrgApacheLuceneIndexFieldInfos *)readWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
                                       withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)segmentInfo
                                                              withNSString:(NSString *)segmentSuffix
                                         withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)iocontext;
 
+/*!
+ @brief Writes the provided <code>FieldInfos</code> to the
+ directory.
+ */
 - (void)writeWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
            withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)segmentInfo
                                   withNSString:(NSString *)segmentSuffix
@@ -38,6 +48,11 @@
 
 #pragma mark Protected
 
+/*!
+ @brief Sole constructor.
+ (For invocation by subclass 
+ constructors, typically implicit.) 
+ */
 - (instancetype)init;
 
 @end
@@ -50,4 +65,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsFieldInfosFormat)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsFieldInfosFormat_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsFieldInfosFormat")

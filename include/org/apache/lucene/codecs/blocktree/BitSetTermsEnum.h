@@ -5,26 +5,34 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum_RESTRICT
-#define OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum")
+#ifdef RESTRICT_OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum
+#define INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum 0
 #else
-#define OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum 1
 #endif
-#undef OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum
 
-#if !defined (_OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum_) && (OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum_INCLUDE_ALL || OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum_INCLUDE)
-#define _OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum_
+#if !defined (OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum_) && (INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum || defined(INCLUDE_OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum))
+#define OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum_
 
-#define OrgApacheLuceneIndexTermsEnum_RESTRICT 1
-#define OrgApacheLuceneIndexTermsEnum_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexTermsEnum 1
+#define INCLUDE_OrgApacheLuceneIndexTermsEnum 1
 #include "org/apache/lucene/index/TermsEnum.h"
 
 @class OrgApacheLuceneIndexPostingsEnum;
-@class OrgApacheLuceneIndexTermsEnum_SeekStatusEnum;
+@class OrgApacheLuceneIndexTermsEnum_SeekStatus;
 @class OrgApacheLuceneUtilBitSet;
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief Silly stub class, used only when writing an auto-prefix
+ term in order to expose DocsEnum over a FixedBitSet.
+ We
+ pass this to <code>PostingsWriterBase.writeTerm</code> so 
+ that it can pull .docs() multiple times for the
+ current term. 
+ */
 @interface OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum : OrgApacheLuceneIndexTermsEnum
 
 #pragma mark Public
@@ -40,7 +48,7 @@
 - (OrgApacheLuceneIndexPostingsEnum *)postingsWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)reuse
                                                                            withInt:(jint)flags;
 
-- (OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *)seekCeilWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)text;
+- (OrgApacheLuceneIndexTermsEnum_SeekStatus *)seekCeilWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)text;
 
 - (void)seekExactWithLong:(jlong)ord;
 
@@ -56,8 +64,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum_initWithOrg
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum *new_OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet *docs) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum *create_OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet *docs);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum")

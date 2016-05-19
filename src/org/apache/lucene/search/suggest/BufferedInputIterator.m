@@ -44,7 +44,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestBufferedInputIterator, payloadSp
 
 - (OrgApacheLuceneUtilBytesRef *)next {
   if (++curPos_ < [((OrgApacheLuceneUtilBytesRefArray *) nil_chk(entries_)) size]) {
-    [entries_ getWithOrgApacheLuceneUtilBytesRefBuilder:spare_ withInt:curPos_];
+    [((OrgApacheLuceneUtilBytesRefArray *) nil_chk(entries_)) getWithOrgApacheLuceneUtilBytesRefBuilder:spare_ withInt:curPos_];
     return [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(spare_)) get];
   }
   return nil;
@@ -52,7 +52,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestBufferedInputIterator, payloadSp
 
 - (OrgApacheLuceneUtilBytesRef *)payload {
   if (hasPayloads_ && curPos_ < [((OrgApacheLuceneUtilBytesRefArray *) nil_chk(payloads_)) size]) {
-    return [payloads_ getWithOrgApacheLuceneUtilBytesRefBuilder:payloadSpare_ withInt:curPos_];
+    return [((OrgApacheLuceneUtilBytesRefArray *) nil_chk(payloads_)) getWithOrgApacheLuceneUtilBytesRefBuilder:payloadSpare_ withInt:curPos_];
   }
   return nil;
 }
@@ -63,7 +63,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestBufferedInputIterator, payloadSp
 
 - (id<JavaUtilSet>)contexts {
   if (hasContexts_ && curPos_ < [((id<JavaUtilList>) nil_chk(contextSets_)) size]) {
-    return [contextSets_ getWithInt:curPos_];
+    return [((id<JavaUtilList>) nil_chk(contextSets_)) getWithInt:curPos_];
   }
   return nil;
 }
@@ -89,7 +89,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestBufferedInputIterator, payloadSp
     { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
     { "payload", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
     { "hasPayloads", NULL, "Z", 0x1, NULL, NULL },
-    { "contexts", NULL, "Ljava.util.Set;", 0x1, NULL, NULL },
+    { "contexts", NULL, "Ljava.util.Set;", 0x1, NULL, "()Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;" },
     { "hasContexts", NULL, "Z", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -123,14 +123,14 @@ void OrgApacheLuceneSearchSuggestBufferedInputIterator_initWithOrgApacheLuceneSe
   self->hasPayloads_ = [((id<OrgApacheLuceneSearchSuggestInputIterator>) nil_chk(source)) hasPayloads];
   self->hasContexts_ = [source hasContexts];
   while ((spare = [source next]) != nil) {
-    [self->entries_ appendWithOrgApacheLuceneUtilBytesRef:spare];
+    [((OrgApacheLuceneUtilBytesRefArray *) nil_chk(self->entries_)) appendWithOrgApacheLuceneUtilBytesRef:spare];
     if (self->hasPayloads_) {
-      [self->payloads_ appendWithOrgApacheLuceneUtilBytesRef:[source payload]];
+      [((OrgApacheLuceneUtilBytesRefArray *) nil_chk(self->payloads_)) appendWithOrgApacheLuceneUtilBytesRef:[source payload]];
     }
     if (self->hasContexts_) {
-      [self->contextSets_ addWithId:[source contexts]];
+      [((id<JavaUtilList>) nil_chk(self->contextSets_)) addWithId:[source contexts]];
     }
-    if (freqIndex >= self->freqs_->size_) {
+    if (freqIndex >= ((IOSLongArray *) nil_chk(self->freqs_))->size_) {
       JreStrongAssign(&self->freqs_, OrgApacheLuceneUtilArrayUtil_growWithLongArray_withInt_(self->freqs_, self->freqs_->size_ + 1));
     }
     *IOSLongArray_GetRef(nil_chk(self->freqs_), freqIndex++) = [source weight];
@@ -138,9 +138,11 @@ void OrgApacheLuceneSearchSuggestBufferedInputIterator_initWithOrgApacheLuceneSe
 }
 
 OrgApacheLuceneSearchSuggestBufferedInputIterator *new_OrgApacheLuceneSearchSuggestBufferedInputIterator_initWithOrgApacheLuceneSearchSuggestInputIterator_(id<OrgApacheLuceneSearchSuggestInputIterator> source) {
-  OrgApacheLuceneSearchSuggestBufferedInputIterator *self = [OrgApacheLuceneSearchSuggestBufferedInputIterator alloc];
-  OrgApacheLuceneSearchSuggestBufferedInputIterator_initWithOrgApacheLuceneSearchSuggestInputIterator_(self, source);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestBufferedInputIterator, initWithOrgApacheLuceneSearchSuggestInputIterator_, source)
+}
+
+OrgApacheLuceneSearchSuggestBufferedInputIterator *create_OrgApacheLuceneSearchSuggestBufferedInputIterator_initWithOrgApacheLuceneSearchSuggestInputIterator_(id<OrgApacheLuceneSearchSuggestInputIterator> source) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestBufferedInputIterator, initWithOrgApacheLuceneSearchSuggestInputIterator_, source)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestBufferedInputIterator)

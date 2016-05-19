@@ -3,14 +3,17 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/simple/package-info.java
 //
 
+/*!
+ @brief A simple query parser for human-entered queries.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserSimplePackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserSimplePackage_info_RESTRICT
-#define OrgApacheLuceneQueryparserSimplePackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSimplePackage_info")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserSimplePackage_info
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserSimplePackage_info 0
 #else
-#define OrgApacheLuceneQueryparserSimplePackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserSimplePackage_info 1
 #endif
-#undef OrgApacheLuceneQueryparserSimplePackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserSimplePackage_info
 
-#pragma pop_macro("OrgApacheLuceneQueryparserSimplePackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSimplePackage_info")

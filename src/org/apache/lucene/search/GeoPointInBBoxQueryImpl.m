@@ -33,19 +33,19 @@
 
 - (OrgApacheLuceneIndexTermsEnum *)getTermsEnumWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms
                                       withOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)atts {
-  return [new_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum_initWithOrgApacheLuceneSearchGeoPointInBBoxQueryImpl_withOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_(self, [((OrgApacheLuceneIndexTerms *) nil_chk(terms)) iterator], minLon_, minLat_, maxLon_, maxLat_) autorelease];
+  return create_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum_initWithOrgApacheLuceneSearchGeoPointInBBoxQueryImpl_withOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_(self, [((OrgApacheLuceneIndexTerms *) nil_chk(terms)) iterator], minLon_, minLat_, maxLon_, maxLat_);
 }
 
 - (void)setRewriteMethodWithOrgApacheLuceneSearchMultiTermQuery_RewriteMethod:(OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)method {
-  @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(@"cannot change rewrite method") autorelease];
+  @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"cannot change rewrite method");
 }
 
 - (jboolean)isEqual:(id)o {
   if (self == o) return true;
-  if (o == nil || [self getClass] != [o getClass]) return false;
+  if (o == nil || [self getClass] != (id) [o getClass]) return false;
   if (![super isEqual:o]) return false;
-  OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *that = (OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *) check_class_cast(o, [OrgApacheLuceneSearchGeoPointInBBoxQueryImpl class]);
-  if (JavaLangDouble_compareWithDouble_withDouble_(((OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *) nil_chk(that))->maxLat_, maxLat_) != 0) return false;
+  OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *that = (OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *) cast_chk(o, [OrgApacheLuceneSearchGeoPointInBBoxQueryImpl class]);
+  if (JavaLangDouble_compareWithDouble_withDouble_(that->maxLat_, maxLat_) != 0) return false;
   if (JavaLangDouble_compareWithDouble_withDouble_(that->maxLon_, maxLon_) != 0) return false;
   if (JavaLangDouble_compareWithDouble_withDouble_(that->minLat_, minLat_) != 0) return false;
   if (JavaLangDouble_compareWithDouble_withDouble_(that->minLon_, minLon_) != 0) return false;
@@ -67,7 +67,7 @@
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   [sb appendWithNSString:[[self getClass] getSimpleName]];
   [sb appendWithChar:':'];
   if (![((NSString *) nil_chk([self getField])) isEqual:field]) {
@@ -99,9 +99,11 @@ void OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_initWithNSString_withDouble_wi
 }
 
 OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *new_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_initWithNSString_withDouble_withDouble_withDouble_withDouble_(NSString *field, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat) {
-  OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *self = [OrgApacheLuceneSearchGeoPointInBBoxQueryImpl alloc];
-  OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_initWithNSString_withDouble_withDouble_withDouble_withDouble_(self, field, minLon, minLat, maxLon, maxLat);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchGeoPointInBBoxQueryImpl, initWithNSString_withDouble_withDouble_withDouble_withDouble_, field, minLon, minLat, maxLon, maxLat)
+}
+
+OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *create_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_initWithNSString_withDouble_withDouble_withDouble_withDouble_(NSString *field, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchGeoPointInBBoxQueryImpl, initWithNSString_withDouble_withDouble_withDouble_withDouble_, field, minLon, minLat, maxLon, maxLat)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchGeoPointInBBoxQueryImpl)
@@ -163,9 +165,11 @@ void OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum_initWi
 }
 
 OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum *new_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum_initWithOrgApacheLuceneSearchGeoPointInBBoxQueryImpl_withOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *outer$, OrgApacheLuceneIndexTermsEnum *tenum, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat) {
-  OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum *self = [OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum alloc];
-  OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum_initWithOrgApacheLuceneSearchGeoPointInBBoxQueryImpl_withOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_(self, outer$, tenum, minLon, minLat, maxLon, maxLat);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum, initWithOrgApacheLuceneSearchGeoPointInBBoxQueryImpl_withOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_, outer$, tenum, minLon, minLat, maxLon, maxLat)
+}
+
+OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum *create_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum_initWithOrgApacheLuceneSearchGeoPointInBBoxQueryImpl_withOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *outer$, OrgApacheLuceneIndexTermsEnum *tenum, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum, initWithOrgApacheLuceneSearchGeoPointInBBoxQueryImpl_withOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_, outer$, tenum, minLon, minLat, maxLon, maxLat)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum)

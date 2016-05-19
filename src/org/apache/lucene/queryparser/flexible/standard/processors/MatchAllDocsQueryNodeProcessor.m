@@ -25,9 +25,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node {
   if ([node isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode class]]) {
-    OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *fqn = (OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) check_class_cast(node, [OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode class]);
+    OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *fqn = (OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) cast_chk(node, [OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode class]);
     if ([((NSString *) nil_chk([((id<JavaLangCharSequence>) nil_chk([((OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) nil_chk(fqn)) getField])) description])) isEqual:@"*"] && [((NSString *) nil_chk([((id<JavaLangCharSequence>) nil_chk([fqn getText])) description])) isEqual:@"*"]) {
-      return [new_OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode_init() autorelease];
+      return create_OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode_init();
     }
   }
   return node;
@@ -46,7 +46,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "init", "MatchAllDocsQueryNodeProcessor", NULL, 0x1, NULL, NULL },
     { "postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "postProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
     { "preProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "preProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "setChildrenOrderWithJavaUtilList:", "setChildrenOrder", "Ljava.util.List;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
+    { "setChildrenOrderWithJavaUtilList:", "setChildrenOrder", "Ljava.util.List;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;)Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;" },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardProcessorsMatchAllDocsQueryNodeProcessor = { 2, "MatchAllDocsQueryNodeProcessor", "org.apache.lucene.queryparser.flexible.standard.processors", NULL, 0x1, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleStandardProcessorsMatchAllDocsQueryNodeProcessor;
@@ -59,9 +59,11 @@ void OrgApacheLuceneQueryparserFlexibleStandardProcessorsMatchAllDocsQueryNodePr
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardProcessorsMatchAllDocsQueryNodeProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsMatchAllDocsQueryNodeProcessor_init() {
-  OrgApacheLuceneQueryparserFlexibleStandardProcessorsMatchAllDocsQueryNodeProcessor *self = [OrgApacheLuceneQueryparserFlexibleStandardProcessorsMatchAllDocsQueryNodeProcessor alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardProcessorsMatchAllDocsQueryNodeProcessor_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardProcessorsMatchAllDocsQueryNodeProcessor, init)
+}
+
+OrgApacheLuceneQueryparserFlexibleStandardProcessorsMatchAllDocsQueryNodeProcessor *create_OrgApacheLuceneQueryparserFlexibleStandardProcessorsMatchAllDocsQueryNodeProcessor_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardProcessorsMatchAllDocsQueryNodeProcessor, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleStandardProcessorsMatchAllDocsQueryNodeProcessor)

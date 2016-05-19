@@ -24,17 +24,17 @@
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)preProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node {
   if ([node isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode class]]) {
-    OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode *fuzzyNode = (OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode *) check_class_cast(node, [OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode class]);
+    OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode *fuzzyNode = (OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode *) cast_chk(node, [OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode class]);
     OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *config = [self getQueryConfigHandler];
     OrgApacheLuceneQueryparserFlexibleStandardConfigFuzzyConfig *fuzzyConfig = nil;
-    if (config != nil && (fuzzyConfig = [config getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, FUZZY_CONFIG_)]) != nil) {
+    if (config != nil && (fuzzyConfig = [config getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, FUZZY_CONFIG)]) != nil) {
       [((OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode *) nil_chk(fuzzyNode)) setPrefixLengthWithInt:[((OrgApacheLuceneQueryparserFlexibleStandardConfigFuzzyConfig *) nil_chk(fuzzyConfig)) getPrefixLength]];
       if ([fuzzyNode getSimilarity] < 0) {
         [fuzzyNode setSimilarityWithFloat:[fuzzyConfig getMinSimilarity]];
       }
     }
     else if ([((OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode *) nil_chk(fuzzyNode)) getSimilarity] < 0) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"No FUZZY_CONFIG set in the config") autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"No FUZZY_CONFIG set in the config");
     }
   }
   return node;
@@ -55,8 +55,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   static const J2ObjcMethodInfo methods[] = {
     { "postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "postProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
     { "preProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "preProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "setChildrenOrderWithJavaUtilList:", "setChildrenOrder", "Ljava.util.List;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "setChildrenOrderWithJavaUtilList:", "setChildrenOrder", "Ljava.util.List;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;)Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;" },
+    { "init", "FuzzyQueryNodeProcessor", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardProcessorsFuzzyQueryNodeProcessor = { 2, "FuzzyQueryNodeProcessor", "org.apache.lucene.queryparser.flexible.standard.processors", NULL, 0x1, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleStandardProcessorsFuzzyQueryNodeProcessor;
@@ -69,9 +69,11 @@ void OrgApacheLuceneQueryparserFlexibleStandardProcessorsFuzzyQueryNodeProcessor
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardProcessorsFuzzyQueryNodeProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsFuzzyQueryNodeProcessor_init() {
-  OrgApacheLuceneQueryparserFlexibleStandardProcessorsFuzzyQueryNodeProcessor *self = [OrgApacheLuceneQueryparserFlexibleStandardProcessorsFuzzyQueryNodeProcessor alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardProcessorsFuzzyQueryNodeProcessor_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardProcessorsFuzzyQueryNodeProcessor, init)
+}
+
+OrgApacheLuceneQueryparserFlexibleStandardProcessorsFuzzyQueryNodeProcessor *create_OrgApacheLuceneQueryparserFlexibleStandardProcessorsFuzzyQueryNodeProcessor_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardProcessorsFuzzyQueryNodeProcessor, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleStandardProcessorsFuzzyQueryNodeProcessor)

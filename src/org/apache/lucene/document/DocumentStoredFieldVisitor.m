@@ -53,40 +53,40 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)binaryFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
                                        withByteArray:(IOSByteArray *)value {
-  [((OrgApacheLuceneDocumentDocument *) nil_chk(doc_)) addWithOrgApacheLuceneIndexIndexableField:[new_OrgApacheLuceneDocumentStoredField_initWithNSString_withByteArray_(((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo))->name_, value) autorelease]];
+  [((OrgApacheLuceneDocumentDocument *) nil_chk(doc_)) addWithOrgApacheLuceneIndexIndexableField:create_OrgApacheLuceneDocumentStoredField_initWithNSString_withByteArray_(((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo))->name_, value)];
 }
 
 - (void)stringFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
                                        withByteArray:(IOSByteArray *)value {
-  OrgApacheLuceneDocumentFieldType *ft = [new_OrgApacheLuceneDocumentFieldType_initWithOrgApacheLuceneDocumentFieldType_(JreLoadStatic(OrgApacheLuceneDocumentTextField, TYPE_STORED_)) autorelease];
+  OrgApacheLuceneDocumentFieldType *ft = create_OrgApacheLuceneDocumentFieldType_initWithOrgApacheLuceneDocumentFieldType_(JreLoadStatic(OrgApacheLuceneDocumentTextField, TYPE_STORED));
   [ft setStoreTermVectorsWithBoolean:[((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo)) hasVectors]];
   [ft setOmitNormsWithBoolean:[fieldInfo omitsNorms]];
-  [ft setIndexOptionsWithOrgApacheLuceneIndexIndexOptionsEnum:[fieldInfo getIndexOptions]];
-  [((OrgApacheLuceneDocumentDocument *) nil_chk(doc_)) addWithOrgApacheLuceneIndexIndexableField:[new_OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentFieldType_(fieldInfo->name_, [NSString stringWithBytes:value charset:JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8_)], ft) autorelease]];
+  [ft setIndexOptionsWithOrgApacheLuceneIndexIndexOptions:[fieldInfo getIndexOptions]];
+  [((OrgApacheLuceneDocumentDocument *) nil_chk(doc_)) addWithOrgApacheLuceneIndexIndexableField:create_OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentFieldType_(fieldInfo->name_, [NSString stringWithBytes:value charset:JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8)], ft)];
 }
 
 - (void)intFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
                                           withInt:(jint)value {
-  [((OrgApacheLuceneDocumentDocument *) nil_chk(doc_)) addWithOrgApacheLuceneIndexIndexableField:[new_OrgApacheLuceneDocumentStoredField_initWithNSString_withInt_(((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo))->name_, value) autorelease]];
+  [((OrgApacheLuceneDocumentDocument *) nil_chk(doc_)) addWithOrgApacheLuceneIndexIndexableField:create_OrgApacheLuceneDocumentStoredField_initWithNSString_withInt_(((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo))->name_, value)];
 }
 
 - (void)longFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
                                           withLong:(jlong)value {
-  [((OrgApacheLuceneDocumentDocument *) nil_chk(doc_)) addWithOrgApacheLuceneIndexIndexableField:[new_OrgApacheLuceneDocumentStoredField_initWithNSString_withLong_(((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo))->name_, value) autorelease]];
+  [((OrgApacheLuceneDocumentDocument *) nil_chk(doc_)) addWithOrgApacheLuceneIndexIndexableField:create_OrgApacheLuceneDocumentStoredField_initWithNSString_withLong_(((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo))->name_, value)];
 }
 
 - (void)floatFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
                                           withFloat:(jfloat)value {
-  [((OrgApacheLuceneDocumentDocument *) nil_chk(doc_)) addWithOrgApacheLuceneIndexIndexableField:[new_OrgApacheLuceneDocumentStoredField_initWithNSString_withFloat_(((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo))->name_, value) autorelease]];
+  [((OrgApacheLuceneDocumentDocument *) nil_chk(doc_)) addWithOrgApacheLuceneIndexIndexableField:create_OrgApacheLuceneDocumentStoredField_initWithNSString_withFloat_(((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo))->name_, value)];
 }
 
 - (void)doubleFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
                                           withDouble:(jdouble)value {
-  [((OrgApacheLuceneDocumentDocument *) nil_chk(doc_)) addWithOrgApacheLuceneIndexIndexableField:[new_OrgApacheLuceneDocumentStoredField_initWithNSString_withDouble_(((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo))->name_, value) autorelease]];
+  [((OrgApacheLuceneDocumentDocument *) nil_chk(doc_)) addWithOrgApacheLuceneIndexIndexableField:create_OrgApacheLuceneDocumentStoredField_initWithNSString_withDouble_(((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo))->name_, value)];
 }
 
-- (OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum *)needsFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo {
-  return fieldsToAdd_ == nil || [fieldsToAdd_ containsWithId:((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo))->name_] ? JreLoadStatic(OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum, YES) : JreLoadStatic(OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum, NO);
+- (OrgApacheLuceneIndexStoredFieldVisitor_Status *)needsFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo {
+  return fieldsToAdd_ == nil || [fieldsToAdd_ containsWithId:((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo))->name_] ? JreLoadEnum(OrgApacheLuceneIndexStoredFieldVisitor_Status, YES) : JreLoadEnum(OrgApacheLuceneIndexStoredFieldVisitor_Status, NO);
 }
 
 - (OrgApacheLuceneDocumentDocument *)getDocument {
@@ -101,7 +101,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilSet:", "DocumentStoredFieldVisitor", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilSet:", "DocumentStoredFieldVisitor", NULL, 0x1, NULL, "(Ljava/util/Set<Ljava/lang/String;>;)V" },
     { "initWithNSStringArray:", "DocumentStoredFieldVisitor", NULL, 0x81, NULL, NULL },
     { "init", "DocumentStoredFieldVisitor", NULL, 0x1, NULL, NULL },
     { "binaryFieldWithOrgApacheLuceneIndexFieldInfo:withByteArray:", "binaryField", "V", 0x1, "Ljava.io.IOException;", NULL },
@@ -130,9 +130,11 @@ void OrgApacheLuceneDocumentDocumentStoredFieldVisitor_initWithJavaUtilSet_(OrgA
 }
 
 OrgApacheLuceneDocumentDocumentStoredFieldVisitor *new_OrgApacheLuceneDocumentDocumentStoredFieldVisitor_initWithJavaUtilSet_(id<JavaUtilSet> fieldsToAdd) {
-  OrgApacheLuceneDocumentDocumentStoredFieldVisitor *self = [OrgApacheLuceneDocumentDocumentStoredFieldVisitor alloc];
-  OrgApacheLuceneDocumentDocumentStoredFieldVisitor_initWithJavaUtilSet_(self, fieldsToAdd);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentDocumentStoredFieldVisitor, initWithJavaUtilSet_, fieldsToAdd)
+}
+
+OrgApacheLuceneDocumentDocumentStoredFieldVisitor *create_OrgApacheLuceneDocumentDocumentStoredFieldVisitor_initWithJavaUtilSet_(id<JavaUtilSet> fieldsToAdd) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentDocumentStoredFieldVisitor, initWithJavaUtilSet_, fieldsToAdd)
 }
 
 void OrgApacheLuceneDocumentDocumentStoredFieldVisitor_initWithNSStringArray_(OrgApacheLuceneDocumentDocumentStoredFieldVisitor *self, IOSObjectArray *fields) {
@@ -151,9 +153,11 @@ void OrgApacheLuceneDocumentDocumentStoredFieldVisitor_initWithNSStringArray_(Or
 }
 
 OrgApacheLuceneDocumentDocumentStoredFieldVisitor *new_OrgApacheLuceneDocumentDocumentStoredFieldVisitor_initWithNSStringArray_(IOSObjectArray *fields) {
-  OrgApacheLuceneDocumentDocumentStoredFieldVisitor *self = [OrgApacheLuceneDocumentDocumentStoredFieldVisitor alloc];
-  OrgApacheLuceneDocumentDocumentStoredFieldVisitor_initWithNSStringArray_(self, fields);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentDocumentStoredFieldVisitor, initWithNSStringArray_, fields)
+}
+
+OrgApacheLuceneDocumentDocumentStoredFieldVisitor *create_OrgApacheLuceneDocumentDocumentStoredFieldVisitor_initWithNSStringArray_(IOSObjectArray *fields) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentDocumentStoredFieldVisitor, initWithNSStringArray_, fields)
 }
 
 void OrgApacheLuceneDocumentDocumentStoredFieldVisitor_init(OrgApacheLuceneDocumentDocumentStoredFieldVisitor *self) {
@@ -163,9 +167,11 @@ void OrgApacheLuceneDocumentDocumentStoredFieldVisitor_init(OrgApacheLuceneDocum
 }
 
 OrgApacheLuceneDocumentDocumentStoredFieldVisitor *new_OrgApacheLuceneDocumentDocumentStoredFieldVisitor_init() {
-  OrgApacheLuceneDocumentDocumentStoredFieldVisitor *self = [OrgApacheLuceneDocumentDocumentStoredFieldVisitor alloc];
-  OrgApacheLuceneDocumentDocumentStoredFieldVisitor_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentDocumentStoredFieldVisitor, init)
+}
+
+OrgApacheLuceneDocumentDocumentStoredFieldVisitor *create_OrgApacheLuceneDocumentDocumentStoredFieldVisitor_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentDocumentStoredFieldVisitor, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentDocumentStoredFieldVisitor)

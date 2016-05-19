@@ -14,7 +14,6 @@
 #include "java/lang/Integer.h"
 #include "java/lang/System.h"
 #include "java/lang/Thread.h"
-#include "java/lang/Throwable.h"
 #include "java/lang/reflect/Field.h"
 #include "java/net/InetSocketAddress.h"
 #include "java/net/Socket.h"
@@ -39,9 +38,13 @@
 
 __attribute__((unused)) static OrgApacheLuceneStoreFSLockFactory *OrgApacheLuceneStoreLockStressTest_getNewLockFactoryWithNSString_(NSString *lockFactoryClassName);
 
-NSString *OrgApacheLuceneStoreLockStressTest_LOCK_FILE_NAME_ = @"test.lock";
+NSString *OrgApacheLuceneStoreLockStressTest_LOCK_FILE_NAME = @"test.lock";
 
 @implementation OrgApacheLuceneStoreLockStressTest
+
++ (NSString *)LOCK_FILE_NAME {
+  return OrgApacheLuceneStoreLockStressTest_LOCK_FILE_NAME;
+}
 
 + (void)mainWithNSStringArray:(IOSObjectArray *)args {
   OrgApacheLuceneStoreLockStressTest_mainWithNSStringArray_(args);
@@ -62,10 +65,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   static const J2ObjcMethodInfo methods[] = {
     { "mainWithNSStringArray:", "main", "V", 0x9, "Ljava.lang.Exception;", NULL },
     { "getNewLockFactoryWithNSString:", "getNewLockFactory", "Lorg.apache.lucene.store.FSLockFactory;", 0xa, "Ljava.io.IOException;", NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "LockStressTest", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "LOCK_FILE_NAME_", NULL, 0x18, "Ljava.lang.String;", &OrgApacheLuceneStoreLockStressTest_LOCK_FILE_NAME_, NULL, .constantValue.asLong = 0 },
+    { "LOCK_FILE_NAME", "LOCK_FILE_NAME", 0x18, "Ljava.lang.String;", &OrgApacheLuceneStoreLockStressTest_LOCK_FILE_NAME, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneStoreLockStressTest = { 2, "LockStressTest", "org.apache.lucene.store", NULL, 0x1, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneStoreLockStressTest;
@@ -76,13 +79,13 @@ J2OBJC_IGNORE_DESIGNATED_END
 void OrgApacheLuceneStoreLockStressTest_mainWithNSStringArray_(IOSObjectArray *args) {
   OrgApacheLuceneStoreLockStressTest_initialize();
   if (((IOSObjectArray *) nil_chk(args))->size_ != 7) {
-    [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out_))) printlnWithNSString:@"Usage: java org.apache.lucene.store.LockStressTest myID verifierHost verifierPort lockFactoryClassName lockDirName sleepTimeMS count\n\n  myID = int from 0 .. 255 (should be unique for test process)\n  verifierHost = hostname that LockVerifyServer is listening on\n  verifierPort = port that LockVerifyServer is listening on\n  lockFactoryClassName = primary FSLockFactory class that we will use\n  lockDirName = path to the lock directory\n  sleepTimeMS = milliseconds to pause betweeen each lock obtain/release\n  count = number of locking tries\n\nYou should run multiple instances of this process, each with its own\nunique ID, and each pointing to the same lock directory, to verify\nthat locking is working correctly.\n\nMake sure you are first running LockVerifyServer."];
+    [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out))) printlnWithNSString:@"Usage: java org.apache.lucene.store.LockStressTest myID verifierHost verifierPort lockFactoryClassName lockDirName sleepTimeMS count\n\n  myID = int from 0 .. 255 (should be unique for test process)\n  verifierHost = hostname that LockVerifyServer is listening on\n  verifierPort = port that LockVerifyServer is listening on\n  lockFactoryClassName = primary FSLockFactory class that we will use\n  lockDirName = path to the lock directory\n  sleepTimeMS = milliseconds to pause betweeen each lock obtain/release\n  count = number of locking tries\n\nYou should run multiple instances of this process, each with its own\nunique ID, and each pointing to the same lock directory, to verify\nthat locking is working correctly.\n\nMake sure you are first running LockVerifyServer."];
     JavaLangSystem_exitWithInt_(1);
   }
   jint arg = 0;
   jint myID = JavaLangInteger_parseIntWithNSString_(IOSObjectArray_Get(args, arg++));
   if (myID < 0 || myID > 255) {
-    [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out_))) printlnWithNSString:@"myID must be a unique int 0..255"];
+    [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out))) printlnWithNSString:@"myID must be a unique int 0..255"];
     JavaLangSystem_exitWithInt_(1);
   }
   NSString *verifierHost = IOSObjectArray_Get(args, arg++);
@@ -92,12 +95,12 @@ void OrgApacheLuceneStoreLockStressTest_mainWithNSStringArray_(IOSObjectArray *a
   jint sleepTimeMS = JavaLangInteger_parseIntWithNSString_(IOSObjectArray_Get(args, arg++));
   jint count = JavaLangInteger_parseIntWithNSString_(IOSObjectArray_Get(args, arg++));
   OrgApacheLuceneStoreLockFactory *lockFactory = OrgApacheLuceneStoreLockStressTest_getNewLockFactoryWithNSString_(lockFactoryClassName);
-  OrgApacheLuceneStoreFSDirectory *lockDir = [new_OrgApacheLuceneStoreSimpleFSDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_(lockDirPath, JreLoadStatic(OrgApacheLuceneStoreNoLockFactory, INSTANCE_)) autorelease];
-  JavaNetInetSocketAddress *addr = [new_JavaNetInetSocketAddress_initWithNSString_withInt_(verifierHost, verifierPort) autorelease];
-  [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out_))) printlnWithNSString:JreStrcat("$@$I$", @"Connecting to server ", addr, @" and registering as client ", myID, @"...")];
+  OrgApacheLuceneStoreFSDirectory *lockDir = create_OrgApacheLuceneStoreSimpleFSDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_(lockDirPath, JreLoadStatic(OrgApacheLuceneStoreNoLockFactory, INSTANCE));
+  JavaNetInetSocketAddress *addr = create_JavaNetInetSocketAddress_initWithNSString_withInt_(verifierHost, verifierPort);
+  [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out))) printlnWithNSString:JreStrcat("$@$I$", @"Connecting to server ", addr, @" and registering as client ", myID, @"...")];
   {
-    JavaNetSocket *socket = [new_JavaNetSocket_init() autorelease];
-    JavaLangThrowable *__primaryException1 = nil;
+    JavaNetSocket *socket = create_JavaNetSocket_init();
+    NSException *__primaryException1 = nil;
     @try {
       [socket setReuseAddressWithBoolean:true];
       [socket connectWithJavaNetSocketAddress:addr withInt:500];
@@ -105,27 +108,27 @@ void OrgApacheLuceneStoreLockStressTest_mainWithNSStringArray_(IOSObjectArray *a
       JavaIoInputStream *in = [socket getInputStream];
       [((JavaIoOutputStream *) nil_chk(out)) writeWithInt:myID];
       [out flush];
-      OrgApacheLuceneStoreLockFactory *verifyLF = [new_OrgApacheLuceneStoreVerifyingLockFactory_initWithOrgApacheLuceneStoreLockFactory_withJavaIoInputStream_withJavaIoOutputStream_(lockFactory, in, out) autorelease];
-      JavaUtilRandom *rnd = [new_JavaUtilRandom_init() autorelease];
+      OrgApacheLuceneStoreLockFactory *verifyLF = create_OrgApacheLuceneStoreVerifyingLockFactory_initWithOrgApacheLuceneStoreLockFactory_withJavaIoInputStream_withJavaIoOutputStream_(lockFactory, in, out);
+      JavaUtilRandom *rnd = create_JavaUtilRandom_init();
       if ([((JavaIoInputStream *) nil_chk(in)) read] != 43) {
-        @throw [new_JavaIoIOException_initWithNSString_(@"Protocol violation") autorelease];
+        @throw create_JavaIoIOException_initWithNSString_(@"Protocol violation");
       }
       for (jint i = 0; i < count; i++) {
         @try {
-          OrgApacheLuceneStoreLock *l = [verifyLF obtainLockWithOrgApacheLuceneStoreDirectory:lockDir withNSString:OrgApacheLuceneStoreLockStressTest_LOCK_FILE_NAME_];
-          JavaLangThrowable *__primaryException1 = nil;
+          OrgApacheLuceneStoreLock *l = [verifyLF obtainLockWithOrgApacheLuceneStoreDirectory:lockDir withNSString:OrgApacheLuceneStoreLockStressTest_LOCK_FILE_NAME];
+          NSException *__primaryException1 = nil;
           @try {
             if ([rnd nextIntWithInt:10] == 0) {
               if ([rnd nextBoolean]) {
-                verifyLF = [new_OrgApacheLuceneStoreVerifyingLockFactory_initWithOrgApacheLuceneStoreLockFactory_withJavaIoInputStream_withJavaIoOutputStream_(OrgApacheLuceneStoreLockStressTest_getNewLockFactoryWithNSString_(lockFactoryClassName), in, out) autorelease];
+                verifyLF = create_OrgApacheLuceneStoreVerifyingLockFactory_initWithOrgApacheLuceneStoreLockFactory_withJavaIoInputStream_withJavaIoOutputStream_(OrgApacheLuceneStoreLockStressTest_getNewLockFactoryWithNSString_(lockFactoryClassName), in, out);
               }
               @try {
-                OrgApacheLuceneStoreLock *secondLock = [verifyLF obtainLockWithOrgApacheLuceneStoreDirectory:lockDir withNSString:OrgApacheLuceneStoreLockStressTest_LOCK_FILE_NAME_];
-                JavaLangThrowable *__primaryException1 = nil;
+                OrgApacheLuceneStoreLock *secondLock = [verifyLF obtainLockWithOrgApacheLuceneStoreDirectory:lockDir withNSString:OrgApacheLuceneStoreLockStressTest_LOCK_FILE_NAME];
+                NSException *__primaryException1 = nil;
                 @try {
-                  @throw [new_JavaIoIOException_initWithNSString_(@"Double obtain") autorelease];
+                  @throw create_JavaIoIOException_initWithNSString_(@"Double obtain");
                 }
-                @catch (JavaLangThrowable *e) {
+                @catch (NSException *e) {
                   __primaryException1 = e;
                   @throw e;
                 }
@@ -134,8 +137,8 @@ void OrgApacheLuceneStoreLockStressTest_mainWithNSStringArray_(IOSObjectArray *a
                     if (__primaryException1 != nil) {
                       @try {
                         [secondLock close];
-                      } @catch (JavaLangThrowable *e) {
-                        [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+                      } @catch (NSException *e) {
+                        [__primaryException1 addSuppressedWithNSException:e];
                       }
                     } else {
                       [secondLock close];
@@ -148,7 +151,7 @@ void OrgApacheLuceneStoreLockStressTest_mainWithNSStringArray_(IOSObjectArray *a
             }
             JavaLangThread_sleepWithLong_(sleepTimeMS);
           }
-          @catch (JavaLangThrowable *e) {
+          @catch (NSException *e) {
             __primaryException1 = e;
             @throw e;
           }
@@ -157,8 +160,8 @@ void OrgApacheLuceneStoreLockStressTest_mainWithNSStringArray_(IOSObjectArray *a
               if (__primaryException1 != nil) {
                 @try {
                   [l close];
-                } @catch (JavaLangThrowable *e) {
-                  [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+                } @catch (NSException *e) {
+                  [__primaryException1 addSuppressedWithNSException:e];
                 }
               } else {
                 [l close];
@@ -169,12 +172,12 @@ void OrgApacheLuceneStoreLockStressTest_mainWithNSStringArray_(IOSObjectArray *a
         @catch (OrgApacheLuceneStoreLockObtainFailedException *loe) {
         }
         if (i % 500 == 0) {
-          [JreLoadStatic(JavaLangSystem, out_) printlnWithNSString:JreStrcat("D$", (i * 100. / count), @"% done.")];
+          [JreLoadStatic(JavaLangSystem, out) printlnWithNSString:JreStrcat("D$", (i * 100. / count), @"% done.")];
         }
         JavaLangThread_sleepWithLong_(sleepTimeMS);
       }
     }
-    @catch (JavaLangThrowable *e) {
+    @catch (NSException *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -183,8 +186,8 @@ void OrgApacheLuceneStoreLockStressTest_mainWithNSStringArray_(IOSObjectArray *a
         if (__primaryException1 != nil) {
           @try {
             [socket close];
-          } @catch (JavaLangThrowable *e) {
-            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          } @catch (NSException *e) {
+            [__primaryException1 addSuppressedWithNSException:e];
           }
         } else {
           [socket close];
@@ -192,13 +195,13 @@ void OrgApacheLuceneStoreLockStressTest_mainWithNSStringArray_(IOSObjectArray *a
       }
     }
   }
-  [JreLoadStatic(JavaLangSystem, out_) printlnWithNSString:JreStrcat("$I$", @"Finished ", count, @" tries.")];
+  [JreLoadStatic(JavaLangSystem, out) printlnWithNSString:JreStrcat("$I$", @"Finished ", count, @" tries.")];
 }
 
 OrgApacheLuceneStoreFSLockFactory *OrgApacheLuceneStoreLockStressTest_getNewLockFactoryWithNSString_(NSString *lockFactoryClassName) {
   OrgApacheLuceneStoreLockStressTest_initialize();
   @try {
-    return (OrgApacheLuceneStoreFSLockFactory *) check_class_cast([((JavaLangReflectField *) nil_chk([((IOSClass *) nil_chk(IOSClass_forName_(lockFactoryClassName))) getField:@"INSTANCE"])) getWithId:nil], [OrgApacheLuceneStoreFSLockFactory class]);
+    return (OrgApacheLuceneStoreFSLockFactory *) cast_chk([((JavaLangReflectField *) nil_chk([((IOSClass *) nil_chk(IOSClass_forName_(lockFactoryClassName))) getField:@"INSTANCE"])) getWithId:nil], [OrgApacheLuceneStoreFSLockFactory class]);
   }
   @catch (JavaLangException *e) {
   }
@@ -207,7 +210,7 @@ OrgApacheLuceneStoreFSLockFactory *OrgApacheLuceneStoreLockStressTest_getNewLock
   }
   @catch (JavaLangException *e) {
   }
-  @throw [new_JavaIoIOException_initWithNSString_(JreStrcat("$$", @"Cannot get lock factory singleton of ", lockFactoryClassName)) autorelease];
+  @throw create_JavaIoIOException_initWithNSString_(JreStrcat("$$", @"Cannot get lock factory singleton of ", lockFactoryClassName));
 }
 
 void OrgApacheLuceneStoreLockStressTest_init(OrgApacheLuceneStoreLockStressTest *self) {
@@ -215,9 +218,11 @@ void OrgApacheLuceneStoreLockStressTest_init(OrgApacheLuceneStoreLockStressTest 
 }
 
 OrgApacheLuceneStoreLockStressTest *new_OrgApacheLuceneStoreLockStressTest_init() {
-  OrgApacheLuceneStoreLockStressTest *self = [OrgApacheLuceneStoreLockStressTest alloc];
-  OrgApacheLuceneStoreLockStressTest_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreLockStressTest, init)
+}
+
+OrgApacheLuceneStoreLockStressTest *create_OrgApacheLuceneStoreLockStressTest_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreLockStressTest, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreLockStressTest)

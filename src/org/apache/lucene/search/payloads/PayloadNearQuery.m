@@ -74,26 +74,26 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpa
 
 - (OrgApacheLuceneSearchSpansSpanWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                                  withBoolean:(jboolean)needsScores {
-  id<JavaUtilList> subWeights = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> subWeights = create_JavaUtilArrayList_init();
   for (OrgApacheLuceneSearchSpansSpanQuery * __strong q in nil_chk(clauses_)) {
     [subWeights addWithId:[((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(q)) createWeightWithOrgApacheLuceneSearchIndexSearcher:searcher withBoolean:false]];
   }
-  return [new_OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanWeight_initWithOrgApacheLuceneSearchPayloadsPayloadNearQuery_withJavaUtilList_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_(self, subWeights, searcher, needsScores ? OrgApacheLuceneSearchSpansSpanQuery_getTermContextsWithJavaUtilCollection_(subWeights) : nil) autorelease];
+  return create_OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanWeight_initWithOrgApacheLuceneSearchPayloadsPayloadNearQuery_withJavaUtilList_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_(self, subWeights, searcher, needsScores ? OrgApacheLuceneSearchSpansSpanQuery_getTermContextsWithJavaUtilCollection_(subWeights) : nil);
 }
 
 - (OrgApacheLuceneSearchPayloadsPayloadNearQuery *)clone {
   jint sz = [((id<JavaUtilList>) nil_chk(clauses_)) size];
   IOSObjectArray *newClauses = [IOSObjectArray arrayWithLength:sz type:OrgApacheLuceneSearchSpansSpanQuery_class_()];
   for (jint i = 0; i < sz; i++) {
-    IOSObjectArray_Set(newClauses, i, (OrgApacheLuceneSearchSpansSpanQuery *) check_class_cast([((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk([clauses_ getWithInt:i])) clone], [OrgApacheLuceneSearchSpansSpanQuery class]));
+    IOSObjectArray_Set(newClauses, i, (OrgApacheLuceneSearchSpansSpanQuery *) cast_chk([((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk([((id<JavaUtilList>) nil_chk(clauses_)) getWithInt:i])) clone], [OrgApacheLuceneSearchSpansSpanQuery class]));
   }
-  OrgApacheLuceneSearchPayloadsPayloadNearQuery *boostingNearQuery = [new_OrgApacheLuceneSearchPayloadsPayloadNearQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_withInt_withBoolean_withOrgApacheLuceneSearchPayloadsPayloadFunction_(newClauses, slop_, inOrder_, function_) autorelease];
+  OrgApacheLuceneSearchPayloadsPayloadNearQuery *boostingNearQuery = create_OrgApacheLuceneSearchPayloadsPayloadNearQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_withInt_withBoolean_withOrgApacheLuceneSearchPayloadsPayloadFunction_(newClauses, slop_, inOrder_, function_);
   [boostingNearQuery setBoostWithFloat:[self getBoost]];
   return boostingNearQuery;
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
-  JavaLangStringBuilder *buffer = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_init();
   [buffer appendWithNSString:@"payloadNear(["];
   id<JavaUtilIterator> i = [((id<JavaUtilList>) nil_chk(clauses_)) iterator];
   while ([((id<JavaUtilIterator>) nil_chk(i)) hasNext]) {
@@ -124,7 +124,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpa
   if (![super isEqual:obj]) {
     return false;
   }
-  OrgApacheLuceneSearchPayloadsPayloadNearQuery *other = (OrgApacheLuceneSearchPayloadsPayloadNearQuery *) check_class_cast(obj, [OrgApacheLuceneSearchPayloadsPayloadNearQuery class]);
+  OrgApacheLuceneSearchPayloadsPayloadNearQuery *other = (OrgApacheLuceneSearchPayloadsPayloadNearQuery *) cast_chk(obj, [OrgApacheLuceneSearchPayloadsPayloadNearQuery class]);
   return [((NSString *) nil_chk(fieldName_)) isEqual:((OrgApacheLuceneSearchPayloadsPayloadNearQuery *) nil_chk(other))->fieldName_] && [((OrgApacheLuceneSearchPayloadsPayloadFunction *) nil_chk(function_)) isEqual:other->function_];
 }
 
@@ -156,13 +156,15 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpa
 @end
 
 void OrgApacheLuceneSearchPayloadsPayloadNearQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_withInt_withBoolean_(OrgApacheLuceneSearchPayloadsPayloadNearQuery *self, IOSObjectArray *clauses, jint slop, jboolean inOrder) {
-  OrgApacheLuceneSearchPayloadsPayloadNearQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_withInt_withBoolean_withOrgApacheLuceneSearchPayloadsPayloadFunction_(self, clauses, slop, inOrder, [new_OrgApacheLuceneSearchPayloadsAveragePayloadFunction_init() autorelease]);
+  OrgApacheLuceneSearchPayloadsPayloadNearQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_withInt_withBoolean_withOrgApacheLuceneSearchPayloadsPayloadFunction_(self, clauses, slop, inOrder, create_OrgApacheLuceneSearchPayloadsAveragePayloadFunction_init());
 }
 
 OrgApacheLuceneSearchPayloadsPayloadNearQuery *new_OrgApacheLuceneSearchPayloadsPayloadNearQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_withInt_withBoolean_(IOSObjectArray *clauses, jint slop, jboolean inOrder) {
-  OrgApacheLuceneSearchPayloadsPayloadNearQuery *self = [OrgApacheLuceneSearchPayloadsPayloadNearQuery alloc];
-  OrgApacheLuceneSearchPayloadsPayloadNearQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_withInt_withBoolean_(self, clauses, slop, inOrder);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchPayloadsPayloadNearQuery, initWithOrgApacheLuceneSearchSpansSpanQueryArray_withInt_withBoolean_, clauses, slop, inOrder)
+}
+
+OrgApacheLuceneSearchPayloadsPayloadNearQuery *create_OrgApacheLuceneSearchPayloadsPayloadNearQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_withInt_withBoolean_(IOSObjectArray *clauses, jint slop, jboolean inOrder) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchPayloadsPayloadNearQuery, initWithOrgApacheLuceneSearchSpansSpanQueryArray_withInt_withBoolean_, clauses, slop, inOrder)
 }
 
 void OrgApacheLuceneSearchPayloadsPayloadNearQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_withInt_withBoolean_withOrgApacheLuceneSearchPayloadsPayloadFunction_(OrgApacheLuceneSearchPayloadsPayloadNearQuery *self, IOSObjectArray *clauses, jint slop, jboolean inOrder, OrgApacheLuceneSearchPayloadsPayloadFunction *function) {
@@ -172,9 +174,11 @@ void OrgApacheLuceneSearchPayloadsPayloadNearQuery_initWithOrgApacheLuceneSearch
 }
 
 OrgApacheLuceneSearchPayloadsPayloadNearQuery *new_OrgApacheLuceneSearchPayloadsPayloadNearQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_withInt_withBoolean_withOrgApacheLuceneSearchPayloadsPayloadFunction_(IOSObjectArray *clauses, jint slop, jboolean inOrder, OrgApacheLuceneSearchPayloadsPayloadFunction *function) {
-  OrgApacheLuceneSearchPayloadsPayloadNearQuery *self = [OrgApacheLuceneSearchPayloadsPayloadNearQuery alloc];
-  OrgApacheLuceneSearchPayloadsPayloadNearQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_withInt_withBoolean_withOrgApacheLuceneSearchPayloadsPayloadFunction_(self, clauses, slop, inOrder, function);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchPayloadsPayloadNearQuery, initWithOrgApacheLuceneSearchSpansSpanQueryArray_withInt_withBoolean_withOrgApacheLuceneSearchPayloadsPayloadFunction_, clauses, slop, inOrder, function)
+}
+
+OrgApacheLuceneSearchPayloadsPayloadNearQuery *create_OrgApacheLuceneSearchPayloadsPayloadNearQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_withInt_withBoolean_withOrgApacheLuceneSearchPayloadsPayloadFunction_(IOSObjectArray *clauses, jint slop, jboolean inOrder, OrgApacheLuceneSearchPayloadsPayloadFunction *function) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchPayloadsPayloadNearQuery, initWithOrgApacheLuceneSearchSpansSpanQueryArray_withInt_withBoolean_withOrgApacheLuceneSearchPayloadsPayloadFunction_, clauses, slop, inOrder, function)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPayloadsPayloadNearQuery)
@@ -190,14 +194,14 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPayloadsPayloadNearQuery)
 }
 
 - (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
-  OrgApacheLuceneSearchSpansSpans *spans = [super getSpansWithOrgApacheLuceneIndexLeafReaderContext:context withOrgApacheLuceneSearchSpansSpanWeight_PostingsEnum:JreLoadStatic(OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum, PAYLOADS)];
+  OrgApacheLuceneSearchSpansSpans *spans = [super getSpansWithOrgApacheLuceneIndexLeafReaderContext:context withOrgApacheLuceneSearchSpansSpanWeight_Postings:JreLoadEnum(OrgApacheLuceneSearchSpansSpanWeight_Postings, PAYLOADS)];
   OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *simScorer = simWeight_ == nil ? nil : [((OrgApacheLuceneSearchSimilaritiesSimilarity *) nil_chk(similarity_)) simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:simWeight_ withOrgApacheLuceneIndexLeafReaderContext:context];
-  return (spans == nil) ? nil : [new_OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanScorer_initWithOrgApacheLuceneSearchPayloadsPayloadNearQuery_withOrgApacheLuceneSearchSpansSpans_withOrgApacheLuceneSearchSpansSpanWeight_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(this$1_, spans, self, simScorer) autorelease];
+  return (spans == nil) ? nil : create_OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanScorer_initWithOrgApacheLuceneSearchPayloadsPayloadNearQuery_withOrgApacheLuceneSearchSpansSpans_withOrgApacheLuceneSearchSpansSpanWeight_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(this$1_, spans, self, simScorer);
 }
 
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                                withInt:(jint)doc {
-  OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanScorer *scorer = (OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanScorer *) check_class_cast([self scorerWithOrgApacheLuceneIndexLeafReaderContext:context], [OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanScorer class]);
+  OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanScorer *scorer = (OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanScorer *) cast_chk([self scorerWithOrgApacheLuceneIndexLeafReaderContext:context], [OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanScorer class]);
   if (scorer != nil) {
     jint newDoc = [scorer advanceWithInt:doc];
     if (newDoc == doc) {
@@ -206,7 +210,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPayloadsPayloadNearQuery)
       OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer = [((OrgApacheLuceneSearchSimilaritiesSimilarity *) nil_chk(similarity_)) simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:simWeight_ withOrgApacheLuceneIndexLeafReaderContext:context];
       OrgApacheLuceneSearchExplanation *scoreExplanation = [((OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *) nil_chk(docScorer)) explainWithInt:doc withOrgApacheLuceneSearchExplanation:freqExplanation];
       OrgApacheLuceneSearchExplanation *expl = OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_([((OrgApacheLuceneSearchExplanation *) nil_chk(scoreExplanation)) getValue], JreStrcat("$@$I$$$", @"weight(", [self getQuery], @" in ", doc, @") [", [[similarity_ getClass] getSimpleName], @"], result of:"), [IOSObjectArray arrayWithObjects:(id[]){ scoreExplanation } count:1 type:OrgApacheLuceneSearchExplanation_class_()]);
-      NSString *field = [((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(((OrgApacheLuceneSearchSpansSpanQuery *) check_class_cast([self getQuery], [OrgApacheLuceneSearchSpansSpanQuery class])))) getField];
+      NSString *field = [((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(((OrgApacheLuceneSearchSpansSpanQuery *) cast_chk([self getQuery], [OrgApacheLuceneSearchSpansSpanQuery class])))) getField];
       OrgApacheLuceneSearchExplanation *payloadExpl = [((OrgApacheLuceneSearchPayloadsPayloadFunction *) nil_chk(this$1_->function_)) explainWithInt:doc withNSString:field withInt:scorer->payloadsSeen_ withFloat:scorer->payloadScore_];
       return OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_([((OrgApacheLuceneSearchExplanation *) nil_chk(expl)) getValue] * [((OrgApacheLuceneSearchExplanation *) nil_chk(payloadExpl)) getValue], @"PayloadNearQuery, product of:", [IOSObjectArray arrayWithObjects:(id[]){ expl, payloadExpl } count:2 type:OrgApacheLuceneSearchExplanation_class_()]);
     }
@@ -221,7 +225,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPayloadsPayloadNearQuery)
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchPayloadsPayloadNearQuery:withJavaUtilList:withOrgApacheLuceneSearchIndexSearcher:withJavaUtilMap:", "PayloadNearSpanWeight", NULL, 0x1, NULL, NULL },
+    { "initWithOrgApacheLuceneSearchPayloadsPayloadNearQuery:withJavaUtilList:withOrgApacheLuceneSearchIndexSearcher:withJavaUtilMap:", "PayloadNearSpanWeight", NULL, 0x1, NULL, "(Lorg/apache/lucene/search/payloads/PayloadNearQuery;Ljava/util/List<Lorg/apache/lucene/search/spans/SpanWeight;>;Lorg/apache/lucene/search/IndexSearcher;Ljava/util/Map<Lorg/apache/lucene/index/Term;Lorg/apache/lucene/index/TermContext;>;)V" },
     { "scorerWithOrgApacheLuceneIndexLeafReaderContext:", "scorer", "Lorg.apache.lucene.search.Scorer;", 0x1, "Ljava.io.IOException;", NULL },
     { "explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x1, "Ljava.io.IOException;", NULL },
   };
@@ -240,9 +244,11 @@ void OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanWeight_initWit
 }
 
 OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanWeight *new_OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanWeight_initWithOrgApacheLuceneSearchPayloadsPayloadNearQuery_withJavaUtilList_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_(OrgApacheLuceneSearchPayloadsPayloadNearQuery *outer$, id<JavaUtilList> subWeights, OrgApacheLuceneSearchIndexSearcher *searcher, id<JavaUtilMap> terms) {
-  OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanWeight *self = [OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanWeight alloc];
-  OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanWeight_initWithOrgApacheLuceneSearchPayloadsPayloadNearQuery_withJavaUtilList_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_(self, outer$, subWeights, searcher, terms);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanWeight, initWithOrgApacheLuceneSearchPayloadsPayloadNearQuery_withJavaUtilList_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_, outer$, subWeights, searcher, terms)
+}
+
+OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanWeight *create_OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanWeight_initWithOrgApacheLuceneSearchPayloadsPayloadNearQuery_withJavaUtilList_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_(OrgApacheLuceneSearchPayloadsPayloadNearQuery *outer$, id<JavaUtilList> subWeights, OrgApacheLuceneSearchIndexSearcher *searcher, id<JavaUtilMap> terms) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanWeight, initWithOrgApacheLuceneSearchPayloadsPayloadNearQuery_withJavaUtilList_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_, outer$, subWeights, searcher, terms)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanWeight)
@@ -264,7 +270,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPayloadsPayloadNearQuery_P
     JreStrongAssign(&((OrgApacheLuceneUtilBytesRef *) nil_chk(scratch_))->bytes_, thePayload);
     scratch_->offset_ = 0;
     scratch_->length_ = ((IOSByteArray *) nil_chk(thePayload))->size_;
-    payloadScore_ = [((OrgApacheLuceneSearchPayloadsPayloadFunction *) nil_chk(this$0_->function_)) currentScoreWithInt:[self docID] withNSString:this$0_->fieldName_ withInt:start withInt:end withInt:payloadsSeen_ withFloat:payloadScore_ withFloat:[((OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *) nil_chk(docScorer_)) computePayloadFactorWithInt:[self docID] withInt:[((OrgApacheLuceneSearchSpansSpans *) nil_chk(spans_PayloadNearSpanScorer_)) startPosition] withInt:[spans_PayloadNearSpanScorer_ endPosition] withOrgApacheLuceneUtilBytesRef:scratch_]];
+    payloadScore_ = [((OrgApacheLuceneSearchPayloadsPayloadFunction *) nil_chk(this$0_->function_)) currentScoreWithInt:[self docID] withNSString:this$0_->fieldName_ withInt:start withInt:end withInt:payloadsSeen_ withFloat:payloadScore_ withFloat:[((OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *) nil_chk(docScorer_)) computePayloadFactorWithInt:[self docID] withInt:[((OrgApacheLuceneSearchSpansSpans *) nil_chk(spans_PayloadNearSpanScorer_)) startPosition] withInt:[((OrgApacheLuceneSearchSpansSpans *) nil_chk(spans_PayloadNearSpanScorer_)) endPosition] withOrgApacheLuceneUtilBytesRef:scratch_]];
     ++payloadsSeen_;
   }
 }
@@ -277,7 +283,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPayloadsPayloadNearQuery_P
 - (void)doCurrentSpans {
   [((OrgApacheLuceneSearchPayloadsPayloadSpanCollector *) nil_chk(collector_)) reset];
   [((OrgApacheLuceneSearchSpansSpans *) nil_chk(spans_PayloadNearSpanScorer_)) collectWithOrgApacheLuceneSearchSpansSpanCollector:collector_];
-  [self processPayloadsWithJavaUtilCollection:[collector_ getPayloads] withInt:[spans_PayloadNearSpanScorer_ startPosition] withInt:[spans_PayloadNearSpanScorer_ endPosition]];
+  [self processPayloadsWithJavaUtilCollection:[collector_ getPayloads] withInt:[((OrgApacheLuceneSearchSpansSpans *) nil_chk(spans_PayloadNearSpanScorer_)) startPosition] withInt:[((OrgApacheLuceneSearchSpansSpans *) nil_chk(spans_PayloadNearSpanScorer_)) endPosition]];
 }
 
 - (jfloat)scoreCurrentDoc {
@@ -295,7 +301,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPayloadsPayloadNearQuery_P
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneSearchPayloadsPayloadNearQuery:withOrgApacheLuceneSearchSpansSpans:withOrgApacheLuceneSearchSpansSpanWeight:withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:", "PayloadNearSpanScorer", NULL, 0x4, NULL, NULL },
-    { "processPayloadsWithJavaUtilCollection:withInt:withInt:", "processPayloads", "V", 0x4, NULL, NULL },
+    { "processPayloadsWithJavaUtilCollection:withInt:withInt:", "processPayloads", "V", 0x4, NULL, "(Ljava/util/Collection<[LB;>;II)V" },
     { "doStartCurrentDoc", NULL, "V", 0x4, "Ljava.io.IOException;", NULL },
     { "doCurrentSpans", NULL, "V", 0x4, "Ljava.io.IOException;", NULL },
     { "scoreCurrentDoc", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
@@ -323,9 +329,11 @@ void OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanScorer_initWit
 }
 
 OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanScorer *new_OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanScorer_initWithOrgApacheLuceneSearchPayloadsPayloadNearQuery_withOrgApacheLuceneSearchSpansSpans_withOrgApacheLuceneSearchSpansSpanWeight_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(OrgApacheLuceneSearchPayloadsPayloadNearQuery *outer$, OrgApacheLuceneSearchSpansSpans *spans, OrgApacheLuceneSearchSpansSpanWeight *weight, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer) {
-  OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanScorer *self = [OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanScorer alloc];
-  OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanScorer_initWithOrgApacheLuceneSearchPayloadsPayloadNearQuery_withOrgApacheLuceneSearchSpansSpans_withOrgApacheLuceneSearchSpansSpanWeight_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(self, outer$, spans, weight, docScorer);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanScorer, initWithOrgApacheLuceneSearchPayloadsPayloadNearQuery_withOrgApacheLuceneSearchSpansSpans_withOrgApacheLuceneSearchSpansSpanWeight_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_, outer$, spans, weight, docScorer)
+}
+
+OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanScorer *create_OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanScorer_initWithOrgApacheLuceneSearchPayloadsPayloadNearQuery_withOrgApacheLuceneSearchSpansSpans_withOrgApacheLuceneSearchSpansSpanWeight_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(OrgApacheLuceneSearchPayloadsPayloadNearQuery *outer$, OrgApacheLuceneSearchSpansSpans *spans, OrgApacheLuceneSearchSpansSpanWeight *weight, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanScorer, initWithOrgApacheLuceneSearchPayloadsPayloadNearQuery_withOrgApacheLuceneSearchSpansSpans_withOrgApacheLuceneSearchSpansSpanWeight_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_, outer$, spans, weight, docScorer)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanScorer)

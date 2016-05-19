@@ -19,12 +19,12 @@
 }
 
 - (OrgApacheLuceneAnalysisBrBrazilianStemFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg {
-  return [new_OrgApacheLuceneAnalysisBrBrazilianStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(inArg) autorelease];
+  return create_OrgApacheLuceneAnalysisBrBrazilianStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(inArg);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "BrazilianStemFilterFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "BrazilianStemFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.br.BrazilianStemFilter;", 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisBrBrazilianStemFilterFactory = { 2, "BrazilianStemFilterFactory", "org.apache.lucene.analysis.br", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
@@ -36,14 +36,16 @@
 void OrgApacheLuceneAnalysisBrBrazilianStemFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisBrBrazilianStemFilterFactory *self, id<JavaUtilMap> args) {
   OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisBrBrazilianStemFilterFactory *new_OrgApacheLuceneAnalysisBrBrazilianStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisBrBrazilianStemFilterFactory *self = [OrgApacheLuceneAnalysisBrBrazilianStemFilterFactory alloc];
-  OrgApacheLuceneAnalysisBrBrazilianStemFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisBrBrazilianStemFilterFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisBrBrazilianStemFilterFactory *create_OrgApacheLuceneAnalysisBrBrazilianStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisBrBrazilianStemFilterFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisBrBrazilianStemFilterFactory)

@@ -40,13 +40,19 @@ __attribute__((unused)) static void OrgApacheLuceneQueriesFunctionValuesourceLit
 
 __attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource *outer$, OrgApacheLuceneQueriesFunctionValueSource *arg$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource *outer$, OrgApacheLuceneQueriesFunctionValueSource *arg$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_$1)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource)
 
-jint OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_hash__;
+jint OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_hash;
 
 @implementation OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource
+
++ (jint)hash_ {
+  return OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_hash;
+}
 
 - (instancetype)initWithNSString:(NSString *)string {
   OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_initWithNSString_(self, string);
@@ -59,7 +65,7 @@ jint OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_hash__;
 
 - (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
                                  withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext {
-  return [new_OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_withOrgApacheLuceneQueriesFunctionValueSource_(self, self) autorelease];
+  return create_OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_withOrgApacheLuceneQueriesFunctionValueSource_(self, self);
 }
 
 - (NSString *)description__ {
@@ -69,12 +75,12 @@ jint OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_hash__;
 - (jboolean)isEqual:(id)o {
   if (self == o) return true;
   if (!([o isKindOfClass:[OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource class]])) return false;
-  OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource *that = (OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource *) check_class_cast(o, [OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource class]);
+  OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource *that = (OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource *) cast_chk(o, [OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource class]);
   return [((NSString *) nil_chk(string_)) isEqual:((OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource *) nil_chk(that))->string_];
 }
 
 - (NSUInteger)hash {
-  return OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_hash__ + ((jint) [((NSString *) nil_chk(string_)) hash]);
+  return OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_hash + ((jint) [((NSString *) nil_chk(string_)) hash]);
 }
 
 - (void)dealloc {
@@ -85,7 +91,7 @@ jint OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_hash__;
 
 + (void)initialize {
   if (self == [OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource class]) {
-    OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_hash__ = ((jint) [OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_class_() hash]);
+    OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_hash = ((jint) [OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_class_() hash]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource)
   }
 }
@@ -102,7 +108,7 @@ jint OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_hash__;
   static const J2ObjcFieldInfo fields[] = {
     { "string_", NULL, 0x14, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
     { "bytesRef_", NULL, 0x14, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "hash__", "hash", 0x19, "I", &OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_hash__, NULL, .constantValue.asLong = 0 },
+    { "hash", "hash", 0x19, "I", &OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_hash, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource = { 2, "LiteralValueSource", "org.apache.lucene.queries.function.valuesource", NULL, 0x1, 6, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource;
@@ -117,9 +123,11 @@ void OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_initWithNSStrin
 }
 
 OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_initWithNSString_(NSString *string) {
-  OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource *self = [OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource alloc];
-  OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_initWithNSString_(self, string);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource, initWithNSString_, string)
+}
+
+OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource *create_OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_initWithNSString_(NSString *string) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource, initWithNSString_, string)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource)
@@ -174,9 +182,11 @@ void OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_$1_initWithOrgA
 }
 
 OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource *outer$, OrgApacheLuceneQueriesFunctionValueSource *arg$0) {
-  OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_$1 *self = [OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_$1 alloc];
-  OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_withOrgApacheLuceneQueriesFunctionValueSource_(self, outer$, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_$1, initWithOrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_withOrgApacheLuceneQueriesFunctionValueSource_, outer$, arg$0)
+}
+
+OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource *outer$, OrgApacheLuceneQueriesFunctionValueSource *arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_$1, initWithOrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_withOrgApacheLuceneQueriesFunctionValueSource_, outer$, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_$1)

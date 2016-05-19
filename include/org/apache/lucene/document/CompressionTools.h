@@ -5,54 +5,103 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneDocumentCompressionTools_INCLUDE_ALL")
-#if OrgApacheLuceneDocumentCompressionTools_RESTRICT
-#define OrgApacheLuceneDocumentCompressionTools_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneDocumentCompressionTools")
+#ifdef RESTRICT_OrgApacheLuceneDocumentCompressionTools
+#define INCLUDE_ALL_OrgApacheLuceneDocumentCompressionTools 0
 #else
-#define OrgApacheLuceneDocumentCompressionTools_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneDocumentCompressionTools 1
 #endif
-#undef OrgApacheLuceneDocumentCompressionTools_RESTRICT
+#undef RESTRICT_OrgApacheLuceneDocumentCompressionTools
 
-#if !defined (_OrgApacheLuceneDocumentCompressionTools_) && (OrgApacheLuceneDocumentCompressionTools_INCLUDE_ALL || OrgApacheLuceneDocumentCompressionTools_INCLUDE)
-#define _OrgApacheLuceneDocumentCompressionTools_
+#if !defined (OrgApacheLuceneDocumentCompressionTools_) && (INCLUDE_ALL_OrgApacheLuceneDocumentCompressionTools || defined(INCLUDE_OrgApacheLuceneDocumentCompressionTools))
+#define OrgApacheLuceneDocumentCompressionTools_
 
 @class IOSByteArray;
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief Simple utility class providing static methods to
+ compress and decompress binary data for stored fields.
+ This class uses java.util.zip.Deflater and Inflater
+ classes to compress and decompress.
+ */
 @interface OrgApacheLuceneDocumentCompressionTools : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Compresses all bytes in the array, with default BEST_COMPRESSION level
+ */
 + (IOSByteArray *)compressWithByteArray:(IOSByteArray *)value;
 
+/*!
+ @brief Compresses the specified byte range, with default BEST_COMPRESSION level
+ */
 + (IOSByteArray *)compressWithByteArray:(IOSByteArray *)value
                                 withInt:(jint)offset
                                 withInt:(jint)length;
 
+/*!
+ @brief Compresses the specified byte range using the
+ specified compressionLevel (constants are defined in
+ java.util.zip.Deflater).
+ */
 + (IOSByteArray *)compressWithByteArray:(IOSByteArray *)value
                                 withInt:(jint)offset
                                 withInt:(jint)length
                                 withInt:(jint)compressionLevel;
 
+/*!
+ @brief Compresses the String value, with default BEST_COMPRESSION level
+ */
 + (IOSByteArray *)compressStringWithNSString:(NSString *)value;
 
+/*!
+ @brief Compresses the String value using the specified
+ compressionLevel (constants are defined in
+ java.util.zip.Deflater).
+ */
 + (IOSByteArray *)compressStringWithNSString:(NSString *)value
                                      withInt:(jint)compressionLevel;
 
+/*!
+ @brief Decompress the byte array previously returned by
+ compress
+ */
 + (IOSByteArray *)decompressWithByteArray:(IOSByteArray *)value;
 
+/*!
+ @brief Decompress the byte array previously returned by
+ compress
+ */
 + (IOSByteArray *)decompressWithByteArray:(IOSByteArray *)value
                                   withInt:(jint)offset
                                   withInt:(jint)length;
 
+/*!
+ @brief Decompress the byte array previously returned by
+ compress (referenced by the provided BytesRef)
+ */
 + (IOSByteArray *)decompressWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes;
 
+/*!
+ @brief Decompress the byte array previously returned by
+ compressString back into a String
+ */
 + (NSString *)decompressStringWithByteArray:(IOSByteArray *)value;
 
+/*!
+ @brief Decompress the byte array previously returned by
+ compressString back into a String
+ */
 + (NSString *)decompressStringWithByteArray:(IOSByteArray *)value
                                     withInt:(jint)offset
                                     withInt:(jint)length;
 
+/*!
+ @brief Decompress the byte array (referenced by the provided BytesRef) 
+ previously returned by compressString back into a String
+ */
 + (NSString *)decompressStringWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes;
 
 @end
@@ -85,4 +134,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentCompressionTools)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneDocumentCompressionTools_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneDocumentCompressionTools")

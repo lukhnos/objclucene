@@ -5,29 +5,42 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisStandardStandardTokenizerFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisStandardStandardTokenizerFactory_RESTRICT
-#define OrgApacheLuceneAnalysisStandardStandardTokenizerFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisStandardStandardTokenizerFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisStandardStandardTokenizerFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisStandardStandardTokenizerFactory 0
 #else
-#define OrgApacheLuceneAnalysisStandardStandardTokenizerFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisStandardStandardTokenizerFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisStandardStandardTokenizerFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisStandardStandardTokenizerFactory
 
-#if !defined (_OrgApacheLuceneAnalysisStandardStandardTokenizerFactory_) && (OrgApacheLuceneAnalysisStandardStandardTokenizerFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisStandardStandardTokenizerFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisStandardStandardTokenizerFactory_
+#if !defined (OrgApacheLuceneAnalysisStandardStandardTokenizerFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisStandardStandardTokenizerFactory || defined(INCLUDE_OrgApacheLuceneAnalysisStandardStandardTokenizerFactory))
+#define OrgApacheLuceneAnalysisStandardStandardTokenizerFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenizerFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenizerFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenizerFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenizerFactory 1
 #include "org/apache/lucene/analysis/util/TokenizerFactory.h"
 
 @class OrgApacheLuceneAnalysisTokenizer;
 @class OrgApacheLuceneUtilAttributeFactory;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>StandardTokenizer</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_stndrd" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.StandardTokenizerFactory" maxTokenLength="255"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode 
+ */
 @interface OrgApacheLuceneAnalysisStandardStandardTokenizerFactory : OrgApacheLuceneAnalysisUtilTokenizerFactory
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new StandardTokenizerFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenizer *)createWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
@@ -40,8 +53,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisStandardStandardTokenizerFactory_i
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardStandardTokenizerFactory *new_OrgApacheLuceneAnalysisStandardStandardTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardStandardTokenizerFactory *create_OrgApacheLuceneAnalysisStandardStandardTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisStandardStandardTokenizerFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisStandardStandardTokenizerFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisStandardStandardTokenizerFactory")

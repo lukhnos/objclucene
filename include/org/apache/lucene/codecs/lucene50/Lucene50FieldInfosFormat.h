@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_RESTRICT
-#define OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat")
+#ifdef RESTRICT_OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat
+#define INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat 0
 #else
-#define OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat 1
 #endif
-#undef OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat
 
-#if !defined (_OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_) && (OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_INCLUDE_ALL || OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_INCLUDE)
-#define _OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_
+#if !defined (OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_) && (INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat || defined(INCLUDE_OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat))
+#define OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_
 
-#define OrgApacheLuceneCodecsFieldInfosFormat_RESTRICT 1
-#define OrgApacheLuceneCodecsFieldInfosFormat_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneCodecsFieldInfosFormat 1
+#define INCLUDE_OrgApacheLuceneCodecsFieldInfosFormat 1
 #include "org/apache/lucene/codecs/FieldInfosFormat.h"
 
 @class OrgApacheLuceneIndexFieldInfos;
@@ -25,17 +25,88 @@
 @class OrgApacheLuceneStoreDirectory;
 @class OrgApacheLuceneStoreIOContext;
 
-#define OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_FORMAT_START 0
-#define OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_FORMAT_SAFE_MAPS 1
-#define OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_FORMAT_CURRENT 1
-#define OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_STORE_TERMVECTOR 1
-#define OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_OMIT_NORMS 2
-#define OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_STORE_PAYLOADS 4
-
+/*!
+ @brief Lucene 5.0 Field Infos format.
+ <p>Field names are stored in the field info file, with suffix <tt>.fnm</tt>.
+ <p>FieldInfos (.fnm) --&gt; Header,FieldsCount, &lt;FieldName,FieldNumber,
+ FieldBits,DocValuesBits,DocValuesGen,Attributes&gt; <sup>FieldsCount</sup>,Footer
+ <p>Data types:
+ <ul>
+ <li>Header --&gt; <code>IndexHeader</code></li>
+ <li>FieldsCount --&gt; <code>VInt</code></li>
+ <li>FieldName --&gt; <code>String</code></li>
+ <li>FieldBits, IndexOptions, DocValuesBits --&gt; <code>Byte</code></li>
+ <li>FieldNumber --&gt; <code>VInt</code></li>
+ <li>Attributes --&gt; <code>Map&lt;String,String&gt;</code></li>
+ <li>DocValuesGen --&gt; <code>Int64</code></li>
+ <li>Footer --&gt; <code>CodecFooter</code></li>
+ </ul>
+ Field Descriptions:
+ <ul>
+ <li>FieldsCount: the number of fields in this file.</li>
+ <li>FieldName: name of the field as a UTF-8 String.</li>
+ <li>FieldNumber: the field's number. Note that unlike previous versions of
+ Lucene, the fields are not numbered implicitly by their order in the
+ file, instead explicitly.</li>
+ <li>FieldBits: a byte containing field options.
+ <ul>
+ <li>The low order bit (0x1) is one for fields that have term vectors
+ stored, and zero for fields without term vectors.</li>
+ <li>If the second lowest order-bit is set (0x2), norms are omitted for the
+ indexed field.</li>
+ <li>If the third lowest-order bit is set (0x4), payloads are stored for the
+ indexed field.</li>
+ </ul>
+ </li>
+ <li>IndexOptions: a byte containing index options.
+ <ul>
+ <li>0: not indexed</li>
+ <li>1: indexed as DOCS_ONLY</li>
+ <li>2: indexed as DOCS_AND_FREQS</li>
+ <li>3: indexed as DOCS_AND_FREQS_AND_POSITIONS</li>
+ <li>4: indexed as DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS</li>
+ </ul>
+ </li>
+ <li>DocValuesBits: a byte containing per-document value types. The type
+ recorded as two four-bit integers, with the high-order bits representing
+ <code>norms</code> options, and the low-order bits representing 
+ <code>DocValues</code> options. Each four-bit integer can be decoded as such:
+ <ul>
+ <li>0: no DocValues for this field.</li>
+ <li>1: NumericDocValues. (<code>DocValuesType.NUMERIC</code>)</li>
+ <li>2: BinaryDocValues. (<code>DocValuesType#BINARY</code>)</li>
+ <li>3: SortedDocValues. (<code>DocValuesType#SORTED</code>)</li>
+ </ul>
+ </li>
+ <li>DocValuesGen is the generation count of the field's DocValues. If this is -1,
+ there are no DocValues updates to that field. Anything above zero means there 
+ are updates stored by <code>DocValuesFormat</code>.</li>
+ <li>Attributes: a key-value map of codec-private attributes.</li>
+ </ul>
+ */
 @interface OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat : OrgApacheLuceneCodecsFieldInfosFormat
+
++ (NSString *)EXTENSION;
+
++ (NSString *)CODEC_NAME;
+
++ (jint)FORMAT_START;
+
++ (jint)FORMAT_SAFE_MAPS;
+
++ (jint)FORMAT_CURRENT;
+
++ (jbyte)STORE_TERMVECTOR;
+
++ (jbyte)OMIT_NORMS;
+
++ (jbyte)STORE_PAYLOADS;
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ */
 - (instancetype)init;
 
 - (OrgApacheLuceneIndexFieldInfos *)readWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
@@ -53,30 +124,51 @@
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_EXTENSION_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat, EXTENSION_, NSString *)
+/*!
+ @brief Extension of field infos
+ */
+inline NSString *OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_get_EXTENSION();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_EXTENSION;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat, EXTENSION, NSString *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_CODEC_NAME_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat, CODEC_NAME_, NSString *)
+inline NSString *OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_get_CODEC_NAME();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_CODEC_NAME;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat, CODEC_NAME, NSString *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat, FORMAT_START, jint)
+inline jint OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_get_FORMAT_START();
+#define OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_FORMAT_START 0
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat, FORMAT_START, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat, FORMAT_SAFE_MAPS, jint)
+inline jint OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_get_FORMAT_SAFE_MAPS();
+#define OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_FORMAT_SAFE_MAPS 1
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat, FORMAT_SAFE_MAPS, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat, FORMAT_CURRENT, jint)
+inline jint OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_get_FORMAT_CURRENT();
+#define OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_FORMAT_CURRENT 1
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat, FORMAT_CURRENT, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat, STORE_TERMVECTOR, jbyte)
+inline jbyte OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_get_STORE_TERMVECTOR();
+#define OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_STORE_TERMVECTOR 1
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat, STORE_TERMVECTOR, jbyte)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat, OMIT_NORMS, jbyte)
+inline jbyte OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_get_OMIT_NORMS();
+#define OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_OMIT_NORMS 2
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat, OMIT_NORMS, jbyte)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat, STORE_PAYLOADS, jbyte)
+inline jbyte OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_get_STORE_PAYLOADS();
+#define OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_STORE_PAYLOADS 4
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat, STORE_PAYLOADS, jbyte)
 
 FOUNDATION_EXPORT void OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_init(OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat *new_OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat *create_OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat")

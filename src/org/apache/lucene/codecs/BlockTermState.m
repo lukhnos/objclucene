@@ -20,7 +20,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)copyFromWithOrgApacheLuceneIndexTermState:(OrgApacheLuceneIndexTermState *)_other {
   JreAssert(([_other isKindOfClass:[OrgApacheLuceneCodecsBlockTermState class]]), (JreStrcat("$$", @"can not copy from ", [[((OrgApacheLuceneIndexTermState *) nil_chk(_other)) getClass] getName])));
-  OrgApacheLuceneCodecsBlockTermState *other = (OrgApacheLuceneCodecsBlockTermState *) check_class_cast(_other, [OrgApacheLuceneCodecsBlockTermState class]);
+  OrgApacheLuceneCodecsBlockTermState *other = (OrgApacheLuceneCodecsBlockTermState *) cast_chk(_other, [OrgApacheLuceneCodecsBlockTermState class]);
   [super copyFromWithOrgApacheLuceneIndexTermState:_other];
   docFreq_ = other->docFreq_;
   totalTermFreq_ = other->totalTermFreq_;
@@ -63,9 +63,11 @@ void OrgApacheLuceneCodecsBlockTermState_init(OrgApacheLuceneCodecsBlockTermStat
 }
 
 OrgApacheLuceneCodecsBlockTermState *new_OrgApacheLuceneCodecsBlockTermState_init() {
-  OrgApacheLuceneCodecsBlockTermState *self = [OrgApacheLuceneCodecsBlockTermState alloc];
-  OrgApacheLuceneCodecsBlockTermState_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsBlockTermState, init)
+}
+
+OrgApacheLuceneCodecsBlockTermState *create_OrgApacheLuceneCodecsBlockTermState_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsBlockTermState, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsBlockTermState)

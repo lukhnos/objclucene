@@ -28,6 +28,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchJoinCheckJoinIndex_init
 
 __attribute__((unused)) static OrgApacheLuceneSearchJoinCheckJoinIndex *new_OrgApacheLuceneSearchJoinCheckJoinIndex_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchJoinCheckJoinIndex *create_OrgApacheLuceneSearchJoinCheckJoinIndex_init();
+
 @implementation OrgApacheLuceneSearchJoinCheckJoinIndex
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -58,9 +60,11 @@ void OrgApacheLuceneSearchJoinCheckJoinIndex_init(OrgApacheLuceneSearchJoinCheck
 }
 
 OrgApacheLuceneSearchJoinCheckJoinIndex *new_OrgApacheLuceneSearchJoinCheckJoinIndex_init() {
-  OrgApacheLuceneSearchJoinCheckJoinIndex *self = [OrgApacheLuceneSearchJoinCheckJoinIndex alloc];
-  OrgApacheLuceneSearchJoinCheckJoinIndex_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinCheckJoinIndex, init)
+}
+
+OrgApacheLuceneSearchJoinCheckJoinIndex *create_OrgApacheLuceneSearchJoinCheckJoinIndex_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinCheckJoinIndex, init)
 }
 
 void OrgApacheLuceneSearchJoinCheckJoinIndex_checkWithOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneSearchJoinBitSetProducer_(OrgApacheLuceneIndexIndexReader *reader, id<OrgApacheLuceneSearchJoinBitSetProducer> parentsFilter) {
@@ -71,25 +75,25 @@ void OrgApacheLuceneSearchJoinCheckJoinIndex_checkWithOrgApacheLuceneIndexIndexR
     }
     OrgApacheLuceneUtilBitSet *parents = [((id<OrgApacheLuceneSearchJoinBitSetProducer>) nil_chk(parentsFilter)) getBitSetWithOrgApacheLuceneIndexLeafReaderContext:context];
     if (parents == nil || [parents cardinality] == 0) {
-      @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$@$", @"Every segment should have at least one parent, but ", [context reader], @" does not have any")) autorelease];
+      @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$@$", @"Every segment should have at least one parent, but ", [context reader], @" does not have any"));
     }
-    if ([((OrgApacheLuceneUtilBitSet *) nil_chk(parents)) getWithInt:[((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) maxDoc] - 1] == false) {
-      @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$@$", @"The last document of a segment must always be a parent, but ", [context reader], @" has a child as a last doc")) autorelease];
+    if ([parents getWithInt:[((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) maxDoc] - 1] == false) {
+      @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$@$", @"The last document of a segment must always be a parent, but ", [context reader], @" has a child as a last doc"));
     }
     id<OrgApacheLuceneUtilBits> liveDocs = [((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) getLiveDocs];
     if (liveDocs != nil) {
       jint prevParentDoc = -1;
-      OrgApacheLuceneSearchDocIdSetIterator *it = [new_OrgApacheLuceneUtilBitSetIterator_initWithOrgApacheLuceneUtilBitSet_withLong_(parents, 0LL) autorelease];
+      OrgApacheLuceneSearchDocIdSetIterator *it = create_OrgApacheLuceneUtilBitSetIterator_initWithOrgApacheLuceneUtilBitSet_withLong_(parents, 0LL);
       for (jint parentDoc = [it nextDoc]; parentDoc != OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS; parentDoc = [it nextDoc]) {
         jboolean parentIsLive = [liveDocs getWithInt:parentDoc];
         for (jint child = prevParentDoc + 1; child != parentDoc; child++) {
           jboolean childIsLive = [liveDocs getWithInt:child];
           if (parentIsLive != childIsLive) {
             if (childIsLive) {
-              @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$@$I", @"Parent doc ", parentDoc, @" of segment ", [context reader], @" is live but has a deleted child document ", child)) autorelease];
+              @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$@$I", @"Parent doc ", parentDoc, @" of segment ", [context reader], @" is live but has a deleted child document ", child));
             }
             else {
-              @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$@$I", @"Parent doc ", parentDoc, @" of segment ", [context reader], @" is deleted but has a live child document ", child)) autorelease];
+              @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$@$I", @"Parent doc ", parentDoc, @" of segment ", [context reader], @" is deleted but has a live child document ", child));
             }
           }
         }

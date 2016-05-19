@@ -5,24 +5,36 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexSlowCodecReaderWrapper_INCLUDE_ALL")
-#if OrgApacheLuceneIndexSlowCodecReaderWrapper_RESTRICT
-#define OrgApacheLuceneIndexSlowCodecReaderWrapper_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexSlowCodecReaderWrapper")
+#ifdef RESTRICT_OrgApacheLuceneIndexSlowCodecReaderWrapper
+#define INCLUDE_ALL_OrgApacheLuceneIndexSlowCodecReaderWrapper 0
 #else
-#define OrgApacheLuceneIndexSlowCodecReaderWrapper_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexSlowCodecReaderWrapper 1
 #endif
-#undef OrgApacheLuceneIndexSlowCodecReaderWrapper_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexSlowCodecReaderWrapper
 
-#if !defined (_OrgApacheLuceneIndexSlowCodecReaderWrapper_) && (OrgApacheLuceneIndexSlowCodecReaderWrapper_INCLUDE_ALL || OrgApacheLuceneIndexSlowCodecReaderWrapper_INCLUDE)
-#define _OrgApacheLuceneIndexSlowCodecReaderWrapper_
+#if !defined (OrgApacheLuceneIndexSlowCodecReaderWrapper_) && (INCLUDE_ALL_OrgApacheLuceneIndexSlowCodecReaderWrapper || defined(INCLUDE_OrgApacheLuceneIndexSlowCodecReaderWrapper))
+#define OrgApacheLuceneIndexSlowCodecReaderWrapper_
 
 @class OrgApacheLuceneIndexCodecReader;
 @class OrgApacheLuceneIndexLeafReader;
 
+/*!
+ @brief Wraps arbitrary readers for merging.
+ Note that this can cause slow
+ and memory-intensive merges. Consider using <code>FilterCodecReader</code>
+ instead.
+ */
 @interface OrgApacheLuceneIndexSlowCodecReaderWrapper : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Returns a <code>CodecReader</code> view of reader.
+ <p>
+ If <code>reader</code> is already a <code>CodecReader</code>, it is returned
+ directly. Otherwise, a (slow) view is returned.
+ */
 + (OrgApacheLuceneIndexCodecReader *)wrapWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader;
 
 @end
@@ -35,4 +47,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSlowCodecReaderWrapper)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexSlowCodecReaderWrapper_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSlowCodecReaderWrapper")

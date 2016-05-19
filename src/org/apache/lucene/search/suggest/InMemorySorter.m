@@ -32,7 +32,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestInMemorySorter, comparator_, id<
 }
 
 - (void)addWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)utf8 {
-  if (closed_) @throw [new_JavaLangIllegalStateException_init() autorelease];
+  if (closed_) @throw create_JavaLangIllegalStateException_init();
   [((OrgApacheLuceneUtilBytesRefArray *) nil_chk(buffer_)) appendWithOrgApacheLuceneUtilBytesRef:utf8];
 }
 
@@ -53,10 +53,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestInMemorySorter, comparator_, id<
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilComparator:", "InMemorySorter", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilComparator:", "InMemorySorter", NULL, 0x1, NULL, "(Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;)V" },
     { "addWithOrgApacheLuceneUtilBytesRef:", "add", "V", 0x1, NULL, NULL },
     { "iterator", NULL, "Lorg.apache.lucene.util.BytesRefIterator;", 0x1, NULL, NULL },
-    { "getComparator", NULL, "Ljava.util.Comparator;", 0x1, NULL, NULL },
+    { "getComparator", NULL, "Ljava.util.Comparator;", 0x1, NULL, "()Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "buffer_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRefArray;", NULL, NULL, .constantValue.asLong = 0 },
@@ -77,9 +77,11 @@ void OrgApacheLuceneSearchSuggestInMemorySorter_initWithJavaUtilComparator_(OrgA
 }
 
 OrgApacheLuceneSearchSuggestInMemorySorter *new_OrgApacheLuceneSearchSuggestInMemorySorter_initWithJavaUtilComparator_(id<JavaUtilComparator> comparator) {
-  OrgApacheLuceneSearchSuggestInMemorySorter *self = [OrgApacheLuceneSearchSuggestInMemorySorter alloc];
-  OrgApacheLuceneSearchSuggestInMemorySorter_initWithJavaUtilComparator_(self, comparator);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestInMemorySorter, initWithJavaUtilComparator_, comparator)
+}
+
+OrgApacheLuceneSearchSuggestInMemorySorter *create_OrgApacheLuceneSearchSuggestInMemorySorter_initWithJavaUtilComparator_(id<JavaUtilComparator> comparator) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestInMemorySorter, initWithJavaUtilComparator_, comparator)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestInMemorySorter)

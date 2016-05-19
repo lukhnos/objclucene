@@ -18,11 +18,6 @@
 #include "org/apache/lucene/util/GeoUtils.h"
 #include "org/apache/lucene/util/SloppyMath.h"
 
-#define OrgApacheLuceneUtilGeoUtils_MIN_LON -180
-#define OrgApacheLuceneUtilGeoUtils_MIN_LAT -90
-#define OrgApacheLuceneUtilGeoUtils_LON_SCALE 1.1930464708333334E7
-#define OrgApacheLuceneUtilGeoUtils_LAT_SCALE 2.3860929416666668E7
-
 @interface OrgApacheLuceneUtilGeoUtils ()
 
 - (instancetype)init;
@@ -51,6 +46,20 @@
                                   withDouble:(jdouble)centerLat
                                   withDouble:(jdouble)radius;
 
+/*!
+ @brief Computes whether or a 3dimensional line segment intersects or crosses a sphere
+ @param lon1 longitudinal location of the line segment start point (in degrees)
+ @param lat1 latitudinal location of the line segment start point (in degrees)
+ @param alt1 altitude of the line segment start point (in degrees)
+ @param lon2 longitudinal location of the line segment end point (in degrees)
+ @param lat2 latitudinal location of the line segment end point (in degrees)
+ @param alt2 altitude of the line segment end point (in degrees)
+ @param centerLon longitudinal location of center search point (in degrees)
+ @param centerLat latitudinal location of center search point (in degrees)
+ @param centerAlt altitude of the center point (in meters)
+ @param radius search sphere radius (in meters)
+ @return whether the provided line segment is a secant of the
+ */
 + (jboolean)lineCrossesSphereWithDouble:(jdouble)lon1
                              withDouble:(jdouble)lat1
                              withDouble:(jdouble)alt1
@@ -64,17 +73,27 @@
 
 @end
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilGeoUtils, MIN_LON, jshort)
+inline jshort OrgApacheLuceneUtilGeoUtils_get_MIN_LON();
+#define OrgApacheLuceneUtilGeoUtils_MIN_LON -180
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilGeoUtils, MIN_LON, jshort)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilGeoUtils, MIN_LAT, jshort)
+inline jshort OrgApacheLuceneUtilGeoUtils_get_MIN_LAT();
+#define OrgApacheLuceneUtilGeoUtils_MIN_LAT -90
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilGeoUtils, MIN_LAT, jshort)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilGeoUtils, LON_SCALE, jdouble)
+inline jdouble OrgApacheLuceneUtilGeoUtils_get_LON_SCALE();
+#define OrgApacheLuceneUtilGeoUtils_LON_SCALE 1.1930464708333334E7
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilGeoUtils, LON_SCALE, jdouble)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilGeoUtils, LAT_SCALE, jdouble)
+inline jdouble OrgApacheLuceneUtilGeoUtils_get_LAT_SCALE();
+#define OrgApacheLuceneUtilGeoUtils_LAT_SCALE 2.3860929416666668E7
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilGeoUtils, LAT_SCALE, jdouble)
 
 __attribute__((unused)) static void OrgApacheLuceneUtilGeoUtils_init(OrgApacheLuceneUtilGeoUtils *self);
 
 __attribute__((unused)) static OrgApacheLuceneUtilGeoUtils *new_OrgApacheLuceneUtilGeoUtils_init() NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneUtilGeoUtils *create_OrgApacheLuceneUtilGeoUtils_init();
 
 __attribute__((unused)) static jlong OrgApacheLuceneUtilGeoUtils_scaleLonWithDouble_(jdouble val);
 
@@ -91,6 +110,30 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilGeoUtils_rectAnyCorne
 __attribute__((unused)) static jboolean OrgApacheLuceneUtilGeoUtils_lineCrossesSphereWithDouble_withDouble_withDouble_withDouble_withDouble_withDouble_withDouble_withDouble_withDouble_withDouble_(jdouble lon1, jdouble lat1, jdouble alt1, jdouble lon2, jdouble lat2, jdouble alt2, jdouble centerLon, jdouble centerLat, jdouble centerAlt, jdouble radius);
 
 @implementation OrgApacheLuceneUtilGeoUtils
+
++ (jshort)BITS {
+  return OrgApacheLuceneUtilGeoUtils_BITS;
+}
+
++ (jdouble)TOLERANCE {
+  return OrgApacheLuceneUtilGeoUtils_TOLERANCE;
+}
+
++ (jdouble)MIN_LON_INCL {
+  return OrgApacheLuceneUtilGeoUtils_MIN_LON_INCL;
+}
+
++ (jdouble)MAX_LON_INCL {
+  return OrgApacheLuceneUtilGeoUtils_MAX_LON_INCL;
+}
+
++ (jdouble)MIN_LAT_INCL {
+  return OrgApacheLuceneUtilGeoUtils_MIN_LAT_INCL;
+}
+
++ (jdouble)MAX_LAT_INCL {
+  return OrgApacheLuceneUtilGeoUtils_MAX_LAT_INCL;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -341,7 +384,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "rectContainsWithDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:", "rectContains", "Z", 0x9, NULL, NULL },
     { "rectIntersectsWithDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:", "rectIntersects", "Z", 0x9, NULL, NULL },
     { "rectCrossesPolyWithDouble:withDouble:withDouble:withDouble:withDoubleArray:withDoubleArray:withDouble:withDouble:withDouble:withDouble:", "rectCrossesPoly", "Z", 0x9, NULL, NULL },
-    { "circleToPolyWithDouble:withDouble:withDouble:", "circleToPoly", "Ljava.util.ArrayList;", 0x9, NULL, NULL },
+    { "circleToPolyWithDouble:withDouble:withDouble:", "circleToPoly", "Ljava.util.ArrayList;", 0x9, NULL, "(DDD)Ljava/util/ArrayList<[LD;>;" },
     { "rectWithinPolyWithDouble:withDouble:withDouble:withDouble:withDoubleArray:withDoubleArray:withDouble:withDouble:withDouble:withDouble:", "rectWithinPoly", "Z", 0x9, NULL, NULL },
     { "rectAnyCornersOutsideCircleWithDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:", "rectAnyCornersOutsideCircle", "Z", 0xa, NULL, NULL },
     { "rectAnyCornersInCircleWithDouble:withDouble:withDouble:withDouble:withDouble:withDouble:withDouble:", "rectAnyCornersInCircle", "Z", 0xa, NULL, NULL },
@@ -375,9 +418,11 @@ void OrgApacheLuceneUtilGeoUtils_init(OrgApacheLuceneUtilGeoUtils *self) {
 }
 
 OrgApacheLuceneUtilGeoUtils *new_OrgApacheLuceneUtilGeoUtils_init() {
-  OrgApacheLuceneUtilGeoUtils *self = [OrgApacheLuceneUtilGeoUtils alloc];
-  OrgApacheLuceneUtilGeoUtils_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilGeoUtils, init)
+}
+
+OrgApacheLuceneUtilGeoUtils *create_OrgApacheLuceneUtilGeoUtils_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilGeoUtils, init)
 }
 
 JavaLangLong *OrgApacheLuceneUtilGeoUtils_mortonHashWithDouble_withDouble_(jdouble lon, jdouble lat) {
@@ -468,7 +513,7 @@ jboolean OrgApacheLuceneUtilGeoUtils_pointInPolygonWithDoubleArray_withDoubleArr
 
 NSString *OrgApacheLuceneUtilGeoUtils_geoTermToStringWithLong_(jlong term) {
   OrgApacheLuceneUtilGeoUtils_initialize();
-  JavaLangStringBuilder *s = [new_JavaLangStringBuilder_initWithInt_(64) autorelease];
+  JavaLangStringBuilder *s = create_JavaLangStringBuilder_initWithInt_(64);
   jint numberOfLeadingZeros = JavaLangLong_numberOfLeadingZerosWithLong_(term);
   for (jint i = 0; i < numberOfLeadingZeros; i++) {
     [s appendWithChar:'0'];
@@ -547,7 +592,7 @@ JavaUtilArrayList *OrgApacheLuceneUtilGeoUtils_circleToPolyWithDouble_withDouble
   OrgApacheLuceneUtilGeoUtils_initialize();
   jdouble angle;
   jint sides = 25;
-  JavaUtilArrayList *geometry = [new_JavaUtilArrayList_init() autorelease];
+  JavaUtilArrayList *geometry = create_JavaUtilArrayList_init();
   IOSDoubleArray *lons = [IOSDoubleArray arrayWithLength:sides];
   IOSDoubleArray *lats = [IOSDoubleArray arrayWithLength:sides];
   IOSDoubleArray *pt = [IOSDoubleArray arrayWithLength:2];

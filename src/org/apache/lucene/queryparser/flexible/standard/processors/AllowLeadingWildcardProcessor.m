@@ -31,7 +31,7 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryTree {
-  JavaLangBoolean *allowsLeadingWildcard = [((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk([self getQueryConfigHandler])) getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, ALLOW_LEADING_WILDCARD_)];
+  JavaLangBoolean *allowsLeadingWildcard = [((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk([self getQueryConfigHandler])) getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, ALLOW_LEADING_WILDCARD)];
   if (allowsLeadingWildcard != nil) {
     if (![allowsLeadingWildcard booleanValue]) {
       return [super processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:queryTree];
@@ -42,13 +42,13 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node {
   if ([node isKindOfClass:[OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode class]]) {
-    OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode *wildcardNode = (OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode *) check_class_cast(node, [OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode class]);
+    OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode *wildcardNode = (OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode *) cast_chk(node, [OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode class]);
     if ([((id<JavaLangCharSequence>) nil_chk([((OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode *) nil_chk(wildcardNode)) getText])) length] > 0) {
       if (OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_wasEscapedWithJavaLangCharSequence_withInt_([wildcardNode getText], 0)) return node;
       switch ([((id<JavaLangCharSequence>) nil_chk([wildcardNode getText])) charAtWithInt:0]) {
         case '*':
         case '?':
-        @throw [new_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_([new_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, LEADING_WILDCARD_NOT_ALLOWED_), [IOSObjectArray arrayWithObjects:(id[]){ [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(node)) toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:[new_OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_init() autorelease]] } count:1 type:NSObject_class_()]) autorelease]) autorelease];
+        @throw create_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_(create_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, LEADING_WILDCARD_NOT_ALLOWED), [IOSObjectArray arrayWithObjects:(id[]){ [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(node)) toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:create_OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_init()] } count:1 type:NSObject_class_()]));
       }
     }
   }
@@ -69,7 +69,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "process", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x1, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
     { "postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "postProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
     { "preProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "preProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "setChildrenOrderWithJavaUtilList:", "setChildrenOrder", "Ljava.util.List;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
+    { "setChildrenOrderWithJavaUtilList:", "setChildrenOrder", "Ljava.util.List;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;)Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;" },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor = { 2, "AllowLeadingWildcardProcessor", "org.apache.lucene.queryparser.flexible.standard.processors", NULL, 0x1, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor;
@@ -82,9 +82,11 @@ void OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardPro
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor_init() {
-  OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor *self = [OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor, init)
+}
+
+OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor *create_OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor)

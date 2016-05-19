@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsStoredFieldsFormat_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsStoredFieldsFormat_RESTRICT
-#define OrgApacheLuceneCodecsStoredFieldsFormat_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsStoredFieldsFormat")
+#ifdef RESTRICT_OrgApacheLuceneCodecsStoredFieldsFormat
+#define INCLUDE_ALL_OrgApacheLuceneCodecsStoredFieldsFormat 0
 #else
-#define OrgApacheLuceneCodecsStoredFieldsFormat_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsStoredFieldsFormat 1
 #endif
-#undef OrgApacheLuceneCodecsStoredFieldsFormat_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsStoredFieldsFormat
 
-#if !defined (_OrgApacheLuceneCodecsStoredFieldsFormat_) && (OrgApacheLuceneCodecsStoredFieldsFormat_INCLUDE_ALL || OrgApacheLuceneCodecsStoredFieldsFormat_INCLUDE)
-#define _OrgApacheLuceneCodecsStoredFieldsFormat_
+#if !defined (OrgApacheLuceneCodecsStoredFieldsFormat_) && (INCLUDE_ALL_OrgApacheLuceneCodecsStoredFieldsFormat || defined(INCLUDE_OrgApacheLuceneCodecsStoredFieldsFormat))
+#define OrgApacheLuceneCodecsStoredFieldsFormat_
 
 @class OrgApacheLuceneCodecsStoredFieldsReader;
 @class OrgApacheLuceneCodecsStoredFieldsWriter;
@@ -23,21 +23,37 @@
 @class OrgApacheLuceneStoreDirectory;
 @class OrgApacheLuceneStoreIOContext;
 
+/*!
+ @brief Controls the format of stored fields
+ */
 @interface OrgApacheLuceneCodecsStoredFieldsFormat : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Returns a <code>StoredFieldsReader</code> to load stored
+ fields.
+ */
 - (OrgApacheLuceneCodecsStoredFieldsReader *)fieldsReaderWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
                                                        withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)si
                                                         withOrgApacheLuceneIndexFieldInfos:(OrgApacheLuceneIndexFieldInfos *)fn
                                                          withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
 
+/*!
+ @brief Returns a <code>StoredFieldsWriter</code> to write stored
+ fields.
+ */
 - (OrgApacheLuceneCodecsStoredFieldsWriter *)fieldsWriterWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
                                                        withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)si
                                                          withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
 
 #pragma mark Protected
 
+/*!
+ @brief Sole constructor.
+ (For invocation by subclass 
+ constructors, typically implicit.) 
+ */
 - (instancetype)init;
 
 @end
@@ -50,4 +66,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsStoredFieldsFormat)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsStoredFieldsFormat_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsStoredFieldsFormat")

@@ -34,7 +34,7 @@
   jfloat scoreSum = 0;
   jfloat scoreMax = 0;
   for (OrgApacheLuceneSearchDisiWrapper *w = topList; w != nil; w = w->next_) {
-    jfloat subScore = [((OrgApacheLuceneSearchScorer *) nil_chk(((OrgApacheLuceneSearchDisiWrapper *) nil_chk(w))->iterator_)) score];
+    jfloat subScore = [((OrgApacheLuceneSearchScorer *) nil_chk(w->iterator_)) score];
     JrePlusAssignFloatF(&scoreSum, subScore);
     if (subScore > scoreMax) {
       scoreMax = subScore;
@@ -45,8 +45,8 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchWeight:withFloat:withJavaUtilList:withBoolean:", "DisjunctionMaxScorer", NULL, 0x0, NULL, NULL },
-    { "scoreWithOrgApacheLuceneSearchDisiWrapper:", "score", "F", 0x4, "Ljava.io.IOException;", NULL },
+    { "initWithOrgApacheLuceneSearchWeight:withFloat:withJavaUtilList:withBoolean:", "DisjunctionMaxScorer", NULL, 0x0, NULL, "(Lorg/apache/lucene/search/Weight;FLjava/util/List<Lorg/apache/lucene/search/Scorer;>;Z)V" },
+    { "scoreWithOrgApacheLuceneSearchDisiWrapper:", "score", "F", 0x4, "Ljava.io.IOException;", "(Lorg/apache/lucene/search/DisiWrapper<Lorg/apache/lucene/search/Scorer;>;)F" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "tieBreakerMultiplier_", NULL, 0x12, "F", NULL, NULL, .constantValue.asLong = 0 },
@@ -63,9 +63,11 @@ void OrgApacheLuceneSearchDisjunctionMaxScorer_initWithOrgApacheLuceneSearchWeig
 }
 
 OrgApacheLuceneSearchDisjunctionMaxScorer *new_OrgApacheLuceneSearchDisjunctionMaxScorer_initWithOrgApacheLuceneSearchWeight_withFloat_withJavaUtilList_withBoolean_(OrgApacheLuceneSearchWeight *weight, jfloat tieBreakerMultiplier, id<JavaUtilList> subScorers, jboolean needsScores) {
-  OrgApacheLuceneSearchDisjunctionMaxScorer *self = [OrgApacheLuceneSearchDisjunctionMaxScorer alloc];
-  OrgApacheLuceneSearchDisjunctionMaxScorer_initWithOrgApacheLuceneSearchWeight_withFloat_withJavaUtilList_withBoolean_(self, weight, tieBreakerMultiplier, subScorers, needsScores);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDisjunctionMaxScorer, initWithOrgApacheLuceneSearchWeight_withFloat_withJavaUtilList_withBoolean_, weight, tieBreakerMultiplier, subScorers, needsScores)
+}
+
+OrgApacheLuceneSearchDisjunctionMaxScorer *create_OrgApacheLuceneSearchDisjunctionMaxScorer_initWithOrgApacheLuceneSearchWeight_withFloat_withJavaUtilList_withBoolean_(OrgApacheLuceneSearchWeight *weight, jfloat tieBreakerMultiplier, id<JavaUtilList> subScorers, jboolean needsScores) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDisjunctionMaxScorer, initWithOrgApacheLuceneSearchWeight_withFloat_withJavaUtilList_withBoolean_, weight, tieBreakerMultiplier, subScorers, needsScores)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDisjunctionMaxScorer)

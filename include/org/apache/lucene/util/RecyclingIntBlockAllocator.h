@@ -5,48 +5,92 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilRecyclingIntBlockAllocator_INCLUDE_ALL")
-#if OrgApacheLuceneUtilRecyclingIntBlockAllocator_RESTRICT
-#define OrgApacheLuceneUtilRecyclingIntBlockAllocator_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilRecyclingIntBlockAllocator")
+#ifdef RESTRICT_OrgApacheLuceneUtilRecyclingIntBlockAllocator
+#define INCLUDE_ALL_OrgApacheLuceneUtilRecyclingIntBlockAllocator 0
 #else
-#define OrgApacheLuceneUtilRecyclingIntBlockAllocator_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilRecyclingIntBlockAllocator 1
 #endif
-#undef OrgApacheLuceneUtilRecyclingIntBlockAllocator_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilRecyclingIntBlockAllocator
 
-#if !defined (_OrgApacheLuceneUtilRecyclingIntBlockAllocator_) && (OrgApacheLuceneUtilRecyclingIntBlockAllocator_INCLUDE_ALL || OrgApacheLuceneUtilRecyclingIntBlockAllocator_INCLUDE)
-#define _OrgApacheLuceneUtilRecyclingIntBlockAllocator_
+#if !defined (OrgApacheLuceneUtilRecyclingIntBlockAllocator_) && (INCLUDE_ALL_OrgApacheLuceneUtilRecyclingIntBlockAllocator || defined(INCLUDE_OrgApacheLuceneUtilRecyclingIntBlockAllocator))
+#define OrgApacheLuceneUtilRecyclingIntBlockAllocator_
 
-#define OrgApacheLuceneUtilIntBlockPool_RESTRICT 1
-#define OrgApacheLuceneUtilIntBlockPool_Allocator_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilIntBlockPool 1
+#define INCLUDE_OrgApacheLuceneUtilIntBlockPool_Allocator 1
 #include "org/apache/lucene/util/IntBlockPool.h"
 
 @class IOSIntArray;
 @class IOSObjectArray;
 @class OrgApacheLuceneUtilCounter;
 
-#define OrgApacheLuceneUtilRecyclingIntBlockAllocator_DEFAULT_BUFFERED_BLOCKS 64
-
+/*!
+ @brief A <code>Allocator</code> implementation that recycles unused int
+ blocks in a buffer and reuses them in subsequent calls to
+ <code>getIntBlock()</code>.
+ <p>
+ Note: This class is not thread-safe
+ </p>
+ */
 @interface OrgApacheLuceneUtilRecyclingIntBlockAllocator : OrgApacheLuceneUtilIntBlockPool_Allocator
+
++ (jint)DEFAULT_BUFFERED_BLOCKS;
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new <code>RecyclingIntBlockAllocator</code> with a block size of
+ <code>IntBlockPool.INT_BLOCK_SIZE</code>, upper buffered docs limit of
+ <code>DEFAULT_BUFFERED_BLOCKS</code> (#DEFAULT_BUFFERED_BLOCKS).
+ */
 - (instancetype)init;
 
+/*!
+ @brief Creates a new <code>RecyclingIntBlockAllocator</code>.
+ @param blockSize
+ the size of each block returned by this allocator
+ @param maxBufferedBlocks
+ maximum number of buffered int blocks
+ */
 - (instancetype)initWithInt:(jint)blockSize
                     withInt:(jint)maxBufferedBlocks;
 
+/*!
+ @brief Creates a new <code>RecyclingIntBlockAllocator</code>
+ @param blockSize
+ the block size in bytes
+ @param maxBufferedBlocks
+ maximum number of buffered int block
+ @param bytesUsed
+ <code>Counter</code> reference counting internally allocated bytes
+ */
 - (instancetype)initWithInt:(jint)blockSize
                     withInt:(jint)maxBufferedBlocks
 withOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)bytesUsed;
 
+/*!
+ @return the number of bytes currently allocated by this <code>Allocator</code>
+ */
 - (jlong)bytesUsed;
 
+/*!
+ @brief Removes the given number of int blocks from the buffer if possible.
+ @param num
+ the number of int blocks to remove
+ @return the number of actually removed buffers
+ */
 - (jint)freeBlocksWithInt:(jint)num;
 
 - (IOSIntArray *)getIntBlock;
 
+/*!
+ @return the maximum number of buffered byte blocks
+ */
 - (jint)maxBufferedBlocks;
 
+/*!
+ @return the number of currently buffered blocks
+ */
 - (jint)numBufferedBlocks;
 
 - (void)recycleIntBlocksWithIntArray2:(IOSObjectArray *)blocks
@@ -57,22 +101,30 @@ withOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)bytesUsed;
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilRecyclingIntBlockAllocator)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilRecyclingIntBlockAllocator, DEFAULT_BUFFERED_BLOCKS, jint)
+inline jint OrgApacheLuceneUtilRecyclingIntBlockAllocator_get_DEFAULT_BUFFERED_BLOCKS();
+#define OrgApacheLuceneUtilRecyclingIntBlockAllocator_DEFAULT_BUFFERED_BLOCKS 64
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilRecyclingIntBlockAllocator, DEFAULT_BUFFERED_BLOCKS, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilRecyclingIntBlockAllocator_initWithInt_withInt_withOrgApacheLuceneUtilCounter_(OrgApacheLuceneUtilRecyclingIntBlockAllocator *self, jint blockSize, jint maxBufferedBlocks, OrgApacheLuceneUtilCounter *bytesUsed);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilRecyclingIntBlockAllocator *new_OrgApacheLuceneUtilRecyclingIntBlockAllocator_initWithInt_withInt_withOrgApacheLuceneUtilCounter_(jint blockSize, jint maxBufferedBlocks, OrgApacheLuceneUtilCounter *bytesUsed) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilRecyclingIntBlockAllocator *create_OrgApacheLuceneUtilRecyclingIntBlockAllocator_initWithInt_withInt_withOrgApacheLuceneUtilCounter_(jint blockSize, jint maxBufferedBlocks, OrgApacheLuceneUtilCounter *bytesUsed);
+
 FOUNDATION_EXPORT void OrgApacheLuceneUtilRecyclingIntBlockAllocator_initWithInt_withInt_(OrgApacheLuceneUtilRecyclingIntBlockAllocator *self, jint blockSize, jint maxBufferedBlocks);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilRecyclingIntBlockAllocator *new_OrgApacheLuceneUtilRecyclingIntBlockAllocator_initWithInt_withInt_(jint blockSize, jint maxBufferedBlocks) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilRecyclingIntBlockAllocator *create_OrgApacheLuceneUtilRecyclingIntBlockAllocator_initWithInt_withInt_(jint blockSize, jint maxBufferedBlocks);
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilRecyclingIntBlockAllocator_init(OrgApacheLuceneUtilRecyclingIntBlockAllocator *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilRecyclingIntBlockAllocator *new_OrgApacheLuceneUtilRecyclingIntBlockAllocator_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilRecyclingIntBlockAllocator *create_OrgApacheLuceneUtilRecyclingIntBlockAllocator_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilRecyclingIntBlockAllocator)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilRecyclingIntBlockAllocator_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilRecyclingIntBlockAllocator")

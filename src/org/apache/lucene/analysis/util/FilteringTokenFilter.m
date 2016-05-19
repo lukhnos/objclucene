@@ -40,7 +40,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisUtilFilteringTokenFilter, posIncrAtt_
   while ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
     if ([self accept]) {
       if (skippedPositions_ != 0) {
-        [posIncrAtt_ setPositionIncrementWithInt:[((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncrAtt_)) getPositionIncrement] + skippedPositions_];
+        [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncrAtt_)) setPositionIncrementWithInt:[posIncrAtt_ getPositionIncrement] + skippedPositions_];
       }
       return true;
     }
@@ -56,7 +56,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisUtilFilteringTokenFilter, posIncrAtt_
 
 - (void)end {
   [super end];
-  [posIncrAtt_ setPositionIncrementWithInt:[((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncrAtt_)) getPositionIncrement] + skippedPositions_];
+  [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncrAtt_)) setPositionIncrementWithInt:[posIncrAtt_ getPositionIncrement] + skippedPositions_];
 }
 
 - (void)dealloc {

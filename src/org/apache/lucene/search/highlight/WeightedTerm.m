@@ -60,9 +60,11 @@ void OrgApacheLuceneSearchHighlightWeightedTerm_initWithFloat_withNSString_(OrgA
 }
 
 OrgApacheLuceneSearchHighlightWeightedTerm *new_OrgApacheLuceneSearchHighlightWeightedTerm_initWithFloat_withNSString_(jfloat weight, NSString *term) {
-  OrgApacheLuceneSearchHighlightWeightedTerm *self = [OrgApacheLuceneSearchHighlightWeightedTerm alloc];
-  OrgApacheLuceneSearchHighlightWeightedTerm_initWithFloat_withNSString_(self, weight, term);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchHighlightWeightedTerm, initWithFloat_withNSString_, weight, term)
+}
+
+OrgApacheLuceneSearchHighlightWeightedTerm *create_OrgApacheLuceneSearchHighlightWeightedTerm_initWithFloat_withNSString_(jfloat weight, NSString *term) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchHighlightWeightedTerm, initWithFloat_withNSString_, weight, term)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchHighlightWeightedTerm)

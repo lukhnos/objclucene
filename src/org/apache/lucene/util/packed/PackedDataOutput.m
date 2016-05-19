@@ -72,9 +72,11 @@ void OrgApacheLuceneUtilPackedPackedDataOutput_initWithOrgApacheLuceneStoreDataO
 }
 
 OrgApacheLuceneUtilPackedPackedDataOutput *new_OrgApacheLuceneUtilPackedPackedDataOutput_initWithOrgApacheLuceneStoreDataOutput_(OrgApacheLuceneStoreDataOutput *outArg) {
-  OrgApacheLuceneUtilPackedPackedDataOutput *self = [OrgApacheLuceneUtilPackedPackedDataOutput alloc];
-  OrgApacheLuceneUtilPackedPackedDataOutput_initWithOrgApacheLuceneStoreDataOutput_(self, outArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedPackedDataOutput, initWithOrgApacheLuceneStoreDataOutput_, outArg)
+}
+
+OrgApacheLuceneUtilPackedPackedDataOutput *create_OrgApacheLuceneUtilPackedPackedDataOutput_initWithOrgApacheLuceneStoreDataOutput_(OrgApacheLuceneStoreDataOutput *outArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedPackedDataOutput, initWithOrgApacheLuceneStoreDataOutput_, outArg)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPackedDataOutput)

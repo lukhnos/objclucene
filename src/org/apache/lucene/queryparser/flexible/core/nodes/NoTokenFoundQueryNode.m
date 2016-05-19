@@ -30,7 +30,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode *clone = (OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode *) check_class_cast([super cloneTree], [OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode class]);
+  OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode *clone = (OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode *) cast_chk([super cloneTree], [OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode class]);
   return clone;
 }
 
@@ -52,9 +52,11 @@ void OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode_init(OrgAp
 }
 
 OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode_init() {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode *self = [OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode alloc];
-  OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode, init)
+}
+
+OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode *create_OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode)

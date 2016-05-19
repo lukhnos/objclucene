@@ -13,20 +13,20 @@
  @public
   jint precisionStep_;
   JavaTextNumberFormat *format_;
-  OrgApacheLuceneDocumentFieldType_NumericTypeEnum *type_;
+  OrgApacheLuceneDocumentFieldType_NumericType *type_;
 }
 
 @end
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig, format_, JavaTextNumberFormat *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig, type_, OrgApacheLuceneDocumentFieldType_NumericTypeEnum *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig, type_, OrgApacheLuceneDocumentFieldType_NumericType *)
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig
 
 - (instancetype)initWithInt:(jint)precisionStep
    withJavaTextNumberFormat:(JavaTextNumberFormat *)format
-withOrgApacheLuceneDocumentFieldType_NumericTypeEnum:(OrgApacheLuceneDocumentFieldType_NumericTypeEnum *)type {
-  OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig_initWithInt_withJavaTextNumberFormat_withOrgApacheLuceneDocumentFieldType_NumericTypeEnum_(self, precisionStep, format, type);
+withOrgApacheLuceneDocumentFieldType_NumericType:(OrgApacheLuceneDocumentFieldType_NumericType *)type {
+  OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig_initWithInt_withJavaTextNumberFormat_withOrgApacheLuceneDocumentFieldType_NumericType_(self, precisionStep, format, type);
   return self;
 }
 
@@ -42,20 +42,20 @@ withOrgApacheLuceneDocumentFieldType_NumericTypeEnum:(OrgApacheLuceneDocumentFie
   return format_;
 }
 
-- (OrgApacheLuceneDocumentFieldType_NumericTypeEnum *)getType {
+- (OrgApacheLuceneDocumentFieldType_NumericType *)getType {
   return type_;
 }
 
-- (void)setTypeWithOrgApacheLuceneDocumentFieldType_NumericTypeEnum:(OrgApacheLuceneDocumentFieldType_NumericTypeEnum *)type {
+- (void)setTypeWithOrgApacheLuceneDocumentFieldType_NumericType:(OrgApacheLuceneDocumentFieldType_NumericType *)type {
   if (type == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"type cannot be null!") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"type cannot be null!");
   }
   JreStrongAssign(&self->type_, type);
 }
 
 - (void)setNumberFormatWithJavaTextNumberFormat:(JavaTextNumberFormat *)format {
   if (format == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"format cannot be null!") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"format cannot be null!");
   }
   JreStrongAssign(&self->format_, format);
 }
@@ -63,7 +63,7 @@ withOrgApacheLuceneDocumentFieldType_NumericTypeEnum:(OrgApacheLuceneDocumentFie
 - (jboolean)isEqual:(id)obj {
   if (obj == self) return true;
   if ([obj isKindOfClass:[OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig class]]) {
-    OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *other = (OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *) check_class_cast(obj, [OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig class]);
+    OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *other = (OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *) cast_chk(obj, [OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig class]);
     if (self->precisionStep_ == ((OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *) nil_chk(other))->precisionStep_ && self->type_ == other->type_ && (self->format_ == other->format_ || ([((JavaTextNumberFormat *) nil_chk(self->format_)) isEqual:other->format_]))) {
       return true;
     }
@@ -79,12 +79,12 @@ withOrgApacheLuceneDocumentFieldType_NumericTypeEnum:(OrgApacheLuceneDocumentFie
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withJavaTextNumberFormat:withOrgApacheLuceneDocumentFieldType_NumericTypeEnum:", "NumericConfig", NULL, 0x1, NULL, NULL },
+    { "initWithInt:withJavaTextNumberFormat:withOrgApacheLuceneDocumentFieldType_NumericType:", "NumericConfig", NULL, 0x1, NULL, NULL },
     { "getPrecisionStep", NULL, "I", 0x1, NULL, NULL },
     { "setPrecisionStepWithInt:", "setPrecisionStep", "V", 0x1, NULL, NULL },
     { "getNumberFormat", NULL, "Ljava.text.NumberFormat;", 0x1, NULL, NULL },
     { "getType", NULL, "Lorg.apache.lucene.document.FieldType$NumericType;", 0x1, NULL, NULL },
-    { "setTypeWithOrgApacheLuceneDocumentFieldType_NumericTypeEnum:", "setType", "V", 0x1, NULL, NULL },
+    { "setTypeWithOrgApacheLuceneDocumentFieldType_NumericType:", "setType", "V", 0x1, NULL, NULL },
     { "setNumberFormatWithJavaTextNumberFormat:", "setNumberFormat", "V", 0x1, NULL, NULL },
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
   };
@@ -99,17 +99,19 @@ withOrgApacheLuceneDocumentFieldType_NumericTypeEnum:(OrgApacheLuceneDocumentFie
 
 @end
 
-void OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig_initWithInt_withJavaTextNumberFormat_withOrgApacheLuceneDocumentFieldType_NumericTypeEnum_(OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *self, jint precisionStep, JavaTextNumberFormat *format, OrgApacheLuceneDocumentFieldType_NumericTypeEnum *type) {
+void OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig_initWithInt_withJavaTextNumberFormat_withOrgApacheLuceneDocumentFieldType_NumericType_(OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *self, jint precisionStep, JavaTextNumberFormat *format, OrgApacheLuceneDocumentFieldType_NumericType *type) {
   NSObject_init(self);
   [self setPrecisionStepWithInt:precisionStep];
   [self setNumberFormatWithJavaTextNumberFormat:format];
-  [self setTypeWithOrgApacheLuceneDocumentFieldType_NumericTypeEnum:type];
+  [self setTypeWithOrgApacheLuceneDocumentFieldType_NumericType:type];
 }
 
-OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *new_OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig_initWithInt_withJavaTextNumberFormat_withOrgApacheLuceneDocumentFieldType_NumericTypeEnum_(jint precisionStep, JavaTextNumberFormat *format, OrgApacheLuceneDocumentFieldType_NumericTypeEnum *type) {
-  OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *self = [OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig_initWithInt_withJavaTextNumberFormat_withOrgApacheLuceneDocumentFieldType_NumericTypeEnum_(self, precisionStep, format, type);
-  return self;
+OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *new_OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig_initWithInt_withJavaTextNumberFormat_withOrgApacheLuceneDocumentFieldType_NumericType_(jint precisionStep, JavaTextNumberFormat *format, OrgApacheLuceneDocumentFieldType_NumericType *type) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig, initWithInt_withJavaTextNumberFormat_withOrgApacheLuceneDocumentFieldType_NumericType_, precisionStep, format, type)
+}
+
+OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *create_OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig_initWithInt_withJavaTextNumberFormat_withOrgApacheLuceneDocumentFieldType_NumericType_(jint precisionStep, JavaTextNumberFormat *format, OrgApacheLuceneDocumentFieldType_NumericType *type) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig, initWithInt_withJavaTextNumberFormat_withOrgApacheLuceneDocumentFieldType_NumericType_, precisionStep, format, type)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig)

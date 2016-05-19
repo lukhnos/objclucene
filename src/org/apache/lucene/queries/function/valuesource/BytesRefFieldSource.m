@@ -61,6 +61,8 @@ __attribute__((unused)) static void OrgApacheLuceneQueriesFunctionValuesourceByt
 
 __attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_withOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexBinaryDocValues_(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource *outer$, id<OrgApacheLuceneUtilBits> capture$0, OrgApacheLuceneIndexBinaryDocValues *capture$1) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_withOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexBinaryDocValues_(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource *outer$, id<OrgApacheLuceneUtilBits> capture$0, OrgApacheLuceneIndexBinaryDocValues *capture$1);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1)
 
 @interface OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_$1 : OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller {
@@ -85,6 +87,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource
 __attribute__((unused)) static void OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_$1 *self, OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1 *outer$);
 
 __attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1 *outer$) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1 *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_$1)
 
@@ -114,6 +118,8 @@ __attribute__((unused)) static void OrgApacheLuceneQueriesFunctionValuesourceByt
 
 __attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$2 *new_OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$2_initWithOrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_withOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneIndexLeafReaderContext_withNSString_(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource *outer$, OrgApacheLuceneQueriesFunctionValueSource *arg$0, OrgApacheLuceneIndexLeafReaderContext *arg$1, NSString *arg$2) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$2 *create_OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$2_initWithOrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_withOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneIndexLeafReaderContext_withNSString_(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource *outer$, OrgApacheLuceneQueriesFunctionValueSource *arg$0, OrgApacheLuceneIndexLeafReaderContext *arg$1, NSString *arg$2);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$2)
 
 @implementation OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource
@@ -126,13 +132,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFiel
 - (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
                                  withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext {
   OrgApacheLuceneIndexFieldInfo *fieldInfo = [((OrgApacheLuceneIndexFieldInfos *) nil_chk([((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(readerContext)) reader])) getFieldInfos])) fieldInfoWithNSString:field_];
-  if (fieldInfo != nil && [fieldInfo getDocValuesType] == JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, BINARY)) {
+  if (fieldInfo != nil && [fieldInfo getDocValuesType] == JreLoadEnum(OrgApacheLuceneIndexDocValuesType, BINARY)) {
     OrgApacheLuceneIndexBinaryDocValues *binaryValues = OrgApacheLuceneIndexDocValues_getBinaryWithOrgApacheLuceneIndexLeafReader_withNSString_([readerContext reader], field_);
     id<OrgApacheLuceneUtilBits> docsWithField = OrgApacheLuceneIndexDocValues_getDocsWithFieldWithOrgApacheLuceneIndexLeafReader_withNSString_([readerContext reader], field_);
-    return [new_OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_withOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexBinaryDocValues_(self, docsWithField, binaryValues) autorelease];
+    return create_OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_withOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexBinaryDocValues_(self, docsWithField, binaryValues);
   }
   else {
-    return [new_OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$2_initWithOrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_withOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneIndexLeafReaderContext_withNSString_(self, self, readerContext, field_) autorelease];
+    return create_OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$2_initWithOrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_withOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneIndexLeafReaderContext_withNSString_(self, self, readerContext, field_);
   }
 }
 
@@ -152,9 +158,11 @@ void OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_initWithNSStri
 }
 
 OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource *new_OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_initWithNSString_(NSString *field) {
-  OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource *self = [OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource alloc];
-  OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_initWithNSString_(self, field);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource, initWithNSString_, field)
+}
+
+OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource *create_OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_initWithNSString_(NSString *field) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource, initWithNSString_, field)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource)
@@ -172,7 +180,7 @@ withOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)tar
 }
 
 - (NSString *)strValWithInt:(jint)doc {
-  OrgApacheLuceneUtilBytesRefBuilder *bytes = [new_OrgApacheLuceneUtilBytesRefBuilder_init() autorelease];
+  OrgApacheLuceneUtilBytesRefBuilder *bytes = create_OrgApacheLuceneUtilBytesRefBuilder_init();
   return [self bytesValWithInt:doc withOrgApacheLuceneUtilBytesRefBuilder:bytes] ? [((OrgApacheLuceneUtilBytesRef *) nil_chk([bytes get])) utf8ToString] : nil;
 }
 
@@ -185,7 +193,7 @@ withOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)tar
 }
 
 - (OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller *)getValueFiller {
-  return [new_OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_(self) autorelease];
+  return create_OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_(self);
 }
 
 - (instancetype)initWithOrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource:(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource *)outer$
@@ -232,9 +240,11 @@ void OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_initWithOrg
 }
 
 OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_withOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexBinaryDocValues_(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource *outer$, id<OrgApacheLuceneUtilBits> capture$0, OrgApacheLuceneIndexBinaryDocValues *capture$1) {
-  OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1 *self = [OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1 alloc];
-  OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_withOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexBinaryDocValues_(self, outer$, capture$0, capture$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1, initWithOrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_withOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexBinaryDocValues_, outer$, capture$0, capture$1)
+}
+
+OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_withOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexBinaryDocValues_(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource *outer$, id<OrgApacheLuceneUtilBits> capture$0, OrgApacheLuceneIndexBinaryDocValues *capture$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1, initWithOrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_withOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexBinaryDocValues_, outer$, capture$0, capture$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1)
@@ -248,7 +258,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceBytesR
 - (void)fillValueWithInt:(jint)doc {
   ((OrgApacheLuceneUtilMutableMutableValueStr *) nil_chk(mval_))->exists_ = [((id<OrgApacheLuceneUtilBits>) nil_chk(this$0_->val$docsWithField_)) getWithInt:doc];
   [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(mval_->value_)) clear];
-  [mval_->value_ copyBytesWithOrgApacheLuceneUtilBytesRef:[((OrgApacheLuceneIndexBinaryDocValues *) nil_chk(this$0_->val$binaryValues_)) getWithInt:doc]];
+  [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(mval_->value_)) copyBytesWithOrgApacheLuceneUtilBytesRef:[((OrgApacheLuceneIndexBinaryDocValues *) nil_chk(this$0_->val$binaryValues_)) getWithInt:doc]];
 }
 
 - (instancetype)initWithOrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1:(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1 *)outer$ {
@@ -286,9 +296,11 @@ void OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_$1_initWith
 }
 
 OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1 *outer$) {
-  OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_$1 *self = [OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_$1 alloc];
-  OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_(self, outer$);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_$1, initWithOrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_, outer$)
+}
+
+OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1 *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_$1, initWithOrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_, outer$)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$1_$1)
@@ -343,9 +355,11 @@ void OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$2_initWithOrg
 }
 
 OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$2 *new_OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$2_initWithOrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_withOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneIndexLeafReaderContext_withNSString_(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource *outer$, OrgApacheLuceneQueriesFunctionValueSource *arg$0, OrgApacheLuceneIndexLeafReaderContext *arg$1, NSString *arg$2) {
-  OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$2 *self = [OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$2 alloc];
-  OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$2_initWithOrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_withOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneIndexLeafReaderContext_withNSString_(self, outer$, arg$0, arg$1, arg$2);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$2, initWithOrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_withOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneIndexLeafReaderContext_withNSString_, outer$, arg$0, arg$1, arg$2)
+}
+
+OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$2 *create_OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$2_initWithOrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_withOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneIndexLeafReaderContext_withNSString_(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource *outer$, OrgApacheLuceneQueriesFunctionValueSource *arg$0, OrgApacheLuceneIndexLeafReaderContext *arg$1, NSString *arg$2) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$2, initWithOrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_withOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneIndexLeafReaderContext_withNSString_, outer$, arg$0, arg$1, arg$2)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_$2)

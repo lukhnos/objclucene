@@ -26,13 +26,15 @@
 @end
 
 void OrgApacheLuceneUtilThreadInterruptedException_initWithJavaLangInterruptedException_(OrgApacheLuceneUtilThreadInterruptedException *self, JavaLangInterruptedException *ie) {
-  JavaLangRuntimeException_initWithJavaLangThrowable_(self, ie);
+  JavaLangRuntimeException_initWithNSException_(self, ie);
 }
 
 OrgApacheLuceneUtilThreadInterruptedException *new_OrgApacheLuceneUtilThreadInterruptedException_initWithJavaLangInterruptedException_(JavaLangInterruptedException *ie) {
-  OrgApacheLuceneUtilThreadInterruptedException *self = [OrgApacheLuceneUtilThreadInterruptedException alloc];
-  OrgApacheLuceneUtilThreadInterruptedException_initWithJavaLangInterruptedException_(self, ie);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilThreadInterruptedException, initWithJavaLangInterruptedException_, ie)
+}
+
+OrgApacheLuceneUtilThreadInterruptedException *create_OrgApacheLuceneUtilThreadInterruptedException_initWithJavaLangInterruptedException_(JavaLangInterruptedException *ie) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilThreadInterruptedException, initWithJavaLangInterruptedException_, ie)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilThreadInterruptedException)

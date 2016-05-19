@@ -3,14 +3,17 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/xml/builders/package-info.java
 //
 
+/*!
+ @brief XML Parser factories for different Lucene Query/Filters.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserXmlBuildersPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserXmlBuildersPackage_info_RESTRICT
-#define OrgApacheLuceneQueryparserXmlBuildersPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersPackage_info 0
 #else
-#define OrgApacheLuceneQueryparserXmlBuildersPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersPackage_info 1
 #endif
-#undef OrgApacheLuceneQueryparserXmlBuildersPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersPackage_info
 
-#pragma pop_macro("OrgApacheLuceneQueryparserXmlBuildersPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersPackage_info")

@@ -5,28 +5,37 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery_INCLUDE_ALL")
-#if OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery_RESTRICT
-#define OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery")
+#ifdef RESTRICT_OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery
+#define INCLUDE_ALL_OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery 0
 #else
-#define OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery 1
 #endif
-#undef OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery
 
-#if !defined (_OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery_) && (OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery_INCLUDE_ALL || OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery_INCLUDE)
-#define _OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery_
+#if !defined (OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery || defined(INCLUDE_OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery))
+#define OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery_
 
-#define OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_RESTRICT 1
-#define OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery 1
+#define INCLUDE_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery 1
 #include "org/apache/lucene/search/payloads/SpanPayloadCheckQuery.h"
 
+@class IOSObjectArray;
 @class OrgApacheLuceneSearchSpansSpanNearQuery;
 @protocol JavaUtilCollection;
 
+/*!
+ @brief Only return those matches that have a specific payload at
+ the given position.
+ */
 @interface OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery : OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery
 
 #pragma mark Public
 
+/*!
+ @param match          The underlying <code>org.apache.lucene.search.spans.SpanQuery</code> to check
+ @param payloadToMatch The <code>java.util.Collection</code> of payloads to match
+ */
 - (instancetype)initWithOrgApacheLuceneSearchSpansSpanNearQuery:(OrgApacheLuceneSearchSpansSpanNearQuery *)match
                                          withJavaUtilCollection:(id<JavaUtilCollection>)payloadToMatch;
 
@@ -46,8 +55,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery_in
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery *new_OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery_initWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilCollection_(OrgApacheLuceneSearchSpansSpanNearQuery *match, id<JavaUtilCollection> payloadToMatch) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery *create_OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery_initWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilCollection_(OrgApacheLuceneSearchSpansSpanNearQuery *match, id<JavaUtilCollection> payloadToMatch);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery")

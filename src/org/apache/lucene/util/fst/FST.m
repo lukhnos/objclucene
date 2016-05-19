@@ -22,7 +22,6 @@
 #include "java/lang/Long.h"
 #include "java/lang/Math.h"
 #include "java/lang/StringBuilder.h"
-#include "java/lang/Throwable.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Collection.h"
 #include "java/util/HashMap.h"
@@ -53,18 +52,6 @@
 #include "org/lukhnos/portmobile/file/Files.h"
 #include "org/lukhnos/portmobile/file/Path.h"
 
-#define OrgApacheLuceneUtilFstFST_BIT_TARGET_DELTA 64
-#define OrgApacheLuceneUtilFstFST_ARCS_AS_FIXED_ARRAY 32
-#define OrgApacheLuceneUtilFstFST_VERSION_START 0
-#define OrgApacheLuceneUtilFstFST_VERSION_INT_NUM_BYTES_PER_ARC 1
-#define OrgApacheLuceneUtilFstFST_VERSION_SHORT_BYTE2_LABELS 2
-#define OrgApacheLuceneUtilFstFST_VERSION_PACKED 3
-#define OrgApacheLuceneUtilFstFST_VERSION_VINT_TARGET 4
-#define OrgApacheLuceneUtilFstFST_VERSION_NO_NODE_ARC_COUNTS 5
-#define OrgApacheLuceneUtilFstFST_VERSION_CURRENT 5
-#define OrgApacheLuceneUtilFstFST_FINAL_END_NODE -1LL
-#define OrgApacheLuceneUtilFstFST_NON_FINAL_END_NODE 0LL
-
 @interface OrgApacheLuceneUtilFstFST () {
  @public
   jlong startNode_;
@@ -94,6 +81,10 @@
 - (jboolean)assertRootCachedArcWithInt:(jint)label
      withOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)cachedArc;
 
+/*!
+ @brief Finds an arc leaving the incoming arc, replacing the arc in place.
+ This returns null if the arc was not found, else the incoming arc. 
+ */
 - (OrgApacheLuceneUtilFstFST_Arc *)findTargetArcWithInt:(jint)labelToMatch
                       withOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)follow
                       withOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)arc
@@ -102,12 +93,24 @@
 
 - (void)seekToNextNodeWithOrgApacheLuceneUtilFstFST_BytesReader:(OrgApacheLuceneUtilFstFST_BytesReader *)inArg;
 
+/*!
+ @brief Nodes will be expanded if their depth (distance from the root node) is
+ &lt;= this value and their number of arcs is &gt;=
+ <code>FIXED_ARRAY_NUM_ARCS_SHALLOW</code>.
+ <p>
+ Fixed array consumes more RAM but enables binary search on the arcs
+ (instead of a linear scan) on lookup by arc label.
+ @return <code>true</code> if <code>node</code> should be stored in an
+ expanded (array) form.
+ - seealso: #FIXED_ARRAY_NUM_ARCS_DEEP
+ - seealso: Builder.UnCompiledNode#depth
+ */
 - (jboolean)shouldExpandWithOrgApacheLuceneUtilFstBuilder:(OrgApacheLuceneUtilFstBuilder *)builder
          withOrgApacheLuceneUtilFstBuilder_UnCompiledNode:(OrgApacheLuceneUtilFstBuilder_UnCompiledNode *)node;
 
-- (instancetype)initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum:(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum *)inputType
-                               withOrgApacheLuceneUtilFstOutputs:(OrgApacheLuceneUtilFstOutputs *)outputs
-                                                         withInt:(jint)bytesPageBits;
+- (instancetype)initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE:(OrgApacheLuceneUtilFstFST_INPUT_TYPE *)inputType
+                           withOrgApacheLuceneUtilFstOutputs:(OrgApacheLuceneUtilFstOutputs *)outputs
+                                                     withInt:(jint)bytesPageBits;
 
 @end
 
@@ -116,36 +119,77 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstFST, cachedRootArcs_, IOSObjectArray *
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstFST, nodeAddress_, OrgApacheLuceneUtilPackedGrowableWriter *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstFST, inCounts_, OrgApacheLuceneUtilPackedGrowableWriter *)
 
-static jlong OrgApacheLuceneUtilFstFST_BASE_RAM_BYTES_USED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFstFST, BASE_RAM_BYTES_USED_, jlong)
+inline jlong OrgApacheLuceneUtilFstFST_get_BASE_RAM_BYTES_USED();
+static jlong OrgApacheLuceneUtilFstFST_BASE_RAM_BYTES_USED;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilFstFST, BASE_RAM_BYTES_USED, jlong)
 
-static jlong OrgApacheLuceneUtilFstFST_ARC_SHALLOW_RAM_BYTES_USED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFstFST, ARC_SHALLOW_RAM_BYTES_USED_, jlong)
+inline jlong OrgApacheLuceneUtilFstFST_get_ARC_SHALLOW_RAM_BYTES_USED();
+static jlong OrgApacheLuceneUtilFstFST_ARC_SHALLOW_RAM_BYTES_USED;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilFstFST, ARC_SHALLOW_RAM_BYTES_USED, jlong)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFstFST, BIT_TARGET_DELTA, jint)
+inline jint OrgApacheLuceneUtilFstFST_get_BIT_TARGET_DELTA();
+#define OrgApacheLuceneUtilFstFST_BIT_TARGET_DELTA 64
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilFstFST, BIT_TARGET_DELTA, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFstFST, ARCS_AS_FIXED_ARRAY, jbyte)
+inline jbyte OrgApacheLuceneUtilFstFST_get_ARCS_AS_FIXED_ARRAY();
+#define OrgApacheLuceneUtilFstFST_ARCS_AS_FIXED_ARRAY 32
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilFstFST, ARCS_AS_FIXED_ARRAY, jbyte)
 
-static NSString *OrgApacheLuceneUtilFstFST_FILE_FORMAT_NAME_ = @"FST";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFstFST, FILE_FORMAT_NAME_, NSString *)
+inline NSString *OrgApacheLuceneUtilFstFST_get_FILE_FORMAT_NAME();
+static NSString *OrgApacheLuceneUtilFstFST_FILE_FORMAT_NAME = @"FST";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilFstFST, FILE_FORMAT_NAME, NSString *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFstFST, VERSION_START, jint)
+inline jint OrgApacheLuceneUtilFstFST_get_VERSION_START();
+#define OrgApacheLuceneUtilFstFST_VERSION_START 0
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilFstFST, VERSION_START, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFstFST, VERSION_INT_NUM_BYTES_PER_ARC, jint)
+/*!
+ @brief Changed numBytesPerArc for array'd case from byte to int.
+ */
+inline jint OrgApacheLuceneUtilFstFST_get_VERSION_INT_NUM_BYTES_PER_ARC();
+#define OrgApacheLuceneUtilFstFST_VERSION_INT_NUM_BYTES_PER_ARC 1
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilFstFST, VERSION_INT_NUM_BYTES_PER_ARC, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFstFST, VERSION_SHORT_BYTE2_LABELS, jint)
+/*!
+ @brief Write BYTE2 labels as 2-byte short, not vInt.
+ */
+inline jint OrgApacheLuceneUtilFstFST_get_VERSION_SHORT_BYTE2_LABELS();
+#define OrgApacheLuceneUtilFstFST_VERSION_SHORT_BYTE2_LABELS 2
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilFstFST, VERSION_SHORT_BYTE2_LABELS, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFstFST, VERSION_PACKED, jint)
+/*!
+ @brief Added optional packed format.
+ */
+inline jint OrgApacheLuceneUtilFstFST_get_VERSION_PACKED();
+#define OrgApacheLuceneUtilFstFST_VERSION_PACKED 3
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilFstFST, VERSION_PACKED, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFstFST, VERSION_VINT_TARGET, jint)
+/*!
+ @brief Changed from int to vInt for encoding arc targets.
+ Also changed maxBytesPerArc from int to vInt in the array case. 
+ */
+inline jint OrgApacheLuceneUtilFstFST_get_VERSION_VINT_TARGET();
+#define OrgApacheLuceneUtilFstFST_VERSION_VINT_TARGET 4
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilFstFST, VERSION_VINT_TARGET, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFstFST, VERSION_NO_NODE_ARC_COUNTS, jint)
+/*!
+ @brief Don't store arcWithOutputCount anymore
+ */
+inline jint OrgApacheLuceneUtilFstFST_get_VERSION_NO_NODE_ARC_COUNTS();
+#define OrgApacheLuceneUtilFstFST_VERSION_NO_NODE_ARC_COUNTS 5
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilFstFST, VERSION_NO_NODE_ARC_COUNTS, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFstFST, VERSION_CURRENT, jint)
+inline jint OrgApacheLuceneUtilFstFST_get_VERSION_CURRENT();
+#define OrgApacheLuceneUtilFstFST_VERSION_CURRENT 5
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilFstFST, VERSION_CURRENT, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFstFST, FINAL_END_NODE, jlong)
+inline jlong OrgApacheLuceneUtilFstFST_get_FINAL_END_NODE();
+#define OrgApacheLuceneUtilFstFST_FINAL_END_NODE -1LL
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilFstFST, FINAL_END_NODE, jlong)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFstFST, NON_FINAL_END_NODE, jlong)
+inline jlong OrgApacheLuceneUtilFstFST_get_NON_FINAL_END_NODE();
+#define OrgApacheLuceneUtilFstFST_NON_FINAL_END_NODE 0LL
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilFstFST, NON_FINAL_END_NODE, jlong)
 
 __attribute__((unused)) static jboolean OrgApacheLuceneUtilFstFST_flagWithInt_withInt_(jint flags, jint bit);
 
@@ -167,13 +211,13 @@ __attribute__((unused)) static void OrgApacheLuceneUtilFstFST_seekToNextNodeWith
 
 __attribute__((unused)) static jboolean OrgApacheLuceneUtilFstFST_shouldExpandWithOrgApacheLuceneUtilFstBuilder_withOrgApacheLuceneUtilFstBuilder_UnCompiledNode_(OrgApacheLuceneUtilFstFST *self, OrgApacheLuceneUtilFstBuilder *builder, OrgApacheLuceneUtilFstBuilder_UnCompiledNode *node);
 
-__attribute__((unused)) static void OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_withOrgApacheLuceneUtilFstOutputs_withInt_(OrgApacheLuceneUtilFstFST *self, OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum *inputType, OrgApacheLuceneUtilFstOutputs *outputs, jint bytesPageBits);
+__attribute__((unused)) static void OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE_withOrgApacheLuceneUtilFstOutputs_withInt_(OrgApacheLuceneUtilFstFST *self, OrgApacheLuceneUtilFstFST_INPUT_TYPE *inputType, OrgApacheLuceneUtilFstOutputs *outputs, jint bytesPageBits);
 
-__attribute__((unused)) static OrgApacheLuceneUtilFstFST *new_OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_withOrgApacheLuceneUtilFstOutputs_withInt_(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum *inputType, OrgApacheLuceneUtilFstOutputs *outputs, jint bytesPageBits) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneUtilFstFST *new_OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE_withOrgApacheLuceneUtilFstOutputs_withInt_(OrgApacheLuceneUtilFstFST_INPUT_TYPE *inputType, OrgApacheLuceneUtilFstOutputs *outputs, jint bytesPageBits) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static void OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_initWithNSString_withInt_(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum *self, NSString *__name, jint __ordinal);
+__attribute__((unused)) static OrgApacheLuceneUtilFstFST *create_OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE_withOrgApacheLuceneUtilFstOutputs_withInt_(OrgApacheLuceneUtilFstFST_INPUT_TYPE *inputType, OrgApacheLuceneUtilFstOutputs *outputs, jint bytesPageBits);
 
-__attribute__((unused)) static OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum *new_OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
+__attribute__((unused)) static void OrgApacheLuceneUtilFstFST_INPUT_TYPE_initWithNSString_withInt_(OrgApacheLuceneUtilFstFST_INPUT_TYPE *self, NSString *__name, jint __ordinal);
 
 @interface OrgApacheLuceneUtilFstFST_NodeAndInCount : NSObject < JavaLangComparable > {
  @public
@@ -194,6 +238,8 @@ __attribute__((unused)) static void OrgApacheLuceneUtilFstFST_NodeAndInCount_ini
 
 __attribute__((unused)) static OrgApacheLuceneUtilFstFST_NodeAndInCount *new_OrgApacheLuceneUtilFstFST_NodeAndInCount_initWithInt_withInt_(jint node, jint count) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneUtilFstFST_NodeAndInCount *create_OrgApacheLuceneUtilFstFST_NodeAndInCount_initWithInt_withInt_(jint node, jint count);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstFST_NodeAndInCount)
 
 @interface OrgApacheLuceneUtilFstFST_NodeQueue : OrgApacheLuceneUtilPriorityQueue
@@ -211,25 +257,71 @@ __attribute__((unused)) static void OrgApacheLuceneUtilFstFST_NodeQueue_initWith
 
 __attribute__((unused)) static OrgApacheLuceneUtilFstFST_NodeQueue *new_OrgApacheLuceneUtilFstFST_NodeQueue_initWithInt_(jint topN) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneUtilFstFST_NodeQueue *create_OrgApacheLuceneUtilFstFST_NodeQueue_initWithInt_(jint topN);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstFST_NodeQueue)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFstFST)
 
-jint OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS_;
+jint OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS;
 
 @implementation OrgApacheLuceneUtilFstFST
+
++ (jint)BIT_FINAL_ARC {
+  return OrgApacheLuceneUtilFstFST_BIT_FINAL_ARC;
+}
+
++ (jint)BIT_LAST_ARC {
+  return OrgApacheLuceneUtilFstFST_BIT_LAST_ARC;
+}
+
++ (jint)BIT_TARGET_NEXT {
+  return OrgApacheLuceneUtilFstFST_BIT_TARGET_NEXT;
+}
+
++ (jint)BIT_STOP_NODE {
+  return OrgApacheLuceneUtilFstFST_BIT_STOP_NODE;
+}
+
++ (jint)BIT_ARC_HAS_OUTPUT {
+  return OrgApacheLuceneUtilFstFST_BIT_ARC_HAS_OUTPUT;
+}
+
++ (jint)BIT_ARC_HAS_FINAL_OUTPUT {
+  return OrgApacheLuceneUtilFstFST_BIT_ARC_HAS_FINAL_OUTPUT;
+}
+
++ (jint)FIXED_ARRAY_SHALLOW_DISTANCE {
+  return OrgApacheLuceneUtilFstFST_FIXED_ARRAY_SHALLOW_DISTANCE;
+}
+
++ (jint)FIXED_ARRAY_NUM_ARCS_SHALLOW {
+  return OrgApacheLuceneUtilFstFST_FIXED_ARRAY_NUM_ARCS_SHALLOW;
+}
+
++ (jint)FIXED_ARRAY_NUM_ARCS_DEEP {
+  return OrgApacheLuceneUtilFstFST_FIXED_ARRAY_NUM_ARCS_DEEP;
+}
+
++ (jint)END_LABEL {
+  return OrgApacheLuceneUtilFstFST_END_LABEL;
+}
+
++ (jint)DEFAULT_MAX_BLOCK_BITS {
+  return OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS;
+}
 
 + (jboolean)flagWithInt:(jint)flags
                 withInt:(jint)bit {
   return OrgApacheLuceneUtilFstFST_flagWithInt_withInt_(flags, bit);
 }
 
-- (instancetype)initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum:(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum *)inputType
-                               withOrgApacheLuceneUtilFstOutputs:(OrgApacheLuceneUtilFstOutputs *)outputs
-                                                     withBoolean:(jboolean)willPackFST
-                                                       withFloat:(jfloat)acceptableOverheadRatio
-                                                         withInt:(jint)bytesPageBits {
-  OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_withOrgApacheLuceneUtilFstOutputs_withBoolean_withFloat_withInt_(self, inputType, outputs, willPackFST, acceptableOverheadRatio, bytesPageBits);
+- (instancetype)initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE:(OrgApacheLuceneUtilFstFST_INPUT_TYPE *)inputType
+                           withOrgApacheLuceneUtilFstOutputs:(OrgApacheLuceneUtilFstOutputs *)outputs
+                                                 withBoolean:(jboolean)willPackFST
+                                                   withFloat:(jfloat)acceptableOverheadRatio
+                                                     withInt:(jint)bytesPageBits {
+  OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE_withOrgApacheLuceneUtilFstOutputs_withBoolean_withFloat_withInt_(self, inputType, outputs, willPackFST, acceptableOverheadRatio, bytesPageBits);
   return self;
 }
 
@@ -246,7 +338,7 @@ jint OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS_;
   return self;
 }
 
-- (OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum *)getInputType {
+- (OrgApacheLuceneUtilFstFST_INPUT_TYPE *)getInputType {
   return inputType_;
 }
 
@@ -255,7 +347,7 @@ jint OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS_;
 }
 
 - (jlong)ramBytesUsed {
-  jlong size = OrgApacheLuceneUtilFstFST_BASE_RAM_BYTES_USED_;
+  jlong size = OrgApacheLuceneUtilFstFST_BASE_RAM_BYTES_USED;
   if (bytesArray_ != nil) {
     size += bytesArray_->size_;
   }
@@ -274,7 +366,7 @@ jint OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS_;
 }
 
 - (id<JavaUtilCollection>)getChildResources {
-  id<JavaUtilList> resources = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> resources = create_JavaUtilArrayList_init();
   if (packed_) {
     [resources addWithId:OrgApacheLuceneUtilAccountables_namedAccountableWithNSString_withOrgApacheLuceneUtilAccountable_(@"node ref to address", nodeRefToAddress_)];
   }
@@ -292,7 +384,7 @@ jint OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS_;
 - (void)finishWithLong:(jlong)newStartNode {
   JreAssert((newStartNode <= [((OrgApacheLuceneUtilFstBytesStore *) nil_chk(bytes_)) getPosition]), (@"org/apache/lucene/util/fst/FST.java:456 condition failed: assert newStartNode <= bytes.getPosition();"));
   if (startNode_ != -1) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"already finished") autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"already finished");
   }
   if (newStartNode == OrgApacheLuceneUtilFstFST_FINAL_END_NODE && emptyOutput_ != nil) {
     newStartNode = 0;
@@ -325,15 +417,15 @@ jint OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS_;
 
 - (void)saveWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
   if (startNode_ == -1) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"call finish first") autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"call finish first");
   }
   if (nodeAddress_ != nil) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"cannot save an FST pre-packed FST; it must first be packed") autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"cannot save an FST pre-packed FST; it must first be packed");
   }
   if (packed_ && !([nodeRefToAddress_ isKindOfClass:[OrgApacheLuceneUtilPackedPackedInts_Mutable class]])) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"cannot save a FST which has been loaded from disk ") autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"cannot save a FST which has been loaded from disk ");
   }
-  OrgApacheLuceneCodecsCodecUtil_writeHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_(outArg, OrgApacheLuceneUtilFstFST_FILE_FORMAT_NAME_, OrgApacheLuceneUtilFstFST_VERSION_CURRENT);
+  OrgApacheLuceneCodecsCodecUtil_writeHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_(outArg, OrgApacheLuceneUtilFstFST_FILE_FORMAT_NAME, OrgApacheLuceneUtilFstFST_VERSION_CURRENT);
   if (packed_) {
     [((OrgApacheLuceneStoreDataOutput *) nil_chk(outArg)) writeByteWithByte:(jbyte) 1];
   }
@@ -341,8 +433,8 @@ jint OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS_;
     [((OrgApacheLuceneStoreDataOutput *) nil_chk(outArg)) writeByteWithByte:(jbyte) 0];
   }
   if (emptyOutput_ != nil) {
-    [((OrgApacheLuceneStoreDataOutput *) nil_chk(outArg)) writeByteWithByte:(jbyte) 1];
-    OrgApacheLuceneStoreRAMOutputStream *ros = [new_OrgApacheLuceneStoreRAMOutputStream_init() autorelease];
+    [outArg writeByteWithByte:(jbyte) 1];
+    OrgApacheLuceneStoreRAMOutputStream *ros = create_OrgApacheLuceneStoreRAMOutputStream_init();
     [((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs_)) writeFinalOutputWithId:emptyOutput_ withOrgApacheLuceneStoreDataOutput:ros];
     IOSByteArray *emptyOutputBytes = [IOSByteArray arrayWithLength:(jint) [ros getFilePointer]];
     [ros writeToWithByteArray:emptyOutputBytes withInt:0];
@@ -360,21 +452,21 @@ jint OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS_;
     [outArg writeBytesWithByteArray:emptyOutputBytes withInt:0 withInt:emptyOutputBytes->size_];
   }
   else {
-    [((OrgApacheLuceneStoreDataOutput *) nil_chk(outArg)) writeByteWithByte:(jbyte) 0];
+    [outArg writeByteWithByte:(jbyte) 0];
   }
   jbyte t;
-  if (inputType_ == JreLoadStatic(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum, BYTE1)) {
+  if (inputType_ == JreLoadEnum(OrgApacheLuceneUtilFstFST_INPUT_TYPE, BYTE1)) {
     t = 0;
   }
-  else if (inputType_ == JreLoadStatic(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum, BYTE2)) {
+  else if (inputType_ == JreLoadEnum(OrgApacheLuceneUtilFstFST_INPUT_TYPE, BYTE2)) {
     t = 1;
   }
   else {
     t = 2;
   }
-  [((OrgApacheLuceneStoreDataOutput *) nil_chk(outArg)) writeByteWithByte:t];
+  [outArg writeByteWithByte:t];
   if (packed_) {
-    [((OrgApacheLuceneUtilPackedPackedInts_Mutable *) nil_chk(((OrgApacheLuceneUtilPackedPackedInts_Mutable *) check_class_cast(nodeRefToAddress_, [OrgApacheLuceneUtilPackedPackedInts_Mutable class])))) saveWithOrgApacheLuceneStoreDataOutput:outArg];
+    [((OrgApacheLuceneUtilPackedPackedInts_Mutable *) nil_chk(((OrgApacheLuceneUtilPackedPackedInts_Mutable *) cast_chk(nodeRefToAddress_, [OrgApacheLuceneUtilPackedPackedInts_Mutable class])))) saveWithOrgApacheLuceneStoreDataOutput:outArg];
   }
   [outArg writeVLongWithLong:startNode_];
   if (bytes_ != nil) {
@@ -391,12 +483,12 @@ jint OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS_;
 
 - (void)saveWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path {
   {
-    JavaIoOutputStream *os = [new_JavaIoBufferedOutputStream_initWithJavaIoOutputStream_(OrgLukhnosPortmobileFileFiles_newOutputStreamWithOrgLukhnosPortmobileFilePath_(path)) autorelease];
-    JavaLangThrowable *__primaryException1 = nil;
+    JavaIoOutputStream *os = create_JavaIoBufferedOutputStream_initWithJavaIoOutputStream_(OrgLukhnosPortmobileFileFiles_newOutputStreamWithOrgLukhnosPortmobileFilePath_(path));
+    NSException *__primaryException1 = nil;
     @try {
-      [self saveWithOrgApacheLuceneStoreDataOutput:[new_OrgApacheLuceneStoreOutputStreamDataOutput_initWithJavaIoOutputStream_(os) autorelease]];
+      [self saveWithOrgApacheLuceneStoreDataOutput:create_OrgApacheLuceneStoreOutputStreamDataOutput_initWithJavaIoOutputStream_(os)];
     }
-    @catch (JavaLangThrowable *e) {
+    @catch (NSException *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -405,8 +497,8 @@ jint OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS_;
         if (__primaryException1 != nil) {
           @try {
             [os close];
-          } @catch (JavaLangThrowable *e) {
-            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          } @catch (NSException *e) {
+            [__primaryException1 addSuppressedWithNSException:e];
           }
         } else {
           [os close];
@@ -428,10 +520,10 @@ jint OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS_;
 
 - (jint)readLabelWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg {
   jint v;
-  if (inputType_ == JreLoadStatic(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum, BYTE1)) {
+  if (inputType_ == JreLoadEnum(OrgApacheLuceneUtilFstFST_INPUT_TYPE, BYTE1)) {
     v = [((OrgApacheLuceneStoreDataInput *) nil_chk(inArg)) readByte] & (jint) 0xFF;
   }
-  else if (inputType_ == JreLoadStatic(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum, BYTE2)) {
+  else if (inputType_ == JreLoadEnum(OrgApacheLuceneUtilFstFST_INPUT_TYPE, BYTE2)) {
     v = [((OrgApacheLuceneStoreDataInput *) nil_chk(inArg)) readShort] & (jint) 0xFFFF;
   }
   else {
@@ -464,11 +556,11 @@ jint OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS_;
   }
   builder->arcCount_ += nodeIn->numArcs_;
   jint lastArc = nodeIn->numArcs_ - 1;
-  jlong lastArcStart = [builder->bytes_ getPosition];
+  jlong lastArcStart = [((OrgApacheLuceneUtilFstBytesStore *) nil_chk(builder->bytes_)) getPosition];
   jint maxBytesPerArc = 0;
   for (jint arcIdx = 0; arcIdx < nodeIn->numArcs_; arcIdx++) {
     OrgApacheLuceneUtilFstBuilder_Arc *arc = IOSObjectArray_Get(nil_chk(nodeIn->arcs_), arcIdx);
-    OrgApacheLuceneUtilFstBuilder_CompiledNode *target = (OrgApacheLuceneUtilFstBuilder_CompiledNode *) check_class_cast(((OrgApacheLuceneUtilFstBuilder_Arc *) nil_chk(arc))->target_, [OrgApacheLuceneUtilFstBuilder_CompiledNode class]);
+    OrgApacheLuceneUtilFstBuilder_CompiledNode *target = (OrgApacheLuceneUtilFstBuilder_CompiledNode *) cast_chk(((OrgApacheLuceneUtilFstBuilder_Arc *) nil_chk(arc))->target_, [OrgApacheLuceneUtilFstBuilder_CompiledNode class]);
     jint flags = 0;
     if (arcIdx == lastArc) {
       flags += OrgApacheLuceneUtilFstFST_BIT_LAST_ARC;
@@ -495,61 +587,61 @@ jint OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS_;
     if (arc->output_ != NO_OUTPUT) {
       flags += OrgApacheLuceneUtilFstFST_BIT_ARC_HAS_OUTPUT;
     }
-    [builder->bytes_ writeByteWithByte:(jbyte) flags];
+    [((OrgApacheLuceneUtilFstBytesStore *) nil_chk(builder->bytes_)) writeByteWithByte:(jbyte) flags];
     OrgApacheLuceneUtilFstFST_writeLabelWithOrgApacheLuceneStoreDataOutput_withInt_(self, builder->bytes_, arc->label_);
     if (arc->output_ != NO_OUTPUT) {
-      [outputs_ writeWithId:arc->output_ withOrgApacheLuceneStoreDataOutput:builder->bytes_];
+      [outputs_ writeWithId:((id) arc->output_) withOrgApacheLuceneStoreDataOutput:builder->bytes_];
     }
     if (arc->nextFinalOutput_ != NO_OUTPUT) {
-      [outputs_ writeFinalOutputWithId:arc->nextFinalOutput_ withOrgApacheLuceneStoreDataOutput:builder->bytes_];
+      [outputs_ writeFinalOutputWithId:((id) arc->nextFinalOutput_) withOrgApacheLuceneStoreDataOutput:builder->bytes_];
     }
     if (targetHasArcs && (flags & OrgApacheLuceneUtilFstFST_BIT_TARGET_NEXT) == 0) {
       JreAssert((target->node_ > 0), (@"org/apache/lucene/util/fst/FST.java:733 condition failed: assert target.node > 0;"));
-      [builder->bytes_ writeVLongWithLong:target->node_];
+      [((OrgApacheLuceneUtilFstBytesStore *) nil_chk(builder->bytes_)) writeVLongWithLong:target->node_];
     }
     if (doFixedArray) {
-      *IOSIntArray_GetRef(nil_chk(builder->reusedBytesPerArc_), arcIdx) = (jint) ([builder->bytes_ getPosition] - lastArcStart);
-      lastArcStart = [builder->bytes_ getPosition];
-      maxBytesPerArc = JavaLangMath_maxWithInt_withInt_(maxBytesPerArc, IOSIntArray_Get(builder->reusedBytesPerArc_, arcIdx));
+      *IOSIntArray_GetRef(nil_chk(builder->reusedBytesPerArc_), arcIdx) = (jint) ([((OrgApacheLuceneUtilFstBytesStore *) nil_chk(builder->bytes_)) getPosition] - lastArcStart);
+      lastArcStart = [((OrgApacheLuceneUtilFstBytesStore *) nil_chk(builder->bytes_)) getPosition];
+      maxBytesPerArc = JavaLangMath_maxWithInt_withInt_(maxBytesPerArc, IOSIntArray_Get(nil_chk(builder->reusedBytesPerArc_), arcIdx));
     }
   }
   if (doFixedArray) {
     jint MAX_HEADER_SIZE = 11;
     JreAssert((maxBytesPerArc > 0), (@"org/apache/lucene/util/fst/FST.java:771 condition failed: assert maxBytesPerArc > 0;"));
     IOSByteArray *header = [IOSByteArray arrayWithLength:MAX_HEADER_SIZE];
-    OrgApacheLuceneStoreByteArrayDataOutput *bad = [new_OrgApacheLuceneStoreByteArrayDataOutput_initWithByteArray_(header) autorelease];
+    OrgApacheLuceneStoreByteArrayDataOutput *bad = create_OrgApacheLuceneStoreByteArrayDataOutput_initWithByteArray_(header);
     [bad writeByteWithByte:OrgApacheLuceneUtilFstFST_ARCS_AS_FIXED_ARRAY];
     [bad writeVIntWithInt:nodeIn->numArcs_];
     [bad writeVIntWithInt:maxBytesPerArc];
     jint headerLen = [bad getPosition];
     jlong fixedArrayStart = startAddress + headerLen;
-    jlong srcPos = [builder->bytes_ getPosition];
+    jlong srcPos = [((OrgApacheLuceneUtilFstBytesStore *) nil_chk(builder->bytes_)) getPosition];
     jlong destPos = fixedArrayStart + nodeIn->numArcs_ * maxBytesPerArc;
     JreAssert((destPos >= srcPos), (@"org/apache/lucene/util/fst/FST.java:791 condition failed: assert destPos >= srcPos;"));
     if (destPos > srcPos) {
-      [builder->bytes_ skipBytesWithInt:(jint) (destPos - srcPos)];
+      [((OrgApacheLuceneUtilFstBytesStore *) nil_chk(builder->bytes_)) skipBytesWithInt:(jint) (destPos - srcPos)];
       for (jint arcIdx = nodeIn->numArcs_ - 1; arcIdx >= 0; arcIdx--) {
         destPos -= maxBytesPerArc;
         srcPos -= IOSIntArray_Get(nil_chk(builder->reusedBytesPerArc_), arcIdx);
         if (srcPos != destPos) {
           JreAssert((destPos > srcPos), (JreStrcat("$J$J$I$I$I$I", @"destPos=", destPos, @" srcPos=", srcPos, @" arcIdx=", arcIdx, @" maxBytesPerArc=", maxBytesPerArc, @" reusedBytesPerArc[arcIdx]=", IOSIntArray_Get(builder->reusedBytesPerArc_, arcIdx), @" nodeIn.numArcs=", nodeIn->numArcs_)));
-          [builder->bytes_ copyBytesWithLong:srcPos withLong:destPos withInt:IOSIntArray_Get(builder->reusedBytesPerArc_, arcIdx)];
+          [((OrgApacheLuceneUtilFstBytesStore *) nil_chk(builder->bytes_)) copyBytesWithLong:srcPos withLong:destPos withInt:IOSIntArray_Get(builder->reusedBytesPerArc_, arcIdx)];
         }
       }
     }
-    [builder->bytes_ writeBytesWithLong:startAddress withByteArray:header withInt:0 withInt:headerLen];
+    [((OrgApacheLuceneUtilFstBytesStore *) nil_chk(builder->bytes_)) writeBytesWithLong:startAddress withByteArray:header withInt:0 withInt:headerLen];
   }
-  jlong thisNodeAddress = [builder->bytes_ getPosition] - 1;
-  [builder->bytes_ reverseWithLong:startAddress withLong:thisNodeAddress];
+  jlong thisNodeAddress = [((OrgApacheLuceneUtilFstBytesStore *) nil_chk(builder->bytes_)) getPosition] - 1;
+  [((OrgApacheLuceneUtilFstBytesStore *) nil_chk(builder->bytes_)) reverseWithLong:startAddress withLong:thisNodeAddress];
   if (nodeAddress_ != nil && builder->nodeCount_ == JavaLangInteger_MAX_VALUE) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"cannot create a packed FST with more than 2.1 billion nodes") autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"cannot create a packed FST with more than 2.1 billion nodes");
   }
   builder->nodeCount_++;
   jlong node;
   if (nodeAddress_ != nil) {
     if ((jint) builder->nodeCount_ == [nodeAddress_ size]) {
-      JreStrongAssign(&nodeAddress_, [nodeAddress_ resizeWithInt:OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_([nodeAddress_ size] + 1, [nodeAddress_ getBitsPerValue])]);
-      JreStrongAssign(&inCounts_, [inCounts_ resizeWithInt:OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_([((OrgApacheLuceneUtilPackedGrowableWriter *) nil_chk(inCounts_)) size] + 1, [inCounts_ getBitsPerValue])]);
+      JreStrongAssign(&nodeAddress_, [((OrgApacheLuceneUtilPackedGrowableWriter *) nil_chk(nodeAddress_)) resizeWithInt:OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_([nodeAddress_ size] + 1, [((OrgApacheLuceneUtilPackedGrowableWriter *) nil_chk(nodeAddress_)) getBitsPerValue])]);
+      JreStrongAssign(&inCounts_, [((OrgApacheLuceneUtilPackedGrowableWriter *) nil_chk(inCounts_)) resizeWithInt:OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_([inCounts_ size] + 1, [((OrgApacheLuceneUtilPackedGrowableWriter *) nil_chk(inCounts_)) getBitsPerValue])]);
     }
     [((OrgApacheLuceneUtilPackedGrowableWriter *) nil_chk(nodeAddress_)) setWithInt:(jint) builder->nodeCount_ withLong:thisNodeAddress];
     node = builder->nodeCount_;
@@ -573,7 +665,7 @@ jint OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS_;
     ((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->flags_ = OrgApacheLuceneUtilFstFST_BIT_LAST_ARC;
     JreStrongAssign(&arc->nextFinalOutput_, NO_OUTPUT);
   }
-  JreStrongAssign(&((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->output_, NO_OUTPUT);
+  JreStrongAssign(&arc->output_, NO_OUTPUT);
   arc->target_ = startNode_;
   return arc;
 }
@@ -701,7 +793,7 @@ jint OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS_;
                                       withOrgApacheLuceneUtilFstFST_BytesReader:(OrgApacheLuceneUtilFstFST_BytesReader *)inArg {
   if (((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->label_ == OrgApacheLuceneUtilFstFST_END_LABEL) {
     if (arc->nextArc_ <= 0) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"cannot readNextArc when arc.isLast()=true") autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"cannot readNextArc when arc.isLast()=true");
     }
     return [self readFirstRealTargetArcWithLong:arc->nextArc_ withOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_BytesReader:inArg];
   }
@@ -739,7 +831,7 @@ jint OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS_;
       [((OrgApacheLuceneUtilFstFST_BytesReader *) nil_chk(inArg)) setPositionWithLong:arc->nextArc_];
     }
   }
-  [((OrgApacheLuceneUtilFstFST_BytesReader *) nil_chk(inArg)) readByte];
+  [inArg readByte];
   return [self readLabelWithOrgApacheLuceneStoreDataInput:inArg];
 }
 
@@ -754,7 +846,7 @@ jint OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS_;
   else {
     [((OrgApacheLuceneUtilFstFST_BytesReader *) nil_chk(inArg)) setPositionWithLong:arc->nextArc_];
   }
-  arc->flags_ = [((OrgApacheLuceneUtilFstFST_BytesReader *) nil_chk(inArg)) readByte];
+  arc->flags_ = [inArg readByte];
   arc->label_ = [self readLabelWithOrgApacheLuceneStoreDataInput:inArg];
   if ([arc flagWithInt:OrgApacheLuceneUtilFstFST_BIT_ARC_HAS_OUTPUT]) {
     JreStrongAssign(&arc->output_, [((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs_)) readWithOrgApacheLuceneStoreDataInput:inArg]);
@@ -763,10 +855,10 @@ jint OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS_;
     JreStrongAssign(&arc->output_, [((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs_)) getNoOutput]);
   }
   if ([arc flagWithInt:OrgApacheLuceneUtilFstFST_BIT_ARC_HAS_FINAL_OUTPUT]) {
-    JreStrongAssign(&arc->nextFinalOutput_, [((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs_)) readFinalOutputWithOrgApacheLuceneStoreDataInput:inArg]);
+    JreStrongAssign(&arc->nextFinalOutput_, [outputs_ readFinalOutputWithOrgApacheLuceneStoreDataInput:inArg]);
   }
   else {
-    JreStrongAssign(&arc->nextFinalOutput_, [((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs_)) getNoOutput]);
+    JreStrongAssign(&arc->nextFinalOutput_, [outputs_ getNoOutput]);
   }
   if ([arc flagWithInt:OrgApacheLuceneUtilFstFST_BIT_STOP_NODE]) {
     if ([arc flagWithInt:OrgApacheLuceneUtilFstFST_BIT_FINAL_ARC]) {
@@ -804,7 +896,7 @@ jint OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS_;
         arc->target_ = pos + code;
       }
       else if (code < [((OrgApacheLuceneUtilPackedPackedInts_Reader *) nil_chk(nodeRefToAddress_)) size]) {
-        arc->target_ = [nodeRefToAddress_ getWithInt:(jint) code];
+        arc->target_ = [((OrgApacheLuceneUtilPackedPackedInts_Reader *) nil_chk(nodeRefToAddress_)) getWithInt:(jint) code];
       }
       else {
         arc->target_ = code;
@@ -850,7 +942,7 @@ jint OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS_;
 - (OrgApacheLuceneUtilFstFST_BytesReader *)getBytesReader {
   if (packed_) {
     if (bytesArray_ != nil) {
-      return [new_OrgApacheLuceneUtilFstForwardBytesReader_initWithByteArray_(bytesArray_) autorelease];
+      return create_OrgApacheLuceneUtilFstForwardBytesReader_initWithByteArray_(bytesArray_);
     }
     else {
       return [((OrgApacheLuceneUtilFstBytesStore *) nil_chk(bytes_)) getForwardReader];
@@ -858,7 +950,7 @@ jint OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS_;
   }
   else {
     if (bytesArray_ != nil) {
-      return [new_OrgApacheLuceneUtilFstReverseBytesReader_initWithByteArray_(bytesArray_) autorelease];
+      return create_OrgApacheLuceneUtilFstReverseBytesReader_initWithByteArray_(bytesArray_);
     }
     else {
       return [((OrgApacheLuceneUtilFstBytesStore *) nil_chk(bytes_)) getReverseReader];
@@ -866,10 +958,10 @@ jint OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS_;
   }
 }
 
-- (instancetype)initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum:(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum *)inputType
-                               withOrgApacheLuceneUtilFstOutputs:(OrgApacheLuceneUtilFstOutputs *)outputs
-                                                         withInt:(jint)bytesPageBits {
-  OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_withOrgApacheLuceneUtilFstOutputs_withInt_(self, inputType, outputs, bytesPageBits);
+- (instancetype)initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE:(OrgApacheLuceneUtilFstFST_INPUT_TYPE *)inputType
+                           withOrgApacheLuceneUtilFstOutputs:(OrgApacheLuceneUtilFstOutputs *)outputs
+                                                     withInt:(jint)bytesPageBits {
+  OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE_withOrgApacheLuceneUtilFstOutputs_withInt_(self, inputType, outputs, bytesPageBits);
   return self;
 }
 
@@ -878,36 +970,36 @@ jint OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS_;
                                                              withInt:(jint)maxDerefNodes
                                                            withFloat:(jfloat)acceptableOverheadRatio {
   if (nodeAddress_ == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"this FST was not built with willPackFST=true") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"this FST was not built with willPackFST=true");
   }
   id NO_OUTPUT = [((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs_)) getNoOutput];
-  OrgApacheLuceneUtilFstFST_Arc *arc = [new_OrgApacheLuceneUtilFstFST_Arc_init() autorelease];
+  OrgApacheLuceneUtilFstFST_Arc *arc = create_OrgApacheLuceneUtilFstFST_Arc_init();
   OrgApacheLuceneUtilFstFST_BytesReader *r = [self getBytesReader];
   jint topN = JavaLangMath_minWithInt_withInt_(maxDerefNodes, [((OrgApacheLuceneUtilPackedGrowableWriter *) nil_chk(inCounts_)) size]);
-  OrgApacheLuceneUtilFstFST_NodeQueue *q = [new_OrgApacheLuceneUtilFstFST_NodeQueue_initWithInt_(topN) autorelease];
+  OrgApacheLuceneUtilFstFST_NodeQueue *q = create_OrgApacheLuceneUtilFstFST_NodeQueue_initWithInt_(topN);
   OrgApacheLuceneUtilFstFST_NodeAndInCount *bottom = nil;
-  for (jint node = 0; node < [inCounts_ size]; node++) {
-    if ([inCounts_ getWithInt:node] >= minInCountDeref) {
+  for (jint node = 0; node < [((OrgApacheLuceneUtilPackedGrowableWriter *) nil_chk(inCounts_)) size]; node++) {
+    if ([((OrgApacheLuceneUtilPackedGrowableWriter *) nil_chk(inCounts_)) getWithInt:node] >= minInCountDeref) {
       if (bottom == nil) {
-        [q addWithId:[new_OrgApacheLuceneUtilFstFST_NodeAndInCount_initWithInt_withInt_(node, (jint) [inCounts_ getWithInt:node]) autorelease]];
+        [q addWithId:create_OrgApacheLuceneUtilFstFST_NodeAndInCount_initWithInt_withInt_(node, (jint) [((OrgApacheLuceneUtilPackedGrowableWriter *) nil_chk(inCounts_)) getWithInt:node])];
         if ([q size] == topN) {
           bottom = [q top];
         }
       }
-      else if ([inCounts_ getWithInt:node] > bottom->count_) {
-        [q insertWithOverflowWithId:[new_OrgApacheLuceneUtilFstFST_NodeAndInCount_initWithInt_withInt_(node, (jint) [inCounts_ getWithInt:node]) autorelease]];
+      else if ([((OrgApacheLuceneUtilPackedGrowableWriter *) nil_chk(inCounts_)) getWithInt:node] > bottom->count_) {
+        [q insertWithOverflowWithId:create_OrgApacheLuceneUtilFstFST_NodeAndInCount_initWithInt_withInt_(node, (jint) [((OrgApacheLuceneUtilPackedGrowableWriter *) nil_chk(inCounts_)) getWithInt:node])];
       }
     }
   }
   JreStrongAssign(&inCounts_, nil);
-  id<JavaUtilMap> topNodeMap = [new_JavaUtilHashMap_init() autorelease];
+  id<JavaUtilMap> topNodeMap = create_JavaUtilHashMap_init();
   for (jint downTo = [q size] - 1; downTo >= 0; downTo--) {
     OrgApacheLuceneUtilFstFST_NodeAndInCount *n = [q pop];
     [topNodeMap putWithId:JavaLangInteger_valueOfWithInt_(((OrgApacheLuceneUtilFstFST_NodeAndInCount *) nil_chk(n))->node_) withId:JavaLangInteger_valueOfWithInt_(downTo)];
   }
-  OrgApacheLuceneUtilPackedGrowableWriter *newNodeAddress = [new_OrgApacheLuceneUtilPackedGrowableWriter_initWithInt_withInt_withFloat_(OrgApacheLuceneUtilPackedPackedInts_bitsRequiredWithLong_([((OrgApacheLuceneUtilFstBytesStore *) nil_chk(((OrgApacheLuceneUtilFstBuilder *) nil_chk(builder))->bytes_)) getPosition]), (jint) (1 + builder->nodeCount_), acceptableOverheadRatio) autorelease];
+  OrgApacheLuceneUtilPackedGrowableWriter *newNodeAddress = create_OrgApacheLuceneUtilPackedGrowableWriter_initWithInt_withInt_withFloat_(OrgApacheLuceneUtilPackedPackedInts_bitsRequiredWithLong_([((OrgApacheLuceneUtilFstBytesStore *) nil_chk(((OrgApacheLuceneUtilFstBuilder *) nil_chk(builder))->bytes_)) getPosition]), (jint) (1 + builder->nodeCount_), acceptableOverheadRatio);
   for (jint node = 1; node <= builder->nodeCount_; node++) {
-    [newNodeAddress setWithInt:node withLong:1 + [builder->bytes_ getPosition] - [((OrgApacheLuceneUtilPackedGrowableWriter *) nil_chk(nodeAddress_)) getWithInt:node]];
+    [newNodeAddress setWithInt:node withLong:1 + [((OrgApacheLuceneUtilFstBytesStore *) nil_chk(builder->bytes_)) getPosition] - [((OrgApacheLuceneUtilPackedGrowableWriter *) nil_chk(nodeAddress_)) getWithInt:node]];
   }
   jint absCount;
   jint deltaCount;
@@ -917,7 +1009,7 @@ jint OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS_;
   while (true) {
     jboolean changed = false;
     jboolean negDelta = false;
-    fst = [new_OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_withOrgApacheLuceneUtilFstOutputs_withInt_(inputType_, outputs_, [builder->bytes_ getBlockBits]) autorelease];
+    fst = create_OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE_withOrgApacheLuceneUtilFstOutputs_withInt_(inputType_, outputs_, [((OrgApacheLuceneUtilFstBytesStore *) nil_chk(builder->bytes_)) getBlockBits]);
     OrgApacheLuceneUtilFstBytesStore *writer = fst->bytes_;
     [((OrgApacheLuceneUtilFstBytesStore *) nil_chk(writer)) writeByteWithByte:(jbyte) 0];
     absCount = deltaCount = topCount = nextCount = 0;
@@ -1001,10 +1093,10 @@ jint OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS_;
           [writer writeByteWithByte:flags];
           OrgApacheLuceneUtilFstFST_writeLabelWithOrgApacheLuceneStoreDataOutput_withInt_(fst, writer, arc->label_);
           if (arc->output_ != NO_OUTPUT) {
-            [outputs_ writeWithId:arc->output_ withOrgApacheLuceneStoreDataOutput:writer];
+            [outputs_ writeWithId:((id) arc->output_) withOrgApacheLuceneStoreDataOutput:writer];
           }
           if (arc->nextFinalOutput_ != NO_OUTPUT) {
-            [outputs_ writeFinalOutputWithId:arc->nextFinalOutput_ withOrgApacheLuceneStoreDataOutput:writer];
+            [outputs_ writeFinalOutputWithId:((id) arc->nextFinalOutput_) withOrgApacheLuceneStoreDataOutput:writer];
           }
           if (doWriteTarget) {
             jlong delta = [newNodeAddress getWithInt:(jint) arc->target_] + addressError - [writer getPosition];
@@ -1095,9 +1187,9 @@ jint OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS_;
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilFstFST class]) {
-    OrgApacheLuceneUtilFstFST_BASE_RAM_BYTES_USED_ = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilFstFST_class_());
-    OrgApacheLuceneUtilFstFST_ARC_SHALLOW_RAM_BYTES_USED_ = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilFstFST_Arc_class_());
-    OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS_ = JreLoadStatic(OrgApacheLuceneUtilConstants, JRE_IS_64BIT_) ? 30 : 28;
+    OrgApacheLuceneUtilFstFST_BASE_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilFstFST_class_());
+    OrgApacheLuceneUtilFstFST_ARC_SHALLOW_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilFstFST_Arc_class_());
+    OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS = JreLoadStatic(OrgApacheLuceneUtilConstants, JRE_IS_64BIT) ? 30 : 28;
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilFstFST)
   }
 }
@@ -1105,13 +1197,13 @@ jint OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS_;
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "flagWithInt:withInt:", "flag", "Z", 0xa, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum:withOrgApacheLuceneUtilFstOutputs:withBoolean:withFloat:withInt:", "FST", NULL, 0x0, NULL, NULL },
-    { "initWithOrgApacheLuceneStoreDataInput:withOrgApacheLuceneUtilFstOutputs:", "FST", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneStoreDataInput:withOrgApacheLuceneUtilFstOutputs:withInt:", "FST", NULL, 0x1, "Ljava.io.IOException;", NULL },
+    { "initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE:withOrgApacheLuceneUtilFstOutputs:withBoolean:withFloat:withInt:", "FST", NULL, 0x0, NULL, "(Lorg/apache/lucene/util/fst/FST$INPUT_TYPE;Lorg/apache/lucene/util/fst/Outputs<TT;>;ZFI)V" },
+    { "initWithOrgApacheLuceneStoreDataInput:withOrgApacheLuceneUtilFstOutputs:", "FST", NULL, 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/store/DataInput;Lorg/apache/lucene/util/fst/Outputs<TT;>;)V" },
+    { "initWithOrgApacheLuceneStoreDataInput:withOrgApacheLuceneUtilFstOutputs:withInt:", "FST", NULL, 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/store/DataInput;Lorg/apache/lucene/util/fst/Outputs<TT;>;I)V" },
     { "getInputType", NULL, "Lorg.apache.lucene.util.fst.FST$INPUT_TYPE;", 0x1, NULL, NULL },
     { "ramBytesUsedWithOrgApacheLuceneUtilFstFST_ArcArray:", "ramBytesUsed", "J", 0x2, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "finishWithLong:", "finish", "V", 0x0, "Ljava.io.IOException;", NULL },
     { "getNodeAddressWithLong:", "getNodeAddress", "J", 0x2, NULL, NULL },
@@ -1124,28 +1216,28 @@ jint OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS_;
     { "writeLabelWithOrgApacheLuceneStoreDataOutput:withInt:", "writeLabel", "V", 0x2, "Ljava.io.IOException;", NULL },
     { "readLabelWithOrgApacheLuceneStoreDataInput:", "readLabel", "I", 0x1, "Ljava.io.IOException;", NULL },
     { "targetHasArcsWithOrgApacheLuceneUtilFstFST_Arc:", "targetHasArcs", "Z", 0x9, NULL, "<T:Ljava/lang/Object;>(Lorg/apache/lucene/util/fst/FST$Arc<TT;>;)Z" },
-    { "addNodeWithOrgApacheLuceneUtilFstBuilder:withOrgApacheLuceneUtilFstBuilder_UnCompiledNode:", "addNode", "J", 0x0, "Ljava.io.IOException;", NULL },
-    { "getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:", "getFirstArc", "Lorg.apache.lucene.util.fst.FST$Arc;", 0x1, NULL, NULL },
-    { "readLastTargetArcWithOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_BytesReader:", "readLastTargetArc", "Lorg.apache.lucene.util.fst.FST$Arc;", 0x1, "Ljava.io.IOException;", NULL },
+    { "addNodeWithOrgApacheLuceneUtilFstBuilder:withOrgApacheLuceneUtilFstBuilder_UnCompiledNode:", "addNode", "J", 0x0, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/fst/Builder<TT;>;Lorg/apache/lucene/util/fst/Builder$UnCompiledNode<TT;>;)J" },
+    { "getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:", "getFirstArc", "Lorg.apache.lucene.util.fst.FST$Arc;", 0x1, NULL, "(Lorg/apache/lucene/util/fst/FST$Arc<TT;>;)Lorg/apache/lucene/util/fst/FST$Arc<TT;>;" },
+    { "readLastTargetArcWithOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_BytesReader:", "readLastTargetArc", "Lorg.apache.lucene.util.fst.FST$Arc;", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/fst/FST$Arc<TT;>;Lorg/apache/lucene/util/fst/FST$Arc<TT;>;Lorg/apache/lucene/util/fst/FST$BytesReader;)Lorg/apache/lucene/util/fst/FST$Arc<TT;>;" },
     { "readUnpackedNodeTargetWithOrgApacheLuceneUtilFstFST_BytesReader:", "readUnpackedNodeTarget", "J", 0x2, "Ljava.io.IOException;", NULL },
-    { "readFirstTargetArcWithOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_BytesReader:", "readFirstTargetArc", "Lorg.apache.lucene.util.fst.FST$Arc;", 0x1, "Ljava.io.IOException;", NULL },
-    { "readFirstRealTargetArcWithLong:withOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_BytesReader:", "readFirstRealTargetArc", "Lorg.apache.lucene.util.fst.FST$Arc;", 0x1, "Ljava.io.IOException;", NULL },
-    { "isExpandedTargetWithOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_BytesReader:", "isExpandedTarget", "Z", 0x0, "Ljava.io.IOException;", NULL },
-    { "readNextArcWithOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_BytesReader:", "readNextArc", "Lorg.apache.lucene.util.fst.FST$Arc;", 0x1, "Ljava.io.IOException;", NULL },
-    { "readNextArcLabelWithOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_BytesReader:", "readNextArcLabel", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "readNextRealArcWithOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_BytesReader:", "readNextRealArc", "Lorg.apache.lucene.util.fst.FST$Arc;", 0x1, "Ljava.io.IOException;", NULL },
-    { "assertRootCachedArcWithInt:withOrgApacheLuceneUtilFstFST_Arc:", "assertRootCachedArc", "Z", 0x2, "Ljava.io.IOException;", NULL },
-    { "findTargetArcWithInt:withOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_BytesReader:", "findTargetArc", "Lorg.apache.lucene.util.fst.FST$Arc;", 0x1, "Ljava.io.IOException;", NULL },
-    { "findTargetArcWithInt:withOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_BytesReader:withBoolean:", "findTargetArc", "Lorg.apache.lucene.util.fst.FST$Arc;", 0x2, "Ljava.io.IOException;", NULL },
+    { "readFirstTargetArcWithOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_BytesReader:", "readFirstTargetArc", "Lorg.apache.lucene.util.fst.FST$Arc;", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/fst/FST$Arc<TT;>;Lorg/apache/lucene/util/fst/FST$Arc<TT;>;Lorg/apache/lucene/util/fst/FST$BytesReader;)Lorg/apache/lucene/util/fst/FST$Arc<TT;>;" },
+    { "readFirstRealTargetArcWithLong:withOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_BytesReader:", "readFirstRealTargetArc", "Lorg.apache.lucene.util.fst.FST$Arc;", 0x1, "Ljava.io.IOException;", "(JLorg/apache/lucene/util/fst/FST$Arc<TT;>;Lorg/apache/lucene/util/fst/FST$BytesReader;)Lorg/apache/lucene/util/fst/FST$Arc<TT;>;" },
+    { "isExpandedTargetWithOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_BytesReader:", "isExpandedTarget", "Z", 0x0, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/fst/FST$Arc<TT;>;Lorg/apache/lucene/util/fst/FST$BytesReader;)Z" },
+    { "readNextArcWithOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_BytesReader:", "readNextArc", "Lorg.apache.lucene.util.fst.FST$Arc;", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/fst/FST$Arc<TT;>;Lorg/apache/lucene/util/fst/FST$BytesReader;)Lorg/apache/lucene/util/fst/FST$Arc<TT;>;" },
+    { "readNextArcLabelWithOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_BytesReader:", "readNextArcLabel", "I", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/fst/FST$Arc<TT;>;Lorg/apache/lucene/util/fst/FST$BytesReader;)I" },
+    { "readNextRealArcWithOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_BytesReader:", "readNextRealArc", "Lorg.apache.lucene.util.fst.FST$Arc;", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/fst/FST$Arc<TT;>;Lorg/apache/lucene/util/fst/FST$BytesReader;)Lorg/apache/lucene/util/fst/FST$Arc<TT;>;" },
+    { "assertRootCachedArcWithInt:withOrgApacheLuceneUtilFstFST_Arc:", "assertRootCachedArc", "Z", 0x2, "Ljava.io.IOException;", "(ILorg/apache/lucene/util/fst/FST$Arc<TT;>;)Z" },
+    { "findTargetArcWithInt:withOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_BytesReader:", "findTargetArc", "Lorg.apache.lucene.util.fst.FST$Arc;", 0x1, "Ljava.io.IOException;", "(ILorg/apache/lucene/util/fst/FST$Arc<TT;>;Lorg/apache/lucene/util/fst/FST$Arc<TT;>;Lorg/apache/lucene/util/fst/FST$BytesReader;)Lorg/apache/lucene/util/fst/FST$Arc<TT;>;" },
+    { "findTargetArcWithInt:withOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_BytesReader:withBoolean:", "findTargetArc", "Lorg.apache.lucene.util.fst.FST$Arc;", 0x2, "Ljava.io.IOException;", "(ILorg/apache/lucene/util/fst/FST$Arc<TT;>;Lorg/apache/lucene/util/fst/FST$Arc<TT;>;Lorg/apache/lucene/util/fst/FST$BytesReader;Z)Lorg/apache/lucene/util/fst/FST$Arc<TT;>;" },
     { "seekToNextNodeWithOrgApacheLuceneUtilFstFST_BytesReader:", "seekToNextNode", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "shouldExpandWithOrgApacheLuceneUtilFstBuilder:withOrgApacheLuceneUtilFstBuilder_UnCompiledNode:", "shouldExpand", "Z", 0x2, NULL, NULL },
+    { "shouldExpandWithOrgApacheLuceneUtilFstBuilder:withOrgApacheLuceneUtilFstBuilder_UnCompiledNode:", "shouldExpand", "Z", 0x2, NULL, "(Lorg/apache/lucene/util/fst/Builder<TT;>;Lorg/apache/lucene/util/fst/Builder$UnCompiledNode<TT;>;)Z" },
     { "getBytesReader", NULL, "Lorg.apache.lucene.util.fst.FST$BytesReader;", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum:withOrgApacheLuceneUtilFstOutputs:withInt:", "FST", NULL, 0x2, NULL, NULL },
-    { "packWithOrgApacheLuceneUtilFstBuilder:withInt:withInt:withFloat:", "pack", "Lorg.apache.lucene.util.fst.FST;", 0x0, "Ljava.io.IOException;", NULL },
+    { "initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE:withOrgApacheLuceneUtilFstOutputs:withInt:", "FST", NULL, 0x2, NULL, "(Lorg/apache/lucene/util/fst/FST$INPUT_TYPE;Lorg/apache/lucene/util/fst/Outputs<TT;>;I)V" },
+    { "packWithOrgApacheLuceneUtilFstBuilder:withInt:withInt:withFloat:", "pack", "Lorg.apache.lucene.util.fst.FST;", 0x0, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/fst/Builder<TT;>;IIF)Lorg/apache/lucene/util/fst/FST<TT;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "BASE_RAM_BYTES_USED_", NULL, 0x1a, "J", &OrgApacheLuceneUtilFstFST_BASE_RAM_BYTES_USED_, NULL, .constantValue.asLong = 0 },
-    { "ARC_SHALLOW_RAM_BYTES_USED_", NULL, 0x1a, "J", &OrgApacheLuceneUtilFstFST_ARC_SHALLOW_RAM_BYTES_USED_, NULL, .constantValue.asLong = 0 },
+    { "BASE_RAM_BYTES_USED", "BASE_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneUtilFstFST_BASE_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
+    { "ARC_SHALLOW_RAM_BYTES_USED", "ARC_SHALLOW_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneUtilFstFST_ARC_SHALLOW_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
     { "BIT_FINAL_ARC", "BIT_FINAL_ARC", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilFstFST_BIT_FINAL_ARC },
     { "BIT_LAST_ARC", "BIT_LAST_ARC", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilFstFST_BIT_LAST_ARC },
     { "BIT_TARGET_NEXT", "BIT_TARGET_NEXT", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilFstFST_BIT_TARGET_NEXT },
@@ -1157,7 +1249,7 @@ jint OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS_;
     { "FIXED_ARRAY_SHALLOW_DISTANCE", "FIXED_ARRAY_SHALLOW_DISTANCE", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilFstFST_FIXED_ARRAY_SHALLOW_DISTANCE },
     { "FIXED_ARRAY_NUM_ARCS_SHALLOW", "FIXED_ARRAY_NUM_ARCS_SHALLOW", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilFstFST_FIXED_ARRAY_NUM_ARCS_SHALLOW },
     { "FIXED_ARRAY_NUM_ARCS_DEEP", "FIXED_ARRAY_NUM_ARCS_DEEP", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilFstFST_FIXED_ARRAY_NUM_ARCS_DEEP },
-    { "FILE_FORMAT_NAME_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneUtilFstFST_FILE_FORMAT_NAME_, NULL, .constantValue.asLong = 0 },
+    { "FILE_FORMAT_NAME", "FILE_FORMAT_NAME", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneUtilFstFST_FILE_FORMAT_NAME, NULL, .constantValue.asLong = 0 },
     { "VERSION_START", "VERSION_START", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilFstFST_VERSION_START },
     { "VERSION_INT_NUM_BYTES_PER_ARC", "VERSION_INT_NUM_BYTES_PER_ARC", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilFstFST_VERSION_INT_NUM_BYTES_PER_ARC },
     { "VERSION_SHORT_BYTE2_LABELS", "VERSION_SHORT_BYTE2_LABELS", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilFstFST_VERSION_SHORT_BYTE2_LABELS },
@@ -1180,7 +1272,7 @@ jint OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS_;
     { "nodeAddress_", NULL, 0x2, "Lorg.apache.lucene.util.packed.GrowableWriter;", NULL, NULL, .constantValue.asLong = 0 },
     { "inCounts_", NULL, 0x2, "Lorg.apache.lucene.util.packed.GrowableWriter;", NULL, NULL, .constantValue.asLong = 0 },
     { "version__", "version", 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "DEFAULT_MAX_BLOCK_BITS_", NULL, 0x19, "I", &OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS_, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_MAX_BLOCK_BITS", "DEFAULT_MAX_BLOCK_BITS", 0x19, "I", &OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS, NULL, .constantValue.asLong = 0 },
     { "cachedArcsBytesUsed_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.fst.FST$INPUT_TYPE;", "Lorg.apache.lucene.util.fst.FST$Arc;", "Lorg.apache.lucene.util.fst.FST$BytesReader;", "Lorg.apache.lucene.util.fst.FST$NodeAndInCount;", "Lorg.apache.lucene.util.fst.FST$NodeQueue;"};
@@ -1195,7 +1287,7 @@ jboolean OrgApacheLuceneUtilFstFST_flagWithInt_withInt_(jint flags, jint bit) {
   return (flags & bit) != 0;
 }
 
-void OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_withOrgApacheLuceneUtilFstOutputs_withBoolean_withFloat_withInt_(OrgApacheLuceneUtilFstFST *self, OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum *inputType, OrgApacheLuceneUtilFstOutputs *outputs, jboolean willPackFST, jfloat acceptableOverheadRatio, jint bytesPageBits) {
+void OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE_withOrgApacheLuceneUtilFstOutputs_withBoolean_withFloat_withInt_(OrgApacheLuceneUtilFstFST *self, OrgApacheLuceneUtilFstFST_INPUT_TYPE *inputType, OrgApacheLuceneUtilFstOutputs *outputs, jboolean willPackFST, jfloat acceptableOverheadRatio, jint bytesPageBits) {
   NSObject_init(self);
   self->startNode_ = -1;
   JreStrongAssign(&self->inputType_, inputType);
@@ -1217,20 +1309,24 @@ void OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_
   JreStrongAssign(&self->nodeRefToAddress_, nil);
 }
 
-OrgApacheLuceneUtilFstFST *new_OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_withOrgApacheLuceneUtilFstOutputs_withBoolean_withFloat_withInt_(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum *inputType, OrgApacheLuceneUtilFstOutputs *outputs, jboolean willPackFST, jfloat acceptableOverheadRatio, jint bytesPageBits) {
-  OrgApacheLuceneUtilFstFST *self = [OrgApacheLuceneUtilFstFST alloc];
-  OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_withOrgApacheLuceneUtilFstOutputs_withBoolean_withFloat_withInt_(self, inputType, outputs, willPackFST, acceptableOverheadRatio, bytesPageBits);
-  return self;
+OrgApacheLuceneUtilFstFST *new_OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE_withOrgApacheLuceneUtilFstOutputs_withBoolean_withFloat_withInt_(OrgApacheLuceneUtilFstFST_INPUT_TYPE *inputType, OrgApacheLuceneUtilFstOutputs *outputs, jboolean willPackFST, jfloat acceptableOverheadRatio, jint bytesPageBits) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFstFST, initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE_withOrgApacheLuceneUtilFstOutputs_withBoolean_withFloat_withInt_, inputType, outputs, willPackFST, acceptableOverheadRatio, bytesPageBits)
+}
+
+OrgApacheLuceneUtilFstFST *create_OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE_withOrgApacheLuceneUtilFstOutputs_withBoolean_withFloat_withInt_(OrgApacheLuceneUtilFstFST_INPUT_TYPE *inputType, OrgApacheLuceneUtilFstOutputs *outputs, jboolean willPackFST, jfloat acceptableOverheadRatio, jint bytesPageBits) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFstFST, initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE_withOrgApacheLuceneUtilFstOutputs_withBoolean_withFloat_withInt_, inputType, outputs, willPackFST, acceptableOverheadRatio, bytesPageBits)
 }
 
 void OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilFstOutputs_(OrgApacheLuceneUtilFstFST *self, OrgApacheLuceneStoreDataInput *inArg, OrgApacheLuceneUtilFstOutputs *outputs) {
-  OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilFstOutputs_withInt_(self, inArg, outputs, OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS_);
+  OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilFstOutputs_withInt_(self, inArg, outputs, OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS);
 }
 
 OrgApacheLuceneUtilFstFST *new_OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilFstOutputs_(OrgApacheLuceneStoreDataInput *inArg, OrgApacheLuceneUtilFstOutputs *outputs) {
-  OrgApacheLuceneUtilFstFST *self = [OrgApacheLuceneUtilFstFST alloc];
-  OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilFstOutputs_(self, inArg, outputs);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFstFST, initWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilFstOutputs_, inArg, outputs)
+}
+
+OrgApacheLuceneUtilFstFST *create_OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilFstOutputs_(OrgApacheLuceneStoreDataInput *inArg, OrgApacheLuceneUtilFstOutputs *outputs) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFstFST, initWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilFstOutputs_, inArg, outputs)
 }
 
 void OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilFstOutputs_withInt_(OrgApacheLuceneUtilFstFST *self, OrgApacheLuceneStoreDataInput *inArg, OrgApacheLuceneUtilFstOutputs *outputs, jint maxBlockBits) {
@@ -1238,12 +1334,12 @@ void OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneStoreDataInput_withOrgApac
   self->startNode_ = -1;
   JreStrongAssign(&self->outputs_, outputs);
   if (maxBlockBits < 1 || maxBlockBits > 30) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"maxBlockBits should be 1 .. 30; got ", maxBlockBits)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"maxBlockBits should be 1 .. 30; got ", maxBlockBits));
   }
-  self->version__ = OrgApacheLuceneCodecsCodecUtil_checkHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_(inArg, OrgApacheLuceneUtilFstFST_FILE_FORMAT_NAME_, OrgApacheLuceneUtilFstFST_VERSION_PACKED, OrgApacheLuceneUtilFstFST_VERSION_NO_NODE_ARC_COUNTS);
+  self->version__ = OrgApacheLuceneCodecsCodecUtil_checkHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_(inArg, OrgApacheLuceneUtilFstFST_FILE_FORMAT_NAME, OrgApacheLuceneUtilFstFST_VERSION_PACKED, OrgApacheLuceneUtilFstFST_VERSION_NO_NODE_ARC_COUNTS);
   self->packed_ = ([((OrgApacheLuceneStoreDataInput *) nil_chk(inArg)) readByte] == 1);
   if ([inArg readByte] == 1) {
-    OrgApacheLuceneUtilFstBytesStore *emptyBytes = [new_OrgApacheLuceneUtilFstBytesStore_initWithInt_(10) autorelease];
+    OrgApacheLuceneUtilFstBytesStore *emptyBytes = create_OrgApacheLuceneUtilFstBytesStore_initWithInt_(10);
     jint numBytes = [inArg readVInt];
     [emptyBytes copyBytesWithOrgApacheLuceneStoreDataInput:inArg withLong:numBytes];
     OrgApacheLuceneUtilFstFST_BytesReader *reader;
@@ -1264,16 +1360,16 @@ void OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneStoreDataInput_withOrgApac
   jbyte t = [inArg readByte];
   switch (t) {
     case 0:
-    JreStrongAssign(&self->inputType_, JreLoadStatic(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum, BYTE1));
+    JreStrongAssign(&self->inputType_, JreLoadEnum(OrgApacheLuceneUtilFstFST_INPUT_TYPE, BYTE1));
     break;
     case 1:
-    JreStrongAssign(&self->inputType_, JreLoadStatic(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum, BYTE2));
+    JreStrongAssign(&self->inputType_, JreLoadEnum(OrgApacheLuceneUtilFstFST_INPUT_TYPE, BYTE2));
     break;
     case 2:
-    JreStrongAssign(&self->inputType_, JreLoadStatic(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum, BYTE4));
+    JreStrongAssign(&self->inputType_, JreLoadEnum(OrgApacheLuceneUtilFstFST_INPUT_TYPE, BYTE4));
     break;
     default:
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$B", @"invalid input type ", t)) autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$B", @"invalid input type ", t));
   }
   if (self->packed_) {
     JreStrongAssign(&self->nodeRefToAddress_, OrgApacheLuceneUtilPackedPackedInts_getReaderWithOrgApacheLuceneStoreDataInput_(inArg));
@@ -1301,9 +1397,11 @@ void OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneStoreDataInput_withOrgApac
 }
 
 OrgApacheLuceneUtilFstFST *new_OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilFstOutputs_withInt_(OrgApacheLuceneStoreDataInput *inArg, OrgApacheLuceneUtilFstOutputs *outputs, jint maxBlockBits) {
-  OrgApacheLuceneUtilFstFST *self = [OrgApacheLuceneUtilFstFST alloc];
-  OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilFstOutputs_withInt_(self, inArg, outputs, maxBlockBits);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFstFST, initWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilFstOutputs_withInt_, inArg, outputs, maxBlockBits)
+}
+
+OrgApacheLuceneUtilFstFST *create_OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilFstOutputs_withInt_(OrgApacheLuceneStoreDataInput *inArg, OrgApacheLuceneUtilFstOutputs *outputs, jint maxBlockBits) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFstFST, initWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilFstOutputs_withInt_, inArg, outputs, maxBlockBits)
 }
 
 jlong OrgApacheLuceneUtilFstFST_ramBytesUsedWithOrgApacheLuceneUtilFstFST_ArcArray_(OrgApacheLuceneUtilFstFST *self, IOSObjectArray *arcs) {
@@ -1317,12 +1415,12 @@ jlong OrgApacheLuceneUtilFstFST_ramBytesUsedWithOrgApacheLuceneUtilFstFST_ArcArr
       while (b__ < e__) {
         OrgApacheLuceneUtilFstFST_Arc *arc = *b__++;
         if (arc != nil) {
-          size += OrgApacheLuceneUtilFstFST_ARC_SHALLOW_RAM_BYTES_USED_;
+          size += OrgApacheLuceneUtilFstFST_ARC_SHALLOW_RAM_BYTES_USED;
           if (arc->output_ != nil && arc->output_ != [((OrgApacheLuceneUtilFstOutputs *) nil_chk(self->outputs_)) getNoOutput]) {
-            size += [self->outputs_ ramBytesUsedWithId:arc->output_];
+            size += [((OrgApacheLuceneUtilFstOutputs *) nil_chk(self->outputs_)) ramBytesUsedWithId:((id) arc->output_)];
           }
           if (arc->nextFinalOutput_ != nil && arc->nextFinalOutput_ != [((OrgApacheLuceneUtilFstOutputs *) nil_chk(self->outputs_)) getNoOutput]) {
-            size += [self->outputs_ ramBytesUsedWithId:arc->nextFinalOutput_];
+            size += [((OrgApacheLuceneUtilFstOutputs *) nil_chk(self->outputs_)) ramBytesUsedWithId:((id) arc->nextFinalOutput_)];
           }
         }
       }
@@ -1342,17 +1440,17 @@ jlong OrgApacheLuceneUtilFstFST_getNodeAddressWithLong_(OrgApacheLuceneUtilFstFS
 
 void OrgApacheLuceneUtilFstFST_cacheRootArcs(OrgApacheLuceneUtilFstFST *self) {
   JreAssert((self->cachedArcsBytesUsed_ == 0), (@"org/apache/lucene/util/fst/FST.java:482 condition failed: assert cachedArcsBytesUsed == 0;"));
-  OrgApacheLuceneUtilFstFST_Arc *arc = [new_OrgApacheLuceneUtilFstFST_Arc_init() autorelease];
+  OrgApacheLuceneUtilFstFST_Arc *arc = create_OrgApacheLuceneUtilFstFST_Arc_init();
   [self getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:arc];
   if (OrgApacheLuceneUtilFstFST_targetHasArcsWithOrgApacheLuceneUtilFstFST_Arc_(arc)) {
     OrgApacheLuceneUtilFstFST_BytesReader *in = [self getBytesReader];
-    IOSObjectArray *arcs = (IOSObjectArray *) check_class_cast([IOSObjectArray arrayWithLength:(jint) 0x80 type:OrgApacheLuceneUtilFstFST_Arc_class_()], [IOSObjectArray class]);
+    IOSObjectArray *arcs = [IOSObjectArray arrayWithLength:(jint) 0x80 type:OrgApacheLuceneUtilFstFST_Arc_class_()];
     [self readFirstRealTargetArcWithLong:arc->target_ withOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_BytesReader:in];
     jint count = 0;
     while (true) {
       JreAssert((arc->label_ != OrgApacheLuceneUtilFstFST_END_LABEL), (@"org/apache/lucene/util/fst/FST.java:492 condition failed: assert arc.label != END_LABEL;"));
       if (arc->label_ < arcs->size_) {
-        IOSObjectArray_Set(arcs, arc->label_, [((OrgApacheLuceneUtilFstFST_Arc *) [new_OrgApacheLuceneUtilFstFST_Arc_init() autorelease]) copyFromWithOrgApacheLuceneUtilFstFST_Arc:arc]);
+        IOSObjectArray_Set(arcs, arc->label_, [create_OrgApacheLuceneUtilFstFST_Arc_init() copyFromWithOrgApacheLuceneUtilFstFST_Arc:arc]);
       }
       else {
         break;
@@ -1375,11 +1473,11 @@ OrgApacheLuceneUtilFstFST *OrgApacheLuceneUtilFstFST_readWithOrgLukhnosPortmobil
   OrgApacheLuceneUtilFstFST_initialize();
   {
     JavaIoInputStream *is = OrgLukhnosPortmobileFileFiles_newInputStreamWithOrgLukhnosPortmobileFilePath_(path);
-    JavaLangThrowable *__primaryException1 = nil;
+    NSException *__primaryException1 = nil;
     @try {
-      return [new_OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilFstOutputs_([new_OrgApacheLuceneStoreInputStreamDataInput_initWithJavaIoInputStream_([new_JavaIoBufferedInputStream_initWithJavaIoInputStream_(is) autorelease]) autorelease], outputs) autorelease];
+      return create_OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilFstOutputs_(create_OrgApacheLuceneStoreInputStreamDataInput_initWithJavaIoInputStream_(create_JavaIoBufferedInputStream_initWithJavaIoInputStream_(is)), outputs);
     }
-    @catch (JavaLangThrowable *e) {
+    @catch (NSException *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -1388,8 +1486,8 @@ OrgApacheLuceneUtilFstFST *OrgApacheLuceneUtilFstFST_readWithOrgLukhnosPortmobil
         if (__primaryException1 != nil) {
           @try {
             [is close];
-          } @catch (JavaLangThrowable *e) {
-            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          } @catch (NSException *e) {
+            [__primaryException1 addSuppressedWithNSException:e];
           }
         } else {
           [is close];
@@ -1401,11 +1499,11 @@ OrgApacheLuceneUtilFstFST *OrgApacheLuceneUtilFstFST_readWithOrgLukhnosPortmobil
 
 void OrgApacheLuceneUtilFstFST_writeLabelWithOrgApacheLuceneStoreDataOutput_withInt_(OrgApacheLuceneUtilFstFST *self, OrgApacheLuceneStoreDataOutput *outArg, jint v) {
   JreAssert((v >= 0), (JreStrcat("$I", @"v=", v)));
-  if (self->inputType_ == JreLoadStatic(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum, BYTE1)) {
+  if (self->inputType_ == JreLoadEnum(OrgApacheLuceneUtilFstFST_INPUT_TYPE, BYTE1)) {
     JreAssert((v <= 255), (JreStrcat("$I", @"v=", v)));
     [((OrgApacheLuceneStoreDataOutput *) nil_chk(outArg)) writeByteWithByte:(jbyte) v];
   }
-  else if (self->inputType_ == JreLoadStatic(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum, BYTE2)) {
+  else if (self->inputType_ == JreLoadEnum(OrgApacheLuceneUtilFstFST_INPUT_TYPE, BYTE2)) {
     JreAssert((v <= 65535), (JreStrcat("$I", @"v=", v)));
     [((OrgApacheLuceneStoreDataOutput *) nil_chk(outArg)) writeShortWithShort:(jshort) v];
   }
@@ -1431,7 +1529,7 @@ jlong OrgApacheLuceneUtilFstFST_readUnpackedNodeTargetWithOrgApacheLuceneUtilFst
 }
 
 jboolean OrgApacheLuceneUtilFstFST_assertRootCachedArcWithInt_withOrgApacheLuceneUtilFstFST_Arc_(OrgApacheLuceneUtilFstFST *self, jint label, OrgApacheLuceneUtilFstFST_Arc *cachedArc) {
-  OrgApacheLuceneUtilFstFST_Arc *arc = [new_OrgApacheLuceneUtilFstFST_Arc_init() autorelease];
+  OrgApacheLuceneUtilFstFST_Arc *arc = create_OrgApacheLuceneUtilFstFST_Arc_init();
   [self getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:arc];
   OrgApacheLuceneUtilFstFST_BytesReader *in = [self getBytesReader];
   OrgApacheLuceneUtilFstFST_Arc *result = OrgApacheLuceneUtilFstFST_findTargetArcWithInt_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilFstFST_BytesReader_withBoolean_(self, label, arc, arc, in, false);
@@ -1445,10 +1543,10 @@ jboolean OrgApacheLuceneUtilFstFST_assertRootCachedArcWithInt_withOrgApacheLucen
     JreAssert((cachedArc->flags_ == result->flags_), (@"org/apache/lucene/util/fst/FST.java:1167 condition failed: assert cachedArc.flags == result.flags;"));
     JreAssert((cachedArc->label_ == result->label_), (@"org/apache/lucene/util/fst/FST.java:1168 condition failed: assert cachedArc.label == result.label;"));
     JreAssert((cachedArc->nextArc_ == result->nextArc_), (@"org/apache/lucene/util/fst/FST.java:1169 condition failed: assert cachedArc.nextArc == result.nextArc;"));
-    JreAssert(([nil_chk(cachedArc->nextFinalOutput_) isEqual:result->nextFinalOutput_]), (@"org/apache/lucene/util/fst/FST.java:1170 condition failed: assert cachedArc.nextFinalOutput.equals(result.nextFinalOutput);"));
+    JreAssert(([((id) nil_chk(cachedArc->nextFinalOutput_)) isEqual:result->nextFinalOutput_]), (@"org/apache/lucene/util/fst/FST.java:1170 condition failed: assert cachedArc.nextFinalOutput.equals(result.nextFinalOutput);"));
     JreAssert((cachedArc->node_ == result->node_), (@"org/apache/lucene/util/fst/FST.java:1171 condition failed: assert cachedArc.node == result.node;"));
     JreAssert((cachedArc->numArcs_ == result->numArcs_), (@"org/apache/lucene/util/fst/FST.java:1172 condition failed: assert cachedArc.numArcs == result.numArcs;"));
-    JreAssert(([nil_chk(cachedArc->output_) isEqual:result->output_]), (@"org/apache/lucene/util/fst/FST.java:1173 condition failed: assert cachedArc.output.equals(result.output);"));
+    JreAssert(([((id) nil_chk(cachedArc->output_)) isEqual:result->output_]), (@"org/apache/lucene/util/fst/FST.java:1173 condition failed: assert cachedArc.output.equals(result.output);"));
     JreAssert((cachedArc->posArcsStart_ == result->posArcsStart_), (@"org/apache/lucene/util/fst/FST.java:1174 condition failed: assert cachedArc.posArcsStart == result.posArcsStart;"));
     JreAssert((cachedArc->target_ == result->target_), (@"org/apache/lucene/util/fst/FST.java:1175 condition failed: assert cachedArc.target == result.target;"));
   }
@@ -1466,7 +1564,7 @@ OrgApacheLuceneUtilFstFST_Arc *OrgApacheLuceneUtilFstFST_findTargetArcWithInt_wi
         arc->nextArc_ = follow->target_;
         arc->node_ = follow->target_;
       }
-      JreStrongAssign(&((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->output_, follow->nextFinalOutput_);
+      JreStrongAssign(&arc->output_, follow->nextFinalOutput_);
       arc->label_ = OrgApacheLuceneUtilFstFST_END_LABEL;
       return arc;
     }
@@ -1565,7 +1663,7 @@ jboolean OrgApacheLuceneUtilFstFST_shouldExpandWithOrgApacheLuceneUtilFstBuilder
   return ((OrgApacheLuceneUtilFstBuilder *) nil_chk(builder))->allowArrayArcs_ && ((((OrgApacheLuceneUtilFstBuilder_UnCompiledNode *) nil_chk(node))->depth_ <= OrgApacheLuceneUtilFstFST_FIXED_ARRAY_SHALLOW_DISTANCE && node->numArcs_ >= OrgApacheLuceneUtilFstFST_FIXED_ARRAY_NUM_ARCS_SHALLOW) || node->numArcs_ >= OrgApacheLuceneUtilFstFST_FIXED_ARRAY_NUM_ARCS_DEEP);
 }
 
-void OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_withOrgApacheLuceneUtilFstOutputs_withInt_(OrgApacheLuceneUtilFstFST *self, OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum *inputType, OrgApacheLuceneUtilFstOutputs *outputs, jint bytesPageBits) {
+void OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE_withOrgApacheLuceneUtilFstOutputs_withInt_(OrgApacheLuceneUtilFstFST *self, OrgApacheLuceneUtilFstFST_INPUT_TYPE *inputType, OrgApacheLuceneUtilFstOutputs *outputs, jint bytesPageBits) {
   NSObject_init(self);
   self->startNode_ = -1;
   self->version__ = OrgApacheLuceneUtilFstFST_VERSION_CURRENT;
@@ -1576,43 +1674,92 @@ void OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_
   JreStrongAssign(&self->outputs_, outputs);
 }
 
-OrgApacheLuceneUtilFstFST *new_OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_withOrgApacheLuceneUtilFstOutputs_withInt_(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum *inputType, OrgApacheLuceneUtilFstOutputs *outputs, jint bytesPageBits) {
-  OrgApacheLuceneUtilFstFST *self = [OrgApacheLuceneUtilFstFST alloc];
-  OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_withOrgApacheLuceneUtilFstOutputs_withInt_(self, inputType, outputs, bytesPageBits);
-  return self;
+OrgApacheLuceneUtilFstFST *new_OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE_withOrgApacheLuceneUtilFstOutputs_withInt_(OrgApacheLuceneUtilFstFST_INPUT_TYPE *inputType, OrgApacheLuceneUtilFstOutputs *outputs, jint bytesPageBits) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFstFST, initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE_withOrgApacheLuceneUtilFstOutputs_withInt_, inputType, outputs, bytesPageBits)
+}
+
+OrgApacheLuceneUtilFstFST *create_OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE_withOrgApacheLuceneUtilFstOutputs_withInt_(OrgApacheLuceneUtilFstFST_INPUT_TYPE *inputType, OrgApacheLuceneUtilFstOutputs *outputs, jint bytesPageBits) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFstFST, initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE_withOrgApacheLuceneUtilFstOutputs_withInt_, inputType, outputs, bytesPageBits)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstFST)
 
-J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum)
+J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFstFST_INPUT_TYPE)
 
-OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum *OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_values_[3];
+OrgApacheLuceneUtilFstFST_INPUT_TYPE *OrgApacheLuceneUtilFstFST_INPUT_TYPE_values_[3];
 
-@implementation OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum
+@implementation OrgApacheLuceneUtilFstFST_INPUT_TYPE
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
++ (OrgApacheLuceneUtilFstFST_INPUT_TYPE *)BYTE1 {
+  return JreEnum(OrgApacheLuceneUtilFstFST_INPUT_TYPE, BYTE1);
 }
 
-IOSObjectArray *OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_values() {
-  OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_initialize();
-  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_values_ count:3 type:OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_class_()];
++ (OrgApacheLuceneUtilFstFST_INPUT_TYPE *)BYTE2 {
+  return JreEnum(OrgApacheLuceneUtilFstFST_INPUT_TYPE, BYTE2);
+}
+
++ (OrgApacheLuceneUtilFstFST_INPUT_TYPE *)BYTE4 {
+  return JreEnum(OrgApacheLuceneUtilFstFST_INPUT_TYPE, BYTE4);
 }
 
 + (IOSObjectArray *)values {
-  return OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_values();
+  return OrgApacheLuceneUtilFstFST_INPUT_TYPE_values();
 }
 
-+ (OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum *)valueOfWithNSString:(NSString *)name {
-  return OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_valueOfWithNSString_(name);
++ (OrgApacheLuceneUtilFstFST_INPUT_TYPE *)valueOfWithNSString:(NSString *)name {
+  return OrgApacheLuceneUtilFstFST_INPUT_TYPE_valueOfWithNSString_(name);
 }
 
-OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum *OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_valueOfWithNSString_(NSString *name) {
-  OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_initialize();
+- (OrgApacheLuceneUtilFstFST_INPUT_TYPE_Enum)toNSEnum {
+  return (OrgApacheLuceneUtilFstFST_INPUT_TYPE_Enum)[self ordinal];
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+  return self;
+}
+
++ (void)initialize {
+  if (self == [OrgApacheLuceneUtilFstFST_INPUT_TYPE class]) {
+    size_t objSize = class_getInstanceSize(self);
+    size_t allocSize = 3 * objSize;
+    uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
+    id e;
+    (JreEnum(OrgApacheLuceneUtilFstFST_INPUT_TYPE, BYTE1) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneUtilFstFST_INPUT_TYPE_initWithNSString_withInt_(e, @"BYTE1", 0);
+    (JreEnum(OrgApacheLuceneUtilFstFST_INPUT_TYPE, BYTE2) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneUtilFstFST_INPUT_TYPE_initWithNSString_withInt_(e, @"BYTE2", 1);
+    (JreEnum(OrgApacheLuceneUtilFstFST_INPUT_TYPE, BYTE4) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneUtilFstFST_INPUT_TYPE_initWithNSString_withInt_(e, @"BYTE4", 2);
+    J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilFstFST_INPUT_TYPE)
+  }
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static const J2ObjcFieldInfo fields[] = {
+    { "BYTE1", "BYTE1", 0x4019, "Lorg.apache.lucene.util.fst.FST$INPUT_TYPE;", &JreEnum(OrgApacheLuceneUtilFstFST_INPUT_TYPE, BYTE1), NULL, .constantValue.asLong = 0 },
+    { "BYTE2", "BYTE2", 0x4019, "Lorg.apache.lucene.util.fst.FST$INPUT_TYPE;", &JreEnum(OrgApacheLuceneUtilFstFST_INPUT_TYPE, BYTE2), NULL, .constantValue.asLong = 0 },
+    { "BYTE4", "BYTE4", 0x4019, "Lorg.apache.lucene.util.fst.FST$INPUT_TYPE;", &JreEnum(OrgApacheLuceneUtilFstFST_INPUT_TYPE, BYTE4), NULL, .constantValue.asLong = 0 },
+  };
+  static const char *superclass_type_args[] = {"Lorg.apache.lucene.util.fst.FST$INPUT_TYPE;"};
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstFST_INPUT_TYPE = { 2, "INPUT_TYPE", "org.apache.lucene.util.fst", "FST", 0x4019, 0, NULL, 3, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/util/fst/FST$INPUT_TYPE;>;" };
+  return &_OrgApacheLuceneUtilFstFST_INPUT_TYPE;
+}
+
+@end
+
+void OrgApacheLuceneUtilFstFST_INPUT_TYPE_initWithNSString_withInt_(OrgApacheLuceneUtilFstFST_INPUT_TYPE *self, NSString *__name, jint __ordinal) {
+  JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
+}
+
+IOSObjectArray *OrgApacheLuceneUtilFstFST_INPUT_TYPE_values() {
+  OrgApacheLuceneUtilFstFST_INPUT_TYPE_initialize();
+  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneUtilFstFST_INPUT_TYPE_values_ count:3 type:OrgApacheLuceneUtilFstFST_INPUT_TYPE_class_()];
+}
+
+OrgApacheLuceneUtilFstFST_INPUT_TYPE *OrgApacheLuceneUtilFstFST_INPUT_TYPE_valueOfWithNSString_(NSString *name) {
+  OrgApacheLuceneUtilFstFST_INPUT_TYPE_initialize();
   for (int i = 0; i < 3; i++) {
-    OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum *e = OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_values_[i];
+    OrgApacheLuceneUtilFstFST_INPUT_TYPE *e = OrgApacheLuceneUtilFstFST_INPUT_TYPE_values_[i];
     if ([name isEqual:[e name]]) {
       return e;
     }
@@ -1621,43 +1768,15 @@ OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum *OrgApacheLuceneUtilFstFST_INPUT_TYPEEn
   return nil;
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return [self retain];
-}
-
-+ (void)initialize {
-  if (self == [OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum class]) {
-    OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_BYTE1 = new_OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_initWithNSString_withInt_(@"BYTE1", 0);
-    OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_BYTE2 = new_OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_initWithNSString_withInt_(@"BYTE2", 1);
-    OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_BYTE4 = new_OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_initWithNSString_withInt_(@"BYTE4", 2);
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum)
+OrgApacheLuceneUtilFstFST_INPUT_TYPE *OrgApacheLuceneUtilFstFST_INPUT_TYPE_fromOrdinal(NSUInteger ordinal) {
+  OrgApacheLuceneUtilFstFST_INPUT_TYPE_initialize();
+  if (ordinal >= 3) {
+    return nil;
   }
+  return OrgApacheLuceneUtilFstFST_INPUT_TYPE_values_[ordinal];
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcFieldInfo fields[] = {
-    { "BYTE1", "BYTE1", 0x4019, "Lorg.apache.lucene.util.fst.FST$INPUT_TYPE;", &OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_BYTE1, NULL, .constantValue.asLong = 0 },
-    { "BYTE2", "BYTE2", 0x4019, "Lorg.apache.lucene.util.fst.FST$INPUT_TYPE;", &OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_BYTE2, NULL, .constantValue.asLong = 0 },
-    { "BYTE4", "BYTE4", 0x4019, "Lorg.apache.lucene.util.fst.FST$INPUT_TYPE;", &OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_BYTE4, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.util.fst.FST$INPUT_TYPE;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum = { 2, "INPUT_TYPE", "org.apache.lucene.util.fst", "FST", 0x4019, 0, NULL, 3, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/util/fst/FST$INPUT_TYPE;>;" };
-  return &_OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum;
-}
-
-@end
-
-void OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_initWithNSString_withInt_(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum *self, NSString *__name, jint __ordinal) {
-  JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
-}
-
-OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum *new_OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum *self = [OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum alloc];
-  OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum)
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstFST_INPUT_TYPE)
 
 @implementation OrgApacheLuceneUtilFstFST_Arc
 
@@ -1691,7 +1810,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum)
 }
 
 - (NSString *)description {
-  JavaLangStringBuilder *b = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *b = create_JavaLangStringBuilder_init();
   [b appendWithNSString:JreStrcat("$J", @"node=", node_)];
   [b appendWithNSString:JreStrcat("$J", @" target=", target_)];
   [b appendWithNSString:JreStrcat("$$", @" label=0x", JavaLangInteger_toHexStringWithInt_(label_))];
@@ -1734,12 +1853,12 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "copyFromWithOrgApacheLuceneUtilFstFST_Arc:", "copyFrom", "Lorg.apache.lucene.util.fst.FST$Arc;", 0x1, NULL, NULL },
+    { "copyFromWithOrgApacheLuceneUtilFstFST_Arc:", "copyFrom", "Lorg.apache.lucene.util.fst.FST$Arc;", 0x1, NULL, "(Lorg/apache/lucene/util/fst/FST$Arc<TT;>;)Lorg/apache/lucene/util/fst/FST$Arc<TT;>;" },
     { "flagWithInt:", "flag", "Z", 0x0, NULL, NULL },
     { "isLast", NULL, "Z", 0x1, NULL, NULL },
     { "isFinal", NULL, "Z", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "Arc", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "label_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
@@ -1765,9 +1884,11 @@ void OrgApacheLuceneUtilFstFST_Arc_init(OrgApacheLuceneUtilFstFST_Arc *self) {
 }
 
 OrgApacheLuceneUtilFstFST_Arc *new_OrgApacheLuceneUtilFstFST_Arc_init() {
-  OrgApacheLuceneUtilFstFST_Arc *self = [OrgApacheLuceneUtilFstFST_Arc alloc];
-  OrgApacheLuceneUtilFstFST_Arc_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFstFST_Arc, init)
+}
+
+OrgApacheLuceneUtilFstFST_Arc *create_OrgApacheLuceneUtilFstFST_Arc_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFstFST_Arc, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstFST_Arc)
@@ -1803,7 +1924,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "getPosition", NULL, "J", 0x401, NULL, NULL },
     { "setPositionWithLong:", "setPosition", "V", 0x401, NULL, NULL },
     { "reversed", NULL, "Z", 0x401, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "BytesReader", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneUtilFstFST_BytesReader = { 2, "BytesReader", "org.apache.lucene.util.fst", "FST", 0x409, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilFstFST_BytesReader;
@@ -1826,7 +1947,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstFST_BytesReader)
 }
 
 - (jint)compareToWithId:(OrgApacheLuceneUtilFstFST_NodeAndInCount *)other {
-  check_class_cast(other, [OrgApacheLuceneUtilFstFST_NodeAndInCount class]);
+  cast_chk(other, [OrgApacheLuceneUtilFstFST_NodeAndInCount class]);
   if (count_ > ((OrgApacheLuceneUtilFstFST_NodeAndInCount *) nil_chk(other))->count_) {
     return 1;
   }
@@ -1860,9 +1981,11 @@ void OrgApacheLuceneUtilFstFST_NodeAndInCount_initWithInt_withInt_(OrgApacheLuce
 }
 
 OrgApacheLuceneUtilFstFST_NodeAndInCount *new_OrgApacheLuceneUtilFstFST_NodeAndInCount_initWithInt_withInt_(jint node, jint count) {
-  OrgApacheLuceneUtilFstFST_NodeAndInCount *self = [OrgApacheLuceneUtilFstFST_NodeAndInCount alloc];
-  OrgApacheLuceneUtilFstFST_NodeAndInCount_initWithInt_withInt_(self, node, count);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFstFST_NodeAndInCount, initWithInt_withInt_, node, count)
+}
+
+OrgApacheLuceneUtilFstFST_NodeAndInCount *create_OrgApacheLuceneUtilFstFST_NodeAndInCount_initWithInt_withInt_(jint node, jint count) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFstFST_NodeAndInCount, initWithInt_withInt_, node, count)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstFST_NodeAndInCount)
@@ -1884,7 +2007,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstFST_NodeAndInCount)
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithInt:", "NodeQueue", NULL, 0x1, NULL, NULL },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x1, NULL, NULL },
+    { "lessThanWithId:withId:", "lessThan", "Z", 0x1, NULL, "(Lorg/apache/lucene/util/fst/FST$NodeAndInCount;Lorg/apache/lucene/util/fst/FST$NodeAndInCount;)Z" },
   };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.util.fst.FST$NodeAndInCount;"};
   static const J2ObjcClassInfo _OrgApacheLuceneUtilFstFST_NodeQueue = { 2, "NodeQueue", "org.apache.lucene.util.fst", "FST", 0xa, 2, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/util/fst/FST$NodeAndInCount;>;" };
@@ -1898,9 +2021,11 @@ void OrgApacheLuceneUtilFstFST_NodeQueue_initWithInt_(OrgApacheLuceneUtilFstFST_
 }
 
 OrgApacheLuceneUtilFstFST_NodeQueue *new_OrgApacheLuceneUtilFstFST_NodeQueue_initWithInt_(jint topN) {
-  OrgApacheLuceneUtilFstFST_NodeQueue *self = [OrgApacheLuceneUtilFstFST_NodeQueue alloc];
-  OrgApacheLuceneUtilFstFST_NodeQueue_initWithInt_(self, topN);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFstFST_NodeQueue, initWithInt_, topN)
+}
+
+OrgApacheLuceneUtilFstFST_NodeQueue *create_OrgApacheLuceneUtilFstFST_NodeQueue_initWithInt_(jint topN) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFstFST_NodeQueue, initWithInt_, topN)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstFST_NodeQueue)

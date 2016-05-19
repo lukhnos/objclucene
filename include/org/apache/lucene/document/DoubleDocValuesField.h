@@ -5,25 +5,42 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneDocumentDoubleDocValuesField_INCLUDE_ALL")
-#if OrgApacheLuceneDocumentDoubleDocValuesField_RESTRICT
-#define OrgApacheLuceneDocumentDoubleDocValuesField_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneDocumentDoubleDocValuesField")
+#ifdef RESTRICT_OrgApacheLuceneDocumentDoubleDocValuesField
+#define INCLUDE_ALL_OrgApacheLuceneDocumentDoubleDocValuesField 0
 #else
-#define OrgApacheLuceneDocumentDoubleDocValuesField_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneDocumentDoubleDocValuesField 1
 #endif
-#undef OrgApacheLuceneDocumentDoubleDocValuesField_RESTRICT
+#undef RESTRICT_OrgApacheLuceneDocumentDoubleDocValuesField
 
-#if !defined (_OrgApacheLuceneDocumentDoubleDocValuesField_) && (OrgApacheLuceneDocumentDoubleDocValuesField_INCLUDE_ALL || OrgApacheLuceneDocumentDoubleDocValuesField_INCLUDE)
-#define _OrgApacheLuceneDocumentDoubleDocValuesField_
+#if !defined (OrgApacheLuceneDocumentDoubleDocValuesField_) && (INCLUDE_ALL_OrgApacheLuceneDocumentDoubleDocValuesField || defined(INCLUDE_OrgApacheLuceneDocumentDoubleDocValuesField))
+#define OrgApacheLuceneDocumentDoubleDocValuesField_
 
-#define OrgApacheLuceneDocumentNumericDocValuesField_RESTRICT 1
-#define OrgApacheLuceneDocumentNumericDocValuesField_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneDocumentNumericDocValuesField 1
+#define INCLUDE_OrgApacheLuceneDocumentNumericDocValuesField 1
 #include "org/apache/lucene/document/NumericDocValuesField.h"
 
+/*!
+ @brief Syntactic sugar for encoding doubles as NumericDocValues
+ via <code>Double.doubleToRawLongBits(double)</code>.
+ <p>
+ Per-document double values can be retrieved via
+ <code>org.apache.lucene.index.LeafReader.getNumericDocValues(String)</code>.
+ <p>
+ <b>NOTE</b>: In most all cases this will be rather inefficient,
+ requiring eight bytes per document. Consider encoding double
+ values yourself with only as much precision as you require.
+ */
 @interface OrgApacheLuceneDocumentDoubleDocValuesField : OrgApacheLuceneDocumentNumericDocValuesField
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new DocValues field with the specified 64-bit double value
+ @param name field name
+ @param value 64-bit double value
+ @throws IllegalArgumentException if the field name is null
+ */
 - (instancetype)initWithNSString:(NSString *)name
                       withDouble:(jdouble)value;
 
@@ -39,8 +56,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneDocumentDoubleDocValuesField_initWithNSStr
 
 FOUNDATION_EXPORT OrgApacheLuceneDocumentDoubleDocValuesField *new_OrgApacheLuceneDocumentDoubleDocValuesField_initWithNSString_withDouble_(NSString *name, jdouble value) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneDocumentDoubleDocValuesField *create_OrgApacheLuceneDocumentDoubleDocValuesField_initWithNSString_withDouble_(NSString *name, jdouble value);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentDoubleDocValuesField)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneDocumentDoubleDocValuesField_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneDocumentDoubleDocValuesField")

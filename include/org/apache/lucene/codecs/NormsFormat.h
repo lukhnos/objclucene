@@ -5,32 +5,54 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsNormsFormat_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsNormsFormat_RESTRICT
-#define OrgApacheLuceneCodecsNormsFormat_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsNormsFormat")
+#ifdef RESTRICT_OrgApacheLuceneCodecsNormsFormat
+#define INCLUDE_ALL_OrgApacheLuceneCodecsNormsFormat 0
 #else
-#define OrgApacheLuceneCodecsNormsFormat_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsNormsFormat 1
 #endif
-#undef OrgApacheLuceneCodecsNormsFormat_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsNormsFormat
 
-#if !defined (_OrgApacheLuceneCodecsNormsFormat_) && (OrgApacheLuceneCodecsNormsFormat_INCLUDE_ALL || OrgApacheLuceneCodecsNormsFormat_INCLUDE)
-#define _OrgApacheLuceneCodecsNormsFormat_
+#if !defined (OrgApacheLuceneCodecsNormsFormat_) && (INCLUDE_ALL_OrgApacheLuceneCodecsNormsFormat || defined(INCLUDE_OrgApacheLuceneCodecsNormsFormat))
+#define OrgApacheLuceneCodecsNormsFormat_
 
 @class OrgApacheLuceneCodecsNormsConsumer;
 @class OrgApacheLuceneCodecsNormsProducer;
 @class OrgApacheLuceneIndexSegmentReadState;
 @class OrgApacheLuceneIndexSegmentWriteState;
 
+/*!
+ @brief Encodes/decodes per-document score normalization values.
+ */
 @interface OrgApacheLuceneCodecsNormsFormat : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Returns a <code>NormsConsumer</code> to write norms to the
+ index.
+ */
 - (OrgApacheLuceneCodecsNormsConsumer *)normsConsumerWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state;
 
+/*!
+ @brief Returns a <code>NormsProducer</code> to read norms from the index.
+ <p>
+ NOTE: by the time this call returns, it must hold open any files it will 
+ need to use; else, those files may be deleted. Additionally, required files 
+ may be deleted during the execution of this call before there is a chance 
+ to open them. Under these circumstances an IOException should be thrown by 
+ the implementation. IOExceptions are expected and will automatically cause 
+ a retry of the segment opening logic with the newly revised segments.
+ */
 - (OrgApacheLuceneCodecsNormsProducer *)normsProducerWithOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state;
 
 #pragma mark Protected
 
+/*!
+ @brief Sole constructor.
+ (For invocation by subclass 
+ constructors, typically implicit.) 
+ */
 - (instancetype)init;
 
 @end
@@ -43,4 +65,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsNormsFormat)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsNormsFormat_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsNormsFormat")

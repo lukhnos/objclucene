@@ -3,12 +3,8 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/standard/builders/StandardQueryBuilder.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/queryparser/flexible/core/QueryNodeException.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/standard/builders/StandardQueryBuilder.h"
-#include "org/apache/lucene/search/Query.h"
 
 @interface OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryBuilder : NSObject
 

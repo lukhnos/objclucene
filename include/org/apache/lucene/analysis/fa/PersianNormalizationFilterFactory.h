@@ -5,23 +5,23 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory_) && (OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory))
+#define OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-#define OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent 1
 #include "org/apache/lucene/analysis/util/MultiTermAwareComponent.h"
 
 @class OrgApacheLuceneAnalysisFaPersianNormalizationFilter;
@@ -29,10 +29,25 @@
 @class OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>PersianNormalizationFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_fanormal" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;charFilter class="solr.PersianCharFilterFactory"/&gt;
+ &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+ &lt;filter class="solr.PersianNormalizationFilterFactory"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilMultiTermAwareComponent >
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new PersianNormalizationFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisFaPersianNormalizationFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -47,8 +62,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactor
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory *new_OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory *create_OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory")

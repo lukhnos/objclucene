@@ -5,60 +5,114 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilBitSet_INCLUDE_ALL")
-#if OrgApacheLuceneUtilBitSet_RESTRICT
-#define OrgApacheLuceneUtilBitSet_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilBitSet")
+#ifdef RESTRICT_OrgApacheLuceneUtilBitSet
+#define INCLUDE_ALL_OrgApacheLuceneUtilBitSet 0
 #else
-#define OrgApacheLuceneUtilBitSet_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilBitSet 1
 #endif
-#undef OrgApacheLuceneUtilBitSet_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilBitSet
 
-#if !defined (_OrgApacheLuceneUtilBitSet_) && (OrgApacheLuceneUtilBitSet_INCLUDE_ALL || OrgApacheLuceneUtilBitSet_INCLUDE)
-#define _OrgApacheLuceneUtilBitSet_
+#if !defined (OrgApacheLuceneUtilBitSet_) && (INCLUDE_ALL_OrgApacheLuceneUtilBitSet || defined(INCLUDE_OrgApacheLuceneUtilBitSet))
+#define OrgApacheLuceneUtilBitSet_
 
-#define OrgApacheLuceneUtilMutableBits_RESTRICT 1
-#define OrgApacheLuceneUtilMutableBits_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilMutableBits 1
+#define INCLUDE_OrgApacheLuceneUtilMutableBits 1
 #include "org/apache/lucene/util/MutableBits.h"
 
-#define OrgApacheLuceneUtilAccountable_RESTRICT 1
-#define OrgApacheLuceneUtilAccountable_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAccountable 1
+#define INCLUDE_OrgApacheLuceneUtilAccountable 1
 #include "org/apache/lucene/util/Accountable.h"
 
+@class IOSObjectArray;
 @class OrgApacheLuceneSearchDocIdSetIterator;
 @protocol JavaUtilCollection;
 
+/*!
+ @brief Base implementation for a bit set.
+ */
 @interface OrgApacheLuceneUtilBitSet : NSObject < OrgApacheLuceneUtilMutableBits, OrgApacheLuceneUtilAccountable >
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @brief Does in-place AND of the bits provided by the iterator.
+ The state of the
+ iterator after this operation terminates is undefined. 
+ */
 - (void)and__WithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iter;
 
+/*!
+ @brief this = this AND NOT other.
+ The state of the iterator after this operation
+ terminates is undefined. 
+ */
 - (void)andNotWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iter;
 
+/*!
+ @brief Return an approximation of the cardinality of this set.
+ Some
+ implementations may trade accuracy for speed if they have the ability to
+ estimate the cardinality of the set without iterating over all the data.
+ The default implementation returns <code>cardinality()</code>.
+ */
 - (jint)approximateCardinality;
 
+/*!
+ @brief Return the number of bits that are set.
+ NOTE: this method is likely to run in linear time
+ */
 - (jint)cardinality;
 
+/*!
+ @brief Clears a range of bits.
+ @param startIndex lower index
+ @param endIndex one-past the last bit to clear
+ */
 - (void)clearWithInt:(jint)startIndex
              withInt:(jint)endIndex;
 
 - (id<JavaUtilCollection>)getChildResources;
 
+/*!
+ @brief Returns the index of the first set bit starting at the index specified.
+ <code>DocIdSetIterator.NO_MORE_DOCS</code> is returned if there are no more set bits.
+ */
 - (jint)nextSetBitWithInt:(jint)index;
 
+/*!
+ @brief Build a <code>BitSet</code> from the content of the provided <code>DocIdSetIterator</code>.
+ NOTE: this will fully consume the <code>DocIdSetIterator</code>. 
+ */
 + (OrgApacheLuceneUtilBitSet *)ofWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)it
                                                                    withInt:(jint)maxDoc;
 
+/*!
+ @brief Does in-place OR of the bits provided by the iterator.
+ The state of the
+ iterator after this operation terminates is undefined. 
+ */
 - (void)or__WithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iter;
 
+/*!
+ @brief Returns the index of the last set bit before or on the index specified
+ .
+ -1 is returned if there are no more set bits.
+ */
 - (jint)prevSetBitWithInt:(jint)index;
 
+/*!
+ @brief Set the bit at <code>i</code>.
+ */
 - (void)setWithInt:(jint)i;
 
 #pragma mark Protected
 
+/*!
+ @brief Assert that the current doc is -1.
+ */
 - (void)assertUnpositionedWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iter;
 
 @end
@@ -73,4 +127,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBitSet)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilBitSet_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilBitSet")

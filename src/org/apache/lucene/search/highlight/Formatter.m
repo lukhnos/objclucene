@@ -5,7 +5,6 @@
 
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/search/highlight/Formatter.h"
-#include "org/apache/lucene/search/highlight/TokenGroup.h"
 
 @interface OrgApacheLuceneSearchHighlightFormatter : NSObject
 

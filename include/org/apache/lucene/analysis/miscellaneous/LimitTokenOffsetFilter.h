@@ -5,27 +5,48 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_RESTRICT
-#define OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter 0
 #else
-#define OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter
 
-#if !defined (_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_) && (OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_
+#if !defined (OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter))
+#define OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief Lets all tokens pass through until it sees one with a start offset &lt;= a
+ configured limit, which won't pass and ends the stream.
+ This can be useful to
+ limit highlighting, for example.
+ <p>
+ By default, this filter ignores any tokens in the wrapped <code>TokenStream</code>
+ once the limit has been exceeded, which can result in <code>reset()</code> being
+ called prior to <code>incrementToken()</code> returning <code>false</code>.  For most
+ <code>TokenStream</code> implementations this should be acceptable, and faster
+ then consuming the full stream. If you are wrapping a <code>TokenStream</code>
+ which requires that the full stream of tokens be exhausted in order to
+ function properly, use the
+ <code>LimitTokenOffsetFilter(TokenStream,int,boolean)</code> option.
+ */
 @interface OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
+/*!
+ @brief Lets all tokens pass through until it sees one with a start offset &lt;= <code>maxStartOffset</code>
+ which won't pass and ends the stream.
+ It won't consume any tokens afterwards.
+ @param maxStartOffset the maximum start offset allowed
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
                                                    withInt:(jint)maxStartOffset;
 
@@ -43,12 +64,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilte
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter *new_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(OrgApacheLuceneAnalysisTokenStream *input, jint maxStartOffset) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter *create_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(OrgApacheLuceneAnalysisTokenStream *input, jint maxStartOffset);
+
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_(OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter *self, OrgApacheLuceneAnalysisTokenStream *input, jint maxStartOffset, jboolean consumeAllTokens);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter *new_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_(OrgApacheLuceneAnalysisTokenStream *input, jint maxStartOffset, jboolean consumeAllTokens) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter *create_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_(OrgApacheLuceneAnalysisTokenStream *input, jint maxStartOffset, jboolean consumeAllTokens);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter")

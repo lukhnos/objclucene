@@ -33,7 +33,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactor
 }
 
 - (OrgApacheLuceneAnalysisCharFilter *)createWithJavaIoReader:(JavaIoReader *)input {
-  return [new_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter_initWithJavaUtilRegexPattern_withNSString_withJavaIoReader_(pattern_, replacement_, input) autorelease];
+  return create_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter_initWithJavaUtilRegexPattern_withNSString_withJavaIoReader_(pattern_, replacement_, input);
 }
 
 - (void)dealloc {
@@ -44,7 +44,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactor
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "PatternReplaceCharFilterFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "PatternReplaceCharFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "createWithJavaIoReader:", "create", "Lorg.apache.lucene.analysis.CharFilter;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -62,14 +62,16 @@ void OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory_initWithJavaU
   JreStrongAssign(&self->pattern_, [self getPatternWithJavaUtilMap:args withNSString:@"pattern"]);
   JreStrongAssign(&self->replacement_, [self getWithJavaUtilMap:args withNSString:@"replacement" withNSString:@""]);
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory *new_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory *self = [OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory alloc];
-  OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory *create_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory)

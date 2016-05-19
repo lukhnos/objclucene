@@ -5,34 +5,59 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexLogDocMergePolicy_INCLUDE_ALL")
-#if OrgApacheLuceneIndexLogDocMergePolicy_RESTRICT
-#define OrgApacheLuceneIndexLogDocMergePolicy_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexLogDocMergePolicy")
+#ifdef RESTRICT_OrgApacheLuceneIndexLogDocMergePolicy
+#define INCLUDE_ALL_OrgApacheLuceneIndexLogDocMergePolicy 0
 #else
-#define OrgApacheLuceneIndexLogDocMergePolicy_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexLogDocMergePolicy 1
 #endif
-#undef OrgApacheLuceneIndexLogDocMergePolicy_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexLogDocMergePolicy
 
-#if !defined (_OrgApacheLuceneIndexLogDocMergePolicy_) && (OrgApacheLuceneIndexLogDocMergePolicy_INCLUDE_ALL || OrgApacheLuceneIndexLogDocMergePolicy_INCLUDE)
-#define _OrgApacheLuceneIndexLogDocMergePolicy_
+#if !defined (OrgApacheLuceneIndexLogDocMergePolicy_) && (INCLUDE_ALL_OrgApacheLuceneIndexLogDocMergePolicy || defined(INCLUDE_OrgApacheLuceneIndexLogDocMergePolicy))
+#define OrgApacheLuceneIndexLogDocMergePolicy_
 
-#define OrgApacheLuceneIndexLogMergePolicy_RESTRICT 1
-#define OrgApacheLuceneIndexLogMergePolicy_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexLogMergePolicy 1
+#define INCLUDE_OrgApacheLuceneIndexLogMergePolicy 1
 #include "org/apache/lucene/index/LogMergePolicy.h"
 
 @class OrgApacheLuceneIndexIndexWriter;
 @class OrgApacheLuceneIndexSegmentCommitInfo;
 
-#define OrgApacheLuceneIndexLogDocMergePolicy_DEFAULT_MIN_MERGE_DOCS 1000
-
+/*!
+ @brief This is a <code>LogMergePolicy</code> that measures size of a
+ segment as the number of documents (not taking deletions
+ into account).
+ */
 @interface OrgApacheLuceneIndexLogDocMergePolicy : OrgApacheLuceneIndexLogMergePolicy
+
++ (jint)DEFAULT_MIN_MERGE_DOCS;
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor, setting all settings to their
+ defaults.
+ */
 - (instancetype)init;
 
+/*!
+ @brief Get the minimum size for a segment to remain
+ un-merged.
+ - seealso: #setMinMergeDocs
+ */
 - (jint)getMinMergeDocs;
 
+/*!
+ @brief Sets the minimum size for the lowest level segments.
+ Any segments below this size are considered to be on
+ the same level (even if they vary drastically in size)
+ and will be merged whenever there are mergeFactor of
+ them.  This effectively truncates the "long tail" of
+ small segments that would otherwise be created into a
+ single level.  If you set this too large, it could
+ greatly increase the merging cost during indexing (if
+ you flush many small segments). 
+ */
 - (void)setMinMergeDocsWithInt:(jint)minMergeDocs;
 
 #pragma mark Protected
@@ -44,14 +69,22 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexLogDocMergePolicy)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexLogDocMergePolicy, DEFAULT_MIN_MERGE_DOCS, jint)
+/*!
+ @brief Default minimum segment size.
+ @@see setMinMergeDocs 
+ */
+inline jint OrgApacheLuceneIndexLogDocMergePolicy_get_DEFAULT_MIN_MERGE_DOCS();
+#define OrgApacheLuceneIndexLogDocMergePolicy_DEFAULT_MIN_MERGE_DOCS 1000
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexLogDocMergePolicy, DEFAULT_MIN_MERGE_DOCS, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexLogDocMergePolicy_init(OrgApacheLuceneIndexLogDocMergePolicy *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexLogDocMergePolicy *new_OrgApacheLuceneIndexLogDocMergePolicy_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexLogDocMergePolicy *create_OrgApacheLuceneIndexLogDocMergePolicy_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexLogDocMergePolicy)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexLogDocMergePolicy_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexLogDocMergePolicy")

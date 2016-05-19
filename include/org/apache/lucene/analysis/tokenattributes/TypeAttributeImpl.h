@@ -5,33 +5,42 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_RESTRICT
-#define OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl 0
 #else
-#define OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl 1
 #endif
-#undef OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl
 
-#if !defined (_OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_) && (OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_INCLUDE_ALL || OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_INCLUDE)
-#define _OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_
+#if !defined (OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl || defined(INCLUDE_OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl))
+#define OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_
 
-#define OrgApacheLuceneUtilAttributeImpl_RESTRICT 1
-#define OrgApacheLuceneUtilAttributeImpl_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAttributeImpl 1
+#define INCLUDE_OrgApacheLuceneUtilAttributeImpl 1
 #include "org/apache/lucene/util/AttributeImpl.h"
 
-#define OrgApacheLuceneAnalysisTokenattributesTypeAttribute_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenattributesTypeAttribute_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenattributesTypeAttribute 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenattributesTypeAttribute 1
 #include "org/apache/lucene/analysis/tokenattributes/TypeAttribute.h"
 
 @protocol OrgApacheLuceneUtilAttributeReflector;
 
+/*!
+ @brief Default implementation of <code>TypeAttribute</code>.
+ */
 @interface OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl : OrgApacheLuceneUtilAttributeImpl < OrgApacheLuceneAnalysisTokenattributesTypeAttribute, NSCopying >
 
 #pragma mark Public
 
+/*!
+ @brief Initialize this attribute with <code>TypeAttribute.DEFAULT_TYPE</code>
+ */
 - (instancetype)init;
 
+/*!
+ @brief Initialize this attribute with <code>type</code>
+ */
 - (instancetype)initWithNSString:(NSString *)type;
 
 - (void)clear;
@@ -56,12 +65,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_i
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_init();
+
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_initWithNSString_(OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl *self, NSString *type);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_initWithNSString_(NSString *type) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_initWithNSString_(NSString *type);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl")

@@ -12,6 +12,10 @@
 
 @implementation OrgApacheLuceneIndexParallelPostingsArray
 
++ (jint)BYTES_PER_POSTING {
+  return OrgApacheLuceneIndexParallelPostingsArray_BYTES_PER_POSTING;
+}
+
 - (instancetype)initWithInt:(jint)size {
   OrgApacheLuceneIndexParallelPostingsArray_initWithInt_(self, size);
   return self;
@@ -22,7 +26,7 @@
 }
 
 - (OrgApacheLuceneIndexParallelPostingsArray *)newInstanceWithInt:(jint)size {
-  return [new_OrgApacheLuceneIndexParallelPostingsArray_initWithInt_(size) autorelease];
+  return create_OrgApacheLuceneIndexParallelPostingsArray_initWithInt_(size);
 }
 
 - (OrgApacheLuceneIndexParallelPostingsArray *)grow {
@@ -76,9 +80,11 @@ void OrgApacheLuceneIndexParallelPostingsArray_initWithInt_(OrgApacheLuceneIndex
 }
 
 OrgApacheLuceneIndexParallelPostingsArray *new_OrgApacheLuceneIndexParallelPostingsArray_initWithInt_(jint size) {
-  OrgApacheLuceneIndexParallelPostingsArray *self = [OrgApacheLuceneIndexParallelPostingsArray alloc];
-  OrgApacheLuceneIndexParallelPostingsArray_initWithInt_(self, size);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexParallelPostingsArray, initWithInt_, size)
+}
+
+OrgApacheLuceneIndexParallelPostingsArray *create_OrgApacheLuceneIndexParallelPostingsArray_initWithInt_(jint size) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexParallelPostingsArray, initWithInt_, size)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexParallelPostingsArray)

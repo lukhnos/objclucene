@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSuggestTstTSTLookup_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSuggestTstTSTLookup_RESTRICT
-#define OrgApacheLuceneSearchSuggestTstTSTLookup_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestTstTSTLookup")
+#ifdef RESTRICT_OrgApacheLuceneSearchSuggestTstTSTLookup
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestTstTSTLookup 0
 #else
-#define OrgApacheLuceneSearchSuggestTstTSTLookup_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestTstTSTLookup 1
 #endif
-#undef OrgApacheLuceneSearchSuggestTstTSTLookup_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSuggestTstTSTLookup
 
-#if !defined (_OrgApacheLuceneSearchSuggestTstTSTLookup_) && (OrgApacheLuceneSearchSuggestTstTSTLookup_INCLUDE_ALL || OrgApacheLuceneSearchSuggestTstTSTLookup_INCLUDE)
-#define _OrgApacheLuceneSearchSuggestTstTSTLookup_
+#if !defined (OrgApacheLuceneSearchSuggestTstTSTLookup_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestTstTSTLookup || defined(INCLUDE_OrgApacheLuceneSearchSuggestTstTSTLookup))
+#define OrgApacheLuceneSearchSuggestTstTSTLookup_
 
-#define OrgApacheLuceneSearchSuggestLookup_RESTRICT 1
-#define OrgApacheLuceneSearchSuggestLookup_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSuggestLookup 1
+#define INCLUDE_OrgApacheLuceneSearchSuggestLookup 1
 #include "org/apache/lucene/search/suggest/Lookup.h"
 
 @class OrgApacheLuceneSearchSuggestTstTSTAutocomplete;
@@ -29,6 +29,11 @@
 @protocol JavaUtilSet;
 @protocol OrgApacheLuceneSearchSuggestInputIterator;
 
+/*!
+ @brief Suggest implementation based on a 
+ <a href="http://en.wikipedia.org/wiki/Ternary_search_tree">Ternary Search Tree</a>
+ - seealso: TSTAutocomplete
+ */
 @interface OrgApacheLuceneSearchSuggestTstTSTLookup : OrgApacheLuceneSearchSuggestLookup {
  @public
   OrgApacheLuceneSearchSuggestTstTernaryTreeNode *root_;
@@ -37,13 +42,27 @@
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new TSTLookup with an empty Ternary Search Tree.
+ - seealso: #build(InputIterator)
+ */
 - (instancetype)init;
 
+/*!
+ @brief Adds a new node if <code>key</code> already exists,
+ otherwise replaces its value.
+ <p>
+ This method always returns true.
+ */
 - (jboolean)addWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
                                  withId:(id)value;
 
 - (void)buildWithOrgApacheLuceneSearchSuggestInputIterator:(id<OrgApacheLuceneSearchSuggestInputIterator>)iterator;
 
+/*!
+ @brief Returns the value for the specified key, or null
+ if the key does not exist.
+ */
 - (id)getWithJavaLangCharSequence:(id<JavaLangCharSequence>)key;
 
 - (jlong)getCount;
@@ -55,6 +74,9 @@
                                        withBoolean:(jboolean)onlyMorePopular
                                            withInt:(jint)num;
 
+/*!
+ @brief Returns byte size of the underlying TST
+ */
 - (jlong)ramBytesUsed;
 
 - (jboolean)storeWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)output;
@@ -70,8 +92,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestTstTSTLookup_init(OrgApacheLu
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestTstTSTLookup *new_OrgApacheLuceneSearchSuggestTstTSTLookup_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestTstTSTLookup *create_OrgApacheLuceneSearchSuggestTstTSTLookup_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestTstTSTLookup)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSuggestTstTSTLookup_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestTstTSTLookup")

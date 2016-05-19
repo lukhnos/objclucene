@@ -9,9 +9,10 @@
 
 #pragma clang diagnostic ignored "-Wprotocol"
 
-static OrgApacheLuceneUtilInfoStream *OrgApacheLuceneUtilInfoStream_defaultInfoStream_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilInfoStream, defaultInfoStream_, OrgApacheLuceneUtilInfoStream *)
-J2OBJC_STATIC_FIELD_SETTER(OrgApacheLuceneUtilInfoStream, defaultInfoStream_, OrgApacheLuceneUtilInfoStream *)
+inline OrgApacheLuceneUtilInfoStream *OrgApacheLuceneUtilInfoStream_get_defaultInfoStream();
+inline OrgApacheLuceneUtilInfoStream *OrgApacheLuceneUtilInfoStream_set_defaultInfoStream(OrgApacheLuceneUtilInfoStream *value);
+static OrgApacheLuceneUtilInfoStream *OrgApacheLuceneUtilInfoStream_defaultInfoStream;
+J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneUtilInfoStream, defaultInfoStream, OrgApacheLuceneUtilInfoStream *)
 
 @interface OrgApacheLuceneUtilInfoStream_NoOutput : OrgApacheLuceneUtilInfoStream
 
@@ -32,13 +33,19 @@ __attribute__((unused)) static void OrgApacheLuceneUtilInfoStream_NoOutput_init(
 
 __attribute__((unused)) static OrgApacheLuceneUtilInfoStream_NoOutput *new_OrgApacheLuceneUtilInfoStream_NoOutput_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneUtilInfoStream_NoOutput *create_OrgApacheLuceneUtilInfoStream_NoOutput_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilInfoStream_NoOutput)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilInfoStream)
 
-OrgApacheLuceneUtilInfoStream *OrgApacheLuceneUtilInfoStream_NO_OUTPUT_;
+OrgApacheLuceneUtilInfoStream *OrgApacheLuceneUtilInfoStream_NO_OUTPUT;
 
 @implementation OrgApacheLuceneUtilInfoStream
+
++ (OrgApacheLuceneUtilInfoStream *)NO_OUTPUT {
+  return OrgApacheLuceneUtilInfoStream_NO_OUTPUT;
+}
 
 - (void)messageWithNSString:(NSString *)component
                withNSString:(NSString *)message {
@@ -69,8 +76,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilInfoStream class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilInfoStream_NO_OUTPUT_, new_OrgApacheLuceneUtilInfoStream_NoOutput_init());
-    JreStrongAssign(&OrgApacheLuceneUtilInfoStream_defaultInfoStream_, OrgApacheLuceneUtilInfoStream_NO_OUTPUT_);
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilInfoStream_NO_OUTPUT, new_OrgApacheLuceneUtilInfoStream_NoOutput_init());
+    JreStrongAssign(&OrgApacheLuceneUtilInfoStream_defaultInfoStream, OrgApacheLuceneUtilInfoStream_NO_OUTPUT);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilInfoStream)
   }
 }
@@ -81,11 +88,11 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "isEnabledWithNSString:", "isEnabled", "Z", 0x401, NULL, NULL },
     { "getDefault", NULL, "Lorg.apache.lucene.util.InfoStream;", 0x29, NULL, NULL },
     { "setDefaultWithOrgApacheLuceneUtilInfoStream:", "setDefault", "V", 0x29, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "InfoStream", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "NO_OUTPUT_", NULL, 0x19, "Lorg.apache.lucene.util.InfoStream;", &OrgApacheLuceneUtilInfoStream_NO_OUTPUT_, NULL, .constantValue.asLong = 0 },
-    { "defaultInfoStream_", NULL, 0xa, "Lorg.apache.lucene.util.InfoStream;", &OrgApacheLuceneUtilInfoStream_defaultInfoStream_, NULL, .constantValue.asLong = 0 },
+    { "NO_OUTPUT", "NO_OUTPUT", 0x19, "Lorg.apache.lucene.util.InfoStream;", &OrgApacheLuceneUtilInfoStream_NO_OUTPUT, NULL, .constantValue.asLong = 0 },
+    { "defaultInfoStream", "defaultInfoStream", 0xa, "Lorg.apache.lucene.util.InfoStream;", &OrgApacheLuceneUtilInfoStream_defaultInfoStream, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.InfoStream$NoOutput;"};
   static const J2ObjcClassInfo _OrgApacheLuceneUtilInfoStream = { 2, "InfoStream", "org.apache.lucene.util", NULL, 0x401, 5, methods, 2, fields, 0, NULL, 1, inner_classes, NULL, NULL };
@@ -97,7 +104,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 OrgApacheLuceneUtilInfoStream *OrgApacheLuceneUtilInfoStream_getDefault() {
   OrgApacheLuceneUtilInfoStream_initialize();
   @synchronized(OrgApacheLuceneUtilInfoStream_class_()) {
-    return OrgApacheLuceneUtilInfoStream_defaultInfoStream_;
+    return OrgApacheLuceneUtilInfoStream_defaultInfoStream;
   }
 }
 
@@ -105,9 +112,9 @@ void OrgApacheLuceneUtilInfoStream_setDefaultWithOrgApacheLuceneUtilInfoStream_(
   OrgApacheLuceneUtilInfoStream_initialize();
   @synchronized(OrgApacheLuceneUtilInfoStream_class_()) {
     if (infoStream == nil) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"Cannot set InfoStream default implementation to null. To disable logging use InfoStream.NO_OUTPUT") autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"Cannot set InfoStream default implementation to null. To disable logging use InfoStream.NO_OUTPUT");
     }
-    JreStrongAssign(&OrgApacheLuceneUtilInfoStream_defaultInfoStream_, infoStream);
+    JreStrongAssign(&OrgApacheLuceneUtilInfoStream_defaultInfoStream, infoStream);
   }
 }
 
@@ -143,7 +150,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "messageWithNSString:withNSString:", "message", "V", 0x1, NULL, NULL },
     { "isEnabledWithNSString:", "isEnabled", "Z", 0x1, NULL, NULL },
     { "close", NULL, "V", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x2, NULL, NULL },
+    { "init", "NoOutput", NULL, 0x2, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneUtilInfoStream_NoOutput = { 2, "NoOutput", "org.apache.lucene.util", "InfoStream", 0x1a, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilInfoStream_NoOutput;
@@ -156,9 +163,11 @@ void OrgApacheLuceneUtilInfoStream_NoOutput_init(OrgApacheLuceneUtilInfoStream_N
 }
 
 OrgApacheLuceneUtilInfoStream_NoOutput *new_OrgApacheLuceneUtilInfoStream_NoOutput_init() {
-  OrgApacheLuceneUtilInfoStream_NoOutput *self = [OrgApacheLuceneUtilInfoStream_NoOutput alloc];
-  OrgApacheLuceneUtilInfoStream_NoOutput_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilInfoStream_NoOutput, init)
+}
+
+OrgApacheLuceneUtilInfoStream_NoOutput *create_OrgApacheLuceneUtilInfoStream_NoOutput_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilInfoStream_NoOutput, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilInfoStream_NoOutput)

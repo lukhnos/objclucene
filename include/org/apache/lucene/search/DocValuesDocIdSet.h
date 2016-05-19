@@ -5,24 +5,32 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchDocValuesDocIdSet_INCLUDE_ALL")
-#if OrgApacheLuceneSearchDocValuesDocIdSet_RESTRICT
-#define OrgApacheLuceneSearchDocValuesDocIdSet_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchDocValuesDocIdSet")
+#ifdef RESTRICT_OrgApacheLuceneSearchDocValuesDocIdSet
+#define INCLUDE_ALL_OrgApacheLuceneSearchDocValuesDocIdSet 0
 #else
-#define OrgApacheLuceneSearchDocValuesDocIdSet_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchDocValuesDocIdSet 1
 #endif
-#undef OrgApacheLuceneSearchDocValuesDocIdSet_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchDocValuesDocIdSet
 
-#if !defined (_OrgApacheLuceneSearchDocValuesDocIdSet_) && (OrgApacheLuceneSearchDocValuesDocIdSet_INCLUDE_ALL || OrgApacheLuceneSearchDocValuesDocIdSet_INCLUDE)
-#define _OrgApacheLuceneSearchDocValuesDocIdSet_
+#if !defined (OrgApacheLuceneSearchDocValuesDocIdSet_) && (INCLUDE_ALL_OrgApacheLuceneSearchDocValuesDocIdSet || defined(INCLUDE_OrgApacheLuceneSearchDocValuesDocIdSet))
+#define OrgApacheLuceneSearchDocValuesDocIdSet_
 
-#define OrgApacheLuceneSearchDocIdSet_RESTRICT 1
-#define OrgApacheLuceneSearchDocIdSet_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchDocIdSet 1
+#define INCLUDE_OrgApacheLuceneSearchDocIdSet 1
 #include "org/apache/lucene/search/DocIdSet.h"
 
 @class OrgApacheLuceneSearchDocIdSetIterator;
 @protocol OrgApacheLuceneUtilBits;
 
+/*!
+ @brief Base class for DocIdSet to be used with DocValues.
+ The implementation
+ of its iterator is very stupid and slow if the implementation of the
+ <code>matchDoc</code> method is not optimized, as iterators simply increment
+ the document id until <code>matchDoc(int)</code> returns true. Because of this
+ <code>matchDoc(int)</code> must be as fast as possible.
+ */
 @interface OrgApacheLuceneSearchDocValuesDocIdSet : OrgApacheLuceneSearchDocIdSet {
  @public
   jint maxDoc_;
@@ -42,6 +50,9 @@ withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs;
 
 #pragma mark Protected
 
+/*!
+ @brief this method checks, if a doc is a hit
+ */
 - (jboolean)matchDocWithInt:(jint)doc;
 
 @end
@@ -56,4 +67,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesDocIdSet)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchDocValuesDocIdSet_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchDocValuesDocIdSet")

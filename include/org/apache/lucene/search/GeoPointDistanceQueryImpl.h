@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchGeoPointDistanceQueryImpl_INCLUDE_ALL")
-#if OrgApacheLuceneSearchGeoPointDistanceQueryImpl_RESTRICT
-#define OrgApacheLuceneSearchGeoPointDistanceQueryImpl_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchGeoPointDistanceQueryImpl")
+#ifdef RESTRICT_OrgApacheLuceneSearchGeoPointDistanceQueryImpl
+#define INCLUDE_ALL_OrgApacheLuceneSearchGeoPointDistanceQueryImpl 0
 #else
-#define OrgApacheLuceneSearchGeoPointDistanceQueryImpl_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchGeoPointDistanceQueryImpl 1
 #endif
-#undef OrgApacheLuceneSearchGeoPointDistanceQueryImpl_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchGeoPointDistanceQueryImpl
 
-#if !defined (_OrgApacheLuceneSearchGeoPointDistanceQueryImpl_) && (OrgApacheLuceneSearchGeoPointDistanceQueryImpl_INCLUDE_ALL || OrgApacheLuceneSearchGeoPointDistanceQueryImpl_INCLUDE)
-#define _OrgApacheLuceneSearchGeoPointDistanceQueryImpl_
+#if !defined (OrgApacheLuceneSearchGeoPointDistanceQueryImpl_) && (INCLUDE_ALL_OrgApacheLuceneSearchGeoPointDistanceQueryImpl || defined(INCLUDE_OrgApacheLuceneSearchGeoPointDistanceQueryImpl))
+#define OrgApacheLuceneSearchGeoPointDistanceQueryImpl_
 
-#define OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_RESTRICT 1
-#define OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl 1
+#define INCLUDE_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl 1
 #include "org/apache/lucene/search/GeoPointInBBoxQueryImpl.h"
 
 @class OrgApacheLuceneIndexTerms;
@@ -27,6 +27,9 @@
 @class OrgApacheLuceneSearchMultiTermQuery_RewriteMethod;
 @class OrgApacheLuceneUtilAttributeSource;
 
+/*!
+ @brief Package private implementation for the public facing GeoPointDistanceQuery delegate class.
+ */
 @interface OrgApacheLuceneSearchGeoPointDistanceQueryImpl : OrgApacheLuceneSearchGeoPointInBBoxQueryImpl
 
 #pragma mark Public
@@ -56,8 +59,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchGeoPointDistanceQueryImpl_initWithNS
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchGeoPointDistanceQueryImpl *new_OrgApacheLuceneSearchGeoPointDistanceQueryImpl_initWithNSString_withOrgApacheLuceneSearchGeoPointDistanceQuery_withOrgApacheLuceneSearchGeoBoundingBox_(NSString *field, OrgApacheLuceneSearchGeoPointDistanceQuery *q, OrgApacheLuceneSearchGeoBoundingBox *bbox) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchGeoPointDistanceQueryImpl *create_OrgApacheLuceneSearchGeoPointDistanceQueryImpl_initWithNSString_withOrgApacheLuceneSearchGeoPointDistanceQuery_withOrgApacheLuceneSearchGeoBoundingBox_(NSString *field, OrgApacheLuceneSearchGeoPointDistanceQuery *q, OrgApacheLuceneSearchGeoBoundingBox *bbox);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchGeoPointDistanceQueryImpl)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchGeoPointDistanceQueryImpl_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchGeoPointDistanceQueryImpl")

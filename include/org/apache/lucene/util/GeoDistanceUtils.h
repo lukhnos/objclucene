@@ -5,29 +5,54 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilGeoDistanceUtils_INCLUDE_ALL")
-#if OrgApacheLuceneUtilGeoDistanceUtils_RESTRICT
-#define OrgApacheLuceneUtilGeoDistanceUtils_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilGeoDistanceUtils")
+#ifdef RESTRICT_OrgApacheLuceneUtilGeoDistanceUtils
+#define INCLUDE_ALL_OrgApacheLuceneUtilGeoDistanceUtils 0
 #else
-#define OrgApacheLuceneUtilGeoDistanceUtils_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilGeoDistanceUtils 1
 #endif
-#undef OrgApacheLuceneUtilGeoDistanceUtils_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilGeoDistanceUtils
 
-#if !defined (_OrgApacheLuceneUtilGeoDistanceUtils_) && (OrgApacheLuceneUtilGeoDistanceUtils_INCLUDE_ALL || OrgApacheLuceneUtilGeoDistanceUtils_INCLUDE)
-#define _OrgApacheLuceneUtilGeoDistanceUtils_
+#if !defined (OrgApacheLuceneUtilGeoDistanceUtils_) && (INCLUDE_ALL_OrgApacheLuceneUtilGeoDistanceUtils || defined(INCLUDE_OrgApacheLuceneUtilGeoDistanceUtils))
+#define OrgApacheLuceneUtilGeoDistanceUtils_
 
+/*!
+ @brief Reusable geo-spatial distance utility methods.
+ */
 @interface OrgApacheLuceneUtilGeoDistanceUtils : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @brief Compute the inverse haversine to determine distance in degrees longitude for provided distance in meters
+ @param lat latitude to compute delta degrees lon
+ @param distance distance in meters to convert to degrees lon
+ @return Sloppy distance in degrees longitude for provided distance in meters
+ */
 + (jdouble)distanceToDegreesLatWithDouble:(jdouble)lat
                                withDouble:(jdouble)distance;
 
+/*!
+ @brief Compute the inverse haversine to determine distance in degrees longitude for provided distance in meters
+ @param lat latitude to compute delta degrees lon
+ @param distance distance in meters to convert to degrees lon
+ @return Sloppy distance in degrees longitude for provided distance in meters
+ */
 + (jdouble)distanceToDegreesLonWithDouble:(jdouble)lat
                                withDouble:(jdouble)distance;
 
+/*!
+ @brief Compute the distance between two geo-points using vincenty distance formula
+ Vincenty uses the oblate spheroid whereas haversine uses unit sphere, this will give roughly
+ 22m better accuracy (in worst case) than haversine
+ @param lonA longitudinal coordinate of point A (in degrees)
+ @param latA latitudinal coordinate of point A (in degrees)
+ @param lonB longitudinal coordinate of point B (in degrees)
+ @param latB latitudinal coordinate of point B (in degrees)
+ @return distance (in meters) between point A and point B
+ */
 + (jdouble)vincentyDistanceWithDouble:(jdouble)lonA
                            withDouble:(jdouble)latA
                            withDouble:(jdouble)lonB
@@ -47,8 +72,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilGeoDistanceUtils_init(OrgApacheLuceneU
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilGeoDistanceUtils *new_OrgApacheLuceneUtilGeoDistanceUtils_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilGeoDistanceUtils *create_OrgApacheLuceneUtilGeoDistanceUtils_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilGeoDistanceUtils)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilGeoDistanceUtils_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilGeoDistanceUtils")

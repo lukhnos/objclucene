@@ -91,9 +91,11 @@ void OrgApacheLuceneSearchCollectionStatistics_initWithNSString_withLong_withLon
 }
 
 OrgApacheLuceneSearchCollectionStatistics *new_OrgApacheLuceneSearchCollectionStatistics_initWithNSString_withLong_withLong_withLong_withLong_(NSString *field, jlong maxDoc, jlong docCount, jlong sumTotalTermFreq, jlong sumDocFreq) {
-  OrgApacheLuceneSearchCollectionStatistics *self = [OrgApacheLuceneSearchCollectionStatistics alloc];
-  OrgApacheLuceneSearchCollectionStatistics_initWithNSString_withLong_withLong_withLong_withLong_(self, field, maxDoc, docCount, sumTotalTermFreq, sumDocFreq);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchCollectionStatistics, initWithNSString_withLong_withLong_withLong_withLong_, field, maxDoc, docCount, sumTotalTermFreq, sumDocFreq)
+}
+
+OrgApacheLuceneSearchCollectionStatistics *create_OrgApacheLuceneSearchCollectionStatistics_initWithNSString_withLong_withLong_withLong_withLong_(NSString *field, jlong maxDoc, jlong docCount, jlong sumTotalTermFreq, jlong sumDocFreq) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchCollectionStatistics, initWithNSString_withLong_withLong_withLong_withLong_, field, maxDoc, docCount, sumTotalTermFreq, sumDocFreq)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchCollectionStatistics)

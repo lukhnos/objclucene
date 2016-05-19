@@ -26,6 +26,8 @@ __attribute__((unused)) static void OrgApacheLuceneUtilCounter_SerialCounter_ini
 
 __attribute__((unused)) static OrgApacheLuceneUtilCounter_SerialCounter *new_OrgApacheLuceneUtilCounter_SerialCounter_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneUtilCounter_SerialCounter *create_OrgApacheLuceneUtilCounter_SerialCounter_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilCounter_SerialCounter)
 
 @interface OrgApacheLuceneUtilCounter_AtomicCounter : OrgApacheLuceneUtilCounter {
@@ -48,6 +50,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilCounter_AtomicCounter, count_, JavaUtilCo
 __attribute__((unused)) static void OrgApacheLuceneUtilCounter_AtomicCounter_init(OrgApacheLuceneUtilCounter_AtomicCounter *self);
 
 __attribute__((unused)) static OrgApacheLuceneUtilCounter_AtomicCounter *new_OrgApacheLuceneUtilCounter_AtomicCounter_init() NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneUtilCounter_AtomicCounter *create_OrgApacheLuceneUtilCounter_AtomicCounter_init();
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilCounter_AtomicCounter)
 
@@ -86,7 +90,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "get", NULL, "J", 0x401, NULL, NULL },
     { "newCounter", NULL, "Lorg.apache.lucene.util.Counter;", 0x9, NULL, NULL },
     { "newCounterWithBoolean:", "newCounter", "Lorg.apache.lucene.util.Counter;", 0x9, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "Counter", NULL, 0x1, NULL, NULL },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.Counter$SerialCounter;", "Lorg.apache.lucene.util.Counter$AtomicCounter;"};
   static const J2ObjcClassInfo _OrgApacheLuceneUtilCounter = { 2, "Counter", "org.apache.lucene.util", NULL, 0x401, 5, methods, 0, NULL, 0, NULL, 2, inner_classes, NULL, NULL };
@@ -102,7 +106,7 @@ OrgApacheLuceneUtilCounter *OrgApacheLuceneUtilCounter_newCounter() {
 
 OrgApacheLuceneUtilCounter *OrgApacheLuceneUtilCounter_newCounterWithBoolean_(jboolean threadSafe) {
   OrgApacheLuceneUtilCounter_initialize();
-  return threadSafe ? [new_OrgApacheLuceneUtilCounter_AtomicCounter_init() autorelease] : [new_OrgApacheLuceneUtilCounter_SerialCounter_init() autorelease];
+  return threadSafe ? create_OrgApacheLuceneUtilCounter_AtomicCounter_init() : create_OrgApacheLuceneUtilCounter_SerialCounter_init();
 }
 
 void OrgApacheLuceneUtilCounter_init(OrgApacheLuceneUtilCounter *self) {
@@ -132,7 +136,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   static const J2ObjcMethodInfo methods[] = {
     { "addAndGetWithLong:", "addAndGet", "J", 0x1, NULL, NULL },
     { "get", NULL, "J", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x2, NULL, NULL },
+    { "init", "SerialCounter", NULL, 0x2, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "count_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
@@ -149,9 +153,11 @@ void OrgApacheLuceneUtilCounter_SerialCounter_init(OrgApacheLuceneUtilCounter_Se
 }
 
 OrgApacheLuceneUtilCounter_SerialCounter *new_OrgApacheLuceneUtilCounter_SerialCounter_init() {
-  OrgApacheLuceneUtilCounter_SerialCounter *self = [OrgApacheLuceneUtilCounter_SerialCounter alloc];
-  OrgApacheLuceneUtilCounter_SerialCounter_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilCounter_SerialCounter, init)
+}
+
+OrgApacheLuceneUtilCounter_SerialCounter *create_OrgApacheLuceneUtilCounter_SerialCounter_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilCounter_SerialCounter, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilCounter_SerialCounter)
@@ -182,7 +188,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   static const J2ObjcMethodInfo methods[] = {
     { "addAndGetWithLong:", "addAndGet", "J", 0x1, NULL, NULL },
     { "get", NULL, "J", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x2, NULL, NULL },
+    { "init", "AtomicCounter", NULL, 0x2, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "count_", NULL, 0x12, "Ljava.util.concurrent.atomic.AtomicLong;", NULL, NULL, .constantValue.asLong = 0 },
@@ -199,9 +205,11 @@ void OrgApacheLuceneUtilCounter_AtomicCounter_init(OrgApacheLuceneUtilCounter_At
 }
 
 OrgApacheLuceneUtilCounter_AtomicCounter *new_OrgApacheLuceneUtilCounter_AtomicCounter_init() {
-  OrgApacheLuceneUtilCounter_AtomicCounter *self = [OrgApacheLuceneUtilCounter_AtomicCounter alloc];
-  OrgApacheLuceneUtilCounter_AtomicCounter_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilCounter_AtomicCounter, init)
+}
+
+OrgApacheLuceneUtilCounter_AtomicCounter *create_OrgApacheLuceneUtilCounter_AtomicCounter_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilCounter_AtomicCounter, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilCounter_AtomicCounter)

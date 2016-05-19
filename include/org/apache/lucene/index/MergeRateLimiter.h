@@ -5,23 +5,31 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexMergeRateLimiter_INCLUDE_ALL")
-#if OrgApacheLuceneIndexMergeRateLimiter_RESTRICT
-#define OrgApacheLuceneIndexMergeRateLimiter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexMergeRateLimiter")
+#ifdef RESTRICT_OrgApacheLuceneIndexMergeRateLimiter
+#define INCLUDE_ALL_OrgApacheLuceneIndexMergeRateLimiter 0
 #else
-#define OrgApacheLuceneIndexMergeRateLimiter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexMergeRateLimiter 1
 #endif
-#undef OrgApacheLuceneIndexMergeRateLimiter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexMergeRateLimiter
 
-#if !defined (_OrgApacheLuceneIndexMergeRateLimiter_) && (OrgApacheLuceneIndexMergeRateLimiter_INCLUDE_ALL || OrgApacheLuceneIndexMergeRateLimiter_INCLUDE)
-#define _OrgApacheLuceneIndexMergeRateLimiter_
+#if !defined (OrgApacheLuceneIndexMergeRateLimiter_) && (INCLUDE_ALL_OrgApacheLuceneIndexMergeRateLimiter || defined(INCLUDE_OrgApacheLuceneIndexMergeRateLimiter))
+#define OrgApacheLuceneIndexMergeRateLimiter_
 
-#define OrgApacheLuceneStoreRateLimiter_RESTRICT 1
-#define OrgApacheLuceneStoreRateLimiter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreRateLimiter 1
+#define INCLUDE_OrgApacheLuceneStoreRateLimiter 1
 #include "org/apache/lucene/store/RateLimiter.h"
 
 @class OrgApacheLuceneIndexMergePolicy_OneMerge;
 
+/*!
+ @brief This is the <code>RateLimiter</code> that <code>IndexWriter</code> assigns to each running merge, to 
+ give <code>MergeScheduler</code>s ionice like control.
+ This is similar to <code>SimpleRateLimiter</code>, except it's merge-private,
+ it will wake up if its rate changes while it's paused, it tracks how
+ much time it spent stopped and paused, and it supports aborting.
+  
+ */
 @interface OrgApacheLuceneIndexMergeRateLimiter : OrgApacheLuceneStoreRateLimiter {
  @public
   volatile_jlong totalBytesWritten_;
@@ -33,24 +41,45 @@
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ */
 - (instancetype)initWithOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_OneMerge *)merge;
 
+/*!
+ @brief Throws <code>MergePolicy.MergeAbortedException</code> if this merge was aborted.
+ */
 - (void)checkAbort;
 
+/*!
+ @brief Returns true if this merge was aborted.
+ */
 - (jboolean)getAbort;
 
 - (jdouble)getMBPerSec;
 
 - (jlong)getMinPauseCheckBytes;
 
+/*!
+ @brief Returns total bytes written by this merge.
+ */
 - (jlong)getTotalBytesWritten;
 
+/*!
+ @brief Total NS merge was paused to rate limit IO.
+ */
 - (jlong)getTotalPausedNS;
 
+/*!
+ @brief Total NS merge was stopped.
+ */
 - (jlong)getTotalStoppedNS;
 
 - (jlong)pauseWithLong:(jlong)bytes;
 
+/*!
+ @brief Mark this merge aborted.
+ */
 - (void)setAbort;
 
 - (void)setMBPerSecWithDouble:(jdouble)mbPerSec;
@@ -65,8 +94,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexMergeRateLimiter_initWithOrgApacheLuc
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexMergeRateLimiter *new_OrgApacheLuceneIndexMergeRateLimiter_initWithOrgApacheLuceneIndexMergePolicy_OneMerge_(OrgApacheLuceneIndexMergePolicy_OneMerge *merge) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexMergeRateLimiter *create_OrgApacheLuceneIndexMergeRateLimiter_initWithOrgApacheLuceneIndexMergePolicy_OneMerge_(OrgApacheLuceneIndexMergePolicy_OneMerge *merge);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergeRateLimiter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexMergeRateLimiter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexMergeRateLimiter")

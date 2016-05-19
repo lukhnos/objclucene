@@ -5,23 +5,23 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_) && (OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory))
+#define OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-#define OrgApacheLuceneAnalysisUtilResourceLoaderAware_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilResourceLoaderAware_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilResourceLoaderAware 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilResourceLoaderAware 1
 #include "org/apache/lucene/analysis/util/ResourceLoaderAware.h"
 
 @class OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter;
@@ -29,10 +29,28 @@
 @protocol JavaUtilMap;
 @protocol OrgApacheLuceneAnalysisUtilResourceLoader;
 
+/*!
+ @brief Factory for <code>DelimitedPayloadTokenFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_dlmtd" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+ &lt;filter class="solr.DelimitedPayloadTokenFilterFactory" encoder="float" delimiter="|"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilResourceLoaderAware >
+
++ (NSString *)ENCODER_ATTR;
+
++ (NSString *)DELIMITER_ATTR;
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new DelimitedPayloadTokenFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -43,18 +61,24 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_ENCODER_ATTR_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory, ENCODER_ATTR_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_get_ENCODER_ATTR();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_ENCODER_ATTR;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory, ENCODER_ATTR, NSString *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_DELIMITER_ATTR_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory, DELIMITER_ATTR_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_get_DELIMITER_ATTR();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_DELIMITER_ATTR;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory, DELIMITER_ATTR, NSString *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory *self, id<JavaUtilMap> args);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory *new_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory *create_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory")

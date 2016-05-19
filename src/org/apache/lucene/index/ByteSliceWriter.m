@@ -101,9 +101,11 @@ void OrgApacheLuceneIndexByteSliceWriter_initWithOrgApacheLuceneUtilByteBlockPoo
 }
 
 OrgApacheLuceneIndexByteSliceWriter *new_OrgApacheLuceneIndexByteSliceWriter_initWithOrgApacheLuceneUtilByteBlockPool_(OrgApacheLuceneUtilByteBlockPool *pool) {
-  OrgApacheLuceneIndexByteSliceWriter *self = [OrgApacheLuceneIndexByteSliceWriter alloc];
-  OrgApacheLuceneIndexByteSliceWriter_initWithOrgApacheLuceneUtilByteBlockPool_(self, pool);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexByteSliceWriter, initWithOrgApacheLuceneUtilByteBlockPool_, pool)
+}
+
+OrgApacheLuceneIndexByteSliceWriter *create_OrgApacheLuceneIndexByteSliceWriter_initWithOrgApacheLuceneUtilByteBlockPool_(OrgApacheLuceneUtilByteBlockPool *pool) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexByteSliceWriter, initWithOrgApacheLuceneUtilByteBlockPool_, pool)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexByteSliceWriter)

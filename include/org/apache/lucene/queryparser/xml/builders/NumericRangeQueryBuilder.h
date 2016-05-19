@@ -5,24 +5,85 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder_RESTRICT
-#define OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder 0
 #else
-#define OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder 1
 #endif
-#undef OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder
 
-#if !defined (_OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder_) && (OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder_INCLUDE_ALL || OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder_INCLUDE)
-#define _OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder_
+#if !defined (OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder))
+#define OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder_
 
-#define OrgApacheLuceneQueryparserXmlQueryBuilder_RESTRICT 1
-#define OrgApacheLuceneQueryparserXmlQueryBuilder_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserXmlQueryBuilder 1
+#define INCLUDE_OrgApacheLuceneQueryparserXmlQueryBuilder 1
 #include "org/apache/lucene/queryparser/xml/QueryBuilder.h"
 
 @class OrgApacheLuceneSearchQuery;
 @protocol OrgW3cDomElement;
 
+/*!
+ @brief Creates a <code>NumericRangeQuery</code>.
+ The table below specifies the required
+ attributes and the defaults if optional attributes are omitted. For more
+ detail on what each of the attributes actually do, consult the documentation
+ for <code>NumericRangeQuery</code>:
+ <table summary="supported attributes">
+ <tr>
+ <th>Attribute name</th>
+ <th>Values</th>
+ <th>Required</th>
+ <th>Default</th>
+ </tr>
+ <tr>
+ <td>fieldName</td>
+ <td>String</td>
+ <td>Yes</td>
+ <td>N/A</td>
+ </tr>
+ <tr>
+ <td>lowerTerm</td>
+ <td>Specified by <tt>type</tt></td>
+ <td>Yes</td>
+ <td>N/A</td>
+ </tr>
+ <tr>
+ <td>upperTerm</td>
+ <td>Specified by <tt>type</tt></td>
+ <td>Yes</td>
+ <td>N/A</td>
+ </tr>
+ <tr>
+ <td>type</td>
+ <td>int, long, float, double</td>
+ <td>No</td>
+ <td>int</td>
+ </tr>
+ <tr>
+ <td>includeLower</td>
+ <td>true, false</td>
+ <td>No</td>
+ <td>true</td>
+ </tr>
+ <tr>
+ <td>includeUpper</td>
+ <td>true, false</td>
+ <td>No</td>
+ <td>true</td>
+ </tr>
+ <tr>
+ <td>precisionStep</td>
+ <td>Integer</td>
+ <td>No</td>
+ <td>4</td>
+ </tr>
+ </table>
+ <p>
+ A <code>ParserException</code> will be thrown if an error occurs parsing the
+ supplied <tt>lowerTerm</tt> or <tt>upperTerm</tt> into the numeric type
+ specified by <tt>type</tt>.
+ */
 @interface OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder : NSObject < OrgApacheLuceneQueryparserXmlQueryBuilder >
 
 #pragma mark Public
@@ -39,8 +100,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBui
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder *new_OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder *create_OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder")

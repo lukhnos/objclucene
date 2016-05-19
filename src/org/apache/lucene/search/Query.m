@@ -44,7 +44,7 @@
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores {
-  @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(JreStrcat("$@$", @"Query ", self, @" does not implement createWeight")) autorelease];
+  @throw create_JavaLangUnsupportedOperationException_initWithNSString_(JreStrcat("$@$", @"Query ", self, @" does not implement createWeight"));
 }
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader {
@@ -53,10 +53,10 @@
 
 - (OrgApacheLuceneSearchQuery *)clone {
   @try {
-    return (OrgApacheLuceneSearchQuery *) check_class_cast([super clone], [OrgApacheLuceneSearchQuery class]);
+    return (OrgApacheLuceneSearchQuery *) cast_chk([super clone], [OrgApacheLuceneSearchQuery class]);
   }
   @catch (JavaLangCloneNotSupportedException *e) {
-    @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$", @"Clone not supported: ", [((JavaLangCloneNotSupportedException *) nil_chk(e)) getMessage])) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$", @"Clone not supported: ", [((JavaLangCloneNotSupportedException *) nil_chk(e)) getMessage]));
   }
 }
 
@@ -67,8 +67,8 @@
 - (jboolean)isEqual:(id)obj {
   if (self == obj) return true;
   if (obj == nil) return false;
-  if ([self getClass] != [nil_chk(obj) getClass]) return false;
-  OrgApacheLuceneSearchQuery *other = (OrgApacheLuceneSearchQuery *) check_class_cast(obj, [OrgApacheLuceneSearchQuery class]);
+  if ([self getClass] != (id) [obj getClass]) return false;
+  OrgApacheLuceneSearchQuery *other = (OrgApacheLuceneSearchQuery *) cast_chk(obj, [OrgApacheLuceneSearchQuery class]);
   if (JavaLangFloat_floatToIntBitsWithFloat_(boost_) != JavaLangFloat_floatToIntBitsWithFloat_(other->boost_)) return false;
   return true;
 }
@@ -95,7 +95,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "clone", NULL, "Lorg.apache.lucene.search.Query;", 0x1, NULL, NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "Query", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "boost_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },

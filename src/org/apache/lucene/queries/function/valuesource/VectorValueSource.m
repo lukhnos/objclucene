@@ -64,6 +64,8 @@ __attribute__((unused)) static void OrgApacheLuceneQueriesFunctionValuesourceVec
 
 __attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource *outer$, OrgApacheLuceneQueriesFunctionFunctionValues *capture$0, OrgApacheLuceneQueriesFunctionFunctionValues *capture$1) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource *outer$, OrgApacheLuceneQueriesFunctionFunctionValues *capture$0, OrgApacheLuceneQueriesFunctionFunctionValues *capture$1);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$1)
 
 @interface OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$2 : OrgApacheLuceneQueriesFunctionFunctionValues {
@@ -109,6 +111,8 @@ __attribute__((unused)) static void OrgApacheLuceneQueriesFunctionValuesourceVec
 
 __attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$2 *new_OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$2_initWithOrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_(OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource *outer$, IOSObjectArray *capture$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$2 *create_OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$2_initWithOrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_(OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource *outer$, IOSObjectArray *capture$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$2)
 
 @implementation OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource
@@ -136,13 +140,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceVectorValueS
   if (size == 2) {
     OrgApacheLuceneQueriesFunctionFunctionValues *x = [((OrgApacheLuceneQueriesFunctionValueSource *) nil_chk([sources_ getWithInt:0])) getValuesWithJavaUtilMap:context withOrgApacheLuceneIndexLeafReaderContext:readerContext];
     OrgApacheLuceneQueriesFunctionFunctionValues *y = [((OrgApacheLuceneQueriesFunctionValueSource *) nil_chk([sources_ getWithInt:1])) getValuesWithJavaUtilMap:context withOrgApacheLuceneIndexLeafReaderContext:readerContext];
-    return [new_OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionFunctionValues_(self, x, y) autorelease];
+    return create_OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionFunctionValues_(self, x, y);
   }
   IOSObjectArray *valsArr = [IOSObjectArray arrayWithLength:size type:OrgApacheLuceneQueriesFunctionFunctionValues_class_()];
   for (jint i = 0; i < size; i++) {
     IOSObjectArray_Set(valsArr, i, [((OrgApacheLuceneQueriesFunctionValueSource *) nil_chk([sources_ getWithInt:i])) getValuesWithJavaUtilMap:context withOrgApacheLuceneIndexLeafReaderContext:readerContext]);
   }
-  return [new_OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$2_initWithOrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_(self, valsArr) autorelease];
+  return create_OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$2_initWithOrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_(self, valsArr);
 }
 
 - (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
@@ -151,7 +155,7 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 }
 
 - (NSString *)description__ {
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   [((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:[self name]])) appendWithChar:'('];
   jboolean firstTime = true;
   for (OrgApacheLuceneQueriesFunctionValueSource * __strong source in nil_chk(sources_)) {
@@ -170,7 +174,7 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 - (jboolean)isEqual:(id)o {
   if (self == o) return true;
   if (!([o isKindOfClass:[OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource class]])) return false;
-  OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource *that = (OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource *) check_class_cast(o, [OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource class]);
+  OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource *that = (OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource *) cast_chk(o, [OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource class]);
   return [((id<JavaUtilList>) nil_chk(sources_)) isEqual:((OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource *) nil_chk(that))->sources_];
 }
 
@@ -185,8 +189,8 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:", "VectorValueSource", NULL, 0x1, NULL, NULL },
-    { "getSources", NULL, "Ljava.util.List;", 0x1, NULL, NULL },
+    { "initWithJavaUtilList:", "VectorValueSource", NULL, 0x1, NULL, "(Ljava/util/List<Lorg/apache/lucene/queries/function/ValueSource;>;)V" },
+    { "getSources", NULL, "Ljava.util.List;", 0x1, NULL, "()Ljava/util/List<Lorg/apache/lucene/queries/function/ValueSource;>;" },
     { "dimension", NULL, "I", 0x1, NULL, NULL },
     { "name", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
     { "getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:", "getValues", "Lorg.apache.lucene.queries.function.FunctionValues;", 0x1, "Ljava.io.IOException;", NULL },
@@ -210,9 +214,11 @@ void OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_initWithJavaUtil
 }
 
 OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_initWithJavaUtilList_(id<JavaUtilList> sources) {
-  OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource *self = [OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource alloc];
-  OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_initWithJavaUtilList_(self, sources);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource, initWithJavaUtilList_, sources)
+}
+
+OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource *create_OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_initWithJavaUtilList_(id<JavaUtilList> sources) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource, initWithJavaUtilList_, sources)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource)
@@ -311,9 +317,11 @@ void OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$1_initWithOrgAp
 }
 
 OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource *outer$, OrgApacheLuceneQueriesFunctionFunctionValues *capture$0, OrgApacheLuceneQueriesFunctionFunctionValues *capture$1) {
-  OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$1 *self = [OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$1 alloc];
-  OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionFunctionValues_(self, outer$, capture$0, capture$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$1, initWithOrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionFunctionValues_, outer$, capture$0, capture$1)
+}
+
+OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource *outer$, OrgApacheLuceneQueriesFunctionFunctionValues *capture$0, OrgApacheLuceneQueriesFunctionFunctionValues *capture$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$1, initWithOrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionFunctionValues_, outer$, capture$0, capture$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$1)
@@ -370,7 +378,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceVector
 }
 
 - (NSString *)toStringWithInt:(jint)doc {
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   [((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:[this$0_ name]])) appendWithChar:'('];
   jboolean firstTime = true;
   {
@@ -434,9 +442,11 @@ void OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$2_initWithOrgAp
 }
 
 OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$2 *new_OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$2_initWithOrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_(OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource *outer$, IOSObjectArray *capture$0) {
-  OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$2 *self = [OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$2 alloc];
-  OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$2_initWithOrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_(self, outer$, capture$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$2, initWithOrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_, outer$, capture$0)
+}
+
+OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$2 *create_OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$2_initWithOrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_(OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource *outer$, IOSObjectArray *capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$2, initWithOrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_, outer$, capture$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_$2)

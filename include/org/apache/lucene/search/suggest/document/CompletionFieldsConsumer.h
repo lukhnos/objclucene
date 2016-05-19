@@ -5,25 +5,36 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_RESTRICT
-#define OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer")
+#ifdef RESTRICT_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer 0
 #else
-#define OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer 1
 #endif
-#undef OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer
 
-#if !defined (_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_) && (OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_INCLUDE_ALL || OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_INCLUDE)
-#define _OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_
+#if !defined (OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer || defined(INCLUDE_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer))
+#define OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_
 
-#define OrgApacheLuceneCodecsFieldsConsumer_RESTRICT 1
-#define OrgApacheLuceneCodecsFieldsConsumer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneCodecsFieldsConsumer 1
+#define INCLUDE_OrgApacheLuceneCodecsFieldsConsumer 1
 #include "org/apache/lucene/codecs/FieldsConsumer.h"
 
 @class OrgApacheLuceneCodecsPostingsFormat;
 @class OrgApacheLuceneIndexFields;
 @class OrgApacheLuceneIndexSegmentWriteState;
 
+/*!
+ @brief <p>
+ Weighted FSTs for any indexed <code>SuggestField</code> is built on <code>write(Fields)</code>.
+ A weighted FST maps the analyzed forms of a field to its
+ surface form and document id. FSTs are stored in the CompletionDictionary (.lkp).
+ </p>
+ <p>
+ The file offsets of a field's FST are stored in the CompletionIndex (.cmp)
+ along with the field's internal number <code>FieldInfo.number</code> on <code>close()</code>.
+ </p>
+ */
 @interface OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer : OrgApacheLuceneCodecsFieldsConsumer
 
 #pragma mark Public
@@ -45,8 +56,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsu
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer *new_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_initWithOrgApacheLuceneCodecsPostingsFormat_withOrgApacheLuceneIndexSegmentWriteState_(OrgApacheLuceneCodecsPostingsFormat *delegatePostingsFormat, OrgApacheLuceneIndexSegmentWriteState *state) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer *create_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_initWithOrgApacheLuceneCodecsPostingsFormat_withOrgApacheLuceneIndexSegmentWriteState_(OrgApacheLuceneCodecsPostingsFormat *delegatePostingsFormat, OrgApacheLuceneIndexSegmentWriteState *state);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer")

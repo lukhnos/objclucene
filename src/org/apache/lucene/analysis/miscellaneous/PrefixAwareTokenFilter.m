@@ -87,9 +87,9 @@ __attribute__((unused)) static OrgApacheLuceneAnalysisToken *OrgApacheLuceneAnal
     }
     else {
       [((OrgApacheLuceneAnalysisToken *) nil_chk(previousPrefixToken_)) reinitWithOrgApacheLuceneAnalysisToken:nextToken];
-      OrgApacheLuceneUtilBytesRef *p = [previousPrefixToken_ getPayload];
+      OrgApacheLuceneUtilBytesRef *p = [((OrgApacheLuceneAnalysisToken *) nil_chk(previousPrefixToken_)) getPayload];
       if (p != nil) {
-        [previousPrefixToken_ setPayloadWithOrgApacheLuceneUtilBytesRef:[p clone]];
+        [((OrgApacheLuceneAnalysisToken *) nil_chk(previousPrefixToken_)) setPayloadWithOrgApacheLuceneUtilBytesRef:[p clone]];
       }
       OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_setCurrentTokenWithOrgApacheLuceneAnalysisToken_(self, nextToken);
       return true;
@@ -118,7 +118,7 @@ __attribute__((unused)) static OrgApacheLuceneAnalysisToken *OrgApacheLuceneAnal
 
 - (OrgApacheLuceneAnalysisToken *)updateSuffixTokenWithOrgApacheLuceneAnalysisToken:(OrgApacheLuceneAnalysisToken *)suffixToken
                                                    withOrgApacheLuceneAnalysisToken:(OrgApacheLuceneAnalysisToken *)lastPrefixToken {
-  [suffixToken setOffsetWithInt:[((OrgApacheLuceneAnalysisToken *) nil_chk(lastPrefixToken)) endOffset] + [((OrgApacheLuceneAnalysisToken *) nil_chk(suffixToken)) startOffset] withInt:[lastPrefixToken endOffset] + [suffixToken endOffset]];
+  [((OrgApacheLuceneAnalysisToken *) nil_chk(suffixToken)) setOffsetWithInt:[((OrgApacheLuceneAnalysisToken *) nil_chk(lastPrefixToken)) endOffset] + [suffixToken startOffset] withInt:[lastPrefixToken endOffset] + [suffixToken endOffset]];
   return suffixToken;
 }
 
@@ -242,15 +242,17 @@ void OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_initWithOrgApach
 }
 
 OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter *new_OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *prefix, OrgApacheLuceneAnalysisTokenStream *suffix) {
-  OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter *self = [OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter alloc];
-  OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(self, prefix, suffix);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_, prefix, suffix)
+}
+
+OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter *create_OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *prefix, OrgApacheLuceneAnalysisTokenStream *suffix) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_, prefix, suffix)
 }
 
 void OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_setCurrentTokenWithOrgApacheLuceneAnalysisToken_(OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter *self, OrgApacheLuceneAnalysisToken *token) {
   if (token == nil) return;
   [self clearAttributes];
-  [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(self->termAtt_)) copyBufferWithCharArray:[((OrgApacheLuceneAnalysisToken *) nil_chk(token)) buffer] withInt:0 withInt:[token length]];
+  [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(self->termAtt_)) copyBufferWithCharArray:[token buffer] withInt:0 withInt:[token length]];
   [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(self->posIncrAtt_)) setPositionIncrementWithInt:[token getPositionIncrement]];
   [((id<OrgApacheLuceneAnalysisTokenattributesFlagsAttribute>) nil_chk(self->flagsAtt_)) setFlagsWithInt:[token getFlags]];
   [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(self->offsetAtt_)) setOffsetWithInt:[token startOffset] withInt:[token endOffset]];
@@ -260,10 +262,10 @@ void OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_setCurrentTokenW
 
 OrgApacheLuceneAnalysisToken *OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_getNextPrefixInputTokenWithOrgApacheLuceneAnalysisToken_(OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter *self, OrgApacheLuceneAnalysisToken *token) {
   if (![((OrgApacheLuceneAnalysisTokenStream *) nil_chk(self->prefix_)) incrementToken]) return nil;
-  [((OrgApacheLuceneAnalysisToken *) nil_chk(token)) copyBufferWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(self->p_termAtt_)) buffer] withInt:0 withInt:[self->p_termAtt_ length]];
+  [((OrgApacheLuceneAnalysisToken *) nil_chk(token)) copyBufferWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(self->p_termAtt_)) buffer] withInt:0 withInt:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(self->p_termAtt_)) length]];
   [token setPositionIncrementWithInt:[((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(self->p_posIncrAtt_)) getPositionIncrement]];
   [token setFlagsWithInt:[((id<OrgApacheLuceneAnalysisTokenattributesFlagsAttribute>) nil_chk(self->p_flagsAtt_)) getFlags]];
-  [token setOffsetWithInt:[((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(self->p_offsetAtt_)) startOffset] withInt:[self->p_offsetAtt_ endOffset]];
+  [token setOffsetWithInt:[((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(self->p_offsetAtt_)) startOffset] withInt:[((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(self->p_offsetAtt_)) endOffset]];
   [token setTypeWithNSString:[((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(self->p_typeAtt_)) type]];
   [token setPayloadWithOrgApacheLuceneUtilBytesRef:[((id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute>) nil_chk(self->p_payloadAtt_)) getPayload]];
   return token;
@@ -271,10 +273,10 @@ OrgApacheLuceneAnalysisToken *OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTok
 
 OrgApacheLuceneAnalysisToken *OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_getNextSuffixInputTokenWithOrgApacheLuceneAnalysisToken_(OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter *self, OrgApacheLuceneAnalysisToken *token) {
   if (![((OrgApacheLuceneAnalysisTokenStream *) nil_chk(self->suffix_)) incrementToken]) return nil;
-  [((OrgApacheLuceneAnalysisToken *) nil_chk(token)) copyBufferWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(self->termAtt_)) buffer] withInt:0 withInt:[self->termAtt_ length]];
+  [((OrgApacheLuceneAnalysisToken *) nil_chk(token)) copyBufferWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(self->termAtt_)) buffer] withInt:0 withInt:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(self->termAtt_)) length]];
   [token setPositionIncrementWithInt:[((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(self->posIncrAtt_)) getPositionIncrement]];
   [token setFlagsWithInt:[((id<OrgApacheLuceneAnalysisTokenattributesFlagsAttribute>) nil_chk(self->flagsAtt_)) getFlags]];
-  [token setOffsetWithInt:[((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(self->offsetAtt_)) startOffset] withInt:[self->offsetAtt_ endOffset]];
+  [token setOffsetWithInt:[((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(self->offsetAtt_)) startOffset] withInt:[((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(self->offsetAtt_)) endOffset]];
   [token setTypeWithNSString:[((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(self->typeAtt_)) type]];
   [token setPayloadWithOrgApacheLuceneUtilBytesRef:[((id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute>) nil_chk(self->payloadAtt_)) getPayload]];
   return token;

@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSpansSpanOrQuery_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSpansSpanOrQuery_RESTRICT
-#define OrgApacheLuceneSearchSpansSpanOrQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanOrQuery")
+#ifdef RESTRICT_OrgApacheLuceneSearchSpansSpanOrQuery
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanOrQuery 0
 #else
-#define OrgApacheLuceneSearchSpansSpanOrQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanOrQuery 1
 #endif
-#undef OrgApacheLuceneSearchSpansSpanOrQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSpansSpanOrQuery
 
-#if !defined (_OrgApacheLuceneSearchSpansSpanOrQuery_) && (OrgApacheLuceneSearchSpansSpanOrQuery_INCLUDE_ALL || OrgApacheLuceneSearchSpansSpanOrQuery_INCLUDE)
-#define _OrgApacheLuceneSearchSpansSpanOrQuery_
+#if !defined (OrgApacheLuceneSearchSpansSpanOrQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanOrQuery || defined(INCLUDE_OrgApacheLuceneSearchSpansSpanOrQuery))
+#define OrgApacheLuceneSearchSpansSpanOrQuery_
 
-#define OrgApacheLuceneSearchSpansSpanQuery_RESTRICT 1
-#define OrgApacheLuceneSearchSpansSpanQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSpansSpanQuery 1
+#define INCLUDE_OrgApacheLuceneSearchSpansSpanQuery 1
 #include "org/apache/lucene/search/spans/SpanQuery.h"
 
 @class IOSObjectArray;
@@ -26,12 +26,22 @@
 @class OrgApacheLuceneSearchQuery;
 @class OrgApacheLuceneSearchSpansSpanWeight;
 
+/*!
+ @brief Matches the union of its clauses.
+ */
 @interface OrgApacheLuceneSearchSpansSpanOrQuery : OrgApacheLuceneSearchSpansSpanQuery < NSCopying >
 
 #pragma mark Public
 
+/*!
+ @brief Construct a SpanOrQuery merging the provided clauses.
+ All clauses must have the same field.
+ */
 - (instancetype)initWithOrgApacheLuceneSearchSpansSpanQueryArray:(IOSObjectArray *)clauses;
 
+/*!
+ @brief Adds a clause to this query
+ */
 - (void)addClauseWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)clause;
 
 - (OrgApacheLuceneSearchSpansSpanOrQuery *)clone;
@@ -41,6 +51,9 @@
 
 - (jboolean)isEqual:(id)o;
 
+/*!
+ @brief Return the clauses whose spans are matched.
+ */
 - (IOSObjectArray *)getClauses;
 
 - (NSString *)getField;
@@ -59,21 +72,23 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanOrQuery_initWithOrgApacheLu
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanOrQuery *new_OrgApacheLuceneSearchSpansSpanOrQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_(IOSObjectArray *clauses) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanOrQuery *create_OrgApacheLuceneSearchSpansSpanOrQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_(IOSObjectArray *clauses);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanOrQuery)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchSpansSpanOrQuery_SpanOrWeight_) && (OrgApacheLuceneSearchSpansSpanOrQuery_INCLUDE_ALL || OrgApacheLuceneSearchSpansSpanOrQuery_SpanOrWeight_INCLUDE)
-#define _OrgApacheLuceneSearchSpansSpanOrQuery_SpanOrWeight_
+#if !defined (OrgApacheLuceneSearchSpansSpanOrQuery_SpanOrWeight_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanOrQuery || defined(INCLUDE_OrgApacheLuceneSearchSpansSpanOrQuery_SpanOrWeight))
+#define OrgApacheLuceneSearchSpansSpanOrQuery_SpanOrWeight_
 
-#define OrgApacheLuceneSearchSpansSpanWeight_RESTRICT 1
-#define OrgApacheLuceneSearchSpansSpanWeight_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSpansSpanWeight 1
+#define INCLUDE_OrgApacheLuceneSearchSpansSpanWeight 1
 #include "org/apache/lucene/search/spans/SpanWeight.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchSpansSpanOrQuery;
-@class OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum;
+@class OrgApacheLuceneSearchSpansSpanWeight_Postings;
 @class OrgApacheLuceneSearchSpansSpans;
 @protocol JavaUtilList;
 @protocol JavaUtilMap;
@@ -96,7 +111,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanOrQuery)
 - (void)extractTermsWithJavaUtilSet:(id<JavaUtilSet>)terms;
 
 - (OrgApacheLuceneSearchSpansSpans *)getSpansWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                 withOrgApacheLuceneSearchSpansSpanWeight_PostingsEnum:(OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum *)requiredPostings;
+                                     withOrgApacheLuceneSearchSpansSpanWeight_Postings:(OrgApacheLuceneSearchSpansSpanWeight_Postings *)requiredPostings;
 
 @end
 
@@ -108,8 +123,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanOrQuery_SpanOrWeight_initWi
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanOrQuery_SpanOrWeight *new_OrgApacheLuceneSearchSpansSpanOrQuery_SpanOrWeight_initWithOrgApacheLuceneSearchSpansSpanOrQuery_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_withJavaUtilList_(OrgApacheLuceneSearchSpansSpanOrQuery *outer$, OrgApacheLuceneSearchIndexSearcher *searcher, id<JavaUtilMap> terms, id<JavaUtilList> subWeights) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanOrQuery_SpanOrWeight *create_OrgApacheLuceneSearchSpansSpanOrQuery_SpanOrWeight_initWithOrgApacheLuceneSearchSpansSpanOrQuery_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_withJavaUtilList_(OrgApacheLuceneSearchSpansSpanOrQuery *outer$, OrgApacheLuceneSearchIndexSearcher *searcher, id<JavaUtilMap> terms, id<JavaUtilList> subWeights);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanOrQuery_SpanOrWeight)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSpansSpanOrQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanOrQuery")

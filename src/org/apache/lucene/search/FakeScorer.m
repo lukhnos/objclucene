@@ -21,7 +21,7 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)advanceWithInt:(jint)target {
-  @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(@"FakeScorer doesn't support advance(int)") autorelease];
+  @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"FakeScorer doesn't support advance(int)");
 }
 
 - (jint)docID {
@@ -33,7 +33,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jint)nextDoc {
-  @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(@"FakeScorer doesn't support nextDoc()") autorelease];
+  @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"FakeScorer doesn't support nextDoc()");
 }
 
 - (jfloat)score {
@@ -45,11 +45,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (OrgApacheLuceneSearchWeight *)getWeight {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (id<JavaUtilCollection>)getChildren {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -62,7 +62,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "score", NULL, "F", 0x1, NULL, NULL },
     { "cost", NULL, "J", 0x1, NULL, NULL },
     { "getWeight", NULL, "Lorg.apache.lucene.search.Weight;", 0x1, NULL, NULL },
-    { "getChildren", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildren", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/search/Scorer$ChildScorer;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "score_", NULL, 0x0, "F", NULL, NULL, .constantValue.asLong = 0 },
@@ -82,9 +82,11 @@ void OrgApacheLuceneSearchFakeScorer_init(OrgApacheLuceneSearchFakeScorer *self)
 }
 
 OrgApacheLuceneSearchFakeScorer *new_OrgApacheLuceneSearchFakeScorer_init() {
-  OrgApacheLuceneSearchFakeScorer *self = [OrgApacheLuceneSearchFakeScorer alloc];
-  OrgApacheLuceneSearchFakeScorer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFakeScorer, init)
+}
+
+OrgApacheLuceneSearchFakeScorer *create_OrgApacheLuceneSearchFakeScorer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFakeScorer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFakeScorer)

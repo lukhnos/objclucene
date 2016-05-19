@@ -34,6 +34,9 @@
   OrgApacheLuceneUtilAutomatonTransition *transition_;
 }
 
+/*!
+ @brief Returns sink state, if present, else -1.
+ */
 + (jint)findSinkStateWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton;
 
 - (OrgApacheLuceneUtilBytesRef *)addTailWithInt:(jint)state
@@ -49,9 +52,7 @@ __attribute__((unused)) static jint OrgApacheLuceneUtilAutomatonCompiledAutomato
 
 __attribute__((unused)) static OrgApacheLuceneUtilBytesRef *OrgApacheLuceneUtilAutomatonCompiledAutomaton_addTailWithInt_withOrgApacheLuceneUtilBytesRefBuilder_withInt_withInt_(OrgApacheLuceneUtilAutomatonCompiledAutomaton *self, jint state, OrgApacheLuceneUtilBytesRefBuilder *term, jint idx, jint leadLabel);
 
-__attribute__((unused)) static void OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum_initWithNSString_withInt_(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum *self, NSString *__name, jint __ordinal);
-
-__attribute__((unused)) static OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum *new_OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
+__attribute__((unused)) static void OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_initWithNSString_withInt_(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE *self, NSString *__name, jint __ordinal);
 
 @implementation OrgApacheLuceneUtilAutomatonCompiledAutomaton
 
@@ -89,16 +90,16 @@ __attribute__((unused)) static OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUT
 
 - (OrgApacheLuceneIndexTermsEnum *)getTermsEnumWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms {
   switch ([type_ ordinal]) {
-    case OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_NONE:
-    return JreLoadStatic(OrgApacheLuceneIndexTermsEnum, EMPTY_);
-    case OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_ALL:
+    case OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_Enum_NONE:
+    return JreLoadStatic(OrgApacheLuceneIndexTermsEnum, EMPTY);
+    case OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_Enum_ALL:
     return [((OrgApacheLuceneIndexTerms *) nil_chk(terms)) iterator];
-    case OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_SINGLE:
-    return [new_OrgApacheLuceneIndexSingleTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilBytesRef_([((OrgApacheLuceneIndexTerms *) nil_chk(terms)) iterator], term_) autorelease];
-    case OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_NORMAL:
+    case OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_Enum_SINGLE:
+    return create_OrgApacheLuceneIndexSingleTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilBytesRef_([((OrgApacheLuceneIndexTerms *) nil_chk(terms)) iterator], term_);
+    case OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_Enum_NORMAL:
     return [((OrgApacheLuceneIndexTerms *) nil_chk(terms)) intersectWithOrgApacheLuceneUtilAutomatonCompiledAutomaton:self withOrgApacheLuceneUtilBytesRef:nil];
     default:
-    @throw [new_JavaLangRuntimeException_initWithNSString_(@"unhandled case") autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSString_(@"unhandled case");
   }
 }
 
@@ -114,7 +115,7 @@ __attribute__((unused)) static OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUT
       return nil;
     }
   }
-  id<JavaUtilList> stack = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> stack = create_JavaUtilArrayList_init();
   jint idx = 0;
   while (true) {
     jint label = IOSByteArray_Get(nil_chk(input->bytes_), input->offset_ + idx) & (jint) 0xff;
@@ -151,7 +152,7 @@ __attribute__((unused)) static OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUT
             else {
               state = [((JavaLangInteger *) nil_chk([stack removeWithInt:[stack size] - 1])) intValue];
               idx--;
-              label = IOSByteArray_Get(input->bytes_, input->offset_ + idx) & (jint) 0xff;
+              label = IOSByteArray_Get(nil_chk(input->bytes_), input->offset_ + idx) & (jint) 0xff;
             }
           }
           else {
@@ -174,22 +175,22 @@ __attribute__((unused)) static OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUT
 - (NSUInteger)hash {
   jint prime = 31;
   jint result = 1;
-  result = prime * result + ((runAutomaton_ == nil) ? 0 : ((jint) [runAutomaton_ hash]));
-  result = prime * result + ((term_ == nil) ? 0 : ((jint) [term_ hash]));
-  result = prime * result + ((type_ == nil) ? 0 : ((jint) [type_ hash]));
+  result = prime * result + ((runAutomaton_ == nil) ? 0 : ((jint) [((OrgApacheLuceneUtilAutomatonByteRunAutomaton *) nil_chk(runAutomaton_)) hash]));
+  result = prime * result + ((term_ == nil) ? 0 : ((jint) [((OrgApacheLuceneUtilBytesRef *) nil_chk(term_)) hash]));
+  result = prime * result + ((type_ == nil) ? 0 : ((jint) [((OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE *) nil_chk(type_)) hash]));
   return result;
 }
 
 - (jboolean)isEqual:(id)obj {
   if (self == obj) return true;
   if (obj == nil) return false;
-  if ([self getClass] != [nil_chk(obj) getClass]) return false;
-  OrgApacheLuceneUtilAutomatonCompiledAutomaton *other = (OrgApacheLuceneUtilAutomatonCompiledAutomaton *) check_class_cast(obj, [OrgApacheLuceneUtilAutomatonCompiledAutomaton class]);
+  if ([self getClass] != (id) [obj getClass]) return false;
+  OrgApacheLuceneUtilAutomatonCompiledAutomaton *other = (OrgApacheLuceneUtilAutomatonCompiledAutomaton *) cast_chk(obj, [OrgApacheLuceneUtilAutomatonCompiledAutomaton class]);
   if (type_ != other->type_) return false;
-  if (type_ == JreLoadStatic(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum, SINGLE)) {
+  if (type_ == JreLoadEnum(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE, SINGLE)) {
     if (![((OrgApacheLuceneUtilBytesRef *) nil_chk(term_)) isEqual:other->term_]) return false;
   }
-  else if (type_ == JreLoadStatic(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum, NORMAL)) {
+  else if (type_ == JreLoadEnum(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE, NORMAL)) {
     if (![((OrgApacheLuceneUtilAutomatonByteRunAutomaton *) nil_chk(runAutomaton_)) isEqual:other->runAutomaton_]) return false;
   }
   return true;
@@ -240,15 +241,17 @@ void OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAu
 }
 
 OrgApacheLuceneUtilAutomatonCompiledAutomaton *new_OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonAutomaton *automaton) {
-  OrgApacheLuceneUtilAutomatonCompiledAutomaton *self = [OrgApacheLuceneUtilAutomatonCompiledAutomaton alloc];
-  OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_(self, automaton);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAutomatonCompiledAutomaton, initWithOrgApacheLuceneUtilAutomatonAutomaton_, automaton)
+}
+
+OrgApacheLuceneUtilAutomatonCompiledAutomaton *create_OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonAutomaton *automaton) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAutomatonCompiledAutomaton, initWithOrgApacheLuceneUtilAutomatonAutomaton_, automaton)
 }
 
 jint OrgApacheLuceneUtilAutomatonCompiledAutomaton_findSinkStateWithOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonAutomaton *automaton) {
   OrgApacheLuceneUtilAutomatonCompiledAutomaton_initialize();
   jint numStates = [((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(automaton)) getNumStates];
-  OrgApacheLuceneUtilAutomatonTransition *t = [new_OrgApacheLuceneUtilAutomatonTransition_init() autorelease];
+  OrgApacheLuceneUtilAutomatonTransition *t = create_OrgApacheLuceneUtilAutomatonTransition_init();
   jint foundState = -1;
   for (jint s = 0; s < numStates; s++) {
     if ([automaton isAcceptWithInt:s]) {
@@ -275,21 +278,23 @@ void OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAu
 }
 
 OrgApacheLuceneUtilAutomatonCompiledAutomaton *new_OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withJavaLangBoolean_withBoolean_(OrgApacheLuceneUtilAutomatonAutomaton *automaton, JavaLangBoolean *finite, jboolean simplify) {
-  OrgApacheLuceneUtilAutomatonCompiledAutomaton *self = [OrgApacheLuceneUtilAutomatonCompiledAutomaton alloc];
-  OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withJavaLangBoolean_withBoolean_(self, automaton, finite, simplify);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAutomatonCompiledAutomaton, initWithOrgApacheLuceneUtilAutomatonAutomaton_withJavaLangBoolean_withBoolean_, automaton, finite, simplify)
+}
+
+OrgApacheLuceneUtilAutomatonCompiledAutomaton *create_OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withJavaLangBoolean_withBoolean_(OrgApacheLuceneUtilAutomatonAutomaton *automaton, JavaLangBoolean *finite, jboolean simplify) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAutomatonCompiledAutomaton, initWithOrgApacheLuceneUtilAutomatonAutomaton_withJavaLangBoolean_withBoolean_, automaton, finite, simplify)
 }
 
 void OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withJavaLangBoolean_withBoolean_withInt_withBoolean_(OrgApacheLuceneUtilAutomatonCompiledAutomaton *self, OrgApacheLuceneUtilAutomatonAutomaton *automaton, JavaLangBoolean *finite, jboolean simplify, jint maxDeterminizedStates, jboolean isBinary) {
   NSObject_init(self);
   JreStrongAssignAndConsume(&self->transition_, new_OrgApacheLuceneUtilAutomatonTransition_init());
   if ([((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(automaton)) getNumStates] == 0) {
-    automaton = [new_OrgApacheLuceneUtilAutomatonAutomaton_init() autorelease];
+    automaton = create_OrgApacheLuceneUtilAutomatonAutomaton_init();
     [automaton createState];
   }
   if (simplify) {
     if (OrgApacheLuceneUtilAutomatonOperations_isEmptyWithOrgApacheLuceneUtilAutomatonAutomaton_(automaton)) {
-      JreStrongAssign(&self->type_, JreLoadStatic(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum, NONE));
+      JreStrongAssign(&self->type_, JreLoadEnum(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE, NONE));
       JreStrongAssign(&self->term_, nil);
       JreStrongAssign(&self->commonSuffixRef_, nil);
       JreStrongAssign(&self->runAutomaton_, nil);
@@ -306,7 +311,7 @@ void OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAu
       isTotal = OrgApacheLuceneUtilAutomatonOperations_isTotalWithOrgApacheLuceneUtilAutomatonAutomaton_(automaton);
     }
     if (isTotal) {
-      JreStrongAssign(&self->type_, JreLoadStatic(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum, ALL));
+      JreStrongAssign(&self->type_, JreLoadEnum(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE, ALL));
       JreStrongAssign(&self->term_, nil);
       JreStrongAssign(&self->commonSuffixRef_, nil);
       JreStrongAssign(&self->runAutomaton_, nil);
@@ -318,7 +323,7 @@ void OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAu
     automaton = OrgApacheLuceneUtilAutomatonOperations_determinizeWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(automaton, maxDeterminizedStates);
     OrgApacheLuceneUtilIntsRef *singleton = OrgApacheLuceneUtilAutomatonOperations_getSingletonWithOrgApacheLuceneUtilAutomatonAutomaton_(automaton);
     if (singleton != nil) {
-      JreStrongAssign(&self->type_, JreLoadStatic(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum, SINGLE));
+      JreStrongAssign(&self->type_, JreLoadEnum(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE, SINGLE));
       JreStrongAssign(&self->commonSuffixRef_, nil);
       JreStrongAssign(&self->runAutomaton_, nil);
       JreStrongAssign(&self->automaton_, nil);
@@ -333,7 +338,7 @@ void OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAu
       return;
     }
   }
-  JreStrongAssign(&self->type_, JreLoadStatic(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum, NORMAL));
+  JreStrongAssign(&self->type_, JreLoadEnum(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE, NORMAL));
   JreStrongAssign(&self->term_, nil);
   if (finite == nil) {
     JreStrongAssign(&self->finite_, JavaLangBoolean_valueOfWithBoolean_(OrgApacheLuceneUtilAutomatonOperations_isFiniteWithOrgApacheLuceneUtilAutomatonAutomaton_(automaton)));
@@ -346,9 +351,9 @@ void OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAu
     binary = automaton;
   }
   else {
-    binary = [((OrgApacheLuceneUtilAutomatonUTF32ToUTF8 *) [new_OrgApacheLuceneUtilAutomatonUTF32ToUTF8_init() autorelease]) convertWithOrgApacheLuceneUtilAutomatonAutomaton:automaton];
+    binary = [create_OrgApacheLuceneUtilAutomatonUTF32ToUTF8_init() convertWithOrgApacheLuceneUtilAutomatonAutomaton:automaton];
   }
-  if ([((JavaLangBoolean *) nil_chk(self->finite_)) booleanValue]) {
+  if ([self->finite_ booleanValue]) {
     JreStrongAssign(&self->commonSuffixRef_, nil);
   }
   else {
@@ -366,9 +371,11 @@ void OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAu
 }
 
 OrgApacheLuceneUtilAutomatonCompiledAutomaton *new_OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withJavaLangBoolean_withBoolean_withInt_withBoolean_(OrgApacheLuceneUtilAutomatonAutomaton *automaton, JavaLangBoolean *finite, jboolean simplify, jint maxDeterminizedStates, jboolean isBinary) {
-  OrgApacheLuceneUtilAutomatonCompiledAutomaton *self = [OrgApacheLuceneUtilAutomatonCompiledAutomaton alloc];
-  OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withJavaLangBoolean_withBoolean_withInt_withBoolean_(self, automaton, finite, simplify, maxDeterminizedStates, isBinary);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAutomatonCompiledAutomaton, initWithOrgApacheLuceneUtilAutomatonAutomaton_withJavaLangBoolean_withBoolean_withInt_withBoolean_, automaton, finite, simplify, maxDeterminizedStates, isBinary)
+}
+
+OrgApacheLuceneUtilAutomatonCompiledAutomaton *create_OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withJavaLangBoolean_withBoolean_withInt_withBoolean_(OrgApacheLuceneUtilAutomatonAutomaton *automaton, JavaLangBoolean *finite, jboolean simplify, jint maxDeterminizedStates, jboolean isBinary) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAutomatonCompiledAutomaton, initWithOrgApacheLuceneUtilAutomatonAutomaton_withJavaLangBoolean_withBoolean_withInt_withBoolean_, automaton, finite, simplify, maxDeterminizedStates, isBinary)
 }
 
 OrgApacheLuceneUtilBytesRef *OrgApacheLuceneUtilAutomatonCompiledAutomaton_addTailWithInt_withOrgApacheLuceneUtilBytesRefBuilder_withInt_withInt_(OrgApacheLuceneUtilAutomatonCompiledAutomaton *self, jint state, OrgApacheLuceneUtilBytesRefBuilder *term, jint idx, jint leadLabel) {
@@ -394,7 +401,7 @@ OrgApacheLuceneUtilBytesRef *OrgApacheLuceneUtilAutomatonCompiledAutomaton_addTa
   }
   [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(term)) growWithInt:1 + idx];
   [term setByteAtWithInt:idx withByte:(jbyte) floorLabel];
-  state = self->transition_->dest_;
+  state = ((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(self->transition_))->dest_;
   idx++;
   while (true) {
     numTransitions = [self->automaton_ getNumTransitionsWithInt:state];
@@ -406,8 +413,8 @@ OrgApacheLuceneUtilBytesRef *OrgApacheLuceneUtilAutomatonCompiledAutomaton_addTa
     else {
       [self->automaton_ getTransitionWithInt:state withInt:numTransitions - 1 withOrgApacheLuceneUtilAutomatonTransition:self->transition_];
       [term growWithInt:1 + idx];
-      [term setByteAtWithInt:idx withByte:(jbyte) self->transition_->max_];
-      state = self->transition_->dest_;
+      [term setByteAtWithInt:idx withByte:(jbyte) ((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(self->transition_))->max_];
+      state = ((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(self->transition_))->dest_;
       idx++;
     }
   }
@@ -415,35 +422,89 @@ OrgApacheLuceneUtilBytesRef *OrgApacheLuceneUtilAutomatonCompiledAutomaton_addTa
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonCompiledAutomaton)
 
-J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum)
+J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE)
 
-OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum *OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum_values_[4];
+OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE *OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_values_[4];
 
-@implementation OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum
+@implementation OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
++ (OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE *)NONE {
+  return JreEnum(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE, NONE);
 }
 
-IOSObjectArray *OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum_values() {
-  OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum_initialize();
-  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum_values_ count:4 type:OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum_class_()];
++ (OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE *)ALL {
+  return JreEnum(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE, ALL);
+}
+
++ (OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE *)SINGLE {
+  return JreEnum(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE, SINGLE);
+}
+
++ (OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE *)NORMAL {
+  return JreEnum(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE, NORMAL);
 }
 
 + (IOSObjectArray *)values {
-  return OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum_values();
+  return OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_values();
 }
 
-+ (OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum *)valueOfWithNSString:(NSString *)name {
-  return OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum_valueOfWithNSString_(name);
++ (OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE *)valueOfWithNSString:(NSString *)name {
+  return OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_valueOfWithNSString_(name);
 }
 
-OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum *OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum_valueOfWithNSString_(NSString *name) {
-  OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum_initialize();
+- (OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_Enum)toNSEnum {
+  return (OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_Enum)[self ordinal];
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+  return self;
+}
+
++ (void)initialize {
+  if (self == [OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE class]) {
+    size_t objSize = class_getInstanceSize(self);
+    size_t allocSize = 4 * objSize;
+    uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
+    id e;
+    (JreEnum(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE, NONE) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_initWithNSString_withInt_(e, @"NONE", 0);
+    (JreEnum(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE, ALL) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_initWithNSString_withInt_(e, @"ALL", 1);
+    (JreEnum(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE, SINGLE) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_initWithNSString_withInt_(e, @"SINGLE", 2);
+    (JreEnum(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE, NORMAL) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_initWithNSString_withInt_(e, @"NORMAL", 3);
+    J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE)
+  }
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static const J2ObjcFieldInfo fields[] = {
+    { "NONE", "NONE", 0x4019, "Lorg.apache.lucene.util.automaton.CompiledAutomaton$AUTOMATON_TYPE;", &JreEnum(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE, NONE), NULL, .constantValue.asLong = 0 },
+    { "ALL", "ALL", 0x4019, "Lorg.apache.lucene.util.automaton.CompiledAutomaton$AUTOMATON_TYPE;", &JreEnum(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE, ALL), NULL, .constantValue.asLong = 0 },
+    { "SINGLE", "SINGLE", 0x4019, "Lorg.apache.lucene.util.automaton.CompiledAutomaton$AUTOMATON_TYPE;", &JreEnum(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE, SINGLE), NULL, .constantValue.asLong = 0 },
+    { "NORMAL", "NORMAL", 0x4019, "Lorg.apache.lucene.util.automaton.CompiledAutomaton$AUTOMATON_TYPE;", &JreEnum(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE, NORMAL), NULL, .constantValue.asLong = 0 },
+  };
+  static const char *superclass_type_args[] = {"Lorg.apache.lucene.util.automaton.CompiledAutomaton$AUTOMATON_TYPE;"};
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE = { 2, "AUTOMATON_TYPE", "org.apache.lucene.util.automaton", "CompiledAutomaton", 0x4019, 0, NULL, 4, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/util/automaton/CompiledAutomaton$AUTOMATON_TYPE;>;" };
+  return &_OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE;
+}
+
+@end
+
+void OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_initWithNSString_withInt_(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE *self, NSString *__name, jint __ordinal) {
+  JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
+}
+
+IOSObjectArray *OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_values() {
+  OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_initialize();
+  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_values_ count:4 type:OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_class_()];
+}
+
+OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE *OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_valueOfWithNSString_(NSString *name) {
+  OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_initialize();
   for (int i = 0; i < 4; i++) {
-    OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum *e = OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum_values_[i];
+    OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE *e = OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_values_[i];
     if ([name isEqual:[e name]]) {
       return e;
     }
@@ -452,42 +513,12 @@ OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum *OrgApacheLucen
   return nil;
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return [self retain];
-}
-
-+ (void)initialize {
-  if (self == [OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum class]) {
-    OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum_NONE = new_OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum_initWithNSString_withInt_(@"NONE", 0);
-    OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum_ALL = new_OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum_initWithNSString_withInt_(@"ALL", 1);
-    OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum_SINGLE = new_OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum_initWithNSString_withInt_(@"SINGLE", 2);
-    OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum_NORMAL = new_OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum_initWithNSString_withInt_(@"NORMAL", 3);
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum)
+OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE *OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_fromOrdinal(NSUInteger ordinal) {
+  OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_initialize();
+  if (ordinal >= 4) {
+    return nil;
   }
+  return OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE_values_[ordinal];
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcFieldInfo fields[] = {
-    { "NONE", "NONE", 0x4019, "Lorg.apache.lucene.util.automaton.CompiledAutomaton$AUTOMATON_TYPE;", &OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum_NONE, NULL, .constantValue.asLong = 0 },
-    { "ALL", "ALL", 0x4019, "Lorg.apache.lucene.util.automaton.CompiledAutomaton$AUTOMATON_TYPE;", &OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum_ALL, NULL, .constantValue.asLong = 0 },
-    { "SINGLE", "SINGLE", 0x4019, "Lorg.apache.lucene.util.automaton.CompiledAutomaton$AUTOMATON_TYPE;", &OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum_SINGLE, NULL, .constantValue.asLong = 0 },
-    { "NORMAL", "NORMAL", 0x4019, "Lorg.apache.lucene.util.automaton.CompiledAutomaton$AUTOMATON_TYPE;", &OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum_NORMAL, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.util.automaton.CompiledAutomaton$AUTOMATON_TYPE;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum = { 2, "AUTOMATON_TYPE", "org.apache.lucene.util.automaton", "CompiledAutomaton", 0x4019, 0, NULL, 4, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/util/automaton/CompiledAutomaton$AUTOMATON_TYPE;>;" };
-  return &_OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum;
-}
-
-@end
-
-void OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum_initWithNSString_withInt_(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum *self, NSString *__name, jint __ordinal) {
-  JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
-}
-
-OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum *new_OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum *self = [OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum alloc];
-  OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum)
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE)

@@ -5,27 +5,43 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisPayloadsPayloadHelper_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisPayloadsPayloadHelper_RESTRICT
-#define OrgApacheLuceneAnalysisPayloadsPayloadHelper_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsPayloadHelper")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisPayloadsPayloadHelper
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsPayloadHelper 0
 #else
-#define OrgApacheLuceneAnalysisPayloadsPayloadHelper_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsPayloadHelper 1
 #endif
-#undef OrgApacheLuceneAnalysisPayloadsPayloadHelper_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisPayloadsPayloadHelper
 
-#if !defined (_OrgApacheLuceneAnalysisPayloadsPayloadHelper_) && (OrgApacheLuceneAnalysisPayloadsPayloadHelper_INCLUDE_ALL || OrgApacheLuceneAnalysisPayloadsPayloadHelper_INCLUDE)
-#define _OrgApacheLuceneAnalysisPayloadsPayloadHelper_
+#if !defined (OrgApacheLuceneAnalysisPayloadsPayloadHelper_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsPayloadHelper || defined(INCLUDE_OrgApacheLuceneAnalysisPayloadsPayloadHelper))
+#define OrgApacheLuceneAnalysisPayloadsPayloadHelper_
 
 @class IOSByteArray;
 
+/*!
+ @brief Utility methods for encoding payloads.
+ */
 @interface OrgApacheLuceneAnalysisPayloadsPayloadHelper : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ - seealso: #decodeFloat(byte[],int)
+ - seealso: #encodeFloat(float)
+ @return the decoded float
+ */
 + (jfloat)decodeFloatWithByteArray:(IOSByteArray *)bytes;
 
+/*!
+ @brief Decode the payload that was encoded using <code>encodeFloat(float)</code>.
+ NOTE: the length of the array must be at least offset + 4 long.
+ @param bytes The bytes to decode
+ @param offset The offset into the array.
+ @return The float that was encoded
+ - seealso: #encodeFloat(float)
+ */
 + (jfloat)decodeFloatWithByteArray:(IOSByteArray *)bytes
                            withInt:(jint)offset;
 
@@ -66,8 +82,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPayloadsPayloadHelper_init(OrgApac
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsPayloadHelper *new_OrgApacheLuceneAnalysisPayloadsPayloadHelper_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsPayloadHelper *create_OrgApacheLuceneAnalysisPayloadsPayloadHelper_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPayloadsPayloadHelper)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisPayloadsPayloadHelper_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsPayloadHelper")

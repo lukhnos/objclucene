@@ -5,31 +5,37 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl_RESTRICT
-#define OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl 0
 #else
-#define OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl 1
 #endif
-#undef OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl
 
-#if !defined (_OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl_) && (OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl_INCLUDE_ALL || OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl_INCLUDE)
-#define _OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl_
+#if !defined (OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl || defined(INCLUDE_OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl))
+#define OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl_
 
-#define OrgApacheLuceneUtilAttributeImpl_RESTRICT 1
-#define OrgApacheLuceneUtilAttributeImpl_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAttributeImpl 1
+#define INCLUDE_OrgApacheLuceneUtilAttributeImpl 1
 #include "org/apache/lucene/util/AttributeImpl.h"
 
-#define OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenattributesOffsetAttribute 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenattributesOffsetAttribute 1
 #include "org/apache/lucene/analysis/tokenattributes/OffsetAttribute.h"
 
 @protocol OrgApacheLuceneUtilAttributeReflector;
 
+/*!
+ @brief Default implementation of <code>OffsetAttribute</code>.
+ */
 @interface OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl : OrgApacheLuceneUtilAttributeImpl < OrgApacheLuceneAnalysisTokenattributesOffsetAttribute, NSCopying >
 
 #pragma mark Public
 
+/*!
+ @brief Initialize this attribute with startOffset and endOffset of 0.
+ */
 - (instancetype)init;
 
 - (void)clear;
@@ -57,8 +63,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl")

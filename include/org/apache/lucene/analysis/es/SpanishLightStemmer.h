@@ -5,19 +5,26 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisEsSpanishLightStemmer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisEsSpanishLightStemmer_RESTRICT
-#define OrgApacheLuceneAnalysisEsSpanishLightStemmer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisEsSpanishLightStemmer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisEsSpanishLightStemmer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisEsSpanishLightStemmer 0
 #else
-#define OrgApacheLuceneAnalysisEsSpanishLightStemmer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisEsSpanishLightStemmer 1
 #endif
-#undef OrgApacheLuceneAnalysisEsSpanishLightStemmer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisEsSpanishLightStemmer
 
-#if !defined (_OrgApacheLuceneAnalysisEsSpanishLightStemmer_) && (OrgApacheLuceneAnalysisEsSpanishLightStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisEsSpanishLightStemmer_INCLUDE)
-#define _OrgApacheLuceneAnalysisEsSpanishLightStemmer_
+#if !defined (OrgApacheLuceneAnalysisEsSpanishLightStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisEsSpanishLightStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisEsSpanishLightStemmer))
+#define OrgApacheLuceneAnalysisEsSpanishLightStemmer_
 
 @class IOSCharArray;
 
+/*!
+ @brief Light Stemmer for Spanish
+ <p>
+ This stemmer implements the algorithm described in:
+ <i>Report on CLEF-2001 Experiments</i>
+ Jacques Savoy
+ */
 @interface OrgApacheLuceneAnalysisEsSpanishLightStemmer : NSObject
 
 #pragma mark Public
@@ -35,8 +42,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisEsSpanishLightStemmer_init(OrgApac
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisEsSpanishLightStemmer *new_OrgApacheLuceneAnalysisEsSpanishLightStemmer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisEsSpanishLightStemmer *create_OrgApacheLuceneAnalysisEsSpanishLightStemmer_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisEsSpanishLightStemmer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisEsSpanishLightStemmer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisEsSpanishLightStemmer")

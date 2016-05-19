@@ -5,24 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder_RESTRICT
-#define OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder 0
 #else
-#define OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder 1
 #endif
-#undef OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder
 
-#if !defined (_OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder_) && (OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder_INCLUDE_ALL || OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder_INCLUDE)
-#define _OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder_
+#if !defined (OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder))
+#define OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder_
 
-#define OrgApacheLuceneQueryparserXmlBuildersSpanBuilderBase_RESTRICT 1
-#define OrgApacheLuceneQueryparserXmlBuildersSpanBuilderBase_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserXmlBuildersSpanBuilderBase 1
+#define INCLUDE_OrgApacheLuceneQueryparserXmlBuildersSpanBuilderBase 1
 #include "org/apache/lucene/queryparser/xml/builders/SpanBuilderBase.h"
 
 @class OrgApacheLuceneSearchSpansSpanQuery;
 @protocol OrgW3cDomElement;
 
+/*!
+ @brief Builder for <code>SpanTermQuery</code>
+ */
 @interface OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder : OrgApacheLuceneQueryparserXmlBuildersSpanBuilderBase
 
 #pragma mark Public
@@ -39,8 +42,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder_init
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder *new_OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder *create_OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder")

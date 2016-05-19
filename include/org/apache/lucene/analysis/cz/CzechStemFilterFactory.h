@@ -5,28 +5,43 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCzCzechStemFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCzCzechStemFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisCzCzechStemFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCzCzechStemFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCzCzechStemFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCzCzechStemFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisCzCzechStemFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCzCzechStemFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisCzCzechStemFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCzCzechStemFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisCzCzechStemFilterFactory_) && (OrgApacheLuceneAnalysisCzCzechStemFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisCzCzechStemFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisCzCzechStemFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisCzCzechStemFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCzCzechStemFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisCzCzechStemFilterFactory))
+#define OrgApacheLuceneAnalysisCzCzechStemFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>CzechStemFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_czstem" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+ &lt;filter class="solr.LowerCaseFilterFactory"/&gt;
+ &lt;filter class="solr.CzechStemFilterFactory"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisCzCzechStemFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new CzechStemFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -39,8 +54,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCzCzechStemFilterFactory_initWithJ
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCzCzechStemFilterFactory *new_OrgApacheLuceneAnalysisCzCzechStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCzCzechStemFilterFactory *create_OrgApacheLuceneAnalysisCzCzechStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCzCzechStemFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCzCzechStemFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCzCzechStemFilterFactory")

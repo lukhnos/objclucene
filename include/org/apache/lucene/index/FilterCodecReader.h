@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexFilterCodecReader_INCLUDE_ALL")
-#if OrgApacheLuceneIndexFilterCodecReader_RESTRICT
-#define OrgApacheLuceneIndexFilterCodecReader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexFilterCodecReader")
+#ifdef RESTRICT_OrgApacheLuceneIndexFilterCodecReader
+#define INCLUDE_ALL_OrgApacheLuceneIndexFilterCodecReader 0
 #else
-#define OrgApacheLuceneIndexFilterCodecReader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexFilterCodecReader 1
 #endif
-#undef OrgApacheLuceneIndexFilterCodecReader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexFilterCodecReader
 
-#if !defined (_OrgApacheLuceneIndexFilterCodecReader_) && (OrgApacheLuceneIndexFilterCodecReader_INCLUDE_ALL || OrgApacheLuceneIndexFilterCodecReader_INCLUDE)
-#define _OrgApacheLuceneIndexFilterCodecReader_
+#if !defined (OrgApacheLuceneIndexFilterCodecReader_) && (INCLUDE_ALL_OrgApacheLuceneIndexFilterCodecReader || defined(INCLUDE_OrgApacheLuceneIndexFilterCodecReader))
+#define OrgApacheLuceneIndexFilterCodecReader_
 
-#define OrgApacheLuceneIndexCodecReader_RESTRICT 1
-#define OrgApacheLuceneIndexCodecReader_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexCodecReader 1
+#define INCLUDE_OrgApacheLuceneIndexCodecReader 1
 #include "org/apache/lucene/index/CodecReader.h"
 
 @class OrgApacheLuceneCodecsDocValuesProducer;
@@ -29,13 +29,25 @@
 @protocol OrgApacheLuceneIndexLeafReader_CoreClosedListener;
 @protocol OrgApacheLuceneUtilBits;
 
+/*!
+ @brief A <code>FilterCodecReader</code> contains another CodecReader, which it
+ uses as its basic source of data, possibly transforming the data along the
+ way or providing additional functionality.
+ */
 @interface OrgApacheLuceneIndexFilterCodecReader : OrgApacheLuceneIndexCodecReader {
  @public
+  /*!
+   @brief The underlying CodecReader instance.
+   */
   OrgApacheLuceneIndexCodecReader *in_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new FilterCodecReader.
+ @param inArg the underlying CodecReader instance.
+ */
 - (instancetype)initWithOrgApacheLuceneIndexCodecReader:(OrgApacheLuceneIndexCodecReader *)inArg;
 
 - (void)addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener;
@@ -70,8 +82,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexFilterCodecReader_initWithOrgApacheLu
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexFilterCodecReader *new_OrgApacheLuceneIndexFilterCodecReader_initWithOrgApacheLuceneIndexCodecReader_(OrgApacheLuceneIndexCodecReader *inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexFilterCodecReader *create_OrgApacheLuceneIndexFilterCodecReader_initWithOrgApacheLuceneIndexCodecReader_(OrgApacheLuceneIndexCodecReader *inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFilterCodecReader)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexFilterCodecReader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexFilterCodecReader")

@@ -5,25 +5,35 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilInPlaceMergeSorter_INCLUDE_ALL")
-#if OrgApacheLuceneUtilInPlaceMergeSorter_RESTRICT
-#define OrgApacheLuceneUtilInPlaceMergeSorter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilInPlaceMergeSorter")
+#ifdef RESTRICT_OrgApacheLuceneUtilInPlaceMergeSorter
+#define INCLUDE_ALL_OrgApacheLuceneUtilInPlaceMergeSorter 0
 #else
-#define OrgApacheLuceneUtilInPlaceMergeSorter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilInPlaceMergeSorter 1
 #endif
-#undef OrgApacheLuceneUtilInPlaceMergeSorter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilInPlaceMergeSorter
 
-#if !defined (_OrgApacheLuceneUtilInPlaceMergeSorter_) && (OrgApacheLuceneUtilInPlaceMergeSorter_INCLUDE_ALL || OrgApacheLuceneUtilInPlaceMergeSorter_INCLUDE)
-#define _OrgApacheLuceneUtilInPlaceMergeSorter_
+#if !defined (OrgApacheLuceneUtilInPlaceMergeSorter_) && (INCLUDE_ALL_OrgApacheLuceneUtilInPlaceMergeSorter || defined(INCLUDE_OrgApacheLuceneUtilInPlaceMergeSorter))
+#define OrgApacheLuceneUtilInPlaceMergeSorter_
 
-#define OrgApacheLuceneUtilSorter_RESTRICT 1
-#define OrgApacheLuceneUtilSorter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilSorter 1
+#define INCLUDE_OrgApacheLuceneUtilSorter 1
 #include "org/apache/lucene/util/Sorter.h"
 
+/*!
+ @brief <code>Sorter</code> implementation based on the merge-sort algorithm that merges
+ in place (no extra memory will be allocated).
+ Small arrays are sorted with
+ insertion sort.
+  
+ */
 @interface OrgApacheLuceneUtilInPlaceMergeSorter : OrgApacheLuceneUtilSorter
 
 #pragma mark Public
 
+/*!
+ @brief Create a new <code>InPlaceMergeSorter</code>
+ */
 - (instancetype)init;
 
 - (void)sortWithInt:(jint)from
@@ -44,4 +54,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilInPlaceMergeSorter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilInPlaceMergeSorter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilInPlaceMergeSorter")

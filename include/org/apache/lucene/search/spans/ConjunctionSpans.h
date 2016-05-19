@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSpansConjunctionSpans_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSpansConjunctionSpans_RESTRICT
-#define OrgApacheLuceneSearchSpansConjunctionSpans_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansConjunctionSpans")
+#ifdef RESTRICT_OrgApacheLuceneSearchSpansConjunctionSpans
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansConjunctionSpans 0
 #else
-#define OrgApacheLuceneSearchSpansConjunctionSpans_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansConjunctionSpans 1
 #endif
-#undef OrgApacheLuceneSearchSpansConjunctionSpans_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSpansConjunctionSpans
 
-#if !defined (_OrgApacheLuceneSearchSpansConjunctionSpans_) && (OrgApacheLuceneSearchSpansConjunctionSpans_INCLUDE_ALL || OrgApacheLuceneSearchSpansConjunctionSpans_INCLUDE)
-#define _OrgApacheLuceneSearchSpansConjunctionSpans_
+#if !defined (OrgApacheLuceneSearchSpansConjunctionSpans_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansConjunctionSpans || defined(INCLUDE_OrgApacheLuceneSearchSpansConjunctionSpans))
+#define OrgApacheLuceneSearchSpansConjunctionSpans_
 
-#define OrgApacheLuceneSearchSpansSpans_RESTRICT 1
-#define OrgApacheLuceneSearchSpansSpans_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSpansSpans 1
+#define INCLUDE_OrgApacheLuceneSearchSpansSpans 1
 #include "org/apache/lucene/search/spans/Spans.h"
 
 @class IOSObjectArray;
@@ -25,6 +25,9 @@
 @class OrgApacheLuceneSearchTwoPhaseIterator;
 @protocol JavaUtilList;
 
+/*!
+ @brief Common super class for multiple sub spans required in a document.
+ */
 @interface OrgApacheLuceneSearchSpansConjunctionSpans : OrgApacheLuceneSearchSpansSpans {
  @public
   IOSObjectArray *subSpans_;
@@ -37,6 +40,9 @@
 
 - (jint)advanceWithInt:(jint)target;
 
+/*!
+ @brief Return a <code>TwoPhaseIterator</code> view of this ConjunctionSpans.
+ */
 - (OrgApacheLuceneSearchTwoPhaseIterator *)asTwoPhaseIterator;
 
 - (jlong)cost;
@@ -68,4 +74,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansConjunctionSpans)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSpansConjunctionSpans_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansConjunctionSpans")

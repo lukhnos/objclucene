@@ -37,6 +37,11 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentContextSuggestField, con
 
 __attribute__((unused)) static void OrgApacheLuceneSearchSuggestDocumentContextSuggestField_validateWithJavaLangCharSequence_(OrgApacheLuceneSearchSuggestDocumentContextSuggestField *self, id<JavaLangCharSequence> value);
 
+/*!
+ @brief The <code>PrefixTokenFilter</code> wraps a <code>TokenStream</code> and adds a set
+ prefixes ahead.
+ The position attribute will not be incremented for the prefixes.
+ */
 @interface OrgApacheLuceneSearchSuggestDocumentContextSuggestField_PrefixTokenFilter : OrgApacheLuceneAnalysisTokenFilter {
  @public
   jchar separator_;
@@ -46,6 +51,12 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSuggestDocumentContextS
   id<JavaUtilIterator> currentPrefix_;
 }
 
+/*!
+ @brief Create a new <code>PrefixTokenFilter</code>
+ @param input <code>TokenStream</code> to wrap
+ @param separator Character used separate prefixes from other tokens
+ @param prefixes <code>Iterable</code> of <code>CharSequence</code> which keeps all prefixes
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
                                                   withChar:(jchar)separator
                                       withJavaLangIterable:(id<JavaLangIterable>)prefixes;
@@ -67,9 +78,19 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSuggestDocumentContextS
 
 __attribute__((unused)) static OrgApacheLuceneSearchSuggestDocumentContextSuggestField_PrefixTokenFilter *new_OrgApacheLuceneSearchSuggestDocumentContextSuggestField_PrefixTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withChar_withJavaLangIterable_(OrgApacheLuceneAnalysisTokenStream *input, jchar separator, id<JavaLangIterable> prefixes) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchSuggestDocumentContextSuggestField_PrefixTokenFilter *create_OrgApacheLuceneSearchSuggestDocumentContextSuggestField_PrefixTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withChar_withJavaLangIterable_(OrgApacheLuceneAnalysisTokenStream *input, jchar separator, id<JavaLangIterable> prefixes);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentContextSuggestField_PrefixTokenFilter)
 
 @implementation OrgApacheLuceneSearchSuggestDocumentContextSuggestField
+
++ (jint)CONTEXT_SEPARATOR {
+  return OrgApacheLuceneSearchSuggestDocumentContextSuggestField_CONTEXT_SEPARATOR;
+}
+
++ (jbyte)TYPE {
+  return OrgApacheLuceneSearchSuggestDocumentContextSuggestField_TYPE;
+}
 
 - (instancetype)initWithNSString:(NSString *)name
                     withNSString:(NSString *)value
@@ -87,14 +108,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentContextSuggestFie
   for (id<JavaLangCharSequence> __strong context in nil_chk([self contexts])) {
     OrgApacheLuceneSearchSuggestDocumentContextSuggestField_validateWithJavaLangCharSequence_(self, context);
   }
-  OrgApacheLuceneSearchSuggestDocumentContextSuggestField_PrefixTokenFilter *prefixTokenFilter = [new_OrgApacheLuceneSearchSuggestDocumentContextSuggestField_PrefixTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withChar_withJavaLangIterable_(stream, (jchar) OrgApacheLuceneSearchSuggestDocumentContextSuggestField_CONTEXT_SEPARATOR, [self contexts]) autorelease];
+  OrgApacheLuceneSearchSuggestDocumentContextSuggestField_PrefixTokenFilter *prefixTokenFilter = create_OrgApacheLuceneSearchSuggestDocumentContextSuggestField_PrefixTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withChar_withJavaLangIterable_(stream, (jchar) OrgApacheLuceneSearchSuggestDocumentContextSuggestField_CONTEXT_SEPARATOR, [self contexts]);
   OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *completionTokenStream;
   if ([stream isKindOfClass:[OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream class]]) {
-    completionTokenStream = (OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *) check_class_cast(stream, [OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream class]);
-    completionTokenStream = [new_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withBoolean_withInt_(prefixTokenFilter, ((OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *) nil_chk(completionTokenStream))->preserveSep_, completionTokenStream->preservePositionIncrements_, completionTokenStream->maxGraphExpansions_) autorelease];
+    completionTokenStream = (OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *) cast_chk(stream, [OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream class]);
+    completionTokenStream = create_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withBoolean_withInt_(prefixTokenFilter, ((OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *) nil_chk(completionTokenStream))->preserveSep_, completionTokenStream->preservePositionIncrements_, completionTokenStream->maxGraphExpansions_);
   }
   else {
-    completionTokenStream = [new_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_initWithOrgApacheLuceneAnalysisTokenStream_(prefixTokenFilter) autorelease];
+    completionTokenStream = create_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_initWithOrgApacheLuceneAnalysisTokenStream_(prefixTokenFilter);
   }
   return completionTokenStream;
 }
@@ -115,7 +136,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentContextSuggestFie
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithNSString:withNSString:withInt:withJavaLangCharSequenceArray:", "ContextSuggestField", NULL, 0x81, NULL, NULL },
-    { "contexts", NULL, "Ljava.lang.Iterable;", 0x4, NULL, NULL },
+    { "contexts", NULL, "Ljava.lang.Iterable;", 0x4, NULL, "()Ljava/lang/Iterable<Ljava/lang/CharSequence;>;" },
     { "wrapTokenStreamWithOrgApacheLuceneAnalysisTokenStream:", "wrapTokenStream", "Lorg.apache.lucene.search.suggest.document.CompletionTokenStream;", 0x4, NULL, NULL },
     { "type", NULL, "B", 0x4, NULL, NULL },
     { "validateWithJavaLangCharSequence:", "validate", "V", 0x2, NULL, NULL },
@@ -135,22 +156,24 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentContextSuggestFie
 void OrgApacheLuceneSearchSuggestDocumentContextSuggestField_initWithNSString_withNSString_withInt_withJavaLangCharSequenceArray_(OrgApacheLuceneSearchSuggestDocumentContextSuggestField *self, NSString *name, NSString *value, jint weight, IOSObjectArray *contexts) {
   OrgApacheLuceneSearchSuggestDocumentSuggestField_initWithNSString_withNSString_withInt_(self, name, value, weight);
   OrgApacheLuceneSearchSuggestDocumentContextSuggestField_validateWithJavaLangCharSequence_(self, value);
-  JreStrongAssignAndConsume(&self->contexts_, new_JavaUtilHashSet_initWithInt_((contexts != nil) ? contexts->size_ : 0));
+  JreStrongAssignAndConsume(&self->contexts_, new_JavaUtilHashSet_initWithInt_((contexts != nil) ? ((IOSObjectArray *) nil_chk(contexts))->size_ : 0));
   if (contexts != nil) {
     JavaUtilCollections_addAllWithJavaUtilCollection_withNSObjectArray_(self->contexts_, contexts);
   }
 }
 
 OrgApacheLuceneSearchSuggestDocumentContextSuggestField *new_OrgApacheLuceneSearchSuggestDocumentContextSuggestField_initWithNSString_withNSString_withInt_withJavaLangCharSequenceArray_(NSString *name, NSString *value, jint weight, IOSObjectArray *contexts) {
-  OrgApacheLuceneSearchSuggestDocumentContextSuggestField *self = [OrgApacheLuceneSearchSuggestDocumentContextSuggestField alloc];
-  OrgApacheLuceneSearchSuggestDocumentContextSuggestField_initWithNSString_withNSString_withInt_withJavaLangCharSequenceArray_(self, name, value, weight, contexts);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentContextSuggestField, initWithNSString_withNSString_withInt_withJavaLangCharSequenceArray_, name, value, weight, contexts)
+}
+
+OrgApacheLuceneSearchSuggestDocumentContextSuggestField *create_OrgApacheLuceneSearchSuggestDocumentContextSuggestField_initWithNSString_withNSString_withInt_withJavaLangCharSequenceArray_(NSString *name, NSString *value, jint weight, IOSObjectArray *contexts) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentContextSuggestField, initWithNSString_withNSString_withInt_withJavaLangCharSequenceArray_, name, value, weight, contexts)
 }
 
 void OrgApacheLuceneSearchSuggestDocumentContextSuggestField_validateWithJavaLangCharSequence_(OrgApacheLuceneSearchSuggestDocumentContextSuggestField *self, id<JavaLangCharSequence> value) {
   for (jint i = 0; i < [((id<JavaLangCharSequence>) nil_chk(value)) length]; i++) {
     if (OrgApacheLuceneSearchSuggestDocumentContextSuggestField_CONTEXT_SEPARATOR == [value charAtWithInt:i]) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@$$$I$", @"Illegal value [", value, @"] UTF-16 codepoint [0x", JavaLangInteger_toHexStringWithInt_((jint) [value charAtWithInt:i]), @"] at position ", i, @" is a reserved character")) autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@$$$I$", @"Illegal value [", value, @"] UTF-16 codepoint [0x", JavaLangInteger_toHexStringWithInt_((jint) [value charAtWithInt:i]), @"] at position ", i, @" is a reserved character"));
     }
   }
 }
@@ -182,7 +205,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentContextSugg
   }
   [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAttr_)) setEmpty];
   if ([((id<JavaUtilIterator>) nil_chk(currentPrefix_)) hasNext]) {
-    [termAttr_ appendWithJavaLangCharSequence:[currentPrefix_ next]];
+    [termAttr_ appendWithJavaLangCharSequence:[((id<JavaUtilIterator>) nil_chk(currentPrefix_)) next]];
   }
   [termAttr_ appendWithChar:separator_];
   return true;
@@ -203,7 +226,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentContextSugg
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withChar:withJavaLangIterable:", "PrefixTokenFilter", NULL, 0x1, NULL, NULL },
+    { "initWithOrgApacheLuceneAnalysisTokenStream:withChar:withJavaLangIterable:", "PrefixTokenFilter", NULL, 0x1, NULL, "(Lorg/apache/lucene/analysis/TokenStream;CLjava/lang/Iterable<Ljava/lang/CharSequence;>;)V" },
     { "incrementToken", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
     { "reset", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
   };
@@ -230,9 +253,11 @@ void OrgApacheLuceneSearchSuggestDocumentContextSuggestField_PrefixTokenFilter_i
 }
 
 OrgApacheLuceneSearchSuggestDocumentContextSuggestField_PrefixTokenFilter *new_OrgApacheLuceneSearchSuggestDocumentContextSuggestField_PrefixTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withChar_withJavaLangIterable_(OrgApacheLuceneAnalysisTokenStream *input, jchar separator, id<JavaLangIterable> prefixes) {
-  OrgApacheLuceneSearchSuggestDocumentContextSuggestField_PrefixTokenFilter *self = [OrgApacheLuceneSearchSuggestDocumentContextSuggestField_PrefixTokenFilter alloc];
-  OrgApacheLuceneSearchSuggestDocumentContextSuggestField_PrefixTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withChar_withJavaLangIterable_(self, input, separator, prefixes);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentContextSuggestField_PrefixTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_withChar_withJavaLangIterable_, input, separator, prefixes)
+}
+
+OrgApacheLuceneSearchSuggestDocumentContextSuggestField_PrefixTokenFilter *create_OrgApacheLuceneSearchSuggestDocumentContextSuggestField_PrefixTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withChar_withJavaLangIterable_(OrgApacheLuceneAnalysisTokenStream *input, jchar separator, id<JavaLangIterable> prefixes) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentContextSuggestField_PrefixTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_withChar_withJavaLangIterable_, input, separator, prefixes)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentContextSuggestField_PrefixTokenFilter)

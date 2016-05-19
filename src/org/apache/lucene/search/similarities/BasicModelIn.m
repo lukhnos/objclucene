@@ -55,9 +55,11 @@ void OrgApacheLuceneSearchSimilaritiesBasicModelIn_init(OrgApacheLuceneSearchSim
 }
 
 OrgApacheLuceneSearchSimilaritiesBasicModelIn *new_OrgApacheLuceneSearchSimilaritiesBasicModelIn_init() {
-  OrgApacheLuceneSearchSimilaritiesBasicModelIn *self = [OrgApacheLuceneSearchSimilaritiesBasicModelIn alloc];
-  OrgApacheLuceneSearchSimilaritiesBasicModelIn_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSimilaritiesBasicModelIn, init)
+}
+
+OrgApacheLuceneSearchSimilaritiesBasicModelIn *create_OrgApacheLuceneSearchSimilaritiesBasicModelIn_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSimilaritiesBasicModelIn, init)
 }
 
 jfloat OrgApacheLuceneSearchSimilaritiesBasicModelIn_scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats_withFloat_(OrgApacheLuceneSearchSimilaritiesBasicModelIn *self, OrgApacheLuceneSearchSimilaritiesBasicStats *stats, jfloat tfn) {

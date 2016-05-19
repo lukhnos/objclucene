@@ -64,7 +64,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "getStopwordSet", NULL, "Lorg.apache.lucene.analysis.util.CharArraySet;", 0x1, NULL, NULL },
     { "initWithOrgApacheLuceneAnalysisUtilCharArraySet:", "StopwordAnalyzerBase", NULL, 0x4, NULL, NULL },
     { "init", "StopwordAnalyzerBase", NULL, 0x4, NULL, NULL },
-    { "loadStopwordSetWithBoolean:withIOSClass:withNSString:withNSString:", "loadStopwordSet", "Lorg.apache.lucene.analysis.util.CharArraySet;", 0xc, "Ljava.io.IOException;", NULL },
+    { "loadStopwordSetWithBoolean:withIOSClass:withNSString:withNSString:", "loadStopwordSet", "Lorg.apache.lucene.analysis.util.CharArraySet;", 0xc, "Ljava.io.IOException;", "(ZLjava/lang/Class<+Lorg/apache/lucene/analysis/Analyzer;>;Ljava/lang/String;Ljava/lang/String;)Lorg/apache/lucene/analysis/util/CharArraySet;" },
     { "loadStopwordSetWithOrgLukhnosPortmobileFilePath:", "loadStopwordSet", "Lorg.apache.lucene.analysis.util.CharArraySet;", 0xc, "Ljava.io.IOException;", NULL },
     { "loadStopwordSetWithJavaIoReader:", "loadStopwordSet", "Lorg.apache.lucene.analysis.util.CharArraySet;", 0xc, "Ljava.io.IOException;", NULL },
   };
@@ -79,7 +79,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 void OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase *self, OrgApacheLuceneAnalysisUtilCharArraySet *stopwords) {
   OrgApacheLuceneAnalysisAnalyzer_init(self);
-  JreStrongAssign(&self->stopwords_, stopwords == nil ? JreLoadStatic(OrgApacheLuceneAnalysisUtilCharArraySet, EMPTY_SET_) : OrgApacheLuceneAnalysisUtilCharArraySet_unmodifiableSetWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet_copy__WithJavaUtilSet_(stopwords)));
+  JreStrongAssign(&self->stopwords_, stopwords == nil ? JreLoadStatic(OrgApacheLuceneAnalysisUtilCharArraySet, EMPTY_SET) : OrgApacheLuceneAnalysisUtilCharArraySet_unmodifiableSetWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet_copy__WithJavaUtilSet_(stopwords)));
 }
 
 void OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_init(OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase *self) {
@@ -90,8 +90,8 @@ OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisUtilStopwordAnal
   OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_initialize();
   JavaIoReader *reader = nil;
   @try {
-    reader = OrgApacheLuceneUtilIOUtils_getDecodingReaderWithJavaIoInputStream_withJavaNioCharsetCharset_([((IOSClass *) nil_chk(aClass)) getResourceAsStream:resource], JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8_));
-    return OrgApacheLuceneAnalysisUtilWordlistLoader_getWordSetWithJavaIoReader_withNSString_withOrgApacheLuceneAnalysisUtilCharArraySet_(reader, comment, [new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithInt_withBoolean_(16, ignoreCase) autorelease]);
+    reader = OrgApacheLuceneUtilIOUtils_getDecodingReaderWithJavaIoInputStream_withJavaNioCharsetCharset_([((IOSClass *) nil_chk(aClass)) getResourceAsStream:resource], JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8));
+    return OrgApacheLuceneAnalysisUtilWordlistLoader_getWordSetWithJavaIoReader_withNSString_withOrgApacheLuceneAnalysisUtilCharArraySet_(reader, comment, create_OrgApacheLuceneAnalysisUtilCharArraySet_initWithInt_withBoolean_(16, ignoreCase));
   }
   @finally {
     OrgApacheLuceneUtilIOUtils_closeWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ reader } count:1 type:JavaIoCloseable_class_()]);
@@ -102,7 +102,7 @@ OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisUtilStopwordAnal
   OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_initialize();
   JavaIoReader *reader = nil;
   @try {
-    reader = OrgLukhnosPortmobileFileFiles_newBufferedReaderWithOrgLukhnosPortmobileFilePath_withJavaNioCharsetCharset_(stopwords, JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8_));
+    reader = OrgLukhnosPortmobileFileFiles_newBufferedReaderWithOrgLukhnosPortmobileFilePath_withJavaNioCharsetCharset_(stopwords, JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8));
     return OrgApacheLuceneAnalysisUtilWordlistLoader_getWordSetWithJavaIoReader_(reader);
   }
   @finally {

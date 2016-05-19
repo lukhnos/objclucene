@@ -22,6 +22,15 @@
   jboolean aborted_;
 }
 
+/*!
+ @brief Returns a new <code>ThreadState</code> iff any new state is available otherwise
+ <code>null</code>.
+ <p>
+ NOTE: the returned <code>ThreadState</code> is already locked iff non-
+ <code>null</code>.
+ @return a new <code>ThreadState</code> iff any new state is available otherwise
+ <code>null</code>
+ */
 - (OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *)newThreadState OBJC_METHOD_FAMILY_NONE;
 
 @end
@@ -95,7 +104,7 @@ __attribute__((unused)) static void OrgApacheLuceneIndexDocumentsWriterPerThread
       }
     }
   }
-  [((OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *) nil_chk(threadState)) lock];
+  [threadState lock];
   return threadState;
 }
 
@@ -155,7 +164,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "getThreadStateWithInt:", "getThreadState", "Lorg.apache.lucene.index.DocumentsWriterPerThreadPool$ThreadState;", 0x20, NULL, NULL },
     { "getMaxThreadStates", NULL, "I", 0x20, NULL, NULL },
     { "minContendedThreadState", NULL, "Lorg.apache.lucene.index.DocumentsWriterPerThreadPool$ThreadState;", 0x0, NULL, NULL },
-    { "init", NULL, NULL, 0x0, NULL, NULL },
+    { "init", "DocumentsWriterPerThreadPool", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "threadStates_", NULL, 0x12, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/index/DocumentsWriterPerThreadPool$ThreadState;>;", .constantValue.asLong = 0 },
@@ -176,10 +185,10 @@ OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *OrgApacheLuceneInd
         [self wait];
       }
       @catch (JavaLangInterruptedException *ie) {
-        @throw [new_OrgApacheLuceneUtilThreadInterruptedException_initWithJavaLangInterruptedException_(ie) autorelease];
+        @throw create_OrgApacheLuceneUtilThreadInterruptedException_initWithJavaLangInterruptedException_(ie);
       }
     }
-    OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *threadState = [new_OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_(nil) autorelease];
+    OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *threadState = create_OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_(nil);
     [threadState lock];
     [((id<JavaUtilList>) nil_chk(self->threadStates_)) addWithId:threadState];
     return threadState;
@@ -193,9 +202,11 @@ void OrgApacheLuceneIndexDocumentsWriterPerThreadPool_init(OrgApacheLuceneIndexD
 }
 
 OrgApacheLuceneIndexDocumentsWriterPerThreadPool *new_OrgApacheLuceneIndexDocumentsWriterPerThreadPool_init() {
-  OrgApacheLuceneIndexDocumentsWriterPerThreadPool *self = [OrgApacheLuceneIndexDocumentsWriterPerThreadPool alloc];
-  OrgApacheLuceneIndexDocumentsWriterPerThreadPool_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexDocumentsWriterPerThreadPool, init)
+}
+
+OrgApacheLuceneIndexDocumentsWriterPerThreadPool *create_OrgApacheLuceneIndexDocumentsWriterPerThreadPool_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexDocumentsWriterPerThreadPool, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocumentsWriterPerThreadPool)
@@ -263,9 +274,11 @@ void OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState_initWithOrgApa
 }
 
 OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *new_OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_(OrgApacheLuceneIndexDocumentsWriterPerThread *dpwt) {
-  OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *self = [OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState alloc];
-  OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_(self, dpwt);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState, initWithOrgApacheLuceneIndexDocumentsWriterPerThread_, dpwt)
+}
+
+OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *create_OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_(OrgApacheLuceneIndexDocumentsWriterPerThread *dpwt) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState, initWithOrgApacheLuceneIndexDocumentsWriterPerThread_, dpwt)
 }
 
 void OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState_reset(OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *self) {

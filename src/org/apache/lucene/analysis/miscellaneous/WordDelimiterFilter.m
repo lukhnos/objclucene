@@ -57,20 +57,56 @@
 
 - (void)buffer;
 
+/*!
+ @brief Saves the existing attribute states
+ */
 - (void)saveState;
 
+/*!
+ @brief Flushes the given WordDelimiterConcatenation by either writing its concat and then clearing, or just clearing.
+ @param concatenation WordDelimiterConcatenation that will be flushed
+ @return <code>true</code> if the concatenation was written before it was cleared, <code>false</code> otherwise
+ */
 - (jboolean)flushConcatenationWithOrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_WordDelimiterConcatenation:(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_WordDelimiterConcatenation *)concatenation;
 
+/*!
+ @brief Determines whether to concatenate a word or number if the current word is the given type
+ @param wordType Type of the current word used to determine if it should be concatenated
+ @return <code>true</code> if concatenation should occur, <code>false</code> otherwise
+ */
 - (jboolean)shouldConcatenateWithInt:(jint)wordType;
 
+/*!
+ @brief Determines whether a word/number part should be generated for a word of the given type
+ @param wordType Type of the word used to determine if a word/number part should be generated
+ @return <code>true</code> if a word/number part should be generated, <code>false</code> otherwise
+ */
 - (jboolean)shouldGeneratePartsWithInt:(jint)wordType;
 
+/*!
+ @brief Concatenates the saved buffer to the given WordDelimiterConcatenation
+ @param concatenation WordDelimiterConcatenation to concatenate the buffer to
+ */
 - (void)concatenateWithOrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_WordDelimiterConcatenation:(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_WordDelimiterConcatenation *)concatenation;
 
+/*!
+ @brief Generates a word/number part, updating the appropriate attributes
+ @param isSingleWord <code>true</code> if the generation is occurring from a single word, <code>false</code> otherwise
+ */
 - (void)generatePartWithBoolean:(jboolean)isSingleWord;
 
+/*!
+ @brief Get the position increment gap for a subword or concatenation
+ @param inject true if this token wants to be injected
+ @return position increment gap
+ */
 - (jint)positionWithBoolean:(jboolean)inject;
 
+/*!
+ @brief Determines whether the given flag is set
+ @param flag Flag to see if set
+ @return <code>true</code> if flag is set
+ */
 - (jboolean)hasWithInt:(jint)flag;
 
 @end
@@ -111,9 +147,17 @@ __attribute__((unused)) static jboolean OrgApacheLuceneAnalysisMiscellaneousWord
   OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter *this$0_;
 }
 
+- (instancetype)initWithOrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter:(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter *)outer$;
+
 @end
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_OffsetSorter, this$0_, OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter *)
+
+__attribute__((unused)) static void OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_OffsetSorter_initWithOrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_OffsetSorter *self, OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter *outer$);
+
+__attribute__((unused)) static OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_OffsetSorter *new_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_OffsetSorter_initWithOrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter *outer$) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_OffsetSorter *create_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_OffsetSorter_initWithOrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter *outer$);
 
 @interface OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_WordDelimiterConcatenation () {
  @public
@@ -125,6 +169,66 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_Offs
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_WordDelimiterConcatenation, this$0_, OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter *)
 
 @implementation OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter
+
++ (jint)LOWER {
+  return OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_LOWER;
+}
+
++ (jint)UPPER {
+  return OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_UPPER;
+}
+
++ (jint)DIGIT {
+  return OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_DIGIT;
+}
+
++ (jint)SUBWORD_DELIM {
+  return OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_SUBWORD_DELIM;
+}
+
++ (jint)ALPHA {
+  return OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_ALPHA;
+}
+
++ (jint)ALPHANUM {
+  return OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_ALPHANUM;
+}
+
++ (jint)GENERATE_WORD_PARTS {
+  return OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_GENERATE_WORD_PARTS;
+}
+
++ (jint)GENERATE_NUMBER_PARTS {
+  return OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_GENERATE_NUMBER_PARTS;
+}
+
++ (jint)CATENATE_WORDS {
+  return OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_CATENATE_WORDS;
+}
+
++ (jint)CATENATE_NUMBERS {
+  return OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_CATENATE_NUMBERS;
+}
+
++ (jint)CATENATE_ALL {
+  return OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_CATENATE_ALL;
+}
+
++ (jint)PRESERVE_ORIGINAL {
+  return OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_PRESERVE_ORIGINAL;
+}
+
++ (jint)SPLIT_ON_CASE_CHANGE {
+  return OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_SPLIT_ON_CASE_CHANGE;
+}
+
++ (jint)SPLIT_ON_NUMERICS {
+  return OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_SPLIT_ON_NUMERICS;
+}
+
++ (jint)STEM_ENGLISH_POSSESSIVE {
+  return OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_STEM_ENGLISH_POSSESSIVE;
+}
 
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
                                              withByteArray:(IOSByteArray *)charTypeTable
@@ -197,7 +301,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_Word
         [self clearAttributes];
         [self restoreStateWithOrgApacheLuceneUtilAttributeSource_State:IOSObjectArray_Get(nil_chk(buffered_), bufferedPos_++)];
         if (first_ && [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncAttribute_)) getPositionIncrement] == 0) {
-          [posIncAttribute_ setPositionIncrementWithInt:1];
+          [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncAttribute_)) setPositionIncrementWithInt:1];
         }
         first_ = false;
         return true;
@@ -414,19 +518,23 @@ void OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_initWithOrgApacheLu
 }
 
 OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter *new_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_initWithOrgApacheLuceneAnalysisTokenStream_withByteArray_withInt_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisTokenStream *inArg, IOSByteArray *charTypeTable, jint configurationFlags, OrgApacheLuceneAnalysisUtilCharArraySet *protWords) {
-  OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter *self = [OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter alloc];
-  OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_initWithOrgApacheLuceneAnalysisTokenStream_withByteArray_withInt_withOrgApacheLuceneAnalysisUtilCharArraySet_(self, inArg, charTypeTable, configurationFlags, protWords);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter, initWithOrgApacheLuceneAnalysisTokenStream_withByteArray_withInt_withOrgApacheLuceneAnalysisUtilCharArraySet_, inArg, charTypeTable, configurationFlags, protWords)
+}
+
+OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter *create_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_initWithOrgApacheLuceneAnalysisTokenStream_withByteArray_withInt_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisTokenStream *inArg, IOSByteArray *charTypeTable, jint configurationFlags, OrgApacheLuceneAnalysisUtilCharArraySet *protWords) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter, initWithOrgApacheLuceneAnalysisTokenStream_withByteArray_withInt_withOrgApacheLuceneAnalysisUtilCharArraySet_, inArg, charTypeTable, configurationFlags, protWords)
 }
 
 void OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg, jint configurationFlags, OrgApacheLuceneAnalysisUtilCharArraySet *protWords) {
-  OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_initWithOrgApacheLuceneAnalysisTokenStream_withByteArray_withInt_withOrgApacheLuceneAnalysisUtilCharArraySet_(self, inArg, JreLoadStatic(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator, DEFAULT_WORD_DELIM_TABLE_), configurationFlags, protWords);
+  OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_initWithOrgApacheLuceneAnalysisTokenStream_withByteArray_withInt_withOrgApacheLuceneAnalysisUtilCharArraySet_(self, inArg, JreLoadStatic(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator, DEFAULT_WORD_DELIM_TABLE), configurationFlags, protWords);
 }
 
 OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter *new_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisTokenStream *inArg, jint configurationFlags, OrgApacheLuceneAnalysisUtilCharArraySet *protWords) {
-  OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter *self = [OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter alloc];
-  OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withOrgApacheLuceneAnalysisUtilCharArraySet_(self, inArg, configurationFlags, protWords);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter, initWithOrgApacheLuceneAnalysisTokenStream_withInt_withOrgApacheLuceneAnalysisUtilCharArraySet_, inArg, configurationFlags, protWords)
+}
+
+OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter *create_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisTokenStream *inArg, jint configurationFlags, OrgApacheLuceneAnalysisUtilCharArraySet *protWords) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter, initWithOrgApacheLuceneAnalysisTokenStream_withInt_withOrgApacheLuceneAnalysisUtilCharArraySet_, inArg, configurationFlags, protWords)
 }
 
 void OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_buffer(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter *self) {
@@ -580,7 +688,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousWordDelimit
   static const J2ObjcMethodInfo methods[] = {
     { "compareWithInt:withInt:", "compare", "I", 0x4, NULL, NULL },
     { "swapWithInt:withInt:", "swap", "V", 0x4, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter:", "init", NULL, 0x0, NULL, NULL },
+    { "initWithOrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter:", "OffsetSorter", NULL, 0x2, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.analysis.miscellaneous.WordDelimiterFilter;", NULL, NULL, .constantValue.asLong = 0 },
@@ -597,9 +705,11 @@ void OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_OffsetSorter_initWi
 }
 
 OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_OffsetSorter *new_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_OffsetSorter_initWithOrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter *outer$) {
-  OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_OffsetSorter *self = [OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_OffsetSorter alloc];
-  OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_OffsetSorter_initWithOrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_(self, outer$);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_OffsetSorter, initWithOrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_, outer$)
+}
+
+OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_OffsetSorter *create_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_OffsetSorter_initWithOrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_OffsetSorter, initWithOrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_, outer$)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_OffsetSorter)
@@ -664,7 +774,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousWordDelimit
     { "isEmpty", NULL, "Z", 0x0, NULL, NULL },
     { "clear", NULL, "V", 0x0, NULL, NULL },
     { "writeAndClear", NULL, "V", 0x0, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter:", "init", NULL, 0x0, NULL, NULL },
+    { "initWithOrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter:", "WordDelimiterConcatenation", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.analysis.miscellaneous.WordDelimiterFilter;", NULL, NULL, .constantValue.asLong = 0 },
@@ -687,9 +797,11 @@ void OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_WordDelimiterConcat
 }
 
 OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_WordDelimiterConcatenation *new_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_WordDelimiterConcatenation_initWithOrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter *outer$) {
-  OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_WordDelimiterConcatenation *self = [OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_WordDelimiterConcatenation alloc];
-  OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_WordDelimiterConcatenation_initWithOrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_(self, outer$);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_WordDelimiterConcatenation, initWithOrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_, outer$)
+}
+
+OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_WordDelimiterConcatenation *create_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_WordDelimiterConcatenation_initWithOrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_WordDelimiterConcatenation, initWithOrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_, outer$)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_WordDelimiterConcatenation)

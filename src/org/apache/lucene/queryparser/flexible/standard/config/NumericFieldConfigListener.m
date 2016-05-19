@@ -29,11 +29,11 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardConfigNumericField
 }
 
 - (void)buildFieldConfigWithOrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig:(OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *)fieldConfig {
-  id<JavaUtilMap> numericConfigMap = [((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk(config_)) getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, NUMERIC_CONFIG_MAP_)];
+  id<JavaUtilMap> numericConfigMap = [((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk(config_)) getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, NUMERIC_CONFIG_MAP)];
   if (numericConfigMap != nil) {
     OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *numericConfig = [numericConfigMap getWithId:[((OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *) nil_chk(fieldConfig)) getField]];
     if (numericConfig != nil) {
-      [fieldConfig setWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, NUMERIC_CONFIG_) withId:numericConfig];
+      [fieldConfig setWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, NUMERIC_CONFIG) withId:numericConfig];
     }
   }
 }
@@ -60,15 +60,17 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardConfigNumericField
 void OrgApacheLuceneQueryparserFlexibleStandardConfigNumericFieldConfigListener_initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_(OrgApacheLuceneQueryparserFlexibleStandardConfigNumericFieldConfigListener *self, OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *config) {
   NSObject_init(self);
   if (config == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"config cannot be null!") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"config cannot be null!");
   }
   JreStrongAssign(&self->config_, config);
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardConfigNumericFieldConfigListener *new_OrgApacheLuceneQueryparserFlexibleStandardConfigNumericFieldConfigListener_initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *config) {
-  OrgApacheLuceneQueryparserFlexibleStandardConfigNumericFieldConfigListener *self = [OrgApacheLuceneQueryparserFlexibleStandardConfigNumericFieldConfigListener alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardConfigNumericFieldConfigListener_initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_(self, config);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardConfigNumericFieldConfigListener, initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_, config)
+}
+
+OrgApacheLuceneQueryparserFlexibleStandardConfigNumericFieldConfigListener *create_OrgApacheLuceneQueryparserFlexibleStandardConfigNumericFieldConfigListener_initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *config) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardConfigNumericFieldConfigListener, initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_, config)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleStandardConfigNumericFieldConfigListener)

@@ -5,25 +5,45 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser_RESTRICT
-#define OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser 0
 #else
-#define OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser 1
 #endif
-#undef OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser
 
-#if !defined (_OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser_) && (OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser_INCLUDE_ALL || OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser_INCLUDE)
-#define _OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser_
+#if !defined (OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser || defined(INCLUDE_OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser))
+#define OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser_
 
-#define OrgApacheLuceneQueryparserClassicQueryParser_RESTRICT 1
-#define OrgApacheLuceneQueryparserClassicQueryParser_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserClassicQueryParser 1
+#define INCLUDE_OrgApacheLuceneQueryparserClassicQueryParser 1
 #include "org/apache/lucene/queryparser/classic/QueryParser.h"
 
 @class OrgApacheLuceneAnalysisAnalyzer;
 @class OrgApacheLuceneIndexTerm;
 @class OrgApacheLuceneSearchQuery;
 
+/*!
+ @brief QueryParser which permits complex phrase query syntax eg "(john jon
+ jonathan~) peters*".
+ <p>
+ Performs potentially multiple passes over Query text to parse any nested
+ logic in PhraseQueries. - First pass takes any PhraseQuery content between
+ quotes and stores for subsequent pass. All other query content is parsed as
+ normal - Second pass parses any stored PhraseQuery content, checking all
+ embedded clauses are referring to the same field and therefore can be
+ rewritten as Span queries. All PhraseQuery clauses are expressed as
+ ComplexPhraseQuery objects
+ </p>
+ <p>
+ This could arguably be done in one pass using a new QueryParser but here I am
+ working within the constraints of the existing parser as a base class. This
+ currently simply feeds all phrase content through an analyzer to select
+ phrase terms - any "special" syntax such as * ~ * etc are not given special
+ status
+ </p>
+ */
 @interface OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser : OrgApacheLuceneQueryparserClassicQueryParser
 
 #pragma mark Public
@@ -33,6 +53,11 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)a;
 
 - (OrgApacheLuceneSearchQuery *)parseWithNSString:(NSString *)query;
 
+/*!
+ @brief When <code>inOrder</code> is true, the search terms must
+ exists in the documents as the same order as in query.
+ @param inOrder parameter to choose between ordered or un-ordered proximity search
+ */
 - (void)setInOrderWithBoolean:(jboolean)inOrder;
 
 #pragma mark Protected
@@ -70,15 +95,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQuery
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser *new_OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(NSString *f, OrgApacheLuceneAnalysisAnalyzer *a) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser *create_OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(NSString *f, OrgApacheLuceneAnalysisAnalyzer *a);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser)
 
 #endif
 
-#if !defined (_OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser_ComplexPhraseQuery_) && (OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser_INCLUDE_ALL || OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser_ComplexPhraseQuery_INCLUDE)
-#define _OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser_ComplexPhraseQuery_
+#if !defined (OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser_ComplexPhraseQuery_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser || defined(INCLUDE_OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser_ComplexPhraseQuery))
+#define OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser_ComplexPhraseQuery_
 
-#define OrgApacheLuceneSearchQuery_RESTRICT 1
-#define OrgApacheLuceneSearchQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchQuery 1
+#define INCLUDE_OrgApacheLuceneSearchQuery 1
 #include "org/apache/lucene/search/Query.h"
 
 @class OrgApacheLuceneIndexIndexReader;
@@ -121,8 +148,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQuery
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser_ComplexPhraseQuery *new_OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser_ComplexPhraseQuery_initWithNSString_withNSString_withInt_withBoolean_(NSString *field, NSString *phrasedQueryStringContents, jint slopFactor, jboolean inOrder) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser_ComplexPhraseQuery *create_OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser_ComplexPhraseQuery_initWithNSString_withNSString_withInt_withBoolean_(NSString *field, NSString *phrasedQueryStringContents, jint slopFactor, jboolean inOrder);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser_ComplexPhraseQuery)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser")

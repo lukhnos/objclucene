@@ -13,10 +13,18 @@
 #include "org/apache/lucene/analysis/util/TokenizerFactory.h"
 #include "org/apache/lucene/util/AttributeFactory.h"
 
-NSString *OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_PATTERN_ = @"pattern";
-NSString *OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_GROUP_ = @"group";
+NSString *OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_PATTERN = @"pattern";
+NSString *OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_GROUP = @"group";
 
 @implementation OrgApacheLuceneAnalysisPatternPatternTokenizerFactory
+
++ (NSString *)PATTERN {
+  return OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_PATTERN;
+}
+
++ (NSString *)GROUP {
+  return OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_GROUP;
+}
 
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args {
   OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_initWithJavaUtilMap_(self, args);
@@ -24,7 +32,7 @@ NSString *OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_GROUP_ = @"group
 }
 
 - (OrgApacheLuceneAnalysisPatternPatternTokenizer *)createWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory {
-  return [new_OrgApacheLuceneAnalysisPatternPatternTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withJavaUtilRegexPattern_withInt_(factory, pattern_, group_) autorelease];
+  return create_OrgApacheLuceneAnalysisPatternPatternTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withJavaUtilRegexPattern_withInt_(factory, pattern_, group_);
 }
 
 - (void)dealloc {
@@ -34,12 +42,12 @@ NSString *OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_GROUP_ = @"group
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "PatternTokenizerFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "PatternTokenizerFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "createWithOrgApacheLuceneUtilAttributeFactory:", "create", "Lorg.apache.lucene.analysis.pattern.PatternTokenizer;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "PATTERN_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_PATTERN_, NULL, .constantValue.asLong = 0 },
-    { "GROUP_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_GROUP_, NULL, .constantValue.asLong = 0 },
+    { "PATTERN", "PATTERN", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_PATTERN, NULL, .constantValue.asLong = 0 },
+    { "GROUP", "GROUP", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_GROUP, NULL, .constantValue.asLong = 0 },
     { "pattern_", NULL, 0x14, "Ljava.util.regex.Pattern;", NULL, NULL, .constantValue.asLong = 0 },
     { "group_", NULL, 0x14, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
@@ -51,17 +59,19 @@ NSString *OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_GROUP_ = @"group
 
 void OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisPatternPatternTokenizerFactory *self, id<JavaUtilMap> args) {
   OrgApacheLuceneAnalysisUtilTokenizerFactory_initWithJavaUtilMap_(self, args);
-  JreStrongAssign(&self->pattern_, [self getPatternWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_PATTERN_]);
-  self->group_ = [self getIntWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_GROUP_ withInt:-1];
+  JreStrongAssign(&self->pattern_, [self getPatternWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_PATTERN]);
+  self->group_ = [self getIntWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_GROUP withInt:-1];
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisPatternPatternTokenizerFactory *new_OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisPatternPatternTokenizerFactory *self = [OrgApacheLuceneAnalysisPatternPatternTokenizerFactory alloc];
-  OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPatternPatternTokenizerFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisPatternPatternTokenizerFactory *create_OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPatternPatternTokenizerFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisPatternPatternTokenizerFactory)

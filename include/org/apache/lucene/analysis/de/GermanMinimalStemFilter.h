@@ -5,23 +5,32 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisDeGermanMinimalStemFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisDeGermanMinimalStemFilter_RESTRICT
-#define OrgApacheLuceneAnalysisDeGermanMinimalStemFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanMinimalStemFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisDeGermanMinimalStemFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanMinimalStemFilter 0
 #else
-#define OrgApacheLuceneAnalysisDeGermanMinimalStemFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanMinimalStemFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisDeGermanMinimalStemFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisDeGermanMinimalStemFilter
 
-#if !defined (_OrgApacheLuceneAnalysisDeGermanMinimalStemFilter_) && (OrgApacheLuceneAnalysisDeGermanMinimalStemFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisDeGermanMinimalStemFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisDeGermanMinimalStemFilter_
+#if !defined (OrgApacheLuceneAnalysisDeGermanMinimalStemFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanMinimalStemFilter || defined(INCLUDE_OrgApacheLuceneAnalysisDeGermanMinimalStemFilter))
+#define OrgApacheLuceneAnalysisDeGermanMinimalStemFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief A <code>TokenFilter</code> that applies <code>GermanMinimalStemmer</code> to stem German
+ words.
+ <p>
+ To prevent terms from being stemmed use an instance of
+ <code>SetKeywordMarkerFilter</code> or a custom <code>TokenFilter</code> that sets
+ the <code>KeywordAttribute</code> before this <code>TokenStream</code>.
+ </p>
+ */
 @interface OrgApacheLuceneAnalysisDeGermanMinimalStemFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
@@ -38,8 +47,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisDeGermanMinimalStemFilter_initWith
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisDeGermanMinimalStemFilter *new_OrgApacheLuceneAnalysisDeGermanMinimalStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisDeGermanMinimalStemFilter *create_OrgApacheLuceneAnalysisDeGermanMinimalStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisDeGermanMinimalStemFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisDeGermanMinimalStemFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanMinimalStemFilter")

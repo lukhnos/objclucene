@@ -58,13 +58,19 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisHunspellHunspellStemF
 
 __attribute__((unused)) static OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1 *new_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1 *create_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisHunspellHunspellStemFilter)
 
-id<JavaUtilComparator> OrgApacheLuceneAnalysisHunspellHunspellStemFilter_lengthComparator_;
+id<JavaUtilComparator> OrgApacheLuceneAnalysisHunspellHunspellStemFilter_lengthComparator;
 
 @implementation OrgApacheLuceneAnalysisHunspellHunspellStemFilter
+
++ (id<JavaUtilComparator>)lengthComparator {
+  return OrgApacheLuceneAnalysisHunspellHunspellStemFilter_lengthComparator;
+}
 
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
              withOrgApacheLuceneAnalysisHunspellDictionary:(OrgApacheLuceneAnalysisHunspellDictionary *)dictionary {
@@ -105,16 +111,16 @@ id<JavaUtilComparator> OrgApacheLuceneAnalysisHunspellHunspellStemFilter_lengthC
   if ([buffer_ isEmpty]) {
     return true;
   }
-  if (longestOnly_ && [buffer_ size] > 1) {
-    JavaUtilCollections_sortWithJavaUtilList_withJavaUtilComparator_(buffer_, OrgApacheLuceneAnalysisHunspellHunspellStemFilter_lengthComparator_);
+  if (longestOnly_ && [((id<JavaUtilList>) nil_chk(buffer_)) size] > 1) {
+    JavaUtilCollections_sortWithJavaUtilList_withJavaUtilComparator_(buffer_, OrgApacheLuceneAnalysisHunspellHunspellStemFilter_lengthComparator);
   }
-  OrgApacheLuceneUtilCharsRef *stem = [buffer_ removeWithInt:0];
-  [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk([((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) setEmpty])) appendWithJavaLangCharSequence:stem];
+  OrgApacheLuceneUtilCharsRef *stem = [((id<JavaUtilList>) nil_chk(buffer_)) removeWithInt:0];
+  [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk([termAtt_ setEmpty])) appendWithJavaLangCharSequence:stem];
   if (longestOnly_) {
-    [buffer_ clear];
+    [((id<JavaUtilList>) nil_chk(buffer_)) clear];
   }
   else {
-    if (![buffer_ isEmpty]) {
+    if (![((id<JavaUtilList>) nil_chk(buffer_)) isEmpty]) {
       JreStrongAssign(&savedState_, [self captureState]);
     }
   }
@@ -138,7 +144,7 @@ id<JavaUtilComparator> OrgApacheLuceneAnalysisHunspellHunspellStemFilter_lengthC
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisHunspellHunspellStemFilter class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisHunspellHunspellStemFilter_lengthComparator_, new_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisHunspellHunspellStemFilter_lengthComparator, new_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisHunspellHunspellStemFilter)
   }
 }
@@ -160,7 +166,7 @@ id<JavaUtilComparator> OrgApacheLuceneAnalysisHunspellHunspellStemFilter_lengthC
     { "savedState_", NULL, 0x2, "Lorg.apache.lucene.util.AttributeSource$State;", NULL, NULL, .constantValue.asLong = 0 },
     { "dedup_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
     { "longestOnly_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "lengthComparator_", NULL, 0x18, "Ljava.util.Comparator;", &OrgApacheLuceneAnalysisHunspellHunspellStemFilter_lengthComparator_, "Ljava/util/Comparator<Lorg/apache/lucene/util/CharsRef;>;", .constantValue.asLong = 0 },
+    { "lengthComparator", "lengthComparator", 0x18, "Ljava.util.Comparator;", &OrgApacheLuceneAnalysisHunspellHunspellStemFilter_lengthComparator, "Ljava/util/Comparator<Lorg/apache/lucene/util/CharsRef;>;", .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisHunspellHunspellStemFilter = { 2, "HunspellStemFilter", "org.apache.lucene.analysis.hunspell", NULL, 0x11, 5, methods, 9, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisHunspellHunspellStemFilter;
@@ -173,9 +179,11 @@ void OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAn
 }
 
 OrgApacheLuceneAnalysisHunspellHunspellStemFilter *new_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisHunspellDictionary *dictionary) {
-  OrgApacheLuceneAnalysisHunspellHunspellStemFilter *self = [OrgApacheLuceneAnalysisHunspellHunspellStemFilter alloc];
-  OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_(self, input, dictionary);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisHunspellHunspellStemFilter, initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_, input, dictionary)
+}
+
+OrgApacheLuceneAnalysisHunspellHunspellStemFilter *create_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisHunspellDictionary *dictionary) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisHunspellHunspellStemFilter, initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_, input, dictionary)
 }
 
 void OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_withBoolean_(OrgApacheLuceneAnalysisHunspellHunspellStemFilter *self, OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisHunspellDictionary *dictionary, jboolean dedup) {
@@ -183,9 +191,11 @@ void OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAn
 }
 
 OrgApacheLuceneAnalysisHunspellHunspellStemFilter *new_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_withBoolean_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisHunspellDictionary *dictionary, jboolean dedup) {
-  OrgApacheLuceneAnalysisHunspellHunspellStemFilter *self = [OrgApacheLuceneAnalysisHunspellHunspellStemFilter alloc];
-  OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_withBoolean_(self, input, dictionary, dedup);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisHunspellHunspellStemFilter, initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_withBoolean_, input, dictionary, dedup)
+}
+
+OrgApacheLuceneAnalysisHunspellHunspellStemFilter *create_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_withBoolean_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisHunspellDictionary *dictionary, jboolean dedup) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisHunspellHunspellStemFilter, initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_withBoolean_, input, dictionary, dedup)
 }
 
 void OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_withBoolean_withBoolean_(OrgApacheLuceneAnalysisHunspellHunspellStemFilter *self, OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisHunspellDictionary *dictionary, jboolean dedup, jboolean longestOnly) {
@@ -199,9 +209,11 @@ void OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAn
 }
 
 OrgApacheLuceneAnalysisHunspellHunspellStemFilter *new_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_withBoolean_withBoolean_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisHunspellDictionary *dictionary, jboolean dedup, jboolean longestOnly) {
-  OrgApacheLuceneAnalysisHunspellHunspellStemFilter *self = [OrgApacheLuceneAnalysisHunspellHunspellStemFilter alloc];
-  OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_withBoolean_withBoolean_(self, input, dictionary, dedup, longestOnly);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisHunspellHunspellStemFilter, initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_withBoolean_withBoolean_, input, dictionary, dedup, longestOnly)
+}
+
+OrgApacheLuceneAnalysisHunspellHunspellStemFilter *create_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_withBoolean_withBoolean_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisHunspellDictionary *dictionary, jboolean dedup, jboolean longestOnly) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisHunspellHunspellStemFilter, initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_withBoolean_withBoolean_, input, dictionary, dedup, longestOnly)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisHunspellHunspellStemFilter)
@@ -242,9 +254,11 @@ void OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1_init(OrgApacheLuceneAn
 }
 
 OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1 *new_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1_init() {
-  OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1 *self = [OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1 alloc];
-  OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1, init)
+}
+
+OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1 *create_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1)

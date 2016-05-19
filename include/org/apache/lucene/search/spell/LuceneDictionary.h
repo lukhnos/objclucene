@@ -5,28 +5,36 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSpellLuceneDictionary_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSpellLuceneDictionary_RESTRICT
-#define OrgApacheLuceneSearchSpellLuceneDictionary_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpellLuceneDictionary")
+#ifdef RESTRICT_OrgApacheLuceneSearchSpellLuceneDictionary
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpellLuceneDictionary 0
 #else
-#define OrgApacheLuceneSearchSpellLuceneDictionary_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpellLuceneDictionary 1
 #endif
-#undef OrgApacheLuceneSearchSpellLuceneDictionary_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSpellLuceneDictionary
 
-#if !defined (_OrgApacheLuceneSearchSpellLuceneDictionary_) && (OrgApacheLuceneSearchSpellLuceneDictionary_INCLUDE_ALL || OrgApacheLuceneSearchSpellLuceneDictionary_INCLUDE)
-#define _OrgApacheLuceneSearchSpellLuceneDictionary_
+#if !defined (OrgApacheLuceneSearchSpellLuceneDictionary_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpellLuceneDictionary || defined(INCLUDE_OrgApacheLuceneSearchSpellLuceneDictionary))
+#define OrgApacheLuceneSearchSpellLuceneDictionary_
 
-#define OrgApacheLuceneSearchSpellDictionary_RESTRICT 1
-#define OrgApacheLuceneSearchSpellDictionary_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSpellDictionary 1
+#define INCLUDE_OrgApacheLuceneSearchSpellDictionary 1
 #include "org/apache/lucene/search/spell/Dictionary.h"
 
 @class OrgApacheLuceneIndexIndexReader;
 @protocol OrgApacheLuceneSearchSuggestInputIterator;
 
+/*!
+ @brief Lucene Dictionary: terms taken from the given field
+ of a Lucene index.
+ */
 @interface OrgApacheLuceneSearchSpellLuceneDictionary : NSObject < OrgApacheLuceneSearchSpellDictionary >
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new Dictionary, pulling source terms from
+ the specified <code>field</code> in the provided <code>reader</code>
+ */
 - (instancetype)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
                                            withNSString:(NSString *)field;
 
@@ -40,8 +48,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSpellLuceneDictionary_initWithOrgApa
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSpellLuceneDictionary *new_OrgApacheLuceneSearchSpellLuceneDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_(OrgApacheLuceneIndexIndexReader *reader, NSString *field) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpellLuceneDictionary *create_OrgApacheLuceneSearchSpellLuceneDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_(OrgApacheLuceneIndexIndexReader *reader, NSString *field);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellLuceneDictionary)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSpellLuceneDictionary_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpellLuceneDictionary")

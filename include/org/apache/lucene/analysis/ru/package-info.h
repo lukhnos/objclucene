@@ -3,14 +3,17 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/ru/package-info.java
 //
 
+/*!
+ @brief Analyzer for Russian.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisRuPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisRuPackage_info_RESTRICT
-#define OrgApacheLuceneAnalysisRuPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisRuPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisRuPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisRuPackage_info 0
 #else
-#define OrgApacheLuceneAnalysisRuPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisRuPackage_info 1
 #endif
-#undef OrgApacheLuceneAnalysisRuPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisRuPackage_info
 
-#pragma pop_macro("OrgApacheLuceneAnalysisRuPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisRuPackage_info")

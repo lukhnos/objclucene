@@ -25,9 +25,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgLukhnosPortmobileFileAttributeFileTime *)creationTime {
   if (file_ != nil) {
-    return [new_OrgLukhnosPortmobileFileAttributeFileTime_initWithLong_([file_ lastModified]) autorelease];
+    return create_OrgLukhnosPortmobileFileAttributeFileTime_initWithLong_([file_ lastModified]);
   }
-  return [new_OrgLukhnosPortmobileFileAttributeFileTime_initWithLong_(0) autorelease];
+  return create_OrgLukhnosPortmobileFileAttributeFileTime_initWithLong_(0);
 }
 
 - (void)dealloc {
@@ -56,9 +56,11 @@ void OrgLukhnosPortmobileFileAttributeBasicFileAttributes_initWithJavaIoFile_(Or
 }
 
 OrgLukhnosPortmobileFileAttributeBasicFileAttributes *new_OrgLukhnosPortmobileFileAttributeBasicFileAttributes_initWithJavaIoFile_(JavaIoFile *file) {
-  OrgLukhnosPortmobileFileAttributeBasicFileAttributes *self = [OrgLukhnosPortmobileFileAttributeBasicFileAttributes alloc];
-  OrgLukhnosPortmobileFileAttributeBasicFileAttributes_initWithJavaIoFile_(self, file);
-  return self;
+  J2OBJC_NEW_IMPL(OrgLukhnosPortmobileFileAttributeBasicFileAttributes, initWithJavaIoFile_, file)
+}
+
+OrgLukhnosPortmobileFileAttributeBasicFileAttributes *create_OrgLukhnosPortmobileFileAttributeBasicFileAttributes_initWithJavaIoFile_(JavaIoFile *file) {
+  J2OBJC_CREATE_IMPL(OrgLukhnosPortmobileFileAttributeBasicFileAttributes, initWithJavaIoFile_, file)
 }
 
 void OrgLukhnosPortmobileFileAttributeBasicFileAttributes_init(OrgLukhnosPortmobileFileAttributeBasicFileAttributes *self) {
@@ -67,9 +69,11 @@ void OrgLukhnosPortmobileFileAttributeBasicFileAttributes_init(OrgLukhnosPortmob
 }
 
 OrgLukhnosPortmobileFileAttributeBasicFileAttributes *new_OrgLukhnosPortmobileFileAttributeBasicFileAttributes_init() {
-  OrgLukhnosPortmobileFileAttributeBasicFileAttributes *self = [OrgLukhnosPortmobileFileAttributeBasicFileAttributes alloc];
-  OrgLukhnosPortmobileFileAttributeBasicFileAttributes_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgLukhnosPortmobileFileAttributeBasicFileAttributes, init)
+}
+
+OrgLukhnosPortmobileFileAttributeBasicFileAttributes *create_OrgLukhnosPortmobileFileAttributeBasicFileAttributes_init() {
+  J2OBJC_CREATE_IMPL(OrgLukhnosPortmobileFileAttributeBasicFileAttributes, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileFileAttributeBasicFileAttributes)

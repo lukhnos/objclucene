@@ -5,37 +5,56 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_INCLUDE_ALL")
-#if OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_RESTRICT
-#define OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonCharacterRunAutomaton")
+#ifdef RESTRICT_OrgApacheLuceneUtilAutomatonCharacterRunAutomaton
+#define INCLUDE_ALL_OrgApacheLuceneUtilAutomatonCharacterRunAutomaton 0
 #else
-#define OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilAutomatonCharacterRunAutomaton 1
 #endif
-#undef OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilAutomatonCharacterRunAutomaton
 
-#if !defined (_OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_) && (OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_INCLUDE_ALL || OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_INCLUDE)
-#define _OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_
+#if !defined (OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_) && (INCLUDE_ALL_OrgApacheLuceneUtilAutomatonCharacterRunAutomaton || defined(INCLUDE_OrgApacheLuceneUtilAutomatonCharacterRunAutomaton))
+#define OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_
 
-#define OrgApacheLuceneUtilAutomatonRunAutomaton_RESTRICT 1
-#define OrgApacheLuceneUtilAutomatonRunAutomaton_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAutomatonRunAutomaton 1
+#define INCLUDE_OrgApacheLuceneUtilAutomatonRunAutomaton 1
 #include "org/apache/lucene/util/automaton/RunAutomaton.h"
 
 @class IOSCharArray;
 @class OrgApacheLuceneUtilAutomatonAutomaton;
 
+/*!
+ @brief Automaton representation for matching char[].
+ */
 @interface OrgApacheLuceneUtilAutomatonCharacterRunAutomaton : OrgApacheLuceneUtilAutomatonRunAutomaton
 
 #pragma mark Public
 
+/*!
+ @brief Construct with a default number of maxDeterminizedStates.
+ */
 - (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a;
 
+/*!
+ @brief Construct specifying maxDeterminizedStates.
+ @param a Automaton to match
+ @param maxDeterminizedStates maximum number of states that the automataon
+ can have once determinized.  If more states are required to determinize
+ it then a TooComplexToDeterminizeException is thrown.
+ */
 - (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
                                                       withInt:(jint)maxDeterminizedStates;
 
+/*!
+ @brief Returns true if the given string is accepted by this automaton
+ */
 - (jboolean)runWithCharArray:(IOSCharArray *)s
                      withInt:(jint)offset
                      withInt:(jint)length;
 
+/*!
+ @brief Returns true if the given string is accepted by this automaton.
+ */
 - (jboolean)runWithNSString:(NSString *)s;
 
 @end
@@ -46,12 +65,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_initWit
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonCharacterRunAutomaton *new_OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonAutomaton *a) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonCharacterRunAutomaton *create_OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonAutomaton *a);
+
 FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneUtilAutomatonCharacterRunAutomaton *self, OrgApacheLuceneUtilAutomatonAutomaton *a, jint maxDeterminizedStates);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonCharacterRunAutomaton *new_OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneUtilAutomatonAutomaton *a, jint maxDeterminizedStates) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonCharacterRunAutomaton *create_OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneUtilAutomatonAutomaton *a, jint maxDeterminizedStates);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonCharacterRunAutomaton)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonCharacterRunAutomaton")

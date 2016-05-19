@@ -53,7 +53,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchHighlightTermVectorLeafReader, fieldInf
 - (instancetype)initWithNSString:(NSString *)capture$0
    withOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)capture$1;
 
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchHighlightTermVectorLeafReader_$1)
@@ -64,6 +63,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchHighlightTermVectorLeafReader_$1, val$t
 __attribute__((unused)) static void OrgApacheLuceneSearchHighlightTermVectorLeafReader_$1_initWithNSString_withOrgApacheLuceneIndexTerms_(OrgApacheLuceneSearchHighlightTermVectorLeafReader_$1 *self, NSString *capture$0, OrgApacheLuceneIndexTerms *capture$1);
 
 __attribute__((unused)) static OrgApacheLuceneSearchHighlightTermVectorLeafReader_$1 *new_OrgApacheLuceneSearchHighlightTermVectorLeafReader_$1_initWithNSString_withOrgApacheLuceneIndexTerms_(NSString *capture$0, OrgApacheLuceneIndexTerms *capture$1) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchHighlightTermVectorLeafReader_$1 *create_OrgApacheLuceneSearchHighlightTermVectorLeafReader_$1_initWithNSString_withOrgApacheLuceneIndexTerms_(NSString *capture$0, OrgApacheLuceneIndexTerms *capture$1);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightTermVectorLeafReader_$1)
 
@@ -189,27 +190,29 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 void OrgApacheLuceneSearchHighlightTermVectorLeafReader_initWithNSString_withOrgApacheLuceneIndexTerms_(OrgApacheLuceneSearchHighlightTermVectorLeafReader *self, NSString *field, OrgApacheLuceneIndexTerms *terms) {
   OrgApacheLuceneIndexLeafReader_init(self);
   JreStrongAssignAndConsume(&self->fields_, new_OrgApacheLuceneSearchHighlightTermVectorLeafReader_$1_initWithNSString_withOrgApacheLuceneIndexTerms_(field, terms));
-  OrgApacheLuceneIndexIndexOptionsEnum *indexOptions;
+  OrgApacheLuceneIndexIndexOptions *indexOptions;
   if (![((OrgApacheLuceneIndexTerms *) nil_chk(terms)) hasFreqs]) {
-    indexOptions = JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS);
+    indexOptions = JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS);
   }
   else if (![terms hasPositions]) {
-    indexOptions = JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS);
+    indexOptions = JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS);
   }
   else if (![terms hasOffsets]) {
-    indexOptions = JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS);
+    indexOptions = JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS);
   }
   else {
-    indexOptions = JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS);
+    indexOptions = JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS);
   }
-  OrgApacheLuceneIndexFieldInfo *fieldInfo = [new_OrgApacheLuceneIndexFieldInfo_initWithNSString_withInt_withBoolean_withBoolean_withBoolean_withOrgApacheLuceneIndexIndexOptionsEnum_withOrgApacheLuceneIndexDocValuesTypeEnum_withLong_withJavaUtilMap_(field, 0, true, true, [terms hasPayloads], indexOptions, JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, NONE), -1, JavaUtilCollections_emptyMap()) autorelease];
+  OrgApacheLuceneIndexFieldInfo *fieldInfo = create_OrgApacheLuceneIndexFieldInfo_initWithNSString_withInt_withBoolean_withBoolean_withBoolean_withOrgApacheLuceneIndexIndexOptions_withOrgApacheLuceneIndexDocValuesType_withLong_withJavaUtilMap_(field, 0, true, true, [terms hasPayloads], indexOptions, JreLoadEnum(OrgApacheLuceneIndexDocValuesType, NONE), -1, JavaUtilCollections_emptyMap());
   JreStrongAssignAndConsume(&self->fieldInfos_, new_OrgApacheLuceneIndexFieldInfos_initWithOrgApacheLuceneIndexFieldInfoArray_([IOSObjectArray arrayWithObjects:(id[]){ fieldInfo } count:1 type:OrgApacheLuceneIndexFieldInfo_class_()]));
 }
 
 OrgApacheLuceneSearchHighlightTermVectorLeafReader *new_OrgApacheLuceneSearchHighlightTermVectorLeafReader_initWithNSString_withOrgApacheLuceneIndexTerms_(NSString *field, OrgApacheLuceneIndexTerms *terms) {
-  OrgApacheLuceneSearchHighlightTermVectorLeafReader *self = [OrgApacheLuceneSearchHighlightTermVectorLeafReader alloc];
-  OrgApacheLuceneSearchHighlightTermVectorLeafReader_initWithNSString_withOrgApacheLuceneIndexTerms_(self, field, terms);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchHighlightTermVectorLeafReader, initWithNSString_withOrgApacheLuceneIndexTerms_, field, terms)
+}
+
+OrgApacheLuceneSearchHighlightTermVectorLeafReader *create_OrgApacheLuceneSearchHighlightTermVectorLeafReader_initWithNSString_withOrgApacheLuceneIndexTerms_(NSString *field, OrgApacheLuceneIndexTerms *terms) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchHighlightTermVectorLeafReader, initWithNSString_withOrgApacheLuceneIndexTerms_, field, terms)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchHighlightTermVectorLeafReader)
@@ -237,19 +240,19 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchHighlightTermVectorLeafRea
   return self;
 }
 
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
+  return JreDefaultFastEnumeration(self, state, stackbuf, len);
+}
+
 - (void)dealloc {
   RELEASE_(val$field_);
   RELEASE_(val$terms_);
   [super dealloc];
 }
 
-- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, NULL },
+    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<Ljava/lang/String;>;" },
     { "termsWithNSString:", "terms", "Lorg.apache.lucene.index.Terms;", 0x1, "Ljava.io.IOException;", NULL },
     { "size", NULL, "I", 0x1, NULL, NULL },
     { "initWithNSString:withOrgApacheLuceneIndexTerms:", "", NULL, 0x0, NULL, NULL },
@@ -272,9 +275,11 @@ void OrgApacheLuceneSearchHighlightTermVectorLeafReader_$1_initWithNSString_with
 }
 
 OrgApacheLuceneSearchHighlightTermVectorLeafReader_$1 *new_OrgApacheLuceneSearchHighlightTermVectorLeafReader_$1_initWithNSString_withOrgApacheLuceneIndexTerms_(NSString *capture$0, OrgApacheLuceneIndexTerms *capture$1) {
-  OrgApacheLuceneSearchHighlightTermVectorLeafReader_$1 *self = [OrgApacheLuceneSearchHighlightTermVectorLeafReader_$1 alloc];
-  OrgApacheLuceneSearchHighlightTermVectorLeafReader_$1_initWithNSString_withOrgApacheLuceneIndexTerms_(self, capture$0, capture$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchHighlightTermVectorLeafReader_$1, initWithNSString_withOrgApacheLuceneIndexTerms_, capture$0, capture$1)
+}
+
+OrgApacheLuceneSearchHighlightTermVectorLeafReader_$1 *create_OrgApacheLuceneSearchHighlightTermVectorLeafReader_$1_initWithNSString_withOrgApacheLuceneIndexTerms_(NSString *capture$0, OrgApacheLuceneIndexTerms *capture$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchHighlightTermVectorLeafReader_$1, initWithNSString_withOrgApacheLuceneIndexTerms_, capture$0, capture$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchHighlightTermVectorLeafReader_$1)

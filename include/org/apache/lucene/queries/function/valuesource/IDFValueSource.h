@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource_RESTRICT
-#define OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource 0
 #else
-#define OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource_) && (OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource_
+#if !defined (OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource))
+#define OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource_
 
-#define OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource 1
 #include "org/apache/lucene/queries/function/valuesource/DocFreqValueSource.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
@@ -27,6 +27,14 @@
 @class OrgApacheLuceneUtilBytesRef;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Function that returns <code>TFIDFSimilarity.idf(long,long)</code>
+ for every document.
+ <p>
+ Note that the configured Similarity for the field must be
+ a subclass of <code>TFIDFSimilarity</code>
+  
+ */
 @interface OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource : OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource
 
 #pragma mark Public
@@ -54,10 +62,12 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource_i
 
 FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource_initWithNSString_withNSString_withNSString_withOrgApacheLuceneUtilBytesRef_(NSString *field, NSString *val, NSString *indexedField, OrgApacheLuceneUtilBytesRef *indexedBytes) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource *create_OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource_initWithNSString_withNSString_withNSString_withOrgApacheLuceneUtilBytesRef_(NSString *field, NSString *val, NSString *indexedField, OrgApacheLuceneUtilBytesRef *indexedBytes);
+
 FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource_asTFIDFWithOrgApacheLuceneSearchSimilaritiesSimilarity_withNSString_(OrgApacheLuceneSearchSimilaritiesSimilarity *sim, NSString *field);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource")

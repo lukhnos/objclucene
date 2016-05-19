@@ -72,9 +72,11 @@ void OrgApacheLuceneSearchTermStatistics_initWithOrgApacheLuceneUtilBytesRef_wit
 }
 
 OrgApacheLuceneSearchTermStatistics *new_OrgApacheLuceneSearchTermStatistics_initWithOrgApacheLuceneUtilBytesRef_withLong_withLong_(OrgApacheLuceneUtilBytesRef *term, jlong docFreq, jlong totalTermFreq) {
-  OrgApacheLuceneSearchTermStatistics *self = [OrgApacheLuceneSearchTermStatistics alloc];
-  OrgApacheLuceneSearchTermStatistics_initWithOrgApacheLuceneUtilBytesRef_withLong_withLong_(self, term, docFreq, totalTermFreq);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTermStatistics, initWithOrgApacheLuceneUtilBytesRef_withLong_withLong_, term, docFreq, totalTermFreq)
+}
+
+OrgApacheLuceneSearchTermStatistics *create_OrgApacheLuceneSearchTermStatistics_initWithOrgApacheLuceneUtilBytesRef_withLong_withLong_(OrgApacheLuceneUtilBytesRef *term, jlong docFreq, jlong totalTermFreq) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTermStatistics, initWithOrgApacheLuceneUtilBytesRef_withLong_withLong_, term, docFreq, totalTermFreq)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTermStatistics)

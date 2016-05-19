@@ -119,7 +119,7 @@
     { "openIfChangedWithOrgApacheLuceneIndexDirectoryReader:", "openIfChanged", "Lorg.apache.lucene.index.DirectoryReader;", 0x9, "Ljava.io.IOException;", NULL },
     { "openIfChangedWithOrgApacheLuceneIndexDirectoryReader:withOrgApacheLuceneIndexIndexCommit:", "openIfChanged", "Lorg.apache.lucene.index.DirectoryReader;", 0x9, "Ljava.io.IOException;", NULL },
     { "openIfChangedWithOrgApacheLuceneIndexDirectoryReader:withOrgApacheLuceneIndexIndexWriter:withBoolean:", "openIfChanged", "Lorg.apache.lucene.index.DirectoryReader;", 0x9, "Ljava.io.IOException;", NULL },
-    { "listCommitsWithOrgApacheLuceneStoreDirectory:", "listCommits", "Ljava.util.List;", 0x9, "Ljava.io.IOException;", NULL },
+    { "listCommitsWithOrgApacheLuceneStoreDirectory:", "listCommits", "Ljava.util.List;", 0x9, "Ljava.io.IOException;", "(Lorg/apache/lucene/store/Directory;)Ljava/util/List<Lorg/apache/lucene/index/IndexCommit;>;" },
     { "indexExistsWithOrgApacheLuceneStoreDirectory:", "indexExists", "Z", 0x9, "Ljava.io.IOException;", NULL },
     { "initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexLeafReaderArray:", "DirectoryReader", NULL, 0x4, "Ljava.io.IOException;", NULL },
     { "directory", NULL, "Lorg.apache.lucene.store.Directory;", 0x11, NULL, NULL },
@@ -179,13 +179,13 @@ OrgApacheLuceneIndexDirectoryReader *OrgApacheLuceneIndexDirectoryReader_openIfC
 id<JavaUtilList> OrgApacheLuceneIndexDirectoryReader_listCommitsWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *dir) {
   OrgApacheLuceneIndexDirectoryReader_initialize();
   IOSObjectArray *files = [((OrgApacheLuceneStoreDirectory *) nil_chk(dir)) listAll];
-  id<JavaUtilList> commits = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> commits = create_JavaUtilArrayList_init();
   OrgApacheLuceneIndexSegmentInfos *latest = OrgApacheLuceneIndexSegmentInfos_readLatestCommitWithOrgApacheLuceneStoreDirectory_(dir);
   jlong currentGen = [((OrgApacheLuceneIndexSegmentInfos *) nil_chk(latest)) getGeneration];
-  [commits addWithId:[new_OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit_initWithOrgApacheLuceneIndexStandardDirectoryReader_withOrgApacheLuceneIndexSegmentInfos_withOrgApacheLuceneStoreDirectory_(nil, latest, dir) autorelease]];
+  [commits addWithId:create_OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit_initWithOrgApacheLuceneIndexStandardDirectoryReader_withOrgApacheLuceneIndexSegmentInfos_withOrgApacheLuceneStoreDirectory_(nil, latest, dir)];
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(files))->size_; i++) {
     NSString *fileName = IOSObjectArray_Get(files, i);
-    if ([((NSString *) nil_chk(fileName)) hasPrefix:OrgApacheLuceneIndexIndexFileNames_SEGMENTS_] && ![fileName isEqual:OrgApacheLuceneIndexIndexFileNames_OLD_SEGMENTS_GEN_] && OrgApacheLuceneIndexSegmentInfos_generationFromSegmentsFileNameWithNSString_(fileName) < currentGen) {
+    if ([((NSString *) nil_chk(fileName)) hasPrefix:OrgApacheLuceneIndexIndexFileNames_SEGMENTS] && ![fileName isEqual:OrgApacheLuceneIndexIndexFileNames_OLD_SEGMENTS_GEN] && OrgApacheLuceneIndexSegmentInfos_generationFromSegmentsFileNameWithNSString_(fileName) < currentGen) {
       OrgApacheLuceneIndexSegmentInfos *sis = nil;
       @try {
         sis = OrgApacheLuceneIndexSegmentInfos_readCommitWithOrgApacheLuceneStoreDirectory_withNSString_(dir, fileName);
@@ -197,7 +197,7 @@ id<JavaUtilList> OrgApacheLuceneIndexDirectoryReader_listCommitsWithOrgApacheLuc
       @catch (JavaIoIOException *fnfe) {
       }
       if (sis != nil) {
-        [commits addWithId:[new_OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit_initWithOrgApacheLuceneIndexStandardDirectoryReader_withOrgApacheLuceneIndexSegmentInfos_withOrgApacheLuceneStoreDirectory_(nil, sis, dir) autorelease]];
+        [commits addWithId:create_OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit_initWithOrgApacheLuceneIndexStandardDirectoryReader_withOrgApacheLuceneIndexSegmentInfos_withOrgApacheLuceneStoreDirectory_(nil, sis, dir)];
       }
     }
   }
@@ -208,7 +208,7 @@ id<JavaUtilList> OrgApacheLuceneIndexDirectoryReader_listCommitsWithOrgApacheLuc
 jboolean OrgApacheLuceneIndexDirectoryReader_indexExistsWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *directory) {
   OrgApacheLuceneIndexDirectoryReader_initialize();
   IOSObjectArray *files = [((OrgApacheLuceneStoreDirectory *) nil_chk(directory)) listAll];
-  NSString *prefix = JreStrcat("$C", OrgApacheLuceneIndexIndexFileNames_SEGMENTS_, '_');
+  NSString *prefix = JreStrcat("$C", OrgApacheLuceneIndexIndexFileNames_SEGMENTS, '_');
   {
     IOSObjectArray *a__ = files;
     NSString * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;

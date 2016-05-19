@@ -5,24 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisPayloadsAbstractEncoder_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisPayloadsAbstractEncoder_RESTRICT
-#define OrgApacheLuceneAnalysisPayloadsAbstractEncoder_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsAbstractEncoder")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisPayloadsAbstractEncoder
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsAbstractEncoder 0
 #else
-#define OrgApacheLuceneAnalysisPayloadsAbstractEncoder_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsAbstractEncoder 1
 #endif
-#undef OrgApacheLuceneAnalysisPayloadsAbstractEncoder_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisPayloadsAbstractEncoder
 
-#if !defined (_OrgApacheLuceneAnalysisPayloadsAbstractEncoder_) && (OrgApacheLuceneAnalysisPayloadsAbstractEncoder_INCLUDE_ALL || OrgApacheLuceneAnalysisPayloadsAbstractEncoder_INCLUDE)
-#define _OrgApacheLuceneAnalysisPayloadsAbstractEncoder_
+#if !defined (OrgApacheLuceneAnalysisPayloadsAbstractEncoder_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsAbstractEncoder || defined(INCLUDE_OrgApacheLuceneAnalysisPayloadsAbstractEncoder))
+#define OrgApacheLuceneAnalysisPayloadsAbstractEncoder_
 
-#define OrgApacheLuceneAnalysisPayloadsPayloadEncoder_RESTRICT 1
-#define OrgApacheLuceneAnalysisPayloadsPayloadEncoder_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisPayloadsPayloadEncoder 1
+#define INCLUDE_OrgApacheLuceneAnalysisPayloadsPayloadEncoder 1
 #include "org/apache/lucene/analysis/payloads/PayloadEncoder.h"
 
 @class IOSCharArray;
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief Base class for payload encoders.
+ */
 @interface OrgApacheLuceneAnalysisPayloadsAbstractEncoder : NSObject < OrgApacheLuceneAnalysisPayloadsPayloadEncoder >
 
 #pragma mark Public
@@ -41,4 +44,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPayloadsAbstractEncoder)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisPayloadsAbstractEncoder_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsAbstractEncoder")

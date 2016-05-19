@@ -5,25 +5,31 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilFstNoOutputs_INCLUDE_ALL")
-#if OrgApacheLuceneUtilFstNoOutputs_RESTRICT
-#define OrgApacheLuceneUtilFstNoOutputs_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstNoOutputs")
+#ifdef RESTRICT_OrgApacheLuceneUtilFstNoOutputs
+#define INCLUDE_ALL_OrgApacheLuceneUtilFstNoOutputs 0
 #else
-#define OrgApacheLuceneUtilFstNoOutputs_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilFstNoOutputs 1
 #endif
-#undef OrgApacheLuceneUtilFstNoOutputs_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilFstNoOutputs
 
-#if !defined (_OrgApacheLuceneUtilFstNoOutputs_) && (OrgApacheLuceneUtilFstNoOutputs_INCLUDE_ALL || OrgApacheLuceneUtilFstNoOutputs_INCLUDE)
-#define _OrgApacheLuceneUtilFstNoOutputs_
+#if !defined (OrgApacheLuceneUtilFstNoOutputs_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstNoOutputs || defined(INCLUDE_OrgApacheLuceneUtilFstNoOutputs))
+#define OrgApacheLuceneUtilFstNoOutputs_
 
-#define OrgApacheLuceneUtilFstOutputs_RESTRICT 1
-#define OrgApacheLuceneUtilFstOutputs_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilFstOutputs 1
+#define INCLUDE_OrgApacheLuceneUtilFstOutputs 1
 #include "org/apache/lucene/util/fst/Outputs.h"
 
 @class OrgApacheLuceneStoreDataInput;
 @class OrgApacheLuceneStoreDataOutput;
 
+/*!
+ @brief A null FST <code>Outputs</code> implementation; use this if
+ you just want to build an FSA.
+ */
 @interface OrgApacheLuceneUtilFstNoOutputs : OrgApacheLuceneUtilFstOutputs
+
++ (id)NO_OUTPUT;
 
 #pragma mark Public
 
@@ -58,8 +64,10 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg;
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilFstNoOutputs)
 
-FOUNDATION_EXPORT id OrgApacheLuceneUtilFstNoOutputs_NO_OUTPUT_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFstNoOutputs, NO_OUTPUT_, id)
+inline id OrgApacheLuceneUtilFstNoOutputs_get_NO_OUTPUT();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT id OrgApacheLuceneUtilFstNoOutputs_NO_OUTPUT;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilFstNoOutputs, NO_OUTPUT, id)
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilFstNoOutputs *OrgApacheLuceneUtilFstNoOutputs_getSingleton();
 
@@ -67,4 +75,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstNoOutputs)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilFstNoOutputs_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstNoOutputs")

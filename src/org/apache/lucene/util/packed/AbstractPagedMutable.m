@@ -32,6 +32,14 @@ __attribute__((unused)) static id OrgApacheLuceneUtilPackedAbstractPagedMutable_
 
 @implementation OrgApacheLuceneUtilPackedAbstractPagedMutable
 
++ (jint)MIN_BLOCK_SIZE {
+  return OrgApacheLuceneUtilPackedAbstractPagedMutable_MIN_BLOCK_SIZE;
+}
+
++ (jint)MAX_BLOCK_SIZE {
+  return OrgApacheLuceneUtilPackedAbstractPagedMutable_MAX_BLOCK_SIZE;
+}
+
 - (instancetype)initWithInt:(jint)bitsPerValue
                    withLong:(jlong)size
                     withInt:(jint)pageSize {
@@ -90,7 +98,7 @@ __attribute__((unused)) static id OrgApacheLuceneUtilPackedAbstractPagedMutable_
 }
 
 - (jlong)baseRamBytesUsed {
-  return JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER_) + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_) + OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_LONG + 3 * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT;
+  return JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER) + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF) + OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_LONG + 3 * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT;
 }
 
 - (jlong)ramBytesUsed {
@@ -153,7 +161,7 @@ __attribute__((unused)) static id OrgApacheLuceneUtilPackedAbstractPagedMutable_
     { "setWithLong:withLong:", "set", "V", 0x11, NULL, NULL },
     { "baseRamBytesUsed", NULL, "J", 0x4, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
     { "newUnfilledCopyWithLong:", "newUnfilledCopy", "TT;", 0x404, NULL, "(J)TT;" },
     { "resizeWithLong:", "resize", "TT;", 0x11, NULL, "(J)TT;" },
     { "growWithLong:", "grow", "TT;", 0x11, NULL, "(J)TT;" },
@@ -225,7 +233,7 @@ id OrgApacheLuceneUtilPackedAbstractPagedMutable_resizeWithLong_(OrgApacheLucene
 id OrgApacheLuceneUtilPackedAbstractPagedMutable_growWithLong_(OrgApacheLuceneUtilPackedAbstractPagedMutable *self, jlong minSize) {
   JreAssert((minSize >= 0), (@"org/apache/lucene/util/packed/AbstractPagedMutable.java:149 condition failed: assert minSize >= 0;"));
   if (minSize <= OrgApacheLuceneUtilPackedAbstractPagedMutable_size(self)) {
-    OrgApacheLuceneUtilPackedAbstractPagedMutable *result = (OrgApacheLuceneUtilPackedAbstractPagedMutable *) check_class_cast(self, [OrgApacheLuceneUtilPackedAbstractPagedMutable class]);
+    OrgApacheLuceneUtilPackedAbstractPagedMutable *result = self;
     return result;
   }
   jlong extra = JreURShift64(minSize, 3);

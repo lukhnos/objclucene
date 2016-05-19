@@ -5,29 +5,32 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisPayloadsIdentityEncoder_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisPayloadsIdentityEncoder_RESTRICT
-#define OrgApacheLuceneAnalysisPayloadsIdentityEncoder_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsIdentityEncoder")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisPayloadsIdentityEncoder
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsIdentityEncoder 0
 #else
-#define OrgApacheLuceneAnalysisPayloadsIdentityEncoder_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsIdentityEncoder 1
 #endif
-#undef OrgApacheLuceneAnalysisPayloadsIdentityEncoder_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisPayloadsIdentityEncoder
 
-#if !defined (_OrgApacheLuceneAnalysisPayloadsIdentityEncoder_) && (OrgApacheLuceneAnalysisPayloadsIdentityEncoder_INCLUDE_ALL || OrgApacheLuceneAnalysisPayloadsIdentityEncoder_INCLUDE)
-#define _OrgApacheLuceneAnalysisPayloadsIdentityEncoder_
+#if !defined (OrgApacheLuceneAnalysisPayloadsIdentityEncoder_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsIdentityEncoder || defined(INCLUDE_OrgApacheLuceneAnalysisPayloadsIdentityEncoder))
+#define OrgApacheLuceneAnalysisPayloadsIdentityEncoder_
 
-#define OrgApacheLuceneAnalysisPayloadsAbstractEncoder_RESTRICT 1
-#define OrgApacheLuceneAnalysisPayloadsAbstractEncoder_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisPayloadsAbstractEncoder 1
+#define INCLUDE_OrgApacheLuceneAnalysisPayloadsAbstractEncoder 1
 #include "org/apache/lucene/analysis/payloads/AbstractEncoder.h"
 
-#define OrgApacheLuceneAnalysisPayloadsPayloadEncoder_RESTRICT 1
-#define OrgApacheLuceneAnalysisPayloadsPayloadEncoder_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisPayloadsPayloadEncoder 1
+#define INCLUDE_OrgApacheLuceneAnalysisPayloadsPayloadEncoder 1
 #include "org/apache/lucene/analysis/payloads/PayloadEncoder.h"
 
 @class IOSCharArray;
 @class JavaNioCharsetCharset;
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief Does nothing other than convert the char array to a byte array using the specified encoding.
+ */
 @interface OrgApacheLuceneAnalysisPayloadsIdentityEncoder : OrgApacheLuceneAnalysisPayloadsAbstractEncoder < OrgApacheLuceneAnalysisPayloadsPayloadEncoder > {
  @public
   JavaNioCharsetCharset *charset_;
@@ -53,12 +56,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPayloadsIdentityEncoder_init(OrgAp
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsIdentityEncoder *new_OrgApacheLuceneAnalysisPayloadsIdentityEncoder_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsIdentityEncoder *create_OrgApacheLuceneAnalysisPayloadsIdentityEncoder_init();
+
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPayloadsIdentityEncoder_initWithJavaNioCharsetCharset_(OrgApacheLuceneAnalysisPayloadsIdentityEncoder *self, JavaNioCharsetCharset *charset);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsIdentityEncoder *new_OrgApacheLuceneAnalysisPayloadsIdentityEncoder_initWithJavaNioCharsetCharset_(JavaNioCharsetCharset *charset) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsIdentityEncoder *create_OrgApacheLuceneAnalysisPayloadsIdentityEncoder_initWithJavaNioCharsetCharset_(JavaNioCharsetCharset *charset);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPayloadsIdentityEncoder)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisPayloadsIdentityEncoder_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsIdentityEncoder")

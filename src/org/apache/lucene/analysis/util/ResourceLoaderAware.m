@@ -3,10 +3,7 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/util/ResourceLoaderAware.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "org/apache/lucene/analysis/util/ResourceLoader.h"
 #include "org/apache/lucene/analysis/util/ResourceLoaderAware.h"
 
 @interface OrgApacheLuceneAnalysisUtilResourceLoaderAware : NSObject

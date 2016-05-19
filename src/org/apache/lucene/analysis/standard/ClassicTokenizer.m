@@ -22,6 +22,9 @@
 
 @interface OrgApacheLuceneAnalysisStandardClassicTokenizer () {
  @public
+  /*!
+   @brief A private instance of the JFlex-constructed scanner
+   */
   OrgApacheLuceneAnalysisStandardClassicTokenizerImpl *scanner_;
   jint skippedPositions_;
   jint maxTokenLength_;
@@ -45,13 +48,53 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisStandardClassicTokeni
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisStandardClassicTokenizer)
 
-IOSObjectArray *OrgApacheLuceneAnalysisStandardClassicTokenizer_TOKEN_TYPES_;
+IOSObjectArray *OrgApacheLuceneAnalysisStandardClassicTokenizer_TOKEN_TYPES;
 
 @implementation OrgApacheLuceneAnalysisStandardClassicTokenizer
 
++ (jint)ALPHANUM {
+  return OrgApacheLuceneAnalysisStandardClassicTokenizer_ALPHANUM;
+}
+
++ (jint)APOSTROPHE {
+  return OrgApacheLuceneAnalysisStandardClassicTokenizer_APOSTROPHE;
+}
+
++ (jint)ACRONYM {
+  return OrgApacheLuceneAnalysisStandardClassicTokenizer_ACRONYM;
+}
+
++ (jint)COMPANY {
+  return OrgApacheLuceneAnalysisStandardClassicTokenizer_COMPANY;
+}
+
++ (jint)EMAIL {
+  return OrgApacheLuceneAnalysisStandardClassicTokenizer_EMAIL;
+}
+
++ (jint)HOST {
+  return OrgApacheLuceneAnalysisStandardClassicTokenizer_HOST;
+}
+
++ (jint)NUM {
+  return OrgApacheLuceneAnalysisStandardClassicTokenizer_NUM;
+}
+
++ (jint)CJ {
+  return OrgApacheLuceneAnalysisStandardClassicTokenizer_CJ;
+}
+
++ (jint)ACRONYM_DEP {
+  return OrgApacheLuceneAnalysisStandardClassicTokenizer_ACRONYM_DEP;
+}
+
++ (IOSObjectArray *)TOKEN_TYPES {
+  return OrgApacheLuceneAnalysisStandardClassicTokenizer_TOKEN_TYPES;
+}
+
 - (void)setMaxTokenLengthWithInt:(jint)length {
   if (length < 1) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"maxTokenLength must be greater than zero") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"maxTokenLength must be greater than zero");
   }
   self->maxTokenLength_ = length;
 }
@@ -84,17 +127,17 @@ J2OBJC_IGNORE_DESIGNATED_END
     if (tokenType == OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_YYEOF) {
       return false;
     }
-    if ([scanner_ yylength] <= maxTokenLength_) {
+    if ([((OrgApacheLuceneAnalysisStandardClassicTokenizerImpl *) nil_chk(scanner_)) yylength] <= maxTokenLength_) {
       [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncrAtt_)) setPositionIncrementWithInt:skippedPositions_ + 1];
-      [scanner_ getTextWithOrgApacheLuceneAnalysisTokenattributesCharTermAttribute:termAtt_];
-      jint start = [scanner_ yychar];
+      [((OrgApacheLuceneAnalysisStandardClassicTokenizerImpl *) nil_chk(scanner_)) getTextWithOrgApacheLuceneAnalysisTokenattributesCharTermAttribute:termAtt_];
+      jint start = [((OrgApacheLuceneAnalysisStandardClassicTokenizerImpl *) nil_chk(scanner_)) yychar];
       [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) setOffsetWithInt:[self correctOffsetWithInt:start] withInt:[self correctOffsetWithInt:start + [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) length]]];
       if (tokenType == OrgApacheLuceneAnalysisStandardClassicTokenizer_ACRONYM_DEP) {
-        [((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(typeAtt_)) setTypeWithNSString:IOSObjectArray_Get(nil_chk(OrgApacheLuceneAnalysisStandardClassicTokenizer_TOKEN_TYPES_), OrgApacheLuceneAnalysisStandardClassicTokenizer_HOST)];
+        [((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(typeAtt_)) setTypeWithNSString:IOSObjectArray_Get(nil_chk(OrgApacheLuceneAnalysisStandardClassicTokenizer_TOKEN_TYPES), OrgApacheLuceneAnalysisStandardClassicTokenizer_HOST)];
         [termAtt_ setLengthWithInt:[termAtt_ length] - 1];
       }
       else {
-        [((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(typeAtt_)) setTypeWithNSString:IOSObjectArray_Get(nil_chk(OrgApacheLuceneAnalysisStandardClassicTokenizer_TOKEN_TYPES_), tokenType)];
+        [((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(typeAtt_)) setTypeWithNSString:IOSObjectArray_Get(nil_chk(OrgApacheLuceneAnalysisStandardClassicTokenizer_TOKEN_TYPES), tokenType)];
       }
       return true;
     }
@@ -104,9 +147,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)end {
   [super end];
-  jint finalOffset = [self correctOffsetWithInt:[((OrgApacheLuceneAnalysisStandardClassicTokenizerImpl *) nil_chk(scanner_)) yychar] + [scanner_ yylength]];
+  jint finalOffset = [self correctOffsetWithInt:[((OrgApacheLuceneAnalysisStandardClassicTokenizerImpl *) nil_chk(scanner_)) yychar] + [((OrgApacheLuceneAnalysisStandardClassicTokenizerImpl *) nil_chk(scanner_)) yylength]];
   [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) setOffsetWithInt:finalOffset withInt:finalOffset];
-  [posIncrAtt_ setPositionIncrementWithInt:[((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncrAtt_)) getPositionIncrement] + skippedPositions_];
+  [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncrAtt_)) setPositionIncrementWithInt:[posIncrAtt_ getPositionIncrement] + skippedPositions_];
 }
 
 - (void)close {
@@ -131,7 +174,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisStandardClassicTokenizer class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisStandardClassicTokenizer_TOKEN_TYPES_, [IOSObjectArray newArrayWithObjects:(id[]){ @"<ALPHANUM>", @"<APOSTROPHE>", @"<ACRONYM>", @"<COMPANY>", @"<EMAIL>", @"<HOST>", @"<NUM>", @"<CJ>", @"<ACRONYM_DEP>" } count:9 type:NSString_class_()]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisStandardClassicTokenizer_TOKEN_TYPES, [IOSObjectArray newArrayWithObjects:(id[]){ @"<ALPHANUM>", @"<APOSTROPHE>", @"<ACRONYM>", @"<COMPANY>", @"<EMAIL>", @"<HOST>", @"<NUM>", @"<CJ>", @"<ACRONYM_DEP>" } count:9 type:NSString_class_()]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisStandardClassicTokenizer)
   }
 }
@@ -159,7 +202,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "NUM", "NUM", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisStandardClassicTokenizer_NUM },
     { "CJ", "CJ", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisStandardClassicTokenizer_CJ },
     { "ACRONYM_DEP", "ACRONYM_DEP", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisStandardClassicTokenizer_ACRONYM_DEP },
-    { "TOKEN_TYPES_", NULL, 0x19, "[Ljava.lang.String;", &OrgApacheLuceneAnalysisStandardClassicTokenizer_TOKEN_TYPES_, NULL, .constantValue.asLong = 0 },
+    { "TOKEN_TYPES", "TOKEN_TYPES", 0x19, "[Ljava.lang.String;", &OrgApacheLuceneAnalysisStandardClassicTokenizer_TOKEN_TYPES, NULL, .constantValue.asLong = 0 },
     { "skippedPositions_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "maxTokenLength_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
@@ -184,9 +227,11 @@ void OrgApacheLuceneAnalysisStandardClassicTokenizer_init(OrgApacheLuceneAnalysi
 }
 
 OrgApacheLuceneAnalysisStandardClassicTokenizer *new_OrgApacheLuceneAnalysisStandardClassicTokenizer_init() {
-  OrgApacheLuceneAnalysisStandardClassicTokenizer *self = [OrgApacheLuceneAnalysisStandardClassicTokenizer alloc];
-  OrgApacheLuceneAnalysisStandardClassicTokenizer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisStandardClassicTokenizer, init)
+}
+
+OrgApacheLuceneAnalysisStandardClassicTokenizer *create_OrgApacheLuceneAnalysisStandardClassicTokenizer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisStandardClassicTokenizer, init)
 }
 
 void OrgApacheLuceneAnalysisStandardClassicTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneAnalysisStandardClassicTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory) {
@@ -200,9 +245,11 @@ void OrgApacheLuceneAnalysisStandardClassicTokenizer_initWithOrgApacheLuceneUtil
 }
 
 OrgApacheLuceneAnalysisStandardClassicTokenizer *new_OrgApacheLuceneAnalysisStandardClassicTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneUtilAttributeFactory *factory) {
-  OrgApacheLuceneAnalysisStandardClassicTokenizer *self = [OrgApacheLuceneAnalysisStandardClassicTokenizer alloc];
-  OrgApacheLuceneAnalysisStandardClassicTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(self, factory);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisStandardClassicTokenizer, initWithOrgApacheLuceneUtilAttributeFactory_, factory)
+}
+
+OrgApacheLuceneAnalysisStandardClassicTokenizer *create_OrgApacheLuceneAnalysisStandardClassicTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneUtilAttributeFactory *factory) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisStandardClassicTokenizer, initWithOrgApacheLuceneUtilAttributeFactory_, factory)
 }
 
 void OrgApacheLuceneAnalysisStandardClassicTokenizer_init__(OrgApacheLuceneAnalysisStandardClassicTokenizer *self) {

@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisHunspellDictionary_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisHunspellDictionary_RESTRICT
-#define OrgApacheLuceneAnalysisHunspellDictionary_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisHunspellDictionary")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisHunspellDictionary
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisHunspellDictionary 0
 #else
-#define OrgApacheLuceneAnalysisHunspellDictionary_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisHunspellDictionary 1
 #endif
-#undef OrgApacheLuceneAnalysisHunspellDictionary_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisHunspellDictionary
 
-#if !defined (_OrgApacheLuceneAnalysisHunspellDictionary_) && (OrgApacheLuceneAnalysisHunspellDictionary_INCLUDE_ALL || OrgApacheLuceneAnalysisHunspellDictionary_INCLUDE)
-#define _OrgApacheLuceneAnalysisHunspellDictionary_
+#if !defined (OrgApacheLuceneAnalysisHunspellDictionary_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisHunspellDictionary || defined(INCLUDE_OrgApacheLuceneAnalysisHunspellDictionary))
+#define OrgApacheLuceneAnalysisHunspellDictionary_
 
 @class IOSByteArray;
 @class IOSCharArray;
@@ -33,9 +33,10 @@
 @protocol JavaUtilList;
 @protocol JavaUtilMap;
 
-#define OrgApacheLuceneAnalysisHunspellDictionary_FLAG_SEPARATOR 0x001f
-#define OrgApacheLuceneAnalysisHunspellDictionary_MORPH_SEPARATOR 0x001e
-
+/*!
+ @brief In-memory structure for the dictionary (.dic) and affix (.aff)
+ data of a hunspell dictionary.
+ */
 @interface OrgApacheLuceneAnalysisHunspellDictionary : NSObject {
  @public
   OrgApacheLuceneUtilFstFST *prefixes_;
@@ -63,11 +64,39 @@
   jboolean alternateCasing_;
 }
 
++ (IOSCharArray *)NOFLAGS;
+
++ (JavaUtilRegexPattern *)ENCODING_PATTERN;
+
++ (id<JavaUtilMap>)CHARSET_ALIASES;
+
++ (jchar)FLAG_SEPARATOR;
+
++ (jchar)MORPH_SEPARATOR;
+
 #pragma mark Public
 
+/*!
+ @brief Creates a new Dictionary containing the information read from the provided InputStreams to hunspell affix
+ and dictionary files.
+ You have to close the provided InputStreams yourself.
+ @param affix InputStream for reading the hunspell affix file (won't be closed).
+ @param dictionary InputStream for reading the hunspell dictionary file (won't be closed).
+ @throws IOException Can be thrown while reading from the InputStreams
+ @throws ParseException Can be thrown if the content of the files does not meet expected formats
+ */
 - (instancetype)initWithJavaIoInputStream:(JavaIoInputStream *)affix
                     withJavaIoInputStream:(JavaIoInputStream *)dictionary;
 
+/*!
+ @brief Creates a new Dictionary containing the information read from the provided InputStreams to hunspell affix
+ and dictionary files.
+ You have to close the provided InputStreams yourself.
+ @param affix InputStream for reading the hunspell affix file (won't be closed).
+ @param dictionaries InputStream for reading the hunspell dictionary files (won't be closed).
+ @throws IOException Can be thrown while reading from the InputStreams
+ @throws ParseException Can be thrown if the content of the files does not meet expected formats
+ */
 - (instancetype)initWithJavaIoInputStream:(JavaIoInputStream *)affix
                          withJavaUtilList:(id<JavaUtilList>)dictionaries
                               withBoolean:(jboolean)ignoreCase;
@@ -77,6 +106,9 @@
 + (void)applyMappingsWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst
                          withJavaLangStringBuilder:(JavaLangStringBuilder *)sb;
 
+/*!
+ @brief folds single character (according to LANG if present)
+ */
 - (jchar)caseFoldWithChar:(jchar)c;
 
 - (id<JavaLangCharSequence>)cleanInputWithJavaLangCharSequence:(id<JavaLangCharSequence>)input
@@ -89,8 +121,20 @@
 
 + (NSString *)escapeDashWithNSString:(NSString *)re;
 
+/*!
+ @brief Parses the encoding specified in the affix file readable through the provided InputStream
+ @param affix InputStream for reading the affix file
+ @return Encoding specified in the affix file
+ @throws IOException Can be thrown while reading from the InputStream
+ @throws ParseException Thrown if the first non-empty non-comment line read from the file does not adhere to the format <code>SET <encoding></code>
+ */
 + (NSString *)getDictionaryEncodingWithJavaIoInputStream:(JavaIoInputStream *)affix;
 
+/*!
+ @brief Determines the appropriate <code>FlagParsingStrategy</code> based on the FLAG definition line taken from the affix file
+ @param flagLine Line containing the flag information
+ @return FlagParsingStrategy that handles parsing flags in the way specified in the FLAG definition
+ */
 + (OrgApacheLuceneAnalysisHunspellDictionary_FlagParsingStrategy *)getFlagParsingStrategyWithNSString:(NSString *)flagLine;
 
 - (NSString *)getStemExceptionWithInt:(jint)id_;
@@ -114,6 +158,9 @@
                                                   withInt:(jint)offset
                                                   withInt:(jint)length;
 
+/*!
+ @brief Looks up Hunspell word forms from the dictionary
+ */
 - (OrgApacheLuceneUtilIntsRef *)lookupWordWithCharArray:(IOSCharArray *)word
                                                 withInt:(jint)offset
                                                 withInt:(jint)length;
@@ -138,22 +185,43 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisHunspellDictionary, iconv_, OrgApache
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisHunspellDictionary, oconv_, OrgApacheLuceneUtilFstFST *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisHunspellDictionary, language_, NSString *)
 
-FOUNDATION_EXPORT IOSCharArray *OrgApacheLuceneAnalysisHunspellDictionary_NOFLAGS_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHunspellDictionary, NOFLAGS_, IOSCharArray *)
+inline IOSCharArray *OrgApacheLuceneAnalysisHunspellDictionary_get_NOFLAGS();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT IOSCharArray *OrgApacheLuceneAnalysisHunspellDictionary_NOFLAGS;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHunspellDictionary, NOFLAGS, IOSCharArray *)
 
-FOUNDATION_EXPORT JavaUtilRegexPattern *OrgApacheLuceneAnalysisHunspellDictionary_ENCODING_PATTERN_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHunspellDictionary, ENCODING_PATTERN_, JavaUtilRegexPattern *)
+/*!
+ @brief pattern accepts optional BOM + SET + any whitespace
+ */
+inline JavaUtilRegexPattern *OrgApacheLuceneAnalysisHunspellDictionary_get_ENCODING_PATTERN();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT JavaUtilRegexPattern *OrgApacheLuceneAnalysisHunspellDictionary_ENCODING_PATTERN;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHunspellDictionary, ENCODING_PATTERN, JavaUtilRegexPattern *)
 
-FOUNDATION_EXPORT id<JavaUtilMap> OrgApacheLuceneAnalysisHunspellDictionary_CHARSET_ALIASES_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHunspellDictionary, CHARSET_ALIASES_, id<JavaUtilMap>)
+inline id<JavaUtilMap> OrgApacheLuceneAnalysisHunspellDictionary_get_CHARSET_ALIASES();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT id<JavaUtilMap> OrgApacheLuceneAnalysisHunspellDictionary_CHARSET_ALIASES;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHunspellDictionary, CHARSET_ALIASES, id<JavaUtilMap>)
+
+inline jchar OrgApacheLuceneAnalysisHunspellDictionary_get_FLAG_SEPARATOR();
+#define OrgApacheLuceneAnalysisHunspellDictionary_FLAG_SEPARATOR 0x001f
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisHunspellDictionary, FLAG_SEPARATOR, jchar)
+
+inline jchar OrgApacheLuceneAnalysisHunspellDictionary_get_MORPH_SEPARATOR();
+#define OrgApacheLuceneAnalysisHunspellDictionary_MORPH_SEPARATOR 0x001e
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisHunspellDictionary, MORPH_SEPARATOR, jchar)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisHunspellDictionary_initWithJavaIoInputStream_withJavaIoInputStream_(OrgApacheLuceneAnalysisHunspellDictionary *self, JavaIoInputStream *affix, JavaIoInputStream *dictionary);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisHunspellDictionary *new_OrgApacheLuceneAnalysisHunspellDictionary_initWithJavaIoInputStream_withJavaIoInputStream_(JavaIoInputStream *affix, JavaIoInputStream *dictionary) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisHunspellDictionary *create_OrgApacheLuceneAnalysisHunspellDictionary_initWithJavaIoInputStream_withJavaIoInputStream_(JavaIoInputStream *affix, JavaIoInputStream *dictionary);
+
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisHunspellDictionary_initWithJavaIoInputStream_withJavaUtilList_withBoolean_(OrgApacheLuceneAnalysisHunspellDictionary *self, JavaIoInputStream *affix, id<JavaUtilList> dictionaries, jboolean ignoreCase);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisHunspellDictionary *new_OrgApacheLuceneAnalysisHunspellDictionary_initWithJavaIoInputStream_withJavaUtilList_withBoolean_(JavaIoInputStream *affix, id<JavaUtilList> dictionaries, jboolean ignoreCase) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisHunspellDictionary *create_OrgApacheLuceneAnalysisHunspellDictionary_initWithJavaIoInputStream_withJavaUtilList_withBoolean_(JavaIoInputStream *affix, id<JavaUtilList> dictionaries, jboolean ignoreCase);
 
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisHunspellDictionary_escapeDashWithNSString_(NSString *re);
 
@@ -177,19 +245,32 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisHunspellDictionary)
 
 #endif
 
-#if !defined (_OrgApacheLuceneAnalysisHunspellDictionary_FlagParsingStrategy_) && (OrgApacheLuceneAnalysisHunspellDictionary_INCLUDE_ALL || OrgApacheLuceneAnalysisHunspellDictionary_FlagParsingStrategy_INCLUDE)
-#define _OrgApacheLuceneAnalysisHunspellDictionary_FlagParsingStrategy_
+#if !defined (OrgApacheLuceneAnalysisHunspellDictionary_FlagParsingStrategy_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisHunspellDictionary || defined(INCLUDE_OrgApacheLuceneAnalysisHunspellDictionary_FlagParsingStrategy))
+#define OrgApacheLuceneAnalysisHunspellDictionary_FlagParsingStrategy_
 
 @class IOSCharArray;
 
+/*!
+ @brief Abstraction of the process of parsing flags taken from the affix and dic files
+ */
 @interface OrgApacheLuceneAnalysisHunspellDictionary_FlagParsingStrategy : NSObject
 
 #pragma mark Package-Private
 
 - (instancetype)init;
 
+/*!
+ @brief Parses the given String into a single flag
+ @param rawFlag String to parse into a flag
+ @return Parsed flag
+ */
 - (jchar)parseFlagWithNSString:(NSString *)rawFlag;
 
+/*!
+ @brief Parses the given String into multiple flags
+ @param rawFlags String to parse into flags
+ @return Parsed flags
+ */
 - (IOSCharArray *)parseFlagsWithNSString:(NSString *)rawFlags;
 
 @end
@@ -202,4 +283,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisHunspellDictionary_FlagParsing
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisHunspellDictionary_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisHunspellDictionary")

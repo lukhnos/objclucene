@@ -30,7 +30,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexBitsSlice, parent_, id<OrgApacheLuceneUt
 
 - (jboolean)getWithInt:(jint)doc {
   if (doc >= length_) {
-    @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$I", @"doc ", doc, @" is out of bounds 0 .. ", (length_ - 1))) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I$I", @"doc ", doc, @" is out of bounds 0 .. ", (length_ - 1)));
   }
   JreAssert((doc < length_), (JreStrcat("$I$I", @"doc=", doc, @" length=", length_)));
   return [((id<OrgApacheLuceneUtilBits>) nil_chk(parent_)) getWithInt:doc + start_];
@@ -71,9 +71,11 @@ void OrgApacheLuceneIndexBitsSlice_initWithOrgApacheLuceneUtilBits_withOrgApache
 }
 
 OrgApacheLuceneIndexBitsSlice *new_OrgApacheLuceneIndexBitsSlice_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexReaderSlice_(id<OrgApacheLuceneUtilBits> parent, OrgApacheLuceneIndexReaderSlice *slice) {
-  OrgApacheLuceneIndexBitsSlice *self = [OrgApacheLuceneIndexBitsSlice alloc];
-  OrgApacheLuceneIndexBitsSlice_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexReaderSlice_(self, parent, slice);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexBitsSlice, initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexReaderSlice_, parent, slice)
+}
+
+OrgApacheLuceneIndexBitsSlice *create_OrgApacheLuceneIndexBitsSlice_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexReaderSlice_(id<OrgApacheLuceneUtilBits> parent, OrgApacheLuceneIndexReaderSlice *slice) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexBitsSlice, initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexReaderSlice_, parent, slice)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexBitsSlice)

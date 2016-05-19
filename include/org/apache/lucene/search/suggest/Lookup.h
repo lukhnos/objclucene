@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSuggestLookup_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSuggestLookup_RESTRICT
-#define OrgApacheLuceneSearchSuggestLookup_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestLookup")
+#ifdef RESTRICT_OrgApacheLuceneSearchSuggestLookup
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestLookup 0
 #else
-#define OrgApacheLuceneSearchSuggestLookup_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestLookup 1
 #endif
-#undef OrgApacheLuceneSearchSuggestLookup_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSuggestLookup
 
-#if !defined (_OrgApacheLuceneSearchSuggestLookup_) && (OrgApacheLuceneSearchSuggestLookup_INCLUDE_ALL || OrgApacheLuceneSearchSuggestLookup_INCLUDE)
-#define _OrgApacheLuceneSearchSuggestLookup_
+#if !defined (OrgApacheLuceneSearchSuggestLookup_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestLookup || defined(INCLUDE_OrgApacheLuceneSearchSuggestLookup))
+#define OrgApacheLuceneSearchSuggestLookup_
 
-#define OrgApacheLuceneUtilAccountable_RESTRICT 1
-#define OrgApacheLuceneUtilAccountable_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAccountable 1
+#define INCLUDE_OrgApacheLuceneUtilAccountable 1
 #include "org/apache/lucene/util/Accountable.h"
 
 @class JavaIoInputStream;
@@ -32,43 +32,117 @@
 @protocol OrgApacheLuceneSearchSpellDictionary;
 @protocol OrgApacheLuceneSearchSuggestInputIterator;
 
+/*!
+ @brief Simple Lookup interface for <code>CharSequence</code> suggestions.
+ */
 @interface OrgApacheLuceneSearchSuggestLookup : NSObject < OrgApacheLuceneUtilAccountable >
+
++ (id<JavaUtilComparator>)CHARSEQUENCE_COMPARATOR;
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ (For invocation by subclass 
+ constructors, typically implicit.)
+ */
 - (instancetype)init;
 
+/*!
+ @brief Build lookup from a dictionary.
+ Some implementations may require sorted
+ or unsorted keys from the dictionary's iterator - use
+ <code>SortedInputIterator</code> or
+ <code>UnsortedInputIterator</code> in such case.
+ */
 - (void)buildWithOrgApacheLuceneSearchSpellDictionary:(id<OrgApacheLuceneSearchSpellDictionary>)dict;
 
+/*!
+ @brief Builds up a new internal <code>Lookup</code> representation based on the given <code>InputIterator</code>.
+ The implementation might re-sort the data internally.
+ */
 - (void)buildWithOrgApacheLuceneSearchSuggestInputIterator:(id<OrgApacheLuceneSearchSuggestInputIterator>)inputIterator;
 
+/*!
+ @brief Returns nested resources of this class.
+ The result should be a point-in-time snapshot (to avoid race conditions).
+ - seealso: Accountables
+ */
 - (id<JavaUtilCollection>)getChildResources;
 
+/*!
+ @brief Get the number of entries the lookup was built with
+ @return total number of suggester entries
+ */
 - (jlong)getCount;
 
+/*!
+ @brief Discard current lookup data and load it from a previously saved copy.
+ Optional operation.
+ @param input the <code>DataInput</code> to load the lookup data.
+ @return true if completed successfully, false if unsuccessful or not supported.
+ @throws IOException when fatal IO error occurs.
+ */
 - (jboolean)load__WithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)input;
 
+/*!
+ @brief Calls <code>load(DataInput)</code> after converting
+ <code>InputStream</code> to <code>DataInput</code>
+ */
 - (jboolean)load__WithJavaIoInputStream:(JavaIoInputStream *)input;
 
+/*!
+ @brief Look up a key and return possible completion for this key.
+ @param key lookup key. Depending on the implementation this may be
+ a prefix, misspelling, or even infix.
+ @param onlyMorePopular return only more popular results
+ @param num maximum number of results to return
+ @return a list of possible completions, with their relative weight (e.g. popularity)
+ */
 - (id<JavaUtilList>)lookupWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
                                        withBoolean:(jboolean)onlyMorePopular
                                            withInt:(jint)num;
 
+/*!
+ @brief Look up a key and return possible completion for this key.
+ @param key lookup key. Depending on the implementation this may be
+ a prefix, misspelling, or even infix.
+ @param contexts contexts to filter the lookup by, or null if all contexts are allowed; if the suggestion contains any of the contexts, it's a match
+ @param onlyMorePopular return only more popular results
+ @param num maximum number of results to return
+ @return a list of possible completions, with their relative weight (e.g. popularity)
+ */
 - (id<JavaUtilList>)lookupWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
                                    withJavaUtilSet:(id<JavaUtilSet>)contexts
                                        withBoolean:(jboolean)onlyMorePopular
                                            withInt:(jint)num;
 
+/*!
+ @brief Persist the constructed lookup data to a directory.
+ Optional operation.
+ @param output <code>DataOutput</code> to write the data to.
+ @return true if successful, false if unsuccessful or not supported.
+ @throws IOException when fatal IO error occurs.
+ */
 - (jboolean)storeWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)output;
 
+/*!
+ @brief Calls <code>store(DataOutput)</code> after converting
+ <code>OutputStream</code> to <code>DataOutput</code>
+ */
 - (jboolean)storeWithJavaIoOutputStream:(JavaIoOutputStream *)output;
 
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSuggestLookup)
 
-FOUNDATION_EXPORT id<JavaUtilComparator> OrgApacheLuceneSearchSuggestLookup_CHARSEQUENCE_COMPARATOR_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSuggestLookup, CHARSEQUENCE_COMPARATOR_, id<JavaUtilComparator>)
+/*!
+ @brief A simple char-by-char comparator for <code>CharSequence</code>
+ */
+inline id<JavaUtilComparator> OrgApacheLuceneSearchSuggestLookup_get_CHARSEQUENCE_COMPARATOR();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT id<JavaUtilComparator> OrgApacheLuceneSearchSuggestLookup_CHARSEQUENCE_COMPARATOR;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchSuggestLookup, CHARSEQUENCE_COMPARATOR, id<JavaUtilComparator>)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestLookup_init(OrgApacheLuceneSearchSuggestLookup *self);
 
@@ -76,55 +150,95 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestLookup)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchSuggestLookup_LookupResult_) && (OrgApacheLuceneSearchSuggestLookup_INCLUDE_ALL || OrgApacheLuceneSearchSuggestLookup_LookupResult_INCLUDE)
-#define _OrgApacheLuceneSearchSuggestLookup_LookupResult_
+#if !defined (OrgApacheLuceneSearchSuggestLookup_LookupResult_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestLookup || defined(INCLUDE_OrgApacheLuceneSearchSuggestLookup_LookupResult))
+#define OrgApacheLuceneSearchSuggestLookup_LookupResult_
 
-#define JavaLangComparable_RESTRICT 1
-#define JavaLangComparable_INCLUDE 1
+#define RESTRICT_JavaLangComparable 1
+#define INCLUDE_JavaLangComparable 1
 #include "java/lang/Comparable.h"
 
 @class OrgApacheLuceneUtilBytesRef;
 @protocol JavaLangCharSequence;
 @protocol JavaUtilSet;
 
+/*!
+ @brief Result of a lookup.
+ */
 @interface OrgApacheLuceneSearchSuggestLookup_LookupResult : NSObject < JavaLangComparable > {
  @public
+  /*!
+   @brief the key's text
+   */
   id<JavaLangCharSequence> key_;
+  /*!
+   @brief Expert: custom Object to hold the result of a
+ highlighted suggestion.
+   */
   id highlightKey_;
+  /*!
+   @brief the key's weight
+   */
   jlong value_;
+  /*!
+   @brief the key's payload (null if not present)
+   */
   OrgApacheLuceneUtilBytesRef *payload_;
+  /*!
+   @brief the key's contexts (null if not present)
+   */
   id<JavaUtilSet> contexts_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief Create a new result from a key+weight pair.
+ */
 - (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
                                     withLong:(jlong)value;
 
+/*!
+ @brief Create a new result from a key+weight+payload triple.
+ */
 - (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
                                     withLong:(jlong)value
              withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload;
 
+/*!
+ @brief Create a new result from a key+weight+payload+contexts triple.
+ */
 - (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
                                     withLong:(jlong)value
              withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload
                              withJavaUtilSet:(id<JavaUtilSet>)contexts;
 
+/*!
+ @brief Create a new result from a key+weight+contexts triple.
+ */
 - (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
                                     withLong:(jlong)value
                              withJavaUtilSet:(id<JavaUtilSet>)contexts;
 
+/*!
+ @brief Create a new result from a key+highlightKey+weight+payload triple.
+ */
 - (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
                                       withId:(id)highlightKey
                                     withLong:(jlong)value
              withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload;
 
+/*!
+ @brief Create a new result from a key+highlightKey+weight+payload+contexts triple.
+ */
 - (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
                                       withId:(id)highlightKey
                                     withLong:(jlong)value
              withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload
                              withJavaUtilSet:(id<JavaUtilSet>)contexts;
 
+/*!
+ @brief Compare alphabetically.
+ */
 - (jint)compareToWithId:(OrgApacheLuceneSearchSuggestLookup_LookupResult *)o;
 
 - (NSString *)description;
@@ -142,46 +256,68 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJ
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestLookup_LookupResult *new_OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withLong_(id<JavaLangCharSequence> key, jlong value) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestLookup_LookupResult *create_OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withLong_(id<JavaLangCharSequence> key, jlong value);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withLong_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneSearchSuggestLookup_LookupResult *self, id<JavaLangCharSequence> key, jlong value, OrgApacheLuceneUtilBytesRef *payload);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestLookup_LookupResult *new_OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withLong_withOrgApacheLuceneUtilBytesRef_(id<JavaLangCharSequence> key, jlong value, OrgApacheLuceneUtilBytesRef *payload) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestLookup_LookupResult *create_OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withLong_withOrgApacheLuceneUtilBytesRef_(id<JavaLangCharSequence> key, jlong value, OrgApacheLuceneUtilBytesRef *payload);
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withId_withLong_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneSearchSuggestLookup_LookupResult *self, id<JavaLangCharSequence> key, id highlightKey, jlong value, OrgApacheLuceneUtilBytesRef *payload);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestLookup_LookupResult *new_OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withId_withLong_withOrgApacheLuceneUtilBytesRef_(id<JavaLangCharSequence> key, id highlightKey, jlong value, OrgApacheLuceneUtilBytesRef *payload) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestLookup_LookupResult *create_OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withId_withLong_withOrgApacheLuceneUtilBytesRef_(id<JavaLangCharSequence> key, id highlightKey, jlong value, OrgApacheLuceneUtilBytesRef *payload);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withLong_withOrgApacheLuceneUtilBytesRef_withJavaUtilSet_(OrgApacheLuceneSearchSuggestLookup_LookupResult *self, id<JavaLangCharSequence> key, jlong value, OrgApacheLuceneUtilBytesRef *payload, id<JavaUtilSet> contexts);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestLookup_LookupResult *new_OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withLong_withOrgApacheLuceneUtilBytesRef_withJavaUtilSet_(id<JavaLangCharSequence> key, jlong value, OrgApacheLuceneUtilBytesRef *payload, id<JavaUtilSet> contexts) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestLookup_LookupResult *create_OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withLong_withOrgApacheLuceneUtilBytesRef_withJavaUtilSet_(id<JavaLangCharSequence> key, jlong value, OrgApacheLuceneUtilBytesRef *payload, id<JavaUtilSet> contexts);
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withLong_withJavaUtilSet_(OrgApacheLuceneSearchSuggestLookup_LookupResult *self, id<JavaLangCharSequence> key, jlong value, id<JavaUtilSet> contexts);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestLookup_LookupResult *new_OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withLong_withJavaUtilSet_(id<JavaLangCharSequence> key, jlong value, id<JavaUtilSet> contexts) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestLookup_LookupResult *create_OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withLong_withJavaUtilSet_(id<JavaLangCharSequence> key, jlong value, id<JavaUtilSet> contexts);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withId_withLong_withOrgApacheLuceneUtilBytesRef_withJavaUtilSet_(OrgApacheLuceneSearchSuggestLookup_LookupResult *self, id<JavaLangCharSequence> key, id highlightKey, jlong value, OrgApacheLuceneUtilBytesRef *payload, id<JavaUtilSet> contexts);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestLookup_LookupResult *new_OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withId_withLong_withOrgApacheLuceneUtilBytesRef_withJavaUtilSet_(id<JavaLangCharSequence> key, id highlightKey, jlong value, OrgApacheLuceneUtilBytesRef *payload, id<JavaUtilSet> contexts) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestLookup_LookupResult *create_OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withId_withLong_withOrgApacheLuceneUtilBytesRef_withJavaUtilSet_(id<JavaLangCharSequence> key, id highlightKey, jlong value, OrgApacheLuceneUtilBytesRef *payload, id<JavaUtilSet> contexts);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestLookup_LookupResult)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchSuggestLookup_LookupPriorityQueue_) && (OrgApacheLuceneSearchSuggestLookup_INCLUDE_ALL || OrgApacheLuceneSearchSuggestLookup_LookupPriorityQueue_INCLUDE)
-#define _OrgApacheLuceneSearchSuggestLookup_LookupPriorityQueue_
+#if !defined (OrgApacheLuceneSearchSuggestLookup_LookupPriorityQueue_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestLookup || defined(INCLUDE_OrgApacheLuceneSearchSuggestLookup_LookupPriorityQueue))
+#define OrgApacheLuceneSearchSuggestLookup_LookupPriorityQueue_
 
-#define OrgApacheLuceneUtilPriorityQueue_RESTRICT 1
-#define OrgApacheLuceneUtilPriorityQueue_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilPriorityQueue 1
+#define INCLUDE_OrgApacheLuceneUtilPriorityQueue 1
 #include "org/apache/lucene/util/PriorityQueue.h"
 
 @class IOSObjectArray;
 @class OrgApacheLuceneSearchSuggestLookup_LookupResult;
 
+/*!
+ @brief A <code>PriorityQueue</code> collecting a fixed size of high priority <code>LookupResult</code>
+ */
 @interface OrgApacheLuceneSearchSuggestLookup_LookupPriorityQueue : OrgApacheLuceneUtilPriorityQueue
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new priority queue of the specified size.
+ */
 - (instancetype)initWithInt:(jint)size;
 
+/*!
+ @brief Returns the top N results in descending order.
+ @return the top N results in descending order.
+ */
 - (IOSObjectArray *)getResults;
 
 #pragma mark Protected
@@ -197,8 +333,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestLookup_LookupPriorityQueue_in
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestLookup_LookupPriorityQueue *new_OrgApacheLuceneSearchSuggestLookup_LookupPriorityQueue_initWithInt_(jint size) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestLookup_LookupPriorityQueue *create_OrgApacheLuceneSearchSuggestLookup_LookupPriorityQueue_initWithInt_(jint size);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestLookup_LookupPriorityQueue)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSuggestLookup_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestLookup")

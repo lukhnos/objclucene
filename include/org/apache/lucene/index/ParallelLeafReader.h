@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexParallelLeafReader_INCLUDE_ALL")
-#if OrgApacheLuceneIndexParallelLeafReader_RESTRICT
-#define OrgApacheLuceneIndexParallelLeafReader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexParallelLeafReader")
+#ifdef RESTRICT_OrgApacheLuceneIndexParallelLeafReader
+#define INCLUDE_ALL_OrgApacheLuceneIndexParallelLeafReader 0
 #else
-#define OrgApacheLuceneIndexParallelLeafReader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexParallelLeafReader 1
 #endif
-#undef OrgApacheLuceneIndexParallelLeafReader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexParallelLeafReader
 
-#if !defined (_OrgApacheLuceneIndexParallelLeafReader_) && (OrgApacheLuceneIndexParallelLeafReader_INCLUDE_ALL || OrgApacheLuceneIndexParallelLeafReader_INCLUDE)
-#define _OrgApacheLuceneIndexParallelLeafReader_
+#if !defined (OrgApacheLuceneIndexParallelLeafReader_) && (INCLUDE_ALL_OrgApacheLuceneIndexParallelLeafReader || defined(INCLUDE_OrgApacheLuceneIndexParallelLeafReader))
+#define OrgApacheLuceneIndexParallelLeafReader_
 
-#define OrgApacheLuceneIndexLeafReader_RESTRICT 1
-#define OrgApacheLuceneIndexLeafReader_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexLeafReader 1
+#define INCLUDE_OrgApacheLuceneIndexLeafReader 1
 #include "org/apache/lucene/index/LeafReader.h"
 
 @class IOSObjectArray;
@@ -32,17 +32,48 @@
 @protocol OrgApacheLuceneIndexLeafReader_CoreClosedListener;
 @protocol OrgApacheLuceneUtilBits;
 
+/*!
+ @brief An <code>LeafReader</code> which reads multiple, parallel indexes.
+ Each index
+ added must have the same number of documents, but typically each contains
+ different fields. Deletions are taken from the first reader.
+ Each document contains the union of the fields of all documents
+ with the same document number.  When searching, matches for a
+ query term are from the first index added that has the field.
+ <p>This is useful, e.g., with collections that have large fields which
+ change rarely and small fields that change more frequently.  The smaller
+ fields may be re-indexed in a new index and both indexes may be searched
+ together.
+ <p><strong>Warning:</strong> It is up to you to make sure all indexes
+ are created and modified the same way. For example, if you add
+ documents to one index, you need to add the same documents in the
+ same order to the other indexes. <em>Failure to do so will result in
+ undefined behavior</em>.
+ */
 @interface OrgApacheLuceneIndexParallelLeafReader : OrgApacheLuceneIndexLeafReader
 
 #pragma mark Public
 
+/*!
+ @brief Create a ParallelLeafReader based on the provided
+ readers.
+ */
 - (instancetype)initWithBoolean:(jboolean)closeSubReaders
 withOrgApacheLuceneIndexLeafReaderArray:(IOSObjectArray *)readers;
 
+/*!
+ @brief Expert: create a ParallelLeafReader based on the provided
+ readers and storedFieldReaders; when a document is
+ loaded, only storedFieldsReaders will be used.
+ */
 - (instancetype)initWithBoolean:(jboolean)closeSubReaders
 withOrgApacheLuceneIndexLeafReaderArray:(IOSObjectArray *)readers
 withOrgApacheLuceneIndexLeafReaderArray:(IOSObjectArray *)storedFieldsReaders;
 
+/*!
+ @brief Create a ParallelLeafReader based on the provided
+ readers; auto-closes the given readers on <code>close()</code>.
+ */
 - (instancetype)initWithOrgApacheLuceneIndexLeafReaderArray:(IOSObjectArray *)readers;
 
 - (void)addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener;
@@ -58,6 +89,14 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 - (id<OrgApacheLuceneUtilBits>)getDocsWithFieldWithNSString:(NSString *)field;
 
+/*!
+ @brief 
+ <p>
+ NOTE: the returned field numbers will likely not
+ correspond to the actual field numbers in the underlying
+ readers, and codec metadata (<code>FieldInfo.getAttribute(String)</code>
+ will be unavailable.
+ */
 - (OrgApacheLuceneIndexFieldInfos *)getFieldInfos;
 
 - (id<OrgApacheLuceneUtilBits>)getLiveDocs;
@@ -66,6 +105,9 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 - (OrgApacheLuceneIndexNumericDocValues *)getNumericDocValuesWithNSString:(NSString *)field;
 
+/*!
+ @brief Returns the <code>LeafReader</code>s that were passed on init.
+ */
 - (IOSObjectArray *)getParallelReaders;
 
 - (OrgApacheLuceneIndexSortedDocValues *)getSortedDocValuesWithNSString:(NSString *)field;
@@ -96,16 +138,22 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexParallelLeafReader_initWithOrgApacheL
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexParallelLeafReader *new_OrgApacheLuceneIndexParallelLeafReader_initWithOrgApacheLuceneIndexLeafReaderArray_(IOSObjectArray *readers) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexParallelLeafReader *create_OrgApacheLuceneIndexParallelLeafReader_initWithOrgApacheLuceneIndexLeafReaderArray_(IOSObjectArray *readers);
+
 FOUNDATION_EXPORT void OrgApacheLuceneIndexParallelLeafReader_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_(OrgApacheLuceneIndexParallelLeafReader *self, jboolean closeSubReaders, IOSObjectArray *readers);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexParallelLeafReader *new_OrgApacheLuceneIndexParallelLeafReader_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_(jboolean closeSubReaders, IOSObjectArray *readers) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneIndexParallelLeafReader *create_OrgApacheLuceneIndexParallelLeafReader_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_(jboolean closeSubReaders, IOSObjectArray *readers);
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexParallelLeafReader_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_(OrgApacheLuceneIndexParallelLeafReader *self, jboolean closeSubReaders, IOSObjectArray *readers, IOSObjectArray *storedFieldsReaders);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexParallelLeafReader *new_OrgApacheLuceneIndexParallelLeafReader_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_(jboolean closeSubReaders, IOSObjectArray *readers, IOSObjectArray *storedFieldsReaders) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexParallelLeafReader *create_OrgApacheLuceneIndexParallelLeafReader_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_(jboolean closeSubReaders, IOSObjectArray *readers, IOSObjectArray *storedFieldsReaders);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexParallelLeafReader)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexParallelLeafReader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexParallelLeafReader")

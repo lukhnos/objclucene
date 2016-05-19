@@ -5,35 +5,66 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexUpgradeIndexMergePolicy_INCLUDE_ALL")
-#if OrgApacheLuceneIndexUpgradeIndexMergePolicy_RESTRICT
-#define OrgApacheLuceneIndexUpgradeIndexMergePolicy_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexUpgradeIndexMergePolicy")
+#ifdef RESTRICT_OrgApacheLuceneIndexUpgradeIndexMergePolicy
+#define INCLUDE_ALL_OrgApacheLuceneIndexUpgradeIndexMergePolicy 0
 #else
-#define OrgApacheLuceneIndexUpgradeIndexMergePolicy_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexUpgradeIndexMergePolicy 1
 #endif
-#undef OrgApacheLuceneIndexUpgradeIndexMergePolicy_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexUpgradeIndexMergePolicy
 
-#if !defined (_OrgApacheLuceneIndexUpgradeIndexMergePolicy_) && (OrgApacheLuceneIndexUpgradeIndexMergePolicy_INCLUDE_ALL || OrgApacheLuceneIndexUpgradeIndexMergePolicy_INCLUDE)
-#define _OrgApacheLuceneIndexUpgradeIndexMergePolicy_
+#if !defined (OrgApacheLuceneIndexUpgradeIndexMergePolicy_) && (INCLUDE_ALL_OrgApacheLuceneIndexUpgradeIndexMergePolicy || defined(INCLUDE_OrgApacheLuceneIndexUpgradeIndexMergePolicy))
+#define OrgApacheLuceneIndexUpgradeIndexMergePolicy_
 
-#define OrgApacheLuceneIndexMergePolicy_RESTRICT 1
-#define OrgApacheLuceneIndexMergePolicy_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexMergePolicy 1
+#define INCLUDE_OrgApacheLuceneIndexMergePolicy 1
 #include "org/apache/lucene/index/MergePolicy.h"
 
 @class OrgApacheLuceneIndexIndexWriter;
 @class OrgApacheLuceneIndexMergePolicy_MergeSpecification;
-@class OrgApacheLuceneIndexMergeTriggerEnum;
+@class OrgApacheLuceneIndexMergeTrigger;
 @class OrgApacheLuceneIndexSegmentCommitInfo;
 @class OrgApacheLuceneIndexSegmentInfos;
 @protocol JavaUtilMap;
 
+/*!
+ @brief This <code>MergePolicy</code> is used for upgrading all existing segments of
+ an index when calling <code>IndexWriter.forceMerge(int)</code>.
+ All other methods delegate to the base <code>MergePolicy</code> given to the constructor.
+ This allows for an as-cheap-as possible upgrade of an older index by only upgrading segments that
+ are created by previous Lucene versions. forceMerge does no longer really merge;
+ it is just used to &quot;forceMerge&quot; older segment versions away.
+ <p>In general one would use <code>IndexUpgrader</code>, but for a fully customizeable upgrade,
+ you can use this like any other <code>MergePolicy</code> and call <code>IndexWriter.forceMerge(int)</code>:
+ <pre class="prettyprint lang-java">
+ IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_XX, new KeywordAnalyzer());
+ iwc.setMergePolicy(new UpgradeIndexMergePolicy(iwc.getMergePolicy()));
+ IndexWriter w = new IndexWriter(dir, iwc);
+ w.forceMerge(1);
+ w.close();
+ 
+@endcode
+ <p><b>Warning:</b> This merge policy may reorder documents if the index was partially
+ upgraded before calling forceMerge (e.g., documents were added). If your application relies
+ on &quot;monotonicity&quot; of doc IDs (which means that the order in which the documents
+ were added to the index is preserved), do a forceMerge(1) instead. Please note, the
+ delegate <code>MergePolicy</code> may also reorder documents.
+ - seealso: IndexUpgrader
+ */
 @interface OrgApacheLuceneIndexUpgradeIndexMergePolicy : OrgApacheLuceneIndexMergePolicy {
  @public
+  /*!
+   @brief Wrapped <code>MergePolicy</code>.
+   */
   OrgApacheLuceneIndexMergePolicy *base_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief Wrap the given <code>MergePolicy</code> and intercept forceMerge requests to
+ only upgrade segments written with previous Lucene versions.
+ */
 - (instancetype)initWithOrgApacheLuceneIndexMergePolicy:(OrgApacheLuceneIndexMergePolicy *)base;
 
 - (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findForcedDeletesMergesWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)segmentInfos
@@ -44,9 +75,9 @@
                                                                                              withJavaUtilMap:(id<JavaUtilMap>)segmentsToMerge
                                                                          withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
 
-- (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findMergesWithOrgApacheLuceneIndexMergeTriggerEnum:(OrgApacheLuceneIndexMergeTriggerEnum *)mergeTrigger
-                                                                      withOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)segmentInfos
-                                                                       withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
+- (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findMergesWithOrgApacheLuceneIndexMergeTrigger:(OrgApacheLuceneIndexMergeTrigger *)mergeTrigger
+                                                                  withOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)segmentInfos
+                                                                   withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
 
 - (NSString *)description;
 
@@ -56,6 +87,13 @@
 
 #pragma mark Protected
 
+/*!
+ @brief Returns if the given segment should be upgraded.
+ The default implementation
+ will return <code>!Version.LATEST.equals(si.getVersion())</code>,
+ so all segments created with a different version number than this Lucene version will
+ get upgraded.
+ */
 - (jboolean)shouldUpgradeSegmentWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)si;
 
 @end
@@ -68,8 +106,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexUpgradeIndexMergePolicy_initWithOrgAp
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexUpgradeIndexMergePolicy *new_OrgApacheLuceneIndexUpgradeIndexMergePolicy_initWithOrgApacheLuceneIndexMergePolicy_(OrgApacheLuceneIndexMergePolicy *base) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexUpgradeIndexMergePolicy *create_OrgApacheLuceneIndexUpgradeIndexMergePolicy_initWithOrgApacheLuceneIndexMergePolicy_(OrgApacheLuceneIndexMergePolicy *base);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexUpgradeIndexMergePolicy)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexUpgradeIndexMergePolicy_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexUpgradeIndexMergePolicy")

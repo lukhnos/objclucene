@@ -5,34 +5,54 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity_RESTRICT
-#define OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity")
+#ifdef RESTRICT_OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity 0
 #else
-#define OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity 1
 #endif
-#undef OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity
 
-#if !defined (_OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity_) && (OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity_INCLUDE_ALL || OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity_INCLUDE)
-#define _OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity_
+#if !defined (OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity))
+#define OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity_
 
-#define OrgApacheLuceneSearchSimilaritiesLMSimilarity_RESTRICT 1
-#define OrgApacheLuceneSearchSimilaritiesLMSimilarity_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSimilaritiesLMSimilarity 1
+#define INCLUDE_OrgApacheLuceneSearchSimilaritiesLMSimilarity 1
 #include "org/apache/lucene/search/similarities/LMSimilarity.h"
 
 @class OrgApacheLuceneSearchSimilaritiesBasicStats;
 @protocol JavaUtilList;
 @protocol OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel;
 
+/*!
+ @brief Language model based on the Jelinek-Mercer smoothing method.
+ From Chengxiang
+ Zhai and John Lafferty. 2001. A study of smoothing methods for language
+ models applied to Ad Hoc information retrieval. In Proceedings of the 24th
+ annual international ACM SIGIR conference on Research and development in
+ information retrieval (SIGIR '01). ACM, New York, NY, USA, 334-342.
+ <p>The model has a single parameter, &lambda;. According to said paper, the
+ optimal value depends on both the collection and the query. The optimal value
+ is around <code>0.1</code> for title queries and <code>0.7</code> for long queries.</p>
+ */
 @interface OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity : OrgApacheLuceneSearchSimilaritiesLMSimilarity
 
 #pragma mark Public
 
+/*!
+ @brief Instantiates with the specified collectionModel and &lambda; parameter.
+ */
 - (instancetype)initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel:(id<OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel>)collectionModel
                                                                             withFloat:(jfloat)lambda;
 
+/*!
+ @brief Instantiates with the specified &lambda; parameter.
+ */
 - (instancetype)initWithFloat:(jfloat)lambda;
 
+/*!
+ @brief Returns the &lambda; parameter.
+ */
 - (jfloat)getLambda;
 
 - (NSString *)getName;
@@ -57,12 +77,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarit
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity *new_OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity_initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel_withFloat_(id<OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel> collectionModel, jfloat lambda) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity *create_OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity_initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel_withFloat_(id<OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel> collectionModel, jfloat lambda);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity_initWithFloat_(OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity *self, jfloat lambda);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity *new_OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity_initWithFloat_(jfloat lambda) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity *create_OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity_initWithFloat_(jfloat lambda);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity")

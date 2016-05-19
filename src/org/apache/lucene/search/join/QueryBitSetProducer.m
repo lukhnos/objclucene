@@ -51,19 +51,19 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinQueryBitSetProducer, cache_, id<Jav
   OrgApacheLuceneSearchDocIdSet *docIdSet = [((id<JavaUtilMap>) nil_chk(cache_)) getWithId:key];
   if (docIdSet == nil) {
     OrgApacheLuceneIndexIndexReaderContext *topLevelContext = OrgApacheLuceneIndexReaderUtil_getTopLevelContextWithOrgApacheLuceneIndexIndexReaderContext_(context);
-    OrgApacheLuceneSearchIndexSearcher *searcher = [new_OrgApacheLuceneSearchIndexSearcher_initWithOrgApacheLuceneIndexIndexReaderContext_(topLevelContext) autorelease];
+    OrgApacheLuceneSearchIndexSearcher *searcher = create_OrgApacheLuceneSearchIndexSearcher_initWithOrgApacheLuceneIndexIndexReaderContext_(topLevelContext);
     [searcher setQueryCacheWithOrgApacheLuceneSearchQueryCache:nil];
     OrgApacheLuceneSearchWeight *weight = [searcher createNormalizedWeightWithOrgApacheLuceneSearchQuery:query_ withBoolean:false];
     OrgApacheLuceneSearchDocIdSetIterator *it = [((OrgApacheLuceneSearchWeight *) nil_chk(weight)) scorerWithOrgApacheLuceneIndexLeafReaderContext:context];
     if (it == nil) {
-      docIdSet = JreLoadStatic(OrgApacheLuceneSearchDocIdSet, EMPTY_);
+      docIdSet = JreLoadStatic(OrgApacheLuceneSearchDocIdSet, EMPTY);
     }
     else {
-      docIdSet = [new_OrgApacheLuceneUtilBitDocIdSet_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet_ofWithOrgApacheLuceneSearchDocIdSetIterator_withInt_(it, [((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) maxDoc])) autorelease];
+      docIdSet = create_OrgApacheLuceneUtilBitDocIdSet_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet_ofWithOrgApacheLuceneSearchDocIdSetIterator_withInt_(it, [((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) maxDoc]));
     }
     [cache_ putWithId:key withId:docIdSet];
   }
-  return docIdSet == JreLoadStatic(OrgApacheLuceneSearchDocIdSet, EMPTY_) ? nil : [((OrgApacheLuceneUtilBitDocIdSet *) nil_chk(((OrgApacheLuceneUtilBitDocIdSet *) check_class_cast(docIdSet, [OrgApacheLuceneUtilBitDocIdSet class])))) bits];
+  return docIdSet == JreLoadStatic(OrgApacheLuceneSearchDocIdSet, EMPTY) ? nil : [((OrgApacheLuceneUtilBitDocIdSet *) nil_chk(((OrgApacheLuceneUtilBitDocIdSet *) cast_chk(docIdSet, [OrgApacheLuceneUtilBitDocIdSet class])))) bits];
 }
 
 - (NSString *)description {
@@ -71,11 +71,11 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinQueryBitSetProducer, cache_, id<Jav
 }
 
 - (jboolean)isEqual:(id)o {
-  if (o == nil || [self getClass] != [o getClass]) {
+  if (o == nil || [self getClass] != (id) [o getClass]) {
     return false;
   }
-  OrgApacheLuceneSearchJoinQueryBitSetProducer *other = (OrgApacheLuceneSearchJoinQueryBitSetProducer *) check_class_cast(o, [OrgApacheLuceneSearchJoinQueryBitSetProducer class]);
-  return [((OrgApacheLuceneSearchQuery *) nil_chk(self->query_)) isEqual:((OrgApacheLuceneSearchJoinQueryBitSetProducer *) nil_chk(other))->query_];
+  OrgApacheLuceneSearchJoinQueryBitSetProducer *other = (OrgApacheLuceneSearchJoinQueryBitSetProducer *) cast_chk(o, [OrgApacheLuceneSearchJoinQueryBitSetProducer class]);
+  return [((OrgApacheLuceneSearchQuery *) nil_chk(self->query_)) isEqual:other->query_];
 }
 
 - (NSUInteger)hash {
@@ -109,14 +109,16 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinQueryBitSetProducer, cache_, id<Jav
 
 void OrgApacheLuceneSearchJoinQueryBitSetProducer_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchJoinQueryBitSetProducer *self, OrgApacheLuceneSearchQuery *query) {
   NSObject_init(self);
-  JreStrongAssign(&self->cache_, JavaUtilCollections_synchronizedMapWithJavaUtilMap_([new_JavaUtilWeakHashMap_init() autorelease]));
+  JreStrongAssign(&self->cache_, JavaUtilCollections_synchronizedMapWithJavaUtilMap_(create_JavaUtilWeakHashMap_init()));
   JreStrongAssign(&self->query_, query);
 }
 
 OrgApacheLuceneSearchJoinQueryBitSetProducer *new_OrgApacheLuceneSearchJoinQueryBitSetProducer_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchQuery *query) {
-  OrgApacheLuceneSearchJoinQueryBitSetProducer *self = [OrgApacheLuceneSearchJoinQueryBitSetProducer alloc];
-  OrgApacheLuceneSearchJoinQueryBitSetProducer_initWithOrgApacheLuceneSearchQuery_(self, query);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinQueryBitSetProducer, initWithOrgApacheLuceneSearchQuery_, query)
+}
+
+OrgApacheLuceneSearchJoinQueryBitSetProducer *create_OrgApacheLuceneSearchJoinQueryBitSetProducer_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchQuery *query) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinQueryBitSetProducer, initWithOrgApacheLuceneSearchQuery_, query)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinQueryBitSetProducer)

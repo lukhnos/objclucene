@@ -5,24 +5,37 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor_) && (OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor_
+#if !defined (OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor))
+#define OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor_
 
-#define OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor_RESTRICT 1
-#define OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor 1
+#define INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor 1
 #include "org/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessor.h"
 
 @class OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 
+/*!
+ @brief The <code>SyntaxParser</code>
+ generates query node trees that consider the boolean operator precedence, but
+ Lucene current syntax does not support boolean precedence, so this processor
+ remove all the precedence and apply the equivalent modifier according to the
+ boolean operation defined on an specific query node.
+ <p>
+ If there is a <code>GroupQueryNode</code> in the query node tree, the query node
+ tree is not merged with the one above it.
+ <p>
+ Example: TODO: describe a good example to show how this processor works
+ - seealso: org.apache.lucene.queryparser.flexible.standard.config.StandardQueryConfigHandler
+ */
 @interface OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor : NSObject < OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor >
 
 #pragma mark Public
@@ -43,8 +56,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroup
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor *create_OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor")

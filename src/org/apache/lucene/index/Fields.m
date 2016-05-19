@@ -13,9 +13,13 @@
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexFields)
 
-IOSObjectArray *OrgApacheLuceneIndexFields_EMPTY_ARRAY_;
+IOSObjectArray *OrgApacheLuceneIndexFields_EMPTY_ARRAY;
 
 @implementation OrgApacheLuceneIndexFields
+
++ (IOSObjectArray *)EMPTY_ARRAY {
+  return OrgApacheLuceneIndexFields_EMPTY_ARRAY;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -48,7 +52,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneIndexFields class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneIndexFields_EMPTY_ARRAY_, [IOSObjectArray newArrayWithLength:0 type:OrgApacheLuceneIndexFields_class_()]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneIndexFields_EMPTY_ARRAY, [IOSObjectArray newArrayWithLength:0 type:OrgApacheLuceneIndexFields_class_()]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexFields)
   }
 }
@@ -56,12 +60,12 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "Fields", NULL, 0x4, NULL, NULL },
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x401, NULL, NULL },
+    { "iterator", NULL, "Ljava.util.Iterator;", 0x401, NULL, "()Ljava/util/Iterator<Ljava/lang/String;>;" },
     { "termsWithNSString:", "terms", "Lorg.apache.lucene.index.Terms;", 0x401, "Ljava.io.IOException;", NULL },
     { "size", NULL, "I", 0x401, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "EMPTY_ARRAY_", NULL, 0x19, "[Lorg.apache.lucene.index.Fields;", &OrgApacheLuceneIndexFields_EMPTY_ARRAY_, NULL, .constantValue.asLong = 0 },
+    { "EMPTY_ARRAY", "EMPTY_ARRAY", 0x19, "[Lorg.apache.lucene.index.Fields;", &OrgApacheLuceneIndexFields_EMPTY_ARRAY, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneIndexFields = { 2, "Fields", "org.apache.lucene.index", NULL, 0x401, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/lang/Iterable<Ljava/lang/String;>;" };
   return &_OrgApacheLuceneIndexFields;

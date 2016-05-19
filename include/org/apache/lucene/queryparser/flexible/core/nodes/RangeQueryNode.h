@@ -5,23 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode_) && (OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode_
+#if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode))
+#define OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode_
 
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_RESTRICT 1
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode 1
+#define INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/FieldableNode.h"
 
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode;
 
+/*!
+ @brief This interface should be implemented by a <code>QueryNode</code> that represents
+ some kind of range query.
+ */
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode < OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode, NSObject, JavaObject >
 
 - (id)getLowerBound;
@@ -40,4 +44,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQuery
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode")

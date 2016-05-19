@@ -5,44 +5,92 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneStoreIndexInput_INCLUDE_ALL")
-#if OrgApacheLuceneStoreIndexInput_RESTRICT
-#define OrgApacheLuceneStoreIndexInput_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneStoreIndexInput")
+#ifdef RESTRICT_OrgApacheLuceneStoreIndexInput
+#define INCLUDE_ALL_OrgApacheLuceneStoreIndexInput 0
 #else
-#define OrgApacheLuceneStoreIndexInput_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneStoreIndexInput 1
 #endif
-#undef OrgApacheLuceneStoreIndexInput_RESTRICT
+#undef RESTRICT_OrgApacheLuceneStoreIndexInput
 
-#if !defined (_OrgApacheLuceneStoreIndexInput_) && (OrgApacheLuceneStoreIndexInput_INCLUDE_ALL || OrgApacheLuceneStoreIndexInput_INCLUDE)
-#define _OrgApacheLuceneStoreIndexInput_
+#if !defined (OrgApacheLuceneStoreIndexInput_) && (INCLUDE_ALL_OrgApacheLuceneStoreIndexInput || defined(INCLUDE_OrgApacheLuceneStoreIndexInput))
+#define OrgApacheLuceneStoreIndexInput_
 
-#define OrgApacheLuceneStoreDataInput_RESTRICT 1
-#define OrgApacheLuceneStoreDataInput_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreDataInput 1
+#define INCLUDE_OrgApacheLuceneStoreDataInput 1
 #include "org/apache/lucene/store/DataInput.h"
 
-#define JavaIoCloseable_RESTRICT 1
-#define JavaIoCloseable_INCLUDE 1
+#define RESTRICT_JavaIoCloseable 1
+#define INCLUDE_JavaIoCloseable 1
 #include "java/io/Closeable.h"
 
 @protocol OrgApacheLuceneStoreRandomAccessInput;
 
+/*!
+ @brief Abstract base class for input from a file in a <code>Directory</code>.
+ A
+ random-access input stream.  Used for all Lucene index input operations.
+ <p><code>IndexInput</code> may only be used from one thread, because it is not
+ thread safe (it keeps internal state like file position). To allow
+ multithreaded use, every <code>IndexInput</code> instance must be cloned before
+ it is used in another thread. Subclasses must therefore implement <code>clone()</code>,
+ returning a new <code>IndexInput</code> which operates on the same underlying
+ resource, but positioned independently. 
+ <p><b>Warning:</b> Lucene never closes cloned
+ <code>IndexInput</code>s, it will only call <code>close()</code> on the original object.
+ <p>If you access the cloned IndexInput after closing the original object,
+ any <code>readXXX</code> methods will throw <code>AlreadyClosedException</code>.
+ - seealso: Directory
+ */
 @interface OrgApacheLuceneStoreIndexInput : OrgApacheLuceneStoreDataInput < NSCopying, JavaIoCloseable >
 
 #pragma mark Public
 
+/*!
+ @brief 
+ <p><b>Warning:</b> Lucene never closes cloned
+ <code>IndexInput</code>s, it will only call <code>close()</code> on the original object.
+ <p>If you access the cloned IndexInput after closing the original object,
+ any <code>readXXX</code> methods will throw <code>AlreadyClosedException</code>.
+ */
 - (OrgApacheLuceneStoreIndexInput *)clone;
 
+/*!
+ @brief Closes the stream to further operations.
+ */
 - (void)close;
 
+/*!
+ @brief Returns the current position in this file, where the next read will
+ occur.
+ - seealso: #seek(long)
+ */
 - (jlong)getFilePointer;
 
+/*!
+ @brief The number of bytes in the file.
+ */
 - (jlong)length;
 
+/*!
+ @brief Creates a random-access slice of this index input, with the given offset and length.
+ <p>
+ The default implementation calls <code>slice</code>, and it doesn't support random access,
+ it implements absolute reads as seek+read.
+ */
 - (id<OrgApacheLuceneStoreRandomAccessInput>)randomAccessSliceWithLong:(jlong)offset
                                                               withLong:(jlong)length;
 
+/*!
+ @brief Sets current position in this file, where the next read will occur.
+ - seealso: #getFilePointer()
+ */
 - (void)seekWithLong:(jlong)pos;
 
+/*!
+ @brief Creates a slice of this index input, with the given description, offset, and length.
+ The slice is seeked to the beginning.
+ */
 - (OrgApacheLuceneStoreIndexInput *)sliceWithNSString:(NSString *)sliceDescription
                                              withLong:(jlong)offset
                                              withLong:(jlong)length;
@@ -51,8 +99,16 @@
 
 #pragma mark Protected
 
+/*!
+ @brief resourceDescription should be a non-null, opaque string
+ describing this resource; it's returned from
+ <code>toString</code>.
+ */
 - (instancetype)initWithNSString:(NSString *)resourceDescription;
 
+/*!
+ @brief Subclasses call this to get the String for resourceDescription of a slice of this <code>IndexInput</code>.
+ */
 - (NSString *)getFullSliceDescriptionWithNSString:(NSString *)sliceDescription;
 
 @end
@@ -65,4 +121,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreIndexInput)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneStoreIndexInput_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreIndexInput")

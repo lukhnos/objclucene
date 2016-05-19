@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilTokenFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisUtilTokenFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisUtilTokenFilterFactory_) && (OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisUtilTokenFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisUtilTokenFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisUtilTokenFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory))
+#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory 1
 #include "org/apache/lucene/analysis/util/AbstractAnalysisFactory.h"
 
 @class IOSClass;
@@ -26,23 +26,51 @@
 @protocol JavaUtilMap;
 @protocol JavaUtilSet;
 
+/*!
+ @brief Abstract parent class for analysis factories that create <code>org.apache.lucene.analysis.TokenFilter</code>
+ instances.
+ */
 @interface OrgApacheLuceneAnalysisUtilTokenFilterFactory : OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory
 
 #pragma mark Public
 
+/*!
+ @brief returns a list of all available tokenfilter names from context classpath
+ */
 + (id<JavaUtilSet>)availableTokenFilters;
 
+/*!
+ @brief Transform the specified input TokenStream
+ */
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
+/*!
+ @brief looks up a tokenfilter by name from context classpath
+ */
 + (OrgApacheLuceneAnalysisUtilTokenFilterFactory *)forNameWithNSString:(NSString *)name
                                                        withJavaUtilMap:(id<JavaUtilMap>)args;
 
+/*!
+ @brief looks up a tokenfilter class by name from context classpath
+ */
 + (IOSClass *)lookupClassWithNSString:(NSString *)name;
 
+/*!
+ @brief Reloads the factory list from the given <code>ClassLoader</code>.
+ Changes to the factories are visible after the method ends, all
+ iterators (<code>availableTokenFilters()</code>,...) stay consistent. 
+ <p><b>NOTE:</b> Only new factories are added, existing ones are
+ never removed or replaced.
+ <p><em>This method is expensive and should only be called for discovery
+ of new factories on the given classpath/classloader!</em>
+ */
 + (void)reloadTokenFiltersWithJavaLangClassLoader:(JavaLangClassLoader *)classloader;
 
 #pragma mark Protected
 
+/*!
+ @brief Initialize this factory via a set of key-value pairs.
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 @end
@@ -63,4 +91,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilTokenFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilTokenFilterFactory")

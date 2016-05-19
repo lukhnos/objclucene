@@ -5,63 +5,118 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilCharsRef_INCLUDE_ALL")
-#if OrgApacheLuceneUtilCharsRef_RESTRICT
-#define OrgApacheLuceneUtilCharsRef_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilCharsRef")
+#ifdef RESTRICT_OrgApacheLuceneUtilCharsRef
+#define INCLUDE_ALL_OrgApacheLuceneUtilCharsRef 0
 #else
-#define OrgApacheLuceneUtilCharsRef_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilCharsRef 1
 #endif
-#undef OrgApacheLuceneUtilCharsRef_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilCharsRef
 
-#if !defined (_OrgApacheLuceneUtilCharsRef_) && (OrgApacheLuceneUtilCharsRef_INCLUDE_ALL || OrgApacheLuceneUtilCharsRef_INCLUDE)
-#define _OrgApacheLuceneUtilCharsRef_
+#if !defined (OrgApacheLuceneUtilCharsRef_) && (INCLUDE_ALL_OrgApacheLuceneUtilCharsRef || defined(INCLUDE_OrgApacheLuceneUtilCharsRef))
+#define OrgApacheLuceneUtilCharsRef_
 
-#define JavaLangComparable_RESTRICT 1
-#define JavaLangComparable_INCLUDE 1
+#define RESTRICT_JavaLangComparable 1
+#define INCLUDE_JavaLangComparable 1
 #include "java/lang/Comparable.h"
 
-#define JavaLangCharSequence_RESTRICT 1
-#define JavaLangCharSequence_INCLUDE 1
+#define RESTRICT_JavaLangCharSequence 1
+#define INCLUDE_JavaLangCharSequence 1
 #include "java/lang/CharSequence.h"
 
 @class IOSCharArray;
+@class IOSObjectArray;
 @protocol JavaUtilComparator;
 
+/*!
+ @brief Represents char[], as a slice (offset + length) into an existing char[].
+ The <code>chars</code> member should never be null; use
+ <code>EMPTY_CHARS</code> if necessary.
+ */
 @interface OrgApacheLuceneUtilCharsRef : NSObject < JavaLangComparable, JavaLangCharSequence, NSCopying > {
  @public
+  /*!
+   @brief The contents of the CharsRef.
+   Should never be <code>null</code>. 
+   */
   IOSCharArray *chars_;
+  /*!
+   @brief Offset of first valid character.
+   */
   jint offset_;
+  /*!
+   @brief Length of used characters.
+   */
   jint length_;
 }
 
++ (IOSCharArray *)EMPTY_CHARS;
+
 #pragma mark Public
 
+/*!
+ @brief Creates a new <code>CharsRef</code> initialized an empty array zero-length
+ */
 - (instancetype)init;
 
+/*!
+ @brief Creates a new <code>CharsRef</code> initialized with the given array, offset and
+ length
+ */
 - (instancetype)initWithCharArray:(IOSCharArray *)chars
                           withInt:(jint)offset
                           withInt:(jint)length;
 
+/*!
+ @brief Creates a new <code>CharsRef</code> initialized with an array of the given
+ capacity
+ */
 - (instancetype)initWithInt:(jint)capacity;
 
+/*!
+ @brief Creates a new <code>CharsRef</code> initialized with the given Strings character
+ array
+ */
 - (instancetype)initWithNSString:(NSString *)string;
 
 - (jchar)charAtWithInt:(jint)index;
 
 - (jboolean)charsEqualsWithOrgApacheLuceneUtilCharsRef:(OrgApacheLuceneUtilCharsRef *)other;
 
+/*!
+ @brief Returns a shallow clone of this instance (the underlying characters are
+ <b>not</b> copied and will be shared by both the returned object and this
+ object.
+ - seealso: #deepCopyOf
+ */
 - (OrgApacheLuceneUtilCharsRef *)clone;
 
+/*!
+ @brief Signed int order comparison
+ */
 - (jint)compareToWithId:(OrgApacheLuceneUtilCharsRef *)other;
 
+/*!
+ @brief Creates a new CharsRef that points to a copy of the chars from 
+ <code>other</code>
+ <p>
+ The returned CharsRef will have a length of other.length
+ and an offset of zero.
+ */
 + (OrgApacheLuceneUtilCharsRef *)deepCopyOfWithOrgApacheLuceneUtilCharsRef:(OrgApacheLuceneUtilCharsRef *)other;
 
 - (jboolean)isEqual:(id)other;
 
+/*!
+ */
 + (id<JavaUtilComparator>)getUTF16SortedAsUTF8Comparator;
 
 - (NSUInteger)hash;
 
+/*!
+ @brief Performs internal consistency checks.
+ Always returns true (or throws IllegalStateException) 
+ */
 - (jboolean)isValid;
 
 - (jint)length;
@@ -77,24 +132,37 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneUtilCharsRef)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilCharsRef, chars_, IOSCharArray *)
 
-FOUNDATION_EXPORT IOSCharArray *OrgApacheLuceneUtilCharsRef_EMPTY_CHARS_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilCharsRef, EMPTY_CHARS_, IOSCharArray *)
+/*!
+ @brief An empty character array for convenience
+ */
+inline IOSCharArray *OrgApacheLuceneUtilCharsRef_get_EMPTY_CHARS();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT IOSCharArray *OrgApacheLuceneUtilCharsRef_EMPTY_CHARS;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilCharsRef, EMPTY_CHARS, IOSCharArray *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilCharsRef_init(OrgApacheLuceneUtilCharsRef *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilCharsRef *new_OrgApacheLuceneUtilCharsRef_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilCharsRef *create_OrgApacheLuceneUtilCharsRef_init();
+
 FOUNDATION_EXPORT void OrgApacheLuceneUtilCharsRef_initWithInt_(OrgApacheLuceneUtilCharsRef *self, jint capacity);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilCharsRef *new_OrgApacheLuceneUtilCharsRef_initWithInt_(jint capacity) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilCharsRef *create_OrgApacheLuceneUtilCharsRef_initWithInt_(jint capacity);
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilCharsRef_initWithCharArray_withInt_withInt_(OrgApacheLuceneUtilCharsRef *self, IOSCharArray *chars, jint offset, jint length);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilCharsRef *new_OrgApacheLuceneUtilCharsRef_initWithCharArray_withInt_withInt_(IOSCharArray *chars, jint offset, jint length) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilCharsRef *create_OrgApacheLuceneUtilCharsRef_initWithCharArray_withInt_withInt_(IOSCharArray *chars, jint offset, jint length);
+
 FOUNDATION_EXPORT void OrgApacheLuceneUtilCharsRef_initWithNSString_(OrgApacheLuceneUtilCharsRef *self, NSString *string);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilCharsRef *new_OrgApacheLuceneUtilCharsRef_initWithNSString_(NSString *string) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilCharsRef *create_OrgApacheLuceneUtilCharsRef_initWithNSString_(NSString *string);
 
 FOUNDATION_EXPORT id<JavaUtilComparator> OrgApacheLuceneUtilCharsRef_getUTF16SortedAsUTF8Comparator();
 
@@ -104,4 +172,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilCharsRef)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilCharsRef_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilCharsRef")

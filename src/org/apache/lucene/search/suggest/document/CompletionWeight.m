@@ -58,23 +58,23 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionWeight, automa
     return nil;
   }
   if ([terms isKindOfClass:[OrgApacheLuceneSearchSuggestDocumentCompletionTerms class]]) {
-    OrgApacheLuceneSearchSuggestDocumentCompletionTerms *completionTerms = (OrgApacheLuceneSearchSuggestDocumentCompletionTerms *) check_class_cast(terms, [OrgApacheLuceneSearchSuggestDocumentCompletionTerms class]);
+    OrgApacheLuceneSearchSuggestDocumentCompletionTerms *completionTerms = (OrgApacheLuceneSearchSuggestDocumentCompletionTerms *) cast_chk(terms, [OrgApacheLuceneSearchSuggestDocumentCompletionTerms class]);
     if ((suggester = [((OrgApacheLuceneSearchSuggestDocumentCompletionTerms *) nil_chk(completionTerms)) suggester]) == nil) {
       return nil;
     }
   }
   else {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$", [completionQuery_ getField], @" is not a SuggestField")) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$", [completionQuery_ getField], @" is not a SuggestField"));
   }
   OrgApacheLuceneSearchSuggestBitsProducer *filter = [completionQuery_ getFilter];
   id<OrgApacheLuceneUtilBits> filteredDocs = nil;
   if (filter != nil) {
     filteredDocs = [filter getBitsWithOrgApacheLuceneIndexLeafReaderContext:context];
-    if ([((id<OrgApacheLuceneUtilBits>) nil_chk(filteredDocs)) getClass] == OrgApacheLuceneUtilBits_MatchNoBits_class_()) {
+    if ([((id<OrgApacheLuceneUtilBits>) nil_chk(filteredDocs)) getClass] == (id) OrgApacheLuceneUtilBits_MatchNoBits_class_()) {
       return nil;
     }
   }
-  return [new_OrgApacheLuceneSearchSuggestDocumentCompletionScorer_initWithOrgApacheLuceneSearchSuggestDocumentCompletionWeight_withOrgApacheLuceneSearchSuggestDocumentNRTSuggester_withOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneUtilBits_withBoolean_withOrgApacheLuceneUtilAutomatonAutomaton_(self, suggester, reader, filteredDocs, filter != nil, automaton_) autorelease];
+  return create_OrgApacheLuceneSearchSuggestDocumentCompletionScorer_initWithOrgApacheLuceneSearchSuggestDocumentCompletionWeight_withOrgApacheLuceneSearchSuggestDocumentNRTSuggester_withOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneUtilBits_withBoolean_withOrgApacheLuceneUtilAutomatonAutomaton_(self, suggester, reader, filteredDocs, filter != nil, automaton_);
 }
 
 - (void)setNextMatchWithOrgApacheLuceneUtilIntsRef:(OrgApacheLuceneUtilIntsRef *)pathPrefix {
@@ -89,7 +89,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionWeight, automa
 }
 
 - (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (void)extractTermsWithJavaUtilSet:(id<JavaUtilSet>)terms {
@@ -123,7 +123,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionWeight, automa
     { "boost", NULL, "F", 0x4, NULL, NULL },
     { "context", NULL, "Ljava.lang.CharSequence;", 0x4, NULL, NULL },
     { "scorerWithOrgApacheLuceneIndexLeafReaderContext:", "scorer", "Lorg.apache.lucene.search.Scorer;", 0x1, "Ljava.io.IOException;", NULL },
-    { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x1, NULL, NULL },
+    { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x1, NULL, "(Ljava/util/Set<Lorg/apache/lucene/index/Term;>;)V" },
     { "explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x1, "Ljava.io.IOException;", NULL },
     { "getValueForNormalization", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
     { "normalizeWithFloat:withFloat:", "normalize", "V", 0x1, NULL, NULL },
@@ -145,9 +145,11 @@ void OrgApacheLuceneSearchSuggestDocumentCompletionWeight_initWithOrgApacheLucen
 }
 
 OrgApacheLuceneSearchSuggestDocumentCompletionWeight *new_OrgApacheLuceneSearchSuggestDocumentCompletionWeight_initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery_withOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneSearchSuggestDocumentCompletionQuery *query, OrgApacheLuceneUtilAutomatonAutomaton *automaton) {
-  OrgApacheLuceneSearchSuggestDocumentCompletionWeight *self = [OrgApacheLuceneSearchSuggestDocumentCompletionWeight alloc];
-  OrgApacheLuceneSearchSuggestDocumentCompletionWeight_initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery_withOrgApacheLuceneUtilAutomatonAutomaton_(self, query, automaton);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionWeight, initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery_withOrgApacheLuceneUtilAutomatonAutomaton_, query, automaton)
+}
+
+OrgApacheLuceneSearchSuggestDocumentCompletionWeight *create_OrgApacheLuceneSearchSuggestDocumentCompletionWeight_initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery_withOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneSearchSuggestDocumentCompletionQuery *query, OrgApacheLuceneUtilAutomatonAutomaton *automaton) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionWeight, initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery_withOrgApacheLuceneUtilAutomatonAutomaton_, query, automaton)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentCompletionWeight)

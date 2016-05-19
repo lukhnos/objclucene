@@ -5,29 +5,44 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisEnKStemFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisEnKStemFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisEnKStemFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisEnKStemFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisEnKStemFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisEnKStemFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisEnKStemFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisEnKStemFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisEnKStemFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisEnKStemFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisEnKStemFilterFactory_) && (OrgApacheLuceneAnalysisEnKStemFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisEnKStemFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisEnKStemFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisEnKStemFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisEnKStemFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisEnKStemFilterFactory))
+#define OrgApacheLuceneAnalysisEnKStemFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
 @class OrgApacheLuceneAnalysisTokenFilter;
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>KStemFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_kstem" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+ &lt;filter class="solr.LowerCaseFilterFactory"/&gt;
+ &lt;filter class="solr.KStemFilterFactory"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisEnKStemFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new KStemFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -40,8 +55,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisEnKStemFilterFactory_initWithJavaU
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisEnKStemFilterFactory *new_OrgApacheLuceneAnalysisEnKStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisEnKStemFilterFactory *create_OrgApacheLuceneAnalysisEnKStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisEnKStemFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisEnKStemFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisEnKStemFilterFactory")

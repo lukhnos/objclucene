@@ -5,20 +5,22 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgLukhnosPortmobileInvokeMethodHandles_INCLUDE_ALL")
-#if OrgLukhnosPortmobileInvokeMethodHandles_RESTRICT
-#define OrgLukhnosPortmobileInvokeMethodHandles_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgLukhnosPortmobileInvokeMethodHandles")
+#ifdef RESTRICT_OrgLukhnosPortmobileInvokeMethodHandles
+#define INCLUDE_ALL_OrgLukhnosPortmobileInvokeMethodHandles 0
 #else
-#define OrgLukhnosPortmobileInvokeMethodHandles_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgLukhnosPortmobileInvokeMethodHandles 1
 #endif
-#undef OrgLukhnosPortmobileInvokeMethodHandles_RESTRICT
+#undef RESTRICT_OrgLukhnosPortmobileInvokeMethodHandles
 
-#if !defined (_OrgLukhnosPortmobileInvokeMethodHandles_) && (OrgLukhnosPortmobileInvokeMethodHandles_INCLUDE_ALL || OrgLukhnosPortmobileInvokeMethodHandles_INCLUDE)
-#define _OrgLukhnosPortmobileInvokeMethodHandles_
+#if !defined (OrgLukhnosPortmobileInvokeMethodHandles_) && (INCLUDE_ALL_OrgLukhnosPortmobileInvokeMethodHandles || defined(INCLUDE_OrgLukhnosPortmobileInvokeMethodHandles))
+#define OrgLukhnosPortmobileInvokeMethodHandles_
 
 @class OrgLukhnosPortmobileInvokeMethodHandles_Lookup;
 
 @interface OrgLukhnosPortmobileInvokeMethodHandles : NSObject
+
++ (OrgLukhnosPortmobileInvokeMethodHandles_Lookup *)publicLookupInstance;
 
 #pragma mark Public
 
@@ -30,8 +32,10 @@
 
 J2OBJC_STATIC_INIT(OrgLukhnosPortmobileInvokeMethodHandles)
 
-FOUNDATION_EXPORT OrgLukhnosPortmobileInvokeMethodHandles_Lookup *OrgLukhnosPortmobileInvokeMethodHandles_publicLookupInstance_;
-J2OBJC_STATIC_FIELD_GETTER(OrgLukhnosPortmobileInvokeMethodHandles, publicLookupInstance_, OrgLukhnosPortmobileInvokeMethodHandles_Lookup *)
+inline OrgLukhnosPortmobileInvokeMethodHandles_Lookup *OrgLukhnosPortmobileInvokeMethodHandles_get_publicLookupInstance();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT OrgLukhnosPortmobileInvokeMethodHandles_Lookup *OrgLukhnosPortmobileInvokeMethodHandles_publicLookupInstance;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgLukhnosPortmobileInvokeMethodHandles, publicLookupInstance, OrgLukhnosPortmobileInvokeMethodHandles_Lookup *)
 
 FOUNDATION_EXPORT OrgLukhnosPortmobileInvokeMethodHandles_Lookup *OrgLukhnosPortmobileInvokeMethodHandles_publicLookup();
 
@@ -39,12 +43,14 @@ FOUNDATION_EXPORT void OrgLukhnosPortmobileInvokeMethodHandles_init(OrgLukhnosPo
 
 FOUNDATION_EXPORT OrgLukhnosPortmobileInvokeMethodHandles *new_OrgLukhnosPortmobileInvokeMethodHandles_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgLukhnosPortmobileInvokeMethodHandles *create_OrgLukhnosPortmobileInvokeMethodHandles_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileInvokeMethodHandles)
 
 #endif
 
-#if !defined (_OrgLukhnosPortmobileInvokeMethodHandles_Lookup_) && (OrgLukhnosPortmobileInvokeMethodHandles_INCLUDE_ALL || OrgLukhnosPortmobileInvokeMethodHandles_Lookup_INCLUDE)
-#define _OrgLukhnosPortmobileInvokeMethodHandles_Lookup_
+#if !defined (OrgLukhnosPortmobileInvokeMethodHandles_Lookup_) && (INCLUDE_ALL_OrgLukhnosPortmobileInvokeMethodHandles || defined(INCLUDE_OrgLukhnosPortmobileInvokeMethodHandles_Lookup))
+#define OrgLukhnosPortmobileInvokeMethodHandles_Lookup_
 
 @class IOSClass;
 @class OrgLukhnosPortmobileInvokeMethodHandle;
@@ -67,8 +73,10 @@ FOUNDATION_EXPORT void OrgLukhnosPortmobileInvokeMethodHandles_Lookup_init(OrgLu
 
 FOUNDATION_EXPORT OrgLukhnosPortmobileInvokeMethodHandles_Lookup *new_OrgLukhnosPortmobileInvokeMethodHandles_Lookup_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgLukhnosPortmobileInvokeMethodHandles_Lookup *create_OrgLukhnosPortmobileInvokeMethodHandles_Lookup_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileInvokeMethodHandles_Lookup)
 
 #endif
 
-#pragma pop_macro("OrgLukhnosPortmobileInvokeMethodHandles_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileInvokeMethodHandles")

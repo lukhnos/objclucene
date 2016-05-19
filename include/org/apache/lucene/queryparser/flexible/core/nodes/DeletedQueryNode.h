@@ -5,25 +5,31 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode_) && (OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode_
+#if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode))
+#define OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode_
 
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_RESTRICT 1
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl 1
+#define INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNodeImpl.h"
 
 @protocol JavaLangCharSequence;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;
 
+/*!
+ @brief A <code>DeletedQueryNode</code> represents a node that was deleted from the query
+ node tree.
+ It can be removed from the tree using the
+ <code>RemoveDeletedQueryNodesProcessor</code> processor.
+ */
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl
 
 #pragma mark Public
@@ -44,8 +50,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNo
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode *create_OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode")

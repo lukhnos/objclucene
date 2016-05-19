@@ -5,27 +5,39 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig_) && (OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig_
+#if !defined (OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig))
+#define OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig_
 
-#define OrgApacheLuceneQueryparserFlexibleCoreConfigAbstractQueryConfig_RESTRICT 1
-#define OrgApacheLuceneQueryparserFlexibleCoreConfigAbstractQueryConfig_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreConfigAbstractQueryConfig 1
+#define INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreConfigAbstractQueryConfig 1
 #include "org/apache/lucene/queryparser/flexible/core/config/AbstractQueryConfig.h"
 
+/*!
+ @brief This class represents a field configuration.
+ */
 @interface OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig : OrgApacheLuceneQueryparserFlexibleCoreConfigAbstractQueryConfig
 
 #pragma mark Public
 
+/*!
+ @brief Constructs a <code>FieldConfig</code>
+ @param fieldName the field name, it cannot be null
+ @throws IllegalArgumentException if the field name is null
+ */
 - (instancetype)initWithNSString:(NSString *)fieldName;
 
+/*!
+ @brief Returns the field name this configuration represents.
+ @return the field name
+ */
 - (NSString *)getField;
 
 - (NSString *)description;
@@ -38,8 +50,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig_i
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *new_OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig_initWithNSString_(NSString *fieldName) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *create_OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig_initWithNSString_(NSString *fieldName);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig")

@@ -5,21 +5,34 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener_) && (OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener_
+#if !defined (OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener))
+#define OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener_
 
 @class OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig;
 
+/*!
+ @brief This interface should be implemented by classes that wants to listen for
+ field configuration requests.
+ The implementation receives a
+ <code>FieldConfig</code> object and may add/change its configuration.
+ - seealso: FieldConfig
+ - seealso: QueryConfigHandler
+ */
 @protocol OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener < NSObject, JavaObject >
 
+/*!
+ @brief This method is called ever time a field configuration is requested.
+ @param fieldConfig
+ the field configuration requested, should never be null
+ */
 - (void)buildFieldConfigWithOrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig:(OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *)fieldConfig;
 
 @end
@@ -30,4 +43,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConf
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener")

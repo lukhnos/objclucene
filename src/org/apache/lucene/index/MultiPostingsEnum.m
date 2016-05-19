@@ -202,9 +202,11 @@ void OrgApacheLuceneIndexMultiPostingsEnum_initWithOrgApacheLuceneIndexMultiTerm
 }
 
 OrgApacheLuceneIndexMultiPostingsEnum *new_OrgApacheLuceneIndexMultiPostingsEnum_initWithOrgApacheLuceneIndexMultiTermsEnum_withInt_(OrgApacheLuceneIndexMultiTermsEnum *parent, jint subReaderCount) {
-  OrgApacheLuceneIndexMultiPostingsEnum *self = [OrgApacheLuceneIndexMultiPostingsEnum alloc];
-  OrgApacheLuceneIndexMultiPostingsEnum_initWithOrgApacheLuceneIndexMultiTermsEnum_withInt_(self, parent, subReaderCount);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiPostingsEnum, initWithOrgApacheLuceneIndexMultiTermsEnum_withInt_, parent, subReaderCount)
+}
+
+OrgApacheLuceneIndexMultiPostingsEnum *create_OrgApacheLuceneIndexMultiPostingsEnum_initWithOrgApacheLuceneIndexMultiTermsEnum_withInt_(OrgApacheLuceneIndexMultiTermsEnum *parent, jint subReaderCount) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiPostingsEnum, initWithOrgApacheLuceneIndexMultiTermsEnum_withInt_, parent, subReaderCount)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiPostingsEnum)
@@ -248,9 +250,11 @@ void OrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice_init(OrgApacheLuceneInd
 }
 
 OrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice *new_OrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice_init() {
-  OrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice *self = [OrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice alloc];
-  OrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice, init)
+}
+
+OrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice *create_OrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice)

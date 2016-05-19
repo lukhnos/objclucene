@@ -5,30 +5,44 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchTopFieldDocs_INCLUDE_ALL")
-#if OrgApacheLuceneSearchTopFieldDocs_RESTRICT
-#define OrgApacheLuceneSearchTopFieldDocs_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchTopFieldDocs")
+#ifdef RESTRICT_OrgApacheLuceneSearchTopFieldDocs
+#define INCLUDE_ALL_OrgApacheLuceneSearchTopFieldDocs 0
 #else
-#define OrgApacheLuceneSearchTopFieldDocs_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchTopFieldDocs 1
 #endif
-#undef OrgApacheLuceneSearchTopFieldDocs_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchTopFieldDocs
 
-#if !defined (_OrgApacheLuceneSearchTopFieldDocs_) && (OrgApacheLuceneSearchTopFieldDocs_INCLUDE_ALL || OrgApacheLuceneSearchTopFieldDocs_INCLUDE)
-#define _OrgApacheLuceneSearchTopFieldDocs_
+#if !defined (OrgApacheLuceneSearchTopFieldDocs_) && (INCLUDE_ALL_OrgApacheLuceneSearchTopFieldDocs || defined(INCLUDE_OrgApacheLuceneSearchTopFieldDocs))
+#define OrgApacheLuceneSearchTopFieldDocs_
 
-#define OrgApacheLuceneSearchTopDocs_RESTRICT 1
-#define OrgApacheLuceneSearchTopDocs_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchTopDocs 1
+#define INCLUDE_OrgApacheLuceneSearchTopDocs 1
 #include "org/apache/lucene/search/TopDocs.h"
 
 @class IOSObjectArray;
 
+/*!
+ @brief Represents hits returned by <code>IndexSearcher.search(Query,int,Sort)</code>
+ .
+ */
 @interface OrgApacheLuceneSearchTopFieldDocs : OrgApacheLuceneSearchTopDocs {
  @public
+  /*!
+   @brief The fields which were used to sort results by.
+   */
   IOSObjectArray *fields_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief Creates one of these objects.
+ @param totalHits  Total number of hits for the query.
+ @param scoreDocs  The top hits for the query.
+ @param fields     The sort criteria used to find the top hits.
+ @param maxScore   The maximum score encountered.
+ */
 - (instancetype)initWithInt:(jint)totalHits
 withOrgApacheLuceneSearchScoreDocArray:(IOSObjectArray *)scoreDocs
 withOrgApacheLuceneSearchSortFieldArray:(IOSObjectArray *)fields
@@ -44,8 +58,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchTopFieldDocs_initWithInt_withOrgApac
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchTopFieldDocs *new_OrgApacheLuceneSearchTopFieldDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_withOrgApacheLuceneSearchSortFieldArray_withFloat_(jint totalHits, IOSObjectArray *scoreDocs, IOSObjectArray *fields, jfloat maxScore) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchTopFieldDocs *create_OrgApacheLuceneSearchTopFieldDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_withOrgApacheLuceneSearchSortFieldArray_withFloat_(jint totalHits, IOSObjectArray *scoreDocs, IOSObjectArray *fields, jfloat maxScore);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopFieldDocs)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchTopFieldDocs_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchTopFieldDocs")

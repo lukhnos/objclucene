@@ -5,36 +5,60 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchFieldValueFilter_INCLUDE_ALL")
-#if OrgApacheLuceneSearchFieldValueFilter_RESTRICT
-#define OrgApacheLuceneSearchFieldValueFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchFieldValueFilter")
+#ifdef RESTRICT_OrgApacheLuceneSearchFieldValueFilter
+#define INCLUDE_ALL_OrgApacheLuceneSearchFieldValueFilter 0
 #else
-#define OrgApacheLuceneSearchFieldValueFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchFieldValueFilter 1
 #endif
-#undef OrgApacheLuceneSearchFieldValueFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchFieldValueFilter
 
-#if !defined (_OrgApacheLuceneSearchFieldValueFilter_) && (OrgApacheLuceneSearchFieldValueFilter_INCLUDE_ALL || OrgApacheLuceneSearchFieldValueFilter_INCLUDE)
-#define _OrgApacheLuceneSearchFieldValueFilter_
+#if !defined (OrgApacheLuceneSearchFieldValueFilter_) && (INCLUDE_ALL_OrgApacheLuceneSearchFieldValueFilter || defined(INCLUDE_OrgApacheLuceneSearchFieldValueFilter))
+#define OrgApacheLuceneSearchFieldValueFilter_
 
-#define OrgApacheLuceneSearchFilter_RESTRICT 1
-#define OrgApacheLuceneSearchFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchFilter 1
+#define INCLUDE_OrgApacheLuceneSearchFilter 1
 #include "org/apache/lucene/search/Filter.h"
 
+@class IOSObjectArray;
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneSearchDocIdSet;
 @protocol OrgApacheLuceneUtilBits;
 
+/*!
+ @brief A <code>Filter</code> that accepts all documents that have one or more values in a
+ given field.
+ This <code>Filter</code> request <code>Bits</code> from
+ <code>org.apache.lucene.index.LeafReader.getDocsWithField</code>
+ */
 @interface OrgApacheLuceneSearchFieldValueFilter : OrgApacheLuceneSearchFilter
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new <code>FieldValueFilter</code>
+ @param field
+ the field to filter
+ */
 - (instancetype)initWithNSString:(NSString *)field;
 
+/*!
+ @brief Creates a new <code>FieldValueFilter</code>
+ @param field
+ the field to filter
+ @param negate
+ iff <code>true</code> all documents with no value in the given
+ field are accepted.
+ */
 - (instancetype)initWithNSString:(NSString *)field
                      withBoolean:(jboolean)negate;
 
 - (jboolean)isEqual:(id)obj;
 
+/*!
+ @brief Returns the field this filter is applied on.
+ @return the field this filter is applied on.
+ */
 - (NSString *)field;
 
 - (OrgApacheLuceneSearchDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
@@ -42,6 +66,10 @@
 
 - (NSUInteger)hash;
 
+/*!
+ @brief Returns <code>true</code> iff this filter is negated, otherwise <code>false</code>
+ @return <code>true</code> iff this filter is negated, otherwise <code>false</code>
+ */
 - (jboolean)negate;
 
 - (NSString *)toStringWithNSString:(NSString *)defaultField;
@@ -54,12 +82,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchFieldValueFilter_initWithNSString_(O
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchFieldValueFilter *new_OrgApacheLuceneSearchFieldValueFilter_initWithNSString_(NSString *field) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchFieldValueFilter *create_OrgApacheLuceneSearchFieldValueFilter_initWithNSString_(NSString *field);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchFieldValueFilter_initWithNSString_withBoolean_(OrgApacheLuceneSearchFieldValueFilter *self, NSString *field, jboolean negate);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchFieldValueFilter *new_OrgApacheLuceneSearchFieldValueFilter_initWithNSString_withBoolean_(NSString *field, jboolean negate) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchFieldValueFilter *create_OrgApacheLuceneSearchFieldValueFilter_initWithNSString_withBoolean_(NSString *field, jboolean negate);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldValueFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchFieldValueFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchFieldValueFilter")

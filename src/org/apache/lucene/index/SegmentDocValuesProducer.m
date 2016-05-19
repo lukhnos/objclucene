@@ -8,7 +8,6 @@
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/lang/Long.h"
-#include "java/lang/Throwable.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Collection.h"
@@ -38,11 +37,13 @@
 #include "org/apache/lucene/util/RamUsageEstimator.h"
 #include "org/apache/lucene/util/Version.h"
 
-static jlong OrgApacheLuceneIndexSegmentDocValuesProducer_LONG_RAM_BYTES_USED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexSegmentDocValuesProducer, LONG_RAM_BYTES_USED_, jlong)
+inline jlong OrgApacheLuceneIndexSegmentDocValuesProducer_get_LONG_RAM_BYTES_USED();
+static jlong OrgApacheLuceneIndexSegmentDocValuesProducer_LONG_RAM_BYTES_USED;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneIndexSegmentDocValuesProducer, LONG_RAM_BYTES_USED, jlong)
 
-static jlong OrgApacheLuceneIndexSegmentDocValuesProducer_BASE_RAM_BYTES_USED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexSegmentDocValuesProducer, BASE_RAM_BYTES_USED_, jlong)
+inline jlong OrgApacheLuceneIndexSegmentDocValuesProducer_get_BASE_RAM_BYTES_USED();
+static jlong OrgApacheLuceneIndexSegmentDocValuesProducer_BASE_RAM_BYTES_USED;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneIndexSegmentDocValuesProducer, BASE_RAM_BYTES_USED, jlong)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexSegmentDocValuesProducer)
 
@@ -100,14 +101,14 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexSegmentDocValuesProducer)
 }
 
 - (void)close {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (jlong)ramBytesUsed {
-  jlong ramBytesUsed = OrgApacheLuceneIndexSegmentDocValuesProducer_BASE_RAM_BYTES_USED_;
-  ramBytesUsed += [((id<JavaUtilList>) nil_chk(dvGens_)) size] * OrgApacheLuceneIndexSegmentDocValuesProducer_LONG_RAM_BYTES_USED_;
-  ramBytesUsed += [((id<JavaUtilSet>) nil_chk(dvProducers_)) size] * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_);
-  ramBytesUsed += [((id<JavaUtilMap>) nil_chk(dvProducersByField_)) size] * 2 * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_);
+  jlong ramBytesUsed = OrgApacheLuceneIndexSegmentDocValuesProducer_BASE_RAM_BYTES_USED;
+  ramBytesUsed += [((id<JavaUtilList>) nil_chk(dvGens_)) size] * OrgApacheLuceneIndexSegmentDocValuesProducer_LONG_RAM_BYTES_USED;
+  ramBytesUsed += [((id<JavaUtilSet>) nil_chk(dvProducers_)) size] * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF);
+  ramBytesUsed += [((id<JavaUtilMap>) nil_chk(dvProducersByField_)) size] * 2 * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF);
   for (OrgApacheLuceneCodecsDocValuesProducer * __strong producer in dvProducers_) {
     ramBytesUsed += [((OrgApacheLuceneCodecsDocValuesProducer *) nil_chk(producer)) ramBytesUsed];
   }
@@ -115,7 +116,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexSegmentDocValuesProducer)
 }
 
 - (id<JavaUtilCollection>)getChildResources {
-  id<JavaUtilList> resources = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> resources = create_JavaUtilArrayList_init();
   for (id<OrgApacheLuceneUtilAccountable> __strong producer in nil_chk(dvProducers_)) {
     [resources addWithId:OrgApacheLuceneUtilAccountables_namedAccountableWithNSString_withOrgApacheLuceneUtilAccountable_(@"delegate", producer)];
   }
@@ -135,8 +136,8 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexSegmentDocValuesProducer)
 
 + (void)initialize {
   if (self == [OrgApacheLuceneIndexSegmentDocValuesProducer class]) {
-    OrgApacheLuceneIndexSegmentDocValuesProducer_LONG_RAM_BYTES_USED_ = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(JavaLangLong_class_());
-    OrgApacheLuceneIndexSegmentDocValuesProducer_BASE_RAM_BYTES_USED_ = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneIndexSegmentDocValuesProducer_class_());
+    OrgApacheLuceneIndexSegmentDocValuesProducer_LONG_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(JavaLangLong_class_());
+    OrgApacheLuceneIndexSegmentDocValuesProducer_BASE_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneIndexSegmentDocValuesProducer_class_());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexSegmentDocValuesProducer)
   }
 }
@@ -153,12 +154,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexSegmentDocValuesProducer)
     { "checkIntegrity", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
     { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "LONG_RAM_BYTES_USED_", NULL, 0x1a, "J", &OrgApacheLuceneIndexSegmentDocValuesProducer_LONG_RAM_BYTES_USED_, NULL, .constantValue.asLong = 0 },
-    { "BASE_RAM_BYTES_USED_", NULL, 0x1a, "J", &OrgApacheLuceneIndexSegmentDocValuesProducer_BASE_RAM_BYTES_USED_, NULL, .constantValue.asLong = 0 },
+    { "LONG_RAM_BYTES_USED", "LONG_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneIndexSegmentDocValuesProducer_LONG_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
+    { "BASE_RAM_BYTES_USED", "BASE_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneIndexSegmentDocValuesProducer_BASE_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
     { "dvProducersByField_", NULL, 0x10, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/codecs/DocValuesProducer;>;", .constantValue.asLong = 0 },
     { "dvProducers_", NULL, 0x10, "Ljava.util.Set;", NULL, "Ljava/util/Set<Lorg/apache/lucene/codecs/DocValuesProducer;>;", .constantValue.asLong = 0 },
     { "dvGens_", NULL, 0x10, "Ljava.util.List;", NULL, "Ljava/util/List<Ljava/lang/Long;>;", .constantValue.asLong = 0 },
@@ -172,15 +173,15 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexSegmentDocValuesProducer)
 void OrgApacheLuceneIndexSegmentDocValuesProducer_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexSegmentDocValues_(OrgApacheLuceneIndexSegmentDocValuesProducer *self, OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexFieldInfos *coreInfos, OrgApacheLuceneIndexFieldInfos *allInfos, OrgApacheLuceneIndexSegmentDocValues *segDocValues) {
   OrgApacheLuceneCodecsDocValuesProducer_init(self);
   JreStrongAssignAndConsume(&self->dvProducersByField_, new_JavaUtilHashMap_init());
-  JreStrongAssign(&self->dvProducers_, JavaUtilCollections_newSetFromMapWithJavaUtilMap_([new_JavaUtilIdentityHashMap_init() autorelease]));
+  JreStrongAssign(&self->dvProducers_, JavaUtilCollections_newSetFromMapWithJavaUtilMap_(create_JavaUtilIdentityHashMap_init()));
   JreStrongAssignAndConsume(&self->dvGens_, new_JavaUtilArrayList_init());
   jboolean success = false;
   @try {
     OrgApacheLuceneUtilVersion *ver = [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(si))->info_)) getVersion];
-    if (ver != nil && [ver onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_9_0_)]) {
+    if (ver != nil && [ver onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_9_0)]) {
       OrgApacheLuceneCodecsDocValuesProducer *baseProducer = nil;
       for (OrgApacheLuceneIndexFieldInfo * __strong fi in nil_chk(allInfos)) {
-        if ([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fi)) getDocValuesType] == JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, NONE)) {
+        if ([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fi)) getDocValuesType] == JreLoadEnum(OrgApacheLuceneIndexDocValuesType, NONE)) {
           continue;
         }
         jlong docValuesGen = [fi getDocValuesGen];
@@ -194,7 +195,7 @@ void OrgApacheLuceneIndexSegmentDocValuesProducer_initWithOrgApacheLuceneIndexSe
         }
         else {
           JreAssert((![self->dvGens_ containsWithId:JavaLangLong_valueOfWithLong_(docValuesGen)]), (@"org/apache/lucene/index/SegmentDocValuesProducer.java:79 condition failed: assert !dvGens.contains(docValuesGen);"));
-          OrgApacheLuceneCodecsDocValuesProducer *dvp = [((OrgApacheLuceneIndexSegmentDocValues *) nil_chk(segDocValues)) getDocValuesProducerWithLong:docValuesGen withOrgApacheLuceneIndexSegmentCommitInfo:si withOrgApacheLuceneStoreDirectory:dir withOrgApacheLuceneIndexFieldInfos:[new_OrgApacheLuceneIndexFieldInfos_initWithOrgApacheLuceneIndexFieldInfoArray_([IOSObjectArray arrayWithObjects:(id[]){ fi } count:1 type:OrgApacheLuceneIndexFieldInfo_class_()]) autorelease]];
+          OrgApacheLuceneCodecsDocValuesProducer *dvp = [((OrgApacheLuceneIndexSegmentDocValues *) nil_chk(segDocValues)) getDocValuesProducerWithLong:docValuesGen withOrgApacheLuceneIndexSegmentCommitInfo:si withOrgApacheLuceneStoreDirectory:dir withOrgApacheLuceneIndexFieldInfos:create_OrgApacheLuceneIndexFieldInfos_initWithOrgApacheLuceneIndexFieldInfoArray_([IOSObjectArray arrayWithObjects:(id[]){ fi } count:1 type:OrgApacheLuceneIndexFieldInfo_class_()])];
           [self->dvGens_ addWithId:JavaLangLong_valueOfWithLong_(docValuesGen)];
           [((id<JavaUtilSet>) nil_chk(self->dvProducers_)) addWithId:dvp];
           [self->dvProducersByField_ putWithId:fi->name_ withId:dvp];
@@ -202,17 +203,17 @@ void OrgApacheLuceneIndexSegmentDocValuesProducer_initWithOrgApacheLuceneIndexSe
       }
     }
     else {
-      id<JavaUtilMap> genInfos = [new_JavaUtilHashMap_init() autorelease];
+      id<JavaUtilMap> genInfos = create_JavaUtilHashMap_init();
       for (OrgApacheLuceneIndexFieldInfo * __strong fi in nil_chk(allInfos)) {
-        if ([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fi)) getDocValuesType] == JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, NONE)) {
+        if ([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fi)) getDocValuesType] == JreLoadEnum(OrgApacheLuceneIndexDocValuesType, NONE)) {
           continue;
         }
         id<JavaUtilList> genFieldInfos = [genInfos getWithId:JavaLangLong_valueOfWithLong_([fi getDocValuesGen])];
         if (genFieldInfos == nil) {
-          genFieldInfos = [new_JavaUtilArrayList_init() autorelease];
+          genFieldInfos = create_JavaUtilArrayList_init();
           [genInfos putWithId:JavaLangLong_valueOfWithLong_([fi getDocValuesGen]) withId:genFieldInfos];
         }
-        [((id<JavaUtilList>) nil_chk(genFieldInfos)) addWithId:fi];
+        [genFieldInfos addWithId:fi];
       }
       for (id<JavaUtilMap_Entry> __strong e in nil_chk([genInfos entrySet])) {
         jlong docValuesGen = [((JavaLangLong *) nil_chk([((id<JavaUtilMap_Entry>) nil_chk(e)) getKey])) longLongValue];
@@ -222,7 +223,7 @@ void OrgApacheLuceneIndexSegmentDocValuesProducer_initWithOrgApacheLuceneIndexSe
           dvp = [((OrgApacheLuceneIndexSegmentDocValues *) nil_chk(segDocValues)) getDocValuesProducerWithLong:docValuesGen withOrgApacheLuceneIndexSegmentCommitInfo:si withOrgApacheLuceneStoreDirectory:dir withOrgApacheLuceneIndexFieldInfos:coreInfos];
         }
         else {
-          dvp = [((OrgApacheLuceneIndexSegmentDocValues *) nil_chk(segDocValues)) getDocValuesProducerWithLong:docValuesGen withOrgApacheLuceneIndexSegmentCommitInfo:si withOrgApacheLuceneStoreDirectory:dir withOrgApacheLuceneIndexFieldInfos:[new_OrgApacheLuceneIndexFieldInfos_initWithOrgApacheLuceneIndexFieldInfoArray_([infos toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[((id<JavaUtilList>) nil_chk(infos)) size] type:OrgApacheLuceneIndexFieldInfo_class_()]]) autorelease]];
+          dvp = [((OrgApacheLuceneIndexSegmentDocValues *) nil_chk(segDocValues)) getDocValuesProducerWithLong:docValuesGen withOrgApacheLuceneIndexSegmentCommitInfo:si withOrgApacheLuceneStoreDirectory:dir withOrgApacheLuceneIndexFieldInfos:create_OrgApacheLuceneIndexFieldInfos_initWithOrgApacheLuceneIndexFieldInfoArray_([((id<JavaUtilList>) nil_chk(infos)) toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[infos size] type:OrgApacheLuceneIndexFieldInfo_class_()]])];
         }
         [self->dvGens_ addWithId:JavaLangLong_valueOfWithLong_(docValuesGen)];
         [((id<JavaUtilSet>) nil_chk(self->dvProducers_)) addWithId:dvp];
@@ -238,16 +239,18 @@ void OrgApacheLuceneIndexSegmentDocValuesProducer_initWithOrgApacheLuceneIndexSe
       @try {
         [((OrgApacheLuceneIndexSegmentDocValues *) nil_chk(segDocValues)) decRefWithJavaUtilList:self->dvGens_];
       }
-      @catch (JavaLangThrowable *t) {
+      @catch (NSException *t) {
       }
     }
   }
 }
 
 OrgApacheLuceneIndexSegmentDocValuesProducer *new_OrgApacheLuceneIndexSegmentDocValuesProducer_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexSegmentDocValues_(OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexFieldInfos *coreInfos, OrgApacheLuceneIndexFieldInfos *allInfos, OrgApacheLuceneIndexSegmentDocValues *segDocValues) {
-  OrgApacheLuceneIndexSegmentDocValuesProducer *self = [OrgApacheLuceneIndexSegmentDocValuesProducer alloc];
-  OrgApacheLuceneIndexSegmentDocValuesProducer_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexSegmentDocValues_(self, si, dir, coreInfos, allInfos, segDocValues);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSegmentDocValuesProducer, initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexSegmentDocValues_, si, dir, coreInfos, allInfos, segDocValues)
+}
+
+OrgApacheLuceneIndexSegmentDocValuesProducer *create_OrgApacheLuceneIndexSegmentDocValuesProducer_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexSegmentDocValues_(OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexFieldInfos *coreInfos, OrgApacheLuceneIndexFieldInfos *allInfos, OrgApacheLuceneIndexSegmentDocValues *segDocValues) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSegmentDocValuesProducer, initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexSegmentDocValues_, si, dir, coreInfos, allInfos, segDocValues)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSegmentDocValuesProducer)

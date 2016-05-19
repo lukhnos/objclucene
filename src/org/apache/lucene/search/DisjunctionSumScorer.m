@@ -37,7 +37,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDisjunctionSumScorer, coord_, IOSFloatA
   jdouble score = 0;
   jint freq = 0;
   for (OrgApacheLuceneSearchDisiWrapper *w = topList; w != nil; w = w->next_) {
-    JrePlusAssignDoubleD(&score, [((OrgApacheLuceneSearchScorer *) nil_chk(((OrgApacheLuceneSearchDisiWrapper *) nil_chk(w))->iterator_)) score]);
+    JrePlusAssignDoubleD(&score, [((OrgApacheLuceneSearchScorer *) nil_chk(w->iterator_)) score]);
     freq += 1;
   }
   return (jfloat) score * IOSFloatArray_Get(nil_chk(coord_), freq);
@@ -50,8 +50,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDisjunctionSumScorer, coord_, IOSFloatA
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchWeight:withJavaUtilList:withFloatArray:withBoolean:", "DisjunctionSumScorer", NULL, 0x0, NULL, NULL },
-    { "scoreWithOrgApacheLuceneSearchDisiWrapper:", "score", "F", 0x4, "Ljava.io.IOException;", NULL },
+    { "initWithOrgApacheLuceneSearchWeight:withJavaUtilList:withFloatArray:withBoolean:", "DisjunctionSumScorer", NULL, 0x0, NULL, "(Lorg/apache/lucene/search/Weight;Ljava/util/List<Lorg/apache/lucene/search/Scorer;>;[FZ)V" },
+    { "scoreWithOrgApacheLuceneSearchDisiWrapper:", "score", "F", 0x4, "Ljava.io.IOException;", "(Lorg/apache/lucene/search/DisiWrapper<Lorg/apache/lucene/search/Scorer;>;)F" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "coord_", NULL, 0x12, "[F", NULL, NULL, .constantValue.asLong = 0 },
@@ -68,9 +68,11 @@ void OrgApacheLuceneSearchDisjunctionSumScorer_initWithOrgApacheLuceneSearchWeig
 }
 
 OrgApacheLuceneSearchDisjunctionSumScorer *new_OrgApacheLuceneSearchDisjunctionSumScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withFloatArray_withBoolean_(OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> subScorers, IOSFloatArray *coord, jboolean needsScores) {
-  OrgApacheLuceneSearchDisjunctionSumScorer *self = [OrgApacheLuceneSearchDisjunctionSumScorer alloc];
-  OrgApacheLuceneSearchDisjunctionSumScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withFloatArray_withBoolean_(self, weight, subScorers, coord, needsScores);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDisjunctionSumScorer, initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withFloatArray_withBoolean_, weight, subScorers, coord, needsScores)
+}
+
+OrgApacheLuceneSearchDisjunctionSumScorer *create_OrgApacheLuceneSearchDisjunctionSumScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withFloatArray_withBoolean_(OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> subScorers, IOSFloatArray *coord, jboolean needsScores) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDisjunctionSumScorer, initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withFloatArray_withBoolean_, weight, subScorers, coord, needsScores)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDisjunctionSumScorer)

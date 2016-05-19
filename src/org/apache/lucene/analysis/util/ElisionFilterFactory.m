@@ -38,7 +38,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisUtilElisionFilterFactory, articles_, 
 
 - (void)informWithOrgApacheLuceneAnalysisUtilResourceLoader:(id<OrgApacheLuceneAnalysisUtilResourceLoader>)loader {
   if (articlesFile_ == nil) {
-    JreStrongAssign(&articles_, JreLoadStatic(OrgApacheLuceneAnalysisFrFrenchAnalyzer, DEFAULT_ARTICLES_));
+    JreStrongAssign(&articles_, JreLoadStatic(OrgApacheLuceneAnalysisFrFrenchAnalyzer, DEFAULT_ARTICLES));
   }
   else {
     JreStrongAssign(&articles_, [self getWordSetWithOrgApacheLuceneAnalysisUtilResourceLoader:loader withNSString:articlesFile_ withBoolean:ignoreCase_]);
@@ -46,7 +46,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisUtilElisionFilterFactory, articles_, 
 }
 
 - (OrgApacheLuceneAnalysisUtilElisionFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  return [new_OrgApacheLuceneAnalysisUtilElisionFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(input, articles_) autorelease];
+  return create_OrgApacheLuceneAnalysisUtilElisionFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(input, articles_);
 }
 
 - (OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory *)getMultiTermComponent {
@@ -61,7 +61,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisUtilElisionFilterFactory, articles_, 
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "ElisionFilterFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "ElisionFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "informWithOrgApacheLuceneAnalysisUtilResourceLoader:", "inform", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.util.ElisionFilter;", 0x1, NULL, NULL },
     { "getMultiTermComponent", NULL, "Lorg.apache.lucene.analysis.util.AbstractAnalysisFactory;", 0x1, NULL, NULL },
@@ -82,14 +82,16 @@ void OrgApacheLuceneAnalysisUtilElisionFilterFactory_initWithJavaUtilMap_(OrgApa
   JreStrongAssign(&self->articlesFile_, [self getWithJavaUtilMap:args withNSString:@"articles"]);
   self->ignoreCase_ = [self getBooleanWithJavaUtilMap:args withNSString:@"ignoreCase" withBoolean:false];
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisUtilElisionFilterFactory *new_OrgApacheLuceneAnalysisUtilElisionFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisUtilElisionFilterFactory *self = [OrgApacheLuceneAnalysisUtilElisionFilterFactory alloc];
-  OrgApacheLuceneAnalysisUtilElisionFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisUtilElisionFilterFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisUtilElisionFilterFactory *create_OrgApacheLuceneAnalysisUtilElisionFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisUtilElisionFilterFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisUtilElisionFilterFactory)

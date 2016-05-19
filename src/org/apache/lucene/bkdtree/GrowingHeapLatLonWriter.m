@@ -68,7 +68,7 @@ __attribute__((unused)) static IOSLongArray *OrgApacheLuceneBkdtreeGrowingHeapLa
 }
 
 - (id<OrgApacheLuceneBkdtreeLatLonReader>)getReaderWithLong:(jlong)start {
-  return [new_OrgApacheLuceneBkdtreeHeapLatLonReader_initWithIntArray_withIntArray_withLongArray_withIntArray_withInt_withInt_(latEncs_, lonEncs_, ords_, docIDs_, (jint) start, nextWrite_) autorelease];
+  return create_OrgApacheLuceneBkdtreeHeapLatLonReader_initWithIntArray_withIntArray_withLongArray_withIntArray_withInt_withInt_(latEncs_, lonEncs_, ords_, docIDs_, (jint) start, nextWrite_);
 }
 
 - (void)close {
@@ -124,9 +124,11 @@ void OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter_initWithInt_(OrgApacheLuceneB
 }
 
 OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter *new_OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter_initWithInt_(jint maxSize) {
-  OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter *self = [OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter alloc];
-  OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter_initWithInt_(self, maxSize);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter, initWithInt_, maxSize)
+}
+
+OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter *create_OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter_initWithInt_(jint maxSize) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter, initWithInt_, maxSize)
 }
 
 IOSIntArray *OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter_growExactWithIntArray_withInt_(OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter *self, IOSIntArray *arr, jint size) {

@@ -18,7 +18,7 @@
                                              withInt:(jint)length {
   jint payload = OrgApacheLuceneUtilArrayUtil_parseIntWithCharArray_withInt_withInt_(buffer, offset, length);
   IOSByteArray *bytes = OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeIntWithInt_(payload);
-  OrgApacheLuceneUtilBytesRef *result = [new_OrgApacheLuceneUtilBytesRef_initWithByteArray_(bytes) autorelease];
+  OrgApacheLuceneUtilBytesRef *result = create_OrgApacheLuceneUtilBytesRef_initWithByteArray_(bytes);
   return result;
 }
 
@@ -32,7 +32,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "encodeWithCharArray:withInt:withInt:", "encode", "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "IntegerEncoder", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPayloadsIntegerEncoder = { 2, "IntegerEncoder", "org.apache.lucene.analysis.payloads", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisPayloadsIntegerEncoder;
@@ -45,9 +45,11 @@ void OrgApacheLuceneAnalysisPayloadsIntegerEncoder_init(OrgApacheLuceneAnalysisP
 }
 
 OrgApacheLuceneAnalysisPayloadsIntegerEncoder *new_OrgApacheLuceneAnalysisPayloadsIntegerEncoder_init() {
-  OrgApacheLuceneAnalysisPayloadsIntegerEncoder *self = [OrgApacheLuceneAnalysisPayloadsIntegerEncoder alloc];
-  OrgApacheLuceneAnalysisPayloadsIntegerEncoder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPayloadsIntegerEncoder, init)
+}
+
+OrgApacheLuceneAnalysisPayloadsIntegerEncoder *create_OrgApacheLuceneAnalysisPayloadsIntegerEncoder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPayloadsIntegerEncoder, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisPayloadsIntegerEncoder)

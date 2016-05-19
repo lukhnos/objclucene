@@ -21,7 +21,7 @@
 #include "java/lang/RuntimeException.h"
 #include "java/lang/StringBuilder.h"
 #include "java/lang/Thread.h"
-#include "java/lang/Throwable.h"
+#include "java/lang/annotation/Annotation.h"
 #include "java/nio/channels/FileChannel.h"
 #include "java/nio/charset/Charset.h"
 #include "java/nio/charset/CharsetDecoder.h"
@@ -53,8 +53,13 @@
 
 - (instancetype)init;
 
-+ (void)addSuppressedWithJavaLangThrowable:(JavaLangThrowable *)exception
-                     withJavaLangThrowable:(JavaLangThrowable *)suppressed;
+/*!
+ @brief adds a Throwable to the list of suppressed Exceptions of the first Throwable
+ @param exception this exception should get the suppressed one added
+ @param suppressed the suppressed exception
+ */
++ (void)addSuppressedWithNSException:(NSException *)exception
+                     withNSException:(NSException *)suppressed;
 
 + (JavaUtilLinkedHashMap *)rmWithJavaUtilLinkedHashMap:(JavaUtilLinkedHashMap *)unremoved
                  withOrgLukhnosPortmobileFilePathArray:(IOSObjectArray *)locations;
@@ -65,7 +70,9 @@ __attribute__((unused)) static void OrgApacheLuceneUtilIOUtils_init(OrgApacheLuc
 
 __attribute__((unused)) static OrgApacheLuceneUtilIOUtils *new_OrgApacheLuceneUtilIOUtils_init() NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static void OrgApacheLuceneUtilIOUtils_addSuppressedWithJavaLangThrowable_withJavaLangThrowable_(JavaLangThrowable *exception, JavaLangThrowable *suppressed);
+__attribute__((unused)) static OrgApacheLuceneUtilIOUtils *create_OrgApacheLuceneUtilIOUtils_init();
+
+__attribute__((unused)) static void OrgApacheLuceneUtilIOUtils_addSuppressedWithNSException_withNSException_(NSException *exception, NSException *suppressed);
 
 __attribute__((unused)) static JavaUtilLinkedHashMap *OrgApacheLuceneUtilIOUtils_rmWithJavaUtilLinkedHashMap_withOrgLukhnosPortmobileFilePathArray_(JavaUtilLinkedHashMap *unremoved, IOSObjectArray *locations);
 
@@ -74,17 +81,17 @@ __attribute__((unused)) static JavaUtilLinkedHashMap *OrgApacheLuceneUtilIOUtils
   JavaUtilLinkedHashMap *val$unremoved_;
 }
 
-- (OrgLukhnosPortmobileFileFileVisitResultEnum *)preVisitDirectoryWithId:(OrgLukhnosPortmobileFilePath *)dir
-                withOrgLukhnosPortmobileFileAttributeBasicFileAttributes:(OrgLukhnosPortmobileFileAttributeBasicFileAttributes *)attrs;
+- (OrgLukhnosPortmobileFileFileVisitResult *)preVisitDirectoryWithId:(OrgLukhnosPortmobileFilePath *)dir
+            withOrgLukhnosPortmobileFileAttributeBasicFileAttributes:(OrgLukhnosPortmobileFileAttributeBasicFileAttributes *)attrs;
 
-- (OrgLukhnosPortmobileFileFileVisitResultEnum *)postVisitDirectoryWithId:(OrgLukhnosPortmobileFilePath *)dir
-                                                    withJavaIoIOException:(JavaIoIOException *)impossible;
+- (OrgLukhnosPortmobileFileFileVisitResult *)postVisitDirectoryWithId:(OrgLukhnosPortmobileFilePath *)dir
+                                                withJavaIoIOException:(JavaIoIOException *)impossible;
 
-- (OrgLukhnosPortmobileFileFileVisitResultEnum *)visitFileWithId:(OrgLukhnosPortmobileFilePath *)file
-        withOrgLukhnosPortmobileFileAttributeBasicFileAttributes:(OrgLukhnosPortmobileFileAttributeBasicFileAttributes *)attrs;
+- (OrgLukhnosPortmobileFileFileVisitResult *)visitFileWithId:(OrgLukhnosPortmobileFilePath *)file
+    withOrgLukhnosPortmobileFileAttributeBasicFileAttributes:(OrgLukhnosPortmobileFileAttributeBasicFileAttributes *)attrs;
 
-- (OrgLukhnosPortmobileFileFileVisitResultEnum *)visitFileFailedWithId:(OrgLukhnosPortmobileFilePath *)file
-                                                 withJavaIoIOException:(JavaIoIOException *)exc;
+- (OrgLukhnosPortmobileFileFileVisitResult *)visitFileFailedWithId:(OrgLukhnosPortmobileFilePath *)file
+                                             withJavaIoIOException:(JavaIoIOException *)exc;
 
 - (instancetype)initWithJavaUtilLinkedHashMap:(JavaUtilLinkedHashMap *)capture$0;
 
@@ -98,14 +105,24 @@ __attribute__((unused)) static void OrgApacheLuceneUtilIOUtils_$1_initWithJavaUt
 
 __attribute__((unused)) static OrgApacheLuceneUtilIOUtils_$1 *new_OrgApacheLuceneUtilIOUtils_$1_initWithJavaUtilLinkedHashMap_(JavaUtilLinkedHashMap *capture$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneUtilIOUtils_$1 *create_OrgApacheLuceneUtilIOUtils_$1_initWithJavaUtilLinkedHashMap_(JavaUtilLinkedHashMap *capture$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilIOUtils_$1)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilIOUtils)
 
-JavaNioCharsetCharset *OrgApacheLuceneUtilIOUtils_CHARSET_UTF_8_;
-NSString *OrgApacheLuceneUtilIOUtils_UTF_8_;
+JavaNioCharsetCharset *OrgApacheLuceneUtilIOUtils_CHARSET_UTF_8;
+NSString *OrgApacheLuceneUtilIOUtils_UTF_8;
 
 @implementation OrgApacheLuceneUtilIOUtils
+
++ (JavaNioCharsetCharset *)CHARSET_UTF_8 {
+  return OrgApacheLuceneUtilIOUtils_CHARSET_UTF_8;
+}
+
++ (NSString *)UTF_8 {
+  return OrgApacheLuceneUtilIOUtils_UTF_8;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -130,9 +147,9 @@ J2OBJC_IGNORE_DESIGNATED_END
   OrgApacheLuceneUtilIOUtils_closeWhileHandlingExceptionWithJavaLangIterable_(objects);
 }
 
-+ (void)addSuppressedWithJavaLangThrowable:(JavaLangThrowable *)exception
-                     withJavaLangThrowable:(JavaLangThrowable *)suppressed {
-  OrgApacheLuceneUtilIOUtils_addSuppressedWithJavaLangThrowable_withJavaLangThrowable_(exception, suppressed);
++ (void)addSuppressedWithNSException:(NSException *)exception
+                     withNSException:(NSException *)suppressed {
+  OrgApacheLuceneUtilIOUtils_addSuppressedWithNSException_withNSException_(exception, suppressed);
 }
 
 + (JavaIoReader *)getDecodingReaderWithJavaIoInputStream:(JavaIoInputStream *)stream
@@ -176,12 +193,12 @@ J2OBJC_IGNORE_DESIGNATED_END
   return OrgApacheLuceneUtilIOUtils_rmWithJavaUtilLinkedHashMap_withOrgLukhnosPortmobileFilePathArray_(unremoved, locations);
 }
 
-+ (void)reThrowWithJavaLangThrowable:(JavaLangThrowable *)th {
-  OrgApacheLuceneUtilIOUtils_reThrowWithJavaLangThrowable_(th);
++ (void)reThrowWithNSException:(NSException *)th {
+  OrgApacheLuceneUtilIOUtils_reThrowWithNSException_(th);
 }
 
-+ (void)reThrowUncheckedWithJavaLangThrowable:(JavaLangThrowable *)th {
-  OrgApacheLuceneUtilIOUtils_reThrowUncheckedWithJavaLangThrowable_(th);
++ (void)reThrowUncheckedWithNSException:(NSException *)th {
+  OrgApacheLuceneUtilIOUtils_reThrowUncheckedWithNSException_(th);
 }
 
 + (void)fsyncWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)fileToSync
@@ -201,45 +218,45 @@ J2OBJC_IGNORE_DESIGNATED_END
   return OrgApacheLuceneUtilIOUtils_spinsLinuxWithOrgLukhnosPortmobileFilePath_(path);
 }
 
-+ (void)initialize {
-  if (self == [OrgApacheLuceneUtilIOUtils class]) {
-    JreStrongAssign(&OrgApacheLuceneUtilIOUtils_CHARSET_UTF_8_, JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8_));
-    JreStrongAssign(&OrgApacheLuceneUtilIOUtils_UTF_8_, [((JavaNioCharsetCharset *) nil_chk(JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8_))) name]);
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilIOUtils)
-  }
++ (IOSObjectArray *)__annotations_CHARSET_UTF_8_ {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
-+ (IOSObjectArray *)__annotations_CHARSET_UTF_8_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
++ (void)initialize {
+  if (self == [OrgApacheLuceneUtilIOUtils class]) {
+    JreStrongAssign(&OrgApacheLuceneUtilIOUtils_CHARSET_UTF_8, JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8));
+    JreStrongAssign(&OrgApacheLuceneUtilIOUtils_UTF_8, [((JavaNioCharsetCharset *) nil_chk(JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8))) name]);
+    J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilIOUtils)
+  }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "IOUtils", NULL, 0x2, NULL, NULL },
     { "closeWithJavaIoCloseableArray:", "close", "V", 0x89, "Ljava.io.IOException;", NULL },
-    { "closeWithJavaLangIterable:", "close", "V", 0x9, "Ljava.io.IOException;", NULL },
+    { "closeWithJavaLangIterable:", "close", "V", 0x9, "Ljava.io.IOException;", "(Ljava/lang/Iterable<+Ljava/io/Closeable;>;)V" },
     { "closeWhileHandlingExceptionWithJavaIoCloseableArray:", "closeWhileHandlingException", "V", 0x89, NULL, NULL },
-    { "closeWhileHandlingExceptionWithJavaLangIterable:", "closeWhileHandlingException", "V", 0x9, NULL, NULL },
-    { "addSuppressedWithJavaLangThrowable:withJavaLangThrowable:", "addSuppressed", "V", 0xa, NULL, NULL },
+    { "closeWhileHandlingExceptionWithJavaLangIterable:", "closeWhileHandlingException", "V", 0x9, NULL, "(Ljava/lang/Iterable<+Ljava/io/Closeable;>;)V" },
+    { "addSuppressedWithNSException:withNSException:", "addSuppressed", "V", 0xa, NULL, NULL },
     { "getDecodingReaderWithJavaIoInputStream:withJavaNioCharsetCharset:", "getDecodingReader", "Ljava.io.Reader;", 0x9, NULL, NULL },
-    { "getDecodingReaderWithIOSClass:withNSString:withJavaNioCharsetCharset:", "getDecodingReader", "Ljava.io.Reader;", 0x9, "Ljava.io.IOException;", NULL },
+    { "getDecodingReaderWithIOSClass:withNSString:withJavaNioCharsetCharset:", "getDecodingReader", "Ljava.io.Reader;", 0x9, "Ljava.io.IOException;", "(Ljava/lang/Class<*>;Ljava/lang/String;Ljava/nio/charset/Charset;)Ljava/io/Reader;" },
     { "deleteFilesIgnoringExceptionsWithOrgApacheLuceneStoreDirectory:withNSStringArray:", "deleteFilesIgnoringExceptions", "V", 0x89, NULL, NULL },
     { "deleteFilesIgnoringExceptionsWithOrgLukhnosPortmobileFilePathArray:", "deleteFilesIgnoringExceptions", "V", 0x89, NULL, NULL },
-    { "deleteFilesIgnoringExceptionsWithJavaUtilCollection:", "deleteFilesIgnoringExceptions", "V", 0x9, NULL, NULL },
+    { "deleteFilesIgnoringExceptionsWithJavaUtilCollection:", "deleteFilesIgnoringExceptions", "V", 0x9, NULL, "(Ljava/util/Collection<+Lorg/lukhnos/portmobile/file/Path;>;)V" },
     { "deleteFilesIfExistWithOrgLukhnosPortmobileFilePathArray:", "deleteFilesIfExist", "V", 0x89, "Ljava.io.IOException;", NULL },
-    { "deleteFilesIfExistWithJavaUtilCollection:", "deleteFilesIfExist", "V", 0x9, "Ljava.io.IOException;", NULL },
+    { "deleteFilesIfExistWithJavaUtilCollection:", "deleteFilesIfExist", "V", 0x9, "Ljava.io.IOException;", "(Ljava/util/Collection<+Lorg/lukhnos/portmobile/file/Path;>;)V" },
     { "rmWithOrgLukhnosPortmobileFilePathArray:", "rm", "V", 0x89, "Ljava.io.IOException;", NULL },
-    { "rmWithJavaUtilLinkedHashMap:withOrgLukhnosPortmobileFilePathArray:", "rm", "Ljava.util.LinkedHashMap;", 0x8a, NULL, NULL },
-    { "reThrowWithJavaLangThrowable:", "reThrow", "V", 0x9, "Ljava.io.IOException;", NULL },
-    { "reThrowUncheckedWithJavaLangThrowable:", "reThrowUnchecked", "V", 0x9, NULL, NULL },
+    { "rmWithJavaUtilLinkedHashMap:withOrgLukhnosPortmobileFilePathArray:", "rm", "Ljava.util.LinkedHashMap;", 0x8a, NULL, "(Ljava/util/LinkedHashMap<Lorg/lukhnos/portmobile/file/Path;Ljava/lang/Throwable;>;[Lorg/lukhnos/portmobile/file/Path;)Ljava/util/LinkedHashMap<Lorg/lukhnos/portmobile/file/Path;Ljava/lang/Throwable;>;" },
+    { "reThrowWithNSException:", "reThrow", "V", 0x9, "Ljava.io.IOException;", NULL },
+    { "reThrowUncheckedWithNSException:", "reThrowUnchecked", "V", 0x9, NULL, NULL },
     { "fsyncWithOrgLukhnosPortmobileFilePath:withBoolean:", "fsync", "V", 0x9, "Ljava.io.IOException;", NULL },
     { "spinsWithOrgApacheLuceneStoreDirectory:", "spins", "Z", 0x9, "Ljava.io.IOException;", NULL },
     { "spinsWithOrgLukhnosPortmobileFilePath:", "spins", "Z", 0x9, "Ljava.io.IOException;", NULL },
     { "spinsLinuxWithOrgLukhnosPortmobileFilePath:", "spinsLinux", "Z", 0x8, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "CHARSET_UTF_8_", NULL, 0x19, "Ljava.nio.charset.Charset;", &OrgApacheLuceneUtilIOUtils_CHARSET_UTF_8_, NULL, .constantValue.asLong = 0 },
-    { "UTF_8_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneUtilIOUtils_UTF_8_, NULL, .constantValue.asLong = 0 },
+    { "CHARSET_UTF_8", "CHARSET_UTF_8", 0x19, "Ljava.nio.charset.Charset;", &OrgApacheLuceneUtilIOUtils_CHARSET_UTF_8, NULL, .constantValue.asLong = 0 },
+    { "UTF_8", "UTF_8", 0x19, "Ljava.lang.String;", &OrgApacheLuceneUtilIOUtils_UTF_8, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneUtilIOUtils = { 2, "IOUtils", "org.apache.lucene.util", NULL, 0x11, 21, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilIOUtils;
@@ -252,9 +269,11 @@ void OrgApacheLuceneUtilIOUtils_init(OrgApacheLuceneUtilIOUtils *self) {
 }
 
 OrgApacheLuceneUtilIOUtils *new_OrgApacheLuceneUtilIOUtils_init() {
-  OrgApacheLuceneUtilIOUtils *self = [OrgApacheLuceneUtilIOUtils alloc];
-  OrgApacheLuceneUtilIOUtils_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilIOUtils, init)
+}
+
+OrgApacheLuceneUtilIOUtils *create_OrgApacheLuceneUtilIOUtils_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilIOUtils, init)
 }
 
 void OrgApacheLuceneUtilIOUtils_closeWithJavaIoCloseableArray_(IOSObjectArray *objects) {
@@ -264,21 +283,21 @@ void OrgApacheLuceneUtilIOUtils_closeWithJavaIoCloseableArray_(IOSObjectArray *o
 
 void OrgApacheLuceneUtilIOUtils_closeWithJavaLangIterable_(id<JavaLangIterable> objects) {
   OrgApacheLuceneUtilIOUtils_initialize();
-  JavaLangThrowable *th = nil;
+  NSException *th = nil;
   for (id<JavaIoCloseable> __strong object in nil_chk(objects)) {
     @try {
       if (object != nil) {
         [object close];
       }
     }
-    @catch (JavaLangThrowable *t) {
-      OrgApacheLuceneUtilIOUtils_addSuppressedWithJavaLangThrowable_withJavaLangThrowable_(th, t);
+    @catch (NSException *t) {
+      OrgApacheLuceneUtilIOUtils_addSuppressedWithNSException_withNSException_(th, t);
       if (th == nil) {
         th = t;
       }
     }
   }
-  OrgApacheLuceneUtilIOUtils_reThrowWithJavaLangThrowable_(th);
+  OrgApacheLuceneUtilIOUtils_reThrowWithNSException_(th);
 }
 
 void OrgApacheLuceneUtilIOUtils_closeWhileHandlingExceptionWithJavaIoCloseableArray_(IOSObjectArray *objects) {
@@ -294,22 +313,22 @@ void OrgApacheLuceneUtilIOUtils_closeWhileHandlingExceptionWithJavaLangIterable_
         [object close];
       }
     }
-    @catch (JavaLangThrowable *t) {
+    @catch (NSException *t) {
     }
   }
 }
 
-void OrgApacheLuceneUtilIOUtils_addSuppressedWithJavaLangThrowable_withJavaLangThrowable_(JavaLangThrowable *exception, JavaLangThrowable *suppressed) {
+void OrgApacheLuceneUtilIOUtils_addSuppressedWithNSException_withNSException_(NSException *exception, NSException *suppressed) {
   OrgApacheLuceneUtilIOUtils_initialize();
   if (exception != nil && suppressed != nil) {
-    [exception addSuppressedWithJavaLangThrowable:suppressed];
+    [exception addSuppressedWithNSException:suppressed];
   }
 }
 
 JavaIoReader *OrgApacheLuceneUtilIOUtils_getDecodingReaderWithJavaIoInputStream_withJavaNioCharsetCharset_(JavaIoInputStream *stream, JavaNioCharsetCharset *charSet) {
   OrgApacheLuceneUtilIOUtils_initialize();
-  JavaNioCharsetCharsetDecoder *charSetDecoder = [((JavaNioCharsetCharsetDecoder *) nil_chk([((JavaNioCharsetCharsetDecoder *) nil_chk([((JavaNioCharsetCharset *) nil_chk(charSet)) newDecoder])) onMalformedInputWithJavaNioCharsetCodingErrorAction:JreLoadStatic(JavaNioCharsetCodingErrorAction, REPORT_)])) onUnmappableCharacterWithJavaNioCharsetCodingErrorAction:JreLoadStatic(JavaNioCharsetCodingErrorAction, REPORT_)];
-  return [new_JavaIoBufferedReader_initWithJavaIoReader_([new_JavaIoInputStreamReader_initWithJavaIoInputStream_withJavaNioCharsetCharsetDecoder_(stream, charSetDecoder) autorelease]) autorelease];
+  JavaNioCharsetCharsetDecoder *charSetDecoder = [((JavaNioCharsetCharsetDecoder *) nil_chk([((JavaNioCharsetCharsetDecoder *) nil_chk([((JavaNioCharsetCharset *) nil_chk(charSet)) newDecoder])) onMalformedInputWithJavaNioCharsetCodingErrorAction:JreLoadStatic(JavaNioCharsetCodingErrorAction, REPORT)])) onUnmappableCharacterWithJavaNioCharsetCodingErrorAction:JreLoadStatic(JavaNioCharsetCodingErrorAction, REPORT)];
+  return create_JavaIoBufferedReader_initWithJavaIoReader_(create_JavaIoInputStreamReader_initWithJavaIoInputStream_withJavaNioCharsetCharsetDecoder_(stream, charSetDecoder));
 }
 
 JavaIoReader *OrgApacheLuceneUtilIOUtils_getDecodingReaderWithIOSClass_withNSString_withJavaNioCharsetCharset_(IOSClass *clazz, NSString *resource, JavaNioCharsetCharset *charSet) {
@@ -340,7 +359,7 @@ void OrgApacheLuceneUtilIOUtils_deleteFilesIgnoringExceptionsWithOrgApacheLucene
       @try {
         [((OrgApacheLuceneStoreDirectory *) nil_chk(dir)) deleteFileWithNSString:name];
       }
-      @catch (JavaLangThrowable *ignored) {
+      @catch (NSException *ignored) {
       }
     }
   }
@@ -358,7 +377,7 @@ void OrgApacheLuceneUtilIOUtils_deleteFilesIgnoringExceptionsWithJavaUtilCollect
       @try {
         OrgLukhnosPortmobileFileFiles_delete__WithOrgLukhnosPortmobileFilePath_(name);
       }
-      @catch (JavaLangThrowable *ignored) {
+      @catch (NSException *ignored) {
       }
     }
   }
@@ -371,32 +390,32 @@ void OrgApacheLuceneUtilIOUtils_deleteFilesIfExistWithOrgLukhnosPortmobileFilePa
 
 void OrgApacheLuceneUtilIOUtils_deleteFilesIfExistWithJavaUtilCollection_(id<JavaUtilCollection> files) {
   OrgApacheLuceneUtilIOUtils_initialize();
-  JavaLangThrowable *th = nil;
+  NSException *th = nil;
   for (OrgLukhnosPortmobileFilePath * __strong file in nil_chk(files)) {
     @try {
       if (file != nil) {
         OrgLukhnosPortmobileFileFiles_deleteIfExistsWithOrgLukhnosPortmobileFilePath_(file);
       }
     }
-    @catch (JavaLangThrowable *t) {
-      OrgApacheLuceneUtilIOUtils_addSuppressedWithJavaLangThrowable_withJavaLangThrowable_(th, t);
+    @catch (NSException *t) {
+      OrgApacheLuceneUtilIOUtils_addSuppressedWithNSException_withNSException_(th, t);
       if (th == nil) {
         th = t;
       }
     }
   }
-  OrgApacheLuceneUtilIOUtils_reThrowWithJavaLangThrowable_(th);
+  OrgApacheLuceneUtilIOUtils_reThrowWithNSException_(th);
 }
 
 void OrgApacheLuceneUtilIOUtils_rmWithOrgLukhnosPortmobileFilePathArray_(IOSObjectArray *locations) {
   OrgApacheLuceneUtilIOUtils_initialize();
-  JavaUtilLinkedHashMap *unremoved = OrgApacheLuceneUtilIOUtils_rmWithJavaUtilLinkedHashMap_withOrgLukhnosPortmobileFilePathArray_([new_JavaUtilLinkedHashMap_init() autorelease], locations);
+  JavaUtilLinkedHashMap *unremoved = OrgApacheLuceneUtilIOUtils_rmWithJavaUtilLinkedHashMap_withOrgLukhnosPortmobileFilePathArray_(create_JavaUtilLinkedHashMap_init(), locations);
   if (![((JavaUtilLinkedHashMap *) nil_chk(unremoved)) isEmpty]) {
-    JavaLangStringBuilder *b = [new_JavaLangStringBuilder_initWithNSString_(@"Could not remove the following files (in the order of attempts):\n") autorelease];
+    JavaLangStringBuilder *b = create_JavaLangStringBuilder_initWithNSString_(@"Could not remove the following files (in the order of attempts):\n");
     for (id<JavaUtilMap_Entry> __strong kv in nil_chk([unremoved entrySet])) {
       [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([b appendWithNSString:@"   "])) appendWithId:[((OrgLukhnosPortmobileFilePath *) nil_chk([((id<JavaUtilMap_Entry>) nil_chk(kv)) getKey])) toAbsolutePath]])) appendWithNSString:@": "])) appendWithId:[kv getValue]])) appendWithNSString:@"\n"];
     }
-    @throw [new_JavaIoIOException_initWithNSString_([b description]) autorelease];
+    @throw create_JavaIoIOException_initWithNSString_([b description]);
   }
 }
 
@@ -411,10 +430,10 @@ JavaUtilLinkedHashMap *OrgApacheLuceneUtilIOUtils_rmWithJavaUtilLinkedHashMap_wi
         OrgLukhnosPortmobileFilePath *location = *b__++;
         if (location != nil && OrgLukhnosPortmobileFileFiles_existsWithOrgLukhnosPortmobileFilePath_(location)) {
           @try {
-            OrgLukhnosPortmobileFileFiles_walkFileTreeWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileFileVisitor_(location, [new_OrgApacheLuceneUtilIOUtils_$1_initWithJavaUtilLinkedHashMap_(unremoved) autorelease]);
+            OrgLukhnosPortmobileFileFiles_walkFileTreeWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileFileVisitor_(location, create_OrgApacheLuceneUtilIOUtils_$1_initWithJavaUtilLinkedHashMap_(unremoved));
           }
           @catch (JavaIoIOException *impossible) {
-            @throw [new_JavaLangAssertionError_initWithNSString_withJavaLangThrowable_(@"visitor threw exception", impossible) autorelease];
+            @throw create_JavaLangAssertionError_initWithNSString_withNSException_(@"visitor threw exception", impossible);
           }
         }
       }
@@ -423,26 +442,26 @@ JavaUtilLinkedHashMap *OrgApacheLuceneUtilIOUtils_rmWithJavaUtilLinkedHashMap_wi
   return unremoved;
 }
 
-void OrgApacheLuceneUtilIOUtils_reThrowWithJavaLangThrowable_(JavaLangThrowable *th) {
+void OrgApacheLuceneUtilIOUtils_reThrowWithNSException_(NSException *th) {
   OrgApacheLuceneUtilIOUtils_initialize();
   if (th != nil) {
     if ([th isKindOfClass:[JavaIoIOException class]]) {
-      @throw (JavaIoIOException *) check_class_cast(th, [JavaIoIOException class]);
+      @throw (JavaIoIOException *) cast_chk(th, [JavaIoIOException class]);
     }
-    OrgApacheLuceneUtilIOUtils_reThrowUncheckedWithJavaLangThrowable_(th);
+    OrgApacheLuceneUtilIOUtils_reThrowUncheckedWithNSException_(th);
   }
 }
 
-void OrgApacheLuceneUtilIOUtils_reThrowUncheckedWithJavaLangThrowable_(JavaLangThrowable *th) {
+void OrgApacheLuceneUtilIOUtils_reThrowUncheckedWithNSException_(NSException *th) {
   OrgApacheLuceneUtilIOUtils_initialize();
   if (th != nil) {
     if ([th isKindOfClass:[JavaLangRuntimeException class]]) {
-      @throw (JavaLangRuntimeException *) check_class_cast(th, [JavaLangRuntimeException class]);
+      @throw (JavaLangRuntimeException *) cast_chk(th, [JavaLangRuntimeException class]);
     }
     if ([th isKindOfClass:[JavaLangError class]]) {
-      @throw (JavaLangError *) check_class_cast(th, [JavaLangError class]);
+      @throw (JavaLangError *) cast_chk(th, [JavaLangError class]);
     }
-    @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(th) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSException_(th);
   }
 }
 
@@ -453,8 +472,8 @@ void OrgApacheLuceneUtilIOUtils_fsyncWithOrgLukhnosPortmobileFilePath_withBoolea
     return;
   }
   @try {
-    JavaNioChannelsFileChannel *file = OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_openWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardOpenOptionEnumArray_(fileToSync, [IOSObjectArray arrayWithObjects:(id[]){ isDir ? JreLoadStatic(OrgLukhnosPortmobileFileStandardOpenOptionEnum, READ) : JreLoadStatic(OrgLukhnosPortmobileFileStandardOpenOptionEnum, WRITE) } count:1 type:OrgLukhnosPortmobileFileStandardOpenOptionEnum_class_()]);
-    JavaLangThrowable *__primaryException1 = nil;
+    JavaNioChannelsFileChannel *file = OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_openWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardOpenOptionArray_(fileToSync, [IOSObjectArray arrayWithObjects:(id[]){ isDir ? JreLoadEnum(OrgLukhnosPortmobileFileStandardOpenOption, READ) : JreLoadEnum(OrgLukhnosPortmobileFileStandardOpenOption, WRITE) } count:1 type:OrgLukhnosPortmobileFileStandardOpenOption_class_()]);
+    NSException *__primaryException1 = nil;
     @try {
       for (jint retry = 0; retry < 5; retry++) {
         @try {
@@ -469,14 +488,14 @@ void OrgApacheLuceneUtilIOUtils_fsyncWithOrgLukhnosPortmobileFilePath_withBoolea
             JavaLangThread_sleepWithLong_(5LL);
           }
           @catch (JavaLangInterruptedException *ie) {
-            OrgApacheLuceneUtilThreadInterruptedException *ex = [new_OrgApacheLuceneUtilThreadInterruptedException_initWithJavaLangInterruptedException_(ie) autorelease];
-            [ex addSuppressedWithJavaLangThrowable:exc];
+            OrgApacheLuceneUtilThreadInterruptedException *ex = create_OrgApacheLuceneUtilThreadInterruptedException_initWithJavaLangInterruptedException_(ie);
+            [ex addSuppressedWithNSException:exc];
             @throw ex;
           }
         }
       }
     }
-    @catch (JavaLangThrowable *e) {
+    @catch (NSException *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -485,8 +504,8 @@ void OrgApacheLuceneUtilIOUtils_fsyncWithOrgLukhnosPortmobileFilePath_withBoolea
         if (__primaryException1 != nil) {
           @try {
             [file close];
-          } @catch (JavaLangThrowable *e) {
-            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          } @catch (NSException *e) {
+            [__primaryException1 addSuppressedWithNSException:e];
           }
         } else {
           [file close];
@@ -500,7 +519,7 @@ void OrgApacheLuceneUtilIOUtils_fsyncWithOrgLukhnosPortmobileFilePath_withBoolea
     }
   }
   if (isDir) {
-    JreAssert(((JreLoadStatic(OrgApacheLuceneUtilConstants, LINUX_) || JreLoadStatic(OrgApacheLuceneUtilConstants, MAC_OS_X_)) == false || JreLoadStatic(OrgApacheLuceneUtilConstants, JRE_IS_MINIMUM_JAVA9_)), (JreStrcat("$@", @"On Linux and MacOSX fsyncing a directory should not throw IOException, we just don't want to rely on that in production (undocumented). Got: ", exc)));
+    JreAssert(((JreLoadStatic(OrgApacheLuceneUtilConstants, LINUX) || JreLoadStatic(OrgApacheLuceneUtilConstants, MAC_OS_X)) == false || JreLoadStatic(OrgApacheLuceneUtilConstants, JRE_IS_MINIMUM_JAVA9)), (JreStrcat("$@", @"On Linux and MacOSX fsyncing a directory should not throw IOException, we just don't want to rely on that in production (undocumented). Got: ", exc)));
     return;
   }
   @throw exc;
@@ -510,14 +529,14 @@ jboolean OrgApacheLuceneUtilIOUtils_spinsWithOrgApacheLuceneStoreDirectory_(OrgA
   OrgApacheLuceneUtilIOUtils_initialize();
   dir = OrgApacheLuceneStoreFilterDirectory_unwrapWithOrgApacheLuceneStoreDirectory_(dir);
   if ([dir isKindOfClass:[OrgApacheLuceneStoreFileSwitchDirectory class]]) {
-    OrgApacheLuceneStoreFileSwitchDirectory *fsd = (OrgApacheLuceneStoreFileSwitchDirectory *) check_class_cast(dir, [OrgApacheLuceneStoreFileSwitchDirectory class]);
+    OrgApacheLuceneStoreFileSwitchDirectory *fsd = (OrgApacheLuceneStoreFileSwitchDirectory *) cast_chk(dir, [OrgApacheLuceneStoreFileSwitchDirectory class]);
     return OrgApacheLuceneUtilIOUtils_spinsWithOrgApacheLuceneStoreDirectory_([((OrgApacheLuceneStoreFileSwitchDirectory *) nil_chk(fsd)) getPrimaryDir]) || OrgApacheLuceneUtilIOUtils_spinsWithOrgApacheLuceneStoreDirectory_([fsd getSecondaryDir]);
   }
   else if ([dir isKindOfClass:[OrgApacheLuceneStoreRAMDirectory class]]) {
     return false;
   }
   else if ([dir isKindOfClass:[OrgApacheLuceneStoreFSDirectory class]]) {
-    return OrgApacheLuceneUtilIOUtils_spinsWithOrgLukhnosPortmobileFilePath_([((OrgApacheLuceneStoreFSDirectory *) nil_chk(((OrgApacheLuceneStoreFSDirectory *) check_class_cast(dir, [OrgApacheLuceneStoreFSDirectory class])))) getDirectory]);
+    return OrgApacheLuceneUtilIOUtils_spinsWithOrgLukhnosPortmobileFilePath_([((OrgApacheLuceneStoreFSDirectory *) nil_chk(((OrgApacheLuceneStoreFSDirectory *) cast_chk(dir, [OrgApacheLuceneStoreFSDirectory class])))) getDirectory]);
   }
   else {
     return true;
@@ -527,7 +546,7 @@ jboolean OrgApacheLuceneUtilIOUtils_spinsWithOrgApacheLuceneStoreDirectory_(OrgA
 jboolean OrgApacheLuceneUtilIOUtils_spinsWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path) {
   OrgApacheLuceneUtilIOUtils_initialize();
   path = [((OrgLukhnosPortmobileFilePath *) nil_chk(path)) toRealPath];
-  if (!JreLoadStatic(OrgApacheLuceneUtilConstants, LINUX_)) {
+  if (!JreLoadStatic(OrgApacheLuceneUtilConstants, LINUX)) {
     return true;
   }
   @try {
@@ -547,13 +566,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilIOUtils)
 
 @implementation OrgApacheLuceneUtilIOUtils_$1
 
-- (OrgLukhnosPortmobileFileFileVisitResultEnum *)preVisitDirectoryWithId:(OrgLukhnosPortmobileFilePath *)dir
-                withOrgLukhnosPortmobileFileAttributeBasicFileAttributes:(OrgLukhnosPortmobileFileAttributeBasicFileAttributes *)attrs {
-  return JreLoadStatic(OrgLukhnosPortmobileFileFileVisitResultEnum, CONTINUE);
+- (OrgLukhnosPortmobileFileFileVisitResult *)preVisitDirectoryWithId:(OrgLukhnosPortmobileFilePath *)dir
+            withOrgLukhnosPortmobileFileAttributeBasicFileAttributes:(OrgLukhnosPortmobileFileAttributeBasicFileAttributes *)attrs {
+  return JreLoadEnum(OrgLukhnosPortmobileFileFileVisitResult, CONTINUE);
 }
 
-- (OrgLukhnosPortmobileFileFileVisitResultEnum *)postVisitDirectoryWithId:(OrgLukhnosPortmobileFilePath *)dir
-                                                    withJavaIoIOException:(JavaIoIOException *)impossible {
+- (OrgLukhnosPortmobileFileFileVisitResult *)postVisitDirectoryWithId:(OrgLukhnosPortmobileFilePath *)dir
+                                                withJavaIoIOException:(JavaIoIOException *)impossible {
   JreAssert((impossible == nil), (@"org/apache/lucene/util/IOUtils.java:316 condition failed: assert impossible == null;"));
   @try {
     OrgLukhnosPortmobileFileFiles_delete__WithOrgLukhnosPortmobileFilePath_(dir);
@@ -561,26 +580,26 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilIOUtils)
   @catch (JavaIoIOException *e) {
     [((JavaUtilLinkedHashMap *) nil_chk(val$unremoved_)) putWithId:dir withId:e];
   }
-  return JreLoadStatic(OrgLukhnosPortmobileFileFileVisitResultEnum, CONTINUE);
+  return JreLoadEnum(OrgLukhnosPortmobileFileFileVisitResult, CONTINUE);
 }
 
-- (OrgLukhnosPortmobileFileFileVisitResultEnum *)visitFileWithId:(OrgLukhnosPortmobileFilePath *)file
-        withOrgLukhnosPortmobileFileAttributeBasicFileAttributes:(OrgLukhnosPortmobileFileAttributeBasicFileAttributes *)attrs {
+- (OrgLukhnosPortmobileFileFileVisitResult *)visitFileWithId:(OrgLukhnosPortmobileFilePath *)file
+    withOrgLukhnosPortmobileFileAttributeBasicFileAttributes:(OrgLukhnosPortmobileFileAttributeBasicFileAttributes *)attrs {
   @try {
     OrgLukhnosPortmobileFileFiles_delete__WithOrgLukhnosPortmobileFilePath_(file);
   }
   @catch (JavaIoIOException *exc) {
     [((JavaUtilLinkedHashMap *) nil_chk(val$unremoved_)) putWithId:file withId:exc];
   }
-  return JreLoadStatic(OrgLukhnosPortmobileFileFileVisitResultEnum, CONTINUE);
+  return JreLoadEnum(OrgLukhnosPortmobileFileFileVisitResult, CONTINUE);
 }
 
-- (OrgLukhnosPortmobileFileFileVisitResultEnum *)visitFileFailedWithId:(OrgLukhnosPortmobileFilePath *)file
-                                                 withJavaIoIOException:(JavaIoIOException *)exc {
+- (OrgLukhnosPortmobileFileFileVisitResult *)visitFileFailedWithId:(OrgLukhnosPortmobileFilePath *)file
+                                             withJavaIoIOException:(JavaIoIOException *)exc {
   if (exc != nil) {
     [((JavaUtilLinkedHashMap *) nil_chk(val$unremoved_)) putWithId:file withId:exc];
   }
-  return JreLoadStatic(OrgLukhnosPortmobileFileFileVisitResultEnum, CONTINUE);
+  return JreLoadEnum(OrgLukhnosPortmobileFileFileVisitResult, CONTINUE);
 }
 
 - (instancetype)initWithJavaUtilLinkedHashMap:(JavaUtilLinkedHashMap *)capture$0 {
@@ -599,7 +618,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilIOUtils)
     { "postVisitDirectoryWithId:withJavaIoIOException:", "postVisitDirectory", "Lorg.lukhnos.portmobile.file.FileVisitResult;", 0x1, "Ljava.io.IOException;", NULL },
     { "visitFileWithId:withOrgLukhnosPortmobileFileAttributeBasicFileAttributes:", "visitFile", "Lorg.lukhnos.portmobile.file.FileVisitResult;", 0x1, "Ljava.io.IOException;", NULL },
     { "visitFileFailedWithId:withJavaIoIOException:", "visitFileFailed", "Lorg.lukhnos.portmobile.file.FileVisitResult;", 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithJavaUtilLinkedHashMap:", "", NULL, 0x0, NULL, NULL },
+    { "initWithJavaUtilLinkedHashMap:", "", NULL, 0x0, NULL, "(Ljava/util/LinkedHashMap<Lorg/lukhnos/portmobile/file/Path;Ljava/lang/Throwable;>;)V" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "val$unremoved_", NULL, 0x1012, "Ljava.util.LinkedHashMap;", NULL, "Ljava/util/LinkedHashMap<Lorg/lukhnos/portmobile/file/Path;Ljava/lang/Throwable;>;", .constantValue.asLong = 0 },
@@ -617,9 +636,11 @@ void OrgApacheLuceneUtilIOUtils_$1_initWithJavaUtilLinkedHashMap_(OrgApacheLucen
 }
 
 OrgApacheLuceneUtilIOUtils_$1 *new_OrgApacheLuceneUtilIOUtils_$1_initWithJavaUtilLinkedHashMap_(JavaUtilLinkedHashMap *capture$0) {
-  OrgApacheLuceneUtilIOUtils_$1 *self = [OrgApacheLuceneUtilIOUtils_$1 alloc];
-  OrgApacheLuceneUtilIOUtils_$1_initWithJavaUtilLinkedHashMap_(self, capture$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilIOUtils_$1, initWithJavaUtilLinkedHashMap_, capture$0)
+}
+
+OrgApacheLuceneUtilIOUtils_$1 *create_OrgApacheLuceneUtilIOUtils_$1_initWithJavaUtilLinkedHashMap_(JavaUtilLinkedHashMap *capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilIOUtils_$1, initWithJavaUtilLinkedHashMap_, capture$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilIOUtils_$1)

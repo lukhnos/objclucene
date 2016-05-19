@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionFunctionQuery_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionFunctionQuery_RESTRICT
-#define OrgApacheLuceneQueriesFunctionFunctionQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionFunctionQuery")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionFunctionQuery
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionFunctionQuery 0
 #else
-#define OrgApacheLuceneQueriesFunctionFunctionQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionFunctionQuery 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionFunctionQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionFunctionQuery
 
-#if !defined (_OrgApacheLuceneQueriesFunctionFunctionQuery_) && (OrgApacheLuceneQueriesFunctionFunctionQuery_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionFunctionQuery_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionFunctionQuery_
+#if !defined (OrgApacheLuceneQueriesFunctionFunctionQuery_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionFunctionQuery || defined(INCLUDE_OrgApacheLuceneQueriesFunctionFunctionQuery))
+#define OrgApacheLuceneQueriesFunctionFunctionQuery_
 
-#define OrgApacheLuceneSearchQuery_RESTRICT 1
-#define OrgApacheLuceneSearchQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchQuery 1
+#define INCLUDE_OrgApacheLuceneSearchQuery 1
 #include "org/apache/lucene/search/Query.h"
 
 @class OrgApacheLuceneIndexIndexReader;
@@ -25,6 +25,11 @@
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchWeight;
 
+/*!
+ @brief Returns a score for each document based on a ValueSource,
+ often some function of the value of a field.
+ <b>Note: This API is experimental and may change in non backward-compatible ways in the future</b>
+ */
 @interface OrgApacheLuceneQueriesFunctionFunctionQuery : OrgApacheLuceneSearchQuery {
  @public
   OrgApacheLuceneQueriesFunctionValueSource *func_;
@@ -32,19 +37,31 @@
 
 #pragma mark Public
 
+/*!
+ @param func defines the function to be used for scoring
+ */
 - (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)func;
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores;
 
+/*!
+ @brief Returns true if <code>o</code> is equal to this.
+ */
 - (jboolean)isEqual:(id)o;
 
+/*!
+ @return The associated ValueSource
+ */
 - (OrgApacheLuceneQueriesFunctionValueSource *)getValueSource;
 
 - (NSUInteger)hash;
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
 
+/*!
+ @brief Prints a user-readable version of this query.
+ */
 - (NSString *)toStringWithNSString:(NSString *)field;
 
 @end
@@ -57,15 +74,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionFunctionQuery_initWithOrgAp
 
 FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionFunctionQuery *new_OrgApacheLuceneQueriesFunctionFunctionQuery_initWithOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValueSource *func) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionFunctionQuery *create_OrgApacheLuceneQueriesFunctionFunctionQuery_initWithOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValueSource *func);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionFunctionQuery)
 
 #endif
 
-#if !defined (_OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight_) && (OrgApacheLuceneQueriesFunctionFunctionQuery_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight_
+#if !defined (OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionFunctionQuery || defined(INCLUDE_OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight))
+#define OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight_
 
-#define OrgApacheLuceneSearchWeight_RESTRICT 1
-#define OrgApacheLuceneSearchWeight_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchWeight 1
+#define INCLUDE_OrgApacheLuceneSearchWeight 1
 #include "org/apache/lucene/search/Weight.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
@@ -112,15 +131,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeigh
 
 FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight *new_OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight_initWithOrgApacheLuceneQueriesFunctionFunctionQuery_withOrgApacheLuceneSearchIndexSearcher_(OrgApacheLuceneQueriesFunctionFunctionQuery *outer$, OrgApacheLuceneSearchIndexSearcher *searcher) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight *create_OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight_initWithOrgApacheLuceneQueriesFunctionFunctionQuery_withOrgApacheLuceneSearchIndexSearcher_(OrgApacheLuceneQueriesFunctionFunctionQuery *outer$, OrgApacheLuceneSearchIndexSearcher *searcher);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight)
 
 #endif
 
-#if !defined (_OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer_) && (OrgApacheLuceneQueriesFunctionFunctionQuery_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer_
+#if !defined (OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionFunctionQuery || defined(INCLUDE_OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer))
+#define OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer_
 
-#define OrgApacheLuceneSearchScorer_RESTRICT 1
-#define OrgApacheLuceneSearchScorer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchScorer 1
+#define INCLUDE_OrgApacheLuceneSearchScorer 1
 #include "org/apache/lucene/search/Scorer.h"
 
 @class OrgApacheLuceneIndexIndexReader;
@@ -173,8 +194,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer_ini
 
 FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer *new_OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer_initWithOrgApacheLuceneQueriesFunctionFunctionQuery_withOrgApacheLuceneIndexLeafReaderContext_withOrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight_withFloat_(OrgApacheLuceneQueriesFunctionFunctionQuery *outer$, OrgApacheLuceneIndexLeafReaderContext *context, OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight *w, jfloat qWeight) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer *create_OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer_initWithOrgApacheLuceneQueriesFunctionFunctionQuery_withOrgApacheLuceneIndexLeafReaderContext_withOrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight_withFloat_(OrgApacheLuceneQueriesFunctionFunctionQuery *outer$, OrgApacheLuceneIndexLeafReaderContext *context, OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight *w, jfloat qWeight);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionFunctionQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionFunctionQuery")

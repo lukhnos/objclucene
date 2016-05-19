@@ -20,12 +20,12 @@
 }
 
 - (OrgApacheLuceneAnalysisTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  return [new_OrgApacheLuceneAnalysisEnKStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(input) autorelease];
+  return create_OrgApacheLuceneAnalysisEnKStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(input);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "KStemFilterFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "KStemFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenFilter;", 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisEnKStemFilterFactory = { 2, "KStemFilterFactory", "org.apache.lucene.analysis.en", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
@@ -37,14 +37,16 @@
 void OrgApacheLuceneAnalysisEnKStemFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisEnKStemFilterFactory *self, id<JavaUtilMap> args) {
   OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisEnKStemFilterFactory *new_OrgApacheLuceneAnalysisEnKStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisEnKStemFilterFactory *self = [OrgApacheLuceneAnalysisEnKStemFilterFactory alloc];
-  OrgApacheLuceneAnalysisEnKStemFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisEnKStemFilterFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisEnKStemFilterFactory *create_OrgApacheLuceneAnalysisEnKStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisEnKStemFilterFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisEnKStemFilterFactory)

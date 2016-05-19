@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneStoreLockValidatingDirectoryWrapper_INCLUDE_ALL")
-#if OrgApacheLuceneStoreLockValidatingDirectoryWrapper_RESTRICT
-#define OrgApacheLuceneStoreLockValidatingDirectoryWrapper_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneStoreLockValidatingDirectoryWrapper")
+#ifdef RESTRICT_OrgApacheLuceneStoreLockValidatingDirectoryWrapper
+#define INCLUDE_ALL_OrgApacheLuceneStoreLockValidatingDirectoryWrapper 0
 #else
-#define OrgApacheLuceneStoreLockValidatingDirectoryWrapper_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneStoreLockValidatingDirectoryWrapper 1
 #endif
-#undef OrgApacheLuceneStoreLockValidatingDirectoryWrapper_RESTRICT
+#undef RESTRICT_OrgApacheLuceneStoreLockValidatingDirectoryWrapper
 
-#if !defined (_OrgApacheLuceneStoreLockValidatingDirectoryWrapper_) && (OrgApacheLuceneStoreLockValidatingDirectoryWrapper_INCLUDE_ALL || OrgApacheLuceneStoreLockValidatingDirectoryWrapper_INCLUDE)
-#define _OrgApacheLuceneStoreLockValidatingDirectoryWrapper_
+#if !defined (OrgApacheLuceneStoreLockValidatingDirectoryWrapper_) && (INCLUDE_ALL_OrgApacheLuceneStoreLockValidatingDirectoryWrapper || defined(INCLUDE_OrgApacheLuceneStoreLockValidatingDirectoryWrapper))
+#define OrgApacheLuceneStoreLockValidatingDirectoryWrapper_
 
-#define OrgApacheLuceneStoreFilterDirectory_RESTRICT 1
-#define OrgApacheLuceneStoreFilterDirectory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreFilterDirectory 1
+#define INCLUDE_OrgApacheLuceneStoreFilterDirectory 1
 #include "org/apache/lucene/store/FilterDirectory.h"
 
 @class OrgApacheLuceneStoreDirectory;
@@ -26,6 +26,10 @@
 @class OrgApacheLuceneStoreLock;
 @protocol JavaUtilCollection;
 
+/*!
+ @brief This class makes a best-effort check that a provided <code>Lock</code>
+ is valid before any destructive filesystem operation.
+ */
 @interface OrgApacheLuceneStoreLockValidatingDirectoryWrapper : OrgApacheLuceneStoreFilterDirectory
 
 #pragma mark Public
@@ -56,8 +60,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneStoreLockValidatingDirectoryWrapper_initWi
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreLockValidatingDirectoryWrapper *new_OrgApacheLuceneStoreLockValidatingDirectoryWrapper_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreLock_(OrgApacheLuceneStoreDirectory *inArg, OrgApacheLuceneStoreLock *writeLock) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneStoreLockValidatingDirectoryWrapper *create_OrgApacheLuceneStoreLockValidatingDirectoryWrapper_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreLock_(OrgApacheLuceneStoreDirectory *inArg, OrgApacheLuceneStoreLock *writeLock);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreLockValidatingDirectoryWrapper)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneStoreLockValidatingDirectoryWrapper_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreLockValidatingDirectoryWrapper")

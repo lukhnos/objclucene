@@ -5,36 +5,68 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchHighlightQueryTermExtractor_INCLUDE_ALL")
-#if OrgApacheLuceneSearchHighlightQueryTermExtractor_RESTRICT
-#define OrgApacheLuceneSearchHighlightQueryTermExtractor_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightQueryTermExtractor")
+#ifdef RESTRICT_OrgApacheLuceneSearchHighlightQueryTermExtractor
+#define INCLUDE_ALL_OrgApacheLuceneSearchHighlightQueryTermExtractor 0
 #else
-#define OrgApacheLuceneSearchHighlightQueryTermExtractor_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchHighlightQueryTermExtractor 1
 #endif
-#undef OrgApacheLuceneSearchHighlightQueryTermExtractor_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchHighlightQueryTermExtractor
 
-#if !defined (_OrgApacheLuceneSearchHighlightQueryTermExtractor_) && (OrgApacheLuceneSearchHighlightQueryTermExtractor_INCLUDE_ALL || OrgApacheLuceneSearchHighlightQueryTermExtractor_INCLUDE)
-#define _OrgApacheLuceneSearchHighlightQueryTermExtractor_
+#if !defined (OrgApacheLuceneSearchHighlightQueryTermExtractor_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightQueryTermExtractor || defined(INCLUDE_OrgApacheLuceneSearchHighlightQueryTermExtractor))
+#define OrgApacheLuceneSearchHighlightQueryTermExtractor_
 
 @class IOSObjectArray;
 @class OrgApacheLuceneIndexIndexReader;
 @class OrgApacheLuceneSearchQuery;
 
+/*!
+ @brief Utility class used to extract the terms used in a query, plus any weights.
+ This class will not find terms for MultiTermQuery, TermRangeQuery and PrefixQuery classes
+ so the caller must pass a rewritten query (see Query.rewrite) to obtain a list of 
+ expanded terms. 
+ */
 @interface OrgApacheLuceneSearchHighlightQueryTermExtractor : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @brief Extracts all terms texts of a given Query into an array of WeightedTerms
+ @param query      Query to extract term texts from
+ @param reader used to compute IDF which can be used to a) score selected fragments better
+ b) use graded highlights eg changing intensity of font color
+ @param fieldName the field on which Inverse Document Frequency (IDF) calculations are based
+ @return an array of the terms used in a query, plus their weights.
+ */
 + (IOSObjectArray *)getIdfWeightedTermsWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
                                   withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
                                                          withNSString:(NSString *)fieldName;
 
+/*!
+ @brief Extracts all terms texts of a given Query into an array of WeightedTerms
+ @param query      Query to extract term texts from
+ @return an array of the terms used in a query, plus their weights.
+ */
 + (IOSObjectArray *)getTermsWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
 
+/*!
+ @brief Extracts all terms texts of a given Query into an array of WeightedTerms
+ @param query      Query to extract term texts from
+ @param prohibited <code>true</code> to extract "prohibited" terms, too
+ @return an array of the terms used in a query, plus their weights.
+ */
 + (IOSObjectArray *)getTermsWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
                                                withBoolean:(jboolean)prohibited;
 
+/*!
+ @brief Extracts all terms texts of a given Query into an array of WeightedTerms
+ @param query      Query to extract term texts from
+ @param prohibited <code>true</code> to extract "prohibited" terms, too
+ @param fieldName  The fieldName used to filter query terms
+ @return an array of the terms used in a query, plus their weights.
+ */
 + (IOSObjectArray *)getTermsWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
                                                withBoolean:(jboolean)prohibited
                                               withNSString:(NSString *)fieldName;
@@ -55,8 +87,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightQueryTermExtractor_init(Org
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightQueryTermExtractor *new_OrgApacheLuceneSearchHighlightQueryTermExtractor_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightQueryTermExtractor *create_OrgApacheLuceneSearchHighlightQueryTermExtractor_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightQueryTermExtractor)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchHighlightQueryTermExtractor_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightQueryTermExtractor")

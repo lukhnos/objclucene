@@ -5,35 +5,49 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexSingleTermsEnum_INCLUDE_ALL")
-#if OrgApacheLuceneIndexSingleTermsEnum_RESTRICT
-#define OrgApacheLuceneIndexSingleTermsEnum_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexSingleTermsEnum")
+#ifdef RESTRICT_OrgApacheLuceneIndexSingleTermsEnum
+#define INCLUDE_ALL_OrgApacheLuceneIndexSingleTermsEnum 0
 #else
-#define OrgApacheLuceneIndexSingleTermsEnum_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexSingleTermsEnum 1
 #endif
-#undef OrgApacheLuceneIndexSingleTermsEnum_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexSingleTermsEnum
 
-#if !defined (_OrgApacheLuceneIndexSingleTermsEnum_) && (OrgApacheLuceneIndexSingleTermsEnum_INCLUDE_ALL || OrgApacheLuceneIndexSingleTermsEnum_INCLUDE)
-#define _OrgApacheLuceneIndexSingleTermsEnum_
+#if !defined (OrgApacheLuceneIndexSingleTermsEnum_) && (INCLUDE_ALL_OrgApacheLuceneIndexSingleTermsEnum || defined(INCLUDE_OrgApacheLuceneIndexSingleTermsEnum))
+#define OrgApacheLuceneIndexSingleTermsEnum_
 
-#define OrgApacheLuceneIndexFilteredTermsEnum_RESTRICT 1
-#define OrgApacheLuceneIndexFilteredTermsEnum_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexFilteredTermsEnum 1
+#define INCLUDE_OrgApacheLuceneIndexFilteredTermsEnum 1
 #include "org/apache/lucene/index/FilteredTermsEnum.h"
 
-@class OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum;
+@class OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus;
 @class OrgApacheLuceneIndexTermsEnum;
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief Subclass of FilteredTermsEnum for enumerating a single term.
+ <p>
+ For example, this can be used by <code>MultiTermQuery</code>s
+ that need only visit one term, but want to preserve
+ MultiTermQuery semantics such as <code>MultiTermQuery.getRewriteMethod</code>
+ .
+ */
 @interface OrgApacheLuceneIndexSingleTermsEnum : OrgApacheLuceneIndexFilteredTermsEnum
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new <code>SingleTermsEnum</code>.
+ <p>
+ After calling the constructor the enumeration is already pointing to the term,
+ if it exists.
+ */
 - (instancetype)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)tenum
                       withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)termText;
 
 #pragma mark Protected
 
-- (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
+- (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
 
 @end
 
@@ -43,8 +57,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexSingleTermsEnum_initWithOrgApacheLuce
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexSingleTermsEnum *new_OrgApacheLuceneIndexSingleTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneIndexTermsEnum *tenum, OrgApacheLuceneUtilBytesRef *termText) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexSingleTermsEnum *create_OrgApacheLuceneIndexSingleTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneIndexTermsEnum *tenum, OrgApacheLuceneUtilBytesRef *termText);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSingleTermsEnum)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexSingleTermsEnum_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSingleTermsEnum")

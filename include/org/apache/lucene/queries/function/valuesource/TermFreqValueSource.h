@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource_RESTRICT
-#define OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource 0
 #else
-#define OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource_) && (OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource_
+#if !defined (OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource))
+#define OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource_
 
-#define OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource 1
 #include "org/apache/lucene/queries/function/valuesource/DocFreqValueSource.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
@@ -25,6 +25,13 @@
 @class OrgApacheLuceneUtilBytesRef;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Function that returns <code>org.apache.lucene.index.PostingsEnum.freq()</code> for the
+ supplied term in every document.
+ <p>
+ If the term does not exist in the document, returns 0.
+ If frequencies are omitted, returns 1.
+ */
 @interface OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource : OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource
 
 #pragma mark Public
@@ -47,8 +54,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSou
 
 FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource_initWithNSString_withNSString_withNSString_withOrgApacheLuceneUtilBytesRef_(NSString *field, NSString *val, NSString *indexedField, OrgApacheLuceneUtilBytesRef *indexedBytes) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource *create_OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource_initWithNSString_withNSString_withNSString_withOrgApacheLuceneUtilBytesRef_(NSString *field, NSString *val, NSString *indexedField, OrgApacheLuceneUtilBytesRef *indexedBytes);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource")

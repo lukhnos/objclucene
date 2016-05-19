@@ -20,6 +20,18 @@
 
 @implementation OrgApacheLuceneSearchWildcardQuery
 
++ (jchar)WILDCARD_STRING {
+  return OrgApacheLuceneSearchWildcardQuery_WILDCARD_STRING;
+}
+
++ (jchar)WILDCARD_CHAR {
+  return OrgApacheLuceneSearchWildcardQuery_WILDCARD_CHAR;
+}
+
++ (jchar)WILDCARD_ESCAPE {
+  return OrgApacheLuceneSearchWildcardQuery_WILDCARD_ESCAPE;
+}
+
 - (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term {
   OrgApacheLuceneSearchWildcardQuery_initWithOrgApacheLuceneIndexTerm_(self, term);
   return self;
@@ -40,7 +52,7 @@
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
-  JavaLangStringBuilder *buffer = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_init();
   if (![((NSString *) nil_chk([self getField])) isEqual:field]) {
     [buffer appendWithNSString:[self getField]];
     [buffer appendWithNSString:@":"];
@@ -74,9 +86,11 @@ void OrgApacheLuceneSearchWildcardQuery_initWithOrgApacheLuceneIndexTerm_(OrgApa
 }
 
 OrgApacheLuceneSearchWildcardQuery *new_OrgApacheLuceneSearchWildcardQuery_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexTerm *term) {
-  OrgApacheLuceneSearchWildcardQuery *self = [OrgApacheLuceneSearchWildcardQuery alloc];
-  OrgApacheLuceneSearchWildcardQuery_initWithOrgApacheLuceneIndexTerm_(self, term);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchWildcardQuery, initWithOrgApacheLuceneIndexTerm_, term)
+}
+
+OrgApacheLuceneSearchWildcardQuery *create_OrgApacheLuceneSearchWildcardQuery_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexTerm *term) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchWildcardQuery, initWithOrgApacheLuceneIndexTerm_, term)
 }
 
 void OrgApacheLuceneSearchWildcardQuery_initWithOrgApacheLuceneIndexTerm_withInt_(OrgApacheLuceneSearchWildcardQuery *self, OrgApacheLuceneIndexTerm *term, jint maxDeterminizedStates) {
@@ -84,14 +98,16 @@ void OrgApacheLuceneSearchWildcardQuery_initWithOrgApacheLuceneIndexTerm_withInt
 }
 
 OrgApacheLuceneSearchWildcardQuery *new_OrgApacheLuceneSearchWildcardQuery_initWithOrgApacheLuceneIndexTerm_withInt_(OrgApacheLuceneIndexTerm *term, jint maxDeterminizedStates) {
-  OrgApacheLuceneSearchWildcardQuery *self = [OrgApacheLuceneSearchWildcardQuery alloc];
-  OrgApacheLuceneSearchWildcardQuery_initWithOrgApacheLuceneIndexTerm_withInt_(self, term, maxDeterminizedStates);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchWildcardQuery, initWithOrgApacheLuceneIndexTerm_withInt_, term, maxDeterminizedStates)
+}
+
+OrgApacheLuceneSearchWildcardQuery *create_OrgApacheLuceneSearchWildcardQuery_initWithOrgApacheLuceneIndexTerm_withInt_(OrgApacheLuceneIndexTerm *term, jint maxDeterminizedStates) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchWildcardQuery, initWithOrgApacheLuceneIndexTerm_withInt_, term, maxDeterminizedStates)
 }
 
 OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneSearchWildcardQuery_toAutomatonWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexTerm *wildcardquery) {
   OrgApacheLuceneSearchWildcardQuery_initialize();
-  id<JavaUtilList> automata = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> automata = create_JavaUtilArrayList_init();
   NSString *wildcardText = [((OrgApacheLuceneIndexTerm *) nil_chk(wildcardquery)) text];
   for (jint i = 0; i < ((jint) [((NSString *) nil_chk(wildcardText)) length]); ) {
     jint c = [wildcardText codePointAt:i];

@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexSegmentDocValues_INCLUDE_ALL")
-#if OrgApacheLuceneIndexSegmentDocValues_RESTRICT
-#define OrgApacheLuceneIndexSegmentDocValues_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexSegmentDocValues")
+#ifdef RESTRICT_OrgApacheLuceneIndexSegmentDocValues
+#define INCLUDE_ALL_OrgApacheLuceneIndexSegmentDocValues 0
 #else
-#define OrgApacheLuceneIndexSegmentDocValues_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexSegmentDocValues 1
 #endif
-#undef OrgApacheLuceneIndexSegmentDocValues_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexSegmentDocValues
 
-#if !defined (_OrgApacheLuceneIndexSegmentDocValues_) && (OrgApacheLuceneIndexSegmentDocValues_INCLUDE_ALL || OrgApacheLuceneIndexSegmentDocValues_INCLUDE)
-#define _OrgApacheLuceneIndexSegmentDocValues_
+#if !defined (OrgApacheLuceneIndexSegmentDocValues_) && (INCLUDE_ALL_OrgApacheLuceneIndexSegmentDocValues || defined(INCLUDE_OrgApacheLuceneIndexSegmentDocValues))
+#define OrgApacheLuceneIndexSegmentDocValues_
 
 @class OrgApacheLuceneCodecsDocValuesProducer;
 @class OrgApacheLuceneIndexFieldInfos;
@@ -22,14 +22,25 @@
 @class OrgApacheLuceneStoreDirectory;
 @protocol JavaUtilList;
 
+/*!
+ @brief Manages the <code>DocValuesProducer</code> held by <code>SegmentReader</code> and
+ keeps track of their reference counting.
+ */
 @interface OrgApacheLuceneIndexSegmentDocValues : NSObject
 
 #pragma mark Package-Private
 
 - (instancetype)init;
 
+/*!
+ @brief Decrement the reference count of the given <code>DocValuesProducer</code>
+ generations.
+ */
 - (void)decRefWithJavaUtilList:(id<JavaUtilList>)dvProducersGens;
 
+/*!
+ @brief Returns the <code>DocValuesProducer</code> for the given generation.
+ */
 - (OrgApacheLuceneCodecsDocValuesProducer *)getDocValuesProducerWithLong:(jlong)gen
                                withOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)si
                                        withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
@@ -43,8 +54,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexSegmentDocValues_init(OrgApacheLucene
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentDocValues *new_OrgApacheLuceneIndexSegmentDocValues_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentDocValues *create_OrgApacheLuceneIndexSegmentDocValues_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSegmentDocValues)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexSegmentDocValues_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSegmentDocValues")

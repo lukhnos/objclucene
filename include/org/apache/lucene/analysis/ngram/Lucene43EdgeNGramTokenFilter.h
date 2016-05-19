@@ -5,30 +5,41 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter_RESTRICT
-#define OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter 0
 #else
-#define OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter
 
-#if !defined (_OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter_) && (OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter_
+#if !defined (OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter || defined(INCLUDE_OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter))
+#define OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
+@class IOSObjectArray;
 @class OrgApacheLuceneAnalysisTokenStream;
 
-#define OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter_DEFAULT_MAX_GRAM_SIZE 1
-#define OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter_DEFAULT_MIN_GRAM_SIZE 1
-
+/*!
+ @brief Tokenizes the given token into n-grams of given size(s), using pre-4.4 behavior.
+ */
 @interface OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter : OrgApacheLuceneAnalysisTokenFilter
+
++ (jint)DEFAULT_MAX_GRAM_SIZE;
+
++ (jint)DEFAULT_MIN_GRAM_SIZE;
 
 #pragma mark Public
 
+/*!
+ @brief Creates EdgeNGramTokenFilter that can generate n-grams in the sizes of the given range
+ @param input <code>org.apache.lucene.analysis.TokenStream</code> holding the input to be tokenized
+ @param minGram the smallest n-gram to generate
+ @param maxGram the largest n-gram to generate
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
                                                    withInt:(jint)minGram
                                                    withInt:(jint)maxGram;
@@ -41,16 +52,22 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter, DEFAULT_MAX_GRAM_SIZE, jint)
+inline jint OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter_get_DEFAULT_MAX_GRAM_SIZE();
+#define OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter_DEFAULT_MAX_GRAM_SIZE 1
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter, DEFAULT_MAX_GRAM_SIZE, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter, DEFAULT_MIN_GRAM_SIZE, jint)
+inline jint OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter_get_DEFAULT_MIN_GRAM_SIZE();
+#define OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter_DEFAULT_MIN_GRAM_SIZE 1
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter, DEFAULT_MIN_GRAM_SIZE, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter *self, OrgApacheLuceneAnalysisTokenStream *input, jint minGram, jint maxGram);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter *new_OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(OrgApacheLuceneAnalysisTokenStream *input, jint minGram, jint maxGram) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter *create_OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(OrgApacheLuceneAnalysisTokenStream *input, jint minGram, jint maxGram);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter")

@@ -35,6 +35,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchGeoPointDistanceQuery_i
 
 __attribute__((unused)) static OrgApacheLuceneSearchGeoPointDistanceQuery *new_OrgApacheLuceneSearchGeoPointDistanceQuery_initWithNSString_withOrgApacheLuceneSearchGeoBoundingBox_withDouble_withDouble_withDouble_(NSString *field, OrgApacheLuceneSearchGeoBoundingBox *bbox, jdouble centerLon, jdouble centerLat, jdouble radius) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchGeoPointDistanceQuery *create_OrgApacheLuceneSearchGeoPointDistanceQuery_initWithNSString_withOrgApacheLuceneSearchGeoBoundingBox_withDouble_withDouble_withDouble_(NSString *field, OrgApacheLuceneSearchGeoBoundingBox *bbox, jdouble centerLon, jdouble centerLat, jdouble radius);
+
 @implementation OrgApacheLuceneSearchGeoPointDistanceQuery
 
 - (instancetype)initWithNSString:(NSString *)field
@@ -56,16 +58,16 @@ withOrgApacheLuceneSearchGeoBoundingBox:(OrgApacheLuceneSearchGeoBoundingBox *)b
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader {
   if (maxLon_ < minLon_) {
-    OrgApacheLuceneSearchBooleanQuery_Builder *bq = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
-    OrgApacheLuceneSearchGeoPointDistanceQueryImpl *left = [new_OrgApacheLuceneSearchGeoPointDistanceQueryImpl_initWithNSString_withOrgApacheLuceneSearchGeoPointDistanceQuery_withOrgApacheLuceneSearchGeoBoundingBox_(field_, self, [new_OrgApacheLuceneSearchGeoBoundingBox_initWithDouble_withDouble_withDouble_withDouble_(-180.0, maxLon_, minLat_, maxLat_) autorelease]) autorelease];
+    OrgApacheLuceneSearchBooleanQuery_Builder *bq = create_OrgApacheLuceneSearchBooleanQuery_Builder_init();
+    OrgApacheLuceneSearchGeoPointDistanceQueryImpl *left = create_OrgApacheLuceneSearchGeoPointDistanceQueryImpl_initWithNSString_withOrgApacheLuceneSearchGeoPointDistanceQuery_withOrgApacheLuceneSearchGeoBoundingBox_(field_, self, create_OrgApacheLuceneSearchGeoBoundingBox_initWithDouble_withDouble_withDouble_withDouble_(-180.0, maxLon_, minLat_, maxLat_));
     [left setBoostWithFloat:[self getBoost]];
-    [bq addWithOrgApacheLuceneSearchBooleanClause:[new_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_OccurEnum_(left, JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD)) autorelease]];
-    OrgApacheLuceneSearchGeoPointDistanceQueryImpl *right = [new_OrgApacheLuceneSearchGeoPointDistanceQueryImpl_initWithNSString_withOrgApacheLuceneSearchGeoPointDistanceQuery_withOrgApacheLuceneSearchGeoBoundingBox_(field_, self, [new_OrgApacheLuceneSearchGeoBoundingBox_initWithDouble_withDouble_withDouble_withDouble_(minLon_, 180.0, minLat_, maxLat_) autorelease]) autorelease];
+    [bq addWithOrgApacheLuceneSearchBooleanClause:create_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_Occur_(left, JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD))];
+    OrgApacheLuceneSearchGeoPointDistanceQueryImpl *right = create_OrgApacheLuceneSearchGeoPointDistanceQueryImpl_initWithNSString_withOrgApacheLuceneSearchGeoPointDistanceQuery_withOrgApacheLuceneSearchGeoBoundingBox_(field_, self, create_OrgApacheLuceneSearchGeoBoundingBox_initWithDouble_withDouble_withDouble_withDouble_(minLon_, 180.0, minLat_, maxLat_));
     [right setBoostWithFloat:[self getBoost]];
-    [bq addWithOrgApacheLuceneSearchBooleanClause:[new_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_OccurEnum_(right, JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD)) autorelease]];
+    [bq addWithOrgApacheLuceneSearchBooleanClause:create_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_Occur_(right, JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD))];
     return [bq build];
   }
-  return [new_OrgApacheLuceneSearchGeoPointDistanceQueryImpl_initWithNSString_withOrgApacheLuceneSearchGeoPointDistanceQuery_withOrgApacheLuceneSearchGeoBoundingBox_(field_, self, [new_OrgApacheLuceneSearchGeoBoundingBox_initWithDouble_withDouble_withDouble_withDouble_(self->minLon_, self->maxLon_, self->minLat_, self->maxLat_) autorelease]) autorelease];
+  return create_OrgApacheLuceneSearchGeoPointDistanceQueryImpl_initWithNSString_withOrgApacheLuceneSearchGeoPointDistanceQuery_withOrgApacheLuceneSearchGeoBoundingBox_(field_, self, create_OrgApacheLuceneSearchGeoBoundingBox_initWithDouble_withDouble_withDouble_withDouble_(self->minLon_, self->maxLon_, self->minLat_, self->maxLat_));
 }
 
 + (OrgApacheLuceneSearchGeoBoundingBox *)computeBBoxWithDouble:(jdouble)centerLon
@@ -78,7 +80,7 @@ withOrgApacheLuceneSearchGeoBoundingBox:(OrgApacheLuceneSearchGeoBoundingBox *)b
   if (self == o) return true;
   if (!([o isKindOfClass:[OrgApacheLuceneSearchGeoPointDistanceQuery class]])) return false;
   if (![super isEqual:o]) return false;
-  OrgApacheLuceneSearchGeoPointDistanceQuery *that = (OrgApacheLuceneSearchGeoPointDistanceQuery *) check_class_cast(o, [OrgApacheLuceneSearchGeoPointDistanceQuery class]);
+  OrgApacheLuceneSearchGeoPointDistanceQuery *that = (OrgApacheLuceneSearchGeoPointDistanceQuery *) cast_chk(o, [OrgApacheLuceneSearchGeoPointDistanceQuery class]);
   if (JavaLangDouble_compareWithDouble_withDouble_(((OrgApacheLuceneSearchGeoPointDistanceQuery *) nil_chk(that))->centerLat_, centerLat_) != 0) return false;
   if (JavaLangDouble_compareWithDouble_withDouble_(that->centerLon_, centerLon_) != 0) return false;
   if (JavaLangDouble_compareWithDouble_withDouble_(that->radius_, radius_) != 0) return false;
@@ -98,7 +100,7 @@ withOrgApacheLuceneSearchGeoBoundingBox:(OrgApacheLuceneSearchGeoBoundingBox *)b
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   [sb appendWithNSString:[[self getClass] getSimpleName]];
   [sb appendWithChar:':'];
   if (![((NSString *) nil_chk(self->field_)) isEqual:field]) {
@@ -150,18 +152,20 @@ void OrgApacheLuceneSearchGeoPointDistanceQuery_initWithNSString_withDouble_with
 }
 
 OrgApacheLuceneSearchGeoPointDistanceQuery *new_OrgApacheLuceneSearchGeoPointDistanceQuery_initWithNSString_withDouble_withDouble_withDouble_(NSString *field, jdouble centerLon, jdouble centerLat, jdouble radius) {
-  OrgApacheLuceneSearchGeoPointDistanceQuery *self = [OrgApacheLuceneSearchGeoPointDistanceQuery alloc];
-  OrgApacheLuceneSearchGeoPointDistanceQuery_initWithNSString_withDouble_withDouble_withDouble_(self, field, centerLon, centerLat, radius);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchGeoPointDistanceQuery, initWithNSString_withDouble_withDouble_withDouble_, field, centerLon, centerLat, radius)
+}
+
+OrgApacheLuceneSearchGeoPointDistanceQuery *create_OrgApacheLuceneSearchGeoPointDistanceQuery_initWithNSString_withDouble_withDouble_withDouble_(NSString *field, jdouble centerLon, jdouble centerLat, jdouble radius) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchGeoPointDistanceQuery, initWithNSString_withDouble_withDouble_withDouble_, field, centerLon, centerLat, radius)
 }
 
 void OrgApacheLuceneSearchGeoPointDistanceQuery_initWithNSString_withOrgApacheLuceneSearchGeoBoundingBox_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoPointDistanceQuery *self, NSString *field, OrgApacheLuceneSearchGeoBoundingBox *bbox, jdouble centerLon, jdouble centerLat, jdouble radius) {
   OrgApacheLuceneSearchGeoPointInBBoxQuery_initWithNSString_withDouble_withDouble_withDouble_withDouble_(self, field, ((OrgApacheLuceneSearchGeoBoundingBox *) nil_chk(bbox))->minLon_, bbox->minLat_, bbox->maxLon_, bbox->maxLat_);
   if (OrgApacheLuceneUtilGeoUtils_isValidLonWithDouble_(centerLon) == false) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid centerLon ", centerLon)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid centerLon ", centerLon));
   }
   if (OrgApacheLuceneUtilGeoUtils_isValidLatWithDouble_(centerLat) == false) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid centerLat ", centerLat)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid centerLat ", centerLat));
   }
   self->centerLon_ = centerLon;
   self->centerLat_ = centerLat;
@@ -169,9 +173,11 @@ void OrgApacheLuceneSearchGeoPointDistanceQuery_initWithNSString_withOrgApacheLu
 }
 
 OrgApacheLuceneSearchGeoPointDistanceQuery *new_OrgApacheLuceneSearchGeoPointDistanceQuery_initWithNSString_withOrgApacheLuceneSearchGeoBoundingBox_withDouble_withDouble_withDouble_(NSString *field, OrgApacheLuceneSearchGeoBoundingBox *bbox, jdouble centerLon, jdouble centerLat, jdouble radius) {
-  OrgApacheLuceneSearchGeoPointDistanceQuery *self = [OrgApacheLuceneSearchGeoPointDistanceQuery alloc];
-  OrgApacheLuceneSearchGeoPointDistanceQuery_initWithNSString_withOrgApacheLuceneSearchGeoBoundingBox_withDouble_withDouble_withDouble_(self, field, bbox, centerLon, centerLat, radius);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchGeoPointDistanceQuery, initWithNSString_withOrgApacheLuceneSearchGeoBoundingBox_withDouble_withDouble_withDouble_, field, bbox, centerLon, centerLat, radius)
+}
+
+OrgApacheLuceneSearchGeoPointDistanceQuery *create_OrgApacheLuceneSearchGeoPointDistanceQuery_initWithNSString_withOrgApacheLuceneSearchGeoBoundingBox_withDouble_withDouble_withDouble_(NSString *field, OrgApacheLuceneSearchGeoBoundingBox *bbox, jdouble centerLon, jdouble centerLat, jdouble radius) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchGeoPointDistanceQuery, initWithNSString_withOrgApacheLuceneSearchGeoBoundingBox_withDouble_withDouble_withDouble_, field, bbox, centerLon, centerLat, radius)
 }
 
 OrgApacheLuceneSearchGeoBoundingBox *OrgApacheLuceneSearchGeoPointDistanceQuery_computeBBoxWithDouble_withDouble_withDouble_(jdouble centerLon, jdouble centerLat, jdouble radius) {
@@ -180,7 +186,7 @@ OrgApacheLuceneSearchGeoBoundingBox *OrgApacheLuceneSearchGeoPointDistanceQuery_
   IOSDoubleArray *r = OrgApacheLuceneUtilGeoProjectionUtils_pointFromLonLatBearingWithDouble_withDouble_withDouble_withDouble_withDoubleArray_(centerLon, centerLat, 90, radius, nil);
   IOSDoubleArray *b = OrgApacheLuceneUtilGeoProjectionUtils_pointFromLonLatBearingWithDouble_withDouble_withDouble_withDouble_withDoubleArray_(centerLon, centerLat, 180, radius, nil);
   IOSDoubleArray *l = OrgApacheLuceneUtilGeoProjectionUtils_pointFromLonLatBearingWithDouble_withDouble_withDouble_withDouble_withDoubleArray_(centerLon, centerLat, 270, radius, nil);
-  return [new_OrgApacheLuceneSearchGeoBoundingBox_initWithDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneUtilGeoUtils_normalizeLonWithDouble_(IOSDoubleArray_Get(nil_chk(l), 0)), OrgApacheLuceneUtilGeoUtils_normalizeLonWithDouble_(IOSDoubleArray_Get(nil_chk(r), 0)), OrgApacheLuceneUtilGeoUtils_normalizeLatWithDouble_(IOSDoubleArray_Get(nil_chk(b), 1)), OrgApacheLuceneUtilGeoUtils_normalizeLatWithDouble_(IOSDoubleArray_Get(nil_chk(t), 1))) autorelease];
+  return create_OrgApacheLuceneSearchGeoBoundingBox_initWithDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneUtilGeoUtils_normalizeLonWithDouble_(IOSDoubleArray_Get(nil_chk(l), 0)), OrgApacheLuceneUtilGeoUtils_normalizeLonWithDouble_(IOSDoubleArray_Get(nil_chk(r), 0)), OrgApacheLuceneUtilGeoUtils_normalizeLatWithDouble_(IOSDoubleArray_Get(nil_chk(b), 1)), OrgApacheLuceneUtilGeoUtils_normalizeLatWithDouble_(IOSDoubleArray_Get(nil_chk(t), 1)));
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchGeoPointDistanceQuery)

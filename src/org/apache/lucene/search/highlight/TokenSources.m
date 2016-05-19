@@ -4,11 +4,13 @@
 //
 
 #include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/RuntimeException.h"
+#include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/analysis/Analyzer.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/miscellaneous/LimitTokenOffsetFilter.h"
@@ -28,6 +30,8 @@
 __attribute__((unused)) static void OrgApacheLuceneSearchHighlightTokenSources_init(OrgApacheLuceneSearchHighlightTokenSources *self);
 
 __attribute__((unused)) static OrgApacheLuceneSearchHighlightTokenSources *new_OrgApacheLuceneSearchHighlightTokenSources_init() NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchHighlightTokenSources *create_OrgApacheLuceneSearchHighlightTokenSources_init();
 
 @implementation OrgApacheLuceneSearchHighlightTokenSources
 
@@ -102,35 +106,35 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (IOSObjectArray *)__annotations_getAnyTokenStreamWithOrgApacheLuceneIndexIndexReader_withInt_withNSString_withOrgApacheLuceneDocumentDocument_withOrgApacheLuceneAnalysisAnalyzer_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_getAnyTokenStreamWithOrgApacheLuceneIndexIndexReader_withInt_withNSString_withOrgApacheLuceneAnalysisAnalyzer_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_getTokenStreamWithOrgApacheLuceneIndexTerms_withBoolean_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_getTokenStreamWithOrgApacheLuceneIndexTerms_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_getTokenStreamWithOffsetsWithOrgApacheLuceneIndexIndexReader_withInt_withNSString_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_getTokenStreamWithOrgApacheLuceneIndexIndexReader_withInt_withNSString_withOrgApacheLuceneAnalysisAnalyzer_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_getTokenStreamWithOrgApacheLuceneDocumentDocument_withNSString_withOrgApacheLuceneAnalysisAnalyzer_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_getTokenStreamWithNSString_withNSString_withOrgApacheLuceneAnalysisAnalyzer_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -158,9 +162,11 @@ void OrgApacheLuceneSearchHighlightTokenSources_init(OrgApacheLuceneSearchHighli
 }
 
 OrgApacheLuceneSearchHighlightTokenSources *new_OrgApacheLuceneSearchHighlightTokenSources_init() {
-  OrgApacheLuceneSearchHighlightTokenSources *self = [OrgApacheLuceneSearchHighlightTokenSources alloc];
-  OrgApacheLuceneSearchHighlightTokenSources_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchHighlightTokenSources, init)
+}
+
+OrgApacheLuceneSearchHighlightTokenSources *create_OrgApacheLuceneSearchHighlightTokenSources_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchHighlightTokenSources, init)
 }
 
 OrgApacheLuceneAnalysisTokenStream *OrgApacheLuceneSearchHighlightTokenSources_getTokenStreamWithNSString_withOrgApacheLuceneIndexFields_withNSString_withOrgApacheLuceneAnalysisAnalyzer_withInt_(NSString *field, OrgApacheLuceneIndexFields *tvFields, NSString *text, OrgApacheLuceneAnalysisAnalyzer *analyzer, jint maxStartOffset) {
@@ -171,7 +177,7 @@ OrgApacheLuceneAnalysisTokenStream *OrgApacheLuceneSearchHighlightTokenSources_g
   }
   tokenStream = [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(analyzer)) tokenStreamWithNSString:field withNSString:text];
   if (maxStartOffset >= 0 && maxStartOffset < ((jint) [((NSString *) nil_chk(text)) length]) - 1) {
-    tokenStream = [new_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(tokenStream, maxStartOffset) autorelease];
+    tokenStream = create_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(tokenStream, maxStartOffset);
   }
   return tokenStream;
 }
@@ -181,11 +187,11 @@ OrgApacheLuceneAnalysisTokenStream *OrgApacheLuceneSearchHighlightTokenSources_g
   if (tvFields == nil) {
     return nil;
   }
-  OrgApacheLuceneIndexTerms *tvTerms = [((OrgApacheLuceneIndexFields *) nil_chk(tvFields)) termsWithNSString:field];
+  OrgApacheLuceneIndexTerms *tvTerms = [tvFields termsWithNSString:field];
   if (tvTerms == nil || ![tvTerms hasOffsets]) {
     return nil;
   }
-  return [new_OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_initWithOrgApacheLuceneIndexTerms_withInt_(tvTerms, maxStartOffset) autorelease];
+  return create_OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_initWithOrgApacheLuceneIndexTerms_withInt_(tvTerms, maxStartOffset);
 }
 
 OrgApacheLuceneAnalysisTokenStream *OrgApacheLuceneSearchHighlightTokenSources_getAnyTokenStreamWithOrgApacheLuceneIndexIndexReader_withInt_withNSString_withOrgApacheLuceneDocumentDocument_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneIndexIndexReader *reader, jint docId, NSString *field, OrgApacheLuceneDocumentDocument *document, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
@@ -228,9 +234,9 @@ OrgApacheLuceneAnalysisTokenStream *OrgApacheLuceneSearchHighlightTokenSources_g
 OrgApacheLuceneAnalysisTokenStream *OrgApacheLuceneSearchHighlightTokenSources_getTokenStreamWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *tpv) {
   OrgApacheLuceneSearchHighlightTokenSources_initialize();
   if (![((OrgApacheLuceneIndexTerms *) nil_chk(tpv)) hasOffsets]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"Highlighting requires offsets from the TokenStream.") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"Highlighting requires offsets from the TokenStream.");
   }
-  return [new_OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_initWithOrgApacheLuceneIndexTerms_withInt_(tpv, -1) autorelease];
+  return create_OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_initWithOrgApacheLuceneIndexTerms_withInt_(tpv, -1);
 }
 
 OrgApacheLuceneAnalysisTokenStream *OrgApacheLuceneSearchHighlightTokenSources_getTokenStreamWithOffsetsWithOrgApacheLuceneIndexIndexReader_withInt_withNSString_(OrgApacheLuceneIndexIndexReader *reader, jint docId, NSString *field) {
@@ -239,11 +245,11 @@ OrgApacheLuceneAnalysisTokenStream *OrgApacheLuceneSearchHighlightTokenSources_g
   if (vectors == nil) {
     return nil;
   }
-  OrgApacheLuceneIndexTerms *vector = [((OrgApacheLuceneIndexFields *) nil_chk(vectors)) termsWithNSString:field];
+  OrgApacheLuceneIndexTerms *vector = [vectors termsWithNSString:field];
   if (vector == nil) {
     return nil;
   }
-  if (![((OrgApacheLuceneIndexTerms *) nil_chk(vector)) hasOffsets]) {
+  if (![vector hasOffsets]) {
     return nil;
   }
   return OrgApacheLuceneSearchHighlightTokenSources_getTokenStreamWithOrgApacheLuceneIndexTerms_(vector);
@@ -259,7 +265,7 @@ OrgApacheLuceneAnalysisTokenStream *OrgApacheLuceneSearchHighlightTokenSources_g
   OrgApacheLuceneSearchHighlightTokenSources_initialize();
   NSString *contents = [((OrgApacheLuceneDocumentDocument *) nil_chk(doc)) getWithNSString:field];
   if (contents == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"Field ", field, @" in document is not stored and cannot be analyzed")) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"Field ", field, @" in document is not stored and cannot be analyzed"));
   }
   return OrgApacheLuceneSearchHighlightTokenSources_getTokenStreamWithNSString_withNSString_withOrgApacheLuceneAnalysisAnalyzer_(field, contents, analyzer);
 }
@@ -270,7 +276,7 @@ OrgApacheLuceneAnalysisTokenStream *OrgApacheLuceneSearchHighlightTokenSources_g
     return [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(analyzer)) tokenStreamWithNSString:field withNSString:contents];
   }
   @catch (JavaIoIOException *ex) {
-    @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(ex) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSException_(ex);
   }
 }
 

@@ -4,6 +4,7 @@
 //
 
 #include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
@@ -11,6 +12,7 @@
 #include "java/lang/Integer.h"
 #include "java/lang/Math.h"
 #include "java/lang/StringBuilder.h"
+#include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/index/SingleTermsEnum.h"
 #include "org/apache/lucene/index/Term.h"
 #include "org/apache/lucene/index/Terms.h"
@@ -38,6 +40,26 @@
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFuzzyQuery, term_, OrgApacheLuceneIndexTerm *)
 
 @implementation OrgApacheLuceneSearchFuzzyQuery
+
++ (jint)defaultMaxEdits {
+  return OrgApacheLuceneSearchFuzzyQuery_defaultMaxEdits;
+}
+
++ (jint)defaultPrefixLength {
+  return OrgApacheLuceneSearchFuzzyQuery_defaultPrefixLength;
+}
+
++ (jint)defaultMaxExpansions {
+  return OrgApacheLuceneSearchFuzzyQuery_defaultMaxExpansions;
+}
+
++ (jboolean)defaultTranspositions {
+  return OrgApacheLuceneSearchFuzzyQuery_defaultTranspositions;
+}
+
++ (jfloat)defaultMinSimilarity {
+  return OrgApacheLuceneSearchFuzzyQuery_defaultMinSimilarity;
+}
 
 - (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
                                          withInt:(jint)maxEdits
@@ -81,9 +103,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFuzzyQuery, term_, OrgApacheLuceneIndex
 - (OrgApacheLuceneIndexTermsEnum *)getTermsEnumWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms
                                       withOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)atts {
   if (maxEdits_ == 0 || prefixLength_ >= ((jint) [((NSString *) nil_chk([((OrgApacheLuceneIndexTerm *) nil_chk(term_)) text])) length])) {
-    return [new_OrgApacheLuceneIndexSingleTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilBytesRef_([((OrgApacheLuceneIndexTerms *) nil_chk(terms)) iterator], [((OrgApacheLuceneIndexTerm *) nil_chk(term_)) bytes]) autorelease];
+    return create_OrgApacheLuceneIndexSingleTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilBytesRef_([((OrgApacheLuceneIndexTerms *) nil_chk(terms)) iterator], [((OrgApacheLuceneIndexTerm *) nil_chk(term_)) bytes]);
   }
-  return [new_OrgApacheLuceneSearchFuzzyTermsEnum_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneUtilAttributeSource_withOrgApacheLuceneIndexTerm_withFloat_withInt_withBoolean_(terms, atts, [self getTerm], maxEdits_, prefixLength_, transpositions_) autorelease];
+  return create_OrgApacheLuceneSearchFuzzyTermsEnum_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneUtilAttributeSource_withOrgApacheLuceneIndexTerm_withFloat_withInt_withBoolean_(terms, atts, [self getTerm], maxEdits_, prefixLength_, transpositions_);
 }
 
 - (OrgApacheLuceneIndexTerm *)getTerm {
@@ -91,7 +113,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFuzzyQuery, term_, OrgApacheLuceneIndex
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
-  JavaLangStringBuilder *buffer = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_init();
   if (![((NSString *) nil_chk([((OrgApacheLuceneIndexTerm *) nil_chk(term_)) field])) isEqual:field]) {
     [buffer appendWithNSString:[term_ field]];
     [buffer appendWithNSString:@":"];
@@ -110,15 +132,15 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFuzzyQuery, term_, OrgApacheLuceneIndex
   result = prime * result + prefixLength_;
   result = prime * result + maxExpansions_;
   result = prime * result + (transpositions_ ? 0 : 1);
-  result = prime * result + ((term_ == nil) ? 0 : ((jint) [term_ hash]));
+  result = prime * result + ((term_ == nil) ? 0 : ((jint) [((OrgApacheLuceneIndexTerm *) nil_chk(term_)) hash]));
   return result;
 }
 
 - (jboolean)isEqual:(id)obj {
   if (self == obj) return true;
   if (![super isEqual:obj]) return false;
-  if ([self getClass] != [nil_chk(obj) getClass]) return false;
-  OrgApacheLuceneSearchFuzzyQuery *other = (OrgApacheLuceneSearchFuzzyQuery *) check_class_cast(obj, [OrgApacheLuceneSearchFuzzyQuery class]);
+  if ([self getClass] != (id) [nil_chk(obj) getClass]) return false;
+  OrgApacheLuceneSearchFuzzyQuery *other = (OrgApacheLuceneSearchFuzzyQuery *) cast_chk(obj, [OrgApacheLuceneSearchFuzzyQuery class]);
   if (maxEdits_ != other->maxEdits_) return false;
   if (prefixLength_ != other->prefixLength_) return false;
   if (maxExpansions_ != other->maxExpansions_) return false;
@@ -135,17 +157,17 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFuzzyQuery, term_, OrgApacheLuceneIndex
   return OrgApacheLuceneSearchFuzzyQuery_floatToEditsWithFloat_withInt_(minimumSimilarity, termLen);
 }
 
-- (void)dealloc {
-  RELEASE_(term_);
-  [super dealloc];
++ (IOSObjectArray *)__annotations_defaultMinSimilarity_ {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_floatToEditsWithFloat_withInt_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
-+ (IOSObjectArray *)__annotations_defaultMinSimilarity_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+- (void)dealloc {
+  RELEASE_(term_);
+  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -185,26 +207,28 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFuzzyQuery, term_, OrgApacheLuceneIndex
 void OrgApacheLuceneSearchFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withInt_withInt_withInt_withBoolean_(OrgApacheLuceneSearchFuzzyQuery *self, OrgApacheLuceneIndexTerm *term, jint maxEdits, jint prefixLength, jint maxExpansions, jboolean transpositions) {
   OrgApacheLuceneSearchMultiTermQuery_initWithNSString_(self, [((OrgApacheLuceneIndexTerm *) nil_chk(term)) field]);
   if (maxEdits < 0 || maxEdits > OrgApacheLuceneUtilAutomatonLevenshteinAutomata_MAXIMUM_SUPPORTED_DISTANCE) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"maxEdits must be between 0 and ", OrgApacheLuceneUtilAutomatonLevenshteinAutomata_MAXIMUM_SUPPORTED_DISTANCE)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"maxEdits must be between 0 and ", OrgApacheLuceneUtilAutomatonLevenshteinAutomata_MAXIMUM_SUPPORTED_DISTANCE));
   }
   if (prefixLength < 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"prefixLength cannot be negative.") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"prefixLength cannot be negative.");
   }
   if (maxExpansions <= 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"maxExpansions must be positive.") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"maxExpansions must be positive.");
   }
   JreStrongAssign(&self->term_, term);
   self->maxEdits_ = maxEdits;
   self->prefixLength_ = prefixLength;
   self->transpositions_ = transpositions;
   self->maxExpansions_ = maxExpansions;
-  [self setRewriteMethodWithOrgApacheLuceneSearchMultiTermQuery_RewriteMethod:[new_OrgApacheLuceneSearchMultiTermQuery_TopTermsBlendedFreqScoringRewrite_initWithInt_(maxExpansions) autorelease]];
+  [self setRewriteMethodWithOrgApacheLuceneSearchMultiTermQuery_RewriteMethod:create_OrgApacheLuceneSearchMultiTermQuery_TopTermsBlendedFreqScoringRewrite_initWithInt_(maxExpansions)];
 }
 
 OrgApacheLuceneSearchFuzzyQuery *new_OrgApacheLuceneSearchFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withInt_withInt_withInt_withBoolean_(OrgApacheLuceneIndexTerm *term, jint maxEdits, jint prefixLength, jint maxExpansions, jboolean transpositions) {
-  OrgApacheLuceneSearchFuzzyQuery *self = [OrgApacheLuceneSearchFuzzyQuery alloc];
-  OrgApacheLuceneSearchFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withInt_withInt_withInt_withBoolean_(self, term, maxEdits, prefixLength, maxExpansions, transpositions);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFuzzyQuery, initWithOrgApacheLuceneIndexTerm_withInt_withInt_withInt_withBoolean_, term, maxEdits, prefixLength, maxExpansions, transpositions)
+}
+
+OrgApacheLuceneSearchFuzzyQuery *create_OrgApacheLuceneSearchFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withInt_withInt_withInt_withBoolean_(OrgApacheLuceneIndexTerm *term, jint maxEdits, jint prefixLength, jint maxExpansions, jboolean transpositions) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFuzzyQuery, initWithOrgApacheLuceneIndexTerm_withInt_withInt_withInt_withBoolean_, term, maxEdits, prefixLength, maxExpansions, transpositions)
 }
 
 void OrgApacheLuceneSearchFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withInt_withInt_(OrgApacheLuceneSearchFuzzyQuery *self, OrgApacheLuceneIndexTerm *term, jint maxEdits, jint prefixLength) {
@@ -212,9 +236,11 @@ void OrgApacheLuceneSearchFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withInt_wi
 }
 
 OrgApacheLuceneSearchFuzzyQuery *new_OrgApacheLuceneSearchFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withInt_withInt_(OrgApacheLuceneIndexTerm *term, jint maxEdits, jint prefixLength) {
-  OrgApacheLuceneSearchFuzzyQuery *self = [OrgApacheLuceneSearchFuzzyQuery alloc];
-  OrgApacheLuceneSearchFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withInt_withInt_(self, term, maxEdits, prefixLength);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFuzzyQuery, initWithOrgApacheLuceneIndexTerm_withInt_withInt_, term, maxEdits, prefixLength)
+}
+
+OrgApacheLuceneSearchFuzzyQuery *create_OrgApacheLuceneSearchFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withInt_withInt_(OrgApacheLuceneIndexTerm *term, jint maxEdits, jint prefixLength) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFuzzyQuery, initWithOrgApacheLuceneIndexTerm_withInt_withInt_, term, maxEdits, prefixLength)
 }
 
 void OrgApacheLuceneSearchFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withInt_(OrgApacheLuceneSearchFuzzyQuery *self, OrgApacheLuceneIndexTerm *term, jint maxEdits) {
@@ -222,9 +248,11 @@ void OrgApacheLuceneSearchFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withInt_(O
 }
 
 OrgApacheLuceneSearchFuzzyQuery *new_OrgApacheLuceneSearchFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withInt_(OrgApacheLuceneIndexTerm *term, jint maxEdits) {
-  OrgApacheLuceneSearchFuzzyQuery *self = [OrgApacheLuceneSearchFuzzyQuery alloc];
-  OrgApacheLuceneSearchFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withInt_(self, term, maxEdits);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFuzzyQuery, initWithOrgApacheLuceneIndexTerm_withInt_, term, maxEdits)
+}
+
+OrgApacheLuceneSearchFuzzyQuery *create_OrgApacheLuceneSearchFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withInt_(OrgApacheLuceneIndexTerm *term, jint maxEdits) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFuzzyQuery, initWithOrgApacheLuceneIndexTerm_withInt_, term, maxEdits)
 }
 
 void OrgApacheLuceneSearchFuzzyQuery_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneSearchFuzzyQuery *self, OrgApacheLuceneIndexTerm *term) {
@@ -232,9 +260,11 @@ void OrgApacheLuceneSearchFuzzyQuery_initWithOrgApacheLuceneIndexTerm_(OrgApache
 }
 
 OrgApacheLuceneSearchFuzzyQuery *new_OrgApacheLuceneSearchFuzzyQuery_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexTerm *term) {
-  OrgApacheLuceneSearchFuzzyQuery *self = [OrgApacheLuceneSearchFuzzyQuery alloc];
-  OrgApacheLuceneSearchFuzzyQuery_initWithOrgApacheLuceneIndexTerm_(self, term);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFuzzyQuery, initWithOrgApacheLuceneIndexTerm_, term)
+}
+
+OrgApacheLuceneSearchFuzzyQuery *create_OrgApacheLuceneSearchFuzzyQuery_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexTerm *term) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFuzzyQuery, initWithOrgApacheLuceneIndexTerm_, term)
 }
 
 jint OrgApacheLuceneSearchFuzzyQuery_floatToEditsWithFloat_withInt_(jfloat minimumSimilarity, jint termLen) {

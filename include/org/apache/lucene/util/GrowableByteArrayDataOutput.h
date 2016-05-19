@@ -5,31 +5,43 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilGrowableByteArrayDataOutput_INCLUDE_ALL")
-#if OrgApacheLuceneUtilGrowableByteArrayDataOutput_RESTRICT
-#define OrgApacheLuceneUtilGrowableByteArrayDataOutput_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilGrowableByteArrayDataOutput")
+#ifdef RESTRICT_OrgApacheLuceneUtilGrowableByteArrayDataOutput
+#define INCLUDE_ALL_OrgApacheLuceneUtilGrowableByteArrayDataOutput 0
 #else
-#define OrgApacheLuceneUtilGrowableByteArrayDataOutput_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilGrowableByteArrayDataOutput 1
 #endif
-#undef OrgApacheLuceneUtilGrowableByteArrayDataOutput_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilGrowableByteArrayDataOutput
 
-#if !defined (_OrgApacheLuceneUtilGrowableByteArrayDataOutput_) && (OrgApacheLuceneUtilGrowableByteArrayDataOutput_INCLUDE_ALL || OrgApacheLuceneUtilGrowableByteArrayDataOutput_INCLUDE)
-#define _OrgApacheLuceneUtilGrowableByteArrayDataOutput_
+#if !defined (OrgApacheLuceneUtilGrowableByteArrayDataOutput_) && (INCLUDE_ALL_OrgApacheLuceneUtilGrowableByteArrayDataOutput || defined(INCLUDE_OrgApacheLuceneUtilGrowableByteArrayDataOutput))
+#define OrgApacheLuceneUtilGrowableByteArrayDataOutput_
 
-#define OrgApacheLuceneStoreDataOutput_RESTRICT 1
-#define OrgApacheLuceneStoreDataOutput_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreDataOutput 1
+#define INCLUDE_OrgApacheLuceneStoreDataOutput 1
 #include "org/apache/lucene/store/DataOutput.h"
 
 @class IOSByteArray;
 
+/*!
+ @brief A <code>DataOutput</code> that can be used to build a byte[].
+ */
 @interface OrgApacheLuceneUtilGrowableByteArrayDataOutput : OrgApacheLuceneStoreDataOutput {
  @public
+  /*!
+   @brief The bytes
+   */
   IOSByteArray *bytes_;
+  /*!
+   @brief The length
+   */
   jint length_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief Create a <code>GrowableByteArrayDataOutput</code> with the given initial capacity.
+ */
 - (instancetype)initWithInt:(jint)cp;
 
 - (void)writeByteWithByte:(jbyte)b;
@@ -48,8 +60,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilGrowableByteArrayDataOutput_initWithIn
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilGrowableByteArrayDataOutput *new_OrgApacheLuceneUtilGrowableByteArrayDataOutput_initWithInt_(jint cp) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilGrowableByteArrayDataOutput *create_OrgApacheLuceneUtilGrowableByteArrayDataOutput_initWithInt_(jint cp);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilGrowableByteArrayDataOutput)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilGrowableByteArrayDataOutput_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilGrowableByteArrayDataOutput")

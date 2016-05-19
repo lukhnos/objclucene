@@ -68,7 +68,7 @@
       JreTimesAssignFloatF(&valSrcScore, [((OrgApacheLuceneSearchExplanation *) nil_chk(valSrcExpl)) getValue]);
     }
   }
-  id<JavaUtilList> subs = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> subs = create_JavaUtilArrayList_init();
   [subs addWithId:subQueryExpl];
   {
     IOSObjectArray *a__ = valSrcExpls;
@@ -120,9 +120,11 @@ void OrgApacheLuceneQueriesCustomScoreProvider_initWithOrgApacheLuceneIndexLeafR
 }
 
 OrgApacheLuceneQueriesCustomScoreProvider *new_OrgApacheLuceneQueriesCustomScoreProvider_initWithOrgApacheLuceneIndexLeafReaderContext_(OrgApacheLuceneIndexLeafReaderContext *context) {
-  OrgApacheLuceneQueriesCustomScoreProvider *self = [OrgApacheLuceneQueriesCustomScoreProvider alloc];
-  OrgApacheLuceneQueriesCustomScoreProvider_initWithOrgApacheLuceneIndexLeafReaderContext_(self, context);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesCustomScoreProvider, initWithOrgApacheLuceneIndexLeafReaderContext_, context)
+}
+
+OrgApacheLuceneQueriesCustomScoreProvider *create_OrgApacheLuceneQueriesCustomScoreProvider_initWithOrgApacheLuceneIndexLeafReaderContext_(OrgApacheLuceneIndexLeafReaderContext *context) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesCustomScoreProvider, initWithOrgApacheLuceneIndexLeafReaderContext_, context)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesCustomScoreProvider)

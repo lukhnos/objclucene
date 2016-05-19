@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexDefaultIndexingChain_INCLUDE_ALL")
-#if OrgApacheLuceneIndexDefaultIndexingChain_RESTRICT
-#define OrgApacheLuceneIndexDefaultIndexingChain_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexDefaultIndexingChain")
+#ifdef RESTRICT_OrgApacheLuceneIndexDefaultIndexingChain
+#define INCLUDE_ALL_OrgApacheLuceneIndexDefaultIndexingChain 0
 #else
-#define OrgApacheLuceneIndexDefaultIndexingChain_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexDefaultIndexingChain 1
 #endif
-#undef OrgApacheLuceneIndexDefaultIndexingChain_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexDefaultIndexingChain
 
-#if !defined (_OrgApacheLuceneIndexDefaultIndexingChain_) && (OrgApacheLuceneIndexDefaultIndexingChain_INCLUDE_ALL || OrgApacheLuceneIndexDefaultIndexingChain_INCLUDE)
-#define _OrgApacheLuceneIndexDefaultIndexingChain_
+#if !defined (OrgApacheLuceneIndexDefaultIndexingChain_) && (INCLUDE_ALL_OrgApacheLuceneIndexDefaultIndexingChain || defined(INCLUDE_OrgApacheLuceneIndexDefaultIndexingChain))
+#define OrgApacheLuceneIndexDefaultIndexingChain_
 
-#define OrgApacheLuceneIndexDocConsumer_RESTRICT 1
-#define OrgApacheLuceneIndexDocConsumer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexDocConsumer 1
+#define INCLUDE_OrgApacheLuceneIndexDocConsumer 1
 #include "org/apache/lucene/index/DocConsumer.h"
 
 @class OrgApacheLuceneIndexDocumentsWriterPerThread;
@@ -27,6 +27,10 @@
 @class OrgApacheLuceneIndexTermsHash;
 @class OrgApacheLuceneUtilCounter;
 
+/*!
+ @brief Default general purpose indexing chain, which handles
+ indexing all types of fields.
+ */
 @interface OrgApacheLuceneIndexDefaultIndexingChain : OrgApacheLuceneIndexDocConsumer {
  @public
   OrgApacheLuceneUtilCounter *bytesUsed_;
@@ -60,8 +64,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexDefaultIndexingChain_initWithOrgApach
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexDefaultIndexingChain *new_OrgApacheLuceneIndexDefaultIndexingChain_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_(OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexDefaultIndexingChain *create_OrgApacheLuceneIndexDefaultIndexingChain_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_(OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDefaultIndexingChain)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexDefaultIndexingChain_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexDefaultIndexingChain")

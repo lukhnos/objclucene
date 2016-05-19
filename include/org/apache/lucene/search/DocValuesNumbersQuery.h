@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchDocValuesNumbersQuery_INCLUDE_ALL")
-#if OrgApacheLuceneSearchDocValuesNumbersQuery_RESTRICT
-#define OrgApacheLuceneSearchDocValuesNumbersQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchDocValuesNumbersQuery")
+#ifdef RESTRICT_OrgApacheLuceneSearchDocValuesNumbersQuery
+#define INCLUDE_ALL_OrgApacheLuceneSearchDocValuesNumbersQuery 0
 #else
-#define OrgApacheLuceneSearchDocValuesNumbersQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchDocValuesNumbersQuery 1
 #endif
-#undef OrgApacheLuceneSearchDocValuesNumbersQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchDocValuesNumbersQuery
 
-#if !defined (_OrgApacheLuceneSearchDocValuesNumbersQuery_) && (OrgApacheLuceneSearchDocValuesNumbersQuery_INCLUDE_ALL || OrgApacheLuceneSearchDocValuesNumbersQuery_INCLUDE)
-#define _OrgApacheLuceneSearchDocValuesNumbersQuery_
+#if !defined (OrgApacheLuceneSearchDocValuesNumbersQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchDocValuesNumbersQuery || defined(INCLUDE_OrgApacheLuceneSearchDocValuesNumbersQuery))
+#define OrgApacheLuceneSearchDocValuesNumbersQuery_
 
-#define OrgApacheLuceneSearchQuery_RESTRICT 1
-#define OrgApacheLuceneSearchQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchQuery 1
+#define INCLUDE_OrgApacheLuceneSearchQuery 1
 #include "org/apache/lucene/search/Query.h"
 
 @class IOSObjectArray;
@@ -25,6 +25,17 @@
 @class OrgApacheLuceneSearchWeight;
 @protocol JavaUtilSet;
 
+/*!
+ @brief Like <code>DocValuesTermsQuery</code>, but this query only
+ runs on a long <code>NumericDocValuesField</code> or a
+ <code>SortedNumericDocValuesField</code>, matching
+ all documents whose value in the specified field is
+ contained in the provided set of long values.
+ <p>
+ <b>NOTE</b>: be very careful using this query: it is
+ typically much slower than using <code>TermsQuery</code>,
+ but in certain specialized cases may be faster.
+ */
 @interface OrgApacheLuceneSearchDocValuesNumbersQuery : OrgApacheLuceneSearchQuery
 
 #pragma mark Public
@@ -52,12 +63,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchDocValuesNumbersQuery_initWithNSStri
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchDocValuesNumbersQuery *new_OrgApacheLuceneSearchDocValuesNumbersQuery_initWithNSString_withJavaUtilSet_(NSString *field, id<JavaUtilSet> numbers) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchDocValuesNumbersQuery *create_OrgApacheLuceneSearchDocValuesNumbersQuery_initWithNSString_withJavaUtilSet_(NSString *field, id<JavaUtilSet> numbers);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchDocValuesNumbersQuery_initWithNSString_withJavaLangLongArray_(OrgApacheLuceneSearchDocValuesNumbersQuery *self, NSString *field, IOSObjectArray *numbers);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchDocValuesNumbersQuery *new_OrgApacheLuceneSearchDocValuesNumbersQuery_initWithNSString_withJavaLangLongArray_(NSString *field, IOSObjectArray *numbers) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchDocValuesNumbersQuery *create_OrgApacheLuceneSearchDocValuesNumbersQuery_initWithNSString_withJavaLangLongArray_(NSString *field, IOSObjectArray *numbers);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesNumbersQuery)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchDocValuesNumbersQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchDocValuesNumbersQuery")

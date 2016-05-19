@@ -66,10 +66,10 @@ __attribute__((unused)) static jboolean OrgApacheLuceneAnalysisPatternPatternCap
     [self clearAttributes];
     [self restoreStateWithOrgApacheLuceneUtilAttributeSource_State:state_];
     jint start = [((JavaUtilRegexMatcher *) nil_chk(IOSObjectArray_Get(nil_chk(matchers_), currentMatcher_))) startWithInt:IOSIntArray_Get(nil_chk(currentGroup_), currentMatcher_)];
-    jint end = [((JavaUtilRegexMatcher *) nil_chk(IOSObjectArray_Get(matchers_, currentMatcher_))) endWithInt:IOSIntArray_Get(currentGroup_, currentMatcher_)];
+    jint end = [((JavaUtilRegexMatcher *) nil_chk(IOSObjectArray_Get(matchers_, currentMatcher_))) endWithInt:IOSIntArray_Get(nil_chk(currentGroup_), currentMatcher_)];
     [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posAttr_)) setPositionIncrementWithInt:0];
     [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(charTermAttr_)) copyBufferWithCharArray:[((OrgApacheLuceneUtilCharsRefBuilder *) nil_chk(spare_)) chars] withInt:start withInt:end - start];
-    (*IOSIntArray_GetRef(currentGroup_, currentMatcher_))++;
+    (*IOSIntArray_GetRef(nil_chk(currentGroup_), currentMatcher_))++;
     return true;
   }
   if (![((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
@@ -88,14 +88,14 @@ __attribute__((unused)) static jboolean OrgApacheLuceneAnalysisPatternPatternCap
   }
   else if (OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter_nextCapture(self)) {
     jint start = [((JavaUtilRegexMatcher *) nil_chk(IOSObjectArray_Get(matchers_, currentMatcher_))) startWithInt:IOSIntArray_Get(nil_chk(currentGroup_), currentMatcher_)];
-    jint end = [((JavaUtilRegexMatcher *) nil_chk(IOSObjectArray_Get(matchers_, currentMatcher_))) endWithInt:IOSIntArray_Get(currentGroup_, currentMatcher_)];
+    jint end = [((JavaUtilRegexMatcher *) nil_chk(IOSObjectArray_Get(matchers_, currentMatcher_))) endWithInt:IOSIntArray_Get(nil_chk(currentGroup_), currentMatcher_)];
     if (start == 0) {
       [charTermAttr_ setLengthWithInt:end];
     }
     else {
       [charTermAttr_ copyBufferWithCharArray:[spare_ chars] withInt:start withInt:end - start];
     }
-    (*IOSIntArray_GetRef(currentGroup_, currentMatcher_))++;
+    (*IOSIntArray_GetRef(nil_chk(currentGroup_), currentMatcher_))++;
   }
   return true;
 }
@@ -153,14 +153,16 @@ void OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter_initWithOrgApa
   for (jint i = 0; i < patterns->size_; i++) {
     IOSObjectArray_Set(self->matchers_, i, [((JavaUtilRegexPattern *) nil_chk(IOSObjectArray_Get(patterns, i))) matcherWithJavaLangCharSequence:@""]);
     *IOSIntArray_GetRef(self->groupCounts_, i) = [((JavaUtilRegexMatcher *) nil_chk(IOSObjectArray_Get(self->matchers_, i))) groupCount];
-    *IOSIntArray_GetRef(self->currentGroup_, i) = -1;
+    *IOSIntArray_GetRef(nil_chk(self->currentGroup_), i) = -1;
   }
 }
 
 OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter *new_OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withJavaUtilRegexPatternArray_(OrgApacheLuceneAnalysisTokenStream *input, jboolean preserveOriginal, IOSObjectArray *patterns) {
-  OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter *self = [OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter alloc];
-  OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withJavaUtilRegexPatternArray_(self, input, preserveOriginal, patterns);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withJavaUtilRegexPatternArray_, input, preserveOriginal, patterns)
+}
+
+OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter *create_OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withJavaUtilRegexPatternArray_(OrgApacheLuceneAnalysisTokenStream *input, jboolean preserveOriginal, IOSObjectArray *patterns) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withJavaUtilRegexPatternArray_, input, preserveOriginal, patterns)
 }
 
 jboolean OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter_nextCapture(OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter *self) {
@@ -172,12 +174,12 @@ jboolean OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter_nextCaptur
     if (IOSIntArray_Get(nil_chk(self->currentGroup_), i) == -1) {
       *IOSIntArray_GetRef(self->currentGroup_, i) = [((JavaUtilRegexMatcher *) nil_chk(matcher)) find] ? 1 : 0;
     }
-    if (IOSIntArray_Get(self->currentGroup_, i) != 0) {
+    if (IOSIntArray_Get(nil_chk(self->currentGroup_), i) != 0) {
       while (IOSIntArray_Get(self->currentGroup_, i) < IOSIntArray_Get(nil_chk(self->groupCounts_), i) + 1) {
         jint start = [((JavaUtilRegexMatcher *) nil_chk(matcher)) startWithInt:IOSIntArray_Get(self->currentGroup_, i)];
-        jint end = [matcher endWithInt:IOSIntArray_Get(self->currentGroup_, i)];
+        jint end = [matcher endWithInt:IOSIntArray_Get(nil_chk(self->currentGroup_), i)];
         if (start == end || (self->preserveOriginal_ && start == 0 && [((OrgApacheLuceneUtilCharsRefBuilder *) nil_chk(self->spare_)) length] == end)) {
-          (*IOSIntArray_GetRef(self->currentGroup_, i))++;
+          (*IOSIntArray_GetRef(nil_chk(self->currentGroup_), i))++;
           continue;
         }
         if (start < min_offset) {
@@ -186,7 +188,7 @@ jboolean OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter_nextCaptur
         }
         break;
       }
-      if (IOSIntArray_Get(self->currentGroup_, i) == IOSIntArray_Get(self->groupCounts_, i) + 1) {
+      if (IOSIntArray_Get(nil_chk(self->currentGroup_), i) == IOSIntArray_Get(self->groupCounts_, i) + 1) {
         *IOSIntArray_GetRef(self->currentGroup_, i) = -1;
         i--;
       }

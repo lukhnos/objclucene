@@ -5,28 +5,44 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter_RESTRICT
-#define OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter")
+#ifdef RESTRICT_OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter 0
 #else
-#define OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter 1
 #endif
-#undef OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter
 
-#if !defined (_OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter_) && (OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter_INCLUDE_ALL || OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter_INCLUDE)
-#define _OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter_
+#if !defined (OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter || defined(INCLUDE_OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter))
+#define OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 @class OrgApacheLuceneAnalysisUtilCharArraySet;
 
+/*!
+ @brief Like <code>StopFilter</code> except it will not remove the
+ last token if that token was not followed by some token
+ separator.
+ For example, a query 'find the' would
+ preserve the 'the' since it was not followed by a space or
+ punctuation or something, and mark it KEYWORD so future
+ stemmers won't touch it either while a query like "find
+ the popsicle' would remove 'the' as a stopword.
+ <p>Normally you'd use the ordinary <code>StopFilter</code>
+ in your indexAnalyzer and then this class in your
+ queryAnalyzer, when using one of the analyzing suggesters. 
+ */
 @interface OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
                withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopWords;
 
@@ -44,8 +60,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter_in
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter *new_OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisUtilCharArraySet *stopWords) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter *create_OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisUtilCharArraySet *stopWords);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter")

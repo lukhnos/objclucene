@@ -5,29 +5,49 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexSortedNumericDocValues_INCLUDE_ALL")
-#if OrgApacheLuceneIndexSortedNumericDocValues_RESTRICT
-#define OrgApacheLuceneIndexSortedNumericDocValues_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexSortedNumericDocValues")
+#ifdef RESTRICT_OrgApacheLuceneIndexSortedNumericDocValues
+#define INCLUDE_ALL_OrgApacheLuceneIndexSortedNumericDocValues 0
 #else
-#define OrgApacheLuceneIndexSortedNumericDocValues_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexSortedNumericDocValues 1
 #endif
-#undef OrgApacheLuceneIndexSortedNumericDocValues_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexSortedNumericDocValues
 
-#if !defined (_OrgApacheLuceneIndexSortedNumericDocValues_) && (OrgApacheLuceneIndexSortedNumericDocValues_INCLUDE_ALL || OrgApacheLuceneIndexSortedNumericDocValues_INCLUDE)
-#define _OrgApacheLuceneIndexSortedNumericDocValues_
+#if !defined (OrgApacheLuceneIndexSortedNumericDocValues_) && (INCLUDE_ALL_OrgApacheLuceneIndexSortedNumericDocValues || defined(INCLUDE_OrgApacheLuceneIndexSortedNumericDocValues))
+#define OrgApacheLuceneIndexSortedNumericDocValues_
 
+/*!
+ @brief A list of per-document numeric values, sorted 
+ according to <code>Long.compare(long,long)</code>.
+ */
 @interface OrgApacheLuceneIndexSortedNumericDocValues : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Retrieves the count of values for the current document.
+ This may be zero if a document has no values.
+ */
 - (jint)count;
 
+/*!
+ @brief Positions to the specified document
+ */
 - (void)setDocumentWithInt:(jint)doc;
 
+/*!
+ @brief Retrieve the value for the current document at the specified index.
+ An index ranges from <code>0</code> to <code>count()-1</code>. 
+ */
 - (jlong)valueAtWithInt:(jint)index;
 
 #pragma mark Protected
 
+/*!
+ @brief Sole constructor.
+ (For invocation by subclass 
+ constructors, typically implicit.) 
+ */
 - (instancetype)init;
 
 @end
@@ -40,4 +60,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortedNumericDocValues)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexSortedNumericDocValues_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSortedNumericDocValues")

@@ -5,82 +5,196 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilConstants_INCLUDE_ALL")
-#if OrgApacheLuceneUtilConstants_RESTRICT
-#define OrgApacheLuceneUtilConstants_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilConstants")
+#ifdef RESTRICT_OrgApacheLuceneUtilConstants
+#define INCLUDE_ALL_OrgApacheLuceneUtilConstants 0
 #else
-#define OrgApacheLuceneUtilConstants_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilConstants 1
 #endif
-#undef OrgApacheLuceneUtilConstants_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilConstants
 
-#if !defined (_OrgApacheLuceneUtilConstants_) && (OrgApacheLuceneUtilConstants_INCLUDE_ALL || OrgApacheLuceneUtilConstants_INCLUDE)
-#define _OrgApacheLuceneUtilConstants_
+#if !defined (OrgApacheLuceneUtilConstants_) && (INCLUDE_ALL_OrgApacheLuceneUtilConstants || defined(INCLUDE_OrgApacheLuceneUtilConstants))
+#define OrgApacheLuceneUtilConstants_
 
+@class IOSObjectArray;
+
+/*!
+ @brief Some useful constants.
+ */
 @interface OrgApacheLuceneUtilConstants : NSObject
+
++ (NSString *)JVM_VENDOR;
+
++ (NSString *)JVM_VERSION;
+
++ (NSString *)JVM_NAME;
+
++ (NSString *)JVM_SPEC_VERSION;
+
++ (NSString *)JAVA_VERSION;
+
++ (NSString *)OS_NAME;
+
++ (jboolean)LINUX;
+
++ (jboolean)WINDOWS;
+
++ (jboolean)SUN_OS;
+
++ (jboolean)MAC_OS_X;
+
++ (jboolean)FREE_BSD;
+
++ (NSString *)OS_ARCH;
+
++ (NSString *)OS_VERSION;
+
++ (NSString *)JAVA_VENDOR;
+
++ (jboolean)JRE_IS_64BIT;
+
++ (jboolean)JRE_IS_MINIMUM_JAVA8;
+
++ (jboolean)JRE_IS_MINIMUM_JAVA9;
+
++ (NSString *)LUCENE_MAIN_VERSION;
+
++ (NSString *)LUCENE_VERSION;
 
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilConstants)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneUtilConstants_JVM_VENDOR_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilConstants, JVM_VENDOR_, NSString *)
+/*!
+ @brief JVM vendor info.
+ */
+inline NSString *OrgApacheLuceneUtilConstants_get_JVM_VENDOR();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneUtilConstants_JVM_VENDOR;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilConstants, JVM_VENDOR, NSString *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneUtilConstants_JVM_VERSION_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilConstants, JVM_VERSION_, NSString *)
+inline NSString *OrgApacheLuceneUtilConstants_get_JVM_VERSION();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneUtilConstants_JVM_VERSION;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilConstants, JVM_VERSION, NSString *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneUtilConstants_JVM_NAME_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilConstants, JVM_NAME_, NSString *)
+inline NSString *OrgApacheLuceneUtilConstants_get_JVM_NAME();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneUtilConstants_JVM_NAME;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilConstants, JVM_NAME, NSString *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneUtilConstants_JVM_SPEC_VERSION_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilConstants, JVM_SPEC_VERSION_, NSString *)
+inline NSString *OrgApacheLuceneUtilConstants_get_JVM_SPEC_VERSION();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneUtilConstants_JVM_SPEC_VERSION;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilConstants, JVM_SPEC_VERSION, NSString *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneUtilConstants_JAVA_VERSION_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilConstants, JAVA_VERSION_, NSString *)
+/*!
+ @brief The value of <tt>System.getProperty("java.version")</tt>.
+ */
+inline NSString *OrgApacheLuceneUtilConstants_get_JAVA_VERSION();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneUtilConstants_JAVA_VERSION;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilConstants, JAVA_VERSION, NSString *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneUtilConstants_OS_NAME_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilConstants, OS_NAME_, NSString *)
+/*!
+ @brief The value of <tt>System.getProperty("os.name")</tt>.
+ */
+inline NSString *OrgApacheLuceneUtilConstants_get_OS_NAME();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneUtilConstants_OS_NAME;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilConstants, OS_NAME, NSString *)
 
-FOUNDATION_EXPORT jboolean OrgApacheLuceneUtilConstants_LINUX_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilConstants, LINUX_, jboolean)
+/*!
+ @brief True iff running on Linux.
+ */
+inline jboolean OrgApacheLuceneUtilConstants_get_LINUX();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT jboolean OrgApacheLuceneUtilConstants_LINUX;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilConstants, LINUX, jboolean)
 
-FOUNDATION_EXPORT jboolean OrgApacheLuceneUtilConstants_WINDOWS_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilConstants, WINDOWS_, jboolean)
+/*!
+ @brief True iff running on Windows.
+ */
+inline jboolean OrgApacheLuceneUtilConstants_get_WINDOWS();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT jboolean OrgApacheLuceneUtilConstants_WINDOWS;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilConstants, WINDOWS, jboolean)
 
-FOUNDATION_EXPORT jboolean OrgApacheLuceneUtilConstants_SUN_OS_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilConstants, SUN_OS_, jboolean)
+/*!
+ @brief True iff running on SunOS.
+ */
+inline jboolean OrgApacheLuceneUtilConstants_get_SUN_OS();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT jboolean OrgApacheLuceneUtilConstants_SUN_OS;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilConstants, SUN_OS, jboolean)
 
-FOUNDATION_EXPORT jboolean OrgApacheLuceneUtilConstants_MAC_OS_X_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilConstants, MAC_OS_X_, jboolean)
+/*!
+ @brief True iff running on Mac OS X
+ */
+inline jboolean OrgApacheLuceneUtilConstants_get_MAC_OS_X();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT jboolean OrgApacheLuceneUtilConstants_MAC_OS_X;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilConstants, MAC_OS_X, jboolean)
 
-FOUNDATION_EXPORT jboolean OrgApacheLuceneUtilConstants_FREE_BSD_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilConstants, FREE_BSD_, jboolean)
+/*!
+ @brief True iff running on FreeBSD
+ */
+inline jboolean OrgApacheLuceneUtilConstants_get_FREE_BSD();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT jboolean OrgApacheLuceneUtilConstants_FREE_BSD;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilConstants, FREE_BSD, jboolean)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneUtilConstants_OS_ARCH_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilConstants, OS_ARCH_, NSString *)
+inline NSString *OrgApacheLuceneUtilConstants_get_OS_ARCH();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneUtilConstants_OS_ARCH;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilConstants, OS_ARCH, NSString *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneUtilConstants_OS_VERSION_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilConstants, OS_VERSION_, NSString *)
+inline NSString *OrgApacheLuceneUtilConstants_get_OS_VERSION();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneUtilConstants_OS_VERSION;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilConstants, OS_VERSION, NSString *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneUtilConstants_JAVA_VENDOR_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilConstants, JAVA_VENDOR_, NSString *)
+inline NSString *OrgApacheLuceneUtilConstants_get_JAVA_VENDOR();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneUtilConstants_JAVA_VENDOR;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilConstants, JAVA_VENDOR, NSString *)
 
-FOUNDATION_EXPORT jboolean OrgApacheLuceneUtilConstants_JRE_IS_64BIT_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilConstants, JRE_IS_64BIT_, jboolean)
+/*!
+ @brief True iff running on a 64bit JVM
+ */
+inline jboolean OrgApacheLuceneUtilConstants_get_JRE_IS_64BIT();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT jboolean OrgApacheLuceneUtilConstants_JRE_IS_64BIT;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilConstants, JRE_IS_64BIT, jboolean)
 
-FOUNDATION_EXPORT jboolean OrgApacheLuceneUtilConstants_JRE_IS_MINIMUM_JAVA8_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilConstants, JRE_IS_MINIMUM_JAVA8_, jboolean)
+inline jboolean OrgApacheLuceneUtilConstants_get_JRE_IS_MINIMUM_JAVA8();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT jboolean OrgApacheLuceneUtilConstants_JRE_IS_MINIMUM_JAVA8;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilConstants, JRE_IS_MINIMUM_JAVA8, jboolean)
 
-FOUNDATION_EXPORT jboolean OrgApacheLuceneUtilConstants_JRE_IS_MINIMUM_JAVA9_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilConstants, JRE_IS_MINIMUM_JAVA9_, jboolean)
+inline jboolean OrgApacheLuceneUtilConstants_get_JRE_IS_MINIMUM_JAVA9();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT jboolean OrgApacheLuceneUtilConstants_JRE_IS_MINIMUM_JAVA9;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilConstants, JRE_IS_MINIMUM_JAVA9, jboolean)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneUtilConstants_LUCENE_MAIN_VERSION_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilConstants, LUCENE_MAIN_VERSION_, NSString *)
+/*!
+ @brief This is the internal Lucene version, including bugfix versions, recorded into each segment.
+ */
+inline NSString *OrgApacheLuceneUtilConstants_get_LUCENE_MAIN_VERSION();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneUtilConstants_LUCENE_MAIN_VERSION;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilConstants, LUCENE_MAIN_VERSION, NSString *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneUtilConstants_LUCENE_VERSION_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilConstants, LUCENE_VERSION_, NSString *)
+/*!
+ @brief Don't use this constant because the name is not self-describing!
+ */
+inline NSString *OrgApacheLuceneUtilConstants_get_LUCENE_VERSION();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneUtilConstants_LUCENE_VERSION;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilConstants, LUCENE_VERSION, NSString *)
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilConstants)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilConstants_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilConstants")

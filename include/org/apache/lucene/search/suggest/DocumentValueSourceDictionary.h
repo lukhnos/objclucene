@@ -5,38 +5,87 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_RESTRICT
-#define OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary")
+#ifdef RESTRICT_OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary 0
 #else
-#define OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary 1
 #endif
-#undef OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary
 
-#if !defined (_OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_) && (OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_INCLUDE_ALL || OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_INCLUDE)
-#define _OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_
+#if !defined (OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary || defined(INCLUDE_OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary))
+#define OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_
 
-#define OrgApacheLuceneSearchSuggestDocumentDictionary_RESTRICT 1
-#define OrgApacheLuceneSearchSuggestDocumentDictionary_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSuggestDocumentDictionary 1
+#define INCLUDE_OrgApacheLuceneSearchSuggestDocumentDictionary 1
 #include "org/apache/lucene/search/suggest/DocumentDictionary.h"
 
 @class OrgApacheLuceneIndexIndexReader;
 @class OrgApacheLuceneQueriesFunctionValueSource;
 @protocol OrgApacheLuceneSearchSuggestInputIterator;
 
+/*!
+ @brief <p>
+ Dictionary with terms and optionally payload and
+ optionally contexts information
+ taken from stored fields in a Lucene index.
+ Similar to 
+ <code>DocumentDictionary</code>, except it obtains the weight
+ of the terms in a document based on a <code>ValueSource</code>.
+ </p>
+ <b>NOTE:</b> 
+ <ul>
+ <li>
+ The term field has to be stored; if it is missing, the document is skipped.
+ </li>
+ <li>
+ The payload and contexts field are optional and are not required to be stored.
+ </li>
+ </ul>
+ <p>
+ In practice the <code>ValueSource</code> will likely be obtained
+ using the lucene expression module. The following example shows
+ how to create a <code>ValueSource</code> from a simple addition of two
+ fields:
+ <code>
+ Expression expression = JavascriptCompiler.compile("f1 + f2");
+ SimpleBindings bindings = new SimpleBindings();
+ bindings.add(new SortField("f1", SortField.Type.LONG));
+ bindings.add(new SortField("f2", SortField.Type.LONG));
+ ValueSource valueSource = expression.getValueSource(bindings);
+ </code>
+ </p>
+ */
 @interface OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary : OrgApacheLuceneSearchSuggestDocumentDictionary
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new dictionary with the contents of the fields named <code>field</code>
+ for the terms and uses the <code>weightsValueSource</code> supplied to determine the 
+ score.
+ */
 - (instancetype)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
                                            withNSString:(NSString *)field
           withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)weightsValueSource;
 
+/*!
+ @brief Creates a new dictionary with the contents of the fields named <code>field</code>
+ for the terms, <code>payloadField</code> for the corresponding payloads
+ and uses the <code>weightsValueSource</code> supplied to determine the 
+ score.
+ */
 - (instancetype)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
                                            withNSString:(NSString *)field
           withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)weightsValueSource
                                            withNSString:(NSString *)payload;
 
+/*!
+ @brief Creates a new dictionary with the contents of the fields named <code>field</code>
+ for the terms, <code>payload</code> for the corresponding payloads, <code>contexts</code>
+ for the associated contexts and uses the <code>weightsValueSource</code> supplied 
+ to determine the score.
+ */
 - (instancetype)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
                                            withNSString:(NSString *)field
           withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)weightsValueSource
@@ -53,23 +102,29 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary *new_OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneQueriesFunctionValueSource_withNSString_withNSString_(OrgApacheLuceneIndexIndexReader *reader, NSString *field, OrgApacheLuceneQueriesFunctionValueSource *weightsValueSource, NSString *payload, NSString *contexts) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary *create_OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneQueriesFunctionValueSource_withNSString_withNSString_(OrgApacheLuceneIndexIndexReader *reader, NSString *field, OrgApacheLuceneQueriesFunctionValueSource *weightsValueSource, NSString *payload, NSString *contexts);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneQueriesFunctionValueSource_withNSString_(OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary *self, OrgApacheLuceneIndexIndexReader *reader, NSString *field, OrgApacheLuceneQueriesFunctionValueSource *weightsValueSource, NSString *payload);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary *new_OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneQueriesFunctionValueSource_withNSString_(OrgApacheLuceneIndexIndexReader *reader, NSString *field, OrgApacheLuceneQueriesFunctionValueSource *weightsValueSource, NSString *payload) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary *create_OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneQueriesFunctionValueSource_withNSString_(OrgApacheLuceneIndexIndexReader *reader, NSString *field, OrgApacheLuceneQueriesFunctionValueSource *weightsValueSource, NSString *payload);
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary *self, OrgApacheLuceneIndexIndexReader *reader, NSString *field, OrgApacheLuceneQueriesFunctionValueSource *weightsValueSource);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary *new_OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneIndexIndexReader *reader, NSString *field, OrgApacheLuceneQueriesFunctionValueSource *weightsValueSource) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary *create_OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneIndexIndexReader *reader, NSString *field, OrgApacheLuceneQueriesFunctionValueSource *weightsValueSource);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_DocumentValueSourceInputIterator_) && (OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_INCLUDE_ALL || OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_DocumentValueSourceInputIterator_INCLUDE)
-#define _OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_DocumentValueSourceInputIterator_
+#if !defined (OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_DocumentValueSourceInputIterator_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary || defined(INCLUDE_OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_DocumentValueSourceInputIterator))
+#define OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_DocumentValueSourceInputIterator_
 
-#define OrgApacheLuceneSearchSuggestDocumentDictionary_RESTRICT 1
-#define OrgApacheLuceneSearchSuggestDocumentDictionary_DocumentInputIterator_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSuggestDocumentDictionary 1
+#define INCLUDE_OrgApacheLuceneSearchSuggestDocumentDictionary_DocumentInputIterator 1
 #include "org/apache/lucene/search/suggest/DocumentDictionary.h"
 
 @class OrgApacheLuceneDocumentDocument;
@@ -85,6 +140,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentValueSourceDictio
 
 #pragma mark Protected
 
+/*!
+ @brief Returns the weight for the current <code>docId</code> as computed 
+ by the <code>weightsValueSource</code>
+ */
 - (jlong)getWeightWithOrgApacheLuceneDocumentDocument:(OrgApacheLuceneDocumentDocument *)doc
                                               withInt:(jint)docId;
 
@@ -96,8 +155,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_DocumentValueSourceInputIterator *new_OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_DocumentValueSourceInputIterator_initWithOrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_withBoolean_withBoolean_(OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary *outer$, jboolean hasPayloads, jboolean hasContexts) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_DocumentValueSourceInputIterator *create_OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_DocumentValueSourceInputIterator_initWithOrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_withBoolean_withBoolean_(OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary *outer$, jboolean hasPayloads, jboolean hasContexts);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_DocumentValueSourceInputIterator)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary")

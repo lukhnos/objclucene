@@ -64,7 +64,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   jint numTokens;
   if (discountOverlaps_) numTokens = [((OrgApacheLuceneIndexFieldInvertState *) nil_chk(state)) getLength] - [state getNumOverlap];
   else numTokens = [((OrgApacheLuceneIndexFieldInvertState *) nil_chk(state)) getLength];
-  return [((OrgApacheLuceneIndexFieldInvertState *) nil_chk(state)) getBoost] * [self computeLengthNormWithInt:numTokens];
+  return [state getBoost] * [self computeLengthNormWithInt:numTokens];
 }
 
 - (jfloat)computeLengthNormWithInt:(jint)numTerms {
@@ -137,9 +137,11 @@ void OrgApacheLuceneMiscSweetSpotSimilarity_init(OrgApacheLuceneMiscSweetSpotSim
 }
 
 OrgApacheLuceneMiscSweetSpotSimilarity *new_OrgApacheLuceneMiscSweetSpotSimilarity_init() {
-  OrgApacheLuceneMiscSweetSpotSimilarity *self = [OrgApacheLuceneMiscSweetSpotSimilarity alloc];
-  OrgApacheLuceneMiscSweetSpotSimilarity_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneMiscSweetSpotSimilarity, init)
+}
+
+OrgApacheLuceneMiscSweetSpotSimilarity *create_OrgApacheLuceneMiscSweetSpotSimilarity_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneMiscSweetSpotSimilarity, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneMiscSweetSpotSimilarity)

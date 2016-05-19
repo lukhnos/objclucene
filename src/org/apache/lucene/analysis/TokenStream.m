@@ -26,9 +26,13 @@ __attribute__((unused)) static jboolean OrgApacheLuceneAnalysisTokenStream_asser
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisTokenStream)
 
-OrgApacheLuceneUtilAttributeFactory *OrgApacheLuceneAnalysisTokenStream_DEFAULT_TOKEN_ATTRIBUTE_FACTORY_;
+OrgApacheLuceneUtilAttributeFactory *OrgApacheLuceneAnalysisTokenStream_DEFAULT_TOKEN_ATTRIBUTE_FACTORY;
 
 @implementation OrgApacheLuceneAnalysisTokenStream
+
++ (OrgApacheLuceneUtilAttributeFactory *)DEFAULT_TOKEN_ATTRIBUTE_FACTORY {
+  return OrgApacheLuceneAnalysisTokenStream_DEFAULT_TOKEN_ATTRIBUTE_FACTORY;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -73,7 +77,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisTokenStream class]) {
-    JreStrongAssign(&OrgApacheLuceneAnalysisTokenStream_DEFAULT_TOKEN_ATTRIBUTE_FACTORY_, OrgApacheLuceneUtilAttributeFactory_getStaticImplementationWithOrgApacheLuceneUtilAttributeFactory_withIOSClass_(JreLoadStatic(OrgApacheLuceneUtilAttributeFactory, DEFAULT_ATTRIBUTE_FACTORY_), OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl_class_()));
+    JreStrongAssign(&OrgApacheLuceneAnalysisTokenStream_DEFAULT_TOKEN_ATTRIBUTE_FACTORY, OrgApacheLuceneUtilAttributeFactory_getStaticImplementationWithOrgApacheLuceneUtilAttributeFactory_withIOSClass_(JreLoadStatic(OrgApacheLuceneUtilAttributeFactory, DEFAULT_ATTRIBUTE_FACTORY), OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl_class_()));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisTokenStream)
   }
 }
@@ -90,7 +94,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_TOKEN_ATTRIBUTE_FACTORY_", NULL, 0x19, "Lorg.apache.lucene.util.AttributeFactory;", &OrgApacheLuceneAnalysisTokenStream_DEFAULT_TOKEN_ATTRIBUTE_FACTORY_, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_TOKEN_ATTRIBUTE_FACTORY", "DEFAULT_TOKEN_ATTRIBUTE_FACTORY", 0x19, "Lorg.apache.lucene.util.AttributeFactory;", &OrgApacheLuceneAnalysisTokenStream_DEFAULT_TOKEN_ATTRIBUTE_FACTORY, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTokenStream = { 2, "TokenStream", "org.apache.lucene.analysis", NULL, 0x401, 8, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisTokenStream;
@@ -99,7 +103,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 @end
 
 void OrgApacheLuceneAnalysisTokenStream_init(OrgApacheLuceneAnalysisTokenStream *self) {
-  OrgApacheLuceneUtilAttributeSource_initWithOrgApacheLuceneUtilAttributeFactory_(self, OrgApacheLuceneAnalysisTokenStream_DEFAULT_TOKEN_ATTRIBUTE_FACTORY_);
+  OrgApacheLuceneUtilAttributeSource_initWithOrgApacheLuceneUtilAttributeFactory_(self, OrgApacheLuceneAnalysisTokenStream_DEFAULT_TOKEN_ATTRIBUTE_FACTORY);
   JreAssert((OrgApacheLuceneAnalysisTokenStream_assertFinal(self)), (@"org/apache/lucene/analysis/TokenStream.java:99 condition failed: assert assertFinal();"));
 }
 

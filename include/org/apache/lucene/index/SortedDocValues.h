@@ -5,42 +5,86 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexSortedDocValues_INCLUDE_ALL")
-#if OrgApacheLuceneIndexSortedDocValues_RESTRICT
-#define OrgApacheLuceneIndexSortedDocValues_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexSortedDocValues")
+#ifdef RESTRICT_OrgApacheLuceneIndexSortedDocValues
+#define INCLUDE_ALL_OrgApacheLuceneIndexSortedDocValues 0
 #else
-#define OrgApacheLuceneIndexSortedDocValues_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexSortedDocValues 1
 #endif
-#undef OrgApacheLuceneIndexSortedDocValues_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexSortedDocValues
 
-#if !defined (_OrgApacheLuceneIndexSortedDocValues_) && (OrgApacheLuceneIndexSortedDocValues_INCLUDE_ALL || OrgApacheLuceneIndexSortedDocValues_INCLUDE)
-#define _OrgApacheLuceneIndexSortedDocValues_
+#if !defined (OrgApacheLuceneIndexSortedDocValues_) && (INCLUDE_ALL_OrgApacheLuceneIndexSortedDocValues || defined(INCLUDE_OrgApacheLuceneIndexSortedDocValues))
+#define OrgApacheLuceneIndexSortedDocValues_
 
-#define OrgApacheLuceneIndexBinaryDocValues_RESTRICT 1
-#define OrgApacheLuceneIndexBinaryDocValues_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexBinaryDocValues 1
+#define INCLUDE_OrgApacheLuceneIndexBinaryDocValues 1
 #include "org/apache/lucene/index/BinaryDocValues.h"
 
 @class OrgApacheLuceneIndexTermsEnum;
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief A per-document byte[] with presorted values.
+ <p>
+ Per-Document values in a SortedDocValues are deduplicated, dereferenced,
+ and sorted into a dictionary of unique values. A pointer to the
+ dictionary value (ordinal) can be retrieved for each document. Ordinals
+ are dense and in increasing sorted order.
+ */
 @interface OrgApacheLuceneIndexSortedDocValues : OrgApacheLuceneIndexBinaryDocValues
 
 #pragma mark Public
 
 - (OrgApacheLuceneUtilBytesRef *)getWithInt:(jint)docID;
 
+/*!
+ @brief Returns the ordinal for the specified docID.
+ @param docID document ID to lookup
+ @return ordinal for the document: this is dense, starts at 0, then
+ increments by 1 for the next value in sorted order. Note that
+ missing values are indicated by -1.
+ */
 - (jint)getOrdWithInt:(jint)docID;
 
+/*!
+ @brief Returns the number of unique values.
+ @return number of unique values in this SortedDocValues. This is
+ also equivalent to one plus the maximum ordinal.
+ */
 - (jint)getValueCount;
 
+/*!
+ @brief Retrieves the value for the specified ordinal.
+ The returned
+ <code>BytesRef</code> may be re-used across calls to <code>lookupOrd(int)</code>
+ so make sure to <code>copy it</code> if you want
+ to keep it around.
+ @param ord ordinal to lookup (must be &gt;= 0 and &lt; <code>getValueCount()</code>)
+ - seealso: #getOrd(int)
+ */
 - (OrgApacheLuceneUtilBytesRef *)lookupOrdWithInt:(jint)ord;
 
+/*!
+ @brief If <code>key</code> exists, returns its ordinal, else
+ returns <code>-insertionPoint-1</code>, like <code>Arrays.binarySearch</code>
+ .
+ @param key Key to look up
+ */
 - (jint)lookupTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)key;
 
+/*!
+ @brief Returns a <code>TermsEnum</code> over the values.
+ The enum supports <code>TermsEnum.ord()</code> and <code>TermsEnum.seekExact(long)</code>.
+ */
 - (OrgApacheLuceneIndexTermsEnum *)termsEnum;
 
 #pragma mark Protected
 
+/*!
+ @brief Sole constructor.
+ (For invocation by subclass 
+ constructors, typically implicit.) 
+ */
 - (instancetype)init;
 
 @end
@@ -53,4 +97,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortedDocValues)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexSortedDocValues_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSortedDocValues")

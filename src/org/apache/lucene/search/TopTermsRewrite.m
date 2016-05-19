@@ -38,8 +38,9 @@
 
 @end
 
-static id<JavaUtilComparator> OrgApacheLuceneSearchTopTermsRewrite_scoreTermSortByTermComp_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchTopTermsRewrite, scoreTermSortByTermComp_, id<JavaUtilComparator>)
+inline id<JavaUtilComparator> OrgApacheLuceneSearchTopTermsRewrite_get_scoreTermSortByTermComp();
+static id<JavaUtilComparator> OrgApacheLuceneSearchTopTermsRewrite_scoreTermSortByTermComp;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchTopTermsRewrite, scoreTermSortByTermComp, id<JavaUtilComparator>)
 
 @interface OrgApacheLuceneSearchTopTermsRewrite_$2 : OrgApacheLuceneSearchTermCollectingRewrite_TermCollector {
  @public
@@ -80,6 +81,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchTopTermsRewrite_$2_init
 
 __attribute__((unused)) static OrgApacheLuceneSearchTopTermsRewrite_$2 *new_OrgApacheLuceneSearchTopTermsRewrite_$2_initWithJavaUtilPriorityQueue_withInt_(JavaUtilPriorityQueue *capture$0, jint capture$1) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchTopTermsRewrite_$2 *create_OrgApacheLuceneSearchTopTermsRewrite_$2_initWithJavaUtilPriorityQueue_withInt_(JavaUtilPriorityQueue *capture$0, jint capture$1);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopTermsRewrite_$2)
 
 @interface OrgApacheLuceneSearchTopTermsRewrite_$1 : NSObject < JavaUtilComparator >
@@ -96,6 +99,8 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchTopTermsRewrite_$1)
 __attribute__((unused)) static void OrgApacheLuceneSearchTopTermsRewrite_$1_init(OrgApacheLuceneSearchTopTermsRewrite_$1 *self);
 
 __attribute__((unused)) static OrgApacheLuceneSearchTopTermsRewrite_$1 *new_OrgApacheLuceneSearchTopTermsRewrite_$1_init() NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchTopTermsRewrite_$1 *create_OrgApacheLuceneSearchTopTermsRewrite_$1_init();
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopTermsRewrite_$1)
 
@@ -121,18 +126,18 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchTopTermsRewrite)
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
                                    withOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query {
   jint maxSize = JavaLangMath_minWithInt_withInt_(size_, [self getMaxSize]);
-  JavaUtilPriorityQueue *stQueue = [new_JavaUtilPriorityQueue_init() autorelease];
-  [self collectTermsWithOrgApacheLuceneIndexIndexReader:reader withOrgApacheLuceneSearchMultiTermQuery:query withOrgApacheLuceneSearchTermCollectingRewrite_TermCollector:[new_OrgApacheLuceneSearchTopTermsRewrite_$2_initWithJavaUtilPriorityQueue_withInt_(stQueue, maxSize) autorelease]];
+  JavaUtilPriorityQueue *stQueue = create_JavaUtilPriorityQueue_init();
+  [self collectTermsWithOrgApacheLuceneIndexIndexReader:reader withOrgApacheLuceneSearchMultiTermQuery:query withOrgApacheLuceneSearchTermCollectingRewrite_TermCollector:create_OrgApacheLuceneSearchTopTermsRewrite_$2_initWithJavaUtilPriorityQueue_withInt_(stQueue, maxSize)];
   id b = [self getTopLevelBuilder];
   IOSObjectArray *scoreTerms = [stQueue toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[stQueue size] type:OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm_class_()]];
-  OrgApacheLuceneUtilArrayUtil_timSortWithNSObjectArray_withJavaUtilComparator_(scoreTerms, OrgApacheLuceneSearchTopTermsRewrite_scoreTermSortByTermComp_);
+  OrgApacheLuceneUtilArrayUtil_timSortWithNSObjectArray_withJavaUtilComparator_(scoreTerms, OrgApacheLuceneSearchTopTermsRewrite_scoreTermSortByTermComp);
   {
     IOSObjectArray *a__ = scoreTerms;
     OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
     OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm * const *e__ = b__ + a__->size_;
     while (b__ < e__) {
       OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm *st = *b__++;
-      OrgApacheLuceneIndexTerm *term = [new_OrgApacheLuceneIndexTerm_initWithNSString_withOrgApacheLuceneUtilBytesRef_(((OrgApacheLuceneSearchMultiTermQuery *) nil_chk(query))->field_, [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(((OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm *) nil_chk(st))->bytes_)) toBytesRef]) autorelease];
+      OrgApacheLuceneIndexTerm *term = create_OrgApacheLuceneIndexTerm_initWithNSString_withOrgApacheLuceneUtilBytesRef_(((OrgApacheLuceneSearchMultiTermQuery *) nil_chk(query))->field_, [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(((OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm *) nil_chk(st))->bytes_)) toBytesRef]);
       [self addClauseWithId:b withOrgApacheLuceneIndexTerm:term withInt:[((OrgApacheLuceneIndexTermContext *) nil_chk(st->termState_)) docFreq] withFloat:[query getBoost] * st->boost_ withOrgApacheLuceneIndexTermContext:st->termState_];
     }
   }
@@ -146,15 +151,15 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchTopTermsRewrite)
 - (jboolean)isEqual:(id)obj {
   if (self == obj) return true;
   if (obj == nil) return false;
-  if ([self getClass] != [nil_chk(obj) getClass]) return false;
-  OrgApacheLuceneSearchTopTermsRewrite *other = (OrgApacheLuceneSearchTopTermsRewrite *) check_class_cast(obj, [OrgApacheLuceneSearchTopTermsRewrite class]);
+  if ([self getClass] != (id) [obj getClass]) return false;
+  OrgApacheLuceneSearchTopTermsRewrite *other = (OrgApacheLuceneSearchTopTermsRewrite *) cast_chk(obj, [OrgApacheLuceneSearchTopTermsRewrite class]);
   if (size_ != other->size_) return false;
   return true;
 }
 
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchTopTermsRewrite class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneSearchTopTermsRewrite_scoreTermSortByTermComp_, new_OrgApacheLuceneSearchTopTermsRewrite_$1_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneSearchTopTermsRewrite_scoreTermSortByTermComp, new_OrgApacheLuceneSearchTopTermsRewrite_$1_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchTopTermsRewrite)
   }
 }
@@ -170,7 +175,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchTopTermsRewrite)
   };
   static const J2ObjcFieldInfo fields[] = {
     { "size_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "scoreTermSortByTermComp_", NULL, 0x1a, "Ljava.util.Comparator;", &OrgApacheLuceneSearchTopTermsRewrite_scoreTermSortByTermComp_, "Ljava/util/Comparator<Lorg/apache/lucene/search/TopTermsRewrite$ScoreTerm;>;", .constantValue.asLong = 0 },
+    { "scoreTermSortByTermComp", "scoreTermSortByTermComp", 0x1a, "Ljava.util.Comparator;", &OrgApacheLuceneSearchTopTermsRewrite_scoreTermSortByTermComp, "Ljava/util/Comparator<Lorg/apache/lucene/search/TopTermsRewrite$ScoreTerm;>;", .constantValue.asLong = 0 },
   };
   static const char *superclass_type_args[] = {"TB;"};
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.TopTermsRewrite$ScoreTerm;"};
@@ -195,7 +200,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopTermsRewrite)
 }
 
 - (jint)compareToWithId:(OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm *)other {
-  check_class_cast(other, [OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm class]);
+  cast_chk(other, [OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm class]);
   if (self->boost_ == ((OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm *) nil_chk(other))->boost_) return [((OrgApacheLuceneUtilBytesRef *) nil_chk([((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(other->bytes_)) get])) compareToWithId:[self->bytes_ get]];
   else return JavaLangFloat_compareWithFloat_withFloat_(self->boost_, other->boost_);
 }
@@ -229,9 +234,11 @@ void OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm_initWithOrgApacheLuceneIndex
 }
 
 OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm *new_OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm_initWithOrgApacheLuceneIndexTermContext_(OrgApacheLuceneIndexTermContext *termState) {
-  OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm *self = [OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm alloc];
-  OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm_initWithOrgApacheLuceneIndexTermContext_(self, termState);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm, initWithOrgApacheLuceneIndexTermContext_, termState)
+}
+
+OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm *create_OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm_initWithOrgApacheLuceneIndexTermContext_(OrgApacheLuceneIndexTermContext *termState) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm, initWithOrgApacheLuceneIndexTermContext_, termState)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm)
@@ -241,7 +248,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm)
 - (void)setNextEnumWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)termsEnum {
   JreStrongAssign(&self->termsEnum_, termsEnum);
   JreAssert((OrgApacheLuceneSearchTopTermsRewrite_$2_compareToLastTermWithOrgApacheLuceneUtilBytesRef_(self, nil)), (@"org/apache/lucene/search/TopTermsRewrite.java:81 condition failed: assert compareToLastTerm(null);"));
-  if (st_ == nil) JreStrongAssignAndConsume(&st_, new_OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm_initWithOrgApacheLuceneIndexTermContext_([new_OrgApacheLuceneIndexTermContext_initWithOrgApacheLuceneIndexIndexReaderContext_(topReaderContext_) autorelease]));
+  if (st_ == nil) JreStrongAssignAndConsume(&st_, new_OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm_initWithOrgApacheLuceneIndexTermContext_(create_OrgApacheLuceneIndexTermContext_initWithOrgApacheLuceneIndexIndexReaderContext_(topReaderContext_)));
   JreStrongAssign(&boostAtt_, [((OrgApacheLuceneUtilAttributeSource *) nil_chk([((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) attributes])) addAttributeWithIOSClass:OrgApacheLuceneSearchBoostAttribute_class_()]);
 }
 
@@ -262,22 +269,22 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm)
   JreAssert((state != nil), (@"org/apache/lucene/search/TopTermsRewrite.java:123 condition failed: assert state != null;"));
   if (t != nil) {
     JreAssert((t->boost_ == boost), (@"boost should be equal in all segment TermsEnums"));
-    [((OrgApacheLuceneIndexTermContext *) nil_chk(t->termState_)) register__WithOrgApacheLuceneIndexTermState:state withInt:((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(readerContext_))->ord_ withInt:[termsEnum_ docFreq] withLong:[termsEnum_ totalTermFreq]];
+    [((OrgApacheLuceneIndexTermContext *) nil_chk(t->termState_)) register__WithOrgApacheLuceneIndexTermState:state withInt:((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(readerContext_))->ord_ withInt:[((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum_)) docFreq] withLong:[((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum_)) totalTermFreq]];
   }
   else {
     [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(((OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm *) nil_chk(st_))->bytes_)) copyBytesWithOrgApacheLuceneUtilBytesRef:bytes];
-    st_->boost_ = boost;
+    ((OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm *) nil_chk(st_))->boost_ = boost;
     [visitedTerms_ putWithId:[st_->bytes_ get] withId:st_];
-    JreAssert(([((OrgApacheLuceneIndexTermContext *) nil_chk(st_->termState_)) docFreq] == 0), (@"org/apache/lucene/search/TopTermsRewrite.java:133 condition failed: assert st.termState.docFreq() == 0;"));
-    [st_->termState_ register__WithOrgApacheLuceneIndexTermState:state withInt:((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(readerContext_))->ord_ withInt:[termsEnum_ docFreq] withLong:[termsEnum_ totalTermFreq]];
+    JreAssert(([((OrgApacheLuceneIndexTermContext *) nil_chk(((OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm *) nil_chk(st_))->termState_)) docFreq] == 0), (@"org/apache/lucene/search/TopTermsRewrite.java:133 condition failed: assert st.termState.docFreq() == 0;"));
+    [((OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm *) nil_chk(st_))->termState_ register__WithOrgApacheLuceneIndexTermState:state withInt:((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(readerContext_))->ord_ withInt:[((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum_)) docFreq] withLong:[((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum_)) totalTermFreq]];
     [val$stQueue_ offerWithId:st_];
     if ([val$stQueue_ size] > val$maxSize_) {
       JreStrongAssign(&st_, [val$stQueue_ poll]);
       [visitedTerms_ removeWithId:[((OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm *) nil_chk(st_))->bytes_ get]];
-      [st_->termState_ clear];
+      [((OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm *) nil_chk(st_))->termState_ clear];
     }
     else {
-      JreStrongAssignAndConsume(&st_, new_OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm_initWithOrgApacheLuceneIndexTermContext_([new_OrgApacheLuceneIndexTermContext_initWithOrgApacheLuceneIndexIndexReaderContext_(topReaderContext_) autorelease]));
+      JreStrongAssignAndConsume(&st_, new_OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm_initWithOrgApacheLuceneIndexTermContext_(create_OrgApacheLuceneIndexTermContext_initWithOrgApacheLuceneIndexIndexReaderContext_(topReaderContext_)));
     }
     JreAssert(([val$stQueue_ size] <= val$maxSize_), (@"the PQ size must be limited to maxSize"));
     if ([val$stQueue_ size] == val$maxSize_) {
@@ -311,7 +318,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm)
     { "setNextEnumWithOrgApacheLuceneIndexTermsEnum:", "setNextEnum", "V", 0x1, NULL, NULL },
     { "compareToLastTermWithOrgApacheLuceneUtilBytesRef:", "compareToLastTerm", "Z", 0x2, NULL, NULL },
     { "collectWithOrgApacheLuceneUtilBytesRef:", "collect", "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithJavaUtilPriorityQueue:withInt:", "", NULL, 0x0, NULL, NULL },
+    { "initWithJavaUtilPriorityQueue:withInt:", "", NULL, 0x0, NULL, "(Ljava/util/PriorityQueue<Lorg/apache/lucene/search/TopTermsRewrite$ScoreTerm;>;I)V" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "maxBoostAtt_", NULL, 0x12, "Lorg.apache.lucene.search.MaxNonCompetitiveBoostAttribute;", NULL, NULL, .constantValue.asLong = 0 },
@@ -340,7 +347,7 @@ jboolean OrgApacheLuceneSearchTopTermsRewrite_$2_compareToLastTermWithOrgApacheL
   }
   else {
     JreAssert(([((OrgApacheLuceneUtilBytesRef *) nil_chk([((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(self->lastTerm_)) get])) compareToWithId:t] < 0), (JreStrcat("$@$@", @"lastTerm=", self->lastTerm_, @" t=", t)));
-    [self->lastTerm_ copyBytesWithOrgApacheLuceneUtilBytesRef:t];
+    [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(self->lastTerm_)) copyBytesWithOrgApacheLuceneUtilBytesRef:t];
   }
   return true;
 }
@@ -354,9 +361,11 @@ void OrgApacheLuceneSearchTopTermsRewrite_$2_initWithJavaUtilPriorityQueue_withI
 }
 
 OrgApacheLuceneSearchTopTermsRewrite_$2 *new_OrgApacheLuceneSearchTopTermsRewrite_$2_initWithJavaUtilPriorityQueue_withInt_(JavaUtilPriorityQueue *capture$0, jint capture$1) {
-  OrgApacheLuceneSearchTopTermsRewrite_$2 *self = [OrgApacheLuceneSearchTopTermsRewrite_$2 alloc];
-  OrgApacheLuceneSearchTopTermsRewrite_$2_initWithJavaUtilPriorityQueue_withInt_(self, capture$0, capture$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTopTermsRewrite_$2, initWithJavaUtilPriorityQueue_withInt_, capture$0, capture$1)
+}
+
+OrgApacheLuceneSearchTopTermsRewrite_$2 *create_OrgApacheLuceneSearchTopTermsRewrite_$2_initWithJavaUtilPriorityQueue_withInt_(JavaUtilPriorityQueue *capture$0, jint capture$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTopTermsRewrite_$2, initWithJavaUtilPriorityQueue_withInt_, capture$0, capture$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopTermsRewrite_$2)
@@ -391,9 +400,11 @@ void OrgApacheLuceneSearchTopTermsRewrite_$1_init(OrgApacheLuceneSearchTopTermsR
 }
 
 OrgApacheLuceneSearchTopTermsRewrite_$1 *new_OrgApacheLuceneSearchTopTermsRewrite_$1_init() {
-  OrgApacheLuceneSearchTopTermsRewrite_$1 *self = [OrgApacheLuceneSearchTopTermsRewrite_$1 alloc];
-  OrgApacheLuceneSearchTopTermsRewrite_$1_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTopTermsRewrite_$1, init)
+}
+
+OrgApacheLuceneSearchTopTermsRewrite_$1 *create_OrgApacheLuceneSearchTopTermsRewrite_$1_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTopTermsRewrite_$1, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopTermsRewrite_$1)

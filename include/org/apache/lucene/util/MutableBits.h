@@ -5,23 +5,32 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilMutableBits_INCLUDE_ALL")
-#if OrgApacheLuceneUtilMutableBits_RESTRICT
-#define OrgApacheLuceneUtilMutableBits_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilMutableBits")
+#ifdef RESTRICT_OrgApacheLuceneUtilMutableBits
+#define INCLUDE_ALL_OrgApacheLuceneUtilMutableBits 0
 #else
-#define OrgApacheLuceneUtilMutableBits_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilMutableBits 1
 #endif
-#undef OrgApacheLuceneUtilMutableBits_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilMutableBits
 
-#if !defined (_OrgApacheLuceneUtilMutableBits_) && (OrgApacheLuceneUtilMutableBits_INCLUDE_ALL || OrgApacheLuceneUtilMutableBits_INCLUDE)
-#define _OrgApacheLuceneUtilMutableBits_
+#if !defined (OrgApacheLuceneUtilMutableBits_) && (INCLUDE_ALL_OrgApacheLuceneUtilMutableBits || defined(INCLUDE_OrgApacheLuceneUtilMutableBits))
+#define OrgApacheLuceneUtilMutableBits_
 
-#define OrgApacheLuceneUtilBits_RESTRICT 1
-#define OrgApacheLuceneUtilBits_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilBits 1
+#define INCLUDE_OrgApacheLuceneUtilBits 1
 #include "org/apache/lucene/util/Bits.h"
 
+/*!
+ @brief Extension of Bits for live documents.
+ */
 @protocol OrgApacheLuceneUtilMutableBits < OrgApacheLuceneUtilBits, NSObject, JavaObject >
 
+/*!
+ @brief Sets the bit specified by <code>index</code> to false.
+ @param index index, should be non-negative and &lt; <code>length()</code>.
+ The result of passing negative or out of bounds values is undefined
+ by this interface, <b>just don't do it!</b>
+ */
 - (void)clearWithInt:(jint)index;
 
 @end
@@ -32,4 +41,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilMutableBits)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilMutableBits_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilMutableBits")

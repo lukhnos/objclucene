@@ -28,7 +28,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     mem += [hiKid_ sizeInBytes];
   }
   if (token_ != nil) {
-    mem += OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfWithId_(token_) + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_ARRAY_HEADER_) + OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_CHAR * ((jint) [token_ length]);
+    mem += OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfWithId_(token_) + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_ARRAY_HEADER) + OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_CHAR * ((jint) [((NSString *) nil_chk(token_)) length]);
   }
   mem += OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfWithId_(val_);
   return mem;
@@ -67,9 +67,11 @@ void OrgApacheLuceneSearchSuggestTstTernaryTreeNode_init(OrgApacheLuceneSearchSu
 }
 
 OrgApacheLuceneSearchSuggestTstTernaryTreeNode *new_OrgApacheLuceneSearchSuggestTstTernaryTreeNode_init() {
-  OrgApacheLuceneSearchSuggestTstTernaryTreeNode *self = [OrgApacheLuceneSearchSuggestTstTernaryTreeNode alloc];
-  OrgApacheLuceneSearchSuggestTstTernaryTreeNode_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestTstTernaryTreeNode, init)
+}
+
+OrgApacheLuceneSearchSuggestTstTernaryTreeNode *create_OrgApacheLuceneSearchSuggestTstTernaryTreeNode_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestTstTernaryTreeNode, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestTstTernaryTreeNode)

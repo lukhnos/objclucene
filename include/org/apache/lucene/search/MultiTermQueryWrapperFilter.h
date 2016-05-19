@@ -5,26 +5,38 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchMultiTermQueryWrapperFilter_INCLUDE_ALL")
-#if OrgApacheLuceneSearchMultiTermQueryWrapperFilter_RESTRICT
-#define OrgApacheLuceneSearchMultiTermQueryWrapperFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchMultiTermQueryWrapperFilter")
+#ifdef RESTRICT_OrgApacheLuceneSearchMultiTermQueryWrapperFilter
+#define INCLUDE_ALL_OrgApacheLuceneSearchMultiTermQueryWrapperFilter 0
 #else
-#define OrgApacheLuceneSearchMultiTermQueryWrapperFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchMultiTermQueryWrapperFilter 1
 #endif
-#undef OrgApacheLuceneSearchMultiTermQueryWrapperFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchMultiTermQueryWrapperFilter
 
-#if !defined (_OrgApacheLuceneSearchMultiTermQueryWrapperFilter_) && (OrgApacheLuceneSearchMultiTermQueryWrapperFilter_INCLUDE_ALL || OrgApacheLuceneSearchMultiTermQueryWrapperFilter_INCLUDE)
-#define _OrgApacheLuceneSearchMultiTermQueryWrapperFilter_
+#if !defined (OrgApacheLuceneSearchMultiTermQueryWrapperFilter_) && (INCLUDE_ALL_OrgApacheLuceneSearchMultiTermQueryWrapperFilter || defined(INCLUDE_OrgApacheLuceneSearchMultiTermQueryWrapperFilter))
+#define OrgApacheLuceneSearchMultiTermQueryWrapperFilter_
 
-#define OrgApacheLuceneSearchFilter_RESTRICT 1
-#define OrgApacheLuceneSearchFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchFilter 1
+#define INCLUDE_OrgApacheLuceneSearchFilter 1
 #include "org/apache/lucene/search/Filter.h"
 
+@class IOSObjectArray;
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneSearchDocIdSet;
 @class OrgApacheLuceneSearchMultiTermQuery;
 @protocol OrgApacheLuceneUtilBits;
 
+/*!
+ @brief A wrapper for <code>MultiTermQuery</code>, that exposes its
+ functionality as a <code>Filter</code>.
+ <P>
+ <code>MultiTermQueryWrapperFilter</code> is not designed to
+ be used by itself. Normally you subclass it to provide a Filter
+ counterpart for a <code>MultiTermQuery</code> subclass.
+ <P>
+ For example, <code>TermRangeFilter</code> and <code>PrefixFilter</code> extend
+ <code>MultiTermQueryWrapperFilter</code>.
+ */
 @interface OrgApacheLuceneSearchMultiTermQueryWrapperFilter : OrgApacheLuceneSearchFilter {
  @public
   OrgApacheLuceneSearchMultiTermQuery *query_;
@@ -34,9 +46,16 @@
 
 - (jboolean)isEqual:(id)o;
 
+/*!
+ @brief Returns a DocIdSet with documents that should be permitted in search
+ results.
+ */
 - (OrgApacheLuceneSearchDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                             withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs;
 
+/*!
+ @brief Returns the field name for this query
+ */
 - (NSString *)getField;
 
 - (NSUInteger)hash;
@@ -45,6 +64,9 @@
 
 #pragma mark Protected
 
+/*!
+ @brief Wrap a <code>MultiTermQuery</code> as a Filter.
+ */
 - (instancetype)initWithOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query;
 
 @end
@@ -57,8 +79,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchMultiTermQueryWrapperFilter_initWith
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchMultiTermQueryWrapperFilter *new_OrgApacheLuceneSearchMultiTermQueryWrapperFilter_initWithOrgApacheLuceneSearchMultiTermQuery_(OrgApacheLuceneSearchMultiTermQuery *query) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchMultiTermQueryWrapperFilter *create_OrgApacheLuceneSearchMultiTermQueryWrapperFilter_initWithOrgApacheLuceneSearchMultiTermQuery_(OrgApacheLuceneSearchMultiTermQuery *query);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiTermQueryWrapperFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchMultiTermQueryWrapperFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchMultiTermQueryWrapperFilter")

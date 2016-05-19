@@ -33,13 +33,13 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlBuildersDisjunctionMaxQueryBuil
 
 - (OrgApacheLuceneSearchQuery *)getQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e {
   jfloat tieBreaker = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withFloat_(e, @"tieBreaker", 0.0f);
-  OrgApacheLuceneSearchDisjunctionMaxQuery *dq = [new_OrgApacheLuceneSearchDisjunctionMaxQuery_initWithFloat_(tieBreaker) autorelease];
+  OrgApacheLuceneSearchDisjunctionMaxQuery *dq = create_OrgApacheLuceneSearchDisjunctionMaxQuery_initWithFloat_(tieBreaker);
   [dq setBoostWithFloat:OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withFloat_(e, @"boost", 1.0f)];
   id<OrgW3cDomNodeList> nl = [((id<OrgW3cDomElement>) nil_chk(e)) getChildNodes];
   for (jint i = 0; i < [((id<OrgW3cDomNodeList>) nil_chk(nl)) getLength]; i++) {
     id<OrgW3cDomNode> node = [nl itemWithInt:i];
     if ([OrgW3cDomElement_class_() isInstance:node]) {
-      id<OrgW3cDomElement> queryElem = (id<OrgW3cDomElement>) check_protocol_cast(node, OrgW3cDomElement_class_());
+      id<OrgW3cDomElement> queryElem = (id<OrgW3cDomElement>) cast_check(node, OrgW3cDomElement_class_());
       OrgApacheLuceneSearchQuery *q = [((id<OrgApacheLuceneQueryparserXmlQueryBuilder>) nil_chk(factory_)) getQueryWithOrgW3cDomElement:queryElem];
       [dq addWithOrgApacheLuceneSearchQuery:q];
     }
@@ -72,9 +72,11 @@ void OrgApacheLuceneQueryparserXmlBuildersDisjunctionMaxQueryBuilder_initWithOrg
 }
 
 OrgApacheLuceneQueryparserXmlBuildersDisjunctionMaxQueryBuilder *new_OrgApacheLuceneQueryparserXmlBuildersDisjunctionMaxQueryBuilder_initWithOrgApacheLuceneQueryparserXmlQueryBuilder_(id<OrgApacheLuceneQueryparserXmlQueryBuilder> factory) {
-  OrgApacheLuceneQueryparserXmlBuildersDisjunctionMaxQueryBuilder *self = [OrgApacheLuceneQueryparserXmlBuildersDisjunctionMaxQueryBuilder alloc];
-  OrgApacheLuceneQueryparserXmlBuildersDisjunctionMaxQueryBuilder_initWithOrgApacheLuceneQueryparserXmlQueryBuilder_(self, factory);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserXmlBuildersDisjunctionMaxQueryBuilder, initWithOrgApacheLuceneQueryparserXmlQueryBuilder_, factory)
+}
+
+OrgApacheLuceneQueryparserXmlBuildersDisjunctionMaxQueryBuilder *create_OrgApacheLuceneQueryparserXmlBuildersDisjunctionMaxQueryBuilder_initWithOrgApacheLuceneQueryparserXmlQueryBuilder_(id<OrgApacheLuceneQueryparserXmlQueryBuilder> factory) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserXmlBuildersDisjunctionMaxQueryBuilder, initWithOrgApacheLuceneQueryparserXmlQueryBuilder_, factory)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserXmlBuildersDisjunctionMaxQueryBuilder)

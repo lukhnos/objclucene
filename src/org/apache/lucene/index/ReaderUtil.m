@@ -21,6 +21,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexReaderUtil_init(OrgApach
 
 __attribute__((unused)) static OrgApacheLuceneIndexReaderUtil *new_OrgApacheLuceneIndexReaderUtil_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexReaderUtil *create_OrgApacheLuceneIndexReaderUtil_init();
+
 @implementation OrgApacheLuceneIndexReaderUtil
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -49,7 +51,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "init", "ReaderUtil", NULL, 0x2, NULL, NULL },
     { "getTopLevelContextWithOrgApacheLuceneIndexIndexReaderContext:", "getTopLevelContext", "Lorg.apache.lucene.index.IndexReaderContext;", 0x9, NULL, NULL },
     { "subIndexWithInt:withIntArray:", "subIndex", "I", 0x9, NULL, NULL },
-    { "subIndexWithInt:withJavaUtilList:", "subIndex", "I", 0x9, NULL, NULL },
+    { "subIndexWithInt:withJavaUtilList:", "subIndex", "I", 0x9, NULL, "(ILjava/util/List<Lorg/apache/lucene/index/LeafReaderContext;>;)I" },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneIndexReaderUtil = { 2, "ReaderUtil", "org.apache.lucene.index", NULL, 0x11, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexReaderUtil;
@@ -62,9 +64,11 @@ void OrgApacheLuceneIndexReaderUtil_init(OrgApacheLuceneIndexReaderUtil *self) {
 }
 
 OrgApacheLuceneIndexReaderUtil *new_OrgApacheLuceneIndexReaderUtil_init() {
-  OrgApacheLuceneIndexReaderUtil *self = [OrgApacheLuceneIndexReaderUtil alloc];
-  OrgApacheLuceneIndexReaderUtil_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexReaderUtil, init)
+}
+
+OrgApacheLuceneIndexReaderUtil *create_OrgApacheLuceneIndexReaderUtil_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexReaderUtil, init)
 }
 
 OrgApacheLuceneIndexIndexReaderContext *OrgApacheLuceneIndexReaderUtil_getTopLevelContextWithOrgApacheLuceneIndexIndexReaderContext_(OrgApacheLuceneIndexIndexReaderContext *context) {

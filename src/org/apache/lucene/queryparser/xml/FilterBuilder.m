@@ -3,12 +3,8 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/xml/FilterBuilder.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/queryparser/xml/FilterBuilder.h"
-#include "org/apache/lucene/queryparser/xml/ParserException.h"
-#include "org/apache/lucene/search/Filter.h"
-#include "org/w3c/dom/Element.h"
 
 @interface OrgApacheLuceneQueryparserXmlFilterBuilder : NSObject
 

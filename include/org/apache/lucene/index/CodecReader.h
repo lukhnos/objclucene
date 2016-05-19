@@ -5,23 +5,23 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexCodecReader_INCLUDE_ALL")
-#if OrgApacheLuceneIndexCodecReader_RESTRICT
-#define OrgApacheLuceneIndexCodecReader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexCodecReader")
+#ifdef RESTRICT_OrgApacheLuceneIndexCodecReader
+#define INCLUDE_ALL_OrgApacheLuceneIndexCodecReader 0
 #else
-#define OrgApacheLuceneIndexCodecReader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexCodecReader 1
 #endif
-#undef OrgApacheLuceneIndexCodecReader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexCodecReader
 
-#if !defined (_OrgApacheLuceneIndexCodecReader_) && (OrgApacheLuceneIndexCodecReader_INCLUDE_ALL || OrgApacheLuceneIndexCodecReader_INCLUDE)
-#define _OrgApacheLuceneIndexCodecReader_
+#if !defined (OrgApacheLuceneIndexCodecReader_) && (INCLUDE_ALL_OrgApacheLuceneIndexCodecReader || defined(INCLUDE_OrgApacheLuceneIndexCodecReader))
+#define OrgApacheLuceneIndexCodecReader_
 
-#define OrgApacheLuceneIndexLeafReader_RESTRICT 1
-#define OrgApacheLuceneIndexLeafReader_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexLeafReader 1
+#define INCLUDE_OrgApacheLuceneIndexLeafReader 1
 #include "org/apache/lucene/index/LeafReader.h"
 
-#define OrgApacheLuceneUtilAccountable_RESTRICT 1
-#define OrgApacheLuceneUtilAccountable_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAccountable 1
+#define INCLUDE_OrgApacheLuceneUtilAccountable 1
 #include "org/apache/lucene/util/Accountable.h"
 
 @class OrgApacheLuceneCodecsDocValuesProducer;
@@ -40,6 +40,9 @@
 @protocol JavaUtilCollection;
 @protocol OrgApacheLuceneUtilBits;
 
+/*!
+ @brief LeafReader implemented by codec APIs.
+ */
 @interface OrgApacheLuceneIndexCodecReader : OrgApacheLuceneIndexLeafReader < OrgApacheLuceneUtilAccountable > {
  @public
   OrgApacheLuceneUtilCloseableThreadLocal *docValuesLocal_;
@@ -62,16 +65,31 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 - (id<OrgApacheLuceneUtilBits>)getDocsWithFieldWithNSString:(NSString *)field;
 
+/*!
+ @brief Expert: retrieve underlying DocValuesProducer
+  
+ */
 - (OrgApacheLuceneCodecsDocValuesProducer *)getDocValuesReader;
 
+/*!
+ @brief Expert: retrieve thread-private StoredFieldsReader
+  
+ */
 - (OrgApacheLuceneCodecsStoredFieldsReader *)getFieldsReader;
 
+/*!
+ @brief Expert: retrieve underlying NormsProducer
+  
+ */
 - (OrgApacheLuceneCodecsNormsProducer *)getNormsReader;
 
 - (OrgApacheLuceneIndexNumericDocValues *)getNormValuesWithNSString:(NSString *)field;
 
 - (OrgApacheLuceneIndexNumericDocValues *)getNumericDocValuesWithNSString:(NSString *)field;
 
+/*!
+ @brief Expert: retrieve underlying FieldsProducer
+ */
 - (OrgApacheLuceneCodecsFieldsProducer *)getPostingsReader;
 
 - (OrgApacheLuceneIndexSortedDocValues *)getSortedDocValuesWithNSString:(NSString *)field;
@@ -82,12 +100,21 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 - (OrgApacheLuceneIndexFields *)getTermVectorsWithInt:(jint)docID;
 
+/*!
+ @brief Expert: retrieve thread-private TermVectorsReader
+  
+ */
 - (OrgApacheLuceneCodecsTermVectorsReader *)getTermVectorsReader;
 
 - (jlong)ramBytesUsed;
 
 #pragma mark Protected
 
+/*!
+ @brief Sole constructor.
+ (For invocation by subclass 
+ constructors, typically implicit.) 
+ */
 - (instancetype)init;
 
 - (void)doClose;
@@ -106,4 +133,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCodecReader)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexCodecReader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexCodecReader")

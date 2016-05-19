@@ -5,25 +5,28 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchPayloadsPayloadSpanCollector_INCLUDE_ALL")
-#if OrgApacheLuceneSearchPayloadsPayloadSpanCollector_RESTRICT
-#define OrgApacheLuceneSearchPayloadsPayloadSpanCollector_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPayloadSpanCollector")
+#ifdef RESTRICT_OrgApacheLuceneSearchPayloadsPayloadSpanCollector
+#define INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPayloadSpanCollector 0
 #else
-#define OrgApacheLuceneSearchPayloadsPayloadSpanCollector_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPayloadSpanCollector 1
 #endif
-#undef OrgApacheLuceneSearchPayloadsPayloadSpanCollector_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchPayloadsPayloadSpanCollector
 
-#if !defined (_OrgApacheLuceneSearchPayloadsPayloadSpanCollector_) && (OrgApacheLuceneSearchPayloadsPayloadSpanCollector_INCLUDE_ALL || OrgApacheLuceneSearchPayloadsPayloadSpanCollector_INCLUDE)
-#define _OrgApacheLuceneSearchPayloadsPayloadSpanCollector_
+#if !defined (OrgApacheLuceneSearchPayloadsPayloadSpanCollector_) && (INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPayloadSpanCollector || defined(INCLUDE_OrgApacheLuceneSearchPayloadsPayloadSpanCollector))
+#define OrgApacheLuceneSearchPayloadsPayloadSpanCollector_
 
-#define OrgApacheLuceneSearchSpansSpanCollector_RESTRICT 1
-#define OrgApacheLuceneSearchSpansSpanCollector_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSpansSpanCollector 1
+#define INCLUDE_OrgApacheLuceneSearchSpansSpanCollector 1
 #include "org/apache/lucene/search/spans/SpanCollector.h"
 
 @class OrgApacheLuceneIndexPostingsEnum;
 @class OrgApacheLuceneIndexTerm;
 @protocol JavaUtilCollection;
 
+/*!
+ @brief SpanCollector for collecting payloads
+ */
 @interface OrgApacheLuceneSearchPayloadsPayloadSpanCollector : NSObject < OrgApacheLuceneSearchSpansSpanCollector >
 
 #pragma mark Public
@@ -34,6 +37,9 @@
                                                 withInt:(jint)position
                            withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
 
+/*!
+ @return the collected payloads
+ */
 - (id<JavaUtilCollection>)getPayloads;
 
 - (void)reset;
@@ -46,8 +52,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchPayloadsPayloadSpanCollector_init(Or
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsPayloadSpanCollector *new_OrgApacheLuceneSearchPayloadsPayloadSpanCollector_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsPayloadSpanCollector *create_OrgApacheLuceneSearchPayloadsPayloadSpanCollector_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsPayloadSpanCollector)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchPayloadsPayloadSpanCollector_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPayloadSpanCollector")

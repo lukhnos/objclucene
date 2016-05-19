@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSloppyPhraseScorer_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSloppyPhraseScorer_RESTRICT
-#define OrgApacheLuceneSearchSloppyPhraseScorer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSloppyPhraseScorer")
+#ifdef RESTRICT_OrgApacheLuceneSearchSloppyPhraseScorer
+#define INCLUDE_ALL_OrgApacheLuceneSearchSloppyPhraseScorer 0
 #else
-#define OrgApacheLuceneSearchSloppyPhraseScorer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSloppyPhraseScorer 1
 #endif
-#undef OrgApacheLuceneSearchSloppyPhraseScorer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSloppyPhraseScorer
 
-#if !defined (_OrgApacheLuceneSearchSloppyPhraseScorer_) && (OrgApacheLuceneSearchSloppyPhraseScorer_INCLUDE_ALL || OrgApacheLuceneSearchSloppyPhraseScorer_INCLUDE)
-#define _OrgApacheLuceneSearchSloppyPhraseScorer_
+#if !defined (OrgApacheLuceneSearchSloppyPhraseScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchSloppyPhraseScorer || defined(INCLUDE_OrgApacheLuceneSearchSloppyPhraseScorer))
+#define OrgApacheLuceneSearchSloppyPhraseScorer_
 
-#define OrgApacheLuceneSearchScorer_RESTRICT 1
-#define OrgApacheLuceneSearchScorer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchScorer 1
+#define INCLUDE_OrgApacheLuceneSearchScorer 1
 #include "org/apache/lucene/search/Scorer.h"
 
 @class IOSObjectArray;
@@ -66,8 +66,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSloppyPhraseScorer_initWithOrgApache
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSloppyPhraseScorer *new_OrgApacheLuceneSearchSloppyPhraseScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchPhraseQuery_PostingsAndFreqArray_withInt_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_withBoolean_(OrgApacheLuceneSearchWeight *weight, IOSObjectArray *postings, jint slop, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer, jboolean needsScores) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSloppyPhraseScorer *create_OrgApacheLuceneSearchSloppyPhraseScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchPhraseQuery_PostingsAndFreqArray_withInt_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_withBoolean_(OrgApacheLuceneSearchWeight *weight, IOSObjectArray *postings, jint slop, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer, jboolean needsScores);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSloppyPhraseScorer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSloppyPhraseScorer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSloppyPhraseScorer")

@@ -93,9 +93,11 @@ void OrgApacheLuceneBkdtreeHeapLatLonReader_initWithIntArray_withIntArray_withLo
 }
 
 OrgApacheLuceneBkdtreeHeapLatLonReader *new_OrgApacheLuceneBkdtreeHeapLatLonReader_initWithIntArray_withIntArray_withLongArray_withIntArray_withInt_withInt_(IOSIntArray *latEncs, IOSIntArray *lonEncs, IOSLongArray *ords, IOSIntArray *docIDs, jint start, jint end) {
-  OrgApacheLuceneBkdtreeHeapLatLonReader *self = [OrgApacheLuceneBkdtreeHeapLatLonReader alloc];
-  OrgApacheLuceneBkdtreeHeapLatLonReader_initWithIntArray_withIntArray_withLongArray_withIntArray_withInt_withInt_(self, latEncs, lonEncs, ords, docIDs, start, end);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneBkdtreeHeapLatLonReader, initWithIntArray_withIntArray_withLongArray_withIntArray_withInt_withInt_, latEncs, lonEncs, ords, docIDs, start, end)
+}
+
+OrgApacheLuceneBkdtreeHeapLatLonReader *create_OrgApacheLuceneBkdtreeHeapLatLonReader_initWithIntArray_withIntArray_withLongArray_withIntArray_withInt_withInt_(IOSIntArray *latEncs, IOSIntArray *lonEncs, IOSLongArray *ords, IOSIntArray *docIDs, jint start, jint end) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneBkdtreeHeapLatLonReader, initWithIntArray_withIntArray_withLongArray_withIntArray_withInt_withInt_, latEncs, lonEncs, ords, docIDs, start, end)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneBkdtreeHeapLatLonReader)

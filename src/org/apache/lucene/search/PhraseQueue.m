@@ -31,7 +31,7 @@
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithInt:", "PhraseQueue", NULL, 0x0, NULL, NULL },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x14, NULL, NULL },
+    { "lessThanWithId:withId:", "lessThan", "Z", 0x14, NULL, "(Lorg/apache/lucene/search/PhrasePositions;Lorg/apache/lucene/search/PhrasePositions;)Z" },
   };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.PhrasePositions;"};
   static const J2ObjcClassInfo _OrgApacheLuceneSearchPhraseQueue = { 2, "PhraseQueue", "org.apache.lucene.search", NULL, 0x10, 2, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/search/PhrasePositions;>;" };
@@ -45,9 +45,11 @@ void OrgApacheLuceneSearchPhraseQueue_initWithInt_(OrgApacheLuceneSearchPhraseQu
 }
 
 OrgApacheLuceneSearchPhraseQueue *new_OrgApacheLuceneSearchPhraseQueue_initWithInt_(jint size) {
-  OrgApacheLuceneSearchPhraseQueue *self = [OrgApacheLuceneSearchPhraseQueue alloc];
-  OrgApacheLuceneSearchPhraseQueue_initWithInt_(self, size);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchPhraseQueue, initWithInt_, size)
+}
+
+OrgApacheLuceneSearchPhraseQueue *create_OrgApacheLuceneSearchPhraseQueue_initWithInt_(jint size) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchPhraseQueue, initWithInt_, size)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPhraseQueue)

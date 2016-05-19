@@ -5,28 +5,31 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneStoreInputStreamDataInput_INCLUDE_ALL")
-#if OrgApacheLuceneStoreInputStreamDataInput_RESTRICT
-#define OrgApacheLuceneStoreInputStreamDataInput_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneStoreInputStreamDataInput")
+#ifdef RESTRICT_OrgApacheLuceneStoreInputStreamDataInput
+#define INCLUDE_ALL_OrgApacheLuceneStoreInputStreamDataInput 0
 #else
-#define OrgApacheLuceneStoreInputStreamDataInput_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneStoreInputStreamDataInput 1
 #endif
-#undef OrgApacheLuceneStoreInputStreamDataInput_RESTRICT
+#undef RESTRICT_OrgApacheLuceneStoreInputStreamDataInput
 
-#if !defined (_OrgApacheLuceneStoreInputStreamDataInput_) && (OrgApacheLuceneStoreInputStreamDataInput_INCLUDE_ALL || OrgApacheLuceneStoreInputStreamDataInput_INCLUDE)
-#define _OrgApacheLuceneStoreInputStreamDataInput_
+#if !defined (OrgApacheLuceneStoreInputStreamDataInput_) && (INCLUDE_ALL_OrgApacheLuceneStoreInputStreamDataInput || defined(INCLUDE_OrgApacheLuceneStoreInputStreamDataInput))
+#define OrgApacheLuceneStoreInputStreamDataInput_
 
-#define OrgApacheLuceneStoreDataInput_RESTRICT 1
-#define OrgApacheLuceneStoreDataInput_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreDataInput 1
+#define INCLUDE_OrgApacheLuceneStoreDataInput 1
 #include "org/apache/lucene/store/DataInput.h"
 
-#define JavaIoCloseable_RESTRICT 1
-#define JavaIoCloseable_INCLUDE 1
+#define RESTRICT_JavaIoCloseable 1
+#define INCLUDE_JavaIoCloseable 1
 #include "java/io/Closeable.h"
 
 @class IOSByteArray;
 @class JavaIoInputStream;
 
+/*!
+ @brief A <code>DataInput</code> wrapping a plain <code>InputStream</code>.
+ */
 @interface OrgApacheLuceneStoreInputStreamDataInput : OrgApacheLuceneStoreDataInput < JavaIoCloseable >
 
 #pragma mark Public
@@ -49,8 +52,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneStoreInputStreamDataInput_initWithJavaIoIn
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreInputStreamDataInput *new_OrgApacheLuceneStoreInputStreamDataInput_initWithJavaIoInputStream_(JavaIoInputStream *is) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneStoreInputStreamDataInput *create_OrgApacheLuceneStoreInputStreamDataInput_initWithJavaIoInputStream_(JavaIoInputStream *is);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreInputStreamDataInput)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneStoreInputStreamDataInput_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreInputStreamDataInput")

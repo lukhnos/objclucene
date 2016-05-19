@@ -37,14 +37,14 @@
 
 - (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
                                  withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext {
-  OrgApacheLuceneSearchIndexSearcher *searcher = (OrgApacheLuceneSearchIndexSearcher *) check_class_cast([((id<JavaUtilMap>) nil_chk(context)) getWithId:@"searcher"], [OrgApacheLuceneSearchIndexSearcher class]);
+  OrgApacheLuceneSearchIndexSearcher *searcher = (OrgApacheLuceneSearchIndexSearcher *) cast_chk([((id<JavaUtilMap>) nil_chk(context)) getWithId:@"searcher"], [OrgApacheLuceneSearchIndexSearcher class]);
   OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *sim = OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource_asTFIDFWithOrgApacheLuceneSearchSimilaritiesSimilarity_withNSString_([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getSimilarityWithBoolean:true], field_);
   if (sim == nil) {
-    @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(@"requires a TFIDFSimilarity (such as DefaultSimilarity)") autorelease];
+    @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"requires a TFIDFSimilarity (such as DefaultSimilarity)");
   }
-  jint docfreq = [((OrgApacheLuceneIndexIndexReader *) nil_chk([searcher getIndexReader])) docFreqWithOrgApacheLuceneIndexTerm:[new_OrgApacheLuceneIndexTerm_initWithNSString_withOrgApacheLuceneUtilBytesRef_(indexedField_, indexedBytes_) autorelease]];
-  jfloat idf = [((OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *) nil_chk(sim)) idfWithLong:docfreq withLong:[((OrgApacheLuceneIndexIndexReader *) nil_chk([searcher getIndexReader])) maxDoc]];
-  return [new_OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues_initWithDouble_withOrgApacheLuceneQueriesFunctionValueSource_(idf, self) autorelease];
+  jint docfreq = [((OrgApacheLuceneIndexIndexReader *) nil_chk([searcher getIndexReader])) docFreqWithOrgApacheLuceneIndexTerm:create_OrgApacheLuceneIndexTerm_initWithNSString_withOrgApacheLuceneUtilBytesRef_(indexedField_, indexedBytes_)];
+  jfloat idf = [sim idfWithLong:docfreq withLong:[((OrgApacheLuceneIndexIndexReader *) nil_chk([searcher getIndexReader])) maxDoc]];
+  return create_OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues_initWithDouble_withOrgApacheLuceneQueriesFunctionValueSource_(idf, self);
 }
 
 + (OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *)asTFIDFWithOrgApacheLuceneSearchSimilaritiesSimilarity:(OrgApacheLuceneSearchSimilaritiesSimilarity *)sim
@@ -70,18 +70,20 @@ void OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource_initWithNSString_wi
 }
 
 OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource_initWithNSString_withNSString_withNSString_withOrgApacheLuceneUtilBytesRef_(NSString *field, NSString *val, NSString *indexedField, OrgApacheLuceneUtilBytesRef *indexedBytes) {
-  OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource *self = [OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource alloc];
-  OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource_initWithNSString_withNSString_withNSString_withOrgApacheLuceneUtilBytesRef_(self, field, val, indexedField, indexedBytes);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource, initWithNSString_withNSString_withNSString_withOrgApacheLuceneUtilBytesRef_, field, val, indexedField, indexedBytes)
+}
+
+OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource *create_OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource_initWithNSString_withNSString_withNSString_withOrgApacheLuceneUtilBytesRef_(NSString *field, NSString *val, NSString *indexedField, OrgApacheLuceneUtilBytesRef *indexedBytes) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource, initWithNSString_withNSString_withNSString_withOrgApacheLuceneUtilBytesRef_, field, val, indexedField, indexedBytes)
 }
 
 OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource_asTFIDFWithOrgApacheLuceneSearchSimilaritiesSimilarity_withNSString_(OrgApacheLuceneSearchSimilaritiesSimilarity *sim, NSString *field) {
   OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource_initialize();
   while ([sim isKindOfClass:[OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper class]]) {
-    sim = [((OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper *) nil_chk(((OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper *) check_class_cast(sim, [OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper class])))) getWithNSString:field];
+    sim = [((OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper *) nil_chk(((OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper *) cast_chk(sim, [OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper class])))) getWithNSString:field];
   }
   if ([sim isKindOfClass:[OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity class]]) {
-    return (OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *) check_class_cast(sim, [OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity class]);
+    return (OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *) cast_chk(sim, [OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity class]);
   }
   else {
     return nil;

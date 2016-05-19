@@ -5,25 +5,33 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_RESTRICT
-#define OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestAnalyzingFSTUtil")
+#ifdef RESTRICT_OrgApacheLuceneSearchSuggestAnalyzingFSTUtil
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestAnalyzingFSTUtil 0
 #else
-#define OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestAnalyzingFSTUtil 1
 #endif
-#undef OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSuggestAnalyzingFSTUtil
 
-#if !defined (_OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_) && (OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_INCLUDE_ALL || OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_INCLUDE)
-#define _OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_
+#if !defined (OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestAnalyzingFSTUtil || defined(INCLUDE_OrgApacheLuceneSearchSuggestAnalyzingFSTUtil))
+#define OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_
 
 @class OrgApacheLuceneUtilAutomatonAutomaton;
 @class OrgApacheLuceneUtilFstFST;
 @protocol JavaUtilList;
 
+/*!
+ @brief Exposes a utility method to enumerate all paths
+ intersecting an <code>Automaton</code> with an <code>FST</code>.
+ */
 @interface OrgApacheLuceneSearchSuggestAnalyzingFSTUtil : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Enumerates all minimal prefix paths in the automaton that also intersect the FST,
+ accumulating the FST end node and output for each path.
+ */
 + (id<JavaUtilList>)intersectPrefixPathsWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
                                                     withOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst;
 
@@ -37,22 +45,40 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestAnalyzingFSTUtil)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path_) && (OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_INCLUDE_ALL || OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path_INCLUDE)
-#define _OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path_
+#if !defined (OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestAnalyzingFSTUtil || defined(INCLUDE_OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path))
+#define OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path_
 
 @class OrgApacheLuceneUtilFstFST_Arc;
 @class OrgApacheLuceneUtilIntsRefBuilder;
 
+/*!
+ @brief Holds a pair (automaton, fst) of states and accumulated output in the intersected machine.
+ */
 @interface OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path : NSObject {
  @public
+  /*!
+   @brief Node in the automaton where path ends:
+   */
   jint state_;
+  /*!
+   @brief Node in the FST where path ends:
+   */
   OrgApacheLuceneUtilFstFST_Arc *fstNode_;
+  /*!
+   @brief Output of the path so far:
+   */
   id output_;
+  /*!
+   @brief Input of the path so far:
+   */
   OrgApacheLuceneUtilIntsRefBuilder *input_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ */
 - (instancetype)initWithInt:(jint)state
 withOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)fstNode
                      withId:(id)output
@@ -70,8 +96,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path_initWit
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path *new_OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path_initWithInt_withOrgApacheLuceneUtilFstFST_Arc_withId_withOrgApacheLuceneUtilIntsRefBuilder_(jint state, OrgApacheLuceneUtilFstFST_Arc *fstNode, id output, OrgApacheLuceneUtilIntsRefBuilder *input) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path *create_OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path_initWithInt_withOrgApacheLuceneUtilFstFST_Arc_withId_withOrgApacheLuceneUtilIntsRefBuilder_(jint state, OrgApacheLuceneUtilFstFST_Arc *fstNode, id output, OrgApacheLuceneUtilIntsRefBuilder *input);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestAnalyzingFSTUtil")

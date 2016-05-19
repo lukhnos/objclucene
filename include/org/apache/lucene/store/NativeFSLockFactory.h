@@ -5,25 +5,62 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneStoreNativeFSLockFactory_INCLUDE_ALL")
-#if OrgApacheLuceneStoreNativeFSLockFactory_RESTRICT
-#define OrgApacheLuceneStoreNativeFSLockFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneStoreNativeFSLockFactory")
+#ifdef RESTRICT_OrgApacheLuceneStoreNativeFSLockFactory
+#define INCLUDE_ALL_OrgApacheLuceneStoreNativeFSLockFactory 0
 #else
-#define OrgApacheLuceneStoreNativeFSLockFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneStoreNativeFSLockFactory 1
 #endif
-#undef OrgApacheLuceneStoreNativeFSLockFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneStoreNativeFSLockFactory
 
-#if !defined (_OrgApacheLuceneStoreNativeFSLockFactory_) && (OrgApacheLuceneStoreNativeFSLockFactory_INCLUDE_ALL || OrgApacheLuceneStoreNativeFSLockFactory_INCLUDE)
-#define _OrgApacheLuceneStoreNativeFSLockFactory_
+#if !defined (OrgApacheLuceneStoreNativeFSLockFactory_) && (INCLUDE_ALL_OrgApacheLuceneStoreNativeFSLockFactory || defined(INCLUDE_OrgApacheLuceneStoreNativeFSLockFactory))
+#define OrgApacheLuceneStoreNativeFSLockFactory_
 
-#define OrgApacheLuceneStoreFSLockFactory_RESTRICT 1
-#define OrgApacheLuceneStoreFSLockFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreFSLockFactory 1
+#define INCLUDE_OrgApacheLuceneStoreFSLockFactory 1
 #include "org/apache/lucene/store/FSLockFactory.h"
 
 @class OrgApacheLuceneStoreFSDirectory;
 @class OrgApacheLuceneStoreLock;
 
+/*!
+ @brief <p>Implements <code>LockFactory</code> using native OS file
+ locks.
+ Note that because this LockFactory relies on
+ java.nio.* APIs for locking, any problems with those APIs
+ will cause locking to fail.  Specifically, on certain NFS
+ environments the java.nio.* locks will fail (the lock can
+ incorrectly be double acquired) whereas <code>SimpleFSLockFactory</code>
+  worked perfectly in those same
+ environments.  For NFS based access to an index, it's
+ recommended that you try <code>SimpleFSLockFactory</code>
+ first and work around the one limitation that a lock file
+ could be left when the JVM exits abnormally.</p>
+ <p>The primary benefit of <code>NativeFSLockFactory</code> is
+ that locks (not the lock file itsself) will be properly
+ removed (by the OS) if the JVM has an abnormal exit.</p>
+ <p>Note that, unlike <code>SimpleFSLockFactory</code>, the existence of
+ leftover lock files in the filesystem is fine because the OS
+ will free the locks held against these files even though the
+ files still remain. Lucene will never actively remove the lock
+ files, so although you see them, the index may not be locked.</p>
+ <p>Special care needs to be taken if you change the locking
+ implementation: First be certain that no writer is in fact
+ writing to the index otherwise you can easily corrupt
+ your index. Be sure to do the LockFactory change on all Lucene
+ instances and clean up all leftover lock files before starting
+ the new configuration for the first time. Different implementations
+ can not work together!</p>
+ <p>If you suspect that this or any other LockFactory is
+ not working properly in your environment, you can easily
+ test it by using <code>VerifyingLockFactory</code>, <code>LockVerifyServer</code>
+  and <code>LockStressTest</code>.</p>
+ <p>This is a singleton, you have to use <code>INSTANCE</code>.
+ - seealso: LockFactory
+ */
 @interface OrgApacheLuceneStoreNativeFSLockFactory : OrgApacheLuceneStoreFSLockFactory
+
++ (OrgApacheLuceneStoreNativeFSLockFactory *)INSTANCE;
 
 #pragma mark Protected
 
@@ -34,18 +71,23 @@
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneStoreNativeFSLockFactory)
 
-FOUNDATION_EXPORT OrgApacheLuceneStoreNativeFSLockFactory *OrgApacheLuceneStoreNativeFSLockFactory_INSTANCE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneStoreNativeFSLockFactory, INSTANCE_, OrgApacheLuceneStoreNativeFSLockFactory *)
+/*!
+ @brief Singleton instance
+ */
+inline OrgApacheLuceneStoreNativeFSLockFactory *OrgApacheLuceneStoreNativeFSLockFactory_get_INSTANCE();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT OrgApacheLuceneStoreNativeFSLockFactory *OrgApacheLuceneStoreNativeFSLockFactory_INSTANCE;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneStoreNativeFSLockFactory, INSTANCE, OrgApacheLuceneStoreNativeFSLockFactory *)
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreNativeFSLockFactory)
 
 #endif
 
-#if !defined (_OrgApacheLuceneStoreNativeFSLockFactory_NativeFSLock_) && (OrgApacheLuceneStoreNativeFSLockFactory_INCLUDE_ALL || OrgApacheLuceneStoreNativeFSLockFactory_NativeFSLock_INCLUDE)
-#define _OrgApacheLuceneStoreNativeFSLockFactory_NativeFSLock_
+#if !defined (OrgApacheLuceneStoreNativeFSLockFactory_NativeFSLock_) && (INCLUDE_ALL_OrgApacheLuceneStoreNativeFSLockFactory || defined(INCLUDE_OrgApacheLuceneStoreNativeFSLockFactory_NativeFSLock))
+#define OrgApacheLuceneStoreNativeFSLockFactory_NativeFSLock_
 
-#define OrgApacheLuceneStoreLock_RESTRICT 1
-#define OrgApacheLuceneStoreLock_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreLock 1
+#define INCLUDE_OrgApacheLuceneStoreLock 1
 #include "org/apache/lucene/store/Lock.h"
 
 @class JavaNioChannelsFileChannel;
@@ -90,8 +132,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneStoreNativeFSLockFactory_NativeFSLock_init
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreNativeFSLockFactory_NativeFSLock *new_OrgApacheLuceneStoreNativeFSLockFactory_NativeFSLock_initWithJavaNioChannelsFileLock_withJavaNioChannelsFileChannel_withOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileAttributeFileTime_(JavaNioChannelsFileLock *lock, JavaNioChannelsFileChannel *channel, OrgLukhnosPortmobileFilePath *path, OrgLukhnosPortmobileFileAttributeFileTime *creationTime) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneStoreNativeFSLockFactory_NativeFSLock *create_OrgApacheLuceneStoreNativeFSLockFactory_NativeFSLock_initWithJavaNioChannelsFileLock_withJavaNioChannelsFileChannel_withOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileAttributeFileTime_(JavaNioChannelsFileLock *lock, JavaNioChannelsFileChannel *channel, OrgLukhnosPortmobileFilePath *path, OrgLukhnosPortmobileFileAttributeFileTime *creationTime);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreNativeFSLockFactory_NativeFSLock)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneStoreNativeFSLockFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreNativeFSLockFactory")

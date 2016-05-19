@@ -5,27 +5,34 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat_RESTRICT
-#define OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat")
+#ifdef RESTRICT_OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat 0
 #else
-#define OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat 1
 #endif
-#undef OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat
 
-#if !defined (_OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat_) && (OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat_INCLUDE_ALL || OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat_INCLUDE)
-#define _OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat_
+#if !defined (OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat || defined(INCLUDE_OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat))
+#define OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat_
 
-#define OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_RESTRICT 1
-#define OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat 1
+#define INCLUDE_OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat 1
 #include "org/apache/lucene/search/suggest/document/CompletionPostingsFormat.h"
 
 @class OrgApacheLuceneCodecsPostingsFormat;
 
+/*!
+ @brief <code>org.apache.lucene.search.suggest.document.CompletionPostingsFormat</code>
+ for <code>org.apache.lucene.codecs.lucene50.Lucene50PostingsFormat</code>
+ */
 @interface OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat : OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat
 
 #pragma mark Public
 
+/*!
+ @brief Sole Constructor
+ */
 - (instancetype)init;
 
 #pragma mark Protected
@@ -40,8 +47,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsF
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat *new_OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat *create_OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat")

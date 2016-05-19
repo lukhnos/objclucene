@@ -46,7 +46,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSimpleMergedSegmentWarmer, infoStream_, 
   jint docValuesCount = 0;
   jint normsCount = 0;
   for (OrgApacheLuceneIndexFieldInfo * __strong info in nil_chk([((OrgApacheLuceneIndexLeafReader *) nil_chk(reader)) getFieldInfos])) {
-    if ([((OrgApacheLuceneIndexFieldInfo *) nil_chk(info)) getIndexOptions] != JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE)) {
+    if ([((OrgApacheLuceneIndexFieldInfo *) nil_chk(info)) getIndexOptions] != JreLoadEnum(OrgApacheLuceneIndexIndexOptions, NONE)) {
       [reader termsWithNSString:info->name_];
       indexedCount++;
       if ([info hasNorms]) {
@@ -54,21 +54,21 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSimpleMergedSegmentWarmer, infoStream_, 
         normsCount++;
       }
     }
-    if ([info getDocValuesType] != JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, NONE)) {
+    if ([info getDocValuesType] != JreLoadEnum(OrgApacheLuceneIndexDocValuesType, NONE)) {
       switch ([[info getDocValuesType] ordinal]) {
-        case OrgApacheLuceneIndexDocValuesType_NUMERIC:
+        case OrgApacheLuceneIndexDocValuesType_Enum_NUMERIC:
         [reader getNumericDocValuesWithNSString:info->name_];
         break;
-        case OrgApacheLuceneIndexDocValuesType_BINARY:
+        case OrgApacheLuceneIndexDocValuesType_Enum_BINARY:
         [reader getBinaryDocValuesWithNSString:info->name_];
         break;
-        case OrgApacheLuceneIndexDocValuesType_SORTED:
+        case OrgApacheLuceneIndexDocValuesType_Enum_SORTED:
         [reader getSortedDocValuesWithNSString:info->name_];
         break;
-        case OrgApacheLuceneIndexDocValuesType_SORTED_NUMERIC:
+        case OrgApacheLuceneIndexDocValuesType_Enum_SORTED_NUMERIC:
         [reader getSortedNumericDocValuesWithNSString:info->name_];
         break;
-        case OrgApacheLuceneIndexDocValuesType_SORTED_SET:
+        case OrgApacheLuceneIndexDocValuesType_Enum_SORTED_SET:
         [reader getSortedSetDocValuesWithNSString:info->name_];
         break;
         default:
@@ -109,9 +109,11 @@ void OrgApacheLuceneIndexSimpleMergedSegmentWarmer_initWithOrgApacheLuceneUtilIn
 }
 
 OrgApacheLuceneIndexSimpleMergedSegmentWarmer *new_OrgApacheLuceneIndexSimpleMergedSegmentWarmer_initWithOrgApacheLuceneUtilInfoStream_(OrgApacheLuceneUtilInfoStream *infoStream) {
-  OrgApacheLuceneIndexSimpleMergedSegmentWarmer *self = [OrgApacheLuceneIndexSimpleMergedSegmentWarmer alloc];
-  OrgApacheLuceneIndexSimpleMergedSegmentWarmer_initWithOrgApacheLuceneUtilInfoStream_(self, infoStream);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSimpleMergedSegmentWarmer, initWithOrgApacheLuceneUtilInfoStream_, infoStream)
+}
+
+OrgApacheLuceneIndexSimpleMergedSegmentWarmer *create_OrgApacheLuceneIndexSimpleMergedSegmentWarmer_initWithOrgApacheLuceneUtilInfoStream_(OrgApacheLuceneUtilInfoStream *infoStream) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSimpleMergedSegmentWarmer, initWithOrgApacheLuceneUtilInfoStream_, infoStream)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSimpleMergedSegmentWarmer)

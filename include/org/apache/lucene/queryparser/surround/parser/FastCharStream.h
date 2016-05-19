@@ -5,24 +5,31 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserSurroundParserFastCharStream_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserSurroundParserFastCharStream_RESTRICT
-#define OrgApacheLuceneQueryparserSurroundParserFastCharStream_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundParserFastCharStream")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserSurroundParserFastCharStream
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundParserFastCharStream 0
 #else
-#define OrgApacheLuceneQueryparserSurroundParserFastCharStream_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundParserFastCharStream 1
 #endif
-#undef OrgApacheLuceneQueryparserSurroundParserFastCharStream_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserSurroundParserFastCharStream
 
-#if !defined (_OrgApacheLuceneQueryparserSurroundParserFastCharStream_) && (OrgApacheLuceneQueryparserSurroundParserFastCharStream_INCLUDE_ALL || OrgApacheLuceneQueryparserSurroundParserFastCharStream_INCLUDE)
-#define _OrgApacheLuceneQueryparserSurroundParserFastCharStream_
+#if !defined (OrgApacheLuceneQueryparserSurroundParserFastCharStream_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundParserFastCharStream || defined(INCLUDE_OrgApacheLuceneQueryparserSurroundParserFastCharStream))
+#define OrgApacheLuceneQueryparserSurroundParserFastCharStream_
 
-#define OrgApacheLuceneQueryparserSurroundParserCharStream_RESTRICT 1
-#define OrgApacheLuceneQueryparserSurroundParserCharStream_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserSurroundParserCharStream 1
+#define INCLUDE_OrgApacheLuceneQueryparserSurroundParserCharStream 1
 #include "org/apache/lucene/queryparser/surround/parser/CharStream.h"
 
 @class IOSCharArray;
 @class JavaIoReader;
 
+/*!
+ @brief An efficient implementation of JavaCC's CharStream interface.
+ <p>Note that
+ this does not do line-number counting, but instead keeps track of the
+ character position of the token in the input, as required by Lucene's <code>org.apache.lucene.analysis.Token</code>
+  API. 
+ */
 @interface OrgApacheLuceneQueryparserSurroundParserFastCharStream : NSObject < OrgApacheLuceneQueryparserSurroundParserCharStream > {
  @public
   IOSCharArray *buffer_;
@@ -35,6 +42,9 @@
 
 #pragma mark Public
 
+/*!
+ @brief Constructs from a Reader.
+ */
 - (instancetype)initWithJavaIoReader:(JavaIoReader *)r;
 
 - (void)backupWithInt:(jint)amount;
@@ -72,8 +82,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundParserFastCharStream_in
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundParserFastCharStream *new_OrgApacheLuceneQueryparserSurroundParserFastCharStream_initWithJavaIoReader_(JavaIoReader *r) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundParserFastCharStream *create_OrgApacheLuceneQueryparserSurroundParserFastCharStream_initWithJavaIoReader_(JavaIoReader *r);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundParserFastCharStream)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserSurroundParserFastCharStream_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundParserFastCharStream")

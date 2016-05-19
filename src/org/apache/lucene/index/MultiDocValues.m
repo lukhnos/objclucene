@@ -47,6 +47,9 @@
 
 @interface OrgApacheLuceneIndexMultiDocValues ()
 
+/*!
+ @brief No instantiation
+ */
 - (instancetype)init;
 
 @end
@@ -55,16 +58,25 @@ __attribute__((unused)) static void OrgApacheLuceneIndexMultiDocValues_init(OrgA
 
 __attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues *new_OrgApacheLuceneIndexMultiDocValues_init() NS_RETURNS_RETAINED;
 
-static jlong OrgApacheLuceneIndexMultiDocValues_OrdinalMap_BASE_RAM_BYTES_USED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexMultiDocValues_OrdinalMap, BASE_RAM_BYTES_USED_, jlong)
+__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues *create_OrgApacheLuceneIndexMultiDocValues_init();
+
+inline jlong OrgApacheLuceneIndexMultiDocValues_OrdinalMap_get_BASE_RAM_BYTES_USED();
+static jlong OrgApacheLuceneIndexMultiDocValues_OrdinalMap_BASE_RAM_BYTES_USED;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneIndexMultiDocValues_OrdinalMap, BASE_RAM_BYTES_USED, jlong)
 
 @interface OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap () {
  @public
   IOSIntArray *newToOld_, *oldToNew_;
 }
 
+/*!
+ @brief Build a map from an index into a sorted view of `weights` to an index into `weights`.
+ */
 + (IOSIntArray *)mapWithLongArray:(IOSLongArray *)weights;
 
+/*!
+ @brief Inverse the map.
+ */
 + (IOSIntArray *)inverseWithIntArray:(IOSIntArray *)map;
 
 @end
@@ -72,8 +84,9 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexMultiDocValues_OrdinalMap, BASE_R
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap, newToOld_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap, oldToNew_, IOSIntArray *)
 
-static jlong OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_BASE_RAM_BYTES_USED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap, BASE_RAM_BYTES_USED_, jlong)
+inline jlong OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_get_BASE_RAM_BYTES_USED();
+static jlong OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_BASE_RAM_BYTES_USED;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap, BASE_RAM_BYTES_USED, jlong)
 
 __attribute__((unused)) static IOSIntArray *OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_mapWithLongArray_(IOSLongArray *weights);
 
@@ -105,6 +118,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexMultiDocValues_OrdinalMa
 
 __attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1 *new_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1_initWithIntArray_withLongArray_(IOSIntArray *capture$0, IOSLongArray *capture$1) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1 *create_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1_initWithIntArray_withLongArray_(IOSIntArray *capture$0, IOSLongArray *capture$1);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1)
 
 @interface OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1 : OrgApacheLuceneUtilLongValues {
@@ -126,6 +141,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexMultiDocValues_OrdinalMa
 
 __attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1 *new_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1_initWithOrgApacheLuceneUtilPackedPackedInts_Mutable_(OrgApacheLuceneUtilPackedPackedInts_Mutable *capture$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1 *create_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1_initWithOrgApacheLuceneUtilPackedPackedInts_Mutable_(OrgApacheLuceneUtilPackedPackedInts_Mutable *capture$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1)
 
 @interface OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2 : OrgApacheLuceneUtilLongValues {
@@ -146,6 +163,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2, val$deltas
 __attribute__((unused)) static void OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2_initWithOrgApacheLuceneUtilPackedPackedLongValues_(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2 *self, OrgApacheLuceneUtilPackedPackedLongValues *capture$0);
 
 __attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2 *new_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2_initWithOrgApacheLuceneUtilPackedPackedLongValues_(OrgApacheLuceneUtilPackedPackedLongValues *capture$0) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2 *create_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2_initWithOrgApacheLuceneUtilPackedPackedLongValues_(OrgApacheLuceneUtilPackedPackedLongValues *capture$0);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2)
 
@@ -171,6 +190,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexMultiDocValues_$1_initWi
 
 __attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_$1 *new_OrgApacheLuceneIndexMultiDocValues_$1_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_$1 *create_OrgApacheLuceneIndexMultiDocValues_$1_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiDocValues_$1)
 
 @interface OrgApacheLuceneIndexMultiDocValues_$2 : OrgApacheLuceneIndexNumericDocValues {
@@ -195,6 +216,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexMultiDocValues_$2_initWi
 
 __attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_$2 *new_OrgApacheLuceneIndexMultiDocValues_$2_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_$2 *create_OrgApacheLuceneIndexMultiDocValues_$2_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiDocValues_$2)
 
 @interface OrgApacheLuceneIndexMultiDocValues_$3 : OrgApacheLuceneIndexBinaryDocValues {
@@ -218,6 +241,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiDocValues_$3, val$values_, IOSObjec
 __attribute__((unused)) static void OrgApacheLuceneIndexMultiDocValues_$3_initWithIntArray_withOrgApacheLuceneIndexBinaryDocValuesArray_(OrgApacheLuceneIndexMultiDocValues_$3 *self, IOSIntArray *capture$0, IOSObjectArray *capture$1);
 
 __attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_$3 *new_OrgApacheLuceneIndexMultiDocValues_$3_initWithIntArray_withOrgApacheLuceneIndexBinaryDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_$3 *create_OrgApacheLuceneIndexMultiDocValues_$3_initWithIntArray_withOrgApacheLuceneIndexBinaryDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiDocValues_$3)
 
@@ -248,6 +273,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiDocValues_$4, val$values_, IOSObjec
 __attribute__((unused)) static void OrgApacheLuceneIndexMultiDocValues_$4_initWithIntArray_withOrgApacheLuceneIndexSortedNumericDocValuesArray_(OrgApacheLuceneIndexMultiDocValues_$4 *self, IOSIntArray *capture$0, IOSObjectArray *capture$1);
 
 __attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_$4 *new_OrgApacheLuceneIndexMultiDocValues_$4_initWithIntArray_withOrgApacheLuceneIndexSortedNumericDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexMultiDocValues_$4 *create_OrgApacheLuceneIndexMultiDocValues_$4_initWithIntArray_withOrgApacheLuceneIndexSortedNumericDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiDocValues_$4)
 
@@ -318,9 +345,11 @@ void OrgApacheLuceneIndexMultiDocValues_init(OrgApacheLuceneIndexMultiDocValues 
 }
 
 OrgApacheLuceneIndexMultiDocValues *new_OrgApacheLuceneIndexMultiDocValues_init() {
-  OrgApacheLuceneIndexMultiDocValues *self = [OrgApacheLuceneIndexMultiDocValues alloc];
-  OrgApacheLuceneIndexMultiDocValues_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiDocValues, init)
+}
+
+OrgApacheLuceneIndexMultiDocValues *create_OrgApacheLuceneIndexMultiDocValues_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiDocValues, init)
 }
 
 OrgApacheLuceneIndexNumericDocValues *OrgApacheLuceneIndexMultiDocValues_getNormValuesWithOrgApacheLuceneIndexIndexReader_withNSString_(OrgApacheLuceneIndexIndexReader *r, NSString *field) {
@@ -354,7 +383,7 @@ OrgApacheLuceneIndexNumericDocValues *OrgApacheLuceneIndexMultiDocValues_getNorm
   }
   *IOSIntArray_GetRef(starts, size) = [r maxDoc];
   JreAssert((anyReal), (@"org/apache/lucene/index/MultiDocValues.java:93 condition failed: assert anyReal;"));
-  return [new_OrgApacheLuceneIndexMultiDocValues_$1_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(starts, values) autorelease];
+  return create_OrgApacheLuceneIndexMultiDocValues_$1_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(starts, values);
 }
 
 OrgApacheLuceneIndexNumericDocValues *OrgApacheLuceneIndexMultiDocValues_getNumericValuesWithOrgApacheLuceneIndexIndexReader_withNSString_(OrgApacheLuceneIndexIndexReader *r, NSString *field) {
@@ -387,7 +416,7 @@ OrgApacheLuceneIndexNumericDocValues *OrgApacheLuceneIndexMultiDocValues_getNume
     return nil;
   }
   else {
-    return [new_OrgApacheLuceneIndexMultiDocValues_$2_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(starts, values) autorelease];
+    return create_OrgApacheLuceneIndexMultiDocValues_$2_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(starts, values);
   }
 }
 
@@ -409,7 +438,7 @@ id<OrgApacheLuceneUtilBits> OrgApacheLuceneIndexMultiDocValues_getDocsWithFieldW
     OrgApacheLuceneIndexLeafReaderContext *context = [leaves getWithInt:i];
     id<OrgApacheLuceneUtilBits> v = [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) getDocsWithFieldWithNSString:field];
     if (v == nil) {
-      v = [new_OrgApacheLuceneUtilBits_MatchNoBits_initWithInt_([((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) maxDoc]) autorelease];
+      v = create_OrgApacheLuceneUtilBits_MatchNoBits_initWithInt_([((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) maxDoc]);
       anyMissing = true;
     }
     else {
@@ -426,10 +455,10 @@ id<OrgApacheLuceneUtilBits> OrgApacheLuceneIndexMultiDocValues_getDocsWithFieldW
     return nil;
   }
   else if (!anyMissing) {
-    return [new_OrgApacheLuceneUtilBits_MatchAllBits_initWithInt_([r maxDoc]) autorelease];
+    return create_OrgApacheLuceneUtilBits_MatchAllBits_initWithInt_([r maxDoc]);
   }
   else {
-    return [new_OrgApacheLuceneIndexMultiBits_initWithOrgApacheLuceneUtilBitsArray_withIntArray_withBoolean_(values, starts, false) autorelease];
+    return create_OrgApacheLuceneIndexMultiBits_initWithOrgApacheLuceneUtilBitsArray_withIntArray_withBoolean_(values, starts, false);
   }
 }
 
@@ -463,7 +492,7 @@ OrgApacheLuceneIndexBinaryDocValues *OrgApacheLuceneIndexMultiDocValues_getBinar
     return nil;
   }
   else {
-    return [new_OrgApacheLuceneIndexMultiDocValues_$3_initWithIntArray_withOrgApacheLuceneIndexBinaryDocValuesArray_(starts, values) autorelease];
+    return create_OrgApacheLuceneIndexMultiDocValues_$3_initWithIntArray_withOrgApacheLuceneIndexBinaryDocValuesArray_(starts, values);
   }
 }
 
@@ -497,7 +526,7 @@ OrgApacheLuceneIndexSortedNumericDocValues *OrgApacheLuceneIndexMultiDocValues_g
     return nil;
   }
   else {
-    return [new_OrgApacheLuceneIndexMultiDocValues_$4_initWithIntArray_withOrgApacheLuceneIndexSortedNumericDocValuesArray_(starts, values) autorelease];
+    return create_OrgApacheLuceneIndexMultiDocValues_$4_initWithIntArray_withOrgApacheLuceneIndexSortedNumericDocValuesArray_(starts, values);
   }
 }
 
@@ -532,7 +561,7 @@ OrgApacheLuceneIndexSortedDocValues *OrgApacheLuceneIndexMultiDocValues_getSorte
   }
   else {
     OrgApacheLuceneIndexMultiDocValues_OrdinalMap *mapping = OrgApacheLuceneIndexMultiDocValues_OrdinalMap_buildWithId_withOrgApacheLuceneIndexSortedDocValuesArray_withFloat_([r getCoreCacheKey], values, OrgApacheLuceneUtilPackedPackedInts_DEFAULT);
-    return [new_OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues_initWithOrgApacheLuceneIndexSortedDocValuesArray_withIntArray_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_(values, starts, mapping) autorelease];
+    return create_OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues_initWithOrgApacheLuceneIndexSortedDocValuesArray_withIntArray_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_(values, starts, mapping);
   }
 }
 
@@ -567,7 +596,7 @@ OrgApacheLuceneIndexSortedSetDocValues *OrgApacheLuceneIndexMultiDocValues_getSo
   }
   else {
     OrgApacheLuceneIndexMultiDocValues_OrdinalMap *mapping = OrgApacheLuceneIndexMultiDocValues_OrdinalMap_buildWithId_withOrgApacheLuceneIndexSortedSetDocValuesArray_withFloat_([r getCoreCacheKey], values, OrgApacheLuceneUtilPackedPackedInts_DEFAULT);
-    return [new_OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues_initWithOrgApacheLuceneIndexSortedSetDocValuesArray_withIntArray_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_(values, starts, mapping) autorelease];
+    return create_OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues_initWithOrgApacheLuceneIndexSortedSetDocValuesArray_withIntArray_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_(values, starts, mapping);
   }
 }
 
@@ -625,7 +654,7 @@ withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap:(OrgApacheLuceneInd
 }
 
 - (id<JavaUtilCollection>)getChildResources {
-  id<JavaUtilList> resources = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> resources = create_JavaUtilArrayList_init();
   [resources addWithId:OrgApacheLuceneUtilAccountables_namedAccountableWithNSString_withOrgApacheLuceneUtilAccountable_(@"global ord deltas", globalOrdDeltas_)];
   [resources addWithId:OrgApacheLuceneUtilAccountables_namedAccountableWithNSString_withOrgApacheLuceneUtilAccountable_(@"first segments", firstSegments_)];
   [resources addWithId:OrgApacheLuceneUtilAccountables_namedAccountableWithNSString_withOrgApacheLuceneUtilAccountable_(@"segment map", segmentMap_)];
@@ -643,7 +672,7 @@ withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap:(OrgApacheLuceneInd
 
 + (void)initialize {
   if (self == [OrgApacheLuceneIndexMultiDocValues_OrdinalMap class]) {
-    OrgApacheLuceneIndexMultiDocValues_OrdinalMap_BASE_RAM_BYTES_USED_ = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_class_());
+    OrgApacheLuceneIndexMultiDocValues_OrdinalMap_BASE_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_class_());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexMultiDocValues_OrdinalMap)
   }
 }
@@ -659,10 +688,10 @@ withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap:(OrgApacheLuceneInd
     { "getFirstSegmentNumberWithLong:", "getFirstSegmentNumber", "I", 0x1, NULL, NULL },
     { "getValueCount", NULL, "J", 0x1, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "BASE_RAM_BYTES_USED_", NULL, 0x1a, "J", &OrgApacheLuceneIndexMultiDocValues_OrdinalMap_BASE_RAM_BYTES_USED_, NULL, .constantValue.asLong = 0 },
+    { "BASE_RAM_BYTES_USED", "BASE_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneIndexMultiDocValues_OrdinalMap_BASE_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
     { "owner_", NULL, 0x10, "Ljava.lang.Object;", NULL, NULL, .constantValue.asLong = 0 },
     { "globalOrdDeltas_", NULL, 0x10, "Lorg.apache.lucene.util.packed.PackedLongValues;", NULL, NULL, .constantValue.asLong = 0 },
     { "firstSegments_", NULL, 0x10, "Lorg.apache.lucene.util.packed.PackedLongValues;", NULL, NULL, .constantValue.asLong = 0 },
@@ -702,10 +731,10 @@ OrgApacheLuceneIndexMultiDocValues_OrdinalMap *OrgApacheLuceneIndexMultiDocValue
 OrgApacheLuceneIndexMultiDocValues_OrdinalMap *OrgApacheLuceneIndexMultiDocValues_OrdinalMap_buildWithId_withOrgApacheLuceneIndexTermsEnumArray_withLongArray_withFloat_(id owner, IOSObjectArray *subs, IOSLongArray *weights, jfloat acceptableOverheadRatio) {
   OrgApacheLuceneIndexMultiDocValues_OrdinalMap_initialize();
   if (((IOSObjectArray *) nil_chk(subs))->size_ != ((IOSLongArray *) nil_chk(weights))->size_) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"subs and weights must have the same length") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"subs and weights must have the same length");
   }
-  OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap *segmentMap = [new_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_initWithLongArray_(weights) autorelease];
-  return [new_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_initWithId_withOrgApacheLuceneIndexTermsEnumArray_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_withFloat_(owner, subs, segmentMap, acceptableOverheadRatio) autorelease];
+  OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap *segmentMap = create_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_initWithLongArray_(weights);
+  return create_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_initWithId_withOrgApacheLuceneIndexTermsEnumArray_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_withFloat_(owner, subs, segmentMap, acceptableOverheadRatio);
 }
 
 void OrgApacheLuceneIndexMultiDocValues_OrdinalMap_initWithId_withOrgApacheLuceneIndexTermsEnumArray_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_withFloat_(OrgApacheLuceneIndexMultiDocValues_OrdinalMap *self, id owner, IOSObjectArray *subs, OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap *segmentMap, jfloat acceptableOverheadRatio) {
@@ -726,7 +755,7 @@ void OrgApacheLuceneIndexMultiDocValues_OrdinalMap_initWithId_withOrgApacheLucen
     IOSObjectArray_SetAndConsume(slices, i, new_OrgApacheLuceneIndexReaderSlice_initWithInt_withInt_withInt_(0, 0, i));
     IOSObjectArray_SetAndConsume(indexes, i, new_OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex_initWithOrgApacheLuceneIndexTermsEnum_withInt_(IOSObjectArray_Get(subs, [((OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap *) nil_chk(segmentMap)) newToOldWithInt:i]), i));
   }
-  OrgApacheLuceneIndexMultiTermsEnum *mte = [new_OrgApacheLuceneIndexMultiTermsEnum_initWithOrgApacheLuceneIndexReaderSliceArray_(slices) autorelease];
+  OrgApacheLuceneIndexMultiTermsEnum *mte = create_OrgApacheLuceneIndexMultiTermsEnum_initWithOrgApacheLuceneIndexReaderSliceArray_(slices);
   [mte resetWithOrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndexArray:indexes];
   jlong globalOrd = 0;
   while ([mte next] != nil) {
@@ -755,11 +784,11 @@ void OrgApacheLuceneIndexMultiDocValues_OrdinalMap_initWithId_withOrgApacheLucen
   JreStrongAssign(&self->firstSegments_, [((OrgApacheLuceneUtilPackedPackedLongValues_Builder *) nil_chk(firstSegments)) build]);
   JreStrongAssign(&self->globalOrdDeltas_, [((OrgApacheLuceneUtilPackedPackedLongValues_Builder *) nil_chk(globalOrdDeltas)) build]);
   JreStrongAssignAndConsume(&self->segmentToGlobalOrds_, [IOSObjectArray newArrayWithLength:subs->size_ type:OrgApacheLuceneUtilLongValues_class_()]);
-  jlong ramBytesUsed = OrgApacheLuceneIndexMultiDocValues_OrdinalMap_BASE_RAM_BYTES_USED_ + [((OrgApacheLuceneUtilPackedPackedLongValues *) nil_chk(self->globalOrdDeltas_)) ramBytesUsed] + [((OrgApacheLuceneUtilPackedPackedLongValues *) nil_chk(self->firstSegments_)) ramBytesUsed] + OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfWithNSObjectArray_(self->segmentToGlobalOrds_) + [((OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap *) nil_chk(segmentMap)) ramBytesUsed];
+  jlong ramBytesUsed = OrgApacheLuceneIndexMultiDocValues_OrdinalMap_BASE_RAM_BYTES_USED + [((OrgApacheLuceneUtilPackedPackedLongValues *) nil_chk(self->globalOrdDeltas_)) ramBytesUsed] + [((OrgApacheLuceneUtilPackedPackedLongValues *) nil_chk(self->firstSegments_)) ramBytesUsed] + OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfWithNSObjectArray_(self->segmentToGlobalOrds_) + [((OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap *) nil_chk(segmentMap)) ramBytesUsed];
   for (jint i = 0; i < ordDeltas->size_; ++i) {
     OrgApacheLuceneUtilPackedPackedLongValues *deltas = [((OrgApacheLuceneUtilPackedPackedLongValues_Builder *) nil_chk(IOSObjectArray_Get(ordDeltas, i))) build];
     if (IOSLongArray_Get(ordDeltaBits, i) == 0LL) {
-      IOSObjectArray_Set(self->segmentToGlobalOrds_, i, JreLoadStatic(OrgApacheLuceneUtilLongValues, IDENTITY_));
+      IOSObjectArray_Set(self->segmentToGlobalOrds_, i, JreLoadStatic(OrgApacheLuceneUtilLongValues, IDENTITY));
     }
     else {
       jint bitsRequired = IOSLongArray_Get(ordDeltaBits, i) < 0 ? 64 : OrgApacheLuceneUtilPackedPackedInts_bitsRequiredWithLong_(IOSLongArray_Get(ordDeltaBits, i));
@@ -787,9 +816,11 @@ void OrgApacheLuceneIndexMultiDocValues_OrdinalMap_initWithId_withOrgApacheLucen
 }
 
 OrgApacheLuceneIndexMultiDocValues_OrdinalMap *new_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_initWithId_withOrgApacheLuceneIndexTermsEnumArray_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_withFloat_(id owner, IOSObjectArray *subs, OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap *segmentMap, jfloat acceptableOverheadRatio) {
-  OrgApacheLuceneIndexMultiDocValues_OrdinalMap *self = [OrgApacheLuceneIndexMultiDocValues_OrdinalMap alloc];
-  OrgApacheLuceneIndexMultiDocValues_OrdinalMap_initWithId_withOrgApacheLuceneIndexTermsEnumArray_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_withFloat_(self, owner, subs, segmentMap, acceptableOverheadRatio);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiDocValues_OrdinalMap, initWithId_withOrgApacheLuceneIndexTermsEnumArray_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_withFloat_, owner, subs, segmentMap, acceptableOverheadRatio)
+}
+
+OrgApacheLuceneIndexMultiDocValues_OrdinalMap *create_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_initWithId_withOrgApacheLuceneIndexTermsEnumArray_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_withFloat_(id owner, IOSObjectArray *subs, OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap *segmentMap, jfloat acceptableOverheadRatio) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiDocValues_OrdinalMap, initWithId_withOrgApacheLuceneIndexTermsEnumArray_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_withFloat_, owner, subs, segmentMap, acceptableOverheadRatio)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiDocValues_OrdinalMap)
@@ -820,7 +851,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap
 }
 
 - (jlong)ramBytesUsed {
-  return OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_BASE_RAM_BYTES_USED_ + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithIntArray_(newToOld_) + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithIntArray_(oldToNew_);
+  return OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_BASE_RAM_BYTES_USED + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithIntArray_(newToOld_) + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithIntArray_(oldToNew_);
 }
 
 - (id<JavaUtilCollection>)getChildResources {
@@ -835,7 +866,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap
 
 + (void)initialize {
   if (self == [OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap class]) {
-    OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_BASE_RAM_BYTES_USED_ = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_class_());
+    OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_BASE_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_class_());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap)
   }
 }
@@ -848,10 +879,10 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap
     { "newToOldWithInt:", "newToOld", "I", 0x0, NULL, NULL },
     { "oldToNewWithInt:", "oldToNew", "I", 0x0, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "BASE_RAM_BYTES_USED_", NULL, 0x1a, "J", &OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_BASE_RAM_BYTES_USED_, NULL, .constantValue.asLong = 0 },
+    { "BASE_RAM_BYTES_USED", "BASE_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_BASE_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
     { "newToOld_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
     { "oldToNew_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
   };
@@ -867,7 +898,7 @@ IOSIntArray *OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_mapWithLon
   for (jint i = 0; i < weights->size_; ++i) {
     *IOSIntArray_GetRef(newToOld, i) = i;
   }
-  [((OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1 *) [new_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1_initWithIntArray_withLongArray_(newToOld, weights) autorelease]) sortWithInt:0 withInt:weights->size_];
+  [create_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1_initWithIntArray_withLongArray_(newToOld, weights) sortWithInt:0 withInt:weights->size_];
   return newToOld;
 }
 
@@ -888,9 +919,11 @@ void OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_initWithLongArray_
 }
 
 OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap *new_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_initWithLongArray_(IOSLongArray *weights) {
-  OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap *self = [OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap alloc];
-  OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_initWithLongArray_(self, weights);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap, initWithLongArray_, weights)
+}
+
+OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap *create_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_initWithLongArray_(IOSLongArray *weights) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap, initWithLongArray_, weights)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap)
@@ -945,9 +978,11 @@ void OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1_initWithIntArra
 }
 
 OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1 *new_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1_initWithIntArray_withLongArray_(IOSIntArray *capture$0, IOSLongArray *capture$1) {
-  OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1 *self = [OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1 alloc];
-  OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1_initWithIntArray_withLongArray_(self, capture$0, capture$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1, initWithIntArray_withLongArray_, capture$0, capture$1)
+}
+
+OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1 *create_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1_initWithIntArray_withLongArray_(IOSIntArray *capture$0, IOSLongArray *capture$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1, initWithIntArray_withLongArray_, capture$0, capture$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_$1)
@@ -989,9 +1024,11 @@ void OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1_initWithOrgApacheLuceneUti
 }
 
 OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1 *new_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1_initWithOrgApacheLuceneUtilPackedPackedInts_Mutable_(OrgApacheLuceneUtilPackedPackedInts_Mutable *capture$0) {
-  OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1 *self = [OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1 alloc];
-  OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1_initWithOrgApacheLuceneUtilPackedPackedInts_Mutable_(self, capture$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1, initWithOrgApacheLuceneUtilPackedPackedInts_Mutable_, capture$0)
+}
+
+OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1 *create_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1_initWithOrgApacheLuceneUtilPackedPackedInts_Mutable_(OrgApacheLuceneUtilPackedPackedInts_Mutable *capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1, initWithOrgApacheLuceneUtilPackedPackedInts_Mutable_, capture$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$1)
@@ -1033,9 +1070,11 @@ void OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2_initWithOrgApacheLuceneUti
 }
 
 OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2 *new_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2_initWithOrgApacheLuceneUtilPackedPackedLongValues_(OrgApacheLuceneUtilPackedPackedLongValues *capture$0) {
-  OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2 *self = [OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2 alloc];
-  OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2_initWithOrgApacheLuceneUtilPackedPackedLongValues_(self, capture$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2, initWithOrgApacheLuceneUtilPackedPackedLongValues_, capture$0)
+}
+
+OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2 *create_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2_initWithOrgApacheLuceneUtilPackedPackedLongValues_(OrgApacheLuceneUtilPackedPackedLongValues *capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2, initWithOrgApacheLuceneUtilPackedPackedLongValues_, capture$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_$2)
@@ -1099,9 +1138,11 @@ void OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues_initWithOrgApacheLu
 }
 
 OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues *new_OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues_initWithOrgApacheLuceneIndexSortedDocValuesArray_withIntArray_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_(IOSObjectArray *values, IOSIntArray *docStarts, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *mapping) {
-  OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues *self = [OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues alloc];
-  OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues_initWithOrgApacheLuceneIndexSortedDocValuesArray_withIntArray_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_(self, values, docStarts, mapping);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues, initWithOrgApacheLuceneIndexSortedDocValuesArray_withIntArray_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_, values, docStarts, mapping)
+}
+
+OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues *create_OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues_initWithOrgApacheLuceneIndexSortedDocValuesArray_withIntArray_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_(IOSObjectArray *values, IOSIntArray *docStarts, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *mapping) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues, initWithOrgApacheLuceneIndexSortedDocValuesArray_withIntArray_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_, values, docStarts, mapping)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues)
@@ -1179,9 +1220,11 @@ void OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues_initWithOrgApach
 }
 
 OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues *new_OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues_initWithOrgApacheLuceneIndexSortedSetDocValuesArray_withIntArray_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_(IOSObjectArray *values, IOSIntArray *docStarts, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *mapping) {
-  OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues *self = [OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues alloc];
-  OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues_initWithOrgApacheLuceneIndexSortedSetDocValuesArray_withIntArray_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_(self, values, docStarts, mapping);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues, initWithOrgApacheLuceneIndexSortedSetDocValuesArray_withIntArray_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_, values, docStarts, mapping)
+}
+
+OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues *create_OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues_initWithOrgApacheLuceneIndexSortedSetDocValuesArray_withIntArray_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_(IOSObjectArray *values, IOSIntArray *docStarts, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *mapping) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues, initWithOrgApacheLuceneIndexSortedSetDocValuesArray_withIntArray_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_, values, docStarts, mapping)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues)
@@ -1228,9 +1271,11 @@ void OrgApacheLuceneIndexMultiDocValues_$1_initWithIntArray_withOrgApacheLuceneI
 }
 
 OrgApacheLuceneIndexMultiDocValues_$1 *new_OrgApacheLuceneIndexMultiDocValues_$1_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1) {
-  OrgApacheLuceneIndexMultiDocValues_$1 *self = [OrgApacheLuceneIndexMultiDocValues_$1 alloc];
-  OrgApacheLuceneIndexMultiDocValues_$1_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(self, capture$0, capture$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiDocValues_$1, initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_, capture$0, capture$1)
+}
+
+OrgApacheLuceneIndexMultiDocValues_$1 *create_OrgApacheLuceneIndexMultiDocValues_$1_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiDocValues_$1, initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_, capture$0, capture$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiDocValues_$1)
@@ -1277,9 +1322,11 @@ void OrgApacheLuceneIndexMultiDocValues_$2_initWithIntArray_withOrgApacheLuceneI
 }
 
 OrgApacheLuceneIndexMultiDocValues_$2 *new_OrgApacheLuceneIndexMultiDocValues_$2_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1) {
-  OrgApacheLuceneIndexMultiDocValues_$2 *self = [OrgApacheLuceneIndexMultiDocValues_$2 alloc];
-  OrgApacheLuceneIndexMultiDocValues_$2_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(self, capture$0, capture$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiDocValues_$2, initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_, capture$0, capture$1)
+}
+
+OrgApacheLuceneIndexMultiDocValues_$2 *create_OrgApacheLuceneIndexMultiDocValues_$2_initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiDocValues_$2, initWithIntArray_withOrgApacheLuceneIndexNumericDocValuesArray_, capture$0, capture$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiDocValues_$2)
@@ -1326,9 +1373,11 @@ void OrgApacheLuceneIndexMultiDocValues_$3_initWithIntArray_withOrgApacheLuceneI
 }
 
 OrgApacheLuceneIndexMultiDocValues_$3 *new_OrgApacheLuceneIndexMultiDocValues_$3_initWithIntArray_withOrgApacheLuceneIndexBinaryDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1) {
-  OrgApacheLuceneIndexMultiDocValues_$3 *self = [OrgApacheLuceneIndexMultiDocValues_$3 alloc];
-  OrgApacheLuceneIndexMultiDocValues_$3_initWithIntArray_withOrgApacheLuceneIndexBinaryDocValuesArray_(self, capture$0, capture$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiDocValues_$3, initWithIntArray_withOrgApacheLuceneIndexBinaryDocValuesArray_, capture$0, capture$1)
+}
+
+OrgApacheLuceneIndexMultiDocValues_$3 *create_OrgApacheLuceneIndexMultiDocValues_$3_initWithIntArray_withOrgApacheLuceneIndexBinaryDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiDocValues_$3, initWithIntArray_withOrgApacheLuceneIndexBinaryDocValuesArray_, capture$0, capture$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiDocValues_$3)
@@ -1388,9 +1437,11 @@ void OrgApacheLuceneIndexMultiDocValues_$4_initWithIntArray_withOrgApacheLuceneI
 }
 
 OrgApacheLuceneIndexMultiDocValues_$4 *new_OrgApacheLuceneIndexMultiDocValues_$4_initWithIntArray_withOrgApacheLuceneIndexSortedNumericDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1) {
-  OrgApacheLuceneIndexMultiDocValues_$4 *self = [OrgApacheLuceneIndexMultiDocValues_$4 alloc];
-  OrgApacheLuceneIndexMultiDocValues_$4_initWithIntArray_withOrgApacheLuceneIndexSortedNumericDocValuesArray_(self, capture$0, capture$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiDocValues_$4, initWithIntArray_withOrgApacheLuceneIndexSortedNumericDocValuesArray_, capture$0, capture$1)
+}
+
+OrgApacheLuceneIndexMultiDocValues_$4 *create_OrgApacheLuceneIndexMultiDocValues_$4_initWithIntArray_withOrgApacheLuceneIndexSortedNumericDocValuesArray_(IOSIntArray *capture$0, IOSObjectArray *capture$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiDocValues_$4, initWithIntArray_withOrgApacheLuceneIndexSortedNumericDocValuesArray_, capture$0, capture$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiDocValues_$4)

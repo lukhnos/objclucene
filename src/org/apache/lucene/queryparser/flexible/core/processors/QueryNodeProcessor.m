@@ -3,11 +3,7 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessor.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/queryparser/flexible/core/QueryNodeException.h"
-#include "org/apache/lucene/queryparser/flexible/core/config/QueryConfigHandler.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessor.h"
 
 @interface OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor : NSObject

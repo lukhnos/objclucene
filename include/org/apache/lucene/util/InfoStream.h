@@ -5,42 +5,74 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilInfoStream_INCLUDE_ALL")
-#if OrgApacheLuceneUtilInfoStream_RESTRICT
-#define OrgApacheLuceneUtilInfoStream_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilInfoStream")
+#ifdef RESTRICT_OrgApacheLuceneUtilInfoStream
+#define INCLUDE_ALL_OrgApacheLuceneUtilInfoStream 0
 #else
-#define OrgApacheLuceneUtilInfoStream_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilInfoStream 1
 #endif
-#undef OrgApacheLuceneUtilInfoStream_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilInfoStream
 
-#if !defined (_OrgApacheLuceneUtilInfoStream_) && (OrgApacheLuceneUtilInfoStream_INCLUDE_ALL || OrgApacheLuceneUtilInfoStream_INCLUDE)
-#define _OrgApacheLuceneUtilInfoStream_
+#if !defined (OrgApacheLuceneUtilInfoStream_) && (INCLUDE_ALL_OrgApacheLuceneUtilInfoStream || defined(INCLUDE_OrgApacheLuceneUtilInfoStream))
+#define OrgApacheLuceneUtilInfoStream_
 
-#define JavaIoCloseable_RESTRICT 1
-#define JavaIoCloseable_INCLUDE 1
+#define RESTRICT_JavaIoCloseable 1
+#define INCLUDE_JavaIoCloseable 1
 #include "java/io/Closeable.h"
 
+/*!
+ @brief Debugging API for Lucene classes such as <code>IndexWriter</code> 
+ and <code>SegmentInfos</code>.
+ <p>
+ NOTE: Enabling infostreams may cause performance degradation
+ in some components.
+  
+ */
 @interface OrgApacheLuceneUtilInfoStream : NSObject < JavaIoCloseable >
+
++ (OrgApacheLuceneUtilInfoStream *)NO_OUTPUT;
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @brief The default <code>InfoStream</code> used by a newly instantiated classes.
+ - seealso: #setDefault
+ */
 + (OrgApacheLuceneUtilInfoStream *)getDefault;
 
+/*!
+ @brief returns true if messages are enabled and should be posted to <code>message</code>.
+ */
 - (jboolean)isEnabledWithNSString:(NSString *)component;
 
+/*!
+ @brief prints a message
+ */
 - (void)messageWithNSString:(NSString *)component
                withNSString:(NSString *)message;
 
+/*!
+ @brief Sets the default <code>InfoStream</code> used
+ by a newly instantiated classes.
+ It cannot be <code>null</code>,
+ to disable logging use <code>NO_OUTPUT</code>.
+ - seealso: #getDefault
+ */
 + (void)setDefaultWithOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream;
 
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilInfoStream)
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilInfoStream *OrgApacheLuceneUtilInfoStream_NO_OUTPUT_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilInfoStream, NO_OUTPUT_, OrgApacheLuceneUtilInfoStream *)
+/*!
+ @brief Instance of InfoStream that does no logging at all.
+ */
+inline OrgApacheLuceneUtilInfoStream *OrgApacheLuceneUtilInfoStream_get_NO_OUTPUT();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT OrgApacheLuceneUtilInfoStream *OrgApacheLuceneUtilInfoStream_NO_OUTPUT;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilInfoStream, NO_OUTPUT, OrgApacheLuceneUtilInfoStream *)
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilInfoStream *OrgApacheLuceneUtilInfoStream_getDefault();
 
@@ -52,4 +84,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilInfoStream)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilInfoStream_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilInfoStream")

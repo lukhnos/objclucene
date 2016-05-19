@@ -5,27 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisUtilElisionFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisUtilElisionFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisUtilElisionFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilElisionFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisUtilElisionFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisUtilElisionFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisUtilElisionFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisUtilElisionFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisUtilElisionFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisUtilElisionFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisUtilElisionFilterFactory_) && (OrgApacheLuceneAnalysisUtilElisionFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisUtilElisionFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisUtilElisionFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisUtilElisionFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisUtilElisionFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisUtilElisionFilterFactory))
+#define OrgApacheLuceneAnalysisUtilElisionFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-#define OrgApacheLuceneAnalysisUtilResourceLoaderAware_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilResourceLoaderAware_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilResourceLoaderAware 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilResourceLoaderAware 1
 #include "org/apache/lucene/analysis/util/ResourceLoaderAware.h"
 
-#define OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent 1
 #include "org/apache/lucene/analysis/util/MultiTermAwareComponent.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
@@ -34,10 +34,26 @@
 @protocol JavaUtilMap;
 @protocol OrgApacheLuceneAnalysisUtilResourceLoader;
 
+/*!
+ @brief Factory for <code>ElisionFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_elsn" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+ &lt;filter class="solr.LowerCaseFilterFactory"/&gt;
+ &lt;filter class="solr.ElisionFilterFactory" 
+ articles="stopwordarticles.txt" ignoreCase="true"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisUtilElisionFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilResourceLoaderAware, OrgApacheLuceneAnalysisUtilMultiTermAwareComponent >
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new ElisionFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisUtilElisionFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -54,8 +70,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilElisionFilterFactory_initWithJ
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilElisionFilterFactory *new_OrgApacheLuceneAnalysisUtilElisionFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilElisionFilterFactory *create_OrgApacheLuceneAnalysisUtilElisionFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilElisionFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisUtilElisionFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilElisionFilterFactory")

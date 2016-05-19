@@ -73,6 +73,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexNumericDocValuesFieldUpd
 
 __attribute__((unused)) static OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1 *new_OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1_initWithOrgApacheLuceneUtilPackedPagedMutable_withOrgApacheLuceneUtilPackedPagedGrowableWriter_(OrgApacheLuceneUtilPackedPagedMutable *capture$0, OrgApacheLuceneUtilPackedPagedGrowableWriter *capture$1) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1 *create_OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1_initWithOrgApacheLuceneUtilPackedPagedMutable_withOrgApacheLuceneUtilPackedPagedGrowableWriter_(OrgApacheLuceneUtilPackedPagedMutable *capture$0, OrgApacheLuceneUtilPackedPagedGrowableWriter *capture$1);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1)
 
 @implementation OrgApacheLuceneIndexNumericDocValuesFieldUpdates
@@ -86,11 +88,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1)
 - (void)addWithInt:(jint)doc
             withId:(id)value {
   if (size_ == JavaLangInteger_MAX_VALUE) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"cannot support more than Integer.MAX_VALUE doc/value entries") autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"cannot support more than Integer.MAX_VALUE doc/value entries");
   }
-  JavaLangLong *val = (JavaLangLong *) check_class_cast(value, [JavaLangLong class]);
+  JavaLangLong *val = (JavaLangLong *) cast_chk(value, [JavaLangLong class]);
   if ([((OrgApacheLuceneUtilPackedPagedMutable *) nil_chk(docs_)) size] == size_) {
-    JreStrongAssign(&docs_, [docs_ growWithLong:size_ + 1]);
+    JreStrongAssign(&docs_, [((OrgApacheLuceneUtilPackedPagedMutable *) nil_chk(docs_)) growWithLong:size_ + 1]);
     JreStrongAssign(&values_, [((OrgApacheLuceneUtilPackedPagedGrowableWriter *) nil_chk(values_)) growWithLong:size_ + 1]);
   }
   [((OrgApacheLuceneUtilPackedPagedMutable *) nil_chk(docs_)) setWithLong:size_ withLong:doc];
@@ -101,22 +103,22 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1)
 - (OrgApacheLuceneIndexNumericDocValuesFieldUpdates_Iterator *)iterator {
   OrgApacheLuceneUtilPackedPagedMutable *docs = self->docs_;
   OrgApacheLuceneUtilPackedPagedGrowableWriter *values = self->values_;
-  [((OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1 *) [new_OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1_initWithOrgApacheLuceneUtilPackedPagedMutable_withOrgApacheLuceneUtilPackedPagedGrowableWriter_(docs, values) autorelease]) sortWithInt:0 withInt:size_];
-  return [new_OrgApacheLuceneIndexNumericDocValuesFieldUpdates_Iterator_initWithInt_withOrgApacheLuceneUtilPackedPagedGrowableWriter_withOrgApacheLuceneUtilPackedPagedMutable_(size_, values, docs) autorelease];
+  [create_OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1_initWithOrgApacheLuceneUtilPackedPagedMutable_withOrgApacheLuceneUtilPackedPagedGrowableWriter_(docs, values) sortWithInt:0 withInt:size_];
+  return create_OrgApacheLuceneIndexNumericDocValuesFieldUpdates_Iterator_initWithInt_withOrgApacheLuceneUtilPackedPagedGrowableWriter_withOrgApacheLuceneUtilPackedPagedMutable_(size_, values, docs);
 }
 
 - (void)mergeWithOrgApacheLuceneIndexDocValuesFieldUpdates:(OrgApacheLuceneIndexDocValuesFieldUpdates *)other {
   JreAssert(([other isKindOfClass:[OrgApacheLuceneIndexNumericDocValuesFieldUpdates class]]), (@"org/apache/lucene/index/NumericDocValuesFieldUpdates.java:145 condition failed: assert other instanceof NumericDocValuesFieldUpdates;"));
-  OrgApacheLuceneIndexNumericDocValuesFieldUpdates *otherUpdates = (OrgApacheLuceneIndexNumericDocValuesFieldUpdates *) check_class_cast(other, [OrgApacheLuceneIndexNumericDocValuesFieldUpdates class]);
+  OrgApacheLuceneIndexNumericDocValuesFieldUpdates *otherUpdates = (OrgApacheLuceneIndexNumericDocValuesFieldUpdates *) cast_chk(other, [OrgApacheLuceneIndexNumericDocValuesFieldUpdates class]);
   if (size_ + ((OrgApacheLuceneIndexNumericDocValuesFieldUpdates *) nil_chk(otherUpdates))->size_ > JavaLangInteger_MAX_VALUE) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I", @"cannot support more than Integer.MAX_VALUE doc/value entries; size=", size_, @" other.size=", otherUpdates->size_)) autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I", @"cannot support more than Integer.MAX_VALUE doc/value entries; size=", size_, @" other.size=", otherUpdates->size_));
   }
   JreStrongAssign(&docs_, [((OrgApacheLuceneUtilPackedPagedMutable *) nil_chk(docs_)) growWithLong:size_ + otherUpdates->size_]);
   JreStrongAssign(&values_, [((OrgApacheLuceneUtilPackedPagedGrowableWriter *) nil_chk(values_)) growWithLong:size_ + otherUpdates->size_]);
   for (jint i = 0; i < otherUpdates->size_; i++) {
     jint doc = (jint) [((OrgApacheLuceneUtilPackedPagedMutable *) nil_chk(otherUpdates->docs_)) getWithInt:i];
-    [docs_ setWithLong:size_ withLong:doc];
-    [values_ setWithLong:size_ withLong:[((OrgApacheLuceneUtilPackedPagedGrowableWriter *) nil_chk(otherUpdates->values_)) getWithInt:i]];
+    [((OrgApacheLuceneUtilPackedPagedMutable *) nil_chk(docs_)) setWithLong:size_ withLong:doc];
+    [((OrgApacheLuceneUtilPackedPagedGrowableWriter *) nil_chk(values_)) setWithLong:size_ withLong:[otherUpdates->values_ getWithInt:i]];
     ++size_;
   }
 }
@@ -161,7 +163,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1)
 @end
 
 void OrgApacheLuceneIndexNumericDocValuesFieldUpdates_initWithNSString_withInt_(OrgApacheLuceneIndexNumericDocValuesFieldUpdates *self, NSString *field, jint maxDoc) {
-  OrgApacheLuceneIndexDocValuesFieldUpdates_initWithNSString_withOrgApacheLuceneIndexDocValuesTypeEnum_(self, field, JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, NUMERIC));
+  OrgApacheLuceneIndexDocValuesFieldUpdates_initWithNSString_withOrgApacheLuceneIndexDocValuesType_(self, field, JreLoadEnum(OrgApacheLuceneIndexDocValuesType, NUMERIC));
   self->bitsPerValue_ = OrgApacheLuceneUtilPackedPackedInts_bitsRequiredWithLong_(maxDoc - 1);
   JreStrongAssignAndConsume(&self->docs_, new_OrgApacheLuceneUtilPackedPagedMutable_initWithLong_withInt_withInt_withFloat_(1, OrgApacheLuceneIndexDocValuesFieldUpdates_PAGE_SIZE, self->bitsPerValue_, OrgApacheLuceneUtilPackedPackedInts_COMPACT));
   JreStrongAssignAndConsume(&self->values_, new_OrgApacheLuceneUtilPackedPagedGrowableWriter_initWithLong_withInt_withInt_withFloat_(1, OrgApacheLuceneIndexDocValuesFieldUpdates_PAGE_SIZE, 1, OrgApacheLuceneUtilPackedPackedInts_FAST));
@@ -169,9 +171,11 @@ void OrgApacheLuceneIndexNumericDocValuesFieldUpdates_initWithNSString_withInt_(
 }
 
 OrgApacheLuceneIndexNumericDocValuesFieldUpdates *new_OrgApacheLuceneIndexNumericDocValuesFieldUpdates_initWithNSString_withInt_(NSString *field, jint maxDoc) {
-  OrgApacheLuceneIndexNumericDocValuesFieldUpdates *self = [OrgApacheLuceneIndexNumericDocValuesFieldUpdates alloc];
-  OrgApacheLuceneIndexNumericDocValuesFieldUpdates_initWithNSString_withInt_(self, field, maxDoc);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexNumericDocValuesFieldUpdates, initWithNSString_withInt_, field, maxDoc)
+}
+
+OrgApacheLuceneIndexNumericDocValuesFieldUpdates *create_OrgApacheLuceneIndexNumericDocValuesFieldUpdates_initWithNSString_withInt_(NSString *field, jint maxDoc) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexNumericDocValuesFieldUpdates, initWithNSString_withInt_, field, maxDoc)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexNumericDocValuesFieldUpdates)
@@ -253,9 +257,11 @@ void OrgApacheLuceneIndexNumericDocValuesFieldUpdates_Iterator_initWithInt_withO
 }
 
 OrgApacheLuceneIndexNumericDocValuesFieldUpdates_Iterator *new_OrgApacheLuceneIndexNumericDocValuesFieldUpdates_Iterator_initWithInt_withOrgApacheLuceneUtilPackedPagedGrowableWriter_withOrgApacheLuceneUtilPackedPagedMutable_(jint size, OrgApacheLuceneUtilPackedPagedGrowableWriter *values, OrgApacheLuceneUtilPackedPagedMutable *docs) {
-  OrgApacheLuceneIndexNumericDocValuesFieldUpdates_Iterator *self = [OrgApacheLuceneIndexNumericDocValuesFieldUpdates_Iterator alloc];
-  OrgApacheLuceneIndexNumericDocValuesFieldUpdates_Iterator_initWithInt_withOrgApacheLuceneUtilPackedPagedGrowableWriter_withOrgApacheLuceneUtilPackedPagedMutable_(self, size, values, docs);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexNumericDocValuesFieldUpdates_Iterator, initWithInt_withOrgApacheLuceneUtilPackedPagedGrowableWriter_withOrgApacheLuceneUtilPackedPagedMutable_, size, values, docs)
+}
+
+OrgApacheLuceneIndexNumericDocValuesFieldUpdates_Iterator *create_OrgApacheLuceneIndexNumericDocValuesFieldUpdates_Iterator_initWithInt_withOrgApacheLuceneUtilPackedPagedGrowableWriter_withOrgApacheLuceneUtilPackedPagedMutable_(jint size, OrgApacheLuceneUtilPackedPagedGrowableWriter *values, OrgApacheLuceneUtilPackedPagedMutable *docs) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexNumericDocValuesFieldUpdates_Iterator, initWithInt_withOrgApacheLuceneUtilPackedPagedGrowableWriter_withOrgApacheLuceneUtilPackedPagedMutable_, size, values, docs)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexNumericDocValuesFieldUpdates_Iterator)
@@ -315,9 +321,11 @@ void OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1_initWithOrgApacheLucene
 }
 
 OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1 *new_OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1_initWithOrgApacheLuceneUtilPackedPagedMutable_withOrgApacheLuceneUtilPackedPagedGrowableWriter_(OrgApacheLuceneUtilPackedPagedMutable *capture$0, OrgApacheLuceneUtilPackedPagedGrowableWriter *capture$1) {
-  OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1 *self = [OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1 alloc];
-  OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1_initWithOrgApacheLuceneUtilPackedPagedMutable_withOrgApacheLuceneUtilPackedPagedGrowableWriter_(self, capture$0, capture$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1, initWithOrgApacheLuceneUtilPackedPagedMutable_withOrgApacheLuceneUtilPackedPagedGrowableWriter_, capture$0, capture$1)
+}
+
+OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1 *create_OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1_initWithOrgApacheLuceneUtilPackedPagedMutable_withOrgApacheLuceneUtilPackedPagedGrowableWriter_(OrgApacheLuceneUtilPackedPagedMutable *capture$0, OrgApacheLuceneUtilPackedPagedGrowableWriter *capture$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1, initWithOrgApacheLuceneUtilPackedPagedMutable_withOrgApacheLuceneUtilPackedPagedGrowableWriter_, capture$0, capture$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexNumericDocValuesFieldUpdates_$1)

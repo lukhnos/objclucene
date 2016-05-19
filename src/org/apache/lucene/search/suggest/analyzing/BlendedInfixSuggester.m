@@ -13,6 +13,7 @@
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Long.h"
+#include "java/lang/annotation/Annotation.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Comparator.h"
 #include "java/util/List.h"
@@ -44,14 +45,34 @@
 
 @interface OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester () {
  @public
+  /*!
+   @brief Factor to multiply the number of searched elements
+   */
   jint numFactor_;
-  OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum *blenderType_;
+  /*!
+   @brief Type of blender used by the suggester
+   */
+  OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *blenderType_;
 }
 
+/*!
+ @brief Add an element to the tree respecting a size limit
+ @param results the tree to add in
+ @param result the result we try to add
+ @param num size limit
+ */
 + (void)boundedTreeAddWithJavaUtilTreeSet:(JavaUtilTreeSet *)results
 withOrgApacheLuceneSearchSuggestLookup_LookupResult:(OrgApacheLuceneSearchSuggestLookup_LookupResult *)result
                                   withInt:(jint)num;
 
+/*!
+ @brief Create the coefficient to transform the weight.
+ @param doc id of the document
+ @param matchedTokens tokens found in the query
+ @param prefixToken unfinished token in the query
+ @return the coefficient
+ @throws IOException If there are problems reading term vectors from the underlying Lucene index.
+ */
 - (jdouble)createCoefficientWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                            withInt:(jint)doc
                                                    withJavaUtilSet:(id<JavaUtilSet>)matchedTokens
@@ -59,19 +80,18 @@ withOrgApacheLuceneSearchSuggestLookup_LookupResult:(OrgApacheLuceneSearchSugges
 
 @end
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester, blenderType_, OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester, blenderType_, OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *)
 
-static id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LOOKUP_COMP_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester, LOOKUP_COMP_, id<JavaUtilComparator>)
-J2OBJC_STATIC_FIELD_SETTER(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester, LOOKUP_COMP_, id<JavaUtilComparator>)
+inline id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_get_LOOKUP_COMP();
+inline id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_set_LOOKUP_COMP(id<JavaUtilComparator> value);
+static id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LOOKUP_COMP;
+J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester, LOOKUP_COMP, id<JavaUtilComparator>)
 
 __attribute__((unused)) static void OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_boundedTreeAddWithJavaUtilTreeSet_withOrgApacheLuceneSearchSuggestLookup_LookupResult_withInt_(JavaUtilTreeSet *results, OrgApacheLuceneSearchSuggestLookup_LookupResult *result, jint num);
 
 __attribute__((unused)) static jdouble OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_createCoefficientWithOrgApacheLuceneSearchIndexSearcher_withInt_withJavaUtilSet_withNSString_(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester *self, OrgApacheLuceneSearchIndexSearcher *searcher, jint doc, id<JavaUtilSet> matchedTokens, NSString *prefixToken);
 
-__attribute__((unused)) static void OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_initWithNSString_withInt_(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum *self, NSString *__name, jint __ordinal);
-
-__attribute__((unused)) static OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum *new_OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
+__attribute__((unused)) static void OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_initWithNSString_withInt_(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *self, NSString *__name, jint __ordinal);
 
 @interface OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LookUpComparator : NSObject < JavaUtilComparator >
 
@@ -88,14 +108,32 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSuggestAnalyzingBlended
 
 __attribute__((unused)) static OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LookUpComparator *new_OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LookUpComparator_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LookUpComparator *create_OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LookUpComparator_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LookUpComparator)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester)
 
-jdouble OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LINEAR_COEF_ = 0.1;
-jint OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_DEFAULT_NUM_FACTOR_ = 10;
+jdouble OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LINEAR_COEF = 0.1;
+jint OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_DEFAULT_NUM_FACTOR = 10;
 
 @implementation OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester
+
++ (jdouble)LINEAR_COEF {
+  return OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LINEAR_COEF;
+}
+
++ (void)setLINEAR_COEF:(jdouble)value {
+  OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LINEAR_COEF = value;
+}
+
++ (jint)DEFAULT_NUM_FACTOR {
+  return OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_DEFAULT_NUM_FACTOR;
+}
+
++ (void)setDEFAULT_NUM_FACTOR:(jint)value {
+  OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_DEFAULT_NUM_FACTOR = value;
+}
 
 - (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
                   withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer {
@@ -114,10 +152,10 @@ jint OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_DEFAULT_NUM_FACT
                   withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
                   withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer
                                               withInt:(jint)minPrefixChars
-withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum:(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum *)blenderType
+withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType:(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *)blenderType
                                               withInt:(jint)numFactor
                                           withBoolean:(jboolean)commitOnBuild {
-  OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_withInt_withBoolean_(self, dir, indexAnalyzer, queryAnalyzer, minPrefixChars, blenderType, numFactor, commitOnBuild);
+  OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_withInt_withBoolean_(self, dir, indexAnalyzer, queryAnalyzer, minPrefixChars, blenderType, numFactor, commitOnBuild);
   return self;
 }
 
@@ -126,10 +164,10 @@ withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum:(
                withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
                withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer
                                            withInt:(jint)minPrefixChars
-withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum:(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum *)blenderType
+withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType:(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *)blenderType
                                            withInt:(jint)numFactor
                                        withBoolean:(jboolean)commitOnBuild {
-  OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_withInt_withBoolean_(self, matchVersion, dir, indexAnalyzer, queryAnalyzer, minPrefixChars, blenderType, numFactor, commitOnBuild);
+  OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_withInt_withBoolean_(self, matchVersion, dir, indexAnalyzer, queryAnalyzer, minPrefixChars, blenderType, numFactor, commitOnBuild);
   return self;
 }
 
@@ -137,12 +175,12 @@ withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum:(
                   withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
                   withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer
                                               withInt:(jint)minPrefixChars
-withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum:(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum *)blenderType
+withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType:(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *)blenderType
                                               withInt:(jint)numFactor
                                           withBoolean:(jboolean)commitOnBuild
                                           withBoolean:(jboolean)allTermsRequired
                                           withBoolean:(jboolean)highlight {
-  OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_withInt_withBoolean_withBoolean_withBoolean_(self, dir, indexAnalyzer, queryAnalyzer, minPrefixChars, blenderType, numFactor, commitOnBuild, allTermsRequired, highlight);
+  OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_withInt_withBoolean_withBoolean_withBoolean_(self, dir, indexAnalyzer, queryAnalyzer, minPrefixChars, blenderType, numFactor, commitOnBuild, allTermsRequired, highlight);
   return self;
 }
 
@@ -178,8 +216,8 @@ withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum:(
 }
 
 - (OrgApacheLuceneDocumentFieldType *)getTextFieldType {
-  OrgApacheLuceneDocumentFieldType *ft = [new_OrgApacheLuceneDocumentFieldType_initWithOrgApacheLuceneDocumentFieldType_(JreLoadStatic(OrgApacheLuceneDocumentTextField, TYPE_NOT_STORED_)) autorelease];
-  [ft setIndexOptionsWithOrgApacheLuceneIndexIndexOptionsEnum:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS)];
+  OrgApacheLuceneDocumentFieldType *ft = create_OrgApacheLuceneDocumentFieldType_initWithOrgApacheLuceneDocumentFieldType_(JreLoadStatic(OrgApacheLuceneDocumentTextField, TYPE_NOT_STORED));
+  [ft setIndexOptionsWithOrgApacheLuceneIndexIndexOptions:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS)];
   [ft setStoreTermVectorsWithBoolean:true];
   [ft setStoreTermVectorPositionsWithBoolean:true];
   [ft setOmitNormsWithBoolean:true];
@@ -193,15 +231,15 @@ withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum:(
                                                             withBoolean:(jboolean)doHighlight
                                                         withJavaUtilSet:(id<JavaUtilSet>)matchedTokens
                                                            withNSString:(NSString *)prefixToken {
-  OrgApacheLuceneIndexBinaryDocValues *textDV = OrgApacheLuceneIndexMultiDocValues_getBinaryValuesWithOrgApacheLuceneIndexIndexReader_withNSString_([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getIndexReader], OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_TEXT_FIELD_NAME_);
+  OrgApacheLuceneIndexBinaryDocValues *textDV = OrgApacheLuceneIndexMultiDocValues_getBinaryValuesWithOrgApacheLuceneIndexIndexReader_withNSString_([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getIndexReader], OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_TEXT_FIELD_NAME);
   JreAssert((textDV != nil), (@"org/apache/lucene/search/suggest/analyzing/BlendedInfixSuggester.java:201 condition failed: assert textDV != null;"));
   OrgApacheLuceneIndexBinaryDocValues *payloadsDV = OrgApacheLuceneIndexMultiDocValues_getBinaryValuesWithOrgApacheLuceneIndexIndexReader_withNSString_([searcher getIndexReader], @"payloads");
-  JavaUtilTreeSet *results = [new_JavaUtilTreeSet_initWithJavaUtilComparator_(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LOOKUP_COMP_) autorelease];
+  JavaUtilTreeSet *results = create_JavaUtilTreeSet_initWithJavaUtilComparator_(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LOOKUP_COMP);
   jint actualNum = num / numFactor_;
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(((OrgApacheLuceneSearchTopFieldDocs *) nil_chk(hits))->scoreDocs_))->size_; i++) {
-    OrgApacheLuceneSearchFieldDoc *fd = (OrgApacheLuceneSearchFieldDoc *) check_class_cast(IOSObjectArray_Get(hits->scoreDocs_, i), [OrgApacheLuceneSearchFieldDoc class]);
+    OrgApacheLuceneSearchFieldDoc *fd = (OrgApacheLuceneSearchFieldDoc *) cast_chk(IOSObjectArray_Get(hits->scoreDocs_, i), [OrgApacheLuceneSearchFieldDoc class]);
     NSString *text = [((OrgApacheLuceneUtilBytesRef *) nil_chk([((OrgApacheLuceneIndexBinaryDocValues *) nil_chk(textDV)) getWithInt:((OrgApacheLuceneSearchFieldDoc *) nil_chk(fd))->doc_])) utf8ToString];
-    jlong weight = [((JavaLangLong *) nil_chk((JavaLangLong *) check_class_cast(IOSObjectArray_Get(nil_chk(fd->fields_), 0), [JavaLangLong class]))) longLongValue];
+    jlong weight = [((JavaLangLong *) nil_chk((JavaLangLong *) cast_chk(IOSObjectArray_Get(nil_chk(fd->fields_), 0), [JavaLangLong class]))) longLongValue];
     OrgApacheLuceneUtilBytesRef *payload;
     if (payloadsDV != nil) {
       payload = OrgApacheLuceneUtilBytesRef_deepCopyOfWithOrgApacheLuceneUtilBytesRef_([payloadsDV getWithInt:fd->doc_]);
@@ -219,14 +257,14 @@ withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum:(
     jlong score = JreFpToLong((weight * coefficient));
     OrgApacheLuceneSearchSuggestLookup_LookupResult *result;
     if (doHighlight) {
-      result = [new_OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withId_withLong_withOrgApacheLuceneUtilBytesRef_(text, [self highlightWithNSString:text withJavaUtilSet:matchedTokens withNSString:prefixToken], score, payload) autorelease];
+      result = create_OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withId_withLong_withOrgApacheLuceneUtilBytesRef_(text, [self highlightWithNSString:text withJavaUtilSet:matchedTokens withNSString:prefixToken], score, payload);
     }
     else {
-      result = [new_OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withLong_withOrgApacheLuceneUtilBytesRef_(text, score, payload) autorelease];
+      result = create_OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withLong_withOrgApacheLuceneUtilBytesRef_(text, score, payload);
     }
     OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_boundedTreeAddWithJavaUtilTreeSet_withOrgApacheLuceneSearchSuggestLookup_LookupResult_withInt_(results, result, actualNum);
   }
-  return [new_JavaUtilArrayList_initWithJavaUtilCollection_([results descendingSet]) autorelease];
+  return create_JavaUtilArrayList_initWithJavaUtilCollection_([results descendingSet]);
 }
 
 + (void)boundedTreeAddWithJavaUtilTreeSet:(JavaUtilTreeSet *)results
@@ -245,16 +283,24 @@ withOrgApacheLuceneSearchSuggestLookup_LookupResult:(OrgApacheLuceneSearchSugges
 - (jdouble)calculateCoefficientWithInt:(jint)position {
   jdouble coefficient;
   switch ([blenderType_ ordinal]) {
-    case OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_POSITION_LINEAR:
-    coefficient = 1 - OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LINEAR_COEF_ * position;
+    case OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_Enum_POSITION_LINEAR:
+    coefficient = 1 - OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LINEAR_COEF * position;
     break;
-    case OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_POSITION_RECIPROCAL:
+    case OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_Enum_POSITION_RECIPROCAL:
     coefficient = 1. / (position + 1);
     break;
     default:
     coefficient = 1;
   }
   return coefficient;
+}
+
++ (IOSObjectArray *)__annotations_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_ {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
++ (IOSObjectArray *)__annotations_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_withInt_withBoolean_ {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 - (void)dealloc {
@@ -264,42 +310,34 @@ withOrgApacheLuceneSearchSuggestLookup_LookupResult:(OrgApacheLuceneSearchSugges
 
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LOOKUP_COMP_, new_OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LookUpComparator_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LOOKUP_COMP, new_OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LookUpComparator_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester)
   }
-}
-
-+ (IOSObjectArray *)__annotations_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_withInt_withBoolean_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneAnalysisAnalyzer:", "BlendedInfixSuggester", NULL, 0x1, "Ljava.io.IOException;", NULL },
     { "initWithOrgApacheLuceneUtilVersion:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneAnalysisAnalyzer:", "BlendedInfixSuggester", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneAnalysisAnalyzer:withInt:withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum:withInt:withBoolean:", "BlendedInfixSuggester", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneUtilVersion:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneAnalysisAnalyzer:withInt:withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum:withInt:withBoolean:", "BlendedInfixSuggester", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneAnalysisAnalyzer:withInt:withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum:withInt:withBoolean:withBoolean:withBoolean:", "BlendedInfixSuggester", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "lookupWithJavaLangCharSequence:withJavaUtilSet:withBoolean:withInt:", "lookup", "Ljava.util.List;", 0x1, "Ljava.io.IOException;", NULL },
-    { "lookupWithJavaLangCharSequence:withJavaUtilSet:withInt:withBoolean:withBoolean:", "lookup", "Ljava.util.List;", 0x1, "Ljava.io.IOException;", NULL },
-    { "lookupWithJavaLangCharSequence:withJavaUtilMap:withInt:withBoolean:withBoolean:", "lookup", "Ljava.util.List;", 0x1, "Ljava.io.IOException;", NULL },
-    { "lookupWithJavaLangCharSequence:withOrgApacheLuceneSearchBooleanQuery:withInt:withBoolean:withBoolean:", "lookup", "Ljava.util.List;", 0x1, "Ljava.io.IOException;", NULL },
+    { "initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneAnalysisAnalyzer:withInt:withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType:withInt:withBoolean:", "BlendedInfixSuggester", NULL, 0x1, "Ljava.io.IOException;", NULL },
+    { "initWithOrgApacheLuceneUtilVersion:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneAnalysisAnalyzer:withInt:withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType:withInt:withBoolean:", "BlendedInfixSuggester", NULL, 0x1, "Ljava.io.IOException;", NULL },
+    { "initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneAnalysisAnalyzer:withInt:withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType:withInt:withBoolean:withBoolean:withBoolean:", "BlendedInfixSuggester", NULL, 0x1, "Ljava.io.IOException;", NULL },
+    { "lookupWithJavaLangCharSequence:withJavaUtilSet:withBoolean:withInt:", "lookup", "Ljava.util.List;", 0x1, "Ljava.io.IOException;", "(Ljava/lang/CharSequence;Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;ZI)Ljava/util/List<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;" },
+    { "lookupWithJavaLangCharSequence:withJavaUtilSet:withInt:withBoolean:withBoolean:", "lookup", "Ljava.util.List;", 0x1, "Ljava.io.IOException;", "(Ljava/lang/CharSequence;Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;IZZ)Ljava/util/List<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;" },
+    { "lookupWithJavaLangCharSequence:withJavaUtilMap:withInt:withBoolean:withBoolean:", "lookup", "Ljava.util.List;", 0x1, "Ljava.io.IOException;", "(Ljava/lang/CharSequence;Ljava/util/Map<Lorg/apache/lucene/util/BytesRef;Lorg/apache/lucene/search/BooleanClause$Occur;>;IZZ)Ljava/util/List<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;" },
+    { "lookupWithJavaLangCharSequence:withOrgApacheLuceneSearchBooleanQuery:withInt:withBoolean:withBoolean:", "lookup", "Ljava.util.List;", 0x1, "Ljava.io.IOException;", "(Ljava/lang/CharSequence;Lorg/apache/lucene/search/BooleanQuery;IZZ)Ljava/util/List<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;" },
     { "getTextFieldType", NULL, "Lorg.apache.lucene.document.FieldType;", 0x4, NULL, NULL },
-    { "createResultsWithOrgApacheLuceneSearchIndexSearcher:withOrgApacheLuceneSearchTopFieldDocs:withInt:withJavaLangCharSequence:withBoolean:withJavaUtilSet:withNSString:", "createResults", "Ljava.util.List;", 0x4, "Ljava.io.IOException;", NULL },
-    { "boundedTreeAddWithJavaUtilTreeSet:withOrgApacheLuceneSearchSuggestLookup_LookupResult:withInt:", "boundedTreeAdd", "V", 0xa, NULL, NULL },
-    { "createCoefficientWithOrgApacheLuceneSearchIndexSearcher:withInt:withJavaUtilSet:withNSString:", "createCoefficient", "D", 0x2, "Ljava.io.IOException;", NULL },
+    { "createResultsWithOrgApacheLuceneSearchIndexSearcher:withOrgApacheLuceneSearchTopFieldDocs:withInt:withJavaLangCharSequence:withBoolean:withJavaUtilSet:withNSString:", "createResults", "Ljava.util.List;", 0x4, "Ljava.io.IOException;", "(Lorg/apache/lucene/search/IndexSearcher;Lorg/apache/lucene/search/TopFieldDocs;ILjava/lang/CharSequence;ZLjava/util/Set<Ljava/lang/String;>;Ljava/lang/String;)Ljava/util/List<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;" },
+    { "boundedTreeAddWithJavaUtilTreeSet:withOrgApacheLuceneSearchSuggestLookup_LookupResult:withInt:", "boundedTreeAdd", "V", 0xa, NULL, "(Ljava/util/TreeSet<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;Lorg/apache/lucene/search/suggest/Lookup$LookupResult;I)V" },
+    { "createCoefficientWithOrgApacheLuceneSearchIndexSearcher:withInt:withJavaUtilSet:withNSString:", "createCoefficient", "D", 0x2, "Ljava.io.IOException;", "(Lorg/apache/lucene/search/IndexSearcher;ILjava/util/Set<Ljava/lang/String;>;Ljava/lang/String;)D" },
     { "calculateCoefficientWithInt:", "calculateCoefficient", "D", 0x4, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "LINEAR_COEF_", NULL, 0xc, "D", &OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LINEAR_COEF_, NULL, .constantValue.asLong = 0 },
-    { "DEFAULT_NUM_FACTOR_", NULL, 0x9, "I", &OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_DEFAULT_NUM_FACTOR_, NULL, .constantValue.asLong = 0 },
+    { "LINEAR_COEF", "LINEAR_COEF", 0xc, "D", &OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LINEAR_COEF, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_NUM_FACTOR", "DEFAULT_NUM_FACTOR", 0x9, "I", &OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_DEFAULT_NUM_FACTOR, NULL, .constantValue.asLong = 0 },
     { "numFactor_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "blenderType_", NULL, 0x12, "Lorg.apache.lucene.search.suggest.analyzing.BlendedInfixSuggester$BlenderType;", NULL, NULL, .constantValue.asLong = 0 },
-    { "LOOKUP_COMP_", NULL, 0xa, "Ljava.util.Comparator;", &OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LOOKUP_COMP_, "Ljava/util/Comparator<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;", .constantValue.asLong = 0 },
+    { "LOOKUP_COMP", "LOOKUP_COMP", 0xa, "Ljava.util.Comparator;", &OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LOOKUP_COMP, "Ljava/util/Comparator<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;", .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.suggest.analyzing.BlendedInfixSuggester$BlenderType;", "Lorg.apache.lucene.search.suggest.analyzing.BlendedInfixSuggester$LookUpComparator;"};
   static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester = { 2, "BlendedInfixSuggester", "org.apache.lucene.search.suggest.analyzing", NULL, 0x1, 14, methods, 5, fields, 0, NULL, 2, inner_classes, NULL, NULL };
@@ -313,55 +351,65 @@ void OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_initWithOrgApach
 }
 
 OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester *new_OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
-  OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester *self = [OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester alloc];
-  OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_(self, dir, analyzer);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester, initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_, dir, analyzer)
+}
+
+OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester *create_OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester, initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_, dir, analyzer)
 }
 
 void OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester *self, OrgApacheLuceneUtilVersion *matchVersion, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
   OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_(self, matchVersion, dir, analyzer);
-  JreStrongAssign(&self->blenderType_, JreLoadStatic(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum, POSITION_LINEAR));
-  self->numFactor_ = OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_DEFAULT_NUM_FACTOR_;
+  JreStrongAssign(&self->blenderType_, JreLoadEnum(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType, POSITION_LINEAR));
+  self->numFactor_ = OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_DEFAULT_NUM_FACTOR;
 }
 
 OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester *new_OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneUtilVersion *matchVersion, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
-  OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester *self = [OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester alloc];
-  OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_(self, matchVersion, dir, analyzer);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester, initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_, matchVersion, dir, analyzer)
 }
 
-void OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_withInt_withBoolean_(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester *self, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint minPrefixChars, OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum *blenderType, jint numFactor, jboolean commitOnBuild) {
-  OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_withInt_withBoolean_(self, [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(indexAnalyzer)) getVersion], dir, indexAnalyzer, queryAnalyzer, minPrefixChars, blenderType, numFactor, commitOnBuild);
+OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester *create_OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneUtilVersion *matchVersion, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester, initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_, matchVersion, dir, analyzer)
 }
 
-OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester *new_OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_withInt_withBoolean_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint minPrefixChars, OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum *blenderType, jint numFactor, jboolean commitOnBuild) {
-  OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester *self = [OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester alloc];
-  OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_withInt_withBoolean_(self, dir, indexAnalyzer, queryAnalyzer, minPrefixChars, blenderType, numFactor, commitOnBuild);
-  return self;
+void OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_withInt_withBoolean_(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester *self, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint minPrefixChars, OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *blenderType, jint numFactor, jboolean commitOnBuild) {
+  OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_withInt_withBoolean_(self, [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(indexAnalyzer)) getVersion], dir, indexAnalyzer, queryAnalyzer, minPrefixChars, blenderType, numFactor, commitOnBuild);
 }
 
-void OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_withInt_withBoolean_(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester *self, OrgApacheLuceneUtilVersion *matchVersion, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint minPrefixChars, OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum *blenderType, jint numFactor, jboolean commitOnBuild) {
+OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester *new_OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_withInt_withBoolean_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint minPrefixChars, OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *blenderType, jint numFactor, jboolean commitOnBuild) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester, initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_withInt_withBoolean_, dir, indexAnalyzer, queryAnalyzer, minPrefixChars, blenderType, numFactor, commitOnBuild)
+}
+
+OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester *create_OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_withInt_withBoolean_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint minPrefixChars, OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *blenderType, jint numFactor, jboolean commitOnBuild) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester, initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_withInt_withBoolean_, dir, indexAnalyzer, queryAnalyzer, minPrefixChars, blenderType, numFactor, commitOnBuild)
+}
+
+void OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_withInt_withBoolean_(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester *self, OrgApacheLuceneUtilVersion *matchVersion, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint minPrefixChars, OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *blenderType, jint numFactor, jboolean commitOnBuild) {
   OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_(self, matchVersion, dir, indexAnalyzer, queryAnalyzer, minPrefixChars, commitOnBuild);
   JreStrongAssign(&self->blenderType_, blenderType);
   self->numFactor_ = numFactor;
 }
 
-OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester *new_OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_withInt_withBoolean_(OrgApacheLuceneUtilVersion *matchVersion, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint minPrefixChars, OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum *blenderType, jint numFactor, jboolean commitOnBuild) {
-  OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester *self = [OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester alloc];
-  OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_withInt_withBoolean_(self, matchVersion, dir, indexAnalyzer, queryAnalyzer, minPrefixChars, blenderType, numFactor, commitOnBuild);
-  return self;
+OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester *new_OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_withInt_withBoolean_(OrgApacheLuceneUtilVersion *matchVersion, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint minPrefixChars, OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *blenderType, jint numFactor, jboolean commitOnBuild) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester, initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_withInt_withBoolean_, matchVersion, dir, indexAnalyzer, queryAnalyzer, minPrefixChars, blenderType, numFactor, commitOnBuild)
 }
 
-void OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_withInt_withBoolean_withBoolean_withBoolean_(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester *self, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint minPrefixChars, OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum *blenderType, jint numFactor, jboolean commitOnBuild, jboolean allTermsRequired, jboolean highlight) {
+OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester *create_OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_withInt_withBoolean_(OrgApacheLuceneUtilVersion *matchVersion, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint minPrefixChars, OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *blenderType, jint numFactor, jboolean commitOnBuild) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester, initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_withInt_withBoolean_, matchVersion, dir, indexAnalyzer, queryAnalyzer, minPrefixChars, blenderType, numFactor, commitOnBuild)
+}
+
+void OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_withInt_withBoolean_withBoolean_withBoolean_(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester *self, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint minPrefixChars, OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *blenderType, jint numFactor, jboolean commitOnBuild, jboolean allTermsRequired, jboolean highlight) {
   OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_withBoolean_withBoolean_(self, dir, indexAnalyzer, queryAnalyzer, minPrefixChars, commitOnBuild, allTermsRequired, highlight);
   JreStrongAssign(&self->blenderType_, blenderType);
   self->numFactor_ = numFactor;
 }
 
-OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester *new_OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_withInt_withBoolean_withBoolean_withBoolean_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint minPrefixChars, OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum *blenderType, jint numFactor, jboolean commitOnBuild, jboolean allTermsRequired, jboolean highlight) {
-  OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester *self = [OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester alloc];
-  OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_withInt_withBoolean_withBoolean_withBoolean_(self, dir, indexAnalyzer, queryAnalyzer, minPrefixChars, blenderType, numFactor, commitOnBuild, allTermsRequired, highlight);
-  return self;
+OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester *new_OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_withInt_withBoolean_withBoolean_withBoolean_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint minPrefixChars, OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *blenderType, jint numFactor, jboolean commitOnBuild, jboolean allTermsRequired, jboolean highlight) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester, initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_withInt_withBoolean_withBoolean_withBoolean_, dir, indexAnalyzer, queryAnalyzer, minPrefixChars, blenderType, numFactor, commitOnBuild, allTermsRequired, highlight)
+}
+
+OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester *create_OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_withInt_withBoolean_withBoolean_withBoolean_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint minPrefixChars, OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *blenderType, jint numFactor, jboolean commitOnBuild, jboolean allTermsRequired, jboolean highlight) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester, initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_withInt_withBoolean_withBoolean_withBoolean_, dir, indexAnalyzer, queryAnalyzer, minPrefixChars, blenderType, numFactor, commitOnBuild, allTermsRequired, highlight)
 }
 
 void OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_boundedTreeAddWithJavaUtilTreeSet_withOrgApacheLuceneSearchSuggestLookup_LookupResult_withInt_(JavaUtilTreeSet *results, OrgApacheLuceneSearchSuggestLookup_LookupResult *result, jint num) {
@@ -378,7 +426,7 @@ void OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_boundedTreeAddWi
 }
 
 jdouble OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_createCoefficientWithOrgApacheLuceneSearchIndexSearcher_withInt_withJavaUtilSet_withNSString_(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester *self, OrgApacheLuceneSearchIndexSearcher *searcher, jint doc, id<JavaUtilSet> matchedTokens, NSString *prefixToken) {
-  OrgApacheLuceneIndexTerms *tv = [((OrgApacheLuceneIndexIndexReader *) nil_chk([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getIndexReader])) getTermVectorWithInt:doc withNSString:OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_TEXT_FIELD_NAME_];
+  OrgApacheLuceneIndexTerms *tv = [((OrgApacheLuceneIndexIndexReader *) nil_chk([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getIndexReader])) getTermVectorWithInt:doc withNSString:OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_TEXT_FIELD_NAME];
   OrgApacheLuceneIndexTermsEnum *it = [((OrgApacheLuceneIndexTerms *) nil_chk(tv)) iterator];
   JavaLangInteger *position = JavaLangInteger_valueOfWithInt_(JavaLangInteger_MAX_VALUE);
   OrgApacheLuceneUtilBytesRef *term;
@@ -398,35 +446,82 @@ jdouble OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_createCoeffic
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester)
 
-J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum)
+J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType)
 
-OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum *OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_values_[3];
+OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_values_[3];
 
-@implementation OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum
+@implementation OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
++ (OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *)CUSTOM {
+  return JreEnum(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType, CUSTOM);
 }
 
-IOSObjectArray *OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_values() {
-  OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_initialize();
-  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_values_ count:3 type:OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_class_()];
++ (OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *)POSITION_LINEAR {
+  return JreEnum(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType, POSITION_LINEAR);
+}
+
++ (OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *)POSITION_RECIPROCAL {
+  return JreEnum(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType, POSITION_RECIPROCAL);
 }
 
 + (IOSObjectArray *)values {
-  return OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_values();
+  return OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_values();
 }
 
-+ (OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum *)valueOfWithNSString:(NSString *)name {
-  return OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_valueOfWithNSString_(name);
++ (OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *)valueOfWithNSString:(NSString *)name {
+  return OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_valueOfWithNSString_(name);
 }
 
-OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum *OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_valueOfWithNSString_(NSString *name) {
-  OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_initialize();
+- (OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_Enum)toNSEnum {
+  return (OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_Enum)[self ordinal];
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+  return self;
+}
+
++ (void)initialize {
+  if (self == [OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType class]) {
+    size_t objSize = class_getInstanceSize(self);
+    size_t allocSize = 3 * objSize;
+    uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
+    id e;
+    (JreEnum(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType, CUSTOM) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_initWithNSString_withInt_(e, @"CUSTOM", 0);
+    (JreEnum(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType, POSITION_LINEAR) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_initWithNSString_withInt_(e, @"POSITION_LINEAR", 1);
+    (JreEnum(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType, POSITION_RECIPROCAL) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_initWithNSString_withInt_(e, @"POSITION_RECIPROCAL", 2);
+    J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType)
+  }
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static const J2ObjcFieldInfo fields[] = {
+    { "CUSTOM", "CUSTOM", 0x4019, "Lorg.apache.lucene.search.suggest.analyzing.BlendedInfixSuggester$BlenderType;", &JreEnum(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType, CUSTOM), NULL, .constantValue.asLong = 0 },
+    { "POSITION_LINEAR", "POSITION_LINEAR", 0x4019, "Lorg.apache.lucene.search.suggest.analyzing.BlendedInfixSuggester$BlenderType;", &JreEnum(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType, POSITION_LINEAR), NULL, .constantValue.asLong = 0 },
+    { "POSITION_RECIPROCAL", "POSITION_RECIPROCAL", 0x4019, "Lorg.apache.lucene.search.suggest.analyzing.BlendedInfixSuggester$BlenderType;", &JreEnum(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType, POSITION_RECIPROCAL), NULL, .constantValue.asLong = 0 },
+  };
+  static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.suggest.analyzing.BlendedInfixSuggester$BlenderType;"};
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType = { 2, "BlenderType", "org.apache.lucene.search.suggest.analyzing", "BlendedInfixSuggester", 0x4019, 0, NULL, 3, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/search/suggest/analyzing/BlendedInfixSuggester$BlenderType;>;" };
+  return &_OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType;
+}
+
+@end
+
+void OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_initWithNSString_withInt_(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *self, NSString *__name, jint __ordinal) {
+  JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
+}
+
+IOSObjectArray *OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_values() {
+  OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_initialize();
+  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_values_ count:3 type:OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_class_()];
+}
+
+OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_valueOfWithNSString_(NSString *name) {
+  OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_initialize();
   for (int i = 0; i < 3; i++) {
-    OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum *e = OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_values_[i];
+    OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *e = OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_values_[i];
     if ([name isEqual:[e name]]) {
       return e;
     }
@@ -435,43 +530,15 @@ OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum *OrgA
   return nil;
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return [self retain];
-}
-
-+ (void)initialize {
-  if (self == [OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum class]) {
-    OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_CUSTOM = new_OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_initWithNSString_withInt_(@"CUSTOM", 0);
-    OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_POSITION_LINEAR = new_OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_initWithNSString_withInt_(@"POSITION_LINEAR", 1);
-    OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_POSITION_RECIPROCAL = new_OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_initWithNSString_withInt_(@"POSITION_RECIPROCAL", 2);
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum)
+OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType *OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_fromOrdinal(NSUInteger ordinal) {
+  OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_initialize();
+  if (ordinal >= 3) {
+    return nil;
   }
+  return OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType_values_[ordinal];
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcFieldInfo fields[] = {
-    { "CUSTOM", "CUSTOM", 0x4019, "Lorg.apache.lucene.search.suggest.analyzing.BlendedInfixSuggester$BlenderType;", &OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_CUSTOM, NULL, .constantValue.asLong = 0 },
-    { "POSITION_LINEAR", "POSITION_LINEAR", 0x4019, "Lorg.apache.lucene.search.suggest.analyzing.BlendedInfixSuggester$BlenderType;", &OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_POSITION_LINEAR, NULL, .constantValue.asLong = 0 },
-    { "POSITION_RECIPROCAL", "POSITION_RECIPROCAL", 0x4019, "Lorg.apache.lucene.search.suggest.analyzing.BlendedInfixSuggester$BlenderType;", &OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_POSITION_RECIPROCAL, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.suggest.analyzing.BlendedInfixSuggester$BlenderType;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum = { 2, "BlenderType", "org.apache.lucene.search.suggest.analyzing", "BlendedInfixSuggester", 0x4019, 0, NULL, 3, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/search/suggest/analyzing/BlendedInfixSuggester$BlenderType;>;" };
-  return &_OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum;
-}
-
-@end
-
-void OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_initWithNSString_withInt_(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum *self, NSString *__name, jint __ordinal) {
-  JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
-}
-
-OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum *new_OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum *self = [OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum alloc];
-  OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum)
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderType)
 
 @implementation OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LookUpComparator
 
@@ -483,7 +550,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestAnalyzingBlendedInf
   else if (o1->value_ < o2->value_) {
     return -1;
   }
-  jint keyCompare = [((id<JavaUtilComparator>) nil_chk(JreLoadStatic(OrgApacheLuceneSearchSuggestLookup, CHARSEQUENCE_COMPARATOR_))) compareWithId:o1->key_ withId:o2->key_];
+  jint keyCompare = [((id<JavaUtilComparator>) nil_chk(JreLoadStatic(OrgApacheLuceneSearchSuggestLookup, CHARSEQUENCE_COMPARATOR))) compareWithId:o1->key_ withId:o2->key_];
   if (keyCompare != 0) {
     return keyCompare;
   }
@@ -503,7 +570,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "compareWithId:withId:", "compare", "I", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x2, NULL, NULL },
+    { "init", "LookUpComparator", NULL, 0x2, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LookUpComparator = { 2, "LookUpComparator", "org.apache.lucene.search.suggest.analyzing", "BlendedInfixSuggester", 0xa, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;" };
   return &_OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LookUpComparator;
@@ -516,9 +583,11 @@ void OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LookUpComparator
 }
 
 OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LookUpComparator *new_OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LookUpComparator_init() {
-  OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LookUpComparator *self = [OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LookUpComparator alloc];
-  OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LookUpComparator_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LookUpComparator, init)
+}
+
+OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LookUpComparator *create_OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LookUpComparator_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LookUpComparator, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LookUpComparator)

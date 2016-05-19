@@ -5,25 +5,34 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneStoreSingleInstanceLockFactory_INCLUDE_ALL")
-#if OrgApacheLuceneStoreSingleInstanceLockFactory_RESTRICT
-#define OrgApacheLuceneStoreSingleInstanceLockFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneStoreSingleInstanceLockFactory")
+#ifdef RESTRICT_OrgApacheLuceneStoreSingleInstanceLockFactory
+#define INCLUDE_ALL_OrgApacheLuceneStoreSingleInstanceLockFactory 0
 #else
-#define OrgApacheLuceneStoreSingleInstanceLockFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneStoreSingleInstanceLockFactory 1
 #endif
-#undef OrgApacheLuceneStoreSingleInstanceLockFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneStoreSingleInstanceLockFactory
 
-#if !defined (_OrgApacheLuceneStoreSingleInstanceLockFactory_) && (OrgApacheLuceneStoreSingleInstanceLockFactory_INCLUDE_ALL || OrgApacheLuceneStoreSingleInstanceLockFactory_INCLUDE)
-#define _OrgApacheLuceneStoreSingleInstanceLockFactory_
+#if !defined (OrgApacheLuceneStoreSingleInstanceLockFactory_) && (INCLUDE_ALL_OrgApacheLuceneStoreSingleInstanceLockFactory || defined(INCLUDE_OrgApacheLuceneStoreSingleInstanceLockFactory))
+#define OrgApacheLuceneStoreSingleInstanceLockFactory_
 
-#define OrgApacheLuceneStoreLockFactory_RESTRICT 1
-#define OrgApacheLuceneStoreLockFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreLockFactory 1
+#define INCLUDE_OrgApacheLuceneStoreLockFactory 1
 #include "org/apache/lucene/store/LockFactory.h"
 
 @class JavaUtilHashSet;
 @class OrgApacheLuceneStoreDirectory;
 @class OrgApacheLuceneStoreLock;
 
+/*!
+ @brief Implements <code>LockFactory</code> for a single in-process instance,
+ meaning all locking will take place through this one instance.
+ Only use this <code>LockFactory</code> when you are certain all
+ IndexWriters for a given index are running
+ against a single shared in-process Directory instance.  This is
+ currently the default locking for RAMDirectory.
+ - seealso: LockFactory
+ */
 @interface OrgApacheLuceneStoreSingleInstanceLockFactory : OrgApacheLuceneStoreLockFactory {
  @public
   JavaUtilHashSet *locks_;
@@ -46,8 +55,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneStoreSingleInstanceLockFactory_init(OrgApa
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreSingleInstanceLockFactory *new_OrgApacheLuceneStoreSingleInstanceLockFactory_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneStoreSingleInstanceLockFactory *create_OrgApacheLuceneStoreSingleInstanceLockFactory_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreSingleInstanceLockFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneStoreSingleInstanceLockFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreSingleInstanceLockFactory")

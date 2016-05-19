@@ -40,6 +40,26 @@
 
 @implementation OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester
 
++ (jboolean)DEFAULT_UNICODE_AWARE {
+  return OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_DEFAULT_UNICODE_AWARE;
+}
+
++ (jint)DEFAULT_MIN_FUZZY_LENGTH {
+  return OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_DEFAULT_MIN_FUZZY_LENGTH;
+}
+
++ (jint)DEFAULT_NON_FUZZY_PREFIX {
+  return OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_DEFAULT_NON_FUZZY_PREFIX;
+}
+
++ (jint)DEFAULT_MAX_EDITS {
+  return OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_DEFAULT_MAX_EDITS;
+}
+
++ (jboolean)DEFAULT_TRANSPOSITIONS {
+  return OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_DEFAULT_TRANSPOSITIONS;
+}
+
 - (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer {
   OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_initWithOrgApacheLuceneAnalysisAnalyzer_(self, analyzer);
   return self;
@@ -75,7 +95,7 @@
 
 - (OrgApacheLuceneUtilAutomatonAutomaton *)convertAutomatonWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a {
   if (unicodeAware_) {
-    OrgApacheLuceneUtilAutomatonAutomaton *utf8automaton = [((OrgApacheLuceneUtilAutomatonUTF32ToUTF8 *) [new_OrgApacheLuceneUtilAutomatonUTF32ToUTF8_init() autorelease]) convertWithOrgApacheLuceneUtilAutomatonAutomaton:a];
+    OrgApacheLuceneUtilAutomatonAutomaton *utf8automaton = [create_OrgApacheLuceneUtilAutomatonUTF32ToUTF8_init() convertWithOrgApacheLuceneUtilAutomatonAutomaton:a];
     utf8automaton = OrgApacheLuceneUtilAutomatonOperations_determinizeWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(utf8automaton, OrgApacheLuceneUtilAutomatonOperations_DEFAULT_MAX_DETERMINIZED_STATES);
     return utf8automaton;
   }
@@ -91,8 +111,8 @@
 }
 
 - (OrgApacheLuceneUtilAutomatonAutomaton *)toLevenshteinAutomataWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton {
-  id<JavaUtilList> subs = [new_JavaUtilArrayList_init() autorelease];
-  OrgApacheLuceneUtilAutomatonFiniteStringsIterator *finiteStrings = [new_OrgApacheLuceneUtilAutomatonFiniteStringsIterator_initWithOrgApacheLuceneUtilAutomatonAutomaton_(automaton) autorelease];
+  id<JavaUtilList> subs = create_JavaUtilArrayList_init();
+  OrgApacheLuceneUtilAutomatonFiniteStringsIterator *finiteStrings = create_OrgApacheLuceneUtilAutomatonFiniteStringsIterator_initWithOrgApacheLuceneUtilAutomatonAutomaton_(automaton);
   for (OrgApacheLuceneUtilIntsRef *string; (string = [finiteStrings next]) != nil; ) {
     if (((OrgApacheLuceneUtilIntsRef *) nil_chk(string))->length_ <= nonFuzzyPrefix_ || string->length_ < minFuzzyLength_) {
       [subs addWithId:OrgApacheLuceneUtilAutomatonAutomata_makeStringWithIntArray_withInt_withInt_(string->ints_, string->offset_, string->length_)];
@@ -100,7 +120,7 @@
     else {
       IOSIntArray *ints = [IOSIntArray arrayWithLength:string->length_ - nonFuzzyPrefix_];
       JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(string->ints_, string->offset_ + nonFuzzyPrefix_, ints, 0, ints->size_);
-      OrgApacheLuceneUtilAutomatonLevenshteinAutomata *lev = [new_OrgApacheLuceneUtilAutomatonLevenshteinAutomata_initWithIntArray_withInt_withBoolean_(ints, unicodeAware_ ? JavaLangCharacter_MAX_CODE_POINT : 255, transpositions_) autorelease];
+      OrgApacheLuceneUtilAutomatonLevenshteinAutomata *lev = create_OrgApacheLuceneUtilAutomatonLevenshteinAutomata_initWithIntArray_withInt_withBoolean_(ints, unicodeAware_ ? JavaLangCharacter_MAX_CODE_POINT : 255, transpositions_);
       [subs addWithId:[lev toAutomatonWithInt:maxEdits_ withNSString:OrgApacheLuceneUtilUnicodeUtil_newStringWithIntArray_withInt_withInt_(string->ints_, string->offset_, nonFuzzyPrefix_)]];
     }
   }
@@ -121,7 +141,7 @@
     { "initWithOrgApacheLuceneAnalysisAnalyzer:", "FuzzySuggester", NULL, 0x1, NULL, NULL },
     { "initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneAnalysisAnalyzer:", "FuzzySuggester", NULL, 0x1, NULL, NULL },
     { "initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneAnalysisAnalyzer:withInt:withInt:withInt:withBoolean:withInt:withBoolean:withInt:withInt:withBoolean:", "FuzzySuggester", NULL, 0x1, NULL, NULL },
-    { "getFullPrefixPathsWithJavaUtilList:withOrgApacheLuceneUtilAutomatonAutomaton:withOrgApacheLuceneUtilFstFST:", "getFullPrefixPaths", "Ljava.util.List;", 0x4, "Ljava.io.IOException;", NULL },
+    { "getFullPrefixPathsWithJavaUtilList:withOrgApacheLuceneUtilAutomatonAutomaton:withOrgApacheLuceneUtilFstFST:", "getFullPrefixPaths", "Ljava.util.List;", 0x4, "Ljava.io.IOException;", "(Ljava/util/List<Lorg/apache/lucene/search/suggest/analyzing/FSTUtil$Path<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;>;>;Lorg/apache/lucene/util/automaton/Automaton;Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;>;)Ljava/util/List<Lorg/apache/lucene/search/suggest/analyzing/FSTUtil$Path<Lorg/apache/lucene/util/fst/PairOutputs$Pair<Ljava/lang/Long;Lorg/apache/lucene/util/BytesRef;>;>;>;" },
     { "convertAutomatonWithOrgApacheLuceneUtilAutomatonAutomaton:", "convertAutomaton", "Lorg.apache.lucene.util.automaton.Automaton;", 0x4, NULL, NULL },
     { "getTokenStreamToAutomaton", NULL, "Lorg.apache.lucene.analysis.TokenStreamToAutomaton;", 0x0, NULL, NULL },
     { "toLevenshteinAutomataWithOrgApacheLuceneUtilAutomatonAutomaton:", "toLevenshteinAutomata", "Lorg.apache.lucene.util.automaton.Automaton;", 0x0, NULL, NULL },
@@ -149,9 +169,11 @@ void OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_initWithOrgApacheLucene
 }
 
 OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester *new_OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *analyzer) {
-  OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester *self = [OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester alloc];
-  OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_initWithOrgApacheLuceneAnalysisAnalyzer_(self, analyzer);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester, initWithOrgApacheLuceneAnalysisAnalyzer_, analyzer)
+}
+
+OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester *create_OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *analyzer) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester, initWithOrgApacheLuceneAnalysisAnalyzer_, analyzer)
 }
 
 void OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester *self, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer) {
@@ -159,21 +181,23 @@ void OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_initWithOrgApacheLucene
 }
 
 OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester *new_OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer) {
-  OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester *self = [OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester alloc];
-  OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_(self, indexAnalyzer, queryAnalyzer);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester, initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_, indexAnalyzer, queryAnalyzer)
+}
+
+OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester *create_OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester, initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_, indexAnalyzer, queryAnalyzer)
 }
 
 void OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withInt_withInt_withBoolean_withInt_withBoolean_withInt_withInt_withBoolean_(OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester *self, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint options, jint maxSurfaceFormsPerAnalyzedForm, jint maxGraphExpansions, jboolean preservePositionIncrements, jint maxEdits, jboolean transpositions, jint nonFuzzyPrefix, jint minFuzzyLength, jboolean unicodeAware) {
   OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withInt_withInt_withBoolean_(self, indexAnalyzer, queryAnalyzer, options, maxSurfaceFormsPerAnalyzedForm, maxGraphExpansions, preservePositionIncrements);
   if (maxEdits < 0 || maxEdits > OrgApacheLuceneUtilAutomatonLevenshteinAutomata_MAXIMUM_SUPPORTED_DISTANCE) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"maxEdits must be between 0 and ", OrgApacheLuceneUtilAutomatonLevenshteinAutomata_MAXIMUM_SUPPORTED_DISTANCE)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"maxEdits must be between 0 and ", OrgApacheLuceneUtilAutomatonLevenshteinAutomata_MAXIMUM_SUPPORTED_DISTANCE));
   }
   if (nonFuzzyPrefix < 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$IC", @"nonFuzzyPrefix must not be >= 0 (got ", nonFuzzyPrefix, ')')) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$IC", @"nonFuzzyPrefix must not be >= 0 (got ", nonFuzzyPrefix, ')'));
   }
   if (minFuzzyLength < 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$IC", @"minFuzzyLength must not be >= 0 (got ", minFuzzyLength, ')')) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$IC", @"minFuzzyLength must not be >= 0 (got ", minFuzzyLength, ')'));
   }
   self->maxEdits_ = maxEdits;
   self->transpositions_ = transpositions;
@@ -183,9 +207,11 @@ void OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_initWithOrgApacheLucene
 }
 
 OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester *new_OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withInt_withInt_withBoolean_withInt_withBoolean_withInt_withInt_withBoolean_(OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint options, jint maxSurfaceFormsPerAnalyzedForm, jint maxGraphExpansions, jboolean preservePositionIncrements, jint maxEdits, jboolean transpositions, jint nonFuzzyPrefix, jint minFuzzyLength, jboolean unicodeAware) {
-  OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester *self = [OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester alloc];
-  OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withInt_withInt_withBoolean_withInt_withBoolean_withInt_withInt_withBoolean_(self, indexAnalyzer, queryAnalyzer, options, maxSurfaceFormsPerAnalyzedForm, maxGraphExpansions, preservePositionIncrements, maxEdits, transpositions, nonFuzzyPrefix, minFuzzyLength, unicodeAware);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester, initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withInt_withInt_withBoolean_withInt_withBoolean_withInt_withInt_withBoolean_, indexAnalyzer, queryAnalyzer, options, maxSurfaceFormsPerAnalyzedForm, maxGraphExpansions, preservePositionIncrements, maxEdits, transpositions, nonFuzzyPrefix, minFuzzyLength, unicodeAware)
+}
+
+OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester *create_OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withInt_withInt_withBoolean_withInt_withBoolean_withInt_withInt_withBoolean_(OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint options, jint maxSurfaceFormsPerAnalyzedForm, jint maxGraphExpansions, jboolean preservePositionIncrements, jint maxEdits, jboolean transpositions, jint nonFuzzyPrefix, jint minFuzzyLength, jboolean unicodeAware) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester, initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withInt_withInt_withBoolean_withInt_withBoolean_withInt_withInt_withBoolean_, indexAnalyzer, queryAnalyzer, options, maxSurfaceFormsPerAnalyzedForm, maxGraphExpansions, preservePositionIncrements, maxEdits, transpositions, nonFuzzyPrefix, minFuzzyLength, unicodeAware)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestAnalyzingFuzzySuggester)

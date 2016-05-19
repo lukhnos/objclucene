@@ -5,23 +5,28 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneStoreByteArrayDataInput_INCLUDE_ALL")
-#if OrgApacheLuceneStoreByteArrayDataInput_RESTRICT
-#define OrgApacheLuceneStoreByteArrayDataInput_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneStoreByteArrayDataInput")
+#ifdef RESTRICT_OrgApacheLuceneStoreByteArrayDataInput
+#define INCLUDE_ALL_OrgApacheLuceneStoreByteArrayDataInput 0
 #else
-#define OrgApacheLuceneStoreByteArrayDataInput_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneStoreByteArrayDataInput 1
 #endif
-#undef OrgApacheLuceneStoreByteArrayDataInput_RESTRICT
+#undef RESTRICT_OrgApacheLuceneStoreByteArrayDataInput
 
-#if !defined (_OrgApacheLuceneStoreByteArrayDataInput_) && (OrgApacheLuceneStoreByteArrayDataInput_INCLUDE_ALL || OrgApacheLuceneStoreByteArrayDataInput_INCLUDE)
-#define _OrgApacheLuceneStoreByteArrayDataInput_
+#if !defined (OrgApacheLuceneStoreByteArrayDataInput_) && (INCLUDE_ALL_OrgApacheLuceneStoreByteArrayDataInput || defined(INCLUDE_OrgApacheLuceneStoreByteArrayDataInput))
+#define OrgApacheLuceneStoreByteArrayDataInput_
 
-#define OrgApacheLuceneStoreDataInput_RESTRICT 1
-#define OrgApacheLuceneStoreDataInput_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreDataInput 1
+#define INCLUDE_OrgApacheLuceneStoreDataInput 1
 #include "org/apache/lucene/store/DataInput.h"
 
 @class IOSByteArray;
 
+/*!
+ @brief DataInput backed by a byte array.
+ <b>WARNING:</b> This class omits all low-level checks.
+  
+ */
 @interface OrgApacheLuceneStoreByteArrayDataInput : OrgApacheLuceneStoreDataInput
 
 #pragma mark Public
@@ -76,16 +81,22 @@ FOUNDATION_EXPORT void OrgApacheLuceneStoreByteArrayDataInput_initWithByteArray_
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreByteArrayDataInput *new_OrgApacheLuceneStoreByteArrayDataInput_initWithByteArray_(IOSByteArray *bytes) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneStoreByteArrayDataInput *create_OrgApacheLuceneStoreByteArrayDataInput_initWithByteArray_(IOSByteArray *bytes);
+
 FOUNDATION_EXPORT void OrgApacheLuceneStoreByteArrayDataInput_initWithByteArray_withInt_withInt_(OrgApacheLuceneStoreByteArrayDataInput *self, IOSByteArray *bytes, jint offset, jint len);
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreByteArrayDataInput *new_OrgApacheLuceneStoreByteArrayDataInput_initWithByteArray_withInt_withInt_(IOSByteArray *bytes, jint offset, jint len) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneStoreByteArrayDataInput *create_OrgApacheLuceneStoreByteArrayDataInput_initWithByteArray_withInt_withInt_(IOSByteArray *bytes, jint offset, jint len);
 
 FOUNDATION_EXPORT void OrgApacheLuceneStoreByteArrayDataInput_init(OrgApacheLuceneStoreByteArrayDataInput *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreByteArrayDataInput *new_OrgApacheLuceneStoreByteArrayDataInput_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneStoreByteArrayDataInput *create_OrgApacheLuceneStoreByteArrayDataInput_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreByteArrayDataInput)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneStoreByteArrayDataInput_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreByteArrayDataInput")

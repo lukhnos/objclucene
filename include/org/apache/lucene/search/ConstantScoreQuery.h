@@ -5,25 +5,30 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchConstantScoreQuery_INCLUDE_ALL")
-#if OrgApacheLuceneSearchConstantScoreQuery_RESTRICT
-#define OrgApacheLuceneSearchConstantScoreQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchConstantScoreQuery")
+#ifdef RESTRICT_OrgApacheLuceneSearchConstantScoreQuery
+#define INCLUDE_ALL_OrgApacheLuceneSearchConstantScoreQuery 0
 #else
-#define OrgApacheLuceneSearchConstantScoreQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchConstantScoreQuery 1
 #endif
-#undef OrgApacheLuceneSearchConstantScoreQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchConstantScoreQuery
 
-#if !defined (_OrgApacheLuceneSearchConstantScoreQuery_) && (OrgApacheLuceneSearchConstantScoreQuery_INCLUDE_ALL || OrgApacheLuceneSearchConstantScoreQuery_INCLUDE)
-#define _OrgApacheLuceneSearchConstantScoreQuery_
+#if !defined (OrgApacheLuceneSearchConstantScoreQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchConstantScoreQuery || defined(INCLUDE_OrgApacheLuceneSearchConstantScoreQuery))
+#define OrgApacheLuceneSearchConstantScoreQuery_
 
-#define OrgApacheLuceneSearchQuery_RESTRICT 1
-#define OrgApacheLuceneSearchQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchQuery 1
+#define INCLUDE_OrgApacheLuceneSearchQuery 1
 #include "org/apache/lucene/search/Query.h"
 
 @class OrgApacheLuceneIndexIndexReader;
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchWeight;
 
+/*!
+ @brief A query that wraps another query and simply returns a constant score equal to the
+ query boost for every document that matches the query.
+ It therefore simply strips of all scores and returns a constant one.
+ */
 @interface OrgApacheLuceneSearchConstantScoreQuery : OrgApacheLuceneSearchQuery {
  @public
   OrgApacheLuceneSearchQuery *query_;
@@ -31,6 +36,11 @@
 
 #pragma mark Public
 
+/*!
+ @brief Strips off scores from the passed in Query.
+ The hits will get a constant score
+ dependent on the boost factor of this query. 
+ */
 - (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
@@ -38,6 +48,9 @@
 
 - (jboolean)isEqual:(id)o;
 
+/*!
+ @brief Returns the encapsulated query.
+ */
 - (OrgApacheLuceneSearchQuery *)getQuery;
 
 - (NSUInteger)hash;
@@ -56,15 +69,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchConstantScoreQuery_initWithOrgApache
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchConstantScoreQuery *new_OrgApacheLuceneSearchConstantScoreQuery_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchQuery *query) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchConstantScoreQuery *create_OrgApacheLuceneSearchConstantScoreQuery_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchQuery *query);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchConstantScoreQuery)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_) && (OrgApacheLuceneSearchConstantScoreQuery_INCLUDE_ALL || OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_INCLUDE)
-#define _OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_
+#if !defined (OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchConstantScoreQuery || defined(INCLUDE_OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer))
+#define OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_
 
-#define OrgApacheLuceneSearchBulkScorer_RESTRICT 1
-#define OrgApacheLuceneSearchBulkScorer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchBulkScorer 1
+#define INCLUDE_OrgApacheLuceneSearchBulkScorer 1
 #include "org/apache/lucene/search/BulkScorer.h"
 
 @class OrgApacheLuceneSearchConstantScoreQuery;
@@ -72,6 +87,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchConstantScoreQuery)
 @protocol OrgApacheLuceneSearchLeafCollector;
 @protocol OrgApacheLuceneUtilBits;
 
+/*!
+ @brief We return this as our <code>BulkScorer</code> so that if the CSQ
+ wraps a query with its own optimized top-level
+ scorer (e.g.
+ BooleanScorer) we can use that
+ top-level scorer. 
+ */
 @interface OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer : OrgApacheLuceneSearchBulkScorer {
  @public
   OrgApacheLuceneSearchBulkScorer *bulkScorer_;
@@ -104,8 +126,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScore
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer *new_OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_initWithOrgApacheLuceneSearchConstantScoreQuery_withOrgApacheLuceneSearchBulkScorer_withOrgApacheLuceneSearchWeight_withFloat_(OrgApacheLuceneSearchConstantScoreQuery *outer$, OrgApacheLuceneSearchBulkScorer *bulkScorer, OrgApacheLuceneSearchWeight *weight, jfloat theScore) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer *create_OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer_initWithOrgApacheLuceneSearchConstantScoreQuery_withOrgApacheLuceneSearchBulkScorer_withOrgApacheLuceneSearchWeight_withFloat_(OrgApacheLuceneSearchConstantScoreQuery *outer$, OrgApacheLuceneSearchBulkScorer *bulkScorer, OrgApacheLuceneSearchWeight *weight, jfloat theScore);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchConstantScoreQuery_ConstantBulkScorer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchConstantScoreQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchConstantScoreQuery")

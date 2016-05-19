@@ -7,14 +7,19 @@
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
-#include "java/lang/Throwable.h"
 #include "org/apache/lucene/index/TwoPhaseCommit.h"
 #include "org/apache/lucene/index/TwoPhaseCommitTool.h"
 
 @interface OrgApacheLuceneIndexTwoPhaseCommitTool ()
 
+/*!
+ @brief No instance
+ */
 - (instancetype)init;
 
+/*!
+ @brief rollback all objects, discarding any exceptions that occur.
+ */
 + (void)rollbackWithOrgApacheLuceneIndexTwoPhaseCommitArray:(IOSObjectArray *)objects;
 
 @end
@@ -22,6 +27,8 @@
 __attribute__((unused)) static void OrgApacheLuceneIndexTwoPhaseCommitTool_init(OrgApacheLuceneIndexTwoPhaseCommitTool *self);
 
 __attribute__((unused)) static OrgApacheLuceneIndexTwoPhaseCommitTool *new_OrgApacheLuceneIndexTwoPhaseCommitTool_init() NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexTwoPhaseCommitTool *create_OrgApacheLuceneIndexTwoPhaseCommitTool_init();
 
 __attribute__((unused)) static void OrgApacheLuceneIndexTwoPhaseCommitTool_rollbackWithOrgApacheLuceneIndexTwoPhaseCommitArray_(IOSObjectArray *objects);
 
@@ -60,9 +67,11 @@ void OrgApacheLuceneIndexTwoPhaseCommitTool_init(OrgApacheLuceneIndexTwoPhaseCom
 }
 
 OrgApacheLuceneIndexTwoPhaseCommitTool *new_OrgApacheLuceneIndexTwoPhaseCommitTool_init() {
-  OrgApacheLuceneIndexTwoPhaseCommitTool *self = [OrgApacheLuceneIndexTwoPhaseCommitTool alloc];
-  OrgApacheLuceneIndexTwoPhaseCommitTool_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexTwoPhaseCommitTool, init)
+}
+
+OrgApacheLuceneIndexTwoPhaseCommitTool *create_OrgApacheLuceneIndexTwoPhaseCommitTool_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexTwoPhaseCommitTool, init)
 }
 
 void OrgApacheLuceneIndexTwoPhaseCommitTool_rollbackWithOrgApacheLuceneIndexTwoPhaseCommitArray_(IOSObjectArray *objects) {
@@ -77,7 +86,7 @@ void OrgApacheLuceneIndexTwoPhaseCommitTool_rollbackWithOrgApacheLuceneIndexTwoP
         @try {
           [tpc rollback];
         }
-        @catch (JavaLangThrowable *t) {
+        @catch (NSException *t) {
         }
       }
     }
@@ -95,21 +104,21 @@ void OrgApacheLuceneIndexTwoPhaseCommitTool_executeWithOrgApacheLuceneIndexTwoPh
       }
     }
   }
-  @catch (JavaLangThrowable *t) {
+  @catch (NSException *t) {
     OrgApacheLuceneIndexTwoPhaseCommitTool_rollbackWithOrgApacheLuceneIndexTwoPhaseCommitArray_(objects);
-    @throw [new_OrgApacheLuceneIndexTwoPhaseCommitTool_PrepareCommitFailException_initWithJavaLangThrowable_withOrgApacheLuceneIndexTwoPhaseCommit_(t, tpc) autorelease];
+    @throw create_OrgApacheLuceneIndexTwoPhaseCommitTool_PrepareCommitFailException_initWithNSException_withOrgApacheLuceneIndexTwoPhaseCommit_(t, tpc);
   }
   @try {
-    for (jint i = 0; i < ((IOSObjectArray *) nil_chk(objects))->size_; i++) {
+    for (jint i = 0; i < objects->size_; i++) {
       tpc = IOSObjectArray_Get(objects, i);
       if (tpc != nil) {
         [tpc commit];
       }
     }
   }
-  @catch (JavaLangThrowable *t) {
+  @catch (NSException *t) {
     OrgApacheLuceneIndexTwoPhaseCommitTool_rollbackWithOrgApacheLuceneIndexTwoPhaseCommitArray_(objects);
-    @throw [new_OrgApacheLuceneIndexTwoPhaseCommitTool_CommitFailException_initWithJavaLangThrowable_withOrgApacheLuceneIndexTwoPhaseCommit_(t, tpc) autorelease];
+    @throw create_OrgApacheLuceneIndexTwoPhaseCommitTool_CommitFailException_initWithNSException_withOrgApacheLuceneIndexTwoPhaseCommit_(t, tpc);
   }
 }
 
@@ -117,15 +126,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexTwoPhaseCommitTool)
 
 @implementation OrgApacheLuceneIndexTwoPhaseCommitTool_PrepareCommitFailException
 
-- (instancetype)initWithJavaLangThrowable:(JavaLangThrowable *)cause
-   withOrgApacheLuceneIndexTwoPhaseCommit:(id<OrgApacheLuceneIndexTwoPhaseCommit>)obj {
-  OrgApacheLuceneIndexTwoPhaseCommitTool_PrepareCommitFailException_initWithJavaLangThrowable_withOrgApacheLuceneIndexTwoPhaseCommit_(self, cause, obj);
+- (instancetype)initWithNSException:(NSException *)cause
+withOrgApacheLuceneIndexTwoPhaseCommit:(id<OrgApacheLuceneIndexTwoPhaseCommit>)obj {
+  OrgApacheLuceneIndexTwoPhaseCommitTool_PrepareCommitFailException_initWithNSException_withOrgApacheLuceneIndexTwoPhaseCommit_(self, cause, obj);
   return self;
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaLangThrowable:withOrgApacheLuceneIndexTwoPhaseCommit:", "PrepareCommitFailException", NULL, 0x1, NULL, NULL },
+    { "initWithNSException:withOrgApacheLuceneIndexTwoPhaseCommit:", "PrepareCommitFailException", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneIndexTwoPhaseCommitTool_PrepareCommitFailException = { 2, "PrepareCommitFailException", "org.apache.lucene.index", "TwoPhaseCommitTool", 0x9, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexTwoPhaseCommitTool_PrepareCommitFailException;
@@ -133,29 +142,31 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexTwoPhaseCommitTool)
 
 @end
 
-void OrgApacheLuceneIndexTwoPhaseCommitTool_PrepareCommitFailException_initWithJavaLangThrowable_withOrgApacheLuceneIndexTwoPhaseCommit_(OrgApacheLuceneIndexTwoPhaseCommitTool_PrepareCommitFailException *self, JavaLangThrowable *cause, id<OrgApacheLuceneIndexTwoPhaseCommit> obj) {
-  JavaIoIOException_initWithNSString_withJavaLangThrowable_(self, JreStrcat("$@", @"prepareCommit() failed on ", obj), cause);
+void OrgApacheLuceneIndexTwoPhaseCommitTool_PrepareCommitFailException_initWithNSException_withOrgApacheLuceneIndexTwoPhaseCommit_(OrgApacheLuceneIndexTwoPhaseCommitTool_PrepareCommitFailException *self, NSException *cause, id<OrgApacheLuceneIndexTwoPhaseCommit> obj) {
+  JavaIoIOException_initWithNSString_withNSException_(self, JreStrcat("$@", @"prepareCommit() failed on ", obj), cause);
 }
 
-OrgApacheLuceneIndexTwoPhaseCommitTool_PrepareCommitFailException *new_OrgApacheLuceneIndexTwoPhaseCommitTool_PrepareCommitFailException_initWithJavaLangThrowable_withOrgApacheLuceneIndexTwoPhaseCommit_(JavaLangThrowable *cause, id<OrgApacheLuceneIndexTwoPhaseCommit> obj) {
-  OrgApacheLuceneIndexTwoPhaseCommitTool_PrepareCommitFailException *self = [OrgApacheLuceneIndexTwoPhaseCommitTool_PrepareCommitFailException alloc];
-  OrgApacheLuceneIndexTwoPhaseCommitTool_PrepareCommitFailException_initWithJavaLangThrowable_withOrgApacheLuceneIndexTwoPhaseCommit_(self, cause, obj);
-  return self;
+OrgApacheLuceneIndexTwoPhaseCommitTool_PrepareCommitFailException *new_OrgApacheLuceneIndexTwoPhaseCommitTool_PrepareCommitFailException_initWithNSException_withOrgApacheLuceneIndexTwoPhaseCommit_(NSException *cause, id<OrgApacheLuceneIndexTwoPhaseCommit> obj) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexTwoPhaseCommitTool_PrepareCommitFailException, initWithNSException_withOrgApacheLuceneIndexTwoPhaseCommit_, cause, obj)
+}
+
+OrgApacheLuceneIndexTwoPhaseCommitTool_PrepareCommitFailException *create_OrgApacheLuceneIndexTwoPhaseCommitTool_PrepareCommitFailException_initWithNSException_withOrgApacheLuceneIndexTwoPhaseCommit_(NSException *cause, id<OrgApacheLuceneIndexTwoPhaseCommit> obj) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexTwoPhaseCommitTool_PrepareCommitFailException, initWithNSException_withOrgApacheLuceneIndexTwoPhaseCommit_, cause, obj)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexTwoPhaseCommitTool_PrepareCommitFailException)
 
 @implementation OrgApacheLuceneIndexTwoPhaseCommitTool_CommitFailException
 
-- (instancetype)initWithJavaLangThrowable:(JavaLangThrowable *)cause
-   withOrgApacheLuceneIndexTwoPhaseCommit:(id<OrgApacheLuceneIndexTwoPhaseCommit>)obj {
-  OrgApacheLuceneIndexTwoPhaseCommitTool_CommitFailException_initWithJavaLangThrowable_withOrgApacheLuceneIndexTwoPhaseCommit_(self, cause, obj);
+- (instancetype)initWithNSException:(NSException *)cause
+withOrgApacheLuceneIndexTwoPhaseCommit:(id<OrgApacheLuceneIndexTwoPhaseCommit>)obj {
+  OrgApacheLuceneIndexTwoPhaseCommitTool_CommitFailException_initWithNSException_withOrgApacheLuceneIndexTwoPhaseCommit_(self, cause, obj);
   return self;
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaLangThrowable:withOrgApacheLuceneIndexTwoPhaseCommit:", "CommitFailException", NULL, 0x1, NULL, NULL },
+    { "initWithNSException:withOrgApacheLuceneIndexTwoPhaseCommit:", "CommitFailException", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneIndexTwoPhaseCommitTool_CommitFailException = { 2, "CommitFailException", "org.apache.lucene.index", "TwoPhaseCommitTool", 0x9, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexTwoPhaseCommitTool_CommitFailException;
@@ -163,14 +174,16 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexTwoPhaseCommitTool_PrepareC
 
 @end
 
-void OrgApacheLuceneIndexTwoPhaseCommitTool_CommitFailException_initWithJavaLangThrowable_withOrgApacheLuceneIndexTwoPhaseCommit_(OrgApacheLuceneIndexTwoPhaseCommitTool_CommitFailException *self, JavaLangThrowable *cause, id<OrgApacheLuceneIndexTwoPhaseCommit> obj) {
-  JavaIoIOException_initWithNSString_withJavaLangThrowable_(self, JreStrcat("$@", @"commit() failed on ", obj), cause);
+void OrgApacheLuceneIndexTwoPhaseCommitTool_CommitFailException_initWithNSException_withOrgApacheLuceneIndexTwoPhaseCommit_(OrgApacheLuceneIndexTwoPhaseCommitTool_CommitFailException *self, NSException *cause, id<OrgApacheLuceneIndexTwoPhaseCommit> obj) {
+  JavaIoIOException_initWithNSString_withNSException_(self, JreStrcat("$@", @"commit() failed on ", obj), cause);
 }
 
-OrgApacheLuceneIndexTwoPhaseCommitTool_CommitFailException *new_OrgApacheLuceneIndexTwoPhaseCommitTool_CommitFailException_initWithJavaLangThrowable_withOrgApacheLuceneIndexTwoPhaseCommit_(JavaLangThrowable *cause, id<OrgApacheLuceneIndexTwoPhaseCommit> obj) {
-  OrgApacheLuceneIndexTwoPhaseCommitTool_CommitFailException *self = [OrgApacheLuceneIndexTwoPhaseCommitTool_CommitFailException alloc];
-  OrgApacheLuceneIndexTwoPhaseCommitTool_CommitFailException_initWithJavaLangThrowable_withOrgApacheLuceneIndexTwoPhaseCommit_(self, cause, obj);
-  return self;
+OrgApacheLuceneIndexTwoPhaseCommitTool_CommitFailException *new_OrgApacheLuceneIndexTwoPhaseCommitTool_CommitFailException_initWithNSException_withOrgApacheLuceneIndexTwoPhaseCommit_(NSException *cause, id<OrgApacheLuceneIndexTwoPhaseCommit> obj) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexTwoPhaseCommitTool_CommitFailException, initWithNSException_withOrgApacheLuceneIndexTwoPhaseCommit_, cause, obj)
+}
+
+OrgApacheLuceneIndexTwoPhaseCommitTool_CommitFailException *create_OrgApacheLuceneIndexTwoPhaseCommitTool_CommitFailException_initWithNSException_withOrgApacheLuceneIndexTwoPhaseCommit_(NSException *cause, id<OrgApacheLuceneIndexTwoPhaseCommit> obj) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexTwoPhaseCommitTool_CommitFailException, initWithNSException_withOrgApacheLuceneIndexTwoPhaseCommit_, cause, obj)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexTwoPhaseCommitTool_CommitFailException)

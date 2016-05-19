@@ -54,9 +54,11 @@ void OrgApacheLuceneSearchSimilaritiesAfterEffectB_init(OrgApacheLuceneSearchSim
 }
 
 OrgApacheLuceneSearchSimilaritiesAfterEffectB *new_OrgApacheLuceneSearchSimilaritiesAfterEffectB_init() {
-  OrgApacheLuceneSearchSimilaritiesAfterEffectB *self = [OrgApacheLuceneSearchSimilaritiesAfterEffectB alloc];
-  OrgApacheLuceneSearchSimilaritiesAfterEffectB_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSimilaritiesAfterEffectB, init)
+}
+
+OrgApacheLuceneSearchSimilaritiesAfterEffectB *create_OrgApacheLuceneSearchSimilaritiesAfterEffectB_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSimilaritiesAfterEffectB, init)
 }
 
 jfloat OrgApacheLuceneSearchSimilaritiesAfterEffectB_scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats_withFloat_(OrgApacheLuceneSearchSimilaritiesAfterEffectB *self, OrgApacheLuceneSearchSimilaritiesBasicStats *stats, jfloat tfn) {

@@ -5,47 +5,87 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisPtPortugueseAnalyzer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisPtPortugueseAnalyzer_RESTRICT
-#define OrgApacheLuceneAnalysisPtPortugueseAnalyzer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPtPortugueseAnalyzer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisPtPortugueseAnalyzer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPtPortugueseAnalyzer 0
 #else
-#define OrgApacheLuceneAnalysisPtPortugueseAnalyzer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPtPortugueseAnalyzer 1
 #endif
-#undef OrgApacheLuceneAnalysisPtPortugueseAnalyzer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisPtPortugueseAnalyzer
 
-#if !defined (_OrgApacheLuceneAnalysisPtPortugueseAnalyzer_) && (OrgApacheLuceneAnalysisPtPortugueseAnalyzer_INCLUDE_ALL || OrgApacheLuceneAnalysisPtPortugueseAnalyzer_INCLUDE)
-#define _OrgApacheLuceneAnalysisPtPortugueseAnalyzer_
+#if !defined (OrgApacheLuceneAnalysisPtPortugueseAnalyzer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPtPortugueseAnalyzer || defined(INCLUDE_OrgApacheLuceneAnalysisPtPortugueseAnalyzer))
+#define OrgApacheLuceneAnalysisPtPortugueseAnalyzer_
 
-#define OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase 1
 #include "org/apache/lucene/analysis/util/StopwordAnalyzerBase.h"
 
 @class OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;
 @class OrgApacheLuceneAnalysisUtilCharArraySet;
 
+/*!
+ @brief <code>Analyzer</code> for Portuguese.
+ */
 @interface OrgApacheLuceneAnalysisPtPortugueseAnalyzer : OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase
+
++ (NSString *)DEFAULT_STOPWORD_FILE;
 
 #pragma mark Public
 
+/*!
+ @brief Builds an analyzer with the default stop words: <code>DEFAULT_STOPWORD_FILE</code>.
+ */
 - (instancetype)init;
 
+/*!
+ @brief Builds an analyzer with the given stop words.
+ @param stopwords a stopword set
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords;
 
+/*!
+ @brief Builds an analyzer with the given stop words.
+ If a non-empty stem exclusion set is
+ provided this analyzer will add a <code>SetKeywordMarkerFilter</code> before
+ stemming.
+ @param stopwords a stopword set
+ @param stemExclusionSet a set of terms not to be stemmed
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords
                     withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stemExclusionSet;
 
+/*!
+ @brief Returns an unmodifiable instance of the default stop words set.
+ @return default stop words set.
+ */
 + (OrgApacheLuceneAnalysisUtilCharArraySet *)getDefaultStopSet;
 
 #pragma mark Protected
 
+/*!
+ @brief Creates a
+ <code>org.apache.lucene.analysis.Analyzer.TokenStreamComponents</code>
+ which tokenizes all the text in the provided <code>Reader</code>.
+ @return A
+ <code>org.apache.lucene.analysis.Analyzer.TokenStreamComponents</code>
+ built from an <code>StandardTokenizer</code> filtered with
+ <code>StandardFilter</code>, <code>LowerCaseFilter</code>, <code>StopFilter</code>
+ , <code>SetKeywordMarkerFilter</code> if a stem exclusion set is
+ provided and <code>PortugueseLightStemFilter</code>.
+ */
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisPtPortugueseAnalyzer)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisPtPortugueseAnalyzer_DEFAULT_STOPWORD_FILE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisPtPortugueseAnalyzer, DEFAULT_STOPWORD_FILE_, NSString *)
+/*!
+ @brief File containing default Portuguese stopwords.
+ */
+inline NSString *OrgApacheLuceneAnalysisPtPortugueseAnalyzer_get_DEFAULT_STOPWORD_FILE();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisPtPortugueseAnalyzer_DEFAULT_STOPWORD_FILE;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisPtPortugueseAnalyzer, DEFAULT_STOPWORD_FILE, NSString *)
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisPtPortugueseAnalyzer_getDefaultStopSet();
 
@@ -53,16 +93,22 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPtPortugueseAnalyzer_init(OrgApach
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtPortugueseAnalyzer *new_OrgApacheLuceneAnalysisPtPortugueseAnalyzer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtPortugueseAnalyzer *create_OrgApacheLuceneAnalysisPtPortugueseAnalyzer_init();
+
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPtPortugueseAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisPtPortugueseAnalyzer *self, OrgApacheLuceneAnalysisUtilCharArraySet *stopwords);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtPortugueseAnalyzer *new_OrgApacheLuceneAnalysisPtPortugueseAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopwords) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtPortugueseAnalyzer *create_OrgApacheLuceneAnalysisPtPortugueseAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopwords);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPtPortugueseAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisPtPortugueseAnalyzer *self, OrgApacheLuceneAnalysisUtilCharArraySet *stopwords, OrgApacheLuceneAnalysisUtilCharArraySet *stemExclusionSet);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtPortugueseAnalyzer *new_OrgApacheLuceneAnalysisPtPortugueseAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopwords, OrgApacheLuceneAnalysisUtilCharArraySet *stemExclusionSet) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtPortugueseAnalyzer *create_OrgApacheLuceneAnalysisPtPortugueseAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopwords, OrgApacheLuceneAnalysisUtilCharArraySet *stemExclusionSet);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPtPortugueseAnalyzer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisPtPortugueseAnalyzer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPtPortugueseAnalyzer")

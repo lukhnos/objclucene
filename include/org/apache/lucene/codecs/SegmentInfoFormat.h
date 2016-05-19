@@ -5,37 +5,60 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsSegmentInfoFormat_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsSegmentInfoFormat_RESTRICT
-#define OrgApacheLuceneCodecsSegmentInfoFormat_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsSegmentInfoFormat")
+#ifdef RESTRICT_OrgApacheLuceneCodecsSegmentInfoFormat
+#define INCLUDE_ALL_OrgApacheLuceneCodecsSegmentInfoFormat 0
 #else
-#define OrgApacheLuceneCodecsSegmentInfoFormat_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsSegmentInfoFormat 1
 #endif
-#undef OrgApacheLuceneCodecsSegmentInfoFormat_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsSegmentInfoFormat
 
-#if !defined (_OrgApacheLuceneCodecsSegmentInfoFormat_) && (OrgApacheLuceneCodecsSegmentInfoFormat_INCLUDE_ALL || OrgApacheLuceneCodecsSegmentInfoFormat_INCLUDE)
-#define _OrgApacheLuceneCodecsSegmentInfoFormat_
+#if !defined (OrgApacheLuceneCodecsSegmentInfoFormat_) && (INCLUDE_ALL_OrgApacheLuceneCodecsSegmentInfoFormat || defined(INCLUDE_OrgApacheLuceneCodecsSegmentInfoFormat))
+#define OrgApacheLuceneCodecsSegmentInfoFormat_
 
 @class IOSByteArray;
 @class OrgApacheLuceneIndexSegmentInfo;
 @class OrgApacheLuceneStoreDirectory;
 @class OrgApacheLuceneStoreIOContext;
 
+/*!
+ @brief Expert: Controls the format of the 
+ <code>SegmentInfo</code> (segment metadata file).
+ - seealso: SegmentInfo
+ */
 @interface OrgApacheLuceneCodecsSegmentInfoFormat : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Read <code>SegmentInfo</code> data from a directory.
+ @param directory directory to read from
+ @param segmentName name of the segment to read
+ @param segmentID expected identifier for the segment
+ @return infos instance to be populated with data
+ @throws IOException If an I/O error occurs
+ */
 - (OrgApacheLuceneIndexSegmentInfo *)readWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
                                                               withNSString:(NSString *)segmentName
                                                              withByteArray:(IOSByteArray *)segmentID
                                          withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
 
+/*!
+ @brief Write <code>SegmentInfo</code> data.
+ The codec must add its SegmentInfo filename(s) to <code>info</code> before doing i/o. 
+ @throws IOException If an I/O error occurs
+ */
 - (void)writeWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
            withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)info
              withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)ioContext;
 
 #pragma mark Protected
 
+/*!
+ @brief Sole constructor.
+ (For invocation by subclass 
+ constructors, typically implicit.) 
+ */
 - (instancetype)init;
 
 @end
@@ -48,4 +71,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsSegmentInfoFormat)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsSegmentInfoFormat_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsSegmentInfoFormat")

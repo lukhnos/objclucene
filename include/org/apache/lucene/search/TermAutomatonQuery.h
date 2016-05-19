@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchTermAutomatonQuery_INCLUDE_ALL")
-#if OrgApacheLuceneSearchTermAutomatonQuery_RESTRICT
-#define OrgApacheLuceneSearchTermAutomatonQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchTermAutomatonQuery")
+#ifdef RESTRICT_OrgApacheLuceneSearchTermAutomatonQuery
+#define INCLUDE_ALL_OrgApacheLuceneSearchTermAutomatonQuery 0
 #else
-#define OrgApacheLuceneSearchTermAutomatonQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchTermAutomatonQuery 1
 #endif
-#undef OrgApacheLuceneSearchTermAutomatonQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchTermAutomatonQuery
 
-#if !defined (_OrgApacheLuceneSearchTermAutomatonQuery_) && (OrgApacheLuceneSearchTermAutomatonQuery_INCLUDE_ALL || OrgApacheLuceneSearchTermAutomatonQuery_INCLUDE)
-#define _OrgApacheLuceneSearchTermAutomatonQuery_
+#if !defined (OrgApacheLuceneSearchTermAutomatonQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchTermAutomatonQuery || defined(INCLUDE_OrgApacheLuceneSearchTermAutomatonQuery))
+#define OrgApacheLuceneSearchTermAutomatonQuery_
 
-#define OrgApacheLuceneSearchQuery_RESTRICT 1
-#define OrgApacheLuceneSearchQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchQuery 1
+#define INCLUDE_OrgApacheLuceneSearchQuery 1
 #include "org/apache/lucene/search/Query.h"
 
 @class OrgApacheLuceneSearchIndexSearcher;
@@ -25,6 +25,23 @@
 @class OrgApacheLuceneUtilAutomatonAutomaton;
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief A proximity query that lets you express an automaton, whose
+ transitions are terms, to match documents.
+ This is a generalization
+ of other proximity queries like  <code>PhraseQuery</code>, <code>MultiPhraseQuery</code>
+  and <code>SpanNearQuery</code>.  It is likely
+ slow, since it visits any document having any of the terms (i.e. it
+ acts like a disjunction, not a conjunction like <code>PhraseQuery</code>
+ ), and then it must merge-sort all positions within each
+ document to test whether/how many times the automaton matches.
+ <p>After creating the query, use <code>createState</code>, <code>setAccept</code>
+ , <code>addTransition</code> and <code>addAnyTransition</code> to
+ build up the automaton.  Once you are done, call <code>finish</code> and
+ then execute the query.
+ <p>This code is very new and likely has exciting bugs!
+  
+ */
 @interface OrgApacheLuceneSearchTermAutomatonQuery : OrgApacheLuceneSearchQuery {
  @public
   OrgApacheLuceneUtilAutomatonAutomaton *det_;
@@ -34,33 +51,68 @@
 
 - (instancetype)initWithNSString:(NSString *)field;
 
+/*!
+ @brief Adds a transition matching any term.
+ */
 - (void)addAnyTransitionWithInt:(jint)source
                         withInt:(jint)dest;
 
+/*!
+ @brief Adds a transition to the automaton.
+ */
 - (void)addTransitionWithInt:(jint)source
                      withInt:(jint)dest
 withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
 
+/*!
+ @brief Adds a transition to the automaton.
+ */
 - (void)addTransitionWithInt:(jint)source
                      withInt:(jint)dest
                 withNSString:(NSString *)term;
 
+/*!
+ @brief Returns a new state; state 0 is always the initial state.
+ */
 - (jint)createState;
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores;
 
+/*!
+ @brief Returns true iff <code>o</code> is equal to this.
+ */
 - (jboolean)isEqual:(id)o;
 
+/*!
+ @brief Call this once you are done adding states/transitions.
+ */
 - (void)finish;
 
+/*!
+ @brief Call this once you are done adding states/transitions.
+ @param maxDeterminizedStates Maximum number of states created when
+ determinizing the automaton.  Higher numbers allow this operation to
+ consume more memory but allow more complex automatons.
+ */
 - (void)finishWithInt:(jint)maxDeterminizedStates;
 
+/*!
+ @brief Returns a hash code value for this object.
+ This is very costly! 
+ */
 - (NSUInteger)hash;
 
+/*!
+ @brief Marks the specified state as accept or not.
+ */
 - (void)setAcceptWithInt:(jint)state
              withBoolean:(jboolean)accept;
 
+/*!
+ @brief Returns the dot (graphviz) representation of this automaton.
+ This is extremely useful for visualizing the automaton. 
+ */
 - (NSString *)toDot;
 
 - (NSString *)toStringWithNSString:(NSString *)field;
@@ -75,12 +127,14 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchTermAutomatonQuery_initWithNSString_
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchTermAutomatonQuery *new_OrgApacheLuceneSearchTermAutomatonQuery_initWithNSString_(NSString *field) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchTermAutomatonQuery *create_OrgApacheLuceneSearchTermAutomatonQuery_initWithNSString_(NSString *field);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermAutomatonQuery)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer_) && (OrgApacheLuceneSearchTermAutomatonQuery_INCLUDE_ALL || OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer_INCLUDE)
-#define _OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer_
+#if !defined (OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchTermAutomatonQuery || defined(INCLUDE_OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer))
+#define OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer_
 
 @class OrgApacheLuceneIndexPostingsEnum;
 
@@ -107,15 +161,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer_ini
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer *new_OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer_initWithInt_withOrgApacheLuceneIndexPostingsEnum_(jint termID, OrgApacheLuceneIndexPostingsEnum *posEnum) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer *create_OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer_initWithInt_withOrgApacheLuceneIndexPostingsEnum_(jint termID, OrgApacheLuceneIndexPostingsEnum *posEnum);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight_) && (OrgApacheLuceneSearchTermAutomatonQuery_INCLUDE_ALL || OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight_INCLUDE)
-#define _OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight_
+#if !defined (OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight_) && (INCLUDE_ALL_OrgApacheLuceneSearchTermAutomatonQuery || defined(INCLUDE_OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight))
+#define OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight_
 
-#define OrgApacheLuceneSearchWeight_RESTRICT 1
-#define OrgApacheLuceneSearchWeight_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchWeight 1
+#define INCLUDE_OrgApacheLuceneSearchWeight 1
 #include "org/apache/lucene/search/Weight.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
@@ -163,8 +219,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeig
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight *new_OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight_initWithOrgApacheLuceneSearchTermAutomatonQuery_withOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_(OrgApacheLuceneSearchTermAutomatonQuery *outer$, OrgApacheLuceneUtilAutomatonAutomaton *automaton, OrgApacheLuceneSearchIndexSearcher *searcher, id<JavaUtilMap> termStates) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight *create_OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight_initWithOrgApacheLuceneSearchTermAutomatonQuery_withOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_(OrgApacheLuceneSearchTermAutomatonQuery *outer$, OrgApacheLuceneUtilAutomatonAutomaton *automaton, OrgApacheLuceneSearchIndexSearcher *searcher, id<JavaUtilMap> termStates);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchTermAutomatonQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchTermAutomatonQuery")

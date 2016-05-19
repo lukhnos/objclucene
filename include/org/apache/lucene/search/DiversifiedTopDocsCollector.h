@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchDiversifiedTopDocsCollector_INCLUDE_ALL")
-#if OrgApacheLuceneSearchDiversifiedTopDocsCollector_RESTRICT
-#define OrgApacheLuceneSearchDiversifiedTopDocsCollector_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchDiversifiedTopDocsCollector")
+#ifdef RESTRICT_OrgApacheLuceneSearchDiversifiedTopDocsCollector
+#define INCLUDE_ALL_OrgApacheLuceneSearchDiversifiedTopDocsCollector 0
 #else
-#define OrgApacheLuceneSearchDiversifiedTopDocsCollector_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchDiversifiedTopDocsCollector 1
 #endif
-#undef OrgApacheLuceneSearchDiversifiedTopDocsCollector_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchDiversifiedTopDocsCollector
 
-#if !defined (_OrgApacheLuceneSearchDiversifiedTopDocsCollector_) && (OrgApacheLuceneSearchDiversifiedTopDocsCollector_INCLUDE_ALL || OrgApacheLuceneSearchDiversifiedTopDocsCollector_INCLUDE)
-#define _OrgApacheLuceneSearchDiversifiedTopDocsCollector_
+#if !defined (OrgApacheLuceneSearchDiversifiedTopDocsCollector_) && (INCLUDE_ALL_OrgApacheLuceneSearchDiversifiedTopDocsCollector || defined(INCLUDE_OrgApacheLuceneSearchDiversifiedTopDocsCollector))
+#define OrgApacheLuceneSearchDiversifiedTopDocsCollector_
 
-#define OrgApacheLuceneSearchTopDocsCollector_RESTRICT 1
-#define OrgApacheLuceneSearchTopDocsCollector_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchTopDocsCollector 1
+#define INCLUDE_OrgApacheLuceneSearchTopDocsCollector 1
 #include "org/apache/lucene/search/TopDocsCollector.h"
 
 @class IOSObjectArray;
@@ -27,6 +27,32 @@
 @class OrgApacheLuceneSearchTopDocs;
 @protocol OrgApacheLuceneSearchLeafCollector;
 
+/*!
+ @brief A <code>TopDocsCollector</code> that controls diversity in results by ensuring no
+ more than maxHitsPerKey results from a common source are collected in the
+ final results.
+ An example application might be a product search in a marketplace where no
+ more than 3 results per retailer are permitted in search results.
+ <p>
+ To compare behaviour with other forms of collector, a useful analogy might be
+ the problem of making a compilation album of 1967's top hit records:
+ <ol>
+ <li>A vanilla query's results might look like a "Best of the Beatles" album -
+ high quality but not much diversity</li>
+ <li>A GroupingSearch would produce the equivalent of "The 10 top-selling
+ artists of 1967 - some killer and quite a lot of filler"</li>
+ <li>A "diversified" query would be the top 20 hit records of that year - with
+ a max of 3 Beatles hits in order to maintain diversity</li>
+ </ol>
+ This collector improves on the "GroupingSearch" type queries by
+ <ul>
+ <li>Working in one pass over the data</li>
+ <li>Not requiring the client to guess how many groups are required</li>
+ <li>Removing low-scoring "filler" which sits at the end of each group's hits</li>
+ </ul>
+ This is an abstract class and subclasses have to provide a source of keys for
+ documents which is then used to help identify duplicate sources.
+ */
 @interface OrgApacheLuceneSearchDiversifiedTopDocsCollector : OrgApacheLuceneSearchTopDocsCollector {
  @public
   OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *spare_;
@@ -44,6 +70,9 @@
 
 #pragma mark Protected
 
+/*!
+ @brief Get a source of values used for grouping keys
+ */
 - (OrgApacheLuceneIndexNumericDocValues *)getKeysWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
 - (OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *)insertWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey:(OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *)addition
@@ -65,11 +94,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDiversifiedTopDocsCollector)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue_) && (OrgApacheLuceneSearchDiversifiedTopDocsCollector_INCLUDE_ALL || OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue_INCLUDE)
-#define _OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue_
+#if !defined (OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue_) && (INCLUDE_ALL_OrgApacheLuceneSearchDiversifiedTopDocsCollector || defined(INCLUDE_OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue))
+#define OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue_
 
-#define OrgApacheLuceneUtilPriorityQueue_RESTRICT 1
-#define OrgApacheLuceneUtilPriorityQueue_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilPriorityQueue 1
+#define INCLUDE_OrgApacheLuceneUtilPriorityQueue 1
 #include "org/apache/lucene/util/PriorityQueue.h"
 
 @class OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey;
@@ -93,19 +122,24 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDoc
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *new_OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue_initWithInt_(jint size) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *create_OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue_initWithInt_(jint size);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey_) && (OrgApacheLuceneSearchDiversifiedTopDocsCollector_INCLUDE_ALL || OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey_INCLUDE)
-#define _OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey_
+#if !defined (OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey_) && (INCLUDE_ALL_OrgApacheLuceneSearchDiversifiedTopDocsCollector || defined(INCLUDE_OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey))
+#define OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey_
 
-#define OrgApacheLuceneSearchScoreDoc_RESTRICT 1
-#define OrgApacheLuceneSearchScoreDoc_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchScoreDoc 1
+#define INCLUDE_OrgApacheLuceneSearchScoreDoc 1
 #include "org/apache/lucene/search/ScoreDoc.h"
 
 @class JavaLangLong;
 
+/*!
+ @brief An extension to ScoreDoc that includes a key used for grouping purposes
+ */
 @interface OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey : OrgApacheLuceneSearchScoreDoc {
  @public
   JavaLangLong *key_;
@@ -132,8 +166,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDoc
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *new_OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey_initWithInt_withFloat_(jint doc, jfloat score) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *create_OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey_initWithInt_withFloat_(jint doc, jfloat score);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchDiversifiedTopDocsCollector_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchDiversifiedTopDocsCollector")

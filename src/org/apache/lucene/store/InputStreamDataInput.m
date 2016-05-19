@@ -30,7 +30,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreInputStreamDataInput, is_, JavaIoInputSt
 
 - (jbyte)readByte {
   jint v = [((JavaIoInputStream *) nil_chk(is_)) read];
-  if (v == -1) @throw [new_JavaIoEOFException_init() autorelease];
+  if (v == -1) @throw create_JavaIoEOFException_init();
   return (jbyte) v;
 }
 
@@ -40,7 +40,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreInputStreamDataInput, is_, JavaIoInputSt
   while (len > 0) {
     jint cnt = [((JavaIoInputStream *) nil_chk(is_)) readWithByteArray:b withInt:offset withInt:len];
     if (cnt < 0) {
-      @throw [new_JavaIoEOFException_init() autorelease];
+      @throw create_JavaIoEOFException_init();
     }
     len -= cnt;
     offset += cnt;
@@ -78,9 +78,11 @@ void OrgApacheLuceneStoreInputStreamDataInput_initWithJavaIoInputStream_(OrgApac
 }
 
 OrgApacheLuceneStoreInputStreamDataInput *new_OrgApacheLuceneStoreInputStreamDataInput_initWithJavaIoInputStream_(JavaIoInputStream *is) {
-  OrgApacheLuceneStoreInputStreamDataInput *self = [OrgApacheLuceneStoreInputStreamDataInput alloc];
-  OrgApacheLuceneStoreInputStreamDataInput_initWithJavaIoInputStream_(self, is);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreInputStreamDataInput, initWithJavaIoInputStream_, is)
+}
+
+OrgApacheLuceneStoreInputStreamDataInput *create_OrgApacheLuceneStoreInputStreamDataInput_initWithJavaIoInputStream_(JavaIoInputStream *is) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreInputStreamDataInput, initWithJavaIoInputStream_, is)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreInputStreamDataInput)

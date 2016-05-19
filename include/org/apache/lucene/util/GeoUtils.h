@@ -5,29 +5,37 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilGeoUtils_INCLUDE_ALL")
-#if OrgApacheLuceneUtilGeoUtils_RESTRICT
-#define OrgApacheLuceneUtilGeoUtils_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilGeoUtils")
+#ifdef RESTRICT_OrgApacheLuceneUtilGeoUtils
+#define INCLUDE_ALL_OrgApacheLuceneUtilGeoUtils 0
 #else
-#define OrgApacheLuceneUtilGeoUtils_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilGeoUtils 1
 #endif
-#undef OrgApacheLuceneUtilGeoUtils_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilGeoUtils
 
-#if !defined (_OrgApacheLuceneUtilGeoUtils_) && (OrgApacheLuceneUtilGeoUtils_INCLUDE_ALL || OrgApacheLuceneUtilGeoUtils_INCLUDE)
-#define _OrgApacheLuceneUtilGeoUtils_
+#if !defined (OrgApacheLuceneUtilGeoUtils_) && (INCLUDE_ALL_OrgApacheLuceneUtilGeoUtils || defined(INCLUDE_OrgApacheLuceneUtilGeoUtils))
+#define OrgApacheLuceneUtilGeoUtils_
 
 @class IOSDoubleArray;
 @class JavaLangLong;
 @class JavaUtilArrayList;
 
-#define OrgApacheLuceneUtilGeoUtils_BITS 32
-#define OrgApacheLuceneUtilGeoUtils_TOLERANCE 1.0E-6
-#define OrgApacheLuceneUtilGeoUtils_MIN_LON_INCL -180.0
-#define OrgApacheLuceneUtilGeoUtils_MAX_LON_INCL 180.0
-#define OrgApacheLuceneUtilGeoUtils_MIN_LAT_INCL -90.0
-#define OrgApacheLuceneUtilGeoUtils_MAX_LAT_INCL 90.0
-
+/*!
+ @brief Basic reusable geo-spatial utility methods
+ */
 @interface OrgApacheLuceneUtilGeoUtils : NSObject
+
++ (jshort)BITS;
+
++ (jdouble)TOLERANCE;
+
++ (jdouble)MIN_LON_INCL;
+
++ (jdouble)MAX_LON_INCL;
+
++ (jdouble)MIN_LAT_INCL;
+
++ (jdouble)MAX_LAT_INCL;
 
 #pragma mark Public
 
@@ -38,6 +46,13 @@
                         withDouble:(jdouble)maxLon
                         withDouble:(jdouble)maxLat;
 
+/*!
+ @brief Converts a given circle (defined as a point/radius) to an approximated line-segment polygon
+ @param lon longitudinal center of circle (in degrees)
+ @param lat latitudinal center of circle (in degrees)
+ @param radius distance radius of circle (in meters)
+ @return a list of lon/lat points representing the circle
+ */
 + (JavaUtilArrayList *)circleToPolyWithDouble:(jdouble)lon
                                    withDouble:(jdouble)lat
                                    withDouble:(jdouble)radius;
@@ -66,15 +81,33 @@
 
 + (jdouble)mortonUnhashLonWithLong:(jlong)hash_;
 
+/*!
+ @brief Puts latitude in range of -90 to 90.
+ */
 + (jdouble)normalizeLatWithDouble:(jdouble)lat_deg;
 
+/*!
+ @brief Puts longitude in range of -180 to +180.
+ */
 + (jdouble)normalizeLonWithDouble:(jdouble)lon_deg;
 
+/*!
+ @brief simple even-odd point in polygon computation
+ 1.
+ Determine if point is contained in the longitudinal range
+ 2.  Determine whether point crosses the edge by computing the latitudinal delta
+ between the end-point of a parallel vector (originating at the point) and the
+ y-component of the edge sink
+ NOTE: Requires polygon point (x,y) order either clockwise or counter-clockwise
+ */
 + (jboolean)pointInPolygonWithDoubleArray:(IOSDoubleArray *)x
                           withDoubleArray:(IOSDoubleArray *)y
                                withDouble:(jdouble)lat
                                withDouble:(jdouble)lon;
 
+/*!
+ @brief Computes whether rectangle a contains rectangle b (touching allowed)
+ */
 + (jboolean)rectContainsWithDouble:(jdouble)aMinX
                         withDouble:(jdouble)aMinY
                         withDouble:(jdouble)aMaxX
@@ -93,6 +126,9 @@
                        withDouble:(jdouble)bMaxX
                        withDouble:(jdouble)bMaxY;
 
+/*!
+ @brief Computes whether a rectangle crosses a circle
+ */
 + (jboolean)rectCrossesCircleWithDouble:(jdouble)rMinX
                              withDouble:(jdouble)rMinY
                              withDouble:(jdouble)rMaxX
@@ -101,6 +137,10 @@
                              withDouble:(jdouble)centerLat
                              withDouble:(jdouble)radius;
 
+/*!
+ @brief Computes whether a rectangle crosses a shape.
+ (touching not allowed)
+ */
 + (jboolean)rectCrossesPolyWithDouble:(jdouble)rMinX
                            withDouble:(jdouble)rMinY
                            withDouble:(jdouble)rMaxX
@@ -121,6 +161,9 @@
                         withDouble:(jdouble)bMaxX
                         withDouble:(jdouble)bMaxY;
 
+/*!
+ @brief Computes whether a rectangle intersects another rectangle (crosses, within, touching, etc)
+ */
 + (jboolean)rectIntersectsWithDouble:(jdouble)aMinX
                           withDouble:(jdouble)aMinY
                           withDouble:(jdouble)aMaxX
@@ -130,6 +173,9 @@
                           withDouble:(jdouble)bMaxX
                           withDouble:(jdouble)bMaxY;
 
+/*!
+ @brief Computes whether a rectangle is wholly within another rectangle (shared boundaries allowed)
+ */
 + (jboolean)rectWithinWithDouble:(jdouble)aMinX
                       withDouble:(jdouble)aMinY
                       withDouble:(jdouble)aMaxX
@@ -147,6 +193,9 @@
                             withDouble:(jdouble)centerLat
                             withDouble:(jdouble)radius;
 
+/*!
+ @brief Computes whether a rectangle is within a given polygon (shared boundaries allowed)
+ */
 + (jboolean)rectWithinPolyWithDouble:(jdouble)rMinX
                           withDouble:(jdouble)rMinY
                           withDouble:(jdouble)rMaxX
@@ -162,17 +211,41 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilGeoUtils)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilGeoUtils, BITS, jshort)
+inline jshort OrgApacheLuceneUtilGeoUtils_get_BITS();
+#define OrgApacheLuceneUtilGeoUtils_BITS 32
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilGeoUtils, BITS, jshort)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilGeoUtils, TOLERANCE, jdouble)
+inline jdouble OrgApacheLuceneUtilGeoUtils_get_TOLERANCE();
+#define OrgApacheLuceneUtilGeoUtils_TOLERANCE 1.0E-6
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilGeoUtils, TOLERANCE, jdouble)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilGeoUtils, MIN_LON_INCL, jdouble)
+/*!
+ @brief Minimum longitude value.
+ */
+inline jdouble OrgApacheLuceneUtilGeoUtils_get_MIN_LON_INCL();
+#define OrgApacheLuceneUtilGeoUtils_MIN_LON_INCL -180.0
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilGeoUtils, MIN_LON_INCL, jdouble)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilGeoUtils, MAX_LON_INCL, jdouble)
+/*!
+ @brief Maximum longitude value.
+ */
+inline jdouble OrgApacheLuceneUtilGeoUtils_get_MAX_LON_INCL();
+#define OrgApacheLuceneUtilGeoUtils_MAX_LON_INCL 180.0
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilGeoUtils, MAX_LON_INCL, jdouble)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilGeoUtils, MIN_LAT_INCL, jdouble)
+/*!
+ @brief Minimum latitude value.
+ */
+inline jdouble OrgApacheLuceneUtilGeoUtils_get_MIN_LAT_INCL();
+#define OrgApacheLuceneUtilGeoUtils_MIN_LAT_INCL -90.0
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilGeoUtils, MIN_LAT_INCL, jdouble)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilGeoUtils, MAX_LAT_INCL, jdouble)
+/*!
+ @brief Maximum latitude value.
+ */
+inline jdouble OrgApacheLuceneUtilGeoUtils_get_MAX_LAT_INCL();
+#define OrgApacheLuceneUtilGeoUtils_MAX_LAT_INCL 90.0
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilGeoUtils, MAX_LAT_INCL, jdouble)
 
 FOUNDATION_EXPORT JavaLangLong *OrgApacheLuceneUtilGeoUtils_mortonHashWithDouble_withDouble_(jdouble lon, jdouble lat);
 
@@ -222,4 +295,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilGeoUtils)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilGeoUtils_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilGeoUtils")

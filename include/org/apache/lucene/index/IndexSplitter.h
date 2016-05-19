@@ -5,22 +5,37 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexIndexSplitter_INCLUDE_ALL")
-#if OrgApacheLuceneIndexIndexSplitter_RESTRICT
-#define OrgApacheLuceneIndexIndexSplitter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexIndexSplitter")
+#ifdef RESTRICT_OrgApacheLuceneIndexIndexSplitter
+#define INCLUDE_ALL_OrgApacheLuceneIndexIndexSplitter 0
 #else
-#define OrgApacheLuceneIndexIndexSplitter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexIndexSplitter 1
 #endif
-#undef OrgApacheLuceneIndexIndexSplitter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexIndexSplitter
 
-#if !defined (_OrgApacheLuceneIndexIndexSplitter_) && (OrgApacheLuceneIndexIndexSplitter_INCLUDE_ALL || OrgApacheLuceneIndexIndexSplitter_INCLUDE)
-#define _OrgApacheLuceneIndexIndexSplitter_
+#if !defined (OrgApacheLuceneIndexIndexSplitter_) && (INCLUDE_ALL_OrgApacheLuceneIndexIndexSplitter || defined(INCLUDE_OrgApacheLuceneIndexIndexSplitter))
+#define OrgApacheLuceneIndexIndexSplitter_
 
 @class IOSObjectArray;
 @class OrgApacheLuceneIndexSegmentInfos;
 @class OrgApacheLuceneStoreFSDirectory;
 @class OrgLukhnosPortmobileFilePath;
 
+/*!
+ @brief Command-line tool that enables listing segments in an
+ index, copying specific segments to another index, and
+ deleting segments from an index.
+ <p>This tool does file-level copying of segments files.
+ This means it's unable to split apart a single segment
+ into multiple segments.  For example if your index is a
+ single segment, this tool won't help.  Also, it does basic
+ file-level copying (using simple
+ File{In,Out}putStream) so it will not work with non
+ FSDirectory Directory impls.</p>
+  You can easily
+ accidentally remove segments from your index so be
+ careful!
+ */
 @interface OrgApacheLuceneIndexIndexSplitter : NSObject {
  @public
   OrgApacheLuceneIndexSegmentInfos *infos_;
@@ -55,8 +70,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexIndexSplitter_initWithOrgLukhnosPortm
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexIndexSplitter *new_OrgApacheLuceneIndexIndexSplitter_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *dir) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexIndexSplitter *create_OrgApacheLuceneIndexIndexSplitter_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *dir);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexSplitter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexIndexSplitter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexIndexSplitter")

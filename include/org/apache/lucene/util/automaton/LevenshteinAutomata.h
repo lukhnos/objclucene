@@ -5,23 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilAutomatonLevenshteinAutomata_INCLUDE_ALL")
-#if OrgApacheLuceneUtilAutomatonLevenshteinAutomata_RESTRICT
-#define OrgApacheLuceneUtilAutomatonLevenshteinAutomata_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonLevenshteinAutomata")
+#ifdef RESTRICT_OrgApacheLuceneUtilAutomatonLevenshteinAutomata
+#define INCLUDE_ALL_OrgApacheLuceneUtilAutomatonLevenshteinAutomata 0
 #else
-#define OrgApacheLuceneUtilAutomatonLevenshteinAutomata_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilAutomatonLevenshteinAutomata 1
 #endif
-#undef OrgApacheLuceneUtilAutomatonLevenshteinAutomata_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilAutomatonLevenshteinAutomata
 
-#if !defined (_OrgApacheLuceneUtilAutomatonLevenshteinAutomata_) && (OrgApacheLuceneUtilAutomatonLevenshteinAutomata_INCLUDE_ALL || OrgApacheLuceneUtilAutomatonLevenshteinAutomata_INCLUDE)
-#define _OrgApacheLuceneUtilAutomatonLevenshteinAutomata_
+#if !defined (OrgApacheLuceneUtilAutomatonLevenshteinAutomata_) && (INCLUDE_ALL_OrgApacheLuceneUtilAutomatonLevenshteinAutomata || defined(INCLUDE_OrgApacheLuceneUtilAutomatonLevenshteinAutomata))
+#define OrgApacheLuceneUtilAutomatonLevenshteinAutomata_
 
 @class IOSIntArray;
 @class IOSObjectArray;
 @class OrgApacheLuceneUtilAutomatonAutomaton;
 
-#define OrgApacheLuceneUtilAutomatonLevenshteinAutomata_MAXIMUM_SUPPORTED_DISTANCE 2
-
+/*!
+ @brief Class to construct DFAs that match a word within some edit distance.
+ <p>
+ Implements the algorithm described in:
+ Schulz and Mihov: Fast String Correction with Levenshtein Automata
+ */
 @interface OrgApacheLuceneUtilAutomatonLevenshteinAutomata : NSObject {
  @public
   IOSIntArray *word_;
@@ -33,22 +37,57 @@
   IOSObjectArray *descriptions_;
 }
 
++ (jint)MAXIMUM_SUPPORTED_DISTANCE;
+
 #pragma mark Public
 
+/*!
+ @brief Expert: specify a custom maximum possible symbol
+ (alphaMax); default is Character.MAX_CODE_POINT.
+ */
 - (instancetype)initWithIntArray:(IOSIntArray *)word
                          withInt:(jint)alphaMax
                      withBoolean:(jboolean)withTranspositions;
 
+/*!
+ @brief Create a new LevenshteinAutomata for some input String.
+ Optionally count transpositions as a primitive edit.
+ */
 - (instancetype)initWithNSString:(NSString *)input
                      withBoolean:(jboolean)withTranspositions;
 
+/*!
+ @brief Compute a DFA that accepts all strings within an edit distance of <code>n</code>.
+ <p>
+ All automata have the following properties:
+ <ul>
+ <li>They are deterministic (DFA).
+ <li>There are no transitions to dead states.
+ <li>They are not minimal (some transitions could be combined).
+ </ul>
+ */
 - (OrgApacheLuceneUtilAutomatonAutomaton *)toAutomatonWithInt:(jint)n;
 
+/*!
+ @brief Compute a DFA that accepts all strings within an edit distance of <code>n</code>,
+ matching the specified exact prefix.
+ <p>
+ All automata have the following properties:
+ <ul>
+ <li>They are deterministic (DFA).
+ <li>There are no transitions to dead states.
+ <li>They are not minimal (some transitions could be combined).
+ </ul>
+ */
 - (OrgApacheLuceneUtilAutomatonAutomaton *)toAutomatonWithInt:(jint)n
                                                  withNSString:(NSString *)prefix;
 
 #pragma mark Package-Private
 
+/*!
+ @brief Get the characteristic vector <code>X(x, V)</code> 
+ where V is <code>substring(pos, end)</code>
+ */
 - (jint)getVectorWithInt:(jint)x
                  withInt:(jint)pos
                  withInt:(jint)end;
@@ -63,26 +102,48 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAutomatonLevenshteinAutomata, rangeLower_
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAutomatonLevenshteinAutomata, rangeUpper_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAutomatonLevenshteinAutomata, descriptions_, IOSObjectArray *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilAutomatonLevenshteinAutomata, MAXIMUM_SUPPORTED_DISTANCE, jint)
+/*!
+ @brief Maximum edit distance this class can generate an automaton for.
+  
+ */
+inline jint OrgApacheLuceneUtilAutomatonLevenshteinAutomata_get_MAXIMUM_SUPPORTED_DISTANCE();
+#define OrgApacheLuceneUtilAutomatonLevenshteinAutomata_MAXIMUM_SUPPORTED_DISTANCE 2
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilAutomatonLevenshteinAutomata, MAXIMUM_SUPPORTED_DISTANCE, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonLevenshteinAutomata_initWithNSString_withBoolean_(OrgApacheLuceneUtilAutomatonLevenshteinAutomata *self, NSString *input, jboolean withTranspositions);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonLevenshteinAutomata *new_OrgApacheLuceneUtilAutomatonLevenshteinAutomata_initWithNSString_withBoolean_(NSString *input, jboolean withTranspositions) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonLevenshteinAutomata *create_OrgApacheLuceneUtilAutomatonLevenshteinAutomata_initWithNSString_withBoolean_(NSString *input, jboolean withTranspositions);
+
 FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonLevenshteinAutomata_initWithIntArray_withInt_withBoolean_(OrgApacheLuceneUtilAutomatonLevenshteinAutomata *self, IOSIntArray *word, jint alphaMax, jboolean withTranspositions);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonLevenshteinAutomata *new_OrgApacheLuceneUtilAutomatonLevenshteinAutomata_initWithIntArray_withInt_withBoolean_(IOSIntArray *word, jint alphaMax, jboolean withTranspositions) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonLevenshteinAutomata *create_OrgApacheLuceneUtilAutomatonLevenshteinAutomata_initWithIntArray_withInt_withBoolean_(IOSIntArray *word, jint alphaMax, jboolean withTranspositions);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonLevenshteinAutomata)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilAutomatonLevenshteinAutomata_ParametricDescription_) && (OrgApacheLuceneUtilAutomatonLevenshteinAutomata_INCLUDE_ALL || OrgApacheLuceneUtilAutomatonLevenshteinAutomata_ParametricDescription_INCLUDE)
-#define _OrgApacheLuceneUtilAutomatonLevenshteinAutomata_ParametricDescription_
+#if !defined (OrgApacheLuceneUtilAutomatonLevenshteinAutomata_ParametricDescription_) && (INCLUDE_ALL_OrgApacheLuceneUtilAutomatonLevenshteinAutomata || defined(INCLUDE_OrgApacheLuceneUtilAutomatonLevenshteinAutomata_ParametricDescription))
+#define OrgApacheLuceneUtilAutomatonLevenshteinAutomata_ParametricDescription_
 
 @class IOSIntArray;
 @class IOSLongArray;
 
+/*!
+ @brief A ParametricDescription describes the structure of a Levenshtein DFA for some degree n.
+ <p>
+ There are four components of a parametric description, all parameterized on the length
+ of the word <code>w</code>:
+ <ol>
+ <li>The number of states: <code>size()</code>
+ <li>The set of final states: <code>isAccept(int)</code>
+ <li>The transition function: <code>transition(int,int,int)</code>
+ <li>Minimal boundary function: <code>getPosition(int)</code>
+ </ol>
+ */
 @interface OrgApacheLuceneUtilAutomatonLevenshteinAutomata_ParametricDescription : NSObject {
  @public
   jint w_;
@@ -101,12 +162,26 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonLevenshteinAutomata)
                     withInt:(jint)n
                withIntArray:(IOSIntArray *)minErrors;
 
+/*!
+ @brief Returns the position in the input word for a given <code>state</code>.
+ This is the minimal boundary for the state.
+ */
 - (jint)getPositionWithInt:(jint)absState;
 
+/*!
+ @brief Returns true if the <code>state</code> in any Levenshtein DFA is an accept state (final state).
+ */
 - (jboolean)isAcceptWithInt:(jint)absState;
 
+/*!
+ @brief Return the number of states needed to compute a Levenshtein DFA
+ */
 - (jint)size;
 
+/*!
+ @brief Returns the state number for a transition from the given <code>state</code>,
+ assuming <code>position</code> and characteristic vector <code>vector</code>
+ */
 - (jint)transitionWithInt:(jint)state
                   withInt:(jint)position
                   withInt:(jint)vector;
@@ -121,4 +196,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonLevenshteinAutomata_Param
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilAutomatonLevenshteinAutomata_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonLevenshteinAutomata")

@@ -5,28 +5,37 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilterFactory_) && (OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilterFactory))
+#define OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>KeywordRepeatFilter</code>.
+ Since <code>KeywordRepeatFilter</code> emits two tokens for every input token, and any tokens that aren't transformed
+ later in the analysis chain will be in the document twice. Therefore, consider adding
+ <code>RemoveDuplicatesTokenFilterFactory</code> later in the analysis chain.
+ */
 @interface OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new KeywordRepeatFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -39,8 +48,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilterFa
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilterFactory *create_OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilterFactory")

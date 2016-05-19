@@ -26,6 +26,8 @@ __attribute__((unused)) static void OrgApacheLuceneUtilCollectionUtil_init(OrgAp
 
 __attribute__((unused)) static OrgApacheLuceneUtilCollectionUtil *new_OrgApacheLuceneUtilCollectionUtil_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneUtilCollectionUtil *create_OrgApacheLuceneUtilCollectionUtil_init();
+
 @interface OrgApacheLuceneUtilCollectionUtil_ListIntroSorter : OrgApacheLuceneUtilIntroSorter {
  @public
   id pivot_;
@@ -57,6 +59,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilCollectionUtil_ListIntroSorter, comp_, id
 __attribute__((unused)) static void OrgApacheLuceneUtilCollectionUtil_ListIntroSorter_initWithJavaUtilList_withJavaUtilComparator_(OrgApacheLuceneUtilCollectionUtil_ListIntroSorter *self, id<JavaUtilList> list, id<JavaUtilComparator> comp);
 
 __attribute__((unused)) static OrgApacheLuceneUtilCollectionUtil_ListIntroSorter *new_OrgApacheLuceneUtilCollectionUtil_ListIntroSorter_initWithJavaUtilList_withJavaUtilComparator_(id<JavaUtilList> list, id<JavaUtilComparator> comp) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneUtilCollectionUtil_ListIntroSorter *create_OrgApacheLuceneUtilCollectionUtil_ListIntroSorter_initWithJavaUtilList_withJavaUtilComparator_(id<JavaUtilList> list, id<JavaUtilComparator> comp);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilCollectionUtil_ListIntroSorter)
 
@@ -100,6 +104,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilCollectionUtil_ListTimSorter, tmp_, IOSOb
 __attribute__((unused)) static void OrgApacheLuceneUtilCollectionUtil_ListTimSorter_initWithJavaUtilList_withJavaUtilComparator_withInt_(OrgApacheLuceneUtilCollectionUtil_ListTimSorter *self, id<JavaUtilList> list, id<JavaUtilComparator> comp, jint maxTempSlots);
 
 __attribute__((unused)) static OrgApacheLuceneUtilCollectionUtil_ListTimSorter *new_OrgApacheLuceneUtilCollectionUtil_ListTimSorter_initWithJavaUtilList_withJavaUtilComparator_withInt_(id<JavaUtilList> list, id<JavaUtilComparator> comp, jint maxTempSlots) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneUtilCollectionUtil_ListTimSorter *create_OrgApacheLuceneUtilCollectionUtil_ListTimSorter_initWithJavaUtilList_withJavaUtilComparator_withInt_(id<JavaUtilList> list, id<JavaUtilComparator> comp, jint maxTempSlots);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilCollectionUtil_ListTimSorter)
 
@@ -150,16 +156,18 @@ void OrgApacheLuceneUtilCollectionUtil_init(OrgApacheLuceneUtilCollectionUtil *s
 }
 
 OrgApacheLuceneUtilCollectionUtil *new_OrgApacheLuceneUtilCollectionUtil_init() {
-  OrgApacheLuceneUtilCollectionUtil *self = [OrgApacheLuceneUtilCollectionUtil alloc];
-  OrgApacheLuceneUtilCollectionUtil_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilCollectionUtil, init)
+}
+
+OrgApacheLuceneUtilCollectionUtil *create_OrgApacheLuceneUtilCollectionUtil_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilCollectionUtil, init)
 }
 
 void OrgApacheLuceneUtilCollectionUtil_introSortWithJavaUtilList_withJavaUtilComparator_(id<JavaUtilList> list, id<JavaUtilComparator> comp) {
   OrgApacheLuceneUtilCollectionUtil_initialize();
   jint size = [((id<JavaUtilList>) nil_chk(list)) size];
   if (size <= 1) return;
-  [((OrgApacheLuceneUtilCollectionUtil_ListIntroSorter *) [new_OrgApacheLuceneUtilCollectionUtil_ListIntroSorter_initWithJavaUtilList_withJavaUtilComparator_(list, comp) autorelease]) sortWithInt:0 withInt:size];
+  [create_OrgApacheLuceneUtilCollectionUtil_ListIntroSorter_initWithJavaUtilList_withJavaUtilComparator_(list, comp) sortWithInt:0 withInt:size];
 }
 
 void OrgApacheLuceneUtilCollectionUtil_introSortWithJavaUtilList_(id<JavaUtilList> list) {
@@ -173,7 +181,7 @@ void OrgApacheLuceneUtilCollectionUtil_timSortWithJavaUtilList_withJavaUtilCompa
   OrgApacheLuceneUtilCollectionUtil_initialize();
   jint size = [((id<JavaUtilList>) nil_chk(list)) size];
   if (size <= 1) return;
-  [((OrgApacheLuceneUtilCollectionUtil_ListTimSorter *) [new_OrgApacheLuceneUtilCollectionUtil_ListTimSorter_initWithJavaUtilList_withJavaUtilComparator_withInt_(list, comp, [list size] / 64) autorelease]) sortWithInt:0 withInt:size];
+  [create_OrgApacheLuceneUtilCollectionUtil_ListTimSorter_initWithJavaUtilList_withJavaUtilComparator_withInt_(list, comp, [list size] / 64) sortWithInt:0 withInt:size];
 }
 
 void OrgApacheLuceneUtilCollectionUtil_timSortWithJavaUtilList_(id<JavaUtilList> list) {
@@ -220,7 +228,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilCollectionUtil)
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:withJavaUtilComparator:", "ListIntroSorter", NULL, 0x0, NULL, NULL },
+    { "initWithJavaUtilList:withJavaUtilComparator:", "ListIntroSorter", NULL, 0x0, NULL, "(Ljava/util/List<TT;>;Ljava/util/Comparator<-TT;>;)V" },
     { "setPivotWithInt:", "setPivot", "V", 0x4, NULL, NULL },
     { "swapWithInt:withInt:", "swap", "V", 0x4, NULL, NULL },
     { "compareWithInt:withInt:", "compare", "I", 0x4, NULL, NULL },
@@ -239,15 +247,17 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilCollectionUtil)
 
 void OrgApacheLuceneUtilCollectionUtil_ListIntroSorter_initWithJavaUtilList_withJavaUtilComparator_(OrgApacheLuceneUtilCollectionUtil_ListIntroSorter *self, id<JavaUtilList> list, id<JavaUtilComparator> comp) {
   OrgApacheLuceneUtilIntroSorter_init(self);
-  if (!([JavaUtilRandomAccess_class_() isInstance:list])) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"CollectionUtil can only sort random access lists in-place.") autorelease];
+  if (!([JavaUtilRandomAccess_class_() isInstance:list])) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"CollectionUtil can only sort random access lists in-place.");
   JreStrongAssign(&self->list_, list);
   JreStrongAssign(&self->comp_, comp);
 }
 
 OrgApacheLuceneUtilCollectionUtil_ListIntroSorter *new_OrgApacheLuceneUtilCollectionUtil_ListIntroSorter_initWithJavaUtilList_withJavaUtilComparator_(id<JavaUtilList> list, id<JavaUtilComparator> comp) {
-  OrgApacheLuceneUtilCollectionUtil_ListIntroSorter *self = [OrgApacheLuceneUtilCollectionUtil_ListIntroSorter alloc];
-  OrgApacheLuceneUtilCollectionUtil_ListIntroSorter_initWithJavaUtilList_withJavaUtilComparator_(self, list, comp);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilCollectionUtil_ListIntroSorter, initWithJavaUtilList_withJavaUtilComparator_, list, comp)
+}
+
+OrgApacheLuceneUtilCollectionUtil_ListIntroSorter *create_OrgApacheLuceneUtilCollectionUtil_ListIntroSorter_initWithJavaUtilList_withJavaUtilComparator_(id<JavaUtilList> list, id<JavaUtilComparator> comp) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilCollectionUtil_ListIntroSorter, initWithJavaUtilList_withJavaUtilComparator_, list, comp)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilCollectionUtil_ListIntroSorter)
@@ -268,7 +278,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilCollectionUtil_ListIntroSort
 
 - (void)copy__WithInt:(jint)src
               withInt:(jint)dest {
-  [list_ setWithInt:dest withId:[((id<JavaUtilList>) nil_chk(list_)) getWithInt:src]];
+  [((id<JavaUtilList>) nil_chk(list_)) setWithInt:dest withId:[list_ getWithInt:src]];
 }
 
 - (void)saveWithInt:(jint)i
@@ -302,7 +312,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilCollectionUtil_ListIntroSort
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:withJavaUtilComparator:withInt:", "ListTimSorter", NULL, 0x0, NULL, NULL },
+    { "initWithJavaUtilList:withJavaUtilComparator:withInt:", "ListTimSorter", NULL, 0x0, NULL, "(Ljava/util/List<TT;>;Ljava/util/Comparator<-TT;>;I)V" },
     { "swapWithInt:withInt:", "swap", "V", 0x4, NULL, NULL },
     { "copy__WithInt:withInt:", "copy", "V", 0x4, NULL, NULL },
     { "saveWithInt:withInt:", "save", "V", 0x4, NULL, NULL },
@@ -323,11 +333,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilCollectionUtil_ListIntroSort
 
 void OrgApacheLuceneUtilCollectionUtil_ListTimSorter_initWithJavaUtilList_withJavaUtilComparator_withInt_(OrgApacheLuceneUtilCollectionUtil_ListTimSorter *self, id<JavaUtilList> list, id<JavaUtilComparator> comp, jint maxTempSlots) {
   OrgApacheLuceneUtilTimSorter_initWithInt_(self, maxTempSlots);
-  if (!([JavaUtilRandomAccess_class_() isInstance:list])) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"CollectionUtil can only sort random access lists in-place.") autorelease];
+  if (!([JavaUtilRandomAccess_class_() isInstance:list])) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"CollectionUtil can only sort random access lists in-place.");
   JreStrongAssign(&self->list_, list);
   JreStrongAssign(&self->comp_, comp);
   if (maxTempSlots > 0) {
-    JreStrongAssign(&self->tmp_, (IOSObjectArray *) check_class_cast([IOSObjectArray arrayWithLength:maxTempSlots type:NSObject_class_()], [IOSObjectArray class]));
+    JreStrongAssign(&self->tmp_, [IOSObjectArray arrayWithLength:maxTempSlots type:NSObject_class_()]);
   }
   else {
     JreStrongAssign(&self->tmp_, nil);
@@ -335,9 +345,11 @@ void OrgApacheLuceneUtilCollectionUtil_ListTimSorter_initWithJavaUtilList_withJa
 }
 
 OrgApacheLuceneUtilCollectionUtil_ListTimSorter *new_OrgApacheLuceneUtilCollectionUtil_ListTimSorter_initWithJavaUtilList_withJavaUtilComparator_withInt_(id<JavaUtilList> list, id<JavaUtilComparator> comp, jint maxTempSlots) {
-  OrgApacheLuceneUtilCollectionUtil_ListTimSorter *self = [OrgApacheLuceneUtilCollectionUtil_ListTimSorter alloc];
-  OrgApacheLuceneUtilCollectionUtil_ListTimSorter_initWithJavaUtilList_withJavaUtilComparator_withInt_(self, list, comp, maxTempSlots);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilCollectionUtil_ListTimSorter, initWithJavaUtilList_withJavaUtilComparator_withInt_, list, comp, maxTempSlots)
+}
+
+OrgApacheLuceneUtilCollectionUtil_ListTimSorter *create_OrgApacheLuceneUtilCollectionUtil_ListTimSorter_initWithJavaUtilList_withJavaUtilComparator_withInt_(id<JavaUtilList> list, id<JavaUtilComparator> comp, jint maxTempSlots) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilCollectionUtil_ListTimSorter, initWithJavaUtilList_withJavaUtilComparator_withInt_, list, comp, maxTempSlots)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilCollectionUtil_ListTimSorter)

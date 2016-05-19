@@ -46,13 +46,13 @@
 }
 
 - (id<OrgApacheLuceneRangetreeSliceReader>)getReaderWithLong:(jlong)start {
-  return [new_OrgApacheLuceneRangetreeOfflineSliceReader_initWithOrgLukhnosPortmobileFilePath_withLong_withLong_(tempFile_, start, count_ - start) autorelease];
+  return create_OrgApacheLuceneRangetreeOfflineSliceReader_initWithOrgLukhnosPortmobileFilePath_withLong_withLong_(tempFile_, start, count_ - start);
 }
 
 - (void)close {
   [((OrgApacheLuceneStoreOutputStreamDataOutput *) nil_chk(out_)) close];
   if (count_ != countWritten_) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$J$J", @"wrote ", countWritten_, @" values, but expected ", count_)) autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$J$J", @"wrote ", countWritten_, @" values, but expected ", count_));
   }
 }
 
@@ -100,14 +100,16 @@ void OrgApacheLuceneRangetreeOfflineSliceWriter_initWithOrgLukhnosPortmobileFile
   JreStrongAssignAndConsume(&self->scratchBytes_, [IOSByteArray newArrayWithLength:OrgApacheLuceneRangetreeRangeTreeWriter_BYTES_PER_DOC]);
   JreStrongAssignAndConsume(&self->scratchBytesOutput_, new_OrgApacheLuceneStoreByteArrayDataOutput_initWithByteArray_(self->scratchBytes_));
   JreStrongAssign(&self->tempFile_, OrgLukhnosPortmobileFileFiles_createTempFileWithOrgLukhnosPortmobileFilePath_withNSString_withNSString_(tempDir, JreStrcat("$JC", @"size", count, '.'), @""));
-  JreStrongAssignAndConsume(&self->out_, new_OrgApacheLuceneStoreOutputStreamDataOutput_initWithJavaIoOutputStream_([new_JavaIoBufferedOutputStream_initWithJavaIoOutputStream_(OrgLukhnosPortmobileFileFiles_newOutputStreamWithOrgLukhnosPortmobileFilePath_(self->tempFile_)) autorelease]));
+  JreStrongAssignAndConsume(&self->out_, new_OrgApacheLuceneStoreOutputStreamDataOutput_initWithJavaIoOutputStream_(create_JavaIoBufferedOutputStream_initWithJavaIoOutputStream_(OrgLukhnosPortmobileFileFiles_newOutputStreamWithOrgLukhnosPortmobileFilePath_(self->tempFile_))));
   self->count_ = count;
 }
 
 OrgApacheLuceneRangetreeOfflineSliceWriter *new_OrgApacheLuceneRangetreeOfflineSliceWriter_initWithOrgLukhnosPortmobileFilePath_withLong_(OrgLukhnosPortmobileFilePath *tempDir, jlong count) {
-  OrgApacheLuceneRangetreeOfflineSliceWriter *self = [OrgApacheLuceneRangetreeOfflineSliceWriter alloc];
-  OrgApacheLuceneRangetreeOfflineSliceWriter_initWithOrgLukhnosPortmobileFilePath_withLong_(self, tempDir, count);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneRangetreeOfflineSliceWriter, initWithOrgLukhnosPortmobileFilePath_withLong_, tempDir, count)
+}
+
+OrgApacheLuceneRangetreeOfflineSliceWriter *create_OrgApacheLuceneRangetreeOfflineSliceWriter_initWithOrgLukhnosPortmobileFilePath_withLong_(OrgLukhnosPortmobileFilePath *tempDir, jlong count) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneRangetreeOfflineSliceWriter, initWithOrgLukhnosPortmobileFilePath_withLong_, tempDir, count)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneRangetreeOfflineSliceWriter)

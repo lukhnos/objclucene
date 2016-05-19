@@ -70,7 +70,7 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisPatternPatternReplace
 
 - (id<JavaLangCharSequence>)processPatternWithJavaLangCharSequence:(id<JavaLangCharSequence>)input {
   JavaUtilRegexMatcher *m = [((JavaUtilRegexPattern *) nil_chk(pattern_)) matcherWithJavaLangCharSequence:input];
-  JavaLangStringBuffer *cumulativeOutput = [new_JavaLangStringBuffer_init() autorelease];
+  JavaLangStringBuffer *cumulativeOutput = create_JavaLangStringBuffer_init();
   jint cumulative = 0;
   jint lastMatchEnd = 0;
   while ([((JavaUtilRegexMatcher *) nil_chk(m)) find]) {
@@ -131,13 +131,15 @@ void OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter_initWithJavaUtilRege
 }
 
 OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter *new_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter_initWithJavaUtilRegexPattern_withNSString_withJavaIoReader_(JavaUtilRegexPattern *pattern, NSString *replacement, JavaIoReader *inArg) {
-  OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter *self = [OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter alloc];
-  OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter_initWithJavaUtilRegexPattern_withNSString_withJavaIoReader_(self, pattern, replacement, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter, initWithJavaUtilRegexPattern_withNSString_withJavaIoReader_, pattern, replacement, inArg)
+}
+
+OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter *create_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter_initWithJavaUtilRegexPattern_withNSString_withJavaIoReader_(JavaUtilRegexPattern *pattern, NSString *replacement, JavaIoReader *inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter, initWithJavaUtilRegexPattern_withNSString_withJavaIoReader_, pattern, replacement, inArg)
 }
 
 void OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter_fill(OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter *self) {
-  JavaLangStringBuilder *buffered = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *buffered = create_JavaLangStringBuilder_init();
   IOSCharArray *temp = [IOSCharArray arrayWithLength:1024];
   for (jint cnt = [((JavaIoReader *) nil_chk(self->input_)) readWithCharArray:temp]; cnt > 0; cnt = [self->input_ readWithCharArray:temp]) {
     [buffered appendWithCharArray:temp withInt:0 withInt:cnt];

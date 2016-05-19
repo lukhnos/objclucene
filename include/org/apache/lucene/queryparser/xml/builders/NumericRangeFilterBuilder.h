@@ -5,24 +5,86 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_RESTRICT
-#define OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder 0
 #else
-#define OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder 1
 #endif
-#undef OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder
 
-#if !defined (_OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_) && (OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_INCLUDE_ALL || OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_INCLUDE)
-#define _OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_
+#if !defined (OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder))
+#define OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_
 
-#define OrgApacheLuceneQueryparserXmlFilterBuilder_RESTRICT 1
-#define OrgApacheLuceneQueryparserXmlFilterBuilder_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserXmlFilterBuilder 1
+#define INCLUDE_OrgApacheLuceneQueryparserXmlFilterBuilder 1
 #include "org/apache/lucene/queryparser/xml/FilterBuilder.h"
 
 @class OrgApacheLuceneSearchFilter;
 @protocol OrgW3cDomElement;
 
+/*!
+ @brief Creates a <code>NumericRangeFilter</code>.
+ The table below specifies the required
+ attributes and the defaults if optional attributes are omitted. For more
+ detail on what each of the attributes actually do, consult the documentation
+ for <code>NumericRangeFilter</code>:
+ <table summary="supported attributes">
+ <tr>
+ <th>Attribute name</th>
+ <th>Values</th>
+ <th>Required</th>
+ <th>Default</th>
+ </tr>
+ <tr>
+ <td>fieldName</td>
+ <td>String</td>
+ <td>Yes</td>
+ <td>N/A</td>
+ </tr>
+ <tr>
+ <td>lowerTerm</td>
+ <td>Specified by <tt>type</tt></td>
+ <td>Yes</td>
+ <td>N/A</td>
+ </tr>
+ <tr>
+ <td>upperTerm</td>
+ <td>Specified by <tt>type</tt></td>
+ <td>Yes</td>
+ <td>N/A</td>
+ </tr>
+ <tr>
+ <td>type</td>
+ <td>int, long, float, double</td>
+ <td>No</td>
+ <td>int</td>
+ </tr>
+ <tr>
+ <td>includeLower</td>
+ <td>true, false</td>
+ <td>No</td>
+ <td>true</td>
+ </tr>
+ <tr>
+ <td>includeUpper</td>
+ <td>true, false</td>
+ <td>No</td>
+ <td>true</td>
+ </tr>
+ <tr>
+ <td>precisionStep</td>
+ <td>Integer</td>
+ <td>No</td>
+ <td>4</td>
+ </tr>
+ </table>
+ <p>
+ If an error occurs parsing the supplied <tt>lowerTerm</tt> or
+ <tt>upperTerm</tt> into the numeric type specified by <tt>type</tt>, then the
+ error will be silently ignored and the resulting filter will not match any
+ documents.
+ */
 @interface OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder : NSObject < OrgApacheLuceneQueryparserXmlFilterBuilder >
 
 #pragma mark Public
@@ -31,6 +93,17 @@
 
 - (OrgApacheLuceneSearchFilter *)getFilterWithOrgW3cDomElement:(id<OrgW3cDomElement>)e;
 
+/*!
+ @brief Specifies how this <code>NumericRangeFilterBuilder</code> will handle errors.
+ <p>
+ If this is set to true, <code>getFilter(Element)</code> will throw a
+ <code>ParserException</code> if it is unable to parse the lowerTerm or upperTerm
+ into the appropriate numeric type. If this is set to false, then this
+ exception will be silently ignored and the resulting filter will not match
+ any documents.
+ <p>
+ Defaults to false.
+ */
 - (void)setStrictModeWithBoolean:(jboolean)strictMode;
 
 @end
@@ -41,15 +114,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBu
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder *new_OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder *create_OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder)
 
 #endif
 
-#if !defined (_OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter_) && (OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_INCLUDE_ALL || OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter_INCLUDE)
-#define _OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter_
+#if !defined (OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter))
+#define OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter_
 
-#define OrgApacheLuceneSearchFilter_RESTRICT 1
-#define OrgApacheLuceneSearchFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchFilter 1
+#define INCLUDE_OrgApacheLuceneSearchFilter 1
 #include "org/apache/lucene/search/Filter.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
@@ -77,8 +152,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBu
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter *new_OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter *create_OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder")

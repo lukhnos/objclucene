@@ -29,15 +29,15 @@
 
 - (OrgApacheLuceneSearchQuery *)makeLuceneQueryFieldNoBoostWithNSString:(NSString *)fieldName
            withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)qf {
-  return OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery_makeBooleanQueryWithJavaUtilList_withOrgApacheLuceneSearchBooleanClause_OccurEnum_([self makeLuceneSubQueriesFieldWithNSString:fieldName withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:qf], JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD));
+  return OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery_makeBooleanQueryWithJavaUtilList_withOrgApacheLuceneSearchBooleanClause_Occur_([self makeLuceneSubQueriesFieldWithNSString:fieldName withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:qf], JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD));
 }
 
 - (NSString *)distanceSubQueryNotAllowed {
   id<JavaUtilIterator> sqi = [self getSubQueriesIterator];
   while ([((id<JavaUtilIterator>) nil_chk(sqi)) hasNext]) {
-    OrgApacheLuceneQueryparserSurroundQuerySrndQuery *leq = (OrgApacheLuceneQueryparserSurroundQuerySrndQuery *) check_class_cast([sqi next], [OrgApacheLuceneQueryparserSurroundQuerySrndQuery class]);
+    OrgApacheLuceneQueryparserSurroundQuerySrndQuery *leq = (OrgApacheLuceneQueryparserSurroundQuerySrndQuery *) cast_chk([sqi next], [OrgApacheLuceneQueryparserSurroundQuerySrndQuery class]);
     if ([OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_class_() isInstance:leq]) {
-      NSString *m = [((id<OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery>) nil_chk(((id<OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery>) check_protocol_cast(leq, OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_class_())))) distanceSubQueryNotAllowed];
+      NSString *m = [((id<OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery>) nil_chk(((id<OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery>) cast_check(leq, OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_class_())))) distanceSubQueryNotAllowed];
       if (m != nil) {
         return m;
       }
@@ -52,13 +52,13 @@
 - (void)addSpanQueriesWithOrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory:(OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory *)sncf {
   id<JavaUtilIterator> sqi = [self getSubQueriesIterator];
   while ([((id<JavaUtilIterator>) nil_chk(sqi)) hasNext]) {
-    [((id<OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery>) nil_chk(((id<OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery>) check_protocol_cast([sqi next], OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_class_())))) addSpanQueriesWithOrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory:sncf];
+    [((id<OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery>) nil_chk(((id<OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery>) cast_check([sqi next], OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_class_())))) addSpanQueriesWithOrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory:sncf];
   }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:withBoolean:withNSString:", "OrQuery", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilList:withBoolean:withNSString:", "OrQuery", NULL, 0x1, NULL, "(Ljava/util/List<Lorg/apache/lucene/queryparser/surround/query/SrndQuery;>;ZLjava/lang/String;)V" },
     { "makeLuceneQueryFieldNoBoostWithNSString:withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:", "makeLuceneQueryFieldNoBoost", "Lorg.apache.lucene.search.Query;", 0x1, NULL, NULL },
     { "distanceSubQueryNotAllowed", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
     { "addSpanQueriesWithOrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory:", "addSpanQueries", "V", 0x1, "Ljava.io.IOException;", NULL },
@@ -74,9 +74,11 @@ void OrgApacheLuceneQueryparserSurroundQueryOrQuery_initWithJavaUtilList_withBoo
 }
 
 OrgApacheLuceneQueryparserSurroundQueryOrQuery *new_OrgApacheLuceneQueryparserSurroundQueryOrQuery_initWithJavaUtilList_withBoolean_withNSString_(id<JavaUtilList> queries, jboolean infix, NSString *opName) {
-  OrgApacheLuceneQueryparserSurroundQueryOrQuery *self = [OrgApacheLuceneQueryparserSurroundQueryOrQuery alloc];
-  OrgApacheLuceneQueryparserSurroundQueryOrQuery_initWithJavaUtilList_withBoolean_withNSString_(self, queries, infix, opName);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserSurroundQueryOrQuery, initWithJavaUtilList_withBoolean_withNSString_, queries, infix, opName)
+}
+
+OrgApacheLuceneQueryparserSurroundQueryOrQuery *create_OrgApacheLuceneQueryparserSurroundQueryOrQuery_initWithJavaUtilList_withBoolean_withNSString_(id<JavaUtilList> queries, jboolean infix, NSString *opName) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserSurroundQueryOrQuery, initWithJavaUtilList_withBoolean_withNSString_, queries, infix, opName)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserSurroundQueryOrQuery)

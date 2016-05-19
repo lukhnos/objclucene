@@ -19,9 +19,6 @@
 #include "org/apache/lucene/util/RamUsageEstimator.h"
 #include "org/apache/lucene/util/RoaringDocIdSet.h"
 
-#define OrgApacheLuceneUtilRoaringDocIdSet_BLOCK_SIZE 65536
-#define OrgApacheLuceneUtilRoaringDocIdSet_MAX_ARRAY_LENGTH 4096
-
 @interface OrgApacheLuceneUtilRoaringDocIdSet () {
  @public
   IOSObjectArray *docIdSets_;
@@ -36,16 +33,23 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilRoaringDocIdSet, docIdSets_, IOSObjectArray *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilRoaringDocIdSet, BLOCK_SIZE, jint)
+inline jint OrgApacheLuceneUtilRoaringDocIdSet_get_BLOCK_SIZE();
+#define OrgApacheLuceneUtilRoaringDocIdSet_BLOCK_SIZE 65536
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilRoaringDocIdSet, BLOCK_SIZE, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilRoaringDocIdSet, MAX_ARRAY_LENGTH, jint)
+inline jint OrgApacheLuceneUtilRoaringDocIdSet_get_MAX_ARRAY_LENGTH();
+#define OrgApacheLuceneUtilRoaringDocIdSet_MAX_ARRAY_LENGTH 4096
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilRoaringDocIdSet, MAX_ARRAY_LENGTH, jint)
 
-static jlong OrgApacheLuceneUtilRoaringDocIdSet_BASE_RAM_BYTES_USED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilRoaringDocIdSet, BASE_RAM_BYTES_USED_, jlong)
+inline jlong OrgApacheLuceneUtilRoaringDocIdSet_get_BASE_RAM_BYTES_USED();
+static jlong OrgApacheLuceneUtilRoaringDocIdSet_BASE_RAM_BYTES_USED;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilRoaringDocIdSet, BASE_RAM_BYTES_USED, jlong)
 
 __attribute__((unused)) static void OrgApacheLuceneUtilRoaringDocIdSet_initWithOrgApacheLuceneSearchDocIdSetArray_withInt_(OrgApacheLuceneUtilRoaringDocIdSet *self, IOSObjectArray *docIdSets, jint cardinality);
 
 __attribute__((unused)) static OrgApacheLuceneUtilRoaringDocIdSet *new_OrgApacheLuceneUtilRoaringDocIdSet_initWithOrgApacheLuceneSearchDocIdSetArray_withInt_(IOSObjectArray *docIdSets, jint cardinality) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneUtilRoaringDocIdSet *create_OrgApacheLuceneUtilRoaringDocIdSet_initWithOrgApacheLuceneSearchDocIdSetArray_withInt_(IOSObjectArray *docIdSets, jint cardinality);
 
 @interface OrgApacheLuceneUtilRoaringDocIdSet_Builder () {
  @public
@@ -69,6 +73,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilRoaringDocIdSet_Builder, denseBuffer_, Or
 
 __attribute__((unused)) static void OrgApacheLuceneUtilRoaringDocIdSet_Builder_flush(OrgApacheLuceneUtilRoaringDocIdSet_Builder *self);
 
+/*!
+ @brief <code>DocIdSet</code> implementation that can store documents up to 2^16-1 in a short[].
+ */
 @interface OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet : OrgApacheLuceneSearchDocIdSet {
  @public
   IOSShortArray *docIDs_;
@@ -86,12 +93,15 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet, docIDs_, IOSShortArray *)
 
-static jlong OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_BASE_RAM_BYTES_USED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet, BASE_RAM_BYTES_USED_, jlong)
+inline jlong OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_get_BASE_RAM_BYTES_USED();
+static jlong OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_BASE_RAM_BYTES_USED;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet, BASE_RAM_BYTES_USED, jlong)
 
 __attribute__((unused)) static void OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_initWithShortArray_(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet *self, IOSShortArray *docIDs);
 
 __attribute__((unused)) static OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet *new_OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_initWithShortArray_(IOSShortArray *docIDs) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet *create_OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_initWithShortArray_(IOSShortArray *docIDs);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet)
 
@@ -126,6 +136,8 @@ __attribute__((unused)) static void OrgApacheLuceneUtilRoaringDocIdSet_ShortArra
 
 __attribute__((unused)) static OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1 *new_OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1_initWithOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet *outer$) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1 *create_OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1_initWithOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet *outer$);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1)
 
 @interface OrgApacheLuceneUtilRoaringDocIdSet_Iterator : OrgApacheLuceneSearchDocIdSetIterator {
@@ -159,6 +171,8 @@ __attribute__((unused)) static void OrgApacheLuceneUtilRoaringDocIdSet_Iterator_
 
 __attribute__((unused)) static OrgApacheLuceneUtilRoaringDocIdSet_Iterator *new_OrgApacheLuceneUtilRoaringDocIdSet_Iterator_initWithOrgApacheLuceneUtilRoaringDocIdSet_(OrgApacheLuceneUtilRoaringDocIdSet *outer$) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneUtilRoaringDocIdSet_Iterator *create_OrgApacheLuceneUtilRoaringDocIdSet_Iterator_initWithOrgApacheLuceneUtilRoaringDocIdSet_(OrgApacheLuceneUtilRoaringDocIdSet *outer$);
+
 __attribute__((unused)) static jint OrgApacheLuceneUtilRoaringDocIdSet_Iterator_firstDocFromNextBlock(OrgApacheLuceneUtilRoaringDocIdSet_Iterator *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilRoaringDocIdSet_Iterator)
@@ -185,7 +199,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilRoaringDocIdSet)
   if (cardinality_ == 0) {
     return nil;
   }
-  return [new_OrgApacheLuceneUtilRoaringDocIdSet_Iterator_initWithOrgApacheLuceneUtilRoaringDocIdSet_(self) autorelease];
+  return create_OrgApacheLuceneUtilRoaringDocIdSet_Iterator_initWithOrgApacheLuceneUtilRoaringDocIdSet_(self);
 }
 
 - (jint)cardinality {
@@ -203,7 +217,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilRoaringDocIdSet)
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilRoaringDocIdSet class]) {
-    OrgApacheLuceneUtilRoaringDocIdSet_BASE_RAM_BYTES_USED_ = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilRoaringDocIdSet_class_());
+    OrgApacheLuceneUtilRoaringDocIdSet_BASE_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilRoaringDocIdSet_class_());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilRoaringDocIdSet)
   }
 }
@@ -220,7 +234,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilRoaringDocIdSet)
   static const J2ObjcFieldInfo fields[] = {
     { "BLOCK_SIZE", "BLOCK_SIZE", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilRoaringDocIdSet_BLOCK_SIZE },
     { "MAX_ARRAY_LENGTH", "MAX_ARRAY_LENGTH", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilRoaringDocIdSet_MAX_ARRAY_LENGTH },
-    { "BASE_RAM_BYTES_USED_", NULL, 0x1a, "J", &OrgApacheLuceneUtilRoaringDocIdSet_BASE_RAM_BYTES_USED_, NULL, .constantValue.asLong = 0 },
+    { "BASE_RAM_BYTES_USED", "BASE_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneUtilRoaringDocIdSet_BASE_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
     { "docIdSets_", NULL, 0x12, "[Lorg.apache.lucene.search.DocIdSet;", NULL, NULL, .constantValue.asLong = 0 },
     { "cardinality_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "ramBytesUsed_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
@@ -235,7 +249,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilRoaringDocIdSet)
 void OrgApacheLuceneUtilRoaringDocIdSet_initWithOrgApacheLuceneSearchDocIdSetArray_withInt_(OrgApacheLuceneUtilRoaringDocIdSet *self, IOSObjectArray *docIdSets, jint cardinality) {
   OrgApacheLuceneSearchDocIdSet_init(self);
   JreStrongAssign(&self->docIdSets_, docIdSets);
-  jlong ramBytesUsed = OrgApacheLuceneUtilRoaringDocIdSet_BASE_RAM_BYTES_USED_ + OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfWithNSObjectArray_(docIdSets);
+  jlong ramBytesUsed = OrgApacheLuceneUtilRoaringDocIdSet_BASE_RAM_BYTES_USED + OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfWithNSObjectArray_(docIdSets);
   {
     IOSObjectArray *a__ = self->docIdSets_;
     OrgApacheLuceneSearchDocIdSet * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
@@ -252,9 +266,11 @@ void OrgApacheLuceneUtilRoaringDocIdSet_initWithOrgApacheLuceneSearchDocIdSetArr
 }
 
 OrgApacheLuceneUtilRoaringDocIdSet *new_OrgApacheLuceneUtilRoaringDocIdSet_initWithOrgApacheLuceneSearchDocIdSetArray_withInt_(IOSObjectArray *docIdSets, jint cardinality) {
-  OrgApacheLuceneUtilRoaringDocIdSet *self = [OrgApacheLuceneUtilRoaringDocIdSet alloc];
-  OrgApacheLuceneUtilRoaringDocIdSet_initWithOrgApacheLuceneSearchDocIdSetArray_withInt_(self, docIdSets, cardinality);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilRoaringDocIdSet, initWithOrgApacheLuceneSearchDocIdSetArray_withInt_, docIdSets, cardinality)
+}
+
+OrgApacheLuceneUtilRoaringDocIdSet *create_OrgApacheLuceneUtilRoaringDocIdSet_initWithOrgApacheLuceneSearchDocIdSetArray_withInt_(IOSObjectArray *docIdSets, jint cardinality) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilRoaringDocIdSet, initWithOrgApacheLuceneSearchDocIdSetArray_withInt_, docIdSets, cardinality)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilRoaringDocIdSet)
@@ -272,7 +288,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilRoaringDocIdSet)
 
 - (OrgApacheLuceneUtilRoaringDocIdSet_Builder *)addWithInt:(jint)docId {
   if (docId <= lastDocId_) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$I", @"Doc ids must be added in-order, got ", docId, @" which is <= lastDocID=", lastDocId_)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$I", @"Doc ids must be added in-order, got ", docId, @" which is <= lastDocID=", lastDocId_));
   }
   jint block = JreURShift32(docId, 16);
   if (block != currentBlock_) {
@@ -292,7 +308,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilRoaringDocIdSet)
         jshort const *e__ = b__ + a__->size_;
         while (b__ < e__) {
           jshort doc = *b__++;
-          [denseBuffer_ setWithInt:doc & (jint) 0xFFFF];
+          [((OrgApacheLuceneUtilFixedBitSet *) nil_chk(denseBuffer_)) setWithInt:doc & (jint) 0xFFFF];
         }
       }
     }
@@ -312,7 +328,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilRoaringDocIdSet)
 
 - (OrgApacheLuceneUtilRoaringDocIdSet *)build {
   OrgApacheLuceneUtilRoaringDocIdSet_Builder_flush(self);
-  return [new_OrgApacheLuceneUtilRoaringDocIdSet_initWithOrgApacheLuceneSearchDocIdSetArray_withInt_(sets_, cardinality_) autorelease];
+  return create_OrgApacheLuceneUtilRoaringDocIdSet_initWithOrgApacheLuceneSearchDocIdSetArray_withInt_(sets_, cardinality_);
 }
 
 - (void)dealloc {
@@ -356,9 +372,11 @@ void OrgApacheLuceneUtilRoaringDocIdSet_Builder_initWithInt_(OrgApacheLuceneUtil
 }
 
 OrgApacheLuceneUtilRoaringDocIdSet_Builder *new_OrgApacheLuceneUtilRoaringDocIdSet_Builder_initWithInt_(jint maxDoc) {
-  OrgApacheLuceneUtilRoaringDocIdSet_Builder *self = [OrgApacheLuceneUtilRoaringDocIdSet_Builder alloc];
-  OrgApacheLuceneUtilRoaringDocIdSet_Builder_initWithInt_(self, maxDoc);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilRoaringDocIdSet_Builder, initWithInt_, maxDoc)
+}
+
+OrgApacheLuceneUtilRoaringDocIdSet_Builder *create_OrgApacheLuceneUtilRoaringDocIdSet_Builder_initWithInt_(jint maxDoc) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilRoaringDocIdSet_Builder, initWithInt_, maxDoc)
 }
 
 void OrgApacheLuceneUtilRoaringDocIdSet_Builder_flush(OrgApacheLuceneUtilRoaringDocIdSet_Builder *self) {
@@ -372,17 +390,17 @@ void OrgApacheLuceneUtilRoaringDocIdSet_Builder_flush(OrgApacheLuceneUtilRoaring
   else {
     JreAssert((self->denseBuffer_ != nil), (@"org/apache/lucene/util/RoaringDocIdSet.java:79 condition failed: assert denseBuffer != null;"));
     JreAssert(([((OrgApacheLuceneUtilFixedBitSet *) nil_chk(self->denseBuffer_)) cardinality] == self->currentBlockCardinality_), (@"org/apache/lucene/util/RoaringDocIdSet.java:80 condition failed: assert denseBuffer.cardinality() == currentBlockCardinality;"));
-    if ([self->denseBuffer_ length] == OrgApacheLuceneUtilRoaringDocIdSet_BLOCK_SIZE && OrgApacheLuceneUtilRoaringDocIdSet_BLOCK_SIZE - self->currentBlockCardinality_ < OrgApacheLuceneUtilRoaringDocIdSet_MAX_ARRAY_LENGTH) {
+    if ([((OrgApacheLuceneUtilFixedBitSet *) nil_chk(self->denseBuffer_)) length] == OrgApacheLuceneUtilRoaringDocIdSet_BLOCK_SIZE && OrgApacheLuceneUtilRoaringDocIdSet_BLOCK_SIZE - self->currentBlockCardinality_ < OrgApacheLuceneUtilRoaringDocIdSet_MAX_ARRAY_LENGTH) {
       IOSShortArray *excludedDocs = [IOSShortArray arrayWithLength:OrgApacheLuceneUtilRoaringDocIdSet_BLOCK_SIZE - self->currentBlockCardinality_];
-      [self->denseBuffer_ flipWithInt:0 withInt:[self->denseBuffer_ length]];
+      [((OrgApacheLuceneUtilFixedBitSet *) nil_chk(self->denseBuffer_)) flipWithInt:0 withInt:[self->denseBuffer_ length]];
       jint excludedDoc = -1;
       for (jint i = 0; i < excludedDocs->size_; ++i) {
-        excludedDoc = [self->denseBuffer_ nextSetBitWithInt:excludedDoc + 1];
+        excludedDoc = [((OrgApacheLuceneUtilFixedBitSet *) nil_chk(self->denseBuffer_)) nextSetBitWithInt:excludedDoc + 1];
         JreAssert((excludedDoc != OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS), (@"org/apache/lucene/util/RoaringDocIdSet.java:88 condition failed: assert excludedDoc != DocIdSetIterator.NO_MORE_DOCS;"));
         *IOSShortArray_GetRef(excludedDocs, i) = (jshort) excludedDoc;
       }
-      JreAssert((excludedDoc + 1 == [self->denseBuffer_ length] || [self->denseBuffer_ nextSetBitWithInt:excludedDoc + 1] == OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS), (@"org/apache/lucene/util/RoaringDocIdSet.java:91 condition failed: assert excludedDoc + 1 == denseBuffer.length() || denseBuffer.nextSetBit(excludedDoc + 1) == DocIdSetIterator.NO_MORE_DOCS;"));
-      IOSObjectArray_SetAndConsume(nil_chk(self->sets_), self->currentBlock_, new_OrgApacheLuceneUtilNotDocIdSet_initWithInt_withOrgApacheLuceneSearchDocIdSet_(OrgApacheLuceneUtilRoaringDocIdSet_BLOCK_SIZE, [new_OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_initWithShortArray_(excludedDocs) autorelease]));
+      JreAssert((excludedDoc + 1 == [((OrgApacheLuceneUtilFixedBitSet *) nil_chk(self->denseBuffer_)) length] || [((OrgApacheLuceneUtilFixedBitSet *) nil_chk(self->denseBuffer_)) nextSetBitWithInt:excludedDoc + 1] == OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS), (@"org/apache/lucene/util/RoaringDocIdSet.java:91 condition failed: assert excludedDoc + 1 == denseBuffer.length() || denseBuffer.nextSetBit(excludedDoc + 1) == DocIdSetIterator.NO_MORE_DOCS;"));
+      IOSObjectArray_SetAndConsume(nil_chk(self->sets_), self->currentBlock_, new_OrgApacheLuceneUtilNotDocIdSet_initWithInt_withOrgApacheLuceneSearchDocIdSet_(OrgApacheLuceneUtilRoaringDocIdSet_BLOCK_SIZE, create_OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_initWithShortArray_(excludedDocs)));
     }
     else {
       IOSObjectArray_SetAndConsume(nil_chk(self->sets_), self->currentBlock_, new_OrgApacheLuceneUtilBitDocIdSet_initWithOrgApacheLuceneUtilBitSet_withLong_(self->denseBuffer_, self->currentBlockCardinality_));
@@ -406,11 +424,11 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet)
 }
 
 - (jlong)ramBytesUsed {
-  return OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_BASE_RAM_BYTES_USED_ + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithShortArray_(docIDs_);
+  return OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_BASE_RAM_BYTES_USED + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithShortArray_(docIDs_);
 }
 
 - (OrgApacheLuceneSearchDocIdSetIterator *)iterator {
-  return [new_OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1_initWithOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_(self) autorelease];
+  return create_OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1_initWithOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_(self);
 }
 
 - (void)dealloc {
@@ -420,7 +438,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet)
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet class]) {
-    OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_BASE_RAM_BYTES_USED_ = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_class_());
+    OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_BASE_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_class_());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet)
   }
 }
@@ -432,7 +450,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet)
     { "iterator", NULL, "Lorg.apache.lucene.search.DocIdSetIterator;", 0x1, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "BASE_RAM_BYTES_USED_", NULL, 0x1a, "J", &OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_BASE_RAM_BYTES_USED_, NULL, .constantValue.asLong = 0 },
+    { "BASE_RAM_BYTES_USED", "BASE_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_BASE_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
     { "docIDs_", NULL, 0x12, "[S", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet = { 2, "ShortArrayDocIdSet", "org.apache.lucene.util", "RoaringDocIdSet", 0xa, 3, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
@@ -447,9 +465,11 @@ void OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_initWithShortArray_(O
 }
 
 OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet *new_OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_initWithShortArray_(IOSShortArray *docIDs) {
-  OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet *self = [OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet alloc];
-  OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_initWithShortArray_(self, docIDs);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet, initWithShortArray_, docIDs)
+}
+
+OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet *create_OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_initWithShortArray_(IOSShortArray *docIDs) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet, initWithShortArray_, docIDs)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet)
@@ -541,9 +561,11 @@ void OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1_initWithOrgApacheL
 }
 
 OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1 *new_OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1_initWithOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet *outer$) {
-  OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1 *self = [OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1 alloc];
-  OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1_initWithOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_(self, outer$);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1, initWithOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_, outer$)
+}
+
+OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1 *create_OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1_initWithOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1, initWithOrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_, outer$)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilRoaringDocIdSet_ShortArrayDocIdSet_$1)
@@ -632,9 +654,11 @@ void OrgApacheLuceneUtilRoaringDocIdSet_Iterator_initWithOrgApacheLuceneUtilRoar
 }
 
 OrgApacheLuceneUtilRoaringDocIdSet_Iterator *new_OrgApacheLuceneUtilRoaringDocIdSet_Iterator_initWithOrgApacheLuceneUtilRoaringDocIdSet_(OrgApacheLuceneUtilRoaringDocIdSet *outer$) {
-  OrgApacheLuceneUtilRoaringDocIdSet_Iterator *self = [OrgApacheLuceneUtilRoaringDocIdSet_Iterator alloc];
-  OrgApacheLuceneUtilRoaringDocIdSet_Iterator_initWithOrgApacheLuceneUtilRoaringDocIdSet_(self, outer$);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilRoaringDocIdSet_Iterator, initWithOrgApacheLuceneUtilRoaringDocIdSet_, outer$)
+}
+
+OrgApacheLuceneUtilRoaringDocIdSet_Iterator *create_OrgApacheLuceneUtilRoaringDocIdSet_Iterator_initWithOrgApacheLuceneUtilRoaringDocIdSet_(OrgApacheLuceneUtilRoaringDocIdSet *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilRoaringDocIdSet_Iterator, initWithOrgApacheLuceneUtilRoaringDocIdSet_, outer$)
 }
 
 jint OrgApacheLuceneUtilRoaringDocIdSet_Iterator_firstDocFromNextBlock(OrgApacheLuceneUtilRoaringDocIdSet_Iterator *self) {

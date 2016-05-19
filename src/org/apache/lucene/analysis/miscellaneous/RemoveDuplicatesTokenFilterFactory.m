@@ -19,12 +19,12 @@
 }
 
 - (OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  return [new_OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(input) autorelease];
+  return create_OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(input);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "RemoveDuplicatesTokenFilterFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "RemoveDuplicatesTokenFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.miscellaneous.RemoveDuplicatesTokenFilter;", 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory = { 2, "RemoveDuplicatesTokenFilterFactory", "org.apache.lucene.analysis.miscellaneous", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
@@ -36,14 +36,16 @@
 void OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory *self, id<JavaUtilMap> args) {
   OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory *self = [OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory alloc];
-  OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory *create_OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilterFactory)

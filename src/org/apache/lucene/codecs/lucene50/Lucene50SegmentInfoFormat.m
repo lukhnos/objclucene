@@ -8,7 +8,6 @@
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
-#include "java/lang/Throwable.h"
 #include "java/util/Collections.h"
 #include "java/util/Map.h"
 #include "java/util/Set.h"
@@ -24,10 +23,30 @@
 #include "org/apache/lucene/store/IndexOutput.h"
 #include "org/apache/lucene/util/Version.h"
 
-NSString *OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_SI_EXTENSION_ = @"si";
-NSString *OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_CODEC_NAME_ = @"Lucene50SegmentInfo";
+NSString *OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_SI_EXTENSION = @"si";
+NSString *OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_CODEC_NAME = @"Lucene50SegmentInfo";
 
 @implementation OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat
+
++ (NSString *)SI_EXTENSION {
+  return OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_SI_EXTENSION;
+}
+
++ (NSString *)CODEC_NAME {
+  return OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_CODEC_NAME;
+}
+
++ (jint)VERSION_START {
+  return OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_VERSION_START;
+}
+
++ (jint)VERSION_SAFE_MAPS {
+  return OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_VERSION_SAFE_MAPS;
+}
+
++ (jint)VERSION_CURRENT {
+  return OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_VERSION_CURRENT;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -40,19 +59,19 @@ J2OBJC_IGNORE_DESIGNATED_END
                                                               withNSString:(NSString *)segment
                                                              withByteArray:(IOSByteArray *)segmentID
                                          withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
-  NSString *fileName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(segment, @"", OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_SI_EXTENSION_);
+  NSString *fileName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(segment, @"", OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_SI_EXTENSION);
   {
     OrgApacheLuceneStoreChecksumIndexInput *input = [((OrgApacheLuceneStoreDirectory *) nil_chk(dir)) openChecksumInputWithNSString:fileName withOrgApacheLuceneStoreIOContext:context];
-    JavaLangThrowable *__primaryException1 = nil;
+    NSException *__primaryException1 = nil;
     @try {
-      JavaLangThrowable *priorE = nil;
+      NSException *priorE = nil;
       OrgApacheLuceneIndexSegmentInfo *si = nil;
       @try {
-        jint format = OrgApacheLuceneCodecsCodecUtil_checkIndexHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_withByteArray_withNSString_(input, OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_CODEC_NAME_, OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_VERSION_START, OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_VERSION_CURRENT, segmentID, @"");
+        jint format = OrgApacheLuceneCodecsCodecUtil_checkIndexHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_withByteArray_withNSString_(input, OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_CODEC_NAME, OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_VERSION_START, OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_VERSION_CURRENT, segmentID, @"");
         OrgApacheLuceneUtilVersion *version_ = OrgApacheLuceneUtilVersion_fromBitsWithInt_withInt_withInt_([((OrgApacheLuceneStoreChecksumIndexInput *) nil_chk(input)) readInt], [input readInt], [input readInt]);
         jint docCount = [input readInt];
         if (docCount < 0) {
-          @throw [new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$I", @"invalid docCount: ", docCount), input) autorelease];
+          @throw create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$I", @"invalid docCount: ", docCount), input);
         }
         jboolean isCompoundFile = [input readByte] == OrgApacheLuceneIndexSegmentInfo_YES;
         id<JavaUtilMap> diagnostics;
@@ -68,18 +87,18 @@ J2OBJC_IGNORE_DESIGNATED_END
           files = JavaUtilCollections_unmodifiableSetWithJavaUtilSet_([input readStringSet]);
           attributes = JavaUtilCollections_unmodifiableMapWithJavaUtilMap_([input readStringStringMap]);
         }
-        si = [new_OrgApacheLuceneIndexSegmentInfo_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneUtilVersion_withNSString_withInt_withBoolean_withOrgApacheLuceneCodecsCodec_withJavaUtilMap_withByteArray_withJavaUtilMap_(dir, version_, segment, docCount, isCompoundFile, nil, diagnostics, segmentID, attributes) autorelease];
+        si = create_OrgApacheLuceneIndexSegmentInfo_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneUtilVersion_withNSString_withInt_withBoolean_withOrgApacheLuceneCodecsCodec_withJavaUtilMap_withByteArray_withJavaUtilMap_(dir, version_, segment, docCount, isCompoundFile, nil, diagnostics, segmentID, attributes);
         [si setFilesWithJavaUtilCollection:files];
       }
-      @catch (JavaLangThrowable *exception) {
+      @catch (NSException *exception) {
         priorE = exception;
       }
       @finally {
-        OrgApacheLuceneCodecsCodecUtil_checkFooterWithOrgApacheLuceneStoreChecksumIndexInput_withJavaLangThrowable_(input, priorE);
+        OrgApacheLuceneCodecsCodecUtil_checkFooterWithOrgApacheLuceneStoreChecksumIndexInput_withNSException_(input, priorE);
       }
       return si;
     }
-    @catch (JavaLangThrowable *e) {
+    @catch (NSException *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -88,8 +107,8 @@ J2OBJC_IGNORE_DESIGNATED_END
         if (__primaryException1 != nil) {
           @try {
             [input close];
-          } @catch (JavaLangThrowable *e) {
-            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          } @catch (NSException *e) {
+            [__primaryException1 addSuppressedWithNSException:e];
           }
         } else {
           [input close];
@@ -102,16 +121,16 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)writeWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
            withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)si
              withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)ioContext {
-  NSString *fileName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(((OrgApacheLuceneIndexSegmentInfo *) nil_chk(si))->name_, @"", OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_SI_EXTENSION_);
+  NSString *fileName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(((OrgApacheLuceneIndexSegmentInfo *) nil_chk(si))->name_, @"", OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_SI_EXTENSION);
   {
     OrgApacheLuceneStoreIndexOutput *output = [((OrgApacheLuceneStoreDirectory *) nil_chk(dir)) createOutputWithNSString:fileName withOrgApacheLuceneStoreIOContext:ioContext];
-    JavaLangThrowable *__primaryException1 = nil;
+    NSException *__primaryException1 = nil;
     @try {
       [si addFileWithNSString:fileName];
-      OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(output, OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_CODEC_NAME_, OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_VERSION_CURRENT, [si getId], @"");
+      OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(output, OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_CODEC_NAME, OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_VERSION_CURRENT, [si getId], @"");
       OrgApacheLuceneUtilVersion *version_ = [si getVersion];
       if (((OrgApacheLuceneUtilVersion *) nil_chk(version_))->major_ < 5) {
-        @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$@", @"invalid major version: should be >= 5 but got: ", version_->major_, @" segment=", si)) autorelease];
+        @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$@", @"invalid major version: should be >= 5 but got: ", version_->major_, @" segment=", si));
       }
       [((OrgApacheLuceneStoreIndexOutput *) nil_chk(output)) writeIntWithInt:version_->major_];
       [output writeIntWithInt:version_->minor_];
@@ -123,14 +142,14 @@ J2OBJC_IGNORE_DESIGNATED_END
       id<JavaUtilSet> files = [si files];
       for (NSString * __strong file in nil_chk(files)) {
         if (![((NSString *) nil_chk(OrgApacheLuceneIndexIndexFileNames_parseSegmentNameWithNSString_(file))) isEqual:si->name_]) {
-          @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$@", @"invalid files: expected segment=", si->name_, @", got=", files)) autorelease];
+          @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$@", @"invalid files: expected segment=", si->name_, @", got=", files));
         }
       }
       [output writeSetOfStringsWithJavaUtilSet:files];
       [output writeMapOfStringsWithJavaUtilMap:[si getAttributes]];
       OrgApacheLuceneCodecsCodecUtil_writeFooterWithOrgApacheLuceneStoreIndexOutput_(output);
     }
-    @catch (JavaLangThrowable *e) {
+    @catch (NSException *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -139,8 +158,8 @@ J2OBJC_IGNORE_DESIGNATED_END
         if (__primaryException1 != nil) {
           @try {
             [output close];
-          } @catch (JavaLangThrowable *e) {
-            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          } @catch (NSException *e) {
+            [__primaryException1 addSuppressedWithNSException:e];
           }
         } else {
           [output close];
@@ -157,8 +176,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "writeWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentInfo:withOrgApacheLuceneStoreIOContext:", "write", "V", 0x1, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "SI_EXTENSION_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_SI_EXTENSION_, NULL, .constantValue.asLong = 0 },
-    { "CODEC_NAME_", NULL, 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_CODEC_NAME_, NULL, .constantValue.asLong = 0 },
+    { "SI_EXTENSION", "SI_EXTENSION", 0x19, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_SI_EXTENSION, NULL, .constantValue.asLong = 0 },
+    { "CODEC_NAME", "CODEC_NAME", 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_CODEC_NAME, NULL, .constantValue.asLong = 0 },
     { "VERSION_START", "VERSION_START", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_VERSION_START },
     { "VERSION_SAFE_MAPS", "VERSION_SAFE_MAPS", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_VERSION_SAFE_MAPS },
     { "VERSION_CURRENT", "VERSION_CURRENT", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_VERSION_CURRENT },
@@ -174,9 +193,11 @@ void OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_init(OrgApacheLucene
 }
 
 OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat *new_OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_init() {
-  OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat *self = [OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat alloc];
-  OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat, init)
+}
+
+OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat *create_OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat)

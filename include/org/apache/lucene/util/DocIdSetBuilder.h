@@ -5,34 +5,63 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilDocIdSetBuilder_INCLUDE_ALL")
-#if OrgApacheLuceneUtilDocIdSetBuilder_RESTRICT
-#define OrgApacheLuceneUtilDocIdSetBuilder_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilDocIdSetBuilder")
+#ifdef RESTRICT_OrgApacheLuceneUtilDocIdSetBuilder
+#define INCLUDE_ALL_OrgApacheLuceneUtilDocIdSetBuilder 0
 #else
-#define OrgApacheLuceneUtilDocIdSetBuilder_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilDocIdSetBuilder 1
 #endif
-#undef OrgApacheLuceneUtilDocIdSetBuilder_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilDocIdSetBuilder
 
-#if !defined (_OrgApacheLuceneUtilDocIdSetBuilder_) && (OrgApacheLuceneUtilDocIdSetBuilder_INCLUDE_ALL || OrgApacheLuceneUtilDocIdSetBuilder_INCLUDE)
-#define _OrgApacheLuceneUtilDocIdSetBuilder_
+#if !defined (OrgApacheLuceneUtilDocIdSetBuilder_) && (INCLUDE_ALL_OrgApacheLuceneUtilDocIdSetBuilder || defined(INCLUDE_OrgApacheLuceneUtilDocIdSetBuilder))
+#define OrgApacheLuceneUtilDocIdSetBuilder_
 
 @class OrgApacheLuceneSearchDocIdSet;
 @class OrgApacheLuceneSearchDocIdSetIterator;
 
+/*!
+ @brief A builder of <code>DocIdSet</code>s.
+ At first it uses a sparse structure to gather
+ documents, and then upgrades to a non-sparse bit set once enough hits match.
+ */
 @interface OrgApacheLuceneUtilDocIdSetBuilder : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Create a builder that can contain doc IDs between <code>0</code> and <code>maxDoc</code>.
+ */
 - (instancetype)initWithInt:(jint)maxDoc;
 
+/*!
+ @brief Add the content of the provided <code>DocIdSetIterator</code> to this builder.
+ NOTE: if you need to build a <code>DocIdSet</code> out of a single
+ <code>DocIdSetIterator</code>, you should rather use <code>RoaringDocIdSet.Builder</code>.
+ */
 - (void)addWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iter;
 
+/*!
+ @brief Add a document to this builder.
+ NOTE: doc IDs do not need to be provided in order.
+ NOTE: if you plan on adding several docs at once, look into using
+ <code>grow(int)</code> to reserve space.
+ */
 - (void)addWithInt:(jint)doc;
 
+/*!
+ @brief Build a <code>DocIdSet</code> from the accumulated doc IDs.
+ */
 - (OrgApacheLuceneSearchDocIdSet *)build;
 
+/*!
+ @brief Expert: build a <code>DocIdSet</code> with a hint on the cost that the resulting
+ <code>DocIdSet</code> would have.
+ */
 - (OrgApacheLuceneSearchDocIdSet *)buildWithLong:(jlong)costHint;
 
+/*!
+ @brief Reserve space so that this builder can hold <code>numDocs</code> MORE documents.
+ */
 - (void)growWithInt:(jint)numDocs;
 
 @end
@@ -43,8 +72,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilDocIdSetBuilder_initWithInt_(OrgApache
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilDocIdSetBuilder *new_OrgApacheLuceneUtilDocIdSetBuilder_initWithInt_(jint maxDoc) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilDocIdSetBuilder *create_OrgApacheLuceneUtilDocIdSetBuilder_initWithInt_(jint maxDoc);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilDocIdSetBuilder)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilDocIdSetBuilder_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilDocIdSetBuilder")

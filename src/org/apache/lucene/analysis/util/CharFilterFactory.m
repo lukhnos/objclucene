@@ -13,8 +13,9 @@
 #include "org/apache/lucene/analysis/util/AnalysisSPILoader.h"
 #include "org/apache/lucene/analysis/util/CharFilterFactory.h"
 
-static OrgApacheLuceneAnalysisUtilAnalysisSPILoader *OrgApacheLuceneAnalysisUtilCharFilterFactory_loader_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisUtilCharFilterFactory, loader_, OrgApacheLuceneAnalysisUtilAnalysisSPILoader *)
+inline OrgApacheLuceneAnalysisUtilAnalysisSPILoader *OrgApacheLuceneAnalysisUtilCharFilterFactory_get_loader();
+static OrgApacheLuceneAnalysisUtilAnalysisSPILoader *OrgApacheLuceneAnalysisUtilCharFilterFactory_loader;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisUtilCharFilterFactory, loader, OrgApacheLuceneAnalysisUtilAnalysisSPILoader *)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisUtilCharFilterFactory)
 
@@ -50,22 +51,22 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisUtilCharFilterFactory)
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisUtilCharFilterFactory class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisUtilCharFilterFactory_loader_, new_OrgApacheLuceneAnalysisUtilAnalysisSPILoader_initWithIOSClass_(OrgApacheLuceneAnalysisUtilCharFilterFactory_class_()));
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisUtilCharFilterFactory_loader, new_OrgApacheLuceneAnalysisUtilAnalysisSPILoader_initWithIOSClass_(OrgApacheLuceneAnalysisUtilCharFilterFactory_class_()));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisUtilCharFilterFactory)
   }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "forNameWithNSString:withJavaUtilMap:", "forName", "Lorg.apache.lucene.analysis.util.CharFilterFactory;", 0x9, NULL, NULL },
-    { "lookupClassWithNSString:", "lookupClass", "Ljava.lang.Class;", 0x9, NULL, NULL },
-    { "availableCharFilters", NULL, "Ljava.util.Set;", 0x9, NULL, NULL },
+    { "forNameWithNSString:withJavaUtilMap:", "forName", "Lorg.apache.lucene.analysis.util.CharFilterFactory;", 0x9, NULL, "(Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)Lorg/apache/lucene/analysis/util/CharFilterFactory;" },
+    { "lookupClassWithNSString:", "lookupClass", "Ljava.lang.Class;", 0x9, NULL, "(Ljava/lang/String;)Ljava/lang/Class<+Lorg/apache/lucene/analysis/util/CharFilterFactory;>;" },
+    { "availableCharFilters", NULL, "Ljava.util.Set;", 0x9, NULL, "()Ljava/util/Set<Ljava/lang/String;>;" },
     { "reloadCharFiltersWithJavaLangClassLoader:", "reloadCharFilters", "V", 0x9, NULL, NULL },
-    { "initWithJavaUtilMap:", "CharFilterFactory", NULL, 0x4, NULL, NULL },
+    { "initWithJavaUtilMap:", "CharFilterFactory", NULL, 0x4, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "createWithJavaIoReader:", "create", "Ljava.io.Reader;", 0x401, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "loader_", NULL, 0x1a, "Lorg.apache.lucene.analysis.util.AnalysisSPILoader;", &OrgApacheLuceneAnalysisUtilCharFilterFactory_loader_, "Lorg/apache/lucene/analysis/util/AnalysisSPILoader<Lorg/apache/lucene/analysis/util/CharFilterFactory;>;", .constantValue.asLong = 0 },
+    { "loader", "loader", 0x1a, "Lorg.apache.lucene.analysis.util.AnalysisSPILoader;", &OrgApacheLuceneAnalysisUtilCharFilterFactory_loader, "Lorg/apache/lucene/analysis/util/AnalysisSPILoader<Lorg/apache/lucene/analysis/util/CharFilterFactory;>;", .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilCharFilterFactory = { 2, "CharFilterFactory", "org.apache.lucene.analysis.util", NULL, 0x401, 6, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisUtilCharFilterFactory;
@@ -75,22 +76,22 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisUtilCharFilterFactory)
 
 OrgApacheLuceneAnalysisUtilCharFilterFactory *OrgApacheLuceneAnalysisUtilCharFilterFactory_forNameWithNSString_withJavaUtilMap_(NSString *name, id<JavaUtilMap> args) {
   OrgApacheLuceneAnalysisUtilCharFilterFactory_initialize();
-  return [((OrgApacheLuceneAnalysisUtilAnalysisSPILoader *) nil_chk(OrgApacheLuceneAnalysisUtilCharFilterFactory_loader_)) newInstanceWithNSString:name withJavaUtilMap:args];
+  return [((OrgApacheLuceneAnalysisUtilAnalysisSPILoader *) nil_chk(OrgApacheLuceneAnalysisUtilCharFilterFactory_loader)) newInstanceWithNSString:name withJavaUtilMap:args];
 }
 
 IOSClass *OrgApacheLuceneAnalysisUtilCharFilterFactory_lookupClassWithNSString_(NSString *name) {
   OrgApacheLuceneAnalysisUtilCharFilterFactory_initialize();
-  return [((OrgApacheLuceneAnalysisUtilAnalysisSPILoader *) nil_chk(OrgApacheLuceneAnalysisUtilCharFilterFactory_loader_)) lookupClassWithNSString:name];
+  return [((OrgApacheLuceneAnalysisUtilAnalysisSPILoader *) nil_chk(OrgApacheLuceneAnalysisUtilCharFilterFactory_loader)) lookupClassWithNSString:name];
 }
 
 id<JavaUtilSet> OrgApacheLuceneAnalysisUtilCharFilterFactory_availableCharFilters() {
   OrgApacheLuceneAnalysisUtilCharFilterFactory_initialize();
-  return [((OrgApacheLuceneAnalysisUtilAnalysisSPILoader *) nil_chk(OrgApacheLuceneAnalysisUtilCharFilterFactory_loader_)) availableServices];
+  return [((OrgApacheLuceneAnalysisUtilAnalysisSPILoader *) nil_chk(OrgApacheLuceneAnalysisUtilCharFilterFactory_loader)) availableServices];
 }
 
 void OrgApacheLuceneAnalysisUtilCharFilterFactory_reloadCharFiltersWithJavaLangClassLoader_(JavaLangClassLoader *classloader) {
   OrgApacheLuceneAnalysisUtilCharFilterFactory_initialize();
-  [((OrgApacheLuceneAnalysisUtilAnalysisSPILoader *) nil_chk(OrgApacheLuceneAnalysisUtilCharFilterFactory_loader_)) reloadWithJavaLangClassLoader:classloader];
+  [((OrgApacheLuceneAnalysisUtilAnalysisSPILoader *) nil_chk(OrgApacheLuceneAnalysisUtilCharFilterFactory_loader)) reloadWithJavaLangClassLoader:classloader];
 }
 
 void OrgApacheLuceneAnalysisUtilCharFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisUtilCharFilterFactory *self, id<JavaUtilMap> args) {

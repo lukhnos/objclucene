@@ -40,7 +40,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "getTotalHits", NULL, "I", 0x1, NULL, NULL },
     { "collectWithInt:", "collect", "V", 0x1, NULL, NULL },
     { "needsScores", NULL, "Z", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "TotalHitCountCollector", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "totalHits_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
@@ -56,9 +56,11 @@ void OrgApacheLuceneSearchTotalHitCountCollector_init(OrgApacheLuceneSearchTotal
 }
 
 OrgApacheLuceneSearchTotalHitCountCollector *new_OrgApacheLuceneSearchTotalHitCountCollector_init() {
-  OrgApacheLuceneSearchTotalHitCountCollector *self = [OrgApacheLuceneSearchTotalHitCountCollector alloc];
-  OrgApacheLuceneSearchTotalHitCountCollector_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTotalHitCountCollector, init)
+}
+
+OrgApacheLuceneSearchTotalHitCountCollector *create_OrgApacheLuceneSearchTotalHitCountCollector_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTotalHitCountCollector, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTotalHitCountCollector)

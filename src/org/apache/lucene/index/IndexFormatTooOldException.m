@@ -122,9 +122,11 @@ void OrgApacheLuceneIndexIndexFormatTooOldException_initWithNSString_withNSStrin
 }
 
 OrgApacheLuceneIndexIndexFormatTooOldException *new_OrgApacheLuceneIndexIndexFormatTooOldException_initWithNSString_withNSString_(NSString *resourceDescription, NSString *reason) {
-  OrgApacheLuceneIndexIndexFormatTooOldException *self = [OrgApacheLuceneIndexIndexFormatTooOldException alloc];
-  OrgApacheLuceneIndexIndexFormatTooOldException_initWithNSString_withNSString_(self, resourceDescription, reason);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexIndexFormatTooOldException, initWithNSString_withNSString_, resourceDescription, reason)
+}
+
+OrgApacheLuceneIndexIndexFormatTooOldException *create_OrgApacheLuceneIndexIndexFormatTooOldException_initWithNSString_withNSString_(NSString *resourceDescription, NSString *reason) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexIndexFormatTooOldException, initWithNSString_withNSString_, resourceDescription, reason)
 }
 
 void OrgApacheLuceneIndexIndexFormatTooOldException_initWithOrgApacheLuceneStoreDataInput_withNSString_(OrgApacheLuceneIndexIndexFormatTooOldException *self, OrgApacheLuceneStoreDataInput *inArg, NSString *reason) {
@@ -132,9 +134,11 @@ void OrgApacheLuceneIndexIndexFormatTooOldException_initWithOrgApacheLuceneStore
 }
 
 OrgApacheLuceneIndexIndexFormatTooOldException *new_OrgApacheLuceneIndexIndexFormatTooOldException_initWithOrgApacheLuceneStoreDataInput_withNSString_(OrgApacheLuceneStoreDataInput *inArg, NSString *reason) {
-  OrgApacheLuceneIndexIndexFormatTooOldException *self = [OrgApacheLuceneIndexIndexFormatTooOldException alloc];
-  OrgApacheLuceneIndexIndexFormatTooOldException_initWithOrgApacheLuceneStoreDataInput_withNSString_(self, inArg, reason);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexIndexFormatTooOldException, initWithOrgApacheLuceneStoreDataInput_withNSString_, inArg, reason)
+}
+
+OrgApacheLuceneIndexIndexFormatTooOldException *create_OrgApacheLuceneIndexIndexFormatTooOldException_initWithOrgApacheLuceneStoreDataInput_withNSString_(OrgApacheLuceneStoreDataInput *inArg, NSString *reason) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexIndexFormatTooOldException, initWithOrgApacheLuceneStoreDataInput_withNSString_, inArg, reason)
 }
 
 void OrgApacheLuceneIndexIndexFormatTooOldException_initWithNSString_withInt_withInt_withInt_(OrgApacheLuceneIndexIndexFormatTooOldException *self, NSString *resourceDescription, jint version_, jint minVersion, jint maxVersion) {
@@ -147,9 +151,11 @@ void OrgApacheLuceneIndexIndexFormatTooOldException_initWithNSString_withInt_wit
 }
 
 OrgApacheLuceneIndexIndexFormatTooOldException *new_OrgApacheLuceneIndexIndexFormatTooOldException_initWithNSString_withInt_withInt_withInt_(NSString *resourceDescription, jint version_, jint minVersion, jint maxVersion) {
-  OrgApacheLuceneIndexIndexFormatTooOldException *self = [OrgApacheLuceneIndexIndexFormatTooOldException alloc];
-  OrgApacheLuceneIndexIndexFormatTooOldException_initWithNSString_withInt_withInt_withInt_(self, resourceDescription, version_, minVersion, maxVersion);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexIndexFormatTooOldException, initWithNSString_withInt_withInt_withInt_, resourceDescription, version_, minVersion, maxVersion)
+}
+
+OrgApacheLuceneIndexIndexFormatTooOldException *create_OrgApacheLuceneIndexIndexFormatTooOldException_initWithNSString_withInt_withInt_withInt_(NSString *resourceDescription, jint version_, jint minVersion, jint maxVersion) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexIndexFormatTooOldException, initWithNSString_withInt_withInt_withInt_, resourceDescription, version_, minVersion, maxVersion)
 }
 
 void OrgApacheLuceneIndexIndexFormatTooOldException_initWithOrgApacheLuceneStoreDataInput_withInt_withInt_withInt_(OrgApacheLuceneIndexIndexFormatTooOldException *self, OrgApacheLuceneStoreDataInput *inArg, jint version_, jint minVersion, jint maxVersion) {
@@ -157,9 +163,11 @@ void OrgApacheLuceneIndexIndexFormatTooOldException_initWithOrgApacheLuceneStore
 }
 
 OrgApacheLuceneIndexIndexFormatTooOldException *new_OrgApacheLuceneIndexIndexFormatTooOldException_initWithOrgApacheLuceneStoreDataInput_withInt_withInt_withInt_(OrgApacheLuceneStoreDataInput *inArg, jint version_, jint minVersion, jint maxVersion) {
-  OrgApacheLuceneIndexIndexFormatTooOldException *self = [OrgApacheLuceneIndexIndexFormatTooOldException alloc];
-  OrgApacheLuceneIndexIndexFormatTooOldException_initWithOrgApacheLuceneStoreDataInput_withInt_withInt_withInt_(self, inArg, version_, minVersion, maxVersion);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexIndexFormatTooOldException, initWithOrgApacheLuceneStoreDataInput_withInt_withInt_withInt_, inArg, version_, minVersion, maxVersion)
+}
+
+OrgApacheLuceneIndexIndexFormatTooOldException *create_OrgApacheLuceneIndexIndexFormatTooOldException_initWithOrgApacheLuceneStoreDataInput_withInt_withInt_withInt_(OrgApacheLuceneStoreDataInput *inArg, jint version_, jint minVersion, jint maxVersion) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexIndexFormatTooOldException, initWithOrgApacheLuceneStoreDataInput_withInt_withInt_withInt_, inArg, version_, minVersion, maxVersion)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexIndexFormatTooOldException)

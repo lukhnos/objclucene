@@ -3,14 +3,24 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/surround/query/package-info.java
 //
 
+/*!
+ @brief This package contains SrndQuery and its subclasses.
+ <p>
+ The parser in the org.apache.lucene.queryparser.surround.parser package
+ normally generates a SrndQuery.
+ <p>
+ For searching an org.apache.lucene.search.Query is provided by
+ the SrndQuery.makeLuceneQueryField method.
+ For this, TermQuery, BooleanQuery and SpanQuery are used from Lucene.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserSurroundQueryPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserSurroundQueryPackage_info_RESTRICT
-#define OrgApacheLuceneQueryparserSurroundQueryPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserSurroundQueryPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryPackage_info 0
 #else
-#define OrgApacheLuceneQueryparserSurroundQueryPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryPackage_info 1
 #endif
-#undef OrgApacheLuceneQueryparserSurroundQueryPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserSurroundQueryPackage_info
 
-#pragma pop_macro("OrgApacheLuceneQueryparserSurroundQueryPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryPackage_info")

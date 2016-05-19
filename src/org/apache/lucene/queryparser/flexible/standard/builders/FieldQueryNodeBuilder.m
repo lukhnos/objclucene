@@ -22,8 +22,8 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneSearchTermQuery *)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *fieldNode = (OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) check_class_cast(queryNode, [OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode class]);
-  return [new_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_([new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_([((OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) nil_chk(fieldNode)) getFieldAsString], [fieldNode getTextAsString]) autorelease]) autorelease];
+  OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *fieldNode = (OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) cast_chk(queryNode, [OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode class]);
+  return create_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_(create_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_([((OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) nil_chk(fieldNode)) getFieldAsString], [fieldNode getTextAsString]));
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -42,9 +42,11 @@ void OrgApacheLuceneQueryparserFlexibleStandardBuildersFieldQueryNodeBuilder_ini
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardBuildersFieldQueryNodeBuilder *new_OrgApacheLuceneQueryparserFlexibleStandardBuildersFieldQueryNodeBuilder_init() {
-  OrgApacheLuceneQueryparserFlexibleStandardBuildersFieldQueryNodeBuilder *self = [OrgApacheLuceneQueryparserFlexibleStandardBuildersFieldQueryNodeBuilder alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardBuildersFieldQueryNodeBuilder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardBuildersFieldQueryNodeBuilder, init)
+}
+
+OrgApacheLuceneQueryparserFlexibleStandardBuildersFieldQueryNodeBuilder *create_OrgApacheLuceneQueryparserFlexibleStandardBuildersFieldQueryNodeBuilder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardBuildersFieldQueryNodeBuilder, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleStandardBuildersFieldQueryNodeBuilder)

@@ -66,6 +66,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchControlledRealTimeReope
 
 __attribute__((unused)) static OrgApacheLuceneSearchControlledRealTimeReopenThread_HandleRefresh *new_OrgApacheLuceneSearchControlledRealTimeReopenThread_HandleRefresh_initWithOrgApacheLuceneSearchControlledRealTimeReopenThread_(OrgApacheLuceneSearchControlledRealTimeReopenThread *outer$) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchControlledRealTimeReopenThread_HandleRefresh *create_OrgApacheLuceneSearchControlledRealTimeReopenThread_HandleRefresh_initWithOrgApacheLuceneSearchControlledRealTimeReopenThread_(OrgApacheLuceneSearchControlledRealTimeReopenThread *outer$);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchControlledRealTimeReopenThread_HandleRefresh)
 
 @implementation OrgApacheLuceneSearchControlledRealTimeReopenThread
@@ -96,7 +98,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchControlledRealTimeReopenThread_H
       [self join];
     }
     @catch (JavaLangInterruptedException *ie) {
-      @throw [new_OrgApacheLuceneUtilThreadInterruptedException_initWithJavaLangInterruptedException_(ie) autorelease];
+      @throw create_OrgApacheLuceneUtilThreadInterruptedException_initWithJavaLangInterruptedException_(ie);
     }
     JreAssignVolatileLong(&searchingGen_, JavaLangLong_MAX_VALUE);
     [self notifyAll];
@@ -112,7 +114,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchControlledRealTimeReopenThread_H
   @synchronized(self) {
     jlong curGen = [((OrgApacheLuceneIndexTrackingIndexWriter *) nil_chk(writer_)) getGeneration];
     if (targetGen > curGen) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$J$JC", @"targetGen=", targetGen, @" was never returned by the ReferenceManager instance (current gen=", curGen, ')')) autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$J$JC", @"targetGen=", targetGen, @" was never returned by the ReferenceManager instance (current gen=", curGen, ')'));
     }
     if (targetGen > JreLoadVolatileLong(&searchingGen_)) {
       [((JavaUtilConcurrentLocksReentrantLock *) nil_chk(reopenLock_)) lock];
@@ -176,7 +178,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchControlledRealTimeReopenThread_H
       [((OrgApacheLuceneSearchReferenceManager *) nil_chk(manager_)) maybeRefreshBlocking];
     }
     @catch (JavaIoIOException *ioe) {
-      @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(ioe) autorelease];
+      @throw create_JavaLangRuntimeException_initWithNSException_(ioe);
     }
   }
 }
@@ -191,7 +193,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchControlledRealTimeReopenThread_H
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTrackingIndexWriter:withOrgApacheLuceneSearchReferenceManager:withDouble:withDouble:", "ControlledRealTimeReopenThread", NULL, 0x1, NULL, NULL },
+    { "initWithOrgApacheLuceneIndexTrackingIndexWriter:withOrgApacheLuceneSearchReferenceManager:withDouble:withDouble:", "ControlledRealTimeReopenThread", NULL, 0x1, NULL, "(Lorg/apache/lucene/index/TrackingIndexWriter;Lorg/apache/lucene/search/ReferenceManager<TT;>;DD)V" },
     { "refreshDone", NULL, "V", 0x22, NULL, NULL },
     { "close", NULL, "V", 0x21, NULL, NULL },
     { "waitForGenerationWithLong:", "waitForGeneration", "V", 0x1, "Ljava.lang.InterruptedException;", NULL },
@@ -222,19 +224,21 @@ void OrgApacheLuceneSearchControlledRealTimeReopenThread_initWithOrgApacheLucene
   JreStrongAssignAndConsume(&self->reopenLock_, new_JavaUtilConcurrentLocksReentrantLock_init());
   JreStrongAssign(&self->reopenCond_, [((JavaUtilConcurrentLocksReentrantLock *) nil_chk(self->reopenLock_)) newCondition]);
   if (targetMaxStaleSec < targetMinStaleSec) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D$DC", @"targetMaxScaleSec (= ", targetMaxStaleSec, @") < targetMinStaleSec (=", targetMinStaleSec, ')')) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D$DC", @"targetMaxScaleSec (= ", targetMaxStaleSec, @") < targetMinStaleSec (=", targetMinStaleSec, ')'));
   }
   JreStrongAssign(&self->writer_, writer);
   JreStrongAssign(&self->manager_, manager);
   self->targetMaxStaleNS_ = JreFpToLong((1000000000 * targetMaxStaleSec));
   self->targetMinStaleNS_ = JreFpToLong((1000000000 * targetMinStaleSec));
-  [((OrgApacheLuceneSearchReferenceManager *) nil_chk(manager)) addListenerWithOrgApacheLuceneSearchReferenceManager_RefreshListener:[new_OrgApacheLuceneSearchControlledRealTimeReopenThread_HandleRefresh_initWithOrgApacheLuceneSearchControlledRealTimeReopenThread_(self) autorelease]];
+  [((OrgApacheLuceneSearchReferenceManager *) nil_chk(manager)) addListenerWithOrgApacheLuceneSearchReferenceManager_RefreshListener:create_OrgApacheLuceneSearchControlledRealTimeReopenThread_HandleRefresh_initWithOrgApacheLuceneSearchControlledRealTimeReopenThread_(self)];
 }
 
 OrgApacheLuceneSearchControlledRealTimeReopenThread *new_OrgApacheLuceneSearchControlledRealTimeReopenThread_initWithOrgApacheLuceneIndexTrackingIndexWriter_withOrgApacheLuceneSearchReferenceManager_withDouble_withDouble_(OrgApacheLuceneIndexTrackingIndexWriter *writer, OrgApacheLuceneSearchReferenceManager *manager, jdouble targetMaxStaleSec, jdouble targetMinStaleSec) {
-  OrgApacheLuceneSearchControlledRealTimeReopenThread *self = [OrgApacheLuceneSearchControlledRealTimeReopenThread alloc];
-  OrgApacheLuceneSearchControlledRealTimeReopenThread_initWithOrgApacheLuceneIndexTrackingIndexWriter_withOrgApacheLuceneSearchReferenceManager_withDouble_withDouble_(self, writer, manager, targetMaxStaleSec, targetMinStaleSec);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchControlledRealTimeReopenThread, initWithOrgApacheLuceneIndexTrackingIndexWriter_withOrgApacheLuceneSearchReferenceManager_withDouble_withDouble_, writer, manager, targetMaxStaleSec, targetMinStaleSec)
+}
+
+OrgApacheLuceneSearchControlledRealTimeReopenThread *create_OrgApacheLuceneSearchControlledRealTimeReopenThread_initWithOrgApacheLuceneIndexTrackingIndexWriter_withOrgApacheLuceneSearchReferenceManager_withDouble_withDouble_(OrgApacheLuceneIndexTrackingIndexWriter *writer, OrgApacheLuceneSearchReferenceManager *manager, jdouble targetMaxStaleSec, jdouble targetMinStaleSec) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchControlledRealTimeReopenThread, initWithOrgApacheLuceneIndexTrackingIndexWriter_withOrgApacheLuceneSearchReferenceManager_withDouble_withDouble_, writer, manager, targetMaxStaleSec, targetMinStaleSec)
 }
 
 void OrgApacheLuceneSearchControlledRealTimeReopenThread_refreshDone(OrgApacheLuceneSearchControlledRealTimeReopenThread *self) {
@@ -269,7 +273,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchControlledRealTimeReopenTh
   static const J2ObjcMethodInfo methods[] = {
     { "beforeRefresh", NULL, "V", 0x1, NULL, NULL },
     { "afterRefreshWithBoolean:", "afterRefresh", "V", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchControlledRealTimeReopenThread:", "init", NULL, 0x0, NULL, NULL },
+    { "initWithOrgApacheLuceneSearchControlledRealTimeReopenThread:", "HandleRefresh", NULL, 0x2, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.ControlledRealTimeReopenThread;", NULL, NULL, .constantValue.asLong = 0 },
@@ -286,9 +290,11 @@ void OrgApacheLuceneSearchControlledRealTimeReopenThread_HandleRefresh_initWithO
 }
 
 OrgApacheLuceneSearchControlledRealTimeReopenThread_HandleRefresh *new_OrgApacheLuceneSearchControlledRealTimeReopenThread_HandleRefresh_initWithOrgApacheLuceneSearchControlledRealTimeReopenThread_(OrgApacheLuceneSearchControlledRealTimeReopenThread *outer$) {
-  OrgApacheLuceneSearchControlledRealTimeReopenThread_HandleRefresh *self = [OrgApacheLuceneSearchControlledRealTimeReopenThread_HandleRefresh alloc];
-  OrgApacheLuceneSearchControlledRealTimeReopenThread_HandleRefresh_initWithOrgApacheLuceneSearchControlledRealTimeReopenThread_(self, outer$);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchControlledRealTimeReopenThread_HandleRefresh, initWithOrgApacheLuceneSearchControlledRealTimeReopenThread_, outer$)
+}
+
+OrgApacheLuceneSearchControlledRealTimeReopenThread_HandleRefresh *create_OrgApacheLuceneSearchControlledRealTimeReopenThread_HandleRefresh_initWithOrgApacheLuceneSearchControlledRealTimeReopenThread_(OrgApacheLuceneSearchControlledRealTimeReopenThread *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchControlledRealTimeReopenThread_HandleRefresh, initWithOrgApacheLuceneSearchControlledRealTimeReopenThread_, outer$)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchControlledRealTimeReopenThread_HandleRefresh)

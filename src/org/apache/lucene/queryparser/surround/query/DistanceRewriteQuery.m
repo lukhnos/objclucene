@@ -28,7 +28,7 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueryparserSurroundQueryDistanceQuery:withNSString:withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:", "DistanceRewriteQuery", NULL, 0x0, NULL, NULL },
+    { "initWithOrgApacheLuceneQueryparserSurroundQueryDistanceQuery:withNSString:withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:", "DistanceRewriteQuery", NULL, 0x0, NULL, "(Lorg/apache/lucene/queryparser/surround/query/DistanceQuery;Ljava/lang/String;Lorg/apache/lucene/queryparser/surround/query/BasicQueryFactory;)V" },
     { "rewriteWithOrgApacheLuceneIndexIndexReader:", "rewrite", "Lorg.apache.lucene.search.Query;", 0x1, "Ljava.io.IOException;", NULL },
   };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.queryparser.surround.query.DistanceQuery;"};
@@ -43,9 +43,11 @@ void OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery_initWithOrgApac
 }
 
 OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery *new_OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery_initWithOrgApacheLuceneQueryparserSurroundQueryDistanceQuery_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(OrgApacheLuceneQueryparserSurroundQueryDistanceQuery *srndQuery, NSString *fieldName, OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *qf) {
-  OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery *self = [OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery alloc];
-  OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery_initWithOrgApacheLuceneQueryparserSurroundQueryDistanceQuery_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(self, srndQuery, fieldName, qf);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery, initWithOrgApacheLuceneQueryparserSurroundQueryDistanceQuery_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_, srndQuery, fieldName, qf)
+}
+
+OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery *create_OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery_initWithOrgApacheLuceneQueryparserSurroundQueryDistanceQuery_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(OrgApacheLuceneQueryparserSurroundQueryDistanceQuery *srndQuery, NSString *fieldName, OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *qf) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery, initWithOrgApacheLuceneQueryparserSurroundQueryDistanceQuery_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_, srndQuery, fieldName, qf)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery)

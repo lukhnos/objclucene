@@ -5,19 +5,22 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode_) && (OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode_
+#if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode))
+#define OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode_
 
 @protocol JavaLangCharSequence;
 
+/*!
+ @brief Interface for a node that has text as a <code>CharSequence</code>
+ */
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode < NSObject, JavaObject >
 
 - (id<JavaLangCharSequence>)getText;
@@ -32,4 +35,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQu
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode")

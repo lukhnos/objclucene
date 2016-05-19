@@ -5,29 +5,42 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCoreLetterTokenizerFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCoreLetterTokenizerFactory_RESTRICT
-#define OrgApacheLuceneAnalysisCoreLetterTokenizerFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreLetterTokenizerFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCoreLetterTokenizerFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCoreLetterTokenizerFactory 0
 #else
-#define OrgApacheLuceneAnalysisCoreLetterTokenizerFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCoreLetterTokenizerFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisCoreLetterTokenizerFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCoreLetterTokenizerFactory
 
-#if !defined (_OrgApacheLuceneAnalysisCoreLetterTokenizerFactory_) && (OrgApacheLuceneAnalysisCoreLetterTokenizerFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisCoreLetterTokenizerFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisCoreLetterTokenizerFactory_
+#if !defined (OrgApacheLuceneAnalysisCoreLetterTokenizerFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCoreLetterTokenizerFactory || defined(INCLUDE_OrgApacheLuceneAnalysisCoreLetterTokenizerFactory))
+#define OrgApacheLuceneAnalysisCoreLetterTokenizerFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenizerFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenizerFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenizerFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenizerFactory 1
 #include "org/apache/lucene/analysis/util/TokenizerFactory.h"
 
 @class OrgApacheLuceneAnalysisCoreLetterTokenizer;
 @class OrgApacheLuceneUtilAttributeFactory;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>LetterTokenizer</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_letter" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.LetterTokenizerFactory"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisCoreLetterTokenizerFactory : OrgApacheLuceneAnalysisUtilTokenizerFactory
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new LetterTokenizerFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisCoreLetterTokenizer *)createWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
@@ -40,8 +53,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreLetterTokenizerFactory_initWit
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreLetterTokenizerFactory *new_OrgApacheLuceneAnalysisCoreLetterTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreLetterTokenizerFactory *create_OrgApacheLuceneAnalysisCoreLetterTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreLetterTokenizerFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCoreLetterTokenizerFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreLetterTokenizerFactory")

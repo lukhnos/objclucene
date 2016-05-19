@@ -5,23 +5,29 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCharfilterBaseCharFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCharfilterBaseCharFilter_RESTRICT
-#define OrgApacheLuceneAnalysisCharfilterBaseCharFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterBaseCharFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCharfilterBaseCharFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterBaseCharFilter 0
 #else
-#define OrgApacheLuceneAnalysisCharfilterBaseCharFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterBaseCharFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisCharfilterBaseCharFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCharfilterBaseCharFilter
 
-#if !defined (_OrgApacheLuceneAnalysisCharfilterBaseCharFilter_) && (OrgApacheLuceneAnalysisCharfilterBaseCharFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisCharfilterBaseCharFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisCharfilterBaseCharFilter_
+#if !defined (OrgApacheLuceneAnalysisCharfilterBaseCharFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterBaseCharFilter || defined(INCLUDE_OrgApacheLuceneAnalysisCharfilterBaseCharFilter))
+#define OrgApacheLuceneAnalysisCharfilterBaseCharFilter_
 
-#define OrgApacheLuceneAnalysisCharFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisCharFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisCharFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisCharFilter 1
 #include "org/apache/lucene/analysis/CharFilter.h"
 
 @class JavaIoReader;
 
+/*!
+ @brief Base utility class for implementing a <code>CharFilter</code>.
+ You subclass this, and then record mappings by calling
+ <code>addOffCorrectMap</code>, and then invoke the correct
+ method to correct an offset.
+ */
 @interface OrgApacheLuceneAnalysisCharfilterBaseCharFilter : OrgApacheLuceneAnalysisCharFilter
 
 #pragma mark Public
@@ -30,9 +36,24 @@
 
 #pragma mark Protected
 
+/*!
+ @brief <p>
+ Adds an offset correction mapping at the given output stream offset.
+ </p>
+ <p>
+ Assumption: the offset given with each successive call to this method
+ will not be smaller than the offset given at the previous invocation.
+ </p>
+ @param off The output stream offset at which to apply the correction
+ @param cumulativeDiff The input offset is given by adding this
+ to the output offset
+ */
 - (void)addOffCorrectMapWithInt:(jint)off
                         withInt:(jint)cumulativeDiff;
 
+/*!
+ @brief Retrieve the corrected offset.
+ */
 - (jint)correctWithInt:(jint)currentOff;
 
 - (jint)getLastCumulativeDiff;
@@ -47,4 +68,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCharfilterBaseCharFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCharfilterBaseCharFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterBaseCharFilter")

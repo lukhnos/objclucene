@@ -5,40 +5,85 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchJoinToParentBlockJoinQuery_INCLUDE_ALL")
-#if OrgApacheLuceneSearchJoinToParentBlockJoinQuery_RESTRICT
-#define OrgApacheLuceneSearchJoinToParentBlockJoinQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinToParentBlockJoinQuery")
+#ifdef RESTRICT_OrgApacheLuceneSearchJoinToParentBlockJoinQuery
+#define INCLUDE_ALL_OrgApacheLuceneSearchJoinToParentBlockJoinQuery 0
 #else
-#define OrgApacheLuceneSearchJoinToParentBlockJoinQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchJoinToParentBlockJoinQuery 1
 #endif
-#undef OrgApacheLuceneSearchJoinToParentBlockJoinQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchJoinToParentBlockJoinQuery
 
-#if !defined (_OrgApacheLuceneSearchJoinToParentBlockJoinQuery_) && (OrgApacheLuceneSearchJoinToParentBlockJoinQuery_INCLUDE_ALL || OrgApacheLuceneSearchJoinToParentBlockJoinQuery_INCLUDE)
-#define _OrgApacheLuceneSearchJoinToParentBlockJoinQuery_
+#if !defined (OrgApacheLuceneSearchJoinToParentBlockJoinQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinToParentBlockJoinQuery || defined(INCLUDE_OrgApacheLuceneSearchJoinToParentBlockJoinQuery))
+#define OrgApacheLuceneSearchJoinToParentBlockJoinQuery_
 
-#define OrgApacheLuceneSearchQuery_RESTRICT 1
-#define OrgApacheLuceneSearchQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchQuery 1
+#define INCLUDE_OrgApacheLuceneSearchQuery 1
 #include "org/apache/lucene/search/Query.h"
 
 @class OrgApacheLuceneIndexIndexReader;
 @class OrgApacheLuceneSearchIndexSearcher;
-@class OrgApacheLuceneSearchJoinScoreModeEnum;
+@class OrgApacheLuceneSearchJoinScoreMode;
 @class OrgApacheLuceneSearchWeight;
 @protocol OrgApacheLuceneSearchJoinBitSetProducer;
 
+/*!
+ @brief This query requires that you index
+ children and parent docs as a single block, using the
+ <code>IndexWriter.addDocuments()</code> or <code>IndexWriter.updateDocuments()</code>
+  API.
+ In each block, the
+ child documents must appear first, ending with the parent
+ document.  At search time you provide a Filter
+ identifying the parents, however this Filter must provide
+ an <code>BitSet</code> per sub-reader.
+ <p>Once the block index is built, use this query to wrap
+ any sub-query matching only child docs and join matches in that
+ child document space up to the parent document space.
+ You can then use this Query as a clause with
+ other queries in the parent document space.</p>
+ <p>See <code>ToChildBlockJoinQuery</code> if you need to join
+ in the reverse order.
+ <p>The child documents must be orthogonal to the parent
+ documents: the wrapped child query must never
+ return a parent document.</p>
+ If you'd like to retrieve <code>TopGroups</code> for the
+ resulting query, use the <code>ToParentBlockJoinCollector</code>.
+ Note that this is not necessary, ie, if you simply want
+ to collect the parent documents and don't need to see
+ which child documents matched under that parent, then
+ you can use any collector.
+ <p><b>NOTE</b>: If the overall query contains parent-only
+ matches, for example you OR a parent-only query with a
+ joined child-only query, then the resulting collected documents
+ will be correct, however the <code>TopGroups</code> you get
+ from <code>ToParentBlockJoinCollector</code> will not contain every
+ child for parents that had matched.
+ <p>See <code>org.apache.lucene.search.join</code> for an
+ overview. </p>
+ */
 @interface OrgApacheLuceneSearchJoinToParentBlockJoinQuery : OrgApacheLuceneSearchQuery
 
 #pragma mark Public
 
+/*!
+ @brief Create a ToParentBlockJoinQuery.
+ @param childQuery Query matching child documents.
+ @param parentsFilter Filter identifying the parent documents.
+ @param scoreMode How to aggregate multiple child scores
+ into a single parent score.
+ */
 - (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)childQuery
        withOrgApacheLuceneSearchJoinBitSetProducer:(id<OrgApacheLuceneSearchJoinBitSetProducer>)parentsFilter
-        withOrgApacheLuceneSearchJoinScoreModeEnum:(OrgApacheLuceneSearchJoinScoreModeEnum *)scoreMode;
+            withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)scoreMode;
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores;
 
 - (jboolean)isEqual:(id)_other;
 
+/*!
+ @brief Return our child query.
+ */
 - (OrgApacheLuceneSearchQuery *)getChildQuery;
 
 - (NSUInteger)hash;
@@ -51,25 +96,27 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinToParentBlockJoinQuery)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinToParentBlockJoinQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchJoinBitSetProducer_withOrgApacheLuceneSearchJoinScoreModeEnum_(OrgApacheLuceneSearchJoinToParentBlockJoinQuery *self, OrgApacheLuceneSearchQuery *childQuery, id<OrgApacheLuceneSearchJoinBitSetProducer> parentsFilter, OrgApacheLuceneSearchJoinScoreModeEnum *scoreMode);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinToParentBlockJoinQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchJoinBitSetProducer_withOrgApacheLuceneSearchJoinScoreMode_(OrgApacheLuceneSearchJoinToParentBlockJoinQuery *self, OrgApacheLuceneSearchQuery *childQuery, id<OrgApacheLuceneSearchJoinBitSetProducer> parentsFilter, OrgApacheLuceneSearchJoinScoreMode *scoreMode);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchJoinToParentBlockJoinQuery *new_OrgApacheLuceneSearchJoinToParentBlockJoinQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchJoinBitSetProducer_withOrgApacheLuceneSearchJoinScoreModeEnum_(OrgApacheLuceneSearchQuery *childQuery, id<OrgApacheLuceneSearchJoinBitSetProducer> parentsFilter, OrgApacheLuceneSearchJoinScoreModeEnum *scoreMode) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinToParentBlockJoinQuery *new_OrgApacheLuceneSearchJoinToParentBlockJoinQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchJoinBitSetProducer_withOrgApacheLuceneSearchJoinScoreMode_(OrgApacheLuceneSearchQuery *childQuery, id<OrgApacheLuceneSearchJoinBitSetProducer> parentsFilter, OrgApacheLuceneSearchJoinScoreMode *scoreMode) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinToParentBlockJoinQuery *create_OrgApacheLuceneSearchJoinToParentBlockJoinQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchJoinBitSetProducer_withOrgApacheLuceneSearchJoinScoreMode_(OrgApacheLuceneSearchQuery *childQuery, id<OrgApacheLuceneSearchJoinBitSetProducer> parentsFilter, OrgApacheLuceneSearchJoinScoreMode *scoreMode);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinToParentBlockJoinQuery)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchJoinToParentBlockJoinQuery_BlockJoinScorer_) && (OrgApacheLuceneSearchJoinToParentBlockJoinQuery_INCLUDE_ALL || OrgApacheLuceneSearchJoinToParentBlockJoinQuery_BlockJoinScorer_INCLUDE)
-#define _OrgApacheLuceneSearchJoinToParentBlockJoinQuery_BlockJoinScorer_
+#if !defined (OrgApacheLuceneSearchJoinToParentBlockJoinQuery_BlockJoinScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinToParentBlockJoinQuery || defined(INCLUDE_OrgApacheLuceneSearchJoinToParentBlockJoinQuery_BlockJoinScorer))
+#define OrgApacheLuceneSearchJoinToParentBlockJoinQuery_BlockJoinScorer_
 
-#define OrgApacheLuceneSearchScorer_RESTRICT 1
-#define OrgApacheLuceneSearchScorer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchScorer 1
+#define INCLUDE_OrgApacheLuceneSearchScorer 1
 #include "org/apache/lucene/search/Scorer.h"
 
 @class IOSFloatArray;
 @class IOSIntArray;
 @class OrgApacheLuceneSearchExplanation;
-@class OrgApacheLuceneSearchJoinScoreModeEnum;
+@class OrgApacheLuceneSearchJoinScoreMode;
 @class OrgApacheLuceneSearchWeight;
 @class OrgApacheLuceneUtilBitSet;
 @protocol JavaUtilCollection;
@@ -82,7 +129,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinToParentBlockJoinQuery)
                     withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)childScorer
                       withOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)parentBits
                                             withInt:(jint)firstChildDoc
-         withOrgApacheLuceneSearchJoinScoreModeEnum:(OrgApacheLuceneSearchJoinScoreModeEnum *)scoreMode;
+             withOrgApacheLuceneSearchJoinScoreMode:(OrgApacheLuceneSearchJoinScoreMode *)scoreMode;
 
 - (jint)advanceWithInt:(jint)parentTarget;
 
@@ -100,6 +147,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinToParentBlockJoinQuery)
 
 - (jfloat)score;
 
+/*!
+ @brief Instructs this scorer to keep track of the child docIds and score ids for retrieval purposes.
+ */
 - (void)trackPendingChildHits;
 
 #pragma mark Package-Private
@@ -116,12 +166,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinToParentBlockJoinQuery)
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinToParentBlockJoinQuery_BlockJoinScorer)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinToParentBlockJoinQuery_BlockJoinScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneUtilBitSet_withInt_withOrgApacheLuceneSearchJoinScoreModeEnum_(OrgApacheLuceneSearchJoinToParentBlockJoinQuery_BlockJoinScorer *self, OrgApacheLuceneSearchWeight *weight, OrgApacheLuceneSearchScorer *childScorer, OrgApacheLuceneUtilBitSet *parentBits, jint firstChildDoc, OrgApacheLuceneSearchJoinScoreModeEnum *scoreMode);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinToParentBlockJoinQuery_BlockJoinScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneUtilBitSet_withInt_withOrgApacheLuceneSearchJoinScoreMode_(OrgApacheLuceneSearchJoinToParentBlockJoinQuery_BlockJoinScorer *self, OrgApacheLuceneSearchWeight *weight, OrgApacheLuceneSearchScorer *childScorer, OrgApacheLuceneUtilBitSet *parentBits, jint firstChildDoc, OrgApacheLuceneSearchJoinScoreMode *scoreMode);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchJoinToParentBlockJoinQuery_BlockJoinScorer *new_OrgApacheLuceneSearchJoinToParentBlockJoinQuery_BlockJoinScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneUtilBitSet_withInt_withOrgApacheLuceneSearchJoinScoreModeEnum_(OrgApacheLuceneSearchWeight *weight, OrgApacheLuceneSearchScorer *childScorer, OrgApacheLuceneUtilBitSet *parentBits, jint firstChildDoc, OrgApacheLuceneSearchJoinScoreModeEnum *scoreMode) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinToParentBlockJoinQuery_BlockJoinScorer *new_OrgApacheLuceneSearchJoinToParentBlockJoinQuery_BlockJoinScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneUtilBitSet_withInt_withOrgApacheLuceneSearchJoinScoreMode_(OrgApacheLuceneSearchWeight *weight, OrgApacheLuceneSearchScorer *childScorer, OrgApacheLuceneUtilBitSet *parentBits, jint firstChildDoc, OrgApacheLuceneSearchJoinScoreMode *scoreMode) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinToParentBlockJoinQuery_BlockJoinScorer *create_OrgApacheLuceneSearchJoinToParentBlockJoinQuery_BlockJoinScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneUtilBitSet_withInt_withOrgApacheLuceneSearchJoinScoreMode_(OrgApacheLuceneSearchWeight *weight, OrgApacheLuceneSearchScorer *childScorer, OrgApacheLuceneUtilBitSet *parentBits, jint firstChildDoc, OrgApacheLuceneSearchJoinScoreMode *scoreMode);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinToParentBlockJoinQuery_BlockJoinScorer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchJoinToParentBlockJoinQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinToParentBlockJoinQuery")

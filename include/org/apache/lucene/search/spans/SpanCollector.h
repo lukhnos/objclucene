@@ -5,26 +5,40 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSpansSpanCollector_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSpansSpanCollector_RESTRICT
-#define OrgApacheLuceneSearchSpansSpanCollector_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanCollector")
+#ifdef RESTRICT_OrgApacheLuceneSearchSpansSpanCollector
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanCollector 0
 #else
-#define OrgApacheLuceneSearchSpansSpanCollector_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanCollector 1
 #endif
-#undef OrgApacheLuceneSearchSpansSpanCollector_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSpansSpanCollector
 
-#if !defined (_OrgApacheLuceneSearchSpansSpanCollector_) && (OrgApacheLuceneSearchSpansSpanCollector_INCLUDE_ALL || OrgApacheLuceneSearchSpansSpanCollector_INCLUDE)
-#define _OrgApacheLuceneSearchSpansSpanCollector_
+#if !defined (OrgApacheLuceneSearchSpansSpanCollector_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanCollector || defined(INCLUDE_OrgApacheLuceneSearchSpansSpanCollector))
+#define OrgApacheLuceneSearchSpansSpanCollector_
 
 @class OrgApacheLuceneIndexPostingsEnum;
 @class OrgApacheLuceneIndexTerm;
 
+/*!
+ @brief An interface defining the collection of postings information from the leaves
+ of a <code>org.apache.lucene.search.spans.Spans</code>
+ */
 @protocol OrgApacheLuceneSearchSpansSpanCollector < NSObject, JavaObject >
 
+/*!
+ @brief Collect information from postings
+ @param postings a <code>PostingsEnum</code>
+ @param position the position of the PostingsEnum
+ @param term     the <code>Term</code> for this postings list
+ @throws IOException on error
+ */
 - (void)collectLeafWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)postings
                                                 withInt:(jint)position
                            withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
 
+/*!
+ @brief Call to indicate that the driving Spans has moved to a new position
+ */
 - (void)reset;
 
 @end
@@ -35,4 +49,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanCollector)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSpansSpanCollector_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanCollector")

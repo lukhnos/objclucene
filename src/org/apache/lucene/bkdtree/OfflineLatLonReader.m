@@ -105,17 +105,19 @@ void OrgApacheLuceneBkdtreeOfflineLatLonReader_initWithOrgLukhnosPortmobileFileP
     jlong inc = [((JavaIoInputStream *) nil_chk(fis)) skipWithLong:seekFP - skipped];
     skipped += inc;
     if (inc == 0) {
-      @throw [new_JavaLangRuntimeException_initWithNSString_(@"skip returned 0") autorelease];
+      @throw create_JavaLangRuntimeException_initWithNSString_(@"skip returned 0");
     }
   }
-  JreStrongAssignAndConsume(&self->in_, new_OrgApacheLuceneStoreInputStreamDataInput_initWithJavaIoInputStream_([new_JavaIoBufferedInputStream_initWithJavaIoInputStream_(fis) autorelease]));
+  JreStrongAssignAndConsume(&self->in_, new_OrgApacheLuceneStoreInputStreamDataInput_initWithJavaIoInputStream_(create_JavaIoBufferedInputStream_initWithJavaIoInputStream_(fis)));
   self->countLeft_ = count;
 }
 
 OrgApacheLuceneBkdtreeOfflineLatLonReader *new_OrgApacheLuceneBkdtreeOfflineLatLonReader_initWithOrgLukhnosPortmobileFilePath_withLong_withLong_(OrgLukhnosPortmobileFilePath *tempFile, jlong start, jlong count) {
-  OrgApacheLuceneBkdtreeOfflineLatLonReader *self = [OrgApacheLuceneBkdtreeOfflineLatLonReader alloc];
-  OrgApacheLuceneBkdtreeOfflineLatLonReader_initWithOrgLukhnosPortmobileFilePath_withLong_withLong_(self, tempFile, start, count);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneBkdtreeOfflineLatLonReader, initWithOrgLukhnosPortmobileFilePath_withLong_withLong_, tempFile, start, count)
+}
+
+OrgApacheLuceneBkdtreeOfflineLatLonReader *create_OrgApacheLuceneBkdtreeOfflineLatLonReader_initWithOrgLukhnosPortmobileFilePath_withLong_withLong_(OrgLukhnosPortmobileFilePath *tempFile, jlong start, jlong count) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneBkdtreeOfflineLatLonReader, initWithOrgLukhnosPortmobileFilePath_withLong_withLong_, tempFile, start, count)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneBkdtreeOfflineLatLonReader)

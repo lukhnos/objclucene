@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserSurroundQueryComposedQuery_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserSurroundQueryComposedQuery_RESTRICT
-#define OrgApacheLuceneQueryparserSurroundQueryComposedQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryComposedQuery")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserSurroundQueryComposedQuery
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryComposedQuery 0
 #else
-#define OrgApacheLuceneQueryparserSurroundQueryComposedQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryComposedQuery 1
 #endif
-#undef OrgApacheLuceneQueryparserSurroundQueryComposedQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserSurroundQueryComposedQuery
 
-#if !defined (_OrgApacheLuceneQueryparserSurroundQueryComposedQuery_) && (OrgApacheLuceneQueryparserSurroundQueryComposedQuery_INCLUDE_ALL || OrgApacheLuceneQueryparserSurroundQueryComposedQuery_INCLUDE)
-#define _OrgApacheLuceneQueryparserSurroundQueryComposedQuery_
+#if !defined (OrgApacheLuceneQueryparserSurroundQueryComposedQuery_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryComposedQuery || defined(INCLUDE_OrgApacheLuceneQueryparserSurroundQueryComposedQuery))
+#define OrgApacheLuceneQueryparserSurroundQueryComposedQuery_
 
-#define OrgApacheLuceneQueryparserSurroundQuerySrndQuery_RESTRICT 1
-#define OrgApacheLuceneQueryparserSurroundQuerySrndQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserSurroundQuerySrndQuery 1
+#define INCLUDE_OrgApacheLuceneQueryparserSurroundQuerySrndQuery 1
 #include "org/apache/lucene/queryparser/surround/query/SrndQuery.h"
 
 @class JavaLangStringBuilder;
@@ -25,6 +25,9 @@
 @protocol JavaUtilIterator;
 @protocol JavaUtilList;
 
+/*!
+ @brief Base class for composite queries (such as AND/OR/NOT)
+ */
 @interface OrgApacheLuceneQueryparserSurroundQueryComposedQuery : OrgApacheLuceneQueryparserSurroundQuerySrndQuery {
  @public
   NSString *opName_;
@@ -81,4 +84,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQueryComposedQuery)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserSurroundQueryComposedQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryComposedQuery")

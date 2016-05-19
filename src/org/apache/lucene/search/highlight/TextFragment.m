@@ -78,9 +78,11 @@ void OrgApacheLuceneSearchHighlightTextFragment_initWithJavaLangCharSequence_wit
 }
 
 OrgApacheLuceneSearchHighlightTextFragment *new_OrgApacheLuceneSearchHighlightTextFragment_initWithJavaLangCharSequence_withInt_withInt_(id<JavaLangCharSequence> markedUpText, jint textStartPos, jint fragNum) {
-  OrgApacheLuceneSearchHighlightTextFragment *self = [OrgApacheLuceneSearchHighlightTextFragment alloc];
-  OrgApacheLuceneSearchHighlightTextFragment_initWithJavaLangCharSequence_withInt_withInt_(self, markedUpText, textStartPos, fragNum);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchHighlightTextFragment, initWithJavaLangCharSequence_withInt_withInt_, markedUpText, textStartPos, fragNum)
+}
+
+OrgApacheLuceneSearchHighlightTextFragment *create_OrgApacheLuceneSearchHighlightTextFragment_initWithJavaLangCharSequence_withInt_withInt_(id<JavaLangCharSequence> markedUpText, jint textStartPos, jint fragNum) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchHighlightTextFragment, initWithJavaLangCharSequence_withInt_withInt_, markedUpText, textStartPos, fragNum)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchHighlightTextFragment)

@@ -69,6 +69,8 @@ __attribute__((unused)) static void OrgApacheLuceneQueriesBoostingQuery_$1_initW
 
 __attribute__((unused)) static OrgApacheLuceneQueriesBoostingQuery_$1 *new_OrgApacheLuceneQueriesBoostingQuery_$1_initWithOrgApacheLuceneQueriesBoostingQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneQueriesBoostingQuery *outer$, OrgApacheLuceneSearchWeight *capture$0, OrgApacheLuceneSearchWeight *capture$1, OrgApacheLuceneSearchQuery *arg$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneQueriesBoostingQuery_$1 *create_OrgApacheLuceneQueriesBoostingQuery_$1_initWithOrgApacheLuceneQueriesBoostingQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneQueriesBoostingQuery *outer$, OrgApacheLuceneSearchWeight *capture$0, OrgApacheLuceneSearchWeight *capture$1, OrgApacheLuceneSearchQuery *arg$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesBoostingQuery_$1)
 
 @interface OrgApacheLuceneQueriesBoostingQuery_$1_$1 : OrgApacheLuceneSearchFilterScorer {
@@ -97,6 +99,8 @@ __attribute__((unused)) static void OrgApacheLuceneQueriesBoostingQuery_$1_$1_in
 
 __attribute__((unused)) static OrgApacheLuceneQueriesBoostingQuery_$1_$1 *new_OrgApacheLuceneQueriesBoostingQuery_$1_$1_initWithOrgApacheLuceneQueriesBoostingQuery_$1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchTwoPhaseIterator_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneQueriesBoostingQuery_$1 *outer$, OrgApacheLuceneSearchDocIdSetIterator *capture$0, OrgApacheLuceneSearchTwoPhaseIterator *capture$1, OrgApacheLuceneSearchScorer *arg$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneQueriesBoostingQuery_$1_$1 *create_OrgApacheLuceneQueriesBoostingQuery_$1_$1_initWithOrgApacheLuceneQueriesBoostingQuery_$1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchTwoPhaseIterator_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneQueriesBoostingQuery_$1 *outer$, OrgApacheLuceneSearchDocIdSetIterator *capture$0, OrgApacheLuceneSearchTwoPhaseIterator *capture$1, OrgApacheLuceneSearchScorer *arg$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesBoostingQuery_$1_$1)
 
 @implementation OrgApacheLuceneQueriesBoostingQuery
@@ -115,7 +119,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesBoostingQuery_$1_$1)
   }
   OrgApacheLuceneSearchWeight *matchWeight = [((OrgApacheLuceneSearchQuery *) nil_chk(match_)) createWeightWithOrgApacheLuceneSearchIndexSearcher:searcher withBoolean:needsScores];
   OrgApacheLuceneSearchWeight *contextWeight = [((OrgApacheLuceneSearchQuery *) nil_chk(context_)) createWeightWithOrgApacheLuceneSearchIndexSearcher:searcher withBoolean:false];
-  return [new_OrgApacheLuceneQueriesBoostingQuery_$1_initWithOrgApacheLuceneQueriesBoostingQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(self, matchWeight, contextWeight, self) autorelease];
+  return create_OrgApacheLuceneQueriesBoostingQuery_$1_initWithOrgApacheLuceneQueriesBoostingQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(self, matchWeight, contextWeight, self);
 }
 
 - (NSUInteger)hash {
@@ -126,7 +130,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesBoostingQuery_$1_$1)
   if ([super isEqual:obj] == false) {
     return false;
   }
-  OrgApacheLuceneQueriesBoostingQuery *that = (OrgApacheLuceneQueriesBoostingQuery *) check_class_cast(obj, [OrgApacheLuceneQueriesBoostingQuery class]);
+  OrgApacheLuceneQueriesBoostingQuery *that = (OrgApacheLuceneQueriesBoostingQuery *) cast_chk(obj, [OrgApacheLuceneQueriesBoostingQuery class]);
   return [((OrgApacheLuceneSearchQuery *) nil_chk(match_)) isEqual:((OrgApacheLuceneQueriesBoostingQuery *) nil_chk(that))->match_] && [((OrgApacheLuceneSearchQuery *) nil_chk(context_)) isEqual:that->context_] && JavaLangFloat_floatToIntBitsWithFloat_(boost_BoostingQuery_) == JavaLangFloat_floatToIntBitsWithFloat_(that->boost_BoostingQuery_);
 }
 
@@ -168,9 +172,11 @@ void OrgApacheLuceneQueriesBoostingQuery_initWithOrgApacheLuceneSearchQuery_with
 }
 
 OrgApacheLuceneQueriesBoostingQuery *new_OrgApacheLuceneQueriesBoostingQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withFloat_(OrgApacheLuceneSearchQuery *match, OrgApacheLuceneSearchQuery *context, jfloat boost) {
-  OrgApacheLuceneQueriesBoostingQuery *self = [OrgApacheLuceneQueriesBoostingQuery alloc];
-  OrgApacheLuceneQueriesBoostingQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withFloat_(self, match, context, boost);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesBoostingQuery, initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withFloat_, match, context, boost)
+}
+
+OrgApacheLuceneQueriesBoostingQuery *create_OrgApacheLuceneQueriesBoostingQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withFloat_(OrgApacheLuceneSearchQuery *match, OrgApacheLuceneSearchQuery *context, jfloat boost) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesBoostingQuery, initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withFloat_, match, context, boost)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesBoostingQuery)
@@ -212,9 +218,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesBoostingQuery)
   if (contextScorer == nil) {
     return matchScorer;
   }
-  OrgApacheLuceneSearchTwoPhaseIterator *contextTwoPhase = [((OrgApacheLuceneSearchScorer *) nil_chk(contextScorer)) asTwoPhaseIterator];
+  OrgApacheLuceneSearchTwoPhaseIterator *contextTwoPhase = [contextScorer asTwoPhaseIterator];
   OrgApacheLuceneSearchDocIdSetIterator *contextApproximation = contextTwoPhase == nil ? contextScorer : [contextTwoPhase approximation];
-  return [new_OrgApacheLuceneQueriesBoostingQuery_$1_$1_initWithOrgApacheLuceneQueriesBoostingQuery_$1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchTwoPhaseIterator_withOrgApacheLuceneSearchScorer_(self, contextApproximation, contextTwoPhase, matchScorer) autorelease];
+  return create_OrgApacheLuceneQueriesBoostingQuery_$1_$1_initWithOrgApacheLuceneQueriesBoostingQuery_$1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchTwoPhaseIterator_withOrgApacheLuceneSearchScorer_(self, contextApproximation, contextTwoPhase, matchScorer);
 }
 
 - (instancetype)initWithOrgApacheLuceneQueriesBoostingQuery:(OrgApacheLuceneQueriesBoostingQuery *)outer$
@@ -234,7 +240,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesBoostingQuery)
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x1, NULL, NULL },
+    { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x1, NULL, "(Ljava/util/Set<Lorg/apache/lucene/index/Term;>;)V" },
     { "explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x1, "Ljava.io.IOException;", NULL },
     { "getValueForNormalization", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
     { "normalizeWithFloat:withFloat:", "normalize", "V", 0x1, NULL, NULL },
@@ -261,9 +267,11 @@ void OrgApacheLuceneQueriesBoostingQuery_$1_initWithOrgApacheLuceneQueriesBoosti
 }
 
 OrgApacheLuceneQueriesBoostingQuery_$1 *new_OrgApacheLuceneQueriesBoostingQuery_$1_initWithOrgApacheLuceneQueriesBoostingQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneQueriesBoostingQuery *outer$, OrgApacheLuceneSearchWeight *capture$0, OrgApacheLuceneSearchWeight *capture$1, OrgApacheLuceneSearchQuery *arg$0) {
-  OrgApacheLuceneQueriesBoostingQuery_$1 *self = [OrgApacheLuceneQueriesBoostingQuery_$1 alloc];
-  OrgApacheLuceneQueriesBoostingQuery_$1_initWithOrgApacheLuceneQueriesBoostingQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(self, outer$, capture$0, capture$1, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesBoostingQuery_$1, initWithOrgApacheLuceneQueriesBoostingQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_, outer$, capture$0, capture$1, arg$0)
+}
+
+OrgApacheLuceneQueriesBoostingQuery_$1 *create_OrgApacheLuceneQueriesBoostingQuery_$1_initWithOrgApacheLuceneQueriesBoostingQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneQueriesBoostingQuery *outer$, OrgApacheLuceneSearchWeight *capture$0, OrgApacheLuceneSearchWeight *capture$1, OrgApacheLuceneSearchQuery *arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesBoostingQuery_$1, initWithOrgApacheLuceneQueriesBoostingQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_, outer$, capture$0, capture$1, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesBoostingQuery_$1)
@@ -322,9 +330,11 @@ void OrgApacheLuceneQueriesBoostingQuery_$1_$1_initWithOrgApacheLuceneQueriesBoo
 }
 
 OrgApacheLuceneQueriesBoostingQuery_$1_$1 *new_OrgApacheLuceneQueriesBoostingQuery_$1_$1_initWithOrgApacheLuceneQueriesBoostingQuery_$1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchTwoPhaseIterator_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneQueriesBoostingQuery_$1 *outer$, OrgApacheLuceneSearchDocIdSetIterator *capture$0, OrgApacheLuceneSearchTwoPhaseIterator *capture$1, OrgApacheLuceneSearchScorer *arg$0) {
-  OrgApacheLuceneQueriesBoostingQuery_$1_$1 *self = [OrgApacheLuceneQueriesBoostingQuery_$1_$1 alloc];
-  OrgApacheLuceneQueriesBoostingQuery_$1_$1_initWithOrgApacheLuceneQueriesBoostingQuery_$1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchTwoPhaseIterator_withOrgApacheLuceneSearchScorer_(self, outer$, capture$0, capture$1, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesBoostingQuery_$1_$1, initWithOrgApacheLuceneQueriesBoostingQuery_$1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchTwoPhaseIterator_withOrgApacheLuceneSearchScorer_, outer$, capture$0, capture$1, arg$0)
+}
+
+OrgApacheLuceneQueriesBoostingQuery_$1_$1 *create_OrgApacheLuceneQueriesBoostingQuery_$1_$1_initWithOrgApacheLuceneQueriesBoostingQuery_$1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchTwoPhaseIterator_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneQueriesBoostingQuery_$1 *outer$, OrgApacheLuceneSearchDocIdSetIterator *capture$0, OrgApacheLuceneSearchTwoPhaseIterator *capture$1, OrgApacheLuceneSearchScorer *arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesBoostingQuery_$1_$1, initWithOrgApacheLuceneQueriesBoostingQuery_$1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchTwoPhaseIterator_withOrgApacheLuceneSearchScorer_, outer$, capture$0, capture$1, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesBoostingQuery_$1_$1)

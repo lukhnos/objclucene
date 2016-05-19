@@ -5,29 +5,41 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCharfilterMappingCharFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCharfilterMappingCharFilter_RESTRICT
-#define OrgApacheLuceneAnalysisCharfilterMappingCharFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterMappingCharFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCharfilterMappingCharFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterMappingCharFilter 0
 #else
-#define OrgApacheLuceneAnalysisCharfilterMappingCharFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterMappingCharFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisCharfilterMappingCharFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCharfilterMappingCharFilter
 
-#if !defined (_OrgApacheLuceneAnalysisCharfilterMappingCharFilter_) && (OrgApacheLuceneAnalysisCharfilterMappingCharFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisCharfilterMappingCharFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisCharfilterMappingCharFilter_
+#if !defined (OrgApacheLuceneAnalysisCharfilterMappingCharFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterMappingCharFilter || defined(INCLUDE_OrgApacheLuceneAnalysisCharfilterMappingCharFilter))
+#define OrgApacheLuceneAnalysisCharfilterMappingCharFilter_
 
-#define OrgApacheLuceneAnalysisCharfilterBaseCharFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisCharfilterBaseCharFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisCharfilterBaseCharFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisCharfilterBaseCharFilter 1
 #include "org/apache/lucene/analysis/charfilter/BaseCharFilter.h"
 
 @class IOSCharArray;
 @class JavaIoReader;
 @class OrgApacheLuceneAnalysisCharfilterNormalizeCharMap;
 
+/*!
+ @brief Simplistic <code>CharFilter</code> that applies the mappings
+ contained in a <code>NormalizeCharMap</code> to the character
+ stream, and correcting the resulting changes to the
+ offsets.
+ Matching is greedy (longest pattern matching at
+ a given point wins).  Replacement is allowed to be the
+ empty string.
+ */
 @interface OrgApacheLuceneAnalysisCharfilterMappingCharFilter : OrgApacheLuceneAnalysisCharfilterBaseCharFilter
 
 #pragma mark Public
 
+/*!
+ @brief Default constructor that takes a <code>Reader</code>.
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisCharfilterNormalizeCharMap:(OrgApacheLuceneAnalysisCharfilterNormalizeCharMap *)normMap
                                                          withJavaIoReader:(JavaIoReader *)inArg;
 
@@ -47,8 +59,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCharfilterMappingCharFilter_initWi
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCharfilterMappingCharFilter *new_OrgApacheLuceneAnalysisCharfilterMappingCharFilter_initWithOrgApacheLuceneAnalysisCharfilterNormalizeCharMap_withJavaIoReader_(OrgApacheLuceneAnalysisCharfilterNormalizeCharMap *normMap, JavaIoReader *inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCharfilterMappingCharFilter *create_OrgApacheLuceneAnalysisCharfilterMappingCharFilter_initWithOrgApacheLuceneAnalysisCharfilterNormalizeCharMap_withJavaIoReader_(OrgApacheLuceneAnalysisCharfilterNormalizeCharMap *normMap, JavaIoReader *inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCharfilterMappingCharFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCharfilterMappingCharFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterMappingCharFilter")

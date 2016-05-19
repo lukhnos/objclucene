@@ -46,7 +46,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl, co
 }
 
 - (void)copyToWithOrgApacheLuceneUtilAttributeImpl:(OrgApacheLuceneUtilAttributeImpl *)target {
-  OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl *t = (OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl *) check_class_cast(target, [OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl class]);
+  OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl *t = (OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl *) cast_chk(target, [OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl class]);
   [((OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl *) nil_chk(t)) setMaxNonCompetitiveBoostWithFloat:maxNonCompetitiveBoost_];
   [t setCompetitiveTermWithOrgApacheLuceneUtilBytesRef:competitiveTerm_];
 }
@@ -77,7 +77,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "clear", NULL, "V", 0x1, NULL, NULL },
     { "copyToWithOrgApacheLuceneUtilAttributeImpl:", "copyTo", "V", 0x1, NULL, NULL },
     { "reflectWithWithOrgApacheLuceneUtilAttributeReflector:", "reflectWith", "V", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "MaxNonCompetitiveBoostAttributeImpl", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "maxNonCompetitiveBoost_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
@@ -96,9 +96,11 @@ void OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl_init(OrgApacheLuce
 }
 
 OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl *new_OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl_init() {
-  OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl *self = [OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl alloc];
-  OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl, init)
+}
+
+OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl *create_OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl)

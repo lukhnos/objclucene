@@ -3,14 +3,17 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/collation/tokenattributes/package-info.java
 //
 
+/*!
+ @brief Custom <code>org.apache.lucene.util.AttributeImpl</code> for indexing collation keys as index terms.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCollationTokenattributesPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneCollationTokenattributesPackage_info_RESTRICT
-#define OrgApacheLuceneCollationTokenattributesPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCollationTokenattributesPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneCollationTokenattributesPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneCollationTokenattributesPackage_info 0
 #else
-#define OrgApacheLuceneCollationTokenattributesPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCollationTokenattributesPackage_info 1
 #endif
-#undef OrgApacheLuceneCollationTokenattributesPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCollationTokenattributesPackage_info
 
-#pragma pop_macro("OrgApacheLuceneCollationTokenattributesPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCollationTokenattributesPackage_info")

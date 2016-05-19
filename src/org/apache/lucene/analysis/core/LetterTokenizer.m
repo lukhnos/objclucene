@@ -44,9 +44,11 @@ void OrgApacheLuceneAnalysisCoreLetterTokenizer_init(OrgApacheLuceneAnalysisCore
 }
 
 OrgApacheLuceneAnalysisCoreLetterTokenizer *new_OrgApacheLuceneAnalysisCoreLetterTokenizer_init() {
-  OrgApacheLuceneAnalysisCoreLetterTokenizer *self = [OrgApacheLuceneAnalysisCoreLetterTokenizer alloc];
-  OrgApacheLuceneAnalysisCoreLetterTokenizer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCoreLetterTokenizer, init)
+}
+
+OrgApacheLuceneAnalysisCoreLetterTokenizer *create_OrgApacheLuceneAnalysisCoreLetterTokenizer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCoreLetterTokenizer, init)
 }
 
 void OrgApacheLuceneAnalysisCoreLetterTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneAnalysisCoreLetterTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory) {
@@ -54,9 +56,11 @@ void OrgApacheLuceneAnalysisCoreLetterTokenizer_initWithOrgApacheLuceneUtilAttri
 }
 
 OrgApacheLuceneAnalysisCoreLetterTokenizer *new_OrgApacheLuceneAnalysisCoreLetterTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneUtilAttributeFactory *factory) {
-  OrgApacheLuceneAnalysisCoreLetterTokenizer *self = [OrgApacheLuceneAnalysisCoreLetterTokenizer alloc];
-  OrgApacheLuceneAnalysisCoreLetterTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(self, factory);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCoreLetterTokenizer, initWithOrgApacheLuceneUtilAttributeFactory_, factory)
+}
+
+OrgApacheLuceneAnalysisCoreLetterTokenizer *create_OrgApacheLuceneAnalysisCoreLetterTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneUtilAttributeFactory *factory) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCoreLetterTokenizer, initWithOrgApacheLuceneUtilAttributeFactory_, factory)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCoreLetterTokenizer)

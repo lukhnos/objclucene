@@ -5,23 +5,37 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisDeGermanNormalizationFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisDeGermanNormalizationFilter_RESTRICT
-#define OrgApacheLuceneAnalysisDeGermanNormalizationFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanNormalizationFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisDeGermanNormalizationFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanNormalizationFilter 0
 #else
-#define OrgApacheLuceneAnalysisDeGermanNormalizationFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanNormalizationFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisDeGermanNormalizationFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisDeGermanNormalizationFilter
 
-#if !defined (_OrgApacheLuceneAnalysisDeGermanNormalizationFilter_) && (OrgApacheLuceneAnalysisDeGermanNormalizationFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisDeGermanNormalizationFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisDeGermanNormalizationFilter_
+#if !defined (OrgApacheLuceneAnalysisDeGermanNormalizationFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanNormalizationFilter || defined(INCLUDE_OrgApacheLuceneAnalysisDeGermanNormalizationFilter))
+#define OrgApacheLuceneAnalysisDeGermanNormalizationFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief Normalizes German characters according to the heuristics
+ of the <a href="http://snowball.tartarus.org/algorithms/german2/stemmer.html">
+ German2 snowball algorithm</a>.
+ It allows for the fact that ä, ö and ü are sometimes written as ae, oe and ue.
+ <ul>
+ <li> 'ß' is replaced by 'ss'
+ <li> 'ä', 'ö', 'ü' are replaced by 'a', 'o', 'u', respectively.
+ <li> 'ae' and 'oe' are replaced by 'a', and 'o', respectively.
+ <li> 'ue' is replaced by 'u', when not following a vowel or q.
+ </ul>
+ This is useful if you want this normalization without using
+ the German2 stemmer, or perhaps no stemming at all.
+ */
 @interface OrgApacheLuceneAnalysisDeGermanNormalizationFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
@@ -38,8 +52,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisDeGermanNormalizationFilter_initWi
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisDeGermanNormalizationFilter *new_OrgApacheLuceneAnalysisDeGermanNormalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisDeGermanNormalizationFilter *create_OrgApacheLuceneAnalysisDeGermanNormalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisDeGermanNormalizationFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisDeGermanNormalizationFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanNormalizationFilter")

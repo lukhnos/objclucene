@@ -5,27 +5,37 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisUtilFilteringTokenFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisUtilFilteringTokenFilter_RESTRICT
-#define OrgApacheLuceneAnalysisUtilFilteringTokenFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilFilteringTokenFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisUtilFilteringTokenFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisUtilFilteringTokenFilter 0
 #else
-#define OrgApacheLuceneAnalysisUtilFilteringTokenFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisUtilFilteringTokenFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisUtilFilteringTokenFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisUtilFilteringTokenFilter
 
-#if !defined (_OrgApacheLuceneAnalysisUtilFilteringTokenFilter_) && (OrgApacheLuceneAnalysisUtilFilteringTokenFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisUtilFilteringTokenFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisUtilFilteringTokenFilter_
+#if !defined (OrgApacheLuceneAnalysisUtilFilteringTokenFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisUtilFilteringTokenFilter || defined(INCLUDE_OrgApacheLuceneAnalysisUtilFilteringTokenFilter))
+#define OrgApacheLuceneAnalysisUtilFilteringTokenFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief Abstract base class for TokenFilters that may remove tokens.
+ You have to implement <code>accept</code> and return a boolean if the current
+ token should be preserved. <code>incrementToken</code> uses this method
+ to decide if a token should be passed to the caller.
+ */
 @interface OrgApacheLuceneAnalysisUtilFilteringTokenFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
+/*!
+ @brief Create a new <code>FilteringTokenFilter</code>.
+ @param inArg      the <code>TokenStream</code> to consume
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
 
 - (void)end;
@@ -36,6 +46,9 @@
 
 #pragma mark Protected
 
+/*!
+ @brief Override this method and return if the current input token should be returned by <code>incrementToken</code>.
+ */
 - (jboolean)accept;
 
 @end
@@ -48,4 +61,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilFilteringTokenFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisUtilFilteringTokenFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilFilteringTokenFilter")

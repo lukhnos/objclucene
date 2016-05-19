@@ -5,28 +5,34 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilArrayTimSorter_INCLUDE_ALL")
-#if OrgApacheLuceneUtilArrayTimSorter_RESTRICT
-#define OrgApacheLuceneUtilArrayTimSorter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilArrayTimSorter")
+#ifdef RESTRICT_OrgApacheLuceneUtilArrayTimSorter
+#define INCLUDE_ALL_OrgApacheLuceneUtilArrayTimSorter 0
 #else
-#define OrgApacheLuceneUtilArrayTimSorter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilArrayTimSorter 1
 #endif
-#undef OrgApacheLuceneUtilArrayTimSorter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilArrayTimSorter
 
-#if !defined (_OrgApacheLuceneUtilArrayTimSorter_) && (OrgApacheLuceneUtilArrayTimSorter_INCLUDE_ALL || OrgApacheLuceneUtilArrayTimSorter_INCLUDE)
-#define _OrgApacheLuceneUtilArrayTimSorter_
+#if !defined (OrgApacheLuceneUtilArrayTimSorter_) && (INCLUDE_ALL_OrgApacheLuceneUtilArrayTimSorter || defined(INCLUDE_OrgApacheLuceneUtilArrayTimSorter))
+#define OrgApacheLuceneUtilArrayTimSorter_
 
-#define OrgApacheLuceneUtilTimSorter_RESTRICT 1
-#define OrgApacheLuceneUtilTimSorter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilTimSorter 1
+#define INCLUDE_OrgApacheLuceneUtilTimSorter 1
 #include "org/apache/lucene/util/TimSorter.h"
 
 @class IOSObjectArray;
 @protocol JavaUtilComparator;
 
+/*!
+ @brief A <code>TimSorter</code> for object arrays.
+ */
 @interface OrgApacheLuceneUtilArrayTimSorter : OrgApacheLuceneUtilTimSorter
 
 #pragma mark Public
 
+/*!
+ @brief Create a new <code>ArrayTimSorter</code>.
+ */
 - (instancetype)initWithNSObjectArray:(IOSObjectArray *)arr
                withJavaUtilComparator:(id<JavaUtilComparator>)comparator
                               withInt:(jint)maxTempSlots;
@@ -59,8 +65,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilArrayTimSorter_initWithNSObjectArray_w
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilArrayTimSorter *new_OrgApacheLuceneUtilArrayTimSorter_initWithNSObjectArray_withJavaUtilComparator_withInt_(IOSObjectArray *arr, id<JavaUtilComparator> comparator, jint maxTempSlots) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilArrayTimSorter *create_OrgApacheLuceneUtilArrayTimSorter_initWithNSObjectArray_withJavaUtilComparator_withInt_(IOSObjectArray *arr, id<JavaUtilComparator> comparator, jint maxTempSlots);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilArrayTimSorter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilArrayTimSorter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilArrayTimSorter")

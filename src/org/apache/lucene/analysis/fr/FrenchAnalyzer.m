@@ -34,6 +34,9 @@
 
 @interface OrgApacheLuceneAnalysisFrFrenchAnalyzer () {
  @public
+  /*!
+   @brief Contains words that should be indexed but not stemmed.
+   */
   OrgApacheLuceneAnalysisUtilCharArraySet *excltable_;
 }
 
@@ -49,21 +52,32 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisFrFrenchAnalyzer, excltable_, OrgApac
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder)
 
-static OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder, DEFAULT_STOP_SET_, OrgApacheLuceneAnalysisUtilCharArraySet *)
+inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder_get_DEFAULT_STOP_SET();
+static OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder, DEFAULT_STOP_SET, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
 __attribute__((unused)) static void OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder_init(OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder *self);
 
 __attribute__((unused)) static OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder *new_OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder *create_OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisFrFrenchAnalyzer)
 
-NSString *OrgApacheLuceneAnalysisFrFrenchAnalyzer_DEFAULT_STOPWORD_FILE_ = @"french_stop.txt";
-OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisFrFrenchAnalyzer_DEFAULT_ARTICLES_;
+NSString *OrgApacheLuceneAnalysisFrFrenchAnalyzer_DEFAULT_STOPWORD_FILE = @"french_stop.txt";
+OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisFrFrenchAnalyzer_DEFAULT_ARTICLES;
 
 @implementation OrgApacheLuceneAnalysisFrFrenchAnalyzer
+
++ (NSString *)DEFAULT_STOPWORD_FILE {
+  return OrgApacheLuceneAnalysisFrFrenchAnalyzer_DEFAULT_STOPWORD_FILE;
+}
+
++ (OrgApacheLuceneAnalysisUtilCharArraySet *)DEFAULT_ARTICLES {
+  return OrgApacheLuceneAnalysisFrFrenchAnalyzer_DEFAULT_ARTICLES;
+}
 
 + (OrgApacheLuceneAnalysisUtilCharArraySet *)getDefaultStopSet {
   return OrgApacheLuceneAnalysisFrFrenchAnalyzer_getDefaultStopSet();
@@ -89,19 +103,19 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName {
   OrgApacheLuceneAnalysisTokenizer *source;
-  if ([((OrgApacheLuceneUtilVersion *) nil_chk([self getVersion])) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_7_0_)]) {
-    source = [new_OrgApacheLuceneAnalysisStandardStandardTokenizer_init() autorelease];
+  if ([((OrgApacheLuceneUtilVersion *) nil_chk([self getVersion])) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_7_0)]) {
+    source = create_OrgApacheLuceneAnalysisStandardStandardTokenizer_init();
   }
   else {
-    source = [new_OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40_init() autorelease];
+    source = create_OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40_init();
   }
-  OrgApacheLuceneAnalysisTokenStream *result = [new_OrgApacheLuceneAnalysisStandardStandardFilter_initWithOrgApacheLuceneAnalysisTokenStream_(source) autorelease];
-  result = [new_OrgApacheLuceneAnalysisUtilElisionFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(result, OrgApacheLuceneAnalysisFrFrenchAnalyzer_DEFAULT_ARTICLES_) autorelease];
-  result = [new_OrgApacheLuceneAnalysisCoreLowerCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(result) autorelease];
-  result = [new_OrgApacheLuceneAnalysisCoreStopFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(result, stopwords_) autorelease];
-  if (![((OrgApacheLuceneAnalysisUtilCharArraySet *) nil_chk(excltable_)) isEmpty]) result = [new_OrgApacheLuceneAnalysisMiscellaneousSetKeywordMarkerFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(result, excltable_) autorelease];
-  result = [new_OrgApacheLuceneAnalysisFrFrenchLightStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(result) autorelease];
-  return [new_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(source, result) autorelease];
+  OrgApacheLuceneAnalysisTokenStream *result = create_OrgApacheLuceneAnalysisStandardStandardFilter_initWithOrgApacheLuceneAnalysisTokenStream_(source);
+  result = create_OrgApacheLuceneAnalysisUtilElisionFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(result, OrgApacheLuceneAnalysisFrFrenchAnalyzer_DEFAULT_ARTICLES);
+  result = create_OrgApacheLuceneAnalysisCoreLowerCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(result);
+  result = create_OrgApacheLuceneAnalysisCoreStopFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(result, stopwords_);
+  if (![((OrgApacheLuceneAnalysisUtilCharArraySet *) nil_chk(excltable_)) isEmpty]) result = create_OrgApacheLuceneAnalysisMiscellaneousSetKeywordMarkerFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(result, excltable_);
+  result = create_OrgApacheLuceneAnalysisFrFrenchLightStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(result);
+  return create_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(source, result);
 }
 
 - (void)dealloc {
@@ -111,7 +125,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisFrFrenchAnalyzer class]) {
-    JreStrongAssign(&OrgApacheLuceneAnalysisFrFrenchAnalyzer_DEFAULT_ARTICLES_, OrgApacheLuceneAnalysisUtilCharArraySet_unmodifiableSetWithOrgApacheLuceneAnalysisUtilCharArraySet_([new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"l", @"m", @"t", @"qu", @"n", @"s", @"j", @"d", @"c", @"jusqu", @"quoiqu", @"lorsqu", @"puisqu" } count:13 type:NSString_class_()]), true) autorelease]));
+    JreStrongAssign(&OrgApacheLuceneAnalysisFrFrenchAnalyzer_DEFAULT_ARTICLES, OrgApacheLuceneAnalysisUtilCharArraySet_unmodifiableSetWithOrgApacheLuceneAnalysisUtilCharArraySet_(create_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"l", @"m", @"t", @"qu", @"n", @"s", @"j", @"d", @"c", @"jusqu", @"quoiqu", @"lorsqu", @"puisqu" } count:13 type:NSString_class_()]), true)));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisFrFrenchAnalyzer)
   }
 }
@@ -125,8 +139,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "createComponentsWithNSString:", "createComponents", "Lorg.apache.lucene.analysis.Analyzer$TokenStreamComponents;", 0x4, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_STOPWORD_FILE_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisFrFrenchAnalyzer_DEFAULT_STOPWORD_FILE_, NULL, .constantValue.asLong = 0 },
-    { "DEFAULT_ARTICLES_", NULL, 0x19, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisFrFrenchAnalyzer_DEFAULT_ARTICLES_, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_STOPWORD_FILE", "DEFAULT_STOPWORD_FILE", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisFrFrenchAnalyzer_DEFAULT_STOPWORD_FILE, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_ARTICLES", "DEFAULT_ARTICLES", 0x19, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisFrFrenchAnalyzer_DEFAULT_ARTICLES, NULL, .constantValue.asLong = 0 },
     { "excltable_", NULL, 0x12, "Lorg.apache.lucene.analysis.util.CharArraySet;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.analysis.fr.FrenchAnalyzer$DefaultSetHolder;"};
@@ -138,27 +152,31 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisFrFrenchAnalyzer_getDefaultStopSet() {
   OrgApacheLuceneAnalysisFrFrenchAnalyzer_initialize();
-  return JreLoadStatic(OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder, DEFAULT_STOP_SET_);
+  return JreLoadStatic(OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder, DEFAULT_STOP_SET);
 }
 
 void OrgApacheLuceneAnalysisFrFrenchAnalyzer_init(OrgApacheLuceneAnalysisFrFrenchAnalyzer *self) {
-  OrgApacheLuceneAnalysisFrFrenchAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, JreLoadStatic(OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder, DEFAULT_STOP_SET_));
+  OrgApacheLuceneAnalysisFrFrenchAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, JreLoadStatic(OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder, DEFAULT_STOP_SET));
 }
 
 OrgApacheLuceneAnalysisFrFrenchAnalyzer *new_OrgApacheLuceneAnalysisFrFrenchAnalyzer_init() {
-  OrgApacheLuceneAnalysisFrFrenchAnalyzer *self = [OrgApacheLuceneAnalysisFrFrenchAnalyzer alloc];
-  OrgApacheLuceneAnalysisFrFrenchAnalyzer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisFrFrenchAnalyzer, init)
+}
+
+OrgApacheLuceneAnalysisFrFrenchAnalyzer *create_OrgApacheLuceneAnalysisFrFrenchAnalyzer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisFrFrenchAnalyzer, init)
 }
 
 void OrgApacheLuceneAnalysisFrFrenchAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisFrFrenchAnalyzer *self, OrgApacheLuceneAnalysisUtilCharArraySet *stopwords) {
-  OrgApacheLuceneAnalysisFrFrenchAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_withOrgApacheLuceneAnalysisUtilCharArraySet_(self, stopwords, JreLoadStatic(OrgApacheLuceneAnalysisUtilCharArraySet, EMPTY_SET_));
+  OrgApacheLuceneAnalysisFrFrenchAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_withOrgApacheLuceneAnalysisUtilCharArraySet_(self, stopwords, JreLoadStatic(OrgApacheLuceneAnalysisUtilCharArraySet, EMPTY_SET));
 }
 
 OrgApacheLuceneAnalysisFrFrenchAnalyzer *new_OrgApacheLuceneAnalysisFrFrenchAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopwords) {
-  OrgApacheLuceneAnalysisFrFrenchAnalyzer *self = [OrgApacheLuceneAnalysisFrFrenchAnalyzer alloc];
-  OrgApacheLuceneAnalysisFrFrenchAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, stopwords);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisFrFrenchAnalyzer, initWithOrgApacheLuceneAnalysisUtilCharArraySet_, stopwords)
+}
+
+OrgApacheLuceneAnalysisFrFrenchAnalyzer *create_OrgApacheLuceneAnalysisFrFrenchAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopwords) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisFrFrenchAnalyzer, initWithOrgApacheLuceneAnalysisUtilCharArraySet_, stopwords)
 }
 
 void OrgApacheLuceneAnalysisFrFrenchAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisFrFrenchAnalyzer *self, OrgApacheLuceneAnalysisUtilCharArraySet *stopwords, OrgApacheLuceneAnalysisUtilCharArraySet *stemExclutionSet) {
@@ -167,9 +185,11 @@ void OrgApacheLuceneAnalysisFrFrenchAnalyzer_initWithOrgApacheLuceneAnalysisUtil
 }
 
 OrgApacheLuceneAnalysisFrFrenchAnalyzer *new_OrgApacheLuceneAnalysisFrFrenchAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopwords, OrgApacheLuceneAnalysisUtilCharArraySet *stemExclutionSet) {
-  OrgApacheLuceneAnalysisFrFrenchAnalyzer *self = [OrgApacheLuceneAnalysisFrFrenchAnalyzer alloc];
-  OrgApacheLuceneAnalysisFrFrenchAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_withOrgApacheLuceneAnalysisUtilCharArraySet_(self, stopwords, stemExclutionSet);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisFrFrenchAnalyzer, initWithOrgApacheLuceneAnalysisUtilCharArraySet_withOrgApacheLuceneAnalysisUtilCharArraySet_, stopwords, stemExclutionSet)
+}
+
+OrgApacheLuceneAnalysisFrFrenchAnalyzer *create_OrgApacheLuceneAnalysisFrFrenchAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopwords, OrgApacheLuceneAnalysisUtilCharArraySet *stemExclutionSet) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisFrFrenchAnalyzer, initWithOrgApacheLuceneAnalysisUtilCharArraySet_withOrgApacheLuceneAnalysisUtilCharArraySet_, stopwords, stemExclutionSet)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisFrFrenchAnalyzer)
@@ -189,10 +209,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   if (self == [OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder class]) {
     {
       @try {
-        JreStrongAssign(&OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET_, OrgApacheLuceneAnalysisUtilWordlistLoader_getSnowballWordSetWithJavaIoReader_(OrgApacheLuceneUtilIOUtils_getDecodingReaderWithIOSClass_withNSString_withJavaNioCharsetCharset_(OrgApacheLuceneAnalysisSnowballSnowballFilter_class_(), OrgApacheLuceneAnalysisFrFrenchAnalyzer_DEFAULT_STOPWORD_FILE_, JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8_))));
+        JreStrongAssign(&OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET, OrgApacheLuceneAnalysisUtilWordlistLoader_getSnowballWordSetWithJavaIoReader_(OrgApacheLuceneUtilIOUtils_getDecodingReaderWithIOSClass_withNSString_withJavaNioCharsetCharset_(OrgApacheLuceneAnalysisSnowballSnowballFilter_class_(), OrgApacheLuceneAnalysisFrFrenchAnalyzer_DEFAULT_STOPWORD_FILE, JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8))));
       }
       @catch (JavaIoIOException *ex) {
-        @throw [new_JavaLangRuntimeException_initWithNSString_(@"Unable to load default stopword set") autorelease];
+        @throw create_JavaLangRuntimeException_initWithNSString_(@"Unable to load default stopword set");
       }
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder)
@@ -201,10 +221,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", NULL, NULL, 0x2, NULL, NULL },
+    { "init", "DefaultSetHolder", NULL, 0x2, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_STOP_SET_", NULL, 0x18, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET_, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_STOP_SET", "DEFAULT_STOP_SET", 0x18, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder = { 2, "DefaultSetHolder", "org.apache.lucene.analysis.fr", "FrenchAnalyzer", 0xa, 1, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder;
@@ -217,9 +237,11 @@ void OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder_init(OrgApacheLuce
 }
 
 OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder *new_OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder_init() {
-  OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder *self = [OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder alloc];
-  OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder, init)
+}
+
+OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder *create_OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisFrFrenchAnalyzer_DefaultSetHolder)

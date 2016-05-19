@@ -5,25 +5,30 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchConjunctionDISI_INCLUDE_ALL")
-#if OrgApacheLuceneSearchConjunctionDISI_RESTRICT
-#define OrgApacheLuceneSearchConjunctionDISI_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchConjunctionDISI")
+#ifdef RESTRICT_OrgApacheLuceneSearchConjunctionDISI
+#define INCLUDE_ALL_OrgApacheLuceneSearchConjunctionDISI 0
 #else
-#define OrgApacheLuceneSearchConjunctionDISI_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchConjunctionDISI 1
 #endif
-#undef OrgApacheLuceneSearchConjunctionDISI_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchConjunctionDISI
 
-#if !defined (_OrgApacheLuceneSearchConjunctionDISI_) && (OrgApacheLuceneSearchConjunctionDISI_INCLUDE_ALL || OrgApacheLuceneSearchConjunctionDISI_INCLUDE)
-#define _OrgApacheLuceneSearchConjunctionDISI_
+#if !defined (OrgApacheLuceneSearchConjunctionDISI_) && (INCLUDE_ALL_OrgApacheLuceneSearchConjunctionDISI || defined(INCLUDE_OrgApacheLuceneSearchConjunctionDISI))
+#define OrgApacheLuceneSearchConjunctionDISI_
 
-#define OrgApacheLuceneSearchDocIdSetIterator_RESTRICT 1
-#define OrgApacheLuceneSearchDocIdSetIterator_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchDocIdSetIterator 1
+#define INCLUDE_OrgApacheLuceneSearchDocIdSetIterator 1
 #include "org/apache/lucene/search/DocIdSetIterator.h"
 
 @class IOSObjectArray;
 @class OrgApacheLuceneSearchTwoPhaseIterator;
 @protocol JavaUtilList;
 
+/*!
+ @brief A conjunction of DocIdSetIterators.
+ This iterates over the doc ids that are present in each given DocIdSetIterator.
+ <br>Public only for use in <code>org.apache.lucene.search.spans</code>.
+ */
 @interface OrgApacheLuceneSearchConjunctionDISI : OrgApacheLuceneSearchDocIdSetIterator {
  @public
   OrgApacheLuceneSearchDocIdSetIterator *lead_;
@@ -38,6 +43,10 @@
 
 - (jint)docID;
 
+/*!
+ @brief Create a conjunction over the provided iterators, taking advantage of
+ <code>TwoPhaseIterator</code>.
+ */
 + (OrgApacheLuceneSearchConjunctionDISI *)intersectWithJavaUtilList:(id<JavaUtilList>)iterators;
 
 - (jint)nextDoc;
@@ -65,8 +74,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchConjunctionDISI_initWithJavaUtilList
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchConjunctionDISI *new_OrgApacheLuceneSearchConjunctionDISI_initWithJavaUtilList_(id<JavaUtilList> iterators) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchConjunctionDISI *create_OrgApacheLuceneSearchConjunctionDISI_initWithJavaUtilList_(id<JavaUtilList> iterators);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchConjunctionDISI)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchConjunctionDISI_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchConjunctionDISI")

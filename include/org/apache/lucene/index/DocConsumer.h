@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexDocConsumer_INCLUDE_ALL")
-#if OrgApacheLuceneIndexDocConsumer_RESTRICT
-#define OrgApacheLuceneIndexDocConsumer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexDocConsumer")
+#ifdef RESTRICT_OrgApacheLuceneIndexDocConsumer
+#define INCLUDE_ALL_OrgApacheLuceneIndexDocConsumer 0
 #else
-#define OrgApacheLuceneIndexDocConsumer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexDocConsumer 1
 #endif
-#undef OrgApacheLuceneIndexDocConsumer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexDocConsumer
 
-#if !defined (_OrgApacheLuceneIndexDocConsumer_) && (OrgApacheLuceneIndexDocConsumer_INCLUDE_ALL || OrgApacheLuceneIndexDocConsumer_INCLUDE)
-#define _OrgApacheLuceneIndexDocConsumer_
+#if !defined (OrgApacheLuceneIndexDocConsumer_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocConsumer || defined(INCLUDE_OrgApacheLuceneIndexDocConsumer))
+#define OrgApacheLuceneIndexDocConsumer_
 
 @class OrgApacheLuceneIndexSegmentWriteState;
 
@@ -40,4 +40,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocConsumer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexDocConsumer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexDocConsumer")

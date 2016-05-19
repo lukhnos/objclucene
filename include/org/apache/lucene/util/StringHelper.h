@@ -5,40 +5,80 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilStringHelper_INCLUDE_ALL")
-#if OrgApacheLuceneUtilStringHelper_RESTRICT
-#define OrgApacheLuceneUtilStringHelper_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilStringHelper")
+#ifdef RESTRICT_OrgApacheLuceneUtilStringHelper
+#define INCLUDE_ALL_OrgApacheLuceneUtilStringHelper 0
 #else
-#define OrgApacheLuceneUtilStringHelper_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilStringHelper 1
 #endif
-#undef OrgApacheLuceneUtilStringHelper_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilStringHelper
 
-#if !defined (_OrgApacheLuceneUtilStringHelper_) && (OrgApacheLuceneUtilStringHelper_INCLUDE_ALL || OrgApacheLuceneUtilStringHelper_INCLUDE)
-#define _OrgApacheLuceneUtilStringHelper_
+#if !defined (OrgApacheLuceneUtilStringHelper_) && (INCLUDE_ALL_OrgApacheLuceneUtilStringHelper || defined(INCLUDE_OrgApacheLuceneUtilStringHelper))
+#define OrgApacheLuceneUtilStringHelper_
 
 @class IOSByteArray;
 @class OrgApacheLuceneUtilBytesRef;
 @class OrgApacheLuceneUtilIntsRef;
 
-#define OrgApacheLuceneUtilStringHelper_ID_LENGTH 16
-
+/*!
+ @brief Methods for manipulating strings.
+ */
 @interface OrgApacheLuceneUtilStringHelper : NSObject
+
++ (jint)GOOD_FAST_HASH_SEED;
+
++ (jint)ID_LENGTH;
 
 #pragma mark Public
 
+/*!
+ @brief Compares two <code>BytesRef</code>, element by element, and returns the
+ number of elements common to both arrays (from the start of each).
+ @param left The first <code>BytesRef</code> to compare
+ @param right The second <code>BytesRef</code> to compare
+ @return The number of common elements (from the start of each).
+ */
 + (jint)bytesDifferenceWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)left
                        withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)right;
 
+/*!
+ @brief Returns <code>true</code> iff the ref ends with the given suffix.
+ Otherwise
+ <code>false</code>.
+ @param ref
+ the <code>BytesRef</code> to test
+ @param suffix
+ the expected suffix
+ @return Returns <code>true</code> iff the ref ends with the given suffix.
+ Otherwise <code>false</code>.
+ */
 + (jboolean)endsWithWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)ref
                     withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)suffix;
 
 + (jboolean)equalsWithNSString:(NSString *)s1
                   withNSString:(NSString *)s2;
 
+/*!
+ @brief Helper method to render an ID as a string, for debugging
+ <p>
+ Returns the string <code>(null)</code> if the id is null.
+ Otherwise, returns a string representation for debugging.
+ Never throws an exception. The returned string may
+ indicate if the id is definitely invalid.
+ */
 + (NSString *)idToStringWithByteArray:(IOSByteArray *)id_;
 
+/*!
+ @brief Just converts each int in the incoming <code>IntsRef</code> to each byte
+ in the returned <code>BytesRef</code>, throwing <code>IllegalArgumentException</code>
+ if any int value is out of bounds for a byte.
+ */
 + (OrgApacheLuceneUtilBytesRef *)intsRefToBytesRefWithOrgApacheLuceneUtilIntsRef:(OrgApacheLuceneUtilIntsRef *)ints;
 
+/*!
+ @brief Returns the MurmurHash3_x86_32 hash.
+ Original source/tests at https://github.com/yonik/java_util/
+ */
 + (jint)murmurhash3_x86_32WithByteArray:(IOSByteArray *)data
                                 withInt:(jint)offset
                                 withInt:(jint)len
@@ -47,14 +87,42 @@
 + (jint)murmurhash3_x86_32WithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes
                                                   withInt:(jint)seed;
 
+/*!
+ @brief Generates a non-cryptographic globally unique id.
+ */
 + (IOSByteArray *)randomId;
 
+/*!
+ @brief Returns the length of <code>currentTerm</code> needed for use as a sort key.
+ so that <code>BytesRef.compareTo(BytesRef)</code> still returns the same result.
+ This method assumes currentTerm comes after priorTerm.
+ */
 + (jint)sortKeyLengthWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)priorTerm
                      withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)currentTerm;
 
+/*!
+ @brief Returns <code>true</code> iff the ref starts with the given prefix.
+ Otherwise <code>false</code>.
+ @param ref
+ the <code>byte[]</code> to test
+ @param prefix
+ the expected prefix
+ @return Returns <code>true</code> iff the ref starts with the given prefix.
+ Otherwise <code>false</code>.
+ */
 + (jboolean)startsWithWithByteArray:(IOSByteArray *)ref
     withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)prefix;
 
+/*!
+ @brief Returns <code>true</code> iff the ref starts with the given prefix.
+ Otherwise <code>false</code>.
+ @param ref
+ the <code>BytesRef</code> to test
+ @param prefix
+ the expected prefix
+ @return Returns <code>true</code> iff the ref starts with the given prefix.
+ Otherwise <code>false</code>.
+ */
 + (jboolean)startsWithWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)ref
                       withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)prefix;
 
@@ -62,10 +130,20 @@
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilStringHelper)
 
-FOUNDATION_EXPORT jint OrgApacheLuceneUtilStringHelper_GOOD_FAST_HASH_SEED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilStringHelper, GOOD_FAST_HASH_SEED_, jint)
+/*!
+ @brief Pass this as the seed to <code>murmurhash3_x86_32</code>.
+ */
+inline jint OrgApacheLuceneUtilStringHelper_get_GOOD_FAST_HASH_SEED();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT jint OrgApacheLuceneUtilStringHelper_GOOD_FAST_HASH_SEED;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilStringHelper, GOOD_FAST_HASH_SEED, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilStringHelper, ID_LENGTH, jint)
+/*!
+ @brief length in bytes of an ID
+ */
+inline jint OrgApacheLuceneUtilStringHelper_get_ID_LENGTH();
+#define OrgApacheLuceneUtilStringHelper_ID_LENGTH 16
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilStringHelper, ID_LENGTH, jint)
 
 FOUNDATION_EXPORT jint OrgApacheLuceneUtilStringHelper_bytesDifferenceWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *left, OrgApacheLuceneUtilBytesRef *right);
 
@@ -93,4 +171,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilStringHelper)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilStringHelper_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilStringHelper")

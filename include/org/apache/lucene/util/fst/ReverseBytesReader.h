@@ -5,23 +5,26 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilFstReverseBytesReader_INCLUDE_ALL")
-#if OrgApacheLuceneUtilFstReverseBytesReader_RESTRICT
-#define OrgApacheLuceneUtilFstReverseBytesReader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstReverseBytesReader")
+#ifdef RESTRICT_OrgApacheLuceneUtilFstReverseBytesReader
+#define INCLUDE_ALL_OrgApacheLuceneUtilFstReverseBytesReader 0
 #else
-#define OrgApacheLuceneUtilFstReverseBytesReader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilFstReverseBytesReader 1
 #endif
-#undef OrgApacheLuceneUtilFstReverseBytesReader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilFstReverseBytesReader
 
-#if !defined (_OrgApacheLuceneUtilFstReverseBytesReader_) && (OrgApacheLuceneUtilFstReverseBytesReader_INCLUDE_ALL || OrgApacheLuceneUtilFstReverseBytesReader_INCLUDE)
-#define _OrgApacheLuceneUtilFstReverseBytesReader_
+#if !defined (OrgApacheLuceneUtilFstReverseBytesReader_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstReverseBytesReader || defined(INCLUDE_OrgApacheLuceneUtilFstReverseBytesReader))
+#define OrgApacheLuceneUtilFstReverseBytesReader_
 
-#define OrgApacheLuceneUtilFstFST_RESTRICT 1
-#define OrgApacheLuceneUtilFstFST_BytesReader_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilFstFST 1
+#define INCLUDE_OrgApacheLuceneUtilFstFST_BytesReader 1
 #include "org/apache/lucene/util/fst/FST.h"
 
 @class IOSByteArray;
 
+/*!
+ @brief Reads in reverse from a single byte[].
+ */
 @interface OrgApacheLuceneUtilFstReverseBytesReader : OrgApacheLuceneUtilFstFST_BytesReader
 
 #pragma mark Public
@@ -50,8 +53,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilFstReverseBytesReader_initWithByteArra
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilFstReverseBytesReader *new_OrgApacheLuceneUtilFstReverseBytesReader_initWithByteArray_(IOSByteArray *bytes) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstReverseBytesReader *create_OrgApacheLuceneUtilFstReverseBytesReader_initWithByteArray_(IOSByteArray *bytes);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstReverseBytesReader)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilFstReverseBytesReader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstReverseBytesReader")

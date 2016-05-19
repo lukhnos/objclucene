@@ -28,32 +28,32 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum, postingsEnum_
   return self;
 }
 
-- (OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *)seekCeilWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)text {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+- (OrgApacheLuceneIndexTermsEnum_SeekStatus *)seekCeilWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)text {
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (void)seekExactWithLong:(jlong)ord {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (OrgApacheLuceneUtilBytesRef *)term {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (OrgApacheLuceneUtilBytesRef *)next {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (jlong)ord {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (jint)docFreq {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (jlong)totalTermFreq {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (OrgApacheLuceneIndexPostingsEnum *)postingsWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)reuse
@@ -97,9 +97,11 @@ void OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum_initWithOrgApacheLuceneUtilBi
 }
 
 OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum *new_OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet *docs) {
-  OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum *self = [OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum alloc];
-  OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum_initWithOrgApacheLuceneUtilBitSet_(self, docs);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum, initWithOrgApacheLuceneUtilBitSet_, docs)
+}
+
+OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum *create_OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet *docs) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum, initWithOrgApacheLuceneUtilBitSet_, docs)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum)

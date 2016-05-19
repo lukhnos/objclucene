@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSimilaritiesMultiSimilarity_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSimilaritiesMultiSimilarity_RESTRICT
-#define OrgApacheLuceneSearchSimilaritiesMultiSimilarity_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesMultiSimilarity")
+#ifdef RESTRICT_OrgApacheLuceneSearchSimilaritiesMultiSimilarity
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesMultiSimilarity 0
 #else
-#define OrgApacheLuceneSearchSimilaritiesMultiSimilarity_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesMultiSimilarity 1
 #endif
-#undef OrgApacheLuceneSearchSimilaritiesMultiSimilarity_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSimilaritiesMultiSimilarity
 
-#if !defined (_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_) && (OrgApacheLuceneSearchSimilaritiesMultiSimilarity_INCLUDE_ALL || OrgApacheLuceneSearchSimilaritiesMultiSimilarity_INCLUDE)
-#define _OrgApacheLuceneSearchSimilaritiesMultiSimilarity_
+#if !defined (OrgApacheLuceneSearchSimilaritiesMultiSimilarity_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesMultiSimilarity || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesMultiSimilarity))
+#define OrgApacheLuceneSearchSimilaritiesMultiSimilarity_
 
-#define OrgApacheLuceneSearchSimilaritiesSimilarity_RESTRICT 1
-#define OrgApacheLuceneSearchSimilaritiesSimilarity_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSimilaritiesSimilarity 1
+#define INCLUDE_OrgApacheLuceneSearchSimilaritiesSimilarity 1
 #include "org/apache/lucene/search/similarities/Similarity.h"
 
 @class IOSObjectArray;
@@ -27,13 +27,26 @@
 @class OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer;
 @class OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight;
 
+/*!
+ @brief Implements the CombSUM method for combining evidence from multiple
+ similarity values described in: Joseph A.
+ Shaw, Edward A. Fox. 
+ In Text REtrieval Conference (1993), pp. 243-252
+ */
 @interface OrgApacheLuceneSearchSimilaritiesMultiSimilarity : OrgApacheLuceneSearchSimilaritiesSimilarity {
  @public
+  /*!
+   @brief the sub-similarities used to create the combined score
+   */
   IOSObjectArray *sims_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief Creates a MultiSimilarity which will sum the scores
+ of the provided <code>sims</code>.
+ */
 - (instancetype)initWithOrgApacheLuceneSearchSimilaritiesSimilarityArray:(IOSObjectArray *)sims;
 
 - (jlong)computeNormWithOrgApacheLuceneIndexFieldInvertState:(OrgApacheLuceneIndexFieldInvertState *)state;
@@ -55,15 +68,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesMultiSimilarity_initWith
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesMultiSimilarity *new_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_initWithOrgApacheLuceneSearchSimilaritiesSimilarityArray_(IOSObjectArray *sims) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesMultiSimilarity *create_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_initWithOrgApacheLuceneSearchSimilaritiesSimilarityArray_(IOSObjectArray *sims);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesMultiSimilarity)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer_) && (OrgApacheLuceneSearchSimilaritiesMultiSimilarity_INCLUDE_ALL || OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer_INCLUDE)
-#define _OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer_
+#if !defined (OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesMultiSimilarity || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer))
+#define OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer_
 
-#define OrgApacheLuceneSearchSimilaritiesSimilarity_RESTRICT 1
-#define OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSimilaritiesSimilarity 1
+#define INCLUDE_OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer 1
 #include "org/apache/lucene/search/similarities/Similarity.h"
 
 @class IOSObjectArray;
@@ -99,15 +114,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSim
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer *new_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer_initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorerArray_(IOSObjectArray *subScorers) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer *create_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer_initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorerArray_(IOSObjectArray *subScorers);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats_) && (OrgApacheLuceneSearchSimilaritiesMultiSimilarity_INCLUDE_ALL || OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats_INCLUDE)
-#define _OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats_
+#if !defined (OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesMultiSimilarity || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats))
+#define OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats_
 
-#define OrgApacheLuceneSearchSimilaritiesSimilarity_RESTRICT 1
-#define OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSimilaritiesSimilarity 1
+#define INCLUDE_OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight 1
 #include "org/apache/lucene/search/similarities/Similarity.h"
 
 @class IOSObjectArray;
@@ -138,8 +155,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSta
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats *new_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats_initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeightArray_(IOSObjectArray *subStats) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats *create_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats_initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeightArray_(IOSObjectArray *subStats);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSimilaritiesMultiSimilarity_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesMultiSimilarity")

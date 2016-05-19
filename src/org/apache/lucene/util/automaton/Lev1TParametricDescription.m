@@ -8,29 +8,37 @@
 #include "org/apache/lucene/util/automaton/Lev1TParametricDescription.h"
 #include "org/apache/lucene/util/automaton/LevenshteinAutomata.h"
 
-static IOSLongArray *OrgApacheLuceneUtilAutomatonLev1TParametricDescription_toStates0_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilAutomatonLev1TParametricDescription, toStates0_, IOSLongArray *)
+inline IOSLongArray *OrgApacheLuceneUtilAutomatonLev1TParametricDescription_get_toStates0();
+static IOSLongArray *OrgApacheLuceneUtilAutomatonLev1TParametricDescription_toStates0;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilAutomatonLev1TParametricDescription, toStates0, IOSLongArray *)
 
-static IOSLongArray *OrgApacheLuceneUtilAutomatonLev1TParametricDescription_offsetIncrs0_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilAutomatonLev1TParametricDescription, offsetIncrs0_, IOSLongArray *)
+inline IOSLongArray *OrgApacheLuceneUtilAutomatonLev1TParametricDescription_get_offsetIncrs0();
+static IOSLongArray *OrgApacheLuceneUtilAutomatonLev1TParametricDescription_offsetIncrs0;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilAutomatonLev1TParametricDescription, offsetIncrs0, IOSLongArray *)
 
-static IOSLongArray *OrgApacheLuceneUtilAutomatonLev1TParametricDescription_toStates1_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilAutomatonLev1TParametricDescription, toStates1_, IOSLongArray *)
+inline IOSLongArray *OrgApacheLuceneUtilAutomatonLev1TParametricDescription_get_toStates1();
+static IOSLongArray *OrgApacheLuceneUtilAutomatonLev1TParametricDescription_toStates1;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilAutomatonLev1TParametricDescription, toStates1, IOSLongArray *)
 
-static IOSLongArray *OrgApacheLuceneUtilAutomatonLev1TParametricDescription_offsetIncrs1_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilAutomatonLev1TParametricDescription, offsetIncrs1_, IOSLongArray *)
+inline IOSLongArray *OrgApacheLuceneUtilAutomatonLev1TParametricDescription_get_offsetIncrs1();
+static IOSLongArray *OrgApacheLuceneUtilAutomatonLev1TParametricDescription_offsetIncrs1;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilAutomatonLev1TParametricDescription, offsetIncrs1, IOSLongArray *)
 
-static IOSLongArray *OrgApacheLuceneUtilAutomatonLev1TParametricDescription_toStates2_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilAutomatonLev1TParametricDescription, toStates2_, IOSLongArray *)
+inline IOSLongArray *OrgApacheLuceneUtilAutomatonLev1TParametricDescription_get_toStates2();
+static IOSLongArray *OrgApacheLuceneUtilAutomatonLev1TParametricDescription_toStates2;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilAutomatonLev1TParametricDescription, toStates2, IOSLongArray *)
 
-static IOSLongArray *OrgApacheLuceneUtilAutomatonLev1TParametricDescription_offsetIncrs2_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilAutomatonLev1TParametricDescription, offsetIncrs2_, IOSLongArray *)
+inline IOSLongArray *OrgApacheLuceneUtilAutomatonLev1TParametricDescription_get_offsetIncrs2();
+static IOSLongArray *OrgApacheLuceneUtilAutomatonLev1TParametricDescription_offsetIncrs2;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilAutomatonLev1TParametricDescription, offsetIncrs2, IOSLongArray *)
 
-static IOSLongArray *OrgApacheLuceneUtilAutomatonLev1TParametricDescription_toStates3_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilAutomatonLev1TParametricDescription, toStates3_, IOSLongArray *)
+inline IOSLongArray *OrgApacheLuceneUtilAutomatonLev1TParametricDescription_get_toStates3();
+static IOSLongArray *OrgApacheLuceneUtilAutomatonLev1TParametricDescription_toStates3;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilAutomatonLev1TParametricDescription, toStates3, IOSLongArray *)
 
-static IOSLongArray *OrgApacheLuceneUtilAutomatonLev1TParametricDescription_offsetIncrs3_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilAutomatonLev1TParametricDescription, offsetIncrs3_, IOSLongArray *)
+inline IOSLongArray *OrgApacheLuceneUtilAutomatonLev1TParametricDescription_get_offsetIncrs3();
+static IOSLongArray *OrgApacheLuceneUtilAutomatonLev1TParametricDescription_offsetIncrs3;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilAutomatonLev1TParametricDescription, offsetIncrs3, IOSLongArray *)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilAutomatonLev1TParametricDescription)
 
@@ -46,29 +54,29 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilAutomatonLev1TParametricDescription)
   if (position == w_) {
     if (state < 2) {
       jint loc = vector * 2 + state;
-      offset += [self unpackWithLongArray:OrgApacheLuceneUtilAutomatonLev1TParametricDescription_offsetIncrs0_ withInt:loc withInt:1];
-      state = [self unpackWithLongArray:OrgApacheLuceneUtilAutomatonLev1TParametricDescription_toStates0_ withInt:loc withInt:2] - 1;
+      offset += [self unpackWithLongArray:OrgApacheLuceneUtilAutomatonLev1TParametricDescription_offsetIncrs0 withInt:loc withInt:1];
+      state = [self unpackWithLongArray:OrgApacheLuceneUtilAutomatonLev1TParametricDescription_toStates0 withInt:loc withInt:2] - 1;
     }
   }
   else if (position == w_ - 1) {
     if (state < 3) {
       jint loc = vector * 3 + state;
-      offset += [self unpackWithLongArray:OrgApacheLuceneUtilAutomatonLev1TParametricDescription_offsetIncrs1_ withInt:loc withInt:1];
-      state = [self unpackWithLongArray:OrgApacheLuceneUtilAutomatonLev1TParametricDescription_toStates1_ withInt:loc withInt:2] - 1;
+      offset += [self unpackWithLongArray:OrgApacheLuceneUtilAutomatonLev1TParametricDescription_offsetIncrs1 withInt:loc withInt:1];
+      state = [self unpackWithLongArray:OrgApacheLuceneUtilAutomatonLev1TParametricDescription_toStates1 withInt:loc withInt:2] - 1;
     }
   }
   else if (position == w_ - 2) {
     if (state < 6) {
       jint loc = vector * 6 + state;
-      offset += [self unpackWithLongArray:OrgApacheLuceneUtilAutomatonLev1TParametricDescription_offsetIncrs2_ withInt:loc withInt:2];
-      state = [self unpackWithLongArray:OrgApacheLuceneUtilAutomatonLev1TParametricDescription_toStates2_ withInt:loc withInt:3] - 1;
+      offset += [self unpackWithLongArray:OrgApacheLuceneUtilAutomatonLev1TParametricDescription_offsetIncrs2 withInt:loc withInt:2];
+      state = [self unpackWithLongArray:OrgApacheLuceneUtilAutomatonLev1TParametricDescription_toStates2 withInt:loc withInt:3] - 1;
     }
   }
   else {
     if (state < 6) {
       jint loc = vector * 6 + state;
-      offset += [self unpackWithLongArray:OrgApacheLuceneUtilAutomatonLev1TParametricDescription_offsetIncrs3_ withInt:loc withInt:2];
-      state = [self unpackWithLongArray:OrgApacheLuceneUtilAutomatonLev1TParametricDescription_toStates3_ withInt:loc withInt:3] - 1;
+      offset += [self unpackWithLongArray:OrgApacheLuceneUtilAutomatonLev1TParametricDescription_offsetIncrs3 withInt:loc withInt:2];
+      state = [self unpackWithLongArray:OrgApacheLuceneUtilAutomatonLev1TParametricDescription_toStates3 withInt:loc withInt:3] - 1;
     }
   }
   if (state == -1) {
@@ -86,14 +94,14 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilAutomatonLev1TParametricDescription)
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilAutomatonLev1TParametricDescription class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilAutomatonLev1TParametricDescription_toStates0_, [IOSLongArray newArrayWithLongs:(jlong[]){ (jlong) 0x2LL } count:1]);
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilAutomatonLev1TParametricDescription_offsetIncrs0_, [IOSLongArray newArrayWithLongs:(jlong[]){ (jlong) 0x0LL } count:1]);
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilAutomatonLev1TParametricDescription_toStates1_, [IOSLongArray newArrayWithLongs:(jlong[]){ (jlong) 0xa43LL } count:1]);
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilAutomatonLev1TParametricDescription_offsetIncrs1_, [IOSLongArray newArrayWithLongs:(jlong[]){ (jlong) 0x38LL } count:1]);
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilAutomatonLev1TParametricDescription_toStates2_, [IOSLongArray newArrayWithLongs:(jlong[]){ (jlong) 0x3453491482140003LL, (jlong) 0x6dLL } count:2]);
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilAutomatonLev1TParametricDescription_offsetIncrs2_, [IOSLongArray newArrayWithLongs:(jlong[]){ (jlong) 0x555555a20000LL } count:1]);
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilAutomatonLev1TParametricDescription_toStates3_, [IOSLongArray newArrayWithLongs:(jlong[]){ (jlong) 0x21520854900c0003LL, (jlong) 0x5b4d19a24534916dLL, (jlong) 0xda34LL } count:3]);
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilAutomatonLev1TParametricDescription_offsetIncrs3_, [IOSLongArray newArrayWithLongs:(jlong[]){ (jlong) 0x5555ae0a20fc0000LL, (jlong) 0x55555555LL } count:2]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilAutomatonLev1TParametricDescription_toStates0, [IOSLongArray newArrayWithLongs:(jlong[]){ (jlong) 0x2LL } count:1]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilAutomatonLev1TParametricDescription_offsetIncrs0, [IOSLongArray newArrayWithLongs:(jlong[]){ (jlong) 0x0LL } count:1]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilAutomatonLev1TParametricDescription_toStates1, [IOSLongArray newArrayWithLongs:(jlong[]){ (jlong) 0xa43LL } count:1]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilAutomatonLev1TParametricDescription_offsetIncrs1, [IOSLongArray newArrayWithLongs:(jlong[]){ (jlong) 0x38LL } count:1]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilAutomatonLev1TParametricDescription_toStates2, [IOSLongArray newArrayWithLongs:(jlong[]){ (jlong) 0x3453491482140003LL, (jlong) 0x6dLL } count:2]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilAutomatonLev1TParametricDescription_offsetIncrs2, [IOSLongArray newArrayWithLongs:(jlong[]){ (jlong) 0x555555a20000LL } count:1]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilAutomatonLev1TParametricDescription_toStates3, [IOSLongArray newArrayWithLongs:(jlong[]){ (jlong) 0x21520854900c0003LL, (jlong) 0x5b4d19a24534916dLL, (jlong) 0xda34LL } count:3]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilAutomatonLev1TParametricDescription_offsetIncrs3, [IOSLongArray newArrayWithLongs:(jlong[]){ (jlong) 0x5555ae0a20fc0000LL, (jlong) 0x55555555LL } count:2]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilAutomatonLev1TParametricDescription)
   }
 }
@@ -104,14 +112,14 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilAutomatonLev1TParametricDescription)
     { "initWithInt:", "Lev1TParametricDescription", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "toStates0_", NULL, 0x1a, "[J", &OrgApacheLuceneUtilAutomatonLev1TParametricDescription_toStates0_, NULL, .constantValue.asLong = 0 },
-    { "offsetIncrs0_", NULL, 0x1a, "[J", &OrgApacheLuceneUtilAutomatonLev1TParametricDescription_offsetIncrs0_, NULL, .constantValue.asLong = 0 },
-    { "toStates1_", NULL, 0x1a, "[J", &OrgApacheLuceneUtilAutomatonLev1TParametricDescription_toStates1_, NULL, .constantValue.asLong = 0 },
-    { "offsetIncrs1_", NULL, 0x1a, "[J", &OrgApacheLuceneUtilAutomatonLev1TParametricDescription_offsetIncrs1_, NULL, .constantValue.asLong = 0 },
-    { "toStates2_", NULL, 0x1a, "[J", &OrgApacheLuceneUtilAutomatonLev1TParametricDescription_toStates2_, NULL, .constantValue.asLong = 0 },
-    { "offsetIncrs2_", NULL, 0x1a, "[J", &OrgApacheLuceneUtilAutomatonLev1TParametricDescription_offsetIncrs2_, NULL, .constantValue.asLong = 0 },
-    { "toStates3_", NULL, 0x1a, "[J", &OrgApacheLuceneUtilAutomatonLev1TParametricDescription_toStates3_, NULL, .constantValue.asLong = 0 },
-    { "offsetIncrs3_", NULL, 0x1a, "[J", &OrgApacheLuceneUtilAutomatonLev1TParametricDescription_offsetIncrs3_, NULL, .constantValue.asLong = 0 },
+    { "toStates0", "toStates0", 0x1a, "[J", &OrgApacheLuceneUtilAutomatonLev1TParametricDescription_toStates0, NULL, .constantValue.asLong = 0 },
+    { "offsetIncrs0", "offsetIncrs0", 0x1a, "[J", &OrgApacheLuceneUtilAutomatonLev1TParametricDescription_offsetIncrs0, NULL, .constantValue.asLong = 0 },
+    { "toStates1", "toStates1", 0x1a, "[J", &OrgApacheLuceneUtilAutomatonLev1TParametricDescription_toStates1, NULL, .constantValue.asLong = 0 },
+    { "offsetIncrs1", "offsetIncrs1", 0x1a, "[J", &OrgApacheLuceneUtilAutomatonLev1TParametricDescription_offsetIncrs1, NULL, .constantValue.asLong = 0 },
+    { "toStates2", "toStates2", 0x1a, "[J", &OrgApacheLuceneUtilAutomatonLev1TParametricDescription_toStates2, NULL, .constantValue.asLong = 0 },
+    { "offsetIncrs2", "offsetIncrs2", 0x1a, "[J", &OrgApacheLuceneUtilAutomatonLev1TParametricDescription_offsetIncrs2, NULL, .constantValue.asLong = 0 },
+    { "toStates3", "toStates3", 0x1a, "[J", &OrgApacheLuceneUtilAutomatonLev1TParametricDescription_toStates3, NULL, .constantValue.asLong = 0 },
+    { "offsetIncrs3", "offsetIncrs3", 0x1a, "[J", &OrgApacheLuceneUtilAutomatonLev1TParametricDescription_offsetIncrs3, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonLev1TParametricDescription = { 2, "Lev1TParametricDescription", "org.apache.lucene.util.automaton", NULL, 0x0, 2, methods, 8, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilAutomatonLev1TParametricDescription;
@@ -124,9 +132,11 @@ void OrgApacheLuceneUtilAutomatonLev1TParametricDescription_initWithInt_(OrgApac
 }
 
 OrgApacheLuceneUtilAutomatonLev1TParametricDescription *new_OrgApacheLuceneUtilAutomatonLev1TParametricDescription_initWithInt_(jint w) {
-  OrgApacheLuceneUtilAutomatonLev1TParametricDescription *self = [OrgApacheLuceneUtilAutomatonLev1TParametricDescription alloc];
-  OrgApacheLuceneUtilAutomatonLev1TParametricDescription_initWithInt_(self, w);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAutomatonLev1TParametricDescription, initWithInt_, w)
+}
+
+OrgApacheLuceneUtilAutomatonLev1TParametricDescription *create_OrgApacheLuceneUtilAutomatonLev1TParametricDescription_initWithInt_(jint w) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAutomatonLev1TParametricDescription, initWithInt_, w)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonLev1TParametricDescription)

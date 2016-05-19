@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilPackedDirectWriter_INCLUDE_ALL")
-#if OrgApacheLuceneUtilPackedDirectWriter_RESTRICT
-#define OrgApacheLuceneUtilPackedDirectWriter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedDirectWriter")
+#ifdef RESTRICT_OrgApacheLuceneUtilPackedDirectWriter
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackedDirectWriter 0
 #else
-#define OrgApacheLuceneUtilPackedDirectWriter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackedDirectWriter 1
 #endif
-#undef OrgApacheLuceneUtilPackedDirectWriter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilPackedDirectWriter
 
-#if !defined (_OrgApacheLuceneUtilPackedDirectWriter_) && (OrgApacheLuceneUtilPackedDirectWriter_INCLUDE_ALL || OrgApacheLuceneUtilPackedDirectWriter_INCLUDE)
-#define _OrgApacheLuceneUtilPackedDirectWriter_
+#if !defined (OrgApacheLuceneUtilPackedDirectWriter_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedDirectWriter || defined(INCLUDE_OrgApacheLuceneUtilPackedDirectWriter))
+#define OrgApacheLuceneUtilPackedDirectWriter_
 
 @class IOSByteArray;
 @class IOSIntArray;
@@ -22,6 +22,25 @@
 @class OrgApacheLuceneStoreIndexOutput;
 @class OrgApacheLuceneUtilPackedBulkOperation;
 
+/*!
+ @brief Class for writing packed integers to be directly read from Directory.
+ Integers can be read on-the-fly via <code>DirectReader</code>.
+ <p>
+ Unlike PackedInts, it optimizes for read i/o operations and supports &gt; 2B values.
+ Example usage:
+ <pre class="prettyprint">
+ int bitsPerValue = DirectWriter.bitsRequired(100); // values up to and including 100
+ IndexOutput output = dir.createOutput("packed", IOContext.DEFAULT);
+ DirectWriter writer = DirectWriter.getInstance(output, numberOfValues, bitsPerValue);
+ for (int i = 0; i &lt; numberOfValues; i++) {
+ writer.add(value);
+ }
+ writer.finish();
+ output.close();
+ 
+@endcode
+ - seealso: DirectReader
+ */
 @interface OrgApacheLuceneUtilPackedDirectWriter : NSObject {
  @public
   jint bitsPerValue_;
@@ -36,18 +55,43 @@
   jint iterations_;
 }
 
++ (IOSIntArray *)SUPPORTED_BITS_PER_VALUE;
+
 #pragma mark Public
 
+/*!
+ @brief Adds a value to this writer
+ */
 - (void)addWithLong:(jlong)l;
 
+/*!
+ @brief Returns how many bits are required to hold values up
+ to and including maxValue
+ @param maxValue the maximum value that should be representable.
+ @return the amount of bits needed to represent values from 0 to maxValue.
+ - seealso: PackedInts#bitsRequired(long)
+ */
 + (jint)bitsRequiredWithLong:(jlong)maxValue;
 
+/*!
+ @brief finishes writing
+ */
 - (void)finish;
 
+/*!
+ @brief Returns an instance suitable for encoding <code>numValues</code> using <code>bitsPerValue</code>
+ */
 + (OrgApacheLuceneUtilPackedDirectWriter *)getInstanceWithOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)output
                                                                                  withLong:(jlong)numValues
                                                                                   withInt:(jint)bitsPerValue;
 
+/*!
+ @brief Returns how many bits are required to hold values up
+ to and including maxValue, interpreted as an unsigned value.
+ @param maxValue the maximum value that should be representable.
+ @return the amount of bits needed to represent values from 0 to maxValue.
+ - seealso: PackedInts#unsignedBitsRequired(long)
+ */
 + (jint)unsignedBitsRequiredWithLong:(jlong)maxValue;
 
 #pragma mark Package-Private
@@ -65,12 +109,16 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedDirectWriter, nextBlocks_, IOSByteA
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedDirectWriter, nextValues_, IOSLongArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedDirectWriter, encoder_, OrgApacheLuceneUtilPackedBulkOperation *)
 
-FOUNDATION_EXPORT IOSIntArray *OrgApacheLuceneUtilPackedDirectWriter_SUPPORTED_BITS_PER_VALUE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilPackedDirectWriter, SUPPORTED_BITS_PER_VALUE_, IOSIntArray *)
+inline IOSIntArray *OrgApacheLuceneUtilPackedDirectWriter_get_SUPPORTED_BITS_PER_VALUE();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT IOSIntArray *OrgApacheLuceneUtilPackedDirectWriter_SUPPORTED_BITS_PER_VALUE;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilPackedDirectWriter, SUPPORTED_BITS_PER_VALUE, IOSIntArray *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedDirectWriter_initWithOrgApacheLuceneStoreIndexOutput_withLong_withInt_(OrgApacheLuceneUtilPackedDirectWriter *self, OrgApacheLuceneStoreIndexOutput *output, jlong numValues, jint bitsPerValue);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectWriter *new_OrgApacheLuceneUtilPackedDirectWriter_initWithOrgApacheLuceneStoreIndexOutput_withLong_withInt_(OrgApacheLuceneStoreIndexOutput *output, jlong numValues, jint bitsPerValue) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectWriter *create_OrgApacheLuceneUtilPackedDirectWriter_initWithOrgApacheLuceneStoreIndexOutput_withLong_withInt_(OrgApacheLuceneStoreIndexOutput *output, jlong numValues, jint bitsPerValue);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirectWriter *OrgApacheLuceneUtilPackedDirectWriter_getInstanceWithOrgApacheLuceneStoreIndexOutput_withLong_withInt_(OrgApacheLuceneStoreIndexOutput *output, jlong numValues, jint bitsPerValue);
 
@@ -82,4 +130,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirectWriter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilPackedDirectWriter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedDirectWriter")

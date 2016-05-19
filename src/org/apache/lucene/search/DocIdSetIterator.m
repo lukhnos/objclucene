@@ -32,6 +32,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchDocIdSetIterator_$1_ini
 
 __attribute__((unused)) static OrgApacheLuceneSearchDocIdSetIterator_$1 *new_OrgApacheLuceneSearchDocIdSetIterator_$1_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchDocIdSetIterator_$1 *create_OrgApacheLuceneSearchDocIdSetIterator_$1_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocIdSetIterator_$1)
 
 @interface OrgApacheLuceneSearchDocIdSetIterator_$2 : OrgApacheLuceneSearchDocIdSetIterator {
@@ -58,9 +60,15 @@ __attribute__((unused)) static void OrgApacheLuceneSearchDocIdSetIterator_$2_ini
 
 __attribute__((unused)) static OrgApacheLuceneSearchDocIdSetIterator_$2 *new_OrgApacheLuceneSearchDocIdSetIterator_$2_initWithInt_(jint capture$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchDocIdSetIterator_$2 *create_OrgApacheLuceneSearchDocIdSetIterator_$2_initWithInt_(jint capture$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocIdSetIterator_$2)
 
 @implementation OrgApacheLuceneSearchDocIdSetIterator
+
++ (jint)NO_MORE_DOCS {
+  return OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS;
+}
 
 + (OrgApacheLuceneSearchDocIdSetIterator *)empty {
   return OrgApacheLuceneSearchDocIdSetIterator_empty();
@@ -120,7 +128,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "advanceWithInt:", "advance", "I", 0x401, "Ljava.io.IOException;", NULL },
     { "slowAdvanceWithInt:", "slowAdvance", "I", 0x14, "Ljava.io.IOException;", NULL },
     { "cost", NULL, "J", 0x401, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "DocIdSetIterator", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "NO_MORE_DOCS", "NO_MORE_DOCS", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS },
@@ -133,12 +141,12 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 OrgApacheLuceneSearchDocIdSetIterator *OrgApacheLuceneSearchDocIdSetIterator_empty() {
   OrgApacheLuceneSearchDocIdSetIterator_initialize();
-  return [new_OrgApacheLuceneSearchDocIdSetIterator_$1_init() autorelease];
+  return create_OrgApacheLuceneSearchDocIdSetIterator_$1_init();
 }
 
 OrgApacheLuceneSearchDocIdSetIterator *OrgApacheLuceneSearchDocIdSetIterator_allWithInt_(jint maxDoc) {
   OrgApacheLuceneSearchDocIdSetIterator_initialize();
-  return [new_OrgApacheLuceneSearchDocIdSetIterator_$2_initWithInt_(maxDoc) autorelease];
+  return create_OrgApacheLuceneSearchDocIdSetIterator_$2_initWithInt_(maxDoc);
 }
 
 void OrgApacheLuceneSearchDocIdSetIterator_init(OrgApacheLuceneSearchDocIdSetIterator *self) {
@@ -201,9 +209,11 @@ void OrgApacheLuceneSearchDocIdSetIterator_$1_init(OrgApacheLuceneSearchDocIdSet
 }
 
 OrgApacheLuceneSearchDocIdSetIterator_$1 *new_OrgApacheLuceneSearchDocIdSetIterator_$1_init() {
-  OrgApacheLuceneSearchDocIdSetIterator_$1 *self = [OrgApacheLuceneSearchDocIdSetIterator_$1 alloc];
-  OrgApacheLuceneSearchDocIdSetIterator_$1_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDocIdSetIterator_$1, init)
+}
+
+OrgApacheLuceneSearchDocIdSetIterator_$1 *create_OrgApacheLuceneSearchDocIdSetIterator_$1_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDocIdSetIterator_$1, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocIdSetIterator_$1)
@@ -261,9 +271,11 @@ void OrgApacheLuceneSearchDocIdSetIterator_$2_initWithInt_(OrgApacheLuceneSearch
 }
 
 OrgApacheLuceneSearchDocIdSetIterator_$2 *new_OrgApacheLuceneSearchDocIdSetIterator_$2_initWithInt_(jint capture$0) {
-  OrgApacheLuceneSearchDocIdSetIterator_$2 *self = [OrgApacheLuceneSearchDocIdSetIterator_$2 alloc];
-  OrgApacheLuceneSearchDocIdSetIterator_$2_initWithInt_(self, capture$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDocIdSetIterator_$2, initWithInt_, capture$0)
+}
+
+OrgApacheLuceneSearchDocIdSetIterator_$2 *create_OrgApacheLuceneSearchDocIdSetIterator_$2_initWithInt_(jint capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDocIdSetIterator_$2, initWithInt_, capture$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocIdSetIterator_$2)

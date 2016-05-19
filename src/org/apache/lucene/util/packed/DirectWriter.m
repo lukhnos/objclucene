@@ -22,6 +22,13 @@
 
 - (void)flush;
 
+/*!
+ @brief Round a number of bits per value to the next amount of bits per value that
+ is supported by this writer.
+ @param bitsRequired the amount of bits required
+ @return the next number of bits per value that is gte the provided value
+ and supported by this writer
+ */
 + (jint)roundBitsWithInt:(jint)bitsRequired;
 
 @end
@@ -32,9 +39,13 @@ __attribute__((unused)) static jint OrgApacheLuceneUtilPackedDirectWriter_roundB
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPackedDirectWriter)
 
-IOSIntArray *OrgApacheLuceneUtilPackedDirectWriter_SUPPORTED_BITS_PER_VALUE_;
+IOSIntArray *OrgApacheLuceneUtilPackedDirectWriter_SUPPORTED_BITS_PER_VALUE;
 
 @implementation OrgApacheLuceneUtilPackedDirectWriter
+
++ (IOSIntArray *)SUPPORTED_BITS_PER_VALUE {
+  return OrgApacheLuceneUtilPackedDirectWriter_SUPPORTED_BITS_PER_VALUE;
+}
 
 - (instancetype)initWithOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)output
                                                withLong:(jlong)numValues
@@ -47,7 +58,7 @@ IOSIntArray *OrgApacheLuceneUtilPackedDirectWriter_SUPPORTED_BITS_PER_VALUE_;
   JreAssert((bitsPerValue_ == 64 || (l >= 0 && l <= OrgApacheLuceneUtilPackedPackedInts_maxValueWithInt_(bitsPerValue_))), (JavaLangInteger_valueOfWithInt_(bitsPerValue_)));
   JreAssert((!finished_), (@"org/apache/lucene/util/packed/DirectWriter.java:72 condition failed: assert !finished;"));
   if (count_ >= numValues_) {
-    @throw [new_JavaIoEOFException_initWithNSString_(@"Writing past end of stream") autorelease];
+    @throw create_JavaIoEOFException_initWithNSString_(@"Writing past end of stream");
   }
   *IOSLongArray_GetRef(nil_chk(nextValues_), off_++) = l;
   if (off_ == nextValues_->size_) {
@@ -62,7 +73,7 @@ IOSIntArray *OrgApacheLuceneUtilPackedDirectWriter_SUPPORTED_BITS_PER_VALUE_;
 
 - (void)finish {
   if (count_ != numValues_) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$J$J", @"Wrong number of values added, expected: ", numValues_, @", got: ", count_)) autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$J$J", @"Wrong number of values added, expected: ", numValues_, @", got: ", count_));
   }
   JreAssert((!finished_), (@"org/apache/lucene/util/packed/DirectWriter.java:96 condition failed: assert !finished;"));
   OrgApacheLuceneUtilPackedDirectWriter_flush(self);
@@ -100,7 +111,7 @@ IOSIntArray *OrgApacheLuceneUtilPackedDirectWriter_SUPPORTED_BITS_PER_VALUE_;
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilPackedDirectWriter class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilPackedDirectWriter_SUPPORTED_BITS_PER_VALUE_, [IOSIntArray newArrayWithInts:(jint[]){ 1, 2, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64 } count:14]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilPackedDirectWriter_SUPPORTED_BITS_PER_VALUE, [IOSIntArray newArrayWithInts:(jint[]){ 1, 2, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64 } count:14]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilPackedDirectWriter)
   }
 }
@@ -127,7 +138,7 @@ IOSIntArray *OrgApacheLuceneUtilPackedDirectWriter_SUPPORTED_BITS_PER_VALUE_;
     { "nextValues_", NULL, 0x10, "[J", NULL, NULL, .constantValue.asLong = 0 },
     { "encoder_", NULL, 0x10, "Lorg.apache.lucene.util.packed.BulkOperation;", NULL, NULL, .constantValue.asLong = 0 },
     { "iterations_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "SUPPORTED_BITS_PER_VALUE_", NULL, 0x18, "[I", &OrgApacheLuceneUtilPackedDirectWriter_SUPPORTED_BITS_PER_VALUE_, NULL, .constantValue.asLong = 0 },
+    { "SUPPORTED_BITS_PER_VALUE", "SUPPORTED_BITS_PER_VALUE", 0x18, "[I", &OrgApacheLuceneUtilPackedDirectWriter_SUPPORTED_BITS_PER_VALUE, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectWriter = { 2, "DirectWriter", "org.apache.lucene.util.packed", NULL, 0x11, 8, methods, 11, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilPackedDirectWriter;
@@ -140,21 +151,23 @@ void OrgApacheLuceneUtilPackedDirectWriter_initWithOrgApacheLuceneStoreIndexOutp
   JreStrongAssign(&self->output_, output);
   self->numValues_ = numValues;
   self->bitsPerValue_ = bitsPerValue;
-  JreStrongAssign(&self->encoder_, OrgApacheLuceneUtilPackedBulkOperation_ofWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_(JreLoadStatic(OrgApacheLuceneUtilPackedPackedInts_FormatEnum, PACKED), bitsPerValue));
+  JreStrongAssign(&self->encoder_, OrgApacheLuceneUtilPackedBulkOperation_ofWithOrgApacheLuceneUtilPackedPackedInts_Format_withInt_(JreLoadEnum(OrgApacheLuceneUtilPackedPackedInts_Format, PACKED), bitsPerValue));
   self->iterations_ = [((OrgApacheLuceneUtilPackedBulkOperation *) nil_chk(self->encoder_)) computeIterationsWithInt:(jint) JavaLangMath_minWithLong_withLong_(numValues, JavaLangInteger_MAX_VALUE) withInt:OrgApacheLuceneUtilPackedPackedInts_DEFAULT_BUFFER_SIZE];
   JreStrongAssignAndConsume(&self->nextBlocks_, [IOSByteArray newArrayWithLength:self->iterations_ * [self->encoder_ byteBlockCount]]);
   JreStrongAssignAndConsume(&self->nextValues_, [IOSLongArray newArrayWithLength:self->iterations_ * [self->encoder_ byteValueCount]]);
 }
 
 OrgApacheLuceneUtilPackedDirectWriter *new_OrgApacheLuceneUtilPackedDirectWriter_initWithOrgApacheLuceneStoreIndexOutput_withLong_withInt_(OrgApacheLuceneStoreIndexOutput *output, jlong numValues, jint bitsPerValue) {
-  OrgApacheLuceneUtilPackedDirectWriter *self = [OrgApacheLuceneUtilPackedDirectWriter alloc];
-  OrgApacheLuceneUtilPackedDirectWriter_initWithOrgApacheLuceneStoreIndexOutput_withLong_withInt_(self, output, numValues, bitsPerValue);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedDirectWriter, initWithOrgApacheLuceneStoreIndexOutput_withLong_withInt_, output, numValues, bitsPerValue)
+}
+
+OrgApacheLuceneUtilPackedDirectWriter *create_OrgApacheLuceneUtilPackedDirectWriter_initWithOrgApacheLuceneStoreIndexOutput_withLong_withInt_(OrgApacheLuceneStoreIndexOutput *output, jlong numValues, jint bitsPerValue) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedDirectWriter, initWithOrgApacheLuceneStoreIndexOutput_withLong_withInt_, output, numValues, bitsPerValue)
 }
 
 void OrgApacheLuceneUtilPackedDirectWriter_flush(OrgApacheLuceneUtilPackedDirectWriter *self) {
   [((OrgApacheLuceneUtilPackedBulkOperation *) nil_chk(self->encoder_)) encodeWithLongArray:self->nextValues_ withInt:0 withByteArray:self->nextBlocks_ withInt:0 withInt:self->iterations_];
-  jint blockCount = (jint) [((OrgApacheLuceneUtilPackedPackedInts_FormatEnum *) nil_chk(JreLoadStatic(OrgApacheLuceneUtilPackedPackedInts_FormatEnum, PACKED))) byteCountWithInt:OrgApacheLuceneUtilPackedPackedInts_VERSION_CURRENT withInt:self->off_ withInt:self->bitsPerValue_];
+  jint blockCount = (jint) [((OrgApacheLuceneUtilPackedPackedInts_Format *) nil_chk(JreLoadEnum(OrgApacheLuceneUtilPackedPackedInts_Format, PACKED))) byteCountWithInt:OrgApacheLuceneUtilPackedPackedInts_VERSION_CURRENT withInt:self->off_ withInt:self->bitsPerValue_];
   [((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->output_)) writeBytesWithByteArray:self->nextBlocks_ withInt:blockCount];
   JavaUtilArrays_fillWithLongArray_withLong_(self->nextValues_, 0LL);
   self->off_ = 0;
@@ -162,17 +175,17 @@ void OrgApacheLuceneUtilPackedDirectWriter_flush(OrgApacheLuceneUtilPackedDirect
 
 OrgApacheLuceneUtilPackedDirectWriter *OrgApacheLuceneUtilPackedDirectWriter_getInstanceWithOrgApacheLuceneStoreIndexOutput_withLong_withInt_(OrgApacheLuceneStoreIndexOutput *output, jlong numValues, jint bitsPerValue) {
   OrgApacheLuceneUtilPackedDirectWriter_initialize();
-  if (JavaUtilArrays_binarySearchWithIntArray_withInt_(OrgApacheLuceneUtilPackedDirectWriter_SUPPORTED_BITS_PER_VALUE_, bitsPerValue) < 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$", @"Unsupported bitsPerValue ", bitsPerValue, @". Did you use bitsRequired?")) autorelease];
+  if (JavaUtilArrays_binarySearchWithIntArray_withInt_(OrgApacheLuceneUtilPackedDirectWriter_SUPPORTED_BITS_PER_VALUE, bitsPerValue) < 0) {
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$", @"Unsupported bitsPerValue ", bitsPerValue, @". Did you use bitsRequired?"));
   }
-  return [new_OrgApacheLuceneUtilPackedDirectWriter_initWithOrgApacheLuceneStoreIndexOutput_withLong_withInt_(output, numValues, bitsPerValue) autorelease];
+  return create_OrgApacheLuceneUtilPackedDirectWriter_initWithOrgApacheLuceneStoreIndexOutput_withLong_withInt_(output, numValues, bitsPerValue);
 }
 
 jint OrgApacheLuceneUtilPackedDirectWriter_roundBitsWithInt_(jint bitsRequired) {
   OrgApacheLuceneUtilPackedDirectWriter_initialize();
-  jint index = JavaUtilArrays_binarySearchWithIntArray_withInt_(OrgApacheLuceneUtilPackedDirectWriter_SUPPORTED_BITS_PER_VALUE_, bitsRequired);
+  jint index = JavaUtilArrays_binarySearchWithIntArray_withInt_(OrgApacheLuceneUtilPackedDirectWriter_SUPPORTED_BITS_PER_VALUE, bitsRequired);
   if (index < 0) {
-    return IOSIntArray_Get(nil_chk(OrgApacheLuceneUtilPackedDirectWriter_SUPPORTED_BITS_PER_VALUE_), -index - 1);
+    return IOSIntArray_Get(nil_chk(OrgApacheLuceneUtilPackedDirectWriter_SUPPORTED_BITS_PER_VALUE), -index - 1);
   }
   else {
     return bitsRequired;

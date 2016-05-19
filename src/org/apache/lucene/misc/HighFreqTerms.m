@@ -41,6 +41,10 @@ __attribute__((unused)) static void OrgApacheLuceneMiscHighFreqTerms_usage();
 
 @implementation OrgApacheLuceneMiscHighFreqTerms
 
++ (jint)DEFAULT_NUMTERMS {
+  return OrgApacheLuceneMiscHighFreqTerms_DEFAULT_NUMTERMS;
+}
+
 + (void)mainWithNSStringArray:(IOSObjectArray *)args {
   OrgApacheLuceneMiscHighFreqTerms_mainWithNSStringArray_(args);
 }
@@ -67,8 +71,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   static const J2ObjcMethodInfo methods[] = {
     { "mainWithNSStringArray:", "main", "V", 0x9, "Ljava.lang.Exception;", NULL },
     { "usage", NULL, "V", 0xa, NULL, NULL },
-    { "getHighFreqTermsWithOrgApacheLuceneIndexIndexReader:withInt:withNSString:withJavaUtilComparator:", "getHighFreqTerms", "[Lorg.apache.lucene.misc.TermStats;", 0x9, "Ljava.lang.Exception;", NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "getHighFreqTermsWithOrgApacheLuceneIndexIndexReader:withInt:withNSString:withJavaUtilComparator:", "getHighFreqTerms", "[Lorg.apache.lucene.misc.TermStats;", 0x9, "Ljava.lang.Exception;", "(Lorg/apache/lucene/index/IndexReader;ILjava/lang/String;Ljava/util/Comparator<Lorg/apache/lucene/misc/TermStats;>;)[Lorg/apache/lucene/misc/TermStats;" },
+    { "init", "HighFreqTerms", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "DEFAULT_NUMTERMS", "DEFAULT_NUMTERMS", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneMiscHighFreqTerms_DEFAULT_NUMTERMS },
@@ -89,10 +93,10 @@ void OrgApacheLuceneMiscHighFreqTerms_mainWithNSStringArray_(IOSObjectArray *arg
     JavaLangSystem_exitWithInt_(1);
   }
   OrgApacheLuceneStoreDirectory *dir = OrgApacheLuceneStoreFSDirectory_openWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePaths_getWithNSString_(IOSObjectArray_Get(args, 0)));
-  id<JavaUtilComparator> comparator = [new_OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator_init() autorelease];
+  id<JavaUtilComparator> comparator = create_OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator_init();
   for (jint i = 1; i < args->size_; i++) {
     if ([((NSString *) nil_chk(IOSObjectArray_Get(args, i))) isEqual:@"-t"]) {
-      comparator = [new_OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator_init() autorelease];
+      comparator = create_OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator_init();
     }
     else {
       @try {
@@ -106,14 +110,14 @@ void OrgApacheLuceneMiscHighFreqTerms_mainWithNSStringArray_(IOSObjectArray *arg
   OrgApacheLuceneIndexIndexReader *reader = OrgApacheLuceneIndexDirectoryReader_openWithOrgApacheLuceneStoreDirectory_(dir);
   IOSObjectArray *terms = OrgApacheLuceneMiscHighFreqTerms_getHighFreqTermsWithOrgApacheLuceneIndexIndexReader_withInt_withNSString_withJavaUtilComparator_(reader, numTerms, field, comparator);
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(terms))->size_; i++) {
-    [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out_))) printfWithJavaUtilLocale:JreLoadStatic(JavaUtilLocale, ROOT_) withNSString:@"%s:%s \t totalTF = %,d \t docFreq = %,d \n" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ ((OrgApacheLuceneMiscTermStats *) nil_chk(IOSObjectArray_Get(terms, i)))->field_, [((OrgApacheLuceneUtilBytesRef *) nil_chk(((OrgApacheLuceneMiscTermStats *) nil_chk(IOSObjectArray_Get(terms, i)))->termtext_)) utf8ToString], JavaLangLong_valueOfWithLong_(((OrgApacheLuceneMiscTermStats *) nil_chk(IOSObjectArray_Get(terms, i)))->totalTermFreq_), JavaLangInteger_valueOfWithInt_(((OrgApacheLuceneMiscTermStats *) nil_chk(IOSObjectArray_Get(terms, i)))->docFreq_) } count:4 type:NSObject_class_()]];
+    [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out))) printfWithJavaUtilLocale:JreLoadStatic(JavaUtilLocale, ROOT) withNSString:@"%s:%s \t totalTF = %,d \t docFreq = %,d \n" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ ((OrgApacheLuceneMiscTermStats *) nil_chk(IOSObjectArray_Get(terms, i)))->field_, [((OrgApacheLuceneUtilBytesRef *) nil_chk(((OrgApacheLuceneMiscTermStats *) nil_chk(IOSObjectArray_Get(terms, i)))->termtext_)) utf8ToString], JavaLangLong_valueOfWithLong_(((OrgApacheLuceneMiscTermStats *) nil_chk(IOSObjectArray_Get(terms, i)))->totalTermFreq_), JavaLangInteger_valueOfWithInt_(((OrgApacheLuceneMiscTermStats *) nil_chk(IOSObjectArray_Get(terms, i)))->docFreq_) } count:4 type:NSObject_class_()]];
   }
   [((OrgApacheLuceneIndexIndexReader *) nil_chk(reader)) close];
 }
 
 void OrgApacheLuceneMiscHighFreqTerms_usage() {
   OrgApacheLuceneMiscHighFreqTerms_initialize();
-  [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out_))) printlnWithNSString:@"\n\njava org.apache.lucene.misc.HighFreqTerms <index dir> [-t] [number_terms] [field]\n\t -t: order by totalTermFreq\n\n"];
+  [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out))) printlnWithNSString:@"\n\njava org.apache.lucene.misc.HighFreqTerms <index dir> [-t] [number_terms] [field]\n\t -t: order by totalTermFreq\n\n"];
 }
 
 IOSObjectArray *OrgApacheLuceneMiscHighFreqTerms_getHighFreqTermsWithOrgApacheLuceneIndexIndexReader_withInt_withNSString_withJavaUtilComparator_(OrgApacheLuceneIndexIndexReader *reader, jint numTerms, NSString *field, id<JavaUtilComparator> comparator) {
@@ -122,18 +126,18 @@ IOSObjectArray *OrgApacheLuceneMiscHighFreqTerms_getHighFreqTermsWithOrgApacheLu
   if (field != nil) {
     OrgApacheLuceneIndexTerms *terms = OrgApacheLuceneIndexMultiFields_getTermsWithOrgApacheLuceneIndexIndexReader_withNSString_(reader, field);
     if (terms == nil) {
-      @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$", @"field ", field, @" not found")) autorelease];
+      @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$", @"field ", field, @" not found"));
     }
-    OrgApacheLuceneIndexTermsEnum *termsEnum = [((OrgApacheLuceneIndexTerms *) nil_chk(terms)) iterator];
-    tiq = [new_OrgApacheLuceneMiscHighFreqTerms_TermStatsQueue_initWithInt_withJavaUtilComparator_(numTerms, comparator) autorelease];
+    OrgApacheLuceneIndexTermsEnum *termsEnum = [terms iterator];
+    tiq = create_OrgApacheLuceneMiscHighFreqTerms_TermStatsQueue_initWithInt_withJavaUtilComparator_(numTerms, comparator);
     [tiq fillWithNSString:field withOrgApacheLuceneIndexTermsEnum:termsEnum];
   }
   else {
     OrgApacheLuceneIndexFields *fields = OrgApacheLuceneIndexMultiFields_getFieldsWithOrgApacheLuceneIndexIndexReader_(reader);
     if ([((OrgApacheLuceneIndexFields *) nil_chk(fields)) size] == 0) {
-      @throw [new_JavaLangRuntimeException_initWithNSString_(@"no fields found for this index") autorelease];
+      @throw create_JavaLangRuntimeException_initWithNSString_(@"no fields found for this index");
     }
-    tiq = [new_OrgApacheLuceneMiscHighFreqTerms_TermStatsQueue_initWithInt_withJavaUtilComparator_(numTerms, comparator) autorelease];
+    tiq = create_OrgApacheLuceneMiscHighFreqTerms_TermStatsQueue_initWithInt_withJavaUtilComparator_(numTerms, comparator);
     for (NSString * __strong fieldName in fields) {
       OrgApacheLuceneIndexTerms *terms = [fields termsWithNSString:fieldName];
       if (terms != nil) {
@@ -141,7 +145,7 @@ IOSObjectArray *OrgApacheLuceneMiscHighFreqTerms_getHighFreqTermsWithOrgApacheLu
       }
     }
   }
-  IOSObjectArray *result = [IOSObjectArray arrayWithLength:[((OrgApacheLuceneMiscHighFreqTerms_TermStatsQueue *) nil_chk(tiq)) size] type:OrgApacheLuceneMiscTermStats_class_()];
+  IOSObjectArray *result = [IOSObjectArray arrayWithLength:[tiq size] type:OrgApacheLuceneMiscTermStats_class_()];
   jint count = [tiq size] - 1;
   while ([tiq size] != 0) {
     IOSObjectArray_Set(result, count, [tiq pop]);
@@ -155,9 +159,11 @@ void OrgApacheLuceneMiscHighFreqTerms_init(OrgApacheLuceneMiscHighFreqTerms *sel
 }
 
 OrgApacheLuceneMiscHighFreqTerms *new_OrgApacheLuceneMiscHighFreqTerms_init() {
-  OrgApacheLuceneMiscHighFreqTerms *self = [OrgApacheLuceneMiscHighFreqTerms alloc];
-  OrgApacheLuceneMiscHighFreqTerms_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneMiscHighFreqTerms, init)
+}
+
+OrgApacheLuceneMiscHighFreqTerms *create_OrgApacheLuceneMiscHighFreqTerms_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneMiscHighFreqTerms, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneMiscHighFreqTerms)
@@ -186,7 +192,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "compareWithId:withId:", "compare", "I", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "DocFreqComparator", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator = { 2, "DocFreqComparator", "org.apache.lucene.misc", "HighFreqTerms", 0x19, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/misc/TermStats;>;" };
   return &_OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator;
@@ -199,9 +205,11 @@ void OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator_init(OrgApacheLuceneMisc
 }
 
 OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator *new_OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator_init() {
-  OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator *self = [OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator alloc];
-  OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator, init)
+}
+
+OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator *create_OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneMiscHighFreqTerms_DocFreqComparator)
@@ -230,7 +238,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "compareWithId:withId:", "compare", "I", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "TotalTermFreqComparator", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator = { 2, "TotalTermFreqComparator", "org.apache.lucene.misc", "HighFreqTerms", 0x19, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/misc/TermStats;>;" };
   return &_OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator;
@@ -243,9 +251,11 @@ void OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator_init(OrgApacheLuce
 }
 
 OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator *new_OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator_init() {
-  OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator *self = [OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator alloc];
-  OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator, init)
+}
+
+OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator *create_OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqComparator)
@@ -267,7 +277,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneMiscHighFreqTerms_TotalTermFreqC
 withOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)termsEnum {
   OrgApacheLuceneUtilBytesRef *term = nil;
   while ((term = [((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) next]) != nil) {
-    [self insertWithOverflowWithId:[new_OrgApacheLuceneMiscTermStats_initWithNSString_withOrgApacheLuceneUtilBytesRef_withInt_withLong_(field, term, [termsEnum docFreq], [termsEnum totalTermFreq]) autorelease]];
+    [self insertWithOverflowWithId:create_OrgApacheLuceneMiscTermStats_initWithNSString_withOrgApacheLuceneUtilBytesRef_withInt_withLong_(field, term, [termsEnum docFreq], [termsEnum totalTermFreq])];
   }
 }
 
@@ -278,8 +288,8 @@ withOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)termsEnum {
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withJavaUtilComparator:", "TermStatsQueue", NULL, 0x0, NULL, NULL },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x4, NULL, NULL },
+    { "initWithInt:withJavaUtilComparator:", "TermStatsQueue", NULL, 0x0, NULL, "(ILjava/util/Comparator<Lorg/apache/lucene/misc/TermStats;>;)V" },
+    { "lessThanWithId:withId:", "lessThan", "Z", 0x4, NULL, "(Lorg/apache/lucene/misc/TermStats;Lorg/apache/lucene/misc/TermStats;)Z" },
     { "fillWithNSString:withOrgApacheLuceneIndexTermsEnum:", "fill", "V", 0x4, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -298,9 +308,11 @@ void OrgApacheLuceneMiscHighFreqTerms_TermStatsQueue_initWithInt_withJavaUtilCom
 }
 
 OrgApacheLuceneMiscHighFreqTerms_TermStatsQueue *new_OrgApacheLuceneMiscHighFreqTerms_TermStatsQueue_initWithInt_withJavaUtilComparator_(jint size, id<JavaUtilComparator> comparator) {
-  OrgApacheLuceneMiscHighFreqTerms_TermStatsQueue *self = [OrgApacheLuceneMiscHighFreqTerms_TermStatsQueue alloc];
-  OrgApacheLuceneMiscHighFreqTerms_TermStatsQueue_initWithInt_withJavaUtilComparator_(self, size, comparator);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneMiscHighFreqTerms_TermStatsQueue, initWithInt_withJavaUtilComparator_, size, comparator)
+}
+
+OrgApacheLuceneMiscHighFreqTerms_TermStatsQueue *create_OrgApacheLuceneMiscHighFreqTerms_TermStatsQueue_initWithInt_withJavaUtilComparator_(jint size, id<JavaUtilComparator> comparator) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneMiscHighFreqTerms_TermStatsQueue, initWithInt_withJavaUtilComparator_, size, comparator)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneMiscHighFreqTerms_TermStatsQueue)

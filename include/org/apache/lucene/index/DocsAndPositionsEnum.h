@@ -5,54 +5,99 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexDocsAndPositionsEnum_INCLUDE_ALL")
-#if OrgApacheLuceneIndexDocsAndPositionsEnum_RESTRICT
-#define OrgApacheLuceneIndexDocsAndPositionsEnum_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexDocsAndPositionsEnum")
+#ifdef RESTRICT_OrgApacheLuceneIndexDocsAndPositionsEnum
+#define INCLUDE_ALL_OrgApacheLuceneIndexDocsAndPositionsEnum 0
 #else
-#define OrgApacheLuceneIndexDocsAndPositionsEnum_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexDocsAndPositionsEnum 1
 #endif
-#undef OrgApacheLuceneIndexDocsAndPositionsEnum_RESTRICT
-#if OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper_INCLUDE
-#define OrgApacheLuceneIndexDocsAndPositionsEnum_INCLUDE 1
+#undef RESTRICT_OrgApacheLuceneIndexDocsAndPositionsEnum
+#ifdef INCLUDE_OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper
+#define INCLUDE_OrgApacheLuceneIndexDocsAndPositionsEnum 1
 #endif
 
-#if !defined (_OrgApacheLuceneIndexDocsAndPositionsEnum_) && (OrgApacheLuceneIndexDocsAndPositionsEnum_INCLUDE_ALL || OrgApacheLuceneIndexDocsAndPositionsEnum_INCLUDE)
-#define _OrgApacheLuceneIndexDocsAndPositionsEnum_
+#if !defined (OrgApacheLuceneIndexDocsAndPositionsEnum_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocsAndPositionsEnum || defined(INCLUDE_OrgApacheLuceneIndexDocsAndPositionsEnum))
+#define OrgApacheLuceneIndexDocsAndPositionsEnum_
 
-#define OrgApacheLuceneIndexDocsEnum_RESTRICT 1
-#define OrgApacheLuceneIndexDocsEnum_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexDocsEnum 1
+#define INCLUDE_OrgApacheLuceneIndexDocsEnum 1
 #include "org/apache/lucene/index/DocsEnum.h"
 
+@class IOSObjectArray;
 @class OrgApacheLuceneIndexPostingsEnum;
 @class OrgApacheLuceneUtilBytesRef;
 @protocol OrgApacheLuceneUtilBits;
 
-#define OrgApacheLuceneIndexDocsAndPositionsEnum_FLAG_OFFSETS 1
-#define OrgApacheLuceneIndexDocsAndPositionsEnum_FLAG_PAYLOADS 2
-#define OrgApacheLuceneIndexDocsAndPositionsEnum_OLD_NULL_SEMANTICS 16384
-
+/*!
+ @brief Also iterates through positions.
+ */
 @interface OrgApacheLuceneIndexDocsAndPositionsEnum : OrgApacheLuceneIndexDocsEnum
+
++ (jint)FLAG_OFFSETS;
+
++ (jint)FLAG_PAYLOADS;
+
++ (jshort)OLD_NULL_SEMANTICS;
 
 #pragma mark Public
 
+/*!
+ @brief Returns end offset for the current position, or -1 if
+ offsets were not indexed.
+ */
 - (jint)endOffset;
 
+/*!
+ @brief Returns the payload at this position, or null if no
+ payload was indexed.
+ You should not modify anything 
+ (neither members of the returned BytesRef nor bytes 
+ in the byte[]). 
+ */
 - (OrgApacheLuceneUtilBytesRef *)getPayload;
 
+/*!
+ @brief Returns the next position.
+ You should only call this
+ up to <code>DocsEnum.freq()</code> times else
+ the behavior is not defined.  If positions were not
+ indexed this will return -1; this only happens if
+ offsets were indexed and you passed needsOffset=true
+ when pulling the enum.  
+ */
 - (jint)nextPosition;
 
+/*!
+ @brief Returns start offset for the current position, or -1
+ if offsets were not indexed.
+ */
 - (jint)startOffset;
 
 #pragma mark Protected
 
+/*!
+ @brief Sole constructor.
+ (For invocation by subclass 
+ constructors, typically implicit.) 
+ */
 - (instancetype)init;
 
 #pragma mark Package-Private
 
+/*!
+ @brief Unwrap a legacy DocsAndPositionsEnum and return the actual PostingsEnum.
+ if <code>docs</code> is null, this returns null for convenience
+ */
 + (OrgApacheLuceneIndexPostingsEnum *)unwrapWithOrgApacheLuceneIndexDocsEnum:(OrgApacheLuceneIndexDocsEnum *)docs;
 
+/*!
+ @brief Return the live docs that are being applied to this <code>DocsEnum</code>.
+ */
 + (id<OrgApacheLuceneUtilBits>)unwrapliveDocsWithOrgApacheLuceneIndexDocsEnum:(OrgApacheLuceneIndexDocsEnum *)docs;
 
+/*!
+ @brief Wraps a PostingsEnum with a legacy DocsAndPositionsEnum.
+ */
 + (OrgApacheLuceneIndexDocsAndPositionsEnum *)wrapWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)postings
                                                            withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)liveDocs;
 
@@ -60,11 +105,29 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexDocsAndPositionsEnum)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexDocsAndPositionsEnum, FLAG_OFFSETS, jint)
+/*!
+ @brief Flag to pass to <code>TermsEnum.docsAndPositions(Bits,DocsAndPositionsEnum,int)</code>
+ if you require offsets in the returned enum.
+ */
+inline jint OrgApacheLuceneIndexDocsAndPositionsEnum_get_FLAG_OFFSETS();
+#define OrgApacheLuceneIndexDocsAndPositionsEnum_FLAG_OFFSETS 1
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexDocsAndPositionsEnum, FLAG_OFFSETS, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexDocsAndPositionsEnum, FLAG_PAYLOADS, jint)
+/*!
+ @brief Flag to pass to  <code>TermsEnum.docsAndPositions(Bits,DocsAndPositionsEnum,int)</code>
+ if you require payloads in the returned enum.
+ */
+inline jint OrgApacheLuceneIndexDocsAndPositionsEnum_get_FLAG_PAYLOADS();
+#define OrgApacheLuceneIndexDocsAndPositionsEnum_FLAG_PAYLOADS 2
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexDocsAndPositionsEnum, FLAG_PAYLOADS, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexDocsAndPositionsEnum, OLD_NULL_SEMANTICS, jshort)
+/*!
+ @brief Codec implementations should check for this flag,
+ and return null when positions are requested but not present.
+ */
+inline jshort OrgApacheLuceneIndexDocsAndPositionsEnum_get_OLD_NULL_SEMANTICS();
+#define OrgApacheLuceneIndexDocsAndPositionsEnum_OLD_NULL_SEMANTICS 16384
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexDocsAndPositionsEnum, OLD_NULL_SEMANTICS, jshort)
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexDocsAndPositionsEnum_init(OrgApacheLuceneIndexDocsAndPositionsEnum *self);
 
@@ -78,8 +141,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocsAndPositionsEnum)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper_) && (OrgApacheLuceneIndexDocsAndPositionsEnum_INCLUDE_ALL || OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper_INCLUDE)
-#define _OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper_
+#if !defined (OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocsAndPositionsEnum || defined(INCLUDE_OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper))
+#define OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper_
 
 @class OrgApacheLuceneIndexPostingsEnum;
 @class OrgApacheLuceneUtilAttributeSource;
@@ -130,8 +193,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositions
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper *new_OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper_initWithOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneUtilBits_(OrgApacheLuceneIndexPostingsEnum *inArg, id<OrgApacheLuceneUtilBits> liveDocs) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper *create_OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper_initWithOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneUtilBits_(OrgApacheLuceneIndexPostingsEnum *inArg, id<OrgApacheLuceneUtilBits> liveDocs);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexDocsAndPositionsEnum_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexDocsAndPositionsEnum")

@@ -5,29 +5,77 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory_RESTRICT
-#define OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory 0
 #else
-#define OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory
 
-#if !defined (_OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory_) && (OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory_
+#if !defined (OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory || defined(INCLUDE_OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory))
+#define OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenizerFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenizerFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenizerFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenizerFactory 1
 #include "org/apache/lucene/analysis/util/TokenizerFactory.h"
 
 @class OrgApacheLuceneAnalysisTokenizer;
 @class OrgApacheLuceneUtilAttributeFactory;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>PathHierarchyTokenizer</code>.
+ <p>
+ This factory is typically configured for use only in the <code>index</code> 
+ Analyzer (or only in the <code>query</code> Analyzer, but never both).
+ </p>
+ <p>
+ For example, in the configuration below a query for 
+ <code>Books/NonFic</code> will match documents indexed with values like 
+ <code>Books/NonFic</code>, <code>Books/NonFic/Law</code>, 
+ <code>Books/NonFic/Science/Physics</code>, etc. But it will not match 
+ documents indexed with values like <code>Books</code>, or 
+ <code>Books/Fic</code>...
+ </p>
+ <pre class="prettyprint">
+ &lt;fieldType name="descendent_path" class="solr.TextField"&gt;
+ &lt;analyzer type="index"&gt;
+ &lt;tokenizer class="solr.PathHierarchyTokenizerFactory" delimiter="/" /&gt;
+ &lt;/analyzer&gt;
+ &lt;analyzer type="query"&gt;
+ &lt;tokenizer class="solr.KeywordTokenizerFactory" /&gt;
+ &lt;/analyzer&gt;
+ &lt;/fieldType&gt;
+ 
+@endcode
+ <p>
+ In this example however we see the oposite configuration, so that a query 
+ for <code>Books/NonFic/Science/Physics</code> would match documents 
+ containing <code>Books/NonFic</code>, <code>Books/NonFic/Science</code>, 
+ or <code>Books/NonFic/Science/Physics</code>, but not 
+ <code>Books/NonFic/Science/Physics/Theory</code> or 
+ <code>Books/NonFic/Law</code>.
+ </p>
+ <pre class="prettyprint">
+ &lt;fieldType name="descendent_path" class="solr.TextField"&gt;
+ &lt;analyzer type="index"&gt;
+ &lt;tokenizer class="solr.KeywordTokenizerFactory" /&gt;
+ &lt;/analyzer&gt;
+ &lt;analyzer type="query"&gt;
+ &lt;tokenizer class="solr.PathHierarchyTokenizerFactory" delimiter="/" /&gt;
+ &lt;/analyzer&gt;
+ &lt;/fieldType&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory : OrgApacheLuceneAnalysisUtilTokenizerFactory
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new PathHierarchyTokenizerFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenizer *)createWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
@@ -40,8 +88,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory_
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory *new_OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory *create_OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory")

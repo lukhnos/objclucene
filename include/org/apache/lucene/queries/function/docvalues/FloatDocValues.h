@@ -5,24 +5,28 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues_RESTRICT
-#define OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues 0
 #else
-#define OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues
 
-#if !defined (_OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues_) && (OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues_
+#if !defined (OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues || defined(INCLUDE_OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues))
+#define OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues_
 
-#define OrgApacheLuceneQueriesFunctionFunctionValues_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionFunctionValues_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionFunctionValues 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionFunctionValues 1
 #include "org/apache/lucene/queries/function/FunctionValues.h"
 
 @class OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller;
 @class OrgApacheLuceneQueriesFunctionValueSource;
 
+/*!
+ @brief Abstract <code>FunctionValues</code> implementation which supports retrieving float values.
+ Implementations can control how the float values are loaded through <code>floatVal(int)</code>}
+ */
 @interface OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues : OrgApacheLuceneQueriesFunctionFunctionValues {
  @public
   OrgApacheLuceneQueriesFunctionValueSource *vs_;
@@ -64,4 +68,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues")

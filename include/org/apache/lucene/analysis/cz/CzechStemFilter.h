@@ -5,23 +5,34 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCzCzechStemFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCzCzechStemFilter_RESTRICT
-#define OrgApacheLuceneAnalysisCzCzechStemFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCzCzechStemFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCzCzechStemFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCzCzechStemFilter 0
 #else
-#define OrgApacheLuceneAnalysisCzCzechStemFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCzCzechStemFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisCzCzechStemFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCzCzechStemFilter
 
-#if !defined (_OrgApacheLuceneAnalysisCzCzechStemFilter_) && (OrgApacheLuceneAnalysisCzCzechStemFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisCzCzechStemFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisCzCzechStemFilter_
+#if !defined (OrgApacheLuceneAnalysisCzCzechStemFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCzCzechStemFilter || defined(INCLUDE_OrgApacheLuceneAnalysisCzCzechStemFilter))
+#define OrgApacheLuceneAnalysisCzCzechStemFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief A <code>TokenFilter</code> that applies <code>CzechStemmer</code> to stem Czech words.
+ <p>
+ To prevent terms from being stemmed use an instance of
+ <code>SetKeywordMarkerFilter</code> or a custom <code>TokenFilter</code> that sets
+ the <code>KeywordAttribute</code> before this <code>TokenStream</code>.
+ </p>
+ <p><b>NOTE</b>: Input is expected to be in lowercase, 
+ but with diacritical marks</p>
+ - seealso: SetKeywordMarkerFilter
+ */
 @interface OrgApacheLuceneAnalysisCzCzechStemFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
@@ -38,8 +49,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCzCzechStemFilter_initWithOrgApach
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCzCzechStemFilter *new_OrgApacheLuceneAnalysisCzCzechStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCzCzechStemFilter *create_OrgApacheLuceneAnalysisCzCzechStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCzCzechStemFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCzCzechStemFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCzCzechStemFilter")

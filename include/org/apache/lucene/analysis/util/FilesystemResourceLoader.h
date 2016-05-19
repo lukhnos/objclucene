@@ -5,31 +5,54 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_RESTRICT
-#define OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilFilesystemResourceLoader")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisUtilFilesystemResourceLoader
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisUtilFilesystemResourceLoader 0
 #else
-#define OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisUtilFilesystemResourceLoader 1
 #endif
-#undef OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisUtilFilesystemResourceLoader
 
-#if !defined (_OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_) && (OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_INCLUDE_ALL || OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_INCLUDE)
-#define _OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_
+#if !defined (OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisUtilFilesystemResourceLoader || defined(INCLUDE_OrgApacheLuceneAnalysisUtilFilesystemResourceLoader))
+#define OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_
 
-#define OrgApacheLuceneAnalysisUtilResourceLoader_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilResourceLoader_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilResourceLoader 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilResourceLoader 1
 #include "org/apache/lucene/analysis/util/ResourceLoader.h"
 
 @class IOSClass;
 @class JavaIoInputStream;
 @class OrgLukhnosPortmobileFilePath;
 
+/*!
+ @brief Simple <code>ResourceLoader</code> that opens resource files
+ from the local file system, optionally resolving against
+ a base directory.
+ <p>This loader wraps a delegate <code>ResourceLoader</code>
+ that is used to resolve all files, the current base directory
+ does not contain. <code>newInstance</code> is always resolved
+ against the delegate, as a <code>ClassLoader</code> is needed.
+ <p>You can chain several <code>FilesystemResourceLoader</code>s
+ to allow lookup of files in more than one base directory.
+ */
 @interface OrgApacheLuceneAnalysisUtilFilesystemResourceLoader : NSObject < OrgApacheLuceneAnalysisUtilResourceLoader >
 
 #pragma mark Public
 
+/*!
+ @brief Creates a resource loader that resolves resources against the given
+ base directory (may be <code>null</code> to refer to CWD).
+ Files not found in file system and class lookups are delegated to context
+ classloader.
+ */
 - (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)baseDirectory;
 
+/*!
+ @brief Creates a resource loader that resolves resources against the given
+ base directory (may be <code>null</code> to refer to CWD).
+ Files not found in file system and class lookups are delegated
+ to the given delegate <code>ResourceLoader</code>.
+ */
 - (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)baseDirectory
        withOrgApacheLuceneAnalysisUtilResourceLoader:(id<OrgApacheLuceneAnalysisUtilResourceLoader>)delegate;
 
@@ -49,12 +72,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_initW
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilFilesystemResourceLoader *new_OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *baseDirectory) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilFilesystemResourceLoader *create_OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *baseDirectory);
+
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneAnalysisUtilResourceLoader_(OrgApacheLuceneAnalysisUtilFilesystemResourceLoader *self, OrgLukhnosPortmobileFilePath *baseDirectory, id<OrgApacheLuceneAnalysisUtilResourceLoader> delegate);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilFilesystemResourceLoader *new_OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneAnalysisUtilResourceLoader_(OrgLukhnosPortmobileFilePath *baseDirectory, id<OrgApacheLuceneAnalysisUtilResourceLoader> delegate) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilFilesystemResourceLoader *create_OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneAnalysisUtilResourceLoader_(OrgLukhnosPortmobileFilePath *baseDirectory, id<OrgApacheLuceneAnalysisUtilResourceLoader> delegate);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilFilesystemResourceLoader)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilFilesystemResourceLoader")

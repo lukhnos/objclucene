@@ -5,26 +5,26 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_) && (OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_
+#if !defined (OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser))
+#define OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_
 
-#define OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser_RESTRICT 1
-#define OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser 1
+#define INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser 1
 #include "org/apache/lucene/queryparser/flexible/core/parser/SyntaxParser.h"
 
-#define OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_RESTRICT 1
-#define OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants 1
+#define INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants 1
 #include "org/apache/lucene/queryparser/flexible/standard/parser/StandardSyntaxParserConstants.h"
 
-@class OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_ModifierEnum;
+@class OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier;
 @class OrgApacheLuceneQueryparserFlexibleStandardParserParseException;
 @class OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager;
 @class OrgApacheLuceneQueryparserFlexibleStandardParserToken;
@@ -32,10 +32,22 @@
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 @protocol OrgApacheLuceneQueryparserFlexibleStandardParserCharStream;
 
+/*!
+ @brief Parser for the standard Lucene syntax
+ */
 @interface OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser : NSObject < OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser, OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants > {
  @public
+  /*!
+   @brief Generated Token Manager.
+   */
   OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager *token_source_;
+  /*!
+   @brief Current token.
+   */
   OrgApacheLuceneQueryparserFlexibleStandardParserToken *token_;
+  /*!
+   @brief Next token.
+   */
   OrgApacheLuceneQueryparserFlexibleStandardParserToken *jj_nt_;
 }
 
@@ -43,37 +55,69 @@
 
 - (instancetype)init;
 
+/*!
+ @brief Constructor with user supplied CharStream.
+ */
 - (instancetype)initWithOrgApacheLuceneQueryparserFlexibleStandardParserCharStream:(id<OrgApacheLuceneQueryparserFlexibleStandardParserCharStream>)stream;
 
+/*!
+ @brief Constructor with generated Token Manager.
+ */
 - (instancetype)initWithOrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager:(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager *)tm;
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)ClauseWithJavaLangCharSequence:(id<JavaLangCharSequence>)field;
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)ConjQueryWithJavaLangCharSequence:(id<JavaLangCharSequence>)field;
 
+/*!
+ @brief Disable tracing.
+ */
 - (void)disable_tracing;
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)DisjQueryWithJavaLangCharSequence:(id<JavaLangCharSequence>)field;
 
+/*!
+ @brief Enable tracing.
+ */
 - (void)enable_tracing;
 
+/*!
+ @brief Generate ParseException.
+ */
 - (OrgApacheLuceneQueryparserFlexibleStandardParserParseException *)generateParseException;
 
+/*!
+ @brief Get the next Token.
+ */
 - (OrgApacheLuceneQueryparserFlexibleStandardParserToken *)getNextToken;
 
+/*!
+ @brief Get the specific Token.
+ */
 - (OrgApacheLuceneQueryparserFlexibleStandardParserToken *)getTokenWithInt:(jint)index;
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)ModClauseWithJavaLangCharSequence:(id<JavaLangCharSequence>)field;
 
-- (OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_ModifierEnum *)Modifiers;
+- (OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier *)Modifiers;
 
+/*!
+ @brief Parses a query string, returning a <code>org.apache.lucene.queryparser.flexible.core.nodes.QueryNode</code>.
+ @param query  the query string to be parsed.
+ @throws ParseException if the parsing fails
+ */
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)parseWithJavaLangCharSequence:(id<JavaLangCharSequence>)query
                                                                  withJavaLangCharSequence:(id<JavaLangCharSequence>)field;
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)QueryWithJavaLangCharSequence:(id<JavaLangCharSequence>)field;
 
+/*!
+ @brief Reinitialise.
+ */
 - (void)ReInitWithOrgApacheLuceneQueryparserFlexibleStandardParserCharStream:(id<OrgApacheLuceneQueryparserFlexibleStandardParserCharStream>)stream;
 
+/*!
+ @brief Reinitialise.
+ */
 - (void)ReInitWithOrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager:(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager *)tm;
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)TermWithJavaLangCharSequence:(id<JavaLangCharSequence>)field;
@@ -92,20 +136,26 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardParserStandardS
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser *new_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser *create_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_init();
+
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_initWithOrgApacheLuceneQueryparserFlexibleStandardParserCharStream_(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser *self, id<OrgApacheLuceneQueryparserFlexibleStandardParserCharStream> stream);
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser *new_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_initWithOrgApacheLuceneQueryparserFlexibleStandardParserCharStream_(id<OrgApacheLuceneQueryparserFlexibleStandardParserCharStream> stream) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser *create_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_initWithOrgApacheLuceneQueryparserFlexibleStandardParserCharStream_(id<OrgApacheLuceneQueryparserFlexibleStandardParserCharStream> stream);
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_initWithOrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser *self, OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager *tm);
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser *new_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_initWithOrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager *tm) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser *create_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_initWithOrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager *tm);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser)
 
 #endif
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_JJCalls_) && (OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_JJCalls_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_JJCalls_
+#if !defined (OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_JJCalls_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_JJCalls))
+#define OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_JJCalls_
 
 @class OrgApacheLuceneQueryparserFlexibleStandardParserToken;
 
@@ -132,8 +182,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardParserStandardS
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_JJCalls *new_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_JJCalls_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_JJCalls *create_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_JJCalls_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_JJCalls)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser")

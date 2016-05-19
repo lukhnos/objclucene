@@ -3,9 +3,7 @@
 //  source: ./sandbox/src/java/org/apache/lucene/rangetree/SliceReader.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/rangetree/SliceReader.h"
 
 @interface OrgApacheLuceneRangetreeSliceReader : NSObject

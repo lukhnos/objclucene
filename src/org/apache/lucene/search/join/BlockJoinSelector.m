@@ -32,9 +32,9 @@ __attribute__((unused)) static void OrgApacheLuceneSearchJoinBlockJoinSelector_i
 
 __attribute__((unused)) static OrgApacheLuceneSearchJoinBlockJoinSelector *new_OrgApacheLuceneSearchJoinBlockJoinSelector_init() NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static void OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_initWithNSString_withInt_(OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum *self, NSString *__name, jint __ordinal);
+__attribute__((unused)) static OrgApacheLuceneSearchJoinBlockJoinSelector *create_OrgApacheLuceneSearchJoinBlockJoinSelector_init();
 
-__attribute__((unused)) static OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum *new_OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
+__attribute__((unused)) static void OrgApacheLuceneSearchJoinBlockJoinSelector_Type_initWithNSString_withInt_(OrgApacheLuceneSearchJoinBlockJoinSelector_Type *self, NSString *__name, jint __ordinal);
 
 @interface OrgApacheLuceneSearchJoinBlockJoinSelector_$1 : NSObject < OrgApacheLuceneUtilBits > {
  @public
@@ -63,6 +63,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchJoinBlockJoinSelector_$
 
 __attribute__((unused)) static OrgApacheLuceneSearchJoinBlockJoinSelector_$1 *new_OrgApacheLuceneSearchJoinBlockJoinSelector_$1_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBits_(OrgApacheLuceneUtilBitSet *capture$0, OrgApacheLuceneUtilBitSet *capture$1, id<OrgApacheLuceneUtilBits> capture$2) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchJoinBlockJoinSelector_$1 *create_OrgApacheLuceneSearchJoinBlockJoinSelector_$1_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBits_(OrgApacheLuceneUtilBitSet *capture$0, OrgApacheLuceneUtilBitSet *capture$1, id<OrgApacheLuceneUtilBits> capture$2);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinBlockJoinSelector_$1)
 
 @interface OrgApacheLuceneSearchJoinBlockJoinSelector_$2 : OrgApacheLuceneIndexSortedDocValues {
@@ -70,7 +72,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinBlockJoinSelector_$1)
   OrgApacheLuceneUtilBitSet *val$parents_;
   OrgApacheLuceneUtilBitSet *val$children_;
   OrgApacheLuceneIndexSortedDocValues *val$values_;
-  OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum *val$selection_;
+  OrgApacheLuceneSearchJoinBlockJoinSelector_Type *val$selection_;
 }
 
 - (jint)getOrdWithInt:(jint)docID;
@@ -82,7 +84,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinBlockJoinSelector_$1)
 - (instancetype)initWithOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)capture$0
                     withOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)capture$1
           withOrgApacheLuceneIndexSortedDocValues:(OrgApacheLuceneIndexSortedDocValues *)capture$2
-withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum:(OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum *)capture$3;
+withOrgApacheLuceneSearchJoinBlockJoinSelector_Type:(OrgApacheLuceneSearchJoinBlockJoinSelector_Type *)capture$3;
 
 @end
 
@@ -91,11 +93,13 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinBlockJoinSelector_$2)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinBlockJoinSelector_$2, val$parents_, OrgApacheLuceneUtilBitSet *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinBlockJoinSelector_$2, val$children_, OrgApacheLuceneUtilBitSet *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinBlockJoinSelector_$2, val$values_, OrgApacheLuceneIndexSortedDocValues *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinBlockJoinSelector_$2, val$selection_, OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinBlockJoinSelector_$2, val$selection_, OrgApacheLuceneSearchJoinBlockJoinSelector_Type *)
 
-__attribute__((unused)) static void OrgApacheLuceneSearchJoinBlockJoinSelector_$2_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_(OrgApacheLuceneSearchJoinBlockJoinSelector_$2 *self, OrgApacheLuceneUtilBitSet *capture$0, OrgApacheLuceneUtilBitSet *capture$1, OrgApacheLuceneIndexSortedDocValues *capture$2, OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum *capture$3);
+__attribute__((unused)) static void OrgApacheLuceneSearchJoinBlockJoinSelector_$2_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneSearchJoinBlockJoinSelector_Type_(OrgApacheLuceneSearchJoinBlockJoinSelector_$2 *self, OrgApacheLuceneUtilBitSet *capture$0, OrgApacheLuceneUtilBitSet *capture$1, OrgApacheLuceneIndexSortedDocValues *capture$2, OrgApacheLuceneSearchJoinBlockJoinSelector_Type *capture$3);
 
-__attribute__((unused)) static OrgApacheLuceneSearchJoinBlockJoinSelector_$2 *new_OrgApacheLuceneSearchJoinBlockJoinSelector_$2_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_(OrgApacheLuceneUtilBitSet *capture$0, OrgApacheLuceneUtilBitSet *capture$1, OrgApacheLuceneIndexSortedDocValues *capture$2, OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum *capture$3) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchJoinBlockJoinSelector_$2 *new_OrgApacheLuceneSearchJoinBlockJoinSelector_$2_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneSearchJoinBlockJoinSelector_Type_(OrgApacheLuceneUtilBitSet *capture$0, OrgApacheLuceneUtilBitSet *capture$1, OrgApacheLuceneIndexSortedDocValues *capture$2, OrgApacheLuceneSearchJoinBlockJoinSelector_Type *capture$3) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchJoinBlockJoinSelector_$2 *create_OrgApacheLuceneSearchJoinBlockJoinSelector_$2_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneSearchJoinBlockJoinSelector_Type_(OrgApacheLuceneUtilBitSet *capture$0, OrgApacheLuceneUtilBitSet *capture$1, OrgApacheLuceneIndexSortedDocValues *capture$2, OrgApacheLuceneSearchJoinBlockJoinSelector_Type *capture$3);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinBlockJoinSelector_$2)
 
@@ -105,7 +109,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinBlockJoinSelector_$2)
   OrgApacheLuceneUtilBitSet *val$children_;
   OrgApacheLuceneIndexNumericDocValues *val$values_;
   id<OrgApacheLuceneUtilBits> val$docsWithValue_;
-  OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum *val$selection_;
+  OrgApacheLuceneSearchJoinBlockJoinSelector_Type *val$selection_;
 }
 
 - (jlong)getWithInt:(jint)docID;
@@ -114,7 +118,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinBlockJoinSelector_$2)
                     withOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)capture$1
          withOrgApacheLuceneIndexNumericDocValues:(OrgApacheLuceneIndexNumericDocValues *)capture$2
                       withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)capture$3
-withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum:(OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum *)capture$4;
+withOrgApacheLuceneSearchJoinBlockJoinSelector_Type:(OrgApacheLuceneSearchJoinBlockJoinSelector_Type *)capture$4;
 
 @end
 
@@ -124,11 +128,13 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinBlockJoinSelector_$3, val$parents_,
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinBlockJoinSelector_$3, val$children_, OrgApacheLuceneUtilBitSet *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinBlockJoinSelector_$3, val$values_, OrgApacheLuceneIndexNumericDocValues *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinBlockJoinSelector_$3, val$docsWithValue_, id<OrgApacheLuceneUtilBits>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinBlockJoinSelector_$3, val$selection_, OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinBlockJoinSelector_$3, val$selection_, OrgApacheLuceneSearchJoinBlockJoinSelector_Type *)
 
-__attribute__((unused)) static void OrgApacheLuceneSearchJoinBlockJoinSelector_$3_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_(OrgApacheLuceneSearchJoinBlockJoinSelector_$3 *self, OrgApacheLuceneUtilBitSet *capture$0, OrgApacheLuceneUtilBitSet *capture$1, OrgApacheLuceneIndexNumericDocValues *capture$2, id<OrgApacheLuceneUtilBits> capture$3, OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum *capture$4);
+__attribute__((unused)) static void OrgApacheLuceneSearchJoinBlockJoinSelector_$3_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchJoinBlockJoinSelector_Type_(OrgApacheLuceneSearchJoinBlockJoinSelector_$3 *self, OrgApacheLuceneUtilBitSet *capture$0, OrgApacheLuceneUtilBitSet *capture$1, OrgApacheLuceneIndexNumericDocValues *capture$2, id<OrgApacheLuceneUtilBits> capture$3, OrgApacheLuceneSearchJoinBlockJoinSelector_Type *capture$4);
 
-__attribute__((unused)) static OrgApacheLuceneSearchJoinBlockJoinSelector_$3 *new_OrgApacheLuceneSearchJoinBlockJoinSelector_$3_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_(OrgApacheLuceneUtilBitSet *capture$0, OrgApacheLuceneUtilBitSet *capture$1, OrgApacheLuceneIndexNumericDocValues *capture$2, id<OrgApacheLuceneUtilBits> capture$3, OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum *capture$4) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchJoinBlockJoinSelector_$3 *new_OrgApacheLuceneSearchJoinBlockJoinSelector_$3_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchJoinBlockJoinSelector_Type_(OrgApacheLuceneUtilBitSet *capture$0, OrgApacheLuceneUtilBitSet *capture$1, OrgApacheLuceneIndexNumericDocValues *capture$2, id<OrgApacheLuceneUtilBits> capture$3, OrgApacheLuceneSearchJoinBlockJoinSelector_Type *capture$4) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchJoinBlockJoinSelector_$3 *create_OrgApacheLuceneSearchJoinBlockJoinSelector_$3_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchJoinBlockJoinSelector_Type_(OrgApacheLuceneUtilBitSet *capture$0, OrgApacheLuceneUtilBitSet *capture$1, OrgApacheLuceneIndexNumericDocValues *capture$2, id<OrgApacheLuceneUtilBits> capture$3, OrgApacheLuceneSearchJoinBlockJoinSelector_Type *capture$4);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinBlockJoinSelector_$3)
 
@@ -148,42 +154,42 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (OrgApacheLuceneIndexSortedDocValues *)wrapWithOrgApacheLuceneIndexSortedSetDocValues:(OrgApacheLuceneIndexSortedSetDocValues *)sortedSet
-                                withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum:(OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum *)selection
+                                    withOrgApacheLuceneSearchJoinBlockJoinSelector_Type:(OrgApacheLuceneSearchJoinBlockJoinSelector_Type *)selection
                                                           withOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)parents
                                                           withOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)children {
-  return OrgApacheLuceneSearchJoinBlockJoinSelector_wrapWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_(sortedSet, selection, parents, children);
+  return OrgApacheLuceneSearchJoinBlockJoinSelector_wrapWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneSearchJoinBlockJoinSelector_Type_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_(sortedSet, selection, parents, children);
 }
 
 + (OrgApacheLuceneIndexSortedDocValues *)wrapWithOrgApacheLuceneIndexSortedDocValues:(OrgApacheLuceneIndexSortedDocValues *)values
-                             withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum:(OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum *)selection
+                                 withOrgApacheLuceneSearchJoinBlockJoinSelector_Type:(OrgApacheLuceneSearchJoinBlockJoinSelector_Type *)selection
                                                        withOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)parents
                                                        withOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)children {
-  return OrgApacheLuceneSearchJoinBlockJoinSelector_wrapWithOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_(values, selection, parents, children);
+  return OrgApacheLuceneSearchJoinBlockJoinSelector_wrapWithOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneSearchJoinBlockJoinSelector_Type_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_(values, selection, parents, children);
 }
 
 + (OrgApacheLuceneIndexNumericDocValues *)wrapWithOrgApacheLuceneIndexSortedNumericDocValues:(OrgApacheLuceneIndexSortedNumericDocValues *)sortedNumerics
-                                     withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum:(OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum *)selection
+                                         withOrgApacheLuceneSearchJoinBlockJoinSelector_Type:(OrgApacheLuceneSearchJoinBlockJoinSelector_Type *)selection
                                                                withOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)parents
                                                                withOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)children {
-  return OrgApacheLuceneSearchJoinBlockJoinSelector_wrapWithOrgApacheLuceneIndexSortedNumericDocValues_withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_(sortedNumerics, selection, parents, children);
+  return OrgApacheLuceneSearchJoinBlockJoinSelector_wrapWithOrgApacheLuceneIndexSortedNumericDocValues_withOrgApacheLuceneSearchJoinBlockJoinSelector_Type_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_(sortedNumerics, selection, parents, children);
 }
 
 + (OrgApacheLuceneIndexNumericDocValues *)wrapWithOrgApacheLuceneIndexNumericDocValues:(OrgApacheLuceneIndexNumericDocValues *)values
                                                            withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)docsWithValue
-                               withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum:(OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum *)selection
+                                   withOrgApacheLuceneSearchJoinBlockJoinSelector_Type:(OrgApacheLuceneSearchJoinBlockJoinSelector_Type *)selection
                                                          withOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)parents
                                                          withOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)children {
-  return OrgApacheLuceneSearchJoinBlockJoinSelector_wrapWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_(values, docsWithValue, selection, parents, children);
+  return OrgApacheLuceneSearchJoinBlockJoinSelector_wrapWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchJoinBlockJoinSelector_Type_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_(values, docsWithValue, selection, parents, children);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "BlockJoinSelector", NULL, 0x2, NULL, NULL },
     { "wrapWithOrgApacheLuceneUtilBits:withOrgApacheLuceneUtilBitSet:withOrgApacheLuceneUtilBitSet:", "wrap", "Lorg.apache.lucene.util.Bits;", 0x9, NULL, NULL },
-    { "wrapWithOrgApacheLuceneIndexSortedSetDocValues:withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum:withOrgApacheLuceneUtilBitSet:withOrgApacheLuceneUtilBitSet:", "wrap", "Lorg.apache.lucene.index.SortedDocValues;", 0x9, NULL, NULL },
-    { "wrapWithOrgApacheLuceneIndexSortedDocValues:withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum:withOrgApacheLuceneUtilBitSet:withOrgApacheLuceneUtilBitSet:", "wrap", "Lorg.apache.lucene.index.SortedDocValues;", 0x9, NULL, NULL },
-    { "wrapWithOrgApacheLuceneIndexSortedNumericDocValues:withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum:withOrgApacheLuceneUtilBitSet:withOrgApacheLuceneUtilBitSet:", "wrap", "Lorg.apache.lucene.index.NumericDocValues;", 0x9, NULL, NULL },
-    { "wrapWithOrgApacheLuceneIndexNumericDocValues:withOrgApacheLuceneUtilBits:withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum:withOrgApacheLuceneUtilBitSet:withOrgApacheLuceneUtilBitSet:", "wrap", "Lorg.apache.lucene.index.NumericDocValues;", 0x9, NULL, NULL },
+    { "wrapWithOrgApacheLuceneIndexSortedSetDocValues:withOrgApacheLuceneSearchJoinBlockJoinSelector_Type:withOrgApacheLuceneUtilBitSet:withOrgApacheLuceneUtilBitSet:", "wrap", "Lorg.apache.lucene.index.SortedDocValues;", 0x9, NULL, NULL },
+    { "wrapWithOrgApacheLuceneIndexSortedDocValues:withOrgApacheLuceneSearchJoinBlockJoinSelector_Type:withOrgApacheLuceneUtilBitSet:withOrgApacheLuceneUtilBitSet:", "wrap", "Lorg.apache.lucene.index.SortedDocValues;", 0x9, NULL, NULL },
+    { "wrapWithOrgApacheLuceneIndexSortedNumericDocValues:withOrgApacheLuceneSearchJoinBlockJoinSelector_Type:withOrgApacheLuceneUtilBitSet:withOrgApacheLuceneUtilBitSet:", "wrap", "Lorg.apache.lucene.index.NumericDocValues;", 0x9, NULL, NULL },
+    { "wrapWithOrgApacheLuceneIndexNumericDocValues:withOrgApacheLuceneUtilBits:withOrgApacheLuceneSearchJoinBlockJoinSelector_Type:withOrgApacheLuceneUtilBitSet:withOrgApacheLuceneUtilBitSet:", "wrap", "Lorg.apache.lucene.index.NumericDocValues;", 0x9, NULL, NULL },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.join.BlockJoinSelector$Type;"};
   static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinBlockJoinSelector = { 2, "BlockJoinSelector", "org.apache.lucene.search.join", NULL, 0x1, 6, methods, 0, NULL, 0, NULL, 1, inner_classes, NULL, NULL };
@@ -197,89 +203,131 @@ void OrgApacheLuceneSearchJoinBlockJoinSelector_init(OrgApacheLuceneSearchJoinBl
 }
 
 OrgApacheLuceneSearchJoinBlockJoinSelector *new_OrgApacheLuceneSearchJoinBlockJoinSelector_init() {
-  OrgApacheLuceneSearchJoinBlockJoinSelector *self = [OrgApacheLuceneSearchJoinBlockJoinSelector alloc];
-  OrgApacheLuceneSearchJoinBlockJoinSelector_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinBlockJoinSelector, init)
+}
+
+OrgApacheLuceneSearchJoinBlockJoinSelector *create_OrgApacheLuceneSearchJoinBlockJoinSelector_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinBlockJoinSelector, init)
 }
 
 id<OrgApacheLuceneUtilBits> OrgApacheLuceneSearchJoinBlockJoinSelector_wrapWithOrgApacheLuceneUtilBits_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_(id<OrgApacheLuceneUtilBits> docsWithValue, OrgApacheLuceneUtilBitSet *parents, OrgApacheLuceneUtilBitSet *children) {
   OrgApacheLuceneSearchJoinBlockJoinSelector_initialize();
-  return [new_OrgApacheLuceneSearchJoinBlockJoinSelector_$1_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBits_(parents, children, docsWithValue) autorelease];
+  return create_OrgApacheLuceneSearchJoinBlockJoinSelector_$1_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBits_(parents, children, docsWithValue);
 }
 
-OrgApacheLuceneIndexSortedDocValues *OrgApacheLuceneSearchJoinBlockJoinSelector_wrapWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_(OrgApacheLuceneIndexSortedSetDocValues *sortedSet, OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum *selection, OrgApacheLuceneUtilBitSet *parents, OrgApacheLuceneUtilBitSet *children) {
+OrgApacheLuceneIndexSortedDocValues *OrgApacheLuceneSearchJoinBlockJoinSelector_wrapWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneSearchJoinBlockJoinSelector_Type_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_(OrgApacheLuceneIndexSortedSetDocValues *sortedSet, OrgApacheLuceneSearchJoinBlockJoinSelector_Type *selection, OrgApacheLuceneUtilBitSet *parents, OrgApacheLuceneUtilBitSet *children) {
   OrgApacheLuceneSearchJoinBlockJoinSelector_initialize();
   OrgApacheLuceneIndexSortedDocValues *values;
   switch ([selection ordinal]) {
-    case OrgApacheLuceneSearchJoinBlockJoinSelector_Type_MIN:
-    values = OrgApacheLuceneSearchSortedSetSelector_wrapWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneSearchSortedSetSelector_TypeEnum_(sortedSet, JreLoadStatic(OrgApacheLuceneSearchSortedSetSelector_TypeEnum, MIN));
+    case OrgApacheLuceneSearchJoinBlockJoinSelector_Type_Enum_MIN:
+    values = OrgApacheLuceneSearchSortedSetSelector_wrapWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneSearchSortedSetSelector_Type_(sortedSet, JreLoadEnum(OrgApacheLuceneSearchSortedSetSelector_Type, MIN));
     break;
-    case OrgApacheLuceneSearchJoinBlockJoinSelector_Type_MAX:
-    values = OrgApacheLuceneSearchSortedSetSelector_wrapWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneSearchSortedSetSelector_TypeEnum_(sortedSet, JreLoadStatic(OrgApacheLuceneSearchSortedSetSelector_TypeEnum, MAX));
+    case OrgApacheLuceneSearchJoinBlockJoinSelector_Type_Enum_MAX:
+    values = OrgApacheLuceneSearchSortedSetSelector_wrapWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneSearchSortedSetSelector_Type_(sortedSet, JreLoadEnum(OrgApacheLuceneSearchSortedSetSelector_Type, MAX));
     break;
     default:
-    @throw [new_JavaLangAssertionError_init() autorelease];
+    @throw create_JavaLangAssertionError_init();
   }
-  return OrgApacheLuceneSearchJoinBlockJoinSelector_wrapWithOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_(values, selection, parents, children);
+  return OrgApacheLuceneSearchJoinBlockJoinSelector_wrapWithOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneSearchJoinBlockJoinSelector_Type_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_(values, selection, parents, children);
 }
 
-OrgApacheLuceneIndexSortedDocValues *OrgApacheLuceneSearchJoinBlockJoinSelector_wrapWithOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_(OrgApacheLuceneIndexSortedDocValues *values, OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum *selection, OrgApacheLuceneUtilBitSet *parents, OrgApacheLuceneUtilBitSet *children) {
+OrgApacheLuceneIndexSortedDocValues *OrgApacheLuceneSearchJoinBlockJoinSelector_wrapWithOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneSearchJoinBlockJoinSelector_Type_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_(OrgApacheLuceneIndexSortedDocValues *values, OrgApacheLuceneSearchJoinBlockJoinSelector_Type *selection, OrgApacheLuceneUtilBitSet *parents, OrgApacheLuceneUtilBitSet *children) {
   OrgApacheLuceneSearchJoinBlockJoinSelector_initialize();
-  return [new_OrgApacheLuceneSearchJoinBlockJoinSelector_$2_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_(parents, children, values, selection) autorelease];
+  return create_OrgApacheLuceneSearchJoinBlockJoinSelector_$2_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneSearchJoinBlockJoinSelector_Type_(parents, children, values, selection);
 }
 
-OrgApacheLuceneIndexNumericDocValues *OrgApacheLuceneSearchJoinBlockJoinSelector_wrapWithOrgApacheLuceneIndexSortedNumericDocValues_withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_(OrgApacheLuceneIndexSortedNumericDocValues *sortedNumerics, OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum *selection, OrgApacheLuceneUtilBitSet *parents, OrgApacheLuceneUtilBitSet *children) {
+OrgApacheLuceneIndexNumericDocValues *OrgApacheLuceneSearchJoinBlockJoinSelector_wrapWithOrgApacheLuceneIndexSortedNumericDocValues_withOrgApacheLuceneSearchJoinBlockJoinSelector_Type_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_(OrgApacheLuceneIndexSortedNumericDocValues *sortedNumerics, OrgApacheLuceneSearchJoinBlockJoinSelector_Type *selection, OrgApacheLuceneUtilBitSet *parents, OrgApacheLuceneUtilBitSet *children) {
   OrgApacheLuceneSearchJoinBlockJoinSelector_initialize();
   OrgApacheLuceneIndexNumericDocValues *values;
   switch ([selection ordinal]) {
-    case OrgApacheLuceneSearchJoinBlockJoinSelector_Type_MIN:
-    values = OrgApacheLuceneSearchSortedNumericSelector_wrapWithOrgApacheLuceneIndexSortedNumericDocValues_withOrgApacheLuceneSearchSortedNumericSelector_TypeEnum_withOrgApacheLuceneSearchSortField_TypeEnum_(sortedNumerics, JreLoadStatic(OrgApacheLuceneSearchSortedNumericSelector_TypeEnum, MIN), JreLoadStatic(OrgApacheLuceneSearchSortField_TypeEnum, LONG));
+    case OrgApacheLuceneSearchJoinBlockJoinSelector_Type_Enum_MIN:
+    values = OrgApacheLuceneSearchSortedNumericSelector_wrapWithOrgApacheLuceneIndexSortedNumericDocValues_withOrgApacheLuceneSearchSortedNumericSelector_Type_withOrgApacheLuceneSearchSortField_Type_(sortedNumerics, JreLoadEnum(OrgApacheLuceneSearchSortedNumericSelector_Type, MIN), JreLoadEnum(OrgApacheLuceneSearchSortField_Type, LONG));
     break;
-    case OrgApacheLuceneSearchJoinBlockJoinSelector_Type_MAX:
-    values = OrgApacheLuceneSearchSortedNumericSelector_wrapWithOrgApacheLuceneIndexSortedNumericDocValues_withOrgApacheLuceneSearchSortedNumericSelector_TypeEnum_withOrgApacheLuceneSearchSortField_TypeEnum_(sortedNumerics, JreLoadStatic(OrgApacheLuceneSearchSortedNumericSelector_TypeEnum, MAX), JreLoadStatic(OrgApacheLuceneSearchSortField_TypeEnum, LONG));
+    case OrgApacheLuceneSearchJoinBlockJoinSelector_Type_Enum_MAX:
+    values = OrgApacheLuceneSearchSortedNumericSelector_wrapWithOrgApacheLuceneIndexSortedNumericDocValues_withOrgApacheLuceneSearchSortedNumericSelector_Type_withOrgApacheLuceneSearchSortField_Type_(sortedNumerics, JreLoadEnum(OrgApacheLuceneSearchSortedNumericSelector_Type, MAX), JreLoadEnum(OrgApacheLuceneSearchSortField_Type, LONG));
     break;
     default:
-    @throw [new_JavaLangAssertionError_init() autorelease];
+    @throw create_JavaLangAssertionError_init();
   }
-  return OrgApacheLuceneSearchJoinBlockJoinSelector_wrapWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_(values, OrgApacheLuceneIndexDocValues_docsWithValueWithOrgApacheLuceneIndexSortedNumericDocValues_withInt_(sortedNumerics, [((OrgApacheLuceneUtilBitSet *) nil_chk(parents)) length]), selection, parents, children);
+  return OrgApacheLuceneSearchJoinBlockJoinSelector_wrapWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchJoinBlockJoinSelector_Type_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_(values, OrgApacheLuceneIndexDocValues_docsWithValueWithOrgApacheLuceneIndexSortedNumericDocValues_withInt_(sortedNumerics, [((OrgApacheLuceneUtilBitSet *) nil_chk(parents)) length]), selection, parents, children);
 }
 
-OrgApacheLuceneIndexNumericDocValues *OrgApacheLuceneSearchJoinBlockJoinSelector_wrapWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_(OrgApacheLuceneIndexNumericDocValues *values, id<OrgApacheLuceneUtilBits> docsWithValue, OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum *selection, OrgApacheLuceneUtilBitSet *parents, OrgApacheLuceneUtilBitSet *children) {
+OrgApacheLuceneIndexNumericDocValues *OrgApacheLuceneSearchJoinBlockJoinSelector_wrapWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchJoinBlockJoinSelector_Type_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_(OrgApacheLuceneIndexNumericDocValues *values, id<OrgApacheLuceneUtilBits> docsWithValue, OrgApacheLuceneSearchJoinBlockJoinSelector_Type *selection, OrgApacheLuceneUtilBitSet *parents, OrgApacheLuceneUtilBitSet *children) {
   OrgApacheLuceneSearchJoinBlockJoinSelector_initialize();
-  return [new_OrgApacheLuceneSearchJoinBlockJoinSelector_$3_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_(parents, children, values, docsWithValue, selection) autorelease];
+  return create_OrgApacheLuceneSearchJoinBlockJoinSelector_$3_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchJoinBlockJoinSelector_Type_(parents, children, values, docsWithValue, selection);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinBlockJoinSelector)
 
-J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum)
+J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchJoinBlockJoinSelector_Type)
 
-OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum *OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_values_[2];
+OrgApacheLuceneSearchJoinBlockJoinSelector_Type *OrgApacheLuceneSearchJoinBlockJoinSelector_Type_values_[2];
 
-@implementation OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum
+@implementation OrgApacheLuceneSearchJoinBlockJoinSelector_Type
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
++ (OrgApacheLuceneSearchJoinBlockJoinSelector_Type *)MIN {
+  return JreEnum(OrgApacheLuceneSearchJoinBlockJoinSelector_Type, MIN);
 }
 
-IOSObjectArray *OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_values() {
-  OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_initialize();
-  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_values_ count:2 type:OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_class_()];
++ (OrgApacheLuceneSearchJoinBlockJoinSelector_Type *)MAX {
+  return JreEnum(OrgApacheLuceneSearchJoinBlockJoinSelector_Type, MAX);
 }
 
 + (IOSObjectArray *)values {
-  return OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_values();
+  return OrgApacheLuceneSearchJoinBlockJoinSelector_Type_values();
 }
 
-+ (OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum *)valueOfWithNSString:(NSString *)name {
-  return OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_valueOfWithNSString_(name);
++ (OrgApacheLuceneSearchJoinBlockJoinSelector_Type *)valueOfWithNSString:(NSString *)name {
+  return OrgApacheLuceneSearchJoinBlockJoinSelector_Type_valueOfWithNSString_(name);
 }
 
-OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum *OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_valueOfWithNSString_(NSString *name) {
-  OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_initialize();
+- (OrgApacheLuceneSearchJoinBlockJoinSelector_Type_Enum)toNSEnum {
+  return (OrgApacheLuceneSearchJoinBlockJoinSelector_Type_Enum)[self ordinal];
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+  return self;
+}
+
++ (void)initialize {
+  if (self == [OrgApacheLuceneSearchJoinBlockJoinSelector_Type class]) {
+    size_t objSize = class_getInstanceSize(self);
+    size_t allocSize = 2 * objSize;
+    uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
+    id e;
+    (JreEnum(OrgApacheLuceneSearchJoinBlockJoinSelector_Type, MIN) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneSearchJoinBlockJoinSelector_Type_initWithNSString_withInt_(e, @"MIN", 0);
+    (JreEnum(OrgApacheLuceneSearchJoinBlockJoinSelector_Type, MAX) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneSearchJoinBlockJoinSelector_Type_initWithNSString_withInt_(e, @"MAX", 1);
+    J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchJoinBlockJoinSelector_Type)
+  }
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static const J2ObjcFieldInfo fields[] = {
+    { "MIN", "MIN", 0x4019, "Lorg.apache.lucene.search.join.BlockJoinSelector$Type;", &JreEnum(OrgApacheLuceneSearchJoinBlockJoinSelector_Type, MIN), NULL, .constantValue.asLong = 0 },
+    { "MAX", "MAX", 0x4019, "Lorg.apache.lucene.search.join.BlockJoinSelector$Type;", &JreEnum(OrgApacheLuceneSearchJoinBlockJoinSelector_Type, MAX), NULL, .constantValue.asLong = 0 },
+  };
+  static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.join.BlockJoinSelector$Type;"};
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinBlockJoinSelector_Type = { 2, "Type", "org.apache.lucene.search.join", "BlockJoinSelector", 0x4019, 0, NULL, 2, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/search/join/BlockJoinSelector$Type;>;" };
+  return &_OrgApacheLuceneSearchJoinBlockJoinSelector_Type;
+}
+
+@end
+
+void OrgApacheLuceneSearchJoinBlockJoinSelector_Type_initWithNSString_withInt_(OrgApacheLuceneSearchJoinBlockJoinSelector_Type *self, NSString *__name, jint __ordinal) {
+  JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
+}
+
+IOSObjectArray *OrgApacheLuceneSearchJoinBlockJoinSelector_Type_values() {
+  OrgApacheLuceneSearchJoinBlockJoinSelector_Type_initialize();
+  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneSearchJoinBlockJoinSelector_Type_values_ count:2 type:OrgApacheLuceneSearchJoinBlockJoinSelector_Type_class_()];
+}
+
+OrgApacheLuceneSearchJoinBlockJoinSelector_Type *OrgApacheLuceneSearchJoinBlockJoinSelector_Type_valueOfWithNSString_(NSString *name) {
+  OrgApacheLuceneSearchJoinBlockJoinSelector_Type_initialize();
   for (int i = 0; i < 2; i++) {
-    OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum *e = OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_values_[i];
+    OrgApacheLuceneSearchJoinBlockJoinSelector_Type *e = OrgApacheLuceneSearchJoinBlockJoinSelector_Type_values_[i];
     if ([name isEqual:[e name]]) {
       return e;
     }
@@ -288,41 +336,15 @@ OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum *OrgApacheLuceneSearchJoinBl
   return nil;
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return [self retain];
-}
-
-+ (void)initialize {
-  if (self == [OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum class]) {
-    OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_MIN = new_OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_initWithNSString_withInt_(@"MIN", 0);
-    OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_MAX = new_OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_initWithNSString_withInt_(@"MAX", 1);
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum)
+OrgApacheLuceneSearchJoinBlockJoinSelector_Type *OrgApacheLuceneSearchJoinBlockJoinSelector_Type_fromOrdinal(NSUInteger ordinal) {
+  OrgApacheLuceneSearchJoinBlockJoinSelector_Type_initialize();
+  if (ordinal >= 2) {
+    return nil;
   }
+  return OrgApacheLuceneSearchJoinBlockJoinSelector_Type_values_[ordinal];
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcFieldInfo fields[] = {
-    { "MIN", "MIN", 0x4019, "Lorg.apache.lucene.search.join.BlockJoinSelector$Type;", &OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_MIN, NULL, .constantValue.asLong = 0 },
-    { "MAX", "MAX", 0x4019, "Lorg.apache.lucene.search.join.BlockJoinSelector$Type;", &OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_MAX, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.join.BlockJoinSelector$Type;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum = { 2, "Type", "org.apache.lucene.search.join", "BlockJoinSelector", 0x4019, 0, NULL, 2, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/search/join/BlockJoinSelector$Type;>;" };
-  return &_OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum;
-}
-
-@end
-
-void OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_initWithNSString_withInt_(OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum *self, NSString *__name, jint __ordinal) {
-  JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
-}
-
-OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum *new_OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum *self = [OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum alloc];
-  OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum)
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinBlockJoinSelector_Type)
 
 @implementation OrgApacheLuceneSearchJoinBlockJoinSelector_$1
 
@@ -384,9 +406,11 @@ void OrgApacheLuceneSearchJoinBlockJoinSelector_$1_initWithOrgApacheLuceneUtilBi
 }
 
 OrgApacheLuceneSearchJoinBlockJoinSelector_$1 *new_OrgApacheLuceneSearchJoinBlockJoinSelector_$1_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBits_(OrgApacheLuceneUtilBitSet *capture$0, OrgApacheLuceneUtilBitSet *capture$1, id<OrgApacheLuceneUtilBits> capture$2) {
-  OrgApacheLuceneSearchJoinBlockJoinSelector_$1 *self = [OrgApacheLuceneSearchJoinBlockJoinSelector_$1 alloc];
-  OrgApacheLuceneSearchJoinBlockJoinSelector_$1_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBits_(self, capture$0, capture$1, capture$2);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinBlockJoinSelector_$1, initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBits_, capture$0, capture$1, capture$2)
+}
+
+OrgApacheLuceneSearchJoinBlockJoinSelector_$1 *create_OrgApacheLuceneSearchJoinBlockJoinSelector_$1_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBits_(OrgApacheLuceneUtilBitSet *capture$0, OrgApacheLuceneUtilBitSet *capture$1, id<OrgApacheLuceneUtilBits> capture$2) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinBlockJoinSelector_$1, initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBits_, capture$0, capture$1, capture$2)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinBlockJoinSelector_$1)
@@ -403,7 +427,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinBlockJoinSelector_$1)
   for (jint child = [((OrgApacheLuceneUtilBitSet *) nil_chk(val$children_)) nextSetBitWithInt:firstChild]; child < docID; child = [val$children_ nextSetBitWithInt:child + 1]) {
     jint childOrd = [((OrgApacheLuceneIndexSortedDocValues *) nil_chk(val$values_)) getOrdWithInt:child];
     switch ([val$selection_ ordinal]) {
-      case OrgApacheLuceneSearchJoinBlockJoinSelector_Type_MIN:
+      case OrgApacheLuceneSearchJoinBlockJoinSelector_Type_Enum_MIN:
       if (ord == -1) {
         ord = childOrd;
       }
@@ -411,11 +435,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinBlockJoinSelector_$1)
         ord = JavaLangMath_minWithInt_withInt_(ord, childOrd);
       }
       break;
-      case OrgApacheLuceneSearchJoinBlockJoinSelector_Type_MAX:
+      case OrgApacheLuceneSearchJoinBlockJoinSelector_Type_Enum_MAX:
       ord = JavaLangMath_maxWithInt_withInt_(ord, childOrd);
       break;
       default:
-      @throw [new_JavaLangAssertionError_init() autorelease];
+      @throw create_JavaLangAssertionError_init();
     }
   }
   return ord;
@@ -432,8 +456,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinBlockJoinSelector_$1)
 - (instancetype)initWithOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)capture$0
                     withOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)capture$1
           withOrgApacheLuceneIndexSortedDocValues:(OrgApacheLuceneIndexSortedDocValues *)capture$2
-withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum:(OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum *)capture$3 {
-  OrgApacheLuceneSearchJoinBlockJoinSelector_$2_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_(self, capture$0, capture$1, capture$2, capture$3);
+withOrgApacheLuceneSearchJoinBlockJoinSelector_Type:(OrgApacheLuceneSearchJoinBlockJoinSelector_Type *)capture$3 {
+  OrgApacheLuceneSearchJoinBlockJoinSelector_$2_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneSearchJoinBlockJoinSelector_Type_(self, capture$0, capture$1, capture$2, capture$3);
   return self;
 }
 
@@ -450,7 +474,7 @@ withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum:(OrgApacheLuceneSearchJo
     { "getOrdWithInt:", "getOrd", "I", 0x1, NULL, NULL },
     { "lookupOrdWithInt:", "lookupOrd", "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
     { "getValueCount", NULL, "I", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilBitSet:withOrgApacheLuceneUtilBitSet:withOrgApacheLuceneIndexSortedDocValues:withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum:", "", NULL, 0x0, NULL, NULL },
+    { "initWithOrgApacheLuceneUtilBitSet:withOrgApacheLuceneUtilBitSet:withOrgApacheLuceneIndexSortedDocValues:withOrgApacheLuceneSearchJoinBlockJoinSelector_Type:", "", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "val$parents_", NULL, 0x1012, "Lorg.apache.lucene.util.BitSet;", NULL, NULL, .constantValue.asLong = 0 },
@@ -458,14 +482,14 @@ withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum:(OrgApacheLuceneSearchJo
     { "val$values_", NULL, 0x1012, "Lorg.apache.lucene.index.SortedDocValues;", NULL, NULL, .constantValue.asLong = 0 },
     { "val$selection_", NULL, 0x1012, "Lorg.apache.lucene.search.join.BlockJoinSelector$Type;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchJoinBlockJoinSelector", "wrapWithOrgApacheLuceneIndexSortedDocValues:withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum:withOrgApacheLuceneUtilBitSet:withOrgApacheLuceneUtilBitSet:" };
+  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchJoinBlockJoinSelector", "wrapWithOrgApacheLuceneIndexSortedDocValues:withOrgApacheLuceneSearchJoinBlockJoinSelector_Type:withOrgApacheLuceneUtilBitSet:withOrgApacheLuceneUtilBitSet:" };
   static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinBlockJoinSelector_$2 = { 2, "", "org.apache.lucene.search.join", "BlockJoinSelector", 0x8008, 4, methods, 4, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
   return &_OrgApacheLuceneSearchJoinBlockJoinSelector_$2;
 }
 
 @end
 
-void OrgApacheLuceneSearchJoinBlockJoinSelector_$2_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_(OrgApacheLuceneSearchJoinBlockJoinSelector_$2 *self, OrgApacheLuceneUtilBitSet *capture$0, OrgApacheLuceneUtilBitSet *capture$1, OrgApacheLuceneIndexSortedDocValues *capture$2, OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum *capture$3) {
+void OrgApacheLuceneSearchJoinBlockJoinSelector_$2_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneSearchJoinBlockJoinSelector_Type_(OrgApacheLuceneSearchJoinBlockJoinSelector_$2 *self, OrgApacheLuceneUtilBitSet *capture$0, OrgApacheLuceneUtilBitSet *capture$1, OrgApacheLuceneIndexSortedDocValues *capture$2, OrgApacheLuceneSearchJoinBlockJoinSelector_Type *capture$3) {
   JreStrongAssign(&self->val$parents_, capture$0);
   JreStrongAssign(&self->val$children_, capture$1);
   JreStrongAssign(&self->val$values_, capture$2);
@@ -473,10 +497,12 @@ void OrgApacheLuceneSearchJoinBlockJoinSelector_$2_initWithOrgApacheLuceneUtilBi
   OrgApacheLuceneIndexSortedDocValues_init(self);
 }
 
-OrgApacheLuceneSearchJoinBlockJoinSelector_$2 *new_OrgApacheLuceneSearchJoinBlockJoinSelector_$2_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_(OrgApacheLuceneUtilBitSet *capture$0, OrgApacheLuceneUtilBitSet *capture$1, OrgApacheLuceneIndexSortedDocValues *capture$2, OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum *capture$3) {
-  OrgApacheLuceneSearchJoinBlockJoinSelector_$2 *self = [OrgApacheLuceneSearchJoinBlockJoinSelector_$2 alloc];
-  OrgApacheLuceneSearchJoinBlockJoinSelector_$2_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_(self, capture$0, capture$1, capture$2, capture$3);
-  return self;
+OrgApacheLuceneSearchJoinBlockJoinSelector_$2 *new_OrgApacheLuceneSearchJoinBlockJoinSelector_$2_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneSearchJoinBlockJoinSelector_Type_(OrgApacheLuceneUtilBitSet *capture$0, OrgApacheLuceneUtilBitSet *capture$1, OrgApacheLuceneIndexSortedDocValues *capture$2, OrgApacheLuceneSearchJoinBlockJoinSelector_Type *capture$3) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinBlockJoinSelector_$2, initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneSearchJoinBlockJoinSelector_Type_, capture$0, capture$1, capture$2, capture$3)
+}
+
+OrgApacheLuceneSearchJoinBlockJoinSelector_$2 *create_OrgApacheLuceneSearchJoinBlockJoinSelector_$2_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneSearchJoinBlockJoinSelector_Type_(OrgApacheLuceneUtilBitSet *capture$0, OrgApacheLuceneUtilBitSet *capture$1, OrgApacheLuceneIndexSortedDocValues *capture$2, OrgApacheLuceneSearchJoinBlockJoinSelector_Type *capture$3) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinBlockJoinSelector_$2, initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneSearchJoinBlockJoinSelector_Type_, capture$0, capture$1, capture$2, capture$3)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinBlockJoinSelector_$2)
@@ -500,14 +526,14 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinBlockJoinSelector_$2)
     }
     else if (childHasValue) {
       switch ([val$selection_ ordinal]) {
-        case OrgApacheLuceneSearchJoinBlockJoinSelector_Type_MIN:
+        case OrgApacheLuceneSearchJoinBlockJoinSelector_Type_Enum_MIN:
         value = JavaLangMath_minWithLong_withLong_(value, childValue);
         break;
-        case OrgApacheLuceneSearchJoinBlockJoinSelector_Type_MAX:
+        case OrgApacheLuceneSearchJoinBlockJoinSelector_Type_Enum_MAX:
         value = JavaLangMath_maxWithLong_withLong_(value, childValue);
         break;
         default:
-        @throw [new_JavaLangAssertionError_init() autorelease];
+        @throw create_JavaLangAssertionError_init();
       }
     }
   }
@@ -518,8 +544,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinBlockJoinSelector_$2)
                     withOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)capture$1
          withOrgApacheLuceneIndexNumericDocValues:(OrgApacheLuceneIndexNumericDocValues *)capture$2
                       withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)capture$3
-withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum:(OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum *)capture$4 {
-  OrgApacheLuceneSearchJoinBlockJoinSelector_$3_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_(self, capture$0, capture$1, capture$2, capture$3, capture$4);
+withOrgApacheLuceneSearchJoinBlockJoinSelector_Type:(OrgApacheLuceneSearchJoinBlockJoinSelector_Type *)capture$4 {
+  OrgApacheLuceneSearchJoinBlockJoinSelector_$3_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchJoinBlockJoinSelector_Type_(self, capture$0, capture$1, capture$2, capture$3, capture$4);
   return self;
 }
 
@@ -535,7 +561,7 @@ withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum:(OrgApacheLuceneSearchJo
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "getWithInt:", "get", "J", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilBitSet:withOrgApacheLuceneUtilBitSet:withOrgApacheLuceneIndexNumericDocValues:withOrgApacheLuceneUtilBits:withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum:", "", NULL, 0x0, NULL, NULL },
+    { "initWithOrgApacheLuceneUtilBitSet:withOrgApacheLuceneUtilBitSet:withOrgApacheLuceneIndexNumericDocValues:withOrgApacheLuceneUtilBits:withOrgApacheLuceneSearchJoinBlockJoinSelector_Type:", "", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "val$parents_", NULL, 0x1012, "Lorg.apache.lucene.util.BitSet;", NULL, NULL, .constantValue.asLong = 0 },
@@ -544,14 +570,14 @@ withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum:(OrgApacheLuceneSearchJo
     { "val$docsWithValue_", NULL, 0x1012, "Lorg.apache.lucene.util.Bits;", NULL, NULL, .constantValue.asLong = 0 },
     { "val$selection_", NULL, 0x1012, "Lorg.apache.lucene.search.join.BlockJoinSelector$Type;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchJoinBlockJoinSelector", "wrapWithOrgApacheLuceneIndexNumericDocValues:withOrgApacheLuceneUtilBits:withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum:withOrgApacheLuceneUtilBitSet:withOrgApacheLuceneUtilBitSet:" };
+  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchJoinBlockJoinSelector", "wrapWithOrgApacheLuceneIndexNumericDocValues:withOrgApacheLuceneUtilBits:withOrgApacheLuceneSearchJoinBlockJoinSelector_Type:withOrgApacheLuceneUtilBitSet:withOrgApacheLuceneUtilBitSet:" };
   static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinBlockJoinSelector_$3 = { 2, "", "org.apache.lucene.search.join", "BlockJoinSelector", 0x8008, 2, methods, 5, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
   return &_OrgApacheLuceneSearchJoinBlockJoinSelector_$3;
 }
 
 @end
 
-void OrgApacheLuceneSearchJoinBlockJoinSelector_$3_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_(OrgApacheLuceneSearchJoinBlockJoinSelector_$3 *self, OrgApacheLuceneUtilBitSet *capture$0, OrgApacheLuceneUtilBitSet *capture$1, OrgApacheLuceneIndexNumericDocValues *capture$2, id<OrgApacheLuceneUtilBits> capture$3, OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum *capture$4) {
+void OrgApacheLuceneSearchJoinBlockJoinSelector_$3_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchJoinBlockJoinSelector_Type_(OrgApacheLuceneSearchJoinBlockJoinSelector_$3 *self, OrgApacheLuceneUtilBitSet *capture$0, OrgApacheLuceneUtilBitSet *capture$1, OrgApacheLuceneIndexNumericDocValues *capture$2, id<OrgApacheLuceneUtilBits> capture$3, OrgApacheLuceneSearchJoinBlockJoinSelector_Type *capture$4) {
   JreStrongAssign(&self->val$parents_, capture$0);
   JreStrongAssign(&self->val$children_, capture$1);
   JreStrongAssign(&self->val$values_, capture$2);
@@ -560,10 +586,12 @@ void OrgApacheLuceneSearchJoinBlockJoinSelector_$3_initWithOrgApacheLuceneUtilBi
   OrgApacheLuceneIndexNumericDocValues_init(self);
 }
 
-OrgApacheLuceneSearchJoinBlockJoinSelector_$3 *new_OrgApacheLuceneSearchJoinBlockJoinSelector_$3_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_(OrgApacheLuceneUtilBitSet *capture$0, OrgApacheLuceneUtilBitSet *capture$1, OrgApacheLuceneIndexNumericDocValues *capture$2, id<OrgApacheLuceneUtilBits> capture$3, OrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum *capture$4) {
-  OrgApacheLuceneSearchJoinBlockJoinSelector_$3 *self = [OrgApacheLuceneSearchJoinBlockJoinSelector_$3 alloc];
-  OrgApacheLuceneSearchJoinBlockJoinSelector_$3_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchJoinBlockJoinSelector_TypeEnum_(self, capture$0, capture$1, capture$2, capture$3, capture$4);
-  return self;
+OrgApacheLuceneSearchJoinBlockJoinSelector_$3 *new_OrgApacheLuceneSearchJoinBlockJoinSelector_$3_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchJoinBlockJoinSelector_Type_(OrgApacheLuceneUtilBitSet *capture$0, OrgApacheLuceneUtilBitSet *capture$1, OrgApacheLuceneIndexNumericDocValues *capture$2, id<OrgApacheLuceneUtilBits> capture$3, OrgApacheLuceneSearchJoinBlockJoinSelector_Type *capture$4) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinBlockJoinSelector_$3, initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchJoinBlockJoinSelector_Type_, capture$0, capture$1, capture$2, capture$3, capture$4)
+}
+
+OrgApacheLuceneSearchJoinBlockJoinSelector_$3 *create_OrgApacheLuceneSearchJoinBlockJoinSelector_$3_initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchJoinBlockJoinSelector_Type_(OrgApacheLuceneUtilBitSet *capture$0, OrgApacheLuceneUtilBitSet *capture$1, OrgApacheLuceneIndexNumericDocValues *capture$2, id<OrgApacheLuceneUtilBits> capture$3, OrgApacheLuceneSearchJoinBlockJoinSelector_Type *capture$4) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinBlockJoinSelector_$3, initWithOrgApacheLuceneUtilBitSet_withOrgApacheLuceneUtilBitSet_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchJoinBlockJoinSelector_Type_, capture$0, capture$1, capture$2, capture$3, capture$4)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinBlockJoinSelector_$3)

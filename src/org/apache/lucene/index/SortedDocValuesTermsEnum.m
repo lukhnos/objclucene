@@ -35,21 +35,21 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSortedDocValuesTermsEnum, scratch_, OrgA
   return self;
 }
 
-- (OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *)seekCeilWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)text {
+- (OrgApacheLuceneIndexTermsEnum_SeekStatus *)seekCeilWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)text {
   jint ord = [((OrgApacheLuceneIndexSortedDocValues *) nil_chk(values_)) lookupTermWithOrgApacheLuceneUtilBytesRef:text];
   if (ord >= 0) {
     currentOrd_ = ord;
     [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(scratch_)) copyBytesWithOrgApacheLuceneUtilBytesRef:text];
-    return JreLoadStatic(OrgApacheLuceneIndexTermsEnum_SeekStatusEnum, FOUND);
+    return JreLoadEnum(OrgApacheLuceneIndexTermsEnum_SeekStatus, FOUND);
   }
   else {
     currentOrd_ = -ord - 1;
     if (currentOrd_ == [values_ getValueCount]) {
-      return JreLoadStatic(OrgApacheLuceneIndexTermsEnum_SeekStatusEnum, END);
+      return JreLoadEnum(OrgApacheLuceneIndexTermsEnum_SeekStatus, END);
     }
     else {
       [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(scratch_)) copyBytesWithOrgApacheLuceneUtilBytesRef:[values_ lookupOrdWithInt:currentOrd_]];
-      return JreLoadStatic(OrgApacheLuceneIndexTermsEnum_SeekStatusEnum, NOT_FOUND);
+      return JreLoadEnum(OrgApacheLuceneIndexTermsEnum_SeekStatus, NOT_FOUND);
     }
   }
 }
@@ -90,7 +90,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSortedDocValuesTermsEnum, scratch_, OrgA
 }
 
 - (jint)docFreq {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (jlong)totalTermFreq {
@@ -99,17 +99,17 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSortedDocValuesTermsEnum, scratch_, OrgA
 
 - (OrgApacheLuceneIndexPostingsEnum *)postingsWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)reuse
                                                                            withInt:(jint)flags {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (void)seekExactWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term
                withOrgApacheLuceneIndexTermState:(OrgApacheLuceneIndexTermState *)state {
   JreAssert((state != nil && [state isKindOfClass:[OrgApacheLuceneIndexOrdTermState class]]), (@"org/apache/lucene/index/SortedDocValuesTermsEnum.java:114 condition failed: assert state != null && state instanceof OrdTermState;"));
-  [self seekExactWithLong:((OrgApacheLuceneIndexOrdTermState *) nil_chk(((OrgApacheLuceneIndexOrdTermState *) check_class_cast(state, [OrgApacheLuceneIndexOrdTermState class]))))->ord_];
+  [self seekExactWithLong:((OrgApacheLuceneIndexOrdTermState *) nil_chk(((OrgApacheLuceneIndexOrdTermState *) cast_chk(state, [OrgApacheLuceneIndexOrdTermState class]))))->ord_];
 }
 
 - (OrgApacheLuceneIndexTermState *)termState {
-  OrgApacheLuceneIndexOrdTermState *state = [new_OrgApacheLuceneIndexOrdTermState_init() autorelease];
+  OrgApacheLuceneIndexOrdTermState *state = create_OrgApacheLuceneIndexOrdTermState_init();
   state->ord_ = currentOrd_;
   return state;
 }
@@ -154,9 +154,11 @@ void OrgApacheLuceneIndexSortedDocValuesTermsEnum_initWithOrgApacheLuceneIndexSo
 }
 
 OrgApacheLuceneIndexSortedDocValuesTermsEnum *new_OrgApacheLuceneIndexSortedDocValuesTermsEnum_initWithOrgApacheLuceneIndexSortedDocValues_(OrgApacheLuceneIndexSortedDocValues *values) {
-  OrgApacheLuceneIndexSortedDocValuesTermsEnum *self = [OrgApacheLuceneIndexSortedDocValuesTermsEnum alloc];
-  OrgApacheLuceneIndexSortedDocValuesTermsEnum_initWithOrgApacheLuceneIndexSortedDocValues_(self, values);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSortedDocValuesTermsEnum, initWithOrgApacheLuceneIndexSortedDocValues_, values)
+}
+
+OrgApacheLuceneIndexSortedDocValuesTermsEnum *create_OrgApacheLuceneIndexSortedDocValuesTermsEnum_initWithOrgApacheLuceneIndexSortedDocValues_(OrgApacheLuceneIndexSortedDocValues *values) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSortedDocValuesTermsEnum, initWithOrgApacheLuceneIndexSortedDocValues_, values)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortedDocValuesTermsEnum)

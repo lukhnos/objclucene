@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchMultiCollector_INCLUDE_ALL")
-#if OrgApacheLuceneSearchMultiCollector_RESTRICT
-#define OrgApacheLuceneSearchMultiCollector_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchMultiCollector")
+#ifdef RESTRICT_OrgApacheLuceneSearchMultiCollector
+#define INCLUDE_ALL_OrgApacheLuceneSearchMultiCollector 0
 #else
-#define OrgApacheLuceneSearchMultiCollector_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchMultiCollector 1
 #endif
-#undef OrgApacheLuceneSearchMultiCollector_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchMultiCollector
 
-#if !defined (_OrgApacheLuceneSearchMultiCollector_) && (OrgApacheLuceneSearchMultiCollector_INCLUDE_ALL || OrgApacheLuceneSearchMultiCollector_INCLUDE)
-#define _OrgApacheLuceneSearchMultiCollector_
+#if !defined (OrgApacheLuceneSearchMultiCollector_) && (INCLUDE_ALL_OrgApacheLuceneSearchMultiCollector || defined(INCLUDE_OrgApacheLuceneSearchMultiCollector))
+#define OrgApacheLuceneSearchMultiCollector_
 
-#define OrgApacheLuceneSearchCollector_RESTRICT 1
-#define OrgApacheLuceneSearchCollector_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchCollector 1
+#define INCLUDE_OrgApacheLuceneSearchCollector 1
 #include "org/apache/lucene/search/Collector.h"
 
 @class IOSObjectArray;
@@ -25,6 +25,13 @@
 @protocol JavaLangIterable;
 @protocol OrgApacheLuceneSearchLeafCollector;
 
+/*!
+ @brief A <code>Collector</code> which allows running a search with several
+ <code>Collector</code>s.
+ It offers a static <code>wrap</code> method which accepts a
+ list of collectors and wraps them with <code>MultiCollector</code>, while
+ filtering out the <code>null</code> null ones.
+ */
 @interface OrgApacheLuceneSearchMultiCollector : NSObject < OrgApacheLuceneSearchCollector >
 
 #pragma mark Public
@@ -33,8 +40,27 @@
 
 - (jboolean)needsScores;
 
+/*!
+ @brief See <code>wrap(Iterable)</code>.
+ */
 + (id<OrgApacheLuceneSearchCollector>)wrapWithOrgApacheLuceneSearchCollectorArray:(IOSObjectArray *)collectors;
 
+/*!
+ @brief Wraps a list of <code>Collector</code>s with a <code>MultiCollector</code>.
+ This
+ method works as follows:
+ <ul>
+ <li>Filters out the <code>null</code> collectors, so they are not used
+ during search time.
+ <li>If the input contains 1 real collector (i.e. non-<code>null</code> ),
+ it is returned.
+ <li>Otherwise the method returns a <code>MultiCollector</code> which wraps the
+ non-<code>null</code> ones.
+ </ul>
+ @throws IllegalArgumentException
+ if either 0 collectors were input, or all collectors are
+ <code>null</code>.
+ */
 + (id<OrgApacheLuceneSearchCollector>)wrapWithJavaLangIterable:(id<JavaLangIterable>)collectors;
 
 @end
@@ -49,4 +75,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiCollector)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchMultiCollector_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchMultiCollector")

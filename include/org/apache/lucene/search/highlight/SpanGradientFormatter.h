@@ -5,23 +5,30 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchHighlightSpanGradientFormatter_INCLUDE_ALL")
-#if OrgApacheLuceneSearchHighlightSpanGradientFormatter_RESTRICT
-#define OrgApacheLuceneSearchHighlightSpanGradientFormatter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightSpanGradientFormatter")
+#ifdef RESTRICT_OrgApacheLuceneSearchHighlightSpanGradientFormatter
+#define INCLUDE_ALL_OrgApacheLuceneSearchHighlightSpanGradientFormatter 0
 #else
-#define OrgApacheLuceneSearchHighlightSpanGradientFormatter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchHighlightSpanGradientFormatter 1
 #endif
-#undef OrgApacheLuceneSearchHighlightSpanGradientFormatter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchHighlightSpanGradientFormatter
 
-#if !defined (_OrgApacheLuceneSearchHighlightSpanGradientFormatter_) && (OrgApacheLuceneSearchHighlightSpanGradientFormatter_INCLUDE_ALL || OrgApacheLuceneSearchHighlightSpanGradientFormatter_INCLUDE)
-#define _OrgApacheLuceneSearchHighlightSpanGradientFormatter_
+#if !defined (OrgApacheLuceneSearchHighlightSpanGradientFormatter_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightSpanGradientFormatter || defined(INCLUDE_OrgApacheLuceneSearchHighlightSpanGradientFormatter))
+#define OrgApacheLuceneSearchHighlightSpanGradientFormatter_
 
-#define OrgApacheLuceneSearchHighlightGradientFormatter_RESTRICT 1
-#define OrgApacheLuceneSearchHighlightGradientFormatter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchHighlightGradientFormatter 1
+#define INCLUDE_OrgApacheLuceneSearchHighlightGradientFormatter 1
 #include "org/apache/lucene/search/highlight/GradientFormatter.h"
 
 @class OrgApacheLuceneSearchHighlightTokenGroup;
 
+/*!
+ @brief Formats text with different color intensity depending on the score of the
+ term using the span tag.
+ GradientFormatter uses a bgcolor argument to the font tag which
+ doesn't work in Mozilla, thus this class.
+ - seealso: GradientFormatter
+ */
 @interface OrgApacheLuceneSearchHighlightSpanGradientFormatter : OrgApacheLuceneSearchHighlightGradientFormatter
 
 #pragma mark Public
@@ -43,8 +50,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightSpanGradientFormatter_initW
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightSpanGradientFormatter *new_OrgApacheLuceneSearchHighlightSpanGradientFormatter_initWithFloat_withNSString_withNSString_withNSString_withNSString_(jfloat maxScore, NSString *minForegroundColor, NSString *maxForegroundColor, NSString *minBackgroundColor, NSString *maxBackgroundColor) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightSpanGradientFormatter *create_OrgApacheLuceneSearchHighlightSpanGradientFormatter_initWithFloat_withNSString_withNSString_withNSString_withNSString_(jfloat maxScore, NSString *minForegroundColor, NSString *maxForegroundColor, NSString *minBackgroundColor, NSString *maxBackgroundColor);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightSpanGradientFormatter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchHighlightSpanGradientFormatter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightSpanGradientFormatter")

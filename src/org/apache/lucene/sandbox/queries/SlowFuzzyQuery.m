@@ -4,12 +4,14 @@
 //
 
 #include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/Float.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/StringBuilder.h"
+#include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/index/SingleTermsEnum.h"
 #include "org/apache/lucene/index/Term.h"
 #include "org/apache/lucene/index/Terms.h"
@@ -33,6 +35,18 @@
 @end
 
 @implementation OrgApacheLuceneSandboxQueriesSlowFuzzyQuery
+
++ (jfloat)defaultMinSimilarity {
+  return OrgApacheLuceneSandboxQueriesSlowFuzzyQuery_defaultMinSimilarity;
+}
+
++ (jint)defaultPrefixLength {
+  return OrgApacheLuceneSandboxQueriesSlowFuzzyQuery_defaultPrefixLength;
+}
+
++ (jint)defaultMaxExpansions {
+  return OrgApacheLuceneSandboxQueriesSlowFuzzyQuery_defaultMaxExpansions;
+}
 
 - (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
                                        withFloat:(jfloat)minimumSimilarity
@@ -71,9 +85,9 @@
 - (OrgApacheLuceneIndexTermsEnum *)getTermsEnumWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms
                                       withOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)atts {
   if (!termLongEnough_) {
-    return [new_OrgApacheLuceneIndexSingleTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilBytesRef_([((OrgApacheLuceneIndexTerms *) nil_chk(terms)) iterator], [((OrgApacheLuceneIndexTerm *) nil_chk(term_)) bytes]) autorelease];
+    return create_OrgApacheLuceneIndexSingleTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilBytesRef_([((OrgApacheLuceneIndexTerms *) nil_chk(terms)) iterator], [((OrgApacheLuceneIndexTerm *) nil_chk(term_)) bytes]);
   }
-  return [new_OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneUtilAttributeSource_withOrgApacheLuceneIndexTerm_withFloat_withInt_(terms, atts, [self getTerm], minimumSimilarity_, prefixLength_) autorelease];
+  return create_OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneUtilAttributeSource_withOrgApacheLuceneIndexTerm_withFloat_withInt_(terms, atts, [self getTerm], minimumSimilarity_, prefixLength_);
 }
 
 - (OrgApacheLuceneIndexTerm *)getTerm {
@@ -81,12 +95,12 @@
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
-  JavaLangStringBuilder *buffer = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_init();
   if (![((NSString *) nil_chk([((OrgApacheLuceneIndexTerm *) nil_chk(term_)) field])) isEqual:field]) {
-    [buffer appendWithNSString:[term_ field]];
+    [buffer appendWithNSString:[((OrgApacheLuceneIndexTerm *) nil_chk(term_)) field]];
     [buffer appendWithNSString:@":"];
   }
-  [buffer appendWithNSString:[term_ text]];
+  [buffer appendWithNSString:[((OrgApacheLuceneIndexTerm *) nil_chk(term_)) text]];
   [buffer appendWithChar:'~'];
   [buffer appendWithNSString:JavaLangFloat_toStringWithFloat_(minimumSimilarity_)];
   [buffer appendWithNSString:OrgApacheLuceneUtilToStringUtils_boostWithFloat_([self getBoost])];
@@ -98,15 +112,15 @@
   jint result = ((jint) [super hash]);
   result = prime * result + JavaLangFloat_floatToIntBitsWithFloat_(minimumSimilarity_);
   result = prime * result + prefixLength_;
-  result = prime * result + ((term_ == nil) ? 0 : ((jint) [term_ hash]));
+  result = prime * result + ((term_ == nil) ? 0 : ((jint) [((OrgApacheLuceneIndexTerm *) nil_chk(term_)) hash]));
   return result;
 }
 
 - (jboolean)isEqual:(id)obj {
   if (self == obj) return true;
   if (![super isEqual:obj]) return false;
-  if ([self getClass] != [nil_chk(obj) getClass]) return false;
-  OrgApacheLuceneSandboxQueriesSlowFuzzyQuery *other = (OrgApacheLuceneSandboxQueriesSlowFuzzyQuery *) check_class_cast(obj, [OrgApacheLuceneSandboxQueriesSlowFuzzyQuery class]);
+  if ([self getClass] != (id) [nil_chk(obj) getClass]) return false;
+  OrgApacheLuceneSandboxQueriesSlowFuzzyQuery *other = (OrgApacheLuceneSandboxQueriesSlowFuzzyQuery *) cast_chk(obj, [OrgApacheLuceneSandboxQueriesSlowFuzzyQuery class]);
   if (JavaLangFloat_floatToIntBitsWithFloat_(minimumSimilarity_) != JavaLangFloat_floatToIntBitsWithFloat_(other->minimumSimilarity_)) return false;
   if (prefixLength_ != other->prefixLength_) return false;
   if (term_ == nil) {
@@ -116,13 +130,13 @@
   return true;
 }
 
++ (IOSObjectArray *)__annotations {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
 - (void)dealloc {
   RELEASE_(term_);
   [super dealloc];
-}
-
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -158,13 +172,13 @@ void OrgApacheLuceneSandboxQueriesSlowFuzzyQuery_initWithOrgApacheLuceneIndexTer
   OrgApacheLuceneSearchMultiTermQuery_initWithNSString_(self, [((OrgApacheLuceneIndexTerm *) nil_chk(term)) field]);
   self->termLongEnough_ = false;
   JreStrongAssign(&self->term_, term);
-  if (minimumSimilarity >= 1.0f && minimumSimilarity != JreFpToInt(minimumSimilarity)) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"fractional edit distances are not allowed") autorelease];
-  if (minimumSimilarity < 0.0f) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"minimumSimilarity < 0") autorelease];
-  if (prefixLength < 0) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"prefixLength < 0") autorelease];
-  if (maxExpansions < 0) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"maxExpansions < 0") autorelease];
-  [self setRewriteMethodWithOrgApacheLuceneSearchMultiTermQuery_RewriteMethod:[new_OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite_initWithInt_(maxExpansions) autorelease]];
+  if (minimumSimilarity >= 1.0f && minimumSimilarity != JreFpToInt(minimumSimilarity)) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"fractional edit distances are not allowed");
+  if (minimumSimilarity < 0.0f) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"minimumSimilarity < 0");
+  if (prefixLength < 0) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"prefixLength < 0");
+  if (maxExpansions < 0) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"maxExpansions < 0");
+  [self setRewriteMethodWithOrgApacheLuceneSearchMultiTermQuery_RewriteMethod:create_OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite_initWithInt_(maxExpansions)];
   NSString *text = [term text];
-  jint len = [text codePointCount:0 endIndex:((jint) [((NSString *) nil_chk(text)) length])];
+  jint len = [((NSString *) nil_chk(text)) codePointCount:0 endIndex:((jint) [text length])];
   if (len > 0 && (minimumSimilarity >= 1.0f || len > 1.0f / (1.0f - minimumSimilarity))) {
     self->termLongEnough_ = true;
   }
@@ -173,9 +187,11 @@ void OrgApacheLuceneSandboxQueriesSlowFuzzyQuery_initWithOrgApacheLuceneIndexTer
 }
 
 OrgApacheLuceneSandboxQueriesSlowFuzzyQuery *new_OrgApacheLuceneSandboxQueriesSlowFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withFloat_withInt_withInt_(OrgApacheLuceneIndexTerm *term, jfloat minimumSimilarity, jint prefixLength, jint maxExpansions) {
-  OrgApacheLuceneSandboxQueriesSlowFuzzyQuery *self = [OrgApacheLuceneSandboxQueriesSlowFuzzyQuery alloc];
-  OrgApacheLuceneSandboxQueriesSlowFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withFloat_withInt_withInt_(self, term, minimumSimilarity, prefixLength, maxExpansions);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSandboxQueriesSlowFuzzyQuery, initWithOrgApacheLuceneIndexTerm_withFloat_withInt_withInt_, term, minimumSimilarity, prefixLength, maxExpansions)
+}
+
+OrgApacheLuceneSandboxQueriesSlowFuzzyQuery *create_OrgApacheLuceneSandboxQueriesSlowFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withFloat_withInt_withInt_(OrgApacheLuceneIndexTerm *term, jfloat minimumSimilarity, jint prefixLength, jint maxExpansions) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSandboxQueriesSlowFuzzyQuery, initWithOrgApacheLuceneIndexTerm_withFloat_withInt_withInt_, term, minimumSimilarity, prefixLength, maxExpansions)
 }
 
 void OrgApacheLuceneSandboxQueriesSlowFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withFloat_withInt_(OrgApacheLuceneSandboxQueriesSlowFuzzyQuery *self, OrgApacheLuceneIndexTerm *term, jfloat minimumSimilarity, jint prefixLength) {
@@ -183,9 +199,11 @@ void OrgApacheLuceneSandboxQueriesSlowFuzzyQuery_initWithOrgApacheLuceneIndexTer
 }
 
 OrgApacheLuceneSandboxQueriesSlowFuzzyQuery *new_OrgApacheLuceneSandboxQueriesSlowFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withFloat_withInt_(OrgApacheLuceneIndexTerm *term, jfloat minimumSimilarity, jint prefixLength) {
-  OrgApacheLuceneSandboxQueriesSlowFuzzyQuery *self = [OrgApacheLuceneSandboxQueriesSlowFuzzyQuery alloc];
-  OrgApacheLuceneSandboxQueriesSlowFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withFloat_withInt_(self, term, minimumSimilarity, prefixLength);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSandboxQueriesSlowFuzzyQuery, initWithOrgApacheLuceneIndexTerm_withFloat_withInt_, term, minimumSimilarity, prefixLength)
+}
+
+OrgApacheLuceneSandboxQueriesSlowFuzzyQuery *create_OrgApacheLuceneSandboxQueriesSlowFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withFloat_withInt_(OrgApacheLuceneIndexTerm *term, jfloat minimumSimilarity, jint prefixLength) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSandboxQueriesSlowFuzzyQuery, initWithOrgApacheLuceneIndexTerm_withFloat_withInt_, term, minimumSimilarity, prefixLength)
 }
 
 void OrgApacheLuceneSandboxQueriesSlowFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withFloat_(OrgApacheLuceneSandboxQueriesSlowFuzzyQuery *self, OrgApacheLuceneIndexTerm *term, jfloat minimumSimilarity) {
@@ -193,9 +211,11 @@ void OrgApacheLuceneSandboxQueriesSlowFuzzyQuery_initWithOrgApacheLuceneIndexTer
 }
 
 OrgApacheLuceneSandboxQueriesSlowFuzzyQuery *new_OrgApacheLuceneSandboxQueriesSlowFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withFloat_(OrgApacheLuceneIndexTerm *term, jfloat minimumSimilarity) {
-  OrgApacheLuceneSandboxQueriesSlowFuzzyQuery *self = [OrgApacheLuceneSandboxQueriesSlowFuzzyQuery alloc];
-  OrgApacheLuceneSandboxQueriesSlowFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withFloat_(self, term, minimumSimilarity);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSandboxQueriesSlowFuzzyQuery, initWithOrgApacheLuceneIndexTerm_withFloat_, term, minimumSimilarity)
+}
+
+OrgApacheLuceneSandboxQueriesSlowFuzzyQuery *create_OrgApacheLuceneSandboxQueriesSlowFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withFloat_(OrgApacheLuceneIndexTerm *term, jfloat minimumSimilarity) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSandboxQueriesSlowFuzzyQuery, initWithOrgApacheLuceneIndexTerm_withFloat_, term, minimumSimilarity)
 }
 
 void OrgApacheLuceneSandboxQueriesSlowFuzzyQuery_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneSandboxQueriesSlowFuzzyQuery *self, OrgApacheLuceneIndexTerm *term) {
@@ -203,9 +223,11 @@ void OrgApacheLuceneSandboxQueriesSlowFuzzyQuery_initWithOrgApacheLuceneIndexTer
 }
 
 OrgApacheLuceneSandboxQueriesSlowFuzzyQuery *new_OrgApacheLuceneSandboxQueriesSlowFuzzyQuery_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexTerm *term) {
-  OrgApacheLuceneSandboxQueriesSlowFuzzyQuery *self = [OrgApacheLuceneSandboxQueriesSlowFuzzyQuery alloc];
-  OrgApacheLuceneSandboxQueriesSlowFuzzyQuery_initWithOrgApacheLuceneIndexTerm_(self, term);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSandboxQueriesSlowFuzzyQuery, initWithOrgApacheLuceneIndexTerm_, term)
+}
+
+OrgApacheLuceneSandboxQueriesSlowFuzzyQuery *create_OrgApacheLuceneSandboxQueriesSlowFuzzyQuery_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexTerm *term) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSandboxQueriesSlowFuzzyQuery, initWithOrgApacheLuceneIndexTerm_, term)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSandboxQueriesSlowFuzzyQuery)

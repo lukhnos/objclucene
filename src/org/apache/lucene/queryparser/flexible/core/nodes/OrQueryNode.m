@@ -25,7 +25,7 @@
 
 - (NSString *)description {
   if ([self getChildren] == nil || [((id<JavaUtilList>) nil_chk([self getChildren])) size] == 0) return @"<boolean operation='or'/>";
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   [sb appendWithNSString:@"<boolean operation='or'>"];
   for (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> __strong child in nil_chk([self getChildren])) {
     [sb appendWithNSString:@"\n"];
@@ -37,7 +37,7 @@
 
 - (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escapeSyntaxParser {
   if ([self getChildren] == nil || [((id<JavaUtilList>) nil_chk([self getChildren])) size] == 0) return @"";
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   NSString *filler = @"";
   for (id<JavaUtilIterator> it = [((id<JavaUtilList>) nil_chk([self getChildren])) iterator]; [((id<JavaUtilIterator>) nil_chk(it)) hasNext]; ) {
     [((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:filler])) appendWithJavaLangCharSequence:[((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk([it next])) toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:escapeSyntaxParser]];
@@ -49,7 +49,7 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:", "OrQueryNode", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilList:", "OrQueryNode", NULL, 0x1, NULL, "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;)V" },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:", "toQueryString", "Ljava.lang.CharSequence;", 0x1, NULL, NULL },
   };
@@ -61,15 +61,17 @@
 
 void OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode_initWithJavaUtilList_(OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode *self, id<JavaUtilList> clauses) {
   OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode_initWithJavaUtilList_(self, clauses);
-  if ((clauses == nil) || ([clauses size] == 0)) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"OR query must have at least one clause") autorelease];
+  if ((clauses == nil) || ([((id<JavaUtilList>) nil_chk(clauses)) size] == 0)) {
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"OR query must have at least one clause");
   }
 }
 
 OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode_initWithJavaUtilList_(id<JavaUtilList> clauses) {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode *self = [OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode alloc];
-  OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode_initWithJavaUtilList_(self, clauses);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode, initWithJavaUtilList_, clauses)
+}
+
+OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode *create_OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode_initWithJavaUtilList_(id<JavaUtilList> clauses) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode, initWithJavaUtilList_, clauses)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode)

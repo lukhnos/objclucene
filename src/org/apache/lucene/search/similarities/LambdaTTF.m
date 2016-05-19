@@ -52,9 +52,11 @@ void OrgApacheLuceneSearchSimilaritiesLambdaTTF_init(OrgApacheLuceneSearchSimila
 }
 
 OrgApacheLuceneSearchSimilaritiesLambdaTTF *new_OrgApacheLuceneSearchSimilaritiesLambdaTTF_init() {
-  OrgApacheLuceneSearchSimilaritiesLambdaTTF *self = [OrgApacheLuceneSearchSimilaritiesLambdaTTF alloc];
-  OrgApacheLuceneSearchSimilaritiesLambdaTTF_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSimilaritiesLambdaTTF, init)
+}
+
+OrgApacheLuceneSearchSimilaritiesLambdaTTF *create_OrgApacheLuceneSearchSimilaritiesLambdaTTF_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSimilaritiesLambdaTTF, init)
 }
 
 jfloat OrgApacheLuceneSearchSimilaritiesLambdaTTF_lambdaWithOrgApacheLuceneSearchSimilaritiesBasicStats_(OrgApacheLuceneSearchSimilaritiesLambdaTTF *self, OrgApacheLuceneSearchSimilaritiesBasicStats *stats) {

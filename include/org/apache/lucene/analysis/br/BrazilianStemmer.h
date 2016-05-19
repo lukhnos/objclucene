@@ -5,27 +5,39 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisBrBrazilianStemmer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisBrBrazilianStemmer_RESTRICT
-#define OrgApacheLuceneAnalysisBrBrazilianStemmer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisBrBrazilianStemmer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisBrBrazilianStemmer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisBrBrazilianStemmer 0
 #else
-#define OrgApacheLuceneAnalysisBrBrazilianStemmer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisBrBrazilianStemmer 1
 #endif
-#undef OrgApacheLuceneAnalysisBrBrazilianStemmer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisBrBrazilianStemmer
 
-#if !defined (_OrgApacheLuceneAnalysisBrBrazilianStemmer_) && (OrgApacheLuceneAnalysisBrBrazilianStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisBrBrazilianStemmer_INCLUDE)
-#define _OrgApacheLuceneAnalysisBrBrazilianStemmer_
+#if !defined (OrgApacheLuceneAnalysisBrBrazilianStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisBrBrazilianStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisBrBrazilianStemmer))
+#define OrgApacheLuceneAnalysisBrBrazilianStemmer_
 
+/*!
+ @brief A stemmer for Brazilian Portuguese words.
+ */
 @interface OrgApacheLuceneAnalysisBrBrazilianStemmer : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @brief For log and debug purpose
+ @return TERM, CT, RV, R1 and R2
+ */
 - (NSString *)log;
 
 #pragma mark Protected
 
+/*!
+ @brief Stems the given term to an unique <tt>discriminator</tt>.
+ @param term  The term that should be stemmed.
+ @return Discriminator for <tt>term</tt>
+ */
 - (NSString *)stemWithNSString:(NSString *)term;
 
 @end
@@ -36,8 +48,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisBrBrazilianStemmer_init(OrgApacheL
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisBrBrazilianStemmer *new_OrgApacheLuceneAnalysisBrBrazilianStemmer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisBrBrazilianStemmer *create_OrgApacheLuceneAnalysisBrBrazilianStemmer_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisBrBrazilianStemmer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisBrBrazilianStemmer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisBrBrazilianStemmer")

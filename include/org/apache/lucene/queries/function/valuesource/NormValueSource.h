@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_RESTRICT
-#define OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceNormValueSource")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceNormValueSource
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceNormValueSource 0
 #else
-#define OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceNormValueSource 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceNormValueSource
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_) && (OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_
+#if !defined (OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceNormValueSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceNormValueSource))
+#define OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_
 
-#define OrgApacheLuceneQueriesFunctionValueSource_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionValueSource_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionValueSource 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionValueSource 1
 #include "org/apache/lucene/queries/function/ValueSource.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
@@ -25,6 +25,14 @@
 @class OrgApacheLuceneSearchIndexSearcher;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Function that returns <code>TFIDFSimilarity.decodeNormValue(long)</code>
+ for every document.
+ <p>
+ Note that the configured Similarity for the field must be
+ a subclass of <code>TFIDFSimilarity</code>
+  
+ */
 @interface OrgApacheLuceneQueriesFunctionValuesourceNormValueSource : OrgApacheLuceneQueriesFunctionValueSource {
  @public
   NSString *field_;
@@ -58,8 +66,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_
 
 FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceNormValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_initWithNSString_(NSString *field) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceNormValueSource *create_OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_initWithNSString_(NSString *field);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceNormValueSource)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceNormValueSource")

@@ -31,13 +31,13 @@
 }
 
 - (OrgApacheLuceneAnalysisTokenizer *)createWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory {
-  if ([((OrgApacheLuceneUtilVersion *) nil_chk(luceneMatchVersion_)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_7_0_)]) {
-    OrgApacheLuceneAnalysisStandardStandardTokenizer *tokenizer = [new_OrgApacheLuceneAnalysisStandardStandardTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(factory) autorelease];
+  if ([((OrgApacheLuceneUtilVersion *) nil_chk(luceneMatchVersion_)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_7_0)]) {
+    OrgApacheLuceneAnalysisStandardStandardTokenizer *tokenizer = create_OrgApacheLuceneAnalysisStandardStandardTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(factory);
     [tokenizer setMaxTokenLengthWithInt:maxTokenLength_];
     return tokenizer;
   }
   else {
-    OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40 *tokenizer40 = [new_OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40_initWithOrgApacheLuceneUtilAttributeFactory_(factory) autorelease];
+    OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40 *tokenizer40 = create_OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40_initWithOrgApacheLuceneUtilAttributeFactory_(factory);
     [tokenizer40 setMaxTokenLengthWithInt:maxTokenLength_];
     return tokenizer40;
   }
@@ -45,7 +45,7 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "StandardTokenizerFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "StandardTokenizerFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "createWithOrgApacheLuceneUtilAttributeFactory:", "create", "Lorg.apache.lucene.analysis.Tokenizer;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -61,14 +61,16 @@ void OrgApacheLuceneAnalysisStandardStandardTokenizerFactory_initWithJavaUtilMap
   OrgApacheLuceneAnalysisUtilTokenizerFactory_initWithJavaUtilMap_(self, args);
   self->maxTokenLength_ = [self getIntWithJavaUtilMap:args withNSString:@"maxTokenLength" withInt:OrgApacheLuceneAnalysisStandardStandardAnalyzer_DEFAULT_MAX_TOKEN_LENGTH];
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisStandardStandardTokenizerFactory *new_OrgApacheLuceneAnalysisStandardStandardTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisStandardStandardTokenizerFactory *self = [OrgApacheLuceneAnalysisStandardStandardTokenizerFactory alloc];
-  OrgApacheLuceneAnalysisStandardStandardTokenizerFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisStandardStandardTokenizerFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisStandardStandardTokenizerFactory *create_OrgApacheLuceneAnalysisStandardStandardTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisStandardStandardTokenizerFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisStandardStandardTokenizerFactory)

@@ -14,8 +14,6 @@
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
 #include "org/apache/lucene/util/AttributeSource.h"
 
-#define OrgApacheLuceneAnalysisReverseReverseStringFilter_NOMARKER 0xffff
-
 @interface OrgApacheLuceneAnalysisReverseReverseStringFilter () {
  @public
   id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt_;
@@ -26,9 +24,27 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisReverseReverseStringFilter, termAtt_, id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisReverseReverseStringFilter, NOMARKER, jchar)
+inline jchar OrgApacheLuceneAnalysisReverseReverseStringFilter_get_NOMARKER();
+#define OrgApacheLuceneAnalysisReverseReverseStringFilter_NOMARKER 0xffff
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisReverseReverseStringFilter, NOMARKER, jchar)
 
 @implementation OrgApacheLuceneAnalysisReverseReverseStringFilter
+
++ (jchar)START_OF_HEADING_MARKER {
+  return OrgApacheLuceneAnalysisReverseReverseStringFilter_START_OF_HEADING_MARKER;
+}
+
++ (jchar)INFORMATION_SEPARATOR_MARKER {
+  return OrgApacheLuceneAnalysisReverseReverseStringFilter_INFORMATION_SEPARATOR_MARKER;
+}
+
++ (jchar)PUA_EC00_MARKER {
+  return OrgApacheLuceneAnalysisReverseReverseStringFilter_PUA_EC00_MARKER;
+}
+
++ (jchar)RTL_DIRECTION_MARKER {
+  return OrgApacheLuceneAnalysisReverseReverseStringFilter_RTL_DIRECTION_MARKER;
+}
 
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg {
   OrgApacheLuceneAnalysisReverseReverseStringFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, inArg);
@@ -112,9 +128,11 @@ void OrgApacheLuceneAnalysisReverseReverseStringFilter_initWithOrgApacheLuceneAn
 }
 
 OrgApacheLuceneAnalysisReverseReverseStringFilter *new_OrgApacheLuceneAnalysisReverseReverseStringFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) {
-  OrgApacheLuceneAnalysisReverseReverseStringFilter *self = [OrgApacheLuceneAnalysisReverseReverseStringFilter alloc];
-  OrgApacheLuceneAnalysisReverseReverseStringFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisReverseReverseStringFilter, initWithOrgApacheLuceneAnalysisTokenStream_, inArg)
+}
+
+OrgApacheLuceneAnalysisReverseReverseStringFilter *create_OrgApacheLuceneAnalysisReverseReverseStringFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisReverseReverseStringFilter, initWithOrgApacheLuceneAnalysisTokenStream_, inArg)
 }
 
 void OrgApacheLuceneAnalysisReverseReverseStringFilter_initWithOrgApacheLuceneAnalysisTokenStream_withChar_(OrgApacheLuceneAnalysisReverseReverseStringFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg, jchar marker) {
@@ -124,9 +142,11 @@ void OrgApacheLuceneAnalysisReverseReverseStringFilter_initWithOrgApacheLuceneAn
 }
 
 OrgApacheLuceneAnalysisReverseReverseStringFilter *new_OrgApacheLuceneAnalysisReverseReverseStringFilter_initWithOrgApacheLuceneAnalysisTokenStream_withChar_(OrgApacheLuceneAnalysisTokenStream *inArg, jchar marker) {
-  OrgApacheLuceneAnalysisReverseReverseStringFilter *self = [OrgApacheLuceneAnalysisReverseReverseStringFilter alloc];
-  OrgApacheLuceneAnalysisReverseReverseStringFilter_initWithOrgApacheLuceneAnalysisTokenStream_withChar_(self, inArg, marker);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisReverseReverseStringFilter, initWithOrgApacheLuceneAnalysisTokenStream_withChar_, inArg, marker)
+}
+
+OrgApacheLuceneAnalysisReverseReverseStringFilter *create_OrgApacheLuceneAnalysisReverseReverseStringFilter_initWithOrgApacheLuceneAnalysisTokenStream_withChar_(OrgApacheLuceneAnalysisTokenStream *inArg, jchar marker) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisReverseReverseStringFilter, initWithOrgApacheLuceneAnalysisTokenStream_withChar_, inArg, marker)
 }
 
 NSString *OrgApacheLuceneAnalysisReverseReverseStringFilter_reverseWithNSString_(NSString *input) {

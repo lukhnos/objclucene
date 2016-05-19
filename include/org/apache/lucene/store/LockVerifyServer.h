@@ -5,19 +5,28 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneStoreLockVerifyServer_INCLUDE_ALL")
-#if OrgApacheLuceneStoreLockVerifyServer_RESTRICT
-#define OrgApacheLuceneStoreLockVerifyServer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneStoreLockVerifyServer")
+#ifdef RESTRICT_OrgApacheLuceneStoreLockVerifyServer
+#define INCLUDE_ALL_OrgApacheLuceneStoreLockVerifyServer 0
 #else
-#define OrgApacheLuceneStoreLockVerifyServer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneStoreLockVerifyServer 1
 #endif
-#undef OrgApacheLuceneStoreLockVerifyServer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneStoreLockVerifyServer
 
-#if !defined (_OrgApacheLuceneStoreLockVerifyServer_) && (OrgApacheLuceneStoreLockVerifyServer_INCLUDE_ALL || OrgApacheLuceneStoreLockVerifyServer_INCLUDE)
-#define _OrgApacheLuceneStoreLockVerifyServer_
+#if !defined (OrgApacheLuceneStoreLockVerifyServer_) && (INCLUDE_ALL_OrgApacheLuceneStoreLockVerifyServer || defined(INCLUDE_OrgApacheLuceneStoreLockVerifyServer))
+#define OrgApacheLuceneStoreLockVerifyServer_
 
 @class IOSObjectArray;
 
+/*!
+ @brief Simple standalone server that must be running when you
+ use <code>VerifyingLockFactory</code>.
+ This server simply
+ verifies at most one process holds the lock at a time.
+ Run without any args to see usage.
+ - seealso: VerifyingLockFactory
+ - seealso: LockStressTest
+ */
 @interface OrgApacheLuceneStoreLockVerifyServer : NSObject
 
 #pragma mark Public
@@ -36,8 +45,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneStoreLockVerifyServer_init(OrgApacheLucene
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreLockVerifyServer *new_OrgApacheLuceneStoreLockVerifyServer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneStoreLockVerifyServer *create_OrgApacheLuceneStoreLockVerifyServer_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreLockVerifyServer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneStoreLockVerifyServer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreLockVerifyServer")

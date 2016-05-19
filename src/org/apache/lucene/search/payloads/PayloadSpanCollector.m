@@ -31,7 +31,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchPayloadsPayloadSpanCollector, payloads_
                            withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term {
   OrgApacheLuceneUtilBytesRef *payload = [((OrgApacheLuceneIndexPostingsEnum *) nil_chk(postings)) getPayload];
   if (payload == nil) return;
-  IOSByteArray *bytes = [IOSByteArray arrayWithLength:((OrgApacheLuceneUtilBytesRef *) nil_chk(payload))->length_];
+  IOSByteArray *bytes = [IOSByteArray arrayWithLength:payload->length_];
   JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(payload->bytes_, payload->offset_, bytes, 0, payload->length_);
   [((id<JavaUtilCollection>) nil_chk(payloads_)) addWithId:bytes];
 }
@@ -60,11 +60,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   static const J2ObjcMethodInfo methods[] = {
     { "collectLeafWithOrgApacheLuceneIndexPostingsEnum:withInt:withOrgApacheLuceneIndexTerm:", "collectLeaf", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "reset", NULL, "V", 0x1, NULL, NULL },
-    { "getPayloads", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "getPayloads", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<[LB;>;" },
+    { "init", "PayloadSpanCollector", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "payloads_", NULL, 0x12, "Ljava.util.Collection;", NULL, "Ljava/util/Collection<L[B;>;", .constantValue.asLong = 0 },
+    { "payloads_", NULL, 0x12, "Ljava.util.Collection;", NULL, "Ljava/util/Collection<[LB;>;", .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneSearchPayloadsPayloadSpanCollector = { 2, "PayloadSpanCollector", "org.apache.lucene.search.payloads", NULL, 0x1, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchPayloadsPayloadSpanCollector;
@@ -78,9 +78,11 @@ void OrgApacheLuceneSearchPayloadsPayloadSpanCollector_init(OrgApacheLuceneSearc
 }
 
 OrgApacheLuceneSearchPayloadsPayloadSpanCollector *new_OrgApacheLuceneSearchPayloadsPayloadSpanCollector_init() {
-  OrgApacheLuceneSearchPayloadsPayloadSpanCollector *self = [OrgApacheLuceneSearchPayloadsPayloadSpanCollector alloc];
-  OrgApacheLuceneSearchPayloadsPayloadSpanCollector_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchPayloadsPayloadSpanCollector, init)
+}
+
+OrgApacheLuceneSearchPayloadsPayloadSpanCollector *create_OrgApacheLuceneSearchPayloadsPayloadSpanCollector_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchPayloadsPayloadSpanCollector, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPayloadsPayloadSpanCollector)

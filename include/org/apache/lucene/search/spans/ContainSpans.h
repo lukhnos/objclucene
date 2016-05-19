@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSpansContainSpans_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSpansContainSpans_RESTRICT
-#define OrgApacheLuceneSearchSpansContainSpans_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansContainSpans")
+#ifdef RESTRICT_OrgApacheLuceneSearchSpansContainSpans
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansContainSpans 0
 #else
-#define OrgApacheLuceneSearchSpansContainSpans_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansContainSpans 1
 #endif
-#undef OrgApacheLuceneSearchSpansContainSpans_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSpansContainSpans
 
-#if !defined (_OrgApacheLuceneSearchSpansContainSpans_) && (OrgApacheLuceneSearchSpansContainSpans_INCLUDE_ALL || OrgApacheLuceneSearchSpansContainSpans_INCLUDE)
-#define _OrgApacheLuceneSearchSpansContainSpans_
+#if !defined (OrgApacheLuceneSearchSpansContainSpans_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansContainSpans || defined(INCLUDE_OrgApacheLuceneSearchSpansContainSpans))
+#define OrgApacheLuceneSearchSpansContainSpans_
 
-#define OrgApacheLuceneSearchSpansConjunctionSpans_RESTRICT 1
-#define OrgApacheLuceneSearchSpansConjunctionSpans_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSpansConjunctionSpans 1
+#define INCLUDE_OrgApacheLuceneSearchSpansConjunctionSpans 1
 #include "org/apache/lucene/search/spans/ConjunctionSpans.h"
 
 @class OrgApacheLuceneSearchSpansSpans;
@@ -60,4 +60,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansContainSpans)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSpansContainSpans_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansContainSpans")

@@ -30,7 +30,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode *)cloneTree {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode *clone = (OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode *) check_class_cast([super cloneTree], [OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode class]);
+  OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode *clone = (OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode *) cast_chk([super cloneTree], [OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode class]);
   return clone;
 }
 
@@ -52,9 +52,11 @@ void OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode_init(OrgAp
 }
 
 OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode_init() {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode *self = [OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode alloc];
-  OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode, init)
+}
+
+OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode *create_OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode)

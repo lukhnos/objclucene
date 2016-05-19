@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCoreStopFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCoreStopFilter_RESTRICT
-#define OrgApacheLuceneAnalysisCoreStopFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreStopFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCoreStopFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCoreStopFilter 0
 #else
-#define OrgApacheLuceneAnalysisCoreStopFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCoreStopFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisCoreStopFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCoreStopFilter
 
-#if !defined (_OrgApacheLuceneAnalysisCoreStopFilter_) && (OrgApacheLuceneAnalysisCoreStopFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisCoreStopFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisCoreStopFilter_
+#if !defined (OrgApacheLuceneAnalysisCoreStopFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCoreStopFilter || defined(INCLUDE_OrgApacheLuceneAnalysisCoreStopFilter))
+#define OrgApacheLuceneAnalysisCoreStopFilter_
 
-#define OrgApacheLuceneAnalysisUtilFilteringTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilFilteringTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilFilteringTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilFilteringTokenFilter 1
 #include "org/apache/lucene/analysis/util/FilteringTokenFilter.h"
 
 @class IOSObjectArray;
@@ -25,25 +25,69 @@
 @class OrgApacheLuceneAnalysisUtilCharArraySet;
 @protocol JavaUtilList;
 
+/*!
+ @brief Removes stop words from a token stream.
+ */
 @interface OrgApacheLuceneAnalysisCoreStopFilter : OrgApacheLuceneAnalysisUtilFilteringTokenFilter
 
 #pragma mark Public
 
+/*!
+ @brief Constructs a filter which removes words from the input TokenStream that are
+ named in the Set.
+ @param inArg
+ Input stream
+ @param stopWords
+ A <code>CharArraySet</code> representing the stopwords.
+ - seealso: #makeStopSet(java.lang.String...)
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
                withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopWords;
 
+/*!
+ @brief Builds a Set from an array of stop words,
+ appropriate for passing into the StopFilter constructor.
+ This permits this stopWords construction to be cached once when
+ an Analyzer is constructed.
+ @param stopWords A List of Strings or char[] or any other toString()-able list representing the stopwords
+ @return A Set (<code>CharArraySet</code>) containing the words
+ - seealso: #makeStopSet(java.lang.String[],boolean) passing false to ignoreCase
+ */
 + (OrgApacheLuceneAnalysisUtilCharArraySet *)makeStopSetWithJavaUtilList:(id<JavaUtilList>)stopWords;
 
+/*!
+ @brief Creates a stopword set from the given stopword list.
+ @param stopWords A List of Strings or char[] or any other toString()-able list representing the stopwords
+ @param ignoreCase if true, all words are lower cased first
+ @return A Set (<code>CharArraySet</code>) containing the words
+ */
 + (OrgApacheLuceneAnalysisUtilCharArraySet *)makeStopSetWithJavaUtilList:(id<JavaUtilList>)stopWords
                                                              withBoolean:(jboolean)ignoreCase;
 
+/*!
+ @brief Builds a Set from an array of stop words,
+ appropriate for passing into the StopFilter constructor.
+ This permits this stopWords construction to be cached once when
+ an Analyzer is constructed.
+ @param stopWords An array of stopwords
+ - seealso: #makeStopSet(java.lang.String[],boolean) passing false to ignoreCase
+ */
 + (OrgApacheLuceneAnalysisUtilCharArraySet *)makeStopSetWithNSStringArray:(IOSObjectArray *)stopWords;
 
+/*!
+ @brief Creates a stopword set from the given stopword array.
+ @param stopWords An array of stopwords
+ @param ignoreCase If true, all words are lower cased first.
+ @return a Set containing the words
+ */
 + (OrgApacheLuceneAnalysisUtilCharArraySet *)makeStopSetWithNSStringArray:(IOSObjectArray *)stopWords
                                                               withBoolean:(jboolean)ignoreCase;
 
 #pragma mark Protected
 
+/*!
+ @brief Returns the next input Token whose term() is not a stop word.
+ */
 - (jboolean)accept;
 
 @end
@@ -53,6 +97,8 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCoreStopFilter)
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreStopFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisCoreStopFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg, OrgApacheLuceneAnalysisUtilCharArraySet *stopWords);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreStopFilter *new_OrgApacheLuceneAnalysisCoreStopFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisTokenStream *inArg, OrgApacheLuceneAnalysisUtilCharArraySet *stopWords) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreStopFilter *create_OrgApacheLuceneAnalysisCoreStopFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisTokenStream *inArg, OrgApacheLuceneAnalysisUtilCharArraySet *stopWords);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisCoreStopFilter_makeStopSetWithNSStringArray_(IOSObjectArray *stopWords);
 
@@ -66,4 +112,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreStopFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCoreStopFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreStopFilter")

@@ -13,8 +13,6 @@
 #include "java/util/Date.h"
 #include "org/apache/lucene/queryparser/flexible/standard/config/NumberDateFormat.h"
 
-#define OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat_serialVersionUID 964823936071308283LL
-
 @interface OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat () {
  @public
   JavaTextDateFormat *dateFormat_;
@@ -24,7 +22,9 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat, dateFormat_, JavaTextDateFormat *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat, serialVersionUID, jlong)
+inline jlong OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat_get_serialVersionUID();
+#define OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat_serialVersionUID 964823936071308283LL
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat, serialVersionUID, jlong)
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat
 
@@ -36,19 +36,19 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserFlexibleStandardConfigNumbe
 - (JavaLangStringBuffer *)formatWithDouble:(jdouble)number
                   withJavaLangStringBuffer:(JavaLangStringBuffer *)toAppendTo
                  withJavaTextFieldPosition:(JavaTextFieldPosition *)pos {
-  return [((JavaTextDateFormat *) nil_chk(dateFormat_)) formatWithJavaUtilDate:[new_JavaUtilDate_initWithLong_(JreFpToLong(number)) autorelease] withJavaLangStringBuffer:toAppendTo withJavaTextFieldPosition:pos];
+  return [((JavaTextDateFormat *) nil_chk(dateFormat_)) formatWithJavaUtilDate:create_JavaUtilDate_initWithLong_(JreFpToLong(number)) withJavaLangStringBuffer:toAppendTo withJavaTextFieldPosition:pos];
 }
 
 - (JavaLangStringBuffer *)formatWithLong:(jlong)number
                 withJavaLangStringBuffer:(JavaLangStringBuffer *)toAppendTo
                withJavaTextFieldPosition:(JavaTextFieldPosition *)pos {
-  return [((JavaTextDateFormat *) nil_chk(dateFormat_)) formatWithJavaUtilDate:[new_JavaUtilDate_initWithLong_(number) autorelease] withJavaLangStringBuffer:toAppendTo withJavaTextFieldPosition:pos];
+  return [((JavaTextDateFormat *) nil_chk(dateFormat_)) formatWithJavaUtilDate:create_JavaUtilDate_initWithLong_(number) withJavaLangStringBuffer:toAppendTo withJavaTextFieldPosition:pos];
 }
 
 - (NSNumber *)parseWithNSString:(NSString *)source
       withJavaTextParsePosition:(JavaTextParsePosition *)parsePosition {
   JavaUtilDate *date = [((JavaTextDateFormat *) nil_chk(dateFormat_)) parseWithNSString:source withJavaTextParsePosition:parsePosition];
-  return (date == nil) ? nil : JavaLangLong_valueOfWithLong_([date getTime]);
+  return (date == nil) ? nil : JavaLangLong_valueOfWithLong_([((JavaUtilDate *) nil_chk(date)) getTime]);
 }
 
 - (JavaLangStringBuffer *)formatWithId:(id)number
@@ -86,9 +86,11 @@ void OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat_initWithJa
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat *new_OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat_initWithJavaTextDateFormat_(JavaTextDateFormat *dateFormat) {
-  OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat *self = [OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat_initWithJavaTextDateFormat_(self, dateFormat);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat, initWithJavaTextDateFormat_, dateFormat)
+}
+
+OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat *create_OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat_initWithJavaTextDateFormat_(JavaTextDateFormat *dateFormat) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat, initWithJavaTextDateFormat_, dateFormat)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat)

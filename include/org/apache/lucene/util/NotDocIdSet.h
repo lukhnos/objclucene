@@ -5,28 +5,36 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilNotDocIdSet_INCLUDE_ALL")
-#if OrgApacheLuceneUtilNotDocIdSet_RESTRICT
-#define OrgApacheLuceneUtilNotDocIdSet_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilNotDocIdSet")
+#ifdef RESTRICT_OrgApacheLuceneUtilNotDocIdSet
+#define INCLUDE_ALL_OrgApacheLuceneUtilNotDocIdSet 0
 #else
-#define OrgApacheLuceneUtilNotDocIdSet_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilNotDocIdSet 1
 #endif
-#undef OrgApacheLuceneUtilNotDocIdSet_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilNotDocIdSet
 
-#if !defined (_OrgApacheLuceneUtilNotDocIdSet_) && (OrgApacheLuceneUtilNotDocIdSet_INCLUDE_ALL || OrgApacheLuceneUtilNotDocIdSet_INCLUDE)
-#define _OrgApacheLuceneUtilNotDocIdSet_
+#if !defined (OrgApacheLuceneUtilNotDocIdSet_) && (INCLUDE_ALL_OrgApacheLuceneUtilNotDocIdSet || defined(INCLUDE_OrgApacheLuceneUtilNotDocIdSet))
+#define OrgApacheLuceneUtilNotDocIdSet_
 
-#define OrgApacheLuceneSearchDocIdSet_RESTRICT 1
-#define OrgApacheLuceneSearchDocIdSet_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchDocIdSet 1
+#define INCLUDE_OrgApacheLuceneSearchDocIdSet 1
 #include "org/apache/lucene/search/DocIdSet.h"
 
 @class OrgApacheLuceneSearchDocIdSetIterator;
 @protocol OrgApacheLuceneUtilBits;
 
+/*!
+ @brief This <code>DocIdSet</code> encodes the negation of another <code>DocIdSet</code>.
+ It is cacheable and supports random-access if the underlying set is
+ cacheable and supports random-access.
+ */
 @interface OrgApacheLuceneUtilNotDocIdSet : OrgApacheLuceneSearchDocIdSet
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ */
 - (instancetype)initWithInt:(jint)maxDoc
 withOrgApacheLuceneSearchDocIdSet:(OrgApacheLuceneSearchDocIdSet *)inArg;
 
@@ -46,8 +54,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilNotDocIdSet_initWithInt_withOrgApacheL
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilNotDocIdSet *new_OrgApacheLuceneUtilNotDocIdSet_initWithInt_withOrgApacheLuceneSearchDocIdSet_(jint maxDoc, OrgApacheLuceneSearchDocIdSet *inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilNotDocIdSet *create_OrgApacheLuceneUtilNotDocIdSet_initWithInt_withOrgApacheLuceneSearchDocIdSet_(jint maxDoc, OrgApacheLuceneSearchDocIdSet *inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilNotDocIdSet)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilNotDocIdSet_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilNotDocIdSet")

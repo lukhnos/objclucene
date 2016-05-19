@@ -5,25 +5,44 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_) && (OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory))
+#define OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>org.apache.lucene.analysis.miscellaneous.TruncateTokenFilter</code>.
+ The following type is recommended for "<i>diacritics-insensitive search</i>" for Turkish.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_tr_ascii_f5" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+ &lt;filter class="solr.ApostropheFilterFactory"/&gt;
+ &lt;filter class="solr.TurkishLowerCaseFilterFactory"/&gt;
+ &lt;filter class="solr.ASCIIFoldingFilterFactory" preserveOriginal="true"/&gt;
+ &lt;filter class="solr.KeywordRepeatFilterFactory"/&gt;
+ &lt;filter class="solr.TruncateTokenFilterFactory" prefixLength="5"/&gt;
+ &lt;filter class="solr.RemoveDuplicatesTokenFilterFactory"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
+
++ (NSString *)PREFIX_LENGTH_KEY;
 
 #pragma mark Public
 
@@ -35,15 +54,19 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_PREFIX_LENGTH_KEY_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory, PREFIX_LENGTH_KEY_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_get_PREFIX_LENGTH_KEY();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_PREFIX_LENGTH_KEY;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory, PREFIX_LENGTH_KEY, NSString *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory *self, id<JavaUtilMap> args);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory *create_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory")

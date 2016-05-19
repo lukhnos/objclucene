@@ -5,23 +5,23 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory_) && (OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory))
+#define OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-#define OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent 1
 #include "org/apache/lucene/analysis/util/MultiTermAwareComponent.h"
 
 @class OrgApacheLuceneAnalysisElGreekLowerCaseFilter;
@@ -29,10 +29,24 @@
 @class OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>GreekLowerCaseFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_glc" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+ &lt;filter class="solr.GreekLowerCaseFilterFactory"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilMultiTermAwareComponent >
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new GreekLowerCaseFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisElGreekLowerCaseFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
@@ -47,8 +61,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory_init
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory *new_OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory *create_OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory")

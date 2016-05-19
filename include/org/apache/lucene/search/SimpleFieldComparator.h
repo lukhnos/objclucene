@@ -5,28 +5,31 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSimpleFieldComparator_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSimpleFieldComparator_RESTRICT
-#define OrgApacheLuceneSearchSimpleFieldComparator_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimpleFieldComparator")
+#ifdef RESTRICT_OrgApacheLuceneSearchSimpleFieldComparator
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimpleFieldComparator 0
 #else
-#define OrgApacheLuceneSearchSimpleFieldComparator_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimpleFieldComparator 1
 #endif
-#undef OrgApacheLuceneSearchSimpleFieldComparator_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSimpleFieldComparator
 
-#if !defined (_OrgApacheLuceneSearchSimpleFieldComparator_) && (OrgApacheLuceneSearchSimpleFieldComparator_INCLUDE_ALL || OrgApacheLuceneSearchSimpleFieldComparator_INCLUDE)
-#define _OrgApacheLuceneSearchSimpleFieldComparator_
+#if !defined (OrgApacheLuceneSearchSimpleFieldComparator_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimpleFieldComparator || defined(INCLUDE_OrgApacheLuceneSearchSimpleFieldComparator))
+#define OrgApacheLuceneSearchSimpleFieldComparator_
 
-#define OrgApacheLuceneSearchFieldComparator_RESTRICT 1
-#define OrgApacheLuceneSearchFieldComparator_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchFieldComparator 1
+#define INCLUDE_OrgApacheLuceneSearchFieldComparator 1
 #include "org/apache/lucene/search/FieldComparator.h"
 
-#define OrgApacheLuceneSearchLeafFieldComparator_RESTRICT 1
-#define OrgApacheLuceneSearchLeafFieldComparator_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchLeafFieldComparator 1
+#define INCLUDE_OrgApacheLuceneSearchLeafFieldComparator 1
 #include "org/apache/lucene/search/LeafFieldComparator.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneSearchScorer;
 
+/*!
+ @brief Base <code>FieldComparator</code> implementation that is used for all contexts.
+ */
 @interface OrgApacheLuceneSearchSimpleFieldComparator : OrgApacheLuceneSearchFieldComparator < OrgApacheLuceneSearchLeafFieldComparator >
 
 #pragma mark Public
@@ -39,6 +42,9 @@
 
 #pragma mark Protected
 
+/*!
+ @brief This method is called before collecting <code>context</code>.
+ */
 - (void)doSetNextReaderWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
 @end
@@ -51,4 +57,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimpleFieldComparator)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSimpleFieldComparator_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimpleFieldComparator")

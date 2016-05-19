@@ -39,7 +39,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter
     IOSByteArray *data = [IOSByteArray arrayWithLength:8];
     OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeIntWithInt_withByteArray_withInt_([((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) startOffset], data, 0);
     OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeIntWithInt_withByteArray_withInt_([offsetAtt_ endOffset], data, 4);
-    OrgApacheLuceneUtilBytesRef *payload = [new_OrgApacheLuceneUtilBytesRef_initWithByteArray_(data) autorelease];
+    OrgApacheLuceneUtilBytesRef *payload = create_OrgApacheLuceneUtilBytesRef_initWithByteArray_(data);
     [((id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute>) nil_chk(payAtt_)) setPayloadWithOrgApacheLuceneUtilBytesRef:payload];
     return true;
   }
@@ -76,9 +76,11 @@ void OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter_initWithOrgApa
 }
 
 OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter *new_OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) {
-  OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter *self = [OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter alloc];
-  OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, input);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_, input)
+}
+
+OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter *create_OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_, input)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter)

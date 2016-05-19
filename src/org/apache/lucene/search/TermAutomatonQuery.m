@@ -97,14 +97,14 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight,
 - (void)addTransitionWithInt:(jint)source
                      withInt:(jint)dest
                 withNSString:(NSString *)term {
-  [self addTransitionWithInt:source withInt:dest withOrgApacheLuceneUtilBytesRef:[new_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(term) autorelease]];
+  [self addTransitionWithInt:source withInt:dest withOrgApacheLuceneUtilBytesRef:create_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(term)];
 }
 
 - (void)addTransitionWithInt:(jint)source
                      withInt:(jint)dest
 withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
   if (term == nil) {
-    @throw [new_JavaLangNullPointerException_initWithNSString_(@"term should not be null") autorelease];
+    @throw create_JavaLangNullPointerException_initWithNSString_(@"term should not be null");
   }
   [((OrgApacheLuceneUtilAutomatonAutomaton_Builder *) nil_chk(builder_)) addTransitionWithInt:source withInt:dest withInt:OrgApacheLuceneSearchTermAutomatonQuery_getTermIDWithOrgApacheLuceneUtilBytesRef_(self, term)];
 }
@@ -120,13 +120,13 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
 
 - (void)finishWithInt:(jint)maxDeterminizedStates {
   OrgApacheLuceneUtilAutomatonAutomaton *automaton = [((OrgApacheLuceneUtilAutomatonAutomaton_Builder *) nil_chk(builder_)) finish];
-  OrgApacheLuceneUtilAutomatonTransition *t = [new_OrgApacheLuceneUtilAutomatonTransition_init() autorelease];
+  OrgApacheLuceneUtilAutomatonTransition *t = create_OrgApacheLuceneUtilAutomatonTransition_init();
   if (anyTermID_ != -1) {
     jint count = [((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(automaton)) initTransitionWithInt:0 withOrgApacheLuceneUtilAutomatonTransition:t];
     for (jint i = 0; i < count; i++) {
       [automaton getNextTransitionWithOrgApacheLuceneUtilAutomatonTransition:t];
       if (anyTermID_ >= t->min_ && anyTermID_ <= t->max_) {
-        @throw [new_JavaLangIllegalStateException_initWithNSString_(@"automaton cannot lead with an ANY transition") autorelease];
+        @throw create_JavaLangIllegalStateException_initWithNSString_(@"automaton cannot lead with an ANY transition");
       }
     }
     jint numStates = [automaton getNumStates];
@@ -135,12 +135,12 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
       for (jint j = 0; j < count; j++) {
         [automaton getNextTransitionWithOrgApacheLuceneUtilAutomatonTransition:t];
         if ([automaton isAcceptWithInt:t->dest_] && anyTermID_ >= t->min_ && anyTermID_ <= t->max_) {
-          @throw [new_JavaLangIllegalStateException_initWithNSString_(@"automaton cannot end with an ANY transition") autorelease];
+          @throw create_JavaLangIllegalStateException_initWithNSString_(@"automaton cannot end with an ANY transition");
         }
       }
     }
     jint termCount = [((id<JavaUtilMap>) nil_chk(termToID_)) size];
-    OrgApacheLuceneUtilAutomatonAutomaton *newAutomaton = [new_OrgApacheLuceneUtilAutomatonAutomaton_init() autorelease];
+    OrgApacheLuceneUtilAutomatonAutomaton *newAutomaton = create_OrgApacheLuceneUtilAutomatonAutomaton_init();
     for (jint i = 0; i < numStates; i++) {
       [newAutomaton createState];
       [newAutomaton setAcceptWithInt:i withBoolean:[automaton isAcceptWithInt:i]];
@@ -170,22 +170,22 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores {
   OrgApacheLuceneIndexIndexReaderContext *context = [((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getTopReaderContext];
-  id<JavaUtilMap> termStates = [new_JavaUtilHashMap_init() autorelease];
+  id<JavaUtilMap> termStates = create_JavaUtilHashMap_init();
   for (id<JavaUtilMap_Entry> __strong ent in nil_chk([((id<JavaUtilMap>) nil_chk(termToID_)) entrySet])) {
     if ([((id<JavaUtilMap_Entry>) nil_chk(ent)) getKey] != nil) {
-      [termStates putWithId:[ent getValue] withId:OrgApacheLuceneIndexTermContext_buildWithOrgApacheLuceneIndexIndexReaderContext_withOrgApacheLuceneIndexTerm_(context, [new_OrgApacheLuceneIndexTerm_initWithNSString_withOrgApacheLuceneUtilBytesRef_(field_, [ent getKey]) autorelease])];
+      [termStates putWithId:[ent getValue] withId:OrgApacheLuceneIndexTermContext_buildWithOrgApacheLuceneIndexIndexReaderContext_withOrgApacheLuceneIndexTerm_(context, create_OrgApacheLuceneIndexTerm_initWithNSString_withOrgApacheLuceneUtilBytesRef_(field_, [ent getKey]))];
     }
   }
-  return [new_OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight_initWithOrgApacheLuceneSearchTermAutomatonQuery_withOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_(self, det_, searcher, termStates) autorelease];
+  return create_OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight_initWithOrgApacheLuceneSearchTermAutomatonQuery_withOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_(self, det_, searcher, termStates);
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   [sb appendWithNSString:@"TermAutomatonQuery(field="];
   [sb appendWithNSString:self->field_];
   if (det_ != nil) {
     [sb appendWithNSString:@" numStates="];
-    [sb appendWithInt:[det_ getNumStates]];
+    [sb appendWithInt:[((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(det_)) getNumStates]];
   }
   [sb appendWithChar:')'];
   return [sb description];
@@ -199,25 +199,25 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
   if (!([o isKindOfClass:[OrgApacheLuceneSearchTermAutomatonQuery class]])) {
     return false;
   }
-  OrgApacheLuceneSearchTermAutomatonQuery *other = (OrgApacheLuceneSearchTermAutomatonQuery *) check_class_cast(o, [OrgApacheLuceneSearchTermAutomatonQuery class]);
+  OrgApacheLuceneSearchTermAutomatonQuery *other = (OrgApacheLuceneSearchTermAutomatonQuery *) cast_chk(o, [OrgApacheLuceneSearchTermAutomatonQuery class]);
   if (det_ == nil) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"please call finish first") autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"please call finish first");
   }
   if (((OrgApacheLuceneSearchTermAutomatonQuery *) nil_chk(other))->det_ == nil) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"please call other.finish first") autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"please call other.finish first");
   }
   return [super isEqual:o] && [((id<JavaUtilMap>) nil_chk(self->termToID_)) isEqual:other->termToID_] && OrgApacheLuceneUtilAutomatonOperations_sameLanguageWithOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneUtilAutomatonAutomaton_(det_, other->det_);
 }
 
 - (NSUInteger)hash {
   if (det_ == nil) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"please call finish first") autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"please call finish first");
   }
   return ((jint) [super hash]) ^ ((jint) [((id<JavaUtilMap>) nil_chk(termToID_)) hash]) + ((jint) [((NSString *) nil_chk([((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(det_)) toDot])) hash]);
 }
 
 - (NSString *)toDot {
-  JavaLangStringBuilder *b = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *b = create_JavaLangStringBuilder_init();
   [b appendWithNSString:@"digraph Automaton {\n"];
   [b appendWithNSString:@"  rankdir = LR\n"];
   jint numStates = [((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(det_)) getNumStates];
@@ -225,19 +225,19 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
     [b appendWithNSString:@"  initial [shape=plaintext,label=\"0\"]\n"];
     [b appendWithNSString:@"  initial -> 0\n"];
   }
-  OrgApacheLuceneUtilAutomatonTransition *t = [new_OrgApacheLuceneUtilAutomatonTransition_init() autorelease];
+  OrgApacheLuceneUtilAutomatonTransition *t = create_OrgApacheLuceneUtilAutomatonTransition_init();
   for (jint state = 0; state < numStates; state++) {
     [b appendWithNSString:@"  "];
     [b appendWithInt:state];
-    if ([det_ isAcceptWithInt:state]) {
+    if ([((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(det_)) isAcceptWithInt:state]) {
       [b appendWithNSString:JreStrcat("$I$", @" [shape=doublecircle,label=\"", state, @"\"]\n")];
     }
     else {
       [b appendWithNSString:JreStrcat("$I$", @" [shape=circle,label=\"", state, @"\"]\n")];
     }
-    jint numTransitions = [det_ initTransitionWithInt:state withOrgApacheLuceneUtilAutomatonTransition:t];
+    jint numTransitions = [((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(det_)) initTransitionWithInt:state withOrgApacheLuceneUtilAutomatonTransition:t];
     for (jint i = 0; i < numTransitions; i++) {
-      [det_ getNextTransitionWithOrgApacheLuceneUtilAutomatonTransition:t];
+      [((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(det_)) getNextTransitionWithOrgApacheLuceneUtilAutomatonTransition:t];
       JreAssert((t->max_ >= t->min_), (@"org/apache/lucene/search/TermAutomatonQuery.java:292 condition failed: assert t.max >= t.min;"));
       for (jint j = t->min_; j <= t->max_; j++) {
         [b appendWithNSString:@"  "];
@@ -310,9 +310,11 @@ void OrgApacheLuceneSearchTermAutomatonQuery_initWithNSString_(OrgApacheLuceneSe
 }
 
 OrgApacheLuceneSearchTermAutomatonQuery *new_OrgApacheLuceneSearchTermAutomatonQuery_initWithNSString_(NSString *field) {
-  OrgApacheLuceneSearchTermAutomatonQuery *self = [OrgApacheLuceneSearchTermAutomatonQuery alloc];
-  OrgApacheLuceneSearchTermAutomatonQuery_initWithNSString_(self, field);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTermAutomatonQuery, initWithNSString_, field)
+}
+
+OrgApacheLuceneSearchTermAutomatonQuery *create_OrgApacheLuceneSearchTermAutomatonQuery_initWithNSString_(NSString *field) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTermAutomatonQuery, initWithNSString_, field)
 }
 
 jint OrgApacheLuceneSearchTermAutomatonQuery_getTermIDWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneSearchTermAutomatonQuery *self, OrgApacheLuceneUtilBytesRef *term) {
@@ -328,7 +330,7 @@ jint OrgApacheLuceneSearchTermAutomatonQuery_getTermIDWithOrgApacheLuceneUtilByt
       self->anyTermID_ = [id_ intValue];
     }
   }
-  return [((JavaLangInteger *) nil_chk(id_)) intValue];
+  return [id_ intValue];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTermAutomatonQuery)
@@ -369,9 +371,11 @@ void OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer_initWithInt_withOrgAp
 }
 
 OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer *new_OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer_initWithInt_withOrgApacheLuceneIndexPostingsEnum_(jint termID, OrgApacheLuceneIndexPostingsEnum *posEnum) {
-  OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer *self = [OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer alloc];
-  OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer_initWithInt_withOrgApacheLuceneIndexPostingsEnum_(self, termID, posEnum);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer, initWithInt_withOrgApacheLuceneIndexPostingsEnum_, termID, posEnum)
+}
+
+OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer *create_OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer_initWithInt_withOrgApacheLuceneIndexPostingsEnum_(jint termID, OrgApacheLuceneIndexPostingsEnum *posEnum) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer, initWithInt_withOrgApacheLuceneIndexPostingsEnum_, termID, posEnum)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer)
@@ -389,7 +393,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTermAutomatonQuery_EnumAnd
 - (void)extractTermsWithJavaUtilSet:(id<JavaUtilSet>)terms {
   for (OrgApacheLuceneUtilBytesRef * __strong text in nil_chk([((id<JavaUtilMap>) nil_chk(this$0_->termToID_)) keySet])) {
     if (text != nil) {
-      [((id<JavaUtilSet>) nil_chk(terms)) addWithId:[new_OrgApacheLuceneIndexTerm_initWithNSString_withOrgApacheLuceneUtilBytesRef_(this$0_->field_, text) autorelease]];
+      [((id<JavaUtilSet>) nil_chk(terms)) addWithId:create_OrgApacheLuceneIndexTerm_initWithNSString_withOrgApacheLuceneUtilBytesRef_(this$0_->field_, text)];
     }
   }
 }
@@ -423,7 +427,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTermAutomatonQuery_EnumAnd
     }
   }
   if (any) {
-    return [new_OrgApacheLuceneSearchTermAutomatonScorer_initWithOrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight_withOrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorerArray_withInt_withJavaUtilMap_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(self, enums, this$0_->anyTermID_, this$0_->idToTerm_, [((OrgApacheLuceneSearchSimilaritiesSimilarity *) nil_chk(similarity_)) simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:stats_ withOrgApacheLuceneIndexLeafReaderContext:context]) autorelease];
+    return create_OrgApacheLuceneSearchTermAutomatonScorer_initWithOrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight_withOrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorerArray_withInt_withJavaUtilMap_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(self, enums, this$0_->anyTermID_, this$0_->idToTerm_, [((OrgApacheLuceneSearchSimilaritiesSimilarity *) nil_chk(similarity_)) simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:stats_ withOrgApacheLuceneIndexLeafReaderContext:context]);
   }
   else {
     return nil;
@@ -447,8 +451,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTermAutomatonQuery_EnumAnd
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchTermAutomatonQuery:withOrgApacheLuceneUtilAutomatonAutomaton:withOrgApacheLuceneSearchIndexSearcher:withJavaUtilMap:", "TermAutomatonWeight", NULL, 0x1, NULL, NULL },
-    { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x1, NULL, NULL },
+    { "initWithOrgApacheLuceneSearchTermAutomatonQuery:withOrgApacheLuceneUtilAutomatonAutomaton:withOrgApacheLuceneSearchIndexSearcher:withJavaUtilMap:", "TermAutomatonWeight", NULL, 0x1, NULL, "(Lorg/apache/lucene/search/TermAutomatonQuery;Lorg/apache/lucene/util/automaton/Automaton;Lorg/apache/lucene/search/IndexSearcher;Ljava/util/Map<Ljava/lang/Integer;Lorg/apache/lucene/index/TermContext;>;)V" },
+    { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x1, NULL, "(Ljava/util/Set<Lorg/apache/lucene/index/Term;>;)V" },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "getValueForNormalization", NULL, "F", 0x1, NULL, NULL },
     { "normalizeWithFloat:withFloat:", "normalize", "V", 0x1, NULL, NULL },
@@ -476,20 +480,22 @@ void OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight_initWithOrgApac
   JreStrongAssign(&self->searcher_, searcher);
   JreStrongAssign(&self->termStates_, termStates);
   JreStrongAssign(&self->similarity_, [((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getSimilarityWithBoolean:true]);
-  id<JavaUtilList> allTermStats = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> allTermStats = create_JavaUtilArrayList_init();
   for (id<JavaUtilMap_Entry> __strong ent in nil_chk([((id<JavaUtilMap>) nil_chk(outer$->idToTerm_)) entrySet])) {
     JavaLangInteger *termID = [((id<JavaUtilMap_Entry>) nil_chk(ent)) getKey];
     if ([ent getValue] != nil) {
-      [allTermStats addWithId:[searcher termStatisticsWithOrgApacheLuceneIndexTerm:[new_OrgApacheLuceneIndexTerm_initWithNSString_withOrgApacheLuceneUtilBytesRef_(outer$->field_, [ent getValue]) autorelease] withOrgApacheLuceneIndexTermContext:[((id<JavaUtilMap>) nil_chk(termStates)) getWithId:termID]]];
+      [allTermStats addWithId:[searcher termStatisticsWithOrgApacheLuceneIndexTerm:create_OrgApacheLuceneIndexTerm_initWithNSString_withOrgApacheLuceneUtilBytesRef_(outer$->field_, [ent getValue]) withOrgApacheLuceneIndexTermContext:[((id<JavaUtilMap>) nil_chk(termStates)) getWithId:termID]]];
     }
   }
   JreStrongAssign(&self->stats_, [((OrgApacheLuceneSearchSimilaritiesSimilarity *) nil_chk(self->similarity_)) computeWeightWithFloat:[outer$ getBoost] withOrgApacheLuceneSearchCollectionStatistics:[searcher collectionStatisticsWithNSString:outer$->field_] withOrgApacheLuceneSearchTermStatisticsArray:[allTermStats toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[allTermStats size] type:OrgApacheLuceneSearchTermStatistics_class_()]]]);
 }
 
 OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight *new_OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight_initWithOrgApacheLuceneSearchTermAutomatonQuery_withOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_(OrgApacheLuceneSearchTermAutomatonQuery *outer$, OrgApacheLuceneUtilAutomatonAutomaton *automaton, OrgApacheLuceneSearchIndexSearcher *searcher, id<JavaUtilMap> termStates) {
-  OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight *self = [OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight alloc];
-  OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight_initWithOrgApacheLuceneSearchTermAutomatonQuery_withOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_(self, outer$, automaton, searcher, termStates);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight, initWithOrgApacheLuceneSearchTermAutomatonQuery_withOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_, outer$, automaton, searcher, termStates)
+}
+
+OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight *create_OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight_initWithOrgApacheLuceneSearchTermAutomatonQuery_withOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_(OrgApacheLuceneSearchTermAutomatonQuery *outer$, OrgApacheLuceneUtilAutomatonAutomaton *automaton, OrgApacheLuceneSearchIndexSearcher *searcher, id<JavaUtilMap> termStates) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight, initWithOrgApacheLuceneSearchTermAutomatonQuery_withOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_, outer$, automaton, searcher, termStates)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight)

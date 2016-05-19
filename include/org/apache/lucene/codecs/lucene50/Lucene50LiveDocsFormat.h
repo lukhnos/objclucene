@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_RESTRICT
-#define OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat")
+#ifdef RESTRICT_OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat
+#define INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat 0
 #else
-#define OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat 1
 #endif
-#undef OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat
 
-#if !defined (_OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_) && (OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_INCLUDE_ALL || OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_INCLUDE)
-#define _OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_
+#if !defined (OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_) && (INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat || defined(INCLUDE_OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat))
+#define OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_
 
-#define OrgApacheLuceneCodecsLiveDocsFormat_RESTRICT 1
-#define OrgApacheLuceneCodecsLiveDocsFormat_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneCodecsLiveDocsFormat 1
+#define INCLUDE_OrgApacheLuceneCodecsLiveDocsFormat 1
 #include "org/apache/lucene/codecs/LiveDocsFormat.h"
 
 @class OrgApacheLuceneIndexSegmentCommitInfo;
@@ -27,10 +27,25 @@
 @protocol OrgApacheLuceneUtilBits;
 @protocol OrgApacheLuceneUtilMutableBits;
 
+/*!
+ @brief Lucene 5.0 live docs format 
+ <p>The .liv file is optional, and only exists when a segment contains
+ deletions.
+ <p>Although per-segment, this file is maintained exterior to compound segment
+ files.
+ <p>Deletions (.liv) --&gt; IndexHeader,Generation,Bits
+ <ul>
+ <li>SegmentHeader --&gt; <code>IndexHeader</code></li>
+ <li>Bits --&gt; &lt;<code>Int64</code>&gt; <sup>LongCount</sup></li>
+ </ul>
+ */
 @interface OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat : OrgApacheLuceneCodecsLiveDocsFormat
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ */
 - (instancetype)init;
 
 - (void)filesWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)info
@@ -58,8 +73,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_init(
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat *new_OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat *create_OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat")

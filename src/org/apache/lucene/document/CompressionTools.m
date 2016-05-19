@@ -24,6 +24,8 @@ __attribute__((unused)) static void OrgApacheLuceneDocumentCompressionTools_init
 
 __attribute__((unused)) static OrgApacheLuceneDocumentCompressionTools *new_OrgApacheLuceneDocumentCompressionTools_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneDocumentCompressionTools *create_OrgApacheLuceneDocumentCompressionTools_init();
+
 @implementation OrgApacheLuceneDocumentCompressionTools
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -113,15 +115,17 @@ void OrgApacheLuceneDocumentCompressionTools_init(OrgApacheLuceneDocumentCompres
 }
 
 OrgApacheLuceneDocumentCompressionTools *new_OrgApacheLuceneDocumentCompressionTools_init() {
-  OrgApacheLuceneDocumentCompressionTools *self = [OrgApacheLuceneDocumentCompressionTools alloc];
-  OrgApacheLuceneDocumentCompressionTools_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentCompressionTools, init)
+}
+
+OrgApacheLuceneDocumentCompressionTools *create_OrgApacheLuceneDocumentCompressionTools_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentCompressionTools, init)
 }
 
 IOSByteArray *OrgApacheLuceneDocumentCompressionTools_compressWithByteArray_withInt_withInt_withInt_(IOSByteArray *value, jint offset, jint length, jint compressionLevel) {
   OrgApacheLuceneDocumentCompressionTools_initialize();
-  JavaIoByteArrayOutputStream *bos = [new_JavaIoByteArrayOutputStream_initWithInt_(length) autorelease];
-  JavaUtilZipDeflater *compressor = [new_JavaUtilZipDeflater_init() autorelease];
+  JavaIoByteArrayOutputStream *bos = create_JavaIoByteArrayOutputStream_initWithInt_(length);
+  JavaUtilZipDeflater *compressor = create_JavaUtilZipDeflater_init();
   @try {
     [compressor setLevelWithInt:compressionLevel];
     [compressor setInputWithByteArray:value withInt:offset withInt:length];
@@ -172,8 +176,8 @@ IOSByteArray *OrgApacheLuceneDocumentCompressionTools_decompressWithByteArray_(I
 
 IOSByteArray *OrgApacheLuceneDocumentCompressionTools_decompressWithByteArray_withInt_withInt_(IOSByteArray *value, jint offset, jint length) {
   OrgApacheLuceneDocumentCompressionTools_initialize();
-  JavaIoByteArrayOutputStream *bos = [new_JavaIoByteArrayOutputStream_initWithInt_(length) autorelease];
-  JavaUtilZipInflater *decompressor = [new_JavaUtilZipInflater_init() autorelease];
+  JavaIoByteArrayOutputStream *bos = create_JavaIoByteArrayOutputStream_initWithInt_(length);
+  JavaUtilZipInflater *decompressor = create_JavaUtilZipInflater_init();
   @try {
     [decompressor setInputWithByteArray:value withInt:offset withInt:length];
     IOSByteArray *buf = [IOSByteArray arrayWithLength:1024];

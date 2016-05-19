@@ -5,35 +5,46 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter_INCLUDE_ALL")
-#if OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter_RESTRICT
-#define OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter")
+#ifdef RESTRICT_OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter
+#define INCLUDE_ALL_OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter 0
 #else
-#define OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter 1
 #endif
-#undef OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter
 
-#if !defined (_OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter_) && (OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter_INCLUDE_ALL || OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter_INCLUDE)
-#define _OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter_
+#if !defined (OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter || defined(INCLUDE_OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter))
+#define OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter_
 
-#define OrgApacheLuceneSearchJoinBitDocIdSetFilter_RESTRICT 1
-#define OrgApacheLuceneSearchJoinBitDocIdSetFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchJoinBitDocIdSetFilter 1
+#define INCLUDE_OrgApacheLuceneSearchJoinBitDocIdSetFilter 1
 #include "org/apache/lucene/search/join/BitDocIdSetFilter.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneSearchFilter;
 @class OrgApacheLuceneUtilBitDocIdSet;
 
+/*!
+ @brief <code>Filter</code> wrapper that implements <code>BitDocIdSetFilter</code>.
+ */
 @interface OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter : OrgApacheLuceneSearchJoinBitDocIdSetFilter
 
 #pragma mark Public
 
+/*!
+ @brief Wraps another filter's result and caches it into bitsets.
+ @param filter Filter to cache results of
+ */
 - (instancetype)initWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter;
 
 - (jboolean)isEqual:(id)o;
 
 - (OrgApacheLuceneUtilBitDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
+/*!
+ @brief Gets the contained filter.
+ @return the contained filter.
+ */
 - (OrgApacheLuceneSearchFilter *)getFilter;
 
 - (NSUInteger)hash;
@@ -48,8 +59,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter_
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter *new_OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter_initWithOrgApacheLuceneSearchFilter_(OrgApacheLuceneSearchFilter *filter) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter *create_OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter_initWithOrgApacheLuceneSearchFilter_(OrgApacheLuceneSearchFilter *filter);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter")

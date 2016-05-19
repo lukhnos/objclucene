@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexFrozenBufferedUpdates_INCLUDE_ALL")
-#if OrgApacheLuceneIndexFrozenBufferedUpdates_RESTRICT
-#define OrgApacheLuceneIndexFrozenBufferedUpdates_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexFrozenBufferedUpdates")
+#ifdef RESTRICT_OrgApacheLuceneIndexFrozenBufferedUpdates
+#define INCLUDE_ALL_OrgApacheLuceneIndexFrozenBufferedUpdates 0
 #else
-#define OrgApacheLuceneIndexFrozenBufferedUpdates_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexFrozenBufferedUpdates 1
 #endif
-#undef OrgApacheLuceneIndexFrozenBufferedUpdates_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexFrozenBufferedUpdates
 
-#if !defined (_OrgApacheLuceneIndexFrozenBufferedUpdates_) && (OrgApacheLuceneIndexFrozenBufferedUpdates_INCLUDE_ALL || OrgApacheLuceneIndexFrozenBufferedUpdates_INCLUDE)
-#define _OrgApacheLuceneIndexFrozenBufferedUpdates_
+#if !defined (OrgApacheLuceneIndexFrozenBufferedUpdates_) && (INCLUDE_ALL_OrgApacheLuceneIndexFrozenBufferedUpdates || defined(INCLUDE_OrgApacheLuceneIndexFrozenBufferedUpdates))
+#define OrgApacheLuceneIndexFrozenBufferedUpdates_
 
 @class IOSIntArray;
 @class IOSObjectArray;
@@ -23,6 +23,13 @@
 @class OrgApacheLuceneIndexPrefixCodedTerms_TermIterator;
 @protocol JavaLangIterable;
 
+/*!
+ @brief Holds buffered deletes and updates by term or query, once pushed.
+ Pushed
+ deletes/updates are write-once, so we shift to more memory efficient data
+ structure to hold them. We don't hold docIDs because these are applied on
+ flush.
+ */
 @interface OrgApacheLuceneIndexFrozenBufferedUpdates : NSObject {
  @public
   OrgApacheLuceneIndexPrefixCodedTerms *terms_;
@@ -34,6 +41,8 @@
   jint numTermDeletes_;
   jboolean isSegmentPrivate_;
 }
+
++ (jint)BYTES_PER_DEL_QUERY;
 
 #pragma mark Public
 
@@ -64,15 +73,19 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexFrozenBufferedUpdates, queryLimits_, IOS
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexFrozenBufferedUpdates, numericDVUpdates_, IOSObjectArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexFrozenBufferedUpdates, binaryDVUpdates_, IOSObjectArray *)
 
-FOUNDATION_EXPORT jint OrgApacheLuceneIndexFrozenBufferedUpdates_BYTES_PER_DEL_QUERY_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexFrozenBufferedUpdates, BYTES_PER_DEL_QUERY_, jint)
+inline jint OrgApacheLuceneIndexFrozenBufferedUpdates_get_BYTES_PER_DEL_QUERY();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT jint OrgApacheLuceneIndexFrozenBufferedUpdates_BYTES_PER_DEL_QUERY;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneIndexFrozenBufferedUpdates, BYTES_PER_DEL_QUERY, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexFrozenBufferedUpdates_initWithOrgApacheLuceneIndexBufferedUpdates_withBoolean_(OrgApacheLuceneIndexFrozenBufferedUpdates *self, OrgApacheLuceneIndexBufferedUpdates *deletes, jboolean isSegmentPrivate);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexFrozenBufferedUpdates *new_OrgApacheLuceneIndexFrozenBufferedUpdates_initWithOrgApacheLuceneIndexBufferedUpdates_withBoolean_(OrgApacheLuceneIndexBufferedUpdates *deletes, jboolean isSegmentPrivate) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexFrozenBufferedUpdates *create_OrgApacheLuceneIndexFrozenBufferedUpdates_initWithOrgApacheLuceneIndexBufferedUpdates_withBoolean_(OrgApacheLuceneIndexBufferedUpdates *deletes, jboolean isSegmentPrivate);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFrozenBufferedUpdates)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexFrozenBufferedUpdates_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexFrozenBufferedUpdates")

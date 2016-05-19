@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgLukhnosPortmobileFilePath_INCLUDE_ALL")
-#if OrgLukhnosPortmobileFilePath_RESTRICT
-#define OrgLukhnosPortmobileFilePath_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgLukhnosPortmobileFilePath")
+#ifdef RESTRICT_OrgLukhnosPortmobileFilePath
+#define INCLUDE_ALL_OrgLukhnosPortmobileFilePath 0
 #else
-#define OrgLukhnosPortmobileFilePath_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgLukhnosPortmobileFilePath 1
 #endif
-#undef OrgLukhnosPortmobileFilePath_RESTRICT
+#undef RESTRICT_OrgLukhnosPortmobileFilePath
 
-#if !defined (_OrgLukhnosPortmobileFilePath_) && (OrgLukhnosPortmobileFilePath_INCLUDE_ALL || OrgLukhnosPortmobileFilePath_INCLUDE)
-#define _OrgLukhnosPortmobileFilePath_
+#if !defined (OrgLukhnosPortmobileFilePath_) && (INCLUDE_ALL_OrgLukhnosPortmobileFilePath || defined(INCLUDE_OrgLukhnosPortmobileFilePath))
+#define OrgLukhnosPortmobileFilePath_
 
 @class JavaIoFile;
 
@@ -57,12 +57,16 @@ FOUNDATION_EXPORT void OrgLukhnosPortmobileFilePath_initWithNSString_(OrgLukhnos
 
 FOUNDATION_EXPORT OrgLukhnosPortmobileFilePath *new_OrgLukhnosPortmobileFilePath_initWithNSString_(NSString *path) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgLukhnosPortmobileFilePath *create_OrgLukhnosPortmobileFilePath_initWithNSString_(NSString *path);
+
 FOUNDATION_EXPORT void OrgLukhnosPortmobileFilePath_initWithJavaIoFile_(OrgLukhnosPortmobileFilePath *self, JavaIoFile *file);
 
 FOUNDATION_EXPORT OrgLukhnosPortmobileFilePath *new_OrgLukhnosPortmobileFilePath_initWithJavaIoFile_(JavaIoFile *file) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgLukhnosPortmobileFilePath *create_OrgLukhnosPortmobileFilePath_initWithJavaIoFile_(JavaIoFile *file);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileFilePath)
 
 #endif
 
-#pragma pop_macro("OrgLukhnosPortmobileFilePath_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileFilePath")

@@ -5,23 +5,23 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisArArabicNormalizationFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisArArabicNormalizationFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisArArabicNormalizationFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisArArabicNormalizationFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisArArabicNormalizationFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisArArabicNormalizationFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisArArabicNormalizationFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisArArabicNormalizationFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisArArabicNormalizationFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisArArabicNormalizationFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisArArabicNormalizationFilterFactory_) && (OrgApacheLuceneAnalysisArArabicNormalizationFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisArArabicNormalizationFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisArArabicNormalizationFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisArArabicNormalizationFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisArArabicNormalizationFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisArArabicNormalizationFilterFactory))
+#define OrgApacheLuceneAnalysisArArabicNormalizationFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-#define OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent 1
 #include "org/apache/lucene/analysis/util/MultiTermAwareComponent.h"
 
 @class OrgApacheLuceneAnalysisArArabicNormalizationFilter;
@@ -29,10 +29,24 @@
 @class OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>ArabicNormalizationFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_arnormal" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+ &lt;filter class="solr.ArabicNormalizationFilterFactory"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisArArabicNormalizationFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilMultiTermAwareComponent >
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new ArabicNormalizationFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisArArabicNormalizationFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -47,8 +61,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisArArabicNormalizationFilterFactory
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisArArabicNormalizationFilterFactory *new_OrgApacheLuceneAnalysisArArabicNormalizationFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisArArabicNormalizationFilterFactory *create_OrgApacheLuceneAnalysisArArabicNormalizationFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisArArabicNormalizationFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisArArabicNormalizationFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisArArabicNormalizationFilterFactory")

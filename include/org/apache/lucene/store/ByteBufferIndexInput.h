@@ -5,29 +5,29 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneStoreByteBufferIndexInput_INCLUDE_ALL")
-#if OrgApacheLuceneStoreByteBufferIndexInput_RESTRICT
-#define OrgApacheLuceneStoreByteBufferIndexInput_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneStoreByteBufferIndexInput")
+#ifdef RESTRICT_OrgApacheLuceneStoreByteBufferIndexInput
+#define INCLUDE_ALL_OrgApacheLuceneStoreByteBufferIndexInput 0
 #else
-#define OrgApacheLuceneStoreByteBufferIndexInput_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneStoreByteBufferIndexInput 1
 #endif
-#undef OrgApacheLuceneStoreByteBufferIndexInput_RESTRICT
-#if OrgApacheLuceneStoreByteBufferIndexInput_MultiBufferImpl_INCLUDE
-#define OrgApacheLuceneStoreByteBufferIndexInput_INCLUDE 1
+#undef RESTRICT_OrgApacheLuceneStoreByteBufferIndexInput
+#ifdef INCLUDE_OrgApacheLuceneStoreByteBufferIndexInput_MultiBufferImpl
+#define INCLUDE_OrgApacheLuceneStoreByteBufferIndexInput 1
 #endif
-#if OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl_INCLUDE
-#define OrgApacheLuceneStoreByteBufferIndexInput_INCLUDE 1
+#ifdef INCLUDE_OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl
+#define INCLUDE_OrgApacheLuceneStoreByteBufferIndexInput 1
 #endif
 
-#if !defined (_OrgApacheLuceneStoreByteBufferIndexInput_) && (OrgApacheLuceneStoreByteBufferIndexInput_INCLUDE_ALL || OrgApacheLuceneStoreByteBufferIndexInput_INCLUDE)
-#define _OrgApacheLuceneStoreByteBufferIndexInput_
+#if !defined (OrgApacheLuceneStoreByteBufferIndexInput_) && (INCLUDE_ALL_OrgApacheLuceneStoreByteBufferIndexInput || defined(INCLUDE_OrgApacheLuceneStoreByteBufferIndexInput))
+#define OrgApacheLuceneStoreByteBufferIndexInput_
 
-#define OrgApacheLuceneStoreIndexInput_RESTRICT 1
-#define OrgApacheLuceneStoreIndexInput_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreIndexInput 1
+#define INCLUDE_OrgApacheLuceneStoreIndexInput 1
 #include "org/apache/lucene/store/IndexInput.h"
 
-#define OrgApacheLuceneStoreRandomAccessInput_RESTRICT 1
-#define OrgApacheLuceneStoreRandomAccessInput_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreRandomAccessInput 1
+#define INCLUDE_OrgApacheLuceneStoreRandomAccessInput 1
 #include "org/apache/lucene/store/RandomAccessInput.h"
 
 @class IOSByteArray;
@@ -36,6 +36,17 @@
 @class OrgApacheLuceneUtilWeakIdentityMap;
 @protocol OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner;
 
+/*!
+ @brief Base IndexInput implementation that uses an array
+ of ByteBuffers to represent a file.
+ <p>
+ Because Java's ByteBuffer uses an int to address the
+ values, it's necessary to access a file greater
+ Integer.MAX_VALUE in size using multiple byte buffers.
+ <p>
+ For efficiency, this class requires that the buffers
+ are a power-of-two (<code>chunkSizePower</code>).
+ */
 @interface OrgApacheLuceneStoreByteBufferIndexInput : OrgApacheLuceneStoreIndexInput < OrgApacheLuceneStoreRandomAccessInput > {
  @public
   id<OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner> cleaner_;
@@ -88,16 +99,26 @@
 
 - (void)seekWithLong:(jlong)pos;
 
+/*!
+ @brief Creates a slice of this index input, with the given description, offset, and length.
+ The slice is seeked to the beginning.
+ */
 - (OrgApacheLuceneStoreByteBufferIndexInput *)sliceWithNSString:(NSString *)sliceDescription
                                                        withLong:(jlong)offset
                                                        withLong:(jlong)length;
 
 #pragma mark Protected
 
+/*!
+ @brief Builds the actual sliced IndexInput (may apply extra offset in subclasses).
+ */
 - (OrgApacheLuceneStoreByteBufferIndexInput *)buildSliceWithNSString:(NSString *)sliceDescription
                                                             withLong:(jlong)offset
                                                             withLong:(jlong)length;
 
+/*!
+ @brief Factory method that creates a suitable implementation of this class for the given ByteBuffers.
+ */
 - (OrgApacheLuceneStoreByteBufferIndexInput *)newCloneInstanceWithNSString:(NSString *)newResourceDescription
                                                 withJavaNioByteBufferArray:(IOSObjectArray *)newBuffers
                                                                    withInt:(jint)offset
@@ -129,12 +150,16 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreByteBufferIndexInput)
 
 #endif
 
-#if !defined (_OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_) && (OrgApacheLuceneStoreByteBufferIndexInput_INCLUDE_ALL || OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_INCLUDE)
-#define _OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_
+#if !defined (OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_) && (INCLUDE_ALL_OrgApacheLuceneStoreByteBufferIndexInput || defined(INCLUDE_OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner))
+#define OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_
 
 @class JavaNioByteBuffer;
 @class OrgApacheLuceneStoreByteBufferIndexInput;
 
+/*!
+ @brief Pass in an implementation of this interface to cleanup ByteBuffers.
+ MMapDirectory implements this to allow unmapping of bytebuffers with private Java APIs.
+ */
 @protocol OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner < NSObject, JavaObject >
 
 - (void)freeBufferWithOrgApacheLuceneStoreByteBufferIndexInput:(OrgApacheLuceneStoreByteBufferIndexInput *)parent
@@ -148,13 +173,16 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreByteBufferIndexInput_BufferCleane
 
 #endif
 
-#if !defined (_OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl_) && (OrgApacheLuceneStoreByteBufferIndexInput_INCLUDE_ALL || OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl_INCLUDE)
-#define _OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl_
+#if !defined (OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl_) && (INCLUDE_ALL_OrgApacheLuceneStoreByteBufferIndexInput || defined(INCLUDE_OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl))
+#define OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl_
 
 @class JavaNioByteBuffer;
 @class OrgApacheLuceneUtilWeakIdentityMap;
 @protocol OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner;
 
+/*!
+ @brief Optimization of ByteBufferIndexInput for when there is only one buffer
+ */
 @interface OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl : OrgApacheLuceneStoreByteBufferIndexInput
 
 #pragma mark Public
@@ -188,18 +216,23 @@ FOUNDATION_EXPORT void OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl *new_OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl_initWithNSString_withJavaNioByteBuffer_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withOrgApacheLuceneUtilWeakIdentityMap_(NSString *resourceDescription, JavaNioByteBuffer *buffer, jlong length, jint chunkSizePower, id<OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner> cleaner, OrgApacheLuceneUtilWeakIdentityMap *clones) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl *create_OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl_initWithNSString_withJavaNioByteBuffer_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withOrgApacheLuceneUtilWeakIdentityMap_(NSString *resourceDescription, JavaNioByteBuffer *buffer, jlong length, jint chunkSizePower, id<OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner> cleaner, OrgApacheLuceneUtilWeakIdentityMap *clones);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreByteBufferIndexInput_SingleBufferImpl)
 
 #endif
 
-#if !defined (_OrgApacheLuceneStoreByteBufferIndexInput_MultiBufferImpl_) && (OrgApacheLuceneStoreByteBufferIndexInput_INCLUDE_ALL || OrgApacheLuceneStoreByteBufferIndexInput_MultiBufferImpl_INCLUDE)
-#define _OrgApacheLuceneStoreByteBufferIndexInput_MultiBufferImpl_
+#if !defined (OrgApacheLuceneStoreByteBufferIndexInput_MultiBufferImpl_) && (INCLUDE_ALL_OrgApacheLuceneStoreByteBufferIndexInput || defined(INCLUDE_OrgApacheLuceneStoreByteBufferIndexInput_MultiBufferImpl))
+#define OrgApacheLuceneStoreByteBufferIndexInput_MultiBufferImpl_
 
 @class IOSObjectArray;
 @class OrgApacheLuceneStoreByteBufferIndexInput;
 @class OrgApacheLuceneUtilWeakIdentityMap;
 @protocol OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner;
 
+/*!
+ @brief This class adds offset support to ByteBufferIndexInput, which is needed for slices.
+ */
 @interface OrgApacheLuceneStoreByteBufferIndexInput_MultiBufferImpl : OrgApacheLuceneStoreByteBufferIndexInput
 
 #pragma mark Public
@@ -240,8 +273,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneStoreByteBufferIndexInput_MultiBufferImpl_
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreByteBufferIndexInput_MultiBufferImpl *new_OrgApacheLuceneStoreByteBufferIndexInput_MultiBufferImpl_initWithNSString_withJavaNioByteBufferArray_withInt_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withOrgApacheLuceneUtilWeakIdentityMap_(NSString *resourceDescription, IOSObjectArray *buffers, jint offset, jlong length, jint chunkSizePower, id<OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner> cleaner, OrgApacheLuceneUtilWeakIdentityMap *clones) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneStoreByteBufferIndexInput_MultiBufferImpl *create_OrgApacheLuceneStoreByteBufferIndexInput_MultiBufferImpl_initWithNSString_withJavaNioByteBufferArray_withInt_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withOrgApacheLuceneUtilWeakIdentityMap_(NSString *resourceDescription, IOSObjectArray *buffers, jint offset, jlong length, jint chunkSizePower, id<OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner> cleaner, OrgApacheLuceneUtilWeakIdentityMap *clones);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreByteBufferIndexInput_MultiBufferImpl)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneStoreByteBufferIndexInput_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreByteBufferIndexInput")

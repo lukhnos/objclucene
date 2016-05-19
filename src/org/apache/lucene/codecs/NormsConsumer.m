@@ -37,7 +37,6 @@
 - (instancetype)initWithJavaUtilList:(id<JavaUtilList>)capture$0
   withOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)capture$1;
 
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsNormsConsumer_$1)
@@ -48,6 +47,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsNormsConsumer_$1, val$mergeState_, OrgA
 __attribute__((unused)) static void OrgApacheLuceneCodecsNormsConsumer_$1_initWithJavaUtilList_withOrgApacheLuceneIndexMergeState_(OrgApacheLuceneCodecsNormsConsumer_$1 *self, id<JavaUtilList> capture$0, OrgApacheLuceneIndexMergeState *capture$1);
 
 __attribute__((unused)) static OrgApacheLuceneCodecsNormsConsumer_$1 *new_OrgApacheLuceneCodecsNormsConsumer_$1_initWithJavaUtilList_withOrgApacheLuceneIndexMergeState_(id<JavaUtilList> capture$0, OrgApacheLuceneIndexMergeState *capture$1) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneCodecsNormsConsumer_$1 *create_OrgApacheLuceneCodecsNormsConsumer_$1_initWithJavaUtilList_withOrgApacheLuceneIndexMergeState_(id<JavaUtilList> capture$0, OrgApacheLuceneIndexMergeState *capture$1);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsNormsConsumer_$1)
 
@@ -87,6 +88,8 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsNormsConsumer_$1_$1_ini
 
 __attribute__((unused)) static OrgApacheLuceneCodecsNormsConsumer_$1_$1 *new_OrgApacheLuceneCodecsNormsConsumer_$1_$1_initWithOrgApacheLuceneCodecsNormsConsumer_$1_(OrgApacheLuceneCodecsNormsConsumer_$1 *outer$) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneCodecsNormsConsumer_$1_$1 *create_OrgApacheLuceneCodecsNormsConsumer_$1_$1_initWithOrgApacheLuceneCodecsNormsConsumer_$1_(OrgApacheLuceneCodecsNormsConsumer_$1 *outer$);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsNormsConsumer_$1_$1)
 
 @implementation OrgApacheLuceneCodecsNormsConsumer
@@ -118,7 +121,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
   for (OrgApacheLuceneIndexFieldInfo * __strong mergeFieldInfo in nil_chk(mergeState->mergeFieldInfos_)) {
     if ([((OrgApacheLuceneIndexFieldInfo *) nil_chk(mergeFieldInfo)) hasNorms]) {
-      id<JavaUtilList> toMerge = [new_JavaUtilArrayList_init() autorelease];
+      id<JavaUtilList> toMerge = create_JavaUtilArrayList_init();
       for (jint i = 0; i < ((IOSObjectArray *) nil_chk(mergeState->normsProducers_))->size_; i++) {
         OrgApacheLuceneCodecsNormsProducer *normsProducer = IOSObjectArray_Get(mergeState->normsProducers_, i);
         OrgApacheLuceneIndexNumericDocValues *norms = nil;
@@ -141,15 +144,15 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)mergeNormsFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
                       withOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState
                                         withJavaUtilList:(id<JavaUtilList>)toMerge {
-  [self addNormsFieldWithOrgApacheLuceneIndexFieldInfo:fieldInfo withJavaLangIterable:[new_OrgApacheLuceneCodecsNormsConsumer_$1_initWithJavaUtilList_withOrgApacheLuceneIndexMergeState_(toMerge, mergeState) autorelease]];
+  [self addNormsFieldWithOrgApacheLuceneIndexFieldInfo:fieldInfo withJavaLangIterable:create_OrgApacheLuceneCodecsNormsConsumer_$1_initWithJavaUtilList_withOrgApacheLuceneIndexMergeState_(toMerge, mergeState)];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "NormsConsumer", NULL, 0x4, NULL, NULL },
-    { "addNormsFieldWithOrgApacheLuceneIndexFieldInfo:withJavaLangIterable:", "addNormsField", "V", 0x401, "Ljava.io.IOException;", NULL },
+    { "addNormsFieldWithOrgApacheLuceneIndexFieldInfo:withJavaLangIterable:", "addNormsField", "V", 0x401, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/FieldInfo;Ljava/lang/Iterable<Ljava/lang/Number;>;)V" },
     { "mergeWithOrgApacheLuceneIndexMergeState:", "merge", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "mergeNormsFieldWithOrgApacheLuceneIndexFieldInfo:withOrgApacheLuceneIndexMergeState:withJavaUtilList:", "mergeNormsField", "V", 0x1, "Ljava.io.IOException;", NULL },
+    { "mergeNormsFieldWithOrgApacheLuceneIndexFieldInfo:withOrgApacheLuceneIndexMergeState:withJavaUtilList:", "mergeNormsField", "V", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/FieldInfo;Lorg/apache/lucene/index/MergeState;Ljava/util/List<Lorg/apache/lucene/index/NumericDocValues;>;)V" },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneCodecsNormsConsumer = { 2, "NormsConsumer", "org.apache.lucene.codecs", NULL, 0x401, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneCodecsNormsConsumer;
@@ -166,7 +169,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsNormsConsumer)
 @implementation OrgApacheLuceneCodecsNormsConsumer_$1
 
 - (id<JavaUtilIterator>)iterator {
-  return [new_OrgApacheLuceneCodecsNormsConsumer_$1_$1_initWithOrgApacheLuceneCodecsNormsConsumer_$1_(self) autorelease];
+  return create_OrgApacheLuceneCodecsNormsConsumer_$1_$1_initWithOrgApacheLuceneCodecsNormsConsumer_$1_(self);
 }
 
 - (instancetype)initWithJavaUtilList:(id<JavaUtilList>)capture$0
@@ -175,20 +178,20 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsNormsConsumer)
   return self;
 }
 
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
+  return JreDefaultFastEnumeration(self, state, stackbuf, len);
+}
+
 - (void)dealloc {
   RELEASE_(val$toMerge_);
   RELEASE_(val$mergeState_);
   [super dealloc];
 }
 
-- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, NULL },
-    { "initWithJavaUtilList:withOrgApacheLuceneIndexMergeState:", "", NULL, 0x0, NULL, NULL },
+    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<Ljava/lang/Number;>;" },
+    { "initWithJavaUtilList:withOrgApacheLuceneIndexMergeState:", "", NULL, 0x0, NULL, "(Ljava/util/List<Lorg/apache/lucene/index/NumericDocValues;>;Lorg/apache/lucene/index/MergeState;)V" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "val$toMerge_", NULL, 0x1012, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/index/NumericDocValues;>;", .constantValue.asLong = 0 },
@@ -208,9 +211,11 @@ void OrgApacheLuceneCodecsNormsConsumer_$1_initWithJavaUtilList_withOrgApacheLuc
 }
 
 OrgApacheLuceneCodecsNormsConsumer_$1 *new_OrgApacheLuceneCodecsNormsConsumer_$1_initWithJavaUtilList_withOrgApacheLuceneIndexMergeState_(id<JavaUtilList> capture$0, OrgApacheLuceneIndexMergeState *capture$1) {
-  OrgApacheLuceneCodecsNormsConsumer_$1 *self = [OrgApacheLuceneCodecsNormsConsumer_$1 alloc];
-  OrgApacheLuceneCodecsNormsConsumer_$1_initWithJavaUtilList_withOrgApacheLuceneIndexMergeState_(self, capture$0, capture$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsNormsConsumer_$1, initWithJavaUtilList_withOrgApacheLuceneIndexMergeState_, capture$0, capture$1)
+}
+
+OrgApacheLuceneCodecsNormsConsumer_$1 *create_OrgApacheLuceneCodecsNormsConsumer_$1_initWithJavaUtilList_withOrgApacheLuceneIndexMergeState_(id<JavaUtilList> capture$0, OrgApacheLuceneIndexMergeState *capture$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsNormsConsumer_$1, initWithJavaUtilList_withOrgApacheLuceneIndexMergeState_, capture$0, capture$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsNormsConsumer_$1)
@@ -222,12 +227,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsNormsConsumer_$1)
 }
 
 - (void)remove {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (NSNumber *)next {
   if (![self hasNext]) {
-    @throw [new_JavaUtilNoSuchElementException_init() autorelease];
+    @throw create_JavaUtilNoSuchElementException_init();
   }
   JreAssert((nextIsSet_), (@"org/apache/lucene/codecs/NormsConsumer.java:138 condition failed: assert nextIsSet;"));
   nextIsSet_ = false;
@@ -307,9 +312,11 @@ void OrgApacheLuceneCodecsNormsConsumer_$1_$1_initWithOrgApacheLuceneCodecsNorms
 }
 
 OrgApacheLuceneCodecsNormsConsumer_$1_$1 *new_OrgApacheLuceneCodecsNormsConsumer_$1_$1_initWithOrgApacheLuceneCodecsNormsConsumer_$1_(OrgApacheLuceneCodecsNormsConsumer_$1 *outer$) {
-  OrgApacheLuceneCodecsNormsConsumer_$1_$1 *self = [OrgApacheLuceneCodecsNormsConsumer_$1_$1 alloc];
-  OrgApacheLuceneCodecsNormsConsumer_$1_$1_initWithOrgApacheLuceneCodecsNormsConsumer_$1_(self, outer$);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsNormsConsumer_$1_$1, initWithOrgApacheLuceneCodecsNormsConsumer_$1_, outer$)
+}
+
+OrgApacheLuceneCodecsNormsConsumer_$1_$1 *create_OrgApacheLuceneCodecsNormsConsumer_$1_$1_initWithOrgApacheLuceneCodecsNormsConsumer_$1_(OrgApacheLuceneCodecsNormsConsumer_$1 *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsNormsConsumer_$1_$1, initWithOrgApacheLuceneCodecsNormsConsumer_$1_, outer$)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsNormsConsumer_$1_$1)

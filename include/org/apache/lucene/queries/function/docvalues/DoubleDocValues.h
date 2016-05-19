@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionDocvaluesDoubleDocValues_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionDocvaluesDoubleDocValues_RESTRICT
-#define OrgApacheLuceneQueriesFunctionDocvaluesDoubleDocValues_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionDocvaluesDoubleDocValues")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionDocvaluesDoubleDocValues
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionDocvaluesDoubleDocValues 0
 #else
-#define OrgApacheLuceneQueriesFunctionDocvaluesDoubleDocValues_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionDocvaluesDoubleDocValues 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionDocvaluesDoubleDocValues_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionDocvaluesDoubleDocValues
 
-#if !defined (_OrgApacheLuceneQueriesFunctionDocvaluesDoubleDocValues_) && (OrgApacheLuceneQueriesFunctionDocvaluesDoubleDocValues_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionDocvaluesDoubleDocValues_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionDocvaluesDoubleDocValues_
+#if !defined (OrgApacheLuceneQueriesFunctionDocvaluesDoubleDocValues_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionDocvaluesDoubleDocValues || defined(INCLUDE_OrgApacheLuceneQueriesFunctionDocvaluesDoubleDocValues))
+#define OrgApacheLuceneQueriesFunctionDocvaluesDoubleDocValues_
 
-#define OrgApacheLuceneQueriesFunctionFunctionValues_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionFunctionValues_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionFunctionValues 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionFunctionValues 1
 #include "org/apache/lucene/queries/function/FunctionValues.h"
 
 @class OrgApacheLuceneIndexIndexReader;
@@ -25,6 +25,10 @@
 @class OrgApacheLuceneQueriesFunctionValueSource;
 @class OrgApacheLuceneQueriesFunctionValueSourceScorer;
 
+/*!
+ @brief Abstract <code>FunctionValues</code> implementation which supports retrieving double values.
+ Implementations can control how the double values are loaded through <code>doubleVal(int)</code>}
+ */
 @interface OrgApacheLuceneQueriesFunctionDocvaluesDoubleDocValues : OrgApacheLuceneQueriesFunctionFunctionValues {
  @public
   OrgApacheLuceneQueriesFunctionValueSource *vs_;
@@ -74,4 +78,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionDocvaluesDoubleDocValue
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionDocvaluesDoubleDocValues_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionDocvaluesDoubleDocValues")

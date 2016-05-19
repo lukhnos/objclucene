@@ -5,32 +5,56 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisDeGermanStemFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisDeGermanStemFilter_RESTRICT
-#define OrgApacheLuceneAnalysisDeGermanStemFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanStemFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisDeGermanStemFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanStemFilter 0
 #else
-#define OrgApacheLuceneAnalysisDeGermanStemFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanStemFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisDeGermanStemFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisDeGermanStemFilter
 
-#if !defined (_OrgApacheLuceneAnalysisDeGermanStemFilter_) && (OrgApacheLuceneAnalysisDeGermanStemFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisDeGermanStemFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisDeGermanStemFilter_
+#if !defined (OrgApacheLuceneAnalysisDeGermanStemFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanStemFilter || defined(INCLUDE_OrgApacheLuceneAnalysisDeGermanStemFilter))
+#define OrgApacheLuceneAnalysisDeGermanStemFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisDeGermanStemmer;
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief A <code>TokenFilter</code> that stems German words.
+ <p>
+ It supports a table of words that should
+ not be stemmed at all. The stemmer used can be changed at runtime after the
+ filter object is created (as long as it is a <code>GermanStemmer</code>).
+ </p>
+ <p>
+ To prevent terms from being stemmed use an instance of
+ <code>SetKeywordMarkerFilter</code> or a custom <code>TokenFilter</code> that sets
+ the <code>KeywordAttribute</code> before this <code>TokenStream</code>.
+ </p>
+ - seealso: SetKeywordMarkerFilter
+ */
 @interface OrgApacheLuceneAnalysisDeGermanStemFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
+/*!
+ @brief Creates a <code>GermanStemFilter</code> instance
+ @param inArg the source <code>TokenStream</code>
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
 
+/*!
+ @return Returns true for next token in the stream, or false at EOS
+ */
 - (jboolean)incrementToken;
 
+/*!
+ @brief Set a alternative/custom <code>GermanStemmer</code> for this filter.
+ */
 - (void)setStemmerWithOrgApacheLuceneAnalysisDeGermanStemmer:(OrgApacheLuceneAnalysisDeGermanStemmer *)stemmer;
 
 @end
@@ -41,8 +65,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisDeGermanStemFilter_initWithOrgApac
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisDeGermanStemFilter *new_OrgApacheLuceneAnalysisDeGermanStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisDeGermanStemFilter *create_OrgApacheLuceneAnalysisDeGermanStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisDeGermanStemFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisDeGermanStemFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanStemFilter")

@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSuggestDocumentCompletionScorer_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSuggestDocumentCompletionScorer_RESTRICT
-#define OrgApacheLuceneSearchSuggestDocumentCompletionScorer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionScorer")
+#ifdef RESTRICT_OrgApacheLuceneSearchSuggestDocumentCompletionScorer
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionScorer 0
 #else
-#define OrgApacheLuceneSearchSuggestDocumentCompletionScorer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionScorer 1
 #endif
-#undef OrgApacheLuceneSearchSuggestDocumentCompletionScorer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSuggestDocumentCompletionScorer
 
-#if !defined (_OrgApacheLuceneSearchSuggestDocumentCompletionScorer_) && (OrgApacheLuceneSearchSuggestDocumentCompletionScorer_INCLUDE_ALL || OrgApacheLuceneSearchSuggestDocumentCompletionScorer_INCLUDE)
-#define _OrgApacheLuceneSearchSuggestDocumentCompletionScorer_
+#if !defined (OrgApacheLuceneSearchSuggestDocumentCompletionScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionScorer || defined(INCLUDE_OrgApacheLuceneSearchSuggestDocumentCompletionScorer))
+#define OrgApacheLuceneSearchSuggestDocumentCompletionScorer_
 
-#define OrgApacheLuceneSearchBulkScorer_RESTRICT 1
-#define OrgApacheLuceneSearchBulkScorer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchBulkScorer 1
+#define INCLUDE_OrgApacheLuceneSearchBulkScorer 1
 #include "org/apache/lucene/search/BulkScorer.h"
 
 @class OrgApacheLuceneIndexLeafReader;
@@ -27,8 +27,20 @@
 @protocol OrgApacheLuceneSearchLeafCollector;
 @protocol OrgApacheLuceneUtilBits;
 
+/*!
+ @brief Expert: Responsible for executing the query against an
+ appropriate suggester and collecting the results
+ via a collector.
+ <code>score(LeafCollector,Bits,int,int)</code> is called
+ for each leaf reader.
+ <code>accept(int,Bits)</code> and <code>score(float,float)</code>
+ is called for every matched completion (i.e. document)
+ */
 @interface OrgApacheLuceneSearchSuggestDocumentCompletionScorer : OrgApacheLuceneSearchBulkScorer {
  @public
+  /*!
+   @brief weight that created this scorer
+   */
   OrgApacheLuceneSearchSuggestDocumentCompletionWeight *weight_;
   OrgApacheLuceneIndexLeafReader *reader_;
   jboolean filtered_;
@@ -37,11 +49,23 @@
 
 #pragma mark Public
 
+/*!
+ @brief Returns true if a document with <code>docID</code> is accepted,
+ false if the docID maps to a deleted
+ document or has been filtered out
+ @param liveDocs the <code>Bits</code> representing live docs, or possibly
+ <code>null</code> if all docs are live
+ */
 - (jboolean)acceptWithInt:(jint)docID
 withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)liveDocs;
 
 - (jlong)cost;
 
+/*!
+ @brief Returns the score for a matched completion
+ based on the query time boost and the
+ index time weight.
+ */
 - (jfloat)scoreWithFloat:(jfloat)weight
                withFloat:(jfloat)boost;
 
@@ -52,6 +76,9 @@ withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)liveDocs;
 
 #pragma mark Protected
 
+/*!
+ @brief Creates a scorer for a field-specific <code>suggester</code> scoped by <code>acceptDocs</code>
+ */
 - (instancetype)initWithOrgApacheLuceneSearchSuggestDocumentCompletionWeight:(OrgApacheLuceneSearchSuggestDocumentCompletionWeight *)weight
                         withOrgApacheLuceneSearchSuggestDocumentNRTSuggester:(OrgApacheLuceneSearchSuggestDocumentNRTSuggester *)suggester
                                           withOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader
@@ -71,8 +98,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentCompletionScorer_init
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionScorer *new_OrgApacheLuceneSearchSuggestDocumentCompletionScorer_initWithOrgApacheLuceneSearchSuggestDocumentCompletionWeight_withOrgApacheLuceneSearchSuggestDocumentNRTSuggester_withOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneUtilBits_withBoolean_withOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneSearchSuggestDocumentCompletionWeight *weight, OrgApacheLuceneSearchSuggestDocumentNRTSuggester *suggester, OrgApacheLuceneIndexLeafReader *reader, id<OrgApacheLuceneUtilBits> filterDocs, jboolean filtered, OrgApacheLuceneUtilAutomatonAutomaton *automaton) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionScorer *create_OrgApacheLuceneSearchSuggestDocumentCompletionScorer_initWithOrgApacheLuceneSearchSuggestDocumentCompletionWeight_withOrgApacheLuceneSearchSuggestDocumentNRTSuggester_withOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneUtilBits_withBoolean_withOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneSearchSuggestDocumentCompletionWeight *weight, OrgApacheLuceneSearchSuggestDocumentNRTSuggester *suggester, OrgApacheLuceneIndexLeafReader *reader, id<OrgApacheLuceneUtilBits> filterDocs, jboolean filtered, OrgApacheLuceneUtilAutomatonAutomaton *automaton);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionScorer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSuggestDocumentCompletionScorer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionScorer")

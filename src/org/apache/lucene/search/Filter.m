@@ -24,7 +24,7 @@
 }
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader {
-  return [((OrgApacheLuceneSearchFilteredQuery_FilterStrategy *) nil_chk(JreLoadStatic(OrgApacheLuceneSearchFilteredQuery, RANDOM_ACCESS_FILTER_STRATEGY_))) rewriteWithOrgApacheLuceneSearchFilter:self];
+  return [((OrgApacheLuceneSearchFilteredQuery_FilterStrategy *) nil_chk(JreLoadStatic(OrgApacheLuceneSearchFilteredQuery, RANDOM_ACCESS_FILTER_STRATEGY))) rewriteWithOrgApacheLuceneSearchFilter:self];
 }
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -38,7 +38,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   static const J2ObjcMethodInfo methods[] = {
     { "getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneUtilBits:", "getDocIdSet", "Lorg.apache.lucene.search.DocIdSet;", 0x401, "Ljava.io.IOException;", NULL },
     { "rewriteWithOrgApacheLuceneIndexIndexReader:", "rewrite", "Lorg.apache.lucene.search.Query;", 0x1, "Ljava.io.IOException;", NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "Filter", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneSearchFilter = { 2, "Filter", "org.apache.lucene.search", NULL, 0x401, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchFilter;

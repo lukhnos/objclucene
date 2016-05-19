@@ -79,9 +79,11 @@ void OrgApacheLuceneAnalysisArArabicStemFilter_initWithOrgApacheLuceneAnalysisTo
 }
 
 OrgApacheLuceneAnalysisArArabicStemFilter *new_OrgApacheLuceneAnalysisArArabicStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) {
-  OrgApacheLuceneAnalysisArArabicStemFilter *self = [OrgApacheLuceneAnalysisArArabicStemFilter alloc];
-  OrgApacheLuceneAnalysisArArabicStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, input);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisArArabicStemFilter, initWithOrgApacheLuceneAnalysisTokenStream_, input)
+}
+
+OrgApacheLuceneAnalysisArArabicStemFilter *create_OrgApacheLuceneAnalysisArArabicStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisArArabicStemFilter, initWithOrgApacheLuceneAnalysisTokenStream_, input)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisArArabicStemFilter)

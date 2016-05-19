@@ -5,25 +5,26 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchCachingWrapperFilter_INCLUDE_ALL")
-#if OrgApacheLuceneSearchCachingWrapperFilter_RESTRICT
-#define OrgApacheLuceneSearchCachingWrapperFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchCachingWrapperFilter")
+#ifdef RESTRICT_OrgApacheLuceneSearchCachingWrapperFilter
+#define INCLUDE_ALL_OrgApacheLuceneSearchCachingWrapperFilter 0
 #else
-#define OrgApacheLuceneSearchCachingWrapperFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchCachingWrapperFilter 1
 #endif
-#undef OrgApacheLuceneSearchCachingWrapperFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchCachingWrapperFilter
 
-#if !defined (_OrgApacheLuceneSearchCachingWrapperFilter_) && (OrgApacheLuceneSearchCachingWrapperFilter_INCLUDE_ALL || OrgApacheLuceneSearchCachingWrapperFilter_INCLUDE)
-#define _OrgApacheLuceneSearchCachingWrapperFilter_
+#if !defined (OrgApacheLuceneSearchCachingWrapperFilter_) && (INCLUDE_ALL_OrgApacheLuceneSearchCachingWrapperFilter || defined(INCLUDE_OrgApacheLuceneSearchCachingWrapperFilter))
+#define OrgApacheLuceneSearchCachingWrapperFilter_
 
-#define OrgApacheLuceneSearchFilter_RESTRICT 1
-#define OrgApacheLuceneSearchFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchFilter 1
+#define INCLUDE_OrgApacheLuceneSearchFilter 1
 #include "org/apache/lucene/search/Filter.h"
 
-#define OrgApacheLuceneUtilAccountable_RESTRICT 1
-#define OrgApacheLuceneUtilAccountable_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAccountable 1
+#define INCLUDE_OrgApacheLuceneUtilAccountable 1
 #include "org/apache/lucene/util/Accountable.h"
 
+@class IOSObjectArray;
 @class OrgApacheLuceneIndexLeafReader;
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneSearchDocIdSet;
@@ -32,6 +33,12 @@
 @protocol OrgApacheLuceneSearchFilterCachingPolicy;
 @protocol OrgApacheLuceneUtilBits;
 
+/*!
+ @brief Wraps another <code>Filter</code>'s result and caches it.
+ The purpose is to allow
+ filters to simply filter, and then wrap with this class
+ to add caching.
+ */
 @interface OrgApacheLuceneSearchCachingWrapperFilter : OrgApacheLuceneSearchFilter < OrgApacheLuceneUtilAccountable > {
  @public
   jint hitCount_, missCount_;
@@ -39,8 +46,18 @@
 
 #pragma mark Public
 
+/*!
+ @brief Same as <code>CachingWrapperFilter.CachingWrapperFilter(Filter,FilterCachingPolicy)</code>
+ but enforces the use of the
+ <code>FilterCachingPolicy.CacheOnLargeSegments.DEFAULT</code> policy.
+ */
 - (instancetype)initWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter;
 
+/*!
+ @brief Wraps another filter's result and caches it according to the provided policy.
+ @param filter Filter to cache results of
+ @param policy policy defining which filters should be cached on which segments
+ */
 - (instancetype)initWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
        withOrgApacheLuceneSearchFilterCachingPolicy:(id<OrgApacheLuceneSearchFilterCachingPolicy>)policy;
 
@@ -51,6 +68,10 @@
 - (OrgApacheLuceneSearchDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                             withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs;
 
+/*!
+ @brief Gets the contained filter.
+ @return the contained filter.
+ */
 - (OrgApacheLuceneSearchFilter *)getFilter;
 
 - (NSUInteger)hash;
@@ -61,9 +82,22 @@
 
 #pragma mark Protected
 
+/*!
+ @brief Default cache implementation: uses <code>RoaringDocIdSet</code>.
+ */
 - (OrgApacheLuceneSearchDocIdSet *)cacheImplWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iterator
                                                    withOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader;
 
+/*!
+ @brief Provide the DocIdSet to be cached, using the DocIdSet provided
+ by the wrapped Filter.
+ <p>This implementation returns the given <code>DocIdSet</code>,
+ if <code>DocIdSet.isCacheable</code> returns <code>true</code>, else it calls
+ <code>cacheImpl(DocIdSetIterator,org.apache.lucene.index.LeafReader)</code>
+ <p>Note: This method returns DocIdSet.EMPTY if the given docIdSet
+ is <code>null</code> or if <code>DocIdSet.iterator()</code> return <code>null</code>. The empty
+ instance is use as a placeholder in the cache instead of the <code>null</code> value.
+ */
 - (OrgApacheLuceneSearchDocIdSet *)docIdSetToCacheWithOrgApacheLuceneSearchDocIdSet:(OrgApacheLuceneSearchDocIdSet *)docIdSet
                                                  withOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader;
 
@@ -75,12 +109,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchCachingWrapperFilter_initWithOrgApac
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchCachingWrapperFilter *new_OrgApacheLuceneSearchCachingWrapperFilter_initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchFilterCachingPolicy_(OrgApacheLuceneSearchFilter *filter, id<OrgApacheLuceneSearchFilterCachingPolicy> policy) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchCachingWrapperFilter *create_OrgApacheLuceneSearchCachingWrapperFilter_initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchFilterCachingPolicy_(OrgApacheLuceneSearchFilter *filter, id<OrgApacheLuceneSearchFilterCachingPolicy> policy);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchCachingWrapperFilter_initWithOrgApacheLuceneSearchFilter_(OrgApacheLuceneSearchCachingWrapperFilter *self, OrgApacheLuceneSearchFilter *filter);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchCachingWrapperFilter *new_OrgApacheLuceneSearchCachingWrapperFilter_initWithOrgApacheLuceneSearchFilter_(OrgApacheLuceneSearchFilter *filter) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchCachingWrapperFilter *create_OrgApacheLuceneSearchCachingWrapperFilter_initWithOrgApacheLuceneSearchFilter_(OrgApacheLuceneSearchFilter *filter);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCachingWrapperFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchCachingWrapperFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchCachingWrapperFilter")

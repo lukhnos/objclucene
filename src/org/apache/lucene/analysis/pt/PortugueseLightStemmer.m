@@ -98,7 +98,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "stemWithCharArray:withInt:", "stem", "I", 0x1, NULL, NULL },
     { "removeSuffixWithCharArray:withInt:", "removeSuffix", "I", 0x2, NULL, NULL },
     { "normFeminineWithCharArray:withInt:", "normFeminine", "I", 0x2, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "PortugueseLightStemmer", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPtPortugueseLightStemmer = { 2, "PortugueseLightStemmer", "org.apache.lucene.analysis.pt", NULL, 0x1, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisPtPortugueseLightStemmer;
@@ -180,9 +180,11 @@ void OrgApacheLuceneAnalysisPtPortugueseLightStemmer_init(OrgApacheLuceneAnalysi
 }
 
 OrgApacheLuceneAnalysisPtPortugueseLightStemmer *new_OrgApacheLuceneAnalysisPtPortugueseLightStemmer_init() {
-  OrgApacheLuceneAnalysisPtPortugueseLightStemmer *self = [OrgApacheLuceneAnalysisPtPortugueseLightStemmer alloc];
-  OrgApacheLuceneAnalysisPtPortugueseLightStemmer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPtPortugueseLightStemmer, init)
+}
+
+OrgApacheLuceneAnalysisPtPortugueseLightStemmer *create_OrgApacheLuceneAnalysisPtPortugueseLightStemmer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPtPortugueseLightStemmer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisPtPortugueseLightStemmer)

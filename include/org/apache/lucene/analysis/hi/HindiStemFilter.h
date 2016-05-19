@@ -5,23 +5,26 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisHiHindiStemFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisHiHindiStemFilter_RESTRICT
-#define OrgApacheLuceneAnalysisHiHindiStemFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisHiHindiStemFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisHiHindiStemFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisHiHindiStemFilter 0
 #else
-#define OrgApacheLuceneAnalysisHiHindiStemFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisHiHindiStemFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisHiHindiStemFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisHiHindiStemFilter
 
-#if !defined (_OrgApacheLuceneAnalysisHiHindiStemFilter_) && (OrgApacheLuceneAnalysisHiHindiStemFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisHiHindiStemFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisHiHindiStemFilter_
+#if !defined (OrgApacheLuceneAnalysisHiHindiStemFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisHiHindiStemFilter || defined(INCLUDE_OrgApacheLuceneAnalysisHiHindiStemFilter))
+#define OrgApacheLuceneAnalysisHiHindiStemFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief A <code>TokenFilter</code> that applies <code>HindiStemmer</code> to stem Hindi words.
+ */
 @interface OrgApacheLuceneAnalysisHiHindiStemFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
@@ -38,8 +41,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisHiHindiStemFilter_initWithOrgApach
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisHiHindiStemFilter *new_OrgApacheLuceneAnalysisHiHindiStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisHiHindiStemFilter *create_OrgApacheLuceneAnalysisHiHindiStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisHiHindiStemFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisHiHindiStemFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisHiHindiStemFilter")

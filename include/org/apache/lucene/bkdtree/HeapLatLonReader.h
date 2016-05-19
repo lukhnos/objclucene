@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneBkdtreeHeapLatLonReader_INCLUDE_ALL")
-#if OrgApacheLuceneBkdtreeHeapLatLonReader_RESTRICT
-#define OrgApacheLuceneBkdtreeHeapLatLonReader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneBkdtreeHeapLatLonReader")
+#ifdef RESTRICT_OrgApacheLuceneBkdtreeHeapLatLonReader
+#define INCLUDE_ALL_OrgApacheLuceneBkdtreeHeapLatLonReader 0
 #else
-#define OrgApacheLuceneBkdtreeHeapLatLonReader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneBkdtreeHeapLatLonReader 1
 #endif
-#undef OrgApacheLuceneBkdtreeHeapLatLonReader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneBkdtreeHeapLatLonReader
 
-#if !defined (_OrgApacheLuceneBkdtreeHeapLatLonReader_) && (OrgApacheLuceneBkdtreeHeapLatLonReader_INCLUDE_ALL || OrgApacheLuceneBkdtreeHeapLatLonReader_INCLUDE)
-#define _OrgApacheLuceneBkdtreeHeapLatLonReader_
+#if !defined (OrgApacheLuceneBkdtreeHeapLatLonReader_) && (INCLUDE_ALL_OrgApacheLuceneBkdtreeHeapLatLonReader || defined(INCLUDE_OrgApacheLuceneBkdtreeHeapLatLonReader))
+#define OrgApacheLuceneBkdtreeHeapLatLonReader_
 
-#define OrgApacheLuceneBkdtreeLatLonReader_RESTRICT 1
-#define OrgApacheLuceneBkdtreeLatLonReader_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneBkdtreeLatLonReader 1
+#define INCLUDE_OrgApacheLuceneBkdtreeLatLonReader 1
 #include "org/apache/lucene/bkdtree/LatLonReader.h"
 
 @class IOSIntArray;
@@ -68,8 +68,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeHeapLatLonReader_initWithIntArray_w
 
 FOUNDATION_EXPORT OrgApacheLuceneBkdtreeHeapLatLonReader *new_OrgApacheLuceneBkdtreeHeapLatLonReader_initWithIntArray_withIntArray_withLongArray_withIntArray_withInt_withInt_(IOSIntArray *latEncs, IOSIntArray *lonEncs, IOSLongArray *ords, IOSIntArray *docIDs, jint start, jint end) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneBkdtreeHeapLatLonReader *create_OrgApacheLuceneBkdtreeHeapLatLonReader_initWithIntArray_withIntArray_withLongArray_withIntArray_withInt_withInt_(IOSIntArray *latEncs, IOSIntArray *lonEncs, IOSLongArray *ords, IOSIntArray *docIDs, jint start, jint end);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeHeapLatLonReader)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneBkdtreeHeapLatLonReader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneBkdtreeHeapLatLonReader")

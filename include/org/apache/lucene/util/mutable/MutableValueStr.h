@@ -5,23 +5,29 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilMutableMutableValueStr_INCLUDE_ALL")
-#if OrgApacheLuceneUtilMutableMutableValueStr_RESTRICT
-#define OrgApacheLuceneUtilMutableMutableValueStr_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueStr")
+#ifdef RESTRICT_OrgApacheLuceneUtilMutableMutableValueStr
+#define INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueStr 0
 #else
-#define OrgApacheLuceneUtilMutableMutableValueStr_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueStr 1
 #endif
-#undef OrgApacheLuceneUtilMutableMutableValueStr_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilMutableMutableValueStr
 
-#if !defined (_OrgApacheLuceneUtilMutableMutableValueStr_) && (OrgApacheLuceneUtilMutableMutableValueStr_INCLUDE_ALL || OrgApacheLuceneUtilMutableMutableValueStr_INCLUDE)
-#define _OrgApacheLuceneUtilMutableMutableValueStr_
+#if !defined (OrgApacheLuceneUtilMutableMutableValueStr_) && (INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueStr || defined(INCLUDE_OrgApacheLuceneUtilMutableMutableValueStr))
+#define OrgApacheLuceneUtilMutableMutableValueStr_
 
-#define OrgApacheLuceneUtilMutableMutableValue_RESTRICT 1
-#define OrgApacheLuceneUtilMutableMutableValue_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilMutableMutableValue 1
+#define INCLUDE_OrgApacheLuceneUtilMutableMutableValue 1
 #include "org/apache/lucene/util/mutable/MutableValue.h"
 
 @class OrgApacheLuceneUtilBytesRefBuilder;
 
+/*!
+ @brief <code>MutableValue</code> implementation of type <code>String</code>.
+ When mutating instances of this object, the caller is responsible for ensuring 
+ that any instance where <code>exists</code> is set to <code>false</code> must also 
+ have a <code>value</code> with a length set to 0.
+ */
 @interface OrgApacheLuceneUtilMutableMutableValueStr : OrgApacheLuceneUtilMutableMutableValue {
  @public
   OrgApacheLuceneUtilBytesRefBuilder *value_;
@@ -53,8 +59,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilMutableMutableValueStr_init(OrgApacheL
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilMutableMutableValueStr *new_OrgApacheLuceneUtilMutableMutableValueStr_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilMutableMutableValueStr *create_OrgApacheLuceneUtilMutableMutableValueStr_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilMutableMutableValueStr)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilMutableMutableValueStr_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueStr")

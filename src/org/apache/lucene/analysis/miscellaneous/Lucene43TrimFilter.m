@@ -4,10 +4,12 @@
 //
 
 #include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
+#include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/analysis/TokenFilter.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/miscellaneous/Lucene43TrimFilter.h"
@@ -57,7 +59,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter, offs
       [termAtt_ setEmpty];
     }
     if (updateOffsets_ && len == [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) endOffset] - [offsetAtt_ startOffset]) {
-      jint newStart = [offsetAtt_ startOffset] + start;
+      jint newStart = [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) startOffset] + start;
       jint newEnd = [offsetAtt_ endOffset] - (start < end ? endOff : 0);
       [offsetAtt_ setOffsetWithInt:newStart withInt:newEnd];
     }
@@ -65,14 +67,14 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter, offs
   return true;
 }
 
++ (IOSObjectArray *)__annotations {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
 - (void)dealloc {
   RELEASE_(termAtt_);
   RELEASE_(offsetAtt_);
   [super dealloc];
-}
-
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -99,9 +101,11 @@ void OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter_initWithOrgApacheLuc
 }
 
 OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter *new_OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_(OrgApacheLuceneAnalysisTokenStream *inArg, jboolean updateOffsets) {
-  OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter *self = [OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter alloc];
-  OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_(self, inArg, updateOffsets);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter, initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_, inArg, updateOffsets)
+}
+
+OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter *create_OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_(OrgApacheLuceneAnalysisTokenStream *inArg, jboolean updateOffsets) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter, initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_, inArg, updateOffsets)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter)

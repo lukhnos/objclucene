@@ -5,37 +5,58 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneStoreIOContext_INCLUDE_ALL")
-#if OrgApacheLuceneStoreIOContext_RESTRICT
-#define OrgApacheLuceneStoreIOContext_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneStoreIOContext")
+#ifdef RESTRICT_OrgApacheLuceneStoreIOContext
+#define INCLUDE_ALL_OrgApacheLuceneStoreIOContext 0
 #else
-#define OrgApacheLuceneStoreIOContext_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneStoreIOContext 1
 #endif
-#undef OrgApacheLuceneStoreIOContext_RESTRICT
+#undef RESTRICT_OrgApacheLuceneStoreIOContext
 
-#if !defined (_OrgApacheLuceneStoreIOContext_) && (OrgApacheLuceneStoreIOContext_INCLUDE_ALL || OrgApacheLuceneStoreIOContext_INCLUDE)
-#define _OrgApacheLuceneStoreIOContext_
+#if !defined (OrgApacheLuceneStoreIOContext_) && (INCLUDE_ALL_OrgApacheLuceneStoreIOContext || defined(INCLUDE_OrgApacheLuceneStoreIOContext))
+#define OrgApacheLuceneStoreIOContext_
 
 @class OrgApacheLuceneStoreFlushInfo;
-@class OrgApacheLuceneStoreIOContext_ContextEnum;
+@class OrgApacheLuceneStoreIOContext_Context;
 @class OrgApacheLuceneStoreMergeInfo;
 
+/*!
+ @brief IOContext holds additional details on the merge/search context.
+ A IOContext
+ object can never be initialized as null as passed as a parameter to either
+ <code>org.apache.lucene.store.Directory.openInput(String,IOContext)</code> or
+ <code>org.apache.lucene.store.Directory.createOutput(String,IOContext)</code>
+ */
 @interface OrgApacheLuceneStoreIOContext : NSObject {
  @public
-  OrgApacheLuceneStoreIOContext_ContextEnum *context_;
+  /*!
+   @brief An object of a enumerator Context type
+   */
+  OrgApacheLuceneStoreIOContext_Context *context_;
   OrgApacheLuceneStoreMergeInfo *mergeInfo_;
   OrgApacheLuceneStoreFlushInfo *flushInfo_;
   jboolean readOnce_;
 }
 
++ (OrgApacheLuceneStoreIOContext *)DEFAULT;
+
++ (OrgApacheLuceneStoreIOContext *)READONCE;
+
++ (OrgApacheLuceneStoreIOContext *)READ;
+
 #pragma mark Public
 
 - (instancetype)init;
 
-- (instancetype)initWithOrgApacheLuceneStoreIOContext_ContextEnum:(OrgApacheLuceneStoreIOContext_ContextEnum *)context;
+- (instancetype)initWithOrgApacheLuceneStoreIOContext_Context:(OrgApacheLuceneStoreIOContext_Context *)context;
 
 - (instancetype)initWithOrgApacheLuceneStoreFlushInfo:(OrgApacheLuceneStoreFlushInfo *)flushInfo;
 
+/*!
+ @brief This constructor is used to initialize a <code>IOContext</code> instance with a new value for the readOnce variable.
+ @param ctxt <code>IOContext</code> object whose information is used to create the new instance except the readOnce variable.
+ @param readOnce The new <code>IOContext</code> object will use this value for readOnce.
+ */
 - (instancetype)initWithOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)ctxt
                                           withBoolean:(jboolean)readOnce;
 
@@ -51,89 +72,123 @@
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneStoreIOContext)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreIOContext, context_, OrgApacheLuceneStoreIOContext_ContextEnum *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreIOContext, context_, OrgApacheLuceneStoreIOContext_Context *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreIOContext, mergeInfo_, OrgApacheLuceneStoreMergeInfo *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreIOContext, flushInfo_, OrgApacheLuceneStoreFlushInfo *)
 
-FOUNDATION_EXPORT OrgApacheLuceneStoreIOContext *OrgApacheLuceneStoreIOContext_DEFAULT_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneStoreIOContext, DEFAULT_, OrgApacheLuceneStoreIOContext *)
+inline OrgApacheLuceneStoreIOContext *OrgApacheLuceneStoreIOContext_get_DEFAULT();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT OrgApacheLuceneStoreIOContext *OrgApacheLuceneStoreIOContext_DEFAULT;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneStoreIOContext, DEFAULT, OrgApacheLuceneStoreIOContext *)
 
-FOUNDATION_EXPORT OrgApacheLuceneStoreIOContext *OrgApacheLuceneStoreIOContext_READONCE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneStoreIOContext, READONCE_, OrgApacheLuceneStoreIOContext *)
+inline OrgApacheLuceneStoreIOContext *OrgApacheLuceneStoreIOContext_get_READONCE();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT OrgApacheLuceneStoreIOContext *OrgApacheLuceneStoreIOContext_READONCE;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneStoreIOContext, READONCE, OrgApacheLuceneStoreIOContext *)
 
-FOUNDATION_EXPORT OrgApacheLuceneStoreIOContext *OrgApacheLuceneStoreIOContext_READ_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneStoreIOContext, READ_, OrgApacheLuceneStoreIOContext *)
+inline OrgApacheLuceneStoreIOContext *OrgApacheLuceneStoreIOContext_get_READ();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT OrgApacheLuceneStoreIOContext *OrgApacheLuceneStoreIOContext_READ;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneStoreIOContext, READ, OrgApacheLuceneStoreIOContext *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneStoreIOContext_init(OrgApacheLuceneStoreIOContext *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreIOContext *new_OrgApacheLuceneStoreIOContext_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneStoreIOContext *create_OrgApacheLuceneStoreIOContext_init();
+
 FOUNDATION_EXPORT void OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreFlushInfo_(OrgApacheLuceneStoreIOContext *self, OrgApacheLuceneStoreFlushInfo *flushInfo);
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreIOContext *new_OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreFlushInfo_(OrgApacheLuceneStoreFlushInfo *flushInfo) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT void OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreIOContext_ContextEnum_(OrgApacheLuceneStoreIOContext *self, OrgApacheLuceneStoreIOContext_ContextEnum *context);
+FOUNDATION_EXPORT OrgApacheLuceneStoreIOContext *create_OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreFlushInfo_(OrgApacheLuceneStoreFlushInfo *flushInfo);
 
-FOUNDATION_EXPORT OrgApacheLuceneStoreIOContext *new_OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreIOContext_ContextEnum_(OrgApacheLuceneStoreIOContext_ContextEnum *context) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT void OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreIOContext_Context_(OrgApacheLuceneStoreIOContext *self, OrgApacheLuceneStoreIOContext_Context *context);
+
+FOUNDATION_EXPORT OrgApacheLuceneStoreIOContext *new_OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreIOContext_Context_(OrgApacheLuceneStoreIOContext_Context *context) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneStoreIOContext *create_OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreIOContext_Context_(OrgApacheLuceneStoreIOContext_Context *context);
 
 FOUNDATION_EXPORT void OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreMergeInfo_(OrgApacheLuceneStoreIOContext *self, OrgApacheLuceneStoreMergeInfo *mergeInfo);
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreIOContext *new_OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreMergeInfo_(OrgApacheLuceneStoreMergeInfo *mergeInfo) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneStoreIOContext *create_OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreMergeInfo_(OrgApacheLuceneStoreMergeInfo *mergeInfo);
+
 FOUNDATION_EXPORT void OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreIOContext_withBoolean_(OrgApacheLuceneStoreIOContext *self, OrgApacheLuceneStoreIOContext *ctxt, jboolean readOnce);
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreIOContext *new_OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreIOContext_withBoolean_(OrgApacheLuceneStoreIOContext *ctxt, jboolean readOnce) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneStoreIOContext *create_OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreIOContext_withBoolean_(OrgApacheLuceneStoreIOContext *ctxt, jboolean readOnce);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreIOContext)
 
 #endif
 
-#if !defined (_OrgApacheLuceneStoreIOContext_ContextEnum_) && (OrgApacheLuceneStoreIOContext_INCLUDE_ALL || OrgApacheLuceneStoreIOContext_ContextEnum_INCLUDE)
-#define _OrgApacheLuceneStoreIOContext_ContextEnum_
+#if !defined (OrgApacheLuceneStoreIOContext_Context_) && (INCLUDE_ALL_OrgApacheLuceneStoreIOContext || defined(INCLUDE_OrgApacheLuceneStoreIOContext_Context))
+#define OrgApacheLuceneStoreIOContext_Context_
 
-#define JavaLangEnum_RESTRICT 1
-#define JavaLangEnum_INCLUDE 1
+#define RESTRICT_JavaLangEnum 1
+#define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
 
-typedef NS_ENUM(NSUInteger, OrgApacheLuceneStoreIOContext_Context) {
-  OrgApacheLuceneStoreIOContext_Context_MERGE = 0,
-  OrgApacheLuceneStoreIOContext_Context_READ = 1,
-  OrgApacheLuceneStoreIOContext_Context_FLUSH = 2,
-  OrgApacheLuceneStoreIOContext_Context_DEFAULT = 3,
+typedef NS_ENUM(NSUInteger, OrgApacheLuceneStoreIOContext_Context_Enum) {
+  OrgApacheLuceneStoreIOContext_Context_Enum_MERGE = 0,
+  OrgApacheLuceneStoreIOContext_Context_Enum_READ = 1,
+  OrgApacheLuceneStoreIOContext_Context_Enum_FLUSH = 2,
+  OrgApacheLuceneStoreIOContext_Context_Enum_DEFAULT = 3,
 };
 
-@interface OrgApacheLuceneStoreIOContext_ContextEnum : JavaLangEnum < NSCopying >
+/*!
+ @brief Context is a enumerator which specifies the context in which the Directory
+ is being used for.
+ */
+@interface OrgApacheLuceneStoreIOContext_Context : JavaLangEnum < NSCopying >
+
++ (OrgApacheLuceneStoreIOContext_Context *)MERGE;
+
++ (OrgApacheLuceneStoreIOContext_Context *)READ;
+
++ (OrgApacheLuceneStoreIOContext_Context *)FLUSH;
+
++ (OrgApacheLuceneStoreIOContext_Context *)DEFAULT;
 
 #pragma mark Package-Private
 
 + (IOSObjectArray *)values;
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneStoreIOContext_ContextEnum_values();
 
-+ (OrgApacheLuceneStoreIOContext_ContextEnum *)valueOfWithNSString:(NSString *)name;
-FOUNDATION_EXPORT OrgApacheLuceneStoreIOContext_ContextEnum *OrgApacheLuceneStoreIOContext_ContextEnum_valueOfWithNSString_(NSString *name);
++ (OrgApacheLuceneStoreIOContext_Context *)valueOfWithNSString:(NSString *)name;
 
 - (id)copyWithZone:(NSZone *)zone;
+- (OrgApacheLuceneStoreIOContext_Context_Enum)toNSEnum;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneStoreIOContext_ContextEnum)
+J2OBJC_STATIC_INIT(OrgApacheLuceneStoreIOContext_Context)
 
-FOUNDATION_EXPORT OrgApacheLuceneStoreIOContext_ContextEnum *OrgApacheLuceneStoreIOContext_ContextEnum_values_[];
+/*! INTERNAL ONLY - Use enum accessors declared below. */
+FOUNDATION_EXPORT OrgApacheLuceneStoreIOContext_Context *OrgApacheLuceneStoreIOContext_Context_values_[];
 
-#define OrgApacheLuceneStoreIOContext_ContextEnum_MERGE OrgApacheLuceneStoreIOContext_ContextEnum_values_[OrgApacheLuceneStoreIOContext_Context_MERGE]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneStoreIOContext_ContextEnum, MERGE)
+inline OrgApacheLuceneStoreIOContext_Context *OrgApacheLuceneStoreIOContext_Context_get_MERGE();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneStoreIOContext_Context, MERGE)
 
-#define OrgApacheLuceneStoreIOContext_ContextEnum_READ OrgApacheLuceneStoreIOContext_ContextEnum_values_[OrgApacheLuceneStoreIOContext_Context_READ]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneStoreIOContext_ContextEnum, READ)
+inline OrgApacheLuceneStoreIOContext_Context *OrgApacheLuceneStoreIOContext_Context_get_READ();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneStoreIOContext_Context, READ)
 
-#define OrgApacheLuceneStoreIOContext_ContextEnum_FLUSH OrgApacheLuceneStoreIOContext_ContextEnum_values_[OrgApacheLuceneStoreIOContext_Context_FLUSH]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneStoreIOContext_ContextEnum, FLUSH)
+inline OrgApacheLuceneStoreIOContext_Context *OrgApacheLuceneStoreIOContext_Context_get_FLUSH();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneStoreIOContext_Context, FLUSH)
 
-#define OrgApacheLuceneStoreIOContext_ContextEnum_DEFAULT OrgApacheLuceneStoreIOContext_ContextEnum_values_[OrgApacheLuceneStoreIOContext_Context_DEFAULT]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneStoreIOContext_ContextEnum, DEFAULT)
+inline OrgApacheLuceneStoreIOContext_Context *OrgApacheLuceneStoreIOContext_Context_get_DEFAULT();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneStoreIOContext_Context, DEFAULT)
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreIOContext_ContextEnum)
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneStoreIOContext_Context_values();
+
+FOUNDATION_EXPORT OrgApacheLuceneStoreIOContext_Context *OrgApacheLuceneStoreIOContext_Context_valueOfWithNSString_(NSString *name);
+
+FOUNDATION_EXPORT OrgApacheLuceneStoreIOContext_Context *OrgApacheLuceneStoreIOContext_Context_fromOrdinal(NSUInteger ordinal);
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreIOContext_Context)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneStoreIOContext_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreIOContext")

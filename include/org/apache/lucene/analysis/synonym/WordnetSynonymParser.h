@@ -5,24 +5,29 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisSynonymWordnetSynonymParser_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisSynonymWordnetSynonymParser_RESTRICT
-#define OrgApacheLuceneAnalysisSynonymWordnetSynonymParser_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisSynonymWordnetSynonymParser")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisSynonymWordnetSynonymParser
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisSynonymWordnetSynonymParser 0
 #else
-#define OrgApacheLuceneAnalysisSynonymWordnetSynonymParser_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisSynonymWordnetSynonymParser 1
 #endif
-#undef OrgApacheLuceneAnalysisSynonymWordnetSynonymParser_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisSynonymWordnetSynonymParser
 
-#if !defined (_OrgApacheLuceneAnalysisSynonymWordnetSynonymParser_) && (OrgApacheLuceneAnalysisSynonymWordnetSynonymParser_INCLUDE_ALL || OrgApacheLuceneAnalysisSynonymWordnetSynonymParser_INCLUDE)
-#define _OrgApacheLuceneAnalysisSynonymWordnetSynonymParser_
+#if !defined (OrgApacheLuceneAnalysisSynonymWordnetSynonymParser_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisSynonymWordnetSynonymParser || defined(INCLUDE_OrgApacheLuceneAnalysisSynonymWordnetSynonymParser))
+#define OrgApacheLuceneAnalysisSynonymWordnetSynonymParser_
 
-#define OrgApacheLuceneAnalysisSynonymSynonymMap_RESTRICT 1
-#define OrgApacheLuceneAnalysisSynonymSynonymMap_Parser_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisSynonymSynonymMap 1
+#define INCLUDE_OrgApacheLuceneAnalysisSynonymSynonymMap_Parser 1
 #include "org/apache/lucene/analysis/synonym/SynonymMap.h"
 
 @class JavaIoReader;
 @class OrgApacheLuceneAnalysisAnalyzer;
 
+/*!
+ @brief Parser for wordnet prolog format
+ <p>
+ See http://wordnet.princeton.edu/man/prologdb.5WN.html for a description of the format.
+ */
 @interface OrgApacheLuceneAnalysisSynonymWordnetSynonymParser : OrgApacheLuceneAnalysisSynonymSynonymMap_Parser
 
 #pragma mark Public
@@ -41,8 +46,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSynonymWordnetSynonymParser_initWi
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisSynonymWordnetSynonymParser *new_OrgApacheLuceneAnalysisSynonymWordnetSynonymParser_initWithBoolean_withBoolean_withOrgApacheLuceneAnalysisAnalyzer_(jboolean dedup, jboolean expand, OrgApacheLuceneAnalysisAnalyzer *analyzer) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisSynonymWordnetSynonymParser *create_OrgApacheLuceneAnalysisSynonymWordnetSynonymParser_initWithBoolean_withBoolean_withOrgApacheLuceneAnalysisAnalyzer_(jboolean dedup, jboolean expand, OrgApacheLuceneAnalysisAnalyzer *analyzer);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSynonymWordnetSynonymParser)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisSynonymWordnetSynonymParser_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisSynonymWordnetSynonymParser")

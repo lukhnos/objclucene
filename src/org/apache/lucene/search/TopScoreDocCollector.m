@@ -35,6 +35,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchTopScoreDocCollector_Si
 
 __attribute__((unused)) static OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector *new_OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_initWithInt_(jint numHits) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector *create_OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_initWithInt_(jint numHits);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector)
 
 @interface OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1 : OrgApacheLuceneSearchTopScoreDocCollector_ScorerLeafCollector {
@@ -57,6 +59,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocC
 __attribute__((unused)) static void OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1_initWithOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_withInt_(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1 *self, OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector *outer$, jint capture$0);
 
 __attribute__((unused)) static OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1 *new_OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1_initWithOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_withInt_(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector *outer$, jint capture$0) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1 *create_OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1_initWithOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_withInt_(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector *outer$, jint capture$0);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1)
 
@@ -86,6 +90,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchTopScoreDocCollector_Pa
 
 __attribute__((unused)) static OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector *new_OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_initWithInt_withOrgApacheLuceneSearchScoreDoc_(jint numHits, OrgApacheLuceneSearchScoreDoc *after) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector *create_OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_initWithInt_withOrgApacheLuceneSearchScoreDoc_(jint numHits, OrgApacheLuceneSearchScoreDoc *after);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector)
 
 @interface OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1 : OrgApacheLuceneSearchTopScoreDocCollector_ScorerLeafCollector {
@@ -111,6 +117,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchTopScoreDocCollector_Pa
 
 __attribute__((unused)) static OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1 *new_OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1_initWithOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_withInt_withInt_(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector *outer$, jint capture$0, jint capture$1) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1 *create_OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1_initWithOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_withInt_withInt_(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector *outer$, jint capture$0, jint capture$1);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1)
 
 @implementation OrgApacheLuceneSearchTopScoreDocCollector
@@ -132,19 +140,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopSc
 - (OrgApacheLuceneSearchTopDocs *)newTopDocsWithOrgApacheLuceneSearchScoreDocArray:(IOSObjectArray *)results
                                                                            withInt:(jint)start {
   if (results == nil) {
-    return JreLoadStatic(OrgApacheLuceneSearchTopDocsCollector, EMPTY_TOPDOCS_);
+    return JreLoadStatic(OrgApacheLuceneSearchTopDocsCollector, EMPTY_TOPDOCS);
   }
   jfloat maxScore = JavaLangFloat_NaN;
   if (start == 0) {
-    maxScore = ((OrgApacheLuceneSearchScoreDoc *) nil_chk(IOSObjectArray_Get(nil_chk(results), 0)))->score_;
+    maxScore = ((OrgApacheLuceneSearchScoreDoc *) nil_chk(IOSObjectArray_Get(results, 0)))->score_;
   }
   else {
     for (jint i = [((OrgApacheLuceneUtilPriorityQueue *) nil_chk(pq_)) size]; i > 1; i--) {
-      [pq_ pop];
+      [((OrgApacheLuceneUtilPriorityQueue *) nil_chk(pq_)) pop];
     }
-    maxScore = ((OrgApacheLuceneSearchScoreDoc *) nil_chk([pq_ pop]))->score_;
+    maxScore = ((OrgApacheLuceneSearchScoreDoc *) nil_chk([((OrgApacheLuceneUtilPriorityQueue *) nil_chk(pq_)) pop]))->score_;
   }
-  return [new_OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_withFloat_(totalHits_, results, maxScore) autorelease];
+  return create_OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_withFloat_(totalHits_, results, maxScore);
 }
 
 - (jboolean)needsScores {
@@ -183,18 +191,18 @@ OrgApacheLuceneSearchTopScoreDocCollector *OrgApacheLuceneSearchTopScoreDocColle
 OrgApacheLuceneSearchTopScoreDocCollector *OrgApacheLuceneSearchTopScoreDocCollector_createWithInt_withOrgApacheLuceneSearchScoreDoc_(jint numHits, OrgApacheLuceneSearchScoreDoc *after) {
   OrgApacheLuceneSearchTopScoreDocCollector_initialize();
   if (numHits <= 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"numHits must be > 0; please use TotalHitCountCollector if you just need the total hit count") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"numHits must be > 0; please use TotalHitCountCollector if you just need the total hit count");
   }
   if (after == nil) {
-    return [new_OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_initWithInt_(numHits) autorelease];
+    return create_OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_initWithInt_(numHits);
   }
   else {
-    return [new_OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_initWithInt_withOrgApacheLuceneSearchScoreDoc_(numHits, after) autorelease];
+    return create_OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_initWithInt_withOrgApacheLuceneSearchScoreDoc_(numHits, after);
   }
 }
 
 void OrgApacheLuceneSearchTopScoreDocCollector_initWithInt_(OrgApacheLuceneSearchTopScoreDocCollector *self, jint numHits) {
-  OrgApacheLuceneSearchTopDocsCollector_initWithOrgApacheLuceneUtilPriorityQueue_(self, [new_OrgApacheLuceneSearchHitQueue_initWithInt_withBoolean_(numHits, true) autorelease]);
+  OrgApacheLuceneSearchTopDocsCollector_initWithOrgApacheLuceneUtilPriorityQueue_(self, create_OrgApacheLuceneSearchHitQueue_initWithInt_withBoolean_(numHits, true));
   JreStrongAssign(&self->pqTop_, [((OrgApacheLuceneUtilPriorityQueue *) nil_chk(self->pq_)) top]);
 }
 
@@ -221,7 +229,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "setScorerWithOrgApacheLuceneSearchScorer:", "setScorer", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "init", NULL, NULL, 0x0, NULL, NULL },
+    { "init", "ScorerLeafCollector", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "scorer_", NULL, 0x0, "Lorg.apache.lucene.search.Scorer;", NULL, NULL, .constantValue.asLong = 0 },
@@ -247,7 +255,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopScoreDocCollector_Score
 
 - (id<OrgApacheLuceneSearchLeafCollector>)getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
   jint docBase = ((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context))->docBase_;
-  return [new_OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1_initWithOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_withInt_(self, docBase) autorelease];
+  return create_OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1_initWithOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_withInt_(self, docBase);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -266,9 +274,11 @@ void OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_initWi
 }
 
 OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector *new_OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_initWithInt_(jint numHits) {
-  OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector *self = [OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector alloc];
-  OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_initWithInt_(self, numHits);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector, initWithInt_, numHits)
+}
+
+OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector *create_OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_initWithInt_(jint numHits) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector, initWithInt_, numHits)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector)
@@ -322,9 +332,11 @@ void OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1_ini
 }
 
 OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1 *new_OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1_initWithOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_withInt_(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector *outer$, jint capture$0) {
-  OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1 *self = [OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1 alloc];
-  OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1_initWithOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_withInt_(self, outer$, capture$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1, initWithOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_withInt_, outer$, capture$0)
+}
+
+OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1 *create_OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1_initWithOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_withInt_(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector *outer$, jint capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1, initWithOrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_withInt_, outer$, capture$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopScoreDocCollector_SimpleTopScoreDocCollector_$1)
@@ -338,18 +350,18 @@ withOrgApacheLuceneSearchScoreDoc:(OrgApacheLuceneSearchScoreDoc *)after {
 }
 
 - (jint)topDocsSize {
-  return collectedHits_ < [((OrgApacheLuceneUtilPriorityQueue *) nil_chk(pq_)) size] ? collectedHits_ : [pq_ size];
+  return collectedHits_ < [((OrgApacheLuceneUtilPriorityQueue *) nil_chk(pq_)) size] ? collectedHits_ : [((OrgApacheLuceneUtilPriorityQueue *) nil_chk(pq_)) size];
 }
 
 - (OrgApacheLuceneSearchTopDocs *)newTopDocsWithOrgApacheLuceneSearchScoreDocArray:(IOSObjectArray *)results
                                                                            withInt:(jint)start {
-  return results == nil ? [new_OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_withFloat_(totalHits_, [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchScoreDoc_class_()], JavaLangFloat_NaN) autorelease] : [new_OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_(totalHits_, results) autorelease];
+  return results == nil ? create_OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_withFloat_(totalHits_, [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchScoreDoc_class_()], JavaLangFloat_NaN) : create_OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_(totalHits_, results);
 }
 
 - (id<OrgApacheLuceneSearchLeafCollector>)getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
   jint docBase = ((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context))->docBase_;
   jint afterDoc = ((OrgApacheLuceneSearchScoreDoc *) nil_chk(after_))->doc_ - context->docBase_;
-  return [new_OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1_initWithOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_withInt_withInt_(self, afterDoc, docBase) autorelease];
+  return create_OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1_initWithOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_withInt_withInt_(self, afterDoc, docBase);
 }
 
 - (void)dealloc {
@@ -381,9 +393,11 @@ void OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_initWi
 }
 
 OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector *new_OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_initWithInt_withOrgApacheLuceneSearchScoreDoc_(jint numHits, OrgApacheLuceneSearchScoreDoc *after) {
-  OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector *self = [OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector alloc];
-  OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_initWithInt_withOrgApacheLuceneSearchScoreDoc_(self, numHits, after);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector, initWithInt_withOrgApacheLuceneSearchScoreDoc_, numHits, after)
+}
+
+OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector *create_OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_initWithInt_withOrgApacheLuceneSearchScoreDoc_(jint numHits, OrgApacheLuceneSearchScoreDoc *after) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector, initWithInt_withOrgApacheLuceneSearchScoreDoc_, numHits, after)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector)
@@ -444,9 +458,11 @@ void OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1_ini
 }
 
 OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1 *new_OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1_initWithOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_withInt_withInt_(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector *outer$, jint capture$0, jint capture$1) {
-  OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1 *self = [OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1 alloc];
-  OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1_initWithOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_withInt_withInt_(self, outer$, capture$0, capture$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1, initWithOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_withInt_withInt_, outer$, capture$0, capture$1)
+}
+
+OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1 *create_OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1_initWithOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_withInt_withInt_(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector *outer$, jint capture$0, jint capture$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1, initWithOrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_withInt_withInt_, outer$, capture$0, capture$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopScoreDocCollector_$1)

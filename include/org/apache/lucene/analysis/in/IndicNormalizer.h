@@ -5,25 +5,39 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisInIndicNormalizer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisInIndicNormalizer_RESTRICT
-#define OrgApacheLuceneAnalysisInIndicNormalizer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisInIndicNormalizer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisInIndicNormalizer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisInIndicNormalizer 0
 #else
-#define OrgApacheLuceneAnalysisInIndicNormalizer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisInIndicNormalizer 1
 #endif
-#undef OrgApacheLuceneAnalysisInIndicNormalizer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisInIndicNormalizer
 
-#if !defined (_OrgApacheLuceneAnalysisInIndicNormalizer_) && (OrgApacheLuceneAnalysisInIndicNormalizer_INCLUDE_ALL || OrgApacheLuceneAnalysisInIndicNormalizer_INCLUDE)
-#define _OrgApacheLuceneAnalysisInIndicNormalizer_
+#if !defined (OrgApacheLuceneAnalysisInIndicNormalizer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisInIndicNormalizer || defined(INCLUDE_OrgApacheLuceneAnalysisInIndicNormalizer))
+#define OrgApacheLuceneAnalysisInIndicNormalizer_
 
 @class IOSCharArray;
 
+/*!
+ @brief Normalizes the Unicode representation of text in Indian languages.
+ <p>
+ Follows guidelines from Unicode 5.2, chapter 6, South Asian Scripts I
+ and graphical decompositions from http://ldc.upenn.edu/myl/IndianScriptsUnicode.html
+ </p>
+ */
 @interface OrgApacheLuceneAnalysisInIndicNormalizer : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @brief Normalizes input text, and returns the new length.
+ The length will always be less than or equal to the existing length.
+ @param text input text
+ @param len valid length
+ @return normalized length
+ */
 - (jint)normalizeWithCharArray:(IOSCharArray *)text
                        withInt:(jint)len;
 
@@ -35,8 +49,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisInIndicNormalizer_init(OrgApacheLu
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisInIndicNormalizer *new_OrgApacheLuceneAnalysisInIndicNormalizer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisInIndicNormalizer *create_OrgApacheLuceneAnalysisInIndicNormalizer_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisInIndicNormalizer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisInIndicNormalizer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisInIndicNormalizer")

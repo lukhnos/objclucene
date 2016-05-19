@@ -3,14 +3,17 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/fi/package-info.java
 //
 
+/*!
+ @brief Analyzer for Finnish.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisFiPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisFiPackage_info_RESTRICT
-#define OrgApacheLuceneAnalysisFiPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisFiPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisFiPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisFiPackage_info 0
 #else
-#define OrgApacheLuceneAnalysisFiPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisFiPackage_info 1
 #endif
-#undef OrgApacheLuceneAnalysisFiPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisFiPackage_info
 
-#pragma pop_macro("OrgApacheLuceneAnalysisFiPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisFiPackage_info")

@@ -5,19 +5,26 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisPtPortugueseLightStemmer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisPtPortugueseLightStemmer_RESTRICT
-#define OrgApacheLuceneAnalysisPtPortugueseLightStemmer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPtPortugueseLightStemmer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisPtPortugueseLightStemmer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPtPortugueseLightStemmer 0
 #else
-#define OrgApacheLuceneAnalysisPtPortugueseLightStemmer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPtPortugueseLightStemmer 1
 #endif
-#undef OrgApacheLuceneAnalysisPtPortugueseLightStemmer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisPtPortugueseLightStemmer
 
-#if !defined (_OrgApacheLuceneAnalysisPtPortugueseLightStemmer_) && (OrgApacheLuceneAnalysisPtPortugueseLightStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisPtPortugueseLightStemmer_INCLUDE)
-#define _OrgApacheLuceneAnalysisPtPortugueseLightStemmer_
+#if !defined (OrgApacheLuceneAnalysisPtPortugueseLightStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPtPortugueseLightStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisPtPortugueseLightStemmer))
+#define OrgApacheLuceneAnalysisPtPortugueseLightStemmer_
 
 @class IOSCharArray;
 
+/*!
+ @brief Light Stemmer for Portuguese
+ <p>
+ This stemmer implements the "UniNE" algorithm in:
+ <i>Light Stemming Approaches for the French, Portuguese, German and Hungarian Languages</i>
+ Jacques Savoy
+ */
 @interface OrgApacheLuceneAnalysisPtPortugueseLightStemmer : NSObject
 
 #pragma mark Public
@@ -35,8 +42,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPtPortugueseLightStemmer_init(OrgA
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtPortugueseLightStemmer *new_OrgApacheLuceneAnalysisPtPortugueseLightStemmer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtPortugueseLightStemmer *create_OrgApacheLuceneAnalysisPtPortugueseLightStemmer_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPtPortugueseLightStemmer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisPtPortugueseLightStemmer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPtPortugueseLightStemmer")

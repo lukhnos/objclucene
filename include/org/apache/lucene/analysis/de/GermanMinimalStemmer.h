@@ -5,19 +5,26 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisDeGermanMinimalStemmer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisDeGermanMinimalStemmer_RESTRICT
-#define OrgApacheLuceneAnalysisDeGermanMinimalStemmer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanMinimalStemmer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisDeGermanMinimalStemmer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanMinimalStemmer 0
 #else
-#define OrgApacheLuceneAnalysisDeGermanMinimalStemmer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanMinimalStemmer 1
 #endif
-#undef OrgApacheLuceneAnalysisDeGermanMinimalStemmer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisDeGermanMinimalStemmer
 
-#if !defined (_OrgApacheLuceneAnalysisDeGermanMinimalStemmer_) && (OrgApacheLuceneAnalysisDeGermanMinimalStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisDeGermanMinimalStemmer_INCLUDE)
-#define _OrgApacheLuceneAnalysisDeGermanMinimalStemmer_
+#if !defined (OrgApacheLuceneAnalysisDeGermanMinimalStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanMinimalStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisDeGermanMinimalStemmer))
+#define OrgApacheLuceneAnalysisDeGermanMinimalStemmer_
 
 @class IOSCharArray;
 
+/*!
+ @brief Minimal Stemmer for German.
+ <p>
+ This stemmer implements the following algorithm:
+ <i>Morphologie et recherche d'information</i>
+ Jacques Savoy.
+ */
 @interface OrgApacheLuceneAnalysisDeGermanMinimalStemmer : NSObject
 
 #pragma mark Public
@@ -35,8 +42,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisDeGermanMinimalStemmer_init(OrgApa
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisDeGermanMinimalStemmer *new_OrgApacheLuceneAnalysisDeGermanMinimalStemmer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisDeGermanMinimalStemmer *create_OrgApacheLuceneAnalysisDeGermanMinimalStemmer_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisDeGermanMinimalStemmer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisDeGermanMinimalStemmer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanMinimalStemmer")

@@ -5,21 +5,24 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchTotalHitCountCollector_INCLUDE_ALL")
-#if OrgApacheLuceneSearchTotalHitCountCollector_RESTRICT
-#define OrgApacheLuceneSearchTotalHitCountCollector_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchTotalHitCountCollector")
+#ifdef RESTRICT_OrgApacheLuceneSearchTotalHitCountCollector
+#define INCLUDE_ALL_OrgApacheLuceneSearchTotalHitCountCollector 0
 #else
-#define OrgApacheLuceneSearchTotalHitCountCollector_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchTotalHitCountCollector 1
 #endif
-#undef OrgApacheLuceneSearchTotalHitCountCollector_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchTotalHitCountCollector
 
-#if !defined (_OrgApacheLuceneSearchTotalHitCountCollector_) && (OrgApacheLuceneSearchTotalHitCountCollector_INCLUDE_ALL || OrgApacheLuceneSearchTotalHitCountCollector_INCLUDE)
-#define _OrgApacheLuceneSearchTotalHitCountCollector_
+#if !defined (OrgApacheLuceneSearchTotalHitCountCollector_) && (INCLUDE_ALL_OrgApacheLuceneSearchTotalHitCountCollector || defined(INCLUDE_OrgApacheLuceneSearchTotalHitCountCollector))
+#define OrgApacheLuceneSearchTotalHitCountCollector_
 
-#define OrgApacheLuceneSearchSimpleCollector_RESTRICT 1
-#define OrgApacheLuceneSearchSimpleCollector_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSimpleCollector 1
+#define INCLUDE_OrgApacheLuceneSearchSimpleCollector 1
 #include "org/apache/lucene/search/SimpleCollector.h"
 
+/*!
+ @brief Just counts the total number of hits.
+ */
 @interface OrgApacheLuceneSearchTotalHitCountCollector : OrgApacheLuceneSearchSimpleCollector
 
 #pragma mark Public
@@ -28,6 +31,9 @@
 
 - (void)collectWithInt:(jint)doc;
 
+/*!
+ @brief Returns how many hits matched the search.
+ */
 - (jint)getTotalHits;
 
 - (jboolean)needsScores;
@@ -40,8 +46,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchTotalHitCountCollector_init(OrgApach
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchTotalHitCountCollector *new_OrgApacheLuceneSearchTotalHitCountCollector_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchTotalHitCountCollector *create_OrgApacheLuceneSearchTotalHitCountCollector_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTotalHitCountCollector)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchTotalHitCountCollector_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchTotalHitCountCollector")

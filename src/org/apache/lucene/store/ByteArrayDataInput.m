@@ -80,26 +80,16 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jshort)readShort {
-  jint unseq$1 = pos_++;
-  return (jshort) ((JreLShift32((IOSByteArray_Get(nil_chk(bytes_), unseq$1) & (jint) 0xFF), 8)) | (IOSByteArray_Get(bytes_, pos_++) & (jint) 0xFF));
+  return (jshort) ((JreLShift32((IOSByteArray_Get(nil_chk(bytes_), pos_++) & (jint) 0xFF), 8)) | (IOSByteArray_Get(bytes_, pos_++) & (jint) 0xFF));
 }
 
 - (jint)readInt {
-  jint unseq$1 = pos_++;
-  jint unseq$2 = pos_++;
-  jint unseq$3 = pos_++;
-  return (JreLShift32((IOSByteArray_Get(nil_chk(bytes_), unseq$1) & (jint) 0xFF), 24)) | (JreLShift32((IOSByteArray_Get(bytes_, unseq$2) & (jint) 0xFF), 16)) | (JreLShift32((IOSByteArray_Get(bytes_, unseq$3) & (jint) 0xFF), 8)) | (IOSByteArray_Get(bytes_, pos_++) & (jint) 0xFF);
+  return (JreLShift32((IOSByteArray_Get(nil_chk(bytes_), pos_++) & (jint) 0xFF), 24)) | (JreLShift32((IOSByteArray_Get(bytes_, pos_++) & (jint) 0xFF), 16)) | (JreLShift32((IOSByteArray_Get(bytes_, pos_++) & (jint) 0xFF), 8)) | (IOSByteArray_Get(bytes_, pos_++) & (jint) 0xFF);
 }
 
 - (jlong)readLong {
-  jint unseq$1 = pos_++;
-  jint unseq$2 = pos_++;
-  jint unseq$3 = pos_++;
-  jint i1 = (JreLShift32((IOSByteArray_Get(nil_chk(bytes_), unseq$1) & (jint) 0xff), 24)) | (JreLShift32((IOSByteArray_Get(bytes_, unseq$2) & (jint) 0xff), 16)) | (JreLShift32((IOSByteArray_Get(bytes_, unseq$3) & (jint) 0xff), 8)) | (IOSByteArray_Get(bytes_, pos_++) & (jint) 0xff);
-  jint unseq$4 = pos_++;
-  jint unseq$5 = pos_++;
-  jint unseq$6 = pos_++;
-  jint i2 = (JreLShift32((IOSByteArray_Get(bytes_, unseq$4) & (jint) 0xff), 24)) | (JreLShift32((IOSByteArray_Get(bytes_, unseq$5) & (jint) 0xff), 16)) | (JreLShift32((IOSByteArray_Get(bytes_, unseq$6) & (jint) 0xff), 8)) | (IOSByteArray_Get(bytes_, pos_++) & (jint) 0xff);
+  jint i1 = (JreLShift32((IOSByteArray_Get(nil_chk(bytes_), pos_++) & (jint) 0xff), 24)) | (JreLShift32((IOSByteArray_Get(bytes_, pos_++) & (jint) 0xff), 16)) | (JreLShift32((IOSByteArray_Get(bytes_, pos_++) & (jint) 0xff), 8)) | (IOSByteArray_Get(bytes_, pos_++) & (jint) 0xff);
+  jint i2 = (JreLShift32((IOSByteArray_Get(bytes_, pos_++) & (jint) 0xff), 24)) | (JreLShift32((IOSByteArray_Get(bytes_, pos_++) & (jint) 0xff), 16)) | (JreLShift32((IOSByteArray_Get(bytes_, pos_++) & (jint) 0xff), 8)) | (IOSByteArray_Get(bytes_, pos_++) & (jint) 0xff);
   return (JreLShift64(((jlong) i1), 32)) | (i2 & (jlong) 0xFFFFFFFFLL);
 }
 
@@ -119,7 +109,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   b = IOSByteArray_Get(bytes_, pos_++);
   i |= JreLShift32((b & (jint) 0x0F), 28);
   if ((b & (jint) 0xF0) == 0) return i;
-  @throw [new_JavaLangRuntimeException_initWithNSString_(@"Invalid vInt detected (too many bits)") autorelease];
+  @throw create_JavaLangRuntimeException_initWithNSString_(@"Invalid vInt detected (too many bits)");
 }
 
 - (jlong)readVLong {
@@ -150,7 +140,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   b = IOSByteArray_Get(bytes_, pos_++);
   i |= JreLShift64((b & (jlong) 0x7FLL), 56);
   if (b >= 0) return i;
-  @throw [new_JavaLangRuntimeException_initWithNSString_(@"Invalid vLong detected (negative values disallowed)") autorelease];
+  @throw create_JavaLangRuntimeException_initWithNSString_(@"Invalid vLong detected (negative values disallowed)");
 }
 
 - (jbyte)readByte {
@@ -207,9 +197,11 @@ void OrgApacheLuceneStoreByteArrayDataInput_initWithByteArray_(OrgApacheLuceneSt
 }
 
 OrgApacheLuceneStoreByteArrayDataInput *new_OrgApacheLuceneStoreByteArrayDataInput_initWithByteArray_(IOSByteArray *bytes) {
-  OrgApacheLuceneStoreByteArrayDataInput *self = [OrgApacheLuceneStoreByteArrayDataInput alloc];
-  OrgApacheLuceneStoreByteArrayDataInput_initWithByteArray_(self, bytes);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreByteArrayDataInput, initWithByteArray_, bytes)
+}
+
+OrgApacheLuceneStoreByteArrayDataInput *create_OrgApacheLuceneStoreByteArrayDataInput_initWithByteArray_(IOSByteArray *bytes) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreByteArrayDataInput, initWithByteArray_, bytes)
 }
 
 void OrgApacheLuceneStoreByteArrayDataInput_initWithByteArray_withInt_withInt_(OrgApacheLuceneStoreByteArrayDataInput *self, IOSByteArray *bytes, jint offset, jint len) {
@@ -218,20 +210,24 @@ void OrgApacheLuceneStoreByteArrayDataInput_initWithByteArray_withInt_withInt_(O
 }
 
 OrgApacheLuceneStoreByteArrayDataInput *new_OrgApacheLuceneStoreByteArrayDataInput_initWithByteArray_withInt_withInt_(IOSByteArray *bytes, jint offset, jint len) {
-  OrgApacheLuceneStoreByteArrayDataInput *self = [OrgApacheLuceneStoreByteArrayDataInput alloc];
-  OrgApacheLuceneStoreByteArrayDataInput_initWithByteArray_withInt_withInt_(self, bytes, offset, len);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreByteArrayDataInput, initWithByteArray_withInt_withInt_, bytes, offset, len)
+}
+
+OrgApacheLuceneStoreByteArrayDataInput *create_OrgApacheLuceneStoreByteArrayDataInput_initWithByteArray_withInt_withInt_(IOSByteArray *bytes, jint offset, jint len) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreByteArrayDataInput, initWithByteArray_withInt_withInt_, bytes, offset, len)
 }
 
 void OrgApacheLuceneStoreByteArrayDataInput_init(OrgApacheLuceneStoreByteArrayDataInput *self) {
   OrgApacheLuceneStoreDataInput_init(self);
-  [self resetWithByteArray:JreLoadStatic(OrgApacheLuceneUtilBytesRef, EMPTY_BYTES_)];
+  [self resetWithByteArray:JreLoadStatic(OrgApacheLuceneUtilBytesRef, EMPTY_BYTES)];
 }
 
 OrgApacheLuceneStoreByteArrayDataInput *new_OrgApacheLuceneStoreByteArrayDataInput_init() {
-  OrgApacheLuceneStoreByteArrayDataInput *self = [OrgApacheLuceneStoreByteArrayDataInput alloc];
-  OrgApacheLuceneStoreByteArrayDataInput_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreByteArrayDataInput, init)
+}
+
+OrgApacheLuceneStoreByteArrayDataInput *create_OrgApacheLuceneStoreByteArrayDataInput_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreByteArrayDataInput, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreByteArrayDataInput)

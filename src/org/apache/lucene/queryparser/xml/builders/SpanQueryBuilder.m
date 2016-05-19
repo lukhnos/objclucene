@@ -3,12 +3,8 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/xml/builders/SpanQueryBuilder.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/queryparser/xml/ParserException.h"
 #include "org/apache/lucene/queryparser/xml/builders/SpanQueryBuilder.h"
-#include "org/apache/lucene/search/spans/SpanQuery.h"
-#include "org/w3c/dom/Element.h"
 
 @interface OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder : NSObject
 

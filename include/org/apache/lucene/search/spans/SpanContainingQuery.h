@@ -5,29 +5,38 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSpansSpanContainingQuery_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSpansSpanContainingQuery_RESTRICT
-#define OrgApacheLuceneSearchSpansSpanContainingQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanContainingQuery")
+#ifdef RESTRICT_OrgApacheLuceneSearchSpansSpanContainingQuery
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanContainingQuery 0
 #else
-#define OrgApacheLuceneSearchSpansSpanContainingQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanContainingQuery 1
 #endif
-#undef OrgApacheLuceneSearchSpansSpanContainingQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSpansSpanContainingQuery
 
-#if !defined (_OrgApacheLuceneSearchSpansSpanContainingQuery_) && (OrgApacheLuceneSearchSpansSpanContainingQuery_INCLUDE_ALL || OrgApacheLuceneSearchSpansSpanContainingQuery_INCLUDE)
-#define _OrgApacheLuceneSearchSpansSpanContainingQuery_
+#if !defined (OrgApacheLuceneSearchSpansSpanContainingQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanContainingQuery || defined(INCLUDE_OrgApacheLuceneSearchSpansSpanContainingQuery))
+#define OrgApacheLuceneSearchSpansSpanContainingQuery_
 
-#define OrgApacheLuceneSearchSpansSpanContainQuery_RESTRICT 1
-#define OrgApacheLuceneSearchSpansSpanContainQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSpansSpanContainQuery 1
+#define INCLUDE_OrgApacheLuceneSearchSpansSpanContainQuery 1
 #include "org/apache/lucene/search/spans/SpanContainQuery.h"
 
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchSpansSpanQuery;
 @class OrgApacheLuceneSearchSpansSpanWeight;
 
+/*!
+ @brief Keep matches that contain another Spans.
+ */
 @interface OrgApacheLuceneSearchSpansSpanContainingQuery : OrgApacheLuceneSearchSpansSpanContainQuery
 
 #pragma mark Public
 
+/*!
+ @brief Construct a SpanContainingQuery matching spans from <code>big</code>
+ that contain at least one spans from <code>little</code>.
+ This query has the boost of <code>big</code>.
+ <code>big</code> and <code>little</code> must be in the same field.
+ */
 - (instancetype)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)big
                     withOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)little;
 
@@ -46,22 +55,24 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanContainingQuery_initWithOrg
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanContainingQuery *new_OrgApacheLuceneSearchSpansSpanContainingQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withOrgApacheLuceneSearchSpansSpanQuery_(OrgApacheLuceneSearchSpansSpanQuery *big, OrgApacheLuceneSearchSpansSpanQuery *little) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanContainingQuery *create_OrgApacheLuceneSearchSpansSpanContainingQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withOrgApacheLuceneSearchSpansSpanQuery_(OrgApacheLuceneSearchSpansSpanQuery *big, OrgApacheLuceneSearchSpansSpanQuery *little);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanContainingQuery)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchSpansSpanContainingQuery_SpanContainingWeight_) && (OrgApacheLuceneSearchSpansSpanContainingQuery_INCLUDE_ALL || OrgApacheLuceneSearchSpansSpanContainingQuery_SpanContainingWeight_INCLUDE)
-#define _OrgApacheLuceneSearchSpansSpanContainingQuery_SpanContainingWeight_
+#if !defined (OrgApacheLuceneSearchSpansSpanContainingQuery_SpanContainingWeight_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanContainingQuery || defined(INCLUDE_OrgApacheLuceneSearchSpansSpanContainingQuery_SpanContainingWeight))
+#define OrgApacheLuceneSearchSpansSpanContainingQuery_SpanContainingWeight_
 
-#define OrgApacheLuceneSearchSpansSpanContainQuery_RESTRICT 1
-#define OrgApacheLuceneSearchSpansSpanContainQuery_SpanContainWeight_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSpansSpanContainQuery 1
+#define INCLUDE_OrgApacheLuceneSearchSpansSpanContainQuery_SpanContainWeight 1
 #include "org/apache/lucene/search/spans/SpanContainQuery.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchSpansSpanContainingQuery;
 @class OrgApacheLuceneSearchSpansSpanWeight;
-@class OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum;
+@class OrgApacheLuceneSearchSpansSpanWeight_Postings;
 @class OrgApacheLuceneSearchSpansSpans;
 @protocol JavaUtilMap;
 
@@ -75,8 +86,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanContainingQuery)
                              withOrgApacheLuceneSearchSpansSpanWeight:(OrgApacheLuceneSearchSpansSpanWeight *)bigWeight
                              withOrgApacheLuceneSearchSpansSpanWeight:(OrgApacheLuceneSearchSpansSpanWeight *)littleWeight;
 
+/*!
+ @brief Return spans from <code>big</code> that contain at least one spans from <code>little</code>.
+ The payload is from the spans of <code>big</code>.
+ */
 - (OrgApacheLuceneSearchSpansSpans *)getSpansWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                 withOrgApacheLuceneSearchSpansSpanWeight_PostingsEnum:(OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum *)requiredPostings;
+                                     withOrgApacheLuceneSearchSpansSpanWeight_Postings:(OrgApacheLuceneSearchSpansSpanWeight_Postings *)requiredPostings;
 
 @end
 
@@ -86,8 +101,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanContainingQuery_SpanContain
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanContainingQuery_SpanContainingWeight *new_OrgApacheLuceneSearchSpansSpanContainingQuery_SpanContainingWeight_initWithOrgApacheLuceneSearchSpansSpanContainingQuery_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_withOrgApacheLuceneSearchSpansSpanWeight_withOrgApacheLuceneSearchSpansSpanWeight_(OrgApacheLuceneSearchSpansSpanContainingQuery *outer$, OrgApacheLuceneSearchIndexSearcher *searcher, id<JavaUtilMap> terms, OrgApacheLuceneSearchSpansSpanWeight *bigWeight, OrgApacheLuceneSearchSpansSpanWeight *littleWeight) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanContainingQuery_SpanContainingWeight *create_OrgApacheLuceneSearchSpansSpanContainingQuery_SpanContainingWeight_initWithOrgApacheLuceneSearchSpansSpanContainingQuery_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_withOrgApacheLuceneSearchSpansSpanWeight_withOrgApacheLuceneSearchSpansSpanWeight_(OrgApacheLuceneSearchSpansSpanContainingQuery *outer$, OrgApacheLuceneSearchIndexSearcher *searcher, id<JavaUtilMap> terms, OrgApacheLuceneSearchSpansSpanWeight *bigWeight, OrgApacheLuceneSearchSpansSpanWeight *littleWeight);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanContainingQuery_SpanContainingWeight)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSpansSpanContainingQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanContainingQuery")

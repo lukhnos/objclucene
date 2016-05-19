@@ -3,14 +3,17 @@
 //  source: ./suggest/src/java/org/apache/lucene/search/suggest/analyzing/package-info.java
 //
 
+/*!
+ @brief Analyzer based autosuggest.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSuggestAnalyzingPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSuggestAnalyzingPackage_info_RESTRICT
-#define OrgApacheLuceneSearchSuggestAnalyzingPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestAnalyzingPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneSearchSuggestAnalyzingPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestAnalyzingPackage_info 0
 #else
-#define OrgApacheLuceneSearchSuggestAnalyzingPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestAnalyzingPackage_info 1
 #endif
-#undef OrgApacheLuceneSearchSuggestAnalyzingPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSuggestAnalyzingPackage_info
 
-#pragma pop_macro("OrgApacheLuceneSearchSuggestAnalyzingPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestAnalyzingPackage_info")

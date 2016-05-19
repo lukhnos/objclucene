@@ -47,6 +47,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchFilteredDocIdSet_$1_ini
 
 __attribute__((unused)) static OrgApacheLuceneSearchFilteredDocIdSet_$1 *new_OrgApacheLuceneSearchFilteredDocIdSet_$1_initWithOrgApacheLuceneSearchFilteredDocIdSet_withOrgApacheLuceneUtilBits_(OrgApacheLuceneSearchFilteredDocIdSet *outer$, id<OrgApacheLuceneUtilBits> capture$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchFilteredDocIdSet_$1 *create_OrgApacheLuceneSearchFilteredDocIdSet_$1_initWithOrgApacheLuceneSearchFilteredDocIdSet_withOrgApacheLuceneUtilBits_(OrgApacheLuceneSearchFilteredDocIdSet *outer$, id<OrgApacheLuceneUtilBits> capture$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFilteredDocIdSet_$1)
 
 @interface OrgApacheLuceneSearchFilteredDocIdSet_$2 : OrgApacheLuceneSearchFilteredDocIdSetIterator {
@@ -69,6 +71,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchFilteredDocIdSet_$2_ini
 
 __attribute__((unused)) static OrgApacheLuceneSearchFilteredDocIdSet_$2 *new_OrgApacheLuceneSearchFilteredDocIdSet_$2_initWithOrgApacheLuceneSearchFilteredDocIdSet_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchFilteredDocIdSet *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchFilteredDocIdSet_$2 *create_OrgApacheLuceneSearchFilteredDocIdSet_$2_initWithOrgApacheLuceneSearchFilteredDocIdSet_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchFilteredDocIdSet *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFilteredDocIdSet_$2)
 
 @implementation OrgApacheLuceneSearchFilteredDocIdSet
@@ -87,7 +91,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFilteredDocIdSet_$2)
 }
 
 - (jlong)ramBytesUsed {
-  return JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_) + [((OrgApacheLuceneSearchDocIdSet *) nil_chk(_innerSet_)) ramBytesUsed];
+  return JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF) + [((OrgApacheLuceneSearchDocIdSet *) nil_chk(_innerSet_)) ramBytesUsed];
 }
 
 - (id<JavaUtilCollection>)getChildResources {
@@ -96,7 +100,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFilteredDocIdSet_$2)
 
 - (id<OrgApacheLuceneUtilBits>)bits {
   id<OrgApacheLuceneUtilBits> bits = [((OrgApacheLuceneSearchDocIdSet *) nil_chk(_innerSet_)) bits];
-  return (bits == nil) ? nil : [new_OrgApacheLuceneSearchFilteredDocIdSet_$1_initWithOrgApacheLuceneSearchFilteredDocIdSet_withOrgApacheLuceneUtilBits_(self, bits) autorelease];
+  return (bits == nil) ? nil : create_OrgApacheLuceneSearchFilteredDocIdSet_$1_initWithOrgApacheLuceneSearchFilteredDocIdSet_withOrgApacheLuceneUtilBits_(self, bits);
 }
 
 - (jboolean)matchWithInt:(jint)docid {
@@ -110,7 +114,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFilteredDocIdSet_$2)
   if (iterator == nil) {
     return nil;
   }
-  return [new_OrgApacheLuceneSearchFilteredDocIdSet_$2_initWithOrgApacheLuceneSearchFilteredDocIdSet_withOrgApacheLuceneSearchDocIdSetIterator_(self, iterator) autorelease];
+  return create_OrgApacheLuceneSearchFilteredDocIdSet_$2_initWithOrgApacheLuceneSearchFilteredDocIdSet_withOrgApacheLuceneSearchDocIdSetIterator_(self, iterator);
 }
 
 - (void)dealloc {
@@ -124,7 +128,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFilteredDocIdSet_$2)
     { "getDelegate", NULL, "Lorg.apache.lucene.search.DocIdSet;", 0x1, NULL, NULL },
     { "isCacheable", NULL, "Z", 0x1, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
     { "bits", NULL, "Lorg.apache.lucene.util.Bits;", 0x1, "Ljava.io.IOException;", NULL },
     { "matchWithInt:", "match", "Z", 0x404, NULL, NULL },
     { "iterator", NULL, "Lorg.apache.lucene.search.DocIdSetIterator;", 0x1, "Ljava.io.IOException;", NULL },
@@ -191,9 +195,11 @@ void OrgApacheLuceneSearchFilteredDocIdSet_$1_initWithOrgApacheLuceneSearchFilte
 }
 
 OrgApacheLuceneSearchFilteredDocIdSet_$1 *new_OrgApacheLuceneSearchFilteredDocIdSet_$1_initWithOrgApacheLuceneSearchFilteredDocIdSet_withOrgApacheLuceneUtilBits_(OrgApacheLuceneSearchFilteredDocIdSet *outer$, id<OrgApacheLuceneUtilBits> capture$0) {
-  OrgApacheLuceneSearchFilteredDocIdSet_$1 *self = [OrgApacheLuceneSearchFilteredDocIdSet_$1 alloc];
-  OrgApacheLuceneSearchFilteredDocIdSet_$1_initWithOrgApacheLuceneSearchFilteredDocIdSet_withOrgApacheLuceneUtilBits_(self, outer$, capture$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFilteredDocIdSet_$1, initWithOrgApacheLuceneSearchFilteredDocIdSet_withOrgApacheLuceneUtilBits_, outer$, capture$0)
+}
+
+OrgApacheLuceneSearchFilteredDocIdSet_$1 *create_OrgApacheLuceneSearchFilteredDocIdSet_$1_initWithOrgApacheLuceneSearchFilteredDocIdSet_withOrgApacheLuceneUtilBits_(OrgApacheLuceneSearchFilteredDocIdSet *outer$, id<OrgApacheLuceneUtilBits> capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFilteredDocIdSet_$1, initWithOrgApacheLuceneSearchFilteredDocIdSet_withOrgApacheLuceneUtilBits_, outer$, capture$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFilteredDocIdSet_$1)
@@ -236,9 +242,11 @@ void OrgApacheLuceneSearchFilteredDocIdSet_$2_initWithOrgApacheLuceneSearchFilte
 }
 
 OrgApacheLuceneSearchFilteredDocIdSet_$2 *new_OrgApacheLuceneSearchFilteredDocIdSet_$2_initWithOrgApacheLuceneSearchFilteredDocIdSet_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchFilteredDocIdSet *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0) {
-  OrgApacheLuceneSearchFilteredDocIdSet_$2 *self = [OrgApacheLuceneSearchFilteredDocIdSet_$2 alloc];
-  OrgApacheLuceneSearchFilteredDocIdSet_$2_initWithOrgApacheLuceneSearchFilteredDocIdSet_withOrgApacheLuceneSearchDocIdSetIterator_(self, outer$, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFilteredDocIdSet_$2, initWithOrgApacheLuceneSearchFilteredDocIdSet_withOrgApacheLuceneSearchDocIdSetIterator_, outer$, arg$0)
+}
+
+OrgApacheLuceneSearchFilteredDocIdSet_$2 *create_OrgApacheLuceneSearchFilteredDocIdSet_$2_initWithOrgApacheLuceneSearchFilteredDocIdSet_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchFilteredDocIdSet *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFilteredDocIdSet_$2, initWithOrgApacheLuceneSearchFilteredDocIdSet_withOrgApacheLuceneSearchDocIdSetIterator_, outer$, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFilteredDocIdSet_$2)

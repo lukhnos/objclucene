@@ -36,7 +36,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)setOffsetWithInt:(jint)startOffset
                  withInt:(jint)endOffset {
   if (startOffset < 0 || endOffset < startOffset) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$I", @"startOffset must be non-negative, and endOffset must be >= startOffset, startOffset=", startOffset, @",endOffset=", endOffset)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$I", @"startOffset must be non-negative, and endOffset must be >= startOffset, startOffset=", startOffset, @",endOffset=", endOffset));
   }
   self->startOffset_ = startOffset;
   self->endOffset_ = endOffset;
@@ -56,7 +56,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     return true;
   }
   if ([other isKindOfClass:[OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl class]]) {
-    OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl *o = (OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl *) check_class_cast(other, [OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl class]);
+    OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl *o = (OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl *) cast_chk(other, [OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl class]);
     return ((OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl *) nil_chk(o))->startOffset_ == startOffset_ && o->endOffset_ == endOffset_;
   }
   return false;
@@ -69,7 +69,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)copyToWithOrgApacheLuceneUtilAttributeImpl:(OrgApacheLuceneUtilAttributeImpl *)target {
-  id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute> t = (id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) check_protocol_cast(target, OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_());
+  id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute> t = (id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) cast_check(target, OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_());
   [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(t)) setOffsetWithInt:startOffset_ withInt:endOffset_];
 }
 
@@ -105,9 +105,11 @@ void OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl_init(OrgApacheLuc
 }
 
 OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl_init() {
-  OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl *self = [OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl alloc];
-  OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl, init)
+}
+
+OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl)

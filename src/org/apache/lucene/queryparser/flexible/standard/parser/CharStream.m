@@ -3,11 +3,10 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/standard/parser/CharStream.java
 //
 
-#include "IOSClass.h"
-#include "IOSPrimitiveArray.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
+#include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/queryparser/flexible/standard/parser/CharStream.h"
 
 @interface OrgApacheLuceneQueryparserFlexibleStandardParserCharStream : NSObject
@@ -17,11 +16,11 @@
 @implementation OrgApacheLuceneQueryparserFlexibleStandardParserCharStream
 
 + (IOSObjectArray *)__annotations_getColumn {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_getLine {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {

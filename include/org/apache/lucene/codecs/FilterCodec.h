@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsFilterCodec_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsFilterCodec_RESTRICT
-#define OrgApacheLuceneCodecsFilterCodec_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsFilterCodec")
+#ifdef RESTRICT_OrgApacheLuceneCodecsFilterCodec
+#define INCLUDE_ALL_OrgApacheLuceneCodecsFilterCodec 0
 #else
-#define OrgApacheLuceneCodecsFilterCodec_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsFilterCodec 1
 #endif
-#undef OrgApacheLuceneCodecsFilterCodec_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsFilterCodec
 
-#if !defined (_OrgApacheLuceneCodecsFilterCodec_) && (OrgApacheLuceneCodecsFilterCodec_INCLUDE_ALL || OrgApacheLuceneCodecsFilterCodec_INCLUDE)
-#define _OrgApacheLuceneCodecsFilterCodec_
+#if !defined (OrgApacheLuceneCodecsFilterCodec_) && (INCLUDE_ALL_OrgApacheLuceneCodecsFilterCodec || defined(INCLUDE_OrgApacheLuceneCodecsFilterCodec))
+#define OrgApacheLuceneCodecsFilterCodec_
 
-#define OrgApacheLuceneCodecsCodec_RESTRICT 1
-#define OrgApacheLuceneCodecsCodec_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneCodecsCodec 1
+#define INCLUDE_OrgApacheLuceneCodecsCodec 1
 #include "org/apache/lucene/codecs/Codec.h"
 
 @class OrgApacheLuceneCodecsCompoundFormat;
@@ -30,8 +30,34 @@
 @class OrgApacheLuceneCodecsStoredFieldsFormat;
 @class OrgApacheLuceneCodecsTermVectorsFormat;
 
+/*!
+ @brief A codec that forwards all its method calls to another codec.
+ <p>
+ Extend this class when you need to reuse the functionality of an existing
+ codec. For example, if you want to build a codec that redefines LuceneMN's
+ <code>LiveDocsFormat</code>:
+ <pre class="prettyprint">
+ public final class CustomCodec extends FilterCodec {
+ public CustomCodec() {
+ super("CustomCodec", new LuceneMNCodec());
+ }
+ public LiveDocsFormat liveDocsFormat() {
+ return new CustomLiveDocsFormat();
+ }
+ }
+ 
+@endcode
+ <p><em>Please note:</em> Don't call <code>Codec.forName</code> from
+ the no-arg constructor of your own codec. When the SPI framework
+ loads your own Codec as SPI component, SPI has not yet fully initialized!
+ If you want to extend another Codec, instantiate it directly by calling
+ its constructor.
+ */
 @interface OrgApacheLuceneCodecsFilterCodec : OrgApacheLuceneCodecsCodec {
  @public
+  /*!
+   @brief The codec to filter.
+   */
   OrgApacheLuceneCodecsCodec *delegate_;
 }
 
@@ -57,6 +83,12 @@
 
 #pragma mark Protected
 
+/*!
+ @brief Sole constructor.
+ When subclassing this codec,
+ create a no-arg ctor and pass the delegate codec
+ and a unique name to this ctor.
+ */
 - (instancetype)initWithNSString:(NSString *)name
   withOrgApacheLuceneCodecsCodec:(OrgApacheLuceneCodecsCodec *)delegate;
 
@@ -72,4 +104,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsFilterCodec)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsFilterCodec_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsFilterCodec")

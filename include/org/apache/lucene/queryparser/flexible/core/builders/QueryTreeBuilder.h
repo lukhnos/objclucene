@@ -5,36 +5,79 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_) && (OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_
+#if !defined (OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder))
+#define OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_
 
-#define OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder_RESTRICT 1
-#define OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder 1
+#define INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder 1
 #include "org/apache/lucene/queryparser/flexible/core/builders/QueryBuilder.h"
 
 @class IOSClass;
 @protocol JavaLangCharSequence;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 
+/*!
+ @brief This class should be used when there is a builder for each type of node.
+ The type of node may be defined in 2 different ways: - by the field name,
+ when the node implements the <code>FieldableNode</code> interface - by its class,
+ it keeps checking the class and all the interfaces and classes this class
+ implements/extends until it finds a builder for that class/interface
+ This class always check if there is a builder for the field name before it
+ checks for the node class. So, field name builders have precedence over class
+ builders.
+ When a builder is found for a node, it's called and the node is passed to the
+ builder. If the returned built object is not <code>null</code>, it's tagged
+ on the node using the tag <code>QueryTreeBuilder.QUERY_TREE_BUILDER_TAGID</code>.
+ The children are usually built before the parent node. However, if a builder
+ associated to a node is an instance of <code>QueryTreeBuilder</code>, the node is
+ delegated to this builder and it's responsible to build the node and its
+ children.
+ - seealso: QueryBuilder
+ */
 @interface OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder : NSObject < OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder >
+
++ (NSString *)QUERY_TREE_BUILDER_TAGID;
 
 #pragma mark Public
 
+/*!
+ @brief <code>QueryTreeBuilder</code> constructor.
+ */
 - (instancetype)init;
 
+/*!
+ @brief Builds some kind of object from a query tree.
+ Each node in the query tree
+ is built using an specific builder associated to it.
+ @param queryNode the query tree root node
+ @return the built object
+ @throws QueryNodeException if some node builder throws a
+ <code>QueryNodeException</code> or if there is a node which had no
+ builder associated to it
+ */
 - (id)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode;
 
+/*!
+ @brief Associates a field name with a builder.
+ @param fieldName the field name
+ @param builder the builder to be associated
+ */
 - (void)setBuilderWithJavaLangCharSequence:(id<JavaLangCharSequence>)fieldName
 withOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder:(id<OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder>)builder;
 
+/*!
+ @brief Associates a class with a builder
+ @param queryNodeClass the class
+ @param builder the builder to be associated
+ */
 - (void)setBuilderWithIOSClass:(IOSClass *)queryNodeClass
 withOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder:(id<OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder>)builder;
 
@@ -42,15 +85,23 @@ withOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder:(id<OrgApacheLuce
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_QUERY_TREE_BUILDER_TAGID_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder, QUERY_TREE_BUILDER_TAGID_, NSString *)
+/*!
+ @brief This tag is used to tag the nodes in a query tree with the built objects
+ produced from their own associated builder.
+ */
+inline NSString *OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_get_QUERY_TREE_BUILDER_TAGID();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_QUERY_TREE_BUILDER_TAGID;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder, QUERY_TREE_BUILDER_TAGID, NSString *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_init(OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder *new_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder *create_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder")

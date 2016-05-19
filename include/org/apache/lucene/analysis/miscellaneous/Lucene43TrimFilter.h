@@ -5,23 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter_RESTRICT
-#define OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter 0
 #else
-#define OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter
 
-#if !defined (_OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter_) && (OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter_
+#if !defined (OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter))
+#define OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
+@class IOSObjectArray;
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief Backcompat TrimFilter for versions 4.3 and before.
+ */
 @interface OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter : OrgApacheLuceneAnalysisTokenFilter {
  @public
   jboolean updateOffsets_;
@@ -42,8 +46,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter_in
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter *new_OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_(OrgApacheLuceneAnalysisTokenStream *inArg, jboolean updateOffsets) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter *create_OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_(OrgApacheLuceneAnalysisTokenStream *inArg, jboolean updateOffsets);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter")

@@ -5,31 +5,37 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl_RESTRICT
-#define OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl 0
 #else
-#define OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl 1
 #endif
-#undef OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl
 
-#if !defined (_OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl_) && (OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl_INCLUDE_ALL || OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl_INCLUDE)
-#define _OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl_
+#if !defined (OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl || defined(INCLUDE_OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl))
+#define OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl_
 
-#define OrgApacheLuceneUtilAttributeImpl_RESTRICT 1
-#define OrgApacheLuceneUtilAttributeImpl_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAttributeImpl 1
+#define INCLUDE_OrgApacheLuceneUtilAttributeImpl 1
 #include "org/apache/lucene/util/AttributeImpl.h"
 
-#define OrgApacheLuceneAnalysisTokenattributesKeywordAttribute_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenattributesKeywordAttribute_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenattributesKeywordAttribute 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenattributesKeywordAttribute 1
 #include "org/apache/lucene/analysis/tokenattributes/KeywordAttribute.h"
 
 @protocol OrgApacheLuceneUtilAttributeReflector;
 
+/*!
+ @brief Default implementation of <code>KeywordAttribute</code>.
+ */
 @interface OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl : OrgApacheLuceneUtilAttributeImpl < OrgApacheLuceneAnalysisTokenattributesKeywordAttribute >
 
 #pragma mark Public
 
+/*!
+ @brief Initialize this attribute with the keyword value as false.
+ */
 - (instancetype)init;
 
 - (void)clear;
@@ -54,8 +60,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImp
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl")

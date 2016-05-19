@@ -27,8 +27,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCollationCollationKeyAnalyzer, factory_, OrgA
 }
 
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName {
-  OrgApacheLuceneAnalysisCoreKeywordTokenizer *tokenizer = [new_OrgApacheLuceneAnalysisCoreKeywordTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_(factory_, OrgApacheLuceneAnalysisCoreKeywordTokenizer_DEFAULT_BUFFER_SIZE) autorelease];
-  return [new_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(tokenizer, tokenizer) autorelease];
+  OrgApacheLuceneAnalysisCoreKeywordTokenizer *tokenizer = create_OrgApacheLuceneAnalysisCoreKeywordTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_(factory_, OrgApacheLuceneAnalysisCoreKeywordTokenizer_DEFAULT_BUFFER_SIZE);
+  return create_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(tokenizer, tokenizer);
 }
 
 - (void)dealloc {
@@ -56,9 +56,11 @@ void OrgApacheLuceneCollationCollationKeyAnalyzer_initWithJavaTextCollator_(OrgA
 }
 
 OrgApacheLuceneCollationCollationKeyAnalyzer *new_OrgApacheLuceneCollationCollationKeyAnalyzer_initWithJavaTextCollator_(JavaTextCollator *collator) {
-  OrgApacheLuceneCollationCollationKeyAnalyzer *self = [OrgApacheLuceneCollationCollationKeyAnalyzer alloc];
-  OrgApacheLuceneCollationCollationKeyAnalyzer_initWithJavaTextCollator_(self, collator);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCollationCollationKeyAnalyzer, initWithJavaTextCollator_, collator)
+}
+
+OrgApacheLuceneCollationCollationKeyAnalyzer *create_OrgApacheLuceneCollationCollationKeyAnalyzer_initWithJavaTextCollator_(JavaTextCollator *collator) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCollationCollationKeyAnalyzer, initWithJavaTextCollator_, collator)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCollationCollationKeyAnalyzer)

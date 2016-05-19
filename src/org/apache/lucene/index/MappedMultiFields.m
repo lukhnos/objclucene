@@ -51,6 +51,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexMappedMultiFields_Mapped
 
 __attribute__((unused)) static OrgApacheLuceneIndexMappedMultiFields_MappedMultiTerms *new_OrgApacheLuceneIndexMappedMultiFields_MappedMultiTerms_initWithNSString_withOrgApacheLuceneIndexMergeState_withOrgApacheLuceneIndexMultiTerms_(NSString *field, OrgApacheLuceneIndexMergeState *mergeState, OrgApacheLuceneIndexMultiTerms *multiTerms) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexMappedMultiFields_MappedMultiTerms *create_OrgApacheLuceneIndexMappedMultiFields_MappedMultiTerms_initWithNSString_withOrgApacheLuceneIndexMergeState_withOrgApacheLuceneIndexMultiTerms_(NSString *field, OrgApacheLuceneIndexMergeState *mergeState, OrgApacheLuceneIndexMultiTerms *multiTerms);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMappedMultiFields_MappedMultiTerms)
 
 @interface OrgApacheLuceneIndexMappedMultiFields_MappedMultiTermsEnum : OrgApacheLuceneIndexFilterLeafReader_FilterTermsEnum {
@@ -81,6 +83,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexMappedMultiFields_Mapped
 
 __attribute__((unused)) static OrgApacheLuceneIndexMappedMultiFields_MappedMultiTermsEnum *new_OrgApacheLuceneIndexMappedMultiFields_MappedMultiTermsEnum_initWithNSString_withOrgApacheLuceneIndexMergeState_withOrgApacheLuceneIndexMultiTermsEnum_(NSString *field, OrgApacheLuceneIndexMergeState *mergeState, OrgApacheLuceneIndexMultiTermsEnum *multiTermsEnum) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexMappedMultiFields_MappedMultiTermsEnum *create_OrgApacheLuceneIndexMappedMultiFields_MappedMultiTermsEnum_initWithNSString_withOrgApacheLuceneIndexMergeState_withOrgApacheLuceneIndexMultiTermsEnum_(NSString *field, OrgApacheLuceneIndexMergeState *mergeState, OrgApacheLuceneIndexMultiTermsEnum *multiTermsEnum);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMappedMultiFields_MappedMultiTermsEnum)
 
 @implementation OrgApacheLuceneIndexMappedMultiFields
@@ -92,22 +96,22 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMappedMultiFields_MappedMultiTerm
 }
 
 - (OrgApacheLuceneIndexTerms *)termsWithNSString:(NSString *)field {
-  OrgApacheLuceneIndexMultiTerms *terms = (OrgApacheLuceneIndexMultiTerms *) check_class_cast([((OrgApacheLuceneIndexFields *) nil_chk(in_)) termsWithNSString:field], [OrgApacheLuceneIndexMultiTerms class]);
+  OrgApacheLuceneIndexMultiTerms *terms = (OrgApacheLuceneIndexMultiTerms *) cast_chk([((OrgApacheLuceneIndexFields *) nil_chk(in_)) termsWithNSString:field], [OrgApacheLuceneIndexMultiTerms class]);
   if (terms == nil) {
     return nil;
   }
   else {
-    return [new_OrgApacheLuceneIndexMappedMultiFields_MappedMultiTerms_initWithNSString_withOrgApacheLuceneIndexMergeState_withOrgApacheLuceneIndexMultiTerms_(field, mergeState_, terms) autorelease];
+    return create_OrgApacheLuceneIndexMappedMultiFields_MappedMultiTerms_initWithNSString_withOrgApacheLuceneIndexMergeState_withOrgApacheLuceneIndexMultiTerms_(field, mergeState_, terms);
   }
+}
+
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
+  return JreDefaultFastEnumeration(self, state, stackbuf, len);
 }
 
 - (void)dealloc {
   RELEASE_(mergeState_);
   [super dealloc];
-}
-
-- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -131,9 +135,11 @@ void OrgApacheLuceneIndexMappedMultiFields_initWithOrgApacheLuceneIndexMergeStat
 }
 
 OrgApacheLuceneIndexMappedMultiFields *new_OrgApacheLuceneIndexMappedMultiFields_initWithOrgApacheLuceneIndexMergeState_withOrgApacheLuceneIndexMultiFields_(OrgApacheLuceneIndexMergeState *mergeState, OrgApacheLuceneIndexMultiFields *multiFields) {
-  OrgApacheLuceneIndexMappedMultiFields *self = [OrgApacheLuceneIndexMappedMultiFields alloc];
-  OrgApacheLuceneIndexMappedMultiFields_initWithOrgApacheLuceneIndexMergeState_withOrgApacheLuceneIndexMultiFields_(self, mergeState, multiFields);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMappedMultiFields, initWithOrgApacheLuceneIndexMergeState_withOrgApacheLuceneIndexMultiFields_, mergeState, multiFields)
+}
+
+OrgApacheLuceneIndexMappedMultiFields *create_OrgApacheLuceneIndexMappedMultiFields_initWithOrgApacheLuceneIndexMergeState_withOrgApacheLuceneIndexMultiFields_(OrgApacheLuceneIndexMergeState *mergeState, OrgApacheLuceneIndexMultiFields *multiFields) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMappedMultiFields, initWithOrgApacheLuceneIndexMergeState_withOrgApacheLuceneIndexMultiFields_, mergeState, multiFields)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMappedMultiFields)
@@ -148,23 +154,23 @@ withOrgApacheLuceneIndexMultiTerms:(OrgApacheLuceneIndexMultiTerms *)multiTerms 
 }
 
 - (OrgApacheLuceneIndexTermsEnum *)iterator {
-  return [new_OrgApacheLuceneIndexMappedMultiFields_MappedMultiTermsEnum_initWithNSString_withOrgApacheLuceneIndexMergeState_withOrgApacheLuceneIndexMultiTermsEnum_(field_, mergeState_, (OrgApacheLuceneIndexMultiTermsEnum *) check_class_cast([((OrgApacheLuceneIndexTerms *) nil_chk(in_)) iterator], [OrgApacheLuceneIndexMultiTermsEnum class])) autorelease];
+  return create_OrgApacheLuceneIndexMappedMultiFields_MappedMultiTermsEnum_initWithNSString_withOrgApacheLuceneIndexMergeState_withOrgApacheLuceneIndexMultiTermsEnum_(field_, mergeState_, (OrgApacheLuceneIndexMultiTermsEnum *) cast_chk([((OrgApacheLuceneIndexTerms *) nil_chk(in_)) iterator], [OrgApacheLuceneIndexMultiTermsEnum class]));
 }
 
 - (jlong)size {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (jlong)getSumTotalTermFreq {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (jlong)getSumDocFreq {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (jint)getDocCount {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (void)dealloc {
@@ -199,9 +205,11 @@ void OrgApacheLuceneIndexMappedMultiFields_MappedMultiTerms_initWithNSString_wit
 }
 
 OrgApacheLuceneIndexMappedMultiFields_MappedMultiTerms *new_OrgApacheLuceneIndexMappedMultiFields_MappedMultiTerms_initWithNSString_withOrgApacheLuceneIndexMergeState_withOrgApacheLuceneIndexMultiTerms_(NSString *field, OrgApacheLuceneIndexMergeState *mergeState, OrgApacheLuceneIndexMultiTerms *multiTerms) {
-  OrgApacheLuceneIndexMappedMultiFields_MappedMultiTerms *self = [OrgApacheLuceneIndexMappedMultiFields_MappedMultiTerms alloc];
-  OrgApacheLuceneIndexMappedMultiFields_MappedMultiTerms_initWithNSString_withOrgApacheLuceneIndexMergeState_withOrgApacheLuceneIndexMultiTerms_(self, field, mergeState, multiTerms);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMappedMultiFields_MappedMultiTerms, initWithNSString_withOrgApacheLuceneIndexMergeState_withOrgApacheLuceneIndexMultiTerms_, field, mergeState, multiTerms)
+}
+
+OrgApacheLuceneIndexMappedMultiFields_MappedMultiTerms *create_OrgApacheLuceneIndexMappedMultiFields_MappedMultiTerms_initWithNSString_withOrgApacheLuceneIndexMergeState_withOrgApacheLuceneIndexMultiTerms_(NSString *field, OrgApacheLuceneIndexMergeState *mergeState, OrgApacheLuceneIndexMultiTerms *multiTerms) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMappedMultiFields_MappedMultiTerms, initWithNSString_withOrgApacheLuceneIndexMergeState_withOrgApacheLuceneIndexMultiTerms_, field, mergeState, multiTerms)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMappedMultiFields_MappedMultiTerms)
@@ -216,29 +224,29 @@ withOrgApacheLuceneIndexMultiTermsEnum:(OrgApacheLuceneIndexMultiTermsEnum *)mul
 }
 
 - (jint)docFreq {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (jlong)totalTermFreq {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (OrgApacheLuceneIndexPostingsEnum *)postingsWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)reuse
                                                                            withInt:(jint)flags {
   OrgApacheLuceneIndexMappingMultiPostingsEnum *mappingDocsAndPositionsEnum;
   if ([reuse isKindOfClass:[OrgApacheLuceneIndexMappingMultiPostingsEnum class]]) {
-    OrgApacheLuceneIndexMappingMultiPostingsEnum *postings = (OrgApacheLuceneIndexMappingMultiPostingsEnum *) check_class_cast(reuse, [OrgApacheLuceneIndexMappingMultiPostingsEnum class]);
+    OrgApacheLuceneIndexMappingMultiPostingsEnum *postings = (OrgApacheLuceneIndexMappingMultiPostingsEnum *) cast_chk(reuse, [OrgApacheLuceneIndexMappingMultiPostingsEnum class]);
     if ([((NSString *) nil_chk(((OrgApacheLuceneIndexMappingMultiPostingsEnum *) nil_chk(postings))->field_)) isEqual:self->field_]) {
       mappingDocsAndPositionsEnum = postings;
     }
     else {
-      mappingDocsAndPositionsEnum = [new_OrgApacheLuceneIndexMappingMultiPostingsEnum_initWithNSString_withOrgApacheLuceneIndexMergeState_(field_, mergeState_) autorelease];
+      mappingDocsAndPositionsEnum = create_OrgApacheLuceneIndexMappingMultiPostingsEnum_initWithNSString_withOrgApacheLuceneIndexMergeState_(field_, mergeState_);
     }
   }
   else {
-    mappingDocsAndPositionsEnum = [new_OrgApacheLuceneIndexMappingMultiPostingsEnum_initWithNSString_withOrgApacheLuceneIndexMergeState_(field_, mergeState_) autorelease];
+    mappingDocsAndPositionsEnum = create_OrgApacheLuceneIndexMappingMultiPostingsEnum_initWithNSString_withOrgApacheLuceneIndexMergeState_(field_, mergeState_);
   }
-  OrgApacheLuceneIndexMultiPostingsEnum *docsAndPositionsEnum = (OrgApacheLuceneIndexMultiPostingsEnum *) check_class_cast([((OrgApacheLuceneIndexTermsEnum *) nil_chk(in_)) postingsWithOrgApacheLuceneIndexPostingsEnum:((OrgApacheLuceneIndexMappingMultiPostingsEnum *) nil_chk(mappingDocsAndPositionsEnum))->multiDocsAndPositionsEnum_ withInt:flags], [OrgApacheLuceneIndexMultiPostingsEnum class]);
+  OrgApacheLuceneIndexMultiPostingsEnum *docsAndPositionsEnum = (OrgApacheLuceneIndexMultiPostingsEnum *) cast_chk([((OrgApacheLuceneIndexTermsEnum *) nil_chk(in_)) postingsWithOrgApacheLuceneIndexPostingsEnum:mappingDocsAndPositionsEnum->multiDocsAndPositionsEnum_ withInt:flags], [OrgApacheLuceneIndexMultiPostingsEnum class]);
   [mappingDocsAndPositionsEnum resetWithOrgApacheLuceneIndexMultiPostingsEnum:docsAndPositionsEnum];
   return mappingDocsAndPositionsEnum;
 }
@@ -273,9 +281,11 @@ void OrgApacheLuceneIndexMappedMultiFields_MappedMultiTermsEnum_initWithNSString
 }
 
 OrgApacheLuceneIndexMappedMultiFields_MappedMultiTermsEnum *new_OrgApacheLuceneIndexMappedMultiFields_MappedMultiTermsEnum_initWithNSString_withOrgApacheLuceneIndexMergeState_withOrgApacheLuceneIndexMultiTermsEnum_(NSString *field, OrgApacheLuceneIndexMergeState *mergeState, OrgApacheLuceneIndexMultiTermsEnum *multiTermsEnum) {
-  OrgApacheLuceneIndexMappedMultiFields_MappedMultiTermsEnum *self = [OrgApacheLuceneIndexMappedMultiFields_MappedMultiTermsEnum alloc];
-  OrgApacheLuceneIndexMappedMultiFields_MappedMultiTermsEnum_initWithNSString_withOrgApacheLuceneIndexMergeState_withOrgApacheLuceneIndexMultiTermsEnum_(self, field, mergeState, multiTermsEnum);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMappedMultiFields_MappedMultiTermsEnum, initWithNSString_withOrgApacheLuceneIndexMergeState_withOrgApacheLuceneIndexMultiTermsEnum_, field, mergeState, multiTermsEnum)
+}
+
+OrgApacheLuceneIndexMappedMultiFields_MappedMultiTermsEnum *create_OrgApacheLuceneIndexMappedMultiFields_MappedMultiTermsEnum_initWithNSString_withOrgApacheLuceneIndexMergeState_withOrgApacheLuceneIndexMultiTermsEnum_(NSString *field, OrgApacheLuceneIndexMergeState *mergeState, OrgApacheLuceneIndexMultiTermsEnum *multiTermsEnum) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMappedMultiFields_MappedMultiTermsEnum, initWithNSString_withOrgApacheLuceneIndexMergeState_withOrgApacheLuceneIndexMultiTermsEnum_, field, mergeState, multiTermsEnum)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMappedMultiFields_MappedMultiTermsEnum)

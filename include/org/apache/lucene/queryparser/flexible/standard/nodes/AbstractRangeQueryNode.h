@@ -5,48 +5,87 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode_) && (OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode_
+#if !defined (OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode))
+#define OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode_
 
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_RESTRICT 1
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl 1
+#define INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNodeImpl.h"
 
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode_RESTRICT 1
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode 1
+#define INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/RangeQueryNode.h"
 
 @protocol JavaLangCharSequence;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;
 
+/*!
+ @brief This class should be extended by nodes intending to represent range queries.
+ */
 @interface OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl < OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode >
 
 #pragma mark Public
 
+/*!
+ @brief Returns the field associated with this node.
+ @return the field associated with this node
+ - seealso: FieldableNode
+ */
 - (id<JavaLangCharSequence>)getField;
 
+/*!
+ @brief Returns the lower bound node.
+ @return the lower bound node.
+ */
 - (id)getLowerBound;
 
+/*!
+ @brief Returns the upper bound node.
+ @return the upper bound node.
+ */
 - (id)getUpperBound;
 
+/*!
+ @brief Returns whether the lower bound is inclusive or exclusive.
+ @return <code>true</code> if the lower bound is inclusive, otherwise, <code>false</code>
+ */
 - (jboolean)isLowerInclusive;
 
+/*!
+ @brief Returns whether the upper bound is inclusive or exclusive.
+ @return <code>true</code> if the upper bound is inclusive, otherwise, <code>false</code>
+ */
 - (jboolean)isUpperInclusive;
 
+/*!
+ @brief Sets the lower and upper bounds.
+ @param lower the lower bound, <code>null</code> if lower bound is open
+ @param upper the upper bound, <code>null</code> if upper bound is open
+ @param lowerInclusive <code>true</code> if the lower bound is inclusive, otherwise, <code>false</code>
+ @param upperInclusive <code>true</code> if the upper bound is inclusive, otherwise, <code>false</code>
+ - seealso: #getLowerBound()
+ - seealso: #getUpperBound()
+ - seealso: #isLowerInclusive()
+ - seealso: #isUpperInclusive()
+ */
 - (void)setBoundsWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode>)lower
                  withOrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode>)upper
                                                                             withBoolean:(jboolean)lowerInclusive
                                                                             withBoolean:(jboolean)upperInclusive;
 
+/*!
+ @brief Sets the field associated with this node.
+ @param fieldName the field associated with this node
+ */
 - (void)setFieldWithJavaLangCharSequence:(id<JavaLangCharSequence>)fieldName;
 
 - (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escapeSyntaxParser;
@@ -55,6 +94,10 @@
 
 #pragma mark Protected
 
+/*!
+ @brief Constructs an <code>AbstractRangeQueryNode</code>, it should be invoked only by
+ its extenders.
+ */
 - (instancetype)init;
 
 @end
@@ -65,8 +108,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRa
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode *new_OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode *create_OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode")

@@ -27,9 +27,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneSearchMatchAllDocsQuery *)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode {
   if (!([queryNode isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode class]])) {
-    @throw [new_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_([new_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, LUCENE_QUERY_CONVERSION_ERROR_), [IOSObjectArray arrayWithObjects:(id[]){ [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(queryNode)) toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:[new_OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_init() autorelease]], [[queryNode getClass] getName] } count:2 type:NSObject_class_()]) autorelease]) autorelease];
+    @throw create_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_(create_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, LUCENE_QUERY_CONVERSION_ERROR), [IOSObjectArray arrayWithObjects:(id[]){ [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(queryNode)) toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:create_OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_init()], [[queryNode getClass] getName] } count:2 type:NSObject_class_()]));
   }
-  return [new_OrgApacheLuceneSearchMatchAllDocsQuery_init() autorelease];
+  return create_OrgApacheLuceneSearchMatchAllDocsQuery_init();
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -48,9 +48,11 @@ void OrgApacheLuceneQueryparserFlexibleStandardBuildersMatchAllDocsQueryNodeBuil
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardBuildersMatchAllDocsQueryNodeBuilder *new_OrgApacheLuceneQueryparserFlexibleStandardBuildersMatchAllDocsQueryNodeBuilder_init() {
-  OrgApacheLuceneQueryparserFlexibleStandardBuildersMatchAllDocsQueryNodeBuilder *self = [OrgApacheLuceneQueryparserFlexibleStandardBuildersMatchAllDocsQueryNodeBuilder alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardBuildersMatchAllDocsQueryNodeBuilder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardBuildersMatchAllDocsQueryNodeBuilder, init)
+}
+
+OrgApacheLuceneQueryparserFlexibleStandardBuildersMatchAllDocsQueryNodeBuilder *create_OrgApacheLuceneQueryparserFlexibleStandardBuildersMatchAllDocsQueryNodeBuilder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardBuildersMatchAllDocsQueryNodeBuilder, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleStandardBuildersMatchAllDocsQueryNodeBuilder)

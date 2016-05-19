@@ -22,7 +22,7 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)mergeWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
-        withOrgApacheLuceneIndexMergeTriggerEnum:(OrgApacheLuceneIndexMergeTriggerEnum *)trigger
+            withOrgApacheLuceneIndexMergeTrigger:(OrgApacheLuceneIndexMergeTrigger *)trigger
                                      withBoolean:(jboolean)newMergesFound {
   @synchronized(self) {
     while (true) {
@@ -39,7 +39,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "SerialMergeScheduler", NULL, 0x1, NULL, NULL },
-    { "mergeWithOrgApacheLuceneIndexIndexWriter:withOrgApacheLuceneIndexMergeTriggerEnum:withBoolean:", "merge", "V", 0x21, "Ljava.io.IOException;", NULL },
+    { "mergeWithOrgApacheLuceneIndexIndexWriter:withOrgApacheLuceneIndexMergeTrigger:withBoolean:", "merge", "V", 0x21, "Ljava.io.IOException;", NULL },
     { "close", NULL, "V", 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneIndexSerialMergeScheduler = { 2, "SerialMergeScheduler", "org.apache.lucene.index", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
@@ -53,9 +53,11 @@ void OrgApacheLuceneIndexSerialMergeScheduler_init(OrgApacheLuceneIndexSerialMer
 }
 
 OrgApacheLuceneIndexSerialMergeScheduler *new_OrgApacheLuceneIndexSerialMergeScheduler_init() {
-  OrgApacheLuceneIndexSerialMergeScheduler *self = [OrgApacheLuceneIndexSerialMergeScheduler alloc];
-  OrgApacheLuceneIndexSerialMergeScheduler_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSerialMergeScheduler, init)
+}
+
+OrgApacheLuceneIndexSerialMergeScheduler *create_OrgApacheLuceneIndexSerialMergeScheduler_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSerialMergeScheduler, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSerialMergeScheduler)

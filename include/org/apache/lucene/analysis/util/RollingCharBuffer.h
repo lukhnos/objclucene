@@ -5,26 +5,40 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisUtilRollingCharBuffer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisUtilRollingCharBuffer_RESTRICT
-#define OrgApacheLuceneAnalysisUtilRollingCharBuffer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilRollingCharBuffer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisUtilRollingCharBuffer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisUtilRollingCharBuffer 0
 #else
-#define OrgApacheLuceneAnalysisUtilRollingCharBuffer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisUtilRollingCharBuffer 1
 #endif
-#undef OrgApacheLuceneAnalysisUtilRollingCharBuffer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisUtilRollingCharBuffer
 
-#if !defined (_OrgApacheLuceneAnalysisUtilRollingCharBuffer_) && (OrgApacheLuceneAnalysisUtilRollingCharBuffer_INCLUDE_ALL || OrgApacheLuceneAnalysisUtilRollingCharBuffer_INCLUDE)
-#define _OrgApacheLuceneAnalysisUtilRollingCharBuffer_
+#if !defined (OrgApacheLuceneAnalysisUtilRollingCharBuffer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisUtilRollingCharBuffer || defined(INCLUDE_OrgApacheLuceneAnalysisUtilRollingCharBuffer))
+#define OrgApacheLuceneAnalysisUtilRollingCharBuffer_
 
 @class IOSCharArray;
 @class JavaIoReader;
 
+/*!
+ @brief Acts like a forever growing char[] as you read
+ characters into it from the provided reader, but
+ internally it uses a circular buffer to only hold the
+ characters that haven't been freed yet.
+ This is like a
+ PushbackReader, except you don't have to specify
+ up-front the max size of the buffer, but you do have to
+ periodically call <code>freeBefore</code>. 
+ */
 @interface OrgApacheLuceneAnalysisUtilRollingCharBuffer : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @brief Call this to notify us that no chars before this
+ absolute position are needed anymore.
+ */
 - (void)freeBeforeWithInt:(jint)pos;
 
 - (jint)getWithInt:(jint)pos;
@@ -32,6 +46,9 @@
 - (IOSCharArray *)getWithInt:(jint)posStart
                      withInt:(jint)length;
 
+/*!
+ @brief Clear array and switch to new reader.
+ */
 - (void)resetWithJavaIoReader:(JavaIoReader *)reader;
 
 @end
@@ -42,8 +59,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilRollingCharBuffer_init(OrgApac
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilRollingCharBuffer *new_OrgApacheLuceneAnalysisUtilRollingCharBuffer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilRollingCharBuffer *create_OrgApacheLuceneAnalysisUtilRollingCharBuffer_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilRollingCharBuffer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisUtilRollingCharBuffer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilRollingCharBuffer")

@@ -5,33 +5,47 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory_) && (OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory))
+#define OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-#define OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent 1
 #include "org/apache/lucene/analysis/util/MultiTermAwareComponent.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 @class OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>IndicNormalizationFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_innormal" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+ &lt;filter class="solr.IndicNormalizationFilterFactory"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilMultiTermAwareComponent >
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new IndicNormalizationFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -46,8 +60,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory_
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory *new_OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory *create_OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory")

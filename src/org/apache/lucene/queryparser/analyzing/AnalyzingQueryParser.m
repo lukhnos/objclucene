@@ -8,7 +8,6 @@
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/lang/StringBuilder.h"
-#include "java/lang/Throwable.h"
 #include "java/util/Locale.h"
 #include "java/util/regex/Matcher.h"
 #include "java/util/regex/Pattern.h"
@@ -42,27 +41,27 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer 
 - (OrgApacheLuceneSearchQuery *)getWildcardQueryWithNSString:(NSString *)field
                                                 withNSString:(NSString *)termStr {
   if (termStr == nil) {
-    @throw [new_OrgApacheLuceneQueryparserClassicParseException_initWithNSString_(@"Passed null value as term to getWildcardQuery") autorelease];
+    @throw create_OrgApacheLuceneQueryparserClassicParseException_initWithNSString_(@"Passed null value as term to getWildcardQuery");
   }
-  if (![self getAllowLeadingWildcard] && ([((NSString *) nil_chk(termStr)) hasPrefix:@"*"] || [termStr hasPrefix:@"?"])) {
-    @throw [new_OrgApacheLuceneQueryparserClassicParseException_initWithNSString_(@"'*' or '?' not allowed as first character in WildcardQuery unless getAllowLeadingWildcard() returns true") autorelease];
+  if (![self getAllowLeadingWildcard] && ([termStr hasPrefix:@"*"] || [termStr hasPrefix:@"?"])) {
+    @throw create_OrgApacheLuceneQueryparserClassicParseException_initWithNSString_(@"'*' or '?' not allowed as first character in WildcardQuery unless getAllowLeadingWildcard() returns true");
   }
   JavaUtilRegexMatcher *wildcardMatcher = [((JavaUtilRegexPattern *) nil_chk(wildcardPattern_)) matcherWithJavaLangCharSequence:termStr];
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   jint last = 0;
   while ([((JavaUtilRegexMatcher *) nil_chk(wildcardMatcher)) find]) {
     if ([wildcardMatcher groupWithInt:1] != nil) {
       continue;
     }
     if ([wildcardMatcher start] > 0) {
-      NSString *chunk = [((NSString *) nil_chk(termStr)) substring:last endIndex:[wildcardMatcher start]];
+      NSString *chunk = [termStr substring:last endIndex:[wildcardMatcher start]];
       NSString *analyzed = [self analyzeSingleChunkWithNSString:field withNSString:termStr withNSString:chunk];
       [sb appendWithNSString:analyzed];
     }
     [sb appendWithNSString:[wildcardMatcher groupWithInt:2]];
     last = [wildcardMatcher end];
   }
-  if (last < ((jint) [((NSString *) nil_chk(termStr)) length])) {
+  if (last < ((jint) [termStr length])) {
     [sb appendWithNSString:[self analyzeSingleChunkWithNSString:field withNSString:termStr withNSString:[termStr substring:last]]];
   }
   return [super getWildcardQueryWithNSString:field withNSString:[sb description]];
@@ -87,7 +86,7 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer 
   NSString *analyzed = nil;
   @try {
     OrgApacheLuceneAnalysisTokenStream *stream = [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk([self getAnalyzer])) tokenStreamWithNSString:field withNSString:chunk];
-    JavaLangThrowable *__primaryException1 = nil;
+    NSException *__primaryException1 = nil;
     @try {
       [((OrgApacheLuceneAnalysisTokenStream *) nil_chk(stream)) reset];
       id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt = [stream getAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()];
@@ -96,27 +95,27 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer 
         JavaLangStringBuilder *multipleOutputs = nil;
         while ([stream incrementToken]) {
           if (nil == multipleOutputs) {
-            multipleOutputs = [new_JavaLangStringBuilder_init() autorelease];
+            multipleOutputs = create_JavaLangStringBuilder_init();
             [multipleOutputs appendWithChar:'"'];
             [multipleOutputs appendWithNSString:analyzed];
             [multipleOutputs appendWithChar:'"'];
           }
-          [((JavaLangStringBuilder *) nil_chk(multipleOutputs)) appendWithChar:','];
+          [multipleOutputs appendWithChar:','];
           [multipleOutputs appendWithChar:'"'];
           [multipleOutputs appendWithNSString:[termAtt description]];
           [multipleOutputs appendWithChar:'"'];
         }
         [stream end];
         if (nil != multipleOutputs) {
-          @throw [new_OrgApacheLuceneQueryparserClassicParseException_initWithNSString_(NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_([self getLocale], @"Analyzer created multiple terms for \"%s\": %s", [IOSObjectArray arrayWithObjects:(id[]){ chunk, [multipleOutputs description] } count:2 type:NSObject_class_()])) autorelease];
+          @throw create_OrgApacheLuceneQueryparserClassicParseException_initWithNSString_(NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_([self getLocale], @"Analyzer created multiple terms for \"%s\": %s", [IOSObjectArray arrayWithObjects:(id[]){ chunk, [multipleOutputs description] } count:2 type:NSObject_class_()]));
         }
       }
       else {
         [stream end];
-        @throw [new_OrgApacheLuceneQueryparserClassicParseException_initWithNSString_(NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_([self getLocale], @"Analyzer returned nothing for \"%s\"", [IOSObjectArray arrayWithObjects:(id[]){ chunk } count:1 type:NSObject_class_()])) autorelease];
+        @throw create_OrgApacheLuceneQueryparserClassicParseException_initWithNSString_(NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_([self getLocale], @"Analyzer returned nothing for \"%s\"", [IOSObjectArray arrayWithObjects:(id[]){ chunk } count:1 type:NSObject_class_()]));
       }
     }
-    @catch (JavaLangThrowable *e) {
+    @catch (NSException *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -125,8 +124,8 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer 
         if (__primaryException1 != nil) {
           @try {
             [stream close];
-          } @catch (JavaLangThrowable *e) {
-            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          } @catch (NSException *e) {
+            [__primaryException1 addSuppressedWithNSException:e];
           }
         } else {
           [stream close];
@@ -135,7 +134,7 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer 
     }
   }
   @catch (JavaIoIOException *e) {
-    @throw [new_OrgApacheLuceneQueryparserClassicParseException_initWithNSString_(NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_([self getLocale], @"IO error while trying to analyze single term: \"%s\"", [IOSObjectArray arrayWithObjects:(id[]){ termStr } count:1 type:NSObject_class_()])) autorelease];
+    @throw create_OrgApacheLuceneQueryparserClassicParseException_initWithNSString_(NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_([self getLocale], @"IO error while trying to analyze single term: \"%s\"", [IOSObjectArray arrayWithObjects:(id[]){ termStr } count:1 type:NSObject_class_()]));
   }
   return analyzed;
 }
@@ -169,9 +168,11 @@ void OrgApacheLuceneQueryparserAnalyzingAnalyzingQueryParser_initWithNSString_wi
 }
 
 OrgApacheLuceneQueryparserAnalyzingAnalyzingQueryParser *new_OrgApacheLuceneQueryparserAnalyzingAnalyzingQueryParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(NSString *field, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
-  OrgApacheLuceneQueryparserAnalyzingAnalyzingQueryParser *self = [OrgApacheLuceneQueryparserAnalyzingAnalyzingQueryParser alloc];
-  OrgApacheLuceneQueryparserAnalyzingAnalyzingQueryParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(self, field, analyzer);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserAnalyzingAnalyzingQueryParser, initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_, field, analyzer)
+}
+
+OrgApacheLuceneQueryparserAnalyzingAnalyzingQueryParser *create_OrgApacheLuceneQueryparserAnalyzingAnalyzingQueryParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(NSString *field, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserAnalyzingAnalyzingQueryParser, initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_, field, analyzer)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserAnalyzingAnalyzingQueryParser)

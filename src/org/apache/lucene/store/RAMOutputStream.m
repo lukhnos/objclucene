@@ -49,6 +49,10 @@ __attribute__((unused)) static void OrgApacheLuceneStoreRAMOutputStream_setFileL
 
 @implementation OrgApacheLuceneStoreRAMOutputStream
 
++ (jint)BUFFER_SIZE {
+  return OrgApacheLuceneStoreRAMOutputStream_BUFFER_SIZE;
+}
+
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneStoreRAMOutputStream_init(self);
@@ -178,7 +182,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (jlong)getChecksum {
   if (crc_ == nil) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"internal RAMOutputStream created with checksum disabled") autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"internal RAMOutputStream created with checksum disabled");
   }
   else {
     return [crc_ getValue];
@@ -208,7 +212,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "flush", NULL, "V", 0x4, "Ljava.io.IOException;", NULL },
     { "getFilePointer", NULL, "J", 0x1, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
     { "getChecksum", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -228,13 +232,15 @@ J2OBJC_IGNORE_DESIGNATED_END
 @end
 
 void OrgApacheLuceneStoreRAMOutputStream_init(OrgApacheLuceneStoreRAMOutputStream *self) {
-  OrgApacheLuceneStoreRAMOutputStream_initWithNSString_withOrgApacheLuceneStoreRAMFile_withBoolean_(self, @"noname", [new_OrgApacheLuceneStoreRAMFile_init() autorelease], false);
+  OrgApacheLuceneStoreRAMOutputStream_initWithNSString_withOrgApacheLuceneStoreRAMFile_withBoolean_(self, @"noname", create_OrgApacheLuceneStoreRAMFile_init(), false);
 }
 
 OrgApacheLuceneStoreRAMOutputStream *new_OrgApacheLuceneStoreRAMOutputStream_init() {
-  OrgApacheLuceneStoreRAMOutputStream *self = [OrgApacheLuceneStoreRAMOutputStream alloc];
-  OrgApacheLuceneStoreRAMOutputStream_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreRAMOutputStream, init)
+}
+
+OrgApacheLuceneStoreRAMOutputStream *create_OrgApacheLuceneStoreRAMOutputStream_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreRAMOutputStream, init)
 }
 
 void OrgApacheLuceneStoreRAMOutputStream_initWithOrgApacheLuceneStoreRAMFile_withBoolean_(OrgApacheLuceneStoreRAMOutputStream *self, OrgApacheLuceneStoreRAMFile *f, jboolean checksum) {
@@ -242,9 +248,11 @@ void OrgApacheLuceneStoreRAMOutputStream_initWithOrgApacheLuceneStoreRAMFile_wit
 }
 
 OrgApacheLuceneStoreRAMOutputStream *new_OrgApacheLuceneStoreRAMOutputStream_initWithOrgApacheLuceneStoreRAMFile_withBoolean_(OrgApacheLuceneStoreRAMFile *f, jboolean checksum) {
-  OrgApacheLuceneStoreRAMOutputStream *self = [OrgApacheLuceneStoreRAMOutputStream alloc];
-  OrgApacheLuceneStoreRAMOutputStream_initWithOrgApacheLuceneStoreRAMFile_withBoolean_(self, f, checksum);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreRAMOutputStream, initWithOrgApacheLuceneStoreRAMFile_withBoolean_, f, checksum)
+}
+
+OrgApacheLuceneStoreRAMOutputStream *create_OrgApacheLuceneStoreRAMOutputStream_initWithOrgApacheLuceneStoreRAMFile_withBoolean_(OrgApacheLuceneStoreRAMFile *f, jboolean checksum) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreRAMOutputStream, initWithOrgApacheLuceneStoreRAMFile_withBoolean_, f, checksum)
 }
 
 void OrgApacheLuceneStoreRAMOutputStream_initWithNSString_withOrgApacheLuceneStoreRAMFile_withBoolean_(OrgApacheLuceneStoreRAMOutputStream *self, NSString *name, OrgApacheLuceneStoreRAMFile *f, jboolean checksum) {
@@ -253,7 +261,7 @@ void OrgApacheLuceneStoreRAMOutputStream_initWithNSString_withOrgApacheLuceneSto
   self->currentBufferIndex_ = -1;
   JreStrongAssign(&self->currentBuffer_, nil);
   if (checksum) {
-    JreStrongAssignAndConsume(&self->crc_, new_OrgApacheLuceneStoreBufferedChecksum_initWithJavaUtilZipChecksum_([new_JavaUtilZipCRC32_init() autorelease]));
+    JreStrongAssignAndConsume(&self->crc_, new_OrgApacheLuceneStoreBufferedChecksum_initWithJavaUtilZipChecksum_(create_JavaUtilZipCRC32_init()));
   }
   else {
     JreStrongAssign(&self->crc_, nil);
@@ -261,9 +269,11 @@ void OrgApacheLuceneStoreRAMOutputStream_initWithNSString_withOrgApacheLuceneSto
 }
 
 OrgApacheLuceneStoreRAMOutputStream *new_OrgApacheLuceneStoreRAMOutputStream_initWithNSString_withOrgApacheLuceneStoreRAMFile_withBoolean_(NSString *name, OrgApacheLuceneStoreRAMFile *f, jboolean checksum) {
-  OrgApacheLuceneStoreRAMOutputStream *self = [OrgApacheLuceneStoreRAMOutputStream alloc];
-  OrgApacheLuceneStoreRAMOutputStream_initWithNSString_withOrgApacheLuceneStoreRAMFile_withBoolean_(self, name, f, checksum);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreRAMOutputStream, initWithNSString_withOrgApacheLuceneStoreRAMFile_withBoolean_, name, f, checksum)
+}
+
+OrgApacheLuceneStoreRAMOutputStream *create_OrgApacheLuceneStoreRAMOutputStream_initWithNSString_withOrgApacheLuceneStoreRAMFile_withBoolean_(NSString *name, OrgApacheLuceneStoreRAMFile *f, jboolean checksum) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreRAMOutputStream, initWithNSString_withOrgApacheLuceneStoreRAMFile_withBoolean_, name, f, checksum)
 }
 
 void OrgApacheLuceneStoreRAMOutputStream_switchCurrentBuffer(OrgApacheLuceneStoreRAMOutputStream *self) {

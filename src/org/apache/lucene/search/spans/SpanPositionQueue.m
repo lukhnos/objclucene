@@ -25,7 +25,7 @@
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithInt:", "SpanPositionQueue", NULL, 0x0, NULL, NULL },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x4, NULL, NULL },
+    { "lessThanWithId:withId:", "lessThan", "Z", 0x4, NULL, "(Lorg/apache/lucene/search/spans/Spans;Lorg/apache/lucene/search/spans/Spans;)Z" },
   };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.spans.Spans;"};
   static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanPositionQueue = { 2, "SpanPositionQueue", "org.apache.lucene.search.spans", NULL, 0x0, 2, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/search/spans/Spans;>;" };
@@ -39,9 +39,11 @@ void OrgApacheLuceneSearchSpansSpanPositionQueue_initWithInt_(OrgApacheLuceneSea
 }
 
 OrgApacheLuceneSearchSpansSpanPositionQueue *new_OrgApacheLuceneSearchSpansSpanPositionQueue_initWithInt_(jint maxSize) {
-  OrgApacheLuceneSearchSpansSpanPositionQueue *self = [OrgApacheLuceneSearchSpansSpanPositionQueue alloc];
-  OrgApacheLuceneSearchSpansSpanPositionQueue_initWithInt_(self, maxSize);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSpansSpanPositionQueue, initWithInt_, maxSize)
+}
+
+OrgApacheLuceneSearchSpansSpanPositionQueue *create_OrgApacheLuceneSearchSpansSpanPositionQueue_initWithInt_(jint maxSize) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSpansSpanPositionQueue, initWithInt_, maxSize)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanPositionQueue)

@@ -102,9 +102,11 @@ void OrgApacheLuceneIndexFilterCodecReader_initWithOrgApacheLuceneIndexCodecRead
 }
 
 OrgApacheLuceneIndexFilterCodecReader *new_OrgApacheLuceneIndexFilterCodecReader_initWithOrgApacheLuceneIndexCodecReader_(OrgApacheLuceneIndexCodecReader *inArg) {
-  OrgApacheLuceneIndexFilterCodecReader *self = [OrgApacheLuceneIndexFilterCodecReader alloc];
-  OrgApacheLuceneIndexFilterCodecReader_initWithOrgApacheLuceneIndexCodecReader_(self, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexFilterCodecReader, initWithOrgApacheLuceneIndexCodecReader_, inArg)
+}
+
+OrgApacheLuceneIndexFilterCodecReader *create_OrgApacheLuceneIndexFilterCodecReader_initWithOrgApacheLuceneIndexCodecReader_(OrgApacheLuceneIndexCodecReader *inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexFilterCodecReader, initWithOrgApacheLuceneIndexCodecReader_, inArg)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexFilterCodecReader)

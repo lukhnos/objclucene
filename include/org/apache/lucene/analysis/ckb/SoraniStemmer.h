@@ -5,25 +5,34 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCkbSoraniStemmer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCkbSoraniStemmer_RESTRICT
-#define OrgApacheLuceneAnalysisCkbSoraniStemmer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCkbSoraniStemmer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCkbSoraniStemmer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCkbSoraniStemmer 0
 #else
-#define OrgApacheLuceneAnalysisCkbSoraniStemmer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCkbSoraniStemmer 1
 #endif
-#undef OrgApacheLuceneAnalysisCkbSoraniStemmer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCkbSoraniStemmer
 
-#if !defined (_OrgApacheLuceneAnalysisCkbSoraniStemmer_) && (OrgApacheLuceneAnalysisCkbSoraniStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisCkbSoraniStemmer_INCLUDE)
-#define _OrgApacheLuceneAnalysisCkbSoraniStemmer_
+#if !defined (OrgApacheLuceneAnalysisCkbSoraniStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCkbSoraniStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisCkbSoraniStemmer))
+#define OrgApacheLuceneAnalysisCkbSoraniStemmer_
 
 @class IOSCharArray;
 
+/*!
+ @brief Light stemmer for Sorani
+ */
 @interface OrgApacheLuceneAnalysisCkbSoraniStemmer : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @brief Stem an input buffer of Sorani text.
+ @param s input buffer
+ @param len length of input buffer
+ @return length of input buffer after normalization
+ */
 - (jint)stemWithCharArray:(IOSCharArray *)s
                   withInt:(jint)len;
 
@@ -35,8 +44,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCkbSoraniStemmer_init(OrgApacheLuc
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCkbSoraniStemmer *new_OrgApacheLuceneAnalysisCkbSoraniStemmer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCkbSoraniStemmer *create_OrgApacheLuceneAnalysisCkbSoraniStemmer_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCkbSoraniStemmer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCkbSoraniStemmer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCkbSoraniStemmer")

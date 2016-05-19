@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery_RESTRICT
-#define OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery")
+#ifdef RESTRICT_OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery 0
 #else
-#define OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery 1
 #endif
-#undef OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery
 
-#if !defined (_OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery_) && (OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery_INCLUDE_ALL || OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery_INCLUDE)
-#define _OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery_
+#if !defined (OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery || defined(INCLUDE_OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery))
+#define OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery_
 
-#define OrgApacheLuceneSearchSuggestDocumentCompletionQuery_RESTRICT 1
-#define OrgApacheLuceneSearchSuggestDocumentCompletionQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSuggestDocumentCompletionQuery 1
+#define INCLUDE_OrgApacheLuceneSearchSuggestDocumentCompletionQuery 1
 #include "org/apache/lucene/search/suggest/document/CompletionQuery.h"
 
 @class OrgApacheLuceneAnalysisAnalyzer;
@@ -27,16 +27,41 @@
 @class OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer;
 @class OrgApacheLuceneSearchWeight;
 
+/*!
+ @brief A <code>CompletionQuery</code> which takes an <code>Analyzer</code>
+ to analyze the prefix of the query term.
+ <p>
+ Example usage of querying an analyzed prefix 'sugg'
+ against a field 'suggest_field' is as follows:
+ <pre class="prettyprint">
+ CompletionQuery query = new PrefixCompletionQuery(analyzer, new Term("suggest_field", "sugg"));
+ 
+@endcode
+ */
 @interface OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery : OrgApacheLuceneSearchSuggestDocumentCompletionQuery {
  @public
+  /*!
+   @brief Used to analyze the term text
+   */
   OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer *analyzer_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief Calls <code>PrefixCompletionQuery.PrefixCompletionQuery(Analyzer,Term,BitsProducer)</code>
+ with no filter
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
                            withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
 
+/*!
+ @brief Constructs an analyzed prefix completion query
+ @param analyzer used to analyze the provided <code>Term.text()</code>
+ @param term query is run against <code>Term.field()</code> and <code>Term.text()</code>
+ is analyzed with <code>analyzer</code>
+ @param filter used to query on a sub set of documents
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
                            withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
            withOrgApacheLuceneSearchSuggestBitsProducer:(OrgApacheLuceneSearchSuggestBitsProducer *)filter;
@@ -54,12 +79,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery *new_OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_(OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneIndexTerm *term) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery *create_OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_(OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneIndexTerm *term);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchSuggestBitsProducer_(OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery *self, OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneIndexTerm *term, OrgApacheLuceneSearchSuggestBitsProducer *filter);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery *new_OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchSuggestBitsProducer_(OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneIndexTerm *term, OrgApacheLuceneSearchSuggestBitsProducer *filter) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery *create_OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchSuggestBitsProducer_(OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneIndexTerm *term, OrgApacheLuceneSearchSuggestBitsProducer *filter);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery")

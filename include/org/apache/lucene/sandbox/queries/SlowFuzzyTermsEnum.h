@@ -5,26 +5,38 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_INCLUDE_ALL")
-#if OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_RESTRICT
-#define OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum")
+#ifdef RESTRICT_OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum
+#define INCLUDE_ALL_OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum 0
 #else
-#define OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum 1
 #endif
-#undef OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum
 
-#if !defined (_OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_) && (OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_INCLUDE_ALL || OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_INCLUDE)
-#define _OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_
+#if !defined (OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_) && (INCLUDE_ALL_OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum || defined(INCLUDE_OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum))
+#define OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_
 
-#define OrgApacheLuceneSearchFuzzyTermsEnum_RESTRICT 1
-#define OrgApacheLuceneSearchFuzzyTermsEnum_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchFuzzyTermsEnum 1
+#define INCLUDE_OrgApacheLuceneSearchFuzzyTermsEnum 1
 #include "org/apache/lucene/search/FuzzyTermsEnum.h"
 
+@class IOSObjectArray;
 @class OrgApacheLuceneIndexTerm;
 @class OrgApacheLuceneIndexTerms;
 @class OrgApacheLuceneUtilAttributeSource;
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief Potentially slow fuzzy TermsEnum for enumerating all terms that are similar
+ to the specified filter term.
+ <p> If the minSimilarity or maxEdits is greater than the Automaton's
+ allowable range, this backs off to the classic (brute force)
+ fuzzy terms enum method by calling FuzzyTermsEnum's getAutomatonEnum.
+ </p>
+ <p>Term enumerations are always ordered by
+ <code>BytesRef.compareTo</code>.  Each term in the enumeration is
+ greater than all that precede it.</p>
+ */
 @interface OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum : OrgApacheLuceneSearchFuzzyTermsEnum
 
 #pragma mark Public
@@ -49,8 +61,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_initWithO
 
 FOUNDATION_EXPORT OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum *new_OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneUtilAttributeSource_withOrgApacheLuceneIndexTerm_withFloat_withInt_(OrgApacheLuceneIndexTerms *terms, OrgApacheLuceneUtilAttributeSource *atts, OrgApacheLuceneIndexTerm *term, jfloat minSimilarity, jint prefixLength) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum *create_OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneUtilAttributeSource_withOrgApacheLuceneIndexTerm_withFloat_withInt_(OrgApacheLuceneIndexTerms *terms, OrgApacheLuceneUtilAttributeSource *atts, OrgApacheLuceneIndexTerm *term, jfloat minSimilarity, jint prefixLength);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum")

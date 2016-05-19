@@ -5,24 +5,28 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_) && (OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_
+#if !defined (OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl))
+#define OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_
 
-#define OrgApacheLuceneQueryparserFlexibleMessagesMessage_RESTRICT 1
-#define OrgApacheLuceneQueryparserFlexibleMessagesMessage_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserFlexibleMessagesMessage 1
+#define INCLUDE_OrgApacheLuceneQueryparserFlexibleMessagesMessage 1
 #include "org/apache/lucene/queryparser/flexible/messages/Message.h"
 
 @class IOSObjectArray;
 @class JavaUtilLocale;
 
+/*!
+ @brief Default implementation of Message interface.
+ For Native Language Support (NLS), system of software internationalization.
+ */
 @interface OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl : NSObject < OrgApacheLuceneQueryparserFlexibleMessagesMessage >
 
 #pragma mark Public
@@ -50,12 +54,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_ini
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl *new_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_(NSString *key) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl *create_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_(NSString *key);
+
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl *self, NSString *key, IOSObjectArray *args);
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl *new_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(NSString *key, IOSObjectArray *args) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl *create_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(NSString *key, IOSObjectArray *args);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl")

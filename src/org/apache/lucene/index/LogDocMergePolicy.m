@@ -14,6 +14,10 @@
 
 @implementation OrgApacheLuceneIndexLogDocMergePolicy
 
++ (jint)DEFAULT_MIN_MERGE_DOCS {
+  return OrgApacheLuceneIndexLogDocMergePolicy_DEFAULT_MIN_MERGE_DOCS;
+}
+
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexLogDocMergePolicy_init(self);
@@ -58,9 +62,11 @@ void OrgApacheLuceneIndexLogDocMergePolicy_init(OrgApacheLuceneIndexLogDocMergeP
 }
 
 OrgApacheLuceneIndexLogDocMergePolicy *new_OrgApacheLuceneIndexLogDocMergePolicy_init() {
-  OrgApacheLuceneIndexLogDocMergePolicy *self = [OrgApacheLuceneIndexLogDocMergePolicy alloc];
-  OrgApacheLuceneIndexLogDocMergePolicy_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexLogDocMergePolicy, init)
+}
+
+OrgApacheLuceneIndexLogDocMergePolicy *create_OrgApacheLuceneIndexLogDocMergePolicy_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexLogDocMergePolicy, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexLogDocMergePolicy)

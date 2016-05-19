@@ -5,29 +5,39 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisGlGalicianStemmer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisGlGalicianStemmer_RESTRICT
-#define OrgApacheLuceneAnalysisGlGalicianStemmer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisGlGalicianStemmer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisGlGalicianStemmer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisGlGalicianStemmer 0
 #else
-#define OrgApacheLuceneAnalysisGlGalicianStemmer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisGlGalicianStemmer 1
 #endif
-#undef OrgApacheLuceneAnalysisGlGalicianStemmer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisGlGalicianStemmer
 
-#if !defined (_OrgApacheLuceneAnalysisGlGalicianStemmer_) && (OrgApacheLuceneAnalysisGlGalicianStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisGlGalicianStemmer_INCLUDE)
-#define _OrgApacheLuceneAnalysisGlGalicianStemmer_
+#if !defined (OrgApacheLuceneAnalysisGlGalicianStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisGlGalicianStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisGlGalicianStemmer))
+#define OrgApacheLuceneAnalysisGlGalicianStemmer_
 
-#define OrgApacheLuceneAnalysisPtRSLPStemmerBase_RESTRICT 1
-#define OrgApacheLuceneAnalysisPtRSLPStemmerBase_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisPtRSLPStemmerBase 1
+#define INCLUDE_OrgApacheLuceneAnalysisPtRSLPStemmerBase 1
 #include "org/apache/lucene/analysis/pt/RSLPStemmerBase.h"
 
 @class IOSCharArray;
 
+/*!
+ @brief Galician stemmer implementing "Regras do lematizador para o galego".
+ - seealso: RSLPStemmerBase
+ - seealso: <a href="http://bvg.udc.es/recursos_lingua/stemming.jsp">Description of rules</a>
+ */
 @interface OrgApacheLuceneAnalysisGlGalicianStemmer : OrgApacheLuceneAnalysisPtRSLPStemmerBase
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @param s buffer, oversized to at least <code>len+1</code>
+ @param len initial valid length of buffer
+ @return new valid length, stemmed
+ */
 - (jint)stemWithCharArray:(IOSCharArray *)s
                   withInt:(jint)len;
 
@@ -39,8 +49,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisGlGalicianStemmer_init(OrgApacheLu
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisGlGalicianStemmer *new_OrgApacheLuceneAnalysisGlGalicianStemmer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisGlGalicianStemmer *create_OrgApacheLuceneAnalysisGlGalicianStemmer_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisGlGalicianStemmer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisGlGalicianStemmer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisGlGalicianStemmer")

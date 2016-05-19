@@ -5,54 +5,121 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexSnapshotDeletionPolicy_INCLUDE_ALL")
-#if OrgApacheLuceneIndexSnapshotDeletionPolicy_RESTRICT
-#define OrgApacheLuceneIndexSnapshotDeletionPolicy_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexSnapshotDeletionPolicy")
+#ifdef RESTRICT_OrgApacheLuceneIndexSnapshotDeletionPolicy
+#define INCLUDE_ALL_OrgApacheLuceneIndexSnapshotDeletionPolicy 0
 #else
-#define OrgApacheLuceneIndexSnapshotDeletionPolicy_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexSnapshotDeletionPolicy 1
 #endif
-#undef OrgApacheLuceneIndexSnapshotDeletionPolicy_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexSnapshotDeletionPolicy
 
-#if !defined (_OrgApacheLuceneIndexSnapshotDeletionPolicy_) && (OrgApacheLuceneIndexSnapshotDeletionPolicy_INCLUDE_ALL || OrgApacheLuceneIndexSnapshotDeletionPolicy_INCLUDE)
-#define _OrgApacheLuceneIndexSnapshotDeletionPolicy_
+#if !defined (OrgApacheLuceneIndexSnapshotDeletionPolicy_) && (INCLUDE_ALL_OrgApacheLuceneIndexSnapshotDeletionPolicy || defined(INCLUDE_OrgApacheLuceneIndexSnapshotDeletionPolicy))
+#define OrgApacheLuceneIndexSnapshotDeletionPolicy_
 
-#define OrgApacheLuceneIndexIndexDeletionPolicy_RESTRICT 1
-#define OrgApacheLuceneIndexIndexDeletionPolicy_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexIndexDeletionPolicy 1
+#define INCLUDE_OrgApacheLuceneIndexIndexDeletionPolicy 1
 #include "org/apache/lucene/index/IndexDeletionPolicy.h"
 
 @class OrgApacheLuceneIndexIndexCommit;
 @protocol JavaUtilList;
 @protocol JavaUtilMap;
 
+/*!
+ @brief An <code>IndexDeletionPolicy</code> that wraps any other
+ <code>IndexDeletionPolicy</code> and adds the ability to hold and later release
+ snapshots of an index.
+ While a snapshot is held, the <code>IndexWriter</code> will
+ not remove any files associated with it even if the index is otherwise being
+ actively, arbitrarily changed. Because we wrap another arbitrary
+ <code>IndexDeletionPolicy</code>, this gives you the freedom to continue using
+ whatever <code>IndexDeletionPolicy</code> you would normally want to use with your
+ index.
+ <p>
+ This class maintains all snapshots in-memory, and so the information is not
+ persisted and not protected against system failures. If persistence is
+ important, you can use <code>PersistentSnapshotDeletionPolicy</code>.
+ */
 @interface OrgApacheLuceneIndexSnapshotDeletionPolicy : OrgApacheLuceneIndexIndexDeletionPolicy {
  @public
+  /*!
+   @brief Records how many snapshots are held against each
+ commit generation
+   */
   id<JavaUtilMap> refCounts_;
+  /*!
+   @brief Used to map gen to IndexCommit.
+   */
   id<JavaUtilMap> indexCommits_;
+  /*!
+   @brief Most recently committed <code>IndexCommit</code>.
+   */
   OrgApacheLuceneIndexIndexCommit *lastCommit_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor, taking the incoming <code>IndexDeletionPolicy</code>
+  to wrap.
+ */
 - (instancetype)initWithOrgApacheLuceneIndexIndexDeletionPolicy:(OrgApacheLuceneIndexIndexDeletionPolicy *)primary;
 
+/*!
+ @brief Retrieve an <code>IndexCommit</code> from its generation;
+ returns null if this IndexCommit is not currently
+ snapshotted
+ */
 - (OrgApacheLuceneIndexIndexCommit *)getIndexCommitWithLong:(jlong)gen;
 
+/*!
+ @brief Returns the total number of snapshots currently held.
+ */
 - (jint)getSnapshotCount;
 
+/*!
+ @brief Returns all IndexCommits held by at least one snapshot.
+ */
 - (id<JavaUtilList>)getSnapshots;
 
 - (void)onCommitWithJavaUtilList:(id<JavaUtilList>)commits;
 
 - (void)onInitWithJavaUtilList:(id<JavaUtilList>)commits;
 
+/*!
+ @brief Release a snapshotted commit.
+ @param commit
+ the commit previously returned by <code>snapshot</code>
+ */
 - (void)release__WithOrgApacheLuceneIndexIndexCommit:(OrgApacheLuceneIndexIndexCommit *)commit;
 
+/*!
+ @brief Snapshots the last commit and returns it.
+ Once a commit is 'snapshotted,' it is protected
+ from deletion (as long as this <code>IndexDeletionPolicy</code> is used). The
+ snapshot can be removed by calling <code>release(IndexCommit)</code> followed
+ by a call to <code>IndexWriter.deleteUnusedFiles()</code>.
+ <p>
+ <b>NOTE:</b> while the snapshot is held, the files it references will not
+ be deleted, which will consume additional disk space in your index. If you
+ take a snapshot at a particularly bad time (say just before you call
+ forceMerge) then in the worst case this could consume an extra 1X of your
+ total index size, until you release the snapshot.
+ @throws IllegalStateException
+ if this index does not have any commits yet
+ @return the <code>IndexCommit</code> that was snapshotted.
+ */
 - (OrgApacheLuceneIndexIndexCommit *)snapshot;
 
 #pragma mark Protected
 
+/*!
+ @brief Increments the refCount for this <code>IndexCommit</code>.
+ */
 - (void)incRefWithOrgApacheLuceneIndexIndexCommit:(OrgApacheLuceneIndexIndexCommit *)ic;
 
+/*!
+ @brief Release a snapshot by generation.
+ */
 - (void)releaseGenWithLong:(jlong)gen;
 
 @end
@@ -67,8 +134,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexSnapshotDeletionPolicy_initWithOrgApa
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexSnapshotDeletionPolicy *new_OrgApacheLuceneIndexSnapshotDeletionPolicy_initWithOrgApacheLuceneIndexIndexDeletionPolicy_(OrgApacheLuceneIndexIndexDeletionPolicy *primary) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexSnapshotDeletionPolicy *create_OrgApacheLuceneIndexSnapshotDeletionPolicy_initWithOrgApacheLuceneIndexIndexDeletionPolicy_(OrgApacheLuceneIndexIndexDeletionPolicy *primary);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSnapshotDeletionPolicy)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexSnapshotDeletionPolicy_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSnapshotDeletionPolicy")

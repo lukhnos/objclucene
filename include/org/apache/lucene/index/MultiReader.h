@@ -5,29 +5,58 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexMultiReader_INCLUDE_ALL")
-#if OrgApacheLuceneIndexMultiReader_RESTRICT
-#define OrgApacheLuceneIndexMultiReader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexMultiReader")
+#ifdef RESTRICT_OrgApacheLuceneIndexMultiReader
+#define INCLUDE_ALL_OrgApacheLuceneIndexMultiReader 0
 #else
-#define OrgApacheLuceneIndexMultiReader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexMultiReader 1
 #endif
-#undef OrgApacheLuceneIndexMultiReader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexMultiReader
 
-#if !defined (_OrgApacheLuceneIndexMultiReader_) && (OrgApacheLuceneIndexMultiReader_INCLUDE_ALL || OrgApacheLuceneIndexMultiReader_INCLUDE)
-#define _OrgApacheLuceneIndexMultiReader_
+#if !defined (OrgApacheLuceneIndexMultiReader_) && (INCLUDE_ALL_OrgApacheLuceneIndexMultiReader || defined(INCLUDE_OrgApacheLuceneIndexMultiReader))
+#define OrgApacheLuceneIndexMultiReader_
 
-#define OrgApacheLuceneIndexBaseCompositeReader_RESTRICT 1
-#define OrgApacheLuceneIndexBaseCompositeReader_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexBaseCompositeReader 1
+#define INCLUDE_OrgApacheLuceneIndexBaseCompositeReader 1
 #include "org/apache/lucene/index/BaseCompositeReader.h"
 
 @class IOSObjectArray;
 
+/*!
+ @brief A <code>CompositeReader</code> which reads multiple indexes, appending
+ their content.
+ It can be used to create a view on several
+ sub-readers (like <code>DirectoryReader</code>) and execute searches on it.
+ <p> For efficiency, in this API documents are often referred to via
+ <i>document numbers</i>, non-negative integers which each name a unique
+ document in the index.  These document numbers are ephemeral -- they may change
+ as documents are added to and deleted from an index.  Clients should thus not
+ rely on a given document having the same number between sessions.
+ <p><a name="thread-safety"></a><p><b>NOTE</b>: <code>IndexReader</code>
+  instances are completely thread
+ safe, meaning multiple threads can call any of its methods,
+ concurrently.  If your application requires external
+ synchronization, you should <b>not</b> synchronize on the
+ <code>IndexReader</code> instance; use your own
+ (non-Lucene) objects instead.
+ */
 @interface OrgApacheLuceneIndexMultiReader : OrgApacheLuceneIndexBaseCompositeReader
 
 #pragma mark Public
 
+/*!
+ @brief <p>Construct a MultiReader aggregating the named set of (sub)readers.
+ <p>Note that all subreaders are closed if this Multireader is closed.</p>
+ @param subReaders set of (sub)readers
+ */
 - (instancetype)initWithOrgApacheLuceneIndexIndexReaderArray:(IOSObjectArray *)subReaders;
 
+/*!
+ @brief <p>Construct a MultiReader aggregating the named set of (sub)readers.
+ @param subReaders set of (sub)readers; this array will be cloned.
+ @param closeSubReaders indicates whether the subreaders should be closed
+ when this MultiReader is closed
+ */
 - (instancetype)initWithOrgApacheLuceneIndexIndexReaderArray:(IOSObjectArray *)subReaders
                                                  withBoolean:(jboolean)closeSubReaders;
 
@@ -43,12 +72,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexMultiReader_initWithOrgApacheLuceneIn
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexMultiReader *new_OrgApacheLuceneIndexMultiReader_initWithOrgApacheLuceneIndexIndexReaderArray_(IOSObjectArray *subReaders) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexMultiReader *create_OrgApacheLuceneIndexMultiReader_initWithOrgApacheLuceneIndexIndexReaderArray_(IOSObjectArray *subReaders);
+
 FOUNDATION_EXPORT void OrgApacheLuceneIndexMultiReader_initWithOrgApacheLuceneIndexIndexReaderArray_withBoolean_(OrgApacheLuceneIndexMultiReader *self, IOSObjectArray *subReaders, jboolean closeSubReaders);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexMultiReader *new_OrgApacheLuceneIndexMultiReader_initWithOrgApacheLuceneIndexIndexReaderArray_withBoolean_(IOSObjectArray *subReaders, jboolean closeSubReaders) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneIndexMultiReader *create_OrgApacheLuceneIndexMultiReader_initWithOrgApacheLuceneIndexIndexReaderArray_withBoolean_(IOSObjectArray *subReaders, jboolean closeSubReaders);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiReader)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexMultiReader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexMultiReader")

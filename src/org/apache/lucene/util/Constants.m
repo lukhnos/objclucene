@@ -3,11 +3,12 @@
 //  source: ./core/src/java/org/apache/lucene/util/Constants.java
 //
 
-#include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/Integer.h"
 #include "java/lang/System.h"
+#include "java/lang/annotation/Annotation.h"
 #include "java/util/StringTokenizer.h"
 #include "org/apache/lucene/util/Constants.h"
 #include "org/apache/lucene/util/Version.h"
@@ -18,39 +19,119 @@
 
 @end
 
-static jint OrgApacheLuceneUtilConstants_JVM_MAJOR_VERSION_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilConstants, JVM_MAJOR_VERSION_, jint)
+inline jint OrgApacheLuceneUtilConstants_get_JVM_MAJOR_VERSION();
+static jint OrgApacheLuceneUtilConstants_JVM_MAJOR_VERSION;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilConstants, JVM_MAJOR_VERSION, jint)
 
-static jint OrgApacheLuceneUtilConstants_JVM_MINOR_VERSION_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilConstants, JVM_MINOR_VERSION_, jint)
+inline jint OrgApacheLuceneUtilConstants_get_JVM_MINOR_VERSION();
+static jint OrgApacheLuceneUtilConstants_JVM_MINOR_VERSION;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilConstants, JVM_MINOR_VERSION, jint)
 
 __attribute__((unused)) static void OrgApacheLuceneUtilConstants_init(OrgApacheLuceneUtilConstants *self);
 
 __attribute__((unused)) static OrgApacheLuceneUtilConstants *new_OrgApacheLuceneUtilConstants_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneUtilConstants *create_OrgApacheLuceneUtilConstants_init();
+
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilConstants)
 
-NSString *OrgApacheLuceneUtilConstants_JVM_VENDOR_;
-NSString *OrgApacheLuceneUtilConstants_JVM_VERSION_;
-NSString *OrgApacheLuceneUtilConstants_JVM_NAME_;
-NSString *OrgApacheLuceneUtilConstants_JVM_SPEC_VERSION_;
-NSString *OrgApacheLuceneUtilConstants_JAVA_VERSION_;
-NSString *OrgApacheLuceneUtilConstants_OS_NAME_;
-jboolean OrgApacheLuceneUtilConstants_LINUX_;
-jboolean OrgApacheLuceneUtilConstants_WINDOWS_;
-jboolean OrgApacheLuceneUtilConstants_SUN_OS_;
-jboolean OrgApacheLuceneUtilConstants_MAC_OS_X_;
-jboolean OrgApacheLuceneUtilConstants_FREE_BSD_;
-NSString *OrgApacheLuceneUtilConstants_OS_ARCH_;
-NSString *OrgApacheLuceneUtilConstants_OS_VERSION_;
-NSString *OrgApacheLuceneUtilConstants_JAVA_VENDOR_;
-jboolean OrgApacheLuceneUtilConstants_JRE_IS_64BIT_;
-jboolean OrgApacheLuceneUtilConstants_JRE_IS_MINIMUM_JAVA8_;
-jboolean OrgApacheLuceneUtilConstants_JRE_IS_MINIMUM_JAVA9_;
-NSString *OrgApacheLuceneUtilConstants_LUCENE_MAIN_VERSION_;
-NSString *OrgApacheLuceneUtilConstants_LUCENE_VERSION_;
+NSString *OrgApacheLuceneUtilConstants_JVM_VENDOR;
+NSString *OrgApacheLuceneUtilConstants_JVM_VERSION;
+NSString *OrgApacheLuceneUtilConstants_JVM_NAME;
+NSString *OrgApacheLuceneUtilConstants_JVM_SPEC_VERSION;
+NSString *OrgApacheLuceneUtilConstants_JAVA_VERSION;
+NSString *OrgApacheLuceneUtilConstants_OS_NAME;
+jboolean OrgApacheLuceneUtilConstants_LINUX;
+jboolean OrgApacheLuceneUtilConstants_WINDOWS;
+jboolean OrgApacheLuceneUtilConstants_SUN_OS;
+jboolean OrgApacheLuceneUtilConstants_MAC_OS_X;
+jboolean OrgApacheLuceneUtilConstants_FREE_BSD;
+NSString *OrgApacheLuceneUtilConstants_OS_ARCH;
+NSString *OrgApacheLuceneUtilConstants_OS_VERSION;
+NSString *OrgApacheLuceneUtilConstants_JAVA_VENDOR;
+jboolean OrgApacheLuceneUtilConstants_JRE_IS_64BIT;
+jboolean OrgApacheLuceneUtilConstants_JRE_IS_MINIMUM_JAVA8;
+jboolean OrgApacheLuceneUtilConstants_JRE_IS_MINIMUM_JAVA9;
+NSString *OrgApacheLuceneUtilConstants_LUCENE_MAIN_VERSION;
+NSString *OrgApacheLuceneUtilConstants_LUCENE_VERSION;
 
 @implementation OrgApacheLuceneUtilConstants
+
++ (NSString *)JVM_VENDOR {
+  return OrgApacheLuceneUtilConstants_JVM_VENDOR;
+}
+
++ (NSString *)JVM_VERSION {
+  return OrgApacheLuceneUtilConstants_JVM_VERSION;
+}
+
++ (NSString *)JVM_NAME {
+  return OrgApacheLuceneUtilConstants_JVM_NAME;
+}
+
++ (NSString *)JVM_SPEC_VERSION {
+  return OrgApacheLuceneUtilConstants_JVM_SPEC_VERSION;
+}
+
++ (NSString *)JAVA_VERSION {
+  return OrgApacheLuceneUtilConstants_JAVA_VERSION;
+}
+
++ (NSString *)OS_NAME {
+  return OrgApacheLuceneUtilConstants_OS_NAME;
+}
+
++ (jboolean)LINUX {
+  return OrgApacheLuceneUtilConstants_LINUX;
+}
+
++ (jboolean)WINDOWS {
+  return OrgApacheLuceneUtilConstants_WINDOWS;
+}
+
++ (jboolean)SUN_OS {
+  return OrgApacheLuceneUtilConstants_SUN_OS;
+}
+
++ (jboolean)MAC_OS_X {
+  return OrgApacheLuceneUtilConstants_MAC_OS_X;
+}
+
++ (jboolean)FREE_BSD {
+  return OrgApacheLuceneUtilConstants_FREE_BSD;
+}
+
++ (NSString *)OS_ARCH {
+  return OrgApacheLuceneUtilConstants_OS_ARCH;
+}
+
++ (NSString *)OS_VERSION {
+  return OrgApacheLuceneUtilConstants_OS_VERSION;
+}
+
++ (NSString *)JAVA_VENDOR {
+  return OrgApacheLuceneUtilConstants_JAVA_VENDOR;
+}
+
++ (jboolean)JRE_IS_64BIT {
+  return OrgApacheLuceneUtilConstants_JRE_IS_64BIT;
+}
+
++ (jboolean)JRE_IS_MINIMUM_JAVA8 {
+  return OrgApacheLuceneUtilConstants_JRE_IS_MINIMUM_JAVA8;
+}
+
++ (jboolean)JRE_IS_MINIMUM_JAVA9 {
+  return OrgApacheLuceneUtilConstants_JRE_IS_MINIMUM_JAVA9;
+}
+
++ (NSString *)LUCENE_MAIN_VERSION {
+  return OrgApacheLuceneUtilConstants_LUCENE_MAIN_VERSION;
+}
+
++ (NSString *)LUCENE_VERSION {
+  return OrgApacheLuceneUtilConstants_LUCENE_VERSION;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -59,30 +140,38 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
++ (IOSObjectArray *)__annotations_LUCENE_MAIN_VERSION_ {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
++ (IOSObjectArray *)__annotations_LUCENE_VERSION_ {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilConstants class]) {
-    JreStrongAssign(&OrgApacheLuceneUtilConstants_JVM_VENDOR_, JavaLangSystem_getPropertyWithNSString_(@"java.vm.vendor"));
-    JreStrongAssign(&OrgApacheLuceneUtilConstants_JVM_VERSION_, JavaLangSystem_getPropertyWithNSString_(@"java.vm.version"));
-    JreStrongAssign(&OrgApacheLuceneUtilConstants_JVM_NAME_, JavaLangSystem_getPropertyWithNSString_(@"java.vm.name"));
-    JreStrongAssign(&OrgApacheLuceneUtilConstants_JVM_SPEC_VERSION_, JavaLangSystem_getPropertyWithNSString_(@"java.specification.version"));
-    JreStrongAssign(&OrgApacheLuceneUtilConstants_JAVA_VERSION_, JavaLangSystem_getPropertyWithNSString_(@"java.version"));
-    JreStrongAssign(&OrgApacheLuceneUtilConstants_OS_NAME_, JavaLangSystem_getPropertyWithNSString_(@"os.name"));
-    OrgApacheLuceneUtilConstants_LINUX_ = [((NSString *) nil_chk(OrgApacheLuceneUtilConstants_OS_NAME_)) hasPrefix:@"Linux"];
-    OrgApacheLuceneUtilConstants_WINDOWS_ = [OrgApacheLuceneUtilConstants_OS_NAME_ hasPrefix:@"Windows"];
-    OrgApacheLuceneUtilConstants_SUN_OS_ = [OrgApacheLuceneUtilConstants_OS_NAME_ hasPrefix:@"SunOS"];
-    OrgApacheLuceneUtilConstants_MAC_OS_X_ = [OrgApacheLuceneUtilConstants_OS_NAME_ hasPrefix:@"Mac OS X"];
-    OrgApacheLuceneUtilConstants_FREE_BSD_ = [OrgApacheLuceneUtilConstants_OS_NAME_ hasPrefix:@"FreeBSD"];
-    JreStrongAssign(&OrgApacheLuceneUtilConstants_OS_ARCH_, JavaLangSystem_getPropertyWithNSString_(@"os.arch"));
-    JreStrongAssign(&OrgApacheLuceneUtilConstants_OS_VERSION_, JavaLangSystem_getPropertyWithNSString_(@"os.version"));
-    JreStrongAssign(&OrgApacheLuceneUtilConstants_JAVA_VENDOR_, JavaLangSystem_getPropertyWithNSString_(@"java.vendor"));
+    JreStrongAssign(&OrgApacheLuceneUtilConstants_JVM_VENDOR, JavaLangSystem_getPropertyWithNSString_(@"java.vm.vendor"));
+    JreStrongAssign(&OrgApacheLuceneUtilConstants_JVM_VERSION, JavaLangSystem_getPropertyWithNSString_(@"java.vm.version"));
+    JreStrongAssign(&OrgApacheLuceneUtilConstants_JVM_NAME, JavaLangSystem_getPropertyWithNSString_(@"java.vm.name"));
+    JreStrongAssign(&OrgApacheLuceneUtilConstants_JVM_SPEC_VERSION, JavaLangSystem_getPropertyWithNSString_(@"java.specification.version"));
+    JreStrongAssign(&OrgApacheLuceneUtilConstants_JAVA_VERSION, JavaLangSystem_getPropertyWithNSString_(@"java.version"));
+    JreStrongAssign(&OrgApacheLuceneUtilConstants_OS_NAME, JavaLangSystem_getPropertyWithNSString_(@"os.name"));
+    OrgApacheLuceneUtilConstants_LINUX = [((NSString *) nil_chk(OrgApacheLuceneUtilConstants_OS_NAME)) hasPrefix:@"Linux"];
+    OrgApacheLuceneUtilConstants_WINDOWS = [OrgApacheLuceneUtilConstants_OS_NAME hasPrefix:@"Windows"];
+    OrgApacheLuceneUtilConstants_SUN_OS = [OrgApacheLuceneUtilConstants_OS_NAME hasPrefix:@"SunOS"];
+    OrgApacheLuceneUtilConstants_MAC_OS_X = [OrgApacheLuceneUtilConstants_OS_NAME hasPrefix:@"Mac OS X"];
+    OrgApacheLuceneUtilConstants_FREE_BSD = [OrgApacheLuceneUtilConstants_OS_NAME hasPrefix:@"FreeBSD"];
+    JreStrongAssign(&OrgApacheLuceneUtilConstants_OS_ARCH, JavaLangSystem_getPropertyWithNSString_(@"os.arch"));
+    JreStrongAssign(&OrgApacheLuceneUtilConstants_OS_VERSION, JavaLangSystem_getPropertyWithNSString_(@"os.version"));
+    JreStrongAssign(&OrgApacheLuceneUtilConstants_JAVA_VENDOR, JavaLangSystem_getPropertyWithNSString_(@"java.vendor"));
     {
-      JavaUtilStringTokenizer *st = [new_JavaUtilStringTokenizer_initWithNSString_withNSString_(OrgApacheLuceneUtilConstants_JVM_SPEC_VERSION_, @".") autorelease];
-      OrgApacheLuceneUtilConstants_JVM_MAJOR_VERSION_ = JavaLangInteger_parseIntWithNSString_([st nextToken]);
+      JavaUtilStringTokenizer *st = create_JavaUtilStringTokenizer_initWithNSString_withNSString_(OrgApacheLuceneUtilConstants_JVM_SPEC_VERSION, @".");
+      OrgApacheLuceneUtilConstants_JVM_MAJOR_VERSION = JavaLangInteger_parseIntWithNSString_([st nextToken]);
       if ([st hasMoreTokens]) {
-        OrgApacheLuceneUtilConstants_JVM_MINOR_VERSION_ = JavaLangInteger_parseIntWithNSString_([st nextToken]);
+        OrgApacheLuceneUtilConstants_JVM_MINOR_VERSION = JavaLangInteger_parseIntWithNSString_([st nextToken]);
       }
       else {
-        OrgApacheLuceneUtilConstants_JVM_MINOR_VERSION_ = 0;
+        OrgApacheLuceneUtilConstants_JVM_MINOR_VERSION = 0;
       }
       jboolean is64Bit = false;
       NSString *x = JavaLangSystem_getPropertyWithNSString_(@"sun.arch.data.model");
@@ -90,29 +179,21 @@ J2OBJC_IGNORE_DESIGNATED_END
         is64Bit = [x contains:@"64"];
       }
       else {
-        if (OrgApacheLuceneUtilConstants_OS_ARCH_ != nil && [OrgApacheLuceneUtilConstants_OS_ARCH_ contains:@"64"]) {
+        if (OrgApacheLuceneUtilConstants_OS_ARCH != nil && [OrgApacheLuceneUtilConstants_OS_ARCH contains:@"64"]) {
           is64Bit = true;
         }
         else {
           is64Bit = false;
         }
       }
-      OrgApacheLuceneUtilConstants_JRE_IS_64BIT_ = is64Bit;
+      OrgApacheLuceneUtilConstants_JRE_IS_64BIT = is64Bit;
     }
-    OrgApacheLuceneUtilConstants_JRE_IS_MINIMUM_JAVA8_ = (OrgApacheLuceneUtilConstants_JVM_MAJOR_VERSION_ > 1 || (OrgApacheLuceneUtilConstants_JVM_MAJOR_VERSION_ == 1 && OrgApacheLuceneUtilConstants_JVM_MINOR_VERSION_ >= 8));
-    OrgApacheLuceneUtilConstants_JRE_IS_MINIMUM_JAVA9_ = (OrgApacheLuceneUtilConstants_JVM_MAJOR_VERSION_ > 1 || (OrgApacheLuceneUtilConstants_JVM_MAJOR_VERSION_ == 1 && OrgApacheLuceneUtilConstants_JVM_MINOR_VERSION_ >= 9));
-    JreStrongAssign(&OrgApacheLuceneUtilConstants_LUCENE_MAIN_VERSION_, [((OrgApacheLuceneUtilVersion *) nil_chk(JreLoadStatic(OrgApacheLuceneUtilVersion, LATEST_))) description]);
-    JreStrongAssign(&OrgApacheLuceneUtilConstants_LUCENE_VERSION_, [JreLoadStatic(OrgApacheLuceneUtilVersion, LATEST_) description]);
+    OrgApacheLuceneUtilConstants_JRE_IS_MINIMUM_JAVA8 = (OrgApacheLuceneUtilConstants_JVM_MAJOR_VERSION > 1 || (OrgApacheLuceneUtilConstants_JVM_MAJOR_VERSION == 1 && OrgApacheLuceneUtilConstants_JVM_MINOR_VERSION >= 8));
+    OrgApacheLuceneUtilConstants_JRE_IS_MINIMUM_JAVA9 = (OrgApacheLuceneUtilConstants_JVM_MAJOR_VERSION > 1 || (OrgApacheLuceneUtilConstants_JVM_MAJOR_VERSION == 1 && OrgApacheLuceneUtilConstants_JVM_MINOR_VERSION >= 9));
+    JreStrongAssign(&OrgApacheLuceneUtilConstants_LUCENE_MAIN_VERSION, [((OrgApacheLuceneUtilVersion *) nil_chk(JreLoadStatic(OrgApacheLuceneUtilVersion, LATEST))) description]);
+    JreStrongAssign(&OrgApacheLuceneUtilConstants_LUCENE_VERSION, [JreLoadStatic(OrgApacheLuceneUtilVersion, LATEST) description]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilConstants)
   }
-}
-
-+ (IOSObjectArray *)__annotations_LUCENE_MAIN_VERSION_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_LUCENE_VERSION_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -120,27 +201,27 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "init", "Constants", NULL, 0x2, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "JVM_VENDOR_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneUtilConstants_JVM_VENDOR_, NULL, .constantValue.asLong = 0 },
-    { "JVM_VERSION_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneUtilConstants_JVM_VERSION_, NULL, .constantValue.asLong = 0 },
-    { "JVM_NAME_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneUtilConstants_JVM_NAME_, NULL, .constantValue.asLong = 0 },
-    { "JVM_SPEC_VERSION_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneUtilConstants_JVM_SPEC_VERSION_, NULL, .constantValue.asLong = 0 },
-    { "JAVA_VERSION_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneUtilConstants_JAVA_VERSION_, NULL, .constantValue.asLong = 0 },
-    { "OS_NAME_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneUtilConstants_OS_NAME_, NULL, .constantValue.asLong = 0 },
-    { "LINUX_", NULL, 0x19, "Z", &OrgApacheLuceneUtilConstants_LINUX_, NULL, .constantValue.asLong = 0 },
-    { "WINDOWS_", NULL, 0x19, "Z", &OrgApacheLuceneUtilConstants_WINDOWS_, NULL, .constantValue.asLong = 0 },
-    { "SUN_OS_", NULL, 0x19, "Z", &OrgApacheLuceneUtilConstants_SUN_OS_, NULL, .constantValue.asLong = 0 },
-    { "MAC_OS_X_", NULL, 0x19, "Z", &OrgApacheLuceneUtilConstants_MAC_OS_X_, NULL, .constantValue.asLong = 0 },
-    { "FREE_BSD_", NULL, 0x19, "Z", &OrgApacheLuceneUtilConstants_FREE_BSD_, NULL, .constantValue.asLong = 0 },
-    { "OS_ARCH_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneUtilConstants_OS_ARCH_, NULL, .constantValue.asLong = 0 },
-    { "OS_VERSION_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneUtilConstants_OS_VERSION_, NULL, .constantValue.asLong = 0 },
-    { "JAVA_VENDOR_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneUtilConstants_JAVA_VENDOR_, NULL, .constantValue.asLong = 0 },
-    { "JVM_MAJOR_VERSION_", NULL, 0x1a, "I", &OrgApacheLuceneUtilConstants_JVM_MAJOR_VERSION_, NULL, .constantValue.asLong = 0 },
-    { "JVM_MINOR_VERSION_", NULL, 0x1a, "I", &OrgApacheLuceneUtilConstants_JVM_MINOR_VERSION_, NULL, .constantValue.asLong = 0 },
-    { "JRE_IS_64BIT_", NULL, 0x19, "Z", &OrgApacheLuceneUtilConstants_JRE_IS_64BIT_, NULL, .constantValue.asLong = 0 },
-    { "JRE_IS_MINIMUM_JAVA8_", NULL, 0x19, "Z", &OrgApacheLuceneUtilConstants_JRE_IS_MINIMUM_JAVA8_, NULL, .constantValue.asLong = 0 },
-    { "JRE_IS_MINIMUM_JAVA9_", NULL, 0x19, "Z", &OrgApacheLuceneUtilConstants_JRE_IS_MINIMUM_JAVA9_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_MAIN_VERSION_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneUtilConstants_LUCENE_MAIN_VERSION_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_VERSION_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneUtilConstants_LUCENE_VERSION_, NULL, .constantValue.asLong = 0 },
+    { "JVM_VENDOR", "JVM_VENDOR", 0x19, "Ljava.lang.String;", &OrgApacheLuceneUtilConstants_JVM_VENDOR, NULL, .constantValue.asLong = 0 },
+    { "JVM_VERSION", "JVM_VERSION", 0x19, "Ljava.lang.String;", &OrgApacheLuceneUtilConstants_JVM_VERSION, NULL, .constantValue.asLong = 0 },
+    { "JVM_NAME", "JVM_NAME", 0x19, "Ljava.lang.String;", &OrgApacheLuceneUtilConstants_JVM_NAME, NULL, .constantValue.asLong = 0 },
+    { "JVM_SPEC_VERSION", "JVM_SPEC_VERSION", 0x19, "Ljava.lang.String;", &OrgApacheLuceneUtilConstants_JVM_SPEC_VERSION, NULL, .constantValue.asLong = 0 },
+    { "JAVA_VERSION", "JAVA_VERSION", 0x19, "Ljava.lang.String;", &OrgApacheLuceneUtilConstants_JAVA_VERSION, NULL, .constantValue.asLong = 0 },
+    { "OS_NAME", "OS_NAME", 0x19, "Ljava.lang.String;", &OrgApacheLuceneUtilConstants_OS_NAME, NULL, .constantValue.asLong = 0 },
+    { "LINUX", "LINUX", 0x19, "Z", &OrgApacheLuceneUtilConstants_LINUX, NULL, .constantValue.asLong = 0 },
+    { "WINDOWS", "WINDOWS", 0x19, "Z", &OrgApacheLuceneUtilConstants_WINDOWS, NULL, .constantValue.asLong = 0 },
+    { "SUN_OS", "SUN_OS", 0x19, "Z", &OrgApacheLuceneUtilConstants_SUN_OS, NULL, .constantValue.asLong = 0 },
+    { "MAC_OS_X", "MAC_OS_X", 0x19, "Z", &OrgApacheLuceneUtilConstants_MAC_OS_X, NULL, .constantValue.asLong = 0 },
+    { "FREE_BSD", "FREE_BSD", 0x19, "Z", &OrgApacheLuceneUtilConstants_FREE_BSD, NULL, .constantValue.asLong = 0 },
+    { "OS_ARCH", "OS_ARCH", 0x19, "Ljava.lang.String;", &OrgApacheLuceneUtilConstants_OS_ARCH, NULL, .constantValue.asLong = 0 },
+    { "OS_VERSION", "OS_VERSION", 0x19, "Ljava.lang.String;", &OrgApacheLuceneUtilConstants_OS_VERSION, NULL, .constantValue.asLong = 0 },
+    { "JAVA_VENDOR", "JAVA_VENDOR", 0x19, "Ljava.lang.String;", &OrgApacheLuceneUtilConstants_JAVA_VENDOR, NULL, .constantValue.asLong = 0 },
+    { "JVM_MAJOR_VERSION", "JVM_MAJOR_VERSION", 0x1a, "I", &OrgApacheLuceneUtilConstants_JVM_MAJOR_VERSION, NULL, .constantValue.asLong = 0 },
+    { "JVM_MINOR_VERSION", "JVM_MINOR_VERSION", 0x1a, "I", &OrgApacheLuceneUtilConstants_JVM_MINOR_VERSION, NULL, .constantValue.asLong = 0 },
+    { "JRE_IS_64BIT", "JRE_IS_64BIT", 0x19, "Z", &OrgApacheLuceneUtilConstants_JRE_IS_64BIT, NULL, .constantValue.asLong = 0 },
+    { "JRE_IS_MINIMUM_JAVA8", "JRE_IS_MINIMUM_JAVA8", 0x19, "Z", &OrgApacheLuceneUtilConstants_JRE_IS_MINIMUM_JAVA8, NULL, .constantValue.asLong = 0 },
+    { "JRE_IS_MINIMUM_JAVA9", "JRE_IS_MINIMUM_JAVA9", 0x19, "Z", &OrgApacheLuceneUtilConstants_JRE_IS_MINIMUM_JAVA9, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_MAIN_VERSION", "LUCENE_MAIN_VERSION", 0x19, "Ljava.lang.String;", &OrgApacheLuceneUtilConstants_LUCENE_MAIN_VERSION, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_VERSION", "LUCENE_VERSION", 0x19, "Ljava.lang.String;", &OrgApacheLuceneUtilConstants_LUCENE_VERSION, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneUtilConstants = { 2, "Constants", "org.apache.lucene.util", NULL, 0x11, 1, methods, 21, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilConstants;
@@ -153,9 +234,11 @@ void OrgApacheLuceneUtilConstants_init(OrgApacheLuceneUtilConstants *self) {
 }
 
 OrgApacheLuceneUtilConstants *new_OrgApacheLuceneUtilConstants_init() {
-  OrgApacheLuceneUtilConstants *self = [OrgApacheLuceneUtilConstants alloc];
-  OrgApacheLuceneUtilConstants_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilConstants, init)
+}
+
+OrgApacheLuceneUtilConstants *create_OrgApacheLuceneUtilConstants_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilConstants, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilConstants)

@@ -33,7 +33,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "getFilterWithOrgW3cDomElement:", "getFilter", "Lorg.apache.lucene.search.Filter;", 0x1, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "RangeFilterBuilder", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder = { 2, "RangeFilterBuilder", "org.apache.lucene.queryparser.xml.builders", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder;
@@ -46,9 +46,11 @@ void OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder_init(OrgApacheLucen
 }
 
 OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder *new_OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder_init() {
-  OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder *self = [OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder alloc];
-  OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder, init)
+}
+
+OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder *create_OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder)

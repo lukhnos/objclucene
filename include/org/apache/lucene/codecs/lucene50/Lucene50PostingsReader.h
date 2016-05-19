@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_RESTRICT
-#define OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader")
+#ifdef RESTRICT_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader
+#define INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader 0
 #else
-#define OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader 1
 #endif
-#undef OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader
 
-#if !defined (_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_) && (OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_INCLUDE_ALL || OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_INCLUDE)
-#define _OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_
+#if !defined (OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_) && (INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader || defined(INCLUDE_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader))
+#define OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_
 
-#define OrgApacheLuceneCodecsPostingsReaderBase_RESTRICT 1
-#define OrgApacheLuceneCodecsPostingsReaderBase_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneCodecsPostingsReaderBase 1
+#define INCLUDE_OrgApacheLuceneCodecsPostingsReaderBase 1
 #include "org/apache/lucene/codecs/PostingsReaderBase.h"
 
 @class IOSIntArray;
@@ -31,6 +31,10 @@
 @class OrgApacheLuceneStoreIndexInput;
 @protocol JavaUtilCollection;
 
+/*!
+ @brief Concrete class that reads docId(maybe frq,pos,offset,payloads) list
+ with postings format.
+ */
 @interface OrgApacheLuceneCodecsLucene50Lucene50PostingsReader : OrgApacheLuceneCodecsPostingsReaderBase {
  @public
   OrgApacheLuceneCodecsLucene50ForUtil *forUtil_;
@@ -38,6 +42,9 @@
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ */
 - (instancetype)initWithOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state;
 
 - (void)checkIntegrity;
@@ -68,6 +75,9 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)_
 
 #pragma mark Package-Private
 
+/*!
+ @brief Read values that have been written using variable-length encoding instead of bit-packing.
+ */
 + (void)readVIntBlockWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)docIn
                                            withIntArray:(IOSIntArray *)docBuffer
                                            withIntArray:(IOSIntArray *)freqBuffer
@@ -84,17 +94,19 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_initW
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50PostingsReader *new_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_initWithOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneIndexSegmentReadState *state) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50PostingsReader *create_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_initWithOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneIndexSegmentReadState *state);
+
 FOUNDATION_EXPORT void OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_readVIntBlockWithOrgApacheLuceneStoreIndexInput_withIntArray_withIntArray_withInt_withBoolean_(OrgApacheLuceneStoreIndexInput *docIn, IOSIntArray *docBuffer, IOSIntArray *freqBuffer, jint num, jboolean indexHasFreq);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader)
 
 #endif
 
-#if !defined (_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum_) && (OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_INCLUDE_ALL || OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum_INCLUDE)
-#define _OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum_
+#if !defined (OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum_) && (INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader || defined(INCLUDE_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum))
+#define OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum_
 
-#define OrgApacheLuceneIndexPostingsEnum_RESTRICT 1
-#define OrgApacheLuceneIndexPostingsEnum_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexPostingsEnum 1
+#define INCLUDE_OrgApacheLuceneIndexPostingsEnum 1
 #include "org/apache/lucene/index/PostingsEnum.h"
 
 @class OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState;
@@ -153,15 +165,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_Block
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum *new_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum_initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader_withOrgApacheLuceneIndexFieldInfo_(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader *outer$, OrgApacheLuceneIndexFieldInfo *fieldInfo) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum *create_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum_initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader_withOrgApacheLuceneIndexFieldInfo_(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader *outer$, OrgApacheLuceneIndexFieldInfo *fieldInfo);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum)
 
 #endif
 
-#if !defined (_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum_) && (OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_INCLUDE_ALL || OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum_INCLUDE)
-#define _OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum_
+#if !defined (OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum_) && (INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader || defined(INCLUDE_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum))
+#define OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum_
 
-#define OrgApacheLuceneIndexPostingsEnum_RESTRICT 1
-#define OrgApacheLuceneIndexPostingsEnum_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexPostingsEnum 1
+#define INCLUDE_OrgApacheLuceneIndexPostingsEnum 1
 #include "org/apache/lucene/index/PostingsEnum.h"
 
 @class OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState;
@@ -219,15 +233,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_Block
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum *new_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum_initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader_withOrgApacheLuceneIndexFieldInfo_(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader *outer$, OrgApacheLuceneIndexFieldInfo *fieldInfo) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum *create_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum_initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader_withOrgApacheLuceneIndexFieldInfo_(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader *outer$, OrgApacheLuceneIndexFieldInfo *fieldInfo);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum)
 
 #endif
 
-#if !defined (_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum_) && (OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_INCLUDE_ALL || OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum_INCLUDE)
-#define _OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum_
+#if !defined (OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum_) && (INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader || defined(INCLUDE_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum))
+#define OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum_
 
-#define OrgApacheLuceneIndexPostingsEnum_RESTRICT 1
-#define OrgApacheLuceneIndexPostingsEnum_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexPostingsEnum 1
+#define INCLUDE_OrgApacheLuceneIndexPostingsEnum 1
 #include "org/apache/lucene/index/PostingsEnum.h"
 
 @class OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState;
@@ -290,8 +306,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_Every
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum *new_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum_initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader_withOrgApacheLuceneIndexFieldInfo_(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader *outer$, OrgApacheLuceneIndexFieldInfo *fieldInfo) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum *create_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum_initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader_withOrgApacheLuceneIndexFieldInfo_(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader *outer$, OrgApacheLuceneIndexFieldInfo *fieldInfo);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader")

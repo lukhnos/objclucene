@@ -5,28 +5,34 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilArrayInPlaceMergeSorter_INCLUDE_ALL")
-#if OrgApacheLuceneUtilArrayInPlaceMergeSorter_RESTRICT
-#define OrgApacheLuceneUtilArrayInPlaceMergeSorter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilArrayInPlaceMergeSorter")
+#ifdef RESTRICT_OrgApacheLuceneUtilArrayInPlaceMergeSorter
+#define INCLUDE_ALL_OrgApacheLuceneUtilArrayInPlaceMergeSorter 0
 #else
-#define OrgApacheLuceneUtilArrayInPlaceMergeSorter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilArrayInPlaceMergeSorter 1
 #endif
-#undef OrgApacheLuceneUtilArrayInPlaceMergeSorter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilArrayInPlaceMergeSorter
 
-#if !defined (_OrgApacheLuceneUtilArrayInPlaceMergeSorter_) && (OrgApacheLuceneUtilArrayInPlaceMergeSorter_INCLUDE_ALL || OrgApacheLuceneUtilArrayInPlaceMergeSorter_INCLUDE)
-#define _OrgApacheLuceneUtilArrayInPlaceMergeSorter_
+#if !defined (OrgApacheLuceneUtilArrayInPlaceMergeSorter_) && (INCLUDE_ALL_OrgApacheLuceneUtilArrayInPlaceMergeSorter || defined(INCLUDE_OrgApacheLuceneUtilArrayInPlaceMergeSorter))
+#define OrgApacheLuceneUtilArrayInPlaceMergeSorter_
 
-#define OrgApacheLuceneUtilInPlaceMergeSorter_RESTRICT 1
-#define OrgApacheLuceneUtilInPlaceMergeSorter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilInPlaceMergeSorter 1
+#define INCLUDE_OrgApacheLuceneUtilInPlaceMergeSorter 1
 #include "org/apache/lucene/util/InPlaceMergeSorter.h"
 
 @class IOSObjectArray;
 @protocol JavaUtilComparator;
 
+/*!
+ @brief An <code>InPlaceMergeSorter</code> for object arrays.
+ */
 @interface OrgApacheLuceneUtilArrayInPlaceMergeSorter : OrgApacheLuceneUtilInPlaceMergeSorter
 
 #pragma mark Public
 
+/*!
+ @brief Create a new <code>ArrayInPlaceMergeSorter</code>.
+ */
 - (instancetype)initWithNSObjectArray:(IOSObjectArray *)arr
                withJavaUtilComparator:(id<JavaUtilComparator>)comparator;
 
@@ -46,8 +52,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilArrayInPlaceMergeSorter_initWithNSObje
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilArrayInPlaceMergeSorter *new_OrgApacheLuceneUtilArrayInPlaceMergeSorter_initWithNSObjectArray_withJavaUtilComparator_(IOSObjectArray *arr, id<JavaUtilComparator> comparator) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilArrayInPlaceMergeSorter *create_OrgApacheLuceneUtilArrayInPlaceMergeSorter_initWithNSObjectArray_withJavaUtilComparator_(IOSObjectArray *arr, id<JavaUtilComparator> comparator);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilArrayInPlaceMergeSorter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilArrayInPlaceMergeSorter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilArrayInPlaceMergeSorter")

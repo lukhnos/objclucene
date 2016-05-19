@@ -18,6 +18,9 @@
 
 @interface OrgApacheLuceneUtilByteBlockPool () {
  @public
+  /*!
+   @brief index into the buffers array pointing to the current buffer used as the head
+   */
   jint bufferUpto_;
   OrgApacheLuceneUtilByteBlockPool_Allocator *allocator_;
 }
@@ -37,11 +40,35 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilByteBlockPool_DirectTrackingAllocator, by
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilByteBlockPool)
 
-IOSIntArray *OrgApacheLuceneUtilByteBlockPool_NEXT_LEVEL_ARRAY_;
-IOSIntArray *OrgApacheLuceneUtilByteBlockPool_LEVEL_SIZE_ARRAY_;
-jint OrgApacheLuceneUtilByteBlockPool_FIRST_LEVEL_SIZE_;
+IOSIntArray *OrgApacheLuceneUtilByteBlockPool_NEXT_LEVEL_ARRAY;
+IOSIntArray *OrgApacheLuceneUtilByteBlockPool_LEVEL_SIZE_ARRAY;
+jint OrgApacheLuceneUtilByteBlockPool_FIRST_LEVEL_SIZE;
 
 @implementation OrgApacheLuceneUtilByteBlockPool
+
++ (jint)BYTE_BLOCK_SHIFT {
+  return OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_SHIFT;
+}
+
++ (jint)BYTE_BLOCK_SIZE {
+  return OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_SIZE;
+}
+
++ (jint)BYTE_BLOCK_MASK {
+  return OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_MASK;
+}
+
++ (IOSIntArray *)NEXT_LEVEL_ARRAY {
+  return OrgApacheLuceneUtilByteBlockPool_NEXT_LEVEL_ARRAY;
+}
+
++ (IOSIntArray *)LEVEL_SIZE_ARRAY {
+  return OrgApacheLuceneUtilByteBlockPool_LEVEL_SIZE_ARRAY;
+}
+
++ (jint)FIRST_LEVEL_SIZE {
+  return OrgApacheLuceneUtilByteBlockPool_FIRST_LEVEL_SIZE;
+}
 
 - (instancetype)initWithOrgApacheLuceneUtilByteBlockPool_Allocator:(OrgApacheLuceneUtilByteBlockPool_Allocator *)allocator {
   OrgApacheLuceneUtilByteBlockPool_initWithOrgApacheLuceneUtilByteBlockPool_Allocator_(self, allocator);
@@ -83,8 +110,8 @@ jint OrgApacheLuceneUtilByteBlockPool_FIRST_LEVEL_SIZE_;
 
 - (void)nextBuffer {
   if (1 + bufferUpto_ == ((IOSObjectArray *) nil_chk(buffers_))->size_) {
-    IOSObjectArray *newBuffers = [IOSObjectArray arrayWithLength:OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(buffers_->size_ + 1, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_)) type:IOSClass_byteArray(1)];
-    JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(buffers_, 0, newBuffers, 0, buffers_->size_);
+    IOSObjectArray *newBuffers = [IOSObjectArray arrayWithLength:OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(buffers_->size_ + 1, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF)) type:IOSClass_byteArray(1)];
+    JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(buffers_, 0, newBuffers, 0, ((IOSObjectArray *) nil_chk(buffers_))->size_);
     JreStrongAssign(&buffers_, newBuffers);
   }
   JreStrongAssign(&buffer_, IOSObjectArray_Set(buffers_, 1 + bufferUpto_, [((OrgApacheLuceneUtilByteBlockPool_Allocator *) nil_chk(allocator_)) getByteBlock]));
@@ -104,8 +131,8 @@ jint OrgApacheLuceneUtilByteBlockPool_FIRST_LEVEL_SIZE_;
 - (jint)allocSliceWithByteArray:(IOSByteArray *)slice
                         withInt:(jint)upto {
   jint level = IOSByteArray_Get(nil_chk(slice), upto) & 15;
-  jint newLevel = IOSIntArray_Get(nil_chk(OrgApacheLuceneUtilByteBlockPool_NEXT_LEVEL_ARRAY_), level);
-  jint newSize = IOSIntArray_Get(nil_chk(OrgApacheLuceneUtilByteBlockPool_LEVEL_SIZE_ARRAY_), newLevel);
+  jint newLevel = IOSIntArray_Get(nil_chk(OrgApacheLuceneUtilByteBlockPool_NEXT_LEVEL_ARRAY), level);
+  jint newSize = IOSIntArray_Get(nil_chk(OrgApacheLuceneUtilByteBlockPool_LEVEL_SIZE_ARRAY), newLevel);
   if (byteUpto_ > OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_SIZE - newSize) {
     [self nextBuffer];
   }
@@ -189,7 +216,7 @@ jint OrgApacheLuceneUtilByteBlockPool_FIRST_LEVEL_SIZE_;
       pos = 0;
       bytesLength -= bytesToCopy;
       bytesOffset += bytesToCopy;
-      buffer = IOSObjectArray_Get(buffers_, ++bufferIndex);
+      buffer = IOSObjectArray_Get(nil_chk(buffers_), ++bufferIndex);
       overflow = overflow - OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_SIZE;
     }
   }
@@ -205,9 +232,9 @@ jint OrgApacheLuceneUtilByteBlockPool_FIRST_LEVEL_SIZE_;
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilByteBlockPool class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilByteBlockPool_NEXT_LEVEL_ARRAY_, [IOSIntArray newArrayWithInts:(jint[]){ 1, 2, 3, 4, 5, 6, 7, 8, 9, 9 } count:10]);
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilByteBlockPool_LEVEL_SIZE_ARRAY_, [IOSIntArray newArrayWithInts:(jint[]){ 5, 14, 20, 30, 40, 40, 80, 80, 120, 200 } count:10]);
-    OrgApacheLuceneUtilByteBlockPool_FIRST_LEVEL_SIZE_ = IOSIntArray_Get(OrgApacheLuceneUtilByteBlockPool_LEVEL_SIZE_ARRAY_, 0);
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilByteBlockPool_NEXT_LEVEL_ARRAY, [IOSIntArray newArrayWithInts:(jint[]){ 1, 2, 3, 4, 5, 6, 7, 8, 9, 9 } count:10]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilByteBlockPool_LEVEL_SIZE_ARRAY, [IOSIntArray newArrayWithInts:(jint[]){ 5, 14, 20, 30, 40, 40, 80, 80, 120, 200 } count:10]);
+    OrgApacheLuceneUtilByteBlockPool_FIRST_LEVEL_SIZE = IOSIntArray_Get(OrgApacheLuceneUtilByteBlockPool_LEVEL_SIZE_ARRAY, 0);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilByteBlockPool)
   }
 }
@@ -234,9 +261,9 @@ jint OrgApacheLuceneUtilByteBlockPool_FIRST_LEVEL_SIZE_;
     { "buffer_", NULL, 0x1, "[B", NULL, NULL, .constantValue.asLong = 0 },
     { "byteOffset_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "allocator_", NULL, 0x12, "Lorg.apache.lucene.util.ByteBlockPool$Allocator;", NULL, NULL, .constantValue.asLong = 0 },
-    { "NEXT_LEVEL_ARRAY_", NULL, 0x19, "[I", &OrgApacheLuceneUtilByteBlockPool_NEXT_LEVEL_ARRAY_, NULL, .constantValue.asLong = 0 },
-    { "LEVEL_SIZE_ARRAY_", NULL, 0x19, "[I", &OrgApacheLuceneUtilByteBlockPool_LEVEL_SIZE_ARRAY_, NULL, .constantValue.asLong = 0 },
-    { "FIRST_LEVEL_SIZE_", NULL, 0x19, "I", &OrgApacheLuceneUtilByteBlockPool_FIRST_LEVEL_SIZE_, NULL, .constantValue.asLong = 0 },
+    { "NEXT_LEVEL_ARRAY", "NEXT_LEVEL_ARRAY", 0x19, "[I", &OrgApacheLuceneUtilByteBlockPool_NEXT_LEVEL_ARRAY, NULL, .constantValue.asLong = 0 },
+    { "LEVEL_SIZE_ARRAY", "LEVEL_SIZE_ARRAY", 0x19, "[I", &OrgApacheLuceneUtilByteBlockPool_LEVEL_SIZE_ARRAY, NULL, .constantValue.asLong = 0 },
+    { "FIRST_LEVEL_SIZE", "FIRST_LEVEL_SIZE", 0x19, "I", &OrgApacheLuceneUtilByteBlockPool_FIRST_LEVEL_SIZE, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.ByteBlockPool$Allocator;", "Lorg.apache.lucene.util.ByteBlockPool$DirectAllocator;", "Lorg.apache.lucene.util.ByteBlockPool$DirectTrackingAllocator;"};
   static const J2ObjcClassInfo _OrgApacheLuceneUtilByteBlockPool = { 2, "ByteBlockPool", "org.apache.lucene.util", NULL, 0x11, 9, methods, 12, fields, 0, NULL, 3, inner_classes, NULL, NULL };
@@ -255,9 +282,11 @@ void OrgApacheLuceneUtilByteBlockPool_initWithOrgApacheLuceneUtilByteBlockPool_A
 }
 
 OrgApacheLuceneUtilByteBlockPool *new_OrgApacheLuceneUtilByteBlockPool_initWithOrgApacheLuceneUtilByteBlockPool_Allocator_(OrgApacheLuceneUtilByteBlockPool_Allocator *allocator) {
-  OrgApacheLuceneUtilByteBlockPool *self = [OrgApacheLuceneUtilByteBlockPool alloc];
-  OrgApacheLuceneUtilByteBlockPool_initWithOrgApacheLuceneUtilByteBlockPool_Allocator_(self, allocator);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilByteBlockPool, initWithOrgApacheLuceneUtilByteBlockPool_Allocator_, allocator)
+}
+
+OrgApacheLuceneUtilByteBlockPool *create_OrgApacheLuceneUtilByteBlockPool_initWithOrgApacheLuceneUtilByteBlockPool_Allocator_(OrgApacheLuceneUtilByteBlockPool_Allocator *allocator) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilByteBlockPool, initWithOrgApacheLuceneUtilByteBlockPool_Allocator_, allocator)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilByteBlockPool)
@@ -277,7 +306,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilByteBlockPool)
 }
 
 - (void)recycleByteBlocksWithJavaUtilList:(id<JavaUtilList>)blocks {
-  IOSObjectArray *b = [blocks toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[((id<JavaUtilList>) nil_chk(blocks)) size] type:IOSClass_byteArray(1)]];
+  IOSObjectArray *b = [((id<JavaUtilList>) nil_chk(blocks)) toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[blocks size] type:IOSClass_byteArray(1)]];
   [self recycleByteBlocksWithByteArray2:b withInt:0 withInt:((IOSObjectArray *) nil_chk(b))->size_];
 }
 
@@ -289,7 +318,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilByteBlockPool)
   static const J2ObjcMethodInfo methods[] = {
     { "initWithInt:", "Allocator", NULL, 0x1, NULL, NULL },
     { "recycleByteBlocksWithByteArray2:withInt:withInt:", "recycleByteBlocks", "V", 0x401, NULL, NULL },
-    { "recycleByteBlocksWithJavaUtilList:", "recycleByteBlocks", "V", 0x1, NULL, NULL },
+    { "recycleByteBlocksWithJavaUtilList:", "recycleByteBlocks", "V", 0x1, NULL, "(Ljava/util/List<[LB;>;)V" },
     { "getByteBlock", NULL, "[B", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -344,9 +373,11 @@ void OrgApacheLuceneUtilByteBlockPool_DirectAllocator_init(OrgApacheLuceneUtilBy
 }
 
 OrgApacheLuceneUtilByteBlockPool_DirectAllocator *new_OrgApacheLuceneUtilByteBlockPool_DirectAllocator_init() {
-  OrgApacheLuceneUtilByteBlockPool_DirectAllocator *self = [OrgApacheLuceneUtilByteBlockPool_DirectAllocator alloc];
-  OrgApacheLuceneUtilByteBlockPool_DirectAllocator_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilByteBlockPool_DirectAllocator, init)
+}
+
+OrgApacheLuceneUtilByteBlockPool_DirectAllocator *create_OrgApacheLuceneUtilByteBlockPool_DirectAllocator_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilByteBlockPool_DirectAllocator, init)
 }
 
 void OrgApacheLuceneUtilByteBlockPool_DirectAllocator_initWithInt_(OrgApacheLuceneUtilByteBlockPool_DirectAllocator *self, jint blockSize) {
@@ -354,9 +385,11 @@ void OrgApacheLuceneUtilByteBlockPool_DirectAllocator_initWithInt_(OrgApacheLuce
 }
 
 OrgApacheLuceneUtilByteBlockPool_DirectAllocator *new_OrgApacheLuceneUtilByteBlockPool_DirectAllocator_initWithInt_(jint blockSize) {
-  OrgApacheLuceneUtilByteBlockPool_DirectAllocator *self = [OrgApacheLuceneUtilByteBlockPool_DirectAllocator alloc];
-  OrgApacheLuceneUtilByteBlockPool_DirectAllocator_initWithInt_(self, blockSize);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilByteBlockPool_DirectAllocator, initWithInt_, blockSize)
+}
+
+OrgApacheLuceneUtilByteBlockPool_DirectAllocator *create_OrgApacheLuceneUtilByteBlockPool_DirectAllocator_initWithInt_(jint blockSize) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilByteBlockPool_DirectAllocator, initWithInt_, blockSize)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilByteBlockPool_DirectAllocator)
@@ -414,9 +447,11 @@ void OrgApacheLuceneUtilByteBlockPool_DirectTrackingAllocator_initWithOrgApacheL
 }
 
 OrgApacheLuceneUtilByteBlockPool_DirectTrackingAllocator *new_OrgApacheLuceneUtilByteBlockPool_DirectTrackingAllocator_initWithOrgApacheLuceneUtilCounter_(OrgApacheLuceneUtilCounter *bytesUsed) {
-  OrgApacheLuceneUtilByteBlockPool_DirectTrackingAllocator *self = [OrgApacheLuceneUtilByteBlockPool_DirectTrackingAllocator alloc];
-  OrgApacheLuceneUtilByteBlockPool_DirectTrackingAllocator_initWithOrgApacheLuceneUtilCounter_(self, bytesUsed);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilByteBlockPool_DirectTrackingAllocator, initWithOrgApacheLuceneUtilCounter_, bytesUsed)
+}
+
+OrgApacheLuceneUtilByteBlockPool_DirectTrackingAllocator *create_OrgApacheLuceneUtilByteBlockPool_DirectTrackingAllocator_initWithOrgApacheLuceneUtilCounter_(OrgApacheLuceneUtilCounter *bytesUsed) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilByteBlockPool_DirectTrackingAllocator, initWithOrgApacheLuceneUtilCounter_, bytesUsed)
 }
 
 void OrgApacheLuceneUtilByteBlockPool_DirectTrackingAllocator_initWithInt_withOrgApacheLuceneUtilCounter_(OrgApacheLuceneUtilByteBlockPool_DirectTrackingAllocator *self, jint blockSize, OrgApacheLuceneUtilCounter *bytesUsed) {
@@ -425,9 +460,11 @@ void OrgApacheLuceneUtilByteBlockPool_DirectTrackingAllocator_initWithInt_withOr
 }
 
 OrgApacheLuceneUtilByteBlockPool_DirectTrackingAllocator *new_OrgApacheLuceneUtilByteBlockPool_DirectTrackingAllocator_initWithInt_withOrgApacheLuceneUtilCounter_(jint blockSize, OrgApacheLuceneUtilCounter *bytesUsed) {
-  OrgApacheLuceneUtilByteBlockPool_DirectTrackingAllocator *self = [OrgApacheLuceneUtilByteBlockPool_DirectTrackingAllocator alloc];
-  OrgApacheLuceneUtilByteBlockPool_DirectTrackingAllocator_initWithInt_withOrgApacheLuceneUtilCounter_(self, blockSize, bytesUsed);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilByteBlockPool_DirectTrackingAllocator, initWithInt_withOrgApacheLuceneUtilCounter_, blockSize, bytesUsed)
+}
+
+OrgApacheLuceneUtilByteBlockPool_DirectTrackingAllocator *create_OrgApacheLuceneUtilByteBlockPool_DirectTrackingAllocator_initWithInt_withOrgApacheLuceneUtilCounter_(jint blockSize, OrgApacheLuceneUtilCounter *bytesUsed) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilByteBlockPool_DirectTrackingAllocator, initWithInt_withOrgApacheLuceneUtilCounter_, blockSize, bytesUsed)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilByteBlockPool_DirectTrackingAllocator)

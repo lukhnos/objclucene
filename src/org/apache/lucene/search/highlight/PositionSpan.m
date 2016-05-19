@@ -35,9 +35,11 @@ void OrgApacheLuceneSearchHighlightPositionSpan_initWithInt_withInt_(OrgApacheLu
 }
 
 OrgApacheLuceneSearchHighlightPositionSpan *new_OrgApacheLuceneSearchHighlightPositionSpan_initWithInt_withInt_(jint start, jint end) {
-  OrgApacheLuceneSearchHighlightPositionSpan *self = [OrgApacheLuceneSearchHighlightPositionSpan alloc];
-  OrgApacheLuceneSearchHighlightPositionSpan_initWithInt_withInt_(self, start, end);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchHighlightPositionSpan, initWithInt_withInt_, start, end)
+}
+
+OrgApacheLuceneSearchHighlightPositionSpan *create_OrgApacheLuceneSearchHighlightPositionSpan_initWithInt_withInt_(jint start, jint end) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchHighlightPositionSpan, initWithInt_withInt_, start, end)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchHighlightPositionSpan)

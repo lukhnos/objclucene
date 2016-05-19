@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_RESTRICT
-#define OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester")
+#ifdef RESTRICT_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester 0
 #else
-#define OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester 1
 #endif
-#undef OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester
 
-#if !defined (_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_) && (OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_INCLUDE_ALL || OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_INCLUDE)
-#define _OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_
+#if !defined (OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester || defined(INCLUDE_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester))
+#define OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_
 
-#define OrgApacheLuceneSearchSuggestLookup_RESTRICT 1
-#define OrgApacheLuceneSearchSuggestLookup_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSuggestLookup 1
+#define INCLUDE_OrgApacheLuceneSearchSuggestLookup 1
 #include "org/apache/lucene/search/suggest/Lookup.h"
 
 @class OrgApacheLuceneAnalysisAnalyzer;
@@ -30,25 +30,81 @@
 @protocol JavaUtilSet;
 @protocol OrgApacheLuceneSearchSuggestInputIterator;
 
-#define OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_VERSION_START 0
-#define OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_VERSION_CURRENT 0
-#define OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_DEFAULT_GRAMS 2
-#define OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_ALPHA 0.4
-#define OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_DEFAULT_SEPARATOR 30
-
+/*!
+ @brief Builds an ngram model from the text sent to <code>build</code>
+  and predicts based on the last grams-1 tokens in
+ the request sent to <code>lookup</code>.
+ This tries to
+ handle the "long tail" of suggestions for when the
+ incoming query is a never before seen query string.
+ <p>Likely this suggester would only be used as a
+ fallback, when the primary suggester fails to find
+ any suggestions.
+ <p>Note that the weight for each suggestion is unused,
+ and the suggestions are the analyzed forms (so your
+ analysis process should normally be very "light").
+ <p>This uses the stupid backoff language model to smooth
+ scores across ngram models; see
+ "Large language models in machine translation",
+ http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.76.1126
+ for details.
+ <p> From <code>lookup</code>, the key of each result is the
+ ngram token; the value is Long.MAX_VALUE * score (fixed
+ point, cast to long).  Divide by Long.MAX_VALUE to get
+ the score back, which ranges from 0.0 to 1.0.
+ onlyMorePopular is unused.
+ */
 @interface OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester : OrgApacheLuceneSearchSuggestLookup
+
++ (NSString *)CODEC_NAME;
+
++ (jint)VERSION_START;
+
++ (jint)VERSION_CURRENT;
+
++ (jint)DEFAULT_GRAMS;
+
++ (jdouble)ALPHA;
+
++ (jbyte)DEFAULT_SEPARATOR;
+
++ (id<JavaUtilComparator>)weightComparator;
 
 #pragma mark Public
 
+/*!
+ @brief Instantiate, using the provided analyzer for both
+ indexing and lookup, using bigram model by default.
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
 
+/*!
+ @brief Instantiate, using the provided indexing and lookup
+ analyzers, using bigram model by default.
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
                     withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer;
 
+/*!
+ @brief Instantiate, using the provided indexing and lookup
+ analyzers, with the specified model (2
+ = bigram, 3 = trigram, etc.).
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
                     withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer
                                                 withInt:(jint)grams;
 
+/*!
+ @brief Instantiate, using the provided indexing and lookup
+ analyzers, and specified model (2 = bigram, 3 =
+ trigram ,etc.).
+ The separator is passed to <code>ShingleFilter.setTokenSeparator</code>
+  to join multiple
+ tokens into a single ngram token; it must be an ascii
+ (7-bit-clean) byte.  No input tokens should have this
+ byte, otherwise <code>IllegalArgumentException</code> is
+ thrown. 
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
                     withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer
                                                 withInt:(jint)grams
@@ -56,9 +112,19 @@
 
 - (void)buildWithOrgApacheLuceneSearchSuggestInputIterator:(id<OrgApacheLuceneSearchSuggestInputIterator>)iterator;
 
+/*!
+ @brief Build the suggest index, using up to the specified
+ amount of temporary RAM while building.
+ Note that
+ the weights for the suggestions are ignored. 
+ */
 - (void)buildWithOrgApacheLuceneSearchSuggestInputIterator:(id<OrgApacheLuceneSearchSuggestInputIterator>)iterator
                                                 withDouble:(jdouble)ramBufferSizeMB;
 
+/*!
+ @brief Returns the weight associated with an input string,
+ or null if it does not exist.
+ */
 - (id)getWithJavaLangCharSequence:(id<JavaLangCharSequence>)key;
 
 - (id<JavaUtilCollection>)getChildResources;
@@ -71,6 +137,9 @@
                                        withBoolean:(jboolean)onlyMorePopular
                                            withInt:(jint)num;
 
+/*!
+ @brief Lookup, without any context.
+ */
 - (id<JavaUtilList>)lookupWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
                                            withInt:(jint)num;
 
@@ -79,10 +148,16 @@
                                        withBoolean:(jboolean)onlyMorePopular
                                            withInt:(jint)num;
 
+/*!
+ @brief Retrieve suggestions.
+ */
 - (id<JavaUtilList>)lookupWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
                                    withJavaUtilSet:(id<JavaUtilSet>)contexts
                                            withInt:(jint)num;
 
+/*!
+ @brief Returns byte size of the underlying FST.
+ */
 - (jlong)ramBytesUsed;
 
 - (jboolean)storeWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)output;
@@ -91,40 +166,87 @@
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_CODEC_NAME_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester, CODEC_NAME_, NSString *)
+/*!
+ @brief Codec name used in the header for the saved model.
+ */
+inline NSString *OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_get_CODEC_NAME();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_CODEC_NAME;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester, CODEC_NAME, NSString *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester, VERSION_START, jint)
+/*!
+ @brief Initial version of the the saved model file format.
+ */
+inline jint OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_get_VERSION_START();
+#define OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_VERSION_START 0
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester, VERSION_START, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester, VERSION_CURRENT, jint)
+/*!
+ @brief Current version of the the saved model file format.
+ */
+inline jint OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_get_VERSION_CURRENT();
+#define OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_VERSION_CURRENT 0
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester, VERSION_CURRENT, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester, DEFAULT_GRAMS, jint)
+/*!
+ @brief By default we use a bigram model.
+ */
+inline jint OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_get_DEFAULT_GRAMS();
+#define OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_DEFAULT_GRAMS 2
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester, DEFAULT_GRAMS, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester, ALPHA, jdouble)
+/*!
+ @brief The constant used for backoff smoothing; during
+ lookup, this means that if a given trigram did not
+ occur, and we backoff to the bigram, the overall score
+ will be 0.4 times what the bigram model would have
+ assigned.
+ */
+inline jdouble OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_get_ALPHA();
+#define OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_ALPHA 0.4
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester, ALPHA, jdouble)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester, DEFAULT_SEPARATOR, jbyte)
+/*!
+ @brief The default character used to join multiple tokens
+ into a single ngram token.
+ The input tokens produced
+ by the analyzer must not contain this character. 
+ */
+inline jbyte OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_get_DEFAULT_SEPARATOR();
+#define OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_DEFAULT_SEPARATOR 30
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester, DEFAULT_SEPARATOR, jbyte)
 
-FOUNDATION_EXPORT id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_weightComparator_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester, weightComparator_, id<JavaUtilComparator>)
+inline id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_get_weightComparator();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_weightComparator;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester, weightComparator, id<JavaUtilComparator>)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *self, OrgApacheLuceneAnalysisAnalyzer *analyzer);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *new_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *analyzer) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *create_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *analyzer);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *self, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *new_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *create_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer);
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *self, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint grams);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *new_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_(OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint grams) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *create_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_(OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint grams);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withByte_(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *self, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint grams, jbyte separator);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *new_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withByte_(OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint grams, jbyte separator) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *create_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withByte_(OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint grams, jbyte separator);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester")

@@ -5,23 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilPrintStreamInfoStream_INCLUDE_ALL")
-#if OrgApacheLuceneUtilPrintStreamInfoStream_RESTRICT
-#define OrgApacheLuceneUtilPrintStreamInfoStream_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilPrintStreamInfoStream")
+#ifdef RESTRICT_OrgApacheLuceneUtilPrintStreamInfoStream
+#define INCLUDE_ALL_OrgApacheLuceneUtilPrintStreamInfoStream 0
 #else
-#define OrgApacheLuceneUtilPrintStreamInfoStream_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilPrintStreamInfoStream 1
 #endif
-#undef OrgApacheLuceneUtilPrintStreamInfoStream_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilPrintStreamInfoStream
 
-#if !defined (_OrgApacheLuceneUtilPrintStreamInfoStream_) && (OrgApacheLuceneUtilPrintStreamInfoStream_INCLUDE_ALL || OrgApacheLuceneUtilPrintStreamInfoStream_INCLUDE)
-#define _OrgApacheLuceneUtilPrintStreamInfoStream_
+#if !defined (OrgApacheLuceneUtilPrintStreamInfoStream_) && (INCLUDE_ALL_OrgApacheLuceneUtilPrintStreamInfoStream || defined(INCLUDE_OrgApacheLuceneUtilPrintStreamInfoStream))
+#define OrgApacheLuceneUtilPrintStreamInfoStream_
 
-#define OrgApacheLuceneUtilInfoStream_RESTRICT 1
-#define OrgApacheLuceneUtilInfoStream_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilInfoStream 1
+#define INCLUDE_OrgApacheLuceneUtilInfoStream 1
 #include "org/apache/lucene/util/InfoStream.h"
 
 @class JavaIoPrintStream;
 
+/*!
+ @brief InfoStream implementation over a <code>PrintStream</code>
+ such as <code>System.out</code>.
+ */
 @interface OrgApacheLuceneUtilPrintStreamInfoStream : OrgApacheLuceneUtilInfoStream {
  @public
   jint messageID_;
@@ -46,6 +50,9 @@
 
 #pragma mark Protected
 
+/*!
+ @brief Returns the current time as string for insertion into log messages.
+ */
 - (NSString *)getTimestamp;
 
 @end
@@ -58,12 +65,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilPrintStreamInfoStream_initWithJavaIoPr
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPrintStreamInfoStream *new_OrgApacheLuceneUtilPrintStreamInfoStream_initWithJavaIoPrintStream_(JavaIoPrintStream *stream) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilPrintStreamInfoStream *create_OrgApacheLuceneUtilPrintStreamInfoStream_initWithJavaIoPrintStream_(JavaIoPrintStream *stream);
+
 FOUNDATION_EXPORT void OrgApacheLuceneUtilPrintStreamInfoStream_initWithJavaIoPrintStream_withInt_(OrgApacheLuceneUtilPrintStreamInfoStream *self, JavaIoPrintStream *stream, jint messageID);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPrintStreamInfoStream *new_OrgApacheLuceneUtilPrintStreamInfoStream_initWithJavaIoPrintStream_withInt_(JavaIoPrintStream *stream, jint messageID) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilPrintStreamInfoStream *create_OrgApacheLuceneUtilPrintStreamInfoStream_initWithJavaIoPrintStream_withInt_(JavaIoPrintStream *stream, jint messageID);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPrintStreamInfoStream)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilPrintStreamInfoStream_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPrintStreamInfoStream")

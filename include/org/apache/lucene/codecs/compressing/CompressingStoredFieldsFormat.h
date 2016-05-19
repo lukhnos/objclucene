@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat_RESTRICT
-#define OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat")
+#ifdef RESTRICT_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat
+#define INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat 0
 #else
-#define OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat 1
 #endif
-#undef OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat
 
-#if !defined (_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat_) && (OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat_INCLUDE_ALL || OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat_INCLUDE)
-#define _OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat_
+#if !defined (OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat_) && (INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat || defined(INCLUDE_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat))
+#define OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat_
 
-#define OrgApacheLuceneCodecsStoredFieldsFormat_RESTRICT 1
-#define OrgApacheLuceneCodecsStoredFieldsFormat_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneCodecsStoredFieldsFormat 1
+#define INCLUDE_OrgApacheLuceneCodecsStoredFieldsFormat 1
 #include "org/apache/lucene/codecs/StoredFieldsFormat.h"
 
 @class OrgApacheLuceneCodecsCompressingCompressionMode;
@@ -28,16 +28,66 @@
 @class OrgApacheLuceneStoreDirectory;
 @class OrgApacheLuceneStoreIOContext;
 
+/*!
+ @brief A <code>StoredFieldsFormat</code> that compresses documents in chunks in
+ order to improve the compression ratio.
+ <p>
+ For a chunk size of <tt>chunkSize</tt> bytes, this <code>StoredFieldsFormat</code>
+ does not support documents larger than (<tt>2<sup>31</sup> - chunkSize</tt>)
+ bytes.
+ <p>
+ For optimal performance, you should use a <code>MergePolicy</code> that returns
+ segments that have the biggest byte size first.
+ */
 @interface OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat : OrgApacheLuceneCodecsStoredFieldsFormat
 
 #pragma mark Public
 
+/*!
+ @brief Create a new <code>CompressingStoredFieldsFormat</code> with an empty segment 
+ suffix.
+ - seealso: CompressingStoredFieldsFormat#CompressingStoredFieldsFormat(String,String,CompressionMode,int,int,int)
+ */
 - (instancetype)initWithNSString:(NSString *)formatName
 withOrgApacheLuceneCodecsCompressingCompressionMode:(OrgApacheLuceneCodecsCompressingCompressionMode *)compressionMode
                          withInt:(jint)chunkSize
                          withInt:(jint)maxDocsPerChunk
                          withInt:(jint)blockSize;
 
+/*!
+ @brief Create a new <code>CompressingStoredFieldsFormat</code>.
+ <p>
+ <code>formatName</code> is the name of the format. This name will be used
+ in the file formats to perform
+ <code>codec header checks</code>.
+ <p>
+ <code>segmentSuffix</code> is the segment suffix. This suffix is added to 
+ the result file name only if it's not the empty string.
+ <p>
+ The <code>compressionMode</code> parameter allows you to choose between
+ compression algorithms that have various compression and decompression
+ speeds so that you can pick the one that best fits your indexing and
+ searching throughput. You should never instantiate two
+ <code>CompressingStoredFieldsFormat</code>s that have the same name but
+ different <code>CompressionMode</code>s.
+ <p>
+ <code>chunkSize</code> is the minimum byte size of a chunk of documents.
+ A value of <code>1</code> can make sense if there is redundancy across
+ fields.
+ <code>maxDocsPerChunk</code> is an upperbound on how many docs may be stored
+ in a single chunk. This is to bound the cpu costs for highly compressible data.
+ <p>
+ Higher values of <code>chunkSize</code> should improve the compression
+ ratio but will require more memory at indexing time and might make document
+ loading a little slower (depending on the size of your OS cache compared
+ to the size of your index).
+ @param formatName the name of the <code>StoredFieldsFormat</code>
+ @param compressionMode the <code>CompressionMode</code> to use
+ @param chunkSize the minimum number of bytes of a single chunk of stored documents
+ @param maxDocsPerChunk the maximum number of documents in a single chunk
+ @param blockSize the number of chunks to store in an index block
+ - seealso: CompressionMode
+ */
 - (instancetype)initWithNSString:(NSString *)formatName
                     withNSString:(NSString *)segmentSuffix
 withOrgApacheLuceneCodecsCompressingCompressionMode:(OrgApacheLuceneCodecsCompressingCompressionMode *)compressionMode
@@ -64,12 +114,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFo
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat *new_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat_initWithNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_withInt_withInt_withInt_(NSString *formatName, OrgApacheLuceneCodecsCompressingCompressionMode *compressionMode, jint chunkSize, jint maxDocsPerChunk, jint blockSize) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat *create_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat_initWithNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_withInt_withInt_withInt_(NSString *formatName, OrgApacheLuceneCodecsCompressingCompressionMode *compressionMode, jint chunkSize, jint maxDocsPerChunk, jint blockSize);
+
 FOUNDATION_EXPORT void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat_initWithNSString_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_withInt_withInt_withInt_(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat *self, NSString *formatName, NSString *segmentSuffix, OrgApacheLuceneCodecsCompressingCompressionMode *compressionMode, jint chunkSize, jint maxDocsPerChunk, jint blockSize);
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat *new_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat_initWithNSString_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_withInt_withInt_withInt_(NSString *formatName, NSString *segmentSuffix, OrgApacheLuceneCodecsCompressingCompressionMode *compressionMode, jint chunkSize, jint maxDocsPerChunk, jint blockSize) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat *create_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat_initWithNSString_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_withInt_withInt_withInt_(NSString *formatName, NSString *segmentSuffix, OrgApacheLuceneCodecsCompressingCompressionMode *compressionMode, jint chunkSize, jint maxDocsPerChunk, jint blockSize);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsFormat")

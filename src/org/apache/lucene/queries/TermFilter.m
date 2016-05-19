@@ -3,9 +3,10 @@
 //  source: ./queries/src/java/org/apache/lucene/queries/TermFilter.java
 //
 
-#include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Deprecated.h"
+#include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/index/Term.h"
 #include "org/apache/lucene/queries/TermFilter.h"
 #include "org/apache/lucene/search/Query.h"
@@ -24,7 +25,7 @@
 }
 
 + (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -39,13 +40,15 @@
 @end
 
 void OrgApacheLuceneQueriesTermFilter_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneQueriesTermFilter *self, OrgApacheLuceneIndexTerm *term) {
-  OrgApacheLuceneSearchQueryWrapperFilter_initWithOrgApacheLuceneSearchQuery_(self, [new_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_(term) autorelease]);
+  OrgApacheLuceneSearchQueryWrapperFilter_initWithOrgApacheLuceneSearchQuery_(self, create_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_(term));
 }
 
 OrgApacheLuceneQueriesTermFilter *new_OrgApacheLuceneQueriesTermFilter_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexTerm *term) {
-  OrgApacheLuceneQueriesTermFilter *self = [OrgApacheLuceneQueriesTermFilter alloc];
-  OrgApacheLuceneQueriesTermFilter_initWithOrgApacheLuceneIndexTerm_(self, term);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesTermFilter, initWithOrgApacheLuceneIndexTerm_, term)
+}
+
+OrgApacheLuceneQueriesTermFilter *create_OrgApacheLuceneQueriesTermFilter_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexTerm *term) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesTermFilter, initWithOrgApacheLuceneIndexTerm_, term)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesTermFilter)

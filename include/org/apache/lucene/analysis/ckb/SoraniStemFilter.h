@@ -5,23 +5,32 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCkbSoraniStemFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCkbSoraniStemFilter_RESTRICT
-#define OrgApacheLuceneAnalysisCkbSoraniStemFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCkbSoraniStemFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCkbSoraniStemFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCkbSoraniStemFilter 0
 #else
-#define OrgApacheLuceneAnalysisCkbSoraniStemFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCkbSoraniStemFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisCkbSoraniStemFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCkbSoraniStemFilter
 
-#if !defined (_OrgApacheLuceneAnalysisCkbSoraniStemFilter_) && (OrgApacheLuceneAnalysisCkbSoraniStemFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisCkbSoraniStemFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisCkbSoraniStemFilter_
+#if !defined (OrgApacheLuceneAnalysisCkbSoraniStemFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCkbSoraniStemFilter || defined(INCLUDE_OrgApacheLuceneAnalysisCkbSoraniStemFilter))
+#define OrgApacheLuceneAnalysisCkbSoraniStemFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief A <code>TokenFilter</code> that applies <code>SoraniStemmer</code> to stem Sorani words.
+ <p>
+ To prevent terms from being stemmed use an instance of
+ <code>SetKeywordMarkerFilter</code> or a custom <code>TokenFilter</code> that sets
+ the <code>KeywordAttribute</code> before this <code>TokenStream</code>.
+ </p>
+ - seealso: SetKeywordMarkerFilter
+ */
 @interface OrgApacheLuceneAnalysisCkbSoraniStemFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
@@ -38,8 +47,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCkbSoraniStemFilter_initWithOrgApa
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCkbSoraniStemFilter *new_OrgApacheLuceneAnalysisCkbSoraniStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCkbSoraniStemFilter *create_OrgApacheLuceneAnalysisCkbSoraniStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCkbSoraniStemFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCkbSoraniStemFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCkbSoraniStemFilter")

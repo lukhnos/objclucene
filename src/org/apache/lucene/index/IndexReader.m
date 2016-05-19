@@ -9,7 +9,6 @@
 #include "java/lang/Error.h"
 #include "java/lang/IllegalStateException.h"
 #include "java/lang/System.h"
-#include "java/lang/Throwable.h"
 #include "java/util/Collections.h"
 #include "java/util/LinkedHashSet.h"
 #include "java/util/List.h"
@@ -38,7 +37,7 @@
   id<JavaUtilSet> parentReaders_;
 }
 
-- (void)notifyReaderClosedListenersWithJavaLangThrowable:(JavaLangThrowable *)th;
+- (void)notifyReaderClosedListenersWithNSException:(NSException *)th;
 
 - (void)reportCloseToParentReaders;
 
@@ -48,7 +47,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexIndexReader, refCount_, JavaUtilConcurre
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexIndexReader, readerClosedListeners_, id<JavaUtilSet>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexIndexReader, parentReaders_, id<JavaUtilSet>)
 
-__attribute__((unused)) static void OrgApacheLuceneIndexIndexReader_notifyReaderClosedListenersWithJavaLangThrowable_(OrgApacheLuceneIndexIndexReader *self, JavaLangThrowable *th);
+__attribute__((unused)) static void OrgApacheLuceneIndexIndexReader_notifyReaderClosedListenersWithNSException_(OrgApacheLuceneIndexIndexReader *self, NSException *th);
 
 __attribute__((unused)) static void OrgApacheLuceneIndexIndexReader_reportCloseToParentReaders(OrgApacheLuceneIndexIndexReader *self);
 
@@ -88,8 +87,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((id<JavaUtilSet>) nil_chk(parentReaders_)) addWithId:reader];
 }
 
-- (void)notifyReaderClosedListenersWithJavaLangThrowable:(JavaLangThrowable *)th {
-  OrgApacheLuceneIndexIndexReader_notifyReaderClosedListenersWithJavaLangThrowable_(self, th);
+- (void)notifyReaderClosedListenersWithNSException:(NSException *)th {
+  OrgApacheLuceneIndexIndexReader_notifyReaderClosedListenersWithNSException_(self, th);
 }
 
 - (void)reportCloseToParentReaders {
@@ -138,7 +137,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   if (vectors == nil) {
     return nil;
   }
-  return [((OrgApacheLuceneIndexFields *) nil_chk(vectors)) termsWithNSString:field];
+  return [vectors termsWithNSString:field];
 }
 
 - (jint)numDocs {
@@ -164,14 +163,14 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 }
 
 - (OrgApacheLuceneDocumentDocument *)documentWithInt:(jint)docID {
-  OrgApacheLuceneDocumentDocumentStoredFieldVisitor *visitor = [new_OrgApacheLuceneDocumentDocumentStoredFieldVisitor_init() autorelease];
+  OrgApacheLuceneDocumentDocumentStoredFieldVisitor *visitor = create_OrgApacheLuceneDocumentDocumentStoredFieldVisitor_init();
   [self documentWithInt:docID withOrgApacheLuceneIndexStoredFieldVisitor:visitor];
   return [visitor getDocument];
 }
 
 - (OrgApacheLuceneDocumentDocument *)documentWithInt:(jint)docID
                                      withJavaUtilSet:(id<JavaUtilSet>)fieldsToLoad {
-  OrgApacheLuceneDocumentDocumentStoredFieldVisitor *visitor = [new_OrgApacheLuceneDocumentDocumentStoredFieldVisitor_initWithJavaUtilSet_(fieldsToLoad) autorelease];
+  OrgApacheLuceneDocumentDocumentStoredFieldVisitor *visitor = create_OrgApacheLuceneDocumentDocumentStoredFieldVisitor_initWithJavaUtilSet_(fieldsToLoad);
   [self documentWithInt:docID withOrgApacheLuceneIndexStoredFieldVisitor:visitor];
   return [visitor getDocument];
 }
@@ -255,7 +254,7 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
     { "addReaderClosedListenerWithOrgApacheLuceneIndexIndexReader_ReaderClosedListener:", "addReaderClosedListener", "V", 0x11, NULL, NULL },
     { "removeReaderClosedListenerWithOrgApacheLuceneIndexIndexReader_ReaderClosedListener:", "removeReaderClosedListener", "V", 0x11, NULL, NULL },
     { "registerParentReaderWithOrgApacheLuceneIndexIndexReader:", "registerParentReader", "V", 0x11, NULL, NULL },
-    { "notifyReaderClosedListenersWithJavaLangThrowable:", "notifyReaderClosedListeners", "V", 0x2, NULL, NULL },
+    { "notifyReaderClosedListenersWithNSException:", "notifyReaderClosedListeners", "V", 0x2, NULL, NULL },
     { "reportCloseToParentReaders", NULL, "V", 0x2, NULL, NULL },
     { "getRefCount", NULL, "I", 0x11, NULL, NULL },
     { "incRef", NULL, "V", 0x11, NULL, NULL },
@@ -271,12 +270,12 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
     { "numDeletedDocs", NULL, "I", 0x11, NULL, NULL },
     { "documentWithInt:withOrgApacheLuceneIndexStoredFieldVisitor:", "document", "V", 0x401, "Ljava.io.IOException;", NULL },
     { "documentWithInt:", "document", "Lorg.apache.lucene.document.Document;", 0x11, "Ljava.io.IOException;", NULL },
-    { "documentWithInt:withJavaUtilSet:", "document", "Lorg.apache.lucene.document.Document;", 0x11, "Ljava.io.IOException;", NULL },
+    { "documentWithInt:withJavaUtilSet:", "document", "Lorg.apache.lucene.document.Document;", 0x11, "Ljava.io.IOException;", "(ILjava/util/Set<Ljava/lang/String;>;)Lorg/apache/lucene/document/Document;" },
     { "hasDeletions", NULL, "Z", 0x1, NULL, NULL },
     { "close", NULL, "V", 0x31, "Ljava.io.IOException;", NULL },
     { "doClose", NULL, "V", 0x404, "Ljava.io.IOException;", NULL },
     { "getContext", NULL, "Lorg.apache.lucene.index.IndexReaderContext;", 0x401, NULL, NULL },
-    { "leaves", NULL, "Ljava.util.List;", 0x11, NULL, NULL },
+    { "leaves", NULL, "Ljava.util.List;", 0x11, NULL, "()Ljava/util/List<Lorg/apache/lucene/index/LeafReaderContext;>;" },
     { "getCoreCacheKey", NULL, "Ljava.lang.Object;", 0x1, NULL, NULL },
     { "getCombinedCoreAndDeletesKey", NULL, "Ljava.lang.Object;", 0x1, NULL, NULL },
     { "docFreqWithOrgApacheLuceneIndexTerm:", "docFreq", "I", 0x401, "Ljava.io.IOException;", NULL },
@@ -304,27 +303,27 @@ void OrgApacheLuceneIndexIndexReader_init(OrgApacheLuceneIndexIndexReader *self)
   self->closed_ = false;
   self->closedByChild_ = false;
   JreStrongAssignAndConsume(&self->refCount_, new_JavaUtilConcurrentAtomicAtomicInteger_initWithInt_(1));
-  JreStrongAssign(&self->readerClosedListeners_, JavaUtilCollections_synchronizedSetWithJavaUtilSet_([new_JavaUtilLinkedHashSet_init() autorelease]));
-  JreStrongAssign(&self->parentReaders_, JavaUtilCollections_synchronizedSetWithJavaUtilSet_(JavaUtilCollections_newSetFromMapWithJavaUtilMap_([new_JavaUtilWeakHashMap_init() autorelease])));
-  if (!([self isKindOfClass:[OrgApacheLuceneIndexCompositeReader class]] || [self isKindOfClass:[OrgApacheLuceneIndexLeafReader class]])) @throw [new_JavaLangError_initWithNSString_(@"IndexReader should never be directly extended, subclass LeafReader or CompositeReader instead.") autorelease];
+  JreStrongAssign(&self->readerClosedListeners_, JavaUtilCollections_synchronizedSetWithJavaUtilSet_(create_JavaUtilLinkedHashSet_init()));
+  JreStrongAssign(&self->parentReaders_, JavaUtilCollections_synchronizedSetWithJavaUtilSet_(JavaUtilCollections_newSetFromMapWithJavaUtilMap_(create_JavaUtilWeakHashMap_init())));
+  if (!([self isKindOfClass:[OrgApacheLuceneIndexCompositeReader class]] || [self isKindOfClass:[OrgApacheLuceneIndexLeafReader class]])) @throw create_JavaLangError_initWithNSString_(@"IndexReader should never be directly extended, subclass LeafReader or CompositeReader instead.");
 }
 
-void OrgApacheLuceneIndexIndexReader_notifyReaderClosedListenersWithJavaLangThrowable_(OrgApacheLuceneIndexIndexReader *self, JavaLangThrowable *th) {
+void OrgApacheLuceneIndexIndexReader_notifyReaderClosedListenersWithNSException_(OrgApacheLuceneIndexIndexReader *self, NSException *th) {
   @synchronized(self->readerClosedListeners_) {
     for (id<OrgApacheLuceneIndexIndexReader_ReaderClosedListener> __strong listener in nil_chk(self->readerClosedListeners_)) {
       @try {
         [((id<OrgApacheLuceneIndexIndexReader_ReaderClosedListener>) nil_chk(listener)) onCloseWithOrgApacheLuceneIndexIndexReader:self];
       }
-      @catch (JavaLangThrowable *t) {
+      @catch (NSException *t) {
         if (th == nil) {
           th = t;
         }
         else {
-          [th addSuppressedWithJavaLangThrowable:t];
+          [th addSuppressedWithNSException:t];
         }
       }
     }
-    OrgApacheLuceneUtilIOUtils_reThrowUncheckedWithJavaLangThrowable_(th);
+    OrgApacheLuceneUtilIOUtils_reThrowUncheckedWithNSException_(th);
   }
 }
 
@@ -350,16 +349,16 @@ jboolean OrgApacheLuceneIndexIndexReader_tryIncRef(OrgApacheLuceneIndexIndexRead
 
 void OrgApacheLuceneIndexIndexReader_decRef(OrgApacheLuceneIndexIndexReader *self) {
   if ([((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(self->refCount_)) get] <= 0) {
-    @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(@"this IndexReader is closed") autorelease];
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(@"this IndexReader is closed");
   }
   jint rc = [self->refCount_ decrementAndGet];
   if (rc == 0) {
     self->closed_ = true;
-    JavaLangThrowable *throwable = nil;
+    NSException *throwable = nil;
     @try {
       [self doClose];
     }
-    @catch (JavaLangThrowable *th) {
+    @catch (NSException *th) {
       throwable = th;
     }
     @finally {
@@ -367,21 +366,21 @@ void OrgApacheLuceneIndexIndexReader_decRef(OrgApacheLuceneIndexIndexReader *sel
         OrgApacheLuceneIndexIndexReader_reportCloseToParentReaders(self);
       }
       @finally {
-        OrgApacheLuceneIndexIndexReader_notifyReaderClosedListenersWithJavaLangThrowable_(self, throwable);
+        OrgApacheLuceneIndexIndexReader_notifyReaderClosedListenersWithNSException_(self, throwable);
       }
     }
   }
   else if (rc < 0) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$", @"too many decRef calls: refCount is ", rc, @" after decrement")) autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$", @"too many decRef calls: refCount is ", rc, @" after decrement"));
   }
 }
 
 void OrgApacheLuceneIndexIndexReader_ensureOpen(OrgApacheLuceneIndexIndexReader *self) {
   if ([((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(self->refCount_)) get] <= 0) {
-    @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(@"this IndexReader is closed") autorelease];
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(@"this IndexReader is closed");
   }
   if (self->closedByChild_) {
-    @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(@"this IndexReader cannot be used anymore as one of its child readers was closed") autorelease];
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(@"this IndexReader cannot be used anymore as one of its child readers was closed");
   }
 }
 

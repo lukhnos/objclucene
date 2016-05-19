@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgLukhnosPortmobileFilePaths_INCLUDE_ALL")
-#if OrgLukhnosPortmobileFilePaths_RESTRICT
-#define OrgLukhnosPortmobileFilePaths_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgLukhnosPortmobileFilePaths")
+#ifdef RESTRICT_OrgLukhnosPortmobileFilePaths
+#define INCLUDE_ALL_OrgLukhnosPortmobileFilePaths 0
 #else
-#define OrgLukhnosPortmobileFilePaths_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgLukhnosPortmobileFilePaths 1
 #endif
-#undef OrgLukhnosPortmobileFilePaths_RESTRICT
+#undef RESTRICT_OrgLukhnosPortmobileFilePaths
 
-#if !defined (_OrgLukhnosPortmobileFilePaths_) && (OrgLukhnosPortmobileFilePaths_INCLUDE_ALL || OrgLukhnosPortmobileFilePaths_INCLUDE)
-#define _OrgLukhnosPortmobileFilePaths_
+#if !defined (OrgLukhnosPortmobileFilePaths_) && (INCLUDE_ALL_OrgLukhnosPortmobileFilePaths || defined(INCLUDE_OrgLukhnosPortmobileFilePaths))
+#define OrgLukhnosPortmobileFilePaths_
 
 @class OrgLukhnosPortmobileFilePath;
 
@@ -36,8 +36,10 @@ FOUNDATION_EXPORT void OrgLukhnosPortmobileFilePaths_init(OrgLukhnosPortmobileFi
 
 FOUNDATION_EXPORT OrgLukhnosPortmobileFilePaths *new_OrgLukhnosPortmobileFilePaths_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgLukhnosPortmobileFilePaths *create_OrgLukhnosPortmobileFilePaths_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileFilePaths)
 
 #endif
 
-#pragma pop_macro("OrgLukhnosPortmobileFilePaths_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileFilePaths")

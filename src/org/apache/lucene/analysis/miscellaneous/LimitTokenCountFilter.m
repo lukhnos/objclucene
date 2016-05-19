@@ -87,9 +87,11 @@ void OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter_initWithOrgApache
 }
 
 OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter *new_OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(OrgApacheLuceneAnalysisTokenStream *inArg, jint maxTokenCount) {
-  OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter *self = [OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter alloc];
-  OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(self, inArg, maxTokenCount);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter, initWithOrgApacheLuceneAnalysisTokenStream_withInt_, inArg, maxTokenCount)
+}
+
+OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter *create_OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(OrgApacheLuceneAnalysisTokenStream *inArg, jint maxTokenCount) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter, initWithOrgApacheLuceneAnalysisTokenStream_withInt_, inArg, maxTokenCount)
 }
 
 void OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_(OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg, jint maxTokenCount, jboolean consumeAllTokens) {
@@ -97,16 +99,18 @@ void OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter_initWithOrgApache
   self->tokenCount_ = 0;
   self->exhausted_ = false;
   if (maxTokenCount < 1) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"maxTokenCount must be greater than zero") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"maxTokenCount must be greater than zero");
   }
   self->maxTokenCount_ = maxTokenCount;
   self->consumeAllTokens_ = consumeAllTokens;
 }
 
 OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter *new_OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_(OrgApacheLuceneAnalysisTokenStream *inArg, jint maxTokenCount, jboolean consumeAllTokens) {
-  OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter *self = [OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter alloc];
-  OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_(self, inArg, maxTokenCount, consumeAllTokens);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter, initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_, inArg, maxTokenCount, consumeAllTokens)
+}
+
+OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter *create_OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_(OrgApacheLuceneAnalysisTokenStream *inArg, jint maxTokenCount, jboolean consumeAllTokens) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter, initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_, inArg, maxTokenCount, consumeAllTokens)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter)

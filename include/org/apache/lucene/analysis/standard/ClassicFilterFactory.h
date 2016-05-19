@@ -5,29 +5,43 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisStandardClassicFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisStandardClassicFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisStandardClassicFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisStandardClassicFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisStandardClassicFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisStandardClassicFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisStandardClassicFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisStandardClassicFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisStandardClassicFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisStandardClassicFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisStandardClassicFilterFactory_) && (OrgApacheLuceneAnalysisStandardClassicFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisStandardClassicFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisStandardClassicFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisStandardClassicFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisStandardClassicFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisStandardClassicFilterFactory))
+#define OrgApacheLuceneAnalysisStandardClassicFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
 @class OrgApacheLuceneAnalysisTokenFilter;
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>ClassicFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_clssc" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.ClassicTokenizerFactory"/&gt;
+ &lt;filter class="solr.ClassicFilterFactory"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisStandardClassicFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new ClassicFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -40,8 +54,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisStandardClassicFilterFactory_initW
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardClassicFilterFactory *new_OrgApacheLuceneAnalysisStandardClassicFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardClassicFilterFactory *create_OrgApacheLuceneAnalysisStandardClassicFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisStandardClassicFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisStandardClassicFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisStandardClassicFilterFactory")

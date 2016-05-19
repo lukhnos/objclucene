@@ -5,27 +5,34 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator_RESTRICT
-#define OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator")
+#ifdef RESTRICT_OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator 0
 #else
-#define OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator 1
 #endif
-#undef OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator
 
-#if !defined (_OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator_) && (OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator_INCLUDE_ALL || OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator_INCLUDE)
-#define _OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator_
+#if !defined (OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator || defined(INCLUDE_OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator))
+#define OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator_
 
-#define JavaUtilComparator_RESTRICT 1
-#define JavaUtilComparator_INCLUDE 1
+#define RESTRICT_JavaUtilComparator 1
+#define INCLUDE_JavaUtilComparator 1
 #include "java/util/Comparator.h"
 
 @class OrgApacheLuceneSearchSpellSuggestWord;
 
+/*!
+ @brief Frequency first, then score.
+ */
 @interface OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator : NSObject < JavaUtilComparator >
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new comparator that will compare by <code>SuggestWord.freq</code>,
+ then by <code>SuggestWord.score</code>, then by <code>SuggestWord.string</code>.
+ */
 - (instancetype)init;
 
 - (jint)compareWithId:(OrgApacheLuceneSearchSpellSuggestWord *)first
@@ -39,8 +46,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator_
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator *new_OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator *create_OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator")

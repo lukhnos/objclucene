@@ -36,9 +36,15 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCaCatalanAnalyzer, stemExclusionSet_, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
-static OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisCaCatalanAnalyzer_DEFAULT_ARTICLES_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisCaCatalanAnalyzer, DEFAULT_ARTICLES_, OrgApacheLuceneAnalysisUtilCharArraySet *)
+inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisCaCatalanAnalyzer_get_DEFAULT_ARTICLES();
+static OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisCaCatalanAnalyzer_DEFAULT_ARTICLES;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisCaCatalanAnalyzer, DEFAULT_ARTICLES, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
+/*!
+ @brief Atomically loads the DEFAULT_STOP_SET in a lazy fashion once the outer class 
+ accesses the static final set the first time
+ .;
+ */
 @interface OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder : NSObject
 
 - (instancetype)init;
@@ -47,20 +53,27 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisCaCatalanAnalyzer, DEFAULT_ART
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder)
 
-static OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder, DEFAULT_STOP_SET_, OrgApacheLuceneAnalysisUtilCharArraySet *)
+inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder_get_DEFAULT_STOP_SET();
+static OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder, DEFAULT_STOP_SET, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
 __attribute__((unused)) static void OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder_init(OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder *self);
 
 __attribute__((unused)) static OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder *new_OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder *create_OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisCaCatalanAnalyzer)
 
-NSString *OrgApacheLuceneAnalysisCaCatalanAnalyzer_DEFAULT_STOPWORD_FILE_ = @"stopwords.txt";
+NSString *OrgApacheLuceneAnalysisCaCatalanAnalyzer_DEFAULT_STOPWORD_FILE = @"stopwords.txt";
 
 @implementation OrgApacheLuceneAnalysisCaCatalanAnalyzer
+
++ (NSString *)DEFAULT_STOPWORD_FILE {
+  return OrgApacheLuceneAnalysisCaCatalanAnalyzer_DEFAULT_STOPWORD_FILE;
+}
 
 + (OrgApacheLuceneAnalysisUtilCharArraySet *)getDefaultStopSet {
   return OrgApacheLuceneAnalysisCaCatalanAnalyzer_getDefaultStopSet();
@@ -86,19 +99,19 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName {
   OrgApacheLuceneAnalysisTokenizer *source;
-  if ([((OrgApacheLuceneUtilVersion *) nil_chk([self getVersion])) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_7_0_)]) {
-    source = [new_OrgApacheLuceneAnalysisStandardStandardTokenizer_init() autorelease];
+  if ([((OrgApacheLuceneUtilVersion *) nil_chk([self getVersion])) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_7_0)]) {
+    source = create_OrgApacheLuceneAnalysisStandardStandardTokenizer_init();
   }
   else {
-    source = [new_OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40_init() autorelease];
+    source = create_OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40_init();
   }
-  OrgApacheLuceneAnalysisTokenStream *result = [new_OrgApacheLuceneAnalysisStandardStandardFilter_initWithOrgApacheLuceneAnalysisTokenStream_(source) autorelease];
-  result = [new_OrgApacheLuceneAnalysisUtilElisionFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(result, OrgApacheLuceneAnalysisCaCatalanAnalyzer_DEFAULT_ARTICLES_) autorelease];
-  result = [new_OrgApacheLuceneAnalysisCoreLowerCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(result) autorelease];
-  result = [new_OrgApacheLuceneAnalysisCoreStopFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(result, stopwords_) autorelease];
-  if (![((OrgApacheLuceneAnalysisUtilCharArraySet *) nil_chk(stemExclusionSet_)) isEmpty]) result = [new_OrgApacheLuceneAnalysisMiscellaneousSetKeywordMarkerFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(result, stemExclusionSet_) autorelease];
-  result = [new_OrgApacheLuceneAnalysisSnowballSnowballFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgTartarusSnowballSnowballProgram_(result, [new_OrgTartarusSnowballExtCatalanStemmer_init() autorelease]) autorelease];
-  return [new_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(source, result) autorelease];
+  OrgApacheLuceneAnalysisTokenStream *result = create_OrgApacheLuceneAnalysisStandardStandardFilter_initWithOrgApacheLuceneAnalysisTokenStream_(source);
+  result = create_OrgApacheLuceneAnalysisUtilElisionFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(result, OrgApacheLuceneAnalysisCaCatalanAnalyzer_DEFAULT_ARTICLES);
+  result = create_OrgApacheLuceneAnalysisCoreLowerCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(result);
+  result = create_OrgApacheLuceneAnalysisCoreStopFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(result, stopwords_);
+  if (![((OrgApacheLuceneAnalysisUtilCharArraySet *) nil_chk(stemExclusionSet_)) isEmpty]) result = create_OrgApacheLuceneAnalysisMiscellaneousSetKeywordMarkerFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(result, stemExclusionSet_);
+  result = create_OrgApacheLuceneAnalysisSnowballSnowballFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgTartarusSnowballSnowballProgram_(result, create_OrgTartarusSnowballExtCatalanStemmer_init());
+  return create_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(source, result);
 }
 
 - (void)dealloc {
@@ -108,7 +121,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisCaCatalanAnalyzer class]) {
-    JreStrongAssign(&OrgApacheLuceneAnalysisCaCatalanAnalyzer_DEFAULT_ARTICLES_, OrgApacheLuceneAnalysisUtilCharArraySet_unmodifiableSetWithOrgApacheLuceneAnalysisUtilCharArraySet_([new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"d", @"l", @"m", @"n", @"s", @"t" } count:6 type:NSString_class_()]), true) autorelease]));
+    JreStrongAssign(&OrgApacheLuceneAnalysisCaCatalanAnalyzer_DEFAULT_ARTICLES, OrgApacheLuceneAnalysisUtilCharArraySet_unmodifiableSetWithOrgApacheLuceneAnalysisUtilCharArraySet_(create_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"d", @"l", @"m", @"n", @"s", @"t" } count:6 type:NSString_class_()]), true)));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisCaCatalanAnalyzer)
   }
 }
@@ -123,8 +136,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   };
   static const J2ObjcFieldInfo fields[] = {
     { "stemExclusionSet_", NULL, 0x12, "Lorg.apache.lucene.analysis.util.CharArraySet;", NULL, NULL, .constantValue.asLong = 0 },
-    { "DEFAULT_STOPWORD_FILE_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisCaCatalanAnalyzer_DEFAULT_STOPWORD_FILE_, NULL, .constantValue.asLong = 0 },
-    { "DEFAULT_ARTICLES_", NULL, 0x1a, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisCaCatalanAnalyzer_DEFAULT_ARTICLES_, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_STOPWORD_FILE", "DEFAULT_STOPWORD_FILE", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisCaCatalanAnalyzer_DEFAULT_STOPWORD_FILE, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_ARTICLES", "DEFAULT_ARTICLES", 0x1a, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisCaCatalanAnalyzer_DEFAULT_ARTICLES, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.analysis.ca.CatalanAnalyzer$DefaultSetHolder;"};
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCaCatalanAnalyzer = { 2, "CatalanAnalyzer", "org.apache.lucene.analysis.ca", NULL, 0x11, 5, methods, 3, fields, 0, NULL, 1, inner_classes, NULL, NULL };
@@ -135,27 +148,31 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisCaCatalanAnalyzer_getDefaultStopSet() {
   OrgApacheLuceneAnalysisCaCatalanAnalyzer_initialize();
-  return JreLoadStatic(OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder, DEFAULT_STOP_SET_);
+  return JreLoadStatic(OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder, DEFAULT_STOP_SET);
 }
 
 void OrgApacheLuceneAnalysisCaCatalanAnalyzer_init(OrgApacheLuceneAnalysisCaCatalanAnalyzer *self) {
-  OrgApacheLuceneAnalysisCaCatalanAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, JreLoadStatic(OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder, DEFAULT_STOP_SET_));
+  OrgApacheLuceneAnalysisCaCatalanAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, JreLoadStatic(OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder, DEFAULT_STOP_SET));
 }
 
 OrgApacheLuceneAnalysisCaCatalanAnalyzer *new_OrgApacheLuceneAnalysisCaCatalanAnalyzer_init() {
-  OrgApacheLuceneAnalysisCaCatalanAnalyzer *self = [OrgApacheLuceneAnalysisCaCatalanAnalyzer alloc];
-  OrgApacheLuceneAnalysisCaCatalanAnalyzer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCaCatalanAnalyzer, init)
+}
+
+OrgApacheLuceneAnalysisCaCatalanAnalyzer *create_OrgApacheLuceneAnalysisCaCatalanAnalyzer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCaCatalanAnalyzer, init)
 }
 
 void OrgApacheLuceneAnalysisCaCatalanAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisCaCatalanAnalyzer *self, OrgApacheLuceneAnalysisUtilCharArraySet *stopwords) {
-  OrgApacheLuceneAnalysisCaCatalanAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_withOrgApacheLuceneAnalysisUtilCharArraySet_(self, stopwords, JreLoadStatic(OrgApacheLuceneAnalysisUtilCharArraySet, EMPTY_SET_));
+  OrgApacheLuceneAnalysisCaCatalanAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_withOrgApacheLuceneAnalysisUtilCharArraySet_(self, stopwords, JreLoadStatic(OrgApacheLuceneAnalysisUtilCharArraySet, EMPTY_SET));
 }
 
 OrgApacheLuceneAnalysisCaCatalanAnalyzer *new_OrgApacheLuceneAnalysisCaCatalanAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopwords) {
-  OrgApacheLuceneAnalysisCaCatalanAnalyzer *self = [OrgApacheLuceneAnalysisCaCatalanAnalyzer alloc];
-  OrgApacheLuceneAnalysisCaCatalanAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, stopwords);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCaCatalanAnalyzer, initWithOrgApacheLuceneAnalysisUtilCharArraySet_, stopwords)
+}
+
+OrgApacheLuceneAnalysisCaCatalanAnalyzer *create_OrgApacheLuceneAnalysisCaCatalanAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopwords) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCaCatalanAnalyzer, initWithOrgApacheLuceneAnalysisUtilCharArraySet_, stopwords)
 }
 
 void OrgApacheLuceneAnalysisCaCatalanAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisCaCatalanAnalyzer *self, OrgApacheLuceneAnalysisUtilCharArraySet *stopwords, OrgApacheLuceneAnalysisUtilCharArraySet *stemExclusionSet) {
@@ -164,9 +181,11 @@ void OrgApacheLuceneAnalysisCaCatalanAnalyzer_initWithOrgApacheLuceneAnalysisUti
 }
 
 OrgApacheLuceneAnalysisCaCatalanAnalyzer *new_OrgApacheLuceneAnalysisCaCatalanAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopwords, OrgApacheLuceneAnalysisUtilCharArraySet *stemExclusionSet) {
-  OrgApacheLuceneAnalysisCaCatalanAnalyzer *self = [OrgApacheLuceneAnalysisCaCatalanAnalyzer alloc];
-  OrgApacheLuceneAnalysisCaCatalanAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_withOrgApacheLuceneAnalysisUtilCharArraySet_(self, stopwords, stemExclusionSet);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCaCatalanAnalyzer, initWithOrgApacheLuceneAnalysisUtilCharArraySet_withOrgApacheLuceneAnalysisUtilCharArraySet_, stopwords, stemExclusionSet)
+}
+
+OrgApacheLuceneAnalysisCaCatalanAnalyzer *create_OrgApacheLuceneAnalysisCaCatalanAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopwords, OrgApacheLuceneAnalysisUtilCharArraySet *stemExclusionSet) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCaCatalanAnalyzer, initWithOrgApacheLuceneAnalysisUtilCharArraySet_withOrgApacheLuceneAnalysisUtilCharArraySet_, stopwords, stemExclusionSet)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCaCatalanAnalyzer)
@@ -186,10 +205,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   if (self == [OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder class]) {
     {
       @try {
-        JreStrongAssign(&OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET_, OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_loadStopwordSetWithBoolean_withIOSClass_withNSString_withNSString_(false, OrgApacheLuceneAnalysisCaCatalanAnalyzer_class_(), OrgApacheLuceneAnalysisCaCatalanAnalyzer_DEFAULT_STOPWORD_FILE_, @"#"));
+        JreStrongAssign(&OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET, OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_loadStopwordSetWithBoolean_withIOSClass_withNSString_withNSString_(false, OrgApacheLuceneAnalysisCaCatalanAnalyzer_class_(), OrgApacheLuceneAnalysisCaCatalanAnalyzer_DEFAULT_STOPWORD_FILE, @"#"));
       }
       @catch (JavaIoIOException *ex) {
-        @throw [new_JavaLangRuntimeException_initWithNSString_(@"Unable to load default stopword set") autorelease];
+        @throw create_JavaLangRuntimeException_initWithNSString_(@"Unable to load default stopword set");
       }
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder)
@@ -198,10 +217,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", NULL, NULL, 0x2, NULL, NULL },
+    { "init", "DefaultSetHolder", NULL, 0x2, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_STOP_SET_", NULL, 0x18, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET_, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_STOP_SET", "DEFAULT_STOP_SET", 0x18, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder = { 2, "DefaultSetHolder", "org.apache.lucene.analysis.ca", "CatalanAnalyzer", 0xa, 1, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder;
@@ -214,9 +233,11 @@ void OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder_init(OrgApacheLuc
 }
 
 OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder *new_OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder_init() {
-  OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder *self = [OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder alloc];
-  OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder, init)
+}
+
+OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder *create_OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder)

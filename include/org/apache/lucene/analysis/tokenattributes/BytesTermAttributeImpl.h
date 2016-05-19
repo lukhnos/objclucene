@@ -5,36 +5,42 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl_RESTRICT
-#define OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl 0
 #else
-#define OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl 1
 #endif
-#undef OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl
 
-#if !defined (_OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl_) && (OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl_INCLUDE_ALL || OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl_INCLUDE)
-#define _OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl_
+#if !defined (OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl || defined(INCLUDE_OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl))
+#define OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl_
 
-#define OrgApacheLuceneUtilAttributeImpl_RESTRICT 1
-#define OrgApacheLuceneUtilAttributeImpl_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAttributeImpl 1
+#define INCLUDE_OrgApacheLuceneUtilAttributeImpl 1
 #include "org/apache/lucene/util/AttributeImpl.h"
 
-#define OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute 1
 #include "org/apache/lucene/analysis/tokenattributes/BytesTermAttribute.h"
 
-#define OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute 1
 #include "org/apache/lucene/analysis/tokenattributes/TermToBytesRefAttribute.h"
 
 @class OrgApacheLuceneUtilBytesRef;
 @protocol OrgApacheLuceneUtilAttributeReflector;
 
+/*!
+ @brief Implementation class for <code>BytesTermAttribute</code>.
+ */
 @interface OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl : OrgApacheLuceneUtilAttributeImpl < OrgApacheLuceneAnalysisTokenattributesBytesTermAttribute, OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute >
 
 #pragma mark Public
 
+/*!
+ @brief Initialize this attribute with no bytes.
+ */
 - (instancetype)init;
 
 - (void)clear;
@@ -57,8 +63,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeI
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl")

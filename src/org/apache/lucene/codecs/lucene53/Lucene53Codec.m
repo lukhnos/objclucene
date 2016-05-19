@@ -74,6 +74,8 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsLucene53Lucene53Codec_$
 
 __attribute__((unused)) static OrgApacheLuceneCodecsLucene53Lucene53Codec_$1 *new_OrgApacheLuceneCodecsLucene53Lucene53Codec_$1_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(OrgApacheLuceneCodecsLucene53Lucene53Codec *outer$) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneCodecsLucene53Lucene53Codec_$1 *create_OrgApacheLuceneCodecsLucene53Lucene53Codec_$1_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(OrgApacheLuceneCodecsLucene53Lucene53Codec *outer$);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene53Lucene53Codec_$1)
 
 @interface OrgApacheLuceneCodecsLucene53Lucene53Codec_$2 : OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat {
@@ -95,6 +97,8 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsLucene53Lucene53Codec_$
 
 __attribute__((unused)) static OrgApacheLuceneCodecsLucene53Lucene53Codec_$2 *new_OrgApacheLuceneCodecsLucene53Lucene53Codec_$2_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(OrgApacheLuceneCodecsLucene53Lucene53Codec *outer$) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneCodecsLucene53Lucene53Codec_$2 *create_OrgApacheLuceneCodecsLucene53Lucene53Codec_$2_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(OrgApacheLuceneCodecsLucene53Lucene53Codec *outer$);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene53Lucene53Codec_$2)
 
 @implementation OrgApacheLuceneCodecsLucene53Lucene53Codec
@@ -106,8 +110,8 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (instancetype)initWithOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_ModeEnum:(OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_ModeEnum *)mode {
-  OrgApacheLuceneCodecsLucene53Lucene53Codec_initWithOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_ModeEnum_(self, mode);
+- (instancetype)initWithOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode:(OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode *)mode {
+  OrgApacheLuceneCodecsLucene53Lucene53Codec_initWithOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode_(self, mode);
   return self;
 }
 
@@ -173,7 +177,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "Lucene53Codec", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_ModeEnum:", "Lucene53Codec", NULL, 0x1, NULL, NULL },
+    { "initWithOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode:", "Lucene53Codec", NULL, 0x1, NULL, NULL },
     { "storedFieldsFormat", NULL, "Lorg.apache.lucene.codecs.StoredFieldsFormat;", 0x11, NULL, NULL },
     { "termVectorsFormat", NULL, "Lorg.apache.lucene.codecs.TermVectorsFormat;", 0x11, NULL, NULL },
     { "postingsFormat", NULL, "Lorg.apache.lucene.codecs.PostingsFormat;", 0x11, NULL, NULL },
@@ -206,16 +210,18 @@ J2OBJC_IGNORE_DESIGNATED_END
 @end
 
 void OrgApacheLuceneCodecsLucene53Lucene53Codec_init(OrgApacheLuceneCodecsLucene53Lucene53Codec *self) {
-  OrgApacheLuceneCodecsLucene53Lucene53Codec_initWithOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_ModeEnum_(self, JreLoadStatic(OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_ModeEnum, BEST_SPEED));
+  OrgApacheLuceneCodecsLucene53Lucene53Codec_initWithOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode_(self, JreLoadEnum(OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode, BEST_SPEED));
 }
 
 OrgApacheLuceneCodecsLucene53Lucene53Codec *new_OrgApacheLuceneCodecsLucene53Lucene53Codec_init() {
-  OrgApacheLuceneCodecsLucene53Lucene53Codec *self = [OrgApacheLuceneCodecsLucene53Lucene53Codec alloc];
-  OrgApacheLuceneCodecsLucene53Lucene53Codec_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene53Lucene53Codec, init)
 }
 
-void OrgApacheLuceneCodecsLucene53Lucene53Codec_initWithOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_ModeEnum_(OrgApacheLuceneCodecsLucene53Lucene53Codec *self, OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_ModeEnum *mode) {
+OrgApacheLuceneCodecsLucene53Lucene53Codec *create_OrgApacheLuceneCodecsLucene53Lucene53Codec_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene53Lucene53Codec, init)
+}
+
+void OrgApacheLuceneCodecsLucene53Lucene53Codec_initWithOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode_(OrgApacheLuceneCodecsLucene53Lucene53Codec *self, OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode *mode) {
   OrgApacheLuceneCodecsCodec_initWithNSString_(self, @"Lucene53");
   JreStrongAssignAndConsume(&self->vectorsFormat_, new_OrgApacheLuceneCodecsLucene50Lucene50TermVectorsFormat_init());
   JreStrongAssignAndConsume(&self->fieldInfosFormat_, new_OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_init());
@@ -227,13 +233,15 @@ void OrgApacheLuceneCodecsLucene53Lucene53Codec_initWithOrgApacheLuceneCodecsLuc
   JreStrongAssign(&self->defaultFormat_, OrgApacheLuceneCodecsPostingsFormat_forNameWithNSString_(@"Lucene50"));
   JreStrongAssign(&self->defaultDVFormat_, OrgApacheLuceneCodecsDocValuesFormat_forNameWithNSString_(@"Lucene50"));
   JreStrongAssignAndConsume(&self->normsFormat_, new_OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_init());
-  JreStrongAssignAndConsume(&self->storedFieldsFormat_, new_OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_initWithOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_ModeEnum_(OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_(mode)));
+  JreStrongAssignAndConsume(&self->storedFieldsFormat_, new_OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_initWithOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode_(OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_(mode)));
 }
 
-OrgApacheLuceneCodecsLucene53Lucene53Codec *new_OrgApacheLuceneCodecsLucene53Lucene53Codec_initWithOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_ModeEnum_(OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_ModeEnum *mode) {
-  OrgApacheLuceneCodecsLucene53Lucene53Codec *self = [OrgApacheLuceneCodecsLucene53Lucene53Codec alloc];
-  OrgApacheLuceneCodecsLucene53Lucene53Codec_initWithOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_ModeEnum_(self, mode);
-  return self;
+OrgApacheLuceneCodecsLucene53Lucene53Codec *new_OrgApacheLuceneCodecsLucene53Lucene53Codec_initWithOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode_(OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode *mode) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene53Lucene53Codec, initWithOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode_, mode)
+}
+
+OrgApacheLuceneCodecsLucene53Lucene53Codec *create_OrgApacheLuceneCodecsLucene53Lucene53Codec_initWithOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode_(OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode *mode) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene53Lucene53Codec, initWithOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_Mode_, mode)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene53Lucene53Codec)
@@ -274,9 +282,11 @@ void OrgApacheLuceneCodecsLucene53Lucene53Codec_$1_initWithOrgApacheLuceneCodecs
 }
 
 OrgApacheLuceneCodecsLucene53Lucene53Codec_$1 *new_OrgApacheLuceneCodecsLucene53Lucene53Codec_$1_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(OrgApacheLuceneCodecsLucene53Lucene53Codec *outer$) {
-  OrgApacheLuceneCodecsLucene53Lucene53Codec_$1 *self = [OrgApacheLuceneCodecsLucene53Lucene53Codec_$1 alloc];
-  OrgApacheLuceneCodecsLucene53Lucene53Codec_$1_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(self, outer$);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene53Lucene53Codec_$1, initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_, outer$)
+}
+
+OrgApacheLuceneCodecsLucene53Lucene53Codec_$1 *create_OrgApacheLuceneCodecsLucene53Lucene53Codec_$1_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(OrgApacheLuceneCodecsLucene53Lucene53Codec *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene53Lucene53Codec_$1, initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_, outer$)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene53Lucene53Codec_$1)
@@ -317,9 +327,11 @@ void OrgApacheLuceneCodecsLucene53Lucene53Codec_$2_initWithOrgApacheLuceneCodecs
 }
 
 OrgApacheLuceneCodecsLucene53Lucene53Codec_$2 *new_OrgApacheLuceneCodecsLucene53Lucene53Codec_$2_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(OrgApacheLuceneCodecsLucene53Lucene53Codec *outer$) {
-  OrgApacheLuceneCodecsLucene53Lucene53Codec_$2 *self = [OrgApacheLuceneCodecsLucene53Lucene53Codec_$2 alloc];
-  OrgApacheLuceneCodecsLucene53Lucene53Codec_$2_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(self, outer$);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene53Lucene53Codec_$2, initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_, outer$)
+}
+
+OrgApacheLuceneCodecsLucene53Lucene53Codec_$2 *create_OrgApacheLuceneCodecsLucene53Lucene53Codec_$2_initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_(OrgApacheLuceneCodecsLucene53Lucene53Codec *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene53Lucene53Codec_$2, initWithOrgApacheLuceneCodecsLucene53Lucene53Codec_, outer$)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene53Lucene53Codec_$2)

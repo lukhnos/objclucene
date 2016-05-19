@@ -5,31 +5,45 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter_RESTRICT
-#define OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter 0
 #else
-#define OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter
 
-#if !defined (_OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter_) && (OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter_
+#if !defined (OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter || defined(INCLUDE_OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter))
+#define OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter_
 
-#define OrgApacheLuceneAnalysisCharfilterBaseCharFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisCharfilterBaseCharFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisCharfilterBaseCharFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisCharfilterBaseCharFilter 1
 #include "org/apache/lucene/analysis/charfilter/BaseCharFilter.h"
 
 @class IOSCharArray;
 @class JavaIoReader;
 @protocol JavaUtilSet;
 
+/*!
+ @brief A CharFilter that wraps another Reader and attempts to strip out HTML constructs.
+ */
 @interface OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter : OrgApacheLuceneAnalysisCharfilterBaseCharFilter
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new HTMLStripCharFilter over the provided Reader.
+ @param source Reader to strip html tags from.
+ */
 - (instancetype)initWithJavaIoReader:(JavaIoReader *)source;
 
+/*!
+ @brief Creates a new HTMLStripCharFilter over the provided Reader
+ with the specified start and end tags.
+ @param source Reader to strip html tags from.
+ @param escapedTags Tags in this set (both start and end tags)
+ will not be filtered out.
+ */
 - (instancetype)initWithJavaIoReader:(JavaIoReader *)source
                      withJavaUtilSet:(id<JavaUtilSet>)escapedTags;
 
@@ -53,9 +67,13 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter_init
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter *new_OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter_initWithJavaIoReader_(JavaIoReader *source) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter *create_OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter_initWithJavaIoReader_(JavaIoReader *source);
+
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter_initWithJavaIoReader_withJavaUtilSet_(OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter *self, JavaIoReader *source, id<JavaUtilSet> escapedTags);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter *new_OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter_initWithJavaIoReader_withJavaUtilSet_(JavaIoReader *source, id<JavaUtilSet> escapedTags) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter *create_OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter_initWithJavaIoReader_withJavaUtilSet_(JavaIoReader *source, id<JavaUtilSet> escapedTags);
 
 FOUNDATION_EXPORT jint OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter_getInitialBufferSize();
 
@@ -63,4 +81,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter")

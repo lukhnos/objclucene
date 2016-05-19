@@ -45,6 +45,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchJoinTermsIncludingScore
 
 __attribute__((unused)) static OrgApacheLuceneSearchJoinTermsIncludingScoreQuery *new_OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_initWithNSString_withBoolean_withOrgApacheLuceneUtilBytesRefHash_withFloatArray_withIntArray_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_(NSString *field, jboolean multipleValuesPerDocument, OrgApacheLuceneUtilBytesRefHash *terms, IOSFloatArray *scores, IOSIntArray *ords, OrgApacheLuceneSearchQuery *originalQuery, OrgApacheLuceneSearchQuery *unwrittenOriginalQuery) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchJoinTermsIncludingScoreQuery *create_OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_initWithNSString_withBoolean_withOrgApacheLuceneUtilBytesRefHash_withFloatArray_withIntArray_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_(NSString *field, jboolean multipleValuesPerDocument, OrgApacheLuceneUtilBytesRefHash *terms, IOSFloatArray *scores, IOSIntArray *ords, OrgApacheLuceneSearchQuery *originalQuery, OrgApacheLuceneSearchQuery *unwrittenOriginalQuery);
+
 @interface OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_SVInOrderScorer () {
  @public
   OrgApacheLuceneSearchJoinTermsIncludingScoreQuery *this$0_;
@@ -96,6 +98,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchJoinTermsIncludingScore
 
 __attribute__((unused)) static OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_$1 *new_OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_$1_initWithOrgApacheLuceneSearchJoinTermsIncludingScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery *outer$, OrgApacheLuceneSearchWeight *capture$0, OrgApacheLuceneSearchQuery *arg$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_$1 *create_OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_$1_initWithOrgApacheLuceneSearchJoinTermsIncludingScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery *outer$, OrgApacheLuceneSearchWeight *capture$0, OrgApacheLuceneSearchQuery *arg$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_$1)
 
 @implementation OrgApacheLuceneSearchJoinTermsIncludingScoreQuery
@@ -121,13 +125,13 @@ withOrgApacheLuceneUtilBytesRefHash:(OrgApacheLuceneUtilBytesRefHash *)terms
 }
 
 - (NSString *)toStringWithNSString:(NSString *)string {
-  return NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT_), @"TermsIncludingScoreQuery{field=%s;originalQuery=%s}", [IOSObjectArray arrayWithObjects:(id[]){ field_, unwrittenOriginalQuery_ } count:2 type:NSObject_class_()]);
+  return NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"TermsIncludingScoreQuery{field=%s;originalQuery=%s}", [IOSObjectArray arrayWithObjects:(id[]){ field_, unwrittenOriginalQuery_ } count:2 type:NSObject_class_()]);
 }
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader {
   OrgApacheLuceneSearchQuery *originalQueryRewrite = [((OrgApacheLuceneSearchQuery *) nil_chk(originalQuery_)) rewriteWithOrgApacheLuceneIndexIndexReader:reader];
   if (originalQueryRewrite != originalQuery_) {
-    OrgApacheLuceneSearchQuery *rewritten = [new_OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_initWithNSString_withBoolean_withOrgApacheLuceneUtilBytesRefHash_withFloatArray_withIntArray_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_(field_, multipleValuesPerDocument_, terms_, scores_, ords_, originalQueryRewrite, originalQuery_) autorelease];
+    OrgApacheLuceneSearchQuery *rewritten = create_OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_initWithNSString_withBoolean_withOrgApacheLuceneUtilBytesRefHash_withFloatArray_withIntArray_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_(field_, multipleValuesPerDocument_, terms_, scores_, ords_, originalQueryRewrite, originalQuery_);
     [rewritten setBoostWithFloat:[self getBoost]];
     return rewritten;
   }
@@ -143,10 +147,10 @@ withOrgApacheLuceneUtilBytesRefHash:(OrgApacheLuceneUtilBytesRefHash *)terms
   if (![super isEqual:obj]) {
     return false;
   }
-  if ([self getClass] != [nil_chk(obj) getClass]) {
+  if ([self getClass] != (id) [nil_chk(obj) getClass]) {
     return false;
   }
-  OrgApacheLuceneSearchJoinTermsIncludingScoreQuery *other = (OrgApacheLuceneSearchJoinTermsIncludingScoreQuery *) check_class_cast(obj, [OrgApacheLuceneSearchJoinTermsIncludingScoreQuery class]);
+  OrgApacheLuceneSearchJoinTermsIncludingScoreQuery *other = (OrgApacheLuceneSearchJoinTermsIncludingScoreQuery *) cast_chk(obj, [OrgApacheLuceneSearchJoinTermsIncludingScoreQuery class]);
   if (![((NSString *) nil_chk(field_)) isEqual:other->field_]) {
     return false;
   }
@@ -167,7 +171,7 @@ withOrgApacheLuceneUtilBytesRefHash:(OrgApacheLuceneUtilBytesRefHash *)terms
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores {
   OrgApacheLuceneSearchWeight *originalWeight = [((OrgApacheLuceneSearchQuery *) nil_chk(originalQuery_)) createWeightWithOrgApacheLuceneSearchIndexSearcher:searcher withBoolean:needsScores];
-  return [new_OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_$1_initWithOrgApacheLuceneSearchJoinTermsIncludingScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(self, originalWeight, self) autorelease];
+  return create_OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_$1_initWithOrgApacheLuceneSearchJoinTermsIncludingScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(self, originalWeight, self);
 }
 
 - (void)dealloc {
@@ -218,9 +222,11 @@ void OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_initWithNSString_withBool
 }
 
 OrgApacheLuceneSearchJoinTermsIncludingScoreQuery *new_OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_initWithNSString_withBoolean_withOrgApacheLuceneUtilBytesRefHash_withFloatArray_withOrgApacheLuceneSearchQuery_(NSString *field, jboolean multipleValuesPerDocument, OrgApacheLuceneUtilBytesRefHash *terms, IOSFloatArray *scores, OrgApacheLuceneSearchQuery *originalQuery) {
-  OrgApacheLuceneSearchJoinTermsIncludingScoreQuery *self = [OrgApacheLuceneSearchJoinTermsIncludingScoreQuery alloc];
-  OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_initWithNSString_withBoolean_withOrgApacheLuceneUtilBytesRefHash_withFloatArray_withOrgApacheLuceneSearchQuery_(self, field, multipleValuesPerDocument, terms, scores, originalQuery);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery, initWithNSString_withBoolean_withOrgApacheLuceneUtilBytesRefHash_withFloatArray_withOrgApacheLuceneSearchQuery_, field, multipleValuesPerDocument, terms, scores, originalQuery)
+}
+
+OrgApacheLuceneSearchJoinTermsIncludingScoreQuery *create_OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_initWithNSString_withBoolean_withOrgApacheLuceneUtilBytesRefHash_withFloatArray_withOrgApacheLuceneSearchQuery_(NSString *field, jboolean multipleValuesPerDocument, OrgApacheLuceneUtilBytesRefHash *terms, IOSFloatArray *scores, OrgApacheLuceneSearchQuery *originalQuery) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery, initWithNSString_withBoolean_withOrgApacheLuceneUtilBytesRefHash_withFloatArray_withOrgApacheLuceneSearchQuery_, field, multipleValuesPerDocument, terms, scores, originalQuery)
 }
 
 void OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_initWithNSString_withBoolean_withOrgApacheLuceneUtilBytesRefHash_withFloatArray_withIntArray_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery *self, NSString *field, jboolean multipleValuesPerDocument, OrgApacheLuceneUtilBytesRefHash *terms, IOSFloatArray *scores, IOSIntArray *ords, OrgApacheLuceneSearchQuery *originalQuery, OrgApacheLuceneSearchQuery *unwrittenOriginalQuery) {
@@ -235,9 +241,11 @@ void OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_initWithNSString_withBool
 }
 
 OrgApacheLuceneSearchJoinTermsIncludingScoreQuery *new_OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_initWithNSString_withBoolean_withOrgApacheLuceneUtilBytesRefHash_withFloatArray_withIntArray_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_(NSString *field, jboolean multipleValuesPerDocument, OrgApacheLuceneUtilBytesRefHash *terms, IOSFloatArray *scores, IOSIntArray *ords, OrgApacheLuceneSearchQuery *originalQuery, OrgApacheLuceneSearchQuery *unwrittenOriginalQuery) {
-  OrgApacheLuceneSearchJoinTermsIncludingScoreQuery *self = [OrgApacheLuceneSearchJoinTermsIncludingScoreQuery alloc];
-  OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_initWithNSString_withBoolean_withOrgApacheLuceneUtilBytesRefHash_withFloatArray_withIntArray_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_(self, field, multipleValuesPerDocument, terms, scores, ords, originalQuery, unwrittenOriginalQuery);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery, initWithNSString_withBoolean_withOrgApacheLuceneUtilBytesRefHash_withFloatArray_withIntArray_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_, field, multipleValuesPerDocument, terms, scores, ords, originalQuery, unwrittenOriginalQuery)
+}
+
+OrgApacheLuceneSearchJoinTermsIncludingScoreQuery *create_OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_initWithNSString_withBoolean_withOrgApacheLuceneUtilBytesRefHash_withFloatArray_withIntArray_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_(NSString *field, jboolean multipleValuesPerDocument, OrgApacheLuceneUtilBytesRefHash *terms, IOSFloatArray *scores, IOSIntArray *ords, OrgApacheLuceneSearchQuery *originalQuery, OrgApacheLuceneSearchQuery *unwrittenOriginalQuery) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery, initWithNSString_withBoolean_withOrgApacheLuceneUtilBytesRefHash_withFloatArray_withIntArray_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_, field, multipleValuesPerDocument, terms, scores, ords, originalQuery, unwrittenOriginalQuery)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery)
@@ -255,7 +263,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinTermsIncludingScoreQue
 
 - (void)fillDocsAndScoresWithOrgApacheLuceneUtilFixedBitSet:(OrgApacheLuceneUtilFixedBitSet *)matchingDocs
                           withOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)termsEnum {
-  OrgApacheLuceneUtilBytesRef *spare = [new_OrgApacheLuceneUtilBytesRef_init() autorelease];
+  OrgApacheLuceneUtilBytesRef *spare = create_OrgApacheLuceneUtilBytesRef_init();
   OrgApacheLuceneIndexPostingsEnum *postingsEnum = nil;
   for (jint i = 0; i < [((OrgApacheLuceneUtilBytesRefHash *) nil_chk(this$0_->terms_)) size]; i++) {
     if ([((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) seekExactWithOrgApacheLuceneUtilBytesRef:[this$0_->terms_ getWithInt:IOSIntArray_Get(nil_chk(this$0_->ords_), i) withOrgApacheLuceneUtilBytesRef:spare]]) {
@@ -328,7 +336,7 @@ void OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_SVInOrderScorer_initWithO
   JreStrongAssign(&self->this$0_, outer$);
   OrgApacheLuceneSearchScorer_initWithOrgApacheLuceneSearchWeight_(self, weight);
   self->currentDoc_ = -1;
-  OrgApacheLuceneUtilFixedBitSet *matchingDocs = [new_OrgApacheLuceneUtilFixedBitSet_initWithInt_(maxDoc) autorelease];
+  OrgApacheLuceneUtilFixedBitSet *matchingDocs = create_OrgApacheLuceneUtilFixedBitSet_initWithInt_(maxDoc);
   JreStrongAssignAndConsume(&self->scores_, [IOSFloatArray newArrayWithLength:maxDoc]);
   [self fillDocsAndScoresWithOrgApacheLuceneUtilFixedBitSet:matchingDocs withOrgApacheLuceneIndexTermsEnum:termsEnum];
   JreStrongAssignAndConsume(&self->matchingDocsIterator_, new_OrgApacheLuceneUtilBitSetIterator_initWithOrgApacheLuceneUtilBitSet_withLong_(matchingDocs, cost));
@@ -336,9 +344,11 @@ void OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_SVInOrderScorer_initWithO
 }
 
 OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_SVInOrderScorer *new_OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_SVInOrderScorer_initWithOrgApacheLuceneSearchJoinTermsIncludingScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexTermsEnum_withInt_withLong_(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery *outer$, OrgApacheLuceneSearchWeight *weight, OrgApacheLuceneIndexTermsEnum *termsEnum, jint maxDoc, jlong cost) {
-  OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_SVInOrderScorer *self = [OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_SVInOrderScorer alloc];
-  OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_SVInOrderScorer_initWithOrgApacheLuceneSearchJoinTermsIncludingScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexTermsEnum_withInt_withLong_(self, outer$, weight, termsEnum, maxDoc, cost);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_SVInOrderScorer, initWithOrgApacheLuceneSearchJoinTermsIncludingScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexTermsEnum_withInt_withLong_, outer$, weight, termsEnum, maxDoc, cost)
+}
+
+OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_SVInOrderScorer *create_OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_SVInOrderScorer_initWithOrgApacheLuceneSearchJoinTermsIncludingScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexTermsEnum_withInt_withLong_(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery *outer$, OrgApacheLuceneSearchWeight *weight, OrgApacheLuceneIndexTermsEnum *termsEnum, jint maxDoc, jlong cost) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_SVInOrderScorer, initWithOrgApacheLuceneSearchJoinTermsIncludingScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexTermsEnum_withInt_withLong_, outer$, weight, termsEnum, maxDoc, cost)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_SVInOrderScorer)
@@ -356,7 +366,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinTermsIncludingScoreQue
 
 - (void)fillDocsAndScoresWithOrgApacheLuceneUtilFixedBitSet:(OrgApacheLuceneUtilFixedBitSet *)matchingDocs
                           withOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)termsEnum {
-  OrgApacheLuceneUtilBytesRef *spare = [new_OrgApacheLuceneUtilBytesRef_init() autorelease];
+  OrgApacheLuceneUtilBytesRef *spare = create_OrgApacheLuceneUtilBytesRef_init();
   OrgApacheLuceneIndexPostingsEnum *postingsEnum = nil;
   for (jint i = 0; i < [((OrgApacheLuceneUtilBytesRefHash *) nil_chk(this$1_->terms_)) size]; i++) {
     if ([((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) seekExactWithOrgApacheLuceneUtilBytesRef:[this$1_->terms_ getWithInt:IOSIntArray_Get(nil_chk(this$1_->ords_), i) withOrgApacheLuceneUtilBytesRef:spare]]) {
@@ -397,9 +407,11 @@ void OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_MVInOrderScorer_initWithO
 }
 
 OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_MVInOrderScorer *new_OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_MVInOrderScorer_initWithOrgApacheLuceneSearchJoinTermsIncludingScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexTermsEnum_withInt_withLong_(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery *outer$, OrgApacheLuceneSearchWeight *weight, OrgApacheLuceneIndexTermsEnum *termsEnum, jint maxDoc, jlong cost) {
-  OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_MVInOrderScorer *self = [OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_MVInOrderScorer alloc];
-  OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_MVInOrderScorer_initWithOrgApacheLuceneSearchJoinTermsIncludingScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexTermsEnum_withInt_withLong_(self, outer$, weight, termsEnum, maxDoc, cost);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_MVInOrderScorer, initWithOrgApacheLuceneSearchJoinTermsIncludingScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexTermsEnum_withInt_withLong_, outer$, weight, termsEnum, maxDoc, cost)
+}
+
+OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_MVInOrderScorer *create_OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_MVInOrderScorer_initWithOrgApacheLuceneSearchJoinTermsIncludingScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexTermsEnum_withInt_withLong_(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery *outer$, OrgApacheLuceneSearchWeight *weight, OrgApacheLuceneIndexTermsEnum *termsEnum, jint maxDoc, jlong cost) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_MVInOrderScorer, initWithOrgApacheLuceneSearchJoinTermsIncludingScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexTermsEnum_withInt_withLong_, outer$, weight, termsEnum, maxDoc, cost)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_MVInOrderScorer)
@@ -414,7 +426,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinTermsIncludingScoreQue
   OrgApacheLuceneIndexTerms *terms = [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) termsWithNSString:this$0_->field_];
   if (terms != nil) {
     OrgApacheLuceneIndexTermsEnum *segmentTermsEnum = [terms iterator];
-    OrgApacheLuceneUtilBytesRef *spare = [new_OrgApacheLuceneUtilBytesRef_init() autorelease];
+    OrgApacheLuceneUtilBytesRef *spare = create_OrgApacheLuceneUtilBytesRef_init();
     OrgApacheLuceneIndexPostingsEnum *postingsEnum = nil;
     for (jint i = 0; i < [((OrgApacheLuceneUtilBytesRefHash *) nil_chk(this$0_->terms_)) size]; i++) {
       if ([((OrgApacheLuceneIndexTermsEnum *) nil_chk(segmentTermsEnum)) seekExactWithOrgApacheLuceneUtilBytesRef:[this$0_->terms_ getWithInt:IOSIntArray_Get(nil_chk(this$0_->ords_), i) withOrgApacheLuceneUtilBytesRef:spare]]) {
@@ -443,13 +455,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinTermsIncludingScoreQue
   if (terms == nil) {
     return nil;
   }
-  jlong cost = [((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) maxDoc] * [((OrgApacheLuceneIndexTerms *) nil_chk(terms)) size];
+  jlong cost = [((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) maxDoc] * [terms size];
   OrgApacheLuceneIndexTermsEnum *segmentTermsEnum = [terms iterator];
   if (this$0_->multipleValuesPerDocument_) {
-    return [new_OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_MVInOrderScorer_initWithOrgApacheLuceneSearchJoinTermsIncludingScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexTermsEnum_withInt_withLong_(this$0_, self, segmentTermsEnum, [((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) maxDoc], cost) autorelease];
+    return create_OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_MVInOrderScorer_initWithOrgApacheLuceneSearchJoinTermsIncludingScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexTermsEnum_withInt_withLong_(this$0_, self, segmentTermsEnum, [((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) maxDoc], cost);
   }
   else {
-    return [new_OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_SVInOrderScorer_initWithOrgApacheLuceneSearchJoinTermsIncludingScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexTermsEnum_withInt_withLong_(this$0_, self, segmentTermsEnum, [((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) maxDoc], cost) autorelease];
+    return create_OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_SVInOrderScorer_initWithOrgApacheLuceneSearchJoinTermsIncludingScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexTermsEnum_withInt_withLong_(this$0_, self, segmentTermsEnum, [((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) maxDoc], cost);
   }
 }
 
@@ -468,7 +480,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinTermsIncludingScoreQue
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x1, NULL, NULL },
+    { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x1, NULL, "(Ljava/util/Set<Lorg/apache/lucene/index/Term;>;)V" },
     { "explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x1, "Ljava.io.IOException;", NULL },
     { "getValueForNormalization", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
     { "normalizeWithFloat:withFloat:", "normalize", "V", 0x1, NULL, NULL },
@@ -493,9 +505,11 @@ void OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_$1_initWithOrgApacheLucen
 }
 
 OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_$1 *new_OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_$1_initWithOrgApacheLuceneSearchJoinTermsIncludingScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery *outer$, OrgApacheLuceneSearchWeight *capture$0, OrgApacheLuceneSearchQuery *arg$0) {
-  OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_$1 *self = [OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_$1 alloc];
-  OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_$1_initWithOrgApacheLuceneSearchJoinTermsIncludingScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(self, outer$, capture$0, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_$1, initWithOrgApacheLuceneSearchJoinTermsIncludingScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_, outer$, capture$0, arg$0)
+}
+
+OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_$1 *create_OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_$1_initWithOrgApacheLuceneSearchJoinTermsIncludingScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery *outer$, OrgApacheLuceneSearchWeight *capture$0, OrgApacheLuceneSearchQuery *arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_$1, initWithOrgApacheLuceneSearchJoinTermsIncludingScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_, outer$, capture$0, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinTermsIncludingScoreQuery_$1)

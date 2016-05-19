@@ -17,8 +17,25 @@
 @interface OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer () {
  @public
   OrgApacheLuceneAnalysisAnalyzer *analyzer_;
+  /*!
+   @brief Preserve separation between tokens
+ when converting to an automaton
+ <p>
+ Defaults to <code>true</code>
+   */
   jboolean preserveSep_;
+  /*!
+   @brief Preserve position increments for tokens
+ when converting to an automaton
+ <p>
+ Defaults to <code>true</code>
+   */
   jboolean preservePositionIncrements_;
+  /*!
+   @brief Sets the maximum number of graph expansions of a completion automaton
+ <p>
+ Defaults to <code>-1</code> (no limit)
+   */
   jint maxGraphExpansions_;
 }
 
@@ -27,6 +44,26 @@
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer, analyzer_, OrgApacheLuceneAnalysisAnalyzer *)
 
 @implementation OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer
+
++ (jint)SEP_LABEL {
+  return OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_SEP_LABEL;
+}
+
++ (jint)HOLE_CHARACTER {
+  return OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_HOLE_CHARACTER;
+}
+
++ (jint)DEFAULT_MAX_GRAPH_EXPANSIONS {
+  return OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_DEFAULT_MAX_GRAPH_EXPANSIONS;
+}
+
++ (jboolean)DEFAULT_PRESERVE_SEP {
+  return OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_DEFAULT_PRESERVE_SEP;
+}
+
++ (jboolean)DEFAULT_PRESERVE_POSITION_INCREMENTS {
+  return OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_DEFAULT_PRESERVE_POSITION_INCREMENTS;
+}
 
 - (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
                                             withBoolean:(jboolean)preserveSep
@@ -68,8 +105,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer, anal
 
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)wrapComponentsWithNSString:(NSString *)fieldName
                             withOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents:(OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)components {
-  OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *tokenStream = [new_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withBoolean_withInt_([((OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *) nil_chk(components)) getTokenStream], preserveSep_, preservePositionIncrements_, maxGraphExpansions_) autorelease];
-  return [new_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_([components getTokenizer], tokenStream) autorelease];
+  OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *tokenStream = create_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withBoolean_withInt_([((OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *) nil_chk(components)) getTokenStream], preserveSep_, preservePositionIncrements_, maxGraphExpansions_);
+  return create_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_([components getTokenizer], tokenStream);
 }
 
 - (void)dealloc {
@@ -106,7 +143,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer, anal
 @end
 
 void OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withBoolean_withBoolean_withInt_(OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer *self, OrgApacheLuceneAnalysisAnalyzer *analyzer, jboolean preserveSep, jboolean preservePositionIncrements, jint maxGraphExpansions) {
-  OrgApacheLuceneAnalysisAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_(self, JreLoadStatic(OrgApacheLuceneAnalysisAnalyzer, PER_FIELD_REUSE_STRATEGY_));
+  OrgApacheLuceneAnalysisAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_(self, JreLoadStatic(OrgApacheLuceneAnalysisAnalyzer, PER_FIELD_REUSE_STRATEGY));
   JreStrongAssign(&self->analyzer_, analyzer);
   self->preserveSep_ = preserveSep;
   self->preservePositionIncrements_ = preservePositionIncrements;
@@ -114,9 +151,11 @@ void OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_initWithOrgApacheLuc
 }
 
 OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer *new_OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withBoolean_withBoolean_withInt_(OrgApacheLuceneAnalysisAnalyzer *analyzer, jboolean preserveSep, jboolean preservePositionIncrements, jint maxGraphExpansions) {
-  OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer *self = [OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer alloc];
-  OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withBoolean_withBoolean_withInt_(self, analyzer, preserveSep, preservePositionIncrements, maxGraphExpansions);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer, initWithOrgApacheLuceneAnalysisAnalyzer_withBoolean_withBoolean_withInt_, analyzer, preserveSep, preservePositionIncrements, maxGraphExpansions)
+}
+
+OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer *create_OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withBoolean_withBoolean_withInt_(OrgApacheLuceneAnalysisAnalyzer *analyzer, jboolean preserveSep, jboolean preservePositionIncrements, jint maxGraphExpansions) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer, initWithOrgApacheLuceneAnalysisAnalyzer_withBoolean_withBoolean_withInt_, analyzer, preserveSep, preservePositionIncrements, maxGraphExpansions)
 }
 
 void OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer *self, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
@@ -124,9 +163,11 @@ void OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_initWithOrgApacheLuc
 }
 
 OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer *new_OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *analyzer) {
-  OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer *self = [OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer alloc];
-  OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_(self, analyzer);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer, initWithOrgApacheLuceneAnalysisAnalyzer_, analyzer)
+}
+
+OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer *create_OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *analyzer) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer, initWithOrgApacheLuceneAnalysisAnalyzer_, analyzer)
 }
 
 void OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withBoolean_withBoolean_(OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer *self, OrgApacheLuceneAnalysisAnalyzer *analyzer, jboolean preserveSep, jboolean preservePositionIncrements) {
@@ -134,9 +175,11 @@ void OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_initWithOrgApacheLuc
 }
 
 OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer *new_OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withBoolean_withBoolean_(OrgApacheLuceneAnalysisAnalyzer *analyzer, jboolean preserveSep, jboolean preservePositionIncrements) {
-  OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer *self = [OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer alloc];
-  OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withBoolean_withBoolean_(self, analyzer, preserveSep, preservePositionIncrements);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer, initWithOrgApacheLuceneAnalysisAnalyzer_withBoolean_withBoolean_, analyzer, preserveSep, preservePositionIncrements)
+}
+
+OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer *create_OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withBoolean_withBoolean_(OrgApacheLuceneAnalysisAnalyzer *analyzer, jboolean preserveSep, jboolean preservePositionIncrements) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer, initWithOrgApacheLuceneAnalysisAnalyzer_withBoolean_withBoolean_, analyzer, preserveSep, preservePositionIncrements)
 }
 
 void OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withInt_(OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer *self, OrgApacheLuceneAnalysisAnalyzer *analyzer, jint maxGraphExpansions) {
@@ -144,9 +187,11 @@ void OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_initWithOrgApacheLuc
 }
 
 OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer *new_OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withInt_(OrgApacheLuceneAnalysisAnalyzer *analyzer, jint maxGraphExpansions) {
-  OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer *self = [OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer alloc];
-  OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withInt_(self, analyzer, maxGraphExpansions);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer, initWithOrgApacheLuceneAnalysisAnalyzer_withInt_, analyzer, maxGraphExpansions)
+}
+
+OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer *create_OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withInt_(OrgApacheLuceneAnalysisAnalyzer *analyzer, jint maxGraphExpansions) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer, initWithOrgApacheLuceneAnalysisAnalyzer_withInt_, analyzer, maxGraphExpansions)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer)

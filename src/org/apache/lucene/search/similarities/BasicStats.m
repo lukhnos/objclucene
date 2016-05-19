@@ -122,9 +122,11 @@ void OrgApacheLuceneSearchSimilaritiesBasicStats_initWithNSString_withFloat_(Org
 }
 
 OrgApacheLuceneSearchSimilaritiesBasicStats *new_OrgApacheLuceneSearchSimilaritiesBasicStats_initWithNSString_withFloat_(NSString *field, jfloat queryBoost) {
-  OrgApacheLuceneSearchSimilaritiesBasicStats *self = [OrgApacheLuceneSearchSimilaritiesBasicStats alloc];
-  OrgApacheLuceneSearchSimilaritiesBasicStats_initWithNSString_withFloat_(self, field, queryBoost);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSimilaritiesBasicStats, initWithNSString_withFloat_, field, queryBoost)
+}
+
+OrgApacheLuceneSearchSimilaritiesBasicStats *create_OrgApacheLuceneSearchSimilaritiesBasicStats_initWithNSString_withFloat_(NSString *field, jfloat queryBoost) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSimilaritiesBasicStats, initWithNSString_withFloat_, field, queryBoost)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSimilaritiesBasicStats)

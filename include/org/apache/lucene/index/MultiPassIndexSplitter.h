@@ -5,20 +5,36 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexMultiPassIndexSplitter_INCLUDE_ALL")
-#if OrgApacheLuceneIndexMultiPassIndexSplitter_RESTRICT
-#define OrgApacheLuceneIndexMultiPassIndexSplitter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexMultiPassIndexSplitter")
+#ifdef RESTRICT_OrgApacheLuceneIndexMultiPassIndexSplitter
+#define INCLUDE_ALL_OrgApacheLuceneIndexMultiPassIndexSplitter 0
 #else
-#define OrgApacheLuceneIndexMultiPassIndexSplitter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexMultiPassIndexSplitter 1
 #endif
-#undef OrgApacheLuceneIndexMultiPassIndexSplitter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexMultiPassIndexSplitter
 
-#if !defined (_OrgApacheLuceneIndexMultiPassIndexSplitter_) && (OrgApacheLuceneIndexMultiPassIndexSplitter_INCLUDE_ALL || OrgApacheLuceneIndexMultiPassIndexSplitter_INCLUDE)
-#define _OrgApacheLuceneIndexMultiPassIndexSplitter_
+#if !defined (OrgApacheLuceneIndexMultiPassIndexSplitter_) && (INCLUDE_ALL_OrgApacheLuceneIndexMultiPassIndexSplitter || defined(INCLUDE_OrgApacheLuceneIndexMultiPassIndexSplitter))
+#define OrgApacheLuceneIndexMultiPassIndexSplitter_
 
 @class IOSObjectArray;
 @class OrgApacheLuceneIndexIndexReader;
 
+/*!
+ @brief This tool splits input index into multiple equal parts.
+ The method employed
+ here uses <code>IndexWriter.addIndexes(CodecReader[])</code> where the input data
+ comes from the input index with artificially applied deletes to the document
+ id-s that fall outside the selected partition.
+ <p>Note 1: Deletes are only applied to a buffered list of deleted docs and
+ don't affect the source index - this tool works also with read-only indexes.
+ <p>Note 2: the disadvantage of this tool is that source index needs to be
+ read as many times as there are parts to be created, hence the name of this
+ tool.
+ <p><b>NOTE</b>: this tool is unaware of documents added
+ atomically via <code>IndexWriter.addDocuments</code> or <code>IndexWriter.updateDocuments</code>
+ , which means it can easily
+ break up such document groups.
+ */
 @interface OrgApacheLuceneIndexMultiPassIndexSplitter : NSObject
 
 #pragma mark Public
@@ -27,6 +43,16 @@
 
 + (void)mainWithNSStringArray:(IOSObjectArray *)args;
 
+/*!
+ @brief Split source index into multiple parts.
+ @param inArg source index, can have deletions, can have
+ multiple segments (or multiple readers).
+ @param outputs list of directories where the output parts will be stored.
+ @param seq if true, then the source index will be split into equal
+ increasing ranges of document id-s. If false, source document id-s will be
+ assigned in a deterministic round-robin fashion to one of the output splits.
+ @throws IOException If there is a low-level I/O error
+ */
 - (void)splitWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)inArg
           withOrgApacheLuceneStoreDirectoryArray:(IOSObjectArray *)outputs
                                      withBoolean:(jboolean)seq;
@@ -41,8 +67,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexMultiPassIndexSplitter_init(OrgApache
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexMultiPassIndexSplitter *new_OrgApacheLuceneIndexMultiPassIndexSplitter_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexMultiPassIndexSplitter *create_OrgApacheLuceneIndexMultiPassIndexSplitter_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiPassIndexSplitter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexMultiPassIndexSplitter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexMultiPassIndexSplitter")

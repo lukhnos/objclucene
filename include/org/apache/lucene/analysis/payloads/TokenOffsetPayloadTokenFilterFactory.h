@@ -5,29 +5,43 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory_) && (OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory))
+#define OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
 @class OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter;
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>TokenOffsetPayloadTokenFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_tokenoffset" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+ &lt;filter class="solr.TokenOffsetPayloadTokenFilterFactory"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new TokenOffsetPayloadTokenFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -40,8 +54,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFil
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory *new_OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory *create_OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilterFactory")

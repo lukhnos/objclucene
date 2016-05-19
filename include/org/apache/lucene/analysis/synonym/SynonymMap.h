@@ -5,31 +5,43 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisSynonymSynonymMap_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisSynonymSynonymMap_RESTRICT
-#define OrgApacheLuceneAnalysisSynonymSynonymMap_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisSynonymSynonymMap")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisSynonymSynonymMap
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisSynonymSynonymMap 0
 #else
-#define OrgApacheLuceneAnalysisSynonymSynonymMap_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisSynonymSynonymMap 1
 #endif
-#undef OrgApacheLuceneAnalysisSynonymSynonymMap_RESTRICT
-#if OrgApacheLuceneAnalysisSynonymSynonymMap_Parser_INCLUDE
-#define OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_INCLUDE 1
+#undef RESTRICT_OrgApacheLuceneAnalysisSynonymSynonymMap
+#ifdef INCLUDE_OrgApacheLuceneAnalysisSynonymSynonymMap_Parser
+#define INCLUDE_OrgApacheLuceneAnalysisSynonymSynonymMap_Builder 1
 #endif
 
-#if !defined (_OrgApacheLuceneAnalysisSynonymSynonymMap_) && (OrgApacheLuceneAnalysisSynonymSynonymMap_INCLUDE_ALL || OrgApacheLuceneAnalysisSynonymSynonymMap_INCLUDE)
-#define _OrgApacheLuceneAnalysisSynonymSynonymMap_
+#if !defined (OrgApacheLuceneAnalysisSynonymSynonymMap_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisSynonymSynonymMap || defined(INCLUDE_OrgApacheLuceneAnalysisSynonymSynonymMap))
+#define OrgApacheLuceneAnalysisSynonymSynonymMap_
 
 @class OrgApacheLuceneUtilBytesRefHash;
 @class OrgApacheLuceneUtilFstFST;
 
-#define OrgApacheLuceneAnalysisSynonymSynonymMap_WORD_SEPARATOR 0x0000
-
+/*!
+ @brief A map of synonyms, keys and values are phrases.
+ */
 @interface OrgApacheLuceneAnalysisSynonymSynonymMap : NSObject {
  @public
+  /*!
+   @brief map&lt;input word, list&lt;ord&gt;&gt;
+   */
   OrgApacheLuceneUtilFstFST *fst_;
+  /*!
+   @brief map&lt;ord, outputword&gt;
+   */
   OrgApacheLuceneUtilBytesRefHash *words_;
+  /*!
+   @brief maxHorizontalContext: maximum context we need on the tokenstream
+   */
   jint maxHorizontalContext_;
 }
+
++ (jchar)WORD_SEPARATOR;
 
 #pragma mark Public
 
@@ -44,36 +56,71 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisSynonymSynonymMap)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisSynonymSynonymMap, fst_, OrgApacheLuceneUtilFstFST *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisSynonymSynonymMap, words_, OrgApacheLuceneUtilBytesRefHash *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisSynonymSynonymMap, WORD_SEPARATOR, jchar)
+/*!
+ @brief for multiword support, you must separate words with this separator
+ */
+inline jchar OrgApacheLuceneAnalysisSynonymSynonymMap_get_WORD_SEPARATOR();
+#define OrgApacheLuceneAnalysisSynonymSynonymMap_WORD_SEPARATOR 0x0000
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisSynonymSynonymMap, WORD_SEPARATOR, jchar)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSynonymSynonymMap_initWithOrgApacheLuceneUtilFstFST_withOrgApacheLuceneUtilBytesRefHash_withInt_(OrgApacheLuceneAnalysisSynonymSynonymMap *self, OrgApacheLuceneUtilFstFST *fst, OrgApacheLuceneUtilBytesRefHash *words, jint maxHorizontalContext);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisSynonymSynonymMap *new_OrgApacheLuceneAnalysisSynonymSynonymMap_initWithOrgApacheLuceneUtilFstFST_withOrgApacheLuceneUtilBytesRefHash_withInt_(OrgApacheLuceneUtilFstFST *fst, OrgApacheLuceneUtilBytesRefHash *words, jint maxHorizontalContext) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisSynonymSynonymMap *create_OrgApacheLuceneAnalysisSynonymSynonymMap_initWithOrgApacheLuceneUtilFstFST_withOrgApacheLuceneUtilBytesRefHash_withInt_(OrgApacheLuceneUtilFstFST *fst, OrgApacheLuceneUtilBytesRefHash *words, jint maxHorizontalContext);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSynonymSynonymMap)
 
 #endif
 
-#if !defined (_OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_) && (OrgApacheLuceneAnalysisSynonymSynonymMap_INCLUDE_ALL || OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_INCLUDE)
-#define _OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_
+#if !defined (OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisSynonymSynonymMap || defined(INCLUDE_OrgApacheLuceneAnalysisSynonymSynonymMap_Builder))
+#define OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_
 
 @class IOSObjectArray;
 @class OrgApacheLuceneAnalysisSynonymSynonymMap;
 @class OrgApacheLuceneUtilCharsRef;
 @class OrgApacheLuceneUtilCharsRefBuilder;
 
+/*!
+ @brief Builds an FSTSynonymMap.
+ <p>
+ Call add() until you have added all the mappings, then call build() to get an FSTSynonymMap
+ */
 @interface OrgApacheLuceneAnalysisSynonymSynonymMap_Builder : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief If dedup is true then identical rules (same input,
+ same output) will be added only once.
+ */
 - (instancetype)initWithBoolean:(jboolean)dedup;
 
+/*!
+ @brief Add a phrase-&gt;phrase synonym mapping.
+ Phrases are character sequences where words are
+ separated with character zero (U+0000).  Empty words
+ (two U+0000s in a row) are not allowed in the input nor
+ the output!
+ @param input input phrase
+ @param output output phrase
+ @param includeOrig true if the original should be included
+ */
 - (void)addWithOrgApacheLuceneUtilCharsRef:(OrgApacheLuceneUtilCharsRef *)input
            withOrgApacheLuceneUtilCharsRef:(OrgApacheLuceneUtilCharsRef *)output
                                withBoolean:(jboolean)includeOrig;
 
+/*!
+ @brief Builds an <code>SynonymMap</code> and returns it.
+ */
 - (OrgApacheLuceneAnalysisSynonymSynonymMap *)build;
 
+/*!
+ @brief Sugar: just joins the provided terms with <code>SynonymMap.WORD_SEPARATOR</code>
+ .
+ reuse and its chars
+ must not be null. 
+ */
 + (OrgApacheLuceneUtilCharsRef *)joinWithNSStringArray:(IOSObjectArray *)words
                 withOrgApacheLuceneUtilCharsRefBuilder:(OrgApacheLuceneUtilCharsRefBuilder *)reuse;
 
@@ -85,20 +132,25 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_initWith
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisSynonymSynonymMap_Builder *new_OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_initWithBoolean_(jboolean dedup) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisSynonymSynonymMap_Builder *create_OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_initWithBoolean_(jboolean dedup);
+
 FOUNDATION_EXPORT OrgApacheLuceneUtilCharsRef *OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_joinWithNSStringArray_withOrgApacheLuceneUtilCharsRefBuilder_(IOSObjectArray *words, OrgApacheLuceneUtilCharsRefBuilder *reuse);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSynonymSynonymMap_Builder)
 
 #endif
 
-#if !defined (_OrgApacheLuceneAnalysisSynonymSynonymMap_Parser_) && (OrgApacheLuceneAnalysisSynonymSynonymMap_INCLUDE_ALL || OrgApacheLuceneAnalysisSynonymSynonymMap_Parser_INCLUDE)
-#define _OrgApacheLuceneAnalysisSynonymSynonymMap_Parser_
+#if !defined (OrgApacheLuceneAnalysisSynonymSynonymMap_Parser_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisSynonymSynonymMap || defined(INCLUDE_OrgApacheLuceneAnalysisSynonymSynonymMap_Parser))
+#define OrgApacheLuceneAnalysisSynonymSynonymMap_Parser_
 
 @class JavaIoReader;
 @class OrgApacheLuceneAnalysisAnalyzer;
 @class OrgApacheLuceneUtilCharsRef;
 @class OrgApacheLuceneUtilCharsRefBuilder;
 
+/*!
+ @brief Abstraction for parsing synonym files.
+ */
 @interface OrgApacheLuceneAnalysisSynonymSynonymMap_Parser : OrgApacheLuceneAnalysisSynonymSynonymMap_Builder
 
 #pragma mark Public
@@ -106,9 +158,18 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSynonymSynonymMap_Builder)
 - (instancetype)initWithBoolean:(jboolean)dedup
 withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
 
+/*!
+ @brief Sugar: analyzes the text with the analyzer and
+ separates by <code>SynonymMap.WORD_SEPARATOR</code>.
+ reuse and its chars must not be null. 
+ */
 - (OrgApacheLuceneUtilCharsRef *)analyzeWithNSString:(NSString *)text
               withOrgApacheLuceneUtilCharsRefBuilder:(OrgApacheLuceneUtilCharsRefBuilder *)reuse;
 
+/*!
+ @brief Parse the given input, adding synonyms to the inherited <code>Builder</code>.
+ @param inArg The input to parse
+ */
 - (void)parseWithJavaIoReader:(JavaIoReader *)inArg;
 
 @end
@@ -121,4 +182,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSynonymSynonymMap_Parser)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisSynonymSynonymMap_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisSynonymSynonymMap")

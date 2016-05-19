@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgLukhnosPortmobileLangClassValue_INCLUDE_ALL")
-#if OrgLukhnosPortmobileLangClassValue_RESTRICT
-#define OrgLukhnosPortmobileLangClassValue_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgLukhnosPortmobileLangClassValue")
+#ifdef RESTRICT_OrgLukhnosPortmobileLangClassValue
+#define INCLUDE_ALL_OrgLukhnosPortmobileLangClassValue 0
 #else
-#define OrgLukhnosPortmobileLangClassValue_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgLukhnosPortmobileLangClassValue 1
 #endif
-#undef OrgLukhnosPortmobileLangClassValue_RESTRICT
+#undef RESTRICT_OrgLukhnosPortmobileLangClassValue
 
-#if !defined (_OrgLukhnosPortmobileLangClassValue_) && (OrgLukhnosPortmobileLangClassValue_INCLUDE_ALL || OrgLukhnosPortmobileLangClassValue_INCLUDE)
-#define _OrgLukhnosPortmobileLangClassValue_
+#if !defined (OrgLukhnosPortmobileLangClassValue_) && (INCLUDE_ALL_OrgLukhnosPortmobileLangClassValue || defined(INCLUDE_OrgLukhnosPortmobileLangClassValue))
+#define OrgLukhnosPortmobileLangClassValue_
 
 @class IOSClass;
 @protocol JavaUtilMap;
@@ -51,4 +51,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileLangClassValue)
 
 #endif
 
-#pragma pop_macro("OrgLukhnosPortmobileLangClassValue_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileLangClassValue")

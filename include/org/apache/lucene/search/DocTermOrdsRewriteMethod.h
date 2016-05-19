@@ -5,25 +5,31 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchDocTermOrdsRewriteMethod_INCLUDE_ALL")
-#if OrgApacheLuceneSearchDocTermOrdsRewriteMethod_RESTRICT
-#define OrgApacheLuceneSearchDocTermOrdsRewriteMethod_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchDocTermOrdsRewriteMethod")
+#ifdef RESTRICT_OrgApacheLuceneSearchDocTermOrdsRewriteMethod
+#define INCLUDE_ALL_OrgApacheLuceneSearchDocTermOrdsRewriteMethod 0
 #else
-#define OrgApacheLuceneSearchDocTermOrdsRewriteMethod_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchDocTermOrdsRewriteMethod 1
 #endif
-#undef OrgApacheLuceneSearchDocTermOrdsRewriteMethod_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchDocTermOrdsRewriteMethod
 
-#if !defined (_OrgApacheLuceneSearchDocTermOrdsRewriteMethod_) && (OrgApacheLuceneSearchDocTermOrdsRewriteMethod_INCLUDE_ALL || OrgApacheLuceneSearchDocTermOrdsRewriteMethod_INCLUDE)
-#define _OrgApacheLuceneSearchDocTermOrdsRewriteMethod_
+#if !defined (OrgApacheLuceneSearchDocTermOrdsRewriteMethod_) && (INCLUDE_ALL_OrgApacheLuceneSearchDocTermOrdsRewriteMethod || defined(INCLUDE_OrgApacheLuceneSearchDocTermOrdsRewriteMethod))
+#define OrgApacheLuceneSearchDocTermOrdsRewriteMethod_
 
-#define OrgApacheLuceneSearchMultiTermQuery_RESTRICT 1
-#define OrgApacheLuceneSearchMultiTermQuery_RewriteMethod_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchMultiTermQuery 1
+#define INCLUDE_OrgApacheLuceneSearchMultiTermQuery_RewriteMethod 1
 #include "org/apache/lucene/search/MultiTermQuery.h"
 
+@class IOSObjectArray;
 @class OrgApacheLuceneIndexIndexReader;
 @class OrgApacheLuceneSearchMultiTermQuery;
 @class OrgApacheLuceneSearchQuery;
 
+/*!
+ @brief Rewrites MultiTermQueries into a filter, using DocTermOrds for term enumeration.
+ <p>
+ This can be used to perform these queries against an unindexed docvalues field.
+ */
 @interface OrgApacheLuceneSearchDocTermOrdsRewriteMethod : OrgApacheLuceneSearchMultiTermQuery_RewriteMethod
 
 #pragma mark Public
@@ -45,8 +51,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchDocTermOrdsRewriteMethod_init(OrgApa
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchDocTermOrdsRewriteMethod *new_OrgApacheLuceneSearchDocTermOrdsRewriteMethod_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchDocTermOrdsRewriteMethod *create_OrgApacheLuceneSearchDocTermOrdsRewriteMethod_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocTermOrdsRewriteMethod)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchDocTermOrdsRewriteMethod_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchDocTermOrdsRewriteMethod")

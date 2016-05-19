@@ -5,23 +5,23 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory_) && (OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory))
+#define OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-#define OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent 1
 #include "org/apache/lucene/analysis/util/MultiTermAwareComponent.h"
 
 @class OrgApacheLuceneAnalysisCoreLowerCaseFilter;
@@ -29,10 +29,24 @@
 @class OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>LowerCaseFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_lwrcase" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+ &lt;filter class="solr.LowerCaseFilterFactory"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilMultiTermAwareComponent >
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new LowerCaseFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisCoreLowerCaseFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -47,8 +61,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory_initWit
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory *new_OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory *create_OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory")

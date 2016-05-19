@@ -5,22 +5,22 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisUtilCharArrayMap_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisUtilCharArrayMap_RESTRICT
-#define OrgApacheLuceneAnalysisUtilCharArrayMap_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilCharArrayMap")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisUtilCharArrayMap
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisUtilCharArrayMap 0
 #else
-#define OrgApacheLuceneAnalysisUtilCharArrayMap_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisUtilCharArrayMap 1
 #endif
-#undef OrgApacheLuceneAnalysisUtilCharArrayMap_RESTRICT
-#if OrgApacheLuceneAnalysisUtilCharArrayMap_UnmodifiableCharArrayMap_INCLUDE
-#define OrgApacheLuceneAnalysisUtilCharArrayMap_INCLUDE 1
+#undef RESTRICT_OrgApacheLuceneAnalysisUtilCharArrayMap
+#ifdef INCLUDE_OrgApacheLuceneAnalysisUtilCharArrayMap_UnmodifiableCharArrayMap
+#define INCLUDE_OrgApacheLuceneAnalysisUtilCharArrayMap 1
 #endif
 
-#if !defined (_OrgApacheLuceneAnalysisUtilCharArrayMap_) && (OrgApacheLuceneAnalysisUtilCharArrayMap_INCLUDE_ALL || OrgApacheLuceneAnalysisUtilCharArrayMap_INCLUDE)
-#define _OrgApacheLuceneAnalysisUtilCharArrayMap_
+#if !defined (OrgApacheLuceneAnalysisUtilCharArrayMap_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisUtilCharArrayMap || defined(INCLUDE_OrgApacheLuceneAnalysisUtilCharArrayMap))
+#define OrgApacheLuceneAnalysisUtilCharArrayMap_
 
-#define JavaUtilAbstractMap_RESTRICT 1
-#define JavaUtilAbstractMap_INCLUDE 1
+#define RESTRICT_JavaUtilAbstractMap 1
+#define INCLUDE_JavaUtilAbstractMap 1
 #include "java/util/AbstractMap.h"
 
 @class IOSCharArray;
@@ -31,6 +31,16 @@
 @protocol JavaUtilMap;
 @protocol JavaUtilSet;
 
+/*!
+ @brief A simple class that stores key Strings as char[]'s in a
+ hash table.
+ Note that this is not a general purpose
+ class.  For example, it cannot remove items from the
+ map, nor does it resize its hash table to be smaller,
+ etc.  It is designed to be quick to retrieve items
+ by char[] keys without the necessity of converting
+ to a String first.
+ */
 @interface OrgApacheLuceneAnalysisUtilCharArrayMap : JavaUtilAbstractMap {
  @public
   IOSObjectArray *keys_;
@@ -39,47 +49,109 @@
 
 #pragma mark Public
 
+/*!
+ @brief Create map with enough capacity to hold startSize terms
+ @param startSize
+ the initial capacity
+ @param ignoreCase
+ <code>false</code> if and only if the set should be case sensitive
+ otherwise <code>true</code>.
+ */
 - (instancetype)initWithInt:(jint)startSize
                 withBoolean:(jboolean)ignoreCase;
 
+/*!
+ @brief Creates a map from the mappings in another map.
+ @param c
+ a map whose mappings to be copied
+ @param ignoreCase
+ <code>false</code> if and only if the set should be case sensitive
+ otherwise <code>true</code>.
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)c
                         withBoolean:(jboolean)ignoreCase;
 
+/*!
+ @brief Clears all entries in this map.
+ This method is supported for reusing, but not <code>Map.remove</code>. 
+ */
 - (void)clear;
 
+/*!
+ @brief true if the <code>len</code> chars of <code>text</code> starting at <code>off</code>
+ are in the <code>keySet()</code>
+ */
 - (jboolean)containsKeyWithCharArray:(IOSCharArray *)text
                              withInt:(jint)off
                              withInt:(jint)len;
 
+/*!
+ @brief true if the <code>CharSequence</code> is in the <code>keySet()</code>
+ */
 - (jboolean)containsKeyWithJavaLangCharSequence:(id<JavaLangCharSequence>)cs;
 
 - (jboolean)containsKeyWithId:(id)o;
 
+/*!
+ @brief Returns a copy of the given map as a <code>CharArrayMap</code>.
+ If the given map
+ is a <code>CharArrayMap</code> the ignoreCase property will be preserved.
+ @param map
+ a map to copy
+ @return a copy of the given map as a <code>CharArrayMap</code>. If the given map
+ is a <code>CharArrayMap</code> the ignoreCase property as well as the
+ matchVersion will be of the given map will be preserved.
+ */
 + (OrgApacheLuceneAnalysisUtilCharArrayMap *)copy__WithJavaUtilMap:(id<JavaUtilMap>)map OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Returns an empty, unmodifiable map.
+ */
 + (OrgApacheLuceneAnalysisUtilCharArrayMap *)emptyMap;
 
 - (OrgApacheLuceneAnalysisUtilCharArrayMap_EntrySet *)entrySet;
 
+/*!
+ @brief returns the value of the mapping of <code>len</code> chars of <code>text</code>
+ starting at <code>off</code>
+ */
 - (id)getWithCharArray:(IOSCharArray *)text
                withInt:(jint)off
                withInt:(jint)len;
 
+/*!
+ @brief returns the value of the mapping of the chars inside this <code>CharSequence</code>
+ */
 - (id)getWithJavaLangCharSequence:(id<JavaLangCharSequence>)cs;
 
 - (id)getWithId:(id)o;
 
+/*!
+ @brief Returns an <code>CharArraySet</code> view on the map's keys.
+ The set will use the same <code>matchVersion</code> as this map. 
+ */
 - (OrgApacheLuceneAnalysisUtilCharArraySet *)keySet;
 
+/*!
+ @brief Add the given mapping.
+ If ignoreCase is true for this Set, the text array will be directly modified.
+ The user should never modify this text array after calling this method.
+ */
 - (id)putWithCharArray:(IOSCharArray *)text
                 withId:(id)value;
 
+/*!
+ @brief Add the given mapping.
+ */
 - (id)putWithJavaLangCharSequence:(id<JavaLangCharSequence>)text
                            withId:(id)value;
 
 - (id)putWithId:(id)o
          withId:(id)value;
 
+/*!
+ @brief Add the given mapping.
+ */
 - (id)putWithNSString:(NSString *)text
                withId:(id)value;
 
@@ -89,6 +161,16 @@
 
 - (NSString *)description;
 
+/*!
+ @brief Returns an unmodifiable <code>CharArrayMap</code>.
+ This allows to provide
+ unmodifiable views of internal map for "read-only" use.
+ @param map
+ a map for which the unmodifiable map is returned.
+ @return an new unmodifiable <code>CharArrayMap</code>.
+ @throws NullPointerException
+ if the given map is <code>null</code>.
+ */
 + (OrgApacheLuceneAnalysisUtilCharArrayMap *)unmodifiableMapWithOrgApacheLuceneAnalysisUtilCharArrayMap:(OrgApacheLuceneAnalysisUtilCharArrayMap *)map;
 
 #pragma mark Package-Private
@@ -108,9 +190,13 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilCharArrayMap_initWithInt_withB
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArrayMap *new_OrgApacheLuceneAnalysisUtilCharArrayMap_initWithInt_withBoolean_(jint startSize, jboolean ignoreCase) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArrayMap *create_OrgApacheLuceneAnalysisUtilCharArrayMap_initWithInt_withBoolean_(jint startSize, jboolean ignoreCase);
+
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilCharArrayMap_initWithJavaUtilMap_withBoolean_(OrgApacheLuceneAnalysisUtilCharArrayMap *self, id<JavaUtilMap> c, jboolean ignoreCase);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArrayMap *new_OrgApacheLuceneAnalysisUtilCharArrayMap_initWithJavaUtilMap_withBoolean_(id<JavaUtilMap> c, jboolean ignoreCase) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArrayMap *create_OrgApacheLuceneAnalysisUtilCharArrayMap_initWithJavaUtilMap_withBoolean_(id<JavaUtilMap> c, jboolean ignoreCase);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArrayMap *OrgApacheLuceneAnalysisUtilCharArrayMap_unmodifiableMapWithOrgApacheLuceneAnalysisUtilCharArrayMap_(OrgApacheLuceneAnalysisUtilCharArrayMap *map);
 
@@ -122,32 +208,50 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilCharArrayMap)
 
 #endif
 
-#if !defined (_OrgApacheLuceneAnalysisUtilCharArrayMap_EntryIterator_) && (OrgApacheLuceneAnalysisUtilCharArrayMap_INCLUDE_ALL || OrgApacheLuceneAnalysisUtilCharArrayMap_EntryIterator_INCLUDE)
-#define _OrgApacheLuceneAnalysisUtilCharArrayMap_EntryIterator_
+#if !defined (OrgApacheLuceneAnalysisUtilCharArrayMap_EntryIterator_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisUtilCharArrayMap || defined(INCLUDE_OrgApacheLuceneAnalysisUtilCharArrayMap_EntryIterator))
+#define OrgApacheLuceneAnalysisUtilCharArrayMap_EntryIterator_
 
-#define JavaUtilIterator_RESTRICT 1
-#define JavaUtilIterator_INCLUDE 1
+#define RESTRICT_JavaUtilIterator 1
+#define INCLUDE_JavaUtilIterator 1
 #include "java/util/Iterator.h"
 
 @class IOSCharArray;
 @protocol JavaUtilMap_Entry;
 
+/*!
+ @brief public iterator class so efficient methods are exposed to users
+ */
 @interface OrgApacheLuceneAnalysisUtilCharArrayMap_EntryIterator : NSObject < JavaUtilIterator >
 
 #pragma mark Public
 
+/*!
+ @brief returns the value associated with the last key returned
+ */
 - (id)currentValue;
 
 - (jboolean)hasNext;
 
+/*!
+ @brief use nextCharArray() + currentValue() for better efficiency.
+ */
 - (id<JavaUtilMap_Entry>)next;
 
+/*!
+ @brief gets the next key... do not modify the returned char[]
+ */
 - (IOSCharArray *)nextKey;
 
+/*!
+ @brief gets the next key as a newly created String object
+ */
 - (NSString *)nextKeyString;
 
 - (void)remove;
 
+/*!
+ @brief sets the value associated with the last key returned
+ */
 - (id)setValueWithId:(id)value;
 
 @end
@@ -158,15 +262,18 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilCharArrayMap_EntryIterator
 
 #endif
 
-#if !defined (_OrgApacheLuceneAnalysisUtilCharArrayMap_EntrySet_) && (OrgApacheLuceneAnalysisUtilCharArrayMap_INCLUDE_ALL || OrgApacheLuceneAnalysisUtilCharArrayMap_EntrySet_INCLUDE)
-#define _OrgApacheLuceneAnalysisUtilCharArrayMap_EntrySet_
+#if !defined (OrgApacheLuceneAnalysisUtilCharArrayMap_EntrySet_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisUtilCharArrayMap || defined(INCLUDE_OrgApacheLuceneAnalysisUtilCharArrayMap_EntrySet))
+#define OrgApacheLuceneAnalysisUtilCharArrayMap_EntrySet_
 
-#define JavaUtilAbstractSet_RESTRICT 1
-#define JavaUtilAbstractSet_INCLUDE 1
+#define RESTRICT_JavaUtilAbstractSet 1
+#define INCLUDE_JavaUtilAbstractSet 1
 #include "java/util/AbstractSet.h"
 
 @class OrgApacheLuceneAnalysisUtilCharArrayMap_EntryIterator;
 
+/*!
+ @brief public EntrySet class so efficient methods are exposed to users
+ */
 @interface OrgApacheLuceneAnalysisUtilCharArrayMap_EntrySet : JavaUtilAbstractSet
 
 #pragma mark Public
@@ -183,7 +290,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilCharArrayMap_EntryIterator
 
 #pragma mark Package-Private
 
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisUtilCharArrayMap_EntrySet)
@@ -192,8 +298,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilCharArrayMap_EntrySet)
 
 #endif
 
-#if !defined (_OrgApacheLuceneAnalysisUtilCharArrayMap_UnmodifiableCharArrayMap_) && (OrgApacheLuceneAnalysisUtilCharArrayMap_INCLUDE_ALL || OrgApacheLuceneAnalysisUtilCharArrayMap_UnmodifiableCharArrayMap_INCLUDE)
-#define _OrgApacheLuceneAnalysisUtilCharArrayMap_UnmodifiableCharArrayMap_
+#if !defined (OrgApacheLuceneAnalysisUtilCharArrayMap_UnmodifiableCharArrayMap_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisUtilCharArrayMap || defined(INCLUDE_OrgApacheLuceneAnalysisUtilCharArrayMap_UnmodifiableCharArrayMap))
+#define OrgApacheLuceneAnalysisUtilCharArrayMap_UnmodifiableCharArrayMap_
 
 @class IOSCharArray;
 @class OrgApacheLuceneAnalysisUtilCharArrayMap;
@@ -234,8 +340,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilCharArrayMap_UnmodifiableCharA
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArrayMap_UnmodifiableCharArrayMap *new_OrgApacheLuceneAnalysisUtilCharArrayMap_UnmodifiableCharArrayMap_initWithOrgApacheLuceneAnalysisUtilCharArrayMap_(OrgApacheLuceneAnalysisUtilCharArrayMap *map) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArrayMap_UnmodifiableCharArrayMap *create_OrgApacheLuceneAnalysisUtilCharArrayMap_UnmodifiableCharArrayMap_initWithOrgApacheLuceneAnalysisUtilCharArrayMap_(OrgApacheLuceneAnalysisUtilCharArrayMap *map);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilCharArrayMap_UnmodifiableCharArrayMap)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisUtilCharArrayMap_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilCharArrayMap")

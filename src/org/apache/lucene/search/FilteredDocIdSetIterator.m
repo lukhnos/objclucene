@@ -54,7 +54,7 @@
       return doc_;
     }
     else {
-      while ((doc_ = [_innerIter_ nextDoc]) != OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS) {
+      while ((doc_ = [((OrgApacheLuceneSearchDocIdSetIterator *) nil_chk(_innerIter_)) nextDoc]) != OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS) {
         if ([self matchWithInt:doc_]) {
           return doc_;
         }
@@ -97,7 +97,7 @@
 void OrgApacheLuceneSearchFilteredDocIdSetIterator_initWithOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchFilteredDocIdSetIterator *self, OrgApacheLuceneSearchDocIdSetIterator *innerIter) {
   OrgApacheLuceneSearchDocIdSetIterator_init(self);
   if (innerIter == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"null iterator") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"null iterator");
   }
   JreStrongAssign(&self->_innerIter_, innerIter);
   self->doc_ = -1;

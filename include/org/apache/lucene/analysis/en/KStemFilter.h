@@ -5,29 +5,52 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisEnKStemFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisEnKStemFilter_RESTRICT
-#define OrgApacheLuceneAnalysisEnKStemFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisEnKStemFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisEnKStemFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisEnKStemFilter 0
 #else
-#define OrgApacheLuceneAnalysisEnKStemFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisEnKStemFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisEnKStemFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisEnKStemFilter
 
-#if !defined (_OrgApacheLuceneAnalysisEnKStemFilter_) && (OrgApacheLuceneAnalysisEnKStemFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisEnKStemFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisEnKStemFilter_
+#if !defined (OrgApacheLuceneAnalysisEnKStemFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisEnKStemFilter || defined(INCLUDE_OrgApacheLuceneAnalysisEnKStemFilter))
+#define OrgApacheLuceneAnalysisEnKStemFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief A high-performance kstem filter for english.
+ <p>
+ See <a href="http://ciir.cs.umass.edu/pubfiles/ir-35.pdf">
+ "Viewing Morphology as an Inference Process"</a>
+ (Krovetz, R., Proceedings of the Sixteenth Annual International ACM SIGIR
+ Conference on Research and Development in Information Retrieval, 191-203, 1993).
+ <p>
+ All terms must already be lowercased for this filter to work correctly.
+ <p>
+ Note: This filter is aware of the <code>KeywordAttribute</code>. To prevent
+ certain terms from being passed to the stemmer
+ <code>KeywordAttribute.isKeyword()</code> should be set to <code>true</code>
+ in a previous <code>TokenStream</code>.
+ Note: For including the original term as well as the stemmed version, see
+ <code>org.apache.lucene.analysis.miscellaneous.KeywordRepeatFilterFactory</code>
+ </p>
+ */
 @interface OrgApacheLuceneAnalysisEnKStemFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
 
+/*!
+ @brief Returns the next, stemmed, input Token.
+ @return The stemmed form of a token.
+ @throws IOException If there is a low-level I/O error.
+ */
 - (jboolean)incrementToken;
 
 @end
@@ -38,8 +61,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisEnKStemFilter_initWithOrgApacheLuc
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisEnKStemFilter *new_OrgApacheLuceneAnalysisEnKStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisEnKStemFilter *create_OrgApacheLuceneAnalysisEnKStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisEnKStemFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisEnKStemFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisEnKStemFilter")

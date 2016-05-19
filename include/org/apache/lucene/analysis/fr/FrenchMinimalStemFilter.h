@@ -5,23 +5,32 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter_RESTRICT
-#define OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter 0
 #else
-#define OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter
 
-#if !defined (_OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter_) && (OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter_
+#if !defined (OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter || defined(INCLUDE_OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter))
+#define OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief A <code>TokenFilter</code> that applies <code>FrenchMinimalStemmer</code> to stem French
+ words.
+ <p>
+ To prevent terms from being stemmed use an instance of
+ <code>SetKeywordMarkerFilter</code> or a custom <code>TokenFilter</code> that sets
+ the <code>KeywordAttribute</code> before this <code>TokenStream</code>.
+ </p>
+ */
 @interface OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
@@ -38,8 +47,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter_initWith
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter *new_OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter *create_OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter")

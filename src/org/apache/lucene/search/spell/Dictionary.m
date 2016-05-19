@@ -3,11 +3,8 @@
 //  source: ./suggest/src/java/org/apache/lucene/search/spell/Dictionary.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/search/spell/Dictionary.h"
-#include "org/apache/lucene/search/suggest/InputIterator.h"
 
 @interface OrgApacheLuceneSearchSpellDictionary : NSObject
 

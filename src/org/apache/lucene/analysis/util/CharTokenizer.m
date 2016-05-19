@@ -16,9 +16,6 @@
 #include "org/apache/lucene/util/AttributeFactory.h"
 #include "org/apache/lucene/util/AttributeSource.h"
 
-#define OrgApacheLuceneAnalysisUtilCharTokenizer_MAX_WORD_LEN 255
-#define OrgApacheLuceneAnalysisUtilCharTokenizer_IO_BUFFER_SIZE 4096
-
 @interface OrgApacheLuceneAnalysisUtilCharTokenizer () {
  @public
   jint offset_, bufferIndex_, dataLen_, finalOffset_;
@@ -35,9 +32,13 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisUtilCharTokenizer, offsetAtt_, id<Org
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisUtilCharTokenizer, charUtils_, OrgApacheLuceneAnalysisUtilCharacterUtils *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisUtilCharTokenizer, ioBuffer_, OrgApacheLuceneAnalysisUtilCharacterUtils_CharacterBuffer *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisUtilCharTokenizer, MAX_WORD_LEN, jint)
+inline jint OrgApacheLuceneAnalysisUtilCharTokenizer_get_MAX_WORD_LEN();
+#define OrgApacheLuceneAnalysisUtilCharTokenizer_MAX_WORD_LEN 255
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisUtilCharTokenizer, MAX_WORD_LEN, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisUtilCharTokenizer, IO_BUFFER_SIZE, jint)
+inline jint OrgApacheLuceneAnalysisUtilCharTokenizer_get_IO_BUFFER_SIZE();
+#define OrgApacheLuceneAnalysisUtilCharTokenizer_IO_BUFFER_SIZE 4096
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisUtilCharTokenizer, IO_BUFFER_SIZE, jint)
 
 @implementation OrgApacheLuceneAnalysisUtilCharTokenizer
 

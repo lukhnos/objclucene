@@ -5,32 +5,38 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilPackedBlockPackedReader_INCLUDE_ALL")
-#if OrgApacheLuceneUtilPackedBlockPackedReader_RESTRICT
-#define OrgApacheLuceneUtilPackedBlockPackedReader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedBlockPackedReader")
+#ifdef RESTRICT_OrgApacheLuceneUtilPackedBlockPackedReader
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackedBlockPackedReader 0
 #else
-#define OrgApacheLuceneUtilPackedBlockPackedReader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackedBlockPackedReader 1
 #endif
-#undef OrgApacheLuceneUtilPackedBlockPackedReader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilPackedBlockPackedReader
 
-#if !defined (_OrgApacheLuceneUtilPackedBlockPackedReader_) && (OrgApacheLuceneUtilPackedBlockPackedReader_INCLUDE_ALL || OrgApacheLuceneUtilPackedBlockPackedReader_INCLUDE)
-#define _OrgApacheLuceneUtilPackedBlockPackedReader_
+#if !defined (OrgApacheLuceneUtilPackedBlockPackedReader_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedBlockPackedReader || defined(INCLUDE_OrgApacheLuceneUtilPackedBlockPackedReader))
+#define OrgApacheLuceneUtilPackedBlockPackedReader_
 
-#define OrgApacheLuceneUtilLongValues_RESTRICT 1
-#define OrgApacheLuceneUtilLongValues_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilLongValues 1
+#define INCLUDE_OrgApacheLuceneUtilLongValues 1
 #include "org/apache/lucene/util/LongValues.h"
 
-#define OrgApacheLuceneUtilAccountable_RESTRICT 1
-#define OrgApacheLuceneUtilAccountable_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAccountable 1
+#define INCLUDE_OrgApacheLuceneUtilAccountable 1
 #include "org/apache/lucene/util/Accountable.h"
 
 @class OrgApacheLuceneStoreIndexInput;
 @protocol JavaUtilCollection;
 
+/*!
+ @brief Provides random access to a stream written with <code>BlockPackedWriter</code>.
+ */
 @interface OrgApacheLuceneUtilPackedBlockPackedReader : OrgApacheLuceneUtilLongValues < OrgApacheLuceneUtilAccountable >
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ */
 - (instancetype)initWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)inArg
                                                withInt:(jint)packedIntsVersion
                                                withInt:(jint)blockSize
@@ -53,8 +59,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedBlockPackedReader_initWithOrgApa
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedBlockPackedReader *new_OrgApacheLuceneUtilPackedBlockPackedReader_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_(OrgApacheLuceneStoreIndexInput *inArg, jint packedIntsVersion, jint blockSize, jlong valueCount, jboolean direct) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedBlockPackedReader *create_OrgApacheLuceneUtilPackedBlockPackedReader_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_(OrgApacheLuceneStoreIndexInput *inArg, jint packedIntsVersion, jint blockSize, jlong valueCount, jboolean direct);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedBlockPackedReader)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilPackedBlockPackedReader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedBlockPackedReader")

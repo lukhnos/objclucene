@@ -58,6 +58,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexParallelCompositeReader_
 
 __attribute__((unused)) static OrgApacheLuceneIndexParallelCompositeReader_$1 *new_OrgApacheLuceneIndexParallelCompositeReader_$1_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_(jboolean arg$0, IOSObjectArray *arg$1, IOSObjectArray *arg$2) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexParallelCompositeReader_$1 *create_OrgApacheLuceneIndexParallelCompositeReader_$1_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_(jboolean arg$0, IOSObjectArray *arg$1, IOSObjectArray *arg$2);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexParallelCompositeReader_$1)
 
 @implementation OrgApacheLuceneIndexParallelCompositeReader
@@ -141,9 +143,11 @@ void OrgApacheLuceneIndexParallelCompositeReader_initWithOrgApacheLuceneIndexCom
 }
 
 OrgApacheLuceneIndexParallelCompositeReader *new_OrgApacheLuceneIndexParallelCompositeReader_initWithOrgApacheLuceneIndexCompositeReaderArray_(IOSObjectArray *readers) {
-  OrgApacheLuceneIndexParallelCompositeReader *self = [OrgApacheLuceneIndexParallelCompositeReader alloc];
-  OrgApacheLuceneIndexParallelCompositeReader_initWithOrgApacheLuceneIndexCompositeReaderArray_(self, readers);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexParallelCompositeReader, initWithOrgApacheLuceneIndexCompositeReaderArray_, readers)
+}
+
+OrgApacheLuceneIndexParallelCompositeReader *create_OrgApacheLuceneIndexParallelCompositeReader_initWithOrgApacheLuceneIndexCompositeReaderArray_(IOSObjectArray *readers) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexParallelCompositeReader, initWithOrgApacheLuceneIndexCompositeReaderArray_, readers)
 }
 
 void OrgApacheLuceneIndexParallelCompositeReader_initWithBoolean_withOrgApacheLuceneIndexCompositeReaderArray_(OrgApacheLuceneIndexParallelCompositeReader *self, jboolean closeSubReaders, IOSObjectArray *readers) {
@@ -151,14 +155,16 @@ void OrgApacheLuceneIndexParallelCompositeReader_initWithBoolean_withOrgApacheLu
 }
 
 OrgApacheLuceneIndexParallelCompositeReader *new_OrgApacheLuceneIndexParallelCompositeReader_initWithBoolean_withOrgApacheLuceneIndexCompositeReaderArray_(jboolean closeSubReaders, IOSObjectArray *readers) {
-  OrgApacheLuceneIndexParallelCompositeReader *self = [OrgApacheLuceneIndexParallelCompositeReader alloc];
-  OrgApacheLuceneIndexParallelCompositeReader_initWithBoolean_withOrgApacheLuceneIndexCompositeReaderArray_(self, closeSubReaders, readers);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexParallelCompositeReader, initWithBoolean_withOrgApacheLuceneIndexCompositeReaderArray_, closeSubReaders, readers)
+}
+
+OrgApacheLuceneIndexParallelCompositeReader *create_OrgApacheLuceneIndexParallelCompositeReader_initWithBoolean_withOrgApacheLuceneIndexCompositeReaderArray_(jboolean closeSubReaders, IOSObjectArray *readers) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexParallelCompositeReader, initWithBoolean_withOrgApacheLuceneIndexCompositeReaderArray_, closeSubReaders, readers)
 }
 
 void OrgApacheLuceneIndexParallelCompositeReader_initWithBoolean_withOrgApacheLuceneIndexCompositeReaderArray_withOrgApacheLuceneIndexCompositeReaderArray_(OrgApacheLuceneIndexParallelCompositeReader *self, jboolean closeSubReaders, IOSObjectArray *readers, IOSObjectArray *storedFieldReaders) {
   OrgApacheLuceneIndexBaseCompositeReader_initWithOrgApacheLuceneIndexIndexReaderArray_(self, OrgApacheLuceneIndexParallelCompositeReader_prepareLeafReadersWithOrgApacheLuceneIndexCompositeReaderArray_withOrgApacheLuceneIndexCompositeReaderArray_(readers, storedFieldReaders));
-  JreStrongAssign(&self->completeReaderSet_, JavaUtilCollections_newSetFromMapWithJavaUtilMap_([new_JavaUtilIdentityHashMap_init() autorelease]));
+  JreStrongAssign(&self->completeReaderSet_, JavaUtilCollections_newSetFromMapWithJavaUtilMap_(create_JavaUtilIdentityHashMap_init()));
   self->closeSubReaders_ = closeSubReaders;
   JavaUtilCollections_addAllWithJavaUtilCollection_withNSObjectArray_(self->completeReaderSet_, readers);
   JavaUtilCollections_addAllWithJavaUtilCollection_withNSObjectArray_(self->completeReaderSet_, storedFieldReaders);
@@ -171,15 +177,17 @@ void OrgApacheLuceneIndexParallelCompositeReader_initWithBoolean_withOrgApacheLu
 }
 
 OrgApacheLuceneIndexParallelCompositeReader *new_OrgApacheLuceneIndexParallelCompositeReader_initWithBoolean_withOrgApacheLuceneIndexCompositeReaderArray_withOrgApacheLuceneIndexCompositeReaderArray_(jboolean closeSubReaders, IOSObjectArray *readers, IOSObjectArray *storedFieldReaders) {
-  OrgApacheLuceneIndexParallelCompositeReader *self = [OrgApacheLuceneIndexParallelCompositeReader alloc];
-  OrgApacheLuceneIndexParallelCompositeReader_initWithBoolean_withOrgApacheLuceneIndexCompositeReaderArray_withOrgApacheLuceneIndexCompositeReaderArray_(self, closeSubReaders, readers, storedFieldReaders);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexParallelCompositeReader, initWithBoolean_withOrgApacheLuceneIndexCompositeReaderArray_withOrgApacheLuceneIndexCompositeReaderArray_, closeSubReaders, readers, storedFieldReaders)
+}
+
+OrgApacheLuceneIndexParallelCompositeReader *create_OrgApacheLuceneIndexParallelCompositeReader_initWithBoolean_withOrgApacheLuceneIndexCompositeReaderArray_withOrgApacheLuceneIndexCompositeReaderArray_(jboolean closeSubReaders, IOSObjectArray *readers, IOSObjectArray *storedFieldReaders) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexParallelCompositeReader, initWithBoolean_withOrgApacheLuceneIndexCompositeReaderArray_withOrgApacheLuceneIndexCompositeReaderArray_, closeSubReaders, readers, storedFieldReaders)
 }
 
 IOSObjectArray *OrgApacheLuceneIndexParallelCompositeReader_prepareLeafReadersWithOrgApacheLuceneIndexCompositeReaderArray_withOrgApacheLuceneIndexCompositeReaderArray_(IOSObjectArray *readers, IOSObjectArray *storedFieldsReaders) {
   OrgApacheLuceneIndexParallelCompositeReader_initialize();
   if (((IOSObjectArray *) nil_chk(readers))->size_ == 0) {
-    if (((IOSObjectArray *) nil_chk(storedFieldsReaders))->size_ > 0) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"There must be at least one main reader if storedFieldsReaders are used.") autorelease];
+    if (((IOSObjectArray *) nil_chk(storedFieldsReaders))->size_ > 0) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"There must be at least one main reader if storedFieldsReaders are used.");
     return [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneIndexLeafReader_class_()];
   }
   else {
@@ -214,16 +222,16 @@ void OrgApacheLuceneIndexParallelCompositeReader_validateWithOrgApacheLuceneInde
     OrgApacheLuceneIndexCompositeReader *reader = IOSObjectArray_Get(readers, i);
     id<JavaUtilList> subs = [((OrgApacheLuceneIndexCompositeReader *) nil_chk(reader)) leaves];
     if ([reader maxDoc] != maxDoc) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$I", @"All readers must have same maxDoc: ", maxDoc, @"!=", [reader maxDoc])) autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$I", @"All readers must have same maxDoc: ", maxDoc, @"!=", [reader maxDoc]));
     }
     jint noSubs = [((id<JavaUtilList>) nil_chk(subs)) size];
     if (noSubs != ((IOSIntArray *) nil_chk(leafMaxDoc))->size_) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"All readers must have same number of leaf readers") autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"All readers must have same number of leaf readers");
     }
     for (jint subIDX = 0; subIDX < noSubs; subIDX++) {
       OrgApacheLuceneIndexLeafReader *r = [((OrgApacheLuceneIndexLeafReaderContext *) nil_chk([subs getWithInt:subIDX])) reader];
       if ([((OrgApacheLuceneIndexLeafReader *) nil_chk(r)) maxDoc] != IOSIntArray_Get(leafMaxDoc, subIDX)) {
-        @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"All leaf readers must have same corresponding subReader maxDoc") autorelease];
+        @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"All leaf readers must have same corresponding subReader maxDoc");
       }
     }
   }
@@ -260,9 +268,11 @@ void OrgApacheLuceneIndexParallelCompositeReader_$1_initWithBoolean_withOrgApach
 }
 
 OrgApacheLuceneIndexParallelCompositeReader_$1 *new_OrgApacheLuceneIndexParallelCompositeReader_$1_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_(jboolean arg$0, IOSObjectArray *arg$1, IOSObjectArray *arg$2) {
-  OrgApacheLuceneIndexParallelCompositeReader_$1 *self = [OrgApacheLuceneIndexParallelCompositeReader_$1 alloc];
-  OrgApacheLuceneIndexParallelCompositeReader_$1_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_(self, arg$0, arg$1, arg$2);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexParallelCompositeReader_$1, initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_, arg$0, arg$1, arg$2)
+}
+
+OrgApacheLuceneIndexParallelCompositeReader_$1 *create_OrgApacheLuceneIndexParallelCompositeReader_$1_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_(jboolean arg$0, IOSObjectArray *arg$1, IOSObjectArray *arg$2) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexParallelCompositeReader_$1, initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_, arg$0, arg$1, arg$2)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexParallelCompositeReader_$1)

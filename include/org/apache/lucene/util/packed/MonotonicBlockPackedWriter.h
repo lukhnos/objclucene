@@ -5,27 +5,59 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter_INCLUDE_ALL")
-#if OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter_RESTRICT
-#define OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter")
+#ifdef RESTRICT_OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter 0
 #else
-#define OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter 1
 #endif
-#undef OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter
 
-#if !defined (_OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter_) && (OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter_INCLUDE_ALL || OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter_INCLUDE)
-#define _OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter_
+#if !defined (OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter || defined(INCLUDE_OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter))
+#define OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter_
 
-#define OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_RESTRICT 1
-#define OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilPackedAbstractBlockPackedWriter 1
+#define INCLUDE_OrgApacheLuceneUtilPackedAbstractBlockPackedWriter 1
 #include "org/apache/lucene/util/packed/AbstractBlockPackedWriter.h"
 
 @class OrgApacheLuceneStoreDataOutput;
 
+/*!
+ @brief A writer for large monotonically increasing sequences of positive longs.
+ <p>
+ The sequence is divided into fixed-size blocks and for each block, values
+ are modeled after a linear function f: x &rarr; A &times; x + B. The block
+ encodes deltas from the expected values computed from this function using as
+ few bits as possible.
+ <p>
+ Format:
+ <ul>
+ <li>&lt;BLock&gt;<sup>BlockCount</sup>
+ <li>BlockCount: &lceil; ValueCount / BlockSize &rceil;
+ <li>Block: &lt;Header, (Ints)&gt;
+ <li>Header: &lt;B, A, BitsPerValue&gt;
+ <li>B: the B from f: x &rarr; A &times; x + B using a
+ <code>zig-zag encoded</code>
+ <code>vLong</code>
+ <li>A: the A from f: x &rarr; A &times; x + B encoded using
+ <code>Float.floatToIntBits(float)</code> on
+ <code>4 bytes</code>
+ <li>BitsPerValue: a <code>variable-length int</code>
+ <li>Ints: if BitsPerValue is <tt>0</tt>, then there is nothing to read and
+ all values perfectly match the result of the function. Otherwise, these
+ are the <code>packed</code> deltas from the expected value
+ (computed from the function) using exaclty BitsPerValue bits per value.
+ </ul>
+ - seealso: MonotonicBlockPackedReader
+ */
 @interface OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter : OrgApacheLuceneUtilPackedAbstractBlockPackedWriter
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ @param blockSize the number of values of a single block, must be a power of 2
+ */
 - (instancetype)initWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg
                                                withInt:(jint)blockSize;
 
@@ -43,8 +75,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter_initW
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter *new_OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter_initWithOrgApacheLuceneStoreDataOutput_withInt_(OrgApacheLuceneStoreDataOutput *outArg, jint blockSize) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter *create_OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter_initWithOrgApacheLuceneStoreDataOutput_withInt_(OrgApacheLuceneStoreDataOutput *outArg, jint blockSize);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter")

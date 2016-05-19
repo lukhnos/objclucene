@@ -55,9 +55,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (jint)setFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo {
   JreStrongAssign(&self->fieldInfo_, fieldInfo);
   JreStrongAssign(&indexOptions_, [((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo)) getIndexOptions]);
-  writeFreqs_ = ([((OrgApacheLuceneIndexIndexOptionsEnum *) nil_chk(indexOptions_)) compareToWithId:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS)] >= 0);
-  writePositions_ = ([indexOptions_ compareToWithId:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS)] >= 0);
-  writeOffsets_ = ([indexOptions_ compareToWithId:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS)] >= 0);
+  writeFreqs_ = ([((OrgApacheLuceneIndexIndexOptions *) nil_chk(indexOptions_)) compareToWithId:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS)] >= 0);
+  writePositions_ = ([((OrgApacheLuceneIndexIndexOptions *) nil_chk(indexOptions_)) compareToWithId:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS)] >= 0);
+  writeOffsets_ = ([((OrgApacheLuceneIndexIndexOptions *) nil_chk(indexOptions_)) compareToWithId:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS)] >= 0);
   writePayloads_ = [fieldInfo hasPayloads];
   if (writeFreqs_ == false) {
     enumFlags_ = 0;
@@ -101,7 +101,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     [((OrgApacheLuceneUtilFixedBitSet *) nil_chk(docsSeen)) setWithInt:docID];
     jint freq;
     if (writeFreqs_) {
-      freq = [postingsEnum_ freq];
+      freq = [((OrgApacheLuceneIndexPostingsEnum *) nil_chk(postingsEnum_)) freq];
       totalTermFreq += freq;
     }
     else {
@@ -110,13 +110,13 @@ J2OBJC_IGNORE_DESIGNATED_END
     [self startDocWithInt:docID withInt:freq];
     if (writePositions_) {
       for (jint i = 0; i < freq; i++) {
-        jint pos = [postingsEnum_ nextPosition];
-        OrgApacheLuceneUtilBytesRef *payload = writePayloads_ ? [postingsEnum_ getPayload] : nil;
+        jint pos = [((OrgApacheLuceneIndexPostingsEnum *) nil_chk(postingsEnum_)) nextPosition];
+        OrgApacheLuceneUtilBytesRef *payload = writePayloads_ ? [((OrgApacheLuceneIndexPostingsEnum *) nil_chk(postingsEnum_)) getPayload] : nil;
         jint startOffset;
         jint endOffset;
         if (writeOffsets_) {
-          startOffset = [postingsEnum_ startOffset];
-          endOffset = [postingsEnum_ endOffset];
+          startOffset = [((OrgApacheLuceneIndexPostingsEnum *) nil_chk(postingsEnum_)) startOffset];
+          endOffset = [((OrgApacheLuceneIndexPostingsEnum *) nil_chk(postingsEnum_)) endOffset];
         }
         else {
           startOffset = -1;

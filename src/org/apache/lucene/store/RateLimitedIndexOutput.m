@@ -15,7 +15,14 @@
  @public
   OrgApacheLuceneStoreIndexOutput *delegate_;
   OrgApacheLuceneStoreRateLimiter *rateLimiter_;
+  /*!
+   @brief How many bytes we've written since we last called rateLimiter.pause.
+   */
   jlong bytesSinceLastPause_;
+  /*!
+   @brief Cached here not not always have to call RateLimiter#getMinPauseCheckBytes()
+ which does volatile read.
+   */
   jlong currentMinPauseCheckBytes_;
 }
 
@@ -102,9 +109,11 @@ void OrgApacheLuceneStoreRateLimitedIndexOutput_initWithOrgApacheLuceneStoreRate
 }
 
 OrgApacheLuceneStoreRateLimitedIndexOutput *new_OrgApacheLuceneStoreRateLimitedIndexOutput_initWithOrgApacheLuceneStoreRateLimiter_withOrgApacheLuceneStoreIndexOutput_(OrgApacheLuceneStoreRateLimiter *rateLimiter, OrgApacheLuceneStoreIndexOutput *delegate) {
-  OrgApacheLuceneStoreRateLimitedIndexOutput *self = [OrgApacheLuceneStoreRateLimitedIndexOutput alloc];
-  OrgApacheLuceneStoreRateLimitedIndexOutput_initWithOrgApacheLuceneStoreRateLimiter_withOrgApacheLuceneStoreIndexOutput_(self, rateLimiter, delegate);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreRateLimitedIndexOutput, initWithOrgApacheLuceneStoreRateLimiter_withOrgApacheLuceneStoreIndexOutput_, rateLimiter, delegate)
+}
+
+OrgApacheLuceneStoreRateLimitedIndexOutput *create_OrgApacheLuceneStoreRateLimitedIndexOutput_initWithOrgApacheLuceneStoreRateLimiter_withOrgApacheLuceneStoreIndexOutput_(OrgApacheLuceneStoreRateLimiter *rateLimiter, OrgApacheLuceneStoreIndexOutput *delegate) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreRateLimitedIndexOutput, initWithOrgApacheLuceneStoreRateLimiter_withOrgApacheLuceneStoreIndexOutput_, rateLimiter, delegate)
 }
 
 void OrgApacheLuceneStoreRateLimitedIndexOutput_checkRate(OrgApacheLuceneStoreRateLimitedIndexOutput *self) {

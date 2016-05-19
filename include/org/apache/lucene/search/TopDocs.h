@@ -5,24 +5,34 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchTopDocs_INCLUDE_ALL")
-#if OrgApacheLuceneSearchTopDocs_RESTRICT
-#define OrgApacheLuceneSearchTopDocs_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchTopDocs")
+#ifdef RESTRICT_OrgApacheLuceneSearchTopDocs
+#define INCLUDE_ALL_OrgApacheLuceneSearchTopDocs 0
 #else
-#define OrgApacheLuceneSearchTopDocs_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchTopDocs 1
 #endif
-#undef OrgApacheLuceneSearchTopDocs_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchTopDocs
 
-#if !defined (_OrgApacheLuceneSearchTopDocs_) && (OrgApacheLuceneSearchTopDocs_INCLUDE_ALL || OrgApacheLuceneSearchTopDocs_INCLUDE)
-#define _OrgApacheLuceneSearchTopDocs_
+#if !defined (OrgApacheLuceneSearchTopDocs_) && (INCLUDE_ALL_OrgApacheLuceneSearchTopDocs || defined(INCLUDE_OrgApacheLuceneSearchTopDocs))
+#define OrgApacheLuceneSearchTopDocs_
 
 @class IOSObjectArray;
 @class OrgApacheLuceneSearchSort;
 @class OrgApacheLuceneSearchTopFieldDocs;
 
+/*!
+ @brief Represents hits returned by <code>IndexSearcher.search(Query,int)</code>
+ .
+ */
 @interface OrgApacheLuceneSearchTopDocs : NSObject {
  @public
+  /*!
+   @brief The total number of hits for the query.
+   */
   jint totalHits_;
+  /*!
+   @brief The top hits for the query.
+   */
   IOSObjectArray *scoreDocs_;
 }
 
@@ -32,28 +42,66 @@
 withOrgApacheLuceneSearchScoreDocArray:(IOSObjectArray *)scoreDocs
                   withFloat:(jfloat)maxScore;
 
+/*!
+ @brief Returns the maximum score value encountered.
+ Note that in case
+ scores are not tracked, this returns <code>Float.NaN</code>.
+ */
 - (jfloat)getMaxScore;
 
+/*!
+ @brief Same as <code>merge(int,TopDocs[])</code> but also ignores the top
+ <code>start</code> top docs.
+ This is typically useful for pagination.
+ */
 + (OrgApacheLuceneSearchTopDocs *)mergeWithInt:(jint)start
                                        withInt:(jint)topN
          withOrgApacheLuceneSearchTopDocsArray:(IOSObjectArray *)shardHits;
 
+/*!
+ @brief Returns a new TopDocs, containing topN results across
+ the provided TopDocs, sorting by score.
+ Each <code>TopDocs</code>
+ instance must be sorted.
+  
+ */
 + (OrgApacheLuceneSearchTopDocs *)mergeWithInt:(jint)topN
          withOrgApacheLuceneSearchTopDocsArray:(IOSObjectArray *)shardHits;
 
+/*!
+ @brief Same as <code>merge(Sort,int,TopFieldDocs[])</code> but also ignores the top
+ <code>start</code> top docs.
+ This is typically useful for pagination.
+ */
 + (OrgApacheLuceneSearchTopFieldDocs *)mergeWithOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort
                                                                   withInt:(jint)start
                                                                   withInt:(jint)topN
                                withOrgApacheLuceneSearchTopFieldDocsArray:(IOSObjectArray *)shardHits;
 
+/*!
+ @brief Returns a new TopFieldDocs, containing topN results across
+ the provided TopFieldDocs, sorting by the specified <code>Sort</code>
+ .
+ Each of the TopDocs must have been sorted by
+ the same Sort, and sort field values must have been
+ filled (ie, <code>fillFields=true</code> must be
+ passed to <code>TopFieldCollector.create</code>).
+  
+ */
 + (OrgApacheLuceneSearchTopFieldDocs *)mergeWithOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort
                                                                   withInt:(jint)topN
                                withOrgApacheLuceneSearchTopFieldDocsArray:(IOSObjectArray *)shardHits;
 
+/*!
+ @brief Sets the maximum score value encountered.
+ */
 - (void)setMaxScoreWithFloat:(jfloat)maxScore;
 
 #pragma mark Package-Private
 
+/*!
+ @brief Constructs a TopDocs with a default maxScore=Float.NaN.
+ */
 - (instancetype)initWithInt:(jint)totalHits
 withOrgApacheLuceneSearchScoreDocArray:(IOSObjectArray *)scoreDocs;
 
@@ -67,9 +115,13 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuc
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchTopDocs *new_OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_(jint totalHits, IOSObjectArray *scoreDocs) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchTopDocs *create_OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_(jint totalHits, IOSObjectArray *scoreDocs);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_withFloat_(OrgApacheLuceneSearchTopDocs *self, jint totalHits, IOSObjectArray *scoreDocs, jfloat maxScore);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchTopDocs *new_OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_withFloat_(jint totalHits, IOSObjectArray *scoreDocs, jfloat maxScore) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchTopDocs *create_OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_withFloat_(jint totalHits, IOSObjectArray *scoreDocs, jfloat maxScore);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchTopDocs *OrgApacheLuceneSearchTopDocs_mergeWithInt_withOrgApacheLuceneSearchTopDocsArray_(jint topN, IOSObjectArray *shardHits);
 
@@ -83,4 +135,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopDocs)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchTopDocs_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchTopDocs")

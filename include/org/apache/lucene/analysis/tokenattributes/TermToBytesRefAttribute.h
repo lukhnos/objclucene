@@ -5,25 +5,54 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_RESTRICT
-#define OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute 0
 #else
-#define OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute 1
 #endif
-#undef OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute
 
-#if !defined (_OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_) && (OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_INCLUDE_ALL || OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_INCLUDE)
-#define _OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_
+#if !defined (OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute || defined(INCLUDE_OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute))
+#define OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_
 
-#define OrgApacheLuceneUtilAttribute_RESTRICT 1
-#define OrgApacheLuceneUtilAttribute_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAttribute 1
+#define INCLUDE_OrgApacheLuceneUtilAttribute 1
 #include "org/apache/lucene/util/Attribute.h"
 
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief This attribute is requested by TermsHashPerField to index the contents.
+ This attribute can be used to customize the final byte[] encoding of terms.
+ <p>
+ Consumers of this attribute call <code>getBytesRef()</code> for each term. Example:
+ <pre class="prettyprint">
+ final TermToBytesRefAttribute termAtt = tokenStream.getAttribute(TermToBytesRefAttribute.class);
+ while (tokenStream.incrementToken() {
+ final BytesRef bytes = termAtt.getBytesRef();
+ if (isInteresting(bytes)) {
+ // because the bytes are reused by the attribute (like CharTermAttribute's char[] buffer),
+ // you should make a copy if you need persistent access to the bytes, otherwise they will
+ // be rewritten across calls to incrementToken()
+ doSomethingWith(BytesRef.deepCopyOf(bytes));
+ }
+ }
+ ...
+ 
+@endcode
+  This is a very expert and internal API, please use
+ <code>CharTermAttribute</code> and its implementation for UTF-8 terms; to
+ index binary terms, use <code>BytesTermAttribute</code> and its implementation.
+ */
 @protocol OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute < OrgApacheLuceneUtilAttribute, NSObject, JavaObject >
 
+/*!
+ @brief Retrieve this attribute's BytesRef.
+ The bytes are updated from the current term.
+ The implementation may return a new instance or keep the previous one.
+ @return a BytesRef to be indexed (only stays valid until token stream gets incremented)
+ */
 - (OrgApacheLuceneUtilBytesRef *)getBytesRef;
 
 @end
@@ -34,4 +63,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenattributesTermToBytesRefA
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute")

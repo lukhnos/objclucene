@@ -5,25 +5,28 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserSurroundQueryAndQuery_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserSurroundQueryAndQuery_RESTRICT
-#define OrgApacheLuceneQueryparserSurroundQueryAndQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryAndQuery")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserSurroundQueryAndQuery
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryAndQuery 0
 #else
-#define OrgApacheLuceneQueryparserSurroundQueryAndQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryAndQuery 1
 #endif
-#undef OrgApacheLuceneQueryparserSurroundQueryAndQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserSurroundQueryAndQuery
 
-#if !defined (_OrgApacheLuceneQueryparserSurroundQueryAndQuery_) && (OrgApacheLuceneQueryparserSurroundQueryAndQuery_INCLUDE_ALL || OrgApacheLuceneQueryparserSurroundQueryAndQuery_INCLUDE)
-#define _OrgApacheLuceneQueryparserSurroundQueryAndQuery_
+#if !defined (OrgApacheLuceneQueryparserSurroundQueryAndQuery_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryAndQuery || defined(INCLUDE_OrgApacheLuceneQueryparserSurroundQueryAndQuery))
+#define OrgApacheLuceneQueryparserSurroundQueryAndQuery_
 
-#define OrgApacheLuceneQueryparserSurroundQueryComposedQuery_RESTRICT 1
-#define OrgApacheLuceneQueryparserSurroundQueryComposedQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserSurroundQueryComposedQuery 1
+#define INCLUDE_OrgApacheLuceneQueryparserSurroundQueryComposedQuery 1
 #include "org/apache/lucene/queryparser/surround/query/ComposedQuery.h"
 
 @class OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory;
 @class OrgApacheLuceneSearchQuery;
 @protocol JavaUtilList;
 
+/*!
+ @brief Factory for conjunctions
+ */
 @interface OrgApacheLuceneQueryparserSurroundQueryAndQuery : OrgApacheLuceneQueryparserSurroundQueryComposedQuery
 
 #pragma mark Public
@@ -43,8 +46,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQueryAndQuery_initWithJ
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQueryAndQuery *new_OrgApacheLuceneQueryparserSurroundQueryAndQuery_initWithJavaUtilList_withBoolean_withNSString_(id<JavaUtilList> queries, jboolean inf, NSString *opName) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQueryAndQuery *create_OrgApacheLuceneQueryparserSurroundQueryAndQuery_initWithJavaUtilList_withBoolean_withNSString_(id<JavaUtilList> queries, jboolean inf, NSString *opName);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQueryAndQuery)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserSurroundQueryAndQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryAndQuery")

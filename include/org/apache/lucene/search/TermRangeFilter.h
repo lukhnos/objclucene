@@ -5,47 +5,90 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchTermRangeFilter_INCLUDE_ALL")
-#if OrgApacheLuceneSearchTermRangeFilter_RESTRICT
-#define OrgApacheLuceneSearchTermRangeFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchTermRangeFilter")
+#ifdef RESTRICT_OrgApacheLuceneSearchTermRangeFilter
+#define INCLUDE_ALL_OrgApacheLuceneSearchTermRangeFilter 0
 #else
-#define OrgApacheLuceneSearchTermRangeFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchTermRangeFilter 1
 #endif
-#undef OrgApacheLuceneSearchTermRangeFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchTermRangeFilter
 
-#if !defined (_OrgApacheLuceneSearchTermRangeFilter_) && (OrgApacheLuceneSearchTermRangeFilter_INCLUDE_ALL || OrgApacheLuceneSearchTermRangeFilter_INCLUDE)
-#define _OrgApacheLuceneSearchTermRangeFilter_
+#if !defined (OrgApacheLuceneSearchTermRangeFilter_) && (INCLUDE_ALL_OrgApacheLuceneSearchTermRangeFilter || defined(INCLUDE_OrgApacheLuceneSearchTermRangeFilter))
+#define OrgApacheLuceneSearchTermRangeFilter_
 
-#define OrgApacheLuceneSearchMultiTermQueryWrapperFilter_RESTRICT 1
-#define OrgApacheLuceneSearchMultiTermQueryWrapperFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchMultiTermQueryWrapperFilter 1
+#define INCLUDE_OrgApacheLuceneSearchMultiTermQueryWrapperFilter 1
 #include "org/apache/lucene/search/MultiTermQueryWrapperFilter.h"
 
+@class IOSObjectArray;
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief A Filter that restricts search results to a range of term
+ values in a given field.
+ <p>This filter matches the documents looking for terms that fall into the
+ supplied range according to <code>Byte.compareTo(Byte)</code>
+ ,  It is not intended
+ for numerical ranges; use <code>NumericRangeFilter</code> instead.
+ @since 2.9
+ */
 @interface OrgApacheLuceneSearchTermRangeFilter : OrgApacheLuceneSearchMultiTermQueryWrapperFilter
 
 #pragma mark Public
 
+/*!
+ @param fieldName The field this range applies to
+ @param lowerTerm The lower bound on this range
+ @param upperTerm The upper bound on this range
+ @param includeLower Does this range include the lower bound?
+ @param includeUpper Does this range include the upper bound?
+ @throws IllegalArgumentException if both terms are null or if
+ lowerTerm is null and includeLower is true (similar for upperTerm
+ and includeUpper)
+ */
 - (instancetype)initWithNSString:(NSString *)fieldName
  withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)lowerTerm
  withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)upperTerm
                      withBoolean:(jboolean)includeLower
                      withBoolean:(jboolean)includeUpper;
 
+/*!
+ @brief Returns the lower value of this range filter
+ */
 - (OrgApacheLuceneUtilBytesRef *)getLowerTerm;
 
+/*!
+ @brief Returns the upper value of this range filter
+ */
 - (OrgApacheLuceneUtilBytesRef *)getUpperTerm;
 
+/*!
+ @brief Returns <code>true</code> if the lower endpoint is inclusive
+ */
 - (jboolean)includesLower;
 
+/*!
+ @brief Returns <code>true</code> if the upper endpoint is inclusive
+ */
 - (jboolean)includesUpper;
 
+/*!
+ @brief Constructs a filter for field <code>fieldName</code> matching
+ less than or equal to <code>upperTerm</code>.
+ */
 + (OrgApacheLuceneSearchTermRangeFilter *)LessWithNSString:(NSString *)fieldName
                            withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)upperTerm;
 
+/*!
+ @brief Constructs a filter for field <code>fieldName</code> matching
+ greater than or equal to <code>lowerTerm</code>.
+ */
 + (OrgApacheLuceneSearchTermRangeFilter *)MoreWithNSString:(NSString *)fieldName
                            withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)lowerTerm;
 
+/*!
+ @brief Factory that creates a new TermRangeFilter using Strings for term text.
+ */
 + (OrgApacheLuceneSearchTermRangeFilter *)newStringRangeWithNSString:(NSString *)field
                                                         withNSString:(NSString *)lowerTerm
                                                         withNSString:(NSString *)upperTerm
@@ -60,6 +103,8 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchTermRangeFilter_initWithNSString_wit
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchTermRangeFilter *new_OrgApacheLuceneSearchTermRangeFilter_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(NSString *fieldName, OrgApacheLuceneUtilBytesRef *lowerTerm, OrgApacheLuceneUtilBytesRef *upperTerm, jboolean includeLower, jboolean includeUpper) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchTermRangeFilter *create_OrgApacheLuceneSearchTermRangeFilter_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(NSString *fieldName, OrgApacheLuceneUtilBytesRef *lowerTerm, OrgApacheLuceneUtilBytesRef *upperTerm, jboolean includeLower, jboolean includeUpper);
+
 FOUNDATION_EXPORT OrgApacheLuceneSearchTermRangeFilter *OrgApacheLuceneSearchTermRangeFilter_newStringRangeWithNSString_withNSString_withNSString_withBoolean_withBoolean_(NSString *field, NSString *lowerTerm, NSString *upperTerm, jboolean includeLower, jboolean includeUpper);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchTermRangeFilter *OrgApacheLuceneSearchTermRangeFilter_LessWithNSString_withOrgApacheLuceneUtilBytesRef_(NSString *fieldName, OrgApacheLuceneUtilBytesRef *upperTerm);
@@ -70,4 +115,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermRangeFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchTermRangeFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchTermRangeFilter")

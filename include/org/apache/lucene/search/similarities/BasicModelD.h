@@ -5,27 +5,42 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSimilaritiesBasicModelD_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSimilaritiesBasicModelD_RESTRICT
-#define OrgApacheLuceneSearchSimilaritiesBasicModelD_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicModelD")
+#ifdef RESTRICT_OrgApacheLuceneSearchSimilaritiesBasicModelD
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicModelD 0
 #else
-#define OrgApacheLuceneSearchSimilaritiesBasicModelD_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicModelD 1
 #endif
-#undef OrgApacheLuceneSearchSimilaritiesBasicModelD_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSimilaritiesBasicModelD
 
-#if !defined (_OrgApacheLuceneSearchSimilaritiesBasicModelD_) && (OrgApacheLuceneSearchSimilaritiesBasicModelD_INCLUDE_ALL || OrgApacheLuceneSearchSimilaritiesBasicModelD_INCLUDE)
-#define _OrgApacheLuceneSearchSimilaritiesBasicModelD_
+#if !defined (OrgApacheLuceneSearchSimilaritiesBasicModelD_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicModelD || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesBasicModelD))
+#define OrgApacheLuceneSearchSimilaritiesBasicModelD_
 
-#define OrgApacheLuceneSearchSimilaritiesBasicModel_RESTRICT 1
-#define OrgApacheLuceneSearchSimilaritiesBasicModel_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSimilaritiesBasicModel 1
+#define INCLUDE_OrgApacheLuceneSearchSimilaritiesBasicModel 1
 #include "org/apache/lucene/search/similarities/BasicModel.h"
 
 @class OrgApacheLuceneSearchSimilaritiesBasicStats;
 
+/*!
+ @brief Implements the approximation of the binomial model with the divergence
+ for DFR.
+ The formula used in Lucene differs slightly from the one in the
+ original paper: to avoid underflow for small values of <code>N</code> and
+ <code>F</code>, <code>N</code> is increased by <code>1</code> and
+ <code>F</code> is always increased by <code>tfn+1</code>.
+ <p>
+ WARNING: for terms that do not meet the expected random distribution
+ (e.g. stopwords), this model may give poor performance, such as
+ abnormally high scores for low tf values.
+ */
 @interface OrgApacheLuceneSearchSimilaritiesBasicModelD : OrgApacheLuceneSearchSimilaritiesBasicModel
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor: parameter-free
+ */
 - (instancetype)init;
 
 - (jfloat)scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
@@ -41,8 +56,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesBasicModelD_init(OrgApac
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesBasicModelD *new_OrgApacheLuceneSearchSimilaritiesBasicModelD_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesBasicModelD *create_OrgApacheLuceneSearchSimilaritiesBasicModelD_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesBasicModelD)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSimilaritiesBasicModelD_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicModelD")

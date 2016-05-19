@@ -48,7 +48,7 @@ withOrgApacheLuceneSearchPhraseQuery:(OrgApacheLuceneSearchPhraseQuery *)query {
   if (isOptimizable == false) {
     return [phraseQuery_ rewriteWithOrgApacheLuceneIndexIndexReader:reader];
   }
-  OrgApacheLuceneSearchPhraseQuery_Builder *builder = [new_OrgApacheLuceneSearchPhraseQuery_Builder_init() autorelease];
+  OrgApacheLuceneSearchPhraseQuery_Builder *builder = create_OrgApacheLuceneSearchPhraseQuery_Builder_init();
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(terms))->size_; ++i) {
     if (i % n_ == 0 || i == terms->size_ - 1) {
       [builder addWithOrgApacheLuceneIndexTerm:IOSObjectArray_Get(terms, i) withInt:i];
@@ -63,7 +63,7 @@ withOrgApacheLuceneSearchPhraseQuery:(OrgApacheLuceneSearchPhraseQuery *)query {
   if ([super isEqual:o] == false) {
     return false;
   }
-  OrgApacheLuceneSearchNGramPhraseQuery *other = (OrgApacheLuceneSearchNGramPhraseQuery *) check_class_cast(o, [OrgApacheLuceneSearchNGramPhraseQuery class]);
+  OrgApacheLuceneSearchNGramPhraseQuery *other = (OrgApacheLuceneSearchNGramPhraseQuery *) cast_chk(o, [OrgApacheLuceneSearchNGramPhraseQuery class]);
   return n_ == ((OrgApacheLuceneSearchNGramPhraseQuery *) nil_chk(other))->n_ && [((OrgApacheLuceneSearchPhraseQuery *) nil_chk(phraseQuery_)) isEqual:other->phraseQuery_];
 }
 
@@ -128,9 +128,11 @@ void OrgApacheLuceneSearchNGramPhraseQuery_initWithInt_withOrgApacheLuceneSearch
 }
 
 OrgApacheLuceneSearchNGramPhraseQuery *new_OrgApacheLuceneSearchNGramPhraseQuery_initWithInt_withOrgApacheLuceneSearchPhraseQuery_(jint n, OrgApacheLuceneSearchPhraseQuery *query) {
-  OrgApacheLuceneSearchNGramPhraseQuery *self = [OrgApacheLuceneSearchNGramPhraseQuery alloc];
-  OrgApacheLuceneSearchNGramPhraseQuery_initWithInt_withOrgApacheLuceneSearchPhraseQuery_(self, n, query);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchNGramPhraseQuery, initWithInt_withOrgApacheLuceneSearchPhraseQuery_, n, query)
+}
+
+OrgApacheLuceneSearchNGramPhraseQuery *create_OrgApacheLuceneSearchNGramPhraseQuery_initWithInt_withOrgApacheLuceneSearchPhraseQuery_(jint n, OrgApacheLuceneSearchPhraseQuery *query) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchNGramPhraseQuery, initWithInt_withOrgApacheLuceneSearchPhraseQuery_, n, query)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchNGramPhraseQuery)

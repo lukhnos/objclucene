@@ -37,10 +37,26 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter, liveD
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter)
 
-NSString *OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_TERMS_CODEC_ = @"IDVersionPostingsWriterTerms";
-OrgApacheLuceneCodecsIdversionIDVersionTermState *OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_emptyState_;
+NSString *OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_TERMS_CODEC = @"IDVersionPostingsWriterTerms";
+OrgApacheLuceneCodecsIdversionIDVersionTermState *OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_emptyState;
 
 @implementation OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter
+
++ (NSString *)TERMS_CODEC {
+  return OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_TERMS_CODEC;
+}
+
++ (jint)VERSION_START {
+  return OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_VERSION_START;
+}
+
++ (jint)VERSION_CURRENT {
+  return OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_VERSION_CURRENT;
+}
+
++ (OrgApacheLuceneCodecsIdversionIDVersionTermState *)emptyState {
+  return OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_emptyState;
+}
 
 - (instancetype)initWithOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)liveDocs {
   OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_initWithOrgApacheLuceneUtilBits_(self, liveDocs);
@@ -48,23 +64,23 @@ OrgApacheLuceneCodecsIdversionIDVersionTermState *OrgApacheLuceneCodecsIdversion
 }
 
 - (OrgApacheLuceneCodecsBlockTermState *)newTermState {
-  return [new_OrgApacheLuceneCodecsIdversionIDVersionTermState_init() autorelease];
+  return create_OrgApacheLuceneCodecsIdversionIDVersionTermState_init();
 }
 
 - (void)init__WithOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)termsOut
         withOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state {
-  OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(termsOut, OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_TERMS_CODEC_, OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_VERSION_CURRENT, [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentWriteState *) nil_chk(state))->segmentInfo_)) getId], state->segmentSuffix_);
+  OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(termsOut, OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_TERMS_CODEC, OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_VERSION_CURRENT, [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentWriteState *) nil_chk(state))->segmentInfo_)) getId], state->segmentSuffix_);
 }
 
 - (jint)setFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo {
   [super setFieldWithOrgApacheLuceneIndexFieldInfo:fieldInfo];
-  if ([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo)) getIndexOptions] != JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS)) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"field must be index using IndexOptions.DOCS_AND_FREQS_AND_POSITIONS") autorelease];
+  if ([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo)) getIndexOptions] != JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS)) {
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"field must be index using IndexOptions.DOCS_AND_FREQS_AND_POSITIONS");
   }
   if ([fieldInfo hasVectors]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"field cannot index term vectors: CheckIndex will report this as index corruption") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"field cannot index term vectors: CheckIndex will report this as index corruption");
   }
-  JreStrongAssign(&lastState_, OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_emptyState_);
+  JreStrongAssign(&lastState_, OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_emptyState);
   return 0;
 }
 
@@ -78,10 +94,10 @@ OrgApacheLuceneCodecsIdversionIDVersionTermState *OrgApacheLuceneCodecsIdversion
     return;
   }
   if (lastDocID_ != -1) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"term appears in more than one document") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"term appears in more than one document");
   }
   if (termDocFreq != 1) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"term appears more than once in the document") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"term appears more than once in the document");
   }
   lastDocID_ = docID;
   lastPosition_ = -1;
@@ -96,21 +112,21 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload
     return;
   }
   if (lastPosition_ != -1) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"term appears more than once in document") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"term appears more than once in document");
   }
   lastPosition_ = position;
   if (payload == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"token doens't have a payload") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"token doens't have a payload");
   }
-  if (((OrgApacheLuceneUtilBytesRef *) nil_chk(payload))->length_ != 8) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$IC", @"payload.length != 8 (got ", payload->length_, ')')) autorelease];
+  if (payload->length_ != 8) {
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$IC", @"payload.length != 8 (got ", payload->length_, ')'));
   }
   lastVersion_ = OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_bytesToLongWithOrgApacheLuceneUtilBytesRef_(payload);
   if (lastVersion_ < OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_MIN_VERSION) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$J$J$@C", @"version must be >= MIN_VERSION=", OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_MIN_VERSION, @" (got: ", lastVersion_, @"; payload=", payload, ')')) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$J$J$@C", @"version must be >= MIN_VERSION=", OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_MIN_VERSION, @" (got: ", lastVersion_, @"; payload=", payload, ')'));
   }
   if (lastVersion_ > OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_MAX_VERSION) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$J$J$@C", @"version must be <= MAX_VERSION=", OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_MAX_VERSION, @" (got: ", lastVersion_, @"; payload=", payload, ')')) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$J$J$@C", @"version must be <= MAX_VERSION=", OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_MAX_VERSION, @" (got: ", lastVersion_, @"; payload=", payload, ')'));
   }
 }
 
@@ -119,7 +135,7 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload
     return;
   }
   if (lastPosition_ == -1) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"missing addPosition") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"missing addPosition");
   }
 }
 
@@ -127,7 +143,7 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload
   if (lastDocID_ == -1) {
     return;
   }
-  OrgApacheLuceneCodecsIdversionIDVersionTermState *state = (OrgApacheLuceneCodecsIdversionIDVersionTermState *) check_class_cast(_state, [OrgApacheLuceneCodecsIdversionIDVersionTermState class]);
+  OrgApacheLuceneCodecsIdversionIDVersionTermState *state = (OrgApacheLuceneCodecsIdversionIDVersionTermState *) cast_chk(_state, [OrgApacheLuceneCodecsIdversionIDVersionTermState class]);
   JreAssert((((OrgApacheLuceneCodecsIdversionIDVersionTermState *) nil_chk(state))->docFreq_ > 0), (@"org/apache/lucene/codecs/idversion/IDVersionPostingsWriter.java:146 condition failed: assert state.docFreq > 0;"));
   state->docID_ = lastDocID_;
   state->idVersion_ = lastVersion_;
@@ -138,7 +154,7 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg
 withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
 withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)_state
                     withBoolean:(jboolean)absolute {
-  OrgApacheLuceneCodecsIdversionIDVersionTermState *state = (OrgApacheLuceneCodecsIdversionIDVersionTermState *) check_class_cast(_state, [OrgApacheLuceneCodecsIdversionIDVersionTermState class]);
+  OrgApacheLuceneCodecsIdversionIDVersionTermState *state = (OrgApacheLuceneCodecsIdversionIDVersionTermState *) cast_chk(_state, [OrgApacheLuceneCodecsIdversionIDVersionTermState class]);
   [((OrgApacheLuceneStoreDataOutput *) nil_chk(outArg)) writeVIntWithInt:((OrgApacheLuceneCodecsIdversionIDVersionTermState *) nil_chk(state))->docID_];
   if (absolute) {
     [outArg writeVLongWithLong:state->idVersion_];
@@ -161,7 +177,7 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)_
 
 + (void)initialize {
   if (self == [OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_emptyState_, new_OrgApacheLuceneCodecsIdversionIDVersionTermState_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_emptyState, new_OrgApacheLuceneCodecsIdversionIDVersionTermState_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter)
   }
 }
@@ -181,10 +197,10 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)_
     { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "TERMS_CODEC_", NULL, 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_TERMS_CODEC_, NULL, .constantValue.asLong = 0 },
+    { "TERMS_CODEC", "TERMS_CODEC", 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_TERMS_CODEC, NULL, .constantValue.asLong = 0 },
     { "VERSION_START", "VERSION_START", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_VERSION_START },
     { "VERSION_CURRENT", "VERSION_CURRENT", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_VERSION_CURRENT },
-    { "emptyState_", NULL, 0x18, "Lorg.apache.lucene.codecs.idversion.IDVersionTermState;", &OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_emptyState_, NULL, .constantValue.asLong = 0 },
+    { "emptyState", "emptyState", 0x18, "Lorg.apache.lucene.codecs.idversion.IDVersionTermState;", &OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_emptyState, NULL, .constantValue.asLong = 0 },
     { "lastState_", NULL, 0x0, "Lorg.apache.lucene.codecs.idversion.IDVersionTermState;", NULL, NULL, .constantValue.asLong = 0 },
     { "lastDocID_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "lastPosition_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
@@ -204,9 +220,11 @@ void OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_initWithOrgApacheLuce
 }
 
 OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter *new_OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_initWithOrgApacheLuceneUtilBits_(id<OrgApacheLuceneUtilBits> liveDocs) {
-  OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter *self = [OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter alloc];
-  OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_initWithOrgApacheLuceneUtilBits_(self, liveDocs);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter, initWithOrgApacheLuceneUtilBits_, liveDocs)
+}
+
+OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter *create_OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_initWithOrgApacheLuceneUtilBits_(id<OrgApacheLuceneUtilBits> liveDocs) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter, initWithOrgApacheLuceneUtilBits_, liveDocs)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter)

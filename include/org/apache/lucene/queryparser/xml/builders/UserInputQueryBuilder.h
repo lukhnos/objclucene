@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder_RESTRICT
-#define OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder 0
 #else
-#define OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder 1
 #endif
-#undef OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder
 
-#if !defined (_OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder_) && (OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder_INCLUDE_ALL || OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder_INCLUDE)
-#define _OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder_
+#if !defined (OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder))
+#define OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder_
 
-#define OrgApacheLuceneQueryparserXmlQueryBuilder_RESTRICT 1
-#define OrgApacheLuceneQueryparserXmlQueryBuilder_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserXmlQueryBuilder 1
+#define INCLUDE_OrgApacheLuceneQueryparserXmlQueryBuilder 1
 #include "org/apache/lucene/queryparser/xml/QueryBuilder.h"
 
 @class OrgApacheLuceneAnalysisAnalyzer;
@@ -25,10 +25,20 @@
 @class OrgApacheLuceneSearchQuery;
 @protocol OrgW3cDomElement;
 
+/*!
+ @brief UserInputQueryBuilder uses 1 of 2 strategies for thread-safe parsing:
+ 1) Synchronizing access to "parse" calls on a previously supplied QueryParser
+ or..
+ 2) creating a new QueryParser object for each parse request
+ */
 @interface OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder : NSObject < OrgApacheLuceneQueryparserXmlQueryBuilder >
 
 #pragma mark Public
 
+/*!
+ @brief This constructor has the disadvantage of not being able to change choice of default field name
+ @param parser thread un-safe query parser
+ */
 - (instancetype)initWithOrgApacheLuceneQueryparserClassicQueryParser:(OrgApacheLuceneQueryparserClassicQueryParser *)parser;
 
 - (instancetype)initWithNSString:(NSString *)defaultField
@@ -38,6 +48,10 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
 
 #pragma mark Protected
 
+/*!
+ @brief Method to create a QueryParser - designed to be overridden
+ @return QueryParser
+ */
 - (OrgApacheLuceneQueryparserClassicQueryParser *)createQueryParserWithNSString:(NSString *)fieldName
                                             withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
 
@@ -49,12 +63,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilde
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder *new_OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder_initWithOrgApacheLuceneQueryparserClassicQueryParser_(OrgApacheLuceneQueryparserClassicQueryParser *parser) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder *create_OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder_initWithOrgApacheLuceneQueryparserClassicQueryParser_(OrgApacheLuceneQueryparserClassicQueryParser *parser);
+
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder *self, NSString *defaultField, OrgApacheLuceneAnalysisAnalyzer *analyzer);
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder *new_OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(NSString *defaultField, OrgApacheLuceneAnalysisAnalyzer *analyzer) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder *create_OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(NSString *defaultField, OrgApacheLuceneAnalysisAnalyzer *analyzer);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder")

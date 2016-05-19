@@ -172,9 +172,11 @@ void OrgApacheLuceneUtilPackedBulkOperationPacked14_init(OrgApacheLuceneUtilPack
 }
 
 OrgApacheLuceneUtilPackedBulkOperationPacked14 *new_OrgApacheLuceneUtilPackedBulkOperationPacked14_init() {
-  OrgApacheLuceneUtilPackedBulkOperationPacked14 *self = [OrgApacheLuceneUtilPackedBulkOperationPacked14 alloc];
-  OrgApacheLuceneUtilPackedBulkOperationPacked14_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedBulkOperationPacked14, init)
+}
+
+OrgApacheLuceneUtilPackedBulkOperationPacked14 *create_OrgApacheLuceneUtilPackedBulkOperationPacked14_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedBulkOperationPacked14, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedBulkOperationPacked14)

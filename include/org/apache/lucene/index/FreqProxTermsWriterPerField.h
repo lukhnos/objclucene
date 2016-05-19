@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexFreqProxTermsWriterPerField_INCLUDE_ALL")
-#if OrgApacheLuceneIndexFreqProxTermsWriterPerField_RESTRICT
-#define OrgApacheLuceneIndexFreqProxTermsWriterPerField_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexFreqProxTermsWriterPerField")
+#ifdef RESTRICT_OrgApacheLuceneIndexFreqProxTermsWriterPerField
+#define INCLUDE_ALL_OrgApacheLuceneIndexFreqProxTermsWriterPerField 0
 #else
-#define OrgApacheLuceneIndexFreqProxTermsWriterPerField_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexFreqProxTermsWriterPerField 1
 #endif
-#undef OrgApacheLuceneIndexFreqProxTermsWriterPerField_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexFreqProxTermsWriterPerField
 
-#if !defined (_OrgApacheLuceneIndexFreqProxTermsWriterPerField_) && (OrgApacheLuceneIndexFreqProxTermsWriterPerField_INCLUDE_ALL || OrgApacheLuceneIndexFreqProxTermsWriterPerField_INCLUDE)
-#define _OrgApacheLuceneIndexFreqProxTermsWriterPerField_
+#if !defined (OrgApacheLuceneIndexFreqProxTermsWriterPerField_) && (INCLUDE_ALL_OrgApacheLuceneIndexFreqProxTermsWriterPerField || defined(INCLUDE_OrgApacheLuceneIndexFreqProxTermsWriterPerField))
+#define OrgApacheLuceneIndexFreqProxTermsWriterPerField_
 
-#define OrgApacheLuceneIndexTermsHashPerField_RESTRICT 1
-#define OrgApacheLuceneIndexTermsHashPerField_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexTermsHashPerField 1
+#define INCLUDE_OrgApacheLuceneIndexTermsHashPerField 1
 #include "org/apache/lucene/index/TermsHashPerField.h"
 
 @class OrgApacheLuceneIndexFieldInfo;
@@ -38,6 +38,10 @@
   jlong sumTotalTermFreq_;
   jlong sumDocFreq_;
   jint docCount_;
+  /*!
+   @brief Set to true if any token had a payload in the current
+ segment.
+   */
   jboolean sawPayloads_;
 }
 
@@ -80,15 +84,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexFreqProxTermsWriterPerField_initWithO
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexFreqProxTermsWriterPerField *new_OrgApacheLuceneIndexFreqProxTermsWriterPerField_initWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermsHash_withOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneIndexTermsHashPerField_(OrgApacheLuceneIndexFieldInvertState *invertState, OrgApacheLuceneIndexTermsHash *termsHash, OrgApacheLuceneIndexFieldInfo *fieldInfo, OrgApacheLuceneIndexTermsHashPerField *nextPerField) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexFreqProxTermsWriterPerField *create_OrgApacheLuceneIndexFreqProxTermsWriterPerField_initWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermsHash_withOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneIndexTermsHashPerField_(OrgApacheLuceneIndexFieldInvertState *invertState, OrgApacheLuceneIndexTermsHash *termsHash, OrgApacheLuceneIndexFieldInfo *fieldInfo, OrgApacheLuceneIndexTermsHashPerField *nextPerField);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFreqProxTermsWriterPerField)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray_) && (OrgApacheLuceneIndexFreqProxTermsWriterPerField_INCLUDE_ALL || OrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray_INCLUDE)
-#define _OrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray_
+#if !defined (OrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray_) && (INCLUDE_ALL_OrgApacheLuceneIndexFreqProxTermsWriterPerField || defined(INCLUDE_OrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray))
+#define OrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray_
 
-#define OrgApacheLuceneIndexParallelPostingsArray_RESTRICT 1
-#define OrgApacheLuceneIndexParallelPostingsArray_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexParallelPostingsArray 1
+#define INCLUDE_OrgApacheLuceneIndexParallelPostingsArray 1
 #include "org/apache/lucene/index/ParallelPostingsArray.h"
 
 @class IOSIntArray;
@@ -132,8 +138,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxP
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray *new_OrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray_initWithInt_withBoolean_withBoolean_withBoolean_(jint size, jboolean writeFreqs, jboolean writeProx, jboolean writeOffsets) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray *create_OrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray_initWithInt_withBoolean_withBoolean_withBoolean_(jint size, jboolean writeFreqs, jboolean writeProx, jboolean writeOffsets);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexFreqProxTermsWriterPerField_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexFreqProxTermsWriterPerField")

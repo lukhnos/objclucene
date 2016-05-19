@@ -5,21 +5,25 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserSurroundQueryTooManyBasicQueries_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserSurroundQueryTooManyBasicQueries_RESTRICT
-#define OrgApacheLuceneQueryparserSurroundQueryTooManyBasicQueries_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryTooManyBasicQueries")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserSurroundQueryTooManyBasicQueries
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryTooManyBasicQueries 0
 #else
-#define OrgApacheLuceneQueryparserSurroundQueryTooManyBasicQueries_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryTooManyBasicQueries 1
 #endif
-#undef OrgApacheLuceneQueryparserSurroundQueryTooManyBasicQueries_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserSurroundQueryTooManyBasicQueries
 
-#if !defined (_OrgApacheLuceneQueryparserSurroundQueryTooManyBasicQueries_) && (OrgApacheLuceneQueryparserSurroundQueryTooManyBasicQueries_INCLUDE_ALL || OrgApacheLuceneQueryparserSurroundQueryTooManyBasicQueries_INCLUDE)
-#define _OrgApacheLuceneQueryparserSurroundQueryTooManyBasicQueries_
+#if !defined (OrgApacheLuceneQueryparserSurroundQueryTooManyBasicQueries_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryTooManyBasicQueries || defined(INCLUDE_OrgApacheLuceneQueryparserSurroundQueryTooManyBasicQueries))
+#define OrgApacheLuceneQueryparserSurroundQueryTooManyBasicQueries_
 
-#define JavaIoIOException_RESTRICT 1
-#define JavaIoIOException_INCLUDE 1
+#define RESTRICT_JavaIoIOException 1
+#define INCLUDE_JavaIoIOException 1
 #include "java/io/IOException.h"
 
+/*!
+ @brief Exception thrown when <code>BasicQueryFactory</code> would exceed the limit
+ of query clauses.
+ */
 @interface OrgApacheLuceneQueryparserSurroundQueryTooManyBasicQueries : JavaIoIOException
 
 #pragma mark Public
@@ -34,8 +38,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQueryTooManyBasicQuerie
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQueryTooManyBasicQueries *new_OrgApacheLuceneQueryparserSurroundQueryTooManyBasicQueries_initWithInt_(jint maxBasicQueries) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQueryTooManyBasicQueries *create_OrgApacheLuceneQueryparserSurroundQueryTooManyBasicQueries_initWithInt_(jint maxBasicQueries);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQueryTooManyBasicQueries)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserSurroundQueryTooManyBasicQueries_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryTooManyBasicQueries")

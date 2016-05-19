@@ -28,7 +28,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "getInstanceWithOrgApacheLuceneStoreRandomAccessInput:withInt:", "getInstance", "Lorg.apache.lucene.util.LongValues;", 0x9, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "DirectReader", NULL, 0x1, NULL, NULL },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.packed.DirectReader$DirectPackedReader1;", "Lorg.apache.lucene.util.packed.DirectReader$DirectPackedReader2;", "Lorg.apache.lucene.util.packed.DirectReader$DirectPackedReader4;", "Lorg.apache.lucene.util.packed.DirectReader$DirectPackedReader8;", "Lorg.apache.lucene.util.packed.DirectReader$DirectPackedReader12;", "Lorg.apache.lucene.util.packed.DirectReader$DirectPackedReader16;", "Lorg.apache.lucene.util.packed.DirectReader$DirectPackedReader20;", "Lorg.apache.lucene.util.packed.DirectReader$DirectPackedReader24;", "Lorg.apache.lucene.util.packed.DirectReader$DirectPackedReader28;", "Lorg.apache.lucene.util.packed.DirectReader$DirectPackedReader32;", "Lorg.apache.lucene.util.packed.DirectReader$DirectPackedReader40;", "Lorg.apache.lucene.util.packed.DirectReader$DirectPackedReader48;", "Lorg.apache.lucene.util.packed.DirectReader$DirectPackedReader56;", "Lorg.apache.lucene.util.packed.DirectReader$DirectPackedReader64;"};
   static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedDirectReader = { 2, "DirectReader", "org.apache.lucene.util.packed", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 14, inner_classes, NULL, NULL };
@@ -41,35 +41,35 @@ OrgApacheLuceneUtilLongValues *OrgApacheLuceneUtilPackedDirectReader_getInstance
   OrgApacheLuceneUtilPackedDirectReader_initialize();
   switch (bitsPerValue) {
     case 1:
-    return [new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader1_initWithOrgApacheLuceneStoreRandomAccessInput_(slice) autorelease];
+    return create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader1_initWithOrgApacheLuceneStoreRandomAccessInput_(slice);
     case 2:
-    return [new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader2_initWithOrgApacheLuceneStoreRandomAccessInput_(slice) autorelease];
+    return create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader2_initWithOrgApacheLuceneStoreRandomAccessInput_(slice);
     case 4:
-    return [new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader4_initWithOrgApacheLuceneStoreRandomAccessInput_(slice) autorelease];
+    return create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader4_initWithOrgApacheLuceneStoreRandomAccessInput_(slice);
     case 8:
-    return [new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader8_initWithOrgApacheLuceneStoreRandomAccessInput_(slice) autorelease];
+    return create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader8_initWithOrgApacheLuceneStoreRandomAccessInput_(slice);
     case 12:
-    return [new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader12_initWithOrgApacheLuceneStoreRandomAccessInput_(slice) autorelease];
+    return create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader12_initWithOrgApacheLuceneStoreRandomAccessInput_(slice);
     case 16:
-    return [new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader16_initWithOrgApacheLuceneStoreRandomAccessInput_(slice) autorelease];
+    return create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader16_initWithOrgApacheLuceneStoreRandomAccessInput_(slice);
     case 20:
-    return [new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader20_initWithOrgApacheLuceneStoreRandomAccessInput_(slice) autorelease];
+    return create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader20_initWithOrgApacheLuceneStoreRandomAccessInput_(slice);
     case 24:
-    return [new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader24_initWithOrgApacheLuceneStoreRandomAccessInput_(slice) autorelease];
+    return create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader24_initWithOrgApacheLuceneStoreRandomAccessInput_(slice);
     case 28:
-    return [new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader28_initWithOrgApacheLuceneStoreRandomAccessInput_(slice) autorelease];
+    return create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader28_initWithOrgApacheLuceneStoreRandomAccessInput_(slice);
     case 32:
-    return [new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader32_initWithOrgApacheLuceneStoreRandomAccessInput_(slice) autorelease];
+    return create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader32_initWithOrgApacheLuceneStoreRandomAccessInput_(slice);
     case 40:
-    return [new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader40_initWithOrgApacheLuceneStoreRandomAccessInput_(slice) autorelease];
+    return create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader40_initWithOrgApacheLuceneStoreRandomAccessInput_(slice);
     case 48:
-    return [new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader48_initWithOrgApacheLuceneStoreRandomAccessInput_(slice) autorelease];
+    return create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader48_initWithOrgApacheLuceneStoreRandomAccessInput_(slice);
     case 56:
-    return [new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader56_initWithOrgApacheLuceneStoreRandomAccessInput_(slice) autorelease];
+    return create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader56_initWithOrgApacheLuceneStoreRandomAccessInput_(slice);
     case 64:
-    return [new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader64_initWithOrgApacheLuceneStoreRandomAccessInput_(slice) autorelease];
+    return create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader64_initWithOrgApacheLuceneStoreRandomAccessInput_(slice);
     default:
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"unsupported bitsPerValue: ", bitsPerValue)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"unsupported bitsPerValue: ", bitsPerValue));
   }
 }
 
@@ -78,9 +78,11 @@ void OrgApacheLuceneUtilPackedDirectReader_init(OrgApacheLuceneUtilPackedDirectR
 }
 
 OrgApacheLuceneUtilPackedDirectReader *new_OrgApacheLuceneUtilPackedDirectReader_init() {
-  OrgApacheLuceneUtilPackedDirectReader *self = [OrgApacheLuceneUtilPackedDirectReader alloc];
-  OrgApacheLuceneUtilPackedDirectReader_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedDirectReader, init)
+}
+
+OrgApacheLuceneUtilPackedDirectReader *create_OrgApacheLuceneUtilPackedDirectReader_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedDirectReader, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader)
@@ -98,7 +100,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader)
     return (JreURShift32([((id<OrgApacheLuceneStoreRandomAccessInput>) nil_chk(in_)) readByteWithLong:JreURShift64(index, 3)], shift)) & (jint) 0x1;
   }
   @catch (JavaIoIOException *e) {
-    @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(e) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSException_(e);
   }
 }
 
@@ -127,9 +129,11 @@ void OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader1_initWithOrgApache
 }
 
 OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader1 *new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader1_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) {
-  OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader1 *self = [OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader1 alloc];
-  OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader1_initWithOrgApacheLuceneStoreRandomAccessInput_(self, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader1, initWithOrgApacheLuceneStoreRandomAccessInput_, inArg)
+}
+
+OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader1 *create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader1_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader1, initWithOrgApacheLuceneStoreRandomAccessInput_, inArg)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader1)
@@ -147,7 +151,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
     return (JreURShift32([((id<OrgApacheLuceneStoreRandomAccessInput>) nil_chk(in_)) readByteWithLong:JreURShift64(index, 2)], shift)) & (jint) 0x3;
   }
   @catch (JavaIoIOException *e) {
-    @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(e) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSException_(e);
   }
 }
 
@@ -176,9 +180,11 @@ void OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader2_initWithOrgApache
 }
 
 OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader2 *new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader2_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) {
-  OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader2 *self = [OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader2 alloc];
-  OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader2_initWithOrgApacheLuceneStoreRandomAccessInput_(self, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader2, initWithOrgApacheLuceneStoreRandomAccessInput_, inArg)
+}
+
+OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader2 *create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader2_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader2, initWithOrgApacheLuceneStoreRandomAccessInput_, inArg)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader2)
@@ -196,7 +202,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
     return (JreURShift32([((id<OrgApacheLuceneStoreRandomAccessInput>) nil_chk(in_)) readByteWithLong:JreURShift64(index, 1)], shift)) & (jint) 0xF;
   }
   @catch (JavaIoIOException *e) {
-    @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(e) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSException_(e);
   }
 }
 
@@ -225,9 +231,11 @@ void OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader4_initWithOrgApache
 }
 
 OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader4 *new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader4_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) {
-  OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader4 *self = [OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader4 alloc];
-  OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader4_initWithOrgApacheLuceneStoreRandomAccessInput_(self, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader4, initWithOrgApacheLuceneStoreRandomAccessInput_, inArg)
+}
+
+OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader4 *create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader4_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader4, initWithOrgApacheLuceneStoreRandomAccessInput_, inArg)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader4)
@@ -244,7 +252,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
     return [((id<OrgApacheLuceneStoreRandomAccessInput>) nil_chk(in_)) readByteWithLong:index] & (jint) 0xFF;
   }
   @catch (JavaIoIOException *e) {
-    @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(e) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSException_(e);
   }
 }
 
@@ -273,9 +281,11 @@ void OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader8_initWithOrgApache
 }
 
 OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader8 *new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader8_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) {
-  OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader8 *self = [OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader8 alloc];
-  OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader8_initWithOrgApacheLuceneStoreRandomAccessInput_(self, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader8, initWithOrgApacheLuceneStoreRandomAccessInput_, inArg)
+}
+
+OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader8 *create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader8_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader8, initWithOrgApacheLuceneStoreRandomAccessInput_, inArg)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader8)
@@ -294,7 +304,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
     return (JreURShift32([((id<OrgApacheLuceneStoreRandomAccessInput>) nil_chk(in_)) readShortWithLong:offset], shift)) & (jint) 0xFFF;
   }
   @catch (JavaIoIOException *e) {
-    @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(e) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSException_(e);
   }
 }
 
@@ -323,9 +333,11 @@ void OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader12_initWithOrgApach
 }
 
 OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader12 *new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader12_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) {
-  OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader12 *self = [OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader12 alloc];
-  OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader12_initWithOrgApacheLuceneStoreRandomAccessInput_(self, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader12, initWithOrgApacheLuceneStoreRandomAccessInput_, inArg)
+}
+
+OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader12 *create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader12_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader12, initWithOrgApacheLuceneStoreRandomAccessInput_, inArg)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader12)
@@ -342,7 +354,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
     return [((id<OrgApacheLuceneStoreRandomAccessInput>) nil_chk(in_)) readShortWithLong:JreLShift64(index, 1)] & (jint) 0xFFFF;
   }
   @catch (JavaIoIOException *e) {
-    @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(e) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSException_(e);
   }
 }
 
@@ -371,9 +383,11 @@ void OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader16_initWithOrgApach
 }
 
 OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader16 *new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader16_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) {
-  OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader16 *self = [OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader16 alloc];
-  OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader16_initWithOrgApacheLuceneStoreRandomAccessInput_(self, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader16, initWithOrgApacheLuceneStoreRandomAccessInput_, inArg)
+}
+
+OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader16 *create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader16_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader16, initWithOrgApacheLuceneStoreRandomAccessInput_, inArg)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader16)
@@ -393,7 +407,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
     return (JreURShift32(v, shift)) & (jint) 0xFFFFF;
   }
   @catch (JavaIoIOException *e) {
-    @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(e) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSException_(e);
   }
 }
 
@@ -422,9 +436,11 @@ void OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader20_initWithOrgApach
 }
 
 OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader20 *new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader20_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) {
-  OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader20 *self = [OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader20 alloc];
-  OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader20_initWithOrgApacheLuceneStoreRandomAccessInput_(self, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader20, initWithOrgApacheLuceneStoreRandomAccessInput_, inArg)
+}
+
+OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader20 *create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader20_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader20, initWithOrgApacheLuceneStoreRandomAccessInput_, inArg)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader20)
@@ -441,7 +457,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
     return JreURShift32([((id<OrgApacheLuceneStoreRandomAccessInput>) nil_chk(in_)) readIntWithLong:index * 3], 8);
   }
   @catch (JavaIoIOException *e) {
-    @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(e) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSException_(e);
   }
 }
 
@@ -470,9 +486,11 @@ void OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader24_initWithOrgApach
 }
 
 OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader24 *new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader24_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) {
-  OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader24 *self = [OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader24 alloc];
-  OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader24_initWithOrgApacheLuceneStoreRandomAccessInput_(self, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader24, initWithOrgApacheLuceneStoreRandomAccessInput_, inArg)
+}
+
+OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader24 *create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader24_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader24, initWithOrgApacheLuceneStoreRandomAccessInput_, inArg)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader24)
@@ -491,7 +509,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
     return (JreURShift32([((id<OrgApacheLuceneStoreRandomAccessInput>) nil_chk(in_)) readIntWithLong:offset], shift)) & (jlong) 0xFFFFFFFLL;
   }
   @catch (JavaIoIOException *e) {
-    @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(e) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSException_(e);
   }
 }
 
@@ -520,9 +538,11 @@ void OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader28_initWithOrgApach
 }
 
 OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader28 *new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader28_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) {
-  OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader28 *self = [OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader28 alloc];
-  OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader28_initWithOrgApacheLuceneStoreRandomAccessInput_(self, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader28, initWithOrgApacheLuceneStoreRandomAccessInput_, inArg)
+}
+
+OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader28 *create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader28_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader28, initWithOrgApacheLuceneStoreRandomAccessInput_, inArg)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader28)
@@ -539,7 +559,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
     return [((id<OrgApacheLuceneStoreRandomAccessInput>) nil_chk(in_)) readIntWithLong:JreLShift64(index, 2)] & (jlong) 0xFFFFFFFFLL;
   }
   @catch (JavaIoIOException *e) {
-    @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(e) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSException_(e);
   }
 }
 
@@ -568,9 +588,11 @@ void OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader32_initWithOrgApach
 }
 
 OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader32 *new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader32_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) {
-  OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader32 *self = [OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader32 alloc];
-  OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader32_initWithOrgApacheLuceneStoreRandomAccessInput_(self, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader32, initWithOrgApacheLuceneStoreRandomAccessInput_, inArg)
+}
+
+OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader32 *create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader32_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader32, initWithOrgApacheLuceneStoreRandomAccessInput_, inArg)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader32)
@@ -587,7 +609,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
     return JreURShift64([((id<OrgApacheLuceneStoreRandomAccessInput>) nil_chk(in_)) readLongWithLong:index * 5], 24);
   }
   @catch (JavaIoIOException *e) {
-    @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(e) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSException_(e);
   }
 }
 
@@ -616,9 +638,11 @@ void OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader40_initWithOrgApach
 }
 
 OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader40 *new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader40_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) {
-  OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader40 *self = [OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader40 alloc];
-  OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader40_initWithOrgApacheLuceneStoreRandomAccessInput_(self, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader40, initWithOrgApacheLuceneStoreRandomAccessInput_, inArg)
+}
+
+OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader40 *create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader40_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader40, initWithOrgApacheLuceneStoreRandomAccessInput_, inArg)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader40)
@@ -635,7 +659,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
     return JreURShift64([((id<OrgApacheLuceneStoreRandomAccessInput>) nil_chk(in_)) readLongWithLong:index * 6], 16);
   }
   @catch (JavaIoIOException *e) {
-    @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(e) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSException_(e);
   }
 }
 
@@ -664,9 +688,11 @@ void OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader48_initWithOrgApach
 }
 
 OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader48 *new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader48_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) {
-  OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader48 *self = [OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader48 alloc];
-  OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader48_initWithOrgApacheLuceneStoreRandomAccessInput_(self, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader48, initWithOrgApacheLuceneStoreRandomAccessInput_, inArg)
+}
+
+OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader48 *create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader48_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader48, initWithOrgApacheLuceneStoreRandomAccessInput_, inArg)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader48)
@@ -683,7 +709,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
     return JreURShift64([((id<OrgApacheLuceneStoreRandomAccessInput>) nil_chk(in_)) readLongWithLong:index * 7], 8);
   }
   @catch (JavaIoIOException *e) {
-    @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(e) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSException_(e);
   }
 }
 
@@ -712,9 +738,11 @@ void OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader56_initWithOrgApach
 }
 
 OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader56 *new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader56_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) {
-  OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader56 *self = [OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader56 alloc];
-  OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader56_initWithOrgApacheLuceneStoreRandomAccessInput_(self, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader56, initWithOrgApacheLuceneStoreRandomAccessInput_, inArg)
+}
+
+OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader56 *create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader56_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader56, initWithOrgApacheLuceneStoreRandomAccessInput_, inArg)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader56)
@@ -731,7 +759,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPac
     return [((id<OrgApacheLuceneStoreRandomAccessInput>) nil_chk(in_)) readLongWithLong:JreLShift64(index, 3)];
   }
   @catch (JavaIoIOException *e) {
-    @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(e) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSException_(e);
   }
 }
 
@@ -760,9 +788,11 @@ void OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader64_initWithOrgApach
 }
 
 OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader64 *new_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader64_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) {
-  OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader64 *self = [OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader64 alloc];
-  OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader64_initWithOrgApacheLuceneStoreRandomAccessInput_(self, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader64, initWithOrgApacheLuceneStoreRandomAccessInput_, inArg)
+}
+
+OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader64 *create_OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader64_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader64, initWithOrgApacheLuceneStoreRandomAccessInput_, inArg)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedDirectReader_DirectPackedReader64)

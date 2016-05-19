@@ -7,9 +7,14 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/queryparser/surround/parser/Token.h"
 
+/*!
+ @brief The version identifier for this Serializable class.
+ Increment only if the <i>serialized</i> form of the
+ class changes.
+ */
+inline jlong OrgApacheLuceneQueryparserSurroundParserToken_get_serialVersionUID();
 #define OrgApacheLuceneQueryparserSurroundParserToken_serialVersionUID 1LL
-
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserSurroundParserToken, serialVersionUID, jlong)
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserSurroundParserToken, serialVersionUID, jlong)
 
 @implementation OrgApacheLuceneQueryparserSurroundParserToken
 
@@ -87,9 +92,11 @@ void OrgApacheLuceneQueryparserSurroundParserToken_init(OrgApacheLuceneQuerypars
 }
 
 OrgApacheLuceneQueryparserSurroundParserToken *new_OrgApacheLuceneQueryparserSurroundParserToken_init() {
-  OrgApacheLuceneQueryparserSurroundParserToken *self = [OrgApacheLuceneQueryparserSurroundParserToken alloc];
-  OrgApacheLuceneQueryparserSurroundParserToken_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserSurroundParserToken, init)
+}
+
+OrgApacheLuceneQueryparserSurroundParserToken *create_OrgApacheLuceneQueryparserSurroundParserToken_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserSurroundParserToken, init)
 }
 
 void OrgApacheLuceneQueryparserSurroundParserToken_initWithInt_(OrgApacheLuceneQueryparserSurroundParserToken *self, jint kind) {
@@ -97,9 +104,11 @@ void OrgApacheLuceneQueryparserSurroundParserToken_initWithInt_(OrgApacheLuceneQ
 }
 
 OrgApacheLuceneQueryparserSurroundParserToken *new_OrgApacheLuceneQueryparserSurroundParserToken_initWithInt_(jint kind) {
-  OrgApacheLuceneQueryparserSurroundParserToken *self = [OrgApacheLuceneQueryparserSurroundParserToken alloc];
-  OrgApacheLuceneQueryparserSurroundParserToken_initWithInt_(self, kind);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserSurroundParserToken, initWithInt_, kind)
+}
+
+OrgApacheLuceneQueryparserSurroundParserToken *create_OrgApacheLuceneQueryparserSurroundParserToken_initWithInt_(jint kind) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserSurroundParserToken, initWithInt_, kind)
 }
 
 void OrgApacheLuceneQueryparserSurroundParserToken_initWithInt_withNSString_(OrgApacheLuceneQueryparserSurroundParserToken *self, jint kind, NSString *image) {
@@ -109,16 +118,18 @@ void OrgApacheLuceneQueryparserSurroundParserToken_initWithInt_withNSString_(Org
 }
 
 OrgApacheLuceneQueryparserSurroundParserToken *new_OrgApacheLuceneQueryparserSurroundParserToken_initWithInt_withNSString_(jint kind, NSString *image) {
-  OrgApacheLuceneQueryparserSurroundParserToken *self = [OrgApacheLuceneQueryparserSurroundParserToken alloc];
-  OrgApacheLuceneQueryparserSurroundParserToken_initWithInt_withNSString_(self, kind, image);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserSurroundParserToken, initWithInt_withNSString_, kind, image)
+}
+
+OrgApacheLuceneQueryparserSurroundParserToken *create_OrgApacheLuceneQueryparserSurroundParserToken_initWithInt_withNSString_(jint kind, NSString *image) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserSurroundParserToken, initWithInt_withNSString_, kind, image)
 }
 
 OrgApacheLuceneQueryparserSurroundParserToken *OrgApacheLuceneQueryparserSurroundParserToken_newTokenWithInt_withNSString_(jint ofKind, NSString *image) {
   OrgApacheLuceneQueryparserSurroundParserToken_initialize();
   switch (ofKind) {
     default:
-    return [new_OrgApacheLuceneQueryparserSurroundParserToken_initWithInt_withNSString_(ofKind, image) autorelease];
+    return create_OrgApacheLuceneQueryparserSurroundParserToken_initWithInt_withNSString_(ofKind, image);
   }
 }
 

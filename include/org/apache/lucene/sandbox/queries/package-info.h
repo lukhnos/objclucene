@@ -3,14 +3,17 @@
 //  source: ./sandbox/src/java/org/apache/lucene/sandbox/queries/package-info.java
 //
 
+/*!
+ @brief Additional queries (some may have caveats or limitations)
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSandboxQueriesPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneSandboxQueriesPackage_info_RESTRICT
-#define OrgApacheLuceneSandboxQueriesPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSandboxQueriesPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneSandboxQueriesPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneSandboxQueriesPackage_info 0
 #else
-#define OrgApacheLuceneSandboxQueriesPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSandboxQueriesPackage_info 1
 #endif
-#undef OrgApacheLuceneSandboxQueriesPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSandboxQueriesPackage_info
 
-#pragma pop_macro("OrgApacheLuceneSandboxQueriesPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSandboxQueriesPackage_info")

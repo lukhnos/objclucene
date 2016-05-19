@@ -3,12 +3,8 @@
 //  source: ./core/src/java/org/lukhnos/portmobile/file/FileVisitor.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "org/lukhnos/portmobile/file/FileVisitResult.h"
 #include "org/lukhnos/portmobile/file/FileVisitor.h"
-#include "org/lukhnos/portmobile/file/attribute/BasicFileAttributes.h"
 
 @interface OrgLukhnosPortmobileFileFileVisitor : NSObject
 

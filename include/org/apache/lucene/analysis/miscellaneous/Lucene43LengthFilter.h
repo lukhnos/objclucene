@@ -5,27 +5,35 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter_RESTRICT
-#define OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter 0
 #else
-#define OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter
 
-#if !defined (_OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter_) && (OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter_
+#if !defined (OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter))
+#define OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter_
 
-#define OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter 1
 #include "org/apache/lucene/analysis/util/Lucene43FilteringTokenFilter.h"
 
+@class IOSObjectArray;
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief Backcompat LengthFilter for versions 4.3 and before.
+ */
 @interface OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter : OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter
 
 #pragma mark Public
 
+/*!
+ @brief Build a filter that removes words that are too long or too
+ short from the text.
+ */
 - (instancetype)initWithBoolean:(jboolean)enablePositionIncrements
 withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
                         withInt:(jint)min
@@ -41,8 +49,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter_
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter *new_OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(jboolean enablePositionIncrements, OrgApacheLuceneAnalysisTokenStream *inArg, jint min, jint max) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter *create_OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(jboolean enablePositionIncrements, OrgApacheLuceneAnalysisTokenStream *inArg, jint min, jint max);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter")

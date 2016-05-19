@@ -5,24 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchMatchAllDocsQuery_INCLUDE_ALL")
-#if OrgApacheLuceneSearchMatchAllDocsQuery_RESTRICT
-#define OrgApacheLuceneSearchMatchAllDocsQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchMatchAllDocsQuery")
+#ifdef RESTRICT_OrgApacheLuceneSearchMatchAllDocsQuery
+#define INCLUDE_ALL_OrgApacheLuceneSearchMatchAllDocsQuery 0
 #else
-#define OrgApacheLuceneSearchMatchAllDocsQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchMatchAllDocsQuery 1
 #endif
-#undef OrgApacheLuceneSearchMatchAllDocsQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchMatchAllDocsQuery
 
-#if !defined (_OrgApacheLuceneSearchMatchAllDocsQuery_) && (OrgApacheLuceneSearchMatchAllDocsQuery_INCLUDE_ALL || OrgApacheLuceneSearchMatchAllDocsQuery_INCLUDE)
-#define _OrgApacheLuceneSearchMatchAllDocsQuery_
+#if !defined (OrgApacheLuceneSearchMatchAllDocsQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchMatchAllDocsQuery || defined(INCLUDE_OrgApacheLuceneSearchMatchAllDocsQuery))
+#define OrgApacheLuceneSearchMatchAllDocsQuery_
 
-#define OrgApacheLuceneSearchQuery_RESTRICT 1
-#define OrgApacheLuceneSearchQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchQuery 1
+#define INCLUDE_OrgApacheLuceneSearchQuery 1
 #include "org/apache/lucene/search/Query.h"
 
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchWeight;
 
+/*!
+ @brief A query that matches all documents.
+ */
 @interface OrgApacheLuceneSearchMatchAllDocsQuery : OrgApacheLuceneSearchQuery
 
 #pragma mark Public
@@ -42,8 +45,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchMatchAllDocsQuery_init(OrgApacheLuce
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchMatchAllDocsQuery *new_OrgApacheLuceneSearchMatchAllDocsQuery_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchMatchAllDocsQuery *create_OrgApacheLuceneSearchMatchAllDocsQuery_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMatchAllDocsQuery)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchMatchAllDocsQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchMatchAllDocsQuery")

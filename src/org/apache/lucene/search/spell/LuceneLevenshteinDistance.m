@@ -60,9 +60,9 @@ J2OBJC_IGNORE_DESIGNATED_END
   for (j = 1; j <= m; j++) {
     t_j = IOSIntArray_Get(nil_chk(otherPoints->ints_), j - 1);
     for (i = 1; i <= n; i++) {
-      cost = IOSIntArray_Get(targetPoints->ints_, i - 1) == t_j ? 0 : 1;
+      cost = IOSIntArray_Get(nil_chk(targetPoints->ints_), i - 1) == t_j ? 0 : 1;
       *IOSIntArray_GetRef(nil_chk(IOSObjectArray_Get(d, i)), j) = JavaLangMath_minWithInt_withInt_(JavaLangMath_minWithInt_withInt_(IOSIntArray_Get(nil_chk(IOSObjectArray_Get(d, i - 1)), j) + 1, IOSIntArray_Get(nil_chk(IOSObjectArray_Get(d, i)), j - 1) + 1), IOSIntArray_Get(nil_chk(IOSObjectArray_Get(d, i - 1)), j - 1) + cost);
-      if (i > 1 && j > 1 && IOSIntArray_Get(targetPoints->ints_, i - 1) == IOSIntArray_Get(otherPoints->ints_, j - 2) && IOSIntArray_Get(targetPoints->ints_, i - 2) == IOSIntArray_Get(otherPoints->ints_, j - 1)) {
+      if (i > 1 && j > 1 && IOSIntArray_Get(nil_chk(targetPoints->ints_), i - 1) == IOSIntArray_Get(otherPoints->ints_, j - 2) && IOSIntArray_Get(targetPoints->ints_, i - 2) == IOSIntArray_Get(otherPoints->ints_, j - 1)) {
         *IOSIntArray_GetRef(nil_chk(IOSObjectArray_Get(d, i)), j) = JavaLangMath_minWithInt_withInt_(IOSIntArray_Get(nil_chk(IOSObjectArray_Get(d, i)), j), IOSIntArray_Get(nil_chk(IOSObjectArray_Get(d, i - 2)), j - 2) + cost);
       }
     }
@@ -91,14 +91,16 @@ void OrgApacheLuceneSearchSpellLuceneLevenshteinDistance_init(OrgApacheLuceneSea
 }
 
 OrgApacheLuceneSearchSpellLuceneLevenshteinDistance *new_OrgApacheLuceneSearchSpellLuceneLevenshteinDistance_init() {
-  OrgApacheLuceneSearchSpellLuceneLevenshteinDistance *self = [OrgApacheLuceneSearchSpellLuceneLevenshteinDistance alloc];
-  OrgApacheLuceneSearchSpellLuceneLevenshteinDistance_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSpellLuceneLevenshteinDistance, init)
+}
+
+OrgApacheLuceneSearchSpellLuceneLevenshteinDistance *create_OrgApacheLuceneSearchSpellLuceneLevenshteinDistance_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSpellLuceneLevenshteinDistance, init)
 }
 
 OrgApacheLuceneUtilIntsRef *OrgApacheLuceneSearchSpellLuceneLevenshteinDistance_toIntsRefWithNSString_(NSString *s) {
   OrgApacheLuceneSearchSpellLuceneLevenshteinDistance_initialize();
-  OrgApacheLuceneUtilIntsRef *ref = [new_OrgApacheLuceneUtilIntsRef_initWithInt_(((jint) [((NSString *) nil_chk(s)) length])) autorelease];
+  OrgApacheLuceneUtilIntsRef *ref = create_OrgApacheLuceneUtilIntsRef_initWithInt_(((jint) [((NSString *) nil_chk(s)) length]));
   jint utf16Len = ((jint) [s length]);
   for (jint i = 0, cp = 0; i < utf16Len; i += JavaLangCharacter_charCountWithInt_(cp)) {
     cp = *IOSIntArray_GetRef(nil_chk(ref->ints_), ref->length_++) = JavaLangCharacter_codePointAtWithJavaLangCharSequence_withInt_(s, i);

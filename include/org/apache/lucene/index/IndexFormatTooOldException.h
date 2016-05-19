@@ -5,52 +5,106 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexIndexFormatTooOldException_INCLUDE_ALL")
-#if OrgApacheLuceneIndexIndexFormatTooOldException_RESTRICT
-#define OrgApacheLuceneIndexIndexFormatTooOldException_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexIndexFormatTooOldException")
+#ifdef RESTRICT_OrgApacheLuceneIndexIndexFormatTooOldException
+#define INCLUDE_ALL_OrgApacheLuceneIndexIndexFormatTooOldException 0
 #else
-#define OrgApacheLuceneIndexIndexFormatTooOldException_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexIndexFormatTooOldException 1
 #endif
-#undef OrgApacheLuceneIndexIndexFormatTooOldException_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexIndexFormatTooOldException
 
-#if !defined (_OrgApacheLuceneIndexIndexFormatTooOldException_) && (OrgApacheLuceneIndexIndexFormatTooOldException_INCLUDE_ALL || OrgApacheLuceneIndexIndexFormatTooOldException_INCLUDE)
-#define _OrgApacheLuceneIndexIndexFormatTooOldException_
+#if !defined (OrgApacheLuceneIndexIndexFormatTooOldException_) && (INCLUDE_ALL_OrgApacheLuceneIndexIndexFormatTooOldException || defined(INCLUDE_OrgApacheLuceneIndexIndexFormatTooOldException))
+#define OrgApacheLuceneIndexIndexFormatTooOldException_
 
-#define JavaIoIOException_RESTRICT 1
-#define JavaIoIOException_INCLUDE 1
+#define RESTRICT_JavaIoIOException 1
+#define INCLUDE_JavaIoIOException 1
 #include "java/io/IOException.h"
 
 @class JavaLangInteger;
 @class OrgApacheLuceneStoreDataInput;
 
+/*!
+ @brief This exception is thrown when Lucene detects
+ an index that is too old for this Lucene version
+ */
 @interface OrgApacheLuceneIndexIndexFormatTooOldException : JavaIoIOException
 
 #pragma mark Public
 
+/*!
+ @brief Creates an <code>IndexFormatTooOldException</code>.
+ @param inArg the open file that's too old
+ @param version_ the version of the file that was too old
+ @param minVersion the minimum version accepted
+ @param maxVersion the maximum version accepted
+  
+ */
 - (instancetype)initWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
                                               withInt:(jint)version_
                                               withInt:(jint)minVersion
                                               withInt:(jint)maxVersion;
 
+/*!
+ @brief Creates an <code>IndexFormatTooOldException</code>.
+ @param inArg the open file that's too old
+ @param reason the reason for this exception if the version is not available
+  
+ */
 - (instancetype)initWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
                                          withNSString:(NSString *)reason;
 
+/*!
+ @brief Creates an <code>IndexFormatTooOldException</code>.
+ @param resourceDescription describes the file that was too old
+ @param version_ the version of the file that was too old
+ @param minVersion the minimum version accepted
+ @param maxVersion the maximum version accepted
+  
+ */
 - (instancetype)initWithNSString:(NSString *)resourceDescription
                          withInt:(jint)version_
                          withInt:(jint)minVersion
                          withInt:(jint)maxVersion;
 
+/*!
+ @brief Creates an <code>IndexFormatTooOldException</code>.
+ @param resourceDescription describes the file that was too old
+ @param reason the reason for this exception if the version is not available
+  
+ */
 - (instancetype)initWithNSString:(NSString *)resourceDescription
                     withNSString:(NSString *)reason;
 
+/*!
+ @brief Returns the maximum version accepted.
+ This method will return <code>null</code> if an alternative <code>getReason()</code>
+ is provided.
+ */
 - (JavaLangInteger *)getMaxVersion;
 
+/*!
+ @brief Returns the minimum version accepted
+ This method will return <code>null</code> if an alternative <code>getReason()</code>
+ is provided.
+ */
 - (JavaLangInteger *)getMinVersion;
 
+/*!
+ @brief Returns an optional reason for this exception if the version information was not available.
+ Otherwise <code>null</code>
+ */
 - (NSString *)getReason;
 
+/*!
+ @brief Returns a description of the file that was too old
+ */
 - (NSString *)getResourceDescription;
 
+/*!
+ @brief Returns the version of the file that was too old.
+ This method will return <code>null</code> if an alternative <code>getReason()</code>
+ is provided.
+ */
 - (JavaLangInteger *)getVersion;
 
 @end
@@ -61,20 +115,28 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexIndexFormatTooOldException_initWithNS
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexIndexFormatTooOldException *new_OrgApacheLuceneIndexIndexFormatTooOldException_initWithNSString_withNSString_(NSString *resourceDescription, NSString *reason) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexIndexFormatTooOldException *create_OrgApacheLuceneIndexIndexFormatTooOldException_initWithNSString_withNSString_(NSString *resourceDescription, NSString *reason);
+
 FOUNDATION_EXPORT void OrgApacheLuceneIndexIndexFormatTooOldException_initWithOrgApacheLuceneStoreDataInput_withNSString_(OrgApacheLuceneIndexIndexFormatTooOldException *self, OrgApacheLuceneStoreDataInput *inArg, NSString *reason);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexIndexFormatTooOldException *new_OrgApacheLuceneIndexIndexFormatTooOldException_initWithOrgApacheLuceneStoreDataInput_withNSString_(OrgApacheLuceneStoreDataInput *inArg, NSString *reason) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneIndexIndexFormatTooOldException *create_OrgApacheLuceneIndexIndexFormatTooOldException_initWithOrgApacheLuceneStoreDataInput_withNSString_(OrgApacheLuceneStoreDataInput *inArg, NSString *reason);
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexIndexFormatTooOldException_initWithNSString_withInt_withInt_withInt_(OrgApacheLuceneIndexIndexFormatTooOldException *self, NSString *resourceDescription, jint version_, jint minVersion, jint maxVersion);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexIndexFormatTooOldException *new_OrgApacheLuceneIndexIndexFormatTooOldException_initWithNSString_withInt_withInt_withInt_(NSString *resourceDescription, jint version_, jint minVersion, jint maxVersion) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexIndexFormatTooOldException *create_OrgApacheLuceneIndexIndexFormatTooOldException_initWithNSString_withInt_withInt_withInt_(NSString *resourceDescription, jint version_, jint minVersion, jint maxVersion);
+
 FOUNDATION_EXPORT void OrgApacheLuceneIndexIndexFormatTooOldException_initWithOrgApacheLuceneStoreDataInput_withInt_withInt_withInt_(OrgApacheLuceneIndexIndexFormatTooOldException *self, OrgApacheLuceneStoreDataInput *inArg, jint version_, jint minVersion, jint maxVersion);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexIndexFormatTooOldException *new_OrgApacheLuceneIndexIndexFormatTooOldException_initWithOrgApacheLuceneStoreDataInput_withInt_withInt_withInt_(OrgApacheLuceneStoreDataInput *inArg, jint version_, jint minVersion, jint maxVersion) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneIndexIndexFormatTooOldException *create_OrgApacheLuceneIndexIndexFormatTooOldException_initWithOrgApacheLuceneStoreDataInput_withInt_withInt_withInt_(OrgApacheLuceneStoreDataInput *inArg, jint version_, jint minVersion, jint maxVersion);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexFormatTooOldException)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexIndexFormatTooOldException_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexIndexFormatTooOldException")

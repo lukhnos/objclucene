@@ -33,7 +33,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   static const J2ObjcMethodInfo methods[] = {
     { "field", NULL, "Ljava.lang.String;", 0x400, NULL, NULL },
     { "delGen", NULL, "J", 0x400, NULL, NULL },
-    { "init", NULL, NULL, 0x0, NULL, NULL },
+    { "init", "FieldTermIterator", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneIndexFieldTermIterator = { 2, "FieldTermIterator", "org.apache.lucene.index", NULL, 0x400, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexFieldTermIterator;

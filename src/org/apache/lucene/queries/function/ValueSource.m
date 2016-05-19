@@ -96,7 +96,7 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 }
 
 - (OrgApacheLuceneSearchSortField *)getSortFieldWithBoolean:(jboolean)reverse {
-  return [new_OrgApacheLuceneQueriesFunctionValueSource_ValueSourceSortField_initWithOrgApacheLuceneQueriesFunctionValueSource_withBoolean_(self, reverse) autorelease];
+  return create_OrgApacheLuceneQueriesFunctionValueSource_ValueSourceSortField_initWithOrgApacheLuceneQueriesFunctionValueSource_withBoolean_(self, reverse);
 }
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -116,7 +116,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "createWeightWithJavaUtilMap:withOrgApacheLuceneSearchIndexSearcher:", "createWeight", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "newContextWithOrgApacheLuceneSearchIndexSearcher:", "newContext", "Ljava.util.Map;", 0x9, NULL, NULL },
     { "getSortFieldWithBoolean:", "getSortField", "Lorg.apache.lucene.search.SortField;", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "ValueSource", NULL, 0x1, NULL, NULL },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.queries.function.ValueSource$ValueSourceSortField;", "Lorg.apache.lucene.queries.function.ValueSource$ValueSourceComparatorSource;", "Lorg.apache.lucene.queries.function.ValueSource$ValueSourceComparator;"};
   static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValueSource = { 2, "ValueSource", "org.apache.lucene.queries.function", NULL, 0x401, 9, methods, 0, NULL, 0, NULL, 3, inner_classes, NULL, NULL };
@@ -127,7 +127,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 id<JavaUtilMap> OrgApacheLuceneQueriesFunctionValueSource_newContextWithOrgApacheLuceneSearchIndexSearcher_(OrgApacheLuceneSearchIndexSearcher *searcher) {
   OrgApacheLuceneQueriesFunctionValueSource_initialize();
-  id<JavaUtilMap> context = [new_JavaUtilIdentityHashMap_init() autorelease];
+  id<JavaUtilMap> context = create_JavaUtilIdentityHashMap_init();
   [context putWithId:@"searcher" withId:searcher];
   return context;
 }
@@ -149,7 +149,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValueSource)
 - (OrgApacheLuceneSearchSortField *)rewriteWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher {
   id<JavaUtilMap> context = OrgApacheLuceneQueriesFunctionValueSource_newContextWithOrgApacheLuceneSearchIndexSearcher_(searcher);
   [this$0_ createWeightWithJavaUtilMap:context withOrgApacheLuceneSearchIndexSearcher:searcher];
-  return [new_OrgApacheLuceneSearchSortField_initWithNSString_withOrgApacheLuceneSearchFieldComparatorSource_withBoolean_([self getField], [new_OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparatorSource_initWithOrgApacheLuceneQueriesFunctionValueSource_withJavaUtilMap_(this$0_, context) autorelease], [self getReverse]) autorelease];
+  return create_OrgApacheLuceneSearchSortField_initWithNSString_withOrgApacheLuceneSearchFieldComparatorSource_withBoolean_([self getField], create_OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparatorSource_initWithOrgApacheLuceneQueriesFunctionValueSource_withJavaUtilMap_(this$0_, context), [self getReverse]);
 }
 
 - (void)dealloc {
@@ -173,13 +173,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValueSource)
 
 void OrgApacheLuceneQueriesFunctionValueSource_ValueSourceSortField_initWithOrgApacheLuceneQueriesFunctionValueSource_withBoolean_(OrgApacheLuceneQueriesFunctionValueSource_ValueSourceSortField *self, OrgApacheLuceneQueriesFunctionValueSource *outer$, jboolean reverse) {
   JreStrongAssign(&self->this$0_, outer$);
-  OrgApacheLuceneSearchSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_withBoolean_(self, [outer$ description__], JreLoadStatic(OrgApacheLuceneSearchSortField_TypeEnum, REWRITEABLE), reverse);
+  OrgApacheLuceneSearchSortField_initWithNSString_withOrgApacheLuceneSearchSortField_Type_withBoolean_(self, [outer$ description__], JreLoadEnum(OrgApacheLuceneSearchSortField_Type, REWRITEABLE), reverse);
 }
 
 OrgApacheLuceneQueriesFunctionValueSource_ValueSourceSortField *new_OrgApacheLuceneQueriesFunctionValueSource_ValueSourceSortField_initWithOrgApacheLuceneQueriesFunctionValueSource_withBoolean_(OrgApacheLuceneQueriesFunctionValueSource *outer$, jboolean reverse) {
-  OrgApacheLuceneQueriesFunctionValueSource_ValueSourceSortField *self = [OrgApacheLuceneQueriesFunctionValueSource_ValueSourceSortField alloc];
-  OrgApacheLuceneQueriesFunctionValueSource_ValueSourceSortField_initWithOrgApacheLuceneQueriesFunctionValueSource_withBoolean_(self, outer$, reverse);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValueSource_ValueSourceSortField, initWithOrgApacheLuceneQueriesFunctionValueSource_withBoolean_, outer$, reverse)
+}
+
+OrgApacheLuceneQueriesFunctionValueSource_ValueSourceSortField *create_OrgApacheLuceneQueriesFunctionValueSource_ValueSourceSortField_initWithOrgApacheLuceneQueriesFunctionValueSource_withBoolean_(OrgApacheLuceneQueriesFunctionValueSource *outer$, jboolean reverse) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValueSource_ValueSourceSortField, initWithOrgApacheLuceneQueriesFunctionValueSource_withBoolean_, outer$, reverse)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValueSource_ValueSourceSortField)
@@ -196,7 +198,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValueSource_Value
                                                             withInt:(jint)numHits
                                                             withInt:(jint)sortPos
                                                         withBoolean:(jboolean)reversed {
-  return [new_OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparator_initWithOrgApacheLuceneQueriesFunctionValueSource_withJavaUtilMap_withInt_(this$0_, context_, numHits) autorelease];
+  return create_OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparator_initWithOrgApacheLuceneQueriesFunctionValueSource_withJavaUtilMap_withInt_(this$0_, context_, numHits);
 }
 
 - (void)dealloc {
@@ -208,7 +210,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValueSource_Value
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneQueriesFunctionValueSource:withJavaUtilMap:", "ValueSourceComparatorSource", NULL, 0x1, NULL, NULL },
-    { "newComparatorWithNSString:withInt:withInt:withBoolean:", "newComparator", "Lorg.apache.lucene.search.FieldComparator;", 0x1, "Ljava.io.IOException;", NULL },
+    { "newComparatorWithNSString:withInt:withInt:withBoolean:", "newComparator", "Lorg.apache.lucene.search.FieldComparator;", 0x1, "Ljava.io.IOException;", "(Ljava/lang/String;IIZ)Lorg/apache/lucene/search/FieldComparator<Ljava/lang/Double;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.queries.function.ValueSource;", NULL, NULL, .constantValue.asLong = 0 },
@@ -227,9 +229,11 @@ void OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparatorSource_initW
 }
 
 OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparatorSource *new_OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparatorSource_initWithOrgApacheLuceneQueriesFunctionValueSource_withJavaUtilMap_(OrgApacheLuceneQueriesFunctionValueSource *outer$, id<JavaUtilMap> context) {
-  OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparatorSource *self = [OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparatorSource alloc];
-  OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparatorSource_initWithOrgApacheLuceneQueriesFunctionValueSource_withJavaUtilMap_(self, outer$, context);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparatorSource, initWithOrgApacheLuceneQueriesFunctionValueSource_withJavaUtilMap_, outer$, context)
+}
+
+OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparatorSource *create_OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparatorSource_initWithOrgApacheLuceneQueriesFunctionValueSource_withJavaUtilMap_(OrgApacheLuceneQueriesFunctionValueSource *outer$, id<JavaUtilMap> context) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparatorSource, initWithOrgApacheLuceneQueriesFunctionValueSource_withJavaUtilMap_, outer$, context)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparatorSource)
@@ -321,9 +325,11 @@ void OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparator_initWithOrg
 }
 
 OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparator *new_OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparator_initWithOrgApacheLuceneQueriesFunctionValueSource_withJavaUtilMap_withInt_(OrgApacheLuceneQueriesFunctionValueSource *outer$, id<JavaUtilMap> fcontext, jint numHits) {
-  OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparator *self = [OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparator alloc];
-  OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparator_initWithOrgApacheLuceneQueriesFunctionValueSource_withJavaUtilMap_withInt_(self, outer$, fcontext, numHits);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparator, initWithOrgApacheLuceneQueriesFunctionValueSource_withJavaUtilMap_withInt_, outer$, fcontext, numHits)
+}
+
+OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparator *create_OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparator_initWithOrgApacheLuceneQueriesFunctionValueSource_withJavaUtilMap_withInt_(OrgApacheLuceneQueriesFunctionValueSource *outer$, id<JavaUtilMap> fcontext, jint numHits) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparator, initWithOrgApacheLuceneQueriesFunctionValueSource_withJavaUtilMap_withInt_, outer$, fcontext, numHits)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparator)

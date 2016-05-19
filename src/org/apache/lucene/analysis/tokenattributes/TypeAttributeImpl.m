@@ -42,7 +42,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)clear {
-  JreStrongAssign(&type_, OrgApacheLuceneAnalysisTokenattributesTypeAttribute_DEFAULT_TYPE_);
+  JreStrongAssign(&type_, OrgApacheLuceneAnalysisTokenattributesTypeAttribute_DEFAULT_TYPE);
 }
 
 - (jboolean)isEqual:(id)other {
@@ -50,18 +50,18 @@ J2OBJC_IGNORE_DESIGNATED_END
     return true;
   }
   if ([other isKindOfClass:[OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl class]]) {
-    OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl *o = (OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl *) check_class_cast(other, [OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl class]);
+    OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl *o = (OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl *) cast_chk(other, [OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl class]);
     return (self->type_ == nil ? ((OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl *) nil_chk(o))->type_ == nil : [self->type_ isEqual:((OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl *) nil_chk(o))->type_]);
   }
   return false;
 }
 
 - (NSUInteger)hash {
-  return (type_ == nil) ? 0 : ((jint) [type_ hash]);
+  return (type_ == nil) ? 0 : ((jint) [((NSString *) nil_chk(type_)) hash]);
 }
 
 - (void)copyToWithOrgApacheLuceneUtilAttributeImpl:(OrgApacheLuceneUtilAttributeImpl *)target {
-  id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute> t = (id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) check_protocol_cast(target, OrgApacheLuceneAnalysisTokenattributesTypeAttribute_class_());
+  id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute> t = (id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) cast_check(target, OrgApacheLuceneAnalysisTokenattributesTypeAttribute_class_());
   [((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(t)) setTypeWithNSString:type_];
 }
 
@@ -96,13 +96,15 @@ J2OBJC_IGNORE_DESIGNATED_END
 @end
 
 void OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_init(OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl *self) {
-  OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_initWithNSString_(self, OrgApacheLuceneAnalysisTokenattributesTypeAttribute_DEFAULT_TYPE_);
+  OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_initWithNSString_(self, OrgApacheLuceneAnalysisTokenattributesTypeAttribute_DEFAULT_TYPE);
 }
 
 OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_init() {
-  OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl *self = [OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl alloc];
-  OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl, init)
+}
+
+OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl, init)
 }
 
 void OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_initWithNSString_(OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl *self, NSString *type) {
@@ -111,9 +113,11 @@ void OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_initWithNSString_(O
 }
 
 OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_initWithNSString_(NSString *type) {
-  OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl *self = [OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl alloc];
-  OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_initWithNSString_(self, type);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl, initWithNSString_, type)
+}
+
+OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_initWithNSString_(NSString *type) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl, initWithNSString_, type)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl)

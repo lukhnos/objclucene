@@ -3,14 +3,17 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/br/package-info.java
 //
 
+/*!
+ @brief Analyzer for Brazilian Portuguese.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisBrPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisBrPackage_info_RESTRICT
-#define OrgApacheLuceneAnalysisBrPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisBrPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisBrPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisBrPackage_info 0
 #else
-#define OrgApacheLuceneAnalysisBrPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisBrPackage_info 1
 #endif
-#undef OrgApacheLuceneAnalysisBrPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisBrPackage_info
 
-#pragma pop_macro("OrgApacheLuceneAnalysisBrPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisBrPackage_info")

@@ -5,56 +5,121 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsPushPostingsWriterBase_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsPushPostingsWriterBase_RESTRICT
-#define OrgApacheLuceneCodecsPushPostingsWriterBase_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsPushPostingsWriterBase")
+#ifdef RESTRICT_OrgApacheLuceneCodecsPushPostingsWriterBase
+#define INCLUDE_ALL_OrgApacheLuceneCodecsPushPostingsWriterBase 0
 #else
-#define OrgApacheLuceneCodecsPushPostingsWriterBase_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsPushPostingsWriterBase 1
 #endif
-#undef OrgApacheLuceneCodecsPushPostingsWriterBase_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsPushPostingsWriterBase
 
-#if !defined (_OrgApacheLuceneCodecsPushPostingsWriterBase_) && (OrgApacheLuceneCodecsPushPostingsWriterBase_INCLUDE_ALL || OrgApacheLuceneCodecsPushPostingsWriterBase_INCLUDE)
-#define _OrgApacheLuceneCodecsPushPostingsWriterBase_
+#if !defined (OrgApacheLuceneCodecsPushPostingsWriterBase_) && (INCLUDE_ALL_OrgApacheLuceneCodecsPushPostingsWriterBase || defined(INCLUDE_OrgApacheLuceneCodecsPushPostingsWriterBase))
+#define OrgApacheLuceneCodecsPushPostingsWriterBase_
 
-#define OrgApacheLuceneCodecsPostingsWriterBase_RESTRICT 1
-#define OrgApacheLuceneCodecsPostingsWriterBase_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneCodecsPostingsWriterBase 1
+#define INCLUDE_OrgApacheLuceneCodecsPostingsWriterBase 1
 #include "org/apache/lucene/codecs/PostingsWriterBase.h"
 
 @class OrgApacheLuceneCodecsBlockTermState;
 @class OrgApacheLuceneIndexFieldInfo;
-@class OrgApacheLuceneIndexIndexOptionsEnum;
+@class OrgApacheLuceneIndexIndexOptions;
 @class OrgApacheLuceneIndexTermsEnum;
 @class OrgApacheLuceneUtilBytesRef;
 @class OrgApacheLuceneUtilFixedBitSet;
 
+/*!
+ @brief Extension of <code>PostingsWriterBase</code>, adding a push
+ API for writing each element of the postings.
+ This API
+ is somewhat analagous to an XML SAX API, while <code>PostingsWriterBase</code>
+  is more like an XML DOM API.
+ - seealso: PostingsReaderBase
+ */
 @interface OrgApacheLuceneCodecsPushPostingsWriterBase : OrgApacheLuceneCodecsPostingsWriterBase {
  @public
+  /*!
+   @brief <code>FieldInfo</code> of current field being written.
+   */
   OrgApacheLuceneIndexFieldInfo *fieldInfo_;
-  OrgApacheLuceneIndexIndexOptionsEnum *indexOptions_;
+  /*!
+   @brief <code>IndexOptions</code> of current field being
+ written
+   */
+  OrgApacheLuceneIndexIndexOptions *indexOptions_;
+  /*!
+   @brief True if the current field writes freqs.
+   */
   jboolean writeFreqs_;
+  /*!
+   @brief True if the current field writes positions.
+   */
   jboolean writePositions_;
+  /*!
+   @brief True if the current field writes payloads.
+   */
   jboolean writePayloads_;
+  /*!
+   @brief True if the current field writes offsets.
+   */
   jboolean writeOffsets_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief Add a new position and payload, and start/end offset.
+ A
+ null payload means no payload; a non-null payload with
+ zero length also means no payload.  Caller may reuse
+ the <code>BytesRef</code> for the payload between calls
+ (method must fully consume the payload). <code>startOffset</code>
+ and <code>endOffset</code> will be -1 when offsets are not indexed. 
+ */
 - (void)addPositionWithInt:(jint)position
 withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload
                    withInt:(jint)startOffset
                    withInt:(jint)endOffset;
 
+/*!
+ @brief Called when we are done adding positions and payloads
+ for each doc.
+ */
 - (void)finishDoc;
 
+/*!
+ @brief Finishes the current term.
+ The provided <code>BlockTermState</code>
+  contains the term's summary statistics, 
+ and will holds metadata from PBF when returned 
+ */
 - (void)finishTermWithOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)state;
 
+/*!
+ @brief Return a newly created empty TermState
+ */
 - (OrgApacheLuceneCodecsBlockTermState *)newTermState OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Sets the current field for writing, and returns the
+ fixed length of long[] metadata (which is fixed per
+ field), called when the writing switches to another field.
+ */
 - (jint)setFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo;
 
+/*!
+ @brief Adds a new doc in this term.
+ <code>freq</code> will be -1 when term frequencies are omitted
+ for the field. 
+ */
 - (void)startDocWithInt:(jint)docID
                 withInt:(jint)freq;
 
+/*!
+ @brief Start a new term.
+ Note that a matching call to <code>finishTerm(BlockTermState)</code>
+  is done, only if the term has at least one
+ document. 
+ */
 - (void)startTerm;
 
 - (OrgApacheLuceneCodecsBlockTermState *)writeTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term
@@ -63,6 +128,11 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload
 
 #pragma mark Protected
 
+/*!
+ @brief Sole constructor.
+ (For invocation by subclass 
+ constructors, typically implicit.) 
+ */
 - (instancetype)init;
 
 @end
@@ -70,7 +140,7 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsPushPostingsWriterBase)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsPushPostingsWriterBase, fieldInfo_, OrgApacheLuceneIndexFieldInfo *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsPushPostingsWriterBase, indexOptions_, OrgApacheLuceneIndexIndexOptionsEnum *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsPushPostingsWriterBase, indexOptions_, OrgApacheLuceneIndexIndexOptions *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneCodecsPushPostingsWriterBase_init(OrgApacheLuceneCodecsPushPostingsWriterBase *self);
 
@@ -78,4 +148,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsPushPostingsWriterBase)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsPushPostingsWriterBase_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsPushPostingsWriterBase")

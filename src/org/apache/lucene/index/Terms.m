@@ -38,13 +38,19 @@ __attribute__((unused)) static void OrgApacheLuceneIndexTerms_$1_initWithOrgApac
 
 __attribute__((unused)) static OrgApacheLuceneIndexTerms_$1 *new_OrgApacheLuceneIndexTerms_$1_initWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilAutomatonCompiledAutomaton_(OrgApacheLuceneUtilBytesRef *capture$0, OrgApacheLuceneIndexTermsEnum *arg$0, OrgApacheLuceneUtilAutomatonCompiledAutomaton *arg$1) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexTerms_$1 *create_OrgApacheLuceneIndexTerms_$1_initWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilAutomatonCompiledAutomaton_(OrgApacheLuceneUtilBytesRef *capture$0, OrgApacheLuceneIndexTermsEnum *arg$0, OrgApacheLuceneUtilAutomatonCompiledAutomaton *arg$1);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTerms_$1)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexTerms)
 
-IOSObjectArray *OrgApacheLuceneIndexTerms_EMPTY_ARRAY_;
+IOSObjectArray *OrgApacheLuceneIndexTerms_EMPTY_ARRAY;
 
 @implementation OrgApacheLuceneIndexTerms
+
++ (IOSObjectArray *)EMPTY_ARRAY {
+  return OrgApacheLuceneIndexTerms_EMPTY_ARRAY;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -62,14 +68,14 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (OrgApacheLuceneIndexTermsEnum *)intersectWithOrgApacheLuceneUtilAutomatonCompiledAutomaton:(OrgApacheLuceneUtilAutomatonCompiledAutomaton *)compiled
                                                               withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)startTerm {
   OrgApacheLuceneIndexTermsEnum *termsEnum = [self iterator];
-  if (((OrgApacheLuceneUtilAutomatonCompiledAutomaton *) nil_chk(compiled))->type_ != JreLoadStatic(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum, NORMAL)) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"please use CompiledAutomaton.getTermsEnum instead") autorelease];
+  if (((OrgApacheLuceneUtilAutomatonCompiledAutomaton *) nil_chk(compiled))->type_ != JreLoadEnum(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPE, NORMAL)) {
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"please use CompiledAutomaton.getTermsEnum instead");
   }
   if (startTerm == nil) {
-    return [new_OrgApacheLuceneIndexAutomatonTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilAutomatonCompiledAutomaton_(termsEnum, compiled) autorelease];
+    return create_OrgApacheLuceneIndexAutomatonTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilAutomatonCompiledAutomaton_(termsEnum, compiled);
   }
   else {
-    return [new_OrgApacheLuceneIndexTerms_$1_initWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilAutomatonCompiledAutomaton_(startTerm, termsEnum, compiled) autorelease];
+    return create_OrgApacheLuceneIndexTerms_$1_initWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilAutomatonCompiledAutomaton_(startTerm, termsEnum, compiled);
   }
 }
 
@@ -144,7 +150,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   if (v == nil) {
     return v;
   }
-  OrgApacheLuceneUtilBytesRefBuilder *scratch = [new_OrgApacheLuceneUtilBytesRefBuilder_init() autorelease];
+  OrgApacheLuceneUtilBytesRefBuilder *scratch = create_OrgApacheLuceneUtilBytesRefBuilder_init();
   [scratch appendWithByte:(jbyte) 0];
   while (true) {
     jint low = 0;
@@ -152,7 +158,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     while (low != high) {
       jint mid = JreURShift32((low + high), 1);
       [scratch setByteAtWithInt:[scratch length] - 1 withByte:(jbyte) mid];
-      if ([iterator seekCeilWithOrgApacheLuceneUtilBytesRef:[scratch get]] == JreLoadStatic(OrgApacheLuceneIndexTermsEnum_SeekStatusEnum, END)) {
+      if ([iterator seekCeilWithOrgApacheLuceneUtilBytesRef:[scratch get]] == JreLoadEnum(OrgApacheLuceneIndexTermsEnum_SeekStatus, END)) {
         if (mid == 0) {
           [scratch setLengthWithInt:[scratch length] - 1];
           return [scratch get];
@@ -172,7 +178,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (id)getStats {
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   [sb appendWithNSString:JreStrcat("$$", @"impl=", [[self getClass] getSimpleName])];
   [sb appendWithNSString:JreStrcat("$J", @",size=", [self size])];
   [sb appendWithNSString:JreStrcat("$I", @",docCount=", [self getDocCount])];
@@ -183,7 +189,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneIndexTerms class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneIndexTerms_EMPTY_ARRAY_, [IOSObjectArray newArrayWithLength:0 type:OrgApacheLuceneIndexTerms_class_()]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneIndexTerms_EMPTY_ARRAY, [IOSObjectArray newArrayWithLength:0 type:OrgApacheLuceneIndexTerms_class_()]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexTerms)
   }
 }
@@ -206,7 +212,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "getStats", NULL, "Ljava.lang.Object;", 0x1, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "EMPTY_ARRAY_", NULL, 0x19, "[Lorg.apache.lucene.index.Terms;", &OrgApacheLuceneIndexTerms_EMPTY_ARRAY_, NULL, .constantValue.asLong = 0 },
+    { "EMPTY_ARRAY", "EMPTY_ARRAY", 0x19, "[Lorg.apache.lucene.index.Terms;", &OrgApacheLuceneIndexTerms_EMPTY_ARRAY, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneIndexTerms = { 2, "Terms", "org.apache.lucene.index", NULL, 0x401, 14, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexTerms;
@@ -262,9 +268,11 @@ void OrgApacheLuceneIndexTerms_$1_initWithOrgApacheLuceneUtilBytesRef_withOrgApa
 }
 
 OrgApacheLuceneIndexTerms_$1 *new_OrgApacheLuceneIndexTerms_$1_initWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilAutomatonCompiledAutomaton_(OrgApacheLuceneUtilBytesRef *capture$0, OrgApacheLuceneIndexTermsEnum *arg$0, OrgApacheLuceneUtilAutomatonCompiledAutomaton *arg$1) {
-  OrgApacheLuceneIndexTerms_$1 *self = [OrgApacheLuceneIndexTerms_$1 alloc];
-  OrgApacheLuceneIndexTerms_$1_initWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilAutomatonCompiledAutomaton_(self, capture$0, arg$0, arg$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexTerms_$1, initWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilAutomatonCompiledAutomaton_, capture$0, arg$0, arg$1)
+}
+
+OrgApacheLuceneIndexTerms_$1 *create_OrgApacheLuceneIndexTerms_$1_initWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilAutomatonCompiledAutomaton_(OrgApacheLuceneUtilBytesRef *capture$0, OrgApacheLuceneIndexTermsEnum *arg$0, OrgApacheLuceneUtilAutomatonCompiledAutomaton *arg$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexTerms_$1, initWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilAutomatonCompiledAutomaton_, capture$0, arg$0, arg$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexTerms_$1)

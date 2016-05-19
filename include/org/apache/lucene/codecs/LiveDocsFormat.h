@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsLiveDocsFormat_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsLiveDocsFormat_RESTRICT
-#define OrgApacheLuceneCodecsLiveDocsFormat_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLiveDocsFormat")
+#ifdef RESTRICT_OrgApacheLuceneCodecsLiveDocsFormat
+#define INCLUDE_ALL_OrgApacheLuceneCodecsLiveDocsFormat 0
 #else
-#define OrgApacheLuceneCodecsLiveDocsFormat_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsLiveDocsFormat 1
 #endif
-#undef OrgApacheLuceneCodecsLiveDocsFormat_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsLiveDocsFormat
 
-#if !defined (_OrgApacheLuceneCodecsLiveDocsFormat_) && (OrgApacheLuceneCodecsLiveDocsFormat_INCLUDE_ALL || OrgApacheLuceneCodecsLiveDocsFormat_INCLUDE)
-#define _OrgApacheLuceneCodecsLiveDocsFormat_
+#if !defined (OrgApacheLuceneCodecsLiveDocsFormat_) && (INCLUDE_ALL_OrgApacheLuceneCodecsLiveDocsFormat || defined(INCLUDE_OrgApacheLuceneCodecsLiveDocsFormat))
+#define OrgApacheLuceneCodecsLiveDocsFormat_
 
 @class OrgApacheLuceneIndexSegmentCommitInfo;
 @class OrgApacheLuceneStoreDirectory;
@@ -23,21 +23,43 @@
 @protocol OrgApacheLuceneUtilBits;
 @protocol OrgApacheLuceneUtilMutableBits;
 
+/*!
+ @brief Format for live/deleted documents
+  
+ */
 @interface OrgApacheLuceneCodecsLiveDocsFormat : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Records all files in use by this <code>SegmentCommitInfo</code> into the files argument.
+ */
 - (void)filesWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)info
                                 withJavaUtilCollection:(id<JavaUtilCollection>)files;
 
+/*!
+ @brief Creates a new mutablebits of the same bits set and size of existing.
+ */
 - (id<OrgApacheLuceneUtilMutableBits>)newLiveDocsWithOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)existing OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Creates a new MutableBits, with all bits set, for the specified size.
+ */
 - (id<OrgApacheLuceneUtilMutableBits>)newLiveDocsWithInt:(jint)size OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Read live docs bits.
+ */
 - (id<OrgApacheLuceneUtilBits>)readLiveDocsWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
                                    withOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)info
                                            withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
 
+/*!
+ @brief Persist live docs bits.
+ Use <code>SegmentCommitInfo.getNextDelGen</code>
+  to determine the
+ generation of the deletes file you should write to. 
+ */
 - (void)writeLiveDocsWithOrgApacheLuceneUtilMutableBits:(id<OrgApacheLuceneUtilMutableBits>)bits
                       withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
               withOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)info
@@ -46,6 +68,11 @@
 
 #pragma mark Protected
 
+/*!
+ @brief Sole constructor.
+ (For invocation by subclass 
+ constructors, typically implicit.) 
+ */
 - (instancetype)init;
 
 @end
@@ -58,4 +85,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLiveDocsFormat)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsLiveDocsFormat_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLiveDocsFormat")

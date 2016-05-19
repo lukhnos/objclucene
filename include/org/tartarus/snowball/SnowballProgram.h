@@ -5,22 +5,31 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgTartarusSnowballSnowballProgram_INCLUDE_ALL")
-#if OrgTartarusSnowballSnowballProgram_RESTRICT
-#define OrgTartarusSnowballSnowballProgram_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgTartarusSnowballSnowballProgram")
+#ifdef RESTRICT_OrgTartarusSnowballSnowballProgram
+#define INCLUDE_ALL_OrgTartarusSnowballSnowballProgram 0
 #else
-#define OrgTartarusSnowballSnowballProgram_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgTartarusSnowballSnowballProgram 1
 #endif
-#undef OrgTartarusSnowballSnowballProgram_RESTRICT
+#undef RESTRICT_OrgTartarusSnowballSnowballProgram
 
-#if !defined (_OrgTartarusSnowballSnowballProgram_) && (OrgTartarusSnowballSnowballProgram_INCLUDE_ALL || OrgTartarusSnowballSnowballProgram_INCLUDE)
-#define _OrgTartarusSnowballSnowballProgram_
+#if !defined (OrgTartarusSnowballSnowballProgram_) && (INCLUDE_ALL_OrgTartarusSnowballSnowballProgram || defined(INCLUDE_OrgTartarusSnowballSnowballProgram))
+#define OrgTartarusSnowballSnowballProgram_
 
 @class IOSCharArray;
 @class IOSObjectArray;
 @class JavaLangStringBuilder;
 @protocol JavaLangCharSequence;
 
+/*!
+ @brief This is the rev 502 of the Snowball SVN trunk,
+ but modified:
+ made abstract and introduced abstract method stem to avoid expensive reflection in filter class.
+ refactored StringBuffers to StringBuilder
+ uses char[] as buffer instead of StringBuffer/StringBuilder
+ eq_s,eq_s_b,insert,replace_s take CharSequence like eq_v and eq_v_b
+ reflection calls (Lovins, etc) use EMPTY_ARGS/EMPTY_PARAMS
+ */
 @interface OrgTartarusSnowballSnowballProgram : NSObject {
  @public
   jint cursor_;
@@ -32,15 +41,45 @@
 
 #pragma mark Public
 
+/*!
+ @brief Get the current string.
+ */
 - (NSString *)getCurrent;
 
+/*!
+ @brief Get the current buffer containing the stem.
+ <p>
+ NOTE: this may be a reference to a different character array than the
+ one originally provided with setCurrent, in the exceptional case that 
+ stemming produced a longer intermediate or result string. 
+ </p>
+ <p>
+ It is necessary to use <code>getCurrentBufferLength()</code> to determine
+ the valid length of the returned buffer. For example, many words are
+ stemmed simply by subtracting from the length to remove suffixes.
+ </p>
+ - seealso: #getCurrentBufferLength()
+ */
 - (IOSCharArray *)getCurrentBuffer;
 
+/*!
+ @brief Get the valid length of the character array in 
+ <code>getCurrentBuffer()</code>.
+ @return valid length of the array.
+ */
 - (jint)getCurrentBufferLength;
 
+/*!
+ @brief Set the current string.
+ @param text character array containing input
+ @param length valid length of text.
+ */
 - (void)setCurrentWithCharArray:(IOSCharArray *)text
                         withInt:(jint)length;
 
+/*!
+ @brief Set the current string.
+ */
 - (void)setCurrentWithNSString:(NSString *)value;
 
 - (jboolean)stem;
@@ -123,4 +162,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgTartarusSnowballSnowballProgram)
 
 #endif
 
-#pragma pop_macro("OrgTartarusSnowballSnowballProgram_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgTartarusSnowballSnowballProgram")

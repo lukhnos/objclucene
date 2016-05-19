@@ -10,6 +10,12 @@
 
 @interface OrgApacheLuceneAnalysisBgBulgarianStemmer ()
 
+/*!
+ @brief Mainly remove the definite article
+ @param s input buffer
+ @param len length of input buffer
+ @return new stemmed length
+ */
 - (jint)removeArticleWithCharArray:(IOSCharArray *)s
                            withInt:(jint)len;
 
@@ -39,7 +45,7 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisBgBulgarianStemmer_re
     len--;
   }
   if (len > 5 && IOSCharArray_Get(nil_chk(s), len - 2) == 0x044a) {
-    *IOSCharArray_GetRef(s, len - 2) = IOSCharArray_Get(s, len - 1);
+    *IOSCharArray_GetRef(nil_chk(s), len - 2) = IOSCharArray_Get(s, len - 1);
     len--;
   }
   return len;
@@ -67,7 +73,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "stemWithCharArray:withInt:", "stem", "I", 0x1, NULL, NULL },
     { "removeArticleWithCharArray:withInt:", "removeArticle", "I", 0x2, NULL, NULL },
     { "removePluralWithCharArray:withInt:", "removePlural", "I", 0x2, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "BulgarianStemmer", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisBgBulgarianStemmer = { 2, "BulgarianStemmer", "org.apache.lucene.analysis.bg", NULL, 0x1, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisBgBulgarianStemmer;
@@ -124,9 +130,11 @@ void OrgApacheLuceneAnalysisBgBulgarianStemmer_init(OrgApacheLuceneAnalysisBgBul
 }
 
 OrgApacheLuceneAnalysisBgBulgarianStemmer *new_OrgApacheLuceneAnalysisBgBulgarianStemmer_init() {
-  OrgApacheLuceneAnalysisBgBulgarianStemmer *self = [OrgApacheLuceneAnalysisBgBulgarianStemmer alloc];
-  OrgApacheLuceneAnalysisBgBulgarianStemmer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisBgBulgarianStemmer, init)
+}
+
+OrgApacheLuceneAnalysisBgBulgarianStemmer *create_OrgApacheLuceneAnalysisBgBulgarianStemmer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisBgBulgarianStemmer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisBgBulgarianStemmer)

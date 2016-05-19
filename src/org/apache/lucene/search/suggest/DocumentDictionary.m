@@ -88,7 +88,7 @@ __attribute__((unused)) static id<JavaUtilSet> OrgApacheLuceneSearchSuggestDocum
 }
 
 - (id<OrgApacheLuceneSearchSuggestInputIterator>)getEntryIterator {
-  return [new_OrgApacheLuceneSearchSuggestDocumentDictionary_DocumentInputIterator_initWithOrgApacheLuceneSearchSuggestDocumentDictionary_withBoolean_withBoolean_(self, payloadField_ != nil, contextsField_ != nil) autorelease];
+  return create_OrgApacheLuceneSearchSuggestDocumentDictionary_DocumentInputIterator_initWithOrgApacheLuceneSearchSuggestDocumentDictionary_withBoolean_withBoolean_(self, payloadField_ != nil, contextsField_ != nil);
 }
 
 - (void)dealloc {
@@ -126,9 +126,11 @@ void OrgApacheLuceneSearchSuggestDocumentDictionary_initWithOrgApacheLuceneIndex
 }
 
 OrgApacheLuceneSearchSuggestDocumentDictionary *new_OrgApacheLuceneSearchSuggestDocumentDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withNSString_(OrgApacheLuceneIndexIndexReader *reader, NSString *field, NSString *weightField) {
-  OrgApacheLuceneSearchSuggestDocumentDictionary *self = [OrgApacheLuceneSearchSuggestDocumentDictionary alloc];
-  OrgApacheLuceneSearchSuggestDocumentDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withNSString_(self, reader, field, weightField);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentDictionary, initWithOrgApacheLuceneIndexIndexReader_withNSString_withNSString_, reader, field, weightField)
+}
+
+OrgApacheLuceneSearchSuggestDocumentDictionary *create_OrgApacheLuceneSearchSuggestDocumentDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withNSString_(OrgApacheLuceneIndexIndexReader *reader, NSString *field, NSString *weightField) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentDictionary, initWithOrgApacheLuceneIndexIndexReader_withNSString_withNSString_, reader, field, weightField)
 }
 
 void OrgApacheLuceneSearchSuggestDocumentDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withNSString_withNSString_(OrgApacheLuceneSearchSuggestDocumentDictionary *self, OrgApacheLuceneIndexIndexReader *reader, NSString *field, NSString *weightField, NSString *payloadField) {
@@ -136,9 +138,11 @@ void OrgApacheLuceneSearchSuggestDocumentDictionary_initWithOrgApacheLuceneIndex
 }
 
 OrgApacheLuceneSearchSuggestDocumentDictionary *new_OrgApacheLuceneSearchSuggestDocumentDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withNSString_withNSString_(OrgApacheLuceneIndexIndexReader *reader, NSString *field, NSString *weightField, NSString *payloadField) {
-  OrgApacheLuceneSearchSuggestDocumentDictionary *self = [OrgApacheLuceneSearchSuggestDocumentDictionary alloc];
-  OrgApacheLuceneSearchSuggestDocumentDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withNSString_withNSString_(self, reader, field, weightField, payloadField);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentDictionary, initWithOrgApacheLuceneIndexIndexReader_withNSString_withNSString_withNSString_, reader, field, weightField, payloadField)
+}
+
+OrgApacheLuceneSearchSuggestDocumentDictionary *create_OrgApacheLuceneSearchSuggestDocumentDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withNSString_withNSString_(OrgApacheLuceneIndexIndexReader *reader, NSString *field, NSString *weightField, NSString *payloadField) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentDictionary, initWithOrgApacheLuceneIndexIndexReader_withNSString_withNSString_withNSString_, reader, field, weightField, payloadField)
 }
 
 void OrgApacheLuceneSearchSuggestDocumentDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneSearchSuggestDocumentDictionary *self, OrgApacheLuceneIndexIndexReader *reader, NSString *field, NSString *weightField, NSString *payloadField, NSString *contextsField) {
@@ -151,9 +155,11 @@ void OrgApacheLuceneSearchSuggestDocumentDictionary_initWithOrgApacheLuceneIndex
 }
 
 OrgApacheLuceneSearchSuggestDocumentDictionary *new_OrgApacheLuceneSearchSuggestDocumentDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneIndexIndexReader *reader, NSString *field, NSString *weightField, NSString *payloadField, NSString *contextsField) {
-  OrgApacheLuceneSearchSuggestDocumentDictionary *self = [OrgApacheLuceneSearchSuggestDocumentDictionary alloc];
-  OrgApacheLuceneSearchSuggestDocumentDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withNSString_withNSString_withNSString_(self, reader, field, weightField, payloadField, contextsField);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentDictionary, initWithOrgApacheLuceneIndexIndexReader_withNSString_withNSString_withNSString_withNSString_, reader, field, weightField, payloadField, contextsField)
+}
+
+OrgApacheLuceneSearchSuggestDocumentDictionary *create_OrgApacheLuceneSearchSuggestDocumentDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneIndexIndexReader *reader, NSString *field, NSString *weightField, NSString *payloadField, NSString *contextsField) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentDictionary, initWithOrgApacheLuceneIndexIndexReader_withNSString_withNSString_withNSString_withNSString_, reader, field, weightField, payloadField, contextsField)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentDictionary)
@@ -179,7 +185,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentDictionary)
         return [fieldValue binaryValue];
       }
       else if ([fieldValue stringValue] != nil) {
-        return [new_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_([fieldValue stringValue]) autorelease];
+        return create_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_([fieldValue stringValue]);
       }
       else {
         continue;
@@ -201,16 +207,16 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentDictionary)
           tempPayload = [payload binaryValue];
         }
         else if ([payload stringValue] != nil) {
-          tempPayload = [new_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_([payload stringValue]) autorelease];
+          tempPayload = create_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_([payload stringValue]);
         }
       }
       if (tempPayload == nil) {
-        tempPayload = [new_OrgApacheLuceneUtilBytesRef_init() autorelease];
+        tempPayload = create_OrgApacheLuceneUtilBytesRef_init();
       }
     }
     id<JavaUtilSet> tempContexts;
     if (hasContexts_) {
-      tempContexts = [new_JavaUtilHashSet_init() autorelease];
+      tempContexts = create_JavaUtilHashSet_init();
       IOSObjectArray *contextFields = [((OrgApacheLuceneDocumentDocument *) nil_chk(doc)) getFieldsWithNSString:this$0_->contextsField_];
       {
         IOSObjectArray *a__ = contextFields;
@@ -222,7 +228,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentDictionary)
             [tempContexts addWithId:[contextField binaryValue]];
           }
           else if ([contextField stringValue] != nil) {
-            [tempContexts addWithId:[new_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_([contextField stringValue]) autorelease]];
+            [tempContexts addWithId:create_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_([contextField stringValue])];
           }
           else {
             continue;
@@ -244,7 +250,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentDictionary)
       tempTerm = [fieldValue binaryValue];
     }
     else if ([fieldValue stringValue] != nil) {
-      tempTerm = [new_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_([fieldValue stringValue]) autorelease];
+      tempTerm = create_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_([fieldValue stringValue]);
     }
     else {
       continue;
@@ -313,8 +319,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentDictionary)
     { "payload", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
     { "hasPayloads", NULL, "Z", 0x1, NULL, NULL },
     { "getWeightWithOrgApacheLuceneDocumentDocument:withInt:", "getWeight", "J", 0x4, NULL, NULL },
-    { "getRelevantFieldsWithNSStringArray:", "getRelevantFields", "Ljava.util.Set;", 0x82, NULL, NULL },
-    { "contexts", NULL, "Ljava.util.Set;", 0x1, NULL, NULL },
+    { "getRelevantFieldsWithNSStringArray:", "getRelevantFields", "Ljava.util.Set;", 0x82, NULL, "([Ljava/lang/String;)Ljava/util/Set<Ljava/lang/String;>;" },
+    { "contexts", NULL, "Ljava.util.Set;", 0x1, NULL, "()Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;" },
     { "hasContexts", NULL, "Z", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -355,13 +361,15 @@ void OrgApacheLuceneSearchSuggestDocumentDictionary_DocumentInputIterator_initWi
 }
 
 OrgApacheLuceneSearchSuggestDocumentDictionary_DocumentInputIterator *new_OrgApacheLuceneSearchSuggestDocumentDictionary_DocumentInputIterator_initWithOrgApacheLuceneSearchSuggestDocumentDictionary_withBoolean_withBoolean_(OrgApacheLuceneSearchSuggestDocumentDictionary *outer$, jboolean hasPayloads, jboolean hasContexts) {
-  OrgApacheLuceneSearchSuggestDocumentDictionary_DocumentInputIterator *self = [OrgApacheLuceneSearchSuggestDocumentDictionary_DocumentInputIterator alloc];
-  OrgApacheLuceneSearchSuggestDocumentDictionary_DocumentInputIterator_initWithOrgApacheLuceneSearchSuggestDocumentDictionary_withBoolean_withBoolean_(self, outer$, hasPayloads, hasContexts);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentDictionary_DocumentInputIterator, initWithOrgApacheLuceneSearchSuggestDocumentDictionary_withBoolean_withBoolean_, outer$, hasPayloads, hasContexts)
+}
+
+OrgApacheLuceneSearchSuggestDocumentDictionary_DocumentInputIterator *create_OrgApacheLuceneSearchSuggestDocumentDictionary_DocumentInputIterator_initWithOrgApacheLuceneSearchSuggestDocumentDictionary_withBoolean_withBoolean_(OrgApacheLuceneSearchSuggestDocumentDictionary *outer$, jboolean hasPayloads, jboolean hasContexts) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentDictionary_DocumentInputIterator, initWithOrgApacheLuceneSearchSuggestDocumentDictionary_withBoolean_withBoolean_, outer$, hasPayloads, hasContexts)
 }
 
 id<JavaUtilSet> OrgApacheLuceneSearchSuggestDocumentDictionary_DocumentInputIterator_getRelevantFieldsWithNSStringArray_(OrgApacheLuceneSearchSuggestDocumentDictionary_DocumentInputIterator *self, IOSObjectArray *fields) {
-  id<JavaUtilSet> relevantFields = [new_JavaUtilHashSet_init() autorelease];
+  id<JavaUtilSet> relevantFields = create_JavaUtilHashSet_init();
   {
     IOSObjectArray *a__ = fields;
     NSString * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;

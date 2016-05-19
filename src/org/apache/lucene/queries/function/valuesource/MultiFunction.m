@@ -91,8 +91,8 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 }
 
 - (jboolean)isEqual:(id)o {
-  if ([self getClass] != [nil_chk(o) getClass]) return false;
-  OrgApacheLuceneQueriesFunctionValuesourceMultiFunction *other = (OrgApacheLuceneQueriesFunctionValuesourceMultiFunction *) check_class_cast(o, [OrgApacheLuceneQueriesFunctionValuesourceMultiFunction class]);
+  if ([self getClass] != (id) [nil_chk(o) getClass]) return false;
+  OrgApacheLuceneQueriesFunctionValuesourceMultiFunction *other = (OrgApacheLuceneQueriesFunctionValuesourceMultiFunction *) cast_chk(o, [OrgApacheLuceneQueriesFunctionValuesourceMultiFunction class]);
   return [((id<JavaUtilList>) nil_chk(self->sources_)) isEqual:other->sources_];
 }
 
@@ -103,15 +103,15 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:", "MultiFunction", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilList:", "MultiFunction", NULL, 0x1, NULL, "(Ljava/util/List<Lorg/apache/lucene/queries/function/ValueSource;>;)V" },
     { "name", NULL, "Ljava.lang.String;", 0x404, NULL, NULL },
     { "description__", "description", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "allExistsWithInt:withOrgApacheLuceneQueriesFunctionFunctionValuesArray:", "allExists", "Z", 0x9, NULL, NULL },
     { "anyExistsWithInt:withOrgApacheLuceneQueriesFunctionFunctionValuesArray:", "anyExists", "Z", 0x9, NULL, NULL },
     { "allExistsWithInt:withOrgApacheLuceneQueriesFunctionFunctionValues:withOrgApacheLuceneQueriesFunctionFunctionValues:", "allExists", "Z", 0x9, NULL, NULL },
     { "anyExistsWithInt:withOrgApacheLuceneQueriesFunctionFunctionValues:withOrgApacheLuceneQueriesFunctionFunctionValues:", "anyExists", "Z", 0x9, NULL, NULL },
-    { "description__WithNSString:withJavaUtilList:", "description", "Ljava.lang.String;", 0x9, NULL, NULL },
-    { "valsArrWithJavaUtilList:withJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:", "valsArr", "[Lorg.apache.lucene.queries.function.FunctionValues;", 0x9, "Ljava.io.IOException;", NULL },
+    { "description__WithNSString:withJavaUtilList:", "description", "Ljava.lang.String;", 0x9, NULL, "(Ljava/lang/String;Ljava/util/List<Lorg/apache/lucene/queries/function/ValueSource;>;)Ljava/lang/String;" },
+    { "valsArrWithJavaUtilList:withJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:", "valsArr", "[Lorg.apache.lucene.queries.function.FunctionValues;", 0x9, "Ljava.io.IOException;", "(Ljava/util/List<Lorg/apache/lucene/queries/function/ValueSource;>;Ljava/util/Map;Lorg/apache/lucene/index/LeafReaderContext;)[Lorg/apache/lucene/queries/function/FunctionValues;" },
     { "toStringWithNSString:withOrgApacheLuceneQueriesFunctionFunctionValuesArray:withInt:", "toString", "Ljava.lang.String;", 0x9, NULL, NULL },
     { "createWeightWithJavaUtilMap:withOrgApacheLuceneSearchIndexSearcher:", "createWeight", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
@@ -176,7 +176,7 @@ jboolean OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_anyExistsWithInt
 
 NSString *OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_description__WithNSString_withJavaUtilList_(NSString *name, id<JavaUtilList> sources) {
   OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_initialize();
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   [((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:name])) appendWithChar:'('];
   jboolean firstTime = true;
   for (OrgApacheLuceneQueriesFunctionValueSource * __strong source in nil_chk(sources)) {
@@ -204,7 +204,7 @@ IOSObjectArray *OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_valsArrWi
 
 NSString *OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_toStringWithNSString_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withInt_(NSString *name, IOSObjectArray *valsArr, jint doc) {
   OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_initialize();
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   [((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:name])) appendWithChar:'('];
   jboolean firstTime = true;
   {
@@ -273,9 +273,11 @@ void OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values_initWithOrgAp
 }
 
 OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values *new_OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_(OrgApacheLuceneQueriesFunctionValuesourceMultiFunction *outer$, IOSObjectArray *valsArr) {
-  OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values *self = [OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values alloc];
-  OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_(self, outer$, valsArr);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values, initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_, outer$, valsArr)
+}
+
+OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values *create_OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_(OrgApacheLuceneQueriesFunctionValuesourceMultiFunction *outer$, IOSObjectArray *valsArr) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values, initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_, outer$, valsArr)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values)

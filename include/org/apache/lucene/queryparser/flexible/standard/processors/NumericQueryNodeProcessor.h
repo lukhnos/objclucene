@@ -5,28 +5,51 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor_) && (OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor_
+#if !defined (OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor))
+#define OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor_
 
-#define OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_RESTRICT 1
-#define OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl 1
+#define INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl 1
 #include "org/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessorImpl.h"
 
 @protocol JavaUtilList;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 
+/*!
+ @brief This processor is used to convert <code>FieldQueryNode</code>s to
+ <code>NumericRangeQueryNode</code>s.
+ It looks for
+ <code>ConfigurationKeys.NUMERIC_CONFIG</code> set in the <code>FieldConfig</code> of
+ every <code>FieldQueryNode</code> found. If
+ <code>ConfigurationKeys.NUMERIC_CONFIG</code> is found, it considers that
+ <code>FieldQueryNode</code> to be a numeric query and convert it to
+ <code>NumericRangeQueryNode</code> with upper and lower inclusive and lower and
+ upper equals to the value represented by the <code>FieldQueryNode</code> converted
+ to <code>Number</code>. It means that <b>field:1</b> is converted to <b>field:[1
+ TO 1]</b>. <br>
+ <br>
+ Note that <code>FieldQueryNode</code>s children of a
+ <code>RangeQueryNode</code> are ignored.
+ - seealso: ConfigurationKeys#NUMERIC_CONFIG
+ - seealso: FieldQueryNode
+ - seealso: NumericConfig
+ - seealso: NumericQueryNode
+ */
 @interface OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor : OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl
 
 #pragma mark Public
 
+/*!
+ @brief Constructs a <code>NumericQueryNodeProcessor</code> object.
+ */
 - (instancetype)init;
 
 #pragma mark Protected
@@ -45,8 +68,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumer
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor *create_OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsNumericQueryNodeProcessor")

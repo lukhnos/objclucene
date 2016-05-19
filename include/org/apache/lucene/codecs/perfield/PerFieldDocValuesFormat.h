@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_RESTRICT
-#define OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat")
+#ifdef RESTRICT_OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat
+#define INCLUDE_ALL_OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat 0
 #else
-#define OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat 1
 #endif
-#undef OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat
 
-#if !defined (_OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_) && (OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_INCLUDE_ALL || OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_INCLUDE)
-#define _OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_
+#if !defined (OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_) && (INCLUDE_ALL_OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat || defined(INCLUDE_OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat))
+#define OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_
 
-#define OrgApacheLuceneCodecsDocValuesFormat_RESTRICT 1
-#define OrgApacheLuceneCodecsDocValuesFormat_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneCodecsDocValuesFormat 1
+#define INCLUDE_OrgApacheLuceneCodecsDocValuesFormat 1
 #include "org/apache/lucene/codecs/DocValuesFormat.h"
 
 @class OrgApacheLuceneCodecsDocValuesConsumer;
@@ -25,16 +25,46 @@
 @class OrgApacheLuceneIndexSegmentReadState;
 @class OrgApacheLuceneIndexSegmentWriteState;
 
+/*!
+ @brief Enables per field docvalues support.
+ <p>
+ Note, when extending this class, the name (<code>getName</code>) is 
+ written into the index. In order for the field to be read, the
+ name must resolve to your implementation via <code>forName(String)</code>.
+ This method uses Java's 
+ <code>Service Provider Interface</code> to resolve format names.
+ <p>
+ Files written by each docvalues format have an additional suffix containing the 
+ format name. For example, in a per-field configuration instead of <tt>_1.dat</tt> 
+ filenames would look like <tt>_1_Lucene40_0.dat</tt>.
+ - seealso: ServiceLoader
+ */
 @interface OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat : OrgApacheLuceneCodecsDocValuesFormat
+
++ (NSString *)PER_FIELD_NAME;
+
++ (NSString *)PER_FIELD_FORMAT_KEY;
+
++ (NSString *)PER_FIELD_SUFFIX_KEY;
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ */
 - (instancetype)init;
 
 - (OrgApacheLuceneCodecsDocValuesConsumer *)fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state;
 
 - (OrgApacheLuceneCodecsDocValuesProducer *)fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state;
 
+/*!
+ @brief Returns the doc values format that should be used for writing 
+ new segments of <code>field</code>.
+ <p>
+ The field to format mapping is written to the index, so
+ this method is only invoked when writing, not when reading. 
+ */
 - (OrgApacheLuceneCodecsDocValuesFormat *)getDocValuesFormatForFieldWithNSString:(NSString *)field;
 
 #pragma mark Package-Private
@@ -49,14 +79,31 @@
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_PER_FIELD_NAME_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat, PER_FIELD_NAME_, NSString *)
+/*!
+ @brief Name of this <code>PostingsFormat</code>.
+ */
+inline NSString *OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_get_PER_FIELD_NAME();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_PER_FIELD_NAME;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat, PER_FIELD_NAME, NSString *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_PER_FIELD_FORMAT_KEY_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat, PER_FIELD_FORMAT_KEY_, NSString *)
+/*!
+ @brief <code>FieldInfo</code> attribute name used to store the
+ format name for each field.
+ */
+inline NSString *OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_get_PER_FIELD_FORMAT_KEY();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_PER_FIELD_FORMAT_KEY;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat, PER_FIELD_FORMAT_KEY, NSString *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_PER_FIELD_SUFFIX_KEY_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat, PER_FIELD_SUFFIX_KEY_, NSString *)
+/*!
+ @brief <code>FieldInfo</code> attribute name used to store the
+ segment suffix name for each field.
+ */
+inline NSString *OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_get_PER_FIELD_SUFFIX_KEY();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_PER_FIELD_SUFFIX_KEY;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat, PER_FIELD_SUFFIX_KEY, NSString *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_init(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat *self);
 
@@ -68,11 +115,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat)
 
 #endif
 
-#if !defined (_OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_ConsumerAndSuffix_) && (OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_INCLUDE_ALL || OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_ConsumerAndSuffix_INCLUDE)
-#define _OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_ConsumerAndSuffix_
+#if !defined (OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_ConsumerAndSuffix_) && (INCLUDE_ALL_OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat || defined(INCLUDE_OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_ConsumerAndSuffix))
+#define OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_ConsumerAndSuffix_
 
-#define JavaIoCloseable_RESTRICT 1
-#define JavaIoCloseable_INCLUDE 1
+#define RESTRICT_JavaIoCloseable 1
+#define INCLUDE_JavaIoCloseable 1
 #include "java/io/Closeable.h"
 
 @class OrgApacheLuceneCodecsDocValuesConsumer;
@@ -101,8 +148,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_Cons
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_ConsumerAndSuffix *new_OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_ConsumerAndSuffix_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_ConsumerAndSuffix *create_OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_ConsumerAndSuffix_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_ConsumerAndSuffix)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat")

@@ -91,6 +91,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchBlockJoinComparatorSour
 
 __attribute__((unused)) static OrgApacheLuceneSearchBlockJoinComparatorSource_$1 *new_OrgApacheLuceneSearchBlockJoinComparatorSource_$1_initWithOrgApacheLuceneSearchBlockJoinComparatorSource_withIntArray_withIntArray_withOrgApacheLuceneSearchFieldComparatorArray_withOrgApacheLuceneSearchFieldComparatorArray_withIntArray_withIntArray_(OrgApacheLuceneSearchBlockJoinComparatorSource *outer$, IOSIntArray *capture$0, IOSIntArray *capture$1, IOSObjectArray *capture$2, IOSObjectArray *capture$3, IOSIntArray *capture$4, IOSIntArray *capture$5) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchBlockJoinComparatorSource_$1 *create_OrgApacheLuceneSearchBlockJoinComparatorSource_$1_initWithOrgApacheLuceneSearchBlockJoinComparatorSource_withIntArray_withIntArray_withOrgApacheLuceneSearchFieldComparatorArray_withOrgApacheLuceneSearchFieldComparatorArray_withIntArray_withIntArray_(OrgApacheLuceneSearchBlockJoinComparatorSource *outer$, IOSIntArray *capture$0, IOSIntArray *capture$1, IOSObjectArray *capture$2, IOSObjectArray *capture$3, IOSIntArray *capture$4, IOSIntArray *capture$5);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBlockJoinComparatorSource_$1)
 
 @interface OrgApacheLuceneSearchBlockJoinComparatorSource_$1_$1 : NSObject < OrgApacheLuceneSearchLeafFieldComparator > {
@@ -120,6 +122,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchBlockJoinComparatorSource_$1_$1, this$0
 __attribute__((unused)) static void OrgApacheLuceneSearchBlockJoinComparatorSource_$1_$1_initWithOrgApacheLuceneSearchBlockJoinComparatorSource_$1_(OrgApacheLuceneSearchBlockJoinComparatorSource_$1_$1 *self, OrgApacheLuceneSearchBlockJoinComparatorSource_$1 *outer$);
 
 __attribute__((unused)) static OrgApacheLuceneSearchBlockJoinComparatorSource_$1_$1 *new_OrgApacheLuceneSearchBlockJoinComparatorSource_$1_$1_initWithOrgApacheLuceneSearchBlockJoinComparatorSource_$1_(OrgApacheLuceneSearchBlockJoinComparatorSource_$1 *outer$) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchBlockJoinComparatorSource_$1_$1 *create_OrgApacheLuceneSearchBlockJoinComparatorSource_$1_$1_initWithOrgApacheLuceneSearchBlockJoinComparatorSource_$1_(OrgApacheLuceneSearchBlockJoinComparatorSource_$1 *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBlockJoinComparatorSource_$1_$1)
 
@@ -158,7 +162,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBlockJoinComparatorSource_$1_$1)
     *IOSIntArray_GetRef(childReverseMul, i) = [((OrgApacheLuceneSearchSortField *) nil_chk(IOSObjectArray_Get(childFields, i))) getReverse] ? -1 : 1;
     IOSObjectArray_Set(childComparators, i, [((OrgApacheLuceneSearchSortField *) nil_chk(IOSObjectArray_Get(childFields, i))) getComparatorWithInt:1 withInt:i]);
   }
-  return [new_OrgApacheLuceneSearchBlockJoinComparatorSource_$1_initWithOrgApacheLuceneSearchBlockJoinComparatorSource_withIntArray_withIntArray_withOrgApacheLuceneSearchFieldComparatorArray_withOrgApacheLuceneSearchFieldComparatorArray_withIntArray_withIntArray_(self, childSlots, parentSlots, parentComparators, childComparators, childReverseMul, parentReverseMul) autorelease];
+  return create_OrgApacheLuceneSearchBlockJoinComparatorSource_$1_initWithOrgApacheLuceneSearchBlockJoinComparatorSource_withIntArray_withIntArray_withOrgApacheLuceneSearchFieldComparatorArray_withOrgApacheLuceneSearchFieldComparatorArray_withIntArray_withIntArray_(self, childSlots, parentSlots, parentComparators, childComparators, childReverseMul, parentReverseMul);
 }
 
 - (NSString *)description {
@@ -176,7 +180,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBlockJoinComparatorSource_$1_$1)
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneSearchFilter:withOrgApacheLuceneSearchSort:", "BlockJoinComparatorSource", NULL, 0x1, NULL, NULL },
     { "initWithOrgApacheLuceneSearchFilter:withOrgApacheLuceneSearchSort:withOrgApacheLuceneSearchSort:", "BlockJoinComparatorSource", NULL, 0x1, NULL, NULL },
-    { "newComparatorWithNSString:withInt:withInt:withBoolean:", "newComparator", "Lorg.apache.lucene.search.FieldComparator;", 0x1, "Ljava.io.IOException;", NULL },
+    { "newComparatorWithNSString:withInt:withInt:withBoolean:", "newComparator", "Lorg.apache.lucene.search.FieldComparator;", 0x1, "Ljava.io.IOException;", "(Ljava/lang/String;IIZ)Lorg/apache/lucene/search/FieldComparator<Ljava/lang/Integer;>;" },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -191,13 +195,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBlockJoinComparatorSource_$1_$1)
 @end
 
 void OrgApacheLuceneSearchBlockJoinComparatorSource_initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchSort_(OrgApacheLuceneSearchBlockJoinComparatorSource *self, OrgApacheLuceneSearchFilter *parentsFilter, OrgApacheLuceneSearchSort *parentSort) {
-  OrgApacheLuceneSearchBlockJoinComparatorSource_initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchSort_(self, parentsFilter, parentSort, [new_OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortField_(JreLoadStatic(OrgApacheLuceneSearchSortField, FIELD_DOC_)) autorelease]);
+  OrgApacheLuceneSearchBlockJoinComparatorSource_initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchSort_(self, parentsFilter, parentSort, create_OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortField_(JreLoadStatic(OrgApacheLuceneSearchSortField, FIELD_DOC)));
 }
 
 OrgApacheLuceneSearchBlockJoinComparatorSource *new_OrgApacheLuceneSearchBlockJoinComparatorSource_initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchSort_(OrgApacheLuceneSearchFilter *parentsFilter, OrgApacheLuceneSearchSort *parentSort) {
-  OrgApacheLuceneSearchBlockJoinComparatorSource *self = [OrgApacheLuceneSearchBlockJoinComparatorSource alloc];
-  OrgApacheLuceneSearchBlockJoinComparatorSource_initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchSort_(self, parentsFilter, parentSort);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchBlockJoinComparatorSource, initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchSort_, parentsFilter, parentSort)
+}
+
+OrgApacheLuceneSearchBlockJoinComparatorSource *create_OrgApacheLuceneSearchBlockJoinComparatorSource_initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchSort_(OrgApacheLuceneSearchFilter *parentsFilter, OrgApacheLuceneSearchSort *parentSort) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchBlockJoinComparatorSource, initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchSort_, parentsFilter, parentSort)
 }
 
 void OrgApacheLuceneSearchBlockJoinComparatorSource_initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchSort_(OrgApacheLuceneSearchBlockJoinComparatorSource *self, OrgApacheLuceneSearchFilter *parentsFilter, OrgApacheLuceneSearchSort *parentSort, OrgApacheLuceneSearchSort *childSort) {
@@ -208,9 +214,11 @@ void OrgApacheLuceneSearchBlockJoinComparatorSource_initWithOrgApacheLuceneSearc
 }
 
 OrgApacheLuceneSearchBlockJoinComparatorSource *new_OrgApacheLuceneSearchBlockJoinComparatorSource_initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchSort_(OrgApacheLuceneSearchFilter *parentsFilter, OrgApacheLuceneSearchSort *parentSort, OrgApacheLuceneSearchSort *childSort) {
-  OrgApacheLuceneSearchBlockJoinComparatorSource *self = [OrgApacheLuceneSearchBlockJoinComparatorSource alloc];
-  OrgApacheLuceneSearchBlockJoinComparatorSource_initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchSort_(self, parentsFilter, parentSort, childSort);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchBlockJoinComparatorSource, initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchSort_, parentsFilter, parentSort, childSort)
+}
+
+OrgApacheLuceneSearchBlockJoinComparatorSource *create_OrgApacheLuceneSearchBlockJoinComparatorSource_initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchSort_(OrgApacheLuceneSearchFilter *parentsFilter, OrgApacheLuceneSearchSort *parentSort, OrgApacheLuceneSearchSort *childSort) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchBlockJoinComparatorSource, initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchSort_, parentsFilter, parentSort, childSort)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBlockJoinComparatorSource)
@@ -223,39 +231,39 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBlockJoinComparatorSource)
     return [self compareWithInt:IOSIntArray_Get(nil_chk(val$childSlots_), slot1) withInt:IOSIntArray_Get(nil_chk(val$parentSlots_), slot1) withInt:IOSIntArray_Get(val$childSlots_, slot2) withInt:IOSIntArray_Get(val$parentSlots_, slot2)];
   }
   @catch (JavaIoIOException *e) {
-    @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(e) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSException_(e);
   }
 }
 
 - (void)setTopValueWithId:(JavaLangInteger *)value {
-  @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(@"this comparator cannot be used with deep paging") autorelease];
+  @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"this comparator cannot be used with deep paging");
 }
 
 - (id<OrgApacheLuceneSearchLeafFieldComparator>)getLeafComparatorWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
   if (parentBits_ != nil) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"This comparator can only be used on a single segment") autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"This comparator can only be used on a single segment");
   }
   OrgApacheLuceneSearchDocIdSet *parents = [((OrgApacheLuceneSearchFilter *) nil_chk(this$0_->parentsFilter_)) getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:context withOrgApacheLuceneUtilBits:nil];
   if (parents == nil) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$@$", @"LeafReader ", [((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader], @" contains no parents!")) autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$@$", @"LeafReader ", [((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader], @" contains no parents!"));
   }
   if ([parents isKindOfClass:[OrgApacheLuceneUtilBitDocIdSet class]] == false) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$@", @"parentFilter must return BitSet; got ", parents)) autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$@", @"parentFilter must return BitSet; got ", parents));
   }
-  JreStrongAssign(&parentBits_, (OrgApacheLuceneUtilBitSet *) check_class_cast([((OrgApacheLuceneSearchDocIdSet *) nil_chk(parents)) bits], [OrgApacheLuceneUtilBitSet class]));
+  JreStrongAssign(&parentBits_, (OrgApacheLuceneUtilBitSet *) cast_chk([parents bits], [OrgApacheLuceneUtilBitSet class]));
   JreStrongAssignAndConsume(&parentLeafComparators_, [IOSObjectArray newArrayWithLength:((IOSObjectArray *) nil_chk(val$parentComparators_))->size_ type:OrgApacheLuceneSearchLeafFieldComparator_class_()]);
   for (jint i = 0; i < val$parentComparators_->size_; i++) {
-    IOSObjectArray_Set(parentLeafComparators_, i, [((OrgApacheLuceneSearchFieldComparator *) nil_chk(IOSObjectArray_Get(val$parentComparators_, i))) getLeafComparatorWithOrgApacheLuceneIndexLeafReaderContext:context]);
+    IOSObjectArray_Set(nil_chk(parentLeafComparators_), i, [((OrgApacheLuceneSearchFieldComparator *) nil_chk(IOSObjectArray_Get(val$parentComparators_, i))) getLeafComparatorWithOrgApacheLuceneIndexLeafReaderContext:context]);
   }
   JreStrongAssignAndConsume(&childLeafComparators_, [IOSObjectArray newArrayWithLength:((IOSObjectArray *) nil_chk(val$childComparators_))->size_ type:OrgApacheLuceneSearchLeafFieldComparator_class_()]);
   for (jint i = 0; i < val$childComparators_->size_; i++) {
-    IOSObjectArray_Set(childLeafComparators_, i, [((OrgApacheLuceneSearchFieldComparator *) nil_chk(IOSObjectArray_Get(val$childComparators_, i))) getLeafComparatorWithOrgApacheLuceneIndexLeafReaderContext:context]);
+    IOSObjectArray_Set(nil_chk(childLeafComparators_), i, [((OrgApacheLuceneSearchFieldComparator *) nil_chk(IOSObjectArray_Get(val$childComparators_, i))) getLeafComparatorWithOrgApacheLuceneIndexLeafReaderContext:context]);
   }
-  return [new_OrgApacheLuceneSearchBlockJoinComparatorSource_$1_$1_initWithOrgApacheLuceneSearchBlockJoinComparatorSource_$1_(self) autorelease];
+  return create_OrgApacheLuceneSearchBlockJoinComparatorSource_$1_$1_initWithOrgApacheLuceneSearchBlockJoinComparatorSource_$1_(self);
 }
 
 - (JavaLangInteger *)valueWithInt:(jint)slot {
-  @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(@"filling sort field values is not yet supported") autorelease];
+  @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"filling sort field values is not yet supported");
 }
 
 - (jint)parentWithInt:(jint)doc {
@@ -328,9 +336,9 @@ withOrgApacheLuceneSearchLeafFieldComparatorArray:(IOSObjectArray *)comparators
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "compareWithInt:withInt:", "compare", "I", 0x1, NULL, NULL },
-    { "setTopValueWithId:", "setTopValue", "V", 0x1, NULL, NULL },
+    { "setTopValueWithId:", "setTopValue", "V", 0x1, NULL, "(Ljava/lang/Integer;)V" },
     { "getLeafComparatorWithOrgApacheLuceneIndexLeafReaderContext:", "getLeafComparator", "Lorg.apache.lucene.search.LeafFieldComparator;", 0x1, "Ljava.io.IOException;", NULL },
-    { "valueWithInt:", "value", "Ljava.lang.Integer;", 0x1, NULL, NULL },
+    { "valueWithInt:", "value", "Ljava.lang.Integer;", 0x1, NULL, "(I)Ljava/lang/Integer;" },
     { "parentWithInt:", "parent", "I", 0x0, NULL, NULL },
     { "compareWithInt:withInt:withInt:withInt:", "compare", "I", 0x0, "Ljava.io.IOException;", NULL },
     { "compareWithInt:withInt:withOrgApacheLuceneSearchLeafFieldComparatorArray:withIntArray:", "compare", "I", 0x0, "Ljava.io.IOException;", NULL },
@@ -370,9 +378,11 @@ void OrgApacheLuceneSearchBlockJoinComparatorSource_$1_initWithOrgApacheLuceneSe
 }
 
 OrgApacheLuceneSearchBlockJoinComparatorSource_$1 *new_OrgApacheLuceneSearchBlockJoinComparatorSource_$1_initWithOrgApacheLuceneSearchBlockJoinComparatorSource_withIntArray_withIntArray_withOrgApacheLuceneSearchFieldComparatorArray_withOrgApacheLuceneSearchFieldComparatorArray_withIntArray_withIntArray_(OrgApacheLuceneSearchBlockJoinComparatorSource *outer$, IOSIntArray *capture$0, IOSIntArray *capture$1, IOSObjectArray *capture$2, IOSObjectArray *capture$3, IOSIntArray *capture$4, IOSIntArray *capture$5) {
-  OrgApacheLuceneSearchBlockJoinComparatorSource_$1 *self = [OrgApacheLuceneSearchBlockJoinComparatorSource_$1 alloc];
-  OrgApacheLuceneSearchBlockJoinComparatorSource_$1_initWithOrgApacheLuceneSearchBlockJoinComparatorSource_withIntArray_withIntArray_withOrgApacheLuceneSearchFieldComparatorArray_withOrgApacheLuceneSearchFieldComparatorArray_withIntArray_withIntArray_(self, outer$, capture$0, capture$1, capture$2, capture$3, capture$4, capture$5);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchBlockJoinComparatorSource_$1, initWithOrgApacheLuceneSearchBlockJoinComparatorSource_withIntArray_withIntArray_withOrgApacheLuceneSearchFieldComparatorArray_withOrgApacheLuceneSearchFieldComparatorArray_withIntArray_withIntArray_, outer$, capture$0, capture$1, capture$2, capture$3, capture$4, capture$5)
+}
+
+OrgApacheLuceneSearchBlockJoinComparatorSource_$1 *create_OrgApacheLuceneSearchBlockJoinComparatorSource_$1_initWithOrgApacheLuceneSearchBlockJoinComparatorSource_withIntArray_withIntArray_withOrgApacheLuceneSearchFieldComparatorArray_withOrgApacheLuceneSearchFieldComparatorArray_withIntArray_withIntArray_(OrgApacheLuceneSearchBlockJoinComparatorSource *outer$, IOSIntArray *capture$0, IOSIntArray *capture$1, IOSObjectArray *capture$2, IOSObjectArray *capture$3, IOSIntArray *capture$4, IOSIntArray *capture$5) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchBlockJoinComparatorSource_$1, initWithOrgApacheLuceneSearchBlockJoinComparatorSource_withIntArray_withIntArray_withOrgApacheLuceneSearchFieldComparatorArray_withOrgApacheLuceneSearchFieldComparatorArray_withIntArray_withIntArray_, outer$, capture$0, capture$1, capture$2, capture$3, capture$4, capture$5)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBlockJoinComparatorSource_$1)
@@ -384,7 +394,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBlockJoinComparatorSource_
 }
 
 - (jint)compareTopWithInt:(jint)doc {
-  @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(@"this comparator cannot be used with deep paging") autorelease];
+  @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"this comparator cannot be used with deep paging");
 }
 
 - (void)copy__WithInt:(jint)slot
@@ -454,9 +464,11 @@ void OrgApacheLuceneSearchBlockJoinComparatorSource_$1_$1_initWithOrgApacheLucen
 }
 
 OrgApacheLuceneSearchBlockJoinComparatorSource_$1_$1 *new_OrgApacheLuceneSearchBlockJoinComparatorSource_$1_$1_initWithOrgApacheLuceneSearchBlockJoinComparatorSource_$1_(OrgApacheLuceneSearchBlockJoinComparatorSource_$1 *outer$) {
-  OrgApacheLuceneSearchBlockJoinComparatorSource_$1_$1 *self = [OrgApacheLuceneSearchBlockJoinComparatorSource_$1_$1 alloc];
-  OrgApacheLuceneSearchBlockJoinComparatorSource_$1_$1_initWithOrgApacheLuceneSearchBlockJoinComparatorSource_$1_(self, outer$);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchBlockJoinComparatorSource_$1_$1, initWithOrgApacheLuceneSearchBlockJoinComparatorSource_$1_, outer$)
+}
+
+OrgApacheLuceneSearchBlockJoinComparatorSource_$1_$1 *create_OrgApacheLuceneSearchBlockJoinComparatorSource_$1_$1_initWithOrgApacheLuceneSearchBlockJoinComparatorSource_$1_(OrgApacheLuceneSearchBlockJoinComparatorSource_$1 *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchBlockJoinComparatorSource_$1_$1, initWithOrgApacheLuceneSearchBlockJoinComparatorSource_$1_, outer$)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBlockJoinComparatorSource_$1_$1)

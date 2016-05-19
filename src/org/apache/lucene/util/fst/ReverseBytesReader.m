@@ -84,9 +84,11 @@ void OrgApacheLuceneUtilFstReverseBytesReader_initWithByteArray_(OrgApacheLucene
 }
 
 OrgApacheLuceneUtilFstReverseBytesReader *new_OrgApacheLuceneUtilFstReverseBytesReader_initWithByteArray_(IOSByteArray *bytes) {
-  OrgApacheLuceneUtilFstReverseBytesReader *self = [OrgApacheLuceneUtilFstReverseBytesReader alloc];
-  OrgApacheLuceneUtilFstReverseBytesReader_initWithByteArray_(self, bytes);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFstReverseBytesReader, initWithByteArray_, bytes)
+}
+
+OrgApacheLuceneUtilFstReverseBytesReader *create_OrgApacheLuceneUtilFstReverseBytesReader_initWithByteArray_(IOSByteArray *bytes) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFstReverseBytesReader, initWithByteArray_, bytes)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstReverseBytesReader)

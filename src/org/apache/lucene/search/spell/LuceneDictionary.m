@@ -35,10 +35,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpellLuceneDictionary, field_, NSString
 - (id<OrgApacheLuceneSearchSuggestInputIterator>)getEntryIterator {
   OrgApacheLuceneIndexTerms *terms = OrgApacheLuceneIndexMultiFields_getTermsWithOrgApacheLuceneIndexIndexReader_withNSString_(reader_, field_);
   if (terms != nil) {
-    return [new_OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper_initWithOrgApacheLuceneUtilBytesRefIterator_([terms iterator]) autorelease];
+    return create_OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper_initWithOrgApacheLuceneUtilBytesRefIterator_([terms iterator]);
   }
   else {
-    return JreLoadStatic(OrgApacheLuceneSearchSuggestInputIterator, EMPTY_);
+    return JreLoadStatic(OrgApacheLuceneSearchSuggestInputIterator, EMPTY);
   }
 }
 
@@ -70,9 +70,11 @@ void OrgApacheLuceneSearchSpellLuceneDictionary_initWithOrgApacheLuceneIndexInde
 }
 
 OrgApacheLuceneSearchSpellLuceneDictionary *new_OrgApacheLuceneSearchSpellLuceneDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_(OrgApacheLuceneIndexIndexReader *reader, NSString *field) {
-  OrgApacheLuceneSearchSpellLuceneDictionary *self = [OrgApacheLuceneSearchSpellLuceneDictionary alloc];
-  OrgApacheLuceneSearchSpellLuceneDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_(self, reader, field);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSpellLuceneDictionary, initWithOrgApacheLuceneIndexIndexReader_withNSString_, reader, field)
+}
+
+OrgApacheLuceneSearchSpellLuceneDictionary *create_OrgApacheLuceneSearchSpellLuceneDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_(OrgApacheLuceneIndexIndexReader *reader, NSString *field) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSpellLuceneDictionary, initWithOrgApacheLuceneIndexIndexReader_withNSString_, reader, field)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpellLuceneDictionary)

@@ -42,17 +42,17 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node {
   if ([node isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode class]] || [node isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode class]]) {
-    OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *fqn = (OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) check_class_cast(node, [OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode class]);
+    OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *fqn = (OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) cast_chk(node, [OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode class]);
     id<JavaLangCharSequence> text = [((OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) nil_chk(fqn)) getText];
     if ([[fqn getParent] isKindOfClass:[OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode class]] || [fqn isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode class]] || [((id<JavaLangCharSequence>) nil_chk(text)) length] <= 0) {
       return node;
     }
     if (OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor_isPrefixWildcardWithJavaLangCharSequence_(self, text)) {
-      OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode *prefixWildcardQN = [new_OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_(fqn) autorelease];
+      OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode *prefixWildcardQN = create_OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_(fqn);
       return prefixWildcardQN;
     }
     else if (OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor_isWildcardWithJavaLangCharSequence_(self, text)) {
-      OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode *wildcardQN = [new_OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_(fqn) autorelease];
+      OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode *wildcardQN = create_OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_(fqn);
       return wildcardQN;
     }
   }
@@ -82,7 +82,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "isWildcardWithJavaLangCharSequence:", "isWildcard", "Z", 0x2, NULL, NULL },
     { "isPrefixWildcardWithJavaLangCharSequence:", "isPrefixWildcard", "Z", 0x2, NULL, NULL },
     { "preProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "preProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "setChildrenOrderWithJavaUtilList:", "setChildrenOrder", "Ljava.util.List;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
+    { "setChildrenOrderWithJavaUtilList:", "setChildrenOrder", "Ljava.util.List;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;)Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;" },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor = { 2, "WildcardQueryNodeProcessor", "org.apache.lucene.queryparser.flexible.standard.processors", NULL, 0x1, 6, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor;
@@ -95,14 +95,16 @@ void OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProces
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor_init() {
-  OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor *self = [OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor, init)
+}
+
+OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor *create_OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor, init)
 }
 
 jboolean OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor_isWildcardWithJavaLangCharSequence_(OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor *self, id<JavaLangCharSequence> text) {
   if (text == nil || [text length] <= 0) return false;
-  for (jint i = [((id<JavaLangCharSequence>) nil_chk(text)) length] - 1; i >= 0; i--) {
+  for (jint i = [text length] - 1; i >= 0; i--) {
     if (([text charAtWithInt:i] == '*' || [text charAtWithInt:i] == '?') && !OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_wasEscapedWithJavaLangCharSequence_withInt_(text, i)) {
       return true;
     }
@@ -112,7 +114,7 @@ jboolean OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodePr
 
 jboolean OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor_isPrefixWildcardWithJavaLangCharSequence_(OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor *self, id<JavaLangCharSequence> text) {
   if (text == nil || [text length] <= 0 || !OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor_isWildcardWithJavaLangCharSequence_(self, text)) return false;
-  if ([text charAtWithInt:[((id<JavaLangCharSequence>) nil_chk(text)) length] - 1] != '*') return false;
+  if ([text charAtWithInt:[text length] - 1] != '*') return false;
   if (OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_wasEscapedWithJavaLangCharSequence_withInt_(text, [text length] - 1)) return false;
   if ([text length] == 1) return false;
   for (jint i = 0; i < [text length]; i++) {

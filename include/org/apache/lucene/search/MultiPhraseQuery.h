@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchMultiPhraseQuery_INCLUDE_ALL")
-#if OrgApacheLuceneSearchMultiPhraseQuery_RESTRICT
-#define OrgApacheLuceneSearchMultiPhraseQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchMultiPhraseQuery")
+#ifdef RESTRICT_OrgApacheLuceneSearchMultiPhraseQuery
+#define INCLUDE_ALL_OrgApacheLuceneSearchMultiPhraseQuery 0
 #else
-#define OrgApacheLuceneSearchMultiPhraseQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchMultiPhraseQuery 1
 #endif
-#undef OrgApacheLuceneSearchMultiPhraseQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchMultiPhraseQuery
 
-#if !defined (_OrgApacheLuceneSearchMultiPhraseQuery_) && (OrgApacheLuceneSearchMultiPhraseQuery_INCLUDE_ALL || OrgApacheLuceneSearchMultiPhraseQuery_INCLUDE)
-#define _OrgApacheLuceneSearchMultiPhraseQuery_
+#if !defined (OrgApacheLuceneSearchMultiPhraseQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchMultiPhraseQuery || defined(INCLUDE_OrgApacheLuceneSearchMultiPhraseQuery))
+#define OrgApacheLuceneSearchMultiPhraseQuery_
 
-#define OrgApacheLuceneSearchQuery_RESTRICT 1
-#define OrgApacheLuceneSearchQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchQuery 1
+#define INCLUDE_OrgApacheLuceneSearchQuery 1
 #include "org/apache/lucene/search/Query.h"
 
 @class IOSIntArray;
@@ -28,36 +28,79 @@
 @class OrgApacheLuceneSearchWeight;
 @protocol JavaUtilList;
 
+/*!
+ @brief MultiPhraseQuery is a generalized version of PhraseQuery, with an added
+ method <code>add(Term[])</code>.
+ To use this class, to search for the phrase "Microsoft app*" first use
+ add(Term) on the term "Microsoft", then find all terms that have "app" as
+ prefix using IndexReader.terms(Term), and use MultiPhraseQuery.add(Term[]
+ terms) to add them to the query.
+ */
 @interface OrgApacheLuceneSearchMultiPhraseQuery : OrgApacheLuceneSearchQuery
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @brief Add a single term at the next position in the phrase.
+ */
 - (void)addWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
 
+/*!
+ @brief Add multiple terms at the next position in the phrase.
+ Any of the terms
+ may match.
+ */
 - (void)addWithOrgApacheLuceneIndexTermArray:(IOSObjectArray *)terms;
 
+/*!
+ @brief Allows to specify the relative position of terms within the phrase.
+ */
 - (void)addWithOrgApacheLuceneIndexTermArray:(IOSObjectArray *)terms
                                      withInt:(jint)position;
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores;
 
+/*!
+ @brief Returns true if <code>o</code> is equal to this.
+ */
 - (jboolean)isEqual:(id)o;
 
+/*!
+ @brief Returns the relative positions of terms in this phrase.
+ */
 - (IOSIntArray *)getPositions;
 
+/*!
+ @brief Sets the phrase slop for this query.
+ - seealso: PhraseQuery#getSlop()
+ */
 - (jint)getSlop;
 
+/*!
+ @brief Returns a List of the terms in the multiphrase.
+ Do not modify the List or its contents.
+ */
 - (id<JavaUtilList>)getTermArrays;
 
+/*!
+ @brief Returns a hash code value for this object.
+ */
 - (NSUInteger)hash;
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
 
+/*!
+ @brief Sets the phrase slop for this query.
+ - seealso: PhraseQuery#getSlop()
+ */
 - (void)setSlopWithInt:(jint)s;
 
+/*!
+ @brief Prints a user-readable version of this query.
+ */
 - (NSString *)toStringWithNSString:(NSString *)f;
 
 @end
@@ -68,15 +111,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchMultiPhraseQuery_init(OrgApacheLucen
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchMultiPhraseQuery *new_OrgApacheLuceneSearchMultiPhraseQuery_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchMultiPhraseQuery *create_OrgApacheLuceneSearchMultiPhraseQuery_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiPhraseQuery)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_) && (OrgApacheLuceneSearchMultiPhraseQuery_INCLUDE_ALL || OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_INCLUDE)
-#define _OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_
+#if !defined (OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_) && (INCLUDE_ALL_OrgApacheLuceneSearchMultiPhraseQuery || defined(INCLUDE_OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum))
+#define OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_
 
-#define OrgApacheLuceneIndexPostingsEnum_RESTRICT 1
-#define OrgApacheLuceneIndexPostingsEnum_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexPostingsEnum 1
+#define INCLUDE_OrgApacheLuceneIndexPostingsEnum 1
 #include "org/apache/lucene/index/PostingsEnum.h"
 
 @class IOSObjectArray;
@@ -85,12 +130,32 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiPhraseQuery)
 @class OrgApacheLuceneUtilBytesRef;
 @protocol JavaUtilCollection;
 
+/*!
+ @brief Takes the logical union of multiple PostingsEnum iterators.
+ <p>
+ Note: positions are merged during freq()
+ */
 @interface OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum : OrgApacheLuceneIndexPostingsEnum {
  @public
+  /*!
+   @brief queue ordered by docid
+   */
   OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_DocsQueue *docsQueue_;
+  /*!
+   @brief cost of this enum: sum of its subs
+   */
   jlong cost_;
+  /*!
+   @brief queue ordered by position for current doc
+   */
   OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_PositionsQueue *posQueue_;
+  /*!
+   @brief current doc posQueue is working
+   */
   jint posQueueDoc_;
+  /*!
+   @brief list of subs (unordered)
+   */
   IOSObjectArray *subs_;
 }
 
@@ -130,19 +195,24 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_i
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum *new_OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_initWithJavaUtilCollection_(id<JavaUtilCollection> subs) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum *create_OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_initWithJavaUtilCollection_(id<JavaUtilCollection> subs);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_DocsQueue_) && (OrgApacheLuceneSearchMultiPhraseQuery_INCLUDE_ALL || OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_DocsQueue_INCLUDE)
-#define _OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_DocsQueue_
+#if !defined (OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_DocsQueue_) && (INCLUDE_ALL_OrgApacheLuceneSearchMultiPhraseQuery || defined(INCLUDE_OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_DocsQueue))
+#define OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_DocsQueue_
 
-#define OrgApacheLuceneUtilPriorityQueue_RESTRICT 1
-#define OrgApacheLuceneUtilPriorityQueue_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilPriorityQueue 1
+#define INCLUDE_OrgApacheLuceneUtilPriorityQueue 1
 #include "org/apache/lucene/util/PriorityQueue.h"
 
 @class OrgApacheLuceneIndexPostingsEnum;
 
+/*!
+ @brief disjunction of postings ordered by docid.
+ */
 @interface OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_DocsQueue : OrgApacheLuceneUtilPriorityQueue
 
 #pragma mark Public
@@ -162,13 +232,19 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_D
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_DocsQueue *new_OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_DocsQueue_initWithInt_(jint size) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_DocsQueue *create_OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_DocsQueue_initWithInt_(jint size);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_DocsQueue)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_PositionsQueue_) && (OrgApacheLuceneSearchMultiPhraseQuery_INCLUDE_ALL || OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_PositionsQueue_INCLUDE)
-#define _OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_PositionsQueue_
+#if !defined (OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_PositionsQueue_) && (INCLUDE_ALL_OrgApacheLuceneSearchMultiPhraseQuery || defined(INCLUDE_OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_PositionsQueue))
+#define OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_PositionsQueue_
 
+/*!
+ @brief queue of terms for a single document. its a sorted array of
+ all the positions from all the postings
+ */
 @interface OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_PositionsQueue : NSObject
 
 #pragma mark Package-Private
@@ -193,8 +269,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_P
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_PositionsQueue *new_OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_PositionsQueue_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_PositionsQueue *create_OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_PositionsQueue_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_PositionsQueue)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchMultiPhraseQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchMultiPhraseQuery")

@@ -29,17 +29,47 @@
 
 @interface OrgApacheLuceneUtilAutomatonAutomaton () {
  @public
+  /*!
+   @brief Where we next write to the int[] states; this increments by 2 for
+ each added state because we pack a pointer to the transitions
+ array and a count of how many transitions leave the state.
+   */
   jint nextState_;
+  /*!
+   @brief Where we next write to in int[] transitions; this
+ increments by 3 for each added transition because we
+ pack min, max, dest in sequence.
+   */
   jint nextTransition_;
+  /*!
+   @brief Current state we are adding transitions to; the caller
+ must add all transitions for this state before moving
+ onto another state.
+   */
   jint curState_;
+  /*!
+   @brief Index in the transitions array, where this states
+ leaving transitions are stored, or -1 if this state
+ has not added any transitions yet, followed by number
+ of transitions.
+   */
   IOSIntArray *states_;
   JavaUtilBitSet *isAccept_;
+  /*!
+   @brief Holds toState, min, max for each transition.
+   */
   IOSIntArray *transitions_;
+  /*!
+   @brief True if no state has two transitions leaving with the same label.
+   */
   jboolean deterministic_;
   OrgApacheLuceneUtilSorter *destMinMaxSorter_;
   OrgApacheLuceneUtilSorter *minMaxDestSorter_;
 }
 
+/*!
+ @brief Freezes the last state, sorting and reducing the transitions.
+ */
 - (void)finishCurrentState;
 
 - (void)growStates;
@@ -66,7 +96,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilAutomatonAutomaton_tr
 
 @interface OrgApacheLuceneUtilAutomatonAutomaton_DestMinMaxSorter () {
  @public
-  __weak OrgApacheLuceneUtilAutomatonAutomaton *this$0_;
+  __unsafe_unretained OrgApacheLuceneUtilAutomatonAutomaton *this$0_;
 }
 
 - (void)swapOneWithInt:(jint)i
@@ -78,7 +108,7 @@ __attribute__((unused)) static void OrgApacheLuceneUtilAutomatonAutomaton_DestMi
 
 @interface OrgApacheLuceneUtilAutomatonAutomaton_MinMaxDestSorter () {
  @public
-  __weak OrgApacheLuceneUtilAutomatonAutomaton *this$0_;
+  __unsafe_unretained OrgApacheLuceneUtilAutomatonAutomaton *this$0_;
 }
 
 - (void)swapOneWithInt:(jint)i
@@ -105,7 +135,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAutomatonAutomaton_Builder, sorter_, OrgA
 
 @interface OrgApacheLuceneUtilAutomatonAutomaton_Builder_OurSorter () {
  @public
-  __weak OrgApacheLuceneUtilAutomatonAutomaton_Builder *this$0_;
+  __unsafe_unretained OrgApacheLuceneUtilAutomatonAutomaton_Builder *this$0_;
 }
 
 - (void)swapOneWithInt:(jint)i
@@ -141,7 +171,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)setAcceptWithInt:(jint)state
              withBoolean:(jboolean)accept {
   if (state >= [self getNumStates]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$IC", @"state=", state, @" is out of bounds (numStates=", [self getNumStates], ')')) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$IC", @"state=", state, @" is out of bounds (numStates=", [self getNumStates], ')'));
   }
   if (accept) {
     [((JavaUtilBitSet *) nil_chk(isAccept_)) setWithInt:state];
@@ -158,7 +188,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     jint numTransitions = [self getNumTransitionsWithInt:s];
     IOSObjectArray_SetAndConsume(transitions, s, [IOSObjectArray newArrayWithLength:numTransitions type:OrgApacheLuceneUtilAutomatonTransition_class_()]);
     for (jint t = 0; t < numTransitions; t++) {
-      OrgApacheLuceneUtilAutomatonTransition *transition = [new_OrgApacheLuceneUtilAutomatonTransition_init() autorelease];
+      OrgApacheLuceneUtilAutomatonTransition *transition = create_OrgApacheLuceneUtilAutomatonTransition_init();
       [self getTransitionWithInt:s withInt:t withOrgApacheLuceneUtilAutomatonTransition:transition];
       IOSObjectArray_Set(nil_chk(IOSObjectArray_Get(transitions, s)), t, transition);
     }
@@ -186,10 +216,10 @@ J2OBJC_IGNORE_DESIGNATED_END
                      withInt:(jint)max {
   JreAssert((nextTransition_ % 3 == 0), (@"org/apache/lucene/util/automaton/Automaton.java:167 condition failed: assert nextTransition%3 == 0;"));
   if (source >= nextState_ / 2) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$IC", @"source=", source, @" is out of bounds (maxState is ", (nextState_ / 2 - 1), ')')) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$IC", @"source=", source, @" is out of bounds (maxState is ", (nextState_ / 2 - 1), ')'));
   }
   if (dest >= nextState_ / 2) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$IC", @"dest=", dest, @" is out of bounds (max state is ", (nextState_ / 2 - 1), ')')) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$IC", @"dest=", dest, @" is out of bounds (max state is ", (nextState_ / 2 - 1), ')'));
   }
   OrgApacheLuceneUtilAutomatonAutomaton_growTransitions(self);
   if (curState_ != source) {
@@ -198,7 +228,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     }
     curState_ = source;
     if (IOSIntArray_Get(nil_chk(states_), 2 * curState_) != -1) {
-      @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$", @"from state (", source, @") already had transitions added")) autorelease];
+      @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$", @"from state (", source, @") already had transitions added"));
     }
     JreAssert((IOSIntArray_Get(states_, 2 * curState_ + 1) == 0), (@"org/apache/lucene/util/automaton/Automaton.java:187 condition failed: assert states[2*curState+1] == 0;"));
     *IOSIntArray_GetRef(states_, 2 * curState_) = nextTransition_;
@@ -211,7 +241,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)addEpsilonWithInt:(jint)source
                   withInt:(jint)dest {
-  OrgApacheLuceneUtilAutomatonTransition *t = [new_OrgApacheLuceneUtilAutomatonTransition_init() autorelease];
+  OrgApacheLuceneUtilAutomatonTransition *t = create_OrgApacheLuceneUtilAutomatonTransition_init();
   jint count = [self initTransitionWithInt:dest withOrgApacheLuceneUtilAutomatonTransition:t];
   for (jint i = 0; i < count; i++) {
     [self getNextTransitionWithOrgApacheLuceneUtilAutomatonTransition:t];
@@ -328,7 +358,7 @@ withOrgApacheLuceneUtilAutomatonTransition:(OrgApacheLuceneUtilAutomatonTransiti
 }
 
 - (NSString *)toDot {
-  JavaLangStringBuilder *b = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *b = create_JavaLangStringBuilder_init();
   [b appendWithNSString:@"digraph Automaton {\n"];
   [b appendWithNSString:@"  rankdir = LR\n"];
   jint numStates = [self getNumStates];
@@ -336,7 +366,7 @@ withOrgApacheLuceneUtilAutomatonTransition:(OrgApacheLuceneUtilAutomatonTransiti
     [b appendWithNSString:@"  initial [shape=plaintext,label=\"0\"]\n"];
     [b appendWithNSString:@"  initial -> 0\n"];
   }
-  OrgApacheLuceneUtilAutomatonTransition *t = [new_OrgApacheLuceneUtilAutomatonTransition_init() autorelease];
+  OrgApacheLuceneUtilAutomatonTransition *t = create_OrgApacheLuceneUtilAutomatonTransition_init();
   for (jint state = 0; state < numStates; state++) {
     [b appendWithNSString:@"  "];
     [b appendWithInt:state];
@@ -368,7 +398,7 @@ withOrgApacheLuceneUtilAutomatonTransition:(OrgApacheLuceneUtilAutomatonTransiti
 }
 
 - (IOSIntArray *)getStartPoints {
-  id<JavaUtilSet> pointset = [new_JavaUtilHashSet_init() autorelease];
+  id<JavaUtilSet> pointset = create_JavaUtilHashSet_init();
   [pointset addWithId:JavaLangInteger_valueOfWithInt_(JavaLangCharacter_MIN_CODE_POINT)];
   for (jint s = 0; s < nextState_; s += 2) {
     jint trans = IOSIntArray_Get(nil_chk(states_), s);
@@ -411,7 +441,7 @@ withOrgApacheLuceneUtilAutomatonTransition:(OrgApacheLuceneUtilAutomatonTransiti
 }
 
 - (jlong)ramBytesUsed {
-  return JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER_) + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithIntArray_(states_) + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithIntArray_(transitions_) + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER_) + ([((JavaUtilBitSet *) nil_chk(isAccept_)) size] / 8) + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_) + 2 * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_) + 3 * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT + OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_BOOLEAN;
+  return JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER) + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithIntArray_(states_) + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithIntArray_(transitions_) + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER) + ([((JavaUtilBitSet *) nil_chk(isAccept_)) size] / 8) + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF) + 2 * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF) + 3 * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT + OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_BOOLEAN;
 }
 
 - (id<JavaUtilCollection>)getChildResources {
@@ -457,7 +487,7 @@ withOrgApacheLuceneUtilAutomatonTransition:(OrgApacheLuceneUtilAutomatonTransiti
     { "getStartPoints", NULL, "[I", 0x0, NULL, NULL },
     { "stepWithInt:withInt:", "step", "I", 0x1, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "nextState_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
@@ -482,9 +512,11 @@ void OrgApacheLuceneUtilAutomatonAutomaton_init(OrgApacheLuceneUtilAutomatonAuto
 }
 
 OrgApacheLuceneUtilAutomatonAutomaton *new_OrgApacheLuceneUtilAutomatonAutomaton_init() {
-  OrgApacheLuceneUtilAutomatonAutomaton *self = [OrgApacheLuceneUtilAutomatonAutomaton alloc];
-  OrgApacheLuceneUtilAutomatonAutomaton_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAutomatonAutomaton, init)
+}
+
+OrgApacheLuceneUtilAutomatonAutomaton *create_OrgApacheLuceneUtilAutomatonAutomaton_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAutomatonAutomaton, init)
 }
 
 void OrgApacheLuceneUtilAutomatonAutomaton_initWithInt_withInt_(OrgApacheLuceneUtilAutomatonAutomaton *self, jint numStates, jint numTransitions) {
@@ -499,9 +531,11 @@ void OrgApacheLuceneUtilAutomatonAutomaton_initWithInt_withInt_(OrgApacheLuceneU
 }
 
 OrgApacheLuceneUtilAutomatonAutomaton *new_OrgApacheLuceneUtilAutomatonAutomaton_initWithInt_withInt_(jint numStates, jint numTransitions) {
-  OrgApacheLuceneUtilAutomatonAutomaton *self = [OrgApacheLuceneUtilAutomatonAutomaton alloc];
-  OrgApacheLuceneUtilAutomatonAutomaton_initWithInt_withInt_(self, numStates, numTransitions);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAutomatonAutomaton, initWithInt_withInt_, numStates, numTransitions)
+}
+
+OrgApacheLuceneUtilAutomatonAutomaton *create_OrgApacheLuceneUtilAutomatonAutomaton_initWithInt_withInt_(jint numStates, jint numTransitions) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAutomatonAutomaton, initWithInt_withInt_, numStates, numTransitions)
 }
 
 void OrgApacheLuceneUtilAutomatonAutomaton_finishCurrentState(OrgApacheLuceneUtilAutomatonAutomaton *self) {
@@ -554,7 +588,7 @@ void OrgApacheLuceneUtilAutomatonAutomaton_finishCurrentState(OrgApacheLuceneUti
     upto++;
   }
   self->nextTransition_ -= (numTransitions - upto) * 3;
-  *IOSIntArray_GetRef(self->states_, 2 * self->curState_ + 1) = upto;
+  *IOSIntArray_GetRef(nil_chk(self->states_), 2 * self->curState_ + 1) = upto;
   [((OrgApacheLuceneUtilSorter *) nil_chk(self->minMaxDestSorter_)) sortWithInt:start withInt:start + upto];
   if (self->deterministic_ && upto > 1) {
     jint lastMax = IOSIntArray_Get(nil_chk(self->transitions_), offset + 2);
@@ -681,8 +715,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonAutomaton)
   return self;
 }
 
-- (void)__javaClone {
-  [super __javaClone];
+- (void)__javaClone:(OrgApacheLuceneUtilAutomatonAutomaton_DestMinMaxSorter *)original {
+  [super __javaClone:original];
   [this$0_ release];
 }
 
@@ -691,7 +725,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonAutomaton)
     { "swapOneWithInt:withInt:", "swapOne", "V", 0x2, NULL, NULL },
     { "swapWithInt:withInt:", "swap", "V", 0x4, NULL, NULL },
     { "compareWithInt:withInt:", "compare", "I", 0x4, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAutomatonAutomaton:", "init", NULL, 0x0, NULL, NULL },
+    { "initWithOrgApacheLuceneUtilAutomatonAutomaton:", "DestMinMaxSorter", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.util.automaton.Automaton;", NULL, NULL, .constantValue.asLong = 0 },
@@ -714,9 +748,11 @@ void OrgApacheLuceneUtilAutomatonAutomaton_DestMinMaxSorter_initWithOrgApacheLuc
 }
 
 OrgApacheLuceneUtilAutomatonAutomaton_DestMinMaxSorter *new_OrgApacheLuceneUtilAutomatonAutomaton_DestMinMaxSorter_initWithOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonAutomaton *outer$) {
-  OrgApacheLuceneUtilAutomatonAutomaton_DestMinMaxSorter *self = [OrgApacheLuceneUtilAutomatonAutomaton_DestMinMaxSorter alloc];
-  OrgApacheLuceneUtilAutomatonAutomaton_DestMinMaxSorter_initWithOrgApacheLuceneUtilAutomatonAutomaton_(self, outer$);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAutomatonAutomaton_DestMinMaxSorter, initWithOrgApacheLuceneUtilAutomatonAutomaton_, outer$)
+}
+
+OrgApacheLuceneUtilAutomatonAutomaton_DestMinMaxSorter *create_OrgApacheLuceneUtilAutomatonAutomaton_DestMinMaxSorter_initWithOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonAutomaton *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAutomatonAutomaton_DestMinMaxSorter, initWithOrgApacheLuceneUtilAutomatonAutomaton_, outer$)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonAutomaton_DestMinMaxSorter)
@@ -773,8 +809,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonAutomaton_DestMinMa
   return self;
 }
 
-- (void)__javaClone {
-  [super __javaClone];
+- (void)__javaClone:(OrgApacheLuceneUtilAutomatonAutomaton_MinMaxDestSorter *)original {
+  [super __javaClone:original];
   [this$0_ release];
 }
 
@@ -783,7 +819,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonAutomaton_DestMinMa
     { "swapOneWithInt:withInt:", "swapOne", "V", 0x2, NULL, NULL },
     { "swapWithInt:withInt:", "swap", "V", 0x4, NULL, NULL },
     { "compareWithInt:withInt:", "compare", "I", 0x4, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAutomatonAutomaton:", "init", NULL, 0x0, NULL, NULL },
+    { "initWithOrgApacheLuceneUtilAutomatonAutomaton:", "MinMaxDestSorter", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.util.automaton.Automaton;", NULL, NULL, .constantValue.asLong = 0 },
@@ -806,9 +842,11 @@ void OrgApacheLuceneUtilAutomatonAutomaton_MinMaxDestSorter_initWithOrgApacheLuc
 }
 
 OrgApacheLuceneUtilAutomatonAutomaton_MinMaxDestSorter *new_OrgApacheLuceneUtilAutomatonAutomaton_MinMaxDestSorter_initWithOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonAutomaton *outer$) {
-  OrgApacheLuceneUtilAutomatonAutomaton_MinMaxDestSorter *self = [OrgApacheLuceneUtilAutomatonAutomaton_MinMaxDestSorter alloc];
-  OrgApacheLuceneUtilAutomatonAutomaton_MinMaxDestSorter_initWithOrgApacheLuceneUtilAutomatonAutomaton_(self, outer$);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAutomatonAutomaton_MinMaxDestSorter, initWithOrgApacheLuceneUtilAutomatonAutomaton_, outer$)
+}
+
+OrgApacheLuceneUtilAutomatonAutomaton_MinMaxDestSorter *create_OrgApacheLuceneUtilAutomatonAutomaton_MinMaxDestSorter_initWithOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonAutomaton *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAutomatonAutomaton_MinMaxDestSorter, initWithOrgApacheLuceneUtilAutomatonAutomaton_, outer$)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonAutomaton_MinMaxDestSorter)
@@ -862,7 +900,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (OrgApacheLuceneUtilAutomatonAutomaton *)finish {
   jint numStates = nextState_;
   jint numTransitions = nextTransition_ / 4;
-  OrgApacheLuceneUtilAutomatonAutomaton *a = [new_OrgApacheLuceneUtilAutomatonAutomaton_initWithInt_withInt_(numStates, numTransitions) autorelease];
+  OrgApacheLuceneUtilAutomatonAutomaton *a = create_OrgApacheLuceneUtilAutomatonAutomaton_initWithInt_withInt_(numStates, numTransitions);
   for (jint state = 0; state < numStates; state++) {
     [a createState];
     [a setAcceptWithInt:state withBoolean:[self isAcceptWithInt:state]];
@@ -882,7 +920,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)setAcceptWithInt:(jint)state
              withBoolean:(jboolean)accept {
   if (state >= [self getNumStates]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$IC", @"state=", state, @" is out of bounds (numStates=", [self getNumStates], ')')) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$IC", @"state=", state, @" is out of bounds (numStates=", [self getNumStates], ')'));
   }
   [((JavaUtilBitSet *) nil_chk(self->isAccept_)) setWithInt:state withBoolean:accept];
 }
@@ -899,7 +937,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   jint offset = [self getNumStates];
   jint otherNumStates = [((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(other)) getNumStates];
   [self copyStatesWithOrgApacheLuceneUtilAutomatonAutomaton:other];
-  OrgApacheLuceneUtilAutomatonTransition *t = [new_OrgApacheLuceneUtilAutomatonTransition_init() autorelease];
+  OrgApacheLuceneUtilAutomatonTransition *t = create_OrgApacheLuceneUtilAutomatonTransition_init();
   for (jint s = 0; s < otherNumStates; s++) {
     jint count = [other initTransitionWithInt:s withOrgApacheLuceneUtilAutomatonTransition:t];
     for (jint i = 0; i < count; i++) {
@@ -958,9 +996,11 @@ void OrgApacheLuceneUtilAutomatonAutomaton_Builder_init(OrgApacheLuceneUtilAutom
 }
 
 OrgApacheLuceneUtilAutomatonAutomaton_Builder *new_OrgApacheLuceneUtilAutomatonAutomaton_Builder_init() {
-  OrgApacheLuceneUtilAutomatonAutomaton_Builder *self = [OrgApacheLuceneUtilAutomatonAutomaton_Builder alloc];
-  OrgApacheLuceneUtilAutomatonAutomaton_Builder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAutomatonAutomaton_Builder, init)
+}
+
+OrgApacheLuceneUtilAutomatonAutomaton_Builder *create_OrgApacheLuceneUtilAutomatonAutomaton_Builder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAutomatonAutomaton_Builder, init)
 }
 
 void OrgApacheLuceneUtilAutomatonAutomaton_Builder_initWithInt_withInt_(OrgApacheLuceneUtilAutomatonAutomaton_Builder *self, jint numStates, jint numTransitions) {
@@ -973,9 +1013,11 @@ void OrgApacheLuceneUtilAutomatonAutomaton_Builder_initWithInt_withInt_(OrgApach
 }
 
 OrgApacheLuceneUtilAutomatonAutomaton_Builder *new_OrgApacheLuceneUtilAutomatonAutomaton_Builder_initWithInt_withInt_(jint numStates, jint numTransitions) {
-  OrgApacheLuceneUtilAutomatonAutomaton_Builder *self = [OrgApacheLuceneUtilAutomatonAutomaton_Builder alloc];
-  OrgApacheLuceneUtilAutomatonAutomaton_Builder_initWithInt_withInt_(self, numStates, numTransitions);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAutomatonAutomaton_Builder, initWithInt_withInt_, numStates, numTransitions)
+}
+
+OrgApacheLuceneUtilAutomatonAutomaton_Builder *create_OrgApacheLuceneUtilAutomatonAutomaton_Builder_initWithInt_withInt_(jint numStates, jint numTransitions) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAutomatonAutomaton_Builder, initWithInt_withInt_, numStates, numTransitions)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonAutomaton_Builder)
@@ -1041,8 +1083,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonAutomaton_Builder)
   return self;
 }
 
-- (void)__javaClone {
-  [super __javaClone];
+- (void)__javaClone:(OrgApacheLuceneUtilAutomatonAutomaton_Builder_OurSorter *)original {
+  [super __javaClone:original];
   [this$0_ release];
 }
 
@@ -1051,7 +1093,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonAutomaton_Builder)
     { "swapOneWithInt:withInt:", "swapOne", "V", 0x2, NULL, NULL },
     { "swapWithInt:withInt:", "swap", "V", 0x4, NULL, NULL },
     { "compareWithInt:withInt:", "compare", "I", 0x4, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAutomatonAutomaton_Builder:", "init", NULL, 0x0, NULL, NULL },
+    { "initWithOrgApacheLuceneUtilAutomatonAutomaton_Builder:", "OurSorter", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.util.automaton.Automaton$Builder;", NULL, NULL, .constantValue.asLong = 0 },
@@ -1074,9 +1116,11 @@ void OrgApacheLuceneUtilAutomatonAutomaton_Builder_OurSorter_initWithOrgApacheLu
 }
 
 OrgApacheLuceneUtilAutomatonAutomaton_Builder_OurSorter *new_OrgApacheLuceneUtilAutomatonAutomaton_Builder_OurSorter_initWithOrgApacheLuceneUtilAutomatonAutomaton_Builder_(OrgApacheLuceneUtilAutomatonAutomaton_Builder *outer$) {
-  OrgApacheLuceneUtilAutomatonAutomaton_Builder_OurSorter *self = [OrgApacheLuceneUtilAutomatonAutomaton_Builder_OurSorter alloc];
-  OrgApacheLuceneUtilAutomatonAutomaton_Builder_OurSorter_initWithOrgApacheLuceneUtilAutomatonAutomaton_Builder_(self, outer$);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAutomatonAutomaton_Builder_OurSorter, initWithOrgApacheLuceneUtilAutomatonAutomaton_Builder_, outer$)
+}
+
+OrgApacheLuceneUtilAutomatonAutomaton_Builder_OurSorter *create_OrgApacheLuceneUtilAutomatonAutomaton_Builder_OurSorter_initWithOrgApacheLuceneUtilAutomatonAutomaton_Builder_(OrgApacheLuceneUtilAutomatonAutomaton_Builder *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAutomatonAutomaton_Builder_OurSorter, initWithOrgApacheLuceneUtilAutomatonAutomaton_Builder_, outer$)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonAutomaton_Builder_OurSorter)

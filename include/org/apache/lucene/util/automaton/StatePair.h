@@ -5,17 +5,20 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilAutomatonStatePair_INCLUDE_ALL")
-#if OrgApacheLuceneUtilAutomatonStatePair_RESTRICT
-#define OrgApacheLuceneUtilAutomatonStatePair_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonStatePair")
+#ifdef RESTRICT_OrgApacheLuceneUtilAutomatonStatePair
+#define INCLUDE_ALL_OrgApacheLuceneUtilAutomatonStatePair 0
 #else
-#define OrgApacheLuceneUtilAutomatonStatePair_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilAutomatonStatePair 1
 #endif
-#undef OrgApacheLuceneUtilAutomatonStatePair_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilAutomatonStatePair
 
-#if !defined (_OrgApacheLuceneUtilAutomatonStatePair_) && (OrgApacheLuceneUtilAutomatonStatePair_INCLUDE_ALL || OrgApacheLuceneUtilAutomatonStatePair_INCLUDE)
-#define _OrgApacheLuceneUtilAutomatonStatePair_
+#if !defined (OrgApacheLuceneUtilAutomatonStatePair_) && (INCLUDE_ALL_OrgApacheLuceneUtilAutomatonStatePair || defined(INCLUDE_OrgApacheLuceneUtilAutomatonStatePair))
+#define OrgApacheLuceneUtilAutomatonStatePair_
 
+/*!
+ @brief Pair of states.
+ */
 @interface OrgApacheLuceneUtilAutomatonStatePair : NSObject {
  @public
   jint s_;
@@ -25,11 +28,26 @@
 
 #pragma mark Public
 
+/*!
+ @brief Constructs a new state pair.
+ @param s1 first state
+ @param s2 second state
+ */
 - (instancetype)initWithInt:(jint)s1
                     withInt:(jint)s2;
 
+/*!
+ @brief Checks for equality.
+ @param obj object to compare with
+ @return true if <tt>obj</tt> represents the same pair of states as this
+ pair
+ */
 - (jboolean)isEqual:(id)obj;
 
+/*!
+ @brief Returns hash code.
+ @return hash code
+ */
 - (NSUInteger)hash;
 
 - (NSString *)description;
@@ -48,12 +66,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonStatePair_initWithInt_withInt
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonStatePair *new_OrgApacheLuceneUtilAutomatonStatePair_initWithInt_withInt_withInt_(jint s, jint s1, jint s2) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonStatePair *create_OrgApacheLuceneUtilAutomatonStatePair_initWithInt_withInt_withInt_(jint s, jint s1, jint s2);
+
 FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonStatePair_initWithInt_withInt_(OrgApacheLuceneUtilAutomatonStatePair *self, jint s1, jint s2);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonStatePair *new_OrgApacheLuceneUtilAutomatonStatePair_initWithInt_withInt_(jint s1, jint s2) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonStatePair *create_OrgApacheLuceneUtilAutomatonStatePair_initWithInt_withInt_(jint s1, jint s2);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonStatePair)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilAutomatonStatePair_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonStatePair")

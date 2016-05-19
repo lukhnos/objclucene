@@ -25,14 +25,14 @@
 
 @interface OrgApacheLuceneSearchSortedNumericSortField () {
  @public
-  OrgApacheLuceneSearchSortedNumericSelector_TypeEnum *selector_;
-  OrgApacheLuceneSearchSortField_TypeEnum *type_SortedNumericSortField_;
+  OrgApacheLuceneSearchSortedNumericSelector_Type *selector_;
+  OrgApacheLuceneSearchSortField_Type *type_SortedNumericSortField_;
 }
 
 @end
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSortedNumericSortField, selector_, OrgApacheLuceneSearchSortedNumericSelector_TypeEnum *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSortedNumericSortField, type_SortedNumericSortField_, OrgApacheLuceneSearchSortField_TypeEnum *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSortedNumericSortField, selector_, OrgApacheLuceneSearchSortedNumericSelector_Type *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSortedNumericSortField, type_SortedNumericSortField_, OrgApacheLuceneSearchSortField_Type *)
 
 @interface OrgApacheLuceneSearchSortedNumericSortField_$1 : OrgApacheLuceneSearchFieldComparator_IntComparator {
  @public
@@ -56,6 +56,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSortedNumericSortField_$1, this$0_, Org
 __attribute__((unused)) static void OrgApacheLuceneSearchSortedNumericSortField_$1_initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangInteger_(OrgApacheLuceneSearchSortedNumericSortField_$1 *self, OrgApacheLuceneSearchSortedNumericSortField *outer$, jint arg$0, NSString *arg$1, JavaLangInteger *arg$2);
 
 __attribute__((unused)) static OrgApacheLuceneSearchSortedNumericSortField_$1 *new_OrgApacheLuceneSearchSortedNumericSortField_$1_initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangInteger_(OrgApacheLuceneSearchSortedNumericSortField *outer$, jint arg$0, NSString *arg$1, JavaLangInteger *arg$2) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchSortedNumericSortField_$1 *create_OrgApacheLuceneSearchSortedNumericSortField_$1_initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangInteger_(OrgApacheLuceneSearchSortedNumericSortField *outer$, jint arg$0, NSString *arg$1, JavaLangInteger *arg$2);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedNumericSortField_$1)
 
@@ -82,6 +84,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSortedNumericSortField_
 
 __attribute__((unused)) static OrgApacheLuceneSearchSortedNumericSortField_$2 *new_OrgApacheLuceneSearchSortedNumericSortField_$2_initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangFloat_(OrgApacheLuceneSearchSortedNumericSortField *outer$, jint arg$0, NSString *arg$1, JavaLangFloat *arg$2) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchSortedNumericSortField_$2 *create_OrgApacheLuceneSearchSortedNumericSortField_$2_initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangFloat_(OrgApacheLuceneSearchSortedNumericSortField *outer$, jint arg$0, NSString *arg$1, JavaLangFloat *arg$2);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedNumericSortField_$2)
 
 @interface OrgApacheLuceneSearchSortedNumericSortField_$3 : OrgApacheLuceneSearchFieldComparator_LongComparator {
@@ -106,6 +110,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSortedNumericSortField_$3, this$0_, Org
 __attribute__((unused)) static void OrgApacheLuceneSearchSortedNumericSortField_$3_initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangLong_(OrgApacheLuceneSearchSortedNumericSortField_$3 *self, OrgApacheLuceneSearchSortedNumericSortField *outer$, jint arg$0, NSString *arg$1, JavaLangLong *arg$2);
 
 __attribute__((unused)) static OrgApacheLuceneSearchSortedNumericSortField_$3 *new_OrgApacheLuceneSearchSortedNumericSortField_$3_initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangLong_(OrgApacheLuceneSearchSortedNumericSortField *outer$, jint arg$0, NSString *arg$1, JavaLangLong *arg$2) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchSortedNumericSortField_$3 *create_OrgApacheLuceneSearchSortedNumericSortField_$3_initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangLong_(OrgApacheLuceneSearchSortedNumericSortField *outer$, jint arg$0, NSString *arg$1, JavaLangLong *arg$2);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedNumericSortField_$3)
 
@@ -132,55 +138,57 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSortedNumericSortField_
 
 __attribute__((unused)) static OrgApacheLuceneSearchSortedNumericSortField_$4 *new_OrgApacheLuceneSearchSortedNumericSortField_$4_initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangDouble_(OrgApacheLuceneSearchSortedNumericSortField *outer$, jint arg$0, NSString *arg$1, JavaLangDouble *arg$2) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchSortedNumericSortField_$4 *create_OrgApacheLuceneSearchSortedNumericSortField_$4_initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangDouble_(OrgApacheLuceneSearchSortedNumericSortField *outer$, jint arg$0, NSString *arg$1, JavaLangDouble *arg$2);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedNumericSortField_$4)
 
 @implementation OrgApacheLuceneSearchSortedNumericSortField
 
 - (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneSearchSortField_TypeEnum:(OrgApacheLuceneSearchSortField_TypeEnum *)type {
-  OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_(self, field, type);
+withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)type {
+  OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_Type_(self, field, type);
   return self;
 }
 
 - (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneSearchSortField_TypeEnum:(OrgApacheLuceneSearchSortField_TypeEnum *)type
+withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)type
                      withBoolean:(jboolean)reverse {
-  OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_withBoolean_(self, field, type, reverse);
+  OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_Type_withBoolean_(self, field, type, reverse);
   return self;
 }
 
 - (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneSearchSortField_TypeEnum:(OrgApacheLuceneSearchSortField_TypeEnum *)type
+withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)type
                      withBoolean:(jboolean)reverse
-withOrgApacheLuceneSearchSortedNumericSelector_TypeEnum:(OrgApacheLuceneSearchSortedNumericSelector_TypeEnum *)selector {
-  OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_withBoolean_withOrgApacheLuceneSearchSortedNumericSelector_TypeEnum_(self, field, type, reverse, selector);
+withOrgApacheLuceneSearchSortedNumericSelector_Type:(OrgApacheLuceneSearchSortedNumericSelector_Type *)selector {
+  OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_Type_withBoolean_withOrgApacheLuceneSearchSortedNumericSelector_Type_(self, field, type, reverse, selector);
   return self;
 }
 
-- (OrgApacheLuceneSearchSortedNumericSelector_TypeEnum *)getSelector {
+- (OrgApacheLuceneSearchSortedNumericSelector_Type *)getSelector {
   return selector_;
 }
 
 - (NSUInteger)hash {
   jint prime = 31;
   jint result = ((jint) [super hash]);
-  result = prime * result + ((jint) [((OrgApacheLuceneSearchSortedNumericSelector_TypeEnum *) nil_chk(selector_)) hash]);
-  result = prime * result + ((jint) [((OrgApacheLuceneSearchSortField_TypeEnum *) nil_chk(type_SortedNumericSortField_)) hash]);
+  result = prime * result + ((jint) [((OrgApacheLuceneSearchSortedNumericSelector_Type *) nil_chk(selector_)) hash]);
+  result = prime * result + ((jint) [((OrgApacheLuceneSearchSortField_Type *) nil_chk(type_SortedNumericSortField_)) hash]);
   return result;
 }
 
 - (jboolean)isEqual:(id)obj {
   if (self == obj) return true;
   if (![super isEqual:obj]) return false;
-  if ([self getClass] != [nil_chk(obj) getClass]) return false;
-  OrgApacheLuceneSearchSortedNumericSortField *other = (OrgApacheLuceneSearchSortedNumericSortField *) check_class_cast(obj, [OrgApacheLuceneSearchSortedNumericSortField class]);
+  if ([self getClass] != (id) [nil_chk(obj) getClass]) return false;
+  OrgApacheLuceneSearchSortedNumericSortField *other = (OrgApacheLuceneSearchSortedNumericSortField *) cast_chk(obj, [OrgApacheLuceneSearchSortedNumericSortField class]);
   if (selector_ != other->selector_) return false;
   if (type_SortedNumericSortField_ != other->type_SortedNumericSortField_) return false;
   return true;
 }
 
 - (NSString *)description {
-  JavaLangStringBuilder *buffer = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_init();
   [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([buffer appendWithNSString:@"<sortednumeric: \""])) appendWithNSString:[self getField]])) appendWithNSString:@"\">"];
   if ([self getReverse]) [buffer appendWithChar:'!'];
   if (missingValue_ != nil) {
@@ -201,16 +209,16 @@ withOrgApacheLuceneSearchSortedNumericSelector_TypeEnum:(OrgApacheLuceneSearchSo
 - (OrgApacheLuceneSearchFieldComparator *)getComparatorWithInt:(jint)numHits
                                                        withInt:(jint)sortPos {
   switch ([type_SortedNumericSortField_ ordinal]) {
-    case OrgApacheLuceneSearchSortField_Type_INT:
-    return [new_OrgApacheLuceneSearchSortedNumericSortField_$1_initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangInteger_(self, numHits, [self getField], (JavaLangInteger *) check_class_cast(missingValue_, [JavaLangInteger class])) autorelease];
-    case OrgApacheLuceneSearchSortField_Type_FLOAT:
-    return [new_OrgApacheLuceneSearchSortedNumericSortField_$2_initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangFloat_(self, numHits, [self getField], (JavaLangFloat *) check_class_cast(missingValue_, [JavaLangFloat class])) autorelease];
-    case OrgApacheLuceneSearchSortField_Type_LONG:
-    return [new_OrgApacheLuceneSearchSortedNumericSortField_$3_initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangLong_(self, numHits, [self getField], (JavaLangLong *) check_class_cast(missingValue_, [JavaLangLong class])) autorelease];
-    case OrgApacheLuceneSearchSortField_Type_DOUBLE:
-    return [new_OrgApacheLuceneSearchSortedNumericSortField_$4_initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangDouble_(self, numHits, [self getField], (JavaLangDouble *) check_class_cast(missingValue_, [JavaLangDouble class])) autorelease];
+    case OrgApacheLuceneSearchSortField_Type_Enum_INT:
+    return create_OrgApacheLuceneSearchSortedNumericSortField_$1_initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangInteger_(self, numHits, [self getField], (JavaLangInteger *) cast_chk(missingValue_, [JavaLangInteger class]));
+    case OrgApacheLuceneSearchSortField_Type_Enum_FLOAT:
+    return create_OrgApacheLuceneSearchSortedNumericSortField_$2_initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangFloat_(self, numHits, [self getField], (JavaLangFloat *) cast_chk(missingValue_, [JavaLangFloat class]));
+    case OrgApacheLuceneSearchSortField_Type_Enum_LONG:
+    return create_OrgApacheLuceneSearchSortedNumericSortField_$3_initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangLong_(self, numHits, [self getField], (JavaLangLong *) cast_chk(missingValue_, [JavaLangLong class]));
+    case OrgApacheLuceneSearchSortField_Type_Enum_DOUBLE:
+    return create_OrgApacheLuceneSearchSortedNumericSortField_$4_initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangDouble_(self, numHits, [self getField], (JavaLangDouble *) cast_chk(missingValue_, [JavaLangDouble class]));
     default:
-    @throw [new_JavaLangAssertionError_init() autorelease];
+    @throw create_JavaLangAssertionError_init();
   }
 }
 
@@ -222,15 +230,15 @@ withOrgApacheLuceneSearchSortedNumericSelector_TypeEnum:(OrgApacheLuceneSearchSo
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withOrgApacheLuceneSearchSortField_TypeEnum:", "SortedNumericSortField", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withOrgApacheLuceneSearchSortField_TypeEnum:withBoolean:", "SortedNumericSortField", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withOrgApacheLuceneSearchSortField_TypeEnum:withBoolean:withOrgApacheLuceneSearchSortedNumericSelector_TypeEnum:", "SortedNumericSortField", NULL, 0x1, NULL, NULL },
+    { "initWithNSString:withOrgApacheLuceneSearchSortField_Type:", "SortedNumericSortField", NULL, 0x1, NULL, NULL },
+    { "initWithNSString:withOrgApacheLuceneSearchSortField_Type:withBoolean:", "SortedNumericSortField", NULL, 0x1, NULL, NULL },
+    { "initWithNSString:withOrgApacheLuceneSearchSortField_Type:withBoolean:withOrgApacheLuceneSearchSortedNumericSelector_Type:", "SortedNumericSortField", NULL, 0x1, NULL, NULL },
     { "getSelector", NULL, "Lorg.apache.lucene.search.SortedNumericSelector$Type;", 0x1, NULL, NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "setMissingValueWithId:", "setMissingValue", "V", 0x1, NULL, NULL },
-    { "getComparatorWithInt:withInt:", "getComparator", "Lorg.apache.lucene.search.FieldComparator;", 0x1, "Ljava.io.IOException;", NULL },
+    { "getComparatorWithInt:withInt:", "getComparator", "Lorg.apache.lucene.search.FieldComparator;", 0x1, "Ljava.io.IOException;", "(II)Lorg/apache/lucene/search/FieldComparator<*>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "selector_", NULL, 0x12, "Lorg.apache.lucene.search.SortedNumericSelector$Type;", NULL, NULL, .constantValue.asLong = 0 },
@@ -242,42 +250,48 @@ withOrgApacheLuceneSearchSortedNumericSelector_TypeEnum:(OrgApacheLuceneSearchSo
 
 @end
 
-void OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_(OrgApacheLuceneSearchSortedNumericSortField *self, NSString *field, OrgApacheLuceneSearchSortField_TypeEnum *type) {
-  OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_withBoolean_(self, field, type, false);
+void OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_Type_(OrgApacheLuceneSearchSortedNumericSortField *self, NSString *field, OrgApacheLuceneSearchSortField_Type *type) {
+  OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_Type_withBoolean_(self, field, type, false);
 }
 
-OrgApacheLuceneSearchSortedNumericSortField *new_OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_(NSString *field, OrgApacheLuceneSearchSortField_TypeEnum *type) {
-  OrgApacheLuceneSearchSortedNumericSortField *self = [OrgApacheLuceneSearchSortedNumericSortField alloc];
-  OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_(self, field, type);
-  return self;
+OrgApacheLuceneSearchSortedNumericSortField *new_OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_Type_(NSString *field, OrgApacheLuceneSearchSortField_Type *type) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSortedNumericSortField, initWithNSString_withOrgApacheLuceneSearchSortField_Type_, field, type)
 }
 
-void OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_withBoolean_(OrgApacheLuceneSearchSortedNumericSortField *self, NSString *field, OrgApacheLuceneSearchSortField_TypeEnum *type, jboolean reverse) {
-  OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_withBoolean_withOrgApacheLuceneSearchSortedNumericSelector_TypeEnum_(self, field, type, reverse, JreLoadStatic(OrgApacheLuceneSearchSortedNumericSelector_TypeEnum, MIN));
+OrgApacheLuceneSearchSortedNumericSortField *create_OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_Type_(NSString *field, OrgApacheLuceneSearchSortField_Type *type) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSortedNumericSortField, initWithNSString_withOrgApacheLuceneSearchSortField_Type_, field, type)
 }
 
-OrgApacheLuceneSearchSortedNumericSortField *new_OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_withBoolean_(NSString *field, OrgApacheLuceneSearchSortField_TypeEnum *type, jboolean reverse) {
-  OrgApacheLuceneSearchSortedNumericSortField *self = [OrgApacheLuceneSearchSortedNumericSortField alloc];
-  OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_withBoolean_(self, field, type, reverse);
-  return self;
+void OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_Type_withBoolean_(OrgApacheLuceneSearchSortedNumericSortField *self, NSString *field, OrgApacheLuceneSearchSortField_Type *type, jboolean reverse) {
+  OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_Type_withBoolean_withOrgApacheLuceneSearchSortedNumericSelector_Type_(self, field, type, reverse, JreLoadEnum(OrgApacheLuceneSearchSortedNumericSelector_Type, MIN));
 }
 
-void OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_withBoolean_withOrgApacheLuceneSearchSortedNumericSelector_TypeEnum_(OrgApacheLuceneSearchSortedNumericSortField *self, NSString *field, OrgApacheLuceneSearchSortField_TypeEnum *type, jboolean reverse, OrgApacheLuceneSearchSortedNumericSelector_TypeEnum *selector) {
-  OrgApacheLuceneSearchSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_withBoolean_(self, field, JreLoadStatic(OrgApacheLuceneSearchSortField_TypeEnum, CUSTOM), reverse);
+OrgApacheLuceneSearchSortedNumericSortField *new_OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_Type_withBoolean_(NSString *field, OrgApacheLuceneSearchSortField_Type *type, jboolean reverse) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSortedNumericSortField, initWithNSString_withOrgApacheLuceneSearchSortField_Type_withBoolean_, field, type, reverse)
+}
+
+OrgApacheLuceneSearchSortedNumericSortField *create_OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_Type_withBoolean_(NSString *field, OrgApacheLuceneSearchSortField_Type *type, jboolean reverse) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSortedNumericSortField, initWithNSString_withOrgApacheLuceneSearchSortField_Type_withBoolean_, field, type, reverse)
+}
+
+void OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_Type_withBoolean_withOrgApacheLuceneSearchSortedNumericSelector_Type_(OrgApacheLuceneSearchSortedNumericSortField *self, NSString *field, OrgApacheLuceneSearchSortField_Type *type, jboolean reverse, OrgApacheLuceneSearchSortedNumericSelector_Type *selector) {
+  OrgApacheLuceneSearchSortField_initWithNSString_withOrgApacheLuceneSearchSortField_Type_withBoolean_(self, field, JreLoadEnum(OrgApacheLuceneSearchSortField_Type, CUSTOM), reverse);
   if (selector == nil) {
-    @throw [new_JavaLangNullPointerException_init() autorelease];
+    @throw create_JavaLangNullPointerException_init();
   }
   if (type == nil) {
-    @throw [new_JavaLangNullPointerException_init() autorelease];
+    @throw create_JavaLangNullPointerException_init();
   }
   JreStrongAssign(&self->selector_, selector);
   JreStrongAssign(&self->type_SortedNumericSortField_, type);
 }
 
-OrgApacheLuceneSearchSortedNumericSortField *new_OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_withBoolean_withOrgApacheLuceneSearchSortedNumericSelector_TypeEnum_(NSString *field, OrgApacheLuceneSearchSortField_TypeEnum *type, jboolean reverse, OrgApacheLuceneSearchSortedNumericSelector_TypeEnum *selector) {
-  OrgApacheLuceneSearchSortedNumericSortField *self = [OrgApacheLuceneSearchSortedNumericSortField alloc];
-  OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_withBoolean_withOrgApacheLuceneSearchSortedNumericSelector_TypeEnum_(self, field, type, reverse, selector);
-  return self;
+OrgApacheLuceneSearchSortedNumericSortField *new_OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_Type_withBoolean_withOrgApacheLuceneSearchSortedNumericSelector_Type_(NSString *field, OrgApacheLuceneSearchSortField_Type *type, jboolean reverse, OrgApacheLuceneSearchSortedNumericSelector_Type *selector) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSortedNumericSortField, initWithNSString_withOrgApacheLuceneSearchSortField_Type_withBoolean_withOrgApacheLuceneSearchSortedNumericSelector_Type_, field, type, reverse, selector)
+}
+
+OrgApacheLuceneSearchSortedNumericSortField *create_OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_Type_withBoolean_withOrgApacheLuceneSearchSortedNumericSelector_Type_(NSString *field, OrgApacheLuceneSearchSortField_Type *type, jboolean reverse, OrgApacheLuceneSearchSortedNumericSelector_Type *selector) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSortedNumericSortField, initWithNSString_withOrgApacheLuceneSearchSortField_Type_withBoolean_withOrgApacheLuceneSearchSortedNumericSelector_Type_, field, type, reverse, selector)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSortedNumericSortField)
@@ -286,7 +300,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSortedNumericSortField)
 
 - (OrgApacheLuceneIndexNumericDocValues *)getNumericDocValuesWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                                           withNSString:(NSString *)field {
-  return OrgApacheLuceneSearchSortedNumericSelector_wrapWithOrgApacheLuceneIndexSortedNumericDocValues_withOrgApacheLuceneSearchSortedNumericSelector_TypeEnum_withOrgApacheLuceneSearchSortField_TypeEnum_(OrgApacheLuceneIndexDocValues_getSortedNumericWithOrgApacheLuceneIndexLeafReader_withNSString_([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader], field), this$0_->selector_, this$0_->type_SortedNumericSortField_);
+  return OrgApacheLuceneSearchSortedNumericSelector_wrapWithOrgApacheLuceneIndexSortedNumericDocValues_withOrgApacheLuceneSearchSortedNumericSelector_Type_withOrgApacheLuceneSearchSortField_Type_(OrgApacheLuceneIndexDocValues_getSortedNumericWithOrgApacheLuceneIndexLeafReader_withNSString_([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader], field), this$0_->selector_, this$0_->type_SortedNumericSortField_);
 }
 
 - (instancetype)initWithOrgApacheLuceneSearchSortedNumericSortField:(OrgApacheLuceneSearchSortedNumericSortField *)outer$
@@ -323,9 +337,11 @@ void OrgApacheLuceneSearchSortedNumericSortField_$1_initWithOrgApacheLuceneSearc
 }
 
 OrgApacheLuceneSearchSortedNumericSortField_$1 *new_OrgApacheLuceneSearchSortedNumericSortField_$1_initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangInteger_(OrgApacheLuceneSearchSortedNumericSortField *outer$, jint arg$0, NSString *arg$1, JavaLangInteger *arg$2) {
-  OrgApacheLuceneSearchSortedNumericSortField_$1 *self = [OrgApacheLuceneSearchSortedNumericSortField_$1 alloc];
-  OrgApacheLuceneSearchSortedNumericSortField_$1_initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangInteger_(self, outer$, arg$0, arg$1, arg$2);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSortedNumericSortField_$1, initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangInteger_, outer$, arg$0, arg$1, arg$2)
+}
+
+OrgApacheLuceneSearchSortedNumericSortField_$1 *create_OrgApacheLuceneSearchSortedNumericSortField_$1_initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangInteger_(OrgApacheLuceneSearchSortedNumericSortField *outer$, jint arg$0, NSString *arg$1, JavaLangInteger *arg$2) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSortedNumericSortField_$1, initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangInteger_, outer$, arg$0, arg$1, arg$2)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSortedNumericSortField_$1)
@@ -334,7 +350,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSortedNumericSortField_$1)
 
 - (OrgApacheLuceneIndexNumericDocValues *)getNumericDocValuesWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                                           withNSString:(NSString *)field {
-  return OrgApacheLuceneSearchSortedNumericSelector_wrapWithOrgApacheLuceneIndexSortedNumericDocValues_withOrgApacheLuceneSearchSortedNumericSelector_TypeEnum_withOrgApacheLuceneSearchSortField_TypeEnum_(OrgApacheLuceneIndexDocValues_getSortedNumericWithOrgApacheLuceneIndexLeafReader_withNSString_([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader], field), this$0_->selector_, this$0_->type_SortedNumericSortField_);
+  return OrgApacheLuceneSearchSortedNumericSelector_wrapWithOrgApacheLuceneIndexSortedNumericDocValues_withOrgApacheLuceneSearchSortedNumericSelector_Type_withOrgApacheLuceneSearchSortField_Type_(OrgApacheLuceneIndexDocValues_getSortedNumericWithOrgApacheLuceneIndexLeafReader_withNSString_([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader], field), this$0_->selector_, this$0_->type_SortedNumericSortField_);
 }
 
 - (instancetype)initWithOrgApacheLuceneSearchSortedNumericSortField:(OrgApacheLuceneSearchSortedNumericSortField *)outer$
@@ -371,9 +387,11 @@ void OrgApacheLuceneSearchSortedNumericSortField_$2_initWithOrgApacheLuceneSearc
 }
 
 OrgApacheLuceneSearchSortedNumericSortField_$2 *new_OrgApacheLuceneSearchSortedNumericSortField_$2_initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangFloat_(OrgApacheLuceneSearchSortedNumericSortField *outer$, jint arg$0, NSString *arg$1, JavaLangFloat *arg$2) {
-  OrgApacheLuceneSearchSortedNumericSortField_$2 *self = [OrgApacheLuceneSearchSortedNumericSortField_$2 alloc];
-  OrgApacheLuceneSearchSortedNumericSortField_$2_initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangFloat_(self, outer$, arg$0, arg$1, arg$2);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSortedNumericSortField_$2, initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangFloat_, outer$, arg$0, arg$1, arg$2)
+}
+
+OrgApacheLuceneSearchSortedNumericSortField_$2 *create_OrgApacheLuceneSearchSortedNumericSortField_$2_initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangFloat_(OrgApacheLuceneSearchSortedNumericSortField *outer$, jint arg$0, NSString *arg$1, JavaLangFloat *arg$2) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSortedNumericSortField_$2, initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangFloat_, outer$, arg$0, arg$1, arg$2)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSortedNumericSortField_$2)
@@ -382,7 +400,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSortedNumericSortField_$2)
 
 - (OrgApacheLuceneIndexNumericDocValues *)getNumericDocValuesWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                                           withNSString:(NSString *)field {
-  return OrgApacheLuceneSearchSortedNumericSelector_wrapWithOrgApacheLuceneIndexSortedNumericDocValues_withOrgApacheLuceneSearchSortedNumericSelector_TypeEnum_withOrgApacheLuceneSearchSortField_TypeEnum_(OrgApacheLuceneIndexDocValues_getSortedNumericWithOrgApacheLuceneIndexLeafReader_withNSString_([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader], field), this$0_->selector_, this$0_->type_SortedNumericSortField_);
+  return OrgApacheLuceneSearchSortedNumericSelector_wrapWithOrgApacheLuceneIndexSortedNumericDocValues_withOrgApacheLuceneSearchSortedNumericSelector_Type_withOrgApacheLuceneSearchSortField_Type_(OrgApacheLuceneIndexDocValues_getSortedNumericWithOrgApacheLuceneIndexLeafReader_withNSString_([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader], field), this$0_->selector_, this$0_->type_SortedNumericSortField_);
 }
 
 - (instancetype)initWithOrgApacheLuceneSearchSortedNumericSortField:(OrgApacheLuceneSearchSortedNumericSortField *)outer$
@@ -419,9 +437,11 @@ void OrgApacheLuceneSearchSortedNumericSortField_$3_initWithOrgApacheLuceneSearc
 }
 
 OrgApacheLuceneSearchSortedNumericSortField_$3 *new_OrgApacheLuceneSearchSortedNumericSortField_$3_initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangLong_(OrgApacheLuceneSearchSortedNumericSortField *outer$, jint arg$0, NSString *arg$1, JavaLangLong *arg$2) {
-  OrgApacheLuceneSearchSortedNumericSortField_$3 *self = [OrgApacheLuceneSearchSortedNumericSortField_$3 alloc];
-  OrgApacheLuceneSearchSortedNumericSortField_$3_initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangLong_(self, outer$, arg$0, arg$1, arg$2);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSortedNumericSortField_$3, initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangLong_, outer$, arg$0, arg$1, arg$2)
+}
+
+OrgApacheLuceneSearchSortedNumericSortField_$3 *create_OrgApacheLuceneSearchSortedNumericSortField_$3_initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangLong_(OrgApacheLuceneSearchSortedNumericSortField *outer$, jint arg$0, NSString *arg$1, JavaLangLong *arg$2) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSortedNumericSortField_$3, initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangLong_, outer$, arg$0, arg$1, arg$2)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSortedNumericSortField_$3)
@@ -430,7 +450,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSortedNumericSortField_$3)
 
 - (OrgApacheLuceneIndexNumericDocValues *)getNumericDocValuesWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                                           withNSString:(NSString *)field {
-  return OrgApacheLuceneSearchSortedNumericSelector_wrapWithOrgApacheLuceneIndexSortedNumericDocValues_withOrgApacheLuceneSearchSortedNumericSelector_TypeEnum_withOrgApacheLuceneSearchSortField_TypeEnum_(OrgApacheLuceneIndexDocValues_getSortedNumericWithOrgApacheLuceneIndexLeafReader_withNSString_([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader], field), this$0_->selector_, this$0_->type_SortedNumericSortField_);
+  return OrgApacheLuceneSearchSortedNumericSelector_wrapWithOrgApacheLuceneIndexSortedNumericDocValues_withOrgApacheLuceneSearchSortedNumericSelector_Type_withOrgApacheLuceneSearchSortField_Type_(OrgApacheLuceneIndexDocValues_getSortedNumericWithOrgApacheLuceneIndexLeafReader_withNSString_([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader], field), this$0_->selector_, this$0_->type_SortedNumericSortField_);
 }
 
 - (instancetype)initWithOrgApacheLuceneSearchSortedNumericSortField:(OrgApacheLuceneSearchSortedNumericSortField *)outer$
@@ -467,9 +487,11 @@ void OrgApacheLuceneSearchSortedNumericSortField_$4_initWithOrgApacheLuceneSearc
 }
 
 OrgApacheLuceneSearchSortedNumericSortField_$4 *new_OrgApacheLuceneSearchSortedNumericSortField_$4_initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangDouble_(OrgApacheLuceneSearchSortedNumericSortField *outer$, jint arg$0, NSString *arg$1, JavaLangDouble *arg$2) {
-  OrgApacheLuceneSearchSortedNumericSortField_$4 *self = [OrgApacheLuceneSearchSortedNumericSortField_$4 alloc];
-  OrgApacheLuceneSearchSortedNumericSortField_$4_initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangDouble_(self, outer$, arg$0, arg$1, arg$2);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSortedNumericSortField_$4, initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangDouble_, outer$, arg$0, arg$1, arg$2)
+}
+
+OrgApacheLuceneSearchSortedNumericSortField_$4 *create_OrgApacheLuceneSearchSortedNumericSortField_$4_initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangDouble_(OrgApacheLuceneSearchSortedNumericSortField *outer$, jint arg$0, NSString *arg$1, JavaLangDouble *arg$2) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSortedNumericSortField_$4, initWithOrgApacheLuceneSearchSortedNumericSortField_withInt_withNSString_withJavaLangDouble_, outer$, arg$0, arg$1, arg$2)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSortedNumericSortField_$4)

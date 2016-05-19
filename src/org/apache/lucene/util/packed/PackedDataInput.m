@@ -67,9 +67,11 @@ void OrgApacheLuceneUtilPackedPackedDataInput_initWithOrgApacheLuceneStoreDataIn
 }
 
 OrgApacheLuceneUtilPackedPackedDataInput *new_OrgApacheLuceneUtilPackedPackedDataInput_initWithOrgApacheLuceneStoreDataInput_(OrgApacheLuceneStoreDataInput *inArg) {
-  OrgApacheLuceneUtilPackedPackedDataInput *self = [OrgApacheLuceneUtilPackedPackedDataInput alloc];
-  OrgApacheLuceneUtilPackedPackedDataInput_initWithOrgApacheLuceneStoreDataInput_(self, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedPackedDataInput, initWithOrgApacheLuceneStoreDataInput_, inArg)
+}
+
+OrgApacheLuceneUtilPackedPackedDataInput *create_OrgApacheLuceneUtilPackedPackedDataInput_initWithOrgApacheLuceneStoreDataInput_(OrgApacheLuceneStoreDataInput *inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedPackedDataInput, initWithOrgApacheLuceneStoreDataInput_, inArg)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPackedDataInput)

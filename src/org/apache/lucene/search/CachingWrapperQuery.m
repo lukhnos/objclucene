@@ -71,6 +71,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchCachingWrapperQuery_$1_
 
 __attribute__((unused)) static OrgApacheLuceneSearchCachingWrapperQuery_$1 *new_OrgApacheLuceneSearchCachingWrapperQuery_$1_initWithOrgApacheLuceneSearchCachingWrapperQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchCachingWrapperQuery *outer$, OrgApacheLuceneSearchWeight *capture$0, OrgApacheLuceneSearchQuery *arg$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchCachingWrapperQuery_$1 *create_OrgApacheLuceneSearchCachingWrapperQuery_$1_initWithOrgApacheLuceneSearchCachingWrapperQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchCachingWrapperQuery *outer$, OrgApacheLuceneSearchWeight *capture$0, OrgApacheLuceneSearchQuery *arg$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCachingWrapperQuery_$1)
 
 @implementation OrgApacheLuceneSearchCachingWrapperQuery
@@ -87,7 +89,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCachingWrapperQuery_$1)
 }
 
 - (OrgApacheLuceneSearchCachingWrapperQuery *)clone {
-  OrgApacheLuceneSearchCachingWrapperQuery *clone = (OrgApacheLuceneSearchCachingWrapperQuery *) check_class_cast([super clone], [OrgApacheLuceneSearchCachingWrapperQuery class]);
+  OrgApacheLuceneSearchCachingWrapperQuery *clone = (OrgApacheLuceneSearchCachingWrapperQuery *) cast_chk([super clone], [OrgApacheLuceneSearchCachingWrapperQuery class]);
   JreStrongAssign(&((OrgApacheLuceneSearchCachingWrapperQuery *) nil_chk(clone))->query_, [((OrgApacheLuceneSearchQuery *) nil_chk(query_)) clone]);
   return clone;
 }
@@ -106,7 +108,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCachingWrapperQuery_$1)
 
 - (OrgApacheLuceneSearchDocIdSet *)cacheImplWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iterator
                                                    withOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader {
-  return [((OrgApacheLuceneUtilRoaringDocIdSet_Builder *) nil_chk([((OrgApacheLuceneUtilRoaringDocIdSet_Builder *) [new_OrgApacheLuceneUtilRoaringDocIdSet_Builder_initWithInt_([((OrgApacheLuceneIndexLeafReader *) nil_chk(reader)) maxDoc]) autorelease]) addWithOrgApacheLuceneSearchDocIdSetIterator:iterator])) build];
+  return [((OrgApacheLuceneUtilRoaringDocIdSet_Builder *) nil_chk([create_OrgApacheLuceneUtilRoaringDocIdSet_Builder_initWithInt_([((OrgApacheLuceneIndexLeafReader *) nil_chk(reader)) maxDoc]) addWithOrgApacheLuceneSearchDocIdSetIterator:iterator])) build];
 }
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader {
@@ -127,7 +129,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCachingWrapperQuery_$1)
   if (needsScores) {
     return weight;
   }
-  return [new_OrgApacheLuceneSearchCachingWrapperQuery_$1_initWithOrgApacheLuceneSearchCachingWrapperQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(self, weight, [((OrgApacheLuceneSearchWeight *) nil_chk(weight)) getQuery]) autorelease];
+  return create_OrgApacheLuceneSearchCachingWrapperQuery_$1_initWithOrgApacheLuceneSearchCachingWrapperQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(self, weight, [((OrgApacheLuceneSearchWeight *) nil_chk(weight)) getQuery]);
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
@@ -136,8 +138,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCachingWrapperQuery_$1)
 
 - (jboolean)isEqual:(id)o {
   if (o == nil || ![[self getClass] isEqual:[o getClass]]) return false;
-  OrgApacheLuceneSearchCachingWrapperQuery *other = (OrgApacheLuceneSearchCachingWrapperQuery *) check_class_cast(o, [OrgApacheLuceneSearchCachingWrapperQuery class]);
-  return [((OrgApacheLuceneSearchQuery *) nil_chk(self->query_)) isEqual:((OrgApacheLuceneSearchCachingWrapperQuery *) nil_chk(other))->query_];
+  OrgApacheLuceneSearchCachingWrapperQuery *other = (OrgApacheLuceneSearchCachingWrapperQuery *) cast_chk(o, [OrgApacheLuceneSearchCachingWrapperQuery class]);
+  return [((OrgApacheLuceneSearchQuery *) nil_chk(self->query_)) isEqual:other->query_];
 }
 
 - (NSUInteger)hash {
@@ -147,7 +149,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCachingWrapperQuery_$1)
 - (jlong)ramBytesUsed {
   id<JavaUtilList> docIdSets;
   @synchronized(cache_) {
-    docIdSets = [new_JavaUtilArrayList_initWithJavaUtilCollection_([((id<JavaUtilMap>) nil_chk(cache_)) values]) autorelease];
+    docIdSets = create_JavaUtilArrayList_initWithJavaUtilCollection_([((id<JavaUtilMap>) nil_chk(cache_)) values]);
   }
   jlong total = 0;
   for (OrgApacheLuceneSearchDocIdSet * __strong dis in docIdSets) {
@@ -184,7 +186,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCachingWrapperQuery_$1)
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "query_", NULL, 0x2, "Lorg.apache.lucene.search.Query;", NULL, NULL, .constantValue.asLong = 0 },
@@ -201,25 +203,29 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCachingWrapperQuery_$1)
 
 void OrgApacheLuceneSearchCachingWrapperQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQueryCachingPolicy_(OrgApacheLuceneSearchCachingWrapperQuery *self, OrgApacheLuceneSearchQuery *query, id<OrgApacheLuceneSearchQueryCachingPolicy> policy) {
   OrgApacheLuceneSearchQuery_init(self);
-  JreStrongAssign(&self->cache_, JavaUtilCollections_synchronizedMapWithJavaUtilMap_([new_JavaUtilWeakHashMap_init() autorelease]));
+  JreStrongAssign(&self->cache_, JavaUtilCollections_synchronizedMapWithJavaUtilMap_(create_JavaUtilWeakHashMap_init()));
   JreStrongAssign(&self->query_, OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_withNSString_(query, @"Query must not be null"));
   JreStrongAssign(&self->policy_, OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_withNSString_(policy, @"QueryCachingPolicy must not be null"));
 }
 
 OrgApacheLuceneSearchCachingWrapperQuery *new_OrgApacheLuceneSearchCachingWrapperQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQueryCachingPolicy_(OrgApacheLuceneSearchQuery *query, id<OrgApacheLuceneSearchQueryCachingPolicy> policy) {
-  OrgApacheLuceneSearchCachingWrapperQuery *self = [OrgApacheLuceneSearchCachingWrapperQuery alloc];
-  OrgApacheLuceneSearchCachingWrapperQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQueryCachingPolicy_(self, query, policy);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchCachingWrapperQuery, initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQueryCachingPolicy_, query, policy)
+}
+
+OrgApacheLuceneSearchCachingWrapperQuery *create_OrgApacheLuceneSearchCachingWrapperQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQueryCachingPolicy_(OrgApacheLuceneSearchQuery *query, id<OrgApacheLuceneSearchQueryCachingPolicy> policy) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchCachingWrapperQuery, initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQueryCachingPolicy_, query, policy)
 }
 
 void OrgApacheLuceneSearchCachingWrapperQuery_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchCachingWrapperQuery *self, OrgApacheLuceneSearchQuery *query) {
-  OrgApacheLuceneSearchCachingWrapperQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQueryCachingPolicy_(self, query, JreLoadStatic(OrgApacheLuceneSearchQueryCachingPolicy_CacheOnLargeSegments, DEFAULT_));
+  OrgApacheLuceneSearchCachingWrapperQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQueryCachingPolicy_(self, query, JreLoadStatic(OrgApacheLuceneSearchQueryCachingPolicy_CacheOnLargeSegments, DEFAULT));
 }
 
 OrgApacheLuceneSearchCachingWrapperQuery *new_OrgApacheLuceneSearchCachingWrapperQuery_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchQuery *query) {
-  OrgApacheLuceneSearchCachingWrapperQuery *self = [OrgApacheLuceneSearchCachingWrapperQuery alloc];
-  OrgApacheLuceneSearchCachingWrapperQuery_initWithOrgApacheLuceneSearchQuery_(self, query);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchCachingWrapperQuery, initWithOrgApacheLuceneSearchQuery_, query)
+}
+
+OrgApacheLuceneSearchCachingWrapperQuery *create_OrgApacheLuceneSearchCachingWrapperQuery_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchQuery *query) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchCachingWrapperQuery, initWithOrgApacheLuceneSearchQuery_, query)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchCachingWrapperQuery)
@@ -244,7 +250,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchCachingWrapperQuery)
     this$0_->missCount_++;
     OrgApacheLuceneSearchScorer *scorer = [((OrgApacheLuceneSearchWeight *) nil_chk(val$weight_)) scorerWithOrgApacheLuceneIndexLeafReaderContext:context];
     if (scorer == nil) {
-      docIdSet = JreLoadStatic(OrgApacheLuceneSearchDocIdSet, EMPTY_);
+      docIdSet = JreLoadStatic(OrgApacheLuceneSearchDocIdSet, EMPTY);
     }
     else {
       docIdSet = [this$0_ cacheImplWithOrgApacheLuceneSearchDocIdSetIterator:scorer withOrgApacheLuceneIndexLeafReader:[context reader]];
@@ -255,14 +261,14 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchCachingWrapperQuery)
     return [((OrgApacheLuceneSearchWeight *) nil_chk(val$weight_)) scorerWithOrgApacheLuceneIndexLeafReaderContext:context];
   }
   JreAssert((docIdSet != nil), (@"org/apache/lucene/search/CachingWrapperQuery.java:154 condition failed: assert docIdSet != null;"));
-  if (docIdSet == JreLoadStatic(OrgApacheLuceneSearchDocIdSet, EMPTY_)) {
+  if (docIdSet == JreLoadStatic(OrgApacheLuceneSearchDocIdSet, EMPTY)) {
     return nil;
   }
   OrgApacheLuceneSearchDocIdSetIterator *disi = [((OrgApacheLuceneSearchDocIdSet *) nil_chk(docIdSet)) iterator];
   if (disi == nil) {
     return nil;
   }
-  return [new_OrgApacheLuceneSearchConstantScoreScorer_initWithOrgApacheLuceneSearchWeight_withFloat_withOrgApacheLuceneSearchDocIdSetIterator_(self, 0.0f, disi) autorelease];
+  return create_OrgApacheLuceneSearchConstantScoreScorer_initWithOrgApacheLuceneSearchWeight_withFloat_withOrgApacheLuceneSearchDocIdSetIterator_(self, 0.0f, disi);
 }
 
 - (instancetype)initWithOrgApacheLuceneSearchCachingWrapperQuery:(OrgApacheLuceneSearchCachingWrapperQuery *)outer$
@@ -281,7 +287,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchCachingWrapperQuery)
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x1, NULL, NULL },
+    { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x1, NULL, "(Ljava/util/Set<Lorg/apache/lucene/index/Term;>;)V" },
     { "scorerWithOrgApacheLuceneIndexLeafReaderContext:", "scorer", "Lorg.apache.lucene.search.Scorer;", 0x1, "Ljava.io.IOException;", NULL },
     { "initWithOrgApacheLuceneSearchCachingWrapperQuery:withOrgApacheLuceneSearchWeight:withOrgApacheLuceneSearchQuery:", "", NULL, 0x0, NULL, NULL },
   };
@@ -305,9 +311,11 @@ void OrgApacheLuceneSearchCachingWrapperQuery_$1_initWithOrgApacheLuceneSearchCa
 }
 
 OrgApacheLuceneSearchCachingWrapperQuery_$1 *new_OrgApacheLuceneSearchCachingWrapperQuery_$1_initWithOrgApacheLuceneSearchCachingWrapperQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchCachingWrapperQuery *outer$, OrgApacheLuceneSearchWeight *capture$0, OrgApacheLuceneSearchQuery *arg$0) {
-  OrgApacheLuceneSearchCachingWrapperQuery_$1 *self = [OrgApacheLuceneSearchCachingWrapperQuery_$1 alloc];
-  OrgApacheLuceneSearchCachingWrapperQuery_$1_initWithOrgApacheLuceneSearchCachingWrapperQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(self, outer$, capture$0, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchCachingWrapperQuery_$1, initWithOrgApacheLuceneSearchCachingWrapperQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_, outer$, capture$0, arg$0)
+}
+
+OrgApacheLuceneSearchCachingWrapperQuery_$1 *create_OrgApacheLuceneSearchCachingWrapperQuery_$1_initWithOrgApacheLuceneSearchCachingWrapperQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchCachingWrapperQuery *outer$, OrgApacheLuceneSearchWeight *capture$0, OrgApacheLuceneSearchQuery *arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchCachingWrapperQuery_$1, initWithOrgApacheLuceneSearchCachingWrapperQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_, outer$, capture$0, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchCachingWrapperQuery_$1)

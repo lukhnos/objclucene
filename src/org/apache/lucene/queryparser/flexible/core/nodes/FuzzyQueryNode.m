@@ -57,7 +57,7 @@
 }
 
 - (OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode *)cloneTree {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode *clone = (OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode *) check_class_cast([super cloneTree], [OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode class]);
+  OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode *clone = (OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode *) cast_chk([super cloneTree], [OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode class]);
   ((OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode *) nil_chk(clone))->similarity_ = self->similarity_;
   return clone;
 }
@@ -94,9 +94,11 @@ void OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode_initWithJavaLangC
 }
 
 OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withFloat_withInt_withInt_(id<JavaLangCharSequence> field, id<JavaLangCharSequence> term, jfloat minSimilarity, jint begin, jint end) {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode *self = [OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode alloc];
-  OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withFloat_withInt_withInt_(self, field, term, minSimilarity, begin, end);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode, initWithJavaLangCharSequence_withJavaLangCharSequence_withFloat_withInt_withInt_, field, term, minSimilarity, begin, end)
+}
+
+OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode *create_OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withFloat_withInt_withInt_(id<JavaLangCharSequence> field, id<JavaLangCharSequence> term, jfloat minSimilarity, jint begin, jint end) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode, initWithJavaLangCharSequence_withJavaLangCharSequence_withFloat_withInt_withInt_, field, term, minSimilarity, begin, end)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode)

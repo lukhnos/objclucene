@@ -65,7 +65,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "newLiveDocsWithOrgApacheLuceneUtilBits:", "newLiveDocs", "Lorg.apache.lucene.util.MutableBits;", 0x401, "Ljava.io.IOException;", NULL },
     { "readLiveDocsWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentCommitInfo:withOrgApacheLuceneStoreIOContext:", "readLiveDocs", "Lorg.apache.lucene.util.Bits;", 0x401, "Ljava.io.IOException;", NULL },
     { "writeLiveDocsWithOrgApacheLuceneUtilMutableBits:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentCommitInfo:withInt:withOrgApacheLuceneStoreIOContext:", "writeLiveDocs", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "filesWithOrgApacheLuceneIndexSegmentCommitInfo:withJavaUtilCollection:", "files", "V", 0x401, "Ljava.io.IOException;", NULL },
+    { "filesWithOrgApacheLuceneIndexSegmentCommitInfo:withJavaUtilCollection:", "files", "V", 0x401, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/SegmentCommitInfo;Ljava/util/Collection<Ljava/lang/String;>;)V" },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneCodecsLiveDocsFormat = { 2, "LiveDocsFormat", "org.apache.lucene.codecs", NULL, 0x401, 6, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneCodecsLiveDocsFormat;

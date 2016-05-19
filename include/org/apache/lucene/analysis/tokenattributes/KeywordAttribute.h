@@ -5,25 +5,47 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisTokenattributesKeywordAttribute_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisTokenattributesKeywordAttribute_RESTRICT
-#define OrgApacheLuceneAnalysisTokenattributesKeywordAttribute_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesKeywordAttribute")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisTokenattributesKeywordAttribute
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesKeywordAttribute 0
 #else
-#define OrgApacheLuceneAnalysisTokenattributesKeywordAttribute_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesKeywordAttribute 1
 #endif
-#undef OrgApacheLuceneAnalysisTokenattributesKeywordAttribute_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisTokenattributesKeywordAttribute
 
-#if !defined (_OrgApacheLuceneAnalysisTokenattributesKeywordAttribute_) && (OrgApacheLuceneAnalysisTokenattributesKeywordAttribute_INCLUDE_ALL || OrgApacheLuceneAnalysisTokenattributesKeywordAttribute_INCLUDE)
-#define _OrgApacheLuceneAnalysisTokenattributesKeywordAttribute_
+#if !defined (OrgApacheLuceneAnalysisTokenattributesKeywordAttribute_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesKeywordAttribute || defined(INCLUDE_OrgApacheLuceneAnalysisTokenattributesKeywordAttribute))
+#define OrgApacheLuceneAnalysisTokenattributesKeywordAttribute_
 
-#define OrgApacheLuceneUtilAttribute_RESTRICT 1
-#define OrgApacheLuceneUtilAttribute_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAttribute 1
+#define INCLUDE_OrgApacheLuceneUtilAttribute 1
 #include "org/apache/lucene/util/Attribute.h"
 
+/*!
+ @brief This attribute can be used to mark a token as a keyword.
+ Keyword aware
+ <code>TokenStream</code>s can decide to modify a token based on the return value
+ of <code>isKeyword()</code> if the token is modified. Stemming filters for
+ instance can use this attribute to conditionally skip a term if
+ <code>isKeyword()</code> returns <code>true</code>.
+ */
 @protocol OrgApacheLuceneAnalysisTokenattributesKeywordAttribute < OrgApacheLuceneUtilAttribute, NSObject, JavaObject >
 
+/*!
+ @brief Returns <code>true</code> if the current token is a keyword, otherwise
+ <code>false</code>
+ @return <code>true</code> if the current token is a keyword, otherwise
+ <code>false</code>
+ - seealso: #setKeyword(boolean)
+ */
 - (jboolean)isKeyword;
 
+/*!
+ @brief Marks the current token as keyword if set to <code>true</code>.
+ @param isKeyword
+ <code>true</code> if the current token is a keyword, otherwise
+ <code>false</code>.
+ - seealso: #isKeyword()
+ */
 - (void)setKeywordWithBoolean:(jboolean)isKeyword;
 
 @end
@@ -34,4 +56,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenattributesKeywordAttribut
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisTokenattributesKeywordAttribute_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesKeywordAttribute")

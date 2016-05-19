@@ -21,12 +21,12 @@
 
 @interface OrgApacheLuceneSearchSortedSetSortField () {
  @public
-  OrgApacheLuceneSearchSortedSetSelector_TypeEnum *selector_;
+  OrgApacheLuceneSearchSortedSetSelector_Type *selector_;
 }
 
 @end
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSortedSetSortField, selector_, OrgApacheLuceneSearchSortedSetSelector_TypeEnum *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSortedSetSortField, selector_, OrgApacheLuceneSearchSortedSetSelector_Type *)
 
 @interface OrgApacheLuceneSearchSortedSetSortField_$1 : OrgApacheLuceneSearchFieldComparator_TermOrdValComparator {
  @public
@@ -51,6 +51,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSortedSetSortField_$1_i
 
 __attribute__((unused)) static OrgApacheLuceneSearchSortedSetSortField_$1 *new_OrgApacheLuceneSearchSortedSetSortField_$1_initWithOrgApacheLuceneSearchSortedSetSortField_withInt_withNSString_withBoolean_(OrgApacheLuceneSearchSortedSetSortField *outer$, jint arg$0, NSString *arg$1, jboolean arg$2) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchSortedSetSortField_$1 *create_OrgApacheLuceneSearchSortedSetSortField_$1_initWithOrgApacheLuceneSearchSortedSetSortField_withInt_withNSString_withBoolean_(OrgApacheLuceneSearchSortedSetSortField *outer$, jint arg$0, NSString *arg$1, jboolean arg$2);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedSetSortField_$1)
 
 @implementation OrgApacheLuceneSearchSortedSetSortField
@@ -63,30 +65,30 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedSetSortField_$1)
 
 - (instancetype)initWithNSString:(NSString *)field
                      withBoolean:(jboolean)reverse
-withOrgApacheLuceneSearchSortedSetSelector_TypeEnum:(OrgApacheLuceneSearchSortedSetSelector_TypeEnum *)selector {
-  OrgApacheLuceneSearchSortedSetSortField_initWithNSString_withBoolean_withOrgApacheLuceneSearchSortedSetSelector_TypeEnum_(self, field, reverse, selector);
+withOrgApacheLuceneSearchSortedSetSelector_Type:(OrgApacheLuceneSearchSortedSetSelector_Type *)selector {
+  OrgApacheLuceneSearchSortedSetSortField_initWithNSString_withBoolean_withOrgApacheLuceneSearchSortedSetSelector_Type_(self, field, reverse, selector);
   return self;
 }
 
-- (OrgApacheLuceneSearchSortedSetSelector_TypeEnum *)getSelector {
+- (OrgApacheLuceneSearchSortedSetSelector_Type *)getSelector {
   return selector_;
 }
 
 - (NSUInteger)hash {
-  return 31 * ((jint) [super hash]) + ((jint) [((OrgApacheLuceneSearchSortedSetSelector_TypeEnum *) nil_chk(selector_)) hash]);
+  return 31 * ((jint) [super hash]) + ((jint) [((OrgApacheLuceneSearchSortedSetSelector_Type *) nil_chk(selector_)) hash]);
 }
 
 - (jboolean)isEqual:(id)obj {
   if (self == obj) return true;
   if (![super isEqual:obj]) return false;
-  if ([self getClass] != [nil_chk(obj) getClass]) return false;
-  OrgApacheLuceneSearchSortedSetSortField *other = (OrgApacheLuceneSearchSortedSetSortField *) check_class_cast(obj, [OrgApacheLuceneSearchSortedSetSortField class]);
+  if ([self getClass] != (id) [nil_chk(obj) getClass]) return false;
+  OrgApacheLuceneSearchSortedSetSortField *other = (OrgApacheLuceneSearchSortedSetSortField *) cast_chk(obj, [OrgApacheLuceneSearchSortedSetSortField class]);
   if (selector_ != other->selector_) return false;
   return true;
 }
 
 - (NSString *)description {
-  JavaLangStringBuilder *buffer = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_init();
   [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([buffer appendWithNSString:@"<sortedset: \""])) appendWithNSString:[self getField]])) appendWithNSString:@"\">"];
   if ([self getReverse]) [buffer appendWithChar:'!'];
   if (missingValue_ != nil) {
@@ -99,15 +101,15 @@ withOrgApacheLuceneSearchSortedSetSelector_TypeEnum:(OrgApacheLuceneSearchSorted
 }
 
 - (void)setMissingValueWithId:(id)missingValue {
-  if (missingValue != JreLoadStatic(OrgApacheLuceneSearchSortField, STRING_FIRST_) && missingValue != JreLoadStatic(OrgApacheLuceneSearchSortField, STRING_LAST_)) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"For SORTED_SET type, missing value must be either STRING_FIRST or STRING_LAST") autorelease];
+  if (missingValue != JreLoadStatic(OrgApacheLuceneSearchSortField, STRING_FIRST) && missingValue != JreLoadStatic(OrgApacheLuceneSearchSortField, STRING_LAST)) {
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"For SORTED_SET type, missing value must be either STRING_FIRST or STRING_LAST");
   }
   JreStrongAssign(&self->missingValue_, missingValue);
 }
 
 - (OrgApacheLuceneSearchFieldComparator *)getComparatorWithInt:(jint)numHits
                                                        withInt:(jint)sortPos {
-  return [new_OrgApacheLuceneSearchSortedSetSortField_$1_initWithOrgApacheLuceneSearchSortedSetSortField_withInt_withNSString_withBoolean_(self, numHits, [self getField], missingValue_ == JreLoadStatic(OrgApacheLuceneSearchSortField, STRING_LAST_)) autorelease];
+  return create_OrgApacheLuceneSearchSortedSetSortField_$1_initWithOrgApacheLuceneSearchSortedSetSortField_withInt_withNSString_withBoolean_(self, numHits, [self getField], missingValue_ == JreLoadStatic(OrgApacheLuceneSearchSortField, STRING_LAST));
 }
 
 - (void)dealloc {
@@ -118,13 +120,13 @@ withOrgApacheLuceneSearchSortedSetSelector_TypeEnum:(OrgApacheLuceneSearchSorted
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithNSString:withBoolean:", "SortedSetSortField", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withBoolean:withOrgApacheLuceneSearchSortedSetSelector_TypeEnum:", "SortedSetSortField", NULL, 0x1, NULL, NULL },
+    { "initWithNSString:withBoolean:withOrgApacheLuceneSearchSortedSetSelector_Type:", "SortedSetSortField", NULL, 0x1, NULL, NULL },
     { "getSelector", NULL, "Lorg.apache.lucene.search.SortedSetSelector$Type;", 0x1, NULL, NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "setMissingValueWithId:", "setMissingValue", "V", 0x1, NULL, NULL },
-    { "getComparatorWithInt:withInt:", "getComparator", "Lorg.apache.lucene.search.FieldComparator;", 0x1, "Ljava.io.IOException;", NULL },
+    { "getComparatorWithInt:withInt:", "getComparator", "Lorg.apache.lucene.search.FieldComparator;", 0x1, "Ljava.io.IOException;", "(II)Lorg/apache/lucene/search/FieldComparator<*>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "selector_", NULL, 0x12, "Lorg.apache.lucene.search.SortedSetSelector$Type;", NULL, NULL, .constantValue.asLong = 0 },
@@ -136,27 +138,31 @@ withOrgApacheLuceneSearchSortedSetSelector_TypeEnum:(OrgApacheLuceneSearchSorted
 @end
 
 void OrgApacheLuceneSearchSortedSetSortField_initWithNSString_withBoolean_(OrgApacheLuceneSearchSortedSetSortField *self, NSString *field, jboolean reverse) {
-  OrgApacheLuceneSearchSortedSetSortField_initWithNSString_withBoolean_withOrgApacheLuceneSearchSortedSetSelector_TypeEnum_(self, field, reverse, JreLoadStatic(OrgApacheLuceneSearchSortedSetSelector_TypeEnum, MIN));
+  OrgApacheLuceneSearchSortedSetSortField_initWithNSString_withBoolean_withOrgApacheLuceneSearchSortedSetSelector_Type_(self, field, reverse, JreLoadEnum(OrgApacheLuceneSearchSortedSetSelector_Type, MIN));
 }
 
 OrgApacheLuceneSearchSortedSetSortField *new_OrgApacheLuceneSearchSortedSetSortField_initWithNSString_withBoolean_(NSString *field, jboolean reverse) {
-  OrgApacheLuceneSearchSortedSetSortField *self = [OrgApacheLuceneSearchSortedSetSortField alloc];
-  OrgApacheLuceneSearchSortedSetSortField_initWithNSString_withBoolean_(self, field, reverse);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSortedSetSortField, initWithNSString_withBoolean_, field, reverse)
 }
 
-void OrgApacheLuceneSearchSortedSetSortField_initWithNSString_withBoolean_withOrgApacheLuceneSearchSortedSetSelector_TypeEnum_(OrgApacheLuceneSearchSortedSetSortField *self, NSString *field, jboolean reverse, OrgApacheLuceneSearchSortedSetSelector_TypeEnum *selector) {
-  OrgApacheLuceneSearchSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_withBoolean_(self, field, JreLoadStatic(OrgApacheLuceneSearchSortField_TypeEnum, CUSTOM), reverse);
+OrgApacheLuceneSearchSortedSetSortField *create_OrgApacheLuceneSearchSortedSetSortField_initWithNSString_withBoolean_(NSString *field, jboolean reverse) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSortedSetSortField, initWithNSString_withBoolean_, field, reverse)
+}
+
+void OrgApacheLuceneSearchSortedSetSortField_initWithNSString_withBoolean_withOrgApacheLuceneSearchSortedSetSelector_Type_(OrgApacheLuceneSearchSortedSetSortField *self, NSString *field, jboolean reverse, OrgApacheLuceneSearchSortedSetSelector_Type *selector) {
+  OrgApacheLuceneSearchSortField_initWithNSString_withOrgApacheLuceneSearchSortField_Type_withBoolean_(self, field, JreLoadEnum(OrgApacheLuceneSearchSortField_Type, CUSTOM), reverse);
   if (selector == nil) {
-    @throw [new_JavaLangNullPointerException_init() autorelease];
+    @throw create_JavaLangNullPointerException_init();
   }
   JreStrongAssign(&self->selector_, selector);
 }
 
-OrgApacheLuceneSearchSortedSetSortField *new_OrgApacheLuceneSearchSortedSetSortField_initWithNSString_withBoolean_withOrgApacheLuceneSearchSortedSetSelector_TypeEnum_(NSString *field, jboolean reverse, OrgApacheLuceneSearchSortedSetSelector_TypeEnum *selector) {
-  OrgApacheLuceneSearchSortedSetSortField *self = [OrgApacheLuceneSearchSortedSetSortField alloc];
-  OrgApacheLuceneSearchSortedSetSortField_initWithNSString_withBoolean_withOrgApacheLuceneSearchSortedSetSelector_TypeEnum_(self, field, reverse, selector);
-  return self;
+OrgApacheLuceneSearchSortedSetSortField *new_OrgApacheLuceneSearchSortedSetSortField_initWithNSString_withBoolean_withOrgApacheLuceneSearchSortedSetSelector_Type_(NSString *field, jboolean reverse, OrgApacheLuceneSearchSortedSetSelector_Type *selector) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSortedSetSortField, initWithNSString_withBoolean_withOrgApacheLuceneSearchSortedSetSelector_Type_, field, reverse, selector)
+}
+
+OrgApacheLuceneSearchSortedSetSortField *create_OrgApacheLuceneSearchSortedSetSortField_initWithNSString_withBoolean_withOrgApacheLuceneSearchSortedSetSelector_Type_(NSString *field, jboolean reverse, OrgApacheLuceneSearchSortedSetSelector_Type *selector) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSortedSetSortField, initWithNSString_withBoolean_withOrgApacheLuceneSearchSortedSetSelector_Type_, field, reverse, selector)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSortedSetSortField)
@@ -166,7 +172,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSortedSetSortField)
 - (OrgApacheLuceneIndexSortedDocValues *)getSortedDocValuesWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                                         withNSString:(NSString *)field {
   OrgApacheLuceneIndexSortedSetDocValues *sortedSet = OrgApacheLuceneIndexDocValues_getSortedSetWithOrgApacheLuceneIndexLeafReader_withNSString_([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader], field);
-  return OrgApacheLuceneSearchSortedSetSelector_wrapWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneSearchSortedSetSelector_TypeEnum_(sortedSet, this$0_->selector_);
+  return OrgApacheLuceneSearchSortedSetSelector_wrapWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneSearchSortedSetSelector_Type_(sortedSet, this$0_->selector_);
 }
 
 - (instancetype)initWithOrgApacheLuceneSearchSortedSetSortField:(OrgApacheLuceneSearchSortedSetSortField *)outer$
@@ -203,9 +209,11 @@ void OrgApacheLuceneSearchSortedSetSortField_$1_initWithOrgApacheLuceneSearchSor
 }
 
 OrgApacheLuceneSearchSortedSetSortField_$1 *new_OrgApacheLuceneSearchSortedSetSortField_$1_initWithOrgApacheLuceneSearchSortedSetSortField_withInt_withNSString_withBoolean_(OrgApacheLuceneSearchSortedSetSortField *outer$, jint arg$0, NSString *arg$1, jboolean arg$2) {
-  OrgApacheLuceneSearchSortedSetSortField_$1 *self = [OrgApacheLuceneSearchSortedSetSortField_$1 alloc];
-  OrgApacheLuceneSearchSortedSetSortField_$1_initWithOrgApacheLuceneSearchSortedSetSortField_withInt_withNSString_withBoolean_(self, outer$, arg$0, arg$1, arg$2);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSortedSetSortField_$1, initWithOrgApacheLuceneSearchSortedSetSortField_withInt_withNSString_withBoolean_, outer$, arg$0, arg$1, arg$2)
+}
+
+OrgApacheLuceneSearchSortedSetSortField_$1 *create_OrgApacheLuceneSearchSortedSetSortField_$1_initWithOrgApacheLuceneSearchSortedSetSortField_withInt_withNSString_withBoolean_(OrgApacheLuceneSearchSortedSetSortField *outer$, jint arg$0, NSString *arg$1, jboolean arg$2) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSortedSetSortField_$1, initWithOrgApacheLuceneSearchSortedSetSortField_withInt_withNSString_withBoolean_, outer$, arg$0, arg$1, arg$2)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSortedSetSortField_$1)

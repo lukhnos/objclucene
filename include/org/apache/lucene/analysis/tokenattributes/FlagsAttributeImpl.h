@@ -5,31 +5,37 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl_RESTRICT
-#define OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl 0
 #else
-#define OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl 1
 #endif
-#undef OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl
 
-#if !defined (_OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl_) && (OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl_INCLUDE_ALL || OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl_INCLUDE)
-#define _OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl_
+#if !defined (OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl || defined(INCLUDE_OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl))
+#define OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl_
 
-#define OrgApacheLuceneUtilAttributeImpl_RESTRICT 1
-#define OrgApacheLuceneUtilAttributeImpl_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAttributeImpl 1
+#define INCLUDE_OrgApacheLuceneUtilAttributeImpl 1
 #include "org/apache/lucene/util/AttributeImpl.h"
 
-#define OrgApacheLuceneAnalysisTokenattributesFlagsAttribute_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenattributesFlagsAttribute_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenattributesFlagsAttribute 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenattributesFlagsAttribute 1
 #include "org/apache/lucene/analysis/tokenattributes/FlagsAttribute.h"
 
 @protocol OrgApacheLuceneUtilAttributeReflector;
 
+/*!
+ @brief Default implementation of <code>FlagsAttribute</code>.
+ */
 @interface OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl : OrgApacheLuceneUtilAttributeImpl < OrgApacheLuceneAnalysisTokenattributesFlagsAttribute, NSCopying >
 
 #pragma mark Public
 
+/*!
+ @brief Initialize this attribute with no bits set
+ */
 - (instancetype)init;
 
 - (void)clear;
@@ -54,8 +60,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl_
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl")

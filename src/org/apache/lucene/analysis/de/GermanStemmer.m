@@ -12,28 +12,72 @@
 
 @interface OrgApacheLuceneAnalysisDeGermanStemmer () {
  @public
+  /*!
+   @brief Buffer for the terms while stemming them.
+   */
   JavaLangStringBuilder *sb_;
+  /*!
+   @brief Amount of characters that are removed with <tt>substitute()</tt> while stemming.
+   */
   jint substCount_;
 }
 
+/*!
+ @brief Checks if a term could be stemmed.
+ @return true if, and only if, the given term consists in letters.
+ */
 - (jboolean)isStemmableWithNSString:(NSString *)term;
 
+/*!
+ @brief suffix stripping (stemming) on the current term.
+ The stripping is reduced
+ to the seven "base" suffixes "e", "s", "n", "t", "em", "er" and * "nd",
+ from which all regular suffixes are build of. The simplification causes
+ some overstemming, and way more irregular stems, but still provides unique.
+ discriminators in the most of those cases.
+ The algorithm is context free, except of the length restrictions.
+ */
 - (void)stripWithJavaLangStringBuilder:(JavaLangStringBuilder *)buffer;
 
+/*!
+ @brief Does some optimizations on the term.
+ This optimisations are
+ contextual.
+ */
 - (void)optimizeWithJavaLangStringBuilder:(JavaLangStringBuilder *)buffer;
 
+/*!
+ @brief Removes a particle denotion ("ge") from a term.
+ */
 - (void)removeParticleDenotionWithJavaLangStringBuilder:(JavaLangStringBuilder *)buffer;
 
+/*!
+ @brief Do some substitutions for the term to reduce overstemming:
+ - Substitute Umlauts with their corresponding vowel:<code>äöü -> aou</code>,
+ "ß" is substituted by "ss"
+ - Substitute a second char of a pair of equal characters with
+ an asterisk: <code>??
+ -> ?*</code>
+ - Substitute some common character combinations with a token:
+ <code>sch/ch/ei/ie/ig/st -> $/§/%/&/#/!</code>
+ */
 - (void)substituteWithJavaLangStringBuilder:(JavaLangStringBuilder *)buffer;
 
+/*!
+ @brief Undoes the changes made by substitute().
+ That are character pairs and
+ character combinations. Umlauts will remain as their corresponding vowel,
+ as "ß" remains as "ss".
+ */
 - (void)resubstituteWithJavaLangStringBuilder:(JavaLangStringBuilder *)buffer;
 
 @end
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisDeGermanStemmer, sb_, JavaLangStringBuilder *)
 
-static JavaUtilLocale *OrgApacheLuceneAnalysisDeGermanStemmer_locale_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisDeGermanStemmer, locale_, JavaUtilLocale *)
+inline JavaUtilLocale *OrgApacheLuceneAnalysisDeGermanStemmer_get_locale();
+static JavaUtilLocale *OrgApacheLuceneAnalysisDeGermanStemmer_locale;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisDeGermanStemmer, locale, JavaUtilLocale *)
 
 __attribute__((unused)) static jboolean OrgApacheLuceneAnalysisDeGermanStemmer_isStemmableWithNSString_(OrgApacheLuceneAnalysisDeGermanStemmer *self, NSString *term);
 
@@ -52,16 +96,16 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisDeGermanStemmer)
 @implementation OrgApacheLuceneAnalysisDeGermanStemmer
 
 - (NSString *)stemWithNSString:(NSString *)term {
-  term = [((NSString *) nil_chk(term)) lowercaseStringWithJRELocale:OrgApacheLuceneAnalysisDeGermanStemmer_locale_];
+  term = [((NSString *) nil_chk(term)) lowercaseStringWithJRELocale:OrgApacheLuceneAnalysisDeGermanStemmer_locale];
   if (!OrgApacheLuceneAnalysisDeGermanStemmer_isStemmableWithNSString_(self, term)) return term;
-  [sb_ delete__WithInt:0 withInt:[((JavaLangStringBuilder *) nil_chk(sb_)) length]];
-  [sb_ insertWithInt:0 withNSString:term];
+  [((JavaLangStringBuilder *) nil_chk(sb_)) delete__WithInt:0 withInt:[sb_ length]];
+  [((JavaLangStringBuilder *) nil_chk(sb_)) insertWithInt:0 withNSString:term];
   OrgApacheLuceneAnalysisDeGermanStemmer_substituteWithJavaLangStringBuilder_(self, sb_);
   OrgApacheLuceneAnalysisDeGermanStemmer_stripWithJavaLangStringBuilder_(self, sb_);
   OrgApacheLuceneAnalysisDeGermanStemmer_optimizeWithJavaLangStringBuilder_(self, sb_);
   OrgApacheLuceneAnalysisDeGermanStemmer_resubstituteWithJavaLangStringBuilder_(self, sb_);
   OrgApacheLuceneAnalysisDeGermanStemmer_removeParticleDenotionWithJavaLangStringBuilder_(self, sb_);
-  return [sb_ description];
+  return [((JavaLangStringBuilder *) nil_chk(sb_)) description];
 }
 
 - (jboolean)isStemmableWithNSString:(NSString *)term {
@@ -102,7 +146,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisDeGermanStemmer class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisDeGermanStemmer_locale_, new_JavaUtilLocale_initWithNSString_withNSString_(@"de", @"DE"));
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisDeGermanStemmer_locale, new_JavaUtilLocale_initWithNSString_withNSString_(@"de", @"DE"));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisDeGermanStemmer)
   }
 }
@@ -116,12 +160,12 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "removeParticleDenotionWithJavaLangStringBuilder:", "removeParticleDenotion", "V", 0x2, NULL, NULL },
     { "substituteWithJavaLangStringBuilder:", "substitute", "V", 0x2, NULL, NULL },
     { "resubstituteWithJavaLangStringBuilder:", "resubstitute", "V", 0x2, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "GermanStemmer", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "sb_", NULL, 0x2, "Ljava.lang.StringBuilder;", NULL, NULL, .constantValue.asLong = 0 },
     { "substCount_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "locale_", NULL, 0x1a, "Ljava.util.Locale;", &OrgApacheLuceneAnalysisDeGermanStemmer_locale_, NULL, .constantValue.asLong = 0 },
+    { "locale", "locale", 0x1a, "Ljava.util.Locale;", &OrgApacheLuceneAnalysisDeGermanStemmer_locale, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisDeGermanStemmer = { 2, "GermanStemmer", "org.apache.lucene.analysis.de", NULL, 0x1, 8, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisDeGermanStemmer;
@@ -282,9 +326,11 @@ void OrgApacheLuceneAnalysisDeGermanStemmer_init(OrgApacheLuceneAnalysisDeGerman
 }
 
 OrgApacheLuceneAnalysisDeGermanStemmer *new_OrgApacheLuceneAnalysisDeGermanStemmer_init() {
-  OrgApacheLuceneAnalysisDeGermanStemmer *self = [OrgApacheLuceneAnalysisDeGermanStemmer alloc];
-  OrgApacheLuceneAnalysisDeGermanStemmer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisDeGermanStemmer, init)
+}
+
+OrgApacheLuceneAnalysisDeGermanStemmer *create_OrgApacheLuceneAnalysisDeGermanStemmer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisDeGermanStemmer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisDeGermanStemmer)

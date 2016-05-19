@@ -5,32 +5,50 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilFstOutputs_INCLUDE_ALL")
-#if OrgApacheLuceneUtilFstOutputs_RESTRICT
-#define OrgApacheLuceneUtilFstOutputs_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstOutputs")
+#ifdef RESTRICT_OrgApacheLuceneUtilFstOutputs
+#define INCLUDE_ALL_OrgApacheLuceneUtilFstOutputs 0
 #else
-#define OrgApacheLuceneUtilFstOutputs_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilFstOutputs 1
 #endif
-#undef OrgApacheLuceneUtilFstOutputs_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilFstOutputs
 
-#if !defined (_OrgApacheLuceneUtilFstOutputs_) && (OrgApacheLuceneUtilFstOutputs_INCLUDE_ALL || OrgApacheLuceneUtilFstOutputs_INCLUDE)
-#define _OrgApacheLuceneUtilFstOutputs_
+#if !defined (OrgApacheLuceneUtilFstOutputs_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstOutputs || defined(INCLUDE_OrgApacheLuceneUtilFstOutputs))
+#define OrgApacheLuceneUtilFstOutputs_
 
 @class OrgApacheLuceneStoreDataInput;
 @class OrgApacheLuceneStoreDataOutput;
 
+/*!
+ @brief Represents the outputs for an FST, providing the basic
+ algebra required for building and traversing the FST.
+ <p>Note that any operation that returns NO_OUTPUT must
+ return the same singleton object from <code>getNoOutput</code>
+ .</p>
+ */
 @interface OrgApacheLuceneUtilFstOutputs : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @brief Eg add("foo", "bar") -&gt; "foobar"
+ */
 - (id)addWithId:(id)prefix
          withId:(id)output;
 
+/*!
+ @brief Eg common("foobar", "food") -&gt; "foo"
+ */
 - (id)commonWithId:(id)output1
             withId:(id)output2;
 
+/*!
+ @brief NOTE: this output is compared with == so you must
+ ensure that all methods return the single object if
+ it's really no output
+ */
 - (id)getNoOutput;
 
 - (id)mergeWithId:(id)first
@@ -38,22 +56,57 @@
 
 - (NSString *)outputToStringWithId:(id)output;
 
+/*!
+ @brief Return memory usage for the provided output.
+ - seealso: Accountable
+ */
 - (jlong)ramBytesUsedWithId:(id)output;
 
+/*!
+ @brief Decode an output value previously written with <code>write(Object,DataOutput)</code>
+ .
+ */
 - (id)readWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
 
+/*!
+ @brief Decode an output value previously written with <code>writeFinalOutput(Object,DataOutput)</code>
+ .
+ By default this
+ just calls <code>read(DataInput)</code>. 
+ */
 - (id)readFinalOutputWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
 
+/*!
+ @brief Skip the output previously written with <code>writeFinalOutput</code>;
+ defaults to just calling <code>readFinalOutput</code> and discarding
+ the result.
+ */
 - (void)skipFinalOutputWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
 
+/*!
+ @brief Skip the output; defaults to just calling <code>read</code>
+ and discarding the result.
+ */
 - (void)skipOutputWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
 
+/*!
+ @brief Eg subtract("foobar", "foo") -&gt; "bar"
+ */
 - (id)subtractWithId:(id)output
               withId:(id)inc;
 
+/*!
+ @brief Encode an output value into a <code>DataOutput</code>.
+ */
 - (void)writeWithId:(id)output
 withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg;
 
+/*!
+ @brief Encode an final node output value into a <code>DataOutput</code>
+ .
+ By default this just calls <code>write(Object,DataOutput)</code>
+ . 
+ */
 - (void)writeFinalOutputWithId:(id)output
 withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg;
 
@@ -67,4 +120,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstOutputs)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilFstOutputs_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstOutputs")

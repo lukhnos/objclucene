@@ -5,28 +5,31 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSimpleCollector_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSimpleCollector_RESTRICT
-#define OrgApacheLuceneSearchSimpleCollector_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimpleCollector")
+#ifdef RESTRICT_OrgApacheLuceneSearchSimpleCollector
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimpleCollector 0
 #else
-#define OrgApacheLuceneSearchSimpleCollector_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimpleCollector 1
 #endif
-#undef OrgApacheLuceneSearchSimpleCollector_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSimpleCollector
 
-#if !defined (_OrgApacheLuceneSearchSimpleCollector_) && (OrgApacheLuceneSearchSimpleCollector_INCLUDE_ALL || OrgApacheLuceneSearchSimpleCollector_INCLUDE)
-#define _OrgApacheLuceneSearchSimpleCollector_
+#if !defined (OrgApacheLuceneSearchSimpleCollector_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimpleCollector || defined(INCLUDE_OrgApacheLuceneSearchSimpleCollector))
+#define OrgApacheLuceneSearchSimpleCollector_
 
-#define OrgApacheLuceneSearchCollector_RESTRICT 1
-#define OrgApacheLuceneSearchCollector_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchCollector 1
+#define INCLUDE_OrgApacheLuceneSearchCollector 1
 #include "org/apache/lucene/search/Collector.h"
 
-#define OrgApacheLuceneSearchLeafCollector_RESTRICT 1
-#define OrgApacheLuceneSearchLeafCollector_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchLeafCollector 1
+#define INCLUDE_OrgApacheLuceneSearchLeafCollector 1
 #include "org/apache/lucene/search/LeafCollector.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneSearchScorer;
 
+/*!
+ @brief Base <code>Collector</code> implementation that is used to collect all contexts.
+ */
 @interface OrgApacheLuceneSearchSimpleCollector : NSObject < OrgApacheLuceneSearchCollector, OrgApacheLuceneSearchLeafCollector >
 
 #pragma mark Public
@@ -41,6 +44,9 @@
 
 #pragma mark Protected
 
+/*!
+ @brief This method is called before collecting <code>context</code>.
+ */
 - (void)doSetNextReaderWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
 @end
@@ -53,4 +59,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimpleCollector)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSimpleCollector_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimpleCollector")

@@ -5,28 +5,36 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexSimpleMergedSegmentWarmer_INCLUDE_ALL")
-#if OrgApacheLuceneIndexSimpleMergedSegmentWarmer_RESTRICT
-#define OrgApacheLuceneIndexSimpleMergedSegmentWarmer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexSimpleMergedSegmentWarmer")
+#ifdef RESTRICT_OrgApacheLuceneIndexSimpleMergedSegmentWarmer
+#define INCLUDE_ALL_OrgApacheLuceneIndexSimpleMergedSegmentWarmer 0
 #else
-#define OrgApacheLuceneIndexSimpleMergedSegmentWarmer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexSimpleMergedSegmentWarmer 1
 #endif
-#undef OrgApacheLuceneIndexSimpleMergedSegmentWarmer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexSimpleMergedSegmentWarmer
 
-#if !defined (_OrgApacheLuceneIndexSimpleMergedSegmentWarmer_) && (OrgApacheLuceneIndexSimpleMergedSegmentWarmer_INCLUDE_ALL || OrgApacheLuceneIndexSimpleMergedSegmentWarmer_INCLUDE)
-#define _OrgApacheLuceneIndexSimpleMergedSegmentWarmer_
+#if !defined (OrgApacheLuceneIndexSimpleMergedSegmentWarmer_) && (INCLUDE_ALL_OrgApacheLuceneIndexSimpleMergedSegmentWarmer || defined(INCLUDE_OrgApacheLuceneIndexSimpleMergedSegmentWarmer))
+#define OrgApacheLuceneIndexSimpleMergedSegmentWarmer_
 
-#define OrgApacheLuceneIndexIndexWriter_RESTRICT 1
-#define OrgApacheLuceneIndexIndexWriter_IndexReaderWarmer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexIndexWriter 1
+#define INCLUDE_OrgApacheLuceneIndexIndexWriter_IndexReaderWarmer 1
 #include "org/apache/lucene/index/IndexWriter.h"
 
 @class OrgApacheLuceneIndexLeafReader;
 @class OrgApacheLuceneUtilInfoStream;
 
+/*!
+ @brief A very simple merged segment warmer that just ensures 
+ data structures are initialized.
+ */
 @interface OrgApacheLuceneIndexSimpleMergedSegmentWarmer : OrgApacheLuceneIndexIndexWriter_IndexReaderWarmer
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new SimpleMergedSegmentWarmer
+ @param infoStream InfoStream to log statistics about warming.
+ */
 - (instancetype)initWithOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream;
 
 - (void)warmWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader;
@@ -39,8 +47,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexSimpleMergedSegmentWarmer_initWithOrg
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexSimpleMergedSegmentWarmer *new_OrgApacheLuceneIndexSimpleMergedSegmentWarmer_initWithOrgApacheLuceneUtilInfoStream_(OrgApacheLuceneUtilInfoStream *infoStream) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexSimpleMergedSegmentWarmer *create_OrgApacheLuceneIndexSimpleMergedSegmentWarmer_initWithOrgApacheLuceneUtilInfoStream_(OrgApacheLuceneUtilInfoStream *infoStream);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSimpleMergedSegmentWarmer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexSimpleMergedSegmentWarmer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSimpleMergedSegmentWarmer")

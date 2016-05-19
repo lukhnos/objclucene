@@ -35,13 +35,19 @@ __attribute__((unused)) static void OrgApacheLuceneSearchDocIdSet_$1_init(OrgApa
 
 __attribute__((unused)) static OrgApacheLuceneSearchDocIdSet_$1 *new_OrgApacheLuceneSearchDocIdSet_$1_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchDocIdSet_$1 *create_OrgApacheLuceneSearchDocIdSet_$1_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocIdSet_$1)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchDocIdSet)
 
-OrgApacheLuceneSearchDocIdSet *OrgApacheLuceneSearchDocIdSet_EMPTY_;
+OrgApacheLuceneSearchDocIdSet *OrgApacheLuceneSearchDocIdSet_EMPTY;
 
 @implementation OrgApacheLuceneSearchDocIdSet
+
++ (OrgApacheLuceneSearchDocIdSet *)EMPTY {
+  return OrgApacheLuceneSearchDocIdSet_EMPTY;
+}
 
 - (OrgApacheLuceneSearchDocIdSetIterator *)iterator {
   // can't call an abstract method
@@ -70,7 +76,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchDocIdSet class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneSearchDocIdSet_EMPTY_, new_OrgApacheLuceneSearchDocIdSet_$1_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneSearchDocIdSet_EMPTY, new_OrgApacheLuceneSearchDocIdSet_$1_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchDocIdSet)
   }
 }
@@ -80,11 +86,11 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "iterator", NULL, "Lorg.apache.lucene.search.DocIdSetIterator;", 0x401, "Ljava.io.IOException;", NULL },
     { "bits", NULL, "Lorg.apache.lucene.util.Bits;", 0x1, "Ljava.io.IOException;", NULL },
     { "isCacheable", NULL, "Z", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
+    { "init", "DocIdSet", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "EMPTY_", NULL, 0x19, "Lorg.apache.lucene.search.DocIdSet;", &OrgApacheLuceneSearchDocIdSet_EMPTY_, NULL, .constantValue.asLong = 0 },
+    { "EMPTY", "EMPTY", 0x19, "Lorg.apache.lucene.search.DocIdSet;", &OrgApacheLuceneSearchDocIdSet_EMPTY, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneSearchDocIdSet = { 2, "DocIdSet", "org.apache.lucene.search", NULL, 0x401, 5, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchDocIdSet;
@@ -142,9 +148,11 @@ void OrgApacheLuceneSearchDocIdSet_$1_init(OrgApacheLuceneSearchDocIdSet_$1 *sel
 }
 
 OrgApacheLuceneSearchDocIdSet_$1 *new_OrgApacheLuceneSearchDocIdSet_$1_init() {
-  OrgApacheLuceneSearchDocIdSet_$1 *self = [OrgApacheLuceneSearchDocIdSet_$1 alloc];
-  OrgApacheLuceneSearchDocIdSet_$1_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDocIdSet_$1, init)
+}
+
+OrgApacheLuceneSearchDocIdSet_$1 *create_OrgApacheLuceneSearchDocIdSet_$1_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDocIdSet_$1, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocIdSet_$1)

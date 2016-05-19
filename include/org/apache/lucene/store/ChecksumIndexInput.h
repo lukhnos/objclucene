@@ -5,31 +5,49 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneStoreChecksumIndexInput_INCLUDE_ALL")
-#if OrgApacheLuceneStoreChecksumIndexInput_RESTRICT
-#define OrgApacheLuceneStoreChecksumIndexInput_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneStoreChecksumIndexInput")
+#ifdef RESTRICT_OrgApacheLuceneStoreChecksumIndexInput
+#define INCLUDE_ALL_OrgApacheLuceneStoreChecksumIndexInput 0
 #else
-#define OrgApacheLuceneStoreChecksumIndexInput_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneStoreChecksumIndexInput 1
 #endif
-#undef OrgApacheLuceneStoreChecksumIndexInput_RESTRICT
+#undef RESTRICT_OrgApacheLuceneStoreChecksumIndexInput
 
-#if !defined (_OrgApacheLuceneStoreChecksumIndexInput_) && (OrgApacheLuceneStoreChecksumIndexInput_INCLUDE_ALL || OrgApacheLuceneStoreChecksumIndexInput_INCLUDE)
-#define _OrgApacheLuceneStoreChecksumIndexInput_
+#if !defined (OrgApacheLuceneStoreChecksumIndexInput_) && (INCLUDE_ALL_OrgApacheLuceneStoreChecksumIndexInput || defined(INCLUDE_OrgApacheLuceneStoreChecksumIndexInput))
+#define OrgApacheLuceneStoreChecksumIndexInput_
 
-#define OrgApacheLuceneStoreIndexInput_RESTRICT 1
-#define OrgApacheLuceneStoreIndexInput_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreIndexInput 1
+#define INCLUDE_OrgApacheLuceneStoreIndexInput 1
 #include "org/apache/lucene/store/IndexInput.h"
 
+/*!
+ @brief Extension of IndexInput, computing checksum as it goes.
+ Callers can retrieve the checksum via <code>getChecksum()</code>.
+ */
 @interface OrgApacheLuceneStoreChecksumIndexInput : OrgApacheLuceneStoreIndexInput
 
 #pragma mark Public
 
+/*!
+ @brief Returns the current checksum value
+ */
 - (jlong)getChecksum;
 
+/*!
+ @brief 
+ <code>ChecksumIndexInput</code> can only seek forward and seeks are expensive
+ since they imply to read bytes in-between the current position and the
+ target position in order to update the checksum.
+ */
 - (void)seekWithLong:(jlong)pos;
 
 #pragma mark Protected
 
+/*!
+ @brief resourceDescription should be a non-null, opaque string
+ describing this resource; it's returned from
+ <code>toString</code>.
+ */
 - (instancetype)initWithNSString:(NSString *)resourceDescription;
 
 @end
@@ -42,4 +60,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreChecksumIndexInput)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneStoreChecksumIndexInput_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreChecksumIndexInput")

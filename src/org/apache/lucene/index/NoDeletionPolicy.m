@@ -18,11 +18,17 @@ __attribute__((unused)) static void OrgApacheLuceneIndexNoDeletionPolicy_init(Or
 
 __attribute__((unused)) static OrgApacheLuceneIndexNoDeletionPolicy *new_OrgApacheLuceneIndexNoDeletionPolicy_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexNoDeletionPolicy *create_OrgApacheLuceneIndexNoDeletionPolicy_init();
+
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexNoDeletionPolicy)
 
-OrgApacheLuceneIndexIndexDeletionPolicy *OrgApacheLuceneIndexNoDeletionPolicy_INSTANCE_;
+OrgApacheLuceneIndexIndexDeletionPolicy *OrgApacheLuceneIndexNoDeletionPolicy_INSTANCE;
 
 @implementation OrgApacheLuceneIndexNoDeletionPolicy
+
++ (OrgApacheLuceneIndexIndexDeletionPolicy *)INSTANCE {
+  return OrgApacheLuceneIndexNoDeletionPolicy_INSTANCE;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -43,7 +49,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneIndexNoDeletionPolicy class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneIndexNoDeletionPolicy_INSTANCE_, new_OrgApacheLuceneIndexNoDeletionPolicy_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneIndexNoDeletionPolicy_INSTANCE, new_OrgApacheLuceneIndexNoDeletionPolicy_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexNoDeletionPolicy)
   }
 }
@@ -51,12 +57,12 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "NoDeletionPolicy", NULL, 0x2, NULL, NULL },
-    { "onCommitWithJavaUtilList:", "onCommit", "V", 0x1, NULL, NULL },
-    { "onInitWithJavaUtilList:", "onInit", "V", 0x1, NULL, NULL },
+    { "onCommitWithJavaUtilList:", "onCommit", "V", 0x1, NULL, "(Ljava/util/List<+Lorg/apache/lucene/index/IndexCommit;>;)V" },
+    { "onInitWithJavaUtilList:", "onInit", "V", 0x1, NULL, "(Ljava/util/List<+Lorg/apache/lucene/index/IndexCommit;>;)V" },
     { "clone", NULL, "Lorg.apache.lucene.index.IndexDeletionPolicy;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "INSTANCE_", NULL, 0x19, "Lorg.apache.lucene.index.IndexDeletionPolicy;", &OrgApacheLuceneIndexNoDeletionPolicy_INSTANCE_, NULL, .constantValue.asLong = 0 },
+    { "INSTANCE", "INSTANCE", 0x19, "Lorg.apache.lucene.index.IndexDeletionPolicy;", &OrgApacheLuceneIndexNoDeletionPolicy_INSTANCE, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneIndexNoDeletionPolicy = { 2, "NoDeletionPolicy", "org.apache.lucene.index", NULL, 0x11, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexNoDeletionPolicy;
@@ -69,9 +75,11 @@ void OrgApacheLuceneIndexNoDeletionPolicy_init(OrgApacheLuceneIndexNoDeletionPol
 }
 
 OrgApacheLuceneIndexNoDeletionPolicy *new_OrgApacheLuceneIndexNoDeletionPolicy_init() {
-  OrgApacheLuceneIndexNoDeletionPolicy *self = [OrgApacheLuceneIndexNoDeletionPolicy alloc];
-  OrgApacheLuceneIndexNoDeletionPolicy_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexNoDeletionPolicy, init)
+}
+
+OrgApacheLuceneIndexNoDeletionPolicy *create_OrgApacheLuceneIndexNoDeletionPolicy_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexNoDeletionPolicy, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexNoDeletionPolicy)

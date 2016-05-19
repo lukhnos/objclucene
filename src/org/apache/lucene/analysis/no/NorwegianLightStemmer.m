@@ -11,6 +11,14 @@
 
 @implementation OrgApacheLuceneAnalysisNoNorwegianLightStemmer
 
++ (jint)BOKMAAL {
+  return OrgApacheLuceneAnalysisNoNorwegianLightStemmer_BOKMAAL;
+}
+
++ (jint)NYNORSK {
+  return OrgApacheLuceneAnalysisNoNorwegianLightStemmer_NYNORSK;
+}
+
 - (instancetype)initWithInt:(jint)flags {
   OrgApacheLuceneAnalysisNoNorwegianLightStemmer_initWithInt_(self, flags);
   return self;
@@ -56,16 +64,18 @@
 void OrgApacheLuceneAnalysisNoNorwegianLightStemmer_initWithInt_(OrgApacheLuceneAnalysisNoNorwegianLightStemmer *self, jint flags) {
   NSObject_init(self);
   if (flags <= 0 || flags > OrgApacheLuceneAnalysisNoNorwegianLightStemmer_BOKMAAL + OrgApacheLuceneAnalysisNoNorwegianLightStemmer_NYNORSK) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"invalid flags") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"invalid flags");
   }
   self->useBokmaal_ = ((flags & OrgApacheLuceneAnalysisNoNorwegianLightStemmer_BOKMAAL) != 0);
   self->useNynorsk_ = ((flags & OrgApacheLuceneAnalysisNoNorwegianLightStemmer_NYNORSK) != 0);
 }
 
 OrgApacheLuceneAnalysisNoNorwegianLightStemmer *new_OrgApacheLuceneAnalysisNoNorwegianLightStemmer_initWithInt_(jint flags) {
-  OrgApacheLuceneAnalysisNoNorwegianLightStemmer *self = [OrgApacheLuceneAnalysisNoNorwegianLightStemmer alloc];
-  OrgApacheLuceneAnalysisNoNorwegianLightStemmer_initWithInt_(self, flags);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisNoNorwegianLightStemmer, initWithInt_, flags)
+}
+
+OrgApacheLuceneAnalysisNoNorwegianLightStemmer *create_OrgApacheLuceneAnalysisNoNorwegianLightStemmer_initWithInt_(jint flags) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisNoNorwegianLightStemmer, initWithInt_, flags)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisNoNorwegianLightStemmer)

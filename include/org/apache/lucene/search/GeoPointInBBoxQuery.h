@@ -5,23 +5,41 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchGeoPointInBBoxQuery_INCLUDE_ALL")
-#if OrgApacheLuceneSearchGeoPointInBBoxQuery_RESTRICT
-#define OrgApacheLuceneSearchGeoPointInBBoxQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchGeoPointInBBoxQuery")
+#ifdef RESTRICT_OrgApacheLuceneSearchGeoPointInBBoxQuery
+#define INCLUDE_ALL_OrgApacheLuceneSearchGeoPointInBBoxQuery 0
 #else
-#define OrgApacheLuceneSearchGeoPointInBBoxQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchGeoPointInBBoxQuery 1
 #endif
-#undef OrgApacheLuceneSearchGeoPointInBBoxQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchGeoPointInBBoxQuery
 
-#if !defined (_OrgApacheLuceneSearchGeoPointInBBoxQuery_) && (OrgApacheLuceneSearchGeoPointInBBoxQuery_INCLUDE_ALL || OrgApacheLuceneSearchGeoPointInBBoxQuery_INCLUDE)
-#define _OrgApacheLuceneSearchGeoPointInBBoxQuery_
+#if !defined (OrgApacheLuceneSearchGeoPointInBBoxQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchGeoPointInBBoxQuery || defined(INCLUDE_OrgApacheLuceneSearchGeoPointInBBoxQuery))
+#define OrgApacheLuceneSearchGeoPointInBBoxQuery_
 
-#define OrgApacheLuceneSearchQuery_RESTRICT 1
-#define OrgApacheLuceneSearchQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchQuery 1
+#define INCLUDE_OrgApacheLuceneSearchQuery 1
 #include "org/apache/lucene/search/Query.h"
 
 @class OrgApacheLuceneIndexIndexReader;
 
+/*!
+ @brief Implements a simple bounding box query on a GeoPoint field.
+ This is inspired by
+ <code>org.apache.lucene.search.NumericRangeQuery</code> and is implemented using a
+ two phase approach. First, candidate terms are queried using a numeric
+ range based on the morton codes of the min and max lat/lon pairs. Terms
+ passing this initial filter are passed to a final check that verifies whether
+ the decoded lat/lon falls within (or on the boundary) of the query bounding box.
+ The value comparisons are subject to a precision tolerance defined in
+ org.apache.lucene.util.GeoUtils#TOLERANCE
+ NOTES:
+ 1.  All latitude/longitude values must be in decimal degrees.
+ 2.  Complex computational geometry (e.g., dateline wrapping) is not supported
+ 3.  For more advanced GeoSpatial indexing and query operations see spatial module
+ 4.  This is well suited for small rectangles, large bounding boxes may result
+ in many terms, depending whether the bounding box falls on the boundary of
+ many cells (degenerate case)
+ */
 @interface OrgApacheLuceneSearchGeoPointInBBoxQuery : OrgApacheLuceneSearchQuery {
  @public
   NSString *field_;
@@ -67,8 +85,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchGeoPointInBBoxQuery_initWithNSString
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchGeoPointInBBoxQuery *new_OrgApacheLuceneSearchGeoPointInBBoxQuery_initWithNSString_withDouble_withDouble_withDouble_withDouble_(NSString *field, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchGeoPointInBBoxQuery *create_OrgApacheLuceneSearchGeoPointInBBoxQuery_initWithNSString_withDouble_withDouble_withDouble_withDouble_(NSString *field, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchGeoPointInBBoxQuery)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchGeoPointInBBoxQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchGeoPointInBBoxQuery")

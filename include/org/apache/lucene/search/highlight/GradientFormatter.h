@@ -5,23 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchHighlightGradientFormatter_INCLUDE_ALL")
-#if OrgApacheLuceneSearchHighlightGradientFormatter_RESTRICT
-#define OrgApacheLuceneSearchHighlightGradientFormatter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightGradientFormatter")
+#ifdef RESTRICT_OrgApacheLuceneSearchHighlightGradientFormatter
+#define INCLUDE_ALL_OrgApacheLuceneSearchHighlightGradientFormatter 0
 #else
-#define OrgApacheLuceneSearchHighlightGradientFormatter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchHighlightGradientFormatter 1
 #endif
-#undef OrgApacheLuceneSearchHighlightGradientFormatter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchHighlightGradientFormatter
 
-#if !defined (_OrgApacheLuceneSearchHighlightGradientFormatter_) && (OrgApacheLuceneSearchHighlightGradientFormatter_INCLUDE_ALL || OrgApacheLuceneSearchHighlightGradientFormatter_INCLUDE)
-#define _OrgApacheLuceneSearchHighlightGradientFormatter_
+#if !defined (OrgApacheLuceneSearchHighlightGradientFormatter_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightGradientFormatter || defined(INCLUDE_OrgApacheLuceneSearchHighlightGradientFormatter))
+#define OrgApacheLuceneSearchHighlightGradientFormatter_
 
-#define OrgApacheLuceneSearchHighlightFormatter_RESTRICT 1
-#define OrgApacheLuceneSearchHighlightFormatter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchHighlightFormatter 1
+#define INCLUDE_OrgApacheLuceneSearchHighlightFormatter 1
 #include "org/apache/lucene/search/highlight/Formatter.h"
 
 @class OrgApacheLuceneSearchHighlightTokenGroup;
 
+/*!
+ @brief Formats text with different color intensity depending on the score of the
+ term.
+ */
 @interface OrgApacheLuceneSearchHighlightGradientFormatter : NSObject < OrgApacheLuceneSearchHighlightFormatter > {
  @public
   jint fgRMin_, fgGMin_, fgBMin_;
@@ -34,12 +38,46 @@
 
 #pragma mark Public
 
+/*!
+ @brief Sets the color range for the IDF scores
+ @param maxScore
+ The score (and above) displayed as maxColor (See QueryScorer.getMaxWeight 
+ which can be used to calibrate scoring scale)
+ @param minForegroundColor
+ The hex color used for representing IDF scores of zero eg
+ #FFFFFF (white) or null if no foreground color required
+ @param maxForegroundColor
+ The largest hex color used for representing IDF scores eg
+ #000000 (black) or null if no foreground color required
+ @param minBackgroundColor
+ The hex color used for representing IDF scores of zero eg
+ #FFFFFF (white) or null if no background color required
+ @param maxBackgroundColor
+ The largest hex color used for representing IDF scores eg
+ #000000 (black) or null if no background color required
+ */
 - (instancetype)initWithFloat:(jfloat)maxScore
                  withNSString:(NSString *)minForegroundColor
                  withNSString:(NSString *)maxForegroundColor
                  withNSString:(NSString *)minBackgroundColor
                  withNSString:(NSString *)maxBackgroundColor;
 
+/*!
+ @brief Converts a hex string into an int.
+ Integer.parseInt(hex, 16) assumes the
+ input is nonnegative unless there is a preceding minus sign. This method
+ reads the input as twos complement instead, so if the input is 8 bytes
+ long, it will correctly restore a negative int produced by
+ Integer.toHexString() but not necessarily one produced by
+ Integer.toString(x,16) since that method will produce a string like '-FF'
+ for negative integer values.
+ @param hex
+ A string in capital or lower case hex, of no more then 16
+ characters.
+ @throws NumberFormatException
+ if the string is more than 16 characters long, or if any
+ character is not in the set [0-9a-fA-f]
+ */
 + (jint)hexToIntWithNSString:(NSString *)hex;
 
 - (NSString *)highlightTermWithNSString:(NSString *)originalText
@@ -59,10 +97,12 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightGradientFormatter_initWithF
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightGradientFormatter *new_OrgApacheLuceneSearchHighlightGradientFormatter_initWithFloat_withNSString_withNSString_withNSString_withNSString_(jfloat maxScore, NSString *minForegroundColor, NSString *maxForegroundColor, NSString *minBackgroundColor, NSString *maxBackgroundColor) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightGradientFormatter *create_OrgApacheLuceneSearchHighlightGradientFormatter_initWithFloat_withNSString_withNSString_withNSString_withNSString_(jfloat maxScore, NSString *minForegroundColor, NSString *maxForegroundColor, NSString *minBackgroundColor, NSString *maxBackgroundColor);
+
 FOUNDATION_EXPORT jint OrgApacheLuceneSearchHighlightGradientFormatter_hexToIntWithNSString_(NSString *hex);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightGradientFormatter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchHighlightGradientFormatter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightGradientFormatter")

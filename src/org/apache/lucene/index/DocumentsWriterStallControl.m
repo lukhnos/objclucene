@@ -64,7 +64,7 @@ __attribute__((unused)) static void OrgApacheLuceneIndexDocumentsWriterStallCont
           OrgApacheLuceneIndexDocumentsWriterStallControl_decrWaiters(self);
         }
         @catch (JavaLangInterruptedException *e) {
-          @throw [new_OrgApacheLuceneUtilThreadInterruptedException_initWithJavaLangInterruptedException_(e) autorelease];
+          @throw create_OrgApacheLuceneUtilThreadInterruptedException_initWithJavaLangInterruptedException_(e);
         }
       }
     }
@@ -145,9 +145,11 @@ void OrgApacheLuceneIndexDocumentsWriterStallControl_initWithOrgApacheLuceneInde
 }
 
 OrgApacheLuceneIndexDocumentsWriterStallControl *new_OrgApacheLuceneIndexDocumentsWriterStallControl_initWithOrgApacheLuceneIndexLiveIndexWriterConfig_(OrgApacheLuceneIndexLiveIndexWriterConfig *iwc) {
-  OrgApacheLuceneIndexDocumentsWriterStallControl *self = [OrgApacheLuceneIndexDocumentsWriterStallControl alloc];
-  OrgApacheLuceneIndexDocumentsWriterStallControl_initWithOrgApacheLuceneIndexLiveIndexWriterConfig_(self, iwc);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexDocumentsWriterStallControl, initWithOrgApacheLuceneIndexLiveIndexWriterConfig_, iwc)
+}
+
+OrgApacheLuceneIndexDocumentsWriterStallControl *create_OrgApacheLuceneIndexDocumentsWriterStallControl_initWithOrgApacheLuceneIndexLiveIndexWriterConfig_(OrgApacheLuceneIndexLiveIndexWriterConfig *iwc) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexDocumentsWriterStallControl, initWithOrgApacheLuceneIndexLiveIndexWriterConfig_, iwc)
 }
 
 void OrgApacheLuceneIndexDocumentsWriterStallControl_incWaiters(OrgApacheLuceneIndexDocumentsWriterStallControl *self) {
@@ -156,7 +158,7 @@ void OrgApacheLuceneIndexDocumentsWriterStallControl_incWaiters(OrgApacheLuceneI
     [self->infoStream_ messageWithNSString:@"DW" withNSString:@"now stalling flushes"];
   }
   self->numWaiting_++;
-  JreAssert(([((id<JavaUtilMap>) nil_chk(self->waiting_)) putWithId:JavaLangThread_currentThread() withId:JreLoadStatic(JavaLangBoolean, TRUE__)] == nil), (@"org/apache/lucene/index/DocumentsWriterStallControl.java:104 condition failed: assert waiting.put(Thread.currentThread(), Boolean.TRUE) == null;"));
+  JreAssert(([((id<JavaUtilMap>) nil_chk(self->waiting_)) putWithId:JavaLangThread_currentThread() withId:JreLoadStatic(JavaLangBoolean, TRUE)] == nil), (@"org/apache/lucene/index/DocumentsWriterStallControl.java:104 condition failed: assert waiting.put(Thread.currentThread(), Boolean.TRUE) == null;"));
   JreAssert((self->numWaiting_ > 0), (@"org/apache/lucene/index/DocumentsWriterStallControl.java:105 condition failed: assert numWaiting > 0;"));
 }
 

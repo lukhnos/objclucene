@@ -5,33 +5,48 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode_) && (OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode_
+#if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode))
+#define OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode_
 
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_RESTRICT 1
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl 1
+#define INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNodeImpl.h"
 
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_RESTRICT 1
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode 1
+#define INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/FieldableNode.h"
 
 @protocol JavaLangCharSequence;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;
 
+/*!
+ @brief A <code>SlopQueryNode</code> represents phrase query with a slop.
+ From Lucene FAQ: Is there a way to use a proximity operator (like near or
+ within) with Lucene? There is a variable called slop that allows you to
+ perform NEAR/WITHIN-like queries. By default, slop is set to 0 so that only
+ exact phrases will match. When using TextParser you can use this syntax to
+ specify the slop: "doug cutting"~2 will find documents that contain
+ "doug cutting" as well as ones that contain "cutting doug".
+ */
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl < OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode >
 
 #pragma mark Public
 
+/*!
+ @param query
+ - QueryNode Tree with the phrase
+ @param value
+ - slop value
+ */
 - (instancetype)initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)query
                                                                      withInt:(jint)value;
 
@@ -57,8 +72,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode_
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withInt_(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> query, jint value) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode *create_OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withInt_(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> query, jint value);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode")

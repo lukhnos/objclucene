@@ -15,8 +15,6 @@
 #include "org/apache/lucene/util/RamUsageEstimator.h"
 #include "org/apache/lucene/util/automaton/SortedIntSet.h"
 
-#define OrgApacheLuceneUtilAutomatonSortedIntSet_TREE_MAP_CUTOVER 30
-
 @interface OrgApacheLuceneUtilAutomatonSortedIntSet () {
  @public
   jint hashCode_;
@@ -28,7 +26,9 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAutomatonSortedIntSet, map_, id<JavaUtilMap>)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilAutomatonSortedIntSet, TREE_MAP_CUTOVER, jint)
+inline jint OrgApacheLuceneUtilAutomatonSortedIntSet_get_TREE_MAP_CUTOVER();
+#define OrgApacheLuceneUtilAutomatonSortedIntSet_TREE_MAP_CUTOVER 30
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilAutomatonSortedIntSet, TREE_MAP_CUTOVER, jint)
 
 @implementation OrgApacheLuceneUtilAutomatonSortedIntSet
 
@@ -77,7 +77,7 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilAutomatonSortedIntSet, TREE_MAP_CU
   if (upto_ == OrgApacheLuceneUtilAutomatonSortedIntSet_TREE_MAP_CUTOVER) {
     useTreeMap_ = true;
     for (jint i = 0; i < upto_; i++) {
-      [((id<JavaUtilMap>) nil_chk(map_)) putWithId:JavaLangInteger_valueOfWithInt_(IOSIntArray_Get(values_, i)) withId:JavaLangInteger_valueOfWithInt_(IOSIntArray_Get(counts_, i))];
+      [((id<JavaUtilMap>) nil_chk(map_)) putWithId:JavaLangInteger_valueOfWithInt_(IOSIntArray_Get(nil_chk(values_), i)) withId:JavaLangInteger_valueOfWithInt_(IOSIntArray_Get(nil_chk(counts_), i))];
     }
   }
 }
@@ -127,7 +127,7 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilAutomatonSortedIntSet, TREE_MAP_CU
     for (JavaLangInteger *boxed__ in nil_chk([map_ keySet])) {
       jint state = [((JavaLangInteger *) nil_chk(boxed__)) intValue];
       hashCode_ = 683 * hashCode_ + state;
-      *IOSIntArray_GetRef(values_, upto_++) = state;
+      *IOSIntArray_GetRef(nil_chk(values_), upto_++) = state;
     }
   }
   else {
@@ -141,7 +141,7 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilAutomatonSortedIntSet, TREE_MAP_CU
 - (OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet *)freezeWithInt:(jint)state {
   IOSIntArray *c = [IOSIntArray arrayWithLength:upto_];
   JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(values_, 0, c, 0, upto_);
-  return [new_OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet_initWithIntArray_withInt_withInt_(c, hashCode_, state) autorelease];
+  return create_OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet_initWithIntArray_withInt_withInt_(c, hashCode_, state);
 }
 
 - (NSUInteger)hash {
@@ -155,8 +155,8 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilAutomatonSortedIntSet, TREE_MAP_CU
   if (!([_other isKindOfClass:[OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet class]])) {
     return false;
   }
-  OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet *other = (OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet *) check_class_cast(_other, [OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet class]);
-  if (hashCode_ != ((OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet *) nil_chk(other))->hashCode_) {
+  OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet *other = (OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet *) cast_chk(_other, [OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet class]);
+  if (hashCode_ != other->hashCode_) {
     return false;
   }
   if (((IOSIntArray *) nil_chk(other->values_))->size_ != upto_) {
@@ -171,7 +171,7 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilAutomatonSortedIntSet, TREE_MAP_CU
 }
 
 - (NSString *)description {
-  JavaLangStringBuilder *sb = [((JavaLangStringBuilder *) [new_JavaLangStringBuilder_init() autorelease]) appendWithChar:'['];
+  JavaLangStringBuilder *sb = [create_JavaLangStringBuilder_init() appendWithChar:'['];
   for (jint i = 0; i < upto_; i++) {
     if (i > 0) {
       [((JavaLangStringBuilder *) nil_chk(sb)) appendWithChar:' '];
@@ -225,9 +225,11 @@ void OrgApacheLuceneUtilAutomatonSortedIntSet_initWithInt_(OrgApacheLuceneUtilAu
 }
 
 OrgApacheLuceneUtilAutomatonSortedIntSet *new_OrgApacheLuceneUtilAutomatonSortedIntSet_initWithInt_(jint capacity) {
-  OrgApacheLuceneUtilAutomatonSortedIntSet *self = [OrgApacheLuceneUtilAutomatonSortedIntSet alloc];
-  OrgApacheLuceneUtilAutomatonSortedIntSet_initWithInt_(self, capacity);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAutomatonSortedIntSet, initWithInt_, capacity)
+}
+
+OrgApacheLuceneUtilAutomatonSortedIntSet *create_OrgApacheLuceneUtilAutomatonSortedIntSet_initWithInt_(jint capacity) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAutomatonSortedIntSet, initWithInt_, capacity)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonSortedIntSet)
@@ -256,8 +258,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonSortedIntSet)
     return false;
   }
   if ([_other isKindOfClass:[OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet class]]) {
-    OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet *other = (OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet *) check_class_cast(_other, [OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet class]);
-    if (hashCode_ != ((OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet *) nil_chk(other))->hashCode_) {
+    OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet *other = (OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet *) cast_chk(_other, [OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet class]);
+    if (hashCode_ != other->hashCode_) {
       return false;
     }
     if (((IOSIntArray *) nil_chk(other->values_))->size_ != values_->size_) {
@@ -271,8 +273,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonSortedIntSet)
     return true;
   }
   else if ([_other isKindOfClass:[OrgApacheLuceneUtilAutomatonSortedIntSet class]]) {
-    OrgApacheLuceneUtilAutomatonSortedIntSet *other = (OrgApacheLuceneUtilAutomatonSortedIntSet *) check_class_cast(_other, [OrgApacheLuceneUtilAutomatonSortedIntSet class]);
-    if (hashCode_ != ((OrgApacheLuceneUtilAutomatonSortedIntSet *) nil_chk(other))->hashCode_) {
+    OrgApacheLuceneUtilAutomatonSortedIntSet *other = (OrgApacheLuceneUtilAutomatonSortedIntSet *) cast_chk(_other, [OrgApacheLuceneUtilAutomatonSortedIntSet class]);
+    if (hashCode_ != other->hashCode_) {
       return false;
     }
     if (((IOSIntArray *) nil_chk(other->values_))->size_ != ((IOSIntArray *) nil_chk(values_))->size_) {
@@ -289,7 +291,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonSortedIntSet)
 }
 
 - (NSString *)description {
-  JavaLangStringBuilder *sb = [((JavaLangStringBuilder *) [new_JavaLangStringBuilder_init() autorelease]) appendWithChar:'['];
+  JavaLangStringBuilder *sb = [create_JavaLangStringBuilder_init() appendWithChar:'['];
   for (jint i = 0; i < ((IOSIntArray *) nil_chk(values_))->size_; i++) {
     if (i > 0) {
       [((JavaLangStringBuilder *) nil_chk(sb)) appendWithChar:' '];
@@ -332,9 +334,11 @@ void OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet_initWithIntArray_with
 }
 
 OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet *new_OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet_initWithIntArray_withInt_withInt_(IOSIntArray *values, jint hashCode, jint state) {
-  OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet *self = [OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet alloc];
-  OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet_initWithIntArray_withInt_withInt_(self, values, hashCode, state);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet, initWithIntArray_withInt_withInt_, values, hashCode, state)
+}
+
+OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet *create_OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet_initWithIntArray_withInt_withInt_(IOSIntArray *values, jint hashCode, jint state) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet, initWithIntArray_withInt_withInt_, values, hashCode, state)
 }
 
 void OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet_initWithInt_withInt_(OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet *self, jint num, jint state) {
@@ -345,9 +349,11 @@ void OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet_initWithInt_withInt_(
 }
 
 OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet *new_OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet_initWithInt_withInt_(jint num, jint state) {
-  OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet *self = [OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet alloc];
-  OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet_initWithInt_withInt_(self, num, state);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet, initWithInt_withInt_, num, state)
+}
+
+OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet *create_OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet_initWithInt_withInt_(jint num, jint state) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet, initWithInt_withInt_, num, state)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet)

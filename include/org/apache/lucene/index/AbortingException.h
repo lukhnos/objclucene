@@ -5,37 +5,41 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexAbortingException_INCLUDE_ALL")
-#if OrgApacheLuceneIndexAbortingException_RESTRICT
-#define OrgApacheLuceneIndexAbortingException_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexAbortingException")
+#ifdef RESTRICT_OrgApacheLuceneIndexAbortingException
+#define INCLUDE_ALL_OrgApacheLuceneIndexAbortingException 0
 #else
-#define OrgApacheLuceneIndexAbortingException_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexAbortingException 1
 #endif
-#undef OrgApacheLuceneIndexAbortingException_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexAbortingException
 
-#if !defined (_OrgApacheLuceneIndexAbortingException_) && (OrgApacheLuceneIndexAbortingException_INCLUDE_ALL || OrgApacheLuceneIndexAbortingException_INCLUDE)
-#define _OrgApacheLuceneIndexAbortingException_
+#if !defined (OrgApacheLuceneIndexAbortingException_) && (INCLUDE_ALL_OrgApacheLuceneIndexAbortingException || defined(INCLUDE_OrgApacheLuceneIndexAbortingException))
+#define OrgApacheLuceneIndexAbortingException_
 
-#define JavaLangException_RESTRICT 1
-#define JavaLangException_INCLUDE 1
+#define RESTRICT_JavaLangException 1
+#define INCLUDE_JavaLangException 1
 #include "java/lang/Exception.h"
 
-@class JavaLangThrowable;
-
+/*!
+ @brief Thrown and caught internally in <code>IndexWriter</code> methods when an <code>IOException</code> would cause it to
+ lose previously indexed documents.
+ When this happens, the <code>IndexWriter</code> is forcefully 
+ closed, using <code>IndexWriter.rollback</code>). 
+ */
 @interface OrgApacheLuceneIndexAbortingException : JavaLangException
 
 #pragma mark Public
 
-+ (OrgApacheLuceneIndexAbortingException *)wrapWithJavaLangThrowable:(JavaLangThrowable *)t;
++ (OrgApacheLuceneIndexAbortingException *)wrapWithNSException:(NSException *)t;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexAbortingException)
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexAbortingException *OrgApacheLuceneIndexAbortingException_wrapWithJavaLangThrowable_(JavaLangThrowable *t);
+FOUNDATION_EXPORT OrgApacheLuceneIndexAbortingException *OrgApacheLuceneIndexAbortingException_wrapWithNSException_(NSException *t);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexAbortingException)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexAbortingException_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexAbortingException")

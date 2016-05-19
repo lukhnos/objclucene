@@ -62,6 +62,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSearcherLifetimeManager
 
 __attribute__((unused)) static OrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker *new_OrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker_initWithOrgApacheLuceneSearchIndexSearcher_(OrgApacheLuceneSearchIndexSearcher *searcher) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker *create_OrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker_initWithOrgApacheLuceneSearchIndexSearcher_(OrgApacheLuceneSearchIndexSearcher *searcher);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker)
 
 @interface OrgApacheLuceneSearchSearcherLifetimeManager_Pruner : NSObject
@@ -77,22 +79,26 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSearcherLifetimeManager_Searcher
 
 @implementation OrgApacheLuceneSearchSearcherLifetimeManager
 
++ (jdouble)NANOS_PER_SEC {
+  return OrgApacheLuceneSearchSearcherLifetimeManager_NANOS_PER_SEC;
+}
+
 - (void)ensureOpen {
   OrgApacheLuceneSearchSearcherLifetimeManager_ensureOpen(self);
 }
 
 - (jlong)recordWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher {
   OrgApacheLuceneSearchSearcherLifetimeManager_ensureOpen(self);
-  jlong version_ = [((OrgApacheLuceneIndexDirectoryReader *) nil_chk(((OrgApacheLuceneIndexDirectoryReader *) check_class_cast([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getIndexReader], [OrgApacheLuceneIndexDirectoryReader class])))) getVersion];
+  jlong version_ = [((OrgApacheLuceneIndexDirectoryReader *) nil_chk(((OrgApacheLuceneIndexDirectoryReader *) cast_chk([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getIndexReader], [OrgApacheLuceneIndexDirectoryReader class])))) getVersion];
   OrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker *tracker = [((JavaUtilConcurrentConcurrentHashMap *) nil_chk(searchers_)) getWithId:JavaLangLong_valueOfWithLong_(version_)];
   if (tracker == nil) {
-    tracker = [new_OrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker_initWithOrgApacheLuceneSearchIndexSearcher_(searcher) autorelease];
+    tracker = create_OrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker_initWithOrgApacheLuceneSearchIndexSearcher_(searcher);
     if ([searchers_ putIfAbsentWithId:JavaLangLong_valueOfWithLong_(version_) withId:tracker] != nil) {
       [tracker close];
     }
   }
   else if (tracker->searcher_ != searcher) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@$@", @"the provided searcher has the same underlying reader version yet the searcher instance differs from before (new=", searcher, @" vs old=", tracker->searcher_)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@$@", @"the provided searcher has the same underlying reader version yet the searcher instance differs from before (new=", searcher, @" vs old=", tracker->searcher_));
   }
   return version_;
 }
@@ -112,7 +118,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSearcherLifetimeManager_Searcher
 
 - (void)pruneWithOrgApacheLuceneSearchSearcherLifetimeManager_Pruner:(id<OrgApacheLuceneSearchSearcherLifetimeManager_Pruner>)pruner {
   @synchronized(self) {
-    id<JavaUtilList> trackers = [new_JavaUtilArrayList_init() autorelease];
+    id<JavaUtilList> trackers = create_JavaUtilArrayList_init();
     for (OrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker * __strong tracker in nil_chk([((JavaUtilConcurrentConcurrentHashMap *) nil_chk(searchers_)) values])) {
       [trackers addWithId:tracker];
     }
@@ -139,13 +145,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSearcherLifetimeManager_Searcher
 - (void)close {
   @synchronized(self) {
     JreAssignVolatileBoolean(&closed_, true);
-    id<JavaUtilList> toClose = [new_JavaUtilArrayList_initWithJavaUtilCollection_([((JavaUtilConcurrentConcurrentHashMap *) nil_chk(searchers_)) values]) autorelease];
+    id<JavaUtilList> toClose = create_JavaUtilArrayList_initWithJavaUtilCollection_([((JavaUtilConcurrentConcurrentHashMap *) nil_chk(searchers_)) values]);
     for (OrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker * __strong tracker in toClose) {
       [searchers_ removeWithId:JavaLangLong_valueOfWithLong_(((OrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker *) nil_chk(tracker))->version__)];
     }
     OrgApacheLuceneUtilIOUtils_closeWithJavaLangIterable_(toClose);
     if ([searchers_ size] != 0) {
-      @throw [new_JavaLangIllegalStateException_initWithNSString_(@"another thread called record while this SearcherLifetimeManager instance was being closed; not all searchers were closed") autorelease];
+      @throw create_JavaLangIllegalStateException_initWithNSString_(@"another thread called record while this SearcherLifetimeManager instance was being closed; not all searchers were closed");
     }
   }
 }
@@ -170,7 +176,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "release__WithOrgApacheLuceneSearchIndexSearcher:", "release", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "pruneWithOrgApacheLuceneSearchSearcherLifetimeManager_Pruner:", "prune", "V", 0x21, "Ljava.io.IOException;", NULL },
     { "close", NULL, "V", 0x21, "Ljava.io.IOException;", NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "SearcherLifetimeManager", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "NANOS_PER_SEC", "NANOS_PER_SEC", 0x18, "D", NULL, NULL, .constantValue.asDouble = OrgApacheLuceneSearchSearcherLifetimeManager_NANOS_PER_SEC },
@@ -186,7 +192,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 void OrgApacheLuceneSearchSearcherLifetimeManager_ensureOpen(OrgApacheLuceneSearchSearcherLifetimeManager *self) {
   if (JreLoadVolatileBoolean(&self->closed_)) {
-    @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(@"this SearcherLifetimeManager instance is closed") autorelease];
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(@"this SearcherLifetimeManager instance is closed");
   }
 }
 
@@ -196,9 +202,11 @@ void OrgApacheLuceneSearchSearcherLifetimeManager_init(OrgApacheLuceneSearchSear
 }
 
 OrgApacheLuceneSearchSearcherLifetimeManager *new_OrgApacheLuceneSearchSearcherLifetimeManager_init() {
-  OrgApacheLuceneSearchSearcherLifetimeManager *self = [OrgApacheLuceneSearchSearcherLifetimeManager alloc];
-  OrgApacheLuceneSearchSearcherLifetimeManager_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSearcherLifetimeManager, init)
+}
+
+OrgApacheLuceneSearchSearcherLifetimeManager *create_OrgApacheLuceneSearchSearcherLifetimeManager_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSearcherLifetimeManager, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSearcherLifetimeManager)
@@ -211,7 +219,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSearcherLifetimeManager)
 }
 
 - (jint)compareToWithId:(OrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker *)other {
-  check_class_cast(other, [OrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker class]);
+  cast_chk(other, [OrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker class]);
   return JavaLangDouble_compareWithDouble_withDouble_(((OrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker *) nil_chk(other))->recordTimeSec_, recordTimeSec_);
 }
 
@@ -246,15 +254,17 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSearcherLifetimeManager)
 void OrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker_initWithOrgApacheLuceneSearchIndexSearcher_(OrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker *self, OrgApacheLuceneSearchIndexSearcher *searcher) {
   NSObject_init(self);
   JreStrongAssign(&self->searcher_, searcher);
-  self->version__ = [((OrgApacheLuceneIndexDirectoryReader *) nil_chk(((OrgApacheLuceneIndexDirectoryReader *) check_class_cast([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getIndexReader], [OrgApacheLuceneIndexDirectoryReader class])))) getVersion];
+  self->version__ = [((OrgApacheLuceneIndexDirectoryReader *) nil_chk(((OrgApacheLuceneIndexDirectoryReader *) cast_chk([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getIndexReader], [OrgApacheLuceneIndexDirectoryReader class])))) getVersion];
   [((OrgApacheLuceneIndexIndexReader *) nil_chk([searcher getIndexReader])) incRef];
   self->recordTimeSec_ = JavaLangSystem_nanoTime() / OrgApacheLuceneSearchSearcherLifetimeManager_NANOS_PER_SEC;
 }
 
 OrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker *new_OrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker_initWithOrgApacheLuceneSearchIndexSearcher_(OrgApacheLuceneSearchIndexSearcher *searcher) {
-  OrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker *self = [OrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker alloc];
-  OrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker_initWithOrgApacheLuceneSearchIndexSearcher_(self, searcher);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker, initWithOrgApacheLuceneSearchIndexSearcher_, searcher)
+}
+
+OrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker *create_OrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker_initWithOrgApacheLuceneSearchIndexSearcher_(OrgApacheLuceneSearchIndexSearcher *searcher) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker, initWithOrgApacheLuceneSearchIndexSearcher_, searcher)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker)
@@ -302,15 +312,17 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 void OrgApacheLuceneSearchSearcherLifetimeManager_PruneByAge_initWithDouble_(OrgApacheLuceneSearchSearcherLifetimeManager_PruneByAge *self, jdouble maxAgeSec) {
   NSObject_init(self);
   if (maxAgeSec < 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$DC", @"maxAgeSec must be > 0 (got ", maxAgeSec, ')')) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$DC", @"maxAgeSec must be > 0 (got ", maxAgeSec, ')'));
   }
   self->maxAgeSec_ = maxAgeSec;
 }
 
 OrgApacheLuceneSearchSearcherLifetimeManager_PruneByAge *new_OrgApacheLuceneSearchSearcherLifetimeManager_PruneByAge_initWithDouble_(jdouble maxAgeSec) {
-  OrgApacheLuceneSearchSearcherLifetimeManager_PruneByAge *self = [OrgApacheLuceneSearchSearcherLifetimeManager_PruneByAge alloc];
-  OrgApacheLuceneSearchSearcherLifetimeManager_PruneByAge_initWithDouble_(self, maxAgeSec);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSearcherLifetimeManager_PruneByAge, initWithDouble_, maxAgeSec)
+}
+
+OrgApacheLuceneSearchSearcherLifetimeManager_PruneByAge *create_OrgApacheLuceneSearchSearcherLifetimeManager_PruneByAge_initWithDouble_(jdouble maxAgeSec) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSearcherLifetimeManager_PruneByAge, initWithDouble_, maxAgeSec)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSearcherLifetimeManager_PruneByAge)

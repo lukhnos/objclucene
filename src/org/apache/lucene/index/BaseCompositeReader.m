@@ -29,6 +29,10 @@
   IOSIntArray *starts_;
   jint maxDoc_;
   jint numDocs_;
+  /*!
+   @brief List view solely for <code>getSequentialSubReaders()</code>,
+ for effectiveness the array is used internally.
+   */
   id<JavaUtilList> subReadersList_;
 }
 
@@ -153,7 +157,7 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 - (jint)readerBaseWithInt:(jint)readerIndex {
   if (readerIndex < 0 || readerIndex >= ((IOSObjectArray *) nil_chk(subReaders_))->size_) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"readerIndex must be >= 0 and < getSequentialSubReaders().size()") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"readerIndex must be >= 0 and < getSequentialSubReaders().size()");
   }
   return IOSIntArray_Get(nil_chk(self->starts_), readerIndex);
 }
@@ -183,7 +187,7 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
     { "getSumTotalTermFreqWithNSString:", "getSumTotalTermFreq", "J", 0x11, "Ljava.io.IOException;", NULL },
     { "readerIndexWithInt:", "readerIndex", "I", 0x14, NULL, NULL },
     { "readerBaseWithInt:", "readerBase", "I", 0x14, NULL, NULL },
-    { "getSequentialSubReaders", NULL, "Ljava.util.List;", 0x14, NULL, NULL },
+    { "getSequentialSubReaders", NULL, "Ljava.util.List;", 0x14, NULL, "()Ljava/util/List<+TR;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "subReaders_", NULL, 0x12, "[Lorg.apache.lucene.index.IndexReader;", NULL, "[TR;", .constantValue.asLong = 0 },
@@ -213,10 +217,10 @@ void OrgApacheLuceneIndexBaseCompositeReader_initWithOrgApacheLuceneIndexIndexRe
   }
   if (maxDoc > OrgApacheLuceneIndexIndexWriter_getActualMaxDocs()) {
     if ([self isKindOfClass:[OrgApacheLuceneIndexDirectoryReader class]]) {
-      @throw [new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withNSString_(JreStrcat("$I$J", @"Too many documents: an index cannot exceed ", OrgApacheLuceneIndexIndexWriter_getActualMaxDocs(), @" but readers have total maxDoc=", maxDoc), JavaUtilArrays_toStringWithNSObjectArray_(subReaders)) autorelease];
+      @throw create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withNSString_(JreStrcat("$I$J", @"Too many documents: an index cannot exceed ", OrgApacheLuceneIndexIndexWriter_getActualMaxDocs(), @" but readers have total maxDoc=", maxDoc), JavaUtilArrays_toStringWithNSObjectArray_(subReaders));
     }
     else {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$J", @"Too many documents: composite IndexReaders cannot exceed ", OrgApacheLuceneIndexIndexWriter_getActualMaxDocs(), @" but readers have total maxDoc=", maxDoc)) autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$J", @"Too many documents: composite IndexReaders cannot exceed ", OrgApacheLuceneIndexIndexWriter_getActualMaxDocs(), @" but readers have total maxDoc=", maxDoc));
     }
   }
   self->maxDoc_ = (jint) maxDoc;
@@ -226,7 +230,7 @@ void OrgApacheLuceneIndexBaseCompositeReader_initWithOrgApacheLuceneIndexIndexRe
 
 jint OrgApacheLuceneIndexBaseCompositeReader_readerIndexWithInt_(OrgApacheLuceneIndexBaseCompositeReader *self, jint docID) {
   if (docID < 0 || docID >= self->maxDoc_) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$IC", @"docID must be >= 0 and < maxDoc=", self->maxDoc_, @" (got docID=", docID, ')')) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$IC", @"docID must be >= 0 and < maxDoc=", self->maxDoc_, @" (got docID=", docID, ')'));
   }
   return OrgApacheLuceneIndexReaderUtil_subIndexWithInt_withIntArray_(docID, self->starts_);
 }

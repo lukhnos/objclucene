@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionValuesourceDefFunction_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionValuesourceDefFunction_RESTRICT
-#define OrgApacheLuceneQueriesFunctionValuesourceDefFunction_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceDefFunction")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceDefFunction
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceDefFunction 0
 #else
-#define OrgApacheLuceneQueriesFunctionValuesourceDefFunction_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceDefFunction 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionValuesourceDefFunction_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceDefFunction
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValuesourceDefFunction_) && (OrgApacheLuceneQueriesFunctionValuesourceDefFunction_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValuesourceDefFunction_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValuesourceDefFunction_
+#if !defined (OrgApacheLuceneQueriesFunctionValuesourceDefFunction_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceDefFunction || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceDefFunction))
+#define OrgApacheLuceneQueriesFunctionValuesourceDefFunction_
 
-#define OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceMultiFunction 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceMultiFunction 1
 #include "org/apache/lucene/queries/function/valuesource/MultiFunction.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
@@ -25,6 +25,13 @@
 @protocol JavaUtilList;
 @protocol JavaUtilMap;
 
+/*!
+ @brief <code>ValueSource</code> implementation which only returns the values from the provided
+ ValueSources which are available for a particular docId.
+ Consequently, when combined
+ with a <code>ConstValueSource</code>, this function serves as a way to return a default
+ value when the values for a field are unavailable.
+ */
 @interface OrgApacheLuceneQueriesFunctionValuesourceDefFunction : OrgApacheLuceneQueriesFunctionValuesourceMultiFunction
 
 #pragma mark Public
@@ -46,8 +53,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceDefFunction_init
 
 FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceDefFunction *new_OrgApacheLuceneQueriesFunctionValuesourceDefFunction_initWithJavaUtilList_(id<JavaUtilList> sources) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceDefFunction *create_OrgApacheLuceneQueriesFunctionValuesourceDefFunction_initWithJavaUtilList_(id<JavaUtilList> sources);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceDefFunction)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionValuesourceDefFunction_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceDefFunction")

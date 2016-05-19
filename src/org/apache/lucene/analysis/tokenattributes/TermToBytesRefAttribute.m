@@ -5,7 +5,6 @@
 
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/analysis/tokenattributes/TermToBytesRefAttribute.h"
-#include "org/apache/lucene/util/BytesRef.h"
 
 @interface OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute : NSObject
 

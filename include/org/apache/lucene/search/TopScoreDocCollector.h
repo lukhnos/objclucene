@@ -5,25 +5,38 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchTopScoreDocCollector_INCLUDE_ALL")
-#if OrgApacheLuceneSearchTopScoreDocCollector_RESTRICT
-#define OrgApacheLuceneSearchTopScoreDocCollector_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchTopScoreDocCollector")
+#ifdef RESTRICT_OrgApacheLuceneSearchTopScoreDocCollector
+#define INCLUDE_ALL_OrgApacheLuceneSearchTopScoreDocCollector 0
 #else
-#define OrgApacheLuceneSearchTopScoreDocCollector_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchTopScoreDocCollector 1
 #endif
-#undef OrgApacheLuceneSearchTopScoreDocCollector_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchTopScoreDocCollector
 
-#if !defined (_OrgApacheLuceneSearchTopScoreDocCollector_) && (OrgApacheLuceneSearchTopScoreDocCollector_INCLUDE_ALL || OrgApacheLuceneSearchTopScoreDocCollector_INCLUDE)
-#define _OrgApacheLuceneSearchTopScoreDocCollector_
+#if !defined (OrgApacheLuceneSearchTopScoreDocCollector_) && (INCLUDE_ALL_OrgApacheLuceneSearchTopScoreDocCollector || defined(INCLUDE_OrgApacheLuceneSearchTopScoreDocCollector))
+#define OrgApacheLuceneSearchTopScoreDocCollector_
 
-#define OrgApacheLuceneSearchTopDocsCollector_RESTRICT 1
-#define OrgApacheLuceneSearchTopDocsCollector_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchTopDocsCollector 1
+#define INCLUDE_OrgApacheLuceneSearchTopDocsCollector 1
 #include "org/apache/lucene/search/TopDocsCollector.h"
 
 @class IOSObjectArray;
 @class OrgApacheLuceneSearchScoreDoc;
 @class OrgApacheLuceneSearchTopDocs;
 
+/*!
+ @brief A <code>Collector</code> implementation that collects the top-scoring hits,
+ returning them as a <code>TopDocs</code>.
+ This is used by <code>IndexSearcher</code> to
+ implement <code>TopDocs</code>-based search. Hits are sorted by score descending
+ and then (when the scores are tied) docID ascending. When you create an
+ instance of this collector you should know in advance whether documents are
+ going to be collected in doc Id order or not.
+ <p><b>NOTE</b>: The values <code>Float.NaN</code> and
+ <code>Float.NEGATIVE_INFINITY</code> are not valid scores.  This
+ collector will not properly collect hits with such
+ scores.
+ */
 @interface OrgApacheLuceneSearchTopScoreDocCollector : OrgApacheLuceneSearchTopDocsCollector {
  @public
   OrgApacheLuceneSearchScoreDoc *pqTop_;
@@ -31,8 +44,26 @@
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new <code>TopScoreDocCollector</code> given the number of hits to
+ collect and whether documents are scored in order by the input
+ <code>Scorer</code> to <code>LeafCollector.setScorer(Scorer)</code>.
+ <p><b>NOTE</b>: The instances returned by this method
+ pre-allocate a full array of length
+ <code>numHits</code>, and fill the array with sentinel
+ objects.
+ */
 + (OrgApacheLuceneSearchTopScoreDocCollector *)createWithInt:(jint)numHits;
 
+/*!
+ @brief Creates a new <code>TopScoreDocCollector</code> given the number of hits to
+ collect, the bottom of the previous page, and whether documents are scored in order by the input
+ <code>Scorer</code> to <code>LeafCollector.setScorer(Scorer)</code>.
+ <p><b>NOTE</b>: The instances returned by this method
+ pre-allocate a full array of length
+ <code>numHits</code>, and fill the array with sentinel
+ objects.
+ */
 + (OrgApacheLuceneSearchTopScoreDocCollector *)createWithInt:(jint)numHits
                            withOrgApacheLuceneSearchScoreDoc:(OrgApacheLuceneSearchScoreDoc *)after;
 
@@ -63,11 +94,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopScoreDocCollector)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchTopScoreDocCollector_ScorerLeafCollector_) && (OrgApacheLuceneSearchTopScoreDocCollector_INCLUDE_ALL || OrgApacheLuceneSearchTopScoreDocCollector_ScorerLeafCollector_INCLUDE)
-#define _OrgApacheLuceneSearchTopScoreDocCollector_ScorerLeafCollector_
+#if !defined (OrgApacheLuceneSearchTopScoreDocCollector_ScorerLeafCollector_) && (INCLUDE_ALL_OrgApacheLuceneSearchTopScoreDocCollector || defined(INCLUDE_OrgApacheLuceneSearchTopScoreDocCollector_ScorerLeafCollector))
+#define OrgApacheLuceneSearchTopScoreDocCollector_ScorerLeafCollector_
 
-#define OrgApacheLuceneSearchLeafCollector_RESTRICT 1
-#define OrgApacheLuceneSearchLeafCollector_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchLeafCollector 1
+#define INCLUDE_OrgApacheLuceneSearchLeafCollector 1
 #include "org/apache/lucene/search/LeafCollector.h"
 
 @class OrgApacheLuceneSearchScorer;
@@ -97,4 +128,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopScoreDocCollector_ScorerLeafC
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchTopScoreDocCollector_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchTopScoreDocCollector")

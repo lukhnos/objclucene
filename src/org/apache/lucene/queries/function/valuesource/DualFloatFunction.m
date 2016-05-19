@@ -24,6 +24,10 @@
 
 - (jfloat)floatValWithInt:(jint)doc;
 
+/*!
+ @brief True if and only if <em>all</em> of the wrapped <code>FunctionValues</code> 
+ <code>exists</code> for the specified doc
+ */
 - (jboolean)existsWithInt:(jint)doc;
 
 - (NSString *)toStringWithInt:(jint)doc;
@@ -44,6 +48,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_$
 __attribute__((unused)) static void OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_$1 *self, OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction *outer$, OrgApacheLuceneQueriesFunctionFunctionValues *capture$0, OrgApacheLuceneQueriesFunctionFunctionValues *capture$1, OrgApacheLuceneQueriesFunctionValueSource *arg$0);
 
 __attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction *outer$, OrgApacheLuceneQueriesFunctionFunctionValues *capture$0, OrgApacheLuceneQueriesFunctionFunctionValues *capture$1, OrgApacheLuceneQueriesFunctionValueSource *arg$0) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction *outer$, OrgApacheLuceneQueriesFunctionFunctionValues *capture$0, OrgApacheLuceneQueriesFunctionFunctionValues *capture$1, OrgApacheLuceneQueriesFunctionValueSource *arg$0);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_$1)
 
@@ -77,7 +83,7 @@ withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunction
                                  withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext {
   OrgApacheLuceneQueriesFunctionFunctionValues *aVals = [((OrgApacheLuceneQueriesFunctionValueSource *) nil_chk(a_)) getValuesWithJavaUtilMap:context withOrgApacheLuceneIndexLeafReaderContext:readerContext];
   OrgApacheLuceneQueriesFunctionFunctionValues *bVals = [((OrgApacheLuceneQueriesFunctionValueSource *) nil_chk(b_)) getValuesWithJavaUtilMap:context withOrgApacheLuceneIndexLeafReaderContext:readerContext];
-  return [new_OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionValueSource_(self, aVals, bVals, self) autorelease];
+  return create_OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionValueSource_(self, aVals, bVals, self);
 }
 
 - (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
@@ -96,8 +102,8 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 }
 
 - (jboolean)isEqual:(id)o {
-  if ([self getClass] != [nil_chk(o) getClass]) return false;
-  OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction *other = (OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction *) check_class_cast(o, [OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction class]);
+  if ([self getClass] != (id) [nil_chk(o) getClass]) return false;
+  OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction *other = (OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction *) cast_chk(o, [OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction class]);
   return [((OrgApacheLuceneQueriesFunctionValueSource *) nil_chk(self->a_)) isEqual:other->a_] && [((OrgApacheLuceneQueriesFunctionValueSource *) nil_chk(self->b_)) isEqual:other->b_];
 }
 
@@ -192,9 +198,11 @@ void OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_$1_initWithOrgAp
 }
 
 OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction *outer$, OrgApacheLuceneQueriesFunctionFunctionValues *capture$0, OrgApacheLuceneQueriesFunctionFunctionValues *capture$1, OrgApacheLuceneQueriesFunctionValueSource *arg$0) {
-  OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_$1 *self = [OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_$1 alloc];
-  OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionValueSource_(self, outer$, capture$0, capture$1, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_$1, initWithOrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionValueSource_, outer$, capture$0, capture$1, arg$0)
+}
+
+OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction *outer$, OrgApacheLuceneQueriesFunctionFunctionValues *capture$0, OrgApacheLuceneQueriesFunctionFunctionValues *capture$1, OrgApacheLuceneQueriesFunctionValueSource *arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_$1, initWithOrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionValueSource_, outer$, capture$0, capture$1, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_$1)

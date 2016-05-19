@@ -31,8 +31,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "IndexDeletionPolicy", NULL, 0x4, NULL, NULL },
-    { "onInitWithJavaUtilList:", "onInit", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "onCommitWithJavaUtilList:", "onCommit", "V", 0x401, "Ljava.io.IOException;", NULL },
+    { "onInitWithJavaUtilList:", "onInit", "V", 0x401, "Ljava.io.IOException;", "(Ljava/util/List<+Lorg/apache/lucene/index/IndexCommit;>;)V" },
+    { "onCommitWithJavaUtilList:", "onCommit", "V", 0x401, "Ljava.io.IOException;", "(Ljava/util/List<+Lorg/apache/lucene/index/IndexCommit;>;)V" },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexDeletionPolicy = { 2, "IndexDeletionPolicy", "org.apache.lucene.index", NULL, 0x401, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexIndexDeletionPolicy;

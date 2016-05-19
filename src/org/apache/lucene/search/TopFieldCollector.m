@@ -39,8 +39,9 @@
 
 @end
 
-static IOSObjectArray *OrgApacheLuceneSearchTopFieldCollector_EMPTY_SCOREDOCS_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchTopFieldCollector, EMPTY_SCOREDOCS_, IOSObjectArray *)
+inline IOSObjectArray *OrgApacheLuceneSearchTopFieldCollector_get_EMPTY_SCOREDOCS();
+static IOSObjectArray *OrgApacheLuceneSearchTopFieldCollector_EMPTY_SCOREDOCS;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchTopFieldCollector, EMPTY_SCOREDOCS, IOSObjectArray *)
 
 __attribute__((unused)) static void OrgApacheLuceneSearchTopFieldCollector_initWithOrgApacheLuceneUtilPriorityQueue_withInt_withBoolean_withBoolean_(OrgApacheLuceneSearchTopFieldCollector *self, OrgApacheLuceneUtilPriorityQueue *pq, jint numHits, jboolean fillFields, jboolean needsScores);
 
@@ -139,6 +140,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchTopFieldCollector_NonSc
 
 __attribute__((unused)) static OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector *new_OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withInt_withBoolean_(OrgApacheLuceneSearchSort *sort, OrgApacheLuceneSearchFieldValueHitQueue *queue, jint numHits, jboolean fillFields) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector *create_OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withInt_withBoolean_(OrgApacheLuceneSearchSort *sort, OrgApacheLuceneSearchFieldValueHitQueue *queue, jint numHits, jboolean fillFields);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector)
 
 @interface OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$1 : OrgApacheLuceneSearchTopFieldCollector_OneComparatorLeafCollector {
@@ -162,6 +165,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchTopFieldCollector_NonSc
 
 __attribute__((unused)) static OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$1 *new_OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$1_initWithOrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_withOrgApacheLuceneSearchLeafFieldComparator_withInt_(OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector *outer$, id<OrgApacheLuceneSearchLeafFieldComparator> arg$0, jint arg$1) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$1 *create_OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$1_initWithOrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_withOrgApacheLuceneSearchLeafFieldComparator_withInt_(OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector *outer$, id<OrgApacheLuceneSearchLeafFieldComparator> arg$0, jint arg$1);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$1)
 
 @interface OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$2 : OrgApacheLuceneSearchTopFieldCollector_MultiComparatorLeafCollector {
@@ -184,6 +189,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$
 __attribute__((unused)) static void OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$2_initWithOrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_(OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$2 *self, OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector *outer$, IOSObjectArray *arg$0, IOSIntArray *arg$1);
 
 __attribute__((unused)) static OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$2 *new_OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$2_initWithOrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_(OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector *outer$, IOSObjectArray *arg$0, IOSIntArray *arg$1) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$2 *create_OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$2_initWithOrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_(OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector *outer$, IOSObjectArray *arg$0, IOSIntArray *arg$1);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$2)
 
@@ -209,6 +216,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchTopFieldCollector_Scori
 
 __attribute__((unused)) static OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector *new_OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withInt_withBoolean_(OrgApacheLuceneSearchSort *sort, OrgApacheLuceneSearchFieldValueHitQueue *queue, jint numHits, jboolean fillFields) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector *create_OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withInt_withBoolean_(OrgApacheLuceneSearchSort *sort, OrgApacheLuceneSearchFieldValueHitQueue *queue, jint numHits, jboolean fillFields);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector)
 
 @interface OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$1 : OrgApacheLuceneSearchTopFieldCollector_OneComparatorLeafCollector {
@@ -232,6 +241,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchTopFieldCollector_Scori
 
 __attribute__((unused)) static OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$1 *new_OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$1_initWithOrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparator_withInt_(OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector *outer$, id<OrgApacheLuceneSearchLeafFieldComparator> arg$0, jint arg$1) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$1 *create_OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$1_initWithOrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparator_withInt_(OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector *outer$, id<OrgApacheLuceneSearchLeafFieldComparator> arg$0, jint arg$1);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$1)
 
 @interface OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$2 : OrgApacheLuceneSearchTopFieldCollector_MultiComparatorLeafCollector {
@@ -254,6 +265,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreColl
 __attribute__((unused)) static void OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$2_initWithOrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_(OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$2 *self, OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector *outer$, IOSObjectArray *arg$0, IOSIntArray *arg$1);
 
 __attribute__((unused)) static OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$2 *new_OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$2_initWithOrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_(OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector *outer$, IOSObjectArray *arg$0, IOSIntArray *arg$1) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$2 *create_OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$2_initWithOrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_(OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector *outer$, IOSObjectArray *arg$0, IOSIntArray *arg$1);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$2)
 
@@ -279,6 +292,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchTopFieldCollector_Scori
 
 __attribute__((unused)) static OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector *new_OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withInt_withBoolean_(OrgApacheLuceneSearchSort *sort, OrgApacheLuceneSearchFieldValueHitQueue *queue, jint numHits, jboolean fillFields) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector *create_OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withInt_withBoolean_(OrgApacheLuceneSearchSort *sort, OrgApacheLuceneSearchFieldValueHitQueue *queue, jint numHits, jboolean fillFields);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector)
 
 @interface OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$1 : OrgApacheLuceneSearchTopFieldCollector_OneComparatorLeafCollector {
@@ -302,6 +317,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchTopFieldCollector_Scori
 
 __attribute__((unused)) static OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$1 *new_OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$1_initWithOrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparator_withInt_(OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector *outer$, id<OrgApacheLuceneSearchLeafFieldComparator> arg$0, jint arg$1) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$1 *create_OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$1_initWithOrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparator_withInt_(OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector *outer$, id<OrgApacheLuceneSearchLeafFieldComparator> arg$0, jint arg$1);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$1)
 
 @interface OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$2 : OrgApacheLuceneSearchTopFieldCollector_MultiComparatorLeafCollector {
@@ -324,6 +341,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollec
 __attribute__((unused)) static void OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$2_initWithOrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_(OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$2 *self, OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector *outer$, IOSObjectArray *arg$0, IOSIntArray *arg$1);
 
 __attribute__((unused)) static OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$2 *new_OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$2_initWithOrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_(OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector *outer$, IOSObjectArray *arg$0, IOSIntArray *arg$1) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$2 *create_OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$2_initWithOrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_(OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector *outer$, IOSObjectArray *arg$0, IOSIntArray *arg$1);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$2)
 
@@ -357,6 +376,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchTopFieldCollector_Pagin
 
 __attribute__((unused)) static OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector *new_OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withOrgApacheLuceneSearchFieldDoc_withInt_withBoolean_withBoolean_withBoolean_(OrgApacheLuceneSearchSort *sort, OrgApacheLuceneSearchFieldValueHitQueue *queue, OrgApacheLuceneSearchFieldDoc *after, jint numHits, jboolean fillFields, jboolean trackDocScores, jboolean trackMaxScore) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector *create_OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withOrgApacheLuceneSearchFieldDoc_withInt_withBoolean_withBoolean_withBoolean_(OrgApacheLuceneSearchSort *sort, OrgApacheLuceneSearchFieldValueHitQueue *queue, OrgApacheLuceneSearchFieldDoc *after, jint numHits, jboolean fillFields, jboolean trackDocScores, jboolean trackMaxScore);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector)
 
 @interface OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_$1 : OrgApacheLuceneSearchTopFieldCollector_MultiComparatorLeafCollector {
@@ -381,6 +402,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_
 __attribute__((unused)) static void OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_$1_initWithOrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_withInt_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_(OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_$1 *self, OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector *outer$, jint capture$0, IOSObjectArray *arg$0, IOSIntArray *arg$1);
 
 __attribute__((unused)) static OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_$1 *new_OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_$1_initWithOrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_withInt_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_(OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector *outer$, jint capture$0, IOSObjectArray *arg$0, IOSIntArray *arg$1) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_$1 *create_OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_$1_initWithOrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_withInt_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_(OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector *outer$, jint capture$0, IOSObjectArray *arg$0, IOSIntArray *arg$1);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_$1)
 
@@ -435,9 +458,9 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchTopFieldCollector)
 - (void)populateResultsWithOrgApacheLuceneSearchScoreDocArray:(IOSObjectArray *)results
                                                       withInt:(jint)howMany {
   if (fillFields_) {
-    OrgApacheLuceneSearchFieldValueHitQueue *queue = (OrgApacheLuceneSearchFieldValueHitQueue *) check_class_cast(pq_, [OrgApacheLuceneSearchFieldValueHitQueue class]);
+    OrgApacheLuceneSearchFieldValueHitQueue *queue = (OrgApacheLuceneSearchFieldValueHitQueue *) cast_chk(pq_, [OrgApacheLuceneSearchFieldValueHitQueue class]);
     for (jint i = howMany - 1; i >= 0; i--) {
-      IOSObjectArray_Set(nil_chk(results), i, [queue fillFieldsWithOrgApacheLuceneSearchFieldValueHitQueue_Entry:[((OrgApacheLuceneSearchFieldValueHitQueue *) nil_chk(queue)) pop]]);
+      IOSObjectArray_Set(nil_chk(results), i, [((OrgApacheLuceneSearchFieldValueHitQueue *) nil_chk(queue)) fillFieldsWithOrgApacheLuceneSearchFieldValueHitQueue_Entry:[queue pop]]);
     }
   }
   else {
@@ -451,14 +474,14 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchTopFieldCollector)
 - (OrgApacheLuceneSearchTopDocs *)newTopDocsWithOrgApacheLuceneSearchScoreDocArray:(IOSObjectArray *)results
                                                                            withInt:(jint)start {
   if (results == nil) {
-    results = OrgApacheLuceneSearchTopFieldCollector_EMPTY_SCOREDOCS_;
+    results = OrgApacheLuceneSearchTopFieldCollector_EMPTY_SCOREDOCS;
     maxScore_ = JavaLangFloat_NaN;
   }
-  return [new_OrgApacheLuceneSearchTopFieldDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_withOrgApacheLuceneSearchSortFieldArray_withFloat_(totalHits_, results, [((OrgApacheLuceneSearchFieldValueHitQueue *) nil_chk(((OrgApacheLuceneSearchFieldValueHitQueue *) check_class_cast(pq_, [OrgApacheLuceneSearchFieldValueHitQueue class])))) getFields], maxScore_) autorelease];
+  return create_OrgApacheLuceneSearchTopFieldDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_withOrgApacheLuceneSearchSortFieldArray_withFloat_(totalHits_, results, [((OrgApacheLuceneSearchFieldValueHitQueue *) nil_chk(((OrgApacheLuceneSearchFieldValueHitQueue *) cast_chk(pq_, [OrgApacheLuceneSearchFieldValueHitQueue class])))) getFields], maxScore_);
 }
 
 - (OrgApacheLuceneSearchTopFieldDocs *)topDocs {
-  return (OrgApacheLuceneSearchTopFieldDocs *) check_class_cast([super topDocs], [OrgApacheLuceneSearchTopFieldDocs class]);
+  return (OrgApacheLuceneSearchTopFieldDocs *) cast_chk([super topDocs], [OrgApacheLuceneSearchTopFieldDocs class]);
 }
 
 - (void)dealloc {
@@ -468,14 +491,14 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchTopFieldCollector)
 
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchTopFieldCollector class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneSearchTopFieldCollector_EMPTY_SCOREDOCS_, [IOSObjectArray newArrayWithLength:0 type:OrgApacheLuceneSearchScoreDoc_class_()]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneSearchTopFieldCollector_EMPTY_SCOREDOCS, [IOSObjectArray newArrayWithLength:0 type:OrgApacheLuceneSearchScoreDoc_class_()]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchTopFieldCollector)
   }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilPriorityQueue:withInt:withBoolean:withBoolean:", "TopFieldCollector", NULL, 0x2, NULL, NULL },
+    { "initWithOrgApacheLuceneUtilPriorityQueue:withInt:withBoolean:withBoolean:", "TopFieldCollector", NULL, 0x2, NULL, "(Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/search/FieldValueHitQueue$Entry;>;IZZ)V" },
     { "needsScores", NULL, "Z", 0x1, NULL, NULL },
     { "createWithOrgApacheLuceneSearchSort:withInt:withBoolean:withBoolean:withBoolean:", "create", "Lorg.apache.lucene.search.TopFieldCollector;", 0x9, "Ljava.io.IOException;", NULL },
     { "createWithOrgApacheLuceneSearchSort:withInt:withOrgApacheLuceneSearchFieldDoc:withBoolean:withBoolean:withBoolean:", "create", "Lorg.apache.lucene.search.TopFieldCollector;", 0x9, "Ljava.io.IOException;", NULL },
@@ -487,7 +510,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchTopFieldCollector)
     { "topDocs", NULL, "Lorg.apache.lucene.search.TopFieldDocs;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "EMPTY_SCOREDOCS_", NULL, 0x1a, "[Lorg.apache.lucene.search.ScoreDoc;", &OrgApacheLuceneSearchTopFieldCollector_EMPTY_SCOREDOCS_, NULL, .constantValue.asLong = 0 },
+    { "EMPTY_SCOREDOCS", "EMPTY_SCOREDOCS", 0x1a, "[Lorg.apache.lucene.search.ScoreDoc;", &OrgApacheLuceneSearchTopFieldCollector_EMPTY_SCOREDOCS, NULL, .constantValue.asLong = 0 },
     { "fillFields_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
     { "maxScore_", NULL, 0x0, "F", NULL, NULL, .constantValue.asLong = 0 },
     { "numHits_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
@@ -521,36 +544,36 @@ OrgApacheLuceneSearchTopFieldCollector *OrgApacheLuceneSearchTopFieldCollector_c
 OrgApacheLuceneSearchTopFieldCollector *OrgApacheLuceneSearchTopFieldCollector_createWithOrgApacheLuceneSearchSort_withInt_withOrgApacheLuceneSearchFieldDoc_withBoolean_withBoolean_withBoolean_(OrgApacheLuceneSearchSort *sort, jint numHits, OrgApacheLuceneSearchFieldDoc *after, jboolean fillFields, jboolean trackDocScores, jboolean trackMaxScore) {
   OrgApacheLuceneSearchTopFieldCollector_initialize();
   if (((IOSObjectArray *) nil_chk(((OrgApacheLuceneSearchSort *) nil_chk(sort))->fields_))->size_ == 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"Sort must contain at least one field") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"Sort must contain at least one field");
   }
   if (numHits <= 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"numHits must be > 0; please use TotalHitCountCollector if you just need the total hit count") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"numHits must be > 0; please use TotalHitCountCollector if you just need the total hit count");
   }
   OrgApacheLuceneSearchFieldValueHitQueue *queue = OrgApacheLuceneSearchFieldValueHitQueue_createWithOrgApacheLuceneSearchSortFieldArray_withInt_(sort->fields_, numHits);
   if (after == nil) {
     if (trackMaxScore) {
-      return [new_OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withInt_withBoolean_(sort, queue, numHits, fillFields) autorelease];
+      return create_OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withInt_withBoolean_(sort, queue, numHits, fillFields);
     }
     else if (trackDocScores) {
-      return [new_OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withInt_withBoolean_(sort, queue, numHits, fillFields) autorelease];
+      return create_OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withInt_withBoolean_(sort, queue, numHits, fillFields);
     }
     else {
-      return [new_OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withInt_withBoolean_(sort, queue, numHits, fillFields) autorelease];
+      return create_OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withInt_withBoolean_(sort, queue, numHits, fillFields);
     }
   }
   else {
     if (after->fields_ == nil) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"after.fields wasn't set; you must pass fillFields=true for the previous search") autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"after.fields wasn't set; you must pass fillFields=true for the previous search");
     }
-    if (((IOSObjectArray *) nil_chk(after->fields_))->size_ != ((IOSObjectArray *) nil_chk([sort getSort]))->size_) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$I", @"after.fields has ", after->fields_->size_, @" values but sort has ", ((IOSObjectArray *) nil_chk([sort getSort]))->size_)) autorelease];
+    if (after->fields_->size_ != ((IOSObjectArray *) nil_chk([sort getSort]))->size_) {
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$I", @"after.fields has ", ((IOSObjectArray *) nil_chk(after->fields_))->size_, @" values but sort has ", ((IOSObjectArray *) nil_chk([sort getSort]))->size_));
     }
-    return [new_OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withOrgApacheLuceneSearchFieldDoc_withInt_withBoolean_withBoolean_withBoolean_(sort, queue, after, numHits, fillFields, trackDocScores, trackMaxScore) autorelease];
+    return create_OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withOrgApacheLuceneSearchFieldDoc_withInt_withBoolean_withBoolean_withBoolean_(sort, queue, after, numHits, fillFields, trackDocScores, trackMaxScore);
   }
 }
 
 void OrgApacheLuceneSearchTopFieldCollector_addWithInt_withInt_withFloat_(OrgApacheLuceneSearchTopFieldCollector *self, jint slot, jint doc, jfloat score) {
-  JreStrongAssign(&self->bottom_, [((OrgApacheLuceneUtilPriorityQueue *) nil_chk(self->pq_)) addWithId:[new_OrgApacheLuceneSearchFieldValueHitQueue_Entry_initWithInt_withInt_withFloat_(slot, self->docBase_ + doc, score) autorelease]]);
+  JreStrongAssign(&self->bottom_, [((OrgApacheLuceneUtilPriorityQueue *) nil_chk(self->pq_)) addWithId:create_OrgApacheLuceneSearchFieldValueHitQueue_Entry_initWithInt_withInt_withFloat_(slot, self->docBase_ + doc, score)]);
   self->queueFull_ = (self->totalHits_ == self->numHits_);
 }
 
@@ -755,10 +778,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopFieldCollector_MultiCom
   IOSObjectArray *comparators = [((OrgApacheLuceneSearchFieldValueHitQueue *) nil_chk(queue_)) getComparatorsWithOrgApacheLuceneIndexLeafReaderContext:context];
   IOSIntArray *reverseMul = [queue_ getReverseMul];
   if (((IOSObjectArray *) nil_chk(comparators))->size_ == 1) {
-    return [new_OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$1_initWithOrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_withOrgApacheLuceneSearchLeafFieldComparator_withInt_(self, IOSObjectArray_Get(comparators, 0), IOSIntArray_Get(nil_chk(reverseMul), 0)) autorelease];
+    return create_OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$1_initWithOrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_withOrgApacheLuceneSearchLeafFieldComparator_withInt_(self, IOSObjectArray_Get(comparators, 0), IOSIntArray_Get(nil_chk(reverseMul), 0));
   }
   else {
-    return [new_OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$2_initWithOrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_(self, comparators, reverseMul) autorelease];
+    return create_OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$2_initWithOrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_(self, comparators, reverseMul);
   }
 }
 
@@ -769,7 +792,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopFieldCollector_MultiCom
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSort:withOrgApacheLuceneSearchFieldValueHitQueue:withInt:withBoolean:", "NonScoringCollector", NULL, 0x1, NULL, NULL },
+    { "initWithOrgApacheLuceneSearchSort:withOrgApacheLuceneSearchFieldValueHitQueue:withInt:withBoolean:", "NonScoringCollector", NULL, 0x1, NULL, "(Lorg/apache/lucene/search/Sort;Lorg/apache/lucene/search/FieldValueHitQueue<Lorg/apache/lucene/search/FieldValueHitQueue$Entry;>;IZ)V" },
     { "getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:", "getLeafCollector", "Lorg.apache.lucene.search.LeafCollector;", 0x1, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -787,9 +810,11 @@ void OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_initWithOrgApach
 }
 
 OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector *new_OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withInt_withBoolean_(OrgApacheLuceneSearchSort *sort, OrgApacheLuceneSearchFieldValueHitQueue *queue, jint numHits, jboolean fillFields) {
-  OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector *self = [OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector alloc];
-  OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withInt_withBoolean_(self, sort, queue, numHits, fillFields);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector, initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withInt_withBoolean_, sort, queue, numHits, fillFields)
+}
+
+OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector *create_OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withInt_withBoolean_(OrgApacheLuceneSearchSort *sort, OrgApacheLuceneSearchFieldValueHitQueue *queue, jint numHits, jboolean fillFields) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector, initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withInt_withBoolean_, sort, queue, numHits, fillFields)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector)
@@ -804,7 +829,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopFieldCollector_NonScori
     }
     [comparator_ copy__WithInt:((OrgApacheLuceneSearchFieldValueHitQueue_Entry *) nil_chk(this$0_->bottom_))->slot_ withInt:doc];
     OrgApacheLuceneSearchTopFieldCollector_updateBottomWithInt_(this$0_, doc);
-    [comparator_ setBottomWithInt:this$0_->bottom_->slot_];
+    [comparator_ setBottomWithInt:((OrgApacheLuceneSearchFieldValueHitQueue_Entry *) nil_chk(this$0_->bottom_))->slot_];
   }
   else {
     jint slot = this$0_->totalHits_ - 1;
@@ -849,9 +874,11 @@ void OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$1_initWithOrgAp
 }
 
 OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$1 *new_OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$1_initWithOrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_withOrgApacheLuceneSearchLeafFieldComparator_withInt_(OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector *outer$, id<OrgApacheLuceneSearchLeafFieldComparator> arg$0, jint arg$1) {
-  OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$1 *self = [OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$1 alloc];
-  OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$1_initWithOrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_withOrgApacheLuceneSearchLeafFieldComparator_withInt_(self, outer$, arg$0, arg$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$1, initWithOrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_withOrgApacheLuceneSearchLeafFieldComparator_withInt_, outer$, arg$0, arg$1)
+}
+
+OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$1 *create_OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$1_initWithOrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_withOrgApacheLuceneSearchLeafFieldComparator_withInt_(OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector *outer$, id<OrgApacheLuceneSearchLeafFieldComparator> arg$0, jint arg$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$1, initWithOrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_withOrgApacheLuceneSearchLeafFieldComparator_withInt_, outer$, arg$0, arg$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$1)
@@ -866,7 +893,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopFieldCollector_NonScori
     }
     OrgApacheLuceneSearchTopFieldCollector_MultiComparatorLeafCollector_copy__WithInt_withInt_(self, ((OrgApacheLuceneSearchFieldValueHitQueue_Entry *) nil_chk(this$0_->bottom_))->slot_, doc);
     OrgApacheLuceneSearchTopFieldCollector_updateBottomWithInt_(this$0_, doc);
-    OrgApacheLuceneSearchTopFieldCollector_MultiComparatorLeafCollector_setBottomWithInt_(self, this$0_->bottom_->slot_);
+    OrgApacheLuceneSearchTopFieldCollector_MultiComparatorLeafCollector_setBottomWithInt_(self, ((OrgApacheLuceneSearchFieldValueHitQueue_Entry *) nil_chk(this$0_->bottom_))->slot_);
   }
   else {
     jint slot = this$0_->totalHits_ - 1;
@@ -911,9 +938,11 @@ void OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$2_initWithOrgAp
 }
 
 OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$2 *new_OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$2_initWithOrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_(OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector *outer$, IOSObjectArray *arg$0, IOSIntArray *arg$1) {
-  OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$2 *self = [OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$2 alloc];
-  OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$2_initWithOrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_(self, outer$, arg$0, arg$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$2, initWithOrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_, outer$, arg$0, arg$1)
+}
+
+OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$2 *create_OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$2_initWithOrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_(OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector *outer$, IOSObjectArray *arg$0, IOSIntArray *arg$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$2, initWithOrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_, outer$, arg$0, arg$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopFieldCollector_NonScoringCollector_$2)
@@ -933,10 +962,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopFieldCollector_NonScori
   IOSObjectArray *comparators = [((OrgApacheLuceneSearchFieldValueHitQueue *) nil_chk(queue_)) getComparatorsWithOrgApacheLuceneIndexLeafReaderContext:context];
   IOSIntArray *reverseMul = [queue_ getReverseMul];
   if (((IOSObjectArray *) nil_chk(comparators))->size_ == 1) {
-    return [new_OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$1_initWithOrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparator_withInt_(self, IOSObjectArray_Get(comparators, 0), IOSIntArray_Get(nil_chk(reverseMul), 0)) autorelease];
+    return create_OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$1_initWithOrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparator_withInt_(self, IOSObjectArray_Get(comparators, 0), IOSIntArray_Get(nil_chk(reverseMul), 0));
   }
   else {
-    return [new_OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$2_initWithOrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_(self, comparators, reverseMul) autorelease];
+    return create_OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$2_initWithOrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_(self, comparators, reverseMul);
   }
 }
 
@@ -947,7 +976,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopFieldCollector_NonScori
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSort:withOrgApacheLuceneSearchFieldValueHitQueue:withInt:withBoolean:", "ScoringNoMaxScoreCollector", NULL, 0x1, NULL, NULL },
+    { "initWithOrgApacheLuceneSearchSort:withOrgApacheLuceneSearchFieldValueHitQueue:withInt:withBoolean:", "ScoringNoMaxScoreCollector", NULL, 0x1, NULL, "(Lorg/apache/lucene/search/Sort;Lorg/apache/lucene/search/FieldValueHitQueue<Lorg/apache/lucene/search/FieldValueHitQueue$Entry;>;IZ)V" },
     { "getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:", "getLeafCollector", "Lorg.apache.lucene.search.LeafCollector;", 0x1, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -965,9 +994,11 @@ void OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_initWithO
 }
 
 OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector *new_OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withInt_withBoolean_(OrgApacheLuceneSearchSort *sort, OrgApacheLuceneSearchFieldValueHitQueue *queue, jint numHits, jboolean fillFields) {
-  OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector *self = [OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector alloc];
-  OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withInt_withBoolean_(self, sort, queue, numHits, fillFields);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector, initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withInt_withBoolean_, sort, queue, numHits, fillFields)
+}
+
+OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector *create_OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withInt_withBoolean_(OrgApacheLuceneSearchSort *sort, OrgApacheLuceneSearchFieldValueHitQueue *queue, jint numHits, jboolean fillFields) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector, initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withInt_withBoolean_, sort, queue, numHits, fillFields)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector)
@@ -983,7 +1014,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopFieldCollector_ScoringN
     jfloat score = [((OrgApacheLuceneSearchScorer *) nil_chk(scorer_)) score];
     [comparator_ copy__WithInt:((OrgApacheLuceneSearchFieldValueHitQueue_Entry *) nil_chk(this$0_->bottom_))->slot_ withInt:doc];
     OrgApacheLuceneSearchTopFieldCollector_updateBottomWithInt_withFloat_(this$0_, doc, score);
-    [comparator_ setBottomWithInt:this$0_->bottom_->slot_];
+    [comparator_ setBottomWithInt:((OrgApacheLuceneSearchFieldValueHitQueue_Entry *) nil_chk(this$0_->bottom_))->slot_];
   }
   else {
     jfloat score = [((OrgApacheLuceneSearchScorer *) nil_chk(scorer_)) score];
@@ -1029,9 +1060,11 @@ void OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$1_initWi
 }
 
 OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$1 *new_OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$1_initWithOrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparator_withInt_(OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector *outer$, id<OrgApacheLuceneSearchLeafFieldComparator> arg$0, jint arg$1) {
-  OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$1 *self = [OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$1 alloc];
-  OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$1_initWithOrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparator_withInt_(self, outer$, arg$0, arg$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$1, initWithOrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparator_withInt_, outer$, arg$0, arg$1)
+}
+
+OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$1 *create_OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$1_initWithOrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparator_withInt_(OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector *outer$, id<OrgApacheLuceneSearchLeafFieldComparator> arg$0, jint arg$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$1, initWithOrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparator_withInt_, outer$, arg$0, arg$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$1)
@@ -1047,7 +1080,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopFieldCollector_ScoringN
     jfloat score = [((OrgApacheLuceneSearchScorer *) nil_chk(scorer_)) score];
     OrgApacheLuceneSearchTopFieldCollector_MultiComparatorLeafCollector_copy__WithInt_withInt_(self, ((OrgApacheLuceneSearchFieldValueHitQueue_Entry *) nil_chk(this$0_->bottom_))->slot_, doc);
     OrgApacheLuceneSearchTopFieldCollector_updateBottomWithInt_withFloat_(this$0_, doc, score);
-    OrgApacheLuceneSearchTopFieldCollector_MultiComparatorLeafCollector_setBottomWithInt_(self, this$0_->bottom_->slot_);
+    OrgApacheLuceneSearchTopFieldCollector_MultiComparatorLeafCollector_setBottomWithInt_(self, ((OrgApacheLuceneSearchFieldValueHitQueue_Entry *) nil_chk(this$0_->bottom_))->slot_);
   }
   else {
     jfloat score = [((OrgApacheLuceneSearchScorer *) nil_chk(scorer_)) score];
@@ -1093,9 +1126,11 @@ void OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$2_initWi
 }
 
 OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$2 *new_OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$2_initWithOrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_(OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector *outer$, IOSObjectArray *arg$0, IOSIntArray *arg$1) {
-  OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$2 *self = [OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$2 alloc];
-  OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$2_initWithOrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_(self, outer$, arg$0, arg$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$2, initWithOrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_, outer$, arg$0, arg$1)
+}
+
+OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$2 *create_OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$2_initWithOrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_(OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector *outer$, IOSObjectArray *arg$0, IOSIntArray *arg$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$2, initWithOrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_, outer$, arg$0, arg$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_$2)
@@ -1115,10 +1150,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopFieldCollector_ScoringN
   IOSObjectArray *comparators = [((OrgApacheLuceneSearchFieldValueHitQueue *) nil_chk(queue_)) getComparatorsWithOrgApacheLuceneIndexLeafReaderContext:context];
   IOSIntArray *reverseMul = [queue_ getReverseMul];
   if (((IOSObjectArray *) nil_chk(comparators))->size_ == 1) {
-    return [new_OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$1_initWithOrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparator_withInt_(self, IOSObjectArray_Get(comparators, 0), IOSIntArray_Get(nil_chk(reverseMul), 0)) autorelease];
+    return create_OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$1_initWithOrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparator_withInt_(self, IOSObjectArray_Get(comparators, 0), IOSIntArray_Get(nil_chk(reverseMul), 0));
   }
   else {
-    return [new_OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$2_initWithOrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_(self, comparators, reverseMul) autorelease];
+    return create_OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$2_initWithOrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_(self, comparators, reverseMul);
   }
 }
 
@@ -1129,7 +1164,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopFieldCollector_ScoringN
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSort:withOrgApacheLuceneSearchFieldValueHitQueue:withInt:withBoolean:", "ScoringMaxScoreCollector", NULL, 0x1, NULL, NULL },
+    { "initWithOrgApacheLuceneSearchSort:withOrgApacheLuceneSearchFieldValueHitQueue:withInt:withBoolean:", "ScoringMaxScoreCollector", NULL, 0x1, NULL, "(Lorg/apache/lucene/search/Sort;Lorg/apache/lucene/search/FieldValueHitQueue<Lorg/apache/lucene/search/FieldValueHitQueue$Entry;>;IZ)V" },
     { "getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:", "getLeafCollector", "Lorg.apache.lucene.search.LeafCollector;", 0x1, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -1148,9 +1183,11 @@ void OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_initWithOrg
 }
 
 OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector *new_OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withInt_withBoolean_(OrgApacheLuceneSearchSort *sort, OrgApacheLuceneSearchFieldValueHitQueue *queue, jint numHits, jboolean fillFields) {
-  OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector *self = [OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector alloc];
-  OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withInt_withBoolean_(self, sort, queue, numHits, fillFields);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector, initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withInt_withBoolean_, sort, queue, numHits, fillFields)
+}
+
+OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector *create_OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withInt_withBoolean_(OrgApacheLuceneSearchSort *sort, OrgApacheLuceneSearchFieldValueHitQueue *queue, jint numHits, jboolean fillFields) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector, initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withInt_withBoolean_, sort, queue, numHits, fillFields)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector)
@@ -1169,7 +1206,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopFieldCollector_ScoringM
     }
     [comparator_ copy__WithInt:((OrgApacheLuceneSearchFieldValueHitQueue_Entry *) nil_chk(this$0_->bottom_))->slot_ withInt:doc];
     OrgApacheLuceneSearchTopFieldCollector_updateBottomWithInt_withFloat_(this$0_, doc, score);
-    [comparator_ setBottomWithInt:this$0_->bottom_->slot_];
+    [comparator_ setBottomWithInt:((OrgApacheLuceneSearchFieldValueHitQueue_Entry *) nil_chk(this$0_->bottom_))->slot_];
   }
   else {
     jint slot = this$0_->totalHits_ - 1;
@@ -1214,9 +1251,11 @@ void OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$1_initWith
 }
 
 OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$1 *new_OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$1_initWithOrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparator_withInt_(OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector *outer$, id<OrgApacheLuceneSearchLeafFieldComparator> arg$0, jint arg$1) {
-  OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$1 *self = [OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$1 alloc];
-  OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$1_initWithOrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparator_withInt_(self, outer$, arg$0, arg$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$1, initWithOrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparator_withInt_, outer$, arg$0, arg$1)
+}
+
+OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$1 *create_OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$1_initWithOrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparator_withInt_(OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector *outer$, id<OrgApacheLuceneSearchLeafFieldComparator> arg$0, jint arg$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$1, initWithOrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparator_withInt_, outer$, arg$0, arg$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$1)
@@ -1235,7 +1274,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopFieldCollector_ScoringM
     }
     OrgApacheLuceneSearchTopFieldCollector_MultiComparatorLeafCollector_copy__WithInt_withInt_(self, ((OrgApacheLuceneSearchFieldValueHitQueue_Entry *) nil_chk(this$0_->bottom_))->slot_, doc);
     OrgApacheLuceneSearchTopFieldCollector_updateBottomWithInt_withFloat_(this$0_, doc, score);
-    OrgApacheLuceneSearchTopFieldCollector_MultiComparatorLeafCollector_setBottomWithInt_(self, this$0_->bottom_->slot_);
+    OrgApacheLuceneSearchTopFieldCollector_MultiComparatorLeafCollector_setBottomWithInt_(self, ((OrgApacheLuceneSearchFieldValueHitQueue_Entry *) nil_chk(this$0_->bottom_))->slot_);
   }
   else {
     jint slot = this$0_->totalHits_ - 1;
@@ -1280,9 +1319,11 @@ void OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$2_initWith
 }
 
 OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$2 *new_OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$2_initWithOrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_(OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector *outer$, IOSObjectArray *arg$0, IOSIntArray *arg$1) {
-  OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$2 *self = [OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$2 alloc];
-  OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$2_initWithOrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_(self, outer$, arg$0, arg$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$2, initWithOrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_, outer$, arg$0, arg$1)
+}
+
+OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$2 *create_OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$2_initWithOrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_(OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector *outer$, IOSObjectArray *arg$0, IOSIntArray *arg$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$2, initWithOrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_, outer$, arg$0, arg$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_$2)
@@ -1303,7 +1344,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopFieldCollector_ScoringM
 - (id<OrgApacheLuceneSearchLeafCollector>)getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
   docBase_ = ((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context))->docBase_;
   jint afterDoc = ((OrgApacheLuceneSearchFieldDoc *) nil_chk(after_))->doc_ - docBase_;
-  return [new_OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_$1_initWithOrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_withInt_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_(self, afterDoc, [((OrgApacheLuceneSearchFieldValueHitQueue *) nil_chk(queue_)) getComparatorsWithOrgApacheLuceneIndexLeafReaderContext:context], [queue_ getReverseMul]) autorelease];
+  return create_OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_$1_initWithOrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_withInt_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_(self, afterDoc, [((OrgApacheLuceneSearchFieldValueHitQueue *) nil_chk(queue_)) getComparatorsWithOrgApacheLuceneIndexLeafReaderContext:context], [queue_ getReverseMul]);
 }
 
 - (void)dealloc {
@@ -1314,7 +1355,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopFieldCollector_ScoringM
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSort:withOrgApacheLuceneSearchFieldValueHitQueue:withOrgApacheLuceneSearchFieldDoc:withInt:withBoolean:withBoolean:withBoolean:", "PagingFieldCollector", NULL, 0x1, NULL, NULL },
+    { "initWithOrgApacheLuceneSearchSort:withOrgApacheLuceneSearchFieldValueHitQueue:withOrgApacheLuceneSearchFieldDoc:withInt:withBoolean:withBoolean:withBoolean:", "PagingFieldCollector", NULL, 0x1, NULL, "(Lorg/apache/lucene/search/Sort;Lorg/apache/lucene/search/FieldValueHitQueue<Lorg/apache/lucene/search/FieldValueHitQueue$Entry;>;Lorg/apache/lucene/search/FieldDoc;IZZZ)V" },
     { "getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:", "getLeafCollector", "Lorg.apache.lucene.search.LeafCollector;", 0x1, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -1339,15 +1380,17 @@ void OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_initWithOrgApac
   self->maxScore_ = JavaLangFloat_NEGATIVE_INFINITY;
   IOSObjectArray *comparators = ((OrgApacheLuceneSearchFieldValueHitQueue *) nil_chk(queue))->comparators_;
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(comparators))->size_; i++) {
-    OrgApacheLuceneSearchFieldComparator *comparator = (OrgApacheLuceneSearchFieldComparator *) check_class_cast(IOSObjectArray_Get(comparators, i), [OrgApacheLuceneSearchFieldComparator class]);
+    OrgApacheLuceneSearchFieldComparator *comparator = IOSObjectArray_Get(comparators, i);
     [((OrgApacheLuceneSearchFieldComparator *) nil_chk(comparator)) setTopValueWithId:IOSObjectArray_Get(nil_chk(((OrgApacheLuceneSearchFieldDoc *) nil_chk(after))->fields_), i)];
   }
 }
 
 OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector *new_OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withOrgApacheLuceneSearchFieldDoc_withInt_withBoolean_withBoolean_withBoolean_(OrgApacheLuceneSearchSort *sort, OrgApacheLuceneSearchFieldValueHitQueue *queue, OrgApacheLuceneSearchFieldDoc *after, jint numHits, jboolean fillFields, jboolean trackDocScores, jboolean trackMaxScore) {
-  OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector *self = [OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector alloc];
-  OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withOrgApacheLuceneSearchFieldDoc_withInt_withBoolean_withBoolean_withBoolean_(self, sort, queue, after, numHits, fillFields, trackDocScores, trackMaxScore);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector, initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withOrgApacheLuceneSearchFieldDoc_withInt_withBoolean_withBoolean_withBoolean_, sort, queue, after, numHits, fillFields, trackDocScores, trackMaxScore)
+}
+
+OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector *create_OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withOrgApacheLuceneSearchFieldDoc_withInt_withBoolean_withBoolean_withBoolean_(OrgApacheLuceneSearchSort *sort, OrgApacheLuceneSearchFieldValueHitQueue *queue, OrgApacheLuceneSearchFieldDoc *after, jint numHits, jboolean fillFields, jboolean trackDocScores, jboolean trackMaxScore) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector, initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withOrgApacheLuceneSearchFieldDoc_withInt_withBoolean_withBoolean_withBoolean_, sort, queue, after, numHits, fillFields, trackDocScores, trackMaxScore)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector)
@@ -1379,7 +1422,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopFieldCollector_PagingFi
       score = [((OrgApacheLuceneSearchScorer *) nil_chk(scorer_)) score];
     }
     OrgApacheLuceneSearchTopFieldCollector_updateBottomWithInt_withFloat_(this$0_, doc, score);
-    OrgApacheLuceneSearchTopFieldCollector_MultiComparatorLeafCollector_setBottomWithInt_(self, this$0_->bottom_->slot_);
+    OrgApacheLuceneSearchTopFieldCollector_MultiComparatorLeafCollector_setBottomWithInt_(self, ((OrgApacheLuceneSearchFieldValueHitQueue_Entry *) nil_chk(this$0_->bottom_))->slot_);
   }
   else {
     this$0_->collectedHits_++;
@@ -1388,7 +1431,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopFieldCollector_PagingFi
     if (this$0_->trackDocScores_ && !this$0_->trackMaxScore_) {
       score = [((OrgApacheLuceneSearchScorer *) nil_chk(scorer_)) score];
     }
-    JreStrongAssign(&this$0_->bottom_, [((OrgApacheLuceneUtilPriorityQueue *) nil_chk(this$0_->pq_)) addWithId:[new_OrgApacheLuceneSearchFieldValueHitQueue_Entry_initWithInt_withInt_withFloat_(slot, this$0_->docBase_ + doc, score) autorelease]]);
+    JreStrongAssign(&this$0_->bottom_, [((OrgApacheLuceneUtilPriorityQueue *) nil_chk(this$0_->pq_)) addWithId:create_OrgApacheLuceneSearchFieldValueHitQueue_Entry_initWithInt_withInt_withFloat_(slot, this$0_->docBase_ + doc, score)]);
     this$0_->queueFull_ = (this$0_->collectedHits_ == this$0_->numHits_);
     if (this$0_->queueFull_) {
       OrgApacheLuceneSearchTopFieldCollector_MultiComparatorLeafCollector_setBottomWithInt_(self, ((OrgApacheLuceneSearchFieldValueHitQueue_Entry *) nil_chk(this$0_->bottom_))->slot_);
@@ -1432,9 +1475,11 @@ void OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_$1_initWithOrgA
 }
 
 OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_$1 *new_OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_$1_initWithOrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_withInt_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_(OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector *outer$, jint capture$0, IOSObjectArray *arg$0, IOSIntArray *arg$1) {
-  OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_$1 *self = [OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_$1 alloc];
-  OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_$1_initWithOrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_withInt_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_(self, outer$, capture$0, arg$0, arg$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_$1, initWithOrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_withInt_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_, outer$, capture$0, arg$0, arg$1)
+}
+
+OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_$1 *create_OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_$1_initWithOrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_withInt_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_(OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector *outer$, jint capture$0, IOSObjectArray *arg$0, IOSIntArray *arg$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_$1, initWithOrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_withInt_withOrgApacheLuceneSearchLeafFieldComparatorArray_withIntArray_, outer$, capture$0, arg$0, arg$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopFieldCollector_PagingFieldCollector_$1)

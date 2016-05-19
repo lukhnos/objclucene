@@ -5,29 +5,35 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_RESTRICT
-#define OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource 0
 #else
-#define OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_) && (OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_
+#if !defined (OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource))
+#define OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_
 
-#define OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource 1
 #include "org/apache/lucene/queries/function/valuesource/FieldCacheSource.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneQueriesFunctionFunctionValues;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Use a field value and find the Document Frequency within another field.
+ @since solr 4.0
+ */
 @interface OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource : OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource {
  @public
   NSString *qfield_;
 }
+
++ (NSString *)NAME;
 
 #pragma mark Public
 
@@ -49,15 +55,19 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqVal
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource, qfield_, NSString *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_NAME_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource, NAME_, NSString *)
+inline NSString *OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_get_NAME();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_NAME;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource, NAME, NSString *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_initWithNSString_withNSString_(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource *self, NSString *field, NSString *qfield);
 
 FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_initWithNSString_withNSString_(NSString *field, NSString *qfield) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource *create_OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_initWithNSString_withNSString_(NSString *field, NSString *qfield);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource")

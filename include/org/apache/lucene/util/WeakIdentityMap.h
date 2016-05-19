@@ -5,58 +5,157 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilWeakIdentityMap_INCLUDE_ALL")
-#if OrgApacheLuceneUtilWeakIdentityMap_RESTRICT
-#define OrgApacheLuceneUtilWeakIdentityMap_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilWeakIdentityMap")
+#ifdef RESTRICT_OrgApacheLuceneUtilWeakIdentityMap
+#define INCLUDE_ALL_OrgApacheLuceneUtilWeakIdentityMap 0
 #else
-#define OrgApacheLuceneUtilWeakIdentityMap_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilWeakIdentityMap 1
 #endif
-#undef OrgApacheLuceneUtilWeakIdentityMap_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilWeakIdentityMap
 
-#if !defined (_OrgApacheLuceneUtilWeakIdentityMap_) && (OrgApacheLuceneUtilWeakIdentityMap_INCLUDE_ALL || OrgApacheLuceneUtilWeakIdentityMap_INCLUDE)
-#define _OrgApacheLuceneUtilWeakIdentityMap_
+#if !defined (OrgApacheLuceneUtilWeakIdentityMap_) && (INCLUDE_ALL_OrgApacheLuceneUtilWeakIdentityMap || defined(INCLUDE_OrgApacheLuceneUtilWeakIdentityMap))
+#define OrgApacheLuceneUtilWeakIdentityMap_
 
 @protocol JavaUtilIterator;
 
+/*!
+ @brief Implements a combination of <code>java.util.WeakHashMap</code> and
+ <code>java.util.IdentityHashMap</code>.
+ Useful for caches that need to key off of a <code>==</code> comparison
+ instead of a <code>.equals</code>.
+ <p>This class is not a general-purpose <code>java.util.Map</code>
+ implementation! It intentionally violates
+ Map's general contract, which mandates the use of the equals method
+ when comparing objects. This class is designed for use only in the
+ rare cases wherein reference-equality semantics are required.
+ <p>This implementation was forked from <a href="http://cxf.apache.org/">Apache CXF</a>
+ but modified to <b>not</b> implement the <code>java.util.Map</code> interface and
+ without any set views on it, as those are error-prone and inefficient,
+ if not implemented carefully. The map only contains <code>Iterator</code> implementations
+ on the values and not-GCed keys. Lucene's implementation also supports <code>null</code>
+ keys, but those are never weak!
+ <p><a name="reapInfo"></a>The map supports two modes of operation:
+ <ul>
+ <li><code>reapOnRead = true</code>: This behaves identical to a <code>java.util.WeakHashMap</code>
+ where it also cleans up the reference queue on every read operation (<code>get(Object)</code>,
+ <code>containsKey(Object)</code>, <code>size()</code>, <code>valueIterator()</code>), freeing map entries
+ of already GCed keys.</li>
+ <li><code>reapOnRead = false</code>: This mode does not call <code>reap()</code> on every read
+ operation. In this case, the reference queue is only cleaned up on write operations
+ (like <code>put(Object,Object)</code>). This is ideal for maps with few entries where
+ the keys are unlikely be garbage collected, but there are lots of <code>get(Object)</code>
+ operations. The code can still call <code>reap()</code> to manually clean up the queue without
+ doing a write operation.</li>
+ </ul>
+ */
 @interface OrgApacheLuceneUtilWeakIdentityMap : NSObject
+
++ (id)NULL_;
 
 #pragma mark Public
 
+/*!
+ @brief Removes all of the mappings from this map.
+ */
 - (void)clear;
 
+/*!
+ @brief Returns <code>true</code> if this map contains a mapping for the specified key.
+ */
 - (jboolean)containsKeyWithId:(id)key;
 
+/*!
+ @brief Returns the value to which the specified key is mapped.
+ */
 - (id)getWithId:(id)key;
 
+/*!
+ @brief Returns <code>true</code> if this map contains no key-value mappings.
+ */
 - (jboolean)isEmpty;
 
+/*!
+ @brief Returns an iterator over all weak keys of this map.
+ Keys already garbage collected will not be returned.
+ This Iterator does not support removals. 
+ */
 - (id<JavaUtilIterator>)keyIterator;
 
+/*!
+ @brief Creates a new <code>WeakIdentityMap</code> based on a <code>ConcurrentHashMap</code>.
+ The map <a href="#reapInfo">cleans up the reference queue on every read operation</a>.
+ */
 + (OrgApacheLuceneUtilWeakIdentityMap *)newConcurrentHashMap OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Creates a new <code>WeakIdentityMap</code> based on a <code>ConcurrentHashMap</code>.
+ @param reapOnRead controls if the map <a href="#reapInfo">cleans up the reference queue on every read operation</a>.
+ */
 + (OrgApacheLuceneUtilWeakIdentityMap *)newConcurrentHashMapWithBoolean:(jboolean)reapOnRead OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Creates a new <code>WeakIdentityMap</code> based on a non-synchronized <code>HashMap</code>.
+ The map <a href="#reapInfo">cleans up the reference queue on every read operation</a>.
+ */
 + (OrgApacheLuceneUtilWeakIdentityMap *)newHashMap OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Creates a new <code>WeakIdentityMap</code> based on a non-synchronized <code>HashMap</code>.
+ @param reapOnRead controls if the map <a href="#reapInfo">cleans up the reference queue on every read operation</a>.
+ */
 + (OrgApacheLuceneUtilWeakIdentityMap *)newHashMapWithBoolean:(jboolean)reapOnRead OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Associates the specified value with the specified key in this map.
+ If the map previously contained a mapping for this key, the old value
+ is replaced. 
+ */
 - (id)putWithId:(id)key
          withId:(id)value;
 
+/*!
+ @brief This method manually cleans up the reference queue to remove all garbage
+ collected key/value pairs from the map.
+ Calling this method is not needed
+ if <code>reapOnRead = true</code>. Otherwise it might be a good idea
+ to call this method when there is spare time (e.g. from a background thread).
+ - seealso: <a href="#reapInfo">Information about the <code>reapOnRead</code> setting</a>
+ */
 - (void)reap;
 
+/*!
+ @brief Removes the mapping for a key from this weak hash map if it is present.
+ Returns the value to which this map previously associated the key,
+ or <code>null</code> if the map contained no mapping for the key.
+ A return value of <code>null</code> does not necessarily indicate that
+ the map contained.
+ */
 - (id)removeWithId:(id)key;
 
+/*!
+ @brief Returns the number of key-value mappings in this map.
+ This result is a snapshot,
+ and may not reflect unprocessed entries that will be removed before next
+ attempted access because they are no longer referenced.
+ */
 - (jint)size;
 
+/*!
+ @brief Returns an iterator over all values of this map.
+ This iterator may return values whose key is already
+ garbage collected while iterator is consumed,
+ especially if <code>reapOnRead</code> is <code>false</code>. 
+ */
 - (id<JavaUtilIterator>)valueIterator;
 
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilWeakIdentityMap)
 
-FOUNDATION_EXPORT id OrgApacheLuceneUtilWeakIdentityMap_NULL__;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilWeakIdentityMap, NULL__, id)
+inline id OrgApacheLuceneUtilWeakIdentityMap_get_NULL();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT id OrgApacheLuceneUtilWeakIdentityMap_NULL;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilWeakIdentityMap, NULL, id)
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilWeakIdentityMap *OrgApacheLuceneUtilWeakIdentityMap_newHashMap();
 
@@ -70,4 +169,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilWeakIdentityMap)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilWeakIdentityMap_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilWeakIdentityMap")

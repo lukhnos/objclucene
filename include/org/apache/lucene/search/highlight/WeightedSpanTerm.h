@@ -5,23 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchHighlightWeightedSpanTerm_INCLUDE_ALL")
-#if OrgApacheLuceneSearchHighlightWeightedSpanTerm_RESTRICT
-#define OrgApacheLuceneSearchHighlightWeightedSpanTerm_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightWeightedSpanTerm")
+#ifdef RESTRICT_OrgApacheLuceneSearchHighlightWeightedSpanTerm
+#define INCLUDE_ALL_OrgApacheLuceneSearchHighlightWeightedSpanTerm 0
 #else
-#define OrgApacheLuceneSearchHighlightWeightedSpanTerm_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchHighlightWeightedSpanTerm 1
 #endif
-#undef OrgApacheLuceneSearchHighlightWeightedSpanTerm_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchHighlightWeightedSpanTerm
 
-#if !defined (_OrgApacheLuceneSearchHighlightWeightedSpanTerm_) && (OrgApacheLuceneSearchHighlightWeightedSpanTerm_INCLUDE_ALL || OrgApacheLuceneSearchHighlightWeightedSpanTerm_INCLUDE)
-#define _OrgApacheLuceneSearchHighlightWeightedSpanTerm_
+#if !defined (OrgApacheLuceneSearchHighlightWeightedSpanTerm_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightWeightedSpanTerm || defined(INCLUDE_OrgApacheLuceneSearchHighlightWeightedSpanTerm))
+#define OrgApacheLuceneSearchHighlightWeightedSpanTerm_
 
-#define OrgApacheLuceneSearchHighlightWeightedTerm_RESTRICT 1
-#define OrgApacheLuceneSearchHighlightWeightedTerm_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchHighlightWeightedTerm 1
+#define INCLUDE_OrgApacheLuceneSearchHighlightWeightedTerm 1
 #include "org/apache/lucene/search/highlight/WeightedTerm.h"
 
 @protocol JavaUtilList;
 
+/*!
+ @brief Lightweight class to hold term, weight, and positions used for scoring this
+ term.
+ */
 @interface OrgApacheLuceneSearchHighlightWeightedSpanTerm : OrgApacheLuceneSearchHighlightWeightedTerm {
  @public
   jboolean positionSensitive_;
@@ -38,6 +42,12 @@
 
 - (void)addPositionSpansWithJavaUtilList:(id<JavaUtilList>)positionSpans;
 
+/*!
+ @brief Checks to see if this term is valid at <code>position</code>.
+ @param position
+ to check against valid term positions
+ @return true iff this term is a hit at this position
+ */
 - (jboolean)checkPositionWithInt:(jint)position;
 
 - (id<JavaUtilList>)getPositionSpans;
@@ -54,12 +64,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightWeightedSpanTerm_initWithFl
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightWeightedSpanTerm *new_OrgApacheLuceneSearchHighlightWeightedSpanTerm_initWithFloat_withNSString_(jfloat weight, NSString *term) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightWeightedSpanTerm *create_OrgApacheLuceneSearchHighlightWeightedSpanTerm_initWithFloat_withNSString_(jfloat weight, NSString *term);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightWeightedSpanTerm_initWithFloat_withNSString_withBoolean_(OrgApacheLuceneSearchHighlightWeightedSpanTerm *self, jfloat weight, NSString *term, jboolean positionSensitive);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightWeightedSpanTerm *new_OrgApacheLuceneSearchHighlightWeightedSpanTerm_initWithFloat_withNSString_withBoolean_(jfloat weight, NSString *term, jboolean positionSensitive) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightWeightedSpanTerm *create_OrgApacheLuceneSearchHighlightWeightedSpanTerm_initWithFloat_withNSString_withBoolean_(jfloat weight, NSString *term, jboolean positionSensitive);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightWeightedSpanTerm)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchHighlightWeightedSpanTerm_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightWeightedSpanTerm")

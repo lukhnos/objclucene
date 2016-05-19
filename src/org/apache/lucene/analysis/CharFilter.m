@@ -60,7 +60,7 @@ void OrgApacheLuceneAnalysisCharFilter_initWithJavaIoReader_(OrgApacheLuceneAnal
 
 jint OrgApacheLuceneAnalysisCharFilter_correctOffsetWithInt_(OrgApacheLuceneAnalysisCharFilter *self, jint currentOff) {
   jint corrected = [self correctWithInt:currentOff];
-  return ([self->input_ isKindOfClass:[OrgApacheLuceneAnalysisCharFilter class]]) ? OrgApacheLuceneAnalysisCharFilter_correctOffsetWithInt_(nil_chk(((OrgApacheLuceneAnalysisCharFilter *) check_class_cast(self->input_, [OrgApacheLuceneAnalysisCharFilter class]))), corrected) : corrected;
+  return ([self->input_ isKindOfClass:[OrgApacheLuceneAnalysisCharFilter class]]) ? OrgApacheLuceneAnalysisCharFilter_correctOffsetWithInt_(nil_chk(((OrgApacheLuceneAnalysisCharFilter *) cast_chk(self->input_, [OrgApacheLuceneAnalysisCharFilter class]))), corrected) : corrected;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCharFilter)

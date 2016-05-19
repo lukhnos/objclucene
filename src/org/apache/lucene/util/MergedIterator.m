@@ -58,6 +58,8 @@ __attribute__((unused)) static void OrgApacheLuceneUtilMergedIterator_SubIterato
 
 __attribute__((unused)) static OrgApacheLuceneUtilMergedIterator_SubIterator *new_OrgApacheLuceneUtilMergedIterator_SubIterator_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneUtilMergedIterator_SubIterator *create_OrgApacheLuceneUtilMergedIterator_SubIterator_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilMergedIterator_SubIterator)
 
 @interface OrgApacheLuceneUtilMergedIterator_TermMergeQueue : OrgApacheLuceneUtilPriorityQueue
@@ -74,6 +76,8 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilMergedIterator_TermMergeQueue)
 __attribute__((unused)) static void OrgApacheLuceneUtilMergedIterator_TermMergeQueue_initWithInt_(OrgApacheLuceneUtilMergedIterator_TermMergeQueue *self, jint size);
 
 __attribute__((unused)) static OrgApacheLuceneUtilMergedIterator_TermMergeQueue *new_OrgApacheLuceneUtilMergedIterator_TermMergeQueue_initWithInt_(jint size) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneUtilMergedIterator_TermMergeQueue *create_OrgApacheLuceneUtilMergedIterator_TermMergeQueue_initWithInt_(jint size);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilMergedIterator_TermMergeQueue)
 
@@ -111,13 +115,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilMergedIterator_TermMergeQueue)
     JreStrongAssign(&current_, nil);
   }
   if (current_ == nil) {
-    @throw [new_JavaUtilNoSuchElementException_init() autorelease];
+    @throw create_JavaUtilNoSuchElementException_init();
   }
   return current_;
 }
 
 - (void)remove {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (void)pullTop {
@@ -164,9 +168,11 @@ void OrgApacheLuceneUtilMergedIterator_initWithJavaUtilIteratorArray_(OrgApacheL
 }
 
 OrgApacheLuceneUtilMergedIterator *new_OrgApacheLuceneUtilMergedIterator_initWithJavaUtilIteratorArray_(IOSObjectArray *iterators) {
-  OrgApacheLuceneUtilMergedIterator *self = [OrgApacheLuceneUtilMergedIterator alloc];
-  OrgApacheLuceneUtilMergedIterator_initWithJavaUtilIteratorArray_(self, iterators);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilMergedIterator, initWithJavaUtilIteratorArray_, iterators)
+}
+
+OrgApacheLuceneUtilMergedIterator *create_OrgApacheLuceneUtilMergedIterator_initWithJavaUtilIteratorArray_(IOSObjectArray *iterators) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilMergedIterator, initWithJavaUtilIteratorArray_, iterators)
 }
 
 void OrgApacheLuceneUtilMergedIterator_initWithBoolean_withJavaUtilIteratorArray_(OrgApacheLuceneUtilMergedIterator *self, jboolean removeDuplicates, IOSObjectArray *iterators) {
@@ -182,7 +188,7 @@ void OrgApacheLuceneUtilMergedIterator_initWithBoolean_withJavaUtilIteratorArray
     while (b__ < e__) {
       id<JavaUtilIterator> iterator = *b__++;
       if ([((id<JavaUtilIterator>) nil_chk(iterator)) hasNext]) {
-        OrgApacheLuceneUtilMergedIterator_SubIterator *sub = [new_OrgApacheLuceneUtilMergedIterator_SubIterator_init() autorelease];
+        OrgApacheLuceneUtilMergedIterator_SubIterator *sub = create_OrgApacheLuceneUtilMergedIterator_SubIterator_init();
         JreStrongAssign(&sub->current_, [iterator next]);
         JreStrongAssign(&sub->iterator_, iterator);
         sub->index_ = index++;
@@ -193,9 +199,11 @@ void OrgApacheLuceneUtilMergedIterator_initWithBoolean_withJavaUtilIteratorArray
 }
 
 OrgApacheLuceneUtilMergedIterator *new_OrgApacheLuceneUtilMergedIterator_initWithBoolean_withJavaUtilIteratorArray_(jboolean removeDuplicates, IOSObjectArray *iterators) {
-  OrgApacheLuceneUtilMergedIterator *self = [OrgApacheLuceneUtilMergedIterator alloc];
-  OrgApacheLuceneUtilMergedIterator_initWithBoolean_withJavaUtilIteratorArray_(self, removeDuplicates, iterators);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilMergedIterator, initWithBoolean_withJavaUtilIteratorArray_, removeDuplicates, iterators)
+}
+
+OrgApacheLuceneUtilMergedIterator *create_OrgApacheLuceneUtilMergedIterator_initWithBoolean_withJavaUtilIteratorArray_(jboolean removeDuplicates, IOSObjectArray *iterators) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilMergedIterator, initWithBoolean_withJavaUtilIteratorArray_, removeDuplicates, iterators)
 }
 
 void OrgApacheLuceneUtilMergedIterator_pullTop(OrgApacheLuceneUtilMergedIterator *self) {
@@ -212,7 +220,7 @@ void OrgApacheLuceneUtilMergedIterator_pullTop(OrgApacheLuceneUtilMergedIterator
 void OrgApacheLuceneUtilMergedIterator_pushTop(OrgApacheLuceneUtilMergedIterator *self) {
   for (jint i = 0; i < self->numTop_; i++) {
     if ([((id<JavaUtilIterator>) nil_chk(((OrgApacheLuceneUtilMergedIterator_SubIterator *) nil_chk(IOSObjectArray_Get(nil_chk(self->top_), i)))->iterator_)) hasNext]) {
-      JreStrongAssign(&((OrgApacheLuceneUtilMergedIterator_SubIterator *) nil_chk(IOSObjectArray_Get(self->top_, i)))->current_, [((OrgApacheLuceneUtilMergedIterator_SubIterator *) nil_chk(IOSObjectArray_Get(self->top_, i)))->iterator_ next]);
+      JreStrongAssign(&((OrgApacheLuceneUtilMergedIterator_SubIterator *) nil_chk(IOSObjectArray_Get(self->top_, i)))->current_, [((id<JavaUtilIterator>) nil_chk(((OrgApacheLuceneUtilMergedIterator_SubIterator *) nil_chk(IOSObjectArray_Get(self->top_, i)))->iterator_)) next]);
       [((OrgApacheLuceneUtilMergedIterator_TermMergeQueue *) nil_chk(self->queue_)) addWithId:IOSObjectArray_Get(self->top_, i)];
     }
     else {
@@ -241,7 +249,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", NULL, NULL, 0x2, NULL, NULL },
+    { "init", "SubIterator", NULL, 0x2, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "iterator_", NULL, 0x0, "Ljava.util.Iterator;", NULL, "Ljava/util/Iterator<TI;>;", .constantValue.asLong = 0 },
@@ -259,9 +267,11 @@ void OrgApacheLuceneUtilMergedIterator_SubIterator_init(OrgApacheLuceneUtilMerge
 }
 
 OrgApacheLuceneUtilMergedIterator_SubIterator *new_OrgApacheLuceneUtilMergedIterator_SubIterator_init() {
-  OrgApacheLuceneUtilMergedIterator_SubIterator *self = [OrgApacheLuceneUtilMergedIterator_SubIterator alloc];
-  OrgApacheLuceneUtilMergedIterator_SubIterator_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilMergedIterator_SubIterator, init)
+}
+
+OrgApacheLuceneUtilMergedIterator_SubIterator *create_OrgApacheLuceneUtilMergedIterator_SubIterator_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilMergedIterator_SubIterator, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilMergedIterator_SubIterator)
@@ -275,7 +285,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilMergedIterator_SubIterator)
 
 - (jboolean)lessThanWithId:(OrgApacheLuceneUtilMergedIterator_SubIterator *)a
                     withId:(OrgApacheLuceneUtilMergedIterator_SubIterator *)b {
-  jint cmp = [((id<JavaLangComparable>) nil_chk(((OrgApacheLuceneUtilMergedIterator_SubIterator *) nil_chk(a))->current_)) compareToWithId:((OrgApacheLuceneUtilMergedIterator_SubIterator *) nil_chk(b))->current_];
+  jint cmp = [((id<JavaLangComparable>) nil_chk(((OrgApacheLuceneUtilMergedIterator_SubIterator *) nil_chk(a))->current_)) compareToWithId:((id<JavaLangComparable>) ((OrgApacheLuceneUtilMergedIterator_SubIterator *) nil_chk(b))->current_)];
   if (cmp != 0) {
     return cmp < 0;
   }
@@ -287,7 +297,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilMergedIterator_SubIterator)
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithInt:", "TermMergeQueue", NULL, 0x0, NULL, NULL },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x4, NULL, NULL },
+    { "lessThanWithId:withId:", "lessThan", "Z", 0x4, NULL, "(Lorg/apache/lucene/util/MergedIterator$SubIterator<TC;>;Lorg/apache/lucene/util/MergedIterator$SubIterator<TC;>;)Z" },
   };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.util.MergedIterator$SubIterator;"};
   static const J2ObjcClassInfo _OrgApacheLuceneUtilMergedIterator_TermMergeQueue = { 2, "TermMergeQueue", "org.apache.lucene.util", "MergedIterator", 0xa, 2, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "<C::Ljava/lang/Comparable<TC;>;>Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/util/MergedIterator$SubIterator<TC;>;>;" };
@@ -301,9 +311,11 @@ void OrgApacheLuceneUtilMergedIterator_TermMergeQueue_initWithInt_(OrgApacheLuce
 }
 
 OrgApacheLuceneUtilMergedIterator_TermMergeQueue *new_OrgApacheLuceneUtilMergedIterator_TermMergeQueue_initWithInt_(jint size) {
-  OrgApacheLuceneUtilMergedIterator_TermMergeQueue *self = [OrgApacheLuceneUtilMergedIterator_TermMergeQueue alloc];
-  OrgApacheLuceneUtilMergedIterator_TermMergeQueue_initWithInt_(self, size);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilMergedIterator_TermMergeQueue, initWithInt_, size)
+}
+
+OrgApacheLuceneUtilMergedIterator_TermMergeQueue *create_OrgApacheLuceneUtilMergedIterator_TermMergeQueue_initWithInt_(jint size) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilMergedIterator_TermMergeQueue, initWithInt_, size)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilMergedIterator_TermMergeQueue)

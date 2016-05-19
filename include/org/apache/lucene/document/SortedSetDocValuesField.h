@@ -5,28 +5,51 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneDocumentSortedSetDocValuesField_INCLUDE_ALL")
-#if OrgApacheLuceneDocumentSortedSetDocValuesField_RESTRICT
-#define OrgApacheLuceneDocumentSortedSetDocValuesField_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneDocumentSortedSetDocValuesField")
+#ifdef RESTRICT_OrgApacheLuceneDocumentSortedSetDocValuesField
+#define INCLUDE_ALL_OrgApacheLuceneDocumentSortedSetDocValuesField 0
 #else
-#define OrgApacheLuceneDocumentSortedSetDocValuesField_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneDocumentSortedSetDocValuesField 1
 #endif
-#undef OrgApacheLuceneDocumentSortedSetDocValuesField_RESTRICT
+#undef RESTRICT_OrgApacheLuceneDocumentSortedSetDocValuesField
 
-#if !defined (_OrgApacheLuceneDocumentSortedSetDocValuesField_) && (OrgApacheLuceneDocumentSortedSetDocValuesField_INCLUDE_ALL || OrgApacheLuceneDocumentSortedSetDocValuesField_INCLUDE)
-#define _OrgApacheLuceneDocumentSortedSetDocValuesField_
+#if !defined (OrgApacheLuceneDocumentSortedSetDocValuesField_) && (INCLUDE_ALL_OrgApacheLuceneDocumentSortedSetDocValuesField || defined(INCLUDE_OrgApacheLuceneDocumentSortedSetDocValuesField))
+#define OrgApacheLuceneDocumentSortedSetDocValuesField_
 
-#define OrgApacheLuceneDocumentField_RESTRICT 1
-#define OrgApacheLuceneDocumentField_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneDocumentField 1
+#define INCLUDE_OrgApacheLuceneDocumentField 1
 #include "org/apache/lucene/document/Field.h"
 
 @class OrgApacheLuceneDocumentFieldType;
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief <p>
+ Field that stores
+ a set of per-document <code>BytesRef</code> values, indexed for
+ faceting,grouping,joining.
+ Here's an example usage:
+ <pre class="prettyprint">
+ document.add(new SortedSetDocValuesField(name, new BytesRef("hello")));
+ document.add(new SortedSetDocValuesField(name, new BytesRef("world")));
+ 
+@endcode
+ <p>
+ If you also need to store the value, you should add a
+ separate <code>StoredField</code> instance.
+ */
 @interface OrgApacheLuceneDocumentSortedSetDocValuesField : OrgApacheLuceneDocumentField
+
++ (OrgApacheLuceneDocumentFieldType *)TYPE;
 
 #pragma mark Public
 
+/*!
+ @brief Create a new sorted DocValues field.
+ @param name field name
+ @param bytes binary content
+ @throws IllegalArgumentException if the field name is null
+ */
 - (instancetype)initWithNSString:(NSString *)name
  withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes;
 
@@ -34,15 +57,22 @@
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneDocumentSortedSetDocValuesField)
 
-FOUNDATION_EXPORT OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentSortedSetDocValuesField_TYPE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneDocumentSortedSetDocValuesField, TYPE_, OrgApacheLuceneDocumentFieldType *)
+/*!
+ @brief Type for sorted bytes DocValues
+ */
+inline OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentSortedSetDocValuesField_get_TYPE();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentSortedSetDocValuesField_TYPE;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneDocumentSortedSetDocValuesField, TYPE, OrgApacheLuceneDocumentFieldType *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneDocumentSortedSetDocValuesField_initWithNSString_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneDocumentSortedSetDocValuesField *self, NSString *name, OrgApacheLuceneUtilBytesRef *bytes);
 
 FOUNDATION_EXPORT OrgApacheLuceneDocumentSortedSetDocValuesField *new_OrgApacheLuceneDocumentSortedSetDocValuesField_initWithNSString_withOrgApacheLuceneUtilBytesRef_(NSString *name, OrgApacheLuceneUtilBytesRef *bytes) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneDocumentSortedSetDocValuesField *create_OrgApacheLuceneDocumentSortedSetDocValuesField_initWithNSString_withOrgApacheLuceneUtilBytesRef_(NSString *name, OrgApacheLuceneUtilBytesRef *bytes);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentSortedSetDocValuesField)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneDocumentSortedSetDocValuesField_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneDocumentSortedSetDocValuesField")

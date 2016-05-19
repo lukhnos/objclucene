@@ -56,7 +56,7 @@
     { "score", NULL, "F", 0x401, "Ljava.io.IOException;", NULL },
     { "freq", NULL, "I", 0x401, "Ljava.io.IOException;", NULL },
     { "getWeight", NULL, "Lorg.apache.lucene.search.Weight;", 0x1, NULL, NULL },
-    { "getChildren", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildren", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/search/Scorer$ChildScorer;>;" },
     { "asTwoPhaseIterator", NULL, "Lorg.apache.lucene.search.TwoPhaseIterator;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -111,9 +111,11 @@ void OrgApacheLuceneSearchScorer_ChildScorer_initWithOrgApacheLuceneSearchScorer
 }
 
 OrgApacheLuceneSearchScorer_ChildScorer *new_OrgApacheLuceneSearchScorer_ChildScorer_initWithOrgApacheLuceneSearchScorer_withNSString_(OrgApacheLuceneSearchScorer *child, NSString *relationship) {
-  OrgApacheLuceneSearchScorer_ChildScorer *self = [OrgApacheLuceneSearchScorer_ChildScorer alloc];
-  OrgApacheLuceneSearchScorer_ChildScorer_initWithOrgApacheLuceneSearchScorer_withNSString_(self, child, relationship);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchScorer_ChildScorer, initWithOrgApacheLuceneSearchScorer_withNSString_, child, relationship)
+}
+
+OrgApacheLuceneSearchScorer_ChildScorer *create_OrgApacheLuceneSearchScorer_ChildScorer_initWithOrgApacheLuceneSearchScorer_withNSString_(OrgApacheLuceneSearchScorer *child, NSString *relationship) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchScorer_ChildScorer, initWithOrgApacheLuceneSearchScorer_withNSString_, child, relationship)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchScorer_ChildScorer)

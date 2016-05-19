@@ -5,23 +5,29 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneLucenePackage_INCLUDE_ALL")
-#if OrgApacheLuceneLucenePackage_RESTRICT
-#define OrgApacheLuceneLucenePackage_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneLucenePackage")
+#ifdef RESTRICT_OrgApacheLuceneLucenePackage
+#define INCLUDE_ALL_OrgApacheLuceneLucenePackage 0
 #else
-#define OrgApacheLuceneLucenePackage_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneLucenePackage 1
 #endif
-#undef OrgApacheLuceneLucenePackage_RESTRICT
+#undef RESTRICT_OrgApacheLuceneLucenePackage
 
-#if !defined (_OrgApacheLuceneLucenePackage_) && (OrgApacheLuceneLucenePackage_INCLUDE_ALL || OrgApacheLuceneLucenePackage_INCLUDE)
-#define _OrgApacheLuceneLucenePackage_
+#if !defined (OrgApacheLuceneLucenePackage_) && (INCLUDE_ALL_OrgApacheLuceneLucenePackage || defined(INCLUDE_OrgApacheLuceneLucenePackage))
+#define OrgApacheLuceneLucenePackage_
 
 @class JavaLangPackage;
 
+/*!
+ @brief Lucene's package information, including version.
+ */
 @interface OrgApacheLuceneLucenePackage : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Return Lucene's package, including version information.
+ */
 + (JavaLangPackage *)get;
 
 @end
@@ -34,4 +40,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneLucenePackage)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneLucenePackage_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneLucenePackage")

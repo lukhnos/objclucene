@@ -5,28 +5,42 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisHiHindiStemFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisHiHindiStemFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisHiHindiStemFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisHiHindiStemFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisHiHindiStemFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisHiHindiStemFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisHiHindiStemFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisHiHindiStemFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisHiHindiStemFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisHiHindiStemFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisHiHindiStemFilterFactory_) && (OrgApacheLuceneAnalysisHiHindiStemFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisHiHindiStemFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisHiHindiStemFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisHiHindiStemFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisHiHindiStemFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisHiHindiStemFilterFactory))
+#define OrgApacheLuceneAnalysisHiHindiStemFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>HindiStemFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_histem" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+ &lt;filter class="solr.HindiStemFilterFactory"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisHiHindiStemFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new HindiStemFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -39,8 +53,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisHiHindiStemFilterFactory_initWithJ
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisHiHindiStemFilterFactory *new_OrgApacheLuceneAnalysisHiHindiStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisHiHindiStemFilterFactory *create_OrgApacheLuceneAnalysisHiHindiStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisHiHindiStemFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisHiHindiStemFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisHiHindiStemFilterFactory")

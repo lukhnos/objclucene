@@ -5,35 +5,50 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilBitDocIdSet_INCLUDE_ALL")
-#if OrgApacheLuceneUtilBitDocIdSet_RESTRICT
-#define OrgApacheLuceneUtilBitDocIdSet_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilBitDocIdSet")
+#ifdef RESTRICT_OrgApacheLuceneUtilBitDocIdSet
+#define INCLUDE_ALL_OrgApacheLuceneUtilBitDocIdSet 0
 #else
-#define OrgApacheLuceneUtilBitDocIdSet_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilBitDocIdSet 1
 #endif
-#undef OrgApacheLuceneUtilBitDocIdSet_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilBitDocIdSet
 
-#if !defined (_OrgApacheLuceneUtilBitDocIdSet_) && (OrgApacheLuceneUtilBitDocIdSet_INCLUDE_ALL || OrgApacheLuceneUtilBitDocIdSet_INCLUDE)
-#define _OrgApacheLuceneUtilBitDocIdSet_
+#if !defined (OrgApacheLuceneUtilBitDocIdSet_) && (INCLUDE_ALL_OrgApacheLuceneUtilBitDocIdSet || defined(INCLUDE_OrgApacheLuceneUtilBitDocIdSet))
+#define OrgApacheLuceneUtilBitDocIdSet_
 
-#define OrgApacheLuceneSearchDocIdSet_RESTRICT 1
-#define OrgApacheLuceneSearchDocIdSet_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchDocIdSet 1
+#define INCLUDE_OrgApacheLuceneSearchDocIdSet 1
 #include "org/apache/lucene/search/DocIdSet.h"
 
 @class OrgApacheLuceneSearchDocIdSetIterator;
 @class OrgApacheLuceneUtilBitSet;
 
+/*!
+ @brief Implementation of the <code>DocIdSet</code> interface on top of a <code>BitSet</code>.
+ */
 @interface OrgApacheLuceneUtilBitDocIdSet : OrgApacheLuceneSearchDocIdSet
 
 #pragma mark Public
 
+/*!
+ @brief Same as <code>BitDocIdSet(BitSet,long)</code> but uses the set's
+ <code>approximate cardinality</code> as a cost.
+ */
 - (instancetype)initWithOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)set;
 
+/*!
+ @brief Wrap the given <code>BitSet</code> as a <code>DocIdSet</code>.
+ The provided
+ <code>BitSet</code> must not be modified afterwards.
+ */
 - (instancetype)initWithOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)set
                                          withLong:(jlong)cost;
 
 - (OrgApacheLuceneUtilBitSet *)bits;
 
+/*!
+ @brief This DocIdSet implementation is cacheable.
+ */
 - (jboolean)isCacheable;
 
 - (OrgApacheLuceneSearchDocIdSetIterator *)iterator;
@@ -50,37 +65,75 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilBitDocIdSet_initWithOrgApacheLuceneUti
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilBitDocIdSet *new_OrgApacheLuceneUtilBitDocIdSet_initWithOrgApacheLuceneUtilBitSet_withLong_(OrgApacheLuceneUtilBitSet *set, jlong cost) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilBitDocIdSet *create_OrgApacheLuceneUtilBitDocIdSet_initWithOrgApacheLuceneUtilBitSet_withLong_(OrgApacheLuceneUtilBitSet *set, jlong cost);
+
 FOUNDATION_EXPORT void OrgApacheLuceneUtilBitDocIdSet_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitDocIdSet *self, OrgApacheLuceneUtilBitSet *set);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilBitDocIdSet *new_OrgApacheLuceneUtilBitDocIdSet_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet *set) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilBitDocIdSet *create_OrgApacheLuceneUtilBitDocIdSet_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet *set);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBitDocIdSet)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilBitDocIdSet_Builder_) && (OrgApacheLuceneUtilBitDocIdSet_INCLUDE_ALL || OrgApacheLuceneUtilBitDocIdSet_Builder_INCLUDE)
-#define _OrgApacheLuceneUtilBitDocIdSet_Builder_
+#if !defined (OrgApacheLuceneUtilBitDocIdSet_Builder_) && (INCLUDE_ALL_OrgApacheLuceneUtilBitDocIdSet || defined(INCLUDE_OrgApacheLuceneUtilBitDocIdSet_Builder))
+#define OrgApacheLuceneUtilBitDocIdSet_Builder_
 
+@class IOSObjectArray;
 @class OrgApacheLuceneSearchDocIdSetIterator;
 @class OrgApacheLuceneUtilBitDocIdSet;
 
+/*!
+ @brief A builder of <code>DocIdSet</code>s that supports random access.
+ If you don't
+ need random access, you should rather use <code>DocIdSetBuilder</code>.
+ */
 @interface OrgApacheLuceneUtilBitDocIdSet_Builder : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Create a new empty instance.
+ */
 - (instancetype)initWithInt:(jint)maxDoc;
 
+/*!
+ @brief Create a new instance that can hold <code>maxDoc</code> documents and is optionally <code>full</code>.
+ */
 - (instancetype)initWithInt:(jint)maxDoc
                 withBoolean:(jboolean)full;
 
+/*!
+ @brief Removes from this builder documents that are not contained in <code>it</code>.
+ */
 - (void)and__WithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)it;
 
+/*!
+ @brief Removes from this builder documents that are contained in <code>it</code>.
+ */
 - (void)andNotWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)it;
 
+/*!
+ @brief Build a <code>DocIdSet</code> that contains all doc ids that have been added.
+ This method may return <tt>null</tt> if no documents were addded to this
+ builder.
+ NOTE: this is a destructive operation, the builder should not be used
+ anymore after this method has been called.
+ */
 - (OrgApacheLuceneUtilBitDocIdSet *)build;
 
+/*!
+ @brief Is this builder definitely empty?
+ If so, <code>build()</code> will return null.  This is usually the same as
+ simply being empty but if this builder was constructed with the <code>full</code> option or if an iterator was passed
+ that iterated over no documents, then we're not sure.
+ */
 - (jboolean)isDefinitelyEmpty;
 
+/*!
+ @brief Add the content of the provided <code>DocIdSetIterator</code> to this builder.
+ */
 - (void)or__WithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)it;
 
 #pragma mark Package-Private
@@ -95,12 +148,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilBitDocIdSet_Builder_initWithInt_withBo
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilBitDocIdSet_Builder *new_OrgApacheLuceneUtilBitDocIdSet_Builder_initWithInt_withBoolean_(jint maxDoc, jboolean full) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilBitDocIdSet_Builder *create_OrgApacheLuceneUtilBitDocIdSet_Builder_initWithInt_withBoolean_(jint maxDoc, jboolean full);
+
 FOUNDATION_EXPORT void OrgApacheLuceneUtilBitDocIdSet_Builder_initWithInt_(OrgApacheLuceneUtilBitDocIdSet_Builder *self, jint maxDoc);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilBitDocIdSet_Builder *new_OrgApacheLuceneUtilBitDocIdSet_Builder_initWithInt_(jint maxDoc) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilBitDocIdSet_Builder *create_OrgApacheLuceneUtilBitDocIdSet_Builder_initWithInt_(jint maxDoc);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBitDocIdSet_Builder)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilBitDocIdSet_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilBitDocIdSet")

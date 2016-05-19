@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneStoreFilterDirectory_INCLUDE_ALL")
-#if OrgApacheLuceneStoreFilterDirectory_RESTRICT
-#define OrgApacheLuceneStoreFilterDirectory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneStoreFilterDirectory")
+#ifdef RESTRICT_OrgApacheLuceneStoreFilterDirectory
+#define INCLUDE_ALL_OrgApacheLuceneStoreFilterDirectory 0
 #else
-#define OrgApacheLuceneStoreFilterDirectory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneStoreFilterDirectory 1
 #endif
-#undef OrgApacheLuceneStoreFilterDirectory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneStoreFilterDirectory
 
-#if !defined (_OrgApacheLuceneStoreFilterDirectory_) && (OrgApacheLuceneStoreFilterDirectory_INCLUDE_ALL || OrgApacheLuceneStoreFilterDirectory_INCLUDE)
-#define _OrgApacheLuceneStoreFilterDirectory_
+#if !defined (OrgApacheLuceneStoreFilterDirectory_) && (INCLUDE_ALL_OrgApacheLuceneStoreFilterDirectory || defined(INCLUDE_OrgApacheLuceneStoreFilterDirectory))
+#define OrgApacheLuceneStoreFilterDirectory_
 
-#define OrgApacheLuceneStoreDirectory_RESTRICT 1
-#define OrgApacheLuceneStoreDirectory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreDirectory 1
+#define INCLUDE_OrgApacheLuceneStoreDirectory 1
 #include "org/apache/lucene/store/Directory.h"
 
 @class IOSObjectArray;
@@ -27,6 +27,17 @@
 @class OrgApacheLuceneStoreLock;
 @protocol JavaUtilCollection;
 
+/*!
+ @brief Directory implementation that delegates calls to another directory.
+ This class can be used to add limitations on top of an existing
+ <code>Directory</code> implementation such as
+ <code>NRTCachingDirectory</code> or to add additional
+ sanity checks for tests. However, if you plan to write your own
+ <code>Directory</code> implementation, you should consider extending directly
+ <code>Directory</code> or <code>BaseDirectory</code> rather than try to reuse
+ functionality of existing <code>Directory</code>s by extending this class.
+  
+ */
 @interface OrgApacheLuceneStoreFilterDirectory : OrgApacheLuceneStoreDirectory {
  @public
   OrgApacheLuceneStoreDirectory *in_;
@@ -43,6 +54,9 @@
 
 - (jlong)fileLengthWithNSString:(NSString *)name;
 
+/*!
+ @brief Return the wrapped <code>Directory</code>.
+ */
 - (OrgApacheLuceneStoreDirectory *)getDelegate;
 
 - (IOSObjectArray *)listAll;
@@ -59,10 +73,17 @@
 
 - (NSString *)description;
 
+/*!
+ @brief Get the wrapped instance by <code>dir</code> as long as this reader is
+ an instance of <code>FilterDirectory</code>.
+ */
 + (OrgApacheLuceneStoreDirectory *)unwrapWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
 
 #pragma mark Protected
 
+/*!
+ @brief Sole constructor, typically called from sub-classes.
+ */
 - (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)inArg;
 
 @end
@@ -77,8 +98,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneStoreFilterDirectory_initWithOrgApacheLuce
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreFilterDirectory *new_OrgApacheLuceneStoreFilterDirectory_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneStoreFilterDirectory *create_OrgApacheLuceneStoreFilterDirectory_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreFilterDirectory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneStoreFilterDirectory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreFilterDirectory")

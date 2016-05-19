@@ -25,12 +25,28 @@
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/SmallFloat.h"
 
-static jdouble OrgApacheLuceneSearchSimilaritiesSimilarityBase_LOG_2_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSimilaritiesSimilarityBase, LOG_2_, jdouble)
+/*!
+ @brief For <code>log2(double)</code>.
+ Precomputed for efficiency reasons. 
+ */
+inline jdouble OrgApacheLuceneSearchSimilaritiesSimilarityBase_get_LOG_2();
+static jdouble OrgApacheLuceneSearchSimilaritiesSimilarityBase_LOG_2;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneSearchSimilaritiesSimilarityBase, LOG_2, jdouble)
 
-static IOSFloatArray *OrgApacheLuceneSearchSimilaritiesSimilarityBase_NORM_TABLE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSimilaritiesSimilarityBase, NORM_TABLE_, IOSFloatArray *)
+/*!
+ @brief Norm to document length map.
+ */
+inline IOSFloatArray *OrgApacheLuceneSearchSimilaritiesSimilarityBase_get_NORM_TABLE();
+static IOSFloatArray *OrgApacheLuceneSearchSimilaritiesSimilarityBase_NORM_TABLE;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchSimilaritiesSimilarityBase, NORM_TABLE, IOSFloatArray *)
 
+/*!
+ @brief Delegates the <code>score(int,float)</code> and
+ <code>explain(int,Explanation)</code> methods to
+ <code>SimilarityBase.score(BasicStats,float,float)</code> and
+ <code>SimilarityBase.explain(BasicStats,int,Explanation,float)</code>,
+ respectively.
+ */
 @interface OrgApacheLuceneSearchSimilaritiesSimilarityBase_BasicSimScorer : OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer {
  @public
   OrgApacheLuceneSearchSimilaritiesSimilarityBase *this$0_;
@@ -67,6 +83,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSimilaritiesSimilarityB
 
 __attribute__((unused)) static OrgApacheLuceneSearchSimilaritiesSimilarityBase_BasicSimScorer *new_OrgApacheLuceneSearchSimilaritiesSimilarityBase_BasicSimScorer_initWithOrgApacheLuceneSearchSimilaritiesSimilarityBase_withOrgApacheLuceneSearchSimilaritiesBasicStats_withOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchSimilaritiesSimilarityBase *outer$, OrgApacheLuceneSearchSimilaritiesBasicStats *stats, OrgApacheLuceneIndexNumericDocValues *norms) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchSimilaritiesSimilarityBase_BasicSimScorer *create_OrgApacheLuceneSearchSimilaritiesSimilarityBase_BasicSimScorer_initWithOrgApacheLuceneSearchSimilaritiesSimilarityBase_withOrgApacheLuceneSearchSimilaritiesBasicStats_withOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchSimilaritiesSimilarityBase *outer$, OrgApacheLuceneSearchSimilaritiesBasicStats *stats, OrgApacheLuceneIndexNumericDocValues *norms);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesSimilarityBase_BasicSimScorer)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchSimilaritiesSimilarityBase)
@@ -96,12 +114,12 @@ J2OBJC_IGNORE_DESIGNATED_END
     IOSObjectArray_Set(stats, i, [self newStatsWithNSString:[((OrgApacheLuceneSearchCollectionStatistics *) nil_chk(collectionStats)) field] withFloat:queryBoost]);
     [self fillBasicStatsWithOrgApacheLuceneSearchSimilaritiesBasicStats:IOSObjectArray_Get(stats, i) withOrgApacheLuceneSearchCollectionStatistics:collectionStats withOrgApacheLuceneSearchTermStatistics:IOSObjectArray_Get(termStats, i)];
   }
-  return stats->size_ == 1 ? IOSObjectArray_Get(stats, 0) : [new_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats_initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeightArray_(stats) autorelease];
+  return stats->size_ == 1 ? IOSObjectArray_Get(stats, 0) : create_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats_initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeightArray_(stats);
 }
 
 - (OrgApacheLuceneSearchSimilaritiesBasicStats *)newStatsWithNSString:(NSString *)field
                                                             withFloat:(jfloat)queryBoost {
-  return [new_OrgApacheLuceneSearchSimilaritiesBasicStats_initWithNSString_withFloat_(field, queryBoost) autorelease];
+  return create_OrgApacheLuceneSearchSimilaritiesBasicStats_initWithNSString_withFloat_(field, queryBoost);
 }
 
 - (void)fillBasicStatsWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
@@ -151,7 +169,7 @@ withOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilariti
                                                                                      withInt:(jint)doc
                                                         withOrgApacheLuceneSearchExplanation:(OrgApacheLuceneSearchExplanation *)freq
                                                                                    withFloat:(jfloat)docLen {
-  id<JavaUtilList> subs = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> subs = create_JavaUtilArrayList_init();
   [self explainWithJavaUtilList:subs withOrgApacheLuceneSearchSimilaritiesBasicStats:stats withInt:doc withFloat:[((OrgApacheLuceneSearchExplanation *) nil_chk(freq)) getValue] withFloat:docLen];
   return OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withJavaUtilCollection_([self scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:stats withFloat:[freq getValue] withFloat:docLen], JreStrcat("$$$I$F$", @"score(", [[self getClass] getSimpleName], @", doc=", doc, @", freq=", [freq getValue], @"), computed from:"), subs);
 }
@@ -159,17 +177,17 @@ withOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilariti
 - (OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *)simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:(OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight *)stats
                                                                                     withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
   if ([stats isKindOfClass:[OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats class]]) {
-    IOSObjectArray *subStats = ((OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats *) nil_chk(((OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats *) check_class_cast(stats, [OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats class]))))->subStats_;
+    IOSObjectArray *subStats = ((OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats *) nil_chk(((OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats *) cast_chk(stats, [OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats class]))))->subStats_;
     IOSObjectArray *subScorers = [IOSObjectArray arrayWithLength:((IOSObjectArray *) nil_chk(subStats))->size_ type:OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_class_()];
     for (jint i = 0; i < subScorers->size_; i++) {
-      OrgApacheLuceneSearchSimilaritiesBasicStats *basicstats = (OrgApacheLuceneSearchSimilaritiesBasicStats *) check_class_cast(IOSObjectArray_Get(subStats, i), [OrgApacheLuceneSearchSimilaritiesBasicStats class]);
+      OrgApacheLuceneSearchSimilaritiesBasicStats *basicstats = (OrgApacheLuceneSearchSimilaritiesBasicStats *) cast_chk(IOSObjectArray_Get(subStats, i), [OrgApacheLuceneSearchSimilaritiesBasicStats class]);
       IOSObjectArray_SetAndConsume(subScorers, i, new_OrgApacheLuceneSearchSimilaritiesSimilarityBase_BasicSimScorer_initWithOrgApacheLuceneSearchSimilaritiesSimilarityBase_withOrgApacheLuceneSearchSimilaritiesBasicStats_withOrgApacheLuceneIndexNumericDocValues_(self, basicstats, [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) getNormValuesWithNSString:((OrgApacheLuceneSearchSimilaritiesBasicStats *) nil_chk(basicstats))->field_]));
     }
-    return [new_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer_initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorerArray_(subScorers) autorelease];
+    return create_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer_initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorerArray_(subScorers);
   }
   else {
-    OrgApacheLuceneSearchSimilaritiesBasicStats *basicstats = (OrgApacheLuceneSearchSimilaritiesBasicStats *) check_class_cast(stats, [OrgApacheLuceneSearchSimilaritiesBasicStats class]);
-    return [new_OrgApacheLuceneSearchSimilaritiesSimilarityBase_BasicSimScorer_initWithOrgApacheLuceneSearchSimilaritiesSimilarityBase_withOrgApacheLuceneSearchSimilaritiesBasicStats_withOrgApacheLuceneIndexNumericDocValues_(self, basicstats, [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) getNormValuesWithNSString:((OrgApacheLuceneSearchSimilaritiesBasicStats *) nil_chk(basicstats))->field_]) autorelease];
+    OrgApacheLuceneSearchSimilaritiesBasicStats *basicstats = (OrgApacheLuceneSearchSimilaritiesBasicStats *) cast_chk(stats, [OrgApacheLuceneSearchSimilaritiesBasicStats class]);
+    return create_OrgApacheLuceneSearchSimilaritiesSimilarityBase_BasicSimScorer_initWithOrgApacheLuceneSearchSimilaritiesSimilarityBase_withOrgApacheLuceneSearchSimilaritiesBasicStats_withOrgApacheLuceneIndexNumericDocValues_(self, basicstats, [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) getNormValuesWithNSString:((OrgApacheLuceneSearchSimilaritiesBasicStats *) nil_chk(basicstats))->field_]);
   }
 }
 
@@ -183,11 +201,11 @@ withOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilariti
   jfloat numTerms;
   if (discountOverlaps_) numTerms = [((OrgApacheLuceneIndexFieldInvertState *) nil_chk(state)) getLength] - [state getNumOverlap];
   else numTerms = [((OrgApacheLuceneIndexFieldInvertState *) nil_chk(state)) getLength];
-  return [self encodeNormValueWithFloat:[((OrgApacheLuceneIndexFieldInvertState *) nil_chk(state)) getBoost] withFloat:numTerms];
+  return [self encodeNormValueWithFloat:[state getBoost] withFloat:numTerms];
 }
 
 - (jfloat)decodeNormValueWithByte:(jbyte)norm {
-  return IOSFloatArray_Get(nil_chk(OrgApacheLuceneSearchSimilaritiesSimilarityBase_NORM_TABLE_), norm & (jint) 0xFF);
+  return IOSFloatArray_Get(nil_chk(OrgApacheLuceneSearchSimilaritiesSimilarityBase_NORM_TABLE), norm & (jint) 0xFF);
 }
 
 - (jbyte)encodeNormValueWithFloat:(jfloat)boost
@@ -201,12 +219,12 @@ withOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilariti
 
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchSimilaritiesSimilarityBase class]) {
-    OrgApacheLuceneSearchSimilaritiesSimilarityBase_LOG_2_ = JavaLangMath_logWithDouble_(2);
-    JreStrongAssignAndConsume(&OrgApacheLuceneSearchSimilaritiesSimilarityBase_NORM_TABLE_, [IOSFloatArray newArrayWithLength:256]);
+    OrgApacheLuceneSearchSimilaritiesSimilarityBase_LOG_2 = JavaLangMath_logWithDouble_(2);
+    JreStrongAssignAndConsume(&OrgApacheLuceneSearchSimilaritiesSimilarityBase_NORM_TABLE, [IOSFloatArray newArrayWithLength:256]);
     {
       for (jint i = 0; i < 256; i++) {
         jfloat floatNorm = OrgApacheLuceneUtilSmallFloat_byte315ToFloatWithByte_((jbyte) i);
-        *IOSFloatArray_GetRef(OrgApacheLuceneSearchSimilaritiesSimilarityBase_NORM_TABLE_, i) = 1.0f / (floatNorm * floatNorm);
+        *IOSFloatArray_GetRef(OrgApacheLuceneSearchSimilaritiesSimilarityBase_NORM_TABLE, i) = 1.0f / (floatNorm * floatNorm);
       }
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSimilaritiesSimilarityBase)
@@ -222,7 +240,7 @@ withOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilariti
     { "newStatsWithNSString:withFloat:", "newStats", "Lorg.apache.lucene.search.similarities.BasicStats;", 0x4, NULL, NULL },
     { "fillBasicStatsWithOrgApacheLuceneSearchSimilaritiesBasicStats:withOrgApacheLuceneSearchCollectionStatistics:withOrgApacheLuceneSearchTermStatistics:", "fillBasicStats", "V", 0x4, NULL, NULL },
     { "scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:withFloat:", "score", "F", 0x404, NULL, NULL },
-    { "explainWithJavaUtilList:withOrgApacheLuceneSearchSimilaritiesBasicStats:withInt:withFloat:withFloat:", "explain", "V", 0x4, NULL, NULL },
+    { "explainWithJavaUtilList:withOrgApacheLuceneSearchSimilaritiesBasicStats:withInt:withFloat:withFloat:", "explain", "V", 0x4, NULL, "(Ljava/util/List<Lorg/apache/lucene/search/Explanation;>;Lorg/apache/lucene/search/similarities/BasicStats;IFF)V" },
     { "explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:withInt:withOrgApacheLuceneSearchExplanation:withFloat:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x4, NULL, NULL },
     { "simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:withOrgApacheLuceneIndexLeafReaderContext:", "simScorer", "Lorg.apache.lucene.search.similarities.Similarity$SimScorer;", 0x1, "Ljava.io.IOException;", NULL },
     { "description", "toString", "Ljava.lang.String;", 0x401, NULL, NULL },
@@ -232,9 +250,9 @@ withOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilariti
     { "log2WithDouble:", "log2", "D", 0x9, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "LOG_2_", NULL, 0x1a, "D", &OrgApacheLuceneSearchSimilaritiesSimilarityBase_LOG_2_, NULL, .constantValue.asLong = 0 },
+    { "LOG_2", "LOG_2", 0x1a, "D", &OrgApacheLuceneSearchSimilaritiesSimilarityBase_LOG_2, NULL, .constantValue.asLong = 0 },
     { "discountOverlaps_", NULL, 0x4, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "NORM_TABLE_", NULL, 0x1a, "[F", &OrgApacheLuceneSearchSimilaritiesSimilarityBase_NORM_TABLE_, NULL, .constantValue.asLong = 0 },
+    { "NORM_TABLE", "NORM_TABLE", 0x1a, "[F", &OrgApacheLuceneSearchSimilaritiesSimilarityBase_NORM_TABLE, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.similarities.SimilarityBase$BasicSimScorer;"};
   static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesSimilarityBase = { 2, "SimilarityBase", "org.apache.lucene.search.similarities", NULL, 0x401, 15, methods, 3, fields, 0, NULL, 1, inner_classes, NULL, NULL };
@@ -250,7 +268,7 @@ void OrgApacheLuceneSearchSimilaritiesSimilarityBase_init(OrgApacheLuceneSearchS
 
 jdouble OrgApacheLuceneSearchSimilaritiesSimilarityBase_log2WithDouble_(jdouble x) {
   OrgApacheLuceneSearchSimilaritiesSimilarityBase_initialize();
-  return JavaLangMath_logWithDouble_(x) / OrgApacheLuceneSearchSimilaritiesSimilarityBase_LOG_2_;
+  return JavaLangMath_logWithDouble_(x) / OrgApacheLuceneSearchSimilaritiesSimilarityBase_LOG_2;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSimilaritiesSimilarityBase)
@@ -319,9 +337,11 @@ void OrgApacheLuceneSearchSimilaritiesSimilarityBase_BasicSimScorer_initWithOrgA
 }
 
 OrgApacheLuceneSearchSimilaritiesSimilarityBase_BasicSimScorer *new_OrgApacheLuceneSearchSimilaritiesSimilarityBase_BasicSimScorer_initWithOrgApacheLuceneSearchSimilaritiesSimilarityBase_withOrgApacheLuceneSearchSimilaritiesBasicStats_withOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchSimilaritiesSimilarityBase *outer$, OrgApacheLuceneSearchSimilaritiesBasicStats *stats, OrgApacheLuceneIndexNumericDocValues *norms) {
-  OrgApacheLuceneSearchSimilaritiesSimilarityBase_BasicSimScorer *self = [OrgApacheLuceneSearchSimilaritiesSimilarityBase_BasicSimScorer alloc];
-  OrgApacheLuceneSearchSimilaritiesSimilarityBase_BasicSimScorer_initWithOrgApacheLuceneSearchSimilaritiesSimilarityBase_withOrgApacheLuceneSearchSimilaritiesBasicStats_withOrgApacheLuceneIndexNumericDocValues_(self, outer$, stats, norms);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSimilaritiesSimilarityBase_BasicSimScorer, initWithOrgApacheLuceneSearchSimilaritiesSimilarityBase_withOrgApacheLuceneSearchSimilaritiesBasicStats_withOrgApacheLuceneIndexNumericDocValues_, outer$, stats, norms)
+}
+
+OrgApacheLuceneSearchSimilaritiesSimilarityBase_BasicSimScorer *create_OrgApacheLuceneSearchSimilaritiesSimilarityBase_BasicSimScorer_initWithOrgApacheLuceneSearchSimilaritiesSimilarityBase_withOrgApacheLuceneSearchSimilaritiesBasicStats_withOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchSimilaritiesSimilarityBase *outer$, OrgApacheLuceneSearchSimilaritiesBasicStats *stats, OrgApacheLuceneIndexNumericDocValues *norms) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSimilaritiesSimilarityBase_BasicSimScorer, initWithOrgApacheLuceneSearchSimilaritiesSimilarityBase_withOrgApacheLuceneSearchSimilaritiesBasicStats_withOrgApacheLuceneIndexNumericDocValues_, outer$, stats, norms)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSimilaritiesSimilarityBase_BasicSimScorer)

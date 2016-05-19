@@ -5,23 +5,23 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneStoreRAMOutputStream_INCLUDE_ALL")
-#if OrgApacheLuceneStoreRAMOutputStream_RESTRICT
-#define OrgApacheLuceneStoreRAMOutputStream_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneStoreRAMOutputStream")
+#ifdef RESTRICT_OrgApacheLuceneStoreRAMOutputStream
+#define INCLUDE_ALL_OrgApacheLuceneStoreRAMOutputStream 0
 #else
-#define OrgApacheLuceneStoreRAMOutputStream_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneStoreRAMOutputStream 1
 #endif
-#undef OrgApacheLuceneStoreRAMOutputStream_RESTRICT
+#undef RESTRICT_OrgApacheLuceneStoreRAMOutputStream
 
-#if !defined (_OrgApacheLuceneStoreRAMOutputStream_) && (OrgApacheLuceneStoreRAMOutputStream_INCLUDE_ALL || OrgApacheLuceneStoreRAMOutputStream_INCLUDE)
-#define _OrgApacheLuceneStoreRAMOutputStream_
+#if !defined (OrgApacheLuceneStoreRAMOutputStream_) && (INCLUDE_ALL_OrgApacheLuceneStoreRAMOutputStream || defined(INCLUDE_OrgApacheLuceneStoreRAMOutputStream))
+#define OrgApacheLuceneStoreRAMOutputStream_
 
-#define OrgApacheLuceneStoreIndexOutput_RESTRICT 1
-#define OrgApacheLuceneStoreIndexOutput_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreIndexOutput 1
+#define INCLUDE_OrgApacheLuceneStoreIndexOutput 1
 #include "org/apache/lucene/store/IndexOutput.h"
 
-#define OrgApacheLuceneUtilAccountable_RESTRICT 1
-#define OrgApacheLuceneUtilAccountable_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAccountable 1
+#define INCLUDE_OrgApacheLuceneUtilAccountable 1
 #include "org/apache/lucene/util/Accountable.h"
 
 @class IOSByteArray;
@@ -29,17 +29,29 @@
 @class OrgApacheLuceneStoreRAMFile;
 @protocol JavaUtilCollection;
 
-#define OrgApacheLuceneStoreRAMOutputStream_BUFFER_SIZE 1024
-
+/*!
+ @brief A memory-resident <code>IndexOutput</code> implementation.
+ */
 @interface OrgApacheLuceneStoreRAMOutputStream : OrgApacheLuceneStoreIndexOutput < OrgApacheLuceneUtilAccountable >
+
++ (jint)BUFFER_SIZE;
 
 #pragma mark Public
 
+/*!
+ @brief Construct an empty output buffer.
+ */
 - (instancetype)init;
 
+/*!
+ @brief Creates this, with no name.
+ */
 - (instancetype)initWithOrgApacheLuceneStoreRAMFile:(OrgApacheLuceneStoreRAMFile *)f
                                         withBoolean:(jboolean)checksum;
 
+/*!
+ @brief Creates this, with specified name.
+ */
 - (instancetype)initWithNSString:(NSString *)name
  withOrgApacheLuceneStoreRAMFile:(OrgApacheLuceneStoreRAMFile *)f
                      withBoolean:(jboolean)checksum;
@@ -52,8 +64,14 @@
 
 - (jlong)getFilePointer;
 
+/*!
+ @brief Returns byte usage of all buffers.
+ */
 - (jlong)ramBytesUsed;
 
+/*!
+ @brief Resets this to an empty file.
+ */
 - (void)reset;
 
 - (void)writeByteWithByte:(jbyte)b;
@@ -62,35 +80,53 @@
                         withInt:(jint)offset
                         withInt:(jint)len;
 
+/*!
+ @brief Copy the current contents of this buffer to output
+ byte array
+ */
 - (void)writeToWithByteArray:(IOSByteArray *)bytes
                      withInt:(jint)offset;
 
+/*!
+ @brief Copy the current contents of this buffer to the named output.
+ */
 - (void)writeToWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg;
 
 #pragma mark Protected
 
+/*!
+ @brief Forces any buffered output to be written.
+ */
 - (void)flush;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreRAMOutputStream)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneStoreRAMOutputStream, BUFFER_SIZE, jint)
+inline jint OrgApacheLuceneStoreRAMOutputStream_get_BUFFER_SIZE();
+#define OrgApacheLuceneStoreRAMOutputStream_BUFFER_SIZE 1024
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneStoreRAMOutputStream, BUFFER_SIZE, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneStoreRAMOutputStream_init(OrgApacheLuceneStoreRAMOutputStream *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreRAMOutputStream *new_OrgApacheLuceneStoreRAMOutputStream_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneStoreRAMOutputStream *create_OrgApacheLuceneStoreRAMOutputStream_init();
+
 FOUNDATION_EXPORT void OrgApacheLuceneStoreRAMOutputStream_initWithOrgApacheLuceneStoreRAMFile_withBoolean_(OrgApacheLuceneStoreRAMOutputStream *self, OrgApacheLuceneStoreRAMFile *f, jboolean checksum);
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreRAMOutputStream *new_OrgApacheLuceneStoreRAMOutputStream_initWithOrgApacheLuceneStoreRAMFile_withBoolean_(OrgApacheLuceneStoreRAMFile *f, jboolean checksum) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneStoreRAMOutputStream *create_OrgApacheLuceneStoreRAMOutputStream_initWithOrgApacheLuceneStoreRAMFile_withBoolean_(OrgApacheLuceneStoreRAMFile *f, jboolean checksum);
 
 FOUNDATION_EXPORT void OrgApacheLuceneStoreRAMOutputStream_initWithNSString_withOrgApacheLuceneStoreRAMFile_withBoolean_(OrgApacheLuceneStoreRAMOutputStream *self, NSString *name, OrgApacheLuceneStoreRAMFile *f, jboolean checksum);
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreRAMOutputStream *new_OrgApacheLuceneStoreRAMOutputStream_initWithNSString_withOrgApacheLuceneStoreRAMFile_withBoolean_(NSString *name, OrgApacheLuceneStoreRAMFile *f, jboolean checksum) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneStoreRAMOutputStream *create_OrgApacheLuceneStoreRAMOutputStream_initWithNSString_withOrgApacheLuceneStoreRAMFile_withBoolean_(NSString *name, OrgApacheLuceneStoreRAMFile *f, jboolean checksum);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreRAMOutputStream)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneStoreRAMOutputStream_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreRAMOutputStream")

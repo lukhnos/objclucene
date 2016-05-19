@@ -17,6 +17,9 @@
 
 @interface OrgApacheLuceneAnalysisBrBrazilianStemFilter () {
  @public
+  /*!
+   @brief <code>BrazilianStemmer</code> in use by this filter.
+   */
   OrgApacheLuceneAnalysisBrBrazilianStemmer *stemmer_;
   id<JavaUtilSet> exclusions_;
   id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt_;
@@ -42,7 +45,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisBrBrazilianStemFilter, keywordAttr_, 
     NSString *term = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) description];
     if (![((id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>) nil_chk(keywordAttr_)) isKeyword] && (exclusions_ == nil || ![exclusions_ containsWithId:term])) {
       NSString *s = [((OrgApacheLuceneAnalysisBrBrazilianStemmer *) nil_chk(stemmer_)) stemWithNSString:term];
-      if ((s != nil) && ![s isEqual:term]) [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk([termAtt_ setEmpty])) appendWithNSString:s];
+      if ((s != nil) && ![((NSString *) nil_chk(s)) isEqual:term]) [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk([termAtt_ setEmpty])) appendWithNSString:s];
     }
     return true;
   }
@@ -85,9 +88,11 @@ void OrgApacheLuceneAnalysisBrBrazilianStemFilter_initWithOrgApacheLuceneAnalysi
 }
 
 OrgApacheLuceneAnalysisBrBrazilianStemFilter *new_OrgApacheLuceneAnalysisBrBrazilianStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) {
-  OrgApacheLuceneAnalysisBrBrazilianStemFilter *self = [OrgApacheLuceneAnalysisBrBrazilianStemFilter alloc];
-  OrgApacheLuceneAnalysisBrBrazilianStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisBrBrazilianStemFilter, initWithOrgApacheLuceneAnalysisTokenStream_, inArg)
+}
+
+OrgApacheLuceneAnalysisBrBrazilianStemFilter *create_OrgApacheLuceneAnalysisBrBrazilianStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisBrBrazilianStemFilter, initWithOrgApacheLuceneAnalysisTokenStream_, inArg)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisBrBrazilianStemFilter)

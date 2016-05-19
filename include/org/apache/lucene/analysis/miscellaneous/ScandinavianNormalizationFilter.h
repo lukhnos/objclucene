@@ -5,23 +5,35 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_RESTRICT
-#define OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter 0
 #else
-#define OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter
 
-#if !defined (_OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_) && (OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_
+#if !defined (OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter))
+#define OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief This filter normalize use of the interchangeable Scandinavian characters æÆäÄöÖøØ
+ and folded variants (aa, ao, ae, oe and oo) by transforming them to åÅæÆøØ.
+ <p>
+ It's a semantically less destructive solution than <code>ScandinavianFoldingFilter</code>,
+ most useful when a person with a Norwegian or Danish keyboard queries a Swedish index
+ and vice versa. This filter does <b>not</b>  the common Swedish folds of å and ä to a nor ö to o.
+ <p>
+ blåbærsyltetøj == blåbärsyltetöj == blaabaarsyltetoej but not blabarsyltetoj
+ räksmörgås == ræksmørgås == ræksmörgaos == raeksmoergaas but not raksmorgas
+ - seealso: ScandinavianFoldingFilter
+ */
 @interface OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
@@ -38,8 +50,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousScandinavianNormaliza
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter *new_OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter *create_OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter")

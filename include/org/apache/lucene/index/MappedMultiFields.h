@@ -5,25 +5,30 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexMappedMultiFields_INCLUDE_ALL")
-#if OrgApacheLuceneIndexMappedMultiFields_RESTRICT
-#define OrgApacheLuceneIndexMappedMultiFields_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexMappedMultiFields")
+#ifdef RESTRICT_OrgApacheLuceneIndexMappedMultiFields
+#define INCLUDE_ALL_OrgApacheLuceneIndexMappedMultiFields 0
 #else
-#define OrgApacheLuceneIndexMappedMultiFields_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexMappedMultiFields 1
 #endif
-#undef OrgApacheLuceneIndexMappedMultiFields_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexMappedMultiFields
 
-#if !defined (_OrgApacheLuceneIndexMappedMultiFields_) && (OrgApacheLuceneIndexMappedMultiFields_INCLUDE_ALL || OrgApacheLuceneIndexMappedMultiFields_INCLUDE)
-#define _OrgApacheLuceneIndexMappedMultiFields_
+#if !defined (OrgApacheLuceneIndexMappedMultiFields_) && (INCLUDE_ALL_OrgApacheLuceneIndexMappedMultiFields || defined(INCLUDE_OrgApacheLuceneIndexMappedMultiFields))
+#define OrgApacheLuceneIndexMappedMultiFields_
 
-#define OrgApacheLuceneIndexFilterLeafReader_RESTRICT 1
-#define OrgApacheLuceneIndexFilterLeafReader_FilterFields_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexFilterLeafReader 1
+#define INCLUDE_OrgApacheLuceneIndexFilterLeafReader_FilterFields 1
 #include "org/apache/lucene/index/FilterLeafReader.h"
 
 @class OrgApacheLuceneIndexMergeState;
 @class OrgApacheLuceneIndexMultiFields;
 @class OrgApacheLuceneIndexTerms;
 
+/*!
+ @brief A <code>Fields</code> implementation that merges multiple
+ Fields into one, and maps around deleted documents.
+ This is used for merging. 
+ */
 @interface OrgApacheLuceneIndexMappedMultiFields : OrgApacheLuceneIndexFilterLeafReader_FilterFields {
  @public
   OrgApacheLuceneIndexMergeState *mergeState_;
@@ -31,13 +36,16 @@
 
 #pragma mark Public
 
+/*!
+ @brief Create a new MappedMultiFields for merging, based on the supplied
+ mergestate and merged view of terms.
+ */
 - (instancetype)initWithOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState
                    withOrgApacheLuceneIndexMultiFields:(OrgApacheLuceneIndexMultiFields *)multiFields;
 
 - (OrgApacheLuceneIndexTerms *)termsWithNSString:(NSString *)field;
 
 #pragma mark Package-Private
-
 
 @end
 
@@ -49,8 +57,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexMappedMultiFields_initWithOrgApacheLu
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexMappedMultiFields *new_OrgApacheLuceneIndexMappedMultiFields_initWithOrgApacheLuceneIndexMergeState_withOrgApacheLuceneIndexMultiFields_(OrgApacheLuceneIndexMergeState *mergeState, OrgApacheLuceneIndexMultiFields *multiFields) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexMappedMultiFields *create_OrgApacheLuceneIndexMappedMultiFields_initWithOrgApacheLuceneIndexMergeState_withOrgApacheLuceneIndexMultiFields_(OrgApacheLuceneIndexMergeState *mergeState, OrgApacheLuceneIndexMultiFields *multiFields);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMappedMultiFields)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexMappedMultiFields_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexMappedMultiFields")

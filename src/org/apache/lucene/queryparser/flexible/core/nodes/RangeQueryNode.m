@@ -4,7 +4,6 @@
 //
 
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/FieldValuePairQueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/core/nodes/RangeQueryNode.h"
 
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode : NSObject

@@ -5,22 +5,31 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilLongValues_INCLUDE_ALL")
-#if OrgApacheLuceneUtilLongValues_RESTRICT
-#define OrgApacheLuceneUtilLongValues_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilLongValues")
+#ifdef RESTRICT_OrgApacheLuceneUtilLongValues
+#define INCLUDE_ALL_OrgApacheLuceneUtilLongValues 0
 #else
-#define OrgApacheLuceneUtilLongValues_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilLongValues 1
 #endif
-#undef OrgApacheLuceneUtilLongValues_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilLongValues
 
-#if !defined (_OrgApacheLuceneUtilLongValues_) && (OrgApacheLuceneUtilLongValues_INCLUDE_ALL || OrgApacheLuceneUtilLongValues_INCLUDE)
-#define _OrgApacheLuceneUtilLongValues_
+#if !defined (OrgApacheLuceneUtilLongValues_) && (INCLUDE_ALL_OrgApacheLuceneUtilLongValues || defined(INCLUDE_OrgApacheLuceneUtilLongValues))
+#define OrgApacheLuceneUtilLongValues_
 
-#define OrgApacheLuceneIndexNumericDocValues_RESTRICT 1
-#define OrgApacheLuceneIndexNumericDocValues_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexNumericDocValues 1
+#define INCLUDE_OrgApacheLuceneIndexNumericDocValues 1
 #include "org/apache/lucene/index/NumericDocValues.h"
 
+/*!
+ @brief Abstraction over an array of longs.
+ This class extends NumericDocValues so that we don't need to add another
+ level of abstraction every time we want eg. to use the <code>PackedInts</code>
+ utility classes to represent a <code>NumericDocValues</code> instance.
+  
+ */
 @interface OrgApacheLuceneUtilLongValues : OrgApacheLuceneIndexNumericDocValues
+
++ (OrgApacheLuceneUtilLongValues *)IDENTITY;
 
 #pragma mark Public
 
@@ -28,14 +37,22 @@
 
 - (jlong)getWithInt:(jint)idx;
 
+/*!
+ @brief Get value at <code>index</code>.
+ */
 - (jlong)getWithLong:(jlong)index;
 
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilLongValues)
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilLongValues *OrgApacheLuceneUtilLongValues_IDENTITY_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilLongValues, IDENTITY_, OrgApacheLuceneUtilLongValues *)
+/*!
+ @brief An instance that returns the provided value.
+ */
+inline OrgApacheLuceneUtilLongValues *OrgApacheLuceneUtilLongValues_get_IDENTITY();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT OrgApacheLuceneUtilLongValues *OrgApacheLuceneUtilLongValues_IDENTITY;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilLongValues, IDENTITY, OrgApacheLuceneUtilLongValues *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilLongValues_init(OrgApacheLuceneUtilLongValues *self);
 
@@ -43,4 +60,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilLongValues)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilLongValues_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilLongValues")

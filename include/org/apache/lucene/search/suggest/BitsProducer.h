@@ -5,28 +5,40 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSuggestBitsProducer_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSuggestBitsProducer_RESTRICT
-#define OrgApacheLuceneSearchSuggestBitsProducer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestBitsProducer")
+#ifdef RESTRICT_OrgApacheLuceneSearchSuggestBitsProducer
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestBitsProducer 0
 #else
-#define OrgApacheLuceneSearchSuggestBitsProducer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestBitsProducer 1
 #endif
-#undef OrgApacheLuceneSearchSuggestBitsProducer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSuggestBitsProducer
 
-#if !defined (_OrgApacheLuceneSearchSuggestBitsProducer_) && (OrgApacheLuceneSearchSuggestBitsProducer_INCLUDE_ALL || OrgApacheLuceneSearchSuggestBitsProducer_INCLUDE)
-#define _OrgApacheLuceneSearchSuggestBitsProducer_
+#if !defined (OrgApacheLuceneSearchSuggestBitsProducer_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestBitsProducer || defined(INCLUDE_OrgApacheLuceneSearchSuggestBitsProducer))
+#define OrgApacheLuceneSearchSuggestBitsProducer_
 
 @class OrgApacheLuceneIndexLeafReaderContext;
 @protocol OrgApacheLuceneUtilBits;
 
+/*!
+ @brief A producer of <code>Bits</code> per segment.
+ */
 @interface OrgApacheLuceneSearchSuggestBitsProducer : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Return <code>Bits</code> for the given leaf.
+ The returned instance must
+ be non-null and have a <code>length</code> equal to
+ <code>maxDoc</code>. 
+ */
 - (id<OrgApacheLuceneUtilBits>)getBitsWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
 #pragma mark Protected
 
+/*!
+ @brief Sole constructor, typically invoked by sub-classes.
+ */
 - (instancetype)init;
 
 @end
@@ -39,4 +51,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestBitsProducer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSuggestBitsProducer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestBitsProducer")

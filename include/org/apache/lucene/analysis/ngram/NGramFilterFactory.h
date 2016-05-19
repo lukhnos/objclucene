@@ -5,29 +5,43 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisNgramNGramFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisNgramNGramFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisNgramNGramFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisNgramNGramFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisNgramNGramFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisNgramNGramFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisNgramNGramFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisNgramNGramFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisNgramNGramFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisNgramNGramFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisNgramNGramFilterFactory_) && (OrgApacheLuceneAnalysisNgramNGramFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisNgramNGramFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisNgramNGramFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisNgramNGramFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisNgramNGramFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisNgramNGramFilterFactory))
+#define OrgApacheLuceneAnalysisNgramNGramFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
 @class OrgApacheLuceneAnalysisTokenFilter;
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>NGramTokenFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_ngrm" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+ &lt;filter class="solr.NGramFilterFactory" minGramSize="1" maxGramSize="2"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisNgramNGramFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new NGramFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -40,8 +54,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisNgramNGramFilterFactory_initWithJa
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisNgramNGramFilterFactory *new_OrgApacheLuceneAnalysisNgramNGramFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisNgramNGramFilterFactory *create_OrgApacheLuceneAnalysisNgramNGramFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNgramNGramFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisNgramNGramFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisNgramNGramFilterFactory")

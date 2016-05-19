@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchTermCollectingRewrite_INCLUDE_ALL")
-#if OrgApacheLuceneSearchTermCollectingRewrite_RESTRICT
-#define OrgApacheLuceneSearchTermCollectingRewrite_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchTermCollectingRewrite")
+#ifdef RESTRICT_OrgApacheLuceneSearchTermCollectingRewrite
+#define INCLUDE_ALL_OrgApacheLuceneSearchTermCollectingRewrite 0
 #else
-#define OrgApacheLuceneSearchTermCollectingRewrite_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchTermCollectingRewrite 1
 #endif
-#undef OrgApacheLuceneSearchTermCollectingRewrite_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchTermCollectingRewrite
 
-#if !defined (_OrgApacheLuceneSearchTermCollectingRewrite_) && (OrgApacheLuceneSearchTermCollectingRewrite_INCLUDE_ALL || OrgApacheLuceneSearchTermCollectingRewrite_INCLUDE)
-#define _OrgApacheLuceneSearchTermCollectingRewrite_
+#if !defined (OrgApacheLuceneSearchTermCollectingRewrite_) && (INCLUDE_ALL_OrgApacheLuceneSearchTermCollectingRewrite || defined(INCLUDE_OrgApacheLuceneSearchTermCollectingRewrite))
+#define OrgApacheLuceneSearchTermCollectingRewrite_
 
-#define OrgApacheLuceneSearchMultiTermQuery_RESTRICT 1
-#define OrgApacheLuceneSearchMultiTermQuery_RewriteMethod_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchMultiTermQuery 1
+#define INCLUDE_OrgApacheLuceneSearchMultiTermQuery_RewriteMethod 1
 #include "org/apache/lucene/search/MultiTermQuery.h"
 
 @class OrgApacheLuceneIndexIndexReader;
@@ -31,6 +31,9 @@
 
 #pragma mark Protected
 
+/*!
+ @brief Add a MultiTermQuery term to the top-level query builder.
+ */
 - (void)addClauseWithId:(id)topLevel
 withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
                 withInt:(jint)docCount
@@ -42,8 +45,14 @@ withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
               withFloat:(jfloat)boost
 withOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)states;
 
+/*!
+ @brief Finalize the creation of the query from the builder.
+ */
 - (OrgApacheLuceneSearchQuery *)buildWithId:(id)builder;
 
+/*!
+ @brief Return a suitable builder for the top-level Query for holding all expanded terms.
+ */
 - (id)getTopLevelBuilder;
 
 #pragma mark Package-Private
@@ -64,8 +73,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermCollectingRewrite)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchTermCollectingRewrite_TermCollector_) && (OrgApacheLuceneSearchTermCollectingRewrite_INCLUDE_ALL || OrgApacheLuceneSearchTermCollectingRewrite_TermCollector_INCLUDE)
-#define _OrgApacheLuceneSearchTermCollectingRewrite_TermCollector_
+#if !defined (OrgApacheLuceneSearchTermCollectingRewrite_TermCollector_) && (INCLUDE_ALL_OrgApacheLuceneSearchTermCollectingRewrite || defined(INCLUDE_OrgApacheLuceneSearchTermCollectingRewrite_TermCollector))
+#define OrgApacheLuceneSearchTermCollectingRewrite_TermCollector_
 
 @class OrgApacheLuceneIndexIndexReaderContext;
 @class OrgApacheLuceneIndexLeafReaderContext;
@@ -77,13 +86,22 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermCollectingRewrite)
  @public
   OrgApacheLuceneIndexLeafReaderContext *readerContext_;
   OrgApacheLuceneIndexIndexReaderContext *topReaderContext_;
+  /*!
+   @brief attributes used for communication with the enum
+   */
   OrgApacheLuceneUtilAttributeSource *attributes_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief return false to stop collecting
+ */
 - (jboolean)collectWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes;
 
+/*!
+ @brief the next segment's <code>TermsEnum</code> that is used to collect terms
+ */
 - (void)setNextEnumWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)termsEnum;
 
 - (void)setReaderContextWithOrgApacheLuceneIndexIndexReaderContext:(OrgApacheLuceneIndexIndexReaderContext *)topReaderContext
@@ -107,4 +125,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermCollectingRewrite_TermCollec
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchTermCollectingRewrite_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchTermCollectingRewrite")

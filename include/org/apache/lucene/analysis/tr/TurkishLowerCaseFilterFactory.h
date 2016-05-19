@@ -5,33 +5,47 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisTrTurkishLowerCaseFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisTrTurkishLowerCaseFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisTrTurkishLowerCaseFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTrTurkishLowerCaseFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisTrTurkishLowerCaseFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTrTurkishLowerCaseFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisTrTurkishLowerCaseFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTrTurkishLowerCaseFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisTrTurkishLowerCaseFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisTrTurkishLowerCaseFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisTrTurkishLowerCaseFilterFactory_) && (OrgApacheLuceneAnalysisTrTurkishLowerCaseFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisTrTurkishLowerCaseFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisTrTurkishLowerCaseFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisTrTurkishLowerCaseFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTrTurkishLowerCaseFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisTrTurkishLowerCaseFilterFactory))
+#define OrgApacheLuceneAnalysisTrTurkishLowerCaseFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-#define OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent 1
 #include "org/apache/lucene/analysis/util/MultiTermAwareComponent.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 @class OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>TurkishLowerCaseFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_trlwr" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+ &lt;filter class="solr.TurkishLowerCaseFilterFactory"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisTrTurkishLowerCaseFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilMultiTermAwareComponent >
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new TurkishLowerCaseFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -46,8 +60,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisTrTurkishLowerCaseFilterFactory_in
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisTrTurkishLowerCaseFilterFactory *new_OrgApacheLuceneAnalysisTrTurkishLowerCaseFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisTrTurkishLowerCaseFilterFactory *create_OrgApacheLuceneAnalysisTrTurkishLowerCaseFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTrTurkishLowerCaseFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisTrTurkishLowerCaseFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTrTurkishLowerCaseFilterFactory")

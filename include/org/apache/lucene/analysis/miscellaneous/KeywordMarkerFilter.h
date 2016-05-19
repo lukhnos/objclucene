@@ -5,23 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilter_RESTRICT
-#define OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilter 0
 #else
-#define OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilter
 
-#if !defined (_OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilter_) && (OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilter_
+#if !defined (OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilter))
+#define OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief Marks terms as keywords via the <code>KeywordAttribute</code>.
+ - seealso: KeywordAttribute
+ */
 @interface OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
@@ -30,6 +34,10 @@
 
 #pragma mark Protected
 
+/*!
+ @brief Creates a new <code>KeywordMarkerFilter</code>
+ @param inArg the input stream
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
 
 - (jboolean)isKeyword;
@@ -44,4 +52,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilt
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilter")

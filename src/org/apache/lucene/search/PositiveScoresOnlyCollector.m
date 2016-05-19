@@ -36,6 +36,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchPositiveScoresOnlyColle
 
 __attribute__((unused)) static OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1 *new_OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1_initWithOrgApacheLuceneSearchLeafCollector_(id<OrgApacheLuceneSearchLeafCollector> arg$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1 *create_OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1_initWithOrgApacheLuceneSearchLeafCollector_(id<OrgApacheLuceneSearchLeafCollector> arg$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1)
 
 @implementation OrgApacheLuceneSearchPositiveScoresOnlyCollector
@@ -46,7 +48,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1)
 }
 
 - (id<OrgApacheLuceneSearchLeafCollector>)getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
-  return [new_OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1_initWithOrgApacheLuceneSearchLeafCollector_([super getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:context]) autorelease];
+  return create_OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1_initWithOrgApacheLuceneSearchLeafCollector_([super getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:context]);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -65,9 +67,11 @@ void OrgApacheLuceneSearchPositiveScoresOnlyCollector_initWithOrgApacheLuceneSea
 }
 
 OrgApacheLuceneSearchPositiveScoresOnlyCollector *new_OrgApacheLuceneSearchPositiveScoresOnlyCollector_initWithOrgApacheLuceneSearchCollector_(id<OrgApacheLuceneSearchCollector> inArg) {
-  OrgApacheLuceneSearchPositiveScoresOnlyCollector *self = [OrgApacheLuceneSearchPositiveScoresOnlyCollector alloc];
-  OrgApacheLuceneSearchPositiveScoresOnlyCollector_initWithOrgApacheLuceneSearchCollector_(self, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchPositiveScoresOnlyCollector, initWithOrgApacheLuceneSearchCollector_, inArg)
+}
+
+OrgApacheLuceneSearchPositiveScoresOnlyCollector *create_OrgApacheLuceneSearchPositiveScoresOnlyCollector_initWithOrgApacheLuceneSearchCollector_(id<OrgApacheLuceneSearchCollector> inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchPositiveScoresOnlyCollector, initWithOrgApacheLuceneSearchCollector_, inArg)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPositiveScoresOnlyCollector)
@@ -116,9 +120,11 @@ void OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1_initWithOrgApacheLucene
 }
 
 OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1 *new_OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1_initWithOrgApacheLuceneSearchLeafCollector_(id<OrgApacheLuceneSearchLeafCollector> arg$0) {
-  OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1 *self = [OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1 alloc];
-  OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1_initWithOrgApacheLuceneSearchLeafCollector_(self, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1, initWithOrgApacheLuceneSearchLeafCollector_, arg$0)
+}
+
+OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1 *create_OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1_initWithOrgApacheLuceneSearchLeafCollector_(id<OrgApacheLuceneSearchLeafCollector> arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1, initWithOrgApacheLuceneSearchLeafCollector_, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPositiveScoresOnlyCollector_$1)

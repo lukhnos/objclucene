@@ -33,18 +33,41 @@
 
 - (void)advanceTail;
 
+/*!
+ @brief Reinitializes head, freq and doc from 'head'
+ */
 - (void)setDocAndFreq;
 
+/*!
+ @brief Advance tail to the lead until there is a match.
+ */
 - (jint)doNext;
 
+/*!
+ @brief Advance all entries from the tail to know about all matches on the
+ current doc.
+ */
 - (void)updateFreq;
 
+/*!
+ @brief Insert an entry in 'tail' and evict the least-costly scorer if full.
+ */
 - (OrgApacheLuceneSearchDisiWrapper *)insertTailWithOverFlowWithOrgApacheLuceneSearchDisiWrapper:(OrgApacheLuceneSearchDisiWrapper *)s;
 
+/*!
+ @brief Add an entry to 'tail'.
+ Fails if over capacity. 
+ */
 - (void)addTailWithOrgApacheLuceneSearchDisiWrapper:(OrgApacheLuceneSearchDisiWrapper *)s;
 
+/*!
+ @brief Pop the least-costly scorer from 'tail'.
+ */
 - (OrgApacheLuceneSearchDisiWrapper *)popTail;
 
+/*!
+ @brief Heap helpers
+ */
 + (void)upHeapCostWithOrgApacheLuceneSearchDisiWrapperArray:(IOSObjectArray *)heap
                                                     withInt:(jint)i;
 
@@ -94,6 +117,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchMinShouldMatchSumScorer
 
 __attribute__((unused)) static OrgApacheLuceneSearchMinShouldMatchSumScorer_$1 *new_OrgApacheLuceneSearchMinShouldMatchSumScorer_$1_initWithInt_(jint arg$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchMinShouldMatchSumScorer_$1 *create_OrgApacheLuceneSearchMinShouldMatchSumScorer_$1_initWithInt_(jint arg$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMinShouldMatchSumScorer_$1)
 
 @implementation OrgApacheLuceneSearchMinShouldMatchSumScorer
@@ -120,7 +145,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMinShouldMatchSumScorer_$1)
 }
 
 - (jint)nextDoc {
-  for (OrgApacheLuceneSearchDisiWrapper *s = lead_; s != nil; s = ((OrgApacheLuceneSearchDisiWrapper *) nil_chk(s))->next_) {
+  for (OrgApacheLuceneSearchDisiWrapper *s = lead_; s != nil; s = s->next_) {
     OrgApacheLuceneSearchDisiWrapper *evicted = OrgApacheLuceneSearchMinShouldMatchSumScorer_insertTailWithOverFlowWithOrgApacheLuceneSearchDisiWrapper_(self, s);
     if (evicted != nil) {
       if (evicted->doc_ == doc_) {
@@ -137,7 +162,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMinShouldMatchSumScorer_$1)
 }
 
 - (jint)advanceWithInt:(jint)target {
-  for (OrgApacheLuceneSearchDisiWrapper *s = lead_; s != nil; s = ((OrgApacheLuceneSearchDisiWrapper *) nil_chk(s))->next_) {
+  for (OrgApacheLuceneSearchDisiWrapper *s = lead_; s != nil; s = s->next_) {
     OrgApacheLuceneSearchDisiWrapper *evicted = OrgApacheLuceneSearchMinShouldMatchSumScorer_insertTailWithOverFlowWithOrgApacheLuceneSearchDisiWrapper_(self, s);
     if (evicted != nil) {
       evicted->doc_ = [((OrgApacheLuceneSearchScorer *) nil_chk(evicted->iterator_)) advanceWithInt:target];
@@ -191,7 +216,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMinShouldMatchSumScorer_$1)
   OrgApacheLuceneSearchMinShouldMatchSumScorer_updateFreq(self);
   jdouble score = 0;
   for (OrgApacheLuceneSearchDisiWrapper *s = lead_; s != nil; s = s->next_) {
-    JrePlusAssignDoubleD(&score, [((OrgApacheLuceneSearchScorer *) nil_chk(((OrgApacheLuceneSearchDisiWrapper *) nil_chk(s))->iterator_)) score]);
+    JrePlusAssignDoubleD(&score, [((OrgApacheLuceneSearchScorer *) nil_chk(s->iterator_)) score]);
   }
   return IOSFloatArray_Get(nil_chk(coord_), freq_) * (jfloat) score;
 }
@@ -234,15 +259,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMinShouldMatchSumScorer_$1)
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "costWithJavaUtilCollection:withInt:", "cost", "J", 0xa, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchWeight:withJavaUtilCollection:withInt:withFloatArray:", "MinShouldMatchSumScorer", NULL, 0x0, NULL, NULL },
+    { "costWithJavaUtilCollection:withInt:", "cost", "J", 0xa, NULL, "(Ljava/util/Collection<Lorg/apache/lucene/search/Scorer;>;I)J" },
+    { "initWithOrgApacheLuceneSearchWeight:withJavaUtilCollection:withInt:withFloatArray:", "MinShouldMatchSumScorer", NULL, 0x0, NULL, "(Lorg/apache/lucene/search/Weight;Ljava/util/Collection<Lorg/apache/lucene/search/Scorer;>;I[F)V" },
     { "cost", NULL, "J", 0x1, NULL, NULL },
-    { "getChildren", NULL, "Ljava.util.Collection;", 0x11, NULL, NULL },
+    { "getChildren", NULL, "Ljava.util.Collection;", 0x11, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/search/Scorer$ChildScorer;>;" },
     { "nextDoc", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
     { "advanceWithInt:", "advance", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "addLeadWithOrgApacheLuceneSearchDisiWrapper:", "addLead", "V", 0x2, NULL, NULL },
+    { "addLeadWithOrgApacheLuceneSearchDisiWrapper:", "addLead", "V", 0x2, NULL, "(Lorg/apache/lucene/search/DisiWrapper<Lorg/apache/lucene/search/Scorer;>;)V" },
     { "pushBackLeads", NULL, "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "advanceTailWithOrgApacheLuceneSearchDisiWrapper:", "advanceTail", "V", 0x2, "Ljava.io.IOException;", NULL },
+    { "advanceTailWithOrgApacheLuceneSearchDisiWrapper:", "advanceTail", "V", 0x2, "Ljava.io.IOException;", "(Lorg/apache/lucene/search/DisiWrapper<Lorg/apache/lucene/search/Scorer;>;)V" },
     { "advanceTail", NULL, "V", 0x2, "Ljava.io.IOException;", NULL },
     { "setDocAndFreq", NULL, "V", 0x2, NULL, NULL },
     { "doNext", NULL, "I", 0x2, "Ljava.io.IOException;", NULL },
@@ -250,9 +275,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMinShouldMatchSumScorer_$1)
     { "freq", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
     { "score", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
     { "docID", NULL, "I", 0x1, NULL, NULL },
-    { "insertTailWithOverFlowWithOrgApacheLuceneSearchDisiWrapper:", "insertTailWithOverFlow", "Lorg.apache.lucene.search.DisiWrapper;", 0x2, NULL, NULL },
-    { "addTailWithOrgApacheLuceneSearchDisiWrapper:", "addTail", "V", 0x2, NULL, NULL },
-    { "popTail", NULL, "Lorg.apache.lucene.search.DisiWrapper;", 0x2, NULL, NULL },
+    { "insertTailWithOverFlowWithOrgApacheLuceneSearchDisiWrapper:", "insertTailWithOverFlow", "Lorg.apache.lucene.search.DisiWrapper;", 0x2, NULL, "(Lorg/apache/lucene/search/DisiWrapper<Lorg/apache/lucene/search/Scorer;>;)Lorg/apache/lucene/search/DisiWrapper<Lorg/apache/lucene/search/Scorer;>;" },
+    { "addTailWithOrgApacheLuceneSearchDisiWrapper:", "addTail", "V", 0x2, NULL, "(Lorg/apache/lucene/search/DisiWrapper<Lorg/apache/lucene/search/Scorer;>;)V" },
+    { "popTail", NULL, "Lorg.apache.lucene.search.DisiWrapper;", 0x2, NULL, "()Lorg/apache/lucene/search/DisiWrapper<Lorg/apache/lucene/search/Scorer;>;" },
     { "upHeapCostWithOrgApacheLuceneSearchDisiWrapperArray:withInt:", "upHeapCost", "V", 0xa, NULL, NULL },
     { "downHeapCostWithOrgApacheLuceneSearchDisiWrapperArray:withInt:", "downHeapCost", "V", 0xa, NULL, NULL },
   };
@@ -276,13 +301,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMinShouldMatchSumScorer_$1)
 
 jlong OrgApacheLuceneSearchMinShouldMatchSumScorer_costWithJavaUtilCollection_withInt_(id<JavaUtilCollection> scorers, jint minShouldMatch) {
   OrgApacheLuceneSearchMinShouldMatchSumScorer_initialize();
-  OrgApacheLuceneUtilPriorityQueue *pq = [new_OrgApacheLuceneSearchMinShouldMatchSumScorer_$1_initWithInt_([((id<JavaUtilCollection>) nil_chk(scorers)) size] - minShouldMatch + 1) autorelease];
+  OrgApacheLuceneUtilPriorityQueue *pq = create_OrgApacheLuceneSearchMinShouldMatchSumScorer_$1_initWithInt_([((id<JavaUtilCollection>) nil_chk(scorers)) size] - minShouldMatch + 1);
   for (OrgApacheLuceneSearchScorer * __strong scorer in scorers) {
     [pq insertWithOverflowWithId:scorer];
   }
   jlong cost = 0;
   for (OrgApacheLuceneSearchScorer *scorer = [pq pop]; scorer != nil; scorer = [pq pop]) {
-    cost += [((OrgApacheLuceneSearchScorer *) nil_chk(scorer)) cost];
+    cost += [scorer cost];
   }
   return cost;
 }
@@ -290,10 +315,10 @@ jlong OrgApacheLuceneSearchMinShouldMatchSumScorer_costWithJavaUtilCollection_wi
 void OrgApacheLuceneSearchMinShouldMatchSumScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilCollection_withInt_withFloatArray_(OrgApacheLuceneSearchMinShouldMatchSumScorer *self, OrgApacheLuceneSearchWeight *weight, id<JavaUtilCollection> scorers, jint minShouldMatch, IOSFloatArray *coord) {
   OrgApacheLuceneSearchScorer_initWithOrgApacheLuceneSearchWeight_(self, weight);
   if (minShouldMatch > [((id<JavaUtilCollection>) nil_chk(scorers)) size]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"minShouldMatch should be <= the number of scorers") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"minShouldMatch should be <= the number of scorers");
   }
   if (minShouldMatch < 1) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"minShouldMatch should be >= 1") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"minShouldMatch should be >= 1");
   }
   self->minShouldMatch_ = minShouldMatch;
   JreStrongAssign(&self->coord_, coord);
@@ -301,20 +326,22 @@ void OrgApacheLuceneSearchMinShouldMatchSumScorer_initWithOrgApacheLuceneSearchW
   JreStrongAssignAndConsume(&self->head_, new_OrgApacheLuceneSearchDisiPriorityQueue_initWithInt_([scorers size] - minShouldMatch + 1));
   JreStrongAssignAndConsume(&self->tail_, [IOSObjectArray newArrayWithLength:minShouldMatch - 1 type:OrgApacheLuceneSearchDisiWrapper_class_()]);
   for (OrgApacheLuceneSearchScorer * __strong scorer in scorers) {
-    OrgApacheLuceneSearchMinShouldMatchSumScorer_addLeadWithOrgApacheLuceneSearchDisiWrapper_(self, [new_OrgApacheLuceneSearchDisiWrapper_initWithOrgApacheLuceneSearchDocIdSetIterator_(scorer) autorelease]);
+    OrgApacheLuceneSearchMinShouldMatchSumScorer_addLeadWithOrgApacheLuceneSearchDisiWrapper_(self, create_OrgApacheLuceneSearchDisiWrapper_initWithOrgApacheLuceneSearchDocIdSetIterator_(scorer));
   }
-  id<JavaUtilList> children = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> children = create_JavaUtilArrayList_init();
   for (OrgApacheLuceneSearchScorer * __strong scorer in scorers) {
-    [children addWithId:[new_OrgApacheLuceneSearchScorer_ChildScorer_initWithOrgApacheLuceneSearchScorer_withNSString_(scorer, @"SHOULD") autorelease]];
+    [children addWithId:create_OrgApacheLuceneSearchScorer_ChildScorer_initWithOrgApacheLuceneSearchScorer_withNSString_(scorer, @"SHOULD")];
   }
   JreStrongAssign(&self->childScorers_, JavaUtilCollections_unmodifiableCollectionWithJavaUtilCollection_(children));
   self->cost_ = OrgApacheLuceneSearchMinShouldMatchSumScorer_costWithJavaUtilCollection_withInt_(scorers, minShouldMatch);
 }
 
 OrgApacheLuceneSearchMinShouldMatchSumScorer *new_OrgApacheLuceneSearchMinShouldMatchSumScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilCollection_withInt_withFloatArray_(OrgApacheLuceneSearchWeight *weight, id<JavaUtilCollection> scorers, jint minShouldMatch, IOSFloatArray *coord) {
-  OrgApacheLuceneSearchMinShouldMatchSumScorer *self = [OrgApacheLuceneSearchMinShouldMatchSumScorer alloc];
-  OrgApacheLuceneSearchMinShouldMatchSumScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilCollection_withInt_withFloatArray_(self, weight, scorers, minShouldMatch, coord);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchMinShouldMatchSumScorer, initWithOrgApacheLuceneSearchWeight_withJavaUtilCollection_withInt_withFloatArray_, weight, scorers, minShouldMatch, coord)
+}
+
+OrgApacheLuceneSearchMinShouldMatchSumScorer *create_OrgApacheLuceneSearchMinShouldMatchSumScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilCollection_withInt_withFloatArray_(OrgApacheLuceneSearchWeight *weight, id<JavaUtilCollection> scorers, jint minShouldMatch, IOSFloatArray *coord) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchMinShouldMatchSumScorer, initWithOrgApacheLuceneSearchWeight_withJavaUtilCollection_withInt_withFloatArray_, weight, scorers, minShouldMatch, coord)
 }
 
 void OrgApacheLuceneSearchMinShouldMatchSumScorer_addLeadWithOrgApacheLuceneSearchDisiWrapper_(OrgApacheLuceneSearchMinShouldMatchSumScorer *self, OrgApacheLuceneSearchDisiWrapper *lead) {
@@ -324,7 +351,7 @@ void OrgApacheLuceneSearchMinShouldMatchSumScorer_addLeadWithOrgApacheLuceneSear
 }
 
 void OrgApacheLuceneSearchMinShouldMatchSumScorer_pushBackLeads(OrgApacheLuceneSearchMinShouldMatchSumScorer *self) {
-  for (OrgApacheLuceneSearchDisiWrapper *s = self->lead_; s != nil; s = ((OrgApacheLuceneSearchDisiWrapper *) nil_chk(s))->next_) {
+  for (OrgApacheLuceneSearchDisiWrapper *s = self->lead_; s != nil; s = s->next_) {
     OrgApacheLuceneSearchMinShouldMatchSumScorer_addTailWithOrgApacheLuceneSearchDisiWrapper_(self, s);
   }
 }
@@ -462,7 +489,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchMinShouldMatchSumScorer)
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x4, NULL, NULL },
+    { "lessThanWithId:withId:", "lessThan", "Z", 0x4, NULL, "(Lorg/apache/lucene/search/Scorer;Lorg/apache/lucene/search/Scorer;)Z" },
     { "initWithInt:", "", NULL, 0x0, NULL, NULL },
   };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.Scorer;"};
@@ -478,9 +505,11 @@ void OrgApacheLuceneSearchMinShouldMatchSumScorer_$1_initWithInt_(OrgApacheLucen
 }
 
 OrgApacheLuceneSearchMinShouldMatchSumScorer_$1 *new_OrgApacheLuceneSearchMinShouldMatchSumScorer_$1_initWithInt_(jint arg$0) {
-  OrgApacheLuceneSearchMinShouldMatchSumScorer_$1 *self = [OrgApacheLuceneSearchMinShouldMatchSumScorer_$1 alloc];
-  OrgApacheLuceneSearchMinShouldMatchSumScorer_$1_initWithInt_(self, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchMinShouldMatchSumScorer_$1, initWithInt_, arg$0)
+}
+
+OrgApacheLuceneSearchMinShouldMatchSumScorer_$1 *create_OrgApacheLuceneSearchMinShouldMatchSumScorer_$1_initWithInt_(jint arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchMinShouldMatchSumScorer_$1, initWithInt_, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchMinShouldMatchSumScorer_$1)

@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/util/BytesRefIterator.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/BytesRefIterator.h"
 
@@ -23,17 +21,23 @@ __attribute__((unused)) static void OrgApacheLuceneUtilBytesRefIterator_$1_init(
 
 __attribute__((unused)) static OrgApacheLuceneUtilBytesRefIterator_$1 *new_OrgApacheLuceneUtilBytesRefIterator_$1_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneUtilBytesRefIterator_$1 *create_OrgApacheLuceneUtilBytesRefIterator_$1_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBytesRefIterator_$1)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilBytesRefIterator)
 
-id<OrgApacheLuceneUtilBytesRefIterator> OrgApacheLuceneUtilBytesRefIterator_EMPTY_;
+id<OrgApacheLuceneUtilBytesRefIterator> OrgApacheLuceneUtilBytesRefIterator_EMPTY;
 
 @implementation OrgApacheLuceneUtilBytesRefIterator
 
++ (id<OrgApacheLuceneUtilBytesRefIterator>)EMPTY {
+  return OrgApacheLuceneUtilBytesRefIterator_EMPTY;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilBytesRefIterator class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilBytesRefIterator_EMPTY_, new_OrgApacheLuceneUtilBytesRefIterator_$1_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilBytesRefIterator_EMPTY, new_OrgApacheLuceneUtilBytesRefIterator_$1_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilBytesRefIterator)
   }
 }
@@ -43,7 +47,7 @@ id<OrgApacheLuceneUtilBytesRefIterator> OrgApacheLuceneUtilBytesRefIterator_EMPT
     { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x401, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "EMPTY_", NULL, 0x19, "Lorg.apache.lucene.util.BytesRefIterator;", &OrgApacheLuceneUtilBytesRefIterator_EMPTY_, NULL, .constantValue.asLong = 0 },
+    { "EMPTY", "EMPTY", 0x19, "Lorg.apache.lucene.util.BytesRefIterator;", &OrgApacheLuceneUtilBytesRefIterator_EMPTY, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneUtilBytesRefIterator = { 2, "BytesRefIterator", "org.apache.lucene.util", NULL, 0x609, 1, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilBytesRefIterator;
@@ -82,9 +86,11 @@ void OrgApacheLuceneUtilBytesRefIterator_$1_init(OrgApacheLuceneUtilBytesRefIter
 }
 
 OrgApacheLuceneUtilBytesRefIterator_$1 *new_OrgApacheLuceneUtilBytesRefIterator_$1_init() {
-  OrgApacheLuceneUtilBytesRefIterator_$1 *self = [OrgApacheLuceneUtilBytesRefIterator_$1 alloc];
-  OrgApacheLuceneUtilBytesRefIterator_$1_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilBytesRefIterator_$1, init)
+}
+
+OrgApacheLuceneUtilBytesRefIterator_$1 *create_OrgApacheLuceneUtilBytesRefIterator_$1_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilBytesRefIterator_$1, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBytesRefIterator_$1)

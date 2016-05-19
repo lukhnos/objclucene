@@ -5,21 +5,30 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisUtilResourceLoaderAware_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisUtilResourceLoaderAware_RESTRICT
-#define OrgApacheLuceneAnalysisUtilResourceLoaderAware_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilResourceLoaderAware")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisUtilResourceLoaderAware
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisUtilResourceLoaderAware 0
 #else
-#define OrgApacheLuceneAnalysisUtilResourceLoaderAware_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisUtilResourceLoaderAware 1
 #endif
-#undef OrgApacheLuceneAnalysisUtilResourceLoaderAware_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisUtilResourceLoaderAware
 
-#if !defined (_OrgApacheLuceneAnalysisUtilResourceLoaderAware_) && (OrgApacheLuceneAnalysisUtilResourceLoaderAware_INCLUDE_ALL || OrgApacheLuceneAnalysisUtilResourceLoaderAware_INCLUDE)
-#define _OrgApacheLuceneAnalysisUtilResourceLoaderAware_
+#if !defined (OrgApacheLuceneAnalysisUtilResourceLoaderAware_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisUtilResourceLoaderAware || defined(INCLUDE_OrgApacheLuceneAnalysisUtilResourceLoaderAware))
+#define OrgApacheLuceneAnalysisUtilResourceLoaderAware_
 
 @protocol OrgApacheLuceneAnalysisUtilResourceLoader;
 
+/*!
+ @brief Interface for a component that needs to be initialized by
+ an implementation of <code>ResourceLoader</code>.
+ - seealso: ResourceLoader
+ */
 @protocol OrgApacheLuceneAnalysisUtilResourceLoaderAware < NSObject, JavaObject >
 
+/*!
+ @brief Initializes this component with the provided ResourceLoader
+ (used for loading classes, files, etc).
+ */
 - (void)informWithOrgApacheLuceneAnalysisUtilResourceLoader:(id<OrgApacheLuceneAnalysisUtilResourceLoader>)loader;
 
 @end
@@ -30,4 +39,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilResourceLoaderAware)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisUtilResourceLoaderAware_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilResourceLoaderAware")

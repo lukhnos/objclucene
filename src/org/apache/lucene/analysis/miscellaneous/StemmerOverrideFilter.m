@@ -150,9 +150,11 @@ void OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_initWithOrgApache
 }
 
 OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter *new_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap *stemmerOverrideMap) {
-  OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter *self = [OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter alloc];
-  OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap_(self, input, stemmerOverrideMap);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter, initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap_, input, stemmerOverrideMap)
+}
+
+OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter *create_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap *stemmerOverrideMap) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter, initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap_, input, stemmerOverrideMap)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter)
@@ -187,11 +189,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousStemmerOver
     if ([fst_ findTargetArcWithInt:ignoreCase_ ? JavaLangCharacter_toLowerCaseWithInt_(codePoint) : codePoint withOrgApacheLuceneUtilFstFST_Arc:scratchArc withOrgApacheLuceneUtilFstFST_Arc:scratchArc withOrgApacheLuceneUtilFstFST_BytesReader:fstReader] == nil) {
       return nil;
     }
-    pendingOutput = [fst_->outputs_ addWithId:pendingOutput withId:((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(scratchArc))->output_];
+    pendingOutput = [fst_->outputs_ addWithId:pendingOutput withId:((OrgApacheLuceneUtilBytesRef *) ((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(scratchArc))->output_)];
     bufUpto += JavaLangCharacter_charCountWithInt_(codePoint);
   }
   if ([((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(scratchArc)) isFinal]) {
-    matchOutput = [fst_->outputs_ addWithId:pendingOutput withId:scratchArc->nextFinalOutput_];
+    matchOutput = [fst_->outputs_ addWithId:pendingOutput withId:((OrgApacheLuceneUtilBytesRef *) scratchArc->nextFinalOutput_)];
   }
   return matchOutput;
 }
@@ -203,9 +205,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousStemmerOver
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilFstFST:withBoolean:", "StemmerOverrideMap", NULL, 0x1, NULL, NULL },
+    { "initWithOrgApacheLuceneUtilFstFST:withBoolean:", "StemmerOverrideMap", NULL, 0x1, NULL, "(Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/BytesRef;>;Z)V" },
     { "getBytesReader", NULL, "Lorg.apache.lucene.util.fst.FST$BytesReader;", 0x1, NULL, NULL },
-    { "getWithCharArray:withInt:withOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_BytesReader:", "get", "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
+    { "getWithCharArray:withInt:withOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_BytesReader:", "get", "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", "([CILorg/apache/lucene/util/fst/FST$Arc<Lorg/apache/lucene/util/BytesRef;>;Lorg/apache/lucene/util/fst/FST$BytesReader;)Lorg/apache/lucene/util/BytesRef;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "fst_", NULL, 0x12, "Lorg.apache.lucene.util.fst.FST;", NULL, "Lorg/apache/lucene/util/fst/FST<Lorg/apache/lucene/util/BytesRef;>;", .constantValue.asLong = 0 },
@@ -224,9 +226,11 @@ void OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMa
 }
 
 OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap *new_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap_initWithOrgApacheLuceneUtilFstFST_withBoolean_(OrgApacheLuceneUtilFstFST *fst, jboolean ignoreCase) {
-  OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap *self = [OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap alloc];
-  OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap_initWithOrgApacheLuceneUtilFstFST_withBoolean_(self, fst, ignoreCase);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap, initWithOrgApacheLuceneUtilFstFST_withBoolean_, fst, ignoreCase)
+}
+
+OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap *create_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap_initWithOrgApacheLuceneUtilFstFST_withBoolean_(OrgApacheLuceneUtilFstFST *fst, jboolean ignoreCase) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap, initWithOrgApacheLuceneUtilFstFST_withBoolean_, fst, ignoreCase)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap)
@@ -259,7 +263,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   else {
     [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(spare_)) copyCharsWithJavaLangCharSequence:input withInt:0 withInt:length];
   }
-  if ([((OrgApacheLuceneUtilBytesRefHash *) nil_chk(hash__)) addWithOrgApacheLuceneUtilBytesRef:[((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(spare_)) get]] >= 0) {
+  if ([((OrgApacheLuceneUtilBytesRefHash *) nil_chk(hash__)) addWithOrgApacheLuceneUtilBytesRef:[spare_ get]] >= 0) {
     [((JavaUtilArrayList *) nil_chk(outputValues_)) addWithId:output];
     return true;
   }
@@ -268,18 +272,18 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap *)build {
   OrgApacheLuceneUtilFstByteSequenceOutputs *outputs = OrgApacheLuceneUtilFstByteSequenceOutputs_getSingleton();
-  OrgApacheLuceneUtilFstBuilder *builder = [new_OrgApacheLuceneUtilFstBuilder_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_withOrgApacheLuceneUtilFstOutputs_(JreLoadStatic(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum, BYTE4), outputs) autorelease];
+  OrgApacheLuceneUtilFstBuilder *builder = create_OrgApacheLuceneUtilFstBuilder_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE_withOrgApacheLuceneUtilFstOutputs_(JreLoadEnum(OrgApacheLuceneUtilFstFST_INPUT_TYPE, BYTE4), outputs);
   IOSIntArray *sort = [((OrgApacheLuceneUtilBytesRefHash *) nil_chk(hash__)) sortWithJavaUtilComparator:OrgApacheLuceneUtilBytesRef_getUTF8SortedAsUnicodeComparator()];
-  OrgApacheLuceneUtilIntsRefBuilder *intsSpare = [new_OrgApacheLuceneUtilIntsRefBuilder_init() autorelease];
+  OrgApacheLuceneUtilIntsRefBuilder *intsSpare = create_OrgApacheLuceneUtilIntsRefBuilder_init();
   jint size = [hash__ size];
-  OrgApacheLuceneUtilBytesRef *spare = [new_OrgApacheLuceneUtilBytesRef_init() autorelease];
+  OrgApacheLuceneUtilBytesRef *spare = create_OrgApacheLuceneUtilBytesRef_init();
   for (jint i = 0; i < size; i++) {
     jint id_ = IOSIntArray_Get(nil_chk(sort), i);
     OrgApacheLuceneUtilBytesRef *bytesRef = [hash__ getWithInt:id_ withOrgApacheLuceneUtilBytesRef:spare];
     [intsSpare copyUTF8BytesWithOrgApacheLuceneUtilBytesRef:bytesRef];
-    [builder addWithOrgApacheLuceneUtilIntsRef:[intsSpare get] withId:[new_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_([((JavaUtilArrayList *) nil_chk(outputValues_)) getWithInt:id_]) autorelease]];
+    [builder addWithOrgApacheLuceneUtilIntsRef:[intsSpare get] withId:create_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_([((JavaUtilArrayList *) nil_chk(outputValues_)) getWithInt:id_])];
   }
-  return [new_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap_initWithOrgApacheLuceneUtilFstFST_withBoolean_([builder finish], ignoreCase_) autorelease];
+  return create_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap_initWithOrgApacheLuceneUtilFstFST_withBoolean_([builder finish], ignoreCase_);
 }
 
 - (void)dealloc {
@@ -315,9 +319,11 @@ void OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder_init(OrgA
 }
 
 OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder *new_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder_init() {
-  OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder *self = [OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder alloc];
-  OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder, init)
+}
+
+OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder *create_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder, init)
 }
 
 void OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder_initWithBoolean_(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder *self, jboolean ignoreCase) {
@@ -330,9 +336,11 @@ void OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder_initWithB
 }
 
 OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder *new_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder_initWithBoolean_(jboolean ignoreCase) {
-  OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder *self = [OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder alloc];
-  OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder_initWithBoolean_(self, ignoreCase);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder, initWithBoolean_, ignoreCase)
+}
+
+OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder *create_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder_initWithBoolean_(jboolean ignoreCase) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder, initWithBoolean_, ignoreCase)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder)

@@ -55,15 +55,17 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig, fie
 void OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig_initWithNSString_(OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *self, NSString *fieldName) {
   OrgApacheLuceneQueryparserFlexibleCoreConfigAbstractQueryConfig_init(self);
   if (fieldName == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"field name should not be null!") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"field name should not be null!");
   }
   JreStrongAssign(&self->fieldName_, fieldName);
 }
 
 OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *new_OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig_initWithNSString_(NSString *fieldName) {
-  OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *self = [OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig alloc];
-  OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig_initWithNSString_(self, fieldName);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig, initWithNSString_, fieldName)
+}
+
+OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *create_OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig_initWithNSString_(NSString *fieldName) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig, initWithNSString_, fieldName)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig)

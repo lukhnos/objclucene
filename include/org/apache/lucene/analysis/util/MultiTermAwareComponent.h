@@ -5,21 +5,30 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_RESTRICT
-#define OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent 0
 #else
-#define OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent 1
 #endif
-#undef OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent
 
-#if !defined (_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_) && (OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_INCLUDE_ALL || OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_INCLUDE)
-#define _OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_
+#if !defined (OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent || defined(INCLUDE_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent))
+#define OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_
 
 @class OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory;
 
+/*!
+ @brief Add to any analysis factory component to allow returning an
+ analysis component factory for use with partial terms in prefix queries,
+ wildcard queries, range query endpoints, regex queries, etc.
+ */
 @protocol OrgApacheLuceneAnalysisUtilMultiTermAwareComponent < NSObject, JavaObject >
 
+/*!
+ @brief Returns an analysis component to handle analysis if multi-term queries.
+ The returned component must be a TokenizerFactory, TokenFilterFactory or CharFilterFactory.
+ */
 - (OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory *)getMultiTermComponent;
 
 @end
@@ -30,4 +39,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilMultiTermAwareComponent)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent")

@@ -5,32 +5,53 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_) && (OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory))
+#define OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>LimitTokenPositionFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_limit_pos" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+ &lt;filter class="solr.LimitTokenPositionFilterFactory" maxTokenPosition="3" consumeAllTokens="false" /&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ <p>
+ The <code>consumeAllTokens</code> property is optional and defaults to <code>false</code>.  
+ See <code>LimitTokenPositionFilter</code> for an explanation of its use.
+ */
 @interface OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory {
  @public
   jint maxTokenPosition_;
   jboolean consumeAllTokens_;
 }
 
++ (NSString *)MAX_TOKEN_POSITION_KEY;
+
++ (NSString *)CONSUME_ALL_TOKENS_KEY;
+
 #pragma mark Public
 
+/*!
+ @brief Creates a new LimitTokenPositionFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -39,18 +60,24 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_MAX_TOKEN_POSITION_KEY_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory, MAX_TOKEN_POSITION_KEY_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_get_MAX_TOKEN_POSITION_KEY();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_MAX_TOKEN_POSITION_KEY;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory, MAX_TOKEN_POSITION_KEY, NSString *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_CONSUME_ALL_TOKENS_KEY_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory, CONSUME_ALL_TOKENS_KEY_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_get_CONSUME_ALL_TOKENS_KEY();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_CONSUME_ALL_TOKENS_KEY;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory, CONSUME_ALL_TOKENS_KEY, NSString *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory *self, id<JavaUtilMap> args);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory *create_OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory")

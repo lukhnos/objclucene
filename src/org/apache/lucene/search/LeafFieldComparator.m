@@ -3,11 +3,8 @@
 //  source: ./core/src/java/org/apache/lucene/search/LeafFieldComparator.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/search/LeafFieldComparator.h"
-#include "org/apache/lucene/search/Scorer.h"
 
 @interface OrgApacheLuceneSearchLeafFieldComparator : NSObject
 

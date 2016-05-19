@@ -64,8 +64,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilOfflineSorter, buffer_, OrgApacheLuceneUt
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilOfflineSorter, sortInfo_, OrgApacheLuceneUtilOfflineSorter_SortInfo *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilOfflineSorter, comparator_, id<JavaUtilComparator>)
 
-static NSString *OrgApacheLuceneUtilOfflineSorter_MIN_BUFFER_SIZE_MSG_ = @"At least 0.5MB RAM buffer is needed";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilOfflineSorter, MIN_BUFFER_SIZE_MSG_, NSString *)
+inline NSString *OrgApacheLuceneUtilOfflineSorter_get_MIN_BUFFER_SIZE_MSG();
+static NSString *OrgApacheLuceneUtilOfflineSorter_MIN_BUFFER_SIZE_MSG = @"At least 0.5MB RAM buffer is needed";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilOfflineSorter, MIN_BUFFER_SIZE_MSG, NSString *)
 
 @interface OrgApacheLuceneUtilOfflineSorter_BufferSize ()
 
@@ -76,6 +77,8 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilOfflineSorter, MIN_BUFFER_SIZE_MSG
 __attribute__((unused)) static void OrgApacheLuceneUtilOfflineSorter_BufferSize_initWithLong_(OrgApacheLuceneUtilOfflineSorter_BufferSize *self, jlong bytes);
 
 __attribute__((unused)) static OrgApacheLuceneUtilOfflineSorter_BufferSize *new_OrgApacheLuceneUtilOfflineSorter_BufferSize_initWithLong_(jlong bytes) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneUtilOfflineSorter_BufferSize *create_OrgApacheLuceneUtilOfflineSorter_BufferSize_initWithLong_(jlong bytes);
 
 @interface OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter () {
  @public
@@ -116,13 +119,39 @@ __attribute__((unused)) static void OrgApacheLuceneUtilOfflineSorter_$1_initWith
 
 __attribute__((unused)) static OrgApacheLuceneUtilOfflineSorter_$1 *new_OrgApacheLuceneUtilOfflineSorter_$1_initWithOrgApacheLuceneUtilOfflineSorter_withInt_(OrgApacheLuceneUtilOfflineSorter *outer$, jint arg$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneUtilOfflineSorter_$1 *create_OrgApacheLuceneUtilOfflineSorter_$1_initWithOrgApacheLuceneUtilOfflineSorter_withInt_(OrgApacheLuceneUtilOfflineSorter *outer$, jint arg$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilOfflineSorter_$1)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilOfflineSorter)
 
-id<JavaUtilComparator> OrgApacheLuceneUtilOfflineSorter_DEFAULT_COMPARATOR_;
+id<JavaUtilComparator> OrgApacheLuceneUtilOfflineSorter_DEFAULT_COMPARATOR;
 
 @implementation OrgApacheLuceneUtilOfflineSorter
+
++ (jlong)MB {
+  return OrgApacheLuceneUtilOfflineSorter_MB;
+}
+
++ (jlong)GB {
+  return OrgApacheLuceneUtilOfflineSorter_GB;
+}
+
++ (jlong)MIN_BUFFER_SIZE_MB {
+  return OrgApacheLuceneUtilOfflineSorter_MIN_BUFFER_SIZE_MB;
+}
+
++ (jlong)ABSOLUTE_MIN_SORT_BUFFER_SIZE {
+  return OrgApacheLuceneUtilOfflineSorter_ABSOLUTE_MIN_SORT_BUFFER_SIZE;
+}
+
++ (jint)MAX_TEMPFILES {
+  return OrgApacheLuceneUtilOfflineSorter_MAX_TEMPFILES;
+}
+
++ (id<JavaUtilComparator>)DEFAULT_COMPARATOR {
+  return OrgApacheLuceneUtilOfflineSorter_DEFAULT_COMPARATOR;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -149,16 +178,16 @@ withOrgApacheLuceneUtilOfflineSorter_BufferSize:(OrgApacheLuceneUtilOfflineSorte
   JreStrongAssignAndConsume(&sortInfo_, new_OrgApacheLuceneUtilOfflineSorter_SortInfo_initWithOrgApacheLuceneUtilOfflineSorter_(self));
   sortInfo_->totalTime_ = JavaLangSystem_currentTimeMillis();
   OrgLukhnosPortmobileFileFiles_deleteIfExistsWithOrgLukhnosPortmobileFilePath_(output);
-  JavaUtilArrayList *merges = [new_JavaUtilArrayList_init() autorelease];
+  JavaUtilArrayList *merges = create_JavaUtilArrayList_init();
   jboolean success3 = false;
   @try {
-    OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *is = [new_OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_initWithOrgLukhnosPortmobileFilePath_(input) autorelease];
+    OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *is = create_OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_initWithOrgLukhnosPortmobileFilePath_(input);
     jboolean success = false;
     @try {
       jint lines = 0;
       while ((lines = [self readPartitionWithOrgApacheLuceneUtilOfflineSorter_ByteSequencesReader:is]) > 0) {
         [merges addWithId:[self sortPartitionWithInt:lines]];
-        sortInfo_->tempMergeFiles_++;
+        ((OrgApacheLuceneUtilOfflineSorter_SortInfo *) nil_chk(sortInfo_))->tempMergeFiles_++;
         sortInfo_->lines_ += lines;
         if ([merges size] == maxTempFiles_) {
           OrgLukhnosPortmobileFilePath *intermediate = OrgLukhnosPortmobileFileFiles_createTempFileWithOrgLukhnosPortmobileFilePath_withNSString_withNSString_(tempDirectory_, @"sort", @"intermediate");
@@ -177,7 +206,7 @@ withOrgApacheLuceneUtilOfflineSorter_BufferSize:(OrgApacheLuceneUtilOfflineSorte
             [merges clear];
             [merges addWithId:intermediate];
           }
-          sortInfo_->tempMergeFiles_++;
+          ((OrgApacheLuceneUtilOfflineSorter_SortInfo *) nil_chk(sortInfo_))->tempMergeFiles_++;
         }
       }
       success = true;
@@ -189,7 +218,7 @@ withOrgApacheLuceneUtilOfflineSorter_BufferSize:(OrgApacheLuceneUtilOfflineSorte
     if ([merges size] == 1) {
       OrgLukhnosPortmobileFilePath *single = [merges getWithInt:0];
       @try {
-        OrgLukhnosPortmobileFileFiles_moveWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardCopyOptionArray_(single, output, [IOSObjectArray arrayWithObjects:(id[]){ JreLoadStatic(OrgLukhnosPortmobileFileStandardCopyOption, ATOMIC_MOVE_) } count:1 type:OrgLukhnosPortmobileFileStandardCopyOption_class_()]);
+        OrgLukhnosPortmobileFileFiles_moveWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardCopyOptionArray_(single, output, [IOSObjectArray arrayWithObjects:(id[]){ JreLoadStatic(OrgLukhnosPortmobileFileStandardCopyOption, ATOMIC_MOVE) } count:1 type:OrgLukhnosPortmobileFileStandardCopyOption_class_()]);
       }
       @catch (JavaIoIOException *e) {
         OrgLukhnosPortmobileFileFiles_copy__WithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardCopyOptionArray_(single, output, [IOSObjectArray arrayWithLength:0 type:OrgLukhnosPortmobileFileStandardCopyOption_class_()]);
@@ -215,7 +244,7 @@ withOrgApacheLuceneUtilOfflineSorter_BufferSize:(OrgApacheLuceneUtilOfflineSorte
       OrgApacheLuceneUtilIOUtils_deleteFilesIgnoringExceptionsWithOrgLukhnosPortmobileFilePathArray_([IOSObjectArray arrayWithObjects:(id[]){ output } count:1 type:OrgLukhnosPortmobileFilePath_class_()]);
     }
   }
-  sortInfo_->totalTime_ = (JavaLangSystem_currentTimeMillis() - sortInfo_->totalTime_);
+  ((OrgApacheLuceneUtilOfflineSorter_SortInfo *) nil_chk(sortInfo_))->totalTime_ = (JavaLangSystem_currentTimeMillis() - ((OrgApacheLuceneUtilOfflineSorter_SortInfo *) nil_chk(sortInfo_))->totalTime_);
   return sortInfo_;
 }
 
@@ -228,7 +257,7 @@ withOrgApacheLuceneUtilOfflineSorter_BufferSize:(OrgApacheLuceneUtilOfflineSorte
   OrgLukhnosPortmobileFilePath *tempFile = OrgLukhnosPortmobileFileFiles_createTempFileWithOrgLukhnosPortmobileFilePath_withNSString_withNSString_(tempDirectory_, @"sort", @"partition");
   jlong start = JavaLangSystem_currentTimeMillis();
   ((OrgApacheLuceneUtilOfflineSorter_SortInfo *) nil_chk(sortInfo_))->sortTime_ += (JavaLangSystem_currentTimeMillis() - start);
-  OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter *out = [new_OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter_initWithOrgLukhnosPortmobileFilePath_(tempFile) autorelease];
+  OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter *out = create_OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter_initWithOrgLukhnosPortmobileFilePath_(tempFile);
   OrgApacheLuceneUtilBytesRef *spare;
   @try {
     id<OrgApacheLuceneUtilBytesRefIterator> iter = [((OrgApacheLuceneUtilBytesRefArray *) nil_chk(buffer_)) iteratorWithJavaUtilComparator:comparator_];
@@ -248,15 +277,15 @@ withOrgApacheLuceneUtilOfflineSorter_BufferSize:(OrgApacheLuceneUtilOfflineSorte
 - (void)mergePartitionsWithJavaUtilList:(id<JavaUtilList>)merges
        withOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)outputFile {
   jlong start = JavaLangSystem_currentTimeMillis();
-  OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter *out = [new_OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter_initWithOrgLukhnosPortmobileFilePath_(outputFile) autorelease];
-  OrgApacheLuceneUtilPriorityQueue *queue = [new_OrgApacheLuceneUtilOfflineSorter_$1_initWithOrgApacheLuceneUtilOfflineSorter_withInt_(self, [((id<JavaUtilList>) nil_chk(merges)) size]) autorelease];
+  OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter *out = create_OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter_initWithOrgLukhnosPortmobileFilePath_(outputFile);
+  OrgApacheLuceneUtilPriorityQueue *queue = create_OrgApacheLuceneUtilOfflineSorter_$1_initWithOrgApacheLuceneUtilOfflineSorter_withInt_(self, [((id<JavaUtilList>) nil_chk(merges)) size]);
   IOSObjectArray *streams = [IOSObjectArray arrayWithLength:[merges size] type:OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_class_()];
   @try {
     for (jint i = 0; i < [merges size]; i++) {
       IOSObjectArray_SetAndConsume(streams, i, new_OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_initWithOrgLukhnosPortmobileFilePath_([merges getWithInt:i]));
       IOSByteArray *line = [((OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *) nil_chk(IOSObjectArray_Get(streams, i))) read];
       if (line != nil) {
-        [queue insertWithOverflowWithId:[new_OrgApacheLuceneUtilOfflineSorter_FileAndTop_initWithInt_withByteArray_(i, line) autorelease]];
+        [queue insertWithOverflowWithId:create_OrgApacheLuceneUtilOfflineSorter_FileAndTop_initWithInt_withByteArray_(i, line)];
       }
     }
     OrgApacheLuceneUtilOfflineSorter_FileAndTop *top;
@@ -270,7 +299,7 @@ withOrgApacheLuceneUtilOfflineSorter_BufferSize:(OrgApacheLuceneUtilOfflineSorte
       }
     }
     ((OrgApacheLuceneUtilOfflineSorter_SortInfo *) nil_chk(sortInfo_))->mergeTime_ += JavaLangSystem_currentTimeMillis() - start;
-    sortInfo_->mergeRounds_++;
+    ((OrgApacheLuceneUtilOfflineSorter_SortInfo *) nil_chk(sortInfo_))->mergeRounds_++;
   }
   @finally {
     @try {
@@ -284,7 +313,7 @@ withOrgApacheLuceneUtilOfflineSorter_BufferSize:(OrgApacheLuceneUtilOfflineSorte
 
 - (jint)readPartitionWithOrgApacheLuceneUtilOfflineSorter_ByteSequencesReader:(OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *)reader {
   jlong start = JavaLangSystem_currentTimeMillis();
-  OrgApacheLuceneUtilBytesRef *scratch = [new_OrgApacheLuceneUtilBytesRef_init() autorelease];
+  OrgApacheLuceneUtilBytesRef *scratch = create_OrgApacheLuceneUtilBytesRef_init();
   while ((JreStrongAssign(&scratch->bytes_, [((OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *) nil_chk(reader)) read])) != nil) {
     scratch->length_ = ((IOSByteArray *) nil_chk(scratch->bytes_))->size_;
     [((OrgApacheLuceneUtilBytesRefArray *) nil_chk(buffer_)) appendWithOrgApacheLuceneUtilBytesRef:scratch];
@@ -312,7 +341,7 @@ withOrgApacheLuceneUtilOfflineSorter_BufferSize:(OrgApacheLuceneUtilOfflineSorte
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilOfflineSorter class]) {
-    JreStrongAssign(&OrgApacheLuceneUtilOfflineSorter_DEFAULT_COMPARATOR_, OrgApacheLuceneUtilBytesRef_getUTF8SortedAsUnicodeComparator());
+    JreStrongAssign(&OrgApacheLuceneUtilOfflineSorter_DEFAULT_COMPARATOR, OrgApacheLuceneUtilBytesRef_getUTF8SortedAsUnicodeComparator());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilOfflineSorter)
   }
 }
@@ -320,21 +349,21 @@ withOrgApacheLuceneUtilOfflineSorter_BufferSize:(OrgApacheLuceneUtilOfflineSorte
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "OfflineSorter", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithJavaUtilComparator:", "OfflineSorter", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithJavaUtilComparator:withOrgApacheLuceneUtilOfflineSorter_BufferSize:withOrgLukhnosPortmobileFilePath:withInt:", "OfflineSorter", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilComparator:", "OfflineSorter", NULL, 0x1, "Ljava.io.IOException;", "(Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;)V" },
+    { "initWithJavaUtilComparator:withOrgApacheLuceneUtilOfflineSorter_BufferSize:withOrgLukhnosPortmobileFilePath:withInt:", "OfflineSorter", NULL, 0x1, NULL, "(Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;Lorg/apache/lucene/util/OfflineSorter$BufferSize;Lorg/lukhnos/portmobile/file/Path;I)V" },
     { "sortWithOrgLukhnosPortmobileFilePath:withOrgLukhnosPortmobileFilePath:", "sort", "Lorg.apache.lucene.util.OfflineSorter$SortInfo;", 0x1, "Ljava.io.IOException;", NULL },
     { "defaultTempDir", NULL, "Lorg.lukhnos.portmobile.file.Path;", 0x9, "Ljava.io.IOException;", NULL },
     { "sortPartitionWithInt:", "sortPartition", "Lorg.lukhnos.portmobile.file.Path;", 0x4, "Ljava.io.IOException;", NULL },
-    { "mergePartitionsWithJavaUtilList:withOrgLukhnosPortmobileFilePath:", "mergePartitions", "V", 0x0, "Ljava.io.IOException;", NULL },
+    { "mergePartitionsWithJavaUtilList:withOrgLukhnosPortmobileFilePath:", "mergePartitions", "V", 0x0, "Ljava.io.IOException;", "(Ljava/util/List<Lorg/lukhnos/portmobile/file/Path;>;Lorg/lukhnos/portmobile/file/Path;)V" },
     { "readPartitionWithOrgApacheLuceneUtilOfflineSorter_ByteSequencesReader:", "readPartition", "I", 0x0, "Ljava.io.IOException;", NULL },
-    { "getComparator", NULL, "Ljava.util.Comparator;", 0x1, NULL, NULL },
+    { "getComparator", NULL, "Ljava.util.Comparator;", 0x1, NULL, "()Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "MB", "MB", 0x19, "J", NULL, NULL, .constantValue.asLong = OrgApacheLuceneUtilOfflineSorter_MB },
     { "GB", "GB", 0x19, "J", NULL, NULL, .constantValue.asLong = OrgApacheLuceneUtilOfflineSorter_GB },
     { "MIN_BUFFER_SIZE_MB", "MIN_BUFFER_SIZE_MB", 0x19, "J", NULL, NULL, .constantValue.asLong = OrgApacheLuceneUtilOfflineSorter_MIN_BUFFER_SIZE_MB },
     { "ABSOLUTE_MIN_SORT_BUFFER_SIZE", "ABSOLUTE_MIN_SORT_BUFFER_SIZE", 0x19, "J", NULL, NULL, .constantValue.asLong = OrgApacheLuceneUtilOfflineSorter_ABSOLUTE_MIN_SORT_BUFFER_SIZE },
-    { "MIN_BUFFER_SIZE_MSG_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneUtilOfflineSorter_MIN_BUFFER_SIZE_MSG_, NULL, .constantValue.asLong = 0 },
+    { "MIN_BUFFER_SIZE_MSG", "MIN_BUFFER_SIZE_MSG", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneUtilOfflineSorter_MIN_BUFFER_SIZE_MSG, NULL, .constantValue.asLong = 0 },
     { "MAX_TEMPFILES", "MAX_TEMPFILES", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilOfflineSorter_MAX_TEMPFILES },
     { "ramBufferSize_", NULL, 0x12, "Lorg.apache.lucene.util.OfflineSorter$BufferSize;", NULL, NULL, .constantValue.asLong = 0 },
     { "tempDirectory_", NULL, 0x12, "Lorg.lukhnos.portmobile.file.Path;", NULL, NULL, .constantValue.asLong = 0 },
@@ -343,7 +372,7 @@ withOrgApacheLuceneUtilOfflineSorter_BufferSize:(OrgApacheLuceneUtilOfflineSorte
     { "sortInfo_", NULL, 0x2, "Lorg.apache.lucene.util.OfflineSorter$SortInfo;", NULL, NULL, .constantValue.asLong = 0 },
     { "maxTempFiles_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "comparator_", NULL, 0x12, "Ljava.util.Comparator;", NULL, "Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;", .constantValue.asLong = 0 },
-    { "DEFAULT_COMPARATOR_", NULL, 0x19, "Ljava.util.Comparator;", &OrgApacheLuceneUtilOfflineSorter_DEFAULT_COMPARATOR_, "Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;", .constantValue.asLong = 0 },
+    { "DEFAULT_COMPARATOR", "DEFAULT_COMPARATOR", 0x19, "Ljava.util.Comparator;", &OrgApacheLuceneUtilOfflineSorter_DEFAULT_COMPARATOR, "Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;", .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.OfflineSorter$BufferSize;", "Lorg.apache.lucene.util.OfflineSorter$SortInfo;", "Lorg.apache.lucene.util.OfflineSorter$FileAndTop;", "Lorg.apache.lucene.util.OfflineSorter$ByteSequencesWriter;", "Lorg.apache.lucene.util.OfflineSorter$ByteSequencesReader;"};
   static const J2ObjcClassInfo _OrgApacheLuceneUtilOfflineSorter = { 2, "OfflineSorter", "org.apache.lucene.util", NULL, 0x11, 9, methods, 14, fields, 0, NULL, 5, inner_classes, NULL, NULL };
@@ -353,13 +382,15 @@ withOrgApacheLuceneUtilOfflineSorter_BufferSize:(OrgApacheLuceneUtilOfflineSorte
 @end
 
 void OrgApacheLuceneUtilOfflineSorter_init(OrgApacheLuceneUtilOfflineSorter *self) {
-  OrgApacheLuceneUtilOfflineSorter_initWithJavaUtilComparator_withOrgApacheLuceneUtilOfflineSorter_BufferSize_withOrgLukhnosPortmobileFilePath_withInt_(self, OrgApacheLuceneUtilOfflineSorter_DEFAULT_COMPARATOR_, OrgApacheLuceneUtilOfflineSorter_BufferSize_automatic(), OrgApacheLuceneUtilOfflineSorter_defaultTempDir(), OrgApacheLuceneUtilOfflineSorter_MAX_TEMPFILES);
+  OrgApacheLuceneUtilOfflineSorter_initWithJavaUtilComparator_withOrgApacheLuceneUtilOfflineSorter_BufferSize_withOrgLukhnosPortmobileFilePath_withInt_(self, OrgApacheLuceneUtilOfflineSorter_DEFAULT_COMPARATOR, OrgApacheLuceneUtilOfflineSorter_BufferSize_automatic(), OrgApacheLuceneUtilOfflineSorter_defaultTempDir(), OrgApacheLuceneUtilOfflineSorter_MAX_TEMPFILES);
 }
 
 OrgApacheLuceneUtilOfflineSorter *new_OrgApacheLuceneUtilOfflineSorter_init() {
-  OrgApacheLuceneUtilOfflineSorter *self = [OrgApacheLuceneUtilOfflineSorter alloc];
-  OrgApacheLuceneUtilOfflineSorter_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilOfflineSorter, init)
+}
+
+OrgApacheLuceneUtilOfflineSorter *create_OrgApacheLuceneUtilOfflineSorter_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilOfflineSorter, init)
 }
 
 void OrgApacheLuceneUtilOfflineSorter_initWithJavaUtilComparator_(OrgApacheLuceneUtilOfflineSorter *self, id<JavaUtilComparator> comparator) {
@@ -367,9 +398,11 @@ void OrgApacheLuceneUtilOfflineSorter_initWithJavaUtilComparator_(OrgApacheLucen
 }
 
 OrgApacheLuceneUtilOfflineSorter *new_OrgApacheLuceneUtilOfflineSorter_initWithJavaUtilComparator_(id<JavaUtilComparator> comparator) {
-  OrgApacheLuceneUtilOfflineSorter *self = [OrgApacheLuceneUtilOfflineSorter alloc];
-  OrgApacheLuceneUtilOfflineSorter_initWithJavaUtilComparator_(self, comparator);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilOfflineSorter, initWithJavaUtilComparator_, comparator)
+}
+
+OrgApacheLuceneUtilOfflineSorter *create_OrgApacheLuceneUtilOfflineSorter_initWithJavaUtilComparator_(id<JavaUtilComparator> comparator) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilOfflineSorter, initWithJavaUtilComparator_, comparator)
 }
 
 void OrgApacheLuceneUtilOfflineSorter_initWithJavaUtilComparator_withOrgApacheLuceneUtilOfflineSorter_BufferSize_withOrgLukhnosPortmobileFilePath_withInt_(OrgApacheLuceneUtilOfflineSorter *self, id<JavaUtilComparator> comparator, OrgApacheLuceneUtilOfflineSorter_BufferSize *ramBufferSize, OrgLukhnosPortmobileFilePath *tempDirectory, jint maxTempfiles) {
@@ -377,10 +410,10 @@ void OrgApacheLuceneUtilOfflineSorter_initWithJavaUtilComparator_withOrgApacheLu
   JreStrongAssign(&self->bufferBytesUsed_, OrgApacheLuceneUtilCounter_newCounter());
   JreStrongAssignAndConsume(&self->buffer_, new_OrgApacheLuceneUtilBytesRefArray_initWithOrgApacheLuceneUtilCounter_(self->bufferBytesUsed_));
   if (((OrgApacheLuceneUtilOfflineSorter_BufferSize *) nil_chk(ramBufferSize))->bytes_ < OrgApacheLuceneUtilOfflineSorter_ABSOLUTE_MIN_SORT_BUFFER_SIZE) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$I", OrgApacheLuceneUtilOfflineSorter_MIN_BUFFER_SIZE_MSG_, @": ", ramBufferSize->bytes_)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$I", OrgApacheLuceneUtilOfflineSorter_MIN_BUFFER_SIZE_MSG, @": ", ramBufferSize->bytes_));
   }
   if (maxTempfiles < 2) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"maxTempFiles must be >= 2") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"maxTempFiles must be >= 2");
   }
   JreStrongAssign(&self->ramBufferSize_, ramBufferSize);
   JreStrongAssign(&self->tempDirectory_, tempDirectory);
@@ -389,18 +422,20 @@ void OrgApacheLuceneUtilOfflineSorter_initWithJavaUtilComparator_withOrgApacheLu
 }
 
 OrgApacheLuceneUtilOfflineSorter *new_OrgApacheLuceneUtilOfflineSorter_initWithJavaUtilComparator_withOrgApacheLuceneUtilOfflineSorter_BufferSize_withOrgLukhnosPortmobileFilePath_withInt_(id<JavaUtilComparator> comparator, OrgApacheLuceneUtilOfflineSorter_BufferSize *ramBufferSize, OrgLukhnosPortmobileFilePath *tempDirectory, jint maxTempfiles) {
-  OrgApacheLuceneUtilOfflineSorter *self = [OrgApacheLuceneUtilOfflineSorter alloc];
-  OrgApacheLuceneUtilOfflineSorter_initWithJavaUtilComparator_withOrgApacheLuceneUtilOfflineSorter_BufferSize_withOrgLukhnosPortmobileFilePath_withInt_(self, comparator, ramBufferSize, tempDirectory, maxTempfiles);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilOfflineSorter, initWithJavaUtilComparator_withOrgApacheLuceneUtilOfflineSorter_BufferSize_withOrgLukhnosPortmobileFilePath_withInt_, comparator, ramBufferSize, tempDirectory, maxTempfiles)
+}
+
+OrgApacheLuceneUtilOfflineSorter *create_OrgApacheLuceneUtilOfflineSorter_initWithJavaUtilComparator_withOrgApacheLuceneUtilOfflineSorter_BufferSize_withOrgLukhnosPortmobileFilePath_withInt_(id<JavaUtilComparator> comparator, OrgApacheLuceneUtilOfflineSorter_BufferSize *ramBufferSize, OrgLukhnosPortmobileFilePath *tempDirectory, jint maxTempfiles) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilOfflineSorter, initWithJavaUtilComparator_withOrgApacheLuceneUtilOfflineSorter_BufferSize_withOrgLukhnosPortmobileFilePath_withInt_, comparator, ramBufferSize, tempDirectory, maxTempfiles)
 }
 
 OrgLukhnosPortmobileFilePath *OrgApacheLuceneUtilOfflineSorter_defaultTempDir() {
   OrgApacheLuceneUtilOfflineSorter_initialize();
   NSString *tempDirPath = JavaLangSystem_getPropertyWithNSString_(@"java.io.tmpdir");
-  if (tempDirPath == nil) @throw [new_JavaIoIOException_initWithNSString_(@"Java has no temporary folder property (java.io.tmpdir)?") autorelease];
+  if (tempDirPath == nil) @throw create_JavaIoIOException_initWithNSString_(@"Java has no temporary folder property (java.io.tmpdir)?");
   OrgLukhnosPortmobileFilePath *tempDirectory = OrgLukhnosPortmobileFilePaths_getWithNSString_(tempDirPath);
   if (!OrgLukhnosPortmobileFileFiles_isWritableWithOrgLukhnosPortmobileFilePath_(tempDirectory)) {
-    @throw [new_JavaIoIOException_initWithNSString_(JreStrcat("$@", @"Java's temporary folder not present or writeable?: ", [((OrgLukhnosPortmobileFilePath *) nil_chk(tempDirectory)) toAbsolutePath])) autorelease];
+    @throw create_JavaIoIOException_initWithNSString_(JreStrcat("$@", @"Java's temporary folder not present or writeable?: ", [((OrgLukhnosPortmobileFilePath *) nil_chk(tempDirectory)) toAbsolutePath]));
   }
   return tempDirectory;
 }
@@ -440,23 +475,25 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilOfflineSorter)
 void OrgApacheLuceneUtilOfflineSorter_BufferSize_initWithLong_(OrgApacheLuceneUtilOfflineSorter_BufferSize *self, jlong bytes) {
   NSObject_init(self);
   if (bytes > JavaLangInteger_MAX_VALUE) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$J$J", @"Buffer too large for Java (", (JavaLangInteger_MAX_VALUE / OrgApacheLuceneUtilOfflineSorter_MB), @"mb max): ", bytes)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$J$J", @"Buffer too large for Java (", (JavaLangInteger_MAX_VALUE / OrgApacheLuceneUtilOfflineSorter_MB), @"mb max): ", bytes));
   }
   if (bytes < OrgApacheLuceneUtilOfflineSorter_ABSOLUTE_MIN_SORT_BUFFER_SIZE) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$J", OrgApacheLuceneUtilOfflineSorter_MIN_BUFFER_SIZE_MSG_, @": ", bytes)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$J", OrgApacheLuceneUtilOfflineSorter_MIN_BUFFER_SIZE_MSG, @": ", bytes));
   }
   self->bytes_ = (jint) bytes;
 }
 
 OrgApacheLuceneUtilOfflineSorter_BufferSize *new_OrgApacheLuceneUtilOfflineSorter_BufferSize_initWithLong_(jlong bytes) {
-  OrgApacheLuceneUtilOfflineSorter_BufferSize *self = [OrgApacheLuceneUtilOfflineSorter_BufferSize alloc];
-  OrgApacheLuceneUtilOfflineSorter_BufferSize_initWithLong_(self, bytes);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilOfflineSorter_BufferSize, initWithLong_, bytes)
+}
+
+OrgApacheLuceneUtilOfflineSorter_BufferSize *create_OrgApacheLuceneUtilOfflineSorter_BufferSize_initWithLong_(jlong bytes) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilOfflineSorter_BufferSize, initWithLong_, bytes)
 }
 
 OrgApacheLuceneUtilOfflineSorter_BufferSize *OrgApacheLuceneUtilOfflineSorter_BufferSize_megabytesWithLong_(jlong mb) {
   OrgApacheLuceneUtilOfflineSorter_BufferSize_initialize();
-  return [new_OrgApacheLuceneUtilOfflineSorter_BufferSize_initWithLong_(mb * OrgApacheLuceneUtilOfflineSorter_MB) autorelease];
+  return create_OrgApacheLuceneUtilOfflineSorter_BufferSize_initWithLong_(mb * OrgApacheLuceneUtilOfflineSorter_MB);
 }
 
 OrgApacheLuceneUtilOfflineSorter_BufferSize *OrgApacheLuceneUtilOfflineSorter_BufferSize_automatic() {
@@ -476,7 +513,7 @@ OrgApacheLuceneUtilOfflineSorter_BufferSize *OrgApacheLuceneUtilOfflineSorter_Bu
       sortBufferByteSize = JavaLangMath_maxWithLong_withLong_(OrgApacheLuceneUtilOfflineSorter_ABSOLUTE_MIN_SORT_BUFFER_SIZE, sortBufferByteSize);
     }
   }
-  return [new_OrgApacheLuceneUtilOfflineSorter_BufferSize_initWithLong_(JavaLangMath_minWithLong_withLong_((jlong) JavaLangInteger_MAX_VALUE, sortBufferByteSize)) autorelease];
+  return create_OrgApacheLuceneUtilOfflineSorter_BufferSize_initWithLong_(JavaLangMath_minWithLong_withLong_((jlong) JavaLangInteger_MAX_VALUE, sortBufferByteSize));
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilOfflineSorter_BufferSize)
@@ -489,7 +526,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilOfflineSorter_BufferSize)
 }
 
 - (NSString *)description {
-  return NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT_), @"time=%.2f sec. total (%.2f reading, %.2f sorting, %.2f merging), lines=%d, temp files=%d, merges=%d, soft ram limit=%.2f MB", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_(totalTime_ / 1000.0), JavaLangDouble_valueOfWithDouble_(readTime_ / 1000.0), JavaLangDouble_valueOfWithDouble_(sortTime_ / 1000.0), JavaLangDouble_valueOfWithDouble_(mergeTime_ / 1000.0), JavaLangInteger_valueOfWithInt_(lines_), JavaLangInteger_valueOfWithInt_(tempMergeFiles_), JavaLangInteger_valueOfWithInt_(mergeRounds_), JavaLangDouble_valueOfWithDouble_((jdouble) bufferSize_ / OrgApacheLuceneUtilOfflineSorter_MB) } count:8 type:NSObject_class_()]);
+  return NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"time=%.2f sec. total (%.2f reading, %.2f sorting, %.2f merging), lines=%d, temp files=%d, merges=%d, soft ram limit=%.2f MB", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangDouble_valueOfWithDouble_(totalTime_ / 1000.0), JavaLangDouble_valueOfWithDouble_(readTime_ / 1000.0), JavaLangDouble_valueOfWithDouble_(sortTime_ / 1000.0), JavaLangDouble_valueOfWithDouble_(mergeTime_ / 1000.0), JavaLangInteger_valueOfWithInt_(lines_), JavaLangInteger_valueOfWithInt_(tempMergeFiles_), JavaLangInteger_valueOfWithInt_(mergeRounds_), JavaLangDouble_valueOfWithDouble_((jdouble) bufferSize_ / OrgApacheLuceneUtilOfflineSorter_MB) } count:8 type:NSObject_class_()]);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -519,9 +556,11 @@ void OrgApacheLuceneUtilOfflineSorter_SortInfo_initWithOrgApacheLuceneUtilOfflin
 }
 
 OrgApacheLuceneUtilOfflineSorter_SortInfo *new_OrgApacheLuceneUtilOfflineSorter_SortInfo_initWithOrgApacheLuceneUtilOfflineSorter_(OrgApacheLuceneUtilOfflineSorter *outer$) {
-  OrgApacheLuceneUtilOfflineSorter_SortInfo *self = [OrgApacheLuceneUtilOfflineSorter_SortInfo alloc];
-  OrgApacheLuceneUtilOfflineSorter_SortInfo_initWithOrgApacheLuceneUtilOfflineSorter_(self, outer$);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilOfflineSorter_SortInfo, initWithOrgApacheLuceneUtilOfflineSorter_, outer$)
+}
+
+OrgApacheLuceneUtilOfflineSorter_SortInfo *create_OrgApacheLuceneUtilOfflineSorter_SortInfo_initWithOrgApacheLuceneUtilOfflineSorter_(OrgApacheLuceneUtilOfflineSorter *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilOfflineSorter_SortInfo, initWithOrgApacheLuceneUtilOfflineSorter_, outer$)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilOfflineSorter_SortInfo)
@@ -561,9 +600,11 @@ void OrgApacheLuceneUtilOfflineSorter_FileAndTop_initWithInt_withByteArray_(OrgA
 }
 
 OrgApacheLuceneUtilOfflineSorter_FileAndTop *new_OrgApacheLuceneUtilOfflineSorter_FileAndTop_initWithInt_withByteArray_(jint fd, IOSByteArray *firstLine) {
-  OrgApacheLuceneUtilOfflineSorter_FileAndTop *self = [OrgApacheLuceneUtilOfflineSorter_FileAndTop alloc];
-  OrgApacheLuceneUtilOfflineSorter_FileAndTop_initWithInt_withByteArray_(self, fd, firstLine);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilOfflineSorter_FileAndTop, initWithInt_withByteArray_, fd, firstLine)
+}
+
+OrgApacheLuceneUtilOfflineSorter_FileAndTop *create_OrgApacheLuceneUtilOfflineSorter_FileAndTop_initWithInt_withByteArray_(jint fd, IOSByteArray *firstLine) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilOfflineSorter_FileAndTop, initWithInt_withByteArray_, fd, firstLine)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilOfflineSorter_FileAndTop)
@@ -596,7 +637,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilOfflineSorter_FileAndTop)
   JreAssert((off >= 0 && off + len <= ((IOSByteArray *) nil_chk(bytes))->size_), (@"org/apache/lucene/util/OfflineSorter.java:461 condition failed: assert off >= 0 && off + len <= bytes.length;"));
   JreAssert((len >= 0), (@"org/apache/lucene/util/OfflineSorter.java:462 condition failed: assert len >= 0;"));
   if (len > JavaLangShort_MAX_VALUE) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$S$I", @"len must be <= ", JavaLangShort_MAX_VALUE, @"; got ", len)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$S$I", @"len must be <= ", JavaLangShort_MAX_VALUE, @"; got ", len));
   }
   [((id<JavaIoDataOutput>) nil_chk(os_)) writeShortWithInt:len];
   [os_ writeWithByteArray:bytes withInt:off withInt:len];
@@ -604,7 +645,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilOfflineSorter_FileAndTop)
 
 - (void)close {
   if ([JavaIoCloseable_class_() isInstance:os_]) {
-    [((id<JavaIoCloseable>) nil_chk(((id<JavaIoCloseable>) check_protocol_cast(os_, JavaIoCloseable_class_())))) close];
+    [((id<JavaIoCloseable>) nil_chk(((id<JavaIoCloseable>) cast_check(os_, JavaIoCloseable_class_())))) close];
   }
 }
 
@@ -632,13 +673,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilOfflineSorter_FileAndTop)
 @end
 
 void OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter_initWithOrgLukhnosPortmobileFilePath_(OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter *self, OrgLukhnosPortmobileFilePath *path) {
-  OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter_initWithJavaIoDataOutput_(self, [new_JavaIoDataOutputStream_initWithJavaIoOutputStream_([new_JavaIoBufferedOutputStream_initWithJavaIoOutputStream_(OrgLukhnosPortmobileFileFiles_newOutputStreamWithOrgLukhnosPortmobileFilePath_(path)) autorelease]) autorelease]);
+  OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter_initWithJavaIoDataOutput_(self, create_JavaIoDataOutputStream_initWithJavaIoOutputStream_(create_JavaIoBufferedOutputStream_initWithJavaIoOutputStream_(OrgLukhnosPortmobileFileFiles_newOutputStreamWithOrgLukhnosPortmobileFilePath_(path))));
 }
 
 OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter *new_OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path) {
-  OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter *self = [OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter alloc];
-  OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter_initWithOrgLukhnosPortmobileFilePath_(self, path);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter, initWithOrgLukhnosPortmobileFilePath_, path)
+}
+
+OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter *create_OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter, initWithOrgLukhnosPortmobileFilePath_, path)
 }
 
 void OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter_initWithJavaIoDataOutput_(OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter *self, id<JavaIoDataOutput> os) {
@@ -647,9 +690,11 @@ void OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter_initWithJavaIoDataOutp
 }
 
 OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter *new_OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter_initWithJavaIoDataOutput_(id<JavaIoDataOutput> os) {
-  OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter *self = [OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter alloc];
-  OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter_initWithJavaIoDataOutput_(self, os);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter, initWithJavaIoDataOutput_, os)
+}
+
+OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter *create_OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter_initWithJavaIoDataOutput_(id<JavaIoDataOutput> os) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter, initWithJavaIoDataOutput_, os)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter)
@@ -676,7 +721,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilOfflineSorter_ByteSequencesW
   }
   [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(ref)) growWithInt:length];
   [ref setLengthWithInt:length];
-  [((id<JavaIoDataInput>) nil_chk(is_)) readFullyWithByteArray:[ref bytes] withInt:0 withInt:length];
+  [is_ readFullyWithByteArray:[ref bytes] withInt:0 withInt:length];
   return true;
 }
 
@@ -690,13 +735,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilOfflineSorter_ByteSequencesW
   }
   JreAssert((length >= 0), (JreStrcat("$S", @"Sanity: sequence length < 0: ", length)));
   IOSByteArray *result = [IOSByteArray arrayWithLength:length];
-  [((id<JavaIoDataInput>) nil_chk(is_)) readFullyWithByteArray:result];
+  [is_ readFullyWithByteArray:result];
   return result;
 }
 
 - (void)close {
   if ([JavaIoCloseable_class_() isInstance:is_]) {
-    [((id<JavaIoCloseable>) nil_chk(((id<JavaIoCloseable>) check_protocol_cast(is_, JavaIoCloseable_class_())))) close];
+    [((id<JavaIoCloseable>) nil_chk(((id<JavaIoCloseable>) cast_check(is_, JavaIoCloseable_class_())))) close];
   }
 }
 
@@ -723,13 +768,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilOfflineSorter_ByteSequencesW
 @end
 
 void OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_initWithOrgLukhnosPortmobileFilePath_(OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *self, OrgLukhnosPortmobileFilePath *path) {
-  OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_initWithJavaIoDataInput_(self, [new_JavaIoDataInputStream_initWithJavaIoInputStream_([new_JavaIoBufferedInputStream_initWithJavaIoInputStream_(OrgLukhnosPortmobileFileFiles_newInputStreamWithOrgLukhnosPortmobileFilePath_(path)) autorelease]) autorelease]);
+  OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_initWithJavaIoDataInput_(self, create_JavaIoDataInputStream_initWithJavaIoInputStream_(create_JavaIoBufferedInputStream_initWithJavaIoInputStream_(OrgLukhnosPortmobileFileFiles_newInputStreamWithOrgLukhnosPortmobileFilePath_(path))));
 }
 
 OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *new_OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path) {
-  OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *self = [OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader alloc];
-  OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_initWithOrgLukhnosPortmobileFilePath_(self, path);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader, initWithOrgLukhnosPortmobileFilePath_, path)
+}
+
+OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *create_OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader, initWithOrgLukhnosPortmobileFilePath_, path)
 }
 
 void OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_initWithJavaIoDataInput_(OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *self, id<JavaIoDataInput> is) {
@@ -738,9 +785,11 @@ void OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_initWithJavaIoDataInpu
 }
 
 OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *new_OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_initWithJavaIoDataInput_(id<JavaIoDataInput> is) {
-  OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *self = [OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader alloc];
-  OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_initWithJavaIoDataInput_(self, is);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader, initWithJavaIoDataInput_, is)
+}
+
+OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *create_OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_initWithJavaIoDataInput_(id<JavaIoDataInput> is) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader, initWithJavaIoDataInput_, is)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader)
@@ -765,7 +814,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilOfflineSorter_ByteSequencesR
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x4, NULL, NULL },
+    { "lessThanWithId:withId:", "lessThan", "Z", 0x4, NULL, "(Lorg/apache/lucene/util/OfflineSorter$FileAndTop;Lorg/apache/lucene/util/OfflineSorter$FileAndTop;)Z" },
     { "initWithOrgApacheLuceneUtilOfflineSorter:withInt:", "", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -785,9 +834,11 @@ void OrgApacheLuceneUtilOfflineSorter_$1_initWithOrgApacheLuceneUtilOfflineSorte
 }
 
 OrgApacheLuceneUtilOfflineSorter_$1 *new_OrgApacheLuceneUtilOfflineSorter_$1_initWithOrgApacheLuceneUtilOfflineSorter_withInt_(OrgApacheLuceneUtilOfflineSorter *outer$, jint arg$0) {
-  OrgApacheLuceneUtilOfflineSorter_$1 *self = [OrgApacheLuceneUtilOfflineSorter_$1 alloc];
-  OrgApacheLuceneUtilOfflineSorter_$1_initWithOrgApacheLuceneUtilOfflineSorter_withInt_(self, outer$, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilOfflineSorter_$1, initWithOrgApacheLuceneUtilOfflineSorter_withInt_, outer$, arg$0)
+}
+
+OrgApacheLuceneUtilOfflineSorter_$1 *create_OrgApacheLuceneUtilOfflineSorter_$1_initWithOrgApacheLuceneUtilOfflineSorter_withInt_(OrgApacheLuceneUtilOfflineSorter *outer$, jint arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilOfflineSorter_$1, initWithOrgApacheLuceneUtilOfflineSorter_withInt_, outer$, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilOfflineSorter_$1)

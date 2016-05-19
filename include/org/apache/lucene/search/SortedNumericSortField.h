@@ -5,47 +5,84 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSortedNumericSortField_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSortedNumericSortField_RESTRICT
-#define OrgApacheLuceneSearchSortedNumericSortField_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSortedNumericSortField")
+#ifdef RESTRICT_OrgApacheLuceneSearchSortedNumericSortField
+#define INCLUDE_ALL_OrgApacheLuceneSearchSortedNumericSortField 0
 #else
-#define OrgApacheLuceneSearchSortedNumericSortField_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSortedNumericSortField 1
 #endif
-#undef OrgApacheLuceneSearchSortedNumericSortField_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSortedNumericSortField
 
-#if !defined (_OrgApacheLuceneSearchSortedNumericSortField_) && (OrgApacheLuceneSearchSortedNumericSortField_INCLUDE_ALL || OrgApacheLuceneSearchSortedNumericSortField_INCLUDE)
-#define _OrgApacheLuceneSearchSortedNumericSortField_
+#if !defined (OrgApacheLuceneSearchSortedNumericSortField_) && (INCLUDE_ALL_OrgApacheLuceneSearchSortedNumericSortField || defined(INCLUDE_OrgApacheLuceneSearchSortedNumericSortField))
+#define OrgApacheLuceneSearchSortedNumericSortField_
 
-#define OrgApacheLuceneSearchSortField_RESTRICT 1
-#define OrgApacheLuceneSearchSortField_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSortField 1
+#define INCLUDE_OrgApacheLuceneSearchSortField 1
 #include "org/apache/lucene/search/SortField.h"
 
 @class OrgApacheLuceneSearchFieldComparator;
-@class OrgApacheLuceneSearchSortField_TypeEnum;
-@class OrgApacheLuceneSearchSortedNumericSelector_TypeEnum;
+@class OrgApacheLuceneSearchSortField_Type;
+@class OrgApacheLuceneSearchSortedNumericSelector_Type;
 
+/*!
+ @brief SortField for <code>SortedNumericDocValues</code>.
+ <p>
+ A SortedNumericDocValues contains multiple values for a field, so sorting with
+ this technique "selects" a value as the representative sort value for the document.
+ <p>
+ By default, the minimum value in the list is selected as the sort value, but
+ this can be customized.
+ <p>
+ Like sorting by string, this also supports sorting missing values as first or last,
+ via <code>setMissingValue(Object)</code>.
+ - seealso: SortedNumericSelector
+ */
 @interface OrgApacheLuceneSearchSortedNumericSortField : OrgApacheLuceneSearchSortField
 
 #pragma mark Public
 
+/*!
+ @brief Creates a sort, by the minimum value in the set 
+ for the document.
+ @param field Name of field to sort by.  Must not be null.
+ @param type Type of values
+ */
 - (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneSearchSortField_TypeEnum:(OrgApacheLuceneSearchSortField_TypeEnum *)type;
+withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)type;
 
+/*!
+ @brief Creates a sort, possibly in reverse, by the minimum value in the set 
+ for the document.
+ @param field Name of field to sort by.  Must not be null.
+ @param type Type of values
+ @param reverse True if natural order should be reversed.
+ */
 - (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneSearchSortField_TypeEnum:(OrgApacheLuceneSearchSortField_TypeEnum *)type
+withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)type
                      withBoolean:(jboolean)reverse;
 
+/*!
+ @brief Creates a sort, possibly in reverse, specifying how the sort value from 
+ the document's set is selected.
+ @param field Name of field to sort by.  Must not be null.
+ @param type Type of values
+ @param reverse True if natural order should be reversed.
+ @param selector custom selector type for choosing the sort value from the set.
+ */
 - (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneSearchSortField_TypeEnum:(OrgApacheLuceneSearchSortField_TypeEnum *)type
+withOrgApacheLuceneSearchSortField_Type:(OrgApacheLuceneSearchSortField_Type *)type
                      withBoolean:(jboolean)reverse
-withOrgApacheLuceneSearchSortedNumericSelector_TypeEnum:(OrgApacheLuceneSearchSortedNumericSelector_TypeEnum *)selector;
+withOrgApacheLuceneSearchSortedNumericSelector_Type:(OrgApacheLuceneSearchSortedNumericSelector_Type *)selector;
 
 - (jboolean)isEqual:(id)obj;
 
 - (OrgApacheLuceneSearchFieldComparator *)getComparatorWithInt:(jint)numHits
                                                        withInt:(jint)sortPos;
 
-- (OrgApacheLuceneSearchSortedNumericSelector_TypeEnum *)getSelector;
+/*!
+ @brief Returns the selector in use for this sort
+ */
+- (OrgApacheLuceneSearchSortedNumericSelector_Type *)getSelector;
 
 - (NSUInteger)hash;
 
@@ -57,20 +94,26 @@ withOrgApacheLuceneSearchSortedNumericSelector_TypeEnum:(OrgApacheLuceneSearchSo
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSortedNumericSortField)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_(OrgApacheLuceneSearchSortedNumericSortField *self, NSString *field, OrgApacheLuceneSearchSortField_TypeEnum *type);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_Type_(OrgApacheLuceneSearchSortedNumericSortField *self, NSString *field, OrgApacheLuceneSearchSortField_Type *type);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSortedNumericSortField *new_OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_(NSString *field, OrgApacheLuceneSearchSortField_TypeEnum *type) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSortedNumericSortField *new_OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_Type_(NSString *field, OrgApacheLuceneSearchSortField_Type *type) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_withBoolean_(OrgApacheLuceneSearchSortedNumericSortField *self, NSString *field, OrgApacheLuceneSearchSortField_TypeEnum *type, jboolean reverse);
+FOUNDATION_EXPORT OrgApacheLuceneSearchSortedNumericSortField *create_OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_Type_(NSString *field, OrgApacheLuceneSearchSortField_Type *type);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSortedNumericSortField *new_OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_withBoolean_(NSString *field, OrgApacheLuceneSearchSortField_TypeEnum *type, jboolean reverse) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_Type_withBoolean_(OrgApacheLuceneSearchSortedNumericSortField *self, NSString *field, OrgApacheLuceneSearchSortField_Type *type, jboolean reverse);
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_withBoolean_withOrgApacheLuceneSearchSortedNumericSelector_TypeEnum_(OrgApacheLuceneSearchSortedNumericSortField *self, NSString *field, OrgApacheLuceneSearchSortField_TypeEnum *type, jboolean reverse, OrgApacheLuceneSearchSortedNumericSelector_TypeEnum *selector);
+FOUNDATION_EXPORT OrgApacheLuceneSearchSortedNumericSortField *new_OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_Type_withBoolean_(NSString *field, OrgApacheLuceneSearchSortField_Type *type, jboolean reverse) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSortedNumericSortField *new_OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_withBoolean_withOrgApacheLuceneSearchSortedNumericSelector_TypeEnum_(NSString *field, OrgApacheLuceneSearchSortField_TypeEnum *type, jboolean reverse, OrgApacheLuceneSearchSortedNumericSelector_TypeEnum *selector) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSortedNumericSortField *create_OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_Type_withBoolean_(NSString *field, OrgApacheLuceneSearchSortField_Type *type, jboolean reverse);
+
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_Type_withBoolean_withOrgApacheLuceneSearchSortedNumericSelector_Type_(OrgApacheLuceneSearchSortedNumericSortField *self, NSString *field, OrgApacheLuceneSearchSortField_Type *type, jboolean reverse, OrgApacheLuceneSearchSortedNumericSelector_Type *selector);
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchSortedNumericSortField *new_OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_Type_withBoolean_withOrgApacheLuceneSearchSortedNumericSelector_Type_(NSString *field, OrgApacheLuceneSearchSortField_Type *type, jboolean reverse, OrgApacheLuceneSearchSortedNumericSelector_Type *selector) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchSortedNumericSortField *create_OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_Type_withBoolean_withOrgApacheLuceneSearchSortedNumericSelector_Type_(NSString *field, OrgApacheLuceneSearchSortField_Type *type, jboolean reverse, OrgApacheLuceneSearchSortedNumericSelector_Type *selector);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedNumericSortField)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSortedNumericSortField_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSortedNumericSortField")

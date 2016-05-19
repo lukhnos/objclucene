@@ -46,7 +46,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "scoreWithOrgApacheLuceneSearchLeafCollector:withOrgApacheLuceneUtilBits:", "score", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "scoreWithOrgApacheLuceneSearchLeafCollector:withOrgApacheLuceneUtilBits:withInt:withInt:", "score", "I", 0x401, "Ljava.io.IOException;", NULL },
     { "cost", NULL, "J", 0x401, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "BulkScorer", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneSearchBulkScorer = { 2, "BulkScorer", "org.apache.lucene.search", NULL, 0x401, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchBulkScorer;

@@ -5,24 +5,28 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionDocvaluesBoolDocValues_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionDocvaluesBoolDocValues_RESTRICT
-#define OrgApacheLuceneQueriesFunctionDocvaluesBoolDocValues_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionDocvaluesBoolDocValues")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionDocvaluesBoolDocValues
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionDocvaluesBoolDocValues 0
 #else
-#define OrgApacheLuceneQueriesFunctionDocvaluesBoolDocValues_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionDocvaluesBoolDocValues 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionDocvaluesBoolDocValues_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionDocvaluesBoolDocValues
 
-#if !defined (_OrgApacheLuceneQueriesFunctionDocvaluesBoolDocValues_) && (OrgApacheLuceneQueriesFunctionDocvaluesBoolDocValues_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionDocvaluesBoolDocValues_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionDocvaluesBoolDocValues_
+#if !defined (OrgApacheLuceneQueriesFunctionDocvaluesBoolDocValues_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionDocvaluesBoolDocValues || defined(INCLUDE_OrgApacheLuceneQueriesFunctionDocvaluesBoolDocValues))
+#define OrgApacheLuceneQueriesFunctionDocvaluesBoolDocValues_
 
-#define OrgApacheLuceneQueriesFunctionFunctionValues_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionFunctionValues_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionFunctionValues 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionFunctionValues 1
 #include "org/apache/lucene/queries/function/FunctionValues.h"
 
 @class OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller;
 @class OrgApacheLuceneQueriesFunctionValueSource;
 
+/*!
+ @brief Abstract <code>FunctionValues</code> implementation which supports retrieving boolean values.
+ Implementations can control how the boolean values are loaded through <code>boolVal(int)</code>}
+ */
 @interface OrgApacheLuceneQueriesFunctionDocvaluesBoolDocValues : OrgApacheLuceneQueriesFunctionFunctionValues {
  @public
   OrgApacheLuceneQueriesFunctionValueSource *vs_;
@@ -66,4 +70,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionDocvaluesBoolDocValues)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionDocvaluesBoolDocValues_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionDocvaluesBoolDocValues")

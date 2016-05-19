@@ -37,7 +37,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisHiHindiNormalizationFilter, keywordAt
 
 - (jboolean)incrementToken {
   if ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
-    if (![((id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>) nil_chk(keywordAtt_)) isKeyword]) [termAtt_ setLengthWithInt:[((OrgApacheLuceneAnalysisHiHindiNormalizer *) nil_chk(normalizer_)) normalizeWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer] withInt:[termAtt_ length]]];
+    if (![((id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>) nil_chk(keywordAtt_)) isKeyword]) [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) setLengthWithInt:[((OrgApacheLuceneAnalysisHiHindiNormalizer *) nil_chk(normalizer_)) normalizeWithCharArray:[termAtt_ buffer] withInt:[termAtt_ length]]];
     return true;
   }
   return false;
@@ -74,9 +74,11 @@ void OrgApacheLuceneAnalysisHiHindiNormalizationFilter_initWithOrgApacheLuceneAn
 }
 
 OrgApacheLuceneAnalysisHiHindiNormalizationFilter *new_OrgApacheLuceneAnalysisHiHindiNormalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) {
-  OrgApacheLuceneAnalysisHiHindiNormalizationFilter *self = [OrgApacheLuceneAnalysisHiHindiNormalizationFilter alloc];
-  OrgApacheLuceneAnalysisHiHindiNormalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, input);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisHiHindiNormalizationFilter, initWithOrgApacheLuceneAnalysisTokenStream_, input)
+}
+
+OrgApacheLuceneAnalysisHiHindiNormalizationFilter *create_OrgApacheLuceneAnalysisHiHindiNormalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisHiHindiNormalizationFilter, initWithOrgApacheLuceneAnalysisTokenStream_, input)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisHiHindiNormalizationFilter)

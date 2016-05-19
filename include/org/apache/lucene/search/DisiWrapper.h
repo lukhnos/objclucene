@@ -5,20 +5,23 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchDisiWrapper_INCLUDE_ALL")
-#if OrgApacheLuceneSearchDisiWrapper_RESTRICT
-#define OrgApacheLuceneSearchDisiWrapper_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchDisiWrapper")
+#ifdef RESTRICT_OrgApacheLuceneSearchDisiWrapper
+#define INCLUDE_ALL_OrgApacheLuceneSearchDisiWrapper 0
 #else
-#define OrgApacheLuceneSearchDisiWrapper_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchDisiWrapper 1
 #endif
-#undef OrgApacheLuceneSearchDisiWrapper_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchDisiWrapper
 
-#if !defined (_OrgApacheLuceneSearchDisiWrapper_) && (OrgApacheLuceneSearchDisiWrapper_INCLUDE_ALL || OrgApacheLuceneSearchDisiWrapper_INCLUDE)
-#define _OrgApacheLuceneSearchDisiWrapper_
+#if !defined (OrgApacheLuceneSearchDisiWrapper_) && (INCLUDE_ALL_OrgApacheLuceneSearchDisiWrapper || defined(INCLUDE_OrgApacheLuceneSearchDisiWrapper))
+#define OrgApacheLuceneSearchDisiWrapper_
 
 @class OrgApacheLuceneSearchDocIdSetIterator;
 @class OrgApacheLuceneSearchTwoPhaseIterator;
 
+/*!
+ @brief Wrapper used in <code>DisiPriorityQueue</code>.
+ */
 @interface OrgApacheLuceneSearchDisiWrapper : NSObject {
  @public
   OrgApacheLuceneSearchDocIdSetIterator *iterator_;
@@ -48,8 +51,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchDisiWrapper_initWithOrgApacheLuceneS
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchDisiWrapper *new_OrgApacheLuceneSearchDisiWrapper_initWithOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchDocIdSetIterator *iterator) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchDisiWrapper *create_OrgApacheLuceneSearchDisiWrapper_initWithOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchDocIdSetIterator *iterator);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDisiWrapper)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchDisiWrapper_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchDisiWrapper")

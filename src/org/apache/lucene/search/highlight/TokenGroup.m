@@ -13,8 +13,6 @@
 #include "org/apache/lucene/analysis/tokenattributes/OffsetAttribute.h"
 #include "org/apache/lucene/search/highlight/TokenGroup.h"
 
-#define OrgApacheLuceneSearchHighlightTokenGroup_MAX_NUM_TOKENS_PER_GROUP 50
-
 @interface OrgApacheLuceneSearchHighlightTokenGroup () {
  @public
   IOSObjectArray *tokens_;
@@ -36,7 +34,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchHighlightTokenGroup, scores_, IOSFloatA
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchHighlightTokenGroup, offsetAtt_, id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchHighlightTokenGroup, termAtt_, id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchHighlightTokenGroup, MAX_NUM_TOKENS_PER_GROUP, jint)
+inline jint OrgApacheLuceneSearchHighlightTokenGroup_get_MAX_NUM_TOKENS_PER_GROUP();
+#define OrgApacheLuceneSearchHighlightTokenGroup_MAX_NUM_TOKENS_PER_GROUP 50
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchHighlightTokenGroup, MAX_NUM_TOKENS_PER_GROUP, jint)
 
 @implementation OrgApacheLuceneSearchHighlightTokenGroup
 
@@ -48,7 +48,7 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchHighlightTokenGroup, MAX_NUM_TOK
 - (void)addTokenWithFloat:(jfloat)score {
   if (numTokens_ < OrgApacheLuceneSearchHighlightTokenGroup_MAX_NUM_TOKENS_PER_GROUP) {
     jint termStartOffset = [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) startOffset];
-    jint termEndOffset = [offsetAtt_ endOffset];
+    jint termEndOffset = [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) endOffset];
     if (numTokens_ == 0) {
       startOffset_ = matchStartOffset_ = termStartOffset;
       endOffset_ = matchEndOffset_ = termEndOffset;
@@ -69,7 +69,7 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchHighlightTokenGroup, MAX_NUM_TOK
         JrePlusAssignFloatF(&tot_, score);
       }
     }
-    OrgApacheLuceneAnalysisToken *token = [new_OrgApacheLuceneAnalysisToken_init() autorelease];
+    OrgApacheLuceneAnalysisToken *token = create_OrgApacheLuceneAnalysisToken_init();
     [token setOffsetWithInt:termStartOffset withInt:termEndOffset];
     [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk([token setEmpty])) appendWithOrgApacheLuceneAnalysisTokenattributesCharTermAttribute:termAtt_];
     IOSObjectArray_Set(nil_chk(tokens_), numTokens_, token);
@@ -163,9 +163,11 @@ void OrgApacheLuceneSearchHighlightTokenGroup_initWithOrgApacheLuceneAnalysisTok
 }
 
 OrgApacheLuceneSearchHighlightTokenGroup *new_OrgApacheLuceneSearchHighlightTokenGroup_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *tokenStream) {
-  OrgApacheLuceneSearchHighlightTokenGroup *self = [OrgApacheLuceneSearchHighlightTokenGroup alloc];
-  OrgApacheLuceneSearchHighlightTokenGroup_initWithOrgApacheLuceneAnalysisTokenStream_(self, tokenStream);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchHighlightTokenGroup, initWithOrgApacheLuceneAnalysisTokenStream_, tokenStream)
+}
+
+OrgApacheLuceneSearchHighlightTokenGroup *create_OrgApacheLuceneSearchHighlightTokenGroup_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *tokenStream) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchHighlightTokenGroup, initWithOrgApacheLuceneAnalysisTokenStream_, tokenStream)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchHighlightTokenGroup)

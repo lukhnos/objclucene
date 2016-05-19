@@ -5,23 +5,23 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisSynonymSynonymFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisSynonymSynonymFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisSynonymSynonymFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisSynonymSynonymFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisSynonymSynonymFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_) && (OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisSynonymSynonymFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisSynonymSynonymFilterFactory))
+#define OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-#define OrgApacheLuceneAnalysisUtilResourceLoaderAware_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilResourceLoaderAware_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilResourceLoaderAware 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilResourceLoaderAware 1
 #include "org/apache/lucene/analysis/util/ResourceLoaderAware.h"
 
 @class OrgApacheLuceneAnalysisAnalyzer;
@@ -30,6 +30,39 @@
 @protocol JavaUtilMap;
 @protocol OrgApacheLuceneAnalysisUtilResourceLoader;
 
+/*!
+ @brief Factory for <code>SynonymFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_synonym" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+ &lt;filter class="solr.SynonymFilterFactory" synonyms="synonyms.txt" 
+ format="solr" ignoreCase="false" expand="true" 
+ tokenizerFactory="solr.WhitespaceTokenizerFactory"
+ [optional tokenizer factory parameters]/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ <p>
+ An optional param name prefix of "tokenizerFactory." may be used for any 
+ init params that the SynonymFilterFactory needs to pass to the specified 
+ TokenizerFactory.  If the TokenizerFactory expects an init parameters with 
+ the same name as an init param used by the SynonymFilterFactory, the prefix 
+ is mandatory.
+ </p>
+ <p>
+ The optional <code>format</code> parameter controls how the synonyms will be parsed:
+ It supports the short names of <code>solr</code> for <code>SolrSynonymParser</code> 
+ and <code>wordnet</code> for and <code>WordnetSynonymParser</code>, or your own 
+ <code>SynonymMap.Parser</code> class name. The default is <code>solr</code>.
+ A custom <code>SynonymMap.Parser</code> is expected to have a constructor taking:
+ <ul>
+ <li><code>boolean dedup</code> - true if duplicates should be ignored, false otherwise</li>
+ <li><code>boolean expand</code> - true if conflation groups should be expanded, false if they are one-directional</li>
+ <li><code><code>Analyzer</code> analyzer</code> - an analyzer used for each raw synonym</li>
+ </ul>
+ - seealso: SolrSynonymParser SolrSynonymParser: default format
+ */
 @interface OrgApacheLuceneAnalysisSynonymSynonymFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilResourceLoaderAware >
 
 #pragma mark Public
@@ -42,6 +75,9 @@
 
 #pragma mark Protected
 
+/*!
+ @brief Load synonyms with the given <code>SynonymMap.Parser</code> class.
+ */
 - (OrgApacheLuceneAnalysisSynonymSynonymMap *)loadSynonymsWithOrgApacheLuceneAnalysisUtilResourceLoader:(id<OrgApacheLuceneAnalysisUtilResourceLoader>)loader
                                                                                            withNSString:(NSString *)cname
                                                                                             withBoolean:(jboolean)dedup
@@ -55,8 +91,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_initWi
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisSynonymSynonymFilterFactory *new_OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisSynonymSynonymFilterFactory *create_OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisSynonymSynonymFilterFactory")

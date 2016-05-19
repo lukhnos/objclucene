@@ -41,12 +41,15 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilSPIClassIterator, clazz_, IOSClass *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilSPIClassIterator, loader_, JavaLangClassLoader *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilSPIClassIterator, linesIterator_, id<JavaUtilIterator>)
 
-static id<JavaUtilMap> OrgApacheLuceneUtilSPIClassIterator_hardCodedServices_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSPIClassIterator, hardCodedServices_, id<JavaUtilMap>)
+inline id<JavaUtilMap> OrgApacheLuceneUtilSPIClassIterator_get_hardCodedServices();
+static id<JavaUtilMap> OrgApacheLuceneUtilSPIClassIterator_hardCodedServices;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilSPIClassIterator, hardCodedServices, id<JavaUtilMap>)
 
 __attribute__((unused)) static void OrgApacheLuceneUtilSPIClassIterator_initWithIOSClass_withJavaLangClassLoader_(OrgApacheLuceneUtilSPIClassIterator *self, IOSClass *clazz, JavaLangClassLoader *loader);
 
 __attribute__((unused)) static OrgApacheLuceneUtilSPIClassIterator *new_OrgApacheLuceneUtilSPIClassIterator_initWithIOSClass_withJavaLangClassLoader_(IOSClass *clazz, JavaLangClassLoader *loader) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneUtilSPIClassIterator *create_OrgApacheLuceneUtilSPIClassIterator_initWithIOSClass_withJavaLangClassLoader_(IOSClass *clazz, JavaLangClassLoader *loader);
 
 __attribute__((unused)) static jboolean OrgApacheLuceneUtilSPIClassIterator_loadNextProfile(OrgApacheLuceneUtilSPIClassIterator *self);
 
@@ -84,20 +87,20 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilSPIClassIterator)
 
 - (IOSClass *)next {
   if (![self hasNext]) {
-    @throw [new_JavaUtilNoSuchElementException_init() autorelease];
+    @throw create_JavaUtilNoSuchElementException_init();
   }
   JreAssert(([((id<JavaUtilIterator>) nil_chk(linesIterator_)) hasNext]), (@"org/apache/lucene/util/SPIClassIterator.java:259 condition failed: assert linesIterator.hasNext();"));
-  NSString *c = [linesIterator_ next];
+  NSString *c = [((id<JavaUtilIterator>) nil_chk(linesIterator_)) next];
   @try {
     return [((IOSClass *) nil_chk(IOSClass_forName_initialize_classLoader_(c, false, loader_))) asSubclass:clazz_];
   }
   @catch (JavaLangClassNotFoundException *cnfe) {
-    @throw [new_JavaUtilServiceConfigurationError_initWithNSString_(NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT_), @"An SPI class of type %s with classname %s does not exist.", [IOSObjectArray arrayWithObjects:(id[]){ [((IOSClass *) nil_chk(clazz_)) getName], c } count:2 type:NSObject_class_()])) autorelease];
+    @throw create_JavaUtilServiceConfigurationError_initWithNSString_(NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"An SPI class of type %s with classname %s does not exist.", [IOSObjectArray arrayWithObjects:(id[]){ [((IOSClass *) nil_chk(clazz_)) getName], c } count:2 type:NSObject_class_()]));
   }
 }
 
 - (void)remove {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (void)dealloc {
@@ -110,16 +113,16 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilSPIClassIterator)
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilSPIClassIterator class]) {
     {
-      JreStrongAssignAndConsume(&OrgApacheLuceneUtilSPIClassIterator_hardCodedServices_, new_JavaUtilHashMap_init());
+      JreStrongAssignAndConsume(&OrgApacheLuceneUtilSPIClassIterator_hardCodedServices, new_JavaUtilHashMap_init());
       id<JavaUtilList> list;
-      list = [new_JavaUtilArrayList_init() autorelease];
-      [OrgApacheLuceneUtilSPIClassIterator_hardCodedServices_ putWithId:@"org.apache.lucene.codecs.Codec" withId:list];
+      list = create_JavaUtilArrayList_init();
+      [OrgApacheLuceneUtilSPIClassIterator_hardCodedServices putWithId:@"org.apache.lucene.codecs.Codec" withId:list];
       [list addWithId:@"org.apache.lucene.codecs.lucene53.Lucene53Codec"];
-      list = [new_JavaUtilArrayList_init() autorelease];
-      [OrgApacheLuceneUtilSPIClassIterator_hardCodedServices_ putWithId:@"org.apache.lucene.codecs.DocValuesFormat" withId:list];
+      list = create_JavaUtilArrayList_init();
+      [OrgApacheLuceneUtilSPIClassIterator_hardCodedServices putWithId:@"org.apache.lucene.codecs.DocValuesFormat" withId:list];
       [list addWithId:@"org.apache.lucene.codecs.lucene50.Lucene50DocValuesFormat"];
-      list = [new_JavaUtilArrayList_init() autorelease];
-      [OrgApacheLuceneUtilSPIClassIterator_hardCodedServices_ putWithId:@"org.apache.lucene.codecs.PostingsFormat" withId:list];
+      list = create_JavaUtilArrayList_init();
+      [OrgApacheLuceneUtilSPIClassIterator_hardCodedServices putWithId:@"org.apache.lucene.codecs.PostingsFormat" withId:list];
       [list addWithId:@"org.apache.lucene.codecs.lucene50.Lucene50PostingsFormat"];
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilSPIClassIterator)
@@ -131,14 +134,14 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilSPIClassIterator)
     { "getWithIOSClass:", "get", "Lorg.apache.lucene.util.SPIClassIterator;", 0x9, NULL, "<S:Ljava/lang/Object;>(Ljava/lang/Class<TS;>;)Lorg/apache/lucene/util/SPIClassIterator<TS;>;" },
     { "getWithIOSClass:withJavaLangClassLoader:", "get", "Lorg.apache.lucene.util.SPIClassIterator;", 0x9, NULL, "<S:Ljava/lang/Object;>(Ljava/lang/Class<TS;>;Ljava/lang/ClassLoader;)Lorg/apache/lucene/util/SPIClassIterator<TS;>;" },
     { "isParentClassLoaderWithJavaLangClassLoader:withJavaLangClassLoader:", "isParentClassLoader", "Z", 0x9, NULL, NULL },
-    { "initWithIOSClass:withJavaLangClassLoader:", "SPIClassIterator", NULL, 0x2, NULL, NULL },
+    { "initWithIOSClass:withJavaLangClassLoader:", "SPIClassIterator", NULL, 0x2, NULL, "(Ljava/lang/Class<TS;>;Ljava/lang/ClassLoader;)V" },
     { "loadNextProfile", NULL, "Z", 0x2, NULL, NULL },
     { "hasNext", NULL, "Z", 0x1, NULL, NULL },
-    { "next", NULL, "Ljava.lang.Class;", 0x1, NULL, NULL },
+    { "next", NULL, "Ljava.lang.Class;", 0x1, NULL, "()Ljava/lang/Class<+TS;>;" },
     { "remove", NULL, "V", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "hardCodedServices_", NULL, 0x1a, "Ljava.util.Map;", &OrgApacheLuceneUtilSPIClassIterator_hardCodedServices_, "Ljava/util/Map<Ljava/lang/String;Ljava/util/List<Ljava/lang/String;>;>;", .constantValue.asLong = 0 },
+    { "hardCodedServices", "hardCodedServices", 0x1a, "Ljava.util.Map;", &OrgApacheLuceneUtilSPIClassIterator_hardCodedServices, "Ljava/util/Map<Ljava/lang/String;Ljava/util/List<Ljava/lang/String;>;>;", .constantValue.asLong = 0 },
     { "clazz_", NULL, 0x12, "Ljava.lang.Class;", NULL, "Ljava/lang/Class<TS;>;", .constantValue.asLong = 0 },
     { "loader_", NULL, 0x12, "Ljava.lang.ClassLoader;", NULL, NULL, .constantValue.asLong = 0 },
     { "loaded_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
@@ -152,12 +155,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilSPIClassIterator)
 
 OrgApacheLuceneUtilSPIClassIterator *OrgApacheLuceneUtilSPIClassIterator_getWithIOSClass_(IOSClass *clazz) {
   OrgApacheLuceneUtilSPIClassIterator_initialize();
-  return [new_OrgApacheLuceneUtilSPIClassIterator_initWithIOSClass_withJavaLangClassLoader_(clazz, [((JavaLangThread *) nil_chk(JavaLangThread_currentThread())) getContextClassLoader]) autorelease];
+  return create_OrgApacheLuceneUtilSPIClassIterator_initWithIOSClass_withJavaLangClassLoader_(clazz, [((JavaLangThread *) nil_chk(JavaLangThread_currentThread())) getContextClassLoader]);
 }
 
 OrgApacheLuceneUtilSPIClassIterator *OrgApacheLuceneUtilSPIClassIterator_getWithIOSClass_withJavaLangClassLoader_(IOSClass *clazz, JavaLangClassLoader *loader) {
   OrgApacheLuceneUtilSPIClassIterator_initialize();
-  return [new_OrgApacheLuceneUtilSPIClassIterator_initWithIOSClass_withJavaLangClassLoader_(clazz, loader) autorelease];
+  return create_OrgApacheLuceneUtilSPIClassIterator_initWithIOSClass_withJavaLangClassLoader_(clazz, loader);
 }
 
 jboolean OrgApacheLuceneUtilSPIClassIterator_isParentClassLoaderWithJavaLangClassLoader_withJavaLangClassLoader_(JavaLangClassLoader *parent, JavaLangClassLoader *child) {
@@ -166,7 +169,7 @@ jboolean OrgApacheLuceneUtilSPIClassIterator_isParentClassLoaderWithJavaLangClas
     if (child == parent) {
       return true;
     }
-    child = [((JavaLangClassLoader *) nil_chk(child)) getParent];
+    child = [child getParent];
   }
   return false;
 }
@@ -174,9 +177,9 @@ jboolean OrgApacheLuceneUtilSPIClassIterator_isParentClassLoaderWithJavaLangClas
 void OrgApacheLuceneUtilSPIClassIterator_initWithIOSClass_withJavaLangClassLoader_(OrgApacheLuceneUtilSPIClassIterator *self, IOSClass *clazz, JavaLangClassLoader *loader) {
   NSObject_init(self);
   JreStrongAssign(&self->clazz_, clazz);
-  id<JavaUtilList> classList = [((id<JavaUtilMap>) nil_chk(OrgApacheLuceneUtilSPIClassIterator_hardCodedServices_)) getWithId:[((IOSClass *) nil_chk(clazz)) getName]];
+  id<JavaUtilList> classList = [((id<JavaUtilMap>) nil_chk(OrgApacheLuceneUtilSPIClassIterator_hardCodedServices)) getWithId:[((IOSClass *) nil_chk(clazz)) getName]];
   if (classList == nil || [classList isEmpty]) {
-    @throw [new_JavaUtilServiceConfigurationError_initWithNSString_(JreStrcat("$$$", @"Error loading SPI profiles for type ", [clazz getName], @" from hard-coded services")) autorelease];
+    @throw create_JavaUtilServiceConfigurationError_initWithNSString_(JreStrcat("$$$", @"Error loading SPI profiles for type ", [clazz getName], @" from hard-coded services"));
   }
   JreStrongAssign(&self->loader_, (loader == nil) ? JavaLangClassLoader_getSystemClassLoader() : loader);
   JreStrongAssign(&self->linesIterator_, [((id<JavaUtilSet>) nil_chk(JavaUtilCollections_emptySet())) iterator]);
@@ -184,9 +187,11 @@ void OrgApacheLuceneUtilSPIClassIterator_initWithIOSClass_withJavaLangClassLoade
 }
 
 OrgApacheLuceneUtilSPIClassIterator *new_OrgApacheLuceneUtilSPIClassIterator_initWithIOSClass_withJavaLangClassLoader_(IOSClass *clazz, JavaLangClassLoader *loader) {
-  OrgApacheLuceneUtilSPIClassIterator *self = [OrgApacheLuceneUtilSPIClassIterator alloc];
-  OrgApacheLuceneUtilSPIClassIterator_initWithIOSClass_withJavaLangClassLoader_(self, clazz, loader);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilSPIClassIterator, initWithIOSClass_withJavaLangClassLoader_, clazz, loader)
+}
+
+OrgApacheLuceneUtilSPIClassIterator *create_OrgApacheLuceneUtilSPIClassIterator_initWithIOSClass_withJavaLangClassLoader_(IOSClass *clazz, JavaLangClassLoader *loader) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilSPIClassIterator, initWithIOSClass_withJavaLangClassLoader_, clazz, loader)
 }
 
 jboolean OrgApacheLuceneUtilSPIClassIterator_loadNextProfile(OrgApacheLuceneUtilSPIClassIterator *self) {
@@ -194,7 +199,7 @@ jboolean OrgApacheLuceneUtilSPIClassIterator_loadNextProfile(OrgApacheLuceneUtil
     return false;
   }
   self->loaded_ = true;
-  JreStrongAssign(&self->linesIterator_, [((id<JavaUtilList>) nil_chk([((id<JavaUtilMap>) nil_chk(OrgApacheLuceneUtilSPIClassIterator_hardCodedServices_)) getWithId:[((IOSClass *) nil_chk(self->clazz_)) getName]])) iterator]);
+  JreStrongAssign(&self->linesIterator_, [((id<JavaUtilList>) nil_chk([((id<JavaUtilMap>) nil_chk(OrgApacheLuceneUtilSPIClassIterator_hardCodedServices)) getWithId:[((IOSClass *) nil_chk(self->clazz_)) getName]])) iterator]);
   return true;
 }
 

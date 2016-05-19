@@ -73,7 +73,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTermRangeQuery, upperTerm_, OrgApacheLu
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
-  JavaLangStringBuilder *buffer = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_init();
   if (![((NSString *) nil_chk([self getField])) isEqual:field]) {
     [buffer appendWithNSString:[self getField]];
     [buffer appendWithNSString:@":"];
@@ -92,16 +92,16 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTermRangeQuery, upperTerm_, OrgApacheLu
   jint result = ((jint) [super hash]);
   result = prime * result + (includeLower_ ? 1231 : 1237);
   result = prime * result + (includeUpper_ ? 1231 : 1237);
-  result = prime * result + ((lowerTerm_ == nil) ? 0 : ((jint) [lowerTerm_ hash]));
-  result = prime * result + ((upperTerm_ == nil) ? 0 : ((jint) [upperTerm_ hash]));
+  result = prime * result + ((lowerTerm_ == nil) ? 0 : ((jint) [((OrgApacheLuceneUtilBytesRef *) nil_chk(lowerTerm_)) hash]));
+  result = prime * result + ((upperTerm_ == nil) ? 0 : ((jint) [((OrgApacheLuceneUtilBytesRef *) nil_chk(upperTerm_)) hash]));
   return result;
 }
 
 - (jboolean)isEqual:(id)obj {
   if (self == obj) return true;
   if (![super isEqual:obj]) return false;
-  if ([self getClass] != [nil_chk(obj) getClass]) return false;
-  OrgApacheLuceneSearchTermRangeQuery *other = (OrgApacheLuceneSearchTermRangeQuery *) check_class_cast(obj, [OrgApacheLuceneSearchTermRangeQuery class]);
+  if ([self getClass] != (id) [nil_chk(obj) getClass]) return false;
+  OrgApacheLuceneSearchTermRangeQuery *other = (OrgApacheLuceneSearchTermRangeQuery *) cast_chk(obj, [OrgApacheLuceneSearchTermRangeQuery class]);
   if (includeLower_ != other->includeLower_) return false;
   if (includeUpper_ != other->includeUpper_) return false;
   if (lowerTerm_ == nil) {
@@ -147,7 +147,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTermRangeQuery, upperTerm_, OrgApacheLu
 @end
 
 void OrgApacheLuceneSearchTermRangeQuery_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(OrgApacheLuceneSearchTermRangeQuery *self, NSString *field, OrgApacheLuceneUtilBytesRef *lowerTerm, OrgApacheLuceneUtilBytesRef *upperTerm, jboolean includeLower, jboolean includeUpper) {
-  OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_withInt_withBoolean_(self, [new_OrgApacheLuceneIndexTerm_initWithNSString_withOrgApacheLuceneUtilBytesRef_(field, lowerTerm) autorelease], OrgApacheLuceneSearchTermRangeQuery_toAutomatonWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(lowerTerm, upperTerm, includeLower, includeUpper), JavaLangInteger_MAX_VALUE, true);
+  OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_withInt_withBoolean_(self, create_OrgApacheLuceneIndexTerm_initWithNSString_withOrgApacheLuceneUtilBytesRef_(field, lowerTerm), OrgApacheLuceneSearchTermRangeQuery_toAutomatonWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(lowerTerm, upperTerm, includeLower, includeUpper), JavaLangInteger_MAX_VALUE, true);
   JreStrongAssign(&self->lowerTerm_, lowerTerm);
   JreStrongAssign(&self->upperTerm_, upperTerm);
   self->includeLower_ = includeLower;
@@ -155,9 +155,11 @@ void OrgApacheLuceneSearchTermRangeQuery_initWithNSString_withOrgApacheLuceneUti
 }
 
 OrgApacheLuceneSearchTermRangeQuery *new_OrgApacheLuceneSearchTermRangeQuery_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(NSString *field, OrgApacheLuceneUtilBytesRef *lowerTerm, OrgApacheLuceneUtilBytesRef *upperTerm, jboolean includeLower, jboolean includeUpper) {
-  OrgApacheLuceneSearchTermRangeQuery *self = [OrgApacheLuceneSearchTermRangeQuery alloc];
-  OrgApacheLuceneSearchTermRangeQuery_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(self, field, lowerTerm, upperTerm, includeLower, includeUpper);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTermRangeQuery, initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_, field, lowerTerm, upperTerm, includeLower, includeUpper)
+}
+
+OrgApacheLuceneSearchTermRangeQuery *create_OrgApacheLuceneSearchTermRangeQuery_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(NSString *field, OrgApacheLuceneUtilBytesRef *lowerTerm, OrgApacheLuceneUtilBytesRef *upperTerm, jboolean includeLower, jboolean includeUpper) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTermRangeQuery, initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_, field, lowerTerm, upperTerm, includeLower, includeUpper)
 }
 
 OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneSearchTermRangeQuery_toAutomatonWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(OrgApacheLuceneUtilBytesRef *lowerTerm, OrgApacheLuceneUtilBytesRef *upperTerm, jboolean includeLower, jboolean includeUpper) {
@@ -173,9 +175,9 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneSearchTermRangeQuery_toAut
 
 OrgApacheLuceneSearchTermRangeQuery *OrgApacheLuceneSearchTermRangeQuery_newStringRangeWithNSString_withNSString_withNSString_withBoolean_withBoolean_(NSString *field, NSString *lowerTerm, NSString *upperTerm, jboolean includeLower, jboolean includeUpper) {
   OrgApacheLuceneSearchTermRangeQuery_initialize();
-  OrgApacheLuceneUtilBytesRef *lower = lowerTerm == nil ? nil : [new_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(lowerTerm) autorelease];
-  OrgApacheLuceneUtilBytesRef *upper = upperTerm == nil ? nil : [new_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(upperTerm) autorelease];
-  return [new_OrgApacheLuceneSearchTermRangeQuery_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(field, lower, upper, includeLower, includeUpper) autorelease];
+  OrgApacheLuceneUtilBytesRef *lower = lowerTerm == nil ? nil : create_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(lowerTerm);
+  OrgApacheLuceneUtilBytesRef *upper = upperTerm == nil ? nil : create_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(upperTerm);
+  return create_OrgApacheLuceneSearchTermRangeQuery_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(field, lower, upper, includeLower, includeUpper);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTermRangeQuery)

@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchHighlightTermVectorLeafReader_INCLUDE_ALL")
-#if OrgApacheLuceneSearchHighlightTermVectorLeafReader_RESTRICT
-#define OrgApacheLuceneSearchHighlightTermVectorLeafReader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightTermVectorLeafReader")
+#ifdef RESTRICT_OrgApacheLuceneSearchHighlightTermVectorLeafReader
+#define INCLUDE_ALL_OrgApacheLuceneSearchHighlightTermVectorLeafReader 0
 #else
-#define OrgApacheLuceneSearchHighlightTermVectorLeafReader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchHighlightTermVectorLeafReader 1
 #endif
-#undef OrgApacheLuceneSearchHighlightTermVectorLeafReader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchHighlightTermVectorLeafReader
 
-#if !defined (_OrgApacheLuceneSearchHighlightTermVectorLeafReader_) && (OrgApacheLuceneSearchHighlightTermVectorLeafReader_INCLUDE_ALL || OrgApacheLuceneSearchHighlightTermVectorLeafReader_INCLUDE)
-#define _OrgApacheLuceneSearchHighlightTermVectorLeafReader_
+#if !defined (OrgApacheLuceneSearchHighlightTermVectorLeafReader_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightTermVectorLeafReader || defined(INCLUDE_OrgApacheLuceneSearchHighlightTermVectorLeafReader))
+#define OrgApacheLuceneSearchHighlightTermVectorLeafReader_
 
-#define OrgApacheLuceneIndexLeafReader_RESTRICT 1
-#define OrgApacheLuceneIndexLeafReader_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexLeafReader 1
+#define INCLUDE_OrgApacheLuceneIndexLeafReader 1
 #include "org/apache/lucene/index/LeafReader.h"
 
 @class OrgApacheLuceneIndexBinaryDocValues;
@@ -32,6 +32,9 @@
 @protocol OrgApacheLuceneIndexLeafReader_CoreClosedListener;
 @protocol OrgApacheLuceneUtilBits;
 
+/*!
+ @brief Wraps a Terms with a <code>org.apache.lucene.index.LeafReader</code>, typically from term vectors.
+ */
 @interface OrgApacheLuceneSearchHighlightTermVectorLeafReader : OrgApacheLuceneIndexLeafReader
 
 #pragma mark Public
@@ -86,8 +89,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightTermVectorLeafReader_initWi
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightTermVectorLeafReader *new_OrgApacheLuceneSearchHighlightTermVectorLeafReader_initWithNSString_withOrgApacheLuceneIndexTerms_(NSString *field, OrgApacheLuceneIndexTerms *terms) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightTermVectorLeafReader *create_OrgApacheLuceneSearchHighlightTermVectorLeafReader_initWithNSString_withOrgApacheLuceneIndexTerms_(NSString *field, OrgApacheLuceneIndexTerms *terms);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightTermVectorLeafReader)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchHighlightTermVectorLeafReader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightTermVectorLeafReader")

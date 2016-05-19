@@ -5,29 +5,44 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisReverseReverseStringFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisReverseReverseStringFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisReverseReverseStringFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisReverseReverseStringFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisReverseReverseStringFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisReverseReverseStringFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisReverseReverseStringFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisReverseReverseStringFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisReverseReverseStringFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisReverseReverseStringFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisReverseReverseStringFilterFactory_) && (OrgApacheLuceneAnalysisReverseReverseStringFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisReverseReverseStringFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisReverseReverseStringFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisReverseReverseStringFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisReverseReverseStringFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisReverseReverseStringFilterFactory))
+#define OrgApacheLuceneAnalysisReverseReverseStringFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
 @class OrgApacheLuceneAnalysisReverseReverseStringFilter;
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>ReverseStringFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_rvsstr" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+ &lt;filter class="solr.ReverseStringFilterFactory"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ @since solr 1.4
+ */
 @interface OrgApacheLuceneAnalysisReverseReverseStringFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new ReverseStringFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisReverseReverseStringFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
@@ -40,8 +55,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisReverseReverseStringFilterFactory_
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisReverseReverseStringFilterFactory *new_OrgApacheLuceneAnalysisReverseReverseStringFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisReverseReverseStringFilterFactory *create_OrgApacheLuceneAnalysisReverseReverseStringFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisReverseReverseStringFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisReverseReverseStringFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisReverseReverseStringFilterFactory")

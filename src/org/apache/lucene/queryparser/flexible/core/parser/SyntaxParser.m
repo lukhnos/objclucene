@@ -3,11 +3,7 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/core/parser/SyntaxParser.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/lang/CharSequence.h"
-#include "org/apache/lucene/queryparser/flexible/core/QueryNodeParseException.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/core/parser/SyntaxParser.h"
 
 @interface OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser : NSObject

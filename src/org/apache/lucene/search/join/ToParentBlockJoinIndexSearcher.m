@@ -55,7 +55,7 @@ withOrgApacheLuceneSearchCollector:(id<OrgApacheLuceneSearchCollector>)collector
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneIndexIndexReader:withJavaUtilConcurrentExecutorService:", "ToParentBlockJoinIndexSearcher", NULL, 0x1, NULL, NULL },
     { "initWithOrgApacheLuceneIndexIndexReader:", "ToParentBlockJoinIndexSearcher", NULL, 0x1, NULL, NULL },
-    { "searchWithJavaUtilList:withOrgApacheLuceneSearchWeight:withOrgApacheLuceneSearchCollector:", "search", "V", 0x4, "Ljava.io.IOException;", NULL },
+    { "searchWithJavaUtilList:withOrgApacheLuceneSearchWeight:withOrgApacheLuceneSearchCollector:", "search", "V", 0x4, "Ljava.io.IOException;", "(Ljava/util/List<Lorg/apache/lucene/index/LeafReaderContext;>;Lorg/apache/lucene/search/Weight;Lorg/apache/lucene/search/Collector;)V" },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher = { 2, "ToParentBlockJoinIndexSearcher", "org.apache.lucene.search.join", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher;
@@ -68,9 +68,11 @@ void OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher_initWithOrgApacheLu
 }
 
 OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher *new_OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher_initWithOrgApacheLuceneIndexIndexReader_withJavaUtilConcurrentExecutorService_(OrgApacheLuceneIndexIndexReader *r, id<JavaUtilConcurrentExecutorService> executor) {
-  OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher *self = [OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher alloc];
-  OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher_initWithOrgApacheLuceneIndexIndexReader_withJavaUtilConcurrentExecutorService_(self, r, executor);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher, initWithOrgApacheLuceneIndexIndexReader_withJavaUtilConcurrentExecutorService_, r, executor)
+}
+
+OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher *create_OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher_initWithOrgApacheLuceneIndexIndexReader_withJavaUtilConcurrentExecutorService_(OrgApacheLuceneIndexIndexReader *r, id<JavaUtilConcurrentExecutorService> executor) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher, initWithOrgApacheLuceneIndexIndexReader_withJavaUtilConcurrentExecutorService_, r, executor)
 }
 
 void OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher_initWithOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher *self, OrgApacheLuceneIndexIndexReader *r) {
@@ -78,9 +80,11 @@ void OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher_initWithOrgApacheLu
 }
 
 OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher *new_OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher_initWithOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneIndexIndexReader *r) {
-  OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher *self = [OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher alloc];
-  OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher_initWithOrgApacheLuceneIndexIndexReader_(self, r);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher, initWithOrgApacheLuceneIndexIndexReader_, r)
+}
+
+OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher *create_OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher_initWithOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneIndexIndexReader *r) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher, initWithOrgApacheLuceneIndexIndexReader_, r)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher)

@@ -22,6 +22,30 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexPostingsEnum, atts_, OrgApacheLuceneUtil
 
 @implementation OrgApacheLuceneIndexPostingsEnum
 
++ (jshort)NONE {
+  return OrgApacheLuceneIndexPostingsEnum_NONE;
+}
+
++ (jshort)FREQS {
+  return OrgApacheLuceneIndexPostingsEnum_FREQS;
+}
+
++ (jshort)POSITIONS {
+  return OrgApacheLuceneIndexPostingsEnum_POSITIONS;
+}
+
++ (jshort)OFFSETS {
+  return OrgApacheLuceneIndexPostingsEnum_OFFSETS;
+}
+
++ (jshort)PAYLOADS {
+  return OrgApacheLuceneIndexPostingsEnum_PAYLOADS;
+}
+
++ (jshort)ALL {
+  return OrgApacheLuceneIndexPostingsEnum_ALL;
+}
+
 + (jboolean)featureRequestedWithInt:(jint)flags
                           withShort:(jshort)feature {
   return OrgApacheLuceneIndexPostingsEnum_featureRequestedWithInt_withShort_(flags, feature);

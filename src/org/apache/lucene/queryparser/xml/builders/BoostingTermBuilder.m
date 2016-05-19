@@ -20,7 +20,7 @@
 - (OrgApacheLuceneSearchSpansSpanQuery *)getSpanQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e {
   NSString *fieldName = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithInheritanceOrFailWithOrgW3cDomElement_withNSString_(e, @"fieldName");
   NSString *value = OrgApacheLuceneQueryparserXmlDOMUtils_getNonBlankTextOrFailWithOrgW3cDomElement_(e);
-  OrgApacheLuceneSearchPayloadsPayloadTermQuery *btq = [new_OrgApacheLuceneSearchPayloadsPayloadTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchPayloadsPayloadFunction_([new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(fieldName, value) autorelease], [new_OrgApacheLuceneSearchPayloadsAveragePayloadFunction_init() autorelease]) autorelease];
+  OrgApacheLuceneSearchPayloadsPayloadTermQuery *btq = create_OrgApacheLuceneSearchPayloadsPayloadTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchPayloadsPayloadFunction_(create_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(fieldName, value), create_OrgApacheLuceneSearchPayloadsAveragePayloadFunction_init());
   [btq setBoostWithFloat:OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withFloat_(e, @"boost", 1.0f)];
   return btq;
 }
@@ -35,7 +35,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "getSpanQueryWithOrgW3cDomElement:", "getSpanQuery", "Lorg.apache.lucene.search.spans.SpanQuery;", 0x1, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "BoostingTermBuilder", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersBoostingTermBuilder = { 2, "BoostingTermBuilder", "org.apache.lucene.queryparser.xml.builders", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserXmlBuildersBoostingTermBuilder;
@@ -48,9 +48,11 @@ void OrgApacheLuceneQueryparserXmlBuildersBoostingTermBuilder_init(OrgApacheLuce
 }
 
 OrgApacheLuceneQueryparserXmlBuildersBoostingTermBuilder *new_OrgApacheLuceneQueryparserXmlBuildersBoostingTermBuilder_init() {
-  OrgApacheLuceneQueryparserXmlBuildersBoostingTermBuilder *self = [OrgApacheLuceneQueryparserXmlBuildersBoostingTermBuilder alloc];
-  OrgApacheLuceneQueryparserXmlBuildersBoostingTermBuilder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserXmlBuildersBoostingTermBuilder, init)
+}
+
+OrgApacheLuceneQueryparserXmlBuildersBoostingTermBuilder *create_OrgApacheLuceneQueryparserXmlBuildersBoostingTermBuilder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserXmlBuildersBoostingTermBuilder, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserXmlBuildersBoostingTermBuilder)

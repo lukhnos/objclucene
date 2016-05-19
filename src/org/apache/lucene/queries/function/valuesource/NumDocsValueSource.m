@@ -28,11 +28,11 @@
 
 - (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
                                  withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext {
-  return [new_OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues_initWithInt_withOrgApacheLuceneQueriesFunctionValueSource_([((OrgApacheLuceneIndexIndexReader *) nil_chk([((OrgApacheLuceneIndexIndexReaderContext *) nil_chk(OrgApacheLuceneIndexReaderUtil_getTopLevelContextWithOrgApacheLuceneIndexIndexReaderContext_(readerContext))) reader])) numDocs], self) autorelease];
+  return create_OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues_initWithInt_withOrgApacheLuceneQueriesFunctionValueSource_([((OrgApacheLuceneIndexIndexReader *) nil_chk([((OrgApacheLuceneIndexIndexReaderContext *) nil_chk(OrgApacheLuceneIndexReaderUtil_getTopLevelContextWithOrgApacheLuceneIndexIndexReaderContext_(readerContext))) reader])) numDocs], self);
 }
 
 - (jboolean)isEqual:(id)o {
-  return [self getClass] == [nil_chk(o) getClass];
+  return [self getClass] == (id) [nil_chk(o) getClass];
 }
 
 - (NSUInteger)hash {
@@ -53,7 +53,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:", "getValues", "Lorg.apache.lucene.queries.function.FunctionValues;", 0x1, "Ljava.io.IOException;", NULL },
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "NumDocsValueSource", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource = { 2, "NumDocsValueSource", "org.apache.lucene.queries.function.valuesource", NULL, 0x1, 6, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource;
@@ -66,9 +66,11 @@ void OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource_init(OrgApacheL
 }
 
 OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource_init() {
-  OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource *self = [OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource alloc];
-  OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource, init)
+}
+
+OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource *create_OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceNumDocsValueSource)

@@ -5,29 +5,51 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsBlockTermState_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsBlockTermState_RESTRICT
-#define OrgApacheLuceneCodecsBlockTermState_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsBlockTermState")
+#ifdef RESTRICT_OrgApacheLuceneCodecsBlockTermState
+#define INCLUDE_ALL_OrgApacheLuceneCodecsBlockTermState 0
 #else
-#define OrgApacheLuceneCodecsBlockTermState_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsBlockTermState 1
 #endif
-#undef OrgApacheLuceneCodecsBlockTermState_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsBlockTermState
 
-#if !defined (_OrgApacheLuceneCodecsBlockTermState_) && (OrgApacheLuceneCodecsBlockTermState_INCLUDE_ALL || OrgApacheLuceneCodecsBlockTermState_INCLUDE)
-#define _OrgApacheLuceneCodecsBlockTermState_
+#if !defined (OrgApacheLuceneCodecsBlockTermState_) && (INCLUDE_ALL_OrgApacheLuceneCodecsBlockTermState || defined(INCLUDE_OrgApacheLuceneCodecsBlockTermState))
+#define OrgApacheLuceneCodecsBlockTermState_
 
-#define OrgApacheLuceneIndexOrdTermState_RESTRICT 1
-#define OrgApacheLuceneIndexOrdTermState_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexOrdTermState 1
+#define INCLUDE_OrgApacheLuceneIndexOrdTermState 1
 #include "org/apache/lucene/index/OrdTermState.h"
 
 @class OrgApacheLuceneIndexTermState;
 
+/*!
+ @brief Holds all state required for <code>PostingsReaderBase</code>
+ to produce a <code>org.apache.lucene.index.PostingsEnum</code> without re-seeking the
+ terms dict.
+ */
 @interface OrgApacheLuceneCodecsBlockTermState : OrgApacheLuceneIndexOrdTermState {
  @public
+  /*!
+   @brief how many docs have this term
+   */
   jint docFreq_;
+  /*!
+   @brief total number of occurrences of this term
+   */
   jlong totalTermFreq_;
+  /*!
+   @brief the term's ord in the current block
+   */
   jint termBlockOrd_;
+  /*!
+   @brief fp into the terms dict primary file (_X.tim) that holds this term
+   */
   jlong blockFilePointer_;
+  /*!
+   @brief True if this term is "real" (e.g., not an auto-prefix term or
+ some other "secret" term; currently only <code>BlockTreeTermsReader</code>
+ sets this).
+   */
   jboolean isRealTerm_;
 }
 
@@ -41,6 +63,11 @@
 
 #pragma mark Protected
 
+/*!
+ @brief Sole constructor.
+ (For invocation by subclass 
+ constructors, typically implicit.) 
+ */
 - (instancetype)init;
 
 @end
@@ -51,8 +78,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsBlockTermState_init(OrgApacheLuceneC
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsBlockTermState *new_OrgApacheLuceneCodecsBlockTermState_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsBlockTermState *create_OrgApacheLuceneCodecsBlockTermState_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsBlockTermState)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsBlockTermState_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsBlockTermState")

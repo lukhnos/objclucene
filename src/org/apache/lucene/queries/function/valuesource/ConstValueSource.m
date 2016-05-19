@@ -54,6 +54,8 @@ __attribute__((unused)) static void OrgApacheLuceneQueriesFunctionValuesourceCon
 
 __attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceConstValueSource_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceConstValueSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceConstValueSource_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceConstValueSource *outer$, OrgApacheLuceneQueriesFunctionValueSource *arg$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceConstValueSource_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceConstValueSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceConstValueSource_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceConstValueSource *outer$, OrgApacheLuceneQueriesFunctionValueSource *arg$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceConstValueSource_$1)
 
 @implementation OrgApacheLuceneQueriesFunctionValuesourceConstValueSource
@@ -69,7 +71,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceConstValueSo
 
 - (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
                                  withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext {
-  return [new_OrgApacheLuceneQueriesFunctionValuesourceConstValueSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceConstValueSource_withOrgApacheLuceneQueriesFunctionValueSource_(self, self) autorelease];
+  return create_OrgApacheLuceneQueriesFunctionValuesourceConstValueSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceConstValueSource_withOrgApacheLuceneQueriesFunctionValueSource_(self, self);
 }
 
 - (NSUInteger)hash {
@@ -78,7 +80,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceConstValueSo
 
 - (jboolean)isEqual:(id)o {
   if (!([o isKindOfClass:[OrgApacheLuceneQueriesFunctionValuesourceConstValueSource class]])) return false;
-  OrgApacheLuceneQueriesFunctionValuesourceConstValueSource *other = (OrgApacheLuceneQueriesFunctionValuesourceConstValueSource *) check_class_cast(o, [OrgApacheLuceneQueriesFunctionValuesourceConstValueSource class]);
+  OrgApacheLuceneQueriesFunctionValuesourceConstValueSource *other = (OrgApacheLuceneQueriesFunctionValuesourceConstValueSource *) cast_chk(o, [OrgApacheLuceneQueriesFunctionValuesourceConstValueSource class]);
   return self->constant_ == ((OrgApacheLuceneQueriesFunctionValuesourceConstValueSource *) nil_chk(other))->constant_;
 }
 
@@ -137,9 +139,11 @@ void OrgApacheLuceneQueriesFunctionValuesourceConstValueSource_initWithFloat_(Or
 }
 
 OrgApacheLuceneQueriesFunctionValuesourceConstValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceConstValueSource_initWithFloat_(jfloat constant) {
-  OrgApacheLuceneQueriesFunctionValuesourceConstValueSource *self = [OrgApacheLuceneQueriesFunctionValuesourceConstValueSource alloc];
-  OrgApacheLuceneQueriesFunctionValuesourceConstValueSource_initWithFloat_(self, constant);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceConstValueSource, initWithFloat_, constant)
+}
+
+OrgApacheLuceneQueriesFunctionValuesourceConstValueSource *create_OrgApacheLuceneQueriesFunctionValuesourceConstValueSource_initWithFloat_(jfloat constant) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceConstValueSource, initWithFloat_, constant)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceConstValueSource)
@@ -212,9 +216,11 @@ void OrgApacheLuceneQueriesFunctionValuesourceConstValueSource_$1_initWithOrgApa
 }
 
 OrgApacheLuceneQueriesFunctionValuesourceConstValueSource_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceConstValueSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceConstValueSource_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceConstValueSource *outer$, OrgApacheLuceneQueriesFunctionValueSource *arg$0) {
-  OrgApacheLuceneQueriesFunctionValuesourceConstValueSource_$1 *self = [OrgApacheLuceneQueriesFunctionValuesourceConstValueSource_$1 alloc];
-  OrgApacheLuceneQueriesFunctionValuesourceConstValueSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceConstValueSource_withOrgApacheLuceneQueriesFunctionValueSource_(self, outer$, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceConstValueSource_$1, initWithOrgApacheLuceneQueriesFunctionValuesourceConstValueSource_withOrgApacheLuceneQueriesFunctionValueSource_, outer$, arg$0)
+}
+
+OrgApacheLuceneQueriesFunctionValuesourceConstValueSource_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceConstValueSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceConstValueSource_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceConstValueSource *outer$, OrgApacheLuceneQueriesFunctionValueSource *arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceConstValueSource_$1, initWithOrgApacheLuceneQueriesFunctionValuesourceConstValueSource_withOrgApacheLuceneQueriesFunctionValueSource_, outer$, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceConstValueSource_$1)

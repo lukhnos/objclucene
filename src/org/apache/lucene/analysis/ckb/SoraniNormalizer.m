@@ -11,6 +11,94 @@
 
 @implementation OrgApacheLuceneAnalysisCkbSoraniNormalizer
 
++ (jchar)YEH {
+  return OrgApacheLuceneAnalysisCkbSoraniNormalizer_YEH;
+}
+
++ (jchar)DOTLESS_YEH {
+  return OrgApacheLuceneAnalysisCkbSoraniNormalizer_DOTLESS_YEH;
+}
+
++ (jchar)FARSI_YEH {
+  return OrgApacheLuceneAnalysisCkbSoraniNormalizer_FARSI_YEH;
+}
+
++ (jchar)KAF {
+  return OrgApacheLuceneAnalysisCkbSoraniNormalizer_KAF;
+}
+
++ (jchar)KEHEH {
+  return OrgApacheLuceneAnalysisCkbSoraniNormalizer_KEHEH;
+}
+
++ (jchar)HEH {
+  return OrgApacheLuceneAnalysisCkbSoraniNormalizer_HEH;
+}
+
++ (jchar)AE {
+  return OrgApacheLuceneAnalysisCkbSoraniNormalizer_AE;
+}
+
++ (jchar)ZWNJ {
+  return OrgApacheLuceneAnalysisCkbSoraniNormalizer_ZWNJ;
+}
+
++ (jchar)HEH_DOACHASHMEE {
+  return OrgApacheLuceneAnalysisCkbSoraniNormalizer_HEH_DOACHASHMEE;
+}
+
++ (jchar)TEH_MARBUTA {
+  return OrgApacheLuceneAnalysisCkbSoraniNormalizer_TEH_MARBUTA;
+}
+
++ (jchar)REH {
+  return OrgApacheLuceneAnalysisCkbSoraniNormalizer_REH;
+}
+
++ (jchar)RREH {
+  return OrgApacheLuceneAnalysisCkbSoraniNormalizer_RREH;
+}
+
++ (jchar)RREH_ABOVE {
+  return OrgApacheLuceneAnalysisCkbSoraniNormalizer_RREH_ABOVE;
+}
+
++ (jchar)TATWEEL {
+  return OrgApacheLuceneAnalysisCkbSoraniNormalizer_TATWEEL;
+}
+
++ (jchar)FATHATAN {
+  return OrgApacheLuceneAnalysisCkbSoraniNormalizer_FATHATAN;
+}
+
++ (jchar)DAMMATAN {
+  return OrgApacheLuceneAnalysisCkbSoraniNormalizer_DAMMATAN;
+}
+
++ (jchar)KASRATAN {
+  return OrgApacheLuceneAnalysisCkbSoraniNormalizer_KASRATAN;
+}
+
++ (jchar)FATHA {
+  return OrgApacheLuceneAnalysisCkbSoraniNormalizer_FATHA;
+}
+
++ (jchar)DAMMA {
+  return OrgApacheLuceneAnalysisCkbSoraniNormalizer_DAMMA;
+}
+
++ (jchar)KASRA {
+  return OrgApacheLuceneAnalysisCkbSoraniNormalizer_KASRA;
+}
+
++ (jchar)SHADDA {
+  return OrgApacheLuceneAnalysisCkbSoraniNormalizer_SHADDA;
+}
+
++ (jchar)SUKUN {
+  return OrgApacheLuceneAnalysisCkbSoraniNormalizer_SUKUN;
+}
+
 - (jint)normalizeWithCharArray:(IOSCharArray *)s
                        withInt:(jint)len {
   for (jint i = 0; i < len; i++) {
@@ -80,7 +168,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "normalizeWithCharArray:withInt:", "normalize", "I", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "SoraniNormalizer", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "YEH", "YEH", 0x18, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_YEH },
@@ -117,9 +205,11 @@ void OrgApacheLuceneAnalysisCkbSoraniNormalizer_init(OrgApacheLuceneAnalysisCkbS
 }
 
 OrgApacheLuceneAnalysisCkbSoraniNormalizer *new_OrgApacheLuceneAnalysisCkbSoraniNormalizer_init() {
-  OrgApacheLuceneAnalysisCkbSoraniNormalizer *self = [OrgApacheLuceneAnalysisCkbSoraniNormalizer alloc];
-  OrgApacheLuceneAnalysisCkbSoraniNormalizer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCkbSoraniNormalizer, init)
+}
+
+OrgApacheLuceneAnalysisCkbSoraniNormalizer *create_OrgApacheLuceneAnalysisCkbSoraniNormalizer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCkbSoraniNormalizer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCkbSoraniNormalizer)

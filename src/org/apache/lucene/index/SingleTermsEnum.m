@@ -26,8 +26,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSingleTermsEnum, singleRef_, OrgApacheLu
   return self;
 }
 
-- (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
-  return [((OrgApacheLuceneUtilBytesRef *) nil_chk(term)) isEqual:singleRef_] ? JreLoadStatic(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum, YES) : JreLoadStatic(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum, END);
+- (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
+  return [((OrgApacheLuceneUtilBytesRef *) nil_chk(term)) isEqual:singleRef_] ? JreLoadEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, YES) : JreLoadEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, END);
 }
 
 - (void)dealloc {
@@ -56,9 +56,11 @@ void OrgApacheLuceneIndexSingleTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_w
 }
 
 OrgApacheLuceneIndexSingleTermsEnum *new_OrgApacheLuceneIndexSingleTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneIndexTermsEnum *tenum, OrgApacheLuceneUtilBytesRef *termText) {
-  OrgApacheLuceneIndexSingleTermsEnum *self = [OrgApacheLuceneIndexSingleTermsEnum alloc];
-  OrgApacheLuceneIndexSingleTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilBytesRef_(self, tenum, termText);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSingleTermsEnum, initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilBytesRef_, tenum, termText)
+}
+
+OrgApacheLuceneIndexSingleTermsEnum *create_OrgApacheLuceneIndexSingleTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneIndexTermsEnum *tenum, OrgApacheLuceneUtilBytesRef *termText) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSingleTermsEnum, initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilBytesRef_, tenum, termText)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSingleTermsEnum)

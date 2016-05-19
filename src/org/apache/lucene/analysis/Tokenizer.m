@@ -17,6 +17,9 @@
 
 @interface OrgApacheLuceneAnalysisTokenizer () {
  @public
+  /*!
+   @brief Pending reader: not actually assigned to input until reset()
+   */
   JavaIoReader *inputPending_;
 }
 
@@ -24,8 +27,9 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisTokenizer, inputPending_, JavaIoReader *)
 
-static JavaIoReader *OrgApacheLuceneAnalysisTokenizer_ILLEGAL_STATE_READER_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisTokenizer, ILLEGAL_STATE_READER_, JavaIoReader *)
+inline JavaIoReader *OrgApacheLuceneAnalysisTokenizer_get_ILLEGAL_STATE_READER();
+static JavaIoReader *OrgApacheLuceneAnalysisTokenizer_ILLEGAL_STATE_READER;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisTokenizer, ILLEGAL_STATE_READER, JavaIoReader *)
 
 @interface OrgApacheLuceneAnalysisTokenizer_$1 : JavaIoReader
 
@@ -44,6 +48,8 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisTokenizer_$1)
 __attribute__((unused)) static void OrgApacheLuceneAnalysisTokenizer_$1_init(OrgApacheLuceneAnalysisTokenizer_$1 *self);
 
 __attribute__((unused)) static OrgApacheLuceneAnalysisTokenizer_$1 *new_OrgApacheLuceneAnalysisTokenizer_$1_init() NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneAnalysisTokenizer_$1 *create_OrgApacheLuceneAnalysisTokenizer_$1_init();
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenizer_$1)
 
@@ -65,19 +71,19 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)close {
   [((JavaIoReader *) nil_chk(input_)) close];
-  JreStrongAssign(&inputPending_, JreStrongAssign(&input_, OrgApacheLuceneAnalysisTokenizer_ILLEGAL_STATE_READER_));
+  JreStrongAssign(&inputPending_, JreStrongAssign(&input_, OrgApacheLuceneAnalysisTokenizer_ILLEGAL_STATE_READER));
 }
 
 - (jint)correctOffsetWithInt:(jint)currentOff {
-  return ([input_ isKindOfClass:[OrgApacheLuceneAnalysisCharFilter class]]) ? [((OrgApacheLuceneAnalysisCharFilter *) nil_chk(((OrgApacheLuceneAnalysisCharFilter *) check_class_cast(input_, [OrgApacheLuceneAnalysisCharFilter class])))) correctOffsetWithInt:currentOff] : currentOff;
+  return ([input_ isKindOfClass:[OrgApacheLuceneAnalysisCharFilter class]]) ? [((OrgApacheLuceneAnalysisCharFilter *) nil_chk(((OrgApacheLuceneAnalysisCharFilter *) cast_chk(input_, [OrgApacheLuceneAnalysisCharFilter class])))) correctOffsetWithInt:currentOff] : currentOff;
 }
 
 - (void)setReaderWithJavaIoReader:(JavaIoReader *)input {
   if (input == nil) {
-    @throw [new_JavaLangNullPointerException_initWithNSString_(@"input must not be null") autorelease];
+    @throw create_JavaLangNullPointerException_initWithNSString_(@"input must not be null");
   }
-  else if (self->input_ != OrgApacheLuceneAnalysisTokenizer_ILLEGAL_STATE_READER_) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"TokenStream contract violation: close() call missing") autorelease];
+  else if (self->input_ != OrgApacheLuceneAnalysisTokenizer_ILLEGAL_STATE_READER) {
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"TokenStream contract violation: close() call missing");
   }
   JreStrongAssign(&self->inputPending_, input);
   [self setReaderTestPoint];
@@ -86,7 +92,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)reset {
   [super reset];
   JreStrongAssign(&input_, inputPending_);
-  JreStrongAssign(&inputPending_, OrgApacheLuceneAnalysisTokenizer_ILLEGAL_STATE_READER_);
+  JreStrongAssign(&inputPending_, OrgApacheLuceneAnalysisTokenizer_ILLEGAL_STATE_READER);
 }
 
 - (void)setReaderTestPoint {
@@ -100,7 +106,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisTokenizer class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisTokenizer_ILLEGAL_STATE_READER_, new_OrgApacheLuceneAnalysisTokenizer_$1_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisTokenizer_ILLEGAL_STATE_READER, new_OrgApacheLuceneAnalysisTokenizer_$1_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisTokenizer)
   }
 }
@@ -118,7 +124,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   static const J2ObjcFieldInfo fields[] = {
     { "input_", NULL, 0x4, "Ljava.io.Reader;", NULL, NULL, .constantValue.asLong = 0 },
     { "inputPending_", NULL, 0x2, "Ljava.io.Reader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "ILLEGAL_STATE_READER_", NULL, 0x1a, "Ljava.io.Reader;", &OrgApacheLuceneAnalysisTokenizer_ILLEGAL_STATE_READER_, NULL, .constantValue.asLong = 0 },
+    { "ILLEGAL_STATE_READER", "ILLEGAL_STATE_READER", 0x1a, "Ljava.io.Reader;", &OrgApacheLuceneAnalysisTokenizer_ILLEGAL_STATE_READER, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTokenizer = { 2, "Tokenizer", "org.apache.lucene.analysis", NULL, 0x401, 7, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisTokenizer;
@@ -128,14 +134,14 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 void OrgApacheLuceneAnalysisTokenizer_init(OrgApacheLuceneAnalysisTokenizer *self) {
   OrgApacheLuceneAnalysisTokenStream_init(self);
-  JreStrongAssign(&self->input_, OrgApacheLuceneAnalysisTokenizer_ILLEGAL_STATE_READER_);
-  JreStrongAssign(&self->inputPending_, OrgApacheLuceneAnalysisTokenizer_ILLEGAL_STATE_READER_);
+  JreStrongAssign(&self->input_, OrgApacheLuceneAnalysisTokenizer_ILLEGAL_STATE_READER);
+  JreStrongAssign(&self->inputPending_, OrgApacheLuceneAnalysisTokenizer_ILLEGAL_STATE_READER);
 }
 
 void OrgApacheLuceneAnalysisTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneAnalysisTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory) {
   OrgApacheLuceneAnalysisTokenStream_initWithOrgApacheLuceneUtilAttributeFactory_(self, factory);
-  JreStrongAssign(&self->input_, OrgApacheLuceneAnalysisTokenizer_ILLEGAL_STATE_READER_);
-  JreStrongAssign(&self->inputPending_, OrgApacheLuceneAnalysisTokenizer_ILLEGAL_STATE_READER_);
+  JreStrongAssign(&self->input_, OrgApacheLuceneAnalysisTokenizer_ILLEGAL_STATE_READER);
+  JreStrongAssign(&self->inputPending_, OrgApacheLuceneAnalysisTokenizer_ILLEGAL_STATE_READER);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisTokenizer)
@@ -145,7 +151,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisTokenizer)
 - (jint)readWithCharArray:(IOSCharArray *)cbuf
                   withInt:(jint)off
                   withInt:(jint)len {
-  @throw [new_JavaLangIllegalStateException_initWithNSString_(@"TokenStream contract violation: reset()/close() call missing, reset() called multiple times, or subclass does not call super.reset(). Please see Javadocs of TokenStream class for more information about the correct consuming workflow.") autorelease];
+  @throw create_JavaLangIllegalStateException_initWithNSString_(@"TokenStream contract violation: reset()/close() call missing, reset() called multiple times, or subclass does not call super.reset(). Please see Javadocs of TokenStream class for more information about the correct consuming workflow.");
 }
 
 - (void)close {
@@ -175,9 +181,11 @@ void OrgApacheLuceneAnalysisTokenizer_$1_init(OrgApacheLuceneAnalysisTokenizer_$
 }
 
 OrgApacheLuceneAnalysisTokenizer_$1 *new_OrgApacheLuceneAnalysisTokenizer_$1_init() {
-  OrgApacheLuceneAnalysisTokenizer_$1 *self = [OrgApacheLuceneAnalysisTokenizer_$1 alloc];
-  OrgApacheLuceneAnalysisTokenizer_$1_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisTokenizer_$1, init)
+}
+
+OrgApacheLuceneAnalysisTokenizer_$1 *create_OrgApacheLuceneAnalysisTokenizer_$1_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisTokenizer_$1, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisTokenizer_$1)

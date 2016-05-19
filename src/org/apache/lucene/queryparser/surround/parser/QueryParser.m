@@ -84,9 +84,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSurroundParserQueryParser, jj_expe
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSurroundParserQueryParser, jj_expentry_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSurroundParserQueryParser, jj_lasttokens_, IOSIntArray *)
 
-static IOSIntArray *OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_la1_0_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserSurroundParserQueryParser, jj_la1_0_, IOSIntArray *)
-J2OBJC_STATIC_FIELD_SETTER(OrgApacheLuceneQueryparserSurroundParserQueryParser, jj_la1_0_, IOSIntArray *)
+inline IOSIntArray *OrgApacheLuceneQueryparserSurroundParserQueryParser_get_jj_la1_0();
+inline IOSIntArray *OrgApacheLuceneQueryparserSurroundParserQueryParser_set_jj_la1_0(IOSIntArray *value);
+static IOSIntArray *OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_la1_0;
+J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneQueryparserSurroundParserQueryParser, jj_la1_0, IOSIntArray *)
 
 __attribute__((unused)) static OrgApacheLuceneQueryparserSurroundQuerySrndQuery *OrgApacheLuceneQueryparserSurroundParserQueryParser_TopSrndQuery(OrgApacheLuceneQueryparserSurroundParserQueryParser *self);
 
@@ -144,11 +145,45 @@ __attribute__((unused)) static void OrgApacheLuceneQueryparserSurroundParserQuer
 
 __attribute__((unused)) static OrgApacheLuceneQueryparserSurroundParserQueryParser_LookaheadSuccess *new_OrgApacheLuceneQueryparserSurroundParserQueryParser_LookaheadSuccess_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneQueryparserSurroundParserQueryParser_LookaheadSuccess *create_OrgApacheLuceneQueryparserSurroundParserQueryParser_LookaheadSuccess_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundParserQueryParser_LookaheadSuccess)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneQueryparserSurroundParserQueryParser)
 
 @implementation OrgApacheLuceneQueryparserSurroundParserQueryParser
+
++ (jint)minimumPrefixLength {
+  return OrgApacheLuceneQueryparserSurroundParserQueryParser_minimumPrefixLength;
+}
+
++ (jint)minimumCharsInTrunc {
+  return OrgApacheLuceneQueryparserSurroundParserQueryParser_minimumCharsInTrunc;
+}
+
++ (jchar)truncator {
+  return OrgApacheLuceneQueryparserSurroundParserQueryParser_truncator;
+}
+
++ (jchar)anyChar {
+  return OrgApacheLuceneQueryparserSurroundParserQueryParser_anyChar;
+}
+
++ (jchar)quote {
+  return OrgApacheLuceneQueryparserSurroundParserQueryParser_quote;
+}
+
++ (jchar)fieldOperator {
+  return OrgApacheLuceneQueryparserSurroundParserQueryParser_fieldOperator;
+}
+
++ (jchar)comma {
+  return OrgApacheLuceneQueryparserSurroundParserQueryParser_comma;
+}
+
++ (jchar)carat {
+  return OrgApacheLuceneQueryparserSurroundParserQueryParser_carat;
+}
 
 + (OrgApacheLuceneQueryparserSurroundQuerySrndQuery *)parseWithNSString:(NSString *)query {
   return OrgApacheLuceneQueryparserSurroundParserQueryParser_parseWithNSString_(query);
@@ -162,35 +197,35 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneQueryparserSurroundQuerySrndQuery *)parse2WithNSString:(NSString *)query {
-  [self ReInitWithOrgApacheLuceneQueryparserSurroundParserCharStream:[new_OrgApacheLuceneQueryparserSurroundParserFastCharStream_initWithJavaIoReader_([new_JavaIoStringReader_initWithNSString_(query) autorelease]) autorelease]];
+  [self ReInitWithOrgApacheLuceneQueryparserSurroundParserCharStream:create_OrgApacheLuceneQueryparserSurroundParserFastCharStream_initWithJavaIoReader_(create_JavaIoStringReader_initWithNSString_(query))];
   @try {
     return OrgApacheLuceneQueryparserSurroundParserQueryParser_TopSrndQuery(self);
   }
   @catch (OrgApacheLuceneQueryparserSurroundParserTokenMgrError *tme) {
-    @throw [new_OrgApacheLuceneQueryparserSurroundParserParseException_initWithNSString_([((OrgApacheLuceneQueryparserSurroundParserTokenMgrError *) nil_chk(tme)) getMessage]) autorelease];
+    @throw create_OrgApacheLuceneQueryparserSurroundParserParseException_initWithNSString_([((OrgApacheLuceneQueryparserSurroundParserTokenMgrError *) nil_chk(tme)) getMessage]);
   }
 }
 
 - (OrgApacheLuceneQueryparserSurroundQuerySrndQuery *)getFieldsQueryWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery:(OrgApacheLuceneQueryparserSurroundQuerySrndQuery *)q
                                                                                                    withJavaUtilArrayList:(JavaUtilArrayList *)fieldNames {
-  return [new_OrgApacheLuceneQueryparserSurroundQueryFieldsQuery_initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery_withJavaUtilList_withChar_(q, fieldNames, OrgApacheLuceneQueryparserSurroundParserQueryParser_fieldOperator) autorelease];
+  return create_OrgApacheLuceneQueryparserSurroundQueryFieldsQuery_initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery_withJavaUtilList_withChar_(q, fieldNames, OrgApacheLuceneQueryparserSurroundParserQueryParser_fieldOperator);
 }
 
 - (OrgApacheLuceneQueryparserSurroundQuerySrndQuery *)getOrQueryWithJavaUtilList:(id<JavaUtilList>)queries
                                                                      withBoolean:(jboolean)infix
                                withOrgApacheLuceneQueryparserSurroundParserToken:(OrgApacheLuceneQueryparserSurroundParserToken *)orToken {
-  return [new_OrgApacheLuceneQueryparserSurroundQueryOrQuery_initWithJavaUtilList_withBoolean_withNSString_(queries, infix, ((OrgApacheLuceneQueryparserSurroundParserToken *) nil_chk(orToken))->image_) autorelease];
+  return create_OrgApacheLuceneQueryparserSurroundQueryOrQuery_initWithJavaUtilList_withBoolean_withNSString_(queries, infix, ((OrgApacheLuceneQueryparserSurroundParserToken *) nil_chk(orToken))->image_);
 }
 
 - (OrgApacheLuceneQueryparserSurroundQuerySrndQuery *)getAndQueryWithJavaUtilList:(id<JavaUtilList>)queries
                                                                       withBoolean:(jboolean)infix
                                 withOrgApacheLuceneQueryparserSurroundParserToken:(OrgApacheLuceneQueryparserSurroundParserToken *)andToken {
-  return [new_OrgApacheLuceneQueryparserSurroundQueryAndQuery_initWithJavaUtilList_withBoolean_withNSString_(queries, infix, ((OrgApacheLuceneQueryparserSurroundParserToken *) nil_chk(andToken))->image_) autorelease];
+  return create_OrgApacheLuceneQueryparserSurroundQueryAndQuery_initWithJavaUtilList_withBoolean_withNSString_(queries, infix, ((OrgApacheLuceneQueryparserSurroundParserToken *) nil_chk(andToken))->image_);
 }
 
 - (OrgApacheLuceneQueryparserSurroundQuerySrndQuery *)getNotQueryWithJavaUtilList:(id<JavaUtilList>)queries
                                 withOrgApacheLuceneQueryparserSurroundParserToken:(OrgApacheLuceneQueryparserSurroundParserToken *)notToken {
-  return [new_OrgApacheLuceneQueryparserSurroundQueryNotQuery_initWithJavaUtilList_withNSString_(queries, ((OrgApacheLuceneQueryparserSurroundParserToken *) nil_chk(notToken))->image_) autorelease];
+  return create_OrgApacheLuceneQueryparserSurroundQueryNotQuery_initWithJavaUtilList_withNSString_(queries, ((OrgApacheLuceneQueryparserSurroundParserToken *) nil_chk(notToken))->image_);
 }
 
 + (jint)getOpDistanceWithNSString:(NSString *)distanceOp {
@@ -206,14 +241,14 @@ J2OBJC_IGNORE_DESIGNATED_END
                                                                            withBoolean:(jboolean)infix
                                      withOrgApacheLuceneQueryparserSurroundParserToken:(OrgApacheLuceneQueryparserSurroundParserToken *)dToken
                                                                            withBoolean:(jboolean)ordered {
-  OrgApacheLuceneQueryparserSurroundQueryDistanceQuery *dq = [new_OrgApacheLuceneQueryparserSurroundQueryDistanceQuery_initWithJavaUtilList_withBoolean_withInt_withNSString_withBoolean_(queries, infix, OrgApacheLuceneQueryparserSurroundParserQueryParser_getOpDistanceWithNSString_(((OrgApacheLuceneQueryparserSurroundParserToken *) nil_chk(dToken))->image_), dToken->image_, ordered) autorelease];
+  OrgApacheLuceneQueryparserSurroundQueryDistanceQuery *dq = create_OrgApacheLuceneQueryparserSurroundQueryDistanceQuery_initWithJavaUtilList_withBoolean_withInt_withNSString_withBoolean_(queries, infix, OrgApacheLuceneQueryparserSurroundParserQueryParser_getOpDistanceWithNSString_(((OrgApacheLuceneQueryparserSurroundParserToken *) nil_chk(dToken))->image_), dToken->image_, ordered);
   OrgApacheLuceneQueryparserSurroundParserQueryParser_checkDistanceSubQueriesWithOrgApacheLuceneQueryparserSurroundQueryDistanceQuery_withNSString_(dq, dToken->image_);
   return dq;
 }
 
 - (OrgApacheLuceneQueryparserSurroundQuerySrndQuery *)getTermQueryWithNSString:(NSString *)term
                                                                    withBoolean:(jboolean)quoted {
-  return [new_OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery_initWithNSString_withBoolean_(term, quoted) autorelease];
+  return create_OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery_initWithNSString_withBoolean_(term, quoted);
 }
 
 - (jboolean)allowedSuffixWithNSString:(NSString *)suffixed {
@@ -222,7 +257,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneQueryparserSurroundQuerySrndQuery *)getPrefixQueryWithNSString:(NSString *)prefix
                                                                      withBoolean:(jboolean)quoted {
-  return [new_OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery_initWithNSString_withBoolean_withChar_(prefix, quoted, OrgApacheLuceneQueryparserSurroundParserQueryParser_truncator) autorelease];
+  return create_OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery_initWithNSString_withBoolean_withChar_(prefix, quoted, OrgApacheLuceneQueryparserSurroundParserQueryParser_truncator);
 }
 
 - (jboolean)allowedTruncationWithNSString:(NSString *)truncated {
@@ -237,7 +272,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (OrgApacheLuceneQueryparserSurroundQuerySrndQuery *)getTruncQueryWithNSString:(NSString *)truncated {
-  return [new_OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery_initWithNSString_withChar_withChar_(truncated, OrgApacheLuceneQueryparserSurroundParserQueryParser_truncator, OrgApacheLuceneQueryparserSurroundParserQueryParser_anyChar) autorelease];
+  return create_OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery_initWithNSString_withChar_withChar_(truncated, OrgApacheLuceneQueryparserSurroundParserQueryParser_truncator, OrgApacheLuceneQueryparserSurroundParserQueryParser_anyChar);
 }
 
 - (OrgApacheLuceneQueryparserSurroundQuerySrndQuery *)TopSrndQuery {
@@ -376,7 +411,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   for (jint i = 0; i < 10; i++) {
     if (IOSIntArray_Get(nil_chk(jj_la1_), i) == jj_gen_) {
       for (jint j = 0; j < 32; j++) {
-        if ((IOSIntArray_Get(nil_chk(OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_la1_0_), i) & (JreLShift32(1, j))) != 0) {
+        if ((IOSIntArray_Get(nil_chk(OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_la1_0), i) & (JreLShift32(1, j))) != 0) {
           *IOSBooleanArray_GetRef(la1tokens, j) = true;
         }
       }
@@ -386,17 +421,17 @@ J2OBJC_IGNORE_DESIGNATED_END
     if (IOSBooleanArray_Get(la1tokens, i)) {
       JreStrongAssignAndConsume(&jj_expentry_, [IOSIntArray newArrayWithLength:1]);
       *IOSIntArray_GetRef(jj_expentry_, 0) = i;
-      [jj_expentries_ addWithId:jj_expentry_];
+      [((id<JavaUtilList>) nil_chk(jj_expentries_)) addWithId:jj_expentry_];
     }
   }
   jj_endpos_ = 0;
   OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_rescan_token(self);
   OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_add_error_tokenWithInt_withInt_(self, 0, 0);
-  IOSObjectArray *exptokseq = [IOSObjectArray arrayWithLength:[jj_expentries_ size] type:IOSClass_intArray(1)];
-  for (jint i = 0; i < [jj_expentries_ size]; i++) {
-    IOSObjectArray_Set(exptokseq, i, [jj_expentries_ getWithInt:i]);
+  IOSObjectArray *exptokseq = [IOSObjectArray arrayWithLength:[((id<JavaUtilList>) nil_chk(jj_expentries_)) size] type:IOSClass_intArray(1)];
+  for (jint i = 0; i < [((id<JavaUtilList>) nil_chk(jj_expentries_)) size]; i++) {
+    IOSObjectArray_Set(exptokseq, i, [((id<JavaUtilList>) nil_chk(jj_expentries_)) getWithInt:i]);
   }
-  return [new_OrgApacheLuceneQueryparserSurroundParserParseException_initWithOrgApacheLuceneQueryparserSurroundParserToken_withIntArray2_withNSStringArray_(token_, exptokseq, JreLoadStatic(OrgApacheLuceneQueryparserSurroundParserQueryParserConstants, tokenImage_)) autorelease];
+  return create_OrgApacheLuceneQueryparserSurroundParserParseException_initWithOrgApacheLuceneQueryparserSurroundParserToken_withIntArray2_withNSStringArray_(token_, exptokseq, JreLoadStatic(OrgApacheLuceneQueryparserSurroundParserQueryParserConstants, tokenImage));
 }
 
 - (void)enable_tracing {
@@ -445,13 +480,13 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "parseWithNSString:", "parse", "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x9, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", NULL },
     { "init", "QueryParser", NULL, 0x1, NULL, NULL },
     { "parse2WithNSString:", "parse2", "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x1, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", NULL },
-    { "getFieldsQueryWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery:withJavaUtilArrayList:", "getFieldsQuery", "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x4, NULL, NULL },
-    { "getOrQueryWithJavaUtilList:withBoolean:withOrgApacheLuceneQueryparserSurroundParserToken:", "getOrQuery", "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x4, NULL, NULL },
-    { "getAndQueryWithJavaUtilList:withBoolean:withOrgApacheLuceneQueryparserSurroundParserToken:", "getAndQuery", "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x4, NULL, NULL },
-    { "getNotQueryWithJavaUtilList:withOrgApacheLuceneQueryparserSurroundParserToken:", "getNotQuery", "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x4, NULL, NULL },
+    { "getFieldsQueryWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery:withJavaUtilArrayList:", "getFieldsQuery", "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x4, NULL, "(Lorg/apache/lucene/queryparser/surround/query/SrndQuery;Ljava/util/ArrayList<Ljava/lang/String;>;)Lorg/apache/lucene/queryparser/surround/query/SrndQuery;" },
+    { "getOrQueryWithJavaUtilList:withBoolean:withOrgApacheLuceneQueryparserSurroundParserToken:", "getOrQuery", "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x4, NULL, "(Ljava/util/List<Lorg/apache/lucene/queryparser/surround/query/SrndQuery;>;ZLorg/apache/lucene/queryparser/surround/parser/Token;)Lorg/apache/lucene/queryparser/surround/query/SrndQuery;" },
+    { "getAndQueryWithJavaUtilList:withBoolean:withOrgApacheLuceneQueryparserSurroundParserToken:", "getAndQuery", "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x4, NULL, "(Ljava/util/List<Lorg/apache/lucene/queryparser/surround/query/SrndQuery;>;ZLorg/apache/lucene/queryparser/surround/parser/Token;)Lorg/apache/lucene/queryparser/surround/query/SrndQuery;" },
+    { "getNotQueryWithJavaUtilList:withOrgApacheLuceneQueryparserSurroundParserToken:", "getNotQuery", "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x4, NULL, "(Ljava/util/List<Lorg/apache/lucene/queryparser/surround/query/SrndQuery;>;Lorg/apache/lucene/queryparser/surround/parser/Token;)Lorg/apache/lucene/queryparser/surround/query/SrndQuery;" },
     { "getOpDistanceWithNSString:", "getOpDistance", "I", 0xc, NULL, NULL },
     { "checkDistanceSubQueriesWithOrgApacheLuceneQueryparserSurroundQueryDistanceQuery:withNSString:", "checkDistanceSubQueries", "V", 0xc, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", NULL },
-    { "getDistanceQueryWithJavaUtilList:withBoolean:withOrgApacheLuceneQueryparserSurroundParserToken:withBoolean:", "getDistanceQuery", "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x4, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", NULL },
+    { "getDistanceQueryWithJavaUtilList:withBoolean:withOrgApacheLuceneQueryparserSurroundParserToken:withBoolean:", "getDistanceQuery", "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x4, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", "(Ljava/util/List<Lorg/apache/lucene/queryparser/surround/query/SrndQuery;>;ZLorg/apache/lucene/queryparser/surround/parser/Token;Z)Lorg/apache/lucene/queryparser/surround/query/SrndQuery;" },
     { "getTermQueryWithNSString:withBoolean:", "getTermQuery", "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x4, NULL, NULL },
     { "allowedSuffixWithNSString:", "allowedSuffix", "Z", 0x4, NULL, NULL },
     { "getPrefixQueryWithNSString:withBoolean:", "getPrefixQuery", "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x4, NULL, NULL },
@@ -459,7 +494,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "getTruncQueryWithNSString:", "getTruncQuery", "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x4, NULL, NULL },
     { "TopSrndQuery", NULL, "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x11, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", NULL },
     { "FieldsQuery", NULL, "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x11, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", NULL },
-    { "OptionalFields", NULL, "Ljava.util.ArrayList;", 0x11, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", NULL },
+    { "OptionalFields", NULL, "Ljava.util.ArrayList;", 0x11, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", "()Ljava/util/ArrayList<Ljava/lang/String;>;" },
     { "OrQuery", NULL, "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x11, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", NULL },
     { "AndQuery", NULL, "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x11, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", NULL },
     { "NotQuery", NULL, "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x11, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", NULL },
@@ -467,7 +502,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "WQuery", NULL, "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x11, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", NULL },
     { "PrimaryQuery", NULL, "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x11, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", NULL },
     { "PrefixOperatorQuery", NULL, "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x11, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", NULL },
-    { "FieldsQueryList", NULL, "Ljava.util.List;", 0x11, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", NULL },
+    { "FieldsQueryList", NULL, "Ljava.util.List;", 0x11, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", "()Ljava/util/List<Lorg/apache/lucene/queryparser/surround/query/SrndQuery;>;" },
     { "SimpleTerm", NULL, "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x11, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", NULL },
     { "OptionalWeightsWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery:", "OptionalWeights", "V", 0x11, "Lorg.apache.lucene.queryparser.surround.parser.ParseException;", NULL },
     { "jj_2_1WithInt:", "jj_2_1", "Z", 0x2, NULL, NULL },
@@ -509,12 +544,12 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "jj_la_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "jj_gen_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "jj_la1_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "jj_la1_0_", NULL, 0xa, "[I", &OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_la1_0_, NULL, .constantValue.asLong = 0 },
+    { "jj_la1_0", "jj_la1_0", 0xa, "[I", &OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_la1_0, NULL, .constantValue.asLong = 0 },
     { "jj_2_rtns_", NULL, 0x12, "[Lorg.apache.lucene.queryparser.surround.parser.QueryParser$JJCalls;", NULL, NULL, .constantValue.asLong = 0 },
     { "jj_rescan_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
     { "jj_gc_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "jj_ls_", NULL, 0x12, "Lorg.apache.lucene.queryparser.surround.parser.QueryParser$LookaheadSuccess;", NULL, NULL, .constantValue.asLong = 0 },
-    { "jj_expentries_", NULL, 0x2, "Ljava.util.List;", NULL, "Ljava/util/List<L[I;>;", .constantValue.asLong = 0 },
+    { "jj_expentries_", NULL, 0x2, "Ljava.util.List;", NULL, "Ljava/util/List<[LI;>;", .constantValue.asLong = 0 },
     { "jj_expentry_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
     { "jj_kind_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "jj_lasttokens_", NULL, 0x2, "[I", NULL, NULL, .constantValue.asLong = 0 },
@@ -529,18 +564,20 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 OrgApacheLuceneQueryparserSurroundQuerySrndQuery *OrgApacheLuceneQueryparserSurroundParserQueryParser_parseWithNSString_(NSString *query) {
   OrgApacheLuceneQueryparserSurroundParserQueryParser_initialize();
-  OrgApacheLuceneQueryparserSurroundParserQueryParser *parser = [new_OrgApacheLuceneQueryparserSurroundParserQueryParser_init() autorelease];
+  OrgApacheLuceneQueryparserSurroundParserQueryParser *parser = create_OrgApacheLuceneQueryparserSurroundParserQueryParser_init();
   return [parser parse2WithNSString:query];
 }
 
 void OrgApacheLuceneQueryparserSurroundParserQueryParser_init(OrgApacheLuceneQueryparserSurroundParserQueryParser *self) {
-  OrgApacheLuceneQueryparserSurroundParserQueryParser_initWithOrgApacheLuceneQueryparserSurroundParserCharStream_(self, [new_OrgApacheLuceneQueryparserSurroundParserFastCharStream_initWithJavaIoReader_([new_JavaIoStringReader_initWithNSString_(@"") autorelease]) autorelease]);
+  OrgApacheLuceneQueryparserSurroundParserQueryParser_initWithOrgApacheLuceneQueryparserSurroundParserCharStream_(self, create_OrgApacheLuceneQueryparserSurroundParserFastCharStream_initWithJavaIoReader_(create_JavaIoStringReader_initWithNSString_(@"")));
 }
 
 OrgApacheLuceneQueryparserSurroundParserQueryParser *new_OrgApacheLuceneQueryparserSurroundParserQueryParser_init() {
-  OrgApacheLuceneQueryparserSurroundParserQueryParser *self = [OrgApacheLuceneQueryparserSurroundParserQueryParser alloc];
-  OrgApacheLuceneQueryparserSurroundParserQueryParser_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserSurroundParserQueryParser, init)
+}
+
+OrgApacheLuceneQueryparserSurroundParserQueryParser *create_OrgApacheLuceneQueryparserSurroundParserQueryParser_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserSurroundParserQueryParser, init)
 }
 
 jint OrgApacheLuceneQueryparserSurroundParserQueryParser_getOpDistanceWithNSString_(NSString *distanceOp) {
@@ -552,7 +589,7 @@ void OrgApacheLuceneQueryparserSurroundParserQueryParser_checkDistanceSubQueries
   OrgApacheLuceneQueryparserSurroundParserQueryParser_initialize();
   NSString *m = [((OrgApacheLuceneQueryparserSurroundQueryDistanceQuery *) nil_chk(distq)) distanceSubQueryNotAllowed];
   if (m != nil) {
-    @throw [new_OrgApacheLuceneQueryparserSurroundParserParseException_initWithNSString_(JreStrcat("$$$$", @"Operator ", opName, @": ", m)) autorelease];
+    @throw create_OrgApacheLuceneQueryparserSurroundParserParseException_initWithNSString_(JreStrcat("$$$$", @"Operator ", opName, @": ", m));
   }
 }
 
@@ -563,7 +600,6 @@ OrgApacheLuceneQueryparserSurroundQuerySrndQuery *OrgApacheLuceneQueryparserSurr
   {
     return q;
   }
-  @throw [new_JavaLangError_initWithNSString_(@"Missing return statement in function") autorelease];
 }
 
 OrgApacheLuceneQueryparserSurroundQuerySrndQuery *OrgApacheLuceneQueryparserSurroundParserQueryParser_FieldsQuery(OrgApacheLuceneQueryparserSurroundParserQueryParser *self) {
@@ -574,7 +610,6 @@ OrgApacheLuceneQueryparserSurroundQuerySrndQuery *OrgApacheLuceneQueryparserSurr
   {
     return (fieldNames == nil) ? q : [self getFieldsQueryWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery:q withJavaUtilArrayList:fieldNames];
   }
-  @throw [new_JavaLangError_initWithNSString_(@"Missing return statement in function") autorelease];
 }
 
 JavaUtilArrayList *OrgApacheLuceneQueryparserSurroundParserQueryParser_OptionalFields(OrgApacheLuceneQueryparserSurroundParserQueryParser *self) {
@@ -590,15 +625,14 @@ JavaUtilArrayList *OrgApacheLuceneQueryparserSurroundParserQueryParser_OptionalF
     fieldName = OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_consume_tokenWithInt_(self, OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_TERM);
     OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_consume_tokenWithInt_(self, OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_COLON);
     if (fieldNames == nil) {
-      fieldNames = [new_JavaUtilArrayList_init() autorelease];
+      fieldNames = create_JavaUtilArrayList_init();
     }
-    [((JavaUtilArrayList *) nil_chk(fieldNames)) addWithId:((OrgApacheLuceneQueryparserSurroundParserToken *) nil_chk(fieldName))->image_];
+    [fieldNames addWithId:((OrgApacheLuceneQueryparserSurroundParserToken *) nil_chk(fieldName))->image_];
   }
   break_label_1: ;
   {
     return fieldNames;
   }
-  @throw [new_JavaLangError_initWithNSString_(@"Missing return statement in function") autorelease];
 }
 
 OrgApacheLuceneQueryparserSurroundQuerySrndQuery *OrgApacheLuceneQueryparserSurroundParserQueryParser_OrQuery(OrgApacheLuceneQueryparserSurroundParserQueryParser *self) {
@@ -617,17 +651,16 @@ OrgApacheLuceneQueryparserSurroundQuerySrndQuery *OrgApacheLuceneQueryparserSurr
     }
     oprt = OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_consume_tokenWithInt_(self, OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_OR);
     if (queries == nil) {
-      queries = [new_JavaUtilArrayList_init() autorelease];
+      queries = create_JavaUtilArrayList_init();
       [queries addWithId:q];
     }
     q = OrgApacheLuceneQueryparserSurroundParserQueryParser_AndQuery(self);
-    [((JavaUtilArrayList *) nil_chk(queries)) addWithId:q];
+    [queries addWithId:q];
   }
   break_label_2: ;
   {
     return (queries == nil) ? q : [self getOrQueryWithJavaUtilList:queries withBoolean:true withOrgApacheLuceneQueryparserSurroundParserToken:oprt];
   }
-  @throw [new_JavaLangError_initWithNSString_(@"Missing return statement in function") autorelease];
 }
 
 OrgApacheLuceneQueryparserSurroundQuerySrndQuery *OrgApacheLuceneQueryparserSurroundParserQueryParser_AndQuery(OrgApacheLuceneQueryparserSurroundParserQueryParser *self) {
@@ -646,17 +679,16 @@ OrgApacheLuceneQueryparserSurroundQuerySrndQuery *OrgApacheLuceneQueryparserSurr
     }
     oprt = OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_consume_tokenWithInt_(self, OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_AND);
     if (queries == nil) {
-      queries = [new_JavaUtilArrayList_init() autorelease];
+      queries = create_JavaUtilArrayList_init();
       [queries addWithId:q];
     }
     q = OrgApacheLuceneQueryparserSurroundParserQueryParser_NotQuery(self);
-    [((JavaUtilArrayList *) nil_chk(queries)) addWithId:q];
+    [queries addWithId:q];
   }
   break_label_3: ;
   {
     return (queries == nil) ? q : [self getAndQueryWithJavaUtilList:queries withBoolean:true withOrgApacheLuceneQueryparserSurroundParserToken:oprt];
   }
-  @throw [new_JavaLangError_initWithNSString_(@"Missing return statement in function") autorelease];
 }
 
 OrgApacheLuceneQueryparserSurroundQuerySrndQuery *OrgApacheLuceneQueryparserSurroundParserQueryParser_NotQuery(OrgApacheLuceneQueryparserSurroundParserQueryParser *self) {
@@ -675,17 +707,16 @@ OrgApacheLuceneQueryparserSurroundQuerySrndQuery *OrgApacheLuceneQueryparserSurr
     }
     oprt = OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_consume_tokenWithInt_(self, OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_NOT);
     if (queries == nil) {
-      queries = [new_JavaUtilArrayList_init() autorelease];
+      queries = create_JavaUtilArrayList_init();
       [queries addWithId:q];
     }
     q = OrgApacheLuceneQueryparserSurroundParserQueryParser_NQuery(self);
-    [((JavaUtilArrayList *) nil_chk(queries)) addWithId:q];
+    [queries addWithId:q];
   }
   break_label_4: ;
   {
     return (queries == nil) ? q : [self getNotQueryWithJavaUtilList:queries withOrgApacheLuceneQueryparserSurroundParserToken:oprt];
   }
-  @throw [new_JavaLangError_initWithNSString_(@"Missing return statement in function") autorelease];
 }
 
 OrgApacheLuceneQueryparserSurroundQuerySrndQuery *OrgApacheLuceneQueryparserSurroundParserQueryParser_NQuery(OrgApacheLuceneQueryparserSurroundParserQueryParser *self) {
@@ -703,7 +734,7 @@ OrgApacheLuceneQueryparserSurroundQuerySrndQuery *OrgApacheLuceneQueryparserSurr
       goto break_label_5;
     }
     dt = OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_consume_tokenWithInt_(self, OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_N);
-    queries = [new_JavaUtilArrayList_init() autorelease];
+    queries = create_JavaUtilArrayList_init();
     [queries addWithId:q];
     q = OrgApacheLuceneQueryparserSurroundParserQueryParser_WQuery(self);
     [queries addWithId:q];
@@ -713,7 +744,6 @@ OrgApacheLuceneQueryparserSurroundQuerySrndQuery *OrgApacheLuceneQueryparserSurr
   {
     return q;
   }
-  @throw [new_JavaLangError_initWithNSString_(@"Missing return statement in function") autorelease];
 }
 
 OrgApacheLuceneQueryparserSurroundQuerySrndQuery *OrgApacheLuceneQueryparserSurroundParserQueryParser_WQuery(OrgApacheLuceneQueryparserSurroundParserQueryParser *self) {
@@ -731,7 +761,7 @@ OrgApacheLuceneQueryparserSurroundQuerySrndQuery *OrgApacheLuceneQueryparserSurr
       goto break_label_6;
     }
     wt = OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_consume_tokenWithInt_(self, OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_W);
-    queries = [new_JavaUtilArrayList_init() autorelease];
+    queries = create_JavaUtilArrayList_init();
     [queries addWithId:q];
     q = OrgApacheLuceneQueryparserSurroundParserQueryParser_PrimaryQuery(self);
     [queries addWithId:q];
@@ -741,7 +771,6 @@ OrgApacheLuceneQueryparserSurroundQuerySrndQuery *OrgApacheLuceneQueryparserSurr
   {
     return q;
   }
-  @throw [new_JavaLangError_initWithNSString_(@"Missing return statement in function") autorelease];
 }
 
 OrgApacheLuceneQueryparserSurroundQuerySrndQuery *OrgApacheLuceneQueryparserSurroundParserQueryParser_PrimaryQuery(OrgApacheLuceneQueryparserSurroundParserQueryParser *self) {
@@ -768,13 +797,12 @@ OrgApacheLuceneQueryparserSurroundQuerySrndQuery *OrgApacheLuceneQueryparserSurr
     default:
     *IOSIntArray_GetRef(nil_chk(self->jj_la1_), 5) = self->jj_gen_;
     OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_consume_tokenWithInt_(self, -1);
-    @throw [new_OrgApacheLuceneQueryparserSurroundParserParseException_init() autorelease];
+    @throw create_OrgApacheLuceneQueryparserSurroundParserParseException_init();
   }
   OrgApacheLuceneQueryparserSurroundParserQueryParser_OptionalWeightsWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery_(self, q);
   {
     return q;
   }
-  @throw [new_JavaLangError_initWithNSString_(@"Missing return statement in function") autorelease];
 }
 
 OrgApacheLuceneQueryparserSurroundQuerySrndQuery *OrgApacheLuceneQueryparserSurroundParserQueryParser_PrefixOperatorQuery(OrgApacheLuceneQueryparserSurroundParserQueryParser *self) {
@@ -812,14 +840,14 @@ OrgApacheLuceneQueryparserSurroundQuerySrndQuery *OrgApacheLuceneQueryparserSurr
     default:
     *IOSIntArray_GetRef(nil_chk(self->jj_la1_), 6) = self->jj_gen_;
     OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_consume_tokenWithInt_(self, -1);
-    @throw [new_OrgApacheLuceneQueryparserSurroundParserParseException_init() autorelease];
+    @throw create_OrgApacheLuceneQueryparserSurroundParserParseException_init();
   }
-  @throw [new_JavaLangError_initWithNSString_(@"Missing return statement in function") autorelease];
+  @throw create_JavaLangError_initWithNSString_(@"Missing return statement in function");
 }
 
 id<JavaUtilList> OrgApacheLuceneQueryparserSurroundParserQueryParser_FieldsQueryList(OrgApacheLuceneQueryparserSurroundParserQueryParser *self) {
   OrgApacheLuceneQueryparserSurroundQuerySrndQuery *q;
-  JavaUtilArrayList *queries = [new_JavaUtilArrayList_init() autorelease];
+  JavaUtilArrayList *queries = create_JavaUtilArrayList_init();
   OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_consume_tokenWithInt_(self, OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_LPAREN);
   q = OrgApacheLuceneQueryparserSurroundParserQueryParser_FieldsQuery(self);
   [queries addWithId:q];
@@ -841,7 +869,6 @@ id<JavaUtilList> OrgApacheLuceneQueryparserSurroundParserQueryParser_FieldsQuery
   {
     return queries;
   }
-  @throw [new_JavaLangError_initWithNSString_(@"Missing return statement in function") autorelease];
 }
 
 OrgApacheLuceneQueryparserSurroundQuerySrndQuery *OrgApacheLuceneQueryparserSurroundParserQueryParser_SimpleTerm(OrgApacheLuceneQueryparserSurroundParserQueryParser *self) {
@@ -856,25 +883,25 @@ OrgApacheLuceneQueryparserSurroundQuerySrndQuery *OrgApacheLuceneQueryparserSurr
     case OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_QUOTED:
     term = OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_consume_tokenWithInt_(self, OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_QUOTED);
     {
-      return [self getTermQueryWithNSString:[((OrgApacheLuceneQueryparserSurroundParserToken *) nil_chk(term))->image_ substring:1 endIndex:((jint) [((NSString *) nil_chk(term->image_)) length]) - 1] withBoolean:true];
+      return [self getTermQueryWithNSString:[((NSString *) nil_chk(((OrgApacheLuceneQueryparserSurroundParserToken *) nil_chk(term))->image_)) substring:1 endIndex:((jint) [term->image_ length]) - 1] withBoolean:true];
     }
     break;
     case OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_SUFFIXTERM:
     term = OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_consume_tokenWithInt_(self, OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_SUFFIXTERM);
     if (![self allowedSuffixWithNSString:((OrgApacheLuceneQueryparserSurroundParserToken *) nil_chk(term))->image_]) {
       {
-        @throw [new_OrgApacheLuceneQueryparserSurroundParserParseException_initWithNSString_(JreStrcat("$$", self->truncationErrorMessage_, term->image_)) autorelease];
+        @throw create_OrgApacheLuceneQueryparserSurroundParserParseException_initWithNSString_(JreStrcat("$$", self->truncationErrorMessage_, term->image_));
       }
     }
     {
-      return [self getPrefixQueryWithNSString:[term->image_ substring:0 endIndex:((jint) [((NSString *) nil_chk(term->image_)) length]) - 1] withBoolean:false];
+      return [self getPrefixQueryWithNSString:[((NSString *) nil_chk(term->image_)) substring:0 endIndex:((jint) [term->image_ length]) - 1] withBoolean:false];
     }
     break;
     case OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_TRUNCTERM:
     term = OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_consume_tokenWithInt_(self, OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_TRUNCTERM);
     if (![self allowedTruncationWithNSString:((OrgApacheLuceneQueryparserSurroundParserToken *) nil_chk(term))->image_]) {
       {
-        @throw [new_OrgApacheLuceneQueryparserSurroundParserParseException_initWithNSString_(JreStrcat("$$", self->truncationErrorMessage_, term->image_)) autorelease];
+        @throw create_OrgApacheLuceneQueryparserSurroundParserParseException_initWithNSString_(JreStrcat("$$", self->truncationErrorMessage_, term->image_));
       }
     }
     {
@@ -885,19 +912,19 @@ OrgApacheLuceneQueryparserSurroundQuerySrndQuery *OrgApacheLuceneQueryparserSurr
     term = OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_consume_tokenWithInt_(self, OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_TRUNCQUOTED);
     if ((((jint) [((NSString *) nil_chk(((OrgApacheLuceneQueryparserSurroundParserToken *) nil_chk(term))->image_)) length]) - 3) < OrgApacheLuceneQueryparserSurroundParserQueryParser_minimumPrefixLength) {
       {
-        @throw [new_OrgApacheLuceneQueryparserSurroundParserParseException_initWithNSString_(JreStrcat("$$", self->truncationErrorMessage_, term->image_)) autorelease];
+        @throw create_OrgApacheLuceneQueryparserSurroundParserParseException_initWithNSString_(JreStrcat("$$", self->truncationErrorMessage_, term->image_));
       }
     }
     {
-      return [self getPrefixQueryWithNSString:[term->image_ substring:1 endIndex:((jint) [term->image_ length]) - 2] withBoolean:true];
+      return [self getPrefixQueryWithNSString:[((NSString *) nil_chk(term->image_)) substring:1 endIndex:((jint) [term->image_ length]) - 2] withBoolean:true];
     }
     break;
     default:
     *IOSIntArray_GetRef(nil_chk(self->jj_la1_), 8) = self->jj_gen_;
     OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_consume_tokenWithInt_(self, -1);
-    @throw [new_OrgApacheLuceneQueryparserSurroundParserParseException_init() autorelease];
+    @throw create_OrgApacheLuceneQueryparserSurroundParserParseException_init();
   }
-  @throw [new_JavaLangError_initWithNSString_(@"Missing return statement in function") autorelease];
+  @throw create_JavaLangError_initWithNSString_(@"Missing return statement in function");
 }
 
 void OrgApacheLuceneQueryparserSurroundParserQueryParser_OptionalWeightsWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery_(OrgApacheLuceneQueryparserSurroundParserQueryParser *self, OrgApacheLuceneQueryparserSurroundQuerySrndQuery *q) {
@@ -915,19 +942,19 @@ void OrgApacheLuceneQueryparserSurroundParserQueryParser_OptionalWeightsWithOrgA
     weight = OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_consume_tokenWithInt_(self, OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_NUMBER);
     jfloat f;
     @try {
-      f = [JavaLangFloat_valueOfWithNSString_(((OrgApacheLuceneQueryparserSurroundParserToken *) nil_chk(weight))->image_) floatValue];
+      f = [((JavaLangFloat *) nil_chk(JavaLangFloat_valueOfWithNSString_(((OrgApacheLuceneQueryparserSurroundParserToken *) nil_chk(weight))->image_))) floatValue];
     }
     @catch (JavaLangException *floatExc) {
       {
-        @throw [new_OrgApacheLuceneQueryparserSurroundParserParseException_initWithNSString_(JreStrcat("$$$@C", self->boostErrorMessage_, ((OrgApacheLuceneQueryparserSurroundParserToken *) nil_chk(weight))->image_, @" (", floatExc, ')')) autorelease];
+        @throw create_OrgApacheLuceneQueryparserSurroundParserParseException_initWithNSString_(JreStrcat("$$$@C", self->boostErrorMessage_, weight->image_, @" (", floatExc, ')'));
       }
     }
     if (f <= 0.0) {
       {
-        @throw [new_OrgApacheLuceneQueryparserSurroundParserParseException_initWithNSString_(JreStrcat("$$", self->boostErrorMessage_, ((OrgApacheLuceneQueryparserSurroundParserToken *) nil_chk(weight))->image_)) autorelease];
+        @throw create_OrgApacheLuceneQueryparserSurroundParserParseException_initWithNSString_(JreStrcat("$$", self->boostErrorMessage_, weight->image_));
       }
     }
-    [q setWeightWithFloat:f * [((OrgApacheLuceneQueryparserSurroundQuerySrndQuery *) nil_chk(q)) getWeight]];
+    [((OrgApacheLuceneQueryparserSurroundQuerySrndQuery *) nil_chk(q)) setWeightWithFloat:f * [q getWeight]];
   }
   break_label_8: ;
 }
@@ -954,7 +981,7 @@ jboolean OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_3_1(OrgApacheLuc
 
 void OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_la1_init_0() {
   OrgApacheLuceneQueryparserSurroundParserQueryParser_initialize();
-  JreStrongAssignAndConsume(&OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_la1_0_, [IOSIntArray newArrayWithInts:(jint[]){ (jint) 0x100, (jint) 0x200, (jint) 0x400, (jint) 0x1000, (jint) 0x800, (jint) 0x7c3b00, (jint) 0x1b00, (jint) 0x8000, (jint) 0x7c0000, (jint) 0x20000 } count:10]);
+  JreStrongAssignAndConsume(&OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_la1_0, [IOSIntArray newArrayWithInts:(jint[]){ (jint) 0x100, (jint) 0x200, (jint) 0x400, (jint) 0x1000, (jint) 0x800, (jint) 0x7c3b00, (jint) 0x1b00, (jint) 0x8000, (jint) 0x7c0000, (jint) 0x20000 } count:10]);
 }
 
 void OrgApacheLuceneQueryparserSurroundParserQueryParser_initWithOrgApacheLuceneQueryparserSurroundParserCharStream_(OrgApacheLuceneQueryparserSurroundParserQueryParser *self, id<OrgApacheLuceneQueryparserSurroundParserCharStream> stream) {
@@ -978,9 +1005,11 @@ void OrgApacheLuceneQueryparserSurroundParserQueryParser_initWithOrgApacheLucene
 }
 
 OrgApacheLuceneQueryparserSurroundParserQueryParser *new_OrgApacheLuceneQueryparserSurroundParserQueryParser_initWithOrgApacheLuceneQueryparserSurroundParserCharStream_(id<OrgApacheLuceneQueryparserSurroundParserCharStream> stream) {
-  OrgApacheLuceneQueryparserSurroundParserQueryParser *self = [OrgApacheLuceneQueryparserSurroundParserQueryParser alloc];
-  OrgApacheLuceneQueryparserSurroundParserQueryParser_initWithOrgApacheLuceneQueryparserSurroundParserCharStream_(self, stream);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserSurroundParserQueryParser, initWithOrgApacheLuceneQueryparserSurroundParserCharStream_, stream)
+}
+
+OrgApacheLuceneQueryparserSurroundParserQueryParser *create_OrgApacheLuceneQueryparserSurroundParserQueryParser_initWithOrgApacheLuceneQueryparserSurroundParserCharStream_(id<OrgApacheLuceneQueryparserSurroundParserCharStream> stream) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserSurroundParserQueryParser, initWithOrgApacheLuceneQueryparserSurroundParserCharStream_, stream)
 }
 
 void OrgApacheLuceneQueryparserSurroundParserQueryParser_initWithOrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager_(OrgApacheLuceneQueryparserSurroundParserQueryParser *self, OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager *tm) {
@@ -1004,9 +1033,11 @@ void OrgApacheLuceneQueryparserSurroundParserQueryParser_initWithOrgApacheLucene
 }
 
 OrgApacheLuceneQueryparserSurroundParserQueryParser *new_OrgApacheLuceneQueryparserSurroundParserQueryParser_initWithOrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager_(OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager *tm) {
-  OrgApacheLuceneQueryparserSurroundParserQueryParser *self = [OrgApacheLuceneQueryparserSurroundParserQueryParser alloc];
-  OrgApacheLuceneQueryparserSurroundParserQueryParser_initWithOrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager_(self, tm);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserSurroundParserQueryParser, initWithOrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager_, tm)
+}
+
+OrgApacheLuceneQueryparserSurroundParserQueryParser *create_OrgApacheLuceneQueryparserSurroundParserQueryParser_initWithOrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager_(OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager *tm) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserSurroundParserQueryParser, initWithOrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager_, tm)
 }
 
 OrgApacheLuceneQueryparserSurroundParserToken *OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_consume_tokenWithInt_(OrgApacheLuceneQueryparserSurroundParserQueryParser *self, jint kind) {
@@ -1014,14 +1045,14 @@ OrgApacheLuceneQueryparserSurroundParserToken *OrgApacheLuceneQueryparserSurroun
   if ((oldToken = self->token_)->next_ != nil) JreStrongAssign(&self->token_, ((OrgApacheLuceneQueryparserSurroundParserToken *) nil_chk(self->token_))->next_);
   else JreStrongAssign(&self->token_, JreStrongAssign(&((OrgApacheLuceneQueryparserSurroundParserToken *) nil_chk(self->token_))->next_, [((OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager *) nil_chk(self->token_source_)) getNextToken]));
   self->jj_ntk_ = -1;
-  if (((OrgApacheLuceneQueryparserSurroundParserToken *) nil_chk(self->token_))->kind_ == kind) {
+  if (self->token_->kind_ == kind) {
     self->jj_gen_++;
     if (++self->jj_gc_ > 100) {
       self->jj_gc_ = 0;
       for (jint i = 0; i < ((IOSObjectArray *) nil_chk(self->jj_2_rtns_))->size_; i++) {
         OrgApacheLuceneQueryparserSurroundParserQueryParser_JJCalls *c = IOSObjectArray_Get(self->jj_2_rtns_, i);
         while (c != nil) {
-          if (((OrgApacheLuceneQueryparserSurroundParserQueryParser_JJCalls *) nil_chk(c))->gen_ < self->jj_gen_) JreStrongAssign(&c->first_, nil);
+          if (c->gen_ < self->jj_gen_) JreStrongAssign(&c->first_, nil);
           c = c->next_;
         }
       }
@@ -1051,7 +1082,7 @@ jboolean OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_scan_tokenWithIn
     OrgApacheLuceneQueryparserSurroundParserToken *tok = self->token_;
     while (tok != nil && tok != self->jj_scanpos_) {
       i++;
-      tok = ((OrgApacheLuceneQueryparserSurroundParserToken *) nil_chk(tok))->next_;
+      tok = tok->next_;
     }
     if (tok != nil) OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_add_error_tokenWithInt_withInt_(self, kind, i);
   }
@@ -1077,14 +1108,14 @@ void OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_add_error_tokenWithI
     }
     for (id<JavaUtilIterator> it = [((id<JavaUtilList>) nil_chk(self->jj_expentries_)) iterator]; [((id<JavaUtilIterator>) nil_chk(it)) hasNext]; ) {
       {
-        IOSIntArray *oldentry = (IOSIntArray *) check_class_cast(([it next]), [IOSIntArray class]);
-        if (((IOSIntArray *) nil_chk(oldentry))->size_ == self->jj_expentry_->size_) {
+        IOSIntArray *oldentry = (IOSIntArray *) cast_chk(([it next]), [IOSIntArray class]);
+        if (((IOSIntArray *) nil_chk(oldentry))->size_ == ((IOSIntArray *) nil_chk(self->jj_expentry_))->size_) {
           for (jint i = 0; i < self->jj_expentry_->size_; i++) {
             if (IOSIntArray_Get(oldentry, i) != IOSIntArray_Get(self->jj_expentry_, i)) {
               goto continue_jj_entries_loop;
             }
           }
-          [self->jj_expentries_ addWithId:self->jj_expentry_];
+          [((id<JavaUtilList>) nil_chk(self->jj_expentries_)) addWithId:self->jj_expentry_];
           goto break_jj_entries_loop;
         }
       }
@@ -1129,7 +1160,7 @@ void OrgApacheLuceneQueryparserSurroundParserQueryParser_jj_saveWithInt_withInt_
     }
     p = p->next_;
   }
-  ((OrgApacheLuceneQueryparserSurroundParserQueryParser_JJCalls *) nil_chk(p))->gen_ = self->jj_gen_ + xla - self->jj_la_;
+  p->gen_ = self->jj_gen_ + xla - self->jj_la_;
   JreStrongAssign(&p->first_, self->token_);
   p->arg_ = xla;
 }
@@ -1147,7 +1178,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", NULL, NULL, 0x2, NULL, NULL },
+    { "init", "LookaheadSuccess", NULL, 0x2, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundParserQueryParser_LookaheadSuccess = { 2, "LookaheadSuccess", "org.apache.lucene.queryparser.surround.parser", "QueryParser", 0x1a, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserSurroundParserQueryParser_LookaheadSuccess;
@@ -1160,9 +1191,11 @@ void OrgApacheLuceneQueryparserSurroundParserQueryParser_LookaheadSuccess_init(O
 }
 
 OrgApacheLuceneQueryparserSurroundParserQueryParser_LookaheadSuccess *new_OrgApacheLuceneQueryparserSurroundParserQueryParser_LookaheadSuccess_init() {
-  OrgApacheLuceneQueryparserSurroundParserQueryParser_LookaheadSuccess *self = [OrgApacheLuceneQueryparserSurroundParserQueryParser_LookaheadSuccess alloc];
-  OrgApacheLuceneQueryparserSurroundParserQueryParser_LookaheadSuccess_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserSurroundParserQueryParser_LookaheadSuccess, init)
+}
+
+OrgApacheLuceneQueryparserSurroundParserQueryParser_LookaheadSuccess *create_OrgApacheLuceneQueryparserSurroundParserQueryParser_LookaheadSuccess_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserSurroundParserQueryParser_LookaheadSuccess, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserSurroundParserQueryParser_LookaheadSuccess)
@@ -1184,7 +1217,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", NULL, NULL, 0x0, NULL, NULL },
+    { "init", "JJCalls", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "gen_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
@@ -1203,9 +1236,11 @@ void OrgApacheLuceneQueryparserSurroundParserQueryParser_JJCalls_init(OrgApacheL
 }
 
 OrgApacheLuceneQueryparserSurroundParserQueryParser_JJCalls *new_OrgApacheLuceneQueryparserSurroundParserQueryParser_JJCalls_init() {
-  OrgApacheLuceneQueryparserSurroundParserQueryParser_JJCalls *self = [OrgApacheLuceneQueryparserSurroundParserQueryParser_JJCalls alloc];
-  OrgApacheLuceneQueryparserSurroundParserQueryParser_JJCalls_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserSurroundParserQueryParser_JJCalls, init)
+}
+
+OrgApacheLuceneQueryparserSurroundParserQueryParser_JJCalls *create_OrgApacheLuceneQueryparserSurroundParserQueryParser_JJCalls_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserSurroundParserQueryParser_JJCalls, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserSurroundParserQueryParser_JJCalls)

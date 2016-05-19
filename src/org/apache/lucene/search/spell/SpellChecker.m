@@ -47,6 +47,9 @@
 
 @interface OrgApacheLuceneSearchSpellSpellChecker () {
  @public
+  /*!
+   @brief Boost value for start and end grams
+   */
   jfloat bStart_;
   jfloat bEnd_;
   OrgApacheLuceneSearchIndexSearcher *searcher_;
@@ -58,15 +61,27 @@
   id<JavaUtilComparator> comparator_;
 }
 
+/*!
+ @brief Add a clause to a boolean query.
+ */
 + (void)addWithOrgApacheLuceneSearchBooleanQuery_Builder:(OrgApacheLuceneSearchBooleanQuery_Builder *)q
                                             withNSString:(NSString *)name
                                             withNSString:(NSString *)value
                                                withFloat:(jfloat)boost;
 
+/*!
+ @brief Add a clause to a boolean query.
+ */
 + (void)addWithOrgApacheLuceneSearchBooleanQuery_Builder:(OrgApacheLuceneSearchBooleanQuery_Builder *)q
                                             withNSString:(NSString *)name
                                             withNSString:(NSString *)value;
 
+/*!
+ @brief Form all ngrams for a given word.
+ @param text the word to parse
+ @param ng the ngram length e.g. 3
+ @return an array of all ngrams in the word and note that duplicates are not removed
+ */
 + (IOSObjectArray *)formGramsWithNSString:(NSString *)text
                                   withInt:(jint)ng;
 
@@ -121,9 +136,17 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSpellSpellChecker_ensur
 
 __attribute__((unused)) static void OrgApacheLuceneSearchSpellSpellChecker_swapSearcherWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneSearchSpellSpellChecker *self, OrgApacheLuceneStoreDirectory *dir);
 
-NSString *OrgApacheLuceneSearchSpellSpellChecker_F_WORD_ = @"word";
+NSString *OrgApacheLuceneSearchSpellSpellChecker_F_WORD = @"word";
 
 @implementation OrgApacheLuceneSearchSpellSpellChecker
+
++ (jfloat)DEFAULT_ACCURACY {
+  return OrgApacheLuceneSearchSpellSpellChecker_DEFAULT_ACCURACY;
+}
+
++ (NSString *)F_WORD {
+  return OrgApacheLuceneSearchSpellSpellChecker_F_WORD;
+}
 
 - (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)spellIndex
          withOrgApacheLuceneSearchSpellStringDistance:(id<OrgApacheLuceneSearchSpellStringDistance>)sd {
@@ -147,7 +170,7 @@ NSString *OrgApacheLuceneSearchSpellSpellChecker_F_WORD_ = @"word";
   @synchronized(modifyCurrentIndexLock_) {
     OrgApacheLuceneSearchSpellSpellChecker_ensureOpen(self);
     if (!OrgApacheLuceneIndexDirectoryReader_indexExistsWithOrgApacheLuceneStoreDirectory_(spellIndexDir)) {
-      OrgApacheLuceneIndexIndexWriter *writer = [new_OrgApacheLuceneIndexIndexWriter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_(spellIndexDir, [new_OrgApacheLuceneIndexIndexWriterConfig_initWithOrgApacheLuceneAnalysisAnalyzer_(nil) autorelease]) autorelease];
+      OrgApacheLuceneIndexIndexWriter *writer = create_OrgApacheLuceneIndexIndexWriter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_(spellIndexDir, create_OrgApacheLuceneIndexIndexWriterConfig_initWithOrgApacheLuceneAnalysisAnalyzer_(nil));
       [writer close];
     }
     OrgApacheLuceneSearchSpellSpellChecker_swapSearcherWithOrgApacheLuceneStoreDirectory_(self, spellIndexDir);
@@ -180,45 +203,45 @@ NSString *OrgApacheLuceneSearchSpellSpellChecker_F_WORD_ = @"word";
 
 - (IOSObjectArray *)suggestSimilarWithNSString:(NSString *)word
                                        withInt:(jint)numSug {
-  return [self suggestSimilarWithNSString:word withInt:numSug withOrgApacheLuceneIndexIndexReader:nil withNSString:nil withOrgApacheLuceneSearchSpellSuggestModeEnum:JreLoadStatic(OrgApacheLuceneSearchSpellSuggestModeEnum, SUGGEST_WHEN_NOT_IN_INDEX)];
+  return [self suggestSimilarWithNSString:word withInt:numSug withOrgApacheLuceneIndexIndexReader:nil withNSString:nil withOrgApacheLuceneSearchSpellSuggestMode:JreLoadEnum(OrgApacheLuceneSearchSpellSuggestMode, SUGGEST_WHEN_NOT_IN_INDEX)];
 }
 
 - (IOSObjectArray *)suggestSimilarWithNSString:(NSString *)word
                                        withInt:(jint)numSug
                                      withFloat:(jfloat)accuracy {
-  return [self suggestSimilarWithNSString:word withInt:numSug withOrgApacheLuceneIndexIndexReader:nil withNSString:nil withOrgApacheLuceneSearchSpellSuggestModeEnum:JreLoadStatic(OrgApacheLuceneSearchSpellSuggestModeEnum, SUGGEST_WHEN_NOT_IN_INDEX) withFloat:accuracy];
+  return [self suggestSimilarWithNSString:word withInt:numSug withOrgApacheLuceneIndexIndexReader:nil withNSString:nil withOrgApacheLuceneSearchSpellSuggestMode:JreLoadEnum(OrgApacheLuceneSearchSpellSuggestMode, SUGGEST_WHEN_NOT_IN_INDEX) withFloat:accuracy];
 }
 
 - (IOSObjectArray *)suggestSimilarWithNSString:(NSString *)word
                                        withInt:(jint)numSug
            withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)ir
                                   withNSString:(NSString *)field
- withOrgApacheLuceneSearchSpellSuggestModeEnum:(OrgApacheLuceneSearchSpellSuggestModeEnum *)suggestMode {
-  return [self suggestSimilarWithNSString:word withInt:numSug withOrgApacheLuceneIndexIndexReader:ir withNSString:field withOrgApacheLuceneSearchSpellSuggestModeEnum:suggestMode withFloat:self->accuracy_];
+     withOrgApacheLuceneSearchSpellSuggestMode:(OrgApacheLuceneSearchSpellSuggestMode *)suggestMode {
+  return [self suggestSimilarWithNSString:word withInt:numSug withOrgApacheLuceneIndexIndexReader:ir withNSString:field withOrgApacheLuceneSearchSpellSuggestMode:suggestMode withFloat:self->accuracy_];
 }
 
 - (IOSObjectArray *)suggestSimilarWithNSString:(NSString *)word
                                        withInt:(jint)numSug
            withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)ir
                                   withNSString:(NSString *)field
- withOrgApacheLuceneSearchSpellSuggestModeEnum:(OrgApacheLuceneSearchSpellSuggestModeEnum *)suggestMode
+     withOrgApacheLuceneSearchSpellSuggestMode:(OrgApacheLuceneSearchSpellSuggestMode *)suggestMode
                                      withFloat:(jfloat)accuracy {
   OrgApacheLuceneSearchIndexSearcher *indexSearcher = OrgApacheLuceneSearchSpellSpellChecker_obtainSearcher(self);
   @try {
     if (ir == nil || field == nil) {
-      suggestMode = JreLoadStatic(OrgApacheLuceneSearchSpellSuggestModeEnum, SUGGEST_ALWAYS);
+      suggestMode = JreLoadEnum(OrgApacheLuceneSearchSpellSuggestMode, SUGGEST_ALWAYS);
     }
-    if (suggestMode == JreLoadStatic(OrgApacheLuceneSearchSpellSuggestModeEnum, SUGGEST_ALWAYS)) {
+    if (suggestMode == JreLoadEnum(OrgApacheLuceneSearchSpellSuggestMode, SUGGEST_ALWAYS)) {
       ir = nil;
       field = nil;
     }
     jint lengthWord = ((jint) [((NSString *) nil_chk(word)) length]);
-    jint freq = (ir != nil && field != nil) ? [ir docFreqWithOrgApacheLuceneIndexTerm:[new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(field, word) autorelease]] : 0;
-    jint goalFreq = suggestMode == JreLoadStatic(OrgApacheLuceneSearchSpellSuggestModeEnum, SUGGEST_MORE_POPULAR) ? freq : 0;
-    if (suggestMode == JreLoadStatic(OrgApacheLuceneSearchSpellSuggestModeEnum, SUGGEST_WHEN_NOT_IN_INDEX) && freq > 0) {
+    jint freq = (ir != nil && field != nil) ? [((OrgApacheLuceneIndexIndexReader *) nil_chk(ir)) docFreqWithOrgApacheLuceneIndexTerm:create_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(field, word)] : 0;
+    jint goalFreq = suggestMode == JreLoadEnum(OrgApacheLuceneSearchSpellSuggestMode, SUGGEST_MORE_POPULAR) ? freq : 0;
+    if (suggestMode == JreLoadEnum(OrgApacheLuceneSearchSpellSuggestMode, SUGGEST_WHEN_NOT_IN_INDEX) && freq > 0) {
       return [IOSObjectArray arrayWithObjects:(id[]){ word } count:1 type:NSString_class_()];
     }
-    OrgApacheLuceneSearchBooleanQuery_Builder *query = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
+    OrgApacheLuceneSearchBooleanQuery_Builder *query = create_OrgApacheLuceneSearchBooleanQuery_Builder_init();
     IOSObjectArray *grams;
     NSString *key;
     for (jint ng = OrgApacheLuceneSearchSpellSpellChecker_getMinWithInt_(lengthWord); ng <= OrgApacheLuceneSearchSpellSpellChecker_getMaxWithInt_(lengthWord); ng++) {
@@ -239,11 +262,11 @@ NSString *OrgApacheLuceneSearchSpellSpellChecker_F_WORD_ = @"word";
     }
     jint maxHits = 10 * numSug;
     IOSObjectArray *hits = ((OrgApacheLuceneSearchTopDocs *) nil_chk([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(indexSearcher)) searchWithOrgApacheLuceneSearchQuery:[query build] withInt:maxHits]))->scoreDocs_;
-    OrgApacheLuceneSearchSpellSuggestWordQueue *sugQueue = [new_OrgApacheLuceneSearchSpellSuggestWordQueue_initWithInt_withJavaUtilComparator_(numSug, comparator_) autorelease];
+    OrgApacheLuceneSearchSpellSuggestWordQueue *sugQueue = create_OrgApacheLuceneSearchSpellSuggestWordQueue_initWithInt_withJavaUtilComparator_(numSug, comparator_);
     jint stop = JavaLangMath_minWithInt_withInt_(((IOSObjectArray *) nil_chk(hits))->size_, maxHits);
-    OrgApacheLuceneSearchSpellSuggestWord *sugWord = [new_OrgApacheLuceneSearchSpellSuggestWord_init() autorelease];
+    OrgApacheLuceneSearchSpellSuggestWord *sugWord = create_OrgApacheLuceneSearchSpellSuggestWord_init();
     for (jint i = 0; i < stop; i++) {
-      JreStrongAssign(&sugWord->string_, [((OrgApacheLuceneDocumentDocument *) nil_chk([indexSearcher docWithInt:((OrgApacheLuceneSearchScoreDoc *) nil_chk(IOSObjectArray_Get(hits, i)))->doc_])) getWithNSString:OrgApacheLuceneSearchSpellSpellChecker_F_WORD_]);
+      JreStrongAssign(&sugWord->string_, [((OrgApacheLuceneDocumentDocument *) nil_chk([indexSearcher docWithInt:((OrgApacheLuceneSearchScoreDoc *) nil_chk(IOSObjectArray_Get(hits, i)))->doc_])) getWithNSString:OrgApacheLuceneSearchSpellSpellChecker_F_WORD]);
       if ([((NSString *) nil_chk(sugWord->string_)) isEqual:word]) {
         continue;
       }
@@ -252,8 +275,8 @@ NSString *OrgApacheLuceneSearchSpellSpellChecker_F_WORD_ = @"word";
         continue;
       }
       if (ir != nil && field != nil) {
-        sugWord->freq_ = [ir docFreqWithOrgApacheLuceneIndexTerm:[new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(field, sugWord->string_) autorelease]];
-        if ((suggestMode == JreLoadStatic(OrgApacheLuceneSearchSpellSuggestModeEnum, SUGGEST_MORE_POPULAR) && goalFreq > sugWord->freq_) || sugWord->freq_ < 1) {
+        sugWord->freq_ = [ir docFreqWithOrgApacheLuceneIndexTerm:create_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(field, sugWord->string_)];
+        if ((suggestMode == JreLoadEnum(OrgApacheLuceneSearchSpellSuggestMode, SUGGEST_MORE_POPULAR) && goalFreq > sugWord->freq_) || sugWord->freq_ < 1) {
           continue;
         }
       }
@@ -261,7 +284,7 @@ NSString *OrgApacheLuceneSearchSpellSpellChecker_F_WORD_ = @"word";
       if ([sugQueue size] == numSug) {
         accuracy = ((OrgApacheLuceneSearchSpellSuggestWord *) nil_chk([sugQueue top]))->score_;
       }
-      sugWord = [new_OrgApacheLuceneSearchSpellSuggestWord_init() autorelease];
+      sugWord = create_OrgApacheLuceneSearchSpellSuggestWord_init();
     }
     IOSObjectArray *list = [IOSObjectArray arrayWithLength:[sugQueue size] type:NSString_class_()];
     for (jint i = [sugQueue size] - 1; i >= 0; i--) {
@@ -296,7 +319,7 @@ NSString *OrgApacheLuceneSearchSpellSpellChecker_F_WORD_ = @"word";
   @synchronized(modifyCurrentIndexLock_) {
     OrgApacheLuceneSearchSpellSpellChecker_ensureOpen(self);
     OrgApacheLuceneStoreDirectory *dir = self->spellIndex_;
-    OrgApacheLuceneIndexIndexWriter *writer = [new_OrgApacheLuceneIndexIndexWriter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_(dir, [((OrgApacheLuceneIndexIndexWriterConfig *) [new_OrgApacheLuceneIndexIndexWriterConfig_initWithOrgApacheLuceneAnalysisAnalyzer_(nil) autorelease]) setOpenModeWithOrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum:JreLoadStatic(OrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum, CREATE)]) autorelease];
+    OrgApacheLuceneIndexIndexWriter *writer = create_OrgApacheLuceneIndexIndexWriter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_(dir, [create_OrgApacheLuceneIndexIndexWriterConfig_initWithOrgApacheLuceneAnalysisAnalyzer_(nil) setOpenModeWithOrgApacheLuceneIndexIndexWriterConfig_OpenMode:JreLoadEnum(OrgApacheLuceneIndexIndexWriterConfig_OpenMode, CREATE)]);
     [writer close];
     OrgApacheLuceneSearchSpellSpellChecker_swapSearcherWithOrgApacheLuceneStoreDirectory_(self, dir);
   }
@@ -305,7 +328,7 @@ NSString *OrgApacheLuceneSearchSpellSpellChecker_F_WORD_ = @"word";
 - (jboolean)existWithNSString:(NSString *)word {
   OrgApacheLuceneSearchIndexSearcher *indexSearcher = OrgApacheLuceneSearchSpellSpellChecker_obtainSearcher(self);
   @try {
-    return [((OrgApacheLuceneIndexIndexReader *) nil_chk([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(indexSearcher)) getIndexReader])) docFreqWithOrgApacheLuceneIndexTerm:[new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(OrgApacheLuceneSearchSpellSpellChecker_F_WORD_, word) autorelease]] > 0;
+    return [((OrgApacheLuceneIndexIndexReader *) nil_chk([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(indexSearcher)) getIndexReader])) docFreqWithOrgApacheLuceneIndexTerm:create_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(OrgApacheLuceneSearchSpellSpellChecker_F_WORD, word)] > 0;
   }
   @finally {
     OrgApacheLuceneSearchSpellSpellChecker_releaseSearcherWithOrgApacheLuceneSearchIndexSearcher_(self, indexSearcher);
@@ -318,13 +341,13 @@ NSString *OrgApacheLuceneSearchSpellSpellChecker_F_WORD_ = @"word";
   @synchronized(modifyCurrentIndexLock_) {
     OrgApacheLuceneSearchSpellSpellChecker_ensureOpen(self);
     OrgApacheLuceneStoreDirectory *dir = self->spellIndex_;
-    OrgApacheLuceneIndexIndexWriter *writer = [new_OrgApacheLuceneIndexIndexWriter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_(dir, config) autorelease];
+    OrgApacheLuceneIndexIndexWriter *writer = create_OrgApacheLuceneIndexIndexWriter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_(dir, config);
     OrgApacheLuceneSearchIndexSearcher *indexSearcher = OrgApacheLuceneSearchSpellSpellChecker_obtainSearcher(self);
-    id<JavaUtilList> termsEnums = [new_JavaUtilArrayList_init() autorelease];
+    id<JavaUtilList> termsEnums = create_JavaUtilArrayList_init();
     OrgApacheLuceneIndexIndexReader *reader = [((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher_)) getIndexReader];
     if ([((OrgApacheLuceneIndexIndexReader *) nil_chk(reader)) maxDoc] > 0) {
       for (OrgApacheLuceneIndexLeafReaderContext * __strong ctx in nil_chk([reader leaves])) {
-        OrgApacheLuceneIndexTerms *terms = [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(ctx)) reader])) termsWithNSString:OrgApacheLuceneSearchSpellSpellChecker_F_WORD_];
+        OrgApacheLuceneIndexTerms *terms = [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(ctx)) reader])) termsWithNSString:OrgApacheLuceneSearchSpellSpellChecker_F_WORD];
         if (terms != nil) [termsEnums addWithId:[terms iterator]];
       }
     }
@@ -412,7 +435,7 @@ withOrgApacheLuceneDocumentDocument:(OrgApacheLuceneDocumentDocument *)doc
 }
 
 - (OrgApacheLuceneSearchIndexSearcher *)createSearcherWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir {
-  return [new_OrgApacheLuceneSearchIndexSearcher_initWithOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneIndexDirectoryReader_openWithOrgApacheLuceneStoreDirectory_(dir)) autorelease];
+  return create_OrgApacheLuceneSearchIndexSearcher_initWithOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneIndexDirectoryReader_openWithOrgApacheLuceneStoreDirectory_(dir));
 }
 
 - (jboolean)isClosed {
@@ -433,18 +456,18 @@ withOrgApacheLuceneDocumentDocument:(OrgApacheLuceneDocumentDocument *)doc
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneSearchSpellStringDistance:", "SpellChecker", NULL, 0x1, "Ljava.io.IOException;", NULL },
     { "initWithOrgApacheLuceneStoreDirectory:", "SpellChecker", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneSearchSpellStringDistance:withJavaUtilComparator:", "SpellChecker", NULL, 0x1, "Ljava.io.IOException;", NULL },
+    { "initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneSearchSpellStringDistance:withJavaUtilComparator:", "SpellChecker", NULL, 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/store/Directory;Lorg/apache/lucene/search/spell/StringDistance;Ljava/util/Comparator<Lorg/apache/lucene/search/spell/SuggestWord;>;)V" },
     { "setSpellIndexWithOrgApacheLuceneStoreDirectory:", "setSpellIndex", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "setComparatorWithJavaUtilComparator:", "setComparator", "V", 0x1, NULL, NULL },
-    { "getComparator", NULL, "Ljava.util.Comparator;", 0x1, NULL, NULL },
+    { "setComparatorWithJavaUtilComparator:", "setComparator", "V", 0x1, NULL, "(Ljava/util/Comparator<Lorg/apache/lucene/search/spell/SuggestWord;>;)V" },
+    { "getComparator", NULL, "Ljava.util.Comparator;", 0x1, NULL, "()Ljava/util/Comparator<Lorg/apache/lucene/search/spell/SuggestWord;>;" },
     { "setStringDistanceWithOrgApacheLuceneSearchSpellStringDistance:", "setStringDistance", "V", 0x1, NULL, NULL },
     { "getStringDistance", NULL, "Lorg.apache.lucene.search.spell.StringDistance;", 0x1, NULL, NULL },
     { "setAccuracyWithFloat:", "setAccuracy", "V", 0x1, NULL, NULL },
     { "getAccuracy", NULL, "F", 0x1, NULL, NULL },
     { "suggestSimilarWithNSString:withInt:", "suggestSimilar", "[Ljava.lang.String;", 0x1, "Ljava.io.IOException;", NULL },
     { "suggestSimilarWithNSString:withInt:withFloat:", "suggestSimilar", "[Ljava.lang.String;", 0x1, "Ljava.io.IOException;", NULL },
-    { "suggestSimilarWithNSString:withInt:withOrgApacheLuceneIndexIndexReader:withNSString:withOrgApacheLuceneSearchSpellSuggestModeEnum:", "suggestSimilar", "[Ljava.lang.String;", 0x1, "Ljava.io.IOException;", NULL },
-    { "suggestSimilarWithNSString:withInt:withOrgApacheLuceneIndexIndexReader:withNSString:withOrgApacheLuceneSearchSpellSuggestModeEnum:withFloat:", "suggestSimilar", "[Ljava.lang.String;", 0x1, "Ljava.io.IOException;", NULL },
+    { "suggestSimilarWithNSString:withInt:withOrgApacheLuceneIndexIndexReader:withNSString:withOrgApacheLuceneSearchSpellSuggestMode:", "suggestSimilar", "[Ljava.lang.String;", 0x1, "Ljava.io.IOException;", NULL },
+    { "suggestSimilarWithNSString:withInt:withOrgApacheLuceneIndexIndexReader:withNSString:withOrgApacheLuceneSearchSpellSuggestMode:withFloat:", "suggestSimilar", "[Ljava.lang.String;", 0x1, "Ljava.io.IOException;", NULL },
     { "addWithOrgApacheLuceneSearchBooleanQuery_Builder:withNSString:withNSString:withFloat:", "add", "V", 0xa, NULL, NULL },
     { "addWithOrgApacheLuceneSearchBooleanQuery_Builder:withNSString:withNSString:", "add", "V", 0xa, NULL, NULL },
     { "formGramsWithNSString:withInt:", "formGrams", "[Ljava.lang.String;", 0xa, NULL, NULL },
@@ -465,7 +488,7 @@ withOrgApacheLuceneDocumentDocument:(OrgApacheLuceneDocumentDocument *)doc
   };
   static const J2ObjcFieldInfo fields[] = {
     { "DEFAULT_ACCURACY", "DEFAULT_ACCURACY", 0x19, "F", NULL, NULL, .constantValue.asFloat = OrgApacheLuceneSearchSpellSpellChecker_DEFAULT_ACCURACY },
-    { "F_WORD_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneSearchSpellSpellChecker_F_WORD_, NULL, .constantValue.asLong = 0 },
+    { "F_WORD", "F_WORD", 0x19, "Ljava.lang.String;", &OrgApacheLuceneSearchSpellSpellChecker_F_WORD, NULL, .constantValue.asLong = 0 },
     { "spellIndex_", NULL, 0x0, "Lorg.apache.lucene.store.Directory;", NULL, NULL, .constantValue.asLong = 0 },
     { "bStart_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
     { "bEnd_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
@@ -484,23 +507,27 @@ withOrgApacheLuceneDocumentDocument:(OrgApacheLuceneDocumentDocument *)doc
 @end
 
 void OrgApacheLuceneSearchSpellSpellChecker_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchSpellStringDistance_(OrgApacheLuceneSearchSpellSpellChecker *self, OrgApacheLuceneStoreDirectory *spellIndex, id<OrgApacheLuceneSearchSpellStringDistance> sd) {
-  OrgApacheLuceneSearchSpellSpellChecker_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchSpellStringDistance_withJavaUtilComparator_(self, spellIndex, sd, JreLoadStatic(OrgApacheLuceneSearchSpellSuggestWordQueue, DEFAULT_COMPARATOR_));
+  OrgApacheLuceneSearchSpellSpellChecker_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchSpellStringDistance_withJavaUtilComparator_(self, spellIndex, sd, JreLoadStatic(OrgApacheLuceneSearchSpellSuggestWordQueue, DEFAULT_COMPARATOR));
 }
 
 OrgApacheLuceneSearchSpellSpellChecker *new_OrgApacheLuceneSearchSpellSpellChecker_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchSpellStringDistance_(OrgApacheLuceneStoreDirectory *spellIndex, id<OrgApacheLuceneSearchSpellStringDistance> sd) {
-  OrgApacheLuceneSearchSpellSpellChecker *self = [OrgApacheLuceneSearchSpellSpellChecker alloc];
-  OrgApacheLuceneSearchSpellSpellChecker_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchSpellStringDistance_(self, spellIndex, sd);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSpellSpellChecker, initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchSpellStringDistance_, spellIndex, sd)
+}
+
+OrgApacheLuceneSearchSpellSpellChecker *create_OrgApacheLuceneSearchSpellSpellChecker_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchSpellStringDistance_(OrgApacheLuceneStoreDirectory *spellIndex, id<OrgApacheLuceneSearchSpellStringDistance> sd) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSpellSpellChecker, initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchSpellStringDistance_, spellIndex, sd)
 }
 
 void OrgApacheLuceneSearchSpellSpellChecker_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneSearchSpellSpellChecker *self, OrgApacheLuceneStoreDirectory *spellIndex) {
-  OrgApacheLuceneSearchSpellSpellChecker_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchSpellStringDistance_(self, spellIndex, [new_OrgApacheLuceneSearchSpellLevensteinDistance_init() autorelease]);
+  OrgApacheLuceneSearchSpellSpellChecker_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchSpellStringDistance_(self, spellIndex, create_OrgApacheLuceneSearchSpellLevensteinDistance_init());
 }
 
 OrgApacheLuceneSearchSpellSpellChecker *new_OrgApacheLuceneSearchSpellSpellChecker_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *spellIndex) {
-  OrgApacheLuceneSearchSpellSpellChecker *self = [OrgApacheLuceneSearchSpellSpellChecker alloc];
-  OrgApacheLuceneSearchSpellSpellChecker_initWithOrgApacheLuceneStoreDirectory_(self, spellIndex);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSpellSpellChecker, initWithOrgApacheLuceneStoreDirectory_, spellIndex)
+}
+
+OrgApacheLuceneSearchSpellSpellChecker *create_OrgApacheLuceneSearchSpellSpellChecker_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *spellIndex) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSpellSpellChecker, initWithOrgApacheLuceneStoreDirectory_, spellIndex)
 }
 
 void OrgApacheLuceneSearchSpellSpellChecker_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchSpellStringDistance_withJavaUtilComparator_(OrgApacheLuceneSearchSpellSpellChecker *self, OrgApacheLuceneStoreDirectory *spellIndex, id<OrgApacheLuceneSearchSpellStringDistance> sd, id<JavaUtilComparator> comparator) {
@@ -517,21 +544,23 @@ void OrgApacheLuceneSearchSpellSpellChecker_initWithOrgApacheLuceneStoreDirector
 }
 
 OrgApacheLuceneSearchSpellSpellChecker *new_OrgApacheLuceneSearchSpellSpellChecker_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchSpellStringDistance_withJavaUtilComparator_(OrgApacheLuceneStoreDirectory *spellIndex, id<OrgApacheLuceneSearchSpellStringDistance> sd, id<JavaUtilComparator> comparator) {
-  OrgApacheLuceneSearchSpellSpellChecker *self = [OrgApacheLuceneSearchSpellSpellChecker alloc];
-  OrgApacheLuceneSearchSpellSpellChecker_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchSpellStringDistance_withJavaUtilComparator_(self, spellIndex, sd, comparator);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSpellSpellChecker, initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchSpellStringDistance_withJavaUtilComparator_, spellIndex, sd, comparator)
+}
+
+OrgApacheLuceneSearchSpellSpellChecker *create_OrgApacheLuceneSearchSpellSpellChecker_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchSpellStringDistance_withJavaUtilComparator_(OrgApacheLuceneStoreDirectory *spellIndex, id<OrgApacheLuceneSearchSpellStringDistance> sd, id<JavaUtilComparator> comparator) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSpellSpellChecker, initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchSpellStringDistance_withJavaUtilComparator_, spellIndex, sd, comparator)
 }
 
 void OrgApacheLuceneSearchSpellSpellChecker_addWithOrgApacheLuceneSearchBooleanQuery_Builder_withNSString_withNSString_withFloat_(OrgApacheLuceneSearchBooleanQuery_Builder *q, NSString *name, NSString *value, jfloat boost) {
   OrgApacheLuceneSearchSpellSpellChecker_initialize();
-  OrgApacheLuceneSearchQuery *tq = [new_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_([new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(name, value) autorelease]) autorelease];
+  OrgApacheLuceneSearchQuery *tq = create_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_(create_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(name, value));
   [tq setBoostWithFloat:boost];
-  [((OrgApacheLuceneSearchBooleanQuery_Builder *) nil_chk(q)) addWithOrgApacheLuceneSearchBooleanClause:[new_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_OccurEnum_(tq, JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD)) autorelease]];
+  [((OrgApacheLuceneSearchBooleanQuery_Builder *) nil_chk(q)) addWithOrgApacheLuceneSearchBooleanClause:create_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_Occur_(tq, JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD))];
 }
 
 void OrgApacheLuceneSearchSpellSpellChecker_addWithOrgApacheLuceneSearchBooleanQuery_Builder_withNSString_withNSString_(OrgApacheLuceneSearchBooleanQuery_Builder *q, NSString *name, NSString *value) {
   OrgApacheLuceneSearchSpellSpellChecker_initialize();
-  [((OrgApacheLuceneSearchBooleanQuery_Builder *) nil_chk(q)) addWithOrgApacheLuceneSearchBooleanClause:[new_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_OccurEnum_([new_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_([new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(name, value) autorelease]) autorelease], JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD)) autorelease]];
+  [((OrgApacheLuceneSearchBooleanQuery_Builder *) nil_chk(q)) addWithOrgApacheLuceneSearchBooleanClause:create_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_Occur_(create_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_(create_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(name, value)), JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD))];
 }
 
 IOSObjectArray *OrgApacheLuceneSearchSpellSpellChecker_formGramsWithNSString_withInt_(NSString *text, jint ng) {
@@ -568,8 +597,8 @@ jint OrgApacheLuceneSearchSpellSpellChecker_getMaxWithInt_(jint l) {
 
 OrgApacheLuceneDocumentDocument *OrgApacheLuceneSearchSpellSpellChecker_createDocumentWithNSString_withInt_withInt_(NSString *text, jint ng1, jint ng2) {
   OrgApacheLuceneSearchSpellSpellChecker_initialize();
-  OrgApacheLuceneDocumentDocument *doc = [new_OrgApacheLuceneDocumentDocument_init() autorelease];
-  OrgApacheLuceneDocumentField *f = [new_OrgApacheLuceneDocumentStringField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_StoreEnum_(OrgApacheLuceneSearchSpellSpellChecker_F_WORD_, text, JreLoadStatic(OrgApacheLuceneDocumentField_StoreEnum, YES)) autorelease];
+  OrgApacheLuceneDocumentDocument *doc = create_OrgApacheLuceneDocumentDocument_init();
+  OrgApacheLuceneDocumentField *f = create_OrgApacheLuceneDocumentStringField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_Store_(OrgApacheLuceneSearchSpellSpellChecker_F_WORD, text, JreLoadEnum(OrgApacheLuceneDocumentField_Store, YES));
   [doc addWithOrgApacheLuceneIndexIndexableField:f];
   OrgApacheLuceneSearchSpellSpellChecker_addGramWithNSString_withOrgApacheLuceneDocumentDocument_withInt_withInt_(text, doc, ng1, ng2);
   return doc;
@@ -583,18 +612,18 @@ void OrgApacheLuceneSearchSpellSpellChecker_addGramWithNSString_withOrgApacheLuc
     NSString *end = nil;
     for (jint i = 0; i < len - ng + 1; i++) {
       NSString *gram = [text substring:i endIndex:i + ng];
-      OrgApacheLuceneDocumentFieldType *ft = [new_OrgApacheLuceneDocumentFieldType_initWithOrgApacheLuceneDocumentFieldType_(JreLoadStatic(OrgApacheLuceneDocumentStringField, TYPE_NOT_STORED_)) autorelease];
-      [ft setIndexOptionsWithOrgApacheLuceneIndexIndexOptionsEnum:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS)];
-      OrgApacheLuceneDocumentField *ngramField = [new_OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentFieldType_(key, gram, ft) autorelease];
+      OrgApacheLuceneDocumentFieldType *ft = create_OrgApacheLuceneDocumentFieldType_initWithOrgApacheLuceneDocumentFieldType_(JreLoadStatic(OrgApacheLuceneDocumentStringField, TYPE_NOT_STORED));
+      [ft setIndexOptionsWithOrgApacheLuceneIndexIndexOptions:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS)];
+      OrgApacheLuceneDocumentField *ngramField = create_OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentFieldType_(key, gram, ft);
       [((OrgApacheLuceneDocumentDocument *) nil_chk(doc)) addWithOrgApacheLuceneIndexIndexableField:ngramField];
       if (i == 0) {
-        OrgApacheLuceneDocumentField *startField = [new_OrgApacheLuceneDocumentStringField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_StoreEnum_(JreStrcat("$I", @"start", ng), gram, JreLoadStatic(OrgApacheLuceneDocumentField_StoreEnum, NO)) autorelease];
+        OrgApacheLuceneDocumentField *startField = create_OrgApacheLuceneDocumentStringField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_Store_(JreStrcat("$I", @"start", ng), gram, JreLoadEnum(OrgApacheLuceneDocumentField_Store, NO));
         [doc addWithOrgApacheLuceneIndexIndexableField:startField];
       }
       end = gram;
     }
     if (end != nil) {
-      OrgApacheLuceneDocumentField *endField = [new_OrgApacheLuceneDocumentStringField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_StoreEnum_(JreStrcat("$I", @"end", ng), end, JreLoadStatic(OrgApacheLuceneDocumentField_StoreEnum, NO)) autorelease];
+      OrgApacheLuceneDocumentField *endField = create_OrgApacheLuceneDocumentStringField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_Store_(JreStrcat("$I", @"end", ng), end, JreLoadEnum(OrgApacheLuceneDocumentField_Store, NO));
       [((OrgApacheLuceneDocumentDocument *) nil_chk(doc)) addWithOrgApacheLuceneIndexIndexableField:endField];
     }
   }
@@ -614,7 +643,7 @@ void OrgApacheLuceneSearchSpellSpellChecker_releaseSearcherWithOrgApacheLuceneSe
 
 void OrgApacheLuceneSearchSpellSpellChecker_ensureOpen(OrgApacheLuceneSearchSpellSpellChecker *self) {
   if (JreLoadVolatileBoolean(&self->closed_)) {
-    @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(@"Spellchecker has been closed") autorelease];
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(@"Spellchecker has been closed");
   }
 }
 
@@ -623,7 +652,7 @@ void OrgApacheLuceneSearchSpellSpellChecker_swapSearcherWithOrgApacheLuceneStore
   @synchronized(self->searcherLock_) {
     if (JreLoadVolatileBoolean(&self->closed_)) {
       [((OrgApacheLuceneIndexIndexReader *) nil_chk([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(indexSearcher)) getIndexReader])) close];
-      @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(@"Spellchecker has been closed") autorelease];
+      @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(@"Spellchecker has been closed");
     }
     if (self->searcher_ != nil) {
       [((OrgApacheLuceneIndexIndexReader *) nil_chk([self->searcher_ getIndexReader])) close];

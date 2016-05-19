@@ -31,6 +31,8 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisUtilClasspathResource
 
 __attribute__((unused)) static OrgApacheLuceneAnalysisUtilClasspathResourceLoader *new_OrgApacheLuceneAnalysisUtilClasspathResourceLoader_initWithIOSClass_withJavaLangClassLoader_(IOSClass *clazz, JavaLangClassLoader *loader) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneAnalysisUtilClasspathResourceLoader *create_OrgApacheLuceneAnalysisUtilClasspathResourceLoader_initWithIOSClass_withJavaLangClassLoader_(IOSClass *clazz, JavaLangClassLoader *loader);
+
 @implementation OrgApacheLuceneAnalysisUtilClasspathResourceLoader
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -57,8 +59,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (JavaIoInputStream *)openResourceWithNSString:(NSString *)resource {
-  JavaIoInputStream *stream = (clazz_ != nil) ? [clazz_ getResourceAsStream:resource] : [((JavaLangClassLoader *) nil_chk(loader_)) getResourceAsStreamWithNSString:resource];
-  if (stream == nil) @throw [new_JavaIoIOException_initWithNSString_(JreStrcat("$$", @"Resource not found: ", resource)) autorelease];
+  JavaIoInputStream *stream = (clazz_ != nil) ? [((IOSClass *) nil_chk(clazz_)) getResourceAsStream:resource] : [((JavaLangClassLoader *) nil_chk(loader_)) getResourceAsStreamWithNSString:resource];
+  if (stream == nil) @throw create_JavaIoIOException_initWithNSString_(JreStrcat("$$", @"Resource not found: ", resource));
   return stream;
 }
 
@@ -68,7 +70,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     return [((IOSClass *) nil_chk(IOSClass_forName_initialize_classLoader_(cname, true, loader_))) asSubclass:expectedType];
   }
   @catch (JavaLangException *e) {
-    @throw [new_JavaLangRuntimeException_initWithNSString_withJavaLangThrowable_(JreStrcat("$$", @"Cannot load class: ", cname), e) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSString_withNSException_(JreStrcat("$$", @"Cannot load class: ", cname), e);
   }
 }
 
@@ -79,7 +81,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     return [((IOSClass *) nil_chk(clazz)) newInstance];
   }
   @catch (JavaLangException *e) {
-    @throw [new_JavaLangRuntimeException_initWithNSString_withJavaLangThrowable_(JreStrcat("$$", @"Cannot create instance: ", cname), e) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSString_withNSException_(JreStrcat("$$", @"Cannot create instance: ", cname), e);
   }
 }
 
@@ -93,8 +95,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   static const J2ObjcMethodInfo methods[] = {
     { "init", "ClasspathResourceLoader", NULL, 0x1, NULL, NULL },
     { "initWithJavaLangClassLoader:", "ClasspathResourceLoader", NULL, 0x1, NULL, NULL },
-    { "initWithIOSClass:", "ClasspathResourceLoader", NULL, 0x1, NULL, NULL },
-    { "initWithIOSClass:withJavaLangClassLoader:", "ClasspathResourceLoader", NULL, 0x2, NULL, NULL },
+    { "initWithIOSClass:", "ClasspathResourceLoader", NULL, 0x1, NULL, "(Ljava/lang/Class<*>;)V" },
+    { "initWithIOSClass:withJavaLangClassLoader:", "ClasspathResourceLoader", NULL, 0x2, NULL, "(Ljava/lang/Class<*>;Ljava/lang/ClassLoader;)V" },
     { "openResourceWithNSString:", "openResource", "Ljava.io.InputStream;", 0x1, "Ljava.io.IOException;", NULL },
     { "findClassWithNSString:withIOSClass:", "findClass", "Ljava.lang.Class;", 0x1, NULL, "<T:Ljava/lang/Object;>(Ljava/lang/String;Ljava/lang/Class<TT;>;)Ljava/lang/Class<+TT;>;" },
     { "newInstanceWithNSString:withIOSClass:", "newInstance", "TT;", 0x1, NULL, "<T:Ljava/lang/Object;>(Ljava/lang/String;Ljava/lang/Class<TT;>;)TT;" },
@@ -114,9 +116,11 @@ void OrgApacheLuceneAnalysisUtilClasspathResourceLoader_init(OrgApacheLuceneAnal
 }
 
 OrgApacheLuceneAnalysisUtilClasspathResourceLoader *new_OrgApacheLuceneAnalysisUtilClasspathResourceLoader_init() {
-  OrgApacheLuceneAnalysisUtilClasspathResourceLoader *self = [OrgApacheLuceneAnalysisUtilClasspathResourceLoader alloc];
-  OrgApacheLuceneAnalysisUtilClasspathResourceLoader_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisUtilClasspathResourceLoader, init)
+}
+
+OrgApacheLuceneAnalysisUtilClasspathResourceLoader *create_OrgApacheLuceneAnalysisUtilClasspathResourceLoader_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisUtilClasspathResourceLoader, init)
 }
 
 void OrgApacheLuceneAnalysisUtilClasspathResourceLoader_initWithJavaLangClassLoader_(OrgApacheLuceneAnalysisUtilClasspathResourceLoader *self, JavaLangClassLoader *loader) {
@@ -124,9 +128,11 @@ void OrgApacheLuceneAnalysisUtilClasspathResourceLoader_initWithJavaLangClassLoa
 }
 
 OrgApacheLuceneAnalysisUtilClasspathResourceLoader *new_OrgApacheLuceneAnalysisUtilClasspathResourceLoader_initWithJavaLangClassLoader_(JavaLangClassLoader *loader) {
-  OrgApacheLuceneAnalysisUtilClasspathResourceLoader *self = [OrgApacheLuceneAnalysisUtilClasspathResourceLoader alloc];
-  OrgApacheLuceneAnalysisUtilClasspathResourceLoader_initWithJavaLangClassLoader_(self, loader);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisUtilClasspathResourceLoader, initWithJavaLangClassLoader_, loader)
+}
+
+OrgApacheLuceneAnalysisUtilClasspathResourceLoader *create_OrgApacheLuceneAnalysisUtilClasspathResourceLoader_initWithJavaLangClassLoader_(JavaLangClassLoader *loader) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisUtilClasspathResourceLoader, initWithJavaLangClassLoader_, loader)
 }
 
 void OrgApacheLuceneAnalysisUtilClasspathResourceLoader_initWithIOSClass_(OrgApacheLuceneAnalysisUtilClasspathResourceLoader *self, IOSClass *clazz) {
@@ -134,9 +140,11 @@ void OrgApacheLuceneAnalysisUtilClasspathResourceLoader_initWithIOSClass_(OrgApa
 }
 
 OrgApacheLuceneAnalysisUtilClasspathResourceLoader *new_OrgApacheLuceneAnalysisUtilClasspathResourceLoader_initWithIOSClass_(IOSClass *clazz) {
-  OrgApacheLuceneAnalysisUtilClasspathResourceLoader *self = [OrgApacheLuceneAnalysisUtilClasspathResourceLoader alloc];
-  OrgApacheLuceneAnalysisUtilClasspathResourceLoader_initWithIOSClass_(self, clazz);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisUtilClasspathResourceLoader, initWithIOSClass_, clazz)
+}
+
+OrgApacheLuceneAnalysisUtilClasspathResourceLoader *create_OrgApacheLuceneAnalysisUtilClasspathResourceLoader_initWithIOSClass_(IOSClass *clazz) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisUtilClasspathResourceLoader, initWithIOSClass_, clazz)
 }
 
 void OrgApacheLuceneAnalysisUtilClasspathResourceLoader_initWithIOSClass_withJavaLangClassLoader_(OrgApacheLuceneAnalysisUtilClasspathResourceLoader *self, IOSClass *clazz, JavaLangClassLoader *loader) {
@@ -146,9 +154,11 @@ void OrgApacheLuceneAnalysisUtilClasspathResourceLoader_initWithIOSClass_withJav
 }
 
 OrgApacheLuceneAnalysisUtilClasspathResourceLoader *new_OrgApacheLuceneAnalysisUtilClasspathResourceLoader_initWithIOSClass_withJavaLangClassLoader_(IOSClass *clazz, JavaLangClassLoader *loader) {
-  OrgApacheLuceneAnalysisUtilClasspathResourceLoader *self = [OrgApacheLuceneAnalysisUtilClasspathResourceLoader alloc];
-  OrgApacheLuceneAnalysisUtilClasspathResourceLoader_initWithIOSClass_withJavaLangClassLoader_(self, clazz, loader);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisUtilClasspathResourceLoader, initWithIOSClass_withJavaLangClassLoader_, clazz, loader)
+}
+
+OrgApacheLuceneAnalysisUtilClasspathResourceLoader *create_OrgApacheLuceneAnalysisUtilClasspathResourceLoader_initWithIOSClass_withJavaLangClassLoader_(IOSClass *clazz, JavaLangClassLoader *loader) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisUtilClasspathResourceLoader, initWithIOSClass_withJavaLangClassLoader_, clazz, loader)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisUtilClasspathResourceLoader)

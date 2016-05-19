@@ -5,23 +5,23 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilFstBytesStore_INCLUDE_ALL")
-#if OrgApacheLuceneUtilFstBytesStore_RESTRICT
-#define OrgApacheLuceneUtilFstBytesStore_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstBytesStore")
+#ifdef RESTRICT_OrgApacheLuceneUtilFstBytesStore
+#define INCLUDE_ALL_OrgApacheLuceneUtilFstBytesStore 0
 #else
-#define OrgApacheLuceneUtilFstBytesStore_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilFstBytesStore 1
 #endif
-#undef OrgApacheLuceneUtilFstBytesStore_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilFstBytesStore
 
-#if !defined (_OrgApacheLuceneUtilFstBytesStore_) && (OrgApacheLuceneUtilFstBytesStore_INCLUDE_ALL || OrgApacheLuceneUtilFstBytesStore_INCLUDE)
-#define _OrgApacheLuceneUtilFstBytesStore_
+#if !defined (OrgApacheLuceneUtilFstBytesStore_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstBytesStore || defined(INCLUDE_OrgApacheLuceneUtilFstBytesStore))
+#define OrgApacheLuceneUtilFstBytesStore_
 
-#define OrgApacheLuceneStoreDataOutput_RESTRICT 1
-#define OrgApacheLuceneStoreDataOutput_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreDataOutput 1
+#define INCLUDE_OrgApacheLuceneStoreDataOutput 1
 #include "org/apache/lucene/store/DataOutput.h"
 
-#define OrgApacheLuceneUtilAccountable_RESTRICT 1
-#define OrgApacheLuceneUtilAccountable_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAccountable 1
+#define INCLUDE_OrgApacheLuceneUtilAccountable 1
 #include "org/apache/lucene/util/Accountable.h"
 
 @class IOSByteArray;
@@ -33,12 +33,21 @@
 
 #pragma mark Public
 
+/*!
+ @brief Pulls bytes from the provided IndexInput.
+ */
 - (instancetype)initWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
                                              withLong:(jlong)numBytes
                                               withInt:(jint)maxBlockSize;
 
 - (instancetype)initWithInt:(jint)blockBits;
 
+/*!
+ @brief Absolute copy bytes self to self, without changing the
+ position.
+ Note: this cannot "grow" the bytes, so must
+ only call it on already written parts. 
+ */
 - (void)copyBytesWithLong:(jlong)src
                  withLong:(jlong)dest
                   withInt:(jint)len OBJC_METHOD_FAMILY_NONE;
@@ -55,6 +64,9 @@
 
 - (jlong)ramBytesUsed;
 
+/*!
+ @brief Reverse from srcPos, inclusive, to destPos, inclusive.
+ */
 - (void)reverseWithLong:(jlong)srcPos
                withLong:(jlong)destPos;
 
@@ -62,10 +74,18 @@
 
 - (NSString *)description;
 
+/*!
+ @brief Pos must be less than the max position written so far!
+ Ie, you cannot "grow" the file with this! 
+ */
 - (void)truncateWithLong:(jlong)newLen;
 
 - (void)writeByteWithByte:(jbyte)b;
 
+/*!
+ @brief Absolute write byte; you must ensure dest is &lt; max
+ position written so far.
+ */
 - (void)writeByteWithInt:(jint)dest
                 withByte:(jbyte)b;
 
@@ -73,9 +93,16 @@
                         withInt:(jint)offset
                         withInt:(jint)len;
 
+/*!
+ @brief Writes an int at the absolute position without
+ changing the current pointer.
+ */
 - (void)writeIntWithLong:(jlong)pos
                  withInt:(jint)value;
 
+/*!
+ @brief Writes all of our bytes to the target <code>DataOutput</code>.
+ */
 - (void)writeToWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg;
 
 #pragma mark Package-Private
@@ -84,6 +111,12 @@
 
 - (OrgApacheLuceneUtilFstFST_BytesReader *)getReverseReaderWithBoolean:(jboolean)allowSingle;
 
+/*!
+ @brief Absolute writeBytes without changing the current
+ position.
+ Note: this cannot "grow" the bytes, so you
+ must only call it on already written parts. 
+ */
 - (void)writeBytesWithLong:(jlong)dest
              withByteArray:(IOSByteArray *)b
                    withInt:(jint)offset
@@ -97,12 +130,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilFstBytesStore_initWithInt_(OrgApacheLu
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilFstBytesStore *new_OrgApacheLuceneUtilFstBytesStore_initWithInt_(jint blockBits) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstBytesStore *create_OrgApacheLuceneUtilFstBytesStore_initWithInt_(jint blockBits);
+
 FOUNDATION_EXPORT void OrgApacheLuceneUtilFstBytesStore_initWithOrgApacheLuceneStoreDataInput_withLong_withInt_(OrgApacheLuceneUtilFstBytesStore *self, OrgApacheLuceneStoreDataInput *inArg, jlong numBytes, jint maxBlockSize);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilFstBytesStore *new_OrgApacheLuceneUtilFstBytesStore_initWithOrgApacheLuceneStoreDataInput_withLong_withInt_(OrgApacheLuceneStoreDataInput *inArg, jlong numBytes, jint maxBlockSize) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstBytesStore *create_OrgApacheLuceneUtilFstBytesStore_initWithOrgApacheLuceneStoreDataInput_withLong_withInt_(OrgApacheLuceneStoreDataInput *inArg, jlong numBytes, jint maxBlockSize);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstBytesStore)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilFstBytesStore_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstBytesStore")

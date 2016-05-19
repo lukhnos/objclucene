@@ -5,28 +5,43 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory_) && (OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory))
+#define OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>NorwegianLightStemFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_svlgtstem" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+ &lt;filter class="solr.LowerCaseFilterFactory"/&gt;
+ &lt;filter class="solr.NorwegianLightStemFilterFactory" variant="nb"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new NorwegianLightStemFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -39,8 +54,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory_
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory *new_OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory *create_OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisNoNorwegianLightStemFilterFactory")

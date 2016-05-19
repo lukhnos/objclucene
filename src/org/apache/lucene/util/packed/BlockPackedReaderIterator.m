@@ -56,7 +56,7 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPackedBlockPackedReaderIt
 - (void)skipWithLong:(jlong)count {
   JreAssert((count >= 0), (@"org/apache/lucene/util/packed/BlockPackedReaderIterator.java:109 condition failed: assert count >= 0;"));
   if (ord_ + count > valueCount_ || ord_ + count < 0) {
-    @throw [new_JavaIoEOFException_init() autorelease];
+    @throw create_JavaIoEOFException_init();
   }
   jint skipBuffer = (jint) JavaLangMath_minWithLong_withLong_(count, blockSize_ - off_);
   off_ += skipBuffer;
@@ -70,12 +70,12 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPackedBlockPackedReaderIt
     jint token = [((OrgApacheLuceneStoreDataInput *) nil_chk(in_)) readByte] & (jint) 0xFF;
     jint bitsPerValue = JreURShift32(token, OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_BPV_SHIFT);
     if (bitsPerValue > 64) {
-      @throw [new_JavaIoIOException_initWithNSString_(@"Corrupted") autorelease];
+      @throw create_JavaIoIOException_initWithNSString_(@"Corrupted");
     }
     if ((token & OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_MIN_VALUE_EQUALS_0) == 0) {
       OrgApacheLuceneUtilPackedBlockPackedReaderIterator_readVLongWithOrgApacheLuceneStoreDataInput_(in_);
     }
-    jlong blockBytes = [((OrgApacheLuceneUtilPackedPackedInts_FormatEnum *) nil_chk(JreLoadStatic(OrgApacheLuceneUtilPackedPackedInts_FormatEnum, PACKED))) byteCountWithInt:packedIntsVersion_ withInt:blockSize_ withInt:bitsPerValue];
+    jlong blockBytes = [((OrgApacheLuceneUtilPackedPackedInts_Format *) nil_chk(JreLoadEnum(OrgApacheLuceneUtilPackedPackedInts_Format, PACKED))) byteCountWithInt:packedIntsVersion_ withInt:blockSize_ withInt:bitsPerValue];
     OrgApacheLuceneUtilPackedBlockPackedReaderIterator_skipBytesWithLong_(self, blockBytes);
     ord_ += blockSize_;
     count -= blockSize_;
@@ -95,7 +95,7 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPackedBlockPackedReaderIt
 
 - (jlong)next {
   if (ord_ == valueCount_) {
-    @throw [new_JavaIoEOFException_init() autorelease];
+    @throw create_JavaIoEOFException_init();
   }
   if (off_ == blockSize_) {
     OrgApacheLuceneUtilPackedBlockPackedReaderIterator_refill(self);
@@ -108,7 +108,7 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPackedBlockPackedReaderIt
 - (OrgApacheLuceneUtilLongsRef *)nextWithInt:(jint)count {
   JreAssert((count > 0), (@"org/apache/lucene/util/packed/BlockPackedReaderIterator.java:182 condition failed: assert count > 0;"));
   if (ord_ == valueCount_) {
-    @throw [new_JavaIoEOFException_init() autorelease];
+    @throw create_JavaIoEOFException_init();
   }
   if (off_ == blockSize_) {
     OrgApacheLuceneUtilPackedBlockPackedReaderIterator_refill(self);
@@ -209,15 +209,17 @@ void OrgApacheLuceneUtilPackedBlockPackedReaderIterator_initWithOrgApacheLuceneS
 }
 
 OrgApacheLuceneUtilPackedBlockPackedReaderIterator *new_OrgApacheLuceneUtilPackedBlockPackedReaderIterator_initWithOrgApacheLuceneStoreDataInput_withInt_withInt_withLong_(OrgApacheLuceneStoreDataInput *inArg, jint packedIntsVersion, jint blockSize, jlong valueCount) {
-  OrgApacheLuceneUtilPackedBlockPackedReaderIterator *self = [OrgApacheLuceneUtilPackedBlockPackedReaderIterator alloc];
-  OrgApacheLuceneUtilPackedBlockPackedReaderIterator_initWithOrgApacheLuceneStoreDataInput_withInt_withInt_withLong_(self, inArg, packedIntsVersion, blockSize, valueCount);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedBlockPackedReaderIterator, initWithOrgApacheLuceneStoreDataInput_withInt_withInt_withLong_, inArg, packedIntsVersion, blockSize, valueCount)
+}
+
+OrgApacheLuceneUtilPackedBlockPackedReaderIterator *create_OrgApacheLuceneUtilPackedBlockPackedReaderIterator_initWithOrgApacheLuceneStoreDataInput_withInt_withInt_withLong_(OrgApacheLuceneStoreDataInput *inArg, jint packedIntsVersion, jint blockSize, jlong valueCount) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedBlockPackedReaderIterator, initWithOrgApacheLuceneStoreDataInput_withInt_withInt_withLong_, inArg, packedIntsVersion, blockSize, valueCount)
 }
 
 void OrgApacheLuceneUtilPackedBlockPackedReaderIterator_skipBytesWithLong_(OrgApacheLuceneUtilPackedBlockPackedReaderIterator *self, jlong count) {
   if ([self->in_ isKindOfClass:[OrgApacheLuceneStoreIndexInput class]]) {
-    OrgApacheLuceneStoreIndexInput *iin = (OrgApacheLuceneStoreIndexInput *) check_class_cast(self->in_, [OrgApacheLuceneStoreIndexInput class]);
-    [iin seekWithLong:[((OrgApacheLuceneStoreIndexInput *) nil_chk(iin)) getFilePointer] + count];
+    OrgApacheLuceneStoreIndexInput *iin = (OrgApacheLuceneStoreIndexInput *) cast_chk(self->in_, [OrgApacheLuceneStoreIndexInput class]);
+    [((OrgApacheLuceneStoreIndexInput *) nil_chk(iin)) seekWithLong:[iin getFilePointer] + count];
   }
   else {
     if (self->blocks_ == nil) {
@@ -237,7 +239,7 @@ void OrgApacheLuceneUtilPackedBlockPackedReaderIterator_refill(OrgApacheLuceneUt
   jboolean minEquals0 = (token & OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_MIN_VALUE_EQUALS_0) != 0;
   jint bitsPerValue = JreURShift32(token, OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_BPV_SHIFT);
   if (bitsPerValue > 64) {
-    @throw [new_JavaIoIOException_initWithNSString_(@"Corrupted") autorelease];
+    @throw create_JavaIoIOException_initWithNSString_(@"Corrupted");
   }
   jlong minValue = minEquals0 ? 0LL : OrgApacheLuceneUtilBitUtil_zigZagDecodeWithLong_(1LL + OrgApacheLuceneUtilPackedBlockPackedReaderIterator_readVLongWithOrgApacheLuceneStoreDataInput_(self->in_));
   JreAssert((minEquals0 || minValue != 0), (@"org/apache/lucene/util/packed/BlockPackedReaderIterator.java:208 condition failed: assert minEquals0 || minValue != 0;"));
@@ -245,15 +247,15 @@ void OrgApacheLuceneUtilPackedBlockPackedReaderIterator_refill(OrgApacheLuceneUt
     JavaUtilArrays_fillWithLongArray_withLong_(self->values_, minValue);
   }
   else {
-    id<OrgApacheLuceneUtilPackedPackedInts_Decoder> decoder = OrgApacheLuceneUtilPackedPackedInts_getDecoderWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_(JreLoadStatic(OrgApacheLuceneUtilPackedPackedInts_FormatEnum, PACKED), self->packedIntsVersion_, bitsPerValue);
+    id<OrgApacheLuceneUtilPackedPackedInts_Decoder> decoder = OrgApacheLuceneUtilPackedPackedInts_getDecoderWithOrgApacheLuceneUtilPackedPackedInts_Format_withInt_withInt_(JreLoadEnum(OrgApacheLuceneUtilPackedPackedInts_Format, PACKED), self->packedIntsVersion_, bitsPerValue);
     jint iterations = self->blockSize_ / [((id<OrgApacheLuceneUtilPackedPackedInts_Decoder>) nil_chk(decoder)) byteValueCount];
     jint blocksSize = iterations * [decoder byteBlockCount];
     if (self->blocks_ == nil || self->blocks_->size_ < blocksSize) {
       JreStrongAssignAndConsume(&self->blocks_, [IOSByteArray newArrayWithLength:blocksSize]);
     }
     jint valueCount = (jint) JavaLangMath_minWithLong_withLong_(self->valueCount_ - self->ord_, self->blockSize_);
-    jint blocksCount = (jint) [((OrgApacheLuceneUtilPackedPackedInts_FormatEnum *) nil_chk(JreLoadStatic(OrgApacheLuceneUtilPackedPackedInts_FormatEnum, PACKED))) byteCountWithInt:self->packedIntsVersion_ withInt:valueCount withInt:bitsPerValue];
-    [self->in_ readBytesWithByteArray:self->blocks_ withInt:0 withInt:blocksCount];
+    jint blocksCount = (jint) [((OrgApacheLuceneUtilPackedPackedInts_Format *) nil_chk(JreLoadEnum(OrgApacheLuceneUtilPackedPackedInts_Format, PACKED))) byteCountWithInt:self->packedIntsVersion_ withInt:valueCount withInt:bitsPerValue];
+    [((OrgApacheLuceneStoreDataInput *) nil_chk(self->in_)) readBytesWithByteArray:self->blocks_ withInt:0 withInt:blocksCount];
     [decoder decodeWithByteArray:self->blocks_ withInt:0 withLongArray:self->values_ withInt:0 withInt:iterations];
     if (minValue != 0) {
       for (jint i = 0; i < valueCount; ++i) {

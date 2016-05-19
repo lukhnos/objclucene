@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexCoalescedUpdates_INCLUDE_ALL")
-#if OrgApacheLuceneIndexCoalescedUpdates_RESTRICT
-#define OrgApacheLuceneIndexCoalescedUpdates_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexCoalescedUpdates")
+#ifdef RESTRICT_OrgApacheLuceneIndexCoalescedUpdates
+#define INCLUDE_ALL_OrgApacheLuceneIndexCoalescedUpdates 0
 #else
-#define OrgApacheLuceneIndexCoalescedUpdates_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexCoalescedUpdates 1
 #endif
-#undef OrgApacheLuceneIndexCoalescedUpdates_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexCoalescedUpdates
 
-#if !defined (_OrgApacheLuceneIndexCoalescedUpdates_) && (OrgApacheLuceneIndexCoalescedUpdates_INCLUDE_ALL || OrgApacheLuceneIndexCoalescedUpdates_INCLUDE)
-#define _OrgApacheLuceneIndexCoalescedUpdates_
+#if !defined (OrgApacheLuceneIndexCoalescedUpdates_) && (INCLUDE_ALL_OrgApacheLuceneIndexCoalescedUpdates || defined(INCLUDE_OrgApacheLuceneIndexCoalescedUpdates))
+#define OrgApacheLuceneIndexCoalescedUpdates_
 
 @class OrgApacheLuceneIndexFieldTermIterator;
 @class OrgApacheLuceneIndexFrozenBufferedUpdates;
@@ -58,8 +58,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexCoalescedUpdates_init(OrgApacheLucene
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexCoalescedUpdates *new_OrgApacheLuceneIndexCoalescedUpdates_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexCoalescedUpdates *create_OrgApacheLuceneIndexCoalescedUpdates_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCoalescedUpdates)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexCoalescedUpdates_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexCoalescedUpdates")

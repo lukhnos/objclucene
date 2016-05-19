@@ -5,25 +5,41 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisElGreekStemmer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisElGreekStemmer_RESTRICT
-#define OrgApacheLuceneAnalysisElGreekStemmer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisElGreekStemmer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisElGreekStemmer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisElGreekStemmer 0
 #else
-#define OrgApacheLuceneAnalysisElGreekStemmer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisElGreekStemmer 1
 #endif
-#undef OrgApacheLuceneAnalysisElGreekStemmer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisElGreekStemmer
 
-#if !defined (_OrgApacheLuceneAnalysisElGreekStemmer_) && (OrgApacheLuceneAnalysisElGreekStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisElGreekStemmer_INCLUDE)
-#define _OrgApacheLuceneAnalysisElGreekStemmer_
+#if !defined (OrgApacheLuceneAnalysisElGreekStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisElGreekStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisElGreekStemmer))
+#define OrgApacheLuceneAnalysisElGreekStemmer_
 
 @class IOSCharArray;
 
+/*!
+ @brief A stemmer for Greek words, according to: <i>Development of a Stemmer for the
+ Greek Language.
+ </i> Georgios Ntais
+ <p>
+ NOTE: Input is expected to be casefolded for Greek (including folding of final
+ sigma to sigma), and with diacritics removed. This can be achieved with 
+ either <code>GreekLowerCaseFilter</code> or ICUFoldingFilter.
+ */
 @interface OrgApacheLuceneAnalysisElGreekStemmer : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @brief Stems a word contained in a leading portion of a char[] array.
+ The word is passed through a number of rules that modify its length.
+ @param s A char[] array that contains the word to be stemmed.
+ @param len The length of the char[] array.
+ @return The new length of the stemmed word.
+ */
 - (jint)stemWithCharArray:(IOSCharArray *)s
                   withInt:(jint)len;
 
@@ -35,8 +51,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisElGreekStemmer_init(OrgApacheLucen
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisElGreekStemmer *new_OrgApacheLuceneAnalysisElGreekStemmer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisElGreekStemmer *create_OrgApacheLuceneAnalysisElGreekStemmer_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisElGreekStemmer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisElGreekStemmer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisElGreekStemmer")

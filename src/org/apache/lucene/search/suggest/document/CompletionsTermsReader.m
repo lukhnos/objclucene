@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
-#include "java/lang/Throwable.h"
 #include "java/util/Collection.h"
 #include "java/util/Collections.h"
 #include "java/util/List.h"
@@ -42,12 +41,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader, 
     if (suggester_ == nil) {
       {
         OrgApacheLuceneStoreIndexInput *dictClone = [((OrgApacheLuceneStoreIndexInput *) nil_chk(dictIn_)) clone];
-        JavaLangThrowable *__primaryException1 = nil;
+        NSException *__primaryException1 = nil;
         @try {
           [((OrgApacheLuceneStoreIndexInput *) nil_chk(dictClone)) seekWithLong:offset_];
           JreStrongAssign(&suggester_, OrgApacheLuceneSearchSuggestDocumentNRTSuggester_load__WithOrgApacheLuceneStoreIndexInput_(dictClone));
         }
-        @catch (JavaLangThrowable *e) {
+        @catch (NSException *e) {
           __primaryException1 = e;
           @throw e;
         }
@@ -56,8 +55,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader, 
             if (__primaryException1 != nil) {
               @try {
                 [dictClone close];
-              } @catch (JavaLangThrowable *e) {
-                [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+              } @catch (NSException *e) {
+                [__primaryException1 addSuppressedWithNSException:e];
               }
             } else {
               [dictClone close];
@@ -71,7 +70,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader, 
 }
 
 - (jlong)ramBytesUsed {
-  return (suggester_ != nil) ? [suggester_ ramBytesUsed] : 0;
+  return (suggester_ != nil) ? [((OrgApacheLuceneSearchSuggestDocumentNRTSuggester *) nil_chk(suggester_)) ramBytesUsed] : 0;
 }
 
 - (id<JavaUtilCollection>)getChildResources {
@@ -89,7 +88,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader, 
     { "initWithOrgApacheLuceneStoreIndexInput:withLong:withLong:withLong:withByte:", "CompletionsTermsReader", NULL, 0x0, "Ljava.io.IOException;", NULL },
     { "suggester", NULL, "Lorg.apache.lucene.search.suggest.document.NRTSuggester;", 0x21, "Ljava.io.IOException;", NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "minWeight_", NULL, 0x11, "J", NULL, NULL, .constantValue.asLong = 0 },
@@ -117,9 +116,11 @@ void OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_initWithOrgApach
 }
 
 OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader *new_OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_initWithOrgApacheLuceneStoreIndexInput_withLong_withLong_withLong_withByte_(OrgApacheLuceneStoreIndexInput *dictIn, jlong offset, jlong minWeight, jlong maxWeight, jbyte type) {
-  OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader *self = [OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader alloc];
-  OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_initWithOrgApacheLuceneStoreIndexInput_withLong_withLong_withLong_withByte_(self, dictIn, offset, minWeight, maxWeight, type);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader, initWithOrgApacheLuceneStoreIndexInput_withLong_withLong_withLong_withByte_, dictIn, offset, minWeight, maxWeight, type)
+}
+
+OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader *create_OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_initWithOrgApacheLuceneStoreIndexInput_withLong_withLong_withLong_withByte_(OrgApacheLuceneStoreIndexInput *dictIn, jlong offset, jlong minWeight, jlong maxWeight, jbyte type) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader, initWithOrgApacheLuceneStoreIndexInput_withLong_withLong_withLong_withByte_, dictIn, offset, minWeight, maxWeight, type)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader)

@@ -3,11 +3,8 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/surround/query/DistanceSubQuery.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/queryparser/surround/query/DistanceSubQuery.h"
-#include "org/apache/lucene/queryparser/surround/query/SpanNearClauseFactory.h"
 
 @interface OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery : NSObject
 

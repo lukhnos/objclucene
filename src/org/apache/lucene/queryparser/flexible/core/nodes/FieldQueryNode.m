@@ -24,11 +24,11 @@
 }
 
 - (id<JavaLangCharSequence>)getTermEscapedWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escaper {
-  return [((id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>) nil_chk(escaper)) escapeWithJavaLangCharSequence:self->text_ withJavaUtilLocale:JavaUtilLocale_getDefault() withOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum, NORMAL)];
+  return [((id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>) nil_chk(escaper)) escapeWithJavaLangCharSequence:self->text_ withJavaUtilLocale:JavaUtilLocale_getDefault() withOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type:JreLoadEnum(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type, NORMAL)];
 }
 
 - (id<JavaLangCharSequence>)getTermEscapeQuotedWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escaper {
-  return [((id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>) nil_chk(escaper)) escapeWithJavaLangCharSequence:self->text_ withJavaUtilLocale:JavaUtilLocale_getDefault() withOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum, STRING)];
+  return [((id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>) nil_chk(escaper)) escapeWithJavaLangCharSequence:self->text_ withJavaUtilLocale:JavaUtilLocale_getDefault() withOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type:JreLoadEnum(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type, STRING)];
 }
 
 - (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escaper {
@@ -95,7 +95,7 @@
 }
 
 - (OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *)cloneTree {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *fqn = (OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) check_class_cast([super cloneTree], [OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode class]);
+  OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *fqn = (OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) cast_chk([super cloneTree], [OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode class]);
   ((OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) nil_chk(fqn))->begin_ = self->begin_;
   fqn->end_ = self->end_;
   JreStrongAssign(&fqn->field_, self->field_);
@@ -165,9 +165,11 @@ void OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_initWithJavaLangC
 }
 
 OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(id<JavaLangCharSequence> field, id<JavaLangCharSequence> text, jint begin, jint end) {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *self = [OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode alloc];
-  OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(self, field, text, begin, end);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode, initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_, field, text, begin, end)
+}
+
+OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *create_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(id<JavaLangCharSequence> field, id<JavaLangCharSequence> text, jint begin, jint end) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode, initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_, field, text, begin, end)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode)

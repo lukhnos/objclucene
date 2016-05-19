@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneRangetreeHeapSliceReader_INCLUDE_ALL")
-#if OrgApacheLuceneRangetreeHeapSliceReader_RESTRICT
-#define OrgApacheLuceneRangetreeHeapSliceReader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneRangetreeHeapSliceReader")
+#ifdef RESTRICT_OrgApacheLuceneRangetreeHeapSliceReader
+#define INCLUDE_ALL_OrgApacheLuceneRangetreeHeapSliceReader 0
 #else
-#define OrgApacheLuceneRangetreeHeapSliceReader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneRangetreeHeapSliceReader 1
 #endif
-#undef OrgApacheLuceneRangetreeHeapSliceReader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneRangetreeHeapSliceReader
 
-#if !defined (_OrgApacheLuceneRangetreeHeapSliceReader_) && (OrgApacheLuceneRangetreeHeapSliceReader_INCLUDE_ALL || OrgApacheLuceneRangetreeHeapSliceReader_INCLUDE)
-#define _OrgApacheLuceneRangetreeHeapSliceReader_
+#if !defined (OrgApacheLuceneRangetreeHeapSliceReader_) && (INCLUDE_ALL_OrgApacheLuceneRangetreeHeapSliceReader || defined(INCLUDE_OrgApacheLuceneRangetreeHeapSliceReader))
+#define OrgApacheLuceneRangetreeHeapSliceReader_
 
-#define OrgApacheLuceneRangetreeSliceReader_RESTRICT 1
-#define OrgApacheLuceneRangetreeSliceReader_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneRangetreeSliceReader 1
+#define INCLUDE_OrgApacheLuceneRangetreeSliceReader 1
 #include "org/apache/lucene/rangetree/SliceReader.h"
 
 @class IOSIntArray;
@@ -63,8 +63,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneRangetreeHeapSliceReader_initWithLongArray
 
 FOUNDATION_EXPORT OrgApacheLuceneRangetreeHeapSliceReader *new_OrgApacheLuceneRangetreeHeapSliceReader_initWithLongArray_withLongArray_withIntArray_withInt_withInt_(IOSLongArray *values, IOSLongArray *ords, IOSIntArray *docIDs, jint start, jint end) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeHeapSliceReader *create_OrgApacheLuceneRangetreeHeapSliceReader_initWithLongArray_withLongArray_withIntArray_withInt_withInt_(IOSLongArray *values, IOSLongArray *ords, IOSIntArray *docIDs, jint start, jint end);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeHeapSliceReader)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneRangetreeHeapSliceReader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneRangetreeHeapSliceReader")

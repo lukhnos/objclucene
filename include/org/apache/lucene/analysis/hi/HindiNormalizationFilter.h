@@ -5,23 +5,34 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisHiHindiNormalizationFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisHiHindiNormalizationFilter_RESTRICT
-#define OrgApacheLuceneAnalysisHiHindiNormalizationFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisHiHindiNormalizationFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisHiHindiNormalizationFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisHiHindiNormalizationFilter 0
 #else
-#define OrgApacheLuceneAnalysisHiHindiNormalizationFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisHiHindiNormalizationFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisHiHindiNormalizationFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisHiHindiNormalizationFilter
 
-#if !defined (_OrgApacheLuceneAnalysisHiHindiNormalizationFilter_) && (OrgApacheLuceneAnalysisHiHindiNormalizationFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisHiHindiNormalizationFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisHiHindiNormalizationFilter_
+#if !defined (OrgApacheLuceneAnalysisHiHindiNormalizationFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisHiHindiNormalizationFilter || defined(INCLUDE_OrgApacheLuceneAnalysisHiHindiNormalizationFilter))
+#define OrgApacheLuceneAnalysisHiHindiNormalizationFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief A <code>TokenFilter</code> that applies <code>HindiNormalizer</code> to normalize the
+ orthography.
+ <p>
+ In some cases the normalization may cause unrelated terms to conflate, so
+ to prevent terms from being normalized use an instance of
+ <code>SetKeywordMarkerFilter</code> or a custom <code>TokenFilter</code> that sets
+ the <code>KeywordAttribute</code> before this <code>TokenStream</code>.
+ </p>
+ - seealso: HindiNormalizer
+ */
 @interface OrgApacheLuceneAnalysisHiHindiNormalizationFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
@@ -38,8 +49,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisHiHindiNormalizationFilter_initWit
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisHiHindiNormalizationFilter *new_OrgApacheLuceneAnalysisHiHindiNormalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisHiHindiNormalizationFilter *create_OrgApacheLuceneAnalysisHiHindiNormalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisHiHindiNormalizationFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisHiHindiNormalizationFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisHiHindiNormalizationFilter")

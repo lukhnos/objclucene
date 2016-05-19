@@ -5,33 +5,49 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory_) && (OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory))
+#define OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-#define OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent 1
 #include "org/apache/lucene/analysis/util/MultiTermAwareComponent.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 @class OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>CJKWidthFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_cjk" class="solr.TextField"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+ &lt;filter class="solr.CJKWidthFilterFactory"/&gt;
+ &lt;filter class="solr.LowerCaseFilterFactory"/&gt;
+ &lt;filter class="solr.CJKBigramFilterFactory"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilMultiTermAwareComponent >
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new CJKWidthFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -46,8 +62,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory_initWithJ
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory *new_OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory *create_OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory")

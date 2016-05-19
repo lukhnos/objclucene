@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexFilterLeafReader_INCLUDE_ALL")
-#if OrgApacheLuceneIndexFilterLeafReader_RESTRICT
-#define OrgApacheLuceneIndexFilterLeafReader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexFilterLeafReader")
+#ifdef RESTRICT_OrgApacheLuceneIndexFilterLeafReader
+#define INCLUDE_ALL_OrgApacheLuceneIndexFilterLeafReader 0
 #else
-#define OrgApacheLuceneIndexFilterLeafReader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexFilterLeafReader 1
 #endif
-#undef OrgApacheLuceneIndexFilterLeafReader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexFilterLeafReader
 
-#if !defined (_OrgApacheLuceneIndexFilterLeafReader_) && (OrgApacheLuceneIndexFilterLeafReader_INCLUDE_ALL || OrgApacheLuceneIndexFilterLeafReader_INCLUDE)
-#define _OrgApacheLuceneIndexFilterLeafReader_
+#if !defined (OrgApacheLuceneIndexFilterLeafReader_) && (INCLUDE_ALL_OrgApacheLuceneIndexFilterLeafReader || defined(INCLUDE_OrgApacheLuceneIndexFilterLeafReader))
+#define OrgApacheLuceneIndexFilterLeafReader_
 
-#define OrgApacheLuceneIndexLeafReader_RESTRICT 1
-#define OrgApacheLuceneIndexLeafReader_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexLeafReader 1
+#define INCLUDE_OrgApacheLuceneIndexLeafReader 1
 #include "org/apache/lucene/index/LeafReader.h"
 
 @class OrgApacheLuceneIndexBinaryDocValues;
@@ -31,13 +31,41 @@
 @protocol OrgApacheLuceneIndexLeafReader_CoreClosedListener;
 @protocol OrgApacheLuceneUtilBits;
 
+/*!
+ @brief A <code>FilterLeafReader</code> contains another LeafReader, which it
+ uses as its basic source of data, possibly transforming the data along the
+ way or providing additional functionality.
+ The class
+ <code>FilterLeafReader</code> itself simply implements all abstract methods
+ of <code>IndexReader</code> with versions that pass all requests to the
+ contained index reader. Subclasses of <code>FilterLeafReader</code> may
+ further override some of these methods and may also provide additional
+ methods and fields.
+ <p><b>NOTE</b>: If you override <code>getLiveDocs()</code>, you will likely need
+ to override <code>numDocs()</code> as well and vice-versa.
+ <p><b>NOTE</b>: If this <code>FilterLeafReader</code> does not change the
+ content the contained reader, you could consider overriding
+ <code>getCoreCacheKey()</code> so that
+ <code>CachingWrapperQuery</code> shares the same entries for this atomic reader
+ and the wrapped one. <code>getCombinedCoreAndDeletesKey()</code> could be
+ overridden as well if the <code>live docs</code> are not changed
+ either.
+ */
 @interface OrgApacheLuceneIndexFilterLeafReader : OrgApacheLuceneIndexLeafReader {
  @public
+  /*!
+   @brief The underlying LeafReader.
+   */
   OrgApacheLuceneIndexLeafReader *in_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief <p>Construct a FilterLeafReader based on the specified base reader.
+ <p>Note that base reader is closed if this FilterLeafReader is closed.</p>
+ @param inArg specified base reader.
+ */
 - (instancetype)initWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)inArg;
 
 - (void)addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener;
@@ -51,6 +79,9 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 - (OrgApacheLuceneIndexBinaryDocValues *)getBinaryDocValuesWithNSString:(NSString *)field;
 
+/*!
+ @brief Returns the wrapped <code>LeafReader</code>.
+ */
 - (OrgApacheLuceneIndexLeafReader *)getDelegate;
 
 - (id<OrgApacheLuceneUtilBits>)getDocsWithFieldWithNSString:(NSString *)field;
@@ -79,6 +110,10 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 - (NSString *)description;
 
+/*!
+ @brief Get the wrapped instance by <code>reader</code> as long as this reader is
+ an instance of <code>FilterLeafReader</code>.
+ */
 + (OrgApacheLuceneIndexLeafReader *)unwrapWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader;
 
 #pragma mark Protected
@@ -97,27 +132,40 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexFilterLeafReader_initWithOrgApacheLuc
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexFilterLeafReader *new_OrgApacheLuceneIndexFilterLeafReader_initWithOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneIndexLeafReader *inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexFilterLeafReader *create_OrgApacheLuceneIndexFilterLeafReader_initWithOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneIndexLeafReader *inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFilterLeafReader)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexFilterLeafReader_FilterFields_) && (OrgApacheLuceneIndexFilterLeafReader_INCLUDE_ALL || OrgApacheLuceneIndexFilterLeafReader_FilterFields_INCLUDE)
-#define _OrgApacheLuceneIndexFilterLeafReader_FilterFields_
+#if !defined (OrgApacheLuceneIndexFilterLeafReader_FilterFields_) && (INCLUDE_ALL_OrgApacheLuceneIndexFilterLeafReader || defined(INCLUDE_OrgApacheLuceneIndexFilterLeafReader_FilterFields))
+#define OrgApacheLuceneIndexFilterLeafReader_FilterFields_
 
-#define OrgApacheLuceneIndexFields_RESTRICT 1
-#define OrgApacheLuceneIndexFields_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexFields 1
+#define INCLUDE_OrgApacheLuceneIndexFields 1
 #include "org/apache/lucene/index/Fields.h"
 
 @class OrgApacheLuceneIndexTerms;
 @protocol JavaUtilIterator;
 
+/*!
+ @brief Base class for filtering <code>Fields</code>
+ implementations.
+ */
 @interface OrgApacheLuceneIndexFilterLeafReader_FilterFields : OrgApacheLuceneIndexFields {
  @public
+  /*!
+   @brief The underlying Fields instance.
+   */
   OrgApacheLuceneIndexFields *in_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new FilterFields.
+ @param inArg the underlying Fields instance.
+ */
 - (instancetype)initWithOrgApacheLuceneIndexFields:(OrgApacheLuceneIndexFields *)inArg;
 
 - (id<JavaUtilIterator>)iterator;
@@ -127,7 +175,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFilterLeafReader)
 - (OrgApacheLuceneIndexTerms *)termsWithNSString:(NSString *)field;
 
 #pragma mark Package-Private
-
 
 @end
 
@@ -139,26 +186,41 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexFilterLeafReader_FilterFields_initWit
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexFilterLeafReader_FilterFields *new_OrgApacheLuceneIndexFilterLeafReader_FilterFields_initWithOrgApacheLuceneIndexFields_(OrgApacheLuceneIndexFields *inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexFilterLeafReader_FilterFields *create_OrgApacheLuceneIndexFilterLeafReader_FilterFields_initWithOrgApacheLuceneIndexFields_(OrgApacheLuceneIndexFields *inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFilterLeafReader_FilterFields)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexFilterLeafReader_FilterTerms_) && (OrgApacheLuceneIndexFilterLeafReader_INCLUDE_ALL || OrgApacheLuceneIndexFilterLeafReader_FilterTerms_INCLUDE)
-#define _OrgApacheLuceneIndexFilterLeafReader_FilterTerms_
+#if !defined (OrgApacheLuceneIndexFilterLeafReader_FilterTerms_) && (INCLUDE_ALL_OrgApacheLuceneIndexFilterLeafReader || defined(INCLUDE_OrgApacheLuceneIndexFilterLeafReader_FilterTerms))
+#define OrgApacheLuceneIndexFilterLeafReader_FilterTerms_
 
-#define OrgApacheLuceneIndexTerms_RESTRICT 1
-#define OrgApacheLuceneIndexTerms_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexTerms 1
+#define INCLUDE_OrgApacheLuceneIndexTerms 1
 #include "org/apache/lucene/index/Terms.h"
 
 @class OrgApacheLuceneIndexTermsEnum;
 
+/*!
+ @brief Base class for filtering <code>Terms</code> implementations.
+ <p><b>NOTE</b>: If the order of terms and documents is not changed, and if
+ these terms are going to be intersected with automata, you could consider
+ overriding <code>intersect</code> for better performance.
+ */
 @interface OrgApacheLuceneIndexFilterLeafReader_FilterTerms : OrgApacheLuceneIndexTerms {
  @public
+  /*!
+   @brief The underlying Terms instance.
+   */
   OrgApacheLuceneIndexTerms *in_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new FilterTerms
+ @param inArg the underlying Terms instance.
+ */
 - (instancetype)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)inArg;
 
 - (jint)getDocCount;
@@ -191,29 +253,41 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexFilterLeafReader_FilterTerms_initWith
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexFilterLeafReader_FilterTerms *new_OrgApacheLuceneIndexFilterLeafReader_FilterTerms_initWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexFilterLeafReader_FilterTerms *create_OrgApacheLuceneIndexFilterLeafReader_FilterTerms_initWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFilterLeafReader_FilterTerms)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexFilterLeafReader_FilterTermsEnum_) && (OrgApacheLuceneIndexFilterLeafReader_INCLUDE_ALL || OrgApacheLuceneIndexFilterLeafReader_FilterTermsEnum_INCLUDE)
-#define _OrgApacheLuceneIndexFilterLeafReader_FilterTermsEnum_
+#if !defined (OrgApacheLuceneIndexFilterLeafReader_FilterTermsEnum_) && (INCLUDE_ALL_OrgApacheLuceneIndexFilterLeafReader || defined(INCLUDE_OrgApacheLuceneIndexFilterLeafReader_FilterTermsEnum))
+#define OrgApacheLuceneIndexFilterLeafReader_FilterTermsEnum_
 
-#define OrgApacheLuceneIndexTermsEnum_RESTRICT 1
-#define OrgApacheLuceneIndexTermsEnum_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexTermsEnum 1
+#define INCLUDE_OrgApacheLuceneIndexTermsEnum 1
 #include "org/apache/lucene/index/TermsEnum.h"
 
 @class OrgApacheLuceneIndexPostingsEnum;
-@class OrgApacheLuceneIndexTermsEnum_SeekStatusEnum;
+@class OrgApacheLuceneIndexTermsEnum_SeekStatus;
 @class OrgApacheLuceneUtilAttributeSource;
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief Base class for filtering <code>TermsEnum</code> implementations.
+ */
 @interface OrgApacheLuceneIndexFilterLeafReader_FilterTermsEnum : OrgApacheLuceneIndexTermsEnum {
  @public
+  /*!
+   @brief The underlying TermsEnum instance.
+   */
   OrgApacheLuceneIndexTermsEnum *in_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new FilterTermsEnum
+ @param inArg the underlying TermsEnum instance.
+ */
 - (instancetype)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)inArg;
 
 - (OrgApacheLuceneUtilAttributeSource *)attributes;
@@ -227,7 +301,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFilterLeafReader_FilterTerms)
 - (OrgApacheLuceneIndexPostingsEnum *)postingsWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)reuse
                                                                            withInt:(jint)flags;
 
-- (OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *)seekCeilWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)text;
+- (OrgApacheLuceneIndexTermsEnum_SeekStatus *)seekCeilWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)text;
 
 - (void)seekExactWithLong:(jlong)ord;
 
@@ -245,27 +319,39 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexFilterLeafReader_FilterTermsEnum_init
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexFilterLeafReader_FilterTermsEnum *new_OrgApacheLuceneIndexFilterLeafReader_FilterTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneIndexTermsEnum *inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexFilterLeafReader_FilterTermsEnum *create_OrgApacheLuceneIndexFilterLeafReader_FilterTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneIndexTermsEnum *inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFilterLeafReader_FilterTermsEnum)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexFilterLeafReader_FilterPostingsEnum_) && (OrgApacheLuceneIndexFilterLeafReader_INCLUDE_ALL || OrgApacheLuceneIndexFilterLeafReader_FilterPostingsEnum_INCLUDE)
-#define _OrgApacheLuceneIndexFilterLeafReader_FilterPostingsEnum_
+#if !defined (OrgApacheLuceneIndexFilterLeafReader_FilterPostingsEnum_) && (INCLUDE_ALL_OrgApacheLuceneIndexFilterLeafReader || defined(INCLUDE_OrgApacheLuceneIndexFilterLeafReader_FilterPostingsEnum))
+#define OrgApacheLuceneIndexFilterLeafReader_FilterPostingsEnum_
 
-#define OrgApacheLuceneIndexPostingsEnum_RESTRICT 1
-#define OrgApacheLuceneIndexPostingsEnum_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexPostingsEnum 1
+#define INCLUDE_OrgApacheLuceneIndexPostingsEnum 1
 #include "org/apache/lucene/index/PostingsEnum.h"
 
 @class OrgApacheLuceneUtilAttributeSource;
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief Base class for filtering <code>PostingsEnum</code> implementations.
+ */
 @interface OrgApacheLuceneIndexFilterLeafReader_FilterPostingsEnum : OrgApacheLuceneIndexPostingsEnum {
  @public
+  /*!
+   @brief The underlying PostingsEnum instance.
+   */
   OrgApacheLuceneIndexPostingsEnum *in_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief Create a new FilterPostingsEnum
+ @param inArg the underlying PostingsEnum instance.
+ */
 - (instancetype)initWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)inArg;
 
 - (jint)advanceWithInt:(jint)target;
@@ -298,8 +384,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexFilterLeafReader_FilterPostingsEnum_i
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexFilterLeafReader_FilterPostingsEnum *new_OrgApacheLuceneIndexFilterLeafReader_FilterPostingsEnum_initWithOrgApacheLuceneIndexPostingsEnum_(OrgApacheLuceneIndexPostingsEnum *inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexFilterLeafReader_FilterPostingsEnum *create_OrgApacheLuceneIndexFilterLeafReader_FilterPostingsEnum_initWithOrgApacheLuceneIndexPostingsEnum_(OrgApacheLuceneIndexPostingsEnum *inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFilterLeafReader_FilterPostingsEnum)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexFilterLeafReader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexFilterLeafReader")

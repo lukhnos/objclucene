@@ -18,7 +18,7 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName {
-  return [new_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_([new_OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_init() autorelease]) autorelease];
+  return create_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_(create_OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_init());
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -37,9 +37,11 @@ void OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer_init(OrgApacheLuceneAnalysisC
 }
 
 OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer *new_OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer_init() {
-  OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer *self = [OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer alloc];
-  OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer, init)
+}
+
+OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer *create_OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer)

@@ -20,7 +20,7 @@
 }
 
 - (OrgApacheLuceneAnalysisElGreekLowerCaseFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg {
-  return [new_OrgApacheLuceneAnalysisElGreekLowerCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(inArg) autorelease];
+  return create_OrgApacheLuceneAnalysisElGreekLowerCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(inArg);
 }
 
 - (OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory *)getMultiTermComponent {
@@ -29,7 +29,7 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "GreekLowerCaseFilterFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "GreekLowerCaseFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.el.GreekLowerCaseFilter;", 0x1, NULL, NULL },
     { "getMultiTermComponent", NULL, "Lorg.apache.lucene.analysis.util.AbstractAnalysisFactory;", 0x1, NULL, NULL },
   };
@@ -42,14 +42,16 @@
 void OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory *self, id<JavaUtilMap> args) {
   OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory *new_OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory *self = [OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory alloc];
-  OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory *create_OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisElGreekLowerCaseFilterFactory)

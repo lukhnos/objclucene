@@ -18,7 +18,7 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName {
-  return [new_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_([new_OrgApacheLuceneAnalysisCoreKeywordTokenizer_init() autorelease]) autorelease];
+  return create_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_(create_OrgApacheLuceneAnalysisCoreKeywordTokenizer_init());
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -37,9 +37,11 @@ void OrgApacheLuceneAnalysisCoreKeywordAnalyzer_init(OrgApacheLuceneAnalysisCore
 }
 
 OrgApacheLuceneAnalysisCoreKeywordAnalyzer *new_OrgApacheLuceneAnalysisCoreKeywordAnalyzer_init() {
-  OrgApacheLuceneAnalysisCoreKeywordAnalyzer *self = [OrgApacheLuceneAnalysisCoreKeywordAnalyzer alloc];
-  OrgApacheLuceneAnalysisCoreKeywordAnalyzer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCoreKeywordAnalyzer, init)
+}
+
+OrgApacheLuceneAnalysisCoreKeywordAnalyzer *create_OrgApacheLuceneAnalysisCoreKeywordAnalyzer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCoreKeywordAnalyzer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCoreKeywordAnalyzer)

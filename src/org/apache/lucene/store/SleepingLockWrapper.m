@@ -24,9 +24,21 @@
 
 @end
 
-jlong OrgApacheLuceneStoreSleepingLockWrapper_DEFAULT_POLL_INTERVAL_ = 1000;
+jlong OrgApacheLuceneStoreSleepingLockWrapper_DEFAULT_POLL_INTERVAL = 1000;
 
 @implementation OrgApacheLuceneStoreSleepingLockWrapper
+
++ (jlong)LOCK_OBTAIN_WAIT_FOREVER {
+  return OrgApacheLuceneStoreSleepingLockWrapper_LOCK_OBTAIN_WAIT_FOREVER;
+}
+
++ (jlong)DEFAULT_POLL_INTERVAL {
+  return OrgApacheLuceneStoreSleepingLockWrapper_DEFAULT_POLL_INTERVAL;
+}
+
++ (void)setDEFAULT_POLL_INTERVAL:(jlong)value {
+  OrgApacheLuceneStoreSleepingLockWrapper_DEFAULT_POLL_INTERVAL = value;
+}
 
 - (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)delegate
                                              withLong:(jlong)lockWaitTimeout {
@@ -58,7 +70,7 @@ jlong OrgApacheLuceneStoreSleepingLockWrapper_DEFAULT_POLL_INTERVAL_ = 1000;
       JavaLangThread_sleepWithLong_(pollInterval_);
     }
     @catch (JavaLangInterruptedException *ie) {
-      @throw [new_OrgApacheLuceneUtilThreadInterruptedException_initWithJavaLangInterruptedException_(ie) autorelease];
+      @throw create_OrgApacheLuceneUtilThreadInterruptedException_initWithJavaLangInterruptedException_(ie);
     }
   }
   while (sleepCount++ < maxSleepCount || lockWaitTimeout_ == OrgApacheLuceneStoreSleepingLockWrapper_LOCK_OBTAIN_WAIT_FOREVER);
@@ -66,7 +78,7 @@ jlong OrgApacheLuceneStoreSleepingLockWrapper_DEFAULT_POLL_INTERVAL_ = 1000;
   if (failureReason != nil) {
     JreStrAppend(&reason, "$@", @": ", failureReason);
   }
-  @throw [new_OrgApacheLuceneStoreLockObtainFailedException_initWithNSString_withJavaLangThrowable_(reason, failureReason) autorelease];
+  @throw create_OrgApacheLuceneStoreLockObtainFailedException_initWithNSString_withNSException_(reason, failureReason);
 }
 
 - (NSString *)description {
@@ -82,7 +94,7 @@ jlong OrgApacheLuceneStoreSleepingLockWrapper_DEFAULT_POLL_INTERVAL_ = 1000;
   };
   static const J2ObjcFieldInfo fields[] = {
     { "LOCK_OBTAIN_WAIT_FOREVER", "LOCK_OBTAIN_WAIT_FOREVER", 0x19, "J", NULL, NULL, .constantValue.asLong = OrgApacheLuceneStoreSleepingLockWrapper_LOCK_OBTAIN_WAIT_FOREVER },
-    { "DEFAULT_POLL_INTERVAL_", NULL, 0x9, "J", &OrgApacheLuceneStoreSleepingLockWrapper_DEFAULT_POLL_INTERVAL_, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_POLL_INTERVAL", "DEFAULT_POLL_INTERVAL", 0x9, "J", &OrgApacheLuceneStoreSleepingLockWrapper_DEFAULT_POLL_INTERVAL, NULL, .constantValue.asLong = 0 },
     { "lockWaitTimeout_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
     { "pollInterval_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
   };
@@ -93,13 +105,15 @@ jlong OrgApacheLuceneStoreSleepingLockWrapper_DEFAULT_POLL_INTERVAL_ = 1000;
 @end
 
 void OrgApacheLuceneStoreSleepingLockWrapper_initWithOrgApacheLuceneStoreDirectory_withLong_(OrgApacheLuceneStoreSleepingLockWrapper *self, OrgApacheLuceneStoreDirectory *delegate, jlong lockWaitTimeout) {
-  OrgApacheLuceneStoreSleepingLockWrapper_initWithOrgApacheLuceneStoreDirectory_withLong_withLong_(self, delegate, lockWaitTimeout, OrgApacheLuceneStoreSleepingLockWrapper_DEFAULT_POLL_INTERVAL_);
+  OrgApacheLuceneStoreSleepingLockWrapper_initWithOrgApacheLuceneStoreDirectory_withLong_withLong_(self, delegate, lockWaitTimeout, OrgApacheLuceneStoreSleepingLockWrapper_DEFAULT_POLL_INTERVAL);
 }
 
 OrgApacheLuceneStoreSleepingLockWrapper *new_OrgApacheLuceneStoreSleepingLockWrapper_initWithOrgApacheLuceneStoreDirectory_withLong_(OrgApacheLuceneStoreDirectory *delegate, jlong lockWaitTimeout) {
-  OrgApacheLuceneStoreSleepingLockWrapper *self = [OrgApacheLuceneStoreSleepingLockWrapper alloc];
-  OrgApacheLuceneStoreSleepingLockWrapper_initWithOrgApacheLuceneStoreDirectory_withLong_(self, delegate, lockWaitTimeout);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreSleepingLockWrapper, initWithOrgApacheLuceneStoreDirectory_withLong_, delegate, lockWaitTimeout)
+}
+
+OrgApacheLuceneStoreSleepingLockWrapper *create_OrgApacheLuceneStoreSleepingLockWrapper_initWithOrgApacheLuceneStoreDirectory_withLong_(OrgApacheLuceneStoreDirectory *delegate, jlong lockWaitTimeout) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreSleepingLockWrapper, initWithOrgApacheLuceneStoreDirectory_withLong_, delegate, lockWaitTimeout)
 }
 
 void OrgApacheLuceneStoreSleepingLockWrapper_initWithOrgApacheLuceneStoreDirectory_withLong_withLong_(OrgApacheLuceneStoreSleepingLockWrapper *self, OrgApacheLuceneStoreDirectory *delegate, jlong lockWaitTimeout, jlong pollInterval) {
@@ -107,17 +121,19 @@ void OrgApacheLuceneStoreSleepingLockWrapper_initWithOrgApacheLuceneStoreDirecto
   self->lockWaitTimeout_ = lockWaitTimeout;
   self->pollInterval_ = pollInterval;
   if (lockWaitTimeout < 0 && lockWaitTimeout != OrgApacheLuceneStoreSleepingLockWrapper_LOCK_OBTAIN_WAIT_FOREVER) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$JC", @"lockWaitTimeout should be LOCK_OBTAIN_WAIT_FOREVER or a non-negative number (got ", lockWaitTimeout, ')')) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$JC", @"lockWaitTimeout should be LOCK_OBTAIN_WAIT_FOREVER or a non-negative number (got ", lockWaitTimeout, ')'));
   }
   if (pollInterval < 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$JC", @"pollInterval must be a non-negative number (got ", pollInterval, ')')) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$JC", @"pollInterval must be a non-negative number (got ", pollInterval, ')'));
   }
 }
 
 OrgApacheLuceneStoreSleepingLockWrapper *new_OrgApacheLuceneStoreSleepingLockWrapper_initWithOrgApacheLuceneStoreDirectory_withLong_withLong_(OrgApacheLuceneStoreDirectory *delegate, jlong lockWaitTimeout, jlong pollInterval) {
-  OrgApacheLuceneStoreSleepingLockWrapper *self = [OrgApacheLuceneStoreSleepingLockWrapper alloc];
-  OrgApacheLuceneStoreSleepingLockWrapper_initWithOrgApacheLuceneStoreDirectory_withLong_withLong_(self, delegate, lockWaitTimeout, pollInterval);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreSleepingLockWrapper, initWithOrgApacheLuceneStoreDirectory_withLong_withLong_, delegate, lockWaitTimeout, pollInterval)
+}
+
+OrgApacheLuceneStoreSleepingLockWrapper *create_OrgApacheLuceneStoreSleepingLockWrapper_initWithOrgApacheLuceneStoreDirectory_withLong_withLong_(OrgApacheLuceneStoreDirectory *delegate, jlong lockWaitTimeout, jlong pollInterval) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreSleepingLockWrapper, initWithOrgApacheLuceneStoreDirectory_withLong_withLong_, delegate, lockWaitTimeout, pollInterval)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreSleepingLockWrapper)

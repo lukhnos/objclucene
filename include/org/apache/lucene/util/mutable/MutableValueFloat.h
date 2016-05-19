@@ -5,21 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilMutableMutableValueFloat_INCLUDE_ALL")
-#if OrgApacheLuceneUtilMutableMutableValueFloat_RESTRICT
-#define OrgApacheLuceneUtilMutableMutableValueFloat_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueFloat")
+#ifdef RESTRICT_OrgApacheLuceneUtilMutableMutableValueFloat
+#define INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueFloat 0
 #else
-#define OrgApacheLuceneUtilMutableMutableValueFloat_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueFloat 1
 #endif
-#undef OrgApacheLuceneUtilMutableMutableValueFloat_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilMutableMutableValueFloat
 
-#if !defined (_OrgApacheLuceneUtilMutableMutableValueFloat_) && (OrgApacheLuceneUtilMutableMutableValueFloat_INCLUDE_ALL || OrgApacheLuceneUtilMutableMutableValueFloat_INCLUDE)
-#define _OrgApacheLuceneUtilMutableMutableValueFloat_
+#if !defined (OrgApacheLuceneUtilMutableMutableValueFloat_) && (INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueFloat || defined(INCLUDE_OrgApacheLuceneUtilMutableMutableValueFloat))
+#define OrgApacheLuceneUtilMutableMutableValueFloat_
 
-#define OrgApacheLuceneUtilMutableMutableValue_RESTRICT 1
-#define OrgApacheLuceneUtilMutableMutableValue_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilMutableMutableValue 1
+#define INCLUDE_OrgApacheLuceneUtilMutableMutableValue 1
 #include "org/apache/lucene/util/mutable/MutableValue.h"
 
+/*!
+ @brief <code>MutableValue</code> implementation of type <code>float</code>.
+ When mutating instances of this object, the caller is responsible for ensuring 
+ that any instance where <code>exists</code> is set to <code>false</code> must also 
+ <code>value</code> set to <code>0.0F</code> for proper operation.
+ */
 @interface OrgApacheLuceneUtilMutableMutableValueFloat : OrgApacheLuceneUtilMutableMutableValue {
  @public
   jfloat value_;
@@ -49,8 +55,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilMutableMutableValueFloat_init(OrgApach
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilMutableMutableValueFloat *new_OrgApacheLuceneUtilMutableMutableValueFloat_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilMutableMutableValueFloat *create_OrgApacheLuceneUtilMutableMutableValueFloat_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilMutableMutableValueFloat)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilMutableMutableValueFloat_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueFloat")

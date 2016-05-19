@@ -5,31 +5,45 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSimilaritiesNormalizationH3_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSimilaritiesNormalizationH3_RESTRICT
-#define OrgApacheLuceneSearchSimilaritiesNormalizationH3_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesNormalizationH3")
+#ifdef RESTRICT_OrgApacheLuceneSearchSimilaritiesNormalizationH3
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesNormalizationH3 0
 #else
-#define OrgApacheLuceneSearchSimilaritiesNormalizationH3_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesNormalizationH3 1
 #endif
-#undef OrgApacheLuceneSearchSimilaritiesNormalizationH3_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSimilaritiesNormalizationH3
 
-#if !defined (_OrgApacheLuceneSearchSimilaritiesNormalizationH3_) && (OrgApacheLuceneSearchSimilaritiesNormalizationH3_INCLUDE_ALL || OrgApacheLuceneSearchSimilaritiesNormalizationH3_INCLUDE)
-#define _OrgApacheLuceneSearchSimilaritiesNormalizationH3_
+#if !defined (OrgApacheLuceneSearchSimilaritiesNormalizationH3_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesNormalizationH3 || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesNormalizationH3))
+#define OrgApacheLuceneSearchSimilaritiesNormalizationH3_
 
-#define OrgApacheLuceneSearchSimilaritiesNormalization_RESTRICT 1
-#define OrgApacheLuceneSearchSimilaritiesNormalization_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSimilaritiesNormalization 1
+#define INCLUDE_OrgApacheLuceneSearchSimilaritiesNormalization 1
 #include "org/apache/lucene/search/similarities/Normalization.h"
 
 @class OrgApacheLuceneSearchSimilaritiesBasicStats;
 
+/*!
+ @brief Dirichlet Priors normalization
+ */
 @interface OrgApacheLuceneSearchSimilaritiesNormalizationH3 : OrgApacheLuceneSearchSimilaritiesNormalization
 
 #pragma mark Public
 
+/*!
+ @brief Calls <code>NormalizationH3(800)</code>
+ */
 - (instancetype)init;
 
+/*!
+ @brief Creates NormalizationH3 with the supplied parameter <code>&mu;</code>.
+ @param mu smoothing parameter <code>&mu;</code>
+ */
 - (instancetype)initWithFloat:(jfloat)mu;
 
+/*!
+ @brief Returns the parameter <code>&mu;</code>
+ - seealso: #NormalizationH3(float)
+ */
 - (jfloat)getMu;
 
 - (jfloat)tfnWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
@@ -46,12 +60,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesNormalizationH3_init(Org
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesNormalizationH3 *new_OrgApacheLuceneSearchSimilaritiesNormalizationH3_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesNormalizationH3 *create_OrgApacheLuceneSearchSimilaritiesNormalizationH3_init();
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesNormalizationH3_initWithFloat_(OrgApacheLuceneSearchSimilaritiesNormalizationH3 *self, jfloat mu);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesNormalizationH3 *new_OrgApacheLuceneSearchSimilaritiesNormalizationH3_initWithFloat_(jfloat mu) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesNormalizationH3 *create_OrgApacheLuceneSearchSimilaritiesNormalizationH3_initWithFloat_(jfloat mu);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesNormalizationH3)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSimilaritiesNormalizationH3_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesNormalizationH3")

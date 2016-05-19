@@ -5,28 +5,43 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisElGreekStemFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisElGreekStemFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisElGreekStemFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisElGreekStemFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisElGreekStemFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisElGreekStemFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisElGreekStemFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisElGreekStemFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisElGreekStemFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisElGreekStemFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisElGreekStemFilterFactory_) && (OrgApacheLuceneAnalysisElGreekStemFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisElGreekStemFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisElGreekStemFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisElGreekStemFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisElGreekStemFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisElGreekStemFilterFactory))
+#define OrgApacheLuceneAnalysisElGreekStemFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>GreekStemFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_gstem" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+ &lt;filter class="solr.GreekLowerCaseFilterFactory"/&gt;
+ &lt;filter class="solr.GreekStemFilterFactory"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisElGreekStemFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new GreekStemFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -39,8 +54,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisElGreekStemFilterFactory_initWithJ
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisElGreekStemFilterFactory *new_OrgApacheLuceneAnalysisElGreekStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisElGreekStemFilterFactory *create_OrgApacheLuceneAnalysisElGreekStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisElGreekStemFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisElGreekStemFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisElGreekStemFilterFactory")

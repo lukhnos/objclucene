@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexMappingMultiPostingsEnum_INCLUDE_ALL")
-#if OrgApacheLuceneIndexMappingMultiPostingsEnum_RESTRICT
-#define OrgApacheLuceneIndexMappingMultiPostingsEnum_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexMappingMultiPostingsEnum")
+#ifdef RESTRICT_OrgApacheLuceneIndexMappingMultiPostingsEnum
+#define INCLUDE_ALL_OrgApacheLuceneIndexMappingMultiPostingsEnum 0
 #else
-#define OrgApacheLuceneIndexMappingMultiPostingsEnum_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexMappingMultiPostingsEnum 1
 #endif
-#undef OrgApacheLuceneIndexMappingMultiPostingsEnum_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexMappingMultiPostingsEnum
 
-#if !defined (_OrgApacheLuceneIndexMappingMultiPostingsEnum_) && (OrgApacheLuceneIndexMappingMultiPostingsEnum_INCLUDE_ALL || OrgApacheLuceneIndexMappingMultiPostingsEnum_INCLUDE)
-#define _OrgApacheLuceneIndexMappingMultiPostingsEnum_
+#if !defined (OrgApacheLuceneIndexMappingMultiPostingsEnum_) && (INCLUDE_ALL_OrgApacheLuceneIndexMappingMultiPostingsEnum || defined(INCLUDE_OrgApacheLuceneIndexMappingMultiPostingsEnum))
+#define OrgApacheLuceneIndexMappingMultiPostingsEnum_
 
-#define OrgApacheLuceneIndexPostingsEnum_RESTRICT 1
-#define OrgApacheLuceneIndexPostingsEnum_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexPostingsEnum 1
+#define INCLUDE_OrgApacheLuceneIndexPostingsEnum 1
 #include "org/apache/lucene/index/PostingsEnum.h"
 
 @class IOSObjectArray;
@@ -26,6 +26,10 @@
 @class OrgApacheLuceneIndexMultiPostingsEnum;
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief Exposes flex API, merged from flex API of sub-segments,
+ remapping docIDs (this is used for segment merging).
+ */
 @interface OrgApacheLuceneIndexMappingMultiPostingsEnum : OrgApacheLuceneIndexPostingsEnum {
  @public
   jint numSubs_;
@@ -40,6 +44,9 @@
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ */
 - (instancetype)initWithNSString:(NSString *)field
 withOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState;
 
@@ -53,10 +60,17 @@ withOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState;
 
 - (jint)freq;
 
+/*!
+ @brief How many sub-readers we are merging.
+ - seealso: #getSubs
+ */
 - (jint)getNumSubs;
 
 - (OrgApacheLuceneUtilBytesRef *)getPayload;
 
+/*!
+ @brief Returns sub-readers we are merging.
+ */
 - (IOSObjectArray *)getSubs;
 
 - (jint)nextDoc;
@@ -82,8 +96,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexMappingMultiPostingsEnum_initWithNSSt
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexMappingMultiPostingsEnum *new_OrgApacheLuceneIndexMappingMultiPostingsEnum_initWithNSString_withOrgApacheLuceneIndexMergeState_(NSString *field, OrgApacheLuceneIndexMergeState *mergeState) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexMappingMultiPostingsEnum *create_OrgApacheLuceneIndexMappingMultiPostingsEnum_initWithNSString_withOrgApacheLuceneIndexMergeState_(NSString *field, OrgApacheLuceneIndexMergeState *mergeState);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMappingMultiPostingsEnum)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexMappingMultiPostingsEnum_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexMappingMultiPostingsEnum")

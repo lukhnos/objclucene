@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSpansSpanQuery_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSpansSpanQuery_RESTRICT
-#define OrgApacheLuceneSearchSpansSpanQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanQuery")
+#ifdef RESTRICT_OrgApacheLuceneSearchSpansSpanQuery
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanQuery 0
 #else
-#define OrgApacheLuceneSearchSpansSpanQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanQuery 1
 #endif
-#undef OrgApacheLuceneSearchSpansSpanQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSpansSpanQuery
 
-#if !defined (_OrgApacheLuceneSearchSpansSpanQuery_) && (OrgApacheLuceneSearchSpansSpanQuery_INCLUDE_ALL || OrgApacheLuceneSearchSpansSpanQuery_INCLUDE)
-#define _OrgApacheLuceneSearchSpansSpanQuery_
+#if !defined (OrgApacheLuceneSearchSpansSpanQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanQuery || defined(INCLUDE_OrgApacheLuceneSearchSpansSpanQuery))
+#define OrgApacheLuceneSearchSpansSpanQuery_
 
-#define OrgApacheLuceneSearchQuery_RESTRICT 1
-#define OrgApacheLuceneSearchQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchQuery 1
+#define INCLUDE_OrgApacheLuceneSearchQuery 1
 #include "org/apache/lucene/search/Query.h"
 
 @class IOSObjectArray;
@@ -26,21 +26,40 @@
 @protocol JavaUtilCollection;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Base class for span-based queries.
+ */
 @interface OrgApacheLuceneSearchSpansSpanQuery : OrgApacheLuceneSearchQuery
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @brief Create a SpanWeight for this query
+ @param searcher the IndexSearcher to be searched across
+ @param needsScores if the query needs scores
+ @return a SpanWeight
+ @throws IOException on error
+ */
 - (OrgApacheLuceneSearchSpansSpanWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                                  withBoolean:(jboolean)needsScores;
 
+/*!
+ @brief Returns the name of the field matched by this query.
+ */
 - (NSString *)getField;
 
 #pragma mark Protected
 
+/*!
+ @brief Build a map of terms to termcontexts, for use in constructing SpanWeights
+ */
 + (id<JavaUtilMap>)getTermContextsWithJavaUtilCollection:(id<JavaUtilCollection>)weights;
 
+/*!
+ @brief Build a map of terms to termcontexts, for use in constructing SpanWeights
+ */
 + (id<JavaUtilMap>)getTermContextsWithOrgApacheLuceneSearchSpansSpanWeightArray:(IOSObjectArray *)weights;
 
 @end
@@ -57,4 +76,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanQuery)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSpansSpanQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanQuery")

@@ -5,58 +5,123 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_RESTRICT
-#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer 0
 #else
-#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer 1
 #endif
-#undef OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer
 
-#if !defined (_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_) && (OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_INCLUDE_ALL || OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_INCLUDE)
-#define _OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_
+#if !defined (OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer || defined(INCLUDE_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer))
+#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_
 
-#define OrgApacheLuceneAnalysisTokenizer_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenizer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenizer 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenizer 1
 #include "org/apache/lucene/analysis/Tokenizer.h"
 
 @class IOSObjectArray;
 @class OrgApacheLuceneUtilAttributeFactory;
 @protocol JavaUtilSet;
 
-#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_ALPHANUM_ID 0
-#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_APOSTROPHE_ID 1
-#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_ACRONYM_ID 2
-#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_COMPANY_ID 3
-#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_EMAIL_ID 4
-#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_HOST_ID 5
-#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_NUM_ID 6
-#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_CJ_ID 7
-#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_INTERNAL_LINK_ID 8
-#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_EXTERNAL_LINK_ID 9
-#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_CITATION_ID 10
-#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_CATEGORY_ID 11
-#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_BOLD_ID 12
-#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_ITALICS_ID 13
-#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_BOLD_ITALICS_ID 14
-#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_HEADING_ID 15
-#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_SUB_HEADING_ID 16
-#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_EXTERNAL_LINK_URL_ID 17
-#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_TOKENS_ONLY 0
-#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_UNTOKENIZED_ONLY 1
-#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_BOTH 2
-#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_UNTOKENIZED_TOKEN_FLAG 1
-
+/*!
+ @brief Extension of StandardTokenizer that is aware of Wikipedia syntax.
+ It is based off of the
+ Wikipedia tutorial available at http://en.wikipedia.org/wiki/Wikipedia:Tutorial, but it may not be complete.
+ */
 @interface OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer : OrgApacheLuceneAnalysisTokenizer
+
++ (NSString *)INTERNAL_LINK;
+
++ (NSString *)EXTERNAL_LINK;
+
++ (NSString *)EXTERNAL_LINK_URL;
+
++ (NSString *)CITATION;
+
++ (NSString *)CATEGORY;
+
++ (NSString *)BOLD;
+
++ (NSString *)ITALICS;
+
++ (NSString *)BOLD_ITALICS;
+
++ (NSString *)HEADING;
+
++ (NSString *)SUB_HEADING;
+
++ (jint)ALPHANUM_ID;
+
++ (jint)APOSTROPHE_ID;
+
++ (jint)ACRONYM_ID;
+
++ (jint)COMPANY_ID;
+
++ (jint)EMAIL_ID;
+
++ (jint)HOST_ID;
+
++ (jint)NUM_ID;
+
++ (jint)CJ_ID;
+
++ (jint)INTERNAL_LINK_ID;
+
++ (jint)EXTERNAL_LINK_ID;
+
++ (jint)CITATION_ID;
+
++ (jint)CATEGORY_ID;
+
++ (jint)BOLD_ID;
+
++ (jint)ITALICS_ID;
+
++ (jint)BOLD_ITALICS_ID;
+
++ (jint)HEADING_ID;
+
++ (jint)SUB_HEADING_ID;
+
++ (jint)EXTERNAL_LINK_URL_ID;
+
++ (IOSObjectArray *)TOKEN_TYPES;
+
++ (jint)TOKENS_ONLY;
+
++ (jint)UNTOKENIZED_ONLY;
+
++ (jint)BOTH;
+
++ (jint)UNTOKENIZED_TOKEN_FLAG;
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new instance of the <code>WikipediaTokenizer</code>.
+ Attaches the
+ <code>input</code> to a newly created JFlex scanner.
+ */
 - (instancetype)init;
 
+/*!
+ @brief Creates a new instance of the <code>org.apache.lucene.analysis.wikipedia.WikipediaTokenizer</code>.
+ Attaches the
+ <code>input</code> to a the newly created JFlex scanner. Uses the given <code>org.apache.lucene.util.AttributeFactory</code>.
+ @param tokenOutput One of <code>TOKENS_ONLY</code>, <code>UNTOKENIZED_ONLY</code>, <code>BOTH</code>
+ */
 - (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory
                                                     withInt:(jint)tokenOutput
                                             withJavaUtilSet:(id<JavaUtilSet>)untokenizedTypes;
 
+/*!
+ @brief Creates a new instance of the <code>org.apache.lucene.analysis.wikipedia.WikipediaTokenizer</code>.
+ Attaches the
+ <code>input</code> to a the newly created JFlex scanner.
+ @param tokenOutput One of <code>TOKENS_ONLY</code>, <code>UNTOKENIZED_ONLY</code>, <code>BOTH</code>
+ */
 - (instancetype)initWithInt:(jint)tokenOutput
             withJavaUtilSet:(id<JavaUtilSet>)untokenizedTypes;
 
@@ -72,97 +137,184 @@
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_INTERNAL_LINK_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, INTERNAL_LINK_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_get_INTERNAL_LINK();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_INTERNAL_LINK;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, INTERNAL_LINK, NSString *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_EXTERNAL_LINK_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, EXTERNAL_LINK_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_get_EXTERNAL_LINK();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_EXTERNAL_LINK;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, EXTERNAL_LINK, NSString *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_EXTERNAL_LINK_URL_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, EXTERNAL_LINK_URL_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_get_EXTERNAL_LINK_URL();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_EXTERNAL_LINK_URL;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, EXTERNAL_LINK_URL, NSString *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_CITATION_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, CITATION_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_get_CITATION();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_CITATION;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, CITATION, NSString *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_CATEGORY_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, CATEGORY_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_get_CATEGORY();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_CATEGORY;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, CATEGORY, NSString *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_BOLD_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, BOLD_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_get_BOLD();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_BOLD;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, BOLD, NSString *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_ITALICS_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, ITALICS_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_get_ITALICS();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_ITALICS;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, ITALICS, NSString *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_BOLD_ITALICS_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, BOLD_ITALICS_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_get_BOLD_ITALICS();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_BOLD_ITALICS;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, BOLD_ITALICS, NSString *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_HEADING_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, HEADING_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_get_HEADING();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_HEADING;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, HEADING, NSString *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_SUB_HEADING_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, SUB_HEADING_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_get_SUB_HEADING();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_SUB_HEADING;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, SUB_HEADING, NSString *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, ALPHANUM_ID, jint)
+inline jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_get_ALPHANUM_ID();
+#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_ALPHANUM_ID 0
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, ALPHANUM_ID, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, APOSTROPHE_ID, jint)
+inline jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_get_APOSTROPHE_ID();
+#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_APOSTROPHE_ID 1
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, APOSTROPHE_ID, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, ACRONYM_ID, jint)
+inline jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_get_ACRONYM_ID();
+#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_ACRONYM_ID 2
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, ACRONYM_ID, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, COMPANY_ID, jint)
+inline jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_get_COMPANY_ID();
+#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_COMPANY_ID 3
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, COMPANY_ID, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, EMAIL_ID, jint)
+inline jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_get_EMAIL_ID();
+#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_EMAIL_ID 4
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, EMAIL_ID, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, HOST_ID, jint)
+inline jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_get_HOST_ID();
+#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_HOST_ID 5
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, HOST_ID, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, NUM_ID, jint)
+inline jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_get_NUM_ID();
+#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_NUM_ID 6
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, NUM_ID, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, CJ_ID, jint)
+inline jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_get_CJ_ID();
+#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_CJ_ID 7
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, CJ_ID, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, INTERNAL_LINK_ID, jint)
+inline jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_get_INTERNAL_LINK_ID();
+#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_INTERNAL_LINK_ID 8
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, INTERNAL_LINK_ID, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, EXTERNAL_LINK_ID, jint)
+inline jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_get_EXTERNAL_LINK_ID();
+#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_EXTERNAL_LINK_ID 9
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, EXTERNAL_LINK_ID, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, CITATION_ID, jint)
+inline jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_get_CITATION_ID();
+#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_CITATION_ID 10
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, CITATION_ID, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, CATEGORY_ID, jint)
+inline jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_get_CATEGORY_ID();
+#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_CATEGORY_ID 11
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, CATEGORY_ID, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, BOLD_ID, jint)
+inline jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_get_BOLD_ID();
+#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_BOLD_ID 12
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, BOLD_ID, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, ITALICS_ID, jint)
+inline jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_get_ITALICS_ID();
+#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_ITALICS_ID 13
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, ITALICS_ID, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, BOLD_ITALICS_ID, jint)
+inline jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_get_BOLD_ITALICS_ID();
+#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_BOLD_ITALICS_ID 14
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, BOLD_ITALICS_ID, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, HEADING_ID, jint)
+inline jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_get_HEADING_ID();
+#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_HEADING_ID 15
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, HEADING_ID, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, SUB_HEADING_ID, jint)
+inline jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_get_SUB_HEADING_ID();
+#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_SUB_HEADING_ID 16
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, SUB_HEADING_ID, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, EXTERNAL_LINK_URL_ID, jint)
+inline jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_get_EXTERNAL_LINK_URL_ID();
+#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_EXTERNAL_LINK_URL_ID 17
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, EXTERNAL_LINK_URL_ID, jint)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_TOKEN_TYPES_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, TOKEN_TYPES_, IOSObjectArray *)
+/*!
+ @brief String token types that correspond to token type int constants
+ */
+inline IOSObjectArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_get_TOKEN_TYPES();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_TOKEN_TYPES;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, TOKEN_TYPES, IOSObjectArray *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, TOKENS_ONLY, jint)
+/*!
+ @brief Only output tokens
+ */
+inline jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_get_TOKENS_ONLY();
+#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_TOKENS_ONLY 0
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, TOKENS_ONLY, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, UNTOKENIZED_ONLY, jint)
+/*!
+ @brief Only output untokenized tokens, which are tokens that would normally be split into several tokens
+ */
+inline jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_get_UNTOKENIZED_ONLY();
+#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_UNTOKENIZED_ONLY 1
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, UNTOKENIZED_ONLY, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, BOTH, jint)
+/*!
+ @brief Output the both the untokenized token and the splits
+ */
+inline jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_get_BOTH();
+#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_BOTH 2
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, BOTH, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, UNTOKENIZED_TOKEN_FLAG, jint)
+/*!
+ @brief This flag is used to indicate that the produced "Token" would, if <code>TOKENS_ONLY</code> was used, produce multiple tokens.
+ */
+inline jint OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_get_UNTOKENIZED_TOKEN_FLAG();
+#define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_UNTOKENIZED_TOKEN_FLAG 1
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, UNTOKENIZED_TOKEN_FLAG, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_init(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer *new_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer *create_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_init();
+
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_initWithInt_withJavaUtilSet_(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer *self, jint tokenOutput, id<JavaUtilSet> untokenizedTypes);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer *new_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_initWithInt_withJavaUtilSet_(jint tokenOutput, id<JavaUtilSet> untokenizedTypes) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer *create_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_initWithInt_withJavaUtilSet_(jint tokenOutput, id<JavaUtilSet> untokenizedTypes);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withJavaUtilSet_(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory, jint tokenOutput, id<JavaUtilSet> untokenizedTypes);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer *new_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withJavaUtilSet_(OrgApacheLuceneUtilAttributeFactory *factory, jint tokenOutput, id<JavaUtilSet> untokenizedTypes) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer *create_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withJavaUtilSet_(OrgApacheLuceneUtilAttributeFactory *factory, jint tokenOutput, id<JavaUtilSet> untokenizedTypes);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer")

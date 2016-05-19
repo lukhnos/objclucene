@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilIntArrayDocIdSet_INCLUDE_ALL")
-#if OrgApacheLuceneUtilIntArrayDocIdSet_RESTRICT
-#define OrgApacheLuceneUtilIntArrayDocIdSet_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilIntArrayDocIdSet")
+#ifdef RESTRICT_OrgApacheLuceneUtilIntArrayDocIdSet
+#define INCLUDE_ALL_OrgApacheLuceneUtilIntArrayDocIdSet 0
 #else
-#define OrgApacheLuceneUtilIntArrayDocIdSet_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilIntArrayDocIdSet 1
 #endif
-#undef OrgApacheLuceneUtilIntArrayDocIdSet_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilIntArrayDocIdSet
 
-#if !defined (_OrgApacheLuceneUtilIntArrayDocIdSet_) && (OrgApacheLuceneUtilIntArrayDocIdSet_INCLUDE_ALL || OrgApacheLuceneUtilIntArrayDocIdSet_INCLUDE)
-#define _OrgApacheLuceneUtilIntArrayDocIdSet_
+#if !defined (OrgApacheLuceneUtilIntArrayDocIdSet_) && (INCLUDE_ALL_OrgApacheLuceneUtilIntArrayDocIdSet || defined(INCLUDE_OrgApacheLuceneUtilIntArrayDocIdSet))
+#define OrgApacheLuceneUtilIntArrayDocIdSet_
 
-#define OrgApacheLuceneSearchDocIdSet_RESTRICT 1
-#define OrgApacheLuceneSearchDocIdSet_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchDocIdSet 1
+#define INCLUDE_OrgApacheLuceneSearchDocIdSet 1
 #include "org/apache/lucene/search/DocIdSet.h"
 
 @class IOSIntArray;
@@ -44,15 +44,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilIntArrayDocIdSet_initWithIntArray_with
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilIntArrayDocIdSet *new_OrgApacheLuceneUtilIntArrayDocIdSet_initWithIntArray_withInt_(IOSIntArray *docs, jint length) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilIntArrayDocIdSet *create_OrgApacheLuceneUtilIntArrayDocIdSet_initWithIntArray_withInt_(IOSIntArray *docs, jint length);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilIntArrayDocIdSet)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilIntArrayDocIdSet_IntArrayDocIdSetIterator_) && (OrgApacheLuceneUtilIntArrayDocIdSet_INCLUDE_ALL || OrgApacheLuceneUtilIntArrayDocIdSet_IntArrayDocIdSetIterator_INCLUDE)
-#define _OrgApacheLuceneUtilIntArrayDocIdSet_IntArrayDocIdSetIterator_
+#if !defined (OrgApacheLuceneUtilIntArrayDocIdSet_IntArrayDocIdSetIterator_) && (INCLUDE_ALL_OrgApacheLuceneUtilIntArrayDocIdSet || defined(INCLUDE_OrgApacheLuceneUtilIntArrayDocIdSet_IntArrayDocIdSetIterator))
+#define OrgApacheLuceneUtilIntArrayDocIdSet_IntArrayDocIdSetIterator_
 
-#define OrgApacheLuceneSearchDocIdSetIterator_RESTRICT 1
-#define OrgApacheLuceneSearchDocIdSetIterator_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchDocIdSetIterator 1
+#define INCLUDE_OrgApacheLuceneSearchDocIdSetIterator 1
 #include "org/apache/lucene/search/DocIdSetIterator.h"
 
 @class IOSIntArray;
@@ -82,8 +84,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilIntArrayDocIdSet_IntArrayDocIdSetItera
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilIntArrayDocIdSet_IntArrayDocIdSetIterator *new_OrgApacheLuceneUtilIntArrayDocIdSet_IntArrayDocIdSetIterator_initWithIntArray_withInt_(IOSIntArray *docs, jint length) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilIntArrayDocIdSet_IntArrayDocIdSetIterator *create_OrgApacheLuceneUtilIntArrayDocIdSet_IntArrayDocIdSetIterator_initWithIntArray_withInt_(IOSIntArray *docs, jint length);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilIntArrayDocIdSet_IntArrayDocIdSetIterator)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilIntArrayDocIdSet_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilIntArrayDocIdSet")

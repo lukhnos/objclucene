@@ -23,9 +23,9 @@
 - (OrgApacheLuceneStoreLock *)obtainLockWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
                                                              withNSString:(NSString *)lockName {
   if (!([dir isKindOfClass:[OrgApacheLuceneStoreFSDirectory class]])) {
-    @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(JreStrcat("$$@", [[self getClass] getSimpleName], @" can only be used with FSDirectory subclasses, got: ", dir)) autorelease];
+    @throw create_JavaLangUnsupportedOperationException_initWithNSString_(JreStrcat("$$@", [[self getClass] getSimpleName], @" can only be used with FSDirectory subclasses, got: ", dir));
   }
-  return [self obtainFSLockWithOrgApacheLuceneStoreFSDirectory:(OrgApacheLuceneStoreFSDirectory *) check_class_cast(dir, [OrgApacheLuceneStoreFSDirectory class]) withNSString:lockName];
+  return [self obtainFSLockWithOrgApacheLuceneStoreFSDirectory:(OrgApacheLuceneStoreFSDirectory *) cast_chk(dir, [OrgApacheLuceneStoreFSDirectory class]) withNSString:lockName];
 }
 
 - (OrgApacheLuceneStoreLock *)obtainFSLockWithOrgApacheLuceneStoreFSDirectory:(OrgApacheLuceneStoreFSDirectory *)dir
@@ -47,7 +47,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "getDefault", NULL, "Lorg.apache.lucene.store.FSLockFactory;", 0x19, NULL, NULL },
     { "obtainLockWithOrgApacheLuceneStoreDirectory:withNSString:", "obtainLock", "Lorg.apache.lucene.store.Lock;", 0x11, "Ljava.io.IOException;", NULL },
     { "obtainFSLockWithOrgApacheLuceneStoreFSDirectory:withNSString:", "obtainFSLock", "Lorg.apache.lucene.store.Lock;", 0x404, "Ljava.io.IOException;", NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "FSLockFactory", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneStoreFSLockFactory = { 2, "FSLockFactory", "org.apache.lucene.store", NULL, 0x401, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneStoreFSLockFactory;
@@ -57,7 +57,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 OrgApacheLuceneStoreFSLockFactory *OrgApacheLuceneStoreFSLockFactory_getDefault() {
   OrgApacheLuceneStoreFSLockFactory_initialize();
-  return JreLoadStatic(OrgApacheLuceneStoreNativeFSLockFactory, INSTANCE_);
+  return JreLoadStatic(OrgApacheLuceneStoreNativeFSLockFactory, INSTANCE);
 }
 
 void OrgApacheLuceneStoreFSLockFactory_init(OrgApacheLuceneStoreFSLockFactory *self) {

@@ -72,10 +72,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchHighlightQueryTermScorer, termAtt_, id<
     return 0;
   }
   if (![((JavaUtilHashSet *) nil_chk(uniqueTermsInFragment_)) containsWithId:termText]) {
-    JrePlusAssignFloatF(&totalScore_, [((OrgApacheLuceneSearchHighlightWeightedTerm *) nil_chk(queryTerm)) getWeight]);
-    [uniqueTermsInFragment_ addWithId:termText];
+    JrePlusAssignFloatF(&totalScore_, [queryTerm getWeight]);
+    [((JavaUtilHashSet *) nil_chk(uniqueTermsInFragment_)) addWithId:termText];
   }
-  return [((OrgApacheLuceneSearchHighlightWeightedTerm *) nil_chk(queryTerm)) getWeight];
+  return [queryTerm getWeight];
 }
 
 - (jfloat)getFragmentScore {
@@ -129,9 +129,11 @@ void OrgApacheLuceneSearchHighlightQueryTermScorer_initWithOrgApacheLuceneSearch
 }
 
 OrgApacheLuceneSearchHighlightQueryTermScorer *new_OrgApacheLuceneSearchHighlightQueryTermScorer_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchQuery *query) {
-  OrgApacheLuceneSearchHighlightQueryTermScorer *self = [OrgApacheLuceneSearchHighlightQueryTermScorer alloc];
-  OrgApacheLuceneSearchHighlightQueryTermScorer_initWithOrgApacheLuceneSearchQuery_(self, query);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchHighlightQueryTermScorer, initWithOrgApacheLuceneSearchQuery_, query)
+}
+
+OrgApacheLuceneSearchHighlightQueryTermScorer *create_OrgApacheLuceneSearchHighlightQueryTermScorer_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchQuery *query) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchHighlightQueryTermScorer, initWithOrgApacheLuceneSearchQuery_, query)
 }
 
 void OrgApacheLuceneSearchHighlightQueryTermScorer_initWithOrgApacheLuceneSearchQuery_withNSString_(OrgApacheLuceneSearchHighlightQueryTermScorer *self, OrgApacheLuceneSearchQuery *query, NSString *fieldName) {
@@ -139,9 +141,11 @@ void OrgApacheLuceneSearchHighlightQueryTermScorer_initWithOrgApacheLuceneSearch
 }
 
 OrgApacheLuceneSearchHighlightQueryTermScorer *new_OrgApacheLuceneSearchHighlightQueryTermScorer_initWithOrgApacheLuceneSearchQuery_withNSString_(OrgApacheLuceneSearchQuery *query, NSString *fieldName) {
-  OrgApacheLuceneSearchHighlightQueryTermScorer *self = [OrgApacheLuceneSearchHighlightQueryTermScorer alloc];
-  OrgApacheLuceneSearchHighlightQueryTermScorer_initWithOrgApacheLuceneSearchQuery_withNSString_(self, query, fieldName);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchHighlightQueryTermScorer, initWithOrgApacheLuceneSearchQuery_withNSString_, query, fieldName)
+}
+
+OrgApacheLuceneSearchHighlightQueryTermScorer *create_OrgApacheLuceneSearchHighlightQueryTermScorer_initWithOrgApacheLuceneSearchQuery_withNSString_(OrgApacheLuceneSearchQuery *query, NSString *fieldName) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchHighlightQueryTermScorer, initWithOrgApacheLuceneSearchQuery_withNSString_, query, fieldName)
 }
 
 void OrgApacheLuceneSearchHighlightQueryTermScorer_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_withNSString_(OrgApacheLuceneSearchHighlightQueryTermScorer *self, OrgApacheLuceneSearchQuery *query, OrgApacheLuceneIndexIndexReader *reader, NSString *fieldName) {
@@ -149,9 +153,11 @@ void OrgApacheLuceneSearchHighlightQueryTermScorer_initWithOrgApacheLuceneSearch
 }
 
 OrgApacheLuceneSearchHighlightQueryTermScorer *new_OrgApacheLuceneSearchHighlightQueryTermScorer_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_withNSString_(OrgApacheLuceneSearchQuery *query, OrgApacheLuceneIndexIndexReader *reader, NSString *fieldName) {
-  OrgApacheLuceneSearchHighlightQueryTermScorer *self = [OrgApacheLuceneSearchHighlightQueryTermScorer alloc];
-  OrgApacheLuceneSearchHighlightQueryTermScorer_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_withNSString_(self, query, reader, fieldName);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchHighlightQueryTermScorer, initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_withNSString_, query, reader, fieldName)
+}
+
+OrgApacheLuceneSearchHighlightQueryTermScorer *create_OrgApacheLuceneSearchHighlightQueryTermScorer_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_withNSString_(OrgApacheLuceneSearchQuery *query, OrgApacheLuceneIndexIndexReader *reader, NSString *fieldName) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchHighlightQueryTermScorer, initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_withNSString_, query, reader, fieldName)
 }
 
 void OrgApacheLuceneSearchHighlightQueryTermScorer_initWithOrgApacheLuceneSearchHighlightWeightedTermArray_(OrgApacheLuceneSearchHighlightQueryTermScorer *self, IOSObjectArray *weightedTerms) {
@@ -161,18 +167,20 @@ void OrgApacheLuceneSearchHighlightQueryTermScorer_initWithOrgApacheLuceneSearch
   self->maxTermWeight_ = 0;
   JreStrongAssignAndConsume(&self->termsToFind_, new_JavaUtilHashMap_init());
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(weightedTerms))->size_; i++) {
-    OrgApacheLuceneSearchHighlightWeightedTerm *existingTerm = [self->termsToFind_ getWithId:((OrgApacheLuceneSearchHighlightWeightedTerm *) nil_chk(IOSObjectArray_Get(weightedTerms, i)))->term_];
-    if ((existingTerm == nil) || (existingTerm->weight_ < ((OrgApacheLuceneSearchHighlightWeightedTerm *) nil_chk(IOSObjectArray_Get(weightedTerms, i)))->weight_)) {
-      [self->termsToFind_ putWithId:((OrgApacheLuceneSearchHighlightWeightedTerm *) nil_chk(IOSObjectArray_Get(weightedTerms, i)))->term_ withId:IOSObjectArray_Get(weightedTerms, i)];
+    OrgApacheLuceneSearchHighlightWeightedTerm *existingTerm = [((JavaUtilHashMap *) nil_chk(self->termsToFind_)) getWithId:((OrgApacheLuceneSearchHighlightWeightedTerm *) nil_chk(IOSObjectArray_Get(weightedTerms, i)))->term_];
+    if ((existingTerm == nil) || (((OrgApacheLuceneSearchHighlightWeightedTerm *) nil_chk(existingTerm))->weight_ < ((OrgApacheLuceneSearchHighlightWeightedTerm *) nil_chk(IOSObjectArray_Get(weightedTerms, i)))->weight_)) {
+      [((JavaUtilHashMap *) nil_chk(self->termsToFind_)) putWithId:((OrgApacheLuceneSearchHighlightWeightedTerm *) nil_chk(IOSObjectArray_Get(weightedTerms, i)))->term_ withId:IOSObjectArray_Get(weightedTerms, i)];
       self->maxTermWeight_ = JavaLangMath_maxWithFloat_withFloat_(self->maxTermWeight_, [((OrgApacheLuceneSearchHighlightWeightedTerm *) nil_chk(IOSObjectArray_Get(weightedTerms, i))) getWeight]);
     }
   }
 }
 
 OrgApacheLuceneSearchHighlightQueryTermScorer *new_OrgApacheLuceneSearchHighlightQueryTermScorer_initWithOrgApacheLuceneSearchHighlightWeightedTermArray_(IOSObjectArray *weightedTerms) {
-  OrgApacheLuceneSearchHighlightQueryTermScorer *self = [OrgApacheLuceneSearchHighlightQueryTermScorer alloc];
-  OrgApacheLuceneSearchHighlightQueryTermScorer_initWithOrgApacheLuceneSearchHighlightWeightedTermArray_(self, weightedTerms);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchHighlightQueryTermScorer, initWithOrgApacheLuceneSearchHighlightWeightedTermArray_, weightedTerms)
+}
+
+OrgApacheLuceneSearchHighlightQueryTermScorer *create_OrgApacheLuceneSearchHighlightQueryTermScorer_initWithOrgApacheLuceneSearchHighlightWeightedTermArray_(IOSObjectArray *weightedTerms) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchHighlightQueryTermScorer, initWithOrgApacheLuceneSearchHighlightWeightedTermArray_, weightedTerms)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchHighlightQueryTermScorer)

@@ -80,9 +80,11 @@ void OrgApacheLuceneSearchPhrasePositions_initWithOrgApacheLuceneIndexPostingsEn
 }
 
 OrgApacheLuceneSearchPhrasePositions *new_OrgApacheLuceneSearchPhrasePositions_initWithOrgApacheLuceneIndexPostingsEnum_withInt_withInt_withOrgApacheLuceneIndexTermArray_(OrgApacheLuceneIndexPostingsEnum *postings, jint o, jint ord, IOSObjectArray *terms) {
-  OrgApacheLuceneSearchPhrasePositions *self = [OrgApacheLuceneSearchPhrasePositions alloc];
-  OrgApacheLuceneSearchPhrasePositions_initWithOrgApacheLuceneIndexPostingsEnum_withInt_withInt_withOrgApacheLuceneIndexTermArray_(self, postings, o, ord, terms);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchPhrasePositions, initWithOrgApacheLuceneIndexPostingsEnum_withInt_withInt_withOrgApacheLuceneIndexTermArray_, postings, o, ord, terms)
+}
+
+OrgApacheLuceneSearchPhrasePositions *create_OrgApacheLuceneSearchPhrasePositions_initWithOrgApacheLuceneIndexPostingsEnum_withInt_withInt_withOrgApacheLuceneIndexTermArray_(OrgApacheLuceneIndexPostingsEnum *postings, jint o, jint ord, IOSObjectArray *terms) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchPhrasePositions, initWithOrgApacheLuceneIndexPostingsEnum_withInt_withInt_withOrgApacheLuceneIndexTermArray_, postings, o, ord, terms)
 }
 
 jboolean OrgApacheLuceneSearchPhrasePositions_nextPosition(OrgApacheLuceneSearchPhrasePositions *self) {

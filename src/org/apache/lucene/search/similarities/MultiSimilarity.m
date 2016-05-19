@@ -44,16 +44,16 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimSco
   for (jint i = 0; i < subStats->size_; i++) {
     IOSObjectArray_Set(subStats, i, [((OrgApacheLuceneSearchSimilaritiesSimilarity *) nil_chk(IOSObjectArray_Get(sims_, i))) computeWeightWithFloat:queryBoost withOrgApacheLuceneSearchCollectionStatistics:collectionStats withOrgApacheLuceneSearchTermStatisticsArray:termStats]);
   }
-  return [new_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats_initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeightArray_(subStats) autorelease];
+  return create_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats_initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeightArray_(subStats);
 }
 
 - (OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *)simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:(OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight *)stats
                                                                                     withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
   IOSObjectArray *subScorers = [IOSObjectArray arrayWithLength:((IOSObjectArray *) nil_chk(sims_))->size_ type:OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_class_()];
   for (jint i = 0; i < subScorers->size_; i++) {
-    IOSObjectArray_Set(subScorers, i, [((OrgApacheLuceneSearchSimilaritiesSimilarity *) nil_chk(IOSObjectArray_Get(sims_, i))) simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:IOSObjectArray_Get(nil_chk(((OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats *) nil_chk(((OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats *) check_class_cast(stats, [OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats class]))))->subStats_), i) withOrgApacheLuceneIndexLeafReaderContext:context]);
+    IOSObjectArray_Set(subScorers, i, [((OrgApacheLuceneSearchSimilaritiesSimilarity *) nil_chk(IOSObjectArray_Get(sims_, i))) simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:IOSObjectArray_Get(nil_chk(((OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats *) nil_chk(((OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats *) cast_chk(stats, [OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats class]))))->subStats_), i) withOrgApacheLuceneIndexLeafReaderContext:context]);
   }
-  return [new_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer_initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorerArray_(subScorers) autorelease];
+  return create_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer_initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorerArray_(subScorers);
 }
 
 - (void)dealloc {
@@ -84,9 +84,11 @@ void OrgApacheLuceneSearchSimilaritiesMultiSimilarity_initWithOrgApacheLuceneSea
 }
 
 OrgApacheLuceneSearchSimilaritiesMultiSimilarity *new_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_initWithOrgApacheLuceneSearchSimilaritiesSimilarityArray_(IOSObjectArray *sims) {
-  OrgApacheLuceneSearchSimilaritiesMultiSimilarity *self = [OrgApacheLuceneSearchSimilaritiesMultiSimilarity alloc];
-  OrgApacheLuceneSearchSimilaritiesMultiSimilarity_initWithOrgApacheLuceneSearchSimilaritiesSimilarityArray_(self, sims);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSimilaritiesMultiSimilarity, initWithOrgApacheLuceneSearchSimilaritiesSimilarityArray_, sims)
+}
+
+OrgApacheLuceneSearchSimilaritiesMultiSimilarity *create_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_initWithOrgApacheLuceneSearchSimilaritiesSimilarityArray_(IOSObjectArray *sims) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSimilaritiesMultiSimilarity, initWithOrgApacheLuceneSearchSimilaritiesSimilarityArray_, sims)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSimilaritiesMultiSimilarity)
@@ -115,7 +117,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSimilaritiesMultiSimilarit
 
 - (OrgApacheLuceneSearchExplanation *)explainWithInt:(jint)doc
                 withOrgApacheLuceneSearchExplanation:(OrgApacheLuceneSearchExplanation *)freq {
-  id<JavaUtilList> subs = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> subs = create_JavaUtilArrayList_init();
   {
     IOSObjectArray *a__ = subScorers_;
     OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
@@ -167,9 +169,11 @@ void OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer_initWithOrg
 }
 
 OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer *new_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer_initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorerArray_(IOSObjectArray *subScorers) {
-  OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer *self = [OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer alloc];
-  OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer_initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorerArray_(self, subScorers);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer, initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorerArray_, subScorers)
+}
+
+OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer *create_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer_initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorerArray_(IOSObjectArray *subScorers) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer, initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorerArray_, subScorers)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer)
@@ -234,9 +238,11 @@ void OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats_initWithOrgApac
 }
 
 OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats *new_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats_initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeightArray_(IOSObjectArray *subStats) {
-  OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats *self = [OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats alloc];
-  OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats_initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeightArray_(self, subStats);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats, initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeightArray_, subStats)
+}
+
+OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats *create_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats_initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeightArray_(IOSObjectArray *subStats) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats, initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeightArray_, subStats)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats)

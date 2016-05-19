@@ -5,19 +5,26 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisSvSwedishLightStemmer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisSvSwedishLightStemmer_RESTRICT
-#define OrgApacheLuceneAnalysisSvSwedishLightStemmer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisSvSwedishLightStemmer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisSvSwedishLightStemmer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisSvSwedishLightStemmer 0
 #else
-#define OrgApacheLuceneAnalysisSvSwedishLightStemmer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisSvSwedishLightStemmer 1
 #endif
-#undef OrgApacheLuceneAnalysisSvSwedishLightStemmer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisSvSwedishLightStemmer
 
-#if !defined (_OrgApacheLuceneAnalysisSvSwedishLightStemmer_) && (OrgApacheLuceneAnalysisSvSwedishLightStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisSvSwedishLightStemmer_INCLUDE)
-#define _OrgApacheLuceneAnalysisSvSwedishLightStemmer_
+#if !defined (OrgApacheLuceneAnalysisSvSwedishLightStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisSvSwedishLightStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisSvSwedishLightStemmer))
+#define OrgApacheLuceneAnalysisSvSwedishLightStemmer_
 
 @class IOSCharArray;
 
+/*!
+ @brief Light Stemmer for Swedish.
+ <p>
+ This stemmer implements the algorithm described in:
+ <i>Report on CLEF-2003 Monolingual Tracks</i>
+ Jacques Savoy
+ */
 @interface OrgApacheLuceneAnalysisSvSwedishLightStemmer : NSObject
 
 #pragma mark Public
@@ -35,8 +42,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSvSwedishLightStemmer_init(OrgApac
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisSvSwedishLightStemmer *new_OrgApacheLuceneAnalysisSvSwedishLightStemmer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisSvSwedishLightStemmer *create_OrgApacheLuceneAnalysisSvSwedishLightStemmer_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSvSwedishLightStemmer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisSvSwedishLightStemmer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisSvSwedishLightStemmer")

@@ -56,8 +56,8 @@ __attribute__((unused)) static NSString *OrgApacheLuceneIndexTerm_text(OrgApache
 - (jboolean)isEqual:(id)obj {
   if (self == obj) return true;
   if (obj == nil) return false;
-  if ([self getClass] != [nil_chk(obj) getClass]) return false;
-  OrgApacheLuceneIndexTerm *other = (OrgApacheLuceneIndexTerm *) check_class_cast(obj, [OrgApacheLuceneIndexTerm class]);
+  if ([self getClass] != (id) [obj getClass]) return false;
+  OrgApacheLuceneIndexTerm *other = (OrgApacheLuceneIndexTerm *) cast_chk(obj, [OrgApacheLuceneIndexTerm class]);
   if (field_ == nil) {
     if (other->field_ != nil) return false;
   }
@@ -72,18 +72,18 @@ __attribute__((unused)) static NSString *OrgApacheLuceneIndexTerm_text(OrgApache
 - (NSUInteger)hash {
   jint prime = 31;
   jint result = 1;
-  result = prime * result + ((field_ == nil) ? 0 : ((jint) [field_ hash]));
-  result = prime * result + ((bytes_ == nil) ? 0 : ((jint) [bytes_ hash]));
+  result = prime * result + ((field_ == nil) ? 0 : ((jint) [((NSString *) nil_chk(field_)) hash]));
+  result = prime * result + ((bytes_ == nil) ? 0 : ((jint) [((OrgApacheLuceneUtilBytesRef *) nil_chk(bytes_)) hash]));
   return result;
 }
 
 - (jint)compareToWithId:(OrgApacheLuceneIndexTerm *)other {
-  check_class_cast(other, [OrgApacheLuceneIndexTerm class]);
+  cast_chk(other, [OrgApacheLuceneIndexTerm class]);
   if ([((NSString *) nil_chk(field_)) isEqual:((OrgApacheLuceneIndexTerm *) nil_chk(other))->field_]) {
     return [((OrgApacheLuceneUtilBytesRef *) nil_chk(bytes_)) compareToWithId:other->bytes_];
   }
   else {
-    return [field_ compareToWithId:other->field_];
+    return [((NSString *) nil_chk(field_)) compareToWithId:other->field_];
   }
 }
 
@@ -135,29 +135,35 @@ void OrgApacheLuceneIndexTerm_initWithNSString_withOrgApacheLuceneUtilBytesRef_(
 }
 
 OrgApacheLuceneIndexTerm *new_OrgApacheLuceneIndexTerm_initWithNSString_withOrgApacheLuceneUtilBytesRef_(NSString *fld, OrgApacheLuceneUtilBytesRef *bytes) {
-  OrgApacheLuceneIndexTerm *self = [OrgApacheLuceneIndexTerm alloc];
-  OrgApacheLuceneIndexTerm_initWithNSString_withOrgApacheLuceneUtilBytesRef_(self, fld, bytes);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexTerm, initWithNSString_withOrgApacheLuceneUtilBytesRef_, fld, bytes)
+}
+
+OrgApacheLuceneIndexTerm *create_OrgApacheLuceneIndexTerm_initWithNSString_withOrgApacheLuceneUtilBytesRef_(NSString *fld, OrgApacheLuceneUtilBytesRef *bytes) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexTerm, initWithNSString_withOrgApacheLuceneUtilBytesRef_, fld, bytes)
 }
 
 void OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(OrgApacheLuceneIndexTerm *self, NSString *fld, NSString *text) {
-  OrgApacheLuceneIndexTerm_initWithNSString_withOrgApacheLuceneUtilBytesRef_(self, fld, [new_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(text) autorelease]);
+  OrgApacheLuceneIndexTerm_initWithNSString_withOrgApacheLuceneUtilBytesRef_(self, fld, create_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(text));
 }
 
 OrgApacheLuceneIndexTerm *new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(NSString *fld, NSString *text) {
-  OrgApacheLuceneIndexTerm *self = [OrgApacheLuceneIndexTerm alloc];
-  OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(self, fld, text);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexTerm, initWithNSString_withNSString_, fld, text)
+}
+
+OrgApacheLuceneIndexTerm *create_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(NSString *fld, NSString *text) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexTerm, initWithNSString_withNSString_, fld, text)
 }
 
 void OrgApacheLuceneIndexTerm_initWithNSString_(OrgApacheLuceneIndexTerm *self, NSString *fld) {
-  OrgApacheLuceneIndexTerm_initWithNSString_withOrgApacheLuceneUtilBytesRef_(self, fld, [new_OrgApacheLuceneUtilBytesRef_init() autorelease]);
+  OrgApacheLuceneIndexTerm_initWithNSString_withOrgApacheLuceneUtilBytesRef_(self, fld, create_OrgApacheLuceneUtilBytesRef_init());
 }
 
 OrgApacheLuceneIndexTerm *new_OrgApacheLuceneIndexTerm_initWithNSString_(NSString *fld) {
-  OrgApacheLuceneIndexTerm *self = [OrgApacheLuceneIndexTerm alloc];
-  OrgApacheLuceneIndexTerm_initWithNSString_(self, fld);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexTerm, initWithNSString_, fld)
+}
+
+OrgApacheLuceneIndexTerm *create_OrgApacheLuceneIndexTerm_initWithNSString_(NSString *fld) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexTerm, initWithNSString_, fld)
 }
 
 NSString *OrgApacheLuceneIndexTerm_text(OrgApacheLuceneIndexTerm *self) {
@@ -166,12 +172,12 @@ NSString *OrgApacheLuceneIndexTerm_text(OrgApacheLuceneIndexTerm *self) {
 
 NSString *OrgApacheLuceneIndexTerm_toStringWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *termText) {
   OrgApacheLuceneIndexTerm_initialize();
-  JavaNioCharsetCharsetDecoder *decoder = [((JavaNioCharsetCharsetDecoder *) nil_chk([((JavaNioCharsetCharsetDecoder *) nil_chk([((JavaNioCharsetCharset *) nil_chk(JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8_))) newDecoder])) onMalformedInputWithJavaNioCharsetCodingErrorAction:JreLoadStatic(JavaNioCharsetCodingErrorAction, REPORT_)])) onUnmappableCharacterWithJavaNioCharsetCodingErrorAction:JreLoadStatic(JavaNioCharsetCodingErrorAction, REPORT_)];
+  JavaNioCharsetCharsetDecoder *decoder = [((JavaNioCharsetCharsetDecoder *) nil_chk([((JavaNioCharsetCharsetDecoder *) nil_chk([((JavaNioCharsetCharset *) nil_chk(JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8))) newDecoder])) onMalformedInputWithJavaNioCharsetCodingErrorAction:JreLoadStatic(JavaNioCharsetCodingErrorAction, REPORT)])) onUnmappableCharacterWithJavaNioCharsetCodingErrorAction:JreLoadStatic(JavaNioCharsetCodingErrorAction, REPORT)];
   @try {
     return [((JavaNioCharBuffer *) nil_chk([((JavaNioCharsetCharsetDecoder *) nil_chk(decoder)) decodeWithJavaNioByteBuffer:JavaNioByteBuffer_wrapWithByteArray_withInt_withInt_(((OrgApacheLuceneUtilBytesRef *) nil_chk(termText))->bytes_, termText->offset_, termText->length_)])) description];
   }
   @catch (JavaNioCharsetCharacterCodingException *e) {
-    return [((OrgApacheLuceneUtilBytesRef *) nil_chk(termText)) description];
+    return [termText description];
   }
 }
 

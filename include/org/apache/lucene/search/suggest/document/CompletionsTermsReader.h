@@ -5,29 +5,42 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_RESTRICT
-#define OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader")
+#ifdef RESTRICT_OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader 0
 #else
-#define OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader 1
 #endif
-#undef OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader
 
-#if !defined (_OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_) && (OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_INCLUDE_ALL || OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_INCLUDE)
-#define _OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_
+#if !defined (OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader || defined(INCLUDE_OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader))
+#define OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_
 
-#define OrgApacheLuceneUtilAccountable_RESTRICT 1
-#define OrgApacheLuceneUtilAccountable_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAccountable 1
+#define INCLUDE_OrgApacheLuceneUtilAccountable 1
 #include "org/apache/lucene/util/Accountable.h"
 
 @class OrgApacheLuceneSearchSuggestDocumentNRTSuggester;
 @class OrgApacheLuceneStoreIndexInput;
 @protocol JavaUtilCollection;
 
+/*!
+ @brief Holder for suggester and field-level info
+ for a suggest field
+ */
 @interface OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader : NSObject < OrgApacheLuceneUtilAccountable > {
  @public
+  /*!
+   @brief Minimum entry weight for the suggester
+   */
   jlong minWeight_;
+  /*!
+   @brief Maximum entry weight for the suggester
+   */
   jlong maxWeight_;
+  /*!
+   @brief type of suggester (context-enabled or not)
+   */
   jbyte type_;
 }
 
@@ -37,10 +50,18 @@
 
 - (jlong)ramBytesUsed;
 
+/*!
+ @brief Returns the suggester for a field, if not loaded already, loads
+ the appropriate suggester from CompletionDictionary
+ */
 - (OrgApacheLuceneSearchSuggestDocumentNRTSuggester *)suggester;
 
 #pragma mark Package-Private
 
+/*!
+ @brief Creates a CompletionTermsReader to load a field-specific suggester
+ from the index <code>dictIn</code> with <code>offset</code>
+ */
 - (instancetype)initWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)dictIn
                                               withLong:(jlong)offset
                                               withLong:(jlong)minWeight
@@ -55,8 +76,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReade
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader *new_OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_initWithOrgApacheLuceneStoreIndexInput_withLong_withLong_withLong_withByte_(OrgApacheLuceneStoreIndexInput *dictIn, jlong offset, jlong minWeight, jlong maxWeight, jbyte type) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader *create_OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_initWithOrgApacheLuceneStoreIndexInput_withLong_withLong_withLong_withByte_(OrgApacheLuceneStoreIndexInput *dictIn, jlong offset, jlong minWeight, jlong maxWeight, jbyte type);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader")

@@ -5,28 +5,36 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneStoreOutputStreamIndexOutput_INCLUDE_ALL")
-#if OrgApacheLuceneStoreOutputStreamIndexOutput_RESTRICT
-#define OrgApacheLuceneStoreOutputStreamIndexOutput_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneStoreOutputStreamIndexOutput")
+#ifdef RESTRICT_OrgApacheLuceneStoreOutputStreamIndexOutput
+#define INCLUDE_ALL_OrgApacheLuceneStoreOutputStreamIndexOutput 0
 #else
-#define OrgApacheLuceneStoreOutputStreamIndexOutput_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneStoreOutputStreamIndexOutput 1
 #endif
-#undef OrgApacheLuceneStoreOutputStreamIndexOutput_RESTRICT
+#undef RESTRICT_OrgApacheLuceneStoreOutputStreamIndexOutput
 
-#if !defined (_OrgApacheLuceneStoreOutputStreamIndexOutput_) && (OrgApacheLuceneStoreOutputStreamIndexOutput_INCLUDE_ALL || OrgApacheLuceneStoreOutputStreamIndexOutput_INCLUDE)
-#define _OrgApacheLuceneStoreOutputStreamIndexOutput_
+#if !defined (OrgApacheLuceneStoreOutputStreamIndexOutput_) && (INCLUDE_ALL_OrgApacheLuceneStoreOutputStreamIndexOutput || defined(INCLUDE_OrgApacheLuceneStoreOutputStreamIndexOutput))
+#define OrgApacheLuceneStoreOutputStreamIndexOutput_
 
-#define OrgApacheLuceneStoreIndexOutput_RESTRICT 1
-#define OrgApacheLuceneStoreIndexOutput_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreIndexOutput 1
+#define INCLUDE_OrgApacheLuceneStoreIndexOutput 1
 #include "org/apache/lucene/store/IndexOutput.h"
 
 @class IOSByteArray;
 @class JavaIoOutputStream;
 
+/*!
+ @brief Implementation class for buffered <code>IndexOutput</code> that writes to an <code>OutputStream</code>.
+ */
 @interface OrgApacheLuceneStoreOutputStreamIndexOutput : OrgApacheLuceneStoreIndexOutput
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new <code>OutputStreamIndexOutput</code> with the given buffer size.
+ @param bufferSize the buffer size in bytes used to buffer writes internally.
+ @throws IllegalArgumentException if the given buffer size is less or equal to <tt>0</tt>
+ */
 - (instancetype)initWithNSString:(NSString *)resourceDescription
           withJavaIoOutputStream:(JavaIoOutputStream *)outArg
                          withInt:(jint)bufferSize;
@@ -51,8 +59,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneStoreOutputStreamIndexOutput_initWithNSStr
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreOutputStreamIndexOutput *new_OrgApacheLuceneStoreOutputStreamIndexOutput_initWithNSString_withJavaIoOutputStream_withInt_(NSString *resourceDescription, JavaIoOutputStream *outArg, jint bufferSize) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneStoreOutputStreamIndexOutput *create_OrgApacheLuceneStoreOutputStreamIndexOutput_initWithNSString_withJavaIoOutputStream_withInt_(NSString *resourceDescription, JavaIoOutputStream *outArg, jint bufferSize);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreOutputStreamIndexOutput)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneStoreOutputStreamIndexOutput_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreOutputStreamIndexOutput")

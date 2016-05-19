@@ -66,7 +66,7 @@ withOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState 
 }
 
 - (jint)advanceWithInt:(jint)target {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (jint)nextDoc {
@@ -100,10 +100,10 @@ withOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState 
 - (jint)nextPosition {
   jint pos = [((OrgApacheLuceneIndexPostingsEnum *) nil_chk(current_)) nextPosition];
   if (pos < 0) {
-    @throw [new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withNSString_(JreStrcat("$I$$$I", @"position=", pos, @" is negative, field=\"", field_, @" doc=", doc_), [((OrgApacheLuceneCodecsFieldsProducer *) nil_chk(IOSObjectArray_Get(nil_chk(((OrgApacheLuceneIndexMergeState *) nil_chk(mergeState_))->fieldsProducers_), upto_))) description]) autorelease];
+    @throw create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withNSString_(JreStrcat("$I$$$I", @"position=", pos, @" is negative, field=\"", field_, @" doc=", doc_), [((OrgApacheLuceneCodecsFieldsProducer *) nil_chk(IOSObjectArray_Get(nil_chk(((OrgApacheLuceneIndexMergeState *) nil_chk(mergeState_))->fieldsProducers_), upto_))) description]);
   }
   else if (pos > OrgApacheLuceneIndexIndexWriter_MAX_POSITION) {
-    @throw [new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withNSString_(JreStrcat("$I$I$$$I", @"position=", pos, @" is too large (> IndexWriter.MAX_POSITION=", OrgApacheLuceneIndexIndexWriter_MAX_POSITION, @"), field=\"", field_, @"\" doc=", doc_), [((OrgApacheLuceneCodecsFieldsProducer *) nil_chk(IOSObjectArray_Get(nil_chk(((OrgApacheLuceneIndexMergeState *) nil_chk(mergeState_))->fieldsProducers_), upto_))) description]) autorelease];
+    @throw create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withNSString_(JreStrcat("$I$I$$$I", @"position=", pos, @" is too large (> IndexWriter.MAX_POSITION=", OrgApacheLuceneIndexIndexWriter_MAX_POSITION, @"), field=\"", field_, @"\" doc=", doc_), [((OrgApacheLuceneCodecsFieldsProducer *) nil_chk(IOSObjectArray_Get(nil_chk(((OrgApacheLuceneIndexMergeState *) nil_chk(mergeState_))->fieldsProducers_), upto_))) description]);
   }
   return pos;
 }
@@ -186,9 +186,11 @@ void OrgApacheLuceneIndexMappingMultiPostingsEnum_initWithNSString_withOrgApache
 }
 
 OrgApacheLuceneIndexMappingMultiPostingsEnum *new_OrgApacheLuceneIndexMappingMultiPostingsEnum_initWithNSString_withOrgApacheLuceneIndexMergeState_(NSString *field, OrgApacheLuceneIndexMergeState *mergeState) {
-  OrgApacheLuceneIndexMappingMultiPostingsEnum *self = [OrgApacheLuceneIndexMappingMultiPostingsEnum alloc];
-  OrgApacheLuceneIndexMappingMultiPostingsEnum_initWithNSString_withOrgApacheLuceneIndexMergeState_(self, field, mergeState);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMappingMultiPostingsEnum, initWithNSString_withOrgApacheLuceneIndexMergeState_, field, mergeState)
+}
+
+OrgApacheLuceneIndexMappingMultiPostingsEnum *create_OrgApacheLuceneIndexMappingMultiPostingsEnum_initWithNSString_withOrgApacheLuceneIndexMergeState_(NSString *field, OrgApacheLuceneIndexMergeState *mergeState) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMappingMultiPostingsEnum, initWithNSString_withOrgApacheLuceneIndexMergeState_, field, mergeState)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMappingMultiPostingsEnum)

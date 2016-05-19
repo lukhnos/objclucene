@@ -29,7 +29,7 @@
   bufferOffset_ = bufferUpto_ * OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_SIZE;
   JreStrongAssign(&buffer_, IOSObjectArray_Get(nil_chk(((OrgApacheLuceneUtilByteBlockPool *) nil_chk(pool))->buffers_), bufferUpto_));
   upto_ = startIndex & OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_MASK;
-  jint firstSize = IOSIntArray_Get(nil_chk(JreLoadStatic(OrgApacheLuceneUtilByteBlockPool, LEVEL_SIZE_ARRAY_)), 0);
+  jint firstSize = IOSIntArray_Get(nil_chk(JreLoadStatic(OrgApacheLuceneUtilByteBlockPool, LEVEL_SIZE_ARRAY)), 0);
   if (startIndex + firstSize >= endIndex) {
     limit_ = endIndex & OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_MASK;
   }
@@ -68,8 +68,8 @@
 
 - (void)nextSlice {
   jint nextIndex = (JreLShift32((IOSByteArray_Get(nil_chk(buffer_), limit_) & (jint) 0xff), 24)) + (JreLShift32((IOSByteArray_Get(buffer_, 1 + limit_) & (jint) 0xff), 16)) + (JreLShift32((IOSByteArray_Get(buffer_, 2 + limit_) & (jint) 0xff), 8)) + (IOSByteArray_Get(buffer_, 3 + limit_) & (jint) 0xff);
-  level_ = IOSIntArray_Get(nil_chk(JreLoadStatic(OrgApacheLuceneUtilByteBlockPool, NEXT_LEVEL_ARRAY_)), level_);
-  jint newSize = IOSIntArray_Get(nil_chk(JreLoadStatic(OrgApacheLuceneUtilByteBlockPool, LEVEL_SIZE_ARRAY_)), level_);
+  level_ = IOSIntArray_Get(nil_chk(JreLoadStatic(OrgApacheLuceneUtilByteBlockPool, NEXT_LEVEL_ARRAY)), level_);
+  jint newSize = IOSIntArray_Get(nil_chk(JreLoadStatic(OrgApacheLuceneUtilByteBlockPool, LEVEL_SIZE_ARRAY)), level_);
   bufferUpto_ = nextIndex / OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_SIZE;
   bufferOffset_ = bufferUpto_ * OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_SIZE;
   JreStrongAssign(&buffer_, IOSObjectArray_Get(nil_chk(((OrgApacheLuceneUtilByteBlockPool *) nil_chk(pool_))->buffers_), bufferUpto_));
@@ -123,7 +123,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "writeToWithOrgApacheLuceneStoreDataOutput:", "writeTo", "J", 0x1, "Ljava.io.IOException;", NULL },
     { "nextSlice", NULL, "V", 0x1, NULL, NULL },
     { "readBytesWithByteArray:withInt:withInt:", "readBytes", "V", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x0, NULL, NULL },
+    { "init", "ByteSliceReader", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "pool_", NULL, 0x0, "Lorg.apache.lucene.util.ByteBlockPool;", NULL, NULL, .constantValue.asLong = 0 },
@@ -146,9 +146,11 @@ void OrgApacheLuceneIndexByteSliceReader_init(OrgApacheLuceneIndexByteSliceReade
 }
 
 OrgApacheLuceneIndexByteSliceReader *new_OrgApacheLuceneIndexByteSliceReader_init() {
-  OrgApacheLuceneIndexByteSliceReader *self = [OrgApacheLuceneIndexByteSliceReader alloc];
-  OrgApacheLuceneIndexByteSliceReader_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexByteSliceReader, init)
+}
+
+OrgApacheLuceneIndexByteSliceReader *create_OrgApacheLuceneIndexByteSliceReader_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexByteSliceReader, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexByteSliceReader)

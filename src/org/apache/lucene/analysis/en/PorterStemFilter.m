@@ -37,7 +37,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisEnPorterStemFilter, keywordAttr_, id<
 
 - (jboolean)incrementToken {
   if (![((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) return false;
-  if ((![((id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>) nil_chk(keywordAttr_)) isKeyword]) && [((OrgApacheLuceneAnalysisEnPorterStemmer *) nil_chk(stemmer_)) stemWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer] withInt:0 withInt:[termAtt_ length]]) [termAtt_ copyBufferWithCharArray:[stemmer_ getResultBuffer] withInt:0 withInt:[stemmer_ getResultLength]];
+  if ((![((id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>) nil_chk(keywordAttr_)) isKeyword]) && [((OrgApacheLuceneAnalysisEnPorterStemmer *) nil_chk(stemmer_)) stemWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer] withInt:0 withInt:[termAtt_ length]]) [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) copyBufferWithCharArray:[((OrgApacheLuceneAnalysisEnPorterStemmer *) nil_chk(stemmer_)) getResultBuffer] withInt:0 withInt:[stemmer_ getResultLength]];
   return true;
 }
 
@@ -72,9 +72,11 @@ void OrgApacheLuceneAnalysisEnPorterStemFilter_initWithOrgApacheLuceneAnalysisTo
 }
 
 OrgApacheLuceneAnalysisEnPorterStemFilter *new_OrgApacheLuceneAnalysisEnPorterStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) {
-  OrgApacheLuceneAnalysisEnPorterStemFilter *self = [OrgApacheLuceneAnalysisEnPorterStemFilter alloc];
-  OrgApacheLuceneAnalysisEnPorterStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisEnPorterStemFilter, initWithOrgApacheLuceneAnalysisTokenStream_, inArg)
+}
+
+OrgApacheLuceneAnalysisEnPorterStemFilter *create_OrgApacheLuceneAnalysisEnPorterStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisEnPorterStemFilter, initWithOrgApacheLuceneAnalysisTokenStream_, inArg)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisEnPorterStemFilter)

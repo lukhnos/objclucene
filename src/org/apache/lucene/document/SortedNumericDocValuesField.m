@@ -12,9 +12,13 @@
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneDocumentSortedNumericDocValuesField)
 
-OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentSortedNumericDocValuesField_TYPE_;
+OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentSortedNumericDocValuesField_TYPE;
 
 @implementation OrgApacheLuceneDocumentSortedNumericDocValuesField
+
++ (OrgApacheLuceneDocumentFieldType *)TYPE {
+  return OrgApacheLuceneDocumentSortedNumericDocValuesField_TYPE;
+}
 
 - (instancetype)initWithNSString:(NSString *)name
                         withLong:(jlong)value {
@@ -24,10 +28,10 @@ OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentSortedNumericDocValuesF
 
 + (void)initialize {
   if (self == [OrgApacheLuceneDocumentSortedNumericDocValuesField class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneDocumentSortedNumericDocValuesField_TYPE_, new_OrgApacheLuceneDocumentFieldType_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneDocumentSortedNumericDocValuesField_TYPE, new_OrgApacheLuceneDocumentFieldType_init());
     {
-      [OrgApacheLuceneDocumentSortedNumericDocValuesField_TYPE_ setDocValuesTypeWithOrgApacheLuceneIndexDocValuesTypeEnum:JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, SORTED_NUMERIC)];
-      [OrgApacheLuceneDocumentSortedNumericDocValuesField_TYPE_ freeze];
+      [OrgApacheLuceneDocumentSortedNumericDocValuesField_TYPE setDocValuesTypeWithOrgApacheLuceneIndexDocValuesType:JreLoadEnum(OrgApacheLuceneIndexDocValuesType, SORTED_NUMERIC)];
+      [OrgApacheLuceneDocumentSortedNumericDocValuesField_TYPE freeze];
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneDocumentSortedNumericDocValuesField)
   }
@@ -38,7 +42,7 @@ OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentSortedNumericDocValuesF
     { "initWithNSString:withLong:", "SortedNumericDocValuesField", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "TYPE_", NULL, 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentSortedNumericDocValuesField_TYPE_, NULL, .constantValue.asLong = 0 },
+    { "TYPE", "TYPE", 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentSortedNumericDocValuesField_TYPE, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneDocumentSortedNumericDocValuesField = { 2, "SortedNumericDocValuesField", "org.apache.lucene.document", NULL, 0x1, 1, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneDocumentSortedNumericDocValuesField;
@@ -47,14 +51,16 @@ OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentSortedNumericDocValuesF
 @end
 
 void OrgApacheLuceneDocumentSortedNumericDocValuesField_initWithNSString_withLong_(OrgApacheLuceneDocumentSortedNumericDocValuesField *self, NSString *name, jlong value) {
-  OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneDocumentFieldType_(self, name, OrgApacheLuceneDocumentSortedNumericDocValuesField_TYPE_);
+  OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneDocumentFieldType_(self, name, OrgApacheLuceneDocumentSortedNumericDocValuesField_TYPE);
   JreStrongAssign(&self->fieldsData_, JavaLangLong_valueOfWithLong_(value));
 }
 
 OrgApacheLuceneDocumentSortedNumericDocValuesField *new_OrgApacheLuceneDocumentSortedNumericDocValuesField_initWithNSString_withLong_(NSString *name, jlong value) {
-  OrgApacheLuceneDocumentSortedNumericDocValuesField *self = [OrgApacheLuceneDocumentSortedNumericDocValuesField alloc];
-  OrgApacheLuceneDocumentSortedNumericDocValuesField_initWithNSString_withLong_(self, name, value);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentSortedNumericDocValuesField, initWithNSString_withLong_, name, value)
+}
+
+OrgApacheLuceneDocumentSortedNumericDocValuesField *create_OrgApacheLuceneDocumentSortedNumericDocValuesField_initWithNSString_withLong_(NSString *name, jlong value) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentSortedNumericDocValuesField, initWithNSString_withLong_, name, value)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentSortedNumericDocValuesField)

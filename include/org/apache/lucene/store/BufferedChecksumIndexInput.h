@@ -5,25 +5,29 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneStoreBufferedChecksumIndexInput_INCLUDE_ALL")
-#if OrgApacheLuceneStoreBufferedChecksumIndexInput_RESTRICT
-#define OrgApacheLuceneStoreBufferedChecksumIndexInput_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneStoreBufferedChecksumIndexInput")
+#ifdef RESTRICT_OrgApacheLuceneStoreBufferedChecksumIndexInput
+#define INCLUDE_ALL_OrgApacheLuceneStoreBufferedChecksumIndexInput 0
 #else
-#define OrgApacheLuceneStoreBufferedChecksumIndexInput_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneStoreBufferedChecksumIndexInput 1
 #endif
-#undef OrgApacheLuceneStoreBufferedChecksumIndexInput_RESTRICT
+#undef RESTRICT_OrgApacheLuceneStoreBufferedChecksumIndexInput
 
-#if !defined (_OrgApacheLuceneStoreBufferedChecksumIndexInput_) && (OrgApacheLuceneStoreBufferedChecksumIndexInput_INCLUDE_ALL || OrgApacheLuceneStoreBufferedChecksumIndexInput_INCLUDE)
-#define _OrgApacheLuceneStoreBufferedChecksumIndexInput_
+#if !defined (OrgApacheLuceneStoreBufferedChecksumIndexInput_) && (INCLUDE_ALL_OrgApacheLuceneStoreBufferedChecksumIndexInput || defined(INCLUDE_OrgApacheLuceneStoreBufferedChecksumIndexInput))
+#define OrgApacheLuceneStoreBufferedChecksumIndexInput_
 
-#define OrgApacheLuceneStoreChecksumIndexInput_RESTRICT 1
-#define OrgApacheLuceneStoreChecksumIndexInput_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreChecksumIndexInput 1
+#define INCLUDE_OrgApacheLuceneStoreChecksumIndexInput 1
 #include "org/apache/lucene/store/ChecksumIndexInput.h"
 
 @class IOSByteArray;
 @class OrgApacheLuceneStoreIndexInput;
 @protocol JavaUtilZipChecksum;
 
+/*!
+ @brief Simple implementation of <code>ChecksumIndexInput</code> that wraps
+ another input and delegates calls.
+ */
 @interface OrgApacheLuceneStoreBufferedChecksumIndexInput : OrgApacheLuceneStoreChecksumIndexInput {
  @public
   OrgApacheLuceneStoreIndexInput *main_;
@@ -32,6 +36,9 @@
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new BufferedChecksumIndexInput
+ */
 - (instancetype)initWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)main;
 
 - (OrgApacheLuceneStoreIndexInput *)clone;
@@ -65,8 +72,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneStoreBufferedChecksumIndexInput_initWithOr
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreBufferedChecksumIndexInput *new_OrgApacheLuceneStoreBufferedChecksumIndexInput_initWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput *main) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneStoreBufferedChecksumIndexInput *create_OrgApacheLuceneStoreBufferedChecksumIndexInput_initWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput *main);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreBufferedChecksumIndexInput)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneStoreBufferedChecksumIndexInput_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreBufferedChecksumIndexInput")

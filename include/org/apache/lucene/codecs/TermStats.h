@@ -5,25 +5,41 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsTermStats_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsTermStats_RESTRICT
-#define OrgApacheLuceneCodecsTermStats_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsTermStats")
+#ifdef RESTRICT_OrgApacheLuceneCodecsTermStats
+#define INCLUDE_ALL_OrgApacheLuceneCodecsTermStats 0
 #else
-#define OrgApacheLuceneCodecsTermStats_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsTermStats 1
 #endif
-#undef OrgApacheLuceneCodecsTermStats_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsTermStats
 
-#if !defined (_OrgApacheLuceneCodecsTermStats_) && (OrgApacheLuceneCodecsTermStats_INCLUDE_ALL || OrgApacheLuceneCodecsTermStats_INCLUDE)
-#define _OrgApacheLuceneCodecsTermStats_
+#if !defined (OrgApacheLuceneCodecsTermStats_) && (INCLUDE_ALL_OrgApacheLuceneCodecsTermStats || defined(INCLUDE_OrgApacheLuceneCodecsTermStats))
+#define OrgApacheLuceneCodecsTermStats_
 
+/*!
+ @brief Holder for per-term statistics.
+ - seealso: TermsEnum#docFreq
+ - seealso: TermsEnum#totalTermFreq
+ */
 @interface OrgApacheLuceneCodecsTermStats : NSObject {
  @public
+  /*!
+   @brief How many documents have at least one occurrence of
+ this term.
+   */
   jint docFreq_;
+  /*!
+   @brief Total number of times this term occurs across all
+ documents in the field.
+   */
   jlong totalTermFreq_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ */
 - (instancetype)initWithInt:(jint)docFreq
                    withLong:(jlong)totalTermFreq;
 
@@ -35,8 +51,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsTermStats_initWithInt_withLong_(OrgA
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsTermStats *new_OrgApacheLuceneCodecsTermStats_initWithInt_withLong_(jint docFreq, jlong totalTermFreq) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsTermStats *create_OrgApacheLuceneCodecsTermStats_initWithInt_withLong_(jint docFreq, jlong totalTermFreq);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsTermStats)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsTermStats_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsTermStats")

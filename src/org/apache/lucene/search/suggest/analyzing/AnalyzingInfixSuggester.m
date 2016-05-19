@@ -16,7 +16,7 @@
 #include "java/lang/Math.h"
 #include "java/lang/RuntimeException.h"
 #include "java/lang/StringBuilder.h"
-#include "java/lang/Throwable.h"
+#include "java/lang/annotation/Annotation.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Collection.h"
 #include "java/util/Collections.h"
@@ -93,6 +93,9 @@
   jboolean allTermsRequired_;
   jboolean highlight_;
   jboolean commitOnBuild_;
+  /*!
+   @brief Used for ongoing NRT additions/updates.
+   */
   OrgApacheLuceneIndexIndexWriter *writer_;
 }
 
@@ -114,8 +117,12 @@
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester, dir_, OrgApacheLuceneStoreDirectory *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester, writer_, OrgApacheLuceneIndexIndexWriter *)
 
-static OrgApacheLuceneSearchSort *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_SORT_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester, SORT_, OrgApacheLuceneSearchSort *)
+/*!
+ @brief How we sort the postings and search results.
+ */
+inline OrgApacheLuceneSearchSort *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_get_SORT();
+static OrgApacheLuceneSearchSort *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_SORT;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester, SORT, OrgApacheLuceneSearchSort *)
 
 __attribute__((unused)) static OrgApacheLuceneAnalysisAnalyzer *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_getGramAnalyzer(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *self);
 
@@ -150,15 +157,41 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSuggestAnalyzingAnalyzi
 
 __attribute__((unused)) static OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_$1 *new_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_$1_initWithOrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_withOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *outer$, OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *arg$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_$1 *create_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_$1_initWithOrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_withOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *outer$, OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *arg$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_$1)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester)
 
-NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_TEXT_FIELD_NAME_ = @"text";
-NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_EXACT_TEXT_FIELD_NAME_ = @"exacttext";
-NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_FIELD_NAME_ = @"contexts";
+NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_TEXT_FIELD_NAME = @"text";
+NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_EXACT_TEXT_FIELD_NAME = @"exacttext";
+NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_FIELD_NAME = @"contexts";
 
 @implementation OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester
+
++ (NSString *)TEXT_FIELD_NAME {
+  return OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_TEXT_FIELD_NAME;
+}
+
++ (NSString *)EXACT_TEXT_FIELD_NAME {
+  return OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_EXACT_TEXT_FIELD_NAME;
+}
+
++ (NSString *)CONTEXTS_FIELD_NAME {
+  return OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_FIELD_NAME;
+}
+
++ (jint)DEFAULT_MIN_PREFIX_CHARS {
+  return OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_DEFAULT_MIN_PREFIX_CHARS;
+}
+
++ (jboolean)DEFAULT_ALL_TERMS_REQUIRED {
+  return OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_DEFAULT_ALL_TERMS_REQUIRED;
+}
+
++ (jboolean)DEFAULT_HIGHLIGHT {
+  return OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_DEFAULT_HIGHLIGHT;
+}
 
 - (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
                   withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer {
@@ -216,10 +249,10 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
 }
 
 - (OrgApacheLuceneIndexIndexWriterConfig *)getIndexWriterConfigWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
-                                            withOrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum:(OrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum *)openMode {
-  OrgApacheLuceneIndexIndexWriterConfig *iwc = [new_OrgApacheLuceneIndexIndexWriterConfig_initWithOrgApacheLuceneAnalysisAnalyzer_(indexAnalyzer) autorelease];
-  [iwc setOpenModeWithOrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum:openMode];
-  [iwc setMergePolicyWithOrgApacheLuceneIndexMergePolicy:[new_OrgApacheLuceneIndexSortingMergePolicy_initWithOrgApacheLuceneIndexMergePolicy_withOrgApacheLuceneSearchSort_([iwc getMergePolicy], OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_SORT_) autorelease]];
+                                                withOrgApacheLuceneIndexIndexWriterConfig_OpenMode:(OrgApacheLuceneIndexIndexWriterConfig_OpenMode *)openMode {
+  OrgApacheLuceneIndexIndexWriterConfig *iwc = create_OrgApacheLuceneIndexIndexWriterConfig_initWithOrgApacheLuceneAnalysisAnalyzer_(indexAnalyzer);
+  [iwc setOpenModeWithOrgApacheLuceneIndexIndexWriterConfig_OpenMode:openMode];
+  [iwc setMergePolicyWithOrgApacheLuceneIndexMergePolicy:create_OrgApacheLuceneIndexSortingMergePolicy_initWithOrgApacheLuceneIndexMergePolicy_withOrgApacheLuceneSearchSort_([iwc getMergePolicy], OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_SORT)];
   return iwc;
 }
 
@@ -238,7 +271,7 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
   }
   jboolean success = false;
   @try {
-    JreStrongAssignAndConsume(&writer_, new_OrgApacheLuceneIndexIndexWriter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_(dir_, [self getIndexWriterConfigWithOrgApacheLuceneAnalysisAnalyzer:OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_getGramAnalyzer(self) withOrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum:JreLoadStatic(OrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum, CREATE)]));
+    JreStrongAssignAndConsume(&writer_, new_OrgApacheLuceneIndexIndexWriter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_(dir_, [self getIndexWriterConfigWithOrgApacheLuceneAnalysisAnalyzer:OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_getGramAnalyzer(self) withOrgApacheLuceneIndexIndexWriterConfig_OpenMode:JreLoadEnum(OrgApacheLuceneIndexIndexWriterConfig_OpenMode, CREATE)]));
     OrgApacheLuceneUtilBytesRef *text;
     while ((text = [((id<OrgApacheLuceneSearchSuggestInputIterator>) nil_chk(iter)) next]) != nil) {
       OrgApacheLuceneUtilBytesRef *payload;
@@ -266,9 +299,9 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
 
 - (void)commit {
   if (writer_ == nil) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"Cannot commit on an closed writer. Add documents first") autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"Cannot commit on an closed writer. Add documents first");
   }
-  [((OrgApacheLuceneIndexIndexWriter *) nil_chk(writer_)) commit];
+  [writer_ commit];
 }
 
 - (OrgApacheLuceneAnalysisAnalyzer *)getGramAnalyzer {
@@ -292,7 +325,7 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
                                      withLong:(jlong)weight
               withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload {
   OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_ensureOpen(self);
-  [((OrgApacheLuceneIndexIndexWriter *) nil_chk(writer_)) updateDocumentWithOrgApacheLuceneIndexTerm:[new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_EXACT_TEXT_FIELD_NAME_, [((OrgApacheLuceneUtilBytesRef *) nil_chk(text)) utf8ToString]) autorelease] withJavaLangIterable:OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_buildDocumentWithOrgApacheLuceneUtilBytesRef_withJavaUtilSet_withLong_withOrgApacheLuceneUtilBytesRef_(self, text, contexts, weight, payload)];
+  [((OrgApacheLuceneIndexIndexWriter *) nil_chk(writer_)) updateDocumentWithOrgApacheLuceneIndexTerm:create_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_EXACT_TEXT_FIELD_NAME, [((OrgApacheLuceneUtilBytesRef *) nil_chk(text)) utf8ToString]) withJavaLangIterable:OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_buildDocumentWithOrgApacheLuceneUtilBytesRef_withJavaUtilSet_withLong_withOrgApacheLuceneUtilBytesRef_(self, text, contexts, weight, payload)];
 }
 
 - (OrgApacheLuceneDocumentDocument *)buildDocumentWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)text
@@ -304,14 +337,14 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
 
 - (void)refresh {
   if (searcherMgr_ == nil) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"suggester was not built") autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"suggester was not built");
   }
-  [((OrgApacheLuceneSearchSearcherManager *) nil_chk(searcherMgr_)) maybeRefreshBlocking];
+  [searcherMgr_ maybeRefreshBlocking];
 }
 
 - (OrgApacheLuceneDocumentFieldType *)getTextFieldType {
-  OrgApacheLuceneDocumentFieldType *ft = [new_OrgApacheLuceneDocumentFieldType_initWithOrgApacheLuceneDocumentFieldType_(JreLoadStatic(OrgApacheLuceneDocumentTextField, TYPE_NOT_STORED_)) autorelease];
-  [ft setIndexOptionsWithOrgApacheLuceneIndexIndexOptionsEnum:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS)];
+  OrgApacheLuceneDocumentFieldType *ft = create_OrgApacheLuceneDocumentFieldType_initWithOrgApacheLuceneDocumentFieldType_(JreLoadStatic(OrgApacheLuceneDocumentTextField, TYPE_NOT_STORED));
+  [ft setIndexOptionsWithOrgApacheLuceneIndexIndexOptions:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS)];
   [ft setOmitNormsWithBoolean:true];
   return ft;
 }
@@ -340,9 +373,9 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
 
 - (OrgApacheLuceneSearchQuery *)getLastTokenQueryWithNSString:(NSString *)token {
   if (((jint) [((NSString *) nil_chk(token)) length]) < minPrefixChars_) {
-    return [new_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_([new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(@"textgrams", token) autorelease]) autorelease];
+    return create_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_(create_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(@"textgrams", token));
   }
-  return [new_OrgApacheLuceneSearchPrefixQuery_initWithOrgApacheLuceneIndexTerm_([new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_TEXT_FIELD_NAME_, token) autorelease]) autorelease];
+  return create_OrgApacheLuceneSearchPrefixQuery_initWithOrgApacheLuceneIndexTerm_(create_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_TEXT_FIELD_NAME, token));
 }
 
 - (id<JavaUtilList>)lookupWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
@@ -363,8 +396,8 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
 
 - (void)addContextToQueryWithOrgApacheLuceneSearchBooleanQuery_Builder:(OrgApacheLuceneSearchBooleanQuery_Builder *)query
                                        withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)context
-                      withOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanClause_OccurEnum *)clause {
-  [((OrgApacheLuceneSearchBooleanQuery_Builder *) nil_chk(query)) addWithOrgApacheLuceneSearchQuery:[new_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_([new_OrgApacheLuceneIndexTerm_initWithNSString_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_FIELD_NAME_, context) autorelease]) autorelease] withOrgApacheLuceneSearchBooleanClause_OccurEnum:clause];
+                          withOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause_Occur *)clause {
+  [((OrgApacheLuceneSearchBooleanQuery_Builder *) nil_chk(query)) addWithOrgApacheLuceneSearchQuery:create_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_(create_OrgApacheLuceneIndexTerm_initWithNSString_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_FIELD_NAME, context)) withOrgApacheLuceneSearchBooleanClause_Occur:clause];
 }
 
 - (id<JavaUtilList>)lookupWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
@@ -373,33 +406,33 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
                                        withBoolean:(jboolean)allTermsRequired
                                        withBoolean:(jboolean)doHighlight {
   if (searcherMgr_ == nil) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"suggester was not built") autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"suggester was not built");
   }
-  OrgApacheLuceneSearchBooleanClause_OccurEnum *occur;
+  OrgApacheLuceneSearchBooleanClause_Occur *occur;
   if (allTermsRequired) {
-    occur = JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, MUST);
+    occur = JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, MUST);
   }
   else {
-    occur = JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD);
+    occur = JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD);
   }
   OrgApacheLuceneSearchBooleanQuery_Builder *query;
   id<JavaUtilSet> matchedTokens;
   NSString *prefixToken = nil;
   {
-    OrgApacheLuceneAnalysisTokenStream *ts = [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(queryAnalyzer_)) tokenStreamWithNSString:@"" withJavaIoReader:[new_JavaIoStringReader_initWithNSString_([((id<JavaLangCharSequence>) nil_chk(key)) description]) autorelease]];
-    JavaLangThrowable *__primaryException1 = nil;
+    OrgApacheLuceneAnalysisTokenStream *ts = [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(queryAnalyzer_)) tokenStreamWithNSString:@"" withJavaIoReader:create_JavaIoStringReader_initWithNSString_([((id<JavaLangCharSequence>) nil_chk(key)) description])];
+    NSException *__primaryException1 = nil;
     @try {
       [((OrgApacheLuceneAnalysisTokenStream *) nil_chk(ts)) reset];
       id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt = [ts addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()];
       id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute> offsetAtt = [ts addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_()];
       NSString *lastToken = nil;
-      query = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
+      query = create_OrgApacheLuceneSearchBooleanQuery_Builder_init();
       jint maxEndOffset = -1;
-      matchedTokens = [new_JavaUtilHashSet_init() autorelease];
+      matchedTokens = create_JavaUtilHashSet_init();
       while ([ts incrementToken]) {
         if (lastToken != nil) {
           [matchedTokens addWithId:lastToken];
-          [query addWithOrgApacheLuceneSearchQuery:[new_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_([new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_TEXT_FIELD_NAME_, lastToken) autorelease]) autorelease] withOrgApacheLuceneSearchBooleanClause_OccurEnum:occur];
+          [query addWithOrgApacheLuceneSearchQuery:create_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_(create_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_TEXT_FIELD_NAME, lastToken)) withOrgApacheLuceneSearchBooleanClause_Occur:occur];
         }
         lastToken = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt)) description];
         if (lastToken != nil) {
@@ -415,16 +448,16 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
         }
         else {
           [matchedTokens addWithId:lastToken];
-          lastQuery = [new_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_([new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_TEXT_FIELD_NAME_, lastToken) autorelease]) autorelease];
+          lastQuery = create_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_(create_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_TEXT_FIELD_NAME, lastToken));
         }
         if (lastQuery != nil) {
-          [query addWithOrgApacheLuceneSearchQuery:lastQuery withOrgApacheLuceneSearchBooleanClause_OccurEnum:occur];
+          [query addWithOrgApacheLuceneSearchQuery:lastQuery withOrgApacheLuceneSearchBooleanClause_Occur:occur];
         }
       }
       if (contextQuery != nil) {
         jboolean allMustNot = true;
         for (OrgApacheLuceneSearchBooleanClause * __strong clause in nil_chk([contextQuery clauses])) {
-          if ([((OrgApacheLuceneSearchBooleanClause *) nil_chk(clause)) getOccur] != JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, MUST_NOT)) {
+          if ([((OrgApacheLuceneSearchBooleanClause *) nil_chk(clause)) getOccur] != JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, MUST_NOT)) {
             allMustNot = false;
             break;
           }
@@ -435,11 +468,11 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
           }
         }
         else {
-          [query addWithOrgApacheLuceneSearchQuery:contextQuery withOrgApacheLuceneSearchBooleanClause_OccurEnum:JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, MUST)];
+          [query addWithOrgApacheLuceneSearchQuery:contextQuery withOrgApacheLuceneSearchBooleanClause_Occur:JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, MUST)];
         }
       }
     }
-    @catch (JavaLangThrowable *e) {
+    @catch (NSException *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -448,8 +481,8 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
         if (__primaryException1 != nil) {
           @try {
             [ts close];
-          } @catch (JavaLangThrowable *e) {
-            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          } @catch (NSException *e) {
+            [__primaryException1 addSuppressedWithNSException:e];
           }
         } else {
           [ts close];
@@ -458,9 +491,9 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
     }
   }
   OrgApacheLuceneSearchQuery *finalQuery = [self finishQueryWithOrgApacheLuceneSearchBooleanQuery_Builder:query withBoolean:allTermsRequired];
-  OrgApacheLuceneSearchTopFieldCollector *c = OrgApacheLuceneSearchTopFieldCollector_createWithOrgApacheLuceneSearchSort_withInt_withBoolean_withBoolean_withBoolean_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_SORT_, num, true, false, false);
-  OrgApacheLuceneIndexSortingMergePolicy *sortingMergePolicy = (OrgApacheLuceneIndexSortingMergePolicy *) check_class_cast([((OrgApacheLuceneIndexLiveIndexWriterConfig *) nil_chk([((OrgApacheLuceneIndexIndexWriter *) nil_chk(writer_)) getConfig])) getMergePolicy], [OrgApacheLuceneIndexSortingMergePolicy class]);
-  id<OrgApacheLuceneSearchCollector> c2 = [new_OrgApacheLuceneSearchEarlyTerminatingSortingCollector_initWithOrgApacheLuceneSearchCollector_withOrgApacheLuceneSearchSort_withInt_withOrgApacheLuceneSearchSort_(c, OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_SORT_, num, [((OrgApacheLuceneIndexSortingMergePolicy *) nil_chk(sortingMergePolicy)) getSort]) autorelease];
+  OrgApacheLuceneSearchTopFieldCollector *c = OrgApacheLuceneSearchTopFieldCollector_createWithOrgApacheLuceneSearchSort_withInt_withBoolean_withBoolean_withBoolean_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_SORT, num, true, false, false);
+  OrgApacheLuceneIndexSortingMergePolicy *sortingMergePolicy = (OrgApacheLuceneIndexSortingMergePolicy *) cast_chk([((OrgApacheLuceneIndexLiveIndexWriterConfig *) nil_chk([((OrgApacheLuceneIndexIndexWriter *) nil_chk(writer_)) getConfig])) getMergePolicy], [OrgApacheLuceneIndexSortingMergePolicy class]);
+  id<OrgApacheLuceneSearchCollector> c2 = create_OrgApacheLuceneSearchEarlyTerminatingSortingCollector_initWithOrgApacheLuceneSearchCollector_withOrgApacheLuceneSearchSort_withInt_withOrgApacheLuceneSearchSort_(c, OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_SORT, num, [((OrgApacheLuceneIndexSortingMergePolicy *) nil_chk(sortingMergePolicy)) getSort]);
   OrgApacheLuceneSearchIndexSearcher *searcher = [((OrgApacheLuceneSearchSearcherManager *) nil_chk(searcherMgr_)) acquire];
   id<JavaUtilList> results = nil;
   @try {
@@ -469,7 +502,7 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
     results = [self createResultsWithOrgApacheLuceneSearchIndexSearcher:searcher withOrgApacheLuceneSearchTopFieldDocs:hits withInt:num withJavaLangCharSequence:key withBoolean:doHighlight withJavaUtilSet:matchedTokens withNSString:prefixToken];
   }
   @finally {
-    [searcherMgr_ release__WithId:searcher];
+    [((OrgApacheLuceneSearchSearcherManager *) nil_chk(searcherMgr_)) release__WithId:searcher];
   }
   return results;
 }
@@ -481,15 +514,15 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
                                                             withBoolean:(jboolean)doHighlight
                                                         withJavaUtilSet:(id<JavaUtilSet>)matchedTokens
                                                            withNSString:(NSString *)prefixToken {
-  OrgApacheLuceneIndexBinaryDocValues *textDV = OrgApacheLuceneIndexMultiDocValues_getBinaryValuesWithOrgApacheLuceneIndexIndexReader_withNSString_([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getIndexReader], OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_TEXT_FIELD_NAME_);
+  OrgApacheLuceneIndexBinaryDocValues *textDV = OrgApacheLuceneIndexMultiDocValues_getBinaryValuesWithOrgApacheLuceneIndexIndexReader_withNSString_([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getIndexReader], OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_TEXT_FIELD_NAME);
   OrgApacheLuceneIndexBinaryDocValues *payloadsDV = OrgApacheLuceneIndexMultiDocValues_getBinaryValuesWithOrgApacheLuceneIndexIndexReader_withNSString_([searcher getIndexReader], @"payloads");
   id<JavaUtilList> leaves = [((OrgApacheLuceneIndexIndexReader *) nil_chk([searcher getIndexReader])) leaves];
-  id<JavaUtilList> results = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> results = create_JavaUtilArrayList_init();
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(((OrgApacheLuceneSearchTopFieldDocs *) nil_chk(hits))->scoreDocs_))->size_; i++) {
-    OrgApacheLuceneSearchFieldDoc *fd = (OrgApacheLuceneSearchFieldDoc *) check_class_cast(IOSObjectArray_Get(hits->scoreDocs_, i), [OrgApacheLuceneSearchFieldDoc class]);
+    OrgApacheLuceneSearchFieldDoc *fd = (OrgApacheLuceneSearchFieldDoc *) cast_chk(IOSObjectArray_Get(hits->scoreDocs_, i), [OrgApacheLuceneSearchFieldDoc class]);
     OrgApacheLuceneUtilBytesRef *term = [((OrgApacheLuceneIndexBinaryDocValues *) nil_chk(textDV)) getWithInt:((OrgApacheLuceneSearchFieldDoc *) nil_chk(fd))->doc_];
     NSString *text = [((OrgApacheLuceneUtilBytesRef *) nil_chk(term)) utf8ToString];
-    jlong score = [((JavaLangLong *) nil_chk((JavaLangLong *) check_class_cast(IOSObjectArray_Get(nil_chk(fd->fields_), 0), [JavaLangLong class]))) longLongValue];
+    jlong score = [((JavaLangLong *) nil_chk((JavaLangLong *) cast_chk(IOSObjectArray_Get(nil_chk(fd->fields_), 0), [JavaLangLong class]))) longLongValue];
     OrgApacheLuceneUtilBytesRef *payload;
     if (payloadsDV != nil) {
       payload = OrgApacheLuceneUtilBytesRef_deepCopyOfWithOrgApacheLuceneUtilBytesRef_([payloadsDV getWithInt:fd->doc_]);
@@ -498,10 +531,10 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
       payload = nil;
     }
     jint segment = OrgApacheLuceneIndexReaderUtil_subIndexWithInt_withJavaUtilList_(fd->doc_, leaves);
-    OrgApacheLuceneIndexSortedSetDocValues *contextsDV = [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk([((id<JavaUtilList>) nil_chk(leaves)) getWithInt:segment])) reader])) getSortedSetDocValuesWithNSString:OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_FIELD_NAME_];
+    OrgApacheLuceneIndexSortedSetDocValues *contextsDV = [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk([((id<JavaUtilList>) nil_chk(leaves)) getWithInt:segment])) reader])) getSortedSetDocValuesWithNSString:OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_FIELD_NAME];
     id<JavaUtilSet> contexts;
     if (contextsDV != nil) {
-      contexts = [new_JavaUtilHashSet_init() autorelease];
+      contexts = create_JavaUtilHashSet_init();
       [contextsDV setDocumentWithInt:fd->doc_ - ((OrgApacheLuceneIndexLeafReaderContext *) nil_chk([leaves getWithInt:segment]))->docBase_];
       jlong ord;
       while ((ord = [contextsDV nextOrd]) != OrgApacheLuceneIndexSortedSetDocValues_NO_MORE_ORDS) {
@@ -514,10 +547,10 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
     }
     OrgApacheLuceneSearchSuggestLookup_LookupResult *result;
     if (doHighlight) {
-      result = [new_OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withId_withLong_withOrgApacheLuceneUtilBytesRef_withJavaUtilSet_(text, [self highlightWithNSString:text withJavaUtilSet:matchedTokens withNSString:prefixToken], score, payload, contexts) autorelease];
+      result = create_OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withId_withLong_withOrgApacheLuceneUtilBytesRef_withJavaUtilSet_(text, [self highlightWithNSString:text withJavaUtilSet:matchedTokens withNSString:prefixToken], score, payload, contexts);
     }
     else {
-      result = [new_OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withLong_withOrgApacheLuceneUtilBytesRef_withJavaUtilSet_(text, score, payload, contexts) autorelease];
+      result = create_OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withLong_withOrgApacheLuceneUtilBytesRef_withJavaUtilSet_(text, score, payload, contexts);
     }
     [results addWithId:result];
   }
@@ -533,13 +566,13 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
             withJavaUtilSet:(id<JavaUtilSet>)matchedTokens
                withNSString:(NSString *)prefixToken {
   {
-    OrgApacheLuceneAnalysisTokenStream *ts = [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(queryAnalyzer_)) tokenStreamWithNSString:@"text" withJavaIoReader:[new_JavaIoStringReader_initWithNSString_(text) autorelease]];
-    JavaLangThrowable *__primaryException1 = nil;
+    OrgApacheLuceneAnalysisTokenStream *ts = [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(queryAnalyzer_)) tokenStreamWithNSString:@"text" withJavaIoReader:create_JavaIoStringReader_initWithNSString_(text)];
+    NSException *__primaryException1 = nil;
     @try {
       id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt = [((OrgApacheLuceneAnalysisTokenStream *) nil_chk(ts)) addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()];
       id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute> offsetAtt = [ts addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_()];
       [ts reset];
-      JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+      JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
       jint upto = 0;
       while ([ts incrementToken]) {
         NSString *token = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt)) description];
@@ -568,7 +601,7 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
       }
       return [sb description];
     }
-    @catch (JavaLangThrowable *e) {
+    @catch (NSException *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -577,8 +610,8 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
         if (__primaryException1 != nil) {
           @try {
             [ts close];
-          } @catch (JavaLangThrowable *e) {
-            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          } @catch (NSException *e) {
+            [__primaryException1 addSuppressedWithNSException:e];
           }
         } else {
           [ts close];
@@ -644,23 +677,23 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
         for (OrgApacheLuceneIndexLeafReaderContext * __strong context in nil_chk([((OrgApacheLuceneIndexIndexReader *) nil_chk([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getIndexReader])) leaves])) {
           OrgApacheLuceneIndexLeafReader *reader = OrgApacheLuceneIndexFilterLeafReader_unwrapWithOrgApacheLuceneIndexLeafReader_([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader]);
           if ([reader isKindOfClass:[OrgApacheLuceneIndexSegmentReader class]]) {
-            mem += [((OrgApacheLuceneIndexSegmentReader *) nil_chk(((OrgApacheLuceneIndexSegmentReader *) check_class_cast([context reader], [OrgApacheLuceneIndexSegmentReader class])))) ramBytesUsed];
+            mem += [((OrgApacheLuceneIndexSegmentReader *) nil_chk(((OrgApacheLuceneIndexSegmentReader *) cast_chk([context reader], [OrgApacheLuceneIndexSegmentReader class])))) ramBytesUsed];
           }
         }
       }
       @finally {
-        [searcherMgr_ release__WithId:searcher];
+        [((OrgApacheLuceneSearchSearcherManager *) nil_chk(searcherMgr_)) release__WithId:searcher];
       }
     }
     return mem;
   }
   @catch (JavaIoIOException *ioe) {
-    @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(ioe) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSException_(ioe);
   }
 }
 
 - (id<JavaUtilCollection>)getChildResources {
-  id<JavaUtilList> resources = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> resources = create_JavaUtilArrayList_init();
   @try {
     if (searcherMgr_ != nil) {
       OrgApacheLuceneSearchIndexSearcher *searcher = [searcherMgr_ acquire];
@@ -668,18 +701,18 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
         for (OrgApacheLuceneIndexLeafReaderContext * __strong context in nil_chk([((OrgApacheLuceneIndexIndexReader *) nil_chk([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getIndexReader])) leaves])) {
           OrgApacheLuceneIndexLeafReader *reader = OrgApacheLuceneIndexFilterLeafReader_unwrapWithOrgApacheLuceneIndexLeafReader_([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader]);
           if ([reader isKindOfClass:[OrgApacheLuceneIndexSegmentReader class]]) {
-            [resources addWithId:OrgApacheLuceneUtilAccountables_namedAccountableWithNSString_withOrgApacheLuceneUtilAccountable_(@"segment", (OrgApacheLuceneIndexSegmentReader *) check_class_cast(reader, [OrgApacheLuceneIndexSegmentReader class]))];
+            [resources addWithId:OrgApacheLuceneUtilAccountables_namedAccountableWithNSString_withOrgApacheLuceneUtilAccountable_(@"segment", (OrgApacheLuceneIndexSegmentReader *) cast_chk(reader, [OrgApacheLuceneIndexSegmentReader class]))];
           }
         }
       }
       @finally {
-        [searcherMgr_ release__WithId:searcher];
+        [((OrgApacheLuceneSearchSearcherManager *) nil_chk(searcherMgr_)) release__WithId:searcher];
       }
     }
     return JavaUtilCollections_unmodifiableListWithJavaUtilList_(resources);
   }
   @catch (JavaIoIOException *ioe) {
-    @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(ioe) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSException_(ioe);
   }
 }
 
@@ -687,13 +720,25 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
   if (searcherMgr_ == nil) {
     return 0;
   }
-  OrgApacheLuceneSearchIndexSearcher *searcher = [((OrgApacheLuceneSearchSearcherManager *) nil_chk(searcherMgr_)) acquire];
+  OrgApacheLuceneSearchIndexSearcher *searcher = [searcherMgr_ acquire];
   @try {
     return [((OrgApacheLuceneIndexIndexReader *) nil_chk([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getIndexReader])) numDocs];
   }
   @finally {
-    [searcherMgr_ release__WithId:searcher];
+    [((OrgApacheLuceneSearchSearcherManager *) nil_chk(searcherMgr_)) release__WithId:searcher];
   }
+}
+
++ (IOSObjectArray *)__annotations_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_ {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
++ (IOSObjectArray *)__annotations_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_ {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
++ (IOSObjectArray *)__annotations_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_withBoolean_withBoolean_ {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 - (void)dealloc {
@@ -708,21 +753,9 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
 
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_SORT_, new_OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortField_([new_OrgApacheLuceneSearchSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_withBoolean_(@"weight", JreLoadStatic(OrgApacheLuceneSearchSortField_TypeEnum, LONG), true) autorelease]));
+    JreStrongAssignAndConsume(&OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_SORT, new_OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortField_(create_OrgApacheLuceneSearchSortField_initWithNSString_withOrgApacheLuceneSearchSortField_Type_withBoolean_(@"weight", JreLoadEnum(OrgApacheLuceneSearchSortField_Type, LONG), true)));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester)
   }
-}
-
-+ (IOSObjectArray *)__annotations_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_withBoolean_withBoolean_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -733,29 +766,29 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
     { "initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneAnalysisAnalyzer:withInt:withBoolean:withBoolean:withBoolean:", "AnalyzingInfixSuggester", NULL, 0x1, "Ljava.io.IOException;", NULL },
     { "initWithOrgApacheLuceneUtilVersion:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneAnalysisAnalyzer:withInt:withBoolean:", "AnalyzingInfixSuggester", NULL, 0x1, "Ljava.io.IOException;", NULL },
     { "initWithOrgApacheLuceneUtilVersion:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneAnalysisAnalyzer:withInt:withBoolean:withBoolean:withBoolean:", "AnalyzingInfixSuggester", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "getIndexWriterConfigWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum:", "getIndexWriterConfig", "Lorg.apache.lucene.index.IndexWriterConfig;", 0x4, NULL, NULL },
+    { "getIndexWriterConfigWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneIndexIndexWriterConfig_OpenMode:", "getIndexWriterConfig", "Lorg.apache.lucene.index.IndexWriterConfig;", 0x4, NULL, NULL },
     { "getDirectoryWithOrgLukhnosPortmobileFilePath:", "getDirectory", "Lorg.apache.lucene.store.Directory;", 0x4, "Ljava.io.IOException;", NULL },
     { "buildWithOrgApacheLuceneSearchSuggestInputIterator:", "build", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "commit", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
     { "getGramAnalyzer", NULL, "Lorg.apache.lucene.analysis.Analyzer;", 0x2, NULL, NULL },
     { "ensureOpen", NULL, "V", 0x22, "Ljava.io.IOException;", NULL },
-    { "addWithOrgApacheLuceneUtilBytesRef:withJavaUtilSet:withLong:withOrgApacheLuceneUtilBytesRef:", "add", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "updateWithOrgApacheLuceneUtilBytesRef:withJavaUtilSet:withLong:withOrgApacheLuceneUtilBytesRef:", "update", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "buildDocumentWithOrgApacheLuceneUtilBytesRef:withJavaUtilSet:withLong:withOrgApacheLuceneUtilBytesRef:", "buildDocument", "Lorg.apache.lucene.document.Document;", 0x2, "Ljava.io.IOException;", NULL },
+    { "addWithOrgApacheLuceneUtilBytesRef:withJavaUtilSet:withLong:withOrgApacheLuceneUtilBytesRef:", "add", "V", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/BytesRef;Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;JLorg/apache/lucene/util/BytesRef;)V" },
+    { "updateWithOrgApacheLuceneUtilBytesRef:withJavaUtilSet:withLong:withOrgApacheLuceneUtilBytesRef:", "update", "V", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/BytesRef;Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;JLorg/apache/lucene/util/BytesRef;)V" },
+    { "buildDocumentWithOrgApacheLuceneUtilBytesRef:withJavaUtilSet:withLong:withOrgApacheLuceneUtilBytesRef:", "buildDocument", "Lorg.apache.lucene.document.Document;", 0x2, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/BytesRef;Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;JLorg/apache/lucene/util/BytesRef;)Lorg/apache/lucene/document/Document;" },
     { "refresh", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
     { "getTextFieldType", NULL, "Lorg.apache.lucene.document.FieldType;", 0x4, NULL, NULL },
-    { "lookupWithJavaLangCharSequence:withJavaUtilSet:withBoolean:withInt:", "lookup", "Ljava.util.List;", 0x1, "Ljava.io.IOException;", NULL },
-    { "lookupWithJavaLangCharSequence:withInt:withBoolean:withBoolean:", "lookup", "Ljava.util.List;", 0x1, "Ljava.io.IOException;", NULL },
-    { "lookupWithJavaLangCharSequence:withJavaUtilSet:withInt:withBoolean:withBoolean:", "lookup", "Ljava.util.List;", 0x1, "Ljava.io.IOException;", NULL },
+    { "lookupWithJavaLangCharSequence:withJavaUtilSet:withBoolean:withInt:", "lookup", "Ljava.util.List;", 0x1, "Ljava.io.IOException;", "(Ljava/lang/CharSequence;Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;ZI)Ljava/util/List<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;" },
+    { "lookupWithJavaLangCharSequence:withInt:withBoolean:withBoolean:", "lookup", "Ljava.util.List;", 0x1, "Ljava.io.IOException;", "(Ljava/lang/CharSequence;IZZ)Ljava/util/List<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;" },
+    { "lookupWithJavaLangCharSequence:withJavaUtilSet:withInt:withBoolean:withBoolean:", "lookup", "Ljava.util.List;", 0x1, "Ljava.io.IOException;", "(Ljava/lang/CharSequence;Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;IZZ)Ljava/util/List<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;" },
     { "getLastTokenQueryWithNSString:", "getLastTokenQuery", "Lorg.apache.lucene.search.Query;", 0x4, "Ljava.io.IOException;", NULL },
-    { "lookupWithJavaLangCharSequence:withJavaUtilMap:withInt:withBoolean:withBoolean:", "lookup", "Ljava.util.List;", 0x1, "Ljava.io.IOException;", NULL },
-    { "toQueryWithJavaUtilMap:", "toQuery", "Lorg.apache.lucene.search.BooleanQuery;", 0x2, NULL, NULL },
-    { "toQueryWithJavaUtilSet:", "toQuery", "Lorg.apache.lucene.search.BooleanQuery;", 0x2, NULL, NULL },
-    { "addContextToQueryWithOrgApacheLuceneSearchBooleanQuery_Builder:withOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneSearchBooleanClause_OccurEnum:", "addContextToQuery", "V", 0x1, NULL, NULL },
-    { "lookupWithJavaLangCharSequence:withOrgApacheLuceneSearchBooleanQuery:withInt:withBoolean:withBoolean:", "lookup", "Ljava.util.List;", 0x1, "Ljava.io.IOException;", NULL },
-    { "createResultsWithOrgApacheLuceneSearchIndexSearcher:withOrgApacheLuceneSearchTopFieldDocs:withInt:withJavaLangCharSequence:withBoolean:withJavaUtilSet:withNSString:", "createResults", "Ljava.util.List;", 0x4, "Ljava.io.IOException;", NULL },
+    { "lookupWithJavaLangCharSequence:withJavaUtilMap:withInt:withBoolean:withBoolean:", "lookup", "Ljava.util.List;", 0x1, "Ljava.io.IOException;", "(Ljava/lang/CharSequence;Ljava/util/Map<Lorg/apache/lucene/util/BytesRef;Lorg/apache/lucene/search/BooleanClause$Occur;>;IZZ)Ljava/util/List<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;" },
+    { "toQueryWithJavaUtilMap:", "toQuery", "Lorg.apache.lucene.search.BooleanQuery;", 0x2, NULL, "(Ljava/util/Map<Lorg/apache/lucene/util/BytesRef;Lorg/apache/lucene/search/BooleanClause$Occur;>;)Lorg/apache/lucene/search/BooleanQuery;" },
+    { "toQueryWithJavaUtilSet:", "toQuery", "Lorg.apache.lucene.search.BooleanQuery;", 0x2, NULL, "(Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;)Lorg/apache/lucene/search/BooleanQuery;" },
+    { "addContextToQueryWithOrgApacheLuceneSearchBooleanQuery_Builder:withOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneSearchBooleanClause_Occur:", "addContextToQuery", "V", 0x1, NULL, NULL },
+    { "lookupWithJavaLangCharSequence:withOrgApacheLuceneSearchBooleanQuery:withInt:withBoolean:withBoolean:", "lookup", "Ljava.util.List;", 0x1, "Ljava.io.IOException;", "(Ljava/lang/CharSequence;Lorg/apache/lucene/search/BooleanQuery;IZZ)Ljava/util/List<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;" },
+    { "createResultsWithOrgApacheLuceneSearchIndexSearcher:withOrgApacheLuceneSearchTopFieldDocs:withInt:withJavaLangCharSequence:withBoolean:withJavaUtilSet:withNSString:", "createResults", "Ljava.util.List;", 0x4, "Ljava.io.IOException;", "(Lorg/apache/lucene/search/IndexSearcher;Lorg/apache/lucene/search/TopFieldDocs;ILjava/lang/CharSequence;ZLjava/util/Set<Ljava/lang/String;>;Ljava/lang/String;)Ljava/util/List<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;" },
     { "finishQueryWithOrgApacheLuceneSearchBooleanQuery_Builder:withBoolean:", "finishQuery", "Lorg.apache.lucene.search.Query;", 0x4, NULL, NULL },
-    { "highlightWithNSString:withJavaUtilSet:withNSString:", "highlight", "Ljava.lang.Object;", 0x4, "Ljava.io.IOException;", NULL },
+    { "highlightWithNSString:withJavaUtilSet:withNSString:", "highlight", "Ljava.lang.Object;", 0x4, "Ljava.io.IOException;", "(Ljava/lang/String;Ljava/util/Set<Ljava/lang/String;>;Ljava/lang/String;)Ljava/lang/Object;" },
     { "addNonMatchWithJavaLangStringBuilder:withNSString:", "addNonMatch", "V", 0x4, NULL, NULL },
     { "addWholeMatchWithJavaLangStringBuilder:withNSString:withNSString:", "addWholeMatch", "V", 0x4, NULL, NULL },
     { "addPrefixMatchWithJavaLangStringBuilder:withNSString:withNSString:withNSString:", "addPrefixMatch", "V", 0x4, NULL, NULL },
@@ -763,13 +796,13 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
     { "load__WithOrgApacheLuceneStoreDataInput:", "load", "Z", 0x1, "Ljava.io.IOException;", NULL },
     { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
     { "getCount", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "TEXT_FIELD_NAME_", NULL, 0x1c, "Ljava.lang.String;", &OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_TEXT_FIELD_NAME_, NULL, .constantValue.asLong = 0 },
-    { "EXACT_TEXT_FIELD_NAME_", NULL, 0x1c, "Ljava.lang.String;", &OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_EXACT_TEXT_FIELD_NAME_, NULL, .constantValue.asLong = 0 },
-    { "CONTEXTS_FIELD_NAME_", NULL, 0x1c, "Ljava.lang.String;", &OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_FIELD_NAME_, NULL, .constantValue.asLong = 0 },
+    { "TEXT_FIELD_NAME", "TEXT_FIELD_NAME", 0x1c, "Ljava.lang.String;", &OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_TEXT_FIELD_NAME, NULL, .constantValue.asLong = 0 },
+    { "EXACT_TEXT_FIELD_NAME", "EXACT_TEXT_FIELD_NAME", 0x1c, "Ljava.lang.String;", &OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_EXACT_TEXT_FIELD_NAME, NULL, .constantValue.asLong = 0 },
+    { "CONTEXTS_FIELD_NAME", "CONTEXTS_FIELD_NAME", 0x1c, "Ljava.lang.String;", &OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_FIELD_NAME, NULL, .constantValue.asLong = 0 },
     { "queryAnalyzer_", NULL, 0x14, "Lorg.apache.lucene.analysis.Analyzer;", NULL, NULL, .constantValue.asLong = 0 },
     { "indexAnalyzer_", NULL, 0x14, "Lorg.apache.lucene.analysis.Analyzer;", NULL, NULL, .constantValue.asLong = 0 },
     { "matchVersion_", NULL, 0x10, "Lorg.apache.lucene.util.Version;", NULL, NULL, .constantValue.asLong = 0 },
@@ -783,7 +816,7 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
     { "DEFAULT_MIN_PREFIX_CHARS", "DEFAULT_MIN_PREFIX_CHARS", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_DEFAULT_MIN_PREFIX_CHARS },
     { "DEFAULT_ALL_TERMS_REQUIRED", "DEFAULT_ALL_TERMS_REQUIRED", 0x19, "Z", NULL, NULL, .constantValue.asBOOL = OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_DEFAULT_ALL_TERMS_REQUIRED },
     { "DEFAULT_HIGHLIGHT", "DEFAULT_HIGHLIGHT", 0x19, "Z", NULL, NULL, .constantValue.asBOOL = OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_DEFAULT_HIGHLIGHT },
-    { "SORT_", NULL, 0x1a, "Lorg.apache.lucene.search.Sort;", &OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_SORT_, NULL, .constantValue.asLong = 0 },
+    { "SORT", "SORT", 0x1a, "Lorg.apache.lucene.search.Sort;", &OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_SORT, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester = { 2, "AnalyzingInfixSuggester", "org.apache.lucene.search.suggest.analyzing", NULL, 0x1, 38, methods, 17, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester;
@@ -796,9 +829,11 @@ void OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApa
 }
 
 OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *new_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
-  OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *self = [OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester alloc];
-  OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_(self, dir, analyzer);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester, initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_, dir, analyzer)
+}
+
+OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *create_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester, initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_, dir, analyzer)
 }
 
 void OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *self, OrgApacheLuceneUtilVersion *matchVersion, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
@@ -806,9 +841,11 @@ void OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApa
 }
 
 OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *new_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneUtilVersion *matchVersion, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
-  OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *self = [OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester alloc];
-  OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_(self, matchVersion, dir, analyzer);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester, initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_, matchVersion, dir, analyzer)
+}
+
+OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *create_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneUtilVersion *matchVersion, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester, initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_, matchVersion, dir, analyzer)
 }
 
 void OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *self, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint minPrefixChars, jboolean commitOnBuild) {
@@ -816,9 +853,11 @@ void OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApa
 }
 
 OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *new_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint minPrefixChars, jboolean commitOnBuild) {
-  OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *self = [OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester alloc];
-  OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_(self, dir, indexAnalyzer, queryAnalyzer, minPrefixChars, commitOnBuild);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester, initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_, dir, indexAnalyzer, queryAnalyzer, minPrefixChars, commitOnBuild)
+}
+
+OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *create_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint minPrefixChars, jboolean commitOnBuild) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester, initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_, dir, indexAnalyzer, queryAnalyzer, minPrefixChars, commitOnBuild)
 }
 
 void OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_withBoolean_withBoolean_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *self, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint minPrefixChars, jboolean commitOnBuild, jboolean allTermsRequired, jboolean highlight) {
@@ -826,9 +865,11 @@ void OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApa
 }
 
 OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *new_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_withBoolean_withBoolean_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint minPrefixChars, jboolean commitOnBuild, jboolean allTermsRequired, jboolean highlight) {
-  OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *self = [OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester alloc];
-  OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_withBoolean_withBoolean_(self, dir, indexAnalyzer, queryAnalyzer, minPrefixChars, commitOnBuild, allTermsRequired, highlight);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester, initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_withBoolean_withBoolean_, dir, indexAnalyzer, queryAnalyzer, minPrefixChars, commitOnBuild, allTermsRequired, highlight)
+}
+
+OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *create_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_withBoolean_withBoolean_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint minPrefixChars, jboolean commitOnBuild, jboolean allTermsRequired, jboolean highlight) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester, initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_withBoolean_withBoolean_, dir, indexAnalyzer, queryAnalyzer, minPrefixChars, commitOnBuild, allTermsRequired, highlight)
 }
 
 void OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *self, OrgApacheLuceneUtilVersion *matchVersion, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint minPrefixChars, jboolean commitOnBuild) {
@@ -836,15 +877,17 @@ void OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApa
 }
 
 OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *new_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_(OrgApacheLuceneUtilVersion *matchVersion, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint minPrefixChars, jboolean commitOnBuild) {
-  OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *self = [OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester alloc];
-  OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_(self, matchVersion, dir, indexAnalyzer, queryAnalyzer, minPrefixChars, commitOnBuild);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester, initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_, matchVersion, dir, indexAnalyzer, queryAnalyzer, minPrefixChars, commitOnBuild)
+}
+
+OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *create_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_(OrgApacheLuceneUtilVersion *matchVersion, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint minPrefixChars, jboolean commitOnBuild) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester, initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_, matchVersion, dir, indexAnalyzer, queryAnalyzer, minPrefixChars, commitOnBuild)
 }
 
 void OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_withBoolean_withBoolean_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *self, OrgApacheLuceneUtilVersion *matchVersion, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint minPrefixChars, jboolean commitOnBuild, jboolean allTermsRequired, jboolean highlight) {
   OrgApacheLuceneSearchSuggestLookup_init(self);
   if (minPrefixChars < 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"minPrefixChars must be >= 0; got: ", minPrefixChars)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"minPrefixChars must be >= 0; got: ", minPrefixChars));
   }
   JreStrongAssign(&self->queryAnalyzer_, queryAnalyzer);
   JreStrongAssign(&self->indexAnalyzer_, indexAnalyzer);
@@ -855,19 +898,21 @@ void OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApa
   self->allTermsRequired_ = allTermsRequired;
   self->highlight_ = highlight;
   if (OrgApacheLuceneIndexDirectoryReader_indexExistsWithOrgApacheLuceneStoreDirectory_(dir)) {
-    JreStrongAssignAndConsume(&self->writer_, new_OrgApacheLuceneIndexIndexWriter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_(dir, [self getIndexWriterConfigWithOrgApacheLuceneAnalysisAnalyzer:OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_getGramAnalyzer(self) withOrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum:JreLoadStatic(OrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum, APPEND)]));
+    JreStrongAssignAndConsume(&self->writer_, new_OrgApacheLuceneIndexIndexWriter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_(dir, [self getIndexWriterConfigWithOrgApacheLuceneAnalysisAnalyzer:OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_getGramAnalyzer(self) withOrgApacheLuceneIndexIndexWriterConfig_OpenMode:JreLoadEnum(OrgApacheLuceneIndexIndexWriterConfig_OpenMode, APPEND)]));
     JreStrongAssignAndConsume(&self->searcherMgr_, new_OrgApacheLuceneSearchSearcherManager_initWithOrgApacheLuceneIndexIndexWriter_withBoolean_withOrgApacheLuceneSearchSearcherFactory_(self->writer_, true, nil));
   }
 }
 
 OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *new_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_withBoolean_withBoolean_(OrgApacheLuceneUtilVersion *matchVersion, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint minPrefixChars, jboolean commitOnBuild, jboolean allTermsRequired, jboolean highlight) {
-  OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *self = [OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester alloc];
-  OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_withBoolean_withBoolean_(self, matchVersion, dir, indexAnalyzer, queryAnalyzer, minPrefixChars, commitOnBuild, allTermsRequired, highlight);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester, initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_withBoolean_withBoolean_, matchVersion, dir, indexAnalyzer, queryAnalyzer, minPrefixChars, commitOnBuild, allTermsRequired, highlight)
+}
+
+OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *create_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_withBoolean_withBoolean_(OrgApacheLuceneUtilVersion *matchVersion, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint minPrefixChars, jboolean commitOnBuild, jboolean allTermsRequired, jboolean highlight) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester, initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_withBoolean_withBoolean_, matchVersion, dir, indexAnalyzer, queryAnalyzer, minPrefixChars, commitOnBuild, allTermsRequired, highlight)
 }
 
 OrgApacheLuceneAnalysisAnalyzer *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_getGramAnalyzer(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *self) {
-  return [new_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_$1_initWithOrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_withOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_(self, JreLoadStatic(OrgApacheLuceneAnalysisAnalyzer, PER_FIELD_REUSE_STRATEGY_)) autorelease];
+  return create_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_$1_initWithOrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_withOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_(self, JreLoadStatic(OrgApacheLuceneAnalysisAnalyzer, PER_FIELD_REUSE_STRATEGY));
 }
 
 void OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_ensureOpen(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *self) {
@@ -877,7 +922,7 @@ void OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_ensureOpen(Org
         [self->searcherMgr_ close];
         JreStrongAssign(&self->searcherMgr_, nil);
       }
-      JreStrongAssignAndConsume(&self->writer_, new_OrgApacheLuceneIndexIndexWriter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_(self->dir_, [self getIndexWriterConfigWithOrgApacheLuceneAnalysisAnalyzer:OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_getGramAnalyzer(self) withOrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum:JreLoadStatic(OrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum, CREATE)]));
+      JreStrongAssignAndConsume(&self->writer_, new_OrgApacheLuceneIndexIndexWriter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_(self->dir_, [self getIndexWriterConfigWithOrgApacheLuceneAnalysisAnalyzer:OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_getGramAnalyzer(self) withOrgApacheLuceneIndexIndexWriterConfig_OpenMode:JreLoadEnum(OrgApacheLuceneIndexIndexWriterConfig_OpenMode, CREATE)]));
       JreStrongAssignAndConsume(&self->searcherMgr_, new_OrgApacheLuceneSearchSearcherManager_initWithOrgApacheLuceneIndexIndexWriter_withBoolean_withOrgApacheLuceneSearchSearcherFactory_(self->writer_, true, nil));
     }
   }
@@ -885,20 +930,20 @@ void OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_ensureOpen(Org
 
 OrgApacheLuceneDocumentDocument *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_buildDocumentWithOrgApacheLuceneUtilBytesRef_withJavaUtilSet_withLong_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *self, OrgApacheLuceneUtilBytesRef *text, id<JavaUtilSet> contexts, jlong weight, OrgApacheLuceneUtilBytesRef *payload) {
   NSString *textString = [((OrgApacheLuceneUtilBytesRef *) nil_chk(text)) utf8ToString];
-  OrgApacheLuceneDocumentDocument *doc = [new_OrgApacheLuceneDocumentDocument_init() autorelease];
+  OrgApacheLuceneDocumentDocument *doc = create_OrgApacheLuceneDocumentDocument_init();
   OrgApacheLuceneDocumentFieldType *ft = [self getTextFieldType];
-  [doc addWithOrgApacheLuceneIndexIndexableField:[new_OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentFieldType_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_TEXT_FIELD_NAME_, textString, ft) autorelease]];
-  [doc addWithOrgApacheLuceneIndexIndexableField:[new_OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentFieldType_(@"textgrams", textString, ft) autorelease]];
-  [doc addWithOrgApacheLuceneIndexIndexableField:[new_OrgApacheLuceneDocumentStringField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_StoreEnum_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_EXACT_TEXT_FIELD_NAME_, textString, JreLoadStatic(OrgApacheLuceneDocumentField_StoreEnum, NO)) autorelease]];
-  [doc addWithOrgApacheLuceneIndexIndexableField:[new_OrgApacheLuceneDocumentBinaryDocValuesField_initWithNSString_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_TEXT_FIELD_NAME_, text) autorelease]];
-  [doc addWithOrgApacheLuceneIndexIndexableField:[new_OrgApacheLuceneDocumentNumericDocValuesField_initWithNSString_withLong_(@"weight", weight) autorelease]];
+  [doc addWithOrgApacheLuceneIndexIndexableField:create_OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentFieldType_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_TEXT_FIELD_NAME, textString, ft)];
+  [doc addWithOrgApacheLuceneIndexIndexableField:create_OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentFieldType_(@"textgrams", textString, ft)];
+  [doc addWithOrgApacheLuceneIndexIndexableField:create_OrgApacheLuceneDocumentStringField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_Store_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_EXACT_TEXT_FIELD_NAME, textString, JreLoadEnum(OrgApacheLuceneDocumentField_Store, NO))];
+  [doc addWithOrgApacheLuceneIndexIndexableField:create_OrgApacheLuceneDocumentBinaryDocValuesField_initWithNSString_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_TEXT_FIELD_NAME, text)];
+  [doc addWithOrgApacheLuceneIndexIndexableField:create_OrgApacheLuceneDocumentNumericDocValuesField_initWithNSString_withLong_(@"weight", weight)];
   if (payload != nil) {
-    [doc addWithOrgApacheLuceneIndexIndexableField:[new_OrgApacheLuceneDocumentBinaryDocValuesField_initWithNSString_withOrgApacheLuceneUtilBytesRef_(@"payloads", payload) autorelease]];
+    [doc addWithOrgApacheLuceneIndexIndexableField:create_OrgApacheLuceneDocumentBinaryDocValuesField_initWithNSString_withOrgApacheLuceneUtilBytesRef_(@"payloads", payload)];
   }
   if (contexts != nil) {
     for (OrgApacheLuceneUtilBytesRef * __strong context in contexts) {
-      [doc addWithOrgApacheLuceneIndexIndexableField:[new_OrgApacheLuceneDocumentStringField_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneDocumentField_StoreEnum_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_FIELD_NAME_, context, JreLoadStatic(OrgApacheLuceneDocumentField_StoreEnum, NO)) autorelease]];
-      [doc addWithOrgApacheLuceneIndexIndexableField:[new_OrgApacheLuceneDocumentSortedSetDocValuesField_initWithNSString_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_FIELD_NAME_, context) autorelease]];
+      [doc addWithOrgApacheLuceneIndexIndexableField:create_OrgApacheLuceneDocumentStringField_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneDocumentField_Store_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_FIELD_NAME, context, JreLoadEnum(OrgApacheLuceneDocumentField_Store, NO))];
+      [doc addWithOrgApacheLuceneIndexIndexableField:create_OrgApacheLuceneDocumentSortedSetDocValuesField_initWithNSString_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_FIELD_NAME, context)];
     }
   }
   return doc;
@@ -908,9 +953,9 @@ OrgApacheLuceneSearchBooleanQuery *OrgApacheLuceneSearchSuggestAnalyzingAnalyzin
   if (contextInfo == nil || [contextInfo isEmpty]) {
     return nil;
   }
-  OrgApacheLuceneSearchBooleanQuery_Builder *contextFilter = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
-  for (id<JavaUtilMap_Entry> __strong entry_ in nil_chk([((id<JavaUtilMap>) nil_chk(contextInfo)) entrySet])) {
-    [self addContextToQueryWithOrgApacheLuceneSearchBooleanQuery_Builder:contextFilter withOrgApacheLuceneUtilBytesRef:[((id<JavaUtilMap_Entry>) nil_chk(entry_)) getKey] withOrgApacheLuceneSearchBooleanClause_OccurEnum:[entry_ getValue]];
+  OrgApacheLuceneSearchBooleanQuery_Builder *contextFilter = create_OrgApacheLuceneSearchBooleanQuery_Builder_init();
+  for (id<JavaUtilMap_Entry> __strong entry_ in nil_chk([contextInfo entrySet])) {
+    [self addContextToQueryWithOrgApacheLuceneSearchBooleanQuery_Builder:contextFilter withOrgApacheLuceneUtilBytesRef:[((id<JavaUtilMap_Entry>) nil_chk(entry_)) getKey] withOrgApacheLuceneSearchBooleanClause_Occur:[entry_ getValue]];
   }
   return [contextFilter build];
 }
@@ -919,9 +964,9 @@ OrgApacheLuceneSearchBooleanQuery *OrgApacheLuceneSearchSuggestAnalyzingAnalyzin
   if (contextInfo == nil || [contextInfo isEmpty]) {
     return nil;
   }
-  OrgApacheLuceneSearchBooleanQuery_Builder *contextFilter = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
-  for (OrgApacheLuceneUtilBytesRef * __strong context in nil_chk(contextInfo)) {
-    [self addContextToQueryWithOrgApacheLuceneSearchBooleanQuery_Builder:contextFilter withOrgApacheLuceneUtilBytesRef:context withOrgApacheLuceneSearchBooleanClause_OccurEnum:JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD)];
+  OrgApacheLuceneSearchBooleanQuery_Builder *contextFilter = create_OrgApacheLuceneSearchBooleanQuery_Builder_init();
+  for (OrgApacheLuceneUtilBytesRef * __strong context in contextInfo) {
+    [self addContextToQueryWithOrgApacheLuceneSearchBooleanQuery_Builder:contextFilter withOrgApacheLuceneUtilBytesRef:context withOrgApacheLuceneSearchBooleanClause_Occur:JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD)];
   }
   return [contextFilter build];
 }
@@ -938,13 +983,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingI
                             withOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents:(OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)components {
   if ([((NSString *) nil_chk(fieldName)) isEqual:@"textgrams"] && this$0_->minPrefixChars_ > 0) {
     OrgApacheLuceneAnalysisTokenFilter *filter;
-    if ([((OrgApacheLuceneUtilVersion *) nil_chk(this$0_->matchVersion_)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_4_0_)]) {
-      filter = [new_OrgApacheLuceneAnalysisNgramEdgeNGramTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_([((OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *) nil_chk(components)) getTokenStream], 1, this$0_->minPrefixChars_) autorelease];
+    if ([((OrgApacheLuceneUtilVersion *) nil_chk(this$0_->matchVersion_)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_4_0)]) {
+      filter = create_OrgApacheLuceneAnalysisNgramEdgeNGramTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_([((OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *) nil_chk(components)) getTokenStream], 1, this$0_->minPrefixChars_);
     }
     else {
-      filter = [new_OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_([((OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *) nil_chk(components)) getTokenStream], 1, this$0_->minPrefixChars_) autorelease];
+      filter = create_OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_([((OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *) nil_chk(components)) getTokenStream], 1, this$0_->minPrefixChars_);
     }
-    return [new_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_([((OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *) nil_chk(components)) getTokenizer], filter) autorelease];
+    return create_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_([components getTokenizer], filter);
   }
   else {
     return components;
@@ -984,9 +1029,11 @@ void OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_$1_initWithOrg
 }
 
 OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_$1 *new_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_$1_initWithOrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_withOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *outer$, OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *arg$0) {
-  OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_$1 *self = [OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_$1 alloc];
-  OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_$1_initWithOrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_withOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_(self, outer$, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_$1, initWithOrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_withOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_, outer$, arg$0)
+}
+
+OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_$1 *create_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_$1_initWithOrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_withOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *outer$, OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_$1, initWithOrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_withOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_, outer$, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_$1)

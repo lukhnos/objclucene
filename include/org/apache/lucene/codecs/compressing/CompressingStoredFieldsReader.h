@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_RESTRICT
-#define OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader")
+#ifdef RESTRICT_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader
+#define INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader 0
 #else
-#define OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader 1
 #endif
-#undef OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader
 
-#if !defined (_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_) && (OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_INCLUDE_ALL || OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_INCLUDE)
-#define _OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_
+#if !defined (OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_) && (INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader || defined(INCLUDE_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader))
+#define OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_
 
-#define OrgApacheLuceneCodecsStoredFieldsReader_RESTRICT 1
-#define OrgApacheLuceneCodecsStoredFieldsReader_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneCodecsStoredFieldsReader 1
+#define INCLUDE_OrgApacheLuceneCodecsStoredFieldsReader 1
 #include "org/apache/lucene/codecs/StoredFieldsReader.h"
 
 @class OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader;
@@ -32,10 +32,16 @@
 @class OrgApacheLuceneStoreIndexInput;
 @protocol JavaUtilCollection;
 
+/*!
+ @brief <code>StoredFieldsReader</code> impl for <code>CompressingStoredFieldsFormat</code>.
+ */
 @interface OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader : OrgApacheLuceneCodecsStoredFieldsReader
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ */
 - (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)d
                   withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)si
                                          withNSString:(NSString *)segmentSuffix
@@ -48,6 +54,9 @@
 
 - (OrgApacheLuceneCodecsStoredFieldsReader *)clone;
 
+/*!
+ @brief Close the underlying <code>IndexInput</code>s.
+ */
 - (void)close;
 
 - (id<JavaUtilCollection>)getChildResources;
@@ -83,10 +92,25 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 - (jint)getVersion;
 
+/*!
+ @brief Reads a long in a variable-length format.
+ Reads between one and
+ nine bytes. Small values typically take fewer bytes.
+ */
 + (jlong)readTLongWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
 
+/*!
+ @brief Reads a double in a variable-length format.
+ Reads between one and
+ nine bytes. Small integral values typically take fewer bytes.
+ */
 + (jdouble)readZDoubleWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
 
+/*!
+ @brief Reads a float in a variable-length format.
+ Reads between one and
+ five bytes. Small integral values typically take fewer bytes.
+ */
 + (jfloat)readZFloatWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
 
 @end
@@ -96,6 +120,8 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsCompressingCompressingStoredFields
 FOUNDATION_EXPORT void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withNSString_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneStoreIOContext_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader *self, OrgApacheLuceneStoreDirectory *d, OrgApacheLuceneIndexSegmentInfo *si, NSString *segmentSuffix, OrgApacheLuceneIndexFieldInfos *fn, OrgApacheLuceneStoreIOContext *context, NSString *formatName, OrgApacheLuceneCodecsCompressingCompressionMode *compressionMode);
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader *new_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withNSString_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneStoreIOContext_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_(OrgApacheLuceneStoreDirectory *d, OrgApacheLuceneIndexSegmentInfo *si, NSString *segmentSuffix, OrgApacheLuceneIndexFieldInfos *fn, OrgApacheLuceneStoreIOContext *context, NSString *formatName, OrgApacheLuceneCodecsCompressingCompressionMode *compressionMode) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader *create_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withNSString_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneStoreIOContext_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_(OrgApacheLuceneStoreDirectory *d, OrgApacheLuceneIndexSegmentInfo *si, NSString *segmentSuffix, OrgApacheLuceneIndexFieldInfos *fn, OrgApacheLuceneStoreIOContext *context, NSString *formatName, OrgApacheLuceneCodecsCompressingCompressionMode *compressionMode);
 
 FOUNDATION_EXPORT jfloat OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_readZFloatWithOrgApacheLuceneStoreDataInput_(OrgApacheLuceneStoreDataInput *inArg);
 
@@ -107,11 +133,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingCompressingStoredFiel
 
 #endif
 
-#if !defined (_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_SerializedDocument_) && (OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_INCLUDE_ALL || OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_SerializedDocument_INCLUDE)
-#define _OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_SerializedDocument_
+#if !defined (OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_SerializedDocument_) && (INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader || defined(INCLUDE_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_SerializedDocument))
+#define OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_SerializedDocument_
 
 @class OrgApacheLuceneStoreDataInput;
 
+/*!
+ @brief A serialized document, you need to decode its input in order to get an actual
+ <code>Document</code>.
+ */
 @interface OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_SerializedDocument : NSObject {
  @public
   OrgApacheLuceneStoreDataInput *in_;
@@ -129,4 +159,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingCompressingStoredFiel
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader")

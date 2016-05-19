@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchPayloadsPayloadTermQuery_INCLUDE_ALL")
-#if OrgApacheLuceneSearchPayloadsPayloadTermQuery_RESTRICT
-#define OrgApacheLuceneSearchPayloadsPayloadTermQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPayloadTermQuery")
+#ifdef RESTRICT_OrgApacheLuceneSearchPayloadsPayloadTermQuery
+#define INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPayloadTermQuery 0
 #else
-#define OrgApacheLuceneSearchPayloadsPayloadTermQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPayloadTermQuery 1
 #endif
-#undef OrgApacheLuceneSearchPayloadsPayloadTermQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchPayloadsPayloadTermQuery
 
-#if !defined (_OrgApacheLuceneSearchPayloadsPayloadTermQuery_) && (OrgApacheLuceneSearchPayloadsPayloadTermQuery_INCLUDE_ALL || OrgApacheLuceneSearchPayloadsPayloadTermQuery_INCLUDE)
-#define _OrgApacheLuceneSearchPayloadsPayloadTermQuery_
+#if !defined (OrgApacheLuceneSearchPayloadsPayloadTermQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPayloadTermQuery || defined(INCLUDE_OrgApacheLuceneSearchPayloadsPayloadTermQuery))
+#define OrgApacheLuceneSearchPayloadsPayloadTermQuery_
 
-#define OrgApacheLuceneSearchSpansSpanTermQuery_RESTRICT 1
-#define OrgApacheLuceneSearchSpansSpanTermQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSpansSpanTermQuery 1
+#define INCLUDE_OrgApacheLuceneSearchSpansSpanTermQuery 1
 #include "org/apache/lucene/search/spans/SpanTermQuery.h"
 
 @class OrgApacheLuceneIndexTerm;
@@ -25,6 +25,19 @@
 @class OrgApacheLuceneSearchPayloadsPayloadFunction;
 @class OrgApacheLuceneSearchSpansSpanWeight;
 
+/*!
+ @brief This class is very similar to
+ <code>org.apache.lucene.search.spans.SpanTermQuery</code> except that it factors
+ in the value of the payload located at each of the positions where the
+ <code>org.apache.lucene.index.Term</code> occurs.
+ <p>
+ NOTE: In order to take advantage of this with the default scoring implementation
+ (<code>DefaultSimilarity</code>), you must override <code>DefaultSimilarity.scorePayload(int,int,int,BytesRef)</code>,
+ which returns 1 by default.
+ <p>
+ Payload scores are aggregated using a pluggable <code>PayloadFunction</code>.
+ - seealso: org.apache.lucene.search.similarities.Similarity.SimScorer#computePayloadFactor(int,int,int,BytesRef)
+ */
 @interface OrgApacheLuceneSearchPayloadsPayloadTermQuery : OrgApacheLuceneSearchSpansSpanTermQuery {
  @public
   OrgApacheLuceneSearchPayloadsPayloadFunction *function_;
@@ -56,12 +69,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchPayloadsPayloadTermQuery_initWithOrg
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsPayloadTermQuery *new_OrgApacheLuceneSearchPayloadsPayloadTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchPayloadsPayloadFunction_(OrgApacheLuceneIndexTerm *term, OrgApacheLuceneSearchPayloadsPayloadFunction *function) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsPayloadTermQuery *create_OrgApacheLuceneSearchPayloadsPayloadTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchPayloadsPayloadFunction_(OrgApacheLuceneIndexTerm *term, OrgApacheLuceneSearchPayloadsPayloadFunction *function);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchPayloadsPayloadTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchPayloadsPayloadFunction_withBoolean_(OrgApacheLuceneSearchPayloadsPayloadTermQuery *self, OrgApacheLuceneIndexTerm *term, OrgApacheLuceneSearchPayloadsPayloadFunction *function, jboolean includeSpanScore);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsPayloadTermQuery *new_OrgApacheLuceneSearchPayloadsPayloadTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchPayloadsPayloadFunction_withBoolean_(OrgApacheLuceneIndexTerm *term, OrgApacheLuceneSearchPayloadsPayloadFunction *function, jboolean includeSpanScore) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsPayloadTermQuery *create_OrgApacheLuceneSearchPayloadsPayloadTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchPayloadsPayloadFunction_withBoolean_(OrgApacheLuceneIndexTerm *term, OrgApacheLuceneSearchPayloadsPayloadFunction *function, jboolean includeSpanScore);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsPayloadTermQuery)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchPayloadsPayloadTermQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPayloadTermQuery")

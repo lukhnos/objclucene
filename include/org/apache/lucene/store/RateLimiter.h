@@ -5,32 +5,57 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneStoreRateLimiter_INCLUDE_ALL")
-#if OrgApacheLuceneStoreRateLimiter_RESTRICT
-#define OrgApacheLuceneStoreRateLimiter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneStoreRateLimiter")
+#ifdef RESTRICT_OrgApacheLuceneStoreRateLimiter
+#define INCLUDE_ALL_OrgApacheLuceneStoreRateLimiter 0
 #else
-#define OrgApacheLuceneStoreRateLimiter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneStoreRateLimiter 1
 #endif
-#undef OrgApacheLuceneStoreRateLimiter_RESTRICT
-#if OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter_INCLUDE
-#define OrgApacheLuceneStoreRateLimiter_INCLUDE 1
+#undef RESTRICT_OrgApacheLuceneStoreRateLimiter
+#ifdef INCLUDE_OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter
+#define INCLUDE_OrgApacheLuceneStoreRateLimiter 1
 #endif
 
-#if !defined (_OrgApacheLuceneStoreRateLimiter_) && (OrgApacheLuceneStoreRateLimiter_INCLUDE_ALL || OrgApacheLuceneStoreRateLimiter_INCLUDE)
-#define _OrgApacheLuceneStoreRateLimiter_
+#if !defined (OrgApacheLuceneStoreRateLimiter_) && (INCLUDE_ALL_OrgApacheLuceneStoreRateLimiter || defined(INCLUDE_OrgApacheLuceneStoreRateLimiter))
+#define OrgApacheLuceneStoreRateLimiter_
 
+/*!
+ @brief Abstract base class to rate limit IO.
+ Typically implementations are
+ shared across multiple IndexInputs or IndexOutputs (for example
+ those involved all merging).  Those IndexInputs and
+ IndexOutputs would call <code>pause</code> whenever the have read
+ or written more than <code>getMinPauseCheckBytes</code> bytes. 
+ */
 @interface OrgApacheLuceneStoreRateLimiter : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @brief The current MB per second rate limit.
+ */
 - (jdouble)getMBPerSec;
 
+/*!
+ @brief How many bytes caller should add up itself before invoking <code>pause</code>.
+ */
 - (jlong)getMinPauseCheckBytes;
 
+/*!
+ @brief Pauses, if necessary, to keep the instantaneous IO
+ rate at or below the target.
+ <p>
+ Note: the implementation is thread-safe
+ </p>
+ @return the pause time in nano seconds
+ */
 - (jlong)pauseWithLong:(jlong)bytes;
 
+/*!
+ @brief Sets an updated MB per second rate limit.
+ */
 - (void)setMBPerSecWithDouble:(jdouble)mbPerSec;
 
 @end
@@ -43,21 +68,41 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreRateLimiter)
 
 #endif
 
-#if !defined (_OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter_) && (OrgApacheLuceneStoreRateLimiter_INCLUDE_ALL || OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter_INCLUDE)
-#define _OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter_
+#if !defined (OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter_) && (INCLUDE_ALL_OrgApacheLuceneStoreRateLimiter || defined(INCLUDE_OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter))
+#define OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter_
 
+/*!
+ @brief Simple class to rate limit IO.
+ */
 @interface OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter : OrgApacheLuceneStoreRateLimiter
 
 #pragma mark Public
 
+/*!
+ @brief mbPerSec is the MB/sec max IO rate
+ */
 - (instancetype)initWithDouble:(jdouble)mbPerSec;
 
+/*!
+ @brief The current mb per second rate limit.
+ */
 - (jdouble)getMBPerSec;
 
 - (jlong)getMinPauseCheckBytes;
 
+/*!
+ @brief Pauses, if necessary, to keep the instantaneous IO
+ rate at or below the target.
+ Be sure to only call
+ this method when bytes &gt; <code>getMinPauseCheckBytes</code>,
+ otherwise it will pause way too long!
+ @return the pause time in nano seconds
+ */
 - (jlong)pauseWithLong:(jlong)bytes;
 
+/*!
+ @brief Sets an updated mb per second rate limit.
+ */
 - (void)setMBPerSecWithDouble:(jdouble)mbPerSec;
 
 @end
@@ -68,8 +113,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter_initWit
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter *new_OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter_initWithDouble_(jdouble mbPerSec) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter *create_OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter_initWithDouble_(jdouble mbPerSec);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneStoreRateLimiter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreRateLimiter")

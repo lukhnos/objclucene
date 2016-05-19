@@ -13,7 +13,13 @@
 
 @interface OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator () {
  @public
+  /*!
+   @brief Maximum number of finite strings to create.
+   */
   jint limit_;
+  /*!
+   @brief Number of generated finite strings.
+   */
   jint count_;
 }
 
@@ -63,15 +69,17 @@ void OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator_initWithOrgApacheL
   self->limit_ = JavaLangInteger_MAX_VALUE;
   self->count_ = 0;
   if (limit != -1 && limit <= 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"limit must be -1 (which means no limit), or > 0; got: ", limit)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"limit must be -1 (which means no limit), or > 0; got: ", limit));
   }
   self->limit_ = limit > 0 ? limit : JavaLangInteger_MAX_VALUE;
 }
 
 OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator *new_OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneUtilAutomatonAutomaton *a, jint limit) {
-  OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator *self = [OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator alloc];
-  OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(self, a, limit);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator, initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_, a, limit)
+}
+
+OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator *create_OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneUtilAutomatonAutomaton *a, jint limit) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator, initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_, a, limit)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator)

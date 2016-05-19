@@ -12,10 +12,62 @@
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisArArabicStemmer)
 
-IOSObjectArray *OrgApacheLuceneAnalysisArArabicStemmer_prefixes_;
-IOSObjectArray *OrgApacheLuceneAnalysisArArabicStemmer_suffixes_;
+IOSObjectArray *OrgApacheLuceneAnalysisArArabicStemmer_prefixes;
+IOSObjectArray *OrgApacheLuceneAnalysisArArabicStemmer_suffixes;
 
 @implementation OrgApacheLuceneAnalysisArArabicStemmer
+
++ (jchar)ALEF {
+  return OrgApacheLuceneAnalysisArArabicStemmer_ALEF;
+}
+
++ (jchar)BEH {
+  return OrgApacheLuceneAnalysisArArabicStemmer_BEH;
+}
+
++ (jchar)TEH_MARBUTA {
+  return OrgApacheLuceneAnalysisArArabicStemmer_TEH_MARBUTA;
+}
+
++ (jchar)TEH {
+  return OrgApacheLuceneAnalysisArArabicStemmer_TEH;
+}
+
++ (jchar)FEH {
+  return OrgApacheLuceneAnalysisArArabicStemmer_FEH;
+}
+
++ (jchar)KAF {
+  return OrgApacheLuceneAnalysisArArabicStemmer_KAF;
+}
+
++ (jchar)LAM {
+  return OrgApacheLuceneAnalysisArArabicStemmer_LAM;
+}
+
++ (jchar)NOON {
+  return OrgApacheLuceneAnalysisArArabicStemmer_NOON;
+}
+
++ (jchar)HEH {
+  return OrgApacheLuceneAnalysisArArabicStemmer_HEH;
+}
+
++ (jchar)WAW {
+  return OrgApacheLuceneAnalysisArArabicStemmer_WAW;
+}
+
++ (jchar)YEH {
+  return OrgApacheLuceneAnalysisArArabicStemmer_YEH;
+}
+
++ (IOSObjectArray *)prefixes {
+  return OrgApacheLuceneAnalysisArArabicStemmer_prefixes;
+}
+
++ (IOSObjectArray *)suffixes {
+  return OrgApacheLuceneAnalysisArArabicStemmer_suffixes;
+}
 
 - (jint)stemWithCharArray:(IOSCharArray *)s
                   withInt:(jint)len {
@@ -26,13 +78,13 @@ IOSObjectArray *OrgApacheLuceneAnalysisArArabicStemmer_suffixes_;
 
 - (jint)stemPrefixWithCharArray:(IOSCharArray *)s
                         withInt:(jint)len {
-  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(OrgApacheLuceneAnalysisArArabicStemmer_prefixes_))->size_; i++) if ([self startsWithCheckLengthWithCharArray:s withInt:len withCharArray:IOSObjectArray_Get(OrgApacheLuceneAnalysisArArabicStemmer_prefixes_, i)]) return OrgApacheLuceneAnalysisUtilStemmerUtil_deleteNWithCharArray_withInt_withInt_withInt_(s, 0, len, ((IOSCharArray *) nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisArArabicStemmer_prefixes_, i)))->size_);
+  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(OrgApacheLuceneAnalysisArArabicStemmer_prefixes))->size_; i++) if ([self startsWithCheckLengthWithCharArray:s withInt:len withCharArray:IOSObjectArray_Get(OrgApacheLuceneAnalysisArArabicStemmer_prefixes, i)]) return OrgApacheLuceneAnalysisUtilStemmerUtil_deleteNWithCharArray_withInt_withInt_withInt_(s, 0, len, ((IOSCharArray *) nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisArArabicStemmer_prefixes, i)))->size_);
   return len;
 }
 
 - (jint)stemSuffixWithCharArray:(IOSCharArray *)s
                         withInt:(jint)len {
-  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(OrgApacheLuceneAnalysisArArabicStemmer_suffixes_))->size_; i++) if ([self endsWithCheckLengthWithCharArray:s withInt:len withCharArray:IOSObjectArray_Get(OrgApacheLuceneAnalysisArArabicStemmer_suffixes_, i)]) len = OrgApacheLuceneAnalysisUtilStemmerUtil_deleteNWithCharArray_withInt_withInt_withInt_(s, len - ((IOSCharArray *) nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisArArabicStemmer_suffixes_, i)))->size_, len, ((IOSCharArray *) nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisArArabicStemmer_suffixes_, i)))->size_);
+  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(OrgApacheLuceneAnalysisArArabicStemmer_suffixes))->size_; i++) if ([self endsWithCheckLengthWithCharArray:s withInt:len withCharArray:IOSObjectArray_Get(OrgApacheLuceneAnalysisArArabicStemmer_suffixes, i)]) len = OrgApacheLuceneAnalysisUtilStemmerUtil_deleteNWithCharArray_withInt_withInt_withInt_(s, len - ((IOSCharArray *) nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisArArabicStemmer_suffixes, i)))->size_, len, ((IOSCharArray *) nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisArArabicStemmer_suffixes, i)))->size_);
   return len;
 }
 
@@ -72,8 +124,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisArArabicStemmer class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisArArabicStemmer_prefixes_, [IOSObjectArray newArrayWithObjects:(id[]){ [(JreStrcat("CC", OrgApacheLuceneAnalysisArArabicStemmer_ALEF, OrgApacheLuceneAnalysisArArabicStemmer_LAM)) toCharArray], [(JreStrcat("CCC", OrgApacheLuceneAnalysisArArabicStemmer_WAW, OrgApacheLuceneAnalysisArArabicStemmer_ALEF, OrgApacheLuceneAnalysisArArabicStemmer_LAM)) toCharArray], [(JreStrcat("CCC", OrgApacheLuceneAnalysisArArabicStemmer_BEH, OrgApacheLuceneAnalysisArArabicStemmer_ALEF, OrgApacheLuceneAnalysisArArabicStemmer_LAM)) toCharArray], [(JreStrcat("CCC", OrgApacheLuceneAnalysisArArabicStemmer_KAF, OrgApacheLuceneAnalysisArArabicStemmer_ALEF, OrgApacheLuceneAnalysisArArabicStemmer_LAM)) toCharArray], [(JreStrcat("CCC", OrgApacheLuceneAnalysisArArabicStemmer_FEH, OrgApacheLuceneAnalysisArArabicStemmer_ALEF, OrgApacheLuceneAnalysisArArabicStemmer_LAM)) toCharArray], [(JreStrcat("CC", OrgApacheLuceneAnalysisArArabicStemmer_LAM, OrgApacheLuceneAnalysisArArabicStemmer_LAM)) toCharArray], [(JreStrcat("C", OrgApacheLuceneAnalysisArArabicStemmer_WAW)) toCharArray] } count:7 type:IOSClass_charArray(1)]);
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisArArabicStemmer_suffixes_, [IOSObjectArray newArrayWithObjects:(id[]){ [(JreStrcat("CC", OrgApacheLuceneAnalysisArArabicStemmer_HEH, OrgApacheLuceneAnalysisArArabicStemmer_ALEF)) toCharArray], [(JreStrcat("CC", OrgApacheLuceneAnalysisArArabicStemmer_ALEF, OrgApacheLuceneAnalysisArArabicStemmer_NOON)) toCharArray], [(JreStrcat("CC", OrgApacheLuceneAnalysisArArabicStemmer_ALEF, OrgApacheLuceneAnalysisArArabicStemmer_TEH)) toCharArray], [(JreStrcat("CC", OrgApacheLuceneAnalysisArArabicStemmer_WAW, OrgApacheLuceneAnalysisArArabicStemmer_NOON)) toCharArray], [(JreStrcat("CC", OrgApacheLuceneAnalysisArArabicStemmer_YEH, OrgApacheLuceneAnalysisArArabicStemmer_NOON)) toCharArray], [(JreStrcat("CC", OrgApacheLuceneAnalysisArArabicStemmer_YEH, OrgApacheLuceneAnalysisArArabicStemmer_HEH)) toCharArray], [(JreStrcat("CC", OrgApacheLuceneAnalysisArArabicStemmer_YEH, OrgApacheLuceneAnalysisArArabicStemmer_TEH_MARBUTA)) toCharArray], [(JreStrcat("C", OrgApacheLuceneAnalysisArArabicStemmer_HEH)) toCharArray], [(JreStrcat("C", OrgApacheLuceneAnalysisArArabicStemmer_TEH_MARBUTA)) toCharArray], [(JreStrcat("C", OrgApacheLuceneAnalysisArArabicStemmer_YEH)) toCharArray] } count:10 type:IOSClass_charArray(1)]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisArArabicStemmer_prefixes, [IOSObjectArray newArrayWithObjects:(id[]){ [(JreStrcat("CC", OrgApacheLuceneAnalysisArArabicStemmer_ALEF, OrgApacheLuceneAnalysisArArabicStemmer_LAM)) toCharArray], [(JreStrcat("CCC", OrgApacheLuceneAnalysisArArabicStemmer_WAW, OrgApacheLuceneAnalysisArArabicStemmer_ALEF, OrgApacheLuceneAnalysisArArabicStemmer_LAM)) toCharArray], [(JreStrcat("CCC", OrgApacheLuceneAnalysisArArabicStemmer_BEH, OrgApacheLuceneAnalysisArArabicStemmer_ALEF, OrgApacheLuceneAnalysisArArabicStemmer_LAM)) toCharArray], [(JreStrcat("CCC", OrgApacheLuceneAnalysisArArabicStemmer_KAF, OrgApacheLuceneAnalysisArArabicStemmer_ALEF, OrgApacheLuceneAnalysisArArabicStemmer_LAM)) toCharArray], [(JreStrcat("CCC", OrgApacheLuceneAnalysisArArabicStemmer_FEH, OrgApacheLuceneAnalysisArArabicStemmer_ALEF, OrgApacheLuceneAnalysisArArabicStemmer_LAM)) toCharArray], [(JreStrcat("CC", OrgApacheLuceneAnalysisArArabicStemmer_LAM, OrgApacheLuceneAnalysisArArabicStemmer_LAM)) toCharArray], [(JreStrcat("C", OrgApacheLuceneAnalysisArArabicStemmer_WAW)) toCharArray] } count:7 type:IOSClass_charArray(1)]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisArArabicStemmer_suffixes, [IOSObjectArray newArrayWithObjects:(id[]){ [(JreStrcat("CC", OrgApacheLuceneAnalysisArArabicStemmer_HEH, OrgApacheLuceneAnalysisArArabicStemmer_ALEF)) toCharArray], [(JreStrcat("CC", OrgApacheLuceneAnalysisArArabicStemmer_ALEF, OrgApacheLuceneAnalysisArArabicStemmer_NOON)) toCharArray], [(JreStrcat("CC", OrgApacheLuceneAnalysisArArabicStemmer_ALEF, OrgApacheLuceneAnalysisArArabicStemmer_TEH)) toCharArray], [(JreStrcat("CC", OrgApacheLuceneAnalysisArArabicStemmer_WAW, OrgApacheLuceneAnalysisArArabicStemmer_NOON)) toCharArray], [(JreStrcat("CC", OrgApacheLuceneAnalysisArArabicStemmer_YEH, OrgApacheLuceneAnalysisArArabicStemmer_NOON)) toCharArray], [(JreStrcat("CC", OrgApacheLuceneAnalysisArArabicStemmer_YEH, OrgApacheLuceneAnalysisArArabicStemmer_HEH)) toCharArray], [(JreStrcat("CC", OrgApacheLuceneAnalysisArArabicStemmer_YEH, OrgApacheLuceneAnalysisArArabicStemmer_TEH_MARBUTA)) toCharArray], [(JreStrcat("C", OrgApacheLuceneAnalysisArArabicStemmer_HEH)) toCharArray], [(JreStrcat("C", OrgApacheLuceneAnalysisArArabicStemmer_TEH_MARBUTA)) toCharArray], [(JreStrcat("C", OrgApacheLuceneAnalysisArArabicStemmer_YEH)) toCharArray] } count:10 type:IOSClass_charArray(1)]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisArArabicStemmer)
   }
 }
@@ -85,7 +137,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "stemSuffixWithCharArray:withInt:", "stemSuffix", "I", 0x1, NULL, NULL },
     { "startsWithCheckLengthWithCharArray:withInt:withCharArray:", "startsWithCheckLength", "Z", 0x0, NULL, NULL },
     { "endsWithCheckLengthWithCharArray:withInt:withCharArray:", "endsWithCheckLength", "Z", 0x0, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "ArabicStemmer", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "ALEF", "ALEF", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicStemmer_ALEF },
@@ -99,8 +151,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "HEH", "HEH", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicStemmer_HEH },
     { "WAW", "WAW", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicStemmer_WAW },
     { "YEH", "YEH", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisArArabicStemmer_YEH },
-    { "prefixes_", NULL, 0x19, "[[C", &OrgApacheLuceneAnalysisArArabicStemmer_prefixes_, NULL, .constantValue.asLong = 0 },
-    { "suffixes_", NULL, 0x19, "[[C", &OrgApacheLuceneAnalysisArArabicStemmer_suffixes_, NULL, .constantValue.asLong = 0 },
+    { "prefixes", "prefixes", 0x19, "[[C", &OrgApacheLuceneAnalysisArArabicStemmer_prefixes, NULL, .constantValue.asLong = 0 },
+    { "suffixes", "suffixes", 0x19, "[[C", &OrgApacheLuceneAnalysisArArabicStemmer_suffixes, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisArArabicStemmer = { 2, "ArabicStemmer", "org.apache.lucene.analysis.ar", NULL, 0x1, 6, methods, 13, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisArArabicStemmer;
@@ -113,9 +165,11 @@ void OrgApacheLuceneAnalysisArArabicStemmer_init(OrgApacheLuceneAnalysisArArabic
 }
 
 OrgApacheLuceneAnalysisArArabicStemmer *new_OrgApacheLuceneAnalysisArArabicStemmer_init() {
-  OrgApacheLuceneAnalysisArArabicStemmer *self = [OrgApacheLuceneAnalysisArArabicStemmer alloc];
-  OrgApacheLuceneAnalysisArArabicStemmer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisArArabicStemmer, init)
+}
+
+OrgApacheLuceneAnalysisArArabicStemmer *create_OrgApacheLuceneAnalysisArArabicStemmer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisArArabicStemmer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisArArabicStemmer)

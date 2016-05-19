@@ -19,21 +19,26 @@
 #include "org/apache/lucene/analysis/util/WordlistLoader.h"
 #include "org/apache/lucene/util/IOUtils.h"
 
-#define OrgApacheLuceneAnalysisUtilWordlistLoader_INITIAL_CAPACITY 16
-
 @interface OrgApacheLuceneAnalysisUtilWordlistLoader ()
 
+/*!
+ @brief no instance
+ */
 - (instancetype)init;
 
 + (JavaIoBufferedReader *)getBufferedReaderWithJavaIoReader:(JavaIoReader *)reader;
 
 @end
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisUtilWordlistLoader, INITIAL_CAPACITY, jint)
+inline jint OrgApacheLuceneAnalysisUtilWordlistLoader_get_INITIAL_CAPACITY();
+#define OrgApacheLuceneAnalysisUtilWordlistLoader_INITIAL_CAPACITY 16
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisUtilWordlistLoader, INITIAL_CAPACITY, jint)
 
 __attribute__((unused)) static void OrgApacheLuceneAnalysisUtilWordlistLoader_init(OrgApacheLuceneAnalysisUtilWordlistLoader *self);
 
 __attribute__((unused)) static OrgApacheLuceneAnalysisUtilWordlistLoader *new_OrgApacheLuceneAnalysisUtilWordlistLoader_init() NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneAnalysisUtilWordlistLoader *create_OrgApacheLuceneAnalysisUtilWordlistLoader_init();
 
 __attribute__((unused)) static JavaIoBufferedReader *OrgApacheLuceneAnalysisUtilWordlistLoader_getBufferedReaderWithJavaIoReader_(JavaIoReader *reader);
 
@@ -98,8 +103,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "getWordSetWithJavaIoReader:withNSString:withOrgApacheLuceneAnalysisUtilCharArraySet:", "getWordSet", "Lorg.apache.lucene.analysis.util.CharArraySet;", 0x9, "Ljava.io.IOException;", NULL },
     { "getSnowballWordSetWithJavaIoReader:withOrgApacheLuceneAnalysisUtilCharArraySet:", "getSnowballWordSet", "Lorg.apache.lucene.analysis.util.CharArraySet;", 0x9, "Ljava.io.IOException;", NULL },
     { "getSnowballWordSetWithJavaIoReader:", "getSnowballWordSet", "Lorg.apache.lucene.analysis.util.CharArraySet;", 0x9, "Ljava.io.IOException;", NULL },
-    { "getStemDictWithJavaIoReader:withOrgApacheLuceneAnalysisUtilCharArrayMap:", "getStemDict", "Lorg.apache.lucene.analysis.util.CharArrayMap;", 0x9, "Ljava.io.IOException;", NULL },
-    { "getLinesWithJavaIoInputStream:withJavaNioCharsetCharset:", "getLines", "Ljava.util.List;", 0x9, "Ljava.io.IOException;", NULL },
+    { "getStemDictWithJavaIoReader:withOrgApacheLuceneAnalysisUtilCharArrayMap:", "getStemDict", "Lorg.apache.lucene.analysis.util.CharArrayMap;", 0x9, "Ljava.io.IOException;", "(Ljava/io/Reader;Lorg/apache/lucene/analysis/util/CharArrayMap<Ljava/lang/String;>;)Lorg/apache/lucene/analysis/util/CharArrayMap<Ljava/lang/String;>;" },
+    { "getLinesWithJavaIoInputStream:withJavaNioCharsetCharset:", "getLines", "Ljava.util.List;", 0x9, "Ljava.io.IOException;", "(Ljava/io/InputStream;Ljava/nio/charset/Charset;)Ljava/util/List<Ljava/lang/String;>;" },
     { "getBufferedReaderWithJavaIoReader:", "getBufferedReader", "Ljava.io.BufferedReader;", 0xa, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -116,9 +121,11 @@ void OrgApacheLuceneAnalysisUtilWordlistLoader_init(OrgApacheLuceneAnalysisUtilW
 }
 
 OrgApacheLuceneAnalysisUtilWordlistLoader *new_OrgApacheLuceneAnalysisUtilWordlistLoader_init() {
-  OrgApacheLuceneAnalysisUtilWordlistLoader *self = [OrgApacheLuceneAnalysisUtilWordlistLoader alloc];
-  OrgApacheLuceneAnalysisUtilWordlistLoader_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisUtilWordlistLoader, init)
+}
+
+OrgApacheLuceneAnalysisUtilWordlistLoader *create_OrgApacheLuceneAnalysisUtilWordlistLoader_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisUtilWordlistLoader, init)
 }
 
 OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisUtilWordlistLoader_getWordSetWithJavaIoReader_withOrgApacheLuceneAnalysisUtilCharArraySet_(JavaIoReader *reader, OrgApacheLuceneAnalysisUtilCharArraySet *result) {
@@ -139,12 +146,12 @@ OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisUtilWordlistLoad
 
 OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisUtilWordlistLoader_getWordSetWithJavaIoReader_(JavaIoReader *reader) {
   OrgApacheLuceneAnalysisUtilWordlistLoader_initialize();
-  return OrgApacheLuceneAnalysisUtilWordlistLoader_getWordSetWithJavaIoReader_withOrgApacheLuceneAnalysisUtilCharArraySet_(reader, [new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithInt_withBoolean_(OrgApacheLuceneAnalysisUtilWordlistLoader_INITIAL_CAPACITY, false) autorelease]);
+  return OrgApacheLuceneAnalysisUtilWordlistLoader_getWordSetWithJavaIoReader_withOrgApacheLuceneAnalysisUtilCharArraySet_(reader, create_OrgApacheLuceneAnalysisUtilCharArraySet_initWithInt_withBoolean_(OrgApacheLuceneAnalysisUtilWordlistLoader_INITIAL_CAPACITY, false));
 }
 
 OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisUtilWordlistLoader_getWordSetWithJavaIoReader_withNSString_(JavaIoReader *reader, NSString *comment) {
   OrgApacheLuceneAnalysisUtilWordlistLoader_initialize();
-  return OrgApacheLuceneAnalysisUtilWordlistLoader_getWordSetWithJavaIoReader_withNSString_withOrgApacheLuceneAnalysisUtilCharArraySet_(reader, comment, [new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithInt_withBoolean_(OrgApacheLuceneAnalysisUtilWordlistLoader_INITIAL_CAPACITY, false) autorelease]);
+  return OrgApacheLuceneAnalysisUtilWordlistLoader_getWordSetWithJavaIoReader_withNSString_withOrgApacheLuceneAnalysisUtilCharArraySet_(reader, comment, create_OrgApacheLuceneAnalysisUtilCharArraySet_initWithInt_withBoolean_(OrgApacheLuceneAnalysisUtilWordlistLoader_INITIAL_CAPACITY, false));
 }
 
 OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisUtilWordlistLoader_getWordSetWithJavaIoReader_withNSString_withOrgApacheLuceneAnalysisUtilCharArraySet_(JavaIoReader *reader, NSString *comment, OrgApacheLuceneAnalysisUtilCharArraySet *result) {
@@ -186,7 +193,7 @@ OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisUtilWordlistLoad
 
 OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisUtilWordlistLoader_getSnowballWordSetWithJavaIoReader_(JavaIoReader *reader) {
   OrgApacheLuceneAnalysisUtilWordlistLoader_initialize();
-  return OrgApacheLuceneAnalysisUtilWordlistLoader_getSnowballWordSetWithJavaIoReader_withOrgApacheLuceneAnalysisUtilCharArraySet_(reader, [new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithInt_withBoolean_(OrgApacheLuceneAnalysisUtilWordlistLoader_INITIAL_CAPACITY, false) autorelease]);
+  return OrgApacheLuceneAnalysisUtilWordlistLoader_getSnowballWordSetWithJavaIoReader_withOrgApacheLuceneAnalysisUtilCharArraySet_(reader, create_OrgApacheLuceneAnalysisUtilCharArraySet_initWithInt_withBoolean_(OrgApacheLuceneAnalysisUtilWordlistLoader_INITIAL_CAPACITY, false));
 }
 
 OrgApacheLuceneAnalysisUtilCharArrayMap *OrgApacheLuceneAnalysisUtilWordlistLoader_getStemDictWithJavaIoReader_withOrgApacheLuceneAnalysisUtilCharArrayMap_(JavaIoReader *reader, OrgApacheLuceneAnalysisUtilCharArrayMap *result) {
@@ -213,9 +220,9 @@ id<JavaUtilList> OrgApacheLuceneAnalysisUtilWordlistLoader_getLinesWithJavaIoInp
   jboolean success = false;
   @try {
     input = OrgApacheLuceneAnalysisUtilWordlistLoader_getBufferedReaderWithJavaIoReader_(OrgApacheLuceneUtilIOUtils_getDecodingReaderWithJavaIoInputStream_withJavaNioCharsetCharset_(stream, charset));
-    lines = [new_JavaUtilArrayList_init() autorelease];
+    lines = create_JavaUtilArrayList_init();
     for (NSString *word = nil; (word = [((JavaIoBufferedReader *) nil_chk(input)) readLine]) != nil; ) {
-      if ([lines isEmpty] && ((jint) [((NSString *) nil_chk(word)) length]) > 0 && [word charAtWithInt:0] == 0xfeff) word = [word substring:1];
+      if ([lines isEmpty] && ((jint) [((NSString *) nil_chk(word)) length]) > 0 && [word charAtWithInt:0] == 0xfeff) word = [((NSString *) nil_chk(word)) substring:1];
       if ([((NSString *) nil_chk(word)) hasPrefix:@"#"]) continue;
       word = [word trim];
       if (((jint) [((NSString *) nil_chk(word)) length]) == 0) continue;
@@ -236,7 +243,7 @@ id<JavaUtilList> OrgApacheLuceneAnalysisUtilWordlistLoader_getLinesWithJavaIoInp
 
 JavaIoBufferedReader *OrgApacheLuceneAnalysisUtilWordlistLoader_getBufferedReaderWithJavaIoReader_(JavaIoReader *reader) {
   OrgApacheLuceneAnalysisUtilWordlistLoader_initialize();
-  return ([reader isKindOfClass:[JavaIoBufferedReader class]]) ? (JavaIoBufferedReader *) check_class_cast(reader, [JavaIoBufferedReader class]) : [new_JavaIoBufferedReader_initWithJavaIoReader_(reader) autorelease];
+  return ([reader isKindOfClass:[JavaIoBufferedReader class]]) ? (JavaIoBufferedReader *) cast_chk(reader, [JavaIoBufferedReader class]) : create_JavaIoBufferedReader_initWithJavaIoReader_(reader);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisUtilWordlistLoader)

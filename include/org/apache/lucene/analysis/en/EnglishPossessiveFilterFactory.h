@@ -5,28 +5,43 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisEnEnglishPossessiveFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisEnEnglishPossessiveFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisEnEnglishPossessiveFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisEnEnglishPossessiveFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisEnEnglishPossessiveFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisEnEnglishPossessiveFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisEnEnglishPossessiveFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisEnEnglishPossessiveFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisEnEnglishPossessiveFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisEnEnglishPossessiveFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisEnEnglishPossessiveFilterFactory_) && (OrgApacheLuceneAnalysisEnEnglishPossessiveFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisEnEnglishPossessiveFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisEnEnglishPossessiveFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisEnEnglishPossessiveFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisEnEnglishPossessiveFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisEnEnglishPossessiveFilterFactory))
+#define OrgApacheLuceneAnalysisEnEnglishPossessiveFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>EnglishPossessiveFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_enpossessive" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+ &lt;filter class="solr.LowerCaseFilterFactory"/&gt;
+ &lt;filter class="solr.EnglishPossessiveFilterFactory"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisEnEnglishPossessiveFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new EnglishPossessiveFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -39,8 +54,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisEnEnglishPossessiveFilterFactory_i
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisEnEnglishPossessiveFilterFactory *new_OrgApacheLuceneAnalysisEnEnglishPossessiveFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisEnEnglishPossessiveFilterFactory *create_OrgApacheLuceneAnalysisEnEnglishPossessiveFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisEnEnglishPossessiveFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisEnEnglishPossessiveFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisEnEnglishPossessiveFilterFactory")

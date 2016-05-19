@@ -38,6 +38,8 @@ __attribute__((unused)) static void OrgApacheLuceneQueriesFunctionValuesourceSor
 
 __attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_$1_initWithOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneIndexSortedDocValues_(OrgApacheLuceneQueriesFunctionValueSource *arg$0, OrgApacheLuceneIndexSortedDocValues *arg$1) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_$1_initWithOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneIndexSortedDocValues_(OrgApacheLuceneQueriesFunctionValueSource *arg$0, OrgApacheLuceneIndexSortedDocValues *arg$1);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_$1)
 
 @implementation OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource
@@ -48,20 +50,20 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceSortedSetFie
 }
 
 - (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneSearchSortedSetSelector_TypeEnum:(OrgApacheLuceneSearchSortedSetSelector_TypeEnum *)selector {
-  OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_initWithNSString_withOrgApacheLuceneSearchSortedSetSelector_TypeEnum_(self, field, selector);
+withOrgApacheLuceneSearchSortedSetSelector_Type:(OrgApacheLuceneSearchSortedSetSelector_Type *)selector {
+  OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_initWithNSString_withOrgApacheLuceneSearchSortedSetSelector_Type_(self, field, selector);
   return self;
 }
 
 - (OrgApacheLuceneSearchSortField *)getSortFieldWithBoolean:(jboolean)reverse {
-  return [new_OrgApacheLuceneSearchSortedSetSortField_initWithNSString_withBoolean_withOrgApacheLuceneSearchSortedSetSelector_TypeEnum_(self->field_, reverse, self->selector_) autorelease];
+  return create_OrgApacheLuceneSearchSortedSetSortField_initWithNSString_withBoolean_withOrgApacheLuceneSearchSortedSetSelector_Type_(self->field_, reverse, self->selector_);
 }
 
 - (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
                                  withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext {
   OrgApacheLuceneIndexSortedSetDocValues *sortedSet = OrgApacheLuceneIndexDocValues_getSortedSetWithOrgApacheLuceneIndexLeafReader_withNSString_([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(readerContext)) reader], field_);
-  OrgApacheLuceneIndexSortedDocValues *view = OrgApacheLuceneSearchSortedSetSelector_wrapWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneSearchSortedSetSelector_TypeEnum_(sortedSet, selector_);
-  return [new_OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_$1_initWithOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneIndexSortedDocValues_(self, view) autorelease];
+  OrgApacheLuceneIndexSortedDocValues *view = OrgApacheLuceneSearchSortedSetSelector_wrapWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneSearchSortedSetSelector_Type_(sortedSet, selector_);
+  return create_OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_$1_initWithOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneIndexSortedDocValues_(self, view);
 }
 
 - (NSString *)description__ {
@@ -71,15 +73,15 @@ withOrgApacheLuceneSearchSortedSetSelector_TypeEnum:(OrgApacheLuceneSearchSorted
 - (NSUInteger)hash {
   jint prime = 31;
   jint result = ((jint) [super hash]);
-  result = prime * result + ((selector_ == nil) ? 0 : ((jint) [selector_ hash]));
+  result = prime * result + ((selector_ == nil) ? 0 : ((jint) [((OrgApacheLuceneSearchSortedSetSelector_Type *) nil_chk(selector_)) hash]));
   return result;
 }
 
 - (jboolean)isEqual:(id)obj {
   if (self == obj) return true;
   if (![super isEqual:obj]) return false;
-  if ([self getClass] != [nil_chk(obj) getClass]) return false;
-  OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource *other = (OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource *) check_class_cast(obj, [OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource class]);
+  if ([self getClass] != (id) [nil_chk(obj) getClass]) return false;
+  OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource *other = (OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource *) cast_chk(obj, [OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource class]);
   if (selector_ != other->selector_) return false;
   return true;
 }
@@ -92,7 +94,7 @@ withOrgApacheLuceneSearchSortedSetSelector_TypeEnum:(OrgApacheLuceneSearchSorted
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithNSString:", "SortedSetFieldSource", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withOrgApacheLuceneSearchSortedSetSelector_TypeEnum:", "SortedSetFieldSource", NULL, 0x1, NULL, NULL },
+    { "initWithNSString:withOrgApacheLuceneSearchSortedSetSelector_Type:", "SortedSetFieldSource", NULL, 0x1, NULL, NULL },
     { "getSortFieldWithBoolean:", "getSortField", "Lorg.apache.lucene.search.SortField;", 0x1, NULL, NULL },
     { "getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:", "getValues", "Lorg.apache.lucene.queries.function.FunctionValues;", 0x1, "Ljava.io.IOException;", NULL },
     { "description__", "description", "Ljava.lang.String;", 0x1, NULL, NULL },
@@ -109,24 +111,28 @@ withOrgApacheLuceneSearchSortedSetSelector_TypeEnum:(OrgApacheLuceneSearchSorted
 @end
 
 void OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_initWithNSString_(OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource *self, NSString *field) {
-  OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_initWithNSString_withOrgApacheLuceneSearchSortedSetSelector_TypeEnum_(self, field, JreLoadStatic(OrgApacheLuceneSearchSortedSetSelector_TypeEnum, MIN));
+  OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_initWithNSString_withOrgApacheLuceneSearchSortedSetSelector_Type_(self, field, JreLoadEnum(OrgApacheLuceneSearchSortedSetSelector_Type, MIN));
 }
 
 OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource *new_OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_initWithNSString_(NSString *field) {
-  OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource *self = [OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource alloc];
-  OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_initWithNSString_(self, field);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource, initWithNSString_, field)
 }
 
-void OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_initWithNSString_withOrgApacheLuceneSearchSortedSetSelector_TypeEnum_(OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource *self, NSString *field, OrgApacheLuceneSearchSortedSetSelector_TypeEnum *selector) {
+OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource *create_OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_initWithNSString_(NSString *field) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource, initWithNSString_, field)
+}
+
+void OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_initWithNSString_withOrgApacheLuceneSearchSortedSetSelector_Type_(OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource *self, NSString *field, OrgApacheLuceneSearchSortedSetSelector_Type *selector) {
   OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource_initWithNSString_(self, field);
   JreStrongAssign(&self->selector_, selector);
 }
 
-OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource *new_OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_initWithNSString_withOrgApacheLuceneSearchSortedSetSelector_TypeEnum_(NSString *field, OrgApacheLuceneSearchSortedSetSelector_TypeEnum *selector) {
-  OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource *self = [OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource alloc];
-  OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_initWithNSString_withOrgApacheLuceneSearchSortedSetSelector_TypeEnum_(self, field, selector);
-  return self;
+OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource *new_OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_initWithNSString_withOrgApacheLuceneSearchSortedSetSelector_Type_(NSString *field, OrgApacheLuceneSearchSortedSetSelector_Type *selector) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource, initWithNSString_withOrgApacheLuceneSearchSortedSetSelector_Type_, field, selector)
+}
+
+OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource *create_OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_initWithNSString_withOrgApacheLuceneSearchSortedSetSelector_Type_(NSString *field, OrgApacheLuceneSearchSortedSetSelector_Type *selector) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource, initWithNSString_withOrgApacheLuceneSearchSortedSetSelector_Type_, field, selector)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource)
@@ -165,9 +171,11 @@ void OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_$1_initWithOr
 }
 
 OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_$1_initWithOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneIndexSortedDocValues_(OrgApacheLuceneQueriesFunctionValueSource *arg$0, OrgApacheLuceneIndexSortedDocValues *arg$1) {
-  OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_$1 *self = [OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_$1 alloc];
-  OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_$1_initWithOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneIndexSortedDocValues_(self, arg$0, arg$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_$1, initWithOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneIndexSortedDocValues_, arg$0, arg$1)
+}
+
+OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_$1_initWithOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneIndexSortedDocValues_(OrgApacheLuceneQueriesFunctionValueSource *arg$0, OrgApacheLuceneIndexSortedDocValues *arg$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_$1, initWithOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneIndexSortedDocValues_, arg$0, arg$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_$1)

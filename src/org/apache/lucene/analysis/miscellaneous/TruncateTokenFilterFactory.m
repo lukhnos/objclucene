@@ -20,9 +20,13 @@
 
 @end
 
-NSString *OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_PREFIX_LENGTH_KEY_ = @"prefixLength";
+NSString *OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_PREFIX_LENGTH_KEY = @"prefixLength";
 
 @implementation OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory
+
++ (NSString *)PREFIX_LENGTH_KEY {
+  return OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_PREFIX_LENGTH_KEY;
+}
 
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args {
   OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_initWithJavaUtilMap_(self, args);
@@ -30,16 +34,16 @@ NSString *OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_PREFIX_
 }
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  return [new_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(input, prefixLength_) autorelease];
+  return create_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(input, prefixLength_);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "TruncateTokenFilterFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "TruncateTokenFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenStream;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "PREFIX_LENGTH_KEY_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_PREFIX_LENGTH_KEY_, NULL, .constantValue.asLong = 0 },
+    { "PREFIX_LENGTH_KEY", "PREFIX_LENGTH_KEY", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_PREFIX_LENGTH_KEY, NULL, .constantValue.asLong = 0 },
     { "prefixLength_", NULL, 0x12, "B", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory = { 2, "TruncateTokenFilterFactory", "org.apache.lucene.analysis.miscellaneous", NULL, 0x1, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
@@ -50,17 +54,19 @@ NSString *OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_PREFIX_
 
 void OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory *self, id<JavaUtilMap> args) {
   OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  self->prefixLength_ = JavaLangByte_parseByteWithNSString_([self getWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_PREFIX_LENGTH_KEY_ withNSString:@"5"]);
-  if (self->prefixLength_ < 1) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$B", OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_PREFIX_LENGTH_KEY_, @" parameter must be a positive number: ", self->prefixLength_)) autorelease];
+  self->prefixLength_ = JavaLangByte_parseByteWithNSString_([self getWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_PREFIX_LENGTH_KEY withNSString:@"5"]);
+  if (self->prefixLength_ < 1) @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$B", OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_PREFIX_LENGTH_KEY, @" parameter must be a positive number: ", self->prefixLength_));
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameter(s): ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameter(s): ", args));
   }
 }
 
 OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory *self = [OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory alloc];
-  OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory *create_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory)

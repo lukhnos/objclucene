@@ -5,33 +5,48 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisSrSerbianNormalizationFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisSrSerbianNormalizationFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisSrSerbianNormalizationFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisSrSerbianNormalizationFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisSrSerbianNormalizationFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisSrSerbianNormalizationFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisSrSerbianNormalizationFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisSrSerbianNormalizationFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisSrSerbianNormalizationFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisSrSerbianNormalizationFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisSrSerbianNormalizationFilterFactory_) && (OrgApacheLuceneAnalysisSrSerbianNormalizationFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisSrSerbianNormalizationFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisSrSerbianNormalizationFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisSrSerbianNormalizationFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisSrSerbianNormalizationFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisSrSerbianNormalizationFilterFactory))
+#define OrgApacheLuceneAnalysisSrSerbianNormalizationFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-#define OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent 1
 #include "org/apache/lucene/analysis/util/MultiTermAwareComponent.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 @class OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>SerbianNormalizationFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_srnorm" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+ &lt;filter class="solr.LowerCaseFilterFactory"/&gt;
+ &lt;filter class="solr.SerbianNormalizationFilterFactory"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode 
+ */
 @interface OrgApacheLuceneAnalysisSrSerbianNormalizationFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilMultiTermAwareComponent >
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new SerbianNormalizationFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -46,8 +61,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSrSerbianNormalizationFilterFactor
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisSrSerbianNormalizationFilterFactory *new_OrgApacheLuceneAnalysisSrSerbianNormalizationFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisSrSerbianNormalizationFilterFactory *create_OrgApacheLuceneAnalysisSrSerbianNormalizationFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSrSerbianNormalizationFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisSrSerbianNormalizationFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisSrSerbianNormalizationFilterFactory")

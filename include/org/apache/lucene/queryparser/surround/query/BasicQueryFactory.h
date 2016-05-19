@@ -5,21 +5,24 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_RESTRICT
-#define OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory 0
 #else
-#define OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory 1
 #endif
-#undef OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory
 
-#if !defined (_OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_) && (OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_INCLUDE_ALL || OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_INCLUDE)
-#define _OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_
+#if !defined (OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory || defined(INCLUDE_OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory))
+#define OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_
 
 @class OrgApacheLuceneIndexTerm;
 @class OrgApacheLuceneSearchSpansSpanTermQuery;
 @class OrgApacheLuceneSearchTermQuery;
 
+/*!
+ @brief Factory for creating basic term queries
+ */
 @interface OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory : NSObject
 
 #pragma mark Public
@@ -28,6 +31,10 @@
 
 - (instancetype)initWithInt:(jint)maxBasicQueries;
 
+/*!
+ @brief Two BasicQueryFactory's are equal when they generate
+ the same types of basic queries, or both cannot generate queries anymore.
+ */
 - (jboolean)isEqual:(id)obj;
 
 - (jint)getMaxBasicQueries;
@@ -54,12 +61,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *new_OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_initWithInt_(jint maxBasicQueries) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *create_OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_initWithInt_(jint maxBasicQueries);
+
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_init(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *new_OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *create_OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_init();
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory")

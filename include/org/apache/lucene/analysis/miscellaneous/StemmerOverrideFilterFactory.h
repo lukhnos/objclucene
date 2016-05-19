@@ -5,33 +5,47 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory_) && (OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory))
+#define OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-#define OrgApacheLuceneAnalysisUtilResourceLoaderAware_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilResourceLoaderAware_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilResourceLoaderAware 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilResourceLoaderAware 1
 #include "org/apache/lucene/analysis/util/ResourceLoaderAware.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol JavaUtilMap;
 @protocol OrgApacheLuceneAnalysisUtilResourceLoader;
 
+/*!
+ @brief Factory for <code>StemmerOverrideFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_dicstem" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+ &lt;filter class="solr.StemmerOverrideFilterFactory" dictionary="dictionary.txt" ignoreCase="false"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilResourceLoaderAware >
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new StemmerOverrideFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -48,8 +62,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory *create_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory")

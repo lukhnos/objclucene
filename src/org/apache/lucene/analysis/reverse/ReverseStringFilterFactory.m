@@ -19,12 +19,12 @@
 }
 
 - (OrgApacheLuceneAnalysisReverseReverseStringFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg {
-  return [new_OrgApacheLuceneAnalysisReverseReverseStringFilter_initWithOrgApacheLuceneAnalysisTokenStream_(inArg) autorelease];
+  return create_OrgApacheLuceneAnalysisReverseReverseStringFilter_initWithOrgApacheLuceneAnalysisTokenStream_(inArg);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "ReverseStringFilterFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "ReverseStringFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.reverse.ReverseStringFilter;", 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisReverseReverseStringFilterFactory = { 2, "ReverseStringFilterFactory", "org.apache.lucene.analysis.reverse", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
@@ -36,14 +36,16 @@
 void OrgApacheLuceneAnalysisReverseReverseStringFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisReverseReverseStringFilterFactory *self, id<JavaUtilMap> args) {
   OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisReverseReverseStringFilterFactory *new_OrgApacheLuceneAnalysisReverseReverseStringFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisReverseReverseStringFilterFactory *self = [OrgApacheLuceneAnalysisReverseReverseStringFilterFactory alloc];
-  OrgApacheLuceneAnalysisReverseReverseStringFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisReverseReverseStringFilterFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisReverseReverseStringFilterFactory *create_OrgApacheLuceneAnalysisReverseReverseStringFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisReverseReverseStringFilterFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisReverseReverseStringFilterFactory)

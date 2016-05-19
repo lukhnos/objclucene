@@ -46,7 +46,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCoreTypeTokenFilterFactory, stopTypes
     JreStrongAssignAndConsume(&stopTypes_, new_JavaUtilHashSet_init());
     for (NSString * __strong file in files) {
       id<JavaUtilList> typesLines = [self getLinesWithOrgApacheLuceneAnalysisUtilResourceLoader:loader withNSString:[((NSString *) nil_chk(file)) trim]];
-      [stopTypes_ addAllWithJavaUtilCollection:typesLines];
+      [((id<JavaUtilSet>) nil_chk(stopTypes_)) addAllWithJavaUtilCollection:typesLines];
     }
   }
 }
@@ -56,11 +56,11 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCoreTypeTokenFilterFactory, stopTypes
 }
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  if ([((OrgApacheLuceneUtilVersion *) nil_chk(luceneMatchVersion_)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_4_0_)]) {
-    return [new_OrgApacheLuceneAnalysisCoreTypeTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withJavaUtilSet_withBoolean_(input, stopTypes_, useWhitelist_) autorelease];
+  if ([((OrgApacheLuceneUtilVersion *) nil_chk(luceneMatchVersion_)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_4_0)]) {
+    return create_OrgApacheLuceneAnalysisCoreTypeTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withJavaUtilSet_withBoolean_(input, stopTypes_, useWhitelist_);
   }
   else {
-    OrgApacheLuceneAnalysisTokenStream *filter = [new_OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withJavaUtilSet_withBoolean_(enablePositionIncrements_, input, stopTypes_, useWhitelist_) autorelease];
+    OrgApacheLuceneAnalysisTokenStream *filter = create_OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withJavaUtilSet_withBoolean_(enablePositionIncrements_, input, stopTypes_, useWhitelist_);
     return filter;
   }
 }
@@ -73,9 +73,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCoreTypeTokenFilterFactory, stopTypes
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "TypeTokenFilterFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "TypeTokenFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "informWithOrgApacheLuceneAnalysisUtilResourceLoader:", "inform", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "getStopTypes", NULL, "Ljava.util.Set;", 0x1, NULL, NULL },
+    { "getStopTypes", NULL, "Ljava.util.Set;", 0x1, NULL, "()Ljava/util/Set<Ljava/lang/String;>;" },
     { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenStream;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -94,25 +94,27 @@ void OrgApacheLuceneAnalysisCoreTypeTokenFilterFactory_initWithJavaUtilMap_(OrgA
   OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
   JreStrongAssign(&self->stopTypesFiles_, [self requireWithJavaUtilMap:args withNSString:@"types"]);
   self->useWhitelist_ = [self getBooleanWithJavaUtilMap:args withNSString:@"useWhitelist" withBoolean:false];
-  if ([((OrgApacheLuceneUtilVersion *) nil_chk(self->luceneMatchVersion_)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_5_0_0_)] == false) {
-    jboolean defaultValue = [self->luceneMatchVersion_ onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_4_0_)];
+  if ([((OrgApacheLuceneUtilVersion *) nil_chk(self->luceneMatchVersion_)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_5_0_0)] == false) {
+    jboolean defaultValue = [self->luceneMatchVersion_ onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_4_0)];
     self->enablePositionIncrements_ = [self getBooleanWithJavaUtilMap:args withNSString:@"enablePositionIncrements" withBoolean:defaultValue];
-    if (self->enablePositionIncrements_ == false && [self->luceneMatchVersion_ onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_4_0_)]) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"enablePositionIncrements=false is not supported anymore as of Lucene 4.4") autorelease];
+    if (self->enablePositionIncrements_ == false && [self->luceneMatchVersion_ onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_4_0)]) {
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"enablePositionIncrements=false is not supported anymore as of Lucene 4.4");
     }
   }
   else if ([((id<JavaUtilMap>) nil_chk(args)) containsKeyWithId:@"enablePositionIncrements"]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"enablePositionIncrements is not a valid option as of Lucene 5.0") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"enablePositionIncrements is not a valid option as of Lucene 5.0");
   }
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisCoreTypeTokenFilterFactory *new_OrgApacheLuceneAnalysisCoreTypeTokenFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisCoreTypeTokenFilterFactory *self = [OrgApacheLuceneAnalysisCoreTypeTokenFilterFactory alloc];
-  OrgApacheLuceneAnalysisCoreTypeTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCoreTypeTokenFilterFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisCoreTypeTokenFilterFactory *create_OrgApacheLuceneAnalysisCoreTypeTokenFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCoreTypeTokenFilterFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCoreTypeTokenFilterFactory)

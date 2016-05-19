@@ -5,23 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchGeoPointTermQuery_INCLUDE_ALL")
-#if OrgApacheLuceneSearchGeoPointTermQuery_RESTRICT
-#define OrgApacheLuceneSearchGeoPointTermQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchGeoPointTermQuery")
+#ifdef RESTRICT_OrgApacheLuceneSearchGeoPointTermQuery
+#define INCLUDE_ALL_OrgApacheLuceneSearchGeoPointTermQuery 0
 #else
-#define OrgApacheLuceneSearchGeoPointTermQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchGeoPointTermQuery 1
 #endif
-#undef OrgApacheLuceneSearchGeoPointTermQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchGeoPointTermQuery
 
-#if !defined (_OrgApacheLuceneSearchGeoPointTermQuery_) && (OrgApacheLuceneSearchGeoPointTermQuery_INCLUDE_ALL || OrgApacheLuceneSearchGeoPointTermQuery_INCLUDE)
-#define _OrgApacheLuceneSearchGeoPointTermQuery_
+#if !defined (OrgApacheLuceneSearchGeoPointTermQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchGeoPointTermQuery || defined(INCLUDE_OrgApacheLuceneSearchGeoPointTermQuery))
+#define OrgApacheLuceneSearchGeoPointTermQuery_
 
-#define OrgApacheLuceneSearchMultiTermQuery_RESTRICT 1
-#define OrgApacheLuceneSearchMultiTermQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchMultiTermQuery 1
+#define INCLUDE_OrgApacheLuceneSearchMultiTermQuery 1
 #include "org/apache/lucene/search/MultiTermQuery.h"
 
 @class OrgApacheLuceneSearchMultiTermQuery_RewriteMethod;
 
+/*!
+ @brief TermQuery for GeoPointField for overriding <code>org.apache.lucene.search.MultiTermQuery</code> methods specific to
+ Geospatial operations
+ */
 @interface OrgApacheLuceneSearchGeoPointTermQuery : OrgApacheLuceneSearchMultiTermQuery {
  @public
   jdouble minLon_;
@@ -30,8 +34,14 @@
   jdouble maxLat_;
 }
 
++ (OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)GEO_CONSTANT_SCORE_REWRITE;
+
 #pragma mark Public
 
+/*!
+ @brief Constructs a query matching terms that cannot be represented with a single
+ Term.
+ */
 - (instancetype)initWithNSString:(NSString *)field
                       withDouble:(jdouble)minLon
                       withDouble:(jdouble)minLat
@@ -42,8 +52,10 @@
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneSearchGeoPointTermQuery)
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchGeoPointTermQuery_GEO_CONSTANT_SCORE_REWRITE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchGeoPointTermQuery, GEO_CONSTANT_SCORE_REWRITE_, OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)
+inline OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchGeoPointTermQuery_get_GEO_CONSTANT_SCORE_REWRITE();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchGeoPointTermQuery_GEO_CONSTANT_SCORE_REWRITE;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchGeoPointTermQuery, GEO_CONSTANT_SCORE_REWRITE, OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchGeoPointTermQuery_initWithNSString_withDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoPointTermQuery *self, NSString *field, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat);
 
@@ -51,4 +63,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchGeoPointTermQuery)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchGeoPointTermQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchGeoPointTermQuery")

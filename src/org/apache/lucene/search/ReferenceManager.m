@@ -36,8 +36,9 @@
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchReferenceManager, refreshLock_, id<JavaUtilConcurrentLocksLock>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchReferenceManager, refreshListeners_, id<JavaUtilList>)
 
-static NSString *OrgApacheLuceneSearchReferenceManager_REFERENCE_MANAGER_IS_CLOSED_MSG_ = @"this ReferenceManager is closed";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchReferenceManager, REFERENCE_MANAGER_IS_CLOSED_MSG_, NSString *)
+inline NSString *OrgApacheLuceneSearchReferenceManager_get_REFERENCE_MANAGER_IS_CLOSED_MSG();
+static NSString *OrgApacheLuceneSearchReferenceManager_REFERENCE_MANAGER_IS_CLOSED_MSG = @"this ReferenceManager is closed";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchReferenceManager, REFERENCE_MANAGER_IS_CLOSED_MSG, NSString *)
 
 __attribute__((unused)) static void OrgApacheLuceneSearchReferenceManager_ensureOpen(OrgApacheLuceneSearchReferenceManager *self);
 
@@ -152,14 +153,14 @@ __attribute__((unused)) static void OrgApacheLuceneSearchReferenceManager_notify
 
 - (void)addListenerWithOrgApacheLuceneSearchReferenceManager_RefreshListener:(id<OrgApacheLuceneSearchReferenceManager_RefreshListener>)listener {
   if (listener == nil) {
-    @throw [new_JavaLangNullPointerException_initWithNSString_(@"Listener cannot be null") autorelease];
+    @throw create_JavaLangNullPointerException_initWithNSString_(@"Listener cannot be null");
   }
   [((id<JavaUtilList>) nil_chk(refreshListeners_)) addWithId:listener];
 }
 
 - (void)removeListenerWithOrgApacheLuceneSearchReferenceManager_RefreshListener:(id<OrgApacheLuceneSearchReferenceManager_RefreshListener>)listener {
   if (listener == nil) {
-    @throw [new_JavaLangNullPointerException_initWithNSString_(@"Listener cannot be null") autorelease];
+    @throw create_JavaLangNullPointerException_initWithNSString_(@"Listener cannot be null");
   }
   [((id<JavaUtilList>) nil_chk(refreshListeners_)) removeWithId:listener];
 }
@@ -171,16 +172,16 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
+- (void)__javaClone:(OrgApacheLuceneSearchReferenceManager *)original {
+  [super __javaClone:original];
+  JreCloneVolatileStrong(&current_, &original->current_);
+}
+
 - (void)dealloc {
   JreReleaseVolatile(&current_);
   RELEASE_(refreshLock_);
   RELEASE_(refreshListeners_);
   [super dealloc];
-}
-
-- (void)__javaClone {
-  [super __javaClone];
-  JreRetainVolatile(&current_);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -203,10 +204,10 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "notifyRefreshListenersRefreshedWithBoolean:", "notifyRefreshListenersRefreshed", "V", 0x2, "Ljava.io.IOException;", NULL },
     { "addListenerWithOrgApacheLuceneSearchReferenceManager_RefreshListener:", "addListener", "V", 0x1, NULL, NULL },
     { "removeListenerWithOrgApacheLuceneSearchReferenceManager_RefreshListener:", "removeListener", "V", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "ReferenceManager", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "REFERENCE_MANAGER_IS_CLOSED_MSG_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneSearchReferenceManager_REFERENCE_MANAGER_IS_CLOSED_MSG_, NULL, .constantValue.asLong = 0 },
+    { "REFERENCE_MANAGER_IS_CLOSED_MSG", "REFERENCE_MANAGER_IS_CLOSED_MSG", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneSearchReferenceManager_REFERENCE_MANAGER_IS_CLOSED_MSG, NULL, .constantValue.asLong = 0 },
     { "current_", NULL, 0x44, "TG;", NULL, "TG;", .constantValue.asLong = 0 },
     { "refreshLock_", NULL, 0x12, "Ljava.util.concurrent.locks.Lock;", NULL, NULL, .constantValue.asLong = 0 },
     { "refreshListeners_", NULL, 0x12, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/search/ReferenceManager$RefreshListener;>;", .constantValue.asLong = 0 },
@@ -220,7 +221,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 void OrgApacheLuceneSearchReferenceManager_ensureOpen(OrgApacheLuceneSearchReferenceManager *self) {
   if (JreLoadVolatileId(&self->current_) == nil) {
-    @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(OrgApacheLuceneSearchReferenceManager_REFERENCE_MANAGER_IS_CLOSED_MSG_) autorelease];
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(OrgApacheLuceneSearchReferenceManager_REFERENCE_MANAGER_IS_CLOSED_MSG);
   }
 }
 
@@ -237,14 +238,14 @@ id OrgApacheLuceneSearchReferenceManager_acquire(OrgApacheLuceneSearchReferenceM
   id ref;
   do {
     if ((ref = JreLoadVolatileId(&self->current_)) == nil) {
-      @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(OrgApacheLuceneSearchReferenceManager_REFERENCE_MANAGER_IS_CLOSED_MSG_) autorelease];
+      @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(OrgApacheLuceneSearchReferenceManager_REFERENCE_MANAGER_IS_CLOSED_MSG);
     }
     if ([self tryIncRefWithId:ref]) {
       return ref;
     }
     if ([self getRefCountWithId:ref] == 0 && JreLoadVolatileId(&self->current_) == ref) {
       JreAssert((ref != nil), (@"org/apache/lucene/search/ReferenceManager.java:104 condition failed: assert ref != null;"));
-      @throw [new_JavaLangIllegalStateException_initWithNSString_(@"The managed reference has already closed - this is likely a bug when the reference count is modified outside of the ReferenceManager") autorelease];
+      @throw create_JavaLangIllegalStateException_initWithNSString_(@"The managed reference has already closed - this is likely a bug when the reference count is modified outside of the ReferenceManager");
     }
   }
   while (true);

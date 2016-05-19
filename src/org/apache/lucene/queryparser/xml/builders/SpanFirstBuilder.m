@@ -34,7 +34,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlBuildersSpanFirstBuilder, facto
   jint end = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withInt_(e, @"end", 1);
   id<OrgW3cDomElement> child = OrgApacheLuceneQueryparserXmlDOMUtils_getFirstChildElementWithOrgW3cDomElement_(e);
   OrgApacheLuceneSearchSpansSpanQuery *q = [((id<OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder>) nil_chk(factory_)) getSpanQueryWithOrgW3cDomElement:child];
-  OrgApacheLuceneSearchSpansSpanFirstQuery *sfq = [new_OrgApacheLuceneSearchSpansSpanFirstQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withInt_(q, end) autorelease];
+  OrgApacheLuceneSearchSpansSpanFirstQuery *sfq = create_OrgApacheLuceneSearchSpansSpanFirstQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withInt_(q, end);
   [sfq setBoostWithFloat:OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withFloat_(e, @"boost", 1.0f)];
   return sfq;
 }
@@ -64,9 +64,11 @@ void OrgApacheLuceneQueryparserXmlBuildersSpanFirstBuilder_initWithOrgApacheLuce
 }
 
 OrgApacheLuceneQueryparserXmlBuildersSpanFirstBuilder *new_OrgApacheLuceneQueryparserXmlBuildersSpanFirstBuilder_initWithOrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder_(id<OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder> factory) {
-  OrgApacheLuceneQueryparserXmlBuildersSpanFirstBuilder *self = [OrgApacheLuceneQueryparserXmlBuildersSpanFirstBuilder alloc];
-  OrgApacheLuceneQueryparserXmlBuildersSpanFirstBuilder_initWithOrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder_(self, factory);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserXmlBuildersSpanFirstBuilder, initWithOrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder_, factory)
+}
+
+OrgApacheLuceneQueryparserXmlBuildersSpanFirstBuilder *create_OrgApacheLuceneQueryparserXmlBuildersSpanFirstBuilder_initWithOrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder_(id<OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder> factory) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserXmlBuildersSpanFirstBuilder, initWithOrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder_, factory)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserXmlBuildersSpanFirstBuilder)

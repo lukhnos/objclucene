@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneBkdtreeHeapLatLonWriter_INCLUDE_ALL")
-#if OrgApacheLuceneBkdtreeHeapLatLonWriter_RESTRICT
-#define OrgApacheLuceneBkdtreeHeapLatLonWriter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneBkdtreeHeapLatLonWriter")
+#ifdef RESTRICT_OrgApacheLuceneBkdtreeHeapLatLonWriter
+#define INCLUDE_ALL_OrgApacheLuceneBkdtreeHeapLatLonWriter 0
 #else
-#define OrgApacheLuceneBkdtreeHeapLatLonWriter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneBkdtreeHeapLatLonWriter 1
 #endif
-#undef OrgApacheLuceneBkdtreeHeapLatLonWriter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneBkdtreeHeapLatLonWriter
 
-#if !defined (_OrgApacheLuceneBkdtreeHeapLatLonWriter_) && (OrgApacheLuceneBkdtreeHeapLatLonWriter_INCLUDE_ALL || OrgApacheLuceneBkdtreeHeapLatLonWriter_INCLUDE)
-#define _OrgApacheLuceneBkdtreeHeapLatLonWriter_
+#if !defined (OrgApacheLuceneBkdtreeHeapLatLonWriter_) && (INCLUDE_ALL_OrgApacheLuceneBkdtreeHeapLatLonWriter || defined(INCLUDE_OrgApacheLuceneBkdtreeHeapLatLonWriter))
+#define OrgApacheLuceneBkdtreeHeapLatLonWriter_
 
-#define OrgApacheLuceneBkdtreeLatLonWriter_RESTRICT 1
-#define OrgApacheLuceneBkdtreeLatLonWriter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneBkdtreeLatLonWriter 1
+#define INCLUDE_OrgApacheLuceneBkdtreeLatLonWriter 1
 #include "org/apache/lucene/bkdtree/LatLonWriter.h"
 
 @class IOSIntArray;
@@ -62,8 +62,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeHeapLatLonWriter_initWithInt_(OrgAp
 
 FOUNDATION_EXPORT OrgApacheLuceneBkdtreeHeapLatLonWriter *new_OrgApacheLuceneBkdtreeHeapLatLonWriter_initWithInt_(jint count) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneBkdtreeHeapLatLonWriter *create_OrgApacheLuceneBkdtreeHeapLatLonWriter_initWithInt_(jint count);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeHeapLatLonWriter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneBkdtreeHeapLatLonWriter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneBkdtreeHeapLatLonWriter")

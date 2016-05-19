@@ -5,28 +5,38 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexOrdTermState_INCLUDE_ALL")
-#if OrgApacheLuceneIndexOrdTermState_RESTRICT
-#define OrgApacheLuceneIndexOrdTermState_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexOrdTermState")
+#ifdef RESTRICT_OrgApacheLuceneIndexOrdTermState
+#define INCLUDE_ALL_OrgApacheLuceneIndexOrdTermState 0
 #else
-#define OrgApacheLuceneIndexOrdTermState_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexOrdTermState 1
 #endif
-#undef OrgApacheLuceneIndexOrdTermState_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexOrdTermState
 
-#if !defined (_OrgApacheLuceneIndexOrdTermState_) && (OrgApacheLuceneIndexOrdTermState_INCLUDE_ALL || OrgApacheLuceneIndexOrdTermState_INCLUDE)
-#define _OrgApacheLuceneIndexOrdTermState_
+#if !defined (OrgApacheLuceneIndexOrdTermState_) && (INCLUDE_ALL_OrgApacheLuceneIndexOrdTermState || defined(INCLUDE_OrgApacheLuceneIndexOrdTermState))
+#define OrgApacheLuceneIndexOrdTermState_
 
-#define OrgApacheLuceneIndexTermState_RESTRICT 1
-#define OrgApacheLuceneIndexTermState_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexTermState 1
+#define INCLUDE_OrgApacheLuceneIndexTermState 1
 #include "org/apache/lucene/index/TermState.h"
 
+/*!
+ @brief An ordinal based <code>TermState</code>
+ */
 @interface OrgApacheLuceneIndexOrdTermState : OrgApacheLuceneIndexTermState {
  @public
+  /*!
+   @brief Term ordinal, i.e. its position in the full list of
+ sorted terms.
+   */
   jlong ord_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ */
 - (instancetype)init;
 
 - (void)copyFromWithOrgApacheLuceneIndexTermState:(OrgApacheLuceneIndexTermState *)other OBJC_METHOD_FAMILY_NONE;
@@ -41,8 +51,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexOrdTermState_init(OrgApacheLuceneInde
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexOrdTermState *new_OrgApacheLuceneIndexOrdTermState_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexOrdTermState *create_OrgApacheLuceneIndexOrdTermState_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexOrdTermState)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexOrdTermState_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexOrdTermState")

@@ -7,7 +7,6 @@
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/lang/RuntimeException.h"
-#include "java/lang/Throwable.h"
 #include "org/apache/lucene/analysis/Analyzer.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/tokenattributes/TermToBytesRefAttribute.h"
@@ -41,23 +40,23 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder, anal
 - (OrgApacheLuceneSearchQuery *)getQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e {
   NSString *fieldName = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithInheritanceOrFailWithOrgW3cDomElement_withNSString_(e, @"fieldName");
   NSString *text = OrgApacheLuceneQueryparserXmlDOMUtils_getNonBlankTextOrFailWithOrgW3cDomElement_(e);
-  OrgApacheLuceneSearchBooleanQuery_Builder *bq = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
+  OrgApacheLuceneSearchBooleanQuery_Builder *bq = create_OrgApacheLuceneSearchBooleanQuery_Builder_init();
   [bq setDisableCoordWithBoolean:OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withBoolean_(e, @"disableCoord", false)];
   [bq setMinimumNumberShouldMatchWithInt:OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withInt_(e, @"minimumNumberShouldMatch", 0)];
   @try {
     OrgApacheLuceneAnalysisTokenStream *ts = [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(analyzer_)) tokenStreamWithNSString:fieldName withNSString:text];
-    JavaLangThrowable *__primaryException1 = nil;
+    NSException *__primaryException1 = nil;
     @try {
       id<OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute> termAtt = [((OrgApacheLuceneAnalysisTokenStream *) nil_chk(ts)) addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_class_()];
       OrgApacheLuceneIndexTerm *term = nil;
       [ts reset];
       while ([ts incrementToken]) {
-        term = [new_OrgApacheLuceneIndexTerm_initWithNSString_withOrgApacheLuceneUtilBytesRef_(fieldName, OrgApacheLuceneUtilBytesRef_deepCopyOfWithOrgApacheLuceneUtilBytesRef_([((id<OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute>) nil_chk(termAtt)) getBytesRef])) autorelease];
-        [bq addWithOrgApacheLuceneSearchBooleanClause:[new_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_OccurEnum_([new_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_(term) autorelease], JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD)) autorelease]];
+        term = create_OrgApacheLuceneIndexTerm_initWithNSString_withOrgApacheLuceneUtilBytesRef_(fieldName, OrgApacheLuceneUtilBytesRef_deepCopyOfWithOrgApacheLuceneUtilBytesRef_([((id<OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute>) nil_chk(termAtt)) getBytesRef]));
+        [bq addWithOrgApacheLuceneSearchBooleanClause:create_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_Occur_(create_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_(term), JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD))];
       }
       [ts end];
     }
-    @catch (JavaLangThrowable *e) {
+    @catch (NSException *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -66,8 +65,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder, anal
         if (__primaryException1 != nil) {
           @try {
             [ts close];
-          } @catch (JavaLangThrowable *e) {
-            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          } @catch (NSException *e) {
+            [__primaryException1 addSuppressedWithNSException:e];
           }
         } else {
           [ts close];
@@ -76,7 +75,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder, anal
     }
   }
   @catch (JavaIoIOException *ioe) {
-    @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@", @"Error constructing terms from index:", ioe)) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@", @"Error constructing terms from index:", ioe));
   }
   OrgApacheLuceneSearchQuery *q = [bq build];
   [((OrgApacheLuceneSearchQuery *) nil_chk(q)) setBoostWithFloat:OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withFloat_(e, @"boost", 1.0f)];
@@ -108,9 +107,11 @@ void OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder_initWithOrgApacheLuc
 }
 
 OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder *new_OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *analyzer) {
-  OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder *self = [OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder alloc];
-  OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_(self, analyzer);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder, initWithOrgApacheLuceneAnalysisAnalyzer_, analyzer)
+}
+
+OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder *create_OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *analyzer) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder, initWithOrgApacheLuceneAnalysisAnalyzer_, analyzer)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder)

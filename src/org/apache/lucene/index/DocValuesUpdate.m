@@ -12,21 +12,23 @@
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/RamUsageEstimator.h"
 
-static jint OrgApacheLuceneIndexDocValuesUpdate_RAW_SIZE_IN_BYTES_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexDocValuesUpdate, RAW_SIZE_IN_BYTES_, jint)
+inline jint OrgApacheLuceneIndexDocValuesUpdate_get_RAW_SIZE_IN_BYTES();
+static jint OrgApacheLuceneIndexDocValuesUpdate_RAW_SIZE_IN_BYTES;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneIndexDocValuesUpdate, RAW_SIZE_IN_BYTES, jint)
 
-static jlong OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate_RAW_VALUE_SIZE_IN_BYTES_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate, RAW_VALUE_SIZE_IN_BYTES_, jlong)
+inline jlong OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate_get_RAW_VALUE_SIZE_IN_BYTES();
+static jlong OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate_RAW_VALUE_SIZE_IN_BYTES;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate, RAW_VALUE_SIZE_IN_BYTES, jlong)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexDocValuesUpdate)
 
 @implementation OrgApacheLuceneIndexDocValuesUpdate
 
-- (instancetype)initWithOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum *)type
-                                 withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                                                 withNSString:(NSString *)field
-                                                       withId:(id)value {
-  OrgApacheLuceneIndexDocValuesUpdate_initWithOrgApacheLuceneIndexDocValuesTypeEnum_withOrgApacheLuceneIndexTerm_withNSString_withId_(self, type, term, field, value);
+- (instancetype)initWithOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)type
+                             withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
+                                             withNSString:(NSString *)field
+                                                   withId:(id)value {
+  OrgApacheLuceneIndexDocValuesUpdate_initWithOrgApacheLuceneIndexDocValuesType_withOrgApacheLuceneIndexTerm_withNSString_withId_(self, type, term, field, value);
   return self;
 }
 
@@ -37,7 +39,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexDocValuesUpdate)
 }
 
 - (jint)sizeInBytes {
-  jint sizeInBytes = OrgApacheLuceneIndexDocValuesUpdate_RAW_SIZE_IN_BYTES_;
+  jint sizeInBytes = OrgApacheLuceneIndexDocValuesUpdate_RAW_SIZE_IN_BYTES;
   sizeInBytes += ((jint) [((NSString *) nil_chk(((OrgApacheLuceneIndexTerm *) nil_chk(term_))->field_)) length]) * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_CHAR;
   sizeInBytes += ((IOSByteArray *) nil_chk(((OrgApacheLuceneUtilBytesRef *) nil_chk(term_->bytes_))->bytes_))->size_;
   sizeInBytes += ((jint) [((NSString *) nil_chk(field_)) length]) * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_CHAR;
@@ -59,20 +61,20 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexDocValuesUpdate)
 
 + (void)initialize {
   if (self == [OrgApacheLuceneIndexDocValuesUpdate class]) {
-    OrgApacheLuceneIndexDocValuesUpdate_RAW_SIZE_IN_BYTES_ = 8 * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER_) + 8 * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_) + 8 * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT;
+    OrgApacheLuceneIndexDocValuesUpdate_RAW_SIZE_IN_BYTES = 8 * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER) + 8 * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF) + 8 * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT;
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexDocValuesUpdate)
   }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexDocValuesTypeEnum:withOrgApacheLuceneIndexTerm:withNSString:withId:", "DocValuesUpdate", NULL, 0x4, NULL, NULL },
+    { "initWithOrgApacheLuceneIndexDocValuesType:withOrgApacheLuceneIndexTerm:withNSString:withId:", "DocValuesUpdate", NULL, 0x4, NULL, NULL },
     { "valueSizeInBytes", NULL, "J", 0x400, NULL, NULL },
     { "sizeInBytes", NULL, "I", 0x10, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "RAW_SIZE_IN_BYTES_", NULL, 0x1a, "I", &OrgApacheLuceneIndexDocValuesUpdate_RAW_SIZE_IN_BYTES_, NULL, .constantValue.asLong = 0 },
+    { "RAW_SIZE_IN_BYTES", "RAW_SIZE_IN_BYTES", 0x1a, "I", &OrgApacheLuceneIndexDocValuesUpdate_RAW_SIZE_IN_BYTES, NULL, .constantValue.asLong = 0 },
     { "type_", NULL, 0x10, "Lorg.apache.lucene.index.DocValuesType;", NULL, NULL, .constantValue.asLong = 0 },
     { "term_", NULL, 0x10, "Lorg.apache.lucene.index.Term;", NULL, NULL, .constantValue.asLong = 0 },
     { "field_", NULL, 0x10, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
@@ -86,7 +88,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexDocValuesUpdate)
 
 @end
 
-void OrgApacheLuceneIndexDocValuesUpdate_initWithOrgApacheLuceneIndexDocValuesTypeEnum_withOrgApacheLuceneIndexTerm_withNSString_withId_(OrgApacheLuceneIndexDocValuesUpdate *self, OrgApacheLuceneIndexDocValuesTypeEnum *type, OrgApacheLuceneIndexTerm *term, NSString *field, id value) {
+void OrgApacheLuceneIndexDocValuesUpdate_initWithOrgApacheLuceneIndexDocValuesType_withOrgApacheLuceneIndexTerm_withNSString_withId_(OrgApacheLuceneIndexDocValuesUpdate *self, OrgApacheLuceneIndexDocValuesType *type, OrgApacheLuceneIndexTerm *term, NSString *field, id value) {
   NSObject_init(self);
   self->docIDUpto_ = -1;
   JreStrongAssign(&self->type_, type);
@@ -109,12 +111,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdat
 }
 
 - (jlong)valueSizeInBytes {
-  return OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate_RAW_VALUE_SIZE_IN_BYTES_ + ((IOSByteArray *) nil_chk(((OrgApacheLuceneUtilBytesRef *) nil_chk(((OrgApacheLuceneUtilBytesRef *) check_class_cast(value_, [OrgApacheLuceneUtilBytesRef class]))))->bytes_))->size_;
+  return OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate_RAW_VALUE_SIZE_IN_BYTES + ((IOSByteArray *) nil_chk(((OrgApacheLuceneUtilBytesRef *) nil_chk(((OrgApacheLuceneUtilBytesRef *) cast_chk(value_, [OrgApacheLuceneUtilBytesRef class]))))->bytes_))->size_;
 }
 
 + (void)initialize {
   if (self == [OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate class]) {
-    OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate_RAW_VALUE_SIZE_IN_BYTES_ = JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_ARRAY_HEADER_) + 2 * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_);
+    OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate_RAW_VALUE_SIZE_IN_BYTES = JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_ARRAY_HEADER) + 2 * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate)
   }
 }
@@ -125,7 +127,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdat
     { "valueSizeInBytes", NULL, "J", 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "RAW_VALUE_SIZE_IN_BYTES_", NULL, 0x1a, "J", &OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate_RAW_VALUE_SIZE_IN_BYTES_, NULL, .constantValue.asLong = 0 },
+    { "RAW_VALUE_SIZE_IN_BYTES", "RAW_VALUE_SIZE_IN_BYTES", 0x1a, "J", &OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate_RAW_VALUE_SIZE_IN_BYTES, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate = { 2, "BinaryDocValuesUpdate", "org.apache.lucene.index", "DocValuesUpdate", 0x18, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate;
@@ -134,13 +136,15 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdat
 @end
 
 void OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate_initWithOrgApacheLuceneIndexTerm_withNSString_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate *self, OrgApacheLuceneIndexTerm *term, NSString *field, OrgApacheLuceneUtilBytesRef *value) {
-  OrgApacheLuceneIndexDocValuesUpdate_initWithOrgApacheLuceneIndexDocValuesTypeEnum_withOrgApacheLuceneIndexTerm_withNSString_withId_(self, JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, BINARY), term, field, value);
+  OrgApacheLuceneIndexDocValuesUpdate_initWithOrgApacheLuceneIndexDocValuesType_withOrgApacheLuceneIndexTerm_withNSString_withId_(self, JreLoadEnum(OrgApacheLuceneIndexDocValuesType, BINARY), term, field, value);
 }
 
 OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate *new_OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate_initWithOrgApacheLuceneIndexTerm_withNSString_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneIndexTerm *term, NSString *field, OrgApacheLuceneUtilBytesRef *value) {
-  OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate *self = [OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate alloc];
-  OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate_initWithOrgApacheLuceneIndexTerm_withNSString_withOrgApacheLuceneUtilBytesRef_(self, term, field, value);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate, initWithOrgApacheLuceneIndexTerm_withNSString_withOrgApacheLuceneUtilBytesRef_, term, field, value)
+}
+
+OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate *create_OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate_initWithOrgApacheLuceneIndexTerm_withNSString_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneIndexTerm *term, NSString *field, OrgApacheLuceneUtilBytesRef *value) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate, initWithOrgApacheLuceneIndexTerm_withNSString_withOrgApacheLuceneUtilBytesRef_, term, field, value)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate)
@@ -170,13 +174,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocValuesUpdate_BinaryDocVa
 @end
 
 void OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate_initWithOrgApacheLuceneIndexTerm_withNSString_withJavaLangLong_(OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate *self, OrgApacheLuceneIndexTerm *term, NSString *field, JavaLangLong *value) {
-  OrgApacheLuceneIndexDocValuesUpdate_initWithOrgApacheLuceneIndexDocValuesTypeEnum_withOrgApacheLuceneIndexTerm_withNSString_withId_(self, JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, NUMERIC), term, field, value);
+  OrgApacheLuceneIndexDocValuesUpdate_initWithOrgApacheLuceneIndexDocValuesType_withOrgApacheLuceneIndexTerm_withNSString_withId_(self, JreLoadEnum(OrgApacheLuceneIndexDocValuesType, NUMERIC), term, field, value);
 }
 
 OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate *new_OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate_initWithOrgApacheLuceneIndexTerm_withNSString_withJavaLangLong_(OrgApacheLuceneIndexTerm *term, NSString *field, JavaLangLong *value) {
-  OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate *self = [OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate alloc];
-  OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate_initWithOrgApacheLuceneIndexTerm_withNSString_withJavaLangLong_(self, term, field, value);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate, initWithOrgApacheLuceneIndexTerm_withNSString_withJavaLangLong_, term, field, value)
+}
+
+OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate *create_OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate_initWithOrgApacheLuceneIndexTerm_withNSString_withJavaLangLong_(OrgApacheLuceneIndexTerm *term, NSString *field, JavaLangLong *value) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate, initWithOrgApacheLuceneIndexTerm_withNSString_withJavaLangLong_, term, field, value)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate)

@@ -5,28 +5,43 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode_) && (OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode_
+#if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode))
+#define OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode_
 
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_RESTRICT 1
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode 1
+#define INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/FieldQueryNode.h"
 
 @protocol JavaLangCharSequence;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;
 
+/*!
+ @brief A <code>QuotedFieldQueryNode</code> represents phrase query.
+ Example:
+ "life is great"
+ */
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode
 
 #pragma mark Public
 
+/*!
+ @param field
+ - field name
+ @param text
+ - value
+ @param begin
+ - position in the query string
+ @param end
+ - position in the query string
+ */
 - (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)field
                     withJavaLangCharSequence:(id<JavaLangCharSequence>)text
                                      withInt:(jint)begin
@@ -46,8 +61,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQue
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(id<JavaLangCharSequence> field, id<JavaLangCharSequence> text, jint begin, jint end) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode *create_OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(id<JavaLangCharSequence> field, id<JavaLangCharSequence> text, jint begin, jint end);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode")

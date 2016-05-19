@@ -5,24 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_RESTRICT
-#define OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum")
+#ifdef RESTRICT_OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum
+#define INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum 0
 #else
-#define OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum 1
 #endif
-#undef OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum
 
-#if !defined (_OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_) && (OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_INCLUDE_ALL || OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_INCLUDE)
-#define _OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_
+#if !defined (OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_) && (INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum || defined(INCLUDE_OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum))
+#define OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_
 
-#define OrgApacheLuceneIndexPostingsEnum_RESTRICT 1
-#define OrgApacheLuceneIndexPostingsEnum_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexPostingsEnum 1
+#define INCLUDE_OrgApacheLuceneIndexPostingsEnum 1
 #include "org/apache/lucene/index/PostingsEnum.h"
 
 @class OrgApacheLuceneUtilBitSet;
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief Takes a <code>FixedBitSet</code> and creates a DOCS <code>PostingsEnum</code> from it.
+ */
 @interface OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum : OrgApacheLuceneIndexPostingsEnum
 
 #pragma mark Public
@@ -59,8 +62,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_initWith
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum *new_OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet *bits) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum *create_OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_initWithOrgApacheLuceneUtilBitSet_(OrgApacheLuceneUtilBitSet *bits);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeBitSetPostingsEnum")

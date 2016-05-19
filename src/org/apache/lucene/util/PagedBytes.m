@@ -45,11 +45,13 @@
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPagedBytes, blocks_, IOSObjectArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPagedBytes, currentBlock_, IOSByteArray *)
 
-static jlong OrgApacheLuceneUtilPagedBytes_BASE_RAM_BYTES_USED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilPagedBytes, BASE_RAM_BYTES_USED_, jlong)
+inline jlong OrgApacheLuceneUtilPagedBytes_get_BASE_RAM_BYTES_USED();
+static jlong OrgApacheLuceneUtilPagedBytes_BASE_RAM_BYTES_USED;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilPagedBytes, BASE_RAM_BYTES_USED, jlong)
 
-static IOSByteArray *OrgApacheLuceneUtilPagedBytes_EMPTY_BYTES_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilPagedBytes, EMPTY_BYTES_, IOSByteArray *)
+inline IOSByteArray *OrgApacheLuceneUtilPagedBytes_get_EMPTY_BYTES();
+static IOSByteArray *OrgApacheLuceneUtilPagedBytes_EMPTY_BYTES;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilPagedBytes, EMPTY_BYTES, IOSByteArray *)
 
 __attribute__((unused)) static void OrgApacheLuceneUtilPagedBytes_addBlockWithByteArray_(OrgApacheLuceneUtilPagedBytes *self, IOSByteArray *block);
 
@@ -68,12 +70,15 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPagedBytes_addBlockWithBy
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPagedBytes_Reader, blocks_, IOSObjectArray *)
 
-static jlong OrgApacheLuceneUtilPagedBytes_Reader_BASE_RAM_BYTES_USED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilPagedBytes_Reader, BASE_RAM_BYTES_USED_, jlong)
+inline jlong OrgApacheLuceneUtilPagedBytes_Reader_get_BASE_RAM_BYTES_USED();
+static jlong OrgApacheLuceneUtilPagedBytes_Reader_BASE_RAM_BYTES_USED;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilPagedBytes_Reader, BASE_RAM_BYTES_USED, jlong)
 
 __attribute__((unused)) static void OrgApacheLuceneUtilPagedBytes_Reader_initWithOrgApacheLuceneUtilPagedBytes_(OrgApacheLuceneUtilPagedBytes_Reader *self, OrgApacheLuceneUtilPagedBytes *pagedBytes);
 
 __attribute__((unused)) static OrgApacheLuceneUtilPagedBytes_Reader *new_OrgApacheLuceneUtilPagedBytes_Reader_initWithOrgApacheLuceneUtilPagedBytes_(OrgApacheLuceneUtilPagedBytes *pagedBytes) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneUtilPagedBytes_Reader *create_OrgApacheLuceneUtilPagedBytes_Reader_initWithOrgApacheLuceneUtilPagedBytes_(OrgApacheLuceneUtilPagedBytes *pagedBytes);
 
 @interface OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput () {
  @public
@@ -161,10 +166,10 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPagedBytes)
 
 - (OrgApacheLuceneUtilPagedBytes_Reader *)freezeWithBoolean:(jboolean)trim {
   if (frozen_) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"already frozen") autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"already frozen");
   }
   if (didSkipBytes_) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"cannot freeze when copy(BytesRef, BytesRef) was used") autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"cannot freeze when copy(BytesRef, BytesRef) was used");
   }
   if (trim && upto_ < blockSize_) {
     IOSByteArray *newBlock = [IOSByteArray arrayWithLength:upto_];
@@ -172,12 +177,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPagedBytes)
     JreStrongAssign(&currentBlock_, newBlock);
   }
   if (currentBlock_ == nil) {
-    JreStrongAssign(&currentBlock_, OrgApacheLuceneUtilPagedBytes_EMPTY_BYTES_);
+    JreStrongAssign(&currentBlock_, OrgApacheLuceneUtilPagedBytes_EMPTY_BYTES);
   }
   OrgApacheLuceneUtilPagedBytes_addBlockWithByteArray_(self, currentBlock_);
   frozen_ = true;
   JreStrongAssign(&currentBlock_, nil);
-  return [new_OrgApacheLuceneUtilPagedBytes_Reader_initWithOrgApacheLuceneUtilPagedBytes_(self) autorelease];
+  return create_OrgApacheLuceneUtilPagedBytes_Reader_initWithOrgApacheLuceneUtilPagedBytes_(self);
 }
 
 - (jlong)getPointer {
@@ -190,7 +195,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPagedBytes)
 }
 
 - (jlong)ramBytesUsed {
-  jlong size = OrgApacheLuceneUtilPagedBytes_BASE_RAM_BYTES_USED_ + OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfWithNSObjectArray_(blocks_);
+  jlong size = OrgApacheLuceneUtilPagedBytes_BASE_RAM_BYTES_USED + OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfWithNSObjectArray_(blocks_);
   ;
   if (numBlocks_ > 0) {
     size += (numBlocks_ - 1) * bytesUsedPerBlock_;
@@ -208,11 +213,11 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPagedBytes)
 
 - (jlong)copyUsingLengthPrefixWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes {
   if (((OrgApacheLuceneUtilBytesRef *) nil_chk(bytes))->length_ >= 32768) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$IC", @"max length is 32767 (got ", bytes->length_, ')')) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$IC", @"max length is 32767 (got ", bytes->length_, ')'));
   }
   if (upto_ + bytes->length_ + 2 > blockSize_) {
     if (bytes->length_ + 2 > blockSize_) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$I$", @"block size ", blockSize_, @" is too small to store length ", bytes->length_, @" bytes")) autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$I$", @"block size ", blockSize_, @" is too small to store length ", bytes->length_, @" bytes"));
     }
     if (currentBlock_ != nil) {
       OrgApacheLuceneUtilPagedBytes_addBlockWithByteArray_(self, currentBlock_);
@@ -235,16 +240,16 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPagedBytes)
 
 - (OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput *)getDataInput {
   if (!frozen_) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"must call freeze() before getDataInput") autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"must call freeze() before getDataInput");
   }
-  return [new_OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput_initWithOrgApacheLuceneUtilPagedBytes_(self) autorelease];
+  return create_OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput_initWithOrgApacheLuceneUtilPagedBytes_(self);
 }
 
 - (OrgApacheLuceneUtilPagedBytes_PagedBytesDataOutput *)getDataOutput {
   if (frozen_) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"cannot get DataOutput after freeze()") autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"cannot get DataOutput after freeze()");
   }
-  return [new_OrgApacheLuceneUtilPagedBytes_PagedBytesDataOutput_initWithOrgApacheLuceneUtilPagedBytes_(self) autorelease];
+  return create_OrgApacheLuceneUtilPagedBytes_PagedBytesDataOutput_initWithOrgApacheLuceneUtilPagedBytes_(self);
 }
 
 - (void)dealloc {
@@ -255,8 +260,8 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPagedBytes)
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilPagedBytes class]) {
-    OrgApacheLuceneUtilPagedBytes_BASE_RAM_BYTES_USED_ = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilPagedBytes_class_());
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilPagedBytes_EMPTY_BYTES_, [IOSByteArray newArrayWithLength:0]);
+    OrgApacheLuceneUtilPagedBytes_BASE_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilPagedBytes_class_());
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilPagedBytes_EMPTY_BYTES, [IOSByteArray newArrayWithLength:0]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilPagedBytes)
   }
 }
@@ -270,13 +275,13 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPagedBytes)
     { "freezeWithBoolean:", "freeze", "Lorg.apache.lucene.util.PagedBytes$Reader;", 0x1, NULL, NULL },
     { "getPointer", NULL, "J", 0x1, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
     { "copyUsingLengthPrefixWithOrgApacheLuceneUtilBytesRef:", "copyUsingLengthPrefix", "J", 0x1, NULL, NULL },
     { "getDataInput", NULL, "Lorg.apache.lucene.util.PagedBytes$PagedBytesDataInput;", 0x1, NULL, NULL },
     { "getDataOutput", NULL, "Lorg.apache.lucene.util.PagedBytes$PagedBytesDataOutput;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "BASE_RAM_BYTES_USED_", NULL, 0x1a, "J", &OrgApacheLuceneUtilPagedBytes_BASE_RAM_BYTES_USED_, NULL, .constantValue.asLong = 0 },
+    { "BASE_RAM_BYTES_USED", "BASE_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneUtilPagedBytes_BASE_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
     { "blocks_", NULL, 0x2, "[[B", NULL, NULL, .constantValue.asLong = 0 },
     { "numBlocks_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "blockSize_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
@@ -287,7 +292,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPagedBytes)
     { "upto_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "currentBlock_", NULL, 0x2, "[B", NULL, NULL, .constantValue.asLong = 0 },
     { "bytesUsedPerBlock_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "EMPTY_BYTES_", NULL, 0x1a, "[B", &OrgApacheLuceneUtilPagedBytes_EMPTY_BYTES_, NULL, .constantValue.asLong = 0 },
+    { "EMPTY_BYTES", "EMPTY_BYTES", 0x1a, "[B", &OrgApacheLuceneUtilPagedBytes_EMPTY_BYTES, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.PagedBytes$Reader;", "Lorg.apache.lucene.util.PagedBytes$PagedBytesDataInput;", "Lorg.apache.lucene.util.PagedBytes$PagedBytesDataOutput;"};
   static const J2ObjcClassInfo _OrgApacheLuceneUtilPagedBytes = { 2, "PagedBytes", "org.apache.lucene.util", NULL, 0x11, 11, methods, 12, fields, 0, NULL, 3, inner_classes, NULL, NULL };
@@ -304,19 +309,21 @@ void OrgApacheLuceneUtilPagedBytes_initWithInt_(OrgApacheLuceneUtilPagedBytes *s
   self->blockBits_ = blockBits;
   self->blockMask_ = self->blockSize_ - 1;
   self->upto_ = self->blockSize_;
-  self->bytesUsedPerBlock_ = OrgApacheLuceneUtilRamUsageEstimator_alignObjectSizeWithLong_(self->blockSize_ + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_ARRAY_HEADER_));
+  self->bytesUsedPerBlock_ = OrgApacheLuceneUtilRamUsageEstimator_alignObjectSizeWithLong_(self->blockSize_ + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_ARRAY_HEADER));
   self->numBlocks_ = 0;
 }
 
 OrgApacheLuceneUtilPagedBytes *new_OrgApacheLuceneUtilPagedBytes_initWithInt_(jint blockBits) {
-  OrgApacheLuceneUtilPagedBytes *self = [OrgApacheLuceneUtilPagedBytes alloc];
-  OrgApacheLuceneUtilPagedBytes_initWithInt_(self, blockBits);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPagedBytes, initWithInt_, blockBits)
+}
+
+OrgApacheLuceneUtilPagedBytes *create_OrgApacheLuceneUtilPagedBytes_initWithInt_(jint blockBits) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPagedBytes, initWithInt_, blockBits)
 }
 
 void OrgApacheLuceneUtilPagedBytes_addBlockWithByteArray_(OrgApacheLuceneUtilPagedBytes *self, IOSByteArray *block) {
   if (((IOSObjectArray *) nil_chk(self->blocks_))->size_ == self->numBlocks_) {
-    JreStrongAssign(&self->blocks_, JavaUtilArrays_copyOfWithNSObjectArray_withInt_(self->blocks_, OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(self->numBlocks_, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_))));
+    JreStrongAssign(&self->blocks_, JavaUtilArrays_copyOfWithNSObjectArray_withInt_(self->blocks_, OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(self->numBlocks_, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF))));
   }
   IOSObjectArray_Set(nil_chk(self->blocks_), self->numBlocks_++, block);
 }
@@ -372,7 +379,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPagedBytes_Reader)
 }
 
 - (jlong)ramBytesUsed {
-  jlong size = OrgApacheLuceneUtilPagedBytes_Reader_BASE_RAM_BYTES_USED_ + OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfWithNSObjectArray_(blocks_);
+  jlong size = OrgApacheLuceneUtilPagedBytes_Reader_BASE_RAM_BYTES_USED + OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfWithNSObjectArray_(blocks_);
   if (((IOSObjectArray *) nil_chk(blocks_))->size_ > 0) {
     size += (blocks_->size_ - 1) * bytesUsedPerBlock_;
     size += OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithByteArray_(IOSObjectArray_Get(blocks_, blocks_->size_ - 1));
@@ -395,7 +402,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPagedBytes_Reader)
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilPagedBytes_Reader class]) {
-    OrgApacheLuceneUtilPagedBytes_Reader_BASE_RAM_BYTES_USED_ = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilPagedBytes_Reader_class_());
+    OrgApacheLuceneUtilPagedBytes_Reader_BASE_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilPagedBytes_Reader_class_());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilPagedBytes_Reader)
   }
 }
@@ -406,11 +413,11 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPagedBytes_Reader)
     { "fillSliceWithOrgApacheLuceneUtilBytesRef:withLong:withInt:", "fillSlice", "V", 0x1, NULL, NULL },
     { "fillWithOrgApacheLuceneUtilBytesRef:withLong:", "fill", "V", 0x1, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "BASE_RAM_BYTES_USED_", NULL, 0x1a, "J", &OrgApacheLuceneUtilPagedBytes_Reader_BASE_RAM_BYTES_USED_, NULL, .constantValue.asLong = 0 },
+    { "BASE_RAM_BYTES_USED", "BASE_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneUtilPagedBytes_Reader_BASE_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
     { "blocks_", NULL, 0x12, "[[B", NULL, NULL, .constantValue.asLong = 0 },
     { "blockBits_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "blockMask_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
@@ -433,9 +440,11 @@ void OrgApacheLuceneUtilPagedBytes_Reader_initWithOrgApacheLuceneUtilPagedBytes_
 }
 
 OrgApacheLuceneUtilPagedBytes_Reader *new_OrgApacheLuceneUtilPagedBytes_Reader_initWithOrgApacheLuceneUtilPagedBytes_(OrgApacheLuceneUtilPagedBytes *pagedBytes) {
-  OrgApacheLuceneUtilPagedBytes_Reader *self = [OrgApacheLuceneUtilPagedBytes_Reader alloc];
-  OrgApacheLuceneUtilPagedBytes_Reader_initWithOrgApacheLuceneUtilPagedBytes_(self, pagedBytes);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPagedBytes_Reader, initWithOrgApacheLuceneUtilPagedBytes_, pagedBytes)
+}
+
+OrgApacheLuceneUtilPagedBytes_Reader *create_OrgApacheLuceneUtilPagedBytes_Reader_initWithOrgApacheLuceneUtilPagedBytes_(OrgApacheLuceneUtilPagedBytes *pagedBytes) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPagedBytes_Reader, initWithOrgApacheLuceneUtilPagedBytes_, pagedBytes)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPagedBytes_Reader)
@@ -530,9 +539,11 @@ void OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput_initWithOrgApacheLuceneUt
 }
 
 OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput *new_OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput_initWithOrgApacheLuceneUtilPagedBytes_(OrgApacheLuceneUtilPagedBytes *outer$) {
-  OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput *self = [OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput alloc];
-  OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput_initWithOrgApacheLuceneUtilPagedBytes_(self, outer$);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput, initWithOrgApacheLuceneUtilPagedBytes_, outer$)
+}
+
+OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput *create_OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput_initWithOrgApacheLuceneUtilPagedBytes_(OrgApacheLuceneUtilPagedBytes *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput, initWithOrgApacheLuceneUtilPagedBytes_, outer$)
 }
 
 void OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput_nextBlock(OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput *self) {
@@ -608,7 +619,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPagedBytes_PagedBytesDataInp
     { "writeByteWithByte:", "writeByte", "V", 0x1, NULL, NULL },
     { "writeBytesWithByteArray:withInt:withInt:", "writeBytes", "V", 0x1, NULL, NULL },
     { "getPosition", NULL, "J", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilPagedBytes:", "init", NULL, 0x0, NULL, NULL },
+    { "initWithOrgApacheLuceneUtilPagedBytes:", "PagedBytesDataOutput", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.util.PagedBytes;", NULL, NULL, .constantValue.asLong = 0 },
@@ -625,9 +636,11 @@ void OrgApacheLuceneUtilPagedBytes_PagedBytesDataOutput_initWithOrgApacheLuceneU
 }
 
 OrgApacheLuceneUtilPagedBytes_PagedBytesDataOutput *new_OrgApacheLuceneUtilPagedBytes_PagedBytesDataOutput_initWithOrgApacheLuceneUtilPagedBytes_(OrgApacheLuceneUtilPagedBytes *outer$) {
-  OrgApacheLuceneUtilPagedBytes_PagedBytesDataOutput *self = [OrgApacheLuceneUtilPagedBytes_PagedBytesDataOutput alloc];
-  OrgApacheLuceneUtilPagedBytes_PagedBytesDataOutput_initWithOrgApacheLuceneUtilPagedBytes_(self, outer$);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPagedBytes_PagedBytesDataOutput, initWithOrgApacheLuceneUtilPagedBytes_, outer$)
+}
+
+OrgApacheLuceneUtilPagedBytes_PagedBytesDataOutput *create_OrgApacheLuceneUtilPagedBytes_PagedBytesDataOutput_initWithOrgApacheLuceneUtilPagedBytes_(OrgApacheLuceneUtilPagedBytes *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPagedBytes_PagedBytesDataOutput, initWithOrgApacheLuceneUtilPagedBytes_, outer$)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPagedBytes_PagedBytesDataOutput)

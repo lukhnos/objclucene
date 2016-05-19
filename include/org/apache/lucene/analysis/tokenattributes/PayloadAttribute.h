@@ -5,27 +5,48 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_RESTRICT
-#define OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPayloadAttribute")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisTokenattributesPayloadAttribute
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPayloadAttribute 0
 #else
-#define OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPayloadAttribute 1
 #endif
-#undef OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisTokenattributesPayloadAttribute
 
-#if !defined (_OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_) && (OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_INCLUDE_ALL || OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_INCLUDE)
-#define _OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_
+#if !defined (OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPayloadAttribute || defined(INCLUDE_OrgApacheLuceneAnalysisTokenattributesPayloadAttribute))
+#define OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_
 
-#define OrgApacheLuceneUtilAttribute_RESTRICT 1
-#define OrgApacheLuceneUtilAttribute_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAttribute 1
+#define INCLUDE_OrgApacheLuceneUtilAttribute 1
 #include "org/apache/lucene/util/Attribute.h"
 
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief The payload of a Token.
+ <p>
+ The payload is stored in the index at each position, and can
+ be used to influence scoring when using Payload-based queries 
+ in the <code>org.apache.lucene.search.payloads</code> and
+ <code>org.apache.lucene.search.spans</code> packages.
+ <p>
+ NOTE: because the payload will be stored at each position, it's usually
+ best to use the minimum number of bytes necessary. Some codec implementations
+ may optimize payload storage when all payloads have the same length.
+ - seealso: org.apache.lucene.index.PostingsEnum
+ */
 @protocol OrgApacheLuceneAnalysisTokenattributesPayloadAttribute < OrgApacheLuceneUtilAttribute, NSObject, JavaObject >
 
+/*!
+ @brief Returns this Token's payload.
+ - seealso: #setPayload(BytesRef)
+ */
 - (OrgApacheLuceneUtilBytesRef *)getPayload;
 
+/*!
+ @brief Sets this Token's payload.
+ - seealso: #getPayload()
+ */
 - (void)setPayloadWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload;
 
 @end
@@ -36,4 +57,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenattributesPayloadAttribut
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPayloadAttribute")

@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexTermVectorsConsumerPerField_INCLUDE_ALL")
-#if OrgApacheLuceneIndexTermVectorsConsumerPerField_RESTRICT
-#define OrgApacheLuceneIndexTermVectorsConsumerPerField_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexTermVectorsConsumerPerField")
+#ifdef RESTRICT_OrgApacheLuceneIndexTermVectorsConsumerPerField
+#define INCLUDE_ALL_OrgApacheLuceneIndexTermVectorsConsumerPerField 0
 #else
-#define OrgApacheLuceneIndexTermVectorsConsumerPerField_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexTermVectorsConsumerPerField 1
 #endif
-#undef OrgApacheLuceneIndexTermVectorsConsumerPerField_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexTermVectorsConsumerPerField
 
-#if !defined (_OrgApacheLuceneIndexTermVectorsConsumerPerField_) && (OrgApacheLuceneIndexTermVectorsConsumerPerField_INCLUDE_ALL || OrgApacheLuceneIndexTermVectorsConsumerPerField_INCLUDE)
-#define _OrgApacheLuceneIndexTermVectorsConsumerPerField_
+#if !defined (OrgApacheLuceneIndexTermVectorsConsumerPerField_) && (INCLUDE_ALL_OrgApacheLuceneIndexTermVectorsConsumerPerField || defined(INCLUDE_OrgApacheLuceneIndexTermVectorsConsumerPerField))
+#define OrgApacheLuceneIndexTermVectorsConsumerPerField_
 
-#define OrgApacheLuceneIndexTermsHashPerField_RESTRICT 1
-#define OrgApacheLuceneIndexTermsHashPerField_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexTermsHashPerField 1
+#define INCLUDE_OrgApacheLuceneIndexTermsHashPerField 1
 #include "org/apache/lucene/index/TermsHashPerField.h"
 
 @class OrgApacheLuceneIndexFieldInfo;
@@ -55,6 +55,12 @@
 
 - (OrgApacheLuceneIndexParallelPostingsArray *)createPostingsArrayWithInt:(jint)size;
 
+/*!
+ @brief Called once per field per document if term vectors
+ are enabled, to write the vectors to
+ RAMOutputStream, which is then quickly flushed to
+ the real term vectors files in the Directory.
+ */
 - (void)finish;
 
 - (void)finishDocument;
@@ -79,15 +85,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexTermVectorsConsumerPerField_initWithO
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexTermVectorsConsumerPerField *new_OrgApacheLuceneIndexTermVectorsConsumerPerField_initWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermVectorsConsumer_withOrgApacheLuceneIndexFieldInfo_(OrgApacheLuceneIndexFieldInvertState *invertState, OrgApacheLuceneIndexTermVectorsConsumer *termsWriter, OrgApacheLuceneIndexFieldInfo *fieldInfo) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexTermVectorsConsumerPerField *create_OrgApacheLuceneIndexTermVectorsConsumerPerField_initWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermVectorsConsumer_withOrgApacheLuceneIndexFieldInfo_(OrgApacheLuceneIndexFieldInvertState *invertState, OrgApacheLuceneIndexTermVectorsConsumer *termsWriter, OrgApacheLuceneIndexFieldInfo *fieldInfo);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTermVectorsConsumerPerField)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray_) && (OrgApacheLuceneIndexTermVectorsConsumerPerField_INCLUDE_ALL || OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray_INCLUDE)
-#define _OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray_
+#if !defined (OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray_) && (INCLUDE_ALL_OrgApacheLuceneIndexTermVectorsConsumerPerField || defined(INCLUDE_OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray))
+#define OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray_
 
-#define OrgApacheLuceneIndexParallelPostingsArray_RESTRICT 1
-#define OrgApacheLuceneIndexParallelPostingsArray_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexParallelPostingsArray 1
+#define INCLUDE_OrgApacheLuceneIndexParallelPostingsArray 1
 #include "org/apache/lucene/index/ParallelPostingsArray.h"
 
 @class IOSIntArray;
@@ -124,8 +132,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVecto
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray *new_OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray_initWithInt_(jint size) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray *create_OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray_initWithInt_(jint size);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTermVectorsConsumerPerField_TermVectorsPostingsArray)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexTermVectorsConsumerPerField_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexTermVectorsConsumerPerField")

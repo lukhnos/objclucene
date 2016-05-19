@@ -5,21 +5,24 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilAutomatonRunAutomaton_INCLUDE_ALL")
-#if OrgApacheLuceneUtilAutomatonRunAutomaton_RESTRICT
-#define OrgApacheLuceneUtilAutomatonRunAutomaton_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonRunAutomaton")
+#ifdef RESTRICT_OrgApacheLuceneUtilAutomatonRunAutomaton
+#define INCLUDE_ALL_OrgApacheLuceneUtilAutomatonRunAutomaton 0
 #else
-#define OrgApacheLuceneUtilAutomatonRunAutomaton_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilAutomatonRunAutomaton 1
 #endif
-#undef OrgApacheLuceneUtilAutomatonRunAutomaton_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilAutomatonRunAutomaton
 
-#if !defined (_OrgApacheLuceneUtilAutomatonRunAutomaton_) && (OrgApacheLuceneUtilAutomatonRunAutomaton_INCLUDE_ALL || OrgApacheLuceneUtilAutomatonRunAutomaton_INCLUDE)
-#define _OrgApacheLuceneUtilAutomatonRunAutomaton_
+#if !defined (OrgApacheLuceneUtilAutomatonRunAutomaton_) && (INCLUDE_ALL_OrgApacheLuceneUtilAutomatonRunAutomaton || defined(INCLUDE_OrgApacheLuceneUtilAutomatonRunAutomaton))
+#define OrgApacheLuceneUtilAutomatonRunAutomaton_
 
 @class IOSBooleanArray;
 @class IOSIntArray;
 @class OrgApacheLuceneUtilAutomatonAutomaton;
 
+/*!
+ @brief Finite-state automaton with fast run operation.
+ */
 @interface OrgApacheLuceneUtilAutomatonRunAutomaton : NSObject {
  @public
   OrgApacheLuceneUtilAutomatonAutomaton *automaton_;
@@ -34,10 +37,22 @@
 
 #pragma mark Public
 
+/*!
+ @brief Constructs a new <code>RunAutomaton</code> from a deterministic
+ <code>Automaton</code>.
+ @param a an automaton
+ */
 - (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
                                                       withInt:(jint)maxInterval
                                                   withBoolean:(jboolean)tableize;
 
+/*!
+ @brief Constructs a new <code>RunAutomaton</code> from a deterministic
+ <code>Automaton</code>.
+ @param a an automaton
+ @param maxDeterminizedStates maximum number of states that can be created
+ while determinizing a
+ */
 - (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
                                                       withInt:(jint)maxInterval
                                                   withBoolean:(jboolean)tableize
@@ -45,23 +60,50 @@
 
 - (jboolean)isEqual:(id)obj;
 
+/*!
+ @brief Returns array of codepoint class interval start points.
+ The array should
+ not be modified by the caller.
+ */
 - (IOSIntArray *)getCharIntervals;
 
+/*!
+ @brief Returns initial state.
+ */
 - (jint)getInitialState;
 
+/*!
+ @brief Returns number of states in automaton.
+ */
 - (jint)getSize;
 
 - (NSUInteger)hash;
 
+/*!
+ @brief Returns acceptance status for given state.
+ */
 - (jboolean)isAcceptWithInt:(jint)state;
 
+/*!
+ @brief Returns the state obtained by reading the given char from the given state.
+ Returns -1 if not obtaining any such state. (If the original
+ <code>Automaton</code> had no dead states, -1 is returned here if and only
+ if a dead state is entered in an equivalent automaton with a total
+ transition function.)
+ */
 - (jint)stepWithInt:(jint)state
             withInt:(jint)c;
 
+/*!
+ @brief Returns a string representation of this automaton.
+ */
 - (NSString *)description;
 
 #pragma mark Package-Private
 
+/*!
+ @brief Gets character class of given codepoint
+ */
 - (jint)getCharClassWithInt:(jint)c;
 
 @end
@@ -82,4 +124,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonRunAutomaton)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilAutomatonRunAutomaton_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonRunAutomaton")

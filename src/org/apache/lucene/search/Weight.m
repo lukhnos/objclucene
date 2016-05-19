@@ -74,7 +74,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchWeight_DefaultBulkScorer, scorer_, OrgA
   if (scorer == nil) {
     return nil;
   }
-  return [new_OrgApacheLuceneSearchWeight_DefaultBulkScorer_initWithOrgApacheLuceneSearchScorer_(scorer) autorelease];
+  return create_OrgApacheLuceneSearchWeight_DefaultBulkScorer_initWithOrgApacheLuceneSearchScorer_(scorer);
 }
 
 - (void)dealloc {
@@ -85,7 +85,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchWeight_DefaultBulkScorer, scorer_, OrgA
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneSearchQuery:", "Weight", NULL, 0x4, NULL, NULL },
-    { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x401, NULL, NULL },
+    { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x401, NULL, "(Ljava/util/Set<Lorg/apache/lucene/index/Term;>;)V" },
     { "explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x401, "Ljava.io.IOException;", NULL },
     { "getQuery", NULL, "Lorg.apache.lucene.search.Query;", 0x11, NULL, NULL },
     { "getValueForNormalization", NULL, "F", 0x401, "Ljava.io.IOException;", NULL },
@@ -186,15 +186,17 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchWeight)
 void OrgApacheLuceneSearchWeight_DefaultBulkScorer_initWithOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchWeight_DefaultBulkScorer *self, OrgApacheLuceneSearchScorer *scorer) {
   OrgApacheLuceneSearchBulkScorer_init(self);
   if (scorer == nil) {
-    @throw [new_JavaLangNullPointerException_init() autorelease];
+    @throw create_JavaLangNullPointerException_init();
   }
   JreStrongAssign(&self->scorer_, scorer);
 }
 
 OrgApacheLuceneSearchWeight_DefaultBulkScorer *new_OrgApacheLuceneSearchWeight_DefaultBulkScorer_initWithOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *scorer) {
-  OrgApacheLuceneSearchWeight_DefaultBulkScorer *self = [OrgApacheLuceneSearchWeight_DefaultBulkScorer alloc];
-  OrgApacheLuceneSearchWeight_DefaultBulkScorer_initWithOrgApacheLuceneSearchScorer_(self, scorer);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchWeight_DefaultBulkScorer, initWithOrgApacheLuceneSearchScorer_, scorer)
+}
+
+OrgApacheLuceneSearchWeight_DefaultBulkScorer *create_OrgApacheLuceneSearchWeight_DefaultBulkScorer_initWithOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *scorer) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchWeight_DefaultBulkScorer, initWithOrgApacheLuceneSearchScorer_, scorer)
 }
 
 jint OrgApacheLuceneSearchWeight_DefaultBulkScorer_scoreRangeWithOrgApacheLuceneSearchLeafCollector_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchTwoPhaseIterator_withOrgApacheLuceneUtilBits_withInt_withInt_(id<OrgApacheLuceneSearchLeafCollector> collector, OrgApacheLuceneSearchScorer *scorer, OrgApacheLuceneSearchTwoPhaseIterator *twoPhase, id<OrgApacheLuceneUtilBits> acceptDocs, jint currentDoc, jint end) {

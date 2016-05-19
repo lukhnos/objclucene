@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchTermQuery_INCLUDE_ALL")
-#if OrgApacheLuceneSearchTermQuery_RESTRICT
-#define OrgApacheLuceneSearchTermQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchTermQuery")
+#ifdef RESTRICT_OrgApacheLuceneSearchTermQuery
+#define INCLUDE_ALL_OrgApacheLuceneSearchTermQuery 0
 #else
-#define OrgApacheLuceneSearchTermQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchTermQuery 1
 #endif
-#undef OrgApacheLuceneSearchTermQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchTermQuery
 
-#if !defined (_OrgApacheLuceneSearchTermQuery_) && (OrgApacheLuceneSearchTermQuery_INCLUDE_ALL || OrgApacheLuceneSearchTermQuery_INCLUDE)
-#define _OrgApacheLuceneSearchTermQuery_
+#if !defined (OrgApacheLuceneSearchTermQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchTermQuery || defined(INCLUDE_OrgApacheLuceneSearchTermQuery))
+#define OrgApacheLuceneSearchTermQuery_
 
-#define OrgApacheLuceneSearchQuery_RESTRICT 1
-#define OrgApacheLuceneSearchQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchQuery 1
+#define INCLUDE_OrgApacheLuceneSearchQuery 1
 #include "org/apache/lucene/search/Query.h"
 
 @class OrgApacheLuceneIndexTerm;
@@ -25,24 +25,45 @@
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchWeight;
 
+/*!
+ @brief A Query that matches documents containing a term.
+ This may be combined with
+ other terms with a <code>BooleanQuery</code>.
+ */
 @interface OrgApacheLuceneSearchTermQuery : OrgApacheLuceneSearchQuery
 
 #pragma mark Public
 
+/*!
+ @brief Constructs a query for the term <code>t</code>.
+ */
 - (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)t;
 
+/*!
+ @brief Expert: constructs a TermQuery that will use the provided docFreq instead
+ of looking up the docFreq against the searcher.
+ */
 - (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)t
              withOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)states;
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores;
 
+/*!
+ @brief Returns true iff <code>o</code> is equal to this.
+ */
 - (jboolean)isEqual:(id)o;
 
+/*!
+ @brief Returns the term of this query.
+ */
 - (OrgApacheLuceneIndexTerm *)getTerm;
 
 - (NSUInteger)hash;
 
+/*!
+ @brief Prints a user-readable version of this query.
+ */
 - (NSString *)toStringWithNSString:(NSString *)field;
 
 @end
@@ -53,19 +74,23 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneInd
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchTermQuery *new_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexTerm *t) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchTermQuery *create_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexTerm *t);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneIndexTermContext_(OrgApacheLuceneSearchTermQuery *self, OrgApacheLuceneIndexTerm *t, OrgApacheLuceneIndexTermContext *states);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchTermQuery *new_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneIndexTermContext_(OrgApacheLuceneIndexTerm *t, OrgApacheLuceneIndexTermContext *states) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchTermQuery *create_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneIndexTermContext_(OrgApacheLuceneIndexTerm *t, OrgApacheLuceneIndexTermContext *states);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermQuery)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchTermQuery_TermWeight_) && (OrgApacheLuceneSearchTermQuery_INCLUDE_ALL || OrgApacheLuceneSearchTermQuery_TermWeight_INCLUDE)
-#define _OrgApacheLuceneSearchTermQuery_TermWeight_
+#if !defined (OrgApacheLuceneSearchTermQuery_TermWeight_) && (INCLUDE_ALL_OrgApacheLuceneSearchTermQuery || defined(INCLUDE_OrgApacheLuceneSearchTermQuery_TermWeight))
+#define OrgApacheLuceneSearchTermQuery_TermWeight_
 
-#define OrgApacheLuceneSearchWeight_RESTRICT 1
-#define OrgApacheLuceneSearchWeight_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchWeight 1
+#define INCLUDE_OrgApacheLuceneSearchWeight 1
 #include "org/apache/lucene/search/Weight.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
@@ -107,8 +132,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchTermQuery_TermWeight_initWithOrgApac
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchTermQuery_TermWeight *new_OrgApacheLuceneSearchTermQuery_TermWeight_initWithOrgApacheLuceneSearchTermQuery_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withOrgApacheLuceneIndexTermContext_(OrgApacheLuceneSearchTermQuery *outer$, OrgApacheLuceneSearchIndexSearcher *searcher, jboolean needsScores, OrgApacheLuceneIndexTermContext *termStates) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchTermQuery_TermWeight *create_OrgApacheLuceneSearchTermQuery_TermWeight_initWithOrgApacheLuceneSearchTermQuery_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withOrgApacheLuceneIndexTermContext_(OrgApacheLuceneSearchTermQuery *outer$, OrgApacheLuceneSearchIndexSearcher *searcher, jboolean needsScores, OrgApacheLuceneIndexTermContext *termStates);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermQuery_TermWeight)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchTermQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchTermQuery")

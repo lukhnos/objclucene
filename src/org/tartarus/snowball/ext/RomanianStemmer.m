@@ -11,8 +11,6 @@
 #include "org/tartarus/snowball/SnowballProgram.h"
 #include "org/tartarus/snowball/ext/RomanianStemmer.h"
 
-#define OrgTartarusSnowballExtRomanianStemmer_serialVersionUID 1LL
-
 @interface OrgTartarusSnowballExtRomanianStemmer () {
  @public
   jboolean B_standard_suffix_removed_;
@@ -47,31 +45,41 @@
 
 @end
 
-J2OBJC_STATIC_FIELD_GETTER(OrgTartarusSnowballExtRomanianStemmer, serialVersionUID, jlong)
+inline jlong OrgTartarusSnowballExtRomanianStemmer_get_serialVersionUID();
+#define OrgTartarusSnowballExtRomanianStemmer_serialVersionUID 1LL
+J2OBJC_STATIC_FIELD_CONSTANT(OrgTartarusSnowballExtRomanianStemmer, serialVersionUID, jlong)
 
-static OrgTartarusSnowballExtRomanianStemmer *OrgTartarusSnowballExtRomanianStemmer_methodObject_;
-J2OBJC_STATIC_FIELD_GETTER(OrgTartarusSnowballExtRomanianStemmer, methodObject_, OrgTartarusSnowballExtRomanianStemmer *)
+inline OrgTartarusSnowballExtRomanianStemmer *OrgTartarusSnowballExtRomanianStemmer_get_methodObject();
+static OrgTartarusSnowballExtRomanianStemmer *OrgTartarusSnowballExtRomanianStemmer_methodObject;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtRomanianStemmer, methodObject, OrgTartarusSnowballExtRomanianStemmer *)
 
-static IOSObjectArray *OrgTartarusSnowballExtRomanianStemmer_a_0_;
-J2OBJC_STATIC_FIELD_GETTER(OrgTartarusSnowballExtRomanianStemmer, a_0_, IOSObjectArray *)
+inline IOSObjectArray *OrgTartarusSnowballExtRomanianStemmer_get_a_0();
+static IOSObjectArray *OrgTartarusSnowballExtRomanianStemmer_a_0;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtRomanianStemmer, a_0, IOSObjectArray *)
 
-static IOSObjectArray *OrgTartarusSnowballExtRomanianStemmer_a_1_;
-J2OBJC_STATIC_FIELD_GETTER(OrgTartarusSnowballExtRomanianStemmer, a_1_, IOSObjectArray *)
+inline IOSObjectArray *OrgTartarusSnowballExtRomanianStemmer_get_a_1();
+static IOSObjectArray *OrgTartarusSnowballExtRomanianStemmer_a_1;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtRomanianStemmer, a_1, IOSObjectArray *)
 
-static IOSObjectArray *OrgTartarusSnowballExtRomanianStemmer_a_2_;
-J2OBJC_STATIC_FIELD_GETTER(OrgTartarusSnowballExtRomanianStemmer, a_2_, IOSObjectArray *)
+inline IOSObjectArray *OrgTartarusSnowballExtRomanianStemmer_get_a_2();
+static IOSObjectArray *OrgTartarusSnowballExtRomanianStemmer_a_2;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtRomanianStemmer, a_2, IOSObjectArray *)
 
-static IOSObjectArray *OrgTartarusSnowballExtRomanianStemmer_a_3_;
-J2OBJC_STATIC_FIELD_GETTER(OrgTartarusSnowballExtRomanianStemmer, a_3_, IOSObjectArray *)
+inline IOSObjectArray *OrgTartarusSnowballExtRomanianStemmer_get_a_3();
+static IOSObjectArray *OrgTartarusSnowballExtRomanianStemmer_a_3;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtRomanianStemmer, a_3, IOSObjectArray *)
 
-static IOSObjectArray *OrgTartarusSnowballExtRomanianStemmer_a_4_;
-J2OBJC_STATIC_FIELD_GETTER(OrgTartarusSnowballExtRomanianStemmer, a_4_, IOSObjectArray *)
+inline IOSObjectArray *OrgTartarusSnowballExtRomanianStemmer_get_a_4();
+static IOSObjectArray *OrgTartarusSnowballExtRomanianStemmer_a_4;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtRomanianStemmer, a_4, IOSObjectArray *)
 
-static IOSObjectArray *OrgTartarusSnowballExtRomanianStemmer_a_5_;
-J2OBJC_STATIC_FIELD_GETTER(OrgTartarusSnowballExtRomanianStemmer, a_5_, IOSObjectArray *)
+inline IOSObjectArray *OrgTartarusSnowballExtRomanianStemmer_get_a_5();
+static IOSObjectArray *OrgTartarusSnowballExtRomanianStemmer_a_5;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtRomanianStemmer, a_5, IOSObjectArray *)
 
-static IOSCharArray *OrgTartarusSnowballExtRomanianStemmer_g_v_;
-J2OBJC_STATIC_FIELD_GETTER(OrgTartarusSnowballExtRomanianStemmer, g_v_, IOSCharArray *)
+inline IOSCharArray *OrgTartarusSnowballExtRomanianStemmer_get_g_v();
+static IOSCharArray *OrgTartarusSnowballExtRomanianStemmer_g_v;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgTartarusSnowballExtRomanianStemmer, g_v, IOSCharArray *)
 
 __attribute__((unused)) static jboolean OrgTartarusSnowballExtRomanianStemmer_r_prelude(OrgTartarusSnowballExtRomanianStemmer *self);
 
@@ -161,74 +169,83 @@ J2OBJC_INITIALIZED_DEFN(OrgTartarusSnowballExtRomanianStemmer)
   jint v_7;
   jint v_8;
   v_1 = cursor_;
-  {
+  do {
     if (!OrgTartarusSnowballExtRomanianStemmer_r_prelude(self)) {
       goto break_lab0;
     }
   }
+  while (false);
   break_lab0: ;
   cursor_ = v_1;
   v_2 = cursor_;
-  {
+  do {
     if (!OrgTartarusSnowballExtRomanianStemmer_r_mark_regions(self)) {
       goto break_lab1;
     }
   }
+  while (false);
   break_lab1: ;
   cursor_ = v_2;
   limit_backward_ = cursor_;
   cursor_ = limit_;
   v_3 = limit_ - cursor_;
-  {
+  do {
     if (!OrgTartarusSnowballExtRomanianStemmer_r_step_0(self)) {
       goto break_lab2;
     }
   }
+  while (false);
   break_lab2: ;
   cursor_ = limit_ - v_3;
   v_4 = limit_ - cursor_;
-  {
+  do {
     if (!OrgTartarusSnowballExtRomanianStemmer_r_standard_suffix(self)) {
       goto break_lab3;
     }
   }
+  while (false);
   break_lab3: ;
   cursor_ = limit_ - v_4;
   v_5 = limit_ - cursor_;
-  {
-    {
+  do {
+    do {
       v_6 = limit_ - cursor_;
-      {
+      do {
         if (!(B_standard_suffix_removed_)) {
           goto break_lab6;
         }
         goto break_lab5;
       }
+      while (false);
       break_lab6: ;
       cursor_ = limit_ - v_6;
       if (!OrgTartarusSnowballExtRomanianStemmer_r_verb_suffix(self)) {
         goto break_lab4;
       }
     }
+    while (false);
     break_lab5: ;
   }
+  while (false);
   break_lab4: ;
   cursor_ = limit_ - v_5;
   v_7 = limit_ - cursor_;
-  {
+  do {
     if (!OrgTartarusSnowballExtRomanianStemmer_r_vowel_suffix(self)) {
       goto break_lab7;
     }
   }
+  while (false);
   break_lab7: ;
   cursor_ = limit_ - v_7;
   cursor_ = limit_backward_;
   v_8 = cursor_;
-  {
+  do {
     if (!OrgTartarusSnowballExtRomanianStemmer_r_postlude(self)) {
       goto break_lab8;
     }
   }
+  while (false);
   break_lab8: ;
   cursor_ = v_8;
   return true;
@@ -251,14 +268,14 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgTartarusSnowballExtRomanianStemmer class]) {
-    JreStrongAssignAndConsume(&OrgTartarusSnowballExtRomanianStemmer_methodObject_, new_OrgTartarusSnowballExtRomanianStemmer_init());
-    JreStrongAssignAndConsume(&OrgTartarusSnowballExtRomanianStemmer_a_0_, [IOSObjectArray newArrayWithObjects:(id[]){ [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"", -1, 3, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"I", 0, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"U", 0, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease] } count:3 type:OrgTartarusSnowballAmong_class_()]);
-    JreStrongAssignAndConsume(&OrgTartarusSnowballExtRomanianStemmer_a_1_, [IOSObjectArray newArrayWithObjects:(id[]){ [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ea", -1, 3, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"a\u0163ia", -1, 7, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"aua", -1, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iua", -1, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"a\u0163ie", -1, 7, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ele", -1, 3, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ile", -1, 5, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iile", 6, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iei", -1, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"atei", -1, 6, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ii", -1, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ului", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ul", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"elor", -1, 3, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ilor", -1, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iilor", 14, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease] } count:16 type:OrgTartarusSnowballAmong_class_()]);
-    JreStrongAssignAndConsume(&OrgTartarusSnowballExtRomanianStemmer_a_2_, [IOSObjectArray newArrayWithObjects:(id[]){ [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"icala", -1, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iciva", -1, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ativa", -1, 5, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"itiva", -1, 6, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"icale", -1, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"a\u0163iune", -1, 5, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"i\u0163iune", -1, 6, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"atoare", -1, 5, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"itoare", -1, 6, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u0103toare", -1, 5, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"icitate", -1, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"abilitate", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ibilitate", -1, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ivitate", -1, 3, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"icive", -1, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ative", -1, 5, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"itive", -1, 6, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"icali", -1, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"atori", -1, 5, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"icatori", 18, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"itori", -1, 6, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u0103tori", -1, 5, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"icitati", -1, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"abilitati", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ivitati", -1, 3, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"icivi", -1, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ativi", -1, 5, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"itivi", -1, 6, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"icit\u0103i", -1, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"abilit\u0103i", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ivit\u0103i", -1, 3, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"icit\u0103\u0163i", -1, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"abilit\u0103\u0163i", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ivit\u0103\u0163i", -1, 3, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ical", -1, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ator", -1, 5, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"icator", 35, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"itor", -1, 6, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u0103tor", -1, 5, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iciv", -1, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ativ", -1, 5, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"itiv", -1, 6, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ical\u0103", -1, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iciv\u0103", -1, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ativ\u0103", -1, 5, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"itiv\u0103", -1, 6, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease] } count:46 type:OrgTartarusSnowballAmong_class_()]);
-    JreStrongAssignAndConsume(&OrgTartarusSnowballExtRomanianStemmer_a_3_, [IOSObjectArray newArrayWithObjects:(id[]){ [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ica", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"abila", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ibila", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"oasa", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ata", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ita", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"anta", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ista", -1, 3, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"uta", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iva", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ic", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ice", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"abile", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ibile", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"isme", -1, 3, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iune", -1, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"oase", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ate", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"itate", 17, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ite", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ante", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iste", -1, 3, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ute", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ive", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ici", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"abili", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ibili", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iuni", -1, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"atori", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"osi", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ati", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"itati", 30, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iti", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"anti", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"isti", -1, 3, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"uti", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"i\u015fti", -1, 3, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ivi", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"it\u0103i", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"o\u015fi", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"it\u0103\u0163i", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"abil", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ibil", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ism", -1, 3, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ator", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"os", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"at", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"it", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ant", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ist", -1, 3, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ut", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iv", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ic\u0103", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"abil\u0103", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ibil\u0103", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"oas\u0103", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"at\u0103", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"it\u0103", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ant\u0103", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ist\u0103", -1, 3, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ut\u0103", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iv\u0103", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease] } count:62 type:OrgTartarusSnowballAmong_class_()]);
-    JreStrongAssignAndConsume(&OrgTartarusSnowballExtRomanianStemmer_a_4_, [IOSObjectArray newArrayWithObjects:(id[]){ [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ea", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ia", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"esc", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u0103sc", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ind", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u00e2nd", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"are", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ere", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ire", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u00e2re", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"se", -1, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ase", 10, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"sese", 10, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ise", 10, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"use", 10, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u00e2se", 10, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"e\u015fte", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u0103\u015fte", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"eze", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ai", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"eai", 19, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iai", 19, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"sei", -1, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"e\u015fti", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u0103\u015fti", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ui", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ezi", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u00e2i", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"a\u015fi", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"se\u015fi", -1, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ase\u015fi", 29, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"sese\u015fi", 29, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ise\u015fi", 29, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"use\u015fi", 29, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u00e2se\u015fi", 29, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"i\u015fi", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"u\u015fi", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u00e2\u015fi", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"a\u0163i", -1, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ea\u0163i", 38, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ia\u0163i", 38, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"e\u0163i", -1, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"i\u0163i", -1, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u00e2\u0163i", -1, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ar\u0103\u0163i", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ser\u0103\u0163i", -1, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"aser\u0103\u0163i", 45, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"seser\u0103\u0163i", 45, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iser\u0103\u0163i", 45, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"user\u0103\u0163i", 45, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u00e2ser\u0103\u0163i", 45, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ir\u0103\u0163i", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ur\u0103\u0163i", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u00e2r\u0103\u0163i", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"am", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"eam", 54, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iam", 54, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"em", -1, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"asem", 57, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"sesem", 57, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"isem", 57, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"usem", 57, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u00e2sem", 57, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"im", -1, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u00e2m", -1, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u0103m", -1, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ar\u0103m", 65, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ser\u0103m", 65, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"aser\u0103m", 67, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"seser\u0103m", 67, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iser\u0103m", 67, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"user\u0103m", 67, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u00e2ser\u0103m", 67, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ir\u0103m", 65, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ur\u0103m", 65, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u00e2r\u0103m", 65, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"au", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"eau", 76, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iau", 76, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"indu", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u00e2ndu", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ez", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"easc\u0103", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ar\u0103", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ser\u0103", -1, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"aser\u0103", 84, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"seser\u0103", 84, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iser\u0103", 84, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"user\u0103", 84, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u00e2ser\u0103", 84, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ir\u0103", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ur\u0103", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u00e2r\u0103", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"eaz\u0103", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease] } count:94 type:OrgTartarusSnowballAmong_class_()]);
-    JreStrongAssignAndConsume(&OrgTartarusSnowballExtRomanianStemmer_a_5_, [IOSObjectArray newArrayWithObjects:(id[]){ [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"a", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"e", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ie", 1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"i", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease], [new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u0103", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject_) autorelease] } count:5 type:OrgTartarusSnowballAmong_class_()]);
-    JreStrongAssignAndConsume(&OrgTartarusSnowballExtRomanianStemmer_g_v_, [IOSCharArray newArrayWithChars:(jchar[]){ 17, 65, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 32, 0, 0, 4 } count:21]);
+    JreStrongAssignAndConsume(&OrgTartarusSnowballExtRomanianStemmer_methodObject, new_OrgTartarusSnowballExtRomanianStemmer_init());
+    JreStrongAssignAndConsume(&OrgTartarusSnowballExtRomanianStemmer_a_0, [IOSObjectArray newArrayWithObjects:(id[]){ create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"", -1, 3, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"I", 0, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"U", 0, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject) } count:3 type:OrgTartarusSnowballAmong_class_()]);
+    JreStrongAssignAndConsume(&OrgTartarusSnowballExtRomanianStemmer_a_1, [IOSObjectArray newArrayWithObjects:(id[]){ create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ea", -1, 3, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"a\u0163ia", -1, 7, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"aua", -1, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iua", -1, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"a\u0163ie", -1, 7, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ele", -1, 3, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ile", -1, 5, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iile", 6, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iei", -1, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"atei", -1, 6, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ii", -1, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ului", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ul", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"elor", -1, 3, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ilor", -1, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iilor", 14, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject) } count:16 type:OrgTartarusSnowballAmong_class_()]);
+    JreStrongAssignAndConsume(&OrgTartarusSnowballExtRomanianStemmer_a_2, [IOSObjectArray newArrayWithObjects:(id[]){ create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"icala", -1, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iciva", -1, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ativa", -1, 5, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"itiva", -1, 6, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"icale", -1, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"a\u0163iune", -1, 5, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"i\u0163iune", -1, 6, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"atoare", -1, 5, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"itoare", -1, 6, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u0103toare", -1, 5, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"icitate", -1, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"abilitate", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ibilitate", -1, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ivitate", -1, 3, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"icive", -1, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ative", -1, 5, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"itive", -1, 6, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"icali", -1, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"atori", -1, 5, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"icatori", 18, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"itori", -1, 6, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u0103tori", -1, 5, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"icitati", -1, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"abilitati", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ivitati", -1, 3, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"icivi", -1, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ativi", -1, 5, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"itivi", -1, 6, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"icit\u0103i", -1, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"abilit\u0103i", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ivit\u0103i", -1, 3, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"icit\u0103\u0163i", -1, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"abilit\u0103\u0163i", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ivit\u0103\u0163i", -1, 3, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ical", -1, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ator", -1, 5, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"icator", 35, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"itor", -1, 6, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u0103tor", -1, 5, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iciv", -1, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ativ", -1, 5, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"itiv", -1, 6, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ical\u0103", -1, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iciv\u0103", -1, 4, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ativ\u0103", -1, 5, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"itiv\u0103", -1, 6, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject) } count:46 type:OrgTartarusSnowballAmong_class_()]);
+    JreStrongAssignAndConsume(&OrgTartarusSnowballExtRomanianStemmer_a_3, [IOSObjectArray newArrayWithObjects:(id[]){ create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ica", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"abila", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ibila", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"oasa", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ata", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ita", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"anta", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ista", -1, 3, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"uta", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iva", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ic", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ice", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"abile", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ibile", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"isme", -1, 3, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iune", -1, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"oase", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ate", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"itate", 17, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ite", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ante", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iste", -1, 3, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ute", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ive", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ici", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"abili", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ibili", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iuni", -1, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"atori", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"osi", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ati", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"itati", 30, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iti", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"anti", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"isti", -1, 3, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"uti", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"i\u015fti", -1, 3, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ivi", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"it\u0103i", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"o\u015fi", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"it\u0103\u0163i", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"abil", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ibil", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ism", -1, 3, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ator", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"os", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"at", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"it", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ant", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ist", -1, 3, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ut", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iv", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ic\u0103", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"abil\u0103", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ibil\u0103", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"oas\u0103", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"at\u0103", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"it\u0103", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ant\u0103", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ist\u0103", -1, 3, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ut\u0103", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iv\u0103", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject) } count:62 type:OrgTartarusSnowballAmong_class_()]);
+    JreStrongAssignAndConsume(&OrgTartarusSnowballExtRomanianStemmer_a_4, [IOSObjectArray newArrayWithObjects:(id[]){ create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ea", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ia", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"esc", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u0103sc", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ind", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u00e2nd", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"are", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ere", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ire", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u00e2re", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"se", -1, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ase", 10, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"sese", 10, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ise", 10, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"use", 10, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u00e2se", 10, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"e\u015fte", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u0103\u015fte", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"eze", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ai", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"eai", 19, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iai", 19, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"sei", -1, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"e\u015fti", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u0103\u015fti", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ui", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ezi", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u00e2i", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"a\u015fi", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"se\u015fi", -1, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ase\u015fi", 29, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"sese\u015fi", 29, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ise\u015fi", 29, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"use\u015fi", 29, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u00e2se\u015fi", 29, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"i\u015fi", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"u\u015fi", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u00e2\u015fi", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"a\u0163i", -1, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ea\u0163i", 38, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ia\u0163i", 38, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"e\u0163i", -1, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"i\u0163i", -1, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u00e2\u0163i", -1, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ar\u0103\u0163i", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ser\u0103\u0163i", -1, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"aser\u0103\u0163i", 45, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"seser\u0103\u0163i", 45, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iser\u0103\u0163i", 45, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"user\u0103\u0163i", 45, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u00e2ser\u0103\u0163i", 45, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ir\u0103\u0163i", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ur\u0103\u0163i", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u00e2r\u0103\u0163i", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"am", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"eam", 54, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iam", 54, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"em", -1, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"asem", 57, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"sesem", 57, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"isem", 57, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"usem", 57, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u00e2sem", 57, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"im", -1, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u00e2m", -1, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u0103m", -1, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ar\u0103m", 65, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ser\u0103m", 65, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"aser\u0103m", 67, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"seser\u0103m", 67, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iser\u0103m", 67, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"user\u0103m", 67, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u00e2ser\u0103m", 67, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ir\u0103m", 65, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ur\u0103m", 65, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u00e2r\u0103m", 65, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"au", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"eau", 76, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iau", 76, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"indu", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u00e2ndu", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ez", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"easc\u0103", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ar\u0103", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ser\u0103", -1, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"aser\u0103", 84, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"seser\u0103", 84, 2, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"iser\u0103", 84, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"user\u0103", 84, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u00e2ser\u0103", 84, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ir\u0103", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ur\u0103", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u00e2r\u0103", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"eaz\u0103", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject) } count:94 type:OrgTartarusSnowballAmong_class_()]);
+    JreStrongAssignAndConsume(&OrgTartarusSnowballExtRomanianStemmer_a_5, [IOSObjectArray newArrayWithObjects:(id[]){ create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"a", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"e", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"ie", 1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"i", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject), create_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(@"\u0103", -1, 1, @"", OrgTartarusSnowballExtRomanianStemmer_methodObject) } count:5 type:OrgTartarusSnowballAmong_class_()]);
+    JreStrongAssignAndConsume(&OrgTartarusSnowballExtRomanianStemmer_g_v, [IOSCharArray newArrayWithChars:(jchar[]){ 17, 65, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 32, 0, 0, 4 } count:21]);
     J2OBJC_SET_INITIALIZED(OrgTartarusSnowballExtRomanianStemmer)
   }
 }
@@ -280,18 +297,18 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "stem", NULL, "Z", 0x1, NULL, NULL },
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "RomanianStemmer", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "serialVersionUID", "serialVersionUID", 0x1a, "J", NULL, NULL, .constantValue.asLong = OrgTartarusSnowballExtRomanianStemmer_serialVersionUID },
-    { "methodObject_", NULL, 0x1a, "Lorg.tartarus.snowball.ext.RomanianStemmer;", &OrgTartarusSnowballExtRomanianStemmer_methodObject_, NULL, .constantValue.asLong = 0 },
-    { "a_0_", NULL, 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtRomanianStemmer_a_0_, NULL, .constantValue.asLong = 0 },
-    { "a_1_", NULL, 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtRomanianStemmer_a_1_, NULL, .constantValue.asLong = 0 },
-    { "a_2_", NULL, 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtRomanianStemmer_a_2_, NULL, .constantValue.asLong = 0 },
-    { "a_3_", NULL, 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtRomanianStemmer_a_3_, NULL, .constantValue.asLong = 0 },
-    { "a_4_", NULL, 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtRomanianStemmer_a_4_, NULL, .constantValue.asLong = 0 },
-    { "a_5_", NULL, 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtRomanianStemmer_a_5_, NULL, .constantValue.asLong = 0 },
-    { "g_v_", NULL, 0x1a, "[C", &OrgTartarusSnowballExtRomanianStemmer_g_v_, NULL, .constantValue.asLong = 0 },
+    { "methodObject", "methodObject", 0x1a, "Lorg.tartarus.snowball.ext.RomanianStemmer;", &OrgTartarusSnowballExtRomanianStemmer_methodObject, NULL, .constantValue.asLong = 0 },
+    { "a_0", "a_0", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtRomanianStemmer_a_0, NULL, .constantValue.asLong = 0 },
+    { "a_1", "a_1", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtRomanianStemmer_a_1, NULL, .constantValue.asLong = 0 },
+    { "a_2", "a_2", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtRomanianStemmer_a_2, NULL, .constantValue.asLong = 0 },
+    { "a_3", "a_3", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtRomanianStemmer_a_3, NULL, .constantValue.asLong = 0 },
+    { "a_4", "a_4", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtRomanianStemmer_a_4, NULL, .constantValue.asLong = 0 },
+    { "a_5", "a_5", 0x1a, "[Lorg.tartarus.snowball.Among;", &OrgTartarusSnowballExtRomanianStemmer_a_5, NULL, .constantValue.asLong = 0 },
+    { "g_v", "g_v", 0x1a, "[C", &OrgTartarusSnowballExtRomanianStemmer_g_v, NULL, .constantValue.asLong = 0 },
     { "B_standard_suffix_removed_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
     { "I_p2_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "I_p1_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
@@ -310,42 +327,45 @@ jboolean OrgTartarusSnowballExtRomanianStemmer_r_prelude(OrgTartarusSnowballExtR
   while (true) {
     {
       v_1 = self->cursor_;
-      {
+      do {
         while (true) {
           v_2 = self->cursor_;
-          {
-            if (!([self in_groupingWithCharArray:OrgTartarusSnowballExtRomanianStemmer_g_v_ withInt:97 withInt:259])) {
+          do {
+            if (!([self in_groupingWithCharArray:OrgTartarusSnowballExtRomanianStemmer_g_v withInt:97 withInt:259])) {
               goto break_lab3;
             }
             self->bra_ = self->cursor_;
-            {
+            do {
               v_3 = self->cursor_;
-              {
+              do {
                 if (!([self eq_sWithInt:1 withJavaLangCharSequence:@"u"])) {
                   goto break_lab5;
                 }
                 self->ket_ = self->cursor_;
-                if (!([self in_groupingWithCharArray:OrgTartarusSnowballExtRomanianStemmer_g_v_ withInt:97 withInt:259])) {
+                if (!([self in_groupingWithCharArray:OrgTartarusSnowballExtRomanianStemmer_g_v withInt:97 withInt:259])) {
                   goto break_lab5;
                 }
                 [self slice_fromWithJavaLangCharSequence:@"U"];
                 goto break_lab4;
               }
+              while (false);
               break_lab5: ;
               self->cursor_ = v_3;
               if (!([self eq_sWithInt:1 withJavaLangCharSequence:@"i"])) {
                 goto break_lab3;
               }
               self->ket_ = self->cursor_;
-              if (!([self in_groupingWithCharArray:OrgTartarusSnowballExtRomanianStemmer_g_v_ withInt:97 withInt:259])) {
+              if (!([self in_groupingWithCharArray:OrgTartarusSnowballExtRomanianStemmer_g_v withInt:97 withInt:259])) {
                 goto break_lab3;
               }
               [self slice_fromWithJavaLangCharSequence:@"I"];
             }
+            while (false);
             break_lab4: ;
             self->cursor_ = v_2;
             goto break_golab2;
           }
+          while (false);
           break_lab3: ;
           self->cursor_ = v_2;
           if (self->cursor_ >= self->limit_) {
@@ -356,6 +376,7 @@ jboolean OrgTartarusSnowballExtRomanianStemmer_r_prelude(OrgTartarusSnowballExtR
         break_golab2: ;
         goto continue_replab0;
       }
+      while (false);
       break_lab1: ;
       self->cursor_ = v_1;
       goto break_replab0;
@@ -376,26 +397,27 @@ jboolean OrgTartarusSnowballExtRomanianStemmer_r_mark_regions(OrgTartarusSnowbal
   self->I_p1_ = self->limit_;
   self->I_p2_ = self->limit_;
   v_1 = self->cursor_;
-  {
-    {
+  do {
+    do {
       v_2 = self->cursor_;
-      {
-        if (!([self in_groupingWithCharArray:OrgTartarusSnowballExtRomanianStemmer_g_v_ withInt:97 withInt:259])) {
+      do {
+        if (!([self in_groupingWithCharArray:OrgTartarusSnowballExtRomanianStemmer_g_v withInt:97 withInt:259])) {
           goto break_lab2;
         }
-        {
+        do {
           v_3 = self->cursor_;
-          {
-            if (!([self out_groupingWithCharArray:OrgTartarusSnowballExtRomanianStemmer_g_v_ withInt:97 withInt:259])) {
+          do {
+            if (!([self out_groupingWithCharArray:OrgTartarusSnowballExtRomanianStemmer_g_v withInt:97 withInt:259])) {
               goto break_lab4;
             }
             while (true) {
-              {
-                if (!([self in_groupingWithCharArray:OrgTartarusSnowballExtRomanianStemmer_g_v_ withInt:97 withInt:259])) {
+              do {
+                if (!([self in_groupingWithCharArray:OrgTartarusSnowballExtRomanianStemmer_g_v withInt:97 withInt:259])) {
                   goto break_lab6;
                 }
                 goto break_golab5;
               }
+              while (false);
               break_lab6: ;
               if (self->cursor_ >= self->limit_) {
                 goto break_lab4;
@@ -405,18 +427,20 @@ jboolean OrgTartarusSnowballExtRomanianStemmer_r_mark_regions(OrgTartarusSnowbal
             break_golab5: ;
             goto break_lab3;
           }
+          while (false);
           break_lab4: ;
           self->cursor_ = v_3;
-          if (!([self in_groupingWithCharArray:OrgTartarusSnowballExtRomanianStemmer_g_v_ withInt:97 withInt:259])) {
+          if (!([self in_groupingWithCharArray:OrgTartarusSnowballExtRomanianStemmer_g_v withInt:97 withInt:259])) {
             goto break_lab2;
           }
           while (true) {
-            {
-              if (!([self out_groupingWithCharArray:OrgTartarusSnowballExtRomanianStemmer_g_v_ withInt:97 withInt:259])) {
+            do {
+              if (!([self out_groupingWithCharArray:OrgTartarusSnowballExtRomanianStemmer_g_v withInt:97 withInt:259])) {
                 goto break_lab8;
               }
               goto break_golab7;
             }
+            while (false);
             break_lab8: ;
             if (self->cursor_ >= self->limit_) {
               goto break_lab2;
@@ -425,27 +449,30 @@ jboolean OrgTartarusSnowballExtRomanianStemmer_r_mark_regions(OrgTartarusSnowbal
           }
           break_golab7: ;
         }
+        while (false);
         break_lab3: ;
         goto break_lab1;
       }
+      while (false);
       break_lab2: ;
       self->cursor_ = v_2;
-      if (!([self out_groupingWithCharArray:OrgTartarusSnowballExtRomanianStemmer_g_v_ withInt:97 withInt:259])) {
+      if (!([self out_groupingWithCharArray:OrgTartarusSnowballExtRomanianStemmer_g_v withInt:97 withInt:259])) {
         goto break_lab0;
       }
-      {
+      do {
         v_6 = self->cursor_;
-        {
-          if (!([self out_groupingWithCharArray:OrgTartarusSnowballExtRomanianStemmer_g_v_ withInt:97 withInt:259])) {
+        do {
+          if (!([self out_groupingWithCharArray:OrgTartarusSnowballExtRomanianStemmer_g_v withInt:97 withInt:259])) {
             goto break_lab10;
           }
           while (true) {
-            {
-              if (!([self in_groupingWithCharArray:OrgTartarusSnowballExtRomanianStemmer_g_v_ withInt:97 withInt:259])) {
+            do {
+              if (!([self in_groupingWithCharArray:OrgTartarusSnowballExtRomanianStemmer_g_v withInt:97 withInt:259])) {
                 goto break_lab12;
               }
               goto break_golab11;
             }
+            while (false);
             break_lab12: ;
             if (self->cursor_ >= self->limit_) {
               goto break_lab10;
@@ -455,9 +482,10 @@ jboolean OrgTartarusSnowballExtRomanianStemmer_r_mark_regions(OrgTartarusSnowbal
           break_golab11: ;
           goto break_lab9;
         }
+        while (false);
         break_lab10: ;
         self->cursor_ = v_6;
-        if (!([self in_groupingWithCharArray:OrgTartarusSnowballExtRomanianStemmer_g_v_ withInt:97 withInt:259])) {
+        if (!([self in_groupingWithCharArray:OrgTartarusSnowballExtRomanianStemmer_g_v withInt:97 withInt:259])) {
           goto break_lab0;
         }
         if (self->cursor_ >= self->limit_) {
@@ -465,22 +493,26 @@ jboolean OrgTartarusSnowballExtRomanianStemmer_r_mark_regions(OrgTartarusSnowbal
         }
         self->cursor_++;
       }
+      while (false);
       break_lab9: ;
     }
+    while (false);
     break_lab1: ;
     self->I_pV_ = self->cursor_;
   }
+  while (false);
   break_lab0: ;
   self->cursor_ = v_1;
   v_8 = self->cursor_;
-  {
+  do {
     while (true) {
-      {
-        if (!([self in_groupingWithCharArray:OrgTartarusSnowballExtRomanianStemmer_g_v_ withInt:97 withInt:259])) {
+      do {
+        if (!([self in_groupingWithCharArray:OrgTartarusSnowballExtRomanianStemmer_g_v withInt:97 withInt:259])) {
           goto break_lab15;
         }
         goto break_golab14;
       }
+      while (false);
       break_lab15: ;
       if (self->cursor_ >= self->limit_) {
         goto break_lab13;
@@ -489,12 +521,13 @@ jboolean OrgTartarusSnowballExtRomanianStemmer_r_mark_regions(OrgTartarusSnowbal
     }
     break_golab14: ;
     while (true) {
-      {
-        if (!([self out_groupingWithCharArray:OrgTartarusSnowballExtRomanianStemmer_g_v_ withInt:97 withInt:259])) {
+      do {
+        if (!([self out_groupingWithCharArray:OrgTartarusSnowballExtRomanianStemmer_g_v withInt:97 withInt:259])) {
           goto break_lab17;
         }
         goto break_golab16;
       }
+      while (false);
       break_lab17: ;
       if (self->cursor_ >= self->limit_) {
         goto break_lab13;
@@ -504,12 +537,13 @@ jboolean OrgTartarusSnowballExtRomanianStemmer_r_mark_regions(OrgTartarusSnowbal
     break_golab16: ;
     self->I_p1_ = self->cursor_;
     while (true) {
-      {
-        if (!([self in_groupingWithCharArray:OrgTartarusSnowballExtRomanianStemmer_g_v_ withInt:97 withInt:259])) {
+      do {
+        if (!([self in_groupingWithCharArray:OrgTartarusSnowballExtRomanianStemmer_g_v withInt:97 withInt:259])) {
           goto break_lab19;
         }
         goto break_golab18;
       }
+      while (false);
       break_lab19: ;
       if (self->cursor_ >= self->limit_) {
         goto break_lab13;
@@ -518,12 +552,13 @@ jboolean OrgTartarusSnowballExtRomanianStemmer_r_mark_regions(OrgTartarusSnowbal
     }
     break_golab18: ;
     while (true) {
-      {
-        if (!([self out_groupingWithCharArray:OrgTartarusSnowballExtRomanianStemmer_g_v_ withInt:97 withInt:259])) {
+      do {
+        if (!([self out_groupingWithCharArray:OrgTartarusSnowballExtRomanianStemmer_g_v withInt:97 withInt:259])) {
           goto break_lab21;
         }
         goto break_golab20;
       }
+      while (false);
       break_lab21: ;
       if (self->cursor_ >= self->limit_) {
         goto break_lab13;
@@ -533,6 +568,7 @@ jboolean OrgTartarusSnowballExtRomanianStemmer_r_mark_regions(OrgTartarusSnowbal
     break_golab20: ;
     self->I_p2_ = self->cursor_;
   }
+  while (false);
   break_lab13: ;
   self->cursor_ = v_8;
   return true;
@@ -544,9 +580,9 @@ jboolean OrgTartarusSnowballExtRomanianStemmer_r_postlude(OrgTartarusSnowballExt
   while (true) {
     {
       v_1 = self->cursor_;
-      {
+      do {
         self->bra_ = self->cursor_;
-        among_var = [self find_amongWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtRomanianStemmer_a_0_ withInt:3];
+        among_var = [self find_amongWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtRomanianStemmer_a_0 withInt:3];
         if (among_var == 0) {
           goto break_lab1;
         }
@@ -569,6 +605,7 @@ jboolean OrgTartarusSnowballExtRomanianStemmer_r_postlude(OrgTartarusSnowballExt
         }
         goto continue_replab0;
       }
+      while (false);
       break_lab1: ;
       self->cursor_ = v_1;
       goto break_replab0;
@@ -604,7 +641,7 @@ jboolean OrgTartarusSnowballExtRomanianStemmer_r_step_0(OrgTartarusSnowballExtRo
   jint among_var;
   jint v_1;
   self->ket_ = self->cursor_;
-  among_var = [self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtRomanianStemmer_a_1_ withInt:16];
+  among_var = [self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtRomanianStemmer_a_1 withInt:16];
   if (among_var == 0) {
     return false;
   }
@@ -630,12 +667,13 @@ jboolean OrgTartarusSnowballExtRomanianStemmer_r_step_0(OrgTartarusSnowballExtRo
     case 5:
     {
       v_1 = self->limit_ - self->cursor_;
-      {
+      do {
         if (!([self eq_s_bWithInt:2 withJavaLangCharSequence:@"ab"])) {
           goto break_lab0;
         }
         return false;
       }
+      while (false);
       break_lab0: ;
       self->cursor_ = self->limit_ - v_1;
     }
@@ -656,7 +694,7 @@ jboolean OrgTartarusSnowballExtRomanianStemmer_r_combo_suffix(OrgTartarusSnowbal
   jint v_1;
   v_1 = self->limit_ - self->cursor_;
   self->ket_ = self->cursor_;
-  among_var = [self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtRomanianStemmer_a_2_ withInt:46];
+  among_var = [self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtRomanianStemmer_a_2 withInt:46];
   if (among_var == 0) {
     return false;
   }
@@ -698,12 +736,13 @@ jboolean OrgTartarusSnowballExtRomanianStemmer_r_standard_suffix(OrgTartarusSnow
   while (true) {
     {
       v_1 = self->limit_ - self->cursor_;
-      {
+      do {
         if (!OrgTartarusSnowballExtRomanianStemmer_r_combo_suffix(self)) {
           goto break_lab1;
         }
         goto continue_replab0;
       }
+      while (false);
       break_lab1: ;
       self->cursor_ = self->limit_ - v_1;
       goto break_replab0;
@@ -712,7 +751,7 @@ jboolean OrgTartarusSnowballExtRomanianStemmer_r_standard_suffix(OrgTartarusSnow
   }
   break_replab0: ;
   self->ket_ = self->cursor_;
-  among_var = [self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtRomanianStemmer_a_3_ withInt:62];
+  among_var = [self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtRomanianStemmer_a_3 withInt:62];
   if (among_var == 0) {
     return false;
   }
@@ -755,7 +794,7 @@ jboolean OrgTartarusSnowballExtRomanianStemmer_r_verb_suffix(OrgTartarusSnowball
   self->limit_backward_ = self->cursor_;
   self->cursor_ = self->limit_ - v_1;
   self->ket_ = self->cursor_;
-  among_var = [self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtRomanianStemmer_a_4_ withInt:94];
+  among_var = [self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtRomanianStemmer_a_4 withInt:94];
   if (among_var == 0) {
     self->limit_backward_ = v_2;
     return false;
@@ -767,14 +806,15 @@ jboolean OrgTartarusSnowballExtRomanianStemmer_r_verb_suffix(OrgTartarusSnowball
     return false;
     case 1:
     {
-      {
+      do {
         v_3 = self->limit_ - self->cursor_;
-        {
-          if (!([self out_grouping_bWithCharArray:OrgTartarusSnowballExtRomanianStemmer_g_v_ withInt:97 withInt:259])) {
+        do {
+          if (!([self out_grouping_bWithCharArray:OrgTartarusSnowballExtRomanianStemmer_g_v withInt:97 withInt:259])) {
             goto break_lab1;
           }
           goto break_lab0;
         }
+        while (false);
         break_lab1: ;
         self->cursor_ = self->limit_ - v_3;
         if (!([self eq_s_bWithInt:1 withJavaLangCharSequence:@"u"])) {
@@ -782,6 +822,7 @@ jboolean OrgTartarusSnowballExtRomanianStemmer_r_verb_suffix(OrgTartarusSnowball
           return false;
         }
       }
+      while (false);
       break_lab0: ;
     }
     [self slice_del];
@@ -797,7 +838,7 @@ jboolean OrgTartarusSnowballExtRomanianStemmer_r_verb_suffix(OrgTartarusSnowball
 jboolean OrgTartarusSnowballExtRomanianStemmer_r_vowel_suffix(OrgTartarusSnowballExtRomanianStemmer *self) {
   jint among_var;
   self->ket_ = self->cursor_;
-  among_var = [self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtRomanianStemmer_a_5_ withInt:5];
+  among_var = [self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtRomanianStemmer_a_5 withInt:5];
   if (among_var == 0) {
     return false;
   }
@@ -820,9 +861,11 @@ void OrgTartarusSnowballExtRomanianStemmer_init(OrgTartarusSnowballExtRomanianSt
 }
 
 OrgTartarusSnowballExtRomanianStemmer *new_OrgTartarusSnowballExtRomanianStemmer_init() {
-  OrgTartarusSnowballExtRomanianStemmer *self = [OrgTartarusSnowballExtRomanianStemmer alloc];
-  OrgTartarusSnowballExtRomanianStemmer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgTartarusSnowballExtRomanianStemmer, init)
+}
+
+OrgTartarusSnowballExtRomanianStemmer *create_OrgTartarusSnowballExtRomanianStemmer_init() {
+  J2OBJC_CREATE_IMPL(OrgTartarusSnowballExtRomanianStemmer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgTartarusSnowballExtRomanianStemmer)

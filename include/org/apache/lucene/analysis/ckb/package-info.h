@@ -3,14 +3,17 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/ckb/package-info.java
 //
 
+/*!
+ @brief Analyzer for Sorani Kurdish.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCkbPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCkbPackage_info_RESTRICT
-#define OrgApacheLuceneAnalysisCkbPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCkbPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCkbPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCkbPackage_info 0
 #else
-#define OrgApacheLuceneAnalysisCkbPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCkbPackage_info 1
 #endif
-#undef OrgApacheLuceneAnalysisCkbPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCkbPackage_info
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCkbPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCkbPackage_info")

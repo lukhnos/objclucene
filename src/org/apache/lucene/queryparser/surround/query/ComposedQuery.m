@@ -32,7 +32,7 @@
 }
 
 - (void)recomposeWithJavaUtilList:(id<JavaUtilList>)queries {
-  if ([((id<JavaUtilList>) nil_chk(queries)) size] < 2) @throw [new_JavaLangAssertionError_initWithId_(@"Too few subqueries") autorelease];
+  if ([((id<JavaUtilList>) nil_chk(queries)) size] < 2) @throw create_JavaLangAssertionError_initWithId_(@"Too few subqueries");
   JreStrongAssign(&self->queries_, queries);
 }
 
@@ -58,7 +58,7 @@
 
 - (id<JavaUtilList>)makeLuceneSubQueriesFieldWithNSString:(NSString *)fn
 withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)qf {
-  id<JavaUtilList> luceneSubQueries = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> luceneSubQueries = create_JavaUtilArrayList_init();
   id<JavaUtilIterator> sqi = [self getSubQueriesIterator];
   while ([((id<JavaUtilIterator>) nil_chk(sqi)) hasNext]) {
     [luceneSubQueries addWithId:[((OrgApacheLuceneQueryparserSurroundQuerySrndQuery *) nil_chk(([sqi next]))) makeLuceneQueryFieldWithNSString:fn withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:qf]];
@@ -67,7 +67,7 @@ withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQue
 }
 
 - (NSString *)description {
-  JavaLangStringBuilder *r = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *r = create_JavaLangStringBuilder_init();
   if ([self isOperatorInfix]) {
     [self infixToStringWithJavaLangStringBuilder:r];
   }
@@ -137,14 +137,14 @@ withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQue
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:withBoolean:withNSString:", "ComposedQuery", NULL, 0x1, NULL, NULL },
-    { "recomposeWithJavaUtilList:", "recompose", "V", 0x4, NULL, NULL },
+    { "initWithJavaUtilList:withBoolean:withNSString:", "ComposedQuery", NULL, 0x1, NULL, "(Ljava/util/List<Lorg/apache/lucene/queryparser/surround/query/SrndQuery;>;ZLjava/lang/String;)V" },
+    { "recomposeWithJavaUtilList:", "recompose", "V", 0x4, NULL, "(Ljava/util/List<Lorg/apache/lucene/queryparser/surround/query/SrndQuery;>;)V" },
     { "getOperatorName", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getSubQueriesIterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, NULL },
+    { "getSubQueriesIterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<Lorg/apache/lucene/queryparser/surround/query/SrndQuery;>;" },
     { "getNrSubQueries", NULL, "I", 0x1, NULL, NULL },
     { "getSubQueryWithInt:", "getSubQuery", "Lorg.apache.lucene.queryparser.surround.query.SrndQuery;", 0x1, NULL, NULL },
     { "isOperatorInfix", NULL, "Z", 0x1, NULL, NULL },
-    { "makeLuceneSubQueriesFieldWithNSString:withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:", "makeLuceneSubQueriesField", "Ljava.util.List;", 0x1, NULL, NULL },
+    { "makeLuceneSubQueriesFieldWithNSString:withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:", "makeLuceneSubQueriesField", "Ljava.util.List;", 0x1, NULL, "(Ljava/lang/String;Lorg/apache/lucene/queryparser/surround/query/BasicQueryFactory;)Ljava/util/List<Lorg/apache/lucene/search/Query;>;" },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "getPrefixSeparator", NULL, "Ljava.lang.String;", 0x4, NULL, NULL },
     { "getBracketOpen", NULL, "Ljava.lang.String;", 0x4, NULL, NULL },

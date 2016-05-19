@@ -55,7 +55,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneSearchSpellHighFrequencyD
 }
 
 - (id<OrgApacheLuceneSearchSuggestInputIterator>)getEntryIterator {
-  return [new_OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator_initWithOrgApacheLuceneSearchSpellHighFrequencyDictionary_(self) autorelease];
+  return create_OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator_initWithOrgApacheLuceneSearchSpellHighFrequencyDictionary_(self);
 }
 
 - (void)dealloc {
@@ -89,9 +89,11 @@ void OrgApacheLuceneSearchSpellHighFrequencyDictionary_initWithOrgApacheLuceneIn
 }
 
 OrgApacheLuceneSearchSpellHighFrequencyDictionary *new_OrgApacheLuceneSearchSpellHighFrequencyDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withFloat_(OrgApacheLuceneIndexIndexReader *reader, NSString *field, jfloat thresh) {
-  OrgApacheLuceneSearchSpellHighFrequencyDictionary *self = [OrgApacheLuceneSearchSpellHighFrequencyDictionary alloc];
-  OrgApacheLuceneSearchSpellHighFrequencyDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withFloat_(self, reader, field, thresh);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSpellHighFrequencyDictionary, initWithOrgApacheLuceneIndexIndexReader_withNSString_withFloat_, reader, field, thresh)
+}
+
+OrgApacheLuceneSearchSpellHighFrequencyDictionary *create_OrgApacheLuceneSearchSpellHighFrequencyDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withFloat_(OrgApacheLuceneIndexIndexReader *reader, NSString *field, jfloat thresh) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSpellHighFrequencyDictionary, initWithOrgApacheLuceneIndexIndexReader_withNSString_withFloat_, reader, field, thresh)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpellHighFrequencyDictionary)
@@ -155,7 +157,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpellHighFrequencyDictiona
     { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
     { "payload", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
     { "hasPayloads", NULL, "Z", 0x1, NULL, NULL },
-    { "contexts", NULL, "Ljava.util.Set;", 0x1, NULL, NULL },
+    { "contexts", NULL, "Ljava.util.Set;", 0x1, NULL, "()Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;" },
     { "hasContexts", NULL, "Z", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -184,9 +186,11 @@ void OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator_ini
 }
 
 OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator *new_OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator_initWithOrgApacheLuceneSearchSpellHighFrequencyDictionary_(OrgApacheLuceneSearchSpellHighFrequencyDictionary *outer$) {
-  OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator *self = [OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator alloc];
-  OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator_initWithOrgApacheLuceneSearchSpellHighFrequencyDictionary_(self, outer$);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator, initWithOrgApacheLuceneSearchSpellHighFrequencyDictionary_, outer$)
+}
+
+OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator *create_OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator_initWithOrgApacheLuceneSearchSpellHighFrequencyDictionary_(OrgApacheLuceneSearchSpellHighFrequencyDictionary *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator, initWithOrgApacheLuceneSearchSpellHighFrequencyDictionary_, outer$)
 }
 
 jboolean OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator_isFrequentWithInt_(OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator *self, jint freq) {

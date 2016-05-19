@@ -9,8 +9,6 @@
 #include "org/apache/lucene/util/packed/BulkOperation.h"
 #include "org/apache/lucene/util/packed/BulkOperationPackedSingleBlock.h"
 
-#define OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_BLOCK_COUNT 1
-
 @interface OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock () {
  @public
   jint bitsPerValue_;
@@ -37,7 +35,9 @@
 
 @end
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock, BLOCK_COUNT, jint)
+inline jint OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_get_BLOCK_COUNT();
+#define OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_BLOCK_COUNT 1
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock, BLOCK_COUNT, jint)
 
 __attribute__((unused)) static jlong OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_readLongWithByteArray_withInt_(IOSByteArray *blocks, jint blocksOffset);
 
@@ -128,7 +128,7 @@ __attribute__((unused)) static jlong OrgApacheLuceneUtilPackedBulkOperationPacke
                     withInt:(jint)valuesOffset
                     withInt:(jint)iterations {
   if (bitsPerValue_ > 32) {
-    @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(JreStrcat("$I$", @"Cannot decode ", bitsPerValue_, @"-bits values into an int[]")) autorelease];
+    @throw create_JavaLangUnsupportedOperationException_initWithNSString_(JreStrcat("$I$", @"Cannot decode ", bitsPerValue_, @"-bits values into an int[]"));
   }
   for (jint i = 0; i < iterations; ++i) {
     jlong block = IOSLongArray_Get(nil_chk(blocks), blocksOffset++);
@@ -142,7 +142,7 @@ __attribute__((unused)) static jlong OrgApacheLuceneUtilPackedBulkOperationPacke
                     withInt:(jint)valuesOffset
                     withInt:(jint)iterations {
   if (bitsPerValue_ > 32) {
-    @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(JreStrcat("$I$", @"Cannot decode ", bitsPerValue_, @"-bits values into an int[]")) autorelease];
+    @throw create_JavaLangUnsupportedOperationException_initWithNSString_(JreStrcat("$I$", @"Cannot decode ", bitsPerValue_, @"-bits values into an int[]"));
   }
   for (jint i = 0; i < iterations; ++i) {
     jlong block = OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_readLongWithByteArray_withInt_(blocks, blocksOffset);
@@ -238,21 +238,16 @@ void OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initWithInt_(OrgApa
 }
 
 OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock *new_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initWithInt_(jint bitsPerValue) {
-  OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock *self = [OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock alloc];
-  OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initWithInt_(self, bitsPerValue);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock, initWithInt_, bitsPerValue)
+}
+
+OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock *create_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initWithInt_(jint bitsPerValue) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock, initWithInt_, bitsPerValue)
 }
 
 jlong OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_readLongWithByteArray_withInt_(IOSByteArray *blocks, jint blocksOffset) {
   OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_initialize();
-  jint unseq$1 = blocksOffset++;
-  jint unseq$2 = blocksOffset++;
-  jint unseq$3 = blocksOffset++;
-  jint unseq$4 = blocksOffset++;
-  jint unseq$5 = blocksOffset++;
-  jint unseq$6 = blocksOffset++;
-  jint unseq$7 = blocksOffset++;
-  return (JreLShift64((IOSByteArray_Get(nil_chk(blocks), unseq$1) & (jlong) 0xFFLL), 56)) | (JreLShift64((IOSByteArray_Get(blocks, unseq$2) & (jlong) 0xFFLL), 48)) | (JreLShift64((IOSByteArray_Get(blocks, unseq$3) & (jlong) 0xFFLL), 40)) | (JreLShift64((IOSByteArray_Get(blocks, unseq$4) & (jlong) 0xFFLL), 32)) | (JreLShift64((IOSByteArray_Get(blocks, unseq$5) & (jlong) 0xFFLL), 24)) | (JreLShift64((IOSByteArray_Get(blocks, unseq$6) & (jlong) 0xFFLL), 16)) | (JreLShift64((IOSByteArray_Get(blocks, unseq$7) & (jlong) 0xFFLL), 8)) | (IOSByteArray_Get(blocks, blocksOffset++) & (jlong) 0xFFLL);
+  return (JreLShift64((IOSByteArray_Get(nil_chk(blocks), blocksOffset++) & (jlong) 0xFFLL), 56)) | (JreLShift64((IOSByteArray_Get(blocks, blocksOffset++) & (jlong) 0xFFLL), 48)) | (JreLShift64((IOSByteArray_Get(blocks, blocksOffset++) & (jlong) 0xFFLL), 40)) | (JreLShift64((IOSByteArray_Get(blocks, blocksOffset++) & (jlong) 0xFFLL), 32)) | (JreLShift64((IOSByteArray_Get(blocks, blocksOffset++) & (jlong) 0xFFLL), 24)) | (JreLShift64((IOSByteArray_Get(blocks, blocksOffset++) & (jlong) 0xFFLL), 16)) | (JreLShift64((IOSByteArray_Get(blocks, blocksOffset++) & (jlong) 0xFFLL), 8)) | (IOSByteArray_Get(blocks, blocksOffset++) & (jlong) 0xFFLL);
 }
 
 jint OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_decodeWithLong_withLongArray_withInt_(OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock *self, jlong block, IOSLongArray *values, jint valuesOffset) {

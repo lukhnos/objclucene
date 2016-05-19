@@ -60,7 +60,7 @@ __attribute__((unused)) static id<JavaLangCharSequence> OrgApacheLuceneQuerypars
 }
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode *clone = (OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode *) check_class_cast([super cloneTree], [OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode class]);
+  OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode *clone = (OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode *) cast_chk([super cloneTree], [OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode class]);
   ((OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode *) nil_chk(clone))->value_ = self->value_;
   return clone;
 }
@@ -68,7 +68,7 @@ __attribute__((unused)) static id<JavaLangCharSequence> OrgApacheLuceneQuerypars
 - (id<JavaLangCharSequence>)getField {
   id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> child = [self getChild];
   if ([OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_() isInstance:child]) {
-    return [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) nil_chk(((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) check_protocol_cast(child, OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_())))) getField];
+    return [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) nil_chk(((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) cast_check(child, OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_())))) getField];
   }
   return nil;
 }
@@ -76,7 +76,7 @@ __attribute__((unused)) static id<JavaLangCharSequence> OrgApacheLuceneQuerypars
 - (void)setFieldWithJavaLangCharSequence:(id<JavaLangCharSequence>)fieldName {
   id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> child = [self getChild];
   if ([OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_() isInstance:child]) {
-    [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) nil_chk(((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) check_protocol_cast(child, OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_())))) setFieldWithJavaLangCharSequence:fieldName];
+    [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) nil_chk(((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) cast_check(child, OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_())))) setFieldWithJavaLangCharSequence:fieldName];
   }
 }
 
@@ -105,7 +105,7 @@ void OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode_initWithOrgA
   OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_init(self);
   self->value_ = 0;
   if (query == nil) {
-    @throw [new_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeError_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_([new_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, NODE_ACTION_NOT_SUPPORTED_), [IOSObjectArray arrayWithObjects:(id[]){ @"query", @"null" } count:2 type:NSObject_class_()]) autorelease]) autorelease];
+    @throw create_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeError_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_(create_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, NODE_ACTION_NOT_SUPPORTED), [IOSObjectArray arrayWithObjects:(id[]){ @"query", @"null" } count:2 type:NSObject_class_()]));
   }
   self->value_ = value;
   [self setLeafWithBoolean:false];
@@ -114,9 +114,11 @@ void OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode_initWithOrgA
 }
 
 OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withInt_(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> query, jint value) {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode *self = [OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode alloc];
-  OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withInt_(self, query, value);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode, initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withInt_, query, value)
+}
+
+OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode *create_OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withInt_(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> query, jint value) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode, initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withInt_, query, value)
 }
 
 id<JavaLangCharSequence> OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode_getValueString(OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode *self) {

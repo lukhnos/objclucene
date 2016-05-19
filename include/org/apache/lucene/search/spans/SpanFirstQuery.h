@@ -5,29 +5,39 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSpansSpanFirstQuery_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSpansSpanFirstQuery_RESTRICT
-#define OrgApacheLuceneSearchSpansSpanFirstQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanFirstQuery")
+#ifdef RESTRICT_OrgApacheLuceneSearchSpansSpanFirstQuery
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanFirstQuery 0
 #else
-#define OrgApacheLuceneSearchSpansSpanFirstQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanFirstQuery 1
 #endif
-#undef OrgApacheLuceneSearchSpansSpanFirstQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSpansSpanFirstQuery
 
-#if !defined (_OrgApacheLuceneSearchSpansSpanFirstQuery_) && (OrgApacheLuceneSearchSpansSpanFirstQuery_INCLUDE_ALL || OrgApacheLuceneSearchSpansSpanFirstQuery_INCLUDE)
-#define _OrgApacheLuceneSearchSpansSpanFirstQuery_
+#if !defined (OrgApacheLuceneSearchSpansSpanFirstQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanFirstQuery || defined(INCLUDE_OrgApacheLuceneSearchSpansSpanFirstQuery))
+#define OrgApacheLuceneSearchSpansSpanFirstQuery_
 
-#define OrgApacheLuceneSearchSpansSpanPositionRangeQuery_RESTRICT 1
-#define OrgApacheLuceneSearchSpansSpanPositionRangeQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSpansSpanPositionRangeQuery 1
+#define INCLUDE_OrgApacheLuceneSearchSpansSpanPositionRangeQuery 1
 #include "org/apache/lucene/search/spans/SpanPositionRangeQuery.h"
 
-@class OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum;
+@class OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus;
 @class OrgApacheLuceneSearchSpansSpanQuery;
 @class OrgApacheLuceneSearchSpansSpans;
 
+/*!
+ @brief Matches spans near the beginning of a field.
+ <p>
+ This class is a simple extension of <code>SpanPositionRangeQuery</code> in that it assumes the
+ start to be zero and only checks the end boundary.
+ */
 @interface OrgApacheLuceneSearchSpansSpanFirstQuery : OrgApacheLuceneSearchSpansSpanPositionRangeQuery
 
 #pragma mark Public
 
+/*!
+ @brief Construct a SpanFirstQuery matching spans in <code>match</code> whose end
+ position is less than or equal to <code>end</code>.
+ */
 - (instancetype)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)match
                                                     withInt:(jint)end;
 
@@ -37,7 +47,7 @@
 
 #pragma mark Protected
 
-- (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum *)acceptPositionWithOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)spans;
+- (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *)acceptPositionWithOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)spans;
 
 @end
 
@@ -47,8 +57,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanFirstQuery_initWithOrgApach
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanFirstQuery *new_OrgApacheLuceneSearchSpansSpanFirstQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withInt_(OrgApacheLuceneSearchSpansSpanQuery *match, jint end) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanFirstQuery *create_OrgApacheLuceneSearchSpansSpanFirstQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withInt_(OrgApacheLuceneSearchSpansSpanQuery *match, jint end);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanFirstQuery)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSpansSpanFirstQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpanFirstQuery")

@@ -5,29 +5,41 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisIdIndonesianStemFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisIdIndonesianStemFilter_RESTRICT
-#define OrgApacheLuceneAnalysisIdIndonesianStemFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisIdIndonesianStemFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisIdIndonesianStemFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisIdIndonesianStemFilter 0
 #else
-#define OrgApacheLuceneAnalysisIdIndonesianStemFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisIdIndonesianStemFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisIdIndonesianStemFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisIdIndonesianStemFilter
 
-#if !defined (_OrgApacheLuceneAnalysisIdIndonesianStemFilter_) && (OrgApacheLuceneAnalysisIdIndonesianStemFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisIdIndonesianStemFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisIdIndonesianStemFilter_
+#if !defined (OrgApacheLuceneAnalysisIdIndonesianStemFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisIdIndonesianStemFilter || defined(INCLUDE_OrgApacheLuceneAnalysisIdIndonesianStemFilter))
+#define OrgApacheLuceneAnalysisIdIndonesianStemFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief A <code>TokenFilter</code> that applies <code>IndonesianStemmer</code> to stem Indonesian words.
+ */
 @interface OrgApacheLuceneAnalysisIdIndonesianStemFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
+/*!
+ @brief Calls <code>IndonesianStemFilter(input, true)</code>
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
+/*!
+ @brief Create a new IndonesianStemFilter.
+ <p>
+ If <code>stemDerivational</code> is false, 
+ only inflectional suffixes (particles and possessive pronouns) are stemmed.
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
                                                withBoolean:(jboolean)stemDerivational;
 
@@ -41,12 +53,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisIdIndonesianStemFilter_initWithOrg
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisIdIndonesianStemFilter *new_OrgApacheLuceneAnalysisIdIndonesianStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisIdIndonesianStemFilter *create_OrgApacheLuceneAnalysisIdIndonesianStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input);
+
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisIdIndonesianStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_(OrgApacheLuceneAnalysisIdIndonesianStemFilter *self, OrgApacheLuceneAnalysisTokenStream *input, jboolean stemDerivational);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisIdIndonesianStemFilter *new_OrgApacheLuceneAnalysisIdIndonesianStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_(OrgApacheLuceneAnalysisTokenStream *input, jboolean stemDerivational) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisIdIndonesianStemFilter *create_OrgApacheLuceneAnalysisIdIndonesianStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_(OrgApacheLuceneAnalysisTokenStream *input, jboolean stemDerivational);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisIdIndonesianStemFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisIdIndonesianStemFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisIdIndonesianStemFilter")

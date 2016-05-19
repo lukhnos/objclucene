@@ -8,12 +8,16 @@
 #include "java/lang/System.h"
 #include "org/apache/lucene/analysis/compound/hyphenation/CharVector.h"
 
-#define OrgApacheLuceneAnalysisCompoundHyphenationCharVector_DEFAULT_BLOCK_SIZE 2048
-
 @interface OrgApacheLuceneAnalysisCompoundHyphenationCharVector () {
  @public
   jint blockSize_;
+  /*!
+   @brief The encapsulated array
+   */
   IOSCharArray *array_;
+  /*!
+   @brief Points to next free item
+   */
   jint n_;
 }
 
@@ -21,7 +25,12 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundHyphenationCharVector, array_, IOSCharArray *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisCompoundHyphenationCharVector, DEFAULT_BLOCK_SIZE, jint)
+/*!
+ @brief Capacity increment size
+ */
+inline jint OrgApacheLuceneAnalysisCompoundHyphenationCharVector_get_DEFAULT_BLOCK_SIZE();
+#define OrgApacheLuceneAnalysisCompoundHyphenationCharVector_DEFAULT_BLOCK_SIZE 2048
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCompoundHyphenationCharVector, DEFAULT_BLOCK_SIZE, jint)
 
 @implementation OrgApacheLuceneAnalysisCompoundHyphenationCharVector
 
@@ -53,7 +62,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (OrgApacheLuceneAnalysisCompoundHyphenationCharVector *)clone {
-  OrgApacheLuceneAnalysisCompoundHyphenationCharVector *cv = [new_OrgApacheLuceneAnalysisCompoundHyphenationCharVector_initWithCharArray_withInt_([((IOSCharArray *) nil_chk(array_)) clone], blockSize_) autorelease];
+  OrgApacheLuceneAnalysisCompoundHyphenationCharVector *cv = create_OrgApacheLuceneAnalysisCompoundHyphenationCharVector_initWithCharArray_withInt_([((IOSCharArray *) nil_chk(array_)) clone], blockSize_);
   cv->n_ = self->n_;
   return cv;
 }
@@ -141,9 +150,11 @@ void OrgApacheLuceneAnalysisCompoundHyphenationCharVector_init(OrgApacheLuceneAn
 }
 
 OrgApacheLuceneAnalysisCompoundHyphenationCharVector *new_OrgApacheLuceneAnalysisCompoundHyphenationCharVector_init() {
-  OrgApacheLuceneAnalysisCompoundHyphenationCharVector *self = [OrgApacheLuceneAnalysisCompoundHyphenationCharVector alloc];
-  OrgApacheLuceneAnalysisCompoundHyphenationCharVector_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCompoundHyphenationCharVector, init)
+}
+
+OrgApacheLuceneAnalysisCompoundHyphenationCharVector *create_OrgApacheLuceneAnalysisCompoundHyphenationCharVector_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCompoundHyphenationCharVector, init)
 }
 
 void OrgApacheLuceneAnalysisCompoundHyphenationCharVector_initWithInt_(OrgApacheLuceneAnalysisCompoundHyphenationCharVector *self, jint capacity) {
@@ -159,9 +170,11 @@ void OrgApacheLuceneAnalysisCompoundHyphenationCharVector_initWithInt_(OrgApache
 }
 
 OrgApacheLuceneAnalysisCompoundHyphenationCharVector *new_OrgApacheLuceneAnalysisCompoundHyphenationCharVector_initWithInt_(jint capacity) {
-  OrgApacheLuceneAnalysisCompoundHyphenationCharVector *self = [OrgApacheLuceneAnalysisCompoundHyphenationCharVector alloc];
-  OrgApacheLuceneAnalysisCompoundHyphenationCharVector_initWithInt_(self, capacity);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCompoundHyphenationCharVector, initWithInt_, capacity)
+}
+
+OrgApacheLuceneAnalysisCompoundHyphenationCharVector *create_OrgApacheLuceneAnalysisCompoundHyphenationCharVector_initWithInt_(jint capacity) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCompoundHyphenationCharVector, initWithInt_, capacity)
 }
 
 void OrgApacheLuceneAnalysisCompoundHyphenationCharVector_initWithCharArray_(OrgApacheLuceneAnalysisCompoundHyphenationCharVector *self, IOSCharArray *a) {
@@ -172,9 +185,11 @@ void OrgApacheLuceneAnalysisCompoundHyphenationCharVector_initWithCharArray_(Org
 }
 
 OrgApacheLuceneAnalysisCompoundHyphenationCharVector *new_OrgApacheLuceneAnalysisCompoundHyphenationCharVector_initWithCharArray_(IOSCharArray *a) {
-  OrgApacheLuceneAnalysisCompoundHyphenationCharVector *self = [OrgApacheLuceneAnalysisCompoundHyphenationCharVector alloc];
-  OrgApacheLuceneAnalysisCompoundHyphenationCharVector_initWithCharArray_(self, a);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCompoundHyphenationCharVector, initWithCharArray_, a)
+}
+
+OrgApacheLuceneAnalysisCompoundHyphenationCharVector *create_OrgApacheLuceneAnalysisCompoundHyphenationCharVector_initWithCharArray_(IOSCharArray *a) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCompoundHyphenationCharVector, initWithCharArray_, a)
 }
 
 void OrgApacheLuceneAnalysisCompoundHyphenationCharVector_initWithCharArray_withInt_(OrgApacheLuceneAnalysisCompoundHyphenationCharVector *self, IOSCharArray *a, jint capacity) {
@@ -190,9 +205,11 @@ void OrgApacheLuceneAnalysisCompoundHyphenationCharVector_initWithCharArray_with
 }
 
 OrgApacheLuceneAnalysisCompoundHyphenationCharVector *new_OrgApacheLuceneAnalysisCompoundHyphenationCharVector_initWithCharArray_withInt_(IOSCharArray *a, jint capacity) {
-  OrgApacheLuceneAnalysisCompoundHyphenationCharVector *self = [OrgApacheLuceneAnalysisCompoundHyphenationCharVector alloc];
-  OrgApacheLuceneAnalysisCompoundHyphenationCharVector_initWithCharArray_withInt_(self, a, capacity);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCompoundHyphenationCharVector, initWithCharArray_withInt_, a, capacity)
+}
+
+OrgApacheLuceneAnalysisCompoundHyphenationCharVector *create_OrgApacheLuceneAnalysisCompoundHyphenationCharVector_initWithCharArray_withInt_(IOSCharArray *a, jint capacity) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCompoundHyphenationCharVector, initWithCharArray_withInt_, a, capacity)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCompoundHyphenationCharVector)

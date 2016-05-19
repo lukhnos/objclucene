@@ -57,6 +57,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchDocValuesRangeQuery_ini
 
 __attribute__((unused)) static OrgApacheLuceneSearchDocValuesRangeQuery *new_OrgApacheLuceneSearchDocValuesRangeQuery_initWithNSString_withId_withId_withBoolean_withBoolean_(NSString *field, id lowerVal, id upperVal, jboolean includeLower, jboolean includeUpper) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchDocValuesRangeQuery *create_OrgApacheLuceneSearchDocValuesRangeQuery_initWithNSString_withId_withId_withBoolean_withBoolean_(NSString *field, id lowerVal, id upperVal, jboolean includeLower, jboolean includeUpper);
+
 @interface OrgApacheLuceneSearchDocValuesRangeQuery_$1 : OrgApacheLuceneSearchRandomAccessWeight {
  @public
   OrgApacheLuceneSearchDocValuesRangeQuery *this$0_;
@@ -76,6 +78,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDocValuesRangeQuery_$1, this$0_, OrgApa
 __attribute__((unused)) static void OrgApacheLuceneSearchDocValuesRangeQuery_$1_initWithOrgApacheLuceneSearchDocValuesRangeQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchDocValuesRangeQuery_$1 *self, OrgApacheLuceneSearchDocValuesRangeQuery *outer$, OrgApacheLuceneSearchQuery *arg$0);
 
 __attribute__((unused)) static OrgApacheLuceneSearchDocValuesRangeQuery_$1 *new_OrgApacheLuceneSearchDocValuesRangeQuery_$1_initWithOrgApacheLuceneSearchDocValuesRangeQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchDocValuesRangeQuery *outer$, OrgApacheLuceneSearchQuery *arg$0) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchDocValuesRangeQuery_$1 *create_OrgApacheLuceneSearchDocValuesRangeQuery_$1_initWithOrgApacheLuceneSearchDocValuesRangeQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchDocValuesRangeQuery *outer$, OrgApacheLuceneSearchQuery *arg$0);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesRangeQuery_$1)
 
@@ -107,6 +111,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchDocValuesRangeQuery_$1_
 
 __attribute__((unused)) static OrgApacheLuceneSearchDocValuesRangeQuery_$1_$1 *new_OrgApacheLuceneSearchDocValuesRangeQuery_$1_$1_initWithOrgApacheLuceneIndexSortedNumericDocValues_withLong_withLong_withOrgApacheLuceneIndexLeafReaderContext_(OrgApacheLuceneIndexSortedNumericDocValues *capture$0, jlong capture$1, jlong capture$2, OrgApacheLuceneIndexLeafReaderContext *capture$3) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchDocValuesRangeQuery_$1_$1 *create_OrgApacheLuceneSearchDocValuesRangeQuery_$1_$1_initWithOrgApacheLuceneIndexSortedNumericDocValues_withLong_withLong_withOrgApacheLuceneIndexLeafReaderContext_(OrgApacheLuceneIndexSortedNumericDocValues *capture$0, jlong capture$1, jlong capture$2, OrgApacheLuceneIndexLeafReaderContext *capture$3);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesRangeQuery_$1_$1)
 
 @interface OrgApacheLuceneSearchDocValuesRangeQuery_$1_$2 : NSObject < OrgApacheLuceneUtilBits > {
@@ -136,6 +142,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDocValuesRangeQuery_$1_$2, val$context_
 __attribute__((unused)) static void OrgApacheLuceneSearchDocValuesRangeQuery_$1_$2_initWithOrgApacheLuceneIndexSortedSetDocValues_withLong_withLong_withOrgApacheLuceneIndexLeafReaderContext_(OrgApacheLuceneSearchDocValuesRangeQuery_$1_$2 *self, OrgApacheLuceneIndexSortedSetDocValues *capture$0, jlong capture$1, jlong capture$2, OrgApacheLuceneIndexLeafReaderContext *capture$3);
 
 __attribute__((unused)) static OrgApacheLuceneSearchDocValuesRangeQuery_$1_$2 *new_OrgApacheLuceneSearchDocValuesRangeQuery_$1_$2_initWithOrgApacheLuceneIndexSortedSetDocValues_withLong_withLong_withOrgApacheLuceneIndexLeafReaderContext_(OrgApacheLuceneIndexSortedSetDocValues *capture$0, jlong capture$1, jlong capture$2, OrgApacheLuceneIndexLeafReaderContext *capture$3) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchDocValuesRangeQuery_$1_$2 *create_OrgApacheLuceneSearchDocValuesRangeQuery_$1_$2_initWithOrgApacheLuceneIndexSortedSetDocValues_withLong_withLong_withOrgApacheLuceneIndexLeafReaderContext_(OrgApacheLuceneIndexSortedSetDocValues *capture$0, jlong capture$1, jlong capture$2, OrgApacheLuceneIndexLeafReaderContext *capture$3);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesRangeQuery_$1_$2)
 
@@ -174,7 +182,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesRangeQuery_$1_$2)
   if ([obj isKindOfClass:[OrgApacheLuceneSearchDocValuesRangeQuery class]] == false) {
     return false;
   }
-  OrgApacheLuceneSearchDocValuesRangeQuery *that = (OrgApacheLuceneSearchDocValuesRangeQuery *) check_class_cast(obj, [OrgApacheLuceneSearchDocValuesRangeQuery class]);
+  OrgApacheLuceneSearchDocValuesRangeQuery *that = (OrgApacheLuceneSearchDocValuesRangeQuery *) cast_chk(obj, [OrgApacheLuceneSearchDocValuesRangeQuery class]);
   return [((NSString *) nil_chk(field_)) isEqual:((OrgApacheLuceneSearchDocValuesRangeQuery *) nil_chk(that))->field_] && OrgLukhnosPortmobileUtilObjects_equalsWithId_withId_(lowerVal_, that->lowerVal_) && OrgLukhnosPortmobileUtilObjects_equalsWithId_withId_(upperVal_, that->upperVal_) && includeLower_ == that->includeLower_ && includeUpper_ == that->includeUpper_ && [super isEqual:obj];
 }
 
@@ -183,7 +191,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesRangeQuery_$1_$2)
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   if ([((NSString *) nil_chk(self->field_)) isEqual:field] == false) {
     [((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:self->field_])) appendWithChar:':'];
   }
@@ -198,7 +206,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesRangeQuery_$1_$2)
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader {
   if (lowerVal_ == nil && upperVal_ == nil) {
-    OrgApacheLuceneSearchFieldValueQuery *rewritten = [new_OrgApacheLuceneSearchFieldValueQuery_initWithNSString_(field_) autorelease];
+    OrgApacheLuceneSearchFieldValueQuery *rewritten = create_OrgApacheLuceneSearchFieldValueQuery_initWithNSString_(field_);
     [rewritten setBoostWithFloat:[self getBoost]];
     return rewritten;
   }
@@ -208,9 +216,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesRangeQuery_$1_$2)
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores {
   if (lowerVal_ == nil && upperVal_ == nil) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"Both min and max values cannot be null, call rewrite first") autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"Both min and max values cannot be null, call rewrite first");
   }
-  return [new_OrgApacheLuceneSearchDocValuesRangeQuery_$1_initWithOrgApacheLuceneSearchDocValuesRangeQuery_withOrgApacheLuceneSearchQuery_(self, self) autorelease];
+  return create_OrgApacheLuceneSearchDocValuesRangeQuery_$1_initWithOrgApacheLuceneSearchDocValuesRangeQuery_withOrgApacheLuceneSearchQuery_(self, self);
 }
 
 - (void)dealloc {
@@ -247,12 +255,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesRangeQuery_$1_$2)
 
 OrgApacheLuceneSearchQuery *OrgApacheLuceneSearchDocValuesRangeQuery_newLongRangeWithNSString_withJavaLangLong_withJavaLangLong_withBoolean_withBoolean_(NSString *field, JavaLangLong *lowerVal, JavaLangLong *upperVal, jboolean includeLower, jboolean includeUpper) {
   OrgApacheLuceneSearchDocValuesRangeQuery_initialize();
-  return [new_OrgApacheLuceneSearchDocValuesRangeQuery_initWithNSString_withId_withId_withBoolean_withBoolean_(field, lowerVal, upperVal, includeLower, includeUpper) autorelease];
+  return create_OrgApacheLuceneSearchDocValuesRangeQuery_initWithNSString_withId_withId_withBoolean_withBoolean_(field, lowerVal, upperVal, includeLower, includeUpper);
 }
 
 OrgApacheLuceneSearchQuery *OrgApacheLuceneSearchDocValuesRangeQuery_newBytesRefRangeWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(NSString *field, OrgApacheLuceneUtilBytesRef *lowerVal, OrgApacheLuceneUtilBytesRef *upperVal, jboolean includeLower, jboolean includeUpper) {
   OrgApacheLuceneSearchDocValuesRangeQuery_initialize();
-  return [new_OrgApacheLuceneSearchDocValuesRangeQuery_initWithNSString_withId_withId_withBoolean_withBoolean_(field, OrgApacheLuceneSearchDocValuesRangeQuery_deepCopyOfWithOrgApacheLuceneUtilBytesRef_(lowerVal), OrgApacheLuceneSearchDocValuesRangeQuery_deepCopyOfWithOrgApacheLuceneUtilBytesRef_(upperVal), includeLower, includeUpper) autorelease];
+  return create_OrgApacheLuceneSearchDocValuesRangeQuery_initWithNSString_withId_withId_withBoolean_withBoolean_(field, OrgApacheLuceneSearchDocValuesRangeQuery_deepCopyOfWithOrgApacheLuceneUtilBytesRef_(lowerVal), OrgApacheLuceneSearchDocValuesRangeQuery_deepCopyOfWithOrgApacheLuceneUtilBytesRef_(upperVal), includeLower, includeUpper);
 }
 
 OrgApacheLuceneUtilBytesRef *OrgApacheLuceneSearchDocValuesRangeQuery_deepCopyOfWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *b) {
@@ -275,9 +283,11 @@ void OrgApacheLuceneSearchDocValuesRangeQuery_initWithNSString_withId_withId_wit
 }
 
 OrgApacheLuceneSearchDocValuesRangeQuery *new_OrgApacheLuceneSearchDocValuesRangeQuery_initWithNSString_withId_withId_withBoolean_withBoolean_(NSString *field, id lowerVal, id upperVal, jboolean includeLower, jboolean includeUpper) {
-  OrgApacheLuceneSearchDocValuesRangeQuery *self = [OrgApacheLuceneSearchDocValuesRangeQuery alloc];
-  OrgApacheLuceneSearchDocValuesRangeQuery_initWithNSString_withId_withId_withBoolean_withBoolean_(self, field, lowerVal, upperVal, includeLower, includeUpper);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDocValuesRangeQuery, initWithNSString_withId_withId_withBoolean_withBoolean_, field, lowerVal, upperVal, includeLower, includeUpper)
+}
+
+OrgApacheLuceneSearchDocValuesRangeQuery *create_OrgApacheLuceneSearchDocValuesRangeQuery_initWithNSString_withId_withId_withBoolean_withBoolean_(NSString *field, id lowerVal, id upperVal, jboolean includeLower, jboolean includeUpper) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDocValuesRangeQuery, initWithNSString_withId_withId_withBoolean_withBoolean_, field, lowerVal, upperVal, includeLower, includeUpper)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocValuesRangeQuery)
@@ -292,25 +302,25 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocValuesRangeQuery)
       min = JavaLangLong_MIN_VALUE;
     }
     else if (this$0_->includeLower_) {
-      min = [(JavaLangLong *) check_class_cast(this$0_->lowerVal_, [JavaLangLong class]) longLongValue];
+      min = [(JavaLangLong *) cast_chk(this$0_->lowerVal_, [JavaLangLong class]) longLongValue];
     }
     else {
-      min = 1 + [(JavaLangLong *) check_class_cast(this$0_->lowerVal_, [JavaLangLong class]) longLongValue];
+      min = 1 + [(JavaLangLong *) cast_chk(this$0_->lowerVal_, [JavaLangLong class]) longLongValue];
     }
     jlong max;
     if (this$0_->upperVal_ == nil) {
       max = JavaLangLong_MAX_VALUE;
     }
     else if (this$0_->includeUpper_) {
-      max = [(JavaLangLong *) check_class_cast(this$0_->upperVal_, [JavaLangLong class]) longLongValue];
+      max = [(JavaLangLong *) cast_chk(this$0_->upperVal_, [JavaLangLong class]) longLongValue];
     }
     else {
-      max = -1 + [(JavaLangLong *) check_class_cast(this$0_->upperVal_, [JavaLangLong class]) longLongValue];
+      max = -1 + [(JavaLangLong *) cast_chk(this$0_->upperVal_, [JavaLangLong class]) longLongValue];
     }
     if (min > max) {
       return nil;
     }
-    return [new_OrgApacheLuceneSearchDocValuesRangeQuery_$1_$1_initWithOrgApacheLuceneIndexSortedNumericDocValues_withLong_withLong_withOrgApacheLuceneIndexLeafReaderContext_(values, min, max, context) autorelease];
+    return create_OrgApacheLuceneSearchDocValuesRangeQuery_$1_$1_initWithOrgApacheLuceneIndexSortedNumericDocValues_withLong_withLong_withOrgApacheLuceneIndexLeafReaderContext_(values, min, max, context);
   }
   else if ([this$0_->lowerVal_ isKindOfClass:[OrgApacheLuceneUtilBytesRef class]] || [this$0_->upperVal_ isKindOfClass:[OrgApacheLuceneUtilBytesRef class]]) {
     OrgApacheLuceneIndexSortedSetDocValues *values = OrgApacheLuceneIndexDocValues_getSortedSetWithOrgApacheLuceneIndexLeafReader_withNSString_([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader], this$0_->field_);
@@ -319,7 +329,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocValuesRangeQuery)
       minOrd = 0;
     }
     else {
-      jlong ord = [((OrgApacheLuceneIndexSortedSetDocValues *) nil_chk(values)) lookupTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *) check_class_cast(this$0_->lowerVal_, [OrgApacheLuceneUtilBytesRef class])];
+      jlong ord = [((OrgApacheLuceneIndexSortedSetDocValues *) nil_chk(values)) lookupTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *) cast_chk(this$0_->lowerVal_, [OrgApacheLuceneUtilBytesRef class])];
       if (ord < 0) {
         minOrd = -1 - ord;
       }
@@ -335,7 +345,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocValuesRangeQuery)
       maxOrd = [((OrgApacheLuceneIndexSortedSetDocValues *) nil_chk(values)) getValueCount] - 1;
     }
     else {
-      jlong ord = [((OrgApacheLuceneIndexSortedSetDocValues *) nil_chk(values)) lookupTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *) check_class_cast(this$0_->upperVal_, [OrgApacheLuceneUtilBytesRef class])];
+      jlong ord = [((OrgApacheLuceneIndexSortedSetDocValues *) nil_chk(values)) lookupTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *) cast_chk(this$0_->upperVal_, [OrgApacheLuceneUtilBytesRef class])];
       if (ord < 0) {
         maxOrd = -2 - ord;
       }
@@ -349,10 +359,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocValuesRangeQuery)
     if (minOrd > maxOrd) {
       return nil;
     }
-    return [new_OrgApacheLuceneSearchDocValuesRangeQuery_$1_$2_initWithOrgApacheLuceneIndexSortedSetDocValues_withLong_withLong_withOrgApacheLuceneIndexLeafReaderContext_(values, minOrd, maxOrd, context) autorelease];
+    return create_OrgApacheLuceneSearchDocValuesRangeQuery_$1_$2_initWithOrgApacheLuceneIndexSortedSetDocValues_withLong_withLong_withOrgApacheLuceneIndexLeafReaderContext_(values, minOrd, maxOrd, context);
   }
   else {
-    @throw [new_JavaLangAssertionError_init() autorelease];
+    @throw create_JavaLangAssertionError_init();
   }
 }
 
@@ -388,9 +398,11 @@ void OrgApacheLuceneSearchDocValuesRangeQuery_$1_initWithOrgApacheLuceneSearchDo
 }
 
 OrgApacheLuceneSearchDocValuesRangeQuery_$1 *new_OrgApacheLuceneSearchDocValuesRangeQuery_$1_initWithOrgApacheLuceneSearchDocValuesRangeQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchDocValuesRangeQuery *outer$, OrgApacheLuceneSearchQuery *arg$0) {
-  OrgApacheLuceneSearchDocValuesRangeQuery_$1 *self = [OrgApacheLuceneSearchDocValuesRangeQuery_$1 alloc];
-  OrgApacheLuceneSearchDocValuesRangeQuery_$1_initWithOrgApacheLuceneSearchDocValuesRangeQuery_withOrgApacheLuceneSearchQuery_(self, outer$, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDocValuesRangeQuery_$1, initWithOrgApacheLuceneSearchDocValuesRangeQuery_withOrgApacheLuceneSearchQuery_, outer$, arg$0)
+}
+
+OrgApacheLuceneSearchDocValuesRangeQuery_$1 *create_OrgApacheLuceneSearchDocValuesRangeQuery_$1_initWithOrgApacheLuceneSearchDocValuesRangeQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchDocValuesRangeQuery *outer$, OrgApacheLuceneSearchQuery *arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDocValuesRangeQuery_$1, initWithOrgApacheLuceneSearchDocValuesRangeQuery_withOrgApacheLuceneSearchQuery_, outer$, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocValuesRangeQuery_$1)
@@ -455,9 +467,11 @@ void OrgApacheLuceneSearchDocValuesRangeQuery_$1_$1_initWithOrgApacheLuceneIndex
 }
 
 OrgApacheLuceneSearchDocValuesRangeQuery_$1_$1 *new_OrgApacheLuceneSearchDocValuesRangeQuery_$1_$1_initWithOrgApacheLuceneIndexSortedNumericDocValues_withLong_withLong_withOrgApacheLuceneIndexLeafReaderContext_(OrgApacheLuceneIndexSortedNumericDocValues *capture$0, jlong capture$1, jlong capture$2, OrgApacheLuceneIndexLeafReaderContext *capture$3) {
-  OrgApacheLuceneSearchDocValuesRangeQuery_$1_$1 *self = [OrgApacheLuceneSearchDocValuesRangeQuery_$1_$1 alloc];
-  OrgApacheLuceneSearchDocValuesRangeQuery_$1_$1_initWithOrgApacheLuceneIndexSortedNumericDocValues_withLong_withLong_withOrgApacheLuceneIndexLeafReaderContext_(self, capture$0, capture$1, capture$2, capture$3);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDocValuesRangeQuery_$1_$1, initWithOrgApacheLuceneIndexSortedNumericDocValues_withLong_withLong_withOrgApacheLuceneIndexLeafReaderContext_, capture$0, capture$1, capture$2, capture$3)
+}
+
+OrgApacheLuceneSearchDocValuesRangeQuery_$1_$1 *create_OrgApacheLuceneSearchDocValuesRangeQuery_$1_$1_initWithOrgApacheLuceneIndexSortedNumericDocValues_withLong_withLong_withOrgApacheLuceneIndexLeafReaderContext_(OrgApacheLuceneIndexSortedNumericDocValues *capture$0, jlong capture$1, jlong capture$2, OrgApacheLuceneIndexLeafReaderContext *capture$3) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDocValuesRangeQuery_$1_$1, initWithOrgApacheLuceneIndexSortedNumericDocValues_withLong_withLong_withOrgApacheLuceneIndexLeafReaderContext_, capture$0, capture$1, capture$2, capture$3)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocValuesRangeQuery_$1_$1)
@@ -520,9 +534,11 @@ void OrgApacheLuceneSearchDocValuesRangeQuery_$1_$2_initWithOrgApacheLuceneIndex
 }
 
 OrgApacheLuceneSearchDocValuesRangeQuery_$1_$2 *new_OrgApacheLuceneSearchDocValuesRangeQuery_$1_$2_initWithOrgApacheLuceneIndexSortedSetDocValues_withLong_withLong_withOrgApacheLuceneIndexLeafReaderContext_(OrgApacheLuceneIndexSortedSetDocValues *capture$0, jlong capture$1, jlong capture$2, OrgApacheLuceneIndexLeafReaderContext *capture$3) {
-  OrgApacheLuceneSearchDocValuesRangeQuery_$1_$2 *self = [OrgApacheLuceneSearchDocValuesRangeQuery_$1_$2 alloc];
-  OrgApacheLuceneSearchDocValuesRangeQuery_$1_$2_initWithOrgApacheLuceneIndexSortedSetDocValues_withLong_withLong_withOrgApacheLuceneIndexLeafReaderContext_(self, capture$0, capture$1, capture$2, capture$3);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDocValuesRangeQuery_$1_$2, initWithOrgApacheLuceneIndexSortedSetDocValues_withLong_withLong_withOrgApacheLuceneIndexLeafReaderContext_, capture$0, capture$1, capture$2, capture$3)
+}
+
+OrgApacheLuceneSearchDocValuesRangeQuery_$1_$2 *create_OrgApacheLuceneSearchDocValuesRangeQuery_$1_$2_initWithOrgApacheLuceneIndexSortedSetDocValues_withLong_withLong_withOrgApacheLuceneIndexLeafReaderContext_(OrgApacheLuceneIndexSortedSetDocValues *capture$0, jlong capture$1, jlong capture$2, OrgApacheLuceneIndexLeafReaderContext *capture$3) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDocValuesRangeQuery_$1_$2, initWithOrgApacheLuceneIndexSortedSetDocValues_withLong_withLong_withOrgApacheLuceneIndexLeafReaderContext_, capture$0, capture$1, capture$2, capture$3)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocValuesRangeQuery_$1_$2)

@@ -49,10 +49,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFi
   if (dictionary_ == nil) {
     return input;
   }
-  if ([((OrgApacheLuceneUtilVersion *) nil_chk(luceneMatchVersion_)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_4_0_)]) {
-    return [new_OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_withInt_withInt_withInt_withBoolean_(input, dictionary_, minWordSize_, minSubwordSize_, maxSubwordSize_, onlyLongestMatch_) autorelease];
+  if ([((OrgApacheLuceneUtilVersion *) nil_chk(luceneMatchVersion_)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_4_0)]) {
+    return create_OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_withInt_withInt_withInt_withBoolean_(input, dictionary_, minWordSize_, minSubwordSize_, maxSubwordSize_, onlyLongestMatch_);
   }
-  return [new_OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_withInt_withInt_withInt_withBoolean_(input, dictionary_, minWordSize_, minSubwordSize_, maxSubwordSize_, onlyLongestMatch_) autorelease];
+  return create_OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_withInt_withInt_withInt_withBoolean_(input, dictionary_, minWordSize_, minSubwordSize_, maxSubwordSize_, onlyLongestMatch_);
 }
 
 - (void)dealloc {
@@ -63,7 +63,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFi
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "DictionaryCompoundWordTokenFilterFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "DictionaryCompoundWordTokenFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "informWithOrgApacheLuceneAnalysisUtilResourceLoader:", "inform", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenStream;", 0x1, NULL, NULL },
   };
@@ -89,14 +89,16 @@ void OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory_ini
   self->maxSubwordSize_ = [self getIntWithJavaUtilMap:args withNSString:@"maxSubwordSize" withInt:OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_DEFAULT_MAX_SUBWORD_SIZE];
   self->onlyLongestMatch_ = [self getBooleanWithJavaUtilMap:args withNSString:@"onlyLongestMatch" withBoolean:true];
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory *new_OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory *self = [OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory alloc];
-  OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory *create_OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory)

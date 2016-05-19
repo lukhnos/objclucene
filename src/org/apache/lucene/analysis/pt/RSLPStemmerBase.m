@@ -44,17 +44,21 @@
 
 @end
 
-static JavaUtilRegexPattern *OrgApacheLuceneAnalysisPtRSLPStemmerBase_headerPattern_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisPtRSLPStemmerBase, headerPattern_, JavaUtilRegexPattern *)
+inline JavaUtilRegexPattern *OrgApacheLuceneAnalysisPtRSLPStemmerBase_get_headerPattern();
+static JavaUtilRegexPattern *OrgApacheLuceneAnalysisPtRSLPStemmerBase_headerPattern;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisPtRSLPStemmerBase, headerPattern, JavaUtilRegexPattern *)
 
-static JavaUtilRegexPattern *OrgApacheLuceneAnalysisPtRSLPStemmerBase_stripPattern_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisPtRSLPStemmerBase, stripPattern_, JavaUtilRegexPattern *)
+inline JavaUtilRegexPattern *OrgApacheLuceneAnalysisPtRSLPStemmerBase_get_stripPattern();
+static JavaUtilRegexPattern *OrgApacheLuceneAnalysisPtRSLPStemmerBase_stripPattern;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisPtRSLPStemmerBase, stripPattern, JavaUtilRegexPattern *)
 
-static JavaUtilRegexPattern *OrgApacheLuceneAnalysisPtRSLPStemmerBase_repPattern_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisPtRSLPStemmerBase, repPattern_, JavaUtilRegexPattern *)
+inline JavaUtilRegexPattern *OrgApacheLuceneAnalysisPtRSLPStemmerBase_get_repPattern();
+static JavaUtilRegexPattern *OrgApacheLuceneAnalysisPtRSLPStemmerBase_repPattern;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisPtRSLPStemmerBase, repPattern, JavaUtilRegexPattern *)
 
-static JavaUtilRegexPattern *OrgApacheLuceneAnalysisPtRSLPStemmerBase_excPattern_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisPtRSLPStemmerBase, excPattern_, JavaUtilRegexPattern *)
+inline JavaUtilRegexPattern *OrgApacheLuceneAnalysisPtRSLPStemmerBase_get_excPattern();
+static JavaUtilRegexPattern *OrgApacheLuceneAnalysisPtRSLPStemmerBase_excPattern;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisPtRSLPStemmerBase, excPattern, JavaUtilRegexPattern *)
 
 __attribute__((unused)) static OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisPtRSLPStemmerBase_parseStepWithJavaIoLineNumberReader_withNSString_(JavaIoLineNumberReader *r, NSString *header);
 
@@ -106,29 +110,29 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisPtRSLPStemmerBase class]) {
-    JreStrongAssign(&OrgApacheLuceneAnalysisPtRSLPStemmerBase_headerPattern_, JavaUtilRegexPattern_compileWithNSString_(@"^\\{\\s*\"([^\"]*)\",\\s*([0-9]+),\\s*(0|1),\\s*\\{(.*)\\},\\s*$"));
-    JreStrongAssign(&OrgApacheLuceneAnalysisPtRSLPStemmerBase_stripPattern_, JavaUtilRegexPattern_compileWithNSString_(@"^\\{\\s*\"([^\"]*)\",\\s*([0-9]+)\\s*\\}\\s*(,|(\\}\\s*;))$"));
-    JreStrongAssign(&OrgApacheLuceneAnalysisPtRSLPStemmerBase_repPattern_, JavaUtilRegexPattern_compileWithNSString_(@"^\\{\\s*\"([^\"]*)\",\\s*([0-9]+),\\s*\"([^\"]*)\"\\}\\s*(,|(\\}\\s*;))$"));
-    JreStrongAssign(&OrgApacheLuceneAnalysisPtRSLPStemmerBase_excPattern_, JavaUtilRegexPattern_compileWithNSString_(@"^\\{\\s*\"([^\"]*)\",\\s*([0-9]+),\\s*\"([^\"]*)\",\\s*\\{(.*)\\}\\s*\\}\\s*(,|(\\}\\s*;))$"));
+    JreStrongAssign(&OrgApacheLuceneAnalysisPtRSLPStemmerBase_headerPattern, JavaUtilRegexPattern_compileWithNSString_(@"^\\{\\s*\"([^\"]*)\",\\s*([0-9]+),\\s*(0|1),\\s*\\{(.*)\\},\\s*$"));
+    JreStrongAssign(&OrgApacheLuceneAnalysisPtRSLPStemmerBase_stripPattern, JavaUtilRegexPattern_compileWithNSString_(@"^\\{\\s*\"([^\"]*)\",\\s*([0-9]+)\\s*\\}\\s*(,|(\\}\\s*;))$"));
+    JreStrongAssign(&OrgApacheLuceneAnalysisPtRSLPStemmerBase_repPattern, JavaUtilRegexPattern_compileWithNSString_(@"^\\{\\s*\"([^\"]*)\",\\s*([0-9]+),\\s*\"([^\"]*)\"\\}\\s*(,|(\\}\\s*;))$"));
+    JreStrongAssign(&OrgApacheLuceneAnalysisPtRSLPStemmerBase_excPattern, JavaUtilRegexPattern_compileWithNSString_(@"^\\{\\s*\"([^\"]*)\",\\s*([0-9]+),\\s*\"([^\"]*)\",\\s*\\{(.*)\\}\\s*\\}\\s*(,|(\\}\\s*;))$"));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisPtRSLPStemmerBase)
   }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "parseWithIOSClass:withNSString:", "parse", "Ljava.util.Map;", 0xc, NULL, NULL },
+    { "parseWithIOSClass:withNSString:", "parse", "Ljava.util.Map;", 0xc, NULL, "(Ljava/lang/Class<+Lorg/apache/lucene/analysis/pt/RSLPStemmerBase;>;Ljava/lang/String;)Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/analysis/pt/RSLPStemmerBase$Step;>;" },
     { "parseStepWithJavaIoLineNumberReader:withNSString:", "parseStep", "Lorg.apache.lucene.analysis.pt.RSLPStemmerBase$Step;", 0xa, "Ljava.io.IOException;", NULL },
     { "parseRulesWithJavaIoLineNumberReader:withInt:", "parseRules", "[Lorg.apache.lucene.analysis.pt.RSLPStemmerBase$Rule;", 0xa, "Ljava.io.IOException;", NULL },
     { "parseListWithNSString:", "parseList", "[Ljava.lang.String;", 0xa, NULL, NULL },
     { "parseStringWithNSString:", "parseString", "Ljava.lang.String;", 0xa, NULL, NULL },
     { "readLineWithJavaIoLineNumberReader:", "readLine", "Ljava.lang.String;", 0xa, "Ljava.io.IOException;", NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "RSLPStemmerBase", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "headerPattern_", NULL, 0x1a, "Ljava.util.regex.Pattern;", &OrgApacheLuceneAnalysisPtRSLPStemmerBase_headerPattern_, NULL, .constantValue.asLong = 0 },
-    { "stripPattern_", NULL, 0x1a, "Ljava.util.regex.Pattern;", &OrgApacheLuceneAnalysisPtRSLPStemmerBase_stripPattern_, NULL, .constantValue.asLong = 0 },
-    { "repPattern_", NULL, 0x1a, "Ljava.util.regex.Pattern;", &OrgApacheLuceneAnalysisPtRSLPStemmerBase_repPattern_, NULL, .constantValue.asLong = 0 },
-    { "excPattern_", NULL, 0x1a, "Ljava.util.regex.Pattern;", &OrgApacheLuceneAnalysisPtRSLPStemmerBase_excPattern_, NULL, .constantValue.asLong = 0 },
+    { "headerPattern", "headerPattern", 0x1a, "Ljava.util.regex.Pattern;", &OrgApacheLuceneAnalysisPtRSLPStemmerBase_headerPattern, NULL, .constantValue.asLong = 0 },
+    { "stripPattern", "stripPattern", 0x1a, "Ljava.util.regex.Pattern;", &OrgApacheLuceneAnalysisPtRSLPStemmerBase_stripPattern, NULL, .constantValue.asLong = 0 },
+    { "repPattern", "repPattern", 0x1a, "Ljava.util.regex.Pattern;", &OrgApacheLuceneAnalysisPtRSLPStemmerBase_repPattern, NULL, .constantValue.asLong = 0 },
+    { "excPattern", "excPattern", 0x1a, "Ljava.util.regex.Pattern;", &OrgApacheLuceneAnalysisPtRSLPStemmerBase_excPattern, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.analysis.pt.RSLPStemmerBase$Rule;", "Lorg.apache.lucene.analysis.pt.RSLPStemmerBase$RuleWithSetExceptions;", "Lorg.apache.lucene.analysis.pt.RSLPStemmerBase$RuleWithSuffixExceptions;", "Lorg.apache.lucene.analysis.pt.RSLPStemmerBase$Step;"};
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPtRSLPStemmerBase = { 2, "RSLPStemmerBase", "org.apache.lucene.analysis.pt", NULL, 0x401, 7, methods, 4, fields, 0, NULL, 4, inner_classes, NULL, NULL };
@@ -141,8 +145,8 @@ id<JavaUtilMap> OrgApacheLuceneAnalysisPtRSLPStemmerBase_parseWithIOSClass_withN
   OrgApacheLuceneAnalysisPtRSLPStemmerBase_initialize();
   @try {
     JavaIoInputStream *is = [((IOSClass *) nil_chk(clazz)) getResourceAsStream:resource];
-    JavaIoLineNumberReader *r = [new_JavaIoLineNumberReader_initWithJavaIoReader_([new_JavaIoInputStreamReader_initWithJavaIoInputStream_withJavaNioCharsetCharset_(is, JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8_)) autorelease]) autorelease];
-    id<JavaUtilMap> steps = [new_JavaUtilHashMap_init() autorelease];
+    JavaIoLineNumberReader *r = create_JavaIoLineNumberReader_initWithJavaIoReader_(create_JavaIoInputStreamReader_initWithJavaIoInputStream_withJavaNioCharsetCharset_(is, JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8)));
+    id<JavaUtilMap> steps = create_JavaUtilHashMap_init();
     NSString *step;
     while ((step = OrgApacheLuceneAnalysisPtRSLPStemmerBase_readLineWithJavaIoLineNumberReader_(r)) != nil) {
       OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *s = OrgApacheLuceneAnalysisPtRSLPStemmerBase_parseStepWithJavaIoLineNumberReader_withNSString_(r, step);
@@ -152,15 +156,15 @@ id<JavaUtilMap> OrgApacheLuceneAnalysisPtRSLPStemmerBase_parseWithIOSClass_withN
     return steps;
   }
   @catch (JavaIoIOException *e) {
-    @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(e) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSException_(e);
   }
 }
 
 OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisPtRSLPStemmerBase_parseStepWithJavaIoLineNumberReader_withNSString_(JavaIoLineNumberReader *r, NSString *header) {
   OrgApacheLuceneAnalysisPtRSLPStemmerBase_initialize();
-  JavaUtilRegexMatcher *matcher = [((JavaUtilRegexPattern *) nil_chk(OrgApacheLuceneAnalysisPtRSLPStemmerBase_headerPattern_)) matcherWithJavaLangCharSequence:header];
+  JavaUtilRegexMatcher *matcher = [((JavaUtilRegexPattern *) nil_chk(OrgApacheLuceneAnalysisPtRSLPStemmerBase_headerPattern)) matcherWithJavaLangCharSequence:header];
   if (![((JavaUtilRegexMatcher *) nil_chk(matcher)) find]) {
-    @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I", @"Illegal Step header specified at line ", [((JavaIoLineNumberReader *) nil_chk(r)) getLineNumber])) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I", @"Illegal Step header specified at line ", [((JavaIoLineNumberReader *) nil_chk(r)) getLineNumber]));
   }
   JreAssert(([matcher groupCount] == 4), (@"org/apache/lucene/analysis/pt/RSLPStemmerBase.java:277 condition failed: assert matcher.groupCount() == 4;"));
   NSString *name = [matcher groupWithInt:1];
@@ -168,35 +172,35 @@ OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisPtRSLPStem
   jint type = JavaLangInteger_parseIntWithNSString_([matcher groupWithInt:3]);
   IOSObjectArray *suffixes = OrgApacheLuceneAnalysisPtRSLPStemmerBase_parseListWithNSString_([matcher groupWithInt:4]);
   IOSObjectArray *rules = OrgApacheLuceneAnalysisPtRSLPStemmerBase_parseRulesWithJavaIoLineNumberReader_withInt_(r, type);
-  return [new_OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step_initWithNSString_withOrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleArray_withInt_withNSStringArray_(name, rules, min, suffixes) autorelease];
+  return create_OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step_initWithNSString_withOrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleArray_withInt_withNSStringArray_(name, rules, min, suffixes);
 }
 
 IOSObjectArray *OrgApacheLuceneAnalysisPtRSLPStemmerBase_parseRulesWithJavaIoLineNumberReader_withInt_(JavaIoLineNumberReader *r, jint type) {
   OrgApacheLuceneAnalysisPtRSLPStemmerBase_initialize();
-  id<JavaUtilList> rules = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> rules = create_JavaUtilArrayList_init();
   NSString *line;
   while ((line = OrgApacheLuceneAnalysisPtRSLPStemmerBase_readLineWithJavaIoLineNumberReader_(r)) != nil) {
-    JavaUtilRegexMatcher *matcher = [((JavaUtilRegexPattern *) nil_chk(OrgApacheLuceneAnalysisPtRSLPStemmerBase_stripPattern_)) matcherWithJavaLangCharSequence:line];
+    JavaUtilRegexMatcher *matcher = [((JavaUtilRegexPattern *) nil_chk(OrgApacheLuceneAnalysisPtRSLPStemmerBase_stripPattern)) matcherWithJavaLangCharSequence:line];
     if ([((JavaUtilRegexMatcher *) nil_chk(matcher)) matches]) {
-      [rules addWithId:[new_OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule_initWithNSString_withInt_withNSString_([matcher groupWithInt:1], JavaLangInteger_parseIntWithNSString_([matcher groupWithInt:2]), @"") autorelease]];
+      [rules addWithId:create_OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule_initWithNSString_withInt_withNSString_([matcher groupWithInt:1], JavaLangInteger_parseIntWithNSString_([matcher groupWithInt:2]), @"")];
     }
     else {
-      matcher = [((JavaUtilRegexPattern *) nil_chk(OrgApacheLuceneAnalysisPtRSLPStemmerBase_repPattern_)) matcherWithJavaLangCharSequence:line];
+      matcher = [((JavaUtilRegexPattern *) nil_chk(OrgApacheLuceneAnalysisPtRSLPStemmerBase_repPattern)) matcherWithJavaLangCharSequence:line];
       if ([((JavaUtilRegexMatcher *) nil_chk(matcher)) matches]) {
-        [rules addWithId:[new_OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule_initWithNSString_withInt_withNSString_([matcher groupWithInt:1], JavaLangInteger_parseIntWithNSString_([matcher groupWithInt:2]), [matcher groupWithInt:3]) autorelease]];
+        [rules addWithId:create_OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule_initWithNSString_withInt_withNSString_([matcher groupWithInt:1], JavaLangInteger_parseIntWithNSString_([matcher groupWithInt:2]), [matcher groupWithInt:3])];
       }
       else {
-        matcher = [((JavaUtilRegexPattern *) nil_chk(OrgApacheLuceneAnalysisPtRSLPStemmerBase_excPattern_)) matcherWithJavaLangCharSequence:line];
+        matcher = [((JavaUtilRegexPattern *) nil_chk(OrgApacheLuceneAnalysisPtRSLPStemmerBase_excPattern)) matcherWithJavaLangCharSequence:line];
         if ([((JavaUtilRegexMatcher *) nil_chk(matcher)) matches]) {
           if (type == 0) {
-            [rules addWithId:[new_OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions_initWithNSString_withInt_withNSString_withNSStringArray_([matcher groupWithInt:1], JavaLangInteger_parseIntWithNSString_([matcher groupWithInt:2]), [matcher groupWithInt:3], OrgApacheLuceneAnalysisPtRSLPStemmerBase_parseListWithNSString_([matcher groupWithInt:4])) autorelease]];
+            [rules addWithId:create_OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions_initWithNSString_withInt_withNSString_withNSStringArray_([matcher groupWithInt:1], JavaLangInteger_parseIntWithNSString_([matcher groupWithInt:2]), [matcher groupWithInt:3], OrgApacheLuceneAnalysisPtRSLPStemmerBase_parseListWithNSString_([matcher groupWithInt:4]))];
           }
           else {
-            [rules addWithId:[new_OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions_initWithNSString_withInt_withNSString_withNSStringArray_([matcher groupWithInt:1], JavaLangInteger_parseIntWithNSString_([matcher groupWithInt:2]), [matcher groupWithInt:3], OrgApacheLuceneAnalysisPtRSLPStemmerBase_parseListWithNSString_([matcher groupWithInt:4])) autorelease]];
+            [rules addWithId:create_OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions_initWithNSString_withInt_withNSString_withNSStringArray_([matcher groupWithInt:1], JavaLangInteger_parseIntWithNSString_([matcher groupWithInt:2]), [matcher groupWithInt:3], OrgApacheLuceneAnalysisPtRSLPStemmerBase_parseListWithNSString_([matcher groupWithInt:4]))];
           }
         }
         else {
-          @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I", @"Illegal Step rule specified at line ", [((JavaIoLineNumberReader *) nil_chk(r)) getLineNumber])) autorelease];
+          @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I", @"Illegal Step rule specified at line ", [((JavaIoLineNumberReader *) nil_chk(r)) getLineNumber]));
         }
       }
     }
@@ -215,7 +219,7 @@ IOSObjectArray *OrgApacheLuceneAnalysisPtRSLPStemmerBase_parseListWithNSString_(
 
 NSString *OrgApacheLuceneAnalysisPtRSLPStemmerBase_parseStringWithNSString_(NSString *s) {
   OrgApacheLuceneAnalysisPtRSLPStemmerBase_initialize();
-  return [s substring:1 endIndex:((jint) [((NSString *) nil_chk(s)) length]) - 1];
+  return [((NSString *) nil_chk(s)) substring:1 endIndex:((jint) [s length]) - 1];
 }
 
 NSString *OrgApacheLuceneAnalysisPtRSLPStemmerBase_readLineWithJavaIoLineNumberReader_(JavaIoLineNumberReader *r) {
@@ -287,9 +291,11 @@ void OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule_initWithNSString_withInt_with
 }
 
 OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule *new_OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule_initWithNSString_withInt_withNSString_(NSString *suffix, jint min, NSString *replacement) {
-  OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule *self = [OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule alloc];
-  OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule_initWithNSString_withInt_withNSString_(self, suffix, min, replacement);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule, initWithNSString_withInt_withNSString_, suffix, min, replacement)
+}
+
+OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule *create_OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule_initWithNSString_withInt_withNSString_(NSString *suffix, jint min, NSString *replacement) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule, initWithNSString_withInt_withNSString_, suffix, min, replacement)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule)
@@ -331,15 +337,17 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule)
 void OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions_initWithNSString_withInt_withNSString_withNSStringArray_(OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions *self, NSString *suffix, jint min, NSString *replacement, IOSObjectArray *exceptions) {
   OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule_initWithNSString_withInt_withNSString_(self, suffix, min, replacement);
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(exceptions))->size_; i++) {
-    if (![((NSString *) nil_chk(IOSObjectArray_Get(exceptions, i))) hasSuffix:suffix]) @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$$C", @"useless exception '", IOSObjectArray_Get(exceptions, i), @"' does not end with '", suffix, '\'')) autorelease];
+    if (![((NSString *) nil_chk(IOSObjectArray_Get(exceptions, i))) hasSuffix:suffix]) @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$$C", @"useless exception '", IOSObjectArray_Get(exceptions, i), @"' does not end with '", suffix, '\''));
   }
   JreStrongAssignAndConsume(&self->exceptions_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_(exceptions), false));
 }
 
 OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions *new_OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions_initWithNSString_withInt_withNSString_withNSStringArray_(NSString *suffix, jint min, NSString *replacement, IOSObjectArray *exceptions) {
-  OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions *self = [OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions alloc];
-  OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions_initWithNSString_withInt_withNSString_withNSStringArray_(self, suffix, min, replacement, exceptions);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions, initWithNSString_withInt_withNSString_withNSStringArray_, suffix, min, replacement, exceptions)
+}
+
+OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions *create_OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions_initWithNSString_withInt_withNSString_withNSStringArray_(NSString *suffix, jint min, NSString *replacement, IOSObjectArray *exceptions) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions, initWithNSString_withInt_withNSString_withNSStringArray_, suffix, min, replacement, exceptions)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions)
@@ -383,16 +391,18 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWi
 void OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions_initWithNSString_withInt_withNSString_withNSStringArray_(OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions *self, NSString *suffix, jint min, NSString *replacement, IOSObjectArray *exceptions) {
   OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule_initWithNSString_withInt_withNSString_(self, suffix, min, replacement);
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(exceptions))->size_; i++) {
-    if (![((NSString *) nil_chk(IOSObjectArray_Get(exceptions, i))) hasSuffix:suffix]) @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$$C", @"warning: useless exception '", IOSObjectArray_Get(exceptions, i), @"' does not end with '", suffix, '\'')) autorelease];
+    if (![((NSString *) nil_chk(IOSObjectArray_Get(exceptions, i))) hasSuffix:suffix]) @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$$C", @"warning: useless exception '", IOSObjectArray_Get(exceptions, i), @"' does not end with '", suffix, '\''));
   }
   JreStrongAssignAndConsume(&self->exceptions_, [IOSObjectArray newArrayWithLength:exceptions->size_ type:IOSClass_charArray(1)]);
   for (jint i = 0; i < exceptions->size_; i++) IOSObjectArray_Set(self->exceptions_, i, [((NSString *) nil_chk(IOSObjectArray_Get(exceptions, i))) toCharArray]);
 }
 
 OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions *new_OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions_initWithNSString_withInt_withNSString_withNSStringArray_(NSString *suffix, jint min, NSString *replacement, IOSObjectArray *exceptions) {
-  OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions *self = [OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions alloc];
-  OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions_initWithNSString_withInt_withNSString_withNSStringArray_(self, suffix, min, replacement, exceptions);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions, initWithNSString_withInt_withNSString_withNSStringArray_, suffix, min, replacement, exceptions)
+}
+
+OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions *create_OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions_initWithNSString_withInt_withNSString_withNSStringArray_(NSString *suffix, jint min, NSString *replacement, IOSObjectArray *exceptions) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions, initWithNSString_withInt_withNSString_withNSStringArray_, suffix, min, replacement, exceptions)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions)
@@ -475,9 +485,11 @@ void OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step_initWithNSString_withOrgApach
 }
 
 OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *new_OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step_initWithNSString_withOrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleArray_withInt_withNSStringArray_(NSString *name, IOSObjectArray *rules, jint min, IOSObjectArray *suffixes) {
-  OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *self = [OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step alloc];
-  OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step_initWithNSString_withOrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleArray_withInt_withNSStringArray_(self, name, rules, min, suffixes);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step, initWithNSString_withOrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleArray_withInt_withNSStringArray_, name, rules, min, suffixes)
+}
+
+OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *create_OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step_initWithNSString_withOrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleArray_withInt_withNSStringArray_(NSString *name, IOSObjectArray *rules, jint min, IOSObjectArray *suffixes) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step, initWithNSString_withOrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleArray_withInt_withNSStringArray_, name, rules, min, suffixes)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step)

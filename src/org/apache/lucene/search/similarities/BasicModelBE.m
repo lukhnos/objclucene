@@ -12,6 +12,9 @@
 
 @interface OrgApacheLuceneSearchSimilaritiesBasicModelBE ()
 
+/*!
+ @brief The <em>f</em> helper function defined for <em>B<sub>E</sub></em>.
+ */
 - (jdouble)fWithDouble:(jdouble)n
             withDouble:(jdouble)m;
 
@@ -62,9 +65,11 @@ void OrgApacheLuceneSearchSimilaritiesBasicModelBE_init(OrgApacheLuceneSearchSim
 }
 
 OrgApacheLuceneSearchSimilaritiesBasicModelBE *new_OrgApacheLuceneSearchSimilaritiesBasicModelBE_init() {
-  OrgApacheLuceneSearchSimilaritiesBasicModelBE *self = [OrgApacheLuceneSearchSimilaritiesBasicModelBE alloc];
-  OrgApacheLuceneSearchSimilaritiesBasicModelBE_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSimilaritiesBasicModelBE, init)
+}
+
+OrgApacheLuceneSearchSimilaritiesBasicModelBE *create_OrgApacheLuceneSearchSimilaritiesBasicModelBE_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSimilaritiesBasicModelBE, init)
 }
 
 jdouble OrgApacheLuceneSearchSimilaritiesBasicModelBE_fWithDouble_withDouble_(OrgApacheLuceneSearchSimilaritiesBasicModelBE *self, jdouble n, jdouble m) {

@@ -35,7 +35,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCharfilterBaseCharFilter, diffs_, IOS
     return currentOff;
   }
   jint hi = size_ - 1;
-  if (currentOff >= IOSIntArray_Get(nil_chk(offsets_), hi)) return currentOff + IOSIntArray_Get(nil_chk(diffs_), hi);
+  if (currentOff >= IOSIntArray_Get(offsets_, hi)) return currentOff + IOSIntArray_Get(nil_chk(diffs_), hi);
   jint lo = 0;
   jint mid = -1;
   while (hi >= lo) {
@@ -63,8 +63,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCharfilterBaseCharFilter, diffs_, IOS
     JreStrongAssign(&diffs_, OrgApacheLuceneUtilArrayUtil_growWithIntArray_(diffs_));
   }
   JreAssert(((size_ == 0 || off >= IOSIntArray_Get(nil_chk(offsets_), size_ - 1))), (JreStrcat("$ICI$IC$C$", @"Offset #", size_, '(', off, @") is less than the last recorded offset ", IOSIntArray_Get(nil_chk(offsets_), size_ - 1), 0x000a, JavaUtilArrays_toStringWithIntArray_(offsets_), 0x000a, JavaUtilArrays_toStringWithIntArray_(diffs_))));
-  if (size_ == 0 || off != IOSIntArray_Get(offsets_, size_ - 1)) {
-    *IOSIntArray_GetRef(offsets_, size_) = off;
+  if (size_ == 0 || off != IOSIntArray_Get(nil_chk(offsets_), size_ - 1)) {
+    *IOSIntArray_GetRef(nil_chk(offsets_), size_) = off;
     *IOSIntArray_GetRef(nil_chk(diffs_), size_++) = cumulativeDiff;
   }
   else {

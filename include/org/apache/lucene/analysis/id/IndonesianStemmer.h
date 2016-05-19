@@ -5,25 +5,39 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisIdIndonesianStemmer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisIdIndonesianStemmer_RESTRICT
-#define OrgApacheLuceneAnalysisIdIndonesianStemmer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisIdIndonesianStemmer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisIdIndonesianStemmer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisIdIndonesianStemmer 0
 #else
-#define OrgApacheLuceneAnalysisIdIndonesianStemmer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisIdIndonesianStemmer 1
 #endif
-#undef OrgApacheLuceneAnalysisIdIndonesianStemmer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisIdIndonesianStemmer
 
-#if !defined (_OrgApacheLuceneAnalysisIdIndonesianStemmer_) && (OrgApacheLuceneAnalysisIdIndonesianStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisIdIndonesianStemmer_INCLUDE)
-#define _OrgApacheLuceneAnalysisIdIndonesianStemmer_
+#if !defined (OrgApacheLuceneAnalysisIdIndonesianStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisIdIndonesianStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisIdIndonesianStemmer))
+#define OrgApacheLuceneAnalysisIdIndonesianStemmer_
 
 @class IOSCharArray;
 
+/*!
+ @brief Stemmer for Indonesian.
+ <p>
+ Stems Indonesian words with the algorithm presented in:
+ <i>A Study of Stemming Effects on Information Retrieval in 
+ Bahasa Indonesia</i>, Fadillah Z Tala.
+ http://www.illc.uva.nl/Publications/ResearchReports/MoL-2003-02.text.pdf
+ */
 @interface OrgApacheLuceneAnalysisIdIndonesianStemmer : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @brief Stem a term (returning its new length).
+ <p>
+ Use <code>stemDerivational</code> to control whether full stemming
+ or only light inflectional stemming is done.
+ */
 - (jint)stemWithCharArray:(IOSCharArray *)text
                   withInt:(jint)length
               withBoolean:(jboolean)stemDerivational;
@@ -36,8 +50,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisIdIndonesianStemmer_init(OrgApache
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisIdIndonesianStemmer *new_OrgApacheLuceneAnalysisIdIndonesianStemmer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisIdIndonesianStemmer *create_OrgApacheLuceneAnalysisIdIndonesianStemmer_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisIdIndonesianStemmer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisIdIndonesianStemmer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisIdIndonesianStemmer")

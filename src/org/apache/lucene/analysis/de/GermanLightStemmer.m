@@ -86,7 +86,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "stEndingWithChar:", "stEnding", "Z", 0x2, NULL, NULL },
     { "step1WithCharArray:withInt:", "step1", "I", 0x2, NULL, NULL },
     { "step2WithCharArray:withInt:", "step2", "I", 0x2, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "GermanLightStemmer", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisDeGermanLightStemmer = { 2, "GermanLightStemmer", "org.apache.lucene.analysis.de", NULL, 0x1, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisDeGermanLightStemmer;
@@ -114,7 +114,7 @@ jboolean OrgApacheLuceneAnalysisDeGermanLightStemmer_stEndingWithChar_(OrgApache
 
 jint OrgApacheLuceneAnalysisDeGermanLightStemmer_step1WithCharArray_withInt_(OrgApacheLuceneAnalysisDeGermanLightStemmer *self, IOSCharArray *s, jint len) {
   if (len > 5 && IOSCharArray_Get(nil_chk(s), len - 3) == 'e' && IOSCharArray_Get(s, len - 2) == 'r' && IOSCharArray_Get(s, len - 1) == 'n') return len - 3;
-  if (len > 4 && IOSCharArray_Get(nil_chk(s), len - 2) == 'e') switch (IOSCharArray_Get(s, len - 1)) {
+  if (len > 4 && IOSCharArray_Get(nil_chk(s), len - 2) == 'e') switch (IOSCharArray_Get(nil_chk(s), len - 1)) {
     case 'm':
     case 'n':
     case 'r':
@@ -138,9 +138,11 @@ void OrgApacheLuceneAnalysisDeGermanLightStemmer_init(OrgApacheLuceneAnalysisDeG
 }
 
 OrgApacheLuceneAnalysisDeGermanLightStemmer *new_OrgApacheLuceneAnalysisDeGermanLightStemmer_init() {
-  OrgApacheLuceneAnalysisDeGermanLightStemmer *self = [OrgApacheLuceneAnalysisDeGermanLightStemmer alloc];
-  OrgApacheLuceneAnalysisDeGermanLightStemmer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisDeGermanLightStemmer, init)
+}
+
+OrgApacheLuceneAnalysisDeGermanLightStemmer *create_OrgApacheLuceneAnalysisDeGermanLightStemmer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisDeGermanLightStemmer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisDeGermanLightStemmer)

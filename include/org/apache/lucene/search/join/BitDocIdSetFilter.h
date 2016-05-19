@@ -5,23 +5,23 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchJoinBitDocIdSetFilter_INCLUDE_ALL")
-#if OrgApacheLuceneSearchJoinBitDocIdSetFilter_RESTRICT
-#define OrgApacheLuceneSearchJoinBitDocIdSetFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinBitDocIdSetFilter")
+#ifdef RESTRICT_OrgApacheLuceneSearchJoinBitDocIdSetFilter
+#define INCLUDE_ALL_OrgApacheLuceneSearchJoinBitDocIdSetFilter 0
 #else
-#define OrgApacheLuceneSearchJoinBitDocIdSetFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchJoinBitDocIdSetFilter 1
 #endif
-#undef OrgApacheLuceneSearchJoinBitDocIdSetFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchJoinBitDocIdSetFilter
 
-#if !defined (_OrgApacheLuceneSearchJoinBitDocIdSetFilter_) && (OrgApacheLuceneSearchJoinBitDocIdSetFilter_INCLUDE_ALL || OrgApacheLuceneSearchJoinBitDocIdSetFilter_INCLUDE)
-#define _OrgApacheLuceneSearchJoinBitDocIdSetFilter_
+#if !defined (OrgApacheLuceneSearchJoinBitDocIdSetFilter_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinBitDocIdSetFilter || defined(INCLUDE_OrgApacheLuceneSearchJoinBitDocIdSetFilter))
+#define OrgApacheLuceneSearchJoinBitDocIdSetFilter_
 
-#define OrgApacheLuceneSearchFilter_RESTRICT 1
-#define OrgApacheLuceneSearchFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchFilter 1
+#define INCLUDE_OrgApacheLuceneSearchFilter 1
 #include "org/apache/lucene/search/Filter.h"
 
-#define OrgApacheLuceneSearchJoinBitSetProducer_RESTRICT 1
-#define OrgApacheLuceneSearchJoinBitSetProducer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchJoinBitSetProducer 1
+#define INCLUDE_OrgApacheLuceneSearchJoinBitSetProducer 1
 #include "org/apache/lucene/search/join/BitSetProducer.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
@@ -30,12 +30,19 @@
 @class OrgApacheLuceneUtilBitSet;
 @protocol OrgApacheLuceneUtilBits;
 
+/*!
+ @brief A <code>Filter</code> that produces <code>BitDocIdSet</code>s.
+ */
 @interface OrgApacheLuceneSearchJoinBitDocIdSetFilter : OrgApacheLuceneSearchFilter < OrgApacheLuceneSearchJoinBitSetProducer >
 
 #pragma mark Public
 
 - (OrgApacheLuceneUtilBitSet *)getBitSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
+/*!
+ @brief Same as <code>getDocIdSet(LeafReaderContext,Bits)</code> but does not take
+ acceptDocs into account and guarantees to return a <code>BitDocIdSet</code>.
+ */
 - (OrgApacheLuceneUtilBitDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
 - (OrgApacheLuceneSearchDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
@@ -43,6 +50,9 @@
 
 #pragma mark Protected
 
+/*!
+ @brief Sole constructor, typically called from sub-classes.
+ */
 - (instancetype)init;
 
 @end
@@ -55,4 +65,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinBitDocIdSetFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchJoinBitDocIdSetFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinBitDocIdSetFilter")

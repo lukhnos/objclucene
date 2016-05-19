@@ -15,8 +15,9 @@
 #include "org/apache/lucene/analysis/util/TokenizerFactory.h"
 #include "org/apache/lucene/util/AttributeFactory.h"
 
-static OrgApacheLuceneAnalysisUtilAnalysisSPILoader *OrgApacheLuceneAnalysisUtilTokenizerFactory_loader_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisUtilTokenizerFactory, loader_, OrgApacheLuceneAnalysisUtilAnalysisSPILoader *)
+inline OrgApacheLuceneAnalysisUtilAnalysisSPILoader *OrgApacheLuceneAnalysisUtilTokenizerFactory_get_loader();
+static OrgApacheLuceneAnalysisUtilAnalysisSPILoader *OrgApacheLuceneAnalysisUtilTokenizerFactory_loader;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisUtilTokenizerFactory, loader, OrgApacheLuceneAnalysisUtilAnalysisSPILoader *)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisUtilTokenizerFactory)
 
@@ -45,7 +46,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisUtilTokenizerFactory)
 }
 
 - (OrgApacheLuceneAnalysisTokenizer *)create {
-  return [self createWithOrgApacheLuceneUtilAttributeFactory:JreLoadStatic(OrgApacheLuceneAnalysisTokenStream, DEFAULT_TOKEN_ATTRIBUTE_FACTORY_)];
+  return [self createWithOrgApacheLuceneUtilAttributeFactory:JreLoadStatic(OrgApacheLuceneAnalysisTokenStream, DEFAULT_TOKEN_ATTRIBUTE_FACTORY)];
 }
 
 - (OrgApacheLuceneAnalysisTokenizer *)createWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory {
@@ -56,23 +57,23 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisUtilTokenizerFactory)
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisUtilTokenizerFactory class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisUtilTokenizerFactory_loader_, new_OrgApacheLuceneAnalysisUtilAnalysisSPILoader_initWithIOSClass_(OrgApacheLuceneAnalysisUtilTokenizerFactory_class_()));
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisUtilTokenizerFactory_loader, new_OrgApacheLuceneAnalysisUtilAnalysisSPILoader_initWithIOSClass_(OrgApacheLuceneAnalysisUtilTokenizerFactory_class_()));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisUtilTokenizerFactory)
   }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "forNameWithNSString:withJavaUtilMap:", "forName", "Lorg.apache.lucene.analysis.util.TokenizerFactory;", 0x9, NULL, NULL },
-    { "lookupClassWithNSString:", "lookupClass", "Ljava.lang.Class;", 0x9, NULL, NULL },
-    { "availableTokenizers", NULL, "Ljava.util.Set;", 0x9, NULL, NULL },
+    { "forNameWithNSString:withJavaUtilMap:", "forName", "Lorg.apache.lucene.analysis.util.TokenizerFactory;", 0x9, NULL, "(Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)Lorg/apache/lucene/analysis/util/TokenizerFactory;" },
+    { "lookupClassWithNSString:", "lookupClass", "Ljava.lang.Class;", 0x9, NULL, "(Ljava/lang/String;)Ljava/lang/Class<+Lorg/apache/lucene/analysis/util/TokenizerFactory;>;" },
+    { "availableTokenizers", NULL, "Ljava.util.Set;", 0x9, NULL, "()Ljava/util/Set<Ljava/lang/String;>;" },
     { "reloadTokenizersWithJavaLangClassLoader:", "reloadTokenizers", "V", 0x9, NULL, NULL },
-    { "initWithJavaUtilMap:", "TokenizerFactory", NULL, 0x4, NULL, NULL },
+    { "initWithJavaUtilMap:", "TokenizerFactory", NULL, 0x4, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "create", NULL, "Lorg.apache.lucene.analysis.Tokenizer;", 0x11, NULL, NULL },
     { "createWithOrgApacheLuceneUtilAttributeFactory:", "create", "Lorg.apache.lucene.analysis.Tokenizer;", 0x401, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "loader_", NULL, 0x1a, "Lorg.apache.lucene.analysis.util.AnalysisSPILoader;", &OrgApacheLuceneAnalysisUtilTokenizerFactory_loader_, "Lorg/apache/lucene/analysis/util/AnalysisSPILoader<Lorg/apache/lucene/analysis/util/TokenizerFactory;>;", .constantValue.asLong = 0 },
+    { "loader", "loader", 0x1a, "Lorg.apache.lucene.analysis.util.AnalysisSPILoader;", &OrgApacheLuceneAnalysisUtilTokenizerFactory_loader, "Lorg/apache/lucene/analysis/util/AnalysisSPILoader<Lorg/apache/lucene/analysis/util/TokenizerFactory;>;", .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilTokenizerFactory = { 2, "TokenizerFactory", "org.apache.lucene.analysis.util", NULL, 0x401, 7, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisUtilTokenizerFactory;
@@ -82,22 +83,22 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisUtilTokenizerFactory)
 
 OrgApacheLuceneAnalysisUtilTokenizerFactory *OrgApacheLuceneAnalysisUtilTokenizerFactory_forNameWithNSString_withJavaUtilMap_(NSString *name, id<JavaUtilMap> args) {
   OrgApacheLuceneAnalysisUtilTokenizerFactory_initialize();
-  return [((OrgApacheLuceneAnalysisUtilAnalysisSPILoader *) nil_chk(OrgApacheLuceneAnalysisUtilTokenizerFactory_loader_)) newInstanceWithNSString:name withJavaUtilMap:args];
+  return [((OrgApacheLuceneAnalysisUtilAnalysisSPILoader *) nil_chk(OrgApacheLuceneAnalysisUtilTokenizerFactory_loader)) newInstanceWithNSString:name withJavaUtilMap:args];
 }
 
 IOSClass *OrgApacheLuceneAnalysisUtilTokenizerFactory_lookupClassWithNSString_(NSString *name) {
   OrgApacheLuceneAnalysisUtilTokenizerFactory_initialize();
-  return [((OrgApacheLuceneAnalysisUtilAnalysisSPILoader *) nil_chk(OrgApacheLuceneAnalysisUtilTokenizerFactory_loader_)) lookupClassWithNSString:name];
+  return [((OrgApacheLuceneAnalysisUtilAnalysisSPILoader *) nil_chk(OrgApacheLuceneAnalysisUtilTokenizerFactory_loader)) lookupClassWithNSString:name];
 }
 
 id<JavaUtilSet> OrgApacheLuceneAnalysisUtilTokenizerFactory_availableTokenizers() {
   OrgApacheLuceneAnalysisUtilTokenizerFactory_initialize();
-  return [((OrgApacheLuceneAnalysisUtilAnalysisSPILoader *) nil_chk(OrgApacheLuceneAnalysisUtilTokenizerFactory_loader_)) availableServices];
+  return [((OrgApacheLuceneAnalysisUtilAnalysisSPILoader *) nil_chk(OrgApacheLuceneAnalysisUtilTokenizerFactory_loader)) availableServices];
 }
 
 void OrgApacheLuceneAnalysisUtilTokenizerFactory_reloadTokenizersWithJavaLangClassLoader_(JavaLangClassLoader *classloader) {
   OrgApacheLuceneAnalysisUtilTokenizerFactory_initialize();
-  [((OrgApacheLuceneAnalysisUtilAnalysisSPILoader *) nil_chk(OrgApacheLuceneAnalysisUtilTokenizerFactory_loader_)) reloadWithJavaLangClassLoader:classloader];
+  [((OrgApacheLuceneAnalysisUtilAnalysisSPILoader *) nil_chk(OrgApacheLuceneAnalysisUtilTokenizerFactory_loader)) reloadWithJavaLangClassLoader:classloader];
 }
 
 void OrgApacheLuceneAnalysisUtilTokenizerFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisUtilTokenizerFactory *self, id<JavaUtilMap> args) {

@@ -3,11 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/search/spans/SpanCollector.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "org/apache/lucene/index/PostingsEnum.h"
-#include "org/apache/lucene/index/Term.h"
 #include "org/apache/lucene/search/spans/SpanCollector.h"
 
 @interface OrgApacheLuceneSearchSpansSpanCollector : NSObject

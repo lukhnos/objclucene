@@ -3,14 +3,17 @@
 //  source: ./queries/src/java/org/apache/lucene/queries/function/valuesource/package-info.java
 //
 
+/*!
+ @brief A variety of functions to use with FunctionQuery.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionValuesourcePackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionValuesourcePackage_info_RESTRICT
-#define OrgApacheLuceneQueriesFunctionValuesourcePackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourcePackage_info")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourcePackage_info
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourcePackage_info 0
 #else
-#define OrgApacheLuceneQueriesFunctionValuesourcePackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourcePackage_info 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionValuesourcePackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourcePackage_info
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionValuesourcePackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourcePackage_info")

@@ -3,14 +3,17 @@
 //  source: ./suggest/src/java/org/apache/lucene/search/suggest/document/package-info.java
 //
 
+/*!
+ @brief Support for document suggestion
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSuggestDocumentPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSuggestDocumentPackage_info_RESTRICT
-#define OrgApacheLuceneSearchSuggestDocumentPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneSearchSuggestDocumentPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentPackage_info 0
 #else
-#define OrgApacheLuceneSearchSuggestDocumentPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentPackage_info 1
 #endif
-#undef OrgApacheLuceneSearchSuggestDocumentPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSuggestDocumentPackage_info
 
-#pragma pop_macro("OrgApacheLuceneSearchSuggestDocumentPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentPackage_info")

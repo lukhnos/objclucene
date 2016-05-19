@@ -5,27 +5,34 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneStoreBaseDirectory_INCLUDE_ALL")
-#if OrgApacheLuceneStoreBaseDirectory_RESTRICT
-#define OrgApacheLuceneStoreBaseDirectory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneStoreBaseDirectory")
+#ifdef RESTRICT_OrgApacheLuceneStoreBaseDirectory
+#define INCLUDE_ALL_OrgApacheLuceneStoreBaseDirectory 0
 #else
-#define OrgApacheLuceneStoreBaseDirectory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneStoreBaseDirectory 1
 #endif
-#undef OrgApacheLuceneStoreBaseDirectory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneStoreBaseDirectory
 
-#if !defined (_OrgApacheLuceneStoreBaseDirectory_) && (OrgApacheLuceneStoreBaseDirectory_INCLUDE_ALL || OrgApacheLuceneStoreBaseDirectory_INCLUDE)
-#define _OrgApacheLuceneStoreBaseDirectory_
+#if !defined (OrgApacheLuceneStoreBaseDirectory_) && (INCLUDE_ALL_OrgApacheLuceneStoreBaseDirectory || defined(INCLUDE_OrgApacheLuceneStoreBaseDirectory))
+#define OrgApacheLuceneStoreBaseDirectory_
 
-#define OrgApacheLuceneStoreDirectory_RESTRICT 1
-#define OrgApacheLuceneStoreDirectory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreDirectory 1
+#define INCLUDE_OrgApacheLuceneStoreDirectory 1
 #include "org/apache/lucene/store/Directory.h"
 
 @class OrgApacheLuceneStoreLock;
 @class OrgApacheLuceneStoreLockFactory;
 
+/*!
+ @brief Base implementation for a concrete <code>Directory</code> that uses a <code>LockFactory</code> for locking.
+ */
 @interface OrgApacheLuceneStoreBaseDirectory : OrgApacheLuceneStoreDirectory {
  @public
   volatile_jboolean isOpen_;
+  /*!
+   @brief Holds the LockFactory instance (implements locking for
+ this Directory instance).
+   */
   OrgApacheLuceneStoreLockFactory *lockFactory_;
 }
 
@@ -37,6 +44,9 @@
 
 #pragma mark Protected
 
+/*!
+ @brief Sole constructor.
+ */
 - (instancetype)initWithOrgApacheLuceneStoreLockFactory:(OrgApacheLuceneStoreLockFactory *)lockFactory;
 
 - (void)ensureOpen;
@@ -53,4 +63,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreBaseDirectory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneStoreBaseDirectory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreBaseDirectory")

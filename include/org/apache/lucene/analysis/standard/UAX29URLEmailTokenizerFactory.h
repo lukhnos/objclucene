@@ -5,29 +5,42 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory_RESTRICT
-#define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory 0
 #else
-#define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory
 
-#if !defined (_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory_) && (OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory_
+#if !defined (OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory || defined(INCLUDE_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory))
+#define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenizerFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenizerFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenizerFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenizerFactory 1
 #include "org/apache/lucene/analysis/util/TokenizerFactory.h"
 
 @class OrgApacheLuceneAnalysisTokenizer;
 @class OrgApacheLuceneUtilAttributeFactory;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>UAX29URLEmailTokenizer</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_urlemail" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.UAX29URLEmailTokenizerFactory" maxTokenLength="255"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode 
+ */
 @interface OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory : OrgApacheLuceneAnalysisUtilTokenizerFactory
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new UAX29URLEmailTokenizerFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenizer *)createWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
@@ -40,8 +53,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFact
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory *new_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory *create_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory")

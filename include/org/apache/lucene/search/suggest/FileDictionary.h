@@ -5,36 +5,88 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSuggestFileDictionary_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSuggestFileDictionary_RESTRICT
-#define OrgApacheLuceneSearchSuggestFileDictionary_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestFileDictionary")
+#ifdef RESTRICT_OrgApacheLuceneSearchSuggestFileDictionary
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestFileDictionary 0
 #else
-#define OrgApacheLuceneSearchSuggestFileDictionary_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestFileDictionary 1
 #endif
-#undef OrgApacheLuceneSearchSuggestFileDictionary_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSuggestFileDictionary
 
-#if !defined (_OrgApacheLuceneSearchSuggestFileDictionary_) && (OrgApacheLuceneSearchSuggestFileDictionary_INCLUDE_ALL || OrgApacheLuceneSearchSuggestFileDictionary_INCLUDE)
-#define _OrgApacheLuceneSearchSuggestFileDictionary_
+#if !defined (OrgApacheLuceneSearchSuggestFileDictionary_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestFileDictionary || defined(INCLUDE_OrgApacheLuceneSearchSuggestFileDictionary))
+#define OrgApacheLuceneSearchSuggestFileDictionary_
 
-#define OrgApacheLuceneSearchSpellDictionary_RESTRICT 1
-#define OrgApacheLuceneSearchSpellDictionary_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSpellDictionary 1
+#define INCLUDE_OrgApacheLuceneSearchSpellDictionary 1
 #include "org/apache/lucene/search/spell/Dictionary.h"
 
 @class JavaIoInputStream;
 @class JavaIoReader;
 @protocol OrgApacheLuceneSearchSuggestInputIterator;
 
+/*!
+ @brief Dictionary represented by a text file.
+ <p>Format allowed: 1 entry per line:<br>
+ An entry can be: <br>
+ <ul>
+ <li>suggestion</li>
+ <li>suggestion <code>fieldDelimiter</code> weight</li>
+ <li>suggestion <code>fieldDelimiter</code> weight <code>fieldDelimiter</code> payload</li>
+ </ul>
+ where the default <code>fieldDelimiter</code> is #DEFAULT_FIELD_DELIMITER<br>
+ <p>
+ <b>NOTE:</b> 
+ <ul>
+ <li>In order to have payload enabled, the first entry has to have a payload</li>
+ <li>If the weight for an entry is not specified then a value of 1 is used</li>
+ <li>A payload cannot be specified without having the weight specified for an entry</li>
+ <li>If the payload for an entry is not specified (assuming payload is enabled) 
+ then an empty payload is returned</li>
+ <li>An entry cannot have more than two <code>fieldDelimiter</code></li>
+ </ul>
+ <p>
+ <b>Example:</b><br>
+ word1 word2 TAB 100 TAB payload1<br>
+ word3 TAB 101<br>
+ word4 word3 TAB 102<br>
+ */
 @interface OrgApacheLuceneSearchSuggestFileDictionary : NSObject < OrgApacheLuceneSearchSpellDictionary >
+
++ (NSString *)DEFAULT_FIELD_DELIMITER;
 
 #pragma mark Public
 
+/*!
+ @brief Creates a dictionary based on an inputstream.
+ Using <code>DEFAULT_FIELD_DELIMITER</code> as the 
+ field seperator in a line.
+ <p>
+ NOTE: content is treated as UTF-8
+ */
 - (instancetype)initWithJavaIoInputStream:(JavaIoInputStream *)dictFile;
 
+/*!
+ @brief Creates a dictionary based on an inputstream.
+ Using <code>fieldDelimiter</code> to seperate out the
+ fields in a line.
+ <p>
+ NOTE: content is treated as UTF-8
+ */
 - (instancetype)initWithJavaIoInputStream:(JavaIoInputStream *)dictFile
                              withNSString:(NSString *)fieldDelimiter;
 
+/*!
+ @brief Creates a dictionary based on a reader.
+ Using <code>DEFAULT_FIELD_DELIMITER</code> as the 
+ field seperator in a line.
+ */
 - (instancetype)initWithJavaIoReader:(JavaIoReader *)reader;
 
+/*!
+ @brief Creates a dictionary based on a reader.
+ Using <code>fieldDelimiter</code> to seperate out the
+ fields in a line.
+ */
 - (instancetype)initWithJavaIoReader:(JavaIoReader *)reader
                         withNSString:(NSString *)fieldDelimiter;
 
@@ -44,34 +96,47 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestFileDictionary)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneSearchSuggestFileDictionary_DEFAULT_FIELD_DELIMITER_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSuggestFileDictionary, DEFAULT_FIELD_DELIMITER_, NSString *)
+/*!
+ @brief Tab-delimited fields are most common thus the default, but one can override this via the constructor
+ */
+inline NSString *OrgApacheLuceneSearchSuggestFileDictionary_get_DEFAULT_FIELD_DELIMITER();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneSearchSuggestFileDictionary_DEFAULT_FIELD_DELIMITER;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchSuggestFileDictionary, DEFAULT_FIELD_DELIMITER, NSString *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestFileDictionary_initWithJavaIoInputStream_(OrgApacheLuceneSearchSuggestFileDictionary *self, JavaIoInputStream *dictFile);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFileDictionary *new_OrgApacheLuceneSearchSuggestFileDictionary_initWithJavaIoInputStream_(JavaIoInputStream *dictFile) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFileDictionary *create_OrgApacheLuceneSearchSuggestFileDictionary_initWithJavaIoInputStream_(JavaIoInputStream *dictFile);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestFileDictionary_initWithJavaIoReader_(OrgApacheLuceneSearchSuggestFileDictionary *self, JavaIoReader *reader);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFileDictionary *new_OrgApacheLuceneSearchSuggestFileDictionary_initWithJavaIoReader_(JavaIoReader *reader) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFileDictionary *create_OrgApacheLuceneSearchSuggestFileDictionary_initWithJavaIoReader_(JavaIoReader *reader);
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestFileDictionary_initWithJavaIoReader_withNSString_(OrgApacheLuceneSearchSuggestFileDictionary *self, JavaIoReader *reader, NSString *fieldDelimiter);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFileDictionary *new_OrgApacheLuceneSearchSuggestFileDictionary_initWithJavaIoReader_withNSString_(JavaIoReader *reader, NSString *fieldDelimiter) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFileDictionary *create_OrgApacheLuceneSearchSuggestFileDictionary_initWithJavaIoReader_withNSString_(JavaIoReader *reader, NSString *fieldDelimiter);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestFileDictionary_initWithJavaIoInputStream_withNSString_(OrgApacheLuceneSearchSuggestFileDictionary *self, JavaIoInputStream *dictFile, NSString *fieldDelimiter);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFileDictionary *new_OrgApacheLuceneSearchSuggestFileDictionary_initWithJavaIoInputStream_withNSString_(JavaIoInputStream *dictFile, NSString *fieldDelimiter) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFileDictionary *create_OrgApacheLuceneSearchSuggestFileDictionary_initWithJavaIoInputStream_withNSString_(JavaIoInputStream *dictFile, NSString *fieldDelimiter);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestFileDictionary)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchSuggestFileDictionary_FileIterator_) && (OrgApacheLuceneSearchSuggestFileDictionary_INCLUDE_ALL || OrgApacheLuceneSearchSuggestFileDictionary_FileIterator_INCLUDE)
-#define _OrgApacheLuceneSearchSuggestFileDictionary_FileIterator_
+#if !defined (OrgApacheLuceneSearchSuggestFileDictionary_FileIterator_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestFileDictionary || defined(INCLUDE_OrgApacheLuceneSearchSuggestFileDictionary_FileIterator))
+#define OrgApacheLuceneSearchSuggestFileDictionary_FileIterator_
 
-#define OrgApacheLuceneSearchSuggestInputIterator_RESTRICT 1
-#define OrgApacheLuceneSearchSuggestInputIterator_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSuggestInputIterator 1
+#define INCLUDE_OrgApacheLuceneSearchSuggestInputIterator 1
 #include "org/apache/lucene/search/suggest/InputIterator.h"
 
 @class OrgApacheLuceneUtilBytesRef;
@@ -101,4 +166,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestFileDictionary_FileIterat
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSuggestFileDictionary_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestFileDictionary")

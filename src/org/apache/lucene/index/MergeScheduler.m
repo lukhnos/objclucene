@@ -21,7 +21,7 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)mergeWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
-        withOrgApacheLuceneIndexMergeTriggerEnum:(OrgApacheLuceneIndexMergeTriggerEnum *)trigger
+            withOrgApacheLuceneIndexMergeTrigger:(OrgApacheLuceneIndexMergeTrigger *)trigger
                                      withBoolean:(jboolean)newMergesFound {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
@@ -52,7 +52,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "MergeScheduler", NULL, 0x4, NULL, NULL },
-    { "mergeWithOrgApacheLuceneIndexIndexWriter:withOrgApacheLuceneIndexMergeTriggerEnum:withBoolean:", "merge", "V", 0x401, "Ljava.io.IOException;", NULL },
+    { "mergeWithOrgApacheLuceneIndexIndexWriter:withOrgApacheLuceneIndexMergeTrigger:withBoolean:", "merge", "V", 0x401, "Ljava.io.IOException;", NULL },
     { "close", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
     { "setInfoStreamWithOrgApacheLuceneUtilInfoStream:", "setInfoStream", "V", 0x10, NULL, NULL },
     { "verbose", NULL, "Z", 0x4, NULL, NULL },

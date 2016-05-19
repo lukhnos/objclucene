@@ -16,6 +16,9 @@
 
 @interface OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity () {
  @public
+  /*!
+   @brief The &mu; parameter.
+   */
   jfloat mu_;
 }
 
@@ -49,7 +52,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (jfloat)scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
                                                      withFloat:(jfloat)freq
                                                      withFloat:(jfloat)docLen {
-  jfloat score = [((OrgApacheLuceneSearchSimilaritiesBasicStats *) nil_chk(stats)) getTotalBoost] * (jfloat) (JavaLangMath_logWithDouble_(1 + freq / (mu_ * [((OrgApacheLuceneSearchSimilaritiesLMSimilarity_LMStats *) check_class_cast(stats, [OrgApacheLuceneSearchSimilaritiesLMSimilarity_LMStats class])) getCollectionProbability])) + JavaLangMath_logWithDouble_(mu_ / (docLen + mu_)));
+  jfloat score = [((OrgApacheLuceneSearchSimilaritiesBasicStats *) nil_chk(stats)) getTotalBoost] * (jfloat) (JavaLangMath_logWithDouble_(1 + freq / (mu_ * [((OrgApacheLuceneSearchSimilaritiesLMSimilarity_LMStats *) cast_chk(stats, [OrgApacheLuceneSearchSimilaritiesLMSimilarity_LMStats class])) getCollectionProbability])) + JavaLangMath_logWithDouble_(mu_ / (docLen + mu_)));
   return score > 0.0f ? score : 0.0f;
 }
 
@@ -62,7 +65,7 @@ withOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilariti
     [((id<JavaUtilList>) nil_chk(subs)) addWithId:OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_([stats getTotalBoost], @"boost", [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()])];
   }
   [((id<JavaUtilList>) nil_chk(subs)) addWithId:OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_(mu_, @"mu", [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()])];
-  OrgApacheLuceneSearchExplanation *weightExpl = OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_((jfloat) JavaLangMath_logWithDouble_(1 + freq / (mu_ * [((OrgApacheLuceneSearchSimilaritiesLMSimilarity_LMStats *) check_class_cast(stats, [OrgApacheLuceneSearchSimilaritiesLMSimilarity_LMStats class])) getCollectionProbability])), @"term weight", [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]);
+  OrgApacheLuceneSearchExplanation *weightExpl = OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_((jfloat) JavaLangMath_logWithDouble_(1 + freq / (mu_ * [((OrgApacheLuceneSearchSimilaritiesLMSimilarity_LMStats *) cast_chk(stats, [OrgApacheLuceneSearchSimilaritiesLMSimilarity_LMStats class])) getCollectionProbability])), @"term weight", [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]);
   [subs addWithId:weightExpl];
   [subs addWithId:OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_((jfloat) JavaLangMath_logWithDouble_(mu_ / (docLen + mu_)), @"document norm", [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()])];
   [super explainWithJavaUtilList:subs withOrgApacheLuceneSearchSimilaritiesBasicStats:stats withInt:doc withFloat:freq withFloat:docLen];
@@ -73,7 +76,7 @@ withOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilariti
 }
 
 - (NSString *)getName {
-  return NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT_), @"Dirichlet(%f)", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangFloat_valueOfWithFloat_([self getMu]) } count:1 type:NSObject_class_()]);
+  return NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"Dirichlet(%f)", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangFloat_valueOfWithFloat_([self getMu]) } count:1 type:NSObject_class_()]);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -83,7 +86,7 @@ withOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilariti
     { "initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel:", "LMDirichletSimilarity", NULL, 0x1, NULL, NULL },
     { "init", "LMDirichletSimilarity", NULL, 0x1, NULL, NULL },
     { "scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:withFloat:", "score", "F", 0x4, NULL, NULL },
-    { "explainWithJavaUtilList:withOrgApacheLuceneSearchSimilaritiesBasicStats:withInt:withFloat:withFloat:", "explain", "V", 0x4, NULL, NULL },
+    { "explainWithJavaUtilList:withOrgApacheLuceneSearchSimilaritiesBasicStats:withInt:withFloat:withFloat:", "explain", "V", 0x4, NULL, "(Ljava/util/List<Lorg/apache/lucene/search/Explanation;>;Lorg/apache/lucene/search/similarities/BasicStats;IFF)V" },
     { "getMu", NULL, "F", 0x1, NULL, NULL },
     { "getName", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
   };
@@ -102,9 +105,11 @@ void OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity_initWithOrgApacheLuc
 }
 
 OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity *new_OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity_initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel_withFloat_(id<OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel> collectionModel, jfloat mu) {
-  OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity *self = [OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity alloc];
-  OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity_initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel_withFloat_(self, collectionModel, mu);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity, initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel_withFloat_, collectionModel, mu)
+}
+
+OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity *create_OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity_initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel_withFloat_(id<OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel> collectionModel, jfloat mu) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity, initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel_withFloat_, collectionModel, mu)
 }
 
 void OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity_initWithFloat_(OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity *self, jfloat mu) {
@@ -113,9 +118,11 @@ void OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity_initWithFloat_(OrgAp
 }
 
 OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity *new_OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity_initWithFloat_(jfloat mu) {
-  OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity *self = [OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity alloc];
-  OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity_initWithFloat_(self, mu);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity, initWithFloat_, mu)
+}
+
+OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity *create_OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity_initWithFloat_(jfloat mu) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity, initWithFloat_, mu)
 }
 
 void OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity_initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel_(OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity *self, id<OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel> collectionModel) {
@@ -123,9 +130,11 @@ void OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity_initWithOrgApacheLuc
 }
 
 OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity *new_OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity_initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel_(id<OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel> collectionModel) {
-  OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity *self = [OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity alloc];
-  OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity_initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel_(self, collectionModel);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity, initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel_, collectionModel)
+}
+
+OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity *create_OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity_initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel_(id<OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel> collectionModel) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity, initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel_, collectionModel)
 }
 
 void OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity_init(OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity *self) {
@@ -133,9 +142,11 @@ void OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity_init(OrgApacheLucene
 }
 
 OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity *new_OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity_init() {
-  OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity *self = [OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity alloc];
-  OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity, init)
+}
+
+OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity *create_OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity)

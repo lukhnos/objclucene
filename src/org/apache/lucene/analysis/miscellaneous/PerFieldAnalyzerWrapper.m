@@ -53,7 +53,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper,
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneAnalysisAnalyzer:", "PerFieldAnalyzerWrapper", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:withJavaUtilMap:", "PerFieldAnalyzerWrapper", NULL, 0x1, NULL, NULL },
+    { "initWithOrgApacheLuceneAnalysisAnalyzer:withJavaUtilMap:", "PerFieldAnalyzerWrapper", NULL, 0x1, NULL, "(Lorg/apache/lucene/analysis/Analyzer;Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/analysis/Analyzer;>;)V" },
     { "getWrappedAnalyzerWithNSString:", "getWrappedAnalyzer", "Lorg.apache.lucene.analysis.Analyzer;", 0x4, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
@@ -72,21 +72,25 @@ void OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper_initWithOrgApac
 }
 
 OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper *new_OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *defaultAnalyzer) {
-  OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper *self = [OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper alloc];
-  OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_(self, defaultAnalyzer);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper, initWithOrgApacheLuceneAnalysisAnalyzer_, defaultAnalyzer)
+}
+
+OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper *create_OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *defaultAnalyzer) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper, initWithOrgApacheLuceneAnalysisAnalyzer_, defaultAnalyzer)
 }
 
 void OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_withJavaUtilMap_(OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper *self, OrgApacheLuceneAnalysisAnalyzer *defaultAnalyzer, id<JavaUtilMap> fieldAnalyzers) {
-  OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_(self, JreLoadStatic(OrgApacheLuceneAnalysisAnalyzer, PER_FIELD_REUSE_STRATEGY_));
+  OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_(self, JreLoadStatic(OrgApacheLuceneAnalysisAnalyzer, PER_FIELD_REUSE_STRATEGY));
   JreStrongAssign(&self->defaultAnalyzer_, defaultAnalyzer);
   JreStrongAssign(&self->fieldAnalyzers_, (fieldAnalyzers != nil) ? fieldAnalyzers : JavaUtilCollections_emptyMap());
 }
 
 OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper *new_OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_withJavaUtilMap_(OrgApacheLuceneAnalysisAnalyzer *defaultAnalyzer, id<JavaUtilMap> fieldAnalyzers) {
-  OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper *self = [OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper alloc];
-  OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_withJavaUtilMap_(self, defaultAnalyzer, fieldAnalyzers);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper, initWithOrgApacheLuceneAnalysisAnalyzer_withJavaUtilMap_, defaultAnalyzer, fieldAnalyzers)
+}
+
+OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper *create_OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_withJavaUtilMap_(OrgApacheLuceneAnalysisAnalyzer *defaultAnalyzer, id<JavaUtilMap> fieldAnalyzers) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper, initWithOrgApacheLuceneAnalysisAnalyzer_withJavaUtilMap_, defaultAnalyzer, fieldAnalyzers)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper)

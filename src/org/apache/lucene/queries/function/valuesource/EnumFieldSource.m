@@ -80,6 +80,8 @@ __attribute__((unused)) static void OrgApacheLuceneQueriesFunctionValuesourceEnu
 
 __attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource *outer$, OrgApacheLuceneIndexNumericDocValues *capture$0, id<OrgApacheLuceneUtilBits> capture$1, OrgApacheLuceneQueriesFunctionValueSource *arg$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource *outer$, OrgApacheLuceneIndexNumericDocValues *capture$0, id<OrgApacheLuceneUtilBits> capture$1, OrgApacheLuceneQueriesFunctionValueSource *arg$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1)
 
 @interface OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$1 : OrgApacheLuceneQueriesFunctionValueSourceScorer {
@@ -107,6 +109,8 @@ __attribute__((unused)) static void OrgApacheLuceneQueriesFunctionValuesourceEnu
 
 __attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_withInt_withInt_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1 *outer$, jint capture$0, jint capture$1, OrgApacheLuceneIndexIndexReader *arg$0, OrgApacheLuceneQueriesFunctionFunctionValues *arg$1) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_withInt_withInt_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1 *outer$, jint capture$0, jint capture$1, OrgApacheLuceneIndexIndexReader *arg$0, OrgApacheLuceneQueriesFunctionFunctionValues *arg$1);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$1)
 
 @interface OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$2 : OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller {
@@ -132,13 +136,19 @@ __attribute__((unused)) static void OrgApacheLuceneQueriesFunctionValuesourceEnu
 
 __attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$2 *new_OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$2_initWithOrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1 *outer$) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$2 *create_OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$2_initWithOrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1 *outer$);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$2)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource)
 
-JavaLangInteger *OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_DEFAULT_VALUE_;
+JavaLangInteger *OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_DEFAULT_VALUE;
 
 @implementation OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource
+
++ (JavaLangInteger *)DEFAULT_VALUE {
+  return OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_DEFAULT_VALUE;
+}
 
 - (instancetype)initWithNSString:(NSString *)field
                  withJavaUtilMap:(id<JavaUtilMap>)enumIntToStringMap
@@ -167,15 +177,15 @@ JavaLangInteger *OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_DEFAUL
                                  withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext {
   OrgApacheLuceneIndexNumericDocValues *arr = OrgApacheLuceneIndexDocValues_getNumericWithOrgApacheLuceneIndexLeafReader_withNSString_([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(readerContext)) reader], field_);
   id<OrgApacheLuceneUtilBits> valid = OrgApacheLuceneIndexDocValues_getDocsWithFieldWithOrgApacheLuceneIndexLeafReader_withNSString_([readerContext reader], field_);
-  return [new_OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneQueriesFunctionValueSource_(self, arr, valid, self) autorelease];
+  return create_OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneQueriesFunctionValueSource_(self, arr, valid, self);
 }
 
 - (jboolean)isEqual:(id)o {
   if (self == o) return true;
-  if (o == nil || [self getClass] != [o getClass]) return false;
+  if (o == nil || [self getClass] != (id) [o getClass]) return false;
   if (![super isEqual:o]) return false;
-  OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource *that = (OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource *) check_class_cast(o, [OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource class]);
-  if (![((id<JavaUtilMap>) nil_chk(enumIntToStringMap_)) isEqual:((OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource *) nil_chk(that))->enumIntToStringMap_]) return false;
+  OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource *that = (OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource *) cast_chk(o, [OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource class]);
+  if (![((id<JavaUtilMap>) nil_chk(enumIntToStringMap_)) isEqual:that->enumIntToStringMap_]) return false;
   if (![((id<JavaUtilMap>) nil_chk(enumStringToIntMap_)) isEqual:that->enumStringToIntMap_]) return false;
   return true;
 }
@@ -195,14 +205,14 @@ JavaLangInteger *OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_DEFAUL
 
 + (void)initialize {
   if (self == [OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource class]) {
-    JreStrongAssign(&OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_DEFAULT_VALUE_, JavaLangInteger_valueOfWithInt_(-1));
+    JreStrongAssign(&OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_DEFAULT_VALUE, JavaLangInteger_valueOfWithInt_(-1));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource)
   }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withJavaUtilMap:withJavaUtilMap:", "EnumFieldSource", NULL, 0x1, NULL, NULL },
+    { "initWithNSString:withJavaUtilMap:withJavaUtilMap:", "EnumFieldSource", NULL, 0x1, NULL, "(Ljava/lang/String;Ljava/util/Map<Ljava/lang/Integer;Ljava/lang/String;>;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Integer;>;)V" },
     { "tryParseIntWithNSString:", "tryParseInt", "Ljava.lang.Integer;", 0xa, NULL, NULL },
     { "intValueToStringValueWithJavaLangInteger:", "intValueToStringValue", "Ljava.lang.String;", 0x2, NULL, NULL },
     { "stringValueToIntValueWithNSString:", "stringValueToIntValue", "Ljava.lang.Integer;", 0x2, NULL, NULL },
@@ -212,7 +222,7 @@ JavaLangInteger *OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_DEFAUL
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_VALUE_", NULL, 0x18, "Ljava.lang.Integer;", &OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_DEFAULT_VALUE_, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_VALUE", "DEFAULT_VALUE", 0x18, "Ljava.lang.Integer;", &OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_DEFAULT_VALUE, NULL, .constantValue.asLong = 0 },
     { "enumIntToStringMap_", NULL, 0x10, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/Integer;Ljava/lang/String;>;", .constantValue.asLong = 0 },
     { "enumStringToIntMap_", NULL, 0x10, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Integer;>;", .constantValue.asLong = 0 },
   };
@@ -229,9 +239,11 @@ void OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_initWithNSString_w
 }
 
 OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource *new_OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_initWithNSString_withJavaUtilMap_withJavaUtilMap_(NSString *field, id<JavaUtilMap> enumIntToStringMap, id<JavaUtilMap> enumStringToIntMap) {
-  OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource *self = [OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource alloc];
-  OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_initWithNSString_withJavaUtilMap_withJavaUtilMap_(self, field, enumIntToStringMap, enumStringToIntMap);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource, initWithNSString_withJavaUtilMap_withJavaUtilMap_, field, enumIntToStringMap, enumStringToIntMap)
+}
+
+OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource *create_OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_initWithNSString_withJavaUtilMap_withJavaUtilMap_(NSString *field, id<JavaUtilMap> enumIntToStringMap, id<JavaUtilMap> enumStringToIntMap) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource, initWithNSString_withJavaUtilMap_withJavaUtilMap_, field, enumIntToStringMap, enumStringToIntMap)
 }
 
 JavaLangInteger *OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_tryParseIntWithNSString_(NSString *valueStr) {
@@ -249,7 +261,7 @@ NSString *OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_intValueToStr
   if (intVal == nil) return nil;
   NSString *enumString = [((id<JavaUtilMap>) nil_chk(self->enumIntToStringMap_)) getWithId:intVal];
   if (enumString != nil) return enumString;
-  return [((JavaLangInteger *) nil_chk(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_DEFAULT_VALUE_)) description];
+  return [((JavaLangInteger *) nil_chk(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_DEFAULT_VALUE)) description];
 }
 
 JavaLangInteger *OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_stringValueToIntValueWithNSString_(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource *self, NSString *stringVal) {
@@ -258,10 +270,10 @@ JavaLangInteger *OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_string
   JavaLangInteger *enumInt = [((id<JavaUtilMap>) nil_chk(self->enumStringToIntMap_)) getWithId:stringVal];
   if (enumInt != nil) return enumInt;
   intValue = OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_tryParseIntWithNSString_(stringVal);
-  if (intValue == nil) intValue = OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_DEFAULT_VALUE_;
+  if (intValue == nil) intValue = OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_DEFAULT_VALUE;
   NSString *enumString = [((id<JavaUtilMap>) nil_chk(self->enumIntToStringMap_)) getWithId:intValue];
   if (enumString != nil) return intValue;
-  return OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_DEFAULT_VALUE_;
+  return OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_DEFAULT_VALUE;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource)
@@ -300,13 +312,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceEnumFi
   else {
     if (!includeUpper && [upper intValue] > JavaLangInteger_MIN_VALUE) JreBoxedPostDecrInt(&upper);
   }
-  jint ll = [((JavaLangInteger *) nil_chk(lower)) intValue];
-  jint uu = [((JavaLangInteger *) nil_chk(upper)) intValue];
-  return [new_OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_withInt_withInt_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(self, ll, uu, reader, self) autorelease];
+  jint ll = [lower intValue];
+  jint uu = [upper intValue];
+  return create_OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_withInt_withInt_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(self, ll, uu, reader, self);
 }
 
 - (OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller *)getValueFiller {
-  return [new_OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$2_initWithOrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_(self) autorelease];
+  return create_OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$2_initWithOrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_(self);
 }
 
 - (instancetype)initWithOrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource:(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource *)outer$
@@ -356,9 +368,11 @@ void OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_initWithOrgApac
 }
 
 OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource *outer$, OrgApacheLuceneIndexNumericDocValues *capture$0, id<OrgApacheLuceneUtilBits> capture$1, OrgApacheLuceneQueriesFunctionValueSource *arg$0) {
-  OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1 *self = [OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1 alloc];
-  OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneQueriesFunctionValueSource_(self, outer$, capture$0, capture$1, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1, initWithOrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneQueriesFunctionValueSource_, outer$, capture$0, capture$1, arg$0)
+}
+
+OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource *outer$, OrgApacheLuceneIndexNumericDocValues *capture$0, id<OrgApacheLuceneUtilBits> capture$1, OrgApacheLuceneQueriesFunctionValueSource *arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1, initWithOrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_withOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_withOrgApacheLuceneQueriesFunctionValueSource_, outer$, capture$0, capture$1, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1)
@@ -409,9 +423,11 @@ void OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$1_initWithOrgA
 }
 
 OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_withInt_withInt_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1 *outer$, jint capture$0, jint capture$1, OrgApacheLuceneIndexIndexReader *arg$0, OrgApacheLuceneQueriesFunctionFunctionValues *arg$1) {
-  OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$1 *self = [OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$1 alloc];
-  OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_withInt_withInt_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(self, outer$, capture$0, capture$1, arg$0, arg$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$1, initWithOrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_withInt_withInt_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_, outer$, capture$0, capture$1, arg$0, arg$1)
+}
+
+OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_withInt_withInt_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1 *outer$, jint capture$0, jint capture$1, OrgApacheLuceneIndexIndexReader *arg$0, OrgApacheLuceneQueriesFunctionFunctionValues *arg$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$1, initWithOrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_withInt_withInt_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_, outer$, capture$0, capture$1, arg$0, arg$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$1)
@@ -462,9 +478,11 @@ void OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$2_initWithOrgA
 }
 
 OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$2 *new_OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$2_initWithOrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1 *outer$) {
-  OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$2 *self = [OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$2 alloc];
-  OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$2_initWithOrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_(self, outer$);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$2, initWithOrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_, outer$)
+}
+
+OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$2 *create_OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$2_initWithOrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1 *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$2, initWithOrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_, outer$)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_$1_$2)

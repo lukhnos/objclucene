@@ -1,19 +1,21 @@
 #!/bin/bash -e
 
 # TODO: Parameterize, error checking, temp file, etc.
-URL=https://github.com/lukhnos/j2objc/releases/download/0.9.8.1-20150829-2c1855d/j2objc-0.9.8.1-20150829-2c1855d.zip
-FILE=j2objc-0.9.8.1-20150829-2c1855d.zip
-DIR=j2objc-0.9.8.1-20150829-2c1855d
-TARGET=vendor
+VERSION=1.0.2
+FILE=j2objc-$VERSION.zip
+URL=https://github.com/google/j2objc/releases/download/$VERSION/$FILE
+#URL=https://github.com/lukhnos/j2objc/releases/download/$VERSION/$FILE
+DIR=j2objc-$VERSION
+TARGET=j2objc
 
 echo Fetching ${URL}
 curl -L -o "${FILE}" "${URL}"
 
-echo Creating dir ${TARGET}
-mkdir -p "${TARGET}"
-
 echo Unzipping ${FILE}
 unzip "${FILE}"
 
-echo Moving ${DIR} to ${TARGET}/j2objc
-mv "${DIR}" "${TARGET}/j2objc"
+echo Moving ${FILE} archive to ${DIR}
+mv "${FILE}" "${DIR}"
+
+echo Moving ${DIR} to ${TARGET}
+mv "${DIR}" "vendor/${TARGET}"

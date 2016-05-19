@@ -5,30 +5,42 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_INCLUDE_ALL")
-#if OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_RESTRICT
-#define OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightSimpleSpanFragmenter")
+#ifdef RESTRICT_OrgApacheLuceneSearchHighlightSimpleSpanFragmenter
+#define INCLUDE_ALL_OrgApacheLuceneSearchHighlightSimpleSpanFragmenter 0
 #else
-#define OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchHighlightSimpleSpanFragmenter 1
 #endif
-#undef OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchHighlightSimpleSpanFragmenter
 
-#if !defined (_OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_) && (OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_INCLUDE_ALL || OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_INCLUDE)
-#define _OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_
+#if !defined (OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightSimpleSpanFragmenter || defined(INCLUDE_OrgApacheLuceneSearchHighlightSimpleSpanFragmenter))
+#define OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_
 
-#define OrgApacheLuceneSearchHighlightFragmenter_RESTRICT 1
-#define OrgApacheLuceneSearchHighlightFragmenter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchHighlightFragmenter 1
+#define INCLUDE_OrgApacheLuceneSearchHighlightFragmenter 1
 #include "org/apache/lucene/search/highlight/Fragmenter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 @class OrgApacheLuceneSearchHighlightQueryScorer;
 
+/*!
+ @brief <code>Fragmenter</code> implementation which breaks text up into same-size
+ fragments but does not split up <code>Spans</code>.
+ This is a simple sample class.
+ */
 @interface OrgApacheLuceneSearchHighlightSimpleSpanFragmenter : NSObject < OrgApacheLuceneSearchHighlightFragmenter >
 
 #pragma mark Public
 
+/*!
+ @param queryScorer QueryScorer that was used to score hits
+ */
 - (instancetype)initWithOrgApacheLuceneSearchHighlightQueryScorer:(OrgApacheLuceneSearchHighlightQueryScorer *)queryScorer;
 
+/*!
+ @param queryScorer QueryScorer that was used to score hits
+ @param fragmentSize size in bytes of each fragment
+ */
 - (instancetype)initWithOrgApacheLuceneSearchHighlightQueryScorer:(OrgApacheLuceneSearchHighlightQueryScorer *)queryScorer
                                                           withInt:(jint)fragmentSize;
 
@@ -45,12 +57,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_initWi
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightSimpleSpanFragmenter *new_OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_initWithOrgApacheLuceneSearchHighlightQueryScorer_(OrgApacheLuceneSearchHighlightQueryScorer *queryScorer) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightSimpleSpanFragmenter *create_OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_initWithOrgApacheLuceneSearchHighlightQueryScorer_(OrgApacheLuceneSearchHighlightQueryScorer *queryScorer);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_initWithOrgApacheLuceneSearchHighlightQueryScorer_withInt_(OrgApacheLuceneSearchHighlightSimpleSpanFragmenter *self, OrgApacheLuceneSearchHighlightQueryScorer *queryScorer, jint fragmentSize);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightSimpleSpanFragmenter *new_OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_initWithOrgApacheLuceneSearchHighlightQueryScorer_withInt_(OrgApacheLuceneSearchHighlightQueryScorer *queryScorer, jint fragmentSize) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightSimpleSpanFragmenter *create_OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_initWithOrgApacheLuceneSearchHighlightQueryScorer_withInt_(OrgApacheLuceneSearchHighlightQueryScorer *queryScorer, jint fragmentSize);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightSimpleSpanFragmenter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightSimpleSpanFragmenter")

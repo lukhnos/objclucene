@@ -5,32 +5,51 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFilterClause_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFilterClause_RESTRICT
-#define OrgApacheLuceneQueriesFilterClause_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFilterClause")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFilterClause
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFilterClause 0
 #else
-#define OrgApacheLuceneQueriesFilterClause_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFilterClause 1
 #endif
-#undef OrgApacheLuceneQueriesFilterClause_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFilterClause
 
-#if !defined (_OrgApacheLuceneQueriesFilterClause_) && (OrgApacheLuceneQueriesFilterClause_INCLUDE_ALL || OrgApacheLuceneQueriesFilterClause_INCLUDE)
-#define _OrgApacheLuceneQueriesFilterClause_
+#if !defined (OrgApacheLuceneQueriesFilterClause_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFilterClause || defined(INCLUDE_OrgApacheLuceneQueriesFilterClause))
+#define OrgApacheLuceneQueriesFilterClause_
 
-@class OrgApacheLuceneSearchBooleanClause_OccurEnum;
+@class OrgApacheLuceneSearchBooleanClause_Occur;
 @class OrgApacheLuceneSearchFilter;
 
+/*!
+ @brief A Filter that wrapped with an indication of how that filter
+ is used when composed with another filter.
+ (Follows the boolean logic in BooleanClause for composition 
+ of queries.)
+ */
 @interface OrgApacheLuceneQueriesFilterClause : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Create a new FilterClause
+ @param filter A Filter object containing a BitSet
+ @param occur A parameter implementation indicating SHOULD, MUST or MUST NOT
+ */
 - (instancetype)initWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
-   withOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanClause_OccurEnum *)occur;
+       withOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause_Occur *)occur;
 
 - (jboolean)isEqual:(id)o;
 
+/*!
+ @brief Returns this FilterClause's filter
+ @return A Filter object
+ */
 - (OrgApacheLuceneSearchFilter *)getFilter;
 
-- (OrgApacheLuceneSearchBooleanClause_OccurEnum *)getOccur;
+/*!
+ @brief Returns this FilterClause's occur parameter
+ @return An Occur object
+ */
+- (OrgApacheLuceneSearchBooleanClause_Occur *)getOccur;
 
 - (NSUInteger)hash;
 
@@ -42,12 +61,14 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFilterClause)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFilterClause_initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchBooleanClause_OccurEnum_(OrgApacheLuceneQueriesFilterClause *self, OrgApacheLuceneSearchFilter *filter, OrgApacheLuceneSearchBooleanClause_OccurEnum *occur);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFilterClause_initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchBooleanClause_Occur_(OrgApacheLuceneQueriesFilterClause *self, OrgApacheLuceneSearchFilter *filter, OrgApacheLuceneSearchBooleanClause_Occur *occur);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFilterClause *new_OrgApacheLuceneQueriesFilterClause_initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchBooleanClause_OccurEnum_(OrgApacheLuceneSearchFilter *filter, OrgApacheLuceneSearchBooleanClause_OccurEnum *occur) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFilterClause *new_OrgApacheLuceneQueriesFilterClause_initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchBooleanClause_Occur_(OrgApacheLuceneSearchFilter *filter, OrgApacheLuceneSearchBooleanClause_Occur *occur) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFilterClause *create_OrgApacheLuceneQueriesFilterClause_initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchBooleanClause_Occur_(OrgApacheLuceneSearchFilter *filter, OrgApacheLuceneSearchBooleanClause_Occur *occur);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFilterClause)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFilterClause_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFilterClause")

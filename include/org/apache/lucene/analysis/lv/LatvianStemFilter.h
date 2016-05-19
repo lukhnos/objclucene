@@ -5,23 +5,32 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisLvLatvianStemFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisLvLatvianStemFilter_RESTRICT
-#define OrgApacheLuceneAnalysisLvLatvianStemFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisLvLatvianStemFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisLvLatvianStemFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisLvLatvianStemFilter 0
 #else
-#define OrgApacheLuceneAnalysisLvLatvianStemFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisLvLatvianStemFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisLvLatvianStemFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisLvLatvianStemFilter
 
-#if !defined (_OrgApacheLuceneAnalysisLvLatvianStemFilter_) && (OrgApacheLuceneAnalysisLvLatvianStemFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisLvLatvianStemFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisLvLatvianStemFilter_
+#if !defined (OrgApacheLuceneAnalysisLvLatvianStemFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisLvLatvianStemFilter || defined(INCLUDE_OrgApacheLuceneAnalysisLvLatvianStemFilter))
+#define OrgApacheLuceneAnalysisLvLatvianStemFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief A <code>TokenFilter</code> that applies <code>LatvianStemmer</code> to stem Latvian
+ words.
+ <p>
+ To prevent terms from being stemmed use an instance of
+ <code>SetKeywordMarkerFilter</code> or a custom <code>TokenFilter</code> that sets
+ the <code>KeywordAttribute</code> before this <code>TokenStream</code>.
+ </p>
+ */
 @interface OrgApacheLuceneAnalysisLvLatvianStemFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
@@ -38,8 +47,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisLvLatvianStemFilter_initWithOrgApa
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisLvLatvianStemFilter *new_OrgApacheLuceneAnalysisLvLatvianStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisLvLatvianStemFilter *create_OrgApacheLuceneAnalysisLvLatvianStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisLvLatvianStemFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisLvLatvianStemFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisLvLatvianStemFilter")

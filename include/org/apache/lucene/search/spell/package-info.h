@@ -3,14 +3,18 @@
 //  source: ./suggest/src/java/org/apache/lucene/search/spell/package-info.java
 //
 
+/*!
+ @brief Suggest alternate spellings for words.
+ Also see <a href="http://wiki.apache.org/jakarta-lucene/SpellChecker">the spell checker Wiki page</a>.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSpellPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSpellPackage_info_RESTRICT
-#define OrgApacheLuceneSearchSpellPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpellPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneSearchSpellPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpellPackage_info 0
 #else
-#define OrgApacheLuceneSearchSpellPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpellPackage_info 1
 #endif
-#undef OrgApacheLuceneSearchSpellPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSpellPackage_info
 
-#pragma pop_macro("OrgApacheLuceneSearchSpellPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpellPackage_info")

@@ -3,7 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/util/BytesRef.java
 //
 
-#include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/CharSequence.h"
@@ -12,17 +12,22 @@
 #include "java/lang/Integer.h"
 #include "java/lang/Math.h"
 #include "java/lang/StringBuilder.h"
+#include "java/lang/annotation/Annotation.h"
 #include "java/util/Arrays.h"
 #include "java/util/Comparator.h"
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/StringHelper.h"
 #include "org/apache/lucene/util/UnicodeUtil.h"
 
-static id<JavaUtilComparator> OrgApacheLuceneUtilBytesRef_utf8SortedAsUnicodeSortOrder_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilBytesRef, utf8SortedAsUnicodeSortOrder_, id<JavaUtilComparator>)
+inline id<JavaUtilComparator> OrgApacheLuceneUtilBytesRef_get_utf8SortedAsUnicodeSortOrder();
+static id<JavaUtilComparator> OrgApacheLuceneUtilBytesRef_utf8SortedAsUnicodeSortOrder;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilBytesRef, utf8SortedAsUnicodeSortOrder, id<JavaUtilComparator>)
 
-static id<JavaUtilComparator> OrgApacheLuceneUtilBytesRef_utf8SortedAsUTF16SortOrder_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilBytesRef, utf8SortedAsUTF16SortOrder_, id<JavaUtilComparator>)
+/*!
+ */
+inline id<JavaUtilComparator> OrgApacheLuceneUtilBytesRef_get_utf8SortedAsUTF16SortOrder();
+static id<JavaUtilComparator> OrgApacheLuceneUtilBytesRef_utf8SortedAsUTF16SortOrder;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilBytesRef, utf8SortedAsUTF16SortOrder, id<JavaUtilComparator>)
 
 @interface OrgApacheLuceneUtilBytesRef_UTF8SortedAsUnicodeComparator : NSObject < JavaUtilComparator >
 
@@ -39,8 +44,12 @@ __attribute__((unused)) static void OrgApacheLuceneUtilBytesRef_UTF8SortedAsUnic
 
 __attribute__((unused)) static OrgApacheLuceneUtilBytesRef_UTF8SortedAsUnicodeComparator *new_OrgApacheLuceneUtilBytesRef_UTF8SortedAsUnicodeComparator_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneUtilBytesRef_UTF8SortedAsUnicodeComparator *create_OrgApacheLuceneUtilBytesRef_UTF8SortedAsUnicodeComparator_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBytesRef_UTF8SortedAsUnicodeComparator)
 
+/*!
+ */
 @interface OrgApacheLuceneUtilBytesRef_UTF8SortedAsUTF16Comparator : NSObject < JavaUtilComparator >
 
 - (instancetype)init;
@@ -56,13 +65,19 @@ __attribute__((unused)) static void OrgApacheLuceneUtilBytesRef_UTF8SortedAsUTF1
 
 __attribute__((unused)) static OrgApacheLuceneUtilBytesRef_UTF8SortedAsUTF16Comparator *new_OrgApacheLuceneUtilBytesRef_UTF8SortedAsUTF16Comparator_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneUtilBytesRef_UTF8SortedAsUTF16Comparator *create_OrgApacheLuceneUtilBytesRef_UTF8SortedAsUTF16Comparator_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBytesRef_UTF8SortedAsUTF16Comparator)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilBytesRef)
 
-IOSByteArray *OrgApacheLuceneUtilBytesRef_EMPTY_BYTES_;
+IOSByteArray *OrgApacheLuceneUtilBytesRef_EMPTY_BYTES;
 
 @implementation OrgApacheLuceneUtilBytesRef
+
++ (IOSByteArray *)EMPTY_BYTES {
+  return OrgApacheLuceneUtilBytesRef_EMPTY_BYTES;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -112,11 +127,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (OrgApacheLuceneUtilBytesRef *)clone {
-  return [new_OrgApacheLuceneUtilBytesRef_initWithByteArray_withInt_withInt_(bytes_, offset_, length_) autorelease];
+  return create_OrgApacheLuceneUtilBytesRef_initWithByteArray_withInt_withInt_(bytes_, offset_, length_);
 }
 
 - (NSUInteger)hash {
-  return OrgApacheLuceneUtilStringHelper_murmurhash3_x86_32WithOrgApacheLuceneUtilBytesRef_withInt_(self, JreLoadStatic(OrgApacheLuceneUtilStringHelper, GOOD_FAST_HASH_SEED_));
+  return OrgApacheLuceneUtilStringHelper_murmurhash3_x86_32WithOrgApacheLuceneUtilBytesRef_withInt_(self, JreLoadStatic(OrgApacheLuceneUtilStringHelper, GOOD_FAST_HASH_SEED));
 }
 
 - (jboolean)isEqual:(id)other {
@@ -124,7 +139,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     return false;
   }
   if ([other isKindOfClass:[OrgApacheLuceneUtilBytesRef class]]) {
-    return [self bytesEqualsWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *) check_class_cast(other, [OrgApacheLuceneUtilBytesRef class])];
+    return [self bytesEqualsWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *) cast_chk(other, [OrgApacheLuceneUtilBytesRef class])];
   }
   return false;
 }
@@ -136,7 +151,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (NSString *)description {
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   [sb appendWithChar:'['];
   jint end = offset_ + length_;
   for (jint i = offset_; i < end; i++) {
@@ -150,8 +165,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jint)compareToWithId:(OrgApacheLuceneUtilBytesRef *)other {
-  check_class_cast(other, [OrgApacheLuceneUtilBytesRef class]);
-  return [((id<JavaUtilComparator>) nil_chk(OrgApacheLuceneUtilBytesRef_utf8SortedAsUnicodeSortOrder_)) compareWithId:self withId:other];
+  cast_chk(other, [OrgApacheLuceneUtilBytesRef class]);
+  return [((id<JavaUtilComparator>) nil_chk(OrgApacheLuceneUtilBytesRef_utf8SortedAsUnicodeSortOrder)) compareWithId:self withId:other];
 }
 
 + (id<JavaUtilComparator>)getUTF8SortedAsUnicodeComparator {
@@ -168,27 +183,35 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (jboolean)isValid {
   if (bytes_ == nil) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"bytes is null") autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"bytes is null");
   }
   if (length_ < 0) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I", @"length is negative: ", length_)) autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I", @"length is negative: ", length_));
   }
-  if (length_ > ((IOSByteArray *) nil_chk(bytes_))->size_) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I", @"length is out of bounds: ", length_, @",bytes.length=", bytes_->size_)) autorelease];
+  if (length_ > bytes_->size_) {
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I", @"length is out of bounds: ", length_, @",bytes.length=", bytes_->size_));
   }
   if (offset_ < 0) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I", @"offset is negative: ", offset_)) autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I", @"offset is negative: ", offset_));
   }
   if (offset_ > bytes_->size_) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I", @"offset out of bounds: ", offset_, @",bytes.length=", bytes_->size_)) autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I", @"offset out of bounds: ", offset_, @",bytes.length=", bytes_->size_));
   }
   if (offset_ + length_ < 0) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I", @"offset+length is negative: offset=", offset_, @",length=", length_)) autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I", @"offset+length is negative: offset=", offset_, @",length=", length_));
   }
   if (offset_ + length_ > bytes_->size_) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I$I", @"offset+length out of bounds: offset=", offset_, @",length=", length_, @",bytes.length=", bytes_->size_)) autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I$I", @"offset+length out of bounds: offset=", offset_, @",length=", length_, @",bytes.length=", bytes_->size_));
   }
   return true;
+}
+
++ (IOSObjectArray *)__annotations_utf8SortedAsUTF16SortOrder_ {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
++ (IOSObjectArray *)__annotations_getUTF8SortedAsUTF16Comparator {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 - (void)dealloc {
@@ -202,19 +225,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilBytesRef class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilBytesRef_EMPTY_BYTES_, [IOSByteArray newArrayWithLength:0]);
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilBytesRef_utf8SortedAsUnicodeSortOrder_, new_OrgApacheLuceneUtilBytesRef_UTF8SortedAsUnicodeComparator_init());
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilBytesRef_utf8SortedAsUTF16SortOrder_, new_OrgApacheLuceneUtilBytesRef_UTF8SortedAsUTF16Comparator_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilBytesRef_EMPTY_BYTES, [IOSByteArray newArrayWithLength:0]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilBytesRef_utf8SortedAsUnicodeSortOrder, new_OrgApacheLuceneUtilBytesRef_UTF8SortedAsUnicodeComparator_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilBytesRef_utf8SortedAsUTF16SortOrder, new_OrgApacheLuceneUtilBytesRef_UTF8SortedAsUTF16Comparator_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilBytesRef)
   }
-}
-
-+ (IOSObjectArray *)__annotations_getUTF8SortedAsUTF16Comparator {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_utf8SortedAsUTF16SortOrder_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -231,18 +246,18 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "utf8ToString", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "compareToWithId:", "compareTo", "I", 0x1, NULL, NULL },
-    { "getUTF8SortedAsUnicodeComparator", NULL, "Ljava.util.Comparator;", 0x9, NULL, NULL },
-    { "getUTF8SortedAsUTF16Comparator", NULL, "Ljava.util.Comparator;", 0x9, NULL, NULL },
+    { "getUTF8SortedAsUnicodeComparator", NULL, "Ljava.util.Comparator;", 0x9, NULL, "()Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;" },
+    { "getUTF8SortedAsUTF16Comparator", NULL, "Ljava.util.Comparator;", 0x9, NULL, "()Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;" },
     { "deepCopyOfWithOrgApacheLuceneUtilBytesRef:", "deepCopyOf", "Lorg.apache.lucene.util.BytesRef;", 0x9, NULL, NULL },
     { "isValid", NULL, "Z", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "EMPTY_BYTES_", NULL, 0x19, "[B", &OrgApacheLuceneUtilBytesRef_EMPTY_BYTES_, NULL, .constantValue.asLong = 0 },
+    { "EMPTY_BYTES", "EMPTY_BYTES", 0x19, "[B", &OrgApacheLuceneUtilBytesRef_EMPTY_BYTES, NULL, .constantValue.asLong = 0 },
     { "bytes_", NULL, 0x1, "[B", NULL, NULL, .constantValue.asLong = 0 },
     { "offset_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "length_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "utf8SortedAsUnicodeSortOrder_", NULL, 0x1a, "Ljava.util.Comparator;", &OrgApacheLuceneUtilBytesRef_utf8SortedAsUnicodeSortOrder_, "Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;", .constantValue.asLong = 0 },
-    { "utf8SortedAsUTF16SortOrder_", NULL, 0x1a, "Ljava.util.Comparator;", &OrgApacheLuceneUtilBytesRef_utf8SortedAsUTF16SortOrder_, "Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;", .constantValue.asLong = 0 },
+    { "utf8SortedAsUnicodeSortOrder", "utf8SortedAsUnicodeSortOrder", 0x1a, "Ljava.util.Comparator;", &OrgApacheLuceneUtilBytesRef_utf8SortedAsUnicodeSortOrder, "Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;", .constantValue.asLong = 0 },
+    { "utf8SortedAsUTF16SortOrder", "utf8SortedAsUTF16SortOrder", 0x1a, "Ljava.util.Comparator;", &OrgApacheLuceneUtilBytesRef_utf8SortedAsUTF16SortOrder, "Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;", .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.BytesRef$UTF8SortedAsUnicodeComparator;", "Lorg.apache.lucene.util.BytesRef$UTF8SortedAsUTF16Comparator;"};
   static const J2ObjcClassInfo _OrgApacheLuceneUtilBytesRef = { 2, "BytesRef", "org.apache.lucene.util", NULL, 0x11, 16, methods, 6, fields, 0, NULL, 2, inner_classes, NULL, "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/util/BytesRef;>;Ljava/lang/Cloneable;" };
@@ -252,13 +267,15 @@ J2OBJC_IGNORE_DESIGNATED_END
 @end
 
 void OrgApacheLuceneUtilBytesRef_init(OrgApacheLuceneUtilBytesRef *self) {
-  OrgApacheLuceneUtilBytesRef_initWithByteArray_(self, OrgApacheLuceneUtilBytesRef_EMPTY_BYTES_);
+  OrgApacheLuceneUtilBytesRef_initWithByteArray_(self, OrgApacheLuceneUtilBytesRef_EMPTY_BYTES);
 }
 
 OrgApacheLuceneUtilBytesRef *new_OrgApacheLuceneUtilBytesRef_init() {
-  OrgApacheLuceneUtilBytesRef *self = [OrgApacheLuceneUtilBytesRef alloc];
-  OrgApacheLuceneUtilBytesRef_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilBytesRef, init)
+}
+
+OrgApacheLuceneUtilBytesRef *create_OrgApacheLuceneUtilBytesRef_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilBytesRef, init)
 }
 
 void OrgApacheLuceneUtilBytesRef_initWithByteArray_withInt_withInt_(OrgApacheLuceneUtilBytesRef *self, IOSByteArray *bytes, jint offset, jint length) {
@@ -270,9 +287,11 @@ void OrgApacheLuceneUtilBytesRef_initWithByteArray_withInt_withInt_(OrgApacheLuc
 }
 
 OrgApacheLuceneUtilBytesRef *new_OrgApacheLuceneUtilBytesRef_initWithByteArray_withInt_withInt_(IOSByteArray *bytes, jint offset, jint length) {
-  OrgApacheLuceneUtilBytesRef *self = [OrgApacheLuceneUtilBytesRef alloc];
-  OrgApacheLuceneUtilBytesRef_initWithByteArray_withInt_withInt_(self, bytes, offset, length);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilBytesRef, initWithByteArray_withInt_withInt_, bytes, offset, length)
+}
+
+OrgApacheLuceneUtilBytesRef *create_OrgApacheLuceneUtilBytesRef_initWithByteArray_withInt_withInt_(IOSByteArray *bytes, jint offset, jint length) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilBytesRef, initWithByteArray_withInt_withInt_, bytes, offset, length)
 }
 
 void OrgApacheLuceneUtilBytesRef_initWithByteArray_(OrgApacheLuceneUtilBytesRef *self, IOSByteArray *bytes) {
@@ -280,9 +299,11 @@ void OrgApacheLuceneUtilBytesRef_initWithByteArray_(OrgApacheLuceneUtilBytesRef 
 }
 
 OrgApacheLuceneUtilBytesRef *new_OrgApacheLuceneUtilBytesRef_initWithByteArray_(IOSByteArray *bytes) {
-  OrgApacheLuceneUtilBytesRef *self = [OrgApacheLuceneUtilBytesRef alloc];
-  OrgApacheLuceneUtilBytesRef_initWithByteArray_(self, bytes);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilBytesRef, initWithByteArray_, bytes)
+}
+
+OrgApacheLuceneUtilBytesRef *create_OrgApacheLuceneUtilBytesRef_initWithByteArray_(IOSByteArray *bytes) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilBytesRef, initWithByteArray_, bytes)
 }
 
 void OrgApacheLuceneUtilBytesRef_initWithInt_(OrgApacheLuceneUtilBytesRef *self, jint capacity) {
@@ -291,9 +312,11 @@ void OrgApacheLuceneUtilBytesRef_initWithInt_(OrgApacheLuceneUtilBytesRef *self,
 }
 
 OrgApacheLuceneUtilBytesRef *new_OrgApacheLuceneUtilBytesRef_initWithInt_(jint capacity) {
-  OrgApacheLuceneUtilBytesRef *self = [OrgApacheLuceneUtilBytesRef alloc];
-  OrgApacheLuceneUtilBytesRef_initWithInt_(self, capacity);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilBytesRef, initWithInt_, capacity)
+}
+
+OrgApacheLuceneUtilBytesRef *create_OrgApacheLuceneUtilBytesRef_initWithInt_(jint capacity) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilBytesRef, initWithInt_, capacity)
 }
 
 void OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(OrgApacheLuceneUtilBytesRef *self, id<JavaLangCharSequence> text) {
@@ -302,24 +325,26 @@ void OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(OrgApacheLuceneUt
 }
 
 OrgApacheLuceneUtilBytesRef *new_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(id<JavaLangCharSequence> text) {
-  OrgApacheLuceneUtilBytesRef *self = [OrgApacheLuceneUtilBytesRef alloc];
-  OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(self, text);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilBytesRef, initWithJavaLangCharSequence_, text)
+}
+
+OrgApacheLuceneUtilBytesRef *create_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(id<JavaLangCharSequence> text) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilBytesRef, initWithJavaLangCharSequence_, text)
 }
 
 id<JavaUtilComparator> OrgApacheLuceneUtilBytesRef_getUTF8SortedAsUnicodeComparator() {
   OrgApacheLuceneUtilBytesRef_initialize();
-  return OrgApacheLuceneUtilBytesRef_utf8SortedAsUnicodeSortOrder_;
+  return OrgApacheLuceneUtilBytesRef_utf8SortedAsUnicodeSortOrder;
 }
 
 id<JavaUtilComparator> OrgApacheLuceneUtilBytesRef_getUTF8SortedAsUTF16Comparator() {
   OrgApacheLuceneUtilBytesRef_initialize();
-  return OrgApacheLuceneUtilBytesRef_utf8SortedAsUTF16SortOrder_;
+  return OrgApacheLuceneUtilBytesRef_utf8SortedAsUTF16SortOrder;
 }
 
 OrgApacheLuceneUtilBytesRef *OrgApacheLuceneUtilBytesRef_deepCopyOfWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *other) {
   OrgApacheLuceneUtilBytesRef_initialize();
-  OrgApacheLuceneUtilBytesRef *copy_ = [new_OrgApacheLuceneUtilBytesRef_init() autorelease];
+  OrgApacheLuceneUtilBytesRef *copy_ = create_OrgApacheLuceneUtilBytesRef_init();
   JreStrongAssign(&copy_->bytes_, JavaUtilArrays_copyOfRangeWithByteArray_withInt_withInt_(((OrgApacheLuceneUtilBytesRef *) nil_chk(other))->bytes_, other->offset_, other->offset_ + other->length_));
   copy_->offset_ = 0;
   copy_->length_ = other->length_;
@@ -371,9 +396,11 @@ void OrgApacheLuceneUtilBytesRef_UTF8SortedAsUnicodeComparator_init(OrgApacheLuc
 }
 
 OrgApacheLuceneUtilBytesRef_UTF8SortedAsUnicodeComparator *new_OrgApacheLuceneUtilBytesRef_UTF8SortedAsUnicodeComparator_init() {
-  OrgApacheLuceneUtilBytesRef_UTF8SortedAsUnicodeComparator *self = [OrgApacheLuceneUtilBytesRef_UTF8SortedAsUnicodeComparator alloc];
-  OrgApacheLuceneUtilBytesRef_UTF8SortedAsUnicodeComparator_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilBytesRef_UTF8SortedAsUnicodeComparator, init)
+}
+
+OrgApacheLuceneUtilBytesRef_UTF8SortedAsUnicodeComparator *create_OrgApacheLuceneUtilBytesRef_UTF8SortedAsUnicodeComparator_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilBytesRef_UTF8SortedAsUnicodeComparator, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBytesRef_UTF8SortedAsUnicodeComparator)
@@ -419,7 +446,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -438,9 +465,11 @@ void OrgApacheLuceneUtilBytesRef_UTF8SortedAsUTF16Comparator_init(OrgApacheLucen
 }
 
 OrgApacheLuceneUtilBytesRef_UTF8SortedAsUTF16Comparator *new_OrgApacheLuceneUtilBytesRef_UTF8SortedAsUTF16Comparator_init() {
-  OrgApacheLuceneUtilBytesRef_UTF8SortedAsUTF16Comparator *self = [OrgApacheLuceneUtilBytesRef_UTF8SortedAsUTF16Comparator alloc];
-  OrgApacheLuceneUtilBytesRef_UTF8SortedAsUTF16Comparator_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilBytesRef_UTF8SortedAsUTF16Comparator, init)
+}
+
+OrgApacheLuceneUtilBytesRef_UTF8SortedAsUTF16Comparator *create_OrgApacheLuceneUtilBytesRef_UTF8SortedAsUTF16Comparator_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilBytesRef_UTF8SortedAsUTF16Comparator, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBytesRef_UTF8SortedAsUTF16Comparator)

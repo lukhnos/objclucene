@@ -12,8 +12,12 @@
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/SmallFloat.h"
 
-static IOSFloatArray *OrgApacheLuceneSearchSimilaritiesDefaultSimilarity_NORM_TABLE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSimilaritiesDefaultSimilarity, NORM_TABLE_, IOSFloatArray *)
+/*!
+ @brief Cache of decoded bytes.
+ */
+inline IOSFloatArray *OrgApacheLuceneSearchSimilaritiesDefaultSimilarity_get_NORM_TABLE();
+static IOSFloatArray *OrgApacheLuceneSearchSimilaritiesDefaultSimilarity_NORM_TABLE;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchSimilaritiesDefaultSimilarity, NORM_TABLE, IOSFloatArray *)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchSimilaritiesDefaultSimilarity)
 
@@ -40,14 +44,14 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jfloat)decodeNormValueWithLong:(jlong)norm {
-  return IOSFloatArray_Get(nil_chk(OrgApacheLuceneSearchSimilaritiesDefaultSimilarity_NORM_TABLE_), (jint) (norm & (jint) 0xFF));
+  return IOSFloatArray_Get(nil_chk(OrgApacheLuceneSearchSimilaritiesDefaultSimilarity_NORM_TABLE), (jint) (norm & (jint) 0xFF));
 }
 
 - (jfloat)lengthNormWithOrgApacheLuceneIndexFieldInvertState:(OrgApacheLuceneIndexFieldInvertState *)state {
   jint numTerms;
   if (discountOverlaps_) numTerms = [((OrgApacheLuceneIndexFieldInvertState *) nil_chk(state)) getLength] - [state getNumOverlap];
   else numTerms = [((OrgApacheLuceneIndexFieldInvertState *) nil_chk(state)) getLength];
-  return [((OrgApacheLuceneIndexFieldInvertState *) nil_chk(state)) getBoost] * ((jfloat) (1.0 / JavaLangMath_sqrtWithDouble_(numTerms)));
+  return [state getBoost] * ((jfloat) (1.0 / JavaLangMath_sqrtWithDouble_(numTerms)));
 }
 
 - (jfloat)tfWithFloat:(jfloat)freq {
@@ -84,10 +88,10 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload {
 
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchSimilaritiesDefaultSimilarity class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneSearchSimilaritiesDefaultSimilarity_NORM_TABLE_, [IOSFloatArray newArrayWithLength:256]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneSearchSimilaritiesDefaultSimilarity_NORM_TABLE, [IOSFloatArray newArrayWithLength:256]);
     {
       for (jint i = 0; i < 256; i++) {
-        *IOSFloatArray_GetRef(OrgApacheLuceneSearchSimilaritiesDefaultSimilarity_NORM_TABLE_, i) = OrgApacheLuceneUtilSmallFloat_byte315ToFloatWithByte_((jbyte) i);
+        *IOSFloatArray_GetRef(OrgApacheLuceneSearchSimilaritiesDefaultSimilarity_NORM_TABLE, i) = OrgApacheLuceneUtilSmallFloat_byte315ToFloatWithByte_((jbyte) i);
       }
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSimilaritiesDefaultSimilarity)
@@ -111,7 +115,7 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload {
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "NORM_TABLE_", NULL, 0x1a, "[F", &OrgApacheLuceneSearchSimilaritiesDefaultSimilarity_NORM_TABLE_, NULL, .constantValue.asLong = 0 },
+    { "NORM_TABLE", "NORM_TABLE", 0x1a, "[F", &OrgApacheLuceneSearchSimilaritiesDefaultSimilarity_NORM_TABLE, NULL, .constantValue.asLong = 0 },
     { "discountOverlaps_", NULL, 0x4, "Z", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesDefaultSimilarity = { 2, "DefaultSimilarity", "org.apache.lucene.search.similarities", NULL, 0x1, 13, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
@@ -126,9 +130,11 @@ void OrgApacheLuceneSearchSimilaritiesDefaultSimilarity_init(OrgApacheLuceneSear
 }
 
 OrgApacheLuceneSearchSimilaritiesDefaultSimilarity *new_OrgApacheLuceneSearchSimilaritiesDefaultSimilarity_init() {
-  OrgApacheLuceneSearchSimilaritiesDefaultSimilarity *self = [OrgApacheLuceneSearchSimilaritiesDefaultSimilarity alloc];
-  OrgApacheLuceneSearchSimilaritiesDefaultSimilarity_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSimilaritiesDefaultSimilarity, init)
+}
+
+OrgApacheLuceneSearchSimilaritiesDefaultSimilarity *create_OrgApacheLuceneSearchSimilaritiesDefaultSimilarity_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSimilaritiesDefaultSimilarity, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSimilaritiesDefaultSimilarity)

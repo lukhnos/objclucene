@@ -5,21 +5,25 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionValuesourceBoolFunction_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionValuesourceBoolFunction_RESTRICT
-#define OrgApacheLuceneQueriesFunctionValuesourceBoolFunction_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceBoolFunction")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceBoolFunction
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceBoolFunction 0
 #else
-#define OrgApacheLuceneQueriesFunctionValuesourceBoolFunction_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceBoolFunction 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionValuesourceBoolFunction_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceBoolFunction
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValuesourceBoolFunction_) && (OrgApacheLuceneQueriesFunctionValuesourceBoolFunction_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValuesourceBoolFunction_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValuesourceBoolFunction_
+#if !defined (OrgApacheLuceneQueriesFunctionValuesourceBoolFunction_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceBoolFunction || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceBoolFunction))
+#define OrgApacheLuceneQueriesFunctionValuesourceBoolFunction_
 
-#define OrgApacheLuceneQueriesFunctionValueSource_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionValueSource_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionValueSource 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionValueSource 1
 #include "org/apache/lucene/queries/function/ValueSource.h"
 
+/*!
+ @brief Abstract parent class for those <code>ValueSource</code> implementations which
+ apply boolean logic to their values
+ */
 @interface OrgApacheLuceneQueriesFunctionValuesourceBoolFunction : OrgApacheLuceneQueriesFunctionValueSource
 
 #pragma mark Public
@@ -36,4 +40,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceBoolFunction
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionValuesourceBoolFunction_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceBoolFunction")

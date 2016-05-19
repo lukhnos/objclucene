@@ -40,6 +40,8 @@ __attribute__((unused)) static void OrgApacheLuceneQueriesFunctionValuesourceSim
 
 __attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction *outer$, OrgApacheLuceneQueriesFunctionFunctionValues *capture$0, OrgApacheLuceneQueriesFunctionValueSource *arg$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction *outer$, OrgApacheLuceneQueriesFunctionFunctionValues *capture$0, OrgApacheLuceneQueriesFunctionValueSource *arg$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_$1)
 
 @implementation OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction
@@ -65,7 +67,7 @@ withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunction
 - (OrgApacheLuceneQueriesFunctionDocvaluesBoolDocValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
                                          withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext {
   OrgApacheLuceneQueriesFunctionFunctionValues *vals = [((OrgApacheLuceneQueriesFunctionValueSource *) nil_chk(source_)) getValuesWithJavaUtilMap:context withOrgApacheLuceneIndexLeafReaderContext:readerContext];
-  return [new_OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionValueSource_(self, vals, self) autorelease];
+  return create_OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionValueSource_(self, vals, self);
 }
 
 - (NSString *)description__ {
@@ -77,8 +79,8 @@ withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunction
 }
 
 - (jboolean)isEqual:(id)o {
-  if ([self getClass] != [nil_chk(o) getClass]) return false;
-  OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction *other = (OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction *) check_class_cast(o, [OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction class]);
+  if ([self getClass] != (id) [nil_chk(o) getClass]) return false;
+  OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction *other = (OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction *) cast_chk(o, [OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction class]);
   return [((OrgApacheLuceneQueriesFunctionValueSource *) nil_chk(self->source_)) isEqual:other->source_];
 }
 
@@ -166,9 +168,11 @@ void OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_$1_initWithOrgA
 }
 
 OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction *outer$, OrgApacheLuceneQueriesFunctionFunctionValues *capture$0, OrgApacheLuceneQueriesFunctionValueSource *arg$0) {
-  OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_$1 *self = [OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_$1 alloc];
-  OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionValueSource_(self, outer$, capture$0, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_$1, initWithOrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionValueSource_, outer$, capture$0, arg$0)
+}
+
+OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction *outer$, OrgApacheLuceneQueriesFunctionFunctionValues *capture$0, OrgApacheLuceneQueriesFunctionValueSource *arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_$1, initWithOrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionValueSource_, outer$, capture$0, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_$1)

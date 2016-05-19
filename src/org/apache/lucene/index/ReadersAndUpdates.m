@@ -13,7 +13,6 @@
 #include "java/lang/Long.h"
 #include "java/lang/StringBuilder.h"
 #include "java/lang/Thread.h"
-#include "java/lang/Throwable.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "java/util/HashMap.h"
 #include "java/util/Iterator.h"
@@ -111,7 +110,6 @@ __attribute__((unused)) static id<JavaUtilSet> OrgApacheLuceneIndexReadersAndUpd
                                              withNSString:(NSString *)capture$1
      withOrgApacheLuceneIndexNumericDocValuesFieldUpdates:(OrgApacheLuceneIndexNumericDocValuesFieldUpdates *)capture$2;
 
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexReadersAndUpdates_$1)
@@ -126,6 +124,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexReadersAndUpdates_$1, val$fieldUpdates_,
 __attribute__((unused)) static void OrgApacheLuceneIndexReadersAndUpdates_$1_initWithOrgApacheLuceneIndexSegmentReader_withNSString_withOrgApacheLuceneIndexNumericDocValuesFieldUpdates_(OrgApacheLuceneIndexReadersAndUpdates_$1 *self, OrgApacheLuceneIndexSegmentReader *capture$0, NSString *capture$1, OrgApacheLuceneIndexNumericDocValuesFieldUpdates *capture$2);
 
 __attribute__((unused)) static OrgApacheLuceneIndexReadersAndUpdates_$1 *new_OrgApacheLuceneIndexReadersAndUpdates_$1_initWithOrgApacheLuceneIndexSegmentReader_withNSString_withOrgApacheLuceneIndexNumericDocValuesFieldUpdates_(OrgApacheLuceneIndexSegmentReader *capture$0, NSString *capture$1, OrgApacheLuceneIndexNumericDocValuesFieldUpdates *capture$2) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexReadersAndUpdates_$1 *create_OrgApacheLuceneIndexReadersAndUpdates_$1_initWithOrgApacheLuceneIndexSegmentReader_withNSString_withOrgApacheLuceneIndexNumericDocValuesFieldUpdates_(OrgApacheLuceneIndexSegmentReader *capture$0, NSString *capture$1, OrgApacheLuceneIndexNumericDocValuesFieldUpdates *capture$2);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexReadersAndUpdates_$1)
 
@@ -154,6 +154,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexReadersAndUpdates_$1_$1_
 
 __attribute__((unused)) static OrgApacheLuceneIndexReadersAndUpdates_$1_$1 *new_OrgApacheLuceneIndexReadersAndUpdates_$1_$1_initWithOrgApacheLuceneIndexReadersAndUpdates_$1_(OrgApacheLuceneIndexReadersAndUpdates_$1 *outer$) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexReadersAndUpdates_$1_$1 *create_OrgApacheLuceneIndexReadersAndUpdates_$1_$1_initWithOrgApacheLuceneIndexReadersAndUpdates_$1_(OrgApacheLuceneIndexReadersAndUpdates_$1 *outer$);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexReadersAndUpdates_$1_$1)
 
 @interface OrgApacheLuceneIndexReadersAndUpdates_$2 : NSObject < JavaLangIterable > {
@@ -173,7 +175,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexReadersAndUpdates_$1_$1)
                                              withNSString:(NSString *)capture$1
       withOrgApacheLuceneIndexBinaryDocValuesFieldUpdates:(OrgApacheLuceneIndexBinaryDocValuesFieldUpdates *)capture$2;
 
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexReadersAndUpdates_$2)
@@ -188,6 +189,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexReadersAndUpdates_$2, val$fieldUpdates_,
 __attribute__((unused)) static void OrgApacheLuceneIndexReadersAndUpdates_$2_initWithOrgApacheLuceneIndexSegmentReader_withNSString_withOrgApacheLuceneIndexBinaryDocValuesFieldUpdates_(OrgApacheLuceneIndexReadersAndUpdates_$2 *self, OrgApacheLuceneIndexSegmentReader *capture$0, NSString *capture$1, OrgApacheLuceneIndexBinaryDocValuesFieldUpdates *capture$2);
 
 __attribute__((unused)) static OrgApacheLuceneIndexReadersAndUpdates_$2 *new_OrgApacheLuceneIndexReadersAndUpdates_$2_initWithOrgApacheLuceneIndexSegmentReader_withNSString_withOrgApacheLuceneIndexBinaryDocValuesFieldUpdates_(OrgApacheLuceneIndexSegmentReader *capture$0, NSString *capture$1, OrgApacheLuceneIndexBinaryDocValuesFieldUpdates *capture$2) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexReadersAndUpdates_$2 *create_OrgApacheLuceneIndexReadersAndUpdates_$2_initWithOrgApacheLuceneIndexSegmentReader_withNSString_withOrgApacheLuceneIndexBinaryDocValuesFieldUpdates_(OrgApacheLuceneIndexSegmentReader *capture$0, NSString *capture$1, OrgApacheLuceneIndexBinaryDocValuesFieldUpdates *capture$2);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexReadersAndUpdates_$2)
 
@@ -215,6 +218,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexReadersAndUpdates_$2_$1, this$0_, OrgApa
 __attribute__((unused)) static void OrgApacheLuceneIndexReadersAndUpdates_$2_$1_initWithOrgApacheLuceneIndexReadersAndUpdates_$2_(OrgApacheLuceneIndexReadersAndUpdates_$2_$1 *self, OrgApacheLuceneIndexReadersAndUpdates_$2 *outer$);
 
 __attribute__((unused)) static OrgApacheLuceneIndexReadersAndUpdates_$2_$1 *new_OrgApacheLuceneIndexReadersAndUpdates_$2_$1_initWithOrgApacheLuceneIndexReadersAndUpdates_$2_(OrgApacheLuceneIndexReadersAndUpdates_$2 *outer$) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexReadersAndUpdates_$2_$1 *create_OrgApacheLuceneIndexReadersAndUpdates_$2_$1_initWithOrgApacheLuceneIndexReadersAndUpdates_$2_(OrgApacheLuceneIndexReadersAndUpdates_$2 *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexReadersAndUpdates_$2_$1)
 
@@ -260,7 +265,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexReadersAndUpdates_$2_$1)
     if (liveDocs_ != nil) {
       count = 0;
       for (jint docID = 0; docID < [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info_))->info_)) maxDoc]; docID++) {
-        if ([liveDocs_ getWithInt:docID]) {
+        if ([((id<OrgApacheLuceneUtilBits>) nil_chk(liveDocs_)) getWithInt:docID]) {
           count++;
         }
       }
@@ -268,7 +273,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexReadersAndUpdates_$2_$1)
     else {
       count = [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info_))->info_)) maxDoc];
     }
-    JreAssert(([((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info_))->info_)) maxDoc] - [info_ getDelCount] - pendingDeleteCount_ == count), (JreStrcat("$I$I$I$I", @"info.maxDoc=", [info_->info_ maxDoc], @" info.getDelCount()=", [info_ getDelCount], @" pendingDeleteCount=", pendingDeleteCount_, @" count=", count)));
+    JreAssert(([info_->info_ maxDoc] - [info_ getDelCount] - pendingDeleteCount_ == count), (JreStrcat("$I$I$I$I", @"info.maxDoc=", [info_->info_ maxDoc], @" info.getDelCount()=", [info_ getDelCount], @" pendingDeleteCount=", pendingDeleteCount_, @" count=", count)));
     return true;
   }
 }
@@ -297,9 +302,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexReadersAndUpdates_$2_$1)
     JreAssert((JavaLangThread_holdsLockWithId_(writer_)), (@"org/apache/lucene/index/ReadersAndUpdates.java:163 condition failed: assert Thread.holdsLock(writer);"));
     JreAssert((docID >= 0 && docID < [((id<OrgApacheLuceneUtilBits>) nil_chk(liveDocs_)) length]), (JreStrcat("$I$I$$$I", @"out of bounds: docid=", docID, @" liveDocsLength=", [((id<OrgApacheLuceneUtilBits>) nil_chk(liveDocs_)) length], @" seg=", ((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info_))->info_))->name_, @" maxDoc=", [info_->info_ maxDoc])));
     JreAssert((!liveDocsShared_), (@"org/apache/lucene/index/ReadersAndUpdates.java:165 condition failed: assert !liveDocsShared;"));
-    jboolean didDelete = [liveDocs_ getWithInt:docID];
+    jboolean didDelete = [((id<OrgApacheLuceneUtilBits>) nil_chk(liveDocs_)) getWithInt:docID];
     if (didDelete) {
-      [((id<OrgApacheLuceneUtilMutableBits>) check_protocol_cast(liveDocs_, OrgApacheLuceneUtilMutableBits_class_())) clearWithInt:docID];
+      [((id<OrgApacheLuceneUtilMutableBits>) nil_chk(((id<OrgApacheLuceneUtilMutableBits>) cast_check(liveDocs_, OrgApacheLuceneUtilMutableBits_class_())))) clearWithInt:docID];
       pendingDeleteCount_++;
     }
     return didDelete;
@@ -328,11 +333,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexReadersAndUpdates_$2_$1)
     }
     liveDocsShared_ = true;
     if (liveDocs_ != nil) {
-      return [new_OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneIndexSegmentReader_withOrgApacheLuceneUtilBits_withInt_([((OrgApacheLuceneIndexSegmentReader *) nil_chk(reader_)) getSegmentInfo], reader_, liveDocs_, [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info_))->info_)) maxDoc] - [info_ getDelCount] - pendingDeleteCount_) autorelease];
+      return create_OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneIndexSegmentReader_withOrgApacheLuceneUtilBits_withInt_([((OrgApacheLuceneIndexSegmentReader *) nil_chk(reader_)) getSegmentInfo], reader_, liveDocs_, [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info_))->info_)) maxDoc] - [info_ getDelCount] - pendingDeleteCount_);
     }
     else {
       JreAssert(([((OrgApacheLuceneIndexSegmentReader *) nil_chk(reader_)) getLiveDocs] == nil), (@"org/apache/lucene/index/ReadersAndUpdates.java:206 condition failed: assert reader.getLiveDocs() == null;"));
-      [reader_ incRef];
+      [((OrgApacheLuceneIndexSegmentReader *) nil_chk(reader_)) incRef];
       return reader_;
     }
   }
@@ -384,11 +389,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexReadersAndUpdates_$2_$1)
       return false;
     }
     JreAssert(([((id<OrgApacheLuceneUtilBits>) nil_chk(liveDocs_)) length] == [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info_))->info_)) maxDoc]), (@"org/apache/lucene/index/ReadersAndUpdates.java:270 condition failed: assert liveDocs.length() == info.info.maxDoc();"));
-    OrgApacheLuceneStoreTrackingDirectoryWrapper *trackingDir = [new_OrgApacheLuceneStoreTrackingDirectoryWrapper_initWithOrgApacheLuceneStoreDirectory_(dir) autorelease];
+    OrgApacheLuceneStoreTrackingDirectoryWrapper *trackingDir = create_OrgApacheLuceneStoreTrackingDirectoryWrapper_initWithOrgApacheLuceneStoreDirectory_(dir);
     jboolean success = false;
     @try {
       OrgApacheLuceneCodecsCodec *codec = [info_->info_ getCodec];
-      [((OrgApacheLuceneCodecsLiveDocsFormat *) nil_chk([((OrgApacheLuceneCodecsCodec *) nil_chk(codec)) liveDocsFormat])) writeLiveDocsWithOrgApacheLuceneUtilMutableBits:(id<OrgApacheLuceneUtilMutableBits>) check_protocol_cast(liveDocs_, OrgApacheLuceneUtilMutableBits_class_()) withOrgApacheLuceneStoreDirectory:trackingDir withOrgApacheLuceneIndexSegmentCommitInfo:info_ withInt:pendingDeleteCount_ withOrgApacheLuceneStoreIOContext:JreLoadStatic(OrgApacheLuceneStoreIOContext, DEFAULT_)];
+      [((OrgApacheLuceneCodecsLiveDocsFormat *) nil_chk([((OrgApacheLuceneCodecsCodec *) nil_chk(codec)) liveDocsFormat])) writeLiveDocsWithOrgApacheLuceneUtilMutableBits:(id<OrgApacheLuceneUtilMutableBits>) cast_check(liveDocs_, OrgApacheLuceneUtilMutableBits_class_()) withOrgApacheLuceneStoreDirectory:trackingDir withOrgApacheLuceneIndexSegmentCommitInfo:info_ withInt:pendingDeleteCount_ withOrgApacheLuceneStoreIOContext:JreLoadStatic(OrgApacheLuceneStoreIOContext, DEFAULT)];
       success = true;
     }
     @finally {
@@ -436,16 +441,16 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexReadersAndUpdates_$2_$1)
   @synchronized(self) {
     JreAssert((JavaLangThread_holdsLockWithId_(writer_)), (@"org/apache/lucene/index/ReadersAndUpdates.java:472 condition failed: assert Thread.holdsLock(writer);"));
     JreAssert(([((OrgApacheLuceneIndexDocValuesFieldUpdates_Container *) nil_chk(dvUpdates)) any]), (@"org/apache/lucene/index/ReadersAndUpdates.java:475 condition failed: assert dvUpdates.any();"));
-    OrgApacheLuceneStoreTrackingDirectoryWrapper *trackingDir = [new_OrgApacheLuceneStoreTrackingDirectoryWrapper_initWithOrgApacheLuceneStoreDirectory_(dir) autorelease];
-    id<JavaUtilMap> newDVFiles = [new_JavaUtilHashMap_init() autorelease];
+    OrgApacheLuceneStoreTrackingDirectoryWrapper *trackingDir = create_OrgApacheLuceneStoreTrackingDirectoryWrapper_initWithOrgApacheLuceneStoreDirectory_(dir);
+    id<JavaUtilMap> newDVFiles = create_JavaUtilHashMap_init();
     id<JavaUtilSet> fieldInfosFiles = nil;
     OrgApacheLuceneIndexFieldInfos *fieldInfos = nil;
     jboolean success = false;
     @try {
       OrgApacheLuceneCodecsCodec *codec = [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info_))->info_)) getCodec];
-      OrgApacheLuceneIndexSegmentReader *reader = self->reader_ == nil ? [new_OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreIOContext_(info_, JreLoadStatic(OrgApacheLuceneStoreIOContext, READONCE_)) autorelease] : self->reader_;
+      OrgApacheLuceneIndexSegmentReader *reader = self->reader_ == nil ? create_OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreIOContext_(info_, JreLoadStatic(OrgApacheLuceneStoreIOContext, READONCE)) : self->reader_;
       @try {
-        OrgApacheLuceneIndexFieldInfos_Builder *builder = [new_OrgApacheLuceneIndexFieldInfos_Builder_initWithOrgApacheLuceneIndexFieldInfos_FieldNumbers_(((OrgApacheLuceneIndexIndexWriter *) nil_chk(writer_))->globalFieldNumberMap_) autorelease];
+        OrgApacheLuceneIndexFieldInfos_Builder *builder = create_OrgApacheLuceneIndexFieldInfos_Builder_initWithOrgApacheLuceneIndexFieldInfos_FieldNumbers_(((OrgApacheLuceneIndexIndexWriter *) nil_chk(writer_))->globalFieldNumberMap_);
         for (OrgApacheLuceneIndexFieldInfo * __strong fi in nil_chk([reader getFieldInfos])) {
           OrgApacheLuceneIndexFieldInfo *clone = [builder addWithOrgApacheLuceneIndexFieldInfo:fi];
           for (id<JavaUtilMap_Entry> __strong e in nil_chk([((id<JavaUtilMap>) nil_chk([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fi)) attributes])) entrySet])) {
@@ -455,11 +460,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexReadersAndUpdates_$2_$1)
         }
         for (NSString * __strong f in nil_chk([((id<JavaUtilMap>) nil_chk(dvUpdates->numericDVUpdates_)) keySet])) {
           OrgApacheLuceneIndexFieldInfo *fieldInfo = [builder getOrAddWithNSString:f];
-          [((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo)) setDocValuesTypeWithOrgApacheLuceneIndexDocValuesTypeEnum:JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, NUMERIC)];
+          [((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo)) setDocValuesTypeWithOrgApacheLuceneIndexDocValuesType:JreLoadEnum(OrgApacheLuceneIndexDocValuesType, NUMERIC)];
         }
         for (NSString * __strong f in nil_chk([((id<JavaUtilMap>) nil_chk(dvUpdates->binaryDVUpdates_)) keySet])) {
           OrgApacheLuceneIndexFieldInfo *fieldInfo = [builder getOrAddWithNSString:f];
-          [((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo)) setDocValuesTypeWithOrgApacheLuceneIndexDocValuesTypeEnum:JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, BINARY)];
+          [((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo)) setDocValuesTypeWithOrgApacheLuceneIndexDocValuesType:JreLoadEnum(OrgApacheLuceneIndexDocValuesType, BINARY)];
         }
         fieldInfos = [builder finish];
         OrgApacheLuceneCodecsDocValuesFormat *docValuesFormat = [((OrgApacheLuceneCodecsCodec *) nil_chk(codec)) docValuesFormat];
@@ -476,7 +481,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexReadersAndUpdates_$2_$1)
     }
     @finally {
       if (!success) {
-        [((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info_)) advanceNextWriteFieldInfosGen];
+        [info_ advanceNextWriteFieldInfosGen];
         [info_ advanceNextWriteDocValuesGen];
         for (NSString * __strong fileName in nil_chk([trackingDir getCreatedFiles])) {
           OrgApacheLuceneUtilIOUtils_deleteFilesIgnoringExceptionsWithOrgApacheLuceneStoreDirectory_withNSStringArray_(dir, [IOSObjectArray arrayWithObjects:(id[]){ fileName } count:1 type:NSString_class_()]);
@@ -504,7 +509,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexReadersAndUpdates_$2_$1)
       }
     }
     JreAssert((fieldInfosFiles != nil), (@"org/apache/lucene/index/ReadersAndUpdates.java:571 condition failed: assert fieldInfosFiles != null;"));
-    [((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info_)) setFieldInfosFilesWithJavaUtilSet:fieldInfosFiles];
+    [info_ setFieldInfosFilesWithJavaUtilSet:fieldInfosFiles];
     JreAssert((![newDVFiles isEmpty]), (@"org/apache/lucene/index/ReadersAndUpdates.java:578 condition failed: assert !newDVFiles.isEmpty();"));
     for (id<JavaUtilMap_Entry> __strong e in nil_chk([((id<JavaUtilMap>) nil_chk([info_ getDocValuesUpdatesFiles])) entrySet])) {
       if (![newDVFiles containsKeyWithId:[((id<JavaUtilMap_Entry>) nil_chk(e)) getKey]]) {
@@ -514,10 +519,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexReadersAndUpdates_$2_$1)
     [info_ setDocValuesUpdatesFilesWithJavaUtilMap:newDVFiles];
     [((OrgApacheLuceneIndexIndexWriter *) nil_chk(writer_)) checkpoint];
     if (reader_ != nil) {
-      OrgApacheLuceneIndexSegmentReader *newReader = [new_OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneIndexSegmentReader_withOrgApacheLuceneUtilBits_withInt_(info_, reader_, liveDocs_, [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(info_->info_)) maxDoc] - [info_ getDelCount] - pendingDeleteCount_) autorelease];
+      OrgApacheLuceneIndexSegmentReader *newReader = create_OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneIndexSegmentReader_withOrgApacheLuceneUtilBits_withInt_(info_, reader_, liveDocs_, [info_->info_ maxDoc] - [info_ getDelCount] - pendingDeleteCount_);
       jboolean reopened = false;
       @try {
-        [reader_ decRef];
+        [((OrgApacheLuceneIndexSegmentReader *) nil_chk(reader_)) decRef];
         JreStrongAssign(&reader_, newReader);
         reopened = true;
       }
@@ -552,7 +557,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexReadersAndUpdates_$2_$1)
 }
 
 - (NSString *)description {
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   [((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:@"ReadersAndLiveDocs(seg="])) appendWithId:info_];
   [((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:@" pendingDeleteCount="])) appendWithInt:pendingDeleteCount_];
   [((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:@" liveDocsShared="])) appendWithBoolean:liveDocsShared_];
@@ -588,13 +593,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexReadersAndUpdates_$2_$1)
     { "getReadOnlyLiveDocs", NULL, "Lorg.apache.lucene.util.Bits;", 0x21, NULL, NULL },
     { "dropChanges", NULL, "V", 0x21, NULL, NULL },
     { "writeLiveDocsWithOrgApacheLuceneStoreDirectory:", "writeLiveDocs", "Z", 0x21, "Ljava.io.IOException;", NULL },
-    { "handleNumericDVUpdatesWithOrgApacheLuceneIndexFieldInfos:withJavaUtilMap:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneCodecsDocValuesFormat:withOrgApacheLuceneIndexSegmentReader:withJavaUtilMap:", "handleNumericDVUpdates", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "handleBinaryDVUpdatesWithOrgApacheLuceneIndexFieldInfos:withJavaUtilMap:withOrgApacheLuceneStoreTrackingDirectoryWrapper:withOrgApacheLuceneCodecsDocValuesFormat:withOrgApacheLuceneIndexSegmentReader:withJavaUtilMap:", "handleBinaryDVUpdates", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "writeFieldInfosGenWithOrgApacheLuceneIndexFieldInfos:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneCodecsDocValuesFormat:withOrgApacheLuceneCodecsFieldInfosFormat:", "writeFieldInfosGen", "Ljava.util.Set;", 0x2, "Ljava.io.IOException;", NULL },
+    { "handleNumericDVUpdatesWithOrgApacheLuceneIndexFieldInfos:withJavaUtilMap:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneCodecsDocValuesFormat:withOrgApacheLuceneIndexSegmentReader:withJavaUtilMap:", "handleNumericDVUpdates", "V", 0x2, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/FieldInfos;Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/index/NumericDocValuesFieldUpdates;>;Lorg/apache/lucene/store/Directory;Lorg/apache/lucene/codecs/DocValuesFormat;Lorg/apache/lucene/index/SegmentReader;Ljava/util/Map<Ljava/lang/Integer;Ljava/util/Set<Ljava/lang/String;>;>;)V" },
+    { "handleBinaryDVUpdatesWithOrgApacheLuceneIndexFieldInfos:withJavaUtilMap:withOrgApacheLuceneStoreTrackingDirectoryWrapper:withOrgApacheLuceneCodecsDocValuesFormat:withOrgApacheLuceneIndexSegmentReader:withJavaUtilMap:", "handleBinaryDVUpdates", "V", 0x2, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/FieldInfos;Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/index/BinaryDocValuesFieldUpdates;>;Lorg/apache/lucene/store/TrackingDirectoryWrapper;Lorg/apache/lucene/codecs/DocValuesFormat;Lorg/apache/lucene/index/SegmentReader;Ljava/util/Map<Ljava/lang/Integer;Ljava/util/Set<Ljava/lang/String;>;>;)V" },
+    { "writeFieldInfosGenWithOrgApacheLuceneIndexFieldInfos:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneCodecsDocValuesFormat:withOrgApacheLuceneCodecsFieldInfosFormat:", "writeFieldInfosGen", "Ljava.util.Set;", 0x2, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/FieldInfos;Lorg/apache/lucene/store/Directory;Lorg/apache/lucene/codecs/DocValuesFormat;Lorg/apache/lucene/codecs/FieldInfosFormat;)Ljava/util/Set<Ljava/lang/String;>;" },
     { "writeFieldUpdatesWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexDocValuesFieldUpdates_Container:", "writeFieldUpdates", "V", 0x21, "Ljava.io.IOException;", NULL },
     { "getReaderForMergeWithOrgApacheLuceneStoreIOContext:", "getReaderForMerge", "Lorg.apache.lucene.index.SegmentReader;", 0x20, "Ljava.io.IOException;", NULL },
     { "dropMergingUpdates", NULL, "V", 0x21, NULL, NULL },
-    { "getMergingFieldUpdates", NULL, "Ljava.util.Map;", 0x21, NULL, NULL },
+    { "getMergingFieldUpdates", NULL, "Ljava.util.Map;", 0x21, NULL, "()Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/index/DocValuesFieldUpdates;>;" },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -625,9 +630,11 @@ void OrgApacheLuceneIndexReadersAndUpdates_initWithOrgApacheLuceneIndexIndexWrit
 }
 
 OrgApacheLuceneIndexReadersAndUpdates *new_OrgApacheLuceneIndexReadersAndUpdates_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentCommitInfo_(OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexSegmentCommitInfo *info) {
-  OrgApacheLuceneIndexReadersAndUpdates *self = [OrgApacheLuceneIndexReadersAndUpdates alloc];
-  OrgApacheLuceneIndexReadersAndUpdates_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentCommitInfo_(self, writer, info);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexReadersAndUpdates, initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentCommitInfo_, writer, info)
+}
+
+OrgApacheLuceneIndexReadersAndUpdates *create_OrgApacheLuceneIndexReadersAndUpdates_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentCommitInfo_(OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexSegmentCommitInfo *info) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexReadersAndUpdates, initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentCommitInfo_, writer, info)
 }
 
 void OrgApacheLuceneIndexReadersAndUpdates_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentReader_(OrgApacheLuceneIndexReadersAndUpdates *self, OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexSegmentReader *reader) {
@@ -645,9 +652,11 @@ void OrgApacheLuceneIndexReadersAndUpdates_initWithOrgApacheLuceneIndexIndexWrit
 }
 
 OrgApacheLuceneIndexReadersAndUpdates *new_OrgApacheLuceneIndexReadersAndUpdates_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentReader_(OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexSegmentReader *reader) {
-  OrgApacheLuceneIndexReadersAndUpdates *self = [OrgApacheLuceneIndexReadersAndUpdates alloc];
-  OrgApacheLuceneIndexReadersAndUpdates_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentReader_(self, writer, reader);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexReadersAndUpdates, initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentReader_, writer, reader)
+}
+
+OrgApacheLuceneIndexReadersAndUpdates *create_OrgApacheLuceneIndexReadersAndUpdates_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentReader_(OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexSegmentReader *reader) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexReadersAndUpdates, initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentReader_, writer, reader)
 }
 
 void OrgApacheLuceneIndexReadersAndUpdates_handleNumericDVUpdatesWithOrgApacheLuceneIndexFieldInfos_withJavaUtilMap_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneCodecsDocValuesFormat_withOrgApacheLuceneIndexSegmentReader_withJavaUtilMap_(OrgApacheLuceneIndexReadersAndUpdates *self, OrgApacheLuceneIndexFieldInfos *infos, id<JavaUtilMap> updates, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneCodecsDocValuesFormat *dvFormat, OrgApacheLuceneIndexSegmentReader *reader, id<JavaUtilMap> fieldFiles) {
@@ -657,20 +666,20 @@ void OrgApacheLuceneIndexReadersAndUpdates_handleNumericDVUpdatesWithOrgApacheLu
     jlong nextDocValuesGen = [((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(self->info_)) getNextDocValuesGen];
     NSString *segmentSuffix = JavaLangLong_toStringWithLong_withInt_(nextDocValuesGen, JavaLangCharacter_MAX_RADIX);
     jlong estUpdatesSize = [((OrgApacheLuceneIndexNumericDocValuesFieldUpdates *) nil_chk(fieldUpdates)) ramBytesPerDoc] * [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(self->info_->info_)) maxDoc];
-    OrgApacheLuceneStoreIOContext *updatesContext = [new_OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreFlushInfo_([new_OrgApacheLuceneStoreFlushInfo_initWithInt_withLong_([self->info_->info_ maxDoc], estUpdatesSize) autorelease]) autorelease];
+    OrgApacheLuceneStoreIOContext *updatesContext = create_OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreFlushInfo_(create_OrgApacheLuceneStoreFlushInfo_initWithInt_withLong_([self->info_->info_ maxDoc], estUpdatesSize));
     OrgApacheLuceneIndexFieldInfo *fieldInfo = [((OrgApacheLuceneIndexFieldInfos *) nil_chk(infos)) fieldInfoWithNSString:field];
     JreAssert((fieldInfo != nil), (@"org/apache/lucene/index/ReadersAndUpdates.java:320 condition failed: assert fieldInfo != null;"));
     [((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo)) setDocValuesGenWithLong:nextDocValuesGen];
-    OrgApacheLuceneIndexFieldInfos *fieldInfos = [new_OrgApacheLuceneIndexFieldInfos_initWithOrgApacheLuceneIndexFieldInfoArray_([IOSObjectArray arrayWithObjects:(id[]){ fieldInfo } count:1 type:OrgApacheLuceneIndexFieldInfo_class_()]) autorelease];
-    OrgApacheLuceneStoreTrackingDirectoryWrapper *trackingDir = [new_OrgApacheLuceneStoreTrackingDirectoryWrapper_initWithOrgApacheLuceneStoreDirectory_(dir) autorelease];
-    OrgApacheLuceneIndexSegmentWriteState *state = [new_OrgApacheLuceneIndexSegmentWriteState_initWithOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexBufferedUpdates_withOrgApacheLuceneStoreIOContext_withNSString_(nil, trackingDir, self->info_->info_, fieldInfos, nil, updatesContext, segmentSuffix) autorelease];
+    OrgApacheLuceneIndexFieldInfos *fieldInfos = create_OrgApacheLuceneIndexFieldInfos_initWithOrgApacheLuceneIndexFieldInfoArray_([IOSObjectArray arrayWithObjects:(id[]){ fieldInfo } count:1 type:OrgApacheLuceneIndexFieldInfo_class_()]);
+    OrgApacheLuceneStoreTrackingDirectoryWrapper *trackingDir = create_OrgApacheLuceneStoreTrackingDirectoryWrapper_initWithOrgApacheLuceneStoreDirectory_(dir);
+    OrgApacheLuceneIndexSegmentWriteState *state = create_OrgApacheLuceneIndexSegmentWriteState_initWithOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexBufferedUpdates_withOrgApacheLuceneStoreIOContext_withNSString_(nil, trackingDir, self->info_->info_, fieldInfos, nil, updatesContext, segmentSuffix);
     {
       OrgApacheLuceneCodecsDocValuesConsumer *fieldsConsumer = [((OrgApacheLuceneCodecsDocValuesFormat *) nil_chk(dvFormat)) fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:state];
-      JavaLangThrowable *__primaryException1 = nil;
+      NSException *__primaryException1 = nil;
       @try {
-        [((OrgApacheLuceneCodecsDocValuesConsumer *) nil_chk(fieldsConsumer)) addNumericFieldWithOrgApacheLuceneIndexFieldInfo:fieldInfo withJavaLangIterable:[new_OrgApacheLuceneIndexReadersAndUpdates_$1_initWithOrgApacheLuceneIndexSegmentReader_withNSString_withOrgApacheLuceneIndexNumericDocValuesFieldUpdates_(reader, field, fieldUpdates) autorelease]];
+        [((OrgApacheLuceneCodecsDocValuesConsumer *) nil_chk(fieldsConsumer)) addNumericFieldWithOrgApacheLuceneIndexFieldInfo:fieldInfo withJavaLangIterable:create_OrgApacheLuceneIndexReadersAndUpdates_$1_initWithOrgApacheLuceneIndexSegmentReader_withNSString_withOrgApacheLuceneIndexNumericDocValuesFieldUpdates_(reader, field, fieldUpdates)];
       }
-      @catch (JavaLangThrowable *e) {
+      @catch (NSException *e) {
         __primaryException1 = e;
         @throw e;
       }
@@ -679,8 +688,8 @@ void OrgApacheLuceneIndexReadersAndUpdates_handleNumericDVUpdatesWithOrgApacheLu
           if (__primaryException1 != nil) {
             @try {
               [fieldsConsumer close];
-            } @catch (JavaLangThrowable *e) {
-              [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+            } @catch (NSException *e) {
+              [__primaryException1 addSuppressedWithNSException:e];
             }
           } else {
             [fieldsConsumer close];
@@ -701,20 +710,20 @@ void OrgApacheLuceneIndexReadersAndUpdates_handleBinaryDVUpdatesWithOrgApacheLuc
     jlong nextDocValuesGen = [((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(self->info_)) getNextDocValuesGen];
     NSString *segmentSuffix = JavaLangLong_toStringWithLong_withInt_(nextDocValuesGen, JavaLangCharacter_MAX_RADIX);
     jlong estUpdatesSize = [((OrgApacheLuceneIndexBinaryDocValuesFieldUpdates *) nil_chk(fieldUpdates)) ramBytesPerDoc] * [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(self->info_->info_)) maxDoc];
-    OrgApacheLuceneStoreIOContext *updatesContext = [new_OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreFlushInfo_([new_OrgApacheLuceneStoreFlushInfo_initWithInt_withLong_([self->info_->info_ maxDoc], estUpdatesSize) autorelease]) autorelease];
+    OrgApacheLuceneStoreIOContext *updatesContext = create_OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreFlushInfo_(create_OrgApacheLuceneStoreFlushInfo_initWithInt_withLong_([self->info_->info_ maxDoc], estUpdatesSize));
     OrgApacheLuceneIndexFieldInfo *fieldInfo = [((OrgApacheLuceneIndexFieldInfos *) nil_chk(infos)) fieldInfoWithNSString:field];
     JreAssert((fieldInfo != nil), (@"org/apache/lucene/index/ReadersAndUpdates.java:393 condition failed: assert fieldInfo != null;"));
     [((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo)) setDocValuesGenWithLong:nextDocValuesGen];
-    OrgApacheLuceneIndexFieldInfos *fieldInfos = [new_OrgApacheLuceneIndexFieldInfos_initWithOrgApacheLuceneIndexFieldInfoArray_([IOSObjectArray arrayWithObjects:(id[]){ fieldInfo } count:1 type:OrgApacheLuceneIndexFieldInfo_class_()]) autorelease];
-    OrgApacheLuceneStoreTrackingDirectoryWrapper *trackingDir = [new_OrgApacheLuceneStoreTrackingDirectoryWrapper_initWithOrgApacheLuceneStoreDirectory_(dir) autorelease];
-    OrgApacheLuceneIndexSegmentWriteState *state = [new_OrgApacheLuceneIndexSegmentWriteState_initWithOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexBufferedUpdates_withOrgApacheLuceneStoreIOContext_withNSString_(nil, trackingDir, self->info_->info_, fieldInfos, nil, updatesContext, segmentSuffix) autorelease];
+    OrgApacheLuceneIndexFieldInfos *fieldInfos = create_OrgApacheLuceneIndexFieldInfos_initWithOrgApacheLuceneIndexFieldInfoArray_([IOSObjectArray arrayWithObjects:(id[]){ fieldInfo } count:1 type:OrgApacheLuceneIndexFieldInfo_class_()]);
+    OrgApacheLuceneStoreTrackingDirectoryWrapper *trackingDir = create_OrgApacheLuceneStoreTrackingDirectoryWrapper_initWithOrgApacheLuceneStoreDirectory_(dir);
+    OrgApacheLuceneIndexSegmentWriteState *state = create_OrgApacheLuceneIndexSegmentWriteState_initWithOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexBufferedUpdates_withOrgApacheLuceneStoreIOContext_withNSString_(nil, trackingDir, self->info_->info_, fieldInfos, nil, updatesContext, segmentSuffix);
     {
       OrgApacheLuceneCodecsDocValuesConsumer *fieldsConsumer = [((OrgApacheLuceneCodecsDocValuesFormat *) nil_chk(dvFormat)) fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:state];
-      JavaLangThrowable *__primaryException1 = nil;
+      NSException *__primaryException1 = nil;
       @try {
-        [((OrgApacheLuceneCodecsDocValuesConsumer *) nil_chk(fieldsConsumer)) addBinaryFieldWithOrgApacheLuceneIndexFieldInfo:fieldInfo withJavaLangIterable:[new_OrgApacheLuceneIndexReadersAndUpdates_$2_initWithOrgApacheLuceneIndexSegmentReader_withNSString_withOrgApacheLuceneIndexBinaryDocValuesFieldUpdates_(reader, field, fieldUpdates) autorelease]];
+        [((OrgApacheLuceneCodecsDocValuesConsumer *) nil_chk(fieldsConsumer)) addBinaryFieldWithOrgApacheLuceneIndexFieldInfo:fieldInfo withJavaLangIterable:create_OrgApacheLuceneIndexReadersAndUpdates_$2_initWithOrgApacheLuceneIndexSegmentReader_withNSString_withOrgApacheLuceneIndexBinaryDocValuesFieldUpdates_(reader, field, fieldUpdates)];
       }
-      @catch (JavaLangThrowable *e) {
+      @catch (NSException *e) {
         __primaryException1 = e;
         @throw e;
       }
@@ -723,8 +732,8 @@ void OrgApacheLuceneIndexReadersAndUpdates_handleBinaryDVUpdatesWithOrgApacheLuc
           if (__primaryException1 != nil) {
             @try {
               [fieldsConsumer close];
-            } @catch (JavaLangThrowable *e) {
-              [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+            } @catch (NSException *e) {
+              [__primaryException1 addSuppressedWithNSException:e];
             }
           } else {
             [fieldsConsumer close];
@@ -742,8 +751,8 @@ id<JavaUtilSet> OrgApacheLuceneIndexReadersAndUpdates_writeFieldInfosGenWithOrgA
   jlong nextFieldInfosGen = [((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(self->info_)) getNextFieldInfosGen];
   NSString *segmentSuffix = JavaLangLong_toStringWithLong_withInt_(nextFieldInfosGen, JavaLangCharacter_MAX_RADIX);
   jlong estInfosSize = 40 + 90 * [((OrgApacheLuceneIndexFieldInfos *) nil_chk(fieldInfos)) size];
-  OrgApacheLuceneStoreIOContext *infosContext = [new_OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreFlushInfo_([new_OrgApacheLuceneStoreFlushInfo_initWithInt_withLong_([((OrgApacheLuceneIndexSegmentInfo *) nil_chk(self->info_->info_)) maxDoc], estInfosSize) autorelease]) autorelease];
-  OrgApacheLuceneStoreTrackingDirectoryWrapper *trackingDir = [new_OrgApacheLuceneStoreTrackingDirectoryWrapper_initWithOrgApacheLuceneStoreDirectory_(dir) autorelease];
+  OrgApacheLuceneStoreIOContext *infosContext = create_OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreFlushInfo_(create_OrgApacheLuceneStoreFlushInfo_initWithInt_withLong_([((OrgApacheLuceneIndexSegmentInfo *) nil_chk(self->info_->info_)) maxDoc], estInfosSize));
+  OrgApacheLuceneStoreTrackingDirectoryWrapper *trackingDir = create_OrgApacheLuceneStoreTrackingDirectoryWrapper_initWithOrgApacheLuceneStoreDirectory_(dir);
   [((OrgApacheLuceneCodecsFieldInfosFormat *) nil_chk(infosFormat)) writeWithOrgApacheLuceneStoreDirectory:trackingDir withOrgApacheLuceneIndexSegmentInfo:self->info_->info_ withNSString:segmentSuffix withOrgApacheLuceneIndexFieldInfos:fieldInfos withOrgApacheLuceneStoreIOContext:infosContext];
   [self->info_ advanceFieldInfosGen];
   return [trackingDir getCreatedFiles];
@@ -755,7 +764,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexReadersAndUpdates)
 
 - (id<JavaUtilIterator>)iterator {
   [((OrgApacheLuceneIndexNumericDocValuesFieldUpdates_Iterator *) nil_chk(updatesIter_)) reset];
-  return [new_OrgApacheLuceneIndexReadersAndUpdates_$1_$1_initWithOrgApacheLuceneIndexReadersAndUpdates_$1_(self) autorelease];
+  return create_OrgApacheLuceneIndexReadersAndUpdates_$1_$1_initWithOrgApacheLuceneIndexReadersAndUpdates_$1_(self);
 }
 
 - (instancetype)initWithOrgApacheLuceneIndexSegmentReader:(OrgApacheLuceneIndexSegmentReader *)capture$0
@@ -763,6 +772,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexReadersAndUpdates)
      withOrgApacheLuceneIndexNumericDocValuesFieldUpdates:(OrgApacheLuceneIndexNumericDocValuesFieldUpdates *)capture$2 {
   OrgApacheLuceneIndexReadersAndUpdates_$1_initWithOrgApacheLuceneIndexSegmentReader_withNSString_withOrgApacheLuceneIndexNumericDocValuesFieldUpdates_(self, capture$0, capture$1, capture$2);
   return self;
+}
+
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
+  return JreDefaultFastEnumeration(self, state, stackbuf, len);
 }
 
 - (void)dealloc {
@@ -775,13 +788,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexReadersAndUpdates)
   [super dealloc];
 }
 
-- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, NULL },
+    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<Ljava/lang/Number;>;" },
     { "initWithOrgApacheLuceneIndexSegmentReader:withNSString:withOrgApacheLuceneIndexNumericDocValuesFieldUpdates:", "", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -812,9 +821,11 @@ void OrgApacheLuceneIndexReadersAndUpdates_$1_initWithOrgApacheLuceneIndexSegmen
 }
 
 OrgApacheLuceneIndexReadersAndUpdates_$1 *new_OrgApacheLuceneIndexReadersAndUpdates_$1_initWithOrgApacheLuceneIndexSegmentReader_withNSString_withOrgApacheLuceneIndexNumericDocValuesFieldUpdates_(OrgApacheLuceneIndexSegmentReader *capture$0, NSString *capture$1, OrgApacheLuceneIndexNumericDocValuesFieldUpdates *capture$2) {
-  OrgApacheLuceneIndexReadersAndUpdates_$1 *self = [OrgApacheLuceneIndexReadersAndUpdates_$1 alloc];
-  OrgApacheLuceneIndexReadersAndUpdates_$1_initWithOrgApacheLuceneIndexSegmentReader_withNSString_withOrgApacheLuceneIndexNumericDocValuesFieldUpdates_(self, capture$0, capture$1, capture$2);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexReadersAndUpdates_$1, initWithOrgApacheLuceneIndexSegmentReader_withNSString_withOrgApacheLuceneIndexNumericDocValuesFieldUpdates_, capture$0, capture$1, capture$2)
+}
+
+OrgApacheLuceneIndexReadersAndUpdates_$1 *create_OrgApacheLuceneIndexReadersAndUpdates_$1_initWithOrgApacheLuceneIndexSegmentReader_withNSString_withOrgApacheLuceneIndexNumericDocValuesFieldUpdates_(OrgApacheLuceneIndexSegmentReader *capture$0, NSString *capture$1, OrgApacheLuceneIndexNumericDocValuesFieldUpdates *capture$2) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexReadersAndUpdates_$1, initWithOrgApacheLuceneIndexSegmentReader_withNSString_withOrgApacheLuceneIndexNumericDocValuesFieldUpdates_, capture$0, capture$1, capture$2)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexReadersAndUpdates_$1)
@@ -827,7 +838,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexReadersAndUpdates_$1)
 
 - (NSNumber *)next {
   if (++curDoc_ >= this$0_->maxDoc_) {
-    @throw [new_JavaUtilNoSuchElementException_initWithNSString_(@"no more documents to return values for") autorelease];
+    @throw create_JavaUtilNoSuchElementException_initWithNSString_(@"no more documents to return values for");
   }
   if (curDoc_ == updateDoc_) {
     JavaLangLong *value = [((OrgApacheLuceneIndexNumericDocValuesFieldUpdates_Iterator *) nil_chk(this$0_->updatesIter_)) value];
@@ -846,7 +857,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexReadersAndUpdates_$1)
 }
 
 - (void)remove {
-  @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(@"this iterator does not support removing elements") autorelease];
+  @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"this iterator does not support removing elements");
 }
 
 - (instancetype)initWithOrgApacheLuceneIndexReadersAndUpdates_$1:(OrgApacheLuceneIndexReadersAndUpdates_$1 *)outer$ {
@@ -886,9 +897,11 @@ void OrgApacheLuceneIndexReadersAndUpdates_$1_$1_initWithOrgApacheLuceneIndexRea
 }
 
 OrgApacheLuceneIndexReadersAndUpdates_$1_$1 *new_OrgApacheLuceneIndexReadersAndUpdates_$1_$1_initWithOrgApacheLuceneIndexReadersAndUpdates_$1_(OrgApacheLuceneIndexReadersAndUpdates_$1 *outer$) {
-  OrgApacheLuceneIndexReadersAndUpdates_$1_$1 *self = [OrgApacheLuceneIndexReadersAndUpdates_$1_$1 alloc];
-  OrgApacheLuceneIndexReadersAndUpdates_$1_$1_initWithOrgApacheLuceneIndexReadersAndUpdates_$1_(self, outer$);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexReadersAndUpdates_$1_$1, initWithOrgApacheLuceneIndexReadersAndUpdates_$1_, outer$)
+}
+
+OrgApacheLuceneIndexReadersAndUpdates_$1_$1 *create_OrgApacheLuceneIndexReadersAndUpdates_$1_$1_initWithOrgApacheLuceneIndexReadersAndUpdates_$1_(OrgApacheLuceneIndexReadersAndUpdates_$1 *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexReadersAndUpdates_$1_$1, initWithOrgApacheLuceneIndexReadersAndUpdates_$1_, outer$)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexReadersAndUpdates_$1_$1)
@@ -897,7 +910,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexReadersAndUpdates_$1_$1)
 
 - (id<JavaUtilIterator>)iterator {
   [((OrgApacheLuceneIndexBinaryDocValuesFieldUpdates_Iterator *) nil_chk(updatesIter_)) reset];
-  return [new_OrgApacheLuceneIndexReadersAndUpdates_$2_$1_initWithOrgApacheLuceneIndexReadersAndUpdates_$2_(self) autorelease];
+  return create_OrgApacheLuceneIndexReadersAndUpdates_$2_$1_initWithOrgApacheLuceneIndexReadersAndUpdates_$2_(self);
 }
 
 - (instancetype)initWithOrgApacheLuceneIndexSegmentReader:(OrgApacheLuceneIndexSegmentReader *)capture$0
@@ -905,6 +918,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexReadersAndUpdates_$1_$1)
       withOrgApacheLuceneIndexBinaryDocValuesFieldUpdates:(OrgApacheLuceneIndexBinaryDocValuesFieldUpdates *)capture$2 {
   OrgApacheLuceneIndexReadersAndUpdates_$2_initWithOrgApacheLuceneIndexSegmentReader_withNSString_withOrgApacheLuceneIndexBinaryDocValuesFieldUpdates_(self, capture$0, capture$1, capture$2);
   return self;
+}
+
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
+  return JreDefaultFastEnumeration(self, state, stackbuf, len);
 }
 
 - (void)dealloc {
@@ -917,13 +934,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexReadersAndUpdates_$1_$1)
   [super dealloc];
 }
 
-- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, NULL },
+    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<Lorg/apache/lucene/util/BytesRef;>;" },
     { "initWithOrgApacheLuceneIndexSegmentReader:withNSString:withOrgApacheLuceneIndexBinaryDocValuesFieldUpdates:", "", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -954,9 +967,11 @@ void OrgApacheLuceneIndexReadersAndUpdates_$2_initWithOrgApacheLuceneIndexSegmen
 }
 
 OrgApacheLuceneIndexReadersAndUpdates_$2 *new_OrgApacheLuceneIndexReadersAndUpdates_$2_initWithOrgApacheLuceneIndexSegmentReader_withNSString_withOrgApacheLuceneIndexBinaryDocValuesFieldUpdates_(OrgApacheLuceneIndexSegmentReader *capture$0, NSString *capture$1, OrgApacheLuceneIndexBinaryDocValuesFieldUpdates *capture$2) {
-  OrgApacheLuceneIndexReadersAndUpdates_$2 *self = [OrgApacheLuceneIndexReadersAndUpdates_$2 alloc];
-  OrgApacheLuceneIndexReadersAndUpdates_$2_initWithOrgApacheLuceneIndexSegmentReader_withNSString_withOrgApacheLuceneIndexBinaryDocValuesFieldUpdates_(self, capture$0, capture$1, capture$2);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexReadersAndUpdates_$2, initWithOrgApacheLuceneIndexSegmentReader_withNSString_withOrgApacheLuceneIndexBinaryDocValuesFieldUpdates_, capture$0, capture$1, capture$2)
+}
+
+OrgApacheLuceneIndexReadersAndUpdates_$2 *create_OrgApacheLuceneIndexReadersAndUpdates_$2_initWithOrgApacheLuceneIndexSegmentReader_withNSString_withOrgApacheLuceneIndexBinaryDocValuesFieldUpdates_(OrgApacheLuceneIndexSegmentReader *capture$0, NSString *capture$1, OrgApacheLuceneIndexBinaryDocValuesFieldUpdates *capture$2) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexReadersAndUpdates_$2, initWithOrgApacheLuceneIndexSegmentReader_withNSString_withOrgApacheLuceneIndexBinaryDocValuesFieldUpdates_, capture$0, capture$1, capture$2)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexReadersAndUpdates_$2)
@@ -969,7 +984,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexReadersAndUpdates_$2)
 
 - (OrgApacheLuceneUtilBytesRef *)next {
   if (++curDoc_ >= this$0_->maxDoc_) {
-    @throw [new_JavaUtilNoSuchElementException_initWithNSString_(@"no more documents to return values for") autorelease];
+    @throw create_JavaUtilNoSuchElementException_initWithNSString_(@"no more documents to return values for");
   }
   if (curDoc_ == updateDoc_) {
     OrgApacheLuceneUtilBytesRef *value = [((OrgApacheLuceneIndexBinaryDocValuesFieldUpdates_Iterator *) nil_chk(this$0_->updatesIter_)) value];
@@ -988,7 +1003,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexReadersAndUpdates_$2)
 }
 
 - (void)remove {
-  @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(@"this iterator does not support removing elements") autorelease];
+  @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"this iterator does not support removing elements");
 }
 
 - (instancetype)initWithOrgApacheLuceneIndexReadersAndUpdates_$2:(OrgApacheLuceneIndexReadersAndUpdates_$2 *)outer$ {
@@ -1028,9 +1043,11 @@ void OrgApacheLuceneIndexReadersAndUpdates_$2_$1_initWithOrgApacheLuceneIndexRea
 }
 
 OrgApacheLuceneIndexReadersAndUpdates_$2_$1 *new_OrgApacheLuceneIndexReadersAndUpdates_$2_$1_initWithOrgApacheLuceneIndexReadersAndUpdates_$2_(OrgApacheLuceneIndexReadersAndUpdates_$2 *outer$) {
-  OrgApacheLuceneIndexReadersAndUpdates_$2_$1 *self = [OrgApacheLuceneIndexReadersAndUpdates_$2_$1 alloc];
-  OrgApacheLuceneIndexReadersAndUpdates_$2_$1_initWithOrgApacheLuceneIndexReadersAndUpdates_$2_(self, outer$);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexReadersAndUpdates_$2_$1, initWithOrgApacheLuceneIndexReadersAndUpdates_$2_, outer$)
+}
+
+OrgApacheLuceneIndexReadersAndUpdates_$2_$1 *create_OrgApacheLuceneIndexReadersAndUpdates_$2_$1_initWithOrgApacheLuceneIndexReadersAndUpdates_$2_(OrgApacheLuceneIndexReadersAndUpdates_$2 *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexReadersAndUpdates_$2_$1, initWithOrgApacheLuceneIndexReadersAndUpdates_$2_, outer$)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexReadersAndUpdates_$2_$1)

@@ -5,22 +5,22 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexDocumentsWriterFlushQueue_INCLUDE_ALL")
-#if OrgApacheLuceneIndexDocumentsWriterFlushQueue_RESTRICT
-#define OrgApacheLuceneIndexDocumentsWriterFlushQueue_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriterFlushQueue")
+#ifdef RESTRICT_OrgApacheLuceneIndexDocumentsWriterFlushQueue
+#define INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriterFlushQueue 0
 #else
-#define OrgApacheLuceneIndexDocumentsWriterFlushQueue_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriterFlushQueue 1
 #endif
-#undef OrgApacheLuceneIndexDocumentsWriterFlushQueue_RESTRICT
-#if OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket_INCLUDE
-#define OrgApacheLuceneIndexDocumentsWriterFlushQueue_FlushTicket_INCLUDE 1
+#undef RESTRICT_OrgApacheLuceneIndexDocumentsWriterFlushQueue
+#ifdef INCLUDE_OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket
+#define INCLUDE_OrgApacheLuceneIndexDocumentsWriterFlushQueue_FlushTicket 1
 #endif
-#if OrgApacheLuceneIndexDocumentsWriterFlushQueue_GlobalDeletesTicket_INCLUDE
-#define OrgApacheLuceneIndexDocumentsWriterFlushQueue_FlushTicket_INCLUDE 1
+#ifdef INCLUDE_OrgApacheLuceneIndexDocumentsWriterFlushQueue_GlobalDeletesTicket
+#define INCLUDE_OrgApacheLuceneIndexDocumentsWriterFlushQueue_FlushTicket 1
 #endif
 
-#if !defined (_OrgApacheLuceneIndexDocumentsWriterFlushQueue_) && (OrgApacheLuceneIndexDocumentsWriterFlushQueue_INCLUDE_ALL || OrgApacheLuceneIndexDocumentsWriterFlushQueue_INCLUDE)
-#define _OrgApacheLuceneIndexDocumentsWriterFlushQueue_
+#if !defined (OrgApacheLuceneIndexDocumentsWriterFlushQueue_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriterFlushQueue || defined(INCLUDE_OrgApacheLuceneIndexDocumentsWriterFlushQueue))
+#define OrgApacheLuceneIndexDocumentsWriterFlushQueue_
 
 @class OrgApacheLuceneIndexDocumentsWriterDeleteQueue;
 @class OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket;
@@ -28,6 +28,9 @@
 @class OrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment;
 @class OrgApacheLuceneIndexIndexWriter;
 
+/*!
+  
+ */
 @interface OrgApacheLuceneIndexDocumentsWriterFlushQueue : NSObject
 
 #pragma mark Public
@@ -63,12 +66,14 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexDocumentsWriterFlushQueue_init(OrgApa
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterFlushQueue *new_OrgApacheLuceneIndexDocumentsWriterFlushQueue_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterFlushQueue *create_OrgApacheLuceneIndexDocumentsWriterFlushQueue_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterFlushQueue)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexDocumentsWriterFlushQueue_FlushTicket_) && (OrgApacheLuceneIndexDocumentsWriterFlushQueue_INCLUDE_ALL || OrgApacheLuceneIndexDocumentsWriterFlushQueue_FlushTicket_INCLUDE)
-#define _OrgApacheLuceneIndexDocumentsWriterFlushQueue_FlushTicket_
+#if !defined (OrgApacheLuceneIndexDocumentsWriterFlushQueue_FlushTicket_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriterFlushQueue || defined(INCLUDE_OrgApacheLuceneIndexDocumentsWriterFlushQueue_FlushTicket))
+#define OrgApacheLuceneIndexDocumentsWriterFlushQueue_FlushTicket_
 
 @class OrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment;
 @class OrgApacheLuceneIndexFrozenBufferedUpdates;
@@ -92,6 +97,13 @@ withOrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment:(OrgApacheLucene
 
 - (void)publishWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
 
+/*!
+ @brief Publishes the flushed segment, segment private deletes (if any) and its
+ associated global delete (if present) to IndexWriter.
+ The actual
+ publishing operation is synced on <code>IW -> BDS</code> so that the <code>SegmentInfo</code>'s
+ delete generation is always GlobalPacket_deleteGeneration + 1
+ */
 - (void)publishFlushedSegmentWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)indexWriter
  withOrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment:(OrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment *)newSegment
                    withOrgApacheLuceneIndexFrozenBufferedUpdates:(OrgApacheLuceneIndexFrozenBufferedUpdates *)globalPacket;
@@ -108,8 +120,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterFlushQueue_FlushTi
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexDocumentsWriterFlushQueue_GlobalDeletesTicket_) && (OrgApacheLuceneIndexDocumentsWriterFlushQueue_INCLUDE_ALL || OrgApacheLuceneIndexDocumentsWriterFlushQueue_GlobalDeletesTicket_INCLUDE)
-#define _OrgApacheLuceneIndexDocumentsWriterFlushQueue_GlobalDeletesTicket_
+#if !defined (OrgApacheLuceneIndexDocumentsWriterFlushQueue_GlobalDeletesTicket_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriterFlushQueue || defined(INCLUDE_OrgApacheLuceneIndexDocumentsWriterFlushQueue_GlobalDeletesTicket))
+#define OrgApacheLuceneIndexDocumentsWriterFlushQueue_GlobalDeletesTicket_
 
 @class OrgApacheLuceneIndexFrozenBufferedUpdates;
 @class OrgApacheLuceneIndexIndexWriter;
@@ -132,12 +144,14 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexDocumentsWriterFlushQueue_GlobalDelet
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterFlushQueue_GlobalDeletesTicket *new_OrgApacheLuceneIndexDocumentsWriterFlushQueue_GlobalDeletesTicket_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_(OrgApacheLuceneIndexFrozenBufferedUpdates *frozenUpdates) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterFlushQueue_GlobalDeletesTicket *create_OrgApacheLuceneIndexDocumentsWriterFlushQueue_GlobalDeletesTicket_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_(OrgApacheLuceneIndexFrozenBufferedUpdates *frozenUpdates);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterFlushQueue_GlobalDeletesTicket)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket_) && (OrgApacheLuceneIndexDocumentsWriterFlushQueue_INCLUDE_ALL || OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket_INCLUDE)
-#define _OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket_
+#if !defined (OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriterFlushQueue || defined(INCLUDE_OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket))
+#define OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket_
 
 @class OrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment;
 @class OrgApacheLuceneIndexFrozenBufferedUpdates;
@@ -165,8 +179,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlus
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket *new_OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_(OrgApacheLuceneIndexFrozenBufferedUpdates *frozenDeletes) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket *create_OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_(OrgApacheLuceneIndexFrozenBufferedUpdates *frozenDeletes);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexDocumentsWriterFlushQueue_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriterFlushQueue")

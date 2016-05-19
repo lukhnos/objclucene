@@ -4,11 +4,13 @@
 //
 
 #include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/IllegalArgumentException.h"
+#include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/analysis/TokenFilter.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/ngram/Lucene43EdgeNGramTokenFilter.h"
@@ -48,6 +50,14 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter, po
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter, posLenAtt_, id<OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute>)
 
 @implementation OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter
+
++ (jint)DEFAULT_MAX_GRAM_SIZE {
+  return OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter_DEFAULT_MAX_GRAM_SIZE;
+}
+
++ (jint)DEFAULT_MIN_GRAM_SIZE {
+  return OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter_DEFAULT_MIN_GRAM_SIZE;
+}
 
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
                                                    withInt:(jint)minGram
@@ -101,6 +111,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter, po
   savePosIncr_ = 0;
 }
 
++ (IOSObjectArray *)__annotations {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
 - (void)dealloc {
   RELEASE_(charUtils_);
   RELEASE_(curTermBuffer_);
@@ -109,10 +123,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter, po
   RELEASE_(posIncrAtt_);
   RELEASE_(posLenAtt_);
   [super dealloc];
-}
-
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -153,10 +163,10 @@ void OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter_initWithOrgApacheL
   JreStrongAssign(&self->posIncrAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_class_()]);
   JreStrongAssign(&self->posLenAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute_class_()]);
   if (minGram < 1) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"minGram must be greater than zero") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"minGram must be greater than zero");
   }
   if (minGram > maxGram) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"minGram must not be greater than maxGram") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"minGram must not be greater than maxGram");
   }
   JreStrongAssign(&self->charUtils_, OrgApacheLuceneAnalysisUtilCharacterUtils_getJava4Instance());
   self->minGram_ = minGram;
@@ -164,9 +174,11 @@ void OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter_initWithOrgApacheL
 }
 
 OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter *new_OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(OrgApacheLuceneAnalysisTokenStream *input, jint minGram, jint maxGram) {
-  OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter *self = [OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter alloc];
-  OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(self, input, minGram, maxGram);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_, input, minGram, maxGram)
+}
+
+OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter *create_OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(OrgApacheLuceneAnalysisTokenStream *input, jint minGram, jint maxGram) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_, input, minGram, maxGram)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter)

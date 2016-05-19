@@ -5,27 +5,38 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCoreUpperCaseFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCoreUpperCaseFilter_RESTRICT
-#define OrgApacheLuceneAnalysisCoreUpperCaseFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreUpperCaseFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCoreUpperCaseFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCoreUpperCaseFilter 0
 #else
-#define OrgApacheLuceneAnalysisCoreUpperCaseFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCoreUpperCaseFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisCoreUpperCaseFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCoreUpperCaseFilter
 
-#if !defined (_OrgApacheLuceneAnalysisCoreUpperCaseFilter_) && (OrgApacheLuceneAnalysisCoreUpperCaseFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisCoreUpperCaseFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisCoreUpperCaseFilter_
+#if !defined (OrgApacheLuceneAnalysisCoreUpperCaseFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCoreUpperCaseFilter || defined(INCLUDE_OrgApacheLuceneAnalysisCoreUpperCaseFilter))
+#define OrgApacheLuceneAnalysisCoreUpperCaseFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief Normalizes token text to UPPER CASE.
+ <p><b>NOTE:</b> In Unicode, this transformation may lose information when the
+ upper case character represents more than one lower case character. Use this filter
+ when you require uppercase tokens.  Use the <code>LowerCaseFilter</code> for 
+ general search matching
+ */
 @interface OrgApacheLuceneAnalysisCoreUpperCaseFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
+/*!
+ @brief Create a new UpperCaseFilter, that normalizes token text to upper case.
+ @param inArg TokenStream to filter
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
 
 - (jboolean)incrementToken;
@@ -38,8 +49,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreUpperCaseFilter_initWithOrgApa
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreUpperCaseFilter *new_OrgApacheLuceneAnalysisCoreUpperCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreUpperCaseFilter *create_OrgApacheLuceneAnalysisCoreUpperCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreUpperCaseFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCoreUpperCaseFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreUpperCaseFilter")

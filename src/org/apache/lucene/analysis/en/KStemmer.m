@@ -22,10 +22,13 @@
 #include "org/apache/lucene/analysis/util/CharArrayMap.h"
 #include "org/apache/lucene/analysis/util/OpenStringBuilder.h"
 
-#define OrgApacheLuceneAnalysisEnKStemmer_MaxWordLen 50
-
 @interface OrgApacheLuceneAnalysisEnKStemmer () {
  @public
+  /*!
+   @brief caching off private int maxCacheSize; private CharArrayMap<String> cache =
+ null; private static final String SAME = "SAME"; // use if stemmed form is
+ the same
+   */
   OrgApacheLuceneAnalysisUtilOpenStringBuilder *word_;
   jint j_;
   jint k_;
@@ -112,41 +115,53 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisEnKStemmer, word_, OrgApacheLuceneAnalysisUtilOpenStringBuilder *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisEnKStemmer, MaxWordLen, jint)
+inline jint OrgApacheLuceneAnalysisEnKStemmer_get_MaxWordLen();
+#define OrgApacheLuceneAnalysisEnKStemmer_MaxWordLen 50
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisEnKStemmer, MaxWordLen, jint)
 
-static IOSObjectArray *OrgApacheLuceneAnalysisEnKStemmer_exceptionWords_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisEnKStemmer, exceptionWords_, IOSObjectArray *)
+inline IOSObjectArray *OrgApacheLuceneAnalysisEnKStemmer_get_exceptionWords();
+static IOSObjectArray *OrgApacheLuceneAnalysisEnKStemmer_exceptionWords;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisEnKStemmer, exceptionWords, IOSObjectArray *)
 
-static IOSObjectArray *OrgApacheLuceneAnalysisEnKStemmer_directConflations_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisEnKStemmer, directConflations_, IOSObjectArray *)
+inline IOSObjectArray *OrgApacheLuceneAnalysisEnKStemmer_get_directConflations();
+static IOSObjectArray *OrgApacheLuceneAnalysisEnKStemmer_directConflations;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisEnKStemmer, directConflations, IOSObjectArray *)
 
-static IOSObjectArray *OrgApacheLuceneAnalysisEnKStemmer_countryNationality_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisEnKStemmer, countryNationality_, IOSObjectArray *)
+inline IOSObjectArray *OrgApacheLuceneAnalysisEnKStemmer_get_countryNationality();
+static IOSObjectArray *OrgApacheLuceneAnalysisEnKStemmer_countryNationality;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisEnKStemmer, countryNationality, IOSObjectArray *)
 
-static IOSObjectArray *OrgApacheLuceneAnalysisEnKStemmer_supplementDict_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisEnKStemmer, supplementDict_, IOSObjectArray *)
+inline IOSObjectArray *OrgApacheLuceneAnalysisEnKStemmer_get_supplementDict();
+static IOSObjectArray *OrgApacheLuceneAnalysisEnKStemmer_supplementDict;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisEnKStemmer, supplementDict, IOSObjectArray *)
 
-static IOSObjectArray *OrgApacheLuceneAnalysisEnKStemmer_properNouns_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisEnKStemmer, properNouns_, IOSObjectArray *)
+inline IOSObjectArray *OrgApacheLuceneAnalysisEnKStemmer_get_properNouns();
+static IOSObjectArray *OrgApacheLuceneAnalysisEnKStemmer_properNouns;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisEnKStemmer, properNouns, IOSObjectArray *)
 
-static OrgApacheLuceneAnalysisUtilCharArrayMap *OrgApacheLuceneAnalysisEnKStemmer_dict_ht_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisEnKStemmer, dict_ht_, OrgApacheLuceneAnalysisUtilCharArrayMap *)
+inline OrgApacheLuceneAnalysisUtilCharArrayMap *OrgApacheLuceneAnalysisEnKStemmer_get_dict_ht();
+static OrgApacheLuceneAnalysisUtilCharArrayMap *OrgApacheLuceneAnalysisEnKStemmer_dict_ht;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisEnKStemmer, dict_ht, OrgApacheLuceneAnalysisUtilCharArrayMap *)
 
-static IOSCharArray *OrgApacheLuceneAnalysisEnKStemmer_ization_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisEnKStemmer, ization_, IOSCharArray *)
-J2OBJC_STATIC_FIELD_SETTER(OrgApacheLuceneAnalysisEnKStemmer, ization_, IOSCharArray *)
+inline IOSCharArray *OrgApacheLuceneAnalysisEnKStemmer_get_ization();
+inline IOSCharArray *OrgApacheLuceneAnalysisEnKStemmer_set_ization(IOSCharArray *value);
+static IOSCharArray *OrgApacheLuceneAnalysisEnKStemmer_ization;
+J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneAnalysisEnKStemmer, ization, IOSCharArray *)
 
-static IOSCharArray *OrgApacheLuceneAnalysisEnKStemmer_ition_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisEnKStemmer, ition_, IOSCharArray *)
-J2OBJC_STATIC_FIELD_SETTER(OrgApacheLuceneAnalysisEnKStemmer, ition_, IOSCharArray *)
+inline IOSCharArray *OrgApacheLuceneAnalysisEnKStemmer_get_ition();
+inline IOSCharArray *OrgApacheLuceneAnalysisEnKStemmer_set_ition(IOSCharArray *value);
+static IOSCharArray *OrgApacheLuceneAnalysisEnKStemmer_ition;
+J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneAnalysisEnKStemmer, ition, IOSCharArray *)
 
-static IOSCharArray *OrgApacheLuceneAnalysisEnKStemmer_ation_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisEnKStemmer, ation_, IOSCharArray *)
-J2OBJC_STATIC_FIELD_SETTER(OrgApacheLuceneAnalysisEnKStemmer, ation_, IOSCharArray *)
+inline IOSCharArray *OrgApacheLuceneAnalysisEnKStemmer_get_ation();
+inline IOSCharArray *OrgApacheLuceneAnalysisEnKStemmer_set_ation(IOSCharArray *value);
+static IOSCharArray *OrgApacheLuceneAnalysisEnKStemmer_ation;
+J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneAnalysisEnKStemmer, ation, IOSCharArray *)
 
-static IOSCharArray *OrgApacheLuceneAnalysisEnKStemmer_ication_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisEnKStemmer, ication_, IOSCharArray *)
-J2OBJC_STATIC_FIELD_SETTER(OrgApacheLuceneAnalysisEnKStemmer, ication_, IOSCharArray *)
+inline IOSCharArray *OrgApacheLuceneAnalysisEnKStemmer_get_ication();
+inline IOSCharArray *OrgApacheLuceneAnalysisEnKStemmer_set_ication(IOSCharArray *value);
+static IOSCharArray *OrgApacheLuceneAnalysisEnKStemmer_ication;
+J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneAnalysisEnKStemmer, ication, IOSCharArray *)
 
 __attribute__((unused)) static jchar OrgApacheLuceneAnalysisEnKStemmer_penultChar(OrgApacheLuceneAnalysisEnKStemmer *self);
 
@@ -409,7 +424,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   if ((k_ <= 1) || (k_ >= OrgApacheLuceneAnalysisEnKStemmer_MaxWordLen - 1)) {
     return false;
   }
-  OrgApacheLuceneAnalysisEnKStemmer_DictEntry *entry_ = [((OrgApacheLuceneAnalysisUtilCharArrayMap *) nil_chk(OrgApacheLuceneAnalysisEnKStemmer_dict_ht_)) getWithCharArray:term withInt:0 withInt:len];
+  OrgApacheLuceneAnalysisEnKStemmer_DictEntry *entry_ = [((OrgApacheLuceneAnalysisUtilCharArrayMap *) nil_chk(OrgApacheLuceneAnalysisEnKStemmer_dict_ht)) getWithCharArray:term withInt:0 withInt:len];
   if (entry_ != nil) {
     if (entry_->root_ != nil) {
       JreStrongAssign(&result_, entry_->root_);
@@ -479,16 +494,16 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisEnKStemmer class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisEnKStemmer_exceptionWords_, [IOSObjectArray newArrayWithObjects:(id[]){ @"aide", @"bathe", @"caste", @"cute", @"dame", @"dime", @"doge", @"done", @"dune", @"envelope", @"gage", @"grille", @"grippe", @"lobe", @"mane", @"mare", @"nape", @"node", @"pane", @"pate", @"plane", @"pope", @"programme", @"quite", @"ripe", @"rote", @"rune", @"sage", @"severe", @"shoppe", @"sine", @"slime", @"snipe", @"steppe", @"suite", @"swinge", @"tare", @"tine", @"tope", @"tripe", @"twine" } count:41 type:NSString_class_()]);
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisEnKStemmer_directConflations_, [IOSObjectArray newArrayWithObjects:(id[]){ [IOSObjectArray arrayWithObjects:(id[]){ @"aging", @"age" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"going", @"go" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"goes", @"go" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"lying", @"lie" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"using", @"use" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"owing", @"owe" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"suing", @"sue" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"dying", @"die" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"tying", @"tie" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"vying", @"vie" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"aged", @"age" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"used", @"use" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"vied", @"vie" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"cued", @"cue" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"died", @"die" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"eyed", @"eye" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"hued", @"hue" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"iced", @"ice" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"lied", @"lie" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"owed", @"owe" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"sued", @"sue" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"toed", @"toe" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"tied", @"tie" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"does", @"do" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"doing", @"do" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"aeronautical", @"aeronautics" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"mathematical", @"mathematics" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"political", @"politics" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"metaphysical", @"metaphysics" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"cylindrical", @"cylinder" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"nazism", @"nazi" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"ambiguity", @"ambiguous" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"barbarity", @"barbarous" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"credulity", @"credulous" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"generosity", @"generous" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"spontaneity", @"spontaneous" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"unanimity", @"unanimous" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"voracity", @"voracious" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"fled", @"flee" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"miscarriage", @"miscarry" } count:2 type:NSString_class_()] } count:40 type:IOSClass_arrayType(NSString_class_(), 1)]);
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisEnKStemmer_countryNationality_, [IOSObjectArray newArrayWithObjects:(id[]){ [IOSObjectArray arrayWithObjects:(id[]){ @"afghan", @"afghanistan" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"african", @"africa" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"albanian", @"albania" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"algerian", @"algeria" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"american", @"america" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"andorran", @"andorra" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"angolan", @"angola" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"arabian", @"arabia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"argentine", @"argentina" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"armenian", @"armenia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"asian", @"asia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"australian", @"australia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"austrian", @"austria" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"azerbaijani", @"azerbaijan" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"azeri", @"azerbaijan" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"bangladeshi", @"bangladesh" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"belgian", @"belgium" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"bermudan", @"bermuda" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"bolivian", @"bolivia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"bosnian", @"bosnia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"botswanan", @"botswana" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"brazilian", @"brazil" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"british", @"britain" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"bulgarian", @"bulgaria" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"burmese", @"burma" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"californian", @"california" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"cambodian", @"cambodia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"canadian", @"canada" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"chadian", @"chad" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"chilean", @"chile" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"chinese", @"china" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"colombian", @"colombia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"croat", @"croatia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"croatian", @"croatia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"cuban", @"cuba" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"cypriot", @"cyprus" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"czechoslovakian", @"czechoslovakia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"danish", @"denmark" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"egyptian", @"egypt" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"equadorian", @"equador" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"eritrean", @"eritrea" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"estonian", @"estonia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"ethiopian", @"ethiopia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"european", @"europe" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"fijian", @"fiji" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"filipino", @"philippines" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"finnish", @"finland" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"french", @"france" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"gambian", @"gambia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"georgian", @"georgia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"german", @"germany" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"ghanian", @"ghana" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"greek", @"greece" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"grenadan", @"grenada" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"guamian", @"guam" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"guatemalan", @"guatemala" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"guinean", @"guinea" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"guyanan", @"guyana" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"haitian", @"haiti" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"hawaiian", @"hawaii" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"holland", @"dutch" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"honduran", @"honduras" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"hungarian", @"hungary" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"icelandic", @"iceland" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"indonesian", @"indonesia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"iranian", @"iran" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"iraqi", @"iraq" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"iraqui", @"iraq" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"irish", @"ireland" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"israeli", @"israel" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"italian", @"italy" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"jamaican", @"jamaica" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"japanese", @"japan" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"jordanian", @"jordan" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"kampuchean", @"cambodia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"kenyan", @"kenya" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"korean", @"korea" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"kuwaiti", @"kuwait" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"lankan", @"lanka" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"laotian", @"laos" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"latvian", @"latvia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"lebanese", @"lebanon" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"liberian", @"liberia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"libyan", @"libya" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"lithuanian", @"lithuania" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"macedonian", @"macedonia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"madagascan", @"madagascar" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"malaysian", @"malaysia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"maltese", @"malta" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"mauritanian", @"mauritania" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"mexican", @"mexico" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"micronesian", @"micronesia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"moldovan", @"moldova" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"monacan", @"monaco" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"mongolian", @"mongolia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"montenegran", @"montenegro" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"moroccan", @"morocco" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"myanmar", @"burma" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"namibian", @"namibia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"nepalese", @"nepal" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"nicaraguan", @"nicaragua" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"nigerian", @"nigeria" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"norwegian", @"norway" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"omani", @"oman" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"pakistani", @"pakistan" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"panamanian", @"panama" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"papuan", @"papua" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"paraguayan", @"paraguay" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"peruvian", @"peru" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"portuguese", @"portugal" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"romanian", @"romania" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"rumania", @"romania" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"rumanian", @"romania" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"russian", @"russia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"rwandan", @"rwanda" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"samoan", @"samoa" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"scottish", @"scotland" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"serb", @"serbia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"serbian", @"serbia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"siam", @"thailand" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"siamese", @"thailand" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"slovakia", @"slovak" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"slovakian", @"slovak" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"slovenian", @"slovenia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"somali", @"somalia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"somalian", @"somalia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"spanish", @"spain" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"swedish", @"sweden" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"swiss", @"switzerland" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"syrian", @"syria" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"taiwanese", @"taiwan" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"tanzanian", @"tanzania" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"texan", @"texas" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"thai", @"thailand" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"tunisian", @"tunisia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"turkish", @"turkey" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"ugandan", @"uganda" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"ukrainian", @"ukraine" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"uruguayan", @"uruguay" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"uzbek", @"uzbekistan" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"venezuelan", @"venezuela" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"vietnamese", @"viet" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"virginian", @"virginia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"yemeni", @"yemen" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"yugoslav", @"yugoslavia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"yugoslavian", @"yugoslavia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"zambian", @"zambia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"zealander", @"zealand" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"zimbabwean", @"zimbabwe" } count:2 type:NSString_class_()] } count:149 type:IOSClass_arrayType(NSString_class_(), 1)]);
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisEnKStemmer_supplementDict_, [IOSObjectArray newArrayWithObjects:(id[]){ @"aids", @"applicator", @"capacitor", @"digitize", @"electromagnet", @"ellipsoid", @"exosphere", @"extensible", @"ferromagnet", @"graphics", @"hydromagnet", @"polygraph", @"toroid", @"superconduct", @"backscatter", @"connectionism" } count:16 type:NSString_class_()]);
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisEnKStemmer_properNouns_, [IOSObjectArray newArrayWithObjects:(id[]){ @"abrams", @"achilles", @"acropolis", @"adams", @"agnes", @"aires", @"alexander", @"alexis", @"alfred", @"algiers", @"alps", @"amadeus", @"ames", @"amos", @"andes", @"angeles", @"annapolis", @"antilles", @"aquarius", @"archimedes", @"arkansas", @"asher", @"ashly", @"athens", @"atkins", @"atlantis", @"avis", @"bahamas", @"bangor", @"barbados", @"barger", @"bering", @"brahms", @"brandeis", @"brussels", @"bruxelles", @"cairns", @"camoros", @"camus", @"carlos", @"celts", @"chalker", @"charles", @"cheops", @"ching", @"christmas", @"cocos", @"collins", @"columbus", @"confucius", @"conners", @"connolly", @"copernicus", @"cramer", @"cyclops", @"cygnus", @"cyprus", @"dallas", @"damascus", @"daniels", @"davies", @"davis", @"decker", @"denning", @"dennis", @"descartes", @"dickens", @"doris", @"douglas", @"downs", @"dreyfus", @"dukakis", @"dulles", @"dumfries", @"ecclesiastes", @"edwards", @"emily", @"erasmus", @"euphrates", @"evans", @"everglades", @"fairbanks", @"federales", @"fisher", @"fitzsimmons", @"fleming", @"forbes", @"fowler", @"france", @"francis", @"goering", @"goodling", @"goths", @"grenadines", @"guiness", @"hades", @"harding", @"harris", @"hastings", @"hawkes", @"hawking", @"hayes", @"heights", @"hercules", @"himalayas", @"hippocrates", @"hobbs", @"holmes", @"honduras", @"hopkins", @"hughes", @"humphreys", @"illinois", @"indianapolis", @"inverness", @"iris", @"iroquois", @"irving", @"isaacs", @"italy", @"james", @"jarvis", @"jeffreys", @"jesus", @"jones", @"josephus", @"judas", @"julius", @"kansas", @"keynes", @"kipling", @"kiwanis", @"lansing", @"laos", @"leeds", @"levis", @"leviticus", @"lewis", @"louis", @"maccabees", @"madras", @"maimonides", @"maldive", @"massachusetts", @"matthews", @"mauritius", @"memphis", @"mercedes", @"midas", @"mingus", @"minneapolis", @"mohammed", @"moines", @"morris", @"moses", @"myers", @"myknos", @"nablus", @"nanjing", @"nantes", @"naples", @"neal", @"netherlands", @"nevis", @"nostradamus", @"oedipus", @"olympus", @"orleans", @"orly", @"papas", @"paris", @"parker", @"pauling", @"peking", @"pershing", @"peter", @"peters", @"philippines", @"phineas", @"pisces", @"pryor", @"pythagoras", @"queens", @"rabelais", @"ramses", @"reynolds", @"rhesus", @"rhodes", @"richards", @"robins", @"rodgers", @"rogers", @"rubens", @"sagittarius", @"seychelles", @"socrates", @"texas", @"thames", @"thomas", @"tiberias", @"tunis", @"venus", @"vilnius", @"wales", @"warner", @"wilkins", @"williams", @"wyoming", @"xmas", @"yonkers", @"zeus", @"frances", @"aarhus", @"adonis", @"andrews", @"angus", @"antares", @"aquinas", @"arcturus", @"ares", @"artemis", @"augustus", @"ayers", @"barnabas", @"barnes", @"becker", @"bejing", @"biggs", @"billings", @"boeing", @"boris", @"borroughs", @"briggs", @"buenos", @"calais", @"caracas", @"cassius", @"cerberus", @"ceres", @"cervantes", @"chantilly", @"chartres", @"chester", @"connally", @"conner", @"coors", @"cummings", @"curtis", @"daedalus", @"dionysus", @"dobbs", @"dolores", @"edmonds" } count:253 type:NSString_class_()]);
-    JreStrongAssign(&OrgApacheLuceneAnalysisEnKStemmer_dict_ht_, OrgApacheLuceneAnalysisEnKStemmer_initializeDictHash());
-    JreStrongAssign(&OrgApacheLuceneAnalysisEnKStemmer_ization_, [@"ization" toCharArray]);
-    JreStrongAssign(&OrgApacheLuceneAnalysisEnKStemmer_ition_, [@"ition" toCharArray]);
-    JreStrongAssign(&OrgApacheLuceneAnalysisEnKStemmer_ation_, [@"ation" toCharArray]);
-    JreStrongAssign(&OrgApacheLuceneAnalysisEnKStemmer_ication_, [@"ication" toCharArray]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisEnKStemmer_exceptionWords, [IOSObjectArray newArrayWithObjects:(id[]){ @"aide", @"bathe", @"caste", @"cute", @"dame", @"dime", @"doge", @"done", @"dune", @"envelope", @"gage", @"grille", @"grippe", @"lobe", @"mane", @"mare", @"nape", @"node", @"pane", @"pate", @"plane", @"pope", @"programme", @"quite", @"ripe", @"rote", @"rune", @"sage", @"severe", @"shoppe", @"sine", @"slime", @"snipe", @"steppe", @"suite", @"swinge", @"tare", @"tine", @"tope", @"tripe", @"twine" } count:41 type:NSString_class_()]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisEnKStemmer_directConflations, [IOSObjectArray newArrayWithObjects:(id[]){ [IOSObjectArray arrayWithObjects:(id[]){ @"aging", @"age" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"going", @"go" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"goes", @"go" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"lying", @"lie" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"using", @"use" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"owing", @"owe" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"suing", @"sue" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"dying", @"die" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"tying", @"tie" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"vying", @"vie" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"aged", @"age" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"used", @"use" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"vied", @"vie" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"cued", @"cue" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"died", @"die" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"eyed", @"eye" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"hued", @"hue" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"iced", @"ice" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"lied", @"lie" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"owed", @"owe" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"sued", @"sue" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"toed", @"toe" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"tied", @"tie" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"does", @"do" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"doing", @"do" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"aeronautical", @"aeronautics" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"mathematical", @"mathematics" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"political", @"politics" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"metaphysical", @"metaphysics" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"cylindrical", @"cylinder" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"nazism", @"nazi" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"ambiguity", @"ambiguous" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"barbarity", @"barbarous" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"credulity", @"credulous" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"generosity", @"generous" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"spontaneity", @"spontaneous" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"unanimity", @"unanimous" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"voracity", @"voracious" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"fled", @"flee" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"miscarriage", @"miscarry" } count:2 type:NSString_class_()] } count:40 type:IOSClass_arrayType(NSString_class_(), 1)]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisEnKStemmer_countryNationality, [IOSObjectArray newArrayWithObjects:(id[]){ [IOSObjectArray arrayWithObjects:(id[]){ @"afghan", @"afghanistan" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"african", @"africa" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"albanian", @"albania" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"algerian", @"algeria" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"american", @"america" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"andorran", @"andorra" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"angolan", @"angola" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"arabian", @"arabia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"argentine", @"argentina" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"armenian", @"armenia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"asian", @"asia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"australian", @"australia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"austrian", @"austria" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"azerbaijani", @"azerbaijan" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"azeri", @"azerbaijan" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"bangladeshi", @"bangladesh" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"belgian", @"belgium" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"bermudan", @"bermuda" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"bolivian", @"bolivia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"bosnian", @"bosnia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"botswanan", @"botswana" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"brazilian", @"brazil" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"british", @"britain" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"bulgarian", @"bulgaria" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"burmese", @"burma" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"californian", @"california" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"cambodian", @"cambodia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"canadian", @"canada" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"chadian", @"chad" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"chilean", @"chile" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"chinese", @"china" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"colombian", @"colombia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"croat", @"croatia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"croatian", @"croatia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"cuban", @"cuba" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"cypriot", @"cyprus" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"czechoslovakian", @"czechoslovakia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"danish", @"denmark" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"egyptian", @"egypt" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"equadorian", @"equador" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"eritrean", @"eritrea" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"estonian", @"estonia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"ethiopian", @"ethiopia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"european", @"europe" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"fijian", @"fiji" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"filipino", @"philippines" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"finnish", @"finland" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"french", @"france" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"gambian", @"gambia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"georgian", @"georgia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"german", @"germany" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"ghanian", @"ghana" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"greek", @"greece" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"grenadan", @"grenada" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"guamian", @"guam" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"guatemalan", @"guatemala" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"guinean", @"guinea" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"guyanan", @"guyana" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"haitian", @"haiti" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"hawaiian", @"hawaii" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"holland", @"dutch" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"honduran", @"honduras" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"hungarian", @"hungary" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"icelandic", @"iceland" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"indonesian", @"indonesia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"iranian", @"iran" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"iraqi", @"iraq" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"iraqui", @"iraq" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"irish", @"ireland" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"israeli", @"israel" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"italian", @"italy" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"jamaican", @"jamaica" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"japanese", @"japan" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"jordanian", @"jordan" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"kampuchean", @"cambodia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"kenyan", @"kenya" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"korean", @"korea" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"kuwaiti", @"kuwait" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"lankan", @"lanka" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"laotian", @"laos" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"latvian", @"latvia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"lebanese", @"lebanon" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"liberian", @"liberia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"libyan", @"libya" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"lithuanian", @"lithuania" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"macedonian", @"macedonia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"madagascan", @"madagascar" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"malaysian", @"malaysia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"maltese", @"malta" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"mauritanian", @"mauritania" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"mexican", @"mexico" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"micronesian", @"micronesia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"moldovan", @"moldova" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"monacan", @"monaco" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"mongolian", @"mongolia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"montenegran", @"montenegro" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"moroccan", @"morocco" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"myanmar", @"burma" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"namibian", @"namibia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"nepalese", @"nepal" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"nicaraguan", @"nicaragua" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"nigerian", @"nigeria" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"norwegian", @"norway" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"omani", @"oman" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"pakistani", @"pakistan" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"panamanian", @"panama" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"papuan", @"papua" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"paraguayan", @"paraguay" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"peruvian", @"peru" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"portuguese", @"portugal" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"romanian", @"romania" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"rumania", @"romania" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"rumanian", @"romania" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"russian", @"russia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"rwandan", @"rwanda" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"samoan", @"samoa" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"scottish", @"scotland" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"serb", @"serbia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"serbian", @"serbia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"siam", @"thailand" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"siamese", @"thailand" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"slovakia", @"slovak" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"slovakian", @"slovak" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"slovenian", @"slovenia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"somali", @"somalia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"somalian", @"somalia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"spanish", @"spain" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"swedish", @"sweden" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"swiss", @"switzerland" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"syrian", @"syria" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"taiwanese", @"taiwan" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"tanzanian", @"tanzania" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"texan", @"texas" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"thai", @"thailand" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"tunisian", @"tunisia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"turkish", @"turkey" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"ugandan", @"uganda" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"ukrainian", @"ukraine" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"uruguayan", @"uruguay" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"uzbek", @"uzbekistan" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"venezuelan", @"venezuela" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"vietnamese", @"viet" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"virginian", @"virginia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"yemeni", @"yemen" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"yugoslav", @"yugoslavia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"yugoslavian", @"yugoslavia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"zambian", @"zambia" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"zealander", @"zealand" } count:2 type:NSString_class_()], [IOSObjectArray arrayWithObjects:(id[]){ @"zimbabwean", @"zimbabwe" } count:2 type:NSString_class_()] } count:149 type:IOSClass_arrayType(NSString_class_(), 1)]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisEnKStemmer_supplementDict, [IOSObjectArray newArrayWithObjects:(id[]){ @"aids", @"applicator", @"capacitor", @"digitize", @"electromagnet", @"ellipsoid", @"exosphere", @"extensible", @"ferromagnet", @"graphics", @"hydromagnet", @"polygraph", @"toroid", @"superconduct", @"backscatter", @"connectionism" } count:16 type:NSString_class_()]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisEnKStemmer_properNouns, [IOSObjectArray newArrayWithObjects:(id[]){ @"abrams", @"achilles", @"acropolis", @"adams", @"agnes", @"aires", @"alexander", @"alexis", @"alfred", @"algiers", @"alps", @"amadeus", @"ames", @"amos", @"andes", @"angeles", @"annapolis", @"antilles", @"aquarius", @"archimedes", @"arkansas", @"asher", @"ashly", @"athens", @"atkins", @"atlantis", @"avis", @"bahamas", @"bangor", @"barbados", @"barger", @"bering", @"brahms", @"brandeis", @"brussels", @"bruxelles", @"cairns", @"camoros", @"camus", @"carlos", @"celts", @"chalker", @"charles", @"cheops", @"ching", @"christmas", @"cocos", @"collins", @"columbus", @"confucius", @"conners", @"connolly", @"copernicus", @"cramer", @"cyclops", @"cygnus", @"cyprus", @"dallas", @"damascus", @"daniels", @"davies", @"davis", @"decker", @"denning", @"dennis", @"descartes", @"dickens", @"doris", @"douglas", @"downs", @"dreyfus", @"dukakis", @"dulles", @"dumfries", @"ecclesiastes", @"edwards", @"emily", @"erasmus", @"euphrates", @"evans", @"everglades", @"fairbanks", @"federales", @"fisher", @"fitzsimmons", @"fleming", @"forbes", @"fowler", @"france", @"francis", @"goering", @"goodling", @"goths", @"grenadines", @"guiness", @"hades", @"harding", @"harris", @"hastings", @"hawkes", @"hawking", @"hayes", @"heights", @"hercules", @"himalayas", @"hippocrates", @"hobbs", @"holmes", @"honduras", @"hopkins", @"hughes", @"humphreys", @"illinois", @"indianapolis", @"inverness", @"iris", @"iroquois", @"irving", @"isaacs", @"italy", @"james", @"jarvis", @"jeffreys", @"jesus", @"jones", @"josephus", @"judas", @"julius", @"kansas", @"keynes", @"kipling", @"kiwanis", @"lansing", @"laos", @"leeds", @"levis", @"leviticus", @"lewis", @"louis", @"maccabees", @"madras", @"maimonides", @"maldive", @"massachusetts", @"matthews", @"mauritius", @"memphis", @"mercedes", @"midas", @"mingus", @"minneapolis", @"mohammed", @"moines", @"morris", @"moses", @"myers", @"myknos", @"nablus", @"nanjing", @"nantes", @"naples", @"neal", @"netherlands", @"nevis", @"nostradamus", @"oedipus", @"olympus", @"orleans", @"orly", @"papas", @"paris", @"parker", @"pauling", @"peking", @"pershing", @"peter", @"peters", @"philippines", @"phineas", @"pisces", @"pryor", @"pythagoras", @"queens", @"rabelais", @"ramses", @"reynolds", @"rhesus", @"rhodes", @"richards", @"robins", @"rodgers", @"rogers", @"rubens", @"sagittarius", @"seychelles", @"socrates", @"texas", @"thames", @"thomas", @"tiberias", @"tunis", @"venus", @"vilnius", @"wales", @"warner", @"wilkins", @"williams", @"wyoming", @"xmas", @"yonkers", @"zeus", @"frances", @"aarhus", @"adonis", @"andrews", @"angus", @"antares", @"aquinas", @"arcturus", @"ares", @"artemis", @"augustus", @"ayers", @"barnabas", @"barnes", @"becker", @"bejing", @"biggs", @"billings", @"boeing", @"boris", @"borroughs", @"briggs", @"buenos", @"calais", @"caracas", @"cassius", @"cerberus", @"ceres", @"cervantes", @"chantilly", @"chartres", @"chester", @"connally", @"conner", @"coors", @"cummings", @"curtis", @"daedalus", @"dionysus", @"dobbs", @"dolores", @"edmonds" } count:253 type:NSString_class_()]);
+    JreStrongAssign(&OrgApacheLuceneAnalysisEnKStemmer_dict_ht, OrgApacheLuceneAnalysisEnKStemmer_initializeDictHash());
+    JreStrongAssign(&OrgApacheLuceneAnalysisEnKStemmer_ization, [@"ization" toCharArray]);
+    JreStrongAssign(&OrgApacheLuceneAnalysisEnKStemmer_ition, [@"ition" toCharArray]);
+    JreStrongAssign(&OrgApacheLuceneAnalysisEnKStemmer_ation, [@"ation" toCharArray]);
+    JreStrongAssign(&OrgApacheLuceneAnalysisEnKStemmer_ication, [@"ication" toCharArray]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisEnKStemmer)
   }
 }
@@ -499,7 +514,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "penultChar", NULL, "C", 0x2, NULL, NULL },
     { "isVowelWithInt:", "isVowel", "Z", 0x2, NULL, NULL },
     { "isConsWithInt:", "isCons", "Z", 0x2, NULL, NULL },
-    { "initializeDictHash", NULL, "Lorg.apache.lucene.analysis.util.CharArrayMap;", 0xa, NULL, NULL },
+    { "initializeDictHash", NULL, "Lorg.apache.lucene.analysis.util.CharArrayMap;", 0xa, NULL, "()Lorg/apache/lucene/analysis/util/CharArrayMap<Lorg/apache/lucene/analysis/en/KStemmer$DictEntry;>;" },
     { "isAlphaWithChar:", "isAlpha", "Z", 0x2, NULL, NULL },
     { "stemLength", NULL, "I", 0x2, NULL, NULL },
     { "endsInWithCharArray:", "endsIn", "Z", 0x2, NULL, NULL },
@@ -541,20 +556,20 @@ J2OBJC_IGNORE_DESIGNATED_END
   };
   static const J2ObjcFieldInfo fields[] = {
     { "MaxWordLen", "MaxWordLen", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisEnKStemmer_MaxWordLen },
-    { "exceptionWords_", NULL, 0x1a, "[Ljava.lang.String;", &OrgApacheLuceneAnalysisEnKStemmer_exceptionWords_, NULL, .constantValue.asLong = 0 },
-    { "directConflations_", NULL, 0x1a, "[[Ljava.lang.String;", &OrgApacheLuceneAnalysisEnKStemmer_directConflations_, NULL, .constantValue.asLong = 0 },
-    { "countryNationality_", NULL, 0x1a, "[[Ljava.lang.String;", &OrgApacheLuceneAnalysisEnKStemmer_countryNationality_, NULL, .constantValue.asLong = 0 },
-    { "supplementDict_", NULL, 0x1a, "[Ljava.lang.String;", &OrgApacheLuceneAnalysisEnKStemmer_supplementDict_, NULL, .constantValue.asLong = 0 },
-    { "properNouns_", NULL, 0x1a, "[Ljava.lang.String;", &OrgApacheLuceneAnalysisEnKStemmer_properNouns_, NULL, .constantValue.asLong = 0 },
-    { "dict_ht_", NULL, 0x1a, "Lorg.apache.lucene.analysis.util.CharArrayMap;", &OrgApacheLuceneAnalysisEnKStemmer_dict_ht_, "Lorg/apache/lucene/analysis/util/CharArrayMap<Lorg/apache/lucene/analysis/en/KStemmer$DictEntry;>;", .constantValue.asLong = 0 },
+    { "exceptionWords", "exceptionWords", 0x1a, "[Ljava.lang.String;", &OrgApacheLuceneAnalysisEnKStemmer_exceptionWords, NULL, .constantValue.asLong = 0 },
+    { "directConflations", "directConflations", 0x1a, "[[Ljava.lang.String;", &OrgApacheLuceneAnalysisEnKStemmer_directConflations, NULL, .constantValue.asLong = 0 },
+    { "countryNationality", "countryNationality", 0x1a, "[[Ljava.lang.String;", &OrgApacheLuceneAnalysisEnKStemmer_countryNationality, NULL, .constantValue.asLong = 0 },
+    { "supplementDict", "supplementDict", 0x1a, "[Ljava.lang.String;", &OrgApacheLuceneAnalysisEnKStemmer_supplementDict, NULL, .constantValue.asLong = 0 },
+    { "properNouns", "properNouns", 0x1a, "[Ljava.lang.String;", &OrgApacheLuceneAnalysisEnKStemmer_properNouns, NULL, .constantValue.asLong = 0 },
+    { "dict_ht", "dict_ht", 0x1a, "Lorg.apache.lucene.analysis.util.CharArrayMap;", &OrgApacheLuceneAnalysisEnKStemmer_dict_ht, "Lorg/apache/lucene/analysis/util/CharArrayMap<Lorg/apache/lucene/analysis/en/KStemmer$DictEntry;>;", .constantValue.asLong = 0 },
     { "word_", NULL, 0x12, "Lorg.apache.lucene.analysis.util.OpenStringBuilder;", NULL, NULL, .constantValue.asLong = 0 },
     { "j_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "k_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "matchedEntry_", NULL, 0x0, "Lorg.apache.lucene.analysis.en.KStemmer$DictEntry;", NULL, NULL, .constantValue.asLong = 0 },
-    { "ization_", NULL, 0xa, "[C", &OrgApacheLuceneAnalysisEnKStemmer_ization_, NULL, .constantValue.asLong = 0 },
-    { "ition_", NULL, 0xa, "[C", &OrgApacheLuceneAnalysisEnKStemmer_ition_, NULL, .constantValue.asLong = 0 },
-    { "ation_", NULL, 0xa, "[C", &OrgApacheLuceneAnalysisEnKStemmer_ation_, NULL, .constantValue.asLong = 0 },
-    { "ication_", NULL, 0xa, "[C", &OrgApacheLuceneAnalysisEnKStemmer_ication_, NULL, .constantValue.asLong = 0 },
+    { "ization", "ization", 0xa, "[C", &OrgApacheLuceneAnalysisEnKStemmer_ization, NULL, .constantValue.asLong = 0 },
+    { "ition", "ition", 0xa, "[C", &OrgApacheLuceneAnalysisEnKStemmer_ition, NULL, .constantValue.asLong = 0 },
+    { "ation", "ation", 0xa, "[C", &OrgApacheLuceneAnalysisEnKStemmer_ation, NULL, .constantValue.asLong = 0 },
+    { "ication", "ication", 0xa, "[C", &OrgApacheLuceneAnalysisEnKStemmer_ication, NULL, .constantValue.asLong = 0 },
     { "result_", NULL, 0x0, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.analysis.en.KStemmer$DictEntry;"};
@@ -584,121 +599,121 @@ OrgApacheLuceneAnalysisUtilCharArrayMap *OrgApacheLuceneAnalysisEnKStemmer_initi
   OrgApacheLuceneAnalysisEnKStemmer_initialize();
   OrgApacheLuceneAnalysisEnKStemmer_DictEntry *defaultEntry;
   OrgApacheLuceneAnalysisEnKStemmer_DictEntry *entry_;
-  OrgApacheLuceneAnalysisUtilCharArrayMap *d = [new_OrgApacheLuceneAnalysisUtilCharArrayMap_initWithInt_withBoolean_(1000, false) autorelease];
-  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(OrgApacheLuceneAnalysisEnKStemmer_exceptionWords_))->size_; i++) {
-    if (![d containsKeyWithJavaLangCharSequence:IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_exceptionWords_, i)]) {
-      entry_ = [new_OrgApacheLuceneAnalysisEnKStemmer_DictEntry_initWithNSString_withBoolean_(IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_exceptionWords_, i), true) autorelease];
-      [d putWithNSString:IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_exceptionWords_, i) withId:entry_];
+  OrgApacheLuceneAnalysisUtilCharArrayMap *d = create_OrgApacheLuceneAnalysisUtilCharArrayMap_initWithInt_withBoolean_(1000, false);
+  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(OrgApacheLuceneAnalysisEnKStemmer_exceptionWords))->size_; i++) {
+    if (![d containsKeyWithJavaLangCharSequence:IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_exceptionWords, i)]) {
+      entry_ = create_OrgApacheLuceneAnalysisEnKStemmer_DictEntry_initWithNSString_withBoolean_(IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_exceptionWords, i), true);
+      [d putWithNSString:IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_exceptionWords, i) withId:entry_];
     }
     else {
-      @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$", @"Warning: Entry [", IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_exceptionWords_, i), @"] already in dictionary 1")) autorelease];
+      @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$", @"Warning: Entry [", IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_exceptionWords, i), @"] already in dictionary 1"));
     }
   }
-  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(OrgApacheLuceneAnalysisEnKStemmer_directConflations_))->size_; i++) {
-    if (![d containsKeyWithJavaLangCharSequence:IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_directConflations_, i)), 0)]) {
-      entry_ = [new_OrgApacheLuceneAnalysisEnKStemmer_DictEntry_initWithNSString_withBoolean_(IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_directConflations_, i)), 1), false) autorelease];
-      [d putWithNSString:IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_directConflations_, i)), 0) withId:entry_];
+  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(OrgApacheLuceneAnalysisEnKStemmer_directConflations))->size_; i++) {
+    if (![d containsKeyWithJavaLangCharSequence:IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_directConflations, i)), 0)]) {
+      entry_ = create_OrgApacheLuceneAnalysisEnKStemmer_DictEntry_initWithNSString_withBoolean_(IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_directConflations, i)), 1), false);
+      [d putWithNSString:IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_directConflations, i)), 0) withId:entry_];
     }
     else {
-      @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$", @"Warning: Entry [", IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_directConflations_, i)), 0), @"] already in dictionary 2")) autorelease];
+      @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$", @"Warning: Entry [", IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_directConflations, i)), 0), @"] already in dictionary 2"));
     }
   }
-  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(OrgApacheLuceneAnalysisEnKStemmer_countryNationality_))->size_; i++) {
-    if (![d containsKeyWithJavaLangCharSequence:IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_countryNationality_, i)), 0)]) {
-      entry_ = [new_OrgApacheLuceneAnalysisEnKStemmer_DictEntry_initWithNSString_withBoolean_(IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_countryNationality_, i)), 1), false) autorelease];
-      [d putWithNSString:IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_countryNationality_, i)), 0) withId:entry_];
+  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(OrgApacheLuceneAnalysisEnKStemmer_countryNationality))->size_; i++) {
+    if (![d containsKeyWithJavaLangCharSequence:IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_countryNationality, i)), 0)]) {
+      entry_ = create_OrgApacheLuceneAnalysisEnKStemmer_DictEntry_initWithNSString_withBoolean_(IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_countryNationality, i)), 1), false);
+      [d putWithNSString:IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_countryNationality, i)), 0) withId:entry_];
     }
     else {
-      @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$", @"Warning: Entry [", IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_countryNationality_, i)), 0), @"] already in dictionary 3")) autorelease];
+      @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$", @"Warning: Entry [", IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_countryNationality, i)), 0), @"] already in dictionary 3"));
     }
   }
-  defaultEntry = [new_OrgApacheLuceneAnalysisEnKStemmer_DictEntry_initWithNSString_withBoolean_(nil, false) autorelease];
+  defaultEntry = create_OrgApacheLuceneAnalysisEnKStemmer_DictEntry_initWithNSString_withBoolean_(nil, false);
   IOSObjectArray *array;
-  array = JreLoadStatic(OrgApacheLuceneAnalysisEnKStemData1, data_);
+  array = JreLoadStatic(OrgApacheLuceneAnalysisEnKStemData1, data);
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(array))->size_; i++) {
     if (![d containsKeyWithJavaLangCharSequence:IOSObjectArray_Get(array, i)]) {
       [d putWithNSString:IOSObjectArray_Get(array, i) withId:defaultEntry];
     }
     else {
-      @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$", @"Warning: Entry [", IOSObjectArray_Get(array, i), @"] already in dictionary 4")) autorelease];
+      @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$", @"Warning: Entry [", IOSObjectArray_Get(array, i), @"] already in dictionary 4"));
     }
   }
-  array = JreLoadStatic(OrgApacheLuceneAnalysisEnKStemData2, data_);
+  array = JreLoadStatic(OrgApacheLuceneAnalysisEnKStemData2, data);
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(array))->size_; i++) {
     if (![d containsKeyWithJavaLangCharSequence:IOSObjectArray_Get(array, i)]) {
       [d putWithNSString:IOSObjectArray_Get(array, i) withId:defaultEntry];
     }
     else {
-      @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$", @"Warning: Entry [", IOSObjectArray_Get(array, i), @"] already in dictionary 4")) autorelease];
+      @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$", @"Warning: Entry [", IOSObjectArray_Get(array, i), @"] already in dictionary 4"));
     }
   }
-  array = JreLoadStatic(OrgApacheLuceneAnalysisEnKStemData3, data_);
+  array = JreLoadStatic(OrgApacheLuceneAnalysisEnKStemData3, data);
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(array))->size_; i++) {
     if (![d containsKeyWithJavaLangCharSequence:IOSObjectArray_Get(array, i)]) {
       [d putWithNSString:IOSObjectArray_Get(array, i) withId:defaultEntry];
     }
     else {
-      @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$", @"Warning: Entry [", IOSObjectArray_Get(array, i), @"] already in dictionary 4")) autorelease];
+      @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$", @"Warning: Entry [", IOSObjectArray_Get(array, i), @"] already in dictionary 4"));
     }
   }
-  array = JreLoadStatic(OrgApacheLuceneAnalysisEnKStemData4, data_);
+  array = JreLoadStatic(OrgApacheLuceneAnalysisEnKStemData4, data);
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(array))->size_; i++) {
     if (![d containsKeyWithJavaLangCharSequence:IOSObjectArray_Get(array, i)]) {
       [d putWithNSString:IOSObjectArray_Get(array, i) withId:defaultEntry];
     }
     else {
-      @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$", @"Warning: Entry [", IOSObjectArray_Get(array, i), @"] already in dictionary 4")) autorelease];
+      @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$", @"Warning: Entry [", IOSObjectArray_Get(array, i), @"] already in dictionary 4"));
     }
   }
-  array = JreLoadStatic(OrgApacheLuceneAnalysisEnKStemData5, data_);
+  array = JreLoadStatic(OrgApacheLuceneAnalysisEnKStemData5, data);
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(array))->size_; i++) {
     if (![d containsKeyWithJavaLangCharSequence:IOSObjectArray_Get(array, i)]) {
       [d putWithNSString:IOSObjectArray_Get(array, i) withId:defaultEntry];
     }
     else {
-      @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$", @"Warning: Entry [", IOSObjectArray_Get(array, i), @"] already in dictionary 4")) autorelease];
+      @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$", @"Warning: Entry [", IOSObjectArray_Get(array, i), @"] already in dictionary 4"));
     }
   }
-  array = JreLoadStatic(OrgApacheLuceneAnalysisEnKStemData6, data_);
+  array = JreLoadStatic(OrgApacheLuceneAnalysisEnKStemData6, data);
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(array))->size_; i++) {
     if (![d containsKeyWithJavaLangCharSequence:IOSObjectArray_Get(array, i)]) {
       [d putWithNSString:IOSObjectArray_Get(array, i) withId:defaultEntry];
     }
     else {
-      @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$", @"Warning: Entry [", IOSObjectArray_Get(array, i), @"] already in dictionary 4")) autorelease];
+      @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$", @"Warning: Entry [", IOSObjectArray_Get(array, i), @"] already in dictionary 4"));
     }
   }
-  array = JreLoadStatic(OrgApacheLuceneAnalysisEnKStemData7, data_);
+  array = JreLoadStatic(OrgApacheLuceneAnalysisEnKStemData7, data);
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(array))->size_; i++) {
     if (![d containsKeyWithJavaLangCharSequence:IOSObjectArray_Get(array, i)]) {
       [d putWithNSString:IOSObjectArray_Get(array, i) withId:defaultEntry];
     }
     else {
-      @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$", @"Warning: Entry [", IOSObjectArray_Get(array, i), @"] already in dictionary 4")) autorelease];
+      @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$", @"Warning: Entry [", IOSObjectArray_Get(array, i), @"] already in dictionary 4"));
     }
   }
-  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(JreLoadStatic(OrgApacheLuceneAnalysisEnKStemData8, data_)))->size_; i++) {
-    if (![d containsKeyWithJavaLangCharSequence:IOSObjectArray_Get(JreLoadStatic(OrgApacheLuceneAnalysisEnKStemData8, data_), i)]) {
-      [d putWithNSString:IOSObjectArray_Get(JreLoadStatic(OrgApacheLuceneAnalysisEnKStemData8, data_), i) withId:defaultEntry];
+  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(JreLoadStatic(OrgApacheLuceneAnalysisEnKStemData8, data)))->size_; i++) {
+    if (![d containsKeyWithJavaLangCharSequence:IOSObjectArray_Get(JreLoadStatic(OrgApacheLuceneAnalysisEnKStemData8, data), i)]) {
+      [d putWithNSString:IOSObjectArray_Get(nil_chk(JreLoadStatic(OrgApacheLuceneAnalysisEnKStemData8, data)), i) withId:defaultEntry];
     }
     else {
-      @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$", @"Warning: Entry [", IOSObjectArray_Get(JreLoadStatic(OrgApacheLuceneAnalysisEnKStemData8, data_), i), @"] already in dictionary 4")) autorelease];
+      @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$", @"Warning: Entry [", IOSObjectArray_Get(nil_chk(JreLoadStatic(OrgApacheLuceneAnalysisEnKStemData8, data)), i), @"] already in dictionary 4"));
     }
   }
-  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(OrgApacheLuceneAnalysisEnKStemmer_supplementDict_))->size_; i++) {
-    if (![d containsKeyWithJavaLangCharSequence:IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_supplementDict_, i)]) {
-      [d putWithNSString:IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_supplementDict_, i) withId:defaultEntry];
+  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(OrgApacheLuceneAnalysisEnKStemmer_supplementDict))->size_; i++) {
+    if (![d containsKeyWithJavaLangCharSequence:IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_supplementDict, i)]) {
+      [d putWithNSString:IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_supplementDict, i) withId:defaultEntry];
     }
     else {
-      @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$", @"Warning: Entry [", IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_supplementDict_, i), @"] already in dictionary 5")) autorelease];
+      @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$", @"Warning: Entry [", IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_supplementDict, i), @"] already in dictionary 5"));
     }
   }
-  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(OrgApacheLuceneAnalysisEnKStemmer_properNouns_))->size_; i++) {
-    if (![d containsKeyWithJavaLangCharSequence:IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_properNouns_, i)]) {
-      [d putWithNSString:IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_properNouns_, i) withId:defaultEntry];
+  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(OrgApacheLuceneAnalysisEnKStemmer_properNouns))->size_; i++) {
+    if (![d containsKeyWithJavaLangCharSequence:IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_properNouns, i)]) {
+      [d putWithNSString:IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_properNouns, i) withId:defaultEntry];
     }
     else {
-      @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$", @"Warning: Entry [", IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_properNouns_, i), @"] already in dictionary 6")) autorelease];
+      @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$", @"Warning: Entry [", IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_properNouns, i), @"] already in dictionary 6"));
     }
   }
   return d;
@@ -752,7 +767,7 @@ jboolean OrgApacheLuceneAnalysisEnKStemmer_endsInWithChar_withChar_withChar_with
 
 OrgApacheLuceneAnalysisEnKStemmer_DictEntry *OrgApacheLuceneAnalysisEnKStemmer_wordInDict(OrgApacheLuceneAnalysisEnKStemmer *self) {
   if (self->matchedEntry_ != nil) return self->matchedEntry_;
-  OrgApacheLuceneAnalysisEnKStemmer_DictEntry *e = [((OrgApacheLuceneAnalysisUtilCharArrayMap *) nil_chk(OrgApacheLuceneAnalysisEnKStemmer_dict_ht_)) getWithCharArray:[((OrgApacheLuceneAnalysisUtilOpenStringBuilder *) nil_chk(self->word_)) getArray] withInt:0 withInt:[self->word_ length]];
+  OrgApacheLuceneAnalysisEnKStemmer_DictEntry *e = [((OrgApacheLuceneAnalysisUtilCharArrayMap *) nil_chk(OrgApacheLuceneAnalysisEnKStemmer_dict_ht)) getWithCharArray:[((OrgApacheLuceneAnalysisUtilOpenStringBuilder *) nil_chk(self->word_)) getArray] withInt:0 withInt:[self->word_ length]];
   if (e != nil && !e->exception_) {
     JreStrongAssign(&self->matchedEntry_, e);
   }
@@ -806,7 +821,7 @@ void OrgApacheLuceneAnalysisEnKStemmer_setSuffWithNSString_withInt_(OrgApacheLuc
 }
 
 jboolean OrgApacheLuceneAnalysisEnKStemmer_lookup(OrgApacheLuceneAnalysisEnKStemmer *self) {
-  JreStrongAssign(&self->matchedEntry_, [((OrgApacheLuceneAnalysisUtilCharArrayMap *) nil_chk(OrgApacheLuceneAnalysisEnKStemmer_dict_ht_)) getWithCharArray:[((OrgApacheLuceneAnalysisUtilOpenStringBuilder *) nil_chk(self->word_)) getArray] withInt:0 withInt:[self->word_ size]]);
+  JreStrongAssign(&self->matchedEntry_, [((OrgApacheLuceneAnalysisUtilCharArrayMap *) nil_chk(OrgApacheLuceneAnalysisEnKStemmer_dict_ht)) getWithCharArray:[((OrgApacheLuceneAnalysisUtilOpenStringBuilder *) nil_chk(self->word_)) getArray] withInt:0 withInt:[self->word_ size]]);
   return self->matchedEntry_ != nil;
 }
 
@@ -1086,14 +1101,14 @@ void OrgApacheLuceneAnalysisEnKStemmer_ionEndings(OrgApacheLuceneAnalysisEnKStem
   if (!OrgApacheLuceneAnalysisEnKStemmer_endsInWithChar_withChar_withChar_(self, 'i', 'o', 'n')) {
     return;
   }
-  if (OrgApacheLuceneAnalysisEnKStemmer_endsInWithCharArray_(self, OrgApacheLuceneAnalysisEnKStemmer_ization_)) {
+  if (OrgApacheLuceneAnalysisEnKStemmer_endsInWithCharArray_(self, OrgApacheLuceneAnalysisEnKStemmer_ization)) {
     [((OrgApacheLuceneAnalysisUtilOpenStringBuilder *) nil_chk(self->word_)) setLengthWithInt:self->j_ + 3];
     [self->word_ unsafeWriteWithChar:'e'];
     self->k_ = self->j_ + 3;
     OrgApacheLuceneAnalysisEnKStemmer_lookup(self);
     return;
   }
-  if (OrgApacheLuceneAnalysisEnKStemmer_endsInWithCharArray_(self, OrgApacheLuceneAnalysisEnKStemmer_ition_)) {
+  if (OrgApacheLuceneAnalysisEnKStemmer_endsInWithCharArray_(self, OrgApacheLuceneAnalysisEnKStemmer_ition)) {
     [((OrgApacheLuceneAnalysisUtilOpenStringBuilder *) nil_chk(self->word_)) setLengthWithInt:self->j_ + 1];
     [self->word_ unsafeWriteWithChar:'e'];
     self->k_ = self->j_ + 1;
@@ -1102,7 +1117,7 @@ void OrgApacheLuceneAnalysisEnKStemmer_ionEndings(OrgApacheLuceneAnalysisEnKStem
     [self->word_ appendWithJavaLangCharSequence:@"ition"];
     self->k_ = old_k;
   }
-  else if (OrgApacheLuceneAnalysisEnKStemmer_endsInWithCharArray_(self, OrgApacheLuceneAnalysisEnKStemmer_ation_)) {
+  else if (OrgApacheLuceneAnalysisEnKStemmer_endsInWithCharArray_(self, OrgApacheLuceneAnalysisEnKStemmer_ation)) {
     [((OrgApacheLuceneAnalysisUtilOpenStringBuilder *) nil_chk(self->word_)) setLengthWithInt:self->j_ + 3];
     [self->word_ unsafeWriteWithChar:'e'];
     self->k_ = self->j_ + 3;
@@ -1118,7 +1133,7 @@ void OrgApacheLuceneAnalysisEnKStemmer_ionEndings(OrgApacheLuceneAnalysisEnKStem
     [self->word_ appendWithJavaLangCharSequence:@"ation"];
     self->k_ = old_k;
   }
-  if (OrgApacheLuceneAnalysisEnKStemmer_endsInWithCharArray_(self, OrgApacheLuceneAnalysisEnKStemmer_ication_)) {
+  if (OrgApacheLuceneAnalysisEnKStemmer_endsInWithCharArray_(self, OrgApacheLuceneAnalysisEnKStemmer_ication)) {
     [((OrgApacheLuceneAnalysisUtilOpenStringBuilder *) nil_chk(self->word_)) setLengthWithInt:self->j_ + 1];
     [self->word_ unsafeWriteWithChar:'y'];
     self->k_ = self->j_ + 1;
@@ -1311,9 +1326,11 @@ void OrgApacheLuceneAnalysisEnKStemmer_init(OrgApacheLuceneAnalysisEnKStemmer *s
 }
 
 OrgApacheLuceneAnalysisEnKStemmer *new_OrgApacheLuceneAnalysisEnKStemmer_init() {
-  OrgApacheLuceneAnalysisEnKStemmer *self = [OrgApacheLuceneAnalysisEnKStemmer alloc];
-  OrgApacheLuceneAnalysisEnKStemmer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisEnKStemmer, init)
+}
+
+OrgApacheLuceneAnalysisEnKStemmer *create_OrgApacheLuceneAnalysisEnKStemmer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisEnKStemmer, init)
 }
 
 jboolean OrgApacheLuceneAnalysisEnKStemmer_matched(OrgApacheLuceneAnalysisEnKStemmer *self) {
@@ -1356,9 +1373,11 @@ void OrgApacheLuceneAnalysisEnKStemmer_DictEntry_initWithNSString_withBoolean_(O
 }
 
 OrgApacheLuceneAnalysisEnKStemmer_DictEntry *new_OrgApacheLuceneAnalysisEnKStemmer_DictEntry_initWithNSString_withBoolean_(NSString *root, jboolean isException) {
-  OrgApacheLuceneAnalysisEnKStemmer_DictEntry *self = [OrgApacheLuceneAnalysisEnKStemmer_DictEntry alloc];
-  OrgApacheLuceneAnalysisEnKStemmer_DictEntry_initWithNSString_withBoolean_(self, root, isException);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisEnKStemmer_DictEntry, initWithNSString_withBoolean_, root, isException)
+}
+
+OrgApacheLuceneAnalysisEnKStemmer_DictEntry *create_OrgApacheLuceneAnalysisEnKStemmer_DictEntry_initWithNSString_withBoolean_(NSString *root, jboolean isException) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisEnKStemmer_DictEntry, initWithNSString_withBoolean_, root, isException)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisEnKStemmer_DictEntry)

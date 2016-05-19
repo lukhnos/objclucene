@@ -5,39 +5,63 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneStoreIndexOutput_INCLUDE_ALL")
-#if OrgApacheLuceneStoreIndexOutput_RESTRICT
-#define OrgApacheLuceneStoreIndexOutput_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneStoreIndexOutput")
+#ifdef RESTRICT_OrgApacheLuceneStoreIndexOutput
+#define INCLUDE_ALL_OrgApacheLuceneStoreIndexOutput 0
 #else
-#define OrgApacheLuceneStoreIndexOutput_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneStoreIndexOutput 1
 #endif
-#undef OrgApacheLuceneStoreIndexOutput_RESTRICT
+#undef RESTRICT_OrgApacheLuceneStoreIndexOutput
 
-#if !defined (_OrgApacheLuceneStoreIndexOutput_) && (OrgApacheLuceneStoreIndexOutput_INCLUDE_ALL || OrgApacheLuceneStoreIndexOutput_INCLUDE)
-#define _OrgApacheLuceneStoreIndexOutput_
+#if !defined (OrgApacheLuceneStoreIndexOutput_) && (INCLUDE_ALL_OrgApacheLuceneStoreIndexOutput || defined(INCLUDE_OrgApacheLuceneStoreIndexOutput))
+#define OrgApacheLuceneStoreIndexOutput_
 
-#define OrgApacheLuceneStoreDataOutput_RESTRICT 1
-#define OrgApacheLuceneStoreDataOutput_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreDataOutput 1
+#define INCLUDE_OrgApacheLuceneStoreDataOutput 1
 #include "org/apache/lucene/store/DataOutput.h"
 
-#define JavaIoCloseable_RESTRICT 1
-#define JavaIoCloseable_INCLUDE 1
+#define RESTRICT_JavaIoCloseable 1
+#define INCLUDE_JavaIoCloseable 1
 #include "java/io/Closeable.h"
 
+/*!
+ @brief Abstract base class for output to a file in a Directory.
+ A random-access
+ output stream.  Used for all Lucene index output operations.
+ <p><code>IndexOutput</code> may only be used from one thread, because it is not
+ thread safe (it keeps internal state like file position).
+ - seealso: Directory
+ - seealso: IndexInput
+ */
 @interface OrgApacheLuceneStoreIndexOutput : OrgApacheLuceneStoreDataOutput < JavaIoCloseable >
 
 #pragma mark Public
 
+/*!
+ @brief Closes this stream to further operations.
+ */
 - (void)close;
 
+/*!
+ @brief Returns the current checksum of bytes written so far
+ */
 - (jlong)getChecksum;
 
+/*!
+ @brief Returns the current position in this file, where the next write will
+ occur.
+ */
 - (jlong)getFilePointer;
 
 - (NSString *)description;
 
 #pragma mark Protected
 
+/*!
+ @brief Sole constructor.
+ resourceDescription should be non-null, opaque string
+ describing this resource; it's returned from <code>toString</code>. 
+ */
 - (instancetype)initWithNSString:(NSString *)resourceDescription;
 
 @end
@@ -50,4 +74,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreIndexOutput)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneStoreIndexOutput_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreIndexOutput")

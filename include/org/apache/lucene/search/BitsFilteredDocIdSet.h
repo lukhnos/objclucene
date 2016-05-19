@@ -5,31 +5,51 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchBitsFilteredDocIdSet_INCLUDE_ALL")
-#if OrgApacheLuceneSearchBitsFilteredDocIdSet_RESTRICT
-#define OrgApacheLuceneSearchBitsFilteredDocIdSet_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchBitsFilteredDocIdSet")
+#ifdef RESTRICT_OrgApacheLuceneSearchBitsFilteredDocIdSet
+#define INCLUDE_ALL_OrgApacheLuceneSearchBitsFilteredDocIdSet 0
 #else
-#define OrgApacheLuceneSearchBitsFilteredDocIdSet_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchBitsFilteredDocIdSet 1
 #endif
-#undef OrgApacheLuceneSearchBitsFilteredDocIdSet_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchBitsFilteredDocIdSet
 
-#if !defined (_OrgApacheLuceneSearchBitsFilteredDocIdSet_) && (OrgApacheLuceneSearchBitsFilteredDocIdSet_INCLUDE_ALL || OrgApacheLuceneSearchBitsFilteredDocIdSet_INCLUDE)
-#define _OrgApacheLuceneSearchBitsFilteredDocIdSet_
+#if !defined (OrgApacheLuceneSearchBitsFilteredDocIdSet_) && (INCLUDE_ALL_OrgApacheLuceneSearchBitsFilteredDocIdSet || defined(INCLUDE_OrgApacheLuceneSearchBitsFilteredDocIdSet))
+#define OrgApacheLuceneSearchBitsFilteredDocIdSet_
 
-#define OrgApacheLuceneSearchFilteredDocIdSet_RESTRICT 1
-#define OrgApacheLuceneSearchFilteredDocIdSet_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchFilteredDocIdSet 1
+#define INCLUDE_OrgApacheLuceneSearchFilteredDocIdSet 1
 #include "org/apache/lucene/search/FilteredDocIdSet.h"
 
 @class OrgApacheLuceneSearchDocIdSet;
 @protocol OrgApacheLuceneUtilBits;
 
+/*!
+ @brief This implementation supplies a filtered DocIdSet, that excludes all
+ docids which are not in a Bits instance.
+ This is especially useful in
+ <code>org.apache.lucene.search.Filter</code> to apply the <code>acceptDocs</code>
+ passed to <code>getDocIdSet()</code> before returning the final DocIdSet.
+ - seealso: DocIdSet
+ - seealso: org.apache.lucene.search.Filter
+ */
 @interface OrgApacheLuceneSearchBitsFilteredDocIdSet : OrgApacheLuceneSearchFilteredDocIdSet
 
 #pragma mark Public
 
+/*!
+ @brief Constructor.
+ @param innerSet Underlying DocIdSet
+ @param acceptDocs Allowed docs, all docids not in this set will not be returned by this DocIdSet
+ */
 - (instancetype)initWithOrgApacheLuceneSearchDocIdSet:(OrgApacheLuceneSearchDocIdSet *)innerSet
                           withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs;
 
+/*!
+ @brief Convenience wrapper method: If <code>acceptDocs == null</code> it returns the original set without wrapping.
+ @param set Underlying DocIdSet. If <code>null</code>, this method returns <code>null</code>
+ @param acceptDocs Allowed docs, all docids not in this set will not be returned by this DocIdSet.
+ If <code>null</code>, this method returns the original set without wrapping.
+ */
 + (OrgApacheLuceneSearchDocIdSet *)wrapWithOrgApacheLuceneSearchDocIdSet:(OrgApacheLuceneSearchDocIdSet *)set
                                              withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs;
 
@@ -47,8 +67,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchBitsFilteredDocIdSet_initWithOrgApac
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchBitsFilteredDocIdSet *new_OrgApacheLuceneSearchBitsFilteredDocIdSet_initWithOrgApacheLuceneSearchDocIdSet_withOrgApacheLuceneUtilBits_(OrgApacheLuceneSearchDocIdSet *innerSet, id<OrgApacheLuceneUtilBits> acceptDocs) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchBitsFilteredDocIdSet *create_OrgApacheLuceneSearchBitsFilteredDocIdSet_initWithOrgApacheLuceneSearchDocIdSet_withOrgApacheLuceneUtilBits_(OrgApacheLuceneSearchDocIdSet *innerSet, id<OrgApacheLuceneUtilBits> acceptDocs);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBitsFilteredDocIdSet)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchBitsFilteredDocIdSet_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchBitsFilteredDocIdSet")

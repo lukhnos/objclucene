@@ -45,6 +45,8 @@ __attribute__((unused)) static void OrgApacheLuceneStoreIndexInput_$1_initWithOr
 
 __attribute__((unused)) static OrgApacheLuceneStoreIndexInput_$1 *new_OrgApacheLuceneStoreIndexInput_$1_initWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput *capture$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneStoreIndexInput_$1 *create_OrgApacheLuceneStoreIndexInput_$1_initWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput *capture$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreIndexInput_$1)
 
 @implementation OrgApacheLuceneStoreIndexInput
@@ -81,7 +83,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreIndexInput_$1)
 }
 
 - (OrgApacheLuceneStoreIndexInput *)clone {
-  return (OrgApacheLuceneStoreIndexInput *) check_class_cast([super clone], [OrgApacheLuceneStoreIndexInput class]);
+  return (OrgApacheLuceneStoreIndexInput *) cast_chk([super clone], [OrgApacheLuceneStoreIndexInput class]);
 }
 
 - (OrgApacheLuceneStoreIndexInput *)sliceWithNSString:(NSString *)sliceDescription
@@ -105,10 +107,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreIndexInput_$1)
                                                               withLong:(jlong)length {
   OrgApacheLuceneStoreIndexInput *slice = [self sliceWithNSString:@"randomaccess" withLong:offset withLong:length];
   if ([OrgApacheLuceneStoreRandomAccessInput_class_() isInstance:slice]) {
-    return (id<OrgApacheLuceneStoreRandomAccessInput>) check_protocol_cast(slice, OrgApacheLuceneStoreRandomAccessInput_class_());
+    return (id<OrgApacheLuceneStoreRandomAccessInput>) cast_check(slice, OrgApacheLuceneStoreRandomAccessInput_class_());
   }
   else {
-    return [new_OrgApacheLuceneStoreIndexInput_$1_initWithOrgApacheLuceneStoreIndexInput_(slice) autorelease];
+    return create_OrgApacheLuceneStoreIndexInput_$1_initWithOrgApacheLuceneStoreIndexInput_(slice);
   }
 }
 
@@ -142,7 +144,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreIndexInput_$1)
 void OrgApacheLuceneStoreIndexInput_initWithNSString_(OrgApacheLuceneStoreIndexInput *self, NSString *resourceDescription) {
   OrgApacheLuceneStoreDataInput_init(self);
   if (resourceDescription == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"resourceDescription must not be null") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"resourceDescription must not be null");
   }
   JreStrongAssign(&self->resourceDescription_, resourceDescription);
 }
@@ -205,9 +207,11 @@ void OrgApacheLuceneStoreIndexInput_$1_initWithOrgApacheLuceneStoreIndexInput_(O
 }
 
 OrgApacheLuceneStoreIndexInput_$1 *new_OrgApacheLuceneStoreIndexInput_$1_initWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput *capture$0) {
-  OrgApacheLuceneStoreIndexInput_$1 *self = [OrgApacheLuceneStoreIndexInput_$1 alloc];
-  OrgApacheLuceneStoreIndexInput_$1_initWithOrgApacheLuceneStoreIndexInput_(self, capture$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreIndexInput_$1, initWithOrgApacheLuceneStoreIndexInput_, capture$0)
+}
+
+OrgApacheLuceneStoreIndexInput_$1 *create_OrgApacheLuceneStoreIndexInput_$1_initWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput *capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreIndexInput_$1, initWithOrgApacheLuceneStoreIndexInput_, capture$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreIndexInput_$1)

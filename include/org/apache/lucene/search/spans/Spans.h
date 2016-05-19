@@ -5,51 +5,100 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSpansSpans_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSpansSpans_RESTRICT
-#define OrgApacheLuceneSearchSpansSpans_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpans")
+#ifdef RESTRICT_OrgApacheLuceneSearchSpansSpans
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansSpans 0
 #else
-#define OrgApacheLuceneSearchSpansSpans_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansSpans 1
 #endif
-#undef OrgApacheLuceneSearchSpansSpans_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSpansSpans
 
-#if !defined (_OrgApacheLuceneSearchSpansSpans_) && (OrgApacheLuceneSearchSpansSpans_INCLUDE_ALL || OrgApacheLuceneSearchSpansSpans_INCLUDE)
-#define _OrgApacheLuceneSearchSpansSpans_
+#if !defined (OrgApacheLuceneSearchSpansSpans_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansSpans || defined(INCLUDE_OrgApacheLuceneSearchSpansSpans))
+#define OrgApacheLuceneSearchSpansSpans_
 
-#define OrgApacheLuceneSearchDocIdSetIterator_RESTRICT 1
-#define OrgApacheLuceneSearchDocIdSetIterator_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchDocIdSetIterator 1
+#define INCLUDE_OrgApacheLuceneSearchDocIdSetIterator 1
 #include "org/apache/lucene/search/DocIdSetIterator.h"
 
 @class OrgApacheLuceneSearchTwoPhaseIterator;
 @protocol OrgApacheLuceneSearchSpansSpanCollector;
 
-#define OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS 2147483647
-
+/*!
+ @brief Iterates through combinations of start/end positions per-doc.
+ Each start/end position represents a range of term positions within the current document.
+ These are enumerated in order, by increasing document number, within that by
+ increasing start position and finally by increasing end position.
+ */
 @interface OrgApacheLuceneSearchSpansSpans : OrgApacheLuceneSearchDocIdSetIterator
+
++ (jint)NO_MORE_POSITIONS;
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @brief Optional method: Return a <code>TwoPhaseIterator</code> view of this
+ <code>Spans</code>.
+ A return value of <code>null</code> indicates that
+ two-phase iteration is not supported.
+ Note that the returned <code>TwoPhaseIterator</code>'s
+ <code>approximation</code> must
+ advance documents synchronously with this iterator:
+ advancing the approximation must
+ advance this iterator and vice-versa.
+ Implementing this method is typically useful on a <code>Spans</code>
+ that has a high per-document overhead for confirming matches.
+ The default implementation returns <code>null</code>.
+ */
 - (OrgApacheLuceneSearchTwoPhaseIterator *)asTwoPhaseIterator;
 
+/*!
+ @brief Collect postings data from the leaves of the current Spans.
+ This method should only be called after <code>nextStartPosition()</code>, and before
+ <code>NO_MORE_POSITIONS</code> has been reached.
+ @param collector a SpanCollector
+ */
 - (void)collectWithOrgApacheLuceneSearchSpansSpanCollector:(id<OrgApacheLuceneSearchSpansSpanCollector>)collector;
 
+/*!
+ @brief Returns the end position for the current start position, or -1 when <code>nextStartPosition</code> was not yet called on the current doc.
+ After the last start/end position at the current doc this returns <code>NO_MORE_POSITIONS</code>.
+ */
 - (jint)endPosition;
 
+/*!
+ @brief Returns the next start position for the current doc.
+ There is always at least one start/end position per doc.
+ After the last start/end position at the current doc this returns <code>NO_MORE_POSITIONS</code>.
+ */
 - (jint)nextStartPosition;
 
+/*!
+ @brief Returns the start position in the current doc, or -1 when <code>nextStartPosition</code> was not yet called on the current doc.
+ After the last start/end position at the current doc this returns <code>NO_MORE_POSITIONS</code>.
+ */
 - (jint)startPosition;
 
 - (NSString *)description;
 
+/*!
+ @brief Return the width of the match, which is typically used to compute
+ the <code>slop factor</code>.
+ It is only legal
+ to call this method when the iterator is on a valid doc ID and positioned.
+ The return value must be positive, and lower values means that the match is
+ better.
+ */
 - (jint)width;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpansSpans)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSpansSpans, NO_MORE_POSITIONS, jint)
+inline jint OrgApacheLuceneSearchSpansSpans_get_NO_MORE_POSITIONS();
+#define OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS 2147483647
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSpansSpans, NO_MORE_POSITIONS, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpans_init(OrgApacheLuceneSearchSpansSpans *self);
 
@@ -57,4 +106,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpans)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSpansSpans_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansSpans")

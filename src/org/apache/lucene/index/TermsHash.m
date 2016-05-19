@@ -47,7 +47,7 @@
 - (void)flushWithJavaUtilMap:(id<JavaUtilMap>)fieldsToFlush
 withOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state {
   if (nextTermsHash_ != nil) {
-    id<JavaUtilMap> nextChildFields = [new_JavaUtilHashMap_init() autorelease];
+    id<JavaUtilMap> nextChildFields = create_JavaUtilHashMap_init();
     for (id<JavaUtilMap_Entry> __strong entry_ in nil_chk([((id<JavaUtilMap>) nil_chk(fieldsToFlush)) entrySet])) {
       [nextChildFields putWithId:[((id<JavaUtilMap_Entry>) nil_chk(entry_)) getKey] withId:((OrgApacheLuceneIndexTermsHashPerField *) nil_chk([entry_ getValue]))->nextPerField_];
     }
@@ -89,7 +89,7 @@ withOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState
     { "initWithOrgApacheLuceneIndexDocumentsWriterPerThread:withBoolean:withOrgApacheLuceneIndexTermsHash:", "TermsHash", NULL, 0x0, NULL, NULL },
     { "abort", NULL, "V", 0x1, NULL, NULL },
     { "reset", NULL, "V", 0x0, NULL, NULL },
-    { "flushWithJavaUtilMap:withOrgApacheLuceneIndexSegmentWriteState:", "flush", "V", 0x0, "Ljava.io.IOException;", NULL },
+    { "flushWithJavaUtilMap:withOrgApacheLuceneIndexSegmentWriteState:", "flush", "V", 0x0, "Ljava.io.IOException;", "(Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/index/TermsHashPerField;>;Lorg/apache/lucene/index/SegmentWriteState;)V" },
     { "addFieldWithOrgApacheLuceneIndexFieldInvertState:withOrgApacheLuceneIndexFieldInfo:", "addField", "Lorg.apache.lucene.index.TermsHashPerField;", 0x400, NULL, NULL },
     { "finishDocument", NULL, "V", 0x0, "Ljava.io.IOException;", NULL },
     { "startDocument", NULL, "V", 0x0, "Ljava.io.IOException;", NULL },

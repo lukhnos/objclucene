@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionDocvaluesLongDocValues_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionDocvaluesLongDocValues_RESTRICT
-#define OrgApacheLuceneQueriesFunctionDocvaluesLongDocValues_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionDocvaluesLongDocValues")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionDocvaluesLongDocValues
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionDocvaluesLongDocValues 0
 #else
-#define OrgApacheLuceneQueriesFunctionDocvaluesLongDocValues_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionDocvaluesLongDocValues 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionDocvaluesLongDocValues_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionDocvaluesLongDocValues
 
-#if !defined (_OrgApacheLuceneQueriesFunctionDocvaluesLongDocValues_) && (OrgApacheLuceneQueriesFunctionDocvaluesLongDocValues_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionDocvaluesLongDocValues_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionDocvaluesLongDocValues_
+#if !defined (OrgApacheLuceneQueriesFunctionDocvaluesLongDocValues_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionDocvaluesLongDocValues || defined(INCLUDE_OrgApacheLuceneQueriesFunctionDocvaluesLongDocValues))
+#define OrgApacheLuceneQueriesFunctionDocvaluesLongDocValues_
 
-#define OrgApacheLuceneQueriesFunctionFunctionValues_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionFunctionValues_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionFunctionValues 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionFunctionValues 1
 #include "org/apache/lucene/queries/function/FunctionValues.h"
 
 @class OrgApacheLuceneIndexIndexReader;
@@ -25,6 +25,10 @@
 @class OrgApacheLuceneQueriesFunctionValueSource;
 @class OrgApacheLuceneQueriesFunctionValueSourceScorer;
 
+/*!
+ @brief Abstract <code>FunctionValues</code> implementation which supports retrieving long values.
+ Implementations can control how the long values are loaded through <code>longVal(int)</code>}
+ */
 @interface OrgApacheLuceneQueriesFunctionDocvaluesLongDocValues : OrgApacheLuceneQueriesFunctionFunctionValues {
  @public
   OrgApacheLuceneQueriesFunctionValueSource *vs_;
@@ -78,4 +82,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionDocvaluesLongDocValues)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionDocvaluesLongDocValues_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionDocvaluesLongDocValues")

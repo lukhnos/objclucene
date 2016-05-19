@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexMultiBits_INCLUDE_ALL")
-#if OrgApacheLuceneIndexMultiBits_RESTRICT
-#define OrgApacheLuceneIndexMultiBits_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexMultiBits")
+#ifdef RESTRICT_OrgApacheLuceneIndexMultiBits
+#define INCLUDE_ALL_OrgApacheLuceneIndexMultiBits 0
 #else
-#define OrgApacheLuceneIndexMultiBits_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexMultiBits 1
 #endif
-#undef OrgApacheLuceneIndexMultiBits_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexMultiBits
 
-#if !defined (_OrgApacheLuceneIndexMultiBits_) && (OrgApacheLuceneIndexMultiBits_INCLUDE_ALL || OrgApacheLuceneIndexMultiBits_INCLUDE)
-#define _OrgApacheLuceneIndexMultiBits_
+#if !defined (OrgApacheLuceneIndexMultiBits_) && (INCLUDE_ALL_OrgApacheLuceneIndexMultiBits || defined(INCLUDE_OrgApacheLuceneIndexMultiBits))
+#define OrgApacheLuceneIndexMultiBits_
 
-#define OrgApacheLuceneUtilBits_RESTRICT 1
-#define OrgApacheLuceneUtilBits_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilBits 1
+#define INCLUDE_OrgApacheLuceneUtilBits 1
 #include "org/apache/lucene/util/Bits.h"
 
 @class IOSIntArray;
@@ -25,6 +25,11 @@
 @class OrgApacheLuceneIndexMultiBits_SubResult;
 @class OrgApacheLuceneIndexReaderSlice;
 
+/*!
+ @brief Concatenates multiple Bits together, on every lookup.
+ <p><b>NOTE</b>: This is very costly, as every lookup must
+ do a binary search to locate the right sub-reader.
+ */
 @interface OrgApacheLuceneIndexMultiBits : NSObject < OrgApacheLuceneUtilBits >
 
 #pragma mark Public
@@ -35,6 +40,14 @@
 
 - (jboolean)getWithInt:(jint)doc;
 
+/*!
+ @brief Returns a sub-Bits matching the provided <code>slice</code>
+ <p>
+ Because <code>null</code> usually has a special meaning for
+ Bits (e.g. no deleted documents), you must check
+ <code>SubResult.matches</code> instead to ensure the sub was 
+ actually found.
+ */
 - (OrgApacheLuceneIndexMultiBits_SubResult *)getMatchingSubWithOrgApacheLuceneIndexReaderSlice:(OrgApacheLuceneIndexReaderSlice *)slice;
 
 - (jint)length;
@@ -49,15 +62,21 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexMultiBits_initWithOrgApacheLuceneUtil
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexMultiBits *new_OrgApacheLuceneIndexMultiBits_initWithOrgApacheLuceneUtilBitsArray_withIntArray_withBoolean_(IOSObjectArray *subs, IOSIntArray *starts, jboolean defaultValue) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexMultiBits *create_OrgApacheLuceneIndexMultiBits_initWithOrgApacheLuceneUtilBitsArray_withIntArray_withBoolean_(IOSObjectArray *subs, IOSIntArray *starts, jboolean defaultValue);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiBits)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexMultiBits_SubResult_) && (OrgApacheLuceneIndexMultiBits_INCLUDE_ALL || OrgApacheLuceneIndexMultiBits_SubResult_INCLUDE)
-#define _OrgApacheLuceneIndexMultiBits_SubResult_
+#if !defined (OrgApacheLuceneIndexMultiBits_SubResult_) && (INCLUDE_ALL_OrgApacheLuceneIndexMultiBits || defined(INCLUDE_OrgApacheLuceneIndexMultiBits_SubResult))
+#define OrgApacheLuceneIndexMultiBits_SubResult_
 
 @protocol OrgApacheLuceneUtilBits;
 
+/*!
+ @brief Represents a sub-Bits from 
+ <code>getMatchingSub()</code>.
+ */
 @interface OrgApacheLuceneIndexMultiBits_SubResult : NSObject {
  @public
   jboolean matches_;
@@ -78,8 +97,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexMultiBits_SubResult_init(OrgApacheLuc
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexMultiBits_SubResult *new_OrgApacheLuceneIndexMultiBits_SubResult_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexMultiBits_SubResult *create_OrgApacheLuceneIndexMultiBits_SubResult_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiBits_SubResult)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexMultiBits_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexMultiBits")

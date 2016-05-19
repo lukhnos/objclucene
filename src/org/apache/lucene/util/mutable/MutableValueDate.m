@@ -12,11 +12,11 @@
 @implementation OrgApacheLuceneUtilMutableMutableValueDate
 
 - (id)toObject {
-  return exists_ ? [new_JavaUtilDate_initWithLong_(value_) autorelease] : nil;
+  return exists_ ? create_JavaUtilDate_initWithLong_(value_) : nil;
 }
 
 - (OrgApacheLuceneUtilMutableMutableValue *)duplicate {
-  OrgApacheLuceneUtilMutableMutableValueDate *v = [new_OrgApacheLuceneUtilMutableMutableValueDate_init() autorelease];
+  OrgApacheLuceneUtilMutableMutableValueDate *v = create_OrgApacheLuceneUtilMutableMutableValueDate_init();
   v->value_ = self->value_;
   v->exists_ = self->exists_;
   return v;
@@ -33,7 +33,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   static const J2ObjcMethodInfo methods[] = {
     { "toObject", NULL, "Ljava.lang.Object;", 0x1, NULL, NULL },
     { "duplicate", NULL, "Lorg.apache.lucene.util.mutable.MutableValue;", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "MutableValueDate", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneUtilMutableMutableValueDate = { 2, "MutableValueDate", "org.apache.lucene.util.mutable", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilMutableMutableValueDate;
@@ -46,9 +46,11 @@ void OrgApacheLuceneUtilMutableMutableValueDate_init(OrgApacheLuceneUtilMutableM
 }
 
 OrgApacheLuceneUtilMutableMutableValueDate *new_OrgApacheLuceneUtilMutableMutableValueDate_init() {
-  OrgApacheLuceneUtilMutableMutableValueDate *self = [OrgApacheLuceneUtilMutableMutableValueDate alloc];
-  OrgApacheLuceneUtilMutableMutableValueDate_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilMutableMutableValueDate, init)
+}
+
+OrgApacheLuceneUtilMutableMutableValueDate *create_OrgApacheLuceneUtilMutableMutableValueDate_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilMutableMutableValueDate, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilMutableMutableValueDate)

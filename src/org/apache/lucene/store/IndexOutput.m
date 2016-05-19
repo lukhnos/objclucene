@@ -72,7 +72,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreIndexOutput, resourceDescription_, NSStr
 void OrgApacheLuceneStoreIndexOutput_initWithNSString_(OrgApacheLuceneStoreIndexOutput *self, NSString *resourceDescription) {
   OrgApacheLuceneStoreDataOutput_init(self);
   if (resourceDescription == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"resourceDescription must not be null") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"resourceDescription must not be null");
   }
   JreStrongAssign(&self->resourceDescription_, resourceDescription);
 }

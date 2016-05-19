@@ -5,21 +5,30 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleMessagesNLSException_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleMessagesNLSException_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleMessagesNLSException_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleMessagesNLSException")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleMessagesNLSException
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleMessagesNLSException 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleMessagesNLSException_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleMessagesNLSException 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleMessagesNLSException_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleMessagesNLSException
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleMessagesNLSException_) && (OrgApacheLuceneQueryparserFlexibleMessagesNLSException_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleMessagesNLSException_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleMessagesNLSException_
+#if !defined (OrgApacheLuceneQueryparserFlexibleMessagesNLSException_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleMessagesNLSException || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleMessagesNLSException))
+#define OrgApacheLuceneQueryparserFlexibleMessagesNLSException_
 
 @protocol OrgApacheLuceneQueryparserFlexibleMessagesMessage;
 
+/*!
+ @brief Interface that exceptions should implement to support lazy loading of messages.
+ For Native Language Support (NLS), system of software internationalization.
+ This Interface should be implemented by all exceptions that require
+ translation
+ */
 @protocol OrgApacheLuceneQueryparserFlexibleMessagesNLSException < NSObject, JavaObject >
 
+/*!
+ @return a instance of a class that implements the Message interface
+ */
 - (id<OrgApacheLuceneQueryparserFlexibleMessagesMessage>)getMessageObject;
 
 @end
@@ -30,4 +39,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleMessagesNLSExceptio
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleMessagesNLSException_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleMessagesNLSException")

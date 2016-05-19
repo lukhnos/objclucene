@@ -46,6 +46,8 @@ __attribute__((unused)) static void OrgApacheLuceneRangetreeNumericRangeTreeQuer
 
 __attribute__((unused)) static OrgApacheLuceneRangetreeNumericRangeTreeQuery_$1 *new_OrgApacheLuceneRangetreeNumericRangeTreeQuery_$1_initWithOrgApacheLuceneRangetreeNumericRangeTreeQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneRangetreeNumericRangeTreeQuery *outer$, OrgApacheLuceneSearchQuery *arg$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneRangetreeNumericRangeTreeQuery_$1 *create_OrgApacheLuceneRangetreeNumericRangeTreeQuery_$1_initWithOrgApacheLuceneRangetreeNumericRangeTreeQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneRangetreeNumericRangeTreeQuery *outer$, OrgApacheLuceneSearchQuery *arg$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeNumericRangeTreeQuery_$1)
 
 @implementation OrgApacheLuceneRangetreeNumericRangeTreeQuery
@@ -61,7 +63,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeNumericRangeTreeQuery_$1)
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores {
-  return [new_OrgApacheLuceneRangetreeNumericRangeTreeQuery_$1_initWithOrgApacheLuceneRangetreeNumericRangeTreeQuery_withOrgApacheLuceneSearchQuery_(self, self) autorelease];
+  return create_OrgApacheLuceneRangetreeNumericRangeTreeQuery_$1_initWithOrgApacheLuceneRangetreeNumericRangeTreeQuery_withOrgApacheLuceneSearchQuery_(self, self);
 }
 
 - (NSUInteger)hash {
@@ -73,14 +75,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeNumericRangeTreeQuery_$1)
 
 - (jboolean)isEqual:(id)other {
   if ([super isEqual:other]) {
-    OrgApacheLuceneRangetreeNumericRangeTreeQuery *q = (OrgApacheLuceneRangetreeNumericRangeTreeQuery *) check_class_cast(other, [OrgApacheLuceneRangetreeNumericRangeTreeQuery class]);
+    OrgApacheLuceneRangetreeNumericRangeTreeQuery *q = (OrgApacheLuceneRangetreeNumericRangeTreeQuery *) cast_chk(other, [OrgApacheLuceneRangetreeNumericRangeTreeQuery class]);
     return ((((OrgApacheLuceneRangetreeNumericRangeTreeQuery *) nil_chk(q))->minValue_ == nil ? minValue_ == nil : [q->minValue_ isEqual:minValue_]) && (q->maxValue_ == nil ? maxValue_ == nil : [q->maxValue_ isEqual:maxValue_]) && minInclusive_ == q->minInclusive_ && maxInclusive_ == q->maxInclusive_);
   }
   return false;
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   [sb appendWithNSString:[[self getClass] getSimpleName]];
   [sb appendWithChar:':'];
   if ([((NSString *) nil_chk(self->field_)) isEqual:field] == false) {
@@ -88,7 +90,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeNumericRangeTreeQuery_$1)
     [sb appendWithNSString:self->field_];
     [sb appendWithChar:':'];
   }
-  return [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([sb appendWithChar:minInclusive_ ? '[' : '{'])) appendWithNSString:(minValue_ == nil) ? @"*" : [minValue_ description]])) appendWithNSString:@" TO "])) appendWithNSString:(maxValue_ == nil) ? @"*" : [maxValue_ description]])) appendWithChar:maxInclusive_ ? ']' : '}'])) appendWithNSString:OrgApacheLuceneUtilToStringUtils_boostWithFloat_([self getBoost])])) description];
+  return [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([sb appendWithChar:minInclusive_ ? '[' : '{'])) appendWithNSString:(minValue_ == nil) ? @"*" : [((JavaLangLong *) nil_chk(minValue_)) description]])) appendWithNSString:@" TO "])) appendWithNSString:(maxValue_ == nil) ? @"*" : [((JavaLangLong *) nil_chk(maxValue_)) description]])) appendWithChar:maxInclusive_ ? ']' : '}'])) appendWithNSString:OrgApacheLuceneUtilToStringUtils_boostWithFloat_([self getBoost])])) description];
 }
 
 - (void)dealloc {
@@ -129,9 +131,11 @@ void OrgApacheLuceneRangetreeNumericRangeTreeQuery_initWithNSString_withJavaLang
 }
 
 OrgApacheLuceneRangetreeNumericRangeTreeQuery *new_OrgApacheLuceneRangetreeNumericRangeTreeQuery_initWithNSString_withJavaLangLong_withBoolean_withJavaLangLong_withBoolean_(NSString *field, JavaLangLong *minValue, jboolean minInclusive, JavaLangLong *maxValue, jboolean maxInclusive) {
-  OrgApacheLuceneRangetreeNumericRangeTreeQuery *self = [OrgApacheLuceneRangetreeNumericRangeTreeQuery alloc];
-  OrgApacheLuceneRangetreeNumericRangeTreeQuery_initWithNSString_withJavaLangLong_withBoolean_withJavaLangLong_withBoolean_(self, field, minValue, minInclusive, maxValue, maxInclusive);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneRangetreeNumericRangeTreeQuery, initWithNSString_withJavaLangLong_withBoolean_withJavaLangLong_withBoolean_, field, minValue, minInclusive, maxValue, maxInclusive)
+}
+
+OrgApacheLuceneRangetreeNumericRangeTreeQuery *create_OrgApacheLuceneRangetreeNumericRangeTreeQuery_initWithNSString_withJavaLangLong_withBoolean_withJavaLangLong_withBoolean_(NSString *field, JavaLangLong *minValue, jboolean minInclusive, JavaLangLong *maxValue, jboolean maxInclusive) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneRangetreeNumericRangeTreeQuery, initWithNSString_withJavaLangLong_withBoolean_withJavaLangLong_withBoolean_, field, minValue, minInclusive, maxValue, maxInclusive)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneRangetreeNumericRangeTreeQuery)
@@ -145,18 +149,18 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneRangetreeNumericRangeTreeQuery)
     return nil;
   }
   if ([sdv isKindOfClass:[OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues class]] == false) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$@", @"field \"", this$0_->field_, @"\" was not indexed with RangeTreeDocValuesFormat: got: ", sdv)) autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$@", @"field \"", this$0_->field_, @"\" was not indexed with RangeTreeDocValuesFormat: got: ", sdv));
   }
-  OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues *treeDV = (OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues *) check_class_cast(sdv, [OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues class]);
-  OrgApacheLuceneRangetreeRangeTreeReader *tree = [((OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues *) nil_chk(treeDV)) getRangeTreeReader];
-  jlong minBoundIncl = (this$0_->minValue_ == nil) ? JavaLangLong_MIN_VALUE : [this$0_->minValue_ longLongValue];
+  OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues *treeDV = (OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues *) cast_chk(sdv, [OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues class]);
+  OrgApacheLuceneRangetreeRangeTreeReader *tree = [treeDV getRangeTreeReader];
+  jlong minBoundIncl = (this$0_->minValue_ == nil) ? JavaLangLong_MIN_VALUE : [((JavaLangLong *) nil_chk(this$0_->minValue_)) longLongValue];
   if (this$0_->minInclusive_ == false && this$0_->minValue_ != nil) {
     if (minBoundIncl == JavaLangLong_MAX_VALUE) {
       return nil;
     }
     minBoundIncl++;
   }
-  jlong maxBoundIncl = (this$0_->maxValue_ == nil) ? JavaLangLong_MAX_VALUE : [this$0_->maxValue_ longLongValue];
+  jlong maxBoundIncl = (this$0_->maxValue_ == nil) ? JavaLangLong_MAX_VALUE : [((JavaLangLong *) nil_chk(this$0_->maxValue_)) longLongValue];
   if (this$0_->maxInclusive_ == false && this$0_->maxValue_ != nil) {
     if (maxBoundIncl == JavaLangLong_MIN_VALUE) {
       return nil;
@@ -168,7 +172,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneRangetreeNumericRangeTreeQuery)
   }
   OrgApacheLuceneSearchDocIdSet *result = [((OrgApacheLuceneRangetreeRangeTreeReader *) nil_chk(tree)) intersectWithLong:minBoundIncl withLong:maxBoundIncl withOrgApacheLuceneIndexSortedNumericDocValues:treeDV->delegate_ withInt:[((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) maxDoc]];
   OrgApacheLuceneSearchDocIdSetIterator *disi = [((OrgApacheLuceneSearchDocIdSet *) nil_chk(result)) iterator];
-  return [new_OrgApacheLuceneSearchConstantScoreScorer_initWithOrgApacheLuceneSearchWeight_withFloat_withOrgApacheLuceneSearchDocIdSetIterator_(self, [self score], disi) autorelease];
+  return create_OrgApacheLuceneSearchConstantScoreScorer_initWithOrgApacheLuceneSearchWeight_withFloat_withOrgApacheLuceneSearchDocIdSetIterator_(self, [self score], disi);
 }
 
 - (instancetype)initWithOrgApacheLuceneRangetreeNumericRangeTreeQuery:(OrgApacheLuceneRangetreeNumericRangeTreeQuery *)outer$
@@ -203,9 +207,11 @@ void OrgApacheLuceneRangetreeNumericRangeTreeQuery_$1_initWithOrgApacheLuceneRan
 }
 
 OrgApacheLuceneRangetreeNumericRangeTreeQuery_$1 *new_OrgApacheLuceneRangetreeNumericRangeTreeQuery_$1_initWithOrgApacheLuceneRangetreeNumericRangeTreeQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneRangetreeNumericRangeTreeQuery *outer$, OrgApacheLuceneSearchQuery *arg$0) {
-  OrgApacheLuceneRangetreeNumericRangeTreeQuery_$1 *self = [OrgApacheLuceneRangetreeNumericRangeTreeQuery_$1 alloc];
-  OrgApacheLuceneRangetreeNumericRangeTreeQuery_$1_initWithOrgApacheLuceneRangetreeNumericRangeTreeQuery_withOrgApacheLuceneSearchQuery_(self, outer$, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneRangetreeNumericRangeTreeQuery_$1, initWithOrgApacheLuceneRangetreeNumericRangeTreeQuery_withOrgApacheLuceneSearchQuery_, outer$, arg$0)
+}
+
+OrgApacheLuceneRangetreeNumericRangeTreeQuery_$1 *create_OrgApacheLuceneRangetreeNumericRangeTreeQuery_$1_initWithOrgApacheLuceneRangetreeNumericRangeTreeQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneRangetreeNumericRangeTreeQuery *outer$, OrgApacheLuceneSearchQuery *arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneRangetreeNumericRangeTreeQuery_$1, initWithOrgApacheLuceneRangetreeNumericRangeTreeQuery_withOrgApacheLuceneSearchQuery_, outer$, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneRangetreeNumericRangeTreeQuery_$1)

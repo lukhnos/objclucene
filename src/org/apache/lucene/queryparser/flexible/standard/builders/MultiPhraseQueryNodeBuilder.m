@@ -31,25 +31,25 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneSearchMultiPhraseQuery *)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode {
-  OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode *phraseNode = (OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode *) check_class_cast(queryNode, [OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode class]);
-  OrgApacheLuceneSearchMultiPhraseQuery *phraseQuery = [new_OrgApacheLuceneSearchMultiPhraseQuery_init() autorelease];
+  OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode *phraseNode = (OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode *) cast_chk(queryNode, [OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode class]);
+  OrgApacheLuceneSearchMultiPhraseQuery *phraseQuery = create_OrgApacheLuceneSearchMultiPhraseQuery_init();
   id<JavaUtilList> children = [((OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode *) nil_chk(phraseNode)) getChildren];
   if (children != nil) {
-    JavaUtilTreeMap *positionTermMap = [new_JavaUtilTreeMap_init() autorelease];
+    JavaUtilTreeMap *positionTermMap = create_JavaUtilTreeMap_init();
     for (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> __strong child in children) {
-      OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *termNode = (OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) check_class_cast(child, [OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode class]);
-      OrgApacheLuceneSearchTermQuery *termQuery = (OrgApacheLuceneSearchTermQuery *) check_class_cast([((OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) nil_chk(termNode)) getTagWithNSString:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder, QUERY_TREE_BUILDER_TAGID_)], [OrgApacheLuceneSearchTermQuery class]);
+      OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *termNode = (OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) cast_chk(child, [OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode class]);
+      OrgApacheLuceneSearchTermQuery *termQuery = (OrgApacheLuceneSearchTermQuery *) cast_chk([((OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) nil_chk(termNode)) getTagWithNSString:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder, QUERY_TREE_BUILDER_TAGID)], [OrgApacheLuceneSearchTermQuery class]);
       id<JavaUtilList> termList = [positionTermMap getWithId:JavaLangInteger_valueOfWithInt_([termNode getPositionIncrement])];
       if (termList == nil) {
-        termList = [new_JavaUtilLinkedList_init() autorelease];
+        termList = create_JavaUtilLinkedList_init();
         [positionTermMap putWithId:JavaLangInteger_valueOfWithInt_([termNode getPositionIncrement]) withId:termList];
       }
-      [((id<JavaUtilList>) nil_chk(termList)) addWithId:[((OrgApacheLuceneSearchTermQuery *) nil_chk(termQuery)) getTerm]];
+      [termList addWithId:[((OrgApacheLuceneSearchTermQuery *) nil_chk(termQuery)) getTerm]];
     }
     for (JavaLangInteger *boxed__ in nil_chk([positionTermMap keySet])) {
       jint positionIncrement = [((JavaLangInteger *) nil_chk(boxed__)) intValue];
       id<JavaUtilList> termList = [positionTermMap getWithId:JavaLangInteger_valueOfWithInt_(positionIncrement)];
-      [phraseQuery addWithOrgApacheLuceneIndexTermArray:[termList toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[((id<JavaUtilList>) nil_chk(termList)) size] type:OrgApacheLuceneIndexTerm_class_()]] withInt:positionIncrement];
+      [phraseQuery addWithOrgApacheLuceneIndexTermArray:[((id<JavaUtilList>) nil_chk(termList)) toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[termList size] type:OrgApacheLuceneIndexTerm_class_()]] withInt:positionIncrement];
     }
   }
   return phraseQuery;
@@ -71,9 +71,11 @@ void OrgApacheLuceneQueryparserFlexibleStandardBuildersMultiPhraseQueryNodeBuild
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardBuildersMultiPhraseQueryNodeBuilder *new_OrgApacheLuceneQueryparserFlexibleStandardBuildersMultiPhraseQueryNodeBuilder_init() {
-  OrgApacheLuceneQueryparserFlexibleStandardBuildersMultiPhraseQueryNodeBuilder *self = [OrgApacheLuceneQueryparserFlexibleStandardBuildersMultiPhraseQueryNodeBuilder alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardBuildersMultiPhraseQueryNodeBuilder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardBuildersMultiPhraseQueryNodeBuilder, init)
+}
+
+OrgApacheLuceneQueryparserFlexibleStandardBuildersMultiPhraseQueryNodeBuilder *create_OrgApacheLuceneQueryparserFlexibleStandardBuildersMultiPhraseQueryNodeBuilder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardBuildersMultiPhraseQueryNodeBuilder, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleStandardBuildersMultiPhraseQueryNodeBuilder)

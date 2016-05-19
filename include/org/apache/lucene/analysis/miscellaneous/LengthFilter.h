@@ -5,27 +5,42 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisMiscellaneousLengthFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisMiscellaneousLengthFilter_RESTRICT
-#define OrgApacheLuceneAnalysisMiscellaneousLengthFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLengthFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousLengthFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLengthFilter 0
 #else
-#define OrgApacheLuceneAnalysisMiscellaneousLengthFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLengthFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisMiscellaneousLengthFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousLengthFilter
 
-#if !defined (_OrgApacheLuceneAnalysisMiscellaneousLengthFilter_) && (OrgApacheLuceneAnalysisMiscellaneousLengthFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisMiscellaneousLengthFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisMiscellaneousLengthFilter_
+#if !defined (OrgApacheLuceneAnalysisMiscellaneousLengthFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLengthFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousLengthFilter))
+#define OrgApacheLuceneAnalysisMiscellaneousLengthFilter_
 
-#define OrgApacheLuceneAnalysisUtilFilteringTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilFilteringTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilFilteringTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilFilteringTokenFilter 1
 #include "org/apache/lucene/analysis/util/FilteringTokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief Removes words that are too long or too short from the stream.
+ <p>
+ Note: Length is calculated as the number of UTF-16 code units.
+ </p>
+ */
 @interface OrgApacheLuceneAnalysisMiscellaneousLengthFilter : OrgApacheLuceneAnalysisUtilFilteringTokenFilter
 
 #pragma mark Public
 
+/*!
+ @brief Create a new <code>LengthFilter</code>.
+ This will filter out tokens whose
+ <code>CharTermAttribute</code> is either too short (<code>CharTermAttribute.length()</code>
+ &lt; min) or too long (<code>CharTermAttribute.length()</code> &gt; max).
+ @param inArg      the <code>TokenStream</code> to consume
+ @param min     the minimum length
+ @param max     the maximum length
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
                                                    withInt:(jint)min
                                                    withInt:(jint)max;
@@ -40,8 +55,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousLengthFilter_initWith
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLengthFilter *new_OrgApacheLuceneAnalysisMiscellaneousLengthFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(OrgApacheLuceneAnalysisTokenStream *inArg, jint min, jint max) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLengthFilter *create_OrgApacheLuceneAnalysisMiscellaneousLengthFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(OrgApacheLuceneAnalysisTokenStream *inArg, jint min, jint max);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousLengthFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisMiscellaneousLengthFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLengthFilter")

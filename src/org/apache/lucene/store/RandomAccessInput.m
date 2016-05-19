@@ -3,9 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/store/RandomAccessInput.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/store/RandomAccessInput.h"
 
 @interface OrgApacheLuceneStoreRandomAccessInput : NSObject

@@ -71,7 +71,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(((OrgApacheLuceneIndexMergeState *) nil_chk(mergeState))->storedFieldsReaders_))->size_; i++) {
     OrgApacheLuceneCodecsStoredFieldsReader *storedFieldsReader = IOSObjectArray_Get(mergeState->storedFieldsReaders_, i);
     [((OrgApacheLuceneCodecsStoredFieldsReader *) nil_chk(storedFieldsReader)) checkIntegrity];
-    OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor *visitor = [new_OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor_initWithOrgApacheLuceneCodecsStoredFieldsWriter_withOrgApacheLuceneIndexMergeState_withInt_(self, mergeState, i) autorelease];
+    OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor *visitor = create_OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor_initWithOrgApacheLuceneCodecsStoredFieldsWriter_withOrgApacheLuceneIndexMergeState_withInt_(self, mergeState, i);
     jint maxDoc = IOSIntArray_Get(nil_chk(mergeState->maxDocs_), i);
     id<OrgApacheLuceneUtilBits> liveDocs = IOSObjectArray_Get(nil_chk(mergeState->liveDocs_), i);
     for (jint docID = 0; docID < maxDoc; docID++) {
@@ -135,7 +135,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsStoredFieldsWriter)
 - (void)stringFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
                                        withByteArray:(IOSByteArray *)value {
   [self resetWithOrgApacheLuceneIndexFieldInfo:fieldInfo];
-  JreStrongAssign(&stringValue_, [NSString stringWithBytes:value charset:JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8_)]);
+  JreStrongAssign(&stringValue_, [NSString stringWithBytes:value charset:JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8)]);
   [self write];
 }
 
@@ -167,8 +167,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsStoredFieldsWriter)
   [self write];
 }
 
-- (OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum *)needsFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo {
-  return JreLoadStatic(OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum, YES);
+- (OrgApacheLuceneIndexStoredFieldVisitor_Status *)needsFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo {
+  return JreLoadEnum(OrgApacheLuceneIndexStoredFieldVisitor_Status, YES);
 }
 
 - (NSString *)name {
@@ -176,7 +176,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsStoredFieldsWriter)
 }
 
 - (id<OrgApacheLuceneIndexIndexableFieldType>)fieldType {
-  return JreLoadStatic(OrgApacheLuceneDocumentStoredField, TYPE_);
+  return JreLoadStatic(OrgApacheLuceneDocumentStoredField, TYPE);
 }
 
 - (OrgApacheLuceneUtilBytesRef *)binaryValue {
@@ -278,9 +278,11 @@ void OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor_initWithOrgApacheLucen
 }
 
 OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor *new_OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor_initWithOrgApacheLuceneCodecsStoredFieldsWriter_withOrgApacheLuceneIndexMergeState_withInt_(OrgApacheLuceneCodecsStoredFieldsWriter *outer$, OrgApacheLuceneIndexMergeState *mergeState, jint readerIndex) {
-  OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor *self = [OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor alloc];
-  OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor_initWithOrgApacheLuceneCodecsStoredFieldsWriter_withOrgApacheLuceneIndexMergeState_withInt_(self, outer$, mergeState, readerIndex);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor, initWithOrgApacheLuceneCodecsStoredFieldsWriter_withOrgApacheLuceneIndexMergeState_withInt_, outer$, mergeState, readerIndex)
+}
+
+OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor *create_OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor_initWithOrgApacheLuceneCodecsStoredFieldsWriter_withOrgApacheLuceneIndexMergeState_withInt_(OrgApacheLuceneCodecsStoredFieldsWriter *outer$, OrgApacheLuceneIndexMergeState *mergeState, jint readerIndex) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor, initWithOrgApacheLuceneCodecsStoredFieldsWriter_withOrgApacheLuceneIndexMergeState_withInt_, outer$, mergeState, readerIndex)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor)

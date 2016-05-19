@@ -5,23 +5,26 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter_RESTRICT
-#define OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter 0
 #else
-#define OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter
 
-#if !defined (_OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter_) && (OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter_
+#if !defined (OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter || defined(INCLUDE_OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter))
+#define OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter_
 
-#define OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter 1
 #include "org/apache/lucene/analysis/sinks/TeeSinkTokenFilter.h"
 
 @class OrgApacheLuceneUtilAttributeSource;
 
+/*!
+ @brief Counts the tokens as they go by and saves to the internal list those between the range of lower and upper, exclusive of upper
+ */
 @interface OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter : OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter
 
 #pragma mark Public
@@ -41,8 +44,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter_initWith
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter *new_OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter_initWithInt_withInt_(jint lower, jint upper) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter *create_OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter_initWithInt_withInt_(jint lower, jint upper);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter")

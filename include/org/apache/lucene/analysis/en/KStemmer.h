@@ -5,21 +5,24 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisEnKStemmer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisEnKStemmer_RESTRICT
-#define OrgApacheLuceneAnalysisEnKStemmer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisEnKStemmer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisEnKStemmer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisEnKStemmer 0
 #else
-#define OrgApacheLuceneAnalysisEnKStemmer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisEnKStemmer 1
 #endif
-#undef OrgApacheLuceneAnalysisEnKStemmer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisEnKStemmer
 
-#if !defined (_OrgApacheLuceneAnalysisEnKStemmer_) && (OrgApacheLuceneAnalysisEnKStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisEnKStemmer_INCLUDE)
-#define _OrgApacheLuceneAnalysisEnKStemmer_
+#if !defined (OrgApacheLuceneAnalysisEnKStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisEnKStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisEnKStemmer))
+#define OrgApacheLuceneAnalysisEnKStemmer_
 
 @class IOSCharArray;
 @class OrgApacheLuceneAnalysisEnKStemmer_DictEntry;
 @protocol JavaLangCharSequence;
 
+/*!
+ @brief This class implements the Kstem algorithm
+ */
 @interface OrgApacheLuceneAnalysisEnKStemmer : NSObject {
  @public
   OrgApacheLuceneAnalysisEnKStemmer_DictEntry *matchedEntry_;
@@ -32,6 +35,9 @@
 
 - (id<JavaLangCharSequence>)asCharSequence;
 
+/*!
+ @brief Returns the result of the stem (assuming the word was changed) as a String.
+ */
 - (NSString *)asString;
 
 - (IOSCharArray *)getChars;
@@ -40,6 +46,10 @@
 
 - (NSString *)getString;
 
+/*!
+ @brief Stems the text in the token.
+ Returns true if changed.
+ */
 - (jboolean)stemWithCharArray:(IOSCharArray *)term
                       withInt:(jint)len;
 
@@ -56,12 +66,14 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisEnKStemmer_init(OrgApacheLuceneAna
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisEnKStemmer *new_OrgApacheLuceneAnalysisEnKStemmer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisEnKStemmer *create_OrgApacheLuceneAnalysisEnKStemmer_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisEnKStemmer)
 
 #endif
 
-#if !defined (_OrgApacheLuceneAnalysisEnKStemmer_DictEntry_) && (OrgApacheLuceneAnalysisEnKStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisEnKStemmer_DictEntry_INCLUDE)
-#define _OrgApacheLuceneAnalysisEnKStemmer_DictEntry_
+#if !defined (OrgApacheLuceneAnalysisEnKStemmer_DictEntry_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisEnKStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisEnKStemmer_DictEntry))
+#define OrgApacheLuceneAnalysisEnKStemmer_DictEntry_
 
 @interface OrgApacheLuceneAnalysisEnKStemmer_DictEntry : NSObject {
  @public
@@ -84,8 +96,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisEnKStemmer_DictEntry_initWithNSStr
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisEnKStemmer_DictEntry *new_OrgApacheLuceneAnalysisEnKStemmer_DictEntry_initWithNSString_withBoolean_(NSString *root, jboolean isException) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisEnKStemmer_DictEntry *create_OrgApacheLuceneAnalysisEnKStemmer_DictEntry_initWithNSString_withBoolean_(NSString *root, jboolean isException);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisEnKStemmer_DictEntry)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisEnKStemmer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisEnKStemmer")

@@ -5,29 +5,39 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode_) && (OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode_
+#if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode))
+#define OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode_
 
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_RESTRICT 1
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl 1
+#define INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNodeImpl.h"
 
 @protocol JavaLangCharSequence;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;
 
+/*!
+ @brief A <code>GroupQueryNode</code> represents a location where the original user typed
+ real parenthesis on the query string.
+ This class is useful for queries like:
+ a) a AND b OR c b) ( a AND b) OR c
+ Parenthesis might be used to define the boolean operation precedence.
+ */
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl
 
 #pragma mark Public
 
+/*!
+ @brief This QueryNode is used to identify parenthesis on the original query string
+ */
 - (instancetype)initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)query;
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree;
@@ -48,8 +58,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> query) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode *create_OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> query);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode")

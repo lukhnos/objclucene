@@ -90,9 +90,11 @@ void OrgApacheLuceneIndexIndexFormatTooNewException_initWithNSString_withInt_wit
 }
 
 OrgApacheLuceneIndexIndexFormatTooNewException *new_OrgApacheLuceneIndexIndexFormatTooNewException_initWithNSString_withInt_withInt_withInt_(NSString *resourceDescription, jint version_, jint minVersion, jint maxVersion) {
-  OrgApacheLuceneIndexIndexFormatTooNewException *self = [OrgApacheLuceneIndexIndexFormatTooNewException alloc];
-  OrgApacheLuceneIndexIndexFormatTooNewException_initWithNSString_withInt_withInt_withInt_(self, resourceDescription, version_, minVersion, maxVersion);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexIndexFormatTooNewException, initWithNSString_withInt_withInt_withInt_, resourceDescription, version_, minVersion, maxVersion)
+}
+
+OrgApacheLuceneIndexIndexFormatTooNewException *create_OrgApacheLuceneIndexIndexFormatTooNewException_initWithNSString_withInt_withInt_withInt_(NSString *resourceDescription, jint version_, jint minVersion, jint maxVersion) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexIndexFormatTooNewException, initWithNSString_withInt_withInt_withInt_, resourceDescription, version_, minVersion, maxVersion)
 }
 
 void OrgApacheLuceneIndexIndexFormatTooNewException_initWithOrgApacheLuceneStoreDataInput_withInt_withInt_withInt_(OrgApacheLuceneIndexIndexFormatTooNewException *self, OrgApacheLuceneStoreDataInput *inArg, jint version_, jint minVersion, jint maxVersion) {
@@ -100,9 +102,11 @@ void OrgApacheLuceneIndexIndexFormatTooNewException_initWithOrgApacheLuceneStore
 }
 
 OrgApacheLuceneIndexIndexFormatTooNewException *new_OrgApacheLuceneIndexIndexFormatTooNewException_initWithOrgApacheLuceneStoreDataInput_withInt_withInt_withInt_(OrgApacheLuceneStoreDataInput *inArg, jint version_, jint minVersion, jint maxVersion) {
-  OrgApacheLuceneIndexIndexFormatTooNewException *self = [OrgApacheLuceneIndexIndexFormatTooNewException alloc];
-  OrgApacheLuceneIndexIndexFormatTooNewException_initWithOrgApacheLuceneStoreDataInput_withInt_withInt_withInt_(self, inArg, version_, minVersion, maxVersion);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexIndexFormatTooNewException, initWithOrgApacheLuceneStoreDataInput_withInt_withInt_withInt_, inArg, version_, minVersion, maxVersion)
+}
+
+OrgApacheLuceneIndexIndexFormatTooNewException *create_OrgApacheLuceneIndexIndexFormatTooNewException_initWithOrgApacheLuceneStoreDataInput_withInt_withInt_withInt_(OrgApacheLuceneStoreDataInput *inArg, jint version_, jint minVersion, jint maxVersion) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexIndexFormatTooNewException, initWithOrgApacheLuceneStoreDataInput_withInt_withInt_withInt_, inArg, version_, minVersion, maxVersion)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexIndexFormatTooNewException)

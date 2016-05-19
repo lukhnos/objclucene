@@ -5,23 +5,35 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsCompressingMatchingReaders_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsCompressingMatchingReaders_RESTRICT
-#define OrgApacheLuceneCodecsCompressingMatchingReaders_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsCompressingMatchingReaders")
+#ifdef RESTRICT_OrgApacheLuceneCodecsCompressingMatchingReaders
+#define INCLUDE_ALL_OrgApacheLuceneCodecsCompressingMatchingReaders 0
 #else
-#define OrgApacheLuceneCodecsCompressingMatchingReaders_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsCompressingMatchingReaders 1
 #endif
-#undef OrgApacheLuceneCodecsCompressingMatchingReaders_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsCompressingMatchingReaders
 
-#if !defined (_OrgApacheLuceneCodecsCompressingMatchingReaders_) && (OrgApacheLuceneCodecsCompressingMatchingReaders_INCLUDE_ALL || OrgApacheLuceneCodecsCompressingMatchingReaders_INCLUDE)
-#define _OrgApacheLuceneCodecsCompressingMatchingReaders_
+#if !defined (OrgApacheLuceneCodecsCompressingMatchingReaders_) && (INCLUDE_ALL_OrgApacheLuceneCodecsCompressingMatchingReaders || defined(INCLUDE_OrgApacheLuceneCodecsCompressingMatchingReaders))
+#define OrgApacheLuceneCodecsCompressingMatchingReaders_
 
 @class IOSBooleanArray;
 @class OrgApacheLuceneIndexMergeState;
 
+/*!
+ @brief Computes which segments have identical field name to number mappings,
+ which allows stored fields and term vectors in this codec to be bulk-merged.
+ */
 @interface OrgApacheLuceneCodecsCompressingMatchingReaders : NSObject {
  @public
+  /*!
+   @brief <code>SegmentReader</code>s that have identical field
+ name/number mapping, so their stored fields and term
+ vectors may be bulk merged.
+   */
   IOSBooleanArray *matchingReaders_;
+  /*!
+   @brief How many <code>matchingReaders</code> are set.
+   */
   jint count_;
 }
 
@@ -39,8 +51,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsCompressingMatchingReaders_initWithO
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsCompressingMatchingReaders *new_OrgApacheLuceneCodecsCompressingMatchingReaders_initWithOrgApacheLuceneIndexMergeState_(OrgApacheLuceneIndexMergeState *mergeState) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsCompressingMatchingReaders *create_OrgApacheLuceneCodecsCompressingMatchingReaders_initWithOrgApacheLuceneIndexMergeState_(OrgApacheLuceneIndexMergeState *mergeState);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingMatchingReaders)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsCompressingMatchingReaders_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsCompressingMatchingReaders")

@@ -5,39 +5,71 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_RESTRICT
-#define OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer 0
 #else
-#define OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer 1
 #endif
-#undef OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer
 
-#if !defined (_OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_) && (OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_INCLUDE_ALL || OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_INCLUDE)
-#define _OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_
+#if !defined (OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer || defined(INCLUDE_OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer))
+#define OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_
 
-#define OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase 1
 #include "org/apache/lucene/analysis/util/StopwordAnalyzerBase.h"
 
 @class JavaIoReader;
 @class OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;
 @class OrgApacheLuceneAnalysisUtilCharArraySet;
 
-#define OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_DEFAULT_MAX_TOKEN_LENGTH 255
-
+/*!
+ @brief Filters <code>org.apache.lucene.analysis.standard.UAX29URLEmailTokenizer</code>
+ with <code>org.apache.lucene.analysis.standard.StandardFilter</code>,
+ <code>org.apache.lucene.analysis.core.LowerCaseFilter</code> and
+ <code>org.apache.lucene.analysis.core.StopFilter</code>, using a list of
+ English stop words.
+ */
 @interface OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer : OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase
+
++ (jint)DEFAULT_MAX_TOKEN_LENGTH;
+
++ (OrgApacheLuceneAnalysisUtilCharArraySet *)STOP_WORDS_SET;
 
 #pragma mark Public
 
+/*!
+ @brief Builds an analyzer with the default stop words (<code>STOP_WORDS_SET</code>
+ ).
+ */
 - (instancetype)init;
 
+/*!
+ @brief Builds an analyzer with the given stop words.
+ @param stopWords stop words
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopWords;
 
+/*!
+ @brief Builds an analyzer with the stop words from the given reader.
+ - seealso: org.apache.lucene.analysis.util.WordlistLoader#getWordSet(java.io.Reader)
+ @param stopwords Reader to read stop words from
+ */
 - (instancetype)initWithJavaIoReader:(JavaIoReader *)stopwords;
 
+/*!
+ - seealso: #setMaxTokenLength
+ */
 - (jint)getMaxTokenLength;
 
+/*!
+ @brief Set maximum allowed token length.
+ If a token is seen
+ that exceeds this length then it is discarded.  This
+ setting only takes effect the next time tokenStream or
+ tokenStream is called.
+ */
 - (void)setMaxTokenLengthWithInt:(jint)length;
 
 #pragma mark Protected
@@ -48,25 +80,42 @@
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer, DEFAULT_MAX_TOKEN_LENGTH, jint)
+/*!
+ @brief Default maximum allowed token length
+ */
+inline jint OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_get_DEFAULT_MAX_TOKEN_LENGTH();
+#define OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_DEFAULT_MAX_TOKEN_LENGTH 255
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer, DEFAULT_MAX_TOKEN_LENGTH, jint)
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_STOP_WORDS_SET_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer, STOP_WORDS_SET_, OrgApacheLuceneAnalysisUtilCharArraySet *)
+/*!
+ @brief An unmodifiable set containing some common English words that are usually not
+ useful for searching.
+ */
+inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_get_STOP_WORDS_SET();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_STOP_WORDS_SET;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer, STOP_WORDS_SET, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer *self, OrgApacheLuceneAnalysisUtilCharArraySet *stopWords);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer *new_OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopWords) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer *create_OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopWords);
+
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_init(OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer *new_OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer *create_OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_init();
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_initWithJavaIoReader_(OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer *self, JavaIoReader *stopwords);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer *new_OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_initWithJavaIoReader_(JavaIoReader *stopwords) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer *create_OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_initWithJavaIoReader_(JavaIoReader *stopwords);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer")

@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilPackedMonotonicLongValues_INCLUDE_ALL")
-#if OrgApacheLuceneUtilPackedMonotonicLongValues_RESTRICT
-#define OrgApacheLuceneUtilPackedMonotonicLongValues_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedMonotonicLongValues")
+#ifdef RESTRICT_OrgApacheLuceneUtilPackedMonotonicLongValues
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackedMonotonicLongValues 0
 #else
-#define OrgApacheLuceneUtilPackedMonotonicLongValues_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackedMonotonicLongValues 1
 #endif
-#undef OrgApacheLuceneUtilPackedMonotonicLongValues_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilPackedMonotonicLongValues
 
-#if !defined (_OrgApacheLuceneUtilPackedMonotonicLongValues_) && (OrgApacheLuceneUtilPackedMonotonicLongValues_INCLUDE_ALL || OrgApacheLuceneUtilPackedMonotonicLongValues_INCLUDE)
-#define _OrgApacheLuceneUtilPackedMonotonicLongValues_
+#if !defined (OrgApacheLuceneUtilPackedMonotonicLongValues_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedMonotonicLongValues || defined(INCLUDE_OrgApacheLuceneUtilPackedMonotonicLongValues))
+#define OrgApacheLuceneUtilPackedMonotonicLongValues_
 
-#define OrgApacheLuceneUtilPackedDeltaPackedLongValues_RESTRICT 1
-#define OrgApacheLuceneUtilPackedDeltaPackedLongValues_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilPackedDeltaPackedLongValues 1
+#define INCLUDE_OrgApacheLuceneUtilPackedDeltaPackedLongValues 1
 #include "org/apache/lucene/util/packed/DeltaPackedLongValues.h"
 
 @class IOSFloatArray;
@@ -55,15 +55,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedMonotonicLongValues_initWithInt_
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedMonotonicLongValues *new_OrgApacheLuceneUtilPackedMonotonicLongValues_initWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLongArray_withFloatArray_withLong_withLong_(jint pageShift, jint pageMask, IOSObjectArray *values, IOSLongArray *mins, IOSFloatArray *averages, jlong size, jlong ramBytesUsed) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedMonotonicLongValues *create_OrgApacheLuceneUtilPackedMonotonicLongValues_initWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLongArray_withFloatArray_withLong_withLong_(jint pageShift, jint pageMask, IOSObjectArray *values, IOSLongArray *mins, IOSFloatArray *averages, jlong size, jlong ramBytesUsed);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedMonotonicLongValues)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilPackedMonotonicLongValues_Builder_) && (OrgApacheLuceneUtilPackedMonotonicLongValues_INCLUDE_ALL || OrgApacheLuceneUtilPackedMonotonicLongValues_Builder_INCLUDE)
-#define _OrgApacheLuceneUtilPackedMonotonicLongValues_Builder_
+#if !defined (OrgApacheLuceneUtilPackedMonotonicLongValues_Builder_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedMonotonicLongValues || defined(INCLUDE_OrgApacheLuceneUtilPackedMonotonicLongValues_Builder))
+#define OrgApacheLuceneUtilPackedMonotonicLongValues_Builder_
 
-#define OrgApacheLuceneUtilPackedDeltaPackedLongValues_RESTRICT 1
-#define OrgApacheLuceneUtilPackedDeltaPackedLongValues_Builder_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilPackedDeltaPackedLongValues 1
+#define INCLUDE_OrgApacheLuceneUtilPackedDeltaPackedLongValues_Builder 1
 #include "org/apache/lucene/util/packed/DeltaPackedLongValues.h"
 
 @class IOSFloatArray;
@@ -103,8 +105,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedMonotonicLongValues_Builder_init
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedMonotonicLongValues_Builder *new_OrgApacheLuceneUtilPackedMonotonicLongValues_Builder_initWithInt_withFloat_(jint pageSize, jfloat acceptableOverheadRatio) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedMonotonicLongValues_Builder *create_OrgApacheLuceneUtilPackedMonotonicLongValues_Builder_initWithInt_withFloat_(jint pageSize, jfloat acceptableOverheadRatio);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedMonotonicLongValues_Builder)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilPackedMonotonicLongValues_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedMonotonicLongValues")

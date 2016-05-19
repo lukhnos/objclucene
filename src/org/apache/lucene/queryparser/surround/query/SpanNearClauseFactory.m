@@ -71,7 +71,7 @@ withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQue
   JavaLangFloat *w = [((JavaUtilHashMap *) nil_chk(weightBySpanQuery_)) getWithId:sq];
   if (w != nil) w = JavaLangFloat_valueOfWithFloat_([w floatValue] + weight);
   else w = JavaLangFloat_valueOfWithFloat_(weight);
-  [weightBySpanQuery_ putWithId:sq withId:w];
+  [((JavaUtilHashMap *) nil_chk(weightBySpanQuery_)) putWithId:sq withId:w];
 }
 
 - (void)addTermWeightedWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)t
@@ -81,9 +81,9 @@ withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQue
 }
 
 - (void)addSpanQueryWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)q {
-  if ([((OrgApacheLuceneSearchQuery *) nil_chk(q)) getClass] == OrgApacheLuceneSearchMatchNoDocsQuery_class_()) return;
-  if (!([q isKindOfClass:[OrgApacheLuceneSearchSpansSpanQuery class]])) @throw [new_JavaLangAssertionError_initWithId_(JreStrcat("$$", @"Expected SpanQuery: ", [q toStringWithNSString:[self getFieldName]])) autorelease];
-  [self addSpanQueryWeightedWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *) check_class_cast(q, [OrgApacheLuceneSearchSpansSpanQuery class]) withFloat:[q getBoost]];
+  if ([((OrgApacheLuceneSearchQuery *) nil_chk(q)) getClass] == (id) OrgApacheLuceneSearchMatchNoDocsQuery_class_()) return;
+  if (!([q isKindOfClass:[OrgApacheLuceneSearchSpansSpanQuery class]])) @throw create_JavaLangAssertionError_initWithId_(JreStrcat("$$", @"Expected SpanQuery: ", [q toStringWithNSString:[self getFieldName]]));
+  [self addSpanQueryWeightedWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *) cast_chk(q, [OrgApacheLuceneSearchSpansSpanQuery class]) withFloat:[q getBoost]];
 }
 
 - (OrgApacheLuceneSearchSpansSpanQuery *)makeSpanClause {
@@ -92,11 +92,11 @@ withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQue
   jint i = 0;
   while ([((id<JavaUtilIterator>) nil_chk(sqi)) hasNext]) {
     OrgApacheLuceneSearchSpansSpanQuery *sq = [sqi next];
-    [((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(sq)) setBoostWithFloat:[((JavaLangFloat *) nil_chk([weightBySpanQuery_ getWithId:sq])) floatValue]];
+    [((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(sq)) setBoostWithFloat:[((JavaLangFloat *) nil_chk([((JavaUtilHashMap *) nil_chk(weightBySpanQuery_)) getWithId:sq])) floatValue]];
     IOSObjectArray_Set(spanQueries, i++, sq);
   }
   if (spanQueries->size_ == 1) return IOSObjectArray_Get(spanQueries, 0);
-  else return [new_OrgApacheLuceneSearchSpansSpanOrQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_(spanQueries) autorelease];
+  else return create_OrgApacheLuceneSearchSpansSpanOrQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_(spanQueries);
 }
 
 - (void)dealloc {
@@ -141,9 +141,11 @@ void OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory_initWithOrgApa
 }
 
 OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory *new_OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory_initWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(OrgApacheLuceneIndexIndexReader *reader, NSString *fieldName, OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *qf) {
-  OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory *self = [OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory alloc];
-  OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory_initWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(self, reader, fieldName, qf);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory, initWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_, reader, fieldName, qf)
+}
+
+OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory *create_OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory_initWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(OrgApacheLuceneIndexIndexReader *reader, NSString *fieldName, OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *qf) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory, initWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_, reader, fieldName, qf)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory)

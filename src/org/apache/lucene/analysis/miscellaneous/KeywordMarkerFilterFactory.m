@@ -34,10 +34,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFacto
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory, pattern_, JavaUtilRegexPattern *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory, protectedWords_, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
-NSString *OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_PROTECTED_TOKENS_ = @"protected";
-NSString *OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_PATTERN_ = @"pattern";
+NSString *OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_PROTECTED_TOKENS = @"protected";
+NSString *OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_PATTERN = @"pattern";
 
 @implementation OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory
+
++ (NSString *)PROTECTED_TOKENS {
+  return OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_PROTECTED_TOKENS;
+}
+
++ (NSString *)PATTERN {
+  return OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_PATTERN;
+}
 
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args {
   OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_initWithJavaUtilMap_(self, args);
@@ -59,10 +67,10 @@ NSString *OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_PATTERN
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
   if (pattern_ != nil) {
-    input = [new_OrgApacheLuceneAnalysisMiscellaneousPatternKeywordMarkerFilter_initWithOrgApacheLuceneAnalysisTokenStream_withJavaUtilRegexPattern_(input, pattern_) autorelease];
+    input = create_OrgApacheLuceneAnalysisMiscellaneousPatternKeywordMarkerFilter_initWithOrgApacheLuceneAnalysisTokenStream_withJavaUtilRegexPattern_(input, pattern_);
   }
   if (protectedWords_ != nil) {
-    input = [new_OrgApacheLuceneAnalysisMiscellaneousSetKeywordMarkerFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(input, protectedWords_) autorelease];
+    input = create_OrgApacheLuceneAnalysisMiscellaneousSetKeywordMarkerFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(input, protectedWords_);
   }
   return input;
 }
@@ -77,14 +85,14 @@ NSString *OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_PATTERN
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "KeywordMarkerFilterFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "KeywordMarkerFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "informWithOrgApacheLuceneAnalysisUtilResourceLoader:", "inform", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "isIgnoreCase", NULL, "Z", 0x1, NULL, NULL },
     { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenStream;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "PROTECTED_TOKENS_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_PROTECTED_TOKENS_, NULL, .constantValue.asLong = 0 },
-    { "PATTERN_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_PATTERN_, NULL, .constantValue.asLong = 0 },
+    { "PROTECTED_TOKENS", "PROTECTED_TOKENS", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_PROTECTED_TOKENS, NULL, .constantValue.asLong = 0 },
+    { "PATTERN", "PATTERN", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_PATTERN, NULL, .constantValue.asLong = 0 },
     { "wordFiles_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
     { "stringPattern_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
     { "ignoreCase_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
@@ -99,18 +107,20 @@ NSString *OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_PATTERN
 
 void OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory *self, id<JavaUtilMap> args) {
   OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  JreStrongAssign(&self->wordFiles_, [self getWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_PROTECTED_TOKENS_]);
-  JreStrongAssign(&self->stringPattern_, [self getWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_PATTERN_]);
+  JreStrongAssign(&self->wordFiles_, [self getWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_PROTECTED_TOKENS]);
+  JreStrongAssign(&self->stringPattern_, [self getWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_PATTERN]);
   self->ignoreCase_ = [self getBooleanWithJavaUtilMap:args withNSString:@"ignoreCase" withBoolean:false];
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory *self = [OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory alloc];
-  OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory *create_OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory)

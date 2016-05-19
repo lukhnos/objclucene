@@ -66,7 +66,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (jboolean)isEqual:(id)obj {
   if (self == obj) return true;
   if (nil == obj) return false;
-  return [self getClass] == [nil_chk(obj) getClass];
+  return [self getClass] == (id) [obj getClass];
 }
 
 - (NSString *)description {
@@ -92,9 +92,11 @@ void OrgApacheLuceneSearchSpellLevensteinDistance_init(OrgApacheLuceneSearchSpel
 }
 
 OrgApacheLuceneSearchSpellLevensteinDistance *new_OrgApacheLuceneSearchSpellLevensteinDistance_init() {
-  OrgApacheLuceneSearchSpellLevensteinDistance *self = [OrgApacheLuceneSearchSpellLevensteinDistance alloc];
-  OrgApacheLuceneSearchSpellLevensteinDistance_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSpellLevensteinDistance, init)
+}
+
+OrgApacheLuceneSearchSpellLevensteinDistance *create_OrgApacheLuceneSearchSpellLevensteinDistance_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSpellLevensteinDistance, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpellLevensteinDistance)

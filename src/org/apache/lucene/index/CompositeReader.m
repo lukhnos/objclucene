@@ -28,7 +28,7 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (NSString *)description {
-  JavaLangStringBuilder *buffer = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_init();
   for (IOSClass *clazz = [self getClass]; clazz != nil; clazz = [clazz getSuperclass]) {
     if (![clazz isAnonymousClass]) {
       [buffer appendWithNSString:[clazz getSimpleName]];
@@ -63,11 +63,16 @@ J2OBJC_IGNORE_DESIGNATED_END
   return JreLoadVolatileId(&readerContext_);
 }
 
+- (void)__javaClone:(OrgApacheLuceneIndexCompositeReader *)original {
+  [super __javaClone:original];
+  JreCloneVolatile(&readerContext_, &original->readerContext_);
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "CompositeReader", NULL, 0x4, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getSequentialSubReaders", NULL, "Ljava.util.List;", 0x404, NULL, NULL },
+    { "getSequentialSubReaders", NULL, "Ljava.util.List;", 0x404, NULL, "()Ljava/util/List<+Lorg/apache/lucene/index/IndexReader;>;" },
     { "getContext", NULL, "Lorg.apache.lucene.index.CompositeReaderContext;", 0x11, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {

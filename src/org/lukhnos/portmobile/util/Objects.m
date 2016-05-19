@@ -52,7 +52,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "hash__WithNSObjectArray:", "hash", "I", 0x89, NULL, NULL },
     { "toStringWithId:", "toString", "Ljava.lang.String;", 0x9, NULL, NULL },
     { "equalsWithId:withId:", "equals", "Z", 0x9, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "Objects", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgLukhnosPortmobileUtilObjects = { 2, "Objects", "org.lukhnos.portmobile.util", NULL, 0x1, 7, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgLukhnosPortmobileUtilObjects;
@@ -63,7 +63,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 id OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_(id obj) {
   OrgLukhnosPortmobileUtilObjects_initialize();
   if (obj == nil) {
-    @throw [new_JavaLangNullPointerException_init() autorelease];
+    @throw create_JavaLangNullPointerException_init();
   }
   return obj;
 }
@@ -71,7 +71,7 @@ id OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_(id obj) {
 id OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_withNSString_(id obj, NSString *msg) {
   OrgLukhnosPortmobileUtilObjects_initialize();
   if (obj == nil) {
-    @throw [new_JavaLangNullPointerException_initWithNSString_(msg) autorelease];
+    @throw create_JavaLangNullPointerException_initWithNSString_(msg);
   }
   return obj;
 }
@@ -96,7 +96,7 @@ jboolean OrgLukhnosPortmobileUtilObjects_equalsWithId_withId_(id a, id b) {
   if (a == nil) {
     return b == nil ? true : false;
   }
-  return b == nil ? false : [nil_chk(a) isEqual:b];
+  return b == nil ? false : [a isEqual:b];
 }
 
 void OrgLukhnosPortmobileUtilObjects_init(OrgLukhnosPortmobileUtilObjects *self) {
@@ -104,9 +104,11 @@ void OrgLukhnosPortmobileUtilObjects_init(OrgLukhnosPortmobileUtilObjects *self)
 }
 
 OrgLukhnosPortmobileUtilObjects *new_OrgLukhnosPortmobileUtilObjects_init() {
-  OrgLukhnosPortmobileUtilObjects *self = [OrgLukhnosPortmobileUtilObjects alloc];
-  OrgLukhnosPortmobileUtilObjects_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgLukhnosPortmobileUtilObjects, init)
+}
+
+OrgLukhnosPortmobileUtilObjects *create_OrgLukhnosPortmobileUtilObjects_init() {
+  J2OBJC_CREATE_IMPL(OrgLukhnosPortmobileUtilObjects, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileUtilObjects)

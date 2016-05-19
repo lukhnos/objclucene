@@ -44,9 +44,11 @@ void OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_init(OrgApacheLuceneAnalysis
 }
 
 OrgApacheLuceneAnalysisCoreWhitespaceTokenizer *new_OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_init() {
-  OrgApacheLuceneAnalysisCoreWhitespaceTokenizer *self = [OrgApacheLuceneAnalysisCoreWhitespaceTokenizer alloc];
-  OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCoreWhitespaceTokenizer, init)
+}
+
+OrgApacheLuceneAnalysisCoreWhitespaceTokenizer *create_OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCoreWhitespaceTokenizer, init)
 }
 
 void OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneAnalysisCoreWhitespaceTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory) {
@@ -54,9 +56,11 @@ void OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_initWithOrgApacheLuceneUtilA
 }
 
 OrgApacheLuceneAnalysisCoreWhitespaceTokenizer *new_OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneUtilAttributeFactory *factory) {
-  OrgApacheLuceneAnalysisCoreWhitespaceTokenizer *self = [OrgApacheLuceneAnalysisCoreWhitespaceTokenizer alloc];
-  OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(self, factory);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCoreWhitespaceTokenizer, initWithOrgApacheLuceneUtilAttributeFactory_, factory)
+}
+
+OrgApacheLuceneAnalysisCoreWhitespaceTokenizer *create_OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneUtilAttributeFactory *factory) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCoreWhitespaceTokenizer, initWithOrgApacheLuceneUtilAttributeFactory_, factory)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCoreWhitespaceTokenizer)

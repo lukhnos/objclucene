@@ -49,46 +49,158 @@
   jint numMatches_;
 }
 
+/*!
+ @brief Score a candidate doc for all slop-valid position-combinations (matches) 
+ encountered while traversing/hopping the PhrasePositions.
+ <br> The score contribution of a match depends on the distance: 
+ <br> - highest score for distance=0 (exact match).
+ <br> - score gets lower as distance gets higher.
+ <br>Example: for query "a b"~2, a document "x a b a y" can be scored twice: 
+ once for "a b" (distance=0), and once for "b a" (distance=2).
+ <br>Possibly not all valid combinations are encountered, because for efficiency  
+ we always propagate the least PhrasePosition. This allows to base on 
+ PriorityQueue and move forward faster. 
+ As result, for example, document "a b c b a"
+ would score differently for queries "a b c"~4 and "c b a"~4, although 
+ they really are equivalent. 
+ Similarly, for doc "a b c b a f g", query "c b"~2 
+ would get same score as "g f"~2, although "c b"~2 could be matched twice.
+ We may want to fix this in the future (currently not, for performance reasons).
+ */
 - (jfloat)phraseFreq;
 
+/*!
+ @brief advance a PhrasePosition and update 'end', return false if exhausted
+ */
 - (jboolean)advancePPWithOrgApacheLuceneSearchPhrasePositions:(OrgApacheLuceneSearchPhrasePositions *)pp;
 
+/*!
+ @brief pp was just advanced.
+ If that caused a repeater collision, resolve by advancing the lesser
+ of the two colliding pps. Note that there can only be one collision, as by the initialization
+ there were no collisions before pp was advanced.  
+ */
 - (jboolean)advanceRptsWithOrgApacheLuceneSearchPhrasePositions:(OrgApacheLuceneSearchPhrasePositions *)pp;
 
+/*!
+ @brief compare two pps, but only by position and offset
+ */
 - (OrgApacheLuceneSearchPhrasePositions *)lesserWithOrgApacheLuceneSearchPhrasePositions:(OrgApacheLuceneSearchPhrasePositions *)pp
                                                 withOrgApacheLuceneSearchPhrasePositions:(OrgApacheLuceneSearchPhrasePositions *)pp2;
 
+/*!
+ @brief index of a pp2 colliding with pp, or -1 if none
+ */
 - (jint)collideWithOrgApacheLuceneSearchPhrasePositions:(OrgApacheLuceneSearchPhrasePositions *)pp;
 
+/*!
+ @brief Initialize PhrasePositions in place.
+ A one time initialization for this scorer (on first doc matching all terms):
+ <ul>
+ <li>Check if there are repetitions
+ <li>If there are, find groups of repetitions.
+ </ul>
+ Examples:
+ <ol>
+ <li>no repetitions: <b>"ho my"~2</b>
+ <li>repetitions: <b>"ho my my"~2</b>
+ <li>repetitions: <b>"my ho my"~2</b>
+ </ol>
+ @return false if PPs are exhausted (and so current doc will not be a match)
+ */
 - (jboolean)initPhrasePositions OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief no repeats: simplest case, and most common.
+ It is important to keep this piece of the code simple and efficient 
+ */
 - (void)initSimple OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief with repeats: not so simple.
+ */
 - (jboolean)initComplex OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief move all PPs to their first position
+ */
 - (void)placeFirstPositions;
 
+/*!
+ @brief Fill the queue (all pps are already placed
+ */
 - (void)fillQueue;
 
+/*!
+ @brief At initialization (each doc), each repetition group is sorted by (query) offset.
+ This provides the start condition: no collisions.
+ <p>Case 1: no multi-term repeats<br>
+ It is sufficient to advance each pp in the group by one less than its group index.
+ So lesser pp is not advanced, 2nd one advance once, 3rd one advanced twice, etc.
+ <p>Case 2: multi-term repeats<br>
+ @return false if PPs are exhausted.
+ */
 - (jboolean)advanceRepeatGroups;
 
+/*!
+ @brief initialize with checking for repeats.
+ Heavy work, but done only for the first candidate doc.<p>
+ If there are repetitions, check if multi-term postings (MTP) are involved.<p>
+ Without MTP, once PPs are placed in the first candidate doc, repeats (and groups) are visible.<br>
+ With MTP, a more complex check is needed, up-front, as there may be "hidden collisions".<br>
+ For example P1 has {A,B}, P1 has {B,C}, and the first doc is: "A C B". At start, P1 would point
+ to "A", p2 to "C", and it will not be identified that P1 and P2 are repetitions of each other.<p>
+ The more complex initialization has two parts:<br>
+ (1) identification of repetition groups.<br>
+ (2) advancing repeat groups at the start of the doc.<br>
+ For (1), a possible solution is to just create a single repetition group, 
+ made of all repeating pps. But this would slow down the check for collisions, 
+ as all pps would need to be checked. Instead, we compute "connected regions" 
+ on the bipartite graph of postings and terms.  
+ */
 - (jboolean)initFirstTime OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief sort each repetition group by (query) offset.
+ Done only once (at first doc) and allows to initialize faster for each doc. 
+ */
 - (void)sortRptGroupsWithJavaUtilArrayList:(JavaUtilArrayList *)rgs;
 
+/*!
+ @brief Detect repetition groups.
+ Done once - for first doc 
+ */
 - (JavaUtilArrayList *)gatherRptGroupsWithJavaUtilLinkedHashMap:(JavaUtilLinkedHashMap *)rptTerms;
 
+/*!
+ @brief Actual position in doc of a PhrasePosition, relies on that position = tpPos - offset)
+ */
 - (jint)tpPosWithOrgApacheLuceneSearchPhrasePositions:(OrgApacheLuceneSearchPhrasePositions *)pp;
 
+/*!
+ @brief find repeating terms and assign them ordinal values
+ */
 - (JavaUtilLinkedHashMap *)repeatingTerms;
 
+/*!
+ @brief find repeating pps, and for each, if has multi-terms, update this.hasMultiTermRpts
+ */
 - (IOSObjectArray *)repeatingPPsWithJavaUtilHashMap:(JavaUtilHashMap *)rptTerms;
 
+/*!
+ @brief bit-sets - for each repeating pp, for each of its repeating terms, the term ordinal values is set
+ */
 - (JavaUtilArrayList *)ppTermsBitSetsWithOrgApacheLuceneSearchPhrasePositionsArray:(IOSObjectArray *)rpp
                                                                withJavaUtilHashMap:(JavaUtilHashMap *)tord;
 
+/*!
+ @brief union (term group) bit-sets until they are disjoint (O(n^^2)), and each group have different terms
+ */
 - (void)unionTermGroupsWithJavaUtilArrayList:(JavaUtilArrayList *)bb;
 
+/*!
+ @brief map each term to the single group that contains it
+ */
 - (JavaUtilHashMap *)termGroupsWithJavaUtilLinkedHashMap:(JavaUtilLinkedHashMap *)tord
                                    withJavaUtilArrayList:(JavaUtilArrayList *)bb;
 
@@ -156,6 +268,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSloppyPhraseScorer_$1_i
 
 __attribute__((unused)) static OrgApacheLuceneSearchSloppyPhraseScorer_$1 *new_OrgApacheLuceneSearchSloppyPhraseScorer_$1_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchSloppyPhraseScorer_$1 *create_OrgApacheLuceneSearchSloppyPhraseScorer_$1_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSloppyPhraseScorer_$1)
 
 @interface OrgApacheLuceneSearchSloppyPhraseScorer_$2 : OrgApacheLuceneSearchTwoPhaseIterator {
@@ -177,6 +291,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSloppyPhraseScorer_$2, this$0_, OrgApac
 __attribute__((unused)) static void OrgApacheLuceneSearchSloppyPhraseScorer_$2_initWithOrgApacheLuceneSearchSloppyPhraseScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchSloppyPhraseScorer_$2 *self, OrgApacheLuceneSearchSloppyPhraseScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0);
 
 __attribute__((unused)) static OrgApacheLuceneSearchSloppyPhraseScorer_$2 *new_OrgApacheLuceneSearchSloppyPhraseScorer_$2_initWithOrgApacheLuceneSearchSloppyPhraseScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchSloppyPhraseScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchSloppyPhraseScorer_$2 *create_OrgApacheLuceneSearchSloppyPhraseScorer_$2_initWithOrgApacheLuceneSearchSloppyPhraseScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchSloppyPhraseScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSloppyPhraseScorer_$2)
 
@@ -322,7 +438,7 @@ withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:(OrgApacheLuceneSearch
 }
 
 - (OrgApacheLuceneSearchTwoPhaseIterator *)asTwoPhaseIterator {
-  return [new_OrgApacheLuceneSearchSloppyPhraseScorer_$2_initWithOrgApacheLuceneSearchSloppyPhraseScorer_withOrgApacheLuceneSearchDocIdSetIterator_(self, conjunction_) autorelease];
+  return create_OrgApacheLuceneSearchSloppyPhraseScorer_$2_initWithOrgApacheLuceneSearchSloppyPhraseScorer_withOrgApacheLuceneSearchDocIdSetIterator_(self, conjunction_);
 }
 
 - (void)dealloc {
@@ -350,14 +466,14 @@ withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:(OrgApacheLuceneSearch
     { "fillQueue", NULL, "V", 0x2, NULL, NULL },
     { "advanceRepeatGroups", NULL, "Z", 0x2, "Ljava.io.IOException;", NULL },
     { "initFirstTime", NULL, "Z", 0x2, "Ljava.io.IOException;", NULL },
-    { "sortRptGroupsWithJavaUtilArrayList:", "sortRptGroups", "V", 0x2, NULL, NULL },
-    { "gatherRptGroupsWithJavaUtilLinkedHashMap:", "gatherRptGroups", "Ljava.util.ArrayList;", 0x2, "Ljava.io.IOException;", NULL },
+    { "sortRptGroupsWithJavaUtilArrayList:", "sortRptGroups", "V", 0x2, NULL, "(Ljava/util/ArrayList<Ljava/util/ArrayList<Lorg/apache/lucene/search/PhrasePositions;>;>;)V" },
+    { "gatherRptGroupsWithJavaUtilLinkedHashMap:", "gatherRptGroups", "Ljava.util.ArrayList;", 0x2, "Ljava.io.IOException;", "(Ljava/util/LinkedHashMap<Lorg/apache/lucene/index/Term;Ljava/lang/Integer;>;)Ljava/util/ArrayList<Ljava/util/ArrayList<Lorg/apache/lucene/search/PhrasePositions;>;>;" },
     { "tpPosWithOrgApacheLuceneSearchPhrasePositions:", "tpPos", "I", 0x12, NULL, NULL },
-    { "repeatingTerms", NULL, "Ljava.util.LinkedHashMap;", 0x2, NULL, NULL },
-    { "repeatingPPsWithJavaUtilHashMap:", "repeatingPPs", "[Lorg.apache.lucene.search.PhrasePositions;", 0x2, NULL, NULL },
-    { "ppTermsBitSetsWithOrgApacheLuceneSearchPhrasePositionsArray:withJavaUtilHashMap:", "ppTermsBitSets", "Ljava.util.ArrayList;", 0x2, NULL, NULL },
-    { "unionTermGroupsWithJavaUtilArrayList:", "unionTermGroups", "V", 0x2, NULL, NULL },
-    { "termGroupsWithJavaUtilLinkedHashMap:withJavaUtilArrayList:", "termGroups", "Ljava.util.HashMap;", 0x2, "Ljava.io.IOException;", NULL },
+    { "repeatingTerms", NULL, "Ljava.util.LinkedHashMap;", 0x2, NULL, "()Ljava/util/LinkedHashMap<Lorg/apache/lucene/index/Term;Ljava/lang/Integer;>;" },
+    { "repeatingPPsWithJavaUtilHashMap:", "repeatingPPs", "[Lorg.apache.lucene.search.PhrasePositions;", 0x2, NULL, "(Ljava/util/HashMap<Lorg/apache/lucene/index/Term;Ljava/lang/Integer;>;)[Lorg/apache/lucene/search/PhrasePositions;" },
+    { "ppTermsBitSetsWithOrgApacheLuceneSearchPhrasePositionsArray:withJavaUtilHashMap:", "ppTermsBitSets", "Ljava.util.ArrayList;", 0x2, NULL, "([Lorg/apache/lucene/search/PhrasePositions;Ljava/util/HashMap<Lorg/apache/lucene/index/Term;Ljava/lang/Integer;>;)Ljava/util/ArrayList<Lorg/apache/lucene/util/FixedBitSet;>;" },
+    { "unionTermGroupsWithJavaUtilArrayList:", "unionTermGroups", "V", 0x2, NULL, "(Ljava/util/ArrayList<Lorg/apache/lucene/util/FixedBitSet;>;)V" },
+    { "termGroupsWithJavaUtilLinkedHashMap:withJavaUtilArrayList:", "termGroups", "Ljava.util.HashMap;", 0x2, "Ljava.io.IOException;", "(Ljava/util/LinkedHashMap<Lorg/apache/lucene/index/Term;Ljava/lang/Integer;>;Ljava/util/ArrayList<Lorg/apache/lucene/util/FixedBitSet;>;)Ljava/util/HashMap<Lorg/apache/lucene/index/Term;Ljava/lang/Integer;>;" },
     { "freq", NULL, "I", 0x1, NULL, NULL },
     { "sloppyFreq", NULL, "F", 0x0, NULL, NULL },
     { "docID", NULL, "I", 0x1, NULL, NULL },
@@ -408,9 +524,11 @@ void OrgApacheLuceneSearchSloppyPhraseScorer_initWithOrgApacheLuceneSearchWeight
 }
 
 OrgApacheLuceneSearchSloppyPhraseScorer *new_OrgApacheLuceneSearchSloppyPhraseScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchPhraseQuery_PostingsAndFreqArray_withInt_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_withBoolean_(OrgApacheLuceneSearchWeight *weight, IOSObjectArray *postings, jint slop, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer, jboolean needsScores) {
-  OrgApacheLuceneSearchSloppyPhraseScorer *self = [OrgApacheLuceneSearchSloppyPhraseScorer alloc];
-  OrgApacheLuceneSearchSloppyPhraseScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchPhraseQuery_PostingsAndFreqArray_withInt_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_withBoolean_(self, weight, postings, slop, docScorer, needsScores);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSloppyPhraseScorer, initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchPhraseQuery_PostingsAndFreqArray_withInt_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_withBoolean_, weight, postings, slop, docScorer, needsScores)
+}
+
+OrgApacheLuceneSearchSloppyPhraseScorer *create_OrgApacheLuceneSearchSloppyPhraseScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchPhraseQuery_PostingsAndFreqArray_withInt_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_withBoolean_(OrgApacheLuceneSearchWeight *weight, IOSObjectArray *postings, jint slop, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer, jboolean needsScores) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSloppyPhraseScorer, initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchPhraseQuery_PostingsAndFreqArray_withInt_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_withBoolean_, weight, postings, slop, docScorer, needsScores)
 }
 
 jfloat OrgApacheLuceneSearchSloppyPhraseScorer_phraseFreq(OrgApacheLuceneSearchSloppyPhraseScorer *self) {
@@ -468,7 +586,7 @@ jboolean OrgApacheLuceneSearchSloppyPhraseScorer_advanceRptsWithOrgApacheLuceneS
     return true;
   }
   IOSObjectArray *rg = IOSObjectArray_Get(nil_chk(self->rptGroups_), pp->rptGroup_);
-  OrgApacheLuceneUtilFixedBitSet *bits = [new_OrgApacheLuceneUtilFixedBitSet_initWithInt_(((IOSObjectArray *) nil_chk(rg))->size_) autorelease];
+  OrgApacheLuceneUtilFixedBitSet *bits = create_OrgApacheLuceneUtilFixedBitSet_initWithInt_(((IOSObjectArray *) nil_chk(rg))->size_);
   jint k0 = pp->rptInd_;
   jint k;
   while ((k = OrgApacheLuceneSearchSloppyPhraseScorer_collideWithOrgApacheLuceneSearchPhrasePositions_(self, pp)) >= 0) {
@@ -482,7 +600,7 @@ jboolean OrgApacheLuceneSearchSloppyPhraseScorer_advanceRptsWithOrgApacheLuceneS
     }
   }
   jint n = 0;
-  jint numBits = [((OrgApacheLuceneUtilFixedBitSet *) nil_chk(bits)) length];
+  jint numBits = [bits length];
   while ([bits cardinality] > 0) {
     OrgApacheLuceneSearchPhrasePositions *pp2 = [((OrgApacheLuceneSearchPhraseQueue *) nil_chk(self->pq_)) pop];
     IOSObjectArray_Set(nil_chk(self->rptStack_), n++, pp2);
@@ -639,11 +757,11 @@ jboolean OrgApacheLuceneSearchSloppyPhraseScorer_initFirstTime(OrgApacheLuceneSe
 
 void OrgApacheLuceneSearchSloppyPhraseScorer_sortRptGroupsWithJavaUtilArrayList_(OrgApacheLuceneSearchSloppyPhraseScorer *self, JavaUtilArrayList *rgs) {
   JreStrongAssignAndConsume(&self->rptGroups_, [IOSObjectArray newArrayWithLength:[((JavaUtilArrayList *) nil_chk(rgs)) size] type:IOSClass_arrayType(OrgApacheLuceneSearchPhrasePositions_class_(), 1)]);
-  id<JavaUtilComparator> cmprtr = [new_OrgApacheLuceneSearchSloppyPhraseScorer_$1_init() autorelease];
-  for (jint i = 0; i < self->rptGroups_->size_; i++) {
+  id<JavaUtilComparator> cmprtr = create_OrgApacheLuceneSearchSloppyPhraseScorer_$1_init();
+  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(self->rptGroups_))->size_; i++) {
     IOSObjectArray *rg = [((JavaUtilArrayList *) nil_chk([rgs getWithInt:i])) toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchPhrasePositions_class_()]];
     JavaUtilArrays_sortWithNSObjectArray_withJavaUtilComparator_(rg, cmprtr);
-    IOSObjectArray_Set(self->rptGroups_, i, rg);
+    IOSObjectArray_Set(nil_chk(self->rptGroups_), i, rg);
     for (jint j = 0; j < ((IOSObjectArray *) nil_chk(rg))->size_; j++) {
       ((OrgApacheLuceneSearchPhrasePositions *) nil_chk(IOSObjectArray_Get(rg, j)))->rptInd_ = j;
     }
@@ -652,7 +770,7 @@ void OrgApacheLuceneSearchSloppyPhraseScorer_sortRptGroupsWithJavaUtilArrayList_
 
 JavaUtilArrayList *OrgApacheLuceneSearchSloppyPhraseScorer_gatherRptGroupsWithJavaUtilLinkedHashMap_(OrgApacheLuceneSearchSloppyPhraseScorer *self, JavaUtilLinkedHashMap *rptTerms) {
   IOSObjectArray *rpp = OrgApacheLuceneSearchSloppyPhraseScorer_repeatingPPsWithJavaUtilHashMap_(self, rptTerms);
-  JavaUtilArrayList *res = [new_JavaUtilArrayList_init() autorelease];
+  JavaUtilArrayList *res = create_JavaUtilArrayList_init();
   if (!self->hasMultiTermRpts_) {
     for (jint i = 0; i < ((IOSObjectArray *) nil_chk(rpp))->size_; i++) {
       OrgApacheLuceneSearchPhrasePositions *pp = IOSObjectArray_Get(rpp, i);
@@ -667,7 +785,7 @@ JavaUtilArrayList *OrgApacheLuceneSearchSloppyPhraseScorer_gatherRptGroupsWithJa
         if (g < 0) {
           g = [res size];
           pp->rptGroup_ = g;
-          JavaUtilArrayList *rl = [new_JavaUtilArrayList_initWithInt_(2) autorelease];
+          JavaUtilArrayList *rl = create_JavaUtilArrayList_initWithInt_(2);
           [rl addWithId:pp];
           [res addWithId:rl];
         }
@@ -677,13 +795,13 @@ JavaUtilArrayList *OrgApacheLuceneSearchSloppyPhraseScorer_gatherRptGroupsWithJa
     }
   }
   else {
-    JavaUtilArrayList *tmp = [new_JavaUtilArrayList_init() autorelease];
+    JavaUtilArrayList *tmp = create_JavaUtilArrayList_init();
     JavaUtilArrayList *bb = OrgApacheLuceneSearchSloppyPhraseScorer_ppTermsBitSetsWithOrgApacheLuceneSearchPhrasePositionsArray_withJavaUtilHashMap_(self, rpp, rptTerms);
     OrgApacheLuceneSearchSloppyPhraseScorer_unionTermGroupsWithJavaUtilArrayList_(self, bb);
     JavaUtilHashMap *tg = OrgApacheLuceneSearchSloppyPhraseScorer_termGroupsWithJavaUtilLinkedHashMap_withJavaUtilArrayList_(self, rptTerms, bb);
-    JavaUtilHashSet *distinctGroupIDs = [new_JavaUtilHashSet_initWithJavaUtilCollection_([((JavaUtilHashMap *) nil_chk(tg)) values]) autorelease];
+    JavaUtilHashSet *distinctGroupIDs = create_JavaUtilHashSet_initWithJavaUtilCollection_([((JavaUtilHashMap *) nil_chk(tg)) values]);
     for (jint i = 0; i < [distinctGroupIDs size]; i++) {
-      [tmp addWithId:[new_JavaUtilHashSet_init() autorelease]];
+      [tmp addWithId:create_JavaUtilHashSet_init()];
     }
     {
       IOSObjectArray *a__ = rpp;
@@ -708,7 +826,7 @@ JavaUtilArrayList *OrgApacheLuceneSearchSloppyPhraseScorer_gatherRptGroupsWithJa
       }
     }
     for (JavaUtilHashSet * __strong hs in tmp) {
-      [res addWithId:[new_JavaUtilArrayList_initWithJavaUtilCollection_(hs) autorelease]];
+      [res addWithId:create_JavaUtilArrayList_initWithJavaUtilCollection_(hs)];
     }
   }
   return res;
@@ -719,8 +837,8 @@ jint OrgApacheLuceneSearchSloppyPhraseScorer_tpPosWithOrgApacheLuceneSearchPhras
 }
 
 JavaUtilLinkedHashMap *OrgApacheLuceneSearchSloppyPhraseScorer_repeatingTerms(OrgApacheLuceneSearchSloppyPhraseScorer *self) {
-  JavaUtilLinkedHashMap *tord = [new_JavaUtilLinkedHashMap_init() autorelease];
-  JavaUtilHashMap *tcnt = [new_JavaUtilHashMap_init() autorelease];
+  JavaUtilLinkedHashMap *tord = create_JavaUtilLinkedHashMap_init();
+  JavaUtilHashMap *tcnt = create_JavaUtilHashMap_init();
   {
     IOSObjectArray *a__ = self->phrasePositions_;
     OrgApacheLuceneSearchPhrasePositions * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
@@ -734,7 +852,7 @@ JavaUtilLinkedHashMap *OrgApacheLuceneSearchSloppyPhraseScorer_repeatingTerms(Or
         while (b__ < e__) {
           OrgApacheLuceneIndexTerm *t = *b__++;
           JavaLangInteger *cnt0 = [tcnt getWithId:t];
-          JavaLangInteger *cnt = cnt0 == nil ? [new_JavaLangInteger_initWithInt_(1) autorelease] : [new_JavaLangInteger_initWithInt_(1 + [cnt0 intValue]) autorelease];
+          JavaLangInteger *cnt = cnt0 == nil ? create_JavaLangInteger_initWithInt_(1) : create_JavaLangInteger_initWithInt_(1 + [cnt0 intValue]);
           [tcnt putWithId:t withId:cnt];
           if ([cnt intValue] == 2) {
             [tord putWithId:t withId:JavaLangInteger_valueOfWithInt_([tord size])];
@@ -747,7 +865,7 @@ JavaUtilLinkedHashMap *OrgApacheLuceneSearchSloppyPhraseScorer_repeatingTerms(Or
 }
 
 IOSObjectArray *OrgApacheLuceneSearchSloppyPhraseScorer_repeatingPPsWithJavaUtilHashMap_(OrgApacheLuceneSearchSloppyPhraseScorer *self, JavaUtilHashMap *rptTerms) {
-  JavaUtilArrayList *rp = [new_JavaUtilArrayList_init() autorelease];
+  JavaUtilArrayList *rp = create_JavaUtilArrayList_init();
   {
     IOSObjectArray *a__ = self->phrasePositions_;
     OrgApacheLuceneSearchPhrasePositions * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
@@ -773,14 +891,14 @@ IOSObjectArray *OrgApacheLuceneSearchSloppyPhraseScorer_repeatingPPsWithJavaUtil
 }
 
 JavaUtilArrayList *OrgApacheLuceneSearchSloppyPhraseScorer_ppTermsBitSetsWithOrgApacheLuceneSearchPhrasePositionsArray_withJavaUtilHashMap_(OrgApacheLuceneSearchSloppyPhraseScorer *self, IOSObjectArray *rpp, JavaUtilHashMap *tord) {
-  JavaUtilArrayList *bb = [new_JavaUtilArrayList_initWithInt_(((IOSObjectArray *) nil_chk(rpp))->size_) autorelease];
+  JavaUtilArrayList *bb = create_JavaUtilArrayList_initWithInt_(((IOSObjectArray *) nil_chk(rpp))->size_);
   {
     IOSObjectArray *a__ = rpp;
     OrgApacheLuceneSearchPhrasePositions * const *b__ = a__->buffer_;
     OrgApacheLuceneSearchPhrasePositions * const *e__ = b__ + a__->size_;
     while (b__ < e__) {
       OrgApacheLuceneSearchPhrasePositions *pp = *b__++;
-      OrgApacheLuceneUtilFixedBitSet *b = [new_OrgApacheLuceneUtilFixedBitSet_initWithInt_([((JavaUtilHashMap *) nil_chk(tord)) size]) autorelease];
+      OrgApacheLuceneUtilFixedBitSet *b = create_OrgApacheLuceneUtilFixedBitSet_initWithInt_([((JavaUtilHashMap *) nil_chk(tord)) size]);
       JavaLangInteger *ord;
       {
         IOSObjectArray *a__ = ((OrgApacheLuceneSearchPhrasePositions *) nil_chk(pp))->terms_;
@@ -818,7 +936,7 @@ void OrgApacheLuceneSearchSloppyPhraseScorer_unionTermGroupsWithJavaUtilArrayLis
 }
 
 JavaUtilHashMap *OrgApacheLuceneSearchSloppyPhraseScorer_termGroupsWithJavaUtilLinkedHashMap_withJavaUtilArrayList_(OrgApacheLuceneSearchSloppyPhraseScorer *self, JavaUtilLinkedHashMap *tord, JavaUtilArrayList *bb) {
-  JavaUtilHashMap *tg = [new_JavaUtilHashMap_init() autorelease];
+  JavaUtilHashMap *tg = create_JavaUtilHashMap_init();
   IOSObjectArray *t = [((id<JavaUtilSet>) nil_chk([((JavaUtilLinkedHashMap *) nil_chk(tord)) keySet])) toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneIndexTerm_class_()]];
   for (jint i = 0; i < [((JavaUtilArrayList *) nil_chk(bb)) size]; i++) {
     OrgApacheLuceneUtilFixedBitSet *bits = [bb getWithInt:i];
@@ -862,9 +980,11 @@ void OrgApacheLuceneSearchSloppyPhraseScorer_$1_init(OrgApacheLuceneSearchSloppy
 }
 
 OrgApacheLuceneSearchSloppyPhraseScorer_$1 *new_OrgApacheLuceneSearchSloppyPhraseScorer_$1_init() {
-  OrgApacheLuceneSearchSloppyPhraseScorer_$1 *self = [OrgApacheLuceneSearchSloppyPhraseScorer_$1 alloc];
-  OrgApacheLuceneSearchSloppyPhraseScorer_$1_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSloppyPhraseScorer_$1, init)
+}
+
+OrgApacheLuceneSearchSloppyPhraseScorer_$1 *create_OrgApacheLuceneSearchSloppyPhraseScorer_$1_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSloppyPhraseScorer_$1, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSloppyPhraseScorer_$1)
@@ -908,9 +1028,11 @@ void OrgApacheLuceneSearchSloppyPhraseScorer_$2_initWithOrgApacheLuceneSearchSlo
 }
 
 OrgApacheLuceneSearchSloppyPhraseScorer_$2 *new_OrgApacheLuceneSearchSloppyPhraseScorer_$2_initWithOrgApacheLuceneSearchSloppyPhraseScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchSloppyPhraseScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0) {
-  OrgApacheLuceneSearchSloppyPhraseScorer_$2 *self = [OrgApacheLuceneSearchSloppyPhraseScorer_$2 alloc];
-  OrgApacheLuceneSearchSloppyPhraseScorer_$2_initWithOrgApacheLuceneSearchSloppyPhraseScorer_withOrgApacheLuceneSearchDocIdSetIterator_(self, outer$, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSloppyPhraseScorer_$2, initWithOrgApacheLuceneSearchSloppyPhraseScorer_withOrgApacheLuceneSearchDocIdSetIterator_, outer$, arg$0)
+}
+
+OrgApacheLuceneSearchSloppyPhraseScorer_$2 *create_OrgApacheLuceneSearchSloppyPhraseScorer_$2_initWithOrgApacheLuceneSearchSloppyPhraseScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchSloppyPhraseScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSloppyPhraseScorer_$2, initWithOrgApacheLuceneSearchSloppyPhraseScorer_withOrgApacheLuceneSearchDocIdSetIterator_, outer$, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSloppyPhraseScorer_$2)

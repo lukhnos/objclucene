@@ -5,24 +5,61 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexFlushByRamOrCountsPolicy_INCLUDE_ALL")
-#if OrgApacheLuceneIndexFlushByRamOrCountsPolicy_RESTRICT
-#define OrgApacheLuceneIndexFlushByRamOrCountsPolicy_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexFlushByRamOrCountsPolicy")
+#ifdef RESTRICT_OrgApacheLuceneIndexFlushByRamOrCountsPolicy
+#define INCLUDE_ALL_OrgApacheLuceneIndexFlushByRamOrCountsPolicy 0
 #else
-#define OrgApacheLuceneIndexFlushByRamOrCountsPolicy_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexFlushByRamOrCountsPolicy 1
 #endif
-#undef OrgApacheLuceneIndexFlushByRamOrCountsPolicy_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexFlushByRamOrCountsPolicy
 
-#if !defined (_OrgApacheLuceneIndexFlushByRamOrCountsPolicy_) && (OrgApacheLuceneIndexFlushByRamOrCountsPolicy_INCLUDE_ALL || OrgApacheLuceneIndexFlushByRamOrCountsPolicy_INCLUDE)
-#define _OrgApacheLuceneIndexFlushByRamOrCountsPolicy_
+#if !defined (OrgApacheLuceneIndexFlushByRamOrCountsPolicy_) && (INCLUDE_ALL_OrgApacheLuceneIndexFlushByRamOrCountsPolicy || defined(INCLUDE_OrgApacheLuceneIndexFlushByRamOrCountsPolicy))
+#define OrgApacheLuceneIndexFlushByRamOrCountsPolicy_
 
-#define OrgApacheLuceneIndexFlushPolicy_RESTRICT 1
-#define OrgApacheLuceneIndexFlushPolicy_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexFlushPolicy 1
+#define INCLUDE_OrgApacheLuceneIndexFlushPolicy 1
 #include "org/apache/lucene/index/FlushPolicy.h"
 
 @class OrgApacheLuceneIndexDocumentsWriterFlushControl;
 @class OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState;
 
+/*!
+ @brief Default <code>FlushPolicy</code> implementation that flushes new segments based on
+ RAM used and document count depending on the IndexWriter's
+ <code>IndexWriterConfig</code>.
+ It also applies pending deletes based on the
+ number of buffered delete terms.
+ <ul>
+ <li>
+ <code>onDelete(DocumentsWriterFlushControl,DocumentsWriterPerThreadPool.ThreadState)</code>
+ - applies pending delete operations based on the global number of buffered
+ delete terms iff <code>IndexWriterConfig.getMaxBufferedDeleteTerms()</code> is
+ enabled</li>
+ <li>
+ <code>onInsert(DocumentsWriterFlushControl,DocumentsWriterPerThreadPool.ThreadState)</code>
+ - flushes either on the number of documents per
+ <code>DocumentsWriterPerThread</code> (
+ <code>DocumentsWriterPerThread.getNumDocsInRAM()</code>) or on the global active
+ memory consumption in the current indexing session iff
+ <code>IndexWriterConfig.getMaxBufferedDocs()</code> or
+ <code>IndexWriterConfig.getRAMBufferSizeMB()</code> is enabled respectively</li>
+ <li>
+ <code>onUpdate(DocumentsWriterFlushControl,DocumentsWriterPerThreadPool.ThreadState)</code>
+ - calls
+ <code>onInsert(DocumentsWriterFlushControl,DocumentsWriterPerThreadPool.ThreadState)</code>
+ and
+ <code>onDelete(DocumentsWriterFlushControl,DocumentsWriterPerThreadPool.ThreadState)</code>
+ in order</li>
+ </ul>
+ All <code>IndexWriterConfig</code> settings are used to mark
+ <code>DocumentsWriterPerThread</code> as flush pending during indexing with
+ respect to their live updates.
+ <p>
+ If <code>IndexWriterConfig.setRAMBufferSizeMB(double)</code> is enabled, the
+ largest ram consuming <code>DocumentsWriterPerThread</code> will be marked as
+ pending iff the global active RAM consumption is <code>>=</code> the configured max RAM
+ buffer.
+ */
 @interface OrgApacheLuceneIndexFlushByRamOrCountsPolicy : OrgApacheLuceneIndexFlushPolicy
 
 #pragma mark Public
@@ -35,12 +72,31 @@
 
 #pragma mark Protected
 
+/*!
+ @brief Returns <code>true</code> if this <code>FlushPolicy</code> flushes on
+ <code>IndexWriterConfig.getMaxBufferedDeleteTerms()</code>, otherwise
+ <code>false</code>.
+ */
 - (jboolean)flushOnDeleteTerms;
 
+/*!
+ @brief Returns <code>true</code> if this <code>FlushPolicy</code> flushes on
+ <code>IndexWriterConfig.getMaxBufferedDocs()</code>, otherwise
+ <code>false</code>.
+ */
 - (jboolean)flushOnDocCount;
 
+/*!
+ @brief Returns <code>true</code> if this <code>FlushPolicy</code> flushes on
+ <code>IndexWriterConfig.getRAMBufferSizeMB()</code>, otherwise
+ <code>false</code>.
+ */
 - (jboolean)flushOnRAM;
 
+/*!
+ @brief Marks the most ram consuming active <code>DocumentsWriterPerThread</code> flush
+ pending
+ */
 - (void)markLargestWriterPendingWithOrgApacheLuceneIndexDocumentsWriterFlushControl:(OrgApacheLuceneIndexDocumentsWriterFlushControl *)control
                    withOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:(OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *)perThreadState
                                                                            withLong:(jlong)currentBytesPerThread;
@@ -57,8 +113,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexFlushByRamOrCountsPolicy_init(OrgApac
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexFlushByRamOrCountsPolicy *new_OrgApacheLuceneIndexFlushByRamOrCountsPolicy_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexFlushByRamOrCountsPolicy *create_OrgApacheLuceneIndexFlushByRamOrCountsPolicy_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFlushByRamOrCountsPolicy)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexFlushByRamOrCountsPolicy_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexFlushByRamOrCountsPolicy")

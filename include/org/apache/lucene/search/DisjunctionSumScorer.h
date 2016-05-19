@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchDisjunctionSumScorer_INCLUDE_ALL")
-#if OrgApacheLuceneSearchDisjunctionSumScorer_RESTRICT
-#define OrgApacheLuceneSearchDisjunctionSumScorer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchDisjunctionSumScorer")
+#ifdef RESTRICT_OrgApacheLuceneSearchDisjunctionSumScorer
+#define INCLUDE_ALL_OrgApacheLuceneSearchDisjunctionSumScorer 0
 #else
-#define OrgApacheLuceneSearchDisjunctionSumScorer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchDisjunctionSumScorer 1
 #endif
-#undef OrgApacheLuceneSearchDisjunctionSumScorer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchDisjunctionSumScorer
 
-#if !defined (_OrgApacheLuceneSearchDisjunctionSumScorer_) && (OrgApacheLuceneSearchDisjunctionSumScorer_INCLUDE_ALL || OrgApacheLuceneSearchDisjunctionSumScorer_INCLUDE)
-#define _OrgApacheLuceneSearchDisjunctionSumScorer_
+#if !defined (OrgApacheLuceneSearchDisjunctionSumScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchDisjunctionSumScorer || defined(INCLUDE_OrgApacheLuceneSearchDisjunctionSumScorer))
+#define OrgApacheLuceneSearchDisjunctionSumScorer_
 
-#define OrgApacheLuceneSearchDisjunctionScorer_RESTRICT 1
-#define OrgApacheLuceneSearchDisjunctionScorer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchDisjunctionScorer 1
+#define INCLUDE_OrgApacheLuceneSearchDisjunctionScorer 1
 #include "org/apache/lucene/search/DisjunctionScorer.h"
 
 @class IOSFloatArray;
@@ -25,6 +25,10 @@
 @class OrgApacheLuceneSearchWeight;
 @protocol JavaUtilList;
 
+/*!
+ @brief A Scorer for OR like queries, counterpart of <code>ConjunctionScorer</code>.
+ This Scorer implements <code>Scorer.advance(int)</code> and uses advance() on the given Scorers. 
+ */
 @interface OrgApacheLuceneSearchDisjunctionSumScorer : OrgApacheLuceneSearchDisjunctionScorer
 
 #pragma mark Protected
@@ -33,6 +37,12 @@
 
 #pragma mark Package-Private
 
+/*!
+ @brief Construct a <code>DisjunctionScorer</code>.
+ @param weight The weight to be used.
+ @param subScorers Array of at least two subscorers.
+ @param coord Table of coordination factors
+ */
 - (instancetype)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
                                    withJavaUtilList:(id<JavaUtilList>)subScorers
                                      withFloatArray:(IOSFloatArray *)coord
@@ -46,8 +56,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchDisjunctionSumScorer_initWithOrgApac
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchDisjunctionSumScorer *new_OrgApacheLuceneSearchDisjunctionSumScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withFloatArray_withBoolean_(OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> subScorers, IOSFloatArray *coord, jboolean needsScores) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchDisjunctionSumScorer *create_OrgApacheLuceneSearchDisjunctionSumScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withFloatArray_withBoolean_(OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> subScorers, IOSFloatArray *coord, jboolean needsScores);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDisjunctionSumScorer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchDisjunctionSumScorer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchDisjunctionSumScorer")

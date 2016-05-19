@@ -15,9 +15,13 @@
 #include "org/apache/lucene/queryparser/flexible/standard/nodes/TermRangeQueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/standard/processors/OpenRangeQueryNodeProcessor.h"
 
-NSString *OrgApacheLuceneQueryparserFlexibleStandardProcessorsOpenRangeQueryNodeProcessor_OPEN_RANGE_TOKEN_ = @"*";
+NSString *OrgApacheLuceneQueryparserFlexibleStandardProcessorsOpenRangeQueryNodeProcessor_OPEN_RANGE_TOKEN = @"*";
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardProcessorsOpenRangeQueryNodeProcessor
+
++ (NSString *)OPEN_RANGE_TOKEN {
+  return OrgApacheLuceneQueryparserFlexibleStandardProcessorsOpenRangeQueryNodeProcessor_OPEN_RANGE_TOKEN;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -28,15 +32,15 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node {
   if ([node isKindOfClass:[OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode class]]) {
-    OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode *rangeNode = (OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode *) check_class_cast(node, [OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode class]);
+    OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode *rangeNode = (OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode *) cast_chk(node, [OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode class]);
     OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *lowerNode = [((OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode *) nil_chk(rangeNode)) getLowerBound];
     OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *upperNode = [rangeNode getUpperBound];
     id<JavaLangCharSequence> lowerText = [((OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) nil_chk(lowerNode)) getText];
     id<JavaLangCharSequence> upperText = [((OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) nil_chk(upperNode)) getText];
-    if ([((NSString *) nil_chk(OrgApacheLuceneQueryparserFlexibleStandardProcessorsOpenRangeQueryNodeProcessor_OPEN_RANGE_TOKEN_)) isEqual:[upperNode getTextAsString]] && (!([upperText isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence class]]) || ![((OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *) nil_chk(((OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *) check_class_cast(upperText, [OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence class])))) wasEscapedWithInt:0])) {
+    if ([((NSString *) nil_chk(OrgApacheLuceneQueryparserFlexibleStandardProcessorsOpenRangeQueryNodeProcessor_OPEN_RANGE_TOKEN)) isEqual:[upperNode getTextAsString]] && (!([upperText isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence class]]) || ![((OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *) nil_chk(((OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *) cast_chk(upperText, [OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence class])))) wasEscapedWithInt:0])) {
       upperText = @"";
     }
-    if ([OrgApacheLuceneQueryparserFlexibleStandardProcessorsOpenRangeQueryNodeProcessor_OPEN_RANGE_TOKEN_ isEqual:[lowerNode getTextAsString]] && (!([lowerText isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence class]]) || ![((OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *) nil_chk(((OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *) check_class_cast(lowerText, [OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence class])))) wasEscapedWithInt:0])) {
+    if ([OrgApacheLuceneQueryparserFlexibleStandardProcessorsOpenRangeQueryNodeProcessor_OPEN_RANGE_TOKEN isEqual:[lowerNode getTextAsString]] && (!([lowerText isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence class]]) || ![((OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *) nil_chk(((OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *) cast_chk(lowerText, [OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence class])))) wasEscapedWithInt:0])) {
       lowerText = @"";
     }
     [lowerNode setTextWithJavaLangCharSequence:lowerText];
@@ -58,10 +62,10 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "init", "OpenRangeQueryNodeProcessor", NULL, 0x1, NULL, NULL },
     { "postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "postProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
     { "preProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "preProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "setChildrenOrderWithJavaUtilList:", "setChildrenOrder", "Ljava.util.List;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
+    { "setChildrenOrderWithJavaUtilList:", "setChildrenOrder", "Ljava.util.List;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;)Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "OPEN_RANGE_TOKEN_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleStandardProcessorsOpenRangeQueryNodeProcessor_OPEN_RANGE_TOKEN_, NULL, .constantValue.asLong = 0 },
+    { "OPEN_RANGE_TOKEN", "OPEN_RANGE_TOKEN", 0x19, "Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleStandardProcessorsOpenRangeQueryNodeProcessor_OPEN_RANGE_TOKEN, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardProcessorsOpenRangeQueryNodeProcessor = { 2, "OpenRangeQueryNodeProcessor", "org.apache.lucene.queryparser.flexible.standard.processors", NULL, 0x1, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleStandardProcessorsOpenRangeQueryNodeProcessor;
@@ -74,9 +78,11 @@ void OrgApacheLuceneQueryparserFlexibleStandardProcessorsOpenRangeQueryNodeProce
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardProcessorsOpenRangeQueryNodeProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsOpenRangeQueryNodeProcessor_init() {
-  OrgApacheLuceneQueryparserFlexibleStandardProcessorsOpenRangeQueryNodeProcessor *self = [OrgApacheLuceneQueryparserFlexibleStandardProcessorsOpenRangeQueryNodeProcessor alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardProcessorsOpenRangeQueryNodeProcessor_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardProcessorsOpenRangeQueryNodeProcessor, init)
+}
+
+OrgApacheLuceneQueryparserFlexibleStandardProcessorsOpenRangeQueryNodeProcessor *create_OrgApacheLuceneQueryparserFlexibleStandardProcessorsOpenRangeQueryNodeProcessor_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardProcessorsOpenRangeQueryNodeProcessor, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleStandardProcessorsOpenRangeQueryNodeProcessor)

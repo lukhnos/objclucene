@@ -5,34 +5,56 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSimilaritiesDistribution_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSimilaritiesDistribution_RESTRICT
-#define OrgApacheLuceneSearchSimilaritiesDistribution_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesDistribution")
+#ifdef RESTRICT_OrgApacheLuceneSearchSimilaritiesDistribution
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesDistribution 0
 #else
-#define OrgApacheLuceneSearchSimilaritiesDistribution_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesDistribution 1
 #endif
-#undef OrgApacheLuceneSearchSimilaritiesDistribution_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSimilaritiesDistribution
 
-#if !defined (_OrgApacheLuceneSearchSimilaritiesDistribution_) && (OrgApacheLuceneSearchSimilaritiesDistribution_INCLUDE_ALL || OrgApacheLuceneSearchSimilaritiesDistribution_INCLUDE)
-#define _OrgApacheLuceneSearchSimilaritiesDistribution_
+#if !defined (OrgApacheLuceneSearchSimilaritiesDistribution_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesDistribution || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesDistribution))
+#define OrgApacheLuceneSearchSimilaritiesDistribution_
 
 @class OrgApacheLuceneSearchExplanation;
 @class OrgApacheLuceneSearchSimilaritiesBasicStats;
 
+/*!
+ @brief The probabilistic distribution used to model term occurrence
+ in information-based models.
+ - seealso: IBSimilarity
+ */
 @interface OrgApacheLuceneSearchSimilaritiesDistribution : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ (For invocation by subclass 
+ constructors, typically implicit.)
+ */
 - (instancetype)init;
 
+/*!
+ @brief Explains the score.
+ Returns the name of the model only, since
+ both <code>tfn</code> and <code>lambda</code> are explained elsewhere. 
+ */
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
                                                                                    withFloat:(jfloat)tfn
                                                                                    withFloat:(jfloat)lambda;
 
+/*!
+ @brief Computes the score.
+ */
 - (jfloat)scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
                                                      withFloat:(jfloat)tfn
                                                      withFloat:(jfloat)lambda;
 
+/*!
+ @brief Subclasses must override this method to return the name of the
+ distribution.
+ */
 - (NSString *)description;
 
 @end
@@ -45,4 +67,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesDistribution)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSimilaritiesDistribution_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesDistribution")

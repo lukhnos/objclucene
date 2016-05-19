@@ -21,9 +21,13 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpellSuggestWordQueue, comparator_, id<
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchSpellSuggestWordQueue)
 
-id<JavaUtilComparator> OrgApacheLuceneSearchSpellSuggestWordQueue_DEFAULT_COMPARATOR_;
+id<JavaUtilComparator> OrgApacheLuceneSearchSpellSuggestWordQueue_DEFAULT_COMPARATOR;
 
 @implementation OrgApacheLuceneSearchSpellSuggestWordQueue
+
++ (id<JavaUtilComparator>)DEFAULT_COMPARATOR {
+  return OrgApacheLuceneSearchSpellSuggestWordQueue_DEFAULT_COMPARATOR;
+}
 
 - (instancetype)initWithInt:(jint)size {
   OrgApacheLuceneSearchSpellSuggestWordQueue_initWithInt_(self, size);
@@ -49,7 +53,7 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSpellSuggestWordQueue_DEFAULT_COMPAR
 
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchSpellSuggestWordQueue class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneSearchSpellSuggestWordQueue_DEFAULT_COMPARATOR_, new_OrgApacheLuceneSearchSpellSuggestWordScoreComparator_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneSearchSpellSuggestWordQueue_DEFAULT_COMPARATOR, new_OrgApacheLuceneSearchSpellSuggestWordScoreComparator_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSpellSuggestWordQueue)
   }
 }
@@ -57,11 +61,11 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSpellSuggestWordQueue_DEFAULT_COMPAR
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithInt:", "SuggestWordQueue", NULL, 0x1, NULL, NULL },
-    { "initWithInt:withJavaUtilComparator:", "SuggestWordQueue", NULL, 0x1, NULL, NULL },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x14, NULL, NULL },
+    { "initWithInt:withJavaUtilComparator:", "SuggestWordQueue", NULL, 0x1, NULL, "(ILjava/util/Comparator<Lorg/apache/lucene/search/spell/SuggestWord;>;)V" },
+    { "lessThanWithId:withId:", "lessThan", "Z", 0x14, NULL, "(Lorg/apache/lucene/search/spell/SuggestWord;Lorg/apache/lucene/search/spell/SuggestWord;)Z" },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_COMPARATOR_", NULL, 0x19, "Ljava.util.Comparator;", &OrgApacheLuceneSearchSpellSuggestWordQueue_DEFAULT_COMPARATOR_, "Ljava/util/Comparator<Lorg/apache/lucene/search/spell/SuggestWord;>;", .constantValue.asLong = 0 },
+    { "DEFAULT_COMPARATOR", "DEFAULT_COMPARATOR", 0x19, "Ljava.util.Comparator;", &OrgApacheLuceneSearchSpellSuggestWordQueue_DEFAULT_COMPARATOR, "Ljava/util/Comparator<Lorg/apache/lucene/search/spell/SuggestWord;>;", .constantValue.asLong = 0 },
     { "comparator_", NULL, 0x2, "Ljava.util.Comparator;", NULL, "Ljava/util/Comparator<Lorg/apache/lucene/search/spell/SuggestWord;>;", .constantValue.asLong = 0 },
   };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.spell.SuggestWord;"};
@@ -73,13 +77,15 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSpellSuggestWordQueue_DEFAULT_COMPAR
 
 void OrgApacheLuceneSearchSpellSuggestWordQueue_initWithInt_(OrgApacheLuceneSearchSpellSuggestWordQueue *self, jint size) {
   OrgApacheLuceneUtilPriorityQueue_initWithInt_(self, size);
-  JreStrongAssign(&self->comparator_, OrgApacheLuceneSearchSpellSuggestWordQueue_DEFAULT_COMPARATOR_);
+  JreStrongAssign(&self->comparator_, OrgApacheLuceneSearchSpellSuggestWordQueue_DEFAULT_COMPARATOR);
 }
 
 OrgApacheLuceneSearchSpellSuggestWordQueue *new_OrgApacheLuceneSearchSpellSuggestWordQueue_initWithInt_(jint size) {
-  OrgApacheLuceneSearchSpellSuggestWordQueue *self = [OrgApacheLuceneSearchSpellSuggestWordQueue alloc];
-  OrgApacheLuceneSearchSpellSuggestWordQueue_initWithInt_(self, size);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSpellSuggestWordQueue, initWithInt_, size)
+}
+
+OrgApacheLuceneSearchSpellSuggestWordQueue *create_OrgApacheLuceneSearchSpellSuggestWordQueue_initWithInt_(jint size) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSpellSuggestWordQueue, initWithInt_, size)
 }
 
 void OrgApacheLuceneSearchSpellSuggestWordQueue_initWithInt_withJavaUtilComparator_(OrgApacheLuceneSearchSpellSuggestWordQueue *self, jint size, id<JavaUtilComparator> comparator) {
@@ -88,9 +94,11 @@ void OrgApacheLuceneSearchSpellSuggestWordQueue_initWithInt_withJavaUtilComparat
 }
 
 OrgApacheLuceneSearchSpellSuggestWordQueue *new_OrgApacheLuceneSearchSpellSuggestWordQueue_initWithInt_withJavaUtilComparator_(jint size, id<JavaUtilComparator> comparator) {
-  OrgApacheLuceneSearchSpellSuggestWordQueue *self = [OrgApacheLuceneSearchSpellSuggestWordQueue alloc];
-  OrgApacheLuceneSearchSpellSuggestWordQueue_initWithInt_withJavaUtilComparator_(self, size, comparator);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSpellSuggestWordQueue, initWithInt_withJavaUtilComparator_, size, comparator)
+}
+
+OrgApacheLuceneSearchSpellSuggestWordQueue *create_OrgApacheLuceneSearchSpellSuggestWordQueue_initWithInt_withJavaUtilComparator_(jint size, id<JavaUtilComparator> comparator) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSpellSuggestWordQueue, initWithInt_withJavaUtilComparator_, size, comparator)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpellSuggestWordQueue)

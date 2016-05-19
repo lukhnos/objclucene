@@ -5,25 +5,37 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory_) && (OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory))
+#define OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
 @class OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter;
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>PatternCaptureGroupTokenFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_ptncapturegroup" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.KeywordTokenizerFactory"/&gt;
+ &lt;filter class="solr.PatternCaptureGroupFilterFactory" pattern="([^a-z])" preserve_original="true"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ - seealso: PatternCaptureGroupTokenFilter
+ */
 @interface OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
@@ -40,8 +52,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFa
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory *new_OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory *create_OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory")

@@ -5,21 +5,25 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource_RESTRICT
-#define OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource 0
 #else
-#define OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource_) && (OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource_
+#if !defined (OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource))
+#define OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource_
 
-#define OrgApacheLuceneQueriesFunctionValueSource_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionValueSource_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionValueSource 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionValueSource 1
 #include "org/apache/lucene/queries/function/ValueSource.h"
 
+/*!
+ @brief A base class for ValueSource implementations that retrieve values for
+ a single field from DocValues.
+ */
 @interface OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource : OrgApacheLuceneQueriesFunctionValueSource {
  @public
   NSString *field_;
@@ -49,4 +53,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSo
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource")

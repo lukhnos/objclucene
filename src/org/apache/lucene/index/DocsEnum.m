@@ -4,14 +4,24 @@
 //
 
 #include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
+#include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/index/DocsEnum.h"
 #include "org/apache/lucene/index/PostingsEnum.h"
 #include "org/apache/lucene/util/BytesRef.h"
 
 @implementation OrgApacheLuceneIndexDocsEnum
+
++ (jint)FLAG_NONE {
+  return OrgApacheLuceneIndexDocsEnum_FLAG_NONE;
+}
+
++ (jint)FLAG_FREQS {
+  return OrgApacheLuceneIndexDocsEnum_FLAG_FREQS;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -37,7 +47,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {

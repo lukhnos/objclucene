@@ -23,7 +23,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandl
 @implementation OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler
 
 - (OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *)getFieldConfigWithNSString:(NSString *)fieldName {
-  OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *fieldConfig = [new_OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig_initWithNSString_(OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_toStringWithId_(fieldName)) autorelease];
+  OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *fieldConfig = create_OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig_initWithNSString_(OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_toStringWithId_(fieldName));
   for (id<OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener> __strong listener in nil_chk(self->listeners_)) {
     [((id<OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener>) nil_chk(listener)) buildFieldConfigWithOrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig:fieldConfig];
   }
@@ -50,7 +50,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   static const J2ObjcMethodInfo methods[] = {
     { "getFieldConfigWithNSString:", "getFieldConfig", "Lorg.apache.lucene.queryparser.flexible.core.config.FieldConfig;", 0x1, NULL, NULL },
     { "addFieldConfigListenerWithOrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener:", "addFieldConfigListener", "V", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "QueryConfigHandler", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "listeners_", NULL, 0x12, "Ljava.util.LinkedList;", NULL, "Ljava/util/LinkedList<Lorg/apache/lucene/queryparser/flexible/core/config/FieldConfigListener;>;", .constantValue.asLong = 0 },

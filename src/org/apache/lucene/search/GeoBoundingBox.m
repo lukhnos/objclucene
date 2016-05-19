@@ -37,16 +37,16 @@
 void OrgApacheLuceneSearchGeoBoundingBox_initWithDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoBoundingBox *self, jdouble minLon, jdouble maxLon, jdouble minLat, jdouble maxLat) {
   NSObject_init(self);
   if (OrgApacheLuceneUtilGeoUtils_isValidLonWithDouble_(minLon) == false) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid minLon ", minLon)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid minLon ", minLon));
   }
   if (OrgApacheLuceneUtilGeoUtils_isValidLonWithDouble_(maxLon) == false) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid maxLon ", minLon)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid maxLon ", minLon));
   }
   if (OrgApacheLuceneUtilGeoUtils_isValidLatWithDouble_(minLat) == false) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid minLat ", minLat)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid minLat ", minLat));
   }
   if (OrgApacheLuceneUtilGeoUtils_isValidLatWithDouble_(maxLat) == false) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid maxLat ", minLat)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid maxLat ", minLat));
   }
   self->minLon_ = minLon;
   self->maxLon_ = maxLon;
@@ -55,9 +55,11 @@ void OrgApacheLuceneSearchGeoBoundingBox_initWithDouble_withDouble_withDouble_wi
 }
 
 OrgApacheLuceneSearchGeoBoundingBox *new_OrgApacheLuceneSearchGeoBoundingBox_initWithDouble_withDouble_withDouble_withDouble_(jdouble minLon, jdouble maxLon, jdouble minLat, jdouble maxLat) {
-  OrgApacheLuceneSearchGeoBoundingBox *self = [OrgApacheLuceneSearchGeoBoundingBox alloc];
-  OrgApacheLuceneSearchGeoBoundingBox_initWithDouble_withDouble_withDouble_withDouble_(self, minLon, maxLon, minLat, maxLat);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchGeoBoundingBox, initWithDouble_withDouble_withDouble_withDouble_, minLon, maxLon, minLat, maxLat)
+}
+
+OrgApacheLuceneSearchGeoBoundingBox *create_OrgApacheLuceneSearchGeoBoundingBox_initWithDouble_withDouble_withDouble_withDouble_(jdouble minLon, jdouble maxLon, jdouble minLat, jdouble maxLat) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchGeoBoundingBox, initWithDouble_withDouble_withDouble_withDouble_, minLon, maxLon, minLat, maxLat)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchGeoBoundingBox)

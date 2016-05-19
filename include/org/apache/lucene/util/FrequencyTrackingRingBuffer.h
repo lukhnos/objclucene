@@ -5,33 +5,52 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilFrequencyTrackingRingBuffer_INCLUDE_ALL")
-#if OrgApacheLuceneUtilFrequencyTrackingRingBuffer_RESTRICT
-#define OrgApacheLuceneUtilFrequencyTrackingRingBuffer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilFrequencyTrackingRingBuffer")
+#ifdef RESTRICT_OrgApacheLuceneUtilFrequencyTrackingRingBuffer
+#define INCLUDE_ALL_OrgApacheLuceneUtilFrequencyTrackingRingBuffer 0
 #else
-#define OrgApacheLuceneUtilFrequencyTrackingRingBuffer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilFrequencyTrackingRingBuffer 1
 #endif
-#undef OrgApacheLuceneUtilFrequencyTrackingRingBuffer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilFrequencyTrackingRingBuffer
 
-#if !defined (_OrgApacheLuceneUtilFrequencyTrackingRingBuffer_) && (OrgApacheLuceneUtilFrequencyTrackingRingBuffer_INCLUDE_ALL || OrgApacheLuceneUtilFrequencyTrackingRingBuffer_INCLUDE)
-#define _OrgApacheLuceneUtilFrequencyTrackingRingBuffer_
+#if !defined (OrgApacheLuceneUtilFrequencyTrackingRingBuffer_) && (INCLUDE_ALL_OrgApacheLuceneUtilFrequencyTrackingRingBuffer || defined(INCLUDE_OrgApacheLuceneUtilFrequencyTrackingRingBuffer))
+#define OrgApacheLuceneUtilFrequencyTrackingRingBuffer_
 
-#define OrgApacheLuceneUtilAccountable_RESTRICT 1
-#define OrgApacheLuceneUtilAccountable_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAccountable 1
+#define INCLUDE_OrgApacheLuceneUtilAccountable 1
 #include "org/apache/lucene/util/Accountable.h"
 
 @protocol JavaUtilCollection;
 @protocol JavaUtilMap;
 
+/*!
+ @brief A ring buffer that tracks the frequency of the integers that it contains.
+ This is typically useful to track the hash codes of popular recently-used
+ items.
+ This data-structure requires 22 bytes per entry on average (between 16 and
+ 28).
+ */
 @interface OrgApacheLuceneUtilFrequencyTrackingRingBuffer : NSObject < OrgApacheLuceneUtilAccountable >
 
 #pragma mark Public
 
+/*!
+ @brief Create a new ring buffer that will contain at most <code>maxSize</code> items.
+ This buffer will initially contain <code>maxSize</code> times the
+ <code>sentinel</code> value. 
+ */
 - (instancetype)initWithInt:(jint)maxSize
                     withInt:(jint)sentinel;
 
+/*!
+ @brief Add a new item to this ring buffer, potentially removing the oldest
+ entry from this buffer if it is already full.
+ */
 - (void)addWithInt:(jint)i;
 
+/*!
+ @brief Returns the frequency of the provided key in the ring buffer.
+ */
 - (jint)frequencyWithInt:(jint)key;
 
 - (id<JavaUtilCollection>)getChildResources;
@@ -50,8 +69,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilFrequencyTrackingRingBuffer_initWithIn
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilFrequencyTrackingRingBuffer *new_OrgApacheLuceneUtilFrequencyTrackingRingBuffer_initWithInt_withInt_(jint maxSize, jint sentinel) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilFrequencyTrackingRingBuffer *create_OrgApacheLuceneUtilFrequencyTrackingRingBuffer_initWithInt_withInt_(jint maxSize, jint sentinel);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFrequencyTrackingRingBuffer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilFrequencyTrackingRingBuffer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilFrequencyTrackingRingBuffer")

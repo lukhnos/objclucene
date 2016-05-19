@@ -5,21 +5,32 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilAutomatonAutomatonProvider_INCLUDE_ALL")
-#if OrgApacheLuceneUtilAutomatonAutomatonProvider_RESTRICT
-#define OrgApacheLuceneUtilAutomatonAutomatonProvider_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonAutomatonProvider")
+#ifdef RESTRICT_OrgApacheLuceneUtilAutomatonAutomatonProvider
+#define INCLUDE_ALL_OrgApacheLuceneUtilAutomatonAutomatonProvider 0
 #else
-#define OrgApacheLuceneUtilAutomatonAutomatonProvider_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilAutomatonAutomatonProvider 1
 #endif
-#undef OrgApacheLuceneUtilAutomatonAutomatonProvider_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilAutomatonAutomatonProvider
 
-#if !defined (_OrgApacheLuceneUtilAutomatonAutomatonProvider_) && (OrgApacheLuceneUtilAutomatonAutomatonProvider_INCLUDE_ALL || OrgApacheLuceneUtilAutomatonAutomatonProvider_INCLUDE)
-#define _OrgApacheLuceneUtilAutomatonAutomatonProvider_
+#if !defined (OrgApacheLuceneUtilAutomatonAutomatonProvider_) && (INCLUDE_ALL_OrgApacheLuceneUtilAutomatonAutomatonProvider || defined(INCLUDE_OrgApacheLuceneUtilAutomatonAutomatonProvider))
+#define OrgApacheLuceneUtilAutomatonAutomatonProvider_
 
 @class OrgApacheLuceneUtilAutomatonAutomaton;
 
+/*!
+ @brief Automaton provider for <code>RegExp.
+ </code>
+ <code>RegExp.toAutomaton(AutomatonProvider,int)</code>
+ */
 @protocol OrgApacheLuceneUtilAutomatonAutomatonProvider < NSObject, JavaObject >
 
+/*!
+ @brief Returns automaton of the given name.
+ @param name automaton name
+ @return automaton
+ @throws IOException if errors occur
+ */
 - (OrgApacheLuceneUtilAutomatonAutomaton *)getAutomatonWithNSString:(NSString *)name;
 
 @end
@@ -30,4 +41,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonAutomatonProvider)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilAutomatonAutomatonProvider_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonAutomatonProvider")

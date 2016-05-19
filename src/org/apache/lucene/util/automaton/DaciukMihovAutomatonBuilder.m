@@ -26,19 +26,42 @@
 
 @interface OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder () {
  @public
+  /*!
+   @brief A "registry" for state interning.
+   */
   JavaUtilHashMap *stateRegistry_;
+  /*!
+   @brief Root automaton state.
+   */
   OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *root_;
+  /*!
+   @brief Previous sequence added to the automaton in <code>add(CharsRef)</code>.
+   */
   OrgApacheLuceneUtilCharsRef *previous_;
 }
 
+/*!
+ @brief Internal recursive traversal for conversion.
+ */
 + (jint)convertWithOrgApacheLuceneUtilAutomatonAutomaton_Builder:(OrgApacheLuceneUtilAutomatonAutomaton_Builder *)a
 withOrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State:(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *)s
                                      withJavaUtilIdentityHashMap:(JavaUtilIdentityHashMap *)visited;
 
+/*!
+ @brief Copy <code>current</code> into an internal buffer.
+ */
 - (jboolean)setPreviousWithOrgApacheLuceneUtilCharsRef:(OrgApacheLuceneUtilCharsRef *)current;
 
+/*!
+ @brief Replace last child of <code>state</code> with an already registered state
+ or stateRegistry the last child state.
+ */
 - (void)replaceOrRegisterWithOrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State:(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *)state;
 
+/*!
+ @brief Add a suffix of <code>current</code> starting at <code>fromIndex</code>
+ (inclusive) to state <code>state</code>.
+ */
 - (void)addSuffixWithOrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State:(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *)state
                                                           withJavaLangCharSequence:(id<JavaLangCharSequence>)current
                                                                            withInt:(jint)fromIndex;
@@ -49,8 +72,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder, sta
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder, root_, OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder, previous_, OrgApacheLuceneUtilCharsRef *)
 
-static id<JavaUtilComparator> OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_comparator_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder, comparator_, id<JavaUtilComparator>)
+/*!
+ @brief A comparator used for enforcing sorted UTF8 order, used in assertions only.
+ */
+inline id<JavaUtilComparator> OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_get_comparator();
+static id<JavaUtilComparator> OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_comparator;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder, comparator, id<JavaUtilComparator>)
 
 __attribute__((unused)) static jint OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_convertWithOrgApacheLuceneUtilAutomatonAutomaton_Builder_withOrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_withJavaUtilIdentityHashMap_(OrgApacheLuceneUtilAutomatonAutomaton_Builder *a, OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *s, JavaUtilIdentityHashMap *visited);
 
@@ -62,6 +89,9 @@ __attribute__((unused)) static void OrgApacheLuceneUtilAutomatonDaciukMihovAutom
 
 @interface OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State ()
 
+/*!
+ @brief Compare two lists of objects for reference-equality.
+ */
 + (jboolean)referenceEqualsWithNSObjectArray:(IOSObjectArray *)a1
                            withNSObjectArray:(IOSObjectArray *)a2;
 
@@ -69,11 +99,19 @@ __attribute__((unused)) static void OrgApacheLuceneUtilAutomatonDaciukMihovAutom
 
 @end
 
-static IOSIntArray *OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_NO_LABELS_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State, NO_LABELS_, IOSIntArray *)
+/*!
+ @brief An empty set of labels.
+ */
+inline IOSIntArray *OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_get_NO_LABELS();
+static IOSIntArray *OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_NO_LABELS;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State, NO_LABELS, IOSIntArray *)
 
-static IOSObjectArray *OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_NO_STATES_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State, NO_STATES_, IOSObjectArray *)
+/*!
+ @brief An empty set of states.
+ */
+inline IOSObjectArray *OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_get_NO_STATES();
+static IOSObjectArray *OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_NO_STATES;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State, NO_STATES, IOSObjectArray *)
 
 __attribute__((unused)) static jboolean OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_referenceEqualsWithNSObjectArray_withNSObjectArray_(IOSObjectArray *a1, IOSObjectArray *a2);
 
@@ -81,13 +119,15 @@ __attribute__((unused)) static void OrgApacheLuceneUtilAutomatonDaciukMihovAutom
 
 __attribute__((unused)) static OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *new_OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *create_OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_init();
+
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder)
 
 @implementation OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder
 
 - (void)addWithOrgApacheLuceneUtilCharsRef:(OrgApacheLuceneUtilCharsRef *)current {
   JreAssert((stateRegistry_ != nil), (@"Automaton already built."));
-  JreAssert((previous_ == nil || [((id<JavaUtilComparator>) nil_chk(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_comparator_)) compareWithId:previous_ withId:current] <= 0), (JreStrcat("$@$@", @"Input must be in sorted UTF-8 order: ", previous_, @" >= ", current)));
+  JreAssert((previous_ == nil || [((id<JavaUtilComparator>) nil_chk(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_comparator)) compareWithId:previous_ withId:current] <= 0), (JreStrcat("$@$@", @"Input must be in sorted UTF-8 order: ", previous_, @" >= ", current)));
   JreAssert((OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_setPreviousWithOrgApacheLuceneUtilCharsRef_(self, current)), (@"org/apache/lucene/util/automaton/DaciukMihovAutomatonBuilder.java:220 condition failed: assert setPrevious(current);"));
   jint pos = 0, max = [((OrgApacheLuceneUtilCharsRef *) nil_chk(current)) length];
   OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *next, *state = root_;
@@ -100,7 +140,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder)
 }
 
 - (OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *)complete {
-  if (self->stateRegistry_ == nil) @throw [new_JavaLangIllegalStateException_init() autorelease];
+  if (self->stateRegistry_ == nil) @throw create_JavaLangIllegalStateException_init();
   if ([((OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *) nil_chk(root_)) hasChildren]) OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_replaceOrRegisterWithOrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_(self, root_);
   JreStrongAssign(&stateRegistry_, nil);
   return root_;
@@ -146,7 +186,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder class]) {
-    JreStrongAssign(&OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_comparator_, OrgApacheLuceneUtilCharsRef_getUTF16SortedAsUTF8Comparator());
+    JreStrongAssign(&OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_comparator, OrgApacheLuceneUtilCharsRef_getUTF16SortedAsUTF8Comparator());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder)
   }
 }
@@ -155,18 +195,18 @@ J2OBJC_IGNORE_DESIGNATED_END
   static const J2ObjcMethodInfo methods[] = {
     { "addWithOrgApacheLuceneUtilCharsRef:", "add", "V", 0x1, NULL, NULL },
     { "complete", NULL, "Lorg.apache.lucene.util.automaton.DaciukMihovAutomatonBuilder$State;", 0x1, NULL, NULL },
-    { "convertWithOrgApacheLuceneUtilAutomatonAutomaton_Builder:withOrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State:withJavaUtilIdentityHashMap:", "convert", "I", 0xa, NULL, NULL },
-    { "buildWithJavaUtilCollection:", "build", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, NULL },
+    { "convertWithOrgApacheLuceneUtilAutomatonAutomaton_Builder:withOrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State:withJavaUtilIdentityHashMap:", "convert", "I", 0xa, NULL, "(Lorg/apache/lucene/util/automaton/Automaton$Builder;Lorg/apache/lucene/util/automaton/DaciukMihovAutomatonBuilder$State;Ljava/util/IdentityHashMap<Lorg/apache/lucene/util/automaton/DaciukMihovAutomatonBuilder$State;Ljava/lang/Integer;>;)I" },
+    { "buildWithJavaUtilCollection:", "build", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, "(Ljava/util/Collection<Lorg/apache/lucene/util/BytesRef;>;)Lorg/apache/lucene/util/automaton/Automaton;" },
     { "setPreviousWithOrgApacheLuceneUtilCharsRef:", "setPrevious", "Z", 0x2, NULL, NULL },
     { "replaceOrRegisterWithOrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State:", "replaceOrRegister", "V", 0x2, NULL, NULL },
     { "addSuffixWithOrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State:withJavaLangCharSequence:withInt:", "addSuffix", "V", 0x2, NULL, NULL },
-    { "init", NULL, NULL, 0x0, NULL, NULL },
+    { "init", "DaciukMihovAutomatonBuilder", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "stateRegistry_", NULL, 0x2, "Ljava.util.HashMap;", NULL, "Ljava/util/HashMap<Lorg/apache/lucene/util/automaton/DaciukMihovAutomatonBuilder$State;Lorg/apache/lucene/util/automaton/DaciukMihovAutomatonBuilder$State;>;", .constantValue.asLong = 0 },
     { "root_", NULL, 0x2, "Lorg.apache.lucene.util.automaton.DaciukMihovAutomatonBuilder$State;", NULL, NULL, .constantValue.asLong = 0 },
     { "previous_", NULL, 0x2, "Lorg.apache.lucene.util.CharsRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "comparator_", NULL, 0x1a, "Ljava.util.Comparator;", &OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_comparator_, "Ljava/util/Comparator<Lorg/apache/lucene/util/CharsRef;>;", .constantValue.asLong = 0 },
+    { "comparator", "comparator", 0x1a, "Ljava.util.Comparator;", &OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_comparator, "Ljava/util/Comparator<Lorg/apache/lucene/util/CharsRef;>;", .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.automaton.DaciukMihovAutomatonBuilder$State;"};
   static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder = { 2, "DaciukMihovAutomatonBuilder", "org.apache.lucene.util.automaton", NULL, 0x10, 8, methods, 4, fields, 0, NULL, 1, inner_classes, NULL, NULL };
@@ -200,9 +240,9 @@ jint OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_convertWithOrgApach
 
 OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_buildWithJavaUtilCollection_(id<JavaUtilCollection> input) {
   OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_initialize();
-  OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder *builder = [new_OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_init() autorelease];
+  OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder *builder = create_OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_init();
   IOSCharArray *chars = [IOSCharArray arrayWithLength:0];
-  OrgApacheLuceneUtilCharsRef *ref = [new_OrgApacheLuceneUtilCharsRef_init() autorelease];
+  OrgApacheLuceneUtilCharsRef *ref = create_OrgApacheLuceneUtilCharsRef_init();
   for (OrgApacheLuceneUtilBytesRef * __strong b in nil_chk(input)) {
     chars = OrgApacheLuceneUtilArrayUtil_growWithCharArray_withInt_(chars, ((OrgApacheLuceneUtilBytesRef *) nil_chk(b))->length_);
     jint len = OrgApacheLuceneUtilUnicodeUtil_UTF8toUTF16WithOrgApacheLuceneUtilBytesRef_withCharArray_(b, chars);
@@ -210,8 +250,8 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonDaciukMihovAu
     ref->length_ = len;
     [builder addWithOrgApacheLuceneUtilCharsRef:ref];
   }
-  OrgApacheLuceneUtilAutomatonAutomaton_Builder *a = [new_OrgApacheLuceneUtilAutomatonAutomaton_Builder_init() autorelease];
-  OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_convertWithOrgApacheLuceneUtilAutomatonAutomaton_Builder_withOrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_withJavaUtilIdentityHashMap_(a, [builder complete], [new_JavaUtilIdentityHashMap_init() autorelease]);
+  OrgApacheLuceneUtilAutomatonAutomaton_Builder *a = create_OrgApacheLuceneUtilAutomatonAutomaton_Builder_init();
+  OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_convertWithOrgApacheLuceneUtilAutomatonAutomaton_Builder_withOrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_withJavaUtilIdentityHashMap_(a, [builder complete], create_JavaUtilIdentityHashMap_init());
   return [a finish];
 }
 
@@ -228,7 +268,7 @@ void OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_replaceOrRegisterWi
     [state replaceLastChildWithOrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State:registered];
   }
   else {
-    [self->stateRegistry_ putWithId:child withId:child];
+    [((JavaUtilHashMap *) nil_chk(self->stateRegistry_)) putWithId:child withId:child];
   }
 }
 
@@ -249,9 +289,11 @@ void OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_init(OrgApacheLucen
 }
 
 OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder *new_OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_init() {
-  OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder *self = [OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder alloc];
-  OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder, init)
+}
+
+OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder *create_OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder)
@@ -266,7 +308,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_
 }
 
 - (jboolean)isEqual:(id)obj {
-  OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *other = (OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *) check_class_cast(obj, [OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State class]);
+  OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *other = (OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *) cast_chk(obj, [OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State class]);
   return is_final_ == ((OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *) nil_chk(other))->is_final_ && JavaUtilArrays_equalsWithIntArray_withIntArray_(self->labels_, other->labels_) && OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_referenceEqualsWithNSObjectArray_withNSObjectArray_(self->states_, other->states_);
 }
 
@@ -346,8 +388,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_NO_LABELS_, [IOSIntArray newArrayWithLength:0]);
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_NO_STATES_, [IOSObjectArray newArrayWithLength:0 type:OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_class_()]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_NO_LABELS, [IOSIntArray newArrayWithLength:0]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_NO_STATES, [IOSObjectArray newArrayWithLength:0 type:OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_class_()]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State)
   }
 }
@@ -363,11 +405,11 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "lastChildWithInt:", "lastChild", "Lorg.apache.lucene.util.automaton.DaciukMihovAutomatonBuilder$State;", 0x0, NULL, NULL },
     { "replaceLastChildWithOrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State:", "replaceLastChild", "V", 0x0, NULL, NULL },
     { "referenceEqualsWithNSObjectArray:withNSObjectArray:", "referenceEquals", "Z", 0xa, NULL, NULL },
-    { "init", NULL, NULL, 0x2, NULL, NULL },
+    { "init", "State", NULL, 0x2, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "NO_LABELS_", NULL, 0x1a, "[I", &OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_NO_LABELS_, NULL, .constantValue.asLong = 0 },
-    { "NO_STATES_", NULL, 0x1a, "[Lorg.apache.lucene.util.automaton.DaciukMihovAutomatonBuilder$State;", &OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_NO_STATES_, NULL, .constantValue.asLong = 0 },
+    { "NO_LABELS", "NO_LABELS", 0x1a, "[I", &OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_NO_LABELS, NULL, .constantValue.asLong = 0 },
+    { "NO_STATES", "NO_STATES", 0x1a, "[Lorg.apache.lucene.util.automaton.DaciukMihovAutomatonBuilder$State;", &OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_NO_STATES, NULL, .constantValue.asLong = 0 },
     { "labels_", NULL, 0x0, "[I", NULL, NULL, .constantValue.asLong = 0 },
     { "states_", NULL, 0x0, "[Lorg.apache.lucene.util.automaton.DaciukMihovAutomatonBuilder$State;", NULL, NULL, .constantValue.asLong = 0 },
     { "is_final_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
@@ -393,14 +435,16 @@ jboolean OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_reference
 
 void OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_init(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *self) {
   NSObject_init(self);
-  JreStrongAssign(&self->labels_, OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_NO_LABELS_);
-  JreStrongAssign(&self->states_, OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_NO_STATES_);
+  JreStrongAssign(&self->labels_, OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_NO_LABELS);
+  JreStrongAssign(&self->states_, OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_NO_STATES);
 }
 
 OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *new_OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_init() {
-  OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *self = [OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State alloc];
-  OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State, init)
+}
+
+OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *create_OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State)

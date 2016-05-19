@@ -5,8 +5,6 @@
 
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/search/QueryCache.h"
-#include "org/apache/lucene/search/QueryCachingPolicy.h"
-#include "org/apache/lucene/search/Weight.h"
 
 @interface OrgApacheLuceneSearchQueryCache : NSObject
 

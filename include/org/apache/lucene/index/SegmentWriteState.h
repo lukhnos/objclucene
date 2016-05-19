@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexSegmentWriteState_INCLUDE_ALL")
-#if OrgApacheLuceneIndexSegmentWriteState_RESTRICT
-#define OrgApacheLuceneIndexSegmentWriteState_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexSegmentWriteState")
+#ifdef RESTRICT_OrgApacheLuceneIndexSegmentWriteState
+#define INCLUDE_ALL_OrgApacheLuceneIndexSegmentWriteState 0
 #else
-#define OrgApacheLuceneIndexSegmentWriteState_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexSegmentWriteState 1
 #endif
-#undef OrgApacheLuceneIndexSegmentWriteState_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexSegmentWriteState
 
-#if !defined (_OrgApacheLuceneIndexSegmentWriteState_) && (OrgApacheLuceneIndexSegmentWriteState_INCLUDE_ALL || OrgApacheLuceneIndexSegmentWriteState_INCLUDE)
-#define _OrgApacheLuceneIndexSegmentWriteState_
+#if !defined (OrgApacheLuceneIndexSegmentWriteState_) && (INCLUDE_ALL_OrgApacheLuceneIndexSegmentWriteState || defined(INCLUDE_OrgApacheLuceneIndexSegmentWriteState))
+#define OrgApacheLuceneIndexSegmentWriteState_
 
 @class OrgApacheLuceneIndexBufferedUpdates;
 @class OrgApacheLuceneIndexFieldInfos;
@@ -24,21 +24,70 @@
 @class OrgApacheLuceneUtilInfoStream;
 @protocol OrgApacheLuceneUtilMutableBits;
 
+/*!
+ @brief Holder class for common parameters used during write.
+ */
 @interface OrgApacheLuceneIndexSegmentWriteState : NSObject {
  @public
+  /*!
+   @brief <code>InfoStream</code> used for debugging messages.
+   */
   OrgApacheLuceneUtilInfoStream *infoStream_;
+  /*!
+   @brief <code>Directory</code> where this segment will be written
+ to.
+   */
   OrgApacheLuceneStoreDirectory *directory_;
+  /*!
+   @brief <code>SegmentInfo</code> describing this segment.
+   */
   OrgApacheLuceneIndexSegmentInfo *segmentInfo_;
+  /*!
+   @brief <code>FieldInfos</code> describing all fields in this
+ segment.
+   */
   OrgApacheLuceneIndexFieldInfos *fieldInfos_;
+  /*!
+   @brief Number of deleted documents set while flushing the
+ segment.
+   */
   jint delCountOnFlush_;
+  /*!
+   @brief Deletes and updates to apply while we are flushing the segment.
+   A Term is
+ enrolled in here if it was deleted/updated at one point, and it's mapped to
+ the docIDUpto, meaning any docID &lt; docIDUpto containing this term should
+ be deleted/updated.
+   */
   OrgApacheLuceneIndexBufferedUpdates *segUpdates_;
+  /*!
+   @brief <code>MutableBits</code> recording live documents; this is
+ only set if there is one or more deleted documents.
+   */
   id<OrgApacheLuceneUtilMutableBits> liveDocs_;
+  /*!
+   @brief Unique suffix for any postings files written for this
+ segment.
+   <code>PerFieldPostingsFormat</code> sets this for
+ each of the postings formats it wraps.  If you create
+ a new <code>PostingsFormat</code> then any files you
+ write/read must be derived using this suffix (use
+ <code>IndexFileNames.segmentFileName(String,String,String)</code>).
+ Note: the suffix must be either empty, or be a textual suffix contain exactly two parts (separated by underscore), or be a base36 generation. 
+   */
   NSString *segmentSuffix_;
+  /*!
+   @brief <code>IOContext</code> for all writes; you should pass this
+ to <code>Directory.createOutput(String,IOContext)</code>.
+   */
   OrgApacheLuceneStoreIOContext *context_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ */
 - (instancetype)initWithOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream
                     withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
                   withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)segmentInfo
@@ -46,6 +95,10 @@
               withOrgApacheLuceneIndexBufferedUpdates:(OrgApacheLuceneIndexBufferedUpdates *)segUpdates
                     withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
 
+/*!
+ @brief Constructor which takes segment suffix.
+ - seealso: #SegmentWriteState(InfoStream,Directory,SegmentInfo,FieldInfos,BufferedUpdates,IOContext)
+ */
 - (instancetype)initWithOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream
                     withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
                   withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)segmentInfo
@@ -54,6 +107,9 @@
                     withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context
                                          withNSString:(NSString *)segmentSuffix;
 
+/*!
+ @brief Create a shallow copy of <code>SegmentWriteState</code> with a new segment suffix.
+ */
 - (instancetype)initWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state
                                                  withNSString:(NSString *)segmentSuffix;
 
@@ -74,16 +130,22 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexSegmentWriteState_initWithOrgApacheLu
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentWriteState *new_OrgApacheLuceneIndexSegmentWriteState_initWithOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexBufferedUpdates_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneUtilInfoStream *infoStream, OrgApacheLuceneStoreDirectory *directory, OrgApacheLuceneIndexSegmentInfo *segmentInfo, OrgApacheLuceneIndexFieldInfos *fieldInfos, OrgApacheLuceneIndexBufferedUpdates *segUpdates, OrgApacheLuceneStoreIOContext *context) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentWriteState *create_OrgApacheLuceneIndexSegmentWriteState_initWithOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexBufferedUpdates_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneUtilInfoStream *infoStream, OrgApacheLuceneStoreDirectory *directory, OrgApacheLuceneIndexSegmentInfo *segmentInfo, OrgApacheLuceneIndexFieldInfos *fieldInfos, OrgApacheLuceneIndexBufferedUpdates *segUpdates, OrgApacheLuceneStoreIOContext *context);
+
 FOUNDATION_EXPORT void OrgApacheLuceneIndexSegmentWriteState_initWithOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexBufferedUpdates_withOrgApacheLuceneStoreIOContext_withNSString_(OrgApacheLuceneIndexSegmentWriteState *self, OrgApacheLuceneUtilInfoStream *infoStream, OrgApacheLuceneStoreDirectory *directory, OrgApacheLuceneIndexSegmentInfo *segmentInfo, OrgApacheLuceneIndexFieldInfos *fieldInfos, OrgApacheLuceneIndexBufferedUpdates *segUpdates, OrgApacheLuceneStoreIOContext *context, NSString *segmentSuffix);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentWriteState *new_OrgApacheLuceneIndexSegmentWriteState_initWithOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexBufferedUpdates_withOrgApacheLuceneStoreIOContext_withNSString_(OrgApacheLuceneUtilInfoStream *infoStream, OrgApacheLuceneStoreDirectory *directory, OrgApacheLuceneIndexSegmentInfo *segmentInfo, OrgApacheLuceneIndexFieldInfos *fieldInfos, OrgApacheLuceneIndexBufferedUpdates *segUpdates, OrgApacheLuceneStoreIOContext *context, NSString *segmentSuffix) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentWriteState *create_OrgApacheLuceneIndexSegmentWriteState_initWithOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexBufferedUpdates_withOrgApacheLuceneStoreIOContext_withNSString_(OrgApacheLuceneUtilInfoStream *infoStream, OrgApacheLuceneStoreDirectory *directory, OrgApacheLuceneIndexSegmentInfo *segmentInfo, OrgApacheLuceneIndexFieldInfos *fieldInfos, OrgApacheLuceneIndexBufferedUpdates *segUpdates, OrgApacheLuceneStoreIOContext *context, NSString *segmentSuffix);
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexSegmentWriteState_initWithOrgApacheLuceneIndexSegmentWriteState_withNSString_(OrgApacheLuceneIndexSegmentWriteState *self, OrgApacheLuceneIndexSegmentWriteState *state, NSString *segmentSuffix);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentWriteState *new_OrgApacheLuceneIndexSegmentWriteState_initWithOrgApacheLuceneIndexSegmentWriteState_withNSString_(OrgApacheLuceneIndexSegmentWriteState *state, NSString *segmentSuffix) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentWriteState *create_OrgApacheLuceneIndexSegmentWriteState_initWithOrgApacheLuceneIndexSegmentWriteState_withNSString_(OrgApacheLuceneIndexSegmentWriteState *state, NSString *segmentSuffix);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSegmentWriteState)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexSegmentWriteState_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSegmentWriteState")

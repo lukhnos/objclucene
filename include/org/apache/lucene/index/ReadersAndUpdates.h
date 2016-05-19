@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexReadersAndUpdates_INCLUDE_ALL")
-#if OrgApacheLuceneIndexReadersAndUpdates_RESTRICT
-#define OrgApacheLuceneIndexReadersAndUpdates_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexReadersAndUpdates")
+#ifdef RESTRICT_OrgApacheLuceneIndexReadersAndUpdates
+#define INCLUDE_ALL_OrgApacheLuceneIndexReadersAndUpdates 0
 #else
-#define OrgApacheLuceneIndexReadersAndUpdates_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexReadersAndUpdates 1
 #endif
-#undef OrgApacheLuceneIndexReadersAndUpdates_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexReadersAndUpdates
 
-#if !defined (_OrgApacheLuceneIndexReadersAndUpdates_) && (OrgApacheLuceneIndexReadersAndUpdates_INCLUDE_ALL || OrgApacheLuceneIndexReadersAndUpdates_INCLUDE)
-#define _OrgApacheLuceneIndexReadersAndUpdates_
+#if !defined (OrgApacheLuceneIndexReadersAndUpdates_) && (INCLUDE_ALL_OrgApacheLuceneIndexReadersAndUpdates || defined(INCLUDE_OrgApacheLuceneIndexReadersAndUpdates))
+#define OrgApacheLuceneIndexReadersAndUpdates_
 
 @class OrgApacheLuceneIndexDocValuesFieldUpdates_Container;
 @class OrgApacheLuceneIndexIndexWriter;
@@ -35,6 +35,10 @@
 - (instancetype)initWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
               withOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)info;
 
+/*!
+ @brief Init from a previously opened SegmentReader.
+ <p>NOTE: steals incoming ref from reader. 
+ */
 - (instancetype)initWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
                   withOrgApacheLuceneIndexSegmentReader:(OrgApacheLuceneIndexSegmentReader *)reader;
 
@@ -44,18 +48,34 @@
 
 - (void)dropChanges;
 
+/*!
+ @brief Drops all merging updates.
+ Called from IndexWriter after this segment
+ finished merging (whether successfully or not).
+ */
 - (void)dropMergingUpdates;
 
 - (void)dropReaders;
 
 - (id<OrgApacheLuceneUtilBits>)getLiveDocs;
 
+/*!
+ @brief Returns updates that came in while this segment was merging.
+ */
 - (id<JavaUtilMap>)getMergingFieldUpdates;
 
 - (jint)getPendingDeleteCount;
 
+/*!
+ @brief Returns a <code>SegmentReader</code>.
+ */
 - (OrgApacheLuceneIndexSegmentReader *)getReaderWithOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
 
+/*!
+ @brief Returns a ref to a clone.
+ NOTE: you should decRef() the reader when you're
+ done (ie do not call close()).
+ */
 - (OrgApacheLuceneIndexSegmentReader *)getReadOnlyCloneWithOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
 
 - (id<OrgApacheLuceneUtilBits>)getReadOnlyLiveDocs;
@@ -79,6 +99,11 @@
 
 #pragma mark Package-Private
 
+/*!
+ @brief Returns a reader for merge.
+ This method applies field updates if there are
+ any and marks that this segment is currently merging.
+ */
 - (OrgApacheLuceneIndexSegmentReader *)getReaderForMergeWithOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
 
 @end
@@ -91,12 +116,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexReadersAndUpdates_initWithOrgApacheLu
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexReadersAndUpdates *new_OrgApacheLuceneIndexReadersAndUpdates_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentCommitInfo_(OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexSegmentCommitInfo *info) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexReadersAndUpdates *create_OrgApacheLuceneIndexReadersAndUpdates_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentCommitInfo_(OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexSegmentCommitInfo *info);
+
 FOUNDATION_EXPORT void OrgApacheLuceneIndexReadersAndUpdates_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentReader_(OrgApacheLuceneIndexReadersAndUpdates *self, OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexSegmentReader *reader);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexReadersAndUpdates *new_OrgApacheLuceneIndexReadersAndUpdates_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentReader_(OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexSegmentReader *reader) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneIndexReadersAndUpdates *create_OrgApacheLuceneIndexReadersAndUpdates_initWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentReader_(OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexSegmentReader *reader);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexReadersAndUpdates)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexReadersAndUpdates_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexReadersAndUpdates")

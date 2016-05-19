@@ -60,7 +60,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpellPlainTextDictionary_FileIterator, 
 }
 
 - (id<OrgApacheLuceneSearchSuggestInputIterator>)getEntryIterator {
-  return [new_OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper_initWithOrgApacheLuceneUtilBytesRefIterator_([new_OrgApacheLuceneSearchSpellPlainTextDictionary_FileIterator_initWithOrgApacheLuceneSearchSpellPlainTextDictionary_(self) autorelease]) autorelease];
+  return create_OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper_initWithOrgApacheLuceneUtilBytesRefIterator_(create_OrgApacheLuceneSearchSpellPlainTextDictionary_FileIterator_initWithOrgApacheLuceneSearchSpellPlainTextDictionary_(self));
 }
 
 - (void)dealloc {
@@ -87,24 +87,28 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpellPlainTextDictionary_FileIterator, 
 
 void OrgApacheLuceneSearchSpellPlainTextDictionary_initWithOrgLukhnosPortmobileFilePath_(OrgApacheLuceneSearchSpellPlainTextDictionary *self, OrgLukhnosPortmobileFilePath *path) {
   NSObject_init(self);
-  JreStrongAssign(&self->in_, OrgLukhnosPortmobileFileFiles_newBufferedReaderWithOrgLukhnosPortmobileFilePath_withJavaNioCharsetCharset_(path, JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8_)));
+  JreStrongAssign(&self->in_, OrgLukhnosPortmobileFileFiles_newBufferedReaderWithOrgLukhnosPortmobileFilePath_withJavaNioCharsetCharset_(path, JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8)));
 }
 
 OrgApacheLuceneSearchSpellPlainTextDictionary *new_OrgApacheLuceneSearchSpellPlainTextDictionary_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path) {
-  OrgApacheLuceneSearchSpellPlainTextDictionary *self = [OrgApacheLuceneSearchSpellPlainTextDictionary alloc];
-  OrgApacheLuceneSearchSpellPlainTextDictionary_initWithOrgLukhnosPortmobileFilePath_(self, path);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSpellPlainTextDictionary, initWithOrgLukhnosPortmobileFilePath_, path)
+}
+
+OrgApacheLuceneSearchSpellPlainTextDictionary *create_OrgApacheLuceneSearchSpellPlainTextDictionary_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSpellPlainTextDictionary, initWithOrgLukhnosPortmobileFilePath_, path)
 }
 
 void OrgApacheLuceneSearchSpellPlainTextDictionary_initWithJavaIoInputStream_(OrgApacheLuceneSearchSpellPlainTextDictionary *self, JavaIoInputStream *dictFile) {
   NSObject_init(self);
-  JreStrongAssignAndConsume(&self->in_, new_JavaIoBufferedReader_initWithJavaIoReader_(OrgApacheLuceneUtilIOUtils_getDecodingReaderWithJavaIoInputStream_withJavaNioCharsetCharset_(dictFile, JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8_))));
+  JreStrongAssignAndConsume(&self->in_, new_JavaIoBufferedReader_initWithJavaIoReader_(OrgApacheLuceneUtilIOUtils_getDecodingReaderWithJavaIoInputStream_withJavaNioCharsetCharset_(dictFile, JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8))));
 }
 
 OrgApacheLuceneSearchSpellPlainTextDictionary *new_OrgApacheLuceneSearchSpellPlainTextDictionary_initWithJavaIoInputStream_(JavaIoInputStream *dictFile) {
-  OrgApacheLuceneSearchSpellPlainTextDictionary *self = [OrgApacheLuceneSearchSpellPlainTextDictionary alloc];
-  OrgApacheLuceneSearchSpellPlainTextDictionary_initWithJavaIoInputStream_(self, dictFile);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSpellPlainTextDictionary, initWithJavaIoInputStream_, dictFile)
+}
+
+OrgApacheLuceneSearchSpellPlainTextDictionary *create_OrgApacheLuceneSearchSpellPlainTextDictionary_initWithJavaIoInputStream_(JavaIoInputStream *dictFile) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSpellPlainTextDictionary, initWithJavaIoInputStream_, dictFile)
 }
 
 void OrgApacheLuceneSearchSpellPlainTextDictionary_initWithJavaIoReader_(OrgApacheLuceneSearchSpellPlainTextDictionary *self, JavaIoReader *reader) {
@@ -113,9 +117,11 @@ void OrgApacheLuceneSearchSpellPlainTextDictionary_initWithJavaIoReader_(OrgApac
 }
 
 OrgApacheLuceneSearchSpellPlainTextDictionary *new_OrgApacheLuceneSearchSpellPlainTextDictionary_initWithJavaIoReader_(JavaIoReader *reader) {
-  OrgApacheLuceneSearchSpellPlainTextDictionary *self = [OrgApacheLuceneSearchSpellPlainTextDictionary alloc];
-  OrgApacheLuceneSearchSpellPlainTextDictionary_initWithJavaIoReader_(self, reader);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSpellPlainTextDictionary, initWithJavaIoReader_, reader)
+}
+
+OrgApacheLuceneSearchSpellPlainTextDictionary *create_OrgApacheLuceneSearchSpellPlainTextDictionary_initWithJavaIoReader_(JavaIoReader *reader) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSpellPlainTextDictionary, initWithJavaIoReader_, reader)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpellPlainTextDictionary)
@@ -163,7 +169,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpellPlainTextDictionary)
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneSearchSpellPlainTextDictionary:", "init", NULL, 0x0, NULL, NULL },
+    { "initWithOrgApacheLuceneSearchSpellPlainTextDictionary:", "FileIterator", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.spell.PlainTextDictionary;", NULL, NULL, .constantValue.asLong = 0 },
@@ -184,9 +190,11 @@ void OrgApacheLuceneSearchSpellPlainTextDictionary_FileIterator_initWithOrgApach
 }
 
 OrgApacheLuceneSearchSpellPlainTextDictionary_FileIterator *new_OrgApacheLuceneSearchSpellPlainTextDictionary_FileIterator_initWithOrgApacheLuceneSearchSpellPlainTextDictionary_(OrgApacheLuceneSearchSpellPlainTextDictionary *outer$) {
-  OrgApacheLuceneSearchSpellPlainTextDictionary_FileIterator *self = [OrgApacheLuceneSearchSpellPlainTextDictionary_FileIterator alloc];
-  OrgApacheLuceneSearchSpellPlainTextDictionary_FileIterator_initWithOrgApacheLuceneSearchSpellPlainTextDictionary_(self, outer$);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSpellPlainTextDictionary_FileIterator, initWithOrgApacheLuceneSearchSpellPlainTextDictionary_, outer$)
+}
+
+OrgApacheLuceneSearchSpellPlainTextDictionary_FileIterator *create_OrgApacheLuceneSearchSpellPlainTextDictionary_FileIterator_initWithOrgApacheLuceneSearchSpellPlainTextDictionary_(OrgApacheLuceneSearchSpellPlainTextDictionary *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSpellPlainTextDictionary_FileIterator, initWithOrgApacheLuceneSearchSpellPlainTextDictionary_, outer$)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpellPlainTextDictionary_FileIterator)

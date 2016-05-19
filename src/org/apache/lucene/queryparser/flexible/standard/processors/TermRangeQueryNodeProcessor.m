@@ -35,16 +35,16 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node {
   if ([node isKindOfClass:[OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode class]]) {
-    OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode *termRangeNode = (OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode *) check_class_cast(node, [OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode class]);
+    OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode *termRangeNode = (OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode *) cast_chk(node, [OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode class]);
     OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *upper = [((OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode *) nil_chk(termRangeNode)) getUpperBound];
     OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *lower = [termRangeNode getLowerBound];
-    OrgApacheLuceneDocumentDateTools_ResolutionEnum *dateRes = nil;
+    OrgApacheLuceneDocumentDateTools_Resolution *dateRes = nil;
     jboolean inclusive = false;
-    JavaUtilLocale *locale = [((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk([self getQueryConfigHandler])) getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, LOCALE_)];
+    JavaUtilLocale *locale = [((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk([self getQueryConfigHandler])) getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, LOCALE)];
     if (locale == nil) {
       locale = JavaUtilLocale_getDefault();
     }
-    JavaUtilTimeZone *timeZone = [((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk([self getQueryConfigHandler])) getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, TIMEZONE_)];
+    JavaUtilTimeZone *timeZone = [((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk([self getQueryConfigHandler])) getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, TIMEZONE)];
     if (timeZone == nil) {
       timeZone = JavaUtilTimeZone_getDefault();
     }
@@ -55,7 +55,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     }
     OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *fieldConfig = [((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk([self getQueryConfigHandler])) getFieldConfigWithNSString:fieldStr];
     if (fieldConfig != nil) {
-      dateRes = [fieldConfig getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, DATE_RESOLUTION_)];
+      dateRes = [fieldConfig getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, DATE_RESOLUTION)];
     }
     if ([termRangeNode isUpperInclusive]) {
       inclusive = true;
@@ -67,7 +67,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       [((JavaTextDateFormat *) nil_chk(df)) setLenientWithBoolean:true];
       if (((jint) [((NSString *) nil_chk(part1)) length]) > 0) {
         JavaUtilDate *d1 = [df parseWithNSString:part1];
-        part1 = OrgApacheLuceneDocumentDateTools_dateToStringWithJavaUtilDate_withOrgApacheLuceneDocumentDateTools_ResolutionEnum_(d1, dateRes);
+        part1 = OrgApacheLuceneDocumentDateTools_dateToStringWithJavaUtilDate_withOrgApacheLuceneDocumentDateTools_Resolution_(d1, dateRes);
         [lower setTextWithJavaLangCharSequence:part1];
       }
       if (((jint) [((NSString *) nil_chk(part2)) length]) > 0) {
@@ -81,7 +81,7 @@ J2OBJC_IGNORE_DESIGNATED_END
           [cal setWithInt:JavaUtilCalendar_MILLISECOND withInt:999];
           d2 = [cal getTime];
         }
-        part2 = OrgApacheLuceneDocumentDateTools_dateToStringWithJavaUtilDate_withOrgApacheLuceneDocumentDateTools_ResolutionEnum_(d2, dateRes);
+        part2 = OrgApacheLuceneDocumentDateTools_dateToStringWithJavaUtilDate_withOrgApacheLuceneDocumentDateTools_Resolution_(d2, dateRes);
         [upper setTextWithJavaLangCharSequence:part2];
       }
     }
@@ -104,7 +104,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "init", "TermRangeQueryNodeProcessor", NULL, 0x1, NULL, NULL },
     { "postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "postProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
     { "preProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "preProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "setChildrenOrderWithJavaUtilList:", "setChildrenOrder", "Ljava.util.List;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
+    { "setChildrenOrderWithJavaUtilList:", "setChildrenOrder", "Ljava.util.List;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;)Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;" },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProcessor = { 2, "TermRangeQueryNodeProcessor", "org.apache.lucene.queryparser.flexible.standard.processors", NULL, 0x1, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProcessor;
@@ -117,9 +117,11 @@ void OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProce
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProcessor_init() {
-  OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProcessor *self = [OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProcessor alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProcessor_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProcessor, init)
+}
+
+OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProcessor *create_OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProcessor_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProcessor, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProcessor)

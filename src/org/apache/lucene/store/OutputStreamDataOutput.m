@@ -68,9 +68,11 @@ void OrgApacheLuceneStoreOutputStreamDataOutput_initWithJavaIoOutputStream_(OrgA
 }
 
 OrgApacheLuceneStoreOutputStreamDataOutput *new_OrgApacheLuceneStoreOutputStreamDataOutput_initWithJavaIoOutputStream_(JavaIoOutputStream *os) {
-  OrgApacheLuceneStoreOutputStreamDataOutput *self = [OrgApacheLuceneStoreOutputStreamDataOutput alloc];
-  OrgApacheLuceneStoreOutputStreamDataOutput_initWithJavaIoOutputStream_(self, os);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreOutputStreamDataOutput, initWithJavaIoOutputStream_, os)
+}
+
+OrgApacheLuceneStoreOutputStreamDataOutput *create_OrgApacheLuceneStoreOutputStreamDataOutput_initWithJavaIoOutputStream_(JavaIoOutputStream *os) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreOutputStreamDataOutput, initWithJavaIoOutputStream_, os)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreOutputStreamDataOutput)

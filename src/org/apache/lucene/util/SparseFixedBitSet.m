@@ -19,8 +19,6 @@
 #include "org/apache/lucene/util/RamUsageEstimator.h"
 #include "org/apache/lucene/util/SparseFixedBitSet.h"
 
-#define OrgApacheLuceneUtilSparseFixedBitSet_MASK_4096 4095
-
 @interface OrgApacheLuceneUtilSparseFixedBitSet ()
 
 + (jint)blockCountWithInt:(jint)length;
@@ -54,10 +52,19 @@
                         withInt:(jint)from
                         withInt:(jint)to;
 
+/*!
+ @brief Return the first document that occurs on or after the provided block index.
+ */
 - (jint)firstDocWithInt:(jint)i4096;
 
+/*!
+ @brief Return the last document that occurs on or before the provided block index.
+ */
 - (jint)lastDocWithInt:(jint)i4096;
 
+/*!
+ @brief Return the long bits at the given <code>i64</code> index.
+ */
 - (jlong)longBitsWithLong:(jlong)index
             withLongArray:(IOSLongArray *)bits
                   withInt:(jint)i64;
@@ -69,17 +76,24 @@
 
 - (void)or__WithOrgApacheLuceneUtilSparseFixedBitSet:(OrgApacheLuceneUtilSparseFixedBitSet *)other;
 
+/*!
+ @brief <code>or(DocIdSetIterator)</code> impl that works best when <code>it</code> is dense
+ */
 - (void)orDenseWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)it;
 
 @end
 
-static jlong OrgApacheLuceneUtilSparseFixedBitSet_BASE_RAM_BYTES_USED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSparseFixedBitSet, BASE_RAM_BYTES_USED_, jlong)
+inline jlong OrgApacheLuceneUtilSparseFixedBitSet_get_BASE_RAM_BYTES_USED();
+static jlong OrgApacheLuceneUtilSparseFixedBitSet_BASE_RAM_BYTES_USED;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilSparseFixedBitSet, BASE_RAM_BYTES_USED, jlong)
 
-static jlong OrgApacheLuceneUtilSparseFixedBitSet_SINGLE_ELEMENT_ARRAY_BYTES_USED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSparseFixedBitSet, SINGLE_ELEMENT_ARRAY_BYTES_USED_, jlong)
+inline jlong OrgApacheLuceneUtilSparseFixedBitSet_get_SINGLE_ELEMENT_ARRAY_BYTES_USED();
+static jlong OrgApacheLuceneUtilSparseFixedBitSet_SINGLE_ELEMENT_ARRAY_BYTES_USED;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilSparseFixedBitSet, SINGLE_ELEMENT_ARRAY_BYTES_USED, jlong)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSparseFixedBitSet, MASK_4096, jint)
+inline jint OrgApacheLuceneUtilSparseFixedBitSet_get_MASK_4096();
+#define OrgApacheLuceneUtilSparseFixedBitSet_MASK_4096 4095
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilSparseFixedBitSet, MASK_4096, jint)
 
 __attribute__((unused)) static jint OrgApacheLuceneUtilSparseFixedBitSet_blockCountWithInt_(jint length);
 
@@ -385,8 +399,8 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilSparseFixedBitSet)
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilSparseFixedBitSet class]) {
-    OrgApacheLuceneUtilSparseFixedBitSet_BASE_RAM_BYTES_USED_ = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilSparseFixedBitSet_class_());
-    OrgApacheLuceneUtilSparseFixedBitSet_SINGLE_ELEMENT_ARRAY_BYTES_USED_ = OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithLongArray_([IOSLongArray arrayWithLength:1]);
+    OrgApacheLuceneUtilSparseFixedBitSet_BASE_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilSparseFixedBitSet_class_());
+    OrgApacheLuceneUtilSparseFixedBitSet_SINGLE_ELEMENT_ARRAY_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithLongArray_([IOSLongArray arrayWithLength:1]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilSparseFixedBitSet)
   }
 }
@@ -424,8 +438,8 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilSparseFixedBitSet)
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "BASE_RAM_BYTES_USED_", NULL, 0x1a, "J", &OrgApacheLuceneUtilSparseFixedBitSet_BASE_RAM_BYTES_USED_, NULL, .constantValue.asLong = 0 },
-    { "SINGLE_ELEMENT_ARRAY_BYTES_USED_", NULL, 0x1a, "J", &OrgApacheLuceneUtilSparseFixedBitSet_SINGLE_ELEMENT_ARRAY_BYTES_USED_, NULL, .constantValue.asLong = 0 },
+    { "BASE_RAM_BYTES_USED", "BASE_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneUtilSparseFixedBitSet_BASE_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
+    { "SINGLE_ELEMENT_ARRAY_BYTES_USED", "SINGLE_ELEMENT_ARRAY_BYTES_USED", 0x1a, "J", &OrgApacheLuceneUtilSparseFixedBitSet_SINGLE_ELEMENT_ARRAY_BYTES_USED, NULL, .constantValue.asLong = 0 },
     { "MASK_4096", "MASK_4096", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilSparseFixedBitSet_MASK_4096 },
     { "indices_", NULL, 0x10, "[J", NULL, NULL, .constantValue.asLong = 0 },
     { "bits_", NULL, 0x10, "[[J", NULL, NULL, .constantValue.asLong = 0 },
@@ -452,19 +466,21 @@ jint OrgApacheLuceneUtilSparseFixedBitSet_blockCountWithInt_(jint length) {
 void OrgApacheLuceneUtilSparseFixedBitSet_initWithInt_(OrgApacheLuceneUtilSparseFixedBitSet *self, jint length) {
   OrgApacheLuceneUtilBitSet_init(self);
   if (length < 1) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"length needs to be >= 1") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"length needs to be >= 1");
   }
   self->length_ = length;
   jint blockCount = OrgApacheLuceneUtilSparseFixedBitSet_blockCountWithInt_(length);
   JreStrongAssignAndConsume(&self->indices_, [IOSLongArray newArrayWithLength:blockCount]);
   JreStrongAssignAndConsume(&self->bits_, [IOSObjectArray newArrayWithLength:blockCount type:IOSClass_longArray(1)]);
-  self->ramBytesUsed_ = OrgApacheLuceneUtilSparseFixedBitSet_BASE_RAM_BYTES_USED_ + OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfWithId_(self->indices_) + OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfWithNSObjectArray_(self->bits_);
+  self->ramBytesUsed_ = OrgApacheLuceneUtilSparseFixedBitSet_BASE_RAM_BYTES_USED + OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfWithId_(self->indices_) + OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfWithNSObjectArray_(self->bits_);
 }
 
 OrgApacheLuceneUtilSparseFixedBitSet *new_OrgApacheLuceneUtilSparseFixedBitSet_initWithInt_(jint length) {
-  OrgApacheLuceneUtilSparseFixedBitSet *self = [OrgApacheLuceneUtilSparseFixedBitSet alloc];
-  OrgApacheLuceneUtilSparseFixedBitSet_initWithInt_(self, length);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilSparseFixedBitSet, initWithInt_, length)
+}
+
+OrgApacheLuceneUtilSparseFixedBitSet *create_OrgApacheLuceneUtilSparseFixedBitSet_initWithInt_(jint length) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilSparseFixedBitSet, initWithInt_, length)
 }
 
 jboolean OrgApacheLuceneUtilSparseFixedBitSet_consistentWithInt_(OrgApacheLuceneUtilSparseFixedBitSet *self, jint index) {
@@ -486,7 +502,7 @@ void OrgApacheLuceneUtilSparseFixedBitSet_insertBlockWithInt_withInt_withInt_(Or
   JreAssert((IOSObjectArray_Get(nil_chk(self->bits_), i4096) == nil), (@"org/apache/lucene/util/SparseFixedBitSet.java:162 condition failed: assert bits[i4096] == null;"));
   IOSObjectArray_SetAndConsume(self->bits_, i4096, [IOSLongArray newArrayWithLongs:(jlong[]){ JreLShift64(1LL, i) } count:1]);
   ++self->nonZeroLongCount_;
-  self->ramBytesUsed_ += OrgApacheLuceneUtilSparseFixedBitSet_SINGLE_ELEMENT_ARRAY_BYTES_USED_;
+  self->ramBytesUsed_ += OrgApacheLuceneUtilSparseFixedBitSet_SINGLE_ELEMENT_ARRAY_BYTES_USED;
 }
 
 void OrgApacheLuceneUtilSparseFixedBitSet_insertLongWithInt_withInt_withInt_withLong_(OrgApacheLuceneUtilSparseFixedBitSet *self, jint i4096, jint i64, jint i, jlong index) {
@@ -617,7 +633,7 @@ void OrgApacheLuceneUtilSparseFixedBitSet_or__WithInt_withLong_withLongArray_wit
   for (jint i = JavaLangLong_numberOfLeadingZerosWithLong_(newIndex), newO = JavaLangLong_bitCountWithLong_(newIndex) - 1; i < 64; i += 1 + JavaLangLong_numberOfLeadingZerosWithLong_(JreLShift64(newIndex, (i + 1))), newO -= 1) {
     jint bitIndex = 63 - i;
     JreAssert((newO == JavaLangLong_bitCountWithLong_(newIndex & ((JreLShift64(1LL, bitIndex)) - 1))), (@"org/apache/lucene/util/SparseFixedBitSet.java:395 condition failed: assert newO == Long.bitCount(newIndex & ((1L << bitIndex) - 1));"));
-    *IOSLongArray_GetRef(nil_chk(newBits), newO) = OrgApacheLuceneUtilSparseFixedBitSet_longBitsWithLong_withLongArray_withInt_(self, currentIndex, currentBits, bitIndex) | OrgApacheLuceneUtilSparseFixedBitSet_longBitsWithLong_withLongArray_withInt_(self, index, bits, bitIndex);
+    *IOSLongArray_GetRef(newBits, newO) = OrgApacheLuceneUtilSparseFixedBitSet_longBitsWithLong_withLongArray_withInt_(self, currentIndex, currentBits, bitIndex) | OrgApacheLuceneUtilSparseFixedBitSet_longBitsWithLong_withLongArray_withInt_(self, index, bits, bitIndex);
   }
   *IOSLongArray_GetRef(self->indices_, i4096) = newIndex;
   IOSObjectArray_Set(self->bits_, i4096, newBits);

@@ -5,19 +5,22 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchTermStatistics_INCLUDE_ALL")
-#if OrgApacheLuceneSearchTermStatistics_RESTRICT
-#define OrgApacheLuceneSearchTermStatistics_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchTermStatistics")
+#ifdef RESTRICT_OrgApacheLuceneSearchTermStatistics
+#define INCLUDE_ALL_OrgApacheLuceneSearchTermStatistics 0
 #else
-#define OrgApacheLuceneSearchTermStatistics_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchTermStatistics 1
 #endif
-#undef OrgApacheLuceneSearchTermStatistics_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchTermStatistics
 
-#if !defined (_OrgApacheLuceneSearchTermStatistics_) && (OrgApacheLuceneSearchTermStatistics_INCLUDE_ALL || OrgApacheLuceneSearchTermStatistics_INCLUDE)
-#define _OrgApacheLuceneSearchTermStatistics_
+#if !defined (OrgApacheLuceneSearchTermStatistics_) && (INCLUDE_ALL_OrgApacheLuceneSearchTermStatistics || defined(INCLUDE_OrgApacheLuceneSearchTermStatistics))
+#define OrgApacheLuceneSearchTermStatistics_
 
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief Contains statistics for a specific term
+ */
 @interface OrgApacheLuceneSearchTermStatistics : NSObject
 
 #pragma mark Public
@@ -26,10 +29,21 @@
                                            withLong:(jlong)docFreq
                                            withLong:(jlong)totalTermFreq;
 
+/*!
+ @brief returns the number of documents this term occurs in
+ - seealso: TermsEnum#docFreq()
+ */
 - (jlong)docFreq;
 
+/*!
+ @brief returns the term text
+ */
 - (OrgApacheLuceneUtilBytesRef *)term;
 
+/*!
+ @brief returns the total number of occurrences of this term
+ - seealso: TermsEnum#totalTermFreq()
+ */
 - (jlong)totalTermFreq;
 
 @end
@@ -40,8 +54,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchTermStatistics_initWithOrgApacheLuce
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchTermStatistics *new_OrgApacheLuceneSearchTermStatistics_initWithOrgApacheLuceneUtilBytesRef_withLong_withLong_(OrgApacheLuceneUtilBytesRef *term, jlong docFreq, jlong totalTermFreq) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchTermStatistics *create_OrgApacheLuceneSearchTermStatistics_initWithOrgApacheLuceneUtilBytesRef_withLong_withLong_(OrgApacheLuceneUtilBytesRef *term, jlong docFreq, jlong totalTermFreq);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermStatistics)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchTermStatistics_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchTermStatistics")

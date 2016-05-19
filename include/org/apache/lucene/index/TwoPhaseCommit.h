@@ -5,23 +5,50 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexTwoPhaseCommit_INCLUDE_ALL")
-#if OrgApacheLuceneIndexTwoPhaseCommit_RESTRICT
-#define OrgApacheLuceneIndexTwoPhaseCommit_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexTwoPhaseCommit")
+#ifdef RESTRICT_OrgApacheLuceneIndexTwoPhaseCommit
+#define INCLUDE_ALL_OrgApacheLuceneIndexTwoPhaseCommit 0
 #else
-#define OrgApacheLuceneIndexTwoPhaseCommit_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexTwoPhaseCommit 1
 #endif
-#undef OrgApacheLuceneIndexTwoPhaseCommit_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexTwoPhaseCommit
 
-#if !defined (_OrgApacheLuceneIndexTwoPhaseCommit_) && (OrgApacheLuceneIndexTwoPhaseCommit_INCLUDE_ALL || OrgApacheLuceneIndexTwoPhaseCommit_INCLUDE)
-#define _OrgApacheLuceneIndexTwoPhaseCommit_
+#if !defined (OrgApacheLuceneIndexTwoPhaseCommit_) && (INCLUDE_ALL_OrgApacheLuceneIndexTwoPhaseCommit || defined(INCLUDE_OrgApacheLuceneIndexTwoPhaseCommit))
+#define OrgApacheLuceneIndexTwoPhaseCommit_
 
+/*!
+ @brief An interface for implementations that support 2-phase commit.
+ You can use
+ <code>TwoPhaseCommitTool</code> to execute a 2-phase commit algorithm over several
+ <code>TwoPhaseCommit</code>s.
+ */
 @protocol OrgApacheLuceneIndexTwoPhaseCommit < NSObject, JavaObject >
 
+/*!
+ @brief The first stage of a 2-phase commit.
+ Implementations should do as much work
+ as possible in this method, but avoid actual committing changes. If the
+ 2-phase commit fails, <code>rollback()</code> is called to discard all changes
+ since last successful commit.
+ */
 - (void)prepareCommit;
 
+/*!
+ @brief The second phase of a 2-phase commit.
+ Implementations should ideally do
+ very little work in this method (following <code>prepareCommit()</code>, and
+ after it returns, the caller can assume that the changes were successfully
+ committed to the underlying storage.
+ */
 - (void)commit;
 
+/*!
+ @brief Discards any changes that have occurred since the last commit.
+ In a 2-phase
+ commit algorithm, where one of the objects failed to <code>commit()</code> or
+ <code>prepareCommit()</code>, this method is used to roll all other objects
+ back to their previous state.
+ */
 - (void)rollback;
 
 @end
@@ -32,4 +59,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTwoPhaseCommit)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexTwoPhaseCommit_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexTwoPhaseCommit")

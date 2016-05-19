@@ -31,6 +31,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCoreKeywordTokenizer, offsetAtt_, id<
 
 @implementation OrgApacheLuceneAnalysisCoreKeywordTokenizer
 
++ (jint)DEFAULT_BUFFER_SIZE {
+  return OrgApacheLuceneAnalysisCoreKeywordTokenizer_DEFAULT_BUFFER_SIZE;
+}
+
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisCoreKeywordTokenizer_init(self);
@@ -112,9 +116,11 @@ void OrgApacheLuceneAnalysisCoreKeywordTokenizer_init(OrgApacheLuceneAnalysisCor
 }
 
 OrgApacheLuceneAnalysisCoreKeywordTokenizer *new_OrgApacheLuceneAnalysisCoreKeywordTokenizer_init() {
-  OrgApacheLuceneAnalysisCoreKeywordTokenizer *self = [OrgApacheLuceneAnalysisCoreKeywordTokenizer alloc];
-  OrgApacheLuceneAnalysisCoreKeywordTokenizer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCoreKeywordTokenizer, init)
+}
+
+OrgApacheLuceneAnalysisCoreKeywordTokenizer *create_OrgApacheLuceneAnalysisCoreKeywordTokenizer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCoreKeywordTokenizer, init)
 }
 
 void OrgApacheLuceneAnalysisCoreKeywordTokenizer_initWithInt_(OrgApacheLuceneAnalysisCoreKeywordTokenizer *self, jint bufferSize) {
@@ -123,15 +129,17 @@ void OrgApacheLuceneAnalysisCoreKeywordTokenizer_initWithInt_(OrgApacheLuceneAna
   JreStrongAssign(&self->termAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()]);
   JreStrongAssign(&self->offsetAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_()]);
   if (bufferSize <= 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"bufferSize must be > 0") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"bufferSize must be > 0");
   }
   [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(self->termAtt_)) resizeBufferWithInt:bufferSize];
 }
 
 OrgApacheLuceneAnalysisCoreKeywordTokenizer *new_OrgApacheLuceneAnalysisCoreKeywordTokenizer_initWithInt_(jint bufferSize) {
-  OrgApacheLuceneAnalysisCoreKeywordTokenizer *self = [OrgApacheLuceneAnalysisCoreKeywordTokenizer alloc];
-  OrgApacheLuceneAnalysisCoreKeywordTokenizer_initWithInt_(self, bufferSize);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCoreKeywordTokenizer, initWithInt_, bufferSize)
+}
+
+OrgApacheLuceneAnalysisCoreKeywordTokenizer *create_OrgApacheLuceneAnalysisCoreKeywordTokenizer_initWithInt_(jint bufferSize) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCoreKeywordTokenizer, initWithInt_, bufferSize)
 }
 
 void OrgApacheLuceneAnalysisCoreKeywordTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_(OrgApacheLuceneAnalysisCoreKeywordTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory, jint bufferSize) {
@@ -140,15 +148,17 @@ void OrgApacheLuceneAnalysisCoreKeywordTokenizer_initWithOrgApacheLuceneUtilAttr
   JreStrongAssign(&self->termAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()]);
   JreStrongAssign(&self->offsetAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_()]);
   if (bufferSize <= 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"bufferSize must be > 0") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"bufferSize must be > 0");
   }
   [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(self->termAtt_)) resizeBufferWithInt:bufferSize];
 }
 
 OrgApacheLuceneAnalysisCoreKeywordTokenizer *new_OrgApacheLuceneAnalysisCoreKeywordTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_(OrgApacheLuceneUtilAttributeFactory *factory, jint bufferSize) {
-  OrgApacheLuceneAnalysisCoreKeywordTokenizer *self = [OrgApacheLuceneAnalysisCoreKeywordTokenizer alloc];
-  OrgApacheLuceneAnalysisCoreKeywordTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_(self, factory, bufferSize);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCoreKeywordTokenizer, initWithOrgApacheLuceneUtilAttributeFactory_withInt_, factory, bufferSize)
+}
+
+OrgApacheLuceneAnalysisCoreKeywordTokenizer *create_OrgApacheLuceneAnalysisCoreKeywordTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_(OrgApacheLuceneUtilAttributeFactory *factory, jint bufferSize) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCoreKeywordTokenizer, initWithOrgApacheLuceneUtilAttributeFactory_withInt_, factory, bufferSize)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCoreKeywordTokenizer)

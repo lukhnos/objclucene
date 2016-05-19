@@ -5,28 +5,48 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchFilterCachingPolicy_INCLUDE_ALL")
-#if OrgApacheLuceneSearchFilterCachingPolicy_RESTRICT
-#define OrgApacheLuceneSearchFilterCachingPolicy_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchFilterCachingPolicy")
+#ifdef RESTRICT_OrgApacheLuceneSearchFilterCachingPolicy
+#define INCLUDE_ALL_OrgApacheLuceneSearchFilterCachingPolicy 0
 #else
-#define OrgApacheLuceneSearchFilterCachingPolicy_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchFilterCachingPolicy 1
 #endif
-#undef OrgApacheLuceneSearchFilterCachingPolicy_RESTRICT
-#if OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments_INCLUDE
-#define OrgApacheLuceneSearchFilterCachingPolicy_INCLUDE 1
+#undef RESTRICT_OrgApacheLuceneSearchFilterCachingPolicy
+#ifdef INCLUDE_OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments
+#define INCLUDE_OrgApacheLuceneSearchFilterCachingPolicy 1
 #endif
 
-#if !defined (_OrgApacheLuceneSearchFilterCachingPolicy_) && (OrgApacheLuceneSearchFilterCachingPolicy_INCLUDE_ALL || OrgApacheLuceneSearchFilterCachingPolicy_INCLUDE)
-#define _OrgApacheLuceneSearchFilterCachingPolicy_
+#if !defined (OrgApacheLuceneSearchFilterCachingPolicy_) && (INCLUDE_ALL_OrgApacheLuceneSearchFilterCachingPolicy || defined(INCLUDE_OrgApacheLuceneSearchFilterCachingPolicy))
+#define OrgApacheLuceneSearchFilterCachingPolicy_
 
+@class IOSObjectArray;
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneSearchDocIdSet;
 @class OrgApacheLuceneSearchFilter;
 
+/*!
+ @brief A policy defining which filters should be cached.
+ Implementations of this class must be thread-safe.
+ - seealso: UsageTrackingFilterCachingPolicy
+ - seealso: LRUFilterCache
+ */
 @protocol OrgApacheLuceneSearchFilterCachingPolicy < NSObject, JavaObject >
 
+/*!
+ @brief Callback that is called every time that a cached filter is used.
+ This is typically useful if the policy wants to track usage statistics
+ in order to make decisions. 
+ */
 - (void)onUseWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter;
 
+/*!
+ @brief Whether the given <code>DocIdSet</code> should be cached on a given segment.
+ This method will be called on each leaf context to know if the filter
+ should be cached on this particular leaf. The filter cache will first
+ attempt to load a <code>DocIdSet</code> from the cache. If it is not cached
+ yet and this method returns <tt>true</tt> then a cache entry will be
+ generated. Otherwise an uncached set will be returned. 
+ */
 - (jboolean)shouldCacheWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
              withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                      withOrgApacheLuceneSearchDocIdSet:(OrgApacheLuceneSearchDocIdSet *)set;
@@ -35,28 +55,49 @@
 
 @interface OrgApacheLuceneSearchFilterCachingPolicy : NSObject
 
++ (id<OrgApacheLuceneSearchFilterCachingPolicy>)ALWAYS_CACHE;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneSearchFilterCachingPolicy)
 
-FOUNDATION_EXPORT id<OrgApacheLuceneSearchFilterCachingPolicy> OrgApacheLuceneSearchFilterCachingPolicy_ALWAYS_CACHE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchFilterCachingPolicy, ALWAYS_CACHE_, id<OrgApacheLuceneSearchFilterCachingPolicy>)
+/*!
+ @brief A simple policy that caches all the provided filters on all segments.
+ */
+inline id<OrgApacheLuceneSearchFilterCachingPolicy> OrgApacheLuceneSearchFilterCachingPolicy_get_ALWAYS_CACHE();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT id<OrgApacheLuceneSearchFilterCachingPolicy> OrgApacheLuceneSearchFilterCachingPolicy_ALWAYS_CACHE;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchFilterCachingPolicy, ALWAYS_CACHE, id<OrgApacheLuceneSearchFilterCachingPolicy>)
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFilterCachingPolicy)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments_) && (OrgApacheLuceneSearchFilterCachingPolicy_INCLUDE_ALL || OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments_INCLUDE)
-#define _OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments_
+#if !defined (OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments_) && (INCLUDE_ALL_OrgApacheLuceneSearchFilterCachingPolicy || defined(INCLUDE_OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments))
+#define OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments_
 
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneSearchDocIdSet;
 @class OrgApacheLuceneSearchFilter;
 
+/*!
+ @brief A simple policy that only caches on the largest segments of an index.
+ The reasoning is that these segments likely account for most of the
+ execution time of queries and are also more likely to stay around longer
+ than small segments, which makes them more interesting for caching.
+ */
 @interface OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments : NSObject < OrgApacheLuceneSearchFilterCachingPolicy >
+
++ (OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments *)DEFAULT;
 
 #pragma mark Public
 
+/*!
+ @brief Create a <code>CacheOnLargeSegments</code> instance that only caches on a
+ given segment if its number of documents divided by the total number of
+ documents in the index is greater than or equal to
+ <code>minSizeRatio</code>.
+ */
 - (instancetype)initWithFloat:(jfloat)minSizeRatio;
 
 - (void)onUseWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter;
@@ -69,15 +110,28 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFilterCachingPolicy)
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments)
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments *OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments_DEFAULT_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments, DEFAULT_, OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments *)
+/*!
+ @brief <code>CacheOnLargeSegments</code> instance that only caches on segments that
+ account for more than 3% of the total index size.
+ This should guarantee
+ that all segments from the upper <code>tier</code> will be
+ cached while ensuring that at most <tt>33</tt> segments can make it to
+ the cache (given that some implementations such as <code>LRUFilterCache</code>
+ perform better when the number of cached segments is low). 
+ */
+inline OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments *OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments_get_DEFAULT();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments *OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments_DEFAULT;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments, DEFAULT, OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments_initWithFloat_(OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments *self, jfloat minSizeRatio);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments *new_OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments_initWithFloat_(jfloat minSizeRatio) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments *create_OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments_initWithFloat_(jfloat minSizeRatio);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchFilterCachingPolicy_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchFilterCachingPolicy")

@@ -5,28 +5,35 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction_RESTRICT
-#define OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction 0
 #else
-#define OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction_) && (OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction_
+#if !defined (OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction))
+#define OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction_
 
-#define OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction 1
 #include "org/apache/lucene/queries/function/valuesource/DualFloatFunction.h"
 
 @class OrgApacheLuceneQueriesFunctionFunctionValues;
 @class OrgApacheLuceneQueriesFunctionValueSource;
 
+/*!
+ @brief Function to raise the base "a" to the power "b"
+ */
 @interface OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction : OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction
 
 #pragma mark Public
 
+/*!
+ @param a  the base.
+ @param b  the exponent.
+ */
 - (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)a
                     withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)b;
 
@@ -46,8 +53,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction
 
 FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction *new_OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValueSource *a, OrgApacheLuceneQueriesFunctionValueSource *b) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction *create_OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValueSource *a, OrgApacheLuceneQueriesFunctionValueSource *b);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction")

@@ -5,21 +5,26 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchPayloadsAveragePayloadFunction_INCLUDE_ALL")
-#if OrgApacheLuceneSearchPayloadsAveragePayloadFunction_RESTRICT
-#define OrgApacheLuceneSearchPayloadsAveragePayloadFunction_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchPayloadsAveragePayloadFunction")
+#ifdef RESTRICT_OrgApacheLuceneSearchPayloadsAveragePayloadFunction
+#define INCLUDE_ALL_OrgApacheLuceneSearchPayloadsAveragePayloadFunction 0
 #else
-#define OrgApacheLuceneSearchPayloadsAveragePayloadFunction_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchPayloadsAveragePayloadFunction 1
 #endif
-#undef OrgApacheLuceneSearchPayloadsAveragePayloadFunction_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchPayloadsAveragePayloadFunction
 
-#if !defined (_OrgApacheLuceneSearchPayloadsAveragePayloadFunction_) && (OrgApacheLuceneSearchPayloadsAveragePayloadFunction_INCLUDE_ALL || OrgApacheLuceneSearchPayloadsAveragePayloadFunction_INCLUDE)
-#define _OrgApacheLuceneSearchPayloadsAveragePayloadFunction_
+#if !defined (OrgApacheLuceneSearchPayloadsAveragePayloadFunction_) && (INCLUDE_ALL_OrgApacheLuceneSearchPayloadsAveragePayloadFunction || defined(INCLUDE_OrgApacheLuceneSearchPayloadsAveragePayloadFunction))
+#define OrgApacheLuceneSearchPayloadsAveragePayloadFunction_
 
-#define OrgApacheLuceneSearchPayloadsPayloadFunction_RESTRICT 1
-#define OrgApacheLuceneSearchPayloadsPayloadFunction_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchPayloadsPayloadFunction 1
+#define INCLUDE_OrgApacheLuceneSearchPayloadsPayloadFunction 1
 #include "org/apache/lucene/search/payloads/PayloadFunction.h"
 
+/*!
+ @brief Calculate the final score as the average score of all payloads seen.
+ <p>
+ Is thread safe and completely reusable. 
+ */
 @interface OrgApacheLuceneSearchPayloadsAveragePayloadFunction : OrgApacheLuceneSearchPayloadsPayloadFunction
 
 #pragma mark Public
@@ -51,8 +56,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchPayloadsAveragePayloadFunction_init(
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsAveragePayloadFunction *new_OrgApacheLuceneSearchPayloadsAveragePayloadFunction_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsAveragePayloadFunction *create_OrgApacheLuceneSearchPayloadsAveragePayloadFunction_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsAveragePayloadFunction)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchPayloadsAveragePayloadFunction_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchPayloadsAveragePayloadFunction")

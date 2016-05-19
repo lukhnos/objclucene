@@ -18,7 +18,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "NoSuchFileException", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgLukhnosPortmobileFileNoSuchFileException = { 2, "NoSuchFileException", "org.lukhnos.portmobile.file", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgLukhnosPortmobileFileNoSuchFileException;
@@ -31,9 +31,11 @@ void OrgLukhnosPortmobileFileNoSuchFileException_init(OrgLukhnosPortmobileFileNo
 }
 
 OrgLukhnosPortmobileFileNoSuchFileException *new_OrgLukhnosPortmobileFileNoSuchFileException_init() {
-  OrgLukhnosPortmobileFileNoSuchFileException *self = [OrgLukhnosPortmobileFileNoSuchFileException alloc];
-  OrgLukhnosPortmobileFileNoSuchFileException_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgLukhnosPortmobileFileNoSuchFileException, init)
+}
+
+OrgLukhnosPortmobileFileNoSuchFileException *create_OrgLukhnosPortmobileFileNoSuchFileException_init() {
+  J2OBJC_CREATE_IMPL(OrgLukhnosPortmobileFileNoSuchFileException, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileFileNoSuchFileException)

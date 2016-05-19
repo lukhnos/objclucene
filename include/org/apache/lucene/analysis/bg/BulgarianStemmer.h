@@ -5,25 +5,40 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisBgBulgarianStemmer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisBgBulgarianStemmer_RESTRICT
-#define OrgApacheLuceneAnalysisBgBulgarianStemmer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisBgBulgarianStemmer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisBgBulgarianStemmer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisBgBulgarianStemmer 0
 #else
-#define OrgApacheLuceneAnalysisBgBulgarianStemmer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisBgBulgarianStemmer 1
 #endif
-#undef OrgApacheLuceneAnalysisBgBulgarianStemmer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisBgBulgarianStemmer
 
-#if !defined (_OrgApacheLuceneAnalysisBgBulgarianStemmer_) && (OrgApacheLuceneAnalysisBgBulgarianStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisBgBulgarianStemmer_INCLUDE)
-#define _OrgApacheLuceneAnalysisBgBulgarianStemmer_
+#if !defined (OrgApacheLuceneAnalysisBgBulgarianStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisBgBulgarianStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisBgBulgarianStemmer))
+#define OrgApacheLuceneAnalysisBgBulgarianStemmer_
 
 @class IOSCharArray;
 
+/*!
+ @brief Light Stemmer for Bulgarian.
+ <p>
+ Implements the algorithm described in:  
+ <i>
+ Searching Strategies for the Bulgarian Language
+ </i>
+ http://members.unine.ch/jacques.savoy/Papers/BUIR.pdf
+ */
 @interface OrgApacheLuceneAnalysisBgBulgarianStemmer : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @brief Stem an input buffer of Bulgarian text.
+ @param s input buffer
+ @param len length of input buffer
+ @return length of input buffer after normalization
+ */
 - (jint)stemWithCharArray:(IOSCharArray *)s
                   withInt:(jint)len;
 
@@ -35,8 +50,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisBgBulgarianStemmer_init(OrgApacheL
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisBgBulgarianStemmer *new_OrgApacheLuceneAnalysisBgBulgarianStemmer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisBgBulgarianStemmer *create_OrgApacheLuceneAnalysisBgBulgarianStemmer_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisBgBulgarianStemmer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisBgBulgarianStemmer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisBgBulgarianStemmer")

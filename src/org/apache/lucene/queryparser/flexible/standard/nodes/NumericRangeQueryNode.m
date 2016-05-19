@@ -23,11 +23,11 @@
 
 @interface OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode ()
 
-+ (OrgApacheLuceneDocumentFieldType_NumericTypeEnum *)getNumericDataTypeWithNSNumber:(NSNumber *)number;
++ (OrgApacheLuceneDocumentFieldType_NumericType *)getNumericDataTypeWithNSNumber:(NSNumber *)number;
 
 @end
 
-__attribute__((unused)) static OrgApacheLuceneDocumentFieldType_NumericTypeEnum *OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode_getNumericDataTypeWithNSNumber_(NSNumber *number);
+__attribute__((unused)) static OrgApacheLuceneDocumentFieldType_NumericType *OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode_getNumericDataTypeWithNSNumber_(NSNumber *number);
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode
 
@@ -40,7 +40,7 @@ __attribute__((unused)) static OrgApacheLuceneDocumentFieldType_NumericTypeEnum 
   return self;
 }
 
-+ (OrgApacheLuceneDocumentFieldType_NumericTypeEnum *)getNumericDataTypeWithNSNumber:(NSNumber *)number {
++ (OrgApacheLuceneDocumentFieldType_NumericType *)getNumericDataTypeWithNSNumber:(NSNumber *)number {
   return OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode_getNumericDataTypeWithNSNumber_(number);
 }
 
@@ -50,9 +50,9 @@ __attribute__((unused)) static OrgApacheLuceneDocumentFieldType_NumericTypeEnum 
                                                                          withBoolean:(jboolean)upperInclusive
                    withOrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig:(OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *)numericConfig {
   if (numericConfig == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"numericConfig cannot be null!") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"numericConfig cannot be null!");
   }
-  OrgApacheLuceneDocumentFieldType_NumericTypeEnum *lowerNumberType, *upperNumberType;
+  OrgApacheLuceneDocumentFieldType_NumericType *lowerNumberType, *upperNumberType;
   if (lower != nil && [lower getValue] != nil) {
     lowerNumberType = OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode_getNumericDataTypeWithNSNumber_([lower getValue]);
   }
@@ -65,11 +65,11 @@ __attribute__((unused)) static OrgApacheLuceneDocumentFieldType_NumericTypeEnum 
   else {
     upperNumberType = nil;
   }
-  if (lowerNumberType != nil && ![lowerNumberType isEqual:[((OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *) nil_chk(numericConfig)) getType]]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@$@", @"lower value's type should be the same as numericConfig type: ", lowerNumberType, @" != ", [numericConfig getType])) autorelease];
+  if (lowerNumberType != nil && ![lowerNumberType isEqual:[numericConfig getType]]) {
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@$@", @"lower value's type should be the same as numericConfig type: ", lowerNumberType, @" != ", [numericConfig getType]));
   }
-  if (upperNumberType != nil && ![upperNumberType isEqual:[((OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *) nil_chk(numericConfig)) getType]]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@$@", @"upper value's type should be the same as numericConfig type: ", upperNumberType, @" != ", [numericConfig getType])) autorelease];
+  if (upperNumberType != nil && ![upperNumberType isEqual:[numericConfig getType]]) {
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@$@", @"upper value's type should be the same as numericConfig type: ", upperNumberType, @" != ", [numericConfig getType]));
   }
   [super setBoundsWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode:lower withOrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode:upper withBoolean:lowerInclusive withBoolean:upperInclusive];
   JreStrongAssign(&self->numericConfig_, numericConfig);
@@ -80,8 +80,8 @@ __attribute__((unused)) static OrgApacheLuceneDocumentFieldType_NumericTypeEnum 
 }
 
 - (NSString *)description {
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_initWithNSString_(@"<numericRange lowerInclusive='") autorelease];
-  [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([sb appendWithBoolean:[self isLowerInclusive]])) appendWithNSString:@"' upperInclusive='"])) appendWithBoolean:[self isUpperInclusive]])) appendWithNSString:JreStrcat("$I", @"' precisionStep='", [((OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *) nil_chk(numericConfig_)) getPrecisionStep])])) appendWithNSString:JreStrcat("$@", @"' type='", [numericConfig_ getType])])) appendWithNSString:@"'>\n"];
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_initWithNSString_(@"<numericRange lowerInclusive='");
+  [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([sb appendWithBoolean:[self isLowerInclusive]])) appendWithNSString:@"' upperInclusive='"])) appendWithBoolean:[self isUpperInclusive]])) appendWithNSString:JreStrcat("$I", @"' precisionStep='", [((OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *) nil_chk(numericConfig_)) getPrecisionStep])])) appendWithNSString:JreStrcat("$@", @"' type='", [((OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *) nil_chk(numericConfig_)) getType])])) appendWithNSString:@"'>\n"];
   [((JavaLangStringBuilder *) nil_chk([sb appendWithId:[self getLowerBound]])) appendWithChar:0x000a];
   [((JavaLangStringBuilder *) nil_chk([sb appendWithId:[self getUpperBound]])) appendWithChar:0x000a];
   [sb appendWithNSString:@"</numericRange>"];
@@ -117,27 +117,29 @@ void OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode_initWi
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode *new_OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode_initWithOrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode_withOrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode_withBoolean_withBoolean_withOrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig_(OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *lower, OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *upper, jboolean lowerInclusive, jboolean upperInclusive, OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *numericConfig) {
-  OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode *self = [OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode_initWithOrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode_withOrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode_withBoolean_withBoolean_withOrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig_(self, lower, upper, lowerInclusive, upperInclusive, numericConfig);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode, initWithOrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode_withOrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode_withBoolean_withBoolean_withOrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig_, lower, upper, lowerInclusive, upperInclusive, numericConfig)
 }
 
-OrgApacheLuceneDocumentFieldType_NumericTypeEnum *OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode_getNumericDataTypeWithNSNumber_(NSNumber *number) {
+OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode *create_OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode_initWithOrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode_withOrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode_withBoolean_withBoolean_withOrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig_(OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *lower, OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *upper, jboolean lowerInclusive, jboolean upperInclusive, OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *numericConfig) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode, initWithOrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode_withOrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode_withBoolean_withBoolean_withOrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig_, lower, upper, lowerInclusive, upperInclusive, numericConfig)
+}
+
+OrgApacheLuceneDocumentFieldType_NumericType *OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode_getNumericDataTypeWithNSNumber_(NSNumber *number) {
   OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode_initialize();
   if ([number isKindOfClass:[JavaLangLong class]]) {
-    return JreLoadStatic(OrgApacheLuceneDocumentFieldType_NumericTypeEnum, LONG);
+    return JreLoadEnum(OrgApacheLuceneDocumentFieldType_NumericType, LONG);
   }
   else if ([number isKindOfClass:[JavaLangInteger class]]) {
-    return JreLoadStatic(OrgApacheLuceneDocumentFieldType_NumericTypeEnum, INT);
+    return JreLoadEnum(OrgApacheLuceneDocumentFieldType_NumericType, INT);
   }
   else if ([number isKindOfClass:[JavaLangDouble class]]) {
-    return JreLoadStatic(OrgApacheLuceneDocumentFieldType_NumericTypeEnum, DOUBLE);
+    return JreLoadEnum(OrgApacheLuceneDocumentFieldType_NumericType, DOUBLE);
   }
   else if ([number isKindOfClass:[JavaLangFloat class]]) {
-    return JreLoadStatic(OrgApacheLuceneDocumentFieldType_NumericTypeEnum, FLOAT);
+    return JreLoadEnum(OrgApacheLuceneDocumentFieldType_NumericType, FLOAT);
   }
   else {
-    @throw [new_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_([new_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, NUMBER_CLASS_NOT_SUPPORTED_BY_NUMERIC_RANGE_QUERY_), [IOSObjectArray arrayWithObjects:(id[]){ [((NSNumber *) nil_chk(number)) getClass] } count:1 type:NSObject_class_()]) autorelease]) autorelease];
+    @throw create_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_(create_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, NUMBER_CLASS_NOT_SUPPORTED_BY_NUMERIC_RANGE_QUERY), [IOSObjectArray arrayWithObjects:(id[]){ [((NSNumber *) nil_chk(number)) getClass] } count:1 type:NSObject_class_()]));
   }
 }
 

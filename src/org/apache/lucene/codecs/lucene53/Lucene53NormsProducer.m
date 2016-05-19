@@ -12,7 +12,6 @@
 #include "java/lang/AssertionError.h"
 #include "java/lang/Integer.h"
 #include "java/lang/RuntimeException.h"
-#include "java/lang/Throwable.h"
 #include "java/util/Collection.h"
 #include "java/util/Collections.h"
 #include "java/util/HashMap.h"
@@ -70,6 +69,8 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsLucene53Lucene53NormsPr
 
 __attribute__((unused)) static OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$1 *new_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$1_initWithLong_(jlong capture$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$1 *create_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$1_initWithLong_(jlong capture$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$1)
 
 @interface OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$2 : OrgApacheLuceneIndexNumericDocValues {
@@ -90,6 +91,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$2, val$s
 __attribute__((unused)) static void OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$2_initWithOrgApacheLuceneStoreRandomAccessInput_(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$2 *self, id<OrgApacheLuceneStoreRandomAccessInput> capture$0);
 
 __attribute__((unused)) static OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$2 *new_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$2_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> capture$0) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$2 *create_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$2_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> capture$0);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$2)
 
@@ -112,6 +115,8 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsLucene53Lucene53NormsPr
 
 __attribute__((unused)) static OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$3 *new_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$3_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> capture$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$3 *create_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$3_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> capture$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$3)
 
 @interface OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$4 : OrgApacheLuceneIndexNumericDocValues {
@@ -133,6 +138,8 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsLucene53Lucene53NormsPr
 
 __attribute__((unused)) static OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$4 *new_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$4_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> capture$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$4 *create_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$4_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> capture$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$4)
 
 @interface OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$5 : OrgApacheLuceneIndexNumericDocValues {
@@ -153,6 +160,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$5, val$s
 __attribute__((unused)) static void OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$5_initWithOrgApacheLuceneStoreRandomAccessInput_(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$5 *self, id<OrgApacheLuceneStoreRandomAccessInput> capture$0);
 
 __attribute__((unused)) static OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$5 *new_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$5_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> capture$0) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$5 *create_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$5_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> capture$0);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$5)
 
@@ -176,25 +185,25 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$5
   OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_NormsEntry *entry_ = [((id<JavaUtilMap>) nil_chk(norms_)) getWithId:JavaLangInteger_valueOfWithInt_(((OrgApacheLuceneIndexFieldInfo *) nil_chk(field))->number_)];
   if (((OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_NormsEntry *) nil_chk(entry_))->bytesPerValue_ == 0) {
     jlong value = entry_->offset_;
-    return [new_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$1_initWithLong_(value) autorelease];
+    return create_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$1_initWithLong_(value);
   }
   id<OrgApacheLuceneStoreRandomAccessInput> slice;
   @synchronized(data_) {
     switch (entry_->bytesPerValue_) {
       case 1:
       slice = [((OrgApacheLuceneStoreIndexInput *) nil_chk(data_)) randomAccessSliceWithLong:entry_->offset_ withLong:maxDoc_];
-      return [new_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$2_initWithOrgApacheLuceneStoreRandomAccessInput_(slice) autorelease];
+      return create_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$2_initWithOrgApacheLuceneStoreRandomAccessInput_(slice);
       case 2:
       slice = [((OrgApacheLuceneStoreIndexInput *) nil_chk(data_)) randomAccessSliceWithLong:entry_->offset_ withLong:maxDoc_ * 2LL];
-      return [new_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$3_initWithOrgApacheLuceneStoreRandomAccessInput_(slice) autorelease];
+      return create_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$3_initWithOrgApacheLuceneStoreRandomAccessInput_(slice);
       case 4:
       slice = [((OrgApacheLuceneStoreIndexInput *) nil_chk(data_)) randomAccessSliceWithLong:entry_->offset_ withLong:maxDoc_ * 4LL];
-      return [new_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$4_initWithOrgApacheLuceneStoreRandomAccessInput_(slice) autorelease];
+      return create_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$4_initWithOrgApacheLuceneStoreRandomAccessInput_(slice);
       case 8:
       slice = [((OrgApacheLuceneStoreIndexInput *) nil_chk(data_)) randomAccessSliceWithLong:entry_->offset_ withLong:maxDoc_ * 8LL];
-      return [new_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$5_initWithOrgApacheLuceneStoreRandomAccessInput_(slice) autorelease];
+      return create_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$5_initWithOrgApacheLuceneStoreRandomAccessInput_(slice);
       default:
-      @throw [new_JavaLangAssertionError_init() autorelease];
+      @throw create_JavaLangAssertionError_init();
     }
   }
 }
@@ -232,7 +241,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$5
     { "getNormsWithOrgApacheLuceneIndexFieldInfo:", "getNorms", "Lorg.apache.lucene.index.NumericDocValues;", 0x1, "Ljava.io.IOException;", NULL },
     { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
     { "checkIntegrity", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
@@ -256,21 +265,21 @@ void OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_initWithOrgApacheLuceneI
   jint version_ = -1;
   {
     OrgApacheLuceneStoreChecksumIndexInput *in = [((OrgApacheLuceneStoreDirectory *) nil_chk(state->directory_)) openChecksumInputWithNSString:metaName withOrgApacheLuceneStoreIOContext:state->context_];
-    JavaLangThrowable *__primaryException1 = nil;
+    NSException *__primaryException1 = nil;
     @try {
-      JavaLangThrowable *priorE = nil;
+      NSException *priorE = nil;
       @try {
         version_ = OrgApacheLuceneCodecsCodecUtil_checkIndexHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_withByteArray_withNSString_(in, metaCodec, OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_VERSION_START, OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_VERSION_CURRENT, [state->segmentInfo_ getId], state->segmentSuffix_);
         OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_readFieldsWithOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneIndexFieldInfos_(self, in, state->fieldInfos_);
       }
-      @catch (JavaLangThrowable *exception) {
+      @catch (NSException *exception) {
         priorE = exception;
       }
       @finally {
-        OrgApacheLuceneCodecsCodecUtil_checkFooterWithOrgApacheLuceneStoreChecksumIndexInput_withJavaLangThrowable_(in, priorE);
+        OrgApacheLuceneCodecsCodecUtil_checkFooterWithOrgApacheLuceneStoreChecksumIndexInput_withNSException_(in, priorE);
       }
     }
-    @catch (JavaLangThrowable *e) {
+    @catch (NSException *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -279,8 +288,8 @@ void OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_initWithOrgApacheLuceneI
         if (__primaryException1 != nil) {
           @try {
             [in close];
-          } @catch (JavaLangThrowable *e) {
-            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          } @catch (NSException *e) {
+            [__primaryException1 addSuppressedWithNSException:e];
           }
         } else {
           [in close];
@@ -289,12 +298,12 @@ void OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_initWithOrgApacheLuceneI
     }
   }
   NSString *dataName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(state->segmentInfo_->name_, state->segmentSuffix_, dataExtension);
-  JreStrongAssign(&self->data_, [((OrgApacheLuceneStoreDirectory *) nil_chk(state->directory_)) openInputWithNSString:dataName withOrgApacheLuceneStoreIOContext:state->context_]);
+  JreStrongAssign(&self->data_, [state->directory_ openInputWithNSString:dataName withOrgApacheLuceneStoreIOContext:state->context_]);
   jboolean success = false;
   @try {
     jint version2 = OrgApacheLuceneCodecsCodecUtil_checkIndexHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_withByteArray_withNSString_(self->data_, dataCodec, OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_VERSION_START, OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_VERSION_CURRENT, [state->segmentInfo_ getId], state->segmentSuffix_);
     if (version_ != version2) {
-      @throw [new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$I$I", @"Format versions mismatch: meta=", version_, @",data=", version2), self->data_) autorelease];
+      @throw create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$I$I", @"Format versions mismatch: meta=", version_, @",data=", version2), self->data_);
     }
     OrgApacheLuceneCodecsCodecUtil_retrieveChecksumWithOrgApacheLuceneStoreIndexInput_(self->data_);
     success = true;
@@ -307,9 +316,11 @@ void OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_initWithOrgApacheLuceneI
 }
 
 OrgApacheLuceneCodecsLucene53Lucene53NormsProducer *new_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_initWithOrgApacheLuceneIndexSegmentReadState_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneIndexSegmentReadState *state, NSString *dataCodec, NSString *dataExtension, NSString *metaCodec, NSString *metaExtension) {
-  OrgApacheLuceneCodecsLucene53Lucene53NormsProducer *self = [OrgApacheLuceneCodecsLucene53Lucene53NormsProducer alloc];
-  OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_initWithOrgApacheLuceneIndexSegmentReadState_withNSString_withNSString_withNSString_withNSString_(self, state, dataCodec, dataExtension, metaCodec, metaExtension);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer, initWithOrgApacheLuceneIndexSegmentReadState_withNSString_withNSString_withNSString_withNSString_, state, dataCodec, dataExtension, metaCodec, metaExtension)
+}
+
+OrgApacheLuceneCodecsLucene53Lucene53NormsProducer *create_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_initWithOrgApacheLuceneIndexSegmentReadState_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneIndexSegmentReadState *state, NSString *dataCodec, NSString *dataExtension, NSString *metaCodec, NSString *metaExtension) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer, initWithOrgApacheLuceneIndexSegmentReadState_withNSString_withNSString_withNSString_withNSString_, state, dataCodec, dataExtension, metaCodec, metaExtension)
 }
 
 void OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_readFieldsWithOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneIndexFieldInfos_(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer *self, OrgApacheLuceneStoreIndexInput *meta, OrgApacheLuceneIndexFieldInfos *infos) {
@@ -317,12 +328,12 @@ void OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_readFieldsWithOrgApacheL
   while (fieldNumber != -1) {
     OrgApacheLuceneIndexFieldInfo *info = [((OrgApacheLuceneIndexFieldInfos *) nil_chk(infos)) fieldInfoWithInt:fieldNumber];
     if (info == nil) {
-      @throw [new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$I", @"Invalid field number: ", fieldNumber), meta) autorelease];
+      @throw create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$I", @"Invalid field number: ", fieldNumber), meta);
     }
     else if (![info hasNorms]) {
-      @throw [new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$$", @"Invalid field: ", info->name_), meta) autorelease];
+      @throw create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$$", @"Invalid field: ", info->name_), meta);
     }
-    OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_NormsEntry *entry_ = [new_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_NormsEntry_init() autorelease];
+    OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_NormsEntry *entry_ = create_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_NormsEntry_init();
     entry_->bytesPerValue_ = [meta readByte];
     switch (entry_->bytesPerValue_) {
       case 0:
@@ -332,10 +343,10 @@ void OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_readFieldsWithOrgApacheL
       case 8:
       break;
       default:
-      @throw [new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$B$$", @"Invalid bytesPerValue: ", entry_->bytesPerValue_, @", field: ", ((OrgApacheLuceneIndexFieldInfo *) nil_chk(info))->name_), meta) autorelease];
+      @throw create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$B$$", @"Invalid bytesPerValue: ", entry_->bytesPerValue_, @", field: ", info->name_), meta);
     }
     entry_->offset_ = [meta readLong];
-    [((id<JavaUtilMap>) nil_chk(self->norms_)) putWithId:JavaLangInteger_valueOfWithInt_(((OrgApacheLuceneIndexFieldInfo *) nil_chk(info))->number_) withId:entry_];
+    [((id<JavaUtilMap>) nil_chk(self->norms_)) putWithId:JavaLangInteger_valueOfWithInt_(info->number_) withId:entry_];
     fieldNumber = [meta readVInt];
   }
 }
@@ -353,7 +364,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", NULL, NULL, 0x0, NULL, NULL },
+    { "init", "NormsEntry", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "bytesPerValue_", NULL, 0x0, "B", NULL, NULL, .constantValue.asLong = 0 },
@@ -370,9 +381,11 @@ void OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_NormsEntry_init(OrgApach
 }
 
 OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_NormsEntry *new_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_NormsEntry_init() {
-  OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_NormsEntry *self = [OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_NormsEntry alloc];
-  OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_NormsEntry_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_NormsEntry, init)
+}
+
+OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_NormsEntry *create_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_NormsEntry_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_NormsEntry, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_NormsEntry)
@@ -409,9 +422,11 @@ void OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$1_initWithLong_(OrgApac
 }
 
 OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$1 *new_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$1_initWithLong_(jlong capture$0) {
-  OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$1 *self = [OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$1 alloc];
-  OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$1_initWithLong_(self, capture$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$1, initWithLong_, capture$0)
+}
+
+OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$1 *create_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$1_initWithLong_(jlong capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$1, initWithLong_, capture$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$1)
@@ -423,7 +438,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene53Lucene53NormsProdu
     return [((id<OrgApacheLuceneStoreRandomAccessInput>) nil_chk(val$slice_)) readByteWithLong:docID];
   }
   @catch (JavaIoIOException *e) {
-    @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(e) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSException_(e);
   }
 }
 
@@ -458,9 +473,11 @@ void OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$2_initWithOrgApacheLuce
 }
 
 OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$2 *new_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$2_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> capture$0) {
-  OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$2 *self = [OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$2 alloc];
-  OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$2_initWithOrgApacheLuceneStoreRandomAccessInput_(self, capture$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$2, initWithOrgApacheLuceneStoreRandomAccessInput_, capture$0)
+}
+
+OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$2 *create_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$2_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$2, initWithOrgApacheLuceneStoreRandomAccessInput_, capture$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$2)
@@ -472,7 +489,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene53Lucene53NormsProdu
     return [((id<OrgApacheLuceneStoreRandomAccessInput>) nil_chk(val$slice_)) readShortWithLong:JreLShift64(((jlong) docID), 1LL)];
   }
   @catch (JavaIoIOException *e) {
-    @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(e) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSException_(e);
   }
 }
 
@@ -507,9 +524,11 @@ void OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$3_initWithOrgApacheLuce
 }
 
 OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$3 *new_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$3_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> capture$0) {
-  OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$3 *self = [OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$3 alloc];
-  OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$3_initWithOrgApacheLuceneStoreRandomAccessInput_(self, capture$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$3, initWithOrgApacheLuceneStoreRandomAccessInput_, capture$0)
+}
+
+OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$3 *create_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$3_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$3, initWithOrgApacheLuceneStoreRandomAccessInput_, capture$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$3)
@@ -521,7 +540,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene53Lucene53NormsProdu
     return [((id<OrgApacheLuceneStoreRandomAccessInput>) nil_chk(val$slice_)) readIntWithLong:JreLShift64(((jlong) docID), 2LL)];
   }
   @catch (JavaIoIOException *e) {
-    @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(e) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSException_(e);
   }
 }
 
@@ -556,9 +575,11 @@ void OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$4_initWithOrgApacheLuce
 }
 
 OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$4 *new_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$4_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> capture$0) {
-  OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$4 *self = [OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$4 alloc];
-  OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$4_initWithOrgApacheLuceneStoreRandomAccessInput_(self, capture$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$4, initWithOrgApacheLuceneStoreRandomAccessInput_, capture$0)
+}
+
+OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$4 *create_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$4_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$4, initWithOrgApacheLuceneStoreRandomAccessInput_, capture$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$4)
@@ -570,7 +591,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene53Lucene53NormsProdu
     return [((id<OrgApacheLuceneStoreRandomAccessInput>) nil_chk(val$slice_)) readLongWithLong:JreLShift64(((jlong) docID), 3LL)];
   }
   @catch (JavaIoIOException *e) {
-    @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(e) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSException_(e);
   }
 }
 
@@ -605,9 +626,11 @@ void OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$5_initWithOrgApacheLuce
 }
 
 OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$5 *new_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$5_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> capture$0) {
-  OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$5 *self = [OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$5 alloc];
-  OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$5_initWithOrgApacheLuceneStoreRandomAccessInput_(self, capture$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$5, initWithOrgApacheLuceneStoreRandomAccessInput_, capture$0)
+}
+
+OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$5 *create_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$5_initWithOrgApacheLuceneStoreRandomAccessInput_(id<OrgApacheLuceneStoreRandomAccessInput> capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$5, initWithOrgApacheLuceneStoreRandomAccessInput_, capture$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$5)

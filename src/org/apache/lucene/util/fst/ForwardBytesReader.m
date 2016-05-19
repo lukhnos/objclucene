@@ -84,9 +84,11 @@ void OrgApacheLuceneUtilFstForwardBytesReader_initWithByteArray_(OrgApacheLucene
 }
 
 OrgApacheLuceneUtilFstForwardBytesReader *new_OrgApacheLuceneUtilFstForwardBytesReader_initWithByteArray_(IOSByteArray *bytes) {
-  OrgApacheLuceneUtilFstForwardBytesReader *self = [OrgApacheLuceneUtilFstForwardBytesReader alloc];
-  OrgApacheLuceneUtilFstForwardBytesReader_initWithByteArray_(self, bytes);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFstForwardBytesReader, initWithByteArray_, bytes)
+}
+
+OrgApacheLuceneUtilFstForwardBytesReader *create_OrgApacheLuceneUtilFstForwardBytesReader_initWithByteArray_(IOSByteArray *bytes) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFstForwardBytesReader, initWithByteArray_, bytes)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstForwardBytesReader)

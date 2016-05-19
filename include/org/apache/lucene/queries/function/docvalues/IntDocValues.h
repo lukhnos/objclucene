@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues_RESTRICT
-#define OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues 0
 #else
-#define OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues
 
-#if !defined (_OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues_) && (OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues_
+#if !defined (OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues || defined(INCLUDE_OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues))
+#define OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues_
 
-#define OrgApacheLuceneQueriesFunctionFunctionValues_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionFunctionValues_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionFunctionValues 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionFunctionValues 1
 #include "org/apache/lucene/queries/function/FunctionValues.h"
 
 @class OrgApacheLuceneIndexIndexReader;
@@ -25,6 +25,10 @@
 @class OrgApacheLuceneQueriesFunctionValueSource;
 @class OrgApacheLuceneQueriesFunctionValueSourceScorer;
 
+/*!
+ @brief Abstract <code>FunctionValues</code> implementation which supports retrieving int values.
+ Implementations can control how the int values are loaded through <code>intVal(int)</code>
+ */
 @interface OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues : OrgApacheLuceneQueriesFunctionFunctionValues {
  @public
   OrgApacheLuceneQueriesFunctionValueSource *vs_;
@@ -72,4 +76,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues")

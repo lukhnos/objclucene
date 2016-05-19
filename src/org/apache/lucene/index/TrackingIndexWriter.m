@@ -121,15 +121,15 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTrackingIndexWriter, indexingGen_, JavaU
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneIndexIndexWriter:", "TrackingIndexWriter", NULL, 0x1, NULL, NULL },
-    { "updateDocumentWithOrgApacheLuceneIndexTerm:withJavaLangIterable:", "updateDocument", "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "updateDocumentsWithOrgApacheLuceneIndexTerm:withJavaLangIterable:", "updateDocuments", "J", 0x1, "Ljava.io.IOException;", NULL },
+    { "updateDocumentWithOrgApacheLuceneIndexTerm:withJavaLangIterable:", "updateDocument", "J", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/Term;Ljava/lang/Iterable<+Lorg/apache/lucene/index/IndexableField;>;)J" },
+    { "updateDocumentsWithOrgApacheLuceneIndexTerm:withJavaLangIterable:", "updateDocuments", "J", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/Term;Ljava/lang/Iterable<+Ljava/lang/Iterable<+Lorg/apache/lucene/index/IndexableField;>;>;)J" },
     { "deleteDocumentsWithOrgApacheLuceneIndexTerm:", "deleteDocuments", "J", 0x1, "Ljava.io.IOException;", NULL },
     { "deleteDocumentsWithOrgApacheLuceneIndexTermArray:", "deleteDocuments", "J", 0x81, "Ljava.io.IOException;", NULL },
     { "deleteDocumentsWithOrgApacheLuceneSearchQuery:", "deleteDocuments", "J", 0x1, "Ljava.io.IOException;", NULL },
     { "deleteDocumentsWithOrgApacheLuceneSearchQueryArray:", "deleteDocuments", "J", 0x81, "Ljava.io.IOException;", NULL },
     { "deleteAll", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "addDocumentWithJavaLangIterable:", "addDocument", "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "addDocumentsWithJavaLangIterable:", "addDocuments", "J", 0x1, "Ljava.io.IOException;", NULL },
+    { "addDocumentWithJavaLangIterable:", "addDocument", "J", 0x1, "Ljava.io.IOException;", "(Ljava/lang/Iterable<+Lorg/apache/lucene/index/IndexableField;>;)J" },
+    { "addDocumentsWithJavaLangIterable:", "addDocuments", "J", 0x1, "Ljava.io.IOException;", "(Ljava/lang/Iterable<+Ljava/lang/Iterable<+Lorg/apache/lucene/index/IndexableField;>;>;)J" },
     { "addIndexesWithOrgApacheLuceneStoreDirectoryArray:", "addIndexes", "J", 0x81, "Ljava.io.IOException;", NULL },
     { "addIndexesWithOrgApacheLuceneIndexCodecReaderArray:", "addIndexes", "J", 0x81, "Ljava.io.IOException;", NULL },
     { "getGeneration", NULL, "J", 0x1, NULL, NULL },
@@ -154,9 +154,11 @@ void OrgApacheLuceneIndexTrackingIndexWriter_initWithOrgApacheLuceneIndexIndexWr
 }
 
 OrgApacheLuceneIndexTrackingIndexWriter *new_OrgApacheLuceneIndexTrackingIndexWriter_initWithOrgApacheLuceneIndexIndexWriter_(OrgApacheLuceneIndexIndexWriter *writer) {
-  OrgApacheLuceneIndexTrackingIndexWriter *self = [OrgApacheLuceneIndexTrackingIndexWriter alloc];
-  OrgApacheLuceneIndexTrackingIndexWriter_initWithOrgApacheLuceneIndexIndexWriter_(self, writer);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexTrackingIndexWriter, initWithOrgApacheLuceneIndexIndexWriter_, writer)
+}
+
+OrgApacheLuceneIndexTrackingIndexWriter *create_OrgApacheLuceneIndexTrackingIndexWriter_initWithOrgApacheLuceneIndexIndexWriter_(OrgApacheLuceneIndexIndexWriter *writer) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexTrackingIndexWriter, initWithOrgApacheLuceneIndexIndexWriter_, writer)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexTrackingIndexWriter)

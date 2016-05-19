@@ -28,21 +28,27 @@
 
 @end
 
-static JavaLangLong *OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_NO_OUTPUT_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs, NO_OUTPUT_, JavaLangLong *)
+inline JavaLangLong *OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_get_NO_OUTPUT();
+static JavaLangLong *OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_NO_OUTPUT;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs, NO_OUTPUT, JavaLangLong *)
 
-static OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs *OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_singletonShare_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs, singletonShare_, OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs *)
+inline OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs *OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_get_singletonShare();
+static OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs *OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_singletonShare;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs, singletonShare, OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs *)
 
-static OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs *OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_singletonNoShare_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs, singletonNoShare_, OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs *)
+inline OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs *OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_get_singletonNoShare();
+static OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs *OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_singletonNoShare;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs, singletonNoShare, OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs *)
 
-static jlong OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TWO_LONGS_NUM_BYTES_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs, TWO_LONGS_NUM_BYTES_, jlong)
+inline jlong OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_get_TWO_LONGS_NUM_BYTES();
+static jlong OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TWO_LONGS_NUM_BYTES;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs, TWO_LONGS_NUM_BYTES, jlong)
 
 __attribute__((unused)) static void OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_initWithBoolean_(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs *self, jboolean doShare);
 
 __attribute__((unused)) static OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs *new_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_initWithBoolean_(jboolean doShare) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs *create_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_initWithBoolean_(jboolean doShare);
 
 __attribute__((unused)) static jboolean OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithJavaLangLong_(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs *self, JavaLangLong *o);
 
@@ -63,7 +69,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs)
 
 - (JavaLangLong *)getWithLong:(jlong)v {
   if (v == 0) {
-    return OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_NO_OUTPUT_;
+    return OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_NO_OUTPUT;
   }
   else {
     return JavaLangLong_valueOfWithLong_(v);
@@ -72,17 +78,17 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs)
 
 - (OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs *)getWithLong:(jlong)first
                                                                  withLong:(jlong)second {
-  return [new_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs_initWithLong_withLong_(first, second) autorelease];
+  return create_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs_initWithLong_withLong_(first, second);
 }
 
 - (JavaLangLong *)commonWithId:(id)_output1
                         withId:(id)_output2 {
   JreAssert((OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithId_withBoolean_(self, _output1, false)), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:114 condition failed: assert valid(_output1, false);"));
   JreAssert((OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithId_withBoolean_(self, _output2, false)), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:115 condition failed: assert valid(_output2, false);"));
-  JavaLangLong *output1 = (JavaLangLong *) check_class_cast(_output1, [JavaLangLong class]);
-  JavaLangLong *output2 = (JavaLangLong *) check_class_cast(_output2, [JavaLangLong class]);
-  if (output1 == OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_NO_OUTPUT_ || output2 == OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_NO_OUTPUT_) {
-    return OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_NO_OUTPUT_;
+  JavaLangLong *output1 = (JavaLangLong *) cast_chk(_output1, [JavaLangLong class]);
+  JavaLangLong *output2 = (JavaLangLong *) cast_chk(_output2, [JavaLangLong class]);
+  if (output1 == OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_NO_OUTPUT || output2 == OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_NO_OUTPUT) {
+    return OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_NO_OUTPUT;
   }
   else if (doShare_) {
     JreAssert(([((JavaLangLong *) nil_chk(output1)) longLongValue] > 0), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:121 condition failed: assert output1 > 0;"));
@@ -93,7 +99,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs)
     return output1;
   }
   else {
-    return OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_NO_OUTPUT_;
+    return OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_NO_OUTPUT;
   }
 }
 
@@ -101,14 +107,14 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs)
                           withId:(id)_inc {
   JreAssert((OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithId_withBoolean_(self, _output, false)), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:133 condition failed: assert valid(_output, false);"));
   JreAssert((OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithId_withBoolean_(self, _inc, false)), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:134 condition failed: assert valid(_inc, false);"));
-  JavaLangLong *output = (JavaLangLong *) check_class_cast(_output, [JavaLangLong class]);
-  JavaLangLong *inc = (JavaLangLong *) check_class_cast(_inc, [JavaLangLong class]);
+  JavaLangLong *output = (JavaLangLong *) cast_chk(_output, [JavaLangLong class]);
+  JavaLangLong *inc = (JavaLangLong *) cast_chk(_inc, [JavaLangLong class]);
   JreAssert(([((JavaLangLong *) nil_chk(output)) longLongValue] >= [((JavaLangLong *) nil_chk(inc)) longLongValue]), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:137 condition failed: assert output >= inc;"));
-  if (inc == OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_NO_OUTPUT_) {
+  if (inc == OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_NO_OUTPUT) {
     return output;
   }
   else if ([output isEqual:inc]) {
-    return OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_NO_OUTPUT_;
+    return OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_NO_OUTPUT;
   }
   else {
     return JavaLangLong_valueOfWithLong_([output longLongValue] - [inc longLongValue]);
@@ -119,13 +125,13 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs)
          withId:(id)_output {
   JreAssert((OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithId_withBoolean_(self, _prefix, false)), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:150 condition failed: assert valid(_prefix, false);"));
   JreAssert((OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithId_withBoolean_(self, _output, true)), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:151 condition failed: assert valid(_output, true);"));
-  JavaLangLong *prefix = (JavaLangLong *) check_class_cast(_prefix, [JavaLangLong class]);
+  JavaLangLong *prefix = (JavaLangLong *) cast_chk(_prefix, [JavaLangLong class]);
   if ([_output isKindOfClass:[JavaLangLong class]]) {
-    JavaLangLong *output = (JavaLangLong *) check_class_cast(_output, [JavaLangLong class]);
-    if (prefix == OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_NO_OUTPUT_) {
+    JavaLangLong *output = (JavaLangLong *) cast_chk(_output, [JavaLangLong class]);
+    if (prefix == OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_NO_OUTPUT) {
       return output;
     }
-    else if (output == OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_NO_OUTPUT_) {
+    else if (output == OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_NO_OUTPUT) {
       return prefix;
     }
     else {
@@ -133,9 +139,9 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs)
     }
   }
   else {
-    OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs *output = (OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs *) check_class_cast(_output, [OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs class]);
+    OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs *output = (OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs *) cast_chk(_output, [OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs class]);
     jlong v = [((JavaLangLong *) nil_chk(prefix)) longLongValue];
-    return [new_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs_initWithLong_withLong_(((OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs *) nil_chk(output))->first_ + v, output->second_ + v) autorelease];
+    return create_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs_initWithLong_withLong_(((OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs *) nil_chk(output))->first_ + v, output->second_ + v);
   }
 }
 
@@ -143,11 +149,11 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs)
 withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
   JreAssert((OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithId_withBoolean_(self, _output, true)), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:171 condition failed: assert valid(_output, true);"));
   if ([_output isKindOfClass:[JavaLangLong class]]) {
-    JavaLangLong *output = (JavaLangLong *) check_class_cast(_output, [JavaLangLong class]);
+    JavaLangLong *output = (JavaLangLong *) cast_chk(_output, [JavaLangLong class]);
     [((OrgApacheLuceneStoreDataOutput *) nil_chk(outArg)) writeVLongWithLong:JreLShift64([((JavaLangLong *) nil_chk(output)) longLongValue], 1)];
   }
   else {
-    OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs *output = (OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs *) check_class_cast(_output, [OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs class]);
+    OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs *output = (OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs *) cast_chk(_output, [OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs class]);
     [((OrgApacheLuceneStoreDataOutput *) nil_chk(outArg)) writeVLongWithLong:(JreLShift64(((OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs *) nil_chk(output))->first_, 1)) | 1];
     [outArg writeVLongWithLong:output->second_];
   }
@@ -158,7 +164,7 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
   if ((code & 1) == 0) {
     jlong v = JreURShift64(code, 1);
     if (v == 0) {
-      return OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_NO_OUTPUT_;
+      return OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_NO_OUTPUT;
     }
     else {
       return JavaLangLong_valueOfWithLong_(v);
@@ -167,7 +173,7 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
   else {
     jlong first = JreURShift64(code, 1);
     jlong second = [inArg readVLong];
-    return [new_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs_initWithLong_withLong_(first, second) autorelease];
+    return create_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs_initWithLong_withLong_(first, second);
   }
 }
 
@@ -181,7 +187,7 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
 }
 
 - (id)getNoOutput {
-  return OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_NO_OUTPUT_;
+  return OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_NO_OUTPUT;
 }
 
 - (NSString *)outputToStringWithId:(id)output {
@@ -192,25 +198,25 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
            withId:(id)second {
   JreAssert((OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithId_withBoolean_(self, first, false)), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:232 condition failed: assert valid(first, false);"));
   JreAssert((OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithId_withBoolean_(self, second, false)), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:233 condition failed: assert valid(second, false);"));
-  return [new_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs_initWithLong_withLong_([((JavaLangLong *) nil_chk((JavaLangLong *) check_class_cast(first, [JavaLangLong class]))) longLongValue], [((JavaLangLong *) nil_chk((JavaLangLong *) check_class_cast(second, [JavaLangLong class]))) longLongValue]) autorelease];
+  return create_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs_initWithLong_withLong_([((JavaLangLong *) nil_chk((JavaLangLong *) cast_chk(first, [JavaLangLong class]))) longLongValue], [((JavaLangLong *) nil_chk((JavaLangLong *) cast_chk(second, [JavaLangLong class]))) longLongValue]);
 }
 
 - (jlong)ramBytesUsedWithId:(id)o {
   if ([o isKindOfClass:[JavaLangLong class]]) {
-    return OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithJavaLangLong_((JavaLangLong *) check_class_cast(o, [JavaLangLong class]));
+    return OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithJavaLangLong_((JavaLangLong *) cast_chk(o, [JavaLangLong class]));
   }
   else {
     JreAssert(([o isKindOfClass:[OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs class]]), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:244 condition failed: assert o instanceof TwoLongs;"));
-    return OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TWO_LONGS_NUM_BYTES_;
+    return OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TWO_LONGS_NUM_BYTES;
   }
 }
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_NO_OUTPUT_, new_JavaLangLong_initWithLong_(0));
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_singletonShare_, new_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_initWithBoolean_(true));
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_singletonNoShare_, new_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_initWithBoolean_(false));
-    OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TWO_LONGS_NUM_BYTES_ = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfWithId_([new_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs_initWithLong_withLong_(0, 0) autorelease]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_NO_OUTPUT, new_JavaLangLong_initWithLong_(0));
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_singletonShare, new_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_initWithBoolean_(true));
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_singletonNoShare, new_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_initWithBoolean_(false));
+    OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TWO_LONGS_NUM_BYTES = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfWithId_(create_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs_initWithLong_withLong_(0, 0));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs)
   }
 }
@@ -221,24 +227,24 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
     { "getSingletonWithBoolean:", "getSingleton", "Lorg.apache.lucene.util.fst.UpToTwoPositiveIntOutputs;", 0x9, NULL, NULL },
     { "getWithLong:", "get", "Ljava.lang.Long;", 0x1, NULL, NULL },
     { "getWithLong:withLong:", "get", "Lorg.apache.lucene.util.fst.UpToTwoPositiveIntOutputs$TwoLongs;", 0x1, NULL, NULL },
-    { "commonWithId:withId:", "common", "Ljava.lang.Long;", 0x1, NULL, NULL },
-    { "subtractWithId:withId:", "subtract", "Ljava.lang.Long;", 0x1, NULL, NULL },
-    { "addWithId:withId:", "add", "Ljava.lang.Object;", 0x1, NULL, NULL },
-    { "writeWithId:withOrgApacheLuceneStoreDataOutput:", "write", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "readWithOrgApacheLuceneStoreDataInput:", "read", "Ljava.lang.Object;", 0x1, "Ljava.io.IOException;", NULL },
+    { "commonWithId:withId:", "common", "Ljava.lang.Long;", 0x1, NULL, "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Long;" },
+    { "subtractWithId:withId:", "subtract", "Ljava.lang.Long;", 0x1, NULL, "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Long;" },
+    { "addWithId:withId:", "add", "Ljava.lang.Object;", 0x1, NULL, "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;" },
+    { "writeWithId:withOrgApacheLuceneStoreDataOutput:", "write", "V", 0x1, "Ljava.io.IOException;", "(Ljava/lang/Object;Lorg/apache/lucene/store/DataOutput;)V" },
+    { "readWithOrgApacheLuceneStoreDataInput:", "read", "Ljava.lang.Object;", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/store/DataInput;)Ljava/lang/Object;" },
     { "validWithJavaLangLong:", "valid", "Z", 0x2, NULL, NULL },
     { "validWithId:withBoolean:", "valid", "Z", 0x2, NULL, NULL },
-    { "getNoOutput", NULL, "Ljava.lang.Object;", 0x1, NULL, NULL },
-    { "outputToStringWithId:", "outputToString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "mergeWithId:withId:", "merge", "Ljava.lang.Object;", 0x1, NULL, NULL },
-    { "ramBytesUsedWithId:", "ramBytesUsed", "J", 0x1, NULL, NULL },
+    { "getNoOutput", NULL, "Ljava.lang.Object;", 0x1, NULL, "()Ljava/lang/Object;" },
+    { "outputToStringWithId:", "outputToString", "Ljava.lang.String;", 0x1, NULL, "(Ljava/lang/Object;)Ljava/lang/String;" },
+    { "mergeWithId:withId:", "merge", "Ljava.lang.Object;", 0x1, NULL, "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;" },
+    { "ramBytesUsedWithId:", "ramBytesUsed", "J", 0x1, NULL, "(Ljava/lang/Object;)J" },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "NO_OUTPUT_", NULL, 0x1a, "Ljava.lang.Long;", &OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_NO_OUTPUT_, NULL, .constantValue.asLong = 0 },
+    { "NO_OUTPUT", "NO_OUTPUT", 0x1a, "Ljava.lang.Long;", &OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_NO_OUTPUT, NULL, .constantValue.asLong = 0 },
     { "doShare_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "singletonShare_", NULL, 0x1a, "Lorg.apache.lucene.util.fst.UpToTwoPositiveIntOutputs;", &OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_singletonShare_, NULL, .constantValue.asLong = 0 },
-    { "singletonNoShare_", NULL, 0x1a, "Lorg.apache.lucene.util.fst.UpToTwoPositiveIntOutputs;", &OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_singletonNoShare_, NULL, .constantValue.asLong = 0 },
-    { "TWO_LONGS_NUM_BYTES_", NULL, 0x1a, "J", &OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TWO_LONGS_NUM_BYTES_, NULL, .constantValue.asLong = 0 },
+    { "singletonShare", "singletonShare", 0x1a, "Lorg.apache.lucene.util.fst.UpToTwoPositiveIntOutputs;", &OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_singletonShare, NULL, .constantValue.asLong = 0 },
+    { "singletonNoShare", "singletonNoShare", 0x1a, "Lorg.apache.lucene.util.fst.UpToTwoPositiveIntOutputs;", &OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_singletonNoShare, NULL, .constantValue.asLong = 0 },
+    { "TWO_LONGS_NUM_BYTES", "TWO_LONGS_NUM_BYTES", 0x1a, "J", &OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TWO_LONGS_NUM_BYTES, NULL, .constantValue.asLong = 0 },
   };
   static const char *superclass_type_args[] = {"Ljava.lang.Object;"};
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.fst.UpToTwoPositiveIntOutputs$TwoLongs;"};
@@ -254,33 +260,35 @@ void OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_initWithBoolean_(OrgApacheL
 }
 
 OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs *new_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_initWithBoolean_(jboolean doShare) {
-  OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs *self = [OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs alloc];
-  OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_initWithBoolean_(self, doShare);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs, initWithBoolean_, doShare)
+}
+
+OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs *create_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_initWithBoolean_(jboolean doShare) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs, initWithBoolean_, doShare)
 }
 
 OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs *OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_getSingletonWithBoolean_(jboolean doShare) {
   OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_initialize();
-  return doShare ? OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_singletonShare_ : OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_singletonNoShare_;
+  return doShare ? OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_singletonShare : OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_singletonNoShare;
 }
 
 jboolean OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithJavaLangLong_(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs *self, JavaLangLong *o) {
   JreAssert((o != nil), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:202 condition failed: assert o != null;"));
   JreAssert(([o isKindOfClass:[JavaLangLong class]]), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:203 condition failed: assert o instanceof Long;"));
-  JreAssert((o == OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_NO_OUTPUT_ || [((JavaLangLong *) nil_chk(o)) longLongValue] > 0), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:204 condition failed: assert o == NO_OUTPUT || o > 0;"));
+  JreAssert((o == OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_NO_OUTPUT || [((JavaLangLong *) nil_chk(o)) longLongValue] > 0), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:204 condition failed: assert o == NO_OUTPUT || o > 0;"));
   return true;
 }
 
 jboolean OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithId_withBoolean_(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs *self, id _o, jboolean allowDouble) {
   if (!allowDouble) {
     JreAssert(([_o isKindOfClass:[JavaLangLong class]]), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:211 condition failed: assert _o instanceof Long;"));
-    return OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithJavaLangLong_(self, (JavaLangLong *) check_class_cast(_o, [JavaLangLong class]));
+    return OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithJavaLangLong_(self, (JavaLangLong *) cast_chk(_o, [JavaLangLong class]));
   }
   else if ([_o isKindOfClass:[OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs class]]) {
     return true;
   }
   else {
-    return OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithJavaLangLong_(self, (JavaLangLong *) check_class_cast(_o, [JavaLangLong class]));
+    return OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithJavaLangLong_(self, (JavaLangLong *) cast_chk(_o, [JavaLangLong class]));
   }
 }
 
@@ -300,7 +308,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs
 
 - (jboolean)isEqual:(id)_other {
   if ([_other isKindOfClass:[OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs class]]) {
-    OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs *other = (OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs *) check_class_cast(_other, [OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs class]);
+    OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs *other = (OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs *) cast_chk(_other, [OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs class]);
     return first_ == ((OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs *) nil_chk(other))->first_ && second_ == other->second_;
   }
   else {
@@ -338,9 +346,11 @@ void OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs_initWithLong_withL
 }
 
 OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs *new_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs_initWithLong_withLong_(jlong first, jlong second) {
-  OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs *self = [OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs alloc];
-  OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs_initWithLong_withLong_(self, first, second);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs, initWithLong_withLong_, first, second)
+}
+
+OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs *create_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs_initWithLong_withLong_(jlong first, jlong second) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs, initWithLong_withLong_, first, second)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs)

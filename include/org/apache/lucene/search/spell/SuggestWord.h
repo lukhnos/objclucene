@@ -5,26 +5,43 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSpellSuggestWord_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSpellSuggestWord_RESTRICT
-#define OrgApacheLuceneSearchSpellSuggestWord_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpellSuggestWord")
+#ifdef RESTRICT_OrgApacheLuceneSearchSpellSuggestWord
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpellSuggestWord 0
 #else
-#define OrgApacheLuceneSearchSpellSuggestWord_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpellSuggestWord 1
 #endif
-#undef OrgApacheLuceneSearchSpellSuggestWord_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSpellSuggestWord
 
-#if !defined (_OrgApacheLuceneSearchSpellSuggestWord_) && (OrgApacheLuceneSearchSpellSuggestWord_INCLUDE_ALL || OrgApacheLuceneSearchSpellSuggestWord_INCLUDE)
-#define _OrgApacheLuceneSearchSpellSuggestWord_
+#if !defined (OrgApacheLuceneSearchSpellSuggestWord_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpellSuggestWord || defined(INCLUDE_OrgApacheLuceneSearchSpellSuggestWord))
+#define OrgApacheLuceneSearchSpellSuggestWord_
 
+/*!
+ @brief SuggestWord, used in suggestSimilar method in SpellChecker class.
+ <p>
+ Default sort is first by score, then by frequency.
+ */
 @interface OrgApacheLuceneSearchSpellSuggestWord : NSObject {
  @public
+  /*!
+   @brief the score of the word
+   */
   jfloat score_;
+  /*!
+   @brief The freq of the word
+   */
   jint freq_;
+  /*!
+   @brief the suggested word
+   */
   NSString *string_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new empty suggestion with null text.
+ */
 - (instancetype)init;
 
 @end
@@ -37,8 +54,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSpellSuggestWord_init(OrgApacheLucen
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSpellSuggestWord *new_OrgApacheLuceneSearchSpellSuggestWord_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpellSuggestWord *create_OrgApacheLuceneSearchSpellSuggestWord_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellSuggestWord)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSpellSuggestWord_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpellSuggestWord")

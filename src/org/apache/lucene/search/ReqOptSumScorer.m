@@ -44,8 +44,8 @@
   if (optScorer_ == nil) {
     return reqScore;
   }
-  jint optScorerDoc = [((OrgApacheLuceneSearchScorer *) nil_chk(optScorer_)) docID];
-  if (optScorerDoc < curDoc && (optScorerDoc = [optScorer_ advanceWithInt:curDoc]) == OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS) {
+  jint optScorerDoc = [optScorer_ docID];
+  if (optScorerDoc < curDoc && (optScorerDoc = [((OrgApacheLuceneSearchScorer *) nil_chk(optScorer_)) advanceWithInt:curDoc]) == OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS) {
     JreStrongAssign(&optScorer_, nil);
     return reqScore;
   }
@@ -58,9 +58,9 @@
 }
 
 - (id<JavaUtilCollection>)getChildren {
-  JavaUtilArrayList *children = [new_JavaUtilArrayList_initWithInt_(2) autorelease];
-  [children addWithId:[new_OrgApacheLuceneSearchScorer_ChildScorer_initWithOrgApacheLuceneSearchScorer_withNSString_(reqScorer_, @"MUST") autorelease]];
-  [children addWithId:[new_OrgApacheLuceneSearchScorer_ChildScorer_initWithOrgApacheLuceneSearchScorer_withNSString_(optScorer_, @"SHOULD") autorelease]];
+  JavaUtilArrayList *children = create_JavaUtilArrayList_initWithInt_(2);
+  [children addWithId:create_OrgApacheLuceneSearchScorer_ChildScorer_initWithOrgApacheLuceneSearchScorer_withNSString_(reqScorer_, @"MUST")];
+  [children addWithId:create_OrgApacheLuceneSearchScorer_ChildScorer_initWithOrgApacheLuceneSearchScorer_withNSString_(optScorer_, @"SHOULD")];
   return children;
 }
 
@@ -83,7 +83,7 @@
     { "docID", NULL, "I", 0x1, NULL, NULL },
     { "score", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
     { "freq", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "getChildren", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildren", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/search/Scorer$ChildScorer;>;" },
     { "cost", NULL, "J", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -105,9 +105,11 @@ void OrgApacheLuceneSearchReqOptSumScorer_initWithOrgApacheLuceneSearchScorer_wi
 }
 
 OrgApacheLuceneSearchReqOptSumScorer *new_OrgApacheLuceneSearchReqOptSumScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *reqScorer, OrgApacheLuceneSearchScorer *optScorer) {
-  OrgApacheLuceneSearchReqOptSumScorer *self = [OrgApacheLuceneSearchReqOptSumScorer alloc];
-  OrgApacheLuceneSearchReqOptSumScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(self, reqScorer, optScorer);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchReqOptSumScorer, initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_, reqScorer, optScorer)
+}
+
+OrgApacheLuceneSearchReqOptSumScorer *create_OrgApacheLuceneSearchReqOptSumScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *reqScorer, OrgApacheLuceneSearchScorer *optScorer) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchReqOptSumScorer, initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_, reqScorer, optScorer)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchReqOptSumScorer)

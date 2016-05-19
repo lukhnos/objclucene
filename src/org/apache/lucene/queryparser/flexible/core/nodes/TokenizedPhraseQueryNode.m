@@ -26,7 +26,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (NSString *)description {
   if ([self getChildren] == nil || [((id<JavaUtilList>) nil_chk([self getChildren])) size] == 0) return @"<tokenizedphrase/>";
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   [sb appendWithNSString:@"<tokenizedtphrase>"];
   for (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> __strong child in nil_chk([self getChildren])) {
     [sb appendWithNSString:@"\n"];
@@ -38,7 +38,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escapeSyntaxParser {
   if ([self getChildren] == nil || [((id<JavaUtilList>) nil_chk([self getChildren])) size] == 0) return @"";
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   NSString *filler = @"";
   for (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> __strong child in nil_chk([self getChildren])) {
     [((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:filler])) appendWithJavaLangCharSequence:[((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(child)) toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:escapeSyntaxParser]];
@@ -48,7 +48,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode *clone = (OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode *) check_class_cast([super cloneTree], [OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode class]);
+  OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode *clone = (OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode *) cast_chk([super cloneTree], [OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode class]);
   return clone;
 }
 
@@ -58,7 +58,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     return nil;
   }
   else {
-    return [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) nil_chk(((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) check_protocol_cast([children getWithInt:0], OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_())))) getField];
+    return [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) nil_chk(((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) cast_check([children getWithInt:0], OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_())))) getField];
   }
 }
 
@@ -67,7 +67,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   if (children != nil) {
     for (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> __strong child in nil_chk([self getChildren])) {
       if ([OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_() isInstance:child]) {
-        [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) nil_chk(((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) check_protocol_cast(child, OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_())))) setFieldWithJavaLangCharSequence:fieldName];
+        [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) nil_chk(((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) cast_check(child, OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_())))) setFieldWithJavaLangCharSequence:fieldName];
       }
     }
   }
@@ -95,9 +95,11 @@ void OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode_init(Or
 }
 
 OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode_init() {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode *self = [OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode alloc];
-  OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode, init)
+}
+
+OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode *create_OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode)

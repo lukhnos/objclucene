@@ -40,7 +40,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFac
   if (dictionaryFiles_ != nil) {
     id<JavaUtilList> files = [self splitFileNamesWithNSString:dictionaryFiles_];
     if ([((id<JavaUtilList>) nil_chk(files)) size] > 0) {
-      OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder *builder = [new_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder_initWithBoolean_(ignoreCase_) autorelease];
+      OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder *builder = create_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder_initWithBoolean_(ignoreCase_);
       for (NSString * __strong file in files) {
         id<JavaUtilList> list = [self getLinesWithOrgApacheLuceneAnalysisUtilResourceLoader:loader withNSString:[((NSString *) nil_chk(file)) trim]];
         for (NSString * __strong line in nil_chk(list)) {
@@ -58,7 +58,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFac
 }
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  return dictionary_ == nil ? input : [new_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap_(input, dictionary_) autorelease];
+  return dictionary_ == nil ? input : create_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap_(input, dictionary_);
 }
 
 - (void)dealloc {
@@ -69,7 +69,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFac
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "StemmerOverrideFilterFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "StemmerOverrideFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "informWithOrgApacheLuceneAnalysisUtilResourceLoader:", "inform", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "isIgnoreCase", NULL, "Z", 0x1, NULL, NULL },
     { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenStream;", 0x1, NULL, NULL },
@@ -90,14 +90,16 @@ void OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory_initWithJa
   JreStrongAssign(&self->dictionaryFiles_, [self getWithJavaUtilMap:args withNSString:@"dictionary"]);
   self->ignoreCase_ = [self getBooleanWithJavaUtilMap:args withNSString:@"ignoreCase" withBoolean:false];
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory *self = [OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory alloc];
-  OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory *create_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory)

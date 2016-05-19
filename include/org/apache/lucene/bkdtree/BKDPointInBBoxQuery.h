@@ -5,25 +5,31 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_INCLUDE_ALL")
-#if OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_RESTRICT
-#define OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneBkdtreeBKDPointInBBoxQuery")
+#ifdef RESTRICT_OrgApacheLuceneBkdtreeBKDPointInBBoxQuery
+#define INCLUDE_ALL_OrgApacheLuceneBkdtreeBKDPointInBBoxQuery 0
 #else
-#define OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneBkdtreeBKDPointInBBoxQuery 1
 #endif
-#undef OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneBkdtreeBKDPointInBBoxQuery
 
-#if !defined (_OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_) && (OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_INCLUDE_ALL || OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_INCLUDE)
-#define _OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_
+#if !defined (OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_) && (INCLUDE_ALL_OrgApacheLuceneBkdtreeBKDPointInBBoxQuery || defined(INCLUDE_OrgApacheLuceneBkdtreeBKDPointInBBoxQuery))
+#define OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_
 
-#define OrgApacheLuceneSearchQuery_RESTRICT 1
-#define OrgApacheLuceneSearchQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchQuery 1
+#define INCLUDE_OrgApacheLuceneSearchQuery 1
 #include "org/apache/lucene/search/Query.h"
 
 @class OrgApacheLuceneIndexIndexReader;
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchWeight;
 
+/*!
+ @brief Finds all previously indexed points that fall within the specified boundings box.
+ <p>The field must be indexed with <code>BKDTreeDocValuesFormat</code>, and <code>BKDPointField</code> added per document.
+ <p><b>NOTE</b>: for fastest performance, this allocates FixedBitSet(maxDoc) for each segment.  The score of each hit is the query boost.
+  
+ */
 @interface OrgApacheLuceneBkdtreeBKDPointInBBoxQuery : OrgApacheLuceneSearchQuery {
  @public
   NSString *field_;
@@ -35,6 +41,9 @@
 
 #pragma mark Public
 
+/*!
+ @brief Matches all points &gt;= minLon, minLat (inclusive) and &lt; maxLon, maxLat (exclusive).
+ */
 - (instancetype)initWithNSString:(NSString *)field
                       withDouble:(jdouble)minLat
                       withDouble:(jdouble)maxLat
@@ -62,8 +71,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_initWithNSStrin
 
 FOUNDATION_EXPORT OrgApacheLuceneBkdtreeBKDPointInBBoxQuery *new_OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_initWithNSString_withDouble_withDouble_withDouble_withDouble_(NSString *field, jdouble minLat, jdouble maxLat, jdouble minLon, jdouble maxLon) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneBkdtreeBKDPointInBBoxQuery *create_OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_initWithNSString_withDouble_withDouble_withDouble_withDouble_(NSString *field, jdouble minLat, jdouble maxLat, jdouble minLon, jdouble maxLon);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDPointInBBoxQuery)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneBkdtreeBKDPointInBBoxQuery")

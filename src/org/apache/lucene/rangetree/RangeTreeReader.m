@@ -27,8 +27,16 @@
   IOSLongArray *blockMinValues_;
 }
 
+/*!
+ @brief Adds all docs from the current block.
+ */
 - (jint)addAllWithOrgApacheLuceneRangetreeRangeTreeReader_QueryState:(OrgApacheLuceneRangetreeRangeTreeReader_QueryState *)state;
 
+/*!
+ @brief Adds docs from the current block, filtering each hit against the query min/max.
+ This
+ is only needed on the boundary blocks. 
+ */
 - (jint)addSomeWithOrgApacheLuceneRangetreeRangeTreeReader_QueryState:(OrgApacheLuceneRangetreeRangeTreeReader_QueryState *)state;
 
 @end
@@ -67,6 +75,8 @@ __attribute__((unused)) static void OrgApacheLuceneRangetreeRangeTreeReader_Quer
 
 __attribute__((unused)) static OrgApacheLuceneRangetreeRangeTreeReader_QueryState *new_OrgApacheLuceneRangetreeRangeTreeReader_QueryState_initWithOrgApacheLuceneStoreIndexInput_withInt_withLong_withLong_withOrgApacheLuceneIndexSortedNumericDocValues_(OrgApacheLuceneStoreIndexInput *inArg, jint maxDoc, jlong minValueIncl, jlong maxValueIncl, OrgApacheLuceneIndexSortedNumericDocValues *sndv) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneRangetreeRangeTreeReader_QueryState *create_OrgApacheLuceneRangetreeRangeTreeReader_QueryState_initWithOrgApacheLuceneStoreIndexInput_withInt_withLong_withLong_withOrgApacheLuceneIndexSortedNumericDocValues_(OrgApacheLuceneStoreIndexInput *inArg, jint maxDoc, jlong minValueIncl, jlong maxValueIncl, OrgApacheLuceneIndexSortedNumericDocValues *sndv);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeRangeTreeReader_QueryState)
 
 @implementation OrgApacheLuceneRangetreeRangeTreeReader
@@ -89,12 +99,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeRangeTreeReader_QueryState)
       withOrgApacheLuceneIndexSortedNumericDocValues:(OrgApacheLuceneIndexSortedNumericDocValues *)sndv
                                              withInt:(jint)maxDoc {
   if (minIncl > maxIncl) {
-    return JreLoadStatic(OrgApacheLuceneSearchDocIdSet, EMPTY_);
+    return JreLoadStatic(OrgApacheLuceneSearchDocIdSet, EMPTY);
   }
   if (minIncl > globalMaxValue_ || maxIncl < IOSLongArray_Get(nil_chk(blockMinValues_), 0)) {
-    return JreLoadStatic(OrgApacheLuceneSearchDocIdSet, EMPTY_);
+    return JreLoadStatic(OrgApacheLuceneSearchDocIdSet, EMPTY);
   }
-  OrgApacheLuceneRangetreeRangeTreeReader_QueryState *state = [new_OrgApacheLuceneRangetreeRangeTreeReader_QueryState_initWithOrgApacheLuceneStoreIndexInput_withInt_withLong_withLong_withOrgApacheLuceneIndexSortedNumericDocValues_([((OrgApacheLuceneStoreIndexInput *) nil_chk(in_)) clone], maxDoc, minIncl, maxIncl, sndv) autorelease];
+  OrgApacheLuceneRangetreeRangeTreeReader_QueryState *state = create_OrgApacheLuceneRangetreeRangeTreeReader_QueryState_initWithOrgApacheLuceneStoreIndexInput_withInt_withLong_withLong_withOrgApacheLuceneIndexSortedNumericDocValues_([((OrgApacheLuceneStoreIndexInput *) nil_chk(in_)) clone], maxDoc, minIncl, maxIncl, sndv);
   jint startBlockIncl = JavaUtilArrays_binarySearchWithLongArray_withLong_(blockMinValues_, minIncl);
   if (startBlockIncl >= 0) {
     while (startBlockIncl > 0 && IOSLongArray_Get(nil_chk(blockMinValues_), startBlockIncl) == minIncl) {
@@ -163,7 +173,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeRangeTreeReader_QueryState)
     { "addAllWithOrgApacheLuceneRangetreeRangeTreeReader_QueryState:", "addAll", "I", 0x2, "Ljava.io.IOException;", NULL },
     { "addSomeWithOrgApacheLuceneRangetreeRangeTreeReader_QueryState:", "addSome", "I", 0x2, "Ljava.io.IOException;", NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "blockFPs_", NULL, 0x12, "[J", NULL, NULL, .constantValue.asLong = 0 },
@@ -196,9 +206,11 @@ void OrgApacheLuceneRangetreeRangeTreeReader_initWithOrgApacheLuceneStoreIndexIn
 }
 
 OrgApacheLuceneRangetreeRangeTreeReader *new_OrgApacheLuceneRangetreeRangeTreeReader_initWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput *inArg) {
-  OrgApacheLuceneRangetreeRangeTreeReader *self = [OrgApacheLuceneRangetreeRangeTreeReader alloc];
-  OrgApacheLuceneRangetreeRangeTreeReader_initWithOrgApacheLuceneStoreIndexInput_(self, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneRangetreeRangeTreeReader, initWithOrgApacheLuceneStoreIndexInput_, inArg)
+}
+
+OrgApacheLuceneRangetreeRangeTreeReader *create_OrgApacheLuceneRangetreeRangeTreeReader_initWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput *inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneRangetreeRangeTreeReader, initWithOrgApacheLuceneStoreIndexInput_, inArg)
 }
 
 jint OrgApacheLuceneRangetreeRangeTreeReader_addAllWithOrgApacheLuceneRangetreeRangeTreeReader_QueryState_(OrgApacheLuceneRangetreeRangeTreeReader *self, OrgApacheLuceneRangetreeRangeTreeReader_QueryState *state) {
@@ -278,9 +290,11 @@ void OrgApacheLuceneRangetreeRangeTreeReader_QueryState_initWithOrgApacheLuceneS
 }
 
 OrgApacheLuceneRangetreeRangeTreeReader_QueryState *new_OrgApacheLuceneRangetreeRangeTreeReader_QueryState_initWithOrgApacheLuceneStoreIndexInput_withInt_withLong_withLong_withOrgApacheLuceneIndexSortedNumericDocValues_(OrgApacheLuceneStoreIndexInput *inArg, jint maxDoc, jlong minValueIncl, jlong maxValueIncl, OrgApacheLuceneIndexSortedNumericDocValues *sndv) {
-  OrgApacheLuceneRangetreeRangeTreeReader_QueryState *self = [OrgApacheLuceneRangetreeRangeTreeReader_QueryState alloc];
-  OrgApacheLuceneRangetreeRangeTreeReader_QueryState_initWithOrgApacheLuceneStoreIndexInput_withInt_withLong_withLong_withOrgApacheLuceneIndexSortedNumericDocValues_(self, inArg, maxDoc, minValueIncl, maxValueIncl, sndv);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneRangetreeRangeTreeReader_QueryState, initWithOrgApacheLuceneStoreIndexInput_withInt_withLong_withLong_withOrgApacheLuceneIndexSortedNumericDocValues_, inArg, maxDoc, minValueIncl, maxValueIncl, sndv)
+}
+
+OrgApacheLuceneRangetreeRangeTreeReader_QueryState *create_OrgApacheLuceneRangetreeRangeTreeReader_QueryState_initWithOrgApacheLuceneStoreIndexInput_withInt_withLong_withLong_withOrgApacheLuceneIndexSortedNumericDocValues_(OrgApacheLuceneStoreIndexInput *inArg, jint maxDoc, jlong minValueIncl, jlong maxValueIncl, OrgApacheLuceneIndexSortedNumericDocValues *sndv) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneRangetreeRangeTreeReader_QueryState, initWithOrgApacheLuceneStoreIndexInput_withInt_withLong_withLong_withOrgApacheLuceneIndexSortedNumericDocValues_, inArg, maxDoc, minValueIncl, maxValueIncl, sndv)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneRangetreeRangeTreeReader_QueryState)

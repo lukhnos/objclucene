@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_RESTRICT
-#define OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder 0
 #else
-#define OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder 1
 #endif
-#undef OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder
 
-#if !defined (_OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_) && (OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_INCLUDE_ALL || OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_INCLUDE)
-#define _OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_
+#if !defined (OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder))
+#define OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_
 
-#define OrgApacheLuceneQueryparserXmlFilterBuilder_RESTRICT 1
-#define OrgApacheLuceneQueryparserXmlFilterBuilder_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserXmlFilterBuilder 1
+#define INCLUDE_OrgApacheLuceneQueryparserXmlFilterBuilder 1
 #include "org/apache/lucene/queryparser/xml/FilterBuilder.h"
 
 @class OrgApacheLuceneQueryparserXmlFilterBuilderFactory;
@@ -25,6 +25,22 @@
 @class OrgApacheLuceneSearchFilter;
 @protocol OrgW3cDomElement;
 
+/*!
+ @brief Filters are cached in an LRU Cache keyed on the contained query or filter object.
+ Using this will
+ speed up overall performance for repeated uses of the same expensive query/filter. The sorts of
+ queries/filters likely to benefit from caching need not necessarily be complex - e.g. simple
+ TermQuerys with a large DF (document frequency) can be expensive  on large indexes.
+ A good example of this might be a term query on a field with only 2 possible  values -
+ "true" or "false". In a large index, querying or filtering on this field requires reading
+ millions  of document ids from disk which can more usefully be cached as a filter bitset.
+ <p>
+ For Queries/Filters to be cached and reused the object must implement hashcode and
+ equals methods correctly so that duplicate queries/filters can be detected in the cache.
+ <p>
+ The CoreParser.maxNumCachedFilters property can be used to control the size of the LRU
+ Cache established during the construction of CoreParser instances.
+ */
 @interface OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder : NSObject < OrgApacheLuceneQueryparserXmlFilterBuilder >
 
 #pragma mark Public
@@ -43,15 +59,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder *new_OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_initWithOrgApacheLuceneQueryparserXmlQueryBuilderFactory_withOrgApacheLuceneQueryparserXmlFilterBuilderFactory_withInt_(OrgApacheLuceneQueryparserXmlQueryBuilderFactory *queryFactory, OrgApacheLuceneQueryparserXmlFilterBuilderFactory *filterFactory, jint cacheSize) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder *create_OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_initWithOrgApacheLuceneQueryparserXmlQueryBuilderFactory_withOrgApacheLuceneQueryparserXmlFilterBuilderFactory_withInt_(OrgApacheLuceneQueryparserXmlQueryBuilderFactory *queryFactory, OrgApacheLuceneQueryparserXmlFilterBuilderFactory *filterFactory, jint cacheSize);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder)
 
 #endif
 
-#if !defined (_OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache_) && (OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_INCLUDE_ALL || OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache_INCLUDE)
-#define _OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache_
+#if !defined (OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache))
+#define OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache_
 
-#define JavaUtilLinkedHashMap_RESTRICT 1
-#define JavaUtilLinkedHashMap_INCLUDE 1
+#define RESTRICT_JavaUtilLinkedHashMap 1
+#define INCLUDE_JavaUtilLinkedHashMap 1
 #include "java/util/LinkedHashMap.h"
 
 @protocol JavaUtilMap_Entry;
@@ -77,8 +95,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache *new_OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache_initWithInt_(jint maxsize) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache *create_OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache_initWithInt_(jint maxsize);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder")

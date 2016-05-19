@@ -36,7 +36,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter, typ
   if ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
     NSString *type = [((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(typeAtt_)) type];
     if (type != nil && ![type isEmpty]) {
-      [((id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute>) nil_chk(payloadAtt_)) setPayloadWithOrgApacheLuceneUtilBytesRef:[new_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(type) autorelease]];
+      [((id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute>) nil_chk(payloadAtt_)) setPayloadWithOrgApacheLuceneUtilBytesRef:create_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(type)];
     }
     return true;
   }
@@ -73,9 +73,11 @@ void OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter_initWithOrgApacheLu
 }
 
 OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter *new_OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) {
-  OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter *self = [OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter alloc];
-  OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, input);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_, input)
+}
+
+OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter *create_OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_, input)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter)

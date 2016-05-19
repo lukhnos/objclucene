@@ -41,7 +41,6 @@ __attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreProcessorsQ
 
 - (instancetype)init;
 
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList)
@@ -49,6 +48,8 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNo
 __attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList_init(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList *self);
 
 __attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList *new_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList_init() NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList *create_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList_init();
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList)
 
@@ -83,7 +84,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       for (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> __strong child in children) {
         child = OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_processIterationWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_(self, child);
         if (child == nil) {
-          @throw [new_JavaLangNullPointerException_init() autorelease];
+          @throw create_JavaLangNullPointerException_init();
         }
         [((OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList *) nil_chk(newChildren)) addWithId:child];
       }
@@ -144,7 +145,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "getQueryConfigHandler", NULL, "Lorg.apache.lucene.queryparser.flexible.core.config.QueryConfigHandler;", 0x1, NULL, NULL },
     { "preProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "preProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x404, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
     { "postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "postProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x404, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "setChildrenOrderWithJavaUtilList:", "setChildrenOrder", "Ljava.util.List;", 0x404, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
+    { "setChildrenOrderWithJavaUtilList:", "setChildrenOrder", "Ljava.util.List;", 0x404, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;)Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "childrenListPool_", NULL, 0x2, "Ljava.util.ArrayList;", NULL, "Ljava/util/ArrayList<Lorg/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessorImpl$ChildrenList;>;", .constantValue.asLong = 0 },
@@ -185,10 +186,10 @@ OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenL
     }
   }
   if (list == nil) {
-    list = [new_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList_init() autorelease];
-    [self->childrenListPool_ addWithId:list];
+    list = create_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList_init();
+    [((JavaUtilArrayList *) nil_chk(self->childrenListPool_)) addWithId:list];
   }
-  ((OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList *) nil_chk(list))->beingUsed_ = true;
+  list->beingUsed_ = true;
   return list;
 }
 
@@ -209,7 +210,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", NULL, NULL, 0x2, NULL, NULL },
+    { "init", "ChildrenList", NULL, 0x2, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "beingUsed_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
@@ -226,9 +227,11 @@ void OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_Chil
 }
 
 OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList *new_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList_init() {
-  OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList *self = [OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList alloc];
-  OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList, init)
+}
+
+OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList *create_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList)

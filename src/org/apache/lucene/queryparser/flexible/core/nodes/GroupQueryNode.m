@@ -39,12 +39,12 @@
 }
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode *clone = (OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode *) check_class_cast([super cloneTree], [OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode class]);
+  OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode *clone = (OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode *) cast_chk([super cloneTree], [OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode class]);
   return clone;
 }
 
 - (void)setChildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)child {
-  id<JavaUtilList> list = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> list = create_JavaUtilArrayList_init();
   [list addWithId:child];
   [self setWithJavaUtilList:list];
 }
@@ -67,7 +67,7 @@
 void OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_(OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode *self, id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> query) {
   OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_init(self);
   if (query == nil) {
-    @throw [new_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeError_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_([new_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, PARAMETER_VALUE_NOT_SUPPORTED_), [IOSObjectArray arrayWithObjects:(id[]){ @"query", @"null" } count:2 type:NSObject_class_()]) autorelease]) autorelease];
+    @throw create_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeError_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_(create_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, PARAMETER_VALUE_NOT_SUPPORTED), [IOSObjectArray arrayWithObjects:(id[]){ @"query", @"null" } count:2 type:NSObject_class_()]));
   }
   [self allocate];
   [self setLeafWithBoolean:false];
@@ -75,9 +75,11 @@ void OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode_initWithOrgApache
 }
 
 OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> query) {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode *self = [OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode alloc];
-  OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_(self, query);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode, initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_, query)
+}
+
+OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode *create_OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> query) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode, initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_, query)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode)

@@ -72,15 +72,15 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsLucene53Lucene53NormsCo
   jint count = 0;
   for (NSNumber * __strong nv in nil_chk(values)) {
     if (nv == nil) {
-      @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$I", @"illegal norms data for field ", field->name_, @", got null for value: ", count)) autorelease];
+      @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$I", @"illegal norms data for field ", field->name_, @", got null for value: ", count));
     }
-    jlong v = [((NSNumber *) nil_chk(nv)) longLongValue];
+    jlong v = [nv longLongValue];
     minValue = JavaLangMath_minWithLong_withLong_(minValue, v);
     maxValue = JavaLangMath_maxWithLong_withLong_(maxValue, v);
     count++;
   }
   if (count != maxDoc_) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$I$I", @"illegal norms data for field ", field->name_, @", expected count=", maxDoc_, @", got=", count)) autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$I$I", @"illegal norms data for field ", field->name_, @", expected count=", maxDoc_, @", got=", count));
   }
   if (minValue == maxValue) {
     OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_addConstantWithLong_(self, minValue);
@@ -151,12 +151,12 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsLucene53Lucene53NormsCo
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneIndexSegmentWriteState:withNSString:withNSString:withNSString:withNSString:", "Lucene53NormsConsumer", NULL, 0x0, "Ljava.io.IOException;", NULL },
-    { "addNormsFieldWithOrgApacheLuceneIndexFieldInfo:withJavaLangIterable:", "addNormsField", "V", 0x1, "Ljava.io.IOException;", NULL },
+    { "addNormsFieldWithOrgApacheLuceneIndexFieldInfo:withJavaLangIterable:", "addNormsField", "V", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/FieldInfo;Ljava/lang/Iterable<Ljava/lang/Number;>;)V" },
     { "addConstantWithLong:", "addConstant", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "addByte1WithJavaLangIterable:", "addByte1", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "addByte2WithJavaLangIterable:", "addByte2", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "addByte4WithJavaLangIterable:", "addByte4", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "addByte8WithJavaLangIterable:", "addByte8", "V", 0x2, "Ljava.io.IOException;", NULL },
+    { "addByte1WithJavaLangIterable:", "addByte1", "V", 0x2, "Ljava.io.IOException;", "(Ljava/lang/Iterable<Ljava/lang/Number;>;)V" },
+    { "addByte2WithJavaLangIterable:", "addByte2", "V", 0x2, "Ljava.io.IOException;", "(Ljava/lang/Iterable<Ljava/lang/Number;>;)V" },
+    { "addByte4WithJavaLangIterable:", "addByte4", "V", 0x2, "Ljava.io.IOException;", "(Ljava/lang/Iterable<Ljava/lang/Number;>;)V" },
+    { "addByte8WithJavaLangIterable:", "addByte8", "V", 0x2, "Ljava.io.IOException;", "(Ljava/lang/Iterable<Ljava/lang/Number;>;)V" },
     { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -191,45 +191,47 @@ void OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_initWithOrgApacheLuceneI
 }
 
 OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer *new_OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_initWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneIndexSegmentWriteState *state, NSString *dataCodec, NSString *dataExtension, NSString *metaCodec, NSString *metaExtension) {
-  OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer *self = [OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer alloc];
-  OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_initWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_(self, state, dataCodec, dataExtension, metaCodec, metaExtension);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer, initWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_, state, dataCodec, dataExtension, metaCodec, metaExtension)
+}
+
+OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer *create_OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_initWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneIndexSegmentWriteState *state, NSString *dataCodec, NSString *dataExtension, NSString *metaCodec, NSString *metaExtension) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer, initWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_, state, dataCodec, dataExtension, metaCodec, metaExtension)
 }
 
 void OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_addConstantWithLong_(OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer *self, jlong constant) {
   [((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->meta_)) writeByteWithByte:(jbyte) 0];
-  [self->meta_ writeLongWithLong:constant];
+  [((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->meta_)) writeLongWithLong:constant];
 }
 
 void OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_addByte1WithJavaLangIterable_(OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer *self, id<JavaLangIterable> values) {
   [((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->meta_)) writeByteWithByte:(jbyte) 1];
-  [self->meta_ writeLongWithLong:[((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->data_)) getFilePointer]];
+  [((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->meta_)) writeLongWithLong:[((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->data_)) getFilePointer]];
   for (NSNumber * __strong value in nil_chk(values)) {
-    [self->data_ writeByteWithByte:[((NSNumber *) nil_chk(value)) charValue]];
+    [((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->data_)) writeByteWithByte:[((NSNumber *) nil_chk(value)) charValue]];
   }
 }
 
 void OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_addByte2WithJavaLangIterable_(OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer *self, id<JavaLangIterable> values) {
   [((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->meta_)) writeByteWithByte:(jbyte) 2];
-  [self->meta_ writeLongWithLong:[((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->data_)) getFilePointer]];
+  [((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->meta_)) writeLongWithLong:[((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->data_)) getFilePointer]];
   for (NSNumber * __strong value in nil_chk(values)) {
-    [self->data_ writeShortWithShort:[((NSNumber *) nil_chk(value)) shortValue]];
+    [((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->data_)) writeShortWithShort:[((NSNumber *) nil_chk(value)) shortValue]];
   }
 }
 
 void OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_addByte4WithJavaLangIterable_(OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer *self, id<JavaLangIterable> values) {
   [((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->meta_)) writeByteWithByte:(jbyte) 4];
-  [self->meta_ writeLongWithLong:[((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->data_)) getFilePointer]];
+  [((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->meta_)) writeLongWithLong:[((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->data_)) getFilePointer]];
   for (NSNumber * __strong value in nil_chk(values)) {
-    [self->data_ writeIntWithInt:[((NSNumber *) nil_chk(value)) intValue]];
+    [((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->data_)) writeIntWithInt:[((NSNumber *) nil_chk(value)) intValue]];
   }
 }
 
 void OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_addByte8WithJavaLangIterable_(OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer *self, id<JavaLangIterable> values) {
   [((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->meta_)) writeByteWithByte:(jbyte) 8];
-  [self->meta_ writeLongWithLong:[((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->data_)) getFilePointer]];
+  [((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->meta_)) writeLongWithLong:[((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->data_)) getFilePointer]];
   for (NSNumber * __strong value in nil_chk(values)) {
-    [self->data_ writeLongWithLong:[((NSNumber *) nil_chk(value)) longLongValue]];
+    [((OrgApacheLuceneStoreIndexOutput *) nil_chk(self->data_)) writeLongWithLong:[((NSNumber *) nil_chk(value)) longLongValue]];
   }
 }
 

@@ -36,7 +36,6 @@
 
 - (instancetype)initWithOrgApacheLuceneIndexCoalescedUpdates:(OrgApacheLuceneIndexCoalescedUpdates *)outer$;
 
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexCoalescedUpdates_$1)
@@ -46,6 +45,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCoalescedUpdates_$1, this$0_, OrgApacheL
 __attribute__((unused)) static void OrgApacheLuceneIndexCoalescedUpdates_$1_initWithOrgApacheLuceneIndexCoalescedUpdates_(OrgApacheLuceneIndexCoalescedUpdates_$1 *self, OrgApacheLuceneIndexCoalescedUpdates *outer$);
 
 __attribute__((unused)) static OrgApacheLuceneIndexCoalescedUpdates_$1 *new_OrgApacheLuceneIndexCoalescedUpdates_$1_initWithOrgApacheLuceneIndexCoalescedUpdates_(OrgApacheLuceneIndexCoalescedUpdates *outer$) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexCoalescedUpdates_$1 *create_OrgApacheLuceneIndexCoalescedUpdates_$1_initWithOrgApacheLuceneIndexCoalescedUpdates_(OrgApacheLuceneIndexCoalescedUpdates *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCoalescedUpdates_$1)
 
@@ -72,6 +73,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexCoalescedUpdates_$1_$1_i
 
 __attribute__((unused)) static OrgApacheLuceneIndexCoalescedUpdates_$1_$1 *new_OrgApacheLuceneIndexCoalescedUpdates_$1_$1_initWithOrgApacheLuceneIndexCoalescedUpdates_$1_(OrgApacheLuceneIndexCoalescedUpdates_$1 *outer$) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexCoalescedUpdates_$1_$1 *create_OrgApacheLuceneIndexCoalescedUpdates_$1_$1_initWithOrgApacheLuceneIndexCoalescedUpdates_$1_(OrgApacheLuceneIndexCoalescedUpdates_$1 *outer$);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCoalescedUpdates_$1_$1)
 
 @implementation OrgApacheLuceneIndexCoalescedUpdates
@@ -85,7 +88,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCoalescedUpdates_$1_$1)
   [((id<JavaUtilList>) nil_chk(terms_)) addWithId:inArg->terms_];
   for (jint queryIdx = 0; queryIdx < ((IOSObjectArray *) nil_chk(inArg->queries_))->size_; queryIdx++) {
     OrgApacheLuceneSearchQuery *query = IOSObjectArray_Get(inArg->queries_, queryIdx);
-    [((id<JavaUtilMap>) nil_chk(queries_)) putWithId:query withId:JreLoadStatic(OrgApacheLuceneIndexBufferedUpdates, MAX_INT_)];
+    [((id<JavaUtilMap>) nil_chk(queries_)) putWithId:query withId:JreLoadStatic(OrgApacheLuceneIndexBufferedUpdates, MAX_INT)];
   }
   {
     IOSObjectArray *a__ = inArg->numericDVUpdates_;
@@ -93,7 +96,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCoalescedUpdates_$1_$1)
     OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate * const *e__ = b__ + a__->size_;
     while (b__ < e__) {
       OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate *nu = *b__++;
-      OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate *clone = [new_OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate_initWithOrgApacheLuceneIndexTerm_withNSString_withJavaLangLong_(((OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate *) nil_chk(nu))->term_, nu->field_, (JavaLangLong *) check_class_cast(nu->value_, [JavaLangLong class])) autorelease];
+      OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate *clone = create_OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate_initWithOrgApacheLuceneIndexTerm_withNSString_withJavaLangLong_(((OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate *) nil_chk(nu))->term_, nu->field_, (JavaLangLong *) cast_chk(nu->value_, [JavaLangLong class]));
       clone->docIDUpto_ = JavaLangInteger_MAX_VALUE;
       [((id<JavaUtilList>) nil_chk(numericDVUpdates_)) addWithId:clone];
     }
@@ -104,7 +107,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCoalescedUpdates_$1_$1)
     OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate * const *e__ = b__ + a__->size_;
     while (b__ < e__) {
       OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate *bu = *b__++;
-      OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate *clone = [new_OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate_initWithOrgApacheLuceneIndexTerm_withNSString_withOrgApacheLuceneUtilBytesRef_(((OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate *) nil_chk(bu))->term_, bu->field_, (OrgApacheLuceneUtilBytesRef *) check_class_cast(bu->value_, [OrgApacheLuceneUtilBytesRef class])) autorelease];
+      OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate *clone = create_OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate_initWithOrgApacheLuceneIndexTerm_withNSString_withOrgApacheLuceneUtilBytesRef_(((OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate *) nil_chk(bu))->term_, bu->field_, (OrgApacheLuceneUtilBytesRef *) cast_chk(bu->value_, [OrgApacheLuceneUtilBytesRef class]));
       clone->docIDUpto_ = JavaLangInteger_MAX_VALUE;
       [((id<JavaUtilList>) nil_chk(binaryDVUpdates_)) addWithId:clone];
     }
@@ -116,12 +119,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCoalescedUpdates_$1_$1)
     return [((OrgApacheLuceneIndexPrefixCodedTerms *) nil_chk([terms_ getWithInt:0])) iterator];
   }
   else {
-    return [new_OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_initWithJavaUtilList_(terms_) autorelease];
+    return create_OrgApacheLuceneIndexMergedPrefixCodedTermsIterator_initWithJavaUtilList_(terms_);
   }
 }
 
 - (id<JavaLangIterable>)queriesIterable {
-  return [new_OrgApacheLuceneIndexCoalescedUpdates_$1_initWithOrgApacheLuceneIndexCoalescedUpdates_(self) autorelease];
+  return create_OrgApacheLuceneIndexCoalescedUpdates_$1_initWithOrgApacheLuceneIndexCoalescedUpdates_(self);
 }
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -144,8 +147,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "updateWithOrgApacheLuceneIndexFrozenBufferedUpdates:", "update", "V", 0x0, NULL, NULL },
     { "termIterator", NULL, "Lorg.apache.lucene.index.FieldTermIterator;", 0x1, NULL, NULL },
-    { "queriesIterable", NULL, "Ljava.lang.Iterable;", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x0, NULL, NULL },
+    { "queriesIterable", NULL, "Ljava.lang.Iterable;", 0x1, NULL, "()Ljava/lang/Iterable<Lorg/apache/lucene/index/BufferedUpdatesStream$QueryAndLimit;>;" },
+    { "init", "CoalescedUpdates", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "queries_", NULL, 0x10, "Ljava.util.Map;", NULL, "Ljava/util/Map<Lorg/apache/lucene/search/Query;Ljava/lang/Integer;>;", .constantValue.asLong = 0 },
@@ -169,9 +172,11 @@ void OrgApacheLuceneIndexCoalescedUpdates_init(OrgApacheLuceneIndexCoalescedUpda
 }
 
 OrgApacheLuceneIndexCoalescedUpdates *new_OrgApacheLuceneIndexCoalescedUpdates_init() {
-  OrgApacheLuceneIndexCoalescedUpdates *self = [OrgApacheLuceneIndexCoalescedUpdates alloc];
-  OrgApacheLuceneIndexCoalescedUpdates_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexCoalescedUpdates, init)
+}
+
+OrgApacheLuceneIndexCoalescedUpdates *create_OrgApacheLuceneIndexCoalescedUpdates_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexCoalescedUpdates, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexCoalescedUpdates)
@@ -179,7 +184,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexCoalescedUpdates)
 @implementation OrgApacheLuceneIndexCoalescedUpdates_$1
 
 - (id<JavaUtilIterator>)iterator {
-  return [new_OrgApacheLuceneIndexCoalescedUpdates_$1_$1_initWithOrgApacheLuceneIndexCoalescedUpdates_$1_(self) autorelease];
+  return create_OrgApacheLuceneIndexCoalescedUpdates_$1_$1_initWithOrgApacheLuceneIndexCoalescedUpdates_$1_(self);
 }
 
 - (instancetype)initWithOrgApacheLuceneIndexCoalescedUpdates:(OrgApacheLuceneIndexCoalescedUpdates *)outer$ {
@@ -187,18 +192,18 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexCoalescedUpdates)
   return self;
 }
 
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
+  return JreDefaultFastEnumeration(self, state, stackbuf, len);
+}
+
 - (void)dealloc {
   RELEASE_(this$0_);
   [super dealloc];
 }
 
-- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, NULL },
+    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<Lorg/apache/lucene/index/BufferedUpdatesStream$QueryAndLimit;>;" },
     { "initWithOrgApacheLuceneIndexCoalescedUpdates:", "", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -217,9 +222,11 @@ void OrgApacheLuceneIndexCoalescedUpdates_$1_initWithOrgApacheLuceneIndexCoalesc
 }
 
 OrgApacheLuceneIndexCoalescedUpdates_$1 *new_OrgApacheLuceneIndexCoalescedUpdates_$1_initWithOrgApacheLuceneIndexCoalescedUpdates_(OrgApacheLuceneIndexCoalescedUpdates *outer$) {
-  OrgApacheLuceneIndexCoalescedUpdates_$1 *self = [OrgApacheLuceneIndexCoalescedUpdates_$1 alloc];
-  OrgApacheLuceneIndexCoalescedUpdates_$1_initWithOrgApacheLuceneIndexCoalescedUpdates_(self, outer$);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexCoalescedUpdates_$1, initWithOrgApacheLuceneIndexCoalescedUpdates_, outer$)
+}
+
+OrgApacheLuceneIndexCoalescedUpdates_$1 *create_OrgApacheLuceneIndexCoalescedUpdates_$1_initWithOrgApacheLuceneIndexCoalescedUpdates_(OrgApacheLuceneIndexCoalescedUpdates *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexCoalescedUpdates_$1, initWithOrgApacheLuceneIndexCoalescedUpdates_, outer$)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexCoalescedUpdates_$1)
@@ -232,11 +239,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexCoalescedUpdates_$1)
 
 - (OrgApacheLuceneIndexBufferedUpdatesStream_QueryAndLimit *)next {
   id<JavaUtilMap_Entry> ent = [((id<JavaUtilIterator>) nil_chk(iter_)) next];
-  return [new_OrgApacheLuceneIndexBufferedUpdatesStream_QueryAndLimit_initWithOrgApacheLuceneSearchQuery_withInt_([((id<JavaUtilMap_Entry>) nil_chk(ent)) getKey], [((JavaLangInteger *) nil_chk([ent getValue])) intValue]) autorelease];
+  return create_OrgApacheLuceneIndexBufferedUpdatesStream_QueryAndLimit_initWithOrgApacheLuceneSearchQuery_withInt_([((id<JavaUtilMap_Entry>) nil_chk(ent)) getKey], [((JavaLangInteger *) nil_chk([ent getValue])) intValue]);
 }
 
 - (void)remove {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (instancetype)initWithOrgApacheLuceneIndexCoalescedUpdates_$1:(OrgApacheLuceneIndexCoalescedUpdates_$1 *)outer$ {
@@ -272,9 +279,11 @@ void OrgApacheLuceneIndexCoalescedUpdates_$1_$1_initWithOrgApacheLuceneIndexCoal
 }
 
 OrgApacheLuceneIndexCoalescedUpdates_$1_$1 *new_OrgApacheLuceneIndexCoalescedUpdates_$1_$1_initWithOrgApacheLuceneIndexCoalescedUpdates_$1_(OrgApacheLuceneIndexCoalescedUpdates_$1 *outer$) {
-  OrgApacheLuceneIndexCoalescedUpdates_$1_$1 *self = [OrgApacheLuceneIndexCoalescedUpdates_$1_$1 alloc];
-  OrgApacheLuceneIndexCoalescedUpdates_$1_$1_initWithOrgApacheLuceneIndexCoalescedUpdates_$1_(self, outer$);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexCoalescedUpdates_$1_$1, initWithOrgApacheLuceneIndexCoalescedUpdates_$1_, outer$)
+}
+
+OrgApacheLuceneIndexCoalescedUpdates_$1_$1 *create_OrgApacheLuceneIndexCoalescedUpdates_$1_$1_initWithOrgApacheLuceneIndexCoalescedUpdates_$1_(OrgApacheLuceneIndexCoalescedUpdates_$1 *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexCoalescedUpdates_$1_$1, initWithOrgApacheLuceneIndexCoalescedUpdates_$1_, outer$)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexCoalescedUpdates_$1_$1)

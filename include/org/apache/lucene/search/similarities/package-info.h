@@ -3,14 +3,123 @@
 //  source: ./core/src/java/org/apache/lucene/search/similarities/package-info.java
 //
 
+/*!
+ @brief This package contains the various ranking models that can be used in Lucene.
+ The
+ abstract class <code>org.apache.lucene.search.similarities.Similarity</code> serves
+ as the base for ranking functions. For searching, users can employ the models
+ already implemented or create their own by extending one of the classes in this
+ package.
+ <h2>Table Of Contents</h2>
+ <ol>
+ <li><a href="#sims">Summary of the Ranking Methods</a></li>
+ <li><a href="#changingSimilarity">Changing the Similarity</a></li>
+ </ol>
+ <a name="sims"></a>
+ <h2>Summary of the Ranking Methods</h2>
+ <p><code>org.apache.lucene.search.similarities.DefaultSimilarity</code> is the original Lucene
+ scoring function. It is based on a highly optimized 
+ <a href="http://en.wikipedia.org/wiki/Vector_Space_Model">Vector Space Model</a>. For more
+ information, see <code>org.apache.lucene.search.similarities.TFIDFSimilarity</code>.
+ <p><code>org.apache.lucene.search.similarities.BM25Similarity</code> is an optimized
+ implementation of the successful Okapi BM25 model.
+ <p><code>org.apache.lucene.search.similarities.SimilarityBase</code> provides a basic
+ implementation of the Similarity contract and exposes a highly simplified
+ interface, which makes it an ideal starting point for new ranking functions.
+ Lucene ships the following methods built on
+ <code>org.apache.lucene.search.similarities.SimilarityBase</code>:
+ <a name="framework"></a>
+ <ul>
+ <li>Amati and Rijsbergen's DFR framework;</li>
+ <li>Clinchant and Gaussier's Information-based models
+ for IR;</li>
+ <li>The implementation of two language models from
+ Zhai and Lafferty's paper.</li>
+ </ul>
+ Since <code>org.apache.lucene.search.similarities.SimilarityBase</code> is not
+ optimized to the same extent as
+ <code>org.apache.lucene.search.similarities.DefaultSimilarity</code> and
+ <code>org.apache.lucene.search.similarities.BM25Similarity</code>, a difference in
+ performance is to be expected when using the methods listed above. However,
+ optimizations can always be implemented in subclasses; see
+ <a href="#changingSimilarity">below</a>.
+ <a name="changingSimilarity"></a>
+ <h2>Changing Similarity</h2>
+ <p>Chances are the available Similarities are sufficient for all
+ your searching needs.
+ However, in some applications it may be necessary to customize your <a
+ href="Similarity.html">Similarity</a> implementation. For instance, some
+ applications do not need to
+ distinguish between shorter and longer documents (see <a
+ href="http://www.gossamer-threads.com/lists/lucene/java-user/38967#38967">a "fair" similarity</a>).
+ <p>To change <code>org.apache.lucene.search.similarities.Similarity</code>, one must do so for both indexing and
+ searching, and the changes must happen before
+ either of these actions take place. Although in theory there is nothing stopping you from changing mid-stream, it
+ just isn't well-defined what is going to happen.
+ <p>To make this change, implement your own <code>org.apache.lucene.search.similarities.Similarity</code> (likely
+ you'll want to simply subclass an existing method, be it
+ <code>org.apache.lucene.search.similarities.DefaultSimilarity</code> or a descendant of
+ <code>org.apache.lucene.search.similarities.SimilarityBase</code>), and
+ then register the new class by calling
+ <code>org.apache.lucene.index.IndexWriterConfig.setSimilarity(Similarity)</code>
+ before indexing and
+ <code>org.apache.lucene.search.IndexSearcher.setSimilarity(Similarity)</code>
+ before searching.
+ <h3>Extending org.apache.lucene.search.similarities.SimilarityBase</h3>
+ <p>
+ The easiest way to quickly implement a new ranking method is to extend
+ <code>org.apache.lucene.search.similarities.SimilarityBase</code>, which provides
+ basic implementations for the low level . Subclasses are only required to
+ implement the <code>org.apache.lucene.search.similarities.SimilarityBase.score(BasicStats,float,float)</code>
+ and <code>org.apache.lucene.search.similarities.SimilarityBase.toString()</code>
+ methods.
+ <p>Another option is to extend one of the <a href="#framework">frameworks</a>
+ based on <code>org.apache.lucene.search.similarities.SimilarityBase</code>. These
+ Similarities are implemented modularly, e.g.
+ <code>org.apache.lucene.search.similarities.DFRSimilarity</code> delegates
+ computation of the three parts of its formula to the classes
+ <code>org.apache.lucene.search.similarities.BasicModel</code>,
+ <code>org.apache.lucene.search.similarities.AfterEffect</code> and
+ <code>org.apache.lucene.search.similarities.Normalization</code>. Instead of
+ subclassing the Similarity, one can simply introduce a new basic model and tell
+ <code>org.apache.lucene.search.similarities.DFRSimilarity</code> to use it.
+ <h3>Changing org.apache.lucene.search.similarities.DefaultSimilarity</h3>
+ <p>
+ If you are interested in use cases for changing your similarity, see the Lucene users's mailing list at <a
+ href="http://www.gossamer-threads.com/lists/lucene/java-user/39125">Overriding Similarity</a>.
+ In summary, here are a few use cases:
+ <ol>
+ <li><p>The <code>SweetSpotSimilarity</code> in
+ <code>org.apache.lucene.misc</code> gives small
+ increases as the frequency increases a small amount
+ and then greater increases when you hit the "sweet spot", i.e. where
+ you think the frequency of terms is more significant.</li>
+ <li><p>Overriding tf &mdash; In some applications, it doesn't matter what the score of a document is as long as a
+ matching term occurs. In these
+ cases people have overridden Similarity to return 1 from the tf() method.</li>
+ <li><p>Changing Length Normalization &mdash; By overriding
+ <code>state)</code>,
+ it is possible to discount how the length of a field contributes
+ to a score. In <code>org.apache.lucene.search.similarities.DefaultSimilarity</code>,
+ lengthNorm = 1 / (numTerms in field)^0.5, but if one changes this to be
+ 1 / (numTerms in field), all fields will be treated
+ <a href="http://www.gossamer-threads.com/lists/lucene/java-user/38967#38967">"fairly"</a>.</li>
+ </ol>
+ In general, Chris Hostetter sums it up best in saying (from <a
+ href="http://www.gossamer-threads.com/lists/lucene/java-user/39125#39125">the Lucene users's mailing list</a>):
+ <blockquote>[One would override the Similarity in] ... any situation where you know more about your data then just
+ that
+ it's "text" is a situation where it *might* make sense to to override your
+ Similarity method.</blockquote>
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSimilaritiesPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSimilaritiesPackage_info_RESTRICT
-#define OrgApacheLuceneSearchSimilaritiesPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneSearchSimilaritiesPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesPackage_info 0
 #else
-#define OrgApacheLuceneSearchSimilaritiesPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesPackage_info 1
 #endif
-#undef OrgApacheLuceneSearchSimilaritiesPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSimilaritiesPackage_info
 
-#pragma pop_macro("OrgApacheLuceneSearchSimilaritiesPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesPackage_info")

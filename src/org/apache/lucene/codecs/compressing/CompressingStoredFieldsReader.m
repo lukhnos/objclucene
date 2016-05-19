@@ -17,7 +17,6 @@
 #include "java/lang/Integer.h"
 #include "java/lang/Math.h"
 #include "java/lang/System.h"
-#include "java/lang/Throwable.h"
 #include "java/util/Arrays.h"
 #include "java/util/Collection.h"
 #include "java/util/Collections.h"
@@ -75,6 +74,9 @@
 - (instancetype)initWithOrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader:(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader *)reader
                                                                           withBoolean:(jboolean)merging;
 
+/*!
+ @throws AlreadyClosedException if this FieldsReader is closed
+ */
 - (void)ensureOpen;
 
 + (void)readFieldWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
@@ -98,6 +100,8 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsCompressingCompressingS
 
 __attribute__((unused)) static OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader *new_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_initWithOrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_withBoolean_(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader *reader, jboolean merging) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader *create_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_initWithOrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_withBoolean_(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader *reader, jboolean merging);
+
 __attribute__((unused)) static void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_ensureOpen(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader *self);
 
 __attribute__((unused)) static void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_readFieldWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneIndexStoredFieldVisitor_withOrgApacheLuceneIndexFieldInfo_withInt_(OrgApacheLuceneStoreDataInput *inArg, OrgApacheLuceneIndexStoredFieldVisitor *visitor, OrgApacheLuceneIndexFieldInfo *info, jint bits);
@@ -116,6 +120,11 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsCompressingCompressingS
 
 __attribute__((unused)) static OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_SerializedDocument *new_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_SerializedDocument_initWithOrgApacheLuceneStoreDataInput_withInt_withInt_(OrgApacheLuceneStoreDataInput *inArg, jint length, jint numStoredFields) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_SerializedDocument *create_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_SerializedDocument_initWithOrgApacheLuceneStoreDataInput_withInt_withInt_(OrgApacheLuceneStoreDataInput *inArg, jint length, jint numStoredFields);
+
+/*!
+ @brief Keeps state about the current block of documents.
+ */
 @interface OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState : NSObject {
  @public
   OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader *this$0_;
@@ -130,10 +139,19 @@ __attribute__((unused)) static OrgApacheLuceneCodecsCompressingCompressingStored
 
 - (jboolean)containsWithInt:(jint)docID;
 
+/*!
+ @brief Reset this block so that it stores state for the block
+ that contains the given doc id.
+ */
 - (void)resetWithInt:(jint)docID;
 
 - (void)doResetWithInt:(jint)docID;
 
+/*!
+ @brief Get the serialized representation of the given docID.
+ This docID has
+ to be contained in the current block.
+ */
 - (OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_SerializedDocument *)documentWithInt:(jint)docID;
 
 - (instancetype)initWithOrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader:(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader *)outer$;
@@ -153,6 +171,8 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsCompressingCompressingS
 __attribute__((unused)) static void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_initWithOrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState *self, OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader *outer$);
 
 __attribute__((unused)) static OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState *new_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_initWithOrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader *outer$) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState *create_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_initWithOrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState)
 
@@ -183,6 +203,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReade
 __attribute__((unused)) static void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_$1_initWithOrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_withInt_(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_$1 *self, OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState *outer$, jint capture$0);
 
 __attribute__((unused)) static OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_$1 *new_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_$1_initWithOrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_withInt_(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState *outer$, jint capture$0) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_$1 *create_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_$1_initWithOrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_withInt_(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState *outer$, jint capture$0);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_$1)
 
@@ -254,18 +276,18 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
   OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_SerializedDocument *doc = [self documentWithInt:docID];
   for (jint fieldIDX = 0; fieldIDX < ((OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_SerializedDocument *) nil_chk(doc))->numStoredFields_; fieldIDX++) {
     jlong infoAndBits = [((OrgApacheLuceneStoreDataInput *) nil_chk(doc->in_)) readVLong];
-    jint fieldNumber = (jint) (JreURShift64(infoAndBits, JreLoadStatic(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter, TYPE_BITS_)));
+    jint fieldNumber = (jint) (JreURShift64(infoAndBits, JreLoadStatic(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter, TYPE_BITS)));
     OrgApacheLuceneIndexFieldInfo *fieldInfo = [((OrgApacheLuceneIndexFieldInfos *) nil_chk(fieldInfos_)) fieldInfoWithInt:fieldNumber];
-    jint bits = (jint) (infoAndBits & JreLoadStatic(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter, TYPE_MASK_));
+    jint bits = (jint) (infoAndBits & JreLoadStatic(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter, TYPE_MASK));
     JreAssert((bits <= OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_NUMERIC_DOUBLE), (JreStrcat("$$", @"bits=", JavaLangInteger_toHexStringWithInt_(bits))));
     switch ([[((OrgApacheLuceneIndexStoredFieldVisitor *) nil_chk(visitor)) needsFieldWithOrgApacheLuceneIndexFieldInfo:fieldInfo] ordinal]) {
-      case OrgApacheLuceneIndexStoredFieldVisitor_Status_YES:
+      case OrgApacheLuceneIndexStoredFieldVisitor_Status_Enum_YES:
       OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_readFieldWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneIndexStoredFieldVisitor_withOrgApacheLuceneIndexFieldInfo_withInt_(doc->in_, visitor, fieldInfo, bits);
       break;
-      case OrgApacheLuceneIndexStoredFieldVisitor_Status_NO:
+      case OrgApacheLuceneIndexStoredFieldVisitor_Status_Enum_NO:
       OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_skipFieldWithOrgApacheLuceneStoreDataInput_withInt_(doc->in_, bits);
       break;
-      case OrgApacheLuceneIndexStoredFieldVisitor_Status_STOP:
+      case OrgApacheLuceneIndexStoredFieldVisitor_Status_Enum_STOP:
       return;
     }
   }
@@ -273,12 +295,12 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 - (OrgApacheLuceneCodecsStoredFieldsReader *)clone {
   OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_ensureOpen(self);
-  return [new_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_initWithOrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_withBoolean_(self, false) autorelease];
+  return create_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_initWithOrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_withBoolean_(self, false);
 }
 
 - (OrgApacheLuceneCodecsStoredFieldsReader *)getMergeInstance {
   OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_ensureOpen(self);
-  return [new_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_initWithOrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_withBoolean_(self, true) autorelease];
+  return create_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_initWithOrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_withBoolean_(self, true);
 }
 
 - (jint)getVersion {
@@ -368,7 +390,7 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
     { "getNumDirtyChunks", NULL, "J", 0x0, NULL, NULL },
     { "getPackedIntsVersion", NULL, "I", 0x0, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
     { "checkIntegrity", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
@@ -416,9 +438,11 @@ void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_initWithOrgAp
 }
 
 OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader *new_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_initWithOrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_withBoolean_(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader *reader, jboolean merging) {
-  OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader *self = [OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader alloc];
-  OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_initWithOrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_withBoolean_(self, reader, merging);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader, initWithOrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_withBoolean_, reader, merging)
+}
+
+OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader *create_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_initWithOrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_withBoolean_(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader *reader, jboolean merging) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader, initWithOrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_withBoolean_, reader, merging)
 }
 
 void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withNSString_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneStoreIOContext_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader *self, OrgApacheLuceneStoreDirectory *d, OrgApacheLuceneIndexSegmentInfo *si, NSString *segmentSuffix, OrgApacheLuceneIndexFieldInfos *fn, OrgApacheLuceneStoreIOContext *context, NSString *formatName, OrgApacheLuceneCodecsCompressingCompressionMode *compressionMode) {
@@ -431,27 +455,27 @@ void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_initWithOrgAp
   jint version_ = -1;
   jlong maxPointer = -1;
   OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader *indexReader = nil;
-  NSString *indexName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(segment, segmentSuffix, OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_FIELDS_INDEX_EXTENSION_);
+  NSString *indexName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(segment, segmentSuffix, OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_FIELDS_INDEX_EXTENSION);
   {
     OrgApacheLuceneStoreChecksumIndexInput *indexStream = [((OrgApacheLuceneStoreDirectory *) nil_chk(d)) openChecksumInputWithNSString:indexName withOrgApacheLuceneStoreIOContext:context];
-    JavaLangThrowable *__primaryException1 = nil;
+    NSException *__primaryException1 = nil;
     @try {
-      JavaLangThrowable *priorE = nil;
+      NSException *priorE = nil;
       @try {
-        NSString *codecNameIdx = JreStrcat("$$", formatName, OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_CODEC_SFX_IDX_);
+        NSString *codecNameIdx = JreStrcat("$$", formatName, OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_CODEC_SFX_IDX);
         version_ = OrgApacheLuceneCodecsCodecUtil_checkIndexHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_withByteArray_withNSString_(indexStream, codecNameIdx, OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_VERSION_START, OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_VERSION_CURRENT, [si getId], segmentSuffix);
         JreAssert((OrgApacheLuceneCodecsCodecUtil_indexHeaderLengthWithNSString_withNSString_(codecNameIdx, segmentSuffix) == [((OrgApacheLuceneStoreChecksumIndexInput *) nil_chk(indexStream)) getFilePointer]), (@"org/apache/lucene/codecs/compressing/CompressingStoredFieldsReader.java:134 condition failed: assert CodecUtil.indexHeaderLength(codecNameIdx, segmentSuffix) == indexStream.getFilePointer();"));
-        indexReader = [new_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_initWithOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneIndexSegmentInfo_(indexStream, si) autorelease];
+        indexReader = create_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader_initWithOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneIndexSegmentInfo_(indexStream, si);
         maxPointer = [indexStream readVLong];
       }
-      @catch (JavaLangThrowable *exception) {
+      @catch (NSException *exception) {
         priorE = exception;
       }
       @finally {
-        OrgApacheLuceneCodecsCodecUtil_checkFooterWithOrgApacheLuceneStoreChecksumIndexInput_withJavaLangThrowable_(indexStream, priorE);
+        OrgApacheLuceneCodecsCodecUtil_checkFooterWithOrgApacheLuceneStoreChecksumIndexInput_withNSException_(indexStream, priorE);
       }
     }
-    @catch (JavaLangThrowable *e) {
+    @catch (NSException *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -460,8 +484,8 @@ void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_initWithOrgAp
         if (__primaryException1 != nil) {
           @try {
             [indexStream close];
-          } @catch (JavaLangThrowable *e) {
-            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          } @catch (NSException *e) {
+            [__primaryException1 addSuppressedWithNSException:e];
           }
         } else {
           [indexStream close];
@@ -472,13 +496,13 @@ void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_initWithOrgAp
   self->version__ = version_;
   self->maxPointer_ = maxPointer;
   JreStrongAssign(&self->indexReader_, indexReader);
-  NSString *fieldsStreamFN = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(segment, segmentSuffix, OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_FIELDS_EXTENSION_);
+  NSString *fieldsStreamFN = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(segment, segmentSuffix, OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_FIELDS_EXTENSION);
   @try {
-    JreStrongAssign(&self->fieldsStream_, [((OrgApacheLuceneStoreDirectory *) nil_chk(d)) openInputWithNSString:fieldsStreamFN withOrgApacheLuceneStoreIOContext:context]);
-    NSString *codecNameDat = JreStrcat("$$", formatName, OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_CODEC_SFX_DAT_);
+    JreStrongAssign(&self->fieldsStream_, [d openInputWithNSString:fieldsStreamFN withOrgApacheLuceneStoreIOContext:context]);
+    NSString *codecNameDat = JreStrcat("$$", formatName, OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_CODEC_SFX_DAT);
     jint fieldsVersion = OrgApacheLuceneCodecsCodecUtil_checkIndexHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_withByteArray_withNSString_(self->fieldsStream_, codecNameDat, OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_VERSION_START, OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_VERSION_CURRENT, [si getId], segmentSuffix);
     if (version_ != fieldsVersion) {
-      @throw [new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$I$I", @"Version mismatch between stored fields index and data: ", version_, @" != ", fieldsVersion), self->fieldsStream_) autorelease];
+      @throw create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$I$I", @"Version mismatch between stored fields index and data: ", version_, @" != ", fieldsVersion), self->fieldsStream_);
     }
     JreAssert((OrgApacheLuceneCodecsCodecUtil_indexHeaderLengthWithNSString_withNSString_(codecNameDat, segmentSuffix) == [((OrgApacheLuceneStoreIndexInput *) nil_chk(self->fieldsStream_)) getFilePointer]), (@"org/apache/lucene/codecs/compressing/CompressingStoredFieldsReader.java:157 condition failed: assert CodecUtil.indexHeaderLength(codecNameDat, segmentSuffix) == fieldsStream.getFilePointer();"));
     self->chunkSize_ = [self->fieldsStream_ readVInt];
@@ -491,7 +515,7 @@ void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_initWithOrgAp
       self->numChunks_ = [self->fieldsStream_ readVLong];
       self->numDirtyChunks_ = [self->fieldsStream_ readVLong];
       if (self->numDirtyChunks_ > self->numChunks_) {
-        @throw [new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$J$J", @"invalid chunk counts: dirty=", self->numDirtyChunks_, @", total=", self->numChunks_), self->fieldsStream_) autorelease];
+        @throw create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$J$J", @"invalid chunk counts: dirty=", self->numDirtyChunks_, @", total=", self->numChunks_), self->fieldsStream_);
       }
     }
     else {
@@ -508,14 +532,16 @@ void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_initWithOrgAp
 }
 
 OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader *new_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withNSString_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneStoreIOContext_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_(OrgApacheLuceneStoreDirectory *d, OrgApacheLuceneIndexSegmentInfo *si, NSString *segmentSuffix, OrgApacheLuceneIndexFieldInfos *fn, OrgApacheLuceneStoreIOContext *context, NSString *formatName, OrgApacheLuceneCodecsCompressingCompressionMode *compressionMode) {
-  OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader *self = [OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader alloc];
-  OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withNSString_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneStoreIOContext_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_(self, d, si, segmentSuffix, fn, context, formatName, compressionMode);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader, initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withNSString_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneStoreIOContext_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_, d, si, segmentSuffix, fn, context, formatName, compressionMode)
+}
+
+OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader *create_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withNSString_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneStoreIOContext_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_(OrgApacheLuceneStoreDirectory *d, OrgApacheLuceneIndexSegmentInfo *si, NSString *segmentSuffix, OrgApacheLuceneIndexFieldInfos *fn, OrgApacheLuceneStoreIOContext *context, NSString *formatName, OrgApacheLuceneCodecsCompressingCompressionMode *compressionMode) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader, initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withNSString_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneStoreIOContext_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_, d, si, segmentSuffix, fn, context, formatName, compressionMode)
 }
 
 void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_ensureOpen(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader *self) {
   if (self->closed_) {
-    @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(@"this FieldsReader is closed") autorelease];
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(@"this FieldsReader is closed");
   }
 }
 
@@ -524,7 +550,7 @@ void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_readFieldWith
   {
     jint length;
     IOSByteArray *data;
-    switch (bits & JreLoadStatic(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter, TYPE_MASK_)) {
+    switch (bits & JreLoadStatic(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter, TYPE_MASK)) {
       case OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_BYTE_ARR:
       length = [((OrgApacheLuceneStoreDataInput *) nil_chk(inArg)) readVInt];
       data = [IOSByteArray arrayWithLength:length];
@@ -550,7 +576,7 @@ void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_readFieldWith
       [((OrgApacheLuceneIndexStoredFieldVisitor *) nil_chk(visitor)) doubleFieldWithOrgApacheLuceneIndexFieldInfo:info withDouble:OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_readZDoubleWithOrgApacheLuceneStoreDataInput_(inArg)];
       break;
       default:
-      @throw [new_JavaLangAssertionError_initWithId_(JreStrcat("$$", @"Unknown type flag: ", JavaLangInteger_toHexStringWithInt_(bits))) autorelease];
+      @throw create_JavaLangAssertionError_initWithId_(JreStrcat("$$", @"Unknown type flag: ", JavaLangInteger_toHexStringWithInt_(bits)));
     }
   }
 }
@@ -559,7 +585,7 @@ void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_skipFieldWith
   OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_initialize();
   {
     jint length;
-    switch (bits & JreLoadStatic(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter, TYPE_MASK_)) {
+    switch (bits & JreLoadStatic(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter, TYPE_MASK)) {
       case OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_BYTE_ARR:
       case OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_STRING:
       length = [((OrgApacheLuceneStoreDataInput *) nil_chk(inArg)) readVInt];
@@ -578,7 +604,7 @@ void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_skipFieldWith
       OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_readZDoubleWithOrgApacheLuceneStoreDataInput_(inArg);
       break;
       default:
-      @throw [new_JavaLangAssertionError_initWithId_(JreStrcat("$$", @"Unknown type flag: ", JavaLangInteger_toHexStringWithInt_(bits))) autorelease];
+      @throw create_JavaLangAssertionError_initWithId_(JreStrcat("$$", @"Unknown type flag: ", JavaLangInteger_toHexStringWithInt_(bits)));
     }
   }
 }
@@ -637,7 +663,7 @@ jlong OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_readTLongWit
     case 0:
     break;
     default:
-    @throw [new_JavaLangAssertionError_init() autorelease];
+    @throw create_JavaLangAssertionError_init();
   }
   return l;
 }
@@ -681,9 +707,11 @@ void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_SerializedDoc
 }
 
 OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_SerializedDocument *new_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_SerializedDocument_initWithOrgApacheLuceneStoreDataInput_withInt_withInt_(OrgApacheLuceneStoreDataInput *inArg, jint length, jint numStoredFields) {
-  OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_SerializedDocument *self = [OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_SerializedDocument alloc];
-  OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_SerializedDocument_initWithOrgApacheLuceneStoreDataInput_withInt_withInt_(self, inArg, length, numStoredFields);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_SerializedDocument, initWithOrgApacheLuceneStoreDataInput_withInt_withInt_, inArg, length, numStoredFields)
+}
+
+OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_SerializedDocument *create_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_SerializedDocument_initWithOrgApacheLuceneStoreDataInput_withInt_withInt_(OrgApacheLuceneStoreDataInput *inArg, jint length, jint numStoredFields) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_SerializedDocument, initWithOrgApacheLuceneStoreDataInput_withInt_withInt_, inArg, length, numStoredFields)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_SerializedDocument)
@@ -713,7 +741,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCompressingCompressingStor
 
 - (OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_SerializedDocument *)documentWithInt:(jint)docID {
   if ([self containsWithInt:docID] == false) {
-    @throw [new_JavaLangIllegalArgumentException_init() autorelease];
+    @throw create_JavaLangIllegalArgumentException_init();
   }
   jint index = docID - docBase_;
   jint offset = IOSIntArray_Get(nil_chk(offsets_), index);
@@ -722,23 +750,23 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCompressingCompressingStor
   jint numStoredFields = IOSIntArray_Get(nil_chk(self->numStoredFields_), index);
   OrgApacheLuceneStoreDataInput *documentInput;
   if (length == 0) {
-    documentInput = [new_OrgApacheLuceneStoreByteArrayDataInput_init() autorelease];
+    documentInput = create_OrgApacheLuceneStoreByteArrayDataInput_init();
   }
   else if (this$0_->merging_) {
-    documentInput = [new_OrgApacheLuceneStoreByteArrayDataInput_initWithByteArray_withInt_withInt_(((OrgApacheLuceneUtilBytesRef *) nil_chk(bytes_))->bytes_, bytes_->offset_ + offset, length) autorelease];
+    documentInput = create_OrgApacheLuceneStoreByteArrayDataInput_initWithByteArray_withInt_withInt_(((OrgApacheLuceneUtilBytesRef *) nil_chk(bytes_))->bytes_, bytes_->offset_ + offset, length);
   }
   else if (sliced_) {
     [((OrgApacheLuceneStoreIndexInput *) nil_chk(this$0_->fieldsStream_)) seekWithLong:startPointer_];
     [((OrgApacheLuceneCodecsCompressingDecompressor *) nil_chk(this$0_->decompressor_)) decompressWithOrgApacheLuceneStoreDataInput:this$0_->fieldsStream_ withInt:this$0_->chunkSize_ withInt:offset withInt:JavaLangMath_minWithInt_withInt_(length, this$0_->chunkSize_ - offset) withOrgApacheLuceneUtilBytesRef:bytes_];
-    documentInput = [new_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_$1_initWithOrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_withInt_(self, length) autorelease];
+    documentInput = create_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_$1_initWithOrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_withInt_(self, length);
   }
   else {
     [((OrgApacheLuceneStoreIndexInput *) nil_chk(this$0_->fieldsStream_)) seekWithLong:startPointer_];
     [((OrgApacheLuceneCodecsCompressingDecompressor *) nil_chk(this$0_->decompressor_)) decompressWithOrgApacheLuceneStoreDataInput:this$0_->fieldsStream_ withInt:totalLength withInt:offset withInt:length withOrgApacheLuceneUtilBytesRef:bytes_];
     JreAssert((((OrgApacheLuceneUtilBytesRef *) nil_chk(bytes_))->length_ == length), (@"org/apache/lucene/codecs/compressing/CompressingStoredFieldsReader.java:561 condition failed: assert bytes.length == length;"));
-    documentInput = [new_OrgApacheLuceneStoreByteArrayDataInput_initWithByteArray_withInt_withInt_(bytes_->bytes_, bytes_->offset_, bytes_->length_) autorelease];
+    documentInput = create_OrgApacheLuceneStoreByteArrayDataInput_initWithByteArray_withInt_withInt_(bytes_->bytes_, bytes_->offset_, bytes_->length_);
   }
-  return [new_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_SerializedDocument_initWithOrgApacheLuceneStoreDataInput_withInt_withInt_(documentInput, length, numStoredFields) autorelease];
+  return create_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_SerializedDocument_initWithOrgApacheLuceneStoreDataInput_withInt_withInt_(documentInput, length, numStoredFields);
 }
 
 - (instancetype)initWithOrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader:(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader *)outer$ {
@@ -761,7 +789,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCompressingCompressingStor
     { "resetWithInt:", "reset", "V", 0x0, "Ljava.io.IOException;", NULL },
     { "doResetWithInt:", "doReset", "V", 0x2, "Ljava.io.IOException;", NULL },
     { "documentWithInt:", "document", "Lorg.apache.lucene.codecs.compressing.CompressingStoredFieldsReader$SerializedDocument;", 0x0, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader:", "init", NULL, 0x0, NULL, NULL },
+    { "initWithOrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader:", "BlockState", NULL, 0x2, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.codecs.compressing.CompressingStoredFieldsReader;", NULL, NULL, .constantValue.asLong = 0 },
@@ -785,7 +813,7 @@ void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_do
   jint token = [self->this$0_->fieldsStream_ readVInt];
   self->chunkDocs_ = JreURShift32(token, 1);
   if ([self containsWithInt:docID] == false || self->docBase_ + self->chunkDocs_ > self->this$0_->numDocs_) {
-    @throw [new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$I$I$I$I", @"Corrupted: docID=", docID, @", docBase=", self->docBase_, @", chunkDocs=", self->chunkDocs_, @", numDocs=", self->this$0_->numDocs_), self->this$0_->fieldsStream_) autorelease];
+    @throw create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$I$I$I$I", @"Corrupted: docID=", docID, @", docBase=", self->docBase_, @", chunkDocs=", self->chunkDocs_, @", numDocs=", self->this$0_->numDocs_), self->this$0_->fieldsStream_);
   }
   self->sliced_ = ((token & 1) != 0);
   JreStrongAssign(&self->offsets_, OrgApacheLuceneUtilArrayUtil_growWithIntArray_withInt_(self->offsets_, self->chunkDocs_ + 1));
@@ -800,10 +828,10 @@ void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_do
       JavaUtilArrays_fillWithIntArray_withInt_withInt_withInt_(self->numStoredFields_, 0, self->chunkDocs_, [self->this$0_->fieldsStream_ readVInt]);
     }
     else if (bitsPerStoredFields > 31) {
-      @throw [new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$I", @"bitsPerStoredFields=", bitsPerStoredFields), self->this$0_->fieldsStream_) autorelease];
+      @throw create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$I", @"bitsPerStoredFields=", bitsPerStoredFields), self->this$0_->fieldsStream_);
     }
     else {
-      id<OrgApacheLuceneUtilPackedPackedInts_ReaderIterator> it = OrgApacheLuceneUtilPackedPackedInts_getReaderIteratorNoHeaderWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_withInt_withInt_(self->this$0_->fieldsStream_, JreLoadStatic(OrgApacheLuceneUtilPackedPackedInts_FormatEnum, PACKED), self->this$0_->packedIntsVersion_, self->chunkDocs_, bitsPerStoredFields, 1);
+      id<OrgApacheLuceneUtilPackedPackedInts_ReaderIterator> it = OrgApacheLuceneUtilPackedPackedInts_getReaderIteratorNoHeaderWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilPackedPackedInts_Format_withInt_withInt_withInt_withInt_(self->this$0_->fieldsStream_, JreLoadEnum(OrgApacheLuceneUtilPackedPackedInts_Format, PACKED), self->this$0_->packedIntsVersion_, self->chunkDocs_, bitsPerStoredFields, 1);
       for (jint i = 0; i < self->chunkDocs_; ++i) {
         *IOSIntArray_GetRef(nil_chk(self->numStoredFields_), i) = (jint) [((id<OrgApacheLuceneUtilPackedPackedInts_ReaderIterator>) nil_chk(it)) next];
       }
@@ -816,10 +844,10 @@ void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_do
       }
     }
     else if (bitsPerStoredFields > 31) {
-      @throw [new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$I", @"bitsPerLength=", bitsPerLength), self->this$0_->fieldsStream_) autorelease];
+      @throw create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$I", @"bitsPerLength=", bitsPerLength), self->this$0_->fieldsStream_);
     }
     else {
-      id<OrgApacheLuceneUtilPackedPackedInts_ReaderIterator> it = OrgApacheLuceneUtilPackedPackedInts_getReaderIteratorNoHeaderWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_withInt_withInt_(self->this$0_->fieldsStream_, JreLoadStatic(OrgApacheLuceneUtilPackedPackedInts_FormatEnum, PACKED), self->this$0_->packedIntsVersion_, self->chunkDocs_, bitsPerLength, 1);
+      id<OrgApacheLuceneUtilPackedPackedInts_ReaderIterator> it = OrgApacheLuceneUtilPackedPackedInts_getReaderIteratorNoHeaderWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilPackedPackedInts_Format_withInt_withInt_withInt_withInt_(self->this$0_->fieldsStream_, JreLoadEnum(OrgApacheLuceneUtilPackedPackedInts_Format, PACKED), self->this$0_->packedIntsVersion_, self->chunkDocs_, bitsPerLength, 1);
       for (jint i = 0; i < self->chunkDocs_; ++i) {
         *IOSIntArray_GetRef(nil_chk(self->offsets_), i + 1) = (jint) [((id<OrgApacheLuceneUtilPackedPackedInts_ReaderIterator>) nil_chk(it)) next];
       }
@@ -831,7 +859,7 @@ void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_do
       jint len = IOSIntArray_Get(nil_chk(self->offsets_), i + 1) - IOSIntArray_Get(self->offsets_, i);
       jint storedFields = IOSIntArray_Get(nil_chk(self->numStoredFields_), i);
       if ((len == 0) != (storedFields == 0)) {
-        @throw [new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$I$I", @"length=", len, @", numStoredFields=", storedFields), self->this$0_->fieldsStream_) autorelease];
+        @throw create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$I$I", @"length=", len, @", numStoredFields=", storedFields), self->this$0_->fieldsStream_);
       }
     }
   }
@@ -853,7 +881,7 @@ void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_do
       [((OrgApacheLuceneCodecsCompressingDecompressor *) nil_chk(self->this$0_->decompressor_)) decompressWithOrgApacheLuceneStoreDataInput:self->this$0_->fieldsStream_ withInt:totalLength withInt:0 withInt:totalLength withOrgApacheLuceneUtilBytesRef:self->bytes_];
     }
     if (((OrgApacheLuceneUtilBytesRef *) nil_chk(self->bytes_))->length_ != totalLength) {
-      @throw [new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$I$I", @"Corrupted: expected chunk size = ", totalLength, @", got ", self->bytes_->length_), self->this$0_->fieldsStream_) autorelease];
+      @throw create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$I$I", @"Corrupted: expected chunk size = ", totalLength, @", got ", self->bytes_->length_), self->this$0_->fieldsStream_);
     }
   }
 }
@@ -861,16 +889,18 @@ void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_do
 void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_initWithOrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState *self, OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader *outer$) {
   JreStrongAssign(&self->this$0_, outer$);
   NSObject_init(self);
-  JreStrongAssign(&self->offsets_, JreLoadStatic(OrgApacheLuceneUtilIntsRef, EMPTY_INTS_));
-  JreStrongAssign(&self->numStoredFields_, JreLoadStatic(OrgApacheLuceneUtilIntsRef, EMPTY_INTS_));
+  JreStrongAssign(&self->offsets_, JreLoadStatic(OrgApacheLuceneUtilIntsRef, EMPTY_INTS));
+  JreStrongAssign(&self->numStoredFields_, JreLoadStatic(OrgApacheLuceneUtilIntsRef, EMPTY_INTS));
   JreStrongAssignAndConsume(&self->spare_, new_OrgApacheLuceneUtilBytesRef_init());
   JreStrongAssignAndConsume(&self->bytes_, new_OrgApacheLuceneUtilBytesRef_init());
 }
 
 OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState *new_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_initWithOrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader *outer$) {
-  OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState *self = [OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState alloc];
-  OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_initWithOrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_(self, outer$);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState, initWithOrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_, outer$)
+}
+
+OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState *create_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_initWithOrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState, initWithOrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_, outer$)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState)
@@ -880,7 +910,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCompressingCompressingStor
 - (void)fillBuffer {
   JreAssert((decompressed_ <= val$length_), (@"org/apache/lucene/codecs/compressing/CompressingStoredFieldsReader.java:526 condition failed: assert decompressed <= length;"));
   if (decompressed_ == val$length_) {
-    @throw [new_JavaIoEOFException_init() autorelease];
+    @throw create_JavaIoEOFException_init();
   }
   jint toDecompress = JavaLangMath_minWithInt_withInt_(val$length_ - decompressed_, this$0_->this$0_->chunkSize_);
   [((OrgApacheLuceneCodecsCompressingDecompressor *) nil_chk(this$0_->this$0_->decompressor_)) decompressWithOrgApacheLuceneStoreDataInput:this$0_->this$0_->fieldsStream_ withInt:toDecompress withInt:0 withInt:toDecompress withOrgApacheLuceneUtilBytesRef:this$0_->bytes_];
@@ -947,9 +977,11 @@ void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_$1
 }
 
 OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_$1 *new_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_$1_initWithOrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_withInt_(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState *outer$, jint capture$0) {
-  OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_$1 *self = [OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_$1 alloc];
-  OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_$1_initWithOrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_withInt_(self, outer$, capture$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_$1, initWithOrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_withInt_, outer$, capture$0)
+}
+
+OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_$1 *create_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_$1_initWithOrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_withInt_(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState *outer$, jint capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_$1, initWithOrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_withInt_, outer$, capture$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_BlockState_$1)

@@ -48,9 +48,11 @@ void OrgApacheLuceneSearchSimilaritiesBasicModelIne_init(OrgApacheLuceneSearchSi
 }
 
 OrgApacheLuceneSearchSimilaritiesBasicModelIne *new_OrgApacheLuceneSearchSimilaritiesBasicModelIne_init() {
-  OrgApacheLuceneSearchSimilaritiesBasicModelIne *self = [OrgApacheLuceneSearchSimilaritiesBasicModelIne alloc];
-  OrgApacheLuceneSearchSimilaritiesBasicModelIne_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSimilaritiesBasicModelIne, init)
+}
+
+OrgApacheLuceneSearchSimilaritiesBasicModelIne *create_OrgApacheLuceneSearchSimilaritiesBasicModelIne_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSimilaritiesBasicModelIne, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSimilaritiesBasicModelIne)

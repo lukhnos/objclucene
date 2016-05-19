@@ -36,7 +36,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter, key
 
 - (jboolean)incrementToken {
   if ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
-    if (![((id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>) nil_chk(keywordAttr_)) isKeyword] && [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAttribute_)) length] > length_) [termAttribute_ setLengthWithInt:length_];
+    if (![((id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>) nil_chk(keywordAttr_)) isKeyword] && [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAttribute_)) length] > length_) [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAttribute_)) setLengthWithInt:length_];
     return true;
   }
   else {
@@ -70,14 +70,16 @@ void OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter_initWithOrgApacheLu
   OrgApacheLuceneAnalysisTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, input);
   JreStrongAssign(&self->termAttribute_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()]);
   JreStrongAssign(&self->keywordAttr_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesKeywordAttribute_class_()]);
-  if (length < 1) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"length parameter must be a positive number: ", length)) autorelease];
+  if (length < 1) @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"length parameter must be a positive number: ", length));
   self->length_ = length;
 }
 
 OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter *new_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(OrgApacheLuceneAnalysisTokenStream *input, jint length) {
-  OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter *self = [OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter alloc];
-  OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(self, input, length);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_withInt_, input, length)
+}
+
+OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter *create_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(OrgApacheLuceneAnalysisTokenStream *input, jint length) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_withInt_, input, length)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter)

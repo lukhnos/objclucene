@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSpansFieldMaskingSpanQuery_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSpansFieldMaskingSpanQuery_RESTRICT
-#define OrgApacheLuceneSearchSpansFieldMaskingSpanQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansFieldMaskingSpanQuery")
+#ifdef RESTRICT_OrgApacheLuceneSearchSpansFieldMaskingSpanQuery
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansFieldMaskingSpanQuery 0
 #else
-#define OrgApacheLuceneSearchSpansFieldMaskingSpanQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansFieldMaskingSpanQuery 1
 #endif
-#undef OrgApacheLuceneSearchSpansFieldMaskingSpanQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSpansFieldMaskingSpanQuery
 
-#if !defined (_OrgApacheLuceneSearchSpansFieldMaskingSpanQuery_) && (OrgApacheLuceneSearchSpansFieldMaskingSpanQuery_INCLUDE_ALL || OrgApacheLuceneSearchSpansFieldMaskingSpanQuery_INCLUDE)
-#define _OrgApacheLuceneSearchSpansFieldMaskingSpanQuery_
+#if !defined (OrgApacheLuceneSearchSpansFieldMaskingSpanQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansFieldMaskingSpanQuery || defined(INCLUDE_OrgApacheLuceneSearchSpansFieldMaskingSpanQuery))
+#define OrgApacheLuceneSearchSpansFieldMaskingSpanQuery_
 
-#define OrgApacheLuceneSearchSpansSpanQuery_RESTRICT 1
-#define OrgApacheLuceneSearchSpansSpanQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSpansSpanQuery 1
+#define INCLUDE_OrgApacheLuceneSearchSpansSpanQuery 1
 #include "org/apache/lucene/search/spans/SpanQuery.h"
 
 @class OrgApacheLuceneIndexIndexReader;
@@ -25,6 +25,47 @@
 @class OrgApacheLuceneSearchQuery;
 @class OrgApacheLuceneSearchSpansSpanWeight;
 
+/*!
+ @brief <p>Wrapper to allow <code>SpanQuery</code> objects participate in composite 
+ single-field SpanQueries by 'lying' about their search field.
+ That is, 
+ the masked SpanQuery will function as normal, 
+ but <code>SpanQuery.getField()</code> simply hands back the value supplied 
+ in this class's constructor.</p>
+ <p>This can be used to support Queries like <code>SpanNearQuery</code> or 
+ <code>SpanOrQuery</code> across different fields, which is not ordinarily 
+ permitted.</p>
+ <p>This can be useful for denormalized relational data: for example, when 
+ indexing a document with conceptually many 'children': </p>
+ @code
+
+  teacherid: 1
+  studentfirstname: james
+  studentsurname: jones
+  teacherid: 2
+  studenfirstname: james
+  studentsurname: smith
+  studentfirstname: sally
+  studentsurname: jones
+  
+@endcode
+ <p>a SpanNearQuery with a slop of 0 can be applied across two 
+ <code>SpanTermQuery</code> objects as follows:
+ <pre class="prettyprint">
+ SpanQuery q1  = new SpanTermQuery(new Term("studentfirstname", "james"));
+ SpanQuery q2  = new SpanTermQuery(new Term("studentsurname", "jones"));
+ SpanQuery q2m = new FieldMaskingSpanQuery(q2, "studentfirstname");
+ Query q = new SpanNearQuery(new SpanQuery[]{q1, q2m}, -1, false);
+ 
+@endcode
+ to search for 'studentfirstname:james studentsurname:jones' and find 
+ teacherid 1 without matching teacherid 2 (which has a 'james' in position 0 
+ and 'jones' in position 1).
+ <p>Note: as <code>getField()</code> returns the masked field, scoring will be 
+ done using the Similarity and collection statistics of the field name supplied,
+ but with the term statistics of the real field. This may lead to exceptions,
+ poor performance, and unexpected scoring behaviour.
+ */
 @interface OrgApacheLuceneSearchSpansFieldMaskingSpanQuery : OrgApacheLuceneSearchSpansSpanQuery
 
 #pragma mark Public
@@ -55,8 +96,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansFieldMaskingSpanQuery_initWithO
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSpansFieldMaskingSpanQuery *new_OrgApacheLuceneSearchSpansFieldMaskingSpanQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withNSString_(OrgApacheLuceneSearchSpansSpanQuery *maskedQuery, NSString *maskedField) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpansFieldMaskingSpanQuery *create_OrgApacheLuceneSearchSpansFieldMaskingSpanQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withNSString_(OrgApacheLuceneSearchSpansSpanQuery *maskedQuery, NSString *maskedField);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansFieldMaskingSpanQuery)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSpansFieldMaskingSpanQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansFieldMaskingSpanQuery")

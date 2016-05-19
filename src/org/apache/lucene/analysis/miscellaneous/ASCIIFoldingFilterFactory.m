@@ -27,7 +27,7 @@
 }
 
 - (OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  return [new_OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_(input, preserveOriginal_) autorelease];
+  return create_OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_(input, preserveOriginal_);
 }
 
 - (OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory *)getMultiTermComponent {
@@ -36,7 +36,7 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "ASCIIFoldingFilterFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "ASCIIFoldingFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.miscellaneous.ASCIIFoldingFilter;", 0x1, NULL, NULL },
     { "getMultiTermComponent", NULL, "Lorg.apache.lucene.analysis.util.AbstractAnalysisFactory;", 0x1, NULL, NULL },
   };
@@ -53,14 +53,16 @@ void OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory_initWithJavaU
   OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
   self->preserveOriginal_ = [self getBooleanWithJavaUtilMap:args withNSString:@"preserveOriginal" withBoolean:false];
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory *self = [OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory alloc];
-  OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory *create_OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory)

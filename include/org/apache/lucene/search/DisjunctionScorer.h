@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchDisjunctionScorer_INCLUDE_ALL")
-#if OrgApacheLuceneSearchDisjunctionScorer_RESTRICT
-#define OrgApacheLuceneSearchDisjunctionScorer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchDisjunctionScorer")
+#ifdef RESTRICT_OrgApacheLuceneSearchDisjunctionScorer
+#define INCLUDE_ALL_OrgApacheLuceneSearchDisjunctionScorer 0
 #else
-#define OrgApacheLuceneSearchDisjunctionScorer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchDisjunctionScorer 1
 #endif
-#undef OrgApacheLuceneSearchDisjunctionScorer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchDisjunctionScorer
 
-#if !defined (_OrgApacheLuceneSearchDisjunctionScorer_) && (OrgApacheLuceneSearchDisjunctionScorer_INCLUDE_ALL || OrgApacheLuceneSearchDisjunctionScorer_INCLUDE)
-#define _OrgApacheLuceneSearchDisjunctionScorer_
+#if !defined (OrgApacheLuceneSearchDisjunctionScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchDisjunctionScorer || defined(INCLUDE_OrgApacheLuceneSearchDisjunctionScorer))
+#define OrgApacheLuceneSearchDisjunctionScorer_
 
-#define OrgApacheLuceneSearchScorer_RESTRICT 1
-#define OrgApacheLuceneSearchScorer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchScorer 1
+#define INCLUDE_OrgApacheLuceneSearchScorer 1
 #include "org/apache/lucene/search/Scorer.h"
 
 @class OrgApacheLuceneSearchDisiWrapper;
@@ -26,6 +26,9 @@
 @protocol JavaUtilCollection;
 @protocol JavaUtilList;
 
+/*!
+ @brief Base class for Scorers that score disjunctions.
+ */
 @interface OrgApacheLuceneSearchDisjunctionScorer : OrgApacheLuceneSearchScorer
 
 #pragma mark Public
@@ -52,6 +55,9 @@
                                    withJavaUtilList:(id<JavaUtilList>)subScorers
                                         withBoolean:(jboolean)needsScores;
 
+/*!
+ @brief Compute the score for the given linked list of scorers.
+ */
 - (jfloat)scoreWithOrgApacheLuceneSearchDisiWrapper:(OrgApacheLuceneSearchDisiWrapper *)topList;
 
 @end
@@ -64,4 +70,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDisjunctionScorer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchDisjunctionScorer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchDisjunctionScorer")

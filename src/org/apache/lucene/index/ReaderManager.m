@@ -51,10 +51,10 @@
     { "initWithOrgApacheLuceneIndexIndexWriter:withBoolean:", "ReaderManager", NULL, 0x1, "Ljava.io.IOException;", NULL },
     { "initWithOrgApacheLuceneStoreDirectory:", "ReaderManager", NULL, 0x1, "Ljava.io.IOException;", NULL },
     { "initWithOrgApacheLuceneIndexDirectoryReader:", "ReaderManager", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "decRefWithId:", "decRef", "V", 0x4, "Ljava.io.IOException;", NULL },
-    { "refreshIfNeededWithId:", "refreshIfNeeded", "Lorg.apache.lucene.index.DirectoryReader;", 0x4, "Ljava.io.IOException;", NULL },
-    { "tryIncRefWithId:", "tryIncRef", "Z", 0x4, NULL, NULL },
-    { "getRefCountWithId:", "getRefCount", "I", 0x4, NULL, NULL },
+    { "decRefWithId:", "decRef", "V", 0x4, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/DirectoryReader;)V" },
+    { "refreshIfNeededWithId:", "refreshIfNeeded", "Lorg.apache.lucene.index.DirectoryReader;", 0x4, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/DirectoryReader;)Lorg/apache/lucene/index/DirectoryReader;" },
+    { "tryIncRefWithId:", "tryIncRef", "Z", 0x4, NULL, "(Lorg/apache/lucene/index/DirectoryReader;)Z" },
+    { "getRefCountWithId:", "getRefCount", "I", 0x4, NULL, "(Lorg/apache/lucene/index/DirectoryReader;)I" },
   };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.index.DirectoryReader;"};
   static const J2ObjcClassInfo _OrgApacheLuceneIndexReaderManager = { 2, "ReaderManager", "org.apache.lucene.index", NULL, 0x11, 7, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/search/ReferenceManager<Lorg/apache/lucene/index/DirectoryReader;>;" };
@@ -69,9 +69,11 @@ void OrgApacheLuceneIndexReaderManager_initWithOrgApacheLuceneIndexIndexWriter_w
 }
 
 OrgApacheLuceneIndexReaderManager *new_OrgApacheLuceneIndexReaderManager_initWithOrgApacheLuceneIndexIndexWriter_withBoolean_(OrgApacheLuceneIndexIndexWriter *writer, jboolean applyAllDeletes) {
-  OrgApacheLuceneIndexReaderManager *self = [OrgApacheLuceneIndexReaderManager alloc];
-  OrgApacheLuceneIndexReaderManager_initWithOrgApacheLuceneIndexIndexWriter_withBoolean_(self, writer, applyAllDeletes);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexReaderManager, initWithOrgApacheLuceneIndexIndexWriter_withBoolean_, writer, applyAllDeletes)
+}
+
+OrgApacheLuceneIndexReaderManager *create_OrgApacheLuceneIndexReaderManager_initWithOrgApacheLuceneIndexIndexWriter_withBoolean_(OrgApacheLuceneIndexIndexWriter *writer, jboolean applyAllDeletes) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexReaderManager, initWithOrgApacheLuceneIndexIndexWriter_withBoolean_, writer, applyAllDeletes)
 }
 
 void OrgApacheLuceneIndexReaderManager_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexReaderManager *self, OrgApacheLuceneStoreDirectory *dir) {
@@ -80,9 +82,11 @@ void OrgApacheLuceneIndexReaderManager_initWithOrgApacheLuceneStoreDirectory_(Or
 }
 
 OrgApacheLuceneIndexReaderManager *new_OrgApacheLuceneIndexReaderManager_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *dir) {
-  OrgApacheLuceneIndexReaderManager *self = [OrgApacheLuceneIndexReaderManager alloc];
-  OrgApacheLuceneIndexReaderManager_initWithOrgApacheLuceneStoreDirectory_(self, dir);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexReaderManager, initWithOrgApacheLuceneStoreDirectory_, dir)
+}
+
+OrgApacheLuceneIndexReaderManager *create_OrgApacheLuceneIndexReaderManager_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *dir) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexReaderManager, initWithOrgApacheLuceneStoreDirectory_, dir)
 }
 
 void OrgApacheLuceneIndexReaderManager_initWithOrgApacheLuceneIndexDirectoryReader_(OrgApacheLuceneIndexReaderManager *self, OrgApacheLuceneIndexDirectoryReader *reader) {
@@ -91,9 +95,11 @@ void OrgApacheLuceneIndexReaderManager_initWithOrgApacheLuceneIndexDirectoryRead
 }
 
 OrgApacheLuceneIndexReaderManager *new_OrgApacheLuceneIndexReaderManager_initWithOrgApacheLuceneIndexDirectoryReader_(OrgApacheLuceneIndexDirectoryReader *reader) {
-  OrgApacheLuceneIndexReaderManager *self = [OrgApacheLuceneIndexReaderManager alloc];
-  OrgApacheLuceneIndexReaderManager_initWithOrgApacheLuceneIndexDirectoryReader_(self, reader);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexReaderManager, initWithOrgApacheLuceneIndexDirectoryReader_, reader)
+}
+
+OrgApacheLuceneIndexReaderManager *create_OrgApacheLuceneIndexReaderManager_initWithOrgApacheLuceneIndexDirectoryReader_(OrgApacheLuceneIndexDirectoryReader *reader) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexReaderManager, initWithOrgApacheLuceneIndexDirectoryReader_, reader)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexReaderManager)

@@ -5,55 +5,100 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexFieldInfos_INCLUDE_ALL")
-#if OrgApacheLuceneIndexFieldInfos_RESTRICT
-#define OrgApacheLuceneIndexFieldInfos_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexFieldInfos")
+#ifdef RESTRICT_OrgApacheLuceneIndexFieldInfos
+#define INCLUDE_ALL_OrgApacheLuceneIndexFieldInfos 0
 #else
-#define OrgApacheLuceneIndexFieldInfos_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexFieldInfos 1
 #endif
-#undef OrgApacheLuceneIndexFieldInfos_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexFieldInfos
 
-#if !defined (_OrgApacheLuceneIndexFieldInfos_) && (OrgApacheLuceneIndexFieldInfos_INCLUDE_ALL || OrgApacheLuceneIndexFieldInfos_INCLUDE)
-#define _OrgApacheLuceneIndexFieldInfos_
+#if !defined (OrgApacheLuceneIndexFieldInfos_) && (INCLUDE_ALL_OrgApacheLuceneIndexFieldInfos || defined(INCLUDE_OrgApacheLuceneIndexFieldInfos))
+#define OrgApacheLuceneIndexFieldInfos_
 
-#define JavaLangIterable_RESTRICT 1
-#define JavaLangIterable_INCLUDE 1
+#define RESTRICT_JavaLangIterable 1
+#define INCLUDE_JavaLangIterable 1
 #include "java/lang/Iterable.h"
 
 @class IOSObjectArray;
 @class OrgApacheLuceneIndexFieldInfo;
 @protocol JavaUtilIterator;
 
+/*!
+ @brief Collection of <code>FieldInfo</code>s (accessible by number or by name).
+ */
 @interface OrgApacheLuceneIndexFieldInfos : NSObject < JavaLangIterable >
 
 #pragma mark Public
 
+/*!
+ @brief Constructs a new FieldInfos from an array of FieldInfo objects
+ */
 - (instancetype)initWithOrgApacheLuceneIndexFieldInfoArray:(IOSObjectArray *)infos;
 
+/*!
+ @brief Return the fieldinfo object referenced by the fieldNumber.
+ @param fieldNumber field's number.
+ @return the FieldInfo object or null when the given fieldNumber
+ doesn't exist.
+ @throws IllegalArgumentException if fieldNumber is negative
+ */
 - (OrgApacheLuceneIndexFieldInfo *)fieldInfoWithInt:(jint)fieldNumber;
 
+/*!
+ @brief Return the fieldinfo object referenced by the field name
+ @return the FieldInfo object or null when the given fieldName
+ doesn't exist.
+ */
 - (OrgApacheLuceneIndexFieldInfo *)fieldInfoWithNSString:(NSString *)fieldName;
 
+/*!
+ @brief Returns true if any fields have DocValues
+ */
 - (jboolean)hasDocValues;
 
+/*!
+ @brief Returns true if any fields have freqs
+ */
 - (jboolean)hasFreq;
 
+/*!
+ @brief Returns true if any fields have norms
+ */
 - (jboolean)hasNorms;
 
+/*!
+ @brief Returns true if any fields have offsets
+ */
 - (jboolean)hasOffsets;
 
+/*!
+ @brief Returns true if any fields have payloads
+ */
 - (jboolean)hasPayloads;
 
+/*!
+ @brief Returns true if any fields have positions
+ */
 - (jboolean)hasProx;
 
+/*!
+ @brief Returns true if any fields have vectors
+ */
 - (jboolean)hasVectors;
 
+/*!
+ @brief Returns an iterator over all the fieldinfo objects present,
+ ordered by ascending field number
+ */
 - (id<JavaUtilIterator>)iterator;
 
+/*!
+ @brief Returns the number of fields
+ */
 - (jint)size;
 
 #pragma mark Package-Private
-
 
 @end
 
@@ -63,15 +108,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexFieldInfos_initWithOrgApacheLuceneInd
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexFieldInfos *new_OrgApacheLuceneIndexFieldInfos_initWithOrgApacheLuceneIndexFieldInfoArray_(IOSObjectArray *infos) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexFieldInfos *create_OrgApacheLuceneIndexFieldInfos_initWithOrgApacheLuceneIndexFieldInfoArray_(IOSObjectArray *infos);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFieldInfos)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexFieldInfos_FieldNumbers_) && (OrgApacheLuceneIndexFieldInfos_INCLUDE_ALL || OrgApacheLuceneIndexFieldInfos_FieldNumbers_INCLUDE)
-#define _OrgApacheLuceneIndexFieldInfos_FieldNumbers_
+#if !defined (OrgApacheLuceneIndexFieldInfos_FieldNumbers_) && (INCLUDE_ALL_OrgApacheLuceneIndexFieldInfos || defined(INCLUDE_OrgApacheLuceneIndexFieldInfos_FieldNumbers))
+#define OrgApacheLuceneIndexFieldInfos_FieldNumbers_
 
 @class JavaLangInteger;
-@class OrgApacheLuceneIndexDocValuesTypeEnum;
+@class OrgApacheLuceneIndexDocValuesType;
 
 @interface OrgApacheLuceneIndexFieldInfos_FieldNumbers : NSObject
 
@@ -79,22 +126,33 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFieldInfos)
 
 - (instancetype)init;
 
+/*!
+ @brief Returns the global field number for the given field name.
+ If the name
+ does not exist yet it tries to add it with the given preferred field
+ number assigned if possible otherwise the first unassigned field number
+ is used as the field number.
+ */
 - (jint)addOrGetWithNSString:(NSString *)fieldName
                      withInt:(jint)preferredFieldNumber
-withOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum *)dvType;
+withOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)dvType;
 
 - (void)clear;
 
+/*!
+ @brief Returns true if the <code>fieldName</code> exists in the map and is of the
+ same <code>dvType</code>.
+ */
 - (jboolean)containsWithNSString:(NSString *)fieldName
-withOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum *)dvType;
+withOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)dvType;
 
 - (void)setDocValuesTypeWithInt:(jint)number
                    withNSString:(NSString *)name
-withOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum *)dvType;
+withOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)dvType;
 
 - (void)verifyConsistentWithJavaLangInteger:(JavaLangInteger *)number
                                withNSString:(NSString *)name
-  withOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum *)dvType;
+      withOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)dvType;
 
 @end
 
@@ -104,12 +162,14 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexFieldInfos_FieldNumbers_init(OrgApach
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexFieldInfos_FieldNumbers *new_OrgApacheLuceneIndexFieldInfos_FieldNumbers_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexFieldInfos_FieldNumbers *create_OrgApacheLuceneIndexFieldInfos_FieldNumbers_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFieldInfos_FieldNumbers)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexFieldInfos_Builder_) && (OrgApacheLuceneIndexFieldInfos_INCLUDE_ALL || OrgApacheLuceneIndexFieldInfos_Builder_INCLUDE)
-#define _OrgApacheLuceneIndexFieldInfos_Builder_
+#if !defined (OrgApacheLuceneIndexFieldInfos_Builder_) && (INCLUDE_ALL_OrgApacheLuceneIndexFieldInfos || defined(INCLUDE_OrgApacheLuceneIndexFieldInfos_Builder))
+#define OrgApacheLuceneIndexFieldInfos_Builder_
 
 @class OrgApacheLuceneIndexFieldInfo;
 @class OrgApacheLuceneIndexFieldInfos;
@@ -128,12 +188,18 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFieldInfos_FieldNumbers)
 
 - (OrgApacheLuceneIndexFieldInfo *)fieldInfoWithNSString:(NSString *)fieldName;
 
+/*!
+ @brief Create a new field, or return existing one.
+ */
 - (OrgApacheLuceneIndexFieldInfo *)getOrAddWithNSString:(NSString *)name;
 
 #pragma mark Package-Private
 
 - (instancetype)init;
 
+/*!
+ @brief Creates a new instance with the given <code>FieldNumbers</code>.
+ */
 - (instancetype)initWithOrgApacheLuceneIndexFieldInfos_FieldNumbers:(OrgApacheLuceneIndexFieldInfos_FieldNumbers *)globalFieldNumbers;
 
 - (OrgApacheLuceneIndexFieldInfos *)finish;
@@ -148,12 +214,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexFieldInfos_Builder_init(OrgApacheLuce
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexFieldInfos_Builder *new_OrgApacheLuceneIndexFieldInfos_Builder_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexFieldInfos_Builder *create_OrgApacheLuceneIndexFieldInfos_Builder_init();
+
 FOUNDATION_EXPORT void OrgApacheLuceneIndexFieldInfos_Builder_initWithOrgApacheLuceneIndexFieldInfos_FieldNumbers_(OrgApacheLuceneIndexFieldInfos_Builder *self, OrgApacheLuceneIndexFieldInfos_FieldNumbers *globalFieldNumbers);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexFieldInfos_Builder *new_OrgApacheLuceneIndexFieldInfos_Builder_initWithOrgApacheLuceneIndexFieldInfos_FieldNumbers_(OrgApacheLuceneIndexFieldInfos_FieldNumbers *globalFieldNumbers) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneIndexFieldInfos_Builder *create_OrgApacheLuceneIndexFieldInfos_Builder_initWithOrgApacheLuceneIndexFieldInfos_FieldNumbers_(OrgApacheLuceneIndexFieldInfos_FieldNumbers *globalFieldNumbers);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFieldInfos_Builder)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexFieldInfos_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexFieldInfos")

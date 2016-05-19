@@ -5,7 +5,6 @@
 
 #include "J2ObjC_source.h"
 #include "java/lang/Exception.h"
-#include "java/lang/Throwable.h"
 #include "org/apache/lucene/queryparser/xml/ParserException.h"
 
 @implementation OrgApacheLuceneQueryparserXmlParserException
@@ -23,13 +22,13 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (instancetype)initWithNSString:(NSString *)message
-           withJavaLangThrowable:(JavaLangThrowable *)cause {
-  OrgApacheLuceneQueryparserXmlParserException_initWithNSString_withJavaLangThrowable_(self, message, cause);
+                 withNSException:(NSException *)cause {
+  OrgApacheLuceneQueryparserXmlParserException_initWithNSString_withNSException_(self, message, cause);
   return self;
 }
 
-- (instancetype)initWithJavaLangThrowable:(JavaLangThrowable *)cause {
-  OrgApacheLuceneQueryparserXmlParserException_initWithJavaLangThrowable_(self, cause);
+- (instancetype)initWithNSException:(NSException *)cause {
+  OrgApacheLuceneQueryparserXmlParserException_initWithNSException_(self, cause);
   return self;
 }
 
@@ -37,8 +36,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   static const J2ObjcMethodInfo methods[] = {
     { "init", "ParserException", NULL, 0x1, NULL, NULL },
     { "initWithNSString:", "ParserException", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withJavaLangThrowable:", "ParserException", NULL, 0x1, NULL, NULL },
-    { "initWithJavaLangThrowable:", "ParserException", NULL, 0x1, NULL, NULL },
+    { "initWithNSString:withNSException:", "ParserException", NULL, 0x1, NULL, NULL },
+    { "initWithNSException:", "ParserException", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlParserException = { 2, "ParserException", "org.apache.lucene.queryparser.xml", NULL, 0x1, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserXmlParserException;
@@ -51,9 +50,11 @@ void OrgApacheLuceneQueryparserXmlParserException_init(OrgApacheLuceneQueryparse
 }
 
 OrgApacheLuceneQueryparserXmlParserException *new_OrgApacheLuceneQueryparserXmlParserException_init() {
-  OrgApacheLuceneQueryparserXmlParserException *self = [OrgApacheLuceneQueryparserXmlParserException alloc];
-  OrgApacheLuceneQueryparserXmlParserException_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserXmlParserException, init)
+}
+
+OrgApacheLuceneQueryparserXmlParserException *create_OrgApacheLuceneQueryparserXmlParserException_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserXmlParserException, init)
 }
 
 void OrgApacheLuceneQueryparserXmlParserException_initWithNSString_(OrgApacheLuceneQueryparserXmlParserException *self, NSString *message) {
@@ -61,29 +62,35 @@ void OrgApacheLuceneQueryparserXmlParserException_initWithNSString_(OrgApacheLuc
 }
 
 OrgApacheLuceneQueryparserXmlParserException *new_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_(NSString *message) {
-  OrgApacheLuceneQueryparserXmlParserException *self = [OrgApacheLuceneQueryparserXmlParserException alloc];
-  OrgApacheLuceneQueryparserXmlParserException_initWithNSString_(self, message);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserXmlParserException, initWithNSString_, message)
 }
 
-void OrgApacheLuceneQueryparserXmlParserException_initWithNSString_withJavaLangThrowable_(OrgApacheLuceneQueryparserXmlParserException *self, NSString *message, JavaLangThrowable *cause) {
-  JavaLangException_initWithNSString_withJavaLangThrowable_(self, message, cause);
+OrgApacheLuceneQueryparserXmlParserException *create_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_(NSString *message) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserXmlParserException, initWithNSString_, message)
 }
 
-OrgApacheLuceneQueryparserXmlParserException *new_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_withJavaLangThrowable_(NSString *message, JavaLangThrowable *cause) {
-  OrgApacheLuceneQueryparserXmlParserException *self = [OrgApacheLuceneQueryparserXmlParserException alloc];
-  OrgApacheLuceneQueryparserXmlParserException_initWithNSString_withJavaLangThrowable_(self, message, cause);
-  return self;
+void OrgApacheLuceneQueryparserXmlParserException_initWithNSString_withNSException_(OrgApacheLuceneQueryparserXmlParserException *self, NSString *message, NSException *cause) {
+  JavaLangException_initWithNSString_withNSException_(self, message, cause);
 }
 
-void OrgApacheLuceneQueryparserXmlParserException_initWithJavaLangThrowable_(OrgApacheLuceneQueryparserXmlParserException *self, JavaLangThrowable *cause) {
-  JavaLangException_initWithJavaLangThrowable_(self, cause);
+OrgApacheLuceneQueryparserXmlParserException *new_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_withNSException_(NSString *message, NSException *cause) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserXmlParserException, initWithNSString_withNSException_, message, cause)
 }
 
-OrgApacheLuceneQueryparserXmlParserException *new_OrgApacheLuceneQueryparserXmlParserException_initWithJavaLangThrowable_(JavaLangThrowable *cause) {
-  OrgApacheLuceneQueryparserXmlParserException *self = [OrgApacheLuceneQueryparserXmlParserException alloc];
-  OrgApacheLuceneQueryparserXmlParserException_initWithJavaLangThrowable_(self, cause);
-  return self;
+OrgApacheLuceneQueryparserXmlParserException *create_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_withNSException_(NSString *message, NSException *cause) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserXmlParserException, initWithNSString_withNSException_, message, cause)
+}
+
+void OrgApacheLuceneQueryparserXmlParserException_initWithNSException_(OrgApacheLuceneQueryparserXmlParserException *self, NSException *cause) {
+  JavaLangException_initWithNSException_(self, cause);
+}
+
+OrgApacheLuceneQueryparserXmlParserException *new_OrgApacheLuceneQueryparserXmlParserException_initWithNSException_(NSException *cause) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserXmlParserException, initWithNSException_, cause)
+}
+
+OrgApacheLuceneQueryparserXmlParserException *create_OrgApacheLuceneQueryparserXmlParserException_initWithNSException_(NSException *cause) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserXmlParserException, initWithNSException_, cause)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserXmlParserException)

@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionValuesourceFloatFieldSource_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionValuesourceFloatFieldSource_RESTRICT
-#define OrgApacheLuceneQueriesFunctionValuesourceFloatFieldSource_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceFloatFieldSource")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceFloatFieldSource
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceFloatFieldSource 0
 #else
-#define OrgApacheLuceneQueriesFunctionValuesourceFloatFieldSource_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceFloatFieldSource 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionValuesourceFloatFieldSource_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceFloatFieldSource
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValuesourceFloatFieldSource_) && (OrgApacheLuceneQueriesFunctionValuesourceFloatFieldSource_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValuesourceFloatFieldSource_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValuesourceFloatFieldSource_
+#if !defined (OrgApacheLuceneQueriesFunctionValuesourceFloatFieldSource_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceFloatFieldSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceFloatFieldSource))
+#define OrgApacheLuceneQueriesFunctionValuesourceFloatFieldSource_
 
-#define OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource 1
 #include "org/apache/lucene/queries/function/valuesource/FieldCacheSource.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
@@ -25,6 +25,10 @@
 @class OrgApacheLuceneSearchSortField;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Obtains float field values from <code>org.apache.lucene.index.LeafReader.getNumericDocValues</code> and makes those
+ values available as other numeric types, casting as needed.
+ */
 @interface OrgApacheLuceneQueriesFunctionValuesourceFloatFieldSource : OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource
 
 #pragma mark Public
@@ -50,8 +54,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceFloatFieldSource
 
 FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceFloatFieldSource *new_OrgApacheLuceneQueriesFunctionValuesourceFloatFieldSource_initWithNSString_(NSString *field) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceFloatFieldSource *create_OrgApacheLuceneQueriesFunctionValuesourceFloatFieldSource_initWithNSString_(NSString *field);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceFloatFieldSource)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionValuesourceFloatFieldSource_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceFloatFieldSource")

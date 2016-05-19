@@ -5,23 +5,26 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisArArabicNormalizationFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisArArabicNormalizationFilter_RESTRICT
-#define OrgApacheLuceneAnalysisArArabicNormalizationFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisArArabicNormalizationFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisArArabicNormalizationFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisArArabicNormalizationFilter 0
 #else
-#define OrgApacheLuceneAnalysisArArabicNormalizationFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisArArabicNormalizationFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisArArabicNormalizationFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisArArabicNormalizationFilter
 
-#if !defined (_OrgApacheLuceneAnalysisArArabicNormalizationFilter_) && (OrgApacheLuceneAnalysisArArabicNormalizationFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisArArabicNormalizationFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisArArabicNormalizationFilter_
+#if !defined (OrgApacheLuceneAnalysisArArabicNormalizationFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisArArabicNormalizationFilter || defined(INCLUDE_OrgApacheLuceneAnalysisArArabicNormalizationFilter))
+#define OrgApacheLuceneAnalysisArArabicNormalizationFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief A <code>TokenFilter</code> that applies <code>ArabicNormalizer</code> to normalize the orthography.
+ */
 @interface OrgApacheLuceneAnalysisArArabicNormalizationFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
@@ -38,8 +41,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisArArabicNormalizationFilter_initWi
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisArArabicNormalizationFilter *new_OrgApacheLuceneAnalysisArArabicNormalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisArArabicNormalizationFilter *create_OrgApacheLuceneAnalysisArArabicNormalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisArArabicNormalizationFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisArArabicNormalizationFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisArArabicNormalizationFilter")

@@ -53,8 +53,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader, docIn_,
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader, posIn_, OrgApacheLuceneStoreIndexInput *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader, payIn_, OrgApacheLuceneStoreIndexInput *)
 
-static jlong OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BASE_RAM_BYTES_USED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader, BASE_RAM_BYTES_USED_, jlong)
+inline jlong OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_get_BASE_RAM_BYTES_USED();
+static jlong OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BASE_RAM_BYTES_USED;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader, BASE_RAM_BYTES_USED, jlong)
 
 @interface OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum () {
  @public
@@ -217,10 +218,10 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader)
 
 - (void)init__WithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)termsIn
         withOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state {
-  OrgApacheLuceneCodecsCodecUtil_checkIndexHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_withByteArray_withNSString_(termsIn, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_TERMS_CODEC_, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_VERSION_START, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_VERSION_CURRENT, [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentReadState *) nil_chk(state))->segmentInfo_)) getId], state->segmentSuffix_);
+  OrgApacheLuceneCodecsCodecUtil_checkIndexHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_withByteArray_withNSString_(termsIn, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_TERMS_CODEC, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_VERSION_START, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_VERSION_CURRENT, [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentReadState *) nil_chk(state))->segmentInfo_)) getId], state->segmentSuffix_);
   jint indexBlockSize = [((OrgApacheLuceneStoreIndexInput *) nil_chk(termsIn)) readVInt];
   if (indexBlockSize != OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_BLOCK_SIZE) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$IC", @"index-time BLOCK_SIZE (", indexBlockSize, @") != read-time BLOCK_SIZE (", OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_BLOCK_SIZE, ')')) autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$IC", @"index-time BLOCK_SIZE (", indexBlockSize, @") != read-time BLOCK_SIZE (", OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_BLOCK_SIZE, ')'));
   }
 }
 
@@ -233,7 +234,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader)
 }
 
 - (OrgApacheLuceneCodecsBlockTermState *)newTermState {
-  return [new_OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState_init() autorelease];
+  return create_OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState_init();
 }
 
 - (void)close {
@@ -245,9 +246,9 @@ withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
 withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
 withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)_termState
                     withBoolean:(jboolean)absolute {
-  OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *termState = (OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *) check_class_cast(_termState, [OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState class]);
-  jboolean fieldHasPositions = [((OrgApacheLuceneIndexIndexOptionsEnum *) nil_chk([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo)) getIndexOptions])) compareToWithId:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS)] >= 0;
-  jboolean fieldHasOffsets = [((OrgApacheLuceneIndexIndexOptionsEnum *) nil_chk([fieldInfo getIndexOptions])) compareToWithId:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS)] >= 0;
+  OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *termState = (OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *) cast_chk(_termState, [OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState class]);
+  jboolean fieldHasPositions = [((OrgApacheLuceneIndexIndexOptions *) nil_chk([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo)) getIndexOptions])) compareToWithId:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS)] >= 0;
+  jboolean fieldHasOffsets = [((OrgApacheLuceneIndexIndexOptions *) nil_chk([fieldInfo getIndexOptions])) compareToWithId:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS)] >= 0;
   jboolean fieldHasPayloads = [fieldInfo hasPayloads];
   if (absolute) {
     ((OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *) nil_chk(termState))->docStartFP_ = 0;
@@ -287,8 +288,8 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)_
                                         withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)termState
                                            withOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)reuse
                                                                         withInt:(jint)flags {
-  jboolean indexHasPositions = [((OrgApacheLuceneIndexIndexOptionsEnum *) nil_chk([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo)) getIndexOptions])) compareToWithId:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS)] >= 0;
-  jboolean indexHasOffsets = [((OrgApacheLuceneIndexIndexOptionsEnum *) nil_chk([fieldInfo getIndexOptions])) compareToWithId:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS)] >= 0;
+  jboolean indexHasPositions = [((OrgApacheLuceneIndexIndexOptions *) nil_chk([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo)) getIndexOptions])) compareToWithId:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS)] >= 0;
+  jboolean indexHasOffsets = [((OrgApacheLuceneIndexIndexOptions *) nil_chk([fieldInfo getIndexOptions])) compareToWithId:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS)] >= 0;
   jboolean indexHasPayloads = [fieldInfo hasPayloads];
   if (OrgApacheLuceneIndexPostingsEnum_featureRequestedWithInt_withShort_(flags, OrgApacheLuceneIndexDocsAndPositionsEnum_OLD_NULL_SEMANTICS)) {
     if (!indexHasPositions) {
@@ -298,46 +299,46 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)_
   if (indexHasPositions == false || OrgApacheLuceneIndexPostingsEnum_featureRequestedWithInt_withShort_(flags, OrgApacheLuceneIndexPostingsEnum_POSITIONS) == false) {
     OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum *docsEnum;
     if ([reuse isKindOfClass:[OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum class]]) {
-      docsEnum = (OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum *) check_class_cast(reuse, [OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum class]);
+      docsEnum = (OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum *) cast_chk(reuse, [OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum class]);
       if (![((OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum *) nil_chk(docsEnum)) canReuseWithOrgApacheLuceneStoreIndexInput:docIn_ withOrgApacheLuceneIndexFieldInfo:fieldInfo]) {
-        docsEnum = [new_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum_initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader_withOrgApacheLuceneIndexFieldInfo_(self, fieldInfo) autorelease];
+        docsEnum = create_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum_initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader_withOrgApacheLuceneIndexFieldInfo_(self, fieldInfo);
       }
     }
     else {
-      docsEnum = [new_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum_initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader_withOrgApacheLuceneIndexFieldInfo_(self, fieldInfo) autorelease];
+      docsEnum = create_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum_initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader_withOrgApacheLuceneIndexFieldInfo_(self, fieldInfo);
     }
-    return [((OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum *) nil_chk(docsEnum)) resetWithOrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState:(OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *) check_class_cast(termState, [OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState class]) withInt:flags];
+    return [docsEnum resetWithOrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState:(OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *) cast_chk(termState, [OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState class]) withInt:flags];
   }
   else if ((indexHasOffsets == false || OrgApacheLuceneIndexPostingsEnum_featureRequestedWithInt_withShort_(flags, OrgApacheLuceneIndexPostingsEnum_OFFSETS) == false) && (indexHasPayloads == false || OrgApacheLuceneIndexPostingsEnum_featureRequestedWithInt_withShort_(flags, OrgApacheLuceneIndexPostingsEnum_PAYLOADS) == false)) {
     OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum *docsAndPositionsEnum;
     if ([reuse isKindOfClass:[OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum class]]) {
-      docsAndPositionsEnum = (OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum *) check_class_cast(reuse, [OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum class]);
+      docsAndPositionsEnum = (OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum *) cast_chk(reuse, [OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum class]);
       if (![((OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum *) nil_chk(docsAndPositionsEnum)) canReuseWithOrgApacheLuceneStoreIndexInput:docIn_ withOrgApacheLuceneIndexFieldInfo:fieldInfo]) {
-        docsAndPositionsEnum = [new_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum_initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader_withOrgApacheLuceneIndexFieldInfo_(self, fieldInfo) autorelease];
+        docsAndPositionsEnum = create_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum_initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader_withOrgApacheLuceneIndexFieldInfo_(self, fieldInfo);
       }
     }
     else {
-      docsAndPositionsEnum = [new_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum_initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader_withOrgApacheLuceneIndexFieldInfo_(self, fieldInfo) autorelease];
+      docsAndPositionsEnum = create_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum_initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader_withOrgApacheLuceneIndexFieldInfo_(self, fieldInfo);
     }
-    return [((OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum *) nil_chk(docsAndPositionsEnum)) resetWithOrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState:(OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *) check_class_cast(termState, [OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState class])];
+    return [docsAndPositionsEnum resetWithOrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState:(OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *) cast_chk(termState, [OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState class])];
   }
   else {
     OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum *everythingEnum;
     if ([reuse isKindOfClass:[OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum class]]) {
-      everythingEnum = (OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum *) check_class_cast(reuse, [OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum class]);
+      everythingEnum = (OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum *) cast_chk(reuse, [OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum class]);
       if (![((OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum *) nil_chk(everythingEnum)) canReuseWithOrgApacheLuceneStoreIndexInput:docIn_ withOrgApacheLuceneIndexFieldInfo:fieldInfo]) {
-        everythingEnum = [new_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum_initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader_withOrgApacheLuceneIndexFieldInfo_(self, fieldInfo) autorelease];
+        everythingEnum = create_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum_initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader_withOrgApacheLuceneIndexFieldInfo_(self, fieldInfo);
       }
     }
     else {
-      everythingEnum = [new_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum_initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader_withOrgApacheLuceneIndexFieldInfo_(self, fieldInfo) autorelease];
+      everythingEnum = create_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum_initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader_withOrgApacheLuceneIndexFieldInfo_(self, fieldInfo);
     }
-    return [((OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum *) nil_chk(everythingEnum)) resetWithOrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState:(OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *) check_class_cast(termState, [OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState class]) withInt:flags];
+    return [everythingEnum resetWithOrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState:(OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *) cast_chk(termState, [OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState class]) withInt:flags];
   }
 }
 
 - (jlong)ramBytesUsed {
-  return OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BASE_RAM_BYTES_USED_;
+  return OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BASE_RAM_BYTES_USED;
 }
 
 - (id<JavaUtilCollection>)getChildResources {
@@ -370,7 +371,7 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)_
 
 + (void)initialize {
   if (self == [OrgApacheLuceneCodecsLucene50Lucene50PostingsReader class]) {
-    OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BASE_RAM_BYTES_USED_ = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_class_());
+    OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BASE_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_class_());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader)
   }
 }
@@ -385,12 +386,12 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)_
     { "decodeTermWithLongArray:withOrgApacheLuceneStoreDataInput:withOrgApacheLuceneIndexFieldInfo:withOrgApacheLuceneCodecsBlockTermState:withBoolean:", "decodeTerm", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "postingsWithOrgApacheLuceneIndexFieldInfo:withOrgApacheLuceneCodecsBlockTermState:withOrgApacheLuceneIndexPostingsEnum:withInt:", "postings", "Lorg.apache.lucene.index.PostingsEnum;", 0x1, "Ljava.io.IOException;", NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
     { "checkIntegrity", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "BASE_RAM_BYTES_USED_", NULL, 0x1a, "J", &OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BASE_RAM_BYTES_USED_, NULL, .constantValue.asLong = 0 },
+    { "BASE_RAM_BYTES_USED", "BASE_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BASE_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
     { "docIn_", NULL, 0x12, "Lorg.apache.lucene.store.IndexInput;", NULL, NULL, .constantValue.asLong = 0 },
     { "posIn_", NULL, 0x12, "Lorg.apache.lucene.store.IndexInput;", NULL, NULL, .constantValue.asLong = 0 },
     { "payIn_", NULL, 0x12, "Lorg.apache.lucene.store.IndexInput;", NULL, NULL, .constantValue.asLong = 0 },
@@ -410,21 +411,21 @@ void OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_initWithOrgApacheLucene
   OrgApacheLuceneStoreIndexInput *docIn = nil;
   OrgApacheLuceneStoreIndexInput *posIn = nil;
   OrgApacheLuceneStoreIndexInput *payIn = nil;
-  NSString *docName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentReadState *) nil_chk(state))->segmentInfo_))->name_, state->segmentSuffix_, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_DOC_EXTENSION_);
+  NSString *docName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentReadState *) nil_chk(state))->segmentInfo_))->name_, state->segmentSuffix_, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_DOC_EXTENSION);
   @try {
     docIn = [((OrgApacheLuceneStoreDirectory *) nil_chk(state->directory_)) openInputWithNSString:docName withOrgApacheLuceneStoreIOContext:state->context_];
-    self->version__ = OrgApacheLuceneCodecsCodecUtil_checkIndexHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_withByteArray_withNSString_(docIn, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_DOC_CODEC_, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_VERSION_START, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_VERSION_CURRENT, [state->segmentInfo_ getId], state->segmentSuffix_);
+    self->version__ = OrgApacheLuceneCodecsCodecUtil_checkIndexHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_withByteArray_withNSString_(docIn, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_DOC_CODEC, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_VERSION_START, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_VERSION_CURRENT, [state->segmentInfo_ getId], state->segmentSuffix_);
     JreStrongAssignAndConsume(&self->forUtil_, new_OrgApacheLuceneCodecsLucene50ForUtil_initWithOrgApacheLuceneStoreDataInput_(docIn));
     OrgApacheLuceneCodecsCodecUtil_retrieveChecksumWithOrgApacheLuceneStoreIndexInput_(docIn);
     if ([((OrgApacheLuceneIndexFieldInfos *) nil_chk(state->fieldInfos_)) hasProx]) {
-      NSString *proxName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(state->segmentInfo_->name_, state->segmentSuffix_, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_POS_EXTENSION_);
+      NSString *proxName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(state->segmentInfo_->name_, state->segmentSuffix_, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_POS_EXTENSION);
       posIn = [state->directory_ openInputWithNSString:proxName withOrgApacheLuceneStoreIOContext:state->context_];
-      OrgApacheLuceneCodecsCodecUtil_checkIndexHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_withByteArray_withNSString_(posIn, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_POS_CODEC_, self->version__, self->version__, [state->segmentInfo_ getId], state->segmentSuffix_);
+      OrgApacheLuceneCodecsCodecUtil_checkIndexHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_withByteArray_withNSString_(posIn, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_POS_CODEC, self->version__, self->version__, [state->segmentInfo_ getId], state->segmentSuffix_);
       OrgApacheLuceneCodecsCodecUtil_retrieveChecksumWithOrgApacheLuceneStoreIndexInput_(posIn);
       if ([state->fieldInfos_ hasPayloads] || [state->fieldInfos_ hasOffsets]) {
-        NSString *payName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(state->segmentInfo_->name_, state->segmentSuffix_, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_PAY_EXTENSION_);
+        NSString *payName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(state->segmentInfo_->name_, state->segmentSuffix_, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_PAY_EXTENSION);
         payIn = [state->directory_ openInputWithNSString:payName withOrgApacheLuceneStoreIOContext:state->context_];
-        OrgApacheLuceneCodecsCodecUtil_checkIndexHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_withByteArray_withNSString_(payIn, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_PAY_CODEC_, self->version__, self->version__, [state->segmentInfo_ getId], state->segmentSuffix_);
+        OrgApacheLuceneCodecsCodecUtil_checkIndexHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_withByteArray_withNSString_(payIn, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_PAY_CODEC, self->version__, self->version__, [state->segmentInfo_ getId], state->segmentSuffix_);
         OrgApacheLuceneCodecsCodecUtil_retrieveChecksumWithOrgApacheLuceneStoreIndexInput_(payIn);
       }
     }
@@ -441,9 +442,11 @@ void OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_initWithOrgApacheLucene
 }
 
 OrgApacheLuceneCodecsLucene50Lucene50PostingsReader *new_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_initWithOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneIndexSegmentReadState *state) {
-  OrgApacheLuceneCodecsLucene50Lucene50PostingsReader *self = [OrgApacheLuceneCodecsLucene50Lucene50PostingsReader alloc];
-  OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_initWithOrgApacheLuceneIndexSegmentReadState_(self, state);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader, initWithOrgApacheLuceneIndexSegmentReadState_, state)
+}
+
+OrgApacheLuceneCodecsLucene50Lucene50PostingsReader *create_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_initWithOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneIndexSegmentReadState *state) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader, initWithOrgApacheLuceneIndexSegmentReadState_, state)
 }
 
 void OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_readVIntBlockWithOrgApacheLuceneStoreIndexInput_withIntArray_withIntArray_withInt_withBoolean_(OrgApacheLuceneStoreIndexInput *docIn, IOSIntArray *docBuffer, IOSIntArray *freqBuffer, jint num, jboolean indexHasFreq) {
@@ -479,7 +482,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50PostingsRe
 
 - (jboolean)canReuseWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)docIn
                      withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo {
-  return docIn == startDocIn_ && indexHasFreq_ == ([((OrgApacheLuceneIndexIndexOptionsEnum *) nil_chk([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo)) getIndexOptions])) compareToWithId:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS)] >= 0) && indexHasPos_ == ([((OrgApacheLuceneIndexIndexOptionsEnum *) nil_chk([fieldInfo getIndexOptions])) compareToWithId:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS)] >= 0) && indexHasPayloads_ == [fieldInfo hasPayloads];
+  return docIn == startDocIn_ && indexHasFreq_ == ([((OrgApacheLuceneIndexIndexOptions *) nil_chk([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo)) getIndexOptions])) compareToWithId:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS)] >= 0) && indexHasPos_ == ([((OrgApacheLuceneIndexIndexOptions *) nil_chk([fieldInfo getIndexOptions])) compareToWithId:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS)] >= 0) && indexHasPayloads_ == [fieldInfo hasPayloads];
 }
 
 - (OrgApacheLuceneIndexPostingsEnum *)resetWithOrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState:(OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *)termState
@@ -558,7 +561,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50PostingsRe
     }
     if (!skipped_) {
       JreAssert((skipOffset_ != -1), (@"org/apache/lucene/codecs/lucene50/Lucene50PostingsReader.java:423 condition failed: assert skipOffset != -1;"));
-      [((OrgApacheLuceneCodecsLucene50Lucene50SkipReader *) nil_chk(skipper_)) init__WithLong:docTermStartFP_ + skipOffset_ withLong:docTermStartFP_ withLong:0 withLong:0 withInt:docFreq_];
+      [skipper_ init__WithLong:docTermStartFP_ + skipOffset_ withLong:docTermStartFP_ withLong:0 withLong:0 withInt:docFreq_];
       skipped_ = true;
     }
     jint newDocUpto = [((OrgApacheLuceneCodecsLucene50Lucene50SkipReader *) nil_chk(skipper_)) skipToWithInt:target] + 1;
@@ -566,10 +569,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50PostingsRe
       JreAssert((newDocUpto % OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_BLOCK_SIZE == 0), (JreStrcat("$I", @"got ", newDocUpto)));
       docUpto_ = newDocUpto;
       docBufferUpto_ = OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_BLOCK_SIZE;
-      accum_ = [skipper_ getDoc];
-      [((OrgApacheLuceneStoreIndexInput *) nil_chk(docIn_)) seekWithLong:[skipper_ getDocPointer]];
+      accum_ = [((OrgApacheLuceneCodecsLucene50Lucene50SkipReader *) nil_chk(skipper_)) getDoc];
+      [((OrgApacheLuceneStoreIndexInput *) nil_chk(docIn_)) seekWithLong:[((OrgApacheLuceneCodecsLucene50Lucene50SkipReader *) nil_chk(skipper_)) getDocPointer]];
     }
-    nextSkipDoc_ = [skipper_ getNextSkipDoc];
+    nextSkipDoc_ = [((OrgApacheLuceneCodecsLucene50Lucene50SkipReader *) nil_chk(skipper_)) getNextSkipDoc];
   }
   if (docUpto_ == docFreq_) {
     return doc_ = OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS;
@@ -659,21 +662,23 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50PostingsRe
 void OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum_initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader_withOrgApacheLuceneIndexFieldInfo_(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum *self, OrgApacheLuceneCodecsLucene50Lucene50PostingsReader *outer$, OrgApacheLuceneIndexFieldInfo *fieldInfo) {
   JreStrongAssign(&self->this$0_, outer$);
   OrgApacheLuceneIndexPostingsEnum_init(self);
-  JreStrongAssignAndConsume(&self->docDeltaBuffer_, [IOSIntArray newArrayWithLength:JreLoadStatic(OrgApacheLuceneCodecsLucene50ForUtil, MAX_DATA_SIZE_)]);
-  JreStrongAssignAndConsume(&self->freqBuffer_, [IOSIntArray newArrayWithLength:JreLoadStatic(OrgApacheLuceneCodecsLucene50ForUtil, MAX_DATA_SIZE_)]);
+  JreStrongAssignAndConsume(&self->docDeltaBuffer_, [IOSIntArray newArrayWithLength:JreLoadStatic(OrgApacheLuceneCodecsLucene50ForUtil, MAX_DATA_SIZE)]);
+  JreStrongAssignAndConsume(&self->freqBuffer_, [IOSIntArray newArrayWithLength:JreLoadStatic(OrgApacheLuceneCodecsLucene50ForUtil, MAX_DATA_SIZE)]);
   JreStrongAssign(&self->startDocIn_, outer$->docIn_);
   JreStrongAssign(&self->docIn_, nil);
-  self->indexHasFreq_ = ([((OrgApacheLuceneIndexIndexOptionsEnum *) nil_chk([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo)) getIndexOptions])) compareToWithId:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS)] >= 0);
-  self->indexHasPos_ = ([((OrgApacheLuceneIndexIndexOptionsEnum *) nil_chk([fieldInfo getIndexOptions])) compareToWithId:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS)] >= 0);
-  self->indexHasOffsets_ = ([((OrgApacheLuceneIndexIndexOptionsEnum *) nil_chk([fieldInfo getIndexOptions])) compareToWithId:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS)] >= 0);
+  self->indexHasFreq_ = ([((OrgApacheLuceneIndexIndexOptions *) nil_chk([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo)) getIndexOptions])) compareToWithId:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS)] >= 0);
+  self->indexHasPos_ = ([((OrgApacheLuceneIndexIndexOptions *) nil_chk([fieldInfo getIndexOptions])) compareToWithId:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS)] >= 0);
+  self->indexHasOffsets_ = ([((OrgApacheLuceneIndexIndexOptions *) nil_chk([fieldInfo getIndexOptions])) compareToWithId:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS)] >= 0);
   self->indexHasPayloads_ = [fieldInfo hasPayloads];
   JreStrongAssignAndConsume(&self->encoded_, [IOSByteArray newArrayWithLength:OrgApacheLuceneCodecsLucene50ForUtil_MAX_ENCODED_SIZE]);
 }
 
 OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum *new_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum_initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader_withOrgApacheLuceneIndexFieldInfo_(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader *outer$, OrgApacheLuceneIndexFieldInfo *fieldInfo) {
-  OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum *self = [OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum alloc];
-  OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum_initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader_withOrgApacheLuceneIndexFieldInfo_(self, outer$, fieldInfo);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum, initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader_withOrgApacheLuceneIndexFieldInfo_, outer$, fieldInfo)
+}
+
+OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum *create_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum_initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader_withOrgApacheLuceneIndexFieldInfo_(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader *outer$, OrgApacheLuceneIndexFieldInfo *fieldInfo) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum, initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader_withOrgApacheLuceneIndexFieldInfo_, outer$, fieldInfo)
 }
 
 void OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum_refillDocs(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum *self) {
@@ -712,7 +717,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50PostingsRe
 
 - (jboolean)canReuseWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)docIn
                      withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo {
-  return docIn == startDocIn_ && indexHasOffsets_ == ([((OrgApacheLuceneIndexIndexOptionsEnum *) nil_chk([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo)) getIndexOptions])) compareToWithId:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS)] >= 0) && indexHasPayloads_ == [fieldInfo hasPayloads];
+  return docIn == startDocIn_ && indexHasOffsets_ == ([((OrgApacheLuceneIndexIndexOptions *) nil_chk([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo)) getIndexOptions])) compareToWithId:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS)] >= 0) && indexHasPayloads_ == [fieldInfo hasPayloads];
 }
 
 - (OrgApacheLuceneIndexPostingsEnum *)resetWithOrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState:(OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *)termState {
@@ -794,7 +799,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50PostingsRe
     }
     if (!skipped_) {
       JreAssert((skipOffset_ != -1), (@"org/apache/lucene/codecs/lucene50/Lucene50PostingsReader.java:688 condition failed: assert skipOffset != -1;"));
-      [((OrgApacheLuceneCodecsLucene50Lucene50SkipReader *) nil_chk(skipper_)) init__WithLong:docTermStartFP_ + skipOffset_ withLong:docTermStartFP_ withLong:posTermStartFP_ withLong:payTermStartFP_ withInt:docFreq_];
+      [skipper_ init__WithLong:docTermStartFP_ + skipOffset_ withLong:docTermStartFP_ withLong:posTermStartFP_ withLong:payTermStartFP_ withInt:docFreq_];
       skipped_ = true;
     }
     jint newDocUpto = [((OrgApacheLuceneCodecsLucene50Lucene50SkipReader *) nil_chk(skipper_)) skipToWithInt:target] + 1;
@@ -802,12 +807,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50PostingsRe
       JreAssert((newDocUpto % OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_BLOCK_SIZE == 0), (JreStrcat("$I", @"got ", newDocUpto)));
       docUpto_ = newDocUpto;
       docBufferUpto_ = OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_BLOCK_SIZE;
-      accum_ = [skipper_ getDoc];
-      [((OrgApacheLuceneStoreIndexInput *) nil_chk(docIn_)) seekWithLong:[skipper_ getDocPointer]];
-      posPendingFP_ = [skipper_ getPosPointer];
-      posPendingCount_ = [skipper_ getPosBufferUpto];
+      accum_ = [((OrgApacheLuceneCodecsLucene50Lucene50SkipReader *) nil_chk(skipper_)) getDoc];
+      [((OrgApacheLuceneStoreIndexInput *) nil_chk(docIn_)) seekWithLong:[((OrgApacheLuceneCodecsLucene50Lucene50SkipReader *) nil_chk(skipper_)) getDocPointer]];
+      posPendingFP_ = [((OrgApacheLuceneCodecsLucene50Lucene50SkipReader *) nil_chk(skipper_)) getPosPointer];
+      posPendingCount_ = [((OrgApacheLuceneCodecsLucene50Lucene50SkipReader *) nil_chk(skipper_)) getPosBufferUpto];
     }
-    nextSkipDoc_ = [skipper_ getNextSkipDoc];
+    nextSkipDoc_ = [((OrgApacheLuceneCodecsLucene50Lucene50SkipReader *) nil_chk(skipper_)) getNextSkipDoc];
   }
   if (docUpto_ == docFreq_) {
     return doc_ = OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS;
@@ -944,21 +949,23 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50PostingsRe
 void OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum_initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader_withOrgApacheLuceneIndexFieldInfo_(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum *self, OrgApacheLuceneCodecsLucene50Lucene50PostingsReader *outer$, OrgApacheLuceneIndexFieldInfo *fieldInfo) {
   JreStrongAssign(&self->this$0_, outer$);
   OrgApacheLuceneIndexPostingsEnum_init(self);
-  JreStrongAssignAndConsume(&self->docDeltaBuffer_, [IOSIntArray newArrayWithLength:JreLoadStatic(OrgApacheLuceneCodecsLucene50ForUtil, MAX_DATA_SIZE_)]);
-  JreStrongAssignAndConsume(&self->freqBuffer_, [IOSIntArray newArrayWithLength:JreLoadStatic(OrgApacheLuceneCodecsLucene50ForUtil, MAX_DATA_SIZE_)]);
-  JreStrongAssignAndConsume(&self->posDeltaBuffer_, [IOSIntArray newArrayWithLength:JreLoadStatic(OrgApacheLuceneCodecsLucene50ForUtil, MAX_DATA_SIZE_)]);
+  JreStrongAssignAndConsume(&self->docDeltaBuffer_, [IOSIntArray newArrayWithLength:JreLoadStatic(OrgApacheLuceneCodecsLucene50ForUtil, MAX_DATA_SIZE)]);
+  JreStrongAssignAndConsume(&self->freqBuffer_, [IOSIntArray newArrayWithLength:JreLoadStatic(OrgApacheLuceneCodecsLucene50ForUtil, MAX_DATA_SIZE)]);
+  JreStrongAssignAndConsume(&self->posDeltaBuffer_, [IOSIntArray newArrayWithLength:JreLoadStatic(OrgApacheLuceneCodecsLucene50ForUtil, MAX_DATA_SIZE)]);
   JreStrongAssign(&self->startDocIn_, outer$->docIn_);
   JreStrongAssign(&self->docIn_, nil);
   JreStrongAssign(&self->posIn_, [((OrgApacheLuceneStoreIndexInput *) nil_chk(outer$->posIn_)) clone]);
   JreStrongAssignAndConsume(&self->encoded_, [IOSByteArray newArrayWithLength:OrgApacheLuceneCodecsLucene50ForUtil_MAX_ENCODED_SIZE]);
-  self->indexHasOffsets_ = ([((OrgApacheLuceneIndexIndexOptionsEnum *) nil_chk([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo)) getIndexOptions])) compareToWithId:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS)] >= 0);
+  self->indexHasOffsets_ = ([((OrgApacheLuceneIndexIndexOptions *) nil_chk([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo)) getIndexOptions])) compareToWithId:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS)] >= 0);
   self->indexHasPayloads_ = [fieldInfo hasPayloads];
 }
 
 OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum *new_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum_initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader_withOrgApacheLuceneIndexFieldInfo_(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader *outer$, OrgApacheLuceneIndexFieldInfo *fieldInfo) {
-  OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum *self = [OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum alloc];
-  OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum_initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader_withOrgApacheLuceneIndexFieldInfo_(self, outer$, fieldInfo);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum, initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader_withOrgApacheLuceneIndexFieldInfo_, outer$, fieldInfo)
+}
+
+OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum *create_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum_initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader_withOrgApacheLuceneIndexFieldInfo_(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader *outer$, OrgApacheLuceneIndexFieldInfo *fieldInfo) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum, initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader_withOrgApacheLuceneIndexFieldInfo_, outer$, fieldInfo)
 }
 
 void OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum_refillDocs(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum *self) {
@@ -1039,7 +1046,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50PostingsRe
 
 - (jboolean)canReuseWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)docIn
                      withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo {
-  return docIn == startDocIn_ && indexHasOffsets_ == ([((OrgApacheLuceneIndexIndexOptionsEnum *) nil_chk([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo)) getIndexOptions])) compareToWithId:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS)] >= 0) && indexHasPayloads_ == [fieldInfo hasPayloads];
+  return docIn == startDocIn_ && indexHasOffsets_ == ([((OrgApacheLuceneIndexIndexOptions *) nil_chk([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo)) getIndexOptions])) compareToWithId:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS)] >= 0) && indexHasPayloads_ == [fieldInfo hasPayloads];
 }
 
 - (OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum *)resetWithOrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState:(OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *)termState
@@ -1126,7 +1133,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50PostingsRe
     }
     if (!skipped_) {
       JreAssert((skipOffset_ != -1), (@"org/apache/lucene/codecs/lucene50/Lucene50PostingsReader.java:1104 condition failed: assert skipOffset != -1;"));
-      [((OrgApacheLuceneCodecsLucene50Lucene50SkipReader *) nil_chk(skipper_)) init__WithLong:docTermStartFP_ + skipOffset_ withLong:docTermStartFP_ withLong:posTermStartFP_ withLong:payTermStartFP_ withInt:docFreq_];
+      [skipper_ init__WithLong:docTermStartFP_ + skipOffset_ withLong:docTermStartFP_ withLong:posTermStartFP_ withLong:payTermStartFP_ withInt:docFreq_];
       skipped_ = true;
     }
     jint newDocUpto = [((OrgApacheLuceneCodecsLucene50Lucene50SkipReader *) nil_chk(skipper_)) skipToWithInt:target] + 1;
@@ -1134,15 +1141,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50PostingsRe
       JreAssert((newDocUpto % OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_BLOCK_SIZE == 0), (JreStrcat("$I", @"got ", newDocUpto)));
       docUpto_ = newDocUpto;
       docBufferUpto_ = OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_BLOCK_SIZE;
-      accum_ = [skipper_ getDoc];
-      [((OrgApacheLuceneStoreIndexInput *) nil_chk(docIn_)) seekWithLong:[skipper_ getDocPointer]];
-      posPendingFP_ = [skipper_ getPosPointer];
-      payPendingFP_ = [skipper_ getPayPointer];
-      posPendingCount_ = [skipper_ getPosBufferUpto];
+      accum_ = [((OrgApacheLuceneCodecsLucene50Lucene50SkipReader *) nil_chk(skipper_)) getDoc];
+      [((OrgApacheLuceneStoreIndexInput *) nil_chk(docIn_)) seekWithLong:[((OrgApacheLuceneCodecsLucene50Lucene50SkipReader *) nil_chk(skipper_)) getDocPointer]];
+      posPendingFP_ = [((OrgApacheLuceneCodecsLucene50Lucene50SkipReader *) nil_chk(skipper_)) getPosPointer];
+      payPendingFP_ = [((OrgApacheLuceneCodecsLucene50Lucene50SkipReader *) nil_chk(skipper_)) getPayPointer];
+      posPendingCount_ = [((OrgApacheLuceneCodecsLucene50Lucene50SkipReader *) nil_chk(skipper_)) getPosBufferUpto];
       lastStartOffset_ = 0;
-      payloadByteUpto_ = [skipper_ getPayloadByteUpto];
+      payloadByteUpto_ = [((OrgApacheLuceneCodecsLucene50Lucene50SkipReader *) nil_chk(skipper_)) getPayloadByteUpto];
     }
-    nextSkipDoc_ = [skipper_ getNextSkipDoc];
+    nextSkipDoc_ = [((OrgApacheLuceneCodecsLucene50Lucene50SkipReader *) nil_chk(skipper_)) getNextSkipDoc];
   }
   if (docUpto_ == docFreq_) {
     return doc_ = OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS;
@@ -1322,18 +1329,18 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50PostingsRe
 void OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum_initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader_withOrgApacheLuceneIndexFieldInfo_(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum *self, OrgApacheLuceneCodecsLucene50Lucene50PostingsReader *outer$, OrgApacheLuceneIndexFieldInfo *fieldInfo) {
   JreStrongAssign(&self->this$0_, outer$);
   OrgApacheLuceneIndexPostingsEnum_init(self);
-  JreStrongAssignAndConsume(&self->docDeltaBuffer_, [IOSIntArray newArrayWithLength:JreLoadStatic(OrgApacheLuceneCodecsLucene50ForUtil, MAX_DATA_SIZE_)]);
-  JreStrongAssignAndConsume(&self->freqBuffer_, [IOSIntArray newArrayWithLength:JreLoadStatic(OrgApacheLuceneCodecsLucene50ForUtil, MAX_DATA_SIZE_)]);
-  JreStrongAssignAndConsume(&self->posDeltaBuffer_, [IOSIntArray newArrayWithLength:JreLoadStatic(OrgApacheLuceneCodecsLucene50ForUtil, MAX_DATA_SIZE_)]);
+  JreStrongAssignAndConsume(&self->docDeltaBuffer_, [IOSIntArray newArrayWithLength:JreLoadStatic(OrgApacheLuceneCodecsLucene50ForUtil, MAX_DATA_SIZE)]);
+  JreStrongAssignAndConsume(&self->freqBuffer_, [IOSIntArray newArrayWithLength:JreLoadStatic(OrgApacheLuceneCodecsLucene50ForUtil, MAX_DATA_SIZE)]);
+  JreStrongAssignAndConsume(&self->posDeltaBuffer_, [IOSIntArray newArrayWithLength:JreLoadStatic(OrgApacheLuceneCodecsLucene50ForUtil, MAX_DATA_SIZE)]);
   JreStrongAssign(&self->startDocIn_, outer$->docIn_);
   JreStrongAssign(&self->docIn_, nil);
   JreStrongAssign(&self->posIn_, [((OrgApacheLuceneStoreIndexInput *) nil_chk(outer$->posIn_)) clone]);
   JreStrongAssign(&self->payIn_, [((OrgApacheLuceneStoreIndexInput *) nil_chk(outer$->payIn_)) clone]);
   JreStrongAssignAndConsume(&self->encoded_, [IOSByteArray newArrayWithLength:OrgApacheLuceneCodecsLucene50ForUtil_MAX_ENCODED_SIZE]);
-  self->indexHasOffsets_ = ([((OrgApacheLuceneIndexIndexOptionsEnum *) nil_chk([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo)) getIndexOptions])) compareToWithId:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS)] >= 0);
+  self->indexHasOffsets_ = ([((OrgApacheLuceneIndexIndexOptions *) nil_chk([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo)) getIndexOptions])) compareToWithId:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS)] >= 0);
   if (self->indexHasOffsets_) {
-    JreStrongAssignAndConsume(&self->offsetStartDeltaBuffer_, [IOSIntArray newArrayWithLength:JreLoadStatic(OrgApacheLuceneCodecsLucene50ForUtil, MAX_DATA_SIZE_)]);
-    JreStrongAssignAndConsume(&self->offsetLengthBuffer_, [IOSIntArray newArrayWithLength:JreLoadStatic(OrgApacheLuceneCodecsLucene50ForUtil, MAX_DATA_SIZE_)]);
+    JreStrongAssignAndConsume(&self->offsetStartDeltaBuffer_, [IOSIntArray newArrayWithLength:JreLoadStatic(OrgApacheLuceneCodecsLucene50ForUtil, MAX_DATA_SIZE)]);
+    JreStrongAssignAndConsume(&self->offsetLengthBuffer_, [IOSIntArray newArrayWithLength:JreLoadStatic(OrgApacheLuceneCodecsLucene50ForUtil, MAX_DATA_SIZE)]);
   }
   else {
     JreStrongAssign(&self->offsetStartDeltaBuffer_, nil);
@@ -1343,7 +1350,7 @@ void OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum_initWith
   }
   self->indexHasPayloads_ = [fieldInfo hasPayloads];
   if (self->indexHasPayloads_) {
-    JreStrongAssignAndConsume(&self->payloadLengthBuffer_, [IOSIntArray newArrayWithLength:JreLoadStatic(OrgApacheLuceneCodecsLucene50ForUtil, MAX_DATA_SIZE_)]);
+    JreStrongAssignAndConsume(&self->payloadLengthBuffer_, [IOSIntArray newArrayWithLength:JreLoadStatic(OrgApacheLuceneCodecsLucene50ForUtil, MAX_DATA_SIZE)]);
     JreStrongAssignAndConsume(&self->payloadBytes_, [IOSByteArray newArrayWithLength:128]);
     JreStrongAssignAndConsume(&self->payload_, new_OrgApacheLuceneUtilBytesRef_init());
   }
@@ -1355,9 +1362,11 @@ void OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum_initWith
 }
 
 OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum *new_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum_initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader_withOrgApacheLuceneIndexFieldInfo_(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader *outer$, OrgApacheLuceneIndexFieldInfo *fieldInfo) {
-  OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum *self = [OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum alloc];
-  OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum_initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader_withOrgApacheLuceneIndexFieldInfo_(self, outer$, fieldInfo);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum, initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader_withOrgApacheLuceneIndexFieldInfo_, outer$, fieldInfo)
+}
+
+OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum *create_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum_initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader_withOrgApacheLuceneIndexFieldInfo_(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader *outer$, OrgApacheLuceneIndexFieldInfo *fieldInfo) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum, initWithOrgApacheLuceneCodecsLucene50Lucene50PostingsReader_withOrgApacheLuceneIndexFieldInfo_, outer$, fieldInfo)
 }
 
 void OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum_refillDocs(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum *self) {

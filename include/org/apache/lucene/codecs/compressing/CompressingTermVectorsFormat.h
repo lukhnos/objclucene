@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat_RESTRICT
-#define OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat")
+#ifdef RESTRICT_OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat
+#define INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat 0
 #else
-#define OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat 1
 #endif
-#undef OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat
 
-#if !defined (_OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat_) && (OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat_INCLUDE_ALL || OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat_INCLUDE)
-#define _OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat_
+#if !defined (OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat_) && (INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat || defined(INCLUDE_OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat))
+#define OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat_
 
-#define OrgApacheLuceneCodecsTermVectorsFormat_RESTRICT 1
-#define OrgApacheLuceneCodecsTermVectorsFormat_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneCodecsTermVectorsFormat 1
+#define INCLUDE_OrgApacheLuceneCodecsTermVectorsFormat 1
 #include "org/apache/lucene/codecs/TermVectorsFormat.h"
 
 @class OrgApacheLuceneCodecsCompressingCompressionMode;
@@ -28,10 +28,40 @@
 @class OrgApacheLuceneStoreDirectory;
 @class OrgApacheLuceneStoreIOContext;
 
+/*!
+ @brief A <code>TermVectorsFormat</code> that compresses chunks of documents together in
+ order to improve the compression ratio.
+ */
 @interface OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat : OrgApacheLuceneCodecsTermVectorsFormat
 
 #pragma mark Public
 
+/*!
+ @brief Create a new <code>CompressingTermVectorsFormat</code>.
+ <p>
+ <code>formatName</code> is the name of the format. This name will be used
+ in the file formats to perform
+ <code>codec header checks</code>.
+ <p>
+ The <code>compressionMode</code> parameter allows you to choose between
+ compression algorithms that have various compression and decompression
+ speeds so that you can pick the one that best fits your indexing and
+ searching throughput. You should never instantiate two
+ <code>CompressingTermVectorsFormat</code>s that have the same name but
+ different <code>CompressionMode</code>s.
+ <p>
+ <code>chunkSize</code> is the minimum byte size of a chunk of documents.
+ Higher values of <code>chunkSize</code> should improve the compression
+ ratio but will require more memory at indexing time and might make document
+ loading a little slower (depending on the size of your OS cache compared
+ to the size of your index).
+ @param formatName the name of the <code>StoredFieldsFormat</code>
+ @param segmentSuffix a suffix to append to files created by this format
+ @param compressionMode the <code>CompressionMode</code> to use
+ @param chunkSize the minimum number of bytes of a single chunk of stored documents
+ @param blockSize the number of chunks to store in an index block.
+ - seealso: CompressionMode
+ */
 - (instancetype)initWithNSString:(NSString *)formatName
                     withNSString:(NSString *)segmentSuffix
 withOrgApacheLuceneCodecsCompressingCompressionMode:(OrgApacheLuceneCodecsCompressingCompressionMode *)compressionMode
@@ -57,8 +87,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsCompressingCompressingTermVectorsFor
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat *new_OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat_initWithNSString_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_withInt_withInt_(NSString *formatName, NSString *segmentSuffix, OrgApacheLuceneCodecsCompressingCompressionMode *compressionMode, jint chunkSize, jint blockSize) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat *create_OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat_initWithNSString_withNSString_withOrgApacheLuceneCodecsCompressingCompressionMode_withInt_withInt_(NSString *formatName, NSString *segmentSuffix, OrgApacheLuceneCodecsCompressingCompressionMode *compressionMode, jint chunkSize, jint blockSize);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsCompressingCompressingTermVectorsFormat")

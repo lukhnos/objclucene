@@ -58,13 +58,13 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer 
     return q;
   }
   @catch (OrgApacheLuceneQueryparserClassicParseException *e1) {
-    @throw [new_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_([((OrgApacheLuceneQueryparserClassicParseException *) nil_chk(e1)) getMessage]) autorelease];
+    @throw create_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_([((OrgApacheLuceneQueryparserClassicParseException *) nil_chk(e1)) getMessage]);
   }
 }
 
 - (OrgApacheLuceneQueryparserClassicQueryParser *)createQueryParserWithNSString:(NSString *)fieldName
                                             withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer {
-  return [new_OrgApacheLuceneQueryparserClassicQueryParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(fieldName, analyzer) autorelease];
+  return create_OrgApacheLuceneQueryparserClassicQueryParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(fieldName, analyzer);
 }
 
 - (void)dealloc {
@@ -98,9 +98,11 @@ void OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder_initWithOrgApach
 }
 
 OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder *new_OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder_initWithOrgApacheLuceneQueryparserClassicQueryParser_(OrgApacheLuceneQueryparserClassicQueryParser *parser) {
-  OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder *self = [OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder alloc];
-  OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder_initWithOrgApacheLuceneQueryparserClassicQueryParser_(self, parser);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder, initWithOrgApacheLuceneQueryparserClassicQueryParser_, parser)
+}
+
+OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder *create_OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder_initWithOrgApacheLuceneQueryparserClassicQueryParser_(OrgApacheLuceneQueryparserClassicQueryParser *parser) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder, initWithOrgApacheLuceneQueryparserClassicQueryParser_, parser)
 }
 
 void OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder *self, NSString *defaultField, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
@@ -110,9 +112,11 @@ void OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder_initWithNSString
 }
 
 OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder *new_OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(NSString *defaultField, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
-  OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder *self = [OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder alloc];
-  OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(self, defaultField, analyzer);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder, initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_, defaultField, analyzer)
+}
+
+OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder *create_OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(NSString *defaultField, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder, initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_, defaultField, analyzer)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder)

@@ -13,9 +13,13 @@
 
 J2OBJC_INITIALIZED_DEFN(OrgLukhnosPortmobileInvokeMethodHandles)
 
-OrgLukhnosPortmobileInvokeMethodHandles_Lookup *OrgLukhnosPortmobileInvokeMethodHandles_publicLookupInstance_;
+OrgLukhnosPortmobileInvokeMethodHandles_Lookup *OrgLukhnosPortmobileInvokeMethodHandles_publicLookupInstance;
 
 @implementation OrgLukhnosPortmobileInvokeMethodHandles
+
++ (OrgLukhnosPortmobileInvokeMethodHandles_Lookup *)publicLookupInstance {
+  return OrgLukhnosPortmobileInvokeMethodHandles_publicLookupInstance;
+}
 
 + (OrgLukhnosPortmobileInvokeMethodHandles_Lookup *)publicLookup {
   return OrgLukhnosPortmobileInvokeMethodHandles_publicLookup();
@@ -30,7 +34,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgLukhnosPortmobileInvokeMethodHandles class]) {
-    JreStrongAssignAndConsume(&OrgLukhnosPortmobileInvokeMethodHandles_publicLookupInstance_, new_OrgLukhnosPortmobileInvokeMethodHandles_Lookup_init());
+    JreStrongAssignAndConsume(&OrgLukhnosPortmobileInvokeMethodHandles_publicLookupInstance, new_OrgLukhnosPortmobileInvokeMethodHandles_Lookup_init());
     J2OBJC_SET_INITIALIZED(OrgLukhnosPortmobileInvokeMethodHandles)
   }
 }
@@ -38,10 +42,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "publicLookup", NULL, "Lorg.lukhnos.portmobile.invoke.MethodHandles$Lookup;", 0x9, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "MethodHandles", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "publicLookupInstance_", NULL, 0x19, "Lorg.lukhnos.portmobile.invoke.MethodHandles$Lookup;", &OrgLukhnosPortmobileInvokeMethodHandles_publicLookupInstance_, NULL, .constantValue.asLong = 0 },
+    { "publicLookupInstance", "publicLookupInstance", 0x19, "Lorg.lukhnos.portmobile.invoke.MethodHandles$Lookup;", &OrgLukhnosPortmobileInvokeMethodHandles_publicLookupInstance, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.lukhnos.portmobile.invoke.MethodHandles$Lookup;"};
   static const J2ObjcClassInfo _OrgLukhnosPortmobileInvokeMethodHandles = { 2, "MethodHandles", "org.lukhnos.portmobile.invoke", NULL, 0x1, 2, methods, 1, fields, 0, NULL, 1, inner_classes, NULL, NULL };
@@ -52,7 +56,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 OrgLukhnosPortmobileInvokeMethodHandles_Lookup *OrgLukhnosPortmobileInvokeMethodHandles_publicLookup() {
   OrgLukhnosPortmobileInvokeMethodHandles_initialize();
-  return OrgLukhnosPortmobileInvokeMethodHandles_publicLookupInstance_;
+  return OrgLukhnosPortmobileInvokeMethodHandles_publicLookupInstance;
 }
 
 void OrgLukhnosPortmobileInvokeMethodHandles_init(OrgLukhnosPortmobileInvokeMethodHandles *self) {
@@ -60,9 +64,11 @@ void OrgLukhnosPortmobileInvokeMethodHandles_init(OrgLukhnosPortmobileInvokeMeth
 }
 
 OrgLukhnosPortmobileInvokeMethodHandles *new_OrgLukhnosPortmobileInvokeMethodHandles_init() {
-  OrgLukhnosPortmobileInvokeMethodHandles *self = [OrgLukhnosPortmobileInvokeMethodHandles alloc];
-  OrgLukhnosPortmobileInvokeMethodHandles_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgLukhnosPortmobileInvokeMethodHandles, init)
+}
+
+OrgLukhnosPortmobileInvokeMethodHandles *create_OrgLukhnosPortmobileInvokeMethodHandles_init() {
+  J2OBJC_CREATE_IMPL(OrgLukhnosPortmobileInvokeMethodHandles, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileInvokeMethodHandles)
@@ -71,7 +77,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileInvokeMethodHandles)
 
 - (OrgLukhnosPortmobileInvokeMethodHandle *)findConstructorWithIOSClass:(IOSClass *)refc
                                withOrgLukhnosPortmobileInvokeMethodType:(OrgLukhnosPortmobileInvokeMethodType *)type {
-  return [new_OrgLukhnosPortmobileInvokeMethodHandle_NoArgsConstructor_initWithIOSClass_(refc) autorelease];
+  return create_OrgLukhnosPortmobileInvokeMethodHandle_NoArgsConstructor_initWithIOSClass_(refc);
 }
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -83,8 +89,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "findConstructorWithIOSClass:withOrgLukhnosPortmobileInvokeMethodType:", "findConstructor", "Lorg.lukhnos.portmobile.invoke.MethodHandle;", 0x1, "Ljava.lang.NoSuchMethodException;Ljava.lang.IllegalAccessException;", NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "findConstructorWithIOSClass:withOrgLukhnosPortmobileInvokeMethodType:", "findConstructor", "Lorg.lukhnos.portmobile.invoke.MethodHandle;", 0x1, "Ljava.lang.NoSuchMethodException;Ljava.lang.IllegalAccessException;", "(Ljava/lang/Class<*>;Lorg/lukhnos/portmobile/invoke/MethodType;)Lorg/lukhnos/portmobile/invoke/MethodHandle;" },
+    { "init", "Lookup", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgLukhnosPortmobileInvokeMethodHandles_Lookup = { 2, "Lookup", "org.lukhnos.portmobile.invoke", "MethodHandles", 0x9, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgLukhnosPortmobileInvokeMethodHandles_Lookup;
@@ -97,9 +103,11 @@ void OrgLukhnosPortmobileInvokeMethodHandles_Lookup_init(OrgLukhnosPortmobileInv
 }
 
 OrgLukhnosPortmobileInvokeMethodHandles_Lookup *new_OrgLukhnosPortmobileInvokeMethodHandles_Lookup_init() {
-  OrgLukhnosPortmobileInvokeMethodHandles_Lookup *self = [OrgLukhnosPortmobileInvokeMethodHandles_Lookup alloc];
-  OrgLukhnosPortmobileInvokeMethodHandles_Lookup_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgLukhnosPortmobileInvokeMethodHandles_Lookup, init)
+}
+
+OrgLukhnosPortmobileInvokeMethodHandles_Lookup *create_OrgLukhnosPortmobileInvokeMethodHandles_Lookup_init() {
+  J2OBJC_CREATE_IMPL(OrgLukhnosPortmobileInvokeMethodHandles_Lookup, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileInvokeMethodHandles_Lookup)

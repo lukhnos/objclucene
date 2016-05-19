@@ -5,29 +5,44 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory_) && (OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory))
+#define OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
 @class OrgApacheLuceneAnalysisCkbSoraniStemFilter;
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>SoraniStemFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_ckbstem" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+ &lt;filter class="solr.SoraniNormalizationFilterFactory"/&gt;
+ &lt;filter class="solr.SoraniStemFilterFactory"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new SoraniStemFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisCkbSoraniStemFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -40,8 +55,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory_initWit
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory *new_OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory *create_OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory")

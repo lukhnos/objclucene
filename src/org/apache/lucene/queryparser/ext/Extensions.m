@@ -24,6 +24,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserExtExtensions, extensions_, id<Jav
 
 @implementation OrgApacheLuceneQueryparserExtExtensions
 
++ (jchar)DEFAULT_EXTENSION_FIELD_DELIMITER {
+  return OrgApacheLuceneQueryparserExtExtensions_DEFAULT_EXTENSION_FIELD_DELIMITER;
+}
+
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserExtExtensions_init(self);
@@ -52,10 +56,10 @@ withOrgApacheLuceneQueryparserExtParserExtension:(OrgApacheLuceneQueryparserExtP
 - (OrgApacheLuceneQueryparserExtExtensions_Pair *)splitExtensionFieldWithNSString:(NSString *)defaultField
                                                                      withNSString:(NSString *)field {
   jint indexOf = [((NSString *) nil_chk(field)) indexOf:self->extensionFieldDelimiter_];
-  if (indexOf < 0) return [new_OrgApacheLuceneQueryparserExtExtensions_Pair_initWithId_withId_(field, nil) autorelease];
+  if (indexOf < 0) return create_OrgApacheLuceneQueryparserExtExtensions_Pair_initWithId_withId_(field, nil);
   NSString *indexField = indexOf == 0 ? defaultField : [field substring:0 endIndex:indexOf];
   NSString *extensionKey = [field substring:indexOf + 1];
-  return [new_OrgApacheLuceneQueryparserExtExtensions_Pair_initWithId_withId_(indexField, extensionKey) autorelease];
+  return create_OrgApacheLuceneQueryparserExtExtensions_Pair_initWithId_withId_(indexField, extensionKey);
 }
 
 - (NSString *)escapeExtensionFieldWithNSString:(NSString *)extfield {
@@ -68,7 +72,7 @@ withOrgApacheLuceneQueryparserExtParserExtension:(OrgApacheLuceneQueryparserExtP
 
 - (NSString *)buildExtensionFieldWithNSString:(NSString *)extensionKey
                                  withNSString:(NSString *)field {
-  JavaLangStringBuilder *builder = [new_JavaLangStringBuilder_initWithNSString_(field) autorelease];
+  JavaLangStringBuilder *builder = create_JavaLangStringBuilder_initWithNSString_(field);
   [builder appendWithChar:self->extensionFieldDelimiter_];
   [builder appendWithNSString:extensionKey];
   return [self escapeExtensionFieldWithNSString:[builder description]];
@@ -86,7 +90,7 @@ withOrgApacheLuceneQueryparserExtParserExtension:(OrgApacheLuceneQueryparserExtP
     { "addWithNSString:withOrgApacheLuceneQueryparserExtParserExtension:", "add", "V", 0x1, NULL, NULL },
     { "getExtensionWithNSString:", "getExtension", "Lorg.apache.lucene.queryparser.ext.ParserExtension;", 0x11, NULL, NULL },
     { "getExtensionFieldDelimiter", NULL, "C", 0x1, NULL, NULL },
-    { "splitExtensionFieldWithNSString:withNSString:", "splitExtensionField", "Lorg.apache.lucene.queryparser.ext.Extensions$Pair;", 0x1, NULL, NULL },
+    { "splitExtensionFieldWithNSString:withNSString:", "splitExtensionField", "Lorg.apache.lucene.queryparser.ext.Extensions$Pair;", 0x1, NULL, "(Ljava/lang/String;Ljava/lang/String;)Lorg/apache/lucene/queryparser/ext/Extensions$Pair<Ljava/lang/String;Ljava/lang/String;>;" },
     { "escapeExtensionFieldWithNSString:", "escapeExtensionField", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "buildExtensionFieldWithNSString:", "buildExtensionField", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "buildExtensionFieldWithNSString:withNSString:", "buildExtensionField", "Ljava.lang.String;", 0x1, NULL, NULL },
@@ -108,9 +112,11 @@ void OrgApacheLuceneQueryparserExtExtensions_init(OrgApacheLuceneQueryparserExtE
 }
 
 OrgApacheLuceneQueryparserExtExtensions *new_OrgApacheLuceneQueryparserExtExtensions_init() {
-  OrgApacheLuceneQueryparserExtExtensions *self = [OrgApacheLuceneQueryparserExtExtensions alloc];
-  OrgApacheLuceneQueryparserExtExtensions_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserExtExtensions, init)
+}
+
+OrgApacheLuceneQueryparserExtExtensions *create_OrgApacheLuceneQueryparserExtExtensions_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserExtExtensions, init)
 }
 
 void OrgApacheLuceneQueryparserExtExtensions_initWithChar_(OrgApacheLuceneQueryparserExtExtensions *self, jchar extensionFieldDelimiter) {
@@ -120,9 +126,11 @@ void OrgApacheLuceneQueryparserExtExtensions_initWithChar_(OrgApacheLuceneQueryp
 }
 
 OrgApacheLuceneQueryparserExtExtensions *new_OrgApacheLuceneQueryparserExtExtensions_initWithChar_(jchar extensionFieldDelimiter) {
-  OrgApacheLuceneQueryparserExtExtensions *self = [OrgApacheLuceneQueryparserExtExtensions alloc];
-  OrgApacheLuceneQueryparserExtExtensions_initWithChar_(self, extensionFieldDelimiter);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserExtExtensions, initWithChar_, extensionFieldDelimiter)
+}
+
+OrgApacheLuceneQueryparserExtExtensions *create_OrgApacheLuceneQueryparserExtExtensions_initWithChar_(jchar extensionFieldDelimiter) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserExtExtensions, initWithChar_, extensionFieldDelimiter)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserExtExtensions)
@@ -162,9 +170,11 @@ void OrgApacheLuceneQueryparserExtExtensions_Pair_initWithId_withId_(OrgApacheLu
 }
 
 OrgApacheLuceneQueryparserExtExtensions_Pair *new_OrgApacheLuceneQueryparserExtExtensions_Pair_initWithId_withId_(id cur, id cud) {
-  OrgApacheLuceneQueryparserExtExtensions_Pair *self = [OrgApacheLuceneQueryparserExtExtensions_Pair alloc];
-  OrgApacheLuceneQueryparserExtExtensions_Pair_initWithId_withId_(self, cur, cud);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserExtExtensions_Pair, initWithId_withId_, cur, cud)
+}
+
+OrgApacheLuceneQueryparserExtExtensions_Pair *create_OrgApacheLuceneQueryparserExtExtensions_Pair_initWithId_withId_(id cur, id cud) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserExtExtensions_Pair, initWithId_withId_, cur, cud)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserExtExtensions_Pair)

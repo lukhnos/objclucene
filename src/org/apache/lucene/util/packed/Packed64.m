@@ -17,8 +17,17 @@
 
 @interface OrgApacheLuceneUtilPackedPacked64 () {
  @public
+  /*!
+   @brief Values are stores contiguously in the blocks array.
+   */
   IOSLongArray *blocks_;
+  /*!
+   @brief A right-aligned mask of width BitsPerValue used by <code>get(int)</code>.
+   */
   jlong maskRight_;
+  /*!
+   @brief Optimization: Saves one lookup in <code>get(int)</code>.
+   */
   jint bpvMinusBlockSize_;
 }
 
@@ -32,6 +41,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedPacked64, blocks_, IOSLongArray *)
 __attribute__((unused)) static jint OrgApacheLuceneUtilPackedPacked64_gcdWithInt_withInt_(jint a, jint b);
 
 @implementation OrgApacheLuceneUtilPackedPacked64
+
++ (jint)BLOCK_SIZE {
+  return OrgApacheLuceneUtilPackedPacked64_BLOCK_SIZE;
+}
+
++ (jint)BLOCK_BITS {
+  return OrgApacheLuceneUtilPackedPacked64_BLOCK_BITS;
+}
+
++ (jint)MOD_MASK {
+  return OrgApacheLuceneUtilPackedPacked64_MOD_MASK;
+}
 
 - (instancetype)initWithInt:(jint)valueCount
                     withInt:(jint)bitsPerValue {
@@ -66,7 +87,7 @@ withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
   len = JavaLangMath_minWithInt_withInt_(len, valueCount_ - index);
   JreAssert((off + len <= ((IOSLongArray *) nil_chk(arr))->size_), (@"org/apache/lucene/util/packed/Packed64.java:137 condition failed: assert off + len <= arr.length;"));
   jint originalIndex = index;
-  id<OrgApacheLuceneUtilPackedPackedInts_Decoder> decoder = OrgApacheLuceneUtilPackedBulkOperation_ofWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_(JreLoadStatic(OrgApacheLuceneUtilPackedPackedInts_FormatEnum, PACKED), bitsPerValue_);
+  id<OrgApacheLuceneUtilPackedPackedInts_Decoder> decoder = OrgApacheLuceneUtilPackedBulkOperation_ofWithOrgApacheLuceneUtilPackedPackedInts_Format_withInt_(JreLoadEnum(OrgApacheLuceneUtilPackedPackedInts_Format, PACKED), bitsPerValue_);
   jint offsetInBlocks = index % [((id<OrgApacheLuceneUtilPackedPackedInts_Decoder>) nil_chk(decoder)) longValueCount];
   if (offsetInBlocks != 0) {
     for (jint i = offsetInBlocks; i < [decoder longValueCount] && len > 0; ++i) {
@@ -117,7 +138,7 @@ withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
   len = JavaLangMath_minWithInt_withInt_(len, valueCount_ - index);
   JreAssert((off + len <= ((IOSLongArray *) nil_chk(arr))->size_), (@"org/apache/lucene/util/packed/Packed64.java:201 condition failed: assert off + len <= arr.length;"));
   jint originalIndex = index;
-  id<OrgApacheLuceneUtilPackedPackedInts_Encoder> encoder = OrgApacheLuceneUtilPackedBulkOperation_ofWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_(JreLoadStatic(OrgApacheLuceneUtilPackedPackedInts_FormatEnum, PACKED), bitsPerValue_);
+  id<OrgApacheLuceneUtilPackedPackedInts_Encoder> encoder = OrgApacheLuceneUtilPackedBulkOperation_ofWithOrgApacheLuceneUtilPackedPackedInts_Format_withInt_(JreLoadEnum(OrgApacheLuceneUtilPackedPackedInts_Format, PACKED), bitsPerValue_);
   jint offsetInBlocks = index % [((id<OrgApacheLuceneUtilPackedPackedInts_Encoder>) nil_chk(encoder)) longValueCount];
   if (offsetInBlocks != 0) {
     for (jint i = offsetInBlocks; i < [encoder longValueCount] && len > 0; ++i) {
@@ -151,7 +172,7 @@ withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
 }
 
 - (jlong)ramBytesUsed {
-  return OrgApacheLuceneUtilRamUsageEstimator_alignObjectSizeWithLong_(JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER_) + 3 * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT + OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_LONG + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_)) + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithLongArray_(blocks_);
+  return OrgApacheLuceneUtilRamUsageEstimator_alignObjectSizeWithLong_(JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER) + 3 * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT + OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_LONG + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF)) + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithLongArray_(blocks_);
 }
 
 - (void)fillWithInt:(jint)fromIndex
@@ -175,7 +196,7 @@ withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
   jint nAlignedBlocks = JreRShift32((nAlignedValues * bitsPerValue_), 6);
   IOSLongArray *nAlignedValuesBlocks;
   {
-    OrgApacheLuceneUtilPackedPacked64 *values = [new_OrgApacheLuceneUtilPackedPacked64_initWithInt_withInt_(nAlignedValues, bitsPerValue_) autorelease];
+    OrgApacheLuceneUtilPackedPacked64 *values = create_OrgApacheLuceneUtilPackedPacked64_initWithInt_withInt_(nAlignedValues, bitsPerValue_);
     for (jint i = 0; i < nAlignedValues; ++i) {
       [values setWithInt:i withLong:val];
     }
@@ -237,23 +258,25 @@ withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
 
 void OrgApacheLuceneUtilPackedPacked64_initWithInt_withInt_(OrgApacheLuceneUtilPackedPacked64 *self, jint valueCount, jint bitsPerValue) {
   OrgApacheLuceneUtilPackedPackedInts_MutableImpl_initWithInt_withInt_(self, valueCount, bitsPerValue);
-  OrgApacheLuceneUtilPackedPackedInts_FormatEnum *format = JreLoadStatic(OrgApacheLuceneUtilPackedPackedInts_FormatEnum, PACKED);
-  jint longCount = [((OrgApacheLuceneUtilPackedPackedInts_FormatEnum *) nil_chk(format)) longCountWithInt:OrgApacheLuceneUtilPackedPackedInts_VERSION_CURRENT withInt:valueCount withInt:bitsPerValue];
+  OrgApacheLuceneUtilPackedPackedInts_Format *format = JreLoadEnum(OrgApacheLuceneUtilPackedPackedInts_Format, PACKED);
+  jint longCount = [((OrgApacheLuceneUtilPackedPackedInts_Format *) nil_chk(format)) longCountWithInt:OrgApacheLuceneUtilPackedPackedInts_VERSION_CURRENT withInt:valueCount withInt:bitsPerValue];
   JreStrongAssignAndConsume(&self->blocks_, [IOSLongArray newArrayWithLength:longCount]);
   self->maskRight_ = JreURShift64(JreLShift64(~0LL, (OrgApacheLuceneUtilPackedPacked64_BLOCK_SIZE - bitsPerValue)), (OrgApacheLuceneUtilPackedPacked64_BLOCK_SIZE - bitsPerValue));
   self->bpvMinusBlockSize_ = bitsPerValue - OrgApacheLuceneUtilPackedPacked64_BLOCK_SIZE;
 }
 
 OrgApacheLuceneUtilPackedPacked64 *new_OrgApacheLuceneUtilPackedPacked64_initWithInt_withInt_(jint valueCount, jint bitsPerValue) {
-  OrgApacheLuceneUtilPackedPacked64 *self = [OrgApacheLuceneUtilPackedPacked64 alloc];
-  OrgApacheLuceneUtilPackedPacked64_initWithInt_withInt_(self, valueCount, bitsPerValue);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedPacked64, initWithInt_withInt_, valueCount, bitsPerValue)
+}
+
+OrgApacheLuceneUtilPackedPacked64 *create_OrgApacheLuceneUtilPackedPacked64_initWithInt_withInt_(jint valueCount, jint bitsPerValue) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedPacked64, initWithInt_withInt_, valueCount, bitsPerValue)
 }
 
 void OrgApacheLuceneUtilPackedPacked64_initWithInt_withOrgApacheLuceneStoreDataInput_withInt_withInt_(OrgApacheLuceneUtilPackedPacked64 *self, jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount, jint bitsPerValue) {
   OrgApacheLuceneUtilPackedPackedInts_MutableImpl_initWithInt_withInt_(self, valueCount, bitsPerValue);
-  OrgApacheLuceneUtilPackedPackedInts_FormatEnum *format = JreLoadStatic(OrgApacheLuceneUtilPackedPackedInts_FormatEnum, PACKED);
-  jlong byteCount = [((OrgApacheLuceneUtilPackedPackedInts_FormatEnum *) nil_chk(format)) byteCountWithInt:packedIntsVersion withInt:valueCount withInt:bitsPerValue];
+  OrgApacheLuceneUtilPackedPackedInts_Format *format = JreLoadEnum(OrgApacheLuceneUtilPackedPackedInts_Format, PACKED);
+  jlong byteCount = [((OrgApacheLuceneUtilPackedPackedInts_Format *) nil_chk(format)) byteCountWithInt:packedIntsVersion withInt:valueCount withInt:bitsPerValue];
   jint longCount = [format longCountWithInt:OrgApacheLuceneUtilPackedPackedInts_VERSION_CURRENT withInt:valueCount withInt:bitsPerValue];
   JreStrongAssignAndConsume(&self->blocks_, [IOSLongArray newArrayWithLength:longCount]);
   for (jint i = 0; i < byteCount / 8; ++i) {
@@ -272,9 +295,11 @@ void OrgApacheLuceneUtilPackedPacked64_initWithInt_withOrgApacheLuceneStoreDataI
 }
 
 OrgApacheLuceneUtilPackedPacked64 *new_OrgApacheLuceneUtilPackedPacked64_initWithInt_withOrgApacheLuceneStoreDataInput_withInt_withInt_(jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount, jint bitsPerValue) {
-  OrgApacheLuceneUtilPackedPacked64 *self = [OrgApacheLuceneUtilPackedPacked64 alloc];
-  OrgApacheLuceneUtilPackedPacked64_initWithInt_withOrgApacheLuceneStoreDataInput_withInt_withInt_(self, packedIntsVersion, inArg, valueCount, bitsPerValue);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedPacked64, initWithInt_withOrgApacheLuceneStoreDataInput_withInt_withInt_, packedIntsVersion, inArg, valueCount, bitsPerValue)
+}
+
+OrgApacheLuceneUtilPackedPacked64 *create_OrgApacheLuceneUtilPackedPacked64_initWithInt_withOrgApacheLuceneStoreDataInput_withInt_withInt_(jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount, jint bitsPerValue) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedPacked64, initWithInt_withOrgApacheLuceneStoreDataInput_withInt_withInt_, packedIntsVersion, inArg, valueCount, bitsPerValue)
 }
 
 jint OrgApacheLuceneUtilPackedPacked64_gcdWithInt_withInt_(jint a, jint b) {

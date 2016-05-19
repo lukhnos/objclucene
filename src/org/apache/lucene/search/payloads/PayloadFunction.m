@@ -65,7 +65,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "explainWithInt:withNSString:withInt:withFloat:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x1, NULL, NULL },
     { "hash", "hashCode", "I", 0x401, NULL, NULL },
     { "isEqual:", "equals", "Z", 0x401, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "PayloadFunction", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneSearchPayloadsPayloadFunction = { 2, "PayloadFunction", "org.apache.lucene.search.payloads", NULL, 0x401, 6, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchPayloadsPayloadFunction;

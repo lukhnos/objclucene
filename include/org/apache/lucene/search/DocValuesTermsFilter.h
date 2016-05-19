@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchDocValuesTermsFilter_INCLUDE_ALL")
-#if OrgApacheLuceneSearchDocValuesTermsFilter_RESTRICT
-#define OrgApacheLuceneSearchDocValuesTermsFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchDocValuesTermsFilter")
+#ifdef RESTRICT_OrgApacheLuceneSearchDocValuesTermsFilter
+#define INCLUDE_ALL_OrgApacheLuceneSearchDocValuesTermsFilter 0
 #else
-#define OrgApacheLuceneSearchDocValuesTermsFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchDocValuesTermsFilter 1
 #endif
-#undef OrgApacheLuceneSearchDocValuesTermsFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchDocValuesTermsFilter
 
-#if !defined (_OrgApacheLuceneSearchDocValuesTermsFilter_) && (OrgApacheLuceneSearchDocValuesTermsFilter_INCLUDE_ALL || OrgApacheLuceneSearchDocValuesTermsFilter_INCLUDE)
-#define _OrgApacheLuceneSearchDocValuesTermsFilter_
+#if !defined (OrgApacheLuceneSearchDocValuesTermsFilter_) && (INCLUDE_ALL_OrgApacheLuceneSearchDocValuesTermsFilter || defined(INCLUDE_OrgApacheLuceneSearchDocValuesTermsFilter))
+#define OrgApacheLuceneSearchDocValuesTermsFilter_
 
-#define OrgApacheLuceneSearchFilter_RESTRICT 1
-#define OrgApacheLuceneSearchFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchFilter 1
+#define INCLUDE_OrgApacheLuceneSearchFilter 1
 #include "org/apache/lucene/search/Filter.h"
 
 @class IOSObjectArray;
@@ -25,6 +25,53 @@
 @class OrgApacheLuceneSearchDocIdSet;
 @protocol OrgApacheLuceneUtilBits;
 
+/*!
+ @brief A <code>Filter</code> that only accepts documents whose single
+ term value in the specified field is contained in the
+ provided set of allowed terms.
+ <p>
+ This is the same functionality as TermsFilter (from
+ queries/), except this filter requires that the
+ field contains only a single term for all documents.
+ Because of drastically different implementations, they
+ also have different performance characteristics, as
+ described below.
+ <p>
+ With each search, this filter translates the specified
+ set of Terms into a private <code>FixedBitSet</code> keyed by
+ term number per unique <code>IndexReader</code> (normally one
+ reader per segment).  Then, during matching, the term
+ number for each docID is retrieved from the cache and
+ then checked for inclusion using the <code>FixedBitSet</code>.
+ Since all testing is done using RAM resident data
+ structures, performance should be very fast, most likely
+ fast enough to not require further caching of the
+ DocIdSet for each possible combination of terms.
+ However, because docIDs are simply scanned linearly, an
+ index with a great many small documents may find this
+ linear scan too costly.
+ <p>
+ In contrast, TermsFilter builds up an <code>FixedBitSet</code>,
+ keyed by docID, every time it's created, by enumerating
+ through all matching docs using <code>org.apache.lucene.index.PostingsEnum</code> to seek
+ and scan through each term's docID list.  While there is
+ no linear scan of all docIDs, besides the allocation of
+ the underlying array in the <code>FixedBitSet</code>, this
+ approach requires a number of "disk seeks" in proportion
+ to the number of terms, which can be exceptionally costly
+ when there are cache misses in the OS's IO cache.
+ <p>
+ Generally, this filter will be slower on the first
+ invocation for a given field, but subsequent invocations,
+ even if you change the allowed set of Terms, should be
+ faster than TermsFilter, especially as the number of
+ Terms being matched increases.  If you are matching only
+ a very small number of terms, and those terms in turn
+ match a very small number of documents, TermsFilter may
+ perform faster.
+ <p>
+ Which filter is best is very application dependent.
+ */
 @interface OrgApacheLuceneSearchDocValuesTermsFilter : OrgApacheLuceneSearchFilter
 
 #pragma mark Public
@@ -52,12 +99,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchDocValuesTermsFilter_initWithNSStrin
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchDocValuesTermsFilter *new_OrgApacheLuceneSearchDocValuesTermsFilter_initWithNSString_withOrgApacheLuceneUtilBytesRefArray_(NSString *field, IOSObjectArray *terms) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchDocValuesTermsFilter *create_OrgApacheLuceneSearchDocValuesTermsFilter_initWithNSString_withOrgApacheLuceneUtilBytesRefArray_(NSString *field, IOSObjectArray *terms);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchDocValuesTermsFilter_initWithNSString_withNSStringArray_(OrgApacheLuceneSearchDocValuesTermsFilter *self, NSString *field, IOSObjectArray *terms);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchDocValuesTermsFilter *new_OrgApacheLuceneSearchDocValuesTermsFilter_initWithNSString_withNSStringArray_(NSString *field, IOSObjectArray *terms) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchDocValuesTermsFilter *create_OrgApacheLuceneSearchDocValuesTermsFilter_initWithNSString_withNSStringArray_(NSString *field, IOSObjectArray *terms);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesTermsFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchDocValuesTermsFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchDocValuesTermsFilter")

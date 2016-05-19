@@ -5,29 +5,42 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchPayloadsPayloadScoreQuery_INCLUDE_ALL")
-#if OrgApacheLuceneSearchPayloadsPayloadScoreQuery_RESTRICT
-#define OrgApacheLuceneSearchPayloadsPayloadScoreQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPayloadScoreQuery")
+#ifdef RESTRICT_OrgApacheLuceneSearchPayloadsPayloadScoreQuery
+#define INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPayloadScoreQuery 0
 #else
-#define OrgApacheLuceneSearchPayloadsPayloadScoreQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPayloadScoreQuery 1
 #endif
-#undef OrgApacheLuceneSearchPayloadsPayloadScoreQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchPayloadsPayloadScoreQuery
 
-#if !defined (_OrgApacheLuceneSearchPayloadsPayloadScoreQuery_) && (OrgApacheLuceneSearchPayloadsPayloadScoreQuery_INCLUDE_ALL || OrgApacheLuceneSearchPayloadsPayloadScoreQuery_INCLUDE)
-#define _OrgApacheLuceneSearchPayloadsPayloadScoreQuery_
+#if !defined (OrgApacheLuceneSearchPayloadsPayloadScoreQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPayloadScoreQuery || defined(INCLUDE_OrgApacheLuceneSearchPayloadsPayloadScoreQuery))
+#define OrgApacheLuceneSearchPayloadsPayloadScoreQuery_
 
-#define OrgApacheLuceneSearchSpansSpanQuery_RESTRICT 1
-#define OrgApacheLuceneSearchSpansSpanQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSpansSpanQuery 1
+#define INCLUDE_OrgApacheLuceneSearchSpansSpanQuery 1
 #include "org/apache/lucene/search/spans/SpanQuery.h"
 
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchPayloadsPayloadFunction;
 @class OrgApacheLuceneSearchSpansSpanWeight;
 
+/*!
+ @brief A Query class that uses a <code>PayloadFunction</code> to modify the score of a
+ wrapped SpanQuery
+ NOTE: In order to take advantage of this with the default scoring implementation
+ (<code>DefaultSimilarity</code>), you must override <code>DefaultSimilarity.scorePayload(int,int,int,BytesRef)</code>,
+ which returns 1 by default.
+ - seealso: org.apache.lucene.search.similarities.Similarity.SimScorer#computePayloadFactor(int,int,int,BytesRef)
+ */
 @interface OrgApacheLuceneSearchPayloadsPayloadScoreQuery : OrgApacheLuceneSearchSpansSpanQuery
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new PayloadScoreQuery
+ @param wrappedQuery the query to wrap
+ @param function a PayloadFunction to use to modify the scores
+ */
 - (instancetype)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)wrappedQuery
            withOrgApacheLuceneSearchPayloadsPayloadFunction:(OrgApacheLuceneSearchPayloadsPayloadFunction *)function;
 
@@ -50,8 +63,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchPayloadsPayloadScoreQuery_initWithOr
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsPayloadScoreQuery *new_OrgApacheLuceneSearchPayloadsPayloadScoreQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withOrgApacheLuceneSearchPayloadsPayloadFunction_(OrgApacheLuceneSearchSpansSpanQuery *wrappedQuery, OrgApacheLuceneSearchPayloadsPayloadFunction *function) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsPayloadScoreQuery *create_OrgApacheLuceneSearchPayloadsPayloadScoreQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withOrgApacheLuceneSearchPayloadsPayloadFunction_(OrgApacheLuceneSearchSpansSpanQuery *wrappedQuery, OrgApacheLuceneSearchPayloadsPayloadFunction *function);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsPayloadScoreQuery)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchPayloadsPayloadScoreQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPayloadScoreQuery")

@@ -19,17 +19,25 @@
 #include "org/apache/lucene/util/GeoUtils.h"
 #include "org/apache/lucene/util/NumericUtils.h"
 
-#define OrgApacheLuceneSearchGeoPointTermsEnum_MAX_SHIFT 36
-
 @interface OrgApacheLuceneSearchGeoPointTermsEnum () {
  @public
   OrgApacheLuceneUtilBytesRef *currentCell_;
   id<JavaUtilList> rangeBounds_;
 }
 
+/*!
+ @brief entry point for recursively computing ranges
+ */
 - (void)computeRangeWithLong:(jlong)term
                    withShort:(jshort)shift;
 
+/*!
+ @brief recurse to higher level precision cells to find ranges along the space-filling curve that fall within the
+ query box
+ @param start starting value on the space-filling curve for a cell at a given res
+ @param end ending value on the space-filling curve for a cell at a given res
+ @param res spatial res represented as a bit shift (MSB is lower res)
+ */
 - (void)relateAndRecurseWithLong:(jlong)start
                         withLong:(jlong)end
                        withShort:(jshort)res;
@@ -41,7 +49,9 @@
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchGeoPointTermsEnum, currentCell_, OrgApacheLuceneUtilBytesRef *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchGeoPointTermsEnum, rangeBounds_, id<JavaUtilList>)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchGeoPointTermsEnum, MAX_SHIFT, jshort)
+inline jshort OrgApacheLuceneSearchGeoPointTermsEnum_get_MAX_SHIFT();
+#define OrgApacheLuceneSearchGeoPointTermsEnum_MAX_SHIFT 36
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchGeoPointTermsEnum, MAX_SHIFT, jshort)
 
 __attribute__((unused)) static void OrgApacheLuceneSearchGeoPointTermsEnum_computeRangeWithLong_withShort_(OrgApacheLuceneSearchGeoPointTermsEnum *self, jlong term, jshort shift);
 
@@ -50,6 +60,10 @@ __attribute__((unused)) static void OrgApacheLuceneSearchGeoPointTermsEnum_relat
 __attribute__((unused)) static void OrgApacheLuceneSearchGeoPointTermsEnum_nextRange(OrgApacheLuceneSearchGeoPointTermsEnum *self);
 
 @implementation OrgApacheLuceneSearchGeoPointTermsEnum
+
++ (jshort)DETAIL_LEVEL {
+  return OrgApacheLuceneSearchGeoPointTermsEnum_DETAIL_LEVEL;
+}
 
 - (instancetype)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)tenum
                                            withDouble:(jdouble)minLon
@@ -114,9 +128,9 @@ __attribute__((unused)) static void OrgApacheLuceneSearchGeoPointTermsEnum_nextR
 
 - (jboolean)boundaryTerm {
   if (currentRange_ == nil) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"GeoPointTermsEnum empty or not initialized") autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"GeoPointTermsEnum empty or not initialized");
   }
-  return ((OrgApacheLuceneSearchGeoPointTermsEnum_Range *) nil_chk(currentRange_))->boundary_;
+  return currentRange_->boundary_;
 }
 
 - (void)nextRange {
@@ -141,17 +155,17 @@ __attribute__((unused)) static void OrgApacheLuceneSearchGeoPointTermsEnum_nextR
   return nil;
 }
 
-- (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
+- (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
   while (currentCell_ == nil || [((OrgApacheLuceneUtilBytesRef *) nil_chk(term)) compareToWithId:currentCell_] > 0) {
     if ([((id<JavaUtilList>) nil_chk(rangeBounds_)) isEmpty]) {
-      return JreLoadStatic(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum, END);
+      return JreLoadEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, END);
     }
     if ([((OrgApacheLuceneUtilBytesRef *) nil_chk(term)) compareToWithId:((OrgApacheLuceneSearchGeoPointTermsEnum_Range *) nil_chk([rangeBounds_ getWithInt:0]))->cell_] < 0) {
-      return JreLoadStatic(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum, NO_AND_SEEK);
+      return JreLoadEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, NO_AND_SEEK);
     }
     OrgApacheLuceneSearchGeoPointTermsEnum_nextRange(self);
   }
-  return JreLoadStatic(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum, YES);
+  return JreLoadEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, YES);
 }
 
 - (jboolean)postFilterWithDouble:(jdouble)lon
@@ -238,7 +252,7 @@ void OrgApacheLuceneSearchGeoPointTermsEnum_relateAndRecurseWithLong_withLong_wi
   jshort level = (jshort) (JreURShift32((JreLShift32(OrgApacheLuceneUtilGeoUtils_BITS, 1)) - res, 1));
   jboolean within = res % OrgApacheLuceneDocumentGeoPointField_PRECISION_STEP == 0 && [self cellWithinWithDouble:minLon withDouble:minLat withDouble:maxLon withDouble:maxLat];
   if (within || (level == OrgApacheLuceneSearchGeoPointTermsEnum_DETAIL_LEVEL && [self cellIntersectsShapeWithDouble:minLon withDouble:minLat withDouble:maxLon withDouble:maxLat])) {
-    [((id<JavaUtilList>) nil_chk(self->rangeBounds_)) addWithId:[new_OrgApacheLuceneSearchGeoPointTermsEnum_Range_initWithOrgApacheLuceneSearchGeoPointTermsEnum_withLong_withShort_withShort_withBoolean_(self, start, res, level, !within) autorelease]];
+    [((id<JavaUtilList>) nil_chk(self->rangeBounds_)) addWithId:create_OrgApacheLuceneSearchGeoPointTermsEnum_Range_initWithOrgApacheLuceneSearchGeoPointTermsEnum_withLong_withShort_withShort_withBoolean_(self, start, res, level, !within)];
   }
   else if (level < OrgApacheLuceneSearchGeoPointTermsEnum_DETAIL_LEVEL && [self cellIntersectsMBRWithDouble:minLon withDouble:minLat withDouble:maxLon withDouble:maxLat]) {
     OrgApacheLuceneSearchGeoPointTermsEnum_computeRangeWithLong_withShort_(self, start, (jshort) (res - 1));
@@ -264,7 +278,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchGeoPointTermsEnum)
 }
 
 - (jint)compareToWithId:(OrgApacheLuceneSearchGeoPointTermsEnum_Range *)other {
-  check_class_cast(other, [OrgApacheLuceneSearchGeoPointTermsEnum_Range class]);
+  cast_chk(other, [OrgApacheLuceneSearchGeoPointTermsEnum_Range class]);
   return [((OrgApacheLuceneUtilBytesRef *) nil_chk(self->cell_)) compareToWithId:((OrgApacheLuceneSearchGeoPointTermsEnum_Range *) nil_chk(other))->cell_];
 }
 
@@ -293,15 +307,17 @@ void OrgApacheLuceneSearchGeoPointTermsEnum_Range_initWithOrgApacheLuceneSearchG
   NSObject_init(self);
   self->level_ = level;
   self->boundary_ = boundary;
-  OrgApacheLuceneUtilBytesRefBuilder *brb = [new_OrgApacheLuceneUtilBytesRefBuilder_init() autorelease];
+  OrgApacheLuceneUtilBytesRefBuilder *brb = create_OrgApacheLuceneUtilBytesRefBuilder_init();
   OrgApacheLuceneUtilNumericUtils_longToPrefixCodedBytesWithLong_withInt_withOrgApacheLuceneUtilBytesRefBuilder_(lower, res, brb);
   JreStrongAssign(&self->cell_, [brb get]);
 }
 
 OrgApacheLuceneSearchGeoPointTermsEnum_Range *new_OrgApacheLuceneSearchGeoPointTermsEnum_Range_initWithOrgApacheLuceneSearchGeoPointTermsEnum_withLong_withShort_withShort_withBoolean_(OrgApacheLuceneSearchGeoPointTermsEnum *outer$, jlong lower, jshort res, jshort level, jboolean boundary) {
-  OrgApacheLuceneSearchGeoPointTermsEnum_Range *self = [OrgApacheLuceneSearchGeoPointTermsEnum_Range alloc];
-  OrgApacheLuceneSearchGeoPointTermsEnum_Range_initWithOrgApacheLuceneSearchGeoPointTermsEnum_withLong_withShort_withShort_withBoolean_(self, outer$, lower, res, level, boundary);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchGeoPointTermsEnum_Range, initWithOrgApacheLuceneSearchGeoPointTermsEnum_withLong_withShort_withShort_withBoolean_, outer$, lower, res, level, boundary)
+}
+
+OrgApacheLuceneSearchGeoPointTermsEnum_Range *create_OrgApacheLuceneSearchGeoPointTermsEnum_Range_initWithOrgApacheLuceneSearchGeoPointTermsEnum_withLong_withShort_withShort_withBoolean_(OrgApacheLuceneSearchGeoPointTermsEnum *outer$, jlong lower, jshort res, jshort level, jboolean boundary) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchGeoPointTermsEnum_Range, initWithOrgApacheLuceneSearchGeoPointTermsEnum_withLong_withShort_withShort_withBoolean_, outer$, lower, res, level, boundary)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchGeoPointTermsEnum_Range)

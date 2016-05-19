@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_RESTRICT
-#define OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction 0
 #else
-#define OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_) && (OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_
+#if !defined (OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction))
+#define OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_
 
-#define OrgApacheLuceneQueriesFunctionValuesourceBoolFunction_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionValuesourceBoolFunction_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceBoolFunction 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceBoolFunction 1
 #include "org/apache/lucene/queries/function/valuesource/BoolFunction.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
@@ -27,6 +27,12 @@
 @class OrgApacheLuceneSearchIndexSearcher;
 @protocol JavaUtilMap;
 
+/*!
+ @brief <code>BoolFunction</code> implementation which applies an extendible boolean
+ function to the values of a single wrapped <code>ValueSource</code>.
+ Functions this can be used for include whether a field has a value or not,
+ or inverting the boolean value of the wrapped ValueSource.
+ */
 @interface OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction : OrgApacheLuceneQueriesFunctionValuesourceBoolFunction {
  @public
   OrgApacheLuceneQueriesFunctionValueSource *source_;
@@ -67,4 +73,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFu
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction")

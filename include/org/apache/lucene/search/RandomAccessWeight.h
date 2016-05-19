@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchRandomAccessWeight_INCLUDE_ALL")
-#if OrgApacheLuceneSearchRandomAccessWeight_RESTRICT
-#define OrgApacheLuceneSearchRandomAccessWeight_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchRandomAccessWeight")
+#ifdef RESTRICT_OrgApacheLuceneSearchRandomAccessWeight
+#define INCLUDE_ALL_OrgApacheLuceneSearchRandomAccessWeight 0
 #else
-#define OrgApacheLuceneSearchRandomAccessWeight_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchRandomAccessWeight 1
 #endif
-#undef OrgApacheLuceneSearchRandomAccessWeight_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchRandomAccessWeight
 
-#if !defined (_OrgApacheLuceneSearchRandomAccessWeight_) && (OrgApacheLuceneSearchRandomAccessWeight_INCLUDE_ALL || OrgApacheLuceneSearchRandomAccessWeight_INCLUDE)
-#define _OrgApacheLuceneSearchRandomAccessWeight_
+#if !defined (OrgApacheLuceneSearchRandomAccessWeight_) && (INCLUDE_ALL_OrgApacheLuceneSearchRandomAccessWeight || defined(INCLUDE_OrgApacheLuceneSearchRandomAccessWeight))
+#define OrgApacheLuceneSearchRandomAccessWeight_
 
-#define OrgApacheLuceneSearchConstantScoreWeight_RESTRICT 1
-#define OrgApacheLuceneSearchConstantScoreWeight_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchConstantScoreWeight 1
+#define INCLUDE_OrgApacheLuceneSearchConstantScoreWeight 1
 #include "org/apache/lucene/search/ConstantScoreWeight.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
@@ -25,6 +25,14 @@
 @class OrgApacheLuceneSearchScorer;
 @protocol OrgApacheLuceneUtilBits;
 
+/*!
+ @brief Base class to build <code>Weight</code>s that are based on random-access
+ structures such as live docs or doc values.
+ Such weights return a
+ <code>Scorer</code> which consists of an approximation that matches
+ everything, and a confirmation phase that first checks live docs and
+ then the <code>Bits</code> returned by <code>getMatchingDocs(LeafReaderContext)</code>.
+ */
 @interface OrgApacheLuceneSearchRandomAccessWeight : OrgApacheLuceneSearchConstantScoreWeight
 
 #pragma mark Public
@@ -33,8 +41,19 @@
 
 #pragma mark Protected
 
+/*!
+ @brief Sole constructor.
+ */
 - (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
 
+/*!
+ @brief Return a <code>Bits</code> instance representing documents that match this
+ weight on the given context.
+ A return value of <code>null</code> indicates
+ that no documents matched.
+ Note: it is not needed to care about live docs as they will be checked
+ before the returned bits.
+ */
 - (id<OrgApacheLuceneUtilBits>)getMatchingDocsWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
 @end
@@ -47,4 +66,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchRandomAccessWeight)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchRandomAccessWeight_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchRandomAccessWeight")

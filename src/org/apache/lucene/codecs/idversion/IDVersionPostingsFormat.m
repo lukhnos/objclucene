@@ -37,6 +37,14 @@
 
 @implementation OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat
 
++ (jlong)MIN_VERSION {
+  return OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_MIN_VERSION;
+}
+
++ (jlong)MAX_VERSION {
+  return OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_MAX_VERSION;
+}
+
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_init(self);
@@ -51,10 +59,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (OrgApacheLuceneCodecsFieldsConsumer *)fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state {
-  OrgApacheLuceneCodecsPostingsWriterBase *postingsWriter = [new_OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_initWithOrgApacheLuceneUtilBits_(((OrgApacheLuceneIndexSegmentWriteState *) nil_chk(state))->liveDocs_) autorelease];
+  OrgApacheLuceneCodecsPostingsWriterBase *postingsWriter = create_OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_initWithOrgApacheLuceneUtilBits_(((OrgApacheLuceneIndexSegmentWriteState *) nil_chk(state))->liveDocs_);
   jboolean success = false;
   @try {
-    OrgApacheLuceneCodecsFieldsConsumer *ret = [new_OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_initWithOrgApacheLuceneIndexSegmentWriteState_withOrgApacheLuceneCodecsPostingsWriterBase_withInt_withInt_(state, postingsWriter, minTermsInBlock_, maxTermsInBlock_) autorelease];
+    OrgApacheLuceneCodecsFieldsConsumer *ret = create_OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_initWithOrgApacheLuceneIndexSegmentWriteState_withOrgApacheLuceneCodecsPostingsWriterBase_withInt_withInt_(state, postingsWriter, minTermsInBlock_, maxTermsInBlock_);
     success = true;
     return ret;
   }
@@ -66,10 +74,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (OrgApacheLuceneCodecsFieldsProducer *)fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state {
-  OrgApacheLuceneCodecsPostingsReaderBase *postingsReader = [new_OrgApacheLuceneCodecsIdversionIDVersionPostingsReader_init() autorelease];
+  OrgApacheLuceneCodecsPostingsReaderBase *postingsReader = create_OrgApacheLuceneCodecsIdversionIDVersionPostingsReader_init();
   jboolean success = false;
   @try {
-    OrgApacheLuceneCodecsFieldsProducer *ret = [new_OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_initWithOrgApacheLuceneCodecsPostingsReaderBase_withOrgApacheLuceneIndexSegmentReadState_(postingsReader, state) autorelease];
+    OrgApacheLuceneCodecsFieldsProducer *ret = create_OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_initWithOrgApacheLuceneCodecsPostingsReaderBase_withOrgApacheLuceneIndexSegmentReadState_(postingsReader, state);
     success = true;
     return ret;
   }
@@ -115,9 +123,11 @@ void OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_init(OrgApacheLuceneC
 }
 
 OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat *new_OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_init() {
-  OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat *self = [OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat alloc];
-  OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat, init)
+}
+
+OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat *create_OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat, init)
 }
 
 void OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_initWithInt_withInt_(OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat *self, jint minTermsInBlock, jint maxTermsInBlock) {
@@ -128,9 +138,11 @@ void OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_initWithInt_withInt_(
 }
 
 OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat *new_OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_initWithInt_withInt_(jint minTermsInBlock, jint maxTermsInBlock) {
-  OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat *self = [OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat alloc];
-  OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_initWithInt_withInt_(self, minTermsInBlock, maxTermsInBlock);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat, initWithInt_withInt_, minTermsInBlock, maxTermsInBlock)
+}
+
+OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat *create_OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_initWithInt_withInt_(jint minTermsInBlock, jint maxTermsInBlock) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat, initWithInt_withInt_, minTermsInBlock, maxTermsInBlock)
 }
 
 jlong OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_bytesToLongWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *bytes) {
@@ -141,7 +153,7 @@ jlong OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_bytesToLongWithOrgAp
 void OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_longToBytesWithLong_withOrgApacheLuceneUtilBytesRef_(jlong v, OrgApacheLuceneUtilBytesRef *bytes) {
   OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_initialize();
   if (v > OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_MAX_VERSION || v < OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_MIN_VERSION) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$J$J$JC", @"version must be >= MIN_VERSION=", OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_MIN_VERSION, @" and <= MAX_VERSION=", OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_MAX_VERSION, @" (got: ", v, ')')) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$J$J$JC", @"version must be >= MIN_VERSION=", OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_MIN_VERSION, @" and <= MAX_VERSION=", OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_MAX_VERSION, @" (got: ", v, ')'));
   }
   ((OrgApacheLuceneUtilBytesRef *) nil_chk(bytes))->offset_ = 0;
   bytes->length_ = 8;

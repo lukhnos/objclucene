@@ -4,8 +4,6 @@
 //
 
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/index/DocValuesType.h"
-#include "org/apache/lucene/index/IndexOptions.h"
 #include "org/apache/lucene/index/IndexableFieldType.h"
 
 @interface OrgApacheLuceneIndexIndexableFieldType : NSObject

@@ -35,7 +35,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNo
 }
 
 - (OrgApacheLuceneUtilBytesRef *)textToBytesRef {
-  return [new_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(text_) autorelease];
+  return create_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(text_);
 }
 
 - (NSString *)description {
@@ -43,7 +43,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNo
 }
 
 - (OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode *)cloneTree {
-  OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode *clone = (OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode *) check_class_cast([super cloneTree], [OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode class]);
+  OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode *clone = (OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode *) cast_chk([super cloneTree], [OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode class]);
   JreStrongAssign(&((OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode *) nil_chk(clone))->field_, self->field_);
   JreStrongAssign(&clone->text_, self->text_);
   return clone;
@@ -109,9 +109,11 @@ void OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode_initWithJava
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode *new_OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(id<JavaLangCharSequence> field, id<JavaLangCharSequence> text, jint begin, jint end) {
-  OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode *self = [OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(self, field, text, begin, end);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode, initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_, field, text, begin, end)
+}
+
+OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode *create_OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(id<JavaLangCharSequence> field, id<JavaLangCharSequence> text, jint begin, jint end) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode, initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_, field, text, begin, end)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode)

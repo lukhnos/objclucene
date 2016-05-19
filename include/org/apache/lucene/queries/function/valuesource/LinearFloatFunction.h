@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction_RESTRICT
-#define OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction 0
 #else
-#define OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction_) && (OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction_
+#if !defined (OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction))
+#define OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction_
 
-#define OrgApacheLuceneQueriesFunctionValueSource_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionValueSource_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionValueSource 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionValueSource 1
 #include "org/apache/lucene/queries/function/ValueSource.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
@@ -25,6 +25,12 @@
 @class OrgApacheLuceneSearchIndexSearcher;
 @protocol JavaUtilMap;
 
+/*!
+ @brief <code>LinearFloatFunction</code> implements a linear function over
+ another <code>ValueSource</code>.
+ <br>
+ Normally Used as an argument to a <code>org.apache.lucene.queries.function.FunctionQuery</code>
+ */
 @interface OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction : OrgApacheLuceneQueriesFunctionValueSource {
  @public
   OrgApacheLuceneQueriesFunctionValueSource *source_;
@@ -60,8 +66,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunct
 
 FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction *new_OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSource_withFloat_withFloat_(OrgApacheLuceneQueriesFunctionValueSource *source, jfloat slope, jfloat intercept) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction *create_OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSource_withFloat_withFloat_(OrgApacheLuceneQueriesFunctionValueSource *source, jfloat slope, jfloat intercept);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction")

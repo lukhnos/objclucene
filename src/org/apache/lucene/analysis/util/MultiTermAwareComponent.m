@@ -4,7 +4,6 @@
 //
 
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/analysis/util/AbstractAnalysisFactory.h"
 #include "org/apache/lucene/analysis/util/MultiTermAwareComponent.h"
 
 @interface OrgApacheLuceneAnalysisUtilMultiTermAwareComponent : NSObject

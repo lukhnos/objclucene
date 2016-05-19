@@ -86,7 +86,7 @@ void OrgApacheLuceneSearchJoinTermsCollector_initWithNSString_(OrgApacheLuceneSe
 
 OrgApacheLuceneSearchJoinTermsCollector *OrgApacheLuceneSearchJoinTermsCollector_createWithNSString_withBoolean_(NSString *field, jboolean multipleValuesPerDocument) {
   OrgApacheLuceneSearchJoinTermsCollector_initialize();
-  return multipleValuesPerDocument ? [new_OrgApacheLuceneSearchJoinTermsCollector_MV_initWithNSString_(field) autorelease] : [new_OrgApacheLuceneSearchJoinTermsCollector_SV_initWithNSString_(field) autorelease];
+  return multipleValuesPerDocument ? create_OrgApacheLuceneSearchJoinTermsCollector_MV_initWithNSString_(field) : create_OrgApacheLuceneSearchJoinTermsCollector_SV_initWithNSString_(field);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinTermsCollector)
@@ -101,8 +101,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinTermsCollector)
 - (void)collectWithInt:(jint)doc {
   [((OrgApacheLuceneIndexSortedSetDocValues *) nil_chk(docTermOrds_)) setDocumentWithInt:doc];
   jlong ord;
-  while ((ord = [docTermOrds_ nextOrd]) != OrgApacheLuceneIndexSortedSetDocValues_NO_MORE_ORDS) {
-    OrgApacheLuceneUtilBytesRef *term = [docTermOrds_ lookupOrdWithLong:ord];
+  while ((ord = [((OrgApacheLuceneIndexSortedSetDocValues *) nil_chk(docTermOrds_)) nextOrd]) != OrgApacheLuceneIndexSortedSetDocValues_NO_MORE_ORDS) {
+    OrgApacheLuceneUtilBytesRef *term = [((OrgApacheLuceneIndexSortedSetDocValues *) nil_chk(docTermOrds_)) lookupOrdWithLong:ord];
     [((OrgApacheLuceneUtilBytesRefHash *) nil_chk(collectorTerms_)) addWithOrgApacheLuceneUtilBytesRef:term];
   }
 }
@@ -139,9 +139,11 @@ void OrgApacheLuceneSearchJoinTermsCollector_MV_initWithNSString_(OrgApacheLucen
 }
 
 OrgApacheLuceneSearchJoinTermsCollector_MV *new_OrgApacheLuceneSearchJoinTermsCollector_MV_initWithNSString_(NSString *field) {
-  OrgApacheLuceneSearchJoinTermsCollector_MV *self = [OrgApacheLuceneSearchJoinTermsCollector_MV alloc];
-  OrgApacheLuceneSearchJoinTermsCollector_MV_initWithNSString_(self, field);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinTermsCollector_MV, initWithNSString_, field)
+}
+
+OrgApacheLuceneSearchJoinTermsCollector_MV *create_OrgApacheLuceneSearchJoinTermsCollector_MV_initWithNSString_(NSString *field) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinTermsCollector_MV, initWithNSString_, field)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinTermsCollector_MV)
@@ -190,9 +192,11 @@ void OrgApacheLuceneSearchJoinTermsCollector_SV_initWithNSString_(OrgApacheLucen
 }
 
 OrgApacheLuceneSearchJoinTermsCollector_SV *new_OrgApacheLuceneSearchJoinTermsCollector_SV_initWithNSString_(NSString *field) {
-  OrgApacheLuceneSearchJoinTermsCollector_SV *self = [OrgApacheLuceneSearchJoinTermsCollector_SV alloc];
-  OrgApacheLuceneSearchJoinTermsCollector_SV_initWithNSString_(self, field);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinTermsCollector_SV, initWithNSString_, field)
+}
+
+OrgApacheLuceneSearchJoinTermsCollector_SV *create_OrgApacheLuceneSearchJoinTermsCollector_SV_initWithNSString_(NSString *field) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinTermsCollector_SV, initWithNSString_, field)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinTermsCollector_SV)

@@ -3,14 +3,17 @@
 //  source: ./queries/src/java/org/apache/lucene/queries/package-info.java
 //
 
+/*!
+ @brief Filters and Queries that add to core Lucene.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesPackage_info_RESTRICT
-#define OrgApacheLuceneQueriesPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneQueriesPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneQueriesPackage_info 0
 #else
-#define OrgApacheLuceneQueriesPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesPackage_info 1
 #endif
-#undef OrgApacheLuceneQueriesPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesPackage_info
 
-#pragma pop_macro("OrgApacheLuceneQueriesPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesPackage_info")

@@ -73,7 +73,7 @@ withOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilariti
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneSearchSimilaritiesBasicModel:withOrgApacheLuceneSearchSimilaritiesAfterEffect:withOrgApacheLuceneSearchSimilaritiesNormalization:", "DFRSimilarity", NULL, 0x1, NULL, NULL },
     { "scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:withFloat:", "score", "F", 0x4, NULL, NULL },
-    { "explainWithJavaUtilList:withOrgApacheLuceneSearchSimilaritiesBasicStats:withInt:withFloat:withFloat:", "explain", "V", 0x4, NULL, NULL },
+    { "explainWithJavaUtilList:withOrgApacheLuceneSearchSimilaritiesBasicStats:withInt:withFloat:withFloat:", "explain", "V", 0x4, NULL, "(Ljava/util/List<Lorg/apache/lucene/search/Explanation;>;Lorg/apache/lucene/search/similarities/BasicStats;IFF)V" },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "getBasicModel", NULL, "Lorg.apache.lucene.search.similarities.BasicModel;", 0x1, NULL, NULL },
     { "getAfterEffect", NULL, "Lorg.apache.lucene.search.similarities.AfterEffect;", 0x1, NULL, NULL },
@@ -93,7 +93,7 @@ withOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilariti
 void OrgApacheLuceneSearchSimilaritiesDFRSimilarity_initWithOrgApacheLuceneSearchSimilaritiesBasicModel_withOrgApacheLuceneSearchSimilaritiesAfterEffect_withOrgApacheLuceneSearchSimilaritiesNormalization_(OrgApacheLuceneSearchSimilaritiesDFRSimilarity *self, OrgApacheLuceneSearchSimilaritiesBasicModel *basicModel, OrgApacheLuceneSearchSimilaritiesAfterEffect *afterEffect, OrgApacheLuceneSearchSimilaritiesNormalization *normalization) {
   OrgApacheLuceneSearchSimilaritiesSimilarityBase_init(self);
   if (basicModel == nil || afterEffect == nil || normalization == nil) {
-    @throw [new_JavaLangNullPointerException_initWithNSString_(@"null parameters not allowed.") autorelease];
+    @throw create_JavaLangNullPointerException_initWithNSString_(@"null parameters not allowed.");
   }
   JreStrongAssign(&self->basicModel_, basicModel);
   JreStrongAssign(&self->afterEffect_, afterEffect);
@@ -101,9 +101,11 @@ void OrgApacheLuceneSearchSimilaritiesDFRSimilarity_initWithOrgApacheLuceneSearc
 }
 
 OrgApacheLuceneSearchSimilaritiesDFRSimilarity *new_OrgApacheLuceneSearchSimilaritiesDFRSimilarity_initWithOrgApacheLuceneSearchSimilaritiesBasicModel_withOrgApacheLuceneSearchSimilaritiesAfterEffect_withOrgApacheLuceneSearchSimilaritiesNormalization_(OrgApacheLuceneSearchSimilaritiesBasicModel *basicModel, OrgApacheLuceneSearchSimilaritiesAfterEffect *afterEffect, OrgApacheLuceneSearchSimilaritiesNormalization *normalization) {
-  OrgApacheLuceneSearchSimilaritiesDFRSimilarity *self = [OrgApacheLuceneSearchSimilaritiesDFRSimilarity alloc];
-  OrgApacheLuceneSearchSimilaritiesDFRSimilarity_initWithOrgApacheLuceneSearchSimilaritiesBasicModel_withOrgApacheLuceneSearchSimilaritiesAfterEffect_withOrgApacheLuceneSearchSimilaritiesNormalization_(self, basicModel, afterEffect, normalization);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSimilaritiesDFRSimilarity, initWithOrgApacheLuceneSearchSimilaritiesBasicModel_withOrgApacheLuceneSearchSimilaritiesAfterEffect_withOrgApacheLuceneSearchSimilaritiesNormalization_, basicModel, afterEffect, normalization)
+}
+
+OrgApacheLuceneSearchSimilaritiesDFRSimilarity *create_OrgApacheLuceneSearchSimilaritiesDFRSimilarity_initWithOrgApacheLuceneSearchSimilaritiesBasicModel_withOrgApacheLuceneSearchSimilaritiesAfterEffect_withOrgApacheLuceneSearchSimilaritiesNormalization_(OrgApacheLuceneSearchSimilaritiesBasicModel *basicModel, OrgApacheLuceneSearchSimilaritiesAfterEffect *afterEffect, OrgApacheLuceneSearchSimilaritiesNormalization *normalization) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSimilaritiesDFRSimilarity, initWithOrgApacheLuceneSearchSimilaritiesBasicModel_withOrgApacheLuceneSearchSimilaritiesAfterEffect_withOrgApacheLuceneSearchSimilaritiesNormalization_, basicModel, afterEffect, normalization)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSimilaritiesDFRSimilarity)

@@ -55,11 +55,11 @@ __attribute__((unused)) static OrgApacheLuceneIndexSegmentCommitInfo *OrgApacheL
 }
 
 - (void)listSegments {
-  JavaTextDecimalFormat *formatter = [new_JavaTextDecimalFormat_initWithNSString_withJavaTextDecimalFormatSymbols_(@"###,###.###", JavaTextDecimalFormatSymbols_getInstanceWithJavaUtilLocale_(JreLoadStatic(JavaUtilLocale, ROOT_))) autorelease];
+  JavaTextDecimalFormat *formatter = create_JavaTextDecimalFormat_initWithNSString_withJavaTextDecimalFormatSymbols_(@"###,###.###", JavaTextDecimalFormatSymbols_getInstanceWithJavaUtilLocale_(JreLoadStatic(JavaUtilLocale, ROOT)));
   for (jint x = 0; x < [((OrgApacheLuceneIndexSegmentInfos *) nil_chk(infos_)) size]; x++) {
-    OrgApacheLuceneIndexSegmentCommitInfo *info = [infos_ infoWithInt:x];
+    OrgApacheLuceneIndexSegmentCommitInfo *info = [((OrgApacheLuceneIndexSegmentInfos *) nil_chk(infos_)) infoWithInt:x];
     NSString *sizeStr = [formatter formatWithLong:[((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info)) sizeInBytes]];
-    [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out_))) printlnWithNSString:JreStrcat("$C$", ((OrgApacheLuceneIndexSegmentInfo *) nil_chk(info->info_))->name_, ' ', sizeStr)];
+    [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out))) printlnWithNSString:JreStrcat("$C$", ((OrgApacheLuceneIndexSegmentInfo *) nil_chk(info->info_))->name_, ' ', sizeStr)];
   }
 }
 
@@ -83,14 +83,14 @@ __attribute__((unused)) static OrgApacheLuceneIndexSegmentCommitInfo *OrgApacheL
     }
   }
   [((OrgApacheLuceneIndexSegmentInfos *) nil_chk(infos_)) changed];
-  [infos_ commitWithOrgApacheLuceneStoreDirectory:fsDir_];
+  [((OrgApacheLuceneIndexSegmentInfos *) nil_chk(infos_)) commitWithOrgApacheLuceneStoreDirectory:fsDir_];
 }
 
 - (void)splitWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)destDir
                             withNSStringArray:(IOSObjectArray *)segs {
   OrgLukhnosPortmobileFileFiles_createDirectoriesWithOrgLukhnosPortmobileFilePath_(destDir);
   OrgApacheLuceneStoreFSDirectory *destFSDir = OrgApacheLuceneStoreFSDirectory_openWithOrgLukhnosPortmobileFilePath_(destDir);
-  OrgApacheLuceneIndexSegmentInfos *destInfos = [new_OrgApacheLuceneIndexSegmentInfos_init() autorelease];
+  OrgApacheLuceneIndexSegmentInfos *destInfos = create_OrgApacheLuceneIndexSegmentInfos_init();
   destInfos->counter_ = ((OrgApacheLuceneIndexSegmentInfos *) nil_chk(infos_))->counter_;
   {
     IOSObjectArray *a__ = segs;
@@ -100,8 +100,8 @@ __attribute__((unused)) static OrgApacheLuceneIndexSegmentCommitInfo *OrgApacheL
       NSString *n = *b__++;
       OrgApacheLuceneIndexSegmentCommitInfo *infoPerCommit = OrgApacheLuceneIndexIndexSplitter_getInfoWithNSString_(self, n);
       OrgApacheLuceneIndexSegmentInfo *info = ((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(infoPerCommit))->info_;
-      OrgApacheLuceneIndexSegmentInfo *newInfo = [new_OrgApacheLuceneIndexSegmentInfo_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneUtilVersion_withNSString_withInt_withBoolean_withOrgApacheLuceneCodecsCodec_withJavaUtilMap_withByteArray_withJavaUtilMap_(destFSDir, [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(info)) getVersion], info->name_, [info maxDoc], [info getUseCompoundFile], [info getCodec], [info getDiagnostics], [info getId], [new_JavaUtilHashMap_init() autorelease]) autorelease];
-      [destInfos addWithOrgApacheLuceneIndexSegmentCommitInfo:[new_OrgApacheLuceneIndexSegmentCommitInfo_initWithOrgApacheLuceneIndexSegmentInfo_withInt_withLong_withLong_withLong_(newInfo, [infoPerCommit getDelCount], [infoPerCommit getDelGen], [infoPerCommit getFieldInfosGen], [infoPerCommit getDocValuesGen]) autorelease]];
+      OrgApacheLuceneIndexSegmentInfo *newInfo = create_OrgApacheLuceneIndexSegmentInfo_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneUtilVersion_withNSString_withInt_withBoolean_withOrgApacheLuceneCodecsCodec_withJavaUtilMap_withByteArray_withJavaUtilMap_(destFSDir, [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(info)) getVersion], info->name_, [info maxDoc], [info getUseCompoundFile], [info getCodec], [info getDiagnostics], [info getId], create_JavaUtilHashMap_init());
+      [destInfos addWithOrgApacheLuceneIndexSegmentCommitInfo:create_OrgApacheLuceneIndexSegmentCommitInfo_initWithOrgApacheLuceneIndexSegmentInfo_withInt_withLong_withLong_withLong_(newInfo, [infoPerCommit getDelCount], [infoPerCommit getDelGen], [infoPerCommit getFieldInfosGen], [infoPerCommit getDocValuesGen])];
       id<JavaUtilCollection> files = [infoPerCommit files];
       for (NSString * __strong srcName in nil_chk(files)) {
         OrgLukhnosPortmobileFilePath *srcFile = [((OrgLukhnosPortmobileFilePath *) nil_chk(dir_)) resolveWithNSString:srcName];
@@ -145,21 +145,21 @@ __attribute__((unused)) static OrgApacheLuceneIndexSegmentCommitInfo *OrgApacheL
 void OrgApacheLuceneIndexIndexSplitter_mainWithNSStringArray_(IOSObjectArray *args) {
   OrgApacheLuceneIndexIndexSplitter_initialize();
   if (((IOSObjectArray *) nil_chk(args))->size_ < 2) {
-    [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, err_))) printlnWithNSString:@"Usage: IndexSplitter <srcDir> -l (list the segments and their sizes)"];
-    [JreLoadStatic(JavaLangSystem, err_) printlnWithNSString:@"IndexSplitter <srcDir> <destDir> <segments>+"];
-    [JreLoadStatic(JavaLangSystem, err_) printlnWithNSString:@"IndexSplitter <srcDir> -d (delete the following segments)"];
+    [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, err))) printlnWithNSString:@"Usage: IndexSplitter <srcDir> -l (list the segments and their sizes)"];
+    [JreLoadStatic(JavaLangSystem, err) printlnWithNSString:@"IndexSplitter <srcDir> <destDir> <segments>+"];
+    [JreLoadStatic(JavaLangSystem, err) printlnWithNSString:@"IndexSplitter <srcDir> -d (delete the following segments)"];
     return;
   }
   OrgLukhnosPortmobileFilePath *srcDir = OrgLukhnosPortmobileFilePaths_getWithNSString_(IOSObjectArray_Get(args, 0));
-  OrgApacheLuceneIndexIndexSplitter *is = [new_OrgApacheLuceneIndexIndexSplitter_initWithOrgLukhnosPortmobileFilePath_(srcDir) autorelease];
+  OrgApacheLuceneIndexIndexSplitter *is = create_OrgApacheLuceneIndexIndexSplitter_initWithOrgLukhnosPortmobileFilePath_(srcDir);
   if (!OrgLukhnosPortmobileFileFiles_existsWithOrgLukhnosPortmobileFilePath_(srcDir)) {
-    @throw [new_JavaLangException_initWithNSString_(JreStrcat("$@$", @"srcdir:", [((OrgLukhnosPortmobileFilePath *) nil_chk(srcDir)) toAbsolutePath], @" doesn't exist")) autorelease];
+    @throw create_JavaLangException_initWithNSString_(JreStrcat("$@$", @"srcdir:", [((OrgLukhnosPortmobileFilePath *) nil_chk(srcDir)) toAbsolutePath], @" doesn't exist"));
   }
   if ([((NSString *) nil_chk(IOSObjectArray_Get(args, 1))) isEqual:@"-l"]) {
     [is listSegments];
   }
   else if ([((NSString *) nil_chk(IOSObjectArray_Get(args, 1))) isEqual:@"-d"]) {
-    id<JavaUtilList> segs = [new_JavaUtilArrayList_init() autorelease];
+    id<JavaUtilList> segs = create_JavaUtilArrayList_init();
     for (jint x = 2; x < args->size_; x++) {
       [segs addWithId:IOSObjectArray_Get(args, x)];
     }
@@ -167,7 +167,7 @@ void OrgApacheLuceneIndexIndexSplitter_mainWithNSStringArray_(IOSObjectArray *ar
   }
   else {
     OrgLukhnosPortmobileFilePath *targetDir = OrgLukhnosPortmobileFilePaths_getWithNSString_(IOSObjectArray_Get(args, 1));
-    id<JavaUtilList> segs = [new_JavaUtilArrayList_init() autorelease];
+    id<JavaUtilList> segs = create_JavaUtilArrayList_init();
     for (jint x = 2; x < args->size_; x++) {
       [segs addWithId:IOSObjectArray_Get(args, x)];
     }
@@ -183,21 +183,23 @@ void OrgApacheLuceneIndexIndexSplitter_initWithOrgLukhnosPortmobileFilePath_(Org
 }
 
 OrgApacheLuceneIndexIndexSplitter *new_OrgApacheLuceneIndexIndexSplitter_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *dir) {
-  OrgApacheLuceneIndexIndexSplitter *self = [OrgApacheLuceneIndexIndexSplitter alloc];
-  OrgApacheLuceneIndexIndexSplitter_initWithOrgLukhnosPortmobileFilePath_(self, dir);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexIndexSplitter, initWithOrgLukhnosPortmobileFilePath_, dir)
+}
+
+OrgApacheLuceneIndexIndexSplitter *create_OrgApacheLuceneIndexIndexSplitter_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *dir) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexIndexSplitter, initWithOrgLukhnosPortmobileFilePath_, dir)
 }
 
 jint OrgApacheLuceneIndexIndexSplitter_getIdxWithNSString_(OrgApacheLuceneIndexIndexSplitter *self, NSString *name) {
   for (jint x = 0; x < [((OrgApacheLuceneIndexSegmentInfos *) nil_chk(self->infos_)) size]; x++) {
-    if ([((NSString *) nil_chk(name)) isEqual:((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk([self->infos_ infoWithInt:x]))->info_))->name_]) return x;
+    if ([((NSString *) nil_chk(name)) isEqual:((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk([((OrgApacheLuceneIndexSegmentInfos *) nil_chk(self->infos_)) infoWithInt:x]))->info_))->name_]) return x;
   }
   return -1;
 }
 
 OrgApacheLuceneIndexSegmentCommitInfo *OrgApacheLuceneIndexIndexSplitter_getInfoWithNSString_(OrgApacheLuceneIndexIndexSplitter *self, NSString *name) {
   for (jint x = 0; x < [((OrgApacheLuceneIndexSegmentInfos *) nil_chk(self->infos_)) size]; x++) {
-    if ([((NSString *) nil_chk(name)) isEqual:((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk([self->infos_ infoWithInt:x]))->info_))->name_]) return [self->infos_ infoWithInt:x];
+    if ([((NSString *) nil_chk(name)) isEqual:((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk([((OrgApacheLuceneIndexSegmentInfos *) nil_chk(self->infos_)) infoWithInt:x]))->info_))->name_]) return [((OrgApacheLuceneIndexSegmentInfos *) nil_chk(self->infos_)) infoWithInt:x];
   }
   return nil;
 }

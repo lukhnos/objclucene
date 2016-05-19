@@ -33,8 +33,17 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary, w
  @public
   OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary *this$1_;
   OrgApacheLuceneQueriesFunctionFunctionValues *currentWeightValues_;
+  /*!
+   @brief leaves of the reader
+   */
   id<JavaUtilList> leaves_;
+  /*!
+   @brief starting docIds of all the leaves
+   */
   IOSIntArray *starts_;
+  /*!
+   @brief current leave index
+   */
   jint currentLeafIndex_;
 }
 
@@ -72,7 +81,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_Do
 }
 
 - (id<OrgApacheLuceneSearchSuggestInputIterator>)getEntryIterator {
-  return [new_OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_DocumentValueSourceInputIterator_initWithOrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_withBoolean_withBoolean_(self, payloadField_ != nil, contextsField_ != nil) autorelease];
+  return create_OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_DocumentValueSourceInputIterator_initWithOrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_withBoolean_withBoolean_(self, payloadField_ != nil, contextsField_ != nil);
 }
 
 - (void)dealloc {
@@ -103,9 +112,11 @@ void OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_initWithOrgApache
 }
 
 OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary *new_OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneQueriesFunctionValueSource_withNSString_withNSString_(OrgApacheLuceneIndexIndexReader *reader, NSString *field, OrgApacheLuceneQueriesFunctionValueSource *weightsValueSource, NSString *payload, NSString *contexts) {
-  OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary *self = [OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary alloc];
-  OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneQueriesFunctionValueSource_withNSString_withNSString_(self, reader, field, weightsValueSource, payload, contexts);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary, initWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneQueriesFunctionValueSource_withNSString_withNSString_, reader, field, weightsValueSource, payload, contexts)
+}
+
+OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary *create_OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneQueriesFunctionValueSource_withNSString_withNSString_(OrgApacheLuceneIndexIndexReader *reader, NSString *field, OrgApacheLuceneQueriesFunctionValueSource *weightsValueSource, NSString *payload, NSString *contexts) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary, initWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneQueriesFunctionValueSource_withNSString_withNSString_, reader, field, weightsValueSource, payload, contexts)
 }
 
 void OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneQueriesFunctionValueSource_withNSString_(OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary *self, OrgApacheLuceneIndexIndexReader *reader, NSString *field, OrgApacheLuceneQueriesFunctionValueSource *weightsValueSource, NSString *payload) {
@@ -114,9 +125,11 @@ void OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_initWithOrgApache
 }
 
 OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary *new_OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneQueriesFunctionValueSource_withNSString_(OrgApacheLuceneIndexIndexReader *reader, NSString *field, OrgApacheLuceneQueriesFunctionValueSource *weightsValueSource, NSString *payload) {
-  OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary *self = [OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary alloc];
-  OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneQueriesFunctionValueSource_withNSString_(self, reader, field, weightsValueSource, payload);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary, initWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneQueriesFunctionValueSource_withNSString_, reader, field, weightsValueSource, payload)
+}
+
+OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary *create_OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneQueriesFunctionValueSource_withNSString_(OrgApacheLuceneIndexIndexReader *reader, NSString *field, OrgApacheLuceneQueriesFunctionValueSource *weightsValueSource, NSString *payload) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary, initWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneQueriesFunctionValueSource_withNSString_, reader, field, weightsValueSource, payload)
 }
 
 void OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary *self, OrgApacheLuceneIndexIndexReader *reader, NSString *field, OrgApacheLuceneQueriesFunctionValueSource *weightsValueSource) {
@@ -125,9 +138,11 @@ void OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_initWithOrgApache
 }
 
 OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary *new_OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneIndexIndexReader *reader, NSString *field, OrgApacheLuceneQueriesFunctionValueSource *weightsValueSource) {
-  OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary *self = [OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary alloc];
-  OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneQueriesFunctionValueSource_(self, reader, field, weightsValueSource);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary, initWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneQueriesFunctionValueSource_, reader, field, weightsValueSource)
+}
+
+OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary *create_OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneIndexIndexReader *reader, NSString *field, OrgApacheLuceneQueriesFunctionValueSource *weightsValueSource) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary, initWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneQueriesFunctionValueSource_, reader, field, weightsValueSource)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary)
@@ -150,10 +165,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentValueSource
   if (subIndex != currentLeafIndex_) {
     currentLeafIndex_ = subIndex;
     @try {
-      JreStrongAssign(&currentWeightValues_, [((OrgApacheLuceneQueriesFunctionValueSource *) nil_chk(this$1_->weightsValueSource_)) getValuesWithJavaUtilMap:[new_JavaUtilHashMap_init() autorelease] withOrgApacheLuceneIndexLeafReaderContext:[((id<JavaUtilList>) nil_chk(leaves_)) getWithInt:currentLeafIndex_]]);
+      JreStrongAssign(&currentWeightValues_, [((OrgApacheLuceneQueriesFunctionValueSource *) nil_chk(this$1_->weightsValueSource_)) getValuesWithJavaUtilMap:create_JavaUtilHashMap_init() withOrgApacheLuceneIndexLeafReaderContext:[((id<JavaUtilList>) nil_chk(leaves_)) getWithInt:currentLeafIndex_]]);
     }
     @catch (JavaIoIOException *e) {
-      @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(e) autorelease];
+      @throw create_JavaLangRuntimeException_initWithNSException_(e);
     }
   }
   return [((OrgApacheLuceneQueriesFunctionFunctionValues *) nil_chk(currentWeightValues_)) longValWithInt:docId - IOSIntArray_Get(nil_chk(starts_), subIndex)];
@@ -195,13 +210,15 @@ void OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_DocumentValueSour
     *IOSIntArray_GetRef(self->starts_, i) = ((OrgApacheLuceneIndexLeafReaderContext *) nil_chk([self->leaves_ getWithInt:i]))->docBase_;
   }
   *IOSIntArray_GetRef(self->starts_, [self->leaves_ size]) = [outer$->reader_ maxDoc];
-  JreStrongAssign(&self->currentWeightValues_, ([self->leaves_ size] > 0) ? [((OrgApacheLuceneQueriesFunctionValueSource *) nil_chk(outer$->weightsValueSource_)) getValuesWithJavaUtilMap:[new_JavaUtilHashMap_init() autorelease] withOrgApacheLuceneIndexLeafReaderContext:[self->leaves_ getWithInt:self->currentLeafIndex_]] : nil);
+  JreStrongAssign(&self->currentWeightValues_, ([self->leaves_ size] > 0) ? [((OrgApacheLuceneQueriesFunctionValueSource *) nil_chk(outer$->weightsValueSource_)) getValuesWithJavaUtilMap:create_JavaUtilHashMap_init() withOrgApacheLuceneIndexLeafReaderContext:[self->leaves_ getWithInt:self->currentLeafIndex_]] : nil);
 }
 
 OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_DocumentValueSourceInputIterator *new_OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_DocumentValueSourceInputIterator_initWithOrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_withBoolean_withBoolean_(OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary *outer$, jboolean hasPayloads, jboolean hasContexts) {
-  OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_DocumentValueSourceInputIterator *self = [OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_DocumentValueSourceInputIterator alloc];
-  OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_DocumentValueSourceInputIterator_initWithOrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_withBoolean_withBoolean_(self, outer$, hasPayloads, hasContexts);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_DocumentValueSourceInputIterator, initWithOrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_withBoolean_withBoolean_, outer$, hasPayloads, hasContexts)
+}
+
+OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_DocumentValueSourceInputIterator *create_OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_DocumentValueSourceInputIterator_initWithOrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_withBoolean_withBoolean_(OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary *outer$, jboolean hasPayloads, jboolean hasContexts) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_DocumentValueSourceInputIterator, initWithOrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_withBoolean_withBoolean_, outer$, hasPayloads, hasContexts)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentValueSourceDictionary_DocumentValueSourceInputIterator)

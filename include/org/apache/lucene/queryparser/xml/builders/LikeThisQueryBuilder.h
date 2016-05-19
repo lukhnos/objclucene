@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder_RESTRICT
-#define OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder 0
 #else
-#define OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder 1
 #endif
-#undef OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder
 
-#if !defined (_OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder_) && (OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder_INCLUDE_ALL || OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder_INCLUDE)
-#define _OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder_
+#if !defined (OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder))
+#define OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder_
 
-#define OrgApacheLuceneQueryparserXmlQueryBuilder_RESTRICT 1
-#define OrgApacheLuceneQueryparserXmlQueryBuilder_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserXmlQueryBuilder 1
+#define INCLUDE_OrgApacheLuceneQueryparserXmlQueryBuilder 1
 #include "org/apache/lucene/queryparser/xml/QueryBuilder.h"
 
 @class IOSObjectArray;
@@ -25,6 +25,9 @@
 @class OrgApacheLuceneSearchQuery;
 @protocol OrgW3cDomElement;
 
+/*!
+ @brief Builder for <code>MoreLikeThisQuery</code>
+ */
 @interface OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder : NSObject < OrgApacheLuceneQueryparserXmlQueryBuilder >
 
 #pragma mark Public
@@ -42,8 +45,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder *new_OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_withNSStringArray_(OrgApacheLuceneAnalysisAnalyzer *analyzer, IOSObjectArray *defaultFieldNames) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder *create_OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_withNSStringArray_(OrgApacheLuceneAnalysisAnalyzer *analyzer, IOSObjectArray *defaultFieldNames);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder")

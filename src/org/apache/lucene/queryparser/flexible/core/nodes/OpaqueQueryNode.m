@@ -40,7 +40,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode, 
 }
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode *clone = (OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode *) check_class_cast([super cloneTree], [OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode class]);
+  OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode *clone = (OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode *) cast_chk([super cloneTree], [OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode class]);
   JreStrongAssign(&((OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode *) nil_chk(clone))->schema_, self->schema_);
   JreStrongAssign(&clone->value_, self->value_);
   return clone;
@@ -89,9 +89,11 @@ void OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode_initWithJavaLang
 }
 
 OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_(id<JavaLangCharSequence> schema, id<JavaLangCharSequence> value) {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode *self = [OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode alloc];
-  OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_(self, schema, value);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode, initWithJavaLangCharSequence_withJavaLangCharSequence_, schema, value)
+}
+
+OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode *create_OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_(id<JavaLangCharSequence> schema, id<JavaLangCharSequence> value) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode, initWithJavaLangCharSequence_withJavaLangCharSequence_, schema, value)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode)

@@ -12,10 +12,18 @@
 #include "org/apache/lucene/analysis/util/AbstractAnalysisFactory.h"
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_MAX_TOKEN_POSITION_KEY_ = @"maxTokenPosition";
-NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_CONSUME_ALL_TOKENS_KEY_ = @"consumeAllTokens";
+NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_MAX_TOKEN_POSITION_KEY = @"maxTokenPosition";
+NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_CONSUME_ALL_TOKENS_KEY = @"consumeAllTokens";
 
 @implementation OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory
+
++ (NSString *)MAX_TOKEN_POSITION_KEY {
+  return OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_MAX_TOKEN_POSITION_KEY;
+}
+
++ (NSString *)CONSUME_ALL_TOKENS_KEY {
+  return OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_CONSUME_ALL_TOKENS_KEY;
+}
 
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args {
   OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_initWithJavaUtilMap_(self, args);
@@ -23,17 +31,17 @@ NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_CO
 }
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  return [new_OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_(input, maxTokenPosition_, consumeAllTokens_) autorelease];
+  return create_OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_(input, maxTokenPosition_, consumeAllTokens_);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "LimitTokenPositionFilterFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "LimitTokenPositionFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenStream;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "MAX_TOKEN_POSITION_KEY_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_MAX_TOKEN_POSITION_KEY_, NULL, .constantValue.asLong = 0 },
-    { "CONSUME_ALL_TOKENS_KEY_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_CONSUME_ALL_TOKENS_KEY_, NULL, .constantValue.asLong = 0 },
+    { "MAX_TOKEN_POSITION_KEY", "MAX_TOKEN_POSITION_KEY", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_MAX_TOKEN_POSITION_KEY, NULL, .constantValue.asLong = 0 },
+    { "CONSUME_ALL_TOKENS_KEY", "CONSUME_ALL_TOKENS_KEY", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_CONSUME_ALL_TOKENS_KEY, NULL, .constantValue.asLong = 0 },
     { "maxTokenPosition_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "consumeAllTokens_", NULL, 0x10, "Z", NULL, NULL, .constantValue.asLong = 0 },
   };
@@ -45,17 +53,19 @@ NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_CO
 
 void OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory *self, id<JavaUtilMap> args) {
   OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  self->maxTokenPosition_ = [self requireIntWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_MAX_TOKEN_POSITION_KEY_];
-  self->consumeAllTokens_ = [self getBooleanWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_CONSUME_ALL_TOKENS_KEY_ withBoolean:false];
+  self->maxTokenPosition_ = [self requireIntWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_MAX_TOKEN_POSITION_KEY];
+  self->consumeAllTokens_ = [self getBooleanWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_CONSUME_ALL_TOKENS_KEY withBoolean:false];
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory *self = [OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory alloc];
-  OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory *create_OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory)

@@ -5,19 +5,24 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer_RESTRICT
-#define OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer 0
 #else
-#define OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer 1
 #endif
-#undef OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer
 
-#if !defined (_OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer_) && (OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer_INCLUDE)
-#define _OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer_
+#if !defined (OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer))
+#define OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer_
 
 @class IOSCharArray;
 
+/*!
+ @brief Minimal Stemmer for Norwegian Bokmål (no-nb) and Nynorsk (no-nn)
+ <p>
+ Stems known plural forms for Norwegian nouns only, together with genitiv -s
+ */
 @interface OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer : NSObject {
  @public
   jboolean useBokmaal_;
@@ -26,6 +31,11 @@
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new NorwegianMinimalStemmer
+ @param flags set to <code>NorwegianLightStemmer.BOKMAAL</code>, 
+ <code>NorwegianLightStemmer.NYNORSK</code>, or both.
+ */
 - (instancetype)initWithInt:(jint)flags;
 
 - (jint)stemWithCharArray:(IOSCharArray *)s
@@ -39,8 +49,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer_initWith
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer *new_OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer_initWithInt_(jint flags) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer *create_OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer_initWithInt_(jint flags);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer")

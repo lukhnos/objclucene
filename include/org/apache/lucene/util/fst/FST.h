@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilFstFST_INCLUDE_ALL")
-#if OrgApacheLuceneUtilFstFST_RESTRICT
-#define OrgApacheLuceneUtilFstFST_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstFST")
+#ifdef RESTRICT_OrgApacheLuceneUtilFstFST
+#define INCLUDE_ALL_OrgApacheLuceneUtilFstFST 0
 #else
-#define OrgApacheLuceneUtilFstFST_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilFstFST 1
 #endif
-#undef OrgApacheLuceneUtilFstFST_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilFstFST
 
-#if !defined (_OrgApacheLuceneUtilFstFST_) && (OrgApacheLuceneUtilFstFST_INCLUDE_ALL || OrgApacheLuceneUtilFstFST_INCLUDE)
-#define _OrgApacheLuceneUtilFstFST_
+#if !defined (OrgApacheLuceneUtilFstFST_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstFST || defined(INCLUDE_OrgApacheLuceneUtilFstFST))
+#define OrgApacheLuceneUtilFstFST_
 
-#define OrgApacheLuceneUtilAccountable_RESTRICT 1
-#define OrgApacheLuceneUtilAccountable_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAccountable 1
+#define INCLUDE_OrgApacheLuceneUtilAccountable 1
 #include "org/apache/lucene/util/Accountable.h"
 
 @class IOSByteArray;
@@ -28,57 +28,108 @@
 @class OrgApacheLuceneUtilFstBytesStore;
 @class OrgApacheLuceneUtilFstFST_Arc;
 @class OrgApacheLuceneUtilFstFST_BytesReader;
-@class OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum;
+@class OrgApacheLuceneUtilFstFST_INPUT_TYPE;
 @class OrgApacheLuceneUtilFstOutputs;
 @class OrgLukhnosPortmobileFilePath;
 @protocol JavaUtilCollection;
 
-#define OrgApacheLuceneUtilFstFST_BIT_FINAL_ARC 1
-#define OrgApacheLuceneUtilFstFST_BIT_LAST_ARC 2
-#define OrgApacheLuceneUtilFstFST_BIT_TARGET_NEXT 4
-#define OrgApacheLuceneUtilFstFST_BIT_STOP_NODE 8
-#define OrgApacheLuceneUtilFstFST_BIT_ARC_HAS_OUTPUT 16
-#define OrgApacheLuceneUtilFstFST_BIT_ARC_HAS_FINAL_OUTPUT 32
-#define OrgApacheLuceneUtilFstFST_FIXED_ARRAY_SHALLOW_DISTANCE 3
-#define OrgApacheLuceneUtilFstFST_FIXED_ARRAY_NUM_ARCS_SHALLOW 5
-#define OrgApacheLuceneUtilFstFST_FIXED_ARRAY_NUM_ARCS_DEEP 10
-#define OrgApacheLuceneUtilFstFST_END_LABEL -1
-
+/*!
+ @brief Represents an finite state machine (FST), using a
+ compact byte[] format.
+ <p> The format is similar to what's used by Morfologik
+ (http://sourceforge.net/projects/morfologik).
+ <p> See the <code>package
+ documentation</code>
+  for some simple examples.
+ */
 @interface OrgApacheLuceneUtilFstFST : NSObject < OrgApacheLuceneUtilAccountable > {
  @public
-  OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum *inputType_;
+  OrgApacheLuceneUtilFstFST_INPUT_TYPE *inputType_;
   id emptyOutput_;
+  /*!
+   @brief A <code>BytesStore</code>, used during building, or during reading when
+ the FST is very large (more than 1 GB).
+   If the FST is less than 1
+ GB then bytesArray is set instead. 
+   */
   OrgApacheLuceneUtilFstBytesStore *bytes_;
+  /*!
+   @brief Used at read time when the FST fits into a single byte[].
+   */
   IOSByteArray *bytesArray_;
   OrgApacheLuceneUtilFstOutputs *outputs_;
 }
 
++ (jint)BIT_FINAL_ARC;
+
++ (jint)BIT_LAST_ARC;
+
++ (jint)BIT_TARGET_NEXT;
+
++ (jint)BIT_STOP_NODE;
+
++ (jint)BIT_ARC_HAS_OUTPUT;
+
++ (jint)BIT_ARC_HAS_FINAL_OUTPUT;
+
++ (jint)FIXED_ARRAY_SHALLOW_DISTANCE;
+
++ (jint)FIXED_ARRAY_NUM_ARCS_SHALLOW;
+
++ (jint)FIXED_ARRAY_NUM_ARCS_DEEP;
+
++ (jint)END_LABEL;
+
++ (jint)DEFAULT_MAX_BLOCK_BITS;
+
 #pragma mark Public
 
+/*!
+ @brief Load a previously saved FST.
+ */
 - (instancetype)initWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
                     withOrgApacheLuceneUtilFstOutputs:(OrgApacheLuceneUtilFstOutputs *)outputs;
 
+/*!
+ @brief Load a previously saved FST; maxBlockBits allows you to
+ control the size of the byte[] pages used to hold the FST bytes.
+ */
 - (instancetype)initWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
                     withOrgApacheLuceneUtilFstOutputs:(OrgApacheLuceneUtilFstOutputs *)outputs
                                               withInt:(jint)maxBlockBits;
 
+/*!
+ @brief Finds an arc leaving the incoming arc, replacing the arc in place.
+ This returns null if the arc was not found, else the incoming arc. 
+ */
 - (OrgApacheLuceneUtilFstFST_Arc *)findTargetArcWithInt:(jint)labelToMatch
                       withOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)follow
                       withOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)arc
               withOrgApacheLuceneUtilFstFST_BytesReader:(OrgApacheLuceneUtilFstFST_BytesReader *)inArg;
 
+/*!
+ @brief Returns a <code>BytesReader</code> for this FST, positioned at
+ position 0.
+ */
 - (OrgApacheLuceneUtilFstFST_BytesReader *)getBytesReader;
 
 - (id<JavaUtilCollection>)getChildResources;
 
 - (id)getEmptyOutput;
 
+/*!
+ @brief Fills virtual 'start' arc, ie, an empty incoming arc to
+ the FST's start node
+ */
 - (OrgApacheLuceneUtilFstFST_Arc *)getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)arc;
 
-- (OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum *)getInputType;
+- (OrgApacheLuceneUtilFstFST_INPUT_TYPE *)getInputType;
 
 - (jlong)ramBytesUsed;
 
+/*!
+ @brief Reads an automaton from a file.
+ */
 + (OrgApacheLuceneUtilFstFST *)readWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
                                   withOrgApacheLuceneUtilFstOutputs:(OrgApacheLuceneUtilFstOutputs *)outputs;
 
@@ -86,49 +137,102 @@
                                 withOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)arc
                         withOrgApacheLuceneUtilFstFST_BytesReader:(OrgApacheLuceneUtilFstFST_BytesReader *)inArg;
 
+/*!
+ @brief Follow the <code>follow</code> arc and read the first arc of its target;
+ this changes the provided <code>arc</code> (2nd arg) in-place and returns
+ it.
+ @return Returns the second argument (<code>arc</code>).
+ */
 - (OrgApacheLuceneUtilFstFST_Arc *)readFirstTargetArcWithOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)follow
                                                      withOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)arc
                                              withOrgApacheLuceneUtilFstFST_BytesReader:(OrgApacheLuceneUtilFstFST_BytesReader *)inArg;
 
+/*!
+ @brief Reads one BYTE1/2/4 label from the provided <code>DataInput</code>.
+ */
 - (jint)readLabelWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
 
+/*!
+ @brief Follows the <code>follow</code> arc and reads the last
+ arc of its target; this changes the provided
+ <code>arc</code> (2nd arg) in-place and returns it.
+ @return Returns the second argument
+ (<code>arc</code>).
+ */
 - (OrgApacheLuceneUtilFstFST_Arc *)readLastTargetArcWithOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)follow
                                                     withOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)arc
                                             withOrgApacheLuceneUtilFstFST_BytesReader:(OrgApacheLuceneUtilFstFST_BytesReader *)inArg;
 
+/*!
+ @brief In-place read; returns the arc.
+ */
 - (OrgApacheLuceneUtilFstFST_Arc *)readNextArcWithOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)arc
                                       withOrgApacheLuceneUtilFstFST_BytesReader:(OrgApacheLuceneUtilFstFST_BytesReader *)inArg;
 
+/*!
+ @brief Peeks at next arc's label; does not alter arc.
+ Do
+ not call this if arc.isLast()! 
+ */
 - (jint)readNextArcLabelWithOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)arc
                 withOrgApacheLuceneUtilFstFST_BytesReader:(OrgApacheLuceneUtilFstFST_BytesReader *)inArg;
 
+/*!
+ @brief Never returns null, but you should never call this if
+ arc.isLast() is true.
+ */
 - (OrgApacheLuceneUtilFstFST_Arc *)readNextRealArcWithOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)arc
                                           withOrgApacheLuceneUtilFstFST_BytesReader:(OrgApacheLuceneUtilFstFST_BytesReader *)inArg;
 
 - (void)saveWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg;
 
+/*!
+ @brief Writes an automaton to a file.
+ */
 - (void)saveWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path;
 
+/*!
+ @brief returns true if the node at this address has any
+ outgoing arcs
+ */
 + (jboolean)targetHasArcsWithOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)arc;
 
 - (NSString *)description;
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum:(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum *)inputType
-                               withOrgApacheLuceneUtilFstOutputs:(OrgApacheLuceneUtilFstOutputs *)outputs
-                                                     withBoolean:(jboolean)willPackFST
-                                                       withFloat:(jfloat)acceptableOverheadRatio
-                                                         withInt:(jint)bytesPageBits;
+- (instancetype)initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE:(OrgApacheLuceneUtilFstFST_INPUT_TYPE *)inputType
+                           withOrgApacheLuceneUtilFstOutputs:(OrgApacheLuceneUtilFstOutputs *)outputs
+                                                 withBoolean:(jboolean)willPackFST
+                                                   withFloat:(jfloat)acceptableOverheadRatio
+                                                     withInt:(jint)bytesPageBits;
 
 - (jlong)addNodeWithOrgApacheLuceneUtilFstBuilder:(OrgApacheLuceneUtilFstBuilder *)builder
  withOrgApacheLuceneUtilFstBuilder_UnCompiledNode:(OrgApacheLuceneUtilFstBuilder_UnCompiledNode *)nodeIn;
 
 - (void)finishWithLong:(jlong)newStartNode;
 
+/*!
+ @brief Checks if <code>arc</code>'s target state is in expanded (or vector) format.
+ @return Returns <code>true</code> if <code>arc</code> points to a state in an
+ expanded array format.
+ */
 - (jboolean)isExpandedTargetWithOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)follow
                     withOrgApacheLuceneUtilFstFST_BytesReader:(OrgApacheLuceneUtilFstFST_BytesReader *)inArg;
 
+/*!
+ @brief Expert: creates an FST by packing this one.
+ This
+ process requires substantial additional RAM (currently
+ up to ~8 bytes per node depending on
+ <code>acceptableOverheadRatio</code>), but then should
+ produce a smaller FST.
+ <p>The implementation of this method uses ideas from
+ <a target="_blank" href="http://www.cs.put.poznan.pl/dweiss/site/publications/download/fsacomp.pdf">Smaller Representation of Finite State Automata</a>,
+ which describes techniques to reduce the size of a FST.
+ However, this is not a strict implementation of the
+ algorithms described in this paper.
+ */
 - (OrgApacheLuceneUtilFstFST *)packWithOrgApacheLuceneUtilFstBuilder:(OrgApacheLuceneUtilFstBuilder *)builder
                                                              withInt:(jint)minInCountDeref
                                                              withInt:(jint)maxDerefNodes
@@ -140,46 +244,89 @@
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilFstFST)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstFST, inputType_, OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstFST, inputType_, OrgApacheLuceneUtilFstFST_INPUT_TYPE *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstFST, emptyOutput_, id)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstFST, bytes_, OrgApacheLuceneUtilFstBytesStore *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstFST, bytesArray_, IOSByteArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstFST, outputs_, OrgApacheLuceneUtilFstOutputs *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFstFST, BIT_FINAL_ARC, jint)
+inline jint OrgApacheLuceneUtilFstFST_get_BIT_FINAL_ARC();
+#define OrgApacheLuceneUtilFstFST_BIT_FINAL_ARC 1
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilFstFST, BIT_FINAL_ARC, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFstFST, BIT_LAST_ARC, jint)
+inline jint OrgApacheLuceneUtilFstFST_get_BIT_LAST_ARC();
+#define OrgApacheLuceneUtilFstFST_BIT_LAST_ARC 2
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilFstFST, BIT_LAST_ARC, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFstFST, BIT_TARGET_NEXT, jint)
+inline jint OrgApacheLuceneUtilFstFST_get_BIT_TARGET_NEXT();
+#define OrgApacheLuceneUtilFstFST_BIT_TARGET_NEXT 4
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilFstFST, BIT_TARGET_NEXT, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFstFST, BIT_STOP_NODE, jint)
+inline jint OrgApacheLuceneUtilFstFST_get_BIT_STOP_NODE();
+#define OrgApacheLuceneUtilFstFST_BIT_STOP_NODE 8
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilFstFST, BIT_STOP_NODE, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFstFST, BIT_ARC_HAS_OUTPUT, jint)
+/*!
+ @brief This flag is set if the arc has an output.
+ */
+inline jint OrgApacheLuceneUtilFstFST_get_BIT_ARC_HAS_OUTPUT();
+#define OrgApacheLuceneUtilFstFST_BIT_ARC_HAS_OUTPUT 16
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilFstFST, BIT_ARC_HAS_OUTPUT, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFstFST, BIT_ARC_HAS_FINAL_OUTPUT, jint)
+inline jint OrgApacheLuceneUtilFstFST_get_BIT_ARC_HAS_FINAL_OUTPUT();
+#define OrgApacheLuceneUtilFstFST_BIT_ARC_HAS_FINAL_OUTPUT 32
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilFstFST, BIT_ARC_HAS_FINAL_OUTPUT, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFstFST, FIXED_ARRAY_SHALLOW_DISTANCE, jint)
+/*!
+ - seealso: #shouldExpand(Builder,UnCompiledNode)
+ */
+inline jint OrgApacheLuceneUtilFstFST_get_FIXED_ARRAY_SHALLOW_DISTANCE();
+#define OrgApacheLuceneUtilFstFST_FIXED_ARRAY_SHALLOW_DISTANCE 3
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilFstFST, FIXED_ARRAY_SHALLOW_DISTANCE, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFstFST, FIXED_ARRAY_NUM_ARCS_SHALLOW, jint)
+/*!
+ - seealso: #shouldExpand(Builder,UnCompiledNode)
+ */
+inline jint OrgApacheLuceneUtilFstFST_get_FIXED_ARRAY_NUM_ARCS_SHALLOW();
+#define OrgApacheLuceneUtilFstFST_FIXED_ARRAY_NUM_ARCS_SHALLOW 5
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilFstFST, FIXED_ARRAY_NUM_ARCS_SHALLOW, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFstFST, FIXED_ARRAY_NUM_ARCS_DEEP, jint)
+/*!
+ - seealso: #shouldExpand(Builder,UnCompiledNode)
+ */
+inline jint OrgApacheLuceneUtilFstFST_get_FIXED_ARRAY_NUM_ARCS_DEEP();
+#define OrgApacheLuceneUtilFstFST_FIXED_ARRAY_NUM_ARCS_DEEP 10
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilFstFST, FIXED_ARRAY_NUM_ARCS_DEEP, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFstFST, END_LABEL, jint)
+/*!
+ @brief If arc has this label then that arc is final/accepted
+ */
+inline jint OrgApacheLuceneUtilFstFST_get_END_LABEL();
+#define OrgApacheLuceneUtilFstFST_END_LABEL -1
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilFstFST, END_LABEL, jint)
 
-FOUNDATION_EXPORT jint OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFstFST, DEFAULT_MAX_BLOCK_BITS_, jint)
+inline jint OrgApacheLuceneUtilFstFST_get_DEFAULT_MAX_BLOCK_BITS();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT jint OrgApacheLuceneUtilFstFST_DEFAULT_MAX_BLOCK_BITS;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilFstFST, DEFAULT_MAX_BLOCK_BITS, jint)
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_withOrgApacheLuceneUtilFstOutputs_withBoolean_withFloat_withInt_(OrgApacheLuceneUtilFstFST *self, OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum *inputType, OrgApacheLuceneUtilFstOutputs *outputs, jboolean willPackFST, jfloat acceptableOverheadRatio, jint bytesPageBits);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE_withOrgApacheLuceneUtilFstOutputs_withBoolean_withFloat_withInt_(OrgApacheLuceneUtilFstFST *self, OrgApacheLuceneUtilFstFST_INPUT_TYPE *inputType, OrgApacheLuceneUtilFstOutputs *outputs, jboolean willPackFST, jfloat acceptableOverheadRatio, jint bytesPageBits);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilFstFST *new_OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_withOrgApacheLuceneUtilFstOutputs_withBoolean_withFloat_withInt_(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum *inputType, OrgApacheLuceneUtilFstOutputs *outputs, jboolean willPackFST, jfloat acceptableOverheadRatio, jint bytesPageBits) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstFST *new_OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE_withOrgApacheLuceneUtilFstOutputs_withBoolean_withFloat_withInt_(OrgApacheLuceneUtilFstFST_INPUT_TYPE *inputType, OrgApacheLuceneUtilFstOutputs *outputs, jboolean willPackFST, jfloat acceptableOverheadRatio, jint bytesPageBits) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstFST *create_OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPE_withOrgApacheLuceneUtilFstOutputs_withBoolean_withFloat_withInt_(OrgApacheLuceneUtilFstFST_INPUT_TYPE *inputType, OrgApacheLuceneUtilFstOutputs *outputs, jboolean willPackFST, jfloat acceptableOverheadRatio, jint bytesPageBits);
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilFstOutputs_(OrgApacheLuceneUtilFstFST *self, OrgApacheLuceneStoreDataInput *inArg, OrgApacheLuceneUtilFstOutputs *outputs);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilFstFST *new_OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilFstOutputs_(OrgApacheLuceneStoreDataInput *inArg, OrgApacheLuceneUtilFstOutputs *outputs) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstFST *create_OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilFstOutputs_(OrgApacheLuceneStoreDataInput *inArg, OrgApacheLuceneUtilFstOutputs *outputs);
+
 FOUNDATION_EXPORT void OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilFstOutputs_withInt_(OrgApacheLuceneUtilFstFST *self, OrgApacheLuceneStoreDataInput *inArg, OrgApacheLuceneUtilFstOutputs *outputs, jint maxBlockBits);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilFstFST *new_OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilFstOutputs_withInt_(OrgApacheLuceneStoreDataInput *inArg, OrgApacheLuceneUtilFstOutputs *outputs, jint maxBlockBits) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstFST *create_OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilFstOutputs_withInt_(OrgApacheLuceneStoreDataInput *inArg, OrgApacheLuceneUtilFstOutputs *outputs, jint maxBlockBits);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilFstFST *OrgApacheLuceneUtilFstFST_readWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneUtilFstOutputs_(OrgLukhnosPortmobileFilePath *path, OrgApacheLuceneUtilFstOutputs *outputs);
 
@@ -189,65 +336,108 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstFST)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_) && (OrgApacheLuceneUtilFstFST_INCLUDE_ALL || OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_INCLUDE)
-#define _OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_
+#if !defined (OrgApacheLuceneUtilFstFST_INPUT_TYPE_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstFST || defined(INCLUDE_OrgApacheLuceneUtilFstFST_INPUT_TYPE))
+#define OrgApacheLuceneUtilFstFST_INPUT_TYPE_
 
-#define JavaLangEnum_RESTRICT 1
-#define JavaLangEnum_INCLUDE 1
+#define RESTRICT_JavaLangEnum 1
+#define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
 
-typedef NS_ENUM(NSUInteger, OrgApacheLuceneUtilFstFST_INPUT_TYPE) {
-  OrgApacheLuceneUtilFstFST_INPUT_TYPE_BYTE1 = 0,
-  OrgApacheLuceneUtilFstFST_INPUT_TYPE_BYTE2 = 1,
-  OrgApacheLuceneUtilFstFST_INPUT_TYPE_BYTE4 = 2,
+typedef NS_ENUM(NSUInteger, OrgApacheLuceneUtilFstFST_INPUT_TYPE_Enum) {
+  OrgApacheLuceneUtilFstFST_INPUT_TYPE_Enum_BYTE1 = 0,
+  OrgApacheLuceneUtilFstFST_INPUT_TYPE_Enum_BYTE2 = 1,
+  OrgApacheLuceneUtilFstFST_INPUT_TYPE_Enum_BYTE4 = 2,
 };
 
-@interface OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum : JavaLangEnum < NSCopying >
+/*!
+ @brief Specifies allowed range of each int input label for
+ this FST.
+ */
+@interface OrgApacheLuceneUtilFstFST_INPUT_TYPE : JavaLangEnum < NSCopying >
+
++ (OrgApacheLuceneUtilFstFST_INPUT_TYPE *)BYTE1;
+
++ (OrgApacheLuceneUtilFstFST_INPUT_TYPE *)BYTE2;
+
++ (OrgApacheLuceneUtilFstFST_INPUT_TYPE *)BYTE4;
 
 #pragma mark Package-Private
 
 + (IOSObjectArray *)values;
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_values();
 
-+ (OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum *)valueOfWithNSString:(NSString *)name;
-FOUNDATION_EXPORT OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum *OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_valueOfWithNSString_(NSString *name);
++ (OrgApacheLuceneUtilFstFST_INPUT_TYPE *)valueOfWithNSString:(NSString *)name;
 
 - (id)copyWithZone:(NSZone *)zone;
+- (OrgApacheLuceneUtilFstFST_INPUT_TYPE_Enum)toNSEnum;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum)
+J2OBJC_STATIC_INIT(OrgApacheLuceneUtilFstFST_INPUT_TYPE)
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum *OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_values_[];
+/*! INTERNAL ONLY - Use enum accessors declared below. */
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstFST_INPUT_TYPE *OrgApacheLuceneUtilFstFST_INPUT_TYPE_values_[];
 
-#define OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_BYTE1 OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_values_[OrgApacheLuceneUtilFstFST_INPUT_TYPE_BYTE1]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum, BYTE1)
+inline OrgApacheLuceneUtilFstFST_INPUT_TYPE *OrgApacheLuceneUtilFstFST_INPUT_TYPE_get_BYTE1();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneUtilFstFST_INPUT_TYPE, BYTE1)
 
-#define OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_BYTE2 OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_values_[OrgApacheLuceneUtilFstFST_INPUT_TYPE_BYTE2]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum, BYTE2)
+inline OrgApacheLuceneUtilFstFST_INPUT_TYPE *OrgApacheLuceneUtilFstFST_INPUT_TYPE_get_BYTE2();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneUtilFstFST_INPUT_TYPE, BYTE2)
 
-#define OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_BYTE4 OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_values_[OrgApacheLuceneUtilFstFST_INPUT_TYPE_BYTE4]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum, BYTE4)
+inline OrgApacheLuceneUtilFstFST_INPUT_TYPE *OrgApacheLuceneUtilFstFST_INPUT_TYPE_get_BYTE4();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneUtilFstFST_INPUT_TYPE, BYTE4)
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum)
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneUtilFstFST_INPUT_TYPE_values();
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstFST_INPUT_TYPE *OrgApacheLuceneUtilFstFST_INPUT_TYPE_valueOfWithNSString_(NSString *name);
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstFST_INPUT_TYPE *OrgApacheLuceneUtilFstFST_INPUT_TYPE_fromOrdinal(NSUInteger ordinal);
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstFST_INPUT_TYPE)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilFstFST_Arc_) && (OrgApacheLuceneUtilFstFST_INCLUDE_ALL || OrgApacheLuceneUtilFstFST_Arc_INCLUDE)
-#define _OrgApacheLuceneUtilFstFST_Arc_
+#if !defined (OrgApacheLuceneUtilFstFST_Arc_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstFST || defined(INCLUDE_OrgApacheLuceneUtilFstFST_Arc))
+#define OrgApacheLuceneUtilFstFST_Arc_
 
+/*!
+ @brief Represents a single arc.
+ */
 @interface OrgApacheLuceneUtilFstFST_Arc : NSObject {
  @public
   jint label_;
   id output_;
   jlong node_;
+  /*!
+   @brief To node (ord or address)
+   */
   jlong target_;
   jbyte flags_;
   id nextFinalOutput_;
   jlong nextArc_;
+  /*!
+   @brief Where the first arc in the array starts; only valid if
+ bytesPerArc !
+   = 0 
+   */
   jlong posArcsStart_;
+  /*!
+   @brief Non-zero if this arc is part of an array, which means all
+ arcs for the node are encoded with a fixed number of bytes so
+ that we can random access by index.
+   We do when there are enough
+ arcs leaving one node.  It wastes some bytes but gives faster
+ lookups. 
+   */
   jint bytesPerArc_;
+  /*!
+   @brief Where we are in the array; only valid if bytesPerArc !
+   = 0. 
+   */
   jint arcIdx_;
+  /*!
+   @brief How many arcs in the array; only valid if bytesPerArc !
+   = 0. 
+   */
   jint numArcs_;
 }
 
@@ -255,6 +445,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum)
 
 - (instancetype)init;
 
+/*!
+ @brief Returns this
+ */
 - (OrgApacheLuceneUtilFstFST_Arc *)copyFromWithOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)other OBJC_METHOD_FAMILY_NONE;
 
 - (jboolean)isFinal;
@@ -278,27 +471,42 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilFstFST_Arc_init(OrgApacheLuceneUtilFst
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilFstFST_Arc *new_OrgApacheLuceneUtilFstFST_Arc_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstFST_Arc *create_OrgApacheLuceneUtilFstFST_Arc_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstFST_Arc)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilFstFST_BytesReader_) && (OrgApacheLuceneUtilFstFST_INCLUDE_ALL || OrgApacheLuceneUtilFstFST_BytesReader_INCLUDE)
-#define _OrgApacheLuceneUtilFstFST_BytesReader_
+#if !defined (OrgApacheLuceneUtilFstFST_BytesReader_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstFST || defined(INCLUDE_OrgApacheLuceneUtilFstFST_BytesReader))
+#define OrgApacheLuceneUtilFstFST_BytesReader_
 
-#define OrgApacheLuceneStoreDataInput_RESTRICT 1
-#define OrgApacheLuceneStoreDataInput_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreDataInput 1
+#define INCLUDE_OrgApacheLuceneStoreDataInput 1
 #include "org/apache/lucene/store/DataInput.h"
 
+/*!
+ @brief Reads bytes stored in an FST.
+ */
 @interface OrgApacheLuceneUtilFstFST_BytesReader : OrgApacheLuceneStoreDataInput
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @brief Get current read position.
+ */
 - (jlong)getPosition;
 
+/*!
+ @brief Returns true if this reader uses reversed bytes
+ under-the-hood.
+ */
 - (jboolean)reversed;
 
+/*!
+ @brief Set current read position.
+ */
 - (void)setPositionWithLong:(jlong)pos;
 
 @end
@@ -311,4 +519,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstFST_BytesReader)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilFstFST_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstFST")

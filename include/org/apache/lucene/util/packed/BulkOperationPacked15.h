@@ -5,25 +5,28 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilPackedBulkOperationPacked15_INCLUDE_ALL")
-#if OrgApacheLuceneUtilPackedBulkOperationPacked15_RESTRICT
-#define OrgApacheLuceneUtilPackedBulkOperationPacked15_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedBulkOperationPacked15")
+#ifdef RESTRICT_OrgApacheLuceneUtilPackedBulkOperationPacked15
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackedBulkOperationPacked15 0
 #else
-#define OrgApacheLuceneUtilPackedBulkOperationPacked15_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackedBulkOperationPacked15 1
 #endif
-#undef OrgApacheLuceneUtilPackedBulkOperationPacked15_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilPackedBulkOperationPacked15
 
-#if !defined (_OrgApacheLuceneUtilPackedBulkOperationPacked15_) && (OrgApacheLuceneUtilPackedBulkOperationPacked15_INCLUDE_ALL || OrgApacheLuceneUtilPackedBulkOperationPacked15_INCLUDE)
-#define _OrgApacheLuceneUtilPackedBulkOperationPacked15_
+#if !defined (OrgApacheLuceneUtilPackedBulkOperationPacked15_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedBulkOperationPacked15 || defined(INCLUDE_OrgApacheLuceneUtilPackedBulkOperationPacked15))
+#define OrgApacheLuceneUtilPackedBulkOperationPacked15_
 
-#define OrgApacheLuceneUtilPackedBulkOperationPacked_RESTRICT 1
-#define OrgApacheLuceneUtilPackedBulkOperationPacked_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilPackedBulkOperationPacked 1
+#define INCLUDE_OrgApacheLuceneUtilPackedBulkOperationPacked 1
 #include "org/apache/lucene/util/packed/BulkOperationPacked.h"
 
 @class IOSByteArray;
 @class IOSIntArray;
 @class IOSLongArray;
 
+/*!
+ @brief Efficient sequential read/write of packed integers.
+ */
 @interface OrgApacheLuceneUtilPackedBulkOperationPacked15 : OrgApacheLuceneUtilPackedBulkOperationPacked
 
 #pragma mark Public
@@ -62,8 +65,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedBulkOperationPacked15_init(OrgAp
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedBulkOperationPacked15 *new_OrgApacheLuceneUtilPackedBulkOperationPacked15_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedBulkOperationPacked15 *create_OrgApacheLuceneUtilPackedBulkOperationPacked15_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedBulkOperationPacked15)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilPackedBulkOperationPacked15_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedBulkOperationPacked15")

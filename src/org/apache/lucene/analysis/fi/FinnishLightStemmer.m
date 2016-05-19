@@ -108,7 +108,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "norm1WithCharArray:withInt:", "norm1", "I", 0x2, NULL, NULL },
     { "norm2WithCharArray:withInt:", "norm2", "I", 0x2, NULL, NULL },
     { "isVowelWithChar:", "isVowel", "Z", 0x2, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "FinnishLightStemmer", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisFiFinnishLightStemmer = { 2, "FinnishLightStemmer", "org.apache.lucene.analysis.fi", NULL, 0x1, 8, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisFiFinnishLightStemmer;
@@ -233,9 +233,11 @@ void OrgApacheLuceneAnalysisFiFinnishLightStemmer_init(OrgApacheLuceneAnalysisFi
 }
 
 OrgApacheLuceneAnalysisFiFinnishLightStemmer *new_OrgApacheLuceneAnalysisFiFinnishLightStemmer_init() {
-  OrgApacheLuceneAnalysisFiFinnishLightStemmer *self = [OrgApacheLuceneAnalysisFiFinnishLightStemmer alloc];
-  OrgApacheLuceneAnalysisFiFinnishLightStemmer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisFiFinnishLightStemmer, init)
+}
+
+OrgApacheLuceneAnalysisFiFinnishLightStemmer *create_OrgApacheLuceneAnalysisFiFinnishLightStemmer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisFiFinnishLightStemmer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisFiFinnishLightStemmer)

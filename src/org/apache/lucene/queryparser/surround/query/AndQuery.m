@@ -23,12 +23,12 @@
 
 - (OrgApacheLuceneSearchQuery *)makeLuceneQueryFieldNoBoostWithNSString:(NSString *)fieldName
            withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)qf {
-  return OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery_makeBooleanQueryWithJavaUtilList_withOrgApacheLuceneSearchBooleanClause_OccurEnum_([self makeLuceneSubQueriesFieldWithNSString:fieldName withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:qf], JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, MUST));
+  return OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery_makeBooleanQueryWithJavaUtilList_withOrgApacheLuceneSearchBooleanClause_Occur_([self makeLuceneSubQueriesFieldWithNSString:fieldName withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:qf], JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, MUST));
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:withBoolean:withNSString:", "AndQuery", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilList:withBoolean:withNSString:", "AndQuery", NULL, 0x1, NULL, "(Ljava/util/List<Lorg/apache/lucene/queryparser/surround/query/SrndQuery;>;ZLjava/lang/String;)V" },
     { "makeLuceneQueryFieldNoBoostWithNSString:withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:", "makeLuceneQueryFieldNoBoost", "Lorg.apache.lucene.search.Query;", 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundQueryAndQuery = { 2, "AndQuery", "org.apache.lucene.queryparser.surround.query", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
@@ -42,9 +42,11 @@ void OrgApacheLuceneQueryparserSurroundQueryAndQuery_initWithJavaUtilList_withBo
 }
 
 OrgApacheLuceneQueryparserSurroundQueryAndQuery *new_OrgApacheLuceneQueryparserSurroundQueryAndQuery_initWithJavaUtilList_withBoolean_withNSString_(id<JavaUtilList> queries, jboolean inf, NSString *opName) {
-  OrgApacheLuceneQueryparserSurroundQueryAndQuery *self = [OrgApacheLuceneQueryparserSurroundQueryAndQuery alloc];
-  OrgApacheLuceneQueryparserSurroundQueryAndQuery_initWithJavaUtilList_withBoolean_withNSString_(self, queries, inf, opName);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserSurroundQueryAndQuery, initWithJavaUtilList_withBoolean_withNSString_, queries, inf, opName)
+}
+
+OrgApacheLuceneQueryparserSurroundQueryAndQuery *create_OrgApacheLuceneQueryparserSurroundQueryAndQuery_initWithJavaUtilList_withBoolean_withNSString_(id<JavaUtilList> queries, jboolean inf, NSString *opName) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserSurroundQueryAndQuery, initWithJavaUtilList_withBoolean_withNSString_, queries, inf, opName)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserSurroundQueryAndQuery)

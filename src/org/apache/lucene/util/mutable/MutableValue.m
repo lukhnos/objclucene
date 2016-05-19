@@ -43,7 +43,7 @@
 }
 
 - (jint)compareToWithId:(OrgApacheLuceneUtilMutableMutableValue *)other {
-  check_class_cast(other, [OrgApacheLuceneUtilMutableMutableValue class]);
+  cast_chk(other, [OrgApacheLuceneUtilMutableMutableValue class]);
   IOSClass *c1 = [self getClass];
   IOSClass *c2 = [((OrgApacheLuceneUtilMutableMutableValue *) nil_chk(other)) getClass];
   if (c1 != c2) {
@@ -57,7 +57,7 @@
 }
 
 - (jboolean)isEqual:(id)other {
-  return ([self getClass] == [nil_chk(other) getClass]) && [self equalsSameTypeWithId:other];
+  return ([self getClass] == (id) [nil_chk(other) getClass]) && [self equalsSameTypeWithId:other];
 }
 
 - (NSUInteger)hash {
@@ -89,7 +89,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
     { "hash", "hashCode", "I", 0x401, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "MutableValue", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "exists_", NULL, 0x1, "Z", NULL, NULL, .constantValue.asLong = 0 },

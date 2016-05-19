@@ -37,6 +37,12 @@
 
 @interface OrgApacheLuceneSearchBooleanWeight ()
 
+/*!
+ @brief Create a new scorer for the given required clauses.
+ Note that
+ <code>requiredScoring</code> is a subset of <code>required</code> containing
+ required clauses that should participate in scoring. 
+ */
 - (OrgApacheLuceneSearchScorer *)reqWithJavaUtilList:(id<JavaUtilList>)required
                                     withJavaUtilList:(id<JavaUtilList>)requiredScoring
                                          withBoolean:(jboolean)disableCoord;
@@ -71,6 +77,8 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchBooleanWeight_$1)
 __attribute__((unused)) static void OrgApacheLuceneSearchBooleanWeight_$1_initWithOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchBooleanWeight_$1 *self, OrgApacheLuceneSearchScorer *arg$0);
 
 __attribute__((unused)) static OrgApacheLuceneSearchBooleanWeight_$1 *new_OrgApacheLuceneSearchBooleanWeight_$1_initWithOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *arg$0) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchBooleanWeight_$1 *create_OrgApacheLuceneSearchBooleanWeight_$1_initWithOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *arg$0);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanWeight_$1)
 
@@ -132,7 +140,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanWeight_$1)
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                                withInt:(jint)doc {
   jint minShouldMatch = [((OrgApacheLuceneSearchBooleanQuery *) nil_chk(query_)) getMinimumNumberShouldMatch];
-  id<JavaUtilList> subs = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> subs = create_JavaUtilArrayList_init();
   jint coord = 0;
   jfloat sum = 0.0f;
   jboolean fail = false;
@@ -150,7 +158,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanWeight_$1)
         coord++;
       }
       else if ([c isRequired]) {
-        [subs addWithId:OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_(0.0f, @"match on required clause, product of:", [IOSObjectArray arrayWithObjects:(id[]){ OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_(0.0f, JreStrcat("@$", JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, FILTER), @" clause"), [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]), e } count:2 type:OrgApacheLuceneSearchExplanation_class_()])];
+        [subs addWithId:OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_(0.0f, @"match on required clause, product of:", [IOSObjectArray arrayWithObjects:(id[]){ OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_(0.0f, JreStrcat("@$", JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, FILTER), @" clause"), [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]), e } count:2 type:OrgApacheLuceneSearchExplanation_class_()])];
       }
       else if ([c isProhibited]) {
         [subs addWithId:OrgApacheLuceneSearchExplanation_noMatchWithNSString_withOrgApacheLuceneSearchExplanationArray_(JreStrcat("$$C", @"match on prohibited clause (", [((OrgApacheLuceneSearchQuery *) nil_chk([c getQuery])) description], ')'), [IOSObjectArray arrayWithObjects:(id[]){ e } count:1 type:OrgApacheLuceneSearchExplanation_class_()])];
@@ -159,7 +167,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanWeight_$1)
       if (![c isProhibited]) {
         matchCount++;
       }
-      if ([c getOccur] == JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD)) {
+      if ([c getOccur] == JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD)) {
         shouldMatchCount++;
       }
     }
@@ -188,7 +196,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanWeight_$1)
 }
 
 - (OrgApacheLuceneSearchBooleanScorer *)booleanScorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
-  id<JavaUtilList> optional = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> optional = create_JavaUtilArrayList_init();
   id<JavaUtilIterator> cIter = [((OrgApacheLuceneSearchBooleanQuery *) nil_chk(query_)) iterator];
   for (OrgApacheLuceneSearchWeight * __strong w in nil_chk(weights_)) {
     OrgApacheLuceneSearchBooleanClause *c = [((id<JavaUtilIterator>) nil_chk(cIter)) next];
@@ -214,7 +222,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanWeight_$1)
   if ([query_ getMinimumNumberShouldMatch] > [optional size]) {
     return nil;
   }
-  return [new_OrgApacheLuceneSearchBooleanScorer_initWithOrgApacheLuceneSearchBooleanWeight_withBoolean_withInt_withJavaUtilCollection_withInt_withBoolean_(self, disableCoord_, maxCoord_, optional, JavaLangMath_maxWithInt_withInt_(1, [query_ getMinimumNumberShouldMatch]), needsScores_) autorelease];
+  return create_OrgApacheLuceneSearchBooleanScorer_initWithOrgApacheLuceneSearchBooleanWeight_withBoolean_withInt_withJavaUtilCollection_withInt_withBoolean_(self, disableCoord_, maxCoord_, optional, JavaLangMath_maxWithInt_withInt_(1, [query_ getMinimumNumberShouldMatch]), needsScores_);
 }
 
 - (OrgApacheLuceneSearchBulkScorer *)bulkScorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
@@ -236,10 +244,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanWeight_$1)
 
 - (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
   jint minShouldMatch = [((OrgApacheLuceneSearchBooleanQuery *) nil_chk(query_)) getMinimumNumberShouldMatch];
-  id<JavaUtilList> required = [new_JavaUtilArrayList_init() autorelease];
-  id<JavaUtilList> requiredScoring = [new_JavaUtilArrayList_init() autorelease];
-  id<JavaUtilList> prohibited = [new_JavaUtilArrayList_init() autorelease];
-  id<JavaUtilList> optional = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> required = create_JavaUtilArrayList_init();
+  id<JavaUtilList> requiredScoring = create_JavaUtilArrayList_init();
+  id<JavaUtilList> prohibited = create_JavaUtilArrayList_init();
+  id<JavaUtilList> optional = create_JavaUtilArrayList_init();
   id<JavaUtilIterator> cIter = [query_ iterator];
   for (OrgApacheLuceneSearchWeight * __strong w in nil_chk(weights_)) {
     OrgApacheLuceneSearchBooleanClause *c = [((id<JavaUtilIterator>) nil_chk(cIter)) next];
@@ -287,28 +295,28 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanWeight_$1)
   OrgApacheLuceneSearchScorer *opt = OrgApacheLuceneSearchBooleanWeight_optWithJavaUtilList_withInt_withBoolean_(self, optional, minShouldMatch, true);
   if (disableCoord_) {
     if (minShouldMatch > 0) {
-      return [new_OrgApacheLuceneSearchConjunctionScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_withFloat_(self, JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ req, opt } count:2 type:OrgApacheLuceneSearchScorer_class_()]), JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ req, opt } count:2 type:OrgApacheLuceneSearchScorer_class_()]), 1.0f) autorelease];
+      return create_OrgApacheLuceneSearchConjunctionScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_withFloat_(self, JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ req, opt } count:2 type:OrgApacheLuceneSearchScorer_class_()]), JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ req, opt } count:2 type:OrgApacheLuceneSearchScorer_class_()]), 1.0f);
     }
     else {
-      return [new_OrgApacheLuceneSearchReqOptSumScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(req, opt) autorelease];
+      return create_OrgApacheLuceneSearchReqOptSumScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(req, opt);
     }
   }
   else if ([optional size] == 1) {
     if (minShouldMatch > 0) {
-      return [new_OrgApacheLuceneSearchConjunctionScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_withFloat_(self, JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ req, opt } count:2 type:OrgApacheLuceneSearchScorer_class_()]), JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ req, opt } count:2 type:OrgApacheLuceneSearchScorer_class_()]), [self coordWithInt:[requiredScoring size] + 1 withInt:maxCoord_]) autorelease];
+      return create_OrgApacheLuceneSearchConjunctionScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_withFloat_(self, JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ req, opt } count:2 type:OrgApacheLuceneSearchScorer_class_()]), JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ req, opt } count:2 type:OrgApacheLuceneSearchScorer_class_()]), [self coordWithInt:[requiredScoring size] + 1 withInt:maxCoord_]);
     }
     else {
       jfloat coordReq = [self coordWithInt:[requiredScoring size] withInt:maxCoord_];
       jfloat coordBoth = [self coordWithInt:[requiredScoring size] + 1 withInt:maxCoord_];
-      return [new_OrgApacheLuceneSearchBooleanTopLevelScorers_ReqSingleOptScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_withFloat_withFloat_(req, opt, coordReq, coordBoth) autorelease];
+      return create_OrgApacheLuceneSearchBooleanTopLevelScorers_ReqSingleOptScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_withFloat_withFloat_(req, opt, coordReq, coordBoth);
     }
   }
   else {
     if (minShouldMatch > 0) {
-      return [new_OrgApacheLuceneSearchBooleanTopLevelScorers_CoordinatingConjunctionScorer_initWithOrgApacheLuceneSearchWeight_withFloatArray_withOrgApacheLuceneSearchScorer_withInt_withOrgApacheLuceneSearchScorer_(self, coords_, req, [requiredScoring size], opt) autorelease];
+      return create_OrgApacheLuceneSearchBooleanTopLevelScorers_CoordinatingConjunctionScorer_initWithOrgApacheLuceneSearchWeight_withFloatArray_withOrgApacheLuceneSearchScorer_withInt_withOrgApacheLuceneSearchScorer_(self, coords_, req, [requiredScoring size], opt);
     }
     else {
-      return [new_OrgApacheLuceneSearchBooleanTopLevelScorers_ReqMultiOptScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_withInt_withFloatArray_(req, opt, [requiredScoring size], coords_) autorelease];
+      return create_OrgApacheLuceneSearchBooleanTopLevelScorers_ReqMultiOptScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_withInt_withFloatArray_(req, opt, [requiredScoring size], coords_);
     }
   }
 }
@@ -341,7 +349,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanWeight_$1)
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneSearchBooleanQuery:withOrgApacheLuceneSearchIndexSearcher:withBoolean:withBoolean:", "BooleanWeight", NULL, 0x0, "Ljava.io.IOException;", NULL },
-    { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x1, NULL, NULL },
+    { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x1, NULL, "(Ljava/util/Set<Lorg/apache/lucene/index/Term;>;)V" },
     { "getValueForNormalization", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
     { "coordWithInt:withInt:", "coord", "F", 0x1, NULL, NULL },
     { "normalizeWithFloat:withFloat:", "normalize", "V", 0x1, NULL, NULL },
@@ -349,9 +357,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanWeight_$1)
     { "booleanScorerWithOrgApacheLuceneIndexLeafReaderContext:", "booleanScorer", "Lorg.apache.lucene.search.BooleanScorer;", 0x0, "Ljava.io.IOException;", NULL },
     { "bulkScorerWithOrgApacheLuceneIndexLeafReaderContext:", "bulkScorer", "Lorg.apache.lucene.search.BulkScorer;", 0x1, "Ljava.io.IOException;", NULL },
     { "scorerWithOrgApacheLuceneIndexLeafReaderContext:", "scorer", "Lorg.apache.lucene.search.Scorer;", 0x1, "Ljava.io.IOException;", NULL },
-    { "reqWithJavaUtilList:withJavaUtilList:withBoolean:", "req", "Lorg.apache.lucene.search.Scorer;", 0x2, NULL, NULL },
-    { "exclWithOrgApacheLuceneSearchScorer:withJavaUtilList:", "excl", "Lorg.apache.lucene.search.Scorer;", 0x2, "Ljava.io.IOException;", NULL },
-    { "optWithJavaUtilList:withInt:withBoolean:", "opt", "Lorg.apache.lucene.search.Scorer;", 0x2, "Ljava.io.IOException;", NULL },
+    { "reqWithJavaUtilList:withJavaUtilList:withBoolean:", "req", "Lorg.apache.lucene.search.Scorer;", 0x2, NULL, "(Ljava/util/List<Lorg/apache/lucene/search/Scorer;>;Ljava/util/List<Lorg/apache/lucene/search/Scorer;>;Z)Lorg/apache/lucene/search/Scorer;" },
+    { "exclWithOrgApacheLuceneSearchScorer:withJavaUtilList:", "excl", "Lorg.apache.lucene.search.Scorer;", 0x2, "Ljava.io.IOException;", "(Lorg/apache/lucene/search/Scorer;Ljava/util/List<Lorg/apache/lucene/search/Scorer;>;)Lorg/apache/lucene/search/Scorer;" },
+    { "optWithJavaUtilList:withInt:withBoolean:", "opt", "Lorg.apache.lucene.search.Scorer;", 0x2, "Ljava.io.IOException;", "(Ljava/util/List<Lorg/apache/lucene/search/Scorer;>;IZ)Lorg/apache/lucene/search/Scorer;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "similarity_", NULL, 0x10, "Lorg.apache.lucene.search.similarities.Similarity;", NULL, NULL, .constantValue.asLong = 0 },
@@ -402,9 +410,11 @@ void OrgApacheLuceneSearchBooleanWeight_initWithOrgApacheLuceneSearchBooleanQuer
 }
 
 OrgApacheLuceneSearchBooleanWeight *new_OrgApacheLuceneSearchBooleanWeight_initWithOrgApacheLuceneSearchBooleanQuery_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withBoolean_(OrgApacheLuceneSearchBooleanQuery *query, OrgApacheLuceneSearchIndexSearcher *searcher, jboolean needsScores, jboolean disableCoord) {
-  OrgApacheLuceneSearchBooleanWeight *self = [OrgApacheLuceneSearchBooleanWeight alloc];
-  OrgApacheLuceneSearchBooleanWeight_initWithOrgApacheLuceneSearchBooleanQuery_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withBoolean_(self, query, searcher, needsScores, disableCoord);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchBooleanWeight, initWithOrgApacheLuceneSearchBooleanQuery_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withBoolean_, query, searcher, needsScores, disableCoord)
+}
+
+OrgApacheLuceneSearchBooleanWeight *create_OrgApacheLuceneSearchBooleanWeight_initWithOrgApacheLuceneSearchBooleanQuery_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withBoolean_(OrgApacheLuceneSearchBooleanQuery *query, OrgApacheLuceneSearchIndexSearcher *searcher, jboolean needsScores, jboolean disableCoord) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchBooleanWeight, initWithOrgApacheLuceneSearchBooleanQuery_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withBoolean_, query, searcher, needsScores, disableCoord)
 }
 
 OrgApacheLuceneSearchScorer *OrgApacheLuceneSearchBooleanWeight_reqWithJavaUtilList_withJavaUtilList_withBoolean_(OrgApacheLuceneSearchBooleanWeight *self, id<JavaUtilList> required, id<JavaUtilList> requiredScoring, jboolean disableCoord) {
@@ -414,7 +424,7 @@ OrgApacheLuceneSearchScorer *OrgApacheLuceneSearchBooleanWeight_reqWithJavaUtilL
       return req;
     }
     if ([((id<JavaUtilList>) nil_chk(requiredScoring)) isEmpty]) {
-      return [new_OrgApacheLuceneSearchBooleanWeight_$1_initWithOrgApacheLuceneSearchScorer_(req) autorelease];
+      return create_OrgApacheLuceneSearchBooleanWeight_$1_initWithOrgApacheLuceneSearchScorer_(req);
     }
     jfloat boost = 1.0f;
     if (disableCoord == false) {
@@ -423,10 +433,10 @@ OrgApacheLuceneSearchScorer *OrgApacheLuceneSearchBooleanWeight_reqWithJavaUtilL
     if (boost == 1.0f) {
       return req;
     }
-    return [new_OrgApacheLuceneSearchBooleanTopLevelScorers_BoostedScorer_initWithOrgApacheLuceneSearchScorer_withFloat_(req, boost) autorelease];
+    return create_OrgApacheLuceneSearchBooleanTopLevelScorers_BoostedScorer_initWithOrgApacheLuceneSearchScorer_withFloat_(req, boost);
   }
   else {
-    return [new_OrgApacheLuceneSearchConjunctionScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_withFloat_(self, required, requiredScoring, disableCoord ? 1.0f : [self coordWithInt:[((id<JavaUtilList>) nil_chk(requiredScoring)) size] withInt:self->maxCoord_]) autorelease];
+    return create_OrgApacheLuceneSearchConjunctionScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_withFloat_(self, required, requiredScoring, disableCoord ? 1.0f : [self coordWithInt:[((id<JavaUtilList>) nil_chk(requiredScoring)) size] withInt:self->maxCoord_]);
   }
 }
 
@@ -435,12 +445,12 @@ OrgApacheLuceneSearchScorer *OrgApacheLuceneSearchBooleanWeight_exclWithOrgApach
     return main;
   }
   else if ([prohibited size] == 1) {
-    return [new_OrgApacheLuceneSearchReqExclScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(main, [prohibited getWithInt:0]) autorelease];
+    return create_OrgApacheLuceneSearchReqExclScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(main, [prohibited getWithInt:0]);
   }
   else {
     IOSFloatArray *coords = [IOSFloatArray arrayWithLength:[prohibited size] + 1];
     JavaUtilArrays_fillWithFloatArray_withFloat_(coords, 1.0f);
-    return [new_OrgApacheLuceneSearchReqExclScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(main, [new_OrgApacheLuceneSearchDisjunctionSumScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withFloatArray_withBoolean_(self, prohibited, coords, false) autorelease]) autorelease];
+    return create_OrgApacheLuceneSearchReqExclScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_(main, create_OrgApacheLuceneSearchDisjunctionSumScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withFloatArray_withBoolean_(self, prohibited, coords, false));
   }
 }
 
@@ -448,7 +458,7 @@ OrgApacheLuceneSearchScorer *OrgApacheLuceneSearchBooleanWeight_optWithJavaUtilL
   if ([((id<JavaUtilList>) nil_chk(optional)) size] == 1) {
     OrgApacheLuceneSearchScorer *opt = [optional getWithInt:0];
     if (!disableCoord && self->maxCoord_ > 1) {
-      return [new_OrgApacheLuceneSearchBooleanTopLevelScorers_BoostedScorer_initWithOrgApacheLuceneSearchScorer_withFloat_(opt, [self coordWithInt:1 withInt:self->maxCoord_]) autorelease];
+      return create_OrgApacheLuceneSearchBooleanTopLevelScorers_BoostedScorer_initWithOrgApacheLuceneSearchScorer_withFloat_(opt, [self coordWithInt:1 withInt:self->maxCoord_]);
     }
     else {
       return opt;
@@ -464,10 +474,10 @@ OrgApacheLuceneSearchScorer *OrgApacheLuceneSearchBooleanWeight_optWithJavaUtilL
       coords = self->coords_;
     }
     if (minShouldMatch > 1) {
-      return [new_OrgApacheLuceneSearchMinShouldMatchSumScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilCollection_withInt_withFloatArray_(self, optional, minShouldMatch, coords) autorelease];
+      return create_OrgApacheLuceneSearchMinShouldMatchSumScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilCollection_withInt_withFloatArray_(self, optional, minShouldMatch, coords);
     }
     else {
-      return [new_OrgApacheLuceneSearchDisjunctionSumScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withFloatArray_withBoolean_(self, optional, coords, self->needsScores_) autorelease];
+      return create_OrgApacheLuceneSearchDisjunctionSumScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withFloatArray_withBoolean_(self, optional, coords, self->needsScores_);
     }
   }
 }
@@ -507,9 +517,11 @@ void OrgApacheLuceneSearchBooleanWeight_$1_initWithOrgApacheLuceneSearchScorer_(
 }
 
 OrgApacheLuceneSearchBooleanWeight_$1 *new_OrgApacheLuceneSearchBooleanWeight_$1_initWithOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *arg$0) {
-  OrgApacheLuceneSearchBooleanWeight_$1 *self = [OrgApacheLuceneSearchBooleanWeight_$1 alloc];
-  OrgApacheLuceneSearchBooleanWeight_$1_initWithOrgApacheLuceneSearchScorer_(self, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchBooleanWeight_$1, initWithOrgApacheLuceneSearchScorer_, arg$0)
+}
+
+OrgApacheLuceneSearchBooleanWeight_$1 *create_OrgApacheLuceneSearchBooleanWeight_$1_initWithOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchBooleanWeight_$1, initWithOrgApacheLuceneSearchScorer_, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBooleanWeight_$1)

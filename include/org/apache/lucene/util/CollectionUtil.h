@@ -5,31 +5,61 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilCollectionUtil_INCLUDE_ALL")
-#if OrgApacheLuceneUtilCollectionUtil_RESTRICT
-#define OrgApacheLuceneUtilCollectionUtil_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilCollectionUtil")
+#ifdef RESTRICT_OrgApacheLuceneUtilCollectionUtil
+#define INCLUDE_ALL_OrgApacheLuceneUtilCollectionUtil 0
 #else
-#define OrgApacheLuceneUtilCollectionUtil_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilCollectionUtil 1
 #endif
-#undef OrgApacheLuceneUtilCollectionUtil_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilCollectionUtil
 
-#if !defined (_OrgApacheLuceneUtilCollectionUtil_) && (OrgApacheLuceneUtilCollectionUtil_INCLUDE_ALL || OrgApacheLuceneUtilCollectionUtil_INCLUDE)
-#define _OrgApacheLuceneUtilCollectionUtil_
+#if !defined (OrgApacheLuceneUtilCollectionUtil_) && (INCLUDE_ALL_OrgApacheLuceneUtilCollectionUtil || defined(INCLUDE_OrgApacheLuceneUtilCollectionUtil))
+#define OrgApacheLuceneUtilCollectionUtil_
 
 @protocol JavaUtilComparator;
 @protocol JavaUtilList;
 
+/*!
+ @brief Methods for manipulating (sorting) collections.
+ Sort methods work directly on the supplied lists and don't copy to/from arrays
+ before/after. For medium size collections as used in the Lucene indexer that is
+ much more efficient.
+ */
 @interface OrgApacheLuceneUtilCollectionUtil : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Sorts the given random access <code>List</code> in natural order.
+ The list must implement <code>RandomAccess</code>. This method uses the intro sort
+ algorithm, but falls back to insertion sort for small lists.
+ @throws IllegalArgumentException if list is e.g. a linked list without random access.
+ */
 + (void)introSortWithJavaUtilList:(id<JavaUtilList>)list;
 
+/*!
+ @brief Sorts the given random access <code>List</code> using the <code>Comparator</code>.
+ The list must implement <code>RandomAccess</code>. This method uses the intro sort
+ algorithm, but falls back to insertion sort for small lists.
+ @throws IllegalArgumentException if list is e.g. a linked list without random access.
+ */
 + (void)introSortWithJavaUtilList:(id<JavaUtilList>)list
            withJavaUtilComparator:(id<JavaUtilComparator>)comp;
 
+/*!
+ @brief Sorts the given random access <code>List</code> in natural order.
+ The list must implement <code>RandomAccess</code>. This method uses the Tim sort
+ algorithm, but falls back to binary sort for small lists.
+ @throws IllegalArgumentException if list is e.g. a linked list without random access.
+ */
 + (void)timSortWithJavaUtilList:(id<JavaUtilList>)list;
 
+/*!
+ @brief Sorts the given random access <code>List</code> using the <code>Comparator</code>.
+ The list must implement <code>RandomAccess</code>. This method uses the Tim sort
+ algorithm, but falls back to binary sort for small lists.
+ @throws IllegalArgumentException if list is e.g. a linked list without random access.
+ */
 + (void)timSortWithJavaUtilList:(id<JavaUtilList>)list
          withJavaUtilComparator:(id<JavaUtilComparator>)comp;
 
@@ -49,4 +79,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilCollectionUtil)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilCollectionUtil_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilCollectionUtil")

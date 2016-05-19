@@ -5,35 +5,47 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchJoinQueryBitSetProducer_INCLUDE_ALL")
-#if OrgApacheLuceneSearchJoinQueryBitSetProducer_RESTRICT
-#define OrgApacheLuceneSearchJoinQueryBitSetProducer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinQueryBitSetProducer")
+#ifdef RESTRICT_OrgApacheLuceneSearchJoinQueryBitSetProducer
+#define INCLUDE_ALL_OrgApacheLuceneSearchJoinQueryBitSetProducer 0
 #else
-#define OrgApacheLuceneSearchJoinQueryBitSetProducer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchJoinQueryBitSetProducer 1
 #endif
-#undef OrgApacheLuceneSearchJoinQueryBitSetProducer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchJoinQueryBitSetProducer
 
-#if !defined (_OrgApacheLuceneSearchJoinQueryBitSetProducer_) && (OrgApacheLuceneSearchJoinQueryBitSetProducer_INCLUDE_ALL || OrgApacheLuceneSearchJoinQueryBitSetProducer_INCLUDE)
-#define _OrgApacheLuceneSearchJoinQueryBitSetProducer_
+#if !defined (OrgApacheLuceneSearchJoinQueryBitSetProducer_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinQueryBitSetProducer || defined(INCLUDE_OrgApacheLuceneSearchJoinQueryBitSetProducer))
+#define OrgApacheLuceneSearchJoinQueryBitSetProducer_
 
-#define OrgApacheLuceneSearchJoinBitSetProducer_RESTRICT 1
-#define OrgApacheLuceneSearchJoinBitSetProducer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchJoinBitSetProducer 1
+#define INCLUDE_OrgApacheLuceneSearchJoinBitSetProducer 1
 #include "org/apache/lucene/search/join/BitSetProducer.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneSearchQuery;
 @class OrgApacheLuceneUtilBitSet;
 
+/*!
+ @brief A <code>BitSetProducer</code> that wraps a query and caches matching
+ <code>BitSet</code>s per segment.
+ */
 @interface OrgApacheLuceneSearchJoinQueryBitSetProducer : NSObject < OrgApacheLuceneSearchJoinBitSetProducer >
 
 #pragma mark Public
 
+/*!
+ @brief Wraps another query's result and caches it into bitsets.
+ @param query Query to cache results of
+ */
 - (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
 
 - (jboolean)isEqual:(id)o;
 
 - (OrgApacheLuceneUtilBitSet *)getBitSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
+/*!
+ @brief Gets the contained query.
+ @return the contained query.
+ */
 - (OrgApacheLuceneSearchQuery *)getQuery;
 
 - (NSUInteger)hash;
@@ -48,8 +60,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinQueryBitSetProducer_initWithOrgA
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchJoinQueryBitSetProducer *new_OrgApacheLuceneSearchJoinQueryBitSetProducer_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchQuery *query) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinQueryBitSetProducer *create_OrgApacheLuceneSearchJoinQueryBitSetProducer_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchQuery *query);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinQueryBitSetProducer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchJoinQueryBitSetProducer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinQueryBitSetProducer")

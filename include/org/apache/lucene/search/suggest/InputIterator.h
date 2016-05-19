@@ -5,65 +5,105 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSuggestInputIterator_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSuggestInputIterator_RESTRICT
-#define OrgApacheLuceneSearchSuggestInputIterator_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestInputIterator")
+#ifdef RESTRICT_OrgApacheLuceneSearchSuggestInputIterator
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestInputIterator 0
 #else
-#define OrgApacheLuceneSearchSuggestInputIterator_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestInputIterator 1
 #endif
-#undef OrgApacheLuceneSearchSuggestInputIterator_RESTRICT
-#if OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper_INCLUDE
-#define OrgApacheLuceneSearchSuggestInputIterator_INCLUDE 1
+#undef RESTRICT_OrgApacheLuceneSearchSuggestInputIterator
+#ifdef INCLUDE_OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper
+#define INCLUDE_OrgApacheLuceneSearchSuggestInputIterator 1
 #endif
 
-#if !defined (_OrgApacheLuceneSearchSuggestInputIterator_) && (OrgApacheLuceneSearchSuggestInputIterator_INCLUDE_ALL || OrgApacheLuceneSearchSuggestInputIterator_INCLUDE)
-#define _OrgApacheLuceneSearchSuggestInputIterator_
+#if !defined (OrgApacheLuceneSearchSuggestInputIterator_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestInputIterator || defined(INCLUDE_OrgApacheLuceneSearchSuggestInputIterator))
+#define OrgApacheLuceneSearchSuggestInputIterator_
 
-#define OrgApacheLuceneUtilBytesRefIterator_RESTRICT 1
-#define OrgApacheLuceneUtilBytesRefIterator_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilBytesRefIterator 1
+#define INCLUDE_OrgApacheLuceneUtilBytesRefIterator 1
 #include "org/apache/lucene/util/BytesRefIterator.h"
 
 @class OrgApacheLuceneUtilBytesRef;
 @protocol JavaUtilSet;
 
+/*!
+ @brief Interface for enumerating term,weight,payload triples for suggester consumption;
+ currently only <code>AnalyzingSuggester</code>, <code>FuzzySuggester</code>
+  and <code>AnalyzingInfixSuggester</code> support payloads.
+ */
 @protocol OrgApacheLuceneSearchSuggestInputIterator < OrgApacheLuceneUtilBytesRefIterator, NSObject, JavaObject >
 
+/*!
+ @brief A term's weight, higher numbers mean better suggestions.
+ */
 - (jlong)weight;
 
+/*!
+ @brief An arbitrary byte[] to record per suggestion.
+ See
+ <code>LookupResult.payload</code> to retrieve the payload
+ for each suggestion. 
+ */
 - (OrgApacheLuceneUtilBytesRef *)payload;
 
+/*!
+ @brief Returns true if the iterator has payloads
+ */
 - (jboolean)hasPayloads;
 
+/*!
+ @brief A term's contexts context can be used to filter suggestions.
+ May return null, if suggest entries do not have any context
+ */
 - (id<JavaUtilSet>)contexts;
 
+/*!
+ @brief Returns true if the iterator has contexts
+ */
 - (jboolean)hasContexts;
 
 @end
 
 @interface OrgApacheLuceneSearchSuggestInputIterator : NSObject
 
++ (id<OrgApacheLuceneSearchSuggestInputIterator>)EMPTY;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSuggestInputIterator)
 
-FOUNDATION_EXPORT id<OrgApacheLuceneSearchSuggestInputIterator> OrgApacheLuceneSearchSuggestInputIterator_EMPTY_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSuggestInputIterator, EMPTY_, id<OrgApacheLuceneSearchSuggestInputIterator>)
+/*!
+ @brief Singleton InputIterator that iterates over 0 BytesRefs.
+ */
+inline id<OrgApacheLuceneSearchSuggestInputIterator> OrgApacheLuceneSearchSuggestInputIterator_get_EMPTY();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT id<OrgApacheLuceneSearchSuggestInputIterator> OrgApacheLuceneSearchSuggestInputIterator_EMPTY;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchSuggestInputIterator, EMPTY, id<OrgApacheLuceneSearchSuggestInputIterator>)
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestInputIterator)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper_) && (OrgApacheLuceneSearchSuggestInputIterator_INCLUDE_ALL || OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper_INCLUDE)
-#define _OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper_
+#if !defined (OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestInputIterator || defined(INCLUDE_OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper))
+#define OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper_
 
 @class OrgApacheLuceneUtilBytesRef;
 @protocol JavaUtilSet;
 @protocol OrgApacheLuceneUtilBytesRefIterator;
 
+/*!
+ @brief Wraps a BytesRefIterator as a suggester InputIterator, with all weights
+ set to <code>1</code> and carries no payload
+ */
 @interface OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper : NSObject < OrgApacheLuceneSearchSuggestInputIterator >
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new wrapper, wrapping the specified iterator and 
+ specifying a weight value of <code>1</code> for all terms 
+ and nullifies associated payloads.
+ */
 - (instancetype)initWithOrgApacheLuceneUtilBytesRefIterator:(id<OrgApacheLuceneUtilBytesRefIterator>)wrapped;
 
 - (id<JavaUtilSet>)contexts;
@@ -86,8 +126,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWr
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper *new_OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper_initWithOrgApacheLuceneUtilBytesRefIterator_(id<OrgApacheLuceneUtilBytesRefIterator> wrapped) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper *create_OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper_initWithOrgApacheLuceneUtilBytesRefIterator_(id<OrgApacheLuceneUtilBytesRefIterator> wrapped);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSuggestInputIterator_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestInputIterator")

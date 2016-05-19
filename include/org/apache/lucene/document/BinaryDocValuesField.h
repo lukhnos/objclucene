@@ -5,28 +5,52 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneDocumentBinaryDocValuesField_INCLUDE_ALL")
-#if OrgApacheLuceneDocumentBinaryDocValuesField_RESTRICT
-#define OrgApacheLuceneDocumentBinaryDocValuesField_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneDocumentBinaryDocValuesField")
+#ifdef RESTRICT_OrgApacheLuceneDocumentBinaryDocValuesField
+#define INCLUDE_ALL_OrgApacheLuceneDocumentBinaryDocValuesField 0
 #else
-#define OrgApacheLuceneDocumentBinaryDocValuesField_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneDocumentBinaryDocValuesField 1
 #endif
-#undef OrgApacheLuceneDocumentBinaryDocValuesField_RESTRICT
+#undef RESTRICT_OrgApacheLuceneDocumentBinaryDocValuesField
 
-#if !defined (_OrgApacheLuceneDocumentBinaryDocValuesField_) && (OrgApacheLuceneDocumentBinaryDocValuesField_INCLUDE_ALL || OrgApacheLuceneDocumentBinaryDocValuesField_INCLUDE)
-#define _OrgApacheLuceneDocumentBinaryDocValuesField_
+#if !defined (OrgApacheLuceneDocumentBinaryDocValuesField_) && (INCLUDE_ALL_OrgApacheLuceneDocumentBinaryDocValuesField || defined(INCLUDE_OrgApacheLuceneDocumentBinaryDocValuesField))
+#define OrgApacheLuceneDocumentBinaryDocValuesField_
 
-#define OrgApacheLuceneDocumentField_RESTRICT 1
-#define OrgApacheLuceneDocumentField_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneDocumentField 1
+#define INCLUDE_OrgApacheLuceneDocumentField 1
 #include "org/apache/lucene/document/Field.h"
 
 @class OrgApacheLuceneDocumentFieldType;
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief Field that stores a per-document <code>BytesRef</code> value.
+ <p>
+ The values are stored directly with no sharing, which is a good fit when
+ the fields don't share (many) values, such as a title field.  If values 
+ may be shared and sorted it's better to use <code>SortedDocValuesField</code>.  
+ Here's an example usage:
+ <pre class="prettyprint">
+ document.add(new BinaryDocValuesField(name, new BytesRef("hello")));
+ 
+@endcode
+ <p>
+ If you also need to store the value, you should add a
+ separate <code>StoredField</code> instance.
+ - seealso: BinaryDocValues
+ */
 @interface OrgApacheLuceneDocumentBinaryDocValuesField : OrgApacheLuceneDocumentField
+
++ (OrgApacheLuceneDocumentFieldType *)TYPE;
 
 #pragma mark Public
 
+/*!
+ @brief Create a new binary DocValues field.
+ @param name field name
+ @param value binary content
+ @throws IllegalArgumentException if the field name is null
+ */
 - (instancetype)initWithNSString:(NSString *)name
  withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)value;
 
@@ -34,15 +58,22 @@
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneDocumentBinaryDocValuesField)
 
-FOUNDATION_EXPORT OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentBinaryDocValuesField_TYPE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneDocumentBinaryDocValuesField, TYPE_, OrgApacheLuceneDocumentFieldType *)
+/*!
+ @brief Type for straight bytes DocValues.
+ */
+inline OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentBinaryDocValuesField_get_TYPE();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentBinaryDocValuesField_TYPE;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneDocumentBinaryDocValuesField, TYPE, OrgApacheLuceneDocumentFieldType *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneDocumentBinaryDocValuesField_initWithNSString_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneDocumentBinaryDocValuesField *self, NSString *name, OrgApacheLuceneUtilBytesRef *value);
 
 FOUNDATION_EXPORT OrgApacheLuceneDocumentBinaryDocValuesField *new_OrgApacheLuceneDocumentBinaryDocValuesField_initWithNSString_withOrgApacheLuceneUtilBytesRef_(NSString *name, OrgApacheLuceneUtilBytesRef *value) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneDocumentBinaryDocValuesField *create_OrgApacheLuceneDocumentBinaryDocValuesField_initWithNSString_withOrgApacheLuceneUtilBytesRef_(NSString *name, OrgApacheLuceneUtilBytesRef *value);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentBinaryDocValuesField)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneDocumentBinaryDocValuesField_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneDocumentBinaryDocValuesField")

@@ -5,23 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisInIndicNormalizationFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisInIndicNormalizationFilter_RESTRICT
-#define OrgApacheLuceneAnalysisInIndicNormalizationFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisInIndicNormalizationFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisInIndicNormalizationFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisInIndicNormalizationFilter 0
 #else
-#define OrgApacheLuceneAnalysisInIndicNormalizationFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisInIndicNormalizationFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisInIndicNormalizationFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisInIndicNormalizationFilter
 
-#if !defined (_OrgApacheLuceneAnalysisInIndicNormalizationFilter_) && (OrgApacheLuceneAnalysisInIndicNormalizationFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisInIndicNormalizationFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisInIndicNormalizationFilter_
+#if !defined (OrgApacheLuceneAnalysisInIndicNormalizationFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisInIndicNormalizationFilter || defined(INCLUDE_OrgApacheLuceneAnalysisInIndicNormalizationFilter))
+#define OrgApacheLuceneAnalysisInIndicNormalizationFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief A <code>TokenFilter</code> that applies <code>IndicNormalizer</code> to normalize text
+ in Indian Languages.
+ */
 @interface OrgApacheLuceneAnalysisInIndicNormalizationFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
@@ -38,8 +42,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisInIndicNormalizationFilter_initWit
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisInIndicNormalizationFilter *new_OrgApacheLuceneAnalysisInIndicNormalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisInIndicNormalizationFilter *create_OrgApacheLuceneAnalysisInIndicNormalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisInIndicNormalizationFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisInIndicNormalizationFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisInIndicNormalizationFilter")

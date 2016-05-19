@@ -5,22 +5,32 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchQueryCache_INCLUDE_ALL")
-#if OrgApacheLuceneSearchQueryCache_RESTRICT
-#define OrgApacheLuceneSearchQueryCache_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchQueryCache")
+#ifdef RESTRICT_OrgApacheLuceneSearchQueryCache
+#define INCLUDE_ALL_OrgApacheLuceneSearchQueryCache 0
 #else
-#define OrgApacheLuceneSearchQueryCache_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchQueryCache 1
 #endif
-#undef OrgApacheLuceneSearchQueryCache_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchQueryCache
 
-#if !defined (_OrgApacheLuceneSearchQueryCache_) && (OrgApacheLuceneSearchQueryCache_INCLUDE_ALL || OrgApacheLuceneSearchQueryCache_INCLUDE)
-#define _OrgApacheLuceneSearchQueryCache_
+#if !defined (OrgApacheLuceneSearchQueryCache_) && (INCLUDE_ALL_OrgApacheLuceneSearchQueryCache || defined(INCLUDE_OrgApacheLuceneSearchQueryCache))
+#define OrgApacheLuceneSearchQueryCache_
 
 @class OrgApacheLuceneSearchWeight;
 @protocol OrgApacheLuceneSearchQueryCachingPolicy;
 
+/*!
+ @brief A cache for queries.
+ - seealso: LRUQueryCache
+ */
 @protocol OrgApacheLuceneSearchQueryCache < NSObject, JavaObject >
 
+/*!
+ @brief Return a wrapper around the provided <code>weight</code> that will cache
+ matching docs per-segment accordingly to the given <code>policy</code>.
+ NOTE: The returned weight will only be equivalent if scores are not needed.
+ - seealso: Collector#needsScores()
+ */
 - (OrgApacheLuceneSearchWeight *)doCacheWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
                             withOrgApacheLuceneSearchQueryCachingPolicy:(id<OrgApacheLuceneSearchQueryCachingPolicy>)policy;
 
@@ -32,4 +42,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchQueryCache)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchQueryCache_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchQueryCache")

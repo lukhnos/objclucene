@@ -3,10 +3,7 @@
 //  source: ./sandbox/src/java/org/apache/lucene/bkdtree/LatLonWriter.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "org/apache/lucene/bkdtree/LatLonReader.h"
 #include "org/apache/lucene/bkdtree/LatLonWriter.h"
 
 @interface OrgApacheLuceneBkdtreeLatLonWriter : NSObject

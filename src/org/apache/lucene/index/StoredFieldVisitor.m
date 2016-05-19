@@ -12,9 +12,7 @@
 #include "org/apache/lucene/index/FieldInfo.h"
 #include "org/apache/lucene/index/StoredFieldVisitor.h"
 
-__attribute__((unused)) static void OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum_initWithNSString_withInt_(OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum *self, NSString *__name, jint __ordinal);
-
-__attribute__((unused)) static OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum *new_OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
+__attribute__((unused)) static void OrgApacheLuceneIndexStoredFieldVisitor_Status_initWithNSString_withInt_(OrgApacheLuceneIndexStoredFieldVisitor_Status *self, NSString *__name, jint __ordinal);
 
 @implementation OrgApacheLuceneIndexStoredFieldVisitor
 
@@ -49,7 +47,7 @@ J2OBJC_IGNORE_DESIGNATED_END
                                           withDouble:(jdouble)value {
 }
 
-- (OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum *)needsFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo {
+- (OrgApacheLuceneIndexStoredFieldVisitor_Status *)needsFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
   return 0;
@@ -79,35 +77,82 @@ void OrgApacheLuceneIndexStoredFieldVisitor_init(OrgApacheLuceneIndexStoredField
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexStoredFieldVisitor)
 
-J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum)
+J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexStoredFieldVisitor_Status)
 
-OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum *OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum_values_[3];
+OrgApacheLuceneIndexStoredFieldVisitor_Status *OrgApacheLuceneIndexStoredFieldVisitor_Status_values_[3];
 
-@implementation OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum
+@implementation OrgApacheLuceneIndexStoredFieldVisitor_Status
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
++ (OrgApacheLuceneIndexStoredFieldVisitor_Status *)YES_ {
+  return JreEnum(OrgApacheLuceneIndexStoredFieldVisitor_Status, YES);
 }
 
-IOSObjectArray *OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum_values() {
-  OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum_initialize();
-  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum_values_ count:3 type:OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum_class_()];
++ (OrgApacheLuceneIndexStoredFieldVisitor_Status *)NO_ {
+  return JreEnum(OrgApacheLuceneIndexStoredFieldVisitor_Status, NO);
+}
+
++ (OrgApacheLuceneIndexStoredFieldVisitor_Status *)STOP {
+  return JreEnum(OrgApacheLuceneIndexStoredFieldVisitor_Status, STOP);
 }
 
 + (IOSObjectArray *)values {
-  return OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum_values();
+  return OrgApacheLuceneIndexStoredFieldVisitor_Status_values();
 }
 
-+ (OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum *)valueOfWithNSString:(NSString *)name {
-  return OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum_valueOfWithNSString_(name);
++ (OrgApacheLuceneIndexStoredFieldVisitor_Status *)valueOfWithNSString:(NSString *)name {
+  return OrgApacheLuceneIndexStoredFieldVisitor_Status_valueOfWithNSString_(name);
 }
 
-OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum *OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum_valueOfWithNSString_(NSString *name) {
-  OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum_initialize();
+- (OrgApacheLuceneIndexStoredFieldVisitor_Status_Enum)toNSEnum {
+  return (OrgApacheLuceneIndexStoredFieldVisitor_Status_Enum)[self ordinal];
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+  return self;
+}
+
++ (void)initialize {
+  if (self == [OrgApacheLuceneIndexStoredFieldVisitor_Status class]) {
+    size_t objSize = class_getInstanceSize(self);
+    size_t allocSize = 3 * objSize;
+    uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
+    id e;
+    (JreEnum(OrgApacheLuceneIndexStoredFieldVisitor_Status, YES) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneIndexStoredFieldVisitor_Status_initWithNSString_withInt_(e, @"YES", 0);
+    (JreEnum(OrgApacheLuceneIndexStoredFieldVisitor_Status, NO) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneIndexStoredFieldVisitor_Status_initWithNSString_withInt_(e, @"NO", 1);
+    (JreEnum(OrgApacheLuceneIndexStoredFieldVisitor_Status, STOP) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneIndexStoredFieldVisitor_Status_initWithNSString_withInt_(e, @"STOP", 2);
+    J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexStoredFieldVisitor_Status)
+  }
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static const J2ObjcFieldInfo fields[] = {
+    { "YES", "YES", 0x4019, "Lorg.apache.lucene.index.StoredFieldVisitor$Status;", &JreEnum(OrgApacheLuceneIndexStoredFieldVisitor_Status, YES), NULL, .constantValue.asLong = 0 },
+    { "NO", "NO", 0x4019, "Lorg.apache.lucene.index.StoredFieldVisitor$Status;", &JreEnum(OrgApacheLuceneIndexStoredFieldVisitor_Status, NO), NULL, .constantValue.asLong = 0 },
+    { "STOP", "STOP", 0x4019, "Lorg.apache.lucene.index.StoredFieldVisitor$Status;", &JreEnum(OrgApacheLuceneIndexStoredFieldVisitor_Status, STOP), NULL, .constantValue.asLong = 0 },
+  };
+  static const char *superclass_type_args[] = {"Lorg.apache.lucene.index.StoredFieldVisitor$Status;"};
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexStoredFieldVisitor_Status = { 2, "Status", "org.apache.lucene.index", "StoredFieldVisitor", 0x4019, 0, NULL, 3, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/index/StoredFieldVisitor$Status;>;" };
+  return &_OrgApacheLuceneIndexStoredFieldVisitor_Status;
+}
+
+@end
+
+void OrgApacheLuceneIndexStoredFieldVisitor_Status_initWithNSString_withInt_(OrgApacheLuceneIndexStoredFieldVisitor_Status *self, NSString *__name, jint __ordinal) {
+  JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
+}
+
+IOSObjectArray *OrgApacheLuceneIndexStoredFieldVisitor_Status_values() {
+  OrgApacheLuceneIndexStoredFieldVisitor_Status_initialize();
+  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneIndexStoredFieldVisitor_Status_values_ count:3 type:OrgApacheLuceneIndexStoredFieldVisitor_Status_class_()];
+}
+
+OrgApacheLuceneIndexStoredFieldVisitor_Status *OrgApacheLuceneIndexStoredFieldVisitor_Status_valueOfWithNSString_(NSString *name) {
+  OrgApacheLuceneIndexStoredFieldVisitor_Status_initialize();
   for (int i = 0; i < 3; i++) {
-    OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum *e = OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum_values_[i];
+    OrgApacheLuceneIndexStoredFieldVisitor_Status *e = OrgApacheLuceneIndexStoredFieldVisitor_Status_values_[i];
     if ([name isEqual:[e name]]) {
       return e;
     }
@@ -116,40 +161,12 @@ OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum *OrgApacheLuceneIndexStoredFie
   return nil;
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return [self retain];
-}
-
-+ (void)initialize {
-  if (self == [OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum class]) {
-    OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum_YES = new_OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum_initWithNSString_withInt_(@"YES", 0);
-    OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum_NO = new_OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum_initWithNSString_withInt_(@"NO", 1);
-    OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum_STOP = new_OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum_initWithNSString_withInt_(@"STOP", 2);
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum)
+OrgApacheLuceneIndexStoredFieldVisitor_Status *OrgApacheLuceneIndexStoredFieldVisitor_Status_fromOrdinal(NSUInteger ordinal) {
+  OrgApacheLuceneIndexStoredFieldVisitor_Status_initialize();
+  if (ordinal >= 3) {
+    return nil;
   }
+  return OrgApacheLuceneIndexStoredFieldVisitor_Status_values_[ordinal];
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcFieldInfo fields[] = {
-    { "YES", "YES", 0x4019, "Lorg.apache.lucene.index.StoredFieldVisitor$Status;", &OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum_YES, NULL, .constantValue.asLong = 0 },
-    { "NO", "NO", 0x4019, "Lorg.apache.lucene.index.StoredFieldVisitor$Status;", &OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum_NO, NULL, .constantValue.asLong = 0 },
-    { "STOP", "STOP", 0x4019, "Lorg.apache.lucene.index.StoredFieldVisitor$Status;", &OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum_STOP, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.index.StoredFieldVisitor$Status;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum = { 2, "Status", "org.apache.lucene.index", "StoredFieldVisitor", 0x4019, 0, NULL, 3, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/index/StoredFieldVisitor$Status;>;" };
-  return &_OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum;
-}
-
-@end
-
-void OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum_initWithNSString_withInt_(OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum *self, NSString *__name, jint __ordinal) {
-  JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
-}
-
-OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum *new_OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum *self = [OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum alloc];
-  OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum)
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexStoredFieldVisitor_Status)

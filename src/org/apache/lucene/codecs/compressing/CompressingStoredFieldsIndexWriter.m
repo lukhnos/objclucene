@@ -65,7 +65,7 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsCompressingCompressingS
 - (void)finishWithInt:(jint)numDocs
              withLong:(jlong)maxPointer {
   if (numDocs != totalDocs_) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I", @"Expected ", numDocs, @" docs, but got ", totalDocs_)) autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I", @"Expected ", numDocs, @" docs, but got ", totalDocs_));
   }
   if (blockChunks_ > 0) {
     OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter_writeBlock(self);
@@ -115,7 +115,7 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsCompressingCompressingS
 void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter_initWithOrgApacheLuceneStoreIndexOutput_withInt_(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter *self, OrgApacheLuceneStoreIndexOutput *indexOutput, jint blockSize) {
   NSObject_init(self);
   if (blockSize <= 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"blockSize must be positive") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"blockSize must be positive");
   }
   self->blockSize_ = blockSize;
   JreStrongAssign(&self->fieldsIndexOut_, indexOutput);
@@ -127,9 +127,11 @@ void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter_initWith
 }
 
 OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter *new_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter_initWithOrgApacheLuceneStoreIndexOutput_withInt_(OrgApacheLuceneStoreIndexOutput *indexOutput, jint blockSize) {
-  OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter *self = [OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter alloc];
-  OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter_initWithOrgApacheLuceneStoreIndexOutput_withInt_(self, indexOutput, blockSize);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter, initWithOrgApacheLuceneStoreIndexOutput_withInt_, indexOutput, blockSize)
+}
+
+OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter *create_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter_initWithOrgApacheLuceneStoreIndexOutput_withInt_(OrgApacheLuceneStoreIndexOutput *indexOutput, jint blockSize) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter, initWithOrgApacheLuceneStoreIndexOutput_withInt_, indexOutput, blockSize)
 }
 
 void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter_reset(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter *self) {
@@ -159,7 +161,7 @@ void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter_writeBlo
   }
   jint bitsPerDocBase = OrgApacheLuceneUtilPackedPackedInts_bitsRequiredWithLong_(maxDelta);
   [self->fieldsIndexOut_ writeVIntWithInt:bitsPerDocBase];
-  OrgApacheLuceneUtilPackedPackedInts_Writer *writer = OrgApacheLuceneUtilPackedPackedInts_getWriterNoHeaderWithOrgApacheLuceneStoreDataOutput_withOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_withInt_(self->fieldsIndexOut_, JreLoadStatic(OrgApacheLuceneUtilPackedPackedInts_FormatEnum, PACKED), self->blockChunks_, bitsPerDocBase, 1);
+  OrgApacheLuceneUtilPackedPackedInts_Writer *writer = OrgApacheLuceneUtilPackedPackedInts_getWriterNoHeaderWithOrgApacheLuceneStoreDataOutput_withOrgApacheLuceneUtilPackedPackedInts_Format_withInt_withInt_withInt_(self->fieldsIndexOut_, JreLoadEnum(OrgApacheLuceneUtilPackedPackedInts_Format, PACKED), self->blockChunks_, bitsPerDocBase, 1);
   docBase = 0;
   for (jint i = 0; i < self->blockChunks_; ++i) {
     jlong delta = docBase - avgChunkDocs * i;
@@ -186,7 +188,7 @@ void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexWriter_writeBlo
   }
   jint bitsPerStartPointer = OrgApacheLuceneUtilPackedPackedInts_bitsRequiredWithLong_(maxDelta);
   [self->fieldsIndexOut_ writeVIntWithInt:bitsPerStartPointer];
-  writer = OrgApacheLuceneUtilPackedPackedInts_getWriterNoHeaderWithOrgApacheLuceneStoreDataOutput_withOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_withInt_(self->fieldsIndexOut_, JreLoadStatic(OrgApacheLuceneUtilPackedPackedInts_FormatEnum, PACKED), self->blockChunks_, bitsPerStartPointer, 1);
+  writer = OrgApacheLuceneUtilPackedPackedInts_getWriterNoHeaderWithOrgApacheLuceneStoreDataOutput_withOrgApacheLuceneUtilPackedPackedInts_Format_withInt_withInt_withInt_(self->fieldsIndexOut_, JreLoadEnum(OrgApacheLuceneUtilPackedPackedInts_Format, PACKED), self->blockChunks_, bitsPerStartPointer, 1);
   startPointer = 0;
   for (jint i = 0; i < self->blockChunks_; ++i) {
     startPointer += IOSLongArray_Get(nil_chk(self->startPointerDeltas_), i);

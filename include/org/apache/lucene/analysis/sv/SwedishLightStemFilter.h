@@ -5,23 +5,32 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisSvSwedishLightStemFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisSvSwedishLightStemFilter_RESTRICT
-#define OrgApacheLuceneAnalysisSvSwedishLightStemFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisSvSwedishLightStemFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisSvSwedishLightStemFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisSvSwedishLightStemFilter 0
 #else
-#define OrgApacheLuceneAnalysisSvSwedishLightStemFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisSvSwedishLightStemFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisSvSwedishLightStemFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisSvSwedishLightStemFilter
 
-#if !defined (_OrgApacheLuceneAnalysisSvSwedishLightStemFilter_) && (OrgApacheLuceneAnalysisSvSwedishLightStemFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisSvSwedishLightStemFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisSvSwedishLightStemFilter_
+#if !defined (OrgApacheLuceneAnalysisSvSwedishLightStemFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisSvSwedishLightStemFilter || defined(INCLUDE_OrgApacheLuceneAnalysisSvSwedishLightStemFilter))
+#define OrgApacheLuceneAnalysisSvSwedishLightStemFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief A <code>TokenFilter</code> that applies <code>SwedishLightStemmer</code> to stem Swedish
+ words.
+ <p>
+ To prevent terms from being stemmed use an instance of
+ <code>SetKeywordMarkerFilter</code> or a custom <code>TokenFilter</code> that sets
+ the <code>KeywordAttribute</code> before this <code>TokenStream</code>.
+ </p>
+ */
 @interface OrgApacheLuceneAnalysisSvSwedishLightStemFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
@@ -38,8 +47,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSvSwedishLightStemFilter_initWithO
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisSvSwedishLightStemFilter *new_OrgApacheLuceneAnalysisSvSwedishLightStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisSvSwedishLightStemFilter *create_OrgApacheLuceneAnalysisSvSwedishLightStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSvSwedishLightStemFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisSvSwedishLightStemFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisSvSwedishLightStemFilter")

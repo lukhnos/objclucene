@@ -5,24 +5,30 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexByteSliceWriter_INCLUDE_ALL")
-#if OrgApacheLuceneIndexByteSliceWriter_RESTRICT
-#define OrgApacheLuceneIndexByteSliceWriter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexByteSliceWriter")
+#ifdef RESTRICT_OrgApacheLuceneIndexByteSliceWriter
+#define INCLUDE_ALL_OrgApacheLuceneIndexByteSliceWriter 0
 #else
-#define OrgApacheLuceneIndexByteSliceWriter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexByteSliceWriter 1
 #endif
-#undef OrgApacheLuceneIndexByteSliceWriter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexByteSliceWriter
 
-#if !defined (_OrgApacheLuceneIndexByteSliceWriter_) && (OrgApacheLuceneIndexByteSliceWriter_INCLUDE_ALL || OrgApacheLuceneIndexByteSliceWriter_INCLUDE)
-#define _OrgApacheLuceneIndexByteSliceWriter_
+#if !defined (OrgApacheLuceneIndexByteSliceWriter_) && (INCLUDE_ALL_OrgApacheLuceneIndexByteSliceWriter || defined(INCLUDE_OrgApacheLuceneIndexByteSliceWriter))
+#define OrgApacheLuceneIndexByteSliceWriter_
 
-#define OrgApacheLuceneStoreDataOutput_RESTRICT 1
-#define OrgApacheLuceneStoreDataOutput_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreDataOutput 1
+#define INCLUDE_OrgApacheLuceneStoreDataOutput 1
 #include "org/apache/lucene/store/DataOutput.h"
 
 @class IOSByteArray;
 @class OrgApacheLuceneUtilByteBlockPool;
 
+/*!
+ @brief Class to write byte streams into slices of shared
+ byte[].
+ This is used by DocumentsWriter to hold the
+ posting list for many terms in RAM.
+ */
 @interface OrgApacheLuceneIndexByteSliceWriter : OrgApacheLuceneStoreDataOutput {
  @public
   jint offset0_;
@@ -34,8 +40,14 @@
 
 - (jint)getAddress;
 
+/*!
+ @brief Set up the writer to write at address.
+ */
 - (void)init__WithInt:(jint)address OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Write byte into byte slice stream
+ */
 - (void)writeByteWithByte:(jbyte)b;
 
 - (void)writeBytesWithByteArray:(IOSByteArray *)b
@@ -50,8 +62,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexByteSliceWriter_initWithOrgApacheLuce
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexByteSliceWriter *new_OrgApacheLuceneIndexByteSliceWriter_initWithOrgApacheLuceneUtilByteBlockPool_(OrgApacheLuceneUtilByteBlockPool *pool) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexByteSliceWriter *create_OrgApacheLuceneIndexByteSliceWriter_initWithOrgApacheLuceneUtilByteBlockPool_(OrgApacheLuceneUtilByteBlockPool *pool);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexByteSliceWriter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexByteSliceWriter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexByteSliceWriter")

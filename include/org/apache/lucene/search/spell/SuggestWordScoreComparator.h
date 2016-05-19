@@ -5,27 +5,34 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSpellSuggestWordScoreComparator_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSpellSuggestWordScoreComparator_RESTRICT
-#define OrgApacheLuceneSearchSpellSuggestWordScoreComparator_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpellSuggestWordScoreComparator")
+#ifdef RESTRICT_OrgApacheLuceneSearchSpellSuggestWordScoreComparator
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpellSuggestWordScoreComparator 0
 #else
-#define OrgApacheLuceneSearchSpellSuggestWordScoreComparator_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpellSuggestWordScoreComparator 1
 #endif
-#undef OrgApacheLuceneSearchSpellSuggestWordScoreComparator_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSpellSuggestWordScoreComparator
 
-#if !defined (_OrgApacheLuceneSearchSpellSuggestWordScoreComparator_) && (OrgApacheLuceneSearchSpellSuggestWordScoreComparator_INCLUDE_ALL || OrgApacheLuceneSearchSpellSuggestWordScoreComparator_INCLUDE)
-#define _OrgApacheLuceneSearchSpellSuggestWordScoreComparator_
+#if !defined (OrgApacheLuceneSearchSpellSuggestWordScoreComparator_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpellSuggestWordScoreComparator || defined(INCLUDE_OrgApacheLuceneSearchSpellSuggestWordScoreComparator))
+#define OrgApacheLuceneSearchSpellSuggestWordScoreComparator_
 
-#define JavaUtilComparator_RESTRICT 1
-#define JavaUtilComparator_INCLUDE 1
+#define RESTRICT_JavaUtilComparator 1
+#define INCLUDE_JavaUtilComparator 1
 #include "java/util/Comparator.h"
 
 @class OrgApacheLuceneSearchSpellSuggestWord;
 
+/*!
+ @brief Score first, then frequency
+ */
 @interface OrgApacheLuceneSearchSpellSuggestWordScoreComparator : NSObject < JavaUtilComparator >
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new comparator that will compare by <code>SuggestWord.score</code>,
+ then by <code>SuggestWord.freq</code>, then by <code>SuggestWord.string</code>.
+ */
 - (instancetype)init;
 
 - (jint)compareWithId:(OrgApacheLuceneSearchSpellSuggestWord *)first
@@ -39,8 +46,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSpellSuggestWordScoreComparator_init
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSpellSuggestWordScoreComparator *new_OrgApacheLuceneSearchSpellSuggestWordScoreComparator_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpellSuggestWordScoreComparator *create_OrgApacheLuceneSearchSpellSuggestWordScoreComparator_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellSuggestWordScoreComparator)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSpellSuggestWordScoreComparator_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpellSuggestWordScoreComparator")

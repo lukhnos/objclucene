@@ -3,10 +3,7 @@
 //  source: ./core/src/java/org/apache/lucene/util/automaton/AutomatonProvider.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "org/apache/lucene/util/automaton/Automaton.h"
 #include "org/apache/lucene/util/automaton/AutomatonProvider.h"
 
 @interface OrgApacheLuceneUtilAutomatonAutomatonProvider : NSObject

@@ -77,7 +77,7 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
 
 - (id)mergeWithId:(id)first
            withId:(id)second {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (jlong)ramBytesUsedWithId:(id)output {
@@ -108,7 +108,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "outputToStringWithId:", "outputToString", "Ljava.lang.String;", 0x401, NULL, "(TT;)Ljava/lang/String;" },
     { "mergeWithId:withId:", "merge", "TT;", 0x1, NULL, "(TT;TT;)TT;" },
     { "ramBytesUsedWithId:", "ramBytesUsed", "J", 0x401, NULL, "(TT;)J" },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "Outputs", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneUtilFstOutputs = { 2, "Outputs", "org.apache.lucene.util.fst", NULL, 0x401, 14, methods, 0, NULL, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
   return &_OrgApacheLuceneUtilFstOutputs;

@@ -16,13 +16,13 @@
 }
 
 - (void)copy__WithOrgApacheLuceneUtilMutableMutableValue:(OrgApacheLuceneUtilMutableMutableValue *)source {
-  OrgApacheLuceneUtilMutableMutableValueInt *s = (OrgApacheLuceneUtilMutableMutableValueInt *) check_class_cast(source, [OrgApacheLuceneUtilMutableMutableValueInt class]);
+  OrgApacheLuceneUtilMutableMutableValueInt *s = (OrgApacheLuceneUtilMutableMutableValueInt *) cast_chk(source, [OrgApacheLuceneUtilMutableMutableValueInt class]);
   value_ = ((OrgApacheLuceneUtilMutableMutableValueInt *) nil_chk(s))->value_;
   exists_ = s->exists_;
 }
 
 - (OrgApacheLuceneUtilMutableMutableValue *)duplicate {
-  OrgApacheLuceneUtilMutableMutableValueInt *v = [new_OrgApacheLuceneUtilMutableMutableValueInt_init() autorelease];
+  OrgApacheLuceneUtilMutableMutableValueInt *v = create_OrgApacheLuceneUtilMutableMutableValueInt_init();
   v->value_ = self->value_;
   v->exists_ = self->exists_;
   return v;
@@ -30,13 +30,13 @@
 
 - (jboolean)equalsSameTypeWithId:(id)other {
   JreAssert((exists_ || 0 == value_), (@"org/apache/lucene/util/mutable/MutableValueInt.java:51 condition failed: assert exists || 0 == value;"));
-  OrgApacheLuceneUtilMutableMutableValueInt *b = (OrgApacheLuceneUtilMutableMutableValueInt *) check_class_cast(other, [OrgApacheLuceneUtilMutableMutableValueInt class]);
+  OrgApacheLuceneUtilMutableMutableValueInt *b = (OrgApacheLuceneUtilMutableMutableValueInt *) cast_chk(other, [OrgApacheLuceneUtilMutableMutableValueInt class]);
   return value_ == ((OrgApacheLuceneUtilMutableMutableValueInt *) nil_chk(b))->value_ && exists_ == b->exists_;
 }
 
 - (jint)compareSameTypeWithId:(id)other {
   JreAssert((exists_ || 0 == value_), (@"org/apache/lucene/util/mutable/MutableValueInt.java:58 condition failed: assert exists || 0 == value;"));
-  OrgApacheLuceneUtilMutableMutableValueInt *b = (OrgApacheLuceneUtilMutableMutableValueInt *) check_class_cast(other, [OrgApacheLuceneUtilMutableMutableValueInt class]);
+  OrgApacheLuceneUtilMutableMutableValueInt *b = (OrgApacheLuceneUtilMutableMutableValueInt *) cast_chk(other, [OrgApacheLuceneUtilMutableMutableValueInt class]);
   jint ai = value_;
   jint bi = ((OrgApacheLuceneUtilMutableMutableValueInt *) nil_chk(b))->value_;
   if (ai < bi) return -1;
@@ -65,7 +65,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "equalsSameTypeWithId:", "equalsSameType", "Z", 0x1, NULL, NULL },
     { "compareSameTypeWithId:", "compareSameType", "I", 0x1, NULL, NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "MutableValueInt", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "value_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
@@ -81,9 +81,11 @@ void OrgApacheLuceneUtilMutableMutableValueInt_init(OrgApacheLuceneUtilMutableMu
 }
 
 OrgApacheLuceneUtilMutableMutableValueInt *new_OrgApacheLuceneUtilMutableMutableValueInt_init() {
-  OrgApacheLuceneUtilMutableMutableValueInt *self = [OrgApacheLuceneUtilMutableMutableValueInt alloc];
-  OrgApacheLuceneUtilMutableMutableValueInt_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilMutableMutableValueInt, init)
+}
+
+OrgApacheLuceneUtilMutableMutableValueInt *create_OrgApacheLuceneUtilMutableMutableValueInt_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilMutableMutableValueInt, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilMutableMutableValueInt)

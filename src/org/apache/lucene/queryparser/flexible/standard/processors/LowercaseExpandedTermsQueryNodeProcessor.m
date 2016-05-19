@@ -33,7 +33,7 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryTree {
-  JavaLangBoolean *lowercaseExpandedTerms = [((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk([self getQueryConfigHandler])) getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, LOWERCASE_EXPANDED_TERMS_)];
+  JavaLangBoolean *lowercaseExpandedTerms = [((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk([self getQueryConfigHandler])) getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, LOWERCASE_EXPANDED_TERMS)];
   if (lowercaseExpandedTerms != nil && [lowercaseExpandedTerms booleanValue]) {
     return [super processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:queryTree];
   }
@@ -41,12 +41,12 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node {
-  JavaUtilLocale *locale = [((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk([self getQueryConfigHandler])) getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, LOCALE_)];
+  JavaUtilLocale *locale = [((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk([self getQueryConfigHandler])) getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, LOCALE)];
   if (locale == nil) {
     locale = JavaUtilLocale_getDefault();
   }
   if ([node isKindOfClass:[OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode class]] || [node isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode class]] || ([node isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode class]] && [OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode_class_() isInstance:[((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(node)) getParent]]) || [node isKindOfClass:[OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode class]]) {
-    id<OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode> txtNode = (id<OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode>) check_protocol_cast(node, OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode_class_());
+    id<OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode> txtNode = (id<OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode>) cast_check(node, OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode_class_());
     id<JavaLangCharSequence> text = [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode>) nil_chk(txtNode)) getText];
     [txtNode setTextWithJavaLangCharSequence:text != nil ? OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_toLowerCaseWithJavaLangCharSequence_withJavaUtilLocale_(text, locale) : nil];
   }
@@ -67,7 +67,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "process", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x1, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
     { "postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "postProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
     { "preProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "preProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "setChildrenOrderWithJavaUtilList:", "setChildrenOrder", "Ljava.util.List;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
+    { "setChildrenOrderWithJavaUtilList:", "setChildrenOrder", "Ljava.util.List;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;)Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;" },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardProcessorsLowercaseExpandedTermsQueryNodeProcessor = { 2, "LowercaseExpandedTermsQueryNodeProcessor", "org.apache.lucene.queryparser.flexible.standard.processors", NULL, 0x1, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleStandardProcessorsLowercaseExpandedTermsQueryNodeProcessor;
@@ -80,9 +80,11 @@ void OrgApacheLuceneQueryparserFlexibleStandardProcessorsLowercaseExpandedTermsQ
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardProcessorsLowercaseExpandedTermsQueryNodeProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsLowercaseExpandedTermsQueryNodeProcessor_init() {
-  OrgApacheLuceneQueryparserFlexibleStandardProcessorsLowercaseExpandedTermsQueryNodeProcessor *self = [OrgApacheLuceneQueryparserFlexibleStandardProcessorsLowercaseExpandedTermsQueryNodeProcessor alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardProcessorsLowercaseExpandedTermsQueryNodeProcessor_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardProcessorsLowercaseExpandedTermsQueryNodeProcessor, init)
+}
+
+OrgApacheLuceneQueryparserFlexibleStandardProcessorsLowercaseExpandedTermsQueryNodeProcessor *create_OrgApacheLuceneQueryparserFlexibleStandardProcessorsLowercaseExpandedTermsQueryNodeProcessor_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardProcessorsLowercaseExpandedTermsQueryNodeProcessor, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleStandardProcessorsLowercaseExpandedTermsQueryNodeProcessor)

@@ -3,14 +3,17 @@
 //  source: ./suggest/src/java/org/apache/lucene/search/suggest/tst/package-info.java
 //
 
+/*!
+ @brief Ternary Search Tree based autosuggest.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSuggestTstPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSuggestTstPackage_info_RESTRICT
-#define OrgApacheLuceneSearchSuggestTstPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestTstPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneSearchSuggestTstPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestTstPackage_info 0
 #else
-#define OrgApacheLuceneSearchSuggestTstPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestTstPackage_info 1
 #endif
-#undef OrgApacheLuceneSearchSuggestTstPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSuggestTstPackage_info
 
-#pragma pop_macro("OrgApacheLuceneSearchSuggestTstPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestTstPackage_info")

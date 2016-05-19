@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexSortedDocValuesWriter_INCLUDE_ALL")
-#if OrgApacheLuceneIndexSortedDocValuesWriter_RESTRICT
-#define OrgApacheLuceneIndexSortedDocValuesWriter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexSortedDocValuesWriter")
+#ifdef RESTRICT_OrgApacheLuceneIndexSortedDocValuesWriter
+#define INCLUDE_ALL_OrgApacheLuceneIndexSortedDocValuesWriter 0
 #else
-#define OrgApacheLuceneIndexSortedDocValuesWriter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexSortedDocValuesWriter 1
 #endif
-#undef OrgApacheLuceneIndexSortedDocValuesWriter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexSortedDocValuesWriter
 
-#if !defined (_OrgApacheLuceneIndexSortedDocValuesWriter_) && (OrgApacheLuceneIndexSortedDocValuesWriter_INCLUDE_ALL || OrgApacheLuceneIndexSortedDocValuesWriter_INCLUDE)
-#define _OrgApacheLuceneIndexSortedDocValuesWriter_
+#if !defined (OrgApacheLuceneIndexSortedDocValuesWriter_) && (INCLUDE_ALL_OrgApacheLuceneIndexSortedDocValuesWriter || defined(INCLUDE_OrgApacheLuceneIndexSortedDocValuesWriter))
+#define OrgApacheLuceneIndexSortedDocValuesWriter_
 
-#define OrgApacheLuceneIndexDocValuesWriter_RESTRICT 1
-#define OrgApacheLuceneIndexDocValuesWriter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexDocValuesWriter 1
+#define INCLUDE_OrgApacheLuceneIndexDocValuesWriter 1
 #include "org/apache/lucene/index/DocValuesWriter.h"
 
 @class OrgApacheLuceneCodecsDocValuesConsumer;
@@ -27,6 +27,10 @@
 @class OrgApacheLuceneUtilBytesRefHash;
 @class OrgApacheLuceneUtilCounter;
 
+/*!
+ @brief Buffers up pending byte[] per doc, deref and sorting via
+ int ord, then flushes when segment flushes.
+ */
 @interface OrgApacheLuceneIndexSortedDocValuesWriter : OrgApacheLuceneIndexDocValuesWriter {
  @public
   OrgApacheLuceneUtilBytesRefHash *hash__;
@@ -55,8 +59,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexSortedDocValuesWriter_initWithOrgApac
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexSortedDocValuesWriter *new_OrgApacheLuceneIndexSortedDocValuesWriter_initWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilCounter_(OrgApacheLuceneIndexFieldInfo *fieldInfo, OrgApacheLuceneUtilCounter *iwBytesUsed) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexSortedDocValuesWriter *create_OrgApacheLuceneIndexSortedDocValuesWriter_initWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilCounter_(OrgApacheLuceneIndexFieldInfo *fieldInfo, OrgApacheLuceneUtilCounter *iwBytesUsed);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortedDocValuesWriter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexSortedDocValuesWriter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSortedDocValuesWriter")

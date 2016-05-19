@@ -24,11 +24,11 @@
 
 @interface OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardBooleanQueryNodeBuilder ()
 
-+ (OrgApacheLuceneSearchBooleanClause_OccurEnum *)getModifierValueWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node;
++ (OrgApacheLuceneSearchBooleanClause_Occur *)getModifierValueWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node;
 
 @end
 
-__attribute__((unused)) static OrgApacheLuceneSearchBooleanClause_OccurEnum *OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardBooleanQueryNodeBuilder_getModifierValueWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> node);
+__attribute__((unused)) static OrgApacheLuceneSearchBooleanClause_Occur *OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardBooleanQueryNodeBuilder_getModifierValueWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> node);
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardBooleanQueryNodeBuilder
 
@@ -40,20 +40,20 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneSearchBooleanQuery *)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode {
-  OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode *booleanNode = (OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode *) check_class_cast(queryNode, [OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode class]);
-  OrgApacheLuceneSearchBooleanQuery_Builder *bQuery = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
+  OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode *booleanNode = (OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode *) cast_chk(queryNode, [OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode class]);
+  OrgApacheLuceneSearchBooleanQuery_Builder *bQuery = create_OrgApacheLuceneSearchBooleanQuery_Builder_init();
   [bQuery setDisableCoordWithBoolean:[((OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode *) nil_chk(booleanNode)) isDisableCoord]];
   id<JavaUtilList> children = [booleanNode getChildren];
   if (children != nil) {
     for (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> __strong child in children) {
-      id obj = [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(child)) getTagWithNSString:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder, QUERY_TREE_BUILDER_TAGID_)];
+      id obj = [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(child)) getTagWithNSString:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder, QUERY_TREE_BUILDER_TAGID)];
       if (obj != nil) {
-        OrgApacheLuceneSearchQuery *query = (OrgApacheLuceneSearchQuery *) check_class_cast(obj, [OrgApacheLuceneSearchQuery class]);
+        OrgApacheLuceneSearchQuery *query = (OrgApacheLuceneSearchQuery *) cast_chk(obj, [OrgApacheLuceneSearchQuery class]);
         @try {
-          [bQuery addWithOrgApacheLuceneSearchQuery:query withOrgApacheLuceneSearchBooleanClause_OccurEnum:OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardBooleanQueryNodeBuilder_getModifierValueWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_(child)];
+          [bQuery addWithOrgApacheLuceneSearchQuery:query withOrgApacheLuceneSearchBooleanClause_Occur:OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardBooleanQueryNodeBuilder_getModifierValueWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_(child)];
         }
         @catch (OrgApacheLuceneSearchBooleanQuery_TooManyClauses *ex) {
-          @throw [new_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_withJavaLangThrowable_([new_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, TOO_MANY_BOOLEAN_CLAUSES_), [IOSObjectArray arrayWithObjects:(id[]){ JavaLangInteger_valueOfWithInt_(OrgApacheLuceneSearchBooleanQuery_getMaxClauseCount()), [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(queryNode)) toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:[new_OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_init() autorelease]] } count:2 type:NSObject_class_()]) autorelease], ex) autorelease];
+          @throw create_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_withNSException_(create_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, TOO_MANY_BOOLEAN_CLAUSES), [IOSObjectArray arrayWithObjects:(id[]){ JavaLangInteger_valueOfWithInt_(OrgApacheLuceneSearchBooleanQuery_getMaxClauseCount()), [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(queryNode)) toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:create_OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_init()] } count:2 type:NSObject_class_()]), ex);
         }
       }
     }
@@ -61,7 +61,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return [bQuery build];
 }
 
-+ (OrgApacheLuceneSearchBooleanClause_OccurEnum *)getModifierValueWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node {
++ (OrgApacheLuceneSearchBooleanClause_Occur *)getModifierValueWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node {
   return OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardBooleanQueryNodeBuilder_getModifierValueWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_(node);
 }
 
@@ -82,27 +82,29 @@ void OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardBooleanQueryNodeB
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardBooleanQueryNodeBuilder *new_OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardBooleanQueryNodeBuilder_init() {
-  OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardBooleanQueryNodeBuilder *self = [OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardBooleanQueryNodeBuilder alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardBooleanQueryNodeBuilder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardBooleanQueryNodeBuilder, init)
 }
 
-OrgApacheLuceneSearchBooleanClause_OccurEnum *OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardBooleanQueryNodeBuilder_getModifierValueWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> node) {
+OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardBooleanQueryNodeBuilder *create_OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardBooleanQueryNodeBuilder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardBooleanQueryNodeBuilder, init)
+}
+
+OrgApacheLuceneSearchBooleanClause_Occur *OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardBooleanQueryNodeBuilder_getModifierValueWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> node) {
   OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardBooleanQueryNodeBuilder_initialize();
   if ([node isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode class]]) {
-    OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode *mNode = ((OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode *) check_class_cast(node, [OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode class]));
-    OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_ModifierEnum *modifier = [((OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode *) nil_chk(mNode)) getModifier];
-    if ([((OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_ModifierEnum *) nil_chk(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_ModifierEnum, MOD_NONE))) isEqual:modifier]) {
-      return JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD);
+    OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode *mNode = ((OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode *) cast_chk(node, [OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode class]));
+    OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier *modifier = [((OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode *) nil_chk(mNode)) getModifier];
+    if ([((OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier *) nil_chk(JreLoadEnum(OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier, MOD_NONE))) isEqual:modifier]) {
+      return JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD);
     }
-    else if ([((OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_ModifierEnum *) nil_chk(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_ModifierEnum, MOD_NOT))) isEqual:modifier]) {
-      return JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, MUST_NOT);
+    else if ([((OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier *) nil_chk(JreLoadEnum(OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_Modifier, MOD_NOT))) isEqual:modifier]) {
+      return JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, MUST_NOT);
     }
     else {
-      return JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, MUST);
+      return JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, MUST);
     }
   }
-  return JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD);
+  return JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardBooleanQueryNodeBuilder)

@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneRangetreeOfflineSliceWriter_INCLUDE_ALL")
-#if OrgApacheLuceneRangetreeOfflineSliceWriter_RESTRICT
-#define OrgApacheLuceneRangetreeOfflineSliceWriter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneRangetreeOfflineSliceWriter")
+#ifdef RESTRICT_OrgApacheLuceneRangetreeOfflineSliceWriter
+#define INCLUDE_ALL_OrgApacheLuceneRangetreeOfflineSliceWriter 0
 #else
-#define OrgApacheLuceneRangetreeOfflineSliceWriter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneRangetreeOfflineSliceWriter 1
 #endif
-#undef OrgApacheLuceneRangetreeOfflineSliceWriter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneRangetreeOfflineSliceWriter
 
-#if !defined (_OrgApacheLuceneRangetreeOfflineSliceWriter_) && (OrgApacheLuceneRangetreeOfflineSliceWriter_INCLUDE_ALL || OrgApacheLuceneRangetreeOfflineSliceWriter_INCLUDE)
-#define _OrgApacheLuceneRangetreeOfflineSliceWriter_
+#if !defined (OrgApacheLuceneRangetreeOfflineSliceWriter_) && (INCLUDE_ALL_OrgApacheLuceneRangetreeOfflineSliceWriter || defined(INCLUDE_OrgApacheLuceneRangetreeOfflineSliceWriter))
+#define OrgApacheLuceneRangetreeOfflineSliceWriter_
 
-#define OrgApacheLuceneRangetreeSliceWriter_RESTRICT 1
-#define OrgApacheLuceneRangetreeSliceWriter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneRangetreeSliceWriter 1
+#define INCLUDE_OrgApacheLuceneRangetreeSliceWriter 1
 #include "org/apache/lucene/rangetree/SliceWriter.h"
 
 @class IOSByteArray;
@@ -65,8 +65,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneRangetreeOfflineSliceWriter_initWithOrgLuk
 
 FOUNDATION_EXPORT OrgApacheLuceneRangetreeOfflineSliceWriter *new_OrgApacheLuceneRangetreeOfflineSliceWriter_initWithOrgLukhnosPortmobileFilePath_withLong_(OrgLukhnosPortmobileFilePath *tempDir, jlong count) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeOfflineSliceWriter *create_OrgApacheLuceneRangetreeOfflineSliceWriter_initWithOrgLukhnosPortmobileFilePath_withLong_(OrgLukhnosPortmobileFilePath *tempDir, jlong count);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeOfflineSliceWriter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneRangetreeOfflineSliceWriter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneRangetreeOfflineSliceWriter")

@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchConjunctionScorer_INCLUDE_ALL")
-#if OrgApacheLuceneSearchConjunctionScorer_RESTRICT
-#define OrgApacheLuceneSearchConjunctionScorer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchConjunctionScorer")
+#ifdef RESTRICT_OrgApacheLuceneSearchConjunctionScorer
+#define INCLUDE_ALL_OrgApacheLuceneSearchConjunctionScorer 0
 #else
-#define OrgApacheLuceneSearchConjunctionScorer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchConjunctionScorer 1
 #endif
-#undef OrgApacheLuceneSearchConjunctionScorer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchConjunctionScorer
 
-#if !defined (_OrgApacheLuceneSearchConjunctionScorer_) && (OrgApacheLuceneSearchConjunctionScorer_INCLUDE_ALL || OrgApacheLuceneSearchConjunctionScorer_INCLUDE)
-#define _OrgApacheLuceneSearchConjunctionScorer_
+#if !defined (OrgApacheLuceneSearchConjunctionScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchConjunctionScorer || defined(INCLUDE_OrgApacheLuceneSearchConjunctionScorer))
+#define OrgApacheLuceneSearchConjunctionScorer_
 
-#define OrgApacheLuceneSearchScorer_RESTRICT 1
-#define OrgApacheLuceneSearchScorer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchScorer 1
+#define INCLUDE_OrgApacheLuceneSearchScorer 1
 #include "org/apache/lucene/search/Scorer.h"
 
 @class OrgApacheLuceneSearchTwoPhaseIterator;
@@ -25,6 +25,9 @@
 @protocol JavaUtilCollection;
 @protocol JavaUtilList;
 
+/*!
+ @brief Scorer for conjunctions, sets of queries, all of which are required.
+ */
 @interface OrgApacheLuceneSearchConjunctionScorer : OrgApacheLuceneSearchScorer
 
 #pragma mark Public
@@ -51,6 +54,9 @@
                                    withJavaUtilList:(id<JavaUtilList>)required
                                    withJavaUtilList:(id<JavaUtilList>)scorers;
 
+/*!
+ @brief Create a new <code>ConjunctionScorer</code>, note that <code>scorers</code> must be a subset of <code>required</code>.
+ */
 - (instancetype)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
                                    withJavaUtilList:(id<JavaUtilList>)required
                                    withJavaUtilList:(id<JavaUtilList>)scorers
@@ -64,16 +70,20 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchConjunctionScorer_initWithOrgApacheL
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchConjunctionScorer *new_OrgApacheLuceneSearchConjunctionScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_(OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> required, id<JavaUtilList> scorers) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchConjunctionScorer *create_OrgApacheLuceneSearchConjunctionScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_(OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> required, id<JavaUtilList> scorers);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchConjunctionScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_withFloat_(OrgApacheLuceneSearchConjunctionScorer *self, OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> required, id<JavaUtilList> scorers, jfloat coord);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchConjunctionScorer *new_OrgApacheLuceneSearchConjunctionScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_withFloat_(OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> required, id<JavaUtilList> scorers, jfloat coord) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchConjunctionScorer *create_OrgApacheLuceneSearchConjunctionScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withJavaUtilList_withFloat_(OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> required, id<JavaUtilList> scorers, jfloat coord);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchConjunctionScorer)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchConjunctionScorer_DocsAndFreqs_) && (OrgApacheLuceneSearchConjunctionScorer_INCLUDE_ALL || OrgApacheLuceneSearchConjunctionScorer_DocsAndFreqs_INCLUDE)
-#define _OrgApacheLuceneSearchConjunctionScorer_DocsAndFreqs_
+#if !defined (OrgApacheLuceneSearchConjunctionScorer_DocsAndFreqs_) && (INCLUDE_ALL_OrgApacheLuceneSearchConjunctionScorer || defined(INCLUDE_OrgApacheLuceneSearchConjunctionScorer_DocsAndFreqs))
+#define OrgApacheLuceneSearchConjunctionScorer_DocsAndFreqs_
 
 @class OrgApacheLuceneSearchDocIdSetIterator;
 
@@ -98,8 +108,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchConjunctionScorer_DocsAndFreqs_initW
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchConjunctionScorer_DocsAndFreqs *new_OrgApacheLuceneSearchConjunctionScorer_DocsAndFreqs_initWithOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchDocIdSetIterator *iterator) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchConjunctionScorer_DocsAndFreqs *create_OrgApacheLuceneSearchConjunctionScorer_DocsAndFreqs_initWithOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchDocIdSetIterator *iterator);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchConjunctionScorer_DocsAndFreqs)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchConjunctionScorer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchConjunctionScorer")

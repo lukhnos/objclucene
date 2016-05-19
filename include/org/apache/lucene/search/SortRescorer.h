@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSortRescorer_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSortRescorer_RESTRICT
-#define OrgApacheLuceneSearchSortRescorer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSortRescorer")
+#ifdef RESTRICT_OrgApacheLuceneSearchSortRescorer
+#define INCLUDE_ALL_OrgApacheLuceneSearchSortRescorer 0
 #else
-#define OrgApacheLuceneSearchSortRescorer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSortRescorer 1
 #endif
-#undef OrgApacheLuceneSearchSortRescorer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSortRescorer
 
-#if !defined (_OrgApacheLuceneSearchSortRescorer_) && (OrgApacheLuceneSearchSortRescorer_INCLUDE_ALL || OrgApacheLuceneSearchSortRescorer_INCLUDE)
-#define _OrgApacheLuceneSearchSortRescorer_
+#if !defined (OrgApacheLuceneSearchSortRescorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchSortRescorer || defined(INCLUDE_OrgApacheLuceneSearchSortRescorer))
+#define OrgApacheLuceneSearchSortRescorer_
 
-#define OrgApacheLuceneSearchRescorer_RESTRICT 1
-#define OrgApacheLuceneSearchRescorer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchRescorer 1
+#define INCLUDE_OrgApacheLuceneSearchRescorer 1
 #include "org/apache/lucene/search/Rescorer.h"
 
 @class OrgApacheLuceneSearchExplanation;
@@ -25,10 +25,17 @@
 @class OrgApacheLuceneSearchSort;
 @class OrgApacheLuceneSearchTopDocs;
 
+/*!
+ @brief A <code>Rescorer</code> that re-sorts according to a provided
+ Sort.
+ */
 @interface OrgApacheLuceneSearchSortRescorer : OrgApacheLuceneSearchRescorer
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ */
 - (instancetype)initWithOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort;
 
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
@@ -47,8 +54,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSortRescorer_initWithOrgApacheLucene
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSortRescorer *new_OrgApacheLuceneSearchSortRescorer_initWithOrgApacheLuceneSearchSort_(OrgApacheLuceneSearchSort *sort) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSortRescorer *create_OrgApacheLuceneSearchSortRescorer_initWithOrgApacheLuceneSearchSort_(OrgApacheLuceneSearchSort *sort);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortRescorer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSortRescorer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSortRescorer")

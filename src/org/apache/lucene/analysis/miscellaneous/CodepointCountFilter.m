@@ -73,19 +73,21 @@ void OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter_initWithOrgApacheL
   OrgApacheLuceneAnalysisUtilFilteringTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, inArg);
   JreStrongAssign(&self->termAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()]);
   if (min < 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"minimum length must be greater than or equal to zero") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"minimum length must be greater than or equal to zero");
   }
   if (min > max) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"maximum length must not be greater than minimum length") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"maximum length must not be greater than minimum length");
   }
   self->min_ = min;
   self->max_ = max;
 }
 
 OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter *new_OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(OrgApacheLuceneAnalysisTokenStream *inArg, jint min, jint max) {
-  OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter *self = [OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter alloc];
-  OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(self, inArg, min, max);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter, initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_, inArg, min, max)
+}
+
+OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter *create_OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(OrgApacheLuceneAnalysisTokenStream *inArg, jint min, jint max) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter, initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_, inArg, min, max)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter)

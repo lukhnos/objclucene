@@ -5,24 +5,28 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter_RESTRICT
-#define OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter 0
 #else
-#define OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter
 
-#if !defined (_OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter_) && (OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter_
+#if !defined (OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter || defined(INCLUDE_OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter))
+#define OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter_
 
-#define OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter 1
 #include "org/apache/lucene/analysis/util/Lucene43FilteringTokenFilter.h"
 
+@class IOSObjectArray;
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol JavaUtilSet;
 
+/*!
+ @brief Backcompat TypeTokenFilter for versions 4.3 and before.
+ */
 @interface OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter : OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter
 
 #pragma mark Public
@@ -34,6 +38,10 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inp
 
 #pragma mark Protected
 
+/*!
+ @brief By default accept the token if its type is not a stop type.
+ When the useWhiteList parameter is set to true then accept the token if its type is contained in the stopTypes
+ */
 - (jboolean)accept;
 
 @end
@@ -44,8 +52,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter_initWi
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter *new_OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withJavaUtilSet_withBoolean_(jboolean enablePositionIncrements, OrgApacheLuceneAnalysisTokenStream *input, id<JavaUtilSet> stopTypes, jboolean useWhiteList) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter *create_OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withJavaUtilSet_withBoolean_(jboolean enablePositionIncrements, OrgApacheLuceneAnalysisTokenStream *input, id<JavaUtilSet> stopTypes, jboolean useWhiteList);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter")

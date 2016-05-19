@@ -5,60 +5,135 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchFieldComparator_INCLUDE_ALL")
-#if OrgApacheLuceneSearchFieldComparator_RESTRICT
-#define OrgApacheLuceneSearchFieldComparator_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchFieldComparator")
+#ifdef RESTRICT_OrgApacheLuceneSearchFieldComparator
+#define INCLUDE_ALL_OrgApacheLuceneSearchFieldComparator 0
 #else
-#define OrgApacheLuceneSearchFieldComparator_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchFieldComparator 1
 #endif
-#undef OrgApacheLuceneSearchFieldComparator_RESTRICT
-#if OrgApacheLuceneSearchFieldComparator_TermValComparator_INCLUDE
-#define OrgApacheLuceneSearchFieldComparator_INCLUDE 1
+#undef RESTRICT_OrgApacheLuceneSearchFieldComparator
+#ifdef INCLUDE_OrgApacheLuceneSearchFieldComparator_TermValComparator
+#define INCLUDE_OrgApacheLuceneSearchFieldComparator 1
 #endif
-#if OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_INCLUDE
-#define OrgApacheLuceneSearchFieldComparator_INCLUDE 1
+#ifdef INCLUDE_OrgApacheLuceneSearchFieldComparator_TermOrdValComparator
+#define INCLUDE_OrgApacheLuceneSearchFieldComparator 1
 #endif
-#if OrgApacheLuceneSearchFieldComparator_DocComparator_INCLUDE
-#define OrgApacheLuceneSearchFieldComparator_INCLUDE 1
+#ifdef INCLUDE_OrgApacheLuceneSearchFieldComparator_DocComparator
+#define INCLUDE_OrgApacheLuceneSearchFieldComparator 1
 #endif
-#if OrgApacheLuceneSearchFieldComparator_RelevanceComparator_INCLUDE
-#define OrgApacheLuceneSearchFieldComparator_INCLUDE 1
+#ifdef INCLUDE_OrgApacheLuceneSearchFieldComparator_RelevanceComparator
+#define INCLUDE_OrgApacheLuceneSearchFieldComparator 1
 #endif
-#if OrgApacheLuceneSearchFieldComparator_LongComparator_INCLUDE
-#define OrgApacheLuceneSearchFieldComparator_NumericComparator_INCLUDE 1
+#ifdef INCLUDE_OrgApacheLuceneSearchFieldComparator_LongComparator
+#define INCLUDE_OrgApacheLuceneSearchFieldComparator_NumericComparator 1
 #endif
-#if OrgApacheLuceneSearchFieldComparator_IntComparator_INCLUDE
-#define OrgApacheLuceneSearchFieldComparator_NumericComparator_INCLUDE 1
+#ifdef INCLUDE_OrgApacheLuceneSearchFieldComparator_IntComparator
+#define INCLUDE_OrgApacheLuceneSearchFieldComparator_NumericComparator 1
 #endif
-#if OrgApacheLuceneSearchFieldComparator_FloatComparator_INCLUDE
-#define OrgApacheLuceneSearchFieldComparator_NumericComparator_INCLUDE 1
+#ifdef INCLUDE_OrgApacheLuceneSearchFieldComparator_FloatComparator
+#define INCLUDE_OrgApacheLuceneSearchFieldComparator_NumericComparator 1
 #endif
-#if OrgApacheLuceneSearchFieldComparator_DoubleComparator_INCLUDE
-#define OrgApacheLuceneSearchFieldComparator_NumericComparator_INCLUDE 1
+#ifdef INCLUDE_OrgApacheLuceneSearchFieldComparator_DoubleComparator
+#define INCLUDE_OrgApacheLuceneSearchFieldComparator_NumericComparator 1
 #endif
 
-#if !defined (_OrgApacheLuceneSearchFieldComparator_) && (OrgApacheLuceneSearchFieldComparator_INCLUDE_ALL || OrgApacheLuceneSearchFieldComparator_INCLUDE)
-#define _OrgApacheLuceneSearchFieldComparator_
+#if !defined (OrgApacheLuceneSearchFieldComparator_) && (INCLUDE_ALL_OrgApacheLuceneSearchFieldComparator || defined(INCLUDE_OrgApacheLuceneSearchFieldComparator))
+#define OrgApacheLuceneSearchFieldComparator_
 
 @class OrgApacheLuceneIndexLeafReaderContext;
 @protocol OrgApacheLuceneSearchLeafFieldComparator;
 
+/*!
+ @brief Expert: a FieldComparator compares hits so as to determine their
+ sort order when collecting the top results with <code>TopFieldCollector</code>
+ .
+ The concrete public FieldComparator
+ classes here correspond to the SortField types.
+ <p>This API is designed to achieve high performance
+ sorting, by exposing a tight interaction with <code>FieldValueHitQueue</code>
+  as it visits hits.  Whenever a hit is
+ competitive, it's enrolled into a virtual slot, which is
+ an int ranging from 0 to numHits-1. Segment transitions are
+ handled by creating a dedicated per-segment
+ <code>LeafFieldComparator</code> which also needs to interact
+ with the <code>FieldValueHitQueue</code> but can optimize based
+ on the segment to collect.</p>
+ <p>The following functions need to be implemented</p>
+ <ul>
+ <li> <code>compare</code> Compare a hit at 'slot a'
+ with hit 'slot b'.
+ <li> <code>setTopValue</code> This method is called by
+ <code>TopFieldCollector</code> to notify the
+ FieldComparator of the top most value, which is
+ used by future calls to
+ <code>LeafFieldComparator.compareTop</code>.
+ <li> <code>getLeafComparator(org.apache.lucene.index.LeafReaderContext)</code> Invoked
+ when the search is switching to the next segment.
+ You may need to update internal state of the
+ comparator, for example retrieving new values from
+ DocValues.
+ <li> <code>value</code> Return the sort value stored in
+ the specified slot.  This is only called at the end
+ of the search, in order to populate <code>FieldDoc.fields</code>
+  when returning the top results.
+ </ul>
+ - seealso: LeafFieldComparator
+ */
 @interface OrgApacheLuceneSearchFieldComparator : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @brief Compare hit at slot1 with hit at slot2.
+ @param slot1 first slot to compare
+ @param slot2 second slot to compare
+ @return any <code>N < 0</code> if slot2's value is sorted after
+ slot1, any <code>N > 0</code> if the slot2's value is sorted before
+ slot1 and <code>0</code> if they are equal
+ */
 - (jint)compareWithInt:(jint)slot1
                withInt:(jint)slot2;
 
+/*!
+ @brief Returns a negative integer if first is less than second,
+ 0 if they are equal and a positive integer otherwise.
+ Default
+ impl to assume the type implements Comparable and
+ invoke .compareTo; be sure to override this method if
+ your FieldComparator's type isn't a Comparable or
+ if your values may sometimes be null 
+ */
 - (jint)compareValuesWithId:(id)first
                      withId:(id)second;
 
+/*!
+ @brief Get a per-segment <code>LeafFieldComparator</code> to collect the given
+ <code>org.apache.lucene.index.LeafReaderContext</code>.
+ All docIDs supplied to
+ this <code>LeafFieldComparator</code> are relative to the current reader (you
+ must add docBase if you need to map it to a top-level docID).
+ @param context current reader context
+ @return the comparator to use for this segment
+ @throws IOException if there is a low-level IO error
+ */
 - (id<OrgApacheLuceneSearchLeafFieldComparator>)getLeafComparatorWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
+/*!
+ @brief Record the top value, for future calls to <code>LeafFieldComparator.compareTop</code>
+ .
+ This is only called for searches that
+ use searchAfter (deep paging), and is called before any
+ calls to <code>getLeafComparator(LeafReaderContext)</code>.
+ */
 - (void)setTopValueWithId:(id)value;
 
+/*!
+ @brief Return the actual value in the slot.
+ @param slot the value
+ @return value in this slot
+ */
 - (id)valueWithInt:(jint)slot;
 
 @end
@@ -71,17 +146,20 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchFieldComparator_NumericComparator_) && (OrgApacheLuceneSearchFieldComparator_INCLUDE_ALL || OrgApacheLuceneSearchFieldComparator_NumericComparator_INCLUDE)
-#define _OrgApacheLuceneSearchFieldComparator_NumericComparator_
+#if !defined (OrgApacheLuceneSearchFieldComparator_NumericComparator_) && (INCLUDE_ALL_OrgApacheLuceneSearchFieldComparator || defined(INCLUDE_OrgApacheLuceneSearchFieldComparator_NumericComparator))
+#define OrgApacheLuceneSearchFieldComparator_NumericComparator_
 
-#define OrgApacheLuceneSearchSimpleFieldComparator_RESTRICT 1
-#define OrgApacheLuceneSearchSimpleFieldComparator_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSimpleFieldComparator 1
+#define INCLUDE_OrgApacheLuceneSearchSimpleFieldComparator 1
 #include "org/apache/lucene/search/SimpleFieldComparator.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneIndexNumericDocValues;
 @protocol OrgApacheLuceneUtilBits;
 
+/*!
+ @brief Base FieldComparator class for numeric types
+ */
 @interface OrgApacheLuceneSearchFieldComparator_NumericComparator : OrgApacheLuceneSearchSimpleFieldComparator {
  @public
   NSNumber *missingValue_;
@@ -99,9 +177,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator)
 
 - (void)doSetNextReaderWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
+/*!
+ @brief Retrieves a <code>Bits</code> instance representing documents that have a value in this segment.
+ */
 - (id<OrgApacheLuceneUtilBits>)getDocsWithValueWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                             withNSString:(NSString *)field;
 
+/*!
+ @brief Retrieves the NumericDocValues for the field in this segment
+ */
 - (OrgApacheLuceneIndexNumericDocValues *)getNumericDocValuesWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                                           withNSString:(NSString *)field;
 
@@ -120,15 +204,23 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator_NumericComparato
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchFieldComparator_DoubleComparator_) && (OrgApacheLuceneSearchFieldComparator_INCLUDE_ALL || OrgApacheLuceneSearchFieldComparator_DoubleComparator_INCLUDE)
-#define _OrgApacheLuceneSearchFieldComparator_DoubleComparator_
+#if !defined (OrgApacheLuceneSearchFieldComparator_DoubleComparator_) && (INCLUDE_ALL_OrgApacheLuceneSearchFieldComparator || defined(INCLUDE_OrgApacheLuceneSearchFieldComparator_DoubleComparator))
+#define OrgApacheLuceneSearchFieldComparator_DoubleComparator_
 
 @class JavaLangDouble;
 
+/*!
+ @brief Parses field's values as double (using <code>org.apache.lucene.index.LeafReader.getNumericDocValues</code>
+  and sorts by ascending value
+ */
 @interface OrgApacheLuceneSearchFieldComparator_DoubleComparator : OrgApacheLuceneSearchFieldComparator_NumericComparator
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new comparator based on <code>Double.compare</code> for <code>numHits</code>.
+ When a document has no value for the field, <code>missingValue</code> is substituted. 
+ */
 - (instancetype)initWithInt:(jint)numHits
                withNSString:(NSString *)field
          withJavaLangDouble:(JavaLangDouble *)missingValue;
@@ -157,19 +249,29 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchFieldComparator_DoubleComparator_ini
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchFieldComparator_DoubleComparator *new_OrgApacheLuceneSearchFieldComparator_DoubleComparator_initWithInt_withNSString_withJavaLangDouble_(jint numHits, NSString *field, JavaLangDouble *missingValue) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchFieldComparator_DoubleComparator *create_OrgApacheLuceneSearchFieldComparator_DoubleComparator_initWithInt_withNSString_withJavaLangDouble_(jint numHits, NSString *field, JavaLangDouble *missingValue);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator_DoubleComparator)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchFieldComparator_FloatComparator_) && (OrgApacheLuceneSearchFieldComparator_INCLUDE_ALL || OrgApacheLuceneSearchFieldComparator_FloatComparator_INCLUDE)
-#define _OrgApacheLuceneSearchFieldComparator_FloatComparator_
+#if !defined (OrgApacheLuceneSearchFieldComparator_FloatComparator_) && (INCLUDE_ALL_OrgApacheLuceneSearchFieldComparator || defined(INCLUDE_OrgApacheLuceneSearchFieldComparator_FloatComparator))
+#define OrgApacheLuceneSearchFieldComparator_FloatComparator_
 
 @class JavaLangFloat;
 
+/*!
+ @brief Parses field's values as float (using <code>org.apache.lucene.index.LeafReader.getNumericDocValues(String)</code>
+  and sorts by ascending value
+ */
 @interface OrgApacheLuceneSearchFieldComparator_FloatComparator : OrgApacheLuceneSearchFieldComparator_NumericComparator
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new comparator based on <code>Float.compare</code> for <code>numHits</code>.
+ When a document has no value for the field, <code>missingValue</code> is substituted. 
+ */
 - (instancetype)initWithInt:(jint)numHits
                withNSString:(NSString *)field
           withJavaLangFloat:(JavaLangFloat *)missingValue;
@@ -198,19 +300,29 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchFieldComparator_FloatComparator_init
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchFieldComparator_FloatComparator *new_OrgApacheLuceneSearchFieldComparator_FloatComparator_initWithInt_withNSString_withJavaLangFloat_(jint numHits, NSString *field, JavaLangFloat *missingValue) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchFieldComparator_FloatComparator *create_OrgApacheLuceneSearchFieldComparator_FloatComparator_initWithInt_withNSString_withJavaLangFloat_(jint numHits, NSString *field, JavaLangFloat *missingValue);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator_FloatComparator)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchFieldComparator_IntComparator_) && (OrgApacheLuceneSearchFieldComparator_INCLUDE_ALL || OrgApacheLuceneSearchFieldComparator_IntComparator_INCLUDE)
-#define _OrgApacheLuceneSearchFieldComparator_IntComparator_
+#if !defined (OrgApacheLuceneSearchFieldComparator_IntComparator_) && (INCLUDE_ALL_OrgApacheLuceneSearchFieldComparator || defined(INCLUDE_OrgApacheLuceneSearchFieldComparator_IntComparator))
+#define OrgApacheLuceneSearchFieldComparator_IntComparator_
 
 @class JavaLangInteger;
 
+/*!
+ @brief Parses field's values as int (using <code>org.apache.lucene.index.LeafReader.getNumericDocValues(String)</code>
+  and sorts by ascending value
+ */
 @interface OrgApacheLuceneSearchFieldComparator_IntComparator : OrgApacheLuceneSearchFieldComparator_NumericComparator
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new comparator based on <code>Integer.compare</code> for <code>numHits</code>.
+ When a document has no value for the field, <code>missingValue</code> is substituted. 
+ */
 - (instancetype)initWithInt:(jint)numHits
                withNSString:(NSString *)field
         withJavaLangInteger:(JavaLangInteger *)missingValue;
@@ -239,19 +351,29 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchFieldComparator_IntComparator_initWi
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchFieldComparator_IntComparator *new_OrgApacheLuceneSearchFieldComparator_IntComparator_initWithInt_withNSString_withJavaLangInteger_(jint numHits, NSString *field, JavaLangInteger *missingValue) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchFieldComparator_IntComparator *create_OrgApacheLuceneSearchFieldComparator_IntComparator_initWithInt_withNSString_withJavaLangInteger_(jint numHits, NSString *field, JavaLangInteger *missingValue);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator_IntComparator)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchFieldComparator_LongComparator_) && (OrgApacheLuceneSearchFieldComparator_INCLUDE_ALL || OrgApacheLuceneSearchFieldComparator_LongComparator_INCLUDE)
-#define _OrgApacheLuceneSearchFieldComparator_LongComparator_
+#if !defined (OrgApacheLuceneSearchFieldComparator_LongComparator_) && (INCLUDE_ALL_OrgApacheLuceneSearchFieldComparator || defined(INCLUDE_OrgApacheLuceneSearchFieldComparator_LongComparator))
+#define OrgApacheLuceneSearchFieldComparator_LongComparator_
 
 @class JavaLangLong;
 
+/*!
+ @brief Parses field's values as long (using <code>org.apache.lucene.index.LeafReader.getNumericDocValues(String)</code>
+  and sorts by ascending value
+ */
 @interface OrgApacheLuceneSearchFieldComparator_LongComparator : OrgApacheLuceneSearchFieldComparator_NumericComparator
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new comparator based on <code>Long.compare</code> for <code>numHits</code>.
+ When a document has no value for the field, <code>missingValue</code> is substituted. 
+ */
 - (instancetype)initWithInt:(jint)numHits
                withNSString:(NSString *)field
            withJavaLangLong:(JavaLangLong *)missingValue;
@@ -280,25 +402,39 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchFieldComparator_LongComparator_initW
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchFieldComparator_LongComparator *new_OrgApacheLuceneSearchFieldComparator_LongComparator_initWithInt_withNSString_withJavaLangLong_(jint numHits, NSString *field, JavaLangLong *missingValue) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchFieldComparator_LongComparator *create_OrgApacheLuceneSearchFieldComparator_LongComparator_initWithInt_withNSString_withJavaLangLong_(jint numHits, NSString *field, JavaLangLong *missingValue);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator_LongComparator)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchFieldComparator_RelevanceComparator_) && (OrgApacheLuceneSearchFieldComparator_INCLUDE_ALL || OrgApacheLuceneSearchFieldComparator_RelevanceComparator_INCLUDE)
-#define _OrgApacheLuceneSearchFieldComparator_RelevanceComparator_
+#if !defined (OrgApacheLuceneSearchFieldComparator_RelevanceComparator_) && (INCLUDE_ALL_OrgApacheLuceneSearchFieldComparator || defined(INCLUDE_OrgApacheLuceneSearchFieldComparator_RelevanceComparator))
+#define OrgApacheLuceneSearchFieldComparator_RelevanceComparator_
 
-#define OrgApacheLuceneSearchLeafFieldComparator_RESTRICT 1
-#define OrgApacheLuceneSearchLeafFieldComparator_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchLeafFieldComparator 1
+#define INCLUDE_OrgApacheLuceneSearchLeafFieldComparator 1
 #include "org/apache/lucene/search/LeafFieldComparator.h"
 
 @class JavaLangFloat;
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneSearchScorer;
 
+/*!
+ @brief Sorts by descending relevance.
+ NOTE: if you are
+ sorting only by descending relevance and then
+ secondarily by ascending docID, performance is faster
+ using <code>TopScoreDocCollector</code> directly (which <code>IndexSearcher.search</code>
+  uses when no <code>Sort</code> is
+ specified). 
+ */
 @interface OrgApacheLuceneSearchFieldComparator_RelevanceComparator : OrgApacheLuceneSearchFieldComparator < OrgApacheLuceneSearchLeafFieldComparator >
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new comparator based on relevance for <code>numHits</code>.
+ */
 - (instancetype)initWithInt:(jint)numHits;
 
 - (jint)compareWithInt:(jint)slot1
@@ -332,25 +468,33 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchFieldComparator_RelevanceComparator_
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchFieldComparator_RelevanceComparator *new_OrgApacheLuceneSearchFieldComparator_RelevanceComparator_initWithInt_(jint numHits) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchFieldComparator_RelevanceComparator *create_OrgApacheLuceneSearchFieldComparator_RelevanceComparator_initWithInt_(jint numHits);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator_RelevanceComparator)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchFieldComparator_DocComparator_) && (OrgApacheLuceneSearchFieldComparator_INCLUDE_ALL || OrgApacheLuceneSearchFieldComparator_DocComparator_INCLUDE)
-#define _OrgApacheLuceneSearchFieldComparator_DocComparator_
+#if !defined (OrgApacheLuceneSearchFieldComparator_DocComparator_) && (INCLUDE_ALL_OrgApacheLuceneSearchFieldComparator || defined(INCLUDE_OrgApacheLuceneSearchFieldComparator_DocComparator))
+#define OrgApacheLuceneSearchFieldComparator_DocComparator_
 
-#define OrgApacheLuceneSearchLeafFieldComparator_RESTRICT 1
-#define OrgApacheLuceneSearchLeafFieldComparator_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchLeafFieldComparator 1
+#define INCLUDE_OrgApacheLuceneSearchLeafFieldComparator 1
 #include "org/apache/lucene/search/LeafFieldComparator.h"
 
 @class JavaLangInteger;
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneSearchScorer;
 
+/*!
+ @brief Sorts by ascending docID
+ */
 @interface OrgApacheLuceneSearchFieldComparator_DocComparator : OrgApacheLuceneSearchFieldComparator < OrgApacheLuceneSearchLeafFieldComparator >
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new comparator based on document ids for <code>numHits</code>
+ */
 - (instancetype)initWithInt:(jint)numHits;
 
 - (jint)compareWithInt:(jint)slot1
@@ -381,15 +525,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchFieldComparator_DocComparator_initWi
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchFieldComparator_DocComparator *new_OrgApacheLuceneSearchFieldComparator_DocComparator_initWithInt_(jint numHits) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchFieldComparator_DocComparator *create_OrgApacheLuceneSearchFieldComparator_DocComparator_initWithInt_(jint numHits);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator_DocComparator)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_) && (OrgApacheLuceneSearchFieldComparator_INCLUDE_ALL || OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_INCLUDE)
-#define _OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_
+#if !defined (OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_) && (INCLUDE_ALL_OrgApacheLuceneSearchFieldComparator || defined(INCLUDE_OrgApacheLuceneSearchFieldComparator_TermOrdValComparator))
+#define OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_
 
-#define OrgApacheLuceneSearchLeafFieldComparator_RESTRICT 1
-#define OrgApacheLuceneSearchLeafFieldComparator_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchLeafFieldComparator 1
+#define INCLUDE_OrgApacheLuceneSearchLeafFieldComparator 1
 #include "org/apache/lucene/search/LeafFieldComparator.h"
 
 @class IOSIntArray;
@@ -399,6 +545,18 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator_DocComparator)
 @class OrgApacheLuceneSearchScorer;
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief Sorts by field's natural Term sort order, using
+ ordinals.
+ This is functionally equivalent to <code>org.apache.lucene.search.FieldComparator.TermValComparator</code>
+ , but it first resolves the string
+ to their relative ordinal positions (using the index
+ returned by <code>org.apache.lucene.index.LeafReader.getSortedDocValues(String)</code>), and
+ does most comparisons using the ordinals.  For medium
+ to large results, this comparator will be much faster
+ than <code>org.apache.lucene.search.FieldComparator.TermValComparator</code>.  For very small
+ result sets it may be slower. 
+ */
 @interface OrgApacheLuceneSearchFieldComparator_TermOrdValComparator : OrgApacheLuceneSearchFieldComparator < OrgApacheLuceneSearchLeafFieldComparator > {
  @public
   IOSIntArray *ords_;
@@ -410,18 +568,37 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator_DocComparator)
   jint bottomOrd_;
   jboolean bottomSameReader_;
   OrgApacheLuceneUtilBytesRef *bottomValue_;
+  /*!
+   @brief Set by setTopValue.
+   */
   OrgApacheLuceneUtilBytesRef *topValue_;
   jboolean topSameReader_;
   jint topOrd_;
+  /*!
+   @brief -1 if missing values are sorted first, 1 if they are
+ sorted last
+   */
   jint missingSortCmp_;
+  /*!
+   @brief Which ordinal to use for a missing value.
+   */
   jint missingOrd_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief Creates this, sorting missing values first.
+ */
 - (instancetype)initWithInt:(jint)numHits
                withNSString:(NSString *)field;
 
+/*!
+ @brief Creates this, with control over how missing values
+ are sorted.
+ Pass sortMissingLast=true to put
+ missing values at the end. 
+ */
 - (instancetype)initWithInt:(jint)numHits
                withNSString:(NSString *)field
                 withBoolean:(jboolean)sortMissingLast;
@@ -451,6 +628,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator_DocComparator)
 
 #pragma mark Protected
 
+/*!
+ @brief Retrieves the SortedDocValues for the field in this segment
+ */
 - (OrgApacheLuceneIndexSortedDocValues *)getSortedDocValuesWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                                         withNSString:(NSString *)field;
 
@@ -469,19 +649,23 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchFieldComparator_TermOrdValComparator
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchFieldComparator_TermOrdValComparator *new_OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_initWithInt_withNSString_(jint numHits, NSString *field) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchFieldComparator_TermOrdValComparator *create_OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_initWithInt_withNSString_(jint numHits, NSString *field);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_initWithInt_withNSString_withBoolean_(OrgApacheLuceneSearchFieldComparator_TermOrdValComparator *self, jint numHits, NSString *field, jboolean sortMissingLast);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchFieldComparator_TermOrdValComparator *new_OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_initWithInt_withNSString_withBoolean_(jint numHits, NSString *field, jboolean sortMissingLast) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchFieldComparator_TermOrdValComparator *create_OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_initWithInt_withNSString_withBoolean_(jint numHits, NSString *field, jboolean sortMissingLast);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator_TermOrdValComparator)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchFieldComparator_TermValComparator_) && (OrgApacheLuceneSearchFieldComparator_INCLUDE_ALL || OrgApacheLuceneSearchFieldComparator_TermValComparator_INCLUDE)
-#define _OrgApacheLuceneSearchFieldComparator_TermValComparator_
+#if !defined (OrgApacheLuceneSearchFieldComparator_TermValComparator_) && (INCLUDE_ALL_OrgApacheLuceneSearchFieldComparator || defined(INCLUDE_OrgApacheLuceneSearchFieldComparator_TermValComparator))
+#define OrgApacheLuceneSearchFieldComparator_TermValComparator_
 
-#define OrgApacheLuceneSearchLeafFieldComparator_RESTRICT 1
-#define OrgApacheLuceneSearchLeafFieldComparator_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchLeafFieldComparator 1
+#define INCLUDE_OrgApacheLuceneSearchLeafFieldComparator 1
 #include "org/apache/lucene/search/LeafFieldComparator.h"
 
 @class OrgApacheLuceneIndexBinaryDocValues;
@@ -490,10 +674,20 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator_TermOrdValCompar
 @class OrgApacheLuceneUtilBytesRef;
 @protocol OrgApacheLuceneUtilBits;
 
+/*!
+ @brief Sorts by field's natural Term sort order.
+ All
+ comparisons are done using BytesRef.compareTo, which is
+ slow for medium to large result sets but possibly
+ very fast for very small results sets. 
+ */
 @interface OrgApacheLuceneSearchFieldComparator_TermValComparator : OrgApacheLuceneSearchFieldComparator < OrgApacheLuceneSearchLeafFieldComparator >
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ */
 - (instancetype)initWithInt:(jint)numHits
                withNSString:(NSString *)field
                 withBoolean:(jboolean)sortMissingLast;
@@ -523,12 +717,26 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator_TermOrdValCompar
 
 #pragma mark Protected
 
+/*!
+ @brief Retrieves the BinaryDocValues for the field in this segment
+ */
 - (OrgApacheLuceneIndexBinaryDocValues *)getBinaryDocValuesWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                                         withNSString:(NSString *)field;
 
+/*!
+ @brief Retrieves the set of documents that have a value in this segment
+ */
 - (id<OrgApacheLuceneUtilBits>)getDocsWithFieldWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                             withNSString:(NSString *)field;
 
+/*!
+ @brief Check whether the given value represents <tt>null</tt>.
+ This can be
+ useful if the <code>BinaryDocValues</code> returned by <code>getBinaryDocValues</code>
+ use a special value as a sentinel. The default implementation checks
+ <code>getDocsWithField</code>.
+ <p>NOTE: The null value can only be an EMPTY <code>BytesRef</code>. 
+ */
 - (jboolean)isNullWithInt:(jint)doc
 withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
 
@@ -540,8 +748,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchFieldComparator_TermValComparator_in
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchFieldComparator_TermValComparator *new_OrgApacheLuceneSearchFieldComparator_TermValComparator_initWithInt_withNSString_withBoolean_(jint numHits, NSString *field, jboolean sortMissingLast) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchFieldComparator_TermValComparator *create_OrgApacheLuceneSearchFieldComparator_TermValComparator_initWithInt_withNSString_withBoolean_(jint numHits, NSString *field, jboolean sortMissingLast);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator_TermValComparator)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchFieldComparator_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchFieldComparator")

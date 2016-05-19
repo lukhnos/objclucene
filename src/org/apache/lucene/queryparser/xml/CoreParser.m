@@ -50,9 +50,17 @@
 
 __attribute__((unused)) static id<OrgW3cDomDocument> OrgApacheLuceneQueryparserXmlCoreParser_parseXMLWithJavaIoInputStream_(JavaIoInputStream *pXmlFile);
 
-jint OrgApacheLuceneQueryparserXmlCoreParser_maxNumCachedFilters_ = 20;
+jint OrgApacheLuceneQueryparserXmlCoreParser_maxNumCachedFilters = 20;
 
 @implementation OrgApacheLuceneQueryparserXmlCoreParser
+
++ (jint)maxNumCachedFilters {
+  return OrgApacheLuceneQueryparserXmlCoreParser_maxNumCachedFilters;
+}
+
++ (void)setMaxNumCachedFilters:(jint)value {
+  OrgApacheLuceneQueryparserXmlCoreParser_maxNumCachedFilters = value;
+}
 
 - (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
        withOrgApacheLuceneQueryparserClassicQueryParser:(OrgApacheLuceneQueryparserClassicQueryParser *)parser {
@@ -119,7 +127,7 @@ withOrgApacheLuceneQueryparserXmlFilterBuilder:(id<OrgApacheLuceneQueryparserXml
     { "parser_", NULL, 0x4, "Lorg.apache.lucene.queryparser.classic.QueryParser;", NULL, NULL, .constantValue.asLong = 0 },
     { "queryFactory_", NULL, 0x4, "Lorg.apache.lucene.queryparser.xml.QueryBuilderFactory;", NULL, NULL, .constantValue.asLong = 0 },
     { "filterFactory_", NULL, 0x4, "Lorg.apache.lucene.queryparser.xml.FilterBuilderFactory;", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxNumCachedFilters_", NULL, 0x9, "I", &OrgApacheLuceneQueryparserXmlCoreParser_maxNumCachedFilters_, NULL, .constantValue.asLong = 0 },
+    { "maxNumCachedFilters", "maxNumCachedFilters", 0x9, "I", &OrgApacheLuceneQueryparserXmlCoreParser_maxNumCachedFilters, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlCoreParser = { 2, "CoreParser", "org.apache.lucene.queryparser.xml", NULL, 0x1, 8, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserXmlCoreParser;
@@ -132,9 +140,11 @@ void OrgApacheLuceneQueryparserXmlCoreParser_initWithOrgApacheLuceneAnalysisAnal
 }
 
 OrgApacheLuceneQueryparserXmlCoreParser *new_OrgApacheLuceneQueryparserXmlCoreParser_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneQueryparserClassicQueryParser_(OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneQueryparserClassicQueryParser *parser) {
-  OrgApacheLuceneQueryparserXmlCoreParser *self = [OrgApacheLuceneQueryparserXmlCoreParser alloc];
-  OrgApacheLuceneQueryparserXmlCoreParser_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneQueryparserClassicQueryParser_(self, analyzer, parser);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserXmlCoreParser, initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneQueryparserClassicQueryParser_, analyzer, parser)
+}
+
+OrgApacheLuceneQueryparserXmlCoreParser *create_OrgApacheLuceneQueryparserXmlCoreParser_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneQueryparserClassicQueryParser_(OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneQueryparserClassicQueryParser *parser) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserXmlCoreParser, initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneQueryparserClassicQueryParser_, analyzer, parser)
 }
 
 void OrgApacheLuceneQueryparserXmlCoreParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneQueryparserXmlCoreParser *self, NSString *defaultField, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
@@ -142,9 +152,11 @@ void OrgApacheLuceneQueryparserXmlCoreParser_initWithNSString_withOrgApacheLucen
 }
 
 OrgApacheLuceneQueryparserXmlCoreParser *new_OrgApacheLuceneQueryparserXmlCoreParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(NSString *defaultField, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
-  OrgApacheLuceneQueryparserXmlCoreParser *self = [OrgApacheLuceneQueryparserXmlCoreParser alloc];
-  OrgApacheLuceneQueryparserXmlCoreParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(self, defaultField, analyzer);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserXmlCoreParser, initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_, defaultField, analyzer)
+}
+
+OrgApacheLuceneQueryparserXmlCoreParser *create_OrgApacheLuceneQueryparserXmlCoreParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(NSString *defaultField, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserXmlCoreParser, initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_, defaultField, analyzer)
 }
 
 void OrgApacheLuceneQueryparserXmlCoreParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneQueryparserClassicQueryParser_(OrgApacheLuceneQueryparserXmlCoreParser *self, NSString *defaultField, OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneQueryparserClassicQueryParser *parser) {
@@ -152,53 +164,55 @@ void OrgApacheLuceneQueryparserXmlCoreParser_initWithNSString_withOrgApacheLucen
   JreStrongAssign(&self->analyzer_, analyzer);
   JreStrongAssign(&self->parser_, parser);
   JreStrongAssignAndConsume(&self->filterFactory_, new_OrgApacheLuceneQueryparserXmlFilterBuilderFactory_init());
-  [self->filterFactory_ addBuilderWithNSString:@"RangeFilter" withOrgApacheLuceneQueryparserXmlFilterBuilder:[new_OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder_init() autorelease]];
-  [self->filterFactory_ addBuilderWithNSString:@"NumericRangeFilter" withOrgApacheLuceneQueryparserXmlFilterBuilder:[new_OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_init() autorelease]];
+  [self->filterFactory_ addBuilderWithNSString:@"RangeFilter" withOrgApacheLuceneQueryparserXmlFilterBuilder:create_OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder_init()];
+  [((OrgApacheLuceneQueryparserXmlFilterBuilderFactory *) nil_chk(self->filterFactory_)) addBuilderWithNSString:@"NumericRangeFilter" withOrgApacheLuceneQueryparserXmlFilterBuilder:create_OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_init()];
   JreStrongAssignAndConsume(&self->queryFactory_, new_OrgApacheLuceneQueryparserXmlQueryBuilderFactory_init());
-  [self->queryFactory_ addBuilderWithNSString:@"TermQuery" withOrgApacheLuceneQueryparserXmlQueryBuilder:[new_OrgApacheLuceneQueryparserXmlBuildersTermQueryBuilder_init() autorelease]];
-  [self->queryFactory_ addBuilderWithNSString:@"TermsQuery" withOrgApacheLuceneQueryparserXmlQueryBuilder:[new_OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_(analyzer) autorelease]];
-  [self->queryFactory_ addBuilderWithNSString:@"MatchAllDocsQuery" withOrgApacheLuceneQueryparserXmlQueryBuilder:[new_OrgApacheLuceneQueryparserXmlBuildersMatchAllDocsQueryBuilder_init() autorelease]];
-  [self->queryFactory_ addBuilderWithNSString:@"BooleanQuery" withOrgApacheLuceneQueryparserXmlQueryBuilder:[new_OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder_initWithOrgApacheLuceneQueryparserXmlQueryBuilder_(self->queryFactory_) autorelease]];
-  [self->queryFactory_ addBuilderWithNSString:@"NumericRangeQuery" withOrgApacheLuceneQueryparserXmlQueryBuilder:[new_OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder_init() autorelease]];
-  [self->queryFactory_ addBuilderWithNSString:@"RangeQuery" withOrgApacheLuceneQueryparserXmlQueryBuilder:[new_OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder_init() autorelease]];
-  [self->queryFactory_ addBuilderWithNSString:@"DisjunctionMaxQuery" withOrgApacheLuceneQueryparserXmlQueryBuilder:[new_OrgApacheLuceneQueryparserXmlBuildersDisjunctionMaxQueryBuilder_initWithOrgApacheLuceneQueryparserXmlQueryBuilder_(self->queryFactory_) autorelease]];
+  [self->queryFactory_ addBuilderWithNSString:@"TermQuery" withOrgApacheLuceneQueryparserXmlQueryBuilder:create_OrgApacheLuceneQueryparserXmlBuildersTermQueryBuilder_init()];
+  [((OrgApacheLuceneQueryparserXmlQueryBuilderFactory *) nil_chk(self->queryFactory_)) addBuilderWithNSString:@"TermsQuery" withOrgApacheLuceneQueryparserXmlQueryBuilder:create_OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_(analyzer)];
+  [((OrgApacheLuceneQueryparserXmlQueryBuilderFactory *) nil_chk(self->queryFactory_)) addBuilderWithNSString:@"MatchAllDocsQuery" withOrgApacheLuceneQueryparserXmlQueryBuilder:create_OrgApacheLuceneQueryparserXmlBuildersMatchAllDocsQueryBuilder_init()];
+  [((OrgApacheLuceneQueryparserXmlQueryBuilderFactory *) nil_chk(self->queryFactory_)) addBuilderWithNSString:@"BooleanQuery" withOrgApacheLuceneQueryparserXmlQueryBuilder:create_OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder_initWithOrgApacheLuceneQueryparserXmlQueryBuilder_(self->queryFactory_)];
+  [((OrgApacheLuceneQueryparserXmlQueryBuilderFactory *) nil_chk(self->queryFactory_)) addBuilderWithNSString:@"NumericRangeQuery" withOrgApacheLuceneQueryparserXmlQueryBuilder:create_OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder_init()];
+  [((OrgApacheLuceneQueryparserXmlQueryBuilderFactory *) nil_chk(self->queryFactory_)) addBuilderWithNSString:@"RangeQuery" withOrgApacheLuceneQueryparserXmlQueryBuilder:create_OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder_init()];
+  [((OrgApacheLuceneQueryparserXmlQueryBuilderFactory *) nil_chk(self->queryFactory_)) addBuilderWithNSString:@"DisjunctionMaxQuery" withOrgApacheLuceneQueryparserXmlQueryBuilder:create_OrgApacheLuceneQueryparserXmlBuildersDisjunctionMaxQueryBuilder_initWithOrgApacheLuceneQueryparserXmlQueryBuilder_(self->queryFactory_)];
   if (parser != nil) {
-    [self->queryFactory_ addBuilderWithNSString:@"UserQuery" withOrgApacheLuceneQueryparserXmlQueryBuilder:[new_OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder_initWithOrgApacheLuceneQueryparserClassicQueryParser_(parser) autorelease]];
+    [((OrgApacheLuceneQueryparserXmlQueryBuilderFactory *) nil_chk(self->queryFactory_)) addBuilderWithNSString:@"UserQuery" withOrgApacheLuceneQueryparserXmlQueryBuilder:create_OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder_initWithOrgApacheLuceneQueryparserClassicQueryParser_(parser)];
   }
   else {
-    [self->queryFactory_ addBuilderWithNSString:@"UserQuery" withOrgApacheLuceneQueryparserXmlQueryBuilder:[new_OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(defaultField, analyzer) autorelease]];
+    [((OrgApacheLuceneQueryparserXmlQueryBuilderFactory *) nil_chk(self->queryFactory_)) addBuilderWithNSString:@"UserQuery" withOrgApacheLuceneQueryparserXmlQueryBuilder:create_OrgApacheLuceneQueryparserXmlBuildersUserInputQueryBuilder_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(defaultField, analyzer)];
   }
-  [self->queryFactory_ addBuilderWithNSString:@"FilteredQuery" withOrgApacheLuceneQueryparserXmlQueryBuilder:[new_OrgApacheLuceneQueryparserXmlBuildersFilteredQueryBuilder_initWithOrgApacheLuceneQueryparserXmlFilterBuilder_withOrgApacheLuceneQueryparserXmlQueryBuilder_(self->filterFactory_, self->queryFactory_) autorelease]];
-  [self->queryFactory_ addBuilderWithNSString:@"ConstantScoreQuery" withOrgApacheLuceneQueryparserXmlQueryBuilder:[new_OrgApacheLuceneQueryparserXmlBuildersConstantScoreQueryBuilder_initWithOrgApacheLuceneQueryparserXmlQueryBuilderFactory_(self->queryFactory_) autorelease]];
-  [self->filterFactory_ addBuilderWithNSString:@"CachedFilter" withOrgApacheLuceneQueryparserXmlFilterBuilder:[new_OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_initWithOrgApacheLuceneQueryparserXmlQueryBuilderFactory_withOrgApacheLuceneQueryparserXmlFilterBuilderFactory_withInt_(self->queryFactory_, self->filterFactory_, OrgApacheLuceneQueryparserXmlCoreParser_maxNumCachedFilters_) autorelease]];
-  OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilderFactory *sqof = [new_OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilderFactory_init() autorelease];
-  OrgApacheLuceneQueryparserXmlBuildersSpanNearBuilder *snb = [new_OrgApacheLuceneQueryparserXmlBuildersSpanNearBuilder_initWithOrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder_(sqof) autorelease];
+  [((OrgApacheLuceneQueryparserXmlQueryBuilderFactory *) nil_chk(self->queryFactory_)) addBuilderWithNSString:@"FilteredQuery" withOrgApacheLuceneQueryparserXmlQueryBuilder:create_OrgApacheLuceneQueryparserXmlBuildersFilteredQueryBuilder_initWithOrgApacheLuceneQueryparserXmlFilterBuilder_withOrgApacheLuceneQueryparserXmlQueryBuilder_(self->filterFactory_, self->queryFactory_)];
+  [((OrgApacheLuceneQueryparserXmlQueryBuilderFactory *) nil_chk(self->queryFactory_)) addBuilderWithNSString:@"ConstantScoreQuery" withOrgApacheLuceneQueryparserXmlQueryBuilder:create_OrgApacheLuceneQueryparserXmlBuildersConstantScoreQueryBuilder_initWithOrgApacheLuceneQueryparserXmlQueryBuilderFactory_(self->queryFactory_)];
+  [((OrgApacheLuceneQueryparserXmlFilterBuilderFactory *) nil_chk(self->filterFactory_)) addBuilderWithNSString:@"CachedFilter" withOrgApacheLuceneQueryparserXmlFilterBuilder:create_OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_initWithOrgApacheLuceneQueryparserXmlQueryBuilderFactory_withOrgApacheLuceneQueryparserXmlFilterBuilderFactory_withInt_(self->queryFactory_, self->filterFactory_, OrgApacheLuceneQueryparserXmlCoreParser_maxNumCachedFilters)];
+  OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilderFactory *sqof = create_OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilderFactory_init();
+  OrgApacheLuceneQueryparserXmlBuildersSpanNearBuilder *snb = create_OrgApacheLuceneQueryparserXmlBuildersSpanNearBuilder_initWithOrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder_(sqof);
   [sqof addBuilderWithNSString:@"SpanNear" withOrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder:snb];
-  [self->queryFactory_ addBuilderWithNSString:@"SpanNear" withOrgApacheLuceneQueryparserXmlQueryBuilder:snb];
-  OrgApacheLuceneQueryparserXmlBuildersBoostingTermBuilder *btb = [new_OrgApacheLuceneQueryparserXmlBuildersBoostingTermBuilder_init() autorelease];
+  [((OrgApacheLuceneQueryparserXmlQueryBuilderFactory *) nil_chk(self->queryFactory_)) addBuilderWithNSString:@"SpanNear" withOrgApacheLuceneQueryparserXmlQueryBuilder:snb];
+  OrgApacheLuceneQueryparserXmlBuildersBoostingTermBuilder *btb = create_OrgApacheLuceneQueryparserXmlBuildersBoostingTermBuilder_init();
   [sqof addBuilderWithNSString:@"BoostingTermQuery" withOrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder:btb];
-  [self->queryFactory_ addBuilderWithNSString:@"BoostingTermQuery" withOrgApacheLuceneQueryparserXmlQueryBuilder:btb];
-  OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder *snt = [new_OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder_init() autorelease];
+  [((OrgApacheLuceneQueryparserXmlQueryBuilderFactory *) nil_chk(self->queryFactory_)) addBuilderWithNSString:@"BoostingTermQuery" withOrgApacheLuceneQueryparserXmlQueryBuilder:btb];
+  OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder *snt = create_OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder_init();
   [sqof addBuilderWithNSString:@"SpanTerm" withOrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder:snt];
-  [self->queryFactory_ addBuilderWithNSString:@"SpanTerm" withOrgApacheLuceneQueryparserXmlQueryBuilder:snt];
-  OrgApacheLuceneQueryparserXmlBuildersSpanOrBuilder *sot = [new_OrgApacheLuceneQueryparserXmlBuildersSpanOrBuilder_initWithOrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder_(sqof) autorelease];
+  [((OrgApacheLuceneQueryparserXmlQueryBuilderFactory *) nil_chk(self->queryFactory_)) addBuilderWithNSString:@"SpanTerm" withOrgApacheLuceneQueryparserXmlQueryBuilder:snt];
+  OrgApacheLuceneQueryparserXmlBuildersSpanOrBuilder *sot = create_OrgApacheLuceneQueryparserXmlBuildersSpanOrBuilder_initWithOrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder_(sqof);
   [sqof addBuilderWithNSString:@"SpanOr" withOrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder:sot];
-  [self->queryFactory_ addBuilderWithNSString:@"SpanOr" withOrgApacheLuceneQueryparserXmlQueryBuilder:sot];
-  OrgApacheLuceneQueryparserXmlBuildersSpanOrTermsBuilder *sots = [new_OrgApacheLuceneQueryparserXmlBuildersSpanOrTermsBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_(analyzer) autorelease];
+  [((OrgApacheLuceneQueryparserXmlQueryBuilderFactory *) nil_chk(self->queryFactory_)) addBuilderWithNSString:@"SpanOr" withOrgApacheLuceneQueryparserXmlQueryBuilder:sot];
+  OrgApacheLuceneQueryparserXmlBuildersSpanOrTermsBuilder *sots = create_OrgApacheLuceneQueryparserXmlBuildersSpanOrTermsBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_(analyzer);
   [sqof addBuilderWithNSString:@"SpanOrTerms" withOrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder:sots];
-  [self->queryFactory_ addBuilderWithNSString:@"SpanOrTerms" withOrgApacheLuceneQueryparserXmlQueryBuilder:sots];
-  OrgApacheLuceneQueryparserXmlBuildersSpanFirstBuilder *sft = [new_OrgApacheLuceneQueryparserXmlBuildersSpanFirstBuilder_initWithOrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder_(sqof) autorelease];
+  [((OrgApacheLuceneQueryparserXmlQueryBuilderFactory *) nil_chk(self->queryFactory_)) addBuilderWithNSString:@"SpanOrTerms" withOrgApacheLuceneQueryparserXmlQueryBuilder:sots];
+  OrgApacheLuceneQueryparserXmlBuildersSpanFirstBuilder *sft = create_OrgApacheLuceneQueryparserXmlBuildersSpanFirstBuilder_initWithOrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder_(sqof);
   [sqof addBuilderWithNSString:@"SpanFirst" withOrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder:sft];
-  [self->queryFactory_ addBuilderWithNSString:@"SpanFirst" withOrgApacheLuceneQueryparserXmlQueryBuilder:sft];
-  OrgApacheLuceneQueryparserXmlBuildersSpanNotBuilder *snot = [new_OrgApacheLuceneQueryparserXmlBuildersSpanNotBuilder_initWithOrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder_(sqof) autorelease];
+  [((OrgApacheLuceneQueryparserXmlQueryBuilderFactory *) nil_chk(self->queryFactory_)) addBuilderWithNSString:@"SpanFirst" withOrgApacheLuceneQueryparserXmlQueryBuilder:sft];
+  OrgApacheLuceneQueryparserXmlBuildersSpanNotBuilder *snot = create_OrgApacheLuceneQueryparserXmlBuildersSpanNotBuilder_initWithOrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder_(sqof);
   [sqof addBuilderWithNSString:@"SpanNot" withOrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder:snot];
-  [self->queryFactory_ addBuilderWithNSString:@"SpanNot" withOrgApacheLuceneQueryparserXmlQueryBuilder:snot];
+  [((OrgApacheLuceneQueryparserXmlQueryBuilderFactory *) nil_chk(self->queryFactory_)) addBuilderWithNSString:@"SpanNot" withOrgApacheLuceneQueryparserXmlQueryBuilder:snot];
 }
 
 OrgApacheLuceneQueryparserXmlCoreParser *new_OrgApacheLuceneQueryparserXmlCoreParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneQueryparserClassicQueryParser_(NSString *defaultField, OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneQueryparserClassicQueryParser *parser) {
-  OrgApacheLuceneQueryparserXmlCoreParser *self = [OrgApacheLuceneQueryparserXmlCoreParser alloc];
-  OrgApacheLuceneQueryparserXmlCoreParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneQueryparserClassicQueryParser_(self, defaultField, analyzer, parser);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserXmlCoreParser, initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneQueryparserClassicQueryParser_, defaultField, analyzer, parser)
+}
+
+OrgApacheLuceneQueryparserXmlCoreParser *create_OrgApacheLuceneQueryparserXmlCoreParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneQueryparserClassicQueryParser_(NSString *defaultField, OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneQueryparserClassicQueryParser *parser) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserXmlCoreParser, initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneQueryparserClassicQueryParser_, defaultField, analyzer, parser)
 }
 
 id<OrgW3cDomDocument> OrgApacheLuceneQueryparserXmlCoreParser_parseXMLWithJavaIoInputStream_(JavaIoInputStream *pXmlFile) {
@@ -209,14 +223,14 @@ id<OrgW3cDomDocument> OrgApacheLuceneQueryparserXmlCoreParser_parseXMLWithJavaIo
     db = [((JavaxXmlParsersDocumentBuilderFactory *) nil_chk(dbf)) newDocumentBuilder];
   }
   @catch (JavaLangException *se) {
-    @throw [new_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_withJavaLangThrowable_(@"XML Parser configuration error", se) autorelease];
+    @throw create_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_withNSException_(@"XML Parser configuration error", se);
   }
   id<OrgW3cDomDocument> doc = nil;
   @try {
     doc = [((JavaxXmlParsersDocumentBuilder *) nil_chk(db)) parseWithJavaIoInputStream:pXmlFile];
   }
   @catch (JavaLangException *se) {
-    @throw [new_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_withJavaLangThrowable_(JreStrcat("$@", @"Error parsing XML stream:", se), se) autorelease];
+    @throw create_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_withNSException_(JreStrcat("$@", @"Error parsing XML stream:", se), se);
   }
   return doc;
 }

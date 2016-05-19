@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneRangetreeGrowingHeapSliceWriter_INCLUDE_ALL")
-#if OrgApacheLuceneRangetreeGrowingHeapSliceWriter_RESTRICT
-#define OrgApacheLuceneRangetreeGrowingHeapSliceWriter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneRangetreeGrowingHeapSliceWriter")
+#ifdef RESTRICT_OrgApacheLuceneRangetreeGrowingHeapSliceWriter
+#define INCLUDE_ALL_OrgApacheLuceneRangetreeGrowingHeapSliceWriter 0
 #else
-#define OrgApacheLuceneRangetreeGrowingHeapSliceWriter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneRangetreeGrowingHeapSliceWriter 1
 #endif
-#undef OrgApacheLuceneRangetreeGrowingHeapSliceWriter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneRangetreeGrowingHeapSliceWriter
 
-#if !defined (_OrgApacheLuceneRangetreeGrowingHeapSliceWriter_) && (OrgApacheLuceneRangetreeGrowingHeapSliceWriter_INCLUDE_ALL || OrgApacheLuceneRangetreeGrowingHeapSliceWriter_INCLUDE)
-#define _OrgApacheLuceneRangetreeGrowingHeapSliceWriter_
+#if !defined (OrgApacheLuceneRangetreeGrowingHeapSliceWriter_) && (INCLUDE_ALL_OrgApacheLuceneRangetreeGrowingHeapSliceWriter || defined(INCLUDE_OrgApacheLuceneRangetreeGrowingHeapSliceWriter))
+#define OrgApacheLuceneRangetreeGrowingHeapSliceWriter_
 
-#define OrgApacheLuceneRangetreeSliceWriter_RESTRICT 1
-#define OrgApacheLuceneRangetreeSliceWriter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneRangetreeSliceWriter 1
+#define INCLUDE_OrgApacheLuceneRangetreeSliceWriter 1
 #include "org/apache/lucene/rangetree/SliceWriter.h"
 
 @class IOSIntArray;
@@ -60,8 +60,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneRangetreeGrowingHeapSliceWriter_initWithIn
 
 FOUNDATION_EXPORT OrgApacheLuceneRangetreeGrowingHeapSliceWriter *new_OrgApacheLuceneRangetreeGrowingHeapSliceWriter_initWithInt_(jint maxSize) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeGrowingHeapSliceWriter *create_OrgApacheLuceneRangetreeGrowingHeapSliceWriter_initWithInt_(jint maxSize);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeGrowingHeapSliceWriter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneRangetreeGrowingHeapSliceWriter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneRangetreeGrowingHeapSliceWriter")

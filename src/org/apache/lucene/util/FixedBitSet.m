@@ -27,6 +27,11 @@
   jint numWords_;
 }
 
+/*!
+ @brief Checks if the bits past numBits are clear.
+ Some methods rely on this implicit assumption: search for "Depends on the ghost bits being clear!" 
+ @return true if the bits past numBits are clear.
+ */
 - (jboolean)verifyGhostBitsClear;
 
 - (void)or__WithLongArray:(IOSLongArray *)otherArr
@@ -45,8 +50,9 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFixedBitSet, bits_, IOSLongArray *)
 
-static jlong OrgApacheLuceneUtilFixedBitSet_BASE_RAM_BYTES_USED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFixedBitSet, BASE_RAM_BYTES_USED_, jlong)
+inline jlong OrgApacheLuceneUtilFixedBitSet_get_BASE_RAM_BYTES_USED();
+static jlong OrgApacheLuceneUtilFixedBitSet_BASE_RAM_BYTES_USED;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilFixedBitSet, BASE_RAM_BYTES_USED, jlong)
 
 __attribute__((unused)) static jboolean OrgApacheLuceneUtilFixedBitSet_verifyGhostBitsClear(OrgApacheLuceneUtilFixedBitSet *self);
 
@@ -106,7 +112,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFixedBitSet)
 }
 
 - (jlong)ramBytesUsed {
-  return OrgApacheLuceneUtilFixedBitSet_BASE_RAM_BYTES_USED_ + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithLongArray_(bits_);
+  return OrgApacheLuceneUtilFixedBitSet_BASE_RAM_BYTES_USED + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithLongArray_(bits_);
 }
 
 - (IOSLongArray *)getBits {
@@ -362,7 +368,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFixedBitSet)
 - (OrgApacheLuceneUtilFixedBitSet *)clone {
   IOSLongArray *bits = [IOSLongArray arrayWithLength:((IOSLongArray *) nil_chk(self->bits_))->size_];
   JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(self->bits_, 0, bits, 0, numWords_);
-  return [new_OrgApacheLuceneUtilFixedBitSet_initWithLongArray_withInt_(bits, numBits_) autorelease];
+  return create_OrgApacheLuceneUtilFixedBitSet_initWithLongArray_withInt_(bits, numBits_);
 }
 
 - (jboolean)isEqual:(id)o {
@@ -372,7 +378,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFixedBitSet)
   if (!([o isKindOfClass:[OrgApacheLuceneUtilFixedBitSet class]])) {
     return false;
   }
-  OrgApacheLuceneUtilFixedBitSet *other = (OrgApacheLuceneUtilFixedBitSet *) check_class_cast(o, [OrgApacheLuceneUtilFixedBitSet class]);
+  OrgApacheLuceneUtilFixedBitSet *other = (OrgApacheLuceneUtilFixedBitSet *) cast_chk(o, [OrgApacheLuceneUtilFixedBitSet class]);
   if (numBits_ != ((OrgApacheLuceneUtilFixedBitSet *) nil_chk(other))->numBits_) {
     return false;
   }
@@ -395,7 +401,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFixedBitSet)
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilFixedBitSet class]) {
-    OrgApacheLuceneUtilFixedBitSet_BASE_RAM_BYTES_USED_ = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilFixedBitSet_class_());
+    OrgApacheLuceneUtilFixedBitSet_BASE_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilFixedBitSet_class_());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilFixedBitSet)
   }
 }
@@ -444,7 +450,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFixedBitSet)
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "BASE_RAM_BYTES_USED_", NULL, 0x1a, "J", &OrgApacheLuceneUtilFixedBitSet_BASE_RAM_BYTES_USED_, NULL, .constantValue.asLong = 0 },
+    { "BASE_RAM_BYTES_USED", "BASE_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneUtilFixedBitSet_BASE_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
     { "bits_", NULL, 0x12, "[J", NULL, NULL, .constantValue.asLong = 0 },
     { "numBits_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "numWords_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
@@ -466,7 +472,7 @@ OrgApacheLuceneUtilFixedBitSet *OrgApacheLuceneUtilFixedBitSet_ensureCapacityWit
     if (numWords >= ((IOSLongArray *) nil_chk(arr))->size_) {
       arr = OrgApacheLuceneUtilArrayUtil_growWithLongArray_withInt_(arr, numWords + 1);
     }
-    return [new_OrgApacheLuceneUtilFixedBitSet_initWithLongArray_withInt_(arr, JreLShift32(((IOSLongArray *) nil_chk(arr))->size_, 6)) autorelease];
+    return create_OrgApacheLuceneUtilFixedBitSet_initWithLongArray_withInt_(arr, JreLShift32(((IOSLongArray *) nil_chk(arr))->size_, 6));
   }
 }
 
@@ -509,16 +515,18 @@ void OrgApacheLuceneUtilFixedBitSet_initWithInt_(OrgApacheLuceneUtilFixedBitSet 
 }
 
 OrgApacheLuceneUtilFixedBitSet *new_OrgApacheLuceneUtilFixedBitSet_initWithInt_(jint numBits) {
-  OrgApacheLuceneUtilFixedBitSet *self = [OrgApacheLuceneUtilFixedBitSet alloc];
-  OrgApacheLuceneUtilFixedBitSet_initWithInt_(self, numBits);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFixedBitSet, initWithInt_, numBits)
+}
+
+OrgApacheLuceneUtilFixedBitSet *create_OrgApacheLuceneUtilFixedBitSet_initWithInt_(jint numBits) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFixedBitSet, initWithInt_, numBits)
 }
 
 void OrgApacheLuceneUtilFixedBitSet_initWithLongArray_withInt_(OrgApacheLuceneUtilFixedBitSet *self, IOSLongArray *storedBits, jint numBits) {
   OrgApacheLuceneUtilBitSet_init(self);
   self->numWords_ = OrgApacheLuceneUtilFixedBitSet_bits2wordsWithInt_(numBits);
   if (self->numWords_ > ((IOSLongArray *) nil_chk(storedBits))->size_) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$", @"The given long array is too small  to hold ", numBits, @" bits")) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$", @"The given long array is too small  to hold ", numBits, @" bits"));
   }
   self->numBits_ = numBits;
   JreStrongAssign(&self->bits_, storedBits);
@@ -526,9 +534,11 @@ void OrgApacheLuceneUtilFixedBitSet_initWithLongArray_withInt_(OrgApacheLuceneUt
 }
 
 OrgApacheLuceneUtilFixedBitSet *new_OrgApacheLuceneUtilFixedBitSet_initWithLongArray_withInt_(IOSLongArray *storedBits, jint numBits) {
-  OrgApacheLuceneUtilFixedBitSet *self = [OrgApacheLuceneUtilFixedBitSet alloc];
-  OrgApacheLuceneUtilFixedBitSet_initWithLongArray_withInt_(self, storedBits, numBits);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFixedBitSet, initWithLongArray_withInt_, storedBits, numBits)
+}
+
+OrgApacheLuceneUtilFixedBitSet *create_OrgApacheLuceneUtilFixedBitSet_initWithLongArray_withInt_(IOSLongArray *storedBits, jint numBits) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFixedBitSet, initWithLongArray_withInt_, storedBits, numBits)
 }
 
 jboolean OrgApacheLuceneUtilFixedBitSet_verifyGhostBitsClear(OrgApacheLuceneUtilFixedBitSet *self) {

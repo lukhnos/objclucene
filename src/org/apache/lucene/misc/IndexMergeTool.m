@@ -33,7 +33,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "mainWithNSStringArray:", "main", "V", 0x9, "Ljava.io.IOException;", NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "IndexMergeTool", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneMiscIndexMergeTool = { 2, "IndexMergeTool", "org.apache.lucene.misc", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneMiscIndexMergeTool;
@@ -44,21 +44,21 @@ J2OBJC_IGNORE_DESIGNATED_END
 void OrgApacheLuceneMiscIndexMergeTool_mainWithNSStringArray_(IOSObjectArray *args) {
   OrgApacheLuceneMiscIndexMergeTool_initialize();
   if (((IOSObjectArray *) nil_chk(args))->size_ < 3) {
-    [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, err_))) printlnWithNSString:@"Usage: IndexMergeTool <mergedIndex> <index1> <index2> [index3] ..."];
+    [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, err))) printlnWithNSString:@"Usage: IndexMergeTool <mergedIndex> <index1> <index2> [index3] ..."];
     JavaLangSystem_exitWithInt_(1);
   }
   OrgApacheLuceneStoreFSDirectory *mergedIndex = OrgApacheLuceneStoreFSDirectory_openWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePaths_getWithNSString_(IOSObjectArray_Get(args, 0)));
-  OrgApacheLuceneIndexIndexWriter *writer = [new_OrgApacheLuceneIndexIndexWriter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_(mergedIndex, [((OrgApacheLuceneIndexIndexWriterConfig *) [new_OrgApacheLuceneIndexIndexWriterConfig_initWithOrgApacheLuceneAnalysisAnalyzer_(nil) autorelease]) setOpenModeWithOrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum:JreLoadStatic(OrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum, CREATE)]) autorelease];
+  OrgApacheLuceneIndexIndexWriter *writer = create_OrgApacheLuceneIndexIndexWriter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_(mergedIndex, [create_OrgApacheLuceneIndexIndexWriterConfig_initWithOrgApacheLuceneAnalysisAnalyzer_(nil) setOpenModeWithOrgApacheLuceneIndexIndexWriterConfig_OpenMode:JreLoadEnum(OrgApacheLuceneIndexIndexWriterConfig_OpenMode, CREATE)]);
   IOSObjectArray *indexes = [IOSObjectArray arrayWithLength:args->size_ - 1 type:OrgApacheLuceneStoreDirectory_class_()];
   for (jint i = 1; i < args->size_; i++) {
     IOSObjectArray_Set(indexes, i - 1, OrgApacheLuceneStoreFSDirectory_openWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePaths_getWithNSString_(IOSObjectArray_Get(args, i))));
   }
-  [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out_))) printlnWithNSString:@"Merging..."];
+  [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out))) printlnWithNSString:@"Merging..."];
   [writer addIndexesWithOrgApacheLuceneStoreDirectoryArray:indexes];
-  [JreLoadStatic(JavaLangSystem, out_) printlnWithNSString:@"Full merge..."];
+  [JreLoadStatic(JavaLangSystem, out) printlnWithNSString:@"Full merge..."];
   [writer forceMergeWithInt:1];
   [writer close];
-  [JreLoadStatic(JavaLangSystem, out_) printlnWithNSString:@"Done."];
+  [JreLoadStatic(JavaLangSystem, out) printlnWithNSString:@"Done."];
 }
 
 void OrgApacheLuceneMiscIndexMergeTool_init(OrgApacheLuceneMiscIndexMergeTool *self) {
@@ -66,9 +66,11 @@ void OrgApacheLuceneMiscIndexMergeTool_init(OrgApacheLuceneMiscIndexMergeTool *s
 }
 
 OrgApacheLuceneMiscIndexMergeTool *new_OrgApacheLuceneMiscIndexMergeTool_init() {
-  OrgApacheLuceneMiscIndexMergeTool *self = [OrgApacheLuceneMiscIndexMergeTool alloc];
-  OrgApacheLuceneMiscIndexMergeTool_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneMiscIndexMergeTool, init)
+}
+
+OrgApacheLuceneMiscIndexMergeTool *create_OrgApacheLuceneMiscIndexMergeTool_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneMiscIndexMergeTool, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneMiscIndexMergeTool)

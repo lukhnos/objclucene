@@ -7,7 +7,6 @@
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/lang/RuntimeException.h"
-#include "java/lang/Throwable.h"
 #include "java/util/ArrayList.h"
 #include "java/util/List.h"
 #include "org/apache/lucene/analysis/Analyzer.h"
@@ -38,12 +37,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder, ana
 }
 
 - (OrgApacheLuceneSearchFilter *)getFilterWithOrgW3cDomElement:(id<OrgW3cDomElement>)e {
-  id<JavaUtilList> terms = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> terms = create_JavaUtilArrayList_init();
   NSString *text = OrgApacheLuceneQueryparserXmlDOMUtils_getNonBlankTextOrFailWithOrgW3cDomElement_(e);
   NSString *fieldName = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithInheritanceOrFailWithOrgW3cDomElement_withNSString_(e, @"fieldName");
   @try {
     OrgApacheLuceneAnalysisTokenStream *ts = [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(analyzer_)) tokenStreamWithNSString:fieldName withNSString:text];
-    JavaLangThrowable *__primaryException1 = nil;
+    NSException *__primaryException1 = nil;
     @try {
       id<OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute> termAtt = [((OrgApacheLuceneAnalysisTokenStream *) nil_chk(ts)) addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_class_()];
       [ts reset];
@@ -52,7 +51,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder, ana
       }
       [ts end];
     }
-    @catch (JavaLangThrowable *e) {
+    @catch (NSException *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -61,8 +60,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder, ana
         if (__primaryException1 != nil) {
           @try {
             [ts close];
-          } @catch (JavaLangThrowable *e) {
-            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          } @catch (NSException *e) {
+            [__primaryException1 addSuppressedWithNSException:e];
           }
         } else {
           [ts close];
@@ -71,9 +70,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder, ana
     }
   }
   @catch (JavaIoIOException *ioe) {
-    @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@", @"Error constructing terms from index:", ioe)) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@", @"Error constructing terms from index:", ioe));
   }
-  return [new_OrgApacheLuceneQueriesTermsFilter_initWithNSString_withJavaUtilList_(fieldName, terms) autorelease];
+  return create_OrgApacheLuceneQueriesTermsFilter_initWithNSString_withJavaUtilList_(fieldName, terms);
 }
 
 - (void)dealloc {
@@ -101,9 +100,11 @@ void OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder_initWithOrgApacheLu
 }
 
 OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder *new_OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *analyzer) {
-  OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder *self = [OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder alloc];
-  OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_(self, analyzer);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder, initWithOrgApacheLuceneAnalysisAnalyzer_, analyzer)
+}
+
+OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder *create_OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *analyzer) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder, initWithOrgApacheLuceneAnalysisAnalyzer_, analyzer)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder)

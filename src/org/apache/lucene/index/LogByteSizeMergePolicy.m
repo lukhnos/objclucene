@@ -14,6 +14,18 @@
 
 @implementation OrgApacheLuceneIndexLogByteSizeMergePolicy
 
++ (jdouble)DEFAULT_MIN_MERGE_MB {
+  return OrgApacheLuceneIndexLogByteSizeMergePolicy_DEFAULT_MIN_MERGE_MB;
+}
+
++ (jdouble)DEFAULT_MAX_MERGE_MB {
+  return OrgApacheLuceneIndexLogByteSizeMergePolicy_DEFAULT_MAX_MERGE_MB;
+}
+
++ (jdouble)DEFAULT_MAX_MERGE_MB_FOR_FORCED_MERGE {
+  return OrgApacheLuceneIndexLogByteSizeMergePolicy_DEFAULT_MAX_MERGE_MB_FOR_FORCED_MERGE;
+}
+
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexLogByteSizeMergePolicy_init(self);
@@ -80,9 +92,11 @@ void OrgApacheLuceneIndexLogByteSizeMergePolicy_init(OrgApacheLuceneIndexLogByte
 }
 
 OrgApacheLuceneIndexLogByteSizeMergePolicy *new_OrgApacheLuceneIndexLogByteSizeMergePolicy_init() {
-  OrgApacheLuceneIndexLogByteSizeMergePolicy *self = [OrgApacheLuceneIndexLogByteSizeMergePolicy alloc];
-  OrgApacheLuceneIndexLogByteSizeMergePolicy_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexLogByteSizeMergePolicy, init)
+}
+
+OrgApacheLuceneIndexLogByteSizeMergePolicy *create_OrgApacheLuceneIndexLogByteSizeMergePolicy_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexLogByteSizeMergePolicy, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexLogByteSizeMergePolicy)

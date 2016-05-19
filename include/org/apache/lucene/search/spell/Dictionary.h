@@ -5,21 +5,31 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSpellDictionary_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSpellDictionary_RESTRICT
-#define OrgApacheLuceneSearchSpellDictionary_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpellDictionary")
+#ifdef RESTRICT_OrgApacheLuceneSearchSpellDictionary
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpellDictionary 0
 #else
-#define OrgApacheLuceneSearchSpellDictionary_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpellDictionary 1
 #endif
-#undef OrgApacheLuceneSearchSpellDictionary_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSpellDictionary
 
-#if !defined (_OrgApacheLuceneSearchSpellDictionary_) && (OrgApacheLuceneSearchSpellDictionary_INCLUDE_ALL || OrgApacheLuceneSearchSpellDictionary_INCLUDE)
-#define _OrgApacheLuceneSearchSpellDictionary_
+#if !defined (OrgApacheLuceneSearchSpellDictionary_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpellDictionary || defined(INCLUDE_OrgApacheLuceneSearchSpellDictionary))
+#define OrgApacheLuceneSearchSpellDictionary_
 
 @protocol OrgApacheLuceneSearchSuggestInputIterator;
 
+/*!
+ @brief A simple interface representing a Dictionary.
+ A Dictionary
+ here is a list of entries, where every entry consists of
+ term, weight and payload.
+ */
 @protocol OrgApacheLuceneSearchSpellDictionary < NSObject, JavaObject >
 
+/*!
+ @brief Returns an iterator over all the entries
+ @return Iterator
+ */
 - (id<OrgApacheLuceneSearchSuggestInputIterator>)getEntryIterator;
 
 @end
@@ -30,4 +40,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellDictionary)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSpellDictionary_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpellDictionary")

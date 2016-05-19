@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionFunctionValues_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionFunctionValues_RESTRICT
-#define OrgApacheLuceneQueriesFunctionFunctionValues_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionFunctionValues")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionFunctionValues
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionFunctionValues 0
 #else
-#define OrgApacheLuceneQueriesFunctionFunctionValues_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionFunctionValues 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionFunctionValues_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionFunctionValues
 
-#if !defined (_OrgApacheLuceneQueriesFunctionFunctionValues_) && (OrgApacheLuceneQueriesFunctionFunctionValues_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionFunctionValues_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionFunctionValues_
+#if !defined (OrgApacheLuceneQueriesFunctionFunctionValues_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionFunctionValues || defined(INCLUDE_OrgApacheLuceneQueriesFunctionFunctionValues))
+#define OrgApacheLuceneQueriesFunctionFunctionValues_
 
 @class IOSByteArray;
 @class IOSDoubleArray;
@@ -29,6 +29,10 @@
 @class OrgApacheLuceneSearchExplanation;
 @class OrgApacheLuceneUtilBytesRefBuilder;
 
+/*!
+ @brief Represents field values as different types.
+ Normally created via a <code>ValueSource</code> for a particular field and reader.
+ */
 @interface OrgApacheLuceneQueriesFunctionFunctionValues : NSObject
 
 #pragma mark Public
@@ -37,6 +41,9 @@
 
 - (jboolean)boolValWithInt:(jint)doc;
 
+/*!
+ @brief returns the bytes representation of the string val - TODO: should this return the indexed raw bytes not?
+ */
 - (jboolean)bytesValWithInt:(jint)doc
 withOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)target;
 
@@ -50,6 +57,9 @@ withOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)tar
 - (void)doubleValWithInt:(jint)doc
          withDoubleArray:(IOSDoubleArray *)vals;
 
+/*!
+ @brief Returns true if there is a value for this document
+ */
 - (jboolean)existsWithInt:(jint)doc;
 
 - (OrgApacheLuceneSearchExplanation *)explainWithInt:(jint)doc;
@@ -67,6 +77,9 @@ withOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)tar
 
 - (OrgApacheLuceneQueriesFunctionValueSourceScorer *)getScorerWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
 
+/*!
+   
+ */
 - (OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller *)getValueFiller;
 
 - (jint)intValWithInt:(jint)doc;
@@ -79,10 +92,21 @@ withOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)tar
 - (void)longValWithInt:(jint)doc
          withLongArray:(IOSLongArray *)vals;
 
+/*!
+ @return the number of unique sort ordinals this instance has
+ */
 - (jint)numOrd;
 
+/*!
+ @brief Native Java Object representation of the value
+ */
 - (id)objectValWithInt:(jint)doc;
 
+/*!
+ @param doc The doc to retrieve to sort ordinal for
+ @return the sort ordinal for the specified doc
+ TODO: Maybe we can just use intVal for this...
+ */
 - (jint)ordValWithInt:(jint)doc;
 
 - (jshort)shortValWithInt:(jint)doc;
@@ -107,19 +131,33 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionFunctionValues)
 
 #endif
 
-#if !defined (_OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller_) && (OrgApacheLuceneQueriesFunctionFunctionValues_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller_
+#if !defined (OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionFunctionValues || defined(INCLUDE_OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller))
+#define OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller_
 
 @class OrgApacheLuceneUtilMutableMutableValue;
 
+/*!
+ @brief Abstraction of the logic required to fill the value of a specified doc into
+ a reusable <code>MutableValue</code>.
+ Implementations of <code>FunctionValues</code>
+ are encouraged to define their own implementations of ValueFiller if their
+ value is not a float.
+ */
 @interface OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @brief MutableValue will be reused across calls.
+ Returns true if the value exists. 
+ */
 - (void)fillValueWithInt:(jint)doc;
 
+/*!
+ @brief MutableValue will be reused across calls
+ */
 - (OrgApacheLuceneUtilMutableMutableValue *)getValue;
 
 @end
@@ -132,4 +170,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionFunctionValues_ValueFil
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionFunctionValues_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionFunctionValues")

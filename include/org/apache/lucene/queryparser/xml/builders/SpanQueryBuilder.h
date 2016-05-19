@@ -5,24 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder_RESTRICT
-#define OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder 0
 #else
-#define OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder 1
 #endif
-#undef OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder
 
-#if !defined (_OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder_) && (OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder_INCLUDE_ALL || OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder_INCLUDE)
-#define _OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder_
+#if !defined (OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder))
+#define OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder_
 
-#define OrgApacheLuceneQueryparserXmlQueryBuilder_RESTRICT 1
-#define OrgApacheLuceneQueryparserXmlQueryBuilder_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserXmlQueryBuilder 1
+#define INCLUDE_OrgApacheLuceneQueryparserXmlQueryBuilder 1
 #include "org/apache/lucene/queryparser/xml/QueryBuilder.h"
 
 @class OrgApacheLuceneSearchSpansSpanQuery;
 @protocol OrgW3cDomElement;
 
+/*!
+ @brief Interface for retrieving a <code>SpanQuery</code>.
+ */
 @protocol OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder < OrgApacheLuceneQueryparserXmlQueryBuilder, NSObject, JavaObject >
 
 - (OrgApacheLuceneSearchSpansSpanQuery *)getSpanQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e;
@@ -35,4 +38,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder")

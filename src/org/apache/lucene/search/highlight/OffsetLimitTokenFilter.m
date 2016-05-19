@@ -33,7 +33,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter, offset
 
 - (jboolean)incrementToken {
   if (offsetCount_ < offsetLimit_ && [((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
-    jint offsetLength = [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAttrib_)) endOffset] - [offsetAttrib_ startOffset];
+    jint offsetLength = [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAttrib_)) endOffset] - [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAttrib_)) startOffset];
     offsetCount_ += offsetLength;
     return true;
   }
@@ -74,9 +74,11 @@ void OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter_initWithOrgApacheLucen
 }
 
 OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter *new_OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(OrgApacheLuceneAnalysisTokenStream *input, jint offsetLimit) {
-  OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter *self = [OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter alloc];
-  OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(self, input, offsetLimit);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_withInt_, input, offsetLimit)
+}
+
+OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter *create_OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(OrgApacheLuceneAnalysisTokenStream *input, jint offsetLimit) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_withInt_, input, offsetLimit)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter)

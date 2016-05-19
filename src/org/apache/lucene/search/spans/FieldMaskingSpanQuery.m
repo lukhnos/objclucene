@@ -50,9 +50,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansFieldMaskingSpanQuery, field_, NSS
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader {
   OrgApacheLuceneSearchSpansFieldMaskingSpanQuery *clone = nil;
-  OrgApacheLuceneSearchSpansSpanQuery *rewritten = (OrgApacheLuceneSearchSpansSpanQuery *) check_class_cast([((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(maskedQuery_)) rewriteWithOrgApacheLuceneIndexIndexReader:reader], [OrgApacheLuceneSearchSpansSpanQuery class]);
+  OrgApacheLuceneSearchSpansSpanQuery *rewritten = (OrgApacheLuceneSearchSpansSpanQuery *) cast_chk([((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(maskedQuery_)) rewriteWithOrgApacheLuceneIndexIndexReader:reader], [OrgApacheLuceneSearchSpansSpanQuery class]);
   if (rewritten != maskedQuery_) {
-    clone = (OrgApacheLuceneSearchSpansFieldMaskingSpanQuery *) check_class_cast([self clone], [OrgApacheLuceneSearchSpansFieldMaskingSpanQuery class]);
+    clone = (OrgApacheLuceneSearchSpansFieldMaskingSpanQuery *) cast_chk([self clone], [OrgApacheLuceneSearchSpansFieldMaskingSpanQuery class]);
     JreStrongAssign(&((OrgApacheLuceneSearchSpansFieldMaskingSpanQuery *) nil_chk(clone))->maskedQuery_, rewritten);
   }
   if (clone != nil) {
@@ -64,7 +64,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansFieldMaskingSpanQuery, field_, NSS
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
-  JavaLangStringBuilder *buffer = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_init();
   [buffer appendWithNSString:@"mask("];
   [buffer appendWithNSString:[((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(maskedQuery_)) toStringWithNSString:field]];
   [buffer appendWithNSString:@")"];
@@ -78,7 +78,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansFieldMaskingSpanQuery, field_, NSS
   if (![super isEqual:o]) {
     return false;
   }
-  OrgApacheLuceneSearchSpansFieldMaskingSpanQuery *other = (OrgApacheLuceneSearchSpansFieldMaskingSpanQuery *) check_class_cast(o, [OrgApacheLuceneSearchSpansFieldMaskingSpanQuery class]);
+  OrgApacheLuceneSearchSpansFieldMaskingSpanQuery *other = (OrgApacheLuceneSearchSpansFieldMaskingSpanQuery *) cast_chk(o, [OrgApacheLuceneSearchSpansFieldMaskingSpanQuery class]);
   return ([((NSString *) nil_chk([self getField])) isEqual:[((OrgApacheLuceneSearchSpansFieldMaskingSpanQuery *) nil_chk(other)) getField]] && [((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk([self getMaskedQuery])) isEqual:[other getMaskedQuery]]);
 }
 
@@ -120,9 +120,11 @@ void OrgApacheLuceneSearchSpansFieldMaskingSpanQuery_initWithOrgApacheLuceneSear
 }
 
 OrgApacheLuceneSearchSpansFieldMaskingSpanQuery *new_OrgApacheLuceneSearchSpansFieldMaskingSpanQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withNSString_(OrgApacheLuceneSearchSpansSpanQuery *maskedQuery, NSString *maskedField) {
-  OrgApacheLuceneSearchSpansFieldMaskingSpanQuery *self = [OrgApacheLuceneSearchSpansFieldMaskingSpanQuery alloc];
-  OrgApacheLuceneSearchSpansFieldMaskingSpanQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withNSString_(self, maskedQuery, maskedField);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSpansFieldMaskingSpanQuery, initWithOrgApacheLuceneSearchSpansSpanQuery_withNSString_, maskedQuery, maskedField)
+}
+
+OrgApacheLuceneSearchSpansFieldMaskingSpanQuery *create_OrgApacheLuceneSearchSpansFieldMaskingSpanQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withNSString_(OrgApacheLuceneSearchSpansSpanQuery *maskedQuery, NSString *maskedField) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSpansFieldMaskingSpanQuery, initWithOrgApacheLuceneSearchSpansSpanQuery_withNSString_, maskedQuery, maskedField)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansFieldMaskingSpanQuery)

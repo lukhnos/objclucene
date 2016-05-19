@@ -24,9 +24,9 @@
   return self;
 }
 
-- (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum *)acceptPositionWithOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)spans {
+- (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *)acceptPositionWithOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)spans {
   JreAssert(([((OrgApacheLuceneSearchSpansSpans *) nil_chk(spans)) startPosition] != [spans endPosition]), (@"org/apache/lucene/search/spans/SpanPositionRangeQuery.java:43 condition failed: assert spans.startPosition() != spans.endPosition();"));
-  OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum *res = ([spans startPosition] >= end_) ? JreLoadStatic(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum, NO_MORE_IN_CURRENT_DOC) : ([spans startPosition] >= start_ && [spans endPosition] <= end_) ? JreLoadStatic(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum, YES) : JreLoadStatic(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum, NO);
+  OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *res = ([spans startPosition] >= end_) ? JreLoadEnum(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus, NO_MORE_IN_CURRENT_DOC) : ([spans startPosition] >= start_ && [spans endPosition] <= end_) ? JreLoadEnum(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus, YES) : JreLoadEnum(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus, NO);
   return res;
 }
 
@@ -39,7 +39,7 @@
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
-  JavaLangStringBuilder *buffer = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_init();
   [buffer appendWithNSString:@"spanPosRange("];
   [buffer appendWithNSString:[((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(match_)) toStringWithNSString:field]];
   [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([buffer appendWithNSString:@", "])) appendWithInt:start_])) appendWithNSString:@", "];
@@ -50,7 +50,7 @@
 }
 
 - (OrgApacheLuceneSearchSpansSpanPositionRangeQuery *)clone {
-  OrgApacheLuceneSearchSpansSpanPositionRangeQuery *result = [new_OrgApacheLuceneSearchSpansSpanPositionRangeQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withInt_withInt_((OrgApacheLuceneSearchSpansSpanQuery *) check_class_cast([((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(match_)) clone], [OrgApacheLuceneSearchSpansSpanQuery class]), start_, end_) autorelease];
+  OrgApacheLuceneSearchSpansSpanPositionRangeQuery *result = create_OrgApacheLuceneSearchSpansSpanPositionRangeQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withInt_withInt_((OrgApacheLuceneSearchSpansSpanQuery *) cast_chk([((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(match_)) clone], [OrgApacheLuceneSearchSpansSpanQuery class]), start_, end_);
   [result setBoostWithFloat:[self getBoost]];
   return result;
 }
@@ -59,7 +59,7 @@
   if (![super isEqual:o]) {
     return false;
   }
-  OrgApacheLuceneSearchSpansSpanPositionRangeQuery *other = (OrgApacheLuceneSearchSpansSpanPositionRangeQuery *) check_class_cast(o, [OrgApacheLuceneSearchSpansSpanPositionRangeQuery class]);
+  OrgApacheLuceneSearchSpansSpanPositionRangeQuery *other = (OrgApacheLuceneSearchSpansSpanPositionRangeQuery *) cast_chk(o, [OrgApacheLuceneSearchSpansSpanPositionRangeQuery class]);
   return self->end_ == ((OrgApacheLuceneSearchSpansSpanPositionRangeQuery *) nil_chk(other))->end_ && self->start_ == other->start_;
 }
 
@@ -97,9 +97,11 @@ void OrgApacheLuceneSearchSpansSpanPositionRangeQuery_initWithOrgApacheLuceneSea
 }
 
 OrgApacheLuceneSearchSpansSpanPositionRangeQuery *new_OrgApacheLuceneSearchSpansSpanPositionRangeQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withInt_withInt_(OrgApacheLuceneSearchSpansSpanQuery *match, jint start, jint end) {
-  OrgApacheLuceneSearchSpansSpanPositionRangeQuery *self = [OrgApacheLuceneSearchSpansSpanPositionRangeQuery alloc];
-  OrgApacheLuceneSearchSpansSpanPositionRangeQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withInt_withInt_(self, match, start, end);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSpansSpanPositionRangeQuery, initWithOrgApacheLuceneSearchSpansSpanQuery_withInt_withInt_, match, start, end)
+}
+
+OrgApacheLuceneSearchSpansSpanPositionRangeQuery *create_OrgApacheLuceneSearchSpansSpanPositionRangeQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withInt_withInt_(OrgApacheLuceneSearchSpansSpanQuery *match, jint start, jint end) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSpansSpanPositionRangeQuery, initWithOrgApacheLuceneSearchSpansSpanQuery_withInt_withInt_, match, start, end)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanPositionRangeQuery)

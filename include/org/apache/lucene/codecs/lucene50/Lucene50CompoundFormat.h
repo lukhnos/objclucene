@@ -5,32 +5,74 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_RESTRICT
-#define OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat")
+#ifdef RESTRICT_OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat
+#define INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat 0
 #else
-#define OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat 1
 #endif
-#undef OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat
 
-#if !defined (_OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_) && (OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_INCLUDE_ALL || OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_INCLUDE)
-#define _OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_
+#if !defined (OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_) && (INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat || defined(INCLUDE_OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat))
+#define OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_
 
-#define OrgApacheLuceneCodecsCompoundFormat_RESTRICT 1
-#define OrgApacheLuceneCodecsCompoundFormat_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneCodecsCompoundFormat 1
+#define INCLUDE_OrgApacheLuceneCodecsCompoundFormat 1
 #include "org/apache/lucene/codecs/CompoundFormat.h"
 
 @class OrgApacheLuceneIndexSegmentInfo;
 @class OrgApacheLuceneStoreDirectory;
 @class OrgApacheLuceneStoreIOContext;
 
-#define OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_VERSION_START 0
-#define OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_VERSION_CURRENT 0
-
+/*!
+ @brief Lucene 5.0 compound file format
+ <p>
+ Files:
+ <ul>
+ <li><tt>.cfs</tt>: An optional "virtual" file consisting of all the other 
+ index files for systems that frequently run out of file handles.
+ <li><tt>.cfe</tt>: The "virtual" compound file's entry table holding all 
+ entries in the corresponding .cfs file.
+ </ul>
+ <p>Description:</p>
+ <ul>
+ <li>Compound (.cfs) --&gt; Header, FileData <sup>FileCount</sup>, Footer</li>
+ <li>Compound Entry Table (.cfe) --&gt; Header, FileCount, &lt;FileName,
+ DataOffset, DataLength&gt; <sup>FileCount</sup></li>
+ <li>Header --&gt; <code>IndexHeader</code></li>
+ <li>FileCount --&gt; <code>VInt</code></li>
+ <li>DataOffset,DataLength,Checksum --&gt; <code>UInt64</code></li>
+ <li>FileName --&gt; <code>String</code></li>
+ <li>FileData --&gt; raw file data</li>
+ <li>Footer --&gt; <code>CodecFooter</code></li>
+ </ul>
+ <p>Notes:</p>
+ <ul>
+ <li>FileCount indicates how many files are contained in this compound file. 
+ The entry table that follows has that many entries. 
+ <li>Each directory entry contains a long pointer to the start of this file's data
+ section, the files length, and a String with that file's name.
+ </ul>
+ */
 @interface OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat : OrgApacheLuceneCodecsCompoundFormat
+
++ (NSString *)DATA_EXTENSION;
+
++ (NSString *)ENTRIES_EXTENSION;
+
++ (NSString *)DATA_CODEC;
+
++ (NSString *)ENTRY_CODEC;
+
++ (jint)VERSION_START;
+
++ (jint)VERSION_CURRENT;
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ */
 - (instancetype)init;
 
 - (OrgApacheLuceneStoreDirectory *)getCompoundReaderWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
@@ -45,28 +87,48 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_DATA_EXTENSION_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat, DATA_EXTENSION_, NSString *)
+/*!
+ @brief Extension of compound file
+ */
+inline NSString *OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_get_DATA_EXTENSION();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_DATA_EXTENSION;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat, DATA_EXTENSION, NSString *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_ENTRIES_EXTENSION_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat, ENTRIES_EXTENSION_, NSString *)
+/*!
+ @brief Extension of compound file entries
+ */
+inline NSString *OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_get_ENTRIES_EXTENSION();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_ENTRIES_EXTENSION;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat, ENTRIES_EXTENSION, NSString *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_DATA_CODEC_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat, DATA_CODEC_, NSString *)
+inline NSString *OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_get_DATA_CODEC();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_DATA_CODEC;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat, DATA_CODEC, NSString *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_ENTRY_CODEC_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat, ENTRY_CODEC_, NSString *)
+inline NSString *OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_get_ENTRY_CODEC();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_ENTRY_CODEC;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat, ENTRY_CODEC, NSString *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat, VERSION_START, jint)
+inline jint OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_get_VERSION_START();
+#define OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_VERSION_START 0
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat, VERSION_START, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat, VERSION_CURRENT, jint)
+inline jint OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_get_VERSION_CURRENT();
+#define OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_VERSION_CURRENT 0
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat, VERSION_CURRENT, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_init(OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat *new_OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat *create_OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat")

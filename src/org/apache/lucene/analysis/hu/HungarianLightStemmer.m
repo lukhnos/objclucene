@@ -110,7 +110,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "removePluralWithCharArray:withInt:", "removePlural", "I", 0x2, NULL, NULL },
     { "normalizeWithCharArray:withInt:", "normalize", "I", 0x2, NULL, NULL },
     { "isVowelWithChar:", "isVowel", "Z", 0x2, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "HungarianLightStemmer", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisHuHungarianLightStemmer = { 2, "HungarianLightStemmer", "org.apache.lucene.analysis.hu", NULL, 0x1, 7, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisHuHungarianLightStemmer;
@@ -172,7 +172,7 @@ jint OrgApacheLuceneAnalysisHuHungarianLightStemmer_removePossessiveWithCharArra
 }
 
 jint OrgApacheLuceneAnalysisHuHungarianLightStemmer_removePluralWithCharArray_withInt_(OrgApacheLuceneAnalysisHuHungarianLightStemmer *self, IOSCharArray *s, jint len) {
-  if (len > 3 && IOSCharArray_Get(nil_chk(s), len - 1) == 'k') switch (IOSCharArray_Get(s, len - 2)) {
+  if (len > 3 && IOSCharArray_Get(nil_chk(s), len - 1) == 'k') switch (IOSCharArray_Get(nil_chk(s), len - 2)) {
     case 'a':
     case 'o':
     case 'e':
@@ -213,9 +213,11 @@ void OrgApacheLuceneAnalysisHuHungarianLightStemmer_init(OrgApacheLuceneAnalysis
 }
 
 OrgApacheLuceneAnalysisHuHungarianLightStemmer *new_OrgApacheLuceneAnalysisHuHungarianLightStemmer_init() {
-  OrgApacheLuceneAnalysisHuHungarianLightStemmer *self = [OrgApacheLuceneAnalysisHuHungarianLightStemmer alloc];
-  OrgApacheLuceneAnalysisHuHungarianLightStemmer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisHuHungarianLightStemmer, init)
+}
+
+OrgApacheLuceneAnalysisHuHungarianLightStemmer *create_OrgApacheLuceneAnalysisHuHungarianLightStemmer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisHuHungarianLightStemmer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisHuHungarianLightStemmer)

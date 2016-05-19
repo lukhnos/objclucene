@@ -3,14 +3,17 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/hy/package-info.java
 //
 
+/*!
+ @brief Analyzer for Armenian.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisHyPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisHyPackage_info_RESTRICT
-#define OrgApacheLuceneAnalysisHyPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisHyPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisHyPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisHyPackage_info 0
 #else
-#define OrgApacheLuceneAnalysisHyPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisHyPackage_info 1
 #endif
-#undef OrgApacheLuceneAnalysisHyPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisHyPackage_info
 
-#pragma pop_macro("OrgApacheLuceneAnalysisHyPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisHyPackage_info")

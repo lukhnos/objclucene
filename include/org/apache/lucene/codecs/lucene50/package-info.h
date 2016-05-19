@@ -3,14 +3,19 @@
 //  source: ./core/src/java/org/apache/lucene/codecs/lucene50/package-info.java
 //
 
+/*!
+ @brief Components from the Lucene 5.0 index format
+ See <code>org.apache.lucene.codecs.lucene53</code> for an overview
+ of the index format.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsLucene50Package_info_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsLucene50Package_info_RESTRICT
-#define OrgApacheLuceneCodecsLucene50Package_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Package_info")
+#ifdef RESTRICT_OrgApacheLuceneCodecsLucene50Package_info
+#define INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Package_info 0
 #else
-#define OrgApacheLuceneCodecsLucene50Package_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Package_info 1
 #endif
-#undef OrgApacheLuceneCodecsLucene50Package_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsLucene50Package_info
 
-#pragma pop_macro("OrgApacheLuceneCodecsLucene50Package_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Package_info")

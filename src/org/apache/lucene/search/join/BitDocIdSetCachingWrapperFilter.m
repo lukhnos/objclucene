@@ -58,11 +58,11 @@ __attribute__((unused)) static OrgApacheLuceneUtilBitDocIdSet *OrgApacheLuceneSe
     docIdSet = [((OrgApacheLuceneSearchFilter *) nil_chk(filter_)) getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:context withOrgApacheLuceneUtilBits:nil];
     docIdSet = OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter_docIdSetToCacheWithOrgApacheLuceneSearchDocIdSet_withOrgApacheLuceneIndexLeafReader_(self, docIdSet, reader);
     if (docIdSet == nil) {
-      docIdSet = JreLoadStatic(OrgApacheLuceneSearchDocIdSet, EMPTY_);
+      docIdSet = JreLoadStatic(OrgApacheLuceneSearchDocIdSet, EMPTY);
     }
     [cache_ putWithId:key withId:docIdSet];
   }
-  return docIdSet == JreLoadStatic(OrgApacheLuceneSearchDocIdSet, EMPTY_) ? nil : (OrgApacheLuceneUtilBitDocIdSet *) check_class_cast(docIdSet, [OrgApacheLuceneUtilBitDocIdSet class]);
+  return docIdSet == JreLoadStatic(OrgApacheLuceneSearchDocIdSet, EMPTY) ? nil : (OrgApacheLuceneUtilBitDocIdSet *) cast_chk(docIdSet, [OrgApacheLuceneUtilBitDocIdSet class]);
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
@@ -73,7 +73,7 @@ __attribute__((unused)) static OrgApacheLuceneUtilBitDocIdSet *OrgApacheLuceneSe
   if ([super isEqual:o] == false) {
     return false;
   }
-  OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter *other = (OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter *) check_class_cast(o, [OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter class]);
+  OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter *other = (OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter *) cast_chk(o, [OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter class]);
   return [((OrgApacheLuceneSearchFilter *) nil_chk(self->filter_)) isEqual:((OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter *) nil_chk(other))->filter_];
 }
 
@@ -109,14 +109,16 @@ __attribute__((unused)) static OrgApacheLuceneUtilBitDocIdSet *OrgApacheLuceneSe
 
 void OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter_initWithOrgApacheLuceneSearchFilter_(OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter *self, OrgApacheLuceneSearchFilter *filter) {
   OrgApacheLuceneSearchJoinBitDocIdSetFilter_init(self);
-  JreStrongAssign(&self->cache_, JavaUtilCollections_synchronizedMapWithJavaUtilMap_([new_JavaUtilWeakHashMap_init() autorelease]));
+  JreStrongAssign(&self->cache_, JavaUtilCollections_synchronizedMapWithJavaUtilMap_(create_JavaUtilWeakHashMap_init()));
   JreStrongAssign(&self->filter_, filter);
 }
 
 OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter *new_OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter_initWithOrgApacheLuceneSearchFilter_(OrgApacheLuceneSearchFilter *filter) {
-  OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter *self = [OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter alloc];
-  OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter_initWithOrgApacheLuceneSearchFilter_(self, filter);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter, initWithOrgApacheLuceneSearchFilter_, filter)
+}
+
+OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter *create_OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter_initWithOrgApacheLuceneSearchFilter_(OrgApacheLuceneSearchFilter *filter) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter, initWithOrgApacheLuceneSearchFilter_, filter)
 }
 
 OrgApacheLuceneUtilBitDocIdSet *OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter_docIdSetToCacheWithOrgApacheLuceneSearchDocIdSet_withOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter *self, OrgApacheLuceneSearchDocIdSet *docIdSet, OrgApacheLuceneIndexLeafReader *reader) {
@@ -125,7 +127,7 @@ OrgApacheLuceneUtilBitDocIdSet *OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapp
     return nil;
   }
   else {
-    OrgApacheLuceneUtilBitDocIdSet_Builder *builder = [new_OrgApacheLuceneUtilBitDocIdSet_Builder_initWithInt_([((OrgApacheLuceneIndexLeafReader *) nil_chk(reader)) maxDoc]) autorelease];
+    OrgApacheLuceneUtilBitDocIdSet_Builder *builder = create_OrgApacheLuceneUtilBitDocIdSet_Builder_initWithInt_([((OrgApacheLuceneIndexLeafReader *) nil_chk(reader)) maxDoc]);
     [builder or__WithOrgApacheLuceneSearchDocIdSetIterator:it];
     return [builder build];
   }

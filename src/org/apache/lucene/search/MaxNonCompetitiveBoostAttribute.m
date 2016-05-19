@@ -5,7 +5,6 @@
 
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/search/MaxNonCompetitiveBoostAttribute.h"
-#include "org/apache/lucene/util/BytesRef.h"
 
 @interface OrgApacheLuceneSearchMaxNonCompetitiveBoostAttribute : NSObject
 

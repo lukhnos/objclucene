@@ -44,7 +44,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     return true;
   }
   if ([other isKindOfClass:[OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl class]]) {
-    return ((OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl *) nil_chk(((OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl *) check_class_cast(other, [OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl class]))))->flags_ == flags_;
+    return ((OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl *) nil_chk(((OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl *) cast_chk(other, [OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl class]))))->flags_ == flags_;
   }
   return false;
 }
@@ -54,7 +54,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)copyToWithOrgApacheLuceneUtilAttributeImpl:(OrgApacheLuceneUtilAttributeImpl *)target {
-  id<OrgApacheLuceneAnalysisTokenattributesFlagsAttribute> t = (id<OrgApacheLuceneAnalysisTokenattributesFlagsAttribute>) check_protocol_cast(target, OrgApacheLuceneAnalysisTokenattributesFlagsAttribute_class_());
+  id<OrgApacheLuceneAnalysisTokenattributesFlagsAttribute> t = (id<OrgApacheLuceneAnalysisTokenattributesFlagsAttribute>) cast_check(target, OrgApacheLuceneAnalysisTokenattributesFlagsAttribute_class_());
   [((id<OrgApacheLuceneAnalysisTokenattributesFlagsAttribute>) nil_chk(t)) setFlagsWithInt:flags_];
 }
 
@@ -88,9 +88,11 @@ void OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl_init(OrgApacheLuce
 }
 
 OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl_init() {
-  OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl *self = [OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl alloc];
-  OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl, init)
+}
+
+OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl)

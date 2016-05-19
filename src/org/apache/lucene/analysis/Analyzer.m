@@ -51,6 +51,8 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisAnalyzer_$1_init(OrgA
 
 __attribute__((unused)) static OrgApacheLuceneAnalysisAnalyzer_$1 *new_OrgApacheLuceneAnalysisAnalyzer_$1_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneAnalysisAnalyzer_$1 *create_OrgApacheLuceneAnalysisAnalyzer_$1_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisAnalyzer_$1)
 
 @interface OrgApacheLuceneAnalysisAnalyzer_$2 : OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy
@@ -72,14 +74,24 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisAnalyzer_$2_init(OrgA
 
 __attribute__((unused)) static OrgApacheLuceneAnalysisAnalyzer_$2 *new_OrgApacheLuceneAnalysisAnalyzer_$2_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneAnalysisAnalyzer_$2 *create_OrgApacheLuceneAnalysisAnalyzer_$2_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisAnalyzer_$2)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisAnalyzer)
 
-OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *OrgApacheLuceneAnalysisAnalyzer_GLOBAL_REUSE_STRATEGY_;
-OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *OrgApacheLuceneAnalysisAnalyzer_PER_FIELD_REUSE_STRATEGY_;
+OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *OrgApacheLuceneAnalysisAnalyzer_GLOBAL_REUSE_STRATEGY;
+OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *OrgApacheLuceneAnalysisAnalyzer_PER_FIELD_REUSE_STRATEGY;
 
 @implementation OrgApacheLuceneAnalysisAnalyzer
+
++ (OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *)GLOBAL_REUSE_STRATEGY {
+  return OrgApacheLuceneAnalysisAnalyzer_GLOBAL_REUSE_STRATEGY;
+}
+
++ (OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *)PER_FIELD_REUSE_STRATEGY {
+  return OrgApacheLuceneAnalysisAnalyzer_PER_FIELD_REUSE_STRATEGY;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -114,7 +126,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (OrgApacheLuceneAnalysisTokenStream *)tokenStreamWithNSString:(NSString *)fieldName
                                                    withNSString:(NSString *)text {
   OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *components = [((OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *) nil_chk(reuseStrategy_)) getReusableComponentsWithOrgApacheLuceneAnalysisAnalyzer:self withNSString:fieldName];
-  OrgApacheLuceneAnalysisReusableStringReader *strReader = (components == nil || components->reusableStringReader_ == nil) ? [new_OrgApacheLuceneAnalysisReusableStringReader_init() autorelease] : components->reusableStringReader_;
+  OrgApacheLuceneAnalysisReusableStringReader *strReader = (components == nil || components->reusableStringReader_ == nil) ? create_OrgApacheLuceneAnalysisReusableStringReader_init() : ((OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *) nil_chk(components))->reusableStringReader_;
   [strReader setValueWithNSString:text];
   JavaIoReader *r = [self initReaderWithNSString:fieldName withJavaIoReader:strReader];
   if (components == nil) {
@@ -167,8 +179,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisAnalyzer class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisAnalyzer_GLOBAL_REUSE_STRATEGY_, new_OrgApacheLuceneAnalysisAnalyzer_$1_init());
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisAnalyzer_PER_FIELD_REUSE_STRATEGY_, new_OrgApacheLuceneAnalysisAnalyzer_$2_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisAnalyzer_GLOBAL_REUSE_STRATEGY, new_OrgApacheLuceneAnalysisAnalyzer_$1_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisAnalyzer_PER_FIELD_REUSE_STRATEGY, new_OrgApacheLuceneAnalysisAnalyzer_$2_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisAnalyzer)
   }
 }
@@ -192,8 +204,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "reuseStrategy_", NULL, 0x12, "Lorg.apache.lucene.analysis.Analyzer$ReuseStrategy;", NULL, NULL, .constantValue.asLong = 0 },
     { "version__", "version", 0x2, "Lorg.apache.lucene.util.Version;", NULL, NULL, .constantValue.asLong = 0 },
     { "storedValue_", NULL, 0x0, "Lorg.apache.lucene.util.CloseableThreadLocal;", NULL, "Lorg/apache/lucene/util/CloseableThreadLocal<Ljava/lang/Object;>;", .constantValue.asLong = 0 },
-    { "GLOBAL_REUSE_STRATEGY_", NULL, 0x19, "Lorg.apache.lucene.analysis.Analyzer$ReuseStrategy;", &OrgApacheLuceneAnalysisAnalyzer_GLOBAL_REUSE_STRATEGY_, NULL, .constantValue.asLong = 0 },
-    { "PER_FIELD_REUSE_STRATEGY_", NULL, 0x19, "Lorg.apache.lucene.analysis.Analyzer$ReuseStrategy;", &OrgApacheLuceneAnalysisAnalyzer_PER_FIELD_REUSE_STRATEGY_, NULL, .constantValue.asLong = 0 },
+    { "GLOBAL_REUSE_STRATEGY", "GLOBAL_REUSE_STRATEGY", 0x19, "Lorg.apache.lucene.analysis.Analyzer$ReuseStrategy;", &OrgApacheLuceneAnalysisAnalyzer_GLOBAL_REUSE_STRATEGY, NULL, .constantValue.asLong = 0 },
+    { "PER_FIELD_REUSE_STRATEGY", "PER_FIELD_REUSE_STRATEGY", 0x19, "Lorg.apache.lucene.analysis.Analyzer$ReuseStrategy;", &OrgApacheLuceneAnalysisAnalyzer_PER_FIELD_REUSE_STRATEGY, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.analysis.Analyzer$TokenStreamComponents;", "Lorg.apache.lucene.analysis.Analyzer$ReuseStrategy;"};
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisAnalyzer = { 2, "Analyzer", "org.apache.lucene.analysis", NULL, 0x401, 12, methods, 5, fields, 0, NULL, 2, inner_classes, NULL, NULL };
@@ -203,12 +215,12 @@ J2OBJC_IGNORE_DESIGNATED_END
 @end
 
 void OrgApacheLuceneAnalysisAnalyzer_init(OrgApacheLuceneAnalysisAnalyzer *self) {
-  OrgApacheLuceneAnalysisAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_(self, OrgApacheLuceneAnalysisAnalyzer_GLOBAL_REUSE_STRATEGY_);
+  OrgApacheLuceneAnalysisAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_(self, OrgApacheLuceneAnalysisAnalyzer_GLOBAL_REUSE_STRATEGY);
 }
 
 void OrgApacheLuceneAnalysisAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_(OrgApacheLuceneAnalysisAnalyzer *self, OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *reuseStrategy) {
   NSObject_init(self);
-  JreStrongAssign(&self->version__, JreLoadStatic(OrgApacheLuceneUtilVersion, LATEST_));
+  JreStrongAssign(&self->version__, JreLoadStatic(OrgApacheLuceneUtilVersion, LATEST));
   JreStrongAssignAndConsume(&self->storedValue_, new_OrgApacheLuceneUtilCloseableThreadLocal_init());
   JreStrongAssign(&self->reuseStrategy_, reuseStrategy);
 }
@@ -273,9 +285,11 @@ void OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuce
 }
 
 OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *new_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenizer *source, OrgApacheLuceneAnalysisTokenStream *result) {
-  OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *self = [OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents alloc];
-  OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(self, source, result);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents, initWithOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_, source, result)
+}
+
+OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *create_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenizer *source, OrgApacheLuceneAnalysisTokenStream *result) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents, initWithOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_, source, result)
 }
 
 void OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_(OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *self, OrgApacheLuceneAnalysisTokenizer *source) {
@@ -285,9 +299,11 @@ void OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuce
 }
 
 OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *new_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_(OrgApacheLuceneAnalysisTokenizer *source) {
-  OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *self = [OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents alloc];
-  OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_(self, source);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents, initWithOrgApacheLuceneAnalysisTokenizer_, source)
+}
+
+OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *create_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_(OrgApacheLuceneAnalysisTokenizer *source) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents, initWithOrgApacheLuceneAnalysisTokenizer_, source)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents)
@@ -344,16 +360,16 @@ void OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_init(OrgApacheLuceneAnalysisA
 
 id OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_getStoredValueWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *self, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
   if (((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(analyzer))->storedValue_ == nil) {
-    @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(@"this Analyzer is closed") autorelease];
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(@"this Analyzer is closed");
   }
-  return [((OrgApacheLuceneUtilCloseableThreadLocal *) nil_chk(analyzer->storedValue_)) get];
+  return [analyzer->storedValue_ get];
 }
 
 void OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_setStoredValueWithOrgApacheLuceneAnalysisAnalyzer_withId_(OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *self, OrgApacheLuceneAnalysisAnalyzer *analyzer, id storedValue) {
   if (((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(analyzer))->storedValue_ == nil) {
-    @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(@"this Analyzer is closed") autorelease];
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(@"this Analyzer is closed");
   }
-  [((OrgApacheLuceneUtilCloseableThreadLocal *) nil_chk(analyzer->storedValue_)) setWithId:storedValue];
+  [analyzer->storedValue_ setWithId:storedValue];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy)
@@ -362,7 +378,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy)
 
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)getReusableComponentsWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
                                                                                                        withNSString:(NSString *)fieldName {
-  return (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *) check_class_cast(OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_getStoredValueWithOrgApacheLuceneAnalysisAnalyzer_(self, analyzer), [OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents class]);
+  return (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *) cast_chk(OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_getStoredValueWithOrgApacheLuceneAnalysisAnalyzer_(self, analyzer), [OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents class]);
 }
 
 - (void)setReusableComponentsWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
@@ -395,9 +411,11 @@ void OrgApacheLuceneAnalysisAnalyzer_$1_init(OrgApacheLuceneAnalysisAnalyzer_$1 
 }
 
 OrgApacheLuceneAnalysisAnalyzer_$1 *new_OrgApacheLuceneAnalysisAnalyzer_$1_init() {
-  OrgApacheLuceneAnalysisAnalyzer_$1 *self = [OrgApacheLuceneAnalysisAnalyzer_$1 alloc];
-  OrgApacheLuceneAnalysisAnalyzer_$1_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisAnalyzer_$1, init)
+}
+
+OrgApacheLuceneAnalysisAnalyzer_$1 *create_OrgApacheLuceneAnalysisAnalyzer_$1_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisAnalyzer_$1, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisAnalyzer_$1)
@@ -406,19 +424,19 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisAnalyzer_$1)
 
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)getReusableComponentsWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
                                                                                                        withNSString:(NSString *)fieldName {
-  id<JavaUtilMap> componentsPerField = (id<JavaUtilMap>) check_protocol_cast(OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_getStoredValueWithOrgApacheLuceneAnalysisAnalyzer_(self, analyzer), JavaUtilMap_class_());
+  id<JavaUtilMap> componentsPerField = (id<JavaUtilMap>) cast_check(OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_getStoredValueWithOrgApacheLuceneAnalysisAnalyzer_(self, analyzer), JavaUtilMap_class_());
   return componentsPerField != nil ? [componentsPerField getWithId:fieldName] : nil;
 }
 
 - (void)setReusableComponentsWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
                                                     withNSString:(NSString *)fieldName
        withOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents:(OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)components {
-  id<JavaUtilMap> componentsPerField = (id<JavaUtilMap>) check_protocol_cast(OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_getStoredValueWithOrgApacheLuceneAnalysisAnalyzer_(self, analyzer), JavaUtilMap_class_());
+  id<JavaUtilMap> componentsPerField = (id<JavaUtilMap>) cast_check(OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_getStoredValueWithOrgApacheLuceneAnalysisAnalyzer_(self, analyzer), JavaUtilMap_class_());
   if (componentsPerField == nil) {
-    componentsPerField = [new_JavaUtilHashMap_init() autorelease];
+    componentsPerField = create_JavaUtilHashMap_init();
     OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_setStoredValueWithOrgApacheLuceneAnalysisAnalyzer_withId_(self, analyzer, componentsPerField);
   }
-  [((id<JavaUtilMap>) nil_chk(componentsPerField)) putWithId:fieldName withId:components];
+  [componentsPerField putWithId:fieldName withId:components];
 }
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -445,9 +463,11 @@ void OrgApacheLuceneAnalysisAnalyzer_$2_init(OrgApacheLuceneAnalysisAnalyzer_$2 
 }
 
 OrgApacheLuceneAnalysisAnalyzer_$2 *new_OrgApacheLuceneAnalysisAnalyzer_$2_init() {
-  OrgApacheLuceneAnalysisAnalyzer_$2 *self = [OrgApacheLuceneAnalysisAnalyzer_$2 alloc];
-  OrgApacheLuceneAnalysisAnalyzer_$2_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisAnalyzer_$2, init)
+}
+
+OrgApacheLuceneAnalysisAnalyzer_$2 *create_OrgApacheLuceneAnalysisAnalyzer_$2_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisAnalyzer_$2, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisAnalyzer_$2)

@@ -5,33 +5,55 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexQueryTimeoutImpl_INCLUDE_ALL")
-#if OrgApacheLuceneIndexQueryTimeoutImpl_RESTRICT
-#define OrgApacheLuceneIndexQueryTimeoutImpl_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexQueryTimeoutImpl")
+#ifdef RESTRICT_OrgApacheLuceneIndexQueryTimeoutImpl
+#define INCLUDE_ALL_OrgApacheLuceneIndexQueryTimeoutImpl 0
 #else
-#define OrgApacheLuceneIndexQueryTimeoutImpl_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexQueryTimeoutImpl 1
 #endif
-#undef OrgApacheLuceneIndexQueryTimeoutImpl_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexQueryTimeoutImpl
 
-#if !defined (_OrgApacheLuceneIndexQueryTimeoutImpl_) && (OrgApacheLuceneIndexQueryTimeoutImpl_INCLUDE_ALL || OrgApacheLuceneIndexQueryTimeoutImpl_INCLUDE)
-#define _OrgApacheLuceneIndexQueryTimeoutImpl_
+#if !defined (OrgApacheLuceneIndexQueryTimeoutImpl_) && (INCLUDE_ALL_OrgApacheLuceneIndexQueryTimeoutImpl || defined(INCLUDE_OrgApacheLuceneIndexQueryTimeoutImpl))
+#define OrgApacheLuceneIndexQueryTimeoutImpl_
 
-#define OrgApacheLuceneIndexQueryTimeout_RESTRICT 1
-#define OrgApacheLuceneIndexQueryTimeout_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexQueryTimeout 1
+#define INCLUDE_OrgApacheLuceneIndexQueryTimeout 1
 #include "org/apache/lucene/index/QueryTimeout.h"
 
 @class JavaLangLong;
 
+/*!
+ @brief An implementation of <code>QueryTimeout</code> that can be used by
+ the <code>ExitableDirectoryReader</code> class to time out and exit out
+ when a query takes a long time to rewrite.
+ */
 @interface OrgApacheLuceneIndexQueryTimeoutImpl : NSObject < OrgApacheLuceneIndexQueryTimeout >
 
 #pragma mark Public
 
+/*!
+ @brief Sets the time at which to time out by adding the given timeAllowed to the current time.
+ @param timeAllowed Number of milliseconds after which to time out. Use <code>Long.MAX_VALUE</code>
+ to effectively never time out.
+ */
 - (instancetype)initWithLong:(jlong)timeAllowed;
 
+/*!
+ @brief Returns time at which to time out, in nanoseconds relative to the (JVM-specific)
+ epoch for <code>System.nanoTime()</code>, to compare with the value returned by
+ <code>nanoTime()</code>.
+ */
 - (JavaLangLong *)getTimeoutAt;
 
+/*!
+ @brief Reset the timeout value.
+ */
 - (void)reset;
 
+/*!
+ @brief Return true if <code>reset()</code> has not been called
+ and the elapsed time has exceeded the time allowed.
+ */
 - (jboolean)shouldExit;
 
 - (NSString *)description;
@@ -44,8 +66,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexQueryTimeoutImpl_initWithLong_(OrgApa
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexQueryTimeoutImpl *new_OrgApacheLuceneIndexQueryTimeoutImpl_initWithLong_(jlong timeAllowed) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexQueryTimeoutImpl *create_OrgApacheLuceneIndexQueryTimeoutImpl_initWithLong_(jlong timeAllowed);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexQueryTimeoutImpl)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexQueryTimeoutImpl_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexQueryTimeoutImpl")

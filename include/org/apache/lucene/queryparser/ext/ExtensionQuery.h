@@ -5,31 +5,57 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserExtExtensionQuery_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserExtExtensionQuery_RESTRICT
-#define OrgApacheLuceneQueryparserExtExtensionQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserExtExtensionQuery")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserExtExtensionQuery
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserExtExtensionQuery 0
 #else
-#define OrgApacheLuceneQueryparserExtExtensionQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserExtExtensionQuery 1
 #endif
-#undef OrgApacheLuceneQueryparserExtExtensionQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserExtExtensionQuery
 
-#if !defined (_OrgApacheLuceneQueryparserExtExtensionQuery_) && (OrgApacheLuceneQueryparserExtExtensionQuery_INCLUDE_ALL || OrgApacheLuceneQueryparserExtExtensionQuery_INCLUDE)
-#define _OrgApacheLuceneQueryparserExtExtensionQuery_
+#if !defined (OrgApacheLuceneQueryparserExtExtensionQuery_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserExtExtensionQuery || defined(INCLUDE_OrgApacheLuceneQueryparserExtExtensionQuery))
+#define OrgApacheLuceneQueryparserExtExtensionQuery_
 
 @class OrgApacheLuceneQueryparserClassicQueryParser;
 
+/*!
+ @brief <code>ExtensionQuery</code> holds all query components extracted from the original
+ query string like the query field and the extension query string.
+ - seealso: Extensions
+ - seealso: ExtendableQueryParser
+ - seealso: ParserExtension
+ */
 @interface OrgApacheLuceneQueryparserExtExtensionQuery : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new <code>ExtensionQuery</code>
+ @param field
+ the query field
+ @param rawQueryString
+ the raw extension query string
+ */
 - (instancetype)initWithOrgApacheLuceneQueryparserClassicQueryParser:(OrgApacheLuceneQueryparserClassicQueryParser *)topLevelParser
                                                         withNSString:(NSString *)field
                                                         withNSString:(NSString *)rawQueryString;
 
+/*!
+ @brief Returns the query field
+ @return the query field
+ */
 - (NSString *)getField;
 
+/*!
+ @brief Returns the raw extension query string
+ @return the raw extension query string
+ */
 - (NSString *)getRawQueryString;
 
+/*!
+ @brief Returns the top level parser which created this <code>ExtensionQuery</code>
+ @return the top level parser which created this <code>ExtensionQuery</code>
+ */
 - (OrgApacheLuceneQueryparserClassicQueryParser *)getTopLevelParser;
 
 @end
@@ -40,8 +66,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserExtExtensionQuery_initWithOrgAp
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserExtExtensionQuery *new_OrgApacheLuceneQueryparserExtExtensionQuery_initWithOrgApacheLuceneQueryparserClassicQueryParser_withNSString_withNSString_(OrgApacheLuceneQueryparserClassicQueryParser *topLevelParser, NSString *field, NSString *rawQueryString) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserExtExtensionQuery *create_OrgApacheLuceneQueryparserExtExtensionQuery_initWithOrgApacheLuceneQueryparserClassicQueryParser_withNSString_withNSString_(OrgApacheLuceneQueryparserClassicQueryParser *topLevelParser, NSString *field, NSString *rawQueryString);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserExtExtensionQuery)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserExtExtensionQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserExtExtensionQuery")

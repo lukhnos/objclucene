@@ -12,10 +12,18 @@
 #include "org/apache/lucene/analysis/util/AbstractAnalysisFactory.h"
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_MAX_TOKEN_COUNT_KEY_ = @"maxTokenCount";
-NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_CONSUME_ALL_TOKENS_KEY_ = @"consumeAllTokens";
+NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_MAX_TOKEN_COUNT_KEY = @"maxTokenCount";
+NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_CONSUME_ALL_TOKENS_KEY = @"consumeAllTokens";
 
 @implementation OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory
+
++ (NSString *)MAX_TOKEN_COUNT_KEY {
+  return OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_MAX_TOKEN_COUNT_KEY;
+}
+
++ (NSString *)CONSUME_ALL_TOKENS_KEY {
+  return OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_CONSUME_ALL_TOKENS_KEY;
+}
 
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args {
   OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_initWithJavaUtilMap_(self, args);
@@ -23,17 +31,17 @@ NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_CONSU
 }
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  return [new_OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_(input, maxTokenCount_, consumeAllTokens_) autorelease];
+  return create_OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_(input, maxTokenCount_, consumeAllTokens_);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "LimitTokenCountFilterFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "LimitTokenCountFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenStream;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "MAX_TOKEN_COUNT_KEY_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_MAX_TOKEN_COUNT_KEY_, NULL, .constantValue.asLong = 0 },
-    { "CONSUME_ALL_TOKENS_KEY_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_CONSUME_ALL_TOKENS_KEY_, NULL, .constantValue.asLong = 0 },
+    { "MAX_TOKEN_COUNT_KEY", "MAX_TOKEN_COUNT_KEY", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_MAX_TOKEN_COUNT_KEY, NULL, .constantValue.asLong = 0 },
+    { "CONSUME_ALL_TOKENS_KEY", "CONSUME_ALL_TOKENS_KEY", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_CONSUME_ALL_TOKENS_KEY, NULL, .constantValue.asLong = 0 },
     { "maxTokenCount_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "consumeAllTokens_", NULL, 0x10, "Z", NULL, NULL, .constantValue.asLong = 0 },
   };
@@ -45,17 +53,19 @@ NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_CONSU
 
 void OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory *self, id<JavaUtilMap> args) {
   OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  self->maxTokenCount_ = [self requireIntWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_MAX_TOKEN_COUNT_KEY_];
-  self->consumeAllTokens_ = [self getBooleanWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_CONSUME_ALL_TOKENS_KEY_ withBoolean:false];
+  self->maxTokenCount_ = [self requireIntWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_MAX_TOKEN_COUNT_KEY];
+  self->consumeAllTokens_ = [self getBooleanWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_CONSUME_ALL_TOKENS_KEY withBoolean:false];
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory *self = [OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory alloc];
-  OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory *create_OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory)

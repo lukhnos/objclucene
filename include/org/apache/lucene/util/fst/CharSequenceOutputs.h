@@ -5,25 +5,29 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilFstCharSequenceOutputs_INCLUDE_ALL")
-#if OrgApacheLuceneUtilFstCharSequenceOutputs_RESTRICT
-#define OrgApacheLuceneUtilFstCharSequenceOutputs_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstCharSequenceOutputs")
+#ifdef RESTRICT_OrgApacheLuceneUtilFstCharSequenceOutputs
+#define INCLUDE_ALL_OrgApacheLuceneUtilFstCharSequenceOutputs 0
 #else
-#define OrgApacheLuceneUtilFstCharSequenceOutputs_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilFstCharSequenceOutputs 1
 #endif
-#undef OrgApacheLuceneUtilFstCharSequenceOutputs_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilFstCharSequenceOutputs
 
-#if !defined (_OrgApacheLuceneUtilFstCharSequenceOutputs_) && (OrgApacheLuceneUtilFstCharSequenceOutputs_INCLUDE_ALL || OrgApacheLuceneUtilFstCharSequenceOutputs_INCLUDE)
-#define _OrgApacheLuceneUtilFstCharSequenceOutputs_
+#if !defined (OrgApacheLuceneUtilFstCharSequenceOutputs_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstCharSequenceOutputs || defined(INCLUDE_OrgApacheLuceneUtilFstCharSequenceOutputs))
+#define OrgApacheLuceneUtilFstCharSequenceOutputs_
 
-#define OrgApacheLuceneUtilFstOutputs_RESTRICT 1
-#define OrgApacheLuceneUtilFstOutputs_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilFstOutputs 1
+#define INCLUDE_OrgApacheLuceneUtilFstOutputs 1
 #include "org/apache/lucene/util/fst/Outputs.h"
 
 @class OrgApacheLuceneStoreDataInput;
 @class OrgApacheLuceneStoreDataOutput;
 @class OrgApacheLuceneUtilCharsRef;
 
+/*!
+ @brief An FST <code>Outputs</code> implementation where each output
+ is a sequence of characters.
+ */
 @interface OrgApacheLuceneUtilFstCharSequenceOutputs : OrgApacheLuceneUtilFstOutputs
 
 #pragma mark Public
@@ -62,4 +66,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstCharSequenceOutputs)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilFstCharSequenceOutputs_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstCharSequenceOutputs")

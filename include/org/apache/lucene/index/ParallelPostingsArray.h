@@ -5,20 +5,18 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexParallelPostingsArray_INCLUDE_ALL")
-#if OrgApacheLuceneIndexParallelPostingsArray_RESTRICT
-#define OrgApacheLuceneIndexParallelPostingsArray_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexParallelPostingsArray")
+#ifdef RESTRICT_OrgApacheLuceneIndexParallelPostingsArray
+#define INCLUDE_ALL_OrgApacheLuceneIndexParallelPostingsArray 0
 #else
-#define OrgApacheLuceneIndexParallelPostingsArray_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexParallelPostingsArray 1
 #endif
-#undef OrgApacheLuceneIndexParallelPostingsArray_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexParallelPostingsArray
 
-#if !defined (_OrgApacheLuceneIndexParallelPostingsArray_) && (OrgApacheLuceneIndexParallelPostingsArray_INCLUDE_ALL || OrgApacheLuceneIndexParallelPostingsArray_INCLUDE)
-#define _OrgApacheLuceneIndexParallelPostingsArray_
+#if !defined (OrgApacheLuceneIndexParallelPostingsArray_) && (INCLUDE_ALL_OrgApacheLuceneIndexParallelPostingsArray || defined(INCLUDE_OrgApacheLuceneIndexParallelPostingsArray))
+#define OrgApacheLuceneIndexParallelPostingsArray_
 
 @class IOSIntArray;
-
-#define OrgApacheLuceneIndexParallelPostingsArray_BYTES_PER_POSTING 12
 
 @interface OrgApacheLuceneIndexParallelPostingsArray : NSObject {
  @public
@@ -27,6 +25,8 @@
   IOSIntArray *intStarts_;
   IOSIntArray *byteStarts_;
 }
+
++ (jint)BYTES_PER_POSTING;
 
 #pragma mark Package-Private
 
@@ -49,14 +49,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexParallelPostingsArray, textStarts_, IOSI
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexParallelPostingsArray, intStarts_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexParallelPostingsArray, byteStarts_, IOSIntArray *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexParallelPostingsArray, BYTES_PER_POSTING, jint)
+inline jint OrgApacheLuceneIndexParallelPostingsArray_get_BYTES_PER_POSTING();
+#define OrgApacheLuceneIndexParallelPostingsArray_BYTES_PER_POSTING 12
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexParallelPostingsArray, BYTES_PER_POSTING, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexParallelPostingsArray_initWithInt_(OrgApacheLuceneIndexParallelPostingsArray *self, jint size);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexParallelPostingsArray *new_OrgApacheLuceneIndexParallelPostingsArray_initWithInt_(jint size) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexParallelPostingsArray *create_OrgApacheLuceneIndexParallelPostingsArray_initWithInt_(jint size);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexParallelPostingsArray)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexParallelPostingsArray_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexParallelPostingsArray")

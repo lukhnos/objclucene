@@ -5,20 +5,26 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_RESTRICT
-#define OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterNormalizeCharMap")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCharfilterNormalizeCharMap
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterNormalizeCharMap 0
 #else
-#define OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterNormalizeCharMap 1
 #endif
-#undef OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCharfilterNormalizeCharMap
 
-#if !defined (_OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_) && (OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_INCLUDE_ALL || OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_INCLUDE)
-#define _OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_
+#if !defined (OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterNormalizeCharMap || defined(INCLUDE_OrgApacheLuceneAnalysisCharfilterNormalizeCharMap))
+#define OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_
 
 @class OrgApacheLuceneUtilFstFST;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Holds a map of String input to String output, to be used
+ with <code>MappingCharFilter</code>.
+ Use the <code>Builder</code>
+ to create this.
+ */
 @interface OrgApacheLuceneAnalysisCharfilterNormalizeCharMap : NSObject {
  @public
   OrgApacheLuceneUtilFstFST *map_;
@@ -36,20 +42,41 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCharfilterNormalizeCharMap)
 
 #endif
 
-#if !defined (_OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder_) && (OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_INCLUDE_ALL || OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder_INCLUDE)
-#define _OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder_
+#if !defined (OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterNormalizeCharMap || defined(INCLUDE_OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder))
+#define OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder_
 
 @class OrgApacheLuceneAnalysisCharfilterNormalizeCharMap;
 
+/*!
+ @brief Builds an NormalizeCharMap.
+ <p>
+ Call add() until you have added all the mappings, then call build() to get a NormalizeCharMap
+ */
 @interface OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @brief Records a replacement to be applied to the input
+ stream.
+ Whenever <code>singleMatch</code> occurs in
+ the input, it will be replaced with
+ <code>replacement</code>.
+ @param match input String to be replaced
+ @param replacement output String
+ @throws IllegalArgumentException if
+ <code>match</code> is the empty string, or was
+ already previously added
+ */
 - (void)addWithNSString:(NSString *)match
            withNSString:(NSString *)replacement;
 
+/*!
+ @brief Builds the NormalizeCharMap; call this once you
+ are done calling <code>add</code>.
+ */
 - (OrgApacheLuceneAnalysisCharfilterNormalizeCharMap *)build;
 
 @end
@@ -60,8 +87,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder *new_OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder *create_OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterNormalizeCharMap")

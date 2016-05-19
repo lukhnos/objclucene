@@ -4,7 +4,6 @@
 //
 
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/queryparser/flexible/messages/Message.h"
 #include "org/apache/lucene/queryparser/flexible/messages/NLSException.h"
 
 @interface OrgApacheLuceneQueryparserFlexibleMessagesNLSException : NSObject

@@ -65,9 +65,11 @@ void OrgApacheLuceneQueryparserFlexibleStandardConfigFuzzyConfig_init(OrgApacheL
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardConfigFuzzyConfig *new_OrgApacheLuceneQueryparserFlexibleStandardConfigFuzzyConfig_init() {
-  OrgApacheLuceneQueryparserFlexibleStandardConfigFuzzyConfig *self = [OrgApacheLuceneQueryparserFlexibleStandardConfigFuzzyConfig alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardConfigFuzzyConfig_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardConfigFuzzyConfig, init)
+}
+
+OrgApacheLuceneQueryparserFlexibleStandardConfigFuzzyConfig *create_OrgApacheLuceneQueryparserFlexibleStandardConfigFuzzyConfig_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardConfigFuzzyConfig, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleStandardConfigFuzzyConfig)

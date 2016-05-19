@@ -32,6 +32,9 @@
 
 - (void)upgradeToBitSet;
 
+/*!
+ @brief Grows the buffer to at least minSize, but never larger than threshold.
+ */
 - (void)growBufferWithInt:(jint)minSize;
 
 + (jint)dedupWithIntArray:(IOSIntArray *)arr
@@ -78,7 +81,7 @@ __attribute__((unused)) static jint OrgApacheLuceneUtilDocIdSetBuilder_dedupWith
           bufferSize_ = i;
           return;
         }
-        *IOSIntArray_GetRef(buffer_, bufferSize_++) = doc;
+        *IOSIntArray_GetRef(nil_chk(buffer_), bufferSize_++) = doc;
       }
       bufferSize_ = end;
       if (bufferSize_ + 1 >= threshold_) {
@@ -118,7 +121,7 @@ __attribute__((unused)) static jint OrgApacheLuceneUtilDocIdSetBuilder_dedupWith
       }
       OrgApacheLuceneUtilDocIdSetBuilder_growBufferWithInt_(self, bufferSize_ + 1);
     }
-    *IOSIntArray_GetRef(buffer_, bufferSize_++) = doc;
+    *IOSIntArray_GetRef(nil_chk(buffer_), bufferSize_++) = doc;
   }
 }
 
@@ -135,20 +138,20 @@ __attribute__((unused)) static jint OrgApacheLuceneUtilDocIdSetBuilder_dedupWith
   @try {
     if (bitSet_ != nil) {
       if (costHint == -1) {
-        return [new_OrgApacheLuceneUtilBitDocIdSet_initWithOrgApacheLuceneUtilBitSet_(bitSet_) autorelease];
+        return create_OrgApacheLuceneUtilBitDocIdSet_initWithOrgApacheLuceneUtilBitSet_(bitSet_);
       }
       else {
-        return [new_OrgApacheLuceneUtilBitDocIdSet_initWithOrgApacheLuceneUtilBitSet_withLong_(bitSet_, costHint) autorelease];
+        return create_OrgApacheLuceneUtilBitDocIdSet_initWithOrgApacheLuceneUtilBitSet_withLong_(bitSet_, costHint);
       }
     }
     else {
-      OrgApacheLuceneUtilLSBRadixSorter *sorter = [new_OrgApacheLuceneUtilLSBRadixSorter_init() autorelease];
+      OrgApacheLuceneUtilLSBRadixSorter *sorter = create_OrgApacheLuceneUtilLSBRadixSorter_init();
       [sorter sortWithIntArray:buffer_ withInt:0 withInt:bufferSize_];
       jint l = OrgApacheLuceneUtilDocIdSetBuilder_dedupWithIntArray_withInt_(buffer_, bufferSize_);
       JreAssert((l <= bufferSize_), (@"org/apache/lucene/util/DocIdSetBuilder.java:192 condition failed: assert l <= bufferSize;"));
       JreStrongAssign(&buffer_, OrgApacheLuceneUtilArrayUtil_growWithIntArray_withInt_(buffer_, l + 1));
       *IOSIntArray_GetRef(nil_chk(buffer_), l) = OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS;
-      return [new_OrgApacheLuceneUtilIntArrayDocIdSet_initWithIntArray_withInt_(buffer_, l) autorelease];
+      return create_OrgApacheLuceneUtilIntArrayDocIdSet_initWithIntArray_withInt_(buffer_, l);
     }
   }
   @finally {
@@ -199,16 +202,18 @@ void OrgApacheLuceneUtilDocIdSetBuilder_initWithInt_(OrgApacheLuceneUtilDocIdSet
 }
 
 OrgApacheLuceneUtilDocIdSetBuilder *new_OrgApacheLuceneUtilDocIdSetBuilder_initWithInt_(jint maxDoc) {
-  OrgApacheLuceneUtilDocIdSetBuilder *self = [OrgApacheLuceneUtilDocIdSetBuilder alloc];
-  OrgApacheLuceneUtilDocIdSetBuilder_initWithInt_(self, maxDoc);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilDocIdSetBuilder, initWithInt_, maxDoc)
+}
+
+OrgApacheLuceneUtilDocIdSetBuilder *create_OrgApacheLuceneUtilDocIdSetBuilder_initWithInt_(jint maxDoc) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilDocIdSetBuilder, initWithInt_, maxDoc)
 }
 
 void OrgApacheLuceneUtilDocIdSetBuilder_upgradeToBitSet(OrgApacheLuceneUtilDocIdSetBuilder *self) {
   JreAssert((self->bitSet_ == nil), (@"org/apache/lucene/util/DocIdSetBuilder.java:58 condition failed: assert bitSet == null;"));
   JreStrongAssignAndConsume(&self->bitSet_, new_OrgApacheLuceneUtilFixedBitSet_initWithInt_(self->maxDoc_));
   for (jint i = 0; i < self->bufferSize_; ++i) {
-    [self->bitSet_ setWithInt:IOSIntArray_Get(nil_chk(self->buffer_), i)];
+    [((OrgApacheLuceneUtilBitSet *) nil_chk(self->bitSet_)) setWithInt:IOSIntArray_Get(nil_chk(self->buffer_), i)];
   }
   JreStrongAssign(&self->buffer_, nil);
   self->bufferSize_ = 0;
@@ -219,7 +224,7 @@ void OrgApacheLuceneUtilDocIdSetBuilder_growBufferWithInt_(OrgApacheLuceneUtilDo
   if (((IOSIntArray *) nil_chk(self->buffer_))->size_ < minSize) {
     jint nextSize = JavaLangMath_minWithInt_withInt_(self->threshold_, OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(minSize, OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT));
     IOSIntArray *newBuffer = [IOSIntArray arrayWithLength:nextSize];
-    JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(self->buffer_, 0, newBuffer, 0, self->buffer_->size_);
+    JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(self->buffer_, 0, newBuffer, 0, ((IOSIntArray *) nil_chk(self->buffer_))->size_);
     JreStrongAssign(&self->buffer_, newBuffer);
   }
 }

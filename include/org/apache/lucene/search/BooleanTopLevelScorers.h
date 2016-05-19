@@ -5,17 +5,20 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchBooleanTopLevelScorers_INCLUDE_ALL")
-#if OrgApacheLuceneSearchBooleanTopLevelScorers_RESTRICT
-#define OrgApacheLuceneSearchBooleanTopLevelScorers_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchBooleanTopLevelScorers")
+#ifdef RESTRICT_OrgApacheLuceneSearchBooleanTopLevelScorers
+#define INCLUDE_ALL_OrgApacheLuceneSearchBooleanTopLevelScorers 0
 #else
-#define OrgApacheLuceneSearchBooleanTopLevelScorers_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchBooleanTopLevelScorers 1
 #endif
-#undef OrgApacheLuceneSearchBooleanTopLevelScorers_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchBooleanTopLevelScorers
 
-#if !defined (_OrgApacheLuceneSearchBooleanTopLevelScorers_) && (OrgApacheLuceneSearchBooleanTopLevelScorers_INCLUDE_ALL || OrgApacheLuceneSearchBooleanTopLevelScorers_INCLUDE)
-#define _OrgApacheLuceneSearchBooleanTopLevelScorers_
+#if !defined (OrgApacheLuceneSearchBooleanTopLevelScorers_) && (INCLUDE_ALL_OrgApacheLuceneSearchBooleanTopLevelScorers || defined(INCLUDE_OrgApacheLuceneSearchBooleanTopLevelScorers))
+#define OrgApacheLuceneSearchBooleanTopLevelScorers_
 
+/*!
+ @brief Internal document-at-a-time scorers used to deal with stupid coord() computation
+ */
 @interface OrgApacheLuceneSearchBooleanTopLevelScorers : NSObject
 
 #pragma mark Package-Private
@@ -30,20 +33,28 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchBooleanTopLevelScorers_init(OrgApach
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanTopLevelScorers *new_OrgApacheLuceneSearchBooleanTopLevelScorers_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanTopLevelScorers *create_OrgApacheLuceneSearchBooleanTopLevelScorers_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanTopLevelScorers)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchBooleanTopLevelScorers_BoostedScorer_) && (OrgApacheLuceneSearchBooleanTopLevelScorers_INCLUDE_ALL || OrgApacheLuceneSearchBooleanTopLevelScorers_BoostedScorer_INCLUDE)
-#define _OrgApacheLuceneSearchBooleanTopLevelScorers_BoostedScorer_
+#if !defined (OrgApacheLuceneSearchBooleanTopLevelScorers_BoostedScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchBooleanTopLevelScorers || defined(INCLUDE_OrgApacheLuceneSearchBooleanTopLevelScorers_BoostedScorer))
+#define OrgApacheLuceneSearchBooleanTopLevelScorers_BoostedScorer_
 
-#define OrgApacheLuceneSearchFilterScorer_RESTRICT 1
-#define OrgApacheLuceneSearchFilterScorer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchFilterScorer 1
+#define INCLUDE_OrgApacheLuceneSearchFilterScorer 1
 #include "org/apache/lucene/search/FilterScorer.h"
 
 @class OrgApacheLuceneSearchScorer;
 @protocol JavaUtilCollection;
 
+/*!
+ @brief Used when there is more than one scorer in a query, but a segment
+ only had one non-null scorer.
+ This just wraps that scorer directly
+ to factor in coord().
+ */
 @interface OrgApacheLuceneSearchBooleanTopLevelScorers_BoostedScorer : OrgApacheLuceneSearchFilterScorer {
  @public
   jfloat boost_;
@@ -68,21 +79,29 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchBooleanTopLevelScorers_BoostedScorer
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanTopLevelScorers_BoostedScorer *new_OrgApacheLuceneSearchBooleanTopLevelScorers_BoostedScorer_initWithOrgApacheLuceneSearchScorer_withFloat_(OrgApacheLuceneSearchScorer *inArg, jfloat boost) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanTopLevelScorers_BoostedScorer *create_OrgApacheLuceneSearchBooleanTopLevelScorers_BoostedScorer_initWithOrgApacheLuceneSearchScorer_withFloat_(OrgApacheLuceneSearchScorer *inArg, jfloat boost);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanTopLevelScorers_BoostedScorer)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchBooleanTopLevelScorers_CoordinatingConjunctionScorer_) && (OrgApacheLuceneSearchBooleanTopLevelScorers_INCLUDE_ALL || OrgApacheLuceneSearchBooleanTopLevelScorers_CoordinatingConjunctionScorer_INCLUDE)
-#define _OrgApacheLuceneSearchBooleanTopLevelScorers_CoordinatingConjunctionScorer_
+#if !defined (OrgApacheLuceneSearchBooleanTopLevelScorers_CoordinatingConjunctionScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchBooleanTopLevelScorers || defined(INCLUDE_OrgApacheLuceneSearchBooleanTopLevelScorers_CoordinatingConjunctionScorer))
+#define OrgApacheLuceneSearchBooleanTopLevelScorers_CoordinatingConjunctionScorer_
 
-#define OrgApacheLuceneSearchConjunctionScorer_RESTRICT 1
-#define OrgApacheLuceneSearchConjunctionScorer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchConjunctionScorer 1
+#define INCLUDE_OrgApacheLuceneSearchConjunctionScorer 1
 #include "org/apache/lucene/search/ConjunctionScorer.h"
 
 @class IOSFloatArray;
 @class OrgApacheLuceneSearchScorer;
 @class OrgApacheLuceneSearchWeight;
 
+/*!
+ @brief Used when there are both mandatory and optional clauses, but minShouldMatch
+ dictates that some of the optional clauses must match.
+ The query is a conjunction,
+ but must compute coord based on how many optional subscorers matched (freq).
+ */
 @interface OrgApacheLuceneSearchBooleanTopLevelScorers_CoordinatingConjunctionScorer : OrgApacheLuceneSearchConjunctionScorer
 
 #pragma mark Public
@@ -105,19 +124,25 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchBooleanTopLevelScorers_CoordinatingC
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanTopLevelScorers_CoordinatingConjunctionScorer *new_OrgApacheLuceneSearchBooleanTopLevelScorers_CoordinatingConjunctionScorer_initWithOrgApacheLuceneSearchWeight_withFloatArray_withOrgApacheLuceneSearchScorer_withInt_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchWeight *weight, IOSFloatArray *coords, OrgApacheLuceneSearchScorer *req, jint reqCount, OrgApacheLuceneSearchScorer *opt) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanTopLevelScorers_CoordinatingConjunctionScorer *create_OrgApacheLuceneSearchBooleanTopLevelScorers_CoordinatingConjunctionScorer_initWithOrgApacheLuceneSearchWeight_withFloatArray_withOrgApacheLuceneSearchScorer_withInt_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchWeight *weight, IOSFloatArray *coords, OrgApacheLuceneSearchScorer *req, jint reqCount, OrgApacheLuceneSearchScorer *opt);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanTopLevelScorers_CoordinatingConjunctionScorer)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchBooleanTopLevelScorers_ReqSingleOptScorer_) && (OrgApacheLuceneSearchBooleanTopLevelScorers_INCLUDE_ALL || OrgApacheLuceneSearchBooleanTopLevelScorers_ReqSingleOptScorer_INCLUDE)
-#define _OrgApacheLuceneSearchBooleanTopLevelScorers_ReqSingleOptScorer_
+#if !defined (OrgApacheLuceneSearchBooleanTopLevelScorers_ReqSingleOptScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchBooleanTopLevelScorers || defined(INCLUDE_OrgApacheLuceneSearchBooleanTopLevelScorers_ReqSingleOptScorer))
+#define OrgApacheLuceneSearchBooleanTopLevelScorers_ReqSingleOptScorer_
 
-#define OrgApacheLuceneSearchReqOptSumScorer_RESTRICT 1
-#define OrgApacheLuceneSearchReqOptSumScorer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchReqOptSumScorer 1
+#define INCLUDE_OrgApacheLuceneSearchReqOptSumScorer 1
 #include "org/apache/lucene/search/ReqOptSumScorer.h"
 
 @class OrgApacheLuceneSearchScorer;
 
+/*!
+ @brief Used when there are mandatory clauses with one optional clause: we compute
+ coord based on whether the optional clause matched or not.
+ */
 @interface OrgApacheLuceneSearchBooleanTopLevelScorers_ReqSingleOptScorer : OrgApacheLuceneSearchReqOptSumScorer
 
 #pragma mark Public
@@ -137,20 +162,26 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchBooleanTopLevelScorers_ReqSingleOptS
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanTopLevelScorers_ReqSingleOptScorer *new_OrgApacheLuceneSearchBooleanTopLevelScorers_ReqSingleOptScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_withFloat_withFloat_(OrgApacheLuceneSearchScorer *reqScorer, OrgApacheLuceneSearchScorer *optScorer, jfloat coordReq, jfloat coordBoth) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanTopLevelScorers_ReqSingleOptScorer *create_OrgApacheLuceneSearchBooleanTopLevelScorers_ReqSingleOptScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_withFloat_withFloat_(OrgApacheLuceneSearchScorer *reqScorer, OrgApacheLuceneSearchScorer *optScorer, jfloat coordReq, jfloat coordBoth);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanTopLevelScorers_ReqSingleOptScorer)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchBooleanTopLevelScorers_ReqMultiOptScorer_) && (OrgApacheLuceneSearchBooleanTopLevelScorers_INCLUDE_ALL || OrgApacheLuceneSearchBooleanTopLevelScorers_ReqMultiOptScorer_INCLUDE)
-#define _OrgApacheLuceneSearchBooleanTopLevelScorers_ReqMultiOptScorer_
+#if !defined (OrgApacheLuceneSearchBooleanTopLevelScorers_ReqMultiOptScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchBooleanTopLevelScorers || defined(INCLUDE_OrgApacheLuceneSearchBooleanTopLevelScorers_ReqMultiOptScorer))
+#define OrgApacheLuceneSearchBooleanTopLevelScorers_ReqMultiOptScorer_
 
-#define OrgApacheLuceneSearchReqOptSumScorer_RESTRICT 1
-#define OrgApacheLuceneSearchReqOptSumScorer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchReqOptSumScorer 1
+#define INCLUDE_OrgApacheLuceneSearchReqOptSumScorer 1
 #include "org/apache/lucene/search/ReqOptSumScorer.h"
 
 @class IOSFloatArray;
 @class OrgApacheLuceneSearchScorer;
 
+/*!
+ @brief Used when there are mandatory clauses with optional clauses: we compute
+ coord based on how many optional subscorers matched (freq).
+ */
 @interface OrgApacheLuceneSearchBooleanTopLevelScorers_ReqMultiOptScorer : OrgApacheLuceneSearchReqOptSumScorer
 
 #pragma mark Public
@@ -170,8 +201,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchBooleanTopLevelScorers_ReqMultiOptSc
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanTopLevelScorers_ReqMultiOptScorer *new_OrgApacheLuceneSearchBooleanTopLevelScorers_ReqMultiOptScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_withInt_withFloatArray_(OrgApacheLuceneSearchScorer *reqScorer, OrgApacheLuceneSearchScorer *optScorer, jint requiredCount, IOSFloatArray *coords) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanTopLevelScorers_ReqMultiOptScorer *create_OrgApacheLuceneSearchBooleanTopLevelScorers_ReqMultiOptScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorer_withInt_withFloatArray_(OrgApacheLuceneSearchScorer *reqScorer, OrgApacheLuceneSearchScorer *optScorer, jint requiredCount, IOSFloatArray *coords);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanTopLevelScorers_ReqMultiOptScorer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchBooleanTopLevelScorers_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchBooleanTopLevelScorers")

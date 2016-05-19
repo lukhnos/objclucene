@@ -120,6 +120,8 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisSynonymSynonymFilter_
 
 __attribute__((unused)) static OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingInput *new_OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingInput_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingInput *create_OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingInput_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingInput)
 
 @interface OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingOutputs : NSObject {
@@ -162,11 +164,17 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisSynonymSynonymFilter_
 
 __attribute__((unused)) static OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingOutputs *new_OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingOutputs_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingOutputs *create_OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingOutputs_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingOutputs)
 
-NSString *OrgApacheLuceneAnalysisSynonymSynonymFilter_TYPE_SYNONYM_ = @"SYNONYM";
+NSString *OrgApacheLuceneAnalysisSynonymSynonymFilter_TYPE_SYNONYM = @"SYNONYM";
 
 @implementation OrgApacheLuceneAnalysisSynonymSynonymFilter
+
++ (NSString *)TYPE_SYNONYM {
+  return OrgApacheLuceneAnalysisSynonymSynonymFilter_TYPE_SYNONYM;
+}
 
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
               withOrgApacheLuceneAnalysisSynonymSynonymMap:(OrgApacheLuceneAnalysisSynonymSynonymMap *)synonyms
@@ -225,7 +233,7 @@ NSString *OrgApacheLuceneAnalysisSynonymSynonymFilter_TYPE_SYNONYM_ = @"SYNONYM"
         OrgApacheLuceneUtilCharsRef *output = [outputs pullNext];
         [self clearAttributes];
         [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) copyBufferWithCharArray:((OrgApacheLuceneUtilCharsRef *) nil_chk(output))->chars_ withInt:output->offset_ withInt:output->length_];
-        [((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(typeAtt_)) setTypeWithNSString:OrgApacheLuceneAnalysisSynonymSynonymFilter_TYPE_SYNONYM_];
+        [((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(typeAtt_)) setTypeWithNSString:OrgApacheLuceneAnalysisSynonymSynonymFilter_TYPE_SYNONYM];
         jint endOffset = [outputs getLastEndOffset];
         if (endOffset == -1) {
           endOffset = input->endOffset_;
@@ -257,7 +265,7 @@ NSString *OrgApacheLuceneAnalysisSynonymSynonymFilter_TYPE_SYNONYM_ = @"SYNONYM"
         [self clearAttributes];
         [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) setOffsetWithInt:lastStartOffset_ withInt:lastEndOffset_];
         [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) copyBufferWithCharArray:((OrgApacheLuceneUtilCharsRef *) nil_chk(output))->chars_ withInt:output->offset_ withInt:output->length_];
-        [((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(typeAtt_)) setTypeWithNSString:OrgApacheLuceneAnalysisSynonymSynonymFilter_TYPE_SYNONYM_];
+        [((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(typeAtt_)) setTypeWithNSString:OrgApacheLuceneAnalysisSynonymSynonymFilter_TYPE_SYNONYM];
         [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncrAtt_)) setPositionIncrementWithInt:posIncr];
         return true;
       }
@@ -325,7 +333,7 @@ NSString *OrgApacheLuceneAnalysisSynonymSynonymFilter_TYPE_SYNONYM_ = @"SYNONYM"
     { "reset", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "TYPE_SYNONYM_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisSynonymSynonymFilter_TYPE_SYNONYM_, NULL, .constantValue.asLong = 0 },
+    { "TYPE_SYNONYM", "TYPE_SYNONYM", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisSynonymSynonymFilter_TYPE_SYNONYM, NULL, .constantValue.asLong = 0 },
     { "synonyms_", NULL, 0x12, "Lorg.apache.lucene.analysis.synonym.SynonymMap;", NULL, NULL, .constantValue.asLong = 0 },
     { "ignoreCase_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
     { "rollBufferSize_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
@@ -371,9 +379,9 @@ void OrgApacheLuceneAnalysisSynonymSynonymFilter_initWithOrgApacheLuceneAnalysis
   self->ignoreCase_ = ignoreCase;
   JreStrongAssign(&self->fst_, ((OrgApacheLuceneAnalysisSynonymSynonymMap *) nil_chk(synonyms))->fst_);
   if (self->fst_ == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"fst must be non-null") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"fst must be non-null");
   }
-  JreStrongAssign(&self->fstReader_, [((OrgApacheLuceneUtilFstFST *) nil_chk(self->fst_)) getBytesReader]);
+  JreStrongAssign(&self->fstReader_, [self->fst_ getBytesReader]);
   self->rollBufferSize_ = 1 + synonyms->maxHorizontalContext_;
   JreStrongAssignAndConsume(&self->futureInputs_, [IOSObjectArray newArrayWithLength:self->rollBufferSize_ type:OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingInput_class_()]);
   JreStrongAssignAndConsume(&self->futureOutputs_, [IOSObjectArray newArrayWithLength:self->rollBufferSize_ type:OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingOutputs_class_()]);
@@ -385,9 +393,11 @@ void OrgApacheLuceneAnalysisSynonymSynonymFilter_initWithOrgApacheLuceneAnalysis
 }
 
 OrgApacheLuceneAnalysisSynonymSynonymFilter *new_OrgApacheLuceneAnalysisSynonymSynonymFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisSynonymSynonymMap_withBoolean_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisSynonymSynonymMap *synonyms, jboolean ignoreCase) {
-  OrgApacheLuceneAnalysisSynonymSynonymFilter *self = [OrgApacheLuceneAnalysisSynonymSynonymFilter alloc];
-  OrgApacheLuceneAnalysisSynonymSynonymFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisSynonymSynonymMap_withBoolean_(self, input, synonyms, ignoreCase);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisSynonymSynonymFilter, initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisSynonymSynonymMap_withBoolean_, input, synonyms, ignoreCase)
+}
+
+OrgApacheLuceneAnalysisSynonymSynonymFilter *create_OrgApacheLuceneAnalysisSynonymSynonymFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisSynonymSynonymMap_withBoolean_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisSynonymSynonymMap *synonyms, jboolean ignoreCase) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisSynonymSynonymFilter, initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisSynonymSynonymMap_withBoolean_, input, synonyms, ignoreCase)
 }
 
 void OrgApacheLuceneAnalysisSynonymSynonymFilter_capture(OrgApacheLuceneAnalysisSynonymSynonymFilter *self) {
@@ -452,11 +462,11 @@ void OrgApacheLuceneAnalysisSynonymSynonymFilter_parse(OrgApacheLuceneAnalysisSy
       if ([self->fst_ findTargetArcWithInt:self->ignoreCase_ ? JavaLangCharacter_toLowerCaseWithInt_(codePoint) : codePoint withOrgApacheLuceneUtilFstFST_Arc:self->scratchArc_ withOrgApacheLuceneUtilFstFST_Arc:self->scratchArc_ withOrgApacheLuceneUtilFstFST_BytesReader:self->fstReader_] == nil) {
         goto break_byToken;
       }
-      pendingOutput = [self->fst_->outputs_ addWithId:pendingOutput withId:self->scratchArc_->output_];
+      pendingOutput = [self->fst_->outputs_ addWithId:pendingOutput withId:((OrgApacheLuceneUtilBytesRef *) self->scratchArc_->output_)];
       bufUpto += JavaLangCharacter_charCountWithInt_(codePoint);
     }
     if ([self->scratchArc_ isFinal]) {
-      matchOutput = [self->fst_->outputs_ addWithId:pendingOutput withId:self->scratchArc_->nextFinalOutput_];
+      matchOutput = [self->fst_->outputs_ addWithId:pendingOutput withId:((OrgApacheLuceneUtilBytesRef *) self->scratchArc_->nextFinalOutput_)];
       matchInputLength = tokenCount;
       matchEndOffset = inputEndOffset;
     }
@@ -464,7 +474,7 @@ void OrgApacheLuceneAnalysisSynonymSynonymFilter_parse(OrgApacheLuceneAnalysisSy
       break;
     }
     else {
-      pendingOutput = [self->fst_->outputs_ addWithId:pendingOutput withId:self->scratchArc_->output_];
+      pendingOutput = [self->fst_->outputs_ addWithId:pendingOutput withId:((OrgApacheLuceneUtilBytesRef *) self->scratchArc_->output_)];
       if (self->nextRead_ == self->nextWrite_) {
         OrgApacheLuceneAnalysisSynonymSynonymFilter_capture(self);
       }
@@ -564,7 +574,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "reset", NULL, "V", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x2, NULL, NULL },
+    { "init", "PendingInput", NULL, 0x2, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "term_", NULL, 0x10, "Lorg.apache.lucene.util.CharsRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
@@ -588,9 +598,11 @@ void OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingInput_init(OrgApacheLuce
 }
 
 OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingInput *new_OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingInput_init() {
-  OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingInput *self = [OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingInput alloc];
-  OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingInput_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingInput, init)
+}
+
+OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingInput *create_OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingInput_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingInput, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingInput)
@@ -635,7 +647,7 @@ J2OBJC_IGNORE_DESIGNATED_END
                  withInt:(jint)endOffset
                  withInt:(jint)posLength {
   if (count_ == ((IOSObjectArray *) nil_chk(outputs_))->size_) {
-    JreStrongAssign(&outputs_, JavaUtilArrays_copyOfWithNSObjectArray_withInt_(outputs_, OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(1 + count_, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_))));
+    JreStrongAssign(&outputs_, JavaUtilArrays_copyOfWithNSObjectArray_withInt_(outputs_, OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(1 + count_, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF))));
   }
   if (count_ == ((IOSIntArray *) nil_chk(endOffsets_))->size_) {
     IOSIntArray *next = [IOSIntArray arrayWithLength:OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(1 + count_, OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT)];
@@ -650,9 +662,9 @@ J2OBJC_IGNORE_DESIGNATED_END
   if (IOSObjectArray_Get(nil_chk(outputs_), count_) == nil) {
     IOSObjectArray_SetAndConsume(outputs_, count_, new_OrgApacheLuceneUtilCharsRefBuilder_init());
   }
-  [((OrgApacheLuceneUtilCharsRefBuilder *) nil_chk(IOSObjectArray_Get(outputs_, count_))) copyCharsWithCharArray:output withInt:offset withInt:len];
-  *IOSIntArray_GetRef(endOffsets_, count_) = endOffset;
-  *IOSIntArray_GetRef(posLengths_, count_) = posLength;
+  [((OrgApacheLuceneUtilCharsRefBuilder *) nil_chk(IOSObjectArray_Get(nil_chk(outputs_), count_))) copyCharsWithCharArray:output withInt:offset withInt:len];
+  *IOSIntArray_GetRef(nil_chk(endOffsets_), count_) = endOffset;
+  *IOSIntArray_GetRef(nil_chk(posLengths_), count_) = posLength;
   count_++;
 }
 
@@ -697,9 +709,11 @@ void OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingOutputs_init(OrgApacheLu
 }
 
 OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingOutputs *new_OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingOutputs_init() {
-  OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingOutputs *self = [OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingOutputs alloc];
-  OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingOutputs_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingOutputs, init)
+}
+
+OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingOutputs *create_OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingOutputs_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingOutputs, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingOutputs)

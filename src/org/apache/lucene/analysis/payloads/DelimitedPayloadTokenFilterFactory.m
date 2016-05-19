@@ -29,10 +29,18 @@
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory, encoderClass_, NSString *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory, encoder_, id<OrgApacheLuceneAnalysisPayloadsPayloadEncoder>)
 
-NSString *OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_ENCODER_ATTR_ = @"encoder";
-NSString *OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_DELIMITER_ATTR_ = @"delimiter";
+NSString *OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_ENCODER_ATTR = @"encoder";
+NSString *OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_DELIMITER_ATTR = @"delimiter";
 
 @implementation OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory
+
++ (NSString *)ENCODER_ATTR {
+  return OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_ENCODER_ATTR;
+}
+
++ (NSString *)DELIMITER_ATTR {
+  return OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_DELIMITER_ATTR;
+}
 
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args {
   OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_initWithJavaUtilMap_(self, args);
@@ -40,7 +48,7 @@ NSString *OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_DELI
 }
 
 - (OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  return [new_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withChar_withOrgApacheLuceneAnalysisPayloadsPayloadEncoder_(input, delimiter_, encoder_) autorelease];
+  return create_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withChar_withOrgApacheLuceneAnalysisPayloadsPayloadEncoder_(input, delimiter_, encoder_);
 }
 
 - (void)informWithOrgApacheLuceneAnalysisUtilResourceLoader:(id<OrgApacheLuceneAnalysisUtilResourceLoader>)loader {
@@ -66,13 +74,13 @@ NSString *OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_DELI
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "DelimitedPayloadTokenFilterFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "DelimitedPayloadTokenFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.payloads.DelimitedPayloadTokenFilter;", 0x1, NULL, NULL },
     { "informWithOrgApacheLuceneAnalysisUtilResourceLoader:", "inform", "V", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "ENCODER_ATTR_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_ENCODER_ATTR_, NULL, .constantValue.asLong = 0 },
-    { "DELIMITER_ATTR_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_DELIMITER_ATTR_, NULL, .constantValue.asLong = 0 },
+    { "ENCODER_ATTR", "ENCODER_ATTR", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_ENCODER_ATTR, NULL, .constantValue.asLong = 0 },
+    { "DELIMITER_ATTR", "DELIMITER_ATTR", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_DELIMITER_ATTR, NULL, .constantValue.asLong = 0 },
     { "encoderClass_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
     { "delimiter_", NULL, 0x12, "C", NULL, NULL, .constantValue.asLong = 0 },
     { "encoder_", NULL, 0x2, "Lorg.apache.lucene.analysis.payloads.PayloadEncoder;", NULL, NULL, .constantValue.asLong = 0 },
@@ -85,17 +93,19 @@ NSString *OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_DELI
 
 void OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory *self, id<JavaUtilMap> args) {
   OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  JreStrongAssign(&self->encoderClass_, [self requireWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_ENCODER_ATTR_]);
-  self->delimiter_ = [self getCharWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_DELIMITER_ATTR_ withChar:'|'];
+  JreStrongAssign(&self->encoderClass_, [self requireWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_ENCODER_ATTR]);
+  self->delimiter_ = [self getCharWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_DELIMITER_ATTR withChar:'|'];
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory *new_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory *self = [OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory alloc];
-  OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory *create_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory)

@@ -5,26 +5,35 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneStoreNoLockFactory_INCLUDE_ALL")
-#if OrgApacheLuceneStoreNoLockFactory_RESTRICT
-#define OrgApacheLuceneStoreNoLockFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneStoreNoLockFactory")
+#ifdef RESTRICT_OrgApacheLuceneStoreNoLockFactory
+#define INCLUDE_ALL_OrgApacheLuceneStoreNoLockFactory 0
 #else
-#define OrgApacheLuceneStoreNoLockFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneStoreNoLockFactory 1
 #endif
-#undef OrgApacheLuceneStoreNoLockFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneStoreNoLockFactory
 
-#if !defined (_OrgApacheLuceneStoreNoLockFactory_) && (OrgApacheLuceneStoreNoLockFactory_INCLUDE_ALL || OrgApacheLuceneStoreNoLockFactory_INCLUDE)
-#define _OrgApacheLuceneStoreNoLockFactory_
+#if !defined (OrgApacheLuceneStoreNoLockFactory_) && (INCLUDE_ALL_OrgApacheLuceneStoreNoLockFactory || defined(INCLUDE_OrgApacheLuceneStoreNoLockFactory))
+#define OrgApacheLuceneStoreNoLockFactory_
 
-#define OrgApacheLuceneStoreLockFactory_RESTRICT 1
-#define OrgApacheLuceneStoreLockFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreLockFactory 1
+#define INCLUDE_OrgApacheLuceneStoreLockFactory 1
 #include "org/apache/lucene/store/LockFactory.h"
 
 @class OrgApacheLuceneStoreDirectory;
 @class OrgApacheLuceneStoreLock;
 @class OrgApacheLuceneStoreNoLockFactory_NoLock;
 
+/*!
+ @brief Use this <code>LockFactory</code> to disable locking entirely.
+ This is a singleton, you have to use <code>INSTANCE</code>.
+ - seealso: LockFactory
+ */
 @interface OrgApacheLuceneStoreNoLockFactory : OrgApacheLuceneStoreLockFactory
+
++ (OrgApacheLuceneStoreNoLockFactory *)INSTANCE;
+
++ (OrgApacheLuceneStoreNoLockFactory_NoLock *)SINGLETON_LOCK;
 
 #pragma mark Public
 
@@ -35,21 +44,28 @@
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneStoreNoLockFactory)
 
-FOUNDATION_EXPORT OrgApacheLuceneStoreNoLockFactory *OrgApacheLuceneStoreNoLockFactory_INSTANCE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneStoreNoLockFactory, INSTANCE_, OrgApacheLuceneStoreNoLockFactory *)
+/*!
+ @brief The singleton
+ */
+inline OrgApacheLuceneStoreNoLockFactory *OrgApacheLuceneStoreNoLockFactory_get_INSTANCE();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT OrgApacheLuceneStoreNoLockFactory *OrgApacheLuceneStoreNoLockFactory_INSTANCE;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneStoreNoLockFactory, INSTANCE, OrgApacheLuceneStoreNoLockFactory *)
 
-FOUNDATION_EXPORT OrgApacheLuceneStoreNoLockFactory_NoLock *OrgApacheLuceneStoreNoLockFactory_SINGLETON_LOCK_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneStoreNoLockFactory, SINGLETON_LOCK_, OrgApacheLuceneStoreNoLockFactory_NoLock *)
+inline OrgApacheLuceneStoreNoLockFactory_NoLock *OrgApacheLuceneStoreNoLockFactory_get_SINGLETON_LOCK();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT OrgApacheLuceneStoreNoLockFactory_NoLock *OrgApacheLuceneStoreNoLockFactory_SINGLETON_LOCK;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneStoreNoLockFactory, SINGLETON_LOCK, OrgApacheLuceneStoreNoLockFactory_NoLock *)
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreNoLockFactory)
 
 #endif
 
-#if !defined (_OrgApacheLuceneStoreNoLockFactory_NoLock_) && (OrgApacheLuceneStoreNoLockFactory_INCLUDE_ALL || OrgApacheLuceneStoreNoLockFactory_NoLock_INCLUDE)
-#define _OrgApacheLuceneStoreNoLockFactory_NoLock_
+#if !defined (OrgApacheLuceneStoreNoLockFactory_NoLock_) && (INCLUDE_ALL_OrgApacheLuceneStoreNoLockFactory || defined(INCLUDE_OrgApacheLuceneStoreNoLockFactory_NoLock))
+#define OrgApacheLuceneStoreNoLockFactory_NoLock_
 
-#define OrgApacheLuceneStoreLock_RESTRICT 1
-#define OrgApacheLuceneStoreLock_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreLock 1
+#define INCLUDE_OrgApacheLuceneStoreLock 1
 #include "org/apache/lucene/store/Lock.h"
 
 @interface OrgApacheLuceneStoreNoLockFactory_NoLock : OrgApacheLuceneStoreLock
@@ -70,4 +86,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreNoLockFactory_NoLock)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneStoreNoLockFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreNoLockFactory")

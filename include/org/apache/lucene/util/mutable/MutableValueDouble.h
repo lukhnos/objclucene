@@ -5,21 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilMutableMutableValueDouble_INCLUDE_ALL")
-#if OrgApacheLuceneUtilMutableMutableValueDouble_RESTRICT
-#define OrgApacheLuceneUtilMutableMutableValueDouble_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueDouble")
+#ifdef RESTRICT_OrgApacheLuceneUtilMutableMutableValueDouble
+#define INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueDouble 0
 #else
-#define OrgApacheLuceneUtilMutableMutableValueDouble_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueDouble 1
 #endif
-#undef OrgApacheLuceneUtilMutableMutableValueDouble_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilMutableMutableValueDouble
 
-#if !defined (_OrgApacheLuceneUtilMutableMutableValueDouble_) && (OrgApacheLuceneUtilMutableMutableValueDouble_INCLUDE_ALL || OrgApacheLuceneUtilMutableMutableValueDouble_INCLUDE)
-#define _OrgApacheLuceneUtilMutableMutableValueDouble_
+#if !defined (OrgApacheLuceneUtilMutableMutableValueDouble_) && (INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueDouble || defined(INCLUDE_OrgApacheLuceneUtilMutableMutableValueDouble))
+#define OrgApacheLuceneUtilMutableMutableValueDouble_
 
-#define OrgApacheLuceneUtilMutableMutableValue_RESTRICT 1
-#define OrgApacheLuceneUtilMutableMutableValue_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilMutableMutableValue 1
+#define INCLUDE_OrgApacheLuceneUtilMutableMutableValue 1
 #include "org/apache/lucene/util/mutable/MutableValue.h"
 
+/*!
+ @brief <code>MutableValue</code> implementation of type <code>double</code>.
+ When mutating instances of this object, the caller is responsible for ensuring 
+ that any instance where <code>exists</code> is set to <code>false</code> must also 
+ <code>value</code> set to <code>0.0D</code> for proper operation.
+ */
 @interface OrgApacheLuceneUtilMutableMutableValueDouble : OrgApacheLuceneUtilMutableMutableValue {
  @public
   jdouble value_;
@@ -49,8 +55,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilMutableMutableValueDouble_init(OrgApac
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilMutableMutableValueDouble *new_OrgApacheLuceneUtilMutableMutableValueDouble_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilMutableMutableValueDouble *create_OrgApacheLuceneUtilMutableMutableValueDouble_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilMutableMutableValueDouble)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilMutableMutableValueDouble_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueDouble")

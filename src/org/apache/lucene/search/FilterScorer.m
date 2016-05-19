@@ -87,7 +87,7 @@ void OrgApacheLuceneSearchFilterScorer_initWithOrgApacheLuceneSearchScorer_(OrgA
 void OrgApacheLuceneSearchFilterScorer_initWithOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchWeight_(OrgApacheLuceneSearchFilterScorer *self, OrgApacheLuceneSearchScorer *inArg, OrgApacheLuceneSearchWeight *weight) {
   OrgApacheLuceneSearchScorer_initWithOrgApacheLuceneSearchWeight_(self, weight);
   if (inArg == nil) {
-    @throw [new_JavaLangNullPointerException_initWithNSString_(@"wrapped Scorer must not be null") autorelease];
+    @throw create_JavaLangNullPointerException_initWithNSString_(@"wrapped Scorer must not be null");
   }
   JreStrongAssign(&self->in_, inArg);
 }

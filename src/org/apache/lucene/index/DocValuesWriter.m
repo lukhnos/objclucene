@@ -34,7 +34,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   static const J2ObjcMethodInfo methods[] = {
     { "finishWithInt:", "finish", "V", 0x400, NULL, NULL },
     { "flushWithOrgApacheLuceneIndexSegmentWriteState:withOrgApacheLuceneCodecsDocValuesConsumer:", "flush", "V", 0x400, "Ljava.io.IOException;", NULL },
-    { "init", NULL, NULL, 0x0, NULL, NULL },
+    { "init", "DocValuesWriter", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneIndexDocValuesWriter = { 2, "DocValuesWriter", "org.apache.lucene.index", NULL, 0x400, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexDocValuesWriter;

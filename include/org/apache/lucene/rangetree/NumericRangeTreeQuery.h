@@ -5,25 +5,30 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneRangetreeNumericRangeTreeQuery_INCLUDE_ALL")
-#if OrgApacheLuceneRangetreeNumericRangeTreeQuery_RESTRICT
-#define OrgApacheLuceneRangetreeNumericRangeTreeQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneRangetreeNumericRangeTreeQuery")
+#ifdef RESTRICT_OrgApacheLuceneRangetreeNumericRangeTreeQuery
+#define INCLUDE_ALL_OrgApacheLuceneRangetreeNumericRangeTreeQuery 0
 #else
-#define OrgApacheLuceneRangetreeNumericRangeTreeQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneRangetreeNumericRangeTreeQuery 1
 #endif
-#undef OrgApacheLuceneRangetreeNumericRangeTreeQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneRangetreeNumericRangeTreeQuery
 
-#if !defined (_OrgApacheLuceneRangetreeNumericRangeTreeQuery_) && (OrgApacheLuceneRangetreeNumericRangeTreeQuery_INCLUDE_ALL || OrgApacheLuceneRangetreeNumericRangeTreeQuery_INCLUDE)
-#define _OrgApacheLuceneRangetreeNumericRangeTreeQuery_
+#if !defined (OrgApacheLuceneRangetreeNumericRangeTreeQuery_) && (INCLUDE_ALL_OrgApacheLuceneRangetreeNumericRangeTreeQuery || defined(INCLUDE_OrgApacheLuceneRangetreeNumericRangeTreeQuery))
+#define OrgApacheLuceneRangetreeNumericRangeTreeQuery_
 
-#define OrgApacheLuceneSearchQuery_RESTRICT 1
-#define OrgApacheLuceneSearchQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchQuery 1
+#define INCLUDE_OrgApacheLuceneSearchQuery 1
 #include "org/apache/lucene/search/Query.h"
 
 @class JavaLangLong;
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchWeight;
 
+/*!
+ @brief Finds all previously indexed long values that fall within the specified range.
+ <p>The field must be indexed with <code>RangeTreeDocValuesFormat</code>, and <code>SortedNumericDocValuesField</code> added per document.
+  
+ */
 @interface OrgApacheLuceneRangetreeNumericRangeTreeQuery : OrgApacheLuceneSearchQuery {
  @public
   NSString *field_;
@@ -35,6 +40,9 @@
 
 #pragma mark Public
 
+/*!
+ @brief Matches all values in the specified long range.
+ */
 - (instancetype)initWithNSString:(NSString *)field
                 withJavaLangLong:(JavaLangLong *)minValue
                      withBoolean:(jboolean)minInclusive
@@ -62,8 +70,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneRangetreeNumericRangeTreeQuery_initWithNSS
 
 FOUNDATION_EXPORT OrgApacheLuceneRangetreeNumericRangeTreeQuery *new_OrgApacheLuceneRangetreeNumericRangeTreeQuery_initWithNSString_withJavaLangLong_withBoolean_withJavaLangLong_withBoolean_(NSString *field, JavaLangLong *minValue, jboolean minInclusive, JavaLangLong *maxValue, jboolean maxInclusive) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeNumericRangeTreeQuery *create_OrgApacheLuceneRangetreeNumericRangeTreeQuery_initWithNSString_withJavaLangLong_withBoolean_withJavaLangLong_withBoolean_(NSString *field, JavaLangLong *minValue, jboolean minInclusive, JavaLangLong *maxValue, jboolean maxInclusive);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeNumericRangeTreeQuery)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneRangetreeNumericRangeTreeQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneRangetreeNumericRangeTreeQuery")

@@ -53,7 +53,7 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
 }
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader {
-  OrgApacheLuceneQueriesMltMoreLikeThis *mlt = [new_OrgApacheLuceneQueriesMltMoreLikeThis_initWithOrgApacheLuceneIndexIndexReader_(reader) autorelease];
+  OrgApacheLuceneQueriesMltMoreLikeThis *mlt = create_OrgApacheLuceneQueriesMltMoreLikeThis_initWithOrgApacheLuceneIndexIndexReader_(reader);
   [mlt setFieldNamesWithNSStringArray:moreLikeFields_];
   [mlt setAnalyzerWithOrgApacheLuceneAnalysisAnalyzer:analyzer_];
   [mlt setMinTermFreqWithInt:minTermFrequency_];
@@ -62,8 +62,8 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
   }
   [mlt setMaxQueryTermsWithInt:maxQueryTerms_];
   [mlt setStopWordsWithJavaUtilSet:stopWords_];
-  OrgApacheLuceneSearchBooleanQuery *bq = (OrgApacheLuceneSearchBooleanQuery *) check_class_cast([mlt likeWithNSString:fieldName_ withJavaIoReaderArray:[IOSObjectArray arrayWithObjects:(id[]){ [new_JavaIoStringReader_initWithNSString_(likeText_) autorelease] } count:1 type:JavaIoReader_class_()]], [OrgApacheLuceneSearchBooleanQuery class]);
-  OrgApacheLuceneSearchBooleanQuery_Builder *newBq = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
+  OrgApacheLuceneSearchBooleanQuery *bq = (OrgApacheLuceneSearchBooleanQuery *) cast_chk([mlt likeWithNSString:fieldName_ withJavaIoReaderArray:[IOSObjectArray arrayWithObjects:(id[]){ create_JavaIoStringReader_initWithNSString_(likeText_) } count:1 type:JavaIoReader_class_()]], [OrgApacheLuceneSearchBooleanQuery class]);
+  OrgApacheLuceneSearchBooleanQuery_Builder *newBq = create_OrgApacheLuceneSearchBooleanQuery_Builder_init();
   [newBq setDisableCoordWithBoolean:[((OrgApacheLuceneSearchBooleanQuery *) nil_chk(bq)) isCoordDisabled]];
   for (OrgApacheLuceneSearchBooleanClause * __strong clause in bq) {
     [newBq addWithOrgApacheLuceneSearchBooleanClause:clause];
@@ -145,23 +145,23 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
 - (NSUInteger)hash {
   jint prime = 31;
   jint result = ((jint) [super hash]);
-  result = prime * result + ((analyzer_ == nil) ? 0 : ((jint) [analyzer_ hash]));
-  result = prime * result + ((fieldName_ == nil) ? 0 : ((jint) [fieldName_ hash]));
-  result = prime * result + ((likeText_ == nil) ? 0 : ((jint) [likeText_ hash]));
+  result = prime * result + ((analyzer_ == nil) ? 0 : ((jint) [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(analyzer_)) hash]));
+  result = prime * result + ((fieldName_ == nil) ? 0 : ((jint) [((NSString *) nil_chk(fieldName_)) hash]));
+  result = prime * result + ((likeText_ == nil) ? 0 : ((jint) [((NSString *) nil_chk(likeText_)) hash]));
   result = prime * result + maxQueryTerms_;
   result = prime * result + minDocFreq_;
   result = prime * result + minTermFrequency_;
   result = prime * result + JavaUtilArrays_hashCodeWithNSObjectArray_(moreLikeFields_);
   result = prime * result + JavaLangFloat_floatToIntBitsWithFloat_(percentTermsToMatch_);
-  result = prime * result + ((stopWords_ == nil) ? 0 : ((jint) [stopWords_ hash]));
+  result = prime * result + ((stopWords_ == nil) ? 0 : ((jint) [((id<JavaUtilSet>) nil_chk(stopWords_)) hash]));
   return result;
 }
 
 - (jboolean)isEqual:(id)obj {
   if (self == obj) return true;
   if (![super isEqual:obj]) return false;
-  if ([self getClass] != [nil_chk(obj) getClass]) return false;
-  OrgApacheLuceneQueriesMltMoreLikeThisQuery *other = (OrgApacheLuceneQueriesMltMoreLikeThisQuery *) check_class_cast(obj, [OrgApacheLuceneQueriesMltMoreLikeThisQuery class]);
+  if ([self getClass] != (id) [nil_chk(obj) getClass]) return false;
+  OrgApacheLuceneQueriesMltMoreLikeThisQuery *other = (OrgApacheLuceneQueriesMltMoreLikeThisQuery *) cast_chk(obj, [OrgApacheLuceneQueriesMltMoreLikeThisQuery class]);
   if (analyzer_ == nil) {
     if (other->analyzer_ != nil) return false;
   }
@@ -212,8 +212,8 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
     { "setMinTermFrequencyWithInt:", "setMinTermFrequency", "V", 0x1, NULL, NULL },
     { "getMoreLikeFields", NULL, "[Ljava.lang.String;", 0x1, NULL, NULL },
     { "setMoreLikeFieldsWithNSStringArray:", "setMoreLikeFields", "V", 0x1, NULL, NULL },
-    { "getStopWords", NULL, "Ljava.util.Set;", 0x1, NULL, NULL },
-    { "setStopWordsWithJavaUtilSet:", "setStopWords", "V", 0x1, NULL, NULL },
+    { "getStopWords", NULL, "Ljava.util.Set;", 0x1, NULL, "()Ljava/util/Set<*>;" },
+    { "setStopWordsWithJavaUtilSet:", "setStopWords", "V", 0x1, NULL, "(Ljava/util/Set<*>;)V" },
     { "getMinDocFreq", NULL, "I", 0x1, NULL, NULL },
     { "setMinDocFreqWithInt:", "setMinDocFreq", "V", 0x1, NULL, NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
@@ -250,9 +250,11 @@ void OrgApacheLuceneQueriesMltMoreLikeThisQuery_initWithNSString_withNSStringArr
 }
 
 OrgApacheLuceneQueriesMltMoreLikeThisQuery *new_OrgApacheLuceneQueriesMltMoreLikeThisQuery_initWithNSString_withNSStringArray_withOrgApacheLuceneAnalysisAnalyzer_withNSString_(NSString *likeText, IOSObjectArray *moreLikeFields, OrgApacheLuceneAnalysisAnalyzer *analyzer, NSString *fieldName) {
-  OrgApacheLuceneQueriesMltMoreLikeThisQuery *self = [OrgApacheLuceneQueriesMltMoreLikeThisQuery alloc];
-  OrgApacheLuceneQueriesMltMoreLikeThisQuery_initWithNSString_withNSStringArray_withOrgApacheLuceneAnalysisAnalyzer_withNSString_(self, likeText, moreLikeFields, analyzer, fieldName);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesMltMoreLikeThisQuery, initWithNSString_withNSStringArray_withOrgApacheLuceneAnalysisAnalyzer_withNSString_, likeText, moreLikeFields, analyzer, fieldName)
+}
+
+OrgApacheLuceneQueriesMltMoreLikeThisQuery *create_OrgApacheLuceneQueriesMltMoreLikeThisQuery_initWithNSString_withNSStringArray_withOrgApacheLuceneAnalysisAnalyzer_withNSString_(NSString *likeText, IOSObjectArray *moreLikeFields, OrgApacheLuceneAnalysisAnalyzer *analyzer, NSString *fieldName) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesMltMoreLikeThisQuery, initWithNSString_withNSStringArray_withOrgApacheLuceneAnalysisAnalyzer_withNSString_, likeText, moreLikeFields, analyzer, fieldName)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesMltMoreLikeThisQuery)

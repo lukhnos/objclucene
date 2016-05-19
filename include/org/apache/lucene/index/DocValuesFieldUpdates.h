@@ -5,46 +5,74 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexDocValuesFieldUpdates_INCLUDE_ALL")
-#if OrgApacheLuceneIndexDocValuesFieldUpdates_RESTRICT
-#define OrgApacheLuceneIndexDocValuesFieldUpdates_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexDocValuesFieldUpdates")
+#ifdef RESTRICT_OrgApacheLuceneIndexDocValuesFieldUpdates
+#define INCLUDE_ALL_OrgApacheLuceneIndexDocValuesFieldUpdates 0
 #else
-#define OrgApacheLuceneIndexDocValuesFieldUpdates_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexDocValuesFieldUpdates 1
 #endif
-#undef OrgApacheLuceneIndexDocValuesFieldUpdates_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexDocValuesFieldUpdates
 
-#if !defined (_OrgApacheLuceneIndexDocValuesFieldUpdates_) && (OrgApacheLuceneIndexDocValuesFieldUpdates_INCLUDE_ALL || OrgApacheLuceneIndexDocValuesFieldUpdates_INCLUDE)
-#define _OrgApacheLuceneIndexDocValuesFieldUpdates_
+#if !defined (OrgApacheLuceneIndexDocValuesFieldUpdates_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocValuesFieldUpdates || defined(INCLUDE_OrgApacheLuceneIndexDocValuesFieldUpdates))
+#define OrgApacheLuceneIndexDocValuesFieldUpdates_
 
 @class OrgApacheLuceneIndexDocValuesFieldUpdates_Iterator;
-@class OrgApacheLuceneIndexDocValuesTypeEnum;
+@class OrgApacheLuceneIndexDocValuesType;
 
-#define OrgApacheLuceneIndexDocValuesFieldUpdates_PAGE_SIZE 1024
-
+/*!
+ @brief Holds updates of a single DocValues field, for a set of documents.
+ */
 @interface OrgApacheLuceneIndexDocValuesFieldUpdates : NSObject {
  @public
   NSString *field_;
-  OrgApacheLuceneIndexDocValuesTypeEnum *type_;
+  OrgApacheLuceneIndexDocValuesType *type_;
 }
+
+// + (jint)PAGE_SIZE; // disabled by translate.py
 
 #pragma mark Public
 
+/*!
+ @brief Add an update to a document.
+ For unsetting a value you should pass
+ <code>null</code>.
+ */
 - (void)addWithInt:(jint)doc
             withId:(id)value;
 
+/*!
+ @brief Returns true if this instance contains any updates.
+ */
 - (jboolean)any;
 
+/*!
+ @brief Returns an <code>Iterator</code> over the updated documents and their
+ values.
+ */
 - (OrgApacheLuceneIndexDocValuesFieldUpdates_Iterator *)iterator;
 
+/*!
+ @brief Merge with another <code>DocValuesFieldUpdates</code>.
+ This is called for a
+ segment which received updates while it was being merged. The given updates
+ should override whatever updates are in that instance.
+ */
 - (void)mergeWithOrgApacheLuceneIndexDocValuesFieldUpdates:(OrgApacheLuceneIndexDocValuesFieldUpdates *)other;
 
+/*!
+ @brief Returns approximate RAM bytes used per document.
+ */
 - (jlong)ramBytesPerDoc;
 
 #pragma mark Protected
 
 - (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum *)type;
+withOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)type;
 
+/*!
+ @brief Returns the estimated capacity of a <code>PagedGrowableWriter</code> given the
+ actual number of stored elements.
+ */
 + (jint)estimateCapacityWithInt:(jint)size;
 
 @end
@@ -52,11 +80,13 @@ withOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexDocValuesFieldUpdates)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocValuesFieldUpdates, field_, NSString *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocValuesFieldUpdates, type_, OrgApacheLuceneIndexDocValuesTypeEnum *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocValuesFieldUpdates, type_, OrgApacheLuceneIndexDocValuesType *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexDocValuesFieldUpdates, PAGE_SIZE, jint)
+inline jint OrgApacheLuceneIndexDocValuesFieldUpdates_get_PAGE_SIZE();
+#define OrgApacheLuceneIndexDocValuesFieldUpdates_PAGE_SIZE 1024
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexDocValuesFieldUpdates, PAGE_SIZE, jint)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexDocValuesFieldUpdates_initWithNSString_withOrgApacheLuceneIndexDocValuesTypeEnum_(OrgApacheLuceneIndexDocValuesFieldUpdates *self, NSString *field, OrgApacheLuceneIndexDocValuesTypeEnum *type);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexDocValuesFieldUpdates_initWithNSString_withOrgApacheLuceneIndexDocValuesType_(OrgApacheLuceneIndexDocValuesFieldUpdates *self, NSString *field, OrgApacheLuceneIndexDocValuesType *type);
 
 FOUNDATION_EXPORT jint OrgApacheLuceneIndexDocValuesFieldUpdates_estimateCapacityWithInt_(jint size);
 
@@ -64,21 +94,45 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocValuesFieldUpdates)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexDocValuesFieldUpdates_Iterator_) && (OrgApacheLuceneIndexDocValuesFieldUpdates_INCLUDE_ALL || OrgApacheLuceneIndexDocValuesFieldUpdates_Iterator_INCLUDE)
-#define _OrgApacheLuceneIndexDocValuesFieldUpdates_Iterator_
+#if !defined (OrgApacheLuceneIndexDocValuesFieldUpdates_Iterator_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocValuesFieldUpdates || defined(INCLUDE_OrgApacheLuceneIndexDocValuesFieldUpdates_Iterator))
+#define OrgApacheLuceneIndexDocValuesFieldUpdates_Iterator_
 
+/*!
+ @brief An iterator over documents and their updated values.
+ Only documents with
+ updates are returned by this iterator, and the documents are returned in
+ increasing order.
+ */
 @interface OrgApacheLuceneIndexDocValuesFieldUpdates_Iterator : NSObject
 
 #pragma mark Package-Private
 
 - (instancetype)init;
 
+/*!
+ @brief Returns the current document this iterator is on.
+ */
 - (jint)doc;
 
+/*!
+ @brief Returns the next document which has an update, or
+ <code>DocIdSetIterator.NO_MORE_DOCS</code> if there are no more documents to
+ return.
+ */
 - (jint)nextDoc;
 
+/*!
+ @brief Reset the iterator's state.
+ Should be called before <code>nextDoc()</code>
+ and <code>value()</code>.
+ */
 - (void)reset;
 
+/*!
+ @brief Returns the value of the document returned from <code>nextDoc()</code>.
+ A
+ <code>null</code> value means that it was unset for this document.
+ */
 - (id)value;
 
 @end
@@ -91,11 +145,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocValuesFieldUpdates_Iterator)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexDocValuesFieldUpdates_Container_) && (OrgApacheLuceneIndexDocValuesFieldUpdates_INCLUDE_ALL || OrgApacheLuceneIndexDocValuesFieldUpdates_Container_INCLUDE)
-#define _OrgApacheLuceneIndexDocValuesFieldUpdates_Container_
+#if !defined (OrgApacheLuceneIndexDocValuesFieldUpdates_Container_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocValuesFieldUpdates || defined(INCLUDE_OrgApacheLuceneIndexDocValuesFieldUpdates_Container))
+#define OrgApacheLuceneIndexDocValuesFieldUpdates_Container_
 
 @class OrgApacheLuceneIndexDocValuesFieldUpdates;
-@class OrgApacheLuceneIndexDocValuesTypeEnum;
+@class OrgApacheLuceneIndexDocValuesType;
 @protocol JavaUtilMap;
 
 @interface OrgApacheLuceneIndexDocValuesFieldUpdates_Container : NSObject {
@@ -115,10 +169,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocValuesFieldUpdates_Iterator)
 - (jboolean)any;
 
 - (OrgApacheLuceneIndexDocValuesFieldUpdates *)getUpdatesWithNSString:(NSString *)field
-                            withOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum *)type;
+                                withOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)type;
 
 - (OrgApacheLuceneIndexDocValuesFieldUpdates *)newUpdatesWithNSString:(NSString *)field
-                            withOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum *)type
+                                withOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)type
                                                               withInt:(jint)maxDoc OBJC_METHOD_FAMILY_NONE;
 
 - (jlong)ramBytesPerDoc;
@@ -136,8 +190,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexDocValuesFieldUpdates_Container_init(
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexDocValuesFieldUpdates_Container *new_OrgApacheLuceneIndexDocValuesFieldUpdates_Container_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexDocValuesFieldUpdates_Container *create_OrgApacheLuceneIndexDocValuesFieldUpdates_Container_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocValuesFieldUpdates_Container)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexDocValuesFieldUpdates_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexDocValuesFieldUpdates")

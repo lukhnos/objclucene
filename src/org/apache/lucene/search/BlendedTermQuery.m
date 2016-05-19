@@ -56,6 +56,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchBlendedTermQuery_initWi
 
 __attribute__((unused)) static OrgApacheLuceneSearchBlendedTermQuery *new_OrgApacheLuceneSearchBlendedTermQuery_initWithOrgApacheLuceneIndexTermArray_withFloatArray_withOrgApacheLuceneIndexTermContextArray_withOrgApacheLuceneSearchBlendedTermQuery_RewriteMethod_(IOSObjectArray *terms, IOSFloatArray *boosts, IOSObjectArray *contexts, OrgApacheLuceneSearchBlendedTermQuery_RewriteMethod *rewriteMethod) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchBlendedTermQuery *create_OrgApacheLuceneSearchBlendedTermQuery_initWithOrgApacheLuceneIndexTermArray_withFloatArray_withOrgApacheLuceneIndexTermContextArray_withOrgApacheLuceneSearchBlendedTermQuery_RewriteMethod_(IOSObjectArray *terms, IOSFloatArray *boosts, IOSObjectArray *contexts, OrgApacheLuceneSearchBlendedTermQuery_RewriteMethod *rewriteMethod);
+
 __attribute__((unused)) static OrgApacheLuceneIndexTermContext *OrgApacheLuceneSearchBlendedTermQuery_adjustFrequenciesWithOrgApacheLuceneIndexTermContext_withInt_withLong_(OrgApacheLuceneIndexTermContext *ctx, jint artificialDf, jlong artificialTtf);
 
 @interface OrgApacheLuceneSearchBlendedTermQuery_Builder () {
@@ -95,6 +97,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchBlendedTermQuery_$1_ini
 
 __attribute__((unused)) static OrgApacheLuceneSearchBlendedTermQuery_$1 *new_OrgApacheLuceneSearchBlendedTermQuery_$1_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchBlendedTermQuery_$1 *create_OrgApacheLuceneSearchBlendedTermQuery_$1_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBlendedTermQuery_$1)
 
 @interface OrgApacheLuceneSearchBlendedTermQuery_$2 : OrgApacheLuceneUtilInPlaceMergeSorter {
@@ -126,14 +130,24 @@ __attribute__((unused)) static void OrgApacheLuceneSearchBlendedTermQuery_$2_ini
 
 __attribute__((unused)) static OrgApacheLuceneSearchBlendedTermQuery_$2 *new_OrgApacheLuceneSearchBlendedTermQuery_$2_initWithOrgApacheLuceneIndexTermArray_withOrgApacheLuceneIndexTermContextArray_withFloatArray_(IOSObjectArray *capture$0, IOSObjectArray *capture$1, IOSFloatArray *capture$2) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchBlendedTermQuery_$2 *create_OrgApacheLuceneSearchBlendedTermQuery_$2_initWithOrgApacheLuceneIndexTermArray_withOrgApacheLuceneIndexTermContextArray_withFloatArray_(IOSObjectArray *capture$0, IOSObjectArray *capture$1, IOSFloatArray *capture$2);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBlendedTermQuery_$2)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchBlendedTermQuery)
 
-OrgApacheLuceneSearchBlendedTermQuery_RewriteMethod *OrgApacheLuceneSearchBlendedTermQuery_BOOLEAN_REWRITE_;
-OrgApacheLuceneSearchBlendedTermQuery_RewriteMethod *OrgApacheLuceneSearchBlendedTermQuery_DISJUNCTION_MAX_REWRITE_;
+OrgApacheLuceneSearchBlendedTermQuery_RewriteMethod *OrgApacheLuceneSearchBlendedTermQuery_BOOLEAN_REWRITE;
+OrgApacheLuceneSearchBlendedTermQuery_RewriteMethod *OrgApacheLuceneSearchBlendedTermQuery_DISJUNCTION_MAX_REWRITE;
 
 @implementation OrgApacheLuceneSearchBlendedTermQuery
+
++ (OrgApacheLuceneSearchBlendedTermQuery_RewriteMethod *)BOOLEAN_REWRITE {
+  return OrgApacheLuceneSearchBlendedTermQuery_BOOLEAN_REWRITE;
+}
+
++ (OrgApacheLuceneSearchBlendedTermQuery_RewriteMethod *)DISJUNCTION_MAX_REWRITE {
+  return OrgApacheLuceneSearchBlendedTermQuery_DISJUNCTION_MAX_REWRITE;
+}
 
 - (instancetype)initWithOrgApacheLuceneIndexTermArray:(IOSObjectArray *)terms
                                        withFloatArray:(IOSFloatArray *)boosts
@@ -147,7 +161,7 @@ withOrgApacheLuceneSearchBlendedTermQuery_RewriteMethod:(OrgApacheLuceneSearchBl
   if ([super isEqual:obj] == false) {
     return false;
   }
-  OrgApacheLuceneSearchBlendedTermQuery *that = (OrgApacheLuceneSearchBlendedTermQuery *) check_class_cast(obj, [OrgApacheLuceneSearchBlendedTermQuery class]);
+  OrgApacheLuceneSearchBlendedTermQuery *that = (OrgApacheLuceneSearchBlendedTermQuery *) cast_chk(obj, [OrgApacheLuceneSearchBlendedTermQuery class]);
   return JavaUtilArrays_equalsWithNSObjectArray_withNSObjectArray_(terms_, ((OrgApacheLuceneSearchBlendedTermQuery *) nil_chk(that))->terms_) && JavaUtilArrays_equalsWithNSObjectArray_withNSObjectArray_(contexts_, that->contexts_) && JavaUtilArrays_equalsWithFloatArray_withFloatArray_(boosts_, that->boosts_) && [((OrgApacheLuceneSearchBlendedTermQuery_RewriteMethod *) nil_chk(rewriteMethod_)) isEqual:that->rewriteMethod_];
 }
 
@@ -161,12 +175,12 @@ withOrgApacheLuceneSearchBlendedTermQuery_RewriteMethod:(OrgApacheLuceneSearchBl
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
-  JavaLangStringBuilder *builder = [new_JavaLangStringBuilder_initWithNSString_(@"Blended(") autorelease];
+  JavaLangStringBuilder *builder = create_JavaLangStringBuilder_initWithNSString_(@"Blended(");
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(terms_))->size_; ++i) {
     if (i != 0) {
       [builder appendWithNSString:@" "];
     }
-    OrgApacheLuceneSearchTermQuery *termQuery = [new_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_(IOSObjectArray_Get(terms_, i)) autorelease];
+    OrgApacheLuceneSearchTermQuery *termQuery = create_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_(IOSObjectArray_Get(terms_, i));
     [termQuery setBoostWithFloat:IOSFloatArray_Get(nil_chk(boosts_), i)];
     [builder appendWithNSString:[termQuery toStringWithNSString:field]];
   }
@@ -227,8 +241,8 @@ withOrgApacheLuceneSearchBlendedTermQuery_RewriteMethod:(OrgApacheLuceneSearchBl
 
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchBlendedTermQuery class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneSearchBlendedTermQuery_BOOLEAN_REWRITE_, new_OrgApacheLuceneSearchBlendedTermQuery_$1_init());
-    JreStrongAssignAndConsume(&OrgApacheLuceneSearchBlendedTermQuery_DISJUNCTION_MAX_REWRITE_, new_OrgApacheLuceneSearchBlendedTermQuery_DisjunctionMaxRewrite_initWithFloat_(0.01f));
+    JreStrongAssignAndConsume(&OrgApacheLuceneSearchBlendedTermQuery_BOOLEAN_REWRITE, new_OrgApacheLuceneSearchBlendedTermQuery_$1_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneSearchBlendedTermQuery_DISJUNCTION_MAX_REWRITE, new_OrgApacheLuceneSearchBlendedTermQuery_DisjunctionMaxRewrite_initWithFloat_(0.01f));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchBlendedTermQuery)
   }
 }
@@ -243,8 +257,8 @@ withOrgApacheLuceneSearchBlendedTermQuery_RewriteMethod:(OrgApacheLuceneSearchBl
     { "adjustFrequenciesWithOrgApacheLuceneIndexTermContext:withInt:withLong:", "adjustFrequencies", "Lorg.apache.lucene.index.TermContext;", 0xa, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "BOOLEAN_REWRITE_", NULL, 0x19, "Lorg.apache.lucene.search.BlendedTermQuery$RewriteMethod;", &OrgApacheLuceneSearchBlendedTermQuery_BOOLEAN_REWRITE_, NULL, .constantValue.asLong = 0 },
-    { "DISJUNCTION_MAX_REWRITE_", NULL, 0x19, "Lorg.apache.lucene.search.BlendedTermQuery$RewriteMethod;", &OrgApacheLuceneSearchBlendedTermQuery_DISJUNCTION_MAX_REWRITE_, NULL, .constantValue.asLong = 0 },
+    { "BOOLEAN_REWRITE", "BOOLEAN_REWRITE", 0x19, "Lorg.apache.lucene.search.BlendedTermQuery$RewriteMethod;", &OrgApacheLuceneSearchBlendedTermQuery_BOOLEAN_REWRITE, NULL, .constantValue.asLong = 0 },
+    { "DISJUNCTION_MAX_REWRITE", "DISJUNCTION_MAX_REWRITE", 0x19, "Lorg.apache.lucene.search.BlendedTermQuery$RewriteMethod;", &OrgApacheLuceneSearchBlendedTermQuery_DISJUNCTION_MAX_REWRITE, NULL, .constantValue.asLong = 0 },
     { "terms_", NULL, 0x12, "[Lorg.apache.lucene.index.Term;", NULL, NULL, .constantValue.asLong = 0 },
     { "boosts_", NULL, 0x12, "[F", NULL, NULL, .constantValue.asLong = 0 },
     { "contexts_", NULL, 0x12, "[Lorg.apache.lucene.index.TermContext;", NULL, NULL, .constantValue.asLong = 0 },
@@ -265,13 +279,15 @@ void OrgApacheLuceneSearchBlendedTermQuery_initWithOrgApacheLuceneIndexTermArray
   JreStrongAssign(&self->boosts_, boosts);
   JreStrongAssign(&self->contexts_, contexts);
   JreStrongAssign(&self->rewriteMethod_, rewriteMethod);
-  [((OrgApacheLuceneSearchBlendedTermQuery_$2 *) [new_OrgApacheLuceneSearchBlendedTermQuery_$2_initWithOrgApacheLuceneIndexTermArray_withOrgApacheLuceneIndexTermContextArray_withFloatArray_(terms, contexts, boosts) autorelease]) sortWithInt:0 withInt:terms->size_];
+  [create_OrgApacheLuceneSearchBlendedTermQuery_$2_initWithOrgApacheLuceneIndexTermArray_withOrgApacheLuceneIndexTermContextArray_withFloatArray_(terms, contexts, boosts) sortWithInt:0 withInt:terms->size_];
 }
 
 OrgApacheLuceneSearchBlendedTermQuery *new_OrgApacheLuceneSearchBlendedTermQuery_initWithOrgApacheLuceneIndexTermArray_withFloatArray_withOrgApacheLuceneIndexTermContextArray_withOrgApacheLuceneSearchBlendedTermQuery_RewriteMethod_(IOSObjectArray *terms, IOSFloatArray *boosts, IOSObjectArray *contexts, OrgApacheLuceneSearchBlendedTermQuery_RewriteMethod *rewriteMethod) {
-  OrgApacheLuceneSearchBlendedTermQuery *self = [OrgApacheLuceneSearchBlendedTermQuery alloc];
-  OrgApacheLuceneSearchBlendedTermQuery_initWithOrgApacheLuceneIndexTermArray_withFloatArray_withOrgApacheLuceneIndexTermContextArray_withOrgApacheLuceneSearchBlendedTermQuery_RewriteMethod_(self, terms, boosts, contexts, rewriteMethod);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchBlendedTermQuery, initWithOrgApacheLuceneIndexTermArray_withFloatArray_withOrgApacheLuceneIndexTermContextArray_withOrgApacheLuceneSearchBlendedTermQuery_RewriteMethod_, terms, boosts, contexts, rewriteMethod)
+}
+
+OrgApacheLuceneSearchBlendedTermQuery *create_OrgApacheLuceneSearchBlendedTermQuery_initWithOrgApacheLuceneIndexTermArray_withFloatArray_withOrgApacheLuceneIndexTermContextArray_withOrgApacheLuceneSearchBlendedTermQuery_RewriteMethod_(IOSObjectArray *terms, IOSFloatArray *boosts, IOSObjectArray *contexts, OrgApacheLuceneSearchBlendedTermQuery_RewriteMethod *rewriteMethod) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchBlendedTermQuery, initWithOrgApacheLuceneIndexTermArray_withFloatArray_withOrgApacheLuceneIndexTermContextArray_withOrgApacheLuceneSearchBlendedTermQuery_RewriteMethod_, terms, boosts, contexts, rewriteMethod)
 }
 
 OrgApacheLuceneIndexTermContext *OrgApacheLuceneSearchBlendedTermQuery_adjustFrequenciesWithOrgApacheLuceneIndexTermContext_withInt_withLong_(OrgApacheLuceneIndexTermContext *ctx, jint artificialDf, jlong artificialTtf) {
@@ -284,7 +300,7 @@ OrgApacheLuceneIndexTermContext *OrgApacheLuceneSearchBlendedTermQuery_adjustFre
   else {
     len = [leaves size];
   }
-  OrgApacheLuceneIndexTermContext *newCtx = [new_OrgApacheLuceneIndexTermContext_initWithOrgApacheLuceneIndexIndexReaderContext_(ctx->topReaderContext_) autorelease];
+  OrgApacheLuceneIndexTermContext *newCtx = create_OrgApacheLuceneIndexTermContext_initWithOrgApacheLuceneIndexIndexReaderContext_(ctx->topReaderContext_);
   for (jint i = 0; i < len; ++i) {
     OrgApacheLuceneIndexTermState *termState = [ctx getWithInt:i];
     if (termState == nil) {
@@ -325,7 +341,7 @@ J2OBJC_IGNORE_DESIGNATED_END
                                                                          withFloat:(jfloat)boost
                                                withOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)context {
   if (numTerms_ >= OrgApacheLuceneSearchBooleanQuery_getMaxClauseCount()) {
-    @throw [new_OrgApacheLuceneSearchBooleanQuery_TooManyClauses_init() autorelease];
+    @throw create_OrgApacheLuceneSearchBooleanQuery_TooManyClauses_init();
   }
   JreStrongAssign(&terms_, OrgApacheLuceneUtilArrayUtil_growWithNSObjectArray_withInt_(terms_, numTerms_ + 1));
   JreStrongAssign(&boosts_, OrgApacheLuceneUtilArrayUtil_growWithFloatArray_withInt_(boosts_, numTerms_ + 1));
@@ -338,7 +354,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (OrgApacheLuceneSearchBlendedTermQuery *)build {
-  return [new_OrgApacheLuceneSearchBlendedTermQuery_initWithOrgApacheLuceneIndexTermArray_withFloatArray_withOrgApacheLuceneIndexTermContextArray_withOrgApacheLuceneSearchBlendedTermQuery_RewriteMethod_(JavaUtilArrays_copyOfWithNSObjectArray_withInt_(terms_, numTerms_), JavaUtilArrays_copyOfWithFloatArray_withInt_(boosts_, numTerms_), JavaUtilArrays_copyOfWithNSObjectArray_withInt_(contexts_, numTerms_), rewriteMethod_) autorelease];
+  return create_OrgApacheLuceneSearchBlendedTermQuery_initWithOrgApacheLuceneIndexTermArray_withFloatArray_withOrgApacheLuceneIndexTermContextArray_withOrgApacheLuceneSearchBlendedTermQuery_RewriteMethod_(JavaUtilArrays_copyOfWithNSObjectArray_withInt_(terms_, numTerms_), JavaUtilArrays_copyOfWithFloatArray_withInt_(boosts_, numTerms_), JavaUtilArrays_copyOfWithNSObjectArray_withInt_(contexts_, numTerms_), rewriteMethod_);
 }
 
 - (void)dealloc {
@@ -377,13 +393,15 @@ void OrgApacheLuceneSearchBlendedTermQuery_Builder_init(OrgApacheLuceneSearchBle
   JreStrongAssignAndConsume(&self->terms_, [IOSObjectArray newArrayWithLength:0 type:OrgApacheLuceneIndexTerm_class_()]);
   JreStrongAssignAndConsume(&self->boosts_, [IOSFloatArray newArrayWithLength:0]);
   JreStrongAssignAndConsume(&self->contexts_, [IOSObjectArray newArrayWithLength:0 type:OrgApacheLuceneIndexTermContext_class_()]);
-  JreStrongAssign(&self->rewriteMethod_, JreLoadStatic(OrgApacheLuceneSearchBlendedTermQuery, DISJUNCTION_MAX_REWRITE_));
+  JreStrongAssign(&self->rewriteMethod_, JreLoadStatic(OrgApacheLuceneSearchBlendedTermQuery, DISJUNCTION_MAX_REWRITE));
 }
 
 OrgApacheLuceneSearchBlendedTermQuery_Builder *new_OrgApacheLuceneSearchBlendedTermQuery_Builder_init() {
-  OrgApacheLuceneSearchBlendedTermQuery_Builder *self = [OrgApacheLuceneSearchBlendedTermQuery_Builder alloc];
-  OrgApacheLuceneSearchBlendedTermQuery_Builder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchBlendedTermQuery_Builder, init)
+}
+
+OrgApacheLuceneSearchBlendedTermQuery_Builder *create_OrgApacheLuceneSearchBlendedTermQuery_Builder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchBlendedTermQuery_Builder, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBlendedTermQuery_Builder)
@@ -428,15 +446,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBlendedTermQuery_RewriteMe
 }
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneSearchQueryArray:(IOSObjectArray *)subQueries {
-  return [new_OrgApacheLuceneSearchDisjunctionMaxQuery_initWithJavaUtilCollection_withFloat_(JavaUtilArrays_asListWithNSObjectArray_(subQueries), tieBreakerMultiplier_) autorelease];
+  return create_OrgApacheLuceneSearchDisjunctionMaxQuery_initWithJavaUtilCollection_withFloat_(JavaUtilArrays_asListWithNSObjectArray_(subQueries), tieBreakerMultiplier_);
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (obj == nil || [self getClass] != [obj getClass]) {
+  if (obj == nil || [self getClass] != (id) [obj getClass]) {
     return false;
   }
-  OrgApacheLuceneSearchBlendedTermQuery_DisjunctionMaxRewrite *that = (OrgApacheLuceneSearchBlendedTermQuery_DisjunctionMaxRewrite *) check_class_cast(obj, [OrgApacheLuceneSearchBlendedTermQuery_DisjunctionMaxRewrite class]);
-  return tieBreakerMultiplier_ == ((OrgApacheLuceneSearchBlendedTermQuery_DisjunctionMaxRewrite *) nil_chk(that))->tieBreakerMultiplier_;
+  OrgApacheLuceneSearchBlendedTermQuery_DisjunctionMaxRewrite *that = (OrgApacheLuceneSearchBlendedTermQuery_DisjunctionMaxRewrite *) cast_chk(obj, [OrgApacheLuceneSearchBlendedTermQuery_DisjunctionMaxRewrite class]);
+  return tieBreakerMultiplier_ == that->tieBreakerMultiplier_;
 }
 
 - (NSUInteger)hash {
@@ -465,9 +483,11 @@ void OrgApacheLuceneSearchBlendedTermQuery_DisjunctionMaxRewrite_initWithFloat_(
 }
 
 OrgApacheLuceneSearchBlendedTermQuery_DisjunctionMaxRewrite *new_OrgApacheLuceneSearchBlendedTermQuery_DisjunctionMaxRewrite_initWithFloat_(jfloat tieBreakerMultiplier) {
-  OrgApacheLuceneSearchBlendedTermQuery_DisjunctionMaxRewrite *self = [OrgApacheLuceneSearchBlendedTermQuery_DisjunctionMaxRewrite alloc];
-  OrgApacheLuceneSearchBlendedTermQuery_DisjunctionMaxRewrite_initWithFloat_(self, tieBreakerMultiplier);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchBlendedTermQuery_DisjunctionMaxRewrite, initWithFloat_, tieBreakerMultiplier)
+}
+
+OrgApacheLuceneSearchBlendedTermQuery_DisjunctionMaxRewrite *create_OrgApacheLuceneSearchBlendedTermQuery_DisjunctionMaxRewrite_initWithFloat_(jfloat tieBreakerMultiplier) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchBlendedTermQuery_DisjunctionMaxRewrite, initWithFloat_, tieBreakerMultiplier)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBlendedTermQuery_DisjunctionMaxRewrite)
@@ -475,7 +495,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBlendedTermQuery_Disjuncti
 @implementation OrgApacheLuceneSearchBlendedTermQuery_$1
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneSearchQueryArray:(IOSObjectArray *)subQueries {
-  OrgApacheLuceneSearchBooleanQuery_Builder *merged = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
+  OrgApacheLuceneSearchBooleanQuery_Builder *merged = create_OrgApacheLuceneSearchBooleanQuery_Builder_init();
   [merged setDisableCoordWithBoolean:true];
   {
     IOSObjectArray *a__ = subQueries;
@@ -483,7 +503,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBlendedTermQuery_Disjuncti
     OrgApacheLuceneSearchQuery * const *e__ = b__ + a__->size_;
     while (b__ < e__) {
       OrgApacheLuceneSearchQuery *query = *b__++;
-      [merged addWithOrgApacheLuceneSearchQuery:query withOrgApacheLuceneSearchBooleanClause_OccurEnum:JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD)];
+      [merged addWithOrgApacheLuceneSearchQuery:query withOrgApacheLuceneSearchBooleanClause_Occur:JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD)];
     }
   }
   return [merged build];
@@ -512,9 +532,11 @@ void OrgApacheLuceneSearchBlendedTermQuery_$1_init(OrgApacheLuceneSearchBlendedT
 }
 
 OrgApacheLuceneSearchBlendedTermQuery_$1 *new_OrgApacheLuceneSearchBlendedTermQuery_$1_init() {
-  OrgApacheLuceneSearchBlendedTermQuery_$1 *self = [OrgApacheLuceneSearchBlendedTermQuery_$1 alloc];
-  OrgApacheLuceneSearchBlendedTermQuery_$1_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchBlendedTermQuery_$1, init)
+}
+
+OrgApacheLuceneSearchBlendedTermQuery_$1 *create_OrgApacheLuceneSearchBlendedTermQuery_$1_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchBlendedTermQuery_$1, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBlendedTermQuery_$1)
@@ -579,9 +601,11 @@ void OrgApacheLuceneSearchBlendedTermQuery_$2_initWithOrgApacheLuceneIndexTermAr
 }
 
 OrgApacheLuceneSearchBlendedTermQuery_$2 *new_OrgApacheLuceneSearchBlendedTermQuery_$2_initWithOrgApacheLuceneIndexTermArray_withOrgApacheLuceneIndexTermContextArray_withFloatArray_(IOSObjectArray *capture$0, IOSObjectArray *capture$1, IOSFloatArray *capture$2) {
-  OrgApacheLuceneSearchBlendedTermQuery_$2 *self = [OrgApacheLuceneSearchBlendedTermQuery_$2 alloc];
-  OrgApacheLuceneSearchBlendedTermQuery_$2_initWithOrgApacheLuceneIndexTermArray_withOrgApacheLuceneIndexTermContextArray_withFloatArray_(self, capture$0, capture$1, capture$2);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchBlendedTermQuery_$2, initWithOrgApacheLuceneIndexTermArray_withOrgApacheLuceneIndexTermContextArray_withFloatArray_, capture$0, capture$1, capture$2)
+}
+
+OrgApacheLuceneSearchBlendedTermQuery_$2 *create_OrgApacheLuceneSearchBlendedTermQuery_$2_initWithOrgApacheLuceneIndexTermArray_withOrgApacheLuceneIndexTermContextArray_withFloatArray_(IOSObjectArray *capture$0, IOSObjectArray *capture$1, IOSFloatArray *capture$2) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchBlendedTermQuery_$2, initWithOrgApacheLuceneIndexTermArray_withOrgApacheLuceneIndexTermContextArray_withFloatArray_, capture$0, capture$1, capture$2)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBlendedTermQuery_$2)

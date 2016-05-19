@@ -4,12 +4,7 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/util/Locale.h"
-#include "java/util/TimeZone.h"
-#include "org/apache/lucene/analysis/Analyzer.h"
-#include "org/apache/lucene/document/DateTools.h"
 #include "org/apache/lucene/queryparser/flexible/standard/CommonQueryParserConfiguration.h"
-#include "org/apache/lucene/search/MultiTermQuery.h"
 
 @interface OrgApacheLuceneQueryparserFlexibleStandardCommonQueryParserConfiguration : NSObject
 
@@ -38,7 +33,7 @@
     { "getFuzzyPrefixLength", NULL, "I", 0x401, NULL, NULL },
     { "getPhraseSlop", NULL, "I", 0x401, NULL, NULL },
     { "setFuzzyMinSimWithFloat:", "setFuzzyMinSim", "V", 0x401, NULL, NULL },
-    { "setDateResolutionWithOrgApacheLuceneDocumentDateTools_ResolutionEnum:", "setDateResolution", "V", 0x401, NULL, NULL },
+    { "setDateResolutionWithOrgApacheLuceneDocumentDateTools_Resolution:", "setDateResolution", "V", 0x401, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardCommonQueryParserConfiguration = { 2, "CommonQueryParserConfiguration", "org.apache.lucene.queryparser.flexible.standard", NULL, 0x609, 20, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleStandardCommonQueryParserConfiguration;

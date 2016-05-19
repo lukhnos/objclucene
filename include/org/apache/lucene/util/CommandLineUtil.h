@@ -5,40 +5,89 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilCommandLineUtil_INCLUDE_ALL")
-#if OrgApacheLuceneUtilCommandLineUtil_RESTRICT
-#define OrgApacheLuceneUtilCommandLineUtil_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilCommandLineUtil")
+#ifdef RESTRICT_OrgApacheLuceneUtilCommandLineUtil
+#define INCLUDE_ALL_OrgApacheLuceneUtilCommandLineUtil 0
 #else
-#define OrgApacheLuceneUtilCommandLineUtil_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilCommandLineUtil 1
 #endif
-#undef OrgApacheLuceneUtilCommandLineUtil_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilCommandLineUtil
 
-#if !defined (_OrgApacheLuceneUtilCommandLineUtil_) && (OrgApacheLuceneUtilCommandLineUtil_INCLUDE_ALL || OrgApacheLuceneUtilCommandLineUtil_INCLUDE)
-#define _OrgApacheLuceneUtilCommandLineUtil_
+#if !defined (OrgApacheLuceneUtilCommandLineUtil_) && (INCLUDE_ALL_OrgApacheLuceneUtilCommandLineUtil || defined(INCLUDE_OrgApacheLuceneUtilCommandLineUtil))
+#define OrgApacheLuceneUtilCommandLineUtil_
 
 @class IOSClass;
 @class OrgApacheLuceneStoreFSDirectory;
 @class OrgApacheLuceneStoreLockFactory;
 @class OrgLukhnosPortmobileFilePath;
 
+/*!
+ @brief Class containing some useful methods used by command line tools
+ */
 @interface OrgApacheLuceneUtilCommandLineUtil : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Loads a specific Directory implementation
+ @param clazzName The name of the Directory class to load
+ @return The Directory class loaded
+ @throws ClassNotFoundException If the specified class cannot be found.
+ */
 + (IOSClass *)loadDirectoryClassWithNSString:(NSString *)clazzName;
 
+/*!
+ @brief Loads a specific FSDirectory implementation
+ @param clazzName The name of the FSDirectory class to load
+ @return The FSDirectory class loaded
+ @throws ClassNotFoundException If the specified class cannot be found.
+ */
 + (IOSClass *)loadFSDirectoryClassWithNSString:(NSString *)clazzName;
 
+/*!
+ @brief Creates a new specific FSDirectory instance
+ @param clazz The class of the object to be created
+ @param path The file to be used as parameter constructor
+ @return The new FSDirectory instance
+ @throws NoSuchMethodException If the Directory does not have a constructor that takes <code>Path</code>.
+ @throws InstantiationException If the class is abstract or an interface.
+ @throws IllegalAccessException If the constructor does not have public visibility.
+ @throws InvocationTargetException If the constructor throws an exception
+ */
 + (OrgApacheLuceneStoreFSDirectory *)newFSDirectoryWithIOSClass:(IOSClass *)clazz
                                withOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Creates a new specific FSDirectory instance
+ @param clazz The class of the object to be created
+ @param path The file to be used as parameter constructor
+ @param lf The lock factory to be used
+ @return The new FSDirectory instance
+ @throws NoSuchMethodException If the Directory does not have a constructor that takes <code>Path</code>.
+ @throws InstantiationException If the class is abstract or an interface.
+ @throws IllegalAccessException If the constructor does not have public visibility.
+ @throws InvocationTargetException If the constructor throws an exception
+ */
 + (OrgApacheLuceneStoreFSDirectory *)newFSDirectoryWithIOSClass:(IOSClass *)clazz
                                withOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
                             withOrgApacheLuceneStoreLockFactory:(OrgApacheLuceneStoreLockFactory *)lf OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Creates a specific FSDirectory instance starting from its class name, using the default lock factory
+ @param clazzName The name of the FSDirectory class to load
+ @param path The path to be used as parameter constructor
+ @return the new FSDirectory instance
+ */
 + (OrgApacheLuceneStoreFSDirectory *)newFSDirectoryWithNSString:(NSString *)clazzName
                                withOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Creates a specific FSDirectory instance starting from its class name
+ @param clazzName The name of the FSDirectory class to load
+ @param path The path to be used as parameter constructor
+ @param lf The lock factory to be used
+ @return the new FSDirectory instance
+ */
 + (OrgApacheLuceneStoreFSDirectory *)newFSDirectoryWithNSString:(NSString *)clazzName
                                withOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
                             withOrgApacheLuceneStoreLockFactory:(OrgApacheLuceneStoreLockFactory *)lf OBJC_METHOD_FAMILY_NONE;
@@ -63,4 +112,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilCommandLineUtil)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilCommandLineUtil_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilCommandLineUtil")

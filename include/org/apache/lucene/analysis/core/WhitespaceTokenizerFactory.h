@@ -5,29 +5,42 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory_RESTRICT
-#define OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory 0
 #else
-#define OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory
 
-#if !defined (_OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory_) && (OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory_
+#if !defined (OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory || defined(INCLUDE_OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory))
+#define OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenizerFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenizerFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenizerFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenizerFactory 1
 #include "org/apache/lucene/analysis/util/TokenizerFactory.h"
 
 @class OrgApacheLuceneAnalysisCoreWhitespaceTokenizer;
 @class OrgApacheLuceneUtilAttributeFactory;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>WhitespaceTokenizer</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_ws" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory : OrgApacheLuceneAnalysisUtilTokenizerFactory
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new WhitespaceTokenizerFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisCoreWhitespaceTokenizer *)createWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
@@ -40,8 +53,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory_ini
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory *new_OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory *create_OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory")

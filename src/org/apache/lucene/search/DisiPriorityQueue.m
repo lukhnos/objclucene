@@ -158,13 +158,13 @@ __attribute__((unused)) static OrgApacheLuceneSearchDisiWrapper *OrgApacheLucene
   return [((id<JavaUtilList>) nil_chk([((id<JavaUtilList>) nil_chk(JavaUtilArrays_asListWithNSObjectArray_(heap_))) subListWithInt:0 withInt:size_])) iterator];
 }
 
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
+  return JreDefaultFastEnumeration(self, state, stackbuf, len);
+}
+
 - (void)dealloc {
   RELEASE_(heap_);
   [super dealloc];
-}
-
-- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -174,17 +174,17 @@ __attribute__((unused)) static OrgApacheLuceneSearchDisiWrapper *OrgApacheLucene
     { "parentNodeWithInt:", "parentNode", "I", 0x8, NULL, NULL },
     { "initWithInt:", "DisiPriorityQueue", NULL, 0x1, NULL, NULL },
     { "size", NULL, "I", 0x1, NULL, NULL },
-    { "top", NULL, "Lorg.apache.lucene.search.DisiWrapper;", 0x1, NULL, NULL },
-    { "topList", NULL, "Lorg.apache.lucene.search.DisiWrapper;", 0x1, NULL, NULL },
-    { "prependWithOrgApacheLuceneSearchDisiWrapper:withOrgApacheLuceneSearchDisiWrapper:", "prepend", "Lorg.apache.lucene.search.DisiWrapper;", 0x2, NULL, NULL },
-    { "topListWithOrgApacheLuceneSearchDisiWrapper:withOrgApacheLuceneSearchDisiWrapperArray:withInt:withInt:", "topList", "Lorg.apache.lucene.search.DisiWrapper;", 0x2, NULL, NULL },
-    { "addWithOrgApacheLuceneSearchDisiWrapper:", "add", "Lorg.apache.lucene.search.DisiWrapper;", 0x1, NULL, NULL },
-    { "pop", NULL, "Lorg.apache.lucene.search.DisiWrapper;", 0x1, NULL, NULL },
-    { "updateTop", NULL, "Lorg.apache.lucene.search.DisiWrapper;", 0x1, NULL, NULL },
-    { "updateTopWithOrgApacheLuceneSearchDisiWrapper:", "updateTop", "Lorg.apache.lucene.search.DisiWrapper;", 0x0, NULL, NULL },
+    { "top", NULL, "Lorg.apache.lucene.search.DisiWrapper;", 0x1, NULL, "()Lorg/apache/lucene/search/DisiWrapper<TIter;>;" },
+    { "topList", NULL, "Lorg.apache.lucene.search.DisiWrapper;", 0x1, NULL, "()Lorg/apache/lucene/search/DisiWrapper<TIter;>;" },
+    { "prependWithOrgApacheLuceneSearchDisiWrapper:withOrgApacheLuceneSearchDisiWrapper:", "prepend", "Lorg.apache.lucene.search.DisiWrapper;", 0x2, NULL, "(Lorg/apache/lucene/search/DisiWrapper<TIter;>;Lorg/apache/lucene/search/DisiWrapper<TIter;>;)Lorg/apache/lucene/search/DisiWrapper<TIter;>;" },
+    { "topListWithOrgApacheLuceneSearchDisiWrapper:withOrgApacheLuceneSearchDisiWrapperArray:withInt:withInt:", "topList", "Lorg.apache.lucene.search.DisiWrapper;", 0x2, NULL, "(Lorg/apache/lucene/search/DisiWrapper<TIter;>;[Lorg/apache/lucene/search/DisiWrapper<TIter;>;II)Lorg/apache/lucene/search/DisiWrapper<TIter;>;" },
+    { "addWithOrgApacheLuceneSearchDisiWrapper:", "add", "Lorg.apache.lucene.search.DisiWrapper;", 0x1, NULL, "(Lorg/apache/lucene/search/DisiWrapper<TIter;>;)Lorg/apache/lucene/search/DisiWrapper<TIter;>;" },
+    { "pop", NULL, "Lorg.apache.lucene.search.DisiWrapper;", 0x1, NULL, "()Lorg/apache/lucene/search/DisiWrapper<TIter;>;" },
+    { "updateTop", NULL, "Lorg.apache.lucene.search.DisiWrapper;", 0x1, NULL, "()Lorg/apache/lucene/search/DisiWrapper<TIter;>;" },
+    { "updateTopWithOrgApacheLuceneSearchDisiWrapper:", "updateTop", "Lorg.apache.lucene.search.DisiWrapper;", 0x0, NULL, "(Lorg/apache/lucene/search/DisiWrapper<TIter;>;)Lorg/apache/lucene/search/DisiWrapper<TIter;>;" },
     { "upHeapWithInt:", "upHeap", "V", 0x0, NULL, NULL },
     { "downHeapWithInt:", "downHeap", "V", 0x0, NULL, NULL },
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, NULL },
+    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<Lorg/apache/lucene/search/DisiWrapper<TIter;>;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "heap_", NULL, 0x12, "[Lorg.apache.lucene.search.DisiWrapper;", NULL, "[Lorg/apache/lucene/search/DisiWrapper<TIter;>;", .constantValue.asLong = 0 },
@@ -218,9 +218,11 @@ void OrgApacheLuceneSearchDisiPriorityQueue_initWithInt_(OrgApacheLuceneSearchDi
 }
 
 OrgApacheLuceneSearchDisiPriorityQueue *new_OrgApacheLuceneSearchDisiPriorityQueue_initWithInt_(jint maxSize) {
-  OrgApacheLuceneSearchDisiPriorityQueue *self = [OrgApacheLuceneSearchDisiPriorityQueue alloc];
-  OrgApacheLuceneSearchDisiPriorityQueue_initWithInt_(self, maxSize);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDisiPriorityQueue, initWithInt_, maxSize)
+}
+
+OrgApacheLuceneSearchDisiPriorityQueue *create_OrgApacheLuceneSearchDisiPriorityQueue_initWithInt_(jint maxSize) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDisiPriorityQueue, initWithInt_, maxSize)
 }
 
 OrgApacheLuceneSearchDisiWrapper *OrgApacheLuceneSearchDisiPriorityQueue_prependWithOrgApacheLuceneSearchDisiWrapper_withOrgApacheLuceneSearchDisiWrapper_(OrgApacheLuceneSearchDisiPriorityQueue *self, OrgApacheLuceneSearchDisiWrapper *w1, OrgApacheLuceneSearchDisiWrapper *w2) {

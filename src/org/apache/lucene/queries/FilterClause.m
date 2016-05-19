@@ -10,20 +10,20 @@
 
 @interface OrgApacheLuceneQueriesFilterClause () {
  @public
-  OrgApacheLuceneSearchBooleanClause_OccurEnum *occur_;
+  OrgApacheLuceneSearchBooleanClause_Occur *occur_;
   OrgApacheLuceneSearchFilter *filter_;
 }
 
 @end
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFilterClause, occur_, OrgApacheLuceneSearchBooleanClause_OccurEnum *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFilterClause, occur_, OrgApacheLuceneSearchBooleanClause_Occur *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFilterClause, filter_, OrgApacheLuceneSearchFilter *)
 
 @implementation OrgApacheLuceneQueriesFilterClause
 
 - (instancetype)initWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
-   withOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanClause_OccurEnum *)occur {
-  OrgApacheLuceneQueriesFilterClause_initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchBooleanClause_OccurEnum_(self, filter, occur);
+       withOrgApacheLuceneSearchBooleanClause_Occur:(OrgApacheLuceneSearchBooleanClause_Occur *)occur {
+  OrgApacheLuceneQueriesFilterClause_initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchBooleanClause_Occur_(self, filter, occur);
   return self;
 }
 
@@ -31,23 +31,23 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFilterClause, filter_, OrgApacheLucene
   return filter_;
 }
 
-- (OrgApacheLuceneSearchBooleanClause_OccurEnum *)getOccur {
+- (OrgApacheLuceneSearchBooleanClause_Occur *)getOccur {
   return occur_;
 }
 
 - (jboolean)isEqual:(id)o {
   if (o == self) return true;
   if (o == nil || !([o isKindOfClass:[OrgApacheLuceneQueriesFilterClause class]])) return false;
-  OrgApacheLuceneQueriesFilterClause *other = (OrgApacheLuceneQueriesFilterClause *) check_class_cast(o, [OrgApacheLuceneQueriesFilterClause class]);
-  return [((OrgApacheLuceneSearchFilter *) nil_chk(self->filter_)) isEqual:((OrgApacheLuceneQueriesFilterClause *) nil_chk(other))->filter_] && self->occur_ == other->occur_;
+  OrgApacheLuceneQueriesFilterClause *other = (OrgApacheLuceneQueriesFilterClause *) cast_chk(o, [OrgApacheLuceneQueriesFilterClause class]);
+  return [((OrgApacheLuceneSearchFilter *) nil_chk(self->filter_)) isEqual:other->filter_] && self->occur_ == other->occur_;
 }
 
 - (NSUInteger)hash {
-  return ((jint) [((OrgApacheLuceneSearchFilter *) nil_chk(filter_)) hash]) ^ ((jint) [((OrgApacheLuceneSearchBooleanClause_OccurEnum *) nil_chk(occur_)) hash]);
+  return ((jint) [((OrgApacheLuceneSearchFilter *) nil_chk(filter_)) hash]) ^ ((jint) [((OrgApacheLuceneSearchBooleanClause_Occur *) nil_chk(occur_)) hash]);
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
-  return JreStrcat("$$", [((OrgApacheLuceneSearchBooleanClause_OccurEnum *) nil_chk(occur_)) description], [((OrgApacheLuceneSearchFilter *) nil_chk(filter_)) toStringWithNSString:field]);
+  return JreStrcat("$$", [((OrgApacheLuceneSearchBooleanClause_Occur *) nil_chk(occur_)) description], [((OrgApacheLuceneSearchFilter *) nil_chk(filter_)) toStringWithNSString:field]);
 }
 
 - (NSString *)description {
@@ -62,7 +62,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFilterClause, filter_, OrgApacheLucene
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchFilter:withOrgApacheLuceneSearchBooleanClause_OccurEnum:", "FilterClause", NULL, 0x1, NULL, NULL },
+    { "initWithOrgApacheLuceneSearchFilter:withOrgApacheLuceneSearchBooleanClause_Occur:", "FilterClause", NULL, 0x1, NULL, NULL },
     { "getFilter", NULL, "Lorg.apache.lucene.search.Filter;", 0x1, NULL, NULL },
     { "getOccur", NULL, "Lorg.apache.lucene.search.BooleanClause$Occur;", 0x1, NULL, NULL },
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
@@ -80,16 +80,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFilterClause, filter_, OrgApacheLucene
 
 @end
 
-void OrgApacheLuceneQueriesFilterClause_initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchBooleanClause_OccurEnum_(OrgApacheLuceneQueriesFilterClause *self, OrgApacheLuceneSearchFilter *filter, OrgApacheLuceneSearchBooleanClause_OccurEnum *occur) {
+void OrgApacheLuceneQueriesFilterClause_initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchBooleanClause_Occur_(OrgApacheLuceneQueriesFilterClause *self, OrgApacheLuceneSearchFilter *filter, OrgApacheLuceneSearchBooleanClause_Occur *occur) {
   NSObject_init(self);
   JreStrongAssign(&self->occur_, occur);
   JreStrongAssign(&self->filter_, filter);
 }
 
-OrgApacheLuceneQueriesFilterClause *new_OrgApacheLuceneQueriesFilterClause_initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchBooleanClause_OccurEnum_(OrgApacheLuceneSearchFilter *filter, OrgApacheLuceneSearchBooleanClause_OccurEnum *occur) {
-  OrgApacheLuceneQueriesFilterClause *self = [OrgApacheLuceneQueriesFilterClause alloc];
-  OrgApacheLuceneQueriesFilterClause_initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchBooleanClause_OccurEnum_(self, filter, occur);
-  return self;
+OrgApacheLuceneQueriesFilterClause *new_OrgApacheLuceneQueriesFilterClause_initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchBooleanClause_Occur_(OrgApacheLuceneSearchFilter *filter, OrgApacheLuceneSearchBooleanClause_Occur *occur) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFilterClause, initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchBooleanClause_Occur_, filter, occur)
+}
+
+OrgApacheLuceneQueriesFilterClause *create_OrgApacheLuceneQueriesFilterClause_initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchBooleanClause_Occur_(OrgApacheLuceneSearchFilter *filter, OrgApacheLuceneSearchBooleanClause_Occur *occur) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFilterClause, initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchBooleanClause_Occur_, filter, occur)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFilterClause)

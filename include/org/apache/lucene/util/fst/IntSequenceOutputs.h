@@ -5,25 +5,29 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilFstIntSequenceOutputs_INCLUDE_ALL")
-#if OrgApacheLuceneUtilFstIntSequenceOutputs_RESTRICT
-#define OrgApacheLuceneUtilFstIntSequenceOutputs_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstIntSequenceOutputs")
+#ifdef RESTRICT_OrgApacheLuceneUtilFstIntSequenceOutputs
+#define INCLUDE_ALL_OrgApacheLuceneUtilFstIntSequenceOutputs 0
 #else
-#define OrgApacheLuceneUtilFstIntSequenceOutputs_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilFstIntSequenceOutputs 1
 #endif
-#undef OrgApacheLuceneUtilFstIntSequenceOutputs_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilFstIntSequenceOutputs
 
-#if !defined (_OrgApacheLuceneUtilFstIntSequenceOutputs_) && (OrgApacheLuceneUtilFstIntSequenceOutputs_INCLUDE_ALL || OrgApacheLuceneUtilFstIntSequenceOutputs_INCLUDE)
-#define _OrgApacheLuceneUtilFstIntSequenceOutputs_
+#if !defined (OrgApacheLuceneUtilFstIntSequenceOutputs_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstIntSequenceOutputs || defined(INCLUDE_OrgApacheLuceneUtilFstIntSequenceOutputs))
+#define OrgApacheLuceneUtilFstIntSequenceOutputs_
 
-#define OrgApacheLuceneUtilFstOutputs_RESTRICT 1
-#define OrgApacheLuceneUtilFstOutputs_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilFstOutputs 1
+#define INCLUDE_OrgApacheLuceneUtilFstOutputs 1
 #include "org/apache/lucene/util/fst/Outputs.h"
 
 @class OrgApacheLuceneStoreDataInput;
 @class OrgApacheLuceneStoreDataOutput;
 @class OrgApacheLuceneUtilIntsRef;
 
+/*!
+ @brief An FST <code>Outputs</code> implementation where each output
+ is a sequence of ints.
+ */
 @interface OrgApacheLuceneUtilFstIntSequenceOutputs : OrgApacheLuceneUtilFstOutputs
 
 #pragma mark Public
@@ -64,4 +68,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstIntSequenceOutputs)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilFstIntSequenceOutputs_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstIntSequenceOutputs")

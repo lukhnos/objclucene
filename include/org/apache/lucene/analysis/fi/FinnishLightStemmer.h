@@ -5,19 +5,26 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisFiFinnishLightStemmer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisFiFinnishLightStemmer_RESTRICT
-#define OrgApacheLuceneAnalysisFiFinnishLightStemmer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisFiFinnishLightStemmer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisFiFinnishLightStemmer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisFiFinnishLightStemmer 0
 #else
-#define OrgApacheLuceneAnalysisFiFinnishLightStemmer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisFiFinnishLightStemmer 1
 #endif
-#undef OrgApacheLuceneAnalysisFiFinnishLightStemmer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisFiFinnishLightStemmer
 
-#if !defined (_OrgApacheLuceneAnalysisFiFinnishLightStemmer_) && (OrgApacheLuceneAnalysisFiFinnishLightStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisFiFinnishLightStemmer_INCLUDE)
-#define _OrgApacheLuceneAnalysisFiFinnishLightStemmer_
+#if !defined (OrgApacheLuceneAnalysisFiFinnishLightStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisFiFinnishLightStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisFiFinnishLightStemmer))
+#define OrgApacheLuceneAnalysisFiFinnishLightStemmer_
 
 @class IOSCharArray;
 
+/*!
+ @brief Light Stemmer for Finnish.
+ <p>
+ This stemmer implements the algorithm described in:
+ <i>Report on CLEF-2003 Monolingual Tracks</i>
+ Jacques Savoy
+ */
 @interface OrgApacheLuceneAnalysisFiFinnishLightStemmer : NSObject
 
 #pragma mark Public
@@ -35,8 +42,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisFiFinnishLightStemmer_init(OrgApac
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisFiFinnishLightStemmer *new_OrgApacheLuceneAnalysisFiFinnishLightStemmer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisFiFinnishLightStemmer *create_OrgApacheLuceneAnalysisFiFinnishLightStemmer_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisFiFinnishLightStemmer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisFiFinnishLightStemmer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisFiFinnishLightStemmer")

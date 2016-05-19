@@ -19,6 +19,10 @@
 
 @interface OrgApacheLuceneCodecsPostingsFormat () {
  @public
+  /*!
+   @brief Unique name that's used to retrieve this format when
+ reading the index.
+   */
   NSString *name_;
 }
 
@@ -26,6 +30,10 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsPostingsFormat, name_, NSString *)
 
+/*!
+ @brief This static holder class prevents classloading deadlock by delaying
+ init of postings formats until needed.
+ */
 @interface OrgApacheLuceneCodecsPostingsFormat_Holder : NSObject
 
 - (instancetype)init;
@@ -36,12 +44,15 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsPostingsFormat, name_, NSString *)
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneCodecsPostingsFormat_Holder)
 
-static OrgApacheLuceneUtilNamedSPILoader *OrgApacheLuceneCodecsPostingsFormat_Holder_LOADER_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsPostingsFormat_Holder, LOADER_, OrgApacheLuceneUtilNamedSPILoader *)
+inline OrgApacheLuceneUtilNamedSPILoader *OrgApacheLuceneCodecsPostingsFormat_Holder_get_LOADER();
+static OrgApacheLuceneUtilNamedSPILoader *OrgApacheLuceneCodecsPostingsFormat_Holder_LOADER;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsPostingsFormat_Holder, LOADER, OrgApacheLuceneUtilNamedSPILoader *)
 
 __attribute__((unused)) static void OrgApacheLuceneCodecsPostingsFormat_Holder_init(OrgApacheLuceneCodecsPostingsFormat_Holder *self);
 
 __attribute__((unused)) static OrgApacheLuceneCodecsPostingsFormat_Holder *new_OrgApacheLuceneCodecsPostingsFormat_Holder_init() NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneCodecsPostingsFormat_Holder *create_OrgApacheLuceneCodecsPostingsFormat_Holder_init();
 
 __attribute__((unused)) static OrgApacheLuceneUtilNamedSPILoader *OrgApacheLuceneCodecsPostingsFormat_Holder_getLoader();
 
@@ -49,9 +60,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsPostingsFormat_Holder)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneCodecsPostingsFormat)
 
-IOSObjectArray *OrgApacheLuceneCodecsPostingsFormat_EMPTY_;
+IOSObjectArray *OrgApacheLuceneCodecsPostingsFormat_EMPTY;
 
 @implementation OrgApacheLuceneCodecsPostingsFormat
+
++ (IOSObjectArray *)EMPTY {
+  return OrgApacheLuceneCodecsPostingsFormat_EMPTY;
+}
 
 - (instancetype)initWithNSString:(NSString *)name {
   OrgApacheLuceneCodecsPostingsFormat_initWithNSString_(self, name);
@@ -97,7 +112,7 @@ IOSObjectArray *OrgApacheLuceneCodecsPostingsFormat_EMPTY_;
 
 + (void)initialize {
   if (self == [OrgApacheLuceneCodecsPostingsFormat class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneCodecsPostingsFormat_EMPTY_, [IOSObjectArray newArrayWithLength:0 type:OrgApacheLuceneCodecsPostingsFormat_class_()]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneCodecsPostingsFormat_EMPTY, [IOSObjectArray newArrayWithLength:0 type:OrgApacheLuceneCodecsPostingsFormat_class_()]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneCodecsPostingsFormat)
   }
 }
@@ -110,11 +125,11 @@ IOSObjectArray *OrgApacheLuceneCodecsPostingsFormat_EMPTY_;
     { "fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:", "fieldsProducer", "Lorg.apache.lucene.codecs.FieldsProducer;", 0x401, "Ljava.io.IOException;", NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "forNameWithNSString:", "forName", "Lorg.apache.lucene.codecs.PostingsFormat;", 0x9, NULL, NULL },
-    { "availablePostingsFormats", NULL, "Ljava.util.Set;", 0x9, NULL, NULL },
+    { "availablePostingsFormats", NULL, "Ljava.util.Set;", 0x9, NULL, "()Ljava/util/Set<Ljava/lang/String;>;" },
     { "reloadPostingsFormatsWithJavaLangClassLoader:", "reloadPostingsFormats", "V", 0x9, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "EMPTY_", NULL, 0x19, "[Lorg.apache.lucene.codecs.PostingsFormat;", &OrgApacheLuceneCodecsPostingsFormat_EMPTY_, NULL, .constantValue.asLong = 0 },
+    { "EMPTY", "EMPTY", 0x19, "[Lorg.apache.lucene.codecs.PostingsFormat;", &OrgApacheLuceneCodecsPostingsFormat_EMPTY, NULL, .constantValue.asLong = 0 },
     { "name_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.codecs.PostingsFormat$Holder;"};
@@ -164,7 +179,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneCodecsPostingsFormat_Holder class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneCodecsPostingsFormat_Holder_LOADER_, new_OrgApacheLuceneUtilNamedSPILoader_initWithIOSClass_(OrgApacheLuceneCodecsPostingsFormat_class_()));
+    JreStrongAssignAndConsume(&OrgApacheLuceneCodecsPostingsFormat_Holder_LOADER, new_OrgApacheLuceneUtilNamedSPILoader_initWithIOSClass_(OrgApacheLuceneCodecsPostingsFormat_class_()));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneCodecsPostingsFormat_Holder)
   }
 }
@@ -172,10 +187,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "Holder", NULL, 0x2, NULL, NULL },
-    { "getLoader", NULL, "Lorg.apache.lucene.util.NamedSPILoader;", 0x8, NULL, NULL },
+    { "getLoader", NULL, "Lorg.apache.lucene.util.NamedSPILoader;", 0x8, NULL, "()Lorg/apache/lucene/util/NamedSPILoader<Lorg/apache/lucene/codecs/PostingsFormat;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "LOADER_", NULL, 0x1a, "Lorg.apache.lucene.util.NamedSPILoader;", &OrgApacheLuceneCodecsPostingsFormat_Holder_LOADER_, "Lorg/apache/lucene/util/NamedSPILoader<Lorg/apache/lucene/codecs/PostingsFormat;>;", .constantValue.asLong = 0 },
+    { "LOADER", "LOADER", 0x1a, "Lorg.apache.lucene.util.NamedSPILoader;", &OrgApacheLuceneCodecsPostingsFormat_Holder_LOADER, "Lorg/apache/lucene/util/NamedSPILoader<Lorg/apache/lucene/codecs/PostingsFormat;>;", .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneCodecsPostingsFormat_Holder = { 2, "Holder", "org.apache.lucene.codecs", "PostingsFormat", 0x1a, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneCodecsPostingsFormat_Holder;
@@ -188,17 +203,19 @@ void OrgApacheLuceneCodecsPostingsFormat_Holder_init(OrgApacheLuceneCodecsPostin
 }
 
 OrgApacheLuceneCodecsPostingsFormat_Holder *new_OrgApacheLuceneCodecsPostingsFormat_Holder_init() {
-  OrgApacheLuceneCodecsPostingsFormat_Holder *self = [OrgApacheLuceneCodecsPostingsFormat_Holder alloc];
-  OrgApacheLuceneCodecsPostingsFormat_Holder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsPostingsFormat_Holder, init)
+}
+
+OrgApacheLuceneCodecsPostingsFormat_Holder *create_OrgApacheLuceneCodecsPostingsFormat_Holder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsPostingsFormat_Holder, init)
 }
 
 OrgApacheLuceneUtilNamedSPILoader *OrgApacheLuceneCodecsPostingsFormat_Holder_getLoader() {
   OrgApacheLuceneCodecsPostingsFormat_Holder_initialize();
-  if (OrgApacheLuceneCodecsPostingsFormat_Holder_LOADER_ == nil) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"You tried to lookup a PostingsFormat by name before all formats could be initialized. This likely happens if you call PostingsFormat#forName from a PostingsFormat's ctor.") autorelease];
+  if (OrgApacheLuceneCodecsPostingsFormat_Holder_LOADER == nil) {
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"You tried to lookup a PostingsFormat by name before all formats could be initialized. This likely happens if you call PostingsFormat#forName from a PostingsFormat's ctor.");
   }
-  return OrgApacheLuceneCodecsPostingsFormat_Holder_LOADER_;
+  return OrgApacheLuceneCodecsPostingsFormat_Holder_LOADER;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsPostingsFormat_Holder)

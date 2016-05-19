@@ -5,24 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder_RESTRICT
-#define OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder 0
 #else
-#define OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder 1
 #endif
-#undef OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder
 
-#if !defined (_OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder_) && (OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder_INCLUDE_ALL || OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder_INCLUDE)
-#define _OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder_
+#if !defined (OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder))
+#define OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder_
 
-#define OrgApacheLuceneQueryparserXmlFilterBuilder_RESTRICT 1
-#define OrgApacheLuceneQueryparserXmlFilterBuilder_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserXmlFilterBuilder 1
+#define INCLUDE_OrgApacheLuceneQueryparserXmlFilterBuilder 1
 #include "org/apache/lucene/queryparser/xml/FilterBuilder.h"
 
 @class OrgApacheLuceneSearchFilter;
 @protocol OrgW3cDomElement;
 
+/*!
+ @brief Builder for <code>TermRangeFilter</code>
+ */
 @interface OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder : NSObject < OrgApacheLuceneQueryparserXmlFilterBuilder >
 
 #pragma mark Public
@@ -39,8 +42,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder_i
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder *new_OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder *create_OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder")

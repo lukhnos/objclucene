@@ -11,7 +11,6 @@
 #include "java/io/IOException.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Long.h"
-#include "java/lang/Throwable.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Collection.h"
 #include "java/util/Collections.h"
@@ -48,6 +47,9 @@
 
 + (OrgApacheLuceneUtilBytesRef *)readBytesRefWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)inArg;
 
+/*!
+ @brief Seek <code>input</code> to the directory offset.
+ */
 - (void)seekDirWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)input;
 
 @end
@@ -104,7 +106,7 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsIdversionVersionBlockTr
     @try {
       return JreStrcat("$C@", [b utf8ToString], ' ', b);
     }
-    @catch (JavaLangThrowable *t) {
+    @catch (NSException *t) {
       return [b description];
     }
   }
@@ -119,7 +121,7 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsIdversionVersionBlockTr
 }
 
 - (id<JavaUtilCollection>)getChildResources {
-  id<JavaUtilList> resources = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> resources = create_JavaUtilArrayList_init();
   [resources addAllWithJavaUtilCollection:OrgApacheLuceneUtilAccountables_namedAccountablesWithNSString_withJavaUtilMap_(@"field", fields_)];
   [resources addWithId:OrgApacheLuceneUtilAccountables_namedAccountableWithNSString_withOrgApacheLuceneUtilAccountable_(@"delegate", postingsReader_)];
   return JavaUtilCollections_unmodifiableListWithJavaUtilList_(resources);
@@ -134,15 +136,15 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsIdversionVersionBlockTr
   return JreStrcat("$$I$$C", [[self getClass] getSimpleName], @"(fields=", [((JavaUtilTreeMap *) nil_chk(fields_)) size], @",delegate=", [((OrgApacheLuceneCodecsPostingsReaderBase *) nil_chk(postingsReader_)) description], ')');
 }
 
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
+  return JreDefaultFastEnumeration(self, state, stackbuf, len);
+}
+
 - (void)dealloc {
   RELEASE_(in_);
   RELEASE_(postingsReader_);
   RELEASE_(fields_);
   [super dealloc];
-}
-
-- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -151,12 +153,12 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsIdversionVersionBlockTr
     { "readBytesRefWithOrgApacheLuceneStoreIndexInput:", "readBytesRef", "Lorg.apache.lucene.util.BytesRef;", 0xa, "Ljava.io.IOException;", NULL },
     { "seekDirWithOrgApacheLuceneStoreIndexInput:", "seekDir", "V", 0x2, "Ljava.io.IOException;", NULL },
     { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, NULL },
+    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<Ljava/lang/String;>;" },
     { "termsWithNSString:", "terms", "Lorg.apache.lucene.index.Terms;", 0x1, "Ljava.io.IOException;", NULL },
     { "size", NULL, "I", 0x1, NULL, NULL },
     { "brToStringWithOrgApacheLuceneUtilBytesRef:", "brToString", "Ljava.lang.String;", 0x0, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
     { "checkIntegrity", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
@@ -175,17 +177,17 @@ void OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_initWithOrgApache
   OrgApacheLuceneCodecsFieldsProducer_init(self);
   JreStrongAssignAndConsume(&self->fields_, new_JavaUtilTreeMap_init());
   JreStrongAssign(&self->postingsReader_, postingsReader);
-  NSString *termsFile = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentReadState *) nil_chk(state))->segmentInfo_))->name_, state->segmentSuffix_, OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_TERMS_EXTENSION_);
+  NSString *termsFile = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentReadState *) nil_chk(state))->segmentInfo_))->name_, state->segmentSuffix_, OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_TERMS_EXTENSION);
   JreStrongAssign(&self->in_, [((OrgApacheLuceneStoreDirectory *) nil_chk(state->directory_)) openInputWithNSString:termsFile withOrgApacheLuceneStoreIOContext:state->context_]);
   jboolean success = false;
   OrgApacheLuceneStoreIndexInput *indexIn = nil;
   @try {
-    jint termsVersion = OrgApacheLuceneCodecsCodecUtil_checkIndexHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_withByteArray_withNSString_(self->in_, OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_TERMS_CODEC_NAME_, OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_VERSION_START, OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_VERSION_CURRENT, [state->segmentInfo_ getId], state->segmentSuffix_);
-    NSString *indexFile = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(state->segmentInfo_->name_, state->segmentSuffix_, OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_TERMS_INDEX_EXTENSION_);
+    jint termsVersion = OrgApacheLuceneCodecsCodecUtil_checkIndexHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_withByteArray_withNSString_(self->in_, OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_TERMS_CODEC_NAME, OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_VERSION_START, OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_VERSION_CURRENT, [state->segmentInfo_ getId], state->segmentSuffix_);
+    NSString *indexFile = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(state->segmentInfo_->name_, state->segmentSuffix_, OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_TERMS_INDEX_EXTENSION);
     indexIn = [state->directory_ openInputWithNSString:indexFile withOrgApacheLuceneStoreIOContext:state->context_];
-    jint indexVersion = OrgApacheLuceneCodecsCodecUtil_checkIndexHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_withByteArray_withNSString_(indexIn, OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_TERMS_INDEX_CODEC_NAME_, OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_VERSION_START, OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_VERSION_CURRENT, [state->segmentInfo_ getId], state->segmentSuffix_);
+    jint indexVersion = OrgApacheLuceneCodecsCodecUtil_checkIndexHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_withByteArray_withNSString_(indexIn, OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_TERMS_INDEX_CODEC_NAME, OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_VERSION_START, OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_VERSION_CURRENT, [state->segmentInfo_ getId], state->segmentSuffix_);
     if (indexVersion != termsVersion) {
-      @throw [new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$@CIC@CI", @"mixmatched version files: ", self->in_, '=', termsVersion, ',', indexIn, '=', indexVersion), indexIn) autorelease];
+      @throw create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$@CIC@CI", @"mixmatched version files: ", self->in_, '=', termsVersion, ',', indexIn, '=', indexVersion), indexIn);
     }
     OrgApacheLuceneCodecsCodecUtil_checksumEntireFileWithOrgApacheLuceneStoreIndexInput_(indexIn);
     [((OrgApacheLuceneCodecsPostingsReaderBase *) nil_chk(postingsReader)) init__WithOrgApacheLuceneStoreIndexInput:self->in_ withOrgApacheLuceneIndexSegmentReadState:state];
@@ -194,18 +196,18 @@ void OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_initWithOrgApache
     OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_seekDirWithOrgApacheLuceneStoreIndexInput_(self, indexIn);
     jint numFields = [((OrgApacheLuceneStoreIndexInput *) nil_chk(self->in_)) readVInt];
     if (numFields < 0) {
-      @throw [new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$I", @"invalid numFields: ", numFields), self->in_) autorelease];
+      @throw create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$I", @"invalid numFields: ", numFields), self->in_);
     }
     for (jint i = 0; i < numFields; i++) {
       jint field = [self->in_ readVInt];
       jlong numTerms = [self->in_ readVLong];
       JreAssert((numTerms >= 0), (@"org/apache/lucene/codecs/idversion/VersionBlockTreeTermsReader.java:118 condition failed: assert numTerms >= 0;"));
       jint numBytes = [self->in_ readVInt];
-      OrgApacheLuceneUtilBytesRef *code = [new_OrgApacheLuceneUtilBytesRef_initWithByteArray_([IOSByteArray arrayWithLength:numBytes]) autorelease];
+      OrgApacheLuceneUtilBytesRef *code = create_OrgApacheLuceneUtilBytesRef_initWithByteArray_([IOSByteArray arrayWithLength:numBytes]);
       [self->in_ readBytesWithByteArray:code->bytes_ withInt:0 withInt:numBytes];
       code->length_ = numBytes;
       jlong version_ = [self->in_ readVLong];
-      OrgApacheLuceneUtilFstPairOutputs_Pair *rootCode = [((OrgApacheLuceneUtilFstPairOutputs *) nil_chk(JreLoadStatic(OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter, FST_OUTPUTS_))) newPairWithId:code withId:JavaLangLong_valueOfWithLong_(version_)];
+      OrgApacheLuceneUtilFstPairOutputs_Pair *rootCode = [((OrgApacheLuceneUtilFstPairOutputs *) nil_chk(JreLoadStatic(OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter, FST_OUTPUTS))) newPairWithId:code withId:JavaLangLong_valueOfWithLong_(version_)];
       OrgApacheLuceneIndexFieldInfo *fieldInfo = [((OrgApacheLuceneIndexFieldInfos *) nil_chk(state->fieldInfos_)) fieldInfoWithInt:field];
       JreAssert((fieldInfo != nil), (JreStrcat("$I", @"field=", field)));
       jlong sumTotalTermFreq = numTerms;
@@ -216,18 +218,18 @@ void OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_initWithOrgApache
       OrgApacheLuceneUtilBytesRef *minTerm = OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_readBytesRefWithOrgApacheLuceneStoreIndexInput_(self->in_);
       OrgApacheLuceneUtilBytesRef *maxTerm = OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_readBytesRefWithOrgApacheLuceneStoreIndexInput_(self->in_);
       if (docCount < 0 || docCount > [state->segmentInfo_ maxDoc]) {
-        @throw [new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$I$I", @"invalid docCount: ", docCount, @" maxDoc: ", [state->segmentInfo_ maxDoc]), self->in_) autorelease];
+        @throw create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$I$I", @"invalid docCount: ", docCount, @" maxDoc: ", [state->segmentInfo_ maxDoc]), self->in_);
       }
       if (sumDocFreq < docCount) {
-        @throw [new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$J$I", @"invalid sumDocFreq: ", sumDocFreq, @" docCount: ", docCount), self->in_) autorelease];
+        @throw create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$J$I", @"invalid sumDocFreq: ", sumDocFreq, @" docCount: ", docCount), self->in_);
       }
       if (sumTotalTermFreq != -1 && sumTotalTermFreq < sumDocFreq) {
-        @throw [new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$J$J", @"invalid sumTotalTermFreq: ", sumTotalTermFreq, @" sumDocFreq: ", sumDocFreq), self->in_) autorelease];
+        @throw create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$J$J", @"invalid sumTotalTermFreq: ", sumTotalTermFreq, @" sumDocFreq: ", sumDocFreq), self->in_);
       }
       jlong indexStartFP = [((OrgApacheLuceneStoreIndexInput *) nil_chk(indexIn)) readVLong];
-      OrgApacheLuceneCodecsIdversionVersionFieldReader *previous = [self->fields_ putWithId:((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo))->name_ withId:[new_OrgApacheLuceneCodecsIdversionVersionFieldReader_initWithOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_withOrgApacheLuceneIndexFieldInfo_withLong_withOrgApacheLuceneUtilFstPairOutputs_Pair_withLong_withLong_withInt_withLong_withInt_withOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(self, fieldInfo, numTerms, rootCode, sumTotalTermFreq, sumDocFreq, docCount, indexStartFP, longsSize, indexIn, minTerm, maxTerm) autorelease]];
+      OrgApacheLuceneCodecsIdversionVersionFieldReader *previous = [self->fields_ putWithId:((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo))->name_ withId:create_OrgApacheLuceneCodecsIdversionVersionFieldReader_initWithOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_withOrgApacheLuceneIndexFieldInfo_withLong_withOrgApacheLuceneUtilFstPairOutputs_Pair_withLong_withLong_withInt_withLong_withInt_withOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(self, fieldInfo, numTerms, rootCode, sumTotalTermFreq, sumDocFreq, docCount, indexStartFP, longsSize, indexIn, minTerm, maxTerm)];
       if (previous != nil) {
-        @throw [new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$$", @"duplicate field: ", fieldInfo->name_), self->in_) autorelease];
+        @throw create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$$", @"duplicate field: ", fieldInfo->name_), self->in_);
       }
     }
     [((OrgApacheLuceneStoreIndexInput *) nil_chk(indexIn)) close];
@@ -241,14 +243,16 @@ void OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_initWithOrgApache
 }
 
 OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader *new_OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_initWithOrgApacheLuceneCodecsPostingsReaderBase_withOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneCodecsPostingsReaderBase *postingsReader, OrgApacheLuceneIndexSegmentReadState *state) {
-  OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader *self = [OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader alloc];
-  OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_initWithOrgApacheLuceneCodecsPostingsReaderBase_withOrgApacheLuceneIndexSegmentReadState_(self, postingsReader, state);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader, initWithOrgApacheLuceneCodecsPostingsReaderBase_withOrgApacheLuceneIndexSegmentReadState_, postingsReader, state)
+}
+
+OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader *create_OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_initWithOrgApacheLuceneCodecsPostingsReaderBase_withOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneCodecsPostingsReaderBase *postingsReader, OrgApacheLuceneIndexSegmentReadState *state) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader, initWithOrgApacheLuceneCodecsPostingsReaderBase_withOrgApacheLuceneIndexSegmentReadState_, postingsReader, state)
 }
 
 OrgApacheLuceneUtilBytesRef *OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_readBytesRefWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput *inArg) {
   OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_initialize();
-  OrgApacheLuceneUtilBytesRef *bytes = [new_OrgApacheLuceneUtilBytesRef_init() autorelease];
+  OrgApacheLuceneUtilBytesRef *bytes = create_OrgApacheLuceneUtilBytesRef_init();
   bytes->length_ = [((OrgApacheLuceneStoreIndexInput *) nil_chk(inArg)) readVInt];
   JreStrongAssignAndConsume(&bytes->bytes_, [IOSByteArray newArrayWithLength:bytes->length_]);
   [inArg readBytesWithByteArray:bytes->bytes_ withInt:0 withInt:bytes->length_];
@@ -256,7 +260,7 @@ OrgApacheLuceneUtilBytesRef *OrgApacheLuceneCodecsIdversionVersionBlockTreeTerms
 }
 
 void OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_seekDirWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader *self, OrgApacheLuceneStoreIndexInput *input) {
-  [input seekWithLong:[((OrgApacheLuceneStoreIndexInput *) nil_chk(input)) length] - OrgApacheLuceneCodecsCodecUtil_footerLength() - 8];
+  [((OrgApacheLuceneStoreIndexInput *) nil_chk(input)) seekWithLong:[input length] - OrgApacheLuceneCodecsCodecUtil_footerLength() - 8];
   jlong dirOffset = [input readLong];
   [input seekWithLong:dirOffset];
 }

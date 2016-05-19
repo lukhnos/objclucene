@@ -9,13 +9,17 @@
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilBits)
 
-IOSObjectArray *OrgApacheLuceneUtilBits_EMPTY_ARRAY_;
+IOSObjectArray *OrgApacheLuceneUtilBits_EMPTY_ARRAY;
 
 @implementation OrgApacheLuceneUtilBits
 
++ (IOSObjectArray *)EMPTY_ARRAY {
+  return OrgApacheLuceneUtilBits_EMPTY_ARRAY;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilBits class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilBits_EMPTY_ARRAY_, [IOSObjectArray newArrayWithLength:0 type:OrgApacheLuceneUtilBits_class_()]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilBits_EMPTY_ARRAY, [IOSObjectArray newArrayWithLength:0 type:OrgApacheLuceneUtilBits_class_()]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilBits)
   }
 }
@@ -26,7 +30,7 @@ IOSObjectArray *OrgApacheLuceneUtilBits_EMPTY_ARRAY_;
     { "length", NULL, "I", 0x401, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "EMPTY_ARRAY_", NULL, 0x19, "[Lorg.apache.lucene.util.Bits;", &OrgApacheLuceneUtilBits_EMPTY_ARRAY_, NULL, .constantValue.asLong = 0 },
+    { "EMPTY_ARRAY", "EMPTY_ARRAY", 0x19, "[Lorg.apache.lucene.util.Bits;", &OrgApacheLuceneUtilBits_EMPTY_ARRAY, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.Bits$MatchAllBits;", "Lorg.apache.lucene.util.Bits$MatchNoBits;"};
   static const J2ObjcClassInfo _OrgApacheLuceneUtilBits = { 2, "Bits", "org.apache.lucene.util", NULL, 0x609, 2, methods, 1, fields, 0, NULL, 2, inner_classes, NULL, NULL };
@@ -73,9 +77,11 @@ void OrgApacheLuceneUtilBits_MatchAllBits_initWithInt_(OrgApacheLuceneUtilBits_M
 }
 
 OrgApacheLuceneUtilBits_MatchAllBits *new_OrgApacheLuceneUtilBits_MatchAllBits_initWithInt_(jint len) {
-  OrgApacheLuceneUtilBits_MatchAllBits *self = [OrgApacheLuceneUtilBits_MatchAllBits alloc];
-  OrgApacheLuceneUtilBits_MatchAllBits_initWithInt_(self, len);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilBits_MatchAllBits, initWithInt_, len)
+}
+
+OrgApacheLuceneUtilBits_MatchAllBits *create_OrgApacheLuceneUtilBits_MatchAllBits_initWithInt_(jint len) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilBits_MatchAllBits, initWithInt_, len)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBits_MatchAllBits)
@@ -116,9 +122,11 @@ void OrgApacheLuceneUtilBits_MatchNoBits_initWithInt_(OrgApacheLuceneUtilBits_Ma
 }
 
 OrgApacheLuceneUtilBits_MatchNoBits *new_OrgApacheLuceneUtilBits_MatchNoBits_initWithInt_(jint len) {
-  OrgApacheLuceneUtilBits_MatchNoBits *self = [OrgApacheLuceneUtilBits_MatchNoBits alloc];
-  OrgApacheLuceneUtilBits_MatchNoBits_initWithInt_(self, len);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilBits_MatchNoBits, initWithInt_, len)
+}
+
+OrgApacheLuceneUtilBits_MatchNoBits *create_OrgApacheLuceneUtilBits_MatchNoBits_initWithInt_(jint len) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilBits_MatchNoBits, initWithInt_, len)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBits_MatchNoBits)

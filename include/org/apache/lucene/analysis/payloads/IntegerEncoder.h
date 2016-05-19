@@ -5,28 +5,33 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisPayloadsIntegerEncoder_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisPayloadsIntegerEncoder_RESTRICT
-#define OrgApacheLuceneAnalysisPayloadsIntegerEncoder_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsIntegerEncoder")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisPayloadsIntegerEncoder
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsIntegerEncoder 0
 #else
-#define OrgApacheLuceneAnalysisPayloadsIntegerEncoder_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsIntegerEncoder 1
 #endif
-#undef OrgApacheLuceneAnalysisPayloadsIntegerEncoder_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisPayloadsIntegerEncoder
 
-#if !defined (_OrgApacheLuceneAnalysisPayloadsIntegerEncoder_) && (OrgApacheLuceneAnalysisPayloadsIntegerEncoder_INCLUDE_ALL || OrgApacheLuceneAnalysisPayloadsIntegerEncoder_INCLUDE)
-#define _OrgApacheLuceneAnalysisPayloadsIntegerEncoder_
+#if !defined (OrgApacheLuceneAnalysisPayloadsIntegerEncoder_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsIntegerEncoder || defined(INCLUDE_OrgApacheLuceneAnalysisPayloadsIntegerEncoder))
+#define OrgApacheLuceneAnalysisPayloadsIntegerEncoder_
 
-#define OrgApacheLuceneAnalysisPayloadsAbstractEncoder_RESTRICT 1
-#define OrgApacheLuceneAnalysisPayloadsAbstractEncoder_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisPayloadsAbstractEncoder 1
+#define INCLUDE_OrgApacheLuceneAnalysisPayloadsAbstractEncoder 1
 #include "org/apache/lucene/analysis/payloads/AbstractEncoder.h"
 
-#define OrgApacheLuceneAnalysisPayloadsPayloadEncoder_RESTRICT 1
-#define OrgApacheLuceneAnalysisPayloadsPayloadEncoder_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisPayloadsPayloadEncoder 1
+#define INCLUDE_OrgApacheLuceneAnalysisPayloadsPayloadEncoder 1
 #include "org/apache/lucene/analysis/payloads/PayloadEncoder.h"
 
 @class IOSCharArray;
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief Encode a character array Integer as a <code>BytesRef</code>.
+ <p>
+ See <code>org.apache.lucene.analysis.payloads.PayloadHelper.encodeInt(int,byte[],int)</code>.
+ */
 @interface OrgApacheLuceneAnalysisPayloadsIntegerEncoder : OrgApacheLuceneAnalysisPayloadsAbstractEncoder < OrgApacheLuceneAnalysisPayloadsPayloadEncoder >
 
 #pragma mark Public
@@ -45,8 +50,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPayloadsIntegerEncoder_init(OrgApa
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsIntegerEncoder *new_OrgApacheLuceneAnalysisPayloadsIntegerEncoder_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsIntegerEncoder *create_OrgApacheLuceneAnalysisPayloadsIntegerEncoder_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPayloadsIntegerEncoder)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisPayloadsIntegerEncoder_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsIntegerEncoder")

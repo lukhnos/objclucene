@@ -5,42 +5,68 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsStoredFieldsReader_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsStoredFieldsReader_RESTRICT
-#define OrgApacheLuceneCodecsStoredFieldsReader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsStoredFieldsReader")
+#ifdef RESTRICT_OrgApacheLuceneCodecsStoredFieldsReader
+#define INCLUDE_ALL_OrgApacheLuceneCodecsStoredFieldsReader 0
 #else
-#define OrgApacheLuceneCodecsStoredFieldsReader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsStoredFieldsReader 1
 #endif
-#undef OrgApacheLuceneCodecsStoredFieldsReader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsStoredFieldsReader
 
-#if !defined (_OrgApacheLuceneCodecsStoredFieldsReader_) && (OrgApacheLuceneCodecsStoredFieldsReader_INCLUDE_ALL || OrgApacheLuceneCodecsStoredFieldsReader_INCLUDE)
-#define _OrgApacheLuceneCodecsStoredFieldsReader_
+#if !defined (OrgApacheLuceneCodecsStoredFieldsReader_) && (INCLUDE_ALL_OrgApacheLuceneCodecsStoredFieldsReader || defined(INCLUDE_OrgApacheLuceneCodecsStoredFieldsReader))
+#define OrgApacheLuceneCodecsStoredFieldsReader_
 
-#define JavaIoCloseable_RESTRICT 1
-#define JavaIoCloseable_INCLUDE 1
+#define RESTRICT_JavaIoCloseable 1
+#define INCLUDE_JavaIoCloseable 1
 #include "java/io/Closeable.h"
 
-#define OrgApacheLuceneUtilAccountable_RESTRICT 1
-#define OrgApacheLuceneUtilAccountable_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAccountable 1
+#define INCLUDE_OrgApacheLuceneUtilAccountable 1
 #include "org/apache/lucene/util/Accountable.h"
 
 @class OrgApacheLuceneIndexStoredFieldVisitor;
 
+/*!
+ @brief Codec API for reading stored fields.
+ <p>
+ You need to implement <code>visitDocument(int,StoredFieldVisitor)</code> to
+ read the stored fields for a document, implement <code>clone()</code> (creating
+ clones of any IndexInputs used, etc), and <code>close()</code>
+ */
 @interface OrgApacheLuceneCodecsStoredFieldsReader : NSObject < NSCopying, JavaIoCloseable, OrgApacheLuceneUtilAccountable >
 
 #pragma mark Public
 
+/*!
+ @brief Checks consistency of this reader.
+ <p>
+ Note that this may be costly in terms of I/O, e.g. 
+ may involve computing a checksum value against large data files.
+ */
 - (void)checkIntegrity;
 
 - (OrgApacheLuceneCodecsStoredFieldsReader *)clone;
 
+/*!
+ @brief Returns an instance optimized for merging.
+ <p>
+ The default implementation returns <code>this</code> 
+ */
 - (OrgApacheLuceneCodecsStoredFieldsReader *)getMergeInstance;
 
+/*!
+ @brief Visit the stored fields for document <code>docID</code>
+ */
 - (void)visitDocumentWithInt:(jint)docID
 withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisitor *)visitor;
 
 #pragma mark Protected
 
+/*!
+ @brief Sole constructor.
+ (For invocation by subclass 
+ constructors, typically implicit.) 
+ */
 - (instancetype)init;
 
 @end
@@ -53,4 +79,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsStoredFieldsReader)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsStoredFieldsReader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsStoredFieldsReader")

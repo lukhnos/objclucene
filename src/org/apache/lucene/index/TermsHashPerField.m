@@ -24,8 +24,6 @@
 #include "org/apache/lucene/util/Counter.h"
 #include "org/apache/lucene/util/IntBlockPool.h"
 
-#define OrgApacheLuceneIndexTermsHashPerField_HASH_INIT_SIZE 4
-
 @interface OrgApacheLuceneIndexTermsHashPerField () {
  @public
   OrgApacheLuceneUtilCounter *bytesUsed_;
@@ -36,7 +34,9 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTermsHashPerField, bytesUsed_, OrgApacheLuceneUtilCounter *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexTermsHashPerField, HASH_INIT_SIZE, jint)
+inline jint OrgApacheLuceneIndexTermsHashPerField_get_HASH_INIT_SIZE();
+#define OrgApacheLuceneIndexTermsHashPerField_HASH_INIT_SIZE 4
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexTermsHashPerField, HASH_INIT_SIZE, jint)
 
 @interface OrgApacheLuceneIndexTermsHashPerField_PostingsBytesStartArray : OrgApacheLuceneUtilBytesRefHash_BytesStartArray {
  @public
@@ -66,6 +66,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexTermsHashPerField_Postin
 
 __attribute__((unused)) static OrgApacheLuceneIndexTermsHashPerField_PostingsBytesStartArray *new_OrgApacheLuceneIndexTermsHashPerField_PostingsBytesStartArray_initWithOrgApacheLuceneIndexTermsHashPerField_withOrgApacheLuceneUtilCounter_(OrgApacheLuceneIndexTermsHashPerField *perField, OrgApacheLuceneUtilCounter *bytesUsed) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexTermsHashPerField_PostingsBytesStartArray *create_OrgApacheLuceneIndexTermsHashPerField_PostingsBytesStartArray_initWithOrgApacheLuceneIndexTermsHashPerField_withOrgApacheLuceneUtilCounter_(OrgApacheLuceneIndexTermsHashPerField *perField, OrgApacheLuceneUtilCounter *bytesUsed);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTermsHashPerField_PostingsBytesStartArray)
 
 @implementation OrgApacheLuceneIndexTermsHashPerField
@@ -93,7 +95,7 @@ withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo {
   jint intStart = IOSIntArray_Get(nil_chk(((OrgApacheLuceneIndexParallelPostingsArray *) nil_chk(postingsArray_))->intStarts_), termID);
   IOSIntArray *ints = IOSObjectArray_Get(nil_chk(((OrgApacheLuceneUtilIntBlockPool *) nil_chk(intPool_))->buffers_), JreRShift32(intStart, OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_SHIFT));
   jint upto = intStart & OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_MASK;
-  [((OrgApacheLuceneIndexByteSliceReader *) nil_chk(reader)) init__WithOrgApacheLuceneUtilByteBlockPool:bytePool_ withInt:IOSIntArray_Get(nil_chk(postingsArray_->byteStarts_), termID) + stream * JreLoadStatic(OrgApacheLuceneUtilByteBlockPool, FIRST_LEVEL_SIZE_) withInt:IOSIntArray_Get(nil_chk(ints), upto + stream)];
+  [((OrgApacheLuceneIndexByteSliceReader *) nil_chk(reader)) init__WithOrgApacheLuceneUtilByteBlockPool:bytePool_ withInt:IOSIntArray_Get(nil_chk(postingsArray_->byteStarts_), termID) + stream * JreLoadStatic(OrgApacheLuceneUtilByteBlockPool, FIRST_LEVEL_SIZE) withInt:IOSIntArray_Get(nil_chk(ints), upto + stream)];
 }
 
 - (IOSIntArray *)sortPostings {
@@ -107,7 +109,7 @@ withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo {
     if (numPostingInt_ + ((OrgApacheLuceneUtilIntBlockPool *) nil_chk(intPool_))->intUpto_ > OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_SIZE) {
       [intPool_ nextBuffer];
     }
-    if (OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_SIZE - ((OrgApacheLuceneUtilByteBlockPool *) nil_chk(bytePool_))->byteUpto_ < numPostingInt_ * JreLoadStatic(OrgApacheLuceneUtilByteBlockPool, FIRST_LEVEL_SIZE_)) {
+    if (OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_SIZE - ((OrgApacheLuceneUtilByteBlockPool *) nil_chk(bytePool_))->byteUpto_ < numPostingInt_ * JreLoadStatic(OrgApacheLuceneUtilByteBlockPool, FIRST_LEVEL_SIZE)) {
       [bytePool_ nextBuffer];
     }
     JreStrongAssign(&intUptos_, intPool_->buffer_);
@@ -115,10 +117,10 @@ withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo {
     intPool_->intUpto_ += streamCount_;
     *IOSIntArray_GetRef(nil_chk(((OrgApacheLuceneIndexParallelPostingsArray *) nil_chk(postingsArray_))->intStarts_), termID) = intUptoStart_ + intPool_->intOffset_;
     for (jint i = 0; i < streamCount_; i++) {
-      jint upto = [bytePool_ newSliceWithInt:JreLoadStatic(OrgApacheLuceneUtilByteBlockPool, FIRST_LEVEL_SIZE_)];
+      jint upto = [bytePool_ newSliceWithInt:JreLoadStatic(OrgApacheLuceneUtilByteBlockPool, FIRST_LEVEL_SIZE)];
       *IOSIntArray_GetRef(nil_chk(intUptos_), intUptoStart_ + i) = upto + bytePool_->byteOffset_;
     }
-    *IOSIntArray_GetRef(nil_chk(postingsArray_->byteStarts_), termID) = IOSIntArray_Get(nil_chk(intUptos_), intUptoStart_);
+    *IOSIntArray_GetRef(nil_chk(((OrgApacheLuceneIndexParallelPostingsArray *) nil_chk(postingsArray_))->byteStarts_), termID) = IOSIntArray_Get(nil_chk(intUptos_), intUptoStart_);
     [self newTermWithInt:termID];
   }
   else {
@@ -137,7 +139,7 @@ withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo {
     if (numPostingInt_ + ((OrgApacheLuceneUtilIntBlockPool *) nil_chk(intPool_))->intUpto_ > OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_SIZE) {
       [intPool_ nextBuffer];
     }
-    if (OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_SIZE - ((OrgApacheLuceneUtilByteBlockPool *) nil_chk(bytePool_))->byteUpto_ < numPostingInt_ * JreLoadStatic(OrgApacheLuceneUtilByteBlockPool, FIRST_LEVEL_SIZE_)) {
+    if (OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_SIZE - ((OrgApacheLuceneUtilByteBlockPool *) nil_chk(bytePool_))->byteUpto_ < numPostingInt_ * JreLoadStatic(OrgApacheLuceneUtilByteBlockPool, FIRST_LEVEL_SIZE)) {
       [bytePool_ nextBuffer];
     }
     JreStrongAssign(&intUptos_, intPool_->buffer_);
@@ -145,10 +147,10 @@ withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo {
     intPool_->intUpto_ += streamCount_;
     *IOSIntArray_GetRef(nil_chk(((OrgApacheLuceneIndexParallelPostingsArray *) nil_chk(postingsArray_))->intStarts_), termID) = intUptoStart_ + intPool_->intOffset_;
     for (jint i = 0; i < streamCount_; i++) {
-      jint upto = [bytePool_ newSliceWithInt:JreLoadStatic(OrgApacheLuceneUtilByteBlockPool, FIRST_LEVEL_SIZE_)];
+      jint upto = [bytePool_ newSliceWithInt:JreLoadStatic(OrgApacheLuceneUtilByteBlockPool, FIRST_LEVEL_SIZE)];
       *IOSIntArray_GetRef(nil_chk(intUptos_), intUptoStart_ + i) = upto + bytePool_->byteOffset_;
     }
-    *IOSIntArray_GetRef(nil_chk(postingsArray_->byteStarts_), termID) = IOSIntArray_Get(nil_chk(intUptos_), intUptoStart_);
+    *IOSIntArray_GetRef(nil_chk(((OrgApacheLuceneIndexParallelPostingsArray *) nil_chk(postingsArray_))->byteStarts_), termID) = IOSIntArray_Get(nil_chk(intUptos_), intUptoStart_);
     [self newTermWithInt:termID];
   }
   else {
@@ -172,7 +174,7 @@ withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo {
   if (IOSByteArray_Get(nil_chk(bytes), offset) != 0) {
     offset = [bytePool_ allocSliceWithByteArray:bytes withInt:offset];
     bytes = bytePool_->buffer_;
-    *IOSIntArray_GetRef(intUptos_, intUptoStart_ + stream) = offset + bytePool_->byteOffset_;
+    *IOSIntArray_GetRef(nil_chk(intUptos_), intUptoStart_ + stream) = offset + bytePool_->byteOffset_;
   }
   *IOSByteArray_GetRef(nil_chk(bytes), offset) = b;
   (*IOSIntArray_GetRef(intUptos_, intUptoStart_ + stream))++;
@@ -197,7 +199,7 @@ withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo {
 }
 
 - (jint)compareToWithId:(OrgApacheLuceneIndexTermsHashPerField *)other {
-  check_class_cast(other, [OrgApacheLuceneIndexTermsHashPerField class]);
+  cast_chk(other, [OrgApacheLuceneIndexTermsHashPerField class]);
   return [((NSString *) nil_chk(((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo_))->name_)) compareToWithId:((OrgApacheLuceneIndexTermsHashPerField *) nil_chk(other))->fieldInfo_->name_];
 }
 
@@ -315,7 +317,7 @@ void OrgApacheLuceneIndexTermsHashPerField_initWithInt_withOrgApacheLuceneIndexF
   self->numPostingInt_ = 2 * streamCount;
   JreStrongAssign(&self->fieldInfo_, fieldInfo);
   JreStrongAssign(&self->nextPerField_, nextPerField);
-  OrgApacheLuceneIndexTermsHashPerField_PostingsBytesStartArray *byteStarts = [new_OrgApacheLuceneIndexTermsHashPerField_PostingsBytesStartArray_initWithOrgApacheLuceneIndexTermsHashPerField_withOrgApacheLuceneUtilCounter_(self, self->bytesUsed_) autorelease];
+  OrgApacheLuceneIndexTermsHashPerField_PostingsBytesStartArray *byteStarts = create_OrgApacheLuceneIndexTermsHashPerField_PostingsBytesStartArray_initWithOrgApacheLuceneIndexTermsHashPerField_withOrgApacheLuceneUtilCounter_(self, self->bytesUsed_);
   JreStrongAssignAndConsume(&self->bytesHash_, new_OrgApacheLuceneUtilBytesRefHash_initWithOrgApacheLuceneUtilByteBlockPool_withInt_withOrgApacheLuceneUtilBytesRefHash_BytesStartArray_(self->termBytePool_, OrgApacheLuceneIndexTermsHashPerField_HASH_INIT_SIZE, byteStarts));
 }
 
@@ -391,9 +393,11 @@ void OrgApacheLuceneIndexTermsHashPerField_PostingsBytesStartArray_initWithOrgAp
 }
 
 OrgApacheLuceneIndexTermsHashPerField_PostingsBytesStartArray *new_OrgApacheLuceneIndexTermsHashPerField_PostingsBytesStartArray_initWithOrgApacheLuceneIndexTermsHashPerField_withOrgApacheLuceneUtilCounter_(OrgApacheLuceneIndexTermsHashPerField *perField, OrgApacheLuceneUtilCounter *bytesUsed) {
-  OrgApacheLuceneIndexTermsHashPerField_PostingsBytesStartArray *self = [OrgApacheLuceneIndexTermsHashPerField_PostingsBytesStartArray alloc];
-  OrgApacheLuceneIndexTermsHashPerField_PostingsBytesStartArray_initWithOrgApacheLuceneIndexTermsHashPerField_withOrgApacheLuceneUtilCounter_(self, perField, bytesUsed);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexTermsHashPerField_PostingsBytesStartArray, initWithOrgApacheLuceneIndexTermsHashPerField_withOrgApacheLuceneUtilCounter_, perField, bytesUsed)
+}
+
+OrgApacheLuceneIndexTermsHashPerField_PostingsBytesStartArray *create_OrgApacheLuceneIndexTermsHashPerField_PostingsBytesStartArray_initWithOrgApacheLuceneIndexTermsHashPerField_withOrgApacheLuceneUtilCounter_(OrgApacheLuceneIndexTermsHashPerField *perField, OrgApacheLuceneUtilCounter *bytesUsed) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexTermsHashPerField_PostingsBytesStartArray, initWithOrgApacheLuceneIndexTermsHashPerField_withOrgApacheLuceneUtilCounter_, perField, bytesUsed)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexTermsHashPerField_PostingsBytesStartArray)

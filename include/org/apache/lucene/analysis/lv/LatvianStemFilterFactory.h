@@ -5,28 +5,43 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisLvLatvianStemFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisLvLatvianStemFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisLvLatvianStemFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisLvLatvianStemFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisLvLatvianStemFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisLvLatvianStemFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisLvLatvianStemFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisLvLatvianStemFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisLvLatvianStemFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisLvLatvianStemFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisLvLatvianStemFilterFactory_) && (OrgApacheLuceneAnalysisLvLatvianStemFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisLvLatvianStemFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisLvLatvianStemFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisLvLatvianStemFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisLvLatvianStemFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisLvLatvianStemFilterFactory))
+#define OrgApacheLuceneAnalysisLvLatvianStemFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>LatvianStemFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_lvstem" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+ &lt;filter class="solr.LowerCaseFilterFactory"/&gt;
+ &lt;filter class="solr.LatvianStemFilterFactory"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisLvLatvianStemFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new LatvianStemFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -39,8 +54,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisLvLatvianStemFilterFactory_initWit
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisLvLatvianStemFilterFactory *new_OrgApacheLuceneAnalysisLvLatvianStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisLvLatvianStemFilterFactory *create_OrgApacheLuceneAnalysisLvLatvianStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisLvLatvianStemFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisLvLatvianStemFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisLvLatvianStemFilterFactory")

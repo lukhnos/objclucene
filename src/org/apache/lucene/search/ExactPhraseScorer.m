@@ -32,6 +32,11 @@
 
 - (jint)doNextWithInt:(jint)doc;
 
+/*!
+ @brief Advance the given pos enum to the first doc on or after <code>target</code>.
+ Return <code>false</code> if the enum was exhausted before reaching
+ <code>target</code> and <code>true</code> otherwise. 
+ */
 + (jboolean)advancePositionWithOrgApacheLuceneSearchExactPhraseScorer_PostingsAndPosition:(OrgApacheLuceneSearchExactPhraseScorer_PostingsAndPosition *)posting
                                                                                   withInt:(jint)target;
 
@@ -69,6 +74,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchExactPhraseScorer_Posti
 
 __attribute__((unused)) static OrgApacheLuceneSearchExactPhraseScorer_PostingsAndPosition *new_OrgApacheLuceneSearchExactPhraseScorer_PostingsAndPosition_initWithOrgApacheLuceneIndexPostingsEnum_withInt_(OrgApacheLuceneIndexPostingsEnum *postings, jint offset) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchExactPhraseScorer_PostingsAndPosition *create_OrgApacheLuceneSearchExactPhraseScorer_PostingsAndPosition_initWithOrgApacheLuceneIndexPostingsEnum_withInt_(OrgApacheLuceneIndexPostingsEnum *postings, jint offset);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchExactPhraseScorer_PostingsAndPosition)
 
 @interface OrgApacheLuceneSearchExactPhraseScorer_$1 : OrgApacheLuceneSearchTwoPhaseIterator {
@@ -91,6 +98,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchExactPhraseScorer_$1_in
 
 __attribute__((unused)) static OrgApacheLuceneSearchExactPhraseScorer_$1 *new_OrgApacheLuceneSearchExactPhraseScorer_$1_initWithOrgApacheLuceneSearchExactPhraseScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchExactPhraseScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchExactPhraseScorer_$1 *create_OrgApacheLuceneSearchExactPhraseScorer_$1_initWithOrgApacheLuceneSearchExactPhraseScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchExactPhraseScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchExactPhraseScorer_$1)
 
 @implementation OrgApacheLuceneSearchExactPhraseScorer
@@ -104,7 +113,7 @@ withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:(OrgApacheLuceneSearch
 }
 
 - (OrgApacheLuceneSearchTwoPhaseIterator *)asTwoPhaseIterator {
-  return [new_OrgApacheLuceneSearchExactPhraseScorer_$1_initWithOrgApacheLuceneSearchExactPhraseScorer_withOrgApacheLuceneSearchDocIdSetIterator_(self, conjunction_) autorelease];
+  return create_OrgApacheLuceneSearchExactPhraseScorer_$1_initWithOrgApacheLuceneSearchExactPhraseScorer_withOrgApacheLuceneSearchDocIdSetIterator_(self, conjunction_);
 }
 
 - (jint)doNextWithInt:(jint)doc {
@@ -188,8 +197,8 @@ void OrgApacheLuceneSearchExactPhraseScorer_initWithOrgApacheLuceneSearchWeight_
   OrgApacheLuceneSearchScorer_initWithOrgApacheLuceneSearchWeight_(self, weight);
   JreStrongAssign(&self->docScorer_, docScorer);
   self->needsScores_ = needsScores;
-  id<JavaUtilList> iterators = [new_JavaUtilArrayList_init() autorelease];
-  id<JavaUtilList> postingsAndPositions = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> iterators = create_JavaUtilArrayList_init();
+  id<JavaUtilList> postingsAndPositions = create_JavaUtilArrayList_init();
   {
     IOSObjectArray *a__ = postings;
     OrgApacheLuceneSearchPhraseQuery_PostingsAndFreq * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
@@ -197,7 +206,7 @@ void OrgApacheLuceneSearchExactPhraseScorer_initWithOrgApacheLuceneSearchWeight_
     while (b__ < e__) {
       OrgApacheLuceneSearchPhraseQuery_PostingsAndFreq *posting = *b__++;
       [iterators addWithId:((OrgApacheLuceneSearchPhraseQuery_PostingsAndFreq *) nil_chk(posting))->postings_];
-      [postingsAndPositions addWithId:[new_OrgApacheLuceneSearchExactPhraseScorer_PostingsAndPosition_initWithOrgApacheLuceneIndexPostingsEnum_withInt_(posting->postings_, posting->position_) autorelease]];
+      [postingsAndPositions addWithId:create_OrgApacheLuceneSearchExactPhraseScorer_PostingsAndPosition_initWithOrgApacheLuceneIndexPostingsEnum_withInt_(posting->postings_, posting->position_)];
     }
   }
   JreStrongAssign(&self->conjunction_, OrgApacheLuceneSearchConjunctionDISI_intersectWithJavaUtilList_(iterators));
@@ -205,9 +214,11 @@ void OrgApacheLuceneSearchExactPhraseScorer_initWithOrgApacheLuceneSearchWeight_
 }
 
 OrgApacheLuceneSearchExactPhraseScorer *new_OrgApacheLuceneSearchExactPhraseScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchPhraseQuery_PostingsAndFreqArray_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_withBoolean_(OrgApacheLuceneSearchWeight *weight, IOSObjectArray *postings, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer, jboolean needsScores) {
-  OrgApacheLuceneSearchExactPhraseScorer *self = [OrgApacheLuceneSearchExactPhraseScorer alloc];
-  OrgApacheLuceneSearchExactPhraseScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchPhraseQuery_PostingsAndFreqArray_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_withBoolean_(self, weight, postings, docScorer, needsScores);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchExactPhraseScorer, initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchPhraseQuery_PostingsAndFreqArray_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_withBoolean_, weight, postings, docScorer, needsScores)
+}
+
+OrgApacheLuceneSearchExactPhraseScorer *create_OrgApacheLuceneSearchExactPhraseScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchPhraseQuery_PostingsAndFreqArray_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_withBoolean_(OrgApacheLuceneSearchWeight *weight, IOSObjectArray *postings, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer, jboolean needsScores) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchExactPhraseScorer, initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchPhraseQuery_PostingsAndFreqArray_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_withBoolean_, weight, postings, docScorer, needsScores)
 }
 
 jint OrgApacheLuceneSearchExactPhraseScorer_doNextWithInt_(OrgApacheLuceneSearchExactPhraseScorer *self, jint doc) {
@@ -320,9 +331,11 @@ void OrgApacheLuceneSearchExactPhraseScorer_PostingsAndPosition_initWithOrgApach
 }
 
 OrgApacheLuceneSearchExactPhraseScorer_PostingsAndPosition *new_OrgApacheLuceneSearchExactPhraseScorer_PostingsAndPosition_initWithOrgApacheLuceneIndexPostingsEnum_withInt_(OrgApacheLuceneIndexPostingsEnum *postings, jint offset) {
-  OrgApacheLuceneSearchExactPhraseScorer_PostingsAndPosition *self = [OrgApacheLuceneSearchExactPhraseScorer_PostingsAndPosition alloc];
-  OrgApacheLuceneSearchExactPhraseScorer_PostingsAndPosition_initWithOrgApacheLuceneIndexPostingsEnum_withInt_(self, postings, offset);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchExactPhraseScorer_PostingsAndPosition, initWithOrgApacheLuceneIndexPostingsEnum_withInt_, postings, offset)
+}
+
+OrgApacheLuceneSearchExactPhraseScorer_PostingsAndPosition *create_OrgApacheLuceneSearchExactPhraseScorer_PostingsAndPosition_initWithOrgApacheLuceneIndexPostingsEnum_withInt_(OrgApacheLuceneIndexPostingsEnum *postings, jint offset) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchExactPhraseScorer_PostingsAndPosition, initWithOrgApacheLuceneIndexPostingsEnum_withInt_, postings, offset)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchExactPhraseScorer_PostingsAndPosition)
@@ -365,9 +378,11 @@ void OrgApacheLuceneSearchExactPhraseScorer_$1_initWithOrgApacheLuceneSearchExac
 }
 
 OrgApacheLuceneSearchExactPhraseScorer_$1 *new_OrgApacheLuceneSearchExactPhraseScorer_$1_initWithOrgApacheLuceneSearchExactPhraseScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchExactPhraseScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0) {
-  OrgApacheLuceneSearchExactPhraseScorer_$1 *self = [OrgApacheLuceneSearchExactPhraseScorer_$1 alloc];
-  OrgApacheLuceneSearchExactPhraseScorer_$1_initWithOrgApacheLuceneSearchExactPhraseScorer_withOrgApacheLuceneSearchDocIdSetIterator_(self, outer$, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchExactPhraseScorer_$1, initWithOrgApacheLuceneSearchExactPhraseScorer_withOrgApacheLuceneSearchDocIdSetIterator_, outer$, arg$0)
+}
+
+OrgApacheLuceneSearchExactPhraseScorer_$1 *create_OrgApacheLuceneSearchExactPhraseScorer_$1_initWithOrgApacheLuceneSearchExactPhraseScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchExactPhraseScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchExactPhraseScorer_$1, initWithOrgApacheLuceneSearchExactPhraseScorer_withOrgApacheLuceneSearchDocIdSetIterator_, outer$, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchExactPhraseScorer_$1)

@@ -43,12 +43,12 @@
       filter = OrgApacheLuceneSearchNumericRangeQuery_newFloatRangeWithNSString_withInt_withJavaLangFloat_withJavaLangFloat_withBoolean_withBoolean_(field, precisionStep, JavaLangFloat_valueOfWithNSString_(lowerTerm), JavaLangFloat_valueOfWithNSString_(upperTerm), lowerInclusive, upperInclusive);
     }
     else {
-      @throw [new_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_(@"type attribute must be one of: [long, int, double, float]") autorelease];
+      @throw create_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_(@"type attribute must be one of: [long, int, double, float]");
     }
     return filter;
   }
   @catch (JavaLangNumberFormatException *nfe) {
-    @throw [new_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_withJavaLangThrowable_(@"Could not parse lowerTerm or upperTerm into a number", nfe) autorelease];
+    @throw create_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_withNSException_(@"Could not parse lowerTerm or upperTerm into a number", nfe);
   }
 }
 
@@ -62,7 +62,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "getQueryWithOrgW3cDomElement:", "getQuery", "Lorg.apache.lucene.search.Query;", 0x1, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "NumericRangeQueryBuilder", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder = { 2, "NumericRangeQueryBuilder", "org.apache.lucene.queryparser.xml.builders", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder;
@@ -75,9 +75,11 @@ void OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder_init(OrgApach
 }
 
 OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder *new_OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder_init() {
-  OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder *self = [OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder alloc];
-  OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder, init)
+}
+
+OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder *create_OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserXmlBuildersNumericRangeQueryBuilder)

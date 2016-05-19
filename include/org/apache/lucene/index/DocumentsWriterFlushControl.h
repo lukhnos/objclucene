@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexDocumentsWriterFlushControl_INCLUDE_ALL")
-#if OrgApacheLuceneIndexDocumentsWriterFlushControl_RESTRICT
-#define OrgApacheLuceneIndexDocumentsWriterFlushControl_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriterFlushControl")
+#ifdef RESTRICT_OrgApacheLuceneIndexDocumentsWriterFlushControl
+#define INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriterFlushControl 0
 #else
-#define OrgApacheLuceneIndexDocumentsWriterFlushControl_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriterFlushControl 1
 #endif
-#undef OrgApacheLuceneIndexDocumentsWriterFlushControl_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexDocumentsWriterFlushControl
 
-#if !defined (_OrgApacheLuceneIndexDocumentsWriterFlushControl_) && (OrgApacheLuceneIndexDocumentsWriterFlushControl_INCLUDE_ALL || OrgApacheLuceneIndexDocumentsWriterFlushControl_INCLUDE)
-#define _OrgApacheLuceneIndexDocumentsWriterFlushControl_
+#if !defined (OrgApacheLuceneIndexDocumentsWriterFlushControl_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriterFlushControl || defined(INCLUDE_OrgApacheLuceneIndexDocumentsWriterFlushControl))
+#define OrgApacheLuceneIndexDocumentsWriterFlushControl_
 
-#define OrgApacheLuceneUtilAccountable_RESTRICT 1
-#define OrgApacheLuceneUtilAccountable_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAccountable 1
+#define INCLUDE_OrgApacheLuceneUtilAccountable 1
 #include "org/apache/lucene/util/Accountable.h"
 
 @class JavaUtilConcurrentAtomicAtomicBoolean;
@@ -32,6 +32,19 @@
 @protocol JavaUtilCollection;
 @protocol JavaUtilIterator;
 
+/*!
+ @brief This class controls <code>DocumentsWriterPerThread</code> flushing during
+ indexing.
+ It tracks the memory consumption per
+ <code>DocumentsWriterPerThread</code> and uses a configured <code>FlushPolicy</code> to
+ decide if a <code>DocumentsWriterPerThread</code> must flush.
+ <p>
+ In addition to the <code>FlushPolicy</code> the flush control might set certain
+ <code>DocumentsWriterPerThread</code> as flush pending iff a
+ <code>DocumentsWriterPerThread</code> exceeds the
+ <code>IndexWriterConfig.getRAMPerThreadHardLimitMB()</code> to prevent address
+ space exhaustion.
+ */
 @interface OrgApacheLuceneIndexDocumentsWriterFlushControl : NSObject < OrgApacheLuceneUtilAccountable > {
  @public
   JavaUtilConcurrentAtomicAtomicBoolean *flushDeletes_;
@@ -48,6 +61,9 @@
 
 - (jlong)activeBytes;
 
+/*!
+ @brief Returns an iterator that provides access to all currently active <code>ThreadState</code>s
+ */
 - (id<JavaUtilIterator>)allActiveThreadStates;
 
 - (jlong)flushBytes;
@@ -58,8 +74,14 @@
 
 - (jlong)getDeleteBytesUsed;
 
+/*!
+ @brief Returns the <code>IndexWriter</code> <code>InfoStream</code>
+ */
 - (OrgApacheLuceneUtilInfoStream *)getInfoStream;
 
+/*!
+ @brief Returns the number of delete terms in the global pool
+ */
 - (jint)getNumGlobalTermDeletes;
 
 - (jlong)netBytes;
@@ -68,6 +90,12 @@
 
 - (void)setApplyAllDeletes;
 
+/*!
+ @brief Sets flush pending state on the given <code>ThreadState</code>.
+ The
+ <code>ThreadState</code> must have indexed at least on Document and must not be
+ already pending.
+ */
 - (void)setFlushPendingWithOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:(OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *)perThread;
 
 - (NSString *)description;
@@ -86,6 +114,9 @@
 
 - (void)addFlushableStateWithOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:(OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *)perThread;
 
+/*!
+ @brief Returns <code>true</code> iff stalled
+ */
 - (jboolean)anyStalledThreads;
 
 - (jboolean)assertBlockedFlushesWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue:(OrgApacheLuceneIndexDocumentsWriterDeleteQueue *)flushingQueue;
@@ -101,6 +132,9 @@
 
 - (void)finishFullFlush;
 
+/*!
+ @brief Returns <code>true</code> if a full flush is currently running
+ */
 - (jboolean)isFullFlush;
 
 - (void)markForFullFlush;
@@ -109,10 +143,20 @@
 
 - (jint)numActiveDWPT;
 
+/*!
+ @brief Returns the number of flushes that are checked out but not yet available
+ for flushing.
+ This only applies during a full flush if a DWPT needs
+ flushing but must not be flushed until the full flush has finished.
+ */
 - (jint)numBlockedFlushes;
 
 - (jint)numFlushingDWPT;
 
+/*!
+ @brief Returns the number of flushes that are already checked out but not yet
+ actively flushing
+ */
 - (jint)numQueuedFlushes;
 
 - (OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *)obtainAndLock;
@@ -121,6 +165,10 @@
 
 - (OrgApacheLuceneIndexDocumentsWriterPerThread *)tryCheckoutForFlushWithOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:(OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *)perThread;
 
+/*!
+ @brief This method will block if too many DWPT are currently flushing and no
+ checked out DWPT are available
+ */
 - (void)waitIfStalled;
 
 @end
@@ -134,8 +182,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexDocumentsWriterFlushControl_initWithO
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterFlushControl *new_OrgApacheLuceneIndexDocumentsWriterFlushControl_initWithOrgApacheLuceneIndexDocumentsWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneIndexBufferedUpdatesStream_(OrgApacheLuceneIndexDocumentsWriter *documentsWriter, OrgApacheLuceneIndexLiveIndexWriterConfig *config, OrgApacheLuceneIndexBufferedUpdatesStream *bufferedUpdatesStream) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexDocumentsWriterFlushControl *create_OrgApacheLuceneIndexDocumentsWriterFlushControl_initWithOrgApacheLuceneIndexDocumentsWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneIndexBufferedUpdatesStream_(OrgApacheLuceneIndexDocumentsWriter *documentsWriter, OrgApacheLuceneIndexLiveIndexWriterConfig *config, OrgApacheLuceneIndexBufferedUpdatesStream *bufferedUpdatesStream);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterFlushControl)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexDocumentsWriterFlushControl_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexDocumentsWriterFlushControl")

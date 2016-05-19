@@ -10,7 +10,6 @@
 #include "java/io/LineNumberReader.h"
 #include "java/io/Reader.h"
 #include "java/lang/IllegalArgumentException.h"
-#include "java/lang/Throwable.h"
 #include "java/text/ParseException.h"
 #include "java/util/Arrays.h"
 #include "org/apache/lucene/analysis/Analyzer.h"
@@ -46,7 +45,7 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer 
 }
 
 - (void)parseWithJavaIoReader:(JavaIoReader *)inArg {
-  JavaIoLineNumberReader *br = [new_JavaIoLineNumberReader_initWithJavaIoReader_(inArg) autorelease];
+  JavaIoLineNumberReader *br = create_JavaIoLineNumberReader_initWithJavaIoReader_(inArg);
   @try {
     NSString *line = nil;
     NSString *lastSynSetID = @"";
@@ -61,15 +60,15 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer 
       if (synset->size_ <= synsetSize + 1) {
         synset = JavaUtilArrays_copyOfWithNSObjectArray_withInt_(synset, synset->size_ * 2);
       }
-      IOSObjectArray_Set(nil_chk(synset), synsetSize, OrgApacheLuceneAnalysisSynonymWordnetSynonymParser_parseSynonymWithNSString_withOrgApacheLuceneUtilCharsRefBuilder_(self, line, [new_OrgApacheLuceneUtilCharsRefBuilder_init() autorelease]));
+      IOSObjectArray_Set(nil_chk(synset), synsetSize, OrgApacheLuceneAnalysisSynonymWordnetSynonymParser_parseSynonymWithNSString_withOrgApacheLuceneUtilCharsRefBuilder_(self, line, create_OrgApacheLuceneUtilCharsRefBuilder_init()));
       synsetSize++;
       lastSynSetID = synSetID;
     }
     OrgApacheLuceneAnalysisSynonymWordnetSynonymParser_addInternalWithOrgApacheLuceneUtilCharsRefArray_withInt_(self, synset, synsetSize);
   }
   @catch (JavaLangIllegalArgumentException *e) {
-    JavaTextParseException *ex = [new_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$I", @"Invalid synonym rule at line ", [br getLineNumber]), 0) autorelease];
-    [ex initCauseWithJavaLangThrowable:e];
+    JavaTextParseException *ex = create_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$I", @"Invalid synonym rule at line ", [br getLineNumber]), 0);
+    [ex initCauseWithNSException:e];
     @throw ex;
   }
   @finally {
@@ -109,14 +108,16 @@ void OrgApacheLuceneAnalysisSynonymWordnetSynonymParser_initWithBoolean_withBool
 }
 
 OrgApacheLuceneAnalysisSynonymWordnetSynonymParser *new_OrgApacheLuceneAnalysisSynonymWordnetSynonymParser_initWithBoolean_withBoolean_withOrgApacheLuceneAnalysisAnalyzer_(jboolean dedup, jboolean expand, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
-  OrgApacheLuceneAnalysisSynonymWordnetSynonymParser *self = [OrgApacheLuceneAnalysisSynonymWordnetSynonymParser alloc];
-  OrgApacheLuceneAnalysisSynonymWordnetSynonymParser_initWithBoolean_withBoolean_withOrgApacheLuceneAnalysisAnalyzer_(self, dedup, expand, analyzer);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisSynonymWordnetSynonymParser, initWithBoolean_withBoolean_withOrgApacheLuceneAnalysisAnalyzer_, dedup, expand, analyzer)
+}
+
+OrgApacheLuceneAnalysisSynonymWordnetSynonymParser *create_OrgApacheLuceneAnalysisSynonymWordnetSynonymParser_initWithBoolean_withBoolean_withOrgApacheLuceneAnalysisAnalyzer_(jboolean dedup, jboolean expand, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisSynonymWordnetSynonymParser, initWithBoolean_withBoolean_withOrgApacheLuceneAnalysisAnalyzer_, dedup, expand, analyzer)
 }
 
 OrgApacheLuceneUtilCharsRef *OrgApacheLuceneAnalysisSynonymWordnetSynonymParser_parseSynonymWithNSString_withOrgApacheLuceneUtilCharsRefBuilder_(OrgApacheLuceneAnalysisSynonymWordnetSynonymParser *self, NSString *line, OrgApacheLuceneUtilCharsRefBuilder *reuse) {
   if (reuse == nil) {
-    reuse = [new_OrgApacheLuceneUtilCharsRefBuilder_init() autorelease];
+    reuse = create_OrgApacheLuceneUtilCharsRefBuilder_init();
   }
   jint start = [((NSString *) nil_chk(line)) indexOf:'\''] + 1;
   jint end = [line lastIndexOf:'\''];

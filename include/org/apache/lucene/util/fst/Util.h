@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilFstUtil_INCLUDE_ALL")
-#if OrgApacheLuceneUtilFstUtil_RESTRICT
-#define OrgApacheLuceneUtilFstUtil_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstUtil")
+#ifdef RESTRICT_OrgApacheLuceneUtilFstUtil
+#define INCLUDE_ALL_OrgApacheLuceneUtilFstUtil 0
 #else
-#define OrgApacheLuceneUtilFstUtil_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilFstUtil 1
 #endif
-#undef OrgApacheLuceneUtilFstUtil_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilFstUtil
 
-#if !defined (_OrgApacheLuceneUtilFstUtil_) && (OrgApacheLuceneUtilFstUtil_INCLUDE_ALL || OrgApacheLuceneUtilFstUtil_INCLUDE)
-#define _OrgApacheLuceneUtilFstUtil_
+#if !defined (OrgApacheLuceneUtilFstUtil_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstUtil || defined(INCLUDE_OrgApacheLuceneUtilFstUtil))
+#define OrgApacheLuceneUtilFstUtil_
 
 @class IOSCharArray;
 @class JavaIoWriter;
@@ -29,19 +29,49 @@
 @protocol JavaLangCharSequence;
 @protocol JavaUtilComparator;
 
+/*!
+ @brief Static helper methods.
+  
+ */
 @interface OrgApacheLuceneUtilFstUtil : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Looks up the output for this input, or null if the
+ input is not accepted
+ */
 + (id)getWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst
        withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)input;
 
+/*!
+ @brief Looks up the output for this input, or null if the
+ input is not accepted.
+ */
 + (id)getWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst
         withOrgApacheLuceneUtilIntsRef:(OrgApacheLuceneUtilIntsRef *)input;
 
+/*!
+ @brief Reverse lookup (lookup by output instead of by input),
+ in the special case when your FSTs outputs are
+ strictly ascending.
+ This locates the input/output
+ pair where the output is equal to the target, and will
+ return null if that output does not exist.
+ <p>NOTE: this only works with <code>FST<Long></code>, only
+ works when the outputs are ascending in order with
+ the inputs.
+ For example, simple ordinals (0, 1,
+ 2, ...), or file offets (when appending to a file)
+ fit this. 
+ */
 + (OrgApacheLuceneUtilIntsRef *)getByOutputWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst
                                                                 withLong:(jlong)targetOutput;
 
+/*!
+ @brief Expert: like <code>Util.getByOutput(FST,long)</code> except reusing 
+ BytesReader, initial and scratch Arc, and result.
+ */
 + (OrgApacheLuceneUtilIntsRef *)getByOutputWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst
                                                                 withLong:(jlong)targetOutput
                                withOrgApacheLuceneUtilFstFST_BytesReader:(OrgApacheLuceneUtilFstFST_BytesReader *)inArg
@@ -49,12 +79,25 @@
                                        withOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)scratchArc
                                    withOrgApacheLuceneUtilIntsRefBuilder:(OrgApacheLuceneUtilIntsRefBuilder *)result;
 
+/*!
+ @brief Reads the first arc greater or equal that the given label into the provided
+ arc in place and returns it iff found, otherwise return <code>null</code>.
+ @param label the label to ceil on
+ @param fst the fst to operate on
+ @param follow the arc to follow reading the label from
+ @param arc the arc to read into in place
+ @param inArg the fst's <code>BytesReader</code>
+ */
 + (OrgApacheLuceneUtilFstFST_Arc *)readCeilArcWithInt:(jint)label
                         withOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst
                     withOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)follow
                     withOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)arc
             withOrgApacheLuceneUtilFstFST_BytesReader:(OrgApacheLuceneUtilFstFST_BytesReader *)inArg;
 
+/*!
+ @brief Starting from node, find the top N min cost 
+ completions to a final node.
+ */
 + (OrgApacheLuceneUtilFstUtil_TopResults *)shortestPathsWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst
                                                     withOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)fromNode
                                                                                withId:(id)startOutput
@@ -62,25 +105,76 @@
                                                                               withInt:(jint)topN
                                                                           withBoolean:(jboolean)allowEmptyString;
 
+/*!
+ @brief Just converts IntsRef to BytesRef; you must ensure the
+ int values fit into a byte.
+ */
 + (OrgApacheLuceneUtilBytesRef *)toBytesRefWithOrgApacheLuceneUtilIntsRef:(OrgApacheLuceneUtilIntsRef *)input
                                    withOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)scratch;
 
+/*!
+ @brief Dumps an <code>FST</code> to a GraphViz's <code>dot</code> language description
+ for visualization.
+ Example of use:
+ <pre class="prettyprint">
+ PrintWriter pw = new PrintWriter(&quot;out.dot&quot;);
+ Util.toDot(fst, pw, true, true);
+ pw.close();
+ 
+@endcode
+ and then, from command line:
+ @code
+
+  dot -Tpng -o out.png out.dot
+  
+@endcode
+ <p>
+ Note: larger FSTs (a few thousand nodes) won't even
+ render, don't bother.  If the FST is &gt; 2.1 GB in size
+ then this method will throw strange exceptions.
+ @param sameRank
+ If <code>true</code>, the resulting <code>dot</code> file will try
+ to order states in layers of breadth-first traversal. This may
+ mess up arcs, but makes the output FST's structure a bit clearer.
+ @param labelStates
+ If <code>true</code> states will have labels equal to their offsets in their
+ binary format. Expands the graph considerably.
+ - seealso: <a href="http://www.graphviz.org/">graphviz project</a>
+ */
 + (void)toDotWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst
                           withJavaIoWriter:(JavaIoWriter *)outArg
                                withBoolean:(jboolean)sameRank
                                withBoolean:(jboolean)labelStates;
 
+/*!
+ @brief Just takes unsigned byte values from the BytesRef and
+ converts into an IntsRef.
+ */
 + (OrgApacheLuceneUtilIntsRef *)toIntsRefWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)input
                                    withOrgApacheLuceneUtilIntsRefBuilder:(OrgApacheLuceneUtilIntsRefBuilder *)scratch;
 
+/*!
+ @brief Just maps each UTF16 unit (char) to the ints in an
+ IntsRef.
+ */
 + (OrgApacheLuceneUtilIntsRef *)toUTF16WithJavaLangCharSequence:(id<JavaLangCharSequence>)s
                           withOrgApacheLuceneUtilIntsRefBuilder:(OrgApacheLuceneUtilIntsRefBuilder *)scratch;
 
+/*!
+ @brief Decodes the Unicode codepoints from the provided
+ char[] and places them in the provided scratch
+ IntsRef, which must not be null, returning it.
+ */
 + (OrgApacheLuceneUtilIntsRef *)toUTF32WithCharArray:(IOSCharArray *)s
                                              withInt:(jint)offset
                                              withInt:(jint)length
                withOrgApacheLuceneUtilIntsRefBuilder:(OrgApacheLuceneUtilIntsRefBuilder *)scratch;
 
+/*!
+ @brief Decodes the Unicode codepoints from the provided
+ CharSequence and places them in the provided scratch
+ IntsRef, which must not be null, returning it.
+ */
 + (OrgApacheLuceneUtilIntsRef *)toUTF32WithJavaLangCharSequence:(id<JavaLangCharSequence>)s
                           withOrgApacheLuceneUtilIntsRefBuilder:(OrgApacheLuceneUtilIntsRefBuilder *)scratch;
 
@@ -116,13 +210,16 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstUtil)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilFstUtil_FSTPath_) && (OrgApacheLuceneUtilFstUtil_INCLUDE_ALL || OrgApacheLuceneUtilFstUtil_FSTPath_INCLUDE)
-#define _OrgApacheLuceneUtilFstUtil_FSTPath_
+#if !defined (OrgApacheLuceneUtilFstUtil_FSTPath_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstUtil || defined(INCLUDE_OrgApacheLuceneUtilFstUtil_FSTPath))
+#define OrgApacheLuceneUtilFstUtil_FSTPath_
 
 @class OrgApacheLuceneUtilFstFST_Arc;
 @class OrgApacheLuceneUtilIntsRefBuilder;
 @protocol JavaLangCharSequence;
 
+/*!
+ @brief Represents a path in TopNSearcher.
+ */
 @interface OrgApacheLuceneUtilFstUtil_FSTPath : NSObject {
  @public
   OrgApacheLuceneUtilFstFST_Arc *arc_;
@@ -134,6 +231,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstUtil)
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor
+ */
 - (instancetype)initWithId:(id)cost
 withOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)arc
 withOrgApacheLuceneUtilIntsRefBuilder:(OrgApacheLuceneUtilIntsRefBuilder *)input;
@@ -162,16 +262,20 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilFstUtil_FSTPath_initWithId_withOrgApac
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilFstUtil_FSTPath *new_OrgApacheLuceneUtilFstUtil_FSTPath_initWithId_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilIntsRefBuilder_(id cost, OrgApacheLuceneUtilFstFST_Arc *arc, OrgApacheLuceneUtilIntsRefBuilder *input) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstUtil_FSTPath *create_OrgApacheLuceneUtilFstUtil_FSTPath_initWithId_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilIntsRefBuilder_(id cost, OrgApacheLuceneUtilFstFST_Arc *arc, OrgApacheLuceneUtilIntsRefBuilder *input);
+
 FOUNDATION_EXPORT void OrgApacheLuceneUtilFstUtil_FSTPath_initWithId_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilIntsRefBuilder_withFloat_withJavaLangCharSequence_(OrgApacheLuceneUtilFstUtil_FSTPath *self, id cost, OrgApacheLuceneUtilFstFST_Arc *arc, OrgApacheLuceneUtilIntsRefBuilder *input, jfloat boost, id<JavaLangCharSequence> context);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilFstUtil_FSTPath *new_OrgApacheLuceneUtilFstUtil_FSTPath_initWithId_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilIntsRefBuilder_withFloat_withJavaLangCharSequence_(id cost, OrgApacheLuceneUtilFstFST_Arc *arc, OrgApacheLuceneUtilIntsRefBuilder *input, jfloat boost, id<JavaLangCharSequence> context) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstUtil_FSTPath *create_OrgApacheLuceneUtilFstUtil_FSTPath_initWithId_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilIntsRefBuilder_withFloat_withJavaLangCharSequence_(id cost, OrgApacheLuceneUtilFstFST_Arc *arc, OrgApacheLuceneUtilIntsRefBuilder *input, jfloat boost, id<JavaLangCharSequence> context);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstUtil_FSTPath)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilFstUtil_TopNSearcher_) && (OrgApacheLuceneUtilFstUtil_INCLUDE_ALL || OrgApacheLuceneUtilFstUtil_TopNSearcher_INCLUDE)
-#define _OrgApacheLuceneUtilFstUtil_TopNSearcher_
+#if !defined (OrgApacheLuceneUtilFstUtil_TopNSearcher_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstUtil || defined(INCLUDE_OrgApacheLuceneUtilFstUtil_TopNSearcher))
+#define OrgApacheLuceneUtilFstUtil_TopNSearcher_
 
 @class JavaUtilTreeSet;
 @class OrgApacheLuceneUtilFstFST;
@@ -183,6 +287,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstUtil_FSTPath)
 @protocol JavaLangCharSequence;
 @protocol JavaUtilComparator;
 
+/*!
+ @brief Utility class to find top N shortest paths from start
+ point(s).
+ */
 @interface OrgApacheLuceneUtilFstUtil_TopNSearcher : NSObject {
  @public
   JavaUtilTreeSet *queue_;
@@ -190,6 +298,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstUtil_FSTPath)
 
 #pragma mark Public
 
+/*!
+ @brief Creates an unbounded TopNSearcher
+ @param fst the <code>org.apache.lucene.util.fst.FST</code> to search on
+ @param topN the number of top scoring entries to retrieve
+ @param maxQueueDepth the maximum size of the queue of possible top entries
+ @param comparator the comparator to select the top N
+ */
 - (instancetype)initWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst
                                           withInt:(jint)topN
                                           withInt:(jint)maxQueueDepth
@@ -206,6 +321,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstUtil_FSTPath)
                                            withBoolean:(jboolean)allowEmptyString
                  withOrgApacheLuceneUtilIntsRefBuilder:(OrgApacheLuceneUtilIntsRefBuilder *)input;
 
+/*!
+ @brief Adds all leaving arcs, including 'finished' arc, if
+ the node is final, from this node into the queue.
+ */
 - (void)addStartPathsWithOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)node
                                                 withId:(id)startOutput
                                            withBoolean:(jboolean)allowEmptyString
@@ -234,19 +353,27 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilFstUtil_TopNSearcher_initWithOrgApache
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilFstUtil_TopNSearcher *new_OrgApacheLuceneUtilFstUtil_TopNSearcher_initWithOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_(OrgApacheLuceneUtilFstFST *fst, jint topN, jint maxQueueDepth, id<JavaUtilComparator> comparator) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstUtil_TopNSearcher *create_OrgApacheLuceneUtilFstUtil_TopNSearcher_initWithOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_(OrgApacheLuceneUtilFstFST *fst, jint topN, jint maxQueueDepth, id<JavaUtilComparator> comparator);
+
 FOUNDATION_EXPORT void OrgApacheLuceneUtilFstUtil_TopNSearcher_initWithOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_withJavaUtilComparator_(OrgApacheLuceneUtilFstUtil_TopNSearcher *self, OrgApacheLuceneUtilFstFST *fst, jint topN, jint maxQueueDepth, id<JavaUtilComparator> comparator, id<JavaUtilComparator> pathComparator);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilFstUtil_TopNSearcher *new_OrgApacheLuceneUtilFstUtil_TopNSearcher_initWithOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_withJavaUtilComparator_(OrgApacheLuceneUtilFstFST *fst, jint topN, jint maxQueueDepth, id<JavaUtilComparator> comparator, id<JavaUtilComparator> pathComparator) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstUtil_TopNSearcher *create_OrgApacheLuceneUtilFstUtil_TopNSearcher_initWithOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_withJavaUtilComparator_(OrgApacheLuceneUtilFstFST *fst, jint topN, jint maxQueueDepth, id<JavaUtilComparator> comparator, id<JavaUtilComparator> pathComparator);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstUtil_TopNSearcher)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilFstUtil_Result_) && (OrgApacheLuceneUtilFstUtil_INCLUDE_ALL || OrgApacheLuceneUtilFstUtil_Result_INCLUDE)
-#define _OrgApacheLuceneUtilFstUtil_Result_
+#if !defined (OrgApacheLuceneUtilFstUtil_Result_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstUtil || defined(INCLUDE_OrgApacheLuceneUtilFstUtil_Result))
+#define OrgApacheLuceneUtilFstUtil_Result_
 
 @class OrgApacheLuceneUtilIntsRef;
 
+/*!
+ @brief Holds a single input (IntsRef) + output, returned by
+ <code>shortestPaths()</code>.
+ */
 @interface OrgApacheLuceneUtilFstUtil_Result : NSObject {
  @public
   OrgApacheLuceneUtilIntsRef *input_;
@@ -269,23 +396,37 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilFstUtil_Result_initWithOrgApacheLucene
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilFstUtil_Result *new_OrgApacheLuceneUtilFstUtil_Result_initWithOrgApacheLuceneUtilIntsRef_withId_(OrgApacheLuceneUtilIntsRef *input, id output) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstUtil_Result *create_OrgApacheLuceneUtilFstUtil_Result_initWithOrgApacheLuceneUtilIntsRef_withId_(OrgApacheLuceneUtilIntsRef *input, id output);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstUtil_Result)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilFstUtil_TopResults_) && (OrgApacheLuceneUtilFstUtil_INCLUDE_ALL || OrgApacheLuceneUtilFstUtil_TopResults_INCLUDE)
-#define _OrgApacheLuceneUtilFstUtil_TopResults_
+#if !defined (OrgApacheLuceneUtilFstUtil_TopResults_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstUtil || defined(INCLUDE_OrgApacheLuceneUtilFstUtil_TopResults))
+#define OrgApacheLuceneUtilFstUtil_TopResults_
 
-#define JavaLangIterable_RESTRICT 1
-#define JavaLangIterable_INCLUDE 1
+#define RESTRICT_JavaLangIterable 1
+#define INCLUDE_JavaLangIterable 1
 #include "java/lang/Iterable.h"
 
 @protocol JavaUtilIterator;
 @protocol JavaUtilList;
 
+/*!
+ @brief Holds the results for a top N search using <code>TopNSearcher</code>
+ */
 @interface OrgApacheLuceneUtilFstUtil_TopResults : NSObject < JavaLangIterable > {
  @public
+  /*!
+   @brief <code>true</code> iff this is a complete result ie. if
+ the specified queue size was large enough to find the complete list of results.
+   This might
+ be <code>false</code> if the <code>TopNSearcher</code> rejected too many results.
+   */
   jboolean isComplete_;
+  /*!
+   @brief The top results
+   */
   id<JavaUtilList> topN_;
 }
 
@@ -298,7 +439,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstUtil_Result)
 - (instancetype)initWithBoolean:(jboolean)isComplete
                withJavaUtilList:(id<JavaUtilList>)topN;
 
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilFstUtil_TopResults)
@@ -309,8 +449,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilFstUtil_TopResults_initWithBoolean_wit
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilFstUtil_TopResults *new_OrgApacheLuceneUtilFstUtil_TopResults_initWithBoolean_withJavaUtilList_(jboolean isComplete, id<JavaUtilList> topN) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstUtil_TopResults *create_OrgApacheLuceneUtilFstUtil_TopResults_initWithBoolean_withJavaUtilList_(jboolean isComplete, id<JavaUtilList> topN);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstUtil_TopResults)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilFstUtil_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstUtil")

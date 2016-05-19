@@ -5,27 +5,33 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer_RESTRICT
-#define OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer 0
 #else
-#define OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer 1
 #endif
-#undef OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer
 
-#if !defined (_OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer_) && (OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer_INCLUDE_ALL || OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer_INCLUDE)
-#define _OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer_
+#if !defined (OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer || defined(INCLUDE_OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer))
+#define OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer_
 
-#define OrgApacheLuceneAnalysisAnalyzer_RESTRICT 1
-#define OrgApacheLuceneAnalysisAnalyzer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisAnalyzer 1
+#define INCLUDE_OrgApacheLuceneAnalysisAnalyzer 1
 #include "org/apache/lucene/analysis/Analyzer.h"
 
 @class OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;
 
+/*!
+ @brief An Analyzer that uses <code>WhitespaceTokenizer</code>.
+ */
 @interface OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer : OrgApacheLuceneAnalysisAnalyzer
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new <code>WhitespaceAnalyzer</code>
+ */
 - (instancetype)init;
 
 #pragma mark Protected
@@ -40,8 +46,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer_init(OrgApa
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer *new_OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer *create_OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer")

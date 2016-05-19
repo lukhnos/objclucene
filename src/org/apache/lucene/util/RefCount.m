@@ -44,7 +44,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilRefCount, refCount_, JavaUtilConcurrentAt
     }
   }
   else if (rc < 0) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$", @"too many decRef calls: refCount is ", rc, @" after decrement")) autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$", @"too many decRef calls: refCount is ", rc, @" after decrement"));
   }
 }
 
@@ -92,9 +92,11 @@ void OrgApacheLuceneUtilRefCount_initWithId_(OrgApacheLuceneUtilRefCount *self, 
 }
 
 OrgApacheLuceneUtilRefCount *new_OrgApacheLuceneUtilRefCount_initWithId_(id object) {
-  OrgApacheLuceneUtilRefCount *self = [OrgApacheLuceneUtilRefCount alloc];
-  OrgApacheLuceneUtilRefCount_initWithId_(self, object);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilRefCount, initWithId_, object)
+}
+
+OrgApacheLuceneUtilRefCount *create_OrgApacheLuceneUtilRefCount_initWithId_(id object) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilRefCount, initWithId_, object)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilRefCount)

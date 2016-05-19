@@ -12,9 +12,13 @@
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneDocumentBinaryDocValuesField)
 
-OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentBinaryDocValuesField_TYPE_;
+OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentBinaryDocValuesField_TYPE;
 
 @implementation OrgApacheLuceneDocumentBinaryDocValuesField
+
++ (OrgApacheLuceneDocumentFieldType *)TYPE {
+  return OrgApacheLuceneDocumentBinaryDocValuesField_TYPE;
+}
 
 - (instancetype)initWithNSString:(NSString *)name
  withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)value {
@@ -24,10 +28,10 @@ OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentBinaryDocValuesField_TY
 
 + (void)initialize {
   if (self == [OrgApacheLuceneDocumentBinaryDocValuesField class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneDocumentBinaryDocValuesField_TYPE_, new_OrgApacheLuceneDocumentFieldType_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneDocumentBinaryDocValuesField_TYPE, new_OrgApacheLuceneDocumentFieldType_init());
     {
-      [OrgApacheLuceneDocumentBinaryDocValuesField_TYPE_ setDocValuesTypeWithOrgApacheLuceneIndexDocValuesTypeEnum:JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, BINARY)];
-      [OrgApacheLuceneDocumentBinaryDocValuesField_TYPE_ freeze];
+      [OrgApacheLuceneDocumentBinaryDocValuesField_TYPE setDocValuesTypeWithOrgApacheLuceneIndexDocValuesType:JreLoadEnum(OrgApacheLuceneIndexDocValuesType, BINARY)];
+      [OrgApacheLuceneDocumentBinaryDocValuesField_TYPE freeze];
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneDocumentBinaryDocValuesField)
   }
@@ -38,7 +42,7 @@ OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentBinaryDocValuesField_TY
     { "initWithNSString:withOrgApacheLuceneUtilBytesRef:", "BinaryDocValuesField", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "TYPE_", NULL, 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentBinaryDocValuesField_TYPE_, NULL, .constantValue.asLong = 0 },
+    { "TYPE", "TYPE", 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentBinaryDocValuesField_TYPE, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneDocumentBinaryDocValuesField = { 2, "BinaryDocValuesField", "org.apache.lucene.document", NULL, 0x1, 1, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneDocumentBinaryDocValuesField;
@@ -47,14 +51,16 @@ OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentBinaryDocValuesField_TY
 @end
 
 void OrgApacheLuceneDocumentBinaryDocValuesField_initWithNSString_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneDocumentBinaryDocValuesField *self, NSString *name, OrgApacheLuceneUtilBytesRef *value) {
-  OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneDocumentFieldType_(self, name, OrgApacheLuceneDocumentBinaryDocValuesField_TYPE_);
+  OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneDocumentFieldType_(self, name, OrgApacheLuceneDocumentBinaryDocValuesField_TYPE);
   JreStrongAssign(&self->fieldsData_, value);
 }
 
 OrgApacheLuceneDocumentBinaryDocValuesField *new_OrgApacheLuceneDocumentBinaryDocValuesField_initWithNSString_withOrgApacheLuceneUtilBytesRef_(NSString *name, OrgApacheLuceneUtilBytesRef *value) {
-  OrgApacheLuceneDocumentBinaryDocValuesField *self = [OrgApacheLuceneDocumentBinaryDocValuesField alloc];
-  OrgApacheLuceneDocumentBinaryDocValuesField_initWithNSString_withOrgApacheLuceneUtilBytesRef_(self, name, value);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentBinaryDocValuesField, initWithNSString_withOrgApacheLuceneUtilBytesRef_, name, value)
+}
+
+OrgApacheLuceneDocumentBinaryDocValuesField *create_OrgApacheLuceneDocumentBinaryDocValuesField_initWithNSString_withOrgApacheLuceneUtilBytesRef_(NSString *name, OrgApacheLuceneUtilBytesRef *value) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentBinaryDocValuesField, initWithNSString_withOrgApacheLuceneUtilBytesRef_, name, value)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentBinaryDocValuesField)

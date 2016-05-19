@@ -37,13 +37,49 @@
   OrgApacheLuceneUtilIntsRefBuilder *savedStates_;
 }
 
+/*!
+ @brief Sets the enum to operate in linear fashion, as we have found
+ a looping transition at position: we set an upper bound and 
+ act like a TermRangeQuery for this portion of the term space.
+ */
 - (void)setLinearWithInt:(jint)position;
 
+/*!
+ @brief Increments the byte buffer to the next String in binary order after s that will not put
+ the machine into a reject state.
+ If such a string does not exist, returns
+ false.
+ The correctness of this method depends upon the automaton being deterministic,
+ and having no transitions to dead states.
+ @return true if more possible solutions exist for the DFA
+ */
 - (jboolean)nextString;
 
+/*!
+ @brief Returns the next String in lexicographic order that will not put
+ the machine into a reject state.
+ This method traverses the DFA from the given position in the String,
+ starting at the given state.
+ If this cannot satisfy the machine, returns false. This method will
+ walk the minimal path, in lexicographic order, as long as possible.
+ If this method returns false, then there might still be more solutions,
+ it is necessary to backtrack to find out.
+ @param state current non-reject state
+ @param position useful portion of the string
+ @return true if more possible solutions exist for the DFA from this
+ position
+ */
 - (jboolean)nextStringWithInt:(jint)state
                       withInt:(jint)position;
 
+/*!
+ @brief Attempts to backtrack thru the string after encountering a dead end
+ at some given position.
+ Returns false if no more possible strings 
+ can match.
+ @param position current position in the input String
+ @return <code>position >= 0</code> if more possible solutions exist for the DFA
+ */
 - (jint)backtrackWithInt:(jint)position;
 
 @end
@@ -73,20 +109,20 @@ __attribute__((unused)) static jint OrgApacheLuceneIndexAutomatonTermsEnum_backt
   return self;
 }
 
-- (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
+- (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
   if (commonSuffixRef_ == nil || OrgApacheLuceneUtilStringHelper_endsWithWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(term, commonSuffixRef_)) {
-    if ([((OrgApacheLuceneUtilAutomatonByteRunAutomaton *) nil_chk(runAutomaton_)) runWithByteArray:((OrgApacheLuceneUtilBytesRef *) nil_chk(term))->bytes_ withInt:term->offset_ withInt:term->length_]) return linear_ ? JreLoadStatic(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum, YES) : JreLoadStatic(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum, YES_AND_SEEK);
-    else return (linear_ && [term compareToWithId:linearUpperBound_] < 0) ? JreLoadStatic(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum, NO) : JreLoadStatic(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum, NO_AND_SEEK);
+    if ([((OrgApacheLuceneUtilAutomatonByteRunAutomaton *) nil_chk(runAutomaton_)) runWithByteArray:((OrgApacheLuceneUtilBytesRef *) nil_chk(term))->bytes_ withInt:term->offset_ withInt:term->length_]) return linear_ ? JreLoadEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, YES) : JreLoadEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, YES_AND_SEEK);
+    else return (linear_ && [term compareToWithId:linearUpperBound_] < 0) ? JreLoadEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, NO) : JreLoadEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, NO_AND_SEEK);
   }
   else {
-    return (linear_ && [((OrgApacheLuceneUtilBytesRef *) nil_chk(term)) compareToWithId:linearUpperBound_] < 0) ? JreLoadStatic(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum, NO) : JreLoadStatic(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum, NO_AND_SEEK);
+    return (linear_ && [((OrgApacheLuceneUtilBytesRef *) nil_chk(term)) compareToWithId:linearUpperBound_] < 0) ? JreLoadEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, NO) : JreLoadEnum(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus, NO_AND_SEEK);
   }
 }
 
 - (OrgApacheLuceneUtilBytesRef *)nextSeekTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
   if (term == nil) {
     JreAssert(([((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(seekBytesRef_)) length] == 0), (@"org/apache/lucene/index/AutomatonTermsEnum.java:111 condition failed: assert seekBytesRef.length() == 0;"));
-    if ([runAutomaton_ isAcceptWithInt:[((OrgApacheLuceneUtilAutomatonByteRunAutomaton *) nil_chk(runAutomaton_)) getInitialState]]) {
+    if ([((OrgApacheLuceneUtilAutomatonByteRunAutomaton *) nil_chk(runAutomaton_)) isAcceptWithInt:[runAutomaton_ getInitialState]]) {
       return [seekBytesRef_ get];
     }
   }
@@ -94,7 +130,7 @@ __attribute__((unused)) static jint OrgApacheLuceneIndexAutomatonTermsEnum_backt
     [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(seekBytesRef_)) copyBytesWithOrgApacheLuceneUtilBytesRef:term];
   }
   if (OrgApacheLuceneIndexAutomatonTermsEnum_nextString(self)) {
-    return [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(seekBytesRef_)) get];
+    return [seekBytesRef_ get];
   }
   else {
     return nil;
@@ -175,9 +211,11 @@ void OrgApacheLuceneIndexAutomatonTermsEnum_initWithOrgApacheLuceneIndexTermsEnu
 }
 
 OrgApacheLuceneIndexAutomatonTermsEnum *new_OrgApacheLuceneIndexAutomatonTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilAutomatonCompiledAutomaton_(OrgApacheLuceneIndexTermsEnum *tenum, OrgApacheLuceneUtilAutomatonCompiledAutomaton *compiled) {
-  OrgApacheLuceneIndexAutomatonTermsEnum *self = [OrgApacheLuceneIndexAutomatonTermsEnum alloc];
-  OrgApacheLuceneIndexAutomatonTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilAutomatonCompiledAutomaton_(self, tenum, compiled);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexAutomatonTermsEnum, initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilAutomatonCompiledAutomaton_, tenum, compiled)
+}
+
+OrgApacheLuceneIndexAutomatonTermsEnum *create_OrgApacheLuceneIndexAutomatonTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilAutomatonCompiledAutomaton_(OrgApacheLuceneIndexTermsEnum *tenum, OrgApacheLuceneUtilAutomatonCompiledAutomaton *compiled) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexAutomatonTermsEnum, initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilAutomatonCompiledAutomaton_, tenum, compiled)
 }
 
 void OrgApacheLuceneIndexAutomatonTermsEnum_setLinearWithInt_(OrgApacheLuceneIndexAutomatonTermsEnum *self, jint position) {
@@ -193,8 +231,8 @@ void OrgApacheLuceneIndexAutomatonTermsEnum_setLinearWithInt_(OrgApacheLuceneInd
   [self->automaton_ initTransitionWithInt:state withOrgApacheLuceneUtilAutomatonTransition:self->transition_];
   for (jint i = 0; i < numTransitions; i++) {
     [self->automaton_ getNextTransitionWithOrgApacheLuceneUtilAutomatonTransition:self->transition_];
-    if (((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(self->transition_))->min_ <= ([((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(self->seekBytesRef_)) byteAtWithInt:position] & (jint) 0xff) && ([self->seekBytesRef_ byteAtWithInt:position] & (jint) 0xff) <= self->transition_->max_) {
-      maxInterval = self->transition_->max_;
+    if (((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(self->transition_))->min_ <= ([((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(self->seekBytesRef_)) byteAtWithInt:position] & (jint) 0xff) && ([self->seekBytesRef_ byteAtWithInt:position] & (jint) 0xff) <= ((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(self->transition_))->max_) {
+      maxInterval = ((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(self->transition_))->max_;
       break;
     }
   }
@@ -202,7 +240,7 @@ void OrgApacheLuceneIndexAutomatonTermsEnum_setLinearWithInt_(OrgApacheLuceneInd
   jint length = position + 1;
   if (((IOSByteArray *) nil_chk(((OrgApacheLuceneUtilBytesRef *) nil_chk(self->linearUpperBound_))->bytes_))->size_ < length) JreStrongAssignAndConsume(&self->linearUpperBound_->bytes_, [IOSByteArray newArrayWithLength:length]);
   JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_([((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(self->seekBytesRef_)) bytes], 0, self->linearUpperBound_->bytes_, 0, position);
-  *IOSByteArray_GetRef(self->linearUpperBound_->bytes_, position) = (jbyte) maxInterval;
+  *IOSByteArray_GetRef(nil_chk(self->linearUpperBound_->bytes_), position) = (jbyte) maxInterval;
   self->linearUpperBound_->length_ = length;
   self->linear_ = true;
 }
@@ -253,14 +291,14 @@ jboolean OrgApacheLuceneIndexAutomatonTermsEnum_nextStringWithInt_withInt_(OrgAp
       jint nextChar = JavaLangMath_maxWithInt_withInt_(c, self->transition_->min_);
       [self->seekBytesRef_ growWithInt:[self->seekBytesRef_ length] + 1];
       [self->seekBytesRef_ appendWithByte:(jbyte) nextChar];
-      state = self->transition_->dest_;
+      state = ((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(self->transition_))->dest_;
       while (IOSLongArray_Get(self->visited_, state) != self->curGen_ && ![((OrgApacheLuceneUtilAutomatonByteRunAutomaton *) nil_chk(self->runAutomaton_)) isAcceptWithInt:state]) {
         *IOSLongArray_GetRef(self->visited_, state) = self->curGen_;
         [self->automaton_ initTransitionWithInt:state withOrgApacheLuceneUtilAutomatonTransition:self->transition_];
         [self->automaton_ getNextTransitionWithOrgApacheLuceneUtilAutomatonTransition:self->transition_];
-        state = self->transition_->dest_;
+        state = ((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(self->transition_))->dest_;
         [self->seekBytesRef_ growWithInt:[self->seekBytesRef_ length] + 1];
-        [self->seekBytesRef_ appendWithByte:(jbyte) self->transition_->min_];
+        [self->seekBytesRef_ appendWithByte:(jbyte) ((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(self->transition_))->min_];
         if (!self->finite_ && !self->linear_ && IOSLongArray_Get(self->visited_, state) == self->curGen_) {
           OrgApacheLuceneIndexAutomatonTermsEnum_setLinearWithInt_(self, [self->seekBytesRef_ length] - 1);
         }

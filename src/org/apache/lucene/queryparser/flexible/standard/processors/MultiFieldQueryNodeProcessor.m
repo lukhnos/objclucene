@@ -53,11 +53,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)preProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node {
   if ([OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_() isInstance:node]) {
     self->processChildren_ = false;
-    id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode> fieldNode = (id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) check_protocol_cast(node, OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_());
+    id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode> fieldNode = (id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) cast_check(node, OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_());
     if ([((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) nil_chk(fieldNode)) getField] == nil) {
-      IOSObjectArray *fields = [((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk([self getQueryConfigHandler])) getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, MULTI_FIELDS_)];
+      IOSObjectArray *fields = [((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk([self getQueryConfigHandler])) getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, MULTI_FIELDS)];
       if (fields == nil) {
-        @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"StandardQueryConfigHandler.ConfigurationKeys.MULTI_FIELDS should be set on the QueryConfigHandler") autorelease];
+        @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"StandardQueryConfigHandler.ConfigurationKeys.MULTI_FIELDS should be set on the QueryConfigHandler");
       }
       if (fields != nil && fields->size_ > 0) {
         [fieldNode setFieldWithJavaLangCharSequence:IOSObjectArray_Get(fields, 0)];
@@ -65,18 +65,18 @@ J2OBJC_IGNORE_DESIGNATED_END
           return fieldNode;
         }
         else {
-          JavaUtilLinkedList *children = [new_JavaUtilLinkedList_init() autorelease];
+          JavaUtilLinkedList *children = create_JavaUtilLinkedList_init();
           [children addWithId:fieldNode];
           for (jint i = 1; i < fields->size_; i++) {
             @try {
-              fieldNode = (id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) check_protocol_cast([fieldNode cloneTree], OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_());
+              fieldNode = (id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) cast_check([fieldNode cloneTree], OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_());
               [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) nil_chk(fieldNode)) setFieldWithJavaLangCharSequence:IOSObjectArray_Get(fields, i)];
               [children addWithId:fieldNode];
             }
             @catch (JavaLangCloneNotSupportedException *e) {
             }
           }
-          return [new_OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_([new_OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode_initWithJavaUtilList_(children) autorelease]) autorelease];
+          return create_OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_(create_OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode_initWithJavaUtilList_(children));
         }
       }
     }
@@ -94,7 +94,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "postProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
     { "processChildrenWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "processChildren", "V", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
     { "preProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "preProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "setChildrenOrderWithJavaUtilList:", "setChildrenOrder", "Ljava.util.List;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
+    { "setChildrenOrderWithJavaUtilList:", "setChildrenOrder", "Ljava.util.List;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;)Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "processChildren_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
@@ -111,9 +111,11 @@ void OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProc
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor_init() {
-  OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor *self = [OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor, init)
+}
+
+OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor *create_OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor)

@@ -36,12 +36,12 @@
 }
 
 - (id<OrgApacheLuceneBkdtreeLatLonReader>)getReaderWithLong:(jlong)start {
-  return [new_OrgApacheLuceneBkdtreeHeapLatLonReader_initWithIntArray_withIntArray_withLongArray_withIntArray_withInt_withInt_(latEncs_, lonEncs_, ords_, docIDs_, (jint) start, ((IOSIntArray *) nil_chk(latEncs_))->size_) autorelease];
+  return create_OrgApacheLuceneBkdtreeHeapLatLonReader_initWithIntArray_withIntArray_withLongArray_withIntArray_withInt_withInt_(latEncs_, lonEncs_, ords_, docIDs_, (jint) start, ((IOSIntArray *) nil_chk(latEncs_))->size_);
 }
 
 - (void)close {
   if (nextWrite_ != ((IOSIntArray *) nil_chk(latEncs_))->size_) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I", @"only wrote ", nextWrite_, @" values, but expected ", latEncs_->size_)) autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I", @"only wrote ", nextWrite_, @" values, but expected ", latEncs_->size_));
   }
 }
 
@@ -91,9 +91,11 @@ void OrgApacheLuceneBkdtreeHeapLatLonWriter_initWithInt_(OrgApacheLuceneBkdtreeH
 }
 
 OrgApacheLuceneBkdtreeHeapLatLonWriter *new_OrgApacheLuceneBkdtreeHeapLatLonWriter_initWithInt_(jint count) {
-  OrgApacheLuceneBkdtreeHeapLatLonWriter *self = [OrgApacheLuceneBkdtreeHeapLatLonWriter alloc];
-  OrgApacheLuceneBkdtreeHeapLatLonWriter_initWithInt_(self, count);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneBkdtreeHeapLatLonWriter, initWithInt_, count)
+}
+
+OrgApacheLuceneBkdtreeHeapLatLonWriter *create_OrgApacheLuceneBkdtreeHeapLatLonWriter_initWithInt_(jint count) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneBkdtreeHeapLatLonWriter, initWithInt_, count)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneBkdtreeHeapLatLonWriter)

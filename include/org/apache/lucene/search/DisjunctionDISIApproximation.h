@@ -5,23 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchDisjunctionDISIApproximation_INCLUDE_ALL")
-#if OrgApacheLuceneSearchDisjunctionDISIApproximation_RESTRICT
-#define OrgApacheLuceneSearchDisjunctionDISIApproximation_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchDisjunctionDISIApproximation")
+#ifdef RESTRICT_OrgApacheLuceneSearchDisjunctionDISIApproximation
+#define INCLUDE_ALL_OrgApacheLuceneSearchDisjunctionDISIApproximation 0
 #else
-#define OrgApacheLuceneSearchDisjunctionDISIApproximation_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchDisjunctionDISIApproximation 1
 #endif
-#undef OrgApacheLuceneSearchDisjunctionDISIApproximation_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchDisjunctionDISIApproximation
 
-#if !defined (_OrgApacheLuceneSearchDisjunctionDISIApproximation_) && (OrgApacheLuceneSearchDisjunctionDISIApproximation_INCLUDE_ALL || OrgApacheLuceneSearchDisjunctionDISIApproximation_INCLUDE)
-#define _OrgApacheLuceneSearchDisjunctionDISIApproximation_
+#if !defined (OrgApacheLuceneSearchDisjunctionDISIApproximation_) && (INCLUDE_ALL_OrgApacheLuceneSearchDisjunctionDISIApproximation || defined(INCLUDE_OrgApacheLuceneSearchDisjunctionDISIApproximation))
+#define OrgApacheLuceneSearchDisjunctionDISIApproximation_
 
-#define OrgApacheLuceneSearchDocIdSetIterator_RESTRICT 1
-#define OrgApacheLuceneSearchDocIdSetIterator_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchDocIdSetIterator 1
+#define INCLUDE_OrgApacheLuceneSearchDocIdSetIterator 1
 #include "org/apache/lucene/search/DocIdSetIterator.h"
 
 @class OrgApacheLuceneSearchDisiPriorityQueue;
 
+/*!
+ @brief A <code>DocIdSetIterator</code> which is a disjunction of the approximations of
+ the provided iterators.
+ */
 @interface OrgApacheLuceneSearchDisjunctionDISIApproximation : OrgApacheLuceneSearchDocIdSetIterator {
  @public
   OrgApacheLuceneSearchDisiPriorityQueue *subIterators_;
@@ -50,8 +54,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchDisjunctionDISIApproximation_initWit
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchDisjunctionDISIApproximation *new_OrgApacheLuceneSearchDisjunctionDISIApproximation_initWithOrgApacheLuceneSearchDisiPriorityQueue_(OrgApacheLuceneSearchDisiPriorityQueue *subIterators) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchDisjunctionDISIApproximation *create_OrgApacheLuceneSearchDisjunctionDISIApproximation_initWithOrgApacheLuceneSearchDisiPriorityQueue_(OrgApacheLuceneSearchDisiPriorityQueue *subIterators);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDisjunctionDISIApproximation)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchDisjunctionDISIApproximation_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchDisjunctionDISIApproximation")

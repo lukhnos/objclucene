@@ -28,8 +28,9 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter, sinks_, id<JavaUtilList>)
 
-static OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter *OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_ACCEPT_ALL_FILTER_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter, ACCEPT_ALL_FILTER_, OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter *)
+inline OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter *OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_get_ACCEPT_ALL_FILTER();
+static OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter *OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_ACCEPT_ALL_FILTER;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter, ACCEPT_ALL_FILTER, OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter *)
 
 @interface OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream () {
  @public
@@ -59,6 +60,8 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisSinksTeeSinkTokenFilt
 
 __attribute__((unused)) static OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream *new_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream_initWithOrgApacheLuceneUtilAttributeSource_withOrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter_(OrgApacheLuceneUtilAttributeSource *source, OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter *filter) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream *create_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream_initWithOrgApacheLuceneUtilAttributeSource_withOrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter_(OrgApacheLuceneUtilAttributeSource *source, OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter *filter);
+
 __attribute__((unused)) static jboolean OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream_acceptWithOrgApacheLuceneUtilAttributeSource_(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream *self, OrgApacheLuceneUtilAttributeSource *source);
 
 __attribute__((unused)) static void OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream_addStateWithOrgApacheLuceneUtilAttributeSource_State_(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream *self, OrgApacheLuceneUtilAttributeSource_State *state);
@@ -79,6 +82,8 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisSinksTeeSinkTokenFilt
 
 __attribute__((unused)) static OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_$1 *new_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_$1_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_$1 *create_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_$1_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_$1)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter)
@@ -91,23 +96,23 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter)
 }
 
 - (OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream *)newSinkTokenStream {
-  return [self newSinkTokenStreamWithOrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter:OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_ACCEPT_ALL_FILTER_];
+  return [self newSinkTokenStreamWithOrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter:OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_ACCEPT_ALL_FILTER];
 }
 
 - (OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream *)newSinkTokenStreamWithOrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter:(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter *)filter {
-  OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream *sink = [new_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream_initWithOrgApacheLuceneUtilAttributeSource_withOrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter_([self cloneAttributes], filter) autorelease];
-  [((id<JavaUtilList>) nil_chk(self->sinks_)) addWithId:[new_JavaLangRefWeakReference_initWithId_(sink) autorelease]];
+  OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream *sink = create_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream_initWithOrgApacheLuceneUtilAttributeSource_withOrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter_([self cloneAttributes], filter);
+  [((id<JavaUtilList>) nil_chk(self->sinks_)) addWithId:create_JavaLangRefWeakReference_initWithId_(sink)];
   return sink;
 }
 
 - (void)addSinkTokenStreamWithOrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream:(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream *)sink {
   if (![((OrgApacheLuceneUtilAttributeFactory *) nil_chk([self getAttributeFactory])) isEqual:[((OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream *) nil_chk(sink)) getAttributeFactory]]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"The supplied sink is not compatible to this tee") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"The supplied sink is not compatible to this tee");
   }
   for (id<JavaUtilIterator> it = [((OrgApacheLuceneUtilAttributeSource *) nil_chk([self cloneAttributes])) getAttributeImplsIterator]; [((id<JavaUtilIterator>) nil_chk(it)) hasNext]; ) {
     [sink addAttributeImplWithOrgApacheLuceneUtilAttributeImpl:[it next]];
   }
-  [((id<JavaUtilList>) nil_chk(self->sinks_)) addWithId:[new_JavaLangRefWeakReference_initWithId_(sink) autorelease]];
+  [((id<JavaUtilList>) nil_chk(self->sinks_)) addWithId:create_JavaLangRefWeakReference_initWithId_(sink)];
 }
 
 - (void)consumeAllTokens {
@@ -152,7 +157,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter)
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_ACCEPT_ALL_FILTER_, new_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_$1_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_ACCEPT_ALL_FILTER, new_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_$1_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter)
   }
 }
@@ -169,7 +174,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter)
   };
   static const J2ObjcFieldInfo fields[] = {
     { "sinks_", NULL, 0x12, "Ljava.util.List;", NULL, "Ljava/util/List<Ljava/lang/ref/WeakReference<Lorg/apache/lucene/analysis/sinks/TeeSinkTokenFilter$SinkTokenStream;>;>;", .constantValue.asLong = 0 },
-    { "ACCEPT_ALL_FILTER_", NULL, 0x1a, "Lorg.apache.lucene.analysis.sinks.TeeSinkTokenFilter$SinkFilter;", &OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_ACCEPT_ALL_FILTER_, NULL, .constantValue.asLong = 0 },
+    { "ACCEPT_ALL_FILTER", "ACCEPT_ALL_FILTER", 0x1a, "Lorg.apache.lucene.analysis.sinks.TeeSinkTokenFilter$SinkFilter;", &OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_ACCEPT_ALL_FILTER, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.analysis.sinks.TeeSinkTokenFilter$SinkFilter;", "Lorg.apache.lucene.analysis.sinks.TeeSinkTokenFilter$SinkTokenStream;"};
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter = { 2, "TeeSinkTokenFilter", "org.apache.lucene.analysis.sinks", NULL, 0x11, 7, methods, 2, fields, 0, NULL, 2, inner_classes, NULL, NULL };
@@ -184,9 +189,11 @@ void OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_initWithOrgApacheLuceneAnaly
 }
 
 OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter *new_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) {
-  OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter *self = [OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter alloc];
-  OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, input);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_, input)
+}
+
+OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter *create_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_, input)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter)
@@ -213,7 +220,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   static const J2ObjcMethodInfo methods[] = {
     { "acceptWithOrgApacheLuceneUtilAttributeSource:", "accept", "Z", 0x401, NULL, NULL },
     { "reset", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "SinkFilter", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter = { 2, "SinkFilter", "org.apache.lucene.analysis.sinks", "TeeSinkTokenFilter", 0x409, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter;
@@ -254,7 +261,7 @@ withOrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter:(OrgApacheLuceneAn
   if (![((id<JavaUtilIterator>) nil_chk(it_)) hasNext]) {
     return false;
   }
-  OrgApacheLuceneUtilAttributeSource_State *state = [it_ next];
+  OrgApacheLuceneUtilAttributeSource_State *state = [((id<JavaUtilIterator>) nil_chk(it_)) next];
   [self restoreStateWithOrgApacheLuceneUtilAttributeSource_State:state];
   return true;
 }
@@ -307,9 +314,11 @@ void OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream_initWithOrgA
 }
 
 OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream *new_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream_initWithOrgApacheLuceneUtilAttributeSource_withOrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter_(OrgApacheLuceneUtilAttributeSource *source, OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter *filter) {
-  OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream *self = [OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream alloc];
-  OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream_initWithOrgApacheLuceneUtilAttributeSource_withOrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter_(self, source, filter);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream, initWithOrgApacheLuceneUtilAttributeSource_withOrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter_, source, filter)
+}
+
+OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream *create_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream_initWithOrgApacheLuceneUtilAttributeSource_withOrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter_(OrgApacheLuceneUtilAttributeSource *source, OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter *filter) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream, initWithOrgApacheLuceneUtilAttributeSource_withOrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter_, source, filter)
 }
 
 jboolean OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream_acceptWithOrgApacheLuceneUtilAttributeSource_(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream *self, OrgApacheLuceneUtilAttributeSource *source) {
@@ -318,7 +327,7 @@ jboolean OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream_acceptWi
 
 void OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream_addStateWithOrgApacheLuceneUtilAttributeSource_State_(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream *self, OrgApacheLuceneUtilAttributeSource_State *state) {
   if (self->it_ != nil) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"The tee must be consumed before sinks are consumed.") autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"The tee must be consumed before sinks are consumed.");
   }
   [((id<JavaUtilList>) nil_chk(self->cachedStates_)) addWithId:state];
 }
@@ -358,9 +367,11 @@ void OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_$1_init(OrgApacheLuceneAnaly
 }
 
 OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_$1 *new_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_$1_init() {
-  OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_$1 *self = [OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_$1 alloc];
-  OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_$1_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_$1, init)
+}
+
+OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_$1 *create_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_$1_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_$1, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_$1)

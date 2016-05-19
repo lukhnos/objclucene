@@ -23,7 +23,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "getWithNSString:", "get", "Lorg.lukhnos.portmobile.file.Path;", 0x9, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "Paths", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgLukhnosPortmobileFilePaths = { 2, "Paths", "org.lukhnos.portmobile.file", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgLukhnosPortmobileFilePaths;
@@ -33,7 +33,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 OrgLukhnosPortmobileFilePath *OrgLukhnosPortmobileFilePaths_getWithNSString_(NSString *path) {
   OrgLukhnosPortmobileFilePaths_initialize();
-  return [new_OrgLukhnosPortmobileFilePath_initWithNSString_(path) autorelease];
+  return create_OrgLukhnosPortmobileFilePath_initWithNSString_(path);
 }
 
 void OrgLukhnosPortmobileFilePaths_init(OrgLukhnosPortmobileFilePaths *self) {
@@ -41,9 +41,11 @@ void OrgLukhnosPortmobileFilePaths_init(OrgLukhnosPortmobileFilePaths *self) {
 }
 
 OrgLukhnosPortmobileFilePaths *new_OrgLukhnosPortmobileFilePaths_init() {
-  OrgLukhnosPortmobileFilePaths *self = [OrgLukhnosPortmobileFilePaths alloc];
-  OrgLukhnosPortmobileFilePaths_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgLukhnosPortmobileFilePaths, init)
+}
+
+OrgLukhnosPortmobileFilePaths *create_OrgLukhnosPortmobileFilePaths_init() {
+  J2OBJC_CREATE_IMPL(OrgLukhnosPortmobileFilePaths, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileFilePaths)

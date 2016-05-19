@@ -89,6 +89,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSortingMergePolicy_Sorti
 
 __attribute__((unused)) static OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_$1 *new_OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_$1_initWithOrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_withOrgApacheLuceneUtilPackedPackedLongValues_withOrgApacheLuceneIndexMergeState_(OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge *outer$, OrgApacheLuceneUtilPackedPackedLongValues *capture$0, OrgApacheLuceneIndexMergeState *capture$1) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_$1 *create_OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_$1_initWithOrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_withOrgApacheLuceneUtilPackedPackedLongValues_withOrgApacheLuceneIndexMergeState_(OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge *outer$, OrgApacheLuceneUtilPackedPackedLongValues *capture$0, OrgApacheLuceneIndexMergeState *capture$1);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_$1)
 
 @interface OrgApacheLuceneIndexSortingMergePolicy_SortingMergeSpecification () {
@@ -100,9 +102,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerg
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSortingMergePolicy_SortingMergeSpecification, this$0_, OrgApacheLuceneIndexSortingMergePolicy *)
 
-NSString *OrgApacheLuceneIndexSortingMergePolicy_SORTER_ID_PROP_ = @"sorter";
+NSString *OrgApacheLuceneIndexSortingMergePolicy_SORTER_ID_PROP = @"sorter";
 
 @implementation OrgApacheLuceneIndexSortingMergePolicy
+
++ (NSString *)SORTER_ID_PROP {
+  return OrgApacheLuceneIndexSortingMergePolicy_SORTER_ID_PROP;
+}
 
 + (jboolean)isSortedWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader
                          withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort {
@@ -128,10 +134,10 @@ NSString *OrgApacheLuceneIndexSortingMergePolicy_SORTER_ID_PROP_ = @"sorter";
   return sort_;
 }
 
-- (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findMergesWithOrgApacheLuceneIndexMergeTriggerEnum:(OrgApacheLuceneIndexMergeTriggerEnum *)mergeTrigger
-                                                                      withOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)segmentInfos
-                                                                       withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer {
-  return OrgApacheLuceneIndexSortingMergePolicy_sortedMergeSpecificationWithOrgApacheLuceneIndexMergePolicy_MergeSpecification_withOrgApacheLuceneUtilInfoStream_(self, [((OrgApacheLuceneIndexMergePolicy *) nil_chk(in_)) findMergesWithOrgApacheLuceneIndexMergeTriggerEnum:mergeTrigger withOrgApacheLuceneIndexSegmentInfos:segmentInfos withOrgApacheLuceneIndexIndexWriter:writer], ((OrgApacheLuceneIndexIndexWriter *) nil_chk(writer))->infoStream_);
+- (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findMergesWithOrgApacheLuceneIndexMergeTrigger:(OrgApacheLuceneIndexMergeTrigger *)mergeTrigger
+                                                                  withOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)segmentInfos
+                                                                   withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer {
+  return OrgApacheLuceneIndexSortingMergePolicy_sortedMergeSpecificationWithOrgApacheLuceneIndexMergePolicy_MergeSpecification_withOrgApacheLuceneUtilInfoStream_(self, [((OrgApacheLuceneIndexMergePolicy *) nil_chk(in_)) findMergesWithOrgApacheLuceneIndexMergeTrigger:mergeTrigger withOrgApacheLuceneIndexSegmentInfos:segmentInfos withOrgApacheLuceneIndexIndexWriter:writer], ((OrgApacheLuceneIndexIndexWriter *) nil_chk(writer))->infoStream_);
 }
 
 - (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findForcedMergesWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)segmentInfos
@@ -175,15 +181,15 @@ NSString *OrgApacheLuceneIndexSortingMergePolicy_SORTER_ID_PROP_ = @"sorter";
     { "sortedMergeSpecificationWithOrgApacheLuceneIndexMergePolicy_MergeSpecification:withOrgApacheLuceneUtilInfoStream:", "sortedMergeSpecification", "Lorg.apache.lucene.index.MergePolicy$MergeSpecification;", 0x2, NULL, NULL },
     { "initWithOrgApacheLuceneIndexMergePolicy:withOrgApacheLuceneSearchSort:", "SortingMergePolicy", NULL, 0x1, NULL, NULL },
     { "getSort", NULL, "Lorg.apache.lucene.search.Sort;", 0x1, NULL, NULL },
-    { "findMergesWithOrgApacheLuceneIndexMergeTriggerEnum:withOrgApacheLuceneIndexSegmentInfos:withOrgApacheLuceneIndexIndexWriter:", "findMerges", "Lorg.apache.lucene.index.MergePolicy$MergeSpecification;", 0x1, "Ljava.io.IOException;", NULL },
-    { "findForcedMergesWithOrgApacheLuceneIndexSegmentInfos:withInt:withJavaUtilMap:withOrgApacheLuceneIndexIndexWriter:", "findForcedMerges", "Lorg.apache.lucene.index.MergePolicy$MergeSpecification;", 0x1, "Ljava.io.IOException;", NULL },
+    { "findMergesWithOrgApacheLuceneIndexMergeTrigger:withOrgApacheLuceneIndexSegmentInfos:withOrgApacheLuceneIndexIndexWriter:", "findMerges", "Lorg.apache.lucene.index.MergePolicy$MergeSpecification;", 0x1, "Ljava.io.IOException;", NULL },
+    { "findForcedMergesWithOrgApacheLuceneIndexSegmentInfos:withInt:withJavaUtilMap:withOrgApacheLuceneIndexIndexWriter:", "findForcedMerges", "Lorg.apache.lucene.index.MergePolicy$MergeSpecification;", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/SegmentInfos;ILjava/util/Map<Lorg/apache/lucene/index/SegmentCommitInfo;Ljava/lang/Boolean;>;Lorg/apache/lucene/index/IndexWriter;)Lorg/apache/lucene/index/MergePolicy$MergeSpecification;" },
     { "findForcedDeletesMergesWithOrgApacheLuceneIndexSegmentInfos:withOrgApacheLuceneIndexIndexWriter:", "findForcedDeletesMerges", "Lorg.apache.lucene.index.MergePolicy$MergeSpecification;", 0x1, "Ljava.io.IOException;", NULL },
     { "useCompoundFileWithOrgApacheLuceneIndexSegmentInfos:withOrgApacheLuceneIndexSegmentCommitInfo:withOrgApacheLuceneIndexIndexWriter:", "useCompoundFile", "Z", 0x1, "Ljava.io.IOException;", NULL },
     { "sizeWithOrgApacheLuceneIndexSegmentCommitInfo:withOrgApacheLuceneIndexIndexWriter:", "size", "J", 0x4, "Ljava.io.IOException;", NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "SORTER_ID_PROP_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneIndexSortingMergePolicy_SORTER_ID_PROP_, NULL, .constantValue.asLong = 0 },
+    { "SORTER_ID_PROP", "SORTER_ID_PROP", 0x19, "Ljava.lang.String;", &OrgApacheLuceneIndexSortingMergePolicy_SORTER_ID_PROP, NULL, .constantValue.asLong = 0 },
     { "in_", NULL, 0x10, "Lorg.apache.lucene.index.MergePolicy;", NULL, NULL, .constantValue.asLong = 0 },
     { "sorter_", NULL, 0x10, "Lorg.apache.lucene.index.Sorter;", NULL, NULL, .constantValue.asLong = 0 },
     { "sort_", NULL, 0x10, "Lorg.apache.lucene.search.Sort;", NULL, NULL, .constantValue.asLong = 0 },
@@ -207,10 +213,10 @@ jboolean OrgApacheLuceneIndexSortingMergePolicy_isSortedWithOrgApacheLuceneIndex
 NSString *OrgApacheLuceneIndexSortingMergePolicy_getSortDescriptionWithOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneIndexLeafReader *reader) {
   OrgApacheLuceneIndexSortingMergePolicy_initialize();
   if ([reader isKindOfClass:[OrgApacheLuceneIndexSegmentReader class]]) {
-    OrgApacheLuceneIndexSegmentReader *segReader = (OrgApacheLuceneIndexSegmentReader *) check_class_cast(reader, [OrgApacheLuceneIndexSegmentReader class]);
+    OrgApacheLuceneIndexSegmentReader *segReader = (OrgApacheLuceneIndexSegmentReader *) cast_chk(reader, [OrgApacheLuceneIndexSegmentReader class]);
     id<JavaUtilMap> diagnostics = [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk([((OrgApacheLuceneIndexSegmentReader *) nil_chk(segReader)) getSegmentInfo]))->info_)) getDiagnostics];
     if (diagnostics != nil) {
-      return [diagnostics getWithId:OrgApacheLuceneIndexSortingMergePolicy_SORTER_ID_PROP_];
+      return [diagnostics getWithId:OrgApacheLuceneIndexSortingMergePolicy_SORTER_ID_PROP];
     }
   }
   else if ([reader isKindOfClass:[OrgApacheLuceneIndexFilterLeafReader class]]) {
@@ -223,8 +229,8 @@ OrgApacheLuceneIndexMergePolicy_MergeSpecification *OrgApacheLuceneIndexSortingM
   if (specification == nil) {
     return nil;
   }
-  OrgApacheLuceneIndexMergePolicy_MergeSpecification *sortingSpec = [new_OrgApacheLuceneIndexSortingMergePolicy_SortingMergeSpecification_initWithOrgApacheLuceneIndexSortingMergePolicy_withOrgApacheLuceneUtilInfoStream_(self, infoStream) autorelease];
-  for (OrgApacheLuceneIndexMergePolicy_OneMerge * __strong merge in nil_chk(((OrgApacheLuceneIndexMergePolicy_MergeSpecification *) nil_chk(specification))->merges_)) {
+  OrgApacheLuceneIndexMergePolicy_MergeSpecification *sortingSpec = create_OrgApacheLuceneIndexSortingMergePolicy_SortingMergeSpecification_initWithOrgApacheLuceneIndexSortingMergePolicy_withOrgApacheLuceneUtilInfoStream_(self, infoStream);
+  for (OrgApacheLuceneIndexMergePolicy_OneMerge * __strong merge in nil_chk(specification->merges_)) {
     [sortingSpec addWithOrgApacheLuceneIndexMergePolicy_OneMerge:merge];
   }
   return sortingSpec;
@@ -238,9 +244,11 @@ void OrgApacheLuceneIndexSortingMergePolicy_initWithOrgApacheLuceneIndexMergePol
 }
 
 OrgApacheLuceneIndexSortingMergePolicy *new_OrgApacheLuceneIndexSortingMergePolicy_initWithOrgApacheLuceneIndexMergePolicy_withOrgApacheLuceneSearchSort_(OrgApacheLuceneIndexMergePolicy *inArg, OrgApacheLuceneSearchSort *sort) {
-  OrgApacheLuceneIndexSortingMergePolicy *self = [OrgApacheLuceneIndexSortingMergePolicy alloc];
-  OrgApacheLuceneIndexSortingMergePolicy_initWithOrgApacheLuceneIndexMergePolicy_withOrgApacheLuceneSearchSort_(self, inArg, sort);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSortingMergePolicy, initWithOrgApacheLuceneIndexMergePolicy_withOrgApacheLuceneSearchSort_, inArg, sort)
+}
+
+OrgApacheLuceneIndexSortingMergePolicy *create_OrgApacheLuceneIndexSortingMergePolicy_initWithOrgApacheLuceneIndexMergePolicy_withOrgApacheLuceneSearchSort_(OrgApacheLuceneIndexMergePolicy *inArg, OrgApacheLuceneSearchSort *sort) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSortingMergePolicy, initWithOrgApacheLuceneIndexMergePolicy_withOrgApacheLuceneSearchSort_, inArg, sort)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortingMergePolicy)
@@ -267,10 +275,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortingMergePolicy)
         [infoStream_ messageWithNSString:@"SMP" withNSString:JreStrcat("$@C$", @"seg=", leaf, ' ', sortDescription)];
       }
     }
-    id<JavaUtilList> wrapped = [new_JavaUtilArrayList_initWithInt_([((id<JavaUtilList>) nil_chk(unsortedReaders_)) size]) autorelease];
-    for (OrgApacheLuceneIndexLeafReader * __strong leaf in unsortedReaders_) {
+    id<JavaUtilList> wrapped = create_JavaUtilArrayList_initWithInt_([((id<JavaUtilList>) nil_chk(unsortedReaders_)) size]);
+    for (OrgApacheLuceneIndexLeafReader * __strong leaf in nil_chk(unsortedReaders_)) {
       if ([leaf isKindOfClass:[OrgApacheLuceneIndexSegmentReader class]]) {
-        leaf = [new_OrgApacheLuceneIndexMergeReaderWrapper_initWithOrgApacheLuceneIndexSegmentReader_((OrgApacheLuceneIndexSegmentReader *) check_class_cast(leaf, [OrgApacheLuceneIndexSegmentReader class])) autorelease];
+        leaf = create_OrgApacheLuceneIndexMergeReaderWrapper_initWithOrgApacheLuceneIndexSegmentReader_((OrgApacheLuceneIndexSegmentReader *) cast_chk(leaf, [OrgApacheLuceneIndexSegmentReader class]));
       }
       [wrapped addWithId:leaf];
     }
@@ -279,8 +287,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortingMergePolicy)
       atomicView = [wrapped getWithInt:0];
     }
     else {
-      OrgApacheLuceneIndexCompositeReader *multiReader = [new_OrgApacheLuceneIndexMultiReader_initWithOrgApacheLuceneIndexIndexReaderArray_([wrapped toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[wrapped size] type:OrgApacheLuceneIndexLeafReader_class_()]]) autorelease];
-      atomicView = [new_OrgApacheLuceneIndexSlowCompositeReaderWrapper_initWithOrgApacheLuceneIndexCompositeReader_withBoolean_(multiReader, true) autorelease];
+      OrgApacheLuceneIndexCompositeReader *multiReader = create_OrgApacheLuceneIndexMultiReader_initWithOrgApacheLuceneIndexIndexReaderArray_([wrapped toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[wrapped size] type:OrgApacheLuceneIndexLeafReader_class_()]]);
+      atomicView = create_OrgApacheLuceneIndexSlowCompositeReaderWrapper_initWithOrgApacheLuceneIndexCompositeReader_withBoolean_(multiReader, true);
     }
     JreStrongAssign(&docMap_, [((OrgApacheLuceneIndexSorter *) nil_chk(this$0_->sorter_)) sortWithOrgApacheLuceneIndexLeafReader:atomicView]);
     JreStrongAssign(&sortedView_, OrgApacheLuceneIndexSortingLeafReader_wrapWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneIndexSorter_DocMap_(atomicView, docMap_));
@@ -301,7 +309,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortingMergePolicy)
 
 - (void)setMergeInfoWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)info {
   id<JavaUtilMap> diagnostics = [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info))->info_)) getDiagnostics];
-  [((id<JavaUtilMap>) nil_chk(diagnostics)) putWithId:OrgApacheLuceneIndexSortingMergePolicy_SORTER_ID_PROP_ withId:[((OrgApacheLuceneIndexSorter *) nil_chk(this$0_->sorter_)) getID]];
+  [((id<JavaUtilMap>) nil_chk(diagnostics)) putWithId:OrgApacheLuceneIndexSortingMergePolicy_SORTER_ID_PROP withId:[((OrgApacheLuceneIndexSorter *) nil_chk(this$0_->sorter_)) getID]];
   [super setMergeInfoWithOrgApacheLuceneIndexSegmentCommitInfo:info];
 }
 
@@ -311,14 +319,14 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortingMergePolicy)
 
 - (OrgApacheLuceneIndexMergePolicy_DocMap *)getDocMapWithOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState {
   if (unsortedReaders_ == nil) {
-    @throw [new_JavaLangIllegalStateException_init() autorelease];
+    @throw create_JavaLangIllegalStateException_init();
   }
   if (docMap_ == nil) {
     return [super getDocMapWithOrgApacheLuceneIndexMergeState:mergeState];
   }
   JreAssert((((IOSObjectArray *) nil_chk(((OrgApacheLuceneIndexMergeState *) nil_chk(mergeState))->docMaps_))->size_ == 1), (@"org/apache/lucene/index/SortingMergePolicy.java:156 condition failed: assert mergeState.docMaps.length == 1;"));
   OrgApacheLuceneUtilPackedPackedLongValues *deletes = OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_getDeletesWithJavaUtilList_(self, unsortedReaders_);
-  return [new_OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_$1_initWithOrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_withOrgApacheLuceneUtilPackedPackedLongValues_withOrgApacheLuceneIndexMergeState_(self, deletes, mergeState) autorelease];
+  return create_OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_$1_initWithOrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_withOrgApacheLuceneUtilPackedPackedLongValues_withOrgApacheLuceneIndexMergeState_(self, deletes, mergeState);
 }
 
 - (void)dealloc {
@@ -332,10 +340,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortingMergePolicy)
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexSortingMergePolicy:withJavaUtilList:withOrgApacheLuceneUtilInfoStream:", "SortingOneMerge", NULL, 0x0, NULL, NULL },
-    { "getMergeReaders", NULL, "Ljava.util.List;", 0x1, "Ljava.io.IOException;", NULL },
+    { "initWithOrgApacheLuceneIndexSortingMergePolicy:withJavaUtilList:withOrgApacheLuceneUtilInfoStream:", "SortingOneMerge", NULL, 0x0, NULL, "(Lorg/apache/lucene/index/SortingMergePolicy;Ljava/util/List<Lorg/apache/lucene/index/SegmentCommitInfo;>;Lorg/apache/lucene/util/InfoStream;)V" },
+    { "getMergeReaders", NULL, "Ljava.util.List;", 0x1, "Ljava.io.IOException;", "()Ljava/util/List<Lorg/apache/lucene/index/CodecReader;>;" },
     { "setMergeInfoWithOrgApacheLuceneIndexSegmentCommitInfo:", "setMergeInfo", "V", 0x1, NULL, NULL },
-    { "getDeletesWithJavaUtilList:", "getDeletes", "Lorg.apache.lucene.util.packed.PackedLongValues;", 0x2, NULL, NULL },
+    { "getDeletesWithJavaUtilList:", "getDeletes", "Lorg.apache.lucene.util.packed.PackedLongValues;", 0x2, NULL, "(Ljava/util/List<Lorg/apache/lucene/index/CodecReader;>;)Lorg/apache/lucene/util/packed/PackedLongValues;" },
     { "getDocMapWithOrgApacheLuceneIndexMergeState:", "getDocMap", "Lorg.apache.lucene.index.MergePolicy$DocMap;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -358,9 +366,11 @@ void OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_initWithOrgApacheLuc
 }
 
 OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge *new_OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_initWithOrgApacheLuceneIndexSortingMergePolicy_withJavaUtilList_withOrgApacheLuceneUtilInfoStream_(OrgApacheLuceneIndexSortingMergePolicy *outer$, id<JavaUtilList> segments, OrgApacheLuceneUtilInfoStream *infoStream) {
-  OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge *self = [OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge alloc];
-  OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_initWithOrgApacheLuceneIndexSortingMergePolicy_withJavaUtilList_withOrgApacheLuceneUtilInfoStream_(self, outer$, segments, infoStream);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge, initWithOrgApacheLuceneIndexSortingMergePolicy_withJavaUtilList_withOrgApacheLuceneUtilInfoStream_, outer$, segments, infoStream)
+}
+
+OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge *create_OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_initWithOrgApacheLuceneIndexSortingMergePolicy_withJavaUtilList_withOrgApacheLuceneUtilInfoStream_(OrgApacheLuceneIndexSortingMergePolicy *outer$, id<JavaUtilList> segments, OrgApacheLuceneUtilInfoStream *infoStream) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge, initWithOrgApacheLuceneIndexSortingMergePolicy_withJavaUtilList_withOrgApacheLuceneUtilInfoStream_, outer$, segments, infoStream)
 }
 
 OrgApacheLuceneUtilPackedPackedLongValues *OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_getDeletesWithJavaUtilList_(OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge *self, id<JavaUtilList> readers) {
@@ -430,9 +440,11 @@ void OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_$1_initWithOrgApache
 }
 
 OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_$1 *new_OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_$1_initWithOrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_withOrgApacheLuceneUtilPackedPackedLongValues_withOrgApacheLuceneIndexMergeState_(OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge *outer$, OrgApacheLuceneUtilPackedPackedLongValues *capture$0, OrgApacheLuceneIndexMergeState *capture$1) {
-  OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_$1 *self = [OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_$1 alloc];
-  OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_$1_initWithOrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_withOrgApacheLuceneUtilPackedPackedLongValues_withOrgApacheLuceneIndexMergeState_(self, outer$, capture$0, capture$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_$1, initWithOrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_withOrgApacheLuceneUtilPackedPackedLongValues_withOrgApacheLuceneIndexMergeState_, outer$, capture$0, capture$1)
+}
+
+OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_$1 *create_OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_$1_initWithOrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_withOrgApacheLuceneUtilPackedPackedLongValues_withOrgApacheLuceneIndexMergeState_(OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge *outer$, OrgApacheLuceneUtilPackedPackedLongValues *capture$0, OrgApacheLuceneIndexMergeState *capture$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_$1, initWithOrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_withOrgApacheLuceneUtilPackedPackedLongValues_withOrgApacheLuceneIndexMergeState_, outer$, capture$0, capture$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_$1)
@@ -446,7 +458,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortingMergePolicy_SortingO
 }
 
 - (void)addWithOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_OneMerge *)merge {
-  [super addWithOrgApacheLuceneIndexMergePolicy_OneMerge:[new_OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_initWithOrgApacheLuceneIndexSortingMergePolicy_withJavaUtilList_withOrgApacheLuceneUtilInfoStream_(this$0_, ((OrgApacheLuceneIndexMergePolicy_OneMerge *) nil_chk(merge))->segments_, infoStream_) autorelease]];
+  [super addWithOrgApacheLuceneIndexMergePolicy_OneMerge:create_OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerge_initWithOrgApacheLuceneIndexSortingMergePolicy_withJavaUtilList_withOrgApacheLuceneUtilInfoStream_(this$0_, ((OrgApacheLuceneIndexMergePolicy_OneMerge *) nil_chk(merge))->segments_, infoStream_)];
 }
 
 - (NSString *)segStringWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir {
@@ -482,9 +494,11 @@ void OrgApacheLuceneIndexSortingMergePolicy_SortingMergeSpecification_initWithOr
 }
 
 OrgApacheLuceneIndexSortingMergePolicy_SortingMergeSpecification *new_OrgApacheLuceneIndexSortingMergePolicy_SortingMergeSpecification_initWithOrgApacheLuceneIndexSortingMergePolicy_withOrgApacheLuceneUtilInfoStream_(OrgApacheLuceneIndexSortingMergePolicy *outer$, OrgApacheLuceneUtilInfoStream *infoStream) {
-  OrgApacheLuceneIndexSortingMergePolicy_SortingMergeSpecification *self = [OrgApacheLuceneIndexSortingMergePolicy_SortingMergeSpecification alloc];
-  OrgApacheLuceneIndexSortingMergePolicy_SortingMergeSpecification_initWithOrgApacheLuceneIndexSortingMergePolicy_withOrgApacheLuceneUtilInfoStream_(self, outer$, infoStream);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSortingMergePolicy_SortingMergeSpecification, initWithOrgApacheLuceneIndexSortingMergePolicy_withOrgApacheLuceneUtilInfoStream_, outer$, infoStream)
+}
+
+OrgApacheLuceneIndexSortingMergePolicy_SortingMergeSpecification *create_OrgApacheLuceneIndexSortingMergePolicy_SortingMergeSpecification_initWithOrgApacheLuceneIndexSortingMergePolicy_withOrgApacheLuceneUtilInfoStream_(OrgApacheLuceneIndexSortingMergePolicy *outer$, OrgApacheLuceneUtilInfoStream *infoStream) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSortingMergePolicy_SortingMergeSpecification, initWithOrgApacheLuceneIndexSortingMergePolicy_withOrgApacheLuceneUtilInfoStream_, outer$, infoStream)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortingMergePolicy_SortingMergeSpecification)

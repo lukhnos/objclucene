@@ -5,27 +5,34 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_INCLUDE_ALL")
-#if OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_RESTRICT
-#define OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightSimpleHTMLFormatter")
+#ifdef RESTRICT_OrgApacheLuceneSearchHighlightSimpleHTMLFormatter
+#define INCLUDE_ALL_OrgApacheLuceneSearchHighlightSimpleHTMLFormatter 0
 #else
-#define OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchHighlightSimpleHTMLFormatter 1
 #endif
-#undef OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchHighlightSimpleHTMLFormatter
 
-#if !defined (_OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_) && (OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_INCLUDE_ALL || OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_INCLUDE)
-#define _OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_
+#if !defined (OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightSimpleHTMLFormatter || defined(INCLUDE_OrgApacheLuceneSearchHighlightSimpleHTMLFormatter))
+#define OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_
 
-#define OrgApacheLuceneSearchHighlightFormatter_RESTRICT 1
-#define OrgApacheLuceneSearchHighlightFormatter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchHighlightFormatter 1
+#define INCLUDE_OrgApacheLuceneSearchHighlightFormatter 1
 #include "org/apache/lucene/search/highlight/Formatter.h"
 
 @class OrgApacheLuceneSearchHighlightTokenGroup;
 
+/*!
+ @brief Simple <code>Formatter</code> implementation to highlight terms with a pre and
+ post tag.
+ */
 @interface OrgApacheLuceneSearchHighlightSimpleHTMLFormatter : NSObject < OrgApacheLuceneSearchHighlightFormatter >
 
 #pragma mark Public
 
+/*!
+ @brief Default constructor uses HTML: &lt;B&gt; tags to markup terms.
+ */
 - (instancetype)init;
 
 - (instancetype)initWithNSString:(NSString *)preTag
@@ -42,12 +49,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_initWit
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightSimpleHTMLFormatter *new_OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_initWithNSString_withNSString_(NSString *preTag, NSString *postTag) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightSimpleHTMLFormatter *create_OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_initWithNSString_withNSString_(NSString *preTag, NSString *postTag);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_init(OrgApacheLuceneSearchHighlightSimpleHTMLFormatter *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightSimpleHTMLFormatter *new_OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightSimpleHTMLFormatter *create_OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_init();
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightSimpleHTMLFormatter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightSimpleHTMLFormatter")

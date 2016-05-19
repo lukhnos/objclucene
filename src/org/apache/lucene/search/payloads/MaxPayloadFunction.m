@@ -43,7 +43,7 @@
 - (jboolean)isEqual:(id)obj {
   if (self == obj) return true;
   if (obj == nil) return false;
-  if ([self getClass] != [nil_chk(obj) getClass]) return false;
+  if ([self getClass] != (id) [obj getClass]) return false;
   return true;
 }
 
@@ -60,7 +60,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "docScoreWithInt:withNSString:withInt:withFloat:", "docScore", "F", 0x1, NULL, NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "MaxPayloadFunction", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneSearchPayloadsMaxPayloadFunction = { 2, "MaxPayloadFunction", "org.apache.lucene.search.payloads", NULL, 0x1, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchPayloadsMaxPayloadFunction;
@@ -73,9 +73,11 @@ void OrgApacheLuceneSearchPayloadsMaxPayloadFunction_init(OrgApacheLuceneSearchP
 }
 
 OrgApacheLuceneSearchPayloadsMaxPayloadFunction *new_OrgApacheLuceneSearchPayloadsMaxPayloadFunction_init() {
-  OrgApacheLuceneSearchPayloadsMaxPayloadFunction *self = [OrgApacheLuceneSearchPayloadsMaxPayloadFunction alloc];
-  OrgApacheLuceneSearchPayloadsMaxPayloadFunction_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchPayloadsMaxPayloadFunction, init)
+}
+
+OrgApacheLuceneSearchPayloadsMaxPayloadFunction *create_OrgApacheLuceneSearchPayloadsMaxPayloadFunction_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchPayloadsMaxPayloadFunction, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPayloadsMaxPayloadFunction)

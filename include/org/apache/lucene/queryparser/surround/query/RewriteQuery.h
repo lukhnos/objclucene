@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserSurroundQueryRewriteQuery_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserSurroundQueryRewriteQuery_RESTRICT
-#define OrgApacheLuceneQueryparserSurroundQueryRewriteQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryRewriteQuery")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserSurroundQueryRewriteQuery
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryRewriteQuery 0
 #else
-#define OrgApacheLuceneQueryparserSurroundQueryRewriteQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryRewriteQuery 1
 #endif
-#undef OrgApacheLuceneQueryparserSurroundQueryRewriteQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserSurroundQueryRewriteQuery
 
-#if !defined (_OrgApacheLuceneQueryparserSurroundQueryRewriteQuery_) && (OrgApacheLuceneQueryparserSurroundQueryRewriteQuery_INCLUDE_ALL || OrgApacheLuceneQueryparserSurroundQueryRewriteQuery_INCLUDE)
-#define _OrgApacheLuceneQueryparserSurroundQueryRewriteQuery_
+#if !defined (OrgApacheLuceneQueryparserSurroundQueryRewriteQuery_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryRewriteQuery || defined(INCLUDE_OrgApacheLuceneQueryparserSurroundQueryRewriteQuery))
+#define OrgApacheLuceneQueryparserSurroundQueryRewriteQuery_
 
-#define OrgApacheLuceneSearchQuery_RESTRICT 1
-#define OrgApacheLuceneSearchQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchQuery 1
+#define INCLUDE_OrgApacheLuceneSearchQuery 1
 #include "org/apache/lucene/search/Query.h"
 
 @class OrgApacheLuceneIndexIndexReader;
@@ -61,4 +61,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQueryRewriteQuery)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserSurroundQueryRewriteQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryRewriteQuery")

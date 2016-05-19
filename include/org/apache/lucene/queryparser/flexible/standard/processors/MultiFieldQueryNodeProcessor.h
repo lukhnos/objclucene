@@ -5,24 +5,38 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor_) && (OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor_
+#if !defined (OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor))
+#define OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor_
 
-#define OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_RESTRICT 1
-#define OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl 1
+#define INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl 1
 #include "org/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessorImpl.h"
 
 @protocol JavaUtilList;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 
+/*!
+ @brief This processor is used to expand terms so the query looks for the same term
+ in different fields.
+ It also boosts a query based on its field. <br>
+ <br>
+ This processor looks for every <code>FieldableNode</code> contained in the query
+ node tree. If a <code>FieldableNode</code> is found, it checks if there is a
+ <code>ConfigurationKeys.MULTI_FIELDS</code> defined in the <code>QueryConfigHandler</code>. If
+ there is, the <code>FieldableNode</code> is cloned N times and the clones are
+ added to a <code>BooleanQueryNode</code> together with the original node. N is
+ defined by the number of fields that it will be expanded to. The
+ <code>BooleanQueryNode</code> is returned.
+ - seealso: ConfigurationKeys#MULTI_FIELDS
+ */
 @interface OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor : OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl
 
 #pragma mark Public
@@ -47,8 +61,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardProcessorsMulti
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor *create_OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor")

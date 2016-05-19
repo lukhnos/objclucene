@@ -4,11 +4,13 @@
 //
 
 #include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/Enum.h"
 #include "java/lang/IllegalArgumentException.h"
+#include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/index/Fields.h"
 #include "org/apache/lucene/index/LeafReader.h"
 #include "org/apache/lucene/index/LeafReaderContext.h"
@@ -28,8 +30,8 @@
 
 @interface OrgApacheLuceneSandboxQueriesDuplicateFilter () {
  @public
-  OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum *keepMode_;
-  OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum *processingMode_;
+  OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode *keepMode_;
+  OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode *processingMode_;
   NSString *fieldName_;
 }
 
@@ -41,21 +43,17 @@
 
 @end
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSandboxQueriesDuplicateFilter, keepMode_, OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSandboxQueriesDuplicateFilter, processingMode_, OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneSandboxQueriesDuplicateFilter, keepMode_, OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneSandboxQueriesDuplicateFilter, processingMode_, OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSandboxQueriesDuplicateFilter, fieldName_, NSString *)
 
 __attribute__((unused)) static OrgApacheLuceneSearchDocIdSet *OrgApacheLuceneSandboxQueriesDuplicateFilter_correctBitsWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneUtilBits_(OrgApacheLuceneSandboxQueriesDuplicateFilter *self, OrgApacheLuceneIndexLeafReader *reader, id<OrgApacheLuceneUtilBits> acceptDocs);
 
 __attribute__((unused)) static OrgApacheLuceneSearchDocIdSet *OrgApacheLuceneSandboxQueriesDuplicateFilter_fastBitsWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneUtilBits_(OrgApacheLuceneSandboxQueriesDuplicateFilter *self, OrgApacheLuceneIndexLeafReader *reader, id<OrgApacheLuceneUtilBits> acceptDocs);
 
-__attribute__((unused)) static void OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum_initWithNSString_withInt_(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum *self, NSString *__name, jint __ordinal);
+__attribute__((unused)) static void OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_initWithNSString_withInt_(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode *self, NSString *__name, jint __ordinal);
 
-__attribute__((unused)) static OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum *new_OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static void OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum_initWithNSString_withInt_(OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum *self, NSString *__name, jint __ordinal);
-
-__attribute__((unused)) static OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum *new_OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
+__attribute__((unused)) static void OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_initWithNSString_withInt_(OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode *self, NSString *__name, jint __ordinal);
 
 @implementation OrgApacheLuceneSandboxQueriesDuplicateFilter
 
@@ -65,15 +63,15 @@ __attribute__((unused)) static OrgApacheLuceneSandboxQueriesDuplicateFilter_Proc
 }
 
 - (instancetype)initWithNSString:(NSString *)fieldName
-withOrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum:(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum *)keepMode
-withOrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum:(OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum *)processingMode {
-  OrgApacheLuceneSandboxQueriesDuplicateFilter_initWithNSString_withOrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum_withOrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum_(self, fieldName, keepMode, processingMode);
+withOrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode:(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode *)keepMode
+withOrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode:(OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode *)processingMode {
+  OrgApacheLuceneSandboxQueriesDuplicateFilter_initWithNSString_withOrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_withOrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_(self, fieldName, keepMode, processingMode);
   return self;
 }
 
 - (OrgApacheLuceneSearchDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                             withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs {
-  if (processingMode_ == JreLoadStatic(OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum, PM_FAST_INVALIDATION)) {
+  if (processingMode_ == JreLoadEnum(OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode, PM_FAST_INVALIDATION)) {
     return OrgApacheLuceneSandboxQueriesDuplicateFilter_fastBitsWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneUtilBits_(self, [((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader], acceptDocs);
   }
   else {
@@ -99,11 +97,11 @@ withOrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum:(OrgApacheLu
   JreStrongAssign(&self->fieldName_, fieldName);
 }
 
-- (OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum *)getKeepMode {
+- (OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode *)getKeepMode {
   return keepMode_;
 }
 
-- (void)setKeepModeWithOrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum:(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum *)keepMode {
+- (void)setKeepModeWithOrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode:(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode *)keepMode {
   JreStrongAssign(&self->keepMode_, keepMode);
 }
 
@@ -114,28 +112,32 @@ withOrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum:(OrgApacheLu
   if ([super isEqual:obj] == false) {
     return false;
   }
-  OrgApacheLuceneSandboxQueriesDuplicateFilter *other = (OrgApacheLuceneSandboxQueriesDuplicateFilter *) check_class_cast(obj, [OrgApacheLuceneSandboxQueriesDuplicateFilter class]);
+  OrgApacheLuceneSandboxQueriesDuplicateFilter *other = (OrgApacheLuceneSandboxQueriesDuplicateFilter *) cast_chk(obj, [OrgApacheLuceneSandboxQueriesDuplicateFilter class]);
   return keepMode_ == ((OrgApacheLuceneSandboxQueriesDuplicateFilter *) nil_chk(other))->keepMode_ && processingMode_ == other->processingMode_ && fieldName_ != nil && [fieldName_ isEqual:other->fieldName_];
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
-  return JreStrcat("$$$$$$C", @"DuplicateFilter(fieldName=", fieldName_, @",keepMode=", (keepMode_ == JreLoadStatic(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum, KM_USE_FIRST_OCCURRENCE) ? @"first" : @"last"), @",processingMode=", (processingMode_ == JreLoadStatic(OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum, PM_FAST_INVALIDATION) ? @"fast" : @"full"), ')');
+  return JreStrcat("$$$$$$C", @"DuplicateFilter(fieldName=", fieldName_, @",keepMode=", (keepMode_ == JreLoadEnum(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode, KM_USE_FIRST_OCCURRENCE) ? @"first" : @"last"), @",processingMode=", (processingMode_ == JreLoadEnum(OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode, PM_FAST_INVALIDATION) ? @"fast" : @"full"), ')');
 }
 
 - (NSUInteger)hash {
   jint hash_ = ((jint) [super hash]);
-  hash_ = 31 * hash_ + ((jint) [((OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum *) nil_chk(keepMode_)) hash]);
-  hash_ = 31 * hash_ + ((jint) [((OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum *) nil_chk(processingMode_)) hash]);
+  hash_ = 31 * hash_ + ((jint) [((OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode *) nil_chk(keepMode_)) hash]);
+  hash_ = 31 * hash_ + ((jint) [((OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode *) nil_chk(processingMode_)) hash]);
   hash_ = 31 * hash_ + ((jint) [((NSString *) nil_chk(fieldName_)) hash]);
   return hash_;
 }
 
-- (OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum *)getProcessingMode {
+- (OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode *)getProcessingMode {
   return processingMode_;
 }
 
-- (void)setProcessingModeWithOrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum:(OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum *)processingMode {
+- (void)setProcessingModeWithOrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode:(OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode *)processingMode {
   JreStrongAssign(&self->processingMode_, processingMode);
+}
+
++ (IOSObjectArray *)__annotations {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 - (void)dealloc {
@@ -145,26 +147,22 @@ withOrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum:(OrgApacheLu
   [super dealloc];
 }
 
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithNSString:", "DuplicateFilter", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withOrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum:withOrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum:", "DuplicateFilter", NULL, 0x1, NULL, NULL },
+    { "initWithNSString:withOrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode:withOrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode:", "DuplicateFilter", NULL, 0x1, NULL, NULL },
     { "getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneUtilBits:", "getDocIdSet", "Lorg.apache.lucene.search.DocIdSet;", 0x1, "Ljava.io.IOException;", NULL },
     { "correctBitsWithOrgApacheLuceneIndexLeafReader:withOrgApacheLuceneUtilBits:", "correctBits", "Lorg.apache.lucene.search.DocIdSet;", 0x2, "Ljava.io.IOException;", NULL },
     { "fastBitsWithOrgApacheLuceneIndexLeafReader:withOrgApacheLuceneUtilBits:", "fastBits", "Lorg.apache.lucene.search.DocIdSet;", 0x2, "Ljava.io.IOException;", NULL },
     { "getFieldName", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
     { "setFieldNameWithNSString:", "setFieldName", "V", 0x1, NULL, NULL },
     { "getKeepMode", NULL, "Lorg.apache.lucene.sandbox.queries.DuplicateFilter$KeepMode;", 0x1, NULL, NULL },
-    { "setKeepModeWithOrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum:", "setKeepMode", "V", 0x1, NULL, NULL },
+    { "setKeepModeWithOrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode:", "setKeepMode", "V", 0x1, NULL, NULL },
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
     { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
     { "getProcessingMode", NULL, "Lorg.apache.lucene.sandbox.queries.DuplicateFilter$ProcessingMode;", 0x1, NULL, NULL },
-    { "setProcessingModeWithOrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum:", "setProcessingMode", "V", 0x1, NULL, NULL },
+    { "setProcessingModeWithOrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode:", "setProcessingMode", "V", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "keepMode_", NULL, 0x2, "Lorg.apache.lucene.sandbox.queries.DuplicateFilter$KeepMode;", NULL, NULL, .constantValue.asLong = 0 },
@@ -179,30 +177,34 @@ withOrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum:(OrgApacheLu
 @end
 
 void OrgApacheLuceneSandboxQueriesDuplicateFilter_initWithNSString_(OrgApacheLuceneSandboxQueriesDuplicateFilter *self, NSString *fieldName) {
-  OrgApacheLuceneSandboxQueriesDuplicateFilter_initWithNSString_withOrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum_withOrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum_(self, fieldName, JreLoadStatic(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum, KM_USE_LAST_OCCURRENCE), JreLoadStatic(OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum, PM_FULL_VALIDATION));
+  OrgApacheLuceneSandboxQueriesDuplicateFilter_initWithNSString_withOrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_withOrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_(self, fieldName, JreLoadEnum(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode, KM_USE_LAST_OCCURRENCE), JreLoadEnum(OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode, PM_FULL_VALIDATION));
 }
 
 OrgApacheLuceneSandboxQueriesDuplicateFilter *new_OrgApacheLuceneSandboxQueriesDuplicateFilter_initWithNSString_(NSString *fieldName) {
-  OrgApacheLuceneSandboxQueriesDuplicateFilter *self = [OrgApacheLuceneSandboxQueriesDuplicateFilter alloc];
-  OrgApacheLuceneSandboxQueriesDuplicateFilter_initWithNSString_(self, fieldName);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSandboxQueriesDuplicateFilter, initWithNSString_, fieldName)
 }
 
-void OrgApacheLuceneSandboxQueriesDuplicateFilter_initWithNSString_withOrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum_withOrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum_(OrgApacheLuceneSandboxQueriesDuplicateFilter *self, NSString *fieldName, OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum *keepMode, OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum *processingMode) {
+OrgApacheLuceneSandboxQueriesDuplicateFilter *create_OrgApacheLuceneSandboxQueriesDuplicateFilter_initWithNSString_(NSString *fieldName) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSandboxQueriesDuplicateFilter, initWithNSString_, fieldName)
+}
+
+void OrgApacheLuceneSandboxQueriesDuplicateFilter_initWithNSString_withOrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_withOrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_(OrgApacheLuceneSandboxQueriesDuplicateFilter *self, NSString *fieldName, OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode *keepMode, OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode *processingMode) {
   OrgApacheLuceneSearchFilter_init(self);
   JreStrongAssign(&self->fieldName_, fieldName);
   JreStrongAssign(&self->keepMode_, keepMode);
   JreStrongAssign(&self->processingMode_, processingMode);
 }
 
-OrgApacheLuceneSandboxQueriesDuplicateFilter *new_OrgApacheLuceneSandboxQueriesDuplicateFilter_initWithNSString_withOrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum_withOrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum_(NSString *fieldName, OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum *keepMode, OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum *processingMode) {
-  OrgApacheLuceneSandboxQueriesDuplicateFilter *self = [OrgApacheLuceneSandboxQueriesDuplicateFilter alloc];
-  OrgApacheLuceneSandboxQueriesDuplicateFilter_initWithNSString_withOrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum_withOrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum_(self, fieldName, keepMode, processingMode);
-  return self;
+OrgApacheLuceneSandboxQueriesDuplicateFilter *new_OrgApacheLuceneSandboxQueriesDuplicateFilter_initWithNSString_withOrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_withOrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_(NSString *fieldName, OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode *keepMode, OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode *processingMode) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSandboxQueriesDuplicateFilter, initWithNSString_withOrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_withOrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_, fieldName, keepMode, processingMode)
+}
+
+OrgApacheLuceneSandboxQueriesDuplicateFilter *create_OrgApacheLuceneSandboxQueriesDuplicateFilter_initWithNSString_withOrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_withOrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_(NSString *fieldName, OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode *keepMode, OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode *processingMode) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSandboxQueriesDuplicateFilter, initWithNSString_withOrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_withOrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_, fieldName, keepMode, processingMode)
 }
 
 OrgApacheLuceneSearchDocIdSet *OrgApacheLuceneSandboxQueriesDuplicateFilter_correctBitsWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneUtilBits_(OrgApacheLuceneSandboxQueriesDuplicateFilter *self, OrgApacheLuceneIndexLeafReader *reader, id<OrgApacheLuceneUtilBits> acceptDocs) {
-  OrgApacheLuceneUtilSparseFixedBitSet *bits = [new_OrgApacheLuceneUtilSparseFixedBitSet_initWithInt_([((OrgApacheLuceneIndexLeafReader *) nil_chk(reader)) maxDoc]) autorelease];
+  OrgApacheLuceneUtilSparseFixedBitSet *bits = create_OrgApacheLuceneUtilSparseFixedBitSet_initWithInt_([((OrgApacheLuceneIndexLeafReader *) nil_chk(reader)) maxDoc]);
   OrgApacheLuceneIndexTerms *terms = [((OrgApacheLuceneIndexFields *) nil_chk([reader fields])) termsWithNSString:self->fieldName_];
   if (terms != nil) {
     OrgApacheLuceneIndexTermsEnum *termsEnum = [terms iterator];
@@ -216,7 +218,7 @@ OrgApacheLuceneSearchDocIdSet *OrgApacheLuceneSandboxQueriesDuplicateFilter_corr
         docs = [termsEnum postingsWithOrgApacheLuceneIndexPostingsEnum:docs withInt:OrgApacheLuceneIndexPostingsEnum_NONE];
         jint doc = [((OrgApacheLuceneIndexPostingsEnum *) nil_chk(docs)) nextDoc];
         if (doc != OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS) {
-          if (self->keepMode_ == JreLoadStatic(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum, KM_USE_FIRST_OCCURRENCE)) {
+          if (self->keepMode_ == JreLoadEnum(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode, KM_USE_FIRST_OCCURRENCE)) {
             [bits setWithInt:doc];
           }
           else {
@@ -234,11 +236,11 @@ OrgApacheLuceneSearchDocIdSet *OrgApacheLuceneSandboxQueriesDuplicateFilter_corr
       }
     }
   }
-  return OrgApacheLuceneSearchBitsFilteredDocIdSet_wrapWithOrgApacheLuceneSearchDocIdSet_withOrgApacheLuceneUtilBits_([new_OrgApacheLuceneUtilBitDocIdSet_initWithOrgApacheLuceneUtilBitSet_withLong_(bits, [bits approximateCardinality]) autorelease], acceptDocs);
+  return OrgApacheLuceneSearchBitsFilteredDocIdSet_wrapWithOrgApacheLuceneSearchDocIdSet_withOrgApacheLuceneUtilBits_(create_OrgApacheLuceneUtilBitDocIdSet_initWithOrgApacheLuceneUtilBitSet_withLong_(bits, [bits approximateCardinality]), acceptDocs);
 }
 
 OrgApacheLuceneSearchDocIdSet *OrgApacheLuceneSandboxQueriesDuplicateFilter_fastBitsWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneUtilBits_(OrgApacheLuceneSandboxQueriesDuplicateFilter *self, OrgApacheLuceneIndexLeafReader *reader, id<OrgApacheLuceneUtilBits> acceptDocs) {
-  OrgApacheLuceneUtilFixedBitSet *bits = [new_OrgApacheLuceneUtilFixedBitSet_initWithInt_([((OrgApacheLuceneIndexLeafReader *) nil_chk(reader)) maxDoc]) autorelease];
+  OrgApacheLuceneUtilFixedBitSet *bits = create_OrgApacheLuceneUtilFixedBitSet_initWithInt_([((OrgApacheLuceneIndexLeafReader *) nil_chk(reader)) maxDoc]);
   [bits setWithInt:0 withInt:[reader maxDoc]];
   OrgApacheLuceneIndexTerms *terms = [((OrgApacheLuceneIndexFields *) nil_chk([reader fields])) termsWithNSString:self->fieldName_];
   if (terms != nil) {
@@ -254,7 +256,7 @@ OrgApacheLuceneSearchDocIdSet *OrgApacheLuceneSandboxQueriesDuplicateFilter_fast
           docs = [termsEnum postingsWithOrgApacheLuceneIndexPostingsEnum:docs withInt:OrgApacheLuceneIndexPostingsEnum_NONE];
           jint doc = [((OrgApacheLuceneIndexPostingsEnum *) nil_chk(docs)) nextDoc];
           if (doc != OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS) {
-            if (self->keepMode_ == JreLoadStatic(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum, KM_USE_FIRST_OCCURRENCE)) {
+            if (self->keepMode_ == JreLoadEnum(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode, KM_USE_FIRST_OCCURRENCE)) {
               doc = [docs nextDoc];
             }
           }
@@ -267,120 +269,87 @@ OrgApacheLuceneSearchDocIdSet *OrgApacheLuceneSandboxQueriesDuplicateFilter_fast
               break;
             }
           }
-          if (self->keepMode_ == JreLoadStatic(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum, KM_USE_LAST_OCCURRENCE)) {
+          if (self->keepMode_ == JreLoadEnum(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode, KM_USE_LAST_OCCURRENCE)) {
             [bits setWithInt:lastDoc];
           }
         }
       }
     }
   }
-  return OrgApacheLuceneSearchBitsFilteredDocIdSet_wrapWithOrgApacheLuceneSearchDocIdSet_withOrgApacheLuceneUtilBits_([new_OrgApacheLuceneUtilBitDocIdSet_initWithOrgApacheLuceneUtilBitSet_(bits) autorelease], acceptDocs);
+  return OrgApacheLuceneSearchBitsFilteredDocIdSet_wrapWithOrgApacheLuceneSearchDocIdSet_withOrgApacheLuceneUtilBits_(create_OrgApacheLuceneUtilBitDocIdSet_initWithOrgApacheLuceneUtilBitSet_(bits), acceptDocs);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSandboxQueriesDuplicateFilter)
 
-J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum)
+J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode)
 
-OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum *OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum_values_[2];
+OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode *OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_values_[2];
 
-@implementation OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum
+@implementation OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
++ (OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode *)KM_USE_FIRST_OCCURRENCE {
+  return JreEnum(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode, KM_USE_FIRST_OCCURRENCE);
 }
 
-IOSObjectArray *OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum_values() {
-  OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum_initialize();
-  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum_values_ count:2 type:OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum_class_()];
++ (OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode *)KM_USE_LAST_OCCURRENCE {
+  return JreEnum(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode, KM_USE_LAST_OCCURRENCE);
 }
 
 + (IOSObjectArray *)values {
-  return OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum_values();
+  return OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_values();
 }
 
-+ (OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum *)valueOfWithNSString:(NSString *)name {
-  return OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum_valueOfWithNSString_(name);
++ (OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode *)valueOfWithNSString:(NSString *)name {
+  return OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_valueOfWithNSString_(name);
 }
 
-OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum *OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum_valueOfWithNSString_(NSString *name) {
-  OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum_initialize();
-  for (int i = 0; i < 2; i++) {
-    OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum *e = OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum_values_[i];
-    if ([name isEqual:[e name]]) {
-      return e;
-    }
-  }
-  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
-  return nil;
+- (OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_Enum)toNSEnum {
+  return (OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_Enum)[self ordinal];
 }
 
 - (id)copyWithZone:(NSZone *)zone {
-  return [self retain];
+  return self;
 }
 
 + (void)initialize {
-  if (self == [OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum class]) {
-    OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum_KM_USE_FIRST_OCCURRENCE = new_OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum_initWithNSString_withInt_(@"KM_USE_FIRST_OCCURRENCE", 0);
-    OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum_KM_USE_LAST_OCCURRENCE = new_OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum_initWithNSString_withInt_(@"KM_USE_LAST_OCCURRENCE", 1);
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum)
+  if (self == [OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode class]) {
+    size_t objSize = class_getInstanceSize(self);
+    size_t allocSize = 2 * objSize;
+    uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
+    id e;
+    (JreEnum(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode, KM_USE_FIRST_OCCURRENCE) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_initWithNSString_withInt_(e, @"KM_USE_FIRST_OCCURRENCE", 0);
+    (JreEnum(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode, KM_USE_LAST_OCCURRENCE) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_initWithNSString_withInt_(e, @"KM_USE_LAST_OCCURRENCE", 1);
+    J2OBJC_SET_INITIALIZED(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode)
   }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcFieldInfo fields[] = {
-    { "KM_USE_FIRST_OCCURRENCE", "KM_USE_FIRST_OCCURRENCE", 0x4019, "Lorg.apache.lucene.sandbox.queries.DuplicateFilter$KeepMode;", &OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum_KM_USE_FIRST_OCCURRENCE, NULL, .constantValue.asLong = 0 },
-    { "KM_USE_LAST_OCCURRENCE", "KM_USE_LAST_OCCURRENCE", 0x4019, "Lorg.apache.lucene.sandbox.queries.DuplicateFilter$KeepMode;", &OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum_KM_USE_LAST_OCCURRENCE, NULL, .constantValue.asLong = 0 },
+    { "KM_USE_FIRST_OCCURRENCE", "KM_USE_FIRST_OCCURRENCE", 0x4019, "Lorg.apache.lucene.sandbox.queries.DuplicateFilter$KeepMode;", &JreEnum(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode, KM_USE_FIRST_OCCURRENCE), NULL, .constantValue.asLong = 0 },
+    { "KM_USE_LAST_OCCURRENCE", "KM_USE_LAST_OCCURRENCE", 0x4019, "Lorg.apache.lucene.sandbox.queries.DuplicateFilter$KeepMode;", &JreEnum(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode, KM_USE_LAST_OCCURRENCE), NULL, .constantValue.asLong = 0 },
   };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.sandbox.queries.DuplicateFilter$KeepMode;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum = { 2, "KeepMode", "org.apache.lucene.sandbox.queries", "DuplicateFilter", 0x4019, 0, NULL, 2, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/sandbox/queries/DuplicateFilter$KeepMode;>;" };
-  return &_OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum;
+  static const J2ObjcClassInfo _OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode = { 2, "KeepMode", "org.apache.lucene.sandbox.queries", "DuplicateFilter", 0x4019, 0, NULL, 2, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/sandbox/queries/DuplicateFilter$KeepMode;>;" };
+  return &_OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode;
 }
 
 @end
 
-void OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum_initWithNSString_withInt_(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum *self, NSString *__name, jint __ordinal) {
+void OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_initWithNSString_withInt_(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode *self, NSString *__name, jint __ordinal) {
   JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
-OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum *new_OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum *self = [OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum alloc];
-  OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
+IOSObjectArray *OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_values() {
+  OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_initialize();
+  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_values_ count:2 type:OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_class_()];
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepModeEnum)
-
-J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum)
-
-OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum *OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum_values_[2];
-
-@implementation OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum
-
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
-}
-
-IOSObjectArray *OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum_values() {
-  OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum_initialize();
-  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum_values_ count:2 type:OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum_class_()];
-}
-
-+ (IOSObjectArray *)values {
-  return OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum_values();
-}
-
-+ (OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum *)valueOfWithNSString:(NSString *)name {
-  return OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum_valueOfWithNSString_(name);
-}
-
-OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum *OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum_valueOfWithNSString_(NSString *name) {
-  OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum_initialize();
+OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode *OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_valueOfWithNSString_(NSString *name) {
+  OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_initialize();
   for (int i = 0; i < 2; i++) {
-    OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum *e = OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum_values_[i];
+    OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode *e = OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_values_[i];
     if ([name isEqual:[e name]]) {
       return e;
     }
@@ -389,38 +358,99 @@ OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum *OrgApacheLucene
   return nil;
 }
 
+OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode *OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_fromOrdinal(NSUInteger ordinal) {
+  OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_initialize();
+  if (ordinal >= 2) {
+    return nil;
+  }
+  return OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode_values_[ordinal];
+}
+
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSandboxQueriesDuplicateFilter_KeepMode)
+
+J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode)
+
+OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode *OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_values_[2];
+
+@implementation OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode
+
++ (OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode *)PM_FULL_VALIDATION {
+  return JreEnum(OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode, PM_FULL_VALIDATION);
+}
+
++ (OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode *)PM_FAST_INVALIDATION {
+  return JreEnum(OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode, PM_FAST_INVALIDATION);
+}
+
++ (IOSObjectArray *)values {
+  return OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_values();
+}
+
++ (OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode *)valueOfWithNSString:(NSString *)name {
+  return OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_valueOfWithNSString_(name);
+}
+
+- (OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_Enum)toNSEnum {
+  return (OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_Enum)[self ordinal];
+}
+
 - (id)copyWithZone:(NSZone *)zone {
-  return [self retain];
+  return self;
 }
 
 + (void)initialize {
-  if (self == [OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum class]) {
-    OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum_PM_FULL_VALIDATION = new_OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum_initWithNSString_withInt_(@"PM_FULL_VALIDATION", 0);
-    OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum_PM_FAST_INVALIDATION = new_OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum_initWithNSString_withInt_(@"PM_FAST_INVALIDATION", 1);
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum)
+  if (self == [OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode class]) {
+    size_t objSize = class_getInstanceSize(self);
+    size_t allocSize = 2 * objSize;
+    uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
+    id e;
+    (JreEnum(OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode, PM_FULL_VALIDATION) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_initWithNSString_withInt_(e, @"PM_FULL_VALIDATION", 0);
+    (JreEnum(OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode, PM_FAST_INVALIDATION) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_initWithNSString_withInt_(e, @"PM_FAST_INVALIDATION", 1);
+    J2OBJC_SET_INITIALIZED(OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode)
   }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcFieldInfo fields[] = {
-    { "PM_FULL_VALIDATION", "PM_FULL_VALIDATION", 0x4019, "Lorg.apache.lucene.sandbox.queries.DuplicateFilter$ProcessingMode;", &OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum_PM_FULL_VALIDATION, NULL, .constantValue.asLong = 0 },
-    { "PM_FAST_INVALIDATION", "PM_FAST_INVALIDATION", 0x4019, "Lorg.apache.lucene.sandbox.queries.DuplicateFilter$ProcessingMode;", &OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum_PM_FAST_INVALIDATION, NULL, .constantValue.asLong = 0 },
+    { "PM_FULL_VALIDATION", "PM_FULL_VALIDATION", 0x4019, "Lorg.apache.lucene.sandbox.queries.DuplicateFilter$ProcessingMode;", &JreEnum(OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode, PM_FULL_VALIDATION), NULL, .constantValue.asLong = 0 },
+    { "PM_FAST_INVALIDATION", "PM_FAST_INVALIDATION", 0x4019, "Lorg.apache.lucene.sandbox.queries.DuplicateFilter$ProcessingMode;", &JreEnum(OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode, PM_FAST_INVALIDATION), NULL, .constantValue.asLong = 0 },
   };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.sandbox.queries.DuplicateFilter$ProcessingMode;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum = { 2, "ProcessingMode", "org.apache.lucene.sandbox.queries", "DuplicateFilter", 0x4019, 0, NULL, 2, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/sandbox/queries/DuplicateFilter$ProcessingMode;>;" };
-  return &_OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum;
+  static const J2ObjcClassInfo _OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode = { 2, "ProcessingMode", "org.apache.lucene.sandbox.queries", "DuplicateFilter", 0x4019, 0, NULL, 2, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/sandbox/queries/DuplicateFilter$ProcessingMode;>;" };
+  return &_OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode;
 }
 
 @end
 
-void OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum_initWithNSString_withInt_(OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum *self, NSString *__name, jint __ordinal) {
+void OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_initWithNSString_withInt_(OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode *self, NSString *__name, jint __ordinal) {
   JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
-OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum *new_OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum *self = [OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum alloc];
-  OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
+IOSObjectArray *OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_values() {
+  OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_initialize();
+  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_values_ count:2 type:OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_class_()];
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum)
+OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode *OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_valueOfWithNSString_(NSString *name) {
+  OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_initialize();
+  for (int i = 0; i < 2; i++) {
+    OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode *e = OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_values_[i];
+    if ([name isEqual:[e name]]) {
+      return e;
+    }
+  }
+  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
+  return nil;
+}
+
+OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode *OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_fromOrdinal(NSUInteger ordinal) {
+  OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_initialize();
+  if (ordinal >= 2) {
+    return nil;
+  }
+  return OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode_values_[ordinal];
+}
+
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingMode)

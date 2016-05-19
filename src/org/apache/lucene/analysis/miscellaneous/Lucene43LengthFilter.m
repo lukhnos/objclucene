@@ -4,9 +4,11 @@
 //
 
 #include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
+#include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/miscellaneous/Lucene43LengthFilter.h"
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
@@ -39,13 +41,13 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inA
   return (len >= min_ && len <= max_);
 }
 
++ (IOSObjectArray *)__annotations {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
 - (void)dealloc {
   RELEASE_(termAtt_);
   [super dealloc];
-}
-
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -72,9 +74,11 @@ void OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter_initWithBoolean_wi
 }
 
 OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter *new_OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(jboolean enablePositionIncrements, OrgApacheLuceneAnalysisTokenStream *inArg, jint min, jint max) {
-  OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter *self = [OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter alloc];
-  OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(self, enablePositionIncrements, inArg, min, max);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter, initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withInt_withInt_, enablePositionIncrements, inArg, min, max)
+}
+
+OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter *create_OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(jboolean enablePositionIncrements, OrgApacheLuceneAnalysisTokenStream *inArg, jint min, jint max) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter, initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withInt_withInt_, enablePositionIncrements, inArg, min, max)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter)

@@ -5,23 +5,26 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexBitsSlice_INCLUDE_ALL")
-#if OrgApacheLuceneIndexBitsSlice_RESTRICT
-#define OrgApacheLuceneIndexBitsSlice_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexBitsSlice")
+#ifdef RESTRICT_OrgApacheLuceneIndexBitsSlice
+#define INCLUDE_ALL_OrgApacheLuceneIndexBitsSlice 0
 #else
-#define OrgApacheLuceneIndexBitsSlice_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexBitsSlice 1
 #endif
-#undef OrgApacheLuceneIndexBitsSlice_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexBitsSlice
 
-#if !defined (_OrgApacheLuceneIndexBitsSlice_) && (OrgApacheLuceneIndexBitsSlice_INCLUDE_ALL || OrgApacheLuceneIndexBitsSlice_INCLUDE)
-#define _OrgApacheLuceneIndexBitsSlice_
+#if !defined (OrgApacheLuceneIndexBitsSlice_) && (INCLUDE_ALL_OrgApacheLuceneIndexBitsSlice || defined(INCLUDE_OrgApacheLuceneIndexBitsSlice))
+#define OrgApacheLuceneIndexBitsSlice_
 
-#define OrgApacheLuceneUtilBits_RESTRICT 1
-#define OrgApacheLuceneUtilBits_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilBits 1
+#define INCLUDE_OrgApacheLuceneUtilBits 1
 #include "org/apache/lucene/util/Bits.h"
 
 @class OrgApacheLuceneIndexReaderSlice;
 
+/*!
+ @brief Exposes a slice of an existing Bits as a new Bits.
+ */
 @interface OrgApacheLuceneIndexBitsSlice : NSObject < OrgApacheLuceneUtilBits >
 
 #pragma mark Public
@@ -41,8 +44,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexBitsSlice_initWithOrgApacheLuceneUtil
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexBitsSlice *new_OrgApacheLuceneIndexBitsSlice_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexReaderSlice_(id<OrgApacheLuceneUtilBits> parent, OrgApacheLuceneIndexReaderSlice *slice) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexBitsSlice *create_OrgApacheLuceneIndexBitsSlice_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexReaderSlice_(id<OrgApacheLuceneUtilBits> parent, OrgApacheLuceneIndexReaderSlice *slice);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexBitsSlice)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexBitsSlice_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexBitsSlice")

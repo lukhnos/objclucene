@@ -5,17 +5,22 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilStrictStringTokenizer_INCLUDE_ALL")
-#if OrgApacheLuceneUtilStrictStringTokenizer_RESTRICT
-#define OrgApacheLuceneUtilStrictStringTokenizer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilStrictStringTokenizer")
+#ifdef RESTRICT_OrgApacheLuceneUtilStrictStringTokenizer
+#define INCLUDE_ALL_OrgApacheLuceneUtilStrictStringTokenizer 0
 #else
-#define OrgApacheLuceneUtilStrictStringTokenizer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilStrictStringTokenizer 1
 #endif
-#undef OrgApacheLuceneUtilStrictStringTokenizer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilStrictStringTokenizer
 
-#if !defined (_OrgApacheLuceneUtilStrictStringTokenizer_) && (OrgApacheLuceneUtilStrictStringTokenizer_INCLUDE_ALL || OrgApacheLuceneUtilStrictStringTokenizer_INCLUDE)
-#define _OrgApacheLuceneUtilStrictStringTokenizer_
+#if !defined (OrgApacheLuceneUtilStrictStringTokenizer_) && (INCLUDE_ALL_OrgApacheLuceneUtilStrictStringTokenizer || defined(INCLUDE_OrgApacheLuceneUtilStrictStringTokenizer))
+#define OrgApacheLuceneUtilStrictStringTokenizer_
 
+/*!
+ @brief Used for parsing Version strings so we don't have to
+ use overkill String.split nor StringTokenizer (which silently
+ skips empty tokens).
+ */
 @interface OrgApacheLuceneUtilStrictStringTokenizer : NSObject
 
 #pragma mark Public
@@ -35,8 +40,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilStrictStringTokenizer_initWithNSString
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilStrictStringTokenizer *new_OrgApacheLuceneUtilStrictStringTokenizer_initWithNSString_withChar_(NSString *s, jchar delimiter) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilStrictStringTokenizer *create_OrgApacheLuceneUtilStrictStringTokenizer_initWithNSString_withChar_(NSString *s, jchar delimiter);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilStrictStringTokenizer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilStrictStringTokenizer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilStrictStringTokenizer")

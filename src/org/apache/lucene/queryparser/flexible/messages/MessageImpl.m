@@ -52,7 +52,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl, argum
 
 - (NSString *)description {
   IOSObjectArray *args = [self getArguments];
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_initWithNSString_([self getKey]) autorelease];
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_initWithNSString_([self getKey]);
   if (args != nil) {
     for (jint i = 0; i < args->size_; i++) {
       [((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:i == 0 ? @" " : @", "])) appendWithId:IOSObjectArray_Get(args, i)];
@@ -94,9 +94,11 @@ void OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_(Org
 }
 
 OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl *new_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_(NSString *key) {
-  OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl *self = [OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl alloc];
-  OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_(self, key);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl, initWithNSString_, key)
+}
+
+OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl *create_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_(NSString *key) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl, initWithNSString_, key)
 }
 
 void OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl *self, NSString *key, IOSObjectArray *args) {
@@ -105,9 +107,11 @@ void OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_with
 }
 
 OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl *new_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(NSString *key, IOSObjectArray *args) {
-  OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl *self = [OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl alloc];
-  OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(self, key, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl, initWithNSString_withNSObjectArray_, key, args)
+}
+
+OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl *create_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(NSString *key, IOSObjectArray *args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl, initWithNSString_withNSObjectArray_, key, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl)

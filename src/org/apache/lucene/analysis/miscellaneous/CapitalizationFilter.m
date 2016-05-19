@@ -46,6 +46,14 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisMiscellaneousCapitali
 
 @implementation OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter
 
++ (jint)DEFAULT_MAX_WORD_COUNT {
+  return OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_DEFAULT_MAX_WORD_COUNT;
+}
+
++ (jint)DEFAULT_MAX_TOKEN_LENGTH {
+  return OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_DEFAULT_MAX_TOKEN_LENGTH;
+}
+
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg {
   OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, inArg);
   return self;
@@ -113,7 +121,7 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisMiscellaneousCapitali
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneAnalysisTokenStream:", "CapitalizationFilter", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withBoolean:withOrgApacheLuceneAnalysisUtilCharArraySet:withBoolean:withJavaUtilCollection:withInt:withInt:withInt:", "CapitalizationFilter", NULL, 0x1, NULL, NULL },
+    { "initWithOrgApacheLuceneAnalysisTokenStream:withBoolean:withOrgApacheLuceneAnalysisUtilCharArraySet:withBoolean:withJavaUtilCollection:withInt:withInt:withInt:", "CapitalizationFilter", NULL, 0x1, NULL, "(Lorg/apache/lucene/analysis/TokenStream;ZLorg/apache/lucene/analysis/util/CharArraySet;ZLjava/util/Collection<[LC;>;III)V" },
     { "incrementToken", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
     { "processWordWithCharArray:withInt:withInt:withInt:", "processWord", "V", 0x2, NULL, NULL },
   };
@@ -123,7 +131,7 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisMiscellaneousCapitali
     { "onlyFirstWord_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
     { "keep_", NULL, 0x12, "Lorg.apache.lucene.analysis.util.CharArraySet;", NULL, NULL, .constantValue.asLong = 0 },
     { "forceFirstLetter_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "okPrefix_", NULL, 0x12, "Ljava.util.Collection;", NULL, "Ljava/util/Collection<L[C;>;", .constantValue.asLong = 0 },
+    { "okPrefix_", NULL, 0x12, "Ljava.util.Collection;", NULL, "Ljava/util/Collection<[LC;>;", .constantValue.asLong = 0 },
     { "minWordLength_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "maxWordCount_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "maxTokenLength_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
@@ -140,9 +148,11 @@ void OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_initWithOrgApacheL
 }
 
 OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter *new_OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) {
-  OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter *self = [OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter alloc];
-  OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter, initWithOrgApacheLuceneAnalysisTokenStream_, inArg)
+}
+
+OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter *create_OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter, initWithOrgApacheLuceneAnalysisTokenStream_, inArg)
 }
 
 void OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withOrgApacheLuceneAnalysisUtilCharArraySet_withBoolean_withJavaUtilCollection_withInt_withInt_withInt_(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg, jboolean onlyFirstWord, OrgApacheLuceneAnalysisUtilCharArraySet *keep, jboolean forceFirstLetter, id<JavaUtilCollection> okPrefix, jint minWordLength, jint maxWordCount, jint maxTokenLength) {
@@ -153,13 +163,13 @@ void OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_initWithOrgApacheL
   self->forceFirstLetter_ = forceFirstLetter;
   JreStrongAssign(&self->okPrefix_, okPrefix);
   if (minWordLength < 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"minWordLength must be greater than or equal to zero") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"minWordLength must be greater than or equal to zero");
   }
   if (maxWordCount < 1) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"maxWordCount must be greater than zero") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"maxWordCount must be greater than zero");
   }
   if (maxTokenLength < 1) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"maxTokenLength must be greater than zero") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"maxTokenLength must be greater than zero");
   }
   self->minWordLength_ = minWordLength;
   self->maxWordCount_ = maxWordCount;
@@ -167,9 +177,11 @@ void OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_initWithOrgApacheL
 }
 
 OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter *new_OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withOrgApacheLuceneAnalysisUtilCharArraySet_withBoolean_withJavaUtilCollection_withInt_withInt_withInt_(OrgApacheLuceneAnalysisTokenStream *inArg, jboolean onlyFirstWord, OrgApacheLuceneAnalysisUtilCharArraySet *keep, jboolean forceFirstLetter, id<JavaUtilCollection> okPrefix, jint minWordLength, jint maxWordCount, jint maxTokenLength) {
-  OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter *self = [OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter alloc];
-  OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withOrgApacheLuceneAnalysisUtilCharArraySet_withBoolean_withJavaUtilCollection_withInt_withInt_withInt_(self, inArg, onlyFirstWord, keep, forceFirstLetter, okPrefix, minWordLength, maxWordCount, maxTokenLength);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter, initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withOrgApacheLuceneAnalysisUtilCharArraySet_withBoolean_withJavaUtilCollection_withInt_withInt_withInt_, inArg, onlyFirstWord, keep, forceFirstLetter, okPrefix, minWordLength, maxWordCount, maxTokenLength)
+}
+
+OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter *create_OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withOrgApacheLuceneAnalysisUtilCharArraySet_withBoolean_withJavaUtilCollection_withInt_withInt_withInt_(OrgApacheLuceneAnalysisTokenStream *inArg, jboolean onlyFirstWord, OrgApacheLuceneAnalysisUtilCharArraySet *keep, jboolean forceFirstLetter, id<JavaUtilCollection> okPrefix, jint minWordLength, jint maxWordCount, jint maxTokenLength) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter, initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withOrgApacheLuceneAnalysisUtilCharArraySet_withBoolean_withJavaUtilCollection_withInt_withInt_withInt_, inArg, onlyFirstWord, keep, forceFirstLetter, okPrefix, minWordLength, maxWordCount, maxTokenLength)
 }
 
 void OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_processWordWithCharArray_withInt_withInt_withInt_(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter *self, IOSCharArray *buffer, jint offset, jint length, jint wordCount) {

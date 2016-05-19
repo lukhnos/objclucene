@@ -5,27 +5,34 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisMiscellaneousTrimFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisMiscellaneousTrimFilter_RESTRICT
-#define OrgApacheLuceneAnalysisMiscellaneousTrimFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousTrimFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousTrimFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousTrimFilter 0
 #else
-#define OrgApacheLuceneAnalysisMiscellaneousTrimFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousTrimFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisMiscellaneousTrimFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousTrimFilter
 
-#if !defined (_OrgApacheLuceneAnalysisMiscellaneousTrimFilter_) && (OrgApacheLuceneAnalysisMiscellaneousTrimFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisMiscellaneousTrimFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisMiscellaneousTrimFilter_
+#if !defined (OrgApacheLuceneAnalysisMiscellaneousTrimFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousTrimFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousTrimFilter))
+#define OrgApacheLuceneAnalysisMiscellaneousTrimFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief Trims leading and trailing whitespace from Tokens in the stream.
+ */
 @interface OrgApacheLuceneAnalysisMiscellaneousTrimFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
+/*!
+ @brief Create a new <code>TrimFilter</code>.
+ @param inArg            the stream to consume
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
 
 - (jboolean)incrementToken;
@@ -38,8 +45,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousTrimFilter_initWithOr
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousTrimFilter *new_OrgApacheLuceneAnalysisMiscellaneousTrimFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousTrimFilter *create_OrgApacheLuceneAnalysisMiscellaneousTrimFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousTrimFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisMiscellaneousTrimFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousTrimFilter")

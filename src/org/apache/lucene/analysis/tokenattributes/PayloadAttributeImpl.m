@@ -47,7 +47,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *)clone {
-  OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *clone = (OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *) check_class_cast([super clone], [OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl class]);
+  OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *clone = (OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *) cast_chk([super clone], [OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl class]);
   if (payload_ != nil) {
     JreStrongAssign(&((OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *) nil_chk(clone))->payload_, OrgApacheLuceneUtilBytesRef_deepCopyOfWithOrgApacheLuceneUtilBytesRef_(payload_));
   }
@@ -59,21 +59,21 @@ J2OBJC_IGNORE_DESIGNATED_END
     return true;
   }
   if ([OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_class_() isInstance:other]) {
-    OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *o = (OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *) check_class_cast(other, [OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl class]);
+    OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *o = (OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *) cast_chk(other, [OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl class]);
     if (((OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *) nil_chk(o))->payload_ == nil || payload_ == nil) {
       return o->payload_ == nil && payload_ == nil;
     }
-    return [((OrgApacheLuceneUtilBytesRef *) nil_chk(o->payload_)) isEqual:payload_];
+    return [o->payload_ isEqual:payload_];
   }
   return false;
 }
 
 - (NSUInteger)hash {
-  return (payload_ == nil) ? 0 : ((jint) [payload_ hash]);
+  return (payload_ == nil) ? 0 : ((jint) [((OrgApacheLuceneUtilBytesRef *) nil_chk(payload_)) hash]);
 }
 
 - (void)copyToWithOrgApacheLuceneUtilAttributeImpl:(OrgApacheLuceneUtilAttributeImpl *)target {
-  id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute> t = (id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute>) check_protocol_cast(target, OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_class_());
+  id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute> t = (id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute>) cast_check(target, OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_class_());
   [((id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute>) nil_chk(t)) setPayloadWithOrgApacheLuceneUtilBytesRef:(payload_ == nil) ? nil : OrgApacheLuceneUtilBytesRef_deepCopyOfWithOrgApacheLuceneUtilBytesRef_(payload_)];
 }
 
@@ -113,9 +113,11 @@ void OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl_init(OrgApacheLu
 }
 
 OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl_init() {
-  OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *self = [OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl alloc];
-  OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl, init)
+}
+
+OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl, init)
 }
 
 void OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl_initWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *self, OrgApacheLuceneUtilBytesRef *payload) {
@@ -124,9 +126,11 @@ void OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl_initWithOrgApach
 }
 
 OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl_initWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *payload) {
-  OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *self = [OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl alloc];
-  OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl_initWithOrgApacheLuceneUtilBytesRef_(self, payload);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl, initWithOrgApacheLuceneUtilBytesRef_, payload)
+}
+
+OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl_initWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *payload) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl, initWithOrgApacheLuceneUtilBytesRef_, payload)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl)

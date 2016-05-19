@@ -92,11 +92,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jboolean)isEqual:(id)obj {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (NSUInteger)hash {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (void)dealloc {
@@ -138,9 +138,11 @@ void OrgApacheLuceneUtilIntsRefBuilder_init(OrgApacheLuceneUtilIntsRefBuilder *s
 }
 
 OrgApacheLuceneUtilIntsRefBuilder *new_OrgApacheLuceneUtilIntsRefBuilder_init() {
-  OrgApacheLuceneUtilIntsRefBuilder *self = [OrgApacheLuceneUtilIntsRefBuilder alloc];
-  OrgApacheLuceneUtilIntsRefBuilder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilIntsRefBuilder, init)
+}
+
+OrgApacheLuceneUtilIntsRefBuilder *create_OrgApacheLuceneUtilIntsRefBuilder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilIntsRefBuilder, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilIntsRefBuilder)

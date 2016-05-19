@@ -5,33 +5,68 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexReaderManager_INCLUDE_ALL")
-#if OrgApacheLuceneIndexReaderManager_RESTRICT
-#define OrgApacheLuceneIndexReaderManager_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexReaderManager")
+#ifdef RESTRICT_OrgApacheLuceneIndexReaderManager
+#define INCLUDE_ALL_OrgApacheLuceneIndexReaderManager 0
 #else
-#define OrgApacheLuceneIndexReaderManager_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexReaderManager 1
 #endif
-#undef OrgApacheLuceneIndexReaderManager_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexReaderManager
 
-#if !defined (_OrgApacheLuceneIndexReaderManager_) && (OrgApacheLuceneIndexReaderManager_INCLUDE_ALL || OrgApacheLuceneIndexReaderManager_INCLUDE)
-#define _OrgApacheLuceneIndexReaderManager_
+#if !defined (OrgApacheLuceneIndexReaderManager_) && (INCLUDE_ALL_OrgApacheLuceneIndexReaderManager || defined(INCLUDE_OrgApacheLuceneIndexReaderManager))
+#define OrgApacheLuceneIndexReaderManager_
 
-#define OrgApacheLuceneSearchReferenceManager_RESTRICT 1
-#define OrgApacheLuceneSearchReferenceManager_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchReferenceManager 1
+#define INCLUDE_OrgApacheLuceneSearchReferenceManager 1
 #include "org/apache/lucene/search/ReferenceManager.h"
 
 @class OrgApacheLuceneIndexDirectoryReader;
 @class OrgApacheLuceneIndexIndexWriter;
 @class OrgApacheLuceneStoreDirectory;
 
+/*!
+ @brief Utility class to safely share <code>DirectoryReader</code> instances across
+ multiple threads, while periodically reopening.
+ This class ensures each
+ reader is closed only once all threads have finished using it.
+ - seealso: SearcherManager
+ */
 @interface OrgApacheLuceneIndexReaderManager : OrgApacheLuceneSearchReferenceManager
 
 #pragma mark Public
 
+/*!
+ @brief Creates and returns a new ReaderManager from the given <code>Directory</code>.
+ @param dir the directory to open the DirectoryReader on.
+ @throws IOException If there is a low-level I/O error
+ */
 - (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
 
+/*!
+ @brief Creates and returns a new ReaderManager from the given
+ already-opened <code>DirectoryReader</code>, stealing
+ the incoming reference.
+ @param reader the directoryReader to use for future reopens
+ @throws IOException If there is a low-level I/O error
+ */
 - (instancetype)initWithOrgApacheLuceneIndexDirectoryReader:(OrgApacheLuceneIndexDirectoryReader *)reader;
 
+/*!
+ @brief Creates and returns a new ReaderManager from the given
+ <code>IndexWriter</code>.
+ @param writer
+ the IndexWriter to open the IndexReader from.
+ @param applyAllDeletes
+ If <code>true</code>, all buffered deletes will be applied (made
+ visible) in the <code>IndexSearcher</code> / <code>DirectoryReader</code>.
+ If <code>false</code>, the deletes may or may not be applied, but
+ remain buffered (in IndexWriter) so that they will be applied in
+ the future. Applying deletes can be costly, so if your app can
+ tolerate deleted documents being returned you might gain some
+ performance by passing <code>false</code>. See
+ <code>DirectoryReader.openIfChanged(DirectoryReader,IndexWriter,boolean)</code>.
+ @throws IOException If there is a low-level I/O error
+ */
 - (instancetype)initWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
                                             withBoolean:(jboolean)applyAllDeletes;
 
@@ -53,16 +88,22 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexReaderManager_initWithOrgApacheLucene
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexReaderManager *new_OrgApacheLuceneIndexReaderManager_initWithOrgApacheLuceneIndexIndexWriter_withBoolean_(OrgApacheLuceneIndexIndexWriter *writer, jboolean applyAllDeletes) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexReaderManager *create_OrgApacheLuceneIndexReaderManager_initWithOrgApacheLuceneIndexIndexWriter_withBoolean_(OrgApacheLuceneIndexIndexWriter *writer, jboolean applyAllDeletes);
+
 FOUNDATION_EXPORT void OrgApacheLuceneIndexReaderManager_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexReaderManager *self, OrgApacheLuceneStoreDirectory *dir);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexReaderManager *new_OrgApacheLuceneIndexReaderManager_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *dir) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneIndexReaderManager *create_OrgApacheLuceneIndexReaderManager_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *dir);
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexReaderManager_initWithOrgApacheLuceneIndexDirectoryReader_(OrgApacheLuceneIndexReaderManager *self, OrgApacheLuceneIndexDirectoryReader *reader);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexReaderManager *new_OrgApacheLuceneIndexReaderManager_initWithOrgApacheLuceneIndexDirectoryReader_(OrgApacheLuceneIndexDirectoryReader *reader) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexReaderManager *create_OrgApacheLuceneIndexReaderManager_initWithOrgApacheLuceneIndexDirectoryReader_(OrgApacheLuceneIndexDirectoryReader *reader);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexReaderManager)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexReaderManager_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexReaderManager")

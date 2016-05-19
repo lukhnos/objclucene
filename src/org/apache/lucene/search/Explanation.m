@@ -22,6 +22,9 @@
   id<JavaUtilList> details_;
 }
 
+/*!
+ @brief Create a new explanation
+ */
 - (instancetype)initWithBoolean:(jboolean)match
                       withFloat:(jfloat)value
                    withNSString:(NSString *)description_
@@ -39,6 +42,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchExplanation, details_, id<JavaUtilList>
 __attribute__((unused)) static void OrgApacheLuceneSearchExplanation_initWithBoolean_withFloat_withNSString_withJavaUtilCollection_(OrgApacheLuceneSearchExplanation *self, jboolean match, jfloat value, NSString *description_, id<JavaUtilCollection> details);
 
 __attribute__((unused)) static OrgApacheLuceneSearchExplanation *new_OrgApacheLuceneSearchExplanation_initWithBoolean_withFloat_withNSString_withJavaUtilCollection_(jboolean match, jfloat value, NSString *description_, id<JavaUtilCollection> details) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchExplanation *create_OrgApacheLuceneSearchExplanation_initWithBoolean_withFloat_withNSString_withJavaUtilCollection_(jboolean match, jfloat value, NSString *description_, id<JavaUtilCollection> details);
 
 __attribute__((unused)) static NSString *OrgApacheLuceneSearchExplanation_getSummary(OrgApacheLuceneSearchExplanation *self);
 
@@ -105,7 +110,7 @@ __attribute__((unused)) static NSString *OrgApacheLuceneSearchExplanation_toStri
 }
 
 - (NSString *)toHtml {
-  JavaLangStringBuilder *buffer = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_init();
   [buffer appendWithNSString:@"<ul>\n"];
   [buffer appendWithNSString:@"<li>"];
   [buffer appendWithNSString:OrgApacheLuceneSearchExplanation_getSummary(self)];
@@ -127,11 +132,11 @@ __attribute__((unused)) static NSString *OrgApacheLuceneSearchExplanation_toStri
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "matchWithFloat:withNSString:withJavaUtilCollection:", "match", "Lorg.apache.lucene.search.Explanation;", 0x9, NULL, NULL },
+    { "matchWithFloat:withNSString:withJavaUtilCollection:", "match", "Lorg.apache.lucene.search.Explanation;", 0x9, NULL, "(FLjava/lang/String;Ljava/util/Collection<Lorg/apache/lucene/search/Explanation;>;)Lorg/apache/lucene/search/Explanation;" },
     { "matchWithFloat:withNSString:withOrgApacheLuceneSearchExplanationArray:", "match", "Lorg.apache.lucene.search.Explanation;", 0x89, NULL, NULL },
-    { "noMatchWithNSString:withJavaUtilCollection:", "noMatch", "Lorg.apache.lucene.search.Explanation;", 0x9, NULL, NULL },
+    { "noMatchWithNSString:withJavaUtilCollection:", "noMatch", "Lorg.apache.lucene.search.Explanation;", 0x9, NULL, "(Ljava/lang/String;Ljava/util/Collection<Lorg/apache/lucene/search/Explanation;>;)Lorg/apache/lucene/search/Explanation;" },
     { "noMatchWithNSString:withOrgApacheLuceneSearchExplanationArray:", "noMatch", "Lorg.apache.lucene.search.Explanation;", 0x89, NULL, NULL },
-    { "initWithBoolean:withFloat:withNSString:withJavaUtilCollection:", "Explanation", NULL, 0x2, NULL, NULL },
+    { "initWithBoolean:withFloat:withNSString:withJavaUtilCollection:", "Explanation", NULL, 0x2, NULL, "(ZFLjava/lang/String;Ljava/util/Collection<Lorg/apache/lucene/search/Explanation;>;)V" },
     { "isMatch", NULL, "Z", 0x1, NULL, NULL },
     { "getValue", NULL, "F", 0x1, NULL, NULL },
     { "getDescription", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
@@ -155,22 +160,22 @@ __attribute__((unused)) static NSString *OrgApacheLuceneSearchExplanation_toStri
 
 OrgApacheLuceneSearchExplanation *OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withJavaUtilCollection_(jfloat value, NSString *description_, id<JavaUtilCollection> details) {
   OrgApacheLuceneSearchExplanation_initialize();
-  return [new_OrgApacheLuceneSearchExplanation_initWithBoolean_withFloat_withNSString_withJavaUtilCollection_(true, value, description_, details) autorelease];
+  return create_OrgApacheLuceneSearchExplanation_initWithBoolean_withFloat_withNSString_withJavaUtilCollection_(true, value, description_, details);
 }
 
 OrgApacheLuceneSearchExplanation *OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_(jfloat value, NSString *description_, IOSObjectArray *details) {
   OrgApacheLuceneSearchExplanation_initialize();
-  return [new_OrgApacheLuceneSearchExplanation_initWithBoolean_withFloat_withNSString_withJavaUtilCollection_(true, value, description_, JavaUtilArrays_asListWithNSObjectArray_(details)) autorelease];
+  return create_OrgApacheLuceneSearchExplanation_initWithBoolean_withFloat_withNSString_withJavaUtilCollection_(true, value, description_, JavaUtilArrays_asListWithNSObjectArray_(details));
 }
 
 OrgApacheLuceneSearchExplanation *OrgApacheLuceneSearchExplanation_noMatchWithNSString_withJavaUtilCollection_(NSString *description_, id<JavaUtilCollection> details) {
   OrgApacheLuceneSearchExplanation_initialize();
-  return [new_OrgApacheLuceneSearchExplanation_initWithBoolean_withFloat_withNSString_withJavaUtilCollection_(false, 0.0f, description_, details) autorelease];
+  return create_OrgApacheLuceneSearchExplanation_initWithBoolean_withFloat_withNSString_withJavaUtilCollection_(false, 0.0f, description_, details);
 }
 
 OrgApacheLuceneSearchExplanation *OrgApacheLuceneSearchExplanation_noMatchWithNSString_withOrgApacheLuceneSearchExplanationArray_(NSString *description_, IOSObjectArray *details) {
   OrgApacheLuceneSearchExplanation_initialize();
-  return [new_OrgApacheLuceneSearchExplanation_initWithBoolean_withFloat_withNSString_withJavaUtilCollection_(false, 0.0f, description_, JavaUtilArrays_asListWithNSObjectArray_(details)) autorelease];
+  return create_OrgApacheLuceneSearchExplanation_initWithBoolean_withFloat_withNSString_withJavaUtilCollection_(false, 0.0f, description_, JavaUtilArrays_asListWithNSObjectArray_(details));
 }
 
 void OrgApacheLuceneSearchExplanation_initWithBoolean_withFloat_withNSString_withJavaUtilCollection_(OrgApacheLuceneSearchExplanation *self, jboolean match, jfloat value, NSString *description_, id<JavaUtilCollection> details) {
@@ -178,16 +183,18 @@ void OrgApacheLuceneSearchExplanation_initWithBoolean_withFloat_withNSString_wit
   self->match_ = match;
   self->value_ = value;
   JreStrongAssign(&self->description__, OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_(description_));
-  JreStrongAssign(&self->details_, JavaUtilCollections_unmodifiableListWithJavaUtilList_([new_JavaUtilArrayList_initWithJavaUtilCollection_(details) autorelease]));
+  JreStrongAssign(&self->details_, JavaUtilCollections_unmodifiableListWithJavaUtilList_(create_JavaUtilArrayList_initWithJavaUtilCollection_(details)));
   for (OrgApacheLuceneSearchExplanation * __strong detail in nil_chk(details)) {
     OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_(detail);
   }
 }
 
 OrgApacheLuceneSearchExplanation *new_OrgApacheLuceneSearchExplanation_initWithBoolean_withFloat_withNSString_withJavaUtilCollection_(jboolean match, jfloat value, NSString *description_, id<JavaUtilCollection> details) {
-  OrgApacheLuceneSearchExplanation *self = [OrgApacheLuceneSearchExplanation alloc];
-  OrgApacheLuceneSearchExplanation_initWithBoolean_withFloat_withNSString_withJavaUtilCollection_(self, match, value, description_, details);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchExplanation, initWithBoolean_withFloat_withNSString_withJavaUtilCollection_, match, value, description_, details)
+}
+
+OrgApacheLuceneSearchExplanation *create_OrgApacheLuceneSearchExplanation_initWithBoolean_withFloat_withNSString_withJavaUtilCollection_(jboolean match, jfloat value, NSString *description_, id<JavaUtilCollection> details) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchExplanation, initWithBoolean_withFloat_withNSString_withJavaUtilCollection_, match, value, description_, details)
 }
 
 NSString *OrgApacheLuceneSearchExplanation_getSummary(OrgApacheLuceneSearchExplanation *self) {
@@ -195,7 +202,7 @@ NSString *OrgApacheLuceneSearchExplanation_getSummary(OrgApacheLuceneSearchExpla
 }
 
 NSString *OrgApacheLuceneSearchExplanation_toStringWithInt_(OrgApacheLuceneSearchExplanation *self, jint depth) {
-  JavaLangStringBuilder *buffer = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_init();
   for (jint i = 0; i < depth; i++) {
     [buffer appendWithNSString:@"  "];
   }

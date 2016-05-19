@@ -5,24 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSpansNearSpans_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSpansNearSpans_RESTRICT
-#define OrgApacheLuceneSearchSpansNearSpans_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansNearSpans")
+#ifdef RESTRICT_OrgApacheLuceneSearchSpansNearSpans
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansNearSpans 0
 #else
-#define OrgApacheLuceneSearchSpansNearSpans_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansNearSpans 1
 #endif
-#undef OrgApacheLuceneSearchSpansNearSpans_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSpansNearSpans
 
-#if !defined (_OrgApacheLuceneSearchSpansNearSpans_) && (OrgApacheLuceneSearchSpansNearSpans_INCLUDE_ALL || OrgApacheLuceneSearchSpansNearSpans_INCLUDE)
-#define _OrgApacheLuceneSearchSpansNearSpans_
+#if !defined (OrgApacheLuceneSearchSpansNearSpans_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansNearSpans || defined(INCLUDE_OrgApacheLuceneSearchSpansNearSpans))
+#define OrgApacheLuceneSearchSpansNearSpans_
 
-#define OrgApacheLuceneSearchSpansConjunctionSpans_RESTRICT 1
-#define OrgApacheLuceneSearchSpansConjunctionSpans_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSpansConjunctionSpans 1
+#define INCLUDE_OrgApacheLuceneSearchSpansConjunctionSpans 1
 #include "org/apache/lucene/search/spans/ConjunctionSpans.h"
 
 @class OrgApacheLuceneSearchSpansSpanNearQuery;
 @protocol JavaUtilList;
 
+/*!
+ @brief Common super class for un/ordered Spans with a maximum slop between them.
+ */
 @interface OrgApacheLuceneSearchSpansNearSpans : OrgApacheLuceneSearchSpansConjunctionSpans {
  @public
   OrgApacheLuceneSearchSpansSpanNearQuery *query_;
@@ -46,4 +49,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansNearSpans)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSpansNearSpans_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansNearSpans")

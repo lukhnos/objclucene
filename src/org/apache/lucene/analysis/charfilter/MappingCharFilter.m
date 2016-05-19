@@ -71,7 +71,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCharfilterMappingCharFilter, replacem
         if (!OrgApacheLuceneUtilFstFST_targetHasArcsWithOrgApacheLuceneUtilFstFST_Arc_(arc)) {
           JreAssert(([arc isFinal]), (@"org/apache/lucene/analysis/charfilter/MappingCharFilter.java:108 condition failed: assert arc.isFinal();"));
           lastMatchLen = 1;
-          lastMatch = arc->output_;
+          lastMatch = ((OrgApacheLuceneUtilCharsRef *) arc->output_);
         }
         else {
           jint lookahead = 0;
@@ -80,7 +80,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCharfilterMappingCharFilter, replacem
             lookahead++;
             if ([arc isFinal]) {
               lastMatchLen = lookahead;
-              lastMatch = [((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs_)) addWithId:output withId:arc->nextFinalOutput_];
+              lastMatch = [((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs_)) addWithId:output withId:((OrgApacheLuceneUtilCharsRef *) arc->nextFinalOutput_)];
             }
             if (!OrgApacheLuceneUtilFstFST_targetHasArcsWithOrgApacheLuceneUtilFstFST_Arc_(arc)) {
               break;
@@ -92,7 +92,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCharfilterMappingCharFilter, replacem
             if ((arc = [((OrgApacheLuceneUtilFstFST *) nil_chk(map_)) findTargetArcWithInt:ch withOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_Arc:scratchArc_ withOrgApacheLuceneUtilFstFST_BytesReader:fstReader_]) == nil) {
               break;
             }
-            output = [((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs_)) addWithId:output withId:((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->output_];
+            output = [((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs_)) addWithId:output withId:((OrgApacheLuceneUtilCharsRef *) ((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->output_)];
           }
         }
       }
@@ -191,9 +191,11 @@ void OrgApacheLuceneAnalysisCharfilterMappingCharFilter_initWithOrgApacheLuceneA
 }
 
 OrgApacheLuceneAnalysisCharfilterMappingCharFilter *new_OrgApacheLuceneAnalysisCharfilterMappingCharFilter_initWithOrgApacheLuceneAnalysisCharfilterNormalizeCharMap_withJavaIoReader_(OrgApacheLuceneAnalysisCharfilterNormalizeCharMap *normMap, JavaIoReader *inArg) {
-  OrgApacheLuceneAnalysisCharfilterMappingCharFilter *self = [OrgApacheLuceneAnalysisCharfilterMappingCharFilter alloc];
-  OrgApacheLuceneAnalysisCharfilterMappingCharFilter_initWithOrgApacheLuceneAnalysisCharfilterNormalizeCharMap_withJavaIoReader_(self, normMap, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCharfilterMappingCharFilter, initWithOrgApacheLuceneAnalysisCharfilterNormalizeCharMap_withJavaIoReader_, normMap, inArg)
+}
+
+OrgApacheLuceneAnalysisCharfilterMappingCharFilter *create_OrgApacheLuceneAnalysisCharfilterMappingCharFilter_initWithOrgApacheLuceneAnalysisCharfilterNormalizeCharMap_withJavaIoReader_(OrgApacheLuceneAnalysisCharfilterNormalizeCharMap *normMap, JavaIoReader *inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCharfilterMappingCharFilter, initWithOrgApacheLuceneAnalysisCharfilterNormalizeCharMap_withJavaIoReader_, normMap, inArg)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCharfilterMappingCharFilter)

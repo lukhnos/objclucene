@@ -5,21 +5,25 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode_) && (OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode_
+#if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode))
+#define OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode_
 
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_RESTRICT 1
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode 1
+#define INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.h"
 
+/*!
+ @brief This interface should be implemented by <code>QueryNode</code> that holds an
+ arbitrary value.
+ */
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode < OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode, NSObject, JavaObject >
 
 - (void)setValueWithId:(id)value;
@@ -34,4 +38,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesValueQuery
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode")

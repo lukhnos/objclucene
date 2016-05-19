@@ -5,21 +5,31 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilAttributeReflector_INCLUDE_ALL")
-#if OrgApacheLuceneUtilAttributeReflector_RESTRICT
-#define OrgApacheLuceneUtilAttributeReflector_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilAttributeReflector")
+#ifdef RESTRICT_OrgApacheLuceneUtilAttributeReflector
+#define INCLUDE_ALL_OrgApacheLuceneUtilAttributeReflector 0
 #else
-#define OrgApacheLuceneUtilAttributeReflector_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilAttributeReflector 1
 #endif
-#undef OrgApacheLuceneUtilAttributeReflector_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilAttributeReflector
 
-#if !defined (_OrgApacheLuceneUtilAttributeReflector_) && (OrgApacheLuceneUtilAttributeReflector_INCLUDE_ALL || OrgApacheLuceneUtilAttributeReflector_INCLUDE)
-#define _OrgApacheLuceneUtilAttributeReflector_
+#if !defined (OrgApacheLuceneUtilAttributeReflector_) && (INCLUDE_ALL_OrgApacheLuceneUtilAttributeReflector || defined(INCLUDE_OrgApacheLuceneUtilAttributeReflector))
+#define OrgApacheLuceneUtilAttributeReflector_
 
 @class IOSClass;
 
+/*!
+ @brief This interface is used to reflect contents of <code>AttributeSource</code> or <code>AttributeImpl</code>.
+ */
 @protocol OrgApacheLuceneUtilAttributeReflector < NSObject, JavaObject >
 
+/*!
+ @brief This method gets called for every property in an <code>AttributeImpl</code>/<code>AttributeSource</code>
+ passing the class name of the <code>Attribute</code>, a key and the actual value.
+ E.g., an invocation of <code>org.apache.lucene.analysis.tokenattributes.CharTermAttributeImpl.reflectWith</code>
+ would call this method once using <code>org.apache.lucene.analysis.tokenattributes.CharTermAttribute.class</code>
+ as attribute class, <code>"term"</code> as key and the actual value as a String.
+ */
 - (void)reflectWithIOSClass:(IOSClass *)attClass
                withNSString:(NSString *)key
                      withId:(id)value;
@@ -32,4 +42,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAttributeReflector)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilAttributeReflector_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAttributeReflector")

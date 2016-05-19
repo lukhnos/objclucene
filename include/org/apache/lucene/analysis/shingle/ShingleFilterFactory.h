@@ -5,29 +5,44 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisShingleShingleFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisShingleShingleFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisShingleShingleFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisShingleShingleFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisShingleShingleFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisShingleShingleFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisShingleShingleFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisShingleShingleFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisShingleShingleFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisShingleShingleFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisShingleShingleFilterFactory_) && (OrgApacheLuceneAnalysisShingleShingleFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisShingleShingleFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisShingleShingleFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisShingleShingleFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisShingleShingleFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisShingleShingleFilterFactory))
+#define OrgApacheLuceneAnalysisShingleShingleFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
 @class OrgApacheLuceneAnalysisShingleShingleFilter;
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>ShingleFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_shingle" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+ &lt;filter class="solr.ShingleFilterFactory" minShingleSize="2" maxShingleSize="2"
+ outputUnigrams="true" outputUnigramsIfNoShingles="false" tokenSeparator=" " fillerToken="_"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisShingleShingleFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new ShingleFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisShingleShingleFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -40,8 +55,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisShingleShingleFilterFactory_initWi
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisShingleShingleFilterFactory *new_OrgApacheLuceneAnalysisShingleShingleFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisShingleShingleFilterFactory *create_OrgApacheLuceneAnalysisShingleShingleFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisShingleShingleFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisShingleShingleFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisShingleShingleFilterFactory")

@@ -5,19 +5,28 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchTwoPhaseIterator_INCLUDE_ALL")
-#if OrgApacheLuceneSearchTwoPhaseIterator_RESTRICT
-#define OrgApacheLuceneSearchTwoPhaseIterator_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchTwoPhaseIterator")
+#ifdef RESTRICT_OrgApacheLuceneSearchTwoPhaseIterator
+#define INCLUDE_ALL_OrgApacheLuceneSearchTwoPhaseIterator 0
 #else
-#define OrgApacheLuceneSearchTwoPhaseIterator_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchTwoPhaseIterator 1
 #endif
-#undef OrgApacheLuceneSearchTwoPhaseIterator_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchTwoPhaseIterator
 
-#if !defined (_OrgApacheLuceneSearchTwoPhaseIterator_) && (OrgApacheLuceneSearchTwoPhaseIterator_INCLUDE_ALL || OrgApacheLuceneSearchTwoPhaseIterator_INCLUDE)
-#define _OrgApacheLuceneSearchTwoPhaseIterator_
+#if !defined (OrgApacheLuceneSearchTwoPhaseIterator_) && (INCLUDE_ALL_OrgApacheLuceneSearchTwoPhaseIterator || defined(INCLUDE_OrgApacheLuceneSearchTwoPhaseIterator))
+#define OrgApacheLuceneSearchTwoPhaseIterator_
 
 @class OrgApacheLuceneSearchDocIdSetIterator;
 
+/*!
+ @brief Returned by <code>Scorer.asTwoPhaseIterator()</code>
+ and  <code>Spans.asTwoPhaseIterator()</code>
+ to expose an approximation of a <code>DocIdSetIterator</code>.
+ When the <code>approximation()</code>'s
+ <code>DocIdSetIterator.nextDoc()</code> or <code>DocIdSetIterator.advance(int)</code>
+ return, <code>matches()</code> needs to be checked in order to know whether the
+ returned doc ID actually matches.
+ */
 @interface OrgApacheLuceneSearchTwoPhaseIterator : NSObject {
  @public
   OrgApacheLuceneSearchDocIdSetIterator *approximation_;
@@ -25,16 +34,41 @@
 
 #pragma mark Public
 
+/*!
+ @brief Return an approximation.
+ The returned <code>DocIdSetIterator</code> is a
+ superset of the matching documents, and each match needs to be confirmed
+ with <code>matches()</code> in order to know whether it matches or not. 
+ */
 - (OrgApacheLuceneSearchDocIdSetIterator *)approximation;
 
+/*!
+ @brief Return a <code>DocIdSetIterator</code> view of the provided
+ <code>TwoPhaseIterator</code>.
+ */
 + (OrgApacheLuceneSearchDocIdSetIterator *)asDocIdSetIteratorWithOrgApacheLuceneSearchTwoPhaseIterator:(OrgApacheLuceneSearchTwoPhaseIterator *)twoPhaseIterator;
 
+/*!
+ @brief Returns a <code>TwoPhaseIterator</code> for this <code>DocIdSetIterator</code>
+ when available * otherwise returns null.
+ */
 + (OrgApacheLuceneSearchTwoPhaseIterator *)asTwoPhaseIteratorWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iter;
 
+/*!
+ @brief Return whether the current doc ID that the iterator is on matches.
+ This
+ method should only be called when the iterator is positioned -- ie. not
+ when <code>DocIdSetIterator.docID()</code> is <code>-1</code> or
+ <code>DocIdSetIterator.NO_MORE_DOCS</code> -- and at most once. 
+ */
 - (jboolean)matches;
 
 #pragma mark Protected
 
+/*!
+ @brief Takes the approximation to be returned by <code>approximation</code>.
+ Not null. 
+ */
 - (instancetype)initWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)approximation;
 
 @end
@@ -53,4 +87,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTwoPhaseIterator)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchTwoPhaseIterator_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchTwoPhaseIterator")

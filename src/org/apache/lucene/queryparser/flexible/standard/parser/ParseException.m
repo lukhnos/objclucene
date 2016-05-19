@@ -16,17 +16,30 @@
 #include "org/apache/lucene/queryparser/flexible/standard/parser/ParseException.h"
 #include "org/apache/lucene/queryparser/flexible/standard/parser/Token.h"
 
-#define OrgApacheLuceneQueryparserFlexibleStandardParserParseException_serialVersionUID 1LL
-
 @interface OrgApacheLuceneQueryparserFlexibleStandardParserParseException ()
 
+/*!
+ @brief It uses "currentToken" and "expectedTokenSequences" to generate a parse
+ error message and returns it.
+ If this object has been created
+ due to a parse error, and you do not catch it (it gets thrown
+ from the parser) the correct error message
+ gets displayed.
+ */
 + (NSString *)initialiseWithOrgApacheLuceneQueryparserFlexibleStandardParserToken:(OrgApacheLuceneQueryparserFlexibleStandardParserToken *)currentToken
                                                                     withIntArray2:(IOSObjectArray *)expectedTokenSequences
                                                                 withNSStringArray:(IOSObjectArray *)tokenImage OBJC_METHOD_FAMILY_NONE;
 
 @end
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserFlexibleStandardParserParseException, serialVersionUID, jlong)
+/*!
+ @brief The version identifier for this Serializable class.
+ Increment only if the <i>serialized</i> form of the
+ class changes.
+ */
+inline jlong OrgApacheLuceneQueryparserFlexibleStandardParserParseException_get_serialVersionUID();
+#define OrgApacheLuceneQueryparserFlexibleStandardParserParseException_serialVersionUID 1LL
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserFlexibleStandardParserParseException, serialVersionUID, jlong)
 
 __attribute__((unused)) static NSString *OrgApacheLuceneQueryparserFlexibleStandardParserParseException_initialiseWithOrgApacheLuceneQueryparserFlexibleStandardParserToken_withIntArray2_withNSStringArray_(OrgApacheLuceneQueryparserFlexibleStandardParserToken *currentToken, IOSObjectArray *expectedTokenSequences, IOSObjectArray *tokenImage);
 
@@ -91,7 +104,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 @end
 
 void OrgApacheLuceneQueryparserFlexibleStandardParserParseException_initWithOrgApacheLuceneQueryparserFlexibleStandardParserToken_withIntArray2_withNSStringArray_(OrgApacheLuceneQueryparserFlexibleStandardParserParseException *self, OrgApacheLuceneQueryparserFlexibleStandardParserToken *currentTokenVal, IOSObjectArray *expectedTokenSequencesVal, IOSObjectArray *tokenImageVal) {
-  OrgApacheLuceneQueryparserFlexibleCoreQueryNodeParseException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_(self, [new_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, INVALID_SYNTAX_), [IOSObjectArray arrayWithObjects:(id[]){ OrgApacheLuceneQueryparserFlexibleStandardParserParseException_initialiseWithOrgApacheLuceneQueryparserFlexibleStandardParserToken_withIntArray2_withNSStringArray_(currentTokenVal, expectedTokenSequencesVal, tokenImageVal) } count:1 type:NSObject_class_()]) autorelease]);
+  OrgApacheLuceneQueryparserFlexibleCoreQueryNodeParseException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_(self, create_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, INVALID_SYNTAX), [IOSObjectArray arrayWithObjects:(id[]){ OrgApacheLuceneQueryparserFlexibleStandardParserParseException_initialiseWithOrgApacheLuceneQueryparserFlexibleStandardParserToken_withIntArray2_withNSStringArray_(currentTokenVal, expectedTokenSequencesVal, tokenImageVal) } count:1 type:NSObject_class_()]));
   JreStrongAssign(&self->eol_, JavaLangSystem_getPropertyWithNSString_withNSString_(@"line.separator", @"\n"));
   JreStrongAssign(&self->currentToken_, currentTokenVal);
   JreStrongAssign(&self->expectedTokenSequences_, expectedTokenSequencesVal);
@@ -99,20 +112,24 @@ void OrgApacheLuceneQueryparserFlexibleStandardParserParseException_initWithOrgA
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardParserParseException *new_OrgApacheLuceneQueryparserFlexibleStandardParserParseException_initWithOrgApacheLuceneQueryparserFlexibleStandardParserToken_withIntArray2_withNSStringArray_(OrgApacheLuceneQueryparserFlexibleStandardParserToken *currentTokenVal, IOSObjectArray *expectedTokenSequencesVal, IOSObjectArray *tokenImageVal) {
-  OrgApacheLuceneQueryparserFlexibleStandardParserParseException *self = [OrgApacheLuceneQueryparserFlexibleStandardParserParseException alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardParserParseException_initWithOrgApacheLuceneQueryparserFlexibleStandardParserToken_withIntArray2_withNSStringArray_(self, currentTokenVal, expectedTokenSequencesVal, tokenImageVal);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardParserParseException, initWithOrgApacheLuceneQueryparserFlexibleStandardParserToken_withIntArray2_withNSStringArray_, currentTokenVal, expectedTokenSequencesVal, tokenImageVal)
+}
+
+OrgApacheLuceneQueryparserFlexibleStandardParserParseException *create_OrgApacheLuceneQueryparserFlexibleStandardParserParseException_initWithOrgApacheLuceneQueryparserFlexibleStandardParserToken_withIntArray2_withNSStringArray_(OrgApacheLuceneQueryparserFlexibleStandardParserToken *currentTokenVal, IOSObjectArray *expectedTokenSequencesVal, IOSObjectArray *tokenImageVal) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardParserParseException, initWithOrgApacheLuceneQueryparserFlexibleStandardParserToken_withIntArray2_withNSStringArray_, currentTokenVal, expectedTokenSequencesVal, tokenImageVal)
 }
 
 void OrgApacheLuceneQueryparserFlexibleStandardParserParseException_init(OrgApacheLuceneQueryparserFlexibleStandardParserParseException *self) {
-  OrgApacheLuceneQueryparserFlexibleCoreQueryNodeParseException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_(self, [new_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, INVALID_SYNTAX_), [IOSObjectArray arrayWithObjects:(id[]){ @"Error" } count:1 type:NSObject_class_()]) autorelease]);
+  OrgApacheLuceneQueryparserFlexibleCoreQueryNodeParseException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_(self, create_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, INVALID_SYNTAX), [IOSObjectArray arrayWithObjects:(id[]){ @"Error" } count:1 type:NSObject_class_()]));
   JreStrongAssign(&self->eol_, JavaLangSystem_getPropertyWithNSString_withNSString_(@"line.separator", @"\n"));
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardParserParseException *new_OrgApacheLuceneQueryparserFlexibleStandardParserParseException_init() {
-  OrgApacheLuceneQueryparserFlexibleStandardParserParseException *self = [OrgApacheLuceneQueryparserFlexibleStandardParserParseException alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardParserParseException_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardParserParseException, init)
+}
+
+OrgApacheLuceneQueryparserFlexibleStandardParserParseException *create_OrgApacheLuceneQueryparserFlexibleStandardParserParseException_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardParserParseException, init)
 }
 
 void OrgApacheLuceneQueryparserFlexibleStandardParserParseException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_(OrgApacheLuceneQueryparserFlexibleStandardParserParseException *self, id<OrgApacheLuceneQueryparserFlexibleMessagesMessage> message) {
@@ -121,15 +138,17 @@ void OrgApacheLuceneQueryparserFlexibleStandardParserParseException_initWithOrgA
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardParserParseException *new_OrgApacheLuceneQueryparserFlexibleStandardParserParseException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_(id<OrgApacheLuceneQueryparserFlexibleMessagesMessage> message) {
-  OrgApacheLuceneQueryparserFlexibleStandardParserParseException *self = [OrgApacheLuceneQueryparserFlexibleStandardParserParseException alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardParserParseException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_(self, message);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardParserParseException, initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_, message)
+}
+
+OrgApacheLuceneQueryparserFlexibleStandardParserParseException *create_OrgApacheLuceneQueryparserFlexibleStandardParserParseException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_(id<OrgApacheLuceneQueryparserFlexibleMessagesMessage> message) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardParserParseException, initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_, message)
 }
 
 NSString *OrgApacheLuceneQueryparserFlexibleStandardParserParseException_initialiseWithOrgApacheLuceneQueryparserFlexibleStandardParserToken_withIntArray2_withNSStringArray_(OrgApacheLuceneQueryparserFlexibleStandardParserToken *currentToken, IOSObjectArray *expectedTokenSequences, IOSObjectArray *tokenImage) {
   OrgApacheLuceneQueryparserFlexibleStandardParserParseException_initialize();
   NSString *eol = JavaLangSystem_getPropertyWithNSString_withNSString_(@"line.separator", @"\n");
-  JavaLangStringBuilder *expected = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *expected = create_JavaLangStringBuilder_init();
   jint maxSize = 0;
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(expectedTokenSequences))->size_; i++) {
     if (maxSize < ((IOSIntArray *) nil_chk(IOSObjectArray_Get(expectedTokenSequences, i)))->size_) {
@@ -171,7 +190,7 @@ NSString *OrgApacheLuceneQueryparserFlexibleStandardParserParseException_initial
 
 NSString *OrgApacheLuceneQueryparserFlexibleStandardParserParseException_add_escapesWithNSString_(NSString *str) {
   OrgApacheLuceneQueryparserFlexibleStandardParserParseException_initialize();
-  JavaLangStringBuilder *retval = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *retval = create_JavaLangStringBuilder_init();
   jchar ch;
   for (jint i = 0; i < ((jint) [((NSString *) nil_chk(str)) length]); i++) {
     switch ([str charAtWithInt:i]) {

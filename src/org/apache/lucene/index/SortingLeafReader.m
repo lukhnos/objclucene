@@ -54,6 +54,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSortingLeafReader_initWi
 
 __attribute__((unused)) static OrgApacheLuceneIndexSortingLeafReader *new_OrgApacheLuceneIndexSortingLeafReader_initWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexLeafReader *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexSortingLeafReader *create_OrgApacheLuceneIndexSortingLeafReader_initWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexLeafReader *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap);
+
 @interface OrgApacheLuceneIndexSortingLeafReader_SortingFields : OrgApacheLuceneIndexFilterLeafReader_FilterFields {
  @public
   OrgApacheLuceneIndexSorter_DocMap *docMap_;
@@ -66,7 +68,6 @@ __attribute__((unused)) static OrgApacheLuceneIndexSortingLeafReader *new_OrgApa
 
 - (OrgApacheLuceneIndexTerms *)termsWithNSString:(NSString *)field;
 
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexSortingLeafReader_SortingFields)
@@ -78,16 +79,18 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSortingLeafReader_Sortin
 
 __attribute__((unused)) static OrgApacheLuceneIndexSortingLeafReader_SortingFields *new_OrgApacheLuceneIndexSortingLeafReader_SortingFields_initWithOrgApacheLuceneIndexFields_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexFields *inArg, OrgApacheLuceneIndexFieldInfos *infos, OrgApacheLuceneIndexSorter_DocMap *docMap) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexSortingLeafReader_SortingFields *create_OrgApacheLuceneIndexSortingLeafReader_SortingFields_initWithOrgApacheLuceneIndexFields_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexFields *inArg, OrgApacheLuceneIndexFieldInfos *infos, OrgApacheLuceneIndexSorter_DocMap *docMap);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortingLeafReader_SortingFields)
 
 @interface OrgApacheLuceneIndexSortingLeafReader_SortingTerms : OrgApacheLuceneIndexFilterLeafReader_FilterTerms {
  @public
   OrgApacheLuceneIndexSorter_DocMap *docMap_;
-  OrgApacheLuceneIndexIndexOptionsEnum *indexOptions_;
+  OrgApacheLuceneIndexIndexOptions *indexOptions_;
 }
 
 - (instancetype)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)inArg
-         withOrgApacheLuceneIndexIndexOptionsEnum:(OrgApacheLuceneIndexIndexOptionsEnum *)indexOptions
+             withOrgApacheLuceneIndexIndexOptions:(OrgApacheLuceneIndexIndexOptions *)indexOptions
             withOrgApacheLuceneIndexSorter_DocMap:(OrgApacheLuceneIndexSorter_DocMap *)docMap;
 
 - (OrgApacheLuceneIndexTermsEnum *)iterator;
@@ -100,24 +103,26 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortingLeafReader_SortingFields)
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexSortingLeafReader_SortingTerms)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSortingLeafReader_SortingTerms, docMap_, OrgApacheLuceneIndexSorter_DocMap *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSortingLeafReader_SortingTerms, indexOptions_, OrgApacheLuceneIndexIndexOptionsEnum *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSortingLeafReader_SortingTerms, indexOptions_, OrgApacheLuceneIndexIndexOptions *)
 
-__attribute__((unused)) static void OrgApacheLuceneIndexSortingLeafReader_SortingTerms_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneIndexIndexOptionsEnum_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexSortingLeafReader_SortingTerms *self, OrgApacheLuceneIndexTerms *inArg, OrgApacheLuceneIndexIndexOptionsEnum *indexOptions, OrgApacheLuceneIndexSorter_DocMap *docMap);
+__attribute__((unused)) static void OrgApacheLuceneIndexSortingLeafReader_SortingTerms_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneIndexIndexOptions_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexSortingLeafReader_SortingTerms *self, OrgApacheLuceneIndexTerms *inArg, OrgApacheLuceneIndexIndexOptions *indexOptions, OrgApacheLuceneIndexSorter_DocMap *docMap);
 
-__attribute__((unused)) static OrgApacheLuceneIndexSortingLeafReader_SortingTerms *new_OrgApacheLuceneIndexSortingLeafReader_SortingTerms_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneIndexIndexOptionsEnum_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexTerms *inArg, OrgApacheLuceneIndexIndexOptionsEnum *indexOptions, OrgApacheLuceneIndexSorter_DocMap *docMap) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneIndexSortingLeafReader_SortingTerms *new_OrgApacheLuceneIndexSortingLeafReader_SortingTerms_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneIndexIndexOptions_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexTerms *inArg, OrgApacheLuceneIndexIndexOptions *indexOptions, OrgApacheLuceneIndexSorter_DocMap *docMap) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexSortingLeafReader_SortingTerms *create_OrgApacheLuceneIndexSortingLeafReader_SortingTerms_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneIndexIndexOptions_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexTerms *inArg, OrgApacheLuceneIndexIndexOptions *indexOptions, OrgApacheLuceneIndexSorter_DocMap *docMap);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortingLeafReader_SortingTerms)
 
 @interface OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum : OrgApacheLuceneIndexFilterLeafReader_FilterTermsEnum {
  @public
   OrgApacheLuceneIndexSorter_DocMap *docMap_;
-  OrgApacheLuceneIndexIndexOptionsEnum *indexOptions_;
+  OrgApacheLuceneIndexIndexOptions *indexOptions_;
   jboolean hasPositions_;
 }
 
 - (instancetype)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)inArg
                 withOrgApacheLuceneIndexSorter_DocMap:(OrgApacheLuceneIndexSorter_DocMap *)docMap
-             withOrgApacheLuceneIndexIndexOptionsEnum:(OrgApacheLuceneIndexIndexOptionsEnum *)indexOptions
+                 withOrgApacheLuceneIndexIndexOptions:(OrgApacheLuceneIndexIndexOptions *)indexOptions
                                           withBoolean:(jboolean)hasPositions;
 
 - (id<OrgApacheLuceneUtilBits>)newToOldWithOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)liveDocs OBJC_METHOD_FAMILY_NONE;
@@ -130,11 +135,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortingLeafReader_SortingTerms)
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum, docMap_, OrgApacheLuceneIndexSorter_DocMap *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum, indexOptions_, OrgApacheLuceneIndexIndexOptionsEnum *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum, indexOptions_, OrgApacheLuceneIndexIndexOptions *)
 
-__attribute__((unused)) static void OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneIndexSorter_DocMap_withOrgApacheLuceneIndexIndexOptionsEnum_withBoolean_(OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum *self, OrgApacheLuceneIndexTermsEnum *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap, OrgApacheLuceneIndexIndexOptionsEnum *indexOptions, jboolean hasPositions);
+__attribute__((unused)) static void OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneIndexSorter_DocMap_withOrgApacheLuceneIndexIndexOptions_withBoolean_(OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum *self, OrgApacheLuceneIndexTermsEnum *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap, OrgApacheLuceneIndexIndexOptions *indexOptions, jboolean hasPositions);
 
-__attribute__((unused)) static OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum *new_OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneIndexSorter_DocMap_withOrgApacheLuceneIndexIndexOptionsEnum_withBoolean_(OrgApacheLuceneIndexTermsEnum *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap, OrgApacheLuceneIndexIndexOptionsEnum *indexOptions, jboolean hasPositions) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum *new_OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneIndexSorter_DocMap_withOrgApacheLuceneIndexIndexOptions_withBoolean_(OrgApacheLuceneIndexTermsEnum *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap, OrgApacheLuceneIndexIndexOptions *indexOptions, jboolean hasPositions) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum *create_OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneIndexSorter_DocMap_withOrgApacheLuceneIndexIndexOptions_withBoolean_(OrgApacheLuceneIndexTermsEnum *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap, OrgApacheLuceneIndexIndexOptions *indexOptions, jboolean hasPositions);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum)
 
@@ -162,6 +169,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSortingLeafReader_Sortin
 
 __attribute__((unused)) static OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_$1 *new_OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_$1_initWithOrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_withOrgApacheLuceneUtilBits_(OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum *outer$, id<OrgApacheLuceneUtilBits> capture$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_$1 *create_OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_$1_initWithOrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_withOrgApacheLuceneUtilBits_(OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum *outer$, id<OrgApacheLuceneUtilBits> capture$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_$1)
 
 @interface OrgApacheLuceneIndexSortingLeafReader_SortingBinaryDocValues : OrgApacheLuceneIndexBinaryDocValues {
@@ -186,6 +195,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSortingLeafReader_Sortin
 
 __attribute__((unused)) static OrgApacheLuceneIndexSortingLeafReader_SortingBinaryDocValues *new_OrgApacheLuceneIndexSortingLeafReader_SortingBinaryDocValues_initWithOrgApacheLuceneIndexBinaryDocValues_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexBinaryDocValues *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexSortingLeafReader_SortingBinaryDocValues *create_OrgApacheLuceneIndexSortingLeafReader_SortingBinaryDocValues_initWithOrgApacheLuceneIndexBinaryDocValues_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexBinaryDocValues *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortingLeafReader_SortingBinaryDocValues)
 
 @interface OrgApacheLuceneIndexSortingLeafReader_SortingNumericDocValues : OrgApacheLuceneIndexNumericDocValues {
@@ -209,6 +220,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSortingLeafReader_SortingNumericDocValue
 __attribute__((unused)) static void OrgApacheLuceneIndexSortingLeafReader_SortingNumericDocValues_initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexSortingLeafReader_SortingNumericDocValues *self, OrgApacheLuceneIndexNumericDocValues *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap);
 
 __attribute__((unused)) static OrgApacheLuceneIndexSortingLeafReader_SortingNumericDocValues *new_OrgApacheLuceneIndexSortingLeafReader_SortingNumericDocValues_initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexNumericDocValues *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexSortingLeafReader_SortingNumericDocValues *create_OrgApacheLuceneIndexSortingLeafReader_SortingNumericDocValues_initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexNumericDocValues *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortingLeafReader_SortingNumericDocValues)
 
@@ -238,6 +251,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSortingLeafReader_Sortin
 
 __attribute__((unused)) static OrgApacheLuceneIndexSortingLeafReader_SortingSortedNumericDocValues *new_OrgApacheLuceneIndexSortingLeafReader_SortingSortedNumericDocValues_initWithOrgApacheLuceneIndexSortedNumericDocValues_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexSortedNumericDocValues *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexSortingLeafReader_SortingSortedNumericDocValues *create_OrgApacheLuceneIndexSortingLeafReader_SortingSortedNumericDocValues_initWithOrgApacheLuceneIndexSortedNumericDocValues_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexSortedNumericDocValues *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortingLeafReader_SortingSortedNumericDocValues)
 
 @interface OrgApacheLuceneIndexSortingLeafReader_SortingBits : NSObject < OrgApacheLuceneUtilBits > {
@@ -263,6 +278,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSortingLeafReader_SortingBits, docMap_, 
 __attribute__((unused)) static void OrgApacheLuceneIndexSortingLeafReader_SortingBits_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexSortingLeafReader_SortingBits *self, id<OrgApacheLuceneUtilBits> inArg, OrgApacheLuceneIndexSorter_DocMap *docMap);
 
 __attribute__((unused)) static OrgApacheLuceneIndexSortingLeafReader_SortingBits *new_OrgApacheLuceneIndexSortingLeafReader_SortingBits_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexSorter_DocMap_(id<OrgApacheLuceneUtilBits> inArg, OrgApacheLuceneIndexSorter_DocMap *docMap) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexSortingLeafReader_SortingBits *create_OrgApacheLuceneIndexSortingLeafReader_SortingBits_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexSorter_DocMap_(id<OrgApacheLuceneUtilBits> inArg, OrgApacheLuceneIndexSorter_DocMap *docMap);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortingLeafReader_SortingBits)
 
@@ -296,6 +313,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSortingLeafReader_Sortin
 
 __attribute__((unused)) static OrgApacheLuceneIndexSortingLeafReader_SortingSortedDocValues *new_OrgApacheLuceneIndexSortingLeafReader_SortingSortedDocValues_initWithOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexSortedDocValues *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexSortingLeafReader_SortingSortedDocValues *create_OrgApacheLuceneIndexSortingLeafReader_SortingSortedDocValues_initWithOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexSortedDocValues *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortingLeafReader_SortingSortedDocValues)
 
 @interface OrgApacheLuceneIndexSortingLeafReader_SortingSortedSetDocValues : OrgApacheLuceneIndexSortedSetDocValues {
@@ -327,6 +346,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSortingLeafReader_SortingSortedSetDocVal
 __attribute__((unused)) static void OrgApacheLuceneIndexSortingLeafReader_SortingSortedSetDocValues_initWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexSortingLeafReader_SortingSortedSetDocValues *self, OrgApacheLuceneIndexSortedSetDocValues *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap);
 
 __attribute__((unused)) static OrgApacheLuceneIndexSortingLeafReader_SortingSortedSetDocValues *new_OrgApacheLuceneIndexSortingLeafReader_SortingSortedSetDocValues_initWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexSortedSetDocValues *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexSortingLeafReader_SortingSortedSetDocValues *create_OrgApacheLuceneIndexSortingLeafReader_SortingSortedSetDocValues_initWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexSortedSetDocValues *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortingLeafReader_SortingSortedSetDocValues)
 
@@ -391,6 +412,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSortingLeafReader_Sortin
 
 __attribute__((unused)) static OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_DocFreqSorter *new_OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_DocFreqSorter_initWithInt_(jint maxDoc) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_DocFreqSorter *create_OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_DocFreqSorter_initWithInt_(jint maxDoc);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_DocFreqSorter)
 
 @interface OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum () {
@@ -425,6 +448,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum, f
 
 __attribute__((unused)) static void OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_addPositionsWithOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneStoreIndexOutput_(OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum *self, OrgApacheLuceneIndexPostingsEnum *inArg, OrgApacheLuceneStoreIndexOutput *outArg);
 
+/*!
+ @brief A <code>TimSorter</code> which sorts two parallel arrays of doc IDs and
+ offsets in one go.
+ Everytime a doc ID is 'swapped', its corresponding offset
+ is swapped too.
+ */
 @interface OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_DocOffsetSorter : OrgApacheLuceneUtilTimSorter {
  @public
   IOSIntArray *docs_;
@@ -469,6 +498,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSortingLeafReader_Sortin
 
 __attribute__((unused)) static OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_DocOffsetSorter *new_OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_DocOffsetSorter_initWithInt_(jint maxDoc) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_DocOffsetSorter *create_OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_DocOffsetSorter_initWithInt_(jint maxDoc);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_DocOffsetSorter)
 
 @implementation OrgApacheLuceneIndexSortingLeafReader
@@ -495,7 +526,7 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 }
 
 - (OrgApacheLuceneIndexFields *)fields {
-  return [new_OrgApacheLuceneIndexSortingLeafReader_SortingFields_initWithOrgApacheLuceneIndexFields_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexSorter_DocMap_([((OrgApacheLuceneIndexLeafReader *) nil_chk(in_)) fields], [in_ getFieldInfos], docMap_) autorelease];
+  return create_OrgApacheLuceneIndexSortingLeafReader_SortingFields_initWithOrgApacheLuceneIndexFields_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexSorter_DocMap_([((OrgApacheLuceneIndexLeafReader *) nil_chk(in_)) fields], [in_ getFieldInfos], docMap_);
 }
 
 - (OrgApacheLuceneIndexBinaryDocValues *)getBinaryDocValuesWithNSString:(NSString *)field {
@@ -504,7 +535,7 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
     return nil;
   }
   else {
-    return [new_OrgApacheLuceneIndexSortingLeafReader_SortingBinaryDocValues_initWithOrgApacheLuceneIndexBinaryDocValues_withOrgApacheLuceneIndexSorter_DocMap_(oldDocValues, docMap_) autorelease];
+    return create_OrgApacheLuceneIndexSortingLeafReader_SortingBinaryDocValues_initWithOrgApacheLuceneIndexBinaryDocValues_withOrgApacheLuceneIndexSorter_DocMap_(oldDocValues, docMap_);
   }
 }
 
@@ -514,7 +545,7 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
     return nil;
   }
   else {
-    return [new_OrgApacheLuceneIndexSortingLeafReader_SortingBits_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexSorter_DocMap_(inLiveDocs, docMap_) autorelease];
+    return create_OrgApacheLuceneIndexSortingLeafReader_SortingBits_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexSorter_DocMap_(inLiveDocs, docMap_);
   }
 }
 
@@ -524,14 +555,14 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
     return nil;
   }
   else {
-    return [new_OrgApacheLuceneIndexSortingLeafReader_SortingNumericDocValues_initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneIndexSorter_DocMap_(norm, docMap_) autorelease];
+    return create_OrgApacheLuceneIndexSortingLeafReader_SortingNumericDocValues_initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneIndexSorter_DocMap_(norm, docMap_);
   }
 }
 
 - (OrgApacheLuceneIndexNumericDocValues *)getNumericDocValuesWithNSString:(NSString *)field {
   OrgApacheLuceneIndexNumericDocValues *oldDocValues = [((OrgApacheLuceneIndexLeafReader *) nil_chk(in_)) getNumericDocValuesWithNSString:field];
   if (oldDocValues == nil) return nil;
-  return [new_OrgApacheLuceneIndexSortingLeafReader_SortingNumericDocValues_initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneIndexSorter_DocMap_(oldDocValues, docMap_) autorelease];
+  return create_OrgApacheLuceneIndexSortingLeafReader_SortingNumericDocValues_initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneIndexSorter_DocMap_(oldDocValues, docMap_);
 }
 
 - (OrgApacheLuceneIndexSortedNumericDocValues *)getSortedNumericDocValuesWithNSString:(NSString *)field {
@@ -540,7 +571,7 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
     return nil;
   }
   else {
-    return [new_OrgApacheLuceneIndexSortingLeafReader_SortingSortedNumericDocValues_initWithOrgApacheLuceneIndexSortedNumericDocValues_withOrgApacheLuceneIndexSorter_DocMap_(oldDocValues, docMap_) autorelease];
+    return create_OrgApacheLuceneIndexSortingLeafReader_SortingSortedNumericDocValues_initWithOrgApacheLuceneIndexSortedNumericDocValues_withOrgApacheLuceneIndexSorter_DocMap_(oldDocValues, docMap_);
   }
 }
 
@@ -550,7 +581,7 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
     return nil;
   }
   else {
-    return [new_OrgApacheLuceneIndexSortingLeafReader_SortingSortedDocValues_initWithOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneIndexSorter_DocMap_(sortedDV, docMap_) autorelease];
+    return create_OrgApacheLuceneIndexSortingLeafReader_SortingSortedDocValues_initWithOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneIndexSorter_DocMap_(sortedDV, docMap_);
   }
 }
 
@@ -560,7 +591,7 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
     return nil;
   }
   else {
-    return [new_OrgApacheLuceneIndexSortingLeafReader_SortingSortedSetDocValues_initWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneIndexSorter_DocMap_(sortedSetDV, docMap_) autorelease];
+    return create_OrgApacheLuceneIndexSortingLeafReader_SortingSortedSetDocValues_initWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneIndexSorter_DocMap_(sortedSetDV, docMap_);
   }
 }
 
@@ -570,7 +601,7 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
     return bits;
   }
   else {
-    return [new_OrgApacheLuceneIndexSortingLeafReader_SortingBits_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexSorter_DocMap_(bits, docMap_) autorelease];
+    return create_OrgApacheLuceneIndexSortingLeafReader_SortingBits_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexSorter_DocMap_(bits, docMap_);
   }
 }
 
@@ -617,7 +648,7 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 OrgApacheLuceneIndexLeafReader *OrgApacheLuceneIndexSortingLeafReader_wrapWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneSearchSort_(OrgApacheLuceneIndexLeafReader *reader, OrgApacheLuceneSearchSort *sort) {
   OrgApacheLuceneIndexSortingLeafReader_initialize();
-  return OrgApacheLuceneIndexSortingLeafReader_wrapWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneIndexSorter_DocMap_(reader, [((OrgApacheLuceneIndexSorter *) [new_OrgApacheLuceneIndexSorter_initWithOrgApacheLuceneSearchSort_(sort) autorelease]) sortWithOrgApacheLuceneIndexLeafReader:reader]);
+  return OrgApacheLuceneIndexSortingLeafReader_wrapWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneIndexSorter_DocMap_(reader, [create_OrgApacheLuceneIndexSorter_initWithOrgApacheLuceneSearchSort_(sort) sortWithOrgApacheLuceneIndexLeafReader:reader]);
 }
 
 OrgApacheLuceneIndexLeafReader *OrgApacheLuceneIndexSortingLeafReader_wrapWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexLeafReader *reader, OrgApacheLuceneIndexSorter_DocMap *docMap) {
@@ -625,11 +656,11 @@ OrgApacheLuceneIndexLeafReader *OrgApacheLuceneIndexSortingLeafReader_wrapWithOr
   if (docMap == nil) {
     return reader;
   }
-  if ([((OrgApacheLuceneIndexLeafReader *) nil_chk(reader)) maxDoc] != [((OrgApacheLuceneIndexSorter_DocMap *) nil_chk(docMap)) size]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$I", @"reader.maxDoc() should be equal to docMap.size(), got", [reader maxDoc], @" != ", [docMap size])) autorelease];
+  if ([((OrgApacheLuceneIndexLeafReader *) nil_chk(reader)) maxDoc] != [docMap size]) {
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$I", @"reader.maxDoc() should be equal to docMap.size(), got", [reader maxDoc], @" != ", [docMap size]));
   }
   JreAssert((OrgApacheLuceneIndexSorter_isConsistentWithOrgApacheLuceneIndexSorter_DocMap_(docMap)), (@"org/apache/lucene/index/SortingLeafReader.java:760 condition failed: assert Sorter.isConsistent(docMap);"));
-  return [new_OrgApacheLuceneIndexSortingLeafReader_initWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneIndexSorter_DocMap_(reader, docMap) autorelease];
+  return create_OrgApacheLuceneIndexSortingLeafReader_initWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneIndexSorter_DocMap_(reader, docMap);
 }
 
 void OrgApacheLuceneIndexSortingLeafReader_initWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexSortingLeafReader *self, OrgApacheLuceneIndexLeafReader *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap) {
@@ -638,9 +669,11 @@ void OrgApacheLuceneIndexSortingLeafReader_initWithOrgApacheLuceneIndexLeafReade
 }
 
 OrgApacheLuceneIndexSortingLeafReader *new_OrgApacheLuceneIndexSortingLeafReader_initWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexLeafReader *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap) {
-  OrgApacheLuceneIndexSortingLeafReader *self = [OrgApacheLuceneIndexSortingLeafReader alloc];
-  OrgApacheLuceneIndexSortingLeafReader_initWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneIndexSorter_DocMap_(self, inArg, docMap);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSortingLeafReader, initWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneIndexSorter_DocMap_, inArg, docMap)
+}
+
+OrgApacheLuceneIndexSortingLeafReader *create_OrgApacheLuceneIndexSortingLeafReader_initWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexLeafReader *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSortingLeafReader, initWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneIndexSorter_DocMap_, inArg, docMap)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortingLeafReader)
@@ -660,18 +693,18 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortingLeafReader)
     return nil;
   }
   else {
-    return [new_OrgApacheLuceneIndexSortingLeafReader_SortingTerms_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneIndexIndexOptionsEnum_withOrgApacheLuceneIndexSorter_DocMap_(terms, [((OrgApacheLuceneIndexFieldInfo *) nil_chk([((OrgApacheLuceneIndexFieldInfos *) nil_chk(infos_)) fieldInfoWithNSString:field])) getIndexOptions], docMap_) autorelease];
+    return create_OrgApacheLuceneIndexSortingLeafReader_SortingTerms_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneIndexIndexOptions_withOrgApacheLuceneIndexSorter_DocMap_(terms, [((OrgApacheLuceneIndexFieldInfo *) nil_chk([((OrgApacheLuceneIndexFieldInfos *) nil_chk(infos_)) fieldInfoWithNSString:field])) getIndexOptions], docMap_);
   }
+}
+
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
+  return JreDefaultFastEnumeration(self, state, stackbuf, len);
 }
 
 - (void)dealloc {
   RELEASE_(docMap_);
   RELEASE_(infos_);
   [super dealloc];
-}
-
-- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -696,9 +729,11 @@ void OrgApacheLuceneIndexSortingLeafReader_SortingFields_initWithOrgApacheLucene
 }
 
 OrgApacheLuceneIndexSortingLeafReader_SortingFields *new_OrgApacheLuceneIndexSortingLeafReader_SortingFields_initWithOrgApacheLuceneIndexFields_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexFields *inArg, OrgApacheLuceneIndexFieldInfos *infos, OrgApacheLuceneIndexSorter_DocMap *docMap) {
-  OrgApacheLuceneIndexSortingLeafReader_SortingFields *self = [OrgApacheLuceneIndexSortingLeafReader_SortingFields alloc];
-  OrgApacheLuceneIndexSortingLeafReader_SortingFields_initWithOrgApacheLuceneIndexFields_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexSorter_DocMap_(self, inArg, infos, docMap);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSortingLeafReader_SortingFields, initWithOrgApacheLuceneIndexFields_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexSorter_DocMap_, inArg, infos, docMap)
+}
+
+OrgApacheLuceneIndexSortingLeafReader_SortingFields *create_OrgApacheLuceneIndexSortingLeafReader_SortingFields_initWithOrgApacheLuceneIndexFields_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexFields *inArg, OrgApacheLuceneIndexFieldInfos *infos, OrgApacheLuceneIndexSorter_DocMap *docMap) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSortingLeafReader_SortingFields, initWithOrgApacheLuceneIndexFields_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexSorter_DocMap_, inArg, infos, docMap)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortingLeafReader_SortingFields)
@@ -706,19 +741,19 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortingLeafReader_SortingFi
 @implementation OrgApacheLuceneIndexSortingLeafReader_SortingTerms
 
 - (instancetype)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)inArg
-         withOrgApacheLuceneIndexIndexOptionsEnum:(OrgApacheLuceneIndexIndexOptionsEnum *)indexOptions
+             withOrgApacheLuceneIndexIndexOptions:(OrgApacheLuceneIndexIndexOptions *)indexOptions
             withOrgApacheLuceneIndexSorter_DocMap:(OrgApacheLuceneIndexSorter_DocMap *)docMap {
-  OrgApacheLuceneIndexSortingLeafReader_SortingTerms_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneIndexIndexOptionsEnum_withOrgApacheLuceneIndexSorter_DocMap_(self, inArg, indexOptions, docMap);
+  OrgApacheLuceneIndexSortingLeafReader_SortingTerms_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneIndexIndexOptions_withOrgApacheLuceneIndexSorter_DocMap_(self, inArg, indexOptions, docMap);
   return self;
 }
 
 - (OrgApacheLuceneIndexTermsEnum *)iterator {
-  return [new_OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneIndexSorter_DocMap_withOrgApacheLuceneIndexIndexOptionsEnum_withBoolean_([((OrgApacheLuceneIndexTerms *) nil_chk(in_)) iterator], docMap_, indexOptions_, [self hasPositions]) autorelease];
+  return create_OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneIndexSorter_DocMap_withOrgApacheLuceneIndexIndexOptions_withBoolean_([((OrgApacheLuceneIndexTerms *) nil_chk(in_)) iterator], docMap_, indexOptions_, [self hasPositions]);
 }
 
 - (OrgApacheLuceneIndexTermsEnum *)intersectWithOrgApacheLuceneUtilAutomatonCompiledAutomaton:(OrgApacheLuceneUtilAutomatonCompiledAutomaton *)compiled
                                                               withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)startTerm {
-  return [new_OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneIndexSorter_DocMap_withOrgApacheLuceneIndexIndexOptionsEnum_withBoolean_([((OrgApacheLuceneIndexTerms *) nil_chk(in_)) intersectWithOrgApacheLuceneUtilAutomatonCompiledAutomaton:compiled withOrgApacheLuceneUtilBytesRef:startTerm], docMap_, indexOptions_, [self hasPositions]) autorelease];
+  return create_OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneIndexSorter_DocMap_withOrgApacheLuceneIndexIndexOptions_withBoolean_([((OrgApacheLuceneIndexTerms *) nil_chk(in_)) intersectWithOrgApacheLuceneUtilAutomatonCompiledAutomaton:compiled withOrgApacheLuceneUtilBytesRef:startTerm], docMap_, indexOptions_, [self hasPositions]);
 }
 
 - (void)dealloc {
@@ -729,7 +764,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortingLeafReader_SortingFi
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTerms:withOrgApacheLuceneIndexIndexOptionsEnum:withOrgApacheLuceneIndexSorter_DocMap:", "SortingTerms", NULL, 0x1, NULL, NULL },
+    { "initWithOrgApacheLuceneIndexTerms:withOrgApacheLuceneIndexIndexOptions:withOrgApacheLuceneIndexSorter_DocMap:", "SortingTerms", NULL, 0x1, NULL, NULL },
     { "iterator", NULL, "Lorg.apache.lucene.index.TermsEnum;", 0x1, "Ljava.io.IOException;", NULL },
     { "intersectWithOrgApacheLuceneUtilAutomatonCompiledAutomaton:withOrgApacheLuceneUtilBytesRef:", "intersect", "Lorg.apache.lucene.index.TermsEnum;", 0x1, "Ljava.io.IOException;", NULL },
   };
@@ -743,16 +778,18 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortingLeafReader_SortingFi
 
 @end
 
-void OrgApacheLuceneIndexSortingLeafReader_SortingTerms_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneIndexIndexOptionsEnum_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexSortingLeafReader_SortingTerms *self, OrgApacheLuceneIndexTerms *inArg, OrgApacheLuceneIndexIndexOptionsEnum *indexOptions, OrgApacheLuceneIndexSorter_DocMap *docMap) {
+void OrgApacheLuceneIndexSortingLeafReader_SortingTerms_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneIndexIndexOptions_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexSortingLeafReader_SortingTerms *self, OrgApacheLuceneIndexTerms *inArg, OrgApacheLuceneIndexIndexOptions *indexOptions, OrgApacheLuceneIndexSorter_DocMap *docMap) {
   OrgApacheLuceneIndexFilterLeafReader_FilterTerms_initWithOrgApacheLuceneIndexTerms_(self, inArg);
   JreStrongAssign(&self->docMap_, docMap);
   JreStrongAssign(&self->indexOptions_, indexOptions);
 }
 
-OrgApacheLuceneIndexSortingLeafReader_SortingTerms *new_OrgApacheLuceneIndexSortingLeafReader_SortingTerms_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneIndexIndexOptionsEnum_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexTerms *inArg, OrgApacheLuceneIndexIndexOptionsEnum *indexOptions, OrgApacheLuceneIndexSorter_DocMap *docMap) {
-  OrgApacheLuceneIndexSortingLeafReader_SortingTerms *self = [OrgApacheLuceneIndexSortingLeafReader_SortingTerms alloc];
-  OrgApacheLuceneIndexSortingLeafReader_SortingTerms_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneIndexIndexOptionsEnum_withOrgApacheLuceneIndexSorter_DocMap_(self, inArg, indexOptions, docMap);
-  return self;
+OrgApacheLuceneIndexSortingLeafReader_SortingTerms *new_OrgApacheLuceneIndexSortingLeafReader_SortingTerms_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneIndexIndexOptions_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexTerms *inArg, OrgApacheLuceneIndexIndexOptions *indexOptions, OrgApacheLuceneIndexSorter_DocMap *docMap) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSortingLeafReader_SortingTerms, initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneIndexIndexOptions_withOrgApacheLuceneIndexSorter_DocMap_, inArg, indexOptions, docMap)
+}
+
+OrgApacheLuceneIndexSortingLeafReader_SortingTerms *create_OrgApacheLuceneIndexSortingLeafReader_SortingTerms_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneIndexIndexOptions_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexTerms *inArg, OrgApacheLuceneIndexIndexOptions *indexOptions, OrgApacheLuceneIndexSorter_DocMap *docMap) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSortingLeafReader_SortingTerms, initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneIndexIndexOptions_withOrgApacheLuceneIndexSorter_DocMap_, inArg, indexOptions, docMap)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortingLeafReader_SortingTerms)
@@ -761,9 +798,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortingLeafReader_SortingTe
 
 - (instancetype)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)inArg
                 withOrgApacheLuceneIndexSorter_DocMap:(OrgApacheLuceneIndexSorter_DocMap *)docMap
-             withOrgApacheLuceneIndexIndexOptionsEnum:(OrgApacheLuceneIndexIndexOptionsEnum *)indexOptions
+                 withOrgApacheLuceneIndexIndexOptions:(OrgApacheLuceneIndexIndexOptions *)indexOptions
                                           withBoolean:(jboolean)hasPositions {
-  OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneIndexSorter_DocMap_withOrgApacheLuceneIndexIndexOptionsEnum_withBoolean_(self, inArg, docMap, indexOptions, hasPositions);
+  OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneIndexSorter_DocMap_withOrgApacheLuceneIndexIndexOptions_withBoolean_(self, inArg, docMap, indexOptions, hasPositions);
   return self;
 }
 
@@ -771,7 +808,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortingLeafReader_SortingTe
   if (liveDocs == nil) {
     return nil;
   }
-  return [new_OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_$1_initWithOrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_withOrgApacheLuceneUtilBits_(self, liveDocs) autorelease];
+  return create_OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_$1_initWithOrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_withOrgApacheLuceneUtilBits_(self, liveDocs);
 }
 
 - (OrgApacheLuceneIndexPostingsEnum *)postingsWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)reuse
@@ -780,7 +817,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortingLeafReader_SortingTe
     OrgApacheLuceneIndexPostingsEnum *inReuse;
     OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum *wrapReuse;
     if (reuse != nil && [reuse isKindOfClass:[OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum class]]) {
-      wrapReuse = (OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum *) check_class_cast(reuse, [OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum class]);
+      wrapReuse = (OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum *) cast_chk(reuse, [OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum class]);
       inReuse = [wrapReuse getWrapped];
     }
     else {
@@ -788,13 +825,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortingLeafReader_SortingTe
       inReuse = reuse;
     }
     OrgApacheLuceneIndexPostingsEnum *inDocsAndPositions = [((OrgApacheLuceneIndexTermsEnum *) nil_chk(in_)) postingsWithOrgApacheLuceneIndexPostingsEnum:inReuse withInt:flags];
-    jboolean storeOffsets = [((OrgApacheLuceneIndexIndexOptionsEnum *) nil_chk(indexOptions_)) compareToWithId:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS)] >= 0;
-    return [new_OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_initWithInt_withOrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_withOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneIndexSorter_DocMap_withBoolean_([((OrgApacheLuceneIndexSorter_DocMap *) nil_chk(docMap_)) size], wrapReuse, inDocsAndPositions, docMap_, storeOffsets) autorelease];
+    jboolean storeOffsets = [((OrgApacheLuceneIndexIndexOptions *) nil_chk(indexOptions_)) compareToWithId:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS)] >= 0;
+    return create_OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_initWithInt_withOrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_withOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneIndexSorter_DocMap_withBoolean_([((OrgApacheLuceneIndexSorter_DocMap *) nil_chk(docMap_)) size], wrapReuse, inDocsAndPositions, docMap_, storeOffsets);
   }
   OrgApacheLuceneIndexPostingsEnum *inReuse;
   OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum *wrapReuse;
   if (reuse != nil && [reuse isKindOfClass:[OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum class]]) {
-    wrapReuse = (OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum *) check_class_cast(reuse, [OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum class]);
+    wrapReuse = (OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum *) cast_chk(reuse, [OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum class]);
     inReuse = [wrapReuse getWrapped];
   }
   else {
@@ -802,8 +839,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortingLeafReader_SortingTe
     inReuse = reuse;
   }
   OrgApacheLuceneIndexPostingsEnum *inDocs = [((OrgApacheLuceneIndexTermsEnum *) nil_chk(in_)) postingsWithOrgApacheLuceneIndexPostingsEnum:inReuse withInt:flags];
-  jboolean withFreqs = [((OrgApacheLuceneIndexIndexOptionsEnum *) nil_chk(indexOptions_)) compareToWithId:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS)] >= 0 && OrgApacheLuceneIndexPostingsEnum_featureRequestedWithInt_withShort_(flags, OrgApacheLuceneIndexPostingsEnum_FREQS);
-  return [new_OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_initWithInt_withOrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_withOrgApacheLuceneIndexPostingsEnum_withBoolean_withOrgApacheLuceneIndexSorter_DocMap_([((OrgApacheLuceneIndexSorter_DocMap *) nil_chk(docMap_)) size], wrapReuse, inDocs, withFreqs, docMap_) autorelease];
+  jboolean withFreqs = [((OrgApacheLuceneIndexIndexOptions *) nil_chk(indexOptions_)) compareToWithId:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS)] >= 0 && OrgApacheLuceneIndexPostingsEnum_featureRequestedWithInt_withShort_(flags, OrgApacheLuceneIndexPostingsEnum_FREQS);
+  return create_OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_initWithInt_withOrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_withOrgApacheLuceneIndexPostingsEnum_withBoolean_withOrgApacheLuceneIndexSorter_DocMap_([((OrgApacheLuceneIndexSorter_DocMap *) nil_chk(docMap_)) size], wrapReuse, inDocs, withFreqs, docMap_);
 }
 
 - (void)dealloc {
@@ -814,7 +851,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortingLeafReader_SortingTe
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTermsEnum:withOrgApacheLuceneIndexSorter_DocMap:withOrgApacheLuceneIndexIndexOptionsEnum:withBoolean:", "SortingTermsEnum", NULL, 0x1, NULL, NULL },
+    { "initWithOrgApacheLuceneIndexTermsEnum:withOrgApacheLuceneIndexSorter_DocMap:withOrgApacheLuceneIndexIndexOptions:withBoolean:", "SortingTermsEnum", NULL, 0x1, NULL, NULL },
     { "newToOldWithOrgApacheLuceneUtilBits:", "newToOld", "Lorg.apache.lucene.util.Bits;", 0x0, NULL, NULL },
     { "postingsWithOrgApacheLuceneIndexPostingsEnum:withInt:", "postings", "Lorg.apache.lucene.index.PostingsEnum;", 0x1, "Ljava.io.IOException;", NULL },
   };
@@ -829,17 +866,19 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortingLeafReader_SortingTe
 
 @end
 
-void OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneIndexSorter_DocMap_withOrgApacheLuceneIndexIndexOptionsEnum_withBoolean_(OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum *self, OrgApacheLuceneIndexTermsEnum *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap, OrgApacheLuceneIndexIndexOptionsEnum *indexOptions, jboolean hasPositions) {
+void OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneIndexSorter_DocMap_withOrgApacheLuceneIndexIndexOptions_withBoolean_(OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum *self, OrgApacheLuceneIndexTermsEnum *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap, OrgApacheLuceneIndexIndexOptions *indexOptions, jboolean hasPositions) {
   OrgApacheLuceneIndexFilterLeafReader_FilterTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_(self, inArg);
   JreStrongAssign(&self->docMap_, docMap);
   JreStrongAssign(&self->indexOptions_, indexOptions);
   self->hasPositions_ = hasPositions;
 }
 
-OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum *new_OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneIndexSorter_DocMap_withOrgApacheLuceneIndexIndexOptionsEnum_withBoolean_(OrgApacheLuceneIndexTermsEnum *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap, OrgApacheLuceneIndexIndexOptionsEnum *indexOptions, jboolean hasPositions) {
-  OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum *self = [OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum alloc];
-  OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneIndexSorter_DocMap_withOrgApacheLuceneIndexIndexOptionsEnum_withBoolean_(self, inArg, docMap, indexOptions, hasPositions);
-  return self;
+OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum *new_OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneIndexSorter_DocMap_withOrgApacheLuceneIndexIndexOptions_withBoolean_(OrgApacheLuceneIndexTermsEnum *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap, OrgApacheLuceneIndexIndexOptions *indexOptions, jboolean hasPositions) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum, initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneIndexSorter_DocMap_withOrgApacheLuceneIndexIndexOptions_withBoolean_, inArg, docMap, indexOptions, hasPositions)
+}
+
+OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum *create_OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneIndexSorter_DocMap_withOrgApacheLuceneIndexIndexOptions_withBoolean_(OrgApacheLuceneIndexTermsEnum *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap, OrgApacheLuceneIndexIndexOptions *indexOptions, jboolean hasPositions) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum, initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneIndexSorter_DocMap_withOrgApacheLuceneIndexIndexOptions_withBoolean_, inArg, docMap, indexOptions, hasPositions)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum)
@@ -890,9 +929,11 @@ void OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_$1_initWithOrgApache
 }
 
 OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_$1 *new_OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_$1_initWithOrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_withOrgApacheLuceneUtilBits_(OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum *outer$, id<OrgApacheLuceneUtilBits> capture$0) {
-  OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_$1 *self = [OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_$1 alloc];
-  OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_$1_initWithOrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_withOrgApacheLuceneUtilBits_(self, outer$, capture$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_$1, initWithOrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_withOrgApacheLuceneUtilBits_, outer$, capture$0)
+}
+
+OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_$1 *create_OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_$1_initWithOrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_withOrgApacheLuceneUtilBits_(OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum *outer$, id<OrgApacheLuceneUtilBits> capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_$1, initWithOrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_withOrgApacheLuceneUtilBits_, outer$, capture$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortingLeafReader_SortingTermsEnum_$1)
@@ -937,9 +978,11 @@ void OrgApacheLuceneIndexSortingLeafReader_SortingBinaryDocValues_initWithOrgApa
 }
 
 OrgApacheLuceneIndexSortingLeafReader_SortingBinaryDocValues *new_OrgApacheLuceneIndexSortingLeafReader_SortingBinaryDocValues_initWithOrgApacheLuceneIndexBinaryDocValues_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexBinaryDocValues *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap) {
-  OrgApacheLuceneIndexSortingLeafReader_SortingBinaryDocValues *self = [OrgApacheLuceneIndexSortingLeafReader_SortingBinaryDocValues alloc];
-  OrgApacheLuceneIndexSortingLeafReader_SortingBinaryDocValues_initWithOrgApacheLuceneIndexBinaryDocValues_withOrgApacheLuceneIndexSorter_DocMap_(self, inArg, docMap);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSortingLeafReader_SortingBinaryDocValues, initWithOrgApacheLuceneIndexBinaryDocValues_withOrgApacheLuceneIndexSorter_DocMap_, inArg, docMap)
+}
+
+OrgApacheLuceneIndexSortingLeafReader_SortingBinaryDocValues *create_OrgApacheLuceneIndexSortingLeafReader_SortingBinaryDocValues_initWithOrgApacheLuceneIndexBinaryDocValues_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexBinaryDocValues *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSortingLeafReader_SortingBinaryDocValues, initWithOrgApacheLuceneIndexBinaryDocValues_withOrgApacheLuceneIndexSorter_DocMap_, inArg, docMap)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortingLeafReader_SortingBinaryDocValues)
@@ -984,9 +1027,11 @@ void OrgApacheLuceneIndexSortingLeafReader_SortingNumericDocValues_initWithOrgAp
 }
 
 OrgApacheLuceneIndexSortingLeafReader_SortingNumericDocValues *new_OrgApacheLuceneIndexSortingLeafReader_SortingNumericDocValues_initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexNumericDocValues *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap) {
-  OrgApacheLuceneIndexSortingLeafReader_SortingNumericDocValues *self = [OrgApacheLuceneIndexSortingLeafReader_SortingNumericDocValues alloc];
-  OrgApacheLuceneIndexSortingLeafReader_SortingNumericDocValues_initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneIndexSorter_DocMap_(self, inArg, docMap);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSortingLeafReader_SortingNumericDocValues, initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneIndexSorter_DocMap_, inArg, docMap)
+}
+
+OrgApacheLuceneIndexSortingLeafReader_SortingNumericDocValues *create_OrgApacheLuceneIndexSortingLeafReader_SortingNumericDocValues_initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexNumericDocValues *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSortingLeafReader_SortingNumericDocValues, initWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneIndexSorter_DocMap_, inArg, docMap)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortingLeafReader_SortingNumericDocValues)
@@ -1041,9 +1086,11 @@ void OrgApacheLuceneIndexSortingLeafReader_SortingSortedNumericDocValues_initWit
 }
 
 OrgApacheLuceneIndexSortingLeafReader_SortingSortedNumericDocValues *new_OrgApacheLuceneIndexSortingLeafReader_SortingSortedNumericDocValues_initWithOrgApacheLuceneIndexSortedNumericDocValues_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexSortedNumericDocValues *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap) {
-  OrgApacheLuceneIndexSortingLeafReader_SortingSortedNumericDocValues *self = [OrgApacheLuceneIndexSortingLeafReader_SortingSortedNumericDocValues alloc];
-  OrgApacheLuceneIndexSortingLeafReader_SortingSortedNumericDocValues_initWithOrgApacheLuceneIndexSortedNumericDocValues_withOrgApacheLuceneIndexSorter_DocMap_(self, inArg, docMap);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSortingLeafReader_SortingSortedNumericDocValues, initWithOrgApacheLuceneIndexSortedNumericDocValues_withOrgApacheLuceneIndexSorter_DocMap_, inArg, docMap)
+}
+
+OrgApacheLuceneIndexSortingLeafReader_SortingSortedNumericDocValues *create_OrgApacheLuceneIndexSortingLeafReader_SortingSortedNumericDocValues_initWithOrgApacheLuceneIndexSortedNumericDocValues_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexSortedNumericDocValues *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSortingLeafReader_SortingSortedNumericDocValues, initWithOrgApacheLuceneIndexSortedNumericDocValues_withOrgApacheLuceneIndexSorter_DocMap_, inArg, docMap)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortingLeafReader_SortingSortedNumericDocValues)
@@ -1093,9 +1140,11 @@ void OrgApacheLuceneIndexSortingLeafReader_SortingBits_initWithOrgApacheLuceneUt
 }
 
 OrgApacheLuceneIndexSortingLeafReader_SortingBits *new_OrgApacheLuceneIndexSortingLeafReader_SortingBits_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexSorter_DocMap_(id<OrgApacheLuceneUtilBits> inArg, OrgApacheLuceneIndexSorter_DocMap *docMap) {
-  OrgApacheLuceneIndexSortingLeafReader_SortingBits *self = [OrgApacheLuceneIndexSortingLeafReader_SortingBits alloc];
-  OrgApacheLuceneIndexSortingLeafReader_SortingBits_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexSorter_DocMap_(self, inArg, docMap);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSortingLeafReader_SortingBits, initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexSorter_DocMap_, inArg, docMap)
+}
+
+OrgApacheLuceneIndexSortingLeafReader_SortingBits *create_OrgApacheLuceneIndexSortingLeafReader_SortingBits_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexSorter_DocMap_(id<OrgApacheLuceneUtilBits> inArg, OrgApacheLuceneIndexSorter_DocMap *docMap) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSortingLeafReader_SortingBits, initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexSorter_DocMap_, inArg, docMap)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortingLeafReader_SortingBits)
@@ -1160,9 +1209,11 @@ void OrgApacheLuceneIndexSortingLeafReader_SortingSortedDocValues_initWithOrgApa
 }
 
 OrgApacheLuceneIndexSortingLeafReader_SortingSortedDocValues *new_OrgApacheLuceneIndexSortingLeafReader_SortingSortedDocValues_initWithOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexSortedDocValues *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap) {
-  OrgApacheLuceneIndexSortingLeafReader_SortingSortedDocValues *self = [OrgApacheLuceneIndexSortingLeafReader_SortingSortedDocValues alloc];
-  OrgApacheLuceneIndexSortingLeafReader_SortingSortedDocValues_initWithOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneIndexSorter_DocMap_(self, inArg, docMap);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSortingLeafReader_SortingSortedDocValues, initWithOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneIndexSorter_DocMap_, inArg, docMap)
+}
+
+OrgApacheLuceneIndexSortingLeafReader_SortingSortedDocValues *create_OrgApacheLuceneIndexSortingLeafReader_SortingSortedDocValues_initWithOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexSortedDocValues *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSortingLeafReader_SortingSortedDocValues, initWithOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneIndexSorter_DocMap_, inArg, docMap)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortingLeafReader_SortingSortedDocValues)
@@ -1227,9 +1278,11 @@ void OrgApacheLuceneIndexSortingLeafReader_SortingSortedSetDocValues_initWithOrg
 }
 
 OrgApacheLuceneIndexSortingLeafReader_SortingSortedSetDocValues *new_OrgApacheLuceneIndexSortingLeafReader_SortingSortedSetDocValues_initWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexSortedSetDocValues *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap) {
-  OrgApacheLuceneIndexSortingLeafReader_SortingSortedSetDocValues *self = [OrgApacheLuceneIndexSortingLeafReader_SortingSortedSetDocValues alloc];
-  OrgApacheLuceneIndexSortingLeafReader_SortingSortedSetDocValues_initWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneIndexSorter_DocMap_(self, inArg, docMap);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSortingLeafReader_SortingSortedSetDocValues, initWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneIndexSorter_DocMap_, inArg, docMap)
+}
+
+OrgApacheLuceneIndexSortingLeafReader_SortingSortedSetDocValues *create_OrgApacheLuceneIndexSortingLeafReader_SortingSortedSetDocValues_initWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexSortedSetDocValues *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSortingLeafReader_SortingSortedSetDocValues, initWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneIndexSorter_DocMap_, inArg, docMap)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortingLeafReader_SortingSortedSetDocValues)
@@ -1249,7 +1302,7 @@ withOrgApacheLuceneIndexSorter_DocMap:(OrgApacheLuceneIndexSorter_DocMap *)docMa
   if (other == nil || !([other isKindOfClass:[OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum class]])) {
     return false;
   }
-  return docs_ == ((OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum *) nil_chk(((OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum *) check_class_cast(other, [OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum class]))))->docs_;
+  return docs_ == ((OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum *) cast_chk(other, [OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum class]))->docs_;
 }
 
 - (jint)advanceWithInt:(jint)target {
@@ -1377,9 +1430,11 @@ void OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_initWithInt_withOrgAp
 }
 
 OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum *new_OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_initWithInt_withOrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_withOrgApacheLuceneIndexPostingsEnum_withBoolean_withOrgApacheLuceneIndexSorter_DocMap_(jint maxDoc, OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum *reuse, OrgApacheLuceneIndexPostingsEnum *inArg, jboolean withFreqs, OrgApacheLuceneIndexSorter_DocMap *docMap) {
-  OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum *self = [OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum alloc];
-  OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_initWithInt_withOrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_withOrgApacheLuceneIndexPostingsEnum_withBoolean_withOrgApacheLuceneIndexSorter_DocMap_(self, maxDoc, reuse, inArg, withFreqs, docMap);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum, initWithInt_withOrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_withOrgApacheLuceneIndexPostingsEnum_withBoolean_withOrgApacheLuceneIndexSorter_DocMap_, maxDoc, reuse, inArg, withFreqs, docMap)
+}
+
+OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum *create_OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_initWithInt_withOrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_withOrgApacheLuceneIndexPostingsEnum_withBoolean_withOrgApacheLuceneIndexSorter_DocMap_(jint maxDoc, OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum *reuse, OrgApacheLuceneIndexPostingsEnum *inArg, jboolean withFreqs, OrgApacheLuceneIndexSorter_DocMap *docMap) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum, initWithInt_withOrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_withOrgApacheLuceneIndexPostingsEnum_withBoolean_withOrgApacheLuceneIndexSorter_DocMap_, maxDoc, reuse, inArg, withFreqs, docMap)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum)
@@ -1483,9 +1538,11 @@ void OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_DocFreqSorter_initWit
 }
 
 OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_DocFreqSorter *new_OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_DocFreqSorter_initWithInt_(jint maxDoc) {
-  OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_DocFreqSorter *self = [OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_DocFreqSorter alloc];
-  OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_DocFreqSorter_initWithInt_(self, maxDoc);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_DocFreqSorter, initWithInt_, maxDoc)
+}
+
+OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_DocFreqSorter *create_OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_DocFreqSorter_initWithInt_(jint maxDoc) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_DocFreqSorter, initWithInt_, maxDoc)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum_DocFreqSorter)
@@ -1505,7 +1562,7 @@ withOrgApacheLuceneIndexSorter_DocMap:(OrgApacheLuceneIndexSorter_DocMap *)docMa
   if (other == nil || !([other isKindOfClass:[OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum class]])) {
     return false;
   }
-  return docs_ == ((OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum *) nil_chk(((OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum *) check_class_cast(other, [OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum class]))))->docs_;
+  return docs_ == ((OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum *) cast_chk(other, [OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum class]))->docs_;
 }
 
 - (void)addPositionsWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)inArg
@@ -1645,7 +1702,7 @@ void OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_initWithInt_withO
     JreStrongAssignAndConsume(&self->file_, new_OrgApacheLuceneStoreRAMFile_init());
     JreStrongAssignAndConsume(&self->sorter_, new_OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_DocOffsetSorter_initWithInt_(maxDoc));
   }
-  OrgApacheLuceneStoreIndexOutput *out = [new_OrgApacheLuceneStoreRAMOutputStream_initWithOrgApacheLuceneStoreRAMFile_withBoolean_(self->file_, false) autorelease];
+  OrgApacheLuceneStoreIndexOutput *out = create_OrgApacheLuceneStoreRAMOutputStream_initWithOrgApacheLuceneStoreRAMFile_withBoolean_(self->file_, false);
   jint doc;
   jint i = 0;
   while ((doc = [((OrgApacheLuceneIndexPostingsEnum *) nil_chk(inArg)) nextDoc]) != OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS) {
@@ -1667,9 +1724,11 @@ void OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_initWithInt_withO
 }
 
 OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum *new_OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_initWithInt_withOrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_withOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneIndexSorter_DocMap_withBoolean_(jint maxDoc, OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum *reuse, OrgApacheLuceneIndexPostingsEnum *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap, jboolean storeOffsets) {
-  OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum *self = [OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum alloc];
-  OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_initWithInt_withOrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_withOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneIndexSorter_DocMap_withBoolean_(self, maxDoc, reuse, inArg, docMap, storeOffsets);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum, initWithInt_withOrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_withOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneIndexSorter_DocMap_withBoolean_, maxDoc, reuse, inArg, docMap, storeOffsets)
+}
+
+OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum *create_OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_initWithInt_withOrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_withOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneIndexSorter_DocMap_withBoolean_(jint maxDoc, OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum *reuse, OrgApacheLuceneIndexPostingsEnum *inArg, OrgApacheLuceneIndexSorter_DocMap *docMap, jboolean storeOffsets) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum, initWithInt_withOrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_withOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneIndexSorter_DocMap_withBoolean_, maxDoc, reuse, inArg, docMap, storeOffsets)
 }
 
 void OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_addPositionsWithOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneStoreIndexOutput_(OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum *self, OrgApacheLuceneIndexPostingsEnum *inArg, OrgApacheLuceneStoreIndexOutput *outArg) {
@@ -1788,9 +1847,11 @@ void OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_DocOffsetSorter_i
 }
 
 OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_DocOffsetSorter *new_OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_DocOffsetSorter_initWithInt_(jint maxDoc) {
-  OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_DocOffsetSorter *self = [OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_DocOffsetSorter alloc];
-  OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_DocOffsetSorter_initWithInt_(self, maxDoc);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_DocOffsetSorter, initWithInt_, maxDoc)
+}
+
+OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_DocOffsetSorter *create_OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_DocOffsetSorter_initWithInt_(jint maxDoc) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_DocOffsetSorter, initWithInt_, maxDoc)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_DocOffsetSorter)

@@ -5,23 +5,26 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchMatchNoDocsQuery_INCLUDE_ALL")
-#if OrgApacheLuceneSearchMatchNoDocsQuery_RESTRICT
-#define OrgApacheLuceneSearchMatchNoDocsQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchMatchNoDocsQuery")
+#ifdef RESTRICT_OrgApacheLuceneSearchMatchNoDocsQuery
+#define INCLUDE_ALL_OrgApacheLuceneSearchMatchNoDocsQuery 0
 #else
-#define OrgApacheLuceneSearchMatchNoDocsQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchMatchNoDocsQuery 1
 #endif
-#undef OrgApacheLuceneSearchMatchNoDocsQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchMatchNoDocsQuery
 
-#if !defined (_OrgApacheLuceneSearchMatchNoDocsQuery_) && (OrgApacheLuceneSearchMatchNoDocsQuery_INCLUDE_ALL || OrgApacheLuceneSearchMatchNoDocsQuery_INCLUDE)
-#define _OrgApacheLuceneSearchMatchNoDocsQuery_
+#if !defined (OrgApacheLuceneSearchMatchNoDocsQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchMatchNoDocsQuery || defined(INCLUDE_OrgApacheLuceneSearchMatchNoDocsQuery))
+#define OrgApacheLuceneSearchMatchNoDocsQuery_
 
-#define OrgApacheLuceneSearchQuery_RESTRICT 1
-#define OrgApacheLuceneSearchQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchQuery 1
+#define INCLUDE_OrgApacheLuceneSearchQuery 1
 #include "org/apache/lucene/search/Query.h"
 
 @class OrgApacheLuceneIndexIndexReader;
 
+/*!
+ @brief A query that matches no documents.
+ */
 @interface OrgApacheLuceneSearchMatchNoDocsQuery : OrgApacheLuceneSearchQuery
 
 #pragma mark Public
@@ -40,8 +43,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchMatchNoDocsQuery_init(OrgApacheLucen
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchMatchNoDocsQuery *new_OrgApacheLuceneSearchMatchNoDocsQuery_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchMatchNoDocsQuery *create_OrgApacheLuceneSearchMatchNoDocsQuery_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMatchNoDocsQuery)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchMatchNoDocsQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchMatchNoDocsQuery")

@@ -5,25 +5,52 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisPatternPatternTokenizer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisPatternPatternTokenizer_RESTRICT
-#define OrgApacheLuceneAnalysisPatternPatternTokenizer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternTokenizer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisPatternPatternTokenizer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternTokenizer 0
 #else
-#define OrgApacheLuceneAnalysisPatternPatternTokenizer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternTokenizer 1
 #endif
-#undef OrgApacheLuceneAnalysisPatternPatternTokenizer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisPatternPatternTokenizer
 
-#if !defined (_OrgApacheLuceneAnalysisPatternPatternTokenizer_) && (OrgApacheLuceneAnalysisPatternPatternTokenizer_INCLUDE_ALL || OrgApacheLuceneAnalysisPatternPatternTokenizer_INCLUDE)
-#define _OrgApacheLuceneAnalysisPatternPatternTokenizer_
+#if !defined (OrgApacheLuceneAnalysisPatternPatternTokenizer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternTokenizer || defined(INCLUDE_OrgApacheLuceneAnalysisPatternPatternTokenizer))
+#define OrgApacheLuceneAnalysisPatternPatternTokenizer_
 
-#define OrgApacheLuceneAnalysisTokenizer_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenizer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenizer 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenizer 1
 #include "org/apache/lucene/analysis/Tokenizer.h"
 
 @class IOSCharArray;
 @class JavaUtilRegexPattern;
 @class OrgApacheLuceneUtilAttributeFactory;
 
+/*!
+ @brief This tokenizer uses regex pattern matching to construct distinct tokens
+ for the input stream.
+ It takes two arguments:  "pattern" and "group".
+ <ul>
+ <li>"pattern" is the regular expression.</li>
+ <li>"group" says which group to extract into tokens.</li>
+ </ul>
+ <p>
+ group=-1 (the default) is equivalent to "split".  In this case, the tokens will
+ be equivalent to the output from (without empty tokens):
+ <code>String.split(java.lang.String)</code>
+ </p>
+ <p>
+ Using group &gt;= 0 selects the matching group as the token.  For example, if you have:<br>
+ @code
+
+  pattern = \'([^\']+)\'
+  group = 0
+  input = aaa 'bbb' 'ccc'
+ 
+@endcode
+ the output will be two tokens: 'bbb' and 'ccc' (including the ' marks).  With the same input
+ but using group=1, the output would be: bbb and ccc (no ' marks)
+ <p>NOTE: This Tokenizer does not output tokens that are of zero length.</p>
+ - seealso: Pattern
+ */
 @interface OrgApacheLuceneAnalysisPatternPatternTokenizer : OrgApacheLuceneAnalysisTokenizer {
  @public
   IOSCharArray *buffer_;
@@ -31,10 +58,16 @@
 
 #pragma mark Public
 
+/*!
+ @brief creates a new PatternTokenizer returning tokens from group (-1 for split functionality)
+ */
 - (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory
                                    withJavaUtilRegexPattern:(JavaUtilRegexPattern *)pattern
                                                     withInt:(jint)group;
 
+/*!
+ @brief creates a new PatternTokenizer returning tokens from group (-1 for split functionality)
+ */
 - (instancetype)initWithJavaUtilRegexPattern:(JavaUtilRegexPattern *)pattern
                                      withInt:(jint)group;
 
@@ -54,12 +87,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPatternPatternTokenizer_initWithJa
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisPatternPatternTokenizer *new_OrgApacheLuceneAnalysisPatternPatternTokenizer_initWithJavaUtilRegexPattern_withInt_(JavaUtilRegexPattern *pattern, jint group) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPatternPatternTokenizer *create_OrgApacheLuceneAnalysisPatternPatternTokenizer_initWithJavaUtilRegexPattern_withInt_(JavaUtilRegexPattern *pattern, jint group);
+
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPatternPatternTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withJavaUtilRegexPattern_withInt_(OrgApacheLuceneAnalysisPatternPatternTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory, JavaUtilRegexPattern *pattern, jint group);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisPatternPatternTokenizer *new_OrgApacheLuceneAnalysisPatternPatternTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withJavaUtilRegexPattern_withInt_(OrgApacheLuceneUtilAttributeFactory *factory, JavaUtilRegexPattern *pattern, jint group) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPatternPatternTokenizer *create_OrgApacheLuceneAnalysisPatternPatternTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withJavaUtilRegexPattern_withInt_(OrgApacheLuceneUtilAttributeFactory *factory, JavaUtilRegexPattern *pattern, jint group);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPatternPatternTokenizer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisPatternPatternTokenizer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternTokenizer")

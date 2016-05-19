@@ -5,77 +5,153 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilBytesRefBuilder_INCLUDE_ALL")
-#if OrgApacheLuceneUtilBytesRefBuilder_RESTRICT
-#define OrgApacheLuceneUtilBytesRefBuilder_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilBytesRefBuilder")
+#ifdef RESTRICT_OrgApacheLuceneUtilBytesRefBuilder
+#define INCLUDE_ALL_OrgApacheLuceneUtilBytesRefBuilder 0
 #else
-#define OrgApacheLuceneUtilBytesRefBuilder_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilBytesRefBuilder 1
 #endif
-#undef OrgApacheLuceneUtilBytesRefBuilder_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilBytesRefBuilder
 
-#if !defined (_OrgApacheLuceneUtilBytesRefBuilder_) && (OrgApacheLuceneUtilBytesRefBuilder_INCLUDE_ALL || OrgApacheLuceneUtilBytesRefBuilder_INCLUDE)
-#define _OrgApacheLuceneUtilBytesRefBuilder_
+#if !defined (OrgApacheLuceneUtilBytesRefBuilder_) && (INCLUDE_ALL_OrgApacheLuceneUtilBytesRefBuilder || defined(INCLUDE_OrgApacheLuceneUtilBytesRefBuilder))
+#define OrgApacheLuceneUtilBytesRefBuilder_
 
 @class IOSByteArray;
 @class IOSCharArray;
 @class OrgApacheLuceneUtilBytesRef;
 @protocol JavaLangCharSequence;
 
+/*!
+ @brief A builder for <code>BytesRef</code> instances.
+ */
 @interface OrgApacheLuceneUtilBytesRefBuilder : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ */
 - (instancetype)init;
 
+/*!
+ @brief Append a single byte to this builder.
+ */
 - (void)appendWithByte:(jbyte)b;
 
+/*!
+ @brief Append the provided bytes to this builder.
+ */
 - (void)appendWithByteArray:(IOSByteArray *)b
                     withInt:(jint)off
                     withInt:(jint)len;
 
+/*!
+ @brief Append the provided bytes to this builder.
+ */
 - (void)appendWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)ref;
 
+/*!
+ @brief Append the provided bytes to this builder.
+ */
 - (void)appendWithOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)builder;
 
+/*!
+ @brief Return the byte at the given offset.
+ */
 - (jbyte)byteAtWithInt:(jint)offset;
 
+/*!
+ @brief Return a reference to the bytes of this builder.
+ */
 - (IOSByteArray *)bytes;
 
+/*!
+ @brief Reset this builder to the empty state.
+ */
 - (void)clear;
 
+/*!
+ @brief Replace the content of this builder with the provided bytes.
+ Equivalent to
+ calling <code>clear()</code> and then <code>append(byte[],int,int)</code>.
+ */
 - (void)copyBytesWithByteArray:(IOSByteArray *)b
                        withInt:(jint)off
                        withInt:(jint)len OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Replace the content of this builder with the provided bytes.
+ Equivalent to
+ calling <code>clear()</code> and then <code>append(BytesRef)</code>.
+ */
 - (void)copyBytesWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)ref OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Replace the content of this builder with the provided bytes.
+ Equivalent to
+ calling <code>clear()</code> and then <code>append(BytesRefBuilder)</code>.
+ */
 - (void)copyBytesWithOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)builder OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Replace the content of this buffer with UTF-8 encoded bytes that would
+ represent the provided text.
+ */
 - (void)copyCharsWithCharArray:(IOSCharArray *)text
                        withInt:(jint)off
                        withInt:(jint)len OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Replace the content of this buffer with UTF-8 encoded bytes that would
+ represent the provided text.
+ */
 - (void)copyCharsWithJavaLangCharSequence:(id<JavaLangCharSequence>)text OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Replace the content of this buffer with UTF-8 encoded bytes that would
+ represent the provided text.
+ */
 - (void)copyCharsWithJavaLangCharSequence:(id<JavaLangCharSequence>)text
                                   withInt:(jint)off
                                   withInt:(jint)len OBJC_METHOD_FAMILY_NONE;
 
 - (jboolean)isEqual:(id)obj;
 
+/*!
+ @brief Return a <code>BytesRef</code> that points to the internal content of this
+ builder.
+ Any update to the content of this builder might invalidate
+ the provided <code>ref</code> and vice-versa.
+ */
 - (OrgApacheLuceneUtilBytesRef *)get;
 
+/*!
+ @brief Ensure that this builder can hold at least <code>capacity</code> bytes
+ without resizing.
+ */
 - (void)growWithInt:(jint)capacity;
 
 - (NSUInteger)hash;
 
+/*!
+ @brief Return the number of bytes in this buffer.
+ */
 - (jint)length;
 
+/*!
+ @brief Set a byte.
+ */
 - (void)setByteAtWithInt:(jint)offset
                 withByte:(jbyte)b;
 
+/*!
+ @brief Set the length.
+ */
 - (void)setLengthWithInt:(jint)length;
 
+/*!
+ @brief Build a new <code>BytesRef</code> that has the same content as this buffer.
+ */
 - (OrgApacheLuceneUtilBytesRef *)toBytesRef;
 
 @end
@@ -86,8 +162,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilBytesRefBuilder_init(OrgApacheLuceneUt
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilBytesRefBuilder *new_OrgApacheLuceneUtilBytesRefBuilder_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilBytesRefBuilder *create_OrgApacheLuceneUtilBytesRefBuilder_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBytesRefBuilder)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilBytesRefBuilder_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilBytesRefBuilder")

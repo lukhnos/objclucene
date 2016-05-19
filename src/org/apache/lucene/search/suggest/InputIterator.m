@@ -22,13 +22,17 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapp
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchSuggestInputIterator)
 
-id<OrgApacheLuceneSearchSuggestInputIterator> OrgApacheLuceneSearchSuggestInputIterator_EMPTY_;
+id<OrgApacheLuceneSearchSuggestInputIterator> OrgApacheLuceneSearchSuggestInputIterator_EMPTY;
 
 @implementation OrgApacheLuceneSearchSuggestInputIterator
 
++ (id<OrgApacheLuceneSearchSuggestInputIterator>)EMPTY {
+  return OrgApacheLuceneSearchSuggestInputIterator_EMPTY;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchSuggestInputIterator class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneSearchSuggestInputIterator_EMPTY_, new_OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper_initWithOrgApacheLuceneUtilBytesRefIterator_(JreLoadStatic(OrgApacheLuceneUtilBytesRefIterator, EMPTY_)));
+    JreStrongAssignAndConsume(&OrgApacheLuceneSearchSuggestInputIterator_EMPTY, new_OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper_initWithOrgApacheLuceneUtilBytesRefIterator_(JreLoadStatic(OrgApacheLuceneUtilBytesRefIterator, EMPTY)));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSuggestInputIterator)
   }
 }
@@ -38,11 +42,11 @@ id<OrgApacheLuceneSearchSuggestInputIterator> OrgApacheLuceneSearchSuggestInputI
     { "weight", NULL, "J", 0x401, NULL, NULL },
     { "payload", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x401, NULL, NULL },
     { "hasPayloads", NULL, "Z", 0x401, NULL, NULL },
-    { "contexts", NULL, "Ljava.util.Set;", 0x401, NULL, NULL },
+    { "contexts", NULL, "Ljava.util.Set;", 0x401, NULL, "()Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;" },
     { "hasContexts", NULL, "Z", 0x401, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "EMPTY_", NULL, 0x19, "Lorg.apache.lucene.search.suggest.InputIterator;", &OrgApacheLuceneSearchSuggestInputIterator_EMPTY_, NULL, .constantValue.asLong = 0 },
+    { "EMPTY", "EMPTY", 0x19, "Lorg.apache.lucene.search.suggest.InputIterator;", &OrgApacheLuceneSearchSuggestInputIterator_EMPTY, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.suggest.InputIterator$InputIteratorWrapper;"};
   static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestInputIterator = { 2, "InputIterator", "org.apache.lucene.search.suggest", NULL, 0x609, 5, methods, 1, fields, 0, NULL, 1, inner_classes, NULL, NULL };
@@ -96,7 +100,7 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestInputIterator)
     { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
     { "payload", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
     { "hasPayloads", NULL, "Z", 0x1, NULL, NULL },
-    { "contexts", NULL, "Ljava.util.Set;", 0x1, NULL, NULL },
+    { "contexts", NULL, "Ljava.util.Set;", 0x1, NULL, "()Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;" },
     { "hasContexts", NULL, "Z", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -114,9 +118,11 @@ void OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper_initWithOrgA
 }
 
 OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper *new_OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper_initWithOrgApacheLuceneUtilBytesRefIterator_(id<OrgApacheLuceneUtilBytesRefIterator> wrapped) {
-  OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper *self = [OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper alloc];
-  OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper_initWithOrgApacheLuceneUtilBytesRefIterator_(self, wrapped);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper, initWithOrgApacheLuceneUtilBytesRefIterator_, wrapped)
+}
+
+OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper *create_OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper_initWithOrgApacheLuceneUtilBytesRefIterator_(id<OrgApacheLuceneUtilBytesRefIterator> wrapped) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper, initWithOrgApacheLuceneUtilBytesRefIterator_, wrapped)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper)

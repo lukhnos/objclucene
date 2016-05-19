@@ -32,7 +32,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFacto
 }
 
 - (OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  return [new_OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withJavaUtilRegexPatternArray_(input, preserveOriginal_, [IOSObjectArray arrayWithObjects:(id[]){ pattern_ } count:1 type:JavaUtilRegexPattern_class_()]) autorelease];
+  return create_OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withJavaUtilRegexPatternArray_(input, preserveOriginal_, [IOSObjectArray arrayWithObjects:(id[]){ pattern_ } count:1 type:JavaUtilRegexPattern_class_()]);
 }
 
 - (void)dealloc {
@@ -42,7 +42,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFacto
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "PatternCaptureGroupFilterFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "PatternCaptureGroupFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.pattern.PatternCaptureGroupTokenFilter;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -63,9 +63,11 @@ void OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory_initWithJava
 }
 
 OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory *new_OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory *self = [OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory alloc];
-  OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory *create_OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory)

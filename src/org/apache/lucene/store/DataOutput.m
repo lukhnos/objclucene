@@ -4,11 +4,13 @@
 //
 
 #include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/IllegalArgumentException.h"
+#include "java/lang/annotation/Annotation.h"
 #include "java/util/Map.h"
 #include "java/util/Set.h"
 #include "org/apache/lucene/store/DataInput.h"
@@ -27,9 +29,12 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreDataOutput, copyBuffer_, IOSByteArray *)
 
-static jint OrgApacheLuceneStoreDataOutput_COPY_BUFFER_SIZE_ = 16384;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneStoreDataOutput, COPY_BUFFER_SIZE_, jint)
-J2OBJC_STATIC_FIELD_REF_GETTER(OrgApacheLuceneStoreDataOutput, COPY_BUFFER_SIZE_, jint)
+inline jint OrgApacheLuceneStoreDataOutput_get_COPY_BUFFER_SIZE();
+inline jint OrgApacheLuceneStoreDataOutput_set_COPY_BUFFER_SIZE(jint value);
+inline jint *OrgApacheLuceneStoreDataOutput_getRef_COPY_BUFFER_SIZE();
+static jint OrgApacheLuceneStoreDataOutput_COPY_BUFFER_SIZE = 16384;
+J2OBJC_STATIC_FIELD_PRIMITIVE(OrgApacheLuceneStoreDataOutput, COPY_BUFFER_SIZE, jint)
+
 __attribute__((unused)) static void OrgApacheLuceneStoreDataOutput_writeVIntWithInt_(OrgApacheLuceneStoreDataOutput *self, jint i);
 
 __attribute__((unused)) static void OrgApacheLuceneStoreDataOutput_writeSignedVLongWithLong_(OrgApacheLuceneStoreDataOutput *self, jlong i);
@@ -80,7 +85,7 @@ __attribute__((unused)) static void OrgApacheLuceneStoreDataOutput_writeSignedVL
 
 - (void)writeVLongWithLong:(jlong)i {
   if (i < 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$JC", @"cannot write negative vLong (got: ", i, ')')) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$JC", @"cannot write negative vLong (got: ", i, ')'));
   }
   OrgApacheLuceneStoreDataOutput_writeSignedVLongWithLong_(self, i);
 }
@@ -94,7 +99,7 @@ __attribute__((unused)) static void OrgApacheLuceneStoreDataOutput_writeSignedVL
 }
 
 - (void)writeStringWithNSString:(NSString *)s {
-  OrgApacheLuceneUtilBytesRef *utf8Result = [new_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(s) autorelease];
+  OrgApacheLuceneUtilBytesRef *utf8Result = create_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(s);
   OrgApacheLuceneStoreDataOutput_writeVIntWithInt_(self, utf8Result->length_);
   [self writeBytesWithByteArray:utf8Result->bytes_ withInt:utf8Result->offset_ withInt:utf8Result->length_];
 }
@@ -103,10 +108,10 @@ __attribute__((unused)) static void OrgApacheLuceneStoreDataOutput_writeSignedVL
                                           withLong:(jlong)numBytes {
   JreAssert((numBytes >= 0), (JreStrcat("$J", @"numBytes=", numBytes)));
   jlong left = numBytes;
-  if (copyBuffer_ == nil) JreStrongAssignAndConsume(&copyBuffer_, [IOSByteArray newArrayWithLength:OrgApacheLuceneStoreDataOutput_COPY_BUFFER_SIZE_]);
+  if (copyBuffer_ == nil) JreStrongAssignAndConsume(&copyBuffer_, [IOSByteArray newArrayWithLength:OrgApacheLuceneStoreDataOutput_COPY_BUFFER_SIZE]);
   while (left > 0) {
     jint toCopy;
-    if (left > OrgApacheLuceneStoreDataOutput_COPY_BUFFER_SIZE_) toCopy = OrgApacheLuceneStoreDataOutput_COPY_BUFFER_SIZE_;
+    if (left > OrgApacheLuceneStoreDataOutput_COPY_BUFFER_SIZE) toCopy = OrgApacheLuceneStoreDataOutput_COPY_BUFFER_SIZE;
     else toCopy = (jint) left;
     [((OrgApacheLuceneStoreDataInput *) nil_chk(input)) readBytesWithByteArray:copyBuffer_ withInt:0 withInt:toCopy];
     [self writeBytesWithByteArray:copyBuffer_ withInt:0 withInt:toCopy];
@@ -161,17 +166,17 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (void)dealloc {
-  RELEASE_(copyBuffer_);
-  [super dealloc];
-}
-
 + (IOSObjectArray *)__annotations_writeStringStringMapWithJavaUtilMap_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_writeStringSetWithJavaUtilSet_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+- (void)dealloc {
+  RELEASE_(copyBuffer_);
+  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -189,14 +194,14 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "writeZLongWithLong:", "writeZLong", "V", 0x11, "Ljava.io.IOException;", NULL },
     { "writeStringWithNSString:", "writeString", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "copyBytesWithOrgApacheLuceneStoreDataInput:withLong:", "copyBytes", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "writeStringStringMapWithJavaUtilMap:", "writeStringStringMap", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "writeMapOfStringsWithJavaUtilMap:", "writeMapOfStrings", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "writeStringSetWithJavaUtilSet:", "writeStringSet", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "writeSetOfStringsWithJavaUtilSet:", "writeSetOfStrings", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "writeStringStringMapWithJavaUtilMap:", "writeStringStringMap", "V", 0x1, "Ljava.io.IOException;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
+    { "writeMapOfStringsWithJavaUtilMap:", "writeMapOfStrings", "V", 0x1, "Ljava.io.IOException;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
+    { "writeStringSetWithJavaUtilSet:", "writeStringSet", "V", 0x1, "Ljava.io.IOException;", "(Ljava/util/Set<Ljava/lang/String;>;)V" },
+    { "writeSetOfStringsWithJavaUtilSet:", "writeSetOfStrings", "V", 0x1, "Ljava.io.IOException;", "(Ljava/util/Set<Ljava/lang/String;>;)V" },
+    { "init", "DataOutput", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "COPY_BUFFER_SIZE_", NULL, 0xa, "I", &OrgApacheLuceneStoreDataOutput_COPY_BUFFER_SIZE_, NULL, .constantValue.asLong = 0 },
+    { "COPY_BUFFER_SIZE", "COPY_BUFFER_SIZE", 0xa, "I", &OrgApacheLuceneStoreDataOutput_COPY_BUFFER_SIZE, NULL, .constantValue.asLong = 0 },
     { "copyBuffer_", NULL, 0x2, "[B", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneStoreDataOutput = { 2, "DataOutput", "org.apache.lucene.store", NULL, 0x401, 18, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };

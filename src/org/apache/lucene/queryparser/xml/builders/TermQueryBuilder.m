@@ -18,7 +18,7 @@
 - (OrgApacheLuceneSearchQuery *)getQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e {
   NSString *field = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithInheritanceOrFailWithOrgW3cDomElement_withNSString_(e, @"fieldName");
   NSString *value = OrgApacheLuceneQueryparserXmlDOMUtils_getNonBlankTextOrFailWithOrgW3cDomElement_(e);
-  OrgApacheLuceneSearchTermQuery *tq = [new_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_([new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(field, value) autorelease]) autorelease];
+  OrgApacheLuceneSearchTermQuery *tq = create_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_(create_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(field, value));
   [tq setBoostWithFloat:OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withFloat_(e, @"boost", 1.0f)];
   return tq;
 }
@@ -33,7 +33,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "getQueryWithOrgW3cDomElement:", "getQuery", "Lorg.apache.lucene.search.Query;", 0x1, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "TermQueryBuilder", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersTermQueryBuilder = { 2, "TermQueryBuilder", "org.apache.lucene.queryparser.xml.builders", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserXmlBuildersTermQueryBuilder;
@@ -46,9 +46,11 @@ void OrgApacheLuceneQueryparserXmlBuildersTermQueryBuilder_init(OrgApacheLuceneQ
 }
 
 OrgApacheLuceneQueryparserXmlBuildersTermQueryBuilder *new_OrgApacheLuceneQueryparserXmlBuildersTermQueryBuilder_init() {
-  OrgApacheLuceneQueryparserXmlBuildersTermQueryBuilder *self = [OrgApacheLuceneQueryparserXmlBuildersTermQueryBuilder alloc];
-  OrgApacheLuceneQueryparserXmlBuildersTermQueryBuilder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserXmlBuildersTermQueryBuilder, init)
+}
+
+OrgApacheLuceneQueryparserXmlBuildersTermQueryBuilder *create_OrgApacheLuceneQueryparserXmlBuildersTermQueryBuilder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserXmlBuildersTermQueryBuilder, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserXmlBuildersTermQueryBuilder)

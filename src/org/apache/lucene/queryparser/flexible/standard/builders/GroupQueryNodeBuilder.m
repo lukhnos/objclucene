@@ -22,8 +22,8 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneSearchQuery *)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode *groupNode = (OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode *) check_class_cast(queryNode, [OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode class]);
-  return (OrgApacheLuceneSearchQuery *) check_class_cast([((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk([((OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode *) nil_chk((groupNode))) getChild])) getTagWithNSString:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder, QUERY_TREE_BUILDER_TAGID_)], [OrgApacheLuceneSearchQuery class]);
+  OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode *groupNode = (OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode *) cast_chk(queryNode, [OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode class]);
+  return (OrgApacheLuceneSearchQuery *) cast_chk([((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk([((OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode *) nil_chk((groupNode))) getChild])) getTagWithNSString:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder, QUERY_TREE_BUILDER_TAGID)], [OrgApacheLuceneSearchQuery class]);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -42,9 +42,11 @@ void OrgApacheLuceneQueryparserFlexibleStandardBuildersGroupQueryNodeBuilder_ini
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardBuildersGroupQueryNodeBuilder *new_OrgApacheLuceneQueryparserFlexibleStandardBuildersGroupQueryNodeBuilder_init() {
-  OrgApacheLuceneQueryparserFlexibleStandardBuildersGroupQueryNodeBuilder *self = [OrgApacheLuceneQueryparserFlexibleStandardBuildersGroupQueryNodeBuilder alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardBuildersGroupQueryNodeBuilder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardBuildersGroupQueryNodeBuilder, init)
+}
+
+OrgApacheLuceneQueryparserFlexibleStandardBuildersGroupQueryNodeBuilder *create_OrgApacheLuceneQueryparserFlexibleStandardBuildersGroupQueryNodeBuilder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardBuildersGroupQueryNodeBuilder, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleStandardBuildersGroupQueryNodeBuilder)

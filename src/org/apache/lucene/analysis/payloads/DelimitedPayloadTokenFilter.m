@@ -32,6 +32,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter, 
 
 @implementation OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter
 
++ (jchar)DEFAULT_DELIMITER {
+  return OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_DEFAULT_DELIMITER;
+}
+
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
                                                   withChar:(jchar)delimiter
          withOrgApacheLuceneAnalysisPayloadsPayloadEncoder:(id<OrgApacheLuceneAnalysisPayloadsPayloadEncoder>)encoder {
@@ -90,9 +94,11 @@ void OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_initWithOrgApach
 }
 
 OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter *new_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withChar_withOrgApacheLuceneAnalysisPayloadsPayloadEncoder_(OrgApacheLuceneAnalysisTokenStream *input, jchar delimiter, id<OrgApacheLuceneAnalysisPayloadsPayloadEncoder> encoder) {
-  OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter *self = [OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter alloc];
-  OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withChar_withOrgApacheLuceneAnalysisPayloadsPayloadEncoder_(self, input, delimiter, encoder);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_withChar_withOrgApacheLuceneAnalysisPayloadsPayloadEncoder_, input, delimiter, encoder)
+}
+
+OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter *create_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withChar_withOrgApacheLuceneAnalysisPayloadsPayloadEncoder_(OrgApacheLuceneAnalysisTokenStream *input, jchar delimiter, id<OrgApacheLuceneAnalysisPayloadsPayloadEncoder> encoder) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_withChar_withOrgApacheLuceneAnalysisPayloadsPayloadEncoder_, input, delimiter, encoder)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter)

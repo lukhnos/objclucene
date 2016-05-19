@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisUtilCharFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisUtilCharFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisUtilCharFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilCharFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisUtilCharFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisUtilCharFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisUtilCharFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisUtilCharFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisUtilCharFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisUtilCharFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisUtilCharFilterFactory_) && (OrgApacheLuceneAnalysisUtilCharFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisUtilCharFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisUtilCharFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisUtilCharFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisUtilCharFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisUtilCharFilterFactory))
+#define OrgApacheLuceneAnalysisUtilCharFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory 1
 #include "org/apache/lucene/analysis/util/AbstractAnalysisFactory.h"
 
 @class IOSClass;
@@ -26,23 +26,51 @@
 @protocol JavaUtilMap;
 @protocol JavaUtilSet;
 
+/*!
+ @brief Abstract parent class for analysis factories that create <code>CharFilter</code>
+ instances.
+ */
 @interface OrgApacheLuceneAnalysisUtilCharFilterFactory : OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory
 
 #pragma mark Public
 
+/*!
+ @brief returns a list of all available charfilter names
+ */
 + (id<JavaUtilSet>)availableCharFilters;
 
+/*!
+ @brief Wraps the given Reader with a CharFilter.
+ */
 - (JavaIoReader *)createWithJavaIoReader:(JavaIoReader *)input;
 
+/*!
+ @brief looks up a charfilter by name from context classpath
+ */
 + (OrgApacheLuceneAnalysisUtilCharFilterFactory *)forNameWithNSString:(NSString *)name
                                                       withJavaUtilMap:(id<JavaUtilMap>)args;
 
+/*!
+ @brief looks up a charfilter class by name from context classpath
+ */
 + (IOSClass *)lookupClassWithNSString:(NSString *)name;
 
+/*!
+ @brief Reloads the factory list from the given <code>ClassLoader</code>.
+ Changes to the factories are visible after the method ends, all
+ iterators (<code>availableCharFilters()</code>,...) stay consistent. 
+ <p><b>NOTE:</b> Only new factories are added, existing ones are
+ never removed or replaced.
+ <p><em>This method is expensive and should only be called for discovery
+ of new factories on the given classpath/classloader!</em>
+ */
 + (void)reloadCharFiltersWithJavaLangClassLoader:(JavaLangClassLoader *)classloader;
 
 #pragma mark Protected
 
+/*!
+ @brief Initialize this factory via a set of key-value pairs.
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 @end
@@ -63,4 +91,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilCharFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisUtilCharFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilCharFilterFactory")

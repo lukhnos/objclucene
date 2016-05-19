@@ -5,49 +5,125 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserClassicToken_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserClassicToken_RESTRICT
-#define OrgApacheLuceneQueryparserClassicToken_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserClassicToken")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserClassicToken
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserClassicToken 0
 #else
-#define OrgApacheLuceneQueryparserClassicToken_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserClassicToken 1
 #endif
-#undef OrgApacheLuceneQueryparserClassicToken_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserClassicToken
 
-#if !defined (_OrgApacheLuceneQueryparserClassicToken_) && (OrgApacheLuceneQueryparserClassicToken_INCLUDE_ALL || OrgApacheLuceneQueryparserClassicToken_INCLUDE)
-#define _OrgApacheLuceneQueryparserClassicToken_
+#if !defined (OrgApacheLuceneQueryparserClassicToken_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserClassicToken || defined(INCLUDE_OrgApacheLuceneQueryparserClassicToken))
+#define OrgApacheLuceneQueryparserClassicToken_
 
-#define JavaIoSerializable_RESTRICT 1
-#define JavaIoSerializable_INCLUDE 1
+#define RESTRICT_JavaIoSerializable 1
+#define INCLUDE_JavaIoSerializable 1
 #include "java/io/Serializable.h"
 
+/*!
+ @brief Describes the input token stream.
+ */
 @interface OrgApacheLuceneQueryparserClassicToken : NSObject < JavaIoSerializable > {
  @public
+  /*!
+   @brief An integer that describes the kind of this token.
+   This numbering
+ system is determined by JavaCCParser, and a table of these numbers is
+ stored in the file ...Constants.java.
+   */
   jint kind_;
+  /*!
+   @brief The line number of the first character of this Token.
+   */
   jint beginLine_;
+  /*!
+   @brief The column number of the first character of this Token.
+   */
   jint beginColumn_;
+  /*!
+   @brief The line number of the last character of this Token.
+   */
   jint endLine_;
+  /*!
+   @brief The column number of the last character of this Token.
+   */
   jint endColumn_;
+  /*!
+   @brief The string image of the token.
+   */
   NSString *image_;
+  /*!
+   @brief A reference to the next regular (non-special) token from the input
+ stream.
+   If this is the last token from the input stream, or if the
+ token manager has not read tokens beyond this one, this field is
+ set to null.  This is true only if this token is also a regular
+ token.  Otherwise, see below for a description of the contents of
+ this field.
+   */
   OrgApacheLuceneQueryparserClassicToken *next_;
+  /*!
+   @brief This field is used to access special tokens that occur prior to this
+ token, but after the immediately preceding regular (non-special) token.
+   If there are no such special tokens, this field is set to null.
+ When there are more than one such special token, this field refers
+ to the last of these special tokens, which in turn refers to the next
+ previous special token through its specialToken field, and so on
+ until the first special token (whose specialToken field is null).
+ The next fields of special tokens refer to other special tokens that
+ immediately follow it (without an intervening regular token).  If there
+ is no such token, this field is null.
+   */
   OrgApacheLuceneQueryparserClassicToken *specialToken_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief No-argument constructor
+ */
 - (instancetype)init;
 
+/*!
+ @brief Constructs a new token for the specified Image.
+ */
 - (instancetype)initWithInt:(jint)kind;
 
+/*!
+ @brief Constructs a new token for the specified Image and Kind.
+ */
 - (instancetype)initWithInt:(jint)kind
                withNSString:(NSString *)image;
 
+/*!
+ @brief An optional attribute value of the Token.
+ Tokens which are not used as syntactic sugar will often contain
+ meaningful values that will be used later on by the compiler or
+ interpreter. This attribute value is often different from the image.
+ Any subclass of Token that actually wants to return a non-null value can
+ override this method as appropriate.
+ */
 - (id)getValue;
 
 + (OrgApacheLuceneQueryparserClassicToken *)newTokenWithInt:(jint)ofKind OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Returns a new Token object, by default.
+ However, if you want, you
+ can create and return subclass objects based on the value of ofKind.
+ Simply add the cases to the switch for all those special cases.
+ For example, if you have a subclass of Token called IDToken that
+ you want to create if ofKind is ID, simply add something like :
+ case MyParserConstants.ID : return new IDToken(ofKind, image);
+ to the following switch statement. Then you can cast matchedToken
+ variable to the appropriate type and use sit in your lexical actions.
+ */
 + (OrgApacheLuceneQueryparserClassicToken *)newTokenWithInt:(jint)ofKind
                                                withNSString:(NSString *)image OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Returns the image.
+ */
 - (NSString *)description;
 
 @end
@@ -62,13 +138,19 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserClassicToken_init(OrgApacheLuce
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserClassicToken *new_OrgApacheLuceneQueryparserClassicToken_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserClassicToken *create_OrgApacheLuceneQueryparserClassicToken_init();
+
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserClassicToken_initWithInt_(OrgApacheLuceneQueryparserClassicToken *self, jint kind);
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserClassicToken *new_OrgApacheLuceneQueryparserClassicToken_initWithInt_(jint kind) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserClassicToken *create_OrgApacheLuceneQueryparserClassicToken_initWithInt_(jint kind);
+
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserClassicToken_initWithInt_withNSString_(OrgApacheLuceneQueryparserClassicToken *self, jint kind, NSString *image);
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserClassicToken *new_OrgApacheLuceneQueryparserClassicToken_initWithInt_withNSString_(jint kind, NSString *image) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserClassicToken *create_OrgApacheLuceneQueryparserClassicToken_initWithInt_withNSString_(jint kind, NSString *image);
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserClassicToken *OrgApacheLuceneQueryparserClassicToken_newTokenWithInt_withNSString_(jint ofKind, NSString *image);
 
@@ -78,4 +160,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserClassicToken)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserClassicToken_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserClassicToken")

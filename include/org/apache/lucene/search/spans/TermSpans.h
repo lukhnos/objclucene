@@ -5,25 +5,30 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSpansTermSpans_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSpansTermSpans_RESTRICT
-#define OrgApacheLuceneSearchSpansTermSpans_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansTermSpans")
+#ifdef RESTRICT_OrgApacheLuceneSearchSpansTermSpans
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansTermSpans 0
 #else
-#define OrgApacheLuceneSearchSpansTermSpans_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansTermSpans 1
 #endif
-#undef OrgApacheLuceneSearchSpansTermSpans_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSpansTermSpans
 
-#if !defined (_OrgApacheLuceneSearchSpansTermSpans_) && (OrgApacheLuceneSearchSpansTermSpans_INCLUDE_ALL || OrgApacheLuceneSearchSpansTermSpans_INCLUDE)
-#define _OrgApacheLuceneSearchSpansTermSpans_
+#if !defined (OrgApacheLuceneSearchSpansTermSpans_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansTermSpans || defined(INCLUDE_OrgApacheLuceneSearchSpansTermSpans))
+#define OrgApacheLuceneSearchSpansTermSpans_
 
-#define OrgApacheLuceneSearchSpansSpans_RESTRICT 1
-#define OrgApacheLuceneSearchSpansSpans_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSpansSpans 1
+#define INCLUDE_OrgApacheLuceneSearchSpansSpans 1
 #include "org/apache/lucene/search/spans/Spans.h"
 
 @class OrgApacheLuceneIndexPostingsEnum;
 @class OrgApacheLuceneIndexTerm;
 @protocol OrgApacheLuceneSearchSpansSpanCollector;
 
+/*!
+ @brief Expert:
+ Public for extension only.
+ This does not work correctly for terms that indexed at position Integer.MAX_VALUE.
+ */
 @interface OrgApacheLuceneSearchSpansTermSpans : OrgApacheLuceneSearchSpansSpans {
  @public
   OrgApacheLuceneIndexPostingsEnum *postings_;
@@ -73,8 +78,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansTermSpans_initWithOrgApacheLuce
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSpansTermSpans *new_OrgApacheLuceneSearchSpansTermSpans_initWithOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexPostingsEnum *postings, OrgApacheLuceneIndexTerm *term) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpansTermSpans *create_OrgApacheLuceneSearchSpansTermSpans_initWithOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexPostingsEnum *postings, OrgApacheLuceneIndexTerm *term);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansTermSpans)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSpansTermSpans_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansTermSpans")

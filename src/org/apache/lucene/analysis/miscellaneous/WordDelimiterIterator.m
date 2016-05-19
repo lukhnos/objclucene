@@ -13,16 +13,40 @@
  @public
   jboolean hasFinalPossessive_;
   IOSByteArray *charTypeTable_;
+  /*!
+   @brief if true, need to skip over a possessive found in the last call to next()
+   */
   jboolean skipPossessive_;
 }
 
+/*!
+ @brief Determines whether the transition from lastType to type indicates a break
+ @param lastType Last subword type
+ @param type Current subword type
+ @return <code>true</code> if the transition indicates a break, <code>false</code> otherwise
+ */
 - (jboolean)isBreakWithInt:(jint)lastType
                    withInt:(jint)type;
 
+/*!
+ @brief Set the internal word bounds (remove leading and trailing delimiters).
+ Note, if a possessive is found, don't remove
+ it yet, simply note it.
+ */
 - (void)setBounds;
 
+/*!
+ @brief Determines if the text at the given position indicates an English possessive which should be removed
+ @param pos Position in the text to check if it indicates an English possessive
+ @return <code>true</code> if the text at the position indicates an English posessive, <code>false</code> otherwise
+ */
 - (jboolean)endsWithPossessiveWithInt:(jint)pos;
 
+/*!
+ @brief Determines the type of the given character
+ @param ch Character whose type is to be determined
+ @return Type of the character
+ */
 - (jint)charTypeWithInt:(jint)ch;
 
 @end
@@ -39,9 +63,17 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisMiscellaneousWordDeli
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator)
 
-IOSByteArray *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_DEFAULT_WORD_DELIM_TABLE_;
+IOSByteArray *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_DEFAULT_WORD_DELIM_TABLE;
 
 @implementation OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator
+
++ (jint)DONE {
+  return OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_DONE;
+}
+
++ (IOSByteArray *)DEFAULT_WORD_DELIM_TABLE {
+  return OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_DEFAULT_WORD_DELIM_TABLE;
+}
 
 - (instancetype)initWithByteArray:(IOSByteArray *)charTypeTable
                       withBoolean:(jboolean)splitOnCaseChange
@@ -159,7 +191,7 @@ IOSByteArray *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_DEFAULT_
         }
         *IOSByteArray_GetRef(tab, i) = code;
       }
-      JreStrongAssign(&OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_DEFAULT_WORD_DELIM_TABLE_, tab);
+      JreStrongAssign(&OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_DEFAULT_WORD_DELIM_TABLE, tab);
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator)
   }
@@ -180,7 +212,7 @@ IOSByteArray *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_DEFAULT_
   };
   static const J2ObjcFieldInfo fields[] = {
     { "DONE", "DONE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_DONE },
-    { "DEFAULT_WORD_DELIM_TABLE_", NULL, 0x19, "[B", &OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_DEFAULT_WORD_DELIM_TABLE_, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_WORD_DELIM_TABLE", "DEFAULT_WORD_DELIM_TABLE", 0x19, "[B", &OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_DEFAULT_WORD_DELIM_TABLE, NULL, .constantValue.asLong = 0 },
     { "text_", NULL, 0x0, "[C", NULL, NULL, .constantValue.asLong = 0 },
     { "length_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "startBounds_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
@@ -211,9 +243,11 @@ void OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_initWithByteArray
 }
 
 OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator *new_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_initWithByteArray_withBoolean_withBoolean_withBoolean_(IOSByteArray *charTypeTable, jboolean splitOnCaseChange, jboolean splitOnNumerics, jboolean stemEnglishPossessive) {
-  OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator *self = [OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator alloc];
-  OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_initWithByteArray_withBoolean_withBoolean_withBoolean_(self, charTypeTable, splitOnCaseChange, splitOnNumerics, stemEnglishPossessive);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator, initWithByteArray_withBoolean_withBoolean_withBoolean_, charTypeTable, splitOnCaseChange, splitOnNumerics, stemEnglishPossessive)
+}
+
+OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator *create_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_initWithByteArray_withBoolean_withBoolean_withBoolean_(IOSByteArray *charTypeTable, jboolean splitOnCaseChange, jboolean splitOnNumerics, jboolean stemEnglishPossessive) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator, initWithByteArray_withBoolean_withBoolean_withBoolean_, charTypeTable, splitOnCaseChange, splitOnNumerics, stemEnglishPossessive)
 }
 
 jboolean OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_isBreakWithInt_withInt_(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator *self, jint lastType, jint type) {
@@ -246,7 +280,7 @@ void OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_setBounds(OrgApac
 }
 
 jboolean OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_endsWithPossessiveWithInt_(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator *self, jint pos) {
-  return (self->stemEnglishPossessive_ && pos > 2 && IOSCharArray_Get(nil_chk(self->text_), pos - 2) == '\'' && (IOSCharArray_Get(self->text_, pos - 1) == 's' || IOSCharArray_Get(self->text_, pos - 1) == 'S') && OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_isAlphaWithInt_(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_charTypeWithInt_(self, IOSCharArray_Get(self->text_, pos - 3))) && (pos == self->endBounds_ || OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_isSubwordDelimWithInt_(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_charTypeWithInt_(self, IOSCharArray_Get(self->text_, pos)))));
+  return (self->stemEnglishPossessive_ && pos > 2 && IOSCharArray_Get(nil_chk(self->text_), pos - 2) == '\'' && (IOSCharArray_Get(self->text_, pos - 1) == 's' || IOSCharArray_Get(self->text_, pos - 1) == 'S') && OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_isAlphaWithInt_(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_charTypeWithInt_(self, IOSCharArray_Get(self->text_, pos - 3))) && (pos == self->endBounds_ || OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_isSubwordDelimWithInt_(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_charTypeWithInt_(self, IOSCharArray_Get(nil_chk(self->text_), pos)))));
 }
 
 jint OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_charTypeWithInt_(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator *self, jint ch) {

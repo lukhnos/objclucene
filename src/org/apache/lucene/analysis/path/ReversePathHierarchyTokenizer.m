@@ -22,8 +22,6 @@
 #include "org/apache/lucene/util/AttributeFactory.h"
 #include "org/apache/lucene/util/AttributeSource.h"
 
-#define OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_DEFAULT_BUFFER_SIZE 1024
-
 @interface OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer () {
  @public
   jchar delimiter_;
@@ -50,9 +48,19 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer, re
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer, delimiterPositions_, id<JavaUtilList>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer, resultTokenBuffer_, IOSCharArray *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer, DEFAULT_BUFFER_SIZE, jint)
+inline jint OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_get_DEFAULT_BUFFER_SIZE();
+#define OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_DEFAULT_BUFFER_SIZE 1024
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer, DEFAULT_BUFFER_SIZE, jint)
 
 @implementation OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer
+
++ (jchar)DEFAULT_DELIMITER {
+  return OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_DEFAULT_DELIMITER;
+}
+
++ (jint)DEFAULT_SKIP {
+  return OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_DEFAULT_SKIP;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -135,26 +143,26 @@ J2OBJC_IGNORE_DESIGNATED_END
       }
       length++;
       if (c == delimiter_) {
-        [delimiterPositions_ addWithId:JavaLangInteger_valueOfWithInt_(length)];
+        [((id<JavaUtilList>) nil_chk(delimiterPositions_)) addWithId:JavaLangInteger_valueOfWithInt_(length)];
         [((JavaLangStringBuilder *) nil_chk(resultToken_)) appendWithChar:replacement_];
       }
       else {
         [((JavaLangStringBuilder *) nil_chk(resultToken_)) appendWithChar:(jchar) c];
       }
     }
-    delimitersCount_ = [delimiterPositions_ size];
-    if ([((JavaLangInteger *) nil_chk([delimiterPositions_ getWithInt:delimitersCount_ - 1])) intValue] < length) {
-      [delimiterPositions_ addWithId:JavaLangInteger_valueOfWithInt_(length)];
+    delimitersCount_ = [((id<JavaUtilList>) nil_chk(delimiterPositions_)) size];
+    if ([((JavaLangInteger *) nil_chk([((id<JavaUtilList>) nil_chk(delimiterPositions_)) getWithInt:delimitersCount_ - 1])) intValue] < length) {
+      [((id<JavaUtilList>) nil_chk(delimiterPositions_)) addWithId:JavaLangInteger_valueOfWithInt_(length)];
       delimitersCount_++;
     }
     if (((IOSCharArray *) nil_chk(resultTokenBuffer_))->size_ < [((JavaLangStringBuilder *) nil_chk(resultToken_)) length]) {
-      JreStrongAssignAndConsume(&resultTokenBuffer_, [IOSCharArray newArrayWithLength:[resultToken_ length]]);
+      JreStrongAssignAndConsume(&resultTokenBuffer_, [IOSCharArray newArrayWithLength:[((JavaLangStringBuilder *) nil_chk(resultToken_)) length]]);
     }
-    [resultToken_ getCharsWithInt:0 withInt:[resultToken_ length] withCharArray:resultTokenBuffer_ withInt:0];
-    [resultToken_ setLengthWithInt:0];
+    [((JavaLangStringBuilder *) nil_chk(resultToken_)) getCharsWithInt:0 withInt:[resultToken_ length] withCharArray:resultTokenBuffer_ withInt:0];
+    [((JavaLangStringBuilder *) nil_chk(resultToken_)) setLengthWithInt:0];
     jint idx = delimitersCount_ - 1 - skip_;
     if (idx >= 0) {
-      endPosition_ = [((JavaLangInteger *) nil_chk([delimiterPositions_ getWithInt:idx])) intValue];
+      endPosition_ = [((JavaLangInteger *) nil_chk([((id<JavaUtilList>) nil_chk(delimiterPositions_)) getWithInt:idx])) intValue];
     }
     finalOffset_ = [self correctOffsetWithInt:length];
     [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posAtt_)) setPositionIncrementWithInt:1];
@@ -242,9 +250,11 @@ void OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_init(OrgApacheLuce
 }
 
 OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *new_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_init() {
-  OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *self = [OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer alloc];
-  OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer, init)
+}
+
+OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *create_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer, init)
 }
 
 void OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithInt_(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *self, jint skip) {
@@ -252,9 +262,11 @@ void OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithInt_(OrgAp
 }
 
 OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *new_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithInt_(jint skip) {
-  OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *self = [OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer alloc];
-  OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithInt_(self, skip);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer, initWithInt_, skip)
+}
+
+OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *create_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithInt_(jint skip) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer, initWithInt_, skip)
 }
 
 void OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithInt_withChar_(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *self, jint bufferSize, jchar delimiter) {
@@ -262,9 +274,11 @@ void OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithInt_withCh
 }
 
 OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *new_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithInt_withChar_(jint bufferSize, jchar delimiter) {
-  OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *self = [OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer alloc];
-  OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithInt_withChar_(self, bufferSize, delimiter);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer, initWithInt_withChar_, bufferSize, delimiter)
+}
+
+OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *create_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithInt_withChar_(jint bufferSize, jchar delimiter) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer, initWithInt_withChar_, bufferSize, delimiter)
 }
 
 void OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithChar_withChar_(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *self, jchar delimiter, jchar replacement) {
@@ -272,9 +286,11 @@ void OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithChar_withC
 }
 
 OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *new_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithChar_withChar_(jchar delimiter, jchar replacement) {
-  OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *self = [OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer alloc];
-  OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithChar_withChar_(self, delimiter, replacement);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer, initWithChar_withChar_, delimiter, replacement)
+}
+
+OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *create_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithChar_withChar_(jchar delimiter, jchar replacement) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer, initWithChar_withChar_, delimiter, replacement)
 }
 
 void OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithInt_withChar_withChar_(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *self, jint bufferSize, jchar delimiter, jchar replacement) {
@@ -282,9 +298,11 @@ void OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithInt_withCh
 }
 
 OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *new_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithInt_withChar_withChar_(jint bufferSize, jchar delimiter, jchar replacement) {
-  OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *self = [OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer alloc];
-  OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithInt_withChar_withChar_(self, bufferSize, delimiter, replacement);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer, initWithInt_withChar_withChar_, bufferSize, delimiter, replacement)
+}
+
+OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *create_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithInt_withChar_withChar_(jint bufferSize, jchar delimiter, jchar replacement) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer, initWithInt_withChar_withChar_, bufferSize, delimiter, replacement)
 }
 
 void OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithChar_withInt_(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *self, jchar delimiter, jint skip) {
@@ -292,9 +310,11 @@ void OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithChar_withI
 }
 
 OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *new_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithChar_withInt_(jchar delimiter, jint skip) {
-  OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *self = [OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer alloc];
-  OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithChar_withInt_(self, delimiter, skip);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer, initWithChar_withInt_, delimiter, skip)
+}
+
+OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *create_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithChar_withInt_(jchar delimiter, jint skip) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer, initWithChar_withInt_, delimiter, skip)
 }
 
 void OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithChar_withChar_withInt_(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *self, jchar delimiter, jchar replacement, jint skip) {
@@ -302,9 +322,11 @@ void OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithChar_withC
 }
 
 OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *new_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithChar_withChar_withInt_(jchar delimiter, jchar replacement, jint skip) {
-  OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *self = [OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer alloc];
-  OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithChar_withChar_withInt_(self, delimiter, replacement, skip);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer, initWithChar_withChar_withInt_, delimiter, replacement, skip)
+}
+
+OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *create_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithChar_withChar_withInt_(jchar delimiter, jchar replacement, jint skip) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer, initWithChar_withChar_withInt_, delimiter, replacement, skip)
 }
 
 void OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withChar_withChar_withInt_(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory, jchar delimiter, jchar replacement, jint skip) {
@@ -312,19 +334,23 @@ void OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithOrgApacheL
 }
 
 OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *new_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withChar_withChar_withInt_(OrgApacheLuceneUtilAttributeFactory *factory, jchar delimiter, jchar replacement, jint skip) {
-  OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *self = [OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer alloc];
-  OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withChar_withChar_withInt_(self, factory, delimiter, replacement, skip);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer, initWithOrgApacheLuceneUtilAttributeFactory_withChar_withChar_withInt_, factory, delimiter, replacement, skip)
+}
+
+OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *create_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withChar_withChar_withInt_(OrgApacheLuceneUtilAttributeFactory *factory, jchar delimiter, jchar replacement, jint skip) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer, initWithOrgApacheLuceneUtilAttributeFactory_withChar_withChar_withInt_, factory, delimiter, replacement, skip)
 }
 
 void OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithInt_withChar_withChar_withInt_(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *self, jint bufferSize, jchar delimiter, jchar replacement, jint skip) {
-  OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withChar_withChar_withInt_(self, JreLoadStatic(OrgApacheLuceneAnalysisTokenStream, DEFAULT_TOKEN_ATTRIBUTE_FACTORY_), bufferSize, delimiter, replacement, skip);
+  OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withChar_withChar_withInt_(self, JreLoadStatic(OrgApacheLuceneAnalysisTokenStream, DEFAULT_TOKEN_ATTRIBUTE_FACTORY), bufferSize, delimiter, replacement, skip);
 }
 
 OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *new_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithInt_withChar_withChar_withInt_(jint bufferSize, jchar delimiter, jchar replacement, jint skip) {
-  OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *self = [OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer alloc];
-  OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithInt_withChar_withChar_withInt_(self, bufferSize, delimiter, replacement, skip);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer, initWithInt_withChar_withChar_withInt_, bufferSize, delimiter, replacement, skip)
+}
+
+OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *create_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithInt_withChar_withChar_withInt_(jint bufferSize, jchar delimiter, jchar replacement, jint skip) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer, initWithInt_withChar_withChar_withInt_, bufferSize, delimiter, replacement, skip)
 }
 
 void OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withChar_withChar_withInt_(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory, jint bufferSize, jchar delimiter, jchar replacement, jint skip) {
@@ -337,10 +363,10 @@ void OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithOrgApacheL
   self->skipped_ = 0;
   self->delimitersCount_ = -1;
   if (bufferSize < 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"bufferSize cannot be negative") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"bufferSize cannot be negative");
   }
   if (skip < 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"skip cannot be negative") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"skip cannot be negative");
   }
   [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(self->termAtt_)) resizeBufferWithInt:bufferSize];
   self->delimiter_ = delimiter;
@@ -352,9 +378,11 @@ void OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithOrgApacheL
 }
 
 OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *new_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withChar_withChar_withInt_(OrgApacheLuceneUtilAttributeFactory *factory, jint bufferSize, jchar delimiter, jchar replacement, jint skip) {
-  OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *self = [OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer alloc];
-  OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withChar_withChar_withInt_(self, factory, bufferSize, delimiter, replacement, skip);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer, initWithOrgApacheLuceneUtilAttributeFactory_withInt_withChar_withChar_withInt_, factory, bufferSize, delimiter, replacement, skip)
+}
+
+OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *create_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withChar_withChar_withInt_(OrgApacheLuceneUtilAttributeFactory *factory, jint bufferSize, jchar delimiter, jchar replacement, jint skip) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer, initWithOrgApacheLuceneUtilAttributeFactory_withInt_withChar_withChar_withInt_, factory, bufferSize, delimiter, replacement, skip)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer)

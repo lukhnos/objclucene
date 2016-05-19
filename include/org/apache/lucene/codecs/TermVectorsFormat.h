@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsTermVectorsFormat_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsTermVectorsFormat_RESTRICT
-#define OrgApacheLuceneCodecsTermVectorsFormat_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsTermVectorsFormat")
+#ifdef RESTRICT_OrgApacheLuceneCodecsTermVectorsFormat
+#define INCLUDE_ALL_OrgApacheLuceneCodecsTermVectorsFormat 0
 #else
-#define OrgApacheLuceneCodecsTermVectorsFormat_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsTermVectorsFormat 1
 #endif
-#undef OrgApacheLuceneCodecsTermVectorsFormat_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsTermVectorsFormat
 
-#if !defined (_OrgApacheLuceneCodecsTermVectorsFormat_) && (OrgApacheLuceneCodecsTermVectorsFormat_INCLUDE_ALL || OrgApacheLuceneCodecsTermVectorsFormat_INCLUDE)
-#define _OrgApacheLuceneCodecsTermVectorsFormat_
+#if !defined (OrgApacheLuceneCodecsTermVectorsFormat_) && (INCLUDE_ALL_OrgApacheLuceneCodecsTermVectorsFormat || defined(INCLUDE_OrgApacheLuceneCodecsTermVectorsFormat))
+#define OrgApacheLuceneCodecsTermVectorsFormat_
 
 @class OrgApacheLuceneCodecsTermVectorsReader;
 @class OrgApacheLuceneCodecsTermVectorsWriter;
@@ -23,21 +23,37 @@
 @class OrgApacheLuceneStoreDirectory;
 @class OrgApacheLuceneStoreIOContext;
 
+/*!
+ @brief Controls the format of term vectors
+ */
 @interface OrgApacheLuceneCodecsTermVectorsFormat : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Returns a <code>TermVectorsReader</code> to read term
+ vectors.
+ */
 - (OrgApacheLuceneCodecsTermVectorsReader *)vectorsReaderWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
                                                        withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)segmentInfo
                                                         withOrgApacheLuceneIndexFieldInfos:(OrgApacheLuceneIndexFieldInfos *)fieldInfos
                                                          withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
 
+/*!
+ @brief Returns a <code>TermVectorsWriter</code> to write term
+ vectors.
+ */
 - (OrgApacheLuceneCodecsTermVectorsWriter *)vectorsWriterWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
                                                        withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)segmentInfo
                                                          withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
 
 #pragma mark Protected
 
+/*!
+ @brief Sole constructor.
+ (For invocation by subclass 
+ constructors, typically implicit.) 
+ */
 - (instancetype)init;
 
 @end
@@ -50,4 +66,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsTermVectorsFormat)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsTermVectorsFormat_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsTermVectorsFormat")

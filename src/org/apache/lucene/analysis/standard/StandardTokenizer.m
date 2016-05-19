@@ -10,6 +10,7 @@
 #include "java/io/Reader.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/IllegalArgumentException.h"
+#include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/analysis/Tokenizer.h"
 #include "org/apache/lucene/analysis/standard/StandardAnalyzer.h"
 #include "org/apache/lucene/analysis/standard/StandardTokenizer.h"
@@ -23,6 +24,9 @@
 
 @interface OrgApacheLuceneAnalysisStandardStandardTokenizer () {
  @public
+  /*!
+   @brief A private instance of the JFlex-constructed scanner
+   */
   OrgApacheLuceneAnalysisStandardStandardTokenizerImpl *scanner_;
   jint skippedPositions_;
   jint maxTokenLength_;
@@ -46,16 +50,80 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisStandardStandardToken
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisStandardStandardTokenizer)
 
-IOSObjectArray *OrgApacheLuceneAnalysisStandardStandardTokenizer_TOKEN_TYPES_;
+IOSObjectArray *OrgApacheLuceneAnalysisStandardStandardTokenizer_TOKEN_TYPES;
 
 @implementation OrgApacheLuceneAnalysisStandardStandardTokenizer
 
++ (jint)ALPHANUM {
+  return OrgApacheLuceneAnalysisStandardStandardTokenizer_ALPHANUM;
+}
+
++ (jint)APOSTROPHE {
+  return OrgApacheLuceneAnalysisStandardStandardTokenizer_APOSTROPHE;
+}
+
++ (jint)ACRONYM {
+  return OrgApacheLuceneAnalysisStandardStandardTokenizer_ACRONYM;
+}
+
++ (jint)COMPANY {
+  return OrgApacheLuceneAnalysisStandardStandardTokenizer_COMPANY;
+}
+
++ (jint)EMAIL {
+  return OrgApacheLuceneAnalysisStandardStandardTokenizer_EMAIL;
+}
+
++ (jint)HOST {
+  return OrgApacheLuceneAnalysisStandardStandardTokenizer_HOST;
+}
+
++ (jint)NUM {
+  return OrgApacheLuceneAnalysisStandardStandardTokenizer_NUM;
+}
+
++ (jint)CJ {
+  return OrgApacheLuceneAnalysisStandardStandardTokenizer_CJ;
+}
+
++ (jint)ACRONYM_DEP {
+  return OrgApacheLuceneAnalysisStandardStandardTokenizer_ACRONYM_DEP;
+}
+
++ (jint)SOUTHEAST_ASIAN {
+  return OrgApacheLuceneAnalysisStandardStandardTokenizer_SOUTHEAST_ASIAN;
+}
+
++ (jint)IDEOGRAPHIC {
+  return OrgApacheLuceneAnalysisStandardStandardTokenizer_IDEOGRAPHIC;
+}
+
++ (jint)HIRAGANA {
+  return OrgApacheLuceneAnalysisStandardStandardTokenizer_HIRAGANA;
+}
+
++ (jint)KATAKANA {
+  return OrgApacheLuceneAnalysisStandardStandardTokenizer_KATAKANA;
+}
+
++ (jint)HANGUL {
+  return OrgApacheLuceneAnalysisStandardStandardTokenizer_HANGUL;
+}
+
++ (IOSObjectArray *)TOKEN_TYPES {
+  return OrgApacheLuceneAnalysisStandardStandardTokenizer_TOKEN_TYPES;
+}
+
++ (jint)MAX_TOKEN_LENGTH_LIMIT {
+  return OrgApacheLuceneAnalysisStandardStandardTokenizer_MAX_TOKEN_LENGTH_LIMIT;
+}
+
 - (void)setMaxTokenLengthWithInt:(jint)length {
   if (length < 1) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"maxTokenLength must be greater than zero") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"maxTokenLength must be greater than zero");
   }
   else if (length > OrgApacheLuceneAnalysisStandardStandardTokenizer_MAX_TOKEN_LENGTH_LIMIT) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"maxTokenLength may not exceed ", OrgApacheLuceneAnalysisStandardStandardTokenizer_MAX_TOKEN_LENGTH_LIMIT)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"maxTokenLength may not exceed ", OrgApacheLuceneAnalysisStandardStandardTokenizer_MAX_TOKEN_LENGTH_LIMIT));
   }
   if (length != maxTokenLength_) {
     maxTokenLength_ = length;
@@ -91,12 +159,12 @@ J2OBJC_IGNORE_DESIGNATED_END
     if (tokenType == OrgApacheLuceneAnalysisStandardStandardTokenizerImpl_YYEOF) {
       return false;
     }
-    if ([scanner_ yylength] <= maxTokenLength_) {
+    if ([((OrgApacheLuceneAnalysisStandardStandardTokenizerImpl *) nil_chk(scanner_)) yylength] <= maxTokenLength_) {
       [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncrAtt_)) setPositionIncrementWithInt:skippedPositions_ + 1];
-      [scanner_ getTextWithOrgApacheLuceneAnalysisTokenattributesCharTermAttribute:termAtt_];
-      jint start = [scanner_ yychar];
+      [((OrgApacheLuceneAnalysisStandardStandardTokenizerImpl *) nil_chk(scanner_)) getTextWithOrgApacheLuceneAnalysisTokenattributesCharTermAttribute:termAtt_];
+      jint start = [((OrgApacheLuceneAnalysisStandardStandardTokenizerImpl *) nil_chk(scanner_)) yychar];
       [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) setOffsetWithInt:[self correctOffsetWithInt:start] withInt:[self correctOffsetWithInt:start + [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) length]]];
-      [((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(typeAtt_)) setTypeWithNSString:IOSObjectArray_Get(nil_chk(OrgApacheLuceneAnalysisStandardStandardTokenizer_TOKEN_TYPES_), tokenType)];
+      [((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(typeAtt_)) setTypeWithNSString:IOSObjectArray_Get(nil_chk(OrgApacheLuceneAnalysisStandardStandardTokenizer_TOKEN_TYPES), tokenType)];
       return true;
     }
     else skippedPositions_++;
@@ -105,9 +173,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)end {
   [super end];
-  jint finalOffset = [self correctOffsetWithInt:[((OrgApacheLuceneAnalysisStandardStandardTokenizerImpl *) nil_chk(scanner_)) yychar] + [scanner_ yylength]];
+  jint finalOffset = [self correctOffsetWithInt:[((OrgApacheLuceneAnalysisStandardStandardTokenizerImpl *) nil_chk(scanner_)) yychar] + [((OrgApacheLuceneAnalysisStandardStandardTokenizerImpl *) nil_chk(scanner_)) yylength]];
   [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) setOffsetWithInt:finalOffset withInt:finalOffset];
-  [posIncrAtt_ setPositionIncrementWithInt:[((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncrAtt_)) getPositionIncrement] + skippedPositions_];
+  [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncrAtt_)) setPositionIncrementWithInt:[posIncrAtt_ getPositionIncrement] + skippedPositions_];
 }
 
 - (void)close {
@@ -121,6 +189,30 @@ J2OBJC_IGNORE_DESIGNATED_END
   skippedPositions_ = 0;
 }
 
++ (IOSObjectArray *)__annotations_APOSTROPHE_ {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
++ (IOSObjectArray *)__annotations_ACRONYM_ {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
++ (IOSObjectArray *)__annotations_COMPANY_ {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
++ (IOSObjectArray *)__annotations_HOST_ {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
++ (IOSObjectArray *)__annotations_CJ_ {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
++ (IOSObjectArray *)__annotations_ACRONYM_DEP_ {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
 - (void)dealloc {
   RELEASE_(scanner_);
   RELEASE_(termAtt_);
@@ -132,33 +224,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisStandardStandardTokenizer class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisStandardStandardTokenizer_TOKEN_TYPES_, [IOSObjectArray newArrayWithObjects:(id[]){ @"<ALPHANUM>", @"<APOSTROPHE>", @"<ACRONYM>", @"<COMPANY>", @"<EMAIL>", @"<HOST>", @"<NUM>", @"<CJ>", @"<ACRONYM_DEP>", @"<SOUTHEAST_ASIAN>", @"<IDEOGRAPHIC>", @"<HIRAGANA>", @"<KATAKANA>", @"<HANGUL>" } count:14 type:NSString_class_()]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisStandardStandardTokenizer_TOKEN_TYPES, [IOSObjectArray newArrayWithObjects:(id[]){ @"<ALPHANUM>", @"<APOSTROPHE>", @"<ACRONYM>", @"<COMPANY>", @"<EMAIL>", @"<HOST>", @"<NUM>", @"<CJ>", @"<ACRONYM_DEP>", @"<SOUTHEAST_ASIAN>", @"<IDEOGRAPHIC>", @"<HIRAGANA>", @"<KATAKANA>", @"<HANGUL>" } count:14 type:NSString_class_()]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisStandardStandardTokenizer)
   }
-}
-
-+ (IOSObjectArray *)__annotations_APOSTROPHE_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_ACRONYM_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_COMPANY_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_HOST_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_CJ_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_ACRONYM_DEP_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -189,7 +257,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "HIRAGANA", "HIRAGANA", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisStandardStandardTokenizer_HIRAGANA },
     { "KATAKANA", "KATAKANA", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisStandardStandardTokenizer_KATAKANA },
     { "HANGUL", "HANGUL", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisStandardStandardTokenizer_HANGUL },
-    { "TOKEN_TYPES_", NULL, 0x19, "[Ljava.lang.String;", &OrgApacheLuceneAnalysisStandardStandardTokenizer_TOKEN_TYPES_, NULL, .constantValue.asLong = 0 },
+    { "TOKEN_TYPES", "TOKEN_TYPES", 0x19, "[Ljava.lang.String;", &OrgApacheLuceneAnalysisStandardStandardTokenizer_TOKEN_TYPES, NULL, .constantValue.asLong = 0 },
     { "MAX_TOKEN_LENGTH_LIMIT", "MAX_TOKEN_LENGTH_LIMIT", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisStandardStandardTokenizer_MAX_TOKEN_LENGTH_LIMIT },
     { "skippedPositions_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "maxTokenLength_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
@@ -215,9 +283,11 @@ void OrgApacheLuceneAnalysisStandardStandardTokenizer_init(OrgApacheLuceneAnalys
 }
 
 OrgApacheLuceneAnalysisStandardStandardTokenizer *new_OrgApacheLuceneAnalysisStandardStandardTokenizer_init() {
-  OrgApacheLuceneAnalysisStandardStandardTokenizer *self = [OrgApacheLuceneAnalysisStandardStandardTokenizer alloc];
-  OrgApacheLuceneAnalysisStandardStandardTokenizer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisStandardStandardTokenizer, init)
+}
+
+OrgApacheLuceneAnalysisStandardStandardTokenizer *create_OrgApacheLuceneAnalysisStandardStandardTokenizer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisStandardStandardTokenizer, init)
 }
 
 void OrgApacheLuceneAnalysisStandardStandardTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneAnalysisStandardStandardTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory) {
@@ -231,9 +301,11 @@ void OrgApacheLuceneAnalysisStandardStandardTokenizer_initWithOrgApacheLuceneUti
 }
 
 OrgApacheLuceneAnalysisStandardStandardTokenizer *new_OrgApacheLuceneAnalysisStandardStandardTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneUtilAttributeFactory *factory) {
-  OrgApacheLuceneAnalysisStandardStandardTokenizer *self = [OrgApacheLuceneAnalysisStandardStandardTokenizer alloc];
-  OrgApacheLuceneAnalysisStandardStandardTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(self, factory);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisStandardStandardTokenizer, initWithOrgApacheLuceneUtilAttributeFactory_, factory)
+}
+
+OrgApacheLuceneAnalysisStandardStandardTokenizer *create_OrgApacheLuceneAnalysisStandardStandardTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneUtilAttributeFactory *factory) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisStandardStandardTokenizer, initWithOrgApacheLuceneUtilAttributeFactory_, factory)
 }
 
 void OrgApacheLuceneAnalysisStandardStandardTokenizer_init__(OrgApacheLuceneAnalysisStandardStandardTokenizer *self) {

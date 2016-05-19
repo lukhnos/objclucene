@@ -27,7 +27,7 @@
 - (void)seekWithLong:(jlong)pos {
   jlong skip = pos - [self getFilePointer];
   if (skip < 0) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("@$", [self getClass], @" cannot seek backwards")) autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("@$", [self getClass], @" cannot seek backwards"));
   }
   [self skipBytesWithLong:skip];
 }

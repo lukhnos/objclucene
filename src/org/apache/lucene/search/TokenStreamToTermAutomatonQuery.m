@@ -45,7 +45,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   id<OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute> posLengthAtt = [inArg addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute_class_()];
   id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute> offsetAtt = [inArg addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_()];
   [inArg reset];
-  OrgApacheLuceneSearchTermAutomatonQuery *query = [new_OrgApacheLuceneSearchTermAutomatonQuery_initWithNSString_(field) autorelease];
+  OrgApacheLuceneSearchTermAutomatonQuery *query = create_OrgApacheLuceneSearchTermAutomatonQuery_initWithNSString_(field);
   jint pos = -1;
   jint lastPos = 0;
   jint maxOffset = 0;
@@ -58,7 +58,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     }
     JreAssert((pos > -1 || posInc > 0), (@"org/apache/lucene/search/TokenStreamToTermAutomatonQuery.java:78 condition failed: assert pos > -1 || posInc > 0;"));
     if (posInc > 1) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"cannot handle holes; to accept any term, use '*' term") autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"cannot handle holes; to accept any term, use '*' term");
     }
     if (posInc > 0) {
       pos += posInc;
@@ -104,9 +104,11 @@ void OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery_init(OrgApacheLuceneSe
 }
 
 OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery *new_OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery_init() {
-  OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery *self = [OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery alloc];
-  OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery, init)
+}
+
+OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery *create_OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery)

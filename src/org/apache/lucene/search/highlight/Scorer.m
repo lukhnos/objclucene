@@ -3,12 +3,8 @@
 //  source: ./highlighter/src/java/org/apache/lucene/search/highlight/Scorer.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/search/highlight/Scorer.h"
-#include "org/apache/lucene/search/highlight/TextFragment.h"
 
 @interface OrgApacheLuceneSearchHighlightScorer : NSObject
 

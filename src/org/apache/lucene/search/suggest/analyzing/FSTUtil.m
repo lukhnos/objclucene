@@ -27,6 +27,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSuggestAnalyzingFSTUtil
 
 __attribute__((unused)) static OrgApacheLuceneSearchSuggestAnalyzingFSTUtil *new_OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchSuggestAnalyzingFSTUtil *create_OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_init();
+
 @implementation OrgApacheLuceneSearchSuggestAnalyzingFSTUtil
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -58,23 +60,25 @@ void OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_init(OrgApacheLuceneSearchSugg
 }
 
 OrgApacheLuceneSearchSuggestAnalyzingFSTUtil *new_OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_init() {
-  OrgApacheLuceneSearchSuggestAnalyzingFSTUtil *self = [OrgApacheLuceneSearchSuggestAnalyzingFSTUtil alloc];
-  OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestAnalyzingFSTUtil, init)
+}
+
+OrgApacheLuceneSearchSuggestAnalyzingFSTUtil *create_OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestAnalyzingFSTUtil, init)
 }
 
 id<JavaUtilList> OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_intersectPrefixPathsWithOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneUtilFstFST_(OrgApacheLuceneUtilAutomatonAutomaton *a, OrgApacheLuceneUtilFstFST *fst) {
   OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_initialize();
   JreAssert(([((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(a)) isDeterministic]), (@"org/apache/lucene/search/suggest/analyzing/FSTUtil.java:72 condition failed: assert a.isDeterministic();"));
-  id<JavaUtilList> queue = [new_JavaUtilArrayList_init() autorelease];
-  id<JavaUtilList> endNodes = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> queue = create_JavaUtilArrayList_init();
+  id<JavaUtilList> endNodes = create_JavaUtilArrayList_init();
   if ([a getNumStates] == 0) {
     return endNodes;
   }
-  [queue addWithId:[new_OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path_initWithInt_withOrgApacheLuceneUtilFstFST_Arc_withId_withOrgApacheLuceneUtilIntsRefBuilder_(0, [((OrgApacheLuceneUtilFstFST *) nil_chk(fst)) getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:[new_OrgApacheLuceneUtilFstFST_Arc_init() autorelease]], [((OrgApacheLuceneUtilFstOutputs *) nil_chk(fst->outputs_)) getNoOutput], [new_OrgApacheLuceneUtilIntsRefBuilder_init() autorelease]) autorelease]];
-  OrgApacheLuceneUtilFstFST_Arc *scratchArc = [new_OrgApacheLuceneUtilFstFST_Arc_init() autorelease];
+  [queue addWithId:create_OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path_initWithInt_withOrgApacheLuceneUtilFstFST_Arc_withId_withOrgApacheLuceneUtilIntsRefBuilder_(0, [((OrgApacheLuceneUtilFstFST *) nil_chk(fst)) getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:create_OrgApacheLuceneUtilFstFST_Arc_init()], [((OrgApacheLuceneUtilFstOutputs *) nil_chk(fst->outputs_)) getNoOutput], create_OrgApacheLuceneUtilIntsRefBuilder_init())];
+  OrgApacheLuceneUtilFstFST_Arc *scratchArc = create_OrgApacheLuceneUtilFstFST_Arc_init();
   OrgApacheLuceneUtilFstFST_BytesReader *fstReader = [fst getBytesReader];
-  OrgApacheLuceneUtilAutomatonTransition *t = [new_OrgApacheLuceneUtilAutomatonTransition_init() autorelease];
+  OrgApacheLuceneUtilAutomatonTransition *t = create_OrgApacheLuceneUtilAutomatonTransition_init();
   while ([queue size] != 0) {
     OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path *path = [queue removeWithInt:[queue size] - 1];
     if ([a isAcceptWithInt:((OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path *) nil_chk(path))->state_]) {
@@ -90,21 +94,21 @@ id<JavaUtilList> OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_intersectPrefixPat
       if (min == max) {
         OrgApacheLuceneUtilFstFST_Arc *nextArc = [fst findTargetArcWithInt:t->min_ withOrgApacheLuceneUtilFstFST_Arc:path->fstNode_ withOrgApacheLuceneUtilFstFST_Arc:scratchArc withOrgApacheLuceneUtilFstFST_BytesReader:fstReader];
         if (nextArc != nil) {
-          OrgApacheLuceneUtilIntsRefBuilder *newInput = [new_OrgApacheLuceneUtilIntsRefBuilder_init() autorelease];
+          OrgApacheLuceneUtilIntsRefBuilder *newInput = create_OrgApacheLuceneUtilIntsRefBuilder_init();
           [newInput copyIntsWithOrgApacheLuceneUtilIntsRef:[((OrgApacheLuceneUtilIntsRefBuilder *) nil_chk(currentInput)) get]];
           [newInput appendWithInt:t->min_];
-          [queue addWithId:[new_OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path_initWithInt_withOrgApacheLuceneUtilFstFST_Arc_withId_withOrgApacheLuceneUtilIntsRefBuilder_(t->dest_, [((OrgApacheLuceneUtilFstFST_Arc *) [new_OrgApacheLuceneUtilFstFST_Arc_init() autorelease]) copyFromWithOrgApacheLuceneUtilFstFST_Arc:nextArc], [fst->outputs_ addWithId:path->output_ withId:nextArc->output_], newInput) autorelease]];
+          [queue addWithId:create_OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path_initWithInt_withOrgApacheLuceneUtilFstFST_Arc_withId_withOrgApacheLuceneUtilIntsRefBuilder_(t->dest_, [create_OrgApacheLuceneUtilFstFST_Arc_init() copyFromWithOrgApacheLuceneUtilFstFST_Arc:nextArc], [fst->outputs_ addWithId:((id) path->output_) withId:((id) nextArc->output_)], newInput)];
         }
       }
       else {
         OrgApacheLuceneUtilFstFST_Arc *nextArc = OrgApacheLuceneUtilFstUtil_readCeilArcWithInt_withOrgApacheLuceneUtilFstFST_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilFstFST_BytesReader_(min, fst, path->fstNode_, scratchArc, fstReader);
         while (nextArc != nil && nextArc->label_ <= max) {
-          JreAssert((((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(nextArc))->label_ <= max), (@"org/apache/lucene/search/suggest/analyzing/FSTUtil.java:125 condition failed: assert nextArc.label <=  max;"));
+          JreAssert((nextArc->label_ <= max), (@"org/apache/lucene/search/suggest/analyzing/FSTUtil.java:125 condition failed: assert nextArc.label <=  max;"));
           JreAssert((nextArc->label_ >= min), (JreStrcat("ICI", nextArc->label_, ' ', min)));
-          OrgApacheLuceneUtilIntsRefBuilder *newInput = [new_OrgApacheLuceneUtilIntsRefBuilder_init() autorelease];
+          OrgApacheLuceneUtilIntsRefBuilder *newInput = create_OrgApacheLuceneUtilIntsRefBuilder_init();
           [newInput copyIntsWithOrgApacheLuceneUtilIntsRef:[((OrgApacheLuceneUtilIntsRefBuilder *) nil_chk(currentInput)) get]];
           [newInput appendWithInt:nextArc->label_];
-          [queue addWithId:[new_OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path_initWithInt_withOrgApacheLuceneUtilFstFST_Arc_withId_withOrgApacheLuceneUtilIntsRefBuilder_(t->dest_, [((OrgApacheLuceneUtilFstFST_Arc *) [new_OrgApacheLuceneUtilFstFST_Arc_init() autorelease]) copyFromWithOrgApacheLuceneUtilFstFST_Arc:nextArc], [fst->outputs_ addWithId:path->output_ withId:nextArc->output_], newInput) autorelease]];
+          [queue addWithId:create_OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path_initWithInt_withOrgApacheLuceneUtilFstFST_Arc_withId_withOrgApacheLuceneUtilIntsRefBuilder_(t->dest_, [create_OrgApacheLuceneUtilFstFST_Arc_init() copyFromWithOrgApacheLuceneUtilFstFST_Arc:nextArc], [fst->outputs_ addWithId:((id) path->output_) withId:((id) nextArc->output_)], newInput)];
           jint label = nextArc->label_;
           nextArc = [nextArc isLast] ? nil : [fst readNextRealArcWithOrgApacheLuceneUtilFstFST_Arc:nextArc withOrgApacheLuceneUtilFstFST_BytesReader:fstReader];
           JreAssert((nextArc == nil || label < nextArc->label_), (JreStrcat("$I$I", @"last: ", label, @" next: ", nextArc->label_)));
@@ -159,9 +163,11 @@ void OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path_initWithInt_withOrgApache
 }
 
 OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path *new_OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path_initWithInt_withOrgApacheLuceneUtilFstFST_Arc_withId_withOrgApacheLuceneUtilIntsRefBuilder_(jint state, OrgApacheLuceneUtilFstFST_Arc *fstNode, id output, OrgApacheLuceneUtilIntsRefBuilder *input) {
-  OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path *self = [OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path alloc];
-  OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path_initWithInt_withOrgApacheLuceneUtilFstFST_Arc_withId_withOrgApacheLuceneUtilIntsRefBuilder_(self, state, fstNode, output, input);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path, initWithInt_withOrgApacheLuceneUtilFstFST_Arc_withId_withOrgApacheLuceneUtilIntsRefBuilder_, state, fstNode, output, input)
+}
+
+OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path *create_OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path_initWithInt_withOrgApacheLuceneUtilFstFST_Arc_withId_withOrgApacheLuceneUtilIntsRefBuilder_(jint state, OrgApacheLuceneUtilFstFST_Arc *fstNode, id output, OrgApacheLuceneUtilIntsRefBuilder *input) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path, initWithInt_withOrgApacheLuceneUtilFstFST_Arc_withId_withOrgApacheLuceneUtilIntsRefBuilder_, state, fstNode, output, input)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path)

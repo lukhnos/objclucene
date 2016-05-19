@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneRangetreeOfflineSliceReader_INCLUDE_ALL")
-#if OrgApacheLuceneRangetreeOfflineSliceReader_RESTRICT
-#define OrgApacheLuceneRangetreeOfflineSliceReader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneRangetreeOfflineSliceReader")
+#ifdef RESTRICT_OrgApacheLuceneRangetreeOfflineSliceReader
+#define INCLUDE_ALL_OrgApacheLuceneRangetreeOfflineSliceReader 0
 #else
-#define OrgApacheLuceneRangetreeOfflineSliceReader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneRangetreeOfflineSliceReader 1
 #endif
-#undef OrgApacheLuceneRangetreeOfflineSliceReader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneRangetreeOfflineSliceReader
 
-#if !defined (_OrgApacheLuceneRangetreeOfflineSliceReader_) && (OrgApacheLuceneRangetreeOfflineSliceReader_INCLUDE_ALL || OrgApacheLuceneRangetreeOfflineSliceReader_INCLUDE)
-#define _OrgApacheLuceneRangetreeOfflineSliceReader_
+#if !defined (OrgApacheLuceneRangetreeOfflineSliceReader_) && (INCLUDE_ALL_OrgApacheLuceneRangetreeOfflineSliceReader || defined(INCLUDE_OrgApacheLuceneRangetreeOfflineSliceReader))
+#define OrgApacheLuceneRangetreeOfflineSliceReader_
 
-#define OrgApacheLuceneRangetreeSliceReader_RESTRICT 1
-#define OrgApacheLuceneRangetreeSliceReader_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneRangetreeSliceReader 1
+#define INCLUDE_OrgApacheLuceneRangetreeSliceReader 1
 #include "org/apache/lucene/rangetree/SliceReader.h"
 
 @class OrgApacheLuceneStoreInputStreamDataInput;
@@ -57,8 +57,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneRangetreeOfflineSliceReader_initWithOrgLuk
 
 FOUNDATION_EXPORT OrgApacheLuceneRangetreeOfflineSliceReader *new_OrgApacheLuceneRangetreeOfflineSliceReader_initWithOrgLukhnosPortmobileFilePath_withLong_withLong_(OrgLukhnosPortmobileFilePath *tempFile, jlong start, jlong count) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeOfflineSliceReader *create_OrgApacheLuceneRangetreeOfflineSliceReader_initWithOrgLukhnosPortmobileFilePath_withLong_withLong_(OrgLukhnosPortmobileFilePath *tempFile, jlong start, jlong count);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeOfflineSliceReader)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneRangetreeOfflineSliceReader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneRangetreeOfflineSliceReader")

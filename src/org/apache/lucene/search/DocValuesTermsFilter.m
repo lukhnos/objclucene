@@ -9,6 +9,7 @@
 #include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/StringBuilder.h"
+#include "java/lang/annotation/Annotation.h"
 #include "java/util/Arrays.h"
 #include "org/apache/lucene/index/DocValues.h"
 #include "org/apache/lucene/index/LeafReader.h"
@@ -57,6 +58,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchDocValuesTermsFilter_$1
 
 __attribute__((unused)) static OrgApacheLuceneSearchDocValuesTermsFilter_$1 *new_OrgApacheLuceneSearchDocValuesTermsFilter_$1_initWithOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneUtilFixedBitSet_withInt_withOrgApacheLuceneUtilBits_(OrgApacheLuceneIndexSortedDocValues *capture$0, OrgApacheLuceneUtilFixedBitSet *capture$1, jint arg$0, id<OrgApacheLuceneUtilBits> arg$1) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchDocValuesTermsFilter_$1 *create_OrgApacheLuceneSearchDocValuesTermsFilter_$1_initWithOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneUtilFixedBitSet_withInt_withOrgApacheLuceneUtilBits_(OrgApacheLuceneIndexSortedDocValues *capture$0, OrgApacheLuceneUtilFixedBitSet *capture$1, jint arg$0, id<OrgApacheLuceneUtilBits> arg$1);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesTermsFilter_$1)
 
 @implementation OrgApacheLuceneSearchDocValuesTermsFilter
@@ -76,18 +79,18 @@ withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms {
 - (OrgApacheLuceneSearchDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                             withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs {
   OrgApacheLuceneIndexSortedDocValues *fcsi = OrgApacheLuceneIndexDocValues_getSortedWithOrgApacheLuceneIndexLeafReader_withNSString_([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader], field_);
-  OrgApacheLuceneUtilFixedBitSet *bits = [new_OrgApacheLuceneUtilFixedBitSet_initWithInt_([((OrgApacheLuceneIndexSortedDocValues *) nil_chk(fcsi)) getValueCount]) autorelease];
+  OrgApacheLuceneUtilFixedBitSet *bits = create_OrgApacheLuceneUtilFixedBitSet_initWithInt_([((OrgApacheLuceneIndexSortedDocValues *) nil_chk(fcsi)) getValueCount]);
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(terms_))->size_; i++) {
     jint ord = [fcsi lookupTermWithOrgApacheLuceneUtilBytesRef:IOSObjectArray_Get(terms_, i)];
     if (ord >= 0) {
       [bits setWithInt:ord];
     }
   }
-  return [new_OrgApacheLuceneSearchDocValuesTermsFilter_$1_initWithOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneUtilFixedBitSet_withInt_withOrgApacheLuceneUtilBits_(fcsi, bits, [((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) maxDoc], acceptDocs) autorelease];
+  return create_OrgApacheLuceneSearchDocValuesTermsFilter_$1_initWithOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneUtilFixedBitSet_withInt_withOrgApacheLuceneUtilBits_(fcsi, bits, [((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) maxDoc], acceptDocs);
 }
 
 - (NSString *)toStringWithNSString:(NSString *)defaultField {
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   [((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:field_])) appendWithNSString:@": ["];
   {
     IOSObjectArray *a__ = terms_;
@@ -108,7 +111,7 @@ withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms {
   if ([super isEqual:obj] == false) {
     return false;
   }
-  OrgApacheLuceneSearchDocValuesTermsFilter *other = (OrgApacheLuceneSearchDocValuesTermsFilter *) check_class_cast(obj, [OrgApacheLuceneSearchDocValuesTermsFilter class]);
+  OrgApacheLuceneSearchDocValuesTermsFilter *other = (OrgApacheLuceneSearchDocValuesTermsFilter *) cast_chk(obj, [OrgApacheLuceneSearchDocValuesTermsFilter class]);
   return [((NSString *) nil_chk(field_)) isEqual:((OrgApacheLuceneSearchDocValuesTermsFilter *) nil_chk(other))->field_] && JavaUtilArrays_equalsWithNSObjectArray_withNSObjectArray_(terms_, other->terms_);
 }
 
@@ -119,14 +122,14 @@ withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms {
   return h;
 }
 
++ (IOSObjectArray *)__annotations {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
 - (void)dealloc {
   RELEASE_(field_);
   RELEASE_(terms_);
   [super dealloc];
-}
-
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -155,22 +158,26 @@ void OrgApacheLuceneSearchDocValuesTermsFilter_initWithNSString_withOrgApacheLuc
 }
 
 OrgApacheLuceneSearchDocValuesTermsFilter *new_OrgApacheLuceneSearchDocValuesTermsFilter_initWithNSString_withOrgApacheLuceneUtilBytesRefArray_(NSString *field, IOSObjectArray *terms) {
-  OrgApacheLuceneSearchDocValuesTermsFilter *self = [OrgApacheLuceneSearchDocValuesTermsFilter alloc];
-  OrgApacheLuceneSearchDocValuesTermsFilter_initWithNSString_withOrgApacheLuceneUtilBytesRefArray_(self, field, terms);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDocValuesTermsFilter, initWithNSString_withOrgApacheLuceneUtilBytesRefArray_, field, terms)
+}
+
+OrgApacheLuceneSearchDocValuesTermsFilter *create_OrgApacheLuceneSearchDocValuesTermsFilter_initWithNSString_withOrgApacheLuceneUtilBytesRefArray_(NSString *field, IOSObjectArray *terms) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDocValuesTermsFilter, initWithNSString_withOrgApacheLuceneUtilBytesRefArray_, field, terms)
 }
 
 void OrgApacheLuceneSearchDocValuesTermsFilter_initWithNSString_withNSStringArray_(OrgApacheLuceneSearchDocValuesTermsFilter *self, NSString *field, IOSObjectArray *terms) {
   OrgApacheLuceneSearchFilter_init(self);
   JreStrongAssign(&self->field_, field);
   JreStrongAssignAndConsume(&self->terms_, [IOSObjectArray newArrayWithLength:((IOSObjectArray *) nil_chk(terms))->size_ type:OrgApacheLuceneUtilBytesRef_class_()]);
-  for (jint i = 0; i < terms->size_; i++) IOSObjectArray_SetAndConsume(self->terms_, i, new_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(IOSObjectArray_Get(terms, i)));
+  for (jint i = 0; i < terms->size_; i++) IOSObjectArray_SetAndConsume(nil_chk(self->terms_), i, new_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(IOSObjectArray_Get(terms, i)));
 }
 
 OrgApacheLuceneSearchDocValuesTermsFilter *new_OrgApacheLuceneSearchDocValuesTermsFilter_initWithNSString_withNSStringArray_(NSString *field, IOSObjectArray *terms) {
-  OrgApacheLuceneSearchDocValuesTermsFilter *self = [OrgApacheLuceneSearchDocValuesTermsFilter alloc];
-  OrgApacheLuceneSearchDocValuesTermsFilter_initWithNSString_withNSStringArray_(self, field, terms);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDocValuesTermsFilter, initWithNSString_withNSStringArray_, field, terms)
+}
+
+OrgApacheLuceneSearchDocValuesTermsFilter *create_OrgApacheLuceneSearchDocValuesTermsFilter_initWithNSString_withNSStringArray_(NSString *field, IOSObjectArray *terms) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDocValuesTermsFilter, initWithNSString_withNSStringArray_, field, terms)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocValuesTermsFilter)
@@ -224,9 +231,11 @@ void OrgApacheLuceneSearchDocValuesTermsFilter_$1_initWithOrgApacheLuceneIndexSo
 }
 
 OrgApacheLuceneSearchDocValuesTermsFilter_$1 *new_OrgApacheLuceneSearchDocValuesTermsFilter_$1_initWithOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneUtilFixedBitSet_withInt_withOrgApacheLuceneUtilBits_(OrgApacheLuceneIndexSortedDocValues *capture$0, OrgApacheLuceneUtilFixedBitSet *capture$1, jint arg$0, id<OrgApacheLuceneUtilBits> arg$1) {
-  OrgApacheLuceneSearchDocValuesTermsFilter_$1 *self = [OrgApacheLuceneSearchDocValuesTermsFilter_$1 alloc];
-  OrgApacheLuceneSearchDocValuesTermsFilter_$1_initWithOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneUtilFixedBitSet_withInt_withOrgApacheLuceneUtilBits_(self, capture$0, capture$1, arg$0, arg$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDocValuesTermsFilter_$1, initWithOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneUtilFixedBitSet_withInt_withOrgApacheLuceneUtilBits_, capture$0, capture$1, arg$0, arg$1)
+}
+
+OrgApacheLuceneSearchDocValuesTermsFilter_$1 *create_OrgApacheLuceneSearchDocValuesTermsFilter_$1_initWithOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneUtilFixedBitSet_withInt_withOrgApacheLuceneUtilBits_(OrgApacheLuceneIndexSortedDocValues *capture$0, OrgApacheLuceneUtilFixedBitSet *capture$1, jint arg$0, id<OrgApacheLuceneUtilBits> arg$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDocValuesTermsFilter_$1, initWithOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneUtilFixedBitSet_withInt_withOrgApacheLuceneUtilBits_, capture$0, capture$1, arg$0, arg$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocValuesTermsFilter_$1)

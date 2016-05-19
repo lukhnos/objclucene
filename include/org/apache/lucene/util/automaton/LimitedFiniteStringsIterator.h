@@ -5,33 +5,50 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator_INCLUDE_ALL")
-#if OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator_RESTRICT
-#define OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator")
+#ifdef RESTRICT_OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator
+#define INCLUDE_ALL_OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator 0
 #else
-#define OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator 1
 #endif
-#undef OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator
 
-#if !defined (_OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator_) && (OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator_INCLUDE_ALL || OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator_INCLUDE)
-#define _OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator_
+#if !defined (OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator_) && (INCLUDE_ALL_OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator || defined(INCLUDE_OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator))
+#define OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator_
 
-#define OrgApacheLuceneUtilAutomatonFiniteStringsIterator_RESTRICT 1
-#define OrgApacheLuceneUtilAutomatonFiniteStringsIterator_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAutomatonFiniteStringsIterator 1
+#define INCLUDE_OrgApacheLuceneUtilAutomatonFiniteStringsIterator 1
 #include "org/apache/lucene/util/automaton/FiniteStringsIterator.h"
 
 @class OrgApacheLuceneUtilAutomatonAutomaton;
 @class OrgApacheLuceneUtilIntsRef;
 
+/*!
+ @brief <code>FiniteStringsIterator</code> which limits the number of iterated accepted strings.
+ If more than <code>limit</code> strings are accepted,
+ the first <code>limit</code> strings found are returned.
+ <p>If the <code>Automaton</code> has cycles then this iterator may throw an <code>IllegalArgumentException</code>
+ , but this is not guaranteed!
+ <p>Be aware that the iteration order is implementation dependent
+ and may change across releases.
+ */
 @interface OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator : OrgApacheLuceneUtilAutomatonFiniteStringsIterator
 
 #pragma mark Public
 
+/*!
+ @brief Constructor.
+ @param a Automaton to create finite string from.
+ @param limit Maximum number of finite strings to create, or -1 for infinite.
+ */
 - (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
                                                       withInt:(jint)limit;
 
 - (OrgApacheLuceneUtilIntsRef *)next;
 
+/*!
+ @brief Number of iterated finite strings.
+ */
 - (jint)size;
 
 @end
@@ -42,8 +59,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator_
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator *new_OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneUtilAutomatonAutomaton *a, jint limit) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator *create_OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneUtilAutomatonAutomaton *a, jint limit);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator")

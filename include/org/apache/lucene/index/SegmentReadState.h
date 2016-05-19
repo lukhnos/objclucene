@@ -5,44 +5,79 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexSegmentReadState_INCLUDE_ALL")
-#if OrgApacheLuceneIndexSegmentReadState_RESTRICT
-#define OrgApacheLuceneIndexSegmentReadState_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexSegmentReadState")
+#ifdef RESTRICT_OrgApacheLuceneIndexSegmentReadState
+#define INCLUDE_ALL_OrgApacheLuceneIndexSegmentReadState 0
 #else
-#define OrgApacheLuceneIndexSegmentReadState_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexSegmentReadState 1
 #endif
-#undef OrgApacheLuceneIndexSegmentReadState_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexSegmentReadState
 
-#if !defined (_OrgApacheLuceneIndexSegmentReadState_) && (OrgApacheLuceneIndexSegmentReadState_INCLUDE_ALL || OrgApacheLuceneIndexSegmentReadState_INCLUDE)
-#define _OrgApacheLuceneIndexSegmentReadState_
+#if !defined (OrgApacheLuceneIndexSegmentReadState_) && (INCLUDE_ALL_OrgApacheLuceneIndexSegmentReadState || defined(INCLUDE_OrgApacheLuceneIndexSegmentReadState))
+#define OrgApacheLuceneIndexSegmentReadState_
 
 @class OrgApacheLuceneIndexFieldInfos;
 @class OrgApacheLuceneIndexSegmentInfo;
 @class OrgApacheLuceneStoreDirectory;
 @class OrgApacheLuceneStoreIOContext;
 
+/*!
+ @brief Holder class for common parameters used during read.
+ */
 @interface OrgApacheLuceneIndexSegmentReadState : NSObject {
  @public
+  /*!
+   @brief <code>Directory</code> where this segment is read from.
+   */
   OrgApacheLuceneStoreDirectory *directory_;
+  /*!
+   @brief <code>SegmentInfo</code> describing this segment.
+   */
   OrgApacheLuceneIndexSegmentInfo *segmentInfo_;
+  /*!
+   @brief <code>FieldInfos</code> describing all fields in this
+ segment.
+   */
   OrgApacheLuceneIndexFieldInfos *fieldInfos_;
+  /*!
+   @brief <code>IOContext</code> to pass to <code>Directory.openInput(String,IOContext)</code>
+ .
+   */
   OrgApacheLuceneStoreIOContext *context_;
+  /*!
+   @brief Unique suffix for any postings files read for this
+ segment.
+   <code>PerFieldPostingsFormat</code> sets this for
+ each of the postings formats it wraps.  If you create
+ a new <code>PostingsFormat</code> then any files you
+ write/read must be derived using this suffix (use
+ <code>IndexFileNames.segmentFileName(String,String,String)</code>). 
+   */
   NSString *segmentSuffix_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief Create a <code>SegmentReadState</code>.
+ */
 - (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
                   withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)info
                    withOrgApacheLuceneIndexFieldInfos:(OrgApacheLuceneIndexFieldInfos *)fieldInfos
                     withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
 
+/*!
+ @brief Create a <code>SegmentReadState</code>.
+ */
 - (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
                   withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)info
                    withOrgApacheLuceneIndexFieldInfos:(OrgApacheLuceneIndexFieldInfos *)fieldInfos
                     withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context
                                          withNSString:(NSString *)segmentSuffix;
 
+/*!
+ @brief Create a <code>SegmentReadState</code>.
+ */
 - (instancetype)initWithOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)other
                                                 withNSString:(NSString *)newSegmentSuffix;
 
@@ -60,16 +95,22 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexSegmentReadState_initWithOrgApacheLuc
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentReadState *new_OrgApacheLuceneIndexSegmentReadState_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexSegmentInfo *info, OrgApacheLuceneIndexFieldInfos *fieldInfos, OrgApacheLuceneStoreIOContext *context) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentReadState *create_OrgApacheLuceneIndexSegmentReadState_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexSegmentInfo *info, OrgApacheLuceneIndexFieldInfos *fieldInfos, OrgApacheLuceneStoreIOContext *context);
+
 FOUNDATION_EXPORT void OrgApacheLuceneIndexSegmentReadState_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneStoreIOContext_withNSString_(OrgApacheLuceneIndexSegmentReadState *self, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexSegmentInfo *info, OrgApacheLuceneIndexFieldInfos *fieldInfos, OrgApacheLuceneStoreIOContext *context, NSString *segmentSuffix);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentReadState *new_OrgApacheLuceneIndexSegmentReadState_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneStoreIOContext_withNSString_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexSegmentInfo *info, OrgApacheLuceneIndexFieldInfos *fieldInfos, OrgApacheLuceneStoreIOContext *context, NSString *segmentSuffix) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentReadState *create_OrgApacheLuceneIndexSegmentReadState_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneStoreIOContext_withNSString_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexSegmentInfo *info, OrgApacheLuceneIndexFieldInfos *fieldInfos, OrgApacheLuceneStoreIOContext *context, NSString *segmentSuffix);
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexSegmentReadState_initWithOrgApacheLuceneIndexSegmentReadState_withNSString_(OrgApacheLuceneIndexSegmentReadState *self, OrgApacheLuceneIndexSegmentReadState *other, NSString *newSegmentSuffix);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentReadState *new_OrgApacheLuceneIndexSegmentReadState_initWithOrgApacheLuceneIndexSegmentReadState_withNSString_(OrgApacheLuceneIndexSegmentReadState *other, NSString *newSegmentSuffix) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentReadState *create_OrgApacheLuceneIndexSegmentReadState_initWithOrgApacheLuceneIndexSegmentReadState_withNSString_(OrgApacheLuceneIndexSegmentReadState *other, NSString *newSegmentSuffix);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSegmentReadState)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexSegmentReadState_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSegmentReadState")

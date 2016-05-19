@@ -49,18 +49,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiTerms, subSlices_, IOSObjectArray *
 
 - (OrgApacheLuceneIndexTermsEnum *)intersectWithOrgApacheLuceneUtilAutomatonCompiledAutomaton:(OrgApacheLuceneUtilAutomatonCompiledAutomaton *)compiled
                                                               withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)startTerm {
-  id<JavaUtilList> termsEnums = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> termsEnums = create_JavaUtilArrayList_init();
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(subs_))->size_; i++) {
     OrgApacheLuceneIndexTermsEnum *termsEnum = [((OrgApacheLuceneIndexTerms *) nil_chk(IOSObjectArray_Get(subs_, i))) intersectWithOrgApacheLuceneUtilAutomatonCompiledAutomaton:compiled withOrgApacheLuceneUtilBytesRef:startTerm];
     if (termsEnum != nil) {
-      [termsEnums addWithId:[new_OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex_initWithOrgApacheLuceneIndexTermsEnum_withInt_(termsEnum, i) autorelease]];
+      [termsEnums addWithId:create_OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex_initWithOrgApacheLuceneIndexTermsEnum_withInt_(termsEnum, i)];
     }
   }
   if ([termsEnums size] > 0) {
-    return [((OrgApacheLuceneIndexMultiTermsEnum *) [new_OrgApacheLuceneIndexMultiTermsEnum_initWithOrgApacheLuceneIndexReaderSliceArray_(subSlices_) autorelease]) resetWithOrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndexArray:[termsEnums toArrayWithNSObjectArray:JreLoadStatic(OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex, EMPTY_ARRAY_)]];
+    return [create_OrgApacheLuceneIndexMultiTermsEnum_initWithOrgApacheLuceneIndexReaderSliceArray_(subSlices_) resetWithOrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndexArray:[termsEnums toArrayWithNSObjectArray:JreLoadStatic(OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex, EMPTY_ARRAY)]];
   }
   else {
-    return JreLoadStatic(OrgApacheLuceneIndexTermsEnum, EMPTY_);
+    return JreLoadStatic(OrgApacheLuceneIndexTermsEnum, EMPTY);
   }
 }
 
@@ -99,18 +99,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiTerms, subSlices_, IOSObjectArray *
 }
 
 - (OrgApacheLuceneIndexTermsEnum *)iterator {
-  id<JavaUtilList> termsEnums = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> termsEnums = create_JavaUtilArrayList_init();
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(subs_))->size_; i++) {
     OrgApacheLuceneIndexTermsEnum *termsEnum = [((OrgApacheLuceneIndexTerms *) nil_chk(IOSObjectArray_Get(subs_, i))) iterator];
     if (termsEnum != nil) {
-      [termsEnums addWithId:[new_OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex_initWithOrgApacheLuceneIndexTermsEnum_withInt_(termsEnum, i) autorelease]];
+      [termsEnums addWithId:create_OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex_initWithOrgApacheLuceneIndexTermsEnum_withInt_(termsEnum, i)];
     }
   }
   if ([termsEnums size] > 0) {
-    return [((OrgApacheLuceneIndexMultiTermsEnum *) [new_OrgApacheLuceneIndexMultiTermsEnum_initWithOrgApacheLuceneIndexReaderSliceArray_(subSlices_) autorelease]) resetWithOrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndexArray:[termsEnums toArrayWithNSObjectArray:JreLoadStatic(OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex, EMPTY_ARRAY_)]];
+    return [create_OrgApacheLuceneIndexMultiTermsEnum_initWithOrgApacheLuceneIndexReaderSliceArray_(subSlices_) resetWithOrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndexArray:[termsEnums toArrayWithNSObjectArray:JreLoadStatic(OrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndex, EMPTY_ARRAY)]];
   }
   else {
-    return JreLoadStatic(OrgApacheLuceneIndexTermsEnum, EMPTY_);
+    return JreLoadStatic(OrgApacheLuceneIndexTermsEnum, EMPTY);
   }
 }
 
@@ -248,9 +248,11 @@ void OrgApacheLuceneIndexMultiTerms_initWithOrgApacheLuceneIndexTermsArray_withO
 }
 
 OrgApacheLuceneIndexMultiTerms *new_OrgApacheLuceneIndexMultiTerms_initWithOrgApacheLuceneIndexTermsArray_withOrgApacheLuceneIndexReaderSliceArray_(IOSObjectArray *subs, IOSObjectArray *subSlices) {
-  OrgApacheLuceneIndexMultiTerms *self = [OrgApacheLuceneIndexMultiTerms alloc];
-  OrgApacheLuceneIndexMultiTerms_initWithOrgApacheLuceneIndexTermsArray_withOrgApacheLuceneIndexReaderSliceArray_(self, subs, subSlices);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiTerms, initWithOrgApacheLuceneIndexTermsArray_withOrgApacheLuceneIndexReaderSliceArray_, subs, subSlices)
+}
+
+OrgApacheLuceneIndexMultiTerms *create_OrgApacheLuceneIndexMultiTerms_initWithOrgApacheLuceneIndexTermsArray_withOrgApacheLuceneIndexReaderSliceArray_(IOSObjectArray *subs, IOSObjectArray *subSlices) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiTerms, initWithOrgApacheLuceneIndexTermsArray_withOrgApacheLuceneIndexReaderSliceArray_, subs, subSlices)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiTerms)

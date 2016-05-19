@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexByteSliceReader_INCLUDE_ALL")
-#if OrgApacheLuceneIndexByteSliceReader_RESTRICT
-#define OrgApacheLuceneIndexByteSliceReader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexByteSliceReader")
+#ifdef RESTRICT_OrgApacheLuceneIndexByteSliceReader
+#define INCLUDE_ALL_OrgApacheLuceneIndexByteSliceReader 0
 #else
-#define OrgApacheLuceneIndexByteSliceReader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexByteSliceReader 1
 #endif
-#undef OrgApacheLuceneIndexByteSliceReader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexByteSliceReader
 
-#if !defined (_OrgApacheLuceneIndexByteSliceReader_) && (OrgApacheLuceneIndexByteSliceReader_INCLUDE_ALL || OrgApacheLuceneIndexByteSliceReader_INCLUDE)
-#define _OrgApacheLuceneIndexByteSliceReader_
+#if !defined (OrgApacheLuceneIndexByteSliceReader_) && (INCLUDE_ALL_OrgApacheLuceneIndexByteSliceReader || defined(INCLUDE_OrgApacheLuceneIndexByteSliceReader))
+#define OrgApacheLuceneIndexByteSliceReader_
 
-#define OrgApacheLuceneStoreDataInput_RESTRICT 1
-#define OrgApacheLuceneStoreDataInput_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreDataInput 1
+#define INCLUDE_OrgApacheLuceneStoreDataInput 1
 #include "org/apache/lucene/store/DataInput.h"
 
 @class IOSByteArray;
@@ -69,8 +69,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexByteSliceReader_init(OrgApacheLuceneI
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexByteSliceReader *new_OrgApacheLuceneIndexByteSliceReader_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexByteSliceReader *create_OrgApacheLuceneIndexByteSliceReader_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexByteSliceReader)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexByteSliceReader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexByteSliceReader")

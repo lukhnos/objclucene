@@ -5,36 +5,77 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCharFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCharFilter_RESTRICT
-#define OrgApacheLuceneAnalysisCharFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCharFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCharFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCharFilter 0
 #else
-#define OrgApacheLuceneAnalysisCharFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCharFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisCharFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCharFilter
 
-#if !defined (_OrgApacheLuceneAnalysisCharFilter_) && (OrgApacheLuceneAnalysisCharFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisCharFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisCharFilter_
+#if !defined (OrgApacheLuceneAnalysisCharFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCharFilter || defined(INCLUDE_OrgApacheLuceneAnalysisCharFilter))
+#define OrgApacheLuceneAnalysisCharFilter_
 
-#define JavaIoReader_RESTRICT 1
-#define JavaIoReader_INCLUDE 1
+#define RESTRICT_JavaIoReader 1
+#define INCLUDE_JavaIoReader 1
 #include "java/io/Reader.h"
 
+/*!
+ @brief Subclasses of CharFilter can be chained to filter a Reader
+ They can be used as <code>java.io.Reader</code> with additional offset
+ correction.
+ <code>Tokenizer</code>s will automatically use <code>correctOffset</code>
+ if a CharFilter subclass is used.
+ <p>
+ This class is abstract: at a minimum you must implement <code>read(char[],int,int)</code>,
+ transforming the input in some way from <code>input</code>, and <code>correct(int)</code>
+ to adjust the offsets to match the originals.
+ <p>
+ You can optionally provide more efficient implementations of additional methods 
+ like <code>read()</code>, <code>read(char[])</code>, <code>read(java.nio.CharBuffer)</code>,
+ but this is not required.
+ <p>
+ For examples and integration with <code>Analyzer</code>, see the 
+ <code>Analysis package documentation</code>.
+ */
 @interface OrgApacheLuceneAnalysisCharFilter : JavaIoReader {
  @public
+  /*!
+   @brief The underlying character-input stream.
+   */
   JavaIoReader *input_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief Create a new CharFilter wrapping the provided reader.
+ @param input a Reader, can also be a CharFilter for chaining.
+ */
 - (instancetype)initWithJavaIoReader:(JavaIoReader *)input;
 
+/*!
+ @brief Closes the underlying input stream.
+ <p>
+ <b>NOTE:</b> 
+ The default implementation closes the input Reader, so
+ be sure to call <code>super.close()</code> when overriding this method.
+ */
 - (void)close;
 
+/*!
+ @brief Chains the corrected offset through the input
+ CharFilter(s).
+ */
 - (jint)correctOffsetWithInt:(jint)currentOff;
 
 #pragma mark Protected
 
+/*!
+ @brief Subclasses override to correct the current offset.
+ @param currentOff current offset
+ @return corrected offset
+ */
 - (jint)correctWithInt:(jint)currentOff;
 
 @end
@@ -49,4 +90,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCharFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCharFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCharFilter")

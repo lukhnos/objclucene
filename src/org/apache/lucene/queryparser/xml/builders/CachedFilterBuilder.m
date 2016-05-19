@@ -63,16 +63,16 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder, fi
     }
     OrgApacheLuceneSearchQuery *cachedFilter = [((OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache *) nil_chk(filterCache_)) getWithId:cacheKey];
     if (cachedFilter != nil) {
-      return [new_OrgApacheLuceneSearchQueryWrapperFilter_initWithOrgApacheLuceneSearchQuery_(cachedFilter) autorelease];
+      return create_OrgApacheLuceneSearchQueryWrapperFilter_initWithOrgApacheLuceneSearchQuery_(cachedFilter);
     }
     if (qb != nil) {
-      cachedFilter = [new_OrgApacheLuceneSearchQueryWrapperFilter_initWithOrgApacheLuceneSearchQuery_(q) autorelease];
+      cachedFilter = create_OrgApacheLuceneSearchQueryWrapperFilter_initWithOrgApacheLuceneSearchQuery_(q);
     }
     else {
-      cachedFilter = [new_OrgApacheLuceneSearchCachingWrapperQuery_initWithOrgApacheLuceneSearchQuery_(f) autorelease];
+      cachedFilter = create_OrgApacheLuceneSearchCachingWrapperQuery_initWithOrgApacheLuceneSearchQuery_(f);
     }
-    [filterCache_ putWithId:cacheKey withId:cachedFilter];
-    return [new_OrgApacheLuceneSearchQueryWrapperFilter_initWithOrgApacheLuceneSearchQuery_(cachedFilter) autorelease];
+    [((OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache *) nil_chk(filterCache_)) putWithId:cacheKey withId:cachedFilter];
+    return create_OrgApacheLuceneSearchQueryWrapperFilter_initWithOrgApacheLuceneSearchQuery_(cachedFilter);
   }
 }
 
@@ -109,9 +109,11 @@ void OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_initWithOrgApacheL
 }
 
 OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder *new_OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_initWithOrgApacheLuceneQueryparserXmlQueryBuilderFactory_withOrgApacheLuceneQueryparserXmlFilterBuilderFactory_withInt_(OrgApacheLuceneQueryparserXmlQueryBuilderFactory *queryFactory, OrgApacheLuceneQueryparserXmlFilterBuilderFactory *filterFactory, jint cacheSize) {
-  OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder *self = [OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder alloc];
-  OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_initWithOrgApacheLuceneQueryparserXmlQueryBuilderFactory_withOrgApacheLuceneQueryparserXmlFilterBuilderFactory_withInt_(self, queryFactory, filterFactory, cacheSize);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder, initWithOrgApacheLuceneQueryparserXmlQueryBuilderFactory_withOrgApacheLuceneQueryparserXmlFilterBuilderFactory_withInt_, queryFactory, filterFactory, cacheSize)
+}
+
+OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder *create_OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_initWithOrgApacheLuceneQueryparserXmlQueryBuilderFactory_withOrgApacheLuceneQueryparserXmlFilterBuilderFactory_withInt_(OrgApacheLuceneQueryparserXmlQueryBuilderFactory *queryFactory, OrgApacheLuceneQueryparserXmlFilterBuilderFactory *filterFactory, jint cacheSize) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder, initWithOrgApacheLuceneQueryparserXmlQueryBuilderFactory_withOrgApacheLuceneQueryparserXmlFilterBuilderFactory_withInt_, queryFactory, filterFactory, cacheSize)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder)
@@ -130,7 +132,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserXmlBuildersCachedFilt
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithInt:", "LRUCache", NULL, 0x1, NULL, NULL },
-    { "removeEldestEntryWithJavaUtilMap_Entry:", "removeEldestEntry", "Z", 0x4, NULL, NULL },
+    { "removeEldestEntryWithJavaUtilMap_Entry:", "removeEldestEntry", "Z", 0x4, NULL, "(Ljava/util/Map$Entry<TK;TV;>;)Z" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "maxsize_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
@@ -148,9 +150,11 @@ void OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache_initWithI
 }
 
 OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache *new_OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache_initWithInt_(jint maxsize) {
-  OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache *self = [OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache alloc];
-  OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache_initWithInt_(self, maxsize);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache, initWithInt_, maxsize)
+}
+
+OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache *create_OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache_initWithInt_(jint maxsize) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache, initWithInt_, maxsize)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache)

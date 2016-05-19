@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexFreqProxTermsWriter_INCLUDE_ALL")
-#if OrgApacheLuceneIndexFreqProxTermsWriter_RESTRICT
-#define OrgApacheLuceneIndexFreqProxTermsWriter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexFreqProxTermsWriter")
+#ifdef RESTRICT_OrgApacheLuceneIndexFreqProxTermsWriter
+#define INCLUDE_ALL_OrgApacheLuceneIndexFreqProxTermsWriter 0
 #else
-#define OrgApacheLuceneIndexFreqProxTermsWriter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexFreqProxTermsWriter 1
 #endif
-#undef OrgApacheLuceneIndexFreqProxTermsWriter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexFreqProxTermsWriter
 
-#if !defined (_OrgApacheLuceneIndexFreqProxTermsWriter_) && (OrgApacheLuceneIndexFreqProxTermsWriter_INCLUDE_ALL || OrgApacheLuceneIndexFreqProxTermsWriter_INCLUDE)
-#define _OrgApacheLuceneIndexFreqProxTermsWriter_
+#if !defined (OrgApacheLuceneIndexFreqProxTermsWriter_) && (INCLUDE_ALL_OrgApacheLuceneIndexFreqProxTermsWriter || defined(INCLUDE_OrgApacheLuceneIndexFreqProxTermsWriter))
+#define OrgApacheLuceneIndexFreqProxTermsWriter_
 
-#define OrgApacheLuceneIndexTermsHash_RESTRICT 1
-#define OrgApacheLuceneIndexTermsHash_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexTermsHash 1
+#define INCLUDE_OrgApacheLuceneIndexTermsHash 1
 #include "org/apache/lucene/index/TermsHash.h"
 
 @class OrgApacheLuceneIndexDocumentsWriterPerThread;
@@ -48,8 +48,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexFreqProxTermsWriter_initWithOrgApache
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexFreqProxTermsWriter *new_OrgApacheLuceneIndexFreqProxTermsWriter_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_withOrgApacheLuceneIndexTermsHash_(OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter, OrgApacheLuceneIndexTermsHash *termVectors) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexFreqProxTermsWriter *create_OrgApacheLuceneIndexFreqProxTermsWriter_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_withOrgApacheLuceneIndexTermsHash_(OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter, OrgApacheLuceneIndexTermsHash *termVectors);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFreqProxTermsWriter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexFreqProxTermsWriter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexFreqProxTermsWriter")

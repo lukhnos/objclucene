@@ -5,25 +5,33 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_INCLUDE_ALL")
-#if OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_RESTRICT
-#define OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery")
+#ifdef RESTRICT_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery
+#define INCLUDE_ALL_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery 0
 #else
-#define OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery 1
 #endif
-#undef OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery
 
-#if !defined (_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_) && (OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_INCLUDE_ALL || OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_INCLUDE)
-#define _OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_
+#if !defined (OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_) && (INCLUDE_ALL_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery || defined(INCLUDE_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery))
+#define OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_
 
-#define OrgApacheLuceneSearchQuery_RESTRICT 1
-#define OrgApacheLuceneSearchQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchQuery 1
+#define INCLUDE_OrgApacheLuceneSearchQuery 1
 #include "org/apache/lucene/search/Query.h"
 
 @class IOSDoubleArray;
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchWeight;
 
+/*!
+ @brief Finds all previously indexed points that fall within the specified polygon.
+ <p>The field must be indexed with <code>BKDTreeDocValuesFormat</code>, and <code>BKDPointField</code> added per document.
+ <p>Because this implementation cannot intersect each cell with the polygon, it will be costly especially for large polygons, as every
+ possible point must be checked.
+ <p><b>NOTE</b>: for fastest performance, this allocates FixedBitSet(maxDoc) for each segment.  The score of each hit is the query boost.
+  
+ */
 @interface OrgApacheLuceneBkdtreeBKDPointInPolygonQuery : OrgApacheLuceneSearchQuery {
  @public
   NSString *field_;
@@ -37,6 +45,9 @@
 
 #pragma mark Public
 
+/*!
+ @brief The lats/lons must be clockwise or counter-clockwise.
+ */
 - (instancetype)initWithNSString:(NSString *)field
                  withDoubleArray:(IOSDoubleArray *)polyLats
                  withDoubleArray:(IOSDoubleArray *)polyLons;
@@ -62,8 +73,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_initWithNSSt
 
 FOUNDATION_EXPORT OrgApacheLuceneBkdtreeBKDPointInPolygonQuery *new_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_initWithNSString_withDoubleArray_withDoubleArray_(NSString *field, IOSDoubleArray *polyLats, IOSDoubleArray *polyLons) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneBkdtreeBKDPointInPolygonQuery *create_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_initWithNSString_withDoubleArray_withDoubleArray_(NSString *field, IOSDoubleArray *polyLats, IOSDoubleArray *polyLons);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery")

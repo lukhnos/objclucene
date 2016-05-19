@@ -5,28 +5,43 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory_) && (OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory))
+#define OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>GermanMinimalStemFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_deminstem" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+ &lt;filter class="solr.LowerCaseFilterFactory"/&gt;
+ &lt;filter class="solr.GermanMinimalStemFilterFactory"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new GermanMinimalStemFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -39,8 +54,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory_i
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory *new_OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory *create_OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory")

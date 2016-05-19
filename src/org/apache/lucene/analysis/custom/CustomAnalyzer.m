@@ -135,15 +135,15 @@ withOrgApacheLuceneAnalysisUtilTokenFilterFactoryArray:(IOSObjectArray *)tokenFi
       ts = [((OrgApacheLuceneAnalysisUtilTokenFilterFactory *) nil_chk(filter)) createWithOrgApacheLuceneAnalysisTokenStream:ts];
     }
   }
-  return [new_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(tk, ts) autorelease];
+  return create_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(tk, ts);
 }
 
 - (jint)getPositionIncrementGapWithNSString:(NSString *)fieldName {
-  return (posIncGap_ == nil) ? [super getPositionIncrementGapWithNSString:fieldName] : [posIncGap_ intValue];
+  return (posIncGap_ == nil) ? [super getPositionIncrementGapWithNSString:fieldName] : [((JavaLangInteger *) nil_chk(posIncGap_)) intValue];
 }
 
 - (jint)getOffsetGapWithNSString:(NSString *)fieldName {
-  return (offsetGap_ == nil) ? [super getOffsetGapWithNSString:fieldName] : [offsetGap_ intValue];
+  return (offsetGap_ == nil) ? [super getOffsetGapWithNSString:fieldName] : [((JavaLangInteger *) nil_chk(offsetGap_)) intValue];
 }
 
 - (id<JavaUtilList>)getCharFilterFactories {
@@ -159,7 +159,7 @@ withOrgApacheLuceneAnalysisUtilTokenFilterFactoryArray:(IOSObjectArray *)tokenFi
 }
 
 - (NSString *)description {
-  JavaLangStringBuilder *sb = [((JavaLangStringBuilder *) [new_JavaLangStringBuilder_initWithNSString_([[self getClass] getSimpleName]) autorelease]) appendWithChar:'('];
+  JavaLangStringBuilder *sb = [create_JavaLangStringBuilder_initWithNSString_([[self getClass] getSimpleName]) appendWithChar:'('];
   {
     IOSObjectArray *a__ = charFilters_;
     OrgApacheLuceneAnalysisUtilCharFilterFactory * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
@@ -201,9 +201,9 @@ withOrgApacheLuceneAnalysisUtilTokenFilterFactoryArray:(IOSObjectArray *)tokenFi
     { "createComponentsWithNSString:", "createComponents", "Lorg.apache.lucene.analysis.Analyzer$TokenStreamComponents;", 0x4, NULL, NULL },
     { "getPositionIncrementGapWithNSString:", "getPositionIncrementGap", "I", 0x1, NULL, NULL },
     { "getOffsetGapWithNSString:", "getOffsetGap", "I", 0x1, NULL, NULL },
-    { "getCharFilterFactories", NULL, "Ljava.util.List;", 0x1, NULL, NULL },
+    { "getCharFilterFactories", NULL, "Ljava.util.List;", 0x1, NULL, "()Ljava/util/List<Lorg/apache/lucene/analysis/util/CharFilterFactory;>;" },
     { "getTokenizerFactory", NULL, "Lorg.apache.lucene.analysis.util.TokenizerFactory;", 0x1, NULL, NULL },
-    { "getTokenFilterFactories", NULL, "Ljava.util.List;", 0x1, NULL, NULL },
+    { "getTokenFilterFactories", NULL, "Ljava.util.List;", 0x1, NULL, "()Ljava/util/List<Lorg/apache/lucene/analysis/util/TokenFilterFactory;>;" },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -222,17 +222,17 @@ withOrgApacheLuceneAnalysisUtilTokenFilterFactoryArray:(IOSObjectArray *)tokenFi
 
 OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder *OrgApacheLuceneAnalysisCustomCustomAnalyzer_builder() {
   OrgApacheLuceneAnalysisCustomCustomAnalyzer_initialize();
-  return OrgApacheLuceneAnalysisCustomCustomAnalyzer_builderWithOrgApacheLuceneAnalysisUtilResourceLoader_([new_OrgApacheLuceneAnalysisUtilClasspathResourceLoader_init() autorelease]);
+  return OrgApacheLuceneAnalysisCustomCustomAnalyzer_builderWithOrgApacheLuceneAnalysisUtilResourceLoader_(create_OrgApacheLuceneAnalysisUtilClasspathResourceLoader_init());
 }
 
 OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder *OrgApacheLuceneAnalysisCustomCustomAnalyzer_builderWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *configDir) {
   OrgApacheLuceneAnalysisCustomCustomAnalyzer_initialize();
-  return OrgApacheLuceneAnalysisCustomCustomAnalyzer_builderWithOrgApacheLuceneAnalysisUtilResourceLoader_([new_OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_initWithOrgLukhnosPortmobileFilePath_(configDir) autorelease]);
+  return OrgApacheLuceneAnalysisCustomCustomAnalyzer_builderWithOrgApacheLuceneAnalysisUtilResourceLoader_(create_OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_initWithOrgLukhnosPortmobileFilePath_(configDir));
 }
 
 OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder *OrgApacheLuceneAnalysisCustomCustomAnalyzer_builderWithOrgApacheLuceneAnalysisUtilResourceLoader_(id<OrgApacheLuceneAnalysisUtilResourceLoader> loader) {
   OrgApacheLuceneAnalysisCustomCustomAnalyzer_initialize();
-  return [new_OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder_initWithOrgApacheLuceneAnalysisUtilResourceLoader_(loader) autorelease];
+  return create_OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder_initWithOrgApacheLuceneAnalysisUtilResourceLoader_(loader);
 }
 
 void OrgApacheLuceneAnalysisCustomCustomAnalyzer_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneAnalysisUtilCharFilterFactoryArray_withOrgApacheLuceneAnalysisUtilTokenizerFactory_withOrgApacheLuceneAnalysisUtilTokenFilterFactoryArray_withJavaLangInteger_withJavaLangInteger_(OrgApacheLuceneAnalysisCustomCustomAnalyzer *self, OrgApacheLuceneUtilVersion *defaultMatchVersion, IOSObjectArray *charFilters, OrgApacheLuceneAnalysisUtilTokenizerFactory *tokenizer, IOSObjectArray *tokenFilters, JavaLangInteger *posIncGap, JavaLangInteger *offsetGap) {
@@ -248,9 +248,11 @@ void OrgApacheLuceneAnalysisCustomCustomAnalyzer_initWithOrgApacheLuceneUtilVers
 }
 
 OrgApacheLuceneAnalysisCustomCustomAnalyzer *new_OrgApacheLuceneAnalysisCustomCustomAnalyzer_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneAnalysisUtilCharFilterFactoryArray_withOrgApacheLuceneAnalysisUtilTokenizerFactory_withOrgApacheLuceneAnalysisUtilTokenFilterFactoryArray_withJavaLangInteger_withJavaLangInteger_(OrgApacheLuceneUtilVersion *defaultMatchVersion, IOSObjectArray *charFilters, OrgApacheLuceneAnalysisUtilTokenizerFactory *tokenizer, IOSObjectArray *tokenFilters, JavaLangInteger *posIncGap, JavaLangInteger *offsetGap) {
-  OrgApacheLuceneAnalysisCustomCustomAnalyzer *self = [OrgApacheLuceneAnalysisCustomCustomAnalyzer alloc];
-  OrgApacheLuceneAnalysisCustomCustomAnalyzer_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneAnalysisUtilCharFilterFactoryArray_withOrgApacheLuceneAnalysisUtilTokenizerFactory_withOrgApacheLuceneAnalysisUtilTokenFilterFactoryArray_withJavaLangInteger_withJavaLangInteger_(self, defaultMatchVersion, charFilters, tokenizer, tokenFilters, posIncGap, offsetGap);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCustomCustomAnalyzer, initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneAnalysisUtilCharFilterFactoryArray_withOrgApacheLuceneAnalysisUtilTokenizerFactory_withOrgApacheLuceneAnalysisUtilTokenFilterFactoryArray_withJavaLangInteger_withJavaLangInteger_, defaultMatchVersion, charFilters, tokenizer, tokenFilters, posIncGap, offsetGap)
+}
+
+OrgApacheLuceneAnalysisCustomCustomAnalyzer *create_OrgApacheLuceneAnalysisCustomCustomAnalyzer_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneAnalysisUtilCharFilterFactoryArray_withOrgApacheLuceneAnalysisUtilTokenizerFactory_withOrgApacheLuceneAnalysisUtilTokenFilterFactoryArray_withJavaLangInteger_withJavaLangInteger_(OrgApacheLuceneUtilVersion *defaultMatchVersion, IOSObjectArray *charFilters, OrgApacheLuceneAnalysisUtilTokenizerFactory *tokenizer, IOSObjectArray *tokenFilters, JavaLangInteger *posIncGap, JavaLangInteger *offsetGap) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCustomCustomAnalyzer, initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneAnalysisUtilCharFilterFactoryArray_withOrgApacheLuceneAnalysisUtilTokenizerFactory_withOrgApacheLuceneAnalysisUtilTokenFilterFactoryArray_withJavaLangInteger_withJavaLangInteger_, defaultMatchVersion, charFilters, tokenizer, tokenFilters, posIncGap, offsetGap)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCustomCustomAnalyzer)
@@ -265,7 +267,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCustomCustomAnalyzer)
 - (OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder *)withDefaultMatchVersionWithOrgApacheLuceneUtilVersion:(OrgApacheLuceneUtilVersion *)version_ {
   OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_withNSString_(version_, @"version may not be null");
   if (componentsAdded_) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"You may only set the default match version before adding tokenizers, token filters, or char filters.") autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"You may only set the default match version before adding tokenizers, token filters, or char filters.");
   }
   [((OrgApacheLuceneUtilSetOnce *) nil_chk(self->defaultMatchVersion_)) setWithId:version_];
   return self;
@@ -273,7 +275,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCustomCustomAnalyzer)
 
 - (OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder *)withPositionIncrementGapWithInt:(jint)posIncGap {
   if (posIncGap < 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"posIncGap must be >= 0") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"posIncGap must be >= 0");
   }
   [((OrgApacheLuceneUtilSetOnce *) nil_chk(self->posIncGap_)) setWithId:JavaLangInteger_valueOfWithInt_(posIncGap)];
   return self;
@@ -281,7 +283,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCustomCustomAnalyzer)
 
 - (OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder *)withOffsetGapWithInt:(jint)offsetGap {
   if (offsetGap < 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"offsetGap must be >= 0") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"offsetGap must be >= 0");
   }
   [((OrgApacheLuceneUtilSetOnce *) nil_chk(self->offsetGap_)) setWithId:JavaLangInteger_valueOfWithInt_(offsetGap)];
   return self;
@@ -328,9 +330,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCustomCustomAnalyzer)
 
 - (OrgApacheLuceneAnalysisCustomCustomAnalyzer *)build {
   if ([((OrgApacheLuceneUtilSetOnce *) nil_chk(tokenizer_)) get] == nil) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"You have to set at least a tokenizer.") autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"You have to set at least a tokenizer.");
   }
-  return [new_OrgApacheLuceneAnalysisCustomCustomAnalyzer_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneAnalysisUtilCharFilterFactoryArray_withOrgApacheLuceneAnalysisUtilTokenizerFactory_withOrgApacheLuceneAnalysisUtilTokenFilterFactoryArray_withJavaLangInteger_withJavaLangInteger_([((OrgApacheLuceneUtilSetOnce *) nil_chk(defaultMatchVersion_)) get], [charFilters_ toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[((id<JavaUtilList>) nil_chk(charFilters_)) size] type:OrgApacheLuceneAnalysisUtilCharFilterFactory_class_()]], [tokenizer_ get], [tokenFilters_ toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[((id<JavaUtilList>) nil_chk(tokenFilters_)) size] type:OrgApacheLuceneAnalysisUtilTokenFilterFactory_class_()]], [((OrgApacheLuceneUtilSetOnce *) nil_chk(posIncGap_)) get], [((OrgApacheLuceneUtilSetOnce *) nil_chk(offsetGap_)) get]) autorelease];
+  return create_OrgApacheLuceneAnalysisCustomCustomAnalyzer_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneAnalysisUtilCharFilterFactoryArray_withOrgApacheLuceneAnalysisUtilTokenizerFactory_withOrgApacheLuceneAnalysisUtilTokenFilterFactoryArray_withJavaLangInteger_withJavaLangInteger_([((OrgApacheLuceneUtilSetOnce *) nil_chk(defaultMatchVersion_)) get], [((id<JavaUtilList>) nil_chk(charFilters_)) toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[charFilters_ size] type:OrgApacheLuceneAnalysisUtilCharFilterFactory_class_()]], [tokenizer_ get], [((id<JavaUtilList>) nil_chk(tokenFilters_)) toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[tokenFilters_ size] type:OrgApacheLuceneAnalysisUtilTokenFilterFactory_class_()]], [((OrgApacheLuceneUtilSetOnce *) nil_chk(posIncGap_)) get], [((OrgApacheLuceneUtilSetOnce *) nil_chk(offsetGap_)) get]);
 }
 
 - (id<JavaUtilMap>)applyDefaultParamsWithJavaUtilMap:(id<JavaUtilMap>)map {
@@ -363,14 +365,14 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCustomCustomAnalyzer)
     { "withPositionIncrementGapWithInt:", "withPositionIncrementGap", "Lorg.apache.lucene.analysis.custom.CustomAnalyzer$Builder;", 0x1, NULL, NULL },
     { "withOffsetGapWithInt:", "withOffsetGap", "Lorg.apache.lucene.analysis.custom.CustomAnalyzer$Builder;", 0x1, NULL, NULL },
     { "withTokenizerWithNSString:withNSStringArray:", "withTokenizer", "Lorg.apache.lucene.analysis.custom.CustomAnalyzer$Builder;", 0x81, "Ljava.io.IOException;", NULL },
-    { "withTokenizerWithNSString:withJavaUtilMap:", "withTokenizer", "Lorg.apache.lucene.analysis.custom.CustomAnalyzer$Builder;", 0x1, "Ljava.io.IOException;", NULL },
+    { "withTokenizerWithNSString:withJavaUtilMap:", "withTokenizer", "Lorg.apache.lucene.analysis.custom.CustomAnalyzer$Builder;", 0x1, "Ljava.io.IOException;", "(Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)Lorg/apache/lucene/analysis/custom/CustomAnalyzer$Builder;" },
     { "addTokenFilterWithNSString:withNSStringArray:", "addTokenFilter", "Lorg.apache.lucene.analysis.custom.CustomAnalyzer$Builder;", 0x81, "Ljava.io.IOException;", NULL },
-    { "addTokenFilterWithNSString:withJavaUtilMap:", "addTokenFilter", "Lorg.apache.lucene.analysis.custom.CustomAnalyzer$Builder;", 0x1, "Ljava.io.IOException;", NULL },
+    { "addTokenFilterWithNSString:withJavaUtilMap:", "addTokenFilter", "Lorg.apache.lucene.analysis.custom.CustomAnalyzer$Builder;", 0x1, "Ljava.io.IOException;", "(Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)Lorg/apache/lucene/analysis/custom/CustomAnalyzer$Builder;" },
     { "addCharFilterWithNSString:withNSStringArray:", "addCharFilter", "Lorg.apache.lucene.analysis.custom.CustomAnalyzer$Builder;", 0x81, "Ljava.io.IOException;", NULL },
-    { "addCharFilterWithNSString:withJavaUtilMap:", "addCharFilter", "Lorg.apache.lucene.analysis.custom.CustomAnalyzer$Builder;", 0x1, "Ljava.io.IOException;", NULL },
+    { "addCharFilterWithNSString:withJavaUtilMap:", "addCharFilter", "Lorg.apache.lucene.analysis.custom.CustomAnalyzer$Builder;", 0x1, "Ljava.io.IOException;", "(Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)Lorg/apache/lucene/analysis/custom/CustomAnalyzer$Builder;" },
     { "build", NULL, "Lorg.apache.lucene.analysis.custom.CustomAnalyzer;", 0x1, NULL, NULL },
-    { "applyDefaultParamsWithJavaUtilMap:", "applyDefaultParams", "Ljava.util.Map;", 0x2, NULL, NULL },
-    { "paramsToMapWithNSStringArray:", "paramsToMap", "Ljava.util.Map;", 0x82, NULL, NULL },
+    { "applyDefaultParamsWithJavaUtilMap:", "applyDefaultParams", "Ljava.util.Map;", 0x2, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;" },
+    { "paramsToMapWithNSStringArray:", "paramsToMap", "Ljava.util.Map;", 0x82, NULL, "([Ljava/lang/String;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;" },
     { "applyResourceLoaderWithId:", "applyResourceLoader", "TT;", 0x2, "Ljava.io.IOException;", "<T:Ljava/lang/Object;>(TT;)TT;" },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -402,23 +404,25 @@ void OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder_initWithOrgApacheLucene
 }
 
 OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder *new_OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder_initWithOrgApacheLuceneAnalysisUtilResourceLoader_(id<OrgApacheLuceneAnalysisUtilResourceLoader> loader) {
-  OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder *self = [OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder alloc];
-  OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder_initWithOrgApacheLuceneAnalysisUtilResourceLoader_(self, loader);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder, initWithOrgApacheLuceneAnalysisUtilResourceLoader_, loader)
+}
+
+OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder *create_OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder_initWithOrgApacheLuceneAnalysisUtilResourceLoader_(id<OrgApacheLuceneAnalysisUtilResourceLoader> loader) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder, initWithOrgApacheLuceneAnalysisUtilResourceLoader_, loader)
 }
 
 id<JavaUtilMap> OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder_applyDefaultParamsWithJavaUtilMap_(OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder *self, id<JavaUtilMap> map) {
-  if ([((OrgApacheLuceneUtilSetOnce *) nil_chk(self->defaultMatchVersion_)) get] != nil && ![((id<JavaUtilMap>) nil_chk(map)) containsKeyWithId:OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_LUCENE_MATCH_VERSION_PARAM_]) {
-    [map putWithId:OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_LUCENE_MATCH_VERSION_PARAM_ withId:[((OrgApacheLuceneUtilVersion *) nil_chk([self->defaultMatchVersion_ get])) description]];
+  if ([((OrgApacheLuceneUtilSetOnce *) nil_chk(self->defaultMatchVersion_)) get] != nil && ![((id<JavaUtilMap>) nil_chk(map)) containsKeyWithId:OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_LUCENE_MATCH_VERSION_PARAM]) {
+    [((id<JavaUtilMap>) nil_chk(map)) putWithId:OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_LUCENE_MATCH_VERSION_PARAM withId:[((OrgApacheLuceneUtilVersion *) nil_chk([self->defaultMatchVersion_ get])) description]];
   }
   return map;
 }
 
 id<JavaUtilMap> OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder_paramsToMapWithNSStringArray_(OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder *self, IOSObjectArray *params) {
   if (((IOSObjectArray *) nil_chk(params))->size_ % 2 != 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"Key-value pairs expected, so the number of params must be even.") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"Key-value pairs expected, so the number of params must be even.");
   }
-  id<JavaUtilMap> map = [new_JavaUtilHashMap_init() autorelease];
+  id<JavaUtilMap> map = create_JavaUtilHashMap_init();
   for (jint i = 0; i < params->size_; i += 2) {
     OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_withNSString_(IOSObjectArray_Get(params, i), @"Key of param may not be null.");
     [map putWithId:IOSObjectArray_Get(params, i) withId:IOSObjectArray_Get(params, i + 1)];
@@ -428,7 +432,7 @@ id<JavaUtilMap> OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder_paramsToMapW
 
 id OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder_applyResourceLoaderWithId_(OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder *self, id factory) {
   if ([OrgApacheLuceneAnalysisUtilResourceLoaderAware_class_() isInstance:factory]) {
-    [((id<OrgApacheLuceneAnalysisUtilResourceLoaderAware>) nil_chk(((id<OrgApacheLuceneAnalysisUtilResourceLoaderAware>) check_protocol_cast(factory, OrgApacheLuceneAnalysisUtilResourceLoaderAware_class_())))) informWithOrgApacheLuceneAnalysisUtilResourceLoader:self->loader_];
+    [((id<OrgApacheLuceneAnalysisUtilResourceLoaderAware>) nil_chk(((id<OrgApacheLuceneAnalysisUtilResourceLoaderAware>) cast_check(factory, OrgApacheLuceneAnalysisUtilResourceLoaderAware_class_())))) informWithOrgApacheLuceneAnalysisUtilResourceLoader:self->loader_];
   }
   return factory;
 }

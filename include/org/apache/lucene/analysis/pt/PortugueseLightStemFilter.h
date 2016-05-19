@@ -5,23 +5,32 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisPtPortugueseLightStemFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisPtPortugueseLightStemFilter_RESTRICT
-#define OrgApacheLuceneAnalysisPtPortugueseLightStemFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPtPortugueseLightStemFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisPtPortugueseLightStemFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPtPortugueseLightStemFilter 0
 #else
-#define OrgApacheLuceneAnalysisPtPortugueseLightStemFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPtPortugueseLightStemFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisPtPortugueseLightStemFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisPtPortugueseLightStemFilter
 
-#if !defined (_OrgApacheLuceneAnalysisPtPortugueseLightStemFilter_) && (OrgApacheLuceneAnalysisPtPortugueseLightStemFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisPtPortugueseLightStemFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisPtPortugueseLightStemFilter_
+#if !defined (OrgApacheLuceneAnalysisPtPortugueseLightStemFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPtPortugueseLightStemFilter || defined(INCLUDE_OrgApacheLuceneAnalysisPtPortugueseLightStemFilter))
+#define OrgApacheLuceneAnalysisPtPortugueseLightStemFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief A <code>TokenFilter</code> that applies <code>PortugueseLightStemmer</code> to stem 
+ Portuguese words.
+ <p>
+ To prevent terms from being stemmed use an instance of
+ <code>SetKeywordMarkerFilter</code> or a custom <code>TokenFilter</code> that sets
+ the <code>KeywordAttribute</code> before this <code>TokenStream</code>.
+ </p>
+ */
 @interface OrgApacheLuceneAnalysisPtPortugueseLightStemFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
@@ -38,8 +47,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPtPortugueseLightStemFilter_initWi
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtPortugueseLightStemFilter *new_OrgApacheLuceneAnalysisPtPortugueseLightStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtPortugueseLightStemFilter *create_OrgApacheLuceneAnalysisPtPortugueseLightStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPtPortugueseLightStemFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisPtPortugueseLightStemFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPtPortugueseLightStemFilter")

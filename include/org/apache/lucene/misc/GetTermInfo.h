@@ -5,21 +5,24 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneMiscGetTermInfo_INCLUDE_ALL")
-#if OrgApacheLuceneMiscGetTermInfo_RESTRICT
-#define OrgApacheLuceneMiscGetTermInfo_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneMiscGetTermInfo")
+#ifdef RESTRICT_OrgApacheLuceneMiscGetTermInfo
+#define INCLUDE_ALL_OrgApacheLuceneMiscGetTermInfo 0
 #else
-#define OrgApacheLuceneMiscGetTermInfo_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneMiscGetTermInfo 1
 #endif
-#undef OrgApacheLuceneMiscGetTermInfo_RESTRICT
+#undef RESTRICT_OrgApacheLuceneMiscGetTermInfo
 
-#if !defined (_OrgApacheLuceneMiscGetTermInfo_) && (OrgApacheLuceneMiscGetTermInfo_INCLUDE_ALL || OrgApacheLuceneMiscGetTermInfo_INCLUDE)
-#define _OrgApacheLuceneMiscGetTermInfo_
+#if !defined (OrgApacheLuceneMiscGetTermInfo_) && (INCLUDE_ALL_OrgApacheLuceneMiscGetTermInfo || defined(INCLUDE_OrgApacheLuceneMiscGetTermInfo))
+#define OrgApacheLuceneMiscGetTermInfo_
 
 @class IOSObjectArray;
 @class OrgApacheLuceneIndexTerm;
 @class OrgApacheLuceneStoreDirectory;
 
+/*!
+ @brief Utility to get document frequency and total number of occurrences (sum of the tf for each doc)  of a term.
+ */
 @interface OrgApacheLuceneMiscGetTermInfo : NSObject
 
 #pragma mark Public
@@ -43,8 +46,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneMiscGetTermInfo_init(OrgApacheLuceneMiscGe
 
 FOUNDATION_EXPORT OrgApacheLuceneMiscGetTermInfo *new_OrgApacheLuceneMiscGetTermInfo_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneMiscGetTermInfo *create_OrgApacheLuceneMiscGetTermInfo_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneMiscGetTermInfo)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneMiscGetTermInfo_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneMiscGetTermInfo")

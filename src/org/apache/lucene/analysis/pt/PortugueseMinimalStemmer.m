@@ -10,8 +10,9 @@
 #include "org/apache/lucene/analysis/pt/PortugueseMinimalStemmer.h"
 #include "org/apache/lucene/analysis/pt/RSLPStemmerBase.h"
 
-static OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_pluralStep_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer, pluralStep_, OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *)
+inline OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_get_pluralStep();
+static OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_pluralStep;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer, pluralStep, OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer)
 
@@ -19,7 +20,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer)
 
 - (jint)stemWithCharArray:(IOSCharArray *)s
                   withInt:(jint)len {
-  return [((OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *) nil_chk(OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_pluralStep_)) applyWithCharArray:s withInt:len];
+  return [((OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *) nil_chk(OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_pluralStep)) applyWithCharArray:s withInt:len];
 }
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -31,7 +32,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer class]) {
-    JreStrongAssign(&OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_pluralStep_, [((id<JavaUtilMap>) nil_chk(OrgApacheLuceneAnalysisPtRSLPStemmerBase_parseWithIOSClass_withNSString_(OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_class_(), @"portuguese.rslp"))) getWithId:@"Plural"]);
+    JreStrongAssign(&OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_pluralStep, [((id<JavaUtilMap>) nil_chk(OrgApacheLuceneAnalysisPtRSLPStemmerBase_parseWithIOSClass_withNSString_(OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_class_(), @"portuguese.rslp"))) getWithId:@"Plural"]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer)
   }
 }
@@ -39,10 +40,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "stemWithCharArray:withInt:", "stem", "I", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "PortugueseMinimalStemmer", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "pluralStep_", NULL, 0x1a, "Lorg.apache.lucene.analysis.pt.RSLPStemmerBase$Step;", &OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_pluralStep_, NULL, .constantValue.asLong = 0 },
+    { "pluralStep", "pluralStep", 0x1a, "Lorg.apache.lucene.analysis.pt.RSLPStemmerBase$Step;", &OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_pluralStep, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer = { 2, "PortugueseMinimalStemmer", "org.apache.lucene.analysis.pt", NULL, 0x1, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer;
@@ -55,9 +56,11 @@ void OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_init(OrgApacheLuceneAnaly
 }
 
 OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer *new_OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_init() {
-  OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer *self = [OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer alloc];
-  OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer, init)
+}
+
+OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer *create_OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer)

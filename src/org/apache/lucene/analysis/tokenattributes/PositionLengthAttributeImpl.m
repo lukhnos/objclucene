@@ -30,7 +30,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setPositionLengthWithInt:(jint)positionLength {
   if (positionLength < 1) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"Position length must be 1 or greater: got ", positionLength)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"Position length must be 1 or greater: got ", positionLength));
   }
   self->positionLength_ = positionLength;
 }
@@ -48,7 +48,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     return true;
   }
   if ([other isKindOfClass:[OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl class]]) {
-    OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl *_other = (OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl *) check_class_cast(other, [OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl class]);
+    OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl *_other = (OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl *) cast_chk(other, [OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl class]);
     return positionLength_ == ((OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl *) nil_chk(_other))->positionLength_;
   }
   return false;
@@ -59,7 +59,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)copyToWithOrgApacheLuceneUtilAttributeImpl:(OrgApacheLuceneUtilAttributeImpl *)target {
-  id<OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute> t = (id<OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute>) check_protocol_cast(target, OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute_class_());
+  id<OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute> t = (id<OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute>) cast_check(target, OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute_class_());
   [((id<OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute>) nil_chk(t)) setPositionLengthWithInt:positionLength_];
 }
 
@@ -93,9 +93,11 @@ void OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl_init(OrgA
 }
 
 OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl_init() {
-  OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl *self = [OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl alloc];
-  OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl, init)
+}
+
+OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl)

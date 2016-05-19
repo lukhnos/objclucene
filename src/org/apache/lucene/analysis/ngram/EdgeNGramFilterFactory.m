@@ -31,15 +31,15 @@
 }
 
 - (OrgApacheLuceneAnalysisTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  if ([((OrgApacheLuceneUtilVersion *) nil_chk(luceneMatchVersion_)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_4_0_)]) {
-    return [new_OrgApacheLuceneAnalysisNgramEdgeNGramTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(input, minGramSize_, maxGramSize_) autorelease];
+  if ([((OrgApacheLuceneUtilVersion *) nil_chk(luceneMatchVersion_)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_4_0)]) {
+    return create_OrgApacheLuceneAnalysisNgramEdgeNGramTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(input, minGramSize_, maxGramSize_);
   }
-  return [new_OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(input, minGramSize_, maxGramSize_) autorelease];
+  return create_OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(input, minGramSize_, maxGramSize_);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "EdgeNGramFilterFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "EdgeNGramFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenFilter;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -57,14 +57,16 @@ void OrgApacheLuceneAnalysisNgramEdgeNGramFilterFactory_initWithJavaUtilMap_(Org
   self->minGramSize_ = [self getIntWithJavaUtilMap:args withNSString:@"minGramSize" withInt:OrgApacheLuceneAnalysisNgramEdgeNGramTokenFilter_DEFAULT_MIN_GRAM_SIZE];
   self->maxGramSize_ = [self getIntWithJavaUtilMap:args withNSString:@"maxGramSize" withInt:OrgApacheLuceneAnalysisNgramEdgeNGramTokenFilter_DEFAULT_MAX_GRAM_SIZE];
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisNgramEdgeNGramFilterFactory *new_OrgApacheLuceneAnalysisNgramEdgeNGramFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisNgramEdgeNGramFilterFactory *self = [OrgApacheLuceneAnalysisNgramEdgeNGramFilterFactory alloc];
-  OrgApacheLuceneAnalysisNgramEdgeNGramFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisNgramEdgeNGramFilterFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisNgramEdgeNGramFilterFactory *create_OrgApacheLuceneAnalysisNgramEdgeNGramFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisNgramEdgeNGramFilterFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisNgramEdgeNGramFilterFactory)

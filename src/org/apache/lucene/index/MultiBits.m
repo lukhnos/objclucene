@@ -57,7 +57,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneIndexMultiBits_checkLengt
 }
 
 - (NSString *)description {
-  JavaLangStringBuilder *b = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *b = create_JavaLangStringBuilder_init();
   [b appendWithNSString:JreStrcat("I$", ((IOSObjectArray *) nil_chk(subs_))->size_, @" subs: ")];
   for (jint i = 0; i < subs_->size_; i++) {
     if (i != 0) {
@@ -78,7 +78,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneIndexMultiBits_checkLengt
   jint reader = OrgApacheLuceneIndexReaderUtil_subIndexWithInt_withIntArray_(((OrgApacheLuceneIndexReaderSlice *) nil_chk(slice))->start_, starts_);
   JreAssert((reader != -1), (@"org/apache/lucene/index/MultiBits.java:101 condition failed: assert reader != -1;"));
   JreAssert((reader < ((IOSObjectArray *) nil_chk(subs_))->size_), (JreStrcat("$@$I", @"slice=", slice, @" starts[-1]=", IOSIntArray_Get(starts_, ((IOSIntArray *) nil_chk(starts_))->size_ - 1))));
-  OrgApacheLuceneIndexMultiBits_SubResult *subResult = [new_OrgApacheLuceneIndexMultiBits_SubResult_init() autorelease];
+  OrgApacheLuceneIndexMultiBits_SubResult *subResult = create_OrgApacheLuceneIndexMultiBits_SubResult_init();
   if (IOSIntArray_Get(starts_, reader) == slice->start_ && IOSIntArray_Get(starts_, 1 + reader) == slice->start_ + slice->length_) {
     subResult->matches_ = true;
     JreStrongAssign(&subResult->result_, IOSObjectArray_Get(subs_, reader));
@@ -129,9 +129,11 @@ void OrgApacheLuceneIndexMultiBits_initWithOrgApacheLuceneUtilBitsArray_withIntA
 }
 
 OrgApacheLuceneIndexMultiBits *new_OrgApacheLuceneIndexMultiBits_initWithOrgApacheLuceneUtilBitsArray_withIntArray_withBoolean_(IOSObjectArray *subs, IOSIntArray *starts, jboolean defaultValue) {
-  OrgApacheLuceneIndexMultiBits *self = [OrgApacheLuceneIndexMultiBits alloc];
-  OrgApacheLuceneIndexMultiBits_initWithOrgApacheLuceneUtilBitsArray_withIntArray_withBoolean_(self, subs, starts, defaultValue);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiBits, initWithOrgApacheLuceneUtilBitsArray_withIntArray_withBoolean_, subs, starts, defaultValue)
+}
+
+OrgApacheLuceneIndexMultiBits *create_OrgApacheLuceneIndexMultiBits_initWithOrgApacheLuceneUtilBitsArray_withIntArray_withBoolean_(IOSObjectArray *subs, IOSIntArray *starts, jboolean defaultValue) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiBits, initWithOrgApacheLuceneUtilBitsArray_withIntArray_withBoolean_, subs, starts, defaultValue)
 }
 
 jboolean OrgApacheLuceneIndexMultiBits_checkLengthWithInt_withInt_(OrgApacheLuceneIndexMultiBits *self, jint reader, jint doc) {
@@ -158,7 +160,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "SubResult", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "matches_", NULL, 0x1, "Z", NULL, NULL, .constantValue.asLong = 0 },
@@ -175,9 +177,11 @@ void OrgApacheLuceneIndexMultiBits_SubResult_init(OrgApacheLuceneIndexMultiBits_
 }
 
 OrgApacheLuceneIndexMultiBits_SubResult *new_OrgApacheLuceneIndexMultiBits_SubResult_init() {
-  OrgApacheLuceneIndexMultiBits_SubResult *self = [OrgApacheLuceneIndexMultiBits_SubResult alloc];
-  OrgApacheLuceneIndexMultiBits_SubResult_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiBits_SubResult, init)
+}
+
+OrgApacheLuceneIndexMultiBits_SubResult *create_OrgApacheLuceneIndexMultiBits_SubResult_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiBits_SubResult, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiBits_SubResult)

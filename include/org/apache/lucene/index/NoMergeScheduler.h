@@ -5,25 +5,38 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexNoMergeScheduler_INCLUDE_ALL")
-#if OrgApacheLuceneIndexNoMergeScheduler_RESTRICT
-#define OrgApacheLuceneIndexNoMergeScheduler_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexNoMergeScheduler")
+#ifdef RESTRICT_OrgApacheLuceneIndexNoMergeScheduler
+#define INCLUDE_ALL_OrgApacheLuceneIndexNoMergeScheduler 0
 #else
-#define OrgApacheLuceneIndexNoMergeScheduler_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexNoMergeScheduler 1
 #endif
-#undef OrgApacheLuceneIndexNoMergeScheduler_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexNoMergeScheduler
 
-#if !defined (_OrgApacheLuceneIndexNoMergeScheduler_) && (OrgApacheLuceneIndexNoMergeScheduler_INCLUDE_ALL || OrgApacheLuceneIndexNoMergeScheduler_INCLUDE)
-#define _OrgApacheLuceneIndexNoMergeScheduler_
+#if !defined (OrgApacheLuceneIndexNoMergeScheduler_) && (INCLUDE_ALL_OrgApacheLuceneIndexNoMergeScheduler || defined(INCLUDE_OrgApacheLuceneIndexNoMergeScheduler))
+#define OrgApacheLuceneIndexNoMergeScheduler_
 
-#define OrgApacheLuceneIndexMergeScheduler_RESTRICT 1
-#define OrgApacheLuceneIndexMergeScheduler_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexMergeScheduler 1
+#define INCLUDE_OrgApacheLuceneIndexMergeScheduler 1
 #include "org/apache/lucene/index/MergeScheduler.h"
 
 @class OrgApacheLuceneIndexIndexWriter;
-@class OrgApacheLuceneIndexMergeTriggerEnum;
+@class OrgApacheLuceneIndexMergeTrigger;
 
+/*!
+ @brief A <code>MergeScheduler</code> which never executes any merges.
+ It is also a
+ singleton and can be accessed through <code>NoMergeScheduler.INSTANCE</code>. Use
+ it if you want to prevent an <code>IndexWriter</code> from ever executing merges,
+ regardless of the <code>MergePolicy</code> used. Note that you can achieve the
+ same thing by using <code>NoMergePolicy</code>, however with
+ <code>NoMergeScheduler</code> you also ensure that no unnecessary code of any
+ <code>MergeScheduler</code> implementation is ever executed. Hence it is
+ recommended to use both if you want to disable merges from ever happening.
+ */
 @interface OrgApacheLuceneIndexNoMergeScheduler : OrgApacheLuceneIndexMergeScheduler
+
++ (OrgApacheLuceneIndexMergeScheduler *)INSTANCE;
 
 #pragma mark Public
 
@@ -32,18 +45,23 @@
 - (void)close;
 
 - (void)mergeWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
-        withOrgApacheLuceneIndexMergeTriggerEnum:(OrgApacheLuceneIndexMergeTriggerEnum *)trigger
+            withOrgApacheLuceneIndexMergeTrigger:(OrgApacheLuceneIndexMergeTrigger *)trigger
                                      withBoolean:(jboolean)newMergesFound;
 
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneIndexNoMergeScheduler)
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexMergeScheduler *OrgApacheLuceneIndexNoMergeScheduler_INSTANCE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexNoMergeScheduler, INSTANCE_, OrgApacheLuceneIndexMergeScheduler *)
+/*!
+ @brief The single instance of <code>NoMergeScheduler</code>
+ */
+inline OrgApacheLuceneIndexMergeScheduler *OrgApacheLuceneIndexNoMergeScheduler_get_INSTANCE();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT OrgApacheLuceneIndexMergeScheduler *OrgApacheLuceneIndexNoMergeScheduler_INSTANCE;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexNoMergeScheduler, INSTANCE, OrgApacheLuceneIndexMergeScheduler *)
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexNoMergeScheduler)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexNoMergeScheduler_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexNoMergeScheduler")

@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsNormsConsumer_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsNormsConsumer_RESTRICT
-#define OrgApacheLuceneCodecsNormsConsumer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsNormsConsumer")
+#ifdef RESTRICT_OrgApacheLuceneCodecsNormsConsumer
+#define INCLUDE_ALL_OrgApacheLuceneCodecsNormsConsumer 0
 #else
-#define OrgApacheLuceneCodecsNormsConsumer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsNormsConsumer 1
 #endif
-#undef OrgApacheLuceneCodecsNormsConsumer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsNormsConsumer
 
-#if !defined (_OrgApacheLuceneCodecsNormsConsumer_) && (OrgApacheLuceneCodecsNormsConsumer_INCLUDE_ALL || OrgApacheLuceneCodecsNormsConsumer_INCLUDE)
-#define _OrgApacheLuceneCodecsNormsConsumer_
+#if !defined (OrgApacheLuceneCodecsNormsConsumer_) && (INCLUDE_ALL_OrgApacheLuceneCodecsNormsConsumer || defined(INCLUDE_OrgApacheLuceneCodecsNormsConsumer))
+#define OrgApacheLuceneCodecsNormsConsumer_
 
-#define JavaIoCloseable_RESTRICT 1
-#define JavaIoCloseable_INCLUDE 1
+#define RESTRICT_JavaIoCloseable 1
+#define INCLUDE_JavaIoCloseable 1
 #include "java/io/Closeable.h"
 
 @class OrgApacheLuceneIndexFieldInfo;
@@ -25,21 +25,64 @@
 @protocol JavaLangIterable;
 @protocol JavaUtilList;
 
+/*!
+ @brief Abstract API that consumes normalization values.
+ Concrete implementations of this
+ actually do "something" with the norms (write it into
+ the index in a specific format).
+ <p>
+ The lifecycle is:
+ <ol>
+ <li>NormsConsumer is created by 
+ <code>NormsFormat.normsConsumer(SegmentWriteState)</code>.
+ <li><code>addNormsField</code> is called for each field with
+ normalization values. The API is a "pull" rather
+ than "push", and the implementation is free to iterate over the 
+ values multiple times (<code>Iterable.iterator()</code>).
+ <li>After all fields are added, the consumer is <code>close</code>d.
+ </ol>
+ */
 @interface OrgApacheLuceneCodecsNormsConsumer : NSObject < JavaIoCloseable >
 
 #pragma mark Public
 
+/*!
+ @brief Writes normalization values for a field.
+ @param field field information
+ @param values Iterable of numeric values (one for each document).
+ @throws IOException if an I/O error occurred.
+ */
 - (void)addNormsFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field
                                   withJavaLangIterable:(id<JavaLangIterable>)values;
 
+/*!
+ @brief Merges in the fields from the readers in 
+ <code>mergeState</code>.
+ The default implementation 
+ calls <code>mergeNormsField</code> for each field,
+ filling segments with missing norms for the field with zeros. 
+ Implementations can override this method 
+ for more sophisticated merging (bulk-byte copying, etc). 
+ */
 - (void)mergeWithOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState;
 
+/*!
+ @brief Merges the norms from <code>toMerge</code>.
+ <p>
+ The default implementation calls <code>addNormsField</code>, passing
+ an Iterable that merges and filters deleted documents on the fly.
+ */
 - (void)mergeNormsFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
                       withOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState
                                         withJavaUtilList:(id<JavaUtilList>)toMerge;
 
 #pragma mark Protected
 
+/*!
+ @brief Sole constructor.
+ (For invocation by subclass 
+ constructors, typically implicit.) 
+ */
 - (instancetype)init;
 
 @end
@@ -52,4 +95,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsNormsConsumer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsNormsConsumer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsNormsConsumer")

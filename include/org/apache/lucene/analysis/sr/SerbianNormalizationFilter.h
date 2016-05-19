@@ -5,23 +5,30 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisSrSerbianNormalizationFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisSrSerbianNormalizationFilter_RESTRICT
-#define OrgApacheLuceneAnalysisSrSerbianNormalizationFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisSrSerbianNormalizationFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisSrSerbianNormalizationFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisSrSerbianNormalizationFilter 0
 #else
-#define OrgApacheLuceneAnalysisSrSerbianNormalizationFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisSrSerbianNormalizationFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisSrSerbianNormalizationFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisSrSerbianNormalizationFilter
 
-#if !defined (_OrgApacheLuceneAnalysisSrSerbianNormalizationFilter_) && (OrgApacheLuceneAnalysisSrSerbianNormalizationFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisSrSerbianNormalizationFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisSrSerbianNormalizationFilter_
+#if !defined (OrgApacheLuceneAnalysisSrSerbianNormalizationFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisSrSerbianNormalizationFilter || defined(INCLUDE_OrgApacheLuceneAnalysisSrSerbianNormalizationFilter))
+#define OrgApacheLuceneAnalysisSrSerbianNormalizationFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief Normalizes Serbian Cyrillic and Latin characters to "bald" Latin.
+ Cyrillic characters are first converted to Latin; then, Latin characters
+ have their diacritics removed, with the exception of đ which is converted to
+ dj.
+ Note that it expects lowercased input.
+ */
 @interface OrgApacheLuceneAnalysisSrSerbianNormalizationFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
@@ -38,8 +45,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSrSerbianNormalizationFilter_initW
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisSrSerbianNormalizationFilter *new_OrgApacheLuceneAnalysisSrSerbianNormalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisSrSerbianNormalizationFilter *create_OrgApacheLuceneAnalysisSrSerbianNormalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSrSerbianNormalizationFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisSrSerbianNormalizationFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisSrSerbianNormalizationFilter")

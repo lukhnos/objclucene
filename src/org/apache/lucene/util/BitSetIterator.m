@@ -99,7 +99,7 @@ __attribute__((unused)) static id OrgApacheLuceneUtilBitSetIterator_getBitSetWit
 id OrgApacheLuceneUtilBitSetIterator_getBitSetWithOrgApacheLuceneSearchDocIdSetIterator_withIOSClass_(OrgApacheLuceneSearchDocIdSetIterator *iterator, IOSClass *clazz) {
   OrgApacheLuceneUtilBitSetIterator_initialize();
   if ([iterator isKindOfClass:[OrgApacheLuceneUtilBitSetIterator class]]) {
-    OrgApacheLuceneUtilBitSet *bits = ((OrgApacheLuceneUtilBitSetIterator *) nil_chk(((OrgApacheLuceneUtilBitSetIterator *) check_class_cast(iterator, [OrgApacheLuceneUtilBitSetIterator class]))))->bits_;
+    OrgApacheLuceneUtilBitSet *bits = ((OrgApacheLuceneUtilBitSetIterator *) nil_chk(((OrgApacheLuceneUtilBitSetIterator *) cast_chk(iterator, [OrgApacheLuceneUtilBitSetIterator class]))))->bits_;
     JreAssert((bits != nil), (@"org/apache/lucene/util/BitSetIterator.java:32 condition failed: assert bits != null;"));
     if ([((IOSClass *) nil_chk(clazz)) isInstance:bits]) {
       return [clazz cast:bits];
@@ -127,9 +127,11 @@ void OrgApacheLuceneUtilBitSetIterator_initWithOrgApacheLuceneUtilBitSet_withLon
 }
 
 OrgApacheLuceneUtilBitSetIterator *new_OrgApacheLuceneUtilBitSetIterator_initWithOrgApacheLuceneUtilBitSet_withLong_(OrgApacheLuceneUtilBitSet *bits, jlong cost) {
-  OrgApacheLuceneUtilBitSetIterator *self = [OrgApacheLuceneUtilBitSetIterator alloc];
-  OrgApacheLuceneUtilBitSetIterator_initWithOrgApacheLuceneUtilBitSet_withLong_(self, bits, cost);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilBitSetIterator, initWithOrgApacheLuceneUtilBitSet_withLong_, bits, cost)
+}
+
+OrgApacheLuceneUtilBitSetIterator *create_OrgApacheLuceneUtilBitSetIterator_initWithOrgApacheLuceneUtilBitSet_withLong_(OrgApacheLuceneUtilBitSet *bits, jlong cost) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilBitSetIterator, initWithOrgApacheLuceneUtilBitSet_withLong_, bits, cost)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBitSetIterator)

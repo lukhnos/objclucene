@@ -25,7 +25,7 @@
 }
 
 - (void)ensureOpen {
-  if (!JreLoadVolatileBoolean(&isOpen_)) @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(@"this Directory is closed") autorelease];
+  if (!JreLoadVolatileBoolean(&isOpen_)) @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(@"this Directory is closed");
 }
 
 - (NSString *)description {
@@ -58,7 +58,7 @@ void OrgApacheLuceneStoreBaseDirectory_initWithOrgApacheLuceneStoreLockFactory_(
   OrgApacheLuceneStoreDirectory_init(self);
   JreAssignVolatileBoolean(&self->isOpen_, true);
   if (lockFactory == nil) {
-    @throw [new_JavaLangNullPointerException_initWithNSString_(@"LockFactory cannot be null, use an explicit instance!") autorelease];
+    @throw create_JavaLangNullPointerException_initWithNSString_(@"LockFactory cannot be null, use an explicit instance!");
   }
   JreStrongAssign(&self->lockFactory_, lockFactory);
 }

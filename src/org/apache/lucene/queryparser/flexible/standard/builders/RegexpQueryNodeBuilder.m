@@ -25,9 +25,9 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneSearchRegexpQuery *)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode {
-  OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode *regexpNode = (OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode *) check_class_cast(queryNode, [OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode class]);
-  OrgApacheLuceneSearchRegexpQuery *q = [new_OrgApacheLuceneSearchRegexpQuery_initWithOrgApacheLuceneIndexTerm_([new_OrgApacheLuceneIndexTerm_initWithNSString_withOrgApacheLuceneUtilBytesRef_([((OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode *) nil_chk(regexpNode)) getFieldAsString], [regexpNode textToBytesRef]) autorelease]) autorelease];
-  OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *method = (OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *) check_class_cast([((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(queryNode)) getTagWithNSString:OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiTermRewriteMethodProcessor_TAG_ID_], [OrgApacheLuceneSearchMultiTermQuery_RewriteMethod class]);
+  OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode *regexpNode = (OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode *) cast_chk(queryNode, [OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode class]);
+  OrgApacheLuceneSearchRegexpQuery *q = create_OrgApacheLuceneSearchRegexpQuery_initWithOrgApacheLuceneIndexTerm_(create_OrgApacheLuceneIndexTerm_initWithNSString_withOrgApacheLuceneUtilBytesRef_([((OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode *) nil_chk(regexpNode)) getFieldAsString], [regexpNode textToBytesRef]));
+  OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *method = (OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *) cast_chk([((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(queryNode)) getTagWithNSString:OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiTermRewriteMethodProcessor_TAG_ID], [OrgApacheLuceneSearchMultiTermQuery_RewriteMethod class]);
   if (method != nil) {
     [q setRewriteMethodWithOrgApacheLuceneSearchMultiTermQuery_RewriteMethod:method];
   }
@@ -50,9 +50,11 @@ void OrgApacheLuceneQueryparserFlexibleStandardBuildersRegexpQueryNodeBuilder_in
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardBuildersRegexpQueryNodeBuilder *new_OrgApacheLuceneQueryparserFlexibleStandardBuildersRegexpQueryNodeBuilder_init() {
-  OrgApacheLuceneQueryparserFlexibleStandardBuildersRegexpQueryNodeBuilder *self = [OrgApacheLuceneQueryparserFlexibleStandardBuildersRegexpQueryNodeBuilder alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardBuildersRegexpQueryNodeBuilder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardBuildersRegexpQueryNodeBuilder, init)
+}
+
+OrgApacheLuceneQueryparserFlexibleStandardBuildersRegexpQueryNodeBuilder *create_OrgApacheLuceneQueryparserFlexibleStandardBuildersRegexpQueryNodeBuilder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardBuildersRegexpQueryNodeBuilder, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleStandardBuildersRegexpQueryNodeBuilder)

@@ -5,21 +5,24 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource_RESTRICT
-#define OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource 0
 #else
-#define OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource_) && (OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource_
+#if !defined (OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource))
+#define OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource_
 
-#define OrgApacheLuceneQueriesFunctionValueSource_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionValueSource_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionValueSource 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionValueSource 1
 #include "org/apache/lucene/queries/function/ValueSource.h"
 
+/*!
+ @brief <code>ConstNumberSource</code> is the base class for all constant numbers
+ */
 @interface OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource : OrgApacheLuceneQueriesFunctionValueSource
 
 #pragma mark Public
@@ -48,4 +51,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceConstNumberS
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource")

@@ -158,9 +158,11 @@ void OrgApacheLuceneIndexFieldInvertState_initWithNSString_(OrgApacheLuceneIndex
 }
 
 OrgApacheLuceneIndexFieldInvertState *new_OrgApacheLuceneIndexFieldInvertState_initWithNSString_(NSString *name) {
-  OrgApacheLuceneIndexFieldInvertState *self = [OrgApacheLuceneIndexFieldInvertState alloc];
-  OrgApacheLuceneIndexFieldInvertState_initWithNSString_(self, name);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexFieldInvertState, initWithNSString_, name)
+}
+
+OrgApacheLuceneIndexFieldInvertState *create_OrgApacheLuceneIndexFieldInvertState_initWithNSString_(NSString *name) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexFieldInvertState, initWithNSString_, name)
 }
 
 void OrgApacheLuceneIndexFieldInvertState_initWithNSString_withInt_withInt_withInt_withInt_withFloat_(OrgApacheLuceneIndexFieldInvertState *self, NSString *name, jint position, jint length, jint numOverlap, jint offset, jfloat boost) {
@@ -176,9 +178,11 @@ void OrgApacheLuceneIndexFieldInvertState_initWithNSString_withInt_withInt_withI
 }
 
 OrgApacheLuceneIndexFieldInvertState *new_OrgApacheLuceneIndexFieldInvertState_initWithNSString_withInt_withInt_withInt_withInt_withFloat_(NSString *name, jint position, jint length, jint numOverlap, jint offset, jfloat boost) {
-  OrgApacheLuceneIndexFieldInvertState *self = [OrgApacheLuceneIndexFieldInvertState alloc];
-  OrgApacheLuceneIndexFieldInvertState_initWithNSString_withInt_withInt_withInt_withInt_withFloat_(self, name, position, length, numOverlap, offset, boost);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexFieldInvertState, initWithNSString_withInt_withInt_withInt_withInt_withFloat_, name, position, length, numOverlap, offset, boost)
+}
+
+OrgApacheLuceneIndexFieldInvertState *create_OrgApacheLuceneIndexFieldInvertState_initWithNSString_withInt_withInt_withInt_withInt_withFloat_(NSString *name, jint position, jint length, jint numOverlap, jint offset, jfloat boost) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexFieldInvertState, initWithNSString_withInt_withInt_withInt_withInt_withFloat_, name, position, length, numOverlap, offset, boost)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexFieldInvertState)

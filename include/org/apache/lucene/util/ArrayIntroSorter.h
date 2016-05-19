@@ -5,28 +5,34 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilArrayIntroSorter_INCLUDE_ALL")
-#if OrgApacheLuceneUtilArrayIntroSorter_RESTRICT
-#define OrgApacheLuceneUtilArrayIntroSorter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilArrayIntroSorter")
+#ifdef RESTRICT_OrgApacheLuceneUtilArrayIntroSorter
+#define INCLUDE_ALL_OrgApacheLuceneUtilArrayIntroSorter 0
 #else
-#define OrgApacheLuceneUtilArrayIntroSorter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilArrayIntroSorter 1
 #endif
-#undef OrgApacheLuceneUtilArrayIntroSorter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilArrayIntroSorter
 
-#if !defined (_OrgApacheLuceneUtilArrayIntroSorter_) && (OrgApacheLuceneUtilArrayIntroSorter_INCLUDE_ALL || OrgApacheLuceneUtilArrayIntroSorter_INCLUDE)
-#define _OrgApacheLuceneUtilArrayIntroSorter_
+#if !defined (OrgApacheLuceneUtilArrayIntroSorter_) && (INCLUDE_ALL_OrgApacheLuceneUtilArrayIntroSorter || defined(INCLUDE_OrgApacheLuceneUtilArrayIntroSorter))
+#define OrgApacheLuceneUtilArrayIntroSorter_
 
-#define OrgApacheLuceneUtilIntroSorter_RESTRICT 1
-#define OrgApacheLuceneUtilIntroSorter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilIntroSorter 1
+#define INCLUDE_OrgApacheLuceneUtilIntroSorter 1
 #include "org/apache/lucene/util/IntroSorter.h"
 
 @class IOSObjectArray;
 @protocol JavaUtilComparator;
 
+/*!
+ @brief An <code>IntroSorter</code> for object arrays.
+ */
 @interface OrgApacheLuceneUtilArrayIntroSorter : OrgApacheLuceneUtilIntroSorter
 
 #pragma mark Public
 
+/*!
+ @brief Create a new <code>ArrayInPlaceMergeSorter</code>.
+ */
 - (instancetype)initWithNSObjectArray:(IOSObjectArray *)arr
                withJavaUtilComparator:(id<JavaUtilComparator>)comparator;
 
@@ -50,8 +56,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilArrayIntroSorter_initWithNSObjectArray
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilArrayIntroSorter *new_OrgApacheLuceneUtilArrayIntroSorter_initWithNSObjectArray_withJavaUtilComparator_(IOSObjectArray *arr, id<JavaUtilComparator> comparator) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilArrayIntroSorter *create_OrgApacheLuceneUtilArrayIntroSorter_initWithNSObjectArray_withJavaUtilComparator_(IOSObjectArray *arr, id<JavaUtilComparator> comparator);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilArrayIntroSorter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilArrayIntroSorter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilArrayIntroSorter")

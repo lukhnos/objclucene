@@ -55,19 +55,19 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)checkMax {
   @synchronized(self) {
-    if (OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_atMax(self)) @throw [new_OrgApacheLuceneQueryparserSurroundQueryTooManyBasicQueries_initWithInt_([self getMaxBasicQueries]) autorelease];
+    if (OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_atMax(self)) @throw create_OrgApacheLuceneQueryparserSurroundQueryTooManyBasicQueries_initWithInt_([self getMaxBasicQueries]);
     queriesMade_++;
   }
 }
 
 - (OrgApacheLuceneSearchTermQuery *)newTermQueryWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term {
   [self checkMax];
-  return [new_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_(term) autorelease];
+  return create_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_(term);
 }
 
 - (OrgApacheLuceneSearchSpansSpanTermQuery *)newSpanTermQueryWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term {
   [self checkMax];
-  return [new_OrgApacheLuceneSearchSpansSpanTermQuery_initWithOrgApacheLuceneIndexTerm_(term) autorelease];
+  return create_OrgApacheLuceneSearchSpansSpanTermQuery_initWithOrgApacheLuceneIndexTerm_(term);
 }
 
 - (NSUInteger)hash {
@@ -76,7 +76,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (jboolean)isEqual:(id)obj {
   if (!([obj isKindOfClass:[OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory class]])) return false;
-  OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *other = (OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *) check_class_cast(obj, [OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory class]);
+  OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *other = (OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *) cast_chk(obj, [OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory class]);
   return OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_atMax(self) == OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_atMax(nil_chk(other));
 }
 
@@ -111,9 +111,11 @@ void OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_initWithInt_(OrgAp
 }
 
 OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *new_OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_initWithInt_(jint maxBasicQueries) {
-  OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *self = [OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory alloc];
-  OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_initWithInt_(self, maxBasicQueries);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory, initWithInt_, maxBasicQueries)
+}
+
+OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *create_OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_initWithInt_(jint maxBasicQueries) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory, initWithInt_, maxBasicQueries)
 }
 
 void OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_init(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *self) {
@@ -121,9 +123,11 @@ void OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_init(OrgApacheLuce
 }
 
 OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *new_OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_init() {
-  OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *self = [OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory alloc];
-  OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory, init)
+}
+
+OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *create_OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory, init)
 }
 
 jboolean OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_atMax(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *self) {

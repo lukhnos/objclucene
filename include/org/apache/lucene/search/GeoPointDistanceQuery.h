@@ -5,25 +5,41 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchGeoPointDistanceQuery_INCLUDE_ALL")
-#if OrgApacheLuceneSearchGeoPointDistanceQuery_RESTRICT
-#define OrgApacheLuceneSearchGeoPointDistanceQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchGeoPointDistanceQuery")
+#ifdef RESTRICT_OrgApacheLuceneSearchGeoPointDistanceQuery
+#define INCLUDE_ALL_OrgApacheLuceneSearchGeoPointDistanceQuery 0
 #else
-#define OrgApacheLuceneSearchGeoPointDistanceQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchGeoPointDistanceQuery 1
 #endif
-#undef OrgApacheLuceneSearchGeoPointDistanceQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchGeoPointDistanceQuery
 
-#if !defined (_OrgApacheLuceneSearchGeoPointDistanceQuery_) && (OrgApacheLuceneSearchGeoPointDistanceQuery_INCLUDE_ALL || OrgApacheLuceneSearchGeoPointDistanceQuery_INCLUDE)
-#define _OrgApacheLuceneSearchGeoPointDistanceQuery_
+#if !defined (OrgApacheLuceneSearchGeoPointDistanceQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchGeoPointDistanceQuery || defined(INCLUDE_OrgApacheLuceneSearchGeoPointDistanceQuery))
+#define OrgApacheLuceneSearchGeoPointDistanceQuery_
 
-#define OrgApacheLuceneSearchGeoPointInBBoxQuery_RESTRICT 1
-#define OrgApacheLuceneSearchGeoPointInBBoxQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchGeoPointInBBoxQuery 1
+#define INCLUDE_OrgApacheLuceneSearchGeoPointInBBoxQuery 1
 #include "org/apache/lucene/search/GeoPointInBBoxQuery.h"
 
 @class OrgApacheLuceneIndexIndexReader;
 @class OrgApacheLuceneSearchGeoBoundingBox;
 @class OrgApacheLuceneSearchQuery;
 
+/*!
+ @brief Implements a simple point distance query on a GeoPoint field.
+ This is based on
+ <code>org.apache.lucene.search.GeoPointInBBoxQuery</code> and is implemented using a two phase approach. First,
+ like <code>GeoPointInBBoxQueryImpl</code> candidate terms are queried using the numeric ranges based on
+ the morton codes of the min and max lat/lon pairs that intersect the boundary of the point-radius
+ circle (see <code>org.apache.lucene.util.GeoUtils.lineCrossesSphere</code>. Terms
+ passing this initial filter are then passed to a secondary <code>postFilter</code> method that verifies whether the
+ decoded lat/lon point fall within the specified query distance (see <code>org.apache.lucene.util.SloppyMath.haversin</code>.
+ All morton value comparisons are subject to the same precision tolerance defined in
+ org.apache.lucene.util.GeoUtils#TOLERANCE and distance comparisons are subject to the accuracy of the
+ haversine formula (from R.W. Sinnott, "Virtues of the Haversine", Sky and Telescope, vol. 68, no. 2, 1984, p. 159)
+ Note: This query currently uses haversine which is a sloppy distance calculation (see above reference). For large
+ queries one can expect upwards of 400m error. Vincenty shrinks this to ~40m error but pays a penalty for computing
+ using the spheroid
+ */
 @interface OrgApacheLuceneSearchGeoPointDistanceQuery : OrgApacheLuceneSearchGeoPointInBBoxQuery {
  @public
   jdouble centerLon_;
@@ -33,6 +49,9 @@
 
 #pragma mark Public
 
+/*!
+ @brief NOTE: radius is in meters.
+ */
 - (instancetype)initWithNSString:(NSString *)field
                       withDouble:(jdouble)centerLon
                       withDouble:(jdouble)centerLat
@@ -66,10 +85,12 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchGeoPointDistanceQuery_initWithNSStri
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchGeoPointDistanceQuery *new_OrgApacheLuceneSearchGeoPointDistanceQuery_initWithNSString_withDouble_withDouble_withDouble_(NSString *field, jdouble centerLon, jdouble centerLat, jdouble radius) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchGeoPointDistanceQuery *create_OrgApacheLuceneSearchGeoPointDistanceQuery_initWithNSString_withDouble_withDouble_withDouble_(NSString *field, jdouble centerLon, jdouble centerLat, jdouble radius);
+
 FOUNDATION_EXPORT OrgApacheLuceneSearchGeoBoundingBox *OrgApacheLuceneSearchGeoPointDistanceQuery_computeBBoxWithDouble_withDouble_withDouble_(jdouble centerLon, jdouble centerLat, jdouble radius);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchGeoPointDistanceQuery)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchGeoPointDistanceQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchGeoPointDistanceQuery")

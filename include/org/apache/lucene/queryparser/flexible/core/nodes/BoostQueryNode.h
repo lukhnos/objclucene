@@ -5,36 +5,57 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode_) && (OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode_
+#if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode))
+#define OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode_
 
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_RESTRICT 1
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl 1
+#define INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNodeImpl.h"
 
 @protocol JavaLangCharSequence;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;
 
+/*!
+ @brief A <code>BoostQueryNode</code> boosts the QueryNode tree which is under this node.
+ So, it must only and always have one child.
+ The boost value may vary from 0.0 to 1.0.
+ */
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl
 
 #pragma mark Public
 
+/*!
+ @brief Constructs a boost node
+ @param query
+ the query to be boosted
+ @param value
+ the boost value, it may vary from 0.0 to 1.0
+ */
 - (instancetype)initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)query
                                                                    withFloat:(jfloat)value;
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree;
 
+/*!
+ @brief Returns the single child which this node boosts.
+ @return the single child which this node boosts
+ */
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)getChild;
 
+/*!
+ @brief Returns the boost value.
+ It may vary from 0.0 to 1.0.
+ @return the boost value
+ */
 - (jfloat)getValue;
 
 - (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escapeSyntaxParser;
@@ -49,8 +70,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withFloat_(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> query, jfloat value) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode *create_OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withFloat_(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> query, jfloat value);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode")

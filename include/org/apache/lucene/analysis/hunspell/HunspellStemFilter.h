@@ -5,36 +5,66 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisHunspellHunspellStemFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisHunspellHunspellStemFilter_RESTRICT
-#define OrgApacheLuceneAnalysisHunspellHunspellStemFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisHunspellHunspellStemFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisHunspellHunspellStemFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisHunspellHunspellStemFilter 0
 #else
-#define OrgApacheLuceneAnalysisHunspellHunspellStemFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisHunspellHunspellStemFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisHunspellHunspellStemFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisHunspellHunspellStemFilter
 
-#if !defined (_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_) && (OrgApacheLuceneAnalysisHunspellHunspellStemFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisHunspellHunspellStemFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisHunspellHunspellStemFilter_
+#if !defined (OrgApacheLuceneAnalysisHunspellHunspellStemFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisHunspellHunspellStemFilter || defined(INCLUDE_OrgApacheLuceneAnalysisHunspellHunspellStemFilter))
+#define OrgApacheLuceneAnalysisHunspellHunspellStemFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisHunspellDictionary;
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol JavaUtilComparator;
 
+/*!
+ @brief TokenFilter that uses hunspell affix rules and words to stem tokens.
+ Since hunspell supports a word having multiple
+ stems, this filter can emit multiple tokens for each consumed token
+ <p>
+ Note: This filter is aware of the <code>KeywordAttribute</code>. To prevent
+ certain terms from being passed to the stemmer
+ <code>KeywordAttribute.isKeyword()</code> should be set to <code>true</code>
+ in a previous <code>TokenStream</code>.
+ Note: For including the original term as well as the stemmed version, see
+ <code>org.apache.lucene.analysis.miscellaneous.KeywordRepeatFilterFactory</code>
+ </p>
+ */
 @interface OrgApacheLuceneAnalysisHunspellHunspellStemFilter : OrgApacheLuceneAnalysisTokenFilter
+
++ (id<JavaUtilComparator>)lengthComparator;
 
 #pragma mark Public
 
+/*!
+ @brief Create a <code>HunspellStemFilter</code> outputting all possible stems.
+ - seealso: #HunspellStemFilter(TokenStream,Dictionary,boolean)
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
              withOrgApacheLuceneAnalysisHunspellDictionary:(OrgApacheLuceneAnalysisHunspellDictionary *)dictionary;
 
+/*!
+ @brief Create a <code>HunspellStemFilter</code> outputting all possible stems.
+ - seealso: #HunspellStemFilter(TokenStream,Dictionary,boolean,boolean)
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
              withOrgApacheLuceneAnalysisHunspellDictionary:(OrgApacheLuceneAnalysisHunspellDictionary *)dictionary
                                                withBoolean:(jboolean)dedup;
 
+/*!
+ @brief Creates a new HunspellStemFilter that will stem tokens from the given TokenStream using affix rules in the provided
+ Dictionary
+ @param input TokenStream whose tokens will be stemmed
+ @param dictionary HunspellDictionary containing the affix rules and words that will be used to stem the tokens
+ @param longestOnly true if only the longest term should be output.
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
              withOrgApacheLuceneAnalysisHunspellDictionary:(OrgApacheLuceneAnalysisHunspellDictionary *)dictionary
                                                withBoolean:(jboolean)dedup
@@ -48,23 +78,31 @@
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisHunspellHunspellStemFilter)
 
-FOUNDATION_EXPORT id<JavaUtilComparator> OrgApacheLuceneAnalysisHunspellHunspellStemFilter_lengthComparator_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHunspellHunspellStemFilter, lengthComparator_, id<JavaUtilComparator>)
+inline id<JavaUtilComparator> OrgApacheLuceneAnalysisHunspellHunspellStemFilter_get_lengthComparator();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT id<JavaUtilComparator> OrgApacheLuceneAnalysisHunspellHunspellStemFilter_lengthComparator;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHunspellHunspellStemFilter, lengthComparator, id<JavaUtilComparator>)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_(OrgApacheLuceneAnalysisHunspellHunspellStemFilter *self, OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisHunspellDictionary *dictionary);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisHunspellHunspellStemFilter *new_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisHunspellDictionary *dictionary) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisHunspellHunspellStemFilter *create_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisHunspellDictionary *dictionary);
+
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_withBoolean_(OrgApacheLuceneAnalysisHunspellHunspellStemFilter *self, OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisHunspellDictionary *dictionary, jboolean dedup);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisHunspellHunspellStemFilter *new_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_withBoolean_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisHunspellDictionary *dictionary, jboolean dedup) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisHunspellHunspellStemFilter *create_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_withBoolean_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisHunspellDictionary *dictionary, jboolean dedup);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_withBoolean_withBoolean_(OrgApacheLuceneAnalysisHunspellHunspellStemFilter *self, OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisHunspellDictionary *dictionary, jboolean dedup, jboolean longestOnly);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisHunspellHunspellStemFilter *new_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_withBoolean_withBoolean_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisHunspellDictionary *dictionary, jboolean dedup, jboolean longestOnly) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisHunspellHunspellStemFilter *create_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_withBoolean_withBoolean_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisHunspellDictionary *dictionary, jboolean dedup, jboolean longestOnly);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisHunspellHunspellStemFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisHunspellHunspellStemFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisHunspellHunspellStemFilter")

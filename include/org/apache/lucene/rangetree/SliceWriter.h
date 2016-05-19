@@ -5,23 +5,26 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneRangetreeSliceWriter_INCLUDE_ALL")
-#if OrgApacheLuceneRangetreeSliceWriter_RESTRICT
-#define OrgApacheLuceneRangetreeSliceWriter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneRangetreeSliceWriter")
+#ifdef RESTRICT_OrgApacheLuceneRangetreeSliceWriter
+#define INCLUDE_ALL_OrgApacheLuceneRangetreeSliceWriter 0
 #else
-#define OrgApacheLuceneRangetreeSliceWriter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneRangetreeSliceWriter 1
 #endif
-#undef OrgApacheLuceneRangetreeSliceWriter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneRangetreeSliceWriter
 
-#if !defined (_OrgApacheLuceneRangetreeSliceWriter_) && (OrgApacheLuceneRangetreeSliceWriter_INCLUDE_ALL || OrgApacheLuceneRangetreeSliceWriter_INCLUDE)
-#define _OrgApacheLuceneRangetreeSliceWriter_
+#if !defined (OrgApacheLuceneRangetreeSliceWriter_) && (INCLUDE_ALL_OrgApacheLuceneRangetreeSliceWriter || defined(INCLUDE_OrgApacheLuceneRangetreeSliceWriter))
+#define OrgApacheLuceneRangetreeSliceWriter_
 
-#define JavaIoCloseable_RESTRICT 1
-#define JavaIoCloseable_INCLUDE 1
+#define RESTRICT_JavaIoCloseable 1
+#define INCLUDE_JavaIoCloseable 1
 #include "java/io/Closeable.h"
 
 @protocol OrgApacheLuceneRangetreeSliceReader;
 
+/*!
+ @brief Abstracts away whether OfflineSorter or simple arrays in heap are used.
+ */
 @protocol OrgApacheLuceneRangetreeSliceWriter < JavaIoCloseable, NSObject, JavaObject >
 
 - (void)appendWithLong:(jlong)value
@@ -40,4 +43,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeSliceWriter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneRangetreeSliceWriter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneRangetreeSliceWriter")

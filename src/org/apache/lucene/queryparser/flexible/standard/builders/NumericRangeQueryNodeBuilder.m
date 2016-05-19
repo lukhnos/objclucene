@@ -33,35 +33,35 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneSearchNumericRangeQuery *)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode {
-  OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode *numericRangeNode = (OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode *) check_class_cast(queryNode, [OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode class]);
+  OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode *numericRangeNode = (OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode *) cast_chk(queryNode, [OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode class]);
   OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *lowerNumericNode = [((OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode *) nil_chk(numericRangeNode)) getLowerBound];
   OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *upperNumericNode = [numericRangeNode getUpperBound];
   NSNumber *lowerNumber = [((OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *) nil_chk(lowerNumericNode)) getValue];
   NSNumber *upperNumber = [((OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *) nil_chk(upperNumericNode)) getValue];
   OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *numericConfig = [numericRangeNode getNumericConfig];
-  OrgApacheLuceneDocumentFieldType_NumericTypeEnum *numberType = [((OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *) nil_chk(numericConfig)) getType];
+  OrgApacheLuceneDocumentFieldType_NumericType *numberType = [((OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *) nil_chk(numericConfig)) getType];
   NSString *field = OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_toStringWithId_([numericRangeNode getField]);
   jboolean minInclusive = [numericRangeNode isLowerInclusive];
   jboolean maxInclusive = [numericRangeNode isUpperInclusive];
   jint precisionStep = [numericConfig getPrecisionStep];
   switch ([numberType ordinal]) {
-    case OrgApacheLuceneDocumentFieldType_NumericType_LONG:
-    return OrgApacheLuceneSearchNumericRangeQuery_newLongRangeWithNSString_withInt_withJavaLangLong_withJavaLangLong_withBoolean_withBoolean_(field, precisionStep, (JavaLangLong *) check_class_cast(lowerNumber, [JavaLangLong class]), (JavaLangLong *) check_class_cast(upperNumber, [JavaLangLong class]), minInclusive, maxInclusive);
-    case OrgApacheLuceneDocumentFieldType_NumericType_INT:
-    return OrgApacheLuceneSearchNumericRangeQuery_newIntRangeWithNSString_withInt_withJavaLangInteger_withJavaLangInteger_withBoolean_withBoolean_(field, precisionStep, (JavaLangInteger *) check_class_cast(lowerNumber, [JavaLangInteger class]), (JavaLangInteger *) check_class_cast(upperNumber, [JavaLangInteger class]), minInclusive, maxInclusive);
-    case OrgApacheLuceneDocumentFieldType_NumericType_FLOAT:
-    return OrgApacheLuceneSearchNumericRangeQuery_newFloatRangeWithNSString_withInt_withJavaLangFloat_withJavaLangFloat_withBoolean_withBoolean_(field, precisionStep, (JavaLangFloat *) check_class_cast(lowerNumber, [JavaLangFloat class]), (JavaLangFloat *) check_class_cast(upperNumber, [JavaLangFloat class]), minInclusive, maxInclusive);
-    case OrgApacheLuceneDocumentFieldType_NumericType_DOUBLE:
-    return OrgApacheLuceneSearchNumericRangeQuery_newDoubleRangeWithNSString_withInt_withJavaLangDouble_withJavaLangDouble_withBoolean_withBoolean_(field, precisionStep, (JavaLangDouble *) check_class_cast(lowerNumber, [JavaLangDouble class]), (JavaLangDouble *) check_class_cast(upperNumber, [JavaLangDouble class]), minInclusive, maxInclusive);
+    case OrgApacheLuceneDocumentFieldType_NumericType_Enum_LONG:
+    return OrgApacheLuceneSearchNumericRangeQuery_newLongRangeWithNSString_withInt_withJavaLangLong_withJavaLangLong_withBoolean_withBoolean_(field, precisionStep, (JavaLangLong *) cast_chk(lowerNumber, [JavaLangLong class]), (JavaLangLong *) cast_chk(upperNumber, [JavaLangLong class]), minInclusive, maxInclusive);
+    case OrgApacheLuceneDocumentFieldType_NumericType_Enum_INT:
+    return OrgApacheLuceneSearchNumericRangeQuery_newIntRangeWithNSString_withInt_withJavaLangInteger_withJavaLangInteger_withBoolean_withBoolean_(field, precisionStep, (JavaLangInteger *) cast_chk(lowerNumber, [JavaLangInteger class]), (JavaLangInteger *) cast_chk(upperNumber, [JavaLangInteger class]), minInclusive, maxInclusive);
+    case OrgApacheLuceneDocumentFieldType_NumericType_Enum_FLOAT:
+    return OrgApacheLuceneSearchNumericRangeQuery_newFloatRangeWithNSString_withInt_withJavaLangFloat_withJavaLangFloat_withBoolean_withBoolean_(field, precisionStep, (JavaLangFloat *) cast_chk(lowerNumber, [JavaLangFloat class]), (JavaLangFloat *) cast_chk(upperNumber, [JavaLangFloat class]), minInclusive, maxInclusive);
+    case OrgApacheLuceneDocumentFieldType_NumericType_Enum_DOUBLE:
+    return OrgApacheLuceneSearchNumericRangeQuery_newDoubleRangeWithNSString_withInt_withJavaLangDouble_withJavaLangDouble_withBoolean_withBoolean_(field, precisionStep, (JavaLangDouble *) cast_chk(lowerNumber, [JavaLangDouble class]), (JavaLangDouble *) cast_chk(upperNumber, [JavaLangDouble class]), minInclusive, maxInclusive);
     default:
-    @throw [new_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_([new_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, UNSUPPORTED_NUMERIC_DATA_TYPE_), [IOSObjectArray arrayWithObjects:(id[]){ numberType } count:1 type:NSObject_class_()]) autorelease]) autorelease];
+    @throw create_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_(create_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, UNSUPPORTED_NUMERIC_DATA_TYPE), [IOSObjectArray arrayWithObjects:(id[]){ numberType } count:1 type:NSObject_class_()]));
   }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "NumericRangeQueryNodeBuilder", NULL, 0x1, NULL, NULL },
-    { "buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "build", "Lorg.apache.lucene.search.NumericRangeQuery;", 0x1, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
+    { "buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "build", "Lorg.apache.lucene.search.NumericRangeQuery;", 0x1, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", "(Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;)Lorg/apache/lucene/search/NumericRangeQuery<+Ljava/lang/Number;>;" },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardBuildersNumericRangeQueryNodeBuilder = { 2, "NumericRangeQueryNodeBuilder", "org.apache.lucene.queryparser.flexible.standard.builders", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleStandardBuildersNumericRangeQueryNodeBuilder;
@@ -74,9 +74,11 @@ void OrgApacheLuceneQueryparserFlexibleStandardBuildersNumericRangeQueryNodeBuil
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardBuildersNumericRangeQueryNodeBuilder *new_OrgApacheLuceneQueryparserFlexibleStandardBuildersNumericRangeQueryNodeBuilder_init() {
-  OrgApacheLuceneQueryparserFlexibleStandardBuildersNumericRangeQueryNodeBuilder *self = [OrgApacheLuceneQueryparserFlexibleStandardBuildersNumericRangeQueryNodeBuilder alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardBuildersNumericRangeQueryNodeBuilder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardBuildersNumericRangeQueryNodeBuilder, init)
+}
+
+OrgApacheLuceneQueryparserFlexibleStandardBuildersNumericRangeQueryNodeBuilder *create_OrgApacheLuceneQueryparserFlexibleStandardBuildersNumericRangeQueryNodeBuilder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardBuildersNumericRangeQueryNodeBuilder, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleStandardBuildersNumericRangeQueryNodeBuilder)

@@ -35,8 +35,8 @@
 }
 
 + (id<JavaNioChannelsSeekableByteChannel>)newByteChannelWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
-                                      withOrgLukhnosPortmobileFileStandardOpenOptionEnum:(OrgLukhnosPortmobileFileStandardOpenOptionEnum *)mustBeReadOnly {
-  return OrgLukhnosPortmobileFileFiles_newByteChannelWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardOpenOptionEnum_(path, mustBeReadOnly);
+                                          withOrgLukhnosPortmobileFileStandardOpenOption:(OrgLukhnosPortmobileFileStandardOpenOption *)mustBeReadOnly {
+  return OrgLukhnosPortmobileFileFiles_newByteChannelWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardOpenOption_(path, mustBeReadOnly);
 }
 
 + (OrgLukhnosPortmobileFilePath *)createFileWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path {
@@ -135,7 +135,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "createDirectoriesWithOrgLukhnosPortmobileFilePath:", "createDirectories", "Lorg.lukhnos.portmobile.file.Path;", 0x9, "Ljava.io.IOException;", NULL },
-    { "newByteChannelWithOrgLukhnosPortmobileFilePath:withOrgLukhnosPortmobileFileStandardOpenOptionEnum:", "newByteChannel", "Ljava.nio.channels.SeekableByteChannel;", 0x9, "Ljava.io.IOException;", NULL },
+    { "newByteChannelWithOrgLukhnosPortmobileFilePath:withOrgLukhnosPortmobileFileStandardOpenOption:", "newByteChannel", "Ljava.nio.channels.SeekableByteChannel;", 0x9, "Ljava.io.IOException;", NULL },
     { "createFileWithOrgLukhnosPortmobileFilePath:", "createFile", "Lorg.lukhnos.portmobile.file.Path;", 0x9, "Ljava.io.IOException;", NULL },
     { "sizeWithOrgLukhnosPortmobileFilePath:", "size", "J", 0x9, "Ljava.io.IOException;", NULL },
     { "existsWithOrgLukhnosPortmobileFilePath:", "exists", "Z", 0x9, NULL, NULL },
@@ -145,17 +145,17 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "newOutputStreamWithOrgLukhnosPortmobileFilePath:", "newOutputStream", "Ljava.io.FileOutputStream;", 0x9, "Ljava.io.IOException;", NULL },
     { "newInputStreamWithOrgLukhnosPortmobileFilePath:", "newInputStream", "Ljava.io.FileInputStream;", 0x9, "Ljava.io.IOException;", NULL },
     { "newBufferedReaderWithOrgLukhnosPortmobileFilePath:withJavaNioCharsetCharset:", "newBufferedReader", "Ljava.io.BufferedReader;", 0x9, "Ljava.io.IOException;", NULL },
-    { "newDirectoryStreamWithOrgLukhnosPortmobileFilePath:", "newDirectoryStream", "Lorg.lukhnos.portmobile.file.DirectoryStream;", 0x9, "Ljava.io.IOException;", NULL },
+    { "newDirectoryStreamWithOrgLukhnosPortmobileFilePath:", "newDirectoryStream", "Lorg.lukhnos.portmobile.file.DirectoryStream;", 0x9, "Ljava.io.IOException;", "(Lorg/lukhnos/portmobile/file/Path;)Lorg/lukhnos/portmobile/file/DirectoryStream<Lorg/lukhnos/portmobile/file/Path;>;" },
     { "deleteIfExistsWithOrgLukhnosPortmobileFilePath:", "deleteIfExists", "Z", 0x9, "Ljava.io.IOException;", NULL },
     { "createTempFileWithOrgLukhnosPortmobileFilePath:withNSString:withNSString:", "createTempFile", "Lorg.lukhnos.portmobile.file.Path;", 0x9, "Ljava.io.IOException;", NULL },
     { "copy__WithOrgLukhnosPortmobileFilePath:withOrgLukhnosPortmobileFilePath:withOrgLukhnosPortmobileFileStandardCopyOptionArray:", "copy", "Lorg.lukhnos.portmobile.file.Path;", 0x89, "Ljava.io.IOException;", NULL },
     { "delete__WithOrgLukhnosPortmobileFilePath:", "delete", "V", 0x9, "Ljava.io.IOException;", NULL },
     { "moveWithOrgLukhnosPortmobileFilePath:withOrgLukhnosPortmobileFilePath:withOrgLukhnosPortmobileFileStandardCopyOptionArray:", "move", "Lorg.lukhnos.portmobile.file.Path;", 0x89, "Ljava.io.IOException;", NULL },
-    { "walkFileTreeWithOrgLukhnosPortmobileFilePath:withOrgLukhnosPortmobileFileFileVisitor:", "walkFileTree", "Lorg.lukhnos.portmobile.file.Path;", 0x9, "Ljava.io.IOException;", NULL },
+    { "walkFileTreeWithOrgLukhnosPortmobileFilePath:withOrgLukhnosPortmobileFileFileVisitor:", "walkFileTree", "Lorg.lukhnos.portmobile.file.Path;", 0x9, "Ljava.io.IOException;", "(Lorg/lukhnos/portmobile/file/Path;Lorg/lukhnos/portmobile/file/FileVisitor<-Lorg/lukhnos/portmobile/file/Path;>;)Lorg/lukhnos/portmobile/file/Path;" },
     { "createTempDirectoryWithNSString:", "createTempDirectory", "Lorg.lukhnos.portmobile.file.Path;", 0x9, "Ljava.io.IOException;", NULL },
     { "createTempDirectoryWithOrgLukhnosPortmobileFilePath:withNSString:", "createTempDirectory", "Lorg.lukhnos.portmobile.file.Path;", 0x9, "Ljava.io.IOException;", NULL },
-    { "readAttributesWithOrgLukhnosPortmobileFilePath:withIOSClass:", "readAttributes", "Lorg.lukhnos.portmobile.file.attribute.BasicFileAttributes;", 0x9, "Lorg.lukhnos.portmobile.file.NoSuchFileException;", NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "readAttributesWithOrgLukhnosPortmobileFilePath:withIOSClass:", "readAttributes", "Lorg.lukhnos.portmobile.file.attribute.BasicFileAttributes;", 0x9, "Lorg.lukhnos.portmobile.file.NoSuchFileException;", "(Lorg/lukhnos/portmobile/file/Path;Ljava/lang/Class<*>;)Lorg/lukhnos/portmobile/file/attribute/BasicFileAttributes;" },
+    { "init", "Files", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgLukhnosPortmobileFileFiles = { 2, "Files", "org.lukhnos.portmobile.file", NULL, 0x1, 22, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgLukhnosPortmobileFileFiles;
@@ -170,25 +170,25 @@ OrgLukhnosPortmobileFilePath *OrgLukhnosPortmobileFileFiles_createDirectoriesWit
       return dir;
     }
     else {
-      @throw [new_JavaIoIOException_initWithNSString_(JreStrcat("$@", @"Path is not a directory: ", dir)) autorelease];
+      @throw create_JavaIoIOException_initWithNSString_(JreStrcat("$@", @"Path is not a directory: ", dir));
     }
   }
   OrgLukhnosPortmobileFileFiles_createDirectoriesWithOrgLukhnosPortmobileFilePath_([((OrgLukhnosPortmobileFilePath *) nil_chk(dir)) getParent]);
   if ([((JavaIoFile *) nil_chk([dir toFile])) mkdir]) {
     return dir;
   }
-  @throw [new_JavaIoIOException_initWithNSString_(JreStrcat("$@", @"Failed creating directory: ", dir)) autorelease];
+  @throw create_JavaIoIOException_initWithNSString_(JreStrcat("$@", @"Failed creating directory: ", dir));
 }
 
-id<JavaNioChannelsSeekableByteChannel> OrgLukhnosPortmobileFileFiles_newByteChannelWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardOpenOptionEnum_(OrgLukhnosPortmobileFilePath *path, OrgLukhnosPortmobileFileStandardOpenOptionEnum *mustBeReadOnly) {
+id<JavaNioChannelsSeekableByteChannel> OrgLukhnosPortmobileFileFiles_newByteChannelWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardOpenOption_(OrgLukhnosPortmobileFilePath *path, OrgLukhnosPortmobileFileStandardOpenOption *mustBeReadOnly) {
   OrgLukhnosPortmobileFileFiles_initialize();
-  return OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_openWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardOpenOptionEnumArray_(path, [IOSObjectArray arrayWithObjects:(id[]){ mustBeReadOnly } count:1 type:OrgLukhnosPortmobileFileStandardOpenOptionEnum_class_()]);
+  return OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_openWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardOpenOptionArray_(path, [IOSObjectArray arrayWithObjects:(id[]){ mustBeReadOnly } count:1 type:OrgLukhnosPortmobileFileStandardOpenOption_class_()]);
 }
 
 OrgLukhnosPortmobileFilePath *OrgLukhnosPortmobileFileFiles_createFileWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path) {
   OrgLukhnosPortmobileFileFiles_initialize();
   if (![((JavaIoFile *) nil_chk([((OrgLukhnosPortmobileFilePath *) nil_chk(path)) toFile])) createNewFile]) {
-    @throw [new_JavaIoIOException_initWithNSString_(JreStrcat("$@", @"File cannot be created: ", path)) autorelease];
+    @throw create_JavaIoIOException_initWithNSString_(JreStrcat("$@", @"File cannot be created: ", path));
   }
   return path;
 }
@@ -220,25 +220,25 @@ jboolean OrgLukhnosPortmobileFileFiles_isWritableWithOrgLukhnosPortmobileFilePat
 
 JavaIoFileOutputStream *OrgLukhnosPortmobileFileFiles_newOutputStreamWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path) {
   OrgLukhnosPortmobileFileFiles_initialize();
-  return [new_JavaIoFileOutputStream_initWithJavaIoFile_([((OrgLukhnosPortmobileFilePath *) nil_chk(path)) toFile]) autorelease];
+  return create_JavaIoFileOutputStream_initWithJavaIoFile_([((OrgLukhnosPortmobileFilePath *) nil_chk(path)) toFile]);
 }
 
 JavaIoFileInputStream *OrgLukhnosPortmobileFileFiles_newInputStreamWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path) {
   OrgLukhnosPortmobileFileFiles_initialize();
-  return [new_JavaIoFileInputStream_initWithJavaIoFile_([((OrgLukhnosPortmobileFilePath *) nil_chk(path)) toFile]) autorelease];
+  return create_JavaIoFileInputStream_initWithJavaIoFile_([((OrgLukhnosPortmobileFilePath *) nil_chk(path)) toFile]);
 }
 
 JavaIoBufferedReader *OrgLukhnosPortmobileFileFiles_newBufferedReaderWithOrgLukhnosPortmobileFilePath_withJavaNioCharsetCharset_(OrgLukhnosPortmobileFilePath *path, JavaNioCharsetCharset *charset) {
   OrgLukhnosPortmobileFileFiles_initialize();
-  return [new_JavaIoBufferedReader_initWithJavaIoReader_([new_JavaIoInputStreamReader_initWithJavaIoInputStream_withJavaNioCharsetCharset_([new_JavaIoFileInputStream_initWithJavaIoFile_([((OrgLukhnosPortmobileFilePath *) nil_chk(path)) toFile]) autorelease], charset) autorelease]) autorelease];
+  return create_JavaIoBufferedReader_initWithJavaIoReader_(create_JavaIoInputStreamReader_initWithJavaIoInputStream_withJavaNioCharsetCharset_(create_JavaIoFileInputStream_initWithJavaIoFile_([((OrgLukhnosPortmobileFilePath *) nil_chk(path)) toFile]), charset));
 }
 
 id<OrgLukhnosPortmobileFileDirectoryStream> OrgLukhnosPortmobileFileFiles_newDirectoryStreamWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *dir) {
   OrgLukhnosPortmobileFileFiles_initialize();
   if (!OrgLukhnosPortmobileFileFiles_isDirectoryWithOrgLukhnosPortmobileFilePath_(dir)) {
-    @throw [new_JavaIoIOException_initWithNSString_(JreStrcat("$@", @"Not a directory: ", dir)) autorelease];
+    @throw create_JavaIoIOException_initWithNSString_(JreStrcat("$@", @"Not a directory: ", dir));
   }
-  id<JavaUtilList> paths = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> paths = create_JavaUtilArrayList_init();
   IOSObjectArray *files = [((JavaIoFile *) nil_chk([((OrgLukhnosPortmobileFilePath *) nil_chk(dir)) toFile])) listFiles];
   {
     IOSObjectArray *a__ = files;
@@ -246,17 +246,17 @@ id<OrgLukhnosPortmobileFileDirectoryStream> OrgLukhnosPortmobileFileFiles_newDir
     JavaIoFile * const *e__ = b__ + a__->size_;
     while (b__ < e__) {
       JavaIoFile *file = *b__++;
-      [paths addWithId:[new_OrgLukhnosPortmobileFilePath_initWithJavaIoFile_(file) autorelease]];
+      [paths addWithId:create_OrgLukhnosPortmobileFilePath_initWithJavaIoFile_(file)];
     }
   }
-  return [new_OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream_initWithJavaUtilList_(paths) autorelease];
+  return create_OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream_initWithJavaUtilList_(paths);
 }
 
 jboolean OrgLukhnosPortmobileFileFiles_deleteIfExistsWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path) {
   OrgLukhnosPortmobileFileFiles_initialize();
   if (OrgLukhnosPortmobileFileFiles_existsWithOrgLukhnosPortmobileFilePath_(path)) {
     if (![((JavaIoFile *) nil_chk([((OrgLukhnosPortmobileFilePath *) nil_chk(path)) toFile])) delete__]) {
-      @throw [new_JavaIoIOException_initWithNSString_(JreStrcat("$@", @"Could not delete path: ", path)) autorelease];
+      @throw create_JavaIoIOException_initWithNSString_(JreStrcat("$@", @"Could not delete path: ", path));
     }
     return true;
   }
@@ -267,13 +267,13 @@ jboolean OrgLukhnosPortmobileFileFiles_deleteIfExistsWithOrgLukhnosPortmobileFil
 
 OrgLukhnosPortmobileFilePath *OrgLukhnosPortmobileFileFiles_createTempFileWithOrgLukhnosPortmobileFilePath_withNSString_withNSString_(OrgLukhnosPortmobileFilePath *dir, NSString *prefix, NSString *suffix) {
   OrgLukhnosPortmobileFileFiles_initialize();
-  return [new_OrgLukhnosPortmobileFilePath_initWithJavaIoFile_(JavaIoFile_createTempFileWithNSString_withNSString_withJavaIoFile_(prefix, suffix, [((OrgLukhnosPortmobileFilePath *) nil_chk(dir)) toFile])) autorelease];
+  return create_OrgLukhnosPortmobileFilePath_initWithJavaIoFile_(JavaIoFile_createTempFileWithNSString_withNSString_withJavaIoFile_(prefix, suffix, [((OrgLukhnosPortmobileFilePath *) nil_chk(dir)) toFile]));
 }
 
 OrgLukhnosPortmobileFilePath *OrgLukhnosPortmobileFileFiles_copy__WithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardCopyOptionArray_(OrgLukhnosPortmobileFilePath *source, OrgLukhnosPortmobileFilePath *target, IOSObjectArray *ignored) {
   OrgLukhnosPortmobileFileFiles_initialize();
   if (OrgLukhnosPortmobileFileFiles_isDirectoryWithOrgLukhnosPortmobileFilePath_(source)) {
-    @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(@"Directory copy not supported in this implementation") autorelease];
+    @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"Directory copy not supported in this implementation");
   }
   JavaNioChannelsFileChannel *srcChannel = nil;
   JavaNioChannelsFileChannel *dstChannnel = nil;
@@ -303,7 +303,7 @@ OrgLukhnosPortmobileFilePath *OrgLukhnosPortmobileFileFiles_moveWithOrgLukhnosPo
   if ([((JavaIoFile *) nil_chk([((OrgLukhnosPortmobileFilePath *) nil_chk(source)) toFile])) renameToWithJavaIoFile:[((OrgLukhnosPortmobileFilePath *) nil_chk(target)) toFile]]) {
     return target;
   }
-  @throw [new_JavaIoIOException_initWithNSString_(JreStrcat("$@$@$", @"Move from ", source, @" to ", target, @" failed")) autorelease];
+  @throw create_JavaIoIOException_initWithNSString_(JreStrcat("$@$@$", @"Move from ", source, @" to ", target, @" failed"));
 }
 
 OrgLukhnosPortmobileFilePath *OrgLukhnosPortmobileFileFiles_walkFileTreeWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileFileVisitor_(OrgLukhnosPortmobileFilePath *start, id<OrgLukhnosPortmobileFileFileVisitor> visitor) {
@@ -316,7 +316,7 @@ OrgLukhnosPortmobileFilePath *OrgLukhnosPortmobileFileFiles_walkFileTreeWithOrgL
       JavaIoFile * const *e__ = b__ + a__->size_;
       while (b__ < e__) {
         JavaIoFile *child = *b__++;
-        OrgLukhnosPortmobileFileFiles_walkFileTreeWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileFileVisitor_([new_OrgLukhnosPortmobileFilePath_initWithJavaIoFile_(child) autorelease], visitor);
+        OrgLukhnosPortmobileFileFiles_walkFileTreeWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileFileVisitor_(create_OrgLukhnosPortmobileFilePath_initWithJavaIoFile_(child), visitor);
       }
     }
     [visitor postVisitDirectoryWithId:start withJavaIoIOException:nil];
@@ -332,7 +332,7 @@ OrgLukhnosPortmobileFilePath *OrgLukhnosPortmobileFileFiles_createTempDirectoryW
   JavaIoFile *tmpFile = JavaIoFile_createTempFileWithNSString_withNSString_(prefix, @"");
   [((JavaIoFile *) nil_chk(tmpFile)) delete__];
   [tmpFile mkdir];
-  return [new_OrgLukhnosPortmobileFilePath_initWithJavaIoFile_(tmpFile) autorelease];
+  return create_OrgLukhnosPortmobileFilePath_initWithJavaIoFile_(tmpFile);
 }
 
 OrgLukhnosPortmobileFilePath *OrgLukhnosPortmobileFileFiles_createTempDirectoryWithOrgLukhnosPortmobileFilePath_withNSString_(OrgLukhnosPortmobileFilePath *path, NSString *prefix) {
@@ -340,15 +340,15 @@ OrgLukhnosPortmobileFilePath *OrgLukhnosPortmobileFileFiles_createTempDirectoryW
   JavaIoFile *tmpFile = JavaIoFile_createTempFileWithNSString_withNSString_withJavaIoFile_(prefix, @"", [((OrgLukhnosPortmobileFilePath *) nil_chk(path)) toFile]);
   [((JavaIoFile *) nil_chk(tmpFile)) delete__];
   [tmpFile mkdir];
-  return [new_OrgLukhnosPortmobileFilePath_initWithJavaIoFile_(tmpFile) autorelease];
+  return create_OrgLukhnosPortmobileFilePath_initWithJavaIoFile_(tmpFile);
 }
 
 OrgLukhnosPortmobileFileAttributeBasicFileAttributes *OrgLukhnosPortmobileFileFiles_readAttributesWithOrgLukhnosPortmobileFilePath_withIOSClass_(OrgLukhnosPortmobileFilePath *path, IOSClass *clz) {
   OrgLukhnosPortmobileFileFiles_initialize();
   if (OrgLukhnosPortmobileFileFiles_existsWithOrgLukhnosPortmobileFilePath_(path)) {
-    return [new_OrgLukhnosPortmobileFileAttributeBasicFileAttributes_initWithJavaIoFile_([((OrgLukhnosPortmobileFilePath *) nil_chk(path)) toFile]) autorelease];
+    return create_OrgLukhnosPortmobileFileAttributeBasicFileAttributes_initWithJavaIoFile_([((OrgLukhnosPortmobileFilePath *) nil_chk(path)) toFile]);
   }
-  @throw [new_OrgLukhnosPortmobileFileNoSuchFileException_init() autorelease];
+  @throw create_OrgLukhnosPortmobileFileNoSuchFileException_init();
 }
 
 void OrgLukhnosPortmobileFileFiles_init(OrgLukhnosPortmobileFileFiles *self) {
@@ -356,9 +356,11 @@ void OrgLukhnosPortmobileFileFiles_init(OrgLukhnosPortmobileFileFiles *self) {
 }
 
 OrgLukhnosPortmobileFileFiles *new_OrgLukhnosPortmobileFileFiles_init() {
-  OrgLukhnosPortmobileFileFiles *self = [OrgLukhnosPortmobileFileFiles alloc];
-  OrgLukhnosPortmobileFileFiles_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgLukhnosPortmobileFileFiles, init)
+}
+
+OrgLukhnosPortmobileFileFiles *create_OrgLukhnosPortmobileFileFiles_init() {
+  J2OBJC_CREATE_IMPL(OrgLukhnosPortmobileFileFiles, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileFileFiles)

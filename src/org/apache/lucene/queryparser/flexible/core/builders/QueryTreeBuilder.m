@@ -48,9 +48,13 @@ __attribute__((unused)) static id<OrgApacheLuceneQueryparserFlexibleCoreBuilders
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder)
 
-NSString *OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_QUERY_TREE_BUILDER_TAGID_;
+NSString *OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_QUERY_TREE_BUILDER_TAGID;
 
 @implementation OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder
+
++ (NSString *)QUERY_TREE_BUILDER_TAGID {
+  return OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_QUERY_TREE_BUILDER_TAGID;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -64,7 +68,7 @@ withOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder:(id<OrgApacheLuce
   if (self->fieldNameBuilders_ == nil) {
     JreStrongAssignAndConsume(&self->fieldNameBuilders_, new_JavaUtilHashMap_init());
   }
-  [((JavaUtilHashMap *) nil_chk(self->fieldNameBuilders_)) putWithId:[((id<JavaLangCharSequence>) nil_chk(fieldName)) description] withId:builder];
+  [self->fieldNameBuilders_ putWithId:[((id<JavaLangCharSequence>) nil_chk(fieldName)) description] withId:builder];
 }
 
 - (void)setBuilderWithIOSClass:(IOSClass *)queryNodeClass
@@ -72,7 +76,7 @@ withOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder:(id<OrgApacheLuce
   if (self->queryNodeBuilders_ == nil) {
     JreStrongAssignAndConsume(&self->queryNodeBuilders_, new_JavaUtilHashMap_init());
   }
-  [((JavaUtilHashMap *) nil_chk(self->queryNodeBuilders_)) putWithId:queryNodeClass withId:builder];
+  [self->queryNodeBuilders_ putWithId:queryNodeClass withId:builder];
 }
 
 - (void)processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node {
@@ -94,7 +98,7 @@ withOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder:(id<OrgApacheLuce
 
 - (id)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode {
   OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_(self, queryNode);
-  return [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(queryNode)) getTagWithNSString:OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_QUERY_TREE_BUILDER_TAGID_];
+  return [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(queryNode)) getTagWithNSString:OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_QUERY_TREE_BUILDER_TAGID];
 }
 
 - (void)dealloc {
@@ -105,7 +109,7 @@ withOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder:(id<OrgApacheLuce
 
 + (void)initialize {
   if (self == [OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder class]) {
-    JreStrongAssign(&OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_QUERY_TREE_BUILDER_TAGID_, [OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_class_() getName]);
+    JreStrongAssign(&OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_QUERY_TREE_BUILDER_TAGID, [OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_class_() getName]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder)
   }
 }
@@ -114,15 +118,15 @@ withOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder:(id<OrgApacheLuce
   static const J2ObjcMethodInfo methods[] = {
     { "init", "QueryTreeBuilder", NULL, 0x1, NULL, NULL },
     { "setBuilderWithJavaLangCharSequence:withOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder:", "setBuilder", "V", 0x1, NULL, NULL },
-    { "setBuilderWithIOSClass:withOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder:", "setBuilder", "V", 0x1, NULL, NULL },
+    { "setBuilderWithIOSClass:withOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder:", "setBuilder", "V", 0x1, NULL, "(Ljava/lang/Class<+Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;Lorg/apache/lucene/queryparser/flexible/core/builders/QueryBuilder;)V" },
     { "processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "process", "V", 0x2, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
     { "getBuilderWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "getBuilder", "Lorg.apache.lucene.queryparser.flexible.core.builders.QueryBuilder;", 0x2, NULL, NULL },
     { "processNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:withOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder:", "processNode", "V", 0x2, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "getQueryBuilderWithIOSClass:", "getQueryBuilder", "Lorg.apache.lucene.queryparser.flexible.core.builders.QueryBuilder;", 0x2, NULL, NULL },
+    { "getQueryBuilderWithIOSClass:", "getQueryBuilder", "Lorg.apache.lucene.queryparser.flexible.core.builders.QueryBuilder;", 0x2, NULL, "(Ljava/lang/Class<*>;)Lorg/apache/lucene/queryparser/flexible/core/builders/QueryBuilder;" },
     { "buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "build", "Ljava.lang.Object;", 0x1, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "QUERY_TREE_BUILDER_TAGID_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_QUERY_TREE_BUILDER_TAGID_, NULL, .constantValue.asLong = 0 },
+    { "QUERY_TREE_BUILDER_TAGID", "QUERY_TREE_BUILDER_TAGID", 0x19, "Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_QUERY_TREE_BUILDER_TAGID, NULL, .constantValue.asLong = 0 },
     { "queryNodeBuilders_", NULL, 0x2, "Ljava.util.HashMap;", NULL, "Ljava/util/HashMap<Ljava/lang/Class<+Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;Lorg/apache/lucene/queryparser/flexible/core/builders/QueryBuilder;>;", .constantValue.asLong = 0 },
     { "fieldNameBuilders_", NULL, 0x2, "Ljava.util.HashMap;", NULL, "Ljava/util/HashMap<Ljava/lang/String;Lorg/apache/lucene/queryparser/flexible/core/builders/QueryBuilder;>;", .constantValue.asLong = 0 },
   };
@@ -137,9 +141,11 @@ void OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_init(OrgApac
 }
 
 OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder *new_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_init() {
-  OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder *self = [OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder alloc];
-  OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder, init)
+}
+
+OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder *create_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder, init)
 }
 
 void OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_(OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder *self, id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> node) {
@@ -160,18 +166,18 @@ void OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_processWithO
 id<OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder> OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_getBuilderWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_(OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder *self, id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> node) {
   id<OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder> builder = nil;
   if (self->fieldNameBuilders_ != nil && [OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_() isInstance:node]) {
-    id<JavaLangCharSequence> field = [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) nil_chk(((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) check_protocol_cast(node, OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_())))) getField];
+    id<JavaLangCharSequence> field = [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) nil_chk(((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) cast_check(node, OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_())))) getField];
     if (field != nil) {
       field = [field description];
     }
-    builder = [self->fieldNameBuilders_ getWithId:field];
+    builder = [((JavaUtilHashMap *) nil_chk(self->fieldNameBuilders_)) getWithId:field];
   }
   if (builder == nil && self->queryNodeBuilders_ != nil) {
     IOSClass *clazz = [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(node)) getClass];
     do {
       builder = OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_getQueryBuilderWithIOSClass_(self, clazz);
       if (builder == nil) {
-        IOSObjectArray *classes = [clazz getInterfaces];
+        IOSObjectArray *classes = [((IOSClass *) nil_chk(clazz)) getInterfaces];
         {
           IOSObjectArray *a__ = classes;
           IOSClass * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
@@ -186,18 +192,18 @@ id<OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder> OrgApacheLuceneQu
         }
       }
     }
-    while (builder == nil && (clazz = [clazz getSuperclass]) != nil);
+    while (builder == nil && (clazz = [((IOSClass *) nil_chk(clazz)) getSuperclass]) != nil);
   }
   return builder;
 }
 
 void OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_processNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder_(OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder *self, id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> node, id<OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder> builder) {
   if (builder == nil) {
-    @throw [new_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_([new_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, LUCENE_QUERY_CONVERSION_ERROR_), [IOSObjectArray arrayWithObjects:(id[]){ [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(node)) toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:[new_OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_init() autorelease]], [[node getClass] getName] } count:2 type:NSObject_class_()]) autorelease]) autorelease];
+    @throw create_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_(create_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, LUCENE_QUERY_CONVERSION_ERROR), [IOSObjectArray arrayWithObjects:(id[]){ [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(node)) toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:create_OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_init()], [[node getClass] getName] } count:2 type:NSObject_class_()]));
   }
-  id obj = [((id<OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder>) nil_chk(builder)) buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:node];
+  id obj = [builder buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:node];
   if (obj != nil) {
-    [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(node)) setTagWithNSString:OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_QUERY_TREE_BUILDER_TAGID_ withId:obj];
+    [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(node)) setTagWithNSString:OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_QUERY_TREE_BUILDER_TAGID withId:obj];
   }
 }
 

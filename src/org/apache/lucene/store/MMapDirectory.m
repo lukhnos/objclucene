@@ -12,7 +12,6 @@
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
 #include "java/lang/OutOfMemoryError.h"
-#include "java/lang/Throwable.h"
 #include "java/lang/Void.h"
 #include "java/lang/reflect/Method.h"
 #include "java/nio/ByteBuffer.h"
@@ -48,8 +47,9 @@
 
 @end
 
-static id<OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner> OrgApacheLuceneStoreMMapDirectory_CLEANER_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneStoreMMapDirectory, CLEANER_, id<OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner>)
+inline id<OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner> OrgApacheLuceneStoreMMapDirectory_get_CLEANER();
+static id<OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner> OrgApacheLuceneStoreMMapDirectory_CLEANER;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneStoreMMapDirectory, CLEANER, id<OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner>)
 
 __attribute__((unused)) static IOSObjectArray *OrgApacheLuceneStoreMMapDirectory_mapWithNSString_withJavaNioChannelsFileChannel_withLong_withLong_(OrgApacheLuceneStoreMMapDirectory *self, NSString *resourceDescription, JavaNioChannelsFileChannel *fc, jlong offset, jlong length);
 
@@ -69,6 +69,8 @@ __attribute__((unused)) static void OrgApacheLuceneStoreMMapDirectory_$1_init(Or
 
 __attribute__((unused)) static OrgApacheLuceneStoreMMapDirectory_$1 *new_OrgApacheLuceneStoreMMapDirectory_$1_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneStoreMMapDirectory_$1 *create_OrgApacheLuceneStoreMMapDirectory_$1_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreMMapDirectory_$1)
 
 @interface OrgApacheLuceneStoreMMapDirectory_$2 : NSObject < OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner >
@@ -85,6 +87,8 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreMMapDirectory_$2)
 __attribute__((unused)) static void OrgApacheLuceneStoreMMapDirectory_$2_init(OrgApacheLuceneStoreMMapDirectory_$2 *self);
 
 __attribute__((unused)) static OrgApacheLuceneStoreMMapDirectory_$2 *new_OrgApacheLuceneStoreMMapDirectory_$2_init() NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneStoreMMapDirectory_$2 *create_OrgApacheLuceneStoreMMapDirectory_$2_init();
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreMMapDirectory_$2)
 
@@ -107,14 +111,24 @@ __attribute__((unused)) static void OrgApacheLuceneStoreMMapDirectory_$2_$1_init
 
 __attribute__((unused)) static OrgApacheLuceneStoreMMapDirectory_$2_$1 *new_OrgApacheLuceneStoreMMapDirectory_$2_$1_initWithJavaNioByteBuffer_(JavaNioByteBuffer *capture$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneStoreMMapDirectory_$2_$1 *create_OrgApacheLuceneStoreMMapDirectory_$2_$1_initWithJavaNioByteBuffer_(JavaNioByteBuffer *capture$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreMMapDirectory_$2_$1)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneStoreMMapDirectory)
 
-jint OrgApacheLuceneStoreMMapDirectory_DEFAULT_MAX_CHUNK_SIZE_;
-jboolean OrgApacheLuceneStoreMMapDirectory_UNMAP_SUPPORTED_;
+jint OrgApacheLuceneStoreMMapDirectory_DEFAULT_MAX_CHUNK_SIZE;
+jboolean OrgApacheLuceneStoreMMapDirectory_UNMAP_SUPPORTED;
 
 @implementation OrgApacheLuceneStoreMMapDirectory
+
++ (jint)DEFAULT_MAX_CHUNK_SIZE {
+  return OrgApacheLuceneStoreMMapDirectory_DEFAULT_MAX_CHUNK_SIZE;
+}
+
++ (jboolean)UNMAP_SUPPORTED {
+  return OrgApacheLuceneStoreMMapDirectory_UNMAP_SUPPORTED;
+}
 
 - (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
                  withOrgApacheLuceneStoreLockFactory:(OrgApacheLuceneStoreLockFactory *)lockFactory {
@@ -141,7 +155,7 @@ jboolean OrgApacheLuceneStoreMMapDirectory_UNMAP_SUPPORTED_;
 }
 
 - (void)setUseUnmapWithBoolean:(jboolean)useUnmapHack {
-  if (useUnmapHack && !OrgApacheLuceneStoreMMapDirectory_UNMAP_SUPPORTED_) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"Unmap hack not supported on this platform!") autorelease];
+  if (useUnmapHack && !OrgApacheLuceneStoreMMapDirectory_UNMAP_SUPPORTED) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"Unmap hack not supported on this platform!");
   self->useUnmapHack_ = useUnmapHack;
 }
 
@@ -166,14 +180,14 @@ jboolean OrgApacheLuceneStoreMMapDirectory_UNMAP_SUPPORTED_;
   [self ensureOpen];
   OrgLukhnosPortmobileFilePath *path = [((OrgLukhnosPortmobileFilePath *) nil_chk(directory_)) resolveWithNSString:name];
   {
-    JavaNioChannelsFileChannel *c = OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_openWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardOpenOptionEnumArray_(path, [IOSObjectArray arrayWithObjects:(id[]){ JreLoadStatic(OrgLukhnosPortmobileFileStandardOpenOptionEnum, READ) } count:1 type:OrgLukhnosPortmobileFileStandardOpenOptionEnum_class_()]);
-    JavaLangThrowable *__primaryException1 = nil;
+    JavaNioChannelsFileChannel *c = OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_openWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardOpenOptionArray_(path, [IOSObjectArray arrayWithObjects:(id[]){ JreLoadEnum(OrgLukhnosPortmobileFileStandardOpenOption, READ) } count:1 type:OrgLukhnosPortmobileFileStandardOpenOption_class_()]);
+    NSException *__primaryException1 = nil;
     @try {
       NSString *resourceDescription = JreStrcat("$$$", @"MMapIndexInput(path=\"", [((OrgLukhnosPortmobileFilePath *) nil_chk(path)) description], @"\")");
       jboolean useUnmap = [self getUseUnmap];
-      return OrgApacheLuceneStoreByteBufferIndexInput_newInstanceWithNSString_withJavaNioByteBufferArray_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withBoolean_(resourceDescription, OrgApacheLuceneStoreMMapDirectory_mapWithNSString_withJavaNioChannelsFileChannel_withLong_withLong_(self, resourceDescription, c, 0, [((JavaNioChannelsFileChannel *) nil_chk(c)) size]), [c size], chunkSizePower_, useUnmap ? OrgApacheLuceneStoreMMapDirectory_CLEANER_ : nil, useUnmap);
+      return OrgApacheLuceneStoreByteBufferIndexInput_newInstanceWithNSString_withJavaNioByteBufferArray_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withBoolean_(resourceDescription, OrgApacheLuceneStoreMMapDirectory_mapWithNSString_withJavaNioChannelsFileChannel_withLong_withLong_(self, resourceDescription, c, 0, [((JavaNioChannelsFileChannel *) nil_chk(c)) size]), [c size], chunkSizePower_, useUnmap ? OrgApacheLuceneStoreMMapDirectory_CLEANER : nil, useUnmap);
     }
-    @catch (JavaLangThrowable *e) {
+    @catch (NSException *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -182,8 +196,8 @@ jboolean OrgApacheLuceneStoreMMapDirectory_UNMAP_SUPPORTED_;
         if (__primaryException1 != nil) {
           @try {
             [c close];
-          } @catch (JavaLangThrowable *e) {
-            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          } @catch (NSException *e) {
+            [__primaryException1 addSuppressedWithNSException:e];
           }
         } else {
           [c close];
@@ -208,9 +222,9 @@ jboolean OrgApacheLuceneStoreMMapDirectory_UNMAP_SUPPORTED_;
 
 + (void)initialize {
   if (self == [OrgApacheLuceneStoreMMapDirectory class]) {
-    OrgApacheLuceneStoreMMapDirectory_DEFAULT_MAX_CHUNK_SIZE_ = JreLoadStatic(OrgApacheLuceneUtilConstants, JRE_IS_64BIT_) ? (JreLShift32(1, 30)) : (JreLShift32(1, 28));
-    OrgApacheLuceneStoreMMapDirectory_UNMAP_SUPPORTED_ = [((JavaLangBoolean *) nil_chk(JavaSecurityAccessController_doPrivilegedWithJavaSecurityPrivilegedAction_([new_OrgApacheLuceneStoreMMapDirectory_$1_init() autorelease]))) booleanValue];
-    JreStrongAssignAndConsume(&OrgApacheLuceneStoreMMapDirectory_CLEANER_, new_OrgApacheLuceneStoreMMapDirectory_$2_init());
+    OrgApacheLuceneStoreMMapDirectory_DEFAULT_MAX_CHUNK_SIZE = JreLoadStatic(OrgApacheLuceneUtilConstants, JRE_IS_64BIT) ? (JreLShift32(1, 30)) : (JreLShift32(1, 28));
+    OrgApacheLuceneStoreMMapDirectory_UNMAP_SUPPORTED = [((JavaLangBoolean *) nil_chk(JavaSecurityAccessController_doPrivilegedWithJavaSecurityPrivilegedAction_(create_OrgApacheLuceneStoreMMapDirectory_$1_init()))) booleanValue];
+    JreStrongAssignAndConsume(&OrgApacheLuceneStoreMMapDirectory_CLEANER, new_OrgApacheLuceneStoreMMapDirectory_$2_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneStoreMMapDirectory)
   }
 }
@@ -233,10 +247,10 @@ jboolean OrgApacheLuceneStoreMMapDirectory_UNMAP_SUPPORTED_;
   static const J2ObjcFieldInfo fields[] = {
     { "useUnmapHack_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
     { "preload_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "DEFAULT_MAX_CHUNK_SIZE_", NULL, 0x19, "I", &OrgApacheLuceneStoreMMapDirectory_DEFAULT_MAX_CHUNK_SIZE_, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_MAX_CHUNK_SIZE", "DEFAULT_MAX_CHUNK_SIZE", 0x19, "I", &OrgApacheLuceneStoreMMapDirectory_DEFAULT_MAX_CHUNK_SIZE, NULL, .constantValue.asLong = 0 },
     { "chunkSizePower_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "UNMAP_SUPPORTED_", NULL, 0x19, "Z", &OrgApacheLuceneStoreMMapDirectory_UNMAP_SUPPORTED_, NULL, .constantValue.asLong = 0 },
-    { "CLEANER_", NULL, 0x1a, "Lorg.apache.lucene.store.ByteBufferIndexInput$BufferCleaner;", &OrgApacheLuceneStoreMMapDirectory_CLEANER_, NULL, .constantValue.asLong = 0 },
+    { "UNMAP_SUPPORTED", "UNMAP_SUPPORTED", 0x19, "Z", &OrgApacheLuceneStoreMMapDirectory_UNMAP_SUPPORTED, NULL, .constantValue.asLong = 0 },
+    { "CLEANER", "CLEANER", 0x1a, "Lorg.apache.lucene.store.ByteBufferIndexInput$BufferCleaner;", &OrgApacheLuceneStoreMMapDirectory_CLEANER, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneStoreMMapDirectory = { 2, "MMapDirectory", "org.apache.lucene.store", NULL, 0x1, 12, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneStoreMMapDirectory;
@@ -245,13 +259,15 @@ jboolean OrgApacheLuceneStoreMMapDirectory_UNMAP_SUPPORTED_;
 @end
 
 void OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_(OrgApacheLuceneStoreMMapDirectory *self, OrgLukhnosPortmobileFilePath *path, OrgApacheLuceneStoreLockFactory *lockFactory) {
-  OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_withInt_(self, path, lockFactory, OrgApacheLuceneStoreMMapDirectory_DEFAULT_MAX_CHUNK_SIZE_);
+  OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_withInt_(self, path, lockFactory, OrgApacheLuceneStoreMMapDirectory_DEFAULT_MAX_CHUNK_SIZE);
 }
 
 OrgApacheLuceneStoreMMapDirectory *new_OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_(OrgLukhnosPortmobileFilePath *path, OrgApacheLuceneStoreLockFactory *lockFactory) {
-  OrgApacheLuceneStoreMMapDirectory *self = [OrgApacheLuceneStoreMMapDirectory alloc];
-  OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_(self, path, lockFactory);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreMMapDirectory, initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_, path, lockFactory)
+}
+
+OrgApacheLuceneStoreMMapDirectory *create_OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_(OrgLukhnosPortmobileFilePath *path, OrgApacheLuceneStoreLockFactory *lockFactory) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreMMapDirectory, initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_, path, lockFactory)
 }
 
 void OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_(OrgApacheLuceneStoreMMapDirectory *self, OrgLukhnosPortmobileFilePath *path) {
@@ -259,9 +275,11 @@ void OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_(Org
 }
 
 OrgApacheLuceneStoreMMapDirectory *new_OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path) {
-  OrgApacheLuceneStoreMMapDirectory *self = [OrgApacheLuceneStoreMMapDirectory alloc];
-  OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_(self, path);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreMMapDirectory, initWithOrgLukhnosPortmobileFilePath_, path)
+}
+
+OrgApacheLuceneStoreMMapDirectory *create_OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreMMapDirectory, initWithOrgLukhnosPortmobileFilePath_, path)
 }
 
 void OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_withInt_(OrgApacheLuceneStoreMMapDirectory *self, OrgLukhnosPortmobileFilePath *path, jint maxChunkSize) {
@@ -269,29 +287,33 @@ void OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_with
 }
 
 OrgApacheLuceneStoreMMapDirectory *new_OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_withInt_(OrgLukhnosPortmobileFilePath *path, jint maxChunkSize) {
-  OrgApacheLuceneStoreMMapDirectory *self = [OrgApacheLuceneStoreMMapDirectory alloc];
-  OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_withInt_(self, path, maxChunkSize);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreMMapDirectory, initWithOrgLukhnosPortmobileFilePath_withInt_, path, maxChunkSize)
+}
+
+OrgApacheLuceneStoreMMapDirectory *create_OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_withInt_(OrgLukhnosPortmobileFilePath *path, jint maxChunkSize) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreMMapDirectory, initWithOrgLukhnosPortmobileFilePath_withInt_, path, maxChunkSize)
 }
 
 void OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_withInt_(OrgApacheLuceneStoreMMapDirectory *self, OrgLukhnosPortmobileFilePath *path, OrgApacheLuceneStoreLockFactory *lockFactory, jint maxChunkSize) {
   OrgApacheLuceneStoreFSDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_(self, path, lockFactory);
-  self->useUnmapHack_ = OrgApacheLuceneStoreMMapDirectory_UNMAP_SUPPORTED_;
+  self->useUnmapHack_ = OrgApacheLuceneStoreMMapDirectory_UNMAP_SUPPORTED;
   if (maxChunkSize <= 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"Maximum chunk size for mmap must be >0") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"Maximum chunk size for mmap must be >0");
   }
   self->chunkSizePower_ = 31 - JavaLangInteger_numberOfLeadingZerosWithInt_(maxChunkSize);
   JreAssert((self->chunkSizePower_ >= 0 && self->chunkSizePower_ <= 30), (@"org/apache/lucene/store/MMapDirectory.java:162 condition failed: assert this.chunkSizePower >= 0 && this.chunkSizePower <= 30;"));
 }
 
 OrgApacheLuceneStoreMMapDirectory *new_OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_withInt_(OrgLukhnosPortmobileFilePath *path, OrgApacheLuceneStoreLockFactory *lockFactory, jint maxChunkSize) {
-  OrgApacheLuceneStoreMMapDirectory *self = [OrgApacheLuceneStoreMMapDirectory alloc];
-  OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_withInt_(self, path, lockFactory, maxChunkSize);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreMMapDirectory, initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_withInt_, path, lockFactory, maxChunkSize)
+}
+
+OrgApacheLuceneStoreMMapDirectory *create_OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_withInt_(OrgLukhnosPortmobileFilePath *path, OrgApacheLuceneStoreLockFactory *lockFactory, jint maxChunkSize) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreMMapDirectory, initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_withInt_, path, lockFactory, maxChunkSize)
 }
 
 IOSObjectArray *OrgApacheLuceneStoreMMapDirectory_mapWithNSString_withJavaNioChannelsFileChannel_withLong_withLong_(OrgApacheLuceneStoreMMapDirectory *self, NSString *resourceDescription, JavaNioChannelsFileChannel *fc, jlong offset, jlong length) {
-  if ((JreURShift64(length, self->chunkSizePower_)) >= JavaLangInteger_MAX_VALUE) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$", @"RandomAccessFile too big for chunk size: ", resourceDescription)) autorelease];
+  if ((JreURShift64(length, self->chunkSizePower_)) >= JavaLangInteger_MAX_VALUE) @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$", @"RandomAccessFile too big for chunk size: ", resourceDescription));
   jlong chunkSize = JreLShift64(1LL, self->chunkSizePower_);
   jint nrBuffers = (jint) (JreURShift64(length, self->chunkSizePower_)) + 1;
   IOSObjectArray *buffers = [IOSObjectArray arrayWithLength:nrBuffers type:JavaNioByteBuffer_class_()];
@@ -300,7 +322,7 @@ IOSObjectArray *OrgApacheLuceneStoreMMapDirectory_mapWithNSString_withJavaNioCha
     jint bufSize = (jint) ((length > (bufferStart + chunkSize)) ? chunkSize : (length - bufferStart));
     JavaNioMappedByteBuffer *buffer;
     @try {
-      buffer = [((JavaNioChannelsFileChannel *) nil_chk(fc)) mapWithJavaNioChannelsFileChannel_MapMode:JreLoadStatic(JavaNioChannelsFileChannel_MapMode, READ_ONLY_) withLong:offset + bufferStart withLong:bufSize];
+      buffer = [((JavaNioChannelsFileChannel *) nil_chk(fc)) mapWithJavaNioChannelsFileChannel_MapMode:JreLoadStatic(JavaNioChannelsFileChannel_MapMode, READ_ONLY) withLong:offset + bufferStart withLong:bufSize];
     }
     @catch (JavaIoIOException *ioe) {
       @throw OrgApacheLuceneStoreMMapDirectory_convertMapFailedIOExceptionWithJavaIoIOException_withNSString_withInt_(self, ioe, resourceDescription, bufSize);
@@ -316,7 +338,7 @@ IOSObjectArray *OrgApacheLuceneStoreMMapDirectory_mapWithNSString_withJavaNioCha
 
 JavaIoIOException *OrgApacheLuceneStoreMMapDirectory_convertMapFailedIOExceptionWithJavaIoIOException_withNSString_withInt_(OrgApacheLuceneStoreMMapDirectory *self, JavaIoIOException *ioe, NSString *resourceDescription, jint bufSize) {
   NSString *originalMessage;
-  JavaLangThrowable *originalCause;
+  NSException *originalCause;
   if ([[((JavaIoIOException *) nil_chk(ioe)) getCause] isKindOfClass:[JavaLangOutOfMemoryError class]]) {
     originalMessage = @"Map failed";
     originalCause = nil;
@@ -326,19 +348,19 @@ JavaIoIOException *OrgApacheLuceneStoreMMapDirectory_convertMapFailedIOException
     originalCause = [ioe getCause];
   }
   NSString *moreInfo;
-  if (!JreLoadStatic(OrgApacheLuceneUtilConstants, JRE_IS_64BIT_)) {
+  if (!JreLoadStatic(OrgApacheLuceneUtilConstants, JRE_IS_64BIT)) {
     moreInfo = @"MMapDirectory should only be used on 64bit platforms, because the address space on 32bit operating systems is too small. ";
   }
-  else if (JreLoadStatic(OrgApacheLuceneUtilConstants, WINDOWS_)) {
+  else if (JreLoadStatic(OrgApacheLuceneUtilConstants, WINDOWS)) {
     moreInfo = @"Windows is unfortunately very limited on virtual address space. If your index size is several hundred Gigabytes, consider changing to Linux. ";
   }
-  else if (JreLoadStatic(OrgApacheLuceneUtilConstants, LINUX_)) {
+  else if (JreLoadStatic(OrgApacheLuceneUtilConstants, LINUX)) {
     moreInfo = @"Please review 'ulimit -v', 'ulimit -m' (both should return 'unlimited'), and 'sysctl vm.max_map_count'. ";
   }
   else {
     moreInfo = @"Please review 'ulimit -v', 'ulimit -m' (both should return 'unlimited'). ";
   }
-  JavaIoIOException *newIoe = [new_JavaIoIOException_initWithNSString_withJavaLangThrowable_(NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ENGLISH_), @"%s: %s [this may be caused by lack of enough unfragmented virtual address space or too restrictive virtual memory limits enforced by the operating system, preventing us to map a chunk of %d bytes. %sMore information: http://blog.thetaphi.de/2012/07/use-lucenes-mmapdirectory-on-64bit.html]", [IOSObjectArray arrayWithObjects:(id[]){ originalMessage, resourceDescription, JavaLangInteger_valueOfWithInt_(bufSize), moreInfo } count:4 type:NSObject_class_()]), originalCause) autorelease];
+  JavaIoIOException *newIoe = create_JavaIoIOException_initWithNSString_withNSException_(NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ENGLISH), @"%s: %s [this may be caused by lack of enough unfragmented virtual address space or too restrictive virtual memory limits enforced by the operating system, preventing us to map a chunk of %d bytes. %sMore information: http://blog.thetaphi.de/2012/07/use-lucenes-mmapdirectory-on-64bit.html]", [IOSObjectArray arrayWithObjects:(id[]){ originalMessage, resourceDescription, JavaLangInteger_valueOfWithInt_(bufSize), moreInfo } count:4 type:NSObject_class_()]), originalCause);
   [newIoe setStackTraceWithJavaLangStackTraceElementArray:[ioe getStackTrace]];
   return newIoe;
 }
@@ -382,9 +404,11 @@ void OrgApacheLuceneStoreMMapDirectory_$1_init(OrgApacheLuceneStoreMMapDirectory
 }
 
 OrgApacheLuceneStoreMMapDirectory_$1 *new_OrgApacheLuceneStoreMMapDirectory_$1_init() {
-  OrgApacheLuceneStoreMMapDirectory_$1 *self = [OrgApacheLuceneStoreMMapDirectory_$1 alloc];
-  OrgApacheLuceneStoreMMapDirectory_$1_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreMMapDirectory_$1, init)
+}
+
+OrgApacheLuceneStoreMMapDirectory_$1 *create_OrgApacheLuceneStoreMMapDirectory_$1_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreMMapDirectory_$1, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreMMapDirectory_$1)
@@ -394,10 +418,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreMMapDirectory_$1)
 - (void)freeBufferWithOrgApacheLuceneStoreByteBufferIndexInput:(OrgApacheLuceneStoreByteBufferIndexInput *)parent
                                          withJavaNioByteBuffer:(JavaNioByteBuffer *)buffer {
   @try {
-    JavaSecurityAccessController_doPrivilegedWithJavaSecurityPrivilegedExceptionAction_([new_OrgApacheLuceneStoreMMapDirectory_$2_$1_initWithJavaNioByteBuffer_(buffer) autorelease]);
+    JavaSecurityAccessController_doPrivilegedWithJavaSecurityPrivilegedExceptionAction_(create_OrgApacheLuceneStoreMMapDirectory_$2_$1_initWithJavaNioByteBuffer_(buffer));
   }
   @catch (JavaSecurityPrivilegedActionException *e) {
-    @throw [new_JavaIoIOException_initWithNSString_withJavaLangThrowable_(JreStrcat("$$", @"Unable to unmap the mapped buffer: ", [((OrgApacheLuceneStoreByteBufferIndexInput *) nil_chk(parent)) description]), [((JavaSecurityPrivilegedActionException *) nil_chk(e)) getCause]) autorelease];
+    @throw create_JavaIoIOException_initWithNSString_withNSException_(JreStrcat("$$", @"Unable to unmap the mapped buffer: ", [((OrgApacheLuceneStoreByteBufferIndexInput *) nil_chk(parent)) description]), [((JavaSecurityPrivilegedActionException *) nil_chk(e)) getCause]);
   }
 }
 
@@ -424,9 +448,11 @@ void OrgApacheLuceneStoreMMapDirectory_$2_init(OrgApacheLuceneStoreMMapDirectory
 }
 
 OrgApacheLuceneStoreMMapDirectory_$2 *new_OrgApacheLuceneStoreMMapDirectory_$2_init() {
-  OrgApacheLuceneStoreMMapDirectory_$2 *self = [OrgApacheLuceneStoreMMapDirectory_$2 alloc];
-  OrgApacheLuceneStoreMMapDirectory_$2_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreMMapDirectory_$2, init)
+}
+
+OrgApacheLuceneStoreMMapDirectory_$2 *create_OrgApacheLuceneStoreMMapDirectory_$2_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreMMapDirectory_$2, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreMMapDirectory_$2)
@@ -474,9 +500,11 @@ void OrgApacheLuceneStoreMMapDirectory_$2_$1_initWithJavaNioByteBuffer_(OrgApach
 }
 
 OrgApacheLuceneStoreMMapDirectory_$2_$1 *new_OrgApacheLuceneStoreMMapDirectory_$2_$1_initWithJavaNioByteBuffer_(JavaNioByteBuffer *capture$0) {
-  OrgApacheLuceneStoreMMapDirectory_$2_$1 *self = [OrgApacheLuceneStoreMMapDirectory_$2_$1 alloc];
-  OrgApacheLuceneStoreMMapDirectory_$2_$1_initWithJavaNioByteBuffer_(self, capture$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreMMapDirectory_$2_$1, initWithJavaNioByteBuffer_, capture$0)
+}
+
+OrgApacheLuceneStoreMMapDirectory_$2_$1 *create_OrgApacheLuceneStoreMMapDirectory_$2_$1_initWithJavaNioByteBuffer_(JavaNioByteBuffer *capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreMMapDirectory_$2_$1, initWithJavaNioByteBuffer_, capture$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreMMapDirectory_$2_$1)

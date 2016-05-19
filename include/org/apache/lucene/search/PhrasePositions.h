@@ -5,20 +5,23 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchPhrasePositions_INCLUDE_ALL")
-#if OrgApacheLuceneSearchPhrasePositions_RESTRICT
-#define OrgApacheLuceneSearchPhrasePositions_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchPhrasePositions")
+#ifdef RESTRICT_OrgApacheLuceneSearchPhrasePositions
+#define INCLUDE_ALL_OrgApacheLuceneSearchPhrasePositions 0
 #else
-#define OrgApacheLuceneSearchPhrasePositions_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchPhrasePositions 1
 #endif
-#undef OrgApacheLuceneSearchPhrasePositions_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchPhrasePositions
 
-#if !defined (_OrgApacheLuceneSearchPhrasePositions_) && (OrgApacheLuceneSearchPhrasePositions_INCLUDE_ALL || OrgApacheLuceneSearchPhrasePositions_INCLUDE)
-#define _OrgApacheLuceneSearchPhrasePositions_
+#if !defined (OrgApacheLuceneSearchPhrasePositions_) && (INCLUDE_ALL_OrgApacheLuceneSearchPhrasePositions || defined(INCLUDE_OrgApacheLuceneSearchPhrasePositions))
+#define OrgApacheLuceneSearchPhrasePositions_
 
 @class IOSObjectArray;
 @class OrgApacheLuceneIndexPostingsEnum;
 
+/*!
+ @brief Position of a term in a document that takes into account the term offset within the phrase.
+ */
 @interface OrgApacheLuceneSearchPhrasePositions : NSObject {
  @public
   jint position_;
@@ -34,6 +37,9 @@
 
 #pragma mark Public
 
+/*!
+ @brief for debug purposes
+ */
 - (NSString *)description;
 
 #pragma mark Package-Private
@@ -45,6 +51,12 @@
 
 - (void)firstPosition;
 
+/*!
+ @brief Go to next location of this term current document, and set 
+ <code>position</code> as <code>location - offset</code>, so that a 
+ matching exact phrase is easily identified when all PhrasePositions 
+ have exactly the same <code>position</code>.
+ */
 - (jboolean)nextPosition;
 
 @end
@@ -59,8 +71,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchPhrasePositions_initWithOrgApacheLuc
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchPhrasePositions *new_OrgApacheLuceneSearchPhrasePositions_initWithOrgApacheLuceneIndexPostingsEnum_withInt_withInt_withOrgApacheLuceneIndexTermArray_(OrgApacheLuceneIndexPostingsEnum *postings, jint o, jint ord, IOSObjectArray *terms) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchPhrasePositions *create_OrgApacheLuceneSearchPhrasePositions_initWithOrgApacheLuceneIndexPostingsEnum_withInt_withInt_withOrgApacheLuceneIndexTermArray_(OrgApacheLuceneIndexPostingsEnum *postings, jint o, jint ord, IOSObjectArray *terms);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPhrasePositions)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchPhrasePositions_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchPhrasePositions")

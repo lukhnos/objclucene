@@ -5,22 +5,22 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSimilaritiesLMSimilarity_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSimilaritiesLMSimilarity_RESTRICT
-#define OrgApacheLuceneSearchSimilaritiesLMSimilarity_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesLMSimilarity")
+#ifdef RESTRICT_OrgApacheLuceneSearchSimilaritiesLMSimilarity
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesLMSimilarity 0
 #else
-#define OrgApacheLuceneSearchSimilaritiesLMSimilarity_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesLMSimilarity 1
 #endif
-#undef OrgApacheLuceneSearchSimilaritiesLMSimilarity_RESTRICT
-#if OrgApacheLuceneSearchSimilaritiesLMSimilarity_DefaultCollectionModel_INCLUDE
-#define OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel_INCLUDE 1
+#undef RESTRICT_OrgApacheLuceneSearchSimilaritiesLMSimilarity
+#ifdef INCLUDE_OrgApacheLuceneSearchSimilaritiesLMSimilarity_DefaultCollectionModel
+#define INCLUDE_OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel 1
 #endif
 
-#if !defined (_OrgApacheLuceneSearchSimilaritiesLMSimilarity_) && (OrgApacheLuceneSearchSimilaritiesLMSimilarity_INCLUDE_ALL || OrgApacheLuceneSearchSimilaritiesLMSimilarity_INCLUDE)
-#define _OrgApacheLuceneSearchSimilaritiesLMSimilarity_
+#if !defined (OrgApacheLuceneSearchSimilaritiesLMSimilarity_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesLMSimilarity || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesLMSimilarity))
+#define OrgApacheLuceneSearchSimilaritiesLMSimilarity_
 
-#define OrgApacheLuceneSearchSimilaritiesSimilarityBase_RESTRICT 1
-#define OrgApacheLuceneSearchSimilaritiesSimilarityBase_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSimilaritiesSimilarityBase 1
+#define INCLUDE_OrgApacheLuceneSearchSimilaritiesSimilarityBase 1
 #include "org/apache/lucene/search/similarities/SimilarityBase.h"
 
 @class OrgApacheLuceneSearchCollectionStatistics;
@@ -29,19 +29,56 @@
 @protocol JavaUtilList;
 @protocol OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel;
 
+/*!
+ @brief Abstract superclass for language modeling Similarities.
+ The following inner
+ types are introduced:
+ <ul>
+ <li><code>LMStats</code>, which defines a new statistic, the probability that
+ the collection language model generates the current term;</li>
+ <li><code>CollectionModel</code>, which is a strategy interface for object that
+ compute the collection language model <code>p(w|C)</code>;</li>
+ <li><code>DefaultCollectionModel</code>, an implementation of the former, that
+ computes the term probability as the number of occurrences of the term in the
+ collection, divided by the total number of tokens.</li>
+ </ul> 
+ */
 @interface OrgApacheLuceneSearchSimilaritiesLMSimilarity : OrgApacheLuceneSearchSimilaritiesSimilarityBase {
  @public
+  /*!
+   @brief The collection model.
+   */
   id<OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel> collectionModel_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new instance with the default collection language model.
+ */
 - (instancetype)init;
 
+/*!
+ @brief Creates a new instance with the specified collection language model.
+ */
 - (instancetype)initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel:(id<OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel>)collectionModel;
 
+/*!
+ @brief Returns the name of the LM method.
+ The values of the parameters should be
+ included as well.
+ <p>Used in <code>toString()</code></p>.
+ */
 - (NSString *)getName;
 
+/*!
+ @brief Returns the name of the LM method.
+ If a custom collection model strategy is
+ used, its name is included as well.
+ - seealso: #getName()
+ - seealso: CollectionModel#getName()
+ - seealso: DefaultCollectionModel
+ */
 - (NSString *)description;
 
 #pragma mark Protected
@@ -52,6 +89,10 @@ withOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilariti
                       withFloat:(jfloat)freq
                       withFloat:(jfloat)docLen;
 
+/*!
+ @brief Computes the collection probability of the current term in addition to the
+ usual statistics.
+ */
 - (void)fillBasicStatsWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
                         withOrgApacheLuceneSearchCollectionStatistics:(OrgApacheLuceneSearchCollectionStatistics *)collectionStats
                               withOrgApacheLuceneSearchTermStatistics:(OrgApacheLuceneSearchTermStatistics *)termStats;
@@ -73,22 +114,36 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesLMSimilarity)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchSimilaritiesLMSimilarity_LMStats_) && (OrgApacheLuceneSearchSimilaritiesLMSimilarity_INCLUDE_ALL || OrgApacheLuceneSearchSimilaritiesLMSimilarity_LMStats_INCLUDE)
-#define _OrgApacheLuceneSearchSimilaritiesLMSimilarity_LMStats_
+#if !defined (OrgApacheLuceneSearchSimilaritiesLMSimilarity_LMStats_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesLMSimilarity || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesLMSimilarity_LMStats))
+#define OrgApacheLuceneSearchSimilaritiesLMSimilarity_LMStats_
 
-#define OrgApacheLuceneSearchSimilaritiesBasicStats_RESTRICT 1
-#define OrgApacheLuceneSearchSimilaritiesBasicStats_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSimilaritiesBasicStats 1
+#define INCLUDE_OrgApacheLuceneSearchSimilaritiesBasicStats 1
 #include "org/apache/lucene/search/similarities/BasicStats.h"
 
+/*!
+ @brief Stores the collection distribution of the current term.
+ */
 @interface OrgApacheLuceneSearchSimilaritiesLMSimilarity_LMStats : OrgApacheLuceneSearchSimilaritiesBasicStats
 
 #pragma mark Public
 
+/*!
+ @brief Creates LMStats for the provided field and query-time boost
+ */
 - (instancetype)initWithNSString:(NSString *)field
                        withFloat:(jfloat)queryBoost;
 
+/*!
+ @brief Returns the probability that the current term is generated by the
+ collection.
+ */
 - (jfloat)getCollectionProbability;
 
+/*!
+ @brief Sets the probability that the current term is generated by the
+ collection.
+ */
 - (void)setCollectionProbabilityWithFloat:(jfloat)collectionProbability;
 
 @end
@@ -99,19 +154,31 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesLMSimilarity_LMStats_ini
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesLMSimilarity_LMStats *new_OrgApacheLuceneSearchSimilaritiesLMSimilarity_LMStats_initWithNSString_withFloat_(NSString *field, jfloat queryBoost) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesLMSimilarity_LMStats *create_OrgApacheLuceneSearchSimilaritiesLMSimilarity_LMStats_initWithNSString_withFloat_(NSString *field, jfloat queryBoost);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesLMSimilarity_LMStats)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel_) && (OrgApacheLuceneSearchSimilaritiesLMSimilarity_INCLUDE_ALL || OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel_INCLUDE)
-#define _OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel_
+#if !defined (OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesLMSimilarity || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel))
+#define OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel_
 
 @class OrgApacheLuceneSearchSimilaritiesBasicStats;
 
+/*!
+ @brief A strategy for computing the collection language model.
+ */
 @protocol OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel < NSObject, JavaObject >
 
+/*!
+ @brief Computes the probability <code>p(w|C)</code> according to the language model
+ strategy for the current term.
+ */
 - (jfloat)computeProbabilityWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats;
 
+/*!
+ @brief The name of the collection model strategy.
+ */
 - (NSString *)getName;
 
 @end
@@ -122,15 +189,22 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesLMSimilarity_Collect
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchSimilaritiesLMSimilarity_DefaultCollectionModel_) && (OrgApacheLuceneSearchSimilaritiesLMSimilarity_INCLUDE_ALL || OrgApacheLuceneSearchSimilaritiesLMSimilarity_DefaultCollectionModel_INCLUDE)
-#define _OrgApacheLuceneSearchSimilaritiesLMSimilarity_DefaultCollectionModel_
+#if !defined (OrgApacheLuceneSearchSimilaritiesLMSimilarity_DefaultCollectionModel_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesLMSimilarity || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesLMSimilarity_DefaultCollectionModel))
+#define OrgApacheLuceneSearchSimilaritiesLMSimilarity_DefaultCollectionModel_
 
 @class OrgApacheLuceneSearchSimilaritiesBasicStats;
 
+/*!
+ @brief Models <code>p(w|C)</code> as the number of occurrences of the term in the
+ collection, divided by the total number of tokens <code>+ 1</code>.
+ */
 @interface OrgApacheLuceneSearchSimilaritiesLMSimilarity_DefaultCollectionModel : NSObject < OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel >
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor: parameter-free
+ */
 - (instancetype)init;
 
 - (jfloat)computeProbabilityWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats;
@@ -145,8 +219,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesLMSimilarity_DefaultColl
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesLMSimilarity_DefaultCollectionModel *new_OrgApacheLuceneSearchSimilaritiesLMSimilarity_DefaultCollectionModel_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesLMSimilarity_DefaultCollectionModel *create_OrgApacheLuceneSearchSimilaritiesLMSimilarity_DefaultCollectionModel_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesLMSimilarity_DefaultCollectionModel)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSimilaritiesLMSimilarity_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesLMSimilarity")

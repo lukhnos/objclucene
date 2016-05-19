@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_RESTRICT
-#define OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction 0
 #else
-#define OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_) && (OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_
+#if !defined (OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction))
+#define OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_
 
-#define OrgApacheLuceneQueriesFunctionValueSource_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionValueSource_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionValueSource 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionValueSource 1
 #include "org/apache/lucene/queries/function/ValueSource.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
@@ -25,6 +25,17 @@
 @class OrgApacheLuceneSearchIndexSearcher;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Scales values to be between min and max.
+ <p>This implementation currently traverses all of the source values to obtain
+ their min and max.
+ <p>This implementation currently cannot distinguish when documents have been
+ deleted or documents that have no value, and 0.0 values will be used for
+ these cases.  This means that if values are normally all greater than 0.0, one can
+ still end up with 0.0 as the min value to map from.  In these cases, an
+ appropriate map() function could be used as a workaround to change 0.0
+ to a value in the real range.
+ */
 @interface OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction : OrgApacheLuceneQueriesFunctionValueSource {
  @public
   OrgApacheLuceneQueriesFunctionValueSource *source_;
@@ -60,8 +71,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFuncti
 
 FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction *new_OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSource_withFloat_withFloat_(OrgApacheLuceneQueriesFunctionValueSource *source, jfloat min, jfloat max) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction *create_OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSource_withFloat_withFloat_(OrgApacheLuceneQueriesFunctionValueSource *source, jfloat min, jfloat max);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction")

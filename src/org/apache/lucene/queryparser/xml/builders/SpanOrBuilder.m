@@ -35,15 +35,15 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlBuildersSpanOrBuilder, factory_
 }
 
 - (OrgApacheLuceneSearchSpansSpanQuery *)getSpanQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e {
-  id<JavaUtilList> clausesList = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> clausesList = create_JavaUtilArrayList_init();
   for (id<OrgW3cDomNode> kid = [((id<OrgW3cDomElement>) nil_chk(e)) getFirstChild]; kid != nil; kid = [kid getNextSibling]) {
-    if ([((id<OrgW3cDomNode>) nil_chk(kid)) getNodeType] == OrgW3cDomNode_ELEMENT_NODE) {
-      OrgApacheLuceneSearchSpansSpanQuery *clause = [((id<OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder>) nil_chk(factory_)) getSpanQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>) check_protocol_cast(kid, OrgW3cDomElement_class_())];
+    if ([kid getNodeType] == OrgW3cDomNode_ELEMENT_NODE) {
+      OrgApacheLuceneSearchSpansSpanQuery *clause = [((id<OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder>) nil_chk(factory_)) getSpanQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>) cast_check(kid, OrgW3cDomElement_class_())];
       [clausesList addWithId:clause];
     }
   }
   IOSObjectArray *clauses = [clausesList toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[clausesList size] type:OrgApacheLuceneSearchSpansSpanQuery_class_()]];
-  OrgApacheLuceneSearchSpansSpanOrQuery *soq = [new_OrgApacheLuceneSearchSpansSpanOrQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_(clauses) autorelease];
+  OrgApacheLuceneSearchSpansSpanOrQuery *soq = create_OrgApacheLuceneSearchSpansSpanOrQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_(clauses);
   [soq setBoostWithFloat:OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withFloat_(e, @"boost", 1.0f)];
   return soq;
 }
@@ -73,9 +73,11 @@ void OrgApacheLuceneQueryparserXmlBuildersSpanOrBuilder_initWithOrgApacheLuceneQ
 }
 
 OrgApacheLuceneQueryparserXmlBuildersSpanOrBuilder *new_OrgApacheLuceneQueryparserXmlBuildersSpanOrBuilder_initWithOrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder_(id<OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder> factory) {
-  OrgApacheLuceneQueryparserXmlBuildersSpanOrBuilder *self = [OrgApacheLuceneQueryparserXmlBuildersSpanOrBuilder alloc];
-  OrgApacheLuceneQueryparserXmlBuildersSpanOrBuilder_initWithOrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder_(self, factory);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserXmlBuildersSpanOrBuilder, initWithOrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder_, factory)
+}
+
+OrgApacheLuceneQueryparserXmlBuildersSpanOrBuilder *create_OrgApacheLuceneQueryparserXmlBuildersSpanOrBuilder_initWithOrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder_(id<OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder> factory) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserXmlBuildersSpanOrBuilder, initWithOrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder_, factory)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserXmlBuildersSpanOrBuilder)

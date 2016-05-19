@@ -38,14 +38,14 @@
 }
 
 - (id<JavaUtilCollection>)getChildren {
-  return JavaUtilCollections_singletonWithId_([new_OrgApacheLuceneSearchScorer_ChildScorer_initWithOrgApacheLuceneSearchScorer_withNSString_(in_, @"CACHED") autorelease]);
+  return JavaUtilCollections_singletonWithId_(create_OrgApacheLuceneSearchScorer_ChildScorer_initWithOrgApacheLuceneSearchScorer_withNSString_(in_, @"CACHED"));
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneSearchScorer:", "ScoreCachingWrappingScorer", NULL, 0x1, NULL, NULL },
     { "score", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
-    { "getChildren", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildren", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/search/Scorer$ChildScorer;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "curDoc_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
@@ -63,9 +63,11 @@ void OrgApacheLuceneSearchScoreCachingWrappingScorer_initWithOrgApacheLuceneSear
 }
 
 OrgApacheLuceneSearchScoreCachingWrappingScorer *new_OrgApacheLuceneSearchScoreCachingWrappingScorer_initWithOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *scorer) {
-  OrgApacheLuceneSearchScoreCachingWrappingScorer *self = [OrgApacheLuceneSearchScoreCachingWrappingScorer alloc];
-  OrgApacheLuceneSearchScoreCachingWrappingScorer_initWithOrgApacheLuceneSearchScorer_(self, scorer);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchScoreCachingWrappingScorer, initWithOrgApacheLuceneSearchScorer_, scorer)
+}
+
+OrgApacheLuceneSearchScoreCachingWrappingScorer *create_OrgApacheLuceneSearchScoreCachingWrappingScorer_initWithOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchScorer *scorer) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchScoreCachingWrappingScorer, initWithOrgApacheLuceneSearchScorer_, scorer)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchScoreCachingWrappingScorer)

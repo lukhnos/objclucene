@@ -5,40 +5,64 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsNormsProducer_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsNormsProducer_RESTRICT
-#define OrgApacheLuceneCodecsNormsProducer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsNormsProducer")
+#ifdef RESTRICT_OrgApacheLuceneCodecsNormsProducer
+#define INCLUDE_ALL_OrgApacheLuceneCodecsNormsProducer 0
 #else
-#define OrgApacheLuceneCodecsNormsProducer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsNormsProducer 1
 #endif
-#undef OrgApacheLuceneCodecsNormsProducer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsNormsProducer
 
-#if !defined (_OrgApacheLuceneCodecsNormsProducer_) && (OrgApacheLuceneCodecsNormsProducer_INCLUDE_ALL || OrgApacheLuceneCodecsNormsProducer_INCLUDE)
-#define _OrgApacheLuceneCodecsNormsProducer_
+#if !defined (OrgApacheLuceneCodecsNormsProducer_) && (INCLUDE_ALL_OrgApacheLuceneCodecsNormsProducer || defined(INCLUDE_OrgApacheLuceneCodecsNormsProducer))
+#define OrgApacheLuceneCodecsNormsProducer_
 
-#define JavaIoCloseable_RESTRICT 1
-#define JavaIoCloseable_INCLUDE 1
+#define RESTRICT_JavaIoCloseable 1
+#define INCLUDE_JavaIoCloseable 1
 #include "java/io/Closeable.h"
 
-#define OrgApacheLuceneUtilAccountable_RESTRICT 1
-#define OrgApacheLuceneUtilAccountable_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAccountable 1
+#define INCLUDE_OrgApacheLuceneUtilAccountable 1
 #include "org/apache/lucene/util/Accountable.h"
 
 @class OrgApacheLuceneIndexFieldInfo;
 @class OrgApacheLuceneIndexNumericDocValues;
 
+/*!
+ @brief Abstract API that produces field normalization values
+ */
 @interface OrgApacheLuceneCodecsNormsProducer : NSObject < JavaIoCloseable, OrgApacheLuceneUtilAccountable >
 
 #pragma mark Public
 
+/*!
+ @brief Checks consistency of this producer
+ <p>
+ Note that this may be costly in terms of I/O, e.g.
+ may involve computing a checksum value against large data files.
+ */
 - (void)checkIntegrity;
 
+/*!
+ @brief Returns an instance optimized for merging.
+ <p>
+ The default implementation returns <code>this</code> 
+ */
 - (OrgApacheLuceneCodecsNormsProducer *)getMergeInstance;
 
+/*!
+ @brief Returns <code>NumericDocValues</code> for this field.
+ The returned instance need not be thread-safe: it will only be
+ used by a single thread. 
+ */
 - (OrgApacheLuceneIndexNumericDocValues *)getNormsWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field;
 
 #pragma mark Protected
 
+/*!
+ @brief Sole constructor.
+ (For invocation by subclass 
+ constructors, typically implicit.) 
+ */
 - (instancetype)init;
 
 @end
@@ -51,4 +75,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsNormsProducer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsNormsProducer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsNormsProducer")

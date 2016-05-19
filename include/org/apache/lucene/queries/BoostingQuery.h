@@ -5,24 +5,38 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesBoostingQuery_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesBoostingQuery_RESTRICT
-#define OrgApacheLuceneQueriesBoostingQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesBoostingQuery")
+#ifdef RESTRICT_OrgApacheLuceneQueriesBoostingQuery
+#define INCLUDE_ALL_OrgApacheLuceneQueriesBoostingQuery 0
 #else
-#define OrgApacheLuceneQueriesBoostingQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesBoostingQuery 1
 #endif
-#undef OrgApacheLuceneQueriesBoostingQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesBoostingQuery
 
-#if !defined (_OrgApacheLuceneQueriesBoostingQuery_) && (OrgApacheLuceneQueriesBoostingQuery_INCLUDE_ALL || OrgApacheLuceneQueriesBoostingQuery_INCLUDE)
-#define _OrgApacheLuceneQueriesBoostingQuery_
+#if !defined (OrgApacheLuceneQueriesBoostingQuery_) && (INCLUDE_ALL_OrgApacheLuceneQueriesBoostingQuery || defined(INCLUDE_OrgApacheLuceneQueriesBoostingQuery))
+#define OrgApacheLuceneQueriesBoostingQuery_
 
-#define OrgApacheLuceneSearchQuery_RESTRICT 1
-#define OrgApacheLuceneSearchQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchQuery 1
+#define INCLUDE_OrgApacheLuceneSearchQuery 1
 #include "org/apache/lucene/search/Query.h"
 
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchWeight;
 
+/*!
+ @brief The BoostingQuery class can be used to effectively demote results that match a given query.
+ Unlike the "NOT" clause, this still selects documents that contain undesirable terms, 
+ but reduces their overall score:
+ Query balancedQuery = new BoostingQuery(positiveQuery, negativeQuery, 0.01f);
+ In this scenario the positiveQuery contains the mandatory, desirable criteria which is used to 
+ select all matching documents, and the negativeQuery contains the undesirable elements which 
+ are simply used to lessen the scores. Documents that match the negativeQuery have their score 
+ multiplied by the supplied "boost" parameter, so this should be less than 1 to achieve a 
+ demoting effect
+ This code was originally made available here: 
+ <a href="http://marc.theaimsgroup.com/?l=lucene-user&m=108058407130459&w=2">http://marc.theaimsgroup.com/?l=lucene-user&amp;m=108058407130459&amp;w=2</a>
+ and is documented here: http://wiki.apache.org/lucene-java/CommunityContributions
+ */
 @interface OrgApacheLuceneQueriesBoostingQuery : OrgApacheLuceneSearchQuery
 
 #pragma mark Public
@@ -48,8 +62,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueriesBoostingQuery_initWithOrgApacheLuce
 
 FOUNDATION_EXPORT OrgApacheLuceneQueriesBoostingQuery *new_OrgApacheLuceneQueriesBoostingQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withFloat_(OrgApacheLuceneSearchQuery *match, OrgApacheLuceneSearchQuery *context, jfloat boost) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueriesBoostingQuery *create_OrgApacheLuceneQueriesBoostingQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withFloat_(OrgApacheLuceneSearchQuery *match, OrgApacheLuceneSearchQuery *context, jfloat boost);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesBoostingQuery)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesBoostingQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesBoostingQuery")

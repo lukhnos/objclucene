@@ -5,34 +5,61 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_RESTRICT
-#define OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter 0
 #else
-#define OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter
 
-#if !defined (_OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_) && (OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_
+#if !defined (OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter))
+#define OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 @class OrgApacheLuceneAnalysisUtilCharArraySet;
 @protocol JavaUtilCollection;
 
-#define OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_DEFAULT_MAX_WORD_COUNT 2147483647
-#define OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_DEFAULT_MAX_TOKEN_LENGTH 2147483647
-
+/*!
+ @brief A filter to apply normal capitalization rules to Tokens.
+ It will make the first letter
+ capital and the rest lower case.
+ <p>
+ This filter is particularly useful to build nice looking facet parameters.  This filter
+ is not appropriate if you intend to use a prefix query.
+ */
 @interface OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter : OrgApacheLuceneAnalysisTokenFilter
+
++ (jint)DEFAULT_MAX_WORD_COUNT;
+
++ (jint)DEFAULT_MAX_TOKEN_LENGTH;
 
 #pragma mark Public
 
+/*!
+ @brief Creates a CapitalizationFilter with the default parameters.
+ <p>
+ Calls <code>CapitalizationFilter(in, true, null, true, null, 0, DEFAULT_MAX_WORD_COUNT, DEFAULT_MAX_TOKEN_LENGTH)</code>
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
 
+/*!
+ @brief Creates a CapitalizationFilter with the specified parameters.
+ @param inArg input tokenstream
+ @param onlyFirstWord should each word be capitalized or all of the words?
+ @param keep a keep word list.  Each word that should be kept separated by whitespace.
+ @param forceFirstLetter Force the first letter to be capitalized even if it is in the keep list.
+ @param okPrefix do not change word capitalization if a word begins with something in this list.
+ @param minWordLength how long the word needs to be to get capitalization applied.  If the
+ minWordLength is 3, "and" &gt; "And" but "or" stays "or".
+ @param maxWordCount if the token contains more then maxWordCount words, the capitalization is
+ assumed to be correct.
+ @param maxTokenLength ???
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
                                                withBoolean:(jboolean)onlyFirstWord
                withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)keep
@@ -48,20 +75,28 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter, DEFAULT_MAX_WORD_COUNT, jint)
+inline jint OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_get_DEFAULT_MAX_WORD_COUNT();
+#define OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_DEFAULT_MAX_WORD_COUNT 2147483647
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter, DEFAULT_MAX_WORD_COUNT, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter, DEFAULT_MAX_TOKEN_LENGTH, jint)
+inline jint OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_get_DEFAULT_MAX_TOKEN_LENGTH();
+#define OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_DEFAULT_MAX_TOKEN_LENGTH 2147483647
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter, DEFAULT_MAX_TOKEN_LENGTH, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter *new_OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter *create_OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg);
+
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withOrgApacheLuceneAnalysisUtilCharArraySet_withBoolean_withJavaUtilCollection_withInt_withInt_withInt_(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg, jboolean onlyFirstWord, OrgApacheLuceneAnalysisUtilCharArraySet *keep, jboolean forceFirstLetter, id<JavaUtilCollection> okPrefix, jint minWordLength, jint maxWordCount, jint maxTokenLength);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter *new_OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withOrgApacheLuceneAnalysisUtilCharArraySet_withBoolean_withJavaUtilCollection_withInt_withInt_withInt_(OrgApacheLuceneAnalysisTokenStream *inArg, jboolean onlyFirstWord, OrgApacheLuceneAnalysisUtilCharArraySet *keep, jboolean forceFirstLetter, id<JavaUtilCollection> okPrefix, jint minWordLength, jint maxWordCount, jint maxTokenLength) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter *create_OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withOrgApacheLuceneAnalysisUtilCharArraySet_withBoolean_withJavaUtilCollection_withInt_withInt_withInt_(OrgApacheLuceneAnalysisTokenStream *inArg, jboolean onlyFirstWord, OrgApacheLuceneAnalysisUtilCharArraySet *keep, jboolean forceFirstLetter, id<JavaUtilCollection> okPrefix, jint minWordLength, jint maxWordCount, jint maxTokenLength);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter")

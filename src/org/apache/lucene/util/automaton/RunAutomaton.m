@@ -18,7 +18,7 @@ __attribute__((unused)) static jint OrgApacheLuceneUtilAutomatonRunAutomaton_get
 @implementation OrgApacheLuceneUtilAutomatonRunAutomaton
 
 - (NSString *)description {
-  JavaLangStringBuilder *b = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *b = create_JavaLangStringBuilder_init();
   [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([b appendWithNSString:@"initial state: "])) appendWithInt:initial_])) appendWithNSString:@"\n"];
   for (jint i = 0; i < size_; i++) {
     [b appendWithNSString:JreStrcat("$I", @"state ", i)];
@@ -102,8 +102,8 @@ __attribute__((unused)) static jint OrgApacheLuceneUtilAutomatonRunAutomaton_get
 - (jboolean)isEqual:(id)obj {
   if (self == obj) return true;
   if (obj == nil) return false;
-  if ([self getClass] != [nil_chk(obj) getClass]) return false;
-  OrgApacheLuceneUtilAutomatonRunAutomaton *other = (OrgApacheLuceneUtilAutomatonRunAutomaton *) check_class_cast(obj, [OrgApacheLuceneUtilAutomatonRunAutomaton class]);
+  if ([self getClass] != (id) [obj getClass]) return false;
+  OrgApacheLuceneUtilAutomatonRunAutomaton *other = (OrgApacheLuceneUtilAutomatonRunAutomaton *) cast_chk(obj, [OrgApacheLuceneUtilAutomatonRunAutomaton class]);
   if (initial_ != other->initial_) return false;
   if (maxInterval_ != other->maxInterval_) return false;
   if (size_ != other->size_) return false;

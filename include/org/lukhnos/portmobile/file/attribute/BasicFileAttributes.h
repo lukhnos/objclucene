@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgLukhnosPortmobileFileAttributeBasicFileAttributes_INCLUDE_ALL")
-#if OrgLukhnosPortmobileFileAttributeBasicFileAttributes_RESTRICT
-#define OrgLukhnosPortmobileFileAttributeBasicFileAttributes_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgLukhnosPortmobileFileAttributeBasicFileAttributes")
+#ifdef RESTRICT_OrgLukhnosPortmobileFileAttributeBasicFileAttributes
+#define INCLUDE_ALL_OrgLukhnosPortmobileFileAttributeBasicFileAttributes 0
 #else
-#define OrgLukhnosPortmobileFileAttributeBasicFileAttributes_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgLukhnosPortmobileFileAttributeBasicFileAttributes 1
 #endif
-#undef OrgLukhnosPortmobileFileAttributeBasicFileAttributes_RESTRICT
+#undef RESTRICT_OrgLukhnosPortmobileFileAttributeBasicFileAttributes
 
-#if !defined (_OrgLukhnosPortmobileFileAttributeBasicFileAttributes_) && (OrgLukhnosPortmobileFileAttributeBasicFileAttributes_INCLUDE_ALL || OrgLukhnosPortmobileFileAttributeBasicFileAttributes_INCLUDE)
-#define _OrgLukhnosPortmobileFileAttributeBasicFileAttributes_
+#if !defined (OrgLukhnosPortmobileFileAttributeBasicFileAttributes_) && (INCLUDE_ALL_OrgLukhnosPortmobileFileAttributeBasicFileAttributes || defined(INCLUDE_OrgLukhnosPortmobileFileAttributeBasicFileAttributes))
+#define OrgLukhnosPortmobileFileAttributeBasicFileAttributes_
 
 @class JavaIoFile;
 @class OrgLukhnosPortmobileFileAttributeFileTime;
@@ -28,6 +28,11 @@
 
 - (instancetype)initWithJavaIoFile:(JavaIoFile *)file;
 
+/*!
+ @brief WARNING: This is NOT the actual creation time.
+ This curretly works just because of how
+ SimpleFSLock works!!
+ */
 - (OrgLukhnosPortmobileFileAttributeFileTime *)creationTime;
 
 #pragma mark Package-Private
@@ -44,12 +49,16 @@ FOUNDATION_EXPORT void OrgLukhnosPortmobileFileAttributeBasicFileAttributes_init
 
 FOUNDATION_EXPORT OrgLukhnosPortmobileFileAttributeBasicFileAttributes *new_OrgLukhnosPortmobileFileAttributeBasicFileAttributes_initWithJavaIoFile_(JavaIoFile *file) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgLukhnosPortmobileFileAttributeBasicFileAttributes *create_OrgLukhnosPortmobileFileAttributeBasicFileAttributes_initWithJavaIoFile_(JavaIoFile *file);
+
 FOUNDATION_EXPORT void OrgLukhnosPortmobileFileAttributeBasicFileAttributes_init(OrgLukhnosPortmobileFileAttributeBasicFileAttributes *self);
 
 FOUNDATION_EXPORT OrgLukhnosPortmobileFileAttributeBasicFileAttributes *new_OrgLukhnosPortmobileFileAttributeBasicFileAttributes_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgLukhnosPortmobileFileAttributeBasicFileAttributes *create_OrgLukhnosPortmobileFileAttributeBasicFileAttributes_init();
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileFileAttributeBasicFileAttributes)
 
 #endif
 
-#pragma pop_macro("OrgLukhnosPortmobileFileAttributeBasicFileAttributes_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileFileAttributeBasicFileAttributes")

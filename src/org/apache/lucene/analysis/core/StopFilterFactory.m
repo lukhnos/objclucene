@@ -34,10 +34,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCoreStopFilterFactory, stopWords_, Or
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCoreStopFilterFactory, stopWordFiles_, NSString *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCoreStopFilterFactory, format_, NSString *)
 
-NSString *OrgApacheLuceneAnalysisCoreStopFilterFactory_FORMAT_WORDSET_ = @"wordset";
-NSString *OrgApacheLuceneAnalysisCoreStopFilterFactory_FORMAT_SNOWBALL_ = @"snowball";
+NSString *OrgApacheLuceneAnalysisCoreStopFilterFactory_FORMAT_WORDSET = @"wordset";
+NSString *OrgApacheLuceneAnalysisCoreStopFilterFactory_FORMAT_SNOWBALL = @"snowball";
 
 @implementation OrgApacheLuceneAnalysisCoreStopFilterFactory
+
++ (NSString *)FORMAT_WORDSET {
+  return OrgApacheLuceneAnalysisCoreStopFilterFactory_FORMAT_WORDSET;
+}
+
++ (NSString *)FORMAT_SNOWBALL {
+  return OrgApacheLuceneAnalysisCoreStopFilterFactory_FORMAT_SNOWBALL;
+}
 
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args {
   OrgApacheLuceneAnalysisCoreStopFilterFactory_initWithJavaUtilMap_(self, args);
@@ -46,21 +54,21 @@ NSString *OrgApacheLuceneAnalysisCoreStopFilterFactory_FORMAT_SNOWBALL_ = @"snow
 
 - (void)informWithOrgApacheLuceneAnalysisUtilResourceLoader:(id<OrgApacheLuceneAnalysisUtilResourceLoader>)loader {
   if (stopWordFiles_ != nil) {
-    if ([((NSString *) nil_chk(OrgApacheLuceneAnalysisCoreStopFilterFactory_FORMAT_WORDSET_)) equalsIgnoreCase:format_]) {
+    if ([((NSString *) nil_chk(OrgApacheLuceneAnalysisCoreStopFilterFactory_FORMAT_WORDSET)) equalsIgnoreCase:format_]) {
       JreStrongAssign(&stopWords_, [self getWordSetWithOrgApacheLuceneAnalysisUtilResourceLoader:loader withNSString:stopWordFiles_ withBoolean:ignoreCase_]);
     }
-    else if ([((NSString *) nil_chk(OrgApacheLuceneAnalysisCoreStopFilterFactory_FORMAT_SNOWBALL_)) equalsIgnoreCase:format_]) {
+    else if ([((NSString *) nil_chk(OrgApacheLuceneAnalysisCoreStopFilterFactory_FORMAT_SNOWBALL)) equalsIgnoreCase:format_]) {
       JreStrongAssign(&stopWords_, [self getSnowballWordSetWithOrgApacheLuceneAnalysisUtilResourceLoader:loader withNSString:stopWordFiles_ withBoolean:ignoreCase_]);
     }
     else {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$", @"Unknown 'format' specified for 'words' file: ", format_)) autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$", @"Unknown 'format' specified for 'words' file: ", format_));
     }
   }
   else {
     if (nil != format_) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$", @"'format' can not be specified w/o an explicit 'words' file: ", format_)) autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$", @"'format' can not be specified w/o an explicit 'words' file: ", format_));
     }
-    JreStrongAssignAndConsume(&stopWords_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JreLoadStatic(OrgApacheLuceneAnalysisCoreStopAnalyzer, ENGLISH_STOP_WORDS_SET_), ignoreCase_));
+    JreStrongAssignAndConsume(&stopWords_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JreLoadStatic(OrgApacheLuceneAnalysisCoreStopAnalyzer, ENGLISH_STOP_WORDS_SET), ignoreCase_));
   }
 }
 
@@ -73,11 +81,11 @@ NSString *OrgApacheLuceneAnalysisCoreStopFilterFactory_FORMAT_SNOWBALL_ = @"snow
 }
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  if ([((OrgApacheLuceneUtilVersion *) nil_chk(luceneMatchVersion_)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_4_0_)]) {
-    return [new_OrgApacheLuceneAnalysisCoreStopFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(input, stopWords_) autorelease];
+  if ([((OrgApacheLuceneUtilVersion *) nil_chk(luceneMatchVersion_)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_4_0)]) {
+    return create_OrgApacheLuceneAnalysisCoreStopFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(input, stopWords_);
   }
   else {
-    OrgApacheLuceneAnalysisTokenStream *filter = [new_OrgApacheLuceneAnalysisCoreLucene43StopFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(enablePositionIncrements_, input, stopWords_) autorelease];
+    OrgApacheLuceneAnalysisTokenStream *filter = create_OrgApacheLuceneAnalysisCoreLucene43StopFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(enablePositionIncrements_, input, stopWords_);
     return filter;
   }
 }
@@ -91,15 +99,15 @@ NSString *OrgApacheLuceneAnalysisCoreStopFilterFactory_FORMAT_SNOWBALL_ = @"snow
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "StopFilterFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "StopFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "informWithOrgApacheLuceneAnalysisUtilResourceLoader:", "inform", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "isIgnoreCase", NULL, "Z", 0x1, NULL, NULL },
     { "getStopWords", NULL, "Lorg.apache.lucene.analysis.util.CharArraySet;", 0x1, NULL, NULL },
     { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenStream;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "FORMAT_WORDSET_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisCoreStopFilterFactory_FORMAT_WORDSET_, NULL, .constantValue.asLong = 0 },
-    { "FORMAT_SNOWBALL_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisCoreStopFilterFactory_FORMAT_SNOWBALL_, NULL, .constantValue.asLong = 0 },
+    { "FORMAT_WORDSET", "FORMAT_WORDSET", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisCoreStopFilterFactory_FORMAT_WORDSET, NULL, .constantValue.asLong = 0 },
+    { "FORMAT_SNOWBALL", "FORMAT_SNOWBALL", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisCoreStopFilterFactory_FORMAT_SNOWBALL, NULL, .constantValue.asLong = 0 },
     { "stopWords_", NULL, 0x2, "Lorg.apache.lucene.analysis.util.CharArraySet;", NULL, NULL, .constantValue.asLong = 0 },
     { "stopWordFiles_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
     { "format_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
@@ -115,27 +123,29 @@ NSString *OrgApacheLuceneAnalysisCoreStopFilterFactory_FORMAT_SNOWBALL_ = @"snow
 void OrgApacheLuceneAnalysisCoreStopFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisCoreStopFilterFactory *self, id<JavaUtilMap> args) {
   OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
   JreStrongAssign(&self->stopWordFiles_, [self getWithJavaUtilMap:args withNSString:@"words"]);
-  JreStrongAssign(&self->format_, [self getWithJavaUtilMap:args withNSString:@"format" withNSString:(nil == self->stopWordFiles_ ? nil : OrgApacheLuceneAnalysisCoreStopFilterFactory_FORMAT_WORDSET_)]);
+  JreStrongAssign(&self->format_, [self getWithJavaUtilMap:args withNSString:@"format" withNSString:(nil == self->stopWordFiles_ ? nil : OrgApacheLuceneAnalysisCoreStopFilterFactory_FORMAT_WORDSET)]);
   self->ignoreCase_ = [self getBooleanWithJavaUtilMap:args withNSString:@"ignoreCase" withBoolean:false];
-  if ([((OrgApacheLuceneUtilVersion *) nil_chk(self->luceneMatchVersion_)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_5_0_0_)] == false) {
-    jboolean defaultValue = [self->luceneMatchVersion_ onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_4_0_)];
+  if ([((OrgApacheLuceneUtilVersion *) nil_chk(self->luceneMatchVersion_)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_5_0_0)] == false) {
+    jboolean defaultValue = [self->luceneMatchVersion_ onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_4_0)];
     self->enablePositionIncrements_ = [self getBooleanWithJavaUtilMap:args withNSString:@"enablePositionIncrements" withBoolean:defaultValue];
-    if (self->enablePositionIncrements_ == false && [self->luceneMatchVersion_ onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_4_0_)]) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"enablePositionIncrements=false is not supported anymore as of Lucene 4.4") autorelease];
+    if (self->enablePositionIncrements_ == false && [self->luceneMatchVersion_ onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_4_0)]) {
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"enablePositionIncrements=false is not supported anymore as of Lucene 4.4");
     }
   }
   else if ([((id<JavaUtilMap>) nil_chk(args)) containsKeyWithId:@"enablePositionIncrements"]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"enablePositionIncrements is not a valid option as of Lucene 5.0") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"enablePositionIncrements is not a valid option as of Lucene 5.0");
   }
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisCoreStopFilterFactory *new_OrgApacheLuceneAnalysisCoreStopFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisCoreStopFilterFactory *self = [OrgApacheLuceneAnalysisCoreStopFilterFactory alloc];
-  OrgApacheLuceneAnalysisCoreStopFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCoreStopFilterFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisCoreStopFilterFactory *create_OrgApacheLuceneAnalysisCoreStopFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCoreStopFilterFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCoreStopFilterFactory)

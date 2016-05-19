@@ -5,22 +5,26 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexNormValuesWriter_INCLUDE_ALL")
-#if OrgApacheLuceneIndexNormValuesWriter_RESTRICT
-#define OrgApacheLuceneIndexNormValuesWriter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexNormValuesWriter")
+#ifdef RESTRICT_OrgApacheLuceneIndexNormValuesWriter
+#define INCLUDE_ALL_OrgApacheLuceneIndexNormValuesWriter 0
 #else
-#define OrgApacheLuceneIndexNormValuesWriter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexNormValuesWriter 1
 #endif
-#undef OrgApacheLuceneIndexNormValuesWriter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexNormValuesWriter
 
-#if !defined (_OrgApacheLuceneIndexNormValuesWriter_) && (OrgApacheLuceneIndexNormValuesWriter_INCLUDE_ALL || OrgApacheLuceneIndexNormValuesWriter_INCLUDE)
-#define _OrgApacheLuceneIndexNormValuesWriter_
+#if !defined (OrgApacheLuceneIndexNormValuesWriter_) && (INCLUDE_ALL_OrgApacheLuceneIndexNormValuesWriter || defined(INCLUDE_OrgApacheLuceneIndexNormValuesWriter))
+#define OrgApacheLuceneIndexNormValuesWriter_
 
 @class OrgApacheLuceneCodecsNormsConsumer;
 @class OrgApacheLuceneIndexFieldInfo;
 @class OrgApacheLuceneIndexSegmentWriteState;
 @class OrgApacheLuceneUtilCounter;
 
+/*!
+ @brief Buffers up pending long per doc, then flushes when
+ segment flushes.
+ */
 @interface OrgApacheLuceneIndexNormValuesWriter : NSObject
 
 #pragma mark Public
@@ -44,8 +48,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexNormValuesWriter_initWithOrgApacheLuc
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexNormValuesWriter *new_OrgApacheLuceneIndexNormValuesWriter_initWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilCounter_(OrgApacheLuceneIndexFieldInfo *fieldInfo, OrgApacheLuceneUtilCounter *iwBytesUsed) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexNormValuesWriter *create_OrgApacheLuceneIndexNormValuesWriter_initWithOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilCounter_(OrgApacheLuceneIndexFieldInfo *fieldInfo, OrgApacheLuceneUtilCounter *iwBytesUsed);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexNormValuesWriter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexNormValuesWriter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexNormValuesWriter")

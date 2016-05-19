@@ -40,7 +40,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   static const J2ObjcMethodInfo methods[] = {
     { "rescoreWithOrgApacheLuceneSearchIndexSearcher:withOrgApacheLuceneSearchTopDocs:withInt:", "rescore", "Lorg.apache.lucene.search.TopDocs;", 0x401, "Ljava.io.IOException;", NULL },
     { "explainWithOrgApacheLuceneSearchIndexSearcher:withOrgApacheLuceneSearchExplanation:withInt:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x401, "Ljava.io.IOException;", NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "Rescorer", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneSearchRescorer = { 2, "Rescorer", "org.apache.lucene.search", NULL, 0x401, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchRescorer;

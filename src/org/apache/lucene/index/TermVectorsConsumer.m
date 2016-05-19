@@ -61,7 +61,7 @@ withOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState
     @try {
       [self fillWithInt:numDocs];
       JreAssert((state->segmentInfo_ != nil), (@"org/apache/lucene/index/TermVectorsConsumer.java:64 condition failed: assert state.segmentInfo != null;"));
-      [writer_ finishWithOrgApacheLuceneIndexFieldInfos:state->fieldInfos_ withInt:numDocs];
+      [((OrgApacheLuceneCodecsTermVectorsWriter *) nil_chk(writer_)) finishWithOrgApacheLuceneIndexFieldInfos:state->fieldInfos_ withInt:numDocs];
     }
     @finally {
       OrgApacheLuceneUtilIOUtils_closeWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ writer_ } count:1 type:JavaIoCloseable_class_()]);
@@ -75,7 +75,7 @@ withOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState
 - (void)fillWithInt:(jint)docID {
   while (lastDocID_ < docID) {
     [((OrgApacheLuceneCodecsTermVectorsWriter *) nil_chk(writer_)) startDocumentWithInt:0];
-    [writer_ finishDocument];
+    [((OrgApacheLuceneCodecsTermVectorsWriter *) nil_chk(writer_)) finishDocument];
     lastDocID_++;
   }
 }
@@ -95,7 +95,7 @@ withOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState
   for (jint i = 0; i < numVectorFields_; i++) {
     [((OrgApacheLuceneIndexTermVectorsConsumerPerField *) nil_chk(IOSObjectArray_Get(nil_chk(perFields_), i))) finishDocument];
   }
-  [writer_ finishDocument];
+  [((OrgApacheLuceneCodecsTermVectorsWriter *) nil_chk(writer_)) finishDocument];
   JreAssert((lastDocID_ == docState_->docID_), (JreStrcat("$I$I", @"lastDocID=", lastDocID_, @" docState.docID=", docState_->docID_)));
   lastDocID_++;
   [super reset];
@@ -124,12 +124,12 @@ withOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState
 
 - (OrgApacheLuceneIndexTermsHashPerField *)addFieldWithOrgApacheLuceneIndexFieldInvertState:(OrgApacheLuceneIndexFieldInvertState *)invertState
                                                           withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo {
-  return [new_OrgApacheLuceneIndexTermVectorsConsumerPerField_initWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermVectorsConsumer_withOrgApacheLuceneIndexFieldInfo_(invertState, self, fieldInfo) autorelease];
+  return create_OrgApacheLuceneIndexTermVectorsConsumerPerField_initWithOrgApacheLuceneIndexFieldInvertState_withOrgApacheLuceneIndexTermVectorsConsumer_withOrgApacheLuceneIndexFieldInfo_(invertState, self, fieldInfo);
 }
 
 - (void)addFieldToFlushWithOrgApacheLuceneIndexTermVectorsConsumerPerField:(OrgApacheLuceneIndexTermVectorsConsumerPerField *)fieldToFlush {
   if (numVectorFields_ == ((IOSObjectArray *) nil_chk(perFields_))->size_) {
-    jint newSize = OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(numVectorFields_ + 1, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_));
+    jint newSize = OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(numVectorFields_ + 1, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF));
     IOSObjectArray *newArray = [IOSObjectArray arrayWithLength:newSize type:OrgApacheLuceneIndexTermVectorsConsumerPerField_class_()];
     JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(perFields_, 0, newArray, 0, numVectorFields_);
     JreStrongAssign(&perFields_, newArray);
@@ -155,7 +155,7 @@ withOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneIndexDocumentsWriterPerThread:", "TermVectorsConsumer", NULL, 0x1, NULL, NULL },
-    { "flushWithJavaUtilMap:withOrgApacheLuceneIndexSegmentWriteState:", "flush", "V", 0x0, "Ljava.io.IOException;", NULL },
+    { "flushWithJavaUtilMap:withOrgApacheLuceneIndexSegmentWriteState:", "flush", "V", 0x0, "Ljava.io.IOException;", "(Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/index/TermsHashPerField;>;Lorg/apache/lucene/index/SegmentWriteState;)V" },
     { "fillWithInt:", "fill", "V", 0x0, "Ljava.io.IOException;", NULL },
     { "initTermVectorsWriter", NULL, "V", 0x2, "Ljava.io.IOException;", NULL },
     { "finishDocument", NULL, "V", 0x0, "Ljava.io.IOException;", NULL },
@@ -192,14 +192,16 @@ void OrgApacheLuceneIndexTermVectorsConsumer_initWithOrgApacheLuceneIndexDocumen
 }
 
 OrgApacheLuceneIndexTermVectorsConsumer *new_OrgApacheLuceneIndexTermVectorsConsumer_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_(OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter) {
-  OrgApacheLuceneIndexTermVectorsConsumer *self = [OrgApacheLuceneIndexTermVectorsConsumer alloc];
-  OrgApacheLuceneIndexTermVectorsConsumer_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_(self, docWriter);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexTermVectorsConsumer, initWithOrgApacheLuceneIndexDocumentsWriterPerThread_, docWriter)
+}
+
+OrgApacheLuceneIndexTermVectorsConsumer *create_OrgApacheLuceneIndexTermVectorsConsumer_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_(OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexTermVectorsConsumer, initWithOrgApacheLuceneIndexDocumentsWriterPerThread_, docWriter)
 }
 
 void OrgApacheLuceneIndexTermVectorsConsumer_initTermVectorsWriter(OrgApacheLuceneIndexTermVectorsConsumer *self) {
   if (self->writer_ == nil) {
-    OrgApacheLuceneStoreIOContext *context = [new_OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreFlushInfo_([new_OrgApacheLuceneStoreFlushInfo_initWithInt_withLong_([((OrgApacheLuceneIndexDocumentsWriterPerThread *) nil_chk(self->docWriter_)) getNumDocsInRAM], [self->docWriter_ bytesUsed]) autorelease]) autorelease];
+    OrgApacheLuceneStoreIOContext *context = create_OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreFlushInfo_(create_OrgApacheLuceneStoreFlushInfo_initWithInt_withLong_([((OrgApacheLuceneIndexDocumentsWriterPerThread *) nil_chk(self->docWriter_)) getNumDocsInRAM], [self->docWriter_ bytesUsed]));
     JreStrongAssign(&self->writer_, [((OrgApacheLuceneCodecsTermVectorsFormat *) nil_chk([((OrgApacheLuceneCodecsCodec *) nil_chk(self->docWriter_->codec_)) termVectorsFormat])) vectorsWriterWithOrgApacheLuceneStoreDirectory:self->docWriter_->directory_ withOrgApacheLuceneIndexSegmentInfo:[self->docWriter_ getSegmentInfo] withOrgApacheLuceneStoreIOContext:context]);
     self->lastDocID_ = 0;
   }

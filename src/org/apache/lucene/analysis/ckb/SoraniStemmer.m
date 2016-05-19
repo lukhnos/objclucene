@@ -88,7 +88,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "stemWithCharArray:withInt:", "stem", "I", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "SoraniStemmer", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCkbSoraniStemmer = { 2, "SoraniStemmer", "org.apache.lucene.analysis.ckb", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisCkbSoraniStemmer;
@@ -101,9 +101,11 @@ void OrgApacheLuceneAnalysisCkbSoraniStemmer_init(OrgApacheLuceneAnalysisCkbSora
 }
 
 OrgApacheLuceneAnalysisCkbSoraniStemmer *new_OrgApacheLuceneAnalysisCkbSoraniStemmer_init() {
-  OrgApacheLuceneAnalysisCkbSoraniStemmer *self = [OrgApacheLuceneAnalysisCkbSoraniStemmer alloc];
-  OrgApacheLuceneAnalysisCkbSoraniStemmer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCkbSoraniStemmer, init)
+}
+
+OrgApacheLuceneAnalysisCkbSoraniStemmer *create_OrgApacheLuceneAnalysisCkbSoraniStemmer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCkbSoraniStemmer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCkbSoraniStemmer)

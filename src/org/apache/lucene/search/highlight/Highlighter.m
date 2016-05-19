@@ -39,6 +39,12 @@
   id<OrgApacheLuceneSearchHighlightScorer> fragmentScorer_;
 }
 
+/*!
+ @brief Improves readability of a score-sorted list of TextFragments by merging any fragments
+ that were contiguous in the original text into one larger fragment with the correct order.
+ This will leave a "null" in the array entry for the lesser scored fragment.
+ @param frag An array of document fragments in descending score
+ */
 - (void)mergeContiguousFragmentsWithOrgApacheLuceneSearchHighlightTextFragmentArray:(IOSObjectArray *)frag;
 
 @end
@@ -57,6 +63,10 @@ __attribute__((unused)) static IOSObjectArray *OrgApacheLuceneSearchHighlightHig
 __attribute__((unused)) static void OrgApacheLuceneSearchHighlightHighlighter_mergeContiguousFragmentsWithOrgApacheLuceneSearchHighlightTextFragmentArray_(OrgApacheLuceneSearchHighlightHighlighter *self, IOSObjectArray *frag);
 
 @implementation OrgApacheLuceneSearchHighlightHighlighter
+
++ (jint)DEFAULT_MAX_CHARS_TO_ANALYZE {
+  return OrgApacheLuceneSearchHighlightHighlighter_DEFAULT_MAX_CHARS_TO_ANALYZE;
+}
 
 - (instancetype)initWithOrgApacheLuceneSearchHighlightScorer:(id<OrgApacheLuceneSearchHighlightScorer>)fragmentScorer {
   OrgApacheLuceneSearchHighlightHighlighter_initWithOrgApacheLuceneSearchHighlightScorer_(self, fragmentScorer);
@@ -118,7 +128,7 @@ __attribute__((unused)) static void OrgApacheLuceneSearchHighlightHighlighter_me
                                                              withInt:(jint)maxNumFragments
                                                         withNSString:(NSString *)separator {
   IOSObjectArray *sections = OrgApacheLuceneSearchHighlightHighlighter_getBestFragmentsWithOrgApacheLuceneAnalysisTokenStream_withNSString_withInt_(self, tokenStream, text, maxNumFragments);
-  JavaLangStringBuilder *result = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *result = create_JavaLangStringBuilder_init();
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(sections))->size_; i++) {
     if (i > 0) {
       [result appendWithNSString:separator];
@@ -204,23 +214,27 @@ __attribute__((unused)) static void OrgApacheLuceneSearchHighlightHighlighter_me
 @end
 
 void OrgApacheLuceneSearchHighlightHighlighter_initWithOrgApacheLuceneSearchHighlightScorer_(OrgApacheLuceneSearchHighlightHighlighter *self, id<OrgApacheLuceneSearchHighlightScorer> fragmentScorer) {
-  OrgApacheLuceneSearchHighlightHighlighter_initWithOrgApacheLuceneSearchHighlightFormatter_withOrgApacheLuceneSearchHighlightScorer_(self, [new_OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_init() autorelease], fragmentScorer);
+  OrgApacheLuceneSearchHighlightHighlighter_initWithOrgApacheLuceneSearchHighlightFormatter_withOrgApacheLuceneSearchHighlightScorer_(self, create_OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_init(), fragmentScorer);
 }
 
 OrgApacheLuceneSearchHighlightHighlighter *new_OrgApacheLuceneSearchHighlightHighlighter_initWithOrgApacheLuceneSearchHighlightScorer_(id<OrgApacheLuceneSearchHighlightScorer> fragmentScorer) {
-  OrgApacheLuceneSearchHighlightHighlighter *self = [OrgApacheLuceneSearchHighlightHighlighter alloc];
-  OrgApacheLuceneSearchHighlightHighlighter_initWithOrgApacheLuceneSearchHighlightScorer_(self, fragmentScorer);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchHighlightHighlighter, initWithOrgApacheLuceneSearchHighlightScorer_, fragmentScorer)
+}
+
+OrgApacheLuceneSearchHighlightHighlighter *create_OrgApacheLuceneSearchHighlightHighlighter_initWithOrgApacheLuceneSearchHighlightScorer_(id<OrgApacheLuceneSearchHighlightScorer> fragmentScorer) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchHighlightHighlighter, initWithOrgApacheLuceneSearchHighlightScorer_, fragmentScorer)
 }
 
 void OrgApacheLuceneSearchHighlightHighlighter_initWithOrgApacheLuceneSearchHighlightFormatter_withOrgApacheLuceneSearchHighlightScorer_(OrgApacheLuceneSearchHighlightHighlighter *self, id<OrgApacheLuceneSearchHighlightFormatter> formatter, id<OrgApacheLuceneSearchHighlightScorer> fragmentScorer) {
-  OrgApacheLuceneSearchHighlightHighlighter_initWithOrgApacheLuceneSearchHighlightFormatter_withOrgApacheLuceneSearchHighlightEncoder_withOrgApacheLuceneSearchHighlightScorer_(self, formatter, [new_OrgApacheLuceneSearchHighlightDefaultEncoder_init() autorelease], fragmentScorer);
+  OrgApacheLuceneSearchHighlightHighlighter_initWithOrgApacheLuceneSearchHighlightFormatter_withOrgApacheLuceneSearchHighlightEncoder_withOrgApacheLuceneSearchHighlightScorer_(self, formatter, create_OrgApacheLuceneSearchHighlightDefaultEncoder_init(), fragmentScorer);
 }
 
 OrgApacheLuceneSearchHighlightHighlighter *new_OrgApacheLuceneSearchHighlightHighlighter_initWithOrgApacheLuceneSearchHighlightFormatter_withOrgApacheLuceneSearchHighlightScorer_(id<OrgApacheLuceneSearchHighlightFormatter> formatter, id<OrgApacheLuceneSearchHighlightScorer> fragmentScorer) {
-  OrgApacheLuceneSearchHighlightHighlighter *self = [OrgApacheLuceneSearchHighlightHighlighter alloc];
-  OrgApacheLuceneSearchHighlightHighlighter_initWithOrgApacheLuceneSearchHighlightFormatter_withOrgApacheLuceneSearchHighlightScorer_(self, formatter, fragmentScorer);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchHighlightHighlighter, initWithOrgApacheLuceneSearchHighlightFormatter_withOrgApacheLuceneSearchHighlightScorer_, formatter, fragmentScorer)
+}
+
+OrgApacheLuceneSearchHighlightHighlighter *create_OrgApacheLuceneSearchHighlightHighlighter_initWithOrgApacheLuceneSearchHighlightFormatter_withOrgApacheLuceneSearchHighlightScorer_(id<OrgApacheLuceneSearchHighlightFormatter> formatter, id<OrgApacheLuceneSearchHighlightScorer> fragmentScorer) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchHighlightHighlighter, initWithOrgApacheLuceneSearchHighlightFormatter_withOrgApacheLuceneSearchHighlightScorer_, formatter, fragmentScorer)
 }
 
 void OrgApacheLuceneSearchHighlightHighlighter_initWithOrgApacheLuceneSearchHighlightFormatter_withOrgApacheLuceneSearchHighlightEncoder_withOrgApacheLuceneSearchHighlightScorer_(OrgApacheLuceneSearchHighlightHighlighter *self, id<OrgApacheLuceneSearchHighlightFormatter> formatter, id<OrgApacheLuceneSearchHighlightEncoder> encoder, id<OrgApacheLuceneSearchHighlightScorer> fragmentScorer) {
@@ -234,9 +248,11 @@ void OrgApacheLuceneSearchHighlightHighlighter_initWithOrgApacheLuceneSearchHigh
 }
 
 OrgApacheLuceneSearchHighlightHighlighter *new_OrgApacheLuceneSearchHighlightHighlighter_initWithOrgApacheLuceneSearchHighlightFormatter_withOrgApacheLuceneSearchHighlightEncoder_withOrgApacheLuceneSearchHighlightScorer_(id<OrgApacheLuceneSearchHighlightFormatter> formatter, id<OrgApacheLuceneSearchHighlightEncoder> encoder, id<OrgApacheLuceneSearchHighlightScorer> fragmentScorer) {
-  OrgApacheLuceneSearchHighlightHighlighter *self = [OrgApacheLuceneSearchHighlightHighlighter alloc];
-  OrgApacheLuceneSearchHighlightHighlighter_initWithOrgApacheLuceneSearchHighlightFormatter_withOrgApacheLuceneSearchHighlightEncoder_withOrgApacheLuceneSearchHighlightScorer_(self, formatter, encoder, fragmentScorer);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchHighlightHighlighter, initWithOrgApacheLuceneSearchHighlightFormatter_withOrgApacheLuceneSearchHighlightEncoder_withOrgApacheLuceneSearchHighlightScorer_, formatter, encoder, fragmentScorer)
+}
+
+OrgApacheLuceneSearchHighlightHighlighter *create_OrgApacheLuceneSearchHighlightHighlighter_initWithOrgApacheLuceneSearchHighlightFormatter_withOrgApacheLuceneSearchHighlightEncoder_withOrgApacheLuceneSearchHighlightScorer_(id<OrgApacheLuceneSearchHighlightFormatter> formatter, id<OrgApacheLuceneSearchHighlightEncoder> encoder, id<OrgApacheLuceneSearchHighlightScorer> fragmentScorer) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchHighlightHighlighter, initWithOrgApacheLuceneSearchHighlightFormatter_withOrgApacheLuceneSearchHighlightEncoder_withOrgApacheLuceneSearchHighlightScorer_, formatter, encoder, fragmentScorer)
 }
 
 NSString *OrgApacheLuceneSearchHighlightHighlighter_getBestFragmentWithOrgApacheLuceneAnalysisTokenStream_withNSString_(OrgApacheLuceneSearchHighlightHighlighter *self, OrgApacheLuceneAnalysisTokenStream *tokenStream, NSString *text) {
@@ -250,7 +266,7 @@ NSString *OrgApacheLuceneSearchHighlightHighlighter_getBestFragmentWithOrgApache
 IOSObjectArray *OrgApacheLuceneSearchHighlightHighlighter_getBestFragmentsWithOrgApacheLuceneAnalysisTokenStream_withNSString_withInt_(OrgApacheLuceneSearchHighlightHighlighter *self, OrgApacheLuceneAnalysisTokenStream *tokenStream, NSString *text, jint maxNumFragments) {
   maxNumFragments = JavaLangMath_maxWithInt_withInt_(1, maxNumFragments);
   IOSObjectArray *frag = OrgApacheLuceneSearchHighlightHighlighter_getBestTextFragmentsWithOrgApacheLuceneAnalysisTokenStream_withNSString_withBoolean_withInt_(self, tokenStream, text, true, maxNumFragments);
-  JavaUtilArrayList *fragTexts = [new_JavaUtilArrayList_init() autorelease];
+  JavaUtilArrayList *fragTexts = create_JavaUtilArrayList_init();
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(frag))->size_; i++) {
     if ((IOSObjectArray_Get(frag, i) != nil) && ([((OrgApacheLuceneSearchHighlightTextFragment *) nil_chk(IOSObjectArray_Get(frag, i))) getScore] > 0)) {
       [fragTexts addWithId:[((OrgApacheLuceneSearchHighlightTextFragment *) nil_chk(IOSObjectArray_Get(frag, i))) description]];
@@ -260,59 +276,59 @@ IOSObjectArray *OrgApacheLuceneSearchHighlightHighlighter_getBestFragmentsWithOr
 }
 
 IOSObjectArray *OrgApacheLuceneSearchHighlightHighlighter_getBestTextFragmentsWithOrgApacheLuceneAnalysisTokenStream_withNSString_withBoolean_withInt_(OrgApacheLuceneSearchHighlightHighlighter *self, OrgApacheLuceneAnalysisTokenStream *tokenStream, NSString *text, jboolean mergeContiguousFragments, jint maxNumFragments) {
-  JavaUtilArrayList *docFrags = [new_JavaUtilArrayList_init() autorelease];
-  JavaLangStringBuilder *newText = [new_JavaLangStringBuilder_init() autorelease];
+  JavaUtilArrayList *docFrags = create_JavaUtilArrayList_init();
+  JavaLangStringBuilder *newText = create_JavaLangStringBuilder_init();
   id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt = [((OrgApacheLuceneAnalysisTokenStream *) nil_chk(tokenStream)) addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()];
   id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute> offsetAtt = [tokenStream addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_()];
-  OrgApacheLuceneSearchHighlightTextFragment *currentFrag = [new_OrgApacheLuceneSearchHighlightTextFragment_initWithJavaLangCharSequence_withInt_withInt_(newText, [newText length], [docFrags size]) autorelease];
+  OrgApacheLuceneSearchHighlightTextFragment *currentFrag = create_OrgApacheLuceneSearchHighlightTextFragment_initWithJavaLangCharSequence_withInt_withInt_(newText, [newText length], [docFrags size]);
   if ([self->fragmentScorer_ isKindOfClass:[OrgApacheLuceneSearchHighlightQueryScorer class]]) {
-    [((OrgApacheLuceneSearchHighlightQueryScorer *) nil_chk(((OrgApacheLuceneSearchHighlightQueryScorer *) check_class_cast(self->fragmentScorer_, [OrgApacheLuceneSearchHighlightQueryScorer class])))) setMaxDocCharsToAnalyzeWithInt:self->maxDocCharsToAnalyze_];
+    [((OrgApacheLuceneSearchHighlightQueryScorer *) nil_chk(((OrgApacheLuceneSearchHighlightQueryScorer *) cast_chk(self->fragmentScorer_, [OrgApacheLuceneSearchHighlightQueryScorer class])))) setMaxDocCharsToAnalyzeWithInt:self->maxDocCharsToAnalyze_];
   }
   OrgApacheLuceneAnalysisTokenStream *newStream = [((id<OrgApacheLuceneSearchHighlightScorer>) nil_chk(self->fragmentScorer_)) init__WithOrgApacheLuceneAnalysisTokenStream:tokenStream];
   if (newStream != nil) {
     tokenStream = newStream;
   }
-  [self->fragmentScorer_ startFragmentWithOrgApacheLuceneSearchHighlightTextFragment:currentFrag];
+  [((id<OrgApacheLuceneSearchHighlightScorer>) nil_chk(self->fragmentScorer_)) startFragmentWithOrgApacheLuceneSearchHighlightTextFragment:currentFrag];
   [docFrags addWithId:currentFrag];
-  OrgApacheLuceneSearchHighlightFragmentQueue *fragQueue = [new_OrgApacheLuceneSearchHighlightFragmentQueue_initWithInt_(maxNumFragments) autorelease];
+  OrgApacheLuceneSearchHighlightFragmentQueue *fragQueue = create_OrgApacheLuceneSearchHighlightFragmentQueue_initWithInt_(maxNumFragments);
   @try {
     NSString *tokenText;
     jint startOffset;
     jint endOffset;
     jint lastEndOffset = 0;
     [((id<OrgApacheLuceneSearchHighlightFragmenter>) nil_chk(self->textFragmenter_)) startWithNSString:text withOrgApacheLuceneAnalysisTokenStream:tokenStream];
-    OrgApacheLuceneSearchHighlightTokenGroup *tokenGroup = [new_OrgApacheLuceneSearchHighlightTokenGroup_initWithOrgApacheLuceneAnalysisTokenStream_(tokenStream) autorelease];
+    OrgApacheLuceneSearchHighlightTokenGroup *tokenGroup = create_OrgApacheLuceneSearchHighlightTokenGroup_initWithOrgApacheLuceneAnalysisTokenStream_(tokenStream);
     [tokenStream reset];
     for (jboolean next = [tokenStream incrementToken]; next && ([((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt)) startOffset] < self->maxDocCharsToAnalyze_); next = [tokenStream incrementToken]) {
       if (([((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt)) endOffset] > ((jint) [((NSString *) nil_chk(text)) length])) || ([offsetAtt startOffset] > ((jint) [text length]))) {
-        @throw [new_OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException_initWithNSString_(JreStrcat("$$$I", @"Token ", [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt)) description], @" exceeds length of provided text sized ", ((jint) [text length]))) autorelease];
+        @throw create_OrgApacheLuceneSearchHighlightInvalidTokenOffsetsException_initWithNSString_(JreStrcat("$$$I", @"Token ", [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt)) description], @" exceeds length of provided text sized ", ((jint) [text length])));
       }
       if (([tokenGroup getNumTokens] > 0) && ([tokenGroup isDistinct])) {
         startOffset = [tokenGroup getStartOffset];
         endOffset = [tokenGroup getEndOffset];
         tokenText = [text substring:startOffset endIndex:endOffset];
         NSString *markedUpText = [((id<OrgApacheLuceneSearchHighlightFormatter>) nil_chk(self->formatter_)) highlightTermWithNSString:[((id<OrgApacheLuceneSearchHighlightEncoder>) nil_chk(self->encoder_)) encodeTextWithNSString:tokenText] withOrgApacheLuceneSearchHighlightTokenGroup:tokenGroup];
-        if (startOffset > lastEndOffset) [newText appendWithNSString:[self->encoder_ encodeTextWithNSString:[text substring:lastEndOffset endIndex:startOffset]]];
+        if (startOffset > lastEndOffset) [newText appendWithNSString:[((id<OrgApacheLuceneSearchHighlightEncoder>) nil_chk(self->encoder_)) encodeTextWithNSString:[text substring:lastEndOffset endIndex:startOffset]]];
         [newText appendWithNSString:markedUpText];
         lastEndOffset = JavaLangMath_maxWithInt_withInt_(endOffset, lastEndOffset);
         [tokenGroup clear];
-        if ([self->textFragmenter_ isNewFragment]) {
-          [currentFrag setScoreWithFloat:[self->fragmentScorer_ getFragmentScore]];
+        if ([((id<OrgApacheLuceneSearchHighlightFragmenter>) nil_chk(self->textFragmenter_)) isNewFragment]) {
+          [currentFrag setScoreWithFloat:[((id<OrgApacheLuceneSearchHighlightScorer>) nil_chk(self->fragmentScorer_)) getFragmentScore]];
           currentFrag->textEndPos_ = [newText length];
-          currentFrag = [new_OrgApacheLuceneSearchHighlightTextFragment_initWithJavaLangCharSequence_withInt_withInt_(newText, [newText length], [docFrags size]) autorelease];
-          [self->fragmentScorer_ startFragmentWithOrgApacheLuceneSearchHighlightTextFragment:currentFrag];
+          currentFrag = create_OrgApacheLuceneSearchHighlightTextFragment_initWithJavaLangCharSequence_withInt_withInt_(newText, [newText length], [docFrags size]);
+          [((id<OrgApacheLuceneSearchHighlightScorer>) nil_chk(self->fragmentScorer_)) startFragmentWithOrgApacheLuceneSearchHighlightTextFragment:currentFrag];
           [docFrags addWithId:currentFrag];
         }
       }
-      [tokenGroup addTokenWithFloat:[self->fragmentScorer_ getTokenScore]];
+      [tokenGroup addTokenWithFloat:[((id<OrgApacheLuceneSearchHighlightScorer>) nil_chk(self->fragmentScorer_)) getTokenScore]];
     }
-    [currentFrag setScoreWithFloat:[self->fragmentScorer_ getFragmentScore]];
+    [currentFrag setScoreWithFloat:[((id<OrgApacheLuceneSearchHighlightScorer>) nil_chk(self->fragmentScorer_)) getFragmentScore]];
     if ([tokenGroup getNumTokens] > 0) {
       startOffset = [tokenGroup getStartOffset];
       endOffset = [tokenGroup getEndOffset];
       tokenText = [((NSString *) nil_chk(text)) substring:startOffset endIndex:endOffset];
       NSString *markedUpText = [((id<OrgApacheLuceneSearchHighlightFormatter>) nil_chk(self->formatter_)) highlightTermWithNSString:[((id<OrgApacheLuceneSearchHighlightEncoder>) nil_chk(self->encoder_)) encodeTextWithNSString:tokenText] withOrgApacheLuceneSearchHighlightTokenGroup:tokenGroup];
-      if (startOffset > lastEndOffset) [newText appendWithNSString:[self->encoder_ encodeTextWithNSString:[text substring:lastEndOffset endIndex:startOffset]]];
+      if (startOffset > lastEndOffset) [newText appendWithNSString:[((id<OrgApacheLuceneSearchHighlightEncoder>) nil_chk(self->encoder_)) encodeTextWithNSString:[text substring:lastEndOffset endIndex:startOffset]]];
       [newText appendWithNSString:markedUpText];
       lastEndOffset = JavaLangMath_maxWithInt_withInt_(lastEndOffset, endOffset);
     }
@@ -330,7 +346,7 @@ IOSObjectArray *OrgApacheLuceneSearchHighlightHighlighter_getBestTextFragmentsWi
     }
     if (mergeContiguousFragments) {
       OrgApacheLuceneSearchHighlightHighlighter_mergeContiguousFragmentsWithOrgApacheLuceneSearchHighlightTextFragmentArray_(self, frag);
-      JavaUtilArrayList *fragTexts = [new_JavaUtilArrayList_init() autorelease];
+      JavaUtilArrayList *fragTexts = create_JavaUtilArrayList_init();
       for (jint i = 0; i < frag->size_; i++) {
         if ((IOSObjectArray_Get(frag, i) != nil) && ([((OrgApacheLuceneSearchHighlightTextFragment *) nil_chk(IOSObjectArray_Get(frag, i))) getScore] > 0)) {
           [fragTexts addWithId:IOSObjectArray_Get(frag, i)];
@@ -423,7 +439,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchHighlightHighlighter)
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithInt:", "FragmentQueue", NULL, 0x1, NULL, NULL },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x11, NULL, NULL },
+    { "lessThanWithId:withId:", "lessThan", "Z", 0x11, NULL, "(Lorg/apache/lucene/search/highlight/TextFragment;Lorg/apache/lucene/search/highlight/TextFragment;)Z" },
   };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.highlight.TextFragment;"};
   static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightFragmentQueue = { 2, "FragmentQueue", "org.apache.lucene.search.highlight", NULL, 0x0, 2, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/search/highlight/TextFragment;>;" };
@@ -437,9 +453,11 @@ void OrgApacheLuceneSearchHighlightFragmentQueue_initWithInt_(OrgApacheLuceneSea
 }
 
 OrgApacheLuceneSearchHighlightFragmentQueue *new_OrgApacheLuceneSearchHighlightFragmentQueue_initWithInt_(jint size) {
-  OrgApacheLuceneSearchHighlightFragmentQueue *self = [OrgApacheLuceneSearchHighlightFragmentQueue alloc];
-  OrgApacheLuceneSearchHighlightFragmentQueue_initWithInt_(self, size);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchHighlightFragmentQueue, initWithInt_, size)
+}
+
+OrgApacheLuceneSearchHighlightFragmentQueue *create_OrgApacheLuceneSearchHighlightFragmentQueue_initWithInt_(jint size) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchHighlightFragmentQueue, initWithInt_, size)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchHighlightFragmentQueue)

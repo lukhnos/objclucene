@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_RESTRICT
-#define OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase 0
 #else
-#define OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase 1
 #endif
-#undef OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase
 
-#if !defined (_OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_) && (OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_INCLUDE_ALL || OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_INCLUDE)
-#define _OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_
+#if !defined (OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase || defined(INCLUDE_OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase))
+#define OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_
 
-#define OrgApacheLuceneAnalysisAnalyzer_RESTRICT 1
-#define OrgApacheLuceneAnalysisAnalyzer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisAnalyzer 1
+#define INCLUDE_OrgApacheLuceneAnalysisAnalyzer 1
 #include "org/apache/lucene/analysis/Analyzer.h"
 
 @class IOSClass;
@@ -25,28 +25,84 @@
 @class OrgApacheLuceneAnalysisUtilCharArraySet;
 @class OrgLukhnosPortmobileFilePath;
 
+/*!
+ @brief Base class for Analyzers that need to make use of stopword sets.
+ */
 @interface OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase : OrgApacheLuceneAnalysisAnalyzer {
  @public
+  /*!
+   @brief An immutable stopword set
+   */
   OrgApacheLuceneAnalysisUtilCharArraySet *stopwords_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief Returns the analyzer's stopword set or an empty set if the analyzer has no
+ stopwords
+ @return the analyzer's stopword set or an empty set if the analyzer has no
+ stopwords
+ */
 - (OrgApacheLuceneAnalysisUtilCharArraySet *)getStopwordSet;
 
 #pragma mark Protected
 
+/*!
+ @brief Creates a new Analyzer with an empty stopword set
+ */
 - (instancetype)init;
 
+/*!
+ @brief Creates a new instance initialized with the given stopword set
+ @param stopwords
+ the analyzer's stopword set
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords;
 
+/*!
+ @brief Creates a CharArraySet from a file resource associated with a class.
+ (See
+ <code>Class.getResourceAsStream(String)</code>).
+ @param ignoreCase
+ <code>true</code> if the set should ignore the case of the
+ stopwords, otherwise <code>false</code>
+ @param aClass
+ a class that is associated with the given stopwordResource
+ @param resource
+ name of the resource file associated with the given class
+ @param comment
+ comment string to ignore in the stopword file
+ @return a CharArraySet containing the distinct stopwords from the given
+ file
+ @throws IOException
+ if loading the stopwords throws an <code>IOException</code>
+ */
 + (OrgApacheLuceneAnalysisUtilCharArraySet *)loadStopwordSetWithBoolean:(jboolean)ignoreCase
                                                            withIOSClass:(IOSClass *)aClass
                                                            withNSString:(NSString *)resource
                                                            withNSString:(NSString *)comment;
 
+/*!
+ @brief Creates a CharArraySet from a path.
+ @param stopwords
+ the stopwords file to load
+ @return a CharArraySet containing the distinct stopwords from the given
+ file
+ @throws IOException
+ if loading the stopwords throws an <code>IOException</code>
+ */
 + (OrgApacheLuceneAnalysisUtilCharArraySet *)loadStopwordSetWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)stopwords;
 
+/*!
+ @brief Creates a CharArraySet from a file.
+ @param stopwords
+ the stopwords reader to load
+ @return a CharArraySet containing the distinct stopwords from the given
+ reader
+ @throws IOException
+ if loading the stopwords throws an <code>IOException</code>
+ */
 + (OrgApacheLuceneAnalysisUtilCharArraySet *)loadStopwordSetWithJavaIoReader:(JavaIoReader *)stopwords;
 
 @end
@@ -69,4 +125,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase")

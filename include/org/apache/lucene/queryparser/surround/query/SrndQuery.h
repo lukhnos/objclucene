@@ -5,21 +5,24 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserSurroundQuerySrndQuery_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserSurroundQuerySrndQuery_RESTRICT
-#define OrgApacheLuceneQueryparserSurroundQuerySrndQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySrndQuery")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserSurroundQuerySrndQuery
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySrndQuery 0
 #else
-#define OrgApacheLuceneQueryparserSurroundQuerySrndQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySrndQuery 1
 #endif
-#undef OrgApacheLuceneQueryparserSurroundQuerySrndQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserSurroundQuerySrndQuery
 
-#if !defined (_OrgApacheLuceneQueryparserSurroundQuerySrndQuery_) && (OrgApacheLuceneQueryparserSurroundQuerySrndQuery_INCLUDE_ALL || OrgApacheLuceneQueryparserSurroundQuerySrndQuery_INCLUDE)
-#define _OrgApacheLuceneQueryparserSurroundQuerySrndQuery_
+#if !defined (OrgApacheLuceneQueryparserSurroundQuerySrndQuery_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySrndQuery || defined(INCLUDE_OrgApacheLuceneQueryparserSurroundQuerySrndQuery))
+#define OrgApacheLuceneQueryparserSurroundQuerySrndQuery_
 
 @class JavaLangStringBuilder;
 @class OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory;
 @class OrgApacheLuceneSearchQuery;
 
+/*!
+ @brief Lowest level base class for surround queries
+ */
 @interface OrgApacheLuceneQueryparserSurroundQuerySrndQuery : NSObject < NSCopying >
 
 #pragma mark Public
@@ -28,6 +31,12 @@
 
 - (OrgApacheLuceneQueryparserSurroundQuerySrndQuery *)clone;
 
+/*!
+ @brief For subclasses of <code>SrndQuery</code> within the package
+ <code>org.apache.lucene.queryparser.surround.query</code>
+ it is not necessary to override this method,
+ - seealso: #toString()
+ */
 - (jboolean)isEqual:(id)obj;
 
 - (jfloat)getWeight;
@@ -36,6 +45,12 @@
 
 - (NSString *)getWeightString;
 
+/*!
+ @brief For subclasses of <code>SrndQuery</code> within the package
+ <code>org.apache.lucene.queryparser.surround.query</code>
+ it is not necessary to override this method,
+ - seealso: #toString()
+ */
 - (NSUInteger)hash;
 
 - (jboolean)isFieldsSubQueryAcceptable;
@@ -50,6 +65,10 @@
 
 - (void)setWeightWithFloat:(jfloat)w;
 
+/*!
+ @brief This method is used by <code>hashCode()</code> and <code>equals(Object)</code>,
+ see LUCENE-2945.
+ */
 - (NSString *)description;
 
 #pragma mark Protected
@@ -66,4 +85,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQuerySrndQuery)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserSurroundQuerySrndQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySrndQuery")

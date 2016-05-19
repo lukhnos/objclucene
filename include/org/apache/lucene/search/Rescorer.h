@@ -5,31 +5,57 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchRescorer_INCLUDE_ALL")
-#if OrgApacheLuceneSearchRescorer_RESTRICT
-#define OrgApacheLuceneSearchRescorer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchRescorer")
+#ifdef RESTRICT_OrgApacheLuceneSearchRescorer
+#define INCLUDE_ALL_OrgApacheLuceneSearchRescorer 0
 #else
-#define OrgApacheLuceneSearchRescorer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchRescorer 1
 #endif
-#undef OrgApacheLuceneSearchRescorer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchRescorer
 
-#if !defined (_OrgApacheLuceneSearchRescorer_) && (OrgApacheLuceneSearchRescorer_INCLUDE_ALL || OrgApacheLuceneSearchRescorer_INCLUDE)
-#define _OrgApacheLuceneSearchRescorer_
+#if !defined (OrgApacheLuceneSearchRescorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchRescorer || defined(INCLUDE_OrgApacheLuceneSearchRescorer))
+#define OrgApacheLuceneSearchRescorer_
 
 @class OrgApacheLuceneSearchExplanation;
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchTopDocs;
 
+/*!
+ @brief Re-scores the topN results (<code>TopDocs</code>) from an original
+ query.
+ See <code>QueryRescorer</code> for an actual
+ implementation.  Typically, you run a low-cost
+ first-pass query across the entire index, collecting the
+ top few hundred hits perhaps, and then use this class to
+ mix in a more costly second pass scoring.
+ <p>See <code>QueryRescorer.rescore(IndexSearcher,TopDocs,Query,double,int)</code>
+ for a simple static method to call to rescore using a 2nd
+ pass <code>Query</code>.
+ */
 @interface OrgApacheLuceneSearchRescorer : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @brief Explains how the score for the specified document was
+ computed.
+ */
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                withOrgApacheLuceneSearchExplanation:(OrgApacheLuceneSearchExplanation *)firstPassExplanation
                                                                             withInt:(jint)docID;
 
+/*!
+ @brief Rescore an initial first-pass <code>TopDocs</code>.
+ @param searcher <code>IndexSearcher</code> used to produce the
+ first pass topDocs
+ @param firstPassTopDocs Hits from the first pass
+ search.  It's very important that these hits were
+ produced by the provided searcher; otherwise the doc
+ IDs will not match!
+ @param topN How many re-scored hits to return
+ */
 - (OrgApacheLuceneSearchTopDocs *)rescoreWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                withOrgApacheLuceneSearchTopDocs:(OrgApacheLuceneSearchTopDocs *)firstPassTopDocs
                                                                         withInt:(jint)topN;
@@ -44,4 +70,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchRescorer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchRescorer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchRescorer")

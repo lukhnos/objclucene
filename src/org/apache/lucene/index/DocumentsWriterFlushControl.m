@@ -9,7 +9,6 @@
 #include "java/lang/Long.h"
 #include "java/lang/Math.h"
 #include "java/lang/Thread.h"
-#include "java/lang/Throwable.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Collection.h"
@@ -47,7 +46,7 @@
   OrgApacheLuceneIndexDocumentsWriterPerThreadPool *perThreadPool_;
   OrgApacheLuceneIndexFlushPolicy *flushPolicy_;
   jboolean closed_;
-  __weak OrgApacheLuceneIndexDocumentsWriter *documentsWriter_;
+  __unsafe_unretained OrgApacheLuceneIndexDocumentsWriter *documentsWriter_;
   OrgApacheLuceneIndexLiveIndexWriterConfig *config_;
   OrgApacheLuceneIndexBufferedUpdatesStream *bufferedUpdatesStream_;
   OrgApacheLuceneUtilInfoStream *infoStream_;
@@ -74,6 +73,9 @@
 
 - (jboolean)assertActiveDeleteQueueWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue:(OrgApacheLuceneIndexDocumentsWriterDeleteQueue *)queue;
 
+/*!
+ @brief Prunes the blockedQueue by removing all DWPT that are associated with the given flush queue.
+ */
 - (void)pruneBlockedQueueWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue:(OrgApacheLuceneIndexDocumentsWriterDeleteQueue *)flushingQueue;
 
 @end
@@ -129,6 +131,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexDocumentsWriterFlushCont
 
 __attribute__((unused)) static OrgApacheLuceneIndexDocumentsWriterFlushControl_BlockedFlush *new_OrgApacheLuceneIndexDocumentsWriterFlushControl_BlockedFlush_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_withLong_(OrgApacheLuceneIndexDocumentsWriterPerThread *dwpt, jlong bytes) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexDocumentsWriterFlushControl_BlockedFlush *create_OrgApacheLuceneIndexDocumentsWriterFlushControl_BlockedFlush_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_withLong_(OrgApacheLuceneIndexDocumentsWriterPerThread *dwpt, jlong bytes);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterFlushControl_BlockedFlush)
 
 @interface OrgApacheLuceneIndexDocumentsWriterFlushControl_$1 : NSObject < JavaUtilIterator > {
@@ -156,6 +160,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterFlushControl_$1, this$0_,
 __attribute__((unused)) static void OrgApacheLuceneIndexDocumentsWriterFlushControl_$1_initWithOrgApacheLuceneIndexDocumentsWriterFlushControl_withInt_(OrgApacheLuceneIndexDocumentsWriterFlushControl_$1 *self, OrgApacheLuceneIndexDocumentsWriterFlushControl *outer$, jint capture$0);
 
 __attribute__((unused)) static OrgApacheLuceneIndexDocumentsWriterFlushControl_$1 *new_OrgApacheLuceneIndexDocumentsWriterFlushControl_$1_initWithOrgApacheLuceneIndexDocumentsWriterFlushControl_withInt_(OrgApacheLuceneIndexDocumentsWriterFlushControl *outer$, jint capture$0) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexDocumentsWriterFlushControl_$1 *create_OrgApacheLuceneIndexDocumentsWriterFlushControl_$1_initWithOrgApacheLuceneIndexDocumentsWriterFlushControl_withInt_(OrgApacheLuceneIndexDocumentsWriterFlushControl *outer$, jint capture$0);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterFlushControl_$1)
 
@@ -275,7 +281,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterFlushControl_$1)
         [self wait];
       }
       @catch (JavaLangInterruptedException *e) {
-        @throw [new_OrgApacheLuceneUtilThreadInterruptedException_initWithJavaLangInterruptedException_(e) autorelease];
+        @throw create_OrgApacheLuceneUtilThreadInterruptedException_initWithJavaLangInterruptedException_(e);
       }
     }
   }
@@ -436,7 +442,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterFlushControl_$1)
     JreAssert(([((id<JavaUtilList>) nil_chk(fullFlushBuffer_)) isEmpty]), (JreStrcat("$@", @"full flush buffer should be empty: ", fullFlushBuffer_)));
     fullFlush_ = true;
     flushingQueue = JreLoadVolatileId(&((OrgApacheLuceneIndexDocumentsWriter *) nil_chk(documentsWriter_))->deleteQueue_);
-    OrgApacheLuceneIndexDocumentsWriterDeleteQueue *newQueue = [new_OrgApacheLuceneIndexDocumentsWriterDeleteQueue_initWithLong_(((OrgApacheLuceneIndexDocumentsWriterDeleteQueue *) nil_chk(flushingQueue))->generation_ + 1) autorelease];
+    OrgApacheLuceneIndexDocumentsWriterDeleteQueue *newQueue = create_OrgApacheLuceneIndexDocumentsWriterDeleteQueue_initWithLong_(((OrgApacheLuceneIndexDocumentsWriterDeleteQueue *) nil_chk(flushingQueue))->generation_ + 1);
     JreVolatileStrongAssign(&documentsWriter_->deleteQueue_, newQueue);
   }
   jint limit = [((OrgApacheLuceneIndexDocumentsWriterPerThreadPool *) nil_chk(perThreadPool_)) getActiveThreadStateCount];
@@ -448,7 +454,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterFlushControl_$1)
         continue;
       }
       JreAssert((((OrgApacheLuceneIndexDocumentsWriterPerThread *) nil_chk(next->dwpt_))->deleteQueue_ == flushingQueue || next->dwpt_->deleteQueue_ == JreLoadVolatileId(&documentsWriter_->deleteQueue_)), (JreStrcat("$@$@$@$I", @" flushingQueue: ", flushingQueue, @" currentqueue: ", JreLoadVolatileId(&documentsWriter_->deleteQueue_), @" perThread queue: ", next->dwpt_->deleteQueue_, @" numDocsInRam: ", [next->dwpt_ getNumDocsInRAM])));
-      if (next->dwpt_->deleteQueue_ != flushingQueue) {
+      if (((OrgApacheLuceneIndexDocumentsWriterPerThread *) nil_chk(next->dwpt_))->deleteQueue_ != flushingQueue) {
         continue;
       }
       [self addFlushableStateWithOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:next];
@@ -545,7 +551,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterFlushControl_$1)
           [((OrgApacheLuceneIndexDocumentsWriter *) nil_chk(documentsWriter_)) subtractFlushedNumDocsWithInt:[((OrgApacheLuceneIndexDocumentsWriterPerThread *) nil_chk(dwpt)) getNumDocsInRAM]];
           [dwpt abort];
         }
-        @catch (JavaLangThrowable *ex) {
+        @catch (NSException *ex) {
         }
         @finally {
           [self doAfterFlushWithOrgApacheLuceneIndexDocumentsWriterPerThread:dwpt];
@@ -557,15 +563,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterFlushControl_$1)
           [((OrgApacheLuceneIndexDocumentsWriter *) nil_chk(documentsWriter_)) subtractFlushedNumDocsWithInt:[((OrgApacheLuceneIndexDocumentsWriterPerThread *) nil_chk(blockedFlush->dwpt_)) getNumDocsInRAM]];
           [blockedFlush->dwpt_ abort];
         }
-        @catch (JavaLangThrowable *ex) {
+        @catch (NSException *ex) {
         }
         @finally {
-          [self doAfterFlushWithOrgApacheLuceneIndexDocumentsWriterPerThread:((OrgApacheLuceneIndexDocumentsWriterFlushControl_BlockedFlush *) nil_chk(blockedFlush))->dwpt_];
+          [self doAfterFlushWithOrgApacheLuceneIndexDocumentsWriterPerThread:blockedFlush->dwpt_];
         }
       }
     }
     @finally {
-      [((id<JavaUtilQueue>) nil_chk(flushQueue_)) clear];
+      [flushQueue_ clear];
       [((id<JavaUtilQueue>) nil_chk(blockedFlushes_)) clear];
       OrgApacheLuceneIndexDocumentsWriterFlushControl_updateStallState(self);
     }
@@ -605,6 +611,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterFlushControl_$1)
   return infoStream_;
 }
 
+- (void)__javaClone:(OrgApacheLuceneIndexDocumentsWriterFlushControl *)original {
+  [super __javaClone:original];
+  [documentsWriter_ release];
+}
+
 - (void)dealloc {
   RELEASE_(flushDeletes_);
   RELEASE_(flushQueue_);
@@ -618,11 +629,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterFlushControl_$1)
   RELEASE_(infoStream_);
   RELEASE_(fullFlushBuffer_);
   [super dealloc];
-}
-
-- (void)__javaClone {
-  [super __javaClone];
-  [documentsWriter_ release];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -648,13 +654,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterFlushControl_$1)
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "nextPendingFlush", NULL, "Lorg.apache.lucene.index.DocumentsWriterPerThread;", 0x0, NULL, NULL },
     { "setClosed", NULL, "V", 0x20, NULL, NULL },
-    { "allActiveThreadStates", NULL, "Ljava.util.Iterator;", 0x1, NULL, NULL },
-    { "getPerThreadsIteratorWithInt:", "getPerThreadsIterator", "Ljava.util.Iterator;", 0x2, NULL, NULL },
+    { "allActiveThreadStates", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<Lorg/apache/lucene/index/DocumentsWriterPerThreadPool$ThreadState;>;" },
+    { "getPerThreadsIteratorWithInt:", "getPerThreadsIterator", "Ljava.util.Iterator;", 0x2, NULL, "(I)Ljava/util/Iterator<Lorg/apache/lucene/index/DocumentsWriterPerThreadPool$ThreadState;>;" },
     { "doOnDelete", NULL, "V", 0x20, NULL, NULL },
     { "getNumGlobalTermDeletes", NULL, "I", 0x1, NULL, NULL },
     { "getDeleteBytesUsed", NULL, "J", 0x1, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
     { "numFlushingDWPT", NULL, "I", 0x20, NULL, NULL },
     { "getAndResetApplyAllDeletes", NULL, "Z", 0x1, NULL, NULL },
     { "setApplyAllDeletes", NULL, "V", 0x1, NULL, NULL },
@@ -738,9 +744,11 @@ void OrgApacheLuceneIndexDocumentsWriterFlushControl_initWithOrgApacheLuceneInde
 }
 
 OrgApacheLuceneIndexDocumentsWriterFlushControl *new_OrgApacheLuceneIndexDocumentsWriterFlushControl_initWithOrgApacheLuceneIndexDocumentsWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneIndexBufferedUpdatesStream_(OrgApacheLuceneIndexDocumentsWriter *documentsWriter, OrgApacheLuceneIndexLiveIndexWriterConfig *config, OrgApacheLuceneIndexBufferedUpdatesStream *bufferedUpdatesStream) {
-  OrgApacheLuceneIndexDocumentsWriterFlushControl *self = [OrgApacheLuceneIndexDocumentsWriterFlushControl alloc];
-  OrgApacheLuceneIndexDocumentsWriterFlushControl_initWithOrgApacheLuceneIndexDocumentsWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneIndexBufferedUpdatesStream_(self, documentsWriter, config, bufferedUpdatesStream);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexDocumentsWriterFlushControl, initWithOrgApacheLuceneIndexDocumentsWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneIndexBufferedUpdatesStream_, documentsWriter, config, bufferedUpdatesStream)
+}
+
+OrgApacheLuceneIndexDocumentsWriterFlushControl *create_OrgApacheLuceneIndexDocumentsWriterFlushControl_initWithOrgApacheLuceneIndexDocumentsWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneIndexBufferedUpdatesStream_(OrgApacheLuceneIndexDocumentsWriter *documentsWriter, OrgApacheLuceneIndexLiveIndexWriterConfig *config, OrgApacheLuceneIndexBufferedUpdatesStream *bufferedUpdatesStream) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexDocumentsWriterFlushControl, initWithOrgApacheLuceneIndexDocumentsWriter_withOrgApacheLuceneIndexLiveIndexWriterConfig_withOrgApacheLuceneIndexBufferedUpdatesStream_, documentsWriter, config, bufferedUpdatesStream)
 }
 
 jlong OrgApacheLuceneIndexDocumentsWriterFlushControl_stallLimitBytes(OrgApacheLuceneIndexDocumentsWriterFlushControl *self) {
@@ -812,7 +820,7 @@ void OrgApacheLuceneIndexDocumentsWriterFlushControl_checkoutAndBlockWithOrgApac
     jlong bytes = perThread->bytesUsed_;
     dwpt = [((OrgApacheLuceneIndexDocumentsWriterPerThreadPool *) nil_chk(self->perThreadPool_)) resetWithOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:perThread];
     self->numPending_--;
-    [((id<JavaUtilQueue>) nil_chk(self->blockedFlushes_)) addWithId:[new_OrgApacheLuceneIndexDocumentsWriterFlushControl_BlockedFlush_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_withLong_(dwpt, bytes) autorelease]];
+    [((id<JavaUtilQueue>) nil_chk(self->blockedFlushes_)) addWithId:create_OrgApacheLuceneIndexDocumentsWriterFlushControl_BlockedFlush_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_withLong_(dwpt, bytes)];
   }
   @finally {
     [perThread unlock];
@@ -848,7 +856,7 @@ OrgApacheLuceneIndexDocumentsWriterPerThread *OrgApacheLuceneIndexDocumentsWrite
 }
 
 id<JavaUtilIterator> OrgApacheLuceneIndexDocumentsWriterFlushControl_getPerThreadsIteratorWithInt_(OrgApacheLuceneIndexDocumentsWriterFlushControl *self, jint upto) {
-  return [new_OrgApacheLuceneIndexDocumentsWriterFlushControl_$1_initWithOrgApacheLuceneIndexDocumentsWriterFlushControl_withInt_(self, upto) autorelease];
+  return create_OrgApacheLuceneIndexDocumentsWriterFlushControl_$1_initWithOrgApacheLuceneIndexDocumentsWriterFlushControl_withInt_(self, upto);
 }
 
 jboolean OrgApacheLuceneIndexDocumentsWriterFlushControl_assertActiveDeleteQueueWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue_(OrgApacheLuceneIndexDocumentsWriterFlushControl *self, OrgApacheLuceneIndexDocumentsWriterDeleteQueue *queue) {
@@ -915,9 +923,11 @@ void OrgApacheLuceneIndexDocumentsWriterFlushControl_BlockedFlush_initWithOrgApa
 }
 
 OrgApacheLuceneIndexDocumentsWriterFlushControl_BlockedFlush *new_OrgApacheLuceneIndexDocumentsWriterFlushControl_BlockedFlush_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_withLong_(OrgApacheLuceneIndexDocumentsWriterPerThread *dwpt, jlong bytes) {
-  OrgApacheLuceneIndexDocumentsWriterFlushControl_BlockedFlush *self = [OrgApacheLuceneIndexDocumentsWriterFlushControl_BlockedFlush alloc];
-  OrgApacheLuceneIndexDocumentsWriterFlushControl_BlockedFlush_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_withLong_(self, dwpt, bytes);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexDocumentsWriterFlushControl_BlockedFlush, initWithOrgApacheLuceneIndexDocumentsWriterPerThread_withLong_, dwpt, bytes)
+}
+
+OrgApacheLuceneIndexDocumentsWriterFlushControl_BlockedFlush *create_OrgApacheLuceneIndexDocumentsWriterFlushControl_BlockedFlush_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_withLong_(OrgApacheLuceneIndexDocumentsWriterPerThread *dwpt, jlong bytes) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexDocumentsWriterFlushControl_BlockedFlush, initWithOrgApacheLuceneIndexDocumentsWriterPerThread_withLong_, dwpt, bytes)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocumentsWriterFlushControl_BlockedFlush)
@@ -933,7 +943,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocumentsWriterFlushControl
 }
 
 - (void)remove {
-  @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(@"remove() not supported.") autorelease];
+  @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"remove() not supported.");
 }
 
 - (instancetype)initWithOrgApacheLuceneIndexDocumentsWriterFlushControl:(OrgApacheLuceneIndexDocumentsWriterFlushControl *)outer$
@@ -974,9 +984,11 @@ void OrgApacheLuceneIndexDocumentsWriterFlushControl_$1_initWithOrgApacheLuceneI
 }
 
 OrgApacheLuceneIndexDocumentsWriterFlushControl_$1 *new_OrgApacheLuceneIndexDocumentsWriterFlushControl_$1_initWithOrgApacheLuceneIndexDocumentsWriterFlushControl_withInt_(OrgApacheLuceneIndexDocumentsWriterFlushControl *outer$, jint capture$0) {
-  OrgApacheLuceneIndexDocumentsWriterFlushControl_$1 *self = [OrgApacheLuceneIndexDocumentsWriterFlushControl_$1 alloc];
-  OrgApacheLuceneIndexDocumentsWriterFlushControl_$1_initWithOrgApacheLuceneIndexDocumentsWriterFlushControl_withInt_(self, outer$, capture$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexDocumentsWriterFlushControl_$1, initWithOrgApacheLuceneIndexDocumentsWriterFlushControl_withInt_, outer$, capture$0)
+}
+
+OrgApacheLuceneIndexDocumentsWriterFlushControl_$1 *create_OrgApacheLuceneIndexDocumentsWriterFlushControl_$1_initWithOrgApacheLuceneIndexDocumentsWriterFlushControl_withInt_(OrgApacheLuceneIndexDocumentsWriterFlushControl *outer$, jint capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexDocumentsWriterFlushControl_$1, initWithOrgApacheLuceneIndexDocumentsWriterFlushControl_withInt_, outer$, capture$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocumentsWriterFlushControl_$1)

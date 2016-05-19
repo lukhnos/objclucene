@@ -26,7 +26,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryTree {
   queryTree = [super processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:queryTree];
   if ([queryTree isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode class]] && !([queryTree isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode class]])) {
-    return [new_OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode_init() autorelease];
+    return create_OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode_init();
   }
   return queryTree;
 }
@@ -48,7 +48,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       }
     }
     if (removeBoolean) {
-      return [new_OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode_init() autorelease];
+      return create_OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode_init();
     }
   }
   return node;
@@ -72,7 +72,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "init", "RemoveDeletedQueryNodesProcessor", NULL, 0x1, NULL, NULL },
     { "processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "process", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x1, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
     { "postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "postProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "setChildrenOrderWithJavaUtilList:", "setChildrenOrder", "Ljava.util.List;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
+    { "setChildrenOrderWithJavaUtilList:", "setChildrenOrder", "Ljava.util.List;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", "(Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;)Ljava/util/List<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;" },
     { "preProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "preProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreProcessorsRemoveDeletedQueryNodesProcessor = { 2, "RemoveDeletedQueryNodesProcessor", "org.apache.lucene.queryparser.flexible.core.processors", NULL, 0x1, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
@@ -86,9 +86,11 @@ void OrgApacheLuceneQueryparserFlexibleCoreProcessorsRemoveDeletedQueryNodesProc
 }
 
 OrgApacheLuceneQueryparserFlexibleCoreProcessorsRemoveDeletedQueryNodesProcessor *new_OrgApacheLuceneQueryparserFlexibleCoreProcessorsRemoveDeletedQueryNodesProcessor_init() {
-  OrgApacheLuceneQueryparserFlexibleCoreProcessorsRemoveDeletedQueryNodesProcessor *self = [OrgApacheLuceneQueryparserFlexibleCoreProcessorsRemoveDeletedQueryNodesProcessor alloc];
-  OrgApacheLuceneQueryparserFlexibleCoreProcessorsRemoveDeletedQueryNodesProcessor_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleCoreProcessorsRemoveDeletedQueryNodesProcessor, init)
+}
+
+OrgApacheLuceneQueryparserFlexibleCoreProcessorsRemoveDeletedQueryNodesProcessor *create_OrgApacheLuceneQueryparserFlexibleCoreProcessorsRemoveDeletedQueryNodesProcessor_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleCoreProcessorsRemoveDeletedQueryNodesProcessor, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreProcessorsRemoveDeletedQueryNodesProcessor)

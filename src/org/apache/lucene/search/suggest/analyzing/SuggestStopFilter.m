@@ -92,7 +92,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter, endS
       }
     }
     else {
-      [posIncAtt_ setPositionIncrementWithInt:skippedPositions + [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncAtt_)) getPositionIncrement]];
+      [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncAtt_)) setPositionIncrementWithInt:skippedPositions + [posIncAtt_ getPositionIncrement]];
       return true;
     }
   }
@@ -139,9 +139,11 @@ void OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter_initWithOrgApacheLuc
 }
 
 OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter *new_OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisUtilCharArraySet *stopWords) {
-  OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter *self = [OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter alloc];
-  OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(self, input, stopWords);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter, initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_, input, stopWords)
+}
+
+OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter *create_OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisUtilCharArraySet *stopWords) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter, initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_, input, stopWords)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter)

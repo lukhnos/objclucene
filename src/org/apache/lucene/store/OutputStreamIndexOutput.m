@@ -9,7 +9,6 @@
 #include "java/io/BufferedOutputStream.h"
 #include "java/io/IOException.h"
 #include "java/io/OutputStream.h"
-#include "java/lang/Throwable.h"
 #include "java/util/zip/CRC32.h"
 #include "java/util/zip/CheckedOutputStream.h"
 #include "org/apache/lucene/store/IndexOutput.h"
@@ -52,14 +51,14 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreOutputStreamIndexOutput, os_, JavaIoBuff
 - (void)close {
   {
     JavaIoOutputStream *o = os_;
-    JavaLangThrowable *__primaryException1 = nil;
+    NSException *__primaryException1 = nil;
     @try {
       if (!flushedOnClose_) {
         flushedOnClose_ = true;
         [((JavaIoOutputStream *) nil_chk(o)) flush];
       }
     }
-    @catch (JavaLangThrowable *e) {
+    @catch (NSException *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -68,8 +67,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreOutputStreamIndexOutput, os_, JavaIoBuff
         if (__primaryException1 != nil) {
           @try {
             [o close];
-          } @catch (JavaLangThrowable *e) {
-            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          } @catch (NSException *e) {
+            [__primaryException1 addSuppressedWithNSException:e];
           }
         } else {
           [o close];
@@ -120,13 +119,15 @@ void OrgApacheLuceneStoreOutputStreamIndexOutput_initWithNSString_withJavaIoOutp
   JreStrongAssignAndConsume(&self->crc_, new_JavaUtilZipCRC32_init());
   self->bytesWritten_ = 0LL;
   self->flushedOnClose_ = false;
-  JreStrongAssignAndConsume(&self->os_, new_JavaIoBufferedOutputStream_initWithJavaIoOutputStream_withInt_([new_JavaUtilZipCheckedOutputStream_initWithJavaIoOutputStream_withJavaUtilZipChecksum_(outArg, self->crc_) autorelease], bufferSize));
+  JreStrongAssignAndConsume(&self->os_, new_JavaIoBufferedOutputStream_initWithJavaIoOutputStream_withInt_(create_JavaUtilZipCheckedOutputStream_initWithJavaIoOutputStream_withJavaUtilZipChecksum_(outArg, self->crc_), bufferSize));
 }
 
 OrgApacheLuceneStoreOutputStreamIndexOutput *new_OrgApacheLuceneStoreOutputStreamIndexOutput_initWithNSString_withJavaIoOutputStream_withInt_(NSString *resourceDescription, JavaIoOutputStream *outArg, jint bufferSize) {
-  OrgApacheLuceneStoreOutputStreamIndexOutput *self = [OrgApacheLuceneStoreOutputStreamIndexOutput alloc];
-  OrgApacheLuceneStoreOutputStreamIndexOutput_initWithNSString_withJavaIoOutputStream_withInt_(self, resourceDescription, outArg, bufferSize);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreOutputStreamIndexOutput, initWithNSString_withJavaIoOutputStream_withInt_, resourceDescription, outArg, bufferSize)
+}
+
+OrgApacheLuceneStoreOutputStreamIndexOutput *create_OrgApacheLuceneStoreOutputStreamIndexOutput_initWithNSString_withJavaIoOutputStream_withInt_(NSString *resourceDescription, JavaIoOutputStream *outArg, jint bufferSize) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreOutputStreamIndexOutput, initWithNSString_withJavaIoOutputStream_withInt_, resourceDescription, outArg, bufferSize)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreOutputStreamIndexOutput)

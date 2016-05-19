@@ -36,7 +36,7 @@
 }
 
 - (OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode *)cloneTree {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode *clone = (OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode *) check_class_cast([super cloneTree], [OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode class]);
+  OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode *clone = (OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode *) cast_chk([super cloneTree], [OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode class]);
   return clone;
 }
 
@@ -58,9 +58,11 @@ void OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode_initWithJav
 }
 
 OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(id<JavaLangCharSequence> field, id<JavaLangCharSequence> text, jint begin, jint end) {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode *self = [OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode alloc];
-  OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(self, field, text, begin, end);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode, initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_, field, text, begin, end)
+}
+
+OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode *create_OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(id<JavaLangCharSequence> field, id<JavaLangCharSequence> text, jint begin, jint end) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode, initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_, field, text, begin, end)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode)

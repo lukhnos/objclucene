@@ -5,27 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_RESTRICT
-#define OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl 0
 #else
-#define OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl 1
 #endif
-#undef OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl
 
-#if !defined (_OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_) && (OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_INCLUDE_ALL || OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_INCLUDE)
-#define _OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_
+#if !defined (OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl || defined(INCLUDE_OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl))
+#define OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_
 
-#define OrgApacheLuceneUtilAttributeImpl_RESTRICT 1
-#define OrgApacheLuceneUtilAttributeImpl_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAttributeImpl 1
+#define INCLUDE_OrgApacheLuceneUtilAttributeImpl 1
 #include "org/apache/lucene/util/AttributeImpl.h"
 
-#define OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenattributesCharTermAttribute 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenattributesCharTermAttribute 1
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
 
-#define OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute 1
 #include "org/apache/lucene/analysis/tokenattributes/TermToBytesRefAttribute.h"
 
 @class IOSCharArray;
@@ -35,13 +35,22 @@
 @protocol JavaLangCharSequence;
 @protocol OrgApacheLuceneUtilAttributeReflector;
 
+/*!
+ @brief Default implementation of <code>CharTermAttribute</code>.
+ */
 @interface OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl : OrgApacheLuceneUtilAttributeImpl < OrgApacheLuceneAnalysisTokenattributesCharTermAttribute, OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute, NSCopying > {
  @public
+  /*!
+   @brief May be used by subclasses to convert to different charsets / encodings for implementing <code>getBytesRef()</code>.
+   */
   OrgApacheLuceneUtilBytesRefBuilder *builder_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief Initialize this attribute with empty term text
+ */
 - (instancetype)init;
 
 - (id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)appendWithChar:(jchar)c;
@@ -91,6 +100,15 @@
 - (id<JavaLangCharSequence>)subSequenceFrom:(jint)start
                                          to:(jint)end;
 
+/*!
+ @brief Returns solely the term text as specified by the
+ <code>CharSequence</code> interface.
+ <p>This method changed the behavior with Lucene 3.1,
+ before it returned a String representation of the whole
+ term with all attributes.
+ This affects especially the
+ <code>org.apache.lucene.analysis.Token</code> subclass.
+ */
 - (NSString *)description;
 
 @end
@@ -103,8 +121,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisTokenattributesCharTermAttributeIm
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl")

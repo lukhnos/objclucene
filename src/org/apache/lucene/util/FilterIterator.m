@@ -47,7 +47,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilFilterIterator_setNex
 
 - (id)next {
   if (!OrgApacheLuceneUtilFilterIterator_hasNext(self)) {
-    @throw [new_JavaUtilNoSuchElementException_init() autorelease];
+    @throw create_JavaUtilNoSuchElementException_init();
   }
   JreAssert((nextIsSet_), (@"org/apache/lucene/util/FilterIterator.java:54 condition failed: assert nextIsSet;"));
   @try {
@@ -60,7 +60,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilFilterIterator_setNex
 }
 
 - (void)remove {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (jboolean)setNext {
@@ -76,7 +76,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilFilterIterator_setNex
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "predicateFunctionWithId:", "predicateFunction", "Z", 0x404, NULL, "(TInnerT;)Z" },
-    { "initWithJavaUtilIterator:", "FilterIterator", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilIterator:", "FilterIterator", NULL, 0x1, NULL, "(Ljava/util/Iterator<TInnerT;>;)V" },
     { "hasNext", NULL, "Z", 0x11, NULL, NULL },
     { "next", NULL, "TT;", 0x11, NULL, "()TT;" },
     { "remove", NULL, "V", 0x11, NULL, NULL },

@@ -27,12 +27,12 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneSearchQuery *)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode *phraseSlopNode = (OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode *) check_class_cast(queryNode, [OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode class]);
-  OrgApacheLuceneSearchQuery *query = (OrgApacheLuceneSearchQuery *) check_class_cast([((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk([((OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode *) nil_chk(phraseSlopNode)) getChild])) getTagWithNSString:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder, QUERY_TREE_BUILDER_TAGID_)], [OrgApacheLuceneSearchQuery class]);
+  OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode *phraseSlopNode = (OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode *) cast_chk(queryNode, [OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode class]);
+  OrgApacheLuceneSearchQuery *query = (OrgApacheLuceneSearchQuery *) cast_chk([((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk([((OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode *) nil_chk(phraseSlopNode)) getChild])) getTagWithNSString:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder, QUERY_TREE_BUILDER_TAGID)], [OrgApacheLuceneSearchQuery class]);
   if ([query isKindOfClass:[OrgApacheLuceneSearchPhraseQuery class]]) {
-    OrgApacheLuceneSearchPhraseQuery_Builder *builder = [new_OrgApacheLuceneSearchPhraseQuery_Builder_init() autorelease];
+    OrgApacheLuceneSearchPhraseQuery_Builder *builder = create_OrgApacheLuceneSearchPhraseQuery_Builder_init();
     [builder setSlopWithInt:[phraseSlopNode getValue]];
-    OrgApacheLuceneSearchPhraseQuery *pq = (OrgApacheLuceneSearchPhraseQuery *) check_class_cast(query, [OrgApacheLuceneSearchPhraseQuery class]);
+    OrgApacheLuceneSearchPhraseQuery *pq = (OrgApacheLuceneSearchPhraseQuery *) cast_chk(query, [OrgApacheLuceneSearchPhraseQuery class]);
     IOSObjectArray *terms = [((OrgApacheLuceneSearchPhraseQuery *) nil_chk(pq)) getTerms];
     IOSIntArray *positions = [pq getPositions];
     for (jint i = 0; i < ((IOSObjectArray *) nil_chk(terms))->size_; ++i) {
@@ -42,7 +42,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     [((OrgApacheLuceneSearchQuery *) nil_chk(query)) setBoostWithFloat:[pq getBoost]];
   }
   else {
-    [((OrgApacheLuceneSearchMultiPhraseQuery *) nil_chk(((OrgApacheLuceneSearchMultiPhraseQuery *) check_class_cast(query, [OrgApacheLuceneSearchMultiPhraseQuery class])))) setSlopWithInt:[phraseSlopNode getValue]];
+    [((OrgApacheLuceneSearchMultiPhraseQuery *) nil_chk(((OrgApacheLuceneSearchMultiPhraseQuery *) cast_chk(query, [OrgApacheLuceneSearchMultiPhraseQuery class])))) setSlopWithInt:[phraseSlopNode getValue]];
   }
   return query;
 }
@@ -63,9 +63,11 @@ void OrgApacheLuceneQueryparserFlexibleStandardBuildersSlopQueryNodeBuilder_init
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardBuildersSlopQueryNodeBuilder *new_OrgApacheLuceneQueryparserFlexibleStandardBuildersSlopQueryNodeBuilder_init() {
-  OrgApacheLuceneQueryparserFlexibleStandardBuildersSlopQueryNodeBuilder *self = [OrgApacheLuceneQueryparserFlexibleStandardBuildersSlopQueryNodeBuilder alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardBuildersSlopQueryNodeBuilder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardBuildersSlopQueryNodeBuilder, init)
+}
+
+OrgApacheLuceneQueryparserFlexibleStandardBuildersSlopQueryNodeBuilder *create_OrgApacheLuceneQueryparserFlexibleStandardBuildersSlopQueryNodeBuilder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardBuildersSlopQueryNodeBuilder, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleStandardBuildersSlopQueryNodeBuilder)

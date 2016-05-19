@@ -5,25 +5,48 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilFstListOfOutputs_INCLUDE_ALL")
-#if OrgApacheLuceneUtilFstListOfOutputs_RESTRICT
-#define OrgApacheLuceneUtilFstListOfOutputs_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstListOfOutputs")
+#ifdef RESTRICT_OrgApacheLuceneUtilFstListOfOutputs
+#define INCLUDE_ALL_OrgApacheLuceneUtilFstListOfOutputs 0
 #else
-#define OrgApacheLuceneUtilFstListOfOutputs_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilFstListOfOutputs 1
 #endif
-#undef OrgApacheLuceneUtilFstListOfOutputs_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilFstListOfOutputs
 
-#if !defined (_OrgApacheLuceneUtilFstListOfOutputs_) && (OrgApacheLuceneUtilFstListOfOutputs_INCLUDE_ALL || OrgApacheLuceneUtilFstListOfOutputs_INCLUDE)
-#define _OrgApacheLuceneUtilFstListOfOutputs_
+#if !defined (OrgApacheLuceneUtilFstListOfOutputs_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstListOfOutputs || defined(INCLUDE_OrgApacheLuceneUtilFstListOfOutputs))
+#define OrgApacheLuceneUtilFstListOfOutputs_
 
-#define OrgApacheLuceneUtilFstOutputs_RESTRICT 1
-#define OrgApacheLuceneUtilFstOutputs_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilFstOutputs 1
+#define INCLUDE_OrgApacheLuceneUtilFstOutputs 1
 #include "org/apache/lucene/util/fst/Outputs.h"
 
 @class OrgApacheLuceneStoreDataInput;
 @class OrgApacheLuceneStoreDataOutput;
 @protocol JavaUtilList;
 
+/*!
+ @brief Wraps another Outputs implementation and encodes one or
+ more of its output values.
+ You can use this when a single
+ input may need to map to more than one output,
+ maintaining order: pass the same input with a different
+ output by calling <code>Builder.add(IntsRef,Object)</code> multiple
+ times.  The builder will then combine the outputs using
+ the <code>Outputs.merge(Object,Object)</code> method.
+ <p>The resulting FST may not be minimal when an input has
+ more than one output, as this requires pushing all
+ multi-output values to a final state.
+ <p>NOTE: the only way to create multiple outputs is to
+ add the same input to the FST multiple times in a row.  This is
+ how the FST maps a single input to multiple outputs (e.g. you
+ cannot pass a List&lt;Object&gt; to <code>Builder.add</code>).  If
+ your outputs are longs, and you need at most 2, then use
+ <code>UpToTwoPositiveIntOutputs</code> instead since it stores
+ the outputs more compactly (by stealing a bit from each
+ long value).
+ <p>NOTE: this cannot wrap itself (ie you cannot make an
+ FST with List&lt;List&lt;Object&gt;&gt; outputs using this).
+ */
 @interface OrgApacheLuceneUtilFstListOfOutputs : OrgApacheLuceneUtilFstOutputs
 
 #pragma mark Public
@@ -74,8 +97,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilFstListOfOutputs_initWithOrgApacheLuce
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilFstListOfOutputs *new_OrgApacheLuceneUtilFstListOfOutputs_initWithOrgApacheLuceneUtilFstOutputs_(OrgApacheLuceneUtilFstOutputs *outputs) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstListOfOutputs *create_OrgApacheLuceneUtilFstListOfOutputs_initWithOrgApacheLuceneUtilFstOutputs_(OrgApacheLuceneUtilFstOutputs *outputs);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstListOfOutputs)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilFstListOfOutputs_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstListOfOutputs")

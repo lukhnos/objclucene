@@ -5,23 +5,29 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneStoreLockObtainFailedException_INCLUDE_ALL")
-#if OrgApacheLuceneStoreLockObtainFailedException_RESTRICT
-#define OrgApacheLuceneStoreLockObtainFailedException_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneStoreLockObtainFailedException")
+#ifdef RESTRICT_OrgApacheLuceneStoreLockObtainFailedException
+#define INCLUDE_ALL_OrgApacheLuceneStoreLockObtainFailedException 0
 #else
-#define OrgApacheLuceneStoreLockObtainFailedException_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneStoreLockObtainFailedException 1
 #endif
-#undef OrgApacheLuceneStoreLockObtainFailedException_RESTRICT
+#undef RESTRICT_OrgApacheLuceneStoreLockObtainFailedException
 
-#if !defined (_OrgApacheLuceneStoreLockObtainFailedException_) && (OrgApacheLuceneStoreLockObtainFailedException_INCLUDE_ALL || OrgApacheLuceneStoreLockObtainFailedException_INCLUDE)
-#define _OrgApacheLuceneStoreLockObtainFailedException_
+#if !defined (OrgApacheLuceneStoreLockObtainFailedException_) && (INCLUDE_ALL_OrgApacheLuceneStoreLockObtainFailedException || defined(INCLUDE_OrgApacheLuceneStoreLockObtainFailedException))
+#define OrgApacheLuceneStoreLockObtainFailedException_
 
-#define JavaIoIOException_RESTRICT 1
-#define JavaIoIOException_INCLUDE 1
+#define RESTRICT_JavaIoIOException 1
+#define INCLUDE_JavaIoIOException 1
 #include "java/io/IOException.h"
 
-@class JavaLangThrowable;
-
+/*!
+ @brief This exception is thrown when the <code>write.lock</code>
+ could not be acquired.
+ This
+ happens when a writer tries to open an index
+ that another writer already has open.
+ - seealso: LockFactory#obtainLock(Directory,String)
+ */
 @interface OrgApacheLuceneStoreLockObtainFailedException : JavaIoIOException
 
 #pragma mark Public
@@ -29,7 +35,7 @@
 - (instancetype)initWithNSString:(NSString *)message;
 
 - (instancetype)initWithNSString:(NSString *)message
-           withJavaLangThrowable:(JavaLangThrowable *)cause;
+                 withNSException:(NSException *)cause;
 
 @end
 
@@ -39,12 +45,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneStoreLockObtainFailedException_initWithNSS
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreLockObtainFailedException *new_OrgApacheLuceneStoreLockObtainFailedException_initWithNSString_(NSString *message) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT void OrgApacheLuceneStoreLockObtainFailedException_initWithNSString_withJavaLangThrowable_(OrgApacheLuceneStoreLockObtainFailedException *self, NSString *message, JavaLangThrowable *cause);
+FOUNDATION_EXPORT OrgApacheLuceneStoreLockObtainFailedException *create_OrgApacheLuceneStoreLockObtainFailedException_initWithNSString_(NSString *message);
 
-FOUNDATION_EXPORT OrgApacheLuceneStoreLockObtainFailedException *new_OrgApacheLuceneStoreLockObtainFailedException_initWithNSString_withJavaLangThrowable_(NSString *message, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT void OrgApacheLuceneStoreLockObtainFailedException_initWithNSString_withNSException_(OrgApacheLuceneStoreLockObtainFailedException *self, NSString *message, NSException *cause);
+
+FOUNDATION_EXPORT OrgApacheLuceneStoreLockObtainFailedException *new_OrgApacheLuceneStoreLockObtainFailedException_initWithNSString_withNSException_(NSString *message, NSException *cause) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneStoreLockObtainFailedException *create_OrgApacheLuceneStoreLockObtainFailedException_initWithNSString_withNSException_(NSString *message, NSException *cause);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreLockObtainFailedException)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneStoreLockObtainFailedException_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreLockObtainFailedException")

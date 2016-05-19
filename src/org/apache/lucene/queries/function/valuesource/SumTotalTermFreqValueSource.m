@@ -36,6 +36,8 @@ __attribute__((unused)) static void OrgApacheLuceneQueriesFunctionValuesourceSum
 
 __attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_$1_initWithLong_withOrgApacheLuceneQueriesFunctionValueSource_(jlong capture$0, OrgApacheLuceneQueriesFunctionValueSource *arg$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_$1_initWithLong_withOrgApacheLuceneQueriesFunctionValueSource_(jlong capture$0, OrgApacheLuceneQueriesFunctionValueSource *arg$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_$1)
 
 @implementation OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource
@@ -55,7 +57,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceSumTotalTerm
 
 - (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
                                  withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext {
-  return (OrgApacheLuceneQueriesFunctionFunctionValues *) check_class_cast([((id<JavaUtilMap>) nil_chk(context)) getWithId:self], [OrgApacheLuceneQueriesFunctionFunctionValues class]);
+  return (OrgApacheLuceneQueriesFunctionFunctionValues *) cast_chk([((id<JavaUtilMap>) nil_chk(context)) getWithId:self], [OrgApacheLuceneQueriesFunctionFunctionValues class]);
 }
 
 - (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
@@ -64,7 +66,7 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
   for (OrgApacheLuceneIndexLeafReaderContext * __strong readerContext in nil_chk([((OrgApacheLuceneIndexIndexReaderContext *) nil_chk([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getTopReaderContext])) leaves])) {
     OrgApacheLuceneIndexTerms *terms = [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(readerContext)) reader])) termsWithNSString:indexedField_];
     if (terms == nil) continue;
-    jlong v = [((OrgApacheLuceneIndexTerms *) nil_chk(terms)) getSumTotalTermFreq];
+    jlong v = [terms getSumTotalTermFreq];
     if (v == -1) {
       sumTotalTermFreq = -1;
       break;
@@ -74,7 +76,7 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
     }
   }
   jlong ttf = sumTotalTermFreq;
-  [((id<JavaUtilMap>) nil_chk(context)) putWithId:self withId:[new_OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_$1_initWithLong_withOrgApacheLuceneQueriesFunctionValueSource_(ttf, self) autorelease]];
+  [((id<JavaUtilMap>) nil_chk(context)) putWithId:self withId:create_OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_$1_initWithLong_withOrgApacheLuceneQueriesFunctionValueSource_(ttf, self)];
 }
 
 - (NSUInteger)hash {
@@ -82,8 +84,8 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 }
 
 - (jboolean)isEqual:(id)o {
-  if ([self getClass] != [nil_chk(o) getClass]) return false;
-  OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource *other = (OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource *) check_class_cast(o, [OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource class]);
+  if ([self getClass] != (id) [nil_chk(o) getClass]) return false;
+  OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource *other = (OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource *) cast_chk(o, [OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource class]);
   return [((NSString *) nil_chk(self->indexedField_)) isEqual:other->indexedField_];
 }
 
@@ -117,9 +119,11 @@ void OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_initWi
 }
 
 OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_initWithNSString_(NSString *indexedField) {
-  OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource *self = [OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource alloc];
-  OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_initWithNSString_(self, indexedField);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource, initWithNSString_, indexedField)
+}
+
+OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource *create_OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_initWithNSString_(NSString *indexedField) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource, initWithNSString_, indexedField)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource)
@@ -157,9 +161,11 @@ void OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_$1_ini
 }
 
 OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_$1_initWithLong_withOrgApacheLuceneQueriesFunctionValueSource_(jlong capture$0, OrgApacheLuceneQueriesFunctionValueSource *arg$0) {
-  OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_$1 *self = [OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_$1 alloc];
-  OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_$1_initWithLong_withOrgApacheLuceneQueriesFunctionValueSource_(self, capture$0, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_$1, initWithLong_withOrgApacheLuceneQueriesFunctionValueSource_, capture$0, arg$0)
+}
+
+OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_$1_initWithLong_withOrgApacheLuceneQueriesFunctionValueSource_(jlong capture$0, OrgApacheLuceneQueriesFunctionValueSource *arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_$1, initWithLong_withOrgApacheLuceneQueriesFunctionValueSource_, capture$0, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_$1)

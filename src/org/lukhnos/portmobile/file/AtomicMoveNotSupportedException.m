@@ -32,9 +32,11 @@ void OrgLukhnosPortmobileFileAtomicMoveNotSupportedException_initWithNSString_wi
 }
 
 OrgLukhnosPortmobileFileAtomicMoveNotSupportedException *new_OrgLukhnosPortmobileFileAtomicMoveNotSupportedException_initWithNSString_withNSString_withNSString_(NSString *source, NSString *target, NSString *reason) {
-  OrgLukhnosPortmobileFileAtomicMoveNotSupportedException *self = [OrgLukhnosPortmobileFileAtomicMoveNotSupportedException alloc];
-  OrgLukhnosPortmobileFileAtomicMoveNotSupportedException_initWithNSString_withNSString_withNSString_(self, source, target, reason);
-  return self;
+  J2OBJC_NEW_IMPL(OrgLukhnosPortmobileFileAtomicMoveNotSupportedException, initWithNSString_withNSString_withNSString_, source, target, reason)
+}
+
+OrgLukhnosPortmobileFileAtomicMoveNotSupportedException *create_OrgLukhnosPortmobileFileAtomicMoveNotSupportedException_initWithNSString_withNSString_withNSString_(NSString *source, NSString *target, NSString *reason) {
+  J2OBJC_CREATE_IMPL(OrgLukhnosPortmobileFileAtomicMoveNotSupportedException, initWithNSString_withNSString_withNSString_, source, target, reason)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileFileAtomicMoveNotSupportedException)

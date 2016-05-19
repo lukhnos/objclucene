@@ -5,23 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilMutableMutableValueDate_INCLUDE_ALL")
-#if OrgApacheLuceneUtilMutableMutableValueDate_RESTRICT
-#define OrgApacheLuceneUtilMutableMutableValueDate_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueDate")
+#ifdef RESTRICT_OrgApacheLuceneUtilMutableMutableValueDate
+#define INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueDate 0
 #else
-#define OrgApacheLuceneUtilMutableMutableValueDate_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueDate 1
 #endif
-#undef OrgApacheLuceneUtilMutableMutableValueDate_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilMutableMutableValueDate
 
-#if !defined (_OrgApacheLuceneUtilMutableMutableValueDate_) && (OrgApacheLuceneUtilMutableMutableValueDate_INCLUDE_ALL || OrgApacheLuceneUtilMutableMutableValueDate_INCLUDE)
-#define _OrgApacheLuceneUtilMutableMutableValueDate_
+#if !defined (OrgApacheLuceneUtilMutableMutableValueDate_) && (INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueDate || defined(INCLUDE_OrgApacheLuceneUtilMutableMutableValueDate))
+#define OrgApacheLuceneUtilMutableMutableValueDate_
 
-#define OrgApacheLuceneUtilMutableMutableValueLong_RESTRICT 1
-#define OrgApacheLuceneUtilMutableMutableValueLong_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilMutableMutableValueLong 1
+#define INCLUDE_OrgApacheLuceneUtilMutableMutableValueLong 1
 #include "org/apache/lucene/util/mutable/MutableValueLong.h"
 
 @class OrgApacheLuceneUtilMutableMutableValue;
 
+/*!
+ @brief <code>MutableValue</code> implementation of type <code>Date</code>.
+ - seealso: MutableValueLong
+ */
 @interface OrgApacheLuceneUtilMutableMutableValueDate : OrgApacheLuceneUtilMutableMutableValueLong
 
 #pragma mark Public
@@ -40,8 +44,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilMutableMutableValueDate_init(OrgApache
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilMutableMutableValueDate *new_OrgApacheLuceneUtilMutableMutableValueDate_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilMutableMutableValueDate *create_OrgApacheLuceneUtilMutableMutableValueDate_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilMutableMutableValueDate)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilMutableMutableValueDate_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValueDate")

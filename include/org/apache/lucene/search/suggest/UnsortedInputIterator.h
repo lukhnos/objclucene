@@ -5,29 +5,37 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSuggestUnsortedInputIterator_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSuggestUnsortedInputIterator_RESTRICT
-#define OrgApacheLuceneSearchSuggestUnsortedInputIterator_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestUnsortedInputIterator")
+#ifdef RESTRICT_OrgApacheLuceneSearchSuggestUnsortedInputIterator
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestUnsortedInputIterator 0
 #else
-#define OrgApacheLuceneSearchSuggestUnsortedInputIterator_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestUnsortedInputIterator 1
 #endif
-#undef OrgApacheLuceneSearchSuggestUnsortedInputIterator_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSuggestUnsortedInputIterator
 
-#if !defined (_OrgApacheLuceneSearchSuggestUnsortedInputIterator_) && (OrgApacheLuceneSearchSuggestUnsortedInputIterator_INCLUDE_ALL || OrgApacheLuceneSearchSuggestUnsortedInputIterator_INCLUDE)
-#define _OrgApacheLuceneSearchSuggestUnsortedInputIterator_
+#if !defined (OrgApacheLuceneSearchSuggestUnsortedInputIterator_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestUnsortedInputIterator || defined(INCLUDE_OrgApacheLuceneSearchSuggestUnsortedInputIterator))
+#define OrgApacheLuceneSearchSuggestUnsortedInputIterator_
 
-#define OrgApacheLuceneSearchSuggestBufferedInputIterator_RESTRICT 1
-#define OrgApacheLuceneSearchSuggestBufferedInputIterator_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSuggestBufferedInputIterator 1
+#define INCLUDE_OrgApacheLuceneSearchSuggestBufferedInputIterator 1
 #include "org/apache/lucene/search/suggest/BufferedInputIterator.h"
 
 @class OrgApacheLuceneUtilBytesRef;
 @protocol JavaUtilSet;
 @protocol OrgApacheLuceneSearchSuggestInputIterator;
 
+/*!
+ @brief This wrapper buffers the incoming elements and makes sure they are in
+ random order.
+ */
 @interface OrgApacheLuceneSearchSuggestUnsortedInputIterator : OrgApacheLuceneSearchSuggestBufferedInputIterator
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new iterator, wrapping the specified iterator and
+ returning elements in a random order.
+ */
 - (instancetype)initWithOrgApacheLuceneSearchSuggestInputIterator:(id<OrgApacheLuceneSearchSuggestInputIterator>)source;
 
 - (id<JavaUtilSet>)contexts;
@@ -46,8 +54,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestUnsortedInputIterator_initWit
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestUnsortedInputIterator *new_OrgApacheLuceneSearchSuggestUnsortedInputIterator_initWithOrgApacheLuceneSearchSuggestInputIterator_(id<OrgApacheLuceneSearchSuggestInputIterator> source) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestUnsortedInputIterator *create_OrgApacheLuceneSearchSuggestUnsortedInputIterator_initWithOrgApacheLuceneSearchSuggestInputIterator_(id<OrgApacheLuceneSearchSuggestInputIterator> source);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestUnsortedInputIterator)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSuggestUnsortedInputIterator_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestUnsortedInputIterator")

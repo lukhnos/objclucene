@@ -5,31 +5,45 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsCompoundFormat_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsCompoundFormat_RESTRICT
-#define OrgApacheLuceneCodecsCompoundFormat_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsCompoundFormat")
+#ifdef RESTRICT_OrgApacheLuceneCodecsCompoundFormat
+#define INCLUDE_ALL_OrgApacheLuceneCodecsCompoundFormat 0
 #else
-#define OrgApacheLuceneCodecsCompoundFormat_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsCompoundFormat 1
 #endif
-#undef OrgApacheLuceneCodecsCompoundFormat_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsCompoundFormat
 
-#if !defined (_OrgApacheLuceneCodecsCompoundFormat_) && (OrgApacheLuceneCodecsCompoundFormat_INCLUDE_ALL || OrgApacheLuceneCodecsCompoundFormat_INCLUDE)
-#define _OrgApacheLuceneCodecsCompoundFormat_
+#if !defined (OrgApacheLuceneCodecsCompoundFormat_) && (INCLUDE_ALL_OrgApacheLuceneCodecsCompoundFormat || defined(INCLUDE_OrgApacheLuceneCodecsCompoundFormat))
+#define OrgApacheLuceneCodecsCompoundFormat_
 
 @class OrgApacheLuceneIndexSegmentInfo;
 @class OrgApacheLuceneStoreDirectory;
 @class OrgApacheLuceneStoreIOContext;
 
+/*!
+ @brief Encodes/decodes compound files
+ */
 @interface OrgApacheLuceneCodecsCompoundFormat : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ (For invocation by subclass 
+ constructors, typically implicit.) 
+ */
 - (instancetype)init;
 
+/*!
+ @brief Returns a Directory view (read-only) for the compound files in this segment
+ */
 - (OrgApacheLuceneStoreDirectory *)getCompoundReaderWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
                                                   withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)si
                                                     withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
 
+/*!
+ @brief Packs the provided segment's files into a compound format.
+ */
 - (void)writeWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
            withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)si
              withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
@@ -44,4 +58,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompoundFormat)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsCompoundFormat_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsCompoundFormat")

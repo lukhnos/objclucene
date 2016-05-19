@@ -24,15 +24,15 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jint)nextDoc {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (jint)advanceWithInt:(jint)target {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (jlong)cost {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (jint)freq {
@@ -71,9 +71,11 @@ void OrgApacheLuceneSearchJoinFakeScorer_init(OrgApacheLuceneSearchJoinFakeScore
 }
 
 OrgApacheLuceneSearchJoinFakeScorer *new_OrgApacheLuceneSearchJoinFakeScorer_init() {
-  OrgApacheLuceneSearchJoinFakeScorer *self = [OrgApacheLuceneSearchJoinFakeScorer alloc];
-  OrgApacheLuceneSearchJoinFakeScorer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinFakeScorer, init)
+}
+
+OrgApacheLuceneSearchJoinFakeScorer *create_OrgApacheLuceneSearchJoinFakeScorer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinFakeScorer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinFakeScorer)

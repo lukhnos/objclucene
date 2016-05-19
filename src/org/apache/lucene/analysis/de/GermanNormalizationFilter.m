@@ -15,10 +15,6 @@
 #include "org/apache/lucene/analysis/util/StemmerUtil.h"
 #include "org/apache/lucene/util/AttributeSource.h"
 
-#define OrgApacheLuceneAnalysisDeGermanNormalizationFilter_N 0
-#define OrgApacheLuceneAnalysisDeGermanNormalizationFilter_V 1
-#define OrgApacheLuceneAnalysisDeGermanNormalizationFilter_U 2
-
 @interface OrgApacheLuceneAnalysisDeGermanNormalizationFilter () {
  @public
   id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt_;
@@ -28,11 +24,17 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisDeGermanNormalizationFilter, termAtt_, id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisDeGermanNormalizationFilter, N, jint)
+inline jint OrgApacheLuceneAnalysisDeGermanNormalizationFilter_get_N();
+#define OrgApacheLuceneAnalysisDeGermanNormalizationFilter_N 0
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisDeGermanNormalizationFilter, N, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisDeGermanNormalizationFilter, V, jint)
+inline jint OrgApacheLuceneAnalysisDeGermanNormalizationFilter_get_V();
+#define OrgApacheLuceneAnalysisDeGermanNormalizationFilter_V 1
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisDeGermanNormalizationFilter, V, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisDeGermanNormalizationFilter, U, jint)
+inline jint OrgApacheLuceneAnalysisDeGermanNormalizationFilter_get_U();
+#define OrgApacheLuceneAnalysisDeGermanNormalizationFilter_U 2
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisDeGermanNormalizationFilter, U, jint)
 
 @implementation OrgApacheLuceneAnalysisDeGermanNormalizationFilter
 
@@ -125,9 +127,11 @@ void OrgApacheLuceneAnalysisDeGermanNormalizationFilter_initWithOrgApacheLuceneA
 }
 
 OrgApacheLuceneAnalysisDeGermanNormalizationFilter *new_OrgApacheLuceneAnalysisDeGermanNormalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) {
-  OrgApacheLuceneAnalysisDeGermanNormalizationFilter *self = [OrgApacheLuceneAnalysisDeGermanNormalizationFilter alloc];
-  OrgApacheLuceneAnalysisDeGermanNormalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, input);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisDeGermanNormalizationFilter, initWithOrgApacheLuceneAnalysisTokenStream_, input)
+}
+
+OrgApacheLuceneAnalysisDeGermanNormalizationFilter *create_OrgApacheLuceneAnalysisDeGermanNormalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisDeGermanNormalizationFilter, initWithOrgApacheLuceneAnalysisTokenStream_, input)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisDeGermanNormalizationFilter)

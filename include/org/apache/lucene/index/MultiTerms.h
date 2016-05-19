@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexMultiTerms_INCLUDE_ALL")
-#if OrgApacheLuceneIndexMultiTerms_RESTRICT
-#define OrgApacheLuceneIndexMultiTerms_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexMultiTerms")
+#ifdef RESTRICT_OrgApacheLuceneIndexMultiTerms
+#define INCLUDE_ALL_OrgApacheLuceneIndexMultiTerms 0
 #else
-#define OrgApacheLuceneIndexMultiTerms_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexMultiTerms 1
 #endif
-#undef OrgApacheLuceneIndexMultiTerms_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexMultiTerms
 
-#if !defined (_OrgApacheLuceneIndexMultiTerms_) && (OrgApacheLuceneIndexMultiTerms_INCLUDE_ALL || OrgApacheLuceneIndexMultiTerms_INCLUDE)
-#define _OrgApacheLuceneIndexMultiTerms_
+#if !defined (OrgApacheLuceneIndexMultiTerms_) && (INCLUDE_ALL_OrgApacheLuceneIndexMultiTerms || defined(INCLUDE_OrgApacheLuceneIndexMultiTerms))
+#define OrgApacheLuceneIndexMultiTerms_
 
-#define OrgApacheLuceneIndexTerms_RESTRICT 1
-#define OrgApacheLuceneIndexTerms_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexTerms 1
+#define INCLUDE_OrgApacheLuceneIndexTerms 1
 #include "org/apache/lucene/index/Terms.h"
 
 @class IOSObjectArray;
@@ -25,10 +25,20 @@
 @class OrgApacheLuceneUtilAutomatonCompiledAutomaton;
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief Exposes flex API, merged from flex API of
+ sub-segments.
+ */
 @interface OrgApacheLuceneIndexMultiTerms : OrgApacheLuceneIndexTerms
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ @param subs The <code>Terms</code> instances of all sub-readers.
+ @param subSlices A parallel array (matching <code>subs</code>
+ ) describing the sub-reader slices.
+ */
 - (instancetype)initWithOrgApacheLuceneIndexTermsArray:(IOSObjectArray *)subs
               withOrgApacheLuceneIndexReaderSliceArray:(IOSObjectArray *)subSlices;
 
@@ -38,8 +48,14 @@
 
 - (OrgApacheLuceneUtilBytesRef *)getMin;
 
+/*!
+ @brief Expert: returns  pointers to the sub-readers corresponding to the Terms being merged.
+ */
 - (IOSObjectArray *)getSubSlices;
 
+/*!
+ @brief Expert: returns the Terms being merged.
+ */
 - (IOSObjectArray *)getSubTerms;
 
 - (jlong)getSumDocFreq;
@@ -69,8 +85,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexMultiTerms_initWithOrgApacheLuceneInd
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexMultiTerms *new_OrgApacheLuceneIndexMultiTerms_initWithOrgApacheLuceneIndexTermsArray_withOrgApacheLuceneIndexReaderSliceArray_(IOSObjectArray *subs, IOSObjectArray *subSlices) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexMultiTerms *create_OrgApacheLuceneIndexMultiTerms_initWithOrgApacheLuceneIndexTermsArray_withOrgApacheLuceneIndexReaderSliceArray_(IOSObjectArray *subs, IOSObjectArray *subSlices);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiTerms)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexMultiTerms_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexMultiTerms")

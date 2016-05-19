@@ -5,27 +5,47 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSuggestFstBytesRefSorter_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSuggestFstBytesRefSorter_RESTRICT
-#define OrgApacheLuceneSearchSuggestFstBytesRefSorter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestFstBytesRefSorter")
+#ifdef RESTRICT_OrgApacheLuceneSearchSuggestFstBytesRefSorter
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestFstBytesRefSorter 0
 #else
-#define OrgApacheLuceneSearchSuggestFstBytesRefSorter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestFstBytesRefSorter 1
 #endif
-#undef OrgApacheLuceneSearchSuggestFstBytesRefSorter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSuggestFstBytesRefSorter
 
-#if !defined (_OrgApacheLuceneSearchSuggestFstBytesRefSorter_) && (OrgApacheLuceneSearchSuggestFstBytesRefSorter_INCLUDE_ALL || OrgApacheLuceneSearchSuggestFstBytesRefSorter_INCLUDE)
-#define _OrgApacheLuceneSearchSuggestFstBytesRefSorter_
+#if !defined (OrgApacheLuceneSearchSuggestFstBytesRefSorter_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestFstBytesRefSorter || defined(INCLUDE_OrgApacheLuceneSearchSuggestFstBytesRefSorter))
+#define OrgApacheLuceneSearchSuggestFstBytesRefSorter_
 
 @class OrgApacheLuceneUtilBytesRef;
 @protocol JavaUtilComparator;
 @protocol OrgApacheLuceneUtilBytesRefIterator;
 
+/*!
+ @brief Collects <code>BytesRef</code> and then allows one to iterate over their sorted order.
+ Implementations
+ of this interface will be called in a single-threaded scenario.
+   
+ */
 @protocol OrgApacheLuceneSearchSuggestFstBytesRefSorter < NSObject, JavaObject >
 
+/*!
+ @brief Adds a single suggestion entry (possibly compound with its bucket).
+ @throws IOException If an I/O exception occurs.
+ @throws IllegalStateException If an addition attempt is performed after
+ a call to <code>iterator()</code> has been made.
+ */
 - (void)addWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)utf8;
 
+/*!
+ @brief Sorts the entries added in <code>add(BytesRef)</code> and returns 
+ an iterator over all sorted entries.
+ @throws IOException If an I/O exception occurs.
+ */
 - (id<OrgApacheLuceneUtilBytesRefIterator>)iterator;
 
+/*!
+ @brief Comparator used to determine the sort order of entries.
+ */
 - (id<JavaUtilComparator>)getComparator;
 
 @end
@@ -36,4 +56,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestFstBytesRefSorter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSuggestFstBytesRefSorter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestFstBytesRefSorter")

@@ -5,27 +5,34 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisGaIrishLowerCaseFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisGaIrishLowerCaseFilter_RESTRICT
-#define OrgApacheLuceneAnalysisGaIrishLowerCaseFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisGaIrishLowerCaseFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisGaIrishLowerCaseFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisGaIrishLowerCaseFilter 0
 #else
-#define OrgApacheLuceneAnalysisGaIrishLowerCaseFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisGaIrishLowerCaseFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisGaIrishLowerCaseFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisGaIrishLowerCaseFilter
 
-#if !defined (_OrgApacheLuceneAnalysisGaIrishLowerCaseFilter_) && (OrgApacheLuceneAnalysisGaIrishLowerCaseFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisGaIrishLowerCaseFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisGaIrishLowerCaseFilter_
+#if !defined (OrgApacheLuceneAnalysisGaIrishLowerCaseFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisGaIrishLowerCaseFilter || defined(INCLUDE_OrgApacheLuceneAnalysisGaIrishLowerCaseFilter))
+#define OrgApacheLuceneAnalysisGaIrishLowerCaseFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief Normalises token text to lower case, handling t-prothesis
+ and n-eclipsis (i.e., that 'nAthair' should become 'n-athair')
+ */
 @interface OrgApacheLuceneAnalysisGaIrishLowerCaseFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
+/*!
+ @brief Create an IrishLowerCaseFilter that normalises Irish token text.
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
 
 - (jboolean)incrementToken;
@@ -38,8 +45,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisGaIrishLowerCaseFilter_initWithOrg
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisGaIrishLowerCaseFilter *new_OrgApacheLuceneAnalysisGaIrishLowerCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisGaIrishLowerCaseFilter *create_OrgApacheLuceneAnalysisGaIrishLowerCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisGaIrishLowerCaseFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisGaIrishLowerCaseFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisGaIrishLowerCaseFilter")

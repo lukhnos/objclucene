@@ -5,21 +5,24 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchPayloadsMinPayloadFunction_INCLUDE_ALL")
-#if OrgApacheLuceneSearchPayloadsMinPayloadFunction_RESTRICT
-#define OrgApacheLuceneSearchPayloadsMinPayloadFunction_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchPayloadsMinPayloadFunction")
+#ifdef RESTRICT_OrgApacheLuceneSearchPayloadsMinPayloadFunction
+#define INCLUDE_ALL_OrgApacheLuceneSearchPayloadsMinPayloadFunction 0
 #else
-#define OrgApacheLuceneSearchPayloadsMinPayloadFunction_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchPayloadsMinPayloadFunction 1
 #endif
-#undef OrgApacheLuceneSearchPayloadsMinPayloadFunction_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchPayloadsMinPayloadFunction
 
-#if !defined (_OrgApacheLuceneSearchPayloadsMinPayloadFunction_) && (OrgApacheLuceneSearchPayloadsMinPayloadFunction_INCLUDE_ALL || OrgApacheLuceneSearchPayloadsMinPayloadFunction_INCLUDE)
-#define _OrgApacheLuceneSearchPayloadsMinPayloadFunction_
+#if !defined (OrgApacheLuceneSearchPayloadsMinPayloadFunction_) && (INCLUDE_ALL_OrgApacheLuceneSearchPayloadsMinPayloadFunction || defined(INCLUDE_OrgApacheLuceneSearchPayloadsMinPayloadFunction))
+#define OrgApacheLuceneSearchPayloadsMinPayloadFunction_
 
-#define OrgApacheLuceneSearchPayloadsPayloadFunction_RESTRICT 1
-#define OrgApacheLuceneSearchPayloadsPayloadFunction_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchPayloadsPayloadFunction 1
+#define INCLUDE_OrgApacheLuceneSearchPayloadsPayloadFunction 1
 #include "org/apache/lucene/search/payloads/PayloadFunction.h"
 
+/*!
+ @brief Calculates the minimum payload seen
+ */
 @interface OrgApacheLuceneSearchPayloadsMinPayloadFunction : OrgApacheLuceneSearchPayloadsPayloadFunction
 
 #pragma mark Public
@@ -51,8 +54,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchPayloadsMinPayloadFunction_init(OrgA
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsMinPayloadFunction *new_OrgApacheLuceneSearchPayloadsMinPayloadFunction_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsMinPayloadFunction *create_OrgApacheLuceneSearchPayloadsMinPayloadFunction_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsMinPayloadFunction)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchPayloadsMinPayloadFunction_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchPayloadsMinPayloadFunction")

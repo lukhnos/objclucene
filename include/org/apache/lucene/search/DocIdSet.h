@@ -5,45 +5,84 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchDocIdSet_INCLUDE_ALL")
-#if OrgApacheLuceneSearchDocIdSet_RESTRICT
-#define OrgApacheLuceneSearchDocIdSet_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchDocIdSet")
+#ifdef RESTRICT_OrgApacheLuceneSearchDocIdSet
+#define INCLUDE_ALL_OrgApacheLuceneSearchDocIdSet 0
 #else
-#define OrgApacheLuceneSearchDocIdSet_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchDocIdSet 1
 #endif
-#undef OrgApacheLuceneSearchDocIdSet_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchDocIdSet
 
-#if !defined (_OrgApacheLuceneSearchDocIdSet_) && (OrgApacheLuceneSearchDocIdSet_INCLUDE_ALL || OrgApacheLuceneSearchDocIdSet_INCLUDE)
-#define _OrgApacheLuceneSearchDocIdSet_
+#if !defined (OrgApacheLuceneSearchDocIdSet_) && (INCLUDE_ALL_OrgApacheLuceneSearchDocIdSet || defined(INCLUDE_OrgApacheLuceneSearchDocIdSet))
+#define OrgApacheLuceneSearchDocIdSet_
 
-#define OrgApacheLuceneUtilAccountable_RESTRICT 1
-#define OrgApacheLuceneUtilAccountable_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAccountable 1
+#define INCLUDE_OrgApacheLuceneUtilAccountable 1
 #include "org/apache/lucene/util/Accountable.h"
 
 @class OrgApacheLuceneSearchDocIdSetIterator;
 @protocol JavaUtilCollection;
 @protocol OrgApacheLuceneUtilBits;
 
+/*!
+ @brief A DocIdSet contains a set of doc ids.
+ Implementing classes must
+ only implement <code>iterator</code> to provide access to the set. 
+ */
 @interface OrgApacheLuceneSearchDocIdSet : NSObject < OrgApacheLuceneUtilAccountable >
+
++ (OrgApacheLuceneSearchDocIdSet *)EMPTY;
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @brief Optionally provides a <code>Bits</code> interface for random access
+ to matching documents.
+ @return <code>null</code>, if this <code>DocIdSet</code> does not support random access.
+ In contrast to <code>iterator()</code>, a return value of <code>null</code>
+ <b>does not</b> imply that no documents match the filter!
+ The default implementation does not provide random access, so you
+ only need to implement this method if your DocIdSet can
+ guarantee random access to every docid in O(1) time without
+ external disk access (as <code>Bits</code> interface cannot throw
+ <code>IOException</code>). This is generally true for bit sets
+ like <code>org.apache.lucene.util.FixedBitSet</code>, which return
+ itself if they are used as <code>DocIdSet</code>.
+ */
 - (id<OrgApacheLuceneUtilBits>)bits;
 
 - (id<JavaUtilCollection>)getChildResources;
 
+/*!
+ @brief This method is a hint for <code>CachingWrapperFilter</code>, if this <code>DocIdSet</code>
+ should be cached without copying it.
+ The default is to return
+ <code>false</code>. If you have an own <code>DocIdSet</code> implementation
+ that does its iteration very effective and fast without doing disk I/O,
+ override this method and return <code>true</code>.
+ */
 - (jboolean)isCacheable;
 
+/*!
+ @brief Provides a <code>DocIdSetIterator</code> to access the set.
+ This implementation can return <code>null</code> if there
+ are no docs that match. 
+ */
 - (OrgApacheLuceneSearchDocIdSetIterator *)iterator;
 
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneSearchDocIdSet)
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchDocIdSet *OrgApacheLuceneSearchDocIdSet_EMPTY_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchDocIdSet, EMPTY_, OrgApacheLuceneSearchDocIdSet *)
+/*!
+ @brief An empty <code>DocIdSet</code> instance
+ */
+inline OrgApacheLuceneSearchDocIdSet *OrgApacheLuceneSearchDocIdSet_get_EMPTY();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT OrgApacheLuceneSearchDocIdSet *OrgApacheLuceneSearchDocIdSet_EMPTY;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchDocIdSet, EMPTY, OrgApacheLuceneSearchDocIdSet *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchDocIdSet_init(OrgApacheLuceneSearchDocIdSet *self);
 
@@ -51,4 +90,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocIdSet)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchDocIdSet_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchDocIdSet")

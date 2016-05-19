@@ -14,8 +14,17 @@
 
 @interface OrgApacheLuceneCodecsMultiLevelSkipListWriter () {
  @public
+  /*!
+   @brief the skip interval in the list with level = 0
+   */
   jint skipInterval_;
+  /*!
+   @brief skipInterval used for level &gt; 0
+   */
   jint skipMultiplier_;
+  /*!
+   @brief for every skip level a different buffer is used
+   */
   IOSObjectArray *skipBuffer_;
 }
 
@@ -43,7 +52,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsMultiLevelSkipListWriter, skipBuffer_, 
 - (void)init__ {
   JreStrongAssignAndConsume(&skipBuffer_, [IOSObjectArray newArrayWithLength:numberOfSkipLevels_ type:OrgApacheLuceneStoreRAMOutputStream_class_()]);
   for (jint i = 0; i < numberOfSkipLevels_; i++) {
-    IOSObjectArray_SetAndConsume(skipBuffer_, i, new_OrgApacheLuceneStoreRAMOutputStream_init());
+    IOSObjectArray_SetAndConsume(nil_chk(skipBuffer_), i, new_OrgApacheLuceneStoreRAMOutputStream_init());
   }
 }
 
@@ -52,7 +61,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsMultiLevelSkipListWriter, skipBuffer_, 
     [self init__];
   }
   else {
-    for (jint i = 0; i < skipBuffer_->size_; i++) {
+    for (jint i = 0; i < ((IOSObjectArray *) nil_chk(skipBuffer_))->size_; i++) {
       [((OrgApacheLuceneStoreRAMOutputStream *) nil_chk(IOSObjectArray_Get(skipBuffer_, i))) reset];
     }
   }
@@ -75,9 +84,9 @@ withOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)skipBuffe
   jlong childPointer = 0;
   for (jint level = 0; level < numLevels; level++) {
     [self writeSkipDataWithInt:level withOrgApacheLuceneStoreIndexOutput:IOSObjectArray_Get(nil_chk(skipBuffer_), level)];
-    jlong newChildPointer = [((OrgApacheLuceneStoreRAMOutputStream *) nil_chk(IOSObjectArray_Get(skipBuffer_, level))) getFilePointer];
+    jlong newChildPointer = [((OrgApacheLuceneStoreRAMOutputStream *) nil_chk(IOSObjectArray_Get(nil_chk(skipBuffer_), level))) getFilePointer];
     if (level != 0) {
-      [((OrgApacheLuceneStoreRAMOutputStream *) nil_chk(IOSObjectArray_Get(skipBuffer_, level))) writeVLongWithLong:childPointer];
+      [((OrgApacheLuceneStoreRAMOutputStream *) nil_chk(IOSObjectArray_Get(nil_chk(skipBuffer_), level))) writeVLongWithLong:childPointer];
     }
     childPointer = newChildPointer;
   }
@@ -90,7 +99,7 @@ withOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)skipBuffe
     jlong length = [((OrgApacheLuceneStoreRAMOutputStream *) nil_chk(IOSObjectArray_Get(nil_chk(skipBuffer_), level))) getFilePointer];
     if (length > 0) {
       [output writeVLongWithLong:length];
-      [((OrgApacheLuceneStoreRAMOutputStream *) nil_chk(IOSObjectArray_Get(skipBuffer_, level))) writeToWithOrgApacheLuceneStoreDataOutput:output];
+      [((OrgApacheLuceneStoreRAMOutputStream *) nil_chk(IOSObjectArray_Get(nil_chk(skipBuffer_), level))) writeToWithOrgApacheLuceneStoreDataOutput:output];
     }
   }
   [((OrgApacheLuceneStoreRAMOutputStream *) nil_chk(IOSObjectArray_Get(nil_chk(skipBuffer_), 0))) writeToWithOrgApacheLuceneStoreDataOutput:output];

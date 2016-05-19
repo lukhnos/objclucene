@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgLukhnosPortmobileFileFiles_INCLUDE_ALL")
-#if OrgLukhnosPortmobileFileFiles_RESTRICT
-#define OrgLukhnosPortmobileFileFiles_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgLukhnosPortmobileFileFiles")
+#ifdef RESTRICT_OrgLukhnosPortmobileFileFiles
+#define INCLUDE_ALL_OrgLukhnosPortmobileFileFiles 0
 #else
-#define OrgLukhnosPortmobileFileFiles_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgLukhnosPortmobileFileFiles 1
 #endif
-#undef OrgLukhnosPortmobileFileFiles_RESTRICT
+#undef RESTRICT_OrgLukhnosPortmobileFileFiles
 
-#if !defined (_OrgLukhnosPortmobileFileFiles_) && (OrgLukhnosPortmobileFileFiles_INCLUDE_ALL || OrgLukhnosPortmobileFileFiles_INCLUDE)
-#define _OrgLukhnosPortmobileFileFiles_
+#if !defined (OrgLukhnosPortmobileFileFiles_) && (INCLUDE_ALL_OrgLukhnosPortmobileFileFiles || defined(INCLUDE_OrgLukhnosPortmobileFileFiles))
+#define OrgLukhnosPortmobileFileFiles_
 
 @class IOSClass;
 @class IOSObjectArray;
@@ -24,7 +24,7 @@
 @class JavaNioCharsetCharset;
 @class OrgLukhnosPortmobileFileAttributeBasicFileAttributes;
 @class OrgLukhnosPortmobileFilePath;
-@class OrgLukhnosPortmobileFileStandardOpenOptionEnum;
+@class OrgLukhnosPortmobileFileStandardOpenOption;
 @protocol JavaNioChannelsSeekableByteChannel;
 @protocol OrgLukhnosPortmobileFileDirectoryStream;
 @protocol OrgLukhnosPortmobileFileFileVisitor;
@@ -70,7 +70,7 @@
                                                   withJavaNioCharsetCharset:(JavaNioCharsetCharset *)charset OBJC_METHOD_FAMILY_NONE;
 
 + (id<JavaNioChannelsSeekableByteChannel>)newByteChannelWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
-                                      withOrgLukhnosPortmobileFileStandardOpenOptionEnum:(OrgLukhnosPortmobileFileStandardOpenOptionEnum *)mustBeReadOnly OBJC_METHOD_FAMILY_NONE;
+                                          withOrgLukhnosPortmobileFileStandardOpenOption:(OrgLukhnosPortmobileFileStandardOpenOption *)mustBeReadOnly OBJC_METHOD_FAMILY_NONE;
 
 + (id<OrgLukhnosPortmobileFileDirectoryStream>)newDirectoryStreamWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)dir OBJC_METHOD_FAMILY_NONE;
 
@@ -94,7 +94,7 @@ J2OBJC_EMPTY_STATIC_INIT(OrgLukhnosPortmobileFileFiles)
 
 FOUNDATION_EXPORT OrgLukhnosPortmobileFilePath *OrgLukhnosPortmobileFileFiles_createDirectoriesWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *dir);
 
-FOUNDATION_EXPORT id<JavaNioChannelsSeekableByteChannel> OrgLukhnosPortmobileFileFiles_newByteChannelWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardOpenOptionEnum_(OrgLukhnosPortmobileFilePath *path, OrgLukhnosPortmobileFileStandardOpenOptionEnum *mustBeReadOnly);
+FOUNDATION_EXPORT id<JavaNioChannelsSeekableByteChannel> OrgLukhnosPortmobileFileFiles_newByteChannelWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardOpenOption_(OrgLukhnosPortmobileFilePath *path, OrgLukhnosPortmobileFileStandardOpenOption *mustBeReadOnly);
 
 FOUNDATION_EXPORT OrgLukhnosPortmobileFilePath *OrgLukhnosPortmobileFileFiles_createFileWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path);
 
@@ -138,8 +138,10 @@ FOUNDATION_EXPORT void OrgLukhnosPortmobileFileFiles_init(OrgLukhnosPortmobileFi
 
 FOUNDATION_EXPORT OrgLukhnosPortmobileFileFiles *new_OrgLukhnosPortmobileFileFiles_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgLukhnosPortmobileFileFiles *create_OrgLukhnosPortmobileFileFiles_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileFileFiles)
 
 #endif
 
-#pragma pop_macro("OrgLukhnosPortmobileFileFiles_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileFileFiles")

@@ -30,9 +30,6 @@
 #include "org/apache/lucene/store/IndexOutput.h"
 #include "org/apache/lucene/util/IOUtils.h"
 
-#define OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_VERSION_START 0
-#define OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_VERSION_CURRENT 0
-
 @interface OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy () {
  @public
   jlong nextWriteGen_;
@@ -43,18 +40,30 @@
 
 - (void)clearPriorSnapshots;
 
+/*!
+ @brief Reads the snapshots information from the given <code>Directory</code>.
+ This
+ method can be used if the snapshots information is needed, however you
+ cannot instantiate the deletion policy (because e.g., some other process
+ keeps a lock on the snapshots directory).
+ */
 - (void)loadPriorSnapshots;
 
 @end
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy, dir_, OrgApacheLuceneStoreDirectory *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy, VERSION_START, jint)
+inline jint OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_get_VERSION_START();
+#define OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_VERSION_START 0
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy, VERSION_START, jint)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy, VERSION_CURRENT, jint)
+inline jint OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_get_VERSION_CURRENT();
+#define OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_VERSION_CURRENT 0
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy, VERSION_CURRENT, jint)
 
-static NSString *OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_CODEC_NAME_ = @"snapshots";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy, CODEC_NAME_, NSString *)
+inline NSString *OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_get_CODEC_NAME();
+static NSString *OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_CODEC_NAME = @"snapshots";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy, CODEC_NAME, NSString *)
 
 __attribute__((unused)) static void OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_persist(OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy *self);
 
@@ -62,9 +71,13 @@ __attribute__((unused)) static void OrgApacheLuceneIndexPersistentSnapshotDeleti
 
 __attribute__((unused)) static void OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_loadPriorSnapshots(OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy *self);
 
-NSString *OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_SNAPSHOTS_PREFIX_ = @"snapshots_";
+NSString *OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_SNAPSHOTS_PREFIX = @"snapshots_";
 
 @implementation OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy
+
++ (NSString *)SNAPSHOTS_PREFIX {
+  return OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_SNAPSHOTS_PREFIX;
+}
 
 - (instancetype)initWithOrgApacheLuceneIndexIndexDeletionPolicy:(OrgApacheLuceneIndexIndexDeletionPolicy *)primary
                               withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir {
@@ -74,8 +87,8 @@ NSString *OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_SNAPSHOTS_PREFIX_
 
 - (instancetype)initWithOrgApacheLuceneIndexIndexDeletionPolicy:(OrgApacheLuceneIndexIndexDeletionPolicy *)primary
                               withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-         withOrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum:(OrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum *)mode {
-  OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_initWithOrgApacheLuceneIndexIndexDeletionPolicy_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum_(self, primary, dir, mode);
+             withOrgApacheLuceneIndexIndexWriterConfig_OpenMode:(OrgApacheLuceneIndexIndexWriterConfig_OpenMode *)mode {
+  OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_initWithOrgApacheLuceneIndexIndexDeletionPolicy_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_OpenMode_(self, primary, dir, mode);
   return self;
 }
 
@@ -140,7 +153,7 @@ NSString *OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_SNAPSHOTS_PREFIX_
     return nil;
   }
   else {
-    return JreStrcat("$J", OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_SNAPSHOTS_PREFIX_, (nextWriteGen_ - 1));
+    return JreStrcat("$J", OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_SNAPSHOTS_PREFIX, (nextWriteGen_ - 1));
   }
 }
 
@@ -156,7 +169,7 @@ NSString *OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_SNAPSHOTS_PREFIX_
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneIndexIndexDeletionPolicy:withOrgApacheLuceneStoreDirectory:", "PersistentSnapshotDeletionPolicy", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneIndexIndexDeletionPolicy:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum:", "PersistentSnapshotDeletionPolicy", NULL, 0x1, "Ljava.io.IOException;", NULL },
+    { "initWithOrgApacheLuceneIndexIndexDeletionPolicy:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexIndexWriterConfig_OpenMode:", "PersistentSnapshotDeletionPolicy", NULL, 0x1, "Ljava.io.IOException;", NULL },
     { "snapshot", NULL, "Lorg.apache.lucene.index.IndexCommit;", 0x21, "Ljava.io.IOException;", NULL },
     { "release__WithOrgApacheLuceneIndexIndexCommit:", "release", "V", 0x21, "Ljava.io.IOException;", NULL },
     { "release__WithLong:", "release", "V", 0x21, "Ljava.io.IOException;", NULL },
@@ -166,10 +179,10 @@ NSString *OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_SNAPSHOTS_PREFIX_
     { "loadPriorSnapshots", NULL, "V", 0x22, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "SNAPSHOTS_PREFIX_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_SNAPSHOTS_PREFIX_, NULL, .constantValue.asLong = 0 },
+    { "SNAPSHOTS_PREFIX", "SNAPSHOTS_PREFIX", 0x19, "Ljava.lang.String;", &OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_SNAPSHOTS_PREFIX, NULL, .constantValue.asLong = 0 },
     { "VERSION_START", "VERSION_START", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_VERSION_START },
     { "VERSION_CURRENT", "VERSION_CURRENT", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_VERSION_CURRENT },
-    { "CODEC_NAME_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_CODEC_NAME_, NULL, .constantValue.asLong = 0 },
+    { "CODEC_NAME", "CODEC_NAME", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_CODEC_NAME, NULL, .constantValue.asLong = 0 },
     { "nextWriteGen_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
     { "dir_", NULL, 0x12, "Lorg.apache.lucene.store.Directory;", NULL, NULL, .constantValue.asLong = 0 },
   };
@@ -180,40 +193,44 @@ NSString *OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_SNAPSHOTS_PREFIX_
 @end
 
 void OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_initWithOrgApacheLuceneIndexIndexDeletionPolicy_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy *self, OrgApacheLuceneIndexIndexDeletionPolicy *primary, OrgApacheLuceneStoreDirectory *dir) {
-  OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_initWithOrgApacheLuceneIndexIndexDeletionPolicy_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum_(self, primary, dir, JreLoadStatic(OrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum, CREATE_OR_APPEND));
+  OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_initWithOrgApacheLuceneIndexIndexDeletionPolicy_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_OpenMode_(self, primary, dir, JreLoadEnum(OrgApacheLuceneIndexIndexWriterConfig_OpenMode, CREATE_OR_APPEND));
 }
 
 OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy *new_OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_initWithOrgApacheLuceneIndexIndexDeletionPolicy_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexIndexDeletionPolicy *primary, OrgApacheLuceneStoreDirectory *dir) {
-  OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy *self = [OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy alloc];
-  OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_initWithOrgApacheLuceneIndexIndexDeletionPolicy_withOrgApacheLuceneStoreDirectory_(self, primary, dir);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy, initWithOrgApacheLuceneIndexIndexDeletionPolicy_withOrgApacheLuceneStoreDirectory_, primary, dir)
 }
 
-void OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_initWithOrgApacheLuceneIndexIndexDeletionPolicy_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum_(OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy *self, OrgApacheLuceneIndexIndexDeletionPolicy *primary, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum *mode) {
+OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy *create_OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_initWithOrgApacheLuceneIndexIndexDeletionPolicy_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexIndexDeletionPolicy *primary, OrgApacheLuceneStoreDirectory *dir) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy, initWithOrgApacheLuceneIndexIndexDeletionPolicy_withOrgApacheLuceneStoreDirectory_, primary, dir)
+}
+
+void OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_initWithOrgApacheLuceneIndexIndexDeletionPolicy_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_OpenMode_(OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy *self, OrgApacheLuceneIndexIndexDeletionPolicy *primary, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexIndexWriterConfig_OpenMode *mode) {
   OrgApacheLuceneIndexSnapshotDeletionPolicy_initWithOrgApacheLuceneIndexIndexDeletionPolicy_(self, primary);
   JreStrongAssign(&self->dir_, dir);
-  if (mode == JreLoadStatic(OrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum, CREATE)) {
+  if (mode == JreLoadEnum(OrgApacheLuceneIndexIndexWriterConfig_OpenMode, CREATE)) {
     OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_clearPriorSnapshots(self);
   }
   OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_loadPriorSnapshots(self);
-  if (mode == JreLoadStatic(OrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum, APPEND) && self->nextWriteGen_ == 0) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"no snapshots stored in this directory") autorelease];
+  if (mode == JreLoadEnum(OrgApacheLuceneIndexIndexWriterConfig_OpenMode, APPEND) && self->nextWriteGen_ == 0) {
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"no snapshots stored in this directory");
   }
 }
 
-OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy *new_OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_initWithOrgApacheLuceneIndexIndexDeletionPolicy_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum_(OrgApacheLuceneIndexIndexDeletionPolicy *primary, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum *mode) {
-  OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy *self = [OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy alloc];
-  OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_initWithOrgApacheLuceneIndexIndexDeletionPolicy_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum_(self, primary, dir, mode);
-  return self;
+OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy *new_OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_initWithOrgApacheLuceneIndexIndexDeletionPolicy_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_OpenMode_(OrgApacheLuceneIndexIndexDeletionPolicy *primary, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexIndexWriterConfig_OpenMode *mode) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy, initWithOrgApacheLuceneIndexIndexDeletionPolicy_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_OpenMode_, primary, dir, mode)
+}
+
+OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy *create_OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_initWithOrgApacheLuceneIndexIndexDeletionPolicy_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_OpenMode_(OrgApacheLuceneIndexIndexDeletionPolicy *primary, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexIndexWriterConfig_OpenMode *mode) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy, initWithOrgApacheLuceneIndexIndexDeletionPolicy_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_OpenMode_, primary, dir, mode)
 }
 
 void OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_persist(OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy *self) {
   @synchronized(self) {
-    NSString *fileName = JreStrcat("$J", OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_SNAPSHOTS_PREFIX_, self->nextWriteGen_);
-    OrgApacheLuceneStoreIndexOutput *out = [((OrgApacheLuceneStoreDirectory *) nil_chk(self->dir_)) createOutputWithNSString:fileName withOrgApacheLuceneStoreIOContext:JreLoadStatic(OrgApacheLuceneStoreIOContext, DEFAULT_)];
+    NSString *fileName = JreStrcat("$J", OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_SNAPSHOTS_PREFIX, self->nextWriteGen_);
+    OrgApacheLuceneStoreIndexOutput *out = [((OrgApacheLuceneStoreDirectory *) nil_chk(self->dir_)) createOutputWithNSString:fileName withOrgApacheLuceneStoreIOContext:JreLoadStatic(OrgApacheLuceneStoreIOContext, DEFAULT)];
     jboolean success = false;
     @try {
-      OrgApacheLuceneCodecsCodecUtil_writeHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_(out, OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_CODEC_NAME_, OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_VERSION_CURRENT);
+      OrgApacheLuceneCodecsCodecUtil_writeHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_(out, OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_CODEC_NAME, OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_VERSION_CURRENT);
       [((OrgApacheLuceneStoreIndexOutput *) nil_chk(out)) writeVIntWithInt:[((id<JavaUtilMap>) nil_chk(self->refCounts_)) size]];
       for (id<JavaUtilMap_Entry> __strong ent in nil_chk([self->refCounts_ entrySet])) {
         [out writeVLongWithLong:[((JavaLangLong *) nil_chk([((id<JavaUtilMap_Entry>) nil_chk(ent)) getKey])) longLongValue]];
@@ -232,7 +249,7 @@ void OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_persist(OrgApacheLucen
     }
     [self->dir_ syncWithJavaUtilCollection:JavaUtilCollections_singletonListWithId_(fileName)];
     if (self->nextWriteGen_ > 0) {
-      NSString *lastSaveFile = JreStrcat("$J", OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_SNAPSHOTS_PREFIX_, (self->nextWriteGen_ - 1));
+      NSString *lastSaveFile = JreStrcat("$J", OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_SNAPSHOTS_PREFIX, (self->nextWriteGen_ - 1));
       OrgApacheLuceneUtilIOUtils_deleteFilesIgnoringExceptionsWithOrgApacheLuceneStoreDirectory_withNSStringArray_(self->dir_, [IOSObjectArray arrayWithObjects:(id[]){ lastSaveFile } count:1 type:NSString_class_()]);
     }
     self->nextWriteGen_++;
@@ -247,7 +264,7 @@ void OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_clearPriorSnapshots(Or
       NSString * const *e__ = b__ + a__->size_;
       while (b__ < e__) {
         NSString *file = *b__++;
-        if ([((NSString *) nil_chk(file)) hasPrefix:OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_SNAPSHOTS_PREFIX_]) {
+        if ([((NSString *) nil_chk(file)) hasPrefix:OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_SNAPSHOTS_PREFIX]) {
           [self->dir_ deleteFileWithNSString:file];
         }
       }
@@ -259,21 +276,21 @@ void OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_loadPriorSnapshots(Org
   @synchronized(self) {
     jlong genLoaded = -1;
     JavaIoIOException *ioe = nil;
-    id<JavaUtilList> snapshotFiles = [new_JavaUtilArrayList_init() autorelease];
+    id<JavaUtilList> snapshotFiles = create_JavaUtilArrayList_init();
     {
       IOSObjectArray *a__ = [((OrgApacheLuceneStoreDirectory *) nil_chk(self->dir_)) listAll];
       NSString * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
       NSString * const *e__ = b__ + a__->size_;
       while (b__ < e__) {
         NSString *file = *b__++;
-        if ([((NSString *) nil_chk(file)) hasPrefix:OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_SNAPSHOTS_PREFIX_]) {
-          jlong gen = JavaLangLong_parseLongWithNSString_([file substring:((jint) [((NSString *) nil_chk(OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_SNAPSHOTS_PREFIX_)) length])]);
+        if ([((NSString *) nil_chk(file)) hasPrefix:OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_SNAPSHOTS_PREFIX]) {
+          jlong gen = JavaLangLong_parseLongWithNSString_([file substring:((jint) [((NSString *) nil_chk(OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_SNAPSHOTS_PREFIX)) length])]);
           if (genLoaded == -1 || gen > genLoaded) {
             [snapshotFiles addWithId:file];
-            id<JavaUtilMap> m = [new_JavaUtilHashMap_init() autorelease];
-            OrgApacheLuceneStoreIndexInput *in = [self->dir_ openInputWithNSString:file withOrgApacheLuceneStoreIOContext:JreLoadStatic(OrgApacheLuceneStoreIOContext, DEFAULT_)];
+            id<JavaUtilMap> m = create_JavaUtilHashMap_init();
+            OrgApacheLuceneStoreIndexInput *in = [self->dir_ openInputWithNSString:file withOrgApacheLuceneStoreIOContext:JreLoadStatic(OrgApacheLuceneStoreIOContext, DEFAULT)];
             @try {
-              OrgApacheLuceneCodecsCodecUtil_checkHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_(in, OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_CODEC_NAME_, OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_VERSION_START, OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_VERSION_START);
+              OrgApacheLuceneCodecsCodecUtil_checkHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_(in, OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_CODEC_NAME, OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_VERSION_START, OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_VERSION_START);
               jint count = [((OrgApacheLuceneStoreIndexInput *) nil_chk(in)) readVInt];
               for (jint i = 0; i < count; i++) {
                 jlong commitGen = [in readVLong];
@@ -303,7 +320,7 @@ void OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_loadPriorSnapshots(Org
     }
     else {
       if ([snapshotFiles size] > 1) {
-        NSString *curFileName = JreStrcat("$J", OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_SNAPSHOTS_PREFIX_, genLoaded);
+        NSString *curFileName = JreStrcat("$J", OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_SNAPSHOTS_PREFIX, genLoaded);
         for (NSString * __strong file in snapshotFiles) {
           if (![curFileName isEqual:file]) {
             OrgApacheLuceneUtilIOUtils_deleteFilesIgnoringExceptionsWithOrgApacheLuceneStoreDirectory_withNSStringArray_(self->dir_, [IOSObjectArray arrayWithObjects:(id[]){ file } count:1 type:NSString_class_()]);

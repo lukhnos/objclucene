@@ -21,9 +21,13 @@
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisCoreStopAnalyzer)
 
-OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisCoreStopAnalyzer_ENGLISH_STOP_WORDS_SET_;
+OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisCoreStopAnalyzer_ENGLISH_STOP_WORDS_SET;
 
 @implementation OrgApacheLuceneAnalysisCoreStopAnalyzer
+
++ (OrgApacheLuceneAnalysisUtilCharArraySet *)ENGLISH_STOP_WORDS_SET {
+  return OrgApacheLuceneAnalysisCoreStopAnalyzer_ENGLISH_STOP_WORDS_SET;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -48,16 +52,16 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName {
-  OrgApacheLuceneAnalysisTokenizer *source = [new_OrgApacheLuceneAnalysisCoreLowerCaseTokenizer_init() autorelease];
-  return [new_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(source, [new_OrgApacheLuceneAnalysisCoreStopFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(source, stopwords_) autorelease]) autorelease];
+  OrgApacheLuceneAnalysisTokenizer *source = create_OrgApacheLuceneAnalysisCoreLowerCaseTokenizer_init();
+  return create_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(source, create_OrgApacheLuceneAnalysisCoreStopFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(source, stopwords_));
 }
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisCoreStopAnalyzer class]) {
     {
       id<JavaUtilList> stopWords = JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"a", @"an", @"and", @"are", @"as", @"at", @"be", @"but", @"by", @"for", @"if", @"in", @"into", @"is", @"it", @"no", @"not", @"of", @"on", @"or", @"such", @"that", @"the", @"their", @"then", @"there", @"these", @"they", @"this", @"to", @"was", @"will", @"with" } count:33 type:NSString_class_()]);
-      OrgApacheLuceneAnalysisUtilCharArraySet *stopSet = [new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(stopWords, false) autorelease];
-      JreStrongAssign(&OrgApacheLuceneAnalysisCoreStopAnalyzer_ENGLISH_STOP_WORDS_SET_, OrgApacheLuceneAnalysisUtilCharArraySet_unmodifiableSetWithOrgApacheLuceneAnalysisUtilCharArraySet_(stopSet));
+      OrgApacheLuceneAnalysisUtilCharArraySet *stopSet = create_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(stopWords, false);
+      JreStrongAssign(&OrgApacheLuceneAnalysisCoreStopAnalyzer_ENGLISH_STOP_WORDS_SET, OrgApacheLuceneAnalysisUtilCharArraySet_unmodifiableSetWithOrgApacheLuceneAnalysisUtilCharArraySet_(stopSet));
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisCoreStopAnalyzer)
   }
@@ -72,7 +76,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "createComponentsWithNSString:", "createComponents", "Lorg.apache.lucene.analysis.Analyzer$TokenStreamComponents;", 0x4, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "ENGLISH_STOP_WORDS_SET_", NULL, 0x19, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisCoreStopAnalyzer_ENGLISH_STOP_WORDS_SET_, NULL, .constantValue.asLong = 0 },
+    { "ENGLISH_STOP_WORDS_SET", "ENGLISH_STOP_WORDS_SET", 0x19, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisCoreStopAnalyzer_ENGLISH_STOP_WORDS_SET, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreStopAnalyzer = { 2, "StopAnalyzer", "org.apache.lucene.analysis.core", NULL, 0x11, 5, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisCoreStopAnalyzer;
@@ -81,13 +85,15 @@ J2OBJC_IGNORE_DESIGNATED_END
 @end
 
 void OrgApacheLuceneAnalysisCoreStopAnalyzer_init(OrgApacheLuceneAnalysisCoreStopAnalyzer *self) {
-  OrgApacheLuceneAnalysisCoreStopAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, OrgApacheLuceneAnalysisCoreStopAnalyzer_ENGLISH_STOP_WORDS_SET_);
+  OrgApacheLuceneAnalysisCoreStopAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, OrgApacheLuceneAnalysisCoreStopAnalyzer_ENGLISH_STOP_WORDS_SET);
 }
 
 OrgApacheLuceneAnalysisCoreStopAnalyzer *new_OrgApacheLuceneAnalysisCoreStopAnalyzer_init() {
-  OrgApacheLuceneAnalysisCoreStopAnalyzer *self = [OrgApacheLuceneAnalysisCoreStopAnalyzer alloc];
-  OrgApacheLuceneAnalysisCoreStopAnalyzer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCoreStopAnalyzer, init)
+}
+
+OrgApacheLuceneAnalysisCoreStopAnalyzer *create_OrgApacheLuceneAnalysisCoreStopAnalyzer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCoreStopAnalyzer, init)
 }
 
 void OrgApacheLuceneAnalysisCoreStopAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisCoreStopAnalyzer *self, OrgApacheLuceneAnalysisUtilCharArraySet *stopWords) {
@@ -95,9 +101,11 @@ void OrgApacheLuceneAnalysisCoreStopAnalyzer_initWithOrgApacheLuceneAnalysisUtil
 }
 
 OrgApacheLuceneAnalysisCoreStopAnalyzer *new_OrgApacheLuceneAnalysisCoreStopAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopWords) {
-  OrgApacheLuceneAnalysisCoreStopAnalyzer *self = [OrgApacheLuceneAnalysisCoreStopAnalyzer alloc];
-  OrgApacheLuceneAnalysisCoreStopAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, stopWords);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCoreStopAnalyzer, initWithOrgApacheLuceneAnalysisUtilCharArraySet_, stopWords)
+}
+
+OrgApacheLuceneAnalysisCoreStopAnalyzer *create_OrgApacheLuceneAnalysisCoreStopAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopWords) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCoreStopAnalyzer, initWithOrgApacheLuceneAnalysisUtilCharArraySet_, stopWords)
 }
 
 void OrgApacheLuceneAnalysisCoreStopAnalyzer_initWithOrgLukhnosPortmobileFilePath_(OrgApacheLuceneAnalysisCoreStopAnalyzer *self, OrgLukhnosPortmobileFilePath *stopwordsFile) {
@@ -105,9 +113,11 @@ void OrgApacheLuceneAnalysisCoreStopAnalyzer_initWithOrgLukhnosPortmobileFilePat
 }
 
 OrgApacheLuceneAnalysisCoreStopAnalyzer *new_OrgApacheLuceneAnalysisCoreStopAnalyzer_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *stopwordsFile) {
-  OrgApacheLuceneAnalysisCoreStopAnalyzer *self = [OrgApacheLuceneAnalysisCoreStopAnalyzer alloc];
-  OrgApacheLuceneAnalysisCoreStopAnalyzer_initWithOrgLukhnosPortmobileFilePath_(self, stopwordsFile);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCoreStopAnalyzer, initWithOrgLukhnosPortmobileFilePath_, stopwordsFile)
+}
+
+OrgApacheLuceneAnalysisCoreStopAnalyzer *create_OrgApacheLuceneAnalysisCoreStopAnalyzer_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *stopwordsFile) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCoreStopAnalyzer, initWithOrgLukhnosPortmobileFilePath_, stopwordsFile)
 }
 
 void OrgApacheLuceneAnalysisCoreStopAnalyzer_initWithJavaIoReader_(OrgApacheLuceneAnalysisCoreStopAnalyzer *self, JavaIoReader *stopwords) {
@@ -115,9 +125,11 @@ void OrgApacheLuceneAnalysisCoreStopAnalyzer_initWithJavaIoReader_(OrgApacheLuce
 }
 
 OrgApacheLuceneAnalysisCoreStopAnalyzer *new_OrgApacheLuceneAnalysisCoreStopAnalyzer_initWithJavaIoReader_(JavaIoReader *stopwords) {
-  OrgApacheLuceneAnalysisCoreStopAnalyzer *self = [OrgApacheLuceneAnalysisCoreStopAnalyzer alloc];
-  OrgApacheLuceneAnalysisCoreStopAnalyzer_initWithJavaIoReader_(self, stopwords);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCoreStopAnalyzer, initWithJavaIoReader_, stopwords)
+}
+
+OrgApacheLuceneAnalysisCoreStopAnalyzer *create_OrgApacheLuceneAnalysisCoreStopAnalyzer_initWithJavaIoReader_(JavaIoReader *stopwords) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCoreStopAnalyzer, initWithJavaIoReader_, stopwords)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCoreStopAnalyzer)

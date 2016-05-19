@@ -5,28 +5,43 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSpellHighFrequencyDictionary_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSpellHighFrequencyDictionary_RESTRICT
-#define OrgApacheLuceneSearchSpellHighFrequencyDictionary_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpellHighFrequencyDictionary")
+#ifdef RESTRICT_OrgApacheLuceneSearchSpellHighFrequencyDictionary
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpellHighFrequencyDictionary 0
 #else
-#define OrgApacheLuceneSearchSpellHighFrequencyDictionary_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpellHighFrequencyDictionary 1
 #endif
-#undef OrgApacheLuceneSearchSpellHighFrequencyDictionary_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSpellHighFrequencyDictionary
 
-#if !defined (_OrgApacheLuceneSearchSpellHighFrequencyDictionary_) && (OrgApacheLuceneSearchSpellHighFrequencyDictionary_INCLUDE_ALL || OrgApacheLuceneSearchSpellHighFrequencyDictionary_INCLUDE)
-#define _OrgApacheLuceneSearchSpellHighFrequencyDictionary_
+#if !defined (OrgApacheLuceneSearchSpellHighFrequencyDictionary_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpellHighFrequencyDictionary || defined(INCLUDE_OrgApacheLuceneSearchSpellHighFrequencyDictionary))
+#define OrgApacheLuceneSearchSpellHighFrequencyDictionary_
 
-#define OrgApacheLuceneSearchSpellDictionary_RESTRICT 1
-#define OrgApacheLuceneSearchSpellDictionary_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSpellDictionary 1
+#define INCLUDE_OrgApacheLuceneSearchSpellDictionary 1
 #include "org/apache/lucene/search/spell/Dictionary.h"
 
 @class OrgApacheLuceneIndexIndexReader;
 @protocol OrgApacheLuceneSearchSuggestInputIterator;
 
+/*!
+ @brief HighFrequencyDictionary: terms taken from the given field
+ of a Lucene index, which appear in a number of documents
+ above a given threshold.
+ Threshold is a value in [0..1] representing the minimum
+ number of documents (of the total) where a term should appear.
+ Based on LuceneDictionary.
+ */
 @interface OrgApacheLuceneSearchSpellHighFrequencyDictionary : NSObject < OrgApacheLuceneSearchSpellDictionary >
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new Dictionary, pulling source terms from
+ the specified <code>field</code> in the provided <code>reader</code>.
+ <p>
+ Terms appearing in less than <code>thresh</code> percentage of documents
+ will be excluded.
+ */
 - (instancetype)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
                                            withNSString:(NSString *)field
                                               withFloat:(jfloat)thresh;
@@ -41,15 +56,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSpellHighFrequencyDictionary_initWit
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSpellHighFrequencyDictionary *new_OrgApacheLuceneSearchSpellHighFrequencyDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withFloat_(OrgApacheLuceneIndexIndexReader *reader, NSString *field, jfloat thresh) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpellHighFrequencyDictionary *create_OrgApacheLuceneSearchSpellHighFrequencyDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withFloat_(OrgApacheLuceneIndexIndexReader *reader, NSString *field, jfloat thresh);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellHighFrequencyDictionary)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator_) && (OrgApacheLuceneSearchSpellHighFrequencyDictionary_INCLUDE_ALL || OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator_INCLUDE)
-#define _OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator_
+#if !defined (OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpellHighFrequencyDictionary || defined(INCLUDE_OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator))
+#define OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator_
 
-#define OrgApacheLuceneSearchSuggestInputIterator_RESTRICT 1
-#define OrgApacheLuceneSearchSuggestInputIterator_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSuggestInputIterator 1
+#define INCLUDE_OrgApacheLuceneSearchSuggestInputIterator 1
 #include "org/apache/lucene/search/suggest/InputIterator.h"
 
 @class OrgApacheLuceneSearchSpellHighFrequencyDictionary;
@@ -84,8 +101,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFre
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator *new_OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator_initWithOrgApacheLuceneSearchSpellHighFrequencyDictionary_(OrgApacheLuceneSearchSpellHighFrequencyDictionary *outer$) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator *create_OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator_initWithOrgApacheLuceneSearchSpellHighFrequencyDictionary_(OrgApacheLuceneSearchSpellHighFrequencyDictionary *outer$);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSpellHighFrequencyDictionary_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpellHighFrequencyDictionary")

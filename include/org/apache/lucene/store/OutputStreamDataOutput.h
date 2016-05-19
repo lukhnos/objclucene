@@ -5,28 +5,31 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneStoreOutputStreamDataOutput_INCLUDE_ALL")
-#if OrgApacheLuceneStoreOutputStreamDataOutput_RESTRICT
-#define OrgApacheLuceneStoreOutputStreamDataOutput_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneStoreOutputStreamDataOutput")
+#ifdef RESTRICT_OrgApacheLuceneStoreOutputStreamDataOutput
+#define INCLUDE_ALL_OrgApacheLuceneStoreOutputStreamDataOutput 0
 #else
-#define OrgApacheLuceneStoreOutputStreamDataOutput_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneStoreOutputStreamDataOutput 1
 #endif
-#undef OrgApacheLuceneStoreOutputStreamDataOutput_RESTRICT
+#undef RESTRICT_OrgApacheLuceneStoreOutputStreamDataOutput
 
-#if !defined (_OrgApacheLuceneStoreOutputStreamDataOutput_) && (OrgApacheLuceneStoreOutputStreamDataOutput_INCLUDE_ALL || OrgApacheLuceneStoreOutputStreamDataOutput_INCLUDE)
-#define _OrgApacheLuceneStoreOutputStreamDataOutput_
+#if !defined (OrgApacheLuceneStoreOutputStreamDataOutput_) && (INCLUDE_ALL_OrgApacheLuceneStoreOutputStreamDataOutput || defined(INCLUDE_OrgApacheLuceneStoreOutputStreamDataOutput))
+#define OrgApacheLuceneStoreOutputStreamDataOutput_
 
-#define OrgApacheLuceneStoreDataOutput_RESTRICT 1
-#define OrgApacheLuceneStoreDataOutput_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreDataOutput 1
+#define INCLUDE_OrgApacheLuceneStoreDataOutput 1
 #include "org/apache/lucene/store/DataOutput.h"
 
-#define JavaIoCloseable_RESTRICT 1
-#define JavaIoCloseable_INCLUDE 1
+#define RESTRICT_JavaIoCloseable 1
+#define INCLUDE_JavaIoCloseable 1
 #include "java/io/Closeable.h"
 
 @class IOSByteArray;
 @class JavaIoOutputStream;
 
+/*!
+ @brief A <code>DataOutput</code> wrapping a plain <code>OutputStream</code>.
+ */
 @interface OrgApacheLuceneStoreOutputStreamDataOutput : OrgApacheLuceneStoreDataOutput < JavaIoCloseable >
 
 #pragma mark Public
@@ -49,8 +52,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneStoreOutputStreamDataOutput_initWithJavaIo
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreOutputStreamDataOutput *new_OrgApacheLuceneStoreOutputStreamDataOutput_initWithJavaIoOutputStream_(JavaIoOutputStream *os) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneStoreOutputStreamDataOutput *create_OrgApacheLuceneStoreOutputStreamDataOutput_initWithJavaIoOutputStream_(JavaIoOutputStream *os);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreOutputStreamDataOutput)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneStoreOutputStreamDataOutput_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreOutputStreamDataOutput")

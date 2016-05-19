@@ -80,25 +80,29 @@ void OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_initWithOrgApach
 }
 
 OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter *new_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(OrgApacheLuceneAnalysisTokenStream *input, jint maxStartOffset) {
-  OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter *self = [OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter alloc];
-  OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(self, input, maxStartOffset);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter, initWithOrgApacheLuceneAnalysisTokenStream_withInt_, input, maxStartOffset)
+}
+
+OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter *create_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(OrgApacheLuceneAnalysisTokenStream *input, jint maxStartOffset) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter, initWithOrgApacheLuceneAnalysisTokenStream_withInt_, input, maxStartOffset)
 }
 
 void OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_(OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter *self, OrgApacheLuceneAnalysisTokenStream *input, jint maxStartOffset, jboolean consumeAllTokens) {
   OrgApacheLuceneAnalysisTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, input);
   JreStrongAssign(&self->offsetAttrib_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_()]);
   if (maxStartOffset < 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"maxStartOffset must be >= zero") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"maxStartOffset must be >= zero");
   }
   self->maxStartOffset_ = maxStartOffset;
   self->consumeAllTokens_ = consumeAllTokens;
 }
 
 OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter *new_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_(OrgApacheLuceneAnalysisTokenStream *input, jint maxStartOffset, jboolean consumeAllTokens) {
-  OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter *self = [OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter alloc];
-  OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_(self, input, maxStartOffset, consumeAllTokens);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter, initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_, input, maxStartOffset, consumeAllTokens)
+}
+
+OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter *create_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_(OrgApacheLuceneAnalysisTokenStream *input, jint maxStartOffset, jboolean consumeAllTokens) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter, initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_, input, maxStartOffset, consumeAllTokens)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter)

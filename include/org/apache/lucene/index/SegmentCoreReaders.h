@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexSegmentCoreReaders_INCLUDE_ALL")
-#if OrgApacheLuceneIndexSegmentCoreReaders_RESTRICT
-#define OrgApacheLuceneIndexSegmentCoreReaders_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexSegmentCoreReaders")
+#ifdef RESTRICT_OrgApacheLuceneIndexSegmentCoreReaders
+#define INCLUDE_ALL_OrgApacheLuceneIndexSegmentCoreReaders 0
 #else
-#define OrgApacheLuceneIndexSegmentCoreReaders_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexSegmentCoreReaders 1
 #endif
-#undef OrgApacheLuceneIndexSegmentCoreReaders_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexSegmentCoreReaders
 
-#if !defined (_OrgApacheLuceneIndexSegmentCoreReaders_) && (OrgApacheLuceneIndexSegmentCoreReaders_INCLUDE_ALL || OrgApacheLuceneIndexSegmentCoreReaders_INCLUDE)
-#define _OrgApacheLuceneIndexSegmentCoreReaders_
+#if !defined (OrgApacheLuceneIndexSegmentCoreReaders_) && (INCLUDE_ALL_OrgApacheLuceneIndexSegmentCoreReaders || defined(INCLUDE_OrgApacheLuceneIndexSegmentCoreReaders))
+#define OrgApacheLuceneIndexSegmentCoreReaders_
 
 @class OrgApacheLuceneCodecsFieldsProducer;
 @class OrgApacheLuceneCodecsNormsProducer;
@@ -28,6 +28,10 @@
 @class OrgApacheLuceneUtilCloseableThreadLocal;
 @protocol OrgApacheLuceneIndexLeafReader_CoreClosedListener;
 
+/*!
+ @brief Holds core readers that are shared (unchanged) when
+ SegmentReader is cloned or reopened
+ */
 @interface OrgApacheLuceneIndexSegmentCoreReaders : NSObject {
  @public
   OrgApacheLuceneCodecsFieldsProducer *fields_;
@@ -35,6 +39,11 @@
   OrgApacheLuceneCodecsStoredFieldsReader *fieldsReaderOrig_;
   OrgApacheLuceneCodecsTermVectorsReader *termVectorsReaderOrig_;
   OrgApacheLuceneStoreDirectory *cfsReader_;
+  /*!
+   @brief fieldinfos for this core: means gen=-1.
+   this is the exact fieldinfos these codec components saw at write.
+ in the case of DV updates, SR may hold a newer version. 
+   */
   OrgApacheLuceneIndexFieldInfos *coreFieldInfos_;
   OrgApacheLuceneUtilCloseableThreadLocal *fieldsReaderLocal_;
   OrgApacheLuceneUtilCloseableThreadLocal *termVectorsLocal_;
@@ -74,15 +83,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexSegmentCoreReaders_initWithOrgApacheL
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentCoreReaders *new_OrgApacheLuceneIndexSegmentCoreReaders_initWithOrgApacheLuceneIndexSegmentReader_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneIndexSegmentReader *owner, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneStoreIOContext *context) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentCoreReaders *create_OrgApacheLuceneIndexSegmentCoreReaders_initWithOrgApacheLuceneIndexSegmentReader_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneIndexSegmentReader *owner, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneStoreIOContext *context);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSegmentCoreReaders)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexSegmentCoreReaders_FieldsReaderLocal_) && (OrgApacheLuceneIndexSegmentCoreReaders_INCLUDE_ALL || OrgApacheLuceneIndexSegmentCoreReaders_FieldsReaderLocal_INCLUDE)
-#define _OrgApacheLuceneIndexSegmentCoreReaders_FieldsReaderLocal_
+#if !defined (OrgApacheLuceneIndexSegmentCoreReaders_FieldsReaderLocal_) && (INCLUDE_ALL_OrgApacheLuceneIndexSegmentCoreReaders || defined(INCLUDE_OrgApacheLuceneIndexSegmentCoreReaders_FieldsReaderLocal))
+#define OrgApacheLuceneIndexSegmentCoreReaders_FieldsReaderLocal_
 
-#define OrgApacheLuceneUtilCloseableThreadLocal_RESTRICT 1
-#define OrgApacheLuceneUtilCloseableThreadLocal_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilCloseableThreadLocal 1
+#define INCLUDE_OrgApacheLuceneUtilCloseableThreadLocal 1
 #include "org/apache/lucene/util/CloseableThreadLocal.h"
 
 @class OrgApacheLuceneCodecsStoredFieldsReader;
@@ -106,15 +117,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexSegmentCoreReaders_FieldsReaderLocal_
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentCoreReaders_FieldsReaderLocal *new_OrgApacheLuceneIndexSegmentCoreReaders_FieldsReaderLocal_initWithOrgApacheLuceneIndexSegmentCoreReaders_(OrgApacheLuceneIndexSegmentCoreReaders *outer$) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentCoreReaders_FieldsReaderLocal *create_OrgApacheLuceneIndexSegmentCoreReaders_FieldsReaderLocal_initWithOrgApacheLuceneIndexSegmentCoreReaders_(OrgApacheLuceneIndexSegmentCoreReaders *outer$);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSegmentCoreReaders_FieldsReaderLocal)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexSegmentCoreReaders_TermVectorsLocal_) && (OrgApacheLuceneIndexSegmentCoreReaders_INCLUDE_ALL || OrgApacheLuceneIndexSegmentCoreReaders_TermVectorsLocal_INCLUDE)
-#define _OrgApacheLuceneIndexSegmentCoreReaders_TermVectorsLocal_
+#if !defined (OrgApacheLuceneIndexSegmentCoreReaders_TermVectorsLocal_) && (INCLUDE_ALL_OrgApacheLuceneIndexSegmentCoreReaders || defined(INCLUDE_OrgApacheLuceneIndexSegmentCoreReaders_TermVectorsLocal))
+#define OrgApacheLuceneIndexSegmentCoreReaders_TermVectorsLocal_
 
-#define OrgApacheLuceneUtilCloseableThreadLocal_RESTRICT 1
-#define OrgApacheLuceneUtilCloseableThreadLocal_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilCloseableThreadLocal 1
+#define INCLUDE_OrgApacheLuceneUtilCloseableThreadLocal 1
 #include "org/apache/lucene/util/CloseableThreadLocal.h"
 
 @class OrgApacheLuceneCodecsTermVectorsReader;
@@ -138,8 +151,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexSegmentCoreReaders_TermVectorsLocal_i
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentCoreReaders_TermVectorsLocal *new_OrgApacheLuceneIndexSegmentCoreReaders_TermVectorsLocal_initWithOrgApacheLuceneIndexSegmentCoreReaders_(OrgApacheLuceneIndexSegmentCoreReaders *outer$) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentCoreReaders_TermVectorsLocal *create_OrgApacheLuceneIndexSegmentCoreReaders_TermVectorsLocal_initWithOrgApacheLuceneIndexSegmentCoreReaders_(OrgApacheLuceneIndexSegmentCoreReaders *outer$);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSegmentCoreReaders_TermVectorsLocal)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexSegmentCoreReaders_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSegmentCoreReaders")

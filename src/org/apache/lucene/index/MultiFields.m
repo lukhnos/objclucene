@@ -98,14 +98,14 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiFields, terms_, id<JavaUtilMap>)
   for (jint i = 0; i < subs_->size_; i++) {
     IOSObjectArray_Set(subIterators, i, [((OrgApacheLuceneIndexFields *) nil_chk(IOSObjectArray_Get(subs_, i))) iterator]);
   }
-  return [new_OrgApacheLuceneUtilMergedIterator_initWithJavaUtilIteratorArray_(subIterators) autorelease];
+  return create_OrgApacheLuceneUtilMergedIterator_initWithJavaUtilIteratorArray_(subIterators);
 }
 
 - (OrgApacheLuceneIndexTerms *)termsWithNSString:(NSString *)field {
   OrgApacheLuceneIndexTerms *result = [((id<JavaUtilMap>) nil_chk(terms_)) getWithId:field];
   if (result != nil) return result;
-  id<JavaUtilList> subs2 = [new_JavaUtilArrayList_init() autorelease];
-  id<JavaUtilList> slices2 = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> subs2 = create_JavaUtilArrayList_init();
+  id<JavaUtilList> slices2 = create_JavaUtilArrayList_init();
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(subs_))->size_; i++) {
     OrgApacheLuceneIndexTerms *terms = [((OrgApacheLuceneIndexFields *) nil_chk(IOSObjectArray_Get(subs_, i))) termsWithNSString:field];
     if (terms != nil) {
@@ -117,7 +117,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiFields, terms_, id<JavaUtilMap>)
     result = nil;
   }
   else {
-    result = [new_OrgApacheLuceneIndexMultiTerms_initWithOrgApacheLuceneIndexTermsArray_withOrgApacheLuceneIndexReaderSliceArray_([subs2 toArrayWithNSObjectArray:JreLoadStatic(OrgApacheLuceneIndexTerms, EMPTY_ARRAY_)], [slices2 toArrayWithNSObjectArray:JreLoadStatic(OrgApacheLuceneIndexReaderSlice, EMPTY_ARRAY_)]) autorelease];
+    result = create_OrgApacheLuceneIndexMultiTerms_initWithOrgApacheLuceneIndexTermsArray_withOrgApacheLuceneIndexReaderSliceArray_([subs2 toArrayWithNSObjectArray:JreLoadStatic(OrgApacheLuceneIndexTerms, EMPTY_ARRAY)], [slices2 toArrayWithNSObjectArray:JreLoadStatic(OrgApacheLuceneIndexReaderSlice, EMPTY_ARRAY)]);
     [terms_ putWithId:field withId:result];
   }
   return result;
@@ -135,15 +135,15 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiFields, terms_, id<JavaUtilMap>)
   return OrgApacheLuceneIndexMultiFields_getIndexedFieldsWithOrgApacheLuceneIndexIndexReader_(reader);
 }
 
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
+  return JreDefaultFastEnumeration(self, state, stackbuf, len);
+}
+
 - (void)dealloc {
   RELEASE_(subs_);
   RELEASE_(subSlices_);
   RELEASE_(terms_);
   [super dealloc];
-}
-
-- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -156,11 +156,11 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiFields, terms_, id<JavaUtilMap>)
     { "getTermPositionsEnumWithOrgApacheLuceneIndexIndexReader:withNSString:withOrgApacheLuceneUtilBytesRef:", "getTermPositionsEnum", "Lorg.apache.lucene.index.PostingsEnum;", 0x9, "Ljava.io.IOException;", NULL },
     { "getTermPositionsEnumWithOrgApacheLuceneIndexIndexReader:withNSString:withOrgApacheLuceneUtilBytesRef:withInt:", "getTermPositionsEnum", "Lorg.apache.lucene.index.PostingsEnum;", 0x9, "Ljava.io.IOException;", NULL },
     { "initWithOrgApacheLuceneIndexFieldsArray:withOrgApacheLuceneIndexReaderSliceArray:", "MultiFields", NULL, 0x1, NULL, NULL },
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, NULL },
+    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<Ljava/lang/String;>;" },
     { "termsWithNSString:", "terms", "Lorg.apache.lucene.index.Terms;", 0x1, "Ljava.io.IOException;", NULL },
     { "size", NULL, "I", 0x1, NULL, NULL },
     { "getMergedFieldInfosWithOrgApacheLuceneIndexIndexReader:", "getMergedFieldInfos", "Lorg.apache.lucene.index.FieldInfos;", 0x9, NULL, NULL },
-    { "getIndexedFieldsWithOrgApacheLuceneIndexIndexReader:", "getIndexedFields", "Ljava.util.Collection;", 0x9, NULL, NULL },
+    { "getIndexedFieldsWithOrgApacheLuceneIndexIndexReader:", "getIndexedFields", "Ljava.util.Collection;", 0x9, NULL, "(Lorg/apache/lucene/index/IndexReader;)Ljava/util/Collection<Ljava/lang/String;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "subs_", NULL, 0x12, "[Lorg.apache.lucene.index.Fields;", NULL, NULL, .constantValue.asLong = 0 },
@@ -183,19 +183,19 @@ OrgApacheLuceneIndexFields *OrgApacheLuceneIndexMultiFields_getFieldsWithOrgApac
       case 1:
       return [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk([leaves getWithInt:0])) reader])) fields];
       default:
-      fields = [new_JavaUtilArrayList_init() autorelease];
-      slices = [new_JavaUtilArrayList_init() autorelease];
+      fields = create_JavaUtilArrayList_init();
+      slices = create_JavaUtilArrayList_init();
       for (OrgApacheLuceneIndexLeafReaderContext * __strong ctx in leaves) {
         OrgApacheLuceneIndexLeafReader *r = [((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(ctx)) reader];
         OrgApacheLuceneIndexFields *f = [((OrgApacheLuceneIndexLeafReader *) nil_chk(r)) fields];
         [fields addWithId:f];
-        [slices addWithId:[new_OrgApacheLuceneIndexReaderSlice_initWithInt_withInt_withInt_(ctx->docBase_, [r maxDoc], [fields size] - 1) autorelease]];
+        [slices addWithId:create_OrgApacheLuceneIndexReaderSlice_initWithInt_withInt_withInt_(ctx->docBase_, [r maxDoc], [fields size] - 1)];
       }
       if ([fields size] == 1) {
         return [fields getWithInt:0];
       }
       else {
-        return [new_OrgApacheLuceneIndexMultiFields_initWithOrgApacheLuceneIndexFieldsArray_withOrgApacheLuceneIndexReaderSliceArray_([fields toArrayWithNSObjectArray:JreLoadStatic(OrgApacheLuceneIndexFields, EMPTY_ARRAY_)], [slices toArrayWithNSObjectArray:JreLoadStatic(OrgApacheLuceneIndexReaderSlice, EMPTY_ARRAY_)]) autorelease];
+        return create_OrgApacheLuceneIndexMultiFields_initWithOrgApacheLuceneIndexFieldsArray_withOrgApacheLuceneIndexReaderSliceArray_([fields toArrayWithNSObjectArray:JreLoadStatic(OrgApacheLuceneIndexFields, EMPTY_ARRAY)], [slices toArrayWithNSObjectArray:JreLoadStatic(OrgApacheLuceneIndexReaderSlice, EMPTY_ARRAY)]);
       }
     }
   }
@@ -218,7 +218,7 @@ id<OrgApacheLuceneUtilBits> OrgApacheLuceneIndexMultiFields_getLiveDocsWithOrgAp
       *IOSIntArray_GetRef(starts, i) = ctx->docBase_;
     }
     *IOSIntArray_GetRef(starts, size) = [reader maxDoc];
-    return [new_OrgApacheLuceneIndexMultiBits_initWithOrgApacheLuceneUtilBitsArray_withIntArray_withBoolean_(liveDocs, starts, true) autorelease];
+    return create_OrgApacheLuceneIndexMultiBits_initWithOrgApacheLuceneUtilBitsArray_withIntArray_withBoolean_(liveDocs, starts, true);
   }
   else {
     return nil;
@@ -276,14 +276,16 @@ void OrgApacheLuceneIndexMultiFields_initWithOrgApacheLuceneIndexFieldsArray_wit
 }
 
 OrgApacheLuceneIndexMultiFields *new_OrgApacheLuceneIndexMultiFields_initWithOrgApacheLuceneIndexFieldsArray_withOrgApacheLuceneIndexReaderSliceArray_(IOSObjectArray *subs, IOSObjectArray *subSlices) {
-  OrgApacheLuceneIndexMultiFields *self = [OrgApacheLuceneIndexMultiFields alloc];
-  OrgApacheLuceneIndexMultiFields_initWithOrgApacheLuceneIndexFieldsArray_withOrgApacheLuceneIndexReaderSliceArray_(self, subs, subSlices);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMultiFields, initWithOrgApacheLuceneIndexFieldsArray_withOrgApacheLuceneIndexReaderSliceArray_, subs, subSlices)
+}
+
+OrgApacheLuceneIndexMultiFields *create_OrgApacheLuceneIndexMultiFields_initWithOrgApacheLuceneIndexFieldsArray_withOrgApacheLuceneIndexReaderSliceArray_(IOSObjectArray *subs, IOSObjectArray *subSlices) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMultiFields, initWithOrgApacheLuceneIndexFieldsArray_withOrgApacheLuceneIndexReaderSliceArray_, subs, subSlices)
 }
 
 OrgApacheLuceneIndexFieldInfos *OrgApacheLuceneIndexMultiFields_getMergedFieldInfosWithOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneIndexIndexReader *reader) {
   OrgApacheLuceneIndexMultiFields_initialize();
-  OrgApacheLuceneIndexFieldInfos_Builder *builder = [new_OrgApacheLuceneIndexFieldInfos_Builder_init() autorelease];
+  OrgApacheLuceneIndexFieldInfos_Builder *builder = create_OrgApacheLuceneIndexFieldInfos_Builder_init();
   for (OrgApacheLuceneIndexLeafReaderContext * __strong ctx in nil_chk([((OrgApacheLuceneIndexIndexReader *) nil_chk(reader)) leaves])) {
     [builder addWithOrgApacheLuceneIndexFieldInfos:[((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(ctx)) reader])) getFieldInfos]];
   }
@@ -292,9 +294,9 @@ OrgApacheLuceneIndexFieldInfos *OrgApacheLuceneIndexMultiFields_getMergedFieldIn
 
 id<JavaUtilCollection> OrgApacheLuceneIndexMultiFields_getIndexedFieldsWithOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneIndexIndexReader *reader) {
   OrgApacheLuceneIndexMultiFields_initialize();
-  id<JavaUtilCollection> fields = [new_JavaUtilHashSet_init() autorelease];
+  id<JavaUtilCollection> fields = create_JavaUtilHashSet_init();
   for (OrgApacheLuceneIndexFieldInfo * __strong fieldInfo in nil_chk(OrgApacheLuceneIndexMultiFields_getMergedFieldInfosWithOrgApacheLuceneIndexIndexReader_(reader))) {
-    if ([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo)) getIndexOptions] != JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE)) {
+    if ([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo)) getIndexOptions] != JreLoadEnum(OrgApacheLuceneIndexIndexOptions, NONE)) {
       [fields addWithId:fieldInfo->name_];
     }
   }

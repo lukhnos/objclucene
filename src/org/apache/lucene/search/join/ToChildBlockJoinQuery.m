@@ -47,6 +47,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchJoinToChildBlockJoinQue
 
 __attribute__((unused)) static OrgApacheLuceneSearchJoinToChildBlockJoinQuery *new_OrgApacheLuceneSearchJoinToChildBlockJoinQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchJoinBitSetProducer_(OrgApacheLuceneSearchQuery *origParentQuery, OrgApacheLuceneSearchQuery *parentQuery, id<OrgApacheLuceneSearchJoinBitSetProducer> parentsFilter) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchJoinToChildBlockJoinQuery *create_OrgApacheLuceneSearchJoinToChildBlockJoinQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchJoinBitSetProducer_(OrgApacheLuceneSearchQuery *origParentQuery, OrgApacheLuceneSearchQuery *parentQuery, id<OrgApacheLuceneSearchJoinBitSetProducer> parentsFilter);
+
 @interface OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinWeight : OrgApacheLuceneSearchWeight {
  @public
   OrgApacheLuceneSearchQuery *joinQuery_;
@@ -84,6 +86,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchJoinToChildBlockJoinQue
 
 __attribute__((unused)) static OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinWeight *new_OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinWeight_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchJoinBitSetProducer_withBoolean_(OrgApacheLuceneSearchQuery *joinQuery, OrgApacheLuceneSearchWeight *parentWeight, id<OrgApacheLuceneSearchJoinBitSetProducer> parentsFilter, jboolean doScores) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinWeight *create_OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinWeight_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchJoinBitSetProducer_withBoolean_(OrgApacheLuceneSearchQuery *joinQuery, OrgApacheLuceneSearchWeight *parentWeight, id<OrgApacheLuceneSearchJoinBitSetProducer> parentsFilter, jboolean doScores);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinWeight)
 
 @interface OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinScorer () {
@@ -97,6 +101,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChil
   jint parentDoc_;
 }
 
+/*!
+ @brief Detect mis-use, where provided parent query in fact
+ sometimes returns child documents.
+ */
 - (void)validateParentDoc;
 
 @end
@@ -106,10 +114,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJ
 
 __attribute__((unused)) static void OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinScorer_validateParentDoc(OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinScorer *self);
 
-NSString *OrgApacheLuceneSearchJoinToChildBlockJoinQuery_INVALID_QUERY_MESSAGE_ = @"Parent query yields document which is not matched by parents filter, docID=";
-NSString *OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ILLEGAL_ADVANCE_ON_PARENT_ = @"Expect to be advanced on child docs only. got docID=";
+NSString *OrgApacheLuceneSearchJoinToChildBlockJoinQuery_INVALID_QUERY_MESSAGE = @"Parent query yields document which is not matched by parents filter, docID=";
+NSString *OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ILLEGAL_ADVANCE_ON_PARENT = @"Expect to be advanced on child docs only. got docID=";
 
 @implementation OrgApacheLuceneSearchJoinToChildBlockJoinQuery
+
++ (NSString *)INVALID_QUERY_MESSAGE {
+  return OrgApacheLuceneSearchJoinToChildBlockJoinQuery_INVALID_QUERY_MESSAGE;
+}
+
++ (NSString *)ILLEGAL_ADVANCE_ON_PARENT {
+  return OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ILLEGAL_ADVANCE_ON_PARENT;
+}
 
 - (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)parentQuery
        withOrgApacheLuceneSearchJoinBitSetProducer:(id<OrgApacheLuceneSearchJoinBitSetProducer>)parentsFilter {
@@ -126,7 +142,7 @@ NSString *OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ILLEGAL_ADVANCE_ON_PARE
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores {
-  return [new_OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinWeight_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchJoinBitSetProducer_withBoolean_(self, [((OrgApacheLuceneSearchQuery *) nil_chk(parentQuery_)) createWeightWithOrgApacheLuceneSearchIndexSearcher:searcher withBoolean:needsScores], parentsFilter_, needsScores) autorelease];
+  return create_OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinWeight_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchJoinBitSetProducer_withBoolean_(self, [((OrgApacheLuceneSearchQuery *) nil_chk(parentQuery_)) createWeightWithOrgApacheLuceneSearchIndexSearcher:searcher withBoolean:needsScores], parentsFilter_, needsScores);
 }
 
 - (OrgApacheLuceneSearchQuery *)getParentQuery {
@@ -136,7 +152,7 @@ NSString *OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ILLEGAL_ADVANCE_ON_PARE
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader {
   OrgApacheLuceneSearchQuery *parentRewrite = [((OrgApacheLuceneSearchQuery *) nil_chk(parentQuery_)) rewriteWithOrgApacheLuceneIndexIndexReader:reader];
   if (parentRewrite != parentQuery_) {
-    OrgApacheLuceneSearchQuery *rewritten = [new_OrgApacheLuceneSearchJoinToChildBlockJoinQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchJoinBitSetProducer_(parentQuery_, parentRewrite, parentsFilter_) autorelease];
+    OrgApacheLuceneSearchQuery *rewritten = create_OrgApacheLuceneSearchJoinToChildBlockJoinQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchJoinBitSetProducer_(parentQuery_, parentRewrite, parentsFilter_);
     [rewritten setBoostWithFloat:[self getBoost]];
     return rewritten;
   }
@@ -151,7 +167,7 @@ NSString *OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ILLEGAL_ADVANCE_ON_PARE
 
 - (jboolean)isEqual:(id)_other {
   if ([_other isKindOfClass:[OrgApacheLuceneSearchJoinToChildBlockJoinQuery class]]) {
-    OrgApacheLuceneSearchJoinToChildBlockJoinQuery *other = (OrgApacheLuceneSearchJoinToChildBlockJoinQuery *) check_class_cast(_other, [OrgApacheLuceneSearchJoinToChildBlockJoinQuery class]);
+    OrgApacheLuceneSearchJoinToChildBlockJoinQuery *other = (OrgApacheLuceneSearchJoinToChildBlockJoinQuery *) cast_chk(_other, [OrgApacheLuceneSearchJoinToChildBlockJoinQuery class]);
     return [((OrgApacheLuceneSearchQuery *) nil_chk(origParentQuery_)) isEqual:((OrgApacheLuceneSearchJoinToChildBlockJoinQuery *) nil_chk(other))->origParentQuery_] && [((id<OrgApacheLuceneSearchJoinBitSetProducer>) nil_chk(parentsFilter_)) isEqual:other->parentsFilter_] && [super isEqual:other];
   }
   else {
@@ -168,7 +184,7 @@ NSString *OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ILLEGAL_ADVANCE_ON_PARE
 }
 
 - (OrgApacheLuceneSearchJoinToChildBlockJoinQuery *)clone {
-  return [new_OrgApacheLuceneSearchJoinToChildBlockJoinQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchJoinBitSetProducer_([((OrgApacheLuceneSearchQuery *) nil_chk(origParentQuery_)) clone], parentsFilter_) autorelease];
+  return create_OrgApacheLuceneSearchJoinToChildBlockJoinQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchJoinBitSetProducer_([((OrgApacheLuceneSearchQuery *) nil_chk(origParentQuery_)) clone], parentsFilter_);
 }
 
 - (void)dealloc {
@@ -191,8 +207,8 @@ NSString *OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ILLEGAL_ADVANCE_ON_PARE
     { "clone", NULL, "Lorg.apache.lucene.search.join.ToChildBlockJoinQuery;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "INVALID_QUERY_MESSAGE_", NULL, 0x18, "Ljava.lang.String;", &OrgApacheLuceneSearchJoinToChildBlockJoinQuery_INVALID_QUERY_MESSAGE_, NULL, .constantValue.asLong = 0 },
-    { "ILLEGAL_ADVANCE_ON_PARENT_", NULL, 0x18, "Ljava.lang.String;", &OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ILLEGAL_ADVANCE_ON_PARENT_, NULL, .constantValue.asLong = 0 },
+    { "INVALID_QUERY_MESSAGE", "INVALID_QUERY_MESSAGE", 0x18, "Ljava.lang.String;", &OrgApacheLuceneSearchJoinToChildBlockJoinQuery_INVALID_QUERY_MESSAGE, NULL, .constantValue.asLong = 0 },
+    { "ILLEGAL_ADVANCE_ON_PARENT", "ILLEGAL_ADVANCE_ON_PARENT", 0x18, "Ljava.lang.String;", &OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ILLEGAL_ADVANCE_ON_PARENT, NULL, .constantValue.asLong = 0 },
     { "parentsFilter_", NULL, 0x12, "Lorg.apache.lucene.search.join.BitSetProducer;", NULL, NULL, .constantValue.asLong = 0 },
     { "parentQuery_", NULL, 0x12, "Lorg.apache.lucene.search.Query;", NULL, NULL, .constantValue.asLong = 0 },
     { "origParentQuery_", NULL, 0x12, "Lorg.apache.lucene.search.Query;", NULL, NULL, .constantValue.asLong = 0 },
@@ -212,9 +228,11 @@ void OrgApacheLuceneSearchJoinToChildBlockJoinQuery_initWithOrgApacheLuceneSearc
 }
 
 OrgApacheLuceneSearchJoinToChildBlockJoinQuery *new_OrgApacheLuceneSearchJoinToChildBlockJoinQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchJoinBitSetProducer_(OrgApacheLuceneSearchQuery *parentQuery, id<OrgApacheLuceneSearchJoinBitSetProducer> parentsFilter) {
-  OrgApacheLuceneSearchJoinToChildBlockJoinQuery *self = [OrgApacheLuceneSearchJoinToChildBlockJoinQuery alloc];
-  OrgApacheLuceneSearchJoinToChildBlockJoinQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchJoinBitSetProducer_(self, parentQuery, parentsFilter);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinToChildBlockJoinQuery, initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchJoinBitSetProducer_, parentQuery, parentsFilter)
+}
+
+OrgApacheLuceneSearchJoinToChildBlockJoinQuery *create_OrgApacheLuceneSearchJoinToChildBlockJoinQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchJoinBitSetProducer_(OrgApacheLuceneSearchQuery *parentQuery, id<OrgApacheLuceneSearchJoinBitSetProducer> parentsFilter) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinToChildBlockJoinQuery, initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchJoinBitSetProducer_, parentQuery, parentsFilter)
 }
 
 void OrgApacheLuceneSearchJoinToChildBlockJoinQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchJoinBitSetProducer_(OrgApacheLuceneSearchJoinToChildBlockJoinQuery *self, OrgApacheLuceneSearchQuery *origParentQuery, OrgApacheLuceneSearchQuery *parentQuery, id<OrgApacheLuceneSearchJoinBitSetProducer> parentsFilter) {
@@ -225,9 +243,11 @@ void OrgApacheLuceneSearchJoinToChildBlockJoinQuery_initWithOrgApacheLuceneSearc
 }
 
 OrgApacheLuceneSearchJoinToChildBlockJoinQuery *new_OrgApacheLuceneSearchJoinToChildBlockJoinQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchJoinBitSetProducer_(OrgApacheLuceneSearchQuery *origParentQuery, OrgApacheLuceneSearchQuery *parentQuery, id<OrgApacheLuceneSearchJoinBitSetProducer> parentsFilter) {
-  OrgApacheLuceneSearchJoinToChildBlockJoinQuery *self = [OrgApacheLuceneSearchJoinToChildBlockJoinQuery alloc];
-  OrgApacheLuceneSearchJoinToChildBlockJoinQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchJoinBitSetProducer_(self, origParentQuery, parentQuery, parentsFilter);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinToChildBlockJoinQuery, initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchJoinBitSetProducer_, origParentQuery, parentQuery, parentsFilter)
+}
+
+OrgApacheLuceneSearchJoinToChildBlockJoinQuery *create_OrgApacheLuceneSearchJoinToChildBlockJoinQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchJoinBitSetProducer_(OrgApacheLuceneSearchQuery *origParentQuery, OrgApacheLuceneSearchQuery *parentQuery, id<OrgApacheLuceneSearchJoinBitSetProducer> parentsFilter) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinToChildBlockJoinQuery, initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchJoinBitSetProducer_, origParentQuery, parentQuery, parentsFilter)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinToChildBlockJoinQuery)
@@ -263,15 +283,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinToChildBlockJoinQuery)
   if (parents == nil) {
     return nil;
   }
-  return [new_OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneUtilBitSet_withBoolean_(self, parentScorer, parents, doScores_) autorelease];
+  return create_OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneUtilBitSet_withBoolean_(self, parentScorer, parents, doScores_);
 }
 
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                                withInt:(jint)doc {
-  OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinScorer *scorer = (OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinScorer *) check_class_cast([self scorerWithOrgApacheLuceneIndexLeafReaderContext:context], [OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinScorer class]);
+  OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinScorer *scorer = (OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinScorer *) cast_chk([self scorerWithOrgApacheLuceneIndexLeafReaderContext:context], [OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinScorer class]);
   if (scorer != nil && [scorer advanceWithInt:doc] == doc) {
     jint parentDoc = [scorer getParentDoc];
-    return OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_([scorer score], NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT_), @"Score based on parent document %d", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangInteger_valueOfWithInt_(parentDoc + ((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context))->docBase_) } count:1 type:NSObject_class_()]), [IOSObjectArray arrayWithObjects:(id[]){ [((OrgApacheLuceneSearchWeight *) nil_chk(parentWeight_)) explainWithOrgApacheLuceneIndexLeafReaderContext:context withInt:parentDoc] } count:1 type:OrgApacheLuceneSearchExplanation_class_()]);
+    return OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_([scorer score], NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"Score based on parent document %d", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangInteger_valueOfWithInt_(parentDoc + ((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context))->docBase_) } count:1 type:NSObject_class_()]), [IOSObjectArray arrayWithObjects:(id[]){ [((OrgApacheLuceneSearchWeight *) nil_chk(parentWeight_)) explainWithOrgApacheLuceneIndexLeafReaderContext:context withInt:parentDoc] } count:1 type:OrgApacheLuceneSearchExplanation_class_()]);
   }
   return OrgApacheLuceneSearchExplanation_noMatchWithNSString_withOrgApacheLuceneSearchExplanationArray_(@"Not a match", [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]);
 }
@@ -286,7 +306,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinToChildBlockJoinQuery)
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneSearchQuery:withOrgApacheLuceneSearchWeight:withOrgApacheLuceneSearchJoinBitSetProducer:withBoolean:", "ToChildBlockJoinWeight", NULL, 0x1, NULL, NULL },
-    { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x1, NULL, NULL },
+    { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x1, NULL, "(Ljava/util/Set<Lorg/apache/lucene/index/Term;>;)V" },
     { "getValueForNormalization", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
     { "normalizeWithFloat:withFloat:", "normalize", "V", 0x1, NULL, NULL },
     { "scorerWithOrgApacheLuceneIndexLeafReaderContext:", "scorer", "Lorg.apache.lucene.search.Scorer;", 0x1, "Ljava.io.IOException;", NULL },
@@ -313,9 +333,11 @@ void OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinWeight_initW
 }
 
 OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinWeight *new_OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinWeight_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchJoinBitSetProducer_withBoolean_(OrgApacheLuceneSearchQuery *joinQuery, OrgApacheLuceneSearchWeight *parentWeight, id<OrgApacheLuceneSearchJoinBitSetProducer> parentsFilter, jboolean doScores) {
-  OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinWeight *self = [OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinWeight alloc];
-  OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinWeight_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchJoinBitSetProducer_withBoolean_(self, joinQuery, parentWeight, parentsFilter, doScores);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinWeight, initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchJoinBitSetProducer_withBoolean_, joinQuery, parentWeight, parentsFilter, doScores)
+}
+
+OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinWeight *create_OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinWeight_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchJoinBitSetProducer_withBoolean_(OrgApacheLuceneSearchQuery *joinQuery, OrgApacheLuceneSearchWeight *parentWeight, id<OrgApacheLuceneSearchJoinBitSetProducer> parentsFilter, jboolean doScores) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinWeight, initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchJoinBitSetProducer_withBoolean_, joinQuery, parentWeight, parentsFilter, doScores)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinWeight)
@@ -331,7 +353,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinToChildBlockJoinQuery_
 }
 
 - (id<JavaUtilCollection>)getChildren {
-  return JavaUtilCollections_singletonWithId_([new_OrgApacheLuceneSearchScorer_ChildScorer_initWithOrgApacheLuceneSearchScorer_withNSString_(parentScorer_, @"BLOCK_JOIN") autorelease]);
+  return JavaUtilCollections_singletonWithId_(create_OrgApacheLuceneSearchScorer_ChildScorer_initWithOrgApacheLuceneSearchScorer_withNSString_(parentScorer_, @"BLOCK_JOIN"));
 }
 
 - (jint)nextDoc {
@@ -437,7 +459,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinToChildBlockJoinQuery_
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneSearchWeight:withOrgApacheLuceneSearchScorer:withOrgApacheLuceneUtilBitSet:withBoolean:", "ToChildBlockJoinScorer", NULL, 0x1, NULL, NULL },
-    { "getChildren", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildren", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/search/Scorer$ChildScorer;>;" },
     { "nextDoc", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
     { "validateParentDoc", NULL, "V", 0x2, NULL, NULL },
     { "docID", NULL, "I", 0x1, NULL, NULL },
@@ -473,14 +495,16 @@ void OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinScorer_initW
 }
 
 OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinScorer *new_OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneUtilBitSet_withBoolean_(OrgApacheLuceneSearchWeight *weight, OrgApacheLuceneSearchScorer *parentScorer, OrgApacheLuceneUtilBitSet *parentBits, jboolean doScores) {
-  OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinScorer *self = [OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinScorer alloc];
-  OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneUtilBitSet_withBoolean_(self, weight, parentScorer, parentBits, doScores);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinScorer, initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneUtilBitSet_withBoolean_, weight, parentScorer, parentBits, doScores)
+}
+
+OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinScorer *create_OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneUtilBitSet_withBoolean_(OrgApacheLuceneSearchWeight *weight, OrgApacheLuceneSearchScorer *parentScorer, OrgApacheLuceneUtilBitSet *parentBits, jboolean doScores) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinScorer, initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneUtilBitSet_withBoolean_, weight, parentScorer, parentBits, doScores)
 }
 
 void OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinScorer_validateParentDoc(OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinScorer *self) {
   if (self->parentDoc_ != OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS && ![((OrgApacheLuceneUtilBitSet *) nil_chk(self->parentBits_)) getWithInt:self->parentDoc_]) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I", OrgApacheLuceneSearchJoinToChildBlockJoinQuery_INVALID_QUERY_MESSAGE_, self->parentDoc_)) autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I", OrgApacheLuceneSearchJoinToChildBlockJoinQuery_INVALID_QUERY_MESSAGE, self->parentDoc_));
   }
 }
 

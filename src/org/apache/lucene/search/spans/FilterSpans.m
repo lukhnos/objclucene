@@ -21,15 +21,18 @@
   jint startPos_;
 }
 
+/*!
+ @brief Returns true if the current document matches.
+ <p>
+ This is called during two-phase processing.
+ */
 - (jboolean)twoPhaseCurrentDocMatches;
 
 @end
 
 __attribute__((unused)) static jboolean OrgApacheLuceneSearchSpansFilterSpans_twoPhaseCurrentDocMatches(OrgApacheLuceneSearchSpansFilterSpans *self);
 
-__attribute__((unused)) static void OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_initWithNSString_withInt_(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum *self, NSString *__name, jint __ordinal);
-
-__attribute__((unused)) static OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum *new_OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
+__attribute__((unused)) static void OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_initWithNSString_withInt_(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *self, NSString *__name, jint __ordinal);
 
 @interface OrgApacheLuceneSearchSpansFilterSpans_$1 : OrgApacheLuceneSearchTwoPhaseIterator {
  @public
@@ -54,6 +57,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSpansFilterSpans_$1_ini
 
 __attribute__((unused)) static OrgApacheLuceneSearchSpansFilterSpans_$1 *new_OrgApacheLuceneSearchSpansFilterSpans_$1_initWithOrgApacheLuceneSearchSpansFilterSpans_withOrgApacheLuceneSearchTwoPhaseIterator_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchSpansFilterSpans *outer$, OrgApacheLuceneSearchTwoPhaseIterator *capture$0, OrgApacheLuceneSearchDocIdSetIterator *arg$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchSpansFilterSpans_$1 *create_OrgApacheLuceneSearchSpansFilterSpans_$1_initWithOrgApacheLuceneSearchSpansFilterSpans_withOrgApacheLuceneSearchTwoPhaseIterator_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchSpansFilterSpans *outer$, OrgApacheLuceneSearchTwoPhaseIterator *capture$0, OrgApacheLuceneSearchDocIdSetIterator *arg$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansFilterSpans_$1)
 
 @interface OrgApacheLuceneSearchSpansFilterSpans_$2 : OrgApacheLuceneSearchTwoPhaseIterator {
@@ -76,6 +81,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSpansFilterSpans_$2_ini
 
 __attribute__((unused)) static OrgApacheLuceneSearchSpansFilterSpans_$2 *new_OrgApacheLuceneSearchSpansFilterSpans_$2_initWithOrgApacheLuceneSearchSpansFilterSpans_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchSpansFilterSpans *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchSpansFilterSpans_$2 *create_OrgApacheLuceneSearchSpansFilterSpans_$2_initWithOrgApacheLuceneSearchSpansFilterSpans_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchSpansFilterSpans *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansFilterSpans_$2)
 
 @implementation OrgApacheLuceneSearchSpansFilterSpans
@@ -85,7 +92,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansFilterSpans_$2)
   return self;
 }
 
-- (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum *)acceptWithOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)candidate {
+- (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *)acceptWithOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)candidate {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
   return 0;
@@ -129,11 +136,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansFilterSpans_$2)
       return OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS;
     }
     switch ([[self acceptWithOrgApacheLuceneSearchSpansSpans:in_] ordinal]) {
-      case OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_YES:
+      case OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_Enum_YES:
       return startPos_;
-      case OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_NO:
+      case OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_Enum_NO:
       break;
-      case OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_NO_MORE_IN_CURRENT_DOC:
+      case OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_Enum_NO_MORE_IN_CURRENT_DOC:
       return startPos_ = OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS;
     }
   }
@@ -166,10 +173,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansFilterSpans_$2)
 - (OrgApacheLuceneSearchTwoPhaseIterator *)asTwoPhaseIterator {
   OrgApacheLuceneSearchTwoPhaseIterator *inner = [((OrgApacheLuceneSearchSpansSpans *) nil_chk(in_)) asTwoPhaseIterator];
   if (inner != nil) {
-    return [new_OrgApacheLuceneSearchSpansFilterSpans_$1_initWithOrgApacheLuceneSearchSpansFilterSpans_withOrgApacheLuceneSearchTwoPhaseIterator_withOrgApacheLuceneSearchDocIdSetIterator_(self, inner, [inner approximation]) autorelease];
+    return create_OrgApacheLuceneSearchSpansFilterSpans_$1_initWithOrgApacheLuceneSearchSpansFilterSpans_withOrgApacheLuceneSearchTwoPhaseIterator_withOrgApacheLuceneSearchDocIdSetIterator_(self, inner, [inner approximation]);
   }
   else {
-    return [new_OrgApacheLuceneSearchSpansFilterSpans_$2_initWithOrgApacheLuceneSearchSpansFilterSpans_withOrgApacheLuceneSearchDocIdSetIterator_(self, in_) autorelease];
+    return create_OrgApacheLuceneSearchSpansFilterSpans_$2_initWithOrgApacheLuceneSearchSpansFilterSpans_withOrgApacheLuceneSearchDocIdSetIterator_(self, in_);
   }
 }
 
@@ -224,15 +231,15 @@ jboolean OrgApacheLuceneSearchSpansFilterSpans_twoPhaseCurrentDocMatches(OrgApac
   JreAssert((self->startPos_ != OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS), (@"org/apache/lucene/search/spans/FilterSpans.java:166 condition failed: assert startPos != NO_MORE_POSITIONS;"));
   for (; ; ) {
     switch ([[self acceptWithOrgApacheLuceneSearchSpansSpans:self->in_] ordinal]) {
-      case OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_YES:
+      case OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_Enum_YES:
       self->atFirstInCurrentDoc_ = true;
       return true;
-      case OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_NO:
+      case OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_Enum_NO:
       self->startPos_ = [self->in_ nextStartPosition];
       if (self->startPos_ != OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS) {
         break;
       }
-      case OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_NO_MORE_IN_CURRENT_DOC:
+      case OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_Enum_NO_MORE_IN_CURRENT_DOC:
       self->startPos_ = -1;
       return false;
     }
@@ -241,35 +248,82 @@ jboolean OrgApacheLuceneSearchSpansFilterSpans_twoPhaseCurrentDocMatches(OrgApac
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansFilterSpans)
 
-J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum)
+J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus)
 
-OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum *OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_values_[3];
+OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_values_[3];
 
-@implementation OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum
+@implementation OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
++ (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *)YES_ {
+  return JreEnum(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus, YES);
 }
 
-IOSObjectArray *OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_values() {
-  OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_initialize();
-  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_values_ count:3 type:OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_class_()];
++ (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *)NO_ {
+  return JreEnum(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus, NO);
+}
+
++ (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *)NO_MORE_IN_CURRENT_DOC {
+  return JreEnum(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus, NO_MORE_IN_CURRENT_DOC);
 }
 
 + (IOSObjectArray *)values {
-  return OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_values();
+  return OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_values();
 }
 
-+ (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum *)valueOfWithNSString:(NSString *)name {
-  return OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_valueOfWithNSString_(name);
++ (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *)valueOfWithNSString:(NSString *)name {
+  return OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_valueOfWithNSString_(name);
 }
 
-OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum *OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_valueOfWithNSString_(NSString *name) {
-  OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_initialize();
+- (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_Enum)toNSEnum {
+  return (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_Enum)[self ordinal];
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+  return self;
+}
+
++ (void)initialize {
+  if (self == [OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus class]) {
+    size_t objSize = class_getInstanceSize(self);
+    size_t allocSize = 3 * objSize;
+    uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
+    id e;
+    (JreEnum(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus, YES) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_initWithNSString_withInt_(e, @"YES", 0);
+    (JreEnum(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus, NO) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_initWithNSString_withInt_(e, @"NO", 1);
+    (JreEnum(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus, NO_MORE_IN_CURRENT_DOC) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_initWithNSString_withInt_(e, @"NO_MORE_IN_CURRENT_DOC", 2);
+    J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus)
+  }
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static const J2ObjcFieldInfo fields[] = {
+    { "YES", "YES", 0x4019, "Lorg.apache.lucene.search.spans.FilterSpans$AcceptStatus;", &JreEnum(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus, YES), NULL, .constantValue.asLong = 0 },
+    { "NO", "NO", 0x4019, "Lorg.apache.lucene.search.spans.FilterSpans$AcceptStatus;", &JreEnum(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus, NO), NULL, .constantValue.asLong = 0 },
+    { "NO_MORE_IN_CURRENT_DOC", "NO_MORE_IN_CURRENT_DOC", 0x4019, "Lorg.apache.lucene.search.spans.FilterSpans$AcceptStatus;", &JreEnum(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus, NO_MORE_IN_CURRENT_DOC), NULL, .constantValue.asLong = 0 },
+  };
+  static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.spans.FilterSpans$AcceptStatus;"};
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus = { 2, "AcceptStatus", "org.apache.lucene.search.spans", "FilterSpans", 0x4019, 0, NULL, 3, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/search/spans/FilterSpans$AcceptStatus;>;" };
+  return &_OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus;
+}
+
+@end
+
+void OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_initWithNSString_withInt_(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *self, NSString *__name, jint __ordinal) {
+  JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
+}
+
+IOSObjectArray *OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_values() {
+  OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_initialize();
+  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_values_ count:3 type:OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_class_()];
+}
+
+OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_valueOfWithNSString_(NSString *name) {
+  OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_initialize();
   for (int i = 0; i < 3; i++) {
-    OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum *e = OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_values_[i];
+    OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *e = OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_values_[i];
     if ([name isEqual:[e name]]) {
       return e;
     }
@@ -278,43 +332,15 @@ OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum *OrgApacheLuceneSearchSpa
   return nil;
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return [self retain];
-}
-
-+ (void)initialize {
-  if (self == [OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum class]) {
-    OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_YES = new_OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_initWithNSString_withInt_(@"YES", 0);
-    OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_NO = new_OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_initWithNSString_withInt_(@"NO", 1);
-    OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_NO_MORE_IN_CURRENT_DOC = new_OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_initWithNSString_withInt_(@"NO_MORE_IN_CURRENT_DOC", 2);
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum)
+OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_fromOrdinal(NSUInteger ordinal) {
+  OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_initialize();
+  if (ordinal >= 3) {
+    return nil;
   }
+  return OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_values_[ordinal];
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcFieldInfo fields[] = {
-    { "YES", "YES", 0x4019, "Lorg.apache.lucene.search.spans.FilterSpans$AcceptStatus;", &OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_YES, NULL, .constantValue.asLong = 0 },
-    { "NO", "NO", 0x4019, "Lorg.apache.lucene.search.spans.FilterSpans$AcceptStatus;", &OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_NO, NULL, .constantValue.asLong = 0 },
-    { "NO_MORE_IN_CURRENT_DOC", "NO_MORE_IN_CURRENT_DOC", 0x4019, "Lorg.apache.lucene.search.spans.FilterSpans$AcceptStatus;", &OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_NO_MORE_IN_CURRENT_DOC, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.spans.FilterSpans$AcceptStatus;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum = { 2, "AcceptStatus", "org.apache.lucene.search.spans", "FilterSpans", 0x4019, 0, NULL, 3, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/search/spans/FilterSpans$AcceptStatus;>;" };
-  return &_OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum;
-}
-
-@end
-
-void OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_initWithNSString_withInt_(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum *self, NSString *__name, jint __ordinal) {
-  JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
-}
-
-OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum *new_OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum *self = [OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum alloc];
-  OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum)
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus)
 
 @implementation OrgApacheLuceneSearchSpansFilterSpans_$1
 
@@ -358,9 +384,11 @@ void OrgApacheLuceneSearchSpansFilterSpans_$1_initWithOrgApacheLuceneSearchSpans
 }
 
 OrgApacheLuceneSearchSpansFilterSpans_$1 *new_OrgApacheLuceneSearchSpansFilterSpans_$1_initWithOrgApacheLuceneSearchSpansFilterSpans_withOrgApacheLuceneSearchTwoPhaseIterator_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchSpansFilterSpans *outer$, OrgApacheLuceneSearchTwoPhaseIterator *capture$0, OrgApacheLuceneSearchDocIdSetIterator *arg$0) {
-  OrgApacheLuceneSearchSpansFilterSpans_$1 *self = [OrgApacheLuceneSearchSpansFilterSpans_$1 alloc];
-  OrgApacheLuceneSearchSpansFilterSpans_$1_initWithOrgApacheLuceneSearchSpansFilterSpans_withOrgApacheLuceneSearchTwoPhaseIterator_withOrgApacheLuceneSearchDocIdSetIterator_(self, outer$, capture$0, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSpansFilterSpans_$1, initWithOrgApacheLuceneSearchSpansFilterSpans_withOrgApacheLuceneSearchTwoPhaseIterator_withOrgApacheLuceneSearchDocIdSetIterator_, outer$, capture$0, arg$0)
+}
+
+OrgApacheLuceneSearchSpansFilterSpans_$1 *create_OrgApacheLuceneSearchSpansFilterSpans_$1_initWithOrgApacheLuceneSearchSpansFilterSpans_withOrgApacheLuceneSearchTwoPhaseIterator_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchSpansFilterSpans *outer$, OrgApacheLuceneSearchTwoPhaseIterator *capture$0, OrgApacheLuceneSearchDocIdSetIterator *arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSpansFilterSpans_$1, initWithOrgApacheLuceneSearchSpansFilterSpans_withOrgApacheLuceneSearchTwoPhaseIterator_withOrgApacheLuceneSearchDocIdSetIterator_, outer$, capture$0, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansFilterSpans_$1)
@@ -403,9 +431,11 @@ void OrgApacheLuceneSearchSpansFilterSpans_$2_initWithOrgApacheLuceneSearchSpans
 }
 
 OrgApacheLuceneSearchSpansFilterSpans_$2 *new_OrgApacheLuceneSearchSpansFilterSpans_$2_initWithOrgApacheLuceneSearchSpansFilterSpans_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchSpansFilterSpans *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0) {
-  OrgApacheLuceneSearchSpansFilterSpans_$2 *self = [OrgApacheLuceneSearchSpansFilterSpans_$2 alloc];
-  OrgApacheLuceneSearchSpansFilterSpans_$2_initWithOrgApacheLuceneSearchSpansFilterSpans_withOrgApacheLuceneSearchDocIdSetIterator_(self, outer$, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSpansFilterSpans_$2, initWithOrgApacheLuceneSearchSpansFilterSpans_withOrgApacheLuceneSearchDocIdSetIterator_, outer$, arg$0)
+}
+
+OrgApacheLuceneSearchSpansFilterSpans_$2 *create_OrgApacheLuceneSearchSpansFilterSpans_$2_initWithOrgApacheLuceneSearchSpansFilterSpans_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchSpansFilterSpans *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSpansFilterSpans_$2, initWithOrgApacheLuceneSearchSpansFilterSpans_withOrgApacheLuceneSearchDocIdSetIterator_, outer$, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansFilterSpans_$2)

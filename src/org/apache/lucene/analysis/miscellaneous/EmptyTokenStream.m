@@ -23,7 +23,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "incrementToken", NULL, "Z", 0x11, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "EmptyTokenStream", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream = { 2, "EmptyTokenStream", "org.apache.lucene.analysis.miscellaneous", NULL, 0x11, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream;
@@ -36,9 +36,11 @@ void OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream_init(OrgApacheLuceneAn
 }
 
 OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream *new_OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream_init() {
-  OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream *self = [OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream alloc];
-  OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream, init)
+}
+
+OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream *create_OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream)

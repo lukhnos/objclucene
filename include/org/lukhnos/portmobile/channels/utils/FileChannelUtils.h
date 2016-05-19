@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_INCLUDE_ALL")
-#if OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_RESTRICT
-#define OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgLukhnosPortmobileChannelsUtilsFileChannelUtils")
+#ifdef RESTRICT_OrgLukhnosPortmobileChannelsUtilsFileChannelUtils
+#define INCLUDE_ALL_OrgLukhnosPortmobileChannelsUtilsFileChannelUtils 0
 #else
-#define OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgLukhnosPortmobileChannelsUtilsFileChannelUtils 1
 #endif
-#undef OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_RESTRICT
+#undef RESTRICT_OrgLukhnosPortmobileChannelsUtilsFileChannelUtils
 
-#if !defined (_OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_) && (OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_INCLUDE_ALL || OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_INCLUDE)
-#define _OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_
+#if !defined (OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_) && (INCLUDE_ALL_OrgLukhnosPortmobileChannelsUtilsFileChannelUtils || defined(INCLUDE_OrgLukhnosPortmobileChannelsUtilsFileChannelUtils))
+#define OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_
 
 @class IOSObjectArray;
 @class JavaNioChannelsFileChannel;
@@ -27,20 +27,22 @@
 - (instancetype)init;
 
 + (JavaNioChannelsFileChannel *)openWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
-             withOrgLukhnosPortmobileFileStandardOpenOptionEnumArray:(IOSObjectArray *)options;
+                 withOrgLukhnosPortmobileFileStandardOpenOptionArray:(IOSObjectArray *)options;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgLukhnosPortmobileChannelsUtilsFileChannelUtils)
 
-FOUNDATION_EXPORT JavaNioChannelsFileChannel *OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_openWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardOpenOptionEnumArray_(OrgLukhnosPortmobileFilePath *path, IOSObjectArray *options);
+FOUNDATION_EXPORT JavaNioChannelsFileChannel *OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_openWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardOpenOptionArray_(OrgLukhnosPortmobileFilePath *path, IOSObjectArray *options);
 
 FOUNDATION_EXPORT void OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_init(OrgLukhnosPortmobileChannelsUtilsFileChannelUtils *self);
 
 FOUNDATION_EXPORT OrgLukhnosPortmobileChannelsUtilsFileChannelUtils *new_OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgLukhnosPortmobileChannelsUtilsFileChannelUtils *create_OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileChannelsUtilsFileChannelUtils)
 
 #endif
 
-#pragma pop_macro("OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileChannelsUtilsFileChannelUtils")

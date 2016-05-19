@@ -33,14 +33,14 @@
 
 - (OrgApacheLuceneAnalysisTokenizer *)createWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory {
   if (reverse_) {
-    return [new_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withChar_withChar_withInt_(factory, delimiter_, replacement_, skip_) autorelease];
+    return create_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withChar_withChar_withInt_(factory, delimiter_, replacement_, skip_);
   }
-  return [new_OrgApacheLuceneAnalysisPathPathHierarchyTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withChar_withChar_withInt_(factory, delimiter_, replacement_, skip_) autorelease];
+  return create_OrgApacheLuceneAnalysisPathPathHierarchyTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withChar_withChar_withInt_(factory, delimiter_, replacement_, skip_);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "PathHierarchyTokenizerFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "PathHierarchyTokenizerFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "createWithOrgApacheLuceneUtilAttributeFactory:", "create", "Lorg.apache.lucene.analysis.Tokenizer;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -62,14 +62,16 @@ void OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory_initWithJavaUtilMa
   self->reverse_ = [self getBooleanWithJavaUtilMap:args withNSString:@"reverse" withBoolean:false];
   self->skip_ = [self getIntWithJavaUtilMap:args withNSString:@"skip" withInt:OrgApacheLuceneAnalysisPathPathHierarchyTokenizer_DEFAULT_SKIP];
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory *new_OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory *self = [OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory alloc];
-  OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory *create_OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory)

@@ -5,33 +5,48 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchTopTermsRewrite_INCLUDE_ALL")
-#if OrgApacheLuceneSearchTopTermsRewrite_RESTRICT
-#define OrgApacheLuceneSearchTopTermsRewrite_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchTopTermsRewrite")
+#ifdef RESTRICT_OrgApacheLuceneSearchTopTermsRewrite
+#define INCLUDE_ALL_OrgApacheLuceneSearchTopTermsRewrite 0
 #else
-#define OrgApacheLuceneSearchTopTermsRewrite_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchTopTermsRewrite 1
 #endif
-#undef OrgApacheLuceneSearchTopTermsRewrite_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchTopTermsRewrite
 
-#if !defined (_OrgApacheLuceneSearchTopTermsRewrite_) && (OrgApacheLuceneSearchTopTermsRewrite_INCLUDE_ALL || OrgApacheLuceneSearchTopTermsRewrite_INCLUDE)
-#define _OrgApacheLuceneSearchTopTermsRewrite_
+#if !defined (OrgApacheLuceneSearchTopTermsRewrite_) && (INCLUDE_ALL_OrgApacheLuceneSearchTopTermsRewrite || defined(INCLUDE_OrgApacheLuceneSearchTopTermsRewrite))
+#define OrgApacheLuceneSearchTopTermsRewrite_
 
-#define OrgApacheLuceneSearchTermCollectingRewrite_RESTRICT 1
-#define OrgApacheLuceneSearchTermCollectingRewrite_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchTermCollectingRewrite 1
+#define INCLUDE_OrgApacheLuceneSearchTermCollectingRewrite 1
 #include "org/apache/lucene/search/TermCollectingRewrite.h"
 
 @class OrgApacheLuceneIndexIndexReader;
 @class OrgApacheLuceneSearchMultiTermQuery;
 @class OrgApacheLuceneSearchQuery;
 
+/*!
+ @brief Base rewrite method for collecting only the top terms
+ via a priority queue.
+  Only public to be accessible by spans package.
+ */
 @interface OrgApacheLuceneSearchTopTermsRewrite : OrgApacheLuceneSearchTermCollectingRewrite
 
 #pragma mark Public
 
+/*!
+ @brief Create a TopTermsBooleanQueryRewrite for 
+ at most <code>size</code> terms.
+ <p>
+ NOTE: if <code>BooleanQuery.getMaxClauseCount</code> is smaller than 
+ <code>size</code>, then it will be used instead. 
+ */
 - (instancetype)initWithInt:(jint)size;
 
 - (jboolean)isEqual:(id)obj;
 
+/*!
+ @brief return the maximum priority queue size
+ */
 - (jint)getSize;
 
 - (NSUInteger)hash;
@@ -41,6 +56,9 @@
 
 #pragma mark Protected
 
+/*!
+ @brief return the maximum size of the priority queue (for boolean rewrites this is BooleanQuery#getMaxClauseCount).
+ */
 - (jint)getMaxSize;
 
 @end
@@ -53,11 +71,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopTermsRewrite)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm_) && (OrgApacheLuceneSearchTopTermsRewrite_INCLUDE_ALL || OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm_INCLUDE)
-#define _OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm_
+#if !defined (OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm_) && (INCLUDE_ALL_OrgApacheLuceneSearchTopTermsRewrite || defined(INCLUDE_OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm))
+#define OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm_
 
-#define JavaLangComparable_RESTRICT 1
-#define JavaLangComparable_INCLUDE 1
+#define RESTRICT_JavaLangComparable 1
+#define INCLUDE_JavaLangComparable 1
 #include "java/lang/Comparable.h"
 
 @class OrgApacheLuceneIndexTermContext;
@@ -87,8 +105,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm_initWithOr
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm *new_OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm_initWithOrgApacheLuceneIndexTermContext_(OrgApacheLuceneIndexTermContext *termState) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm *create_OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm_initWithOrgApacheLuceneIndexTermContext_(OrgApacheLuceneIndexTermContext *termState);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchTopTermsRewrite_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchTopTermsRewrite")

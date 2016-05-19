@@ -59,9 +59,9 @@ __attribute__((unused)) static jboolean OrgApacheLuceneIndexFlushPolicy_assertMe
     OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *next = [activePerThreadsIterator next];
     if (!JreLoadVolatileBoolean(&((OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *) nil_chk(next))->flushPending_)) {
       jlong nextRam = next->bytesUsed_;
-      if (nextRam > 0 && [next->dwpt_ getNumDocsInRAM] > 0) {
+      if (nextRam > 0 && [((OrgApacheLuceneIndexDocumentsWriterPerThread *) nil_chk(next->dwpt_)) getNumDocsInRAM] > 0) {
         if ([((OrgApacheLuceneUtilInfoStream *) nil_chk(infoStream_)) isEnabledWithNSString:@"FP"]) {
-          [infoStream_ messageWithNSString:@"FP" withNSString:JreStrcat("$J$I", @"thread state has ", nextRam, @" bytes; docInRAM=", [next->dwpt_ getNumDocsInRAM])];
+          [((OrgApacheLuceneUtilInfoStream *) nil_chk(infoStream_)) messageWithNSString:@"FP" withNSString:JreStrcat("$J$I", @"thread state has ", nextRam, @" bytes; docInRAM=", [((OrgApacheLuceneIndexDocumentsWriterPerThread *) nil_chk(next->dwpt_)) getNumDocsInRAM])];
         }
         count++;
         if (nextRam > maxRamSoFar) {
@@ -72,7 +72,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneIndexFlushPolicy_assertMe
     }
   }
   if ([((OrgApacheLuceneUtilInfoStream *) nil_chk(infoStream_)) isEnabledWithNSString:@"FP"]) {
-    [infoStream_ messageWithNSString:@"FP" withNSString:JreStrcat("I$", count, @" in-use non-flushing threads states")];
+    [((OrgApacheLuceneUtilInfoStream *) nil_chk(infoStream_)) messageWithNSString:@"FP" withNSString:JreStrcat("I$", count, @" in-use non-flushing threads states")];
   }
   JreAssert((OrgApacheLuceneIndexFlushPolicy_assertMessageWithNSString_(self, @"set largest ram consuming thread pending on lower watermark")), (@"org/apache/lucene/index/FlushPolicy.java:135 condition failed: assert assertMessage(\"set largest ram consuming thread pending on lower watermark\");"));
   return maxRamUsingThreadState;
@@ -103,7 +103,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "init__WithOrgApacheLuceneIndexLiveIndexWriterConfig:", "init", "V", 0x24, NULL, NULL },
     { "findLargestNonPendingWriterWithOrgApacheLuceneIndexDocumentsWriterFlushControl:withOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:", "findLargestNonPendingWriter", "Lorg.apache.lucene.index.DocumentsWriterPerThreadPool$ThreadState;", 0x4, NULL, NULL },
     { "assertMessageWithNSString:", "assertMessage", "Z", 0x2, NULL, NULL },
-    { "init", NULL, NULL, 0x0, NULL, NULL },
+    { "init", "FlushPolicy", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "indexWriterConfig_", NULL, 0x4, "Lorg.apache.lucene.index.LiveIndexWriterConfig;", NULL, NULL, .constantValue.asLong = 0 },
@@ -117,7 +117,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 jboolean OrgApacheLuceneIndexFlushPolicy_assertMessageWithNSString_(OrgApacheLuceneIndexFlushPolicy *self, NSString *s) {
   if ([((OrgApacheLuceneUtilInfoStream *) nil_chk(self->infoStream_)) isEnabledWithNSString:@"FP"]) {
-    [self->infoStream_ messageWithNSString:@"FP" withNSString:s];
+    [((OrgApacheLuceneUtilInfoStream *) nil_chk(self->infoStream_)) messageWithNSString:@"FP" withNSString:s];
   }
   return true;
 }

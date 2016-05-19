@@ -5,19 +5,23 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneMiscTermStats_INCLUDE_ALL")
-#if OrgApacheLuceneMiscTermStats_RESTRICT
-#define OrgApacheLuceneMiscTermStats_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneMiscTermStats")
+#ifdef RESTRICT_OrgApacheLuceneMiscTermStats
+#define INCLUDE_ALL_OrgApacheLuceneMiscTermStats 0
 #else
-#define OrgApacheLuceneMiscTermStats_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneMiscTermStats 1
 #endif
-#undef OrgApacheLuceneMiscTermStats_RESTRICT
+#undef RESTRICT_OrgApacheLuceneMiscTermStats
 
-#if !defined (_OrgApacheLuceneMiscTermStats_) && (OrgApacheLuceneMiscTermStats_INCLUDE_ALL || OrgApacheLuceneMiscTermStats_INCLUDE)
-#define _OrgApacheLuceneMiscTermStats_
+#if !defined (OrgApacheLuceneMiscTermStats_) && (INCLUDE_ALL_OrgApacheLuceneMiscTermStats || defined(INCLUDE_OrgApacheLuceneMiscTermStats))
+#define OrgApacheLuceneMiscTermStats_
 
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief Holder for a term along with its statistics
+ (<code>docFreq</code> and <code>totalTermFreq</code>).
+ */
 @interface OrgApacheLuceneMiscTermStats : NSObject {
  @public
   OrgApacheLuceneUtilBytesRef *termtext_;
@@ -50,8 +54,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneMiscTermStats_initWithNSString_withOrgApac
 
 FOUNDATION_EXPORT OrgApacheLuceneMiscTermStats *new_OrgApacheLuceneMiscTermStats_initWithNSString_withOrgApacheLuceneUtilBytesRef_withInt_withLong_(NSString *field, OrgApacheLuceneUtilBytesRef *termtext, jint df, jlong tf) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneMiscTermStats *create_OrgApacheLuceneMiscTermStats_initWithNSString_withOrgApacheLuceneUtilBytesRef_withInt_withLong_(NSString *field, OrgApacheLuceneUtilBytesRef *termtext, jint df, jlong tf);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneMiscTermStats)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneMiscTermStats_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneMiscTermStats")

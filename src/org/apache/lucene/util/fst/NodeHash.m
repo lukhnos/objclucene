@@ -84,8 +84,8 @@ withOrgApacheLuceneUtilFstBuilder_UnCompiledNode:(OrgApacheLuceneUtilFstBuilder_
       jlong node = [((OrgApacheLuceneUtilFstFST *) nil_chk(fst_)) addNodeWithOrgApacheLuceneUtilFstBuilder:builder withOrgApacheLuceneUtilFstBuilder_UnCompiledNode:nodeIn];
       JreAssert((OrgApacheLuceneUtilFstNodeHash_hash__WithLong_(self, node) == h), (JreStrcat("$J$J", @"frozenHash=", OrgApacheLuceneUtilFstNodeHash_hash__WithLong_(self, node), @" vs h=", h)));
       count_++;
-      [table_ setWithLong:pos withLong:node];
-      if (count_ > 2 * [table_ size] / 3) {
+      [((OrgApacheLuceneUtilPackedPagedGrowableWriter *) nil_chk(table_)) setWithLong:pos withLong:node];
+      if (count_ > 2 * [((OrgApacheLuceneUtilPackedPagedGrowableWriter *) nil_chk(table_)) size] / 3) {
         OrgApacheLuceneUtilFstNodeHash_rehash(self);
       }
       return node;
@@ -115,11 +115,11 @@ withOrgApacheLuceneUtilFstBuilder_UnCompiledNode:(OrgApacheLuceneUtilFstBuilder_
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilFstFST:withOrgApacheLuceneUtilFstFST_BytesReader:", "NodeHash", NULL, 0x1, NULL, NULL },
-    { "nodesEqualWithOrgApacheLuceneUtilFstBuilder_UnCompiledNode:withLong:", "nodesEqual", "Z", 0x2, "Ljava.io.IOException;", NULL },
-    { "hash__WithOrgApacheLuceneUtilFstBuilder_UnCompiledNode:", "hash", "J", 0x2, NULL, NULL },
+    { "initWithOrgApacheLuceneUtilFstFST:withOrgApacheLuceneUtilFstFST_BytesReader:", "NodeHash", NULL, 0x1, NULL, "(Lorg/apache/lucene/util/fst/FST<TT;>;Lorg/apache/lucene/util/fst/FST$BytesReader;)V" },
+    { "nodesEqualWithOrgApacheLuceneUtilFstBuilder_UnCompiledNode:withLong:", "nodesEqual", "Z", 0x2, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/fst/Builder$UnCompiledNode<TT;>;J)Z" },
+    { "hash__WithOrgApacheLuceneUtilFstBuilder_UnCompiledNode:", "hash", "J", 0x2, NULL, "(Lorg/apache/lucene/util/fst/Builder$UnCompiledNode<TT;>;)J" },
     { "hash__WithLong:", "hash", "J", 0x2, "Ljava.io.IOException;", NULL },
-    { "addWithOrgApacheLuceneUtilFstBuilder:withOrgApacheLuceneUtilFstBuilder_UnCompiledNode:", "add", "J", 0x1, "Ljava.io.IOException;", NULL },
+    { "addWithOrgApacheLuceneUtilFstBuilder:withOrgApacheLuceneUtilFstBuilder_UnCompiledNode:", "add", "J", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/fst/Builder<TT;>;Lorg/apache/lucene/util/fst/Builder$UnCompiledNode<TT;>;)J" },
     { "addNewWithLong:", "addNew", "V", 0x2, "Ljava.io.IOException;", NULL },
     { "rehash", NULL, "V", 0x2, "Ljava.io.IOException;", NULL },
   };
@@ -147,9 +147,11 @@ void OrgApacheLuceneUtilFstNodeHash_initWithOrgApacheLuceneUtilFstFST_withOrgApa
 }
 
 OrgApacheLuceneUtilFstNodeHash *new_OrgApacheLuceneUtilFstNodeHash_initWithOrgApacheLuceneUtilFstFST_withOrgApacheLuceneUtilFstFST_BytesReader_(OrgApacheLuceneUtilFstFST *fst, OrgApacheLuceneUtilFstFST_BytesReader *inArg) {
-  OrgApacheLuceneUtilFstNodeHash *self = [OrgApacheLuceneUtilFstNodeHash alloc];
-  OrgApacheLuceneUtilFstNodeHash_initWithOrgApacheLuceneUtilFstFST_withOrgApacheLuceneUtilFstFST_BytesReader_(self, fst, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFstNodeHash, initWithOrgApacheLuceneUtilFstFST_withOrgApacheLuceneUtilFstFST_BytesReader_, fst, inArg)
+}
+
+OrgApacheLuceneUtilFstNodeHash *create_OrgApacheLuceneUtilFstNodeHash_initWithOrgApacheLuceneUtilFstFST_withOrgApacheLuceneUtilFstFST_BytesReader_(OrgApacheLuceneUtilFstFST *fst, OrgApacheLuceneUtilFstFST_BytesReader *inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFstNodeHash, initWithOrgApacheLuceneUtilFstFST_withOrgApacheLuceneUtilFstFST_BytesReader_, fst, inArg)
 }
 
 jboolean OrgApacheLuceneUtilFstNodeHash_nodesEqualWithOrgApacheLuceneUtilFstBuilder_UnCompiledNode_withLong_(OrgApacheLuceneUtilFstNodeHash *self, OrgApacheLuceneUtilFstBuilder_UnCompiledNode *node, jlong address) {
@@ -159,7 +161,7 @@ jboolean OrgApacheLuceneUtilFstNodeHash_nodesEqualWithOrgApacheLuceneUtilFstBuil
   }
   for (jint arcUpto = 0; arcUpto < ((OrgApacheLuceneUtilFstBuilder_UnCompiledNode *) nil_chk(node))->numArcs_; arcUpto++) {
     OrgApacheLuceneUtilFstBuilder_Arc *arc = IOSObjectArray_Get(nil_chk(node->arcs_), arcUpto);
-    if (((OrgApacheLuceneUtilFstBuilder_Arc *) nil_chk(arc))->label_ != self->scratchArc_->label_ || ![nil_chk(arc->output_) isEqual:self->scratchArc_->output_] || ((OrgApacheLuceneUtilFstBuilder_CompiledNode *) nil_chk(((OrgApacheLuceneUtilFstBuilder_CompiledNode *) check_class_cast(arc->target_, [OrgApacheLuceneUtilFstBuilder_CompiledNode class]))))->node_ != self->scratchArc_->target_ || ![nil_chk(arc->nextFinalOutput_) isEqual:self->scratchArc_->nextFinalOutput_] || arc->isFinal_ != [self->scratchArc_ isFinal]) {
+    if (((OrgApacheLuceneUtilFstBuilder_Arc *) nil_chk(arc))->label_ != self->scratchArc_->label_ || ![((id) nil_chk(arc->output_)) isEqual:self->scratchArc_->output_] || ((OrgApacheLuceneUtilFstBuilder_CompiledNode *) nil_chk(((OrgApacheLuceneUtilFstBuilder_CompiledNode *) cast_chk(arc->target_, [OrgApacheLuceneUtilFstBuilder_CompiledNode class]))))->node_ != self->scratchArc_->target_ || ![((id) nil_chk(arc->nextFinalOutput_)) isEqual:self->scratchArc_->nextFinalOutput_] || arc->isFinal_ != [self->scratchArc_ isFinal]) {
       return false;
     }
     if ([self->scratchArc_ isLast]) {
@@ -181,10 +183,10 @@ jlong OrgApacheLuceneUtilFstNodeHash_hash__WithOrgApacheLuceneUtilFstBuilder_UnC
   for (jint arcIdx = 0; arcIdx < ((OrgApacheLuceneUtilFstBuilder_UnCompiledNode *) nil_chk(node))->numArcs_; arcIdx++) {
     OrgApacheLuceneUtilFstBuilder_Arc *arc = IOSObjectArray_Get(nil_chk(node->arcs_), arcIdx);
     h = PRIME * h + ((OrgApacheLuceneUtilFstBuilder_Arc *) nil_chk(arc))->label_;
-    jlong n = ((OrgApacheLuceneUtilFstBuilder_CompiledNode *) nil_chk(((OrgApacheLuceneUtilFstBuilder_CompiledNode *) check_class_cast(arc->target_, [OrgApacheLuceneUtilFstBuilder_CompiledNode class]))))->node_;
+    jlong n = ((OrgApacheLuceneUtilFstBuilder_CompiledNode *) nil_chk(((OrgApacheLuceneUtilFstBuilder_CompiledNode *) cast_chk(arc->target_, [OrgApacheLuceneUtilFstBuilder_CompiledNode class]))))->node_;
     h = PRIME * h + (jint) (n ^ (JreRShift64(n, 32)));
-    h = PRIME * h + ((jint) [nil_chk(arc->output_) hash]);
-    h = PRIME * h + ((jint) [nil_chk(arc->nextFinalOutput_) hash]);
+    h = PRIME * h + ((jint) [((id) nil_chk(arc->output_)) hash]);
+    h = PRIME * h + ((jint) [((id) nil_chk(arc->nextFinalOutput_)) hash]);
     if (arc->isFinal_) {
       h += 17;
     }
@@ -199,8 +201,8 @@ jlong OrgApacheLuceneUtilFstNodeHash_hash__WithLong_(OrgApacheLuceneUtilFstNodeH
   while (true) {
     h = PRIME * h + ((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(self->scratchArc_))->label_;
     h = PRIME * h + (jint) (self->scratchArc_->target_ ^ (JreRShift64(self->scratchArc_->target_, 32)));
-    h = PRIME * h + ((jint) [nil_chk(self->scratchArc_->output_) hash]);
-    h = PRIME * h + ((jint) [nil_chk(self->scratchArc_->nextFinalOutput_) hash]);
+    h = PRIME * h + ((jint) [((id) nil_chk(self->scratchArc_->output_)) hash]);
+    h = PRIME * h + ((jint) [((id) nil_chk(self->scratchArc_->nextFinalOutput_)) hash]);
     if ([self->scratchArc_ isFinal]) {
       h += 17;
     }
@@ -217,7 +219,7 @@ void OrgApacheLuceneUtilFstNodeHash_addNewWithLong_(OrgApacheLuceneUtilFstNodeHa
   jint c = 0;
   while (true) {
     if ([((OrgApacheLuceneUtilPackedPagedGrowableWriter *) nil_chk(self->table_)) getWithLong:pos] == 0) {
-      [self->table_ setWithLong:pos withLong:address];
+      [((OrgApacheLuceneUtilPackedPagedGrowableWriter *) nil_chk(self->table_)) setWithLong:pos withLong:address];
       break;
     }
     pos = (pos + (++c)) & self->mask_;

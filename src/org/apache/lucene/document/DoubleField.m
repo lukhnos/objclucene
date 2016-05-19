@@ -13,15 +13,23 @@
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneDocumentDoubleField)
 
-OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentDoubleField_TYPE_NOT_STORED_;
-OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentDoubleField_TYPE_STORED_;
+OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentDoubleField_TYPE_NOT_STORED;
+OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentDoubleField_TYPE_STORED;
 
 @implementation OrgApacheLuceneDocumentDoubleField
 
++ (OrgApacheLuceneDocumentFieldType *)TYPE_NOT_STORED {
+  return OrgApacheLuceneDocumentDoubleField_TYPE_NOT_STORED;
+}
+
++ (OrgApacheLuceneDocumentFieldType *)TYPE_STORED {
+  return OrgApacheLuceneDocumentDoubleField_TYPE_STORED;
+}
+
 - (instancetype)initWithNSString:(NSString *)name
                       withDouble:(jdouble)value
-withOrgApacheLuceneDocumentField_StoreEnum:(OrgApacheLuceneDocumentField_StoreEnum *)stored {
-  OrgApacheLuceneDocumentDoubleField_initWithNSString_withDouble_withOrgApacheLuceneDocumentField_StoreEnum_(self, name, value, stored);
+withOrgApacheLuceneDocumentField_Store:(OrgApacheLuceneDocumentField_Store *)stored {
+  OrgApacheLuceneDocumentDoubleField_initWithNSString_withDouble_withOrgApacheLuceneDocumentField_Store_(self, name, value, stored);
   return self;
 }
 
@@ -34,22 +42,22 @@ withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type {
 
 + (void)initialize {
   if (self == [OrgApacheLuceneDocumentDoubleField class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneDocumentDoubleField_TYPE_NOT_STORED_, new_OrgApacheLuceneDocumentFieldType_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneDocumentDoubleField_TYPE_NOT_STORED, new_OrgApacheLuceneDocumentFieldType_init());
     {
-      [OrgApacheLuceneDocumentDoubleField_TYPE_NOT_STORED_ setTokenizedWithBoolean:true];
-      [OrgApacheLuceneDocumentDoubleField_TYPE_NOT_STORED_ setOmitNormsWithBoolean:true];
-      [OrgApacheLuceneDocumentDoubleField_TYPE_NOT_STORED_ setIndexOptionsWithOrgApacheLuceneIndexIndexOptionsEnum:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS)];
-      [OrgApacheLuceneDocumentDoubleField_TYPE_NOT_STORED_ setNumericTypeWithOrgApacheLuceneDocumentFieldType_NumericTypeEnum:JreLoadStatic(OrgApacheLuceneDocumentFieldType_NumericTypeEnum, DOUBLE)];
-      [OrgApacheLuceneDocumentDoubleField_TYPE_NOT_STORED_ freeze];
+      [OrgApacheLuceneDocumentDoubleField_TYPE_NOT_STORED setTokenizedWithBoolean:true];
+      [OrgApacheLuceneDocumentDoubleField_TYPE_NOT_STORED setOmitNormsWithBoolean:true];
+      [OrgApacheLuceneDocumentDoubleField_TYPE_NOT_STORED setIndexOptionsWithOrgApacheLuceneIndexIndexOptions:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS)];
+      [OrgApacheLuceneDocumentDoubleField_TYPE_NOT_STORED setNumericTypeWithOrgApacheLuceneDocumentFieldType_NumericType:JreLoadEnum(OrgApacheLuceneDocumentFieldType_NumericType, DOUBLE)];
+      [OrgApacheLuceneDocumentDoubleField_TYPE_NOT_STORED freeze];
     }
-    JreStrongAssignAndConsume(&OrgApacheLuceneDocumentDoubleField_TYPE_STORED_, new_OrgApacheLuceneDocumentFieldType_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneDocumentDoubleField_TYPE_STORED, new_OrgApacheLuceneDocumentFieldType_init());
     {
-      [OrgApacheLuceneDocumentDoubleField_TYPE_STORED_ setTokenizedWithBoolean:true];
-      [OrgApacheLuceneDocumentDoubleField_TYPE_STORED_ setOmitNormsWithBoolean:true];
-      [OrgApacheLuceneDocumentDoubleField_TYPE_STORED_ setIndexOptionsWithOrgApacheLuceneIndexIndexOptionsEnum:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS)];
-      [OrgApacheLuceneDocumentDoubleField_TYPE_STORED_ setNumericTypeWithOrgApacheLuceneDocumentFieldType_NumericTypeEnum:JreLoadStatic(OrgApacheLuceneDocumentFieldType_NumericTypeEnum, DOUBLE)];
-      [OrgApacheLuceneDocumentDoubleField_TYPE_STORED_ setStoredWithBoolean:true];
-      [OrgApacheLuceneDocumentDoubleField_TYPE_STORED_ freeze];
+      [OrgApacheLuceneDocumentDoubleField_TYPE_STORED setTokenizedWithBoolean:true];
+      [OrgApacheLuceneDocumentDoubleField_TYPE_STORED setOmitNormsWithBoolean:true];
+      [OrgApacheLuceneDocumentDoubleField_TYPE_STORED setIndexOptionsWithOrgApacheLuceneIndexIndexOptions:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS)];
+      [OrgApacheLuceneDocumentDoubleField_TYPE_STORED setNumericTypeWithOrgApacheLuceneDocumentFieldType_NumericType:JreLoadEnum(OrgApacheLuceneDocumentFieldType_NumericType, DOUBLE)];
+      [OrgApacheLuceneDocumentDoubleField_TYPE_STORED setStoredWithBoolean:true];
+      [OrgApacheLuceneDocumentDoubleField_TYPE_STORED freeze];
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneDocumentDoubleField)
   }
@@ -57,12 +65,12 @@ withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type {
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withDouble:withOrgApacheLuceneDocumentField_StoreEnum:", "DoubleField", NULL, 0x1, NULL, NULL },
+    { "initWithNSString:withDouble:withOrgApacheLuceneDocumentField_Store:", "DoubleField", NULL, 0x1, NULL, NULL },
     { "initWithNSString:withDouble:withOrgApacheLuceneDocumentFieldType:", "DoubleField", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "TYPE_NOT_STORED_", NULL, 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentDoubleField_TYPE_NOT_STORED_, NULL, .constantValue.asLong = 0 },
-    { "TYPE_STORED_", NULL, 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentDoubleField_TYPE_STORED_, NULL, .constantValue.asLong = 0 },
+    { "TYPE_NOT_STORED", "TYPE_NOT_STORED", 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentDoubleField_TYPE_NOT_STORED, NULL, .constantValue.asLong = 0 },
+    { "TYPE_STORED", "TYPE_STORED", 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentDoubleField_TYPE_STORED, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneDocumentDoubleField = { 2, "DoubleField", "org.apache.lucene.document", NULL, 0x11, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneDocumentDoubleField;
@@ -70,29 +78,33 @@ withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type {
 
 @end
 
-void OrgApacheLuceneDocumentDoubleField_initWithNSString_withDouble_withOrgApacheLuceneDocumentField_StoreEnum_(OrgApacheLuceneDocumentDoubleField *self, NSString *name, jdouble value, OrgApacheLuceneDocumentField_StoreEnum *stored) {
-  OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneDocumentFieldType_(self, name, stored == JreLoadStatic(OrgApacheLuceneDocumentField_StoreEnum, YES) ? OrgApacheLuceneDocumentDoubleField_TYPE_STORED_ : OrgApacheLuceneDocumentDoubleField_TYPE_NOT_STORED_);
+void OrgApacheLuceneDocumentDoubleField_initWithNSString_withDouble_withOrgApacheLuceneDocumentField_Store_(OrgApacheLuceneDocumentDoubleField *self, NSString *name, jdouble value, OrgApacheLuceneDocumentField_Store *stored) {
+  OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneDocumentFieldType_(self, name, stored == JreLoadEnum(OrgApacheLuceneDocumentField_Store, YES) ? OrgApacheLuceneDocumentDoubleField_TYPE_STORED : OrgApacheLuceneDocumentDoubleField_TYPE_NOT_STORED);
   JreStrongAssign(&self->fieldsData_, JavaLangDouble_valueOfWithDouble_(value));
 }
 
-OrgApacheLuceneDocumentDoubleField *new_OrgApacheLuceneDocumentDoubleField_initWithNSString_withDouble_withOrgApacheLuceneDocumentField_StoreEnum_(NSString *name, jdouble value, OrgApacheLuceneDocumentField_StoreEnum *stored) {
-  OrgApacheLuceneDocumentDoubleField *self = [OrgApacheLuceneDocumentDoubleField alloc];
-  OrgApacheLuceneDocumentDoubleField_initWithNSString_withDouble_withOrgApacheLuceneDocumentField_StoreEnum_(self, name, value, stored);
-  return self;
+OrgApacheLuceneDocumentDoubleField *new_OrgApacheLuceneDocumentDoubleField_initWithNSString_withDouble_withOrgApacheLuceneDocumentField_Store_(NSString *name, jdouble value, OrgApacheLuceneDocumentField_Store *stored) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentDoubleField, initWithNSString_withDouble_withOrgApacheLuceneDocumentField_Store_, name, value, stored)
+}
+
+OrgApacheLuceneDocumentDoubleField *create_OrgApacheLuceneDocumentDoubleField_initWithNSString_withDouble_withOrgApacheLuceneDocumentField_Store_(NSString *name, jdouble value, OrgApacheLuceneDocumentField_Store *stored) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentDoubleField, initWithNSString_withDouble_withOrgApacheLuceneDocumentField_Store_, name, value, stored)
 }
 
 void OrgApacheLuceneDocumentDoubleField_initWithNSString_withDouble_withOrgApacheLuceneDocumentFieldType_(OrgApacheLuceneDocumentDoubleField *self, NSString *name, jdouble value, OrgApacheLuceneDocumentFieldType *type) {
   OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneDocumentFieldType_(self, name, type);
-  if ([((OrgApacheLuceneDocumentFieldType *) nil_chk(type)) numericType] != JreLoadStatic(OrgApacheLuceneDocumentFieldType_NumericTypeEnum, DOUBLE)) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"type.numericType() must be DOUBLE but got ", [type numericType])) autorelease];
+  if ([((OrgApacheLuceneDocumentFieldType *) nil_chk(type)) numericType] != JreLoadEnum(OrgApacheLuceneDocumentFieldType_NumericType, DOUBLE)) {
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"type.numericType() must be DOUBLE but got ", [type numericType]));
   }
   JreStrongAssign(&self->fieldsData_, JavaLangDouble_valueOfWithDouble_(value));
 }
 
 OrgApacheLuceneDocumentDoubleField *new_OrgApacheLuceneDocumentDoubleField_initWithNSString_withDouble_withOrgApacheLuceneDocumentFieldType_(NSString *name, jdouble value, OrgApacheLuceneDocumentFieldType *type) {
-  OrgApacheLuceneDocumentDoubleField *self = [OrgApacheLuceneDocumentDoubleField alloc];
-  OrgApacheLuceneDocumentDoubleField_initWithNSString_withDouble_withOrgApacheLuceneDocumentFieldType_(self, name, value, type);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentDoubleField, initWithNSString_withDouble_withOrgApacheLuceneDocumentFieldType_, name, value, type)
+}
+
+OrgApacheLuceneDocumentDoubleField *create_OrgApacheLuceneDocumentDoubleField_initWithNSString_withDouble_withOrgApacheLuceneDocumentFieldType_(NSString *name, jdouble value, OrgApacheLuceneDocumentFieldType *type) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentDoubleField, initWithNSString_withDouble_withOrgApacheLuceneDocumentFieldType_, name, value, type)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentDoubleField)

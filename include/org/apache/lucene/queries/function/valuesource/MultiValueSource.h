@@ -5,21 +5,25 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionValuesourceMultiValueSource_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionValuesourceMultiValueSource_RESTRICT
-#define OrgApacheLuceneQueriesFunctionValuesourceMultiValueSource_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMultiValueSource")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceMultiValueSource
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMultiValueSource 0
 #else
-#define OrgApacheLuceneQueriesFunctionValuesourceMultiValueSource_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMultiValueSource 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionValuesourceMultiValueSource_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceMultiValueSource
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValuesourceMultiValueSource_) && (OrgApacheLuceneQueriesFunctionValuesourceMultiValueSource_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValuesourceMultiValueSource_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValuesourceMultiValueSource_
+#if !defined (OrgApacheLuceneQueriesFunctionValuesourceMultiValueSource_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMultiValueSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceMultiValueSource))
+#define OrgApacheLuceneQueriesFunctionValuesourceMultiValueSource_
 
-#define OrgApacheLuceneQueriesFunctionValueSource_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionValueSource_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionValueSource 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionValueSource 1
 #include "org/apache/lucene/queries/function/ValueSource.h"
 
+/*!
+ @brief A <code>ValueSource</code> that abstractly represents <code>ValueSource</code>s for
+ poly fields, and other things.
+ */
 @interface OrgApacheLuceneQueriesFunctionValuesourceMultiValueSource : OrgApacheLuceneQueriesFunctionValueSource
 
 #pragma mark Public
@@ -38,4 +42,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceMultiValueSo
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionValuesourceMultiValueSource_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMultiValueSource")

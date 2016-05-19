@@ -51,12 +51,12 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisCachingTokenFilter_fi
   if (cache_ == nil) {
     JreStrongAssignAndConsume(&cache_, new_JavaUtilArrayList_initWithInt_(64));
     OrgApacheLuceneAnalysisCachingTokenFilter_fillCache(self);
-    JreStrongAssign(&iterator_, [cache_ iterator]);
+    JreStrongAssign(&iterator_, [((id<JavaUtilList>) nil_chk(cache_)) iterator]);
   }
   if (![((id<JavaUtilIterator>) nil_chk(iterator_)) hasNext]) {
     return false;
   }
-  [self restoreStateWithOrgApacheLuceneUtilAttributeSource_State:[iterator_ next]];
+  [self restoreStateWithOrgApacheLuceneUtilAttributeSource_State:[((id<JavaUtilIterator>) nil_chk(iterator_)) next]];
   return true;
 }
 
@@ -108,9 +108,11 @@ void OrgApacheLuceneAnalysisCachingTokenFilter_initWithOrgApacheLuceneAnalysisTo
 }
 
 OrgApacheLuceneAnalysisCachingTokenFilter *new_OrgApacheLuceneAnalysisCachingTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) {
-  OrgApacheLuceneAnalysisCachingTokenFilter *self = [OrgApacheLuceneAnalysisCachingTokenFilter alloc];
-  OrgApacheLuceneAnalysisCachingTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, input);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCachingTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_, input)
+}
+
+OrgApacheLuceneAnalysisCachingTokenFilter *create_OrgApacheLuceneAnalysisCachingTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCachingTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_, input)
 }
 
 void OrgApacheLuceneAnalysisCachingTokenFilter_fillCache(OrgApacheLuceneAnalysisCachingTokenFilter *self) {

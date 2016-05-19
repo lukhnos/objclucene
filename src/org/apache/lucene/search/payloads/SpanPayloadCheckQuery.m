@@ -46,7 +46,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPaylo
   OrgApacheLuceneSearchPayloadsPayloadSpanCollector *val$collector_;
 }
 
-- (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum *)acceptWithOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)candidate;
+- (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *)acceptWithOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)candidate;
 
 - (instancetype)initWithOrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight:(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight *)outer$
                                             withOrgApacheLuceneSearchPayloadsPayloadSpanCollector:(OrgApacheLuceneSearchPayloadsPayloadSpanCollector *)capture$0
@@ -62,6 +62,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPaylo
 __attribute__((unused)) static void OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_$1_initWithOrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_withOrgApacheLuceneSearchPayloadsPayloadSpanCollector_withOrgApacheLuceneSearchSpansSpans_(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_$1 *self, OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight *outer$, OrgApacheLuceneSearchPayloadsPayloadSpanCollector *capture$0, OrgApacheLuceneSearchSpansSpans *arg$0);
 
 __attribute__((unused)) static OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_$1 *new_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_$1_initWithOrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_withOrgApacheLuceneSearchPayloadsPayloadSpanCollector_withOrgApacheLuceneSearchSpansSpans_(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight *outer$, OrgApacheLuceneSearchPayloadsPayloadSpanCollector *capture$0, OrgApacheLuceneSearchSpansSpans *arg$0) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_$1 *create_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_$1_initWithOrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_withOrgApacheLuceneSearchPayloadsPayloadSpanCollector_withOrgApacheLuceneSearchSpansSpans_(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight *outer$, OrgApacheLuceneSearchPayloadsPayloadSpanCollector *capture$0, OrgApacheLuceneSearchSpansSpans *arg$0);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_$1)
 
@@ -80,26 +82,26 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_Sp
 - (OrgApacheLuceneSearchSpansSpanWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                                  withBoolean:(jboolean)needsScores {
   OrgApacheLuceneSearchSpansSpanWeight *matchWeight = [((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(match_)) createWeightWithOrgApacheLuceneSearchIndexSearcher:searcher withBoolean:false];
-  return [new_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_initWithOrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_withOrgApacheLuceneSearchSpansSpanWeight_(self, searcher, needsScores ? OrgApacheLuceneSearchSpansSpanQuery_getTermContextsWithOrgApacheLuceneSearchSpansSpanWeightArray_([IOSObjectArray arrayWithObjects:(id[]){ matchWeight } count:1 type:OrgApacheLuceneSearchSpansSpanWeight_class_()]) : nil, matchWeight) autorelease];
+  return create_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_initWithOrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_withOrgApacheLuceneSearchSpansSpanWeight_(self, searcher, needsScores ? OrgApacheLuceneSearchSpansSpanQuery_getTermContextsWithOrgApacheLuceneSearchSpansSpanWeightArray_([IOSObjectArray arrayWithObjects:(id[]){ matchWeight } count:1 type:OrgApacheLuceneSearchSpansSpanWeight_class_()]) : nil, matchWeight);
 }
 
-- (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum *)checkPayloadsWithJavaUtilCollection:(id<JavaUtilCollection>)candidate {
+- (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *)checkPayloadsWithJavaUtilCollection:(id<JavaUtilCollection>)candidate {
   if ([((id<JavaUtilCollection>) nil_chk(candidate)) size] == [((id<JavaUtilCollection>) nil_chk(payloadToMatch_)) size]) {
     id<JavaUtilIterator> toMatchIter = [payloadToMatch_ iterator];
     for (IOSByteArray * __strong candBytes in candidate) {
       if (JavaUtilArrays_equalsWithByteArray_withByteArray_(candBytes, [((id<JavaUtilIterator>) nil_chk(toMatchIter)) next]) == false) {
-        return JreLoadStatic(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum, NO);
+        return JreLoadEnum(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus, NO);
       }
     }
-    return JreLoadStatic(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum, YES);
+    return JreLoadEnum(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus, YES);
   }
   else {
-    return JreLoadStatic(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum, NO);
+    return JreLoadEnum(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus, NO);
   }
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
-  JavaLangStringBuilder *buffer = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_init();
   [buffer appendWithNSString:@"spanPayCheck("];
   [buffer appendWithNSString:[((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(match_)) toStringWithNSString:field]];
   [buffer appendWithNSString:@", payloadRef: "];
@@ -113,7 +115,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_Sp
 }
 
 - (OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery *)clone {
-  OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery *result = [new_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withJavaUtilCollection_((OrgApacheLuceneSearchSpansSpanQuery *) check_class_cast([((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(match_)) clone], [OrgApacheLuceneSearchSpansSpanQuery class]), payloadToMatch_) autorelease];
+  OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery *result = create_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withJavaUtilCollection_((OrgApacheLuceneSearchSpansSpanQuery *) cast_chk([((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(match_)) clone], [OrgApacheLuceneSearchSpansSpanQuery class]), payloadToMatch_);
   [result setBoostWithFloat:[self getBoost]];
   return result;
 }
@@ -122,7 +124,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_Sp
   if (![super isEqual:o]) {
     return false;
   }
-  OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery *other = (OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery *) check_class_cast(o, [OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery class]);
+  OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery *other = (OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery *) cast_chk(o, [OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery class]);
   return [((id<JavaUtilCollection>) nil_chk(self->payloadToMatch_)) isEqual:((OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery *) nil_chk(other))->payloadToMatch_];
 }
 
@@ -140,17 +142,17 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_Sp
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSpansSpanQuery:withJavaUtilCollection:", "SpanPayloadCheckQuery", NULL, 0x1, NULL, NULL },
+    { "initWithOrgApacheLuceneSearchSpansSpanQuery:withJavaUtilCollection:", "SpanPayloadCheckQuery", NULL, 0x1, NULL, "(Lorg/apache/lucene/search/spans/SpanQuery;Ljava/util/Collection<[LB;>;)V" },
     { "getField", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
     { "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:", "createWeight", "Lorg.apache.lucene.search.spans.SpanWeight;", 0x1, "Ljava.io.IOException;", NULL },
-    { "checkPayloadsWithJavaUtilCollection:", "checkPayloads", "Lorg.apache.lucene.search.spans.FilterSpans$AcceptStatus;", 0x4, NULL, NULL },
+    { "checkPayloadsWithJavaUtilCollection:", "checkPayloads", "Lorg.apache.lucene.search.spans.FilterSpans$AcceptStatus;", 0x4, NULL, "(Ljava/util/Collection<[LB;>;)Lorg/apache/lucene/search/spans/FilterSpans$AcceptStatus;" },
     { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "clone", NULL, "Lorg.apache.lucene.search.payloads.SpanPayloadCheckQuery;", 0x1, NULL, NULL },
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "payloadToMatch_", NULL, 0x14, "Ljava.util.Collection;", NULL, "Ljava/util/Collection<L[B;>;", .constantValue.asLong = 0 },
+    { "payloadToMatch_", NULL, 0x14, "Ljava.util.Collection;", NULL, "Ljava/util/Collection<[LB;>;", .constantValue.asLong = 0 },
     { "match_", NULL, 0x14, "Lorg.apache.lucene.search.spans.SpanQuery;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.payloads.SpanPayloadCheckQuery$SpanPayloadCheckWeight;"};
@@ -167,9 +169,11 @@ void OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_initWithOrgApacheLuceneS
 }
 
 OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery *new_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withJavaUtilCollection_(OrgApacheLuceneSearchSpansSpanQuery *match, id<JavaUtilCollection> payloadToMatch) {
-  OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery *self = [OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery alloc];
-  OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withJavaUtilCollection_(self, match, payloadToMatch);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery, initWithOrgApacheLuceneSearchSpansSpanQuery_withJavaUtilCollection_, match, payloadToMatch)
+}
+
+OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery *create_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withJavaUtilCollection_(OrgApacheLuceneSearchSpansSpanQuery *match, id<JavaUtilCollection> payloadToMatch) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery, initWithOrgApacheLuceneSearchSpansSpanQuery_withJavaUtilCollection_, match, payloadToMatch)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery)
@@ -193,21 +197,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQu
 }
 
 - (OrgApacheLuceneSearchSpansSpans *)getSpansWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                 withOrgApacheLuceneSearchSpansSpanWeight_PostingsEnum:(OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum *)requiredPostings {
-  OrgApacheLuceneSearchPayloadsPayloadSpanCollector *collector = [new_OrgApacheLuceneSearchPayloadsPayloadSpanCollector_init() autorelease];
-  OrgApacheLuceneSearchSpansSpans *matchSpans = [((OrgApacheLuceneSearchSpansSpanWeight *) nil_chk(matchWeight_)) getSpansWithOrgApacheLuceneIndexLeafReaderContext:context withOrgApacheLuceneSearchSpansSpanWeight_PostingsEnum:[((OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum *) nil_chk(requiredPostings)) atLeastWithOrgApacheLuceneSearchSpansSpanWeight_PostingsEnum:JreLoadStatic(OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum, PAYLOADS)]];
-  return (matchSpans == nil) ? nil : [new_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_$1_initWithOrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_withOrgApacheLuceneSearchPayloadsPayloadSpanCollector_withOrgApacheLuceneSearchSpansSpans_(self, collector, matchSpans) autorelease];
+                                     withOrgApacheLuceneSearchSpansSpanWeight_Postings:(OrgApacheLuceneSearchSpansSpanWeight_Postings *)requiredPostings {
+  OrgApacheLuceneSearchPayloadsPayloadSpanCollector *collector = create_OrgApacheLuceneSearchPayloadsPayloadSpanCollector_init();
+  OrgApacheLuceneSearchSpansSpans *matchSpans = [((OrgApacheLuceneSearchSpansSpanWeight *) nil_chk(matchWeight_)) getSpansWithOrgApacheLuceneIndexLeafReaderContext:context withOrgApacheLuceneSearchSpansSpanWeight_Postings:[((OrgApacheLuceneSearchSpansSpanWeight_Postings *) nil_chk(requiredPostings)) atLeastWithOrgApacheLuceneSearchSpansSpanWeight_Postings:JreLoadEnum(OrgApacheLuceneSearchSpansSpanWeight_Postings, PAYLOADS)]];
+  return (matchSpans == nil) ? nil : create_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_$1_initWithOrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_withOrgApacheLuceneSearchPayloadsPayloadSpanCollector_withOrgApacheLuceneSearchSpansSpans_(self, collector, matchSpans);
 }
 
 - (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
   if (field_ == nil) return nil;
   OrgApacheLuceneIndexTerms *terms = [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) termsWithNSString:field_];
   if (terms != nil && [terms hasPositions] == false) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$@C", @"field \"", field_, @"\" was indexed without position data; cannot run SpanQuery (query=", parentQuery_, ')')) autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$@C", @"field \"", field_, @"\" was indexed without position data; cannot run SpanQuery (query=", parentQuery_, ')'));
   }
-  OrgApacheLuceneSearchSpansSpans *spans = [self getSpansWithOrgApacheLuceneIndexLeafReaderContext:context withOrgApacheLuceneSearchSpansSpanWeight_PostingsEnum:JreLoadStatic(OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum, PAYLOADS)];
+  OrgApacheLuceneSearchSpansSpans *spans = [self getSpansWithOrgApacheLuceneIndexLeafReaderContext:context withOrgApacheLuceneSearchSpansSpanWeight_Postings:JreLoadEnum(OrgApacheLuceneSearchSpansSpanWeight_Postings, PAYLOADS)];
   OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *simScorer = simWeight_ == nil ? nil : [((OrgApacheLuceneSearchSimilaritiesSimilarity *) nil_chk(similarity_)) simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:simWeight_ withOrgApacheLuceneIndexLeafReaderContext:context];
-  return (spans == nil) ? nil : [new_OrgApacheLuceneSearchSpansSpanScorer_initWithOrgApacheLuceneSearchSpansSpans_withOrgApacheLuceneSearchSpansSpanWeight_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(spans, self, simScorer) autorelease];
+  return (spans == nil) ? nil : create_OrgApacheLuceneSearchSpansSpanScorer_initWithOrgApacheLuceneSearchSpansSpans_withOrgApacheLuceneSearchSpansSpanWeight_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(spans, self, simScorer);
 }
 
 - (void)dealloc {
@@ -218,10 +222,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQu
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery:withOrgApacheLuceneSearchIndexSearcher:withJavaUtilMap:withOrgApacheLuceneSearchSpansSpanWeight:", "SpanPayloadCheckWeight", NULL, 0x1, NULL, NULL },
-    { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x1, NULL, NULL },
-    { "extractTermContextsWithJavaUtilMap:", "extractTermContexts", "V", 0x1, NULL, NULL },
-    { "getSpansWithOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneSearchSpansSpanWeight_PostingsEnum:", "getSpans", "Lorg.apache.lucene.search.spans.Spans;", 0x1, "Ljava.io.IOException;", NULL },
+    { "initWithOrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery:withOrgApacheLuceneSearchIndexSearcher:withJavaUtilMap:withOrgApacheLuceneSearchSpansSpanWeight:", "SpanPayloadCheckWeight", NULL, 0x1, NULL, "(Lorg/apache/lucene/search/payloads/SpanPayloadCheckQuery;Lorg/apache/lucene/search/IndexSearcher;Ljava/util/Map<Lorg/apache/lucene/index/Term;Lorg/apache/lucene/index/TermContext;>;Lorg/apache/lucene/search/spans/SpanWeight;)V" },
+    { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x1, NULL, "(Ljava/util/Set<Lorg/apache/lucene/index/Term;>;)V" },
+    { "extractTermContextsWithJavaUtilMap:", "extractTermContexts", "V", 0x1, NULL, "(Ljava/util/Map<Lorg/apache/lucene/index/Term;Lorg/apache/lucene/index/TermContext;>;)V" },
+    { "getSpansWithOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneSearchSpansSpanWeight_Postings:", "getSpans", "Lorg.apache.lucene.search.spans.Spans;", 0x1, "Ljava.io.IOException;", NULL },
     { "scorerWithOrgApacheLuceneIndexLeafReaderContext:", "scorer", "Lorg.apache.lucene.search.Scorer;", 0x1, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -241,16 +245,18 @@ void OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_i
 }
 
 OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight *new_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_initWithOrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_withOrgApacheLuceneSearchSpansSpanWeight_(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery *outer$, OrgApacheLuceneSearchIndexSearcher *searcher, id<JavaUtilMap> termContexts, OrgApacheLuceneSearchSpansSpanWeight *matchWeight) {
-  OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight *self = [OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight alloc];
-  OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_initWithOrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_withOrgApacheLuceneSearchSpansSpanWeight_(self, outer$, searcher, termContexts, matchWeight);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight, initWithOrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_withOrgApacheLuceneSearchSpansSpanWeight_, outer$, searcher, termContexts, matchWeight)
+}
+
+OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight *create_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_initWithOrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_withOrgApacheLuceneSearchSpansSpanWeight_(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery *outer$, OrgApacheLuceneSearchIndexSearcher *searcher, id<JavaUtilMap> termContexts, OrgApacheLuceneSearchSpansSpanWeight *matchWeight) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight, initWithOrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_withOrgApacheLuceneSearchSpansSpanWeight_, outer$, searcher, termContexts, matchWeight)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight)
 
 @implementation OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_$1
 
-- (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum *)acceptWithOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)candidate {
+- (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *)acceptWithOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)candidate {
   [((OrgApacheLuceneSearchPayloadsPayloadSpanCollector *) nil_chk(val$collector_)) reset];
   [((OrgApacheLuceneSearchSpansSpans *) nil_chk(candidate)) collectWithOrgApacheLuceneSearchSpansSpanCollector:val$collector_];
   return [this$0_->this$0_ checkPayloadsWithJavaUtilCollection:[val$collector_ getPayloads]];
@@ -278,7 +284,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQu
     { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.payloads.SpanPayloadCheckQuery$SpanPayloadCheckWeight;", NULL, NULL, .constantValue.asLong = 0 },
     { "val$collector_", NULL, 0x1012, "Lorg.apache.lucene.search.payloads.PayloadSpanCollector;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight", "getSpansWithOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneSearchSpansSpanWeight_PostingsEnum:" };
+  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight", "getSpansWithOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneSearchSpansSpanWeight_Postings:" };
   static const J2ObjcClassInfo _OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_$1 = { 2, "", "org.apache.lucene.search.payloads", "SpanPayloadCheckQuery$SpanPayloadCheckWeight", 0x8008, 2, methods, 2, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
   return &_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_$1;
 }
@@ -292,9 +298,11 @@ void OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_$
 }
 
 OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_$1 *new_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_$1_initWithOrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_withOrgApacheLuceneSearchPayloadsPayloadSpanCollector_withOrgApacheLuceneSearchSpansSpans_(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight *outer$, OrgApacheLuceneSearchPayloadsPayloadSpanCollector *capture$0, OrgApacheLuceneSearchSpansSpans *arg$0) {
-  OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_$1 *self = [OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_$1 alloc];
-  OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_$1_initWithOrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_withOrgApacheLuceneSearchPayloadsPayloadSpanCollector_withOrgApacheLuceneSearchSpansSpans_(self, outer$, capture$0, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_$1, initWithOrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_withOrgApacheLuceneSearchPayloadsPayloadSpanCollector_withOrgApacheLuceneSearchSpansSpans_, outer$, capture$0, arg$0)
+}
+
+OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_$1 *create_OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_$1_initWithOrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_withOrgApacheLuceneSearchPayloadsPayloadSpanCollector_withOrgApacheLuceneSearchSpansSpans_(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight *outer$, OrgApacheLuceneSearchPayloadsPayloadSpanCollector *capture$0, OrgApacheLuceneSearchSpansSpans *arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_$1, initWithOrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_withOrgApacheLuceneSearchPayloadsPayloadSpanCollector_withOrgApacheLuceneSearchSpansSpans_, outer$, capture$0, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_SpanPayloadCheckWeight_$1)

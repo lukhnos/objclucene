@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneStoreSimpleFSDirectory_INCLUDE_ALL")
-#if OrgApacheLuceneStoreSimpleFSDirectory_RESTRICT
-#define OrgApacheLuceneStoreSimpleFSDirectory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneStoreSimpleFSDirectory")
+#ifdef RESTRICT_OrgApacheLuceneStoreSimpleFSDirectory
+#define INCLUDE_ALL_OrgApacheLuceneStoreSimpleFSDirectory 0
 #else
-#define OrgApacheLuceneStoreSimpleFSDirectory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneStoreSimpleFSDirectory 1
 #endif
-#undef OrgApacheLuceneStoreSimpleFSDirectory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneStoreSimpleFSDirectory
 
-#if !defined (_OrgApacheLuceneStoreSimpleFSDirectory_) && (OrgApacheLuceneStoreSimpleFSDirectory_INCLUDE_ALL || OrgApacheLuceneStoreSimpleFSDirectory_INCLUDE)
-#define _OrgApacheLuceneStoreSimpleFSDirectory_
+#if !defined (OrgApacheLuceneStoreSimpleFSDirectory_) && (INCLUDE_ALL_OrgApacheLuceneStoreSimpleFSDirectory || defined(INCLUDE_OrgApacheLuceneStoreSimpleFSDirectory))
+#define OrgApacheLuceneStoreSimpleFSDirectory_
 
-#define OrgApacheLuceneStoreFSDirectory_RESTRICT 1
-#define OrgApacheLuceneStoreFSDirectory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreFSDirectory 1
+#define INCLUDE_OrgApacheLuceneStoreFSDirectory 1
 #include "org/apache/lucene/store/FSDirectory.h"
 
 @class OrgApacheLuceneStoreIOContext;
@@ -25,15 +25,51 @@
 @class OrgApacheLuceneStoreLockFactory;
 @class OrgLukhnosPortmobileFilePath;
 
+/*!
+ @brief A straightforward implementation of <code>FSDirectory</code>
+ using <code>Files.newByteChannel(Path,org.lukhnos.portmobile.file.StandardOpenOption)</code>  
+ However, this class has
+ poor concurrent performance (multiple threads will
+ bottleneck) as it synchronizes when multiple threads
+ read from the same file.
+ It's usually better to use
+ <code>NIOFSDirectory</code> or <code>MMapDirectory</code> instead.
+ <p>
+ <b>NOTE:</b> Accessing this class either directly or
+ indirectly from a thread while it's interrupted can close the
+ underlying file descriptor immediately if at the same time the thread is
+ blocked on IO. The file descriptor will remain closed and subsequent access
+ to <code>SimpleFSDirectory</code> will throw a <code>ClosedChannelException</code>. If
+ your application uses either <code>Thread.interrupt()</code> or
+ <code>Future.cancel(boolean)</code> you should use the legacy <code>RAFDirectory</code>
+ from the Lucene <code>misc</code> module in favor of <code>SimpleFSDirectory</code>.
+ </p>
+ */
 @interface OrgApacheLuceneStoreSimpleFSDirectory : OrgApacheLuceneStoreFSDirectory
 
 #pragma mark Public
 
+/*!
+ @brief Create a new SimpleFSDirectory for the named location and <code>FSLockFactory.getDefault()</code>.
+ The directory is created at the named location if it does not yet exist.
+ @param path the path of the directory
+ @throws IOException if there is a low-level I/O error
+ */
 - (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path;
 
+/*!
+ @brief Create a new SimpleFSDirectory for the named location.
+ The directory is created at the named location if it does not yet exist.
+ @param path the path of the directory
+ @param lockFactory the lock factory to use
+ @throws IOException if there is a low-level I/O error
+ */
 - (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
                  withOrgApacheLuceneStoreLockFactory:(OrgApacheLuceneStoreLockFactory *)lockFactory;
 
+/*!
+ @brief Creates an IndexInput for the file with the given name.
+ */
 - (OrgApacheLuceneStoreIndexInput *)openInputWithNSString:(NSString *)name
                         withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
 
@@ -45,19 +81,23 @@ FOUNDATION_EXPORT void OrgApacheLuceneStoreSimpleFSDirectory_initWithOrgLukhnosP
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreSimpleFSDirectory *new_OrgApacheLuceneStoreSimpleFSDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_(OrgLukhnosPortmobileFilePath *path, OrgApacheLuceneStoreLockFactory *lockFactory) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneStoreSimpleFSDirectory *create_OrgApacheLuceneStoreSimpleFSDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_(OrgLukhnosPortmobileFilePath *path, OrgApacheLuceneStoreLockFactory *lockFactory);
+
 FOUNDATION_EXPORT void OrgApacheLuceneStoreSimpleFSDirectory_initWithOrgLukhnosPortmobileFilePath_(OrgApacheLuceneStoreSimpleFSDirectory *self, OrgLukhnosPortmobileFilePath *path);
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreSimpleFSDirectory *new_OrgApacheLuceneStoreSimpleFSDirectory_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneStoreSimpleFSDirectory *create_OrgApacheLuceneStoreSimpleFSDirectory_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreSimpleFSDirectory)
 
 #endif
 
-#if !defined (_OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_) && (OrgApacheLuceneStoreSimpleFSDirectory_INCLUDE_ALL || OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_INCLUDE)
-#define _OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_
+#if !defined (OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_) && (INCLUDE_ALL_OrgApacheLuceneStoreSimpleFSDirectory || defined(INCLUDE_OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput))
+#define OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_
 
-#define OrgApacheLuceneStoreBufferedIndexInput_RESTRICT 1
-#define OrgApacheLuceneStoreBufferedIndexInput_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreBufferedIndexInput 1
+#define INCLUDE_OrgApacheLuceneStoreBufferedIndexInput 1
 #include "org/apache/lucene/store/BufferedIndexInput.h"
 
 @class IOSByteArray;
@@ -65,11 +105,26 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreSimpleFSDirectory)
 @class OrgApacheLuceneStoreIndexInput;
 @protocol JavaNioChannelsSeekableByteChannel;
 
+/*!
+ @brief Reads bytes with <code>SeekableByteChannel.read(ByteBuffer)</code>
+ */
 @interface OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput : OrgApacheLuceneStoreBufferedIndexInput {
  @public
+  /*!
+   @brief the channel we will read from
+   */
   id<JavaNioChannelsSeekableByteChannel> channel_;
+  /*!
+   @brief is this instance a clone and hence does not own the file to close it
+   */
   jboolean isClone_;
+  /*!
+   @brief start offset: non-zero in the slice case
+   */
   jlong off_;
+  /*!
+   @brief end offset (start+length)
+   */
   jlong end_;
 }
 
@@ -115,12 +170,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *new_OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_initWithNSString_withJavaNioChannelsSeekableByteChannel_withOrgApacheLuceneStoreIOContext_(NSString *resourceDesc, id<JavaNioChannelsSeekableByteChannel> channel, OrgApacheLuceneStoreIOContext *context) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *create_OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_initWithNSString_withJavaNioChannelsSeekableByteChannel_withOrgApacheLuceneStoreIOContext_(NSString *resourceDesc, id<JavaNioChannelsSeekableByteChannel> channel, OrgApacheLuceneStoreIOContext *context);
+
 FOUNDATION_EXPORT void OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_initWithNSString_withJavaNioChannelsSeekableByteChannel_withLong_withLong_withInt_(OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *self, NSString *resourceDesc, id<JavaNioChannelsSeekableByteChannel> channel, jlong off, jlong length, jint bufferSize);
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *new_OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_initWithNSString_withJavaNioChannelsSeekableByteChannel_withLong_withLong_withInt_(NSString *resourceDesc, id<JavaNioChannelsSeekableByteChannel> channel, jlong off, jlong length, jint bufferSize) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *create_OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_initWithNSString_withJavaNioChannelsSeekableByteChannel_withLong_withLong_withInt_(NSString *resourceDesc, id<JavaNioChannelsSeekableByteChannel> channel, jlong off, jlong length, jint bufferSize);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneStoreSimpleFSDirectory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreSimpleFSDirectory")

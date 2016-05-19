@@ -52,9 +52,11 @@ void OrgApacheLuceneSearchSimilaritiesLambdaDF_init(OrgApacheLuceneSearchSimilar
 }
 
 OrgApacheLuceneSearchSimilaritiesLambdaDF *new_OrgApacheLuceneSearchSimilaritiesLambdaDF_init() {
-  OrgApacheLuceneSearchSimilaritiesLambdaDF *self = [OrgApacheLuceneSearchSimilaritiesLambdaDF alloc];
-  OrgApacheLuceneSearchSimilaritiesLambdaDF_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSimilaritiesLambdaDF, init)
+}
+
+OrgApacheLuceneSearchSimilaritiesLambdaDF *create_OrgApacheLuceneSearchSimilaritiesLambdaDF_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSimilaritiesLambdaDF, init)
 }
 
 jfloat OrgApacheLuceneSearchSimilaritiesLambdaDF_lambdaWithOrgApacheLuceneSearchSimilaritiesBasicStats_(OrgApacheLuceneSearchSimilaritiesLambdaDF *self, OrgApacheLuceneSearchSimilaritiesBasicStats *stats) {

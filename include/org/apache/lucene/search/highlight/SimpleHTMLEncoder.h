@@ -5,21 +5,24 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_INCLUDE_ALL")
-#if OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_RESTRICT
-#define OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightSimpleHTMLEncoder")
+#ifdef RESTRICT_OrgApacheLuceneSearchHighlightSimpleHTMLEncoder
+#define INCLUDE_ALL_OrgApacheLuceneSearchHighlightSimpleHTMLEncoder 0
 #else
-#define OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchHighlightSimpleHTMLEncoder 1
 #endif
-#undef OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchHighlightSimpleHTMLEncoder
 
-#if !defined (_OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_) && (OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_INCLUDE_ALL || OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_INCLUDE)
-#define _OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_
+#if !defined (OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightSimpleHTMLEncoder || defined(INCLUDE_OrgApacheLuceneSearchHighlightSimpleHTMLEncoder))
+#define OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_
 
-#define OrgApacheLuceneSearchHighlightEncoder_RESTRICT 1
-#define OrgApacheLuceneSearchHighlightEncoder_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchHighlightEncoder 1
+#define INCLUDE_OrgApacheLuceneSearchHighlightEncoder 1
 #include "org/apache/lucene/search/highlight/Encoder.h"
 
+/*!
+ @brief Simple <code>Encoder</code> implementation to escape text for HTML output
+ */
 @interface OrgApacheLuceneSearchHighlightSimpleHTMLEncoder : NSObject < OrgApacheLuceneSearchHighlightEncoder >
 
 #pragma mark Public
@@ -28,6 +31,9 @@
 
 - (NSString *)encodeTextWithNSString:(NSString *)originalText;
 
+/*!
+ @brief Encode string into HTML
+ */
 + (NSString *)htmlEncodeWithNSString:(NSString *)plainText;
 
 @end
@@ -38,10 +44,12 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_init(OrgA
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightSimpleHTMLEncoder *new_OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightSimpleHTMLEncoder *create_OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_init();
+
 FOUNDATION_EXPORT NSString *OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_htmlEncodeWithNSString_(NSString *plainText);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightSimpleHTMLEncoder)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightSimpleHTMLEncoder")

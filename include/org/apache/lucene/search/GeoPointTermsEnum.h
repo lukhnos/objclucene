@@ -5,28 +5,30 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchGeoPointTermsEnum_INCLUDE_ALL")
-#if OrgApacheLuceneSearchGeoPointTermsEnum_RESTRICT
-#define OrgApacheLuceneSearchGeoPointTermsEnum_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchGeoPointTermsEnum")
+#ifdef RESTRICT_OrgApacheLuceneSearchGeoPointTermsEnum
+#define INCLUDE_ALL_OrgApacheLuceneSearchGeoPointTermsEnum 0
 #else
-#define OrgApacheLuceneSearchGeoPointTermsEnum_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchGeoPointTermsEnum 1
 #endif
-#undef OrgApacheLuceneSearchGeoPointTermsEnum_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchGeoPointTermsEnum
 
-#if !defined (_OrgApacheLuceneSearchGeoPointTermsEnum_) && (OrgApacheLuceneSearchGeoPointTermsEnum_INCLUDE_ALL || OrgApacheLuceneSearchGeoPointTermsEnum_INCLUDE)
-#define _OrgApacheLuceneSearchGeoPointTermsEnum_
+#if !defined (OrgApacheLuceneSearchGeoPointTermsEnum_) && (INCLUDE_ALL_OrgApacheLuceneSearchGeoPointTermsEnum || defined(INCLUDE_OrgApacheLuceneSearchGeoPointTermsEnum))
+#define OrgApacheLuceneSearchGeoPointTermsEnum_
 
-#define OrgApacheLuceneIndexFilteredTermsEnum_RESTRICT 1
-#define OrgApacheLuceneIndexFilteredTermsEnum_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexFilteredTermsEnum 1
+#define INCLUDE_OrgApacheLuceneIndexFilteredTermsEnum 1
 #include "org/apache/lucene/index/FilteredTermsEnum.h"
 
-@class OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum;
+@class OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus;
 @class OrgApacheLuceneIndexTermsEnum;
 @class OrgApacheLuceneSearchGeoPointTermsEnum_Range;
 @class OrgApacheLuceneUtilBytesRef;
 
-#define OrgApacheLuceneSearchGeoPointTermsEnum_DETAIL_LEVEL 14
-
+/*!
+ @brief computes all ranges along a space-filling curve that represents
+ the given bounding box and enumerates all terms contained within those ranges
+ */
 @interface OrgApacheLuceneSearchGeoPointTermsEnum : OrgApacheLuceneIndexFilteredTermsEnum {
  @public
   jdouble minLon_;
@@ -36,34 +38,60 @@
   OrgApacheLuceneSearchGeoPointTermsEnum_Range *currentRange_;
 }
 
++ (jshort)DETAIL_LEVEL;
+
 #pragma mark Public
 
 - (jboolean)boundaryTerm;
 
 #pragma mark Protected
 
-- (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
+/*!
+ @brief The two-phase query approach.
+ <code>nextSeekTerm</code> is called to obtain the next term that matches a numeric
+ range of the bounding box. Those terms that pass the initial range filter are then compared against the
+ decoded min/max latitude and longitude values of the bounding box only if the range is not a "boundary" range
+ (e.g., a range that straddles the boundary of the bbox).
+ @param term term for candidate document
+ @return match status
+ */
+- (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
 
+/*!
+ @brief Return whether quad-cell contains the bounding box of this shape
+ */
 - (jboolean)cellContainsWithDouble:(jdouble)minLon
                         withDouble:(jdouble)minLat
                         withDouble:(jdouble)maxLon
                         withDouble:(jdouble)maxLat;
 
+/*!
+ @brief Determine whether the quad-cell crosses the shape
+ */
 - (jboolean)cellCrossesWithDouble:(jdouble)minLon
                        withDouble:(jdouble)minLat
                        withDouble:(jdouble)maxLon
                        withDouble:(jdouble)maxLat;
 
+/*!
+ @brief Primary driver for cells intersecting shape boundaries
+ */
 - (jboolean)cellIntersectsMBRWithDouble:(jdouble)minLon
                              withDouble:(jdouble)minLat
                              withDouble:(jdouble)maxLon
                              withDouble:(jdouble)maxLat;
 
+/*!
+ @brief Default shape is a rectangle, so this returns the same as <code>cellIntersectsMBR</code>
+ */
 - (jboolean)cellIntersectsShapeWithDouble:(jdouble)minLon
                                withDouble:(jdouble)minLat
                                withDouble:(jdouble)maxLon
                                withDouble:(jdouble)maxLat;
 
+/*!
+ @brief Determine whether quad-cell is within the shape
+ */
 - (jboolean)cellWithinWithDouble:(jdouble)minLon
                       withDouble:(jdouble)minLat
                       withDouble:(jdouble)maxLon
@@ -88,7 +116,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchGeoPointTermsEnum)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchGeoPointTermsEnum, currentRange_, OrgApacheLuceneSearchGeoPointTermsEnum_Range *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchGeoPointTermsEnum, DETAIL_LEVEL, jshort)
+inline jshort OrgApacheLuceneSearchGeoPointTermsEnum_get_DETAIL_LEVEL();
+#define OrgApacheLuceneSearchGeoPointTermsEnum_DETAIL_LEVEL 14
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchGeoPointTermsEnum, DETAIL_LEVEL, jshort)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchGeoPointTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoPointTermsEnum *self, OrgApacheLuceneIndexTermsEnum *tenum, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat);
 
@@ -96,16 +126,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchGeoPointTermsEnum)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchGeoPointTermsEnum_Range_) && (OrgApacheLuceneSearchGeoPointTermsEnum_INCLUDE_ALL || OrgApacheLuceneSearchGeoPointTermsEnum_Range_INCLUDE)
-#define _OrgApacheLuceneSearchGeoPointTermsEnum_Range_
+#if !defined (OrgApacheLuceneSearchGeoPointTermsEnum_Range_) && (INCLUDE_ALL_OrgApacheLuceneSearchGeoPointTermsEnum || defined(INCLUDE_OrgApacheLuceneSearchGeoPointTermsEnum_Range))
+#define OrgApacheLuceneSearchGeoPointTermsEnum_Range_
 
-#define JavaLangComparable_RESTRICT 1
-#define JavaLangComparable_INCLUDE 1
+#define RESTRICT_JavaLangComparable 1
+#define INCLUDE_JavaLangComparable 1
 #include "java/lang/Comparable.h"
 
 @class OrgApacheLuceneSearchGeoPointTermsEnum;
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief Internal class to represent a range along the space filling curve
+ */
 @interface OrgApacheLuceneSearchGeoPointTermsEnum_Range : NSObject < JavaLangComparable > {
  @public
   OrgApacheLuceneUtilBytesRef *cell_;
@@ -135,8 +168,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchGeoPointTermsEnum_Range_initWithOrgA
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchGeoPointTermsEnum_Range *new_OrgApacheLuceneSearchGeoPointTermsEnum_Range_initWithOrgApacheLuceneSearchGeoPointTermsEnum_withLong_withShort_withShort_withBoolean_(OrgApacheLuceneSearchGeoPointTermsEnum *outer$, jlong lower, jshort res, jshort level, jboolean boundary) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchGeoPointTermsEnum_Range *create_OrgApacheLuceneSearchGeoPointTermsEnum_Range_initWithOrgApacheLuceneSearchGeoPointTermsEnum_withLong_withShort_withShort_withBoolean_(OrgApacheLuceneSearchGeoPointTermsEnum *outer$, jlong lower, jshort res, jshort level, jboolean boundary);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchGeoPointTermsEnum_Range)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchGeoPointTermsEnum_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchGeoPointTermsEnum")

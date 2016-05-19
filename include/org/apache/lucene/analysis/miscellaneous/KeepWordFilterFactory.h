@@ -5,23 +5,23 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory_) && (OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory))
+#define OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-#define OrgApacheLuceneAnalysisUtilResourceLoaderAware_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilResourceLoaderAware_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilResourceLoaderAware 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilResourceLoaderAware 1
 #include "org/apache/lucene/analysis/util/ResourceLoaderAware.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
@@ -29,10 +29,24 @@
 @protocol JavaUtilMap;
 @protocol OrgApacheLuceneAnalysisUtilResourceLoader;
 
+/*!
+ @brief Factory for <code>KeepWordFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_keepword" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+ &lt;filter class="solr.KeepWordFilterFactory" words="keepwords.txt" ignoreCase="false"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilResourceLoaderAware >
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new KeepWordFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -51,8 +65,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory *create_OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory")

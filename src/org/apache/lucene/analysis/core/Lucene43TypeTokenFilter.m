@@ -4,9 +4,11 @@
 //
 
 #include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
+#include "java/lang/annotation/Annotation.h"
 #include "java/util/Set.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/core/Lucene43TypeTokenFilter.h"
@@ -40,19 +42,19 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inp
   return useWhiteList_ == [((id<JavaUtilSet>) nil_chk(stopTypes_)) containsWithId:[((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(typeAttribute_)) type]];
 }
 
++ (IOSObjectArray *)__annotations {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
 - (void)dealloc {
   RELEASE_(stopTypes_);
   RELEASE_(typeAttribute_);
   [super dealloc];
 }
 
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithBoolean:withOrgApacheLuceneAnalysisTokenStream:withJavaUtilSet:withBoolean:", "Lucene43TypeTokenFilter", NULL, 0x1, NULL, NULL },
+    { "initWithBoolean:withOrgApacheLuceneAnalysisTokenStream:withJavaUtilSet:withBoolean:", "Lucene43TypeTokenFilter", NULL, 0x1, NULL, "(ZLorg/apache/lucene/analysis/TokenStream;Ljava/util/Set<Ljava/lang/String;>;Z)V" },
     { "accept", NULL, "Z", 0x4, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -74,9 +76,11 @@ void OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter_initWithBoolean_withOrgA
 }
 
 OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter *new_OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withJavaUtilSet_withBoolean_(jboolean enablePositionIncrements, OrgApacheLuceneAnalysisTokenStream *input, id<JavaUtilSet> stopTypes, jboolean useWhiteList) {
-  OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter *self = [OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter alloc];
-  OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withJavaUtilSet_withBoolean_(self, enablePositionIncrements, input, stopTypes, useWhiteList);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter, initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withJavaUtilSet_withBoolean_, enablePositionIncrements, input, stopTypes, useWhiteList)
+}
+
+OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter *create_OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withJavaUtilSet_withBoolean_(jboolean enablePositionIncrements, OrgApacheLuceneAnalysisTokenStream *input, id<JavaUtilSet> stopTypes, jboolean useWhiteList) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter, initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withJavaUtilSet_withBoolean_, enablePositionIncrements, input, stopTypes, useWhiteList)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter)

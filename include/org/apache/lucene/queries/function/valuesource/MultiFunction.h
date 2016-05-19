@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_RESTRICT
-#define OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMultiFunction")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceMultiFunction
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMultiFunction 0
 #else
-#define OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMultiFunction 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceMultiFunction
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_) && (OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_
+#if !defined (OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMultiFunction || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceMultiFunction))
+#define OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_
 
-#define OrgApacheLuceneQueriesFunctionValueSource_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionValueSource_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionValueSource 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionValueSource 1
 #include "org/apache/lucene/queries/function/ValueSource.h"
 
 @class IOSObjectArray;
@@ -27,6 +27,10 @@
 @protocol JavaUtilList;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Abstract parent class for <code>ValueSource</code> implementations that wrap multiple
+ ValueSources and apply their own logic.
+ */
 @interface OrgApacheLuceneQueriesFunctionValuesourceMultiFunction : OrgApacheLuceneQueriesFunctionValueSource {
  @public
   id<JavaUtilList> sources_;
@@ -36,17 +40,41 @@
 
 - (instancetype)initWithJavaUtilList:(id<JavaUtilList>)sources;
 
+/*!
+ @brief Equivilent the the <code>FunctionValues[]</code> method with the same name, but optimized for 
+ dealing with exactly 2 arguments.
+ @return true if <em>both</em> of the specified <code>values</code>
+ <code>FunctionValues.exists</code> for the specified doc, else false.
+ - seealso: #anyExists(int,FunctionValues[])
+ */
 + (jboolean)allExistsWithInt:(jint)doc
 withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)values1
 withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)values2;
 
+/*!
+ @brief Helper utility for <code>FunctionValues</code>
+ @return true if <em>all</em> of the specified <code>values</code>
+ <code>FunctionValues.exists</code> for the specified doc, else false.
+ */
 + (jboolean)allExistsWithInt:(jint)doc
 withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)values;
 
+/*!
+ @brief Equivilent the the <code>FunctionValues[]</code> method with the same name, but optimized for 
+ dealing with exactly 2 arguments.
+ @return true if <em>either</em> of the specified <code>values</code>
+ <code>FunctionValues.exists</code> for the specified doc, else false.
+ - seealso: #anyExists(int,FunctionValues[])
+ */
 + (jboolean)anyExistsWithInt:(jint)doc
 withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)values1
 withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)values2;
 
+/*!
+ @brief Helper utility for <code>FunctionValues</code>
+ @return true if <em>any</em> of the specified <code>values</code>
+ <code>FunctionValues.exists</code> for the specified doc, else false.
+ */
 + (jboolean)anyExistsWithInt:(jint)doc
 withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)values;
 
@@ -100,11 +128,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceMultiFunctio
 
 #endif
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values_) && (OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values_
+#if !defined (OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMultiFunction || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values))
+#define OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values_
 
-#define OrgApacheLuceneQueriesFunctionFunctionValues_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionFunctionValues_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionFunctionValues 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionFunctionValues 1
 #include "org/apache/lucene/queries/function/FunctionValues.h"
 
 @class IOSObjectArray;
@@ -135,8 +163,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Va
 
 FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values *new_OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_(OrgApacheLuceneQueriesFunctionValuesourceMultiFunction *outer$, IOSObjectArray *valsArr) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values *create_OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_(OrgApacheLuceneQueriesFunctionValuesourceMultiFunction *outer$, IOSObjectArray *valsArr);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMultiFunction")

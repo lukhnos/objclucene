@@ -24,8 +24,9 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilCharsRefBuilder, ref_, OrgApacheLuceneUtilCharsRef *)
 
-static NSString *OrgApacheLuceneUtilCharsRefBuilder_NULL_STRING_ = @"null";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilCharsRefBuilder, NULL_STRING_, NSString *)
+inline NSString *OrgApacheLuceneUtilCharsRefBuilder_get_NULL_STRING();
+static NSString *OrgApacheLuceneUtilCharsRefBuilder_NULL_STRING = @"null";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilCharsRefBuilder, NULL_STRING, NSString *)
 
 @implementation OrgApacheLuceneUtilCharsRefBuilder
 
@@ -63,20 +64,20 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneUtilCharsRefBuilder *)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)csq {
   if (csq == nil) {
-    return [self appendWithJavaLangCharSequence:OrgApacheLuceneUtilCharsRefBuilder_NULL_STRING_];
+    return [self appendWithJavaLangCharSequence:OrgApacheLuceneUtilCharsRefBuilder_NULL_STRING];
   }
-  return [self appendWithJavaLangCharSequence:csq withInt:0 withInt:[((id<JavaLangCharSequence>) nil_chk(csq)) length]];
+  return [self appendWithJavaLangCharSequence:csq withInt:0 withInt:[csq length]];
 }
 
 - (OrgApacheLuceneUtilCharsRefBuilder *)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)csq
                                                                withInt:(jint)start
                                                                withInt:(jint)end {
   if (csq == nil) {
-    return [self appendWithJavaLangCharSequence:OrgApacheLuceneUtilCharsRefBuilder_NULL_STRING_];
+    return [self appendWithJavaLangCharSequence:OrgApacheLuceneUtilCharsRefBuilder_NULL_STRING];
   }
   [self growWithInt:((OrgApacheLuceneUtilCharsRef *) nil_chk(ref_))->length_ + end - start];
   for (jint i = start; i < end; ++i) {
-    [self setCharAtWithInt:ref_->length_++ withChar:[((id<JavaLangCharSequence>) nil_chk(csq)) charAtWithInt:i]];
+    [self setCharAtWithInt:ref_->length_++ withChar:[csq charAtWithInt:i]];
   }
   return self;
 }
@@ -129,7 +130,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (OrgApacheLuceneUtilCharsRef *)toCharsRef {
-  return [new_OrgApacheLuceneUtilCharsRef_initWithCharArray_withInt_withInt_(JavaUtilArrays_copyOfWithCharArray_withInt_(((OrgApacheLuceneUtilCharsRef *) nil_chk(ref_))->chars_, ref_->length_), 0, ref_->length_) autorelease];
+  return create_OrgApacheLuceneUtilCharsRef_initWithCharArray_withInt_withInt_(JavaUtilArrays_copyOfWithCharArray_withInt_(((OrgApacheLuceneUtilCharsRef *) nil_chk(ref_))->chars_, ref_->length_), 0, ref_->length_);
 }
 
 - (NSString *)description {
@@ -137,11 +138,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jboolean)isEqual:(id)obj {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (NSUInteger)hash {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (void)dealloc {
@@ -174,7 +175,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "NULL_STRING_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneUtilCharsRefBuilder_NULL_STRING_, NULL, .constantValue.asLong = 0 },
+    { "NULL_STRING", "NULL_STRING", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneUtilCharsRefBuilder_NULL_STRING, NULL, .constantValue.asLong = 0 },
     { "ref_", NULL, 0x12, "Lorg.apache.lucene.util.CharsRef;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneUtilCharsRefBuilder = { 2, "CharsRefBuilder", "org.apache.lucene.util", NULL, 0x1, 21, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
@@ -189,9 +190,11 @@ void OrgApacheLuceneUtilCharsRefBuilder_init(OrgApacheLuceneUtilCharsRefBuilder 
 }
 
 OrgApacheLuceneUtilCharsRefBuilder *new_OrgApacheLuceneUtilCharsRefBuilder_init() {
-  OrgApacheLuceneUtilCharsRefBuilder *self = [OrgApacheLuceneUtilCharsRefBuilder alloc];
-  OrgApacheLuceneUtilCharsRefBuilder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilCharsRefBuilder, init)
+}
+
+OrgApacheLuceneUtilCharsRefBuilder *create_OrgApacheLuceneUtilCharsRefBuilder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilCharsRefBuilder, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilCharsRefBuilder)

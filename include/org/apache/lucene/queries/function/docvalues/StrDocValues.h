@@ -5,24 +5,28 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_RESTRICT
-#define OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues 0
 #else
-#define OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues
 
-#if !defined (_OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_) && (OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_
+#if !defined (OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues || defined(INCLUDE_OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues))
+#define OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_
 
-#define OrgApacheLuceneQueriesFunctionFunctionValues_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionFunctionValues_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionFunctionValues 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionFunctionValues 1
 #include "org/apache/lucene/queries/function/FunctionValues.h"
 
 @class OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller;
 @class OrgApacheLuceneQueriesFunctionValueSource;
 
+/*!
+ @brief Abstract <code>FunctionValues</code> implementation which supports retrieving String values.
+ Implementations can control how the String values are loaded through <code>strVal(int)</code>}
+ */
 @interface OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues : OrgApacheLuceneQueriesFunctionFunctionValues {
  @public
   OrgApacheLuceneQueriesFunctionValueSource *vs_;
@@ -54,4 +58,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues")

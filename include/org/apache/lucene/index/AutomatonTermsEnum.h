@@ -5,36 +5,63 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexAutomatonTermsEnum_INCLUDE_ALL")
-#if OrgApacheLuceneIndexAutomatonTermsEnum_RESTRICT
-#define OrgApacheLuceneIndexAutomatonTermsEnum_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexAutomatonTermsEnum")
+#ifdef RESTRICT_OrgApacheLuceneIndexAutomatonTermsEnum
+#define INCLUDE_ALL_OrgApacheLuceneIndexAutomatonTermsEnum 0
 #else
-#define OrgApacheLuceneIndexAutomatonTermsEnum_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexAutomatonTermsEnum 1
 #endif
-#undef OrgApacheLuceneIndexAutomatonTermsEnum_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexAutomatonTermsEnum
 
-#if !defined (_OrgApacheLuceneIndexAutomatonTermsEnum_) && (OrgApacheLuceneIndexAutomatonTermsEnum_INCLUDE_ALL || OrgApacheLuceneIndexAutomatonTermsEnum_INCLUDE)
-#define _OrgApacheLuceneIndexAutomatonTermsEnum_
+#if !defined (OrgApacheLuceneIndexAutomatonTermsEnum_) && (INCLUDE_ALL_OrgApacheLuceneIndexAutomatonTermsEnum || defined(INCLUDE_OrgApacheLuceneIndexAutomatonTermsEnum))
+#define OrgApacheLuceneIndexAutomatonTermsEnum_
 
-#define OrgApacheLuceneIndexFilteredTermsEnum_RESTRICT 1
-#define OrgApacheLuceneIndexFilteredTermsEnum_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexFilteredTermsEnum 1
+#define INCLUDE_OrgApacheLuceneIndexFilteredTermsEnum 1
 #include "org/apache/lucene/index/FilteredTermsEnum.h"
 
-@class OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum;
+@class OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus;
 @class OrgApacheLuceneIndexTermsEnum;
 @class OrgApacheLuceneUtilAutomatonCompiledAutomaton;
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief A FilteredTermsEnum that enumerates terms based upon what is accepted by a
+ DFA.
+ <p>
+ The algorithm is such:
+ <ol>
+ <li>As long as matches are successful, keep reading sequentially.
+ <li>When a match fails, skip to the next string in lexicographic order that
+ does not enter a reject state.
+ </ol>
+ <p>
+ The algorithm does not attempt to actually skip to the next string that is
+ completely accepted. This is not possible when the language accepted by the
+ FSM is not finite (i.e. * operator).
+ </p>
+ */
 @interface OrgApacheLuceneIndexAutomatonTermsEnum : OrgApacheLuceneIndexFilteredTermsEnum
 
 #pragma mark Public
 
+/*!
+ @brief Construct an enumerator based upon an automaton, enumerating the specified
+ field, working on a supplied TermsEnum
+  
+ @param compiled CompiledAutomaton
+ */
 - (instancetype)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)tenum
     withOrgApacheLuceneUtilAutomatonCompiledAutomaton:(OrgApacheLuceneUtilAutomatonCompiledAutomaton *)compiled;
 
 #pragma mark Protected
 
-- (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
+/*!
+ @brief Returns true if the term matches the automaton.
+ Also stashes away the term
+ to assist with smart enumeration.
+ */
+- (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
 
 - (OrgApacheLuceneUtilBytesRef *)nextSeekTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
 
@@ -46,8 +73,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexAutomatonTermsEnum_initWithOrgApacheL
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexAutomatonTermsEnum *new_OrgApacheLuceneIndexAutomatonTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilAutomatonCompiledAutomaton_(OrgApacheLuceneIndexTermsEnum *tenum, OrgApacheLuceneUtilAutomatonCompiledAutomaton *compiled) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexAutomatonTermsEnum *create_OrgApacheLuceneIndexAutomatonTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilAutomatonCompiledAutomaton_(OrgApacheLuceneIndexTermsEnum *tenum, OrgApacheLuceneUtilAutomatonCompiledAutomaton *compiled);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexAutomatonTermsEnum)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexAutomatonTermsEnum_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexAutomatonTermsEnum")

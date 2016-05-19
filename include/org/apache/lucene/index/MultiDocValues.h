@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexMultiDocValues_INCLUDE_ALL")
-#if OrgApacheLuceneIndexMultiDocValues_RESTRICT
-#define OrgApacheLuceneIndexMultiDocValues_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexMultiDocValues")
+#ifdef RESTRICT_OrgApacheLuceneIndexMultiDocValues
+#define INCLUDE_ALL_OrgApacheLuceneIndexMultiDocValues 0
 #else
-#define OrgApacheLuceneIndexMultiDocValues_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexMultiDocValues 1
 #endif
-#undef OrgApacheLuceneIndexMultiDocValues_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexMultiDocValues
 
-#if !defined (_OrgApacheLuceneIndexMultiDocValues_) && (OrgApacheLuceneIndexMultiDocValues_INCLUDE_ALL || OrgApacheLuceneIndexMultiDocValues_INCLUDE)
-#define _OrgApacheLuceneIndexMultiDocValues_
+#if !defined (OrgApacheLuceneIndexMultiDocValues_) && (INCLUDE_ALL_OrgApacheLuceneIndexMultiDocValues || defined(INCLUDE_OrgApacheLuceneIndexMultiDocValues))
+#define OrgApacheLuceneIndexMultiDocValues_
 
 @class OrgApacheLuceneIndexBinaryDocValues;
 @class OrgApacheLuceneIndexIndexReader;
@@ -24,28 +24,90 @@
 @class OrgApacheLuceneIndexSortedSetDocValues;
 @protocol OrgApacheLuceneUtilBits;
 
+/*!
+ @brief A wrapper for CompositeIndexReader providing access to DocValues.
+ <p><b>NOTE</b>: for multi readers, you'll get better
+ performance by gathering the sub readers using
+ <code>IndexReader.getContext()</code> to get the
+ atomic leaves and then operate per-LeafReader,
+ instead of using this class.
+ <p><b>NOTE</b>: This is very costly.
+ */
 @interface OrgApacheLuceneIndexMultiDocValues : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Returns a BinaryDocValues for a reader's docvalues (potentially merging on-the-fly)
+ <p>
+ This is a slow way to access binary values.
+ Instead, access them per-segment
+ with <code>LeafReader.getBinaryDocValues(String)</code>
+ </p>  
+ */
 + (OrgApacheLuceneIndexBinaryDocValues *)getBinaryValuesWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)r
                                                                                withNSString:(NSString *)field;
 
+/*!
+ @brief Returns a Bits for a reader's docsWithField (potentially merging on-the-fly) 
+ <p>
+ This is a slow way to access this bitset.
+ Instead, access them per-segment
+ with <code>LeafReader.getDocsWithField(String)</code>
+ </p> 
+ */
 + (id<OrgApacheLuceneUtilBits>)getDocsWithFieldWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)r
                                                                       withNSString:(NSString *)field;
 
+/*!
+ @brief Returns a NumericDocValues for a reader's norms (potentially merging on-the-fly).
+ <p>
+ This is a slow way to access normalization values. Instead, access them per-segment
+ with <code>LeafReader.getNormValues(String)</code>
+ </p> 
+ */
 + (OrgApacheLuceneIndexNumericDocValues *)getNormValuesWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)r
                                                                               withNSString:(NSString *)field;
 
+/*!
+ @brief Returns a NumericDocValues for a reader's docvalues (potentially merging on-the-fly) 
+ <p>
+ This is a slow way to access numeric values.
+ Instead, access them per-segment
+ with <code>LeafReader.getNumericDocValues(String)</code>
+ </p> 
+ */
 + (OrgApacheLuceneIndexNumericDocValues *)getNumericValuesWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)r
                                                                                  withNSString:(NSString *)field;
 
+/*!
+ @brief Returns a SortedNumericDocValues for a reader's docvalues (potentially merging on-the-fly) 
+ <p>
+ This is a slow way to access sorted numeric values.
+ Instead, access them per-segment
+ with <code>LeafReader.getSortedNumericDocValues(String)</code>
+ </p> 
+ */
 + (OrgApacheLuceneIndexSortedNumericDocValues *)getSortedNumericValuesWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)r
                                                                                              withNSString:(NSString *)field;
 
+/*!
+ @brief Returns a SortedSetDocValues for a reader's docvalues (potentially doing extremely slow things).
+ <p>
+ This is an extremely slow way to access sorted values. Instead, access them per-segment
+ with <code>LeafReader.getSortedSetDocValues(String)</code>
+ </p>  
+ */
 + (OrgApacheLuceneIndexSortedSetDocValues *)getSortedSetValuesWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)r
                                                                                      withNSString:(NSString *)field;
 
+/*!
+ @brief Returns a SortedDocValues for a reader's docvalues (potentially doing extremely slow things).
+ <p>
+ This is an extremely slow way to access sorted values. Instead, access them per-segment
+ with <code>LeafReader.getSortedDocValues(String)</code>
+ </p>  
+ */
 + (OrgApacheLuceneIndexSortedDocValues *)getSortedValuesWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)r
                                                                                withNSString:(NSString *)field;
 
@@ -71,11 +133,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiDocValues)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_) && (OrgApacheLuceneIndexMultiDocValues_INCLUDE_ALL || OrgApacheLuceneIndexMultiDocValues_OrdinalMap_INCLUDE)
-#define _OrgApacheLuceneIndexMultiDocValues_OrdinalMap_
+#if !defined (OrgApacheLuceneIndexMultiDocValues_OrdinalMap_) && (INCLUDE_ALL_OrgApacheLuceneIndexMultiDocValues || defined(INCLUDE_OrgApacheLuceneIndexMultiDocValues_OrdinalMap))
+#define OrgApacheLuceneIndexMultiDocValues_OrdinalMap_
 
-#define OrgApacheLuceneUtilAccountable_RESTRICT 1
-#define OrgApacheLuceneUtilAccountable_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAccountable 1
+#define INCLUDE_OrgApacheLuceneUtilAccountable 1
 #include "org/apache/lucene/util/Accountable.h"
 
 @class IOSLongArray;
@@ -85,6 +147,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiDocValues)
 @class OrgApacheLuceneUtilPackedPackedLongValues;
 @protocol JavaUtilCollection;
 
+/*!
+ @brief maps per-segment ordinals to/from global ordinal space
+ */
 @interface OrgApacheLuceneIndexMultiDocValues_OrdinalMap : NSObject < OrgApacheLuceneUtilAccountable > {
  @public
   id owner_;
@@ -97,14 +162,35 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiDocValues)
 
 #pragma mark Public
 
+/*!
+ @brief Create an ordinal map that uses the number of unique values of each
+ <code>SortedDocValues</code> instance as a weight.
+ - seealso: #build(Object,TermsEnum[],long[],float)
+ */
 + (OrgApacheLuceneIndexMultiDocValues_OrdinalMap *)buildWithId:(id)owner
                   withOrgApacheLuceneIndexSortedDocValuesArray:(IOSObjectArray *)values
                                                      withFloat:(jfloat)acceptableOverheadRatio;
 
+/*!
+ @brief Create an ordinal map that uses the number of unique values of each
+ <code>SortedSetDocValues</code> instance as a weight.
+ - seealso: #build(Object,TermsEnum[],long[],float)
+ */
 + (OrgApacheLuceneIndexMultiDocValues_OrdinalMap *)buildWithId:(id)owner
                withOrgApacheLuceneIndexSortedSetDocValuesArray:(IOSObjectArray *)values
                                                      withFloat:(jfloat)acceptableOverheadRatio;
 
+/*!
+ @brief Creates an ordinal map that allows mapping ords to/from a merged
+ space from <code>subs</code>.
+ @param owner a cache key
+ @param subs TermsEnums that support <code>TermsEnum.ord()</code>. They need
+ not be dense (e.g. can be FilteredTermsEnums}.
+ @param weights a weight for each sub. This is ideally correlated with
+ the number of unique terms that each sub introduces compared
+ to the other subs
+ @throws IOException if an I/O error occurred.
+ */
 + (OrgApacheLuceneIndexMultiDocValues_OrdinalMap *)buildWithId:(id)owner
                         withOrgApacheLuceneIndexTermsEnumArray:(IOSObjectArray *)subs
                                                  withLongArray:(IOSLongArray *)weights
@@ -112,12 +198,27 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiDocValues)
 
 - (id<JavaUtilCollection>)getChildResources;
 
+/*!
+ @brief Given a global ordinal, returns the index of the first
+ segment that contains this term.
+ */
 - (jint)getFirstSegmentNumberWithLong:(jlong)globalOrd;
 
+/*!
+ @brief Given global ordinal, returns the ordinal of the first segment which contains
+ this ordinal (the corresponding to the segment return <code>getFirstSegmentNumber</code>).
+ */
 - (jlong)getFirstSegmentOrdWithLong:(jlong)globalOrd;
 
+/*!
+ @brief Given a segment number, return a <code>LongValues</code> instance that maps
+ segment ordinals to global ordinals.
+ */
 - (OrgApacheLuceneUtilLongValues *)getGlobalOrdsWithInt:(jint)segmentIndex;
 
+/*!
+ @brief Returns the total number of unique terms in global ord space.
+ */
 - (jlong)getValueCount;
 
 - (jlong)ramBytesUsed;
@@ -149,15 +250,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexMultiDocValues_OrdinalMap_initWithId_
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexMultiDocValues_OrdinalMap *new_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_initWithId_withOrgApacheLuceneIndexTermsEnumArray_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_withFloat_(id owner, IOSObjectArray *subs, OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap *segmentMap, jfloat acceptableOverheadRatio) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexMultiDocValues_OrdinalMap *create_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_initWithId_withOrgApacheLuceneIndexTermsEnumArray_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_withFloat_(id owner, IOSObjectArray *subs, OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap *segmentMap, jfloat acceptableOverheadRatio);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiDocValues_OrdinalMap)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_) && (OrgApacheLuceneIndexMultiDocValues_INCLUDE_ALL || OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_INCLUDE)
-#define _OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_
+#if !defined (OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_) && (INCLUDE_ALL_OrgApacheLuceneIndexMultiDocValues || defined(INCLUDE_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap))
+#define OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_
 
-#define OrgApacheLuceneUtilAccountable_RESTRICT 1
-#define OrgApacheLuceneUtilAccountable_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAccountable 1
+#define INCLUDE_OrgApacheLuceneUtilAccountable 1
 #include "org/apache/lucene/util/Accountable.h"
 
 @class IOSLongArray;
@@ -187,15 +290,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap *new_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_initWithLongArray_(IOSLongArray *weights) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap *create_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_initWithLongArray_(IOSLongArray *weights);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues_) && (OrgApacheLuceneIndexMultiDocValues_INCLUDE_ALL || OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues_INCLUDE)
-#define _OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues_
+#if !defined (OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues_) && (INCLUDE_ALL_OrgApacheLuceneIndexMultiDocValues || defined(INCLUDE_OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues))
+#define OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues_
 
-#define OrgApacheLuceneIndexSortedDocValues_RESTRICT 1
-#define OrgApacheLuceneIndexSortedDocValues_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexSortedDocValues 1
+#define INCLUDE_OrgApacheLuceneIndexSortedDocValues 1
 #include "org/apache/lucene/index/SortedDocValues.h"
 
 @class IOSIntArray;
@@ -203,10 +308,22 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_Segment
 @class OrgApacheLuceneIndexMultiDocValues_OrdinalMap;
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief Implements SortedDocValues over n subs, using an OrdinalMap
+ */
 @interface OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues : OrgApacheLuceneIndexSortedDocValues {
  @public
+  /*!
+   @brief docbase for each leaf: parallel with <code>values</code>
+   */
   IOSIntArray *docStarts_;
+  /*!
+   @brief leaf values
+   */
   IOSObjectArray *values_;
+  /*!
+   @brief ordinal map mapping ords from <code>values</code> to global ord space
+   */
   OrgApacheLuceneIndexMultiDocValues_OrdinalMap *mapping_;
 }
 
@@ -220,6 +337,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_Segment
 
 #pragma mark Package-Private
 
+/*!
+ @brief Creates a new MultiSortedDocValues over <code>values</code>
+ */
 - (instancetype)initWithOrgApacheLuceneIndexSortedDocValuesArray:(IOSObjectArray *)values
                                                     withIntArray:(IOSIntArray *)docStarts
                withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:(OrgApacheLuceneIndexMultiDocValues_OrdinalMap *)mapping;
@@ -236,15 +356,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues_i
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues *new_OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues_initWithOrgApacheLuceneIndexSortedDocValuesArray_withIntArray_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_(IOSObjectArray *values, IOSIntArray *docStarts, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *mapping) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues *create_OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues_initWithOrgApacheLuceneIndexSortedDocValuesArray_withIntArray_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_(IOSObjectArray *values, IOSIntArray *docStarts, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *mapping);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues_) && (OrgApacheLuceneIndexMultiDocValues_INCLUDE_ALL || OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues_INCLUDE)
-#define _OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues_
+#if !defined (OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues_) && (INCLUDE_ALL_OrgApacheLuceneIndexMultiDocValues || defined(INCLUDE_OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues))
+#define OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues_
 
-#define OrgApacheLuceneIndexSortedSetDocValues_RESTRICT 1
-#define OrgApacheLuceneIndexSortedSetDocValues_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexSortedSetDocValues 1
+#define INCLUDE_OrgApacheLuceneIndexSortedSetDocValues 1
 #include "org/apache/lucene/index/SortedSetDocValues.h"
 
 @class IOSIntArray;
@@ -253,10 +375,22 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValu
 @class OrgApacheLuceneUtilBytesRef;
 @class OrgApacheLuceneUtilLongValues;
 
+/*!
+ @brief Implements MultiSortedSetDocValues over n subs, using an OrdinalMap
+ */
 @interface OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues : OrgApacheLuceneIndexSortedSetDocValues {
  @public
+  /*!
+   @brief docbase for each leaf: parallel with <code>values</code>
+   */
   IOSIntArray *docStarts_;
+  /*!
+   @brief leaf values
+   */
   IOSObjectArray *values_;
+  /*!
+   @brief ordinal map mapping ords from <code>values</code> to global ord space
+   */
   OrgApacheLuceneIndexMultiDocValues_OrdinalMap *mapping_;
   jint currentSubIndex_;
   OrgApacheLuceneUtilLongValues *currentGlobalOrds_;
@@ -274,6 +408,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValu
 
 #pragma mark Package-Private
 
+/*!
+ @brief Creates a new MultiSortedSetDocValues over <code>values</code>
+ */
 - (instancetype)initWithOrgApacheLuceneIndexSortedSetDocValuesArray:(IOSObjectArray *)values
                                                        withIntArray:(IOSIntArray *)docStarts
                   withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:(OrgApacheLuceneIndexMultiDocValues_OrdinalMap *)mapping;
@@ -291,8 +428,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValue
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues *new_OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues_initWithOrgApacheLuceneIndexSortedSetDocValuesArray_withIntArray_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_(IOSObjectArray *values, IOSIntArray *docStarts, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *mapping) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues *create_OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues_initWithOrgApacheLuceneIndexSortedSetDocValuesArray_withIntArray_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_(IOSObjectArray *values, IOSIntArray *docStarts, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *mapping);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexMultiDocValues_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexMultiDocValues")

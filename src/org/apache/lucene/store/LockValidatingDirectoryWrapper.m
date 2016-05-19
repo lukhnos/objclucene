@@ -73,7 +73,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreLockValidatingDirectoryWrapper, writeLoc
     { "createOutputWithNSString:withOrgApacheLuceneStoreIOContext:", "createOutput", "Lorg.apache.lucene.store.IndexOutput;", 0x1, "Ljava.io.IOException;", NULL },
     { "copyFromWithOrgApacheLuceneStoreDirectory:withNSString:withNSString:withOrgApacheLuceneStoreIOContext:", "copyFrom", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "renameFileWithNSString:withNSString:", "renameFile", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "syncWithJavaUtilCollection:", "sync", "V", 0x1, "Ljava.io.IOException;", NULL },
+    { "syncWithJavaUtilCollection:", "sync", "V", 0x1, "Ljava.io.IOException;", "(Ljava/util/Collection<Ljava/lang/String;>;)V" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "writeLock_", NULL, 0x12, "Lorg.apache.lucene.store.Lock;", NULL, NULL, .constantValue.asLong = 0 },
@@ -90,9 +90,11 @@ void OrgApacheLuceneStoreLockValidatingDirectoryWrapper_initWithOrgApacheLuceneS
 }
 
 OrgApacheLuceneStoreLockValidatingDirectoryWrapper *new_OrgApacheLuceneStoreLockValidatingDirectoryWrapper_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreLock_(OrgApacheLuceneStoreDirectory *inArg, OrgApacheLuceneStoreLock *writeLock) {
-  OrgApacheLuceneStoreLockValidatingDirectoryWrapper *self = [OrgApacheLuceneStoreLockValidatingDirectoryWrapper alloc];
-  OrgApacheLuceneStoreLockValidatingDirectoryWrapper_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreLock_(self, inArg, writeLock);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreLockValidatingDirectoryWrapper, initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreLock_, inArg, writeLock)
+}
+
+OrgApacheLuceneStoreLockValidatingDirectoryWrapper *create_OrgApacheLuceneStoreLockValidatingDirectoryWrapper_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreLock_(OrgApacheLuceneStoreDirectory *inArg, OrgApacheLuceneStoreLock *writeLock) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreLockValidatingDirectoryWrapper, initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreLock_, inArg, writeLock)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreLockValidatingDirectoryWrapper)

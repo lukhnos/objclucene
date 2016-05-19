@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchJoinFakeScorer_INCLUDE_ALL")
-#if OrgApacheLuceneSearchJoinFakeScorer_RESTRICT
-#define OrgApacheLuceneSearchJoinFakeScorer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinFakeScorer")
+#ifdef RESTRICT_OrgApacheLuceneSearchJoinFakeScorer
+#define INCLUDE_ALL_OrgApacheLuceneSearchJoinFakeScorer 0
 #else
-#define OrgApacheLuceneSearchJoinFakeScorer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchJoinFakeScorer 1
 #endif
-#undef OrgApacheLuceneSearchJoinFakeScorer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchJoinFakeScorer
 
-#if !defined (_OrgApacheLuceneSearchJoinFakeScorer_) && (OrgApacheLuceneSearchJoinFakeScorer_INCLUDE_ALL || OrgApacheLuceneSearchJoinFakeScorer_INCLUDE)
-#define _OrgApacheLuceneSearchJoinFakeScorer_
+#if !defined (OrgApacheLuceneSearchJoinFakeScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinFakeScorer || defined(INCLUDE_OrgApacheLuceneSearchJoinFakeScorer))
+#define OrgApacheLuceneSearchJoinFakeScorer_
 
-#define OrgApacheLuceneSearchScorer_RESTRICT 1
-#define OrgApacheLuceneSearchScorer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchScorer 1
+#define INCLUDE_OrgApacheLuceneSearchScorer 1
 #include "org/apache/lucene/search/Scorer.h"
 
 @interface OrgApacheLuceneSearchJoinFakeScorer : OrgApacheLuceneSearchScorer {
@@ -53,8 +53,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinFakeScorer_init(OrgApacheLuceneS
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchJoinFakeScorer *new_OrgApacheLuceneSearchJoinFakeScorer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinFakeScorer *create_OrgApacheLuceneSearchJoinFakeScorer_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinFakeScorer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchJoinFakeScorer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinFakeScorer")

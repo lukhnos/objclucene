@@ -79,9 +79,11 @@ void OrgApacheLuceneAnalysisElGreekStemFilter_initWithOrgApacheLuceneAnalysisTok
 }
 
 OrgApacheLuceneAnalysisElGreekStemFilter *new_OrgApacheLuceneAnalysisElGreekStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) {
-  OrgApacheLuceneAnalysisElGreekStemFilter *self = [OrgApacheLuceneAnalysisElGreekStemFilter alloc];
-  OrgApacheLuceneAnalysisElGreekStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, input);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisElGreekStemFilter, initWithOrgApacheLuceneAnalysisTokenStream_, input)
+}
+
+OrgApacheLuceneAnalysisElGreekStemFilter *create_OrgApacheLuceneAnalysisElGreekStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisElGreekStemFilter, initWithOrgApacheLuceneAnalysisTokenStream_, input)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisElGreekStemFilter)

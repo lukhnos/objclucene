@@ -5,38 +5,65 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_) && (OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_
+#if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode))
+#define OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_
 
 @protocol JavaLangCharSequence;
 @protocol JavaUtilList;
 @protocol JavaUtilMap;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;
 
+/*!
+ @brief A <code>QueryNode</code> is a interface implemented by all nodes on a QueryNode
+ tree.
+ */
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode < NSObject, JavaObject >
 
+/*!
+ @brief convert to a query string understood by the query parser
+ */
 - (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escapeSyntaxParser;
 
+/*!
+ @brief for printing
+ */
 - (NSString *)description;
 
+/*!
+ @brief get Children nodes
+ */
 - (id<JavaUtilList>)getChildren;
 
+/*!
+ @brief verify if a node is a Leaf node
+ */
 - (jboolean)isLeaf;
 
+/*!
+ @brief verify if a node contains a tag
+ */
 - (jboolean)containsTagWithNSString:(NSString *)tagName;
 
+/*!
+ @brief Returns object stored under that tag name
+ */
 - (id)getTagWithNSString:(NSString *)tagName;
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)getParent;
 
+/*!
+ @brief Recursive clone the QueryNode tree The tags are not copied to the new tree
+ when you call the cloneTree() method
+ @return the cloned tree
+ */
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree;
 
 - (void)addWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)child;
@@ -45,15 +72,35 @@
 
 - (void)setWithJavaUtilList:(id<JavaUtilList>)children;
 
+/*!
+ @brief Associate the specified value with the specified tagName.
+ If the tagName
+ already exists, the old value is replaced. The tagName and value cannot be
+ null. tagName will be converted to lowercase.
+ */
 - (void)setTagWithNSString:(NSString *)tagName
                     withId:(id)value;
 
+/*!
+ @brief Unset a tag. tagName will be converted to lowercase.
+ */
 - (void)unsetTagWithNSString:(NSString *)tagName;
 
+/*!
+ @brief Returns a map containing all tags attached to this query node.
+ @return a map containing all tags attached to this query node
+ */
 - (id<JavaUtilMap>)getTagMap;
 
+/*!
+ @brief Removes this query node from its parent.
+ */
 - (void)removeFromParent;
 
+/*!
+ @brief Remove a child node
+ @param childNode Which child to remove
+ */
 - (void)removeChildrenWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)childNode;
 
 @end
@@ -64,4 +111,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode")

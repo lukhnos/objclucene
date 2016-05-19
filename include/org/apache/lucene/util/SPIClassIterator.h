@@ -5,24 +5,30 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilSPIClassIterator_INCLUDE_ALL")
-#if OrgApacheLuceneUtilSPIClassIterator_RESTRICT
-#define OrgApacheLuceneUtilSPIClassIterator_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilSPIClassIterator")
+#ifdef RESTRICT_OrgApacheLuceneUtilSPIClassIterator
+#define INCLUDE_ALL_OrgApacheLuceneUtilSPIClassIterator 0
 #else
-#define OrgApacheLuceneUtilSPIClassIterator_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilSPIClassIterator 1
 #endif
-#undef OrgApacheLuceneUtilSPIClassIterator_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilSPIClassIterator
 
-#if !defined (_OrgApacheLuceneUtilSPIClassIterator_) && (OrgApacheLuceneUtilSPIClassIterator_INCLUDE_ALL || OrgApacheLuceneUtilSPIClassIterator_INCLUDE)
-#define _OrgApacheLuceneUtilSPIClassIterator_
+#if !defined (OrgApacheLuceneUtilSPIClassIterator_) && (INCLUDE_ALL_OrgApacheLuceneUtilSPIClassIterator || defined(INCLUDE_OrgApacheLuceneUtilSPIClassIterator))
+#define OrgApacheLuceneUtilSPIClassIterator_
 
-#define JavaUtilIterator_RESTRICT 1
-#define JavaUtilIterator_INCLUDE 1
+#define RESTRICT_JavaUtilIterator 1
+#define INCLUDE_JavaUtilIterator 1
 #include "java/util/Iterator.h"
 
 @class IOSClass;
 @class JavaLangClassLoader;
 
+/*!
+ @brief Helper class for loading SPI classes from classpath (META-INF files).
+ This is a light impl of <code>java.util.ServiceLoader</code> but is guaranteed to
+ be bug-free regarding classpath order and does not instantiate or initialize
+ the classes found.
+ */
 @interface OrgApacheLuceneUtilSPIClassIterator : NSObject < JavaUtilIterator >
 
 #pragma mark Public
@@ -34,6 +40,10 @@
 
 - (jboolean)hasNext;
 
+/*!
+ @brief Utility method to check if some class loader is a (grand-)parent of or the same as another one.
+ This means the child will be able to load all classes from the parent, too. 
+ */
 + (jboolean)isParentClassLoaderWithJavaLangClassLoader:(JavaLangClassLoader *)parent
                                withJavaLangClassLoader:(JavaLangClassLoader *)child;
 
@@ -55,4 +65,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilSPIClassIterator)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilSPIClassIterator_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilSPIClassIterator")

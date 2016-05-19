@@ -29,23 +29,23 @@ withOrgApacheLuceneUtilPackedPackedInts_FormatAndBits:(OrgApacheLuceneUtilPacked
 - (instancetype)initWithLong:(jlong)size
                      withInt:(jint)pageSize
                      withInt:(jint)bitsPerValue
-withOrgApacheLuceneUtilPackedPackedInts_FormatEnum:(OrgApacheLuceneUtilPackedPackedInts_FormatEnum *)format {
-  OrgApacheLuceneUtilPackedPagedMutable_initWithLong_withInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_FormatEnum_(self, size, pageSize, bitsPerValue, format);
+withOrgApacheLuceneUtilPackedPackedInts_Format:(OrgApacheLuceneUtilPackedPackedInts_Format *)format {
+  OrgApacheLuceneUtilPackedPagedMutable_initWithLong_withInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_Format_(self, size, pageSize, bitsPerValue, format);
   return self;
 }
 
 - (OrgApacheLuceneUtilPackedPackedInts_Mutable *)newMutableWithInt:(jint)valueCount
                                                            withInt:(jint)bitsPerValue {
   JreAssert((self->bitsPerValue_ >= bitsPerValue), (@"org/apache/lucene/util/packed/PagedMutable.java:57 condition failed: assert this.bitsPerValue >= bitsPerValue;"));
-  return OrgApacheLuceneUtilPackedPackedInts_getMutableWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_FormatEnum_(valueCount, self->bitsPerValue_, format_);
+  return OrgApacheLuceneUtilPackedPackedInts_getMutableWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_Format_(valueCount, self->bitsPerValue_, format_);
 }
 
 - (OrgApacheLuceneUtilPackedPagedMutable *)newUnfilledCopyWithLong:(jlong)newSize {
-  return [new_OrgApacheLuceneUtilPackedPagedMutable_initWithLong_withInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_FormatEnum_(newSize, [self pageSize], bitsPerValue_, format_) autorelease];
+  return create_OrgApacheLuceneUtilPackedPagedMutable_initWithLong_withInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_Format_(newSize, [self pageSize], bitsPerValue_, format_);
 }
 
 - (jlong)baseRamBytesUsed {
-  return [super baseRamBytesUsed] + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_);
+  return [super baseRamBytesUsed] + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF);
 }
 
 - (void)dealloc {
@@ -57,9 +57,9 @@ withOrgApacheLuceneUtilPackedPackedInts_FormatEnum:(OrgApacheLuceneUtilPackedPac
   static const J2ObjcMethodInfo methods[] = {
     { "initWithLong:withInt:withInt:withFloat:", "PagedMutable", NULL, 0x1, NULL, NULL },
     { "initWithLong:withInt:withOrgApacheLuceneUtilPackedPackedInts_FormatAndBits:", "PagedMutable", NULL, 0x0, NULL, NULL },
-    { "initWithLong:withInt:withInt:withOrgApacheLuceneUtilPackedPackedInts_FormatEnum:", "PagedMutable", NULL, 0x0, NULL, NULL },
+    { "initWithLong:withInt:withInt:withOrgApacheLuceneUtilPackedPackedInts_Format:", "PagedMutable", NULL, 0x0, NULL, NULL },
     { "newMutableWithInt:withInt:", "newMutable", "Lorg.apache.lucene.util.packed.PackedInts$Mutable;", 0x4, NULL, NULL },
-    { "newUnfilledCopyWithLong:", "newUnfilledCopy", "Lorg.apache.lucene.util.packed.PagedMutable;", 0x4, NULL, NULL },
+    { "newUnfilledCopyWithLong:", "newUnfilledCopy", "Lorg.apache.lucene.util.packed.PagedMutable;", 0x4, NULL, "(J)Lorg/apache/lucene/util/packed/PagedMutable;" },
     { "baseRamBytesUsed", NULL, "J", 0x4, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -78,30 +78,36 @@ void OrgApacheLuceneUtilPackedPagedMutable_initWithLong_withInt_withInt_withFloa
 }
 
 OrgApacheLuceneUtilPackedPagedMutable *new_OrgApacheLuceneUtilPackedPagedMutable_initWithLong_withInt_withInt_withFloat_(jlong size, jint pageSize, jint bitsPerValue, jfloat acceptableOverheadRatio) {
-  OrgApacheLuceneUtilPackedPagedMutable *self = [OrgApacheLuceneUtilPackedPagedMutable alloc];
-  OrgApacheLuceneUtilPackedPagedMutable_initWithLong_withInt_withInt_withFloat_(self, size, pageSize, bitsPerValue, acceptableOverheadRatio);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedPagedMutable, initWithLong_withInt_withInt_withFloat_, size, pageSize, bitsPerValue, acceptableOverheadRatio)
+}
+
+OrgApacheLuceneUtilPackedPagedMutable *create_OrgApacheLuceneUtilPackedPagedMutable_initWithLong_withInt_withInt_withFloat_(jlong size, jint pageSize, jint bitsPerValue, jfloat acceptableOverheadRatio) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedPagedMutable, initWithLong_withInt_withInt_withFloat_, size, pageSize, bitsPerValue, acceptableOverheadRatio)
 }
 
 void OrgApacheLuceneUtilPackedPagedMutable_initWithLong_withInt_withOrgApacheLuceneUtilPackedPackedInts_FormatAndBits_(OrgApacheLuceneUtilPackedPagedMutable *self, jlong size, jint pageSize, OrgApacheLuceneUtilPackedPackedInts_FormatAndBits *formatAndBits) {
-  OrgApacheLuceneUtilPackedPagedMutable_initWithLong_withInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_FormatEnum_(self, size, pageSize, ((OrgApacheLuceneUtilPackedPackedInts_FormatAndBits *) nil_chk(formatAndBits))->bitsPerValue_, formatAndBits->format_);
+  OrgApacheLuceneUtilPackedPagedMutable_initWithLong_withInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_Format_(self, size, pageSize, ((OrgApacheLuceneUtilPackedPackedInts_FormatAndBits *) nil_chk(formatAndBits))->bitsPerValue_, formatAndBits->format_);
 }
 
 OrgApacheLuceneUtilPackedPagedMutable *new_OrgApacheLuceneUtilPackedPagedMutable_initWithLong_withInt_withOrgApacheLuceneUtilPackedPackedInts_FormatAndBits_(jlong size, jint pageSize, OrgApacheLuceneUtilPackedPackedInts_FormatAndBits *formatAndBits) {
-  OrgApacheLuceneUtilPackedPagedMutable *self = [OrgApacheLuceneUtilPackedPagedMutable alloc];
-  OrgApacheLuceneUtilPackedPagedMutable_initWithLong_withInt_withOrgApacheLuceneUtilPackedPackedInts_FormatAndBits_(self, size, pageSize, formatAndBits);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedPagedMutable, initWithLong_withInt_withOrgApacheLuceneUtilPackedPackedInts_FormatAndBits_, size, pageSize, formatAndBits)
 }
 
-void OrgApacheLuceneUtilPackedPagedMutable_initWithLong_withInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_FormatEnum_(OrgApacheLuceneUtilPackedPagedMutable *self, jlong size, jint pageSize, jint bitsPerValue, OrgApacheLuceneUtilPackedPackedInts_FormatEnum *format) {
+OrgApacheLuceneUtilPackedPagedMutable *create_OrgApacheLuceneUtilPackedPagedMutable_initWithLong_withInt_withOrgApacheLuceneUtilPackedPackedInts_FormatAndBits_(jlong size, jint pageSize, OrgApacheLuceneUtilPackedPackedInts_FormatAndBits *formatAndBits) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedPagedMutable, initWithLong_withInt_withOrgApacheLuceneUtilPackedPackedInts_FormatAndBits_, size, pageSize, formatAndBits)
+}
+
+void OrgApacheLuceneUtilPackedPagedMutable_initWithLong_withInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_Format_(OrgApacheLuceneUtilPackedPagedMutable *self, jlong size, jint pageSize, jint bitsPerValue, OrgApacheLuceneUtilPackedPackedInts_Format *format) {
   OrgApacheLuceneUtilPackedAbstractPagedMutable_initWithInt_withLong_withInt_(self, bitsPerValue, size, pageSize);
   JreStrongAssign(&self->format_, format);
 }
 
-OrgApacheLuceneUtilPackedPagedMutable *new_OrgApacheLuceneUtilPackedPagedMutable_initWithLong_withInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_FormatEnum_(jlong size, jint pageSize, jint bitsPerValue, OrgApacheLuceneUtilPackedPackedInts_FormatEnum *format) {
-  OrgApacheLuceneUtilPackedPagedMutable *self = [OrgApacheLuceneUtilPackedPagedMutable alloc];
-  OrgApacheLuceneUtilPackedPagedMutable_initWithLong_withInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_FormatEnum_(self, size, pageSize, bitsPerValue, format);
-  return self;
+OrgApacheLuceneUtilPackedPagedMutable *new_OrgApacheLuceneUtilPackedPagedMutable_initWithLong_withInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_Format_(jlong size, jint pageSize, jint bitsPerValue, OrgApacheLuceneUtilPackedPackedInts_Format *format) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedPagedMutable, initWithLong_withInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_Format_, size, pageSize, bitsPerValue, format)
+}
+
+OrgApacheLuceneUtilPackedPagedMutable *create_OrgApacheLuceneUtilPackedPagedMutable_initWithLong_withInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_Format_(jlong size, jint pageSize, jint bitsPerValue, OrgApacheLuceneUtilPackedPackedInts_Format *format) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedPagedMutable, initWithLong_withInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_Format_, size, pageSize, bitsPerValue, format)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPagedMutable)

@@ -12,9 +12,13 @@
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneDocumentSortedDocValuesField)
 
-OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentSortedDocValuesField_TYPE_;
+OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentSortedDocValuesField_TYPE;
 
 @implementation OrgApacheLuceneDocumentSortedDocValuesField
+
++ (OrgApacheLuceneDocumentFieldType *)TYPE {
+  return OrgApacheLuceneDocumentSortedDocValuesField_TYPE;
+}
 
 - (instancetype)initWithNSString:(NSString *)name
  withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes {
@@ -24,10 +28,10 @@ OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentSortedDocValuesField_TY
 
 + (void)initialize {
   if (self == [OrgApacheLuceneDocumentSortedDocValuesField class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneDocumentSortedDocValuesField_TYPE_, new_OrgApacheLuceneDocumentFieldType_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneDocumentSortedDocValuesField_TYPE, new_OrgApacheLuceneDocumentFieldType_init());
     {
-      [OrgApacheLuceneDocumentSortedDocValuesField_TYPE_ setDocValuesTypeWithOrgApacheLuceneIndexDocValuesTypeEnum:JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, SORTED)];
-      [OrgApacheLuceneDocumentSortedDocValuesField_TYPE_ freeze];
+      [OrgApacheLuceneDocumentSortedDocValuesField_TYPE setDocValuesTypeWithOrgApacheLuceneIndexDocValuesType:JreLoadEnum(OrgApacheLuceneIndexDocValuesType, SORTED)];
+      [OrgApacheLuceneDocumentSortedDocValuesField_TYPE freeze];
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneDocumentSortedDocValuesField)
   }
@@ -38,7 +42,7 @@ OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentSortedDocValuesField_TY
     { "initWithNSString:withOrgApacheLuceneUtilBytesRef:", "SortedDocValuesField", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "TYPE_", NULL, 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentSortedDocValuesField_TYPE_, NULL, .constantValue.asLong = 0 },
+    { "TYPE", "TYPE", 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentSortedDocValuesField_TYPE, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneDocumentSortedDocValuesField = { 2, "SortedDocValuesField", "org.apache.lucene.document", NULL, 0x1, 1, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneDocumentSortedDocValuesField;
@@ -47,14 +51,16 @@ OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentSortedDocValuesField_TY
 @end
 
 void OrgApacheLuceneDocumentSortedDocValuesField_initWithNSString_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneDocumentSortedDocValuesField *self, NSString *name, OrgApacheLuceneUtilBytesRef *bytes) {
-  OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneDocumentFieldType_(self, name, OrgApacheLuceneDocumentSortedDocValuesField_TYPE_);
+  OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneDocumentFieldType_(self, name, OrgApacheLuceneDocumentSortedDocValuesField_TYPE);
   JreStrongAssign(&self->fieldsData_, bytes);
 }
 
 OrgApacheLuceneDocumentSortedDocValuesField *new_OrgApacheLuceneDocumentSortedDocValuesField_initWithNSString_withOrgApacheLuceneUtilBytesRef_(NSString *name, OrgApacheLuceneUtilBytesRef *bytes) {
-  OrgApacheLuceneDocumentSortedDocValuesField *self = [OrgApacheLuceneDocumentSortedDocValuesField alloc];
-  OrgApacheLuceneDocumentSortedDocValuesField_initWithNSString_withOrgApacheLuceneUtilBytesRef_(self, name, bytes);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentSortedDocValuesField, initWithNSString_withOrgApacheLuceneUtilBytesRef_, name, bytes)
+}
+
+OrgApacheLuceneDocumentSortedDocValuesField *create_OrgApacheLuceneDocumentSortedDocValuesField_initWithNSString_withOrgApacheLuceneUtilBytesRef_(NSString *name, OrgApacheLuceneUtilBytesRef *bytes) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentSortedDocValuesField, initWithNSString_withOrgApacheLuceneUtilBytesRef_, name, bytes)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentSortedDocValuesField)

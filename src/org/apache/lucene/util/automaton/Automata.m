@@ -23,20 +23,37 @@
 
 - (instancetype)init;
 
+/*!
+ @brief Constructs sub-automaton corresponding to decimal numbers of length
+ x.substring(n).length().
+ */
 + (jint)anyOfRightLengthWithOrgApacheLuceneUtilAutomatonAutomaton_Builder:(OrgApacheLuceneUtilAutomatonAutomaton_Builder *)builder
                                                              withNSString:(NSString *)x
                                                                   withInt:(jint)n;
 
+/*!
+ @brief Constructs sub-automaton corresponding to decimal numbers of value at least
+ x.substring(n) and length x.substring(n).length().
+ */
 + (jint)atLeastWithOrgApacheLuceneUtilAutomatonAutomaton_Builder:(OrgApacheLuceneUtilAutomatonAutomaton_Builder *)builder
                                                     withNSString:(NSString *)x
                                                          withInt:(jint)n
                                           withJavaUtilCollection:(id<JavaUtilCollection>)initials
                                                      withBoolean:(jboolean)zeros;
 
+/*!
+ @brief Constructs sub-automaton corresponding to decimal numbers of value at most
+ x.substring(n) and length x.substring(n).length().
+ */
 + (jint)atMostWithOrgApacheLuceneUtilAutomatonAutomaton_Builder:(OrgApacheLuceneUtilAutomatonAutomaton_Builder *)builder
                                                    withNSString:(NSString *)x
                                                         withInt:(jint)n;
 
+/*!
+ @brief Constructs sub-automaton corresponding to decimal numbers of value between
+ x.substring(n) and y.substring(n) and of length x.substring(n).length()
+ (which must be equal to y.substring(n).length()).
+ */
 + (jint)betweenWithOrgApacheLuceneUtilAutomatonAutomaton_Builder:(OrgApacheLuceneUtilAutomatonAutomaton_Builder *)builder
                                                     withNSString:(NSString *)x
                                                     withNSString:(NSString *)y
@@ -52,6 +69,8 @@
 __attribute__((unused)) static void OrgApacheLuceneUtilAutomatonAutomata_init(OrgApacheLuceneUtilAutomatonAutomata *self);
 
 __attribute__((unused)) static OrgApacheLuceneUtilAutomatonAutomata *new_OrgApacheLuceneUtilAutomatonAutomata_init() NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneUtilAutomatonAutomata *create_OrgApacheLuceneUtilAutomatonAutomata_init();
 
 __attribute__((unused)) static jint OrgApacheLuceneUtilAutomatonAutomata_anyOfRightLengthWithOrgApacheLuceneUtilAutomatonAutomaton_Builder_withNSString_withInt_(OrgApacheLuceneUtilAutomatonAutomaton_Builder *builder, NSString *x, jint n);
 
@@ -190,16 +209,16 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "appendCharWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:withInt:", "appendChar", "I", 0x9, NULL, NULL },
     { "makeCharRangeWithInt:withInt:", "makeCharRange", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, NULL },
     { "anyOfRightLengthWithOrgApacheLuceneUtilAutomatonAutomaton_Builder:withNSString:withInt:", "anyOfRightLength", "I", 0xa, NULL, NULL },
-    { "atLeastWithOrgApacheLuceneUtilAutomatonAutomaton_Builder:withNSString:withInt:withJavaUtilCollection:withBoolean:", "atLeast", "I", 0xa, NULL, NULL },
+    { "atLeastWithOrgApacheLuceneUtilAutomatonAutomaton_Builder:withNSString:withInt:withJavaUtilCollection:withBoolean:", "atLeast", "I", 0xa, NULL, "(Lorg/apache/lucene/util/automaton/Automaton$Builder;Ljava/lang/String;ILjava/util/Collection<Ljava/lang/Integer;>;Z)I" },
     { "atMostWithOrgApacheLuceneUtilAutomatonAutomaton_Builder:withNSString:withInt:", "atMost", "I", 0xa, NULL, NULL },
-    { "betweenWithOrgApacheLuceneUtilAutomatonAutomaton_Builder:withNSString:withNSString:withInt:withJavaUtilCollection:withBoolean:", "between", "I", 0xa, NULL, NULL },
+    { "betweenWithOrgApacheLuceneUtilAutomatonAutomaton_Builder:withNSString:withNSString:withInt:withJavaUtilCollection:withBoolean:", "between", "I", 0xa, NULL, "(Lorg/apache/lucene/util/automaton/Automaton$Builder;Ljava/lang/String;Ljava/lang/String;ILjava/util/Collection<Ljava/lang/Integer;>;Z)I" },
     { "suffixIsZerosWithOrgApacheLuceneUtilBytesRef:withInt:", "suffixIsZeros", "Z", 0xa, NULL, NULL },
     { "makeBinaryIntervalWithOrgApacheLuceneUtilBytesRef:withBoolean:withOrgApacheLuceneUtilBytesRef:withBoolean:", "makeBinaryInterval", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, NULL },
     { "makeDecimalIntervalWithInt:withInt:withInt:", "makeDecimalInterval", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, "Ljava.lang.IllegalArgumentException;", NULL },
     { "makeStringWithNSString:", "makeString", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, NULL },
     { "makeBinaryWithOrgApacheLuceneUtilBytesRef:", "makeBinary", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, NULL },
     { "makeStringWithIntArray:withInt:withInt:", "makeString", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, NULL },
-    { "makeStringUnionWithJavaUtilCollection:", "makeStringUnion", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, NULL },
+    { "makeStringUnionWithJavaUtilCollection:", "makeStringUnion", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, "(Ljava/util/Collection<Lorg/apache/lucene/util/BytesRef;>;)Lorg/apache/lucene/util/automaton/Automaton;" },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonAutomata = { 2, "Automata", "org.apache.lucene.util.automaton", NULL, 0x11, 21, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilAutomatonAutomata;
@@ -212,21 +231,23 @@ void OrgApacheLuceneUtilAutomatonAutomata_init(OrgApacheLuceneUtilAutomatonAutom
 }
 
 OrgApacheLuceneUtilAutomatonAutomata *new_OrgApacheLuceneUtilAutomatonAutomata_init() {
-  OrgApacheLuceneUtilAutomatonAutomata *self = [OrgApacheLuceneUtilAutomatonAutomata alloc];
-  OrgApacheLuceneUtilAutomatonAutomata_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAutomatonAutomata, init)
+}
+
+OrgApacheLuceneUtilAutomatonAutomata *create_OrgApacheLuceneUtilAutomatonAutomata_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAutomatonAutomata, init)
 }
 
 OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_makeEmpty() {
   OrgApacheLuceneUtilAutomatonAutomata_initialize();
-  OrgApacheLuceneUtilAutomatonAutomaton *a = [new_OrgApacheLuceneUtilAutomatonAutomaton_init() autorelease];
+  OrgApacheLuceneUtilAutomatonAutomaton *a = create_OrgApacheLuceneUtilAutomatonAutomaton_init();
   [a finishState];
   return a;
 }
 
 OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_makeEmptyString() {
   OrgApacheLuceneUtilAutomatonAutomata_initialize();
-  OrgApacheLuceneUtilAutomatonAutomaton *a = [new_OrgApacheLuceneUtilAutomatonAutomaton_init() autorelease];
+  OrgApacheLuceneUtilAutomatonAutomaton *a = create_OrgApacheLuceneUtilAutomatonAutomaton_init();
   [a createState];
   [a setAcceptWithInt:0 withBoolean:true];
   return a;
@@ -234,7 +255,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_make
 
 OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_makeAnyString() {
   OrgApacheLuceneUtilAutomatonAutomata_initialize();
-  OrgApacheLuceneUtilAutomatonAutomaton *a = [new_OrgApacheLuceneUtilAutomatonAutomaton_init() autorelease];
+  OrgApacheLuceneUtilAutomatonAutomaton *a = create_OrgApacheLuceneUtilAutomatonAutomaton_init();
   jint s = [a createState];
   [a setAcceptWithInt:s withBoolean:true];
   [a addTransitionWithInt:s withInt:s withInt:JavaLangCharacter_MIN_CODE_POINT withInt:JavaLangCharacter_MAX_CODE_POINT];
@@ -244,7 +265,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_make
 
 OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_makeAnyBinary() {
   OrgApacheLuceneUtilAutomatonAutomata_initialize();
-  OrgApacheLuceneUtilAutomatonAutomaton *a = [new_OrgApacheLuceneUtilAutomatonAutomaton_init() autorelease];
+  OrgApacheLuceneUtilAutomatonAutomaton *a = create_OrgApacheLuceneUtilAutomatonAutomaton_init();
   jint s = [a createState];
   [a setAcceptWithInt:s withBoolean:true];
   [a addTransitionWithInt:s withInt:s withInt:0 withInt:255];
@@ -281,7 +302,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_make
   if (min > max) {
     return OrgApacheLuceneUtilAutomatonAutomata_makeEmpty();
   }
-  OrgApacheLuceneUtilAutomatonAutomaton *a = [new_OrgApacheLuceneUtilAutomatonAutomaton_init() autorelease];
+  OrgApacheLuceneUtilAutomatonAutomaton *a = create_OrgApacheLuceneUtilAutomatonAutomaton_init();
   jint s1 = [a createState];
   jint s2 = [a createState];
   [a setAcceptWithInt:s2 withBoolean:true];
@@ -376,22 +397,22 @@ jboolean OrgApacheLuceneUtilAutomatonAutomata_suffixIsZerosWithOrgApacheLuceneUt
 OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_makeBinaryIntervalWithOrgApacheLuceneUtilBytesRef_withBoolean_withOrgApacheLuceneUtilBytesRef_withBoolean_(OrgApacheLuceneUtilBytesRef *min, jboolean minInclusive, OrgApacheLuceneUtilBytesRef *max, jboolean maxInclusive) {
   OrgApacheLuceneUtilAutomatonAutomata_initialize();
   if (min == nil && minInclusive == false) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"minInclusive must be true when min is null (open ended)") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"minInclusive must be true when min is null (open ended)");
   }
   if (max == nil && maxInclusive == false) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"maxInclusive must be true when max is null (open ended)") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"maxInclusive must be true when max is null (open ended)");
   }
   if (min == nil) {
-    min = [new_OrgApacheLuceneUtilBytesRef_init() autorelease];
+    min = create_OrgApacheLuceneUtilBytesRef_init();
     minInclusive = true;
   }
   jint cmp;
   if (max != nil) {
-    cmp = [((OrgApacheLuceneUtilBytesRef *) nil_chk(min)) compareToWithId:max];
+    cmp = [min compareToWithId:max];
   }
   else {
     cmp = -1;
-    if (((OrgApacheLuceneUtilBytesRef *) nil_chk(min))->length_ == 0 && minInclusive) {
+    if (min->length_ == 0 && minInclusive) {
       return OrgApacheLuceneUtilAutomatonAutomata_makeAnyBinary();
     }
   }
@@ -406,7 +427,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_make
   else if (cmp > 0) {
     return OrgApacheLuceneUtilAutomatonAutomata_makeEmpty();
   }
-  if (max != nil && OrgApacheLuceneUtilStringHelper_startsWithWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(max, min) && OrgApacheLuceneUtilAutomatonAutomata_suffixIsZerosWithOrgApacheLuceneUtilBytesRef_withInt_(max, ((OrgApacheLuceneUtilBytesRef *) nil_chk(min))->length_)) {
+  if (max != nil && OrgApacheLuceneUtilStringHelper_startsWithWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(max, min) && OrgApacheLuceneUtilAutomatonAutomata_suffixIsZerosWithOrgApacheLuceneUtilBytesRef_withInt_(max, min->length_)) {
     jint maxLength = max->length_;
     JreAssert((maxLength > min->length_), (@"org/apache/lucene/util/automaton/Automata.java:282 condition failed: assert maxLength > min.length;"));
     if (maxInclusive == false) {
@@ -420,7 +441,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_make
         return OrgApacheLuceneUtilAutomatonAutomata_makeBinaryWithOrgApacheLuceneUtilBytesRef_(min);
       }
     }
-    OrgApacheLuceneUtilAutomatonAutomaton *a = [new_OrgApacheLuceneUtilAutomatonAutomaton_init() autorelease];
+    OrgApacheLuceneUtilAutomatonAutomaton *a = create_OrgApacheLuceneUtilAutomatonAutomaton_init();
     jint lastState = [a createState];
     for (jint i = 0; i < min->length_; i++) {
       jint state = [a createState];
@@ -440,7 +461,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_make
     [a finishState];
     return a;
   }
-  OrgApacheLuceneUtilAutomatonAutomaton *a = [new_OrgApacheLuceneUtilAutomatonAutomaton_init() autorelease];
+  OrgApacheLuceneUtilAutomatonAutomaton *a = create_OrgApacheLuceneUtilAutomatonAutomaton_init();
   jint startState = [a createState];
   jint sinkState = [a createState];
   [a setAcceptWithInt:sinkState withBoolean:true];
@@ -449,7 +470,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_make
   jint lastState = startState;
   jint firstMaxState = -1;
   jint sharedPrefixLength = 0;
-  for (jint i = 0; i < ((OrgApacheLuceneUtilBytesRef *) nil_chk(min))->length_; i++) {
+  for (jint i = 0; i < min->length_; i++) {
     jint minLabel = IOSByteArray_Get(nil_chk(min->bytes_), min->offset_ + i) & (jint) 0xff;
     jint maxLabel;
     if (max != nil && equalPrefix && i < max->length_) {
@@ -542,28 +563,28 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_make
   NSString *x = JavaLangInteger_toStringWithInt_(min);
   NSString *y = JavaLangInteger_toStringWithInt_(max);
   if (min > max || (digits > 0 && ((jint) [((NSString *) nil_chk(y)) length]) > digits)) {
-    @throw [new_JavaLangIllegalArgumentException_init() autorelease];
+    @throw create_JavaLangIllegalArgumentException_init();
   }
   jint d;
   if (digits > 0) d = digits;
   else d = ((jint) [((NSString *) nil_chk(y)) length]);
-  JavaLangStringBuilder *bx = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *bx = create_JavaLangStringBuilder_init();
   for (jint i = ((jint) [((NSString *) nil_chk(x)) length]); i < d; i++) {
     [bx appendWithChar:'0'];
   }
   [bx appendWithNSString:x];
   x = [bx description];
-  JavaLangStringBuilder *by = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *by = create_JavaLangStringBuilder_init();
   for (jint i = ((jint) [((NSString *) nil_chk(y)) length]); i < d; i++) {
     [by appendWithChar:'0'];
   }
   [by appendWithNSString:y];
   y = [by description];
-  OrgApacheLuceneUtilAutomatonAutomaton_Builder *builder = [new_OrgApacheLuceneUtilAutomatonAutomaton_Builder_init() autorelease];
+  OrgApacheLuceneUtilAutomatonAutomaton_Builder *builder = create_OrgApacheLuceneUtilAutomatonAutomaton_Builder_init();
   if (digits <= 0) {
     [builder createState];
   }
-  id<JavaUtilCollection> initials = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilCollection> initials = create_JavaUtilArrayList_init();
   OrgApacheLuceneUtilAutomatonAutomata_betweenWithOrgApacheLuceneUtilAutomatonAutomaton_Builder_withNSString_withNSString_withInt_withJavaUtilCollection_withBoolean_(builder, x, y, 0, initials, digits <= 0);
   OrgApacheLuceneUtilAutomatonAutomaton *a1 = [builder finish];
   if (digits <= 0) {
@@ -579,7 +600,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_make
 
 OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_makeStringWithNSString_(NSString *s) {
   OrgApacheLuceneUtilAutomatonAutomata_initialize();
-  OrgApacheLuceneUtilAutomatonAutomaton *a = [new_OrgApacheLuceneUtilAutomatonAutomaton_init() autorelease];
+  OrgApacheLuceneUtilAutomatonAutomaton *a = create_OrgApacheLuceneUtilAutomatonAutomaton_init();
   jint lastState = [a createState];
   for (jint i = 0, cp = 0; i < ((jint) [((NSString *) nil_chk(s)) length]); i += JavaLangCharacter_charCountWithInt_(cp)) {
     jint state = [a createState];
@@ -596,7 +617,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_make
 
 OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_makeBinaryWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *term) {
   OrgApacheLuceneUtilAutomatonAutomata_initialize();
-  OrgApacheLuceneUtilAutomatonAutomaton *a = [new_OrgApacheLuceneUtilAutomatonAutomaton_init() autorelease];
+  OrgApacheLuceneUtilAutomatonAutomaton *a = create_OrgApacheLuceneUtilAutomatonAutomaton_init();
   jint lastState = [a createState];
   for (jint i = 0; i < ((OrgApacheLuceneUtilBytesRef *) nil_chk(term))->length_; i++) {
     jint state = [a createState];
@@ -613,7 +634,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_make
 
 OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_makeStringWithIntArray_withInt_withInt_(IOSIntArray *word, jint offset, jint length) {
   OrgApacheLuceneUtilAutomatonAutomata_initialize();
-  OrgApacheLuceneUtilAutomatonAutomaton *a = [new_OrgApacheLuceneUtilAutomatonAutomaton_init() autorelease];
+  OrgApacheLuceneUtilAutomatonAutomaton *a = create_OrgApacheLuceneUtilAutomatonAutomaton_init();
   [a createState];
   jint s = 0;
   for (jint i = offset; i < offset + length; i++) {

@@ -64,9 +64,11 @@ void OrgApacheLuceneAnalysisFaPersianCharFilter_initWithJavaIoReader_(OrgApacheL
 }
 
 OrgApacheLuceneAnalysisFaPersianCharFilter *new_OrgApacheLuceneAnalysisFaPersianCharFilter_initWithJavaIoReader_(JavaIoReader *inArg) {
-  OrgApacheLuceneAnalysisFaPersianCharFilter *self = [OrgApacheLuceneAnalysisFaPersianCharFilter alloc];
-  OrgApacheLuceneAnalysisFaPersianCharFilter_initWithJavaIoReader_(self, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisFaPersianCharFilter, initWithJavaIoReader_, inArg)
+}
+
+OrgApacheLuceneAnalysisFaPersianCharFilter *create_OrgApacheLuceneAnalysisFaPersianCharFilter_initWithJavaIoReader_(JavaIoReader *inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisFaPersianCharFilter, initWithJavaIoReader_, inArg)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisFaPersianCharFilter)

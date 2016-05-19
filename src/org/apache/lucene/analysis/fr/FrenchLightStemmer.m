@@ -23,7 +23,7 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisFrFrenchLightStemmer_
 - (jint)stemWithCharArray:(IOSCharArray *)s
                   withInt:(jint)len {
   if (len > 5 && IOSCharArray_Get(nil_chk(s), len - 1) == 'x') {
-    if (IOSCharArray_Get(s, len - 3) == 'a' && IOSCharArray_Get(s, len - 2) == 'u' && IOSCharArray_Get(s, len - 4) != 'e') *IOSCharArray_GetRef(s, len - 2) = 'l';
+    if (IOSCharArray_Get(nil_chk(s), len - 3) == 'a' && IOSCharArray_Get(s, len - 2) == 'u' && IOSCharArray_Get(s, len - 4) != 'e') *IOSCharArray_GetRef(s, len - 2) = 'l';
     len--;
   }
   if (len > 3 && IOSCharArray_Get(nil_chk(s), len - 1) == 'x') len--;
@@ -154,7 +154,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   static const J2ObjcMethodInfo methods[] = {
     { "stemWithCharArray:withInt:", "stem", "I", 0x1, NULL, NULL },
     { "normWithCharArray:withInt:", "norm", "I", 0x2, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "FrenchLightStemmer", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisFrFrenchLightStemmer = { 2, "FrenchLightStemmer", "org.apache.lucene.analysis.fr", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisFrFrenchLightStemmer;
@@ -210,9 +210,11 @@ void OrgApacheLuceneAnalysisFrFrenchLightStemmer_init(OrgApacheLuceneAnalysisFrF
 }
 
 OrgApacheLuceneAnalysisFrFrenchLightStemmer *new_OrgApacheLuceneAnalysisFrFrenchLightStemmer_init() {
-  OrgApacheLuceneAnalysisFrFrenchLightStemmer *self = [OrgApacheLuceneAnalysisFrFrenchLightStemmer alloc];
-  OrgApacheLuceneAnalysisFrFrenchLightStemmer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisFrFrenchLightStemmer, init)
+}
+
+OrgApacheLuceneAnalysisFrFrenchLightStemmer *create_OrgApacheLuceneAnalysisFrFrenchLightStemmer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisFrFrenchLightStemmer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisFrFrenchLightStemmer)

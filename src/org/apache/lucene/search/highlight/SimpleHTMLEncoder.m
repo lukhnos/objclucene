@@ -41,9 +41,11 @@ void OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_init(OrgApacheLuceneSearchH
 }
 
 OrgApacheLuceneSearchHighlightSimpleHTMLEncoder *new_OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_init() {
-  OrgApacheLuceneSearchHighlightSimpleHTMLEncoder *self = [OrgApacheLuceneSearchHighlightSimpleHTMLEncoder alloc];
-  OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchHighlightSimpleHTMLEncoder, init)
+}
+
+OrgApacheLuceneSearchHighlightSimpleHTMLEncoder *create_OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchHighlightSimpleHTMLEncoder, init)
 }
 
 NSString *OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_htmlEncodeWithNSString_(NSString *plainText) {
@@ -51,7 +53,7 @@ NSString *OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_htmlEncodeWithNSString
   if (plainText == nil || ((jint) [plainText length]) == 0) {
     return @"";
   }
-  JavaLangStringBuilder *result = [new_JavaLangStringBuilder_initWithInt_(((jint) [((NSString *) nil_chk(plainText)) length])) autorelease];
+  JavaLangStringBuilder *result = create_JavaLangStringBuilder_initWithInt_(((jint) [plainText length]));
   for (jint index = 0; index < ((jint) [plainText length]); index++) {
     jchar ch = [plainText charAtWithInt:index];
     switch (ch) {

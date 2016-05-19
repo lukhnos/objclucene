@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchMinShouldMatchSumScorer_INCLUDE_ALL")
-#if OrgApacheLuceneSearchMinShouldMatchSumScorer_RESTRICT
-#define OrgApacheLuceneSearchMinShouldMatchSumScorer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchMinShouldMatchSumScorer")
+#ifdef RESTRICT_OrgApacheLuceneSearchMinShouldMatchSumScorer
+#define INCLUDE_ALL_OrgApacheLuceneSearchMinShouldMatchSumScorer 0
 #else
-#define OrgApacheLuceneSearchMinShouldMatchSumScorer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchMinShouldMatchSumScorer 1
 #endif
-#undef OrgApacheLuceneSearchMinShouldMatchSumScorer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchMinShouldMatchSumScorer
 
-#if !defined (_OrgApacheLuceneSearchMinShouldMatchSumScorer_) && (OrgApacheLuceneSearchMinShouldMatchSumScorer_INCLUDE_ALL || OrgApacheLuceneSearchMinShouldMatchSumScorer_INCLUDE)
-#define _OrgApacheLuceneSearchMinShouldMatchSumScorer_
+#if !defined (OrgApacheLuceneSearchMinShouldMatchSumScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchMinShouldMatchSumScorer || defined(INCLUDE_OrgApacheLuceneSearchMinShouldMatchSumScorer))
+#define OrgApacheLuceneSearchMinShouldMatchSumScorer_
 
-#define OrgApacheLuceneSearchScorer_RESTRICT 1
-#define OrgApacheLuceneSearchScorer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchScorer 1
+#define INCLUDE_OrgApacheLuceneSearchScorer 1
 #include "org/apache/lucene/search/Scorer.h"
 
 @class IOSFloatArray;
@@ -27,6 +27,20 @@
 @class OrgApacheLuceneSearchWeight;
 @protocol JavaUtilCollection;
 
+/*!
+ @brief A <code>Scorer</code> for <code>BooleanQuery</code> when
+ <code>minShouldMatch</code> is
+ between 2 and the total number of clauses.
+ This implementation keeps sub scorers in 3 different places:
+ - lead: a linked list of scorer that are positioned on the desired doc ID
+ - tail: a heap that contains at most minShouldMatch - 1 scorers that are
+ behind the desired doc ID. These scorers are ordered by cost so that we
+ can advance the least costly ones first.
+ - head: a heap that contains scorers which are beyond the desired doc ID,
+ ordered by doc ID in order to move quickly to the next candidate.
+ Finding the next match consists of first setting the desired doc ID to the
+ least entry in 'head' and then advance 'tail' until there is a match.
+ */
 @interface OrgApacheLuceneSearchMinShouldMatchSumScorer : OrgApacheLuceneSearchScorer {
  @public
   jint minShouldMatch_;
@@ -78,8 +92,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchMinShouldMatchSumScorer_initWithOrgA
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchMinShouldMatchSumScorer *new_OrgApacheLuceneSearchMinShouldMatchSumScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilCollection_withInt_withFloatArray_(OrgApacheLuceneSearchWeight *weight, id<JavaUtilCollection> scorers, jint minShouldMatch, IOSFloatArray *coord) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchMinShouldMatchSumScorer *create_OrgApacheLuceneSearchMinShouldMatchSumScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilCollection_withInt_withFloatArray_(OrgApacheLuceneSearchWeight *weight, id<JavaUtilCollection> scorers, jint minShouldMatch, IOSFloatArray *coord);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMinShouldMatchSumScorer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchMinShouldMatchSumScorer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchMinShouldMatchSumScorer")

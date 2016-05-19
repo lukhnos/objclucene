@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexBufferedUpdatesStream_INCLUDE_ALL")
-#if OrgApacheLuceneIndexBufferedUpdatesStream_RESTRICT
-#define OrgApacheLuceneIndexBufferedUpdatesStream_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexBufferedUpdatesStream")
+#ifdef RESTRICT_OrgApacheLuceneIndexBufferedUpdatesStream
+#define INCLUDE_ALL_OrgApacheLuceneIndexBufferedUpdatesStream 0
 #else
-#define OrgApacheLuceneIndexBufferedUpdatesStream_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexBufferedUpdatesStream 1
 #endif
-#undef OrgApacheLuceneIndexBufferedUpdatesStream_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexBufferedUpdatesStream
 
-#if !defined (_OrgApacheLuceneIndexBufferedUpdatesStream_) && (OrgApacheLuceneIndexBufferedUpdatesStream_INCLUDE_ALL || OrgApacheLuceneIndexBufferedUpdatesStream_INCLUDE)
-#define _OrgApacheLuceneIndexBufferedUpdatesStream_
+#if !defined (OrgApacheLuceneIndexBufferedUpdatesStream_) && (INCLUDE_ALL_OrgApacheLuceneIndexBufferedUpdatesStream || defined(INCLUDE_OrgApacheLuceneIndexBufferedUpdatesStream))
+#define OrgApacheLuceneIndexBufferedUpdatesStream_
 
-#define OrgApacheLuceneUtilAccountable_RESTRICT 1
-#define OrgApacheLuceneUtilAccountable_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAccountable 1
+#define INCLUDE_OrgApacheLuceneUtilAccountable 1
 #include "org/apache/lucene/util/Accountable.h"
 
 @class OrgApacheLuceneIndexBufferedUpdatesStream_ApplyDeletesResult;
@@ -36,6 +36,11 @@
 
 - (jboolean)any;
 
+/*!
+ @brief Resolves the buffered deleted Term/Query/docIDs, into
+ actual deleted docIDs in the liveDocs MutableBits for
+ each SegmentReader.
+ */
 - (OrgApacheLuceneIndexBufferedUpdatesStream_ApplyDeletesResult *)applyDeletesAndUpdatesWithOrgApacheLuceneIndexIndexWriter_ReaderPool:(OrgApacheLuceneIndexIndexWriter_ReaderPool *)pool
                                                                                                                       withJavaUtilList:(id<JavaUtilList>)infos;
 
@@ -63,12 +68,14 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexBufferedUpdatesStream_initWithOrgApac
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexBufferedUpdatesStream *new_OrgApacheLuceneIndexBufferedUpdatesStream_initWithOrgApacheLuceneUtilInfoStream_(OrgApacheLuceneUtilInfoStream *infoStream) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexBufferedUpdatesStream *create_OrgApacheLuceneIndexBufferedUpdatesStream_initWithOrgApacheLuceneUtilInfoStream_(OrgApacheLuceneUtilInfoStream *infoStream);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexBufferedUpdatesStream)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexBufferedUpdatesStream_ApplyDeletesResult_) && (OrgApacheLuceneIndexBufferedUpdatesStream_INCLUDE_ALL || OrgApacheLuceneIndexBufferedUpdatesStream_ApplyDeletesResult_INCLUDE)
-#define _OrgApacheLuceneIndexBufferedUpdatesStream_ApplyDeletesResult_
+#if !defined (OrgApacheLuceneIndexBufferedUpdatesStream_ApplyDeletesResult_) && (INCLUDE_ALL_OrgApacheLuceneIndexBufferedUpdatesStream || defined(INCLUDE_OrgApacheLuceneIndexBufferedUpdatesStream_ApplyDeletesResult))
+#define OrgApacheLuceneIndexBufferedUpdatesStream_ApplyDeletesResult_
 
 @protocol JavaUtilList;
 
@@ -95,12 +102,14 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexBufferedUpdatesStream_ApplyDeletesRes
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexBufferedUpdatesStream_ApplyDeletesResult *new_OrgApacheLuceneIndexBufferedUpdatesStream_ApplyDeletesResult_initWithBoolean_withLong_withJavaUtilList_(jboolean anyDeletes, jlong gen, id<JavaUtilList> allDeleted) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexBufferedUpdatesStream_ApplyDeletesResult *create_OrgApacheLuceneIndexBufferedUpdatesStream_ApplyDeletesResult_initWithBoolean_withLong_withJavaUtilList_(jboolean anyDeletes, jlong gen, id<JavaUtilList> allDeleted);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexBufferedUpdatesStream_ApplyDeletesResult)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexBufferedUpdatesStream_SegmentState_) && (OrgApacheLuceneIndexBufferedUpdatesStream_INCLUDE_ALL || OrgApacheLuceneIndexBufferedUpdatesStream_SegmentState_INCLUDE)
-#define _OrgApacheLuceneIndexBufferedUpdatesStream_SegmentState_
+#if !defined (OrgApacheLuceneIndexBufferedUpdatesStream_SegmentState_) && (INCLUDE_ALL_OrgApacheLuceneIndexBufferedUpdatesStream || defined(INCLUDE_OrgApacheLuceneIndexBufferedUpdatesStream_SegmentState))
+#define OrgApacheLuceneIndexBufferedUpdatesStream_SegmentState_
 
 @class OrgApacheLuceneIndexIndexWriter_ReaderPool;
 @class OrgApacheLuceneIndexPostingsEnum;
@@ -143,19 +152,24 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexBufferedUpdatesStream_SegmentState_in
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexBufferedUpdatesStream_SegmentState *new_OrgApacheLuceneIndexBufferedUpdatesStream_SegmentState_initWithOrgApacheLuceneIndexIndexWriter_ReaderPool_withOrgApacheLuceneIndexSegmentCommitInfo_(OrgApacheLuceneIndexIndexWriter_ReaderPool *pool, OrgApacheLuceneIndexSegmentCommitInfo *info) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexBufferedUpdatesStream_SegmentState *create_OrgApacheLuceneIndexBufferedUpdatesStream_SegmentState_initWithOrgApacheLuceneIndexIndexWriter_ReaderPool_withOrgApacheLuceneIndexSegmentCommitInfo_(OrgApacheLuceneIndexIndexWriter_ReaderPool *pool, OrgApacheLuceneIndexSegmentCommitInfo *info);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexBufferedUpdatesStream_SegmentState)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexBufferedUpdatesStream_SegmentQueue_) && (OrgApacheLuceneIndexBufferedUpdatesStream_INCLUDE_ALL || OrgApacheLuceneIndexBufferedUpdatesStream_SegmentQueue_INCLUDE)
-#define _OrgApacheLuceneIndexBufferedUpdatesStream_SegmentQueue_
+#if !defined (OrgApacheLuceneIndexBufferedUpdatesStream_SegmentQueue_) && (INCLUDE_ALL_OrgApacheLuceneIndexBufferedUpdatesStream || defined(INCLUDE_OrgApacheLuceneIndexBufferedUpdatesStream_SegmentQueue))
+#define OrgApacheLuceneIndexBufferedUpdatesStream_SegmentQueue_
 
-#define OrgApacheLuceneUtilPriorityQueue_RESTRICT 1
-#define OrgApacheLuceneUtilPriorityQueue_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilPriorityQueue 1
+#define INCLUDE_OrgApacheLuceneUtilPriorityQueue 1
 #include "org/apache/lucene/util/PriorityQueue.h"
 
 @class OrgApacheLuceneIndexBufferedUpdatesStream_SegmentState;
 
+/*!
+ @brief Does a merge sort by current term across all segments.
+ */
 @interface OrgApacheLuceneIndexBufferedUpdatesStream_SegmentQueue : OrgApacheLuceneUtilPriorityQueue
 
 #pragma mark Public
@@ -175,12 +189,14 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexBufferedUpdatesStream_SegmentQueue_in
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexBufferedUpdatesStream_SegmentQueue *new_OrgApacheLuceneIndexBufferedUpdatesStream_SegmentQueue_initWithInt_(jint size) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexBufferedUpdatesStream_SegmentQueue *create_OrgApacheLuceneIndexBufferedUpdatesStream_SegmentQueue_initWithInt_(jint size);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexBufferedUpdatesStream_SegmentQueue)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexBufferedUpdatesStream_QueryAndLimit_) && (OrgApacheLuceneIndexBufferedUpdatesStream_INCLUDE_ALL || OrgApacheLuceneIndexBufferedUpdatesStream_QueryAndLimit_INCLUDE)
-#define _OrgApacheLuceneIndexBufferedUpdatesStream_QueryAndLimit_
+#if !defined (OrgApacheLuceneIndexBufferedUpdatesStream_QueryAndLimit_) && (INCLUDE_ALL_OrgApacheLuceneIndexBufferedUpdatesStream || defined(INCLUDE_OrgApacheLuceneIndexBufferedUpdatesStream_QueryAndLimit))
+#define OrgApacheLuceneIndexBufferedUpdatesStream_QueryAndLimit_
 
 @class OrgApacheLuceneSearchQuery;
 
@@ -205,8 +221,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexBufferedUpdatesStream_QueryAndLimit_i
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexBufferedUpdatesStream_QueryAndLimit *new_OrgApacheLuceneIndexBufferedUpdatesStream_QueryAndLimit_initWithOrgApacheLuceneSearchQuery_withInt_(OrgApacheLuceneSearchQuery *query, jint limit) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexBufferedUpdatesStream_QueryAndLimit *create_OrgApacheLuceneIndexBufferedUpdatesStream_QueryAndLimit_initWithOrgApacheLuceneSearchQuery_withInt_(OrgApacheLuceneSearchQuery *query, jint limit);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexBufferedUpdatesStream_QueryAndLimit)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexBufferedUpdatesStream_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexBufferedUpdatesStream")

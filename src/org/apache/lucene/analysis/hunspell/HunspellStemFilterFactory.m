@@ -38,20 +38,25 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory, di
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory, affixFile_, NSString *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory, dictionary_, OrgApacheLuceneAnalysisHunspellDictionary *)
 
-static NSString *OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_PARAM_DICTIONARY_ = @"dictionary";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory, PARAM_DICTIONARY_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_get_PARAM_DICTIONARY();
+static NSString *OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_PARAM_DICTIONARY = @"dictionary";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory, PARAM_DICTIONARY, NSString *)
 
-static NSString *OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_PARAM_AFFIX_ = @"affix";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory, PARAM_AFFIX_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_get_PARAM_AFFIX();
+static NSString *OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_PARAM_AFFIX = @"affix";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory, PARAM_AFFIX, NSString *)
 
-static NSString *OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_PARAM_RECURSION_CAP_ = @"recursionCap";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory, PARAM_RECURSION_CAP_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_get_PARAM_RECURSION_CAP();
+static NSString *OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_PARAM_RECURSION_CAP = @"recursionCap";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory, PARAM_RECURSION_CAP, NSString *)
 
-static NSString *OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_PARAM_IGNORE_CASE_ = @"ignoreCase";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory, PARAM_IGNORE_CASE_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_get_PARAM_IGNORE_CASE();
+static NSString *OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_PARAM_IGNORE_CASE = @"ignoreCase";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory, PARAM_IGNORE_CASE, NSString *)
 
-static NSString *OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_PARAM_LONGEST_ONLY_ = @"longestOnly";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory, PARAM_LONGEST_ONLY_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_get_PARAM_LONGEST_ONLY();
+static NSString *OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_PARAM_LONGEST_ONLY = @"longestOnly";
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory, PARAM_LONGEST_ONLY, NSString *)
 
 @implementation OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory
 
@@ -63,9 +68,9 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHunspellHunspellStemFilterFact
 - (void)informWithOrgApacheLuceneAnalysisUtilResourceLoader:(id<OrgApacheLuceneAnalysisUtilResourceLoader>)loader {
   IOSObjectArray *dicts = [((NSString *) nil_chk(dictionaryFiles_)) split:@","];
   JavaIoInputStream *affix = nil;
-  id<JavaUtilList> dictionaries = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> dictionaries = create_JavaUtilArrayList_init();
   @try {
-    dictionaries = [new_JavaUtilArrayList_init() autorelease];
+    dictionaries = create_JavaUtilArrayList_init();
     {
       IOSObjectArray *a__ = dicts;
       NSString * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
@@ -79,7 +84,7 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHunspellHunspellStemFilterFact
     JreStrongAssignAndConsume(&self->dictionary_, new_OrgApacheLuceneAnalysisHunspellDictionary_initWithJavaIoInputStream_withJavaUtilList_withBoolean_(affix, dictionaries, ignoreCase_));
   }
   @catch (JavaTextParseException *e) {
-    @throw [new_JavaIoIOException_initWithNSString_withJavaLangThrowable_(JreStrcat("$@$$C", @"Unable to load hunspell data! [dictionary=", dictionaries, @",affix=", affixFile_, ']'), e) autorelease];
+    @throw create_JavaIoIOException_initWithNSString_withNSException_(JreStrcat("$@$$C", @"Unable to load hunspell data! [dictionary=", dictionaries, @",affix=", affixFile_, ']'), e);
   }
   @finally {
     OrgApacheLuceneUtilIOUtils_closeWhileHandlingExceptionWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ affix } count:1 type:JavaIoCloseable_class_()]);
@@ -88,7 +93,7 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHunspellHunspellStemFilterFact
 }
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream {
-  return [new_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_withBoolean_withBoolean_(tokenStream, dictionary_, true, longestOnly_) autorelease];
+  return create_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_withBoolean_withBoolean_(tokenStream, dictionary_, true, longestOnly_);
 }
 
 - (void)dealloc {
@@ -100,16 +105,16 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHunspellHunspellStemFilterFact
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "HunspellStemFilterFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "HunspellStemFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "informWithOrgApacheLuceneAnalysisUtilResourceLoader:", "inform", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenStream;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "PARAM_DICTIONARY_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_PARAM_DICTIONARY_, NULL, .constantValue.asLong = 0 },
-    { "PARAM_AFFIX_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_PARAM_AFFIX_, NULL, .constantValue.asLong = 0 },
-    { "PARAM_RECURSION_CAP_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_PARAM_RECURSION_CAP_, NULL, .constantValue.asLong = 0 },
-    { "PARAM_IGNORE_CASE_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_PARAM_IGNORE_CASE_, NULL, .constantValue.asLong = 0 },
-    { "PARAM_LONGEST_ONLY_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_PARAM_LONGEST_ONLY_, NULL, .constantValue.asLong = 0 },
+    { "PARAM_DICTIONARY", "PARAM_DICTIONARY", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_PARAM_DICTIONARY, NULL, .constantValue.asLong = 0 },
+    { "PARAM_AFFIX", "PARAM_AFFIX", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_PARAM_AFFIX, NULL, .constantValue.asLong = 0 },
+    { "PARAM_RECURSION_CAP", "PARAM_RECURSION_CAP", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_PARAM_RECURSION_CAP, NULL, .constantValue.asLong = 0 },
+    { "PARAM_IGNORE_CASE", "PARAM_IGNORE_CASE", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_PARAM_IGNORE_CASE, NULL, .constantValue.asLong = 0 },
+    { "PARAM_LONGEST_ONLY", "PARAM_LONGEST_ONLY", 0x1a, "Ljava.lang.String;", &OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_PARAM_LONGEST_ONLY, NULL, .constantValue.asLong = 0 },
     { "dictionaryFiles_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
     { "affixFile_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
     { "ignoreCase_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
@@ -124,21 +129,23 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHunspellHunspellStemFilterFact
 
 void OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory *self, id<JavaUtilMap> args) {
   OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  JreStrongAssign(&self->dictionaryFiles_, [self requireWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_PARAM_DICTIONARY_]);
-  JreStrongAssign(&self->affixFile_, [self getWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_PARAM_AFFIX_]);
-  self->ignoreCase_ = [self getBooleanWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_PARAM_IGNORE_CASE_ withBoolean:false];
-  self->longestOnly_ = [self getBooleanWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_PARAM_LONGEST_ONLY_ withBoolean:false];
+  JreStrongAssign(&self->dictionaryFiles_, [self requireWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_PARAM_DICTIONARY]);
+  JreStrongAssign(&self->affixFile_, [self getWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_PARAM_AFFIX]);
+  self->ignoreCase_ = [self getBooleanWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_PARAM_IGNORE_CASE withBoolean:false];
+  self->longestOnly_ = [self getBooleanWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_PARAM_LONGEST_ONLY withBoolean:false];
   [self getBooleanWithJavaUtilMap:args withNSString:@"strictAffixParsing" withBoolean:true];
   [self getIntWithJavaUtilMap:args withNSString:@"recursionCap" withInt:0];
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory *new_OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory *self = [OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory alloc];
-  OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory *create_OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory)

@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_INCLUDE_ALL")
-#if OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_RESTRICT
-#define OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer")
+#ifdef RESTRICT_OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer
+#define INCLUDE_ALL_OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer 0
 #else
-#define OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer 1
 #endif
-#undef OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer
 
-#if !defined (_OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_) && (OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_INCLUDE_ALL || OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_INCLUDE)
-#define _OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_
+#if !defined (OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer || defined(INCLUDE_OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer))
+#define OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_
 
-#define OrgApacheLuceneSearchScorer_RESTRICT 1
-#define OrgApacheLuceneSearchScorer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchScorer 1
+#define INCLUDE_OrgApacheLuceneSearchScorer 1
 #include "org/apache/lucene/search/Scorer.h"
 
 @class OrgApacheLuceneIndexSortedDocValues;
@@ -67,4 +67,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer")

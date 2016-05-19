@@ -5,41 +5,110 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_RESTRICT
-#define OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter 0
 #else
-#define OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter
 
-#if !defined (_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_) && (OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_
+#if !defined (OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter || defined(INCLUDE_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter))
+#define OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter;
 @class OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream;
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief This TokenFilter provides the ability to set aside attribute states
+ that have already been analyzed.
+ This is useful in situations where multiple fields share
+ many common analysis steps and then go their separate ways.
+ <p>
+ It is also useful for doing things like entity extraction or proper noun analysis as
+ part of the analysis workflow and saving off those tokens for use in another field.
+ <pre class="prettyprint">
+ TeeSinkTokenFilter source1 = new TeeSinkTokenFilter(new WhitespaceTokenizer(version, reader1));
+ TeeSinkTokenFilter.SinkTokenStream sink1 = source1.newSinkTokenStream();
+ TeeSinkTokenFilter.SinkTokenStream sink2 = source1.newSinkTokenStream();
+ TeeSinkTokenFilter source2 = new TeeSinkTokenFilter(new WhitespaceTokenizer(version, reader2));
+ source2.addSinkTokenStream(sink1);
+ source2.addSinkTokenStream(sink2);
+ TokenStream final1 = new LowerCaseFilter(version, source1);
+ TokenStream final2 = source2;
+ TokenStream final3 = new EntityDetect(sink1);
+ TokenStream final4 = new URLDetect(sink2);
+ d.add(new TextField("f1", final1, Field.Store.NO));
+ d.add(new TextField("f2", final2, Field.Store.NO));
+ d.add(new TextField("f3", final3, Field.Store.NO));
+ d.add(new TextField("f4", final4, Field.Store.NO));
+ 
+@endcode
+ In this example, <code>sink1</code> and <code>sink2</code> will both get tokens from both
+ <code>reader1</code> and <code>reader2</code> after whitespace tokenizer
+ and now we can further wrap any of these in extra analysis, and more "sources" can be inserted if desired.
+ It is important, that tees are consumed before sinks (in the above example, the field names must be
+ less the sink's field names). If you are not sure, which stream is consumed first, you can simply
+ add another sink and then pass all tokens to the sinks at once using <code>consumeAllTokens</code>.
+ This TokenFilter is exhausted after this. In the above example, change
+ the example above to:
+ <pre class="prettyprint">
+ ...
+ TokenStream final1 = new LowerCaseFilter(version, source1.newSinkTokenStream());
+ TokenStream final2 = source2.newSinkTokenStream();
+ sink1.consumeAllTokens();
+ sink2.consumeAllTokens();
+ ...
+ 
+@endcode
+ In this case, the fields can be added in any order, because the sources are not used anymore and all sinks are ready.
+ <p>Note, the EntityDetect and URLDetect TokenStreams are for the example and do not currently exist in Lucene.
+ */
 @interface OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
+/*!
+ @brief Instantiates a new TeeSinkTokenFilter.
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
 
+/*!
+ @brief Adds a <code>SinkTokenStream</code> created by another <code>TeeSinkTokenFilter</code>
+ to this one.
+ The supplied stream will also receive all consumed tokens.
+ This method can be used to pass tokens from two different tees to one sink.
+ */
 - (void)addSinkTokenStreamWithOrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream:(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream *)sink;
 
+/*!
+ @brief <code>TeeSinkTokenFilter</code> passes all tokens to the added sinks
+ when itself is consumed.
+ To be sure, that all tokens from the input
+ stream are passed to the sinks, you can call this methods.
+ This instance is exhausted after this, but all sinks are instant available.
+ */
 - (void)consumeAllTokens;
 
 - (void)end;
 
 - (jboolean)incrementToken;
 
+/*!
+ @brief Returns a new <code>SinkTokenStream</code> that receives all tokens consumed by this stream.
+ */
 - (OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream *)newSinkTokenStream OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Returns a new <code>SinkTokenStream</code> that receives all tokens consumed by this stream
+ that pass the supplied filter.
+ - seealso: SinkFilter
+ */
 - (OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream *)newSinkTokenStreamWithOrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter:(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter *)filter OBJC_METHOD_FAMILY_NONE;
 
 @end
@@ -50,23 +119,37 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_initWithOr
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter *new_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter *create_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter)
 
 #endif
 
-#if !defined (_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter_) && (OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter_
+#if !defined (OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter || defined(INCLUDE_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter))
+#define OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter_
 
 @class OrgApacheLuceneUtilAttributeSource;
 
+/*!
+ @brief A filter that decides which <code>AttributeSource</code> states to store in the sink.
+ */
 @interface OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @brief Returns true, iff the current state of the passed-in <code>AttributeSource</code> shall be stored
+ in the sink.
+ */
 - (jboolean)acceptWithOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)source;
 
+/*!
+ @brief Called by <code>SinkTokenStream.reset()</code>.
+ This method does nothing by default
+ and can optionally be overridden.
+ */
 - (void)reset;
 
 @end
@@ -79,13 +162,16 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFi
 
 #endif
 
-#if !defined (_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream_) && (OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream_INCLUDE)
-#define _OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream_
+#if !defined (OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter || defined(INCLUDE_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream))
+#define OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream_
 
-#define OrgApacheLuceneAnalysisTokenStream_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenStream_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenStream 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenStream 1
 #include "org/apache/lucene/analysis/TokenStream.h"
 
+/*!
+ @brief TokenStream output from a tee with optional filtering.
+ */
 @interface OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream : OrgApacheLuceneAnalysisTokenStream
 
 #pragma mark Public
@@ -104,4 +190,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTo
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter")

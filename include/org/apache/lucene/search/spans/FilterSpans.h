@@ -5,27 +5,34 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSpansFilterSpans_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSpansFilterSpans_RESTRICT
-#define OrgApacheLuceneSearchSpansFilterSpans_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansFilterSpans")
+#ifdef RESTRICT_OrgApacheLuceneSearchSpansFilterSpans
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansFilterSpans 0
 #else
-#define OrgApacheLuceneSearchSpansFilterSpans_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansFilterSpans 1
 #endif
-#undef OrgApacheLuceneSearchSpansFilterSpans_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSpansFilterSpans
 
-#if !defined (_OrgApacheLuceneSearchSpansFilterSpans_) && (OrgApacheLuceneSearchSpansFilterSpans_INCLUDE_ALL || OrgApacheLuceneSearchSpansFilterSpans_INCLUDE)
-#define _OrgApacheLuceneSearchSpansFilterSpans_
+#if !defined (OrgApacheLuceneSearchSpansFilterSpans_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansFilterSpans || defined(INCLUDE_OrgApacheLuceneSearchSpansFilterSpans))
+#define OrgApacheLuceneSearchSpansFilterSpans_
 
-#define OrgApacheLuceneSearchSpansSpans_RESTRICT 1
-#define OrgApacheLuceneSearchSpansSpans_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSpansSpans 1
+#define INCLUDE_OrgApacheLuceneSearchSpansSpans 1
 #include "org/apache/lucene/search/spans/Spans.h"
 
-@class OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum;
+@class OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus;
 @class OrgApacheLuceneSearchTwoPhaseIterator;
 @protocol OrgApacheLuceneSearchSpansSpanCollector;
 
+/*!
+ @brief A <code>Spans</code> implementation wrapping another spans instance,
+ allowing to filter spans matches easily by implementing <code>accept</code>
+ */
 @interface OrgApacheLuceneSearchSpansFilterSpans : OrgApacheLuceneSearchSpansSpans {
  @public
+  /*!
+   @brief The wrapped spans instance.
+   */
   OrgApacheLuceneSearchSpansSpans *in_;
 }
 
@@ -55,9 +62,17 @@
 
 #pragma mark Protected
 
+/*!
+ @brief Wrap the given <code>Spans</code>.
+ */
 - (instancetype)initWithOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)inArg;
 
-- (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum *)acceptWithOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)candidate;
+/*!
+ @brief Returns YES if the candidate should be an accepted match,
+ NO if it should not, and NO_MORE_IN_CURRENT_DOC if iteration
+ should move on to the next document.
+ */
+- (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *)acceptWithOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)candidate;
 
 @end
 
@@ -71,48 +86,75 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansFilterSpans)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_) && (OrgApacheLuceneSearchSpansFilterSpans_INCLUDE_ALL || OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_INCLUDE)
-#define _OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_
+#if !defined (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpansFilterSpans || defined(INCLUDE_OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus))
+#define OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_
 
-#define JavaLangEnum_RESTRICT 1
-#define JavaLangEnum_INCLUDE 1
+#define RESTRICT_JavaLangEnum 1
+#define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
 
-typedef NS_ENUM(NSUInteger, OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus) {
-  OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_YES = 0,
-  OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_NO = 1,
-  OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_NO_MORE_IN_CURRENT_DOC = 2,
+typedef NS_ENUM(NSUInteger, OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_Enum) {
+  OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_Enum_YES = 0,
+  OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_Enum_NO = 1,
+  OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_Enum_NO_MORE_IN_CURRENT_DOC = 2,
 };
 
-@interface OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum : JavaLangEnum < NSCopying >
+/*!
+ @brief Status returned from <code>FilterSpans.accept(Spans)</code> that indicates
+ whether a candidate match should be accepted, rejected, or rejected
+ and move on to the next document.
+ */
+@interface OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus : JavaLangEnum < NSCopying >
+
++ (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *)YES_;
+
++ (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *)NO_;
+
++ (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *)NO_MORE_IN_CURRENT_DOC;
 
 #pragma mark Package-Private
 
 + (IOSObjectArray *)values;
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_values();
 
-+ (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum *)valueOfWithNSString:(NSString *)name;
-FOUNDATION_EXPORT OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum *OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_valueOfWithNSString_(NSString *name);
++ (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *)valueOfWithNSString:(NSString *)name;
 
 - (id)copyWithZone:(NSZone *)zone;
+- (OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_Enum)toNSEnum;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum)
+J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus)
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum *OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_values_[];
+/*! INTERNAL ONLY - Use enum accessors declared below. */
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_values_[];
 
-#define OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_YES OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_values_[OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_YES]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum, YES)
+/*!
+ @brief Indicates the match should be accepted
+ */
+inline OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_get_YES();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus, YES)
 
-#define OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_NO OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_values_[OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_NO]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum, NO)
+/*!
+ @brief Indicates the match should be rejected
+ */
+inline OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_get_NO();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus, NO)
 
-#define OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_NO_MORE_IN_CURRENT_DOC OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum_values_[OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_NO_MORE_IN_CURRENT_DOC]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum, NO_MORE_IN_CURRENT_DOC)
+/*!
+ @brief Indicates the match should be rejected, and the enumeration may continue
+ with the next document.
+ */
+inline OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_get_NO_MORE_IN_CURRENT_DOC();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus, NO_MORE_IN_CURRENT_DOC)
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum)
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_values();
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_valueOfWithNSString_(NSString *name);
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus *OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_fromOrdinal(NSUInteger ordinal);
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSpansFilterSpans_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansFilterSpans")

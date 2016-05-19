@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilOfflineSorter_INCLUDE_ALL")
-#if OrgApacheLuceneUtilOfflineSorter_RESTRICT
-#define OrgApacheLuceneUtilOfflineSorter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilOfflineSorter")
+#ifdef RESTRICT_OrgApacheLuceneUtilOfflineSorter
+#define INCLUDE_ALL_OrgApacheLuceneUtilOfflineSorter 0
 #else
-#define OrgApacheLuceneUtilOfflineSorter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilOfflineSorter 1
 #endif
-#undef OrgApacheLuceneUtilOfflineSorter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilOfflineSorter
 
-#if !defined (_OrgApacheLuceneUtilOfflineSorter_) && (OrgApacheLuceneUtilOfflineSorter_INCLUDE_ALL || OrgApacheLuceneUtilOfflineSorter_INCLUDE)
-#define _OrgApacheLuceneUtilOfflineSorter_
+#if !defined (OrgApacheLuceneUtilOfflineSorter_) && (INCLUDE_ALL_OrgApacheLuceneUtilOfflineSorter || defined(INCLUDE_OrgApacheLuceneUtilOfflineSorter))
+#define OrgApacheLuceneUtilOfflineSorter_
 
 @class OrgApacheLuceneUtilOfflineSorter_BufferSize;
 @class OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader;
@@ -23,71 +23,158 @@
 @protocol JavaUtilComparator;
 @protocol JavaUtilList;
 
-#define OrgApacheLuceneUtilOfflineSorter_MB 1048576LL
-#define OrgApacheLuceneUtilOfflineSorter_GB 1073741824LL
-#define OrgApacheLuceneUtilOfflineSorter_MIN_BUFFER_SIZE_MB 32LL
-#define OrgApacheLuceneUtilOfflineSorter_ABSOLUTE_MIN_SORT_BUFFER_SIZE 524288LL
-#define OrgApacheLuceneUtilOfflineSorter_MAX_TEMPFILES 128
-
+/*!
+ @brief On-disk sorting of byte arrays.
+ Each byte array (entry) is a composed of the following
+ fields:
+ <ul>
+ <li>(two bytes) length of the following byte array,
+ <li>exactly the above count of bytes for the sequence to be sorted.
+ </ul>
+ - seealso: #sort(Path,Path)
+ */
 @interface OrgApacheLuceneUtilOfflineSorter : NSObject
+
++ (jlong)MB;
+
++ (jlong)GB;
+
++ (jlong)MIN_BUFFER_SIZE_MB;
+
++ (jlong)ABSOLUTE_MIN_SORT_BUFFER_SIZE;
+
++ (jint)MAX_TEMPFILES;
+
++ (id<JavaUtilComparator>)DEFAULT_COMPARATOR;
 
 #pragma mark Public
 
+/*!
+ @brief Defaults constructor.
+ - seealso: #defaultTempDir()
+ - seealso: BufferSize#automatic()
+ */
 - (instancetype)init;
 
+/*!
+ @brief Defaults constructor with a custom comparator.
+ - seealso: #defaultTempDir()
+ - seealso: BufferSize#automatic()
+ */
 - (instancetype)initWithJavaUtilComparator:(id<JavaUtilComparator>)comparator;
 
+/*!
+ @brief All-details constructor.
+ */
 - (instancetype)initWithJavaUtilComparator:(id<JavaUtilComparator>)comparator
 withOrgApacheLuceneUtilOfflineSorter_BufferSize:(OrgApacheLuceneUtilOfflineSorter_BufferSize *)ramBufferSize
           withOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)tempDirectory
                                    withInt:(jint)maxTempfiles;
 
+/*!
+ @brief Returns the default temporary directory.
+ By default, java.io.tmpdir. If not accessible
+ or not available, an IOException is thrown
+ */
 + (OrgLukhnosPortmobileFilePath *)defaultTempDir;
 
+/*!
+ @brief Returns the comparator in use to sort entries
+ */
 - (id<JavaUtilComparator>)getComparator;
 
+/*!
+ @brief Sort input to output, explicit hint for the buffer size.
+ The amount of allocated
+ memory may deviate from the hint (may be smaller or larger).  
+ */
 - (OrgApacheLuceneUtilOfflineSorter_SortInfo *)sortWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)input
                                                    withOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)output;
 
 #pragma mark Protected
 
+/*!
+ @brief Sort a single partition in-memory.
+ */
 - (OrgLukhnosPortmobileFilePath *)sortPartitionWithInt:(jint)len;
 
 #pragma mark Package-Private
 
+/*!
+ @brief Merge a list of sorted temporary files (partitions) into an output file
+ */
 - (void)mergePartitionsWithJavaUtilList:(id<JavaUtilList>)merges
        withOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)outputFile;
 
+/*!
+ @brief Read in a single partition of data
+ */
 - (jint)readPartitionWithOrgApacheLuceneUtilOfflineSorter_ByteSequencesReader:(OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *)reader;
 
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilOfflineSorter)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilOfflineSorter, MB, jlong)
+/*!
+ @brief Convenience constant for megabytes
+ */
+inline jlong OrgApacheLuceneUtilOfflineSorter_get_MB();
+#define OrgApacheLuceneUtilOfflineSorter_MB 1048576LL
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilOfflineSorter, MB, jlong)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilOfflineSorter, GB, jlong)
+/*!
+ @brief Convenience constant for gigabytes
+ */
+inline jlong OrgApacheLuceneUtilOfflineSorter_get_GB();
+#define OrgApacheLuceneUtilOfflineSorter_GB 1073741824LL
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilOfflineSorter, GB, jlong)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilOfflineSorter, MIN_BUFFER_SIZE_MB, jlong)
+/*!
+ @brief Minimum recommended buffer size for sorting.
+ */
+inline jlong OrgApacheLuceneUtilOfflineSorter_get_MIN_BUFFER_SIZE_MB();
+#define OrgApacheLuceneUtilOfflineSorter_MIN_BUFFER_SIZE_MB 32LL
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilOfflineSorter, MIN_BUFFER_SIZE_MB, jlong)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilOfflineSorter, ABSOLUTE_MIN_SORT_BUFFER_SIZE, jlong)
+/*!
+ @brief Absolute minimum required buffer size for sorting.
+ */
+inline jlong OrgApacheLuceneUtilOfflineSorter_get_ABSOLUTE_MIN_SORT_BUFFER_SIZE();
+#define OrgApacheLuceneUtilOfflineSorter_ABSOLUTE_MIN_SORT_BUFFER_SIZE 524288LL
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilOfflineSorter, ABSOLUTE_MIN_SORT_BUFFER_SIZE, jlong)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilOfflineSorter, MAX_TEMPFILES, jint)
+/*!
+ @brief Maximum number of temporary files before doing an intermediate merge.
+ */
+inline jint OrgApacheLuceneUtilOfflineSorter_get_MAX_TEMPFILES();
+#define OrgApacheLuceneUtilOfflineSorter_MAX_TEMPFILES 128
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilOfflineSorter, MAX_TEMPFILES, jint)
 
-FOUNDATION_EXPORT id<JavaUtilComparator> OrgApacheLuceneUtilOfflineSorter_DEFAULT_COMPARATOR_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilOfflineSorter, DEFAULT_COMPARATOR_, id<JavaUtilComparator>)
+/*!
+ @brief Default comparator: sorts in binary (codepoint) order
+ */
+inline id<JavaUtilComparator> OrgApacheLuceneUtilOfflineSorter_get_DEFAULT_COMPARATOR();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT id<JavaUtilComparator> OrgApacheLuceneUtilOfflineSorter_DEFAULT_COMPARATOR;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilOfflineSorter, DEFAULT_COMPARATOR, id<JavaUtilComparator>)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilOfflineSorter_init(OrgApacheLuceneUtilOfflineSorter *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilOfflineSorter *new_OrgApacheLuceneUtilOfflineSorter_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilOfflineSorter *create_OrgApacheLuceneUtilOfflineSorter_init();
+
 FOUNDATION_EXPORT void OrgApacheLuceneUtilOfflineSorter_initWithJavaUtilComparator_(OrgApacheLuceneUtilOfflineSorter *self, id<JavaUtilComparator> comparator);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilOfflineSorter *new_OrgApacheLuceneUtilOfflineSorter_initWithJavaUtilComparator_(id<JavaUtilComparator> comparator) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilOfflineSorter *create_OrgApacheLuceneUtilOfflineSorter_initWithJavaUtilComparator_(id<JavaUtilComparator> comparator);
+
 FOUNDATION_EXPORT void OrgApacheLuceneUtilOfflineSorter_initWithJavaUtilComparator_withOrgApacheLuceneUtilOfflineSorter_BufferSize_withOrgLukhnosPortmobileFilePath_withInt_(OrgApacheLuceneUtilOfflineSorter *self, id<JavaUtilComparator> comparator, OrgApacheLuceneUtilOfflineSorter_BufferSize *ramBufferSize, OrgLukhnosPortmobileFilePath *tempDirectory, jint maxTempfiles);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilOfflineSorter *new_OrgApacheLuceneUtilOfflineSorter_initWithJavaUtilComparator_withOrgApacheLuceneUtilOfflineSorter_BufferSize_withOrgLukhnosPortmobileFilePath_withInt_(id<JavaUtilComparator> comparator, OrgApacheLuceneUtilOfflineSorter_BufferSize *ramBufferSize, OrgLukhnosPortmobileFilePath *tempDirectory, jint maxTempfiles) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilOfflineSorter *create_OrgApacheLuceneUtilOfflineSorter_initWithJavaUtilComparator_withOrgApacheLuceneUtilOfflineSorter_BufferSize_withOrgLukhnosPortmobileFilePath_withInt_(id<JavaUtilComparator> comparator, OrgApacheLuceneUtilOfflineSorter_BufferSize *ramBufferSize, OrgLukhnosPortmobileFilePath *tempDirectory, jint maxTempfiles);
 
 FOUNDATION_EXPORT OrgLukhnosPortmobileFilePath *OrgApacheLuceneUtilOfflineSorter_defaultTempDir();
 
@@ -95,9 +182,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilOfflineSorter)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilOfflineSorter_BufferSize_) && (OrgApacheLuceneUtilOfflineSorter_INCLUDE_ALL || OrgApacheLuceneUtilOfflineSorter_BufferSize_INCLUDE)
-#define _OrgApacheLuceneUtilOfflineSorter_BufferSize_
+#if !defined (OrgApacheLuceneUtilOfflineSorter_BufferSize_) && (INCLUDE_ALL_OrgApacheLuceneUtilOfflineSorter || defined(INCLUDE_OrgApacheLuceneUtilOfflineSorter_BufferSize))
+#define OrgApacheLuceneUtilOfflineSorter_BufferSize_
 
+/*!
+ @brief A bit more descriptive unit for constructors.
+ - seealso: #automatic()
+ - seealso: #megabytes(long)
+ */
 @interface OrgApacheLuceneUtilOfflineSorter_BufferSize : NSObject {
  @public
   jint bytes_;
@@ -105,8 +197,20 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilOfflineSorter)
 
 #pragma mark Public
 
+/*!
+ @brief Approximately half of the currently available free heap, but no less
+ than <code>ABSOLUTE_MIN_SORT_BUFFER_SIZE</code>.
+ However if current heap allocation 
+ is insufficient or if there is a large portion of unallocated heap-space available 
+ for sorting consult with max allowed heap size. 
+ */
 + (OrgApacheLuceneUtilOfflineSorter_BufferSize *)automatic;
 
+/*!
+ @brief Creates a <code>BufferSize</code> in MB.
+ The given 
+ values must be &gt; 0 and &lt; 2048.
+ */
 + (OrgApacheLuceneUtilOfflineSorter_BufferSize *)megabytesWithLong:(jlong)mb;
 
 @end
@@ -121,25 +225,55 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilOfflineSorter_BufferSize)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilOfflineSorter_SortInfo_) && (OrgApacheLuceneUtilOfflineSorter_INCLUDE_ALL || OrgApacheLuceneUtilOfflineSorter_SortInfo_INCLUDE)
-#define _OrgApacheLuceneUtilOfflineSorter_SortInfo_
+#if !defined (OrgApacheLuceneUtilOfflineSorter_SortInfo_) && (INCLUDE_ALL_OrgApacheLuceneUtilOfflineSorter || defined(INCLUDE_OrgApacheLuceneUtilOfflineSorter_SortInfo))
+#define OrgApacheLuceneUtilOfflineSorter_SortInfo_
 
 @class OrgApacheLuceneUtilOfflineSorter;
 
+/*!
+ @brief Sort info (debugging mostly).
+ */
 @interface OrgApacheLuceneUtilOfflineSorter_SortInfo : NSObject {
  @public
+  /*!
+   @brief number of temporary files created when merging partitions
+   */
   jint tempMergeFiles_;
+  /*!
+   @brief number of partition merges
+   */
   jint mergeRounds_;
+  /*!
+   @brief number of lines of data read
+   */
   jint lines_;
+  /*!
+   @brief time spent merging sorted partitions (in milliseconds)
+   */
   jlong mergeTime_;
+  /*!
+   @brief time spent sorting data (in milliseconds)
+   */
   jlong sortTime_;
+  /*!
+   @brief total time spent (in milliseconds)
+   */
   jlong totalTime_;
+  /*!
+   @brief time spent in i/o read (in milliseconds)
+   */
   jlong readTime_;
+  /*!
+   @brief read buffer size (in bytes)
+   */
   jlong bufferSize_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief create a new SortInfo (with empty statistics) for debugging
+ */
 - (instancetype)initWithOrgApacheLuceneUtilOfflineSorter:(OrgApacheLuceneUtilOfflineSorter *)outer$;
 
 - (NSString *)description;
@@ -152,12 +286,14 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilOfflineSorter_SortInfo_initWithOrgApac
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilOfflineSorter_SortInfo *new_OrgApacheLuceneUtilOfflineSorter_SortInfo_initWithOrgApacheLuceneUtilOfflineSorter_(OrgApacheLuceneUtilOfflineSorter *outer$) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilOfflineSorter_SortInfo *create_OrgApacheLuceneUtilOfflineSorter_SortInfo_initWithOrgApacheLuceneUtilOfflineSorter_(OrgApacheLuceneUtilOfflineSorter *outer$);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilOfflineSorter_SortInfo)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilOfflineSorter_FileAndTop_) && (OrgApacheLuceneUtilOfflineSorter_INCLUDE_ALL || OrgApacheLuceneUtilOfflineSorter_FileAndTop_INCLUDE)
-#define _OrgApacheLuceneUtilOfflineSorter_FileAndTop_
+#if !defined (OrgApacheLuceneUtilOfflineSorter_FileAndTop_) && (INCLUDE_ALL_OrgApacheLuceneUtilOfflineSorter || defined(INCLUDE_OrgApacheLuceneUtilOfflineSorter_FileAndTop))
+#define OrgApacheLuceneUtilOfflineSorter_FileAndTop_
 
 @class IOSByteArray;
 @class OrgApacheLuceneUtilBytesRefBuilder;
@@ -183,15 +319,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilOfflineSorter_FileAndTop_initWithInt_w
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilOfflineSorter_FileAndTop *new_OrgApacheLuceneUtilOfflineSorter_FileAndTop_initWithInt_withByteArray_(jint fd, IOSByteArray *firstLine) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilOfflineSorter_FileAndTop *create_OrgApacheLuceneUtilOfflineSorter_FileAndTop_initWithInt_withByteArray_(jint fd, IOSByteArray *firstLine);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilOfflineSorter_FileAndTop)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter_) && (OrgApacheLuceneUtilOfflineSorter_INCLUDE_ALL || OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter_INCLUDE)
-#define _OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter_
+#if !defined (OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter_) && (INCLUDE_ALL_OrgApacheLuceneUtilOfflineSorter || defined(INCLUDE_OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter))
+#define OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter_
 
-#define JavaIoCloseable_RESTRICT 1
-#define JavaIoCloseable_INCLUDE 1
+#define RESTRICT_JavaIoCloseable 1
+#define INCLUDE_JavaIoCloseable 1
 #include "java/io/Closeable.h"
 
 @class IOSByteArray;
@@ -199,22 +337,49 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilOfflineSorter_FileAndTop)
 @class OrgLukhnosPortmobileFilePath;
 @protocol JavaIoDataOutput;
 
+/*!
+ @brief Utility class to emit length-prefixed byte[] entries to an output stream for sorting.
+ Complementary to <code>ByteSequencesReader</code>.
+ */
 @interface OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter : NSObject < JavaIoCloseable >
 
 #pragma mark Public
 
+/*!
+ @brief Constructs a ByteSequencesWriter to the provided DataOutput
+ */
 - (instancetype)initWithJavaIoDataOutput:(id<JavaIoDataOutput>)os;
 
+/*!
+ @brief Constructs a ByteSequencesWriter to the provided Path
+ */
 - (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path;
 
+/*!
+ @brief Closes the provided <code>DataOutput</code> if it is <code>Closeable</code>.
+ */
 - (void)close;
 
+/*!
+ @brief Writes a byte array.
+ - seealso: #write(byte[],int,int)
+ */
 - (void)writeWithByteArray:(IOSByteArray *)bytes;
 
+/*!
+ @brief Writes a byte array.
+ <p>
+ The length is written as a <code>short</code>, followed
+ by the bytes.
+ */
 - (void)writeWithByteArray:(IOSByteArray *)bytes
                    withInt:(jint)off
                    withInt:(jint)len;
 
+/*!
+ @brief Writes a BytesRef.
+ - seealso: #write(byte[],int,int)
+ */
 - (void)writeWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)ref;
 
 @end
@@ -225,19 +390,23 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter_init
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter *new_OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter *create_OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path);
+
 FOUNDATION_EXPORT void OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter_initWithJavaIoDataOutput_(OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter *self, id<JavaIoDataOutput> os);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter *new_OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter_initWithJavaIoDataOutput_(id<JavaIoDataOutput> os) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter *create_OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter_initWithJavaIoDataOutput_(id<JavaIoDataOutput> os);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_) && (OrgApacheLuceneUtilOfflineSorter_INCLUDE_ALL || OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_INCLUDE)
-#define _OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_
+#if !defined (OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_) && (INCLUDE_ALL_OrgApacheLuceneUtilOfflineSorter || defined(INCLUDE_OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader))
+#define OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_
 
-#define JavaIoCloseable_RESTRICT 1
-#define JavaIoCloseable_INCLUDE 1
+#define RESTRICT_JavaIoCloseable 1
+#define INCLUDE_JavaIoCloseable 1
 #include "java/io/Closeable.h"
 
 @class IOSByteArray;
@@ -245,18 +414,46 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter)
 @class OrgLukhnosPortmobileFilePath;
 @protocol JavaIoDataInput;
 
+/*!
+ @brief Utility class to read length-prefixed byte[] entries from an input.
+ Complementary to <code>ByteSequencesWriter</code>.
+ */
 @interface OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader : NSObject < JavaIoCloseable >
 
 #pragma mark Public
 
+/*!
+ @brief Constructs a ByteSequencesReader from the provided DataInput
+ */
 - (instancetype)initWithJavaIoDataInput:(id<JavaIoDataInput>)is;
 
+/*!
+ @brief Constructs a ByteSequencesReader from the provided Path
+ */
 - (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path;
 
+/*!
+ @brief Closes the provided <code>DataInput</code> if it is <code>Closeable</code>.
+ */
 - (void)close;
 
+/*!
+ @brief Reads the next entry and returns it if successful.
+ - seealso: #read(BytesRefBuilder)
+ @return Returns <code>null</code> if EOF occurred before the next entry
+ could be read.
+ @throws EOFException if the file ends before the full sequence is read.
+ */
 - (IOSByteArray *)read;
 
+/*!
+ @brief Reads the next entry into the provided <code>BytesRef</code>.
+ The internal
+ storage is resized if needed.
+ @return Returns <code>false</code> if EOF occurred when trying to read
+ the header of the next sequence. Returns <code>true</code> otherwise.
+ @throws EOFException if the file ends before the full sequence is read.
+ */
 - (jboolean)readWithOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)ref;
 
 @end
@@ -267,12 +464,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_init
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *new_OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *create_OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path);
+
 FOUNDATION_EXPORT void OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_initWithJavaIoDataInput_(OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *self, id<JavaIoDataInput> is);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *new_OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_initWithJavaIoDataInput_(id<JavaIoDataInput> is) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *create_OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_initWithJavaIoDataInput_(id<JavaIoDataInput> is);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilOfflineSorter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilOfflineSorter")

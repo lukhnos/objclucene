@@ -5,24 +5,51 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchCollectorManager_INCLUDE_ALL")
-#if OrgApacheLuceneSearchCollectorManager_RESTRICT
-#define OrgApacheLuceneSearchCollectorManager_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchCollectorManager")
+#ifdef RESTRICT_OrgApacheLuceneSearchCollectorManager
+#define INCLUDE_ALL_OrgApacheLuceneSearchCollectorManager 0
 #else
-#define OrgApacheLuceneSearchCollectorManager_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchCollectorManager 1
 #endif
-#undef OrgApacheLuceneSearchCollectorManager_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchCollectorManager
 
-#if !defined (_OrgApacheLuceneSearchCollectorManager_) && (OrgApacheLuceneSearchCollectorManager_INCLUDE_ALL || OrgApacheLuceneSearchCollectorManager_INCLUDE)
-#define _OrgApacheLuceneSearchCollectorManager_
+#if !defined (OrgApacheLuceneSearchCollectorManager_) && (INCLUDE_ALL_OrgApacheLuceneSearchCollectorManager || defined(INCLUDE_OrgApacheLuceneSearchCollectorManager))
+#define OrgApacheLuceneSearchCollectorManager_
 
 @protocol JavaUtilCollection;
 @protocol OrgApacheLuceneSearchCollector;
 
+/*!
+ @brief A manager of collectors.
+ This class is useful to parallelize execution of
+ search requests and has two main methods:
+ <ul>
+ <li><code>newCollector()</code> which must return a NEW collector which
+ will be used to collect a certain set of leaves.</li>
+ <li><code>reduce(Collection)</code> which will be used to reduce the
+ results of individual collections into a meaningful result.
+ This method is only called after all leaves have been fully
+ collected.</li>
+ </ul>
+ - seealso: IndexSearcher#search(Query,CollectorManager)
+ */
 @protocol OrgApacheLuceneSearchCollectorManager < NSObject, JavaObject >
 
+/*!
+ @brief Return a new <code>Collector</code>.
+ This must return a different instance on
+ each call.
+ */
 - (id)newCollector OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Reduce the results of individual collectors into a meaningful result.
+ For instance a <code>TopDocsCollector</code> would compute the
+ <code>top docs</code> of each collector and then
+ merge them using <code>TopDocs.merge(int,TopDocs[])</code>.
+ This method must be called after collection is finished on all provided
+ collectors.
+ */
 - (id)reduceWithJavaUtilCollection:(id<JavaUtilCollection>)collectors;
 
 @end
@@ -33,4 +60,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCollectorManager)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchCollectorManager_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchCollectorManager")

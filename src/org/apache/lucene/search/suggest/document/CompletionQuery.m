@@ -26,7 +26,13 @@
 
 @interface OrgApacheLuceneSearchSuggestDocumentCompletionQuery () {
  @public
+  /*!
+   @brief Term to query against
+   */
   OrgApacheLuceneIndexTerm *term_;
+  /*!
+   @brief <code>BitsProducer</code> which is used to filter the document scope.
+   */
   OrgApacheLuceneSearchSuggestBitsProducer *filter_;
 }
 
@@ -74,26 +80,26 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSuggestDocumentCompleti
       continue;
     }
     if ([terms isKindOfClass:[OrgApacheLuceneSearchSuggestDocumentCompletionTerms class]]) {
-      OrgApacheLuceneSearchSuggestDocumentCompletionTerms *completionTerms = (OrgApacheLuceneSearchSuggestDocumentCompletionTerms *) check_class_cast(terms, [OrgApacheLuceneSearchSuggestDocumentCompletionTerms class]);
+      OrgApacheLuceneSearchSuggestDocumentCompletionTerms *completionTerms = (OrgApacheLuceneSearchSuggestDocumentCompletionTerms *) cast_chk(terms, [OrgApacheLuceneSearchSuggestDocumentCompletionTerms class]);
       jbyte t = [((OrgApacheLuceneSearchSuggestDocumentCompletionTerms *) nil_chk(completionTerms)) getType];
       if (first) {
         type = t;
         first = false;
       }
       else if (type != t) {
-        @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$", [self getField], @" has values of multiple types")) autorelease];
+        @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$", [self getField], @" has values of multiple types"));
       }
     }
   }
   if (first == false) {
     if ([self isKindOfClass:[OrgApacheLuceneSearchSuggestDocumentContextQuery class]]) {
       if (type == OrgApacheLuceneSearchSuggestDocumentSuggestField_TYPE) {
-        @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$", [[self getClass] getSimpleName], @" can not be executed against a non context-enabled SuggestField: ", [self getField])) autorelease];
+        @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$", [[self getClass] getSimpleName], @" can not be executed against a non context-enabled SuggestField: ", [self getField]));
       }
     }
     else {
       if (type == OrgApacheLuceneSearchSuggestDocumentContextSuggestField_TYPE) {
-        return [new_OrgApacheLuceneSearchSuggestDocumentContextQuery_initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery_(self) autorelease];
+        return create_OrgApacheLuceneSearchSuggestDocumentContextQuery_initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery_(self);
       }
     }
   }
@@ -101,7 +107,7 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSuggestDocumentCompleti
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
-  JavaLangStringBuilder *buffer = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_init();
   if (![((NSString *) nil_chk([((OrgApacheLuceneIndexTerm *) nil_chk(term_)) field])) isEqual:field]) {
     [buffer appendWithNSString:[term_ field]];
     [buffer appendWithNSString:@":"];
@@ -158,9 +164,9 @@ void OrgApacheLuceneSearchSuggestDocumentCompletionQuery_validateWithNSString_(O
   for (jint i = 0; i < ((jint) [((NSString *) nil_chk(termText)) length]); i++) {
     switch ([termText charAtWithInt:i]) {
       case OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_HOLE_CHARACTER:
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"Term text cannot contain HOLE character U+001E; this character is reserved") autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"Term text cannot contain HOLE character U+001E; this character is reserved");
       case OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_SEP_LABEL:
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"Term text cannot contain unit separator character U+001F; this character is reserved") autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"Term text cannot contain unit separator character U+001F; this character is reserved");
       default:
       break;
     }

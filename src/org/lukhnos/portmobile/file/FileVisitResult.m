@@ -9,39 +9,70 @@
 #include "java/lang/IllegalArgumentException.h"
 #include "org/lukhnos/portmobile/file/FileVisitResult.h"
 
-__attribute__((unused)) static void OrgLukhnosPortmobileFileFileVisitResultEnum_initWithNSString_withInt_(OrgLukhnosPortmobileFileFileVisitResultEnum *self, NSString *__name, jint __ordinal);
+__attribute__((unused)) static void OrgLukhnosPortmobileFileFileVisitResult_initWithNSString_withInt_(OrgLukhnosPortmobileFileFileVisitResult *self, NSString *__name, jint __ordinal);
 
-__attribute__((unused)) static OrgLukhnosPortmobileFileFileVisitResultEnum *new_OrgLukhnosPortmobileFileFileVisitResultEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
+J2OBJC_INITIALIZED_DEFN(OrgLukhnosPortmobileFileFileVisitResult)
 
-J2OBJC_INITIALIZED_DEFN(OrgLukhnosPortmobileFileFileVisitResultEnum)
+OrgLukhnosPortmobileFileFileVisitResult *OrgLukhnosPortmobileFileFileVisitResult_values_[1];
 
-OrgLukhnosPortmobileFileFileVisitResultEnum *OrgLukhnosPortmobileFileFileVisitResultEnum_values_[1];
+@implementation OrgLukhnosPortmobileFileFileVisitResult
 
-@implementation OrgLukhnosPortmobileFileFileVisitResultEnum
-
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgLukhnosPortmobileFileFileVisitResultEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
-}
-
-IOSObjectArray *OrgLukhnosPortmobileFileFileVisitResultEnum_values() {
-  OrgLukhnosPortmobileFileFileVisitResultEnum_initialize();
-  return [IOSObjectArray arrayWithObjects:OrgLukhnosPortmobileFileFileVisitResultEnum_values_ count:1 type:OrgLukhnosPortmobileFileFileVisitResultEnum_class_()];
++ (OrgLukhnosPortmobileFileFileVisitResult *)CONTINUE {
+  return JreEnum(OrgLukhnosPortmobileFileFileVisitResult, CONTINUE);
 }
 
 + (IOSObjectArray *)values {
-  return OrgLukhnosPortmobileFileFileVisitResultEnum_values();
+  return OrgLukhnosPortmobileFileFileVisitResult_values();
 }
 
-+ (OrgLukhnosPortmobileFileFileVisitResultEnum *)valueOfWithNSString:(NSString *)name {
-  return OrgLukhnosPortmobileFileFileVisitResultEnum_valueOfWithNSString_(name);
++ (OrgLukhnosPortmobileFileFileVisitResult *)valueOfWithNSString:(NSString *)name {
+  return OrgLukhnosPortmobileFileFileVisitResult_valueOfWithNSString_(name);
 }
 
-OrgLukhnosPortmobileFileFileVisitResultEnum *OrgLukhnosPortmobileFileFileVisitResultEnum_valueOfWithNSString_(NSString *name) {
-  OrgLukhnosPortmobileFileFileVisitResultEnum_initialize();
+- (OrgLukhnosPortmobileFileFileVisitResult_Enum)toNSEnum {
+  return (OrgLukhnosPortmobileFileFileVisitResult_Enum)[self ordinal];
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+  return self;
+}
+
++ (void)initialize {
+  if (self == [OrgLukhnosPortmobileFileFileVisitResult class]) {
+    size_t objSize = class_getInstanceSize(self);
+    size_t allocSize = 1 * objSize;
+    uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
+    id e;
+    (JreEnum(OrgLukhnosPortmobileFileFileVisitResult, CONTINUE) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgLukhnosPortmobileFileFileVisitResult_initWithNSString_withInt_(e, @"CONTINUE", 0);
+    J2OBJC_SET_INITIALIZED(OrgLukhnosPortmobileFileFileVisitResult)
+  }
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static const J2ObjcFieldInfo fields[] = {
+    { "CONTINUE", "CONTINUE", 0x4019, "Lorg.lukhnos.portmobile.file.FileVisitResult;", &JreEnum(OrgLukhnosPortmobileFileFileVisitResult, CONTINUE), NULL, .constantValue.asLong = 0 },
+  };
+  static const char *superclass_type_args[] = {"Lorg.lukhnos.portmobile.file.FileVisitResult;"};
+  static const J2ObjcClassInfo _OrgLukhnosPortmobileFileFileVisitResult = { 2, "FileVisitResult", "org.lukhnos.portmobile.file", NULL, 0x4011, 0, NULL, 1, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/lukhnos/portmobile/file/FileVisitResult;>;" };
+  return &_OrgLukhnosPortmobileFileFileVisitResult;
+}
+
+@end
+
+void OrgLukhnosPortmobileFileFileVisitResult_initWithNSString_withInt_(OrgLukhnosPortmobileFileFileVisitResult *self, NSString *__name, jint __ordinal) {
+  JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
+}
+
+IOSObjectArray *OrgLukhnosPortmobileFileFileVisitResult_values() {
+  OrgLukhnosPortmobileFileFileVisitResult_initialize();
+  return [IOSObjectArray arrayWithObjects:OrgLukhnosPortmobileFileFileVisitResult_values_ count:1 type:OrgLukhnosPortmobileFileFileVisitResult_class_()];
+}
+
+OrgLukhnosPortmobileFileFileVisitResult *OrgLukhnosPortmobileFileFileVisitResult_valueOfWithNSString_(NSString *name) {
+  OrgLukhnosPortmobileFileFileVisitResult_initialize();
   for (int i = 0; i < 1; i++) {
-    OrgLukhnosPortmobileFileFileVisitResultEnum *e = OrgLukhnosPortmobileFileFileVisitResultEnum_values_[i];
+    OrgLukhnosPortmobileFileFileVisitResult *e = OrgLukhnosPortmobileFileFileVisitResult_values_[i];
     if ([name isEqual:[e name]]) {
       return e;
     }
@@ -50,36 +81,12 @@ OrgLukhnosPortmobileFileFileVisitResultEnum *OrgLukhnosPortmobileFileFileVisitRe
   return nil;
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return [self retain];
-}
-
-+ (void)initialize {
-  if (self == [OrgLukhnosPortmobileFileFileVisitResultEnum class]) {
-    OrgLukhnosPortmobileFileFileVisitResultEnum_CONTINUE = new_OrgLukhnosPortmobileFileFileVisitResultEnum_initWithNSString_withInt_(@"CONTINUE", 0);
-    J2OBJC_SET_INITIALIZED(OrgLukhnosPortmobileFileFileVisitResultEnum)
+OrgLukhnosPortmobileFileFileVisitResult *OrgLukhnosPortmobileFileFileVisitResult_fromOrdinal(NSUInteger ordinal) {
+  OrgLukhnosPortmobileFileFileVisitResult_initialize();
+  if (ordinal >= 1) {
+    return nil;
   }
+  return OrgLukhnosPortmobileFileFileVisitResult_values_[ordinal];
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcFieldInfo fields[] = {
-    { "CONTINUE", "CONTINUE", 0x4019, "Lorg.lukhnos.portmobile.file.FileVisitResult;", &OrgLukhnosPortmobileFileFileVisitResultEnum_CONTINUE, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.lukhnos.portmobile.file.FileVisitResult;"};
-  static const J2ObjcClassInfo _OrgLukhnosPortmobileFileFileVisitResultEnum = { 2, "FileVisitResult", "org.lukhnos.portmobile.file", NULL, 0x4011, 0, NULL, 1, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/lukhnos/portmobile/file/FileVisitResult;>;" };
-  return &_OrgLukhnosPortmobileFileFileVisitResultEnum;
-}
-
-@end
-
-void OrgLukhnosPortmobileFileFileVisitResultEnum_initWithNSString_withInt_(OrgLukhnosPortmobileFileFileVisitResultEnum *self, NSString *__name, jint __ordinal) {
-  JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
-}
-
-OrgLukhnosPortmobileFileFileVisitResultEnum *new_OrgLukhnosPortmobileFileFileVisitResultEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  OrgLukhnosPortmobileFileFileVisitResultEnum *self = [OrgLukhnosPortmobileFileFileVisitResultEnum alloc];
-  OrgLukhnosPortmobileFileFileVisitResultEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileFileFileVisitResultEnum)
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileFileFileVisitResult)

@@ -3,7 +3,6 @@
 //  source: ./core/src/java/org/apache/lucene/util/AttributeReflector.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/util/AttributeReflector.h"
 
@@ -15,7 +14,7 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "reflectWithIOSClass:withNSString:withId:", "reflect", "V", 0x401, NULL, NULL },
+    { "reflectWithIOSClass:withNSString:withId:", "reflect", "V", 0x401, NULL, "(Ljava/lang/Class<+Lorg/apache/lucene/util/Attribute;>;Ljava/lang/String;Ljava/lang/Object;)V" },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneUtilAttributeReflector = { 2, "AttributeReflector", "org.apache.lucene.util", NULL, 0x609, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilAttributeReflector;

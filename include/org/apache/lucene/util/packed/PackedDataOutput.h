@@ -5,19 +5,24 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilPackedPackedDataOutput_INCLUDE_ALL")
-#if OrgApacheLuceneUtilPackedPackedDataOutput_RESTRICT
-#define OrgApacheLuceneUtilPackedPackedDataOutput_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedPackedDataOutput")
+#ifdef RESTRICT_OrgApacheLuceneUtilPackedPackedDataOutput
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackedPackedDataOutput 0
 #else
-#define OrgApacheLuceneUtilPackedPackedDataOutput_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackedPackedDataOutput 1
 #endif
-#undef OrgApacheLuceneUtilPackedPackedDataOutput_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilPackedPackedDataOutput
 
-#if !defined (_OrgApacheLuceneUtilPackedPackedDataOutput_) && (OrgApacheLuceneUtilPackedPackedDataOutput_INCLUDE_ALL || OrgApacheLuceneUtilPackedPackedDataOutput_INCLUDE)
-#define _OrgApacheLuceneUtilPackedPackedDataOutput_
+#if !defined (OrgApacheLuceneUtilPackedPackedDataOutput_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedPackedDataOutput || defined(INCLUDE_OrgApacheLuceneUtilPackedPackedDataOutput))
+#define OrgApacheLuceneUtilPackedPackedDataOutput_
 
 @class OrgApacheLuceneStoreDataOutput;
 
+/*!
+ @brief A <code>DataOutput</code> wrapper to write unaligned, variable-length packed
+ integers.
+ - seealso: PackedDataInput
+ */
 @interface OrgApacheLuceneUtilPackedPackedDataOutput : NSObject {
  @public
   OrgApacheLuceneStoreDataOutput *out_;
@@ -27,10 +32,19 @@
 
 #pragma mark Public
 
+/*!
+ @brief Create a new instance that wraps <code>out</code>.
+ */
 - (instancetype)initWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg;
 
+/*!
+ @brief Flush pending bits to the underlying <code>DataOutput</code>.
+ */
 - (void)flush;
 
+/*!
+ @brief Write a value using exactly <code>bitsPerValue</code> bits.
+ */
 - (void)writeLongWithLong:(jlong)value
                   withInt:(jint)bitsPerValue;
 
@@ -44,8 +58,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedPackedDataOutput_initWithOrgApac
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedDataOutput *new_OrgApacheLuceneUtilPackedPackedDataOutput_initWithOrgApacheLuceneStoreDataOutput_(OrgApacheLuceneStoreDataOutput *outArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedDataOutput *create_OrgApacheLuceneUtilPackedPackedDataOutput_initWithOrgApacheLuceneStoreDataOutput_(OrgApacheLuceneStoreDataOutput *outArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedDataOutput)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilPackedPackedDataOutput_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedPackedDataOutput")

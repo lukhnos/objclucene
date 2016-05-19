@@ -22,18 +22,23 @@
 
 @end
 
-static OrgApacheLuceneUtilCharsRef *OrgApacheLuceneUtilFstCharSequenceOutputs_NO_OUTPUT_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFstCharSequenceOutputs, NO_OUTPUT_, OrgApacheLuceneUtilCharsRef *)
+inline OrgApacheLuceneUtilCharsRef *OrgApacheLuceneUtilFstCharSequenceOutputs_get_NO_OUTPUT();
+static OrgApacheLuceneUtilCharsRef *OrgApacheLuceneUtilFstCharSequenceOutputs_NO_OUTPUT;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilFstCharSequenceOutputs, NO_OUTPUT, OrgApacheLuceneUtilCharsRef *)
 
-static OrgApacheLuceneUtilFstCharSequenceOutputs *OrgApacheLuceneUtilFstCharSequenceOutputs_singleton_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFstCharSequenceOutputs, singleton_, OrgApacheLuceneUtilFstCharSequenceOutputs *)
+inline OrgApacheLuceneUtilFstCharSequenceOutputs *OrgApacheLuceneUtilFstCharSequenceOutputs_get_singleton();
+static OrgApacheLuceneUtilFstCharSequenceOutputs *OrgApacheLuceneUtilFstCharSequenceOutputs_singleton;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilFstCharSequenceOutputs, singleton, OrgApacheLuceneUtilFstCharSequenceOutputs *)
 
-static jlong OrgApacheLuceneUtilFstCharSequenceOutputs_BASE_NUM_BYTES_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFstCharSequenceOutputs, BASE_NUM_BYTES_, jlong)
+inline jlong OrgApacheLuceneUtilFstCharSequenceOutputs_get_BASE_NUM_BYTES();
+static jlong OrgApacheLuceneUtilFstCharSequenceOutputs_BASE_NUM_BYTES;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilFstCharSequenceOutputs, BASE_NUM_BYTES, jlong)
 
 __attribute__((unused)) static void OrgApacheLuceneUtilFstCharSequenceOutputs_init(OrgApacheLuceneUtilFstCharSequenceOutputs *self);
 
 __attribute__((unused)) static OrgApacheLuceneUtilFstCharSequenceOutputs *new_OrgApacheLuceneUtilFstCharSequenceOutputs_init() NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneUtilFstCharSequenceOutputs *create_OrgApacheLuceneUtilFstCharSequenceOutputs_init();
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFstCharSequenceOutputs)
 
@@ -65,7 +70,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     pos2++;
   }
   if (pos1 == output1->offset_) {
-    return OrgApacheLuceneUtilFstCharSequenceOutputs_NO_OUTPUT_;
+    return OrgApacheLuceneUtilFstCharSequenceOutputs_NO_OUTPUT;
   }
   else if (pos1 == output1->offset_ + output1->length_) {
     return output1;
@@ -74,7 +79,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     return output2;
   }
   else {
-    return [new_OrgApacheLuceneUtilCharsRef_initWithCharArray_withInt_withInt_(output1->chars_, output1->offset_, pos1 - output1->offset_) autorelease];
+    return create_OrgApacheLuceneUtilCharsRef_initWithCharArray_withInt_withInt_(output1->chars_, output1->offset_, pos1 - output1->offset_);
   }
 }
 
@@ -82,16 +87,16 @@ J2OBJC_IGNORE_DESIGNATED_END
                                          withId:(OrgApacheLuceneUtilCharsRef *)inc {
   JreAssert((output != nil), (@"org/apache/lucene/util/fst/CharSequenceOutputs.java:78 condition failed: assert output != null;"));
   JreAssert((inc != nil), (@"org/apache/lucene/util/fst/CharSequenceOutputs.java:79 condition failed: assert inc != null;"));
-  if (inc == OrgApacheLuceneUtilFstCharSequenceOutputs_NO_OUTPUT_) {
+  if (inc == OrgApacheLuceneUtilFstCharSequenceOutputs_NO_OUTPUT) {
     return output;
   }
   else if (((OrgApacheLuceneUtilCharsRef *) nil_chk(inc))->length_ == ((OrgApacheLuceneUtilCharsRef *) nil_chk(output))->length_) {
-    return OrgApacheLuceneUtilFstCharSequenceOutputs_NO_OUTPUT_;
+    return OrgApacheLuceneUtilFstCharSequenceOutputs_NO_OUTPUT;
   }
   else {
     JreAssert((inc->length_ < output->length_), (JreStrcat("$I$I", @"inc.length=", inc->length_, @" vs output.length=", output->length_)));
     JreAssert((inc->length_ > 0), (@"org/apache/lucene/util/fst/CharSequenceOutputs.java:88 condition failed: assert inc.length > 0;"));
-    return [new_OrgApacheLuceneUtilCharsRef_initWithCharArray_withInt_withInt_(output->chars_, output->offset_ + inc->length_, output->length_ - inc->length_) autorelease];
+    return create_OrgApacheLuceneUtilCharsRef_initWithCharArray_withInt_withInt_(output->chars_, output->offset_ + inc->length_, output->length_ - inc->length_);
   }
 }
 
@@ -99,16 +104,16 @@ J2OBJC_IGNORE_DESIGNATED_END
                                     withId:(OrgApacheLuceneUtilCharsRef *)output {
   JreAssert((prefix != nil), (@"org/apache/lucene/util/fst/CharSequenceOutputs.java:95 condition failed: assert prefix != null;"));
   JreAssert((output != nil), (@"org/apache/lucene/util/fst/CharSequenceOutputs.java:96 condition failed: assert output != null;"));
-  if (prefix == OrgApacheLuceneUtilFstCharSequenceOutputs_NO_OUTPUT_) {
+  if (prefix == OrgApacheLuceneUtilFstCharSequenceOutputs_NO_OUTPUT) {
     return output;
   }
-  else if (output == OrgApacheLuceneUtilFstCharSequenceOutputs_NO_OUTPUT_) {
+  else if (output == OrgApacheLuceneUtilFstCharSequenceOutputs_NO_OUTPUT) {
     return prefix;
   }
   else {
     JreAssert((((OrgApacheLuceneUtilCharsRef *) nil_chk(prefix))->length_ > 0), (@"org/apache/lucene/util/fst/CharSequenceOutputs.java:102 condition failed: assert prefix.length > 0;"));
     JreAssert((((OrgApacheLuceneUtilCharsRef *) nil_chk(output))->length_ > 0), (@"org/apache/lucene/util/fst/CharSequenceOutputs.java:103 condition failed: assert output.length > 0;"));
-    OrgApacheLuceneUtilCharsRef *result = [new_OrgApacheLuceneUtilCharsRef_initWithInt_(prefix->length_ + output->length_) autorelease];
+    OrgApacheLuceneUtilCharsRef *result = create_OrgApacheLuceneUtilCharsRef_initWithInt_(prefix->length_ + output->length_);
     JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(prefix->chars_, prefix->offset_, result->chars_, 0, prefix->length_);
     JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(output->chars_, output->offset_, result->chars_, prefix->length_, output->length_);
     result->length_ = prefix->length_ + output->length_;
@@ -128,10 +133,10 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
 - (OrgApacheLuceneUtilCharsRef *)readWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg {
   jint len = [((OrgApacheLuceneStoreDataInput *) nil_chk(inArg)) readVInt];
   if (len == 0) {
-    return OrgApacheLuceneUtilFstCharSequenceOutputs_NO_OUTPUT_;
+    return OrgApacheLuceneUtilFstCharSequenceOutputs_NO_OUTPUT;
   }
   else {
-    OrgApacheLuceneUtilCharsRef *output = [new_OrgApacheLuceneUtilCharsRef_initWithInt_(len) autorelease];
+    OrgApacheLuceneUtilCharsRef *output = create_OrgApacheLuceneUtilCharsRef_initWithInt_(len);
     for (jint idx = 0; idx < len; idx++) {
       *IOSCharArray_GetRef(nil_chk(output->chars_), idx) = (jchar) [inArg readVInt];
     }
@@ -148,7 +153,7 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
 }
 
 - (OrgApacheLuceneUtilCharsRef *)getNoOutput {
-  return OrgApacheLuceneUtilFstCharSequenceOutputs_NO_OUTPUT_;
+  return OrgApacheLuceneUtilFstCharSequenceOutputs_NO_OUTPUT;
 }
 
 - (NSString *)outputToStringWithId:(OrgApacheLuceneUtilCharsRef *)output {
@@ -156,14 +161,14 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
 }
 
 - (jlong)ramBytesUsedWithId:(OrgApacheLuceneUtilCharsRef *)output {
-  return OrgApacheLuceneUtilFstCharSequenceOutputs_BASE_NUM_BYTES_ + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithCharArray_(((OrgApacheLuceneUtilCharsRef *) nil_chk(output))->chars_);
+  return OrgApacheLuceneUtilFstCharSequenceOutputs_BASE_NUM_BYTES + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithCharArray_(((OrgApacheLuceneUtilCharsRef *) nil_chk(output))->chars_);
 }
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilFstCharSequenceOutputs class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilFstCharSequenceOutputs_NO_OUTPUT_, new_OrgApacheLuceneUtilCharsRef_init());
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilFstCharSequenceOutputs_singleton_, new_OrgApacheLuceneUtilFstCharSequenceOutputs_init());
-    OrgApacheLuceneUtilFstCharSequenceOutputs_BASE_NUM_BYTES_ = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfWithId_(OrgApacheLuceneUtilFstCharSequenceOutputs_NO_OUTPUT_);
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilFstCharSequenceOutputs_NO_OUTPUT, new_OrgApacheLuceneUtilCharsRef_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilFstCharSequenceOutputs_singleton, new_OrgApacheLuceneUtilFstCharSequenceOutputs_init());
+    OrgApacheLuceneUtilFstCharSequenceOutputs_BASE_NUM_BYTES = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfWithId_(OrgApacheLuceneUtilFstCharSequenceOutputs_NO_OUTPUT);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilFstCharSequenceOutputs)
   }
 }
@@ -172,20 +177,20 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "CharSequenceOutputs", NULL, 0x2, NULL, NULL },
     { "getSingleton", NULL, "Lorg.apache.lucene.util.fst.CharSequenceOutputs;", 0x9, NULL, NULL },
-    { "commonWithId:withId:", "common", "Lorg.apache.lucene.util.CharsRef;", 0x1, NULL, NULL },
-    { "subtractWithId:withId:", "subtract", "Lorg.apache.lucene.util.CharsRef;", 0x1, NULL, NULL },
-    { "addWithId:withId:", "add", "Lorg.apache.lucene.util.CharsRef;", 0x1, NULL, NULL },
-    { "writeWithId:withOrgApacheLuceneStoreDataOutput:", "write", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "readWithOrgApacheLuceneStoreDataInput:", "read", "Lorg.apache.lucene.util.CharsRef;", 0x1, "Ljava.io.IOException;", NULL },
+    { "commonWithId:withId:", "common", "Lorg.apache.lucene.util.CharsRef;", 0x1, NULL, "(Lorg/apache/lucene/util/CharsRef;Lorg/apache/lucene/util/CharsRef;)Lorg/apache/lucene/util/CharsRef;" },
+    { "subtractWithId:withId:", "subtract", "Lorg.apache.lucene.util.CharsRef;", 0x1, NULL, "(Lorg/apache/lucene/util/CharsRef;Lorg/apache/lucene/util/CharsRef;)Lorg/apache/lucene/util/CharsRef;" },
+    { "addWithId:withId:", "add", "Lorg.apache.lucene.util.CharsRef;", 0x1, NULL, "(Lorg/apache/lucene/util/CharsRef;Lorg/apache/lucene/util/CharsRef;)Lorg/apache/lucene/util/CharsRef;" },
+    { "writeWithId:withOrgApacheLuceneStoreDataOutput:", "write", "V", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/CharsRef;Lorg/apache/lucene/store/DataOutput;)V" },
+    { "readWithOrgApacheLuceneStoreDataInput:", "read", "Lorg.apache.lucene.util.CharsRef;", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/store/DataInput;)Lorg/apache/lucene/util/CharsRef;" },
     { "skipOutputWithOrgApacheLuceneStoreDataInput:", "skipOutput", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "getNoOutput", NULL, "Lorg.apache.lucene.util.CharsRef;", 0x1, NULL, NULL },
-    { "outputToStringWithId:", "outputToString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "ramBytesUsedWithId:", "ramBytesUsed", "J", 0x1, NULL, NULL },
+    { "getNoOutput", NULL, "Lorg.apache.lucene.util.CharsRef;", 0x1, NULL, "()Lorg/apache/lucene/util/CharsRef;" },
+    { "outputToStringWithId:", "outputToString", "Ljava.lang.String;", 0x1, NULL, "(Lorg/apache/lucene/util/CharsRef;)Ljava/lang/String;" },
+    { "ramBytesUsedWithId:", "ramBytesUsed", "J", 0x1, NULL, "(Lorg/apache/lucene/util/CharsRef;)J" },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "NO_OUTPUT_", NULL, 0x1a, "Lorg.apache.lucene.util.CharsRef;", &OrgApacheLuceneUtilFstCharSequenceOutputs_NO_OUTPUT_, NULL, .constantValue.asLong = 0 },
-    { "singleton_", NULL, 0x1a, "Lorg.apache.lucene.util.fst.CharSequenceOutputs;", &OrgApacheLuceneUtilFstCharSequenceOutputs_singleton_, NULL, .constantValue.asLong = 0 },
-    { "BASE_NUM_BYTES_", NULL, 0x1a, "J", &OrgApacheLuceneUtilFstCharSequenceOutputs_BASE_NUM_BYTES_, NULL, .constantValue.asLong = 0 },
+    { "NO_OUTPUT", "NO_OUTPUT", 0x1a, "Lorg.apache.lucene.util.CharsRef;", &OrgApacheLuceneUtilFstCharSequenceOutputs_NO_OUTPUT, NULL, .constantValue.asLong = 0 },
+    { "singleton", "singleton", 0x1a, "Lorg.apache.lucene.util.fst.CharSequenceOutputs;", &OrgApacheLuceneUtilFstCharSequenceOutputs_singleton, NULL, .constantValue.asLong = 0 },
+    { "BASE_NUM_BYTES", "BASE_NUM_BYTES", 0x1a, "J", &OrgApacheLuceneUtilFstCharSequenceOutputs_BASE_NUM_BYTES, NULL, .constantValue.asLong = 0 },
   };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.util.CharsRef;"};
   static const J2ObjcClassInfo _OrgApacheLuceneUtilFstCharSequenceOutputs = { 2, "CharSequenceOutputs", "org.apache.lucene.util.fst", NULL, 0x11, 11, methods, 3, fields, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/fst/Outputs<Lorg/apache/lucene/util/CharsRef;>;" };
@@ -199,14 +204,16 @@ void OrgApacheLuceneUtilFstCharSequenceOutputs_init(OrgApacheLuceneUtilFstCharSe
 }
 
 OrgApacheLuceneUtilFstCharSequenceOutputs *new_OrgApacheLuceneUtilFstCharSequenceOutputs_init() {
-  OrgApacheLuceneUtilFstCharSequenceOutputs *self = [OrgApacheLuceneUtilFstCharSequenceOutputs alloc];
-  OrgApacheLuceneUtilFstCharSequenceOutputs_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFstCharSequenceOutputs, init)
+}
+
+OrgApacheLuceneUtilFstCharSequenceOutputs *create_OrgApacheLuceneUtilFstCharSequenceOutputs_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFstCharSequenceOutputs, init)
 }
 
 OrgApacheLuceneUtilFstCharSequenceOutputs *OrgApacheLuceneUtilFstCharSequenceOutputs_getSingleton() {
   OrgApacheLuceneUtilFstCharSequenceOutputs_initialize();
-  return OrgApacheLuceneUtilFstCharSequenceOutputs_singleton_;
+  return OrgApacheLuceneUtilFstCharSequenceOutputs_singleton;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstCharSequenceOutputs)

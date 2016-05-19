@@ -29,7 +29,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "obtainLockWithOrgApacheLuceneStoreDirectory:withNSString:", "obtainLock", "Lorg.apache.lucene.store.Lock;", 0x401, "Ljava.io.IOException;", NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "LockFactory", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneStoreLockFactory = { 2, "LockFactory", "org.apache.lucene.store", NULL, 0x401, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneStoreLockFactory;

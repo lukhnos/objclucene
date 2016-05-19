@@ -78,9 +78,31 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSuggestDocumentFuzzyCom
 
 __attribute__((unused)) static OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_FuzzyCompletionWeight *new_OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_FuzzyCompletionWeight_initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery_withOrgApacheLuceneUtilAutomatonAutomaton_withJavaUtilSet_(OrgApacheLuceneSearchSuggestDocumentCompletionQuery *query, OrgApacheLuceneUtilAutomatonAutomaton *automaton, id<JavaUtilSet> refs) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_FuzzyCompletionWeight *create_OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_FuzzyCompletionWeight_initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery_withOrgApacheLuceneUtilAutomatonAutomaton_withJavaUtilSet_(OrgApacheLuceneSearchSuggestDocumentCompletionQuery *query, OrgApacheLuceneUtilAutomatonAutomaton *automaton, id<JavaUtilSet> refs);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_FuzzyCompletionWeight)
 
 @implementation OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery
+
++ (jboolean)DEFAULT_UNICODE_AWARE {
+  return OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_DEFAULT_UNICODE_AWARE;
+}
+
++ (jint)DEFAULT_MIN_FUZZY_LENGTH {
+  return OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_DEFAULT_MIN_FUZZY_LENGTH;
+}
+
++ (jint)DEFAULT_NON_FUZZY_PREFIX {
+  return OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_DEFAULT_NON_FUZZY_PREFIX;
+}
+
++ (jint)DEFAULT_MAX_EDITS {
+  return OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_DEFAULT_MAX_EDITS;
+}
+
++ (jboolean)DEFAULT_TRANSPOSITIONS {
+  return OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_DEFAULT_TRANSPOSITIONS;
+}
 
 - (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
                            withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term {
@@ -110,15 +132,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQu
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores {
-  OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *stream = (OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *) check_class_cast([((OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer *) nil_chk(analyzer_)) tokenStreamWithNSString:[self getField] withNSString:[((OrgApacheLuceneIndexTerm *) nil_chk([self getTerm])) text]], [OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream class]);
-  id<JavaUtilSet> refs = [new_JavaUtilHashSet_init() autorelease];
+  OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *stream = (OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *) cast_chk([((OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer *) nil_chk(analyzer_)) tokenStreamWithNSString:[self getField] withNSString:[((OrgApacheLuceneIndexTerm *) nil_chk([self getTerm])) text]], [OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream class]);
+  id<JavaUtilSet> refs = create_JavaUtilHashSet_init();
   OrgApacheLuceneUtilAutomatonAutomaton *automaton = OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_toLevenshteinAutomataWithOrgApacheLuceneUtilAutomatonAutomaton_withJavaUtilSet_(self, [((OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *) nil_chk(stream)) toAutomatonWithBoolean:unicodeAware_], refs);
   if (unicodeAware_) {
-    OrgApacheLuceneUtilAutomatonAutomaton *utf8automaton = [((OrgApacheLuceneUtilAutomatonUTF32ToUTF8 *) [new_OrgApacheLuceneUtilAutomatonUTF32ToUTF8_init() autorelease]) convertWithOrgApacheLuceneUtilAutomatonAutomaton:automaton];
+    OrgApacheLuceneUtilAutomatonAutomaton *utf8automaton = [create_OrgApacheLuceneUtilAutomatonUTF32ToUTF8_init() convertWithOrgApacheLuceneUtilAutomatonAutomaton:automaton];
     utf8automaton = OrgApacheLuceneUtilAutomatonOperations_determinizeWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(utf8automaton, maxDeterminizedStates_);
     automaton = utf8automaton;
   }
-  return [new_OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_FuzzyCompletionWeight_initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery_withOrgApacheLuceneUtilAutomatonAutomaton_withJavaUtilSet_(self, automaton, refs) autorelease];
+  return create_OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_FuzzyCompletionWeight_initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery_withOrgApacheLuceneUtilAutomatonAutomaton_withJavaUtilSet_(self, automaton, refs);
 }
 
 - (OrgApacheLuceneUtilAutomatonAutomaton *)toLevenshteinAutomataWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton
@@ -127,7 +149,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQu
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
-  JavaLangStringBuilder *buffer = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_init();
   if (![((NSString *) nil_chk([self getField])) isEqual:field]) {
     [buffer appendWithNSString:[self getField]];
     [buffer appendWithNSString:@":"];
@@ -150,7 +172,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQu
     { "initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneIndexTerm:withOrgApacheLuceneSearchSuggestBitsProducer:", "FuzzyCompletionQuery", NULL, 0x1, NULL, NULL },
     { "initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneIndexTerm:withOrgApacheLuceneSearchSuggestBitsProducer:withInt:withBoolean:withInt:withInt:withBoolean:withInt:", "FuzzyCompletionQuery", NULL, 0x1, NULL, NULL },
     { "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:", "createWeight", "Lorg.apache.lucene.search.Weight;", 0x1, "Ljava.io.IOException;", NULL },
-    { "toLevenshteinAutomataWithOrgApacheLuceneUtilAutomatonAutomaton:withJavaUtilSet:", "toLevenshteinAutomata", "Lorg.apache.lucene.util.automaton.Automaton;", 0x2, NULL, NULL },
+    { "toLevenshteinAutomataWithOrgApacheLuceneUtilAutomatonAutomaton:withJavaUtilSet:", "toLevenshteinAutomata", "Lorg.apache.lucene.util.automaton.Automaton;", 0x2, NULL, "(Lorg/apache/lucene/util/automaton/Automaton;Ljava/util/Set<Lorg/apache/lucene/util/IntsRef;>;)Lorg/apache/lucene/util/automaton/Automaton;" },
     { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -178,9 +200,11 @@ void OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_initWithOrgApacheL
 }
 
 OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery *new_OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_(OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneIndexTerm *term) {
-  OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery *self = [OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery alloc];
-  OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_(self, analyzer, term);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery, initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_, analyzer, term)
+}
+
+OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery *create_OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_(OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneIndexTerm *term) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery, initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_, analyzer, term)
 }
 
 void OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchSuggestBitsProducer_(OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery *self, OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneIndexTerm *term, OrgApacheLuceneSearchSuggestBitsProducer *filter) {
@@ -188,9 +212,11 @@ void OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_initWithOrgApacheL
 }
 
 OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery *new_OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchSuggestBitsProducer_(OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneIndexTerm *term, OrgApacheLuceneSearchSuggestBitsProducer *filter) {
-  OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery *self = [OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery alloc];
-  OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchSuggestBitsProducer_(self, analyzer, term, filter);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery, initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchSuggestBitsProducer_, analyzer, term, filter)
+}
+
+OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery *create_OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchSuggestBitsProducer_(OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneIndexTerm *term, OrgApacheLuceneSearchSuggestBitsProducer *filter) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery, initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchSuggestBitsProducer_, analyzer, term, filter)
 }
 
 void OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchSuggestBitsProducer_withInt_withBoolean_withInt_withInt_withBoolean_withInt_(OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery *self, OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneIndexTerm *term, OrgApacheLuceneSearchSuggestBitsProducer *filter, jint maxEdits, jboolean transpositions, jint nonFuzzyPrefix, jint minFuzzyLength, jboolean unicodeAware, jint maxDeterminizedStates) {
@@ -204,14 +230,16 @@ void OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_initWithOrgApacheL
 }
 
 OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery *new_OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchSuggestBitsProducer_withInt_withBoolean_withInt_withInt_withBoolean_withInt_(OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneIndexTerm *term, OrgApacheLuceneSearchSuggestBitsProducer *filter, jint maxEdits, jboolean transpositions, jint nonFuzzyPrefix, jint minFuzzyLength, jboolean unicodeAware, jint maxDeterminizedStates) {
-  OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery *self = [OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery alloc];
-  OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchSuggestBitsProducer_withInt_withBoolean_withInt_withInt_withBoolean_withInt_(self, analyzer, term, filter, maxEdits, transpositions, nonFuzzyPrefix, minFuzzyLength, unicodeAware, maxDeterminizedStates);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery, initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchSuggestBitsProducer_withInt_withBoolean_withInt_withInt_withBoolean_withInt_, analyzer, term, filter, maxEdits, transpositions, nonFuzzyPrefix, minFuzzyLength, unicodeAware, maxDeterminizedStates)
+}
+
+OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery *create_OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchSuggestBitsProducer_withInt_withBoolean_withInt_withInt_withBoolean_withInt_(OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneIndexTerm *term, OrgApacheLuceneSearchSuggestBitsProducer *filter, jint maxEdits, jboolean transpositions, jint nonFuzzyPrefix, jint minFuzzyLength, jboolean unicodeAware, jint maxDeterminizedStates) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery, initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchSuggestBitsProducer_withInt_withBoolean_withInt_withInt_withBoolean_withInt_, analyzer, term, filter, maxEdits, transpositions, nonFuzzyPrefix, minFuzzyLength, unicodeAware, maxDeterminizedStates)
 }
 
 OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_toLevenshteinAutomataWithOrgApacheLuceneUtilAutomatonAutomaton_withJavaUtilSet_(OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery *self, OrgApacheLuceneUtilAutomatonAutomaton *automaton, id<JavaUtilSet> refs) {
-  id<JavaUtilList> subs = [new_JavaUtilArrayList_init() autorelease];
-  OrgApacheLuceneUtilAutomatonFiniteStringsIterator *finiteStrings = [new_OrgApacheLuceneUtilAutomatonFiniteStringsIterator_initWithOrgApacheLuceneUtilAutomatonAutomaton_(automaton) autorelease];
+  id<JavaUtilList> subs = create_JavaUtilArrayList_init();
+  OrgApacheLuceneUtilAutomatonFiniteStringsIterator *finiteStrings = create_OrgApacheLuceneUtilAutomatonFiniteStringsIterator_initWithOrgApacheLuceneUtilAutomatonAutomaton_(automaton);
   for (OrgApacheLuceneUtilIntsRef *string; (string = [finiteStrings next]) != nil; ) {
     [((id<JavaUtilSet>) nil_chk(refs)) addWithId:OrgApacheLuceneUtilIntsRef_deepCopyOfWithOrgApacheLuceneUtilIntsRef_(string)];
     if (((OrgApacheLuceneUtilIntsRef *) nil_chk(string))->length_ <= self->nonFuzzyPrefix_ || string->length_ < self->minFuzzyLength_) {
@@ -220,7 +248,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneSearchSuggestDocumentFuzzy
     else {
       IOSIntArray *ints = [IOSIntArray arrayWithLength:string->length_ - self->nonFuzzyPrefix_];
       JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(string->ints_, string->offset_ + self->nonFuzzyPrefix_, ints, 0, ints->size_);
-      OrgApacheLuceneUtilAutomatonLevenshteinAutomata *lev = [new_OrgApacheLuceneUtilAutomatonLevenshteinAutomata_initWithIntArray_withInt_withBoolean_(ints, self->unicodeAware_ ? JavaLangCharacter_MAX_CODE_POINT : 255, self->transpositions_) autorelease];
+      OrgApacheLuceneUtilAutomatonLevenshteinAutomata *lev = create_OrgApacheLuceneUtilAutomatonLevenshteinAutomata_initWithIntArray_withInt_withBoolean_(ints, self->unicodeAware_ ? JavaLangCharacter_MAX_CODE_POINT : 255, self->transpositions_);
       [subs addWithId:[lev toAutomatonWithInt:self->maxEdits_ withNSString:OrgApacheLuceneUtilUnicodeUtil_newStringWithIntArray_withInt_withInt_(string->ints_, string->offset_, self->nonFuzzyPrefix_)]];
     }
   }
@@ -276,7 +304,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentFuzzyComple
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery:withOrgApacheLuceneUtilAutomatonAutomaton:withJavaUtilSet:", "FuzzyCompletionWeight", NULL, 0x1, "Ljava.io.IOException;", NULL },
+    { "initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery:withOrgApacheLuceneUtilAutomatonAutomaton:withJavaUtilSet:", "FuzzyCompletionWeight", NULL, 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/search/suggest/document/CompletionQuery;Lorg/apache/lucene/util/automaton/Automaton;Ljava/util/Set<Lorg/apache/lucene/util/IntsRef;>;)V" },
     { "setNextMatchWithOrgApacheLuceneUtilIntsRef:", "setNextMatch", "V", 0x4, NULL, NULL },
     { "boost", NULL, "F", 0x4, NULL, NULL },
   };
@@ -297,9 +325,11 @@ void OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_FuzzyCompletionWei
 }
 
 OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_FuzzyCompletionWeight *new_OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_FuzzyCompletionWeight_initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery_withOrgApacheLuceneUtilAutomatonAutomaton_withJavaUtilSet_(OrgApacheLuceneSearchSuggestDocumentCompletionQuery *query, OrgApacheLuceneUtilAutomatonAutomaton *automaton, id<JavaUtilSet> refs) {
-  OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_FuzzyCompletionWeight *self = [OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_FuzzyCompletionWeight alloc];
-  OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_FuzzyCompletionWeight_initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery_withOrgApacheLuceneUtilAutomatonAutomaton_withJavaUtilSet_(self, query, automaton, refs);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_FuzzyCompletionWeight, initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery_withOrgApacheLuceneUtilAutomatonAutomaton_withJavaUtilSet_, query, automaton, refs)
+}
+
+OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_FuzzyCompletionWeight *create_OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_FuzzyCompletionWeight_initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery_withOrgApacheLuceneUtilAutomatonAutomaton_withJavaUtilSet_(OrgApacheLuceneSearchSuggestDocumentCompletionQuery *query, OrgApacheLuceneUtilAutomatonAutomaton *automaton, id<JavaUtilSet> refs) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_FuzzyCompletionWeight, initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery_withOrgApacheLuceneUtilAutomatonAutomaton_withJavaUtilSet_, query, automaton, refs)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_FuzzyCompletionWeight)

@@ -5,23 +5,31 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisGlGalicianMinimalStemmer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisGlGalicianMinimalStemmer_RESTRICT
-#define OrgApacheLuceneAnalysisGlGalicianMinimalStemmer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisGlGalicianMinimalStemmer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisGlGalicianMinimalStemmer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisGlGalicianMinimalStemmer 0
 #else
-#define OrgApacheLuceneAnalysisGlGalicianMinimalStemmer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisGlGalicianMinimalStemmer 1
 #endif
-#undef OrgApacheLuceneAnalysisGlGalicianMinimalStemmer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisGlGalicianMinimalStemmer
 
-#if !defined (_OrgApacheLuceneAnalysisGlGalicianMinimalStemmer_) && (OrgApacheLuceneAnalysisGlGalicianMinimalStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisGlGalicianMinimalStemmer_INCLUDE)
-#define _OrgApacheLuceneAnalysisGlGalicianMinimalStemmer_
+#if !defined (OrgApacheLuceneAnalysisGlGalicianMinimalStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisGlGalicianMinimalStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisGlGalicianMinimalStemmer))
+#define OrgApacheLuceneAnalysisGlGalicianMinimalStemmer_
 
-#define OrgApacheLuceneAnalysisPtRSLPStemmerBase_RESTRICT 1
-#define OrgApacheLuceneAnalysisPtRSLPStemmerBase_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisPtRSLPStemmerBase 1
+#define INCLUDE_OrgApacheLuceneAnalysisPtRSLPStemmerBase 1
 #include "org/apache/lucene/analysis/pt/RSLPStemmerBase.h"
 
 @class IOSCharArray;
 
+/*!
+ @brief Minimal Stemmer for Galician
+ <p>
+ This follows the "RSLP-S" algorithm, but modified for Galician.
+ Hence this stemmer only applies the plural reduction step of:
+ "Regras do lematizador para o galego"
+ - seealso: RSLPStemmerBase
+ */
 @interface OrgApacheLuceneAnalysisGlGalicianMinimalStemmer : OrgApacheLuceneAnalysisPtRSLPStemmerBase
 
 #pragma mark Public
@@ -39,8 +47,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisGlGalicianMinimalStemmer_init(OrgA
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisGlGalicianMinimalStemmer *new_OrgApacheLuceneAnalysisGlGalicianMinimalStemmer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisGlGalicianMinimalStemmer *create_OrgApacheLuceneAnalysisGlGalicianMinimalStemmer_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisGlGalicianMinimalStemmer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisGlGalicianMinimalStemmer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisGlGalicianMinimalStemmer")

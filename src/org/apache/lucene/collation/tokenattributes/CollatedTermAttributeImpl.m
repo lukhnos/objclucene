@@ -57,13 +57,15 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCollationTokenattributesCollatedTermAttribute
 
 void OrgApacheLuceneCollationTokenattributesCollatedTermAttributeImpl_initWithJavaTextCollator_(OrgApacheLuceneCollationTokenattributesCollatedTermAttributeImpl *self, JavaTextCollator *collator) {
   OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_init(self);
-  JreStrongAssign(&self->collator_, (JavaTextCollator *) check_class_cast([((JavaTextCollator *) nil_chk(collator)) clone], [JavaTextCollator class]));
+  JreStrongAssign(&self->collator_, (JavaTextCollator *) cast_chk([((JavaTextCollator *) nil_chk(collator)) clone], [JavaTextCollator class]));
 }
 
 OrgApacheLuceneCollationTokenattributesCollatedTermAttributeImpl *new_OrgApacheLuceneCollationTokenattributesCollatedTermAttributeImpl_initWithJavaTextCollator_(JavaTextCollator *collator) {
-  OrgApacheLuceneCollationTokenattributesCollatedTermAttributeImpl *self = [OrgApacheLuceneCollationTokenattributesCollatedTermAttributeImpl alloc];
-  OrgApacheLuceneCollationTokenattributesCollatedTermAttributeImpl_initWithJavaTextCollator_(self, collator);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCollationTokenattributesCollatedTermAttributeImpl, initWithJavaTextCollator_, collator)
+}
+
+OrgApacheLuceneCollationTokenattributesCollatedTermAttributeImpl *create_OrgApacheLuceneCollationTokenattributesCollatedTermAttributeImpl_initWithJavaTextCollator_(JavaTextCollator *collator) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCollationTokenattributesCollatedTermAttributeImpl, initWithJavaTextCollator_, collator)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCollationTokenattributesCollatedTermAttributeImpl)

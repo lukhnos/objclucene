@@ -39,7 +39,7 @@
                                                                       withInt:(jint)maxDeterminizedStates;
 
 - (void)findLeavesWithOrgApacheLuceneUtilAutomatonRegExp:(OrgApacheLuceneUtilAutomatonRegExp *)exp
-         withOrgApacheLuceneUtilAutomatonRegExp_KindEnum:(OrgApacheLuceneUtilAutomatonRegExp_KindEnum *)kind
+             withOrgApacheLuceneUtilAutomatonRegExp_Kind:(OrgApacheLuceneUtilAutomatonRegExp_Kind *)kind
                                         withJavaUtilList:(id<JavaUtilList>)list
                                          withJavaUtilMap:(id<JavaUtilMap>)automata
        withOrgApacheLuceneUtilAutomatonAutomatonProvider:(id<OrgApacheLuceneUtilAutomatonAutomatonProvider>)automaton_provider
@@ -66,7 +66,7 @@ __attribute__((unused)) static OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheL
 
 __attribute__((unused)) static OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonRegExp_toAutomatonInternalWithJavaUtilMap_withOrgApacheLuceneUtilAutomatonAutomatonProvider_withInt_(OrgApacheLuceneUtilAutomatonRegExp *self, id<JavaUtilMap> automata, id<OrgApacheLuceneUtilAutomatonAutomatonProvider> automaton_provider, jint maxDeterminizedStates);
 
-__attribute__((unused)) static void OrgApacheLuceneUtilAutomatonRegExp_findLeavesWithOrgApacheLuceneUtilAutomatonRegExp_withOrgApacheLuceneUtilAutomatonRegExp_KindEnum_withJavaUtilList_withJavaUtilMap_withOrgApacheLuceneUtilAutomatonAutomatonProvider_withInt_(OrgApacheLuceneUtilAutomatonRegExp *self, OrgApacheLuceneUtilAutomatonRegExp *exp, OrgApacheLuceneUtilAutomatonRegExp_KindEnum *kind, id<JavaUtilList> list, id<JavaUtilMap> automata, id<OrgApacheLuceneUtilAutomatonAutomatonProvider> automaton_provider, jint maxDeterminizedStates);
+__attribute__((unused)) static void OrgApacheLuceneUtilAutomatonRegExp_findLeavesWithOrgApacheLuceneUtilAutomatonRegExp_withOrgApacheLuceneUtilAutomatonRegExp_Kind_withJavaUtilList_withJavaUtilMap_withOrgApacheLuceneUtilAutomatonAutomatonProvider_withInt_(OrgApacheLuceneUtilAutomatonRegExp *self, OrgApacheLuceneUtilAutomatonRegExp *exp, OrgApacheLuceneUtilAutomatonRegExp_Kind *kind, id<JavaUtilList> list, id<JavaUtilMap> automata, id<OrgApacheLuceneUtilAutomatonAutomatonProvider> automaton_provider, jint maxDeterminizedStates);
 
 __attribute__((unused)) static OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_makeStringWithOrgApacheLuceneUtilAutomatonRegExp_withOrgApacheLuceneUtilAutomatonRegExp_(OrgApacheLuceneUtilAutomatonRegExp *exp1, OrgApacheLuceneUtilAutomatonRegExp *exp2);
 
@@ -100,11 +100,41 @@ __attribute__((unused)) static OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuce
 
 __attribute__((unused)) static jint OrgApacheLuceneUtilAutomatonRegExp_parseCharExp(OrgApacheLuceneUtilAutomatonRegExp *self);
 
-__attribute__((unused)) static void OrgApacheLuceneUtilAutomatonRegExp_KindEnum_initWithNSString_withInt_(OrgApacheLuceneUtilAutomatonRegExp_KindEnum *self, NSString *__name, jint __ordinal);
-
-__attribute__((unused)) static OrgApacheLuceneUtilAutomatonRegExp_KindEnum *new_OrgApacheLuceneUtilAutomatonRegExp_KindEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
+__attribute__((unused)) static void OrgApacheLuceneUtilAutomatonRegExp_Kind_initWithNSString_withInt_(OrgApacheLuceneUtilAutomatonRegExp_Kind *self, NSString *__name, jint __ordinal);
 
 @implementation OrgApacheLuceneUtilAutomatonRegExp
+
++ (jint)INTERSECTION {
+  return OrgApacheLuceneUtilAutomatonRegExp_INTERSECTION;
+}
+
++ (jint)COMPLEMENT {
+  return OrgApacheLuceneUtilAutomatonRegExp_COMPLEMENT;
+}
+
++ (jint)EMPTY {
+  return OrgApacheLuceneUtilAutomatonRegExp_EMPTY;
+}
+
++ (jint)ANYSTRING {
+  return OrgApacheLuceneUtilAutomatonRegExp_ANYSTRING;
+}
+
++ (jint)AUTOMATON {
+  return OrgApacheLuceneUtilAutomatonRegExp_AUTOMATON;
+}
+
++ (jint)INTERVAL {
+  return OrgApacheLuceneUtilAutomatonRegExp_INTERVAL;
+}
+
++ (jint)ALL {
+  return OrgApacheLuceneUtilAutomatonRegExp_ALL;
+}
+
++ (jint)NONE {
+  return OrgApacheLuceneUtilAutomatonRegExp_NONE;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -155,12 +185,12 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)findLeavesWithOrgApacheLuceneUtilAutomatonRegExp:(OrgApacheLuceneUtilAutomatonRegExp *)exp
-         withOrgApacheLuceneUtilAutomatonRegExp_KindEnum:(OrgApacheLuceneUtilAutomatonRegExp_KindEnum *)kind
+             withOrgApacheLuceneUtilAutomatonRegExp_Kind:(OrgApacheLuceneUtilAutomatonRegExp_Kind *)kind
                                         withJavaUtilList:(id<JavaUtilList>)list
                                          withJavaUtilMap:(id<JavaUtilMap>)automata
        withOrgApacheLuceneUtilAutomatonAutomatonProvider:(id<OrgApacheLuceneUtilAutomatonAutomatonProvider>)automaton_provider
                                                  withInt:(jint)maxDeterminizedStates {
-  OrgApacheLuceneUtilAutomatonRegExp_findLeavesWithOrgApacheLuceneUtilAutomatonRegExp_withOrgApacheLuceneUtilAutomatonRegExp_KindEnum_withJavaUtilList_withJavaUtilMap_withOrgApacheLuceneUtilAutomatonAutomatonProvider_withInt_(self, exp, kind, list, automata, automaton_provider, maxDeterminizedStates);
+  OrgApacheLuceneUtilAutomatonRegExp_findLeavesWithOrgApacheLuceneUtilAutomatonRegExp_withOrgApacheLuceneUtilAutomatonRegExp_Kind_withJavaUtilList_withJavaUtilMap_withOrgApacheLuceneUtilAutomatonAutomatonProvider_withInt_(self, exp, kind, list, automata, automaton_provider, maxDeterminizedStates);
 }
 
 - (NSString *)getOriginalString {
@@ -168,7 +198,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (NSString *)description {
-  JavaLangStringBuilder *b = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *b = create_JavaLangStringBuilder_init();
   [self toStringBuilderWithJavaLangStringBuilder:b];
   return [b description];
 }
@@ -178,71 +208,71 @@ J2OBJC_IGNORE_DESIGNATED_END
     NSString *s1;
     NSString *s2;
     switch ([kind_ ordinal]) {
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_UNION:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_UNION:
       [((JavaLangStringBuilder *) nil_chk(b)) appendWithNSString:@"("];
       [((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp1_)) toStringBuilderWithJavaLangStringBuilder:b];
       [b appendWithNSString:@"|"];
       [((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp2_)) toStringBuilderWithJavaLangStringBuilder:b];
       [b appendWithNSString:@")"];
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_CONCATENATION:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_CONCATENATION:
       [((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp1_)) toStringBuilderWithJavaLangStringBuilder:b];
       [((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp2_)) toStringBuilderWithJavaLangStringBuilder:b];
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_INTERSECTION:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_INTERSECTION:
       [((JavaLangStringBuilder *) nil_chk(b)) appendWithNSString:@"("];
       [((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp1_)) toStringBuilderWithJavaLangStringBuilder:b];
       [b appendWithNSString:@"&"];
       [((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp2_)) toStringBuilderWithJavaLangStringBuilder:b];
       [b appendWithNSString:@")"];
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_OPTIONAL:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_OPTIONAL:
       [((JavaLangStringBuilder *) nil_chk(b)) appendWithNSString:@"("];
       [((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp1_)) toStringBuilderWithJavaLangStringBuilder:b];
       [b appendWithNSString:@")?"];
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_REPEAT:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_REPEAT:
       [((JavaLangStringBuilder *) nil_chk(b)) appendWithNSString:@"("];
       [((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp1_)) toStringBuilderWithJavaLangStringBuilder:b];
       [b appendWithNSString:@")*"];
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_REPEAT_MIN:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_REPEAT_MIN:
       [((JavaLangStringBuilder *) nil_chk(b)) appendWithNSString:@"("];
       [((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp1_)) toStringBuilderWithJavaLangStringBuilder:b];
       [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([b appendWithNSString:@"){"])) appendWithInt:min_])) appendWithNSString:@",}"];
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_REPEAT_MINMAX:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_REPEAT_MINMAX:
       [((JavaLangStringBuilder *) nil_chk(b)) appendWithNSString:@"("];
       [((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp1_)) toStringBuilderWithJavaLangStringBuilder:b];
       [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([b appendWithNSString:@"){"])) appendWithInt:min_])) appendWithNSString:@","])) appendWithInt:max_])) appendWithNSString:@"}"];
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_COMPLEMENT:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_COMPLEMENT:
       [((JavaLangStringBuilder *) nil_chk(b)) appendWithNSString:@"~("];
       [((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp1_)) toStringBuilderWithJavaLangStringBuilder:b];
       [b appendWithNSString:@")"];
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_CHAR:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_CHAR:
       [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk(b)) appendWithNSString:@"\\"])) appendCodePointWithInt:c_];
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_CHAR_RANGE:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_CHAR_RANGE:
       [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk(b)) appendWithNSString:@"[\\"])) appendCodePointWithInt:from_])) appendWithNSString:@"-\\"])) appendCodePointWithInt:to_])) appendWithNSString:@"]"];
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_ANYCHAR:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_ANYCHAR:
       [((JavaLangStringBuilder *) nil_chk(b)) appendWithNSString:@"."];
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_EMPTY:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_EMPTY:
       [((JavaLangStringBuilder *) nil_chk(b)) appendWithNSString:@"#"];
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_STRING:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_STRING:
       [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk(b)) appendWithNSString:@"\""])) appendWithNSString:s_])) appendWithNSString:@"\""];
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_ANYSTRING:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_ANYSTRING:
       [((JavaLangStringBuilder *) nil_chk(b)) appendWithNSString:@"@"];
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_AUTOMATON:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_AUTOMATON:
       [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk(b)) appendWithNSString:@"<"])) appendWithNSString:s_])) appendWithNSString:@">"];
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_INTERVAL:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_INTERVAL:
       s1 = JavaLangInteger_toStringWithInt_(min_);
       s2 = JavaLangInteger_toStringWithInt_(max_);
       [((JavaLangStringBuilder *) nil_chk(b)) appendWithNSString:@"<"];
@@ -256,7 +286,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (NSString *)toStringTree {
-  JavaLangStringBuilder *b = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *b = create_JavaLangStringBuilder_init();
   [self toStringTreeWithJavaLangStringBuilder:b withNSString:@""];
   return [b description];
 }
@@ -267,24 +297,24 @@ J2OBJC_IGNORE_DESIGNATED_END
     NSString *s1;
     NSString *s2;
     switch ([kind_ ordinal]) {
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_UNION:
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_CONCATENATION:
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_INTERSECTION:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_UNION:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_CONCATENATION:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_INTERSECTION:
       [((JavaLangStringBuilder *) nil_chk(b)) appendWithNSString:indent];
       [b appendWithId:kind_];
       [b appendWithChar:0x000a];
       [((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp1_)) toStringTreeWithJavaLangStringBuilder:b withNSString:JreStrcat("$$", indent, @"  ")];
       [((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp2_)) toStringTreeWithJavaLangStringBuilder:b withNSString:JreStrcat("$$", indent, @"  ")];
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_OPTIONAL:
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_REPEAT:
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_COMPLEMENT:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_OPTIONAL:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_REPEAT:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_COMPLEMENT:
       [((JavaLangStringBuilder *) nil_chk(b)) appendWithNSString:indent];
       [b appendWithId:kind_];
       [b appendWithChar:0x000a];
       [((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp1_)) toStringTreeWithJavaLangStringBuilder:b withNSString:JreStrcat("$$", indent, @"  ")];
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_REPEAT_MIN:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_REPEAT_MIN:
       [((JavaLangStringBuilder *) nil_chk(b)) appendWithNSString:indent];
       [b appendWithId:kind_];
       [b appendWithNSString:@" min="];
@@ -292,7 +322,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       [b appendWithChar:0x000a];
       [((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp1_)) toStringTreeWithJavaLangStringBuilder:b withNSString:JreStrcat("$$", indent, @"  ")];
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_REPEAT_MINMAX:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_REPEAT_MINMAX:
       [((JavaLangStringBuilder *) nil_chk(b)) appendWithNSString:indent];
       [b appendWithId:kind_];
       [b appendWithNSString:@" min="];
@@ -302,14 +332,14 @@ J2OBJC_IGNORE_DESIGNATED_END
       [b appendWithChar:0x000a];
       [((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp1_)) toStringTreeWithJavaLangStringBuilder:b withNSString:JreStrcat("$$", indent, @"  ")];
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_CHAR:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_CHAR:
       [((JavaLangStringBuilder *) nil_chk(b)) appendWithNSString:indent];
       [b appendWithId:kind_];
       [b appendWithNSString:@" char="];
       [b appendCodePointWithInt:c_];
       [b appendWithChar:0x000a];
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_CHAR_RANGE:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_CHAR_RANGE:
       [((JavaLangStringBuilder *) nil_chk(b)) appendWithNSString:indent];
       [b appendWithId:kind_];
       [b appendWithNSString:@" from="];
@@ -318,30 +348,30 @@ J2OBJC_IGNORE_DESIGNATED_END
       [b appendCodePointWithInt:to_];
       [b appendWithChar:0x000a];
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_ANYCHAR:
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_EMPTY:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_ANYCHAR:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_EMPTY:
       [((JavaLangStringBuilder *) nil_chk(b)) appendWithNSString:indent];
       [b appendWithId:kind_];
       [b appendWithChar:0x000a];
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_STRING:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_STRING:
       [((JavaLangStringBuilder *) nil_chk(b)) appendWithNSString:indent];
       [b appendWithId:kind_];
       [b appendWithNSString:@" string="];
       [b appendWithNSString:s_];
       [b appendWithChar:0x000a];
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_ANYSTRING:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_ANYSTRING:
       [((JavaLangStringBuilder *) nil_chk(b)) appendWithNSString:indent];
       [b appendWithId:kind_];
       [b appendWithChar:0x000a];
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_AUTOMATON:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_AUTOMATON:
       [((JavaLangStringBuilder *) nil_chk(b)) appendWithNSString:indent];
       [b appendWithId:kind_];
       [b appendWithChar:0x000a];
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_INTERVAL:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_INTERVAL:
       [((JavaLangStringBuilder *) nil_chk(b)) appendWithNSString:indent];
       [b appendWithId:kind_];
       s1 = JavaLangInteger_toStringWithInt_(min_);
@@ -358,27 +388,27 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (id<JavaUtilSet>)getIdentifiers {
-  JavaUtilHashSet *set = [new_JavaUtilHashSet_init() autorelease];
+  JavaUtilHashSet *set = create_JavaUtilHashSet_init();
   [self getIdentifiersWithJavaUtilSet:set];
   return set;
 }
 
 - (void)getIdentifiersWithJavaUtilSet:(id<JavaUtilSet>)set {
   switch ([kind_ ordinal]) {
-    case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_UNION:
-    case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_CONCATENATION:
-    case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_INTERSECTION:
+    case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_UNION:
+    case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_CONCATENATION:
+    case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_INTERSECTION:
     [((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp1_)) getIdentifiersWithJavaUtilSet:set];
     [((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp2_)) getIdentifiersWithJavaUtilSet:set];
     break;
-    case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_OPTIONAL:
-    case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_REPEAT:
-    case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_REPEAT_MIN:
-    case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_REPEAT_MINMAX:
-    case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_COMPLEMENT:
+    case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_OPTIONAL:
+    case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_REPEAT:
+    case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_REPEAT_MIN:
+    case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_REPEAT_MINMAX:
+    case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_COMPLEMENT:
     [((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp1_)) getIdentifiersWithJavaUtilSet:set];
     break;
-    case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_AUTOMATON:
+    case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_AUTOMATON:
     [((id<JavaUtilSet>) nil_chk(set)) addWithId:s_];
     break;
     default:
@@ -541,17 +571,17 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "toAutomaton", NULL, "Lorg.apache.lucene.util.automaton.Automaton;", 0x1, NULL, NULL },
     { "toAutomatonWithInt:", "toAutomaton", "Lorg.apache.lucene.util.automaton.Automaton;", 0x1, "Ljava.lang.IllegalArgumentException;Lorg.apache.lucene.util.automaton.TooComplexToDeterminizeException;", NULL },
     { "toAutomatonWithOrgApacheLuceneUtilAutomatonAutomatonProvider:withInt:", "toAutomaton", "Lorg.apache.lucene.util.automaton.Automaton;", 0x1, "Ljava.lang.IllegalArgumentException;Lorg.apache.lucene.util.automaton.TooComplexToDeterminizeException;", NULL },
-    { "toAutomatonWithJavaUtilMap:withInt:", "toAutomaton", "Lorg.apache.lucene.util.automaton.Automaton;", 0x1, "Ljava.lang.IllegalArgumentException;Lorg.apache.lucene.util.automaton.TooComplexToDeterminizeException;", NULL },
-    { "toAutomatonWithJavaUtilMap:withOrgApacheLuceneUtilAutomatonAutomatonProvider:withInt:", "toAutomaton", "Lorg.apache.lucene.util.automaton.Automaton;", 0x2, "Ljava.lang.IllegalArgumentException;Lorg.apache.lucene.util.automaton.TooComplexToDeterminizeException;", NULL },
-    { "toAutomatonInternalWithJavaUtilMap:withOrgApacheLuceneUtilAutomatonAutomatonProvider:withInt:", "toAutomatonInternal", "Lorg.apache.lucene.util.automaton.Automaton;", 0x2, "Ljava.lang.IllegalArgumentException;", NULL },
-    { "findLeavesWithOrgApacheLuceneUtilAutomatonRegExp:withOrgApacheLuceneUtilAutomatonRegExp_KindEnum:withJavaUtilList:withJavaUtilMap:withOrgApacheLuceneUtilAutomatonAutomatonProvider:withInt:", "findLeaves", "V", 0x2, NULL, NULL },
+    { "toAutomatonWithJavaUtilMap:withInt:", "toAutomaton", "Lorg.apache.lucene.util.automaton.Automaton;", 0x1, "Ljava.lang.IllegalArgumentException;Lorg.apache.lucene.util.automaton.TooComplexToDeterminizeException;", "(Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/util/automaton/Automaton;>;I)Lorg/apache/lucene/util/automaton/Automaton;" },
+    { "toAutomatonWithJavaUtilMap:withOrgApacheLuceneUtilAutomatonAutomatonProvider:withInt:", "toAutomaton", "Lorg.apache.lucene.util.automaton.Automaton;", 0x2, "Ljava.lang.IllegalArgumentException;Lorg.apache.lucene.util.automaton.TooComplexToDeterminizeException;", "(Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/util/automaton/Automaton;>;Lorg/apache/lucene/util/automaton/AutomatonProvider;I)Lorg/apache/lucene/util/automaton/Automaton;" },
+    { "toAutomatonInternalWithJavaUtilMap:withOrgApacheLuceneUtilAutomatonAutomatonProvider:withInt:", "toAutomatonInternal", "Lorg.apache.lucene.util.automaton.Automaton;", 0x2, "Ljava.lang.IllegalArgumentException;", "(Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/util/automaton/Automaton;>;Lorg/apache/lucene/util/automaton/AutomatonProvider;I)Lorg/apache/lucene/util/automaton/Automaton;" },
+    { "findLeavesWithOrgApacheLuceneUtilAutomatonRegExp:withOrgApacheLuceneUtilAutomatonRegExp_Kind:withJavaUtilList:withJavaUtilMap:withOrgApacheLuceneUtilAutomatonAutomatonProvider:withInt:", "findLeaves", "V", 0x2, NULL, "(Lorg/apache/lucene/util/automaton/RegExp;Lorg/apache/lucene/util/automaton/RegExp$Kind;Ljava/util/List<Lorg/apache/lucene/util/automaton/Automaton;>;Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/util/automaton/Automaton;>;Lorg/apache/lucene/util/automaton/AutomatonProvider;I)V" },
     { "getOriginalString", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "toStringBuilderWithJavaLangStringBuilder:", "toStringBuilder", "V", 0x0, NULL, NULL },
     { "toStringTree", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
     { "toStringTreeWithJavaLangStringBuilder:withNSString:", "toStringTree", "V", 0x0, NULL, NULL },
-    { "getIdentifiers", NULL, "Ljava.util.Set;", 0x1, NULL, NULL },
-    { "getIdentifiersWithJavaUtilSet:", "getIdentifiers", "V", 0x0, NULL, NULL },
+    { "getIdentifiers", NULL, "Ljava.util.Set;", 0x1, NULL, "()Ljava/util/Set<Ljava/lang/String;>;" },
+    { "getIdentifiersWithJavaUtilSet:", "getIdentifiers", "V", 0x0, NULL, "(Ljava/util/Set<Ljava/lang/String;>;)V" },
     { "makeUnionWithOrgApacheLuceneUtilAutomatonRegExp:withOrgApacheLuceneUtilAutomatonRegExp:", "makeUnion", "Lorg.apache.lucene.util.automaton.RegExp;", 0x8, NULL, NULL },
     { "makeConcatenationWithOrgApacheLuceneUtilAutomatonRegExp:withOrgApacheLuceneUtilAutomatonRegExp:", "makeConcatenation", "Lorg.apache.lucene.util.automaton.RegExp;", 0x8, NULL, NULL },
     { "makeStringWithOrgApacheLuceneUtilAutomatonRegExp:withOrgApacheLuceneUtilAutomatonRegExp:", "makeString", "Lorg.apache.lucene.util.automaton.RegExp;", 0xa, NULL, NULL },
@@ -621,9 +651,11 @@ void OrgApacheLuceneUtilAutomatonRegExp_init(OrgApacheLuceneUtilAutomatonRegExp 
 }
 
 OrgApacheLuceneUtilAutomatonRegExp *new_OrgApacheLuceneUtilAutomatonRegExp_init() {
-  OrgApacheLuceneUtilAutomatonRegExp *self = [OrgApacheLuceneUtilAutomatonRegExp alloc];
-  OrgApacheLuceneUtilAutomatonRegExp_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAutomatonRegExp, init)
+}
+
+OrgApacheLuceneUtilAutomatonRegExp *create_OrgApacheLuceneUtilAutomatonRegExp_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAutomatonRegExp, init)
 }
 
 void OrgApacheLuceneUtilAutomatonRegExp_initWithNSString_(OrgApacheLuceneUtilAutomatonRegExp *self, NSString *s) {
@@ -631,9 +663,11 @@ void OrgApacheLuceneUtilAutomatonRegExp_initWithNSString_(OrgApacheLuceneUtilAut
 }
 
 OrgApacheLuceneUtilAutomatonRegExp *new_OrgApacheLuceneUtilAutomatonRegExp_initWithNSString_(NSString *s) {
-  OrgApacheLuceneUtilAutomatonRegExp *self = [OrgApacheLuceneUtilAutomatonRegExp alloc];
-  OrgApacheLuceneUtilAutomatonRegExp_initWithNSString_(self, s);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAutomatonRegExp, initWithNSString_, s)
+}
+
+OrgApacheLuceneUtilAutomatonRegExp *create_OrgApacheLuceneUtilAutomatonRegExp_initWithNSString_(NSString *s) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAutomatonRegExp, initWithNSString_, s)
 }
 
 void OrgApacheLuceneUtilAutomatonRegExp_initWithNSString_withInt_(OrgApacheLuceneUtilAutomatonRegExp *self, NSString *s, jint syntax_flags) {
@@ -644,7 +678,7 @@ void OrgApacheLuceneUtilAutomatonRegExp_initWithNSString_withInt_(OrgApacheLucen
   if (((jint) [((NSString *) nil_chk(s)) length]) == 0) e = OrgApacheLuceneUtilAutomatonRegExp_makeStringWithNSString_(@"");
   else {
     e = OrgApacheLuceneUtilAutomatonRegExp_parseUnionExp(self);
-    if (self->pos_ < ((jint) [((NSString *) nil_chk(self->originalString_)) length])) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"end-of-string expected at position ", self->pos_)) autorelease];
+    if (self->pos_ < ((jint) [((NSString *) nil_chk(self->originalString_)) length])) @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"end-of-string expected at position ", self->pos_));
   }
   JreStrongAssign(&self->kind_, ((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(e))->kind_);
   JreStrongAssign(&self->exp1_, e->exp1_);
@@ -659,9 +693,11 @@ void OrgApacheLuceneUtilAutomatonRegExp_initWithNSString_withInt_(OrgApacheLucen
 }
 
 OrgApacheLuceneUtilAutomatonRegExp *new_OrgApacheLuceneUtilAutomatonRegExp_initWithNSString_withInt_(NSString *s, jint syntax_flags) {
-  OrgApacheLuceneUtilAutomatonRegExp *self = [OrgApacheLuceneUtilAutomatonRegExp alloc];
-  OrgApacheLuceneUtilAutomatonRegExp_initWithNSString_withInt_(self, s, syntax_flags);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAutomatonRegExp, initWithNSString_withInt_, s, syntax_flags)
+}
+
+OrgApacheLuceneUtilAutomatonRegExp *create_OrgApacheLuceneUtilAutomatonRegExp_initWithNSString_withInt_(NSString *s, jint syntax_flags) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAutomatonRegExp, initWithNSString_withInt_, s, syntax_flags)
 }
 
 OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonRegExp_toAutomatonWithJavaUtilMap_withOrgApacheLuceneUtilAutomatonAutomatonProvider_withInt_(OrgApacheLuceneUtilAutomatonRegExp *self, id<JavaUtilMap> automata, id<OrgApacheLuceneUtilAutomatonAutomatonProvider> automaton_provider, jint maxDeterminizedStates) {
@@ -669,7 +705,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonRegExp_toAuto
     return OrgApacheLuceneUtilAutomatonRegExp_toAutomatonInternalWithJavaUtilMap_withOrgApacheLuceneUtilAutomatonAutomatonProvider_withInt_(self, automata, automaton_provider, maxDeterminizedStates);
   }
   @catch (OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException *e) {
-    @throw [new_OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException_initWithOrgApacheLuceneUtilAutomatonRegExp_withOrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException_(self, e) autorelease];
+    @throw create_OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException_initWithOrgApacheLuceneUtilAutomatonRegExp_withOrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException_(self, e);
   }
 }
 
@@ -679,63 +715,63 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonRegExp_toAuto
   {
     OrgApacheLuceneUtilAutomatonAutomaton *aa;
     switch ([self->kind_ ordinal]) {
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_UNION:
-      list = [new_JavaUtilArrayList_init() autorelease];
-      OrgApacheLuceneUtilAutomatonRegExp_findLeavesWithOrgApacheLuceneUtilAutomatonRegExp_withOrgApacheLuceneUtilAutomatonRegExp_KindEnum_withJavaUtilList_withJavaUtilMap_withOrgApacheLuceneUtilAutomatonAutomatonProvider_withInt_(self, self->exp1_, JreLoadStatic(OrgApacheLuceneUtilAutomatonRegExp_KindEnum, REGEXP_UNION), list, automata, automaton_provider, maxDeterminizedStates);
-      OrgApacheLuceneUtilAutomatonRegExp_findLeavesWithOrgApacheLuceneUtilAutomatonRegExp_withOrgApacheLuceneUtilAutomatonRegExp_KindEnum_withJavaUtilList_withJavaUtilMap_withOrgApacheLuceneUtilAutomatonAutomatonProvider_withInt_(self, self->exp2_, JreLoadStatic(OrgApacheLuceneUtilAutomatonRegExp_KindEnum, REGEXP_UNION), list, automata, automaton_provider, maxDeterminizedStates);
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_UNION:
+      list = create_JavaUtilArrayList_init();
+      OrgApacheLuceneUtilAutomatonRegExp_findLeavesWithOrgApacheLuceneUtilAutomatonRegExp_withOrgApacheLuceneUtilAutomatonRegExp_Kind_withJavaUtilList_withJavaUtilMap_withOrgApacheLuceneUtilAutomatonAutomatonProvider_withInt_(self, self->exp1_, JreLoadEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_UNION), list, automata, automaton_provider, maxDeterminizedStates);
+      OrgApacheLuceneUtilAutomatonRegExp_findLeavesWithOrgApacheLuceneUtilAutomatonRegExp_withOrgApacheLuceneUtilAutomatonRegExp_Kind_withJavaUtilList_withJavaUtilMap_withOrgApacheLuceneUtilAutomatonAutomatonProvider_withInt_(self, self->exp2_, JreLoadEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_UNION), list, automata, automaton_provider, maxDeterminizedStates);
       a = OrgApacheLuceneUtilAutomatonOperations_union__WithJavaUtilCollection_(list);
       a = OrgApacheLuceneUtilAutomatonMinimizationOperations_minimizeWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(a, maxDeterminizedStates);
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_CONCATENATION:
-      list = [new_JavaUtilArrayList_init() autorelease];
-      OrgApacheLuceneUtilAutomatonRegExp_findLeavesWithOrgApacheLuceneUtilAutomatonRegExp_withOrgApacheLuceneUtilAutomatonRegExp_KindEnum_withJavaUtilList_withJavaUtilMap_withOrgApacheLuceneUtilAutomatonAutomatonProvider_withInt_(self, self->exp1_, JreLoadStatic(OrgApacheLuceneUtilAutomatonRegExp_KindEnum, REGEXP_CONCATENATION), list, automata, automaton_provider, maxDeterminizedStates);
-      OrgApacheLuceneUtilAutomatonRegExp_findLeavesWithOrgApacheLuceneUtilAutomatonRegExp_withOrgApacheLuceneUtilAutomatonRegExp_KindEnum_withJavaUtilList_withJavaUtilMap_withOrgApacheLuceneUtilAutomatonAutomatonProvider_withInt_(self, self->exp2_, JreLoadStatic(OrgApacheLuceneUtilAutomatonRegExp_KindEnum, REGEXP_CONCATENATION), list, automata, automaton_provider, maxDeterminizedStates);
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_CONCATENATION:
+      list = create_JavaUtilArrayList_init();
+      OrgApacheLuceneUtilAutomatonRegExp_findLeavesWithOrgApacheLuceneUtilAutomatonRegExp_withOrgApacheLuceneUtilAutomatonRegExp_Kind_withJavaUtilList_withJavaUtilMap_withOrgApacheLuceneUtilAutomatonAutomatonProvider_withInt_(self, self->exp1_, JreLoadEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_CONCATENATION), list, automata, automaton_provider, maxDeterminizedStates);
+      OrgApacheLuceneUtilAutomatonRegExp_findLeavesWithOrgApacheLuceneUtilAutomatonRegExp_withOrgApacheLuceneUtilAutomatonRegExp_Kind_withJavaUtilList_withJavaUtilMap_withOrgApacheLuceneUtilAutomatonAutomatonProvider_withInt_(self, self->exp2_, JreLoadEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_CONCATENATION), list, automata, automaton_provider, maxDeterminizedStates);
       a = OrgApacheLuceneUtilAutomatonOperations_concatenateWithJavaUtilList_(list);
       a = OrgApacheLuceneUtilAutomatonMinimizationOperations_minimizeWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(a, maxDeterminizedStates);
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_INTERSECTION:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_INTERSECTION:
       a = OrgApacheLuceneUtilAutomatonOperations_intersectionWithOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonRegExp_toAutomatonInternalWithJavaUtilMap_withOrgApacheLuceneUtilAutomatonAutomatonProvider_withInt_(nil_chk(self->exp1_), automata, automaton_provider, maxDeterminizedStates), OrgApacheLuceneUtilAutomatonRegExp_toAutomatonInternalWithJavaUtilMap_withOrgApacheLuceneUtilAutomatonAutomatonProvider_withInt_(nil_chk(self->exp2_), automata, automaton_provider, maxDeterminizedStates));
       a = OrgApacheLuceneUtilAutomatonMinimizationOperations_minimizeWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(a, maxDeterminizedStates);
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_OPTIONAL:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_OPTIONAL:
       a = OrgApacheLuceneUtilAutomatonOperations_optionalWithOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonRegExp_toAutomatonInternalWithJavaUtilMap_withOrgApacheLuceneUtilAutomatonAutomatonProvider_withInt_(nil_chk(self->exp1_), automata, automaton_provider, maxDeterminizedStates));
       a = OrgApacheLuceneUtilAutomatonMinimizationOperations_minimizeWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(a, maxDeterminizedStates);
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_REPEAT:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_REPEAT:
       a = OrgApacheLuceneUtilAutomatonOperations_repeatWithOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonRegExp_toAutomatonInternalWithJavaUtilMap_withOrgApacheLuceneUtilAutomatonAutomatonProvider_withInt_(nil_chk(self->exp1_), automata, automaton_provider, maxDeterminizedStates));
       a = OrgApacheLuceneUtilAutomatonMinimizationOperations_minimizeWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(a, maxDeterminizedStates);
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_REPEAT_MIN:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_REPEAT_MIN:
       a = OrgApacheLuceneUtilAutomatonOperations_repeatWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneUtilAutomatonRegExp_toAutomatonInternalWithJavaUtilMap_withOrgApacheLuceneUtilAutomatonAutomatonProvider_withInt_(nil_chk(self->exp1_), automata, automaton_provider, maxDeterminizedStates), self->min_);
       a = OrgApacheLuceneUtilAutomatonMinimizationOperations_minimizeWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(a, maxDeterminizedStates);
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_REPEAT_MINMAX:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_REPEAT_MINMAX:
       a = OrgApacheLuceneUtilAutomatonOperations_repeatWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_withInt_(OrgApacheLuceneUtilAutomatonRegExp_toAutomatonInternalWithJavaUtilMap_withOrgApacheLuceneUtilAutomatonAutomatonProvider_withInt_(nil_chk(self->exp1_), automata, automaton_provider, maxDeterminizedStates), self->min_, self->max_);
       a = OrgApacheLuceneUtilAutomatonMinimizationOperations_minimizeWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(a, maxDeterminizedStates);
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_COMPLEMENT:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_COMPLEMENT:
       a = OrgApacheLuceneUtilAutomatonOperations_complementWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneUtilAutomatonRegExp_toAutomatonInternalWithJavaUtilMap_withOrgApacheLuceneUtilAutomatonAutomatonProvider_withInt_(nil_chk(self->exp1_), automata, automaton_provider, maxDeterminizedStates), maxDeterminizedStates);
       a = OrgApacheLuceneUtilAutomatonMinimizationOperations_minimizeWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(a, maxDeterminizedStates);
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_CHAR:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_CHAR:
       a = OrgApacheLuceneUtilAutomatonAutomata_makeCharWithInt_(self->c_);
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_CHAR_RANGE:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_CHAR_RANGE:
       a = OrgApacheLuceneUtilAutomatonAutomata_makeCharRangeWithInt_withInt_(self->from_, self->to_);
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_ANYCHAR:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_ANYCHAR:
       a = OrgApacheLuceneUtilAutomatonAutomata_makeAnyChar();
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_EMPTY:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_EMPTY:
       a = OrgApacheLuceneUtilAutomatonAutomata_makeEmpty();
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_STRING:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_STRING:
       a = OrgApacheLuceneUtilAutomatonAutomata_makeStringWithNSString_(self->s_);
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_ANYSTRING:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_ANYSTRING:
       a = OrgApacheLuceneUtilAutomatonAutomata_makeAnyString();
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_AUTOMATON:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_AUTOMATON:
       aa = nil;
       if (automata != nil) {
         aa = [automata getWithId:self->s_];
@@ -745,15 +781,15 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonRegExp_toAuto
           aa = [automaton_provider getAutomatonWithNSString:self->s_];
         }
         @catch (JavaIoIOException *e) {
-          @throw [new_JavaLangIllegalArgumentException_initWithJavaLangThrowable_(e) autorelease];
+          @throw create_JavaLangIllegalArgumentException_initWithNSException_(e);
         }
       }
       if (aa == nil) {
-        @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("C$$", '\'', self->s_, @"' not found")) autorelease];
+        @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("C$$", '\'', self->s_, @"' not found"));
       }
       a = aa;
       break;
-      case OrgApacheLuceneUtilAutomatonRegExp_Kind_REGEXP_INTERVAL:
+      case OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum_REGEXP_INTERVAL:
       a = OrgApacheLuceneUtilAutomatonAutomata_makeDecimalIntervalWithInt_withInt_withInt_(self->min_, self->max_, self->digits_);
       break;
     }
@@ -761,10 +797,10 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonRegExp_toAuto
   return a;
 }
 
-void OrgApacheLuceneUtilAutomatonRegExp_findLeavesWithOrgApacheLuceneUtilAutomatonRegExp_withOrgApacheLuceneUtilAutomatonRegExp_KindEnum_withJavaUtilList_withJavaUtilMap_withOrgApacheLuceneUtilAutomatonAutomatonProvider_withInt_(OrgApacheLuceneUtilAutomatonRegExp *self, OrgApacheLuceneUtilAutomatonRegExp *exp, OrgApacheLuceneUtilAutomatonRegExp_KindEnum *kind, id<JavaUtilList> list, id<JavaUtilMap> automata, id<OrgApacheLuceneUtilAutomatonAutomatonProvider> automaton_provider, jint maxDeterminizedStates) {
+void OrgApacheLuceneUtilAutomatonRegExp_findLeavesWithOrgApacheLuceneUtilAutomatonRegExp_withOrgApacheLuceneUtilAutomatonRegExp_Kind_withJavaUtilList_withJavaUtilMap_withOrgApacheLuceneUtilAutomatonAutomatonProvider_withInt_(OrgApacheLuceneUtilAutomatonRegExp *self, OrgApacheLuceneUtilAutomatonRegExp *exp, OrgApacheLuceneUtilAutomatonRegExp_Kind *kind, id<JavaUtilList> list, id<JavaUtilMap> automata, id<OrgApacheLuceneUtilAutomatonAutomatonProvider> automaton_provider, jint maxDeterminizedStates) {
   if (((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp))->kind_ == kind) {
-    OrgApacheLuceneUtilAutomatonRegExp_findLeavesWithOrgApacheLuceneUtilAutomatonRegExp_withOrgApacheLuceneUtilAutomatonRegExp_KindEnum_withJavaUtilList_withJavaUtilMap_withOrgApacheLuceneUtilAutomatonAutomatonProvider_withInt_(self, exp->exp1_, kind, list, automata, automaton_provider, maxDeterminizedStates);
-    OrgApacheLuceneUtilAutomatonRegExp_findLeavesWithOrgApacheLuceneUtilAutomatonRegExp_withOrgApacheLuceneUtilAutomatonRegExp_KindEnum_withJavaUtilList_withJavaUtilMap_withOrgApacheLuceneUtilAutomatonAutomatonProvider_withInt_(self, exp->exp2_, kind, list, automata, automaton_provider, maxDeterminizedStates);
+    OrgApacheLuceneUtilAutomatonRegExp_findLeavesWithOrgApacheLuceneUtilAutomatonRegExp_withOrgApacheLuceneUtilAutomatonRegExp_Kind_withJavaUtilList_withJavaUtilMap_withOrgApacheLuceneUtilAutomatonAutomatonProvider_withInt_(self, exp->exp1_, kind, list, automata, automaton_provider, maxDeterminizedStates);
+    OrgApacheLuceneUtilAutomatonRegExp_findLeavesWithOrgApacheLuceneUtilAutomatonRegExp_withOrgApacheLuceneUtilAutomatonRegExp_Kind_withJavaUtilList_withJavaUtilMap_withOrgApacheLuceneUtilAutomatonAutomatonProvider_withInt_(self, exp->exp2_, kind, list, automata, automaton_provider, maxDeterminizedStates);
   }
   else {
     [((id<JavaUtilList>) nil_chk(list)) addWithId:OrgApacheLuceneUtilAutomatonRegExp_toAutomatonInternalWithJavaUtilMap_withOrgApacheLuceneUtilAutomatonAutomatonProvider_withInt_(exp, automata, automaton_provider, maxDeterminizedStates)];
@@ -773,8 +809,8 @@ void OrgApacheLuceneUtilAutomatonRegExp_findLeavesWithOrgApacheLuceneUtilAutomat
 
 OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_makeUnionWithOrgApacheLuceneUtilAutomatonRegExp_withOrgApacheLuceneUtilAutomatonRegExp_(OrgApacheLuceneUtilAutomatonRegExp *exp1, OrgApacheLuceneUtilAutomatonRegExp *exp2) {
   OrgApacheLuceneUtilAutomatonRegExp_initialize();
-  OrgApacheLuceneUtilAutomatonRegExp *r = [new_OrgApacheLuceneUtilAutomatonRegExp_init() autorelease];
-  JreStrongAssign(&r->kind_, JreLoadStatic(OrgApacheLuceneUtilAutomatonRegExp_KindEnum, REGEXP_UNION));
+  OrgApacheLuceneUtilAutomatonRegExp *r = create_OrgApacheLuceneUtilAutomatonRegExp_init();
+  JreStrongAssign(&r->kind_, JreLoadEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_UNION));
   JreStrongAssign(&r->exp1_, exp1);
   JreStrongAssign(&r->exp2_, exp2);
   return r;
@@ -782,15 +818,15 @@ OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_makeUnion
 
 OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_makeConcatenationWithOrgApacheLuceneUtilAutomatonRegExp_withOrgApacheLuceneUtilAutomatonRegExp_(OrgApacheLuceneUtilAutomatonRegExp *exp1, OrgApacheLuceneUtilAutomatonRegExp *exp2) {
   OrgApacheLuceneUtilAutomatonRegExp_initialize();
-  if ((((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp1))->kind_ == JreLoadStatic(OrgApacheLuceneUtilAutomatonRegExp_KindEnum, REGEXP_CHAR) || exp1->kind_ == JreLoadStatic(OrgApacheLuceneUtilAutomatonRegExp_KindEnum, REGEXP_STRING)) && (((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp2))->kind_ == JreLoadStatic(OrgApacheLuceneUtilAutomatonRegExp_KindEnum, REGEXP_CHAR) || exp2->kind_ == JreLoadStatic(OrgApacheLuceneUtilAutomatonRegExp_KindEnum, REGEXP_STRING))) return OrgApacheLuceneUtilAutomatonRegExp_makeStringWithOrgApacheLuceneUtilAutomatonRegExp_withOrgApacheLuceneUtilAutomatonRegExp_(exp1, exp2);
-  OrgApacheLuceneUtilAutomatonRegExp *r = [new_OrgApacheLuceneUtilAutomatonRegExp_init() autorelease];
-  JreStrongAssign(&r->kind_, JreLoadStatic(OrgApacheLuceneUtilAutomatonRegExp_KindEnum, REGEXP_CONCATENATION));
-  if (exp1->kind_ == JreLoadStatic(OrgApacheLuceneUtilAutomatonRegExp_KindEnum, REGEXP_CONCATENATION) && (((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp1->exp2_))->kind_ == JreLoadStatic(OrgApacheLuceneUtilAutomatonRegExp_KindEnum, REGEXP_CHAR) || exp1->exp2_->kind_ == JreLoadStatic(OrgApacheLuceneUtilAutomatonRegExp_KindEnum, REGEXP_STRING)) && (((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp2))->kind_ == JreLoadStatic(OrgApacheLuceneUtilAutomatonRegExp_KindEnum, REGEXP_CHAR) || exp2->kind_ == JreLoadStatic(OrgApacheLuceneUtilAutomatonRegExp_KindEnum, REGEXP_STRING))) {
+  if ((((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp1))->kind_ == JreLoadEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_CHAR) || exp1->kind_ == JreLoadEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_STRING)) && (((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp2))->kind_ == JreLoadEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_CHAR) || exp2->kind_ == JreLoadEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_STRING))) return OrgApacheLuceneUtilAutomatonRegExp_makeStringWithOrgApacheLuceneUtilAutomatonRegExp_withOrgApacheLuceneUtilAutomatonRegExp_(exp1, exp2);
+  OrgApacheLuceneUtilAutomatonRegExp *r = create_OrgApacheLuceneUtilAutomatonRegExp_init();
+  JreStrongAssign(&r->kind_, JreLoadEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_CONCATENATION));
+  if (exp1->kind_ == JreLoadEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_CONCATENATION) && (((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp1->exp2_))->kind_ == JreLoadEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_CHAR) || exp1->exp2_->kind_ == JreLoadEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_STRING)) && (((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp2))->kind_ == JreLoadEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_CHAR) || exp2->kind_ == JreLoadEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_STRING))) {
     JreStrongAssign(&r->exp1_, exp1->exp1_);
     JreStrongAssign(&r->exp2_, OrgApacheLuceneUtilAutomatonRegExp_makeStringWithOrgApacheLuceneUtilAutomatonRegExp_withOrgApacheLuceneUtilAutomatonRegExp_(exp1->exp2_, exp2));
   }
-  else if ((exp1->kind_ == JreLoadStatic(OrgApacheLuceneUtilAutomatonRegExp_KindEnum, REGEXP_CHAR) || exp1->kind_ == JreLoadStatic(OrgApacheLuceneUtilAutomatonRegExp_KindEnum, REGEXP_STRING)) && ((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp2))->kind_ == JreLoadStatic(OrgApacheLuceneUtilAutomatonRegExp_KindEnum, REGEXP_CONCATENATION) && (((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp2->exp1_))->kind_ == JreLoadStatic(OrgApacheLuceneUtilAutomatonRegExp_KindEnum, REGEXP_CHAR) || exp2->exp1_->kind_ == JreLoadStatic(OrgApacheLuceneUtilAutomatonRegExp_KindEnum, REGEXP_STRING))) {
-    JreStrongAssign(&r->exp1_, OrgApacheLuceneUtilAutomatonRegExp_makeStringWithOrgApacheLuceneUtilAutomatonRegExp_withOrgApacheLuceneUtilAutomatonRegExp_(exp1, exp2->exp1_));
+  else if ((exp1->kind_ == JreLoadEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_CHAR) || exp1->kind_ == JreLoadEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_STRING)) && ((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp2))->kind_ == JreLoadEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_CONCATENATION) && (((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp2->exp1_))->kind_ == JreLoadEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_CHAR) || exp2->exp1_->kind_ == JreLoadEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_STRING))) {
+    JreStrongAssign(&r->exp1_, OrgApacheLuceneUtilAutomatonRegExp_makeStringWithOrgApacheLuceneUtilAutomatonRegExp_withOrgApacheLuceneUtilAutomatonRegExp_(exp1, ((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp2))->exp1_));
     JreStrongAssign(&r->exp2_, exp2->exp2_);
   }
   else {
@@ -802,18 +838,18 @@ OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_makeConca
 
 OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_makeStringWithOrgApacheLuceneUtilAutomatonRegExp_withOrgApacheLuceneUtilAutomatonRegExp_(OrgApacheLuceneUtilAutomatonRegExp *exp1, OrgApacheLuceneUtilAutomatonRegExp *exp2) {
   OrgApacheLuceneUtilAutomatonRegExp_initialize();
-  JavaLangStringBuilder *b = [new_JavaLangStringBuilder_init() autorelease];
-  if (((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp1))->kind_ == JreLoadStatic(OrgApacheLuceneUtilAutomatonRegExp_KindEnum, REGEXP_STRING)) [b appendWithNSString:exp1->s_];
+  JavaLangStringBuilder *b = create_JavaLangStringBuilder_init();
+  if (((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp1))->kind_ == JreLoadEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_STRING)) [b appendWithNSString:exp1->s_];
   else [b appendCodePointWithInt:exp1->c_];
-  if (((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp2))->kind_ == JreLoadStatic(OrgApacheLuceneUtilAutomatonRegExp_KindEnum, REGEXP_STRING)) [b appendWithNSString:exp2->s_];
+  if (((OrgApacheLuceneUtilAutomatonRegExp *) nil_chk(exp2))->kind_ == JreLoadEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_STRING)) [b appendWithNSString:exp2->s_];
   else [b appendCodePointWithInt:exp2->c_];
   return OrgApacheLuceneUtilAutomatonRegExp_makeStringWithNSString_([b description]);
 }
 
 OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_makeIntersectionWithOrgApacheLuceneUtilAutomatonRegExp_withOrgApacheLuceneUtilAutomatonRegExp_(OrgApacheLuceneUtilAutomatonRegExp *exp1, OrgApacheLuceneUtilAutomatonRegExp *exp2) {
   OrgApacheLuceneUtilAutomatonRegExp_initialize();
-  OrgApacheLuceneUtilAutomatonRegExp *r = [new_OrgApacheLuceneUtilAutomatonRegExp_init() autorelease];
-  JreStrongAssign(&r->kind_, JreLoadStatic(OrgApacheLuceneUtilAutomatonRegExp_KindEnum, REGEXP_INTERSECTION));
+  OrgApacheLuceneUtilAutomatonRegExp *r = create_OrgApacheLuceneUtilAutomatonRegExp_init();
+  JreStrongAssign(&r->kind_, JreLoadEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_INTERSECTION));
   JreStrongAssign(&r->exp1_, exp1);
   JreStrongAssign(&r->exp2_, exp2);
   return r;
@@ -821,24 +857,24 @@ OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_makeInter
 
 OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_makeOptionalWithOrgApacheLuceneUtilAutomatonRegExp_(OrgApacheLuceneUtilAutomatonRegExp *exp) {
   OrgApacheLuceneUtilAutomatonRegExp_initialize();
-  OrgApacheLuceneUtilAutomatonRegExp *r = [new_OrgApacheLuceneUtilAutomatonRegExp_init() autorelease];
-  JreStrongAssign(&r->kind_, JreLoadStatic(OrgApacheLuceneUtilAutomatonRegExp_KindEnum, REGEXP_OPTIONAL));
+  OrgApacheLuceneUtilAutomatonRegExp *r = create_OrgApacheLuceneUtilAutomatonRegExp_init();
+  JreStrongAssign(&r->kind_, JreLoadEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_OPTIONAL));
   JreStrongAssign(&r->exp1_, exp);
   return r;
 }
 
 OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_makeRepeatWithOrgApacheLuceneUtilAutomatonRegExp_(OrgApacheLuceneUtilAutomatonRegExp *exp) {
   OrgApacheLuceneUtilAutomatonRegExp_initialize();
-  OrgApacheLuceneUtilAutomatonRegExp *r = [new_OrgApacheLuceneUtilAutomatonRegExp_init() autorelease];
-  JreStrongAssign(&r->kind_, JreLoadStatic(OrgApacheLuceneUtilAutomatonRegExp_KindEnum, REGEXP_REPEAT));
+  OrgApacheLuceneUtilAutomatonRegExp *r = create_OrgApacheLuceneUtilAutomatonRegExp_init();
+  JreStrongAssign(&r->kind_, JreLoadEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_REPEAT));
   JreStrongAssign(&r->exp1_, exp);
   return r;
 }
 
 OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_makeRepeatWithOrgApacheLuceneUtilAutomatonRegExp_withInt_(OrgApacheLuceneUtilAutomatonRegExp *exp, jint min) {
   OrgApacheLuceneUtilAutomatonRegExp_initialize();
-  OrgApacheLuceneUtilAutomatonRegExp *r = [new_OrgApacheLuceneUtilAutomatonRegExp_init() autorelease];
-  JreStrongAssign(&r->kind_, JreLoadStatic(OrgApacheLuceneUtilAutomatonRegExp_KindEnum, REGEXP_REPEAT_MIN));
+  OrgApacheLuceneUtilAutomatonRegExp *r = create_OrgApacheLuceneUtilAutomatonRegExp_init();
+  JreStrongAssign(&r->kind_, JreLoadEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_REPEAT_MIN));
   JreStrongAssign(&r->exp1_, exp);
   r->min_ = min;
   return r;
@@ -846,8 +882,8 @@ OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_makeRepea
 
 OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_makeRepeatWithOrgApacheLuceneUtilAutomatonRegExp_withInt_withInt_(OrgApacheLuceneUtilAutomatonRegExp *exp, jint min, jint max) {
   OrgApacheLuceneUtilAutomatonRegExp_initialize();
-  OrgApacheLuceneUtilAutomatonRegExp *r = [new_OrgApacheLuceneUtilAutomatonRegExp_init() autorelease];
-  JreStrongAssign(&r->kind_, JreLoadStatic(OrgApacheLuceneUtilAutomatonRegExp_KindEnum, REGEXP_REPEAT_MINMAX));
+  OrgApacheLuceneUtilAutomatonRegExp *r = create_OrgApacheLuceneUtilAutomatonRegExp_init();
+  JreStrongAssign(&r->kind_, JreLoadEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_REPEAT_MINMAX));
   JreStrongAssign(&r->exp1_, exp);
   r->min_ = min;
   r->max_ = max;
@@ -856,25 +892,25 @@ OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_makeRepea
 
 OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_makeComplementWithOrgApacheLuceneUtilAutomatonRegExp_(OrgApacheLuceneUtilAutomatonRegExp *exp) {
   OrgApacheLuceneUtilAutomatonRegExp_initialize();
-  OrgApacheLuceneUtilAutomatonRegExp *r = [new_OrgApacheLuceneUtilAutomatonRegExp_init() autorelease];
-  JreStrongAssign(&r->kind_, JreLoadStatic(OrgApacheLuceneUtilAutomatonRegExp_KindEnum, REGEXP_COMPLEMENT));
+  OrgApacheLuceneUtilAutomatonRegExp *r = create_OrgApacheLuceneUtilAutomatonRegExp_init();
+  JreStrongAssign(&r->kind_, JreLoadEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_COMPLEMENT));
   JreStrongAssign(&r->exp1_, exp);
   return r;
 }
 
 OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_makeCharWithInt_(jint c) {
   OrgApacheLuceneUtilAutomatonRegExp_initialize();
-  OrgApacheLuceneUtilAutomatonRegExp *r = [new_OrgApacheLuceneUtilAutomatonRegExp_init() autorelease];
-  JreStrongAssign(&r->kind_, JreLoadStatic(OrgApacheLuceneUtilAutomatonRegExp_KindEnum, REGEXP_CHAR));
+  OrgApacheLuceneUtilAutomatonRegExp *r = create_OrgApacheLuceneUtilAutomatonRegExp_init();
+  JreStrongAssign(&r->kind_, JreLoadEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_CHAR));
   r->c_ = c;
   return r;
 }
 
 OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_makeCharRangeWithInt_withInt_(jint from, jint to) {
   OrgApacheLuceneUtilAutomatonRegExp_initialize();
-  if (from > to) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$IC", @"invalid range: from (", from, @") cannot be > to (", to, ')')) autorelease];
-  OrgApacheLuceneUtilAutomatonRegExp *r = [new_OrgApacheLuceneUtilAutomatonRegExp_init() autorelease];
-  JreStrongAssign(&r->kind_, JreLoadStatic(OrgApacheLuceneUtilAutomatonRegExp_KindEnum, REGEXP_CHAR_RANGE));
+  if (from > to) @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$IC", @"invalid range: from (", from, @") cannot be > to (", to, ')'));
+  OrgApacheLuceneUtilAutomatonRegExp *r = create_OrgApacheLuceneUtilAutomatonRegExp_init();
+  JreStrongAssign(&r->kind_, JreLoadEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_CHAR_RANGE));
   r->from_ = from;
   r->to_ = to;
   return r;
@@ -882,45 +918,45 @@ OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_makeCharR
 
 OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_makeAnyChar() {
   OrgApacheLuceneUtilAutomatonRegExp_initialize();
-  OrgApacheLuceneUtilAutomatonRegExp *r = [new_OrgApacheLuceneUtilAutomatonRegExp_init() autorelease];
-  JreStrongAssign(&r->kind_, JreLoadStatic(OrgApacheLuceneUtilAutomatonRegExp_KindEnum, REGEXP_ANYCHAR));
+  OrgApacheLuceneUtilAutomatonRegExp *r = create_OrgApacheLuceneUtilAutomatonRegExp_init();
+  JreStrongAssign(&r->kind_, JreLoadEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_ANYCHAR));
   return r;
 }
 
 OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_makeEmpty() {
   OrgApacheLuceneUtilAutomatonRegExp_initialize();
-  OrgApacheLuceneUtilAutomatonRegExp *r = [new_OrgApacheLuceneUtilAutomatonRegExp_init() autorelease];
-  JreStrongAssign(&r->kind_, JreLoadStatic(OrgApacheLuceneUtilAutomatonRegExp_KindEnum, REGEXP_EMPTY));
+  OrgApacheLuceneUtilAutomatonRegExp *r = create_OrgApacheLuceneUtilAutomatonRegExp_init();
+  JreStrongAssign(&r->kind_, JreLoadEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_EMPTY));
   return r;
 }
 
 OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_makeStringWithNSString_(NSString *s) {
   OrgApacheLuceneUtilAutomatonRegExp_initialize();
-  OrgApacheLuceneUtilAutomatonRegExp *r = [new_OrgApacheLuceneUtilAutomatonRegExp_init() autorelease];
-  JreStrongAssign(&r->kind_, JreLoadStatic(OrgApacheLuceneUtilAutomatonRegExp_KindEnum, REGEXP_STRING));
+  OrgApacheLuceneUtilAutomatonRegExp *r = create_OrgApacheLuceneUtilAutomatonRegExp_init();
+  JreStrongAssign(&r->kind_, JreLoadEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_STRING));
   JreStrongAssign(&r->s_, s);
   return r;
 }
 
 OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_makeAnyString() {
   OrgApacheLuceneUtilAutomatonRegExp_initialize();
-  OrgApacheLuceneUtilAutomatonRegExp *r = [new_OrgApacheLuceneUtilAutomatonRegExp_init() autorelease];
-  JreStrongAssign(&r->kind_, JreLoadStatic(OrgApacheLuceneUtilAutomatonRegExp_KindEnum, REGEXP_ANYSTRING));
+  OrgApacheLuceneUtilAutomatonRegExp *r = create_OrgApacheLuceneUtilAutomatonRegExp_init();
+  JreStrongAssign(&r->kind_, JreLoadEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_ANYSTRING));
   return r;
 }
 
 OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_makeAutomatonWithNSString_(NSString *s) {
   OrgApacheLuceneUtilAutomatonRegExp_initialize();
-  OrgApacheLuceneUtilAutomatonRegExp *r = [new_OrgApacheLuceneUtilAutomatonRegExp_init() autorelease];
-  JreStrongAssign(&r->kind_, JreLoadStatic(OrgApacheLuceneUtilAutomatonRegExp_KindEnum, REGEXP_AUTOMATON));
+  OrgApacheLuceneUtilAutomatonRegExp *r = create_OrgApacheLuceneUtilAutomatonRegExp_init();
+  JreStrongAssign(&r->kind_, JreLoadEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_AUTOMATON));
   JreStrongAssign(&r->s_, s);
   return r;
 }
 
 OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_makeIntervalWithInt_withInt_withInt_(jint min, jint max, jint digits) {
   OrgApacheLuceneUtilAutomatonRegExp_initialize();
-  OrgApacheLuceneUtilAutomatonRegExp *r = [new_OrgApacheLuceneUtilAutomatonRegExp_init() autorelease];
-  JreStrongAssign(&r->kind_, JreLoadStatic(OrgApacheLuceneUtilAutomatonRegExp_KindEnum, REGEXP_INTERVAL));
+  OrgApacheLuceneUtilAutomatonRegExp *r = create_OrgApacheLuceneUtilAutomatonRegExp_init();
+  JreStrongAssign(&r->kind_, JreLoadEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_INTERVAL));
   r->min_ = min;
   r->max_ = max;
   r->digits_ = digits;
@@ -945,7 +981,7 @@ jboolean OrgApacheLuceneUtilAutomatonRegExp_more(OrgApacheLuceneUtilAutomatonReg
 }
 
 jint OrgApacheLuceneUtilAutomatonRegExp_next(OrgApacheLuceneUtilAutomatonRegExp *self) {
-  if (!OrgApacheLuceneUtilAutomatonRegExp_more(self)) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"unexpected end-of-string") autorelease];
+  if (!OrgApacheLuceneUtilAutomatonRegExp_more(self)) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"unexpected end-of-string");
   jint ch = [((NSString *) nil_chk(self->originalString_)) codePointAt:self->pos_];
   self->pos_ += JavaLangCharacter_charCountWithInt_(ch);
   return ch;
@@ -982,7 +1018,7 @@ OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_parseRepe
     else if (OrgApacheLuceneUtilAutomatonRegExp_matchWithInt_(self, '{')) {
       jint start = self->pos_;
       while (OrgApacheLuceneUtilAutomatonRegExp_peekWithNSString_(self, @"0123456789")) OrgApacheLuceneUtilAutomatonRegExp_next(self);
-      if (start == self->pos_) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"integer expected at position ", self->pos_)) autorelease];
+      if (start == self->pos_) @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"integer expected at position ", self->pos_));
       jint n = JavaLangInteger_parseIntWithNSString_([((NSString *) nil_chk(self->originalString_)) substring:start endIndex:self->pos_]);
       jint m = -1;
       if (OrgApacheLuceneUtilAutomatonRegExp_matchWithInt_(self, ',')) {
@@ -991,7 +1027,7 @@ OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_parseRepe
         if (start != self->pos_) m = JavaLangInteger_parseIntWithNSString_([self->originalString_ substring:start endIndex:self->pos_]);
       }
       else m = n;
-      if (!OrgApacheLuceneUtilAutomatonRegExp_matchWithInt_(self, '}')) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"expected '}' at position ", self->pos_)) autorelease];
+      if (!OrgApacheLuceneUtilAutomatonRegExp_matchWithInt_(self, '}')) @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"expected '}' at position ", self->pos_));
       if (m == -1) e = OrgApacheLuceneUtilAutomatonRegExp_makeRepeatWithOrgApacheLuceneUtilAutomatonRegExp_withInt_(e, n);
       else e = OrgApacheLuceneUtilAutomatonRegExp_makeRepeatWithOrgApacheLuceneUtilAutomatonRegExp_withInt_withInt_(e, n, m);
     }
@@ -1010,7 +1046,7 @@ OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_parseChar
     if (OrgApacheLuceneUtilAutomatonRegExp_matchWithInt_(self, '^')) negate = true;
     OrgApacheLuceneUtilAutomatonRegExp *e = OrgApacheLuceneUtilAutomatonRegExp_parseCharClasses(self);
     if (negate) e = OrgApacheLuceneUtilAutomatonRegExp_makeIntersectionWithOrgApacheLuceneUtilAutomatonRegExp_withOrgApacheLuceneUtilAutomatonRegExp_(OrgApacheLuceneUtilAutomatonRegExp_makeAnyChar(), OrgApacheLuceneUtilAutomatonRegExp_makeComplementWithOrgApacheLuceneUtilAutomatonRegExp_(e));
-    if (!OrgApacheLuceneUtilAutomatonRegExp_matchWithInt_(self, ']')) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"expected ']' at position ", self->pos_)) autorelease];
+    if (!OrgApacheLuceneUtilAutomatonRegExp_matchWithInt_(self, ']')) @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"expected ']' at position ", self->pos_));
     return e;
   }
   else return OrgApacheLuceneUtilAutomatonRegExp_parseSimpleExp(self);
@@ -1035,29 +1071,29 @@ OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_parseSimp
   else if (OrgApacheLuceneUtilAutomatonRegExp_matchWithInt_(self, '"')) {
     jint start = self->pos_;
     while (OrgApacheLuceneUtilAutomatonRegExp_more(self) && !OrgApacheLuceneUtilAutomatonRegExp_peekWithNSString_(self, @"\"")) OrgApacheLuceneUtilAutomatonRegExp_next(self);
-    if (!OrgApacheLuceneUtilAutomatonRegExp_matchWithInt_(self, '"')) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"expected '\"' at position ", self->pos_)) autorelease];
+    if (!OrgApacheLuceneUtilAutomatonRegExp_matchWithInt_(self, '"')) @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"expected '\"' at position ", self->pos_));
     return OrgApacheLuceneUtilAutomatonRegExp_makeStringWithNSString_([((NSString *) nil_chk(self->originalString_)) substring:start endIndex:self->pos_ - 1]);
   }
   else if (OrgApacheLuceneUtilAutomatonRegExp_matchWithInt_(self, '(')) {
     if (OrgApacheLuceneUtilAutomatonRegExp_matchWithInt_(self, ')')) return OrgApacheLuceneUtilAutomatonRegExp_makeStringWithNSString_(@"");
     OrgApacheLuceneUtilAutomatonRegExp *e = OrgApacheLuceneUtilAutomatonRegExp_parseUnionExp(self);
-    if (!OrgApacheLuceneUtilAutomatonRegExp_matchWithInt_(self, ')')) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"expected ')' at position ", self->pos_)) autorelease];
+    if (!OrgApacheLuceneUtilAutomatonRegExp_matchWithInt_(self, ')')) @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"expected ')' at position ", self->pos_));
     return e;
   }
   else if ((OrgApacheLuceneUtilAutomatonRegExp_checkWithInt_(self, OrgApacheLuceneUtilAutomatonRegExp_AUTOMATON) || OrgApacheLuceneUtilAutomatonRegExp_checkWithInt_(self, OrgApacheLuceneUtilAutomatonRegExp_INTERVAL)) && OrgApacheLuceneUtilAutomatonRegExp_matchWithInt_(self, '<')) {
     jint start = self->pos_;
     while (OrgApacheLuceneUtilAutomatonRegExp_more(self) && !OrgApacheLuceneUtilAutomatonRegExp_peekWithNSString_(self, @">")) OrgApacheLuceneUtilAutomatonRegExp_next(self);
-    if (!OrgApacheLuceneUtilAutomatonRegExp_matchWithInt_(self, '>')) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"expected '>' at position ", self->pos_)) autorelease];
+    if (!OrgApacheLuceneUtilAutomatonRegExp_matchWithInt_(self, '>')) @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"expected '>' at position ", self->pos_));
     NSString *s = [((NSString *) nil_chk(self->originalString_)) substring:start endIndex:self->pos_ - 1];
     jint i = [((NSString *) nil_chk(s)) indexOf:'-'];
     if (i == -1) {
-      if (!OrgApacheLuceneUtilAutomatonRegExp_checkWithInt_(self, OrgApacheLuceneUtilAutomatonRegExp_AUTOMATON)) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"interval syntax error at position ", (self->pos_ - 1))) autorelease];
+      if (!OrgApacheLuceneUtilAutomatonRegExp_checkWithInt_(self, OrgApacheLuceneUtilAutomatonRegExp_AUTOMATON)) @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"interval syntax error at position ", (self->pos_ - 1)));
       return OrgApacheLuceneUtilAutomatonRegExp_makeAutomatonWithNSString_(s);
     }
     else {
-      if (!OrgApacheLuceneUtilAutomatonRegExp_checkWithInt_(self, OrgApacheLuceneUtilAutomatonRegExp_INTERVAL)) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"illegal identifier at position ", (self->pos_ - 1))) autorelease];
+      if (!OrgApacheLuceneUtilAutomatonRegExp_checkWithInt_(self, OrgApacheLuceneUtilAutomatonRegExp_INTERVAL)) @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"illegal identifier at position ", (self->pos_ - 1)));
       @try {
-        if (i == 0 || i == ((jint) [s length]) - 1 || i != [s lastIndexOf:'-']) @throw [new_JavaLangNumberFormatException_init() autorelease];
+        if (i == 0 || i == ((jint) [s length]) - 1 || i != [s lastIndexOf:'-']) @throw create_JavaLangNumberFormatException_init();
         NSString *smin = [s substring:0 endIndex:i];
         NSString *smax = [s substring:i + 1 endIndex:((jint) [s length])];
         jint imin = JavaLangInteger_parseIntWithNSString_(smin);
@@ -1073,7 +1109,7 @@ OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_parseSimp
         return OrgApacheLuceneUtilAutomatonRegExp_makeIntervalWithInt_withInt_withInt_(imin, imax, digits);
       }
       @catch (JavaLangNumberFormatException *e) {
-        @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"interval syntax error at position ", (self->pos_ - 1))) autorelease];
+        @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"interval syntax error at position ", (self->pos_ - 1)));
       }
     }
   }
@@ -1087,35 +1123,173 @@ jint OrgApacheLuceneUtilAutomatonRegExp_parseCharExp(OrgApacheLuceneUtilAutomato
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonRegExp)
 
-J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilAutomatonRegExp_KindEnum)
+J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilAutomatonRegExp_Kind)
 
-OrgApacheLuceneUtilAutomatonRegExp_KindEnum *OrgApacheLuceneUtilAutomatonRegExp_KindEnum_values_[16];
+OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_values_[16];
 
-@implementation OrgApacheLuceneUtilAutomatonRegExp_KindEnum
+@implementation OrgApacheLuceneUtilAutomatonRegExp_Kind
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgApacheLuceneUtilAutomatonRegExp_KindEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
++ (OrgApacheLuceneUtilAutomatonRegExp_Kind *)REGEXP_UNION {
+  return JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_UNION);
 }
 
-IOSObjectArray *OrgApacheLuceneUtilAutomatonRegExp_KindEnum_values() {
-  OrgApacheLuceneUtilAutomatonRegExp_KindEnum_initialize();
-  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneUtilAutomatonRegExp_KindEnum_values_ count:16 type:OrgApacheLuceneUtilAutomatonRegExp_KindEnum_class_()];
++ (OrgApacheLuceneUtilAutomatonRegExp_Kind *)REGEXP_CONCATENATION {
+  return JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_CONCATENATION);
+}
+
++ (OrgApacheLuceneUtilAutomatonRegExp_Kind *)REGEXP_INTERSECTION {
+  return JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_INTERSECTION);
+}
+
++ (OrgApacheLuceneUtilAutomatonRegExp_Kind *)REGEXP_OPTIONAL {
+  return JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_OPTIONAL);
+}
+
++ (OrgApacheLuceneUtilAutomatonRegExp_Kind *)REGEXP_REPEAT {
+  return JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_REPEAT);
+}
+
++ (OrgApacheLuceneUtilAutomatonRegExp_Kind *)REGEXP_REPEAT_MIN {
+  return JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_REPEAT_MIN);
+}
+
++ (OrgApacheLuceneUtilAutomatonRegExp_Kind *)REGEXP_REPEAT_MINMAX {
+  return JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_REPEAT_MINMAX);
+}
+
++ (OrgApacheLuceneUtilAutomatonRegExp_Kind *)REGEXP_COMPLEMENT {
+  return JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_COMPLEMENT);
+}
+
++ (OrgApacheLuceneUtilAutomatonRegExp_Kind *)REGEXP_CHAR {
+  return JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_CHAR);
+}
+
++ (OrgApacheLuceneUtilAutomatonRegExp_Kind *)REGEXP_CHAR_RANGE {
+  return JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_CHAR_RANGE);
+}
+
++ (OrgApacheLuceneUtilAutomatonRegExp_Kind *)REGEXP_ANYCHAR {
+  return JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_ANYCHAR);
+}
+
++ (OrgApacheLuceneUtilAutomatonRegExp_Kind *)REGEXP_EMPTY {
+  return JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_EMPTY);
+}
+
++ (OrgApacheLuceneUtilAutomatonRegExp_Kind *)REGEXP_STRING {
+  return JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_STRING);
+}
+
++ (OrgApacheLuceneUtilAutomatonRegExp_Kind *)REGEXP_ANYSTRING {
+  return JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_ANYSTRING);
+}
+
++ (OrgApacheLuceneUtilAutomatonRegExp_Kind *)REGEXP_AUTOMATON {
+  return JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_AUTOMATON);
+}
+
++ (OrgApacheLuceneUtilAutomatonRegExp_Kind *)REGEXP_INTERVAL {
+  return JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_INTERVAL);
 }
 
 + (IOSObjectArray *)values {
-  return OrgApacheLuceneUtilAutomatonRegExp_KindEnum_values();
+  return OrgApacheLuceneUtilAutomatonRegExp_Kind_values();
 }
 
-+ (OrgApacheLuceneUtilAutomatonRegExp_KindEnum *)valueOfWithNSString:(NSString *)name {
-  return OrgApacheLuceneUtilAutomatonRegExp_KindEnum_valueOfWithNSString_(name);
++ (OrgApacheLuceneUtilAutomatonRegExp_Kind *)valueOfWithNSString:(NSString *)name {
+  return OrgApacheLuceneUtilAutomatonRegExp_Kind_valueOfWithNSString_(name);
 }
 
-OrgApacheLuceneUtilAutomatonRegExp_KindEnum *OrgApacheLuceneUtilAutomatonRegExp_KindEnum_valueOfWithNSString_(NSString *name) {
-  OrgApacheLuceneUtilAutomatonRegExp_KindEnum_initialize();
+- (OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum)toNSEnum {
+  return (OrgApacheLuceneUtilAutomatonRegExp_Kind_Enum)[self ordinal];
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+  return self;
+}
+
++ (void)initialize {
+  if (self == [OrgApacheLuceneUtilAutomatonRegExp_Kind class]) {
+    size_t objSize = class_getInstanceSize(self);
+    size_t allocSize = 16 * objSize;
+    uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
+    id e;
+    (JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_UNION) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneUtilAutomatonRegExp_Kind_initWithNSString_withInt_(e, @"REGEXP_UNION", 0);
+    (JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_CONCATENATION) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneUtilAutomatonRegExp_Kind_initWithNSString_withInt_(e, @"REGEXP_CONCATENATION", 1);
+    (JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_INTERSECTION) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneUtilAutomatonRegExp_Kind_initWithNSString_withInt_(e, @"REGEXP_INTERSECTION", 2);
+    (JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_OPTIONAL) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneUtilAutomatonRegExp_Kind_initWithNSString_withInt_(e, @"REGEXP_OPTIONAL", 3);
+    (JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_REPEAT) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneUtilAutomatonRegExp_Kind_initWithNSString_withInt_(e, @"REGEXP_REPEAT", 4);
+    (JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_REPEAT_MIN) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneUtilAutomatonRegExp_Kind_initWithNSString_withInt_(e, @"REGEXP_REPEAT_MIN", 5);
+    (JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_REPEAT_MINMAX) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneUtilAutomatonRegExp_Kind_initWithNSString_withInt_(e, @"REGEXP_REPEAT_MINMAX", 6);
+    (JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_COMPLEMENT) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneUtilAutomatonRegExp_Kind_initWithNSString_withInt_(e, @"REGEXP_COMPLEMENT", 7);
+    (JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_CHAR) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneUtilAutomatonRegExp_Kind_initWithNSString_withInt_(e, @"REGEXP_CHAR", 8);
+    (JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_CHAR_RANGE) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneUtilAutomatonRegExp_Kind_initWithNSString_withInt_(e, @"REGEXP_CHAR_RANGE", 9);
+    (JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_ANYCHAR) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneUtilAutomatonRegExp_Kind_initWithNSString_withInt_(e, @"REGEXP_ANYCHAR", 10);
+    (JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_EMPTY) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneUtilAutomatonRegExp_Kind_initWithNSString_withInt_(e, @"REGEXP_EMPTY", 11);
+    (JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_STRING) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneUtilAutomatonRegExp_Kind_initWithNSString_withInt_(e, @"REGEXP_STRING", 12);
+    (JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_ANYSTRING) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneUtilAutomatonRegExp_Kind_initWithNSString_withInt_(e, @"REGEXP_ANYSTRING", 13);
+    (JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_AUTOMATON) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneUtilAutomatonRegExp_Kind_initWithNSString_withInt_(e, @"REGEXP_AUTOMATON", 14);
+    (JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_INTERVAL) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneUtilAutomatonRegExp_Kind_initWithNSString_withInt_(e, @"REGEXP_INTERVAL", 15);
+    J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilAutomatonRegExp_Kind)
+  }
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static const J2ObjcFieldInfo fields[] = {
+    { "REGEXP_UNION", "REGEXP_UNION", 0x4019, "Lorg.apache.lucene.util.automaton.RegExp$Kind;", &JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_UNION), NULL, .constantValue.asLong = 0 },
+    { "REGEXP_CONCATENATION", "REGEXP_CONCATENATION", 0x4019, "Lorg.apache.lucene.util.automaton.RegExp$Kind;", &JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_CONCATENATION), NULL, .constantValue.asLong = 0 },
+    { "REGEXP_INTERSECTION", "REGEXP_INTERSECTION", 0x4019, "Lorg.apache.lucene.util.automaton.RegExp$Kind;", &JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_INTERSECTION), NULL, .constantValue.asLong = 0 },
+    { "REGEXP_OPTIONAL", "REGEXP_OPTIONAL", 0x4019, "Lorg.apache.lucene.util.automaton.RegExp$Kind;", &JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_OPTIONAL), NULL, .constantValue.asLong = 0 },
+    { "REGEXP_REPEAT", "REGEXP_REPEAT", 0x4019, "Lorg.apache.lucene.util.automaton.RegExp$Kind;", &JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_REPEAT), NULL, .constantValue.asLong = 0 },
+    { "REGEXP_REPEAT_MIN", "REGEXP_REPEAT_MIN", 0x4019, "Lorg.apache.lucene.util.automaton.RegExp$Kind;", &JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_REPEAT_MIN), NULL, .constantValue.asLong = 0 },
+    { "REGEXP_REPEAT_MINMAX", "REGEXP_REPEAT_MINMAX", 0x4019, "Lorg.apache.lucene.util.automaton.RegExp$Kind;", &JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_REPEAT_MINMAX), NULL, .constantValue.asLong = 0 },
+    { "REGEXP_COMPLEMENT", "REGEXP_COMPLEMENT", 0x4019, "Lorg.apache.lucene.util.automaton.RegExp$Kind;", &JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_COMPLEMENT), NULL, .constantValue.asLong = 0 },
+    { "REGEXP_CHAR", "REGEXP_CHAR", 0x4019, "Lorg.apache.lucene.util.automaton.RegExp$Kind;", &JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_CHAR), NULL, .constantValue.asLong = 0 },
+    { "REGEXP_CHAR_RANGE", "REGEXP_CHAR_RANGE", 0x4019, "Lorg.apache.lucene.util.automaton.RegExp$Kind;", &JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_CHAR_RANGE), NULL, .constantValue.asLong = 0 },
+    { "REGEXP_ANYCHAR", "REGEXP_ANYCHAR", 0x4019, "Lorg.apache.lucene.util.automaton.RegExp$Kind;", &JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_ANYCHAR), NULL, .constantValue.asLong = 0 },
+    { "REGEXP_EMPTY", "REGEXP_EMPTY", 0x4019, "Lorg.apache.lucene.util.automaton.RegExp$Kind;", &JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_EMPTY), NULL, .constantValue.asLong = 0 },
+    { "REGEXP_STRING", "REGEXP_STRING", 0x4019, "Lorg.apache.lucene.util.automaton.RegExp$Kind;", &JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_STRING), NULL, .constantValue.asLong = 0 },
+    { "REGEXP_ANYSTRING", "REGEXP_ANYSTRING", 0x4019, "Lorg.apache.lucene.util.automaton.RegExp$Kind;", &JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_ANYSTRING), NULL, .constantValue.asLong = 0 },
+    { "REGEXP_AUTOMATON", "REGEXP_AUTOMATON", 0x4019, "Lorg.apache.lucene.util.automaton.RegExp$Kind;", &JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_AUTOMATON), NULL, .constantValue.asLong = 0 },
+    { "REGEXP_INTERVAL", "REGEXP_INTERVAL", 0x4019, "Lorg.apache.lucene.util.automaton.RegExp$Kind;", &JreEnum(OrgApacheLuceneUtilAutomatonRegExp_Kind, REGEXP_INTERVAL), NULL, .constantValue.asLong = 0 },
+  };
+  static const char *superclass_type_args[] = {"Lorg.apache.lucene.util.automaton.RegExp$Kind;"};
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonRegExp_Kind = { 2, "Kind", "org.apache.lucene.util.automaton", "RegExp", 0x4018, 0, NULL, 16, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/util/automaton/RegExp$Kind;>;" };
+  return &_OrgApacheLuceneUtilAutomatonRegExp_Kind;
+}
+
+@end
+
+void OrgApacheLuceneUtilAutomatonRegExp_Kind_initWithNSString_withInt_(OrgApacheLuceneUtilAutomatonRegExp_Kind *self, NSString *__name, jint __ordinal) {
+  JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
+}
+
+IOSObjectArray *OrgApacheLuceneUtilAutomatonRegExp_Kind_values() {
+  OrgApacheLuceneUtilAutomatonRegExp_Kind_initialize();
+  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneUtilAutomatonRegExp_Kind_values_ count:16 type:OrgApacheLuceneUtilAutomatonRegExp_Kind_class_()];
+}
+
+OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_valueOfWithNSString_(NSString *name) {
+  OrgApacheLuceneUtilAutomatonRegExp_Kind_initialize();
   for (int i = 0; i < 16; i++) {
-    OrgApacheLuceneUtilAutomatonRegExp_KindEnum *e = OrgApacheLuceneUtilAutomatonRegExp_KindEnum_values_[i];
+    OrgApacheLuceneUtilAutomatonRegExp_Kind *e = OrgApacheLuceneUtilAutomatonRegExp_Kind_values_[i];
     if ([name isEqual:[e name]]) {
       return e;
     }
@@ -1124,66 +1298,12 @@ OrgApacheLuceneUtilAutomatonRegExp_KindEnum *OrgApacheLuceneUtilAutomatonRegExp_
   return nil;
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return [self retain];
-}
-
-+ (void)initialize {
-  if (self == [OrgApacheLuceneUtilAutomatonRegExp_KindEnum class]) {
-    OrgApacheLuceneUtilAutomatonRegExp_KindEnum_REGEXP_UNION = new_OrgApacheLuceneUtilAutomatonRegExp_KindEnum_initWithNSString_withInt_(@"REGEXP_UNION", 0);
-    OrgApacheLuceneUtilAutomatonRegExp_KindEnum_REGEXP_CONCATENATION = new_OrgApacheLuceneUtilAutomatonRegExp_KindEnum_initWithNSString_withInt_(@"REGEXP_CONCATENATION", 1);
-    OrgApacheLuceneUtilAutomatonRegExp_KindEnum_REGEXP_INTERSECTION = new_OrgApacheLuceneUtilAutomatonRegExp_KindEnum_initWithNSString_withInt_(@"REGEXP_INTERSECTION", 2);
-    OrgApacheLuceneUtilAutomatonRegExp_KindEnum_REGEXP_OPTIONAL = new_OrgApacheLuceneUtilAutomatonRegExp_KindEnum_initWithNSString_withInt_(@"REGEXP_OPTIONAL", 3);
-    OrgApacheLuceneUtilAutomatonRegExp_KindEnum_REGEXP_REPEAT = new_OrgApacheLuceneUtilAutomatonRegExp_KindEnum_initWithNSString_withInt_(@"REGEXP_REPEAT", 4);
-    OrgApacheLuceneUtilAutomatonRegExp_KindEnum_REGEXP_REPEAT_MIN = new_OrgApacheLuceneUtilAutomatonRegExp_KindEnum_initWithNSString_withInt_(@"REGEXP_REPEAT_MIN", 5);
-    OrgApacheLuceneUtilAutomatonRegExp_KindEnum_REGEXP_REPEAT_MINMAX = new_OrgApacheLuceneUtilAutomatonRegExp_KindEnum_initWithNSString_withInt_(@"REGEXP_REPEAT_MINMAX", 6);
-    OrgApacheLuceneUtilAutomatonRegExp_KindEnum_REGEXP_COMPLEMENT = new_OrgApacheLuceneUtilAutomatonRegExp_KindEnum_initWithNSString_withInt_(@"REGEXP_COMPLEMENT", 7);
-    OrgApacheLuceneUtilAutomatonRegExp_KindEnum_REGEXP_CHAR = new_OrgApacheLuceneUtilAutomatonRegExp_KindEnum_initWithNSString_withInt_(@"REGEXP_CHAR", 8);
-    OrgApacheLuceneUtilAutomatonRegExp_KindEnum_REGEXP_CHAR_RANGE = new_OrgApacheLuceneUtilAutomatonRegExp_KindEnum_initWithNSString_withInt_(@"REGEXP_CHAR_RANGE", 9);
-    OrgApacheLuceneUtilAutomatonRegExp_KindEnum_REGEXP_ANYCHAR = new_OrgApacheLuceneUtilAutomatonRegExp_KindEnum_initWithNSString_withInt_(@"REGEXP_ANYCHAR", 10);
-    OrgApacheLuceneUtilAutomatonRegExp_KindEnum_REGEXP_EMPTY = new_OrgApacheLuceneUtilAutomatonRegExp_KindEnum_initWithNSString_withInt_(@"REGEXP_EMPTY", 11);
-    OrgApacheLuceneUtilAutomatonRegExp_KindEnum_REGEXP_STRING = new_OrgApacheLuceneUtilAutomatonRegExp_KindEnum_initWithNSString_withInt_(@"REGEXP_STRING", 12);
-    OrgApacheLuceneUtilAutomatonRegExp_KindEnum_REGEXP_ANYSTRING = new_OrgApacheLuceneUtilAutomatonRegExp_KindEnum_initWithNSString_withInt_(@"REGEXP_ANYSTRING", 13);
-    OrgApacheLuceneUtilAutomatonRegExp_KindEnum_REGEXP_AUTOMATON = new_OrgApacheLuceneUtilAutomatonRegExp_KindEnum_initWithNSString_withInt_(@"REGEXP_AUTOMATON", 14);
-    OrgApacheLuceneUtilAutomatonRegExp_KindEnum_REGEXP_INTERVAL = new_OrgApacheLuceneUtilAutomatonRegExp_KindEnum_initWithNSString_withInt_(@"REGEXP_INTERVAL", 15);
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilAutomatonRegExp_KindEnum)
+OrgApacheLuceneUtilAutomatonRegExp_Kind *OrgApacheLuceneUtilAutomatonRegExp_Kind_fromOrdinal(NSUInteger ordinal) {
+  OrgApacheLuceneUtilAutomatonRegExp_Kind_initialize();
+  if (ordinal >= 16) {
+    return nil;
   }
+  return OrgApacheLuceneUtilAutomatonRegExp_Kind_values_[ordinal];
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcFieldInfo fields[] = {
-    { "REGEXP_UNION", "REGEXP_UNION", 0x4019, "Lorg.apache.lucene.util.automaton.RegExp$Kind;", &OrgApacheLuceneUtilAutomatonRegExp_KindEnum_REGEXP_UNION, NULL, .constantValue.asLong = 0 },
-    { "REGEXP_CONCATENATION", "REGEXP_CONCATENATION", 0x4019, "Lorg.apache.lucene.util.automaton.RegExp$Kind;", &OrgApacheLuceneUtilAutomatonRegExp_KindEnum_REGEXP_CONCATENATION, NULL, .constantValue.asLong = 0 },
-    { "REGEXP_INTERSECTION", "REGEXP_INTERSECTION", 0x4019, "Lorg.apache.lucene.util.automaton.RegExp$Kind;", &OrgApacheLuceneUtilAutomatonRegExp_KindEnum_REGEXP_INTERSECTION, NULL, .constantValue.asLong = 0 },
-    { "REGEXP_OPTIONAL", "REGEXP_OPTIONAL", 0x4019, "Lorg.apache.lucene.util.automaton.RegExp$Kind;", &OrgApacheLuceneUtilAutomatonRegExp_KindEnum_REGEXP_OPTIONAL, NULL, .constantValue.asLong = 0 },
-    { "REGEXP_REPEAT", "REGEXP_REPEAT", 0x4019, "Lorg.apache.lucene.util.automaton.RegExp$Kind;", &OrgApacheLuceneUtilAutomatonRegExp_KindEnum_REGEXP_REPEAT, NULL, .constantValue.asLong = 0 },
-    { "REGEXP_REPEAT_MIN", "REGEXP_REPEAT_MIN", 0x4019, "Lorg.apache.lucene.util.automaton.RegExp$Kind;", &OrgApacheLuceneUtilAutomatonRegExp_KindEnum_REGEXP_REPEAT_MIN, NULL, .constantValue.asLong = 0 },
-    { "REGEXP_REPEAT_MINMAX", "REGEXP_REPEAT_MINMAX", 0x4019, "Lorg.apache.lucene.util.automaton.RegExp$Kind;", &OrgApacheLuceneUtilAutomatonRegExp_KindEnum_REGEXP_REPEAT_MINMAX, NULL, .constantValue.asLong = 0 },
-    { "REGEXP_COMPLEMENT", "REGEXP_COMPLEMENT", 0x4019, "Lorg.apache.lucene.util.automaton.RegExp$Kind;", &OrgApacheLuceneUtilAutomatonRegExp_KindEnum_REGEXP_COMPLEMENT, NULL, .constantValue.asLong = 0 },
-    { "REGEXP_CHAR", "REGEXP_CHAR", 0x4019, "Lorg.apache.lucene.util.automaton.RegExp$Kind;", &OrgApacheLuceneUtilAutomatonRegExp_KindEnum_REGEXP_CHAR, NULL, .constantValue.asLong = 0 },
-    { "REGEXP_CHAR_RANGE", "REGEXP_CHAR_RANGE", 0x4019, "Lorg.apache.lucene.util.automaton.RegExp$Kind;", &OrgApacheLuceneUtilAutomatonRegExp_KindEnum_REGEXP_CHAR_RANGE, NULL, .constantValue.asLong = 0 },
-    { "REGEXP_ANYCHAR", "REGEXP_ANYCHAR", 0x4019, "Lorg.apache.lucene.util.automaton.RegExp$Kind;", &OrgApacheLuceneUtilAutomatonRegExp_KindEnum_REGEXP_ANYCHAR, NULL, .constantValue.asLong = 0 },
-    { "REGEXP_EMPTY", "REGEXP_EMPTY", 0x4019, "Lorg.apache.lucene.util.automaton.RegExp$Kind;", &OrgApacheLuceneUtilAutomatonRegExp_KindEnum_REGEXP_EMPTY, NULL, .constantValue.asLong = 0 },
-    { "REGEXP_STRING", "REGEXP_STRING", 0x4019, "Lorg.apache.lucene.util.automaton.RegExp$Kind;", &OrgApacheLuceneUtilAutomatonRegExp_KindEnum_REGEXP_STRING, NULL, .constantValue.asLong = 0 },
-    { "REGEXP_ANYSTRING", "REGEXP_ANYSTRING", 0x4019, "Lorg.apache.lucene.util.automaton.RegExp$Kind;", &OrgApacheLuceneUtilAutomatonRegExp_KindEnum_REGEXP_ANYSTRING, NULL, .constantValue.asLong = 0 },
-    { "REGEXP_AUTOMATON", "REGEXP_AUTOMATON", 0x4019, "Lorg.apache.lucene.util.automaton.RegExp$Kind;", &OrgApacheLuceneUtilAutomatonRegExp_KindEnum_REGEXP_AUTOMATON, NULL, .constantValue.asLong = 0 },
-    { "REGEXP_INTERVAL", "REGEXP_INTERVAL", 0x4019, "Lorg.apache.lucene.util.automaton.RegExp$Kind;", &OrgApacheLuceneUtilAutomatonRegExp_KindEnum_REGEXP_INTERVAL, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.util.automaton.RegExp$Kind;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonRegExp_KindEnum = { 2, "Kind", "org.apache.lucene.util.automaton", "RegExp", 0x4018, 0, NULL, 16, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/util/automaton/RegExp$Kind;>;" };
-  return &_OrgApacheLuceneUtilAutomatonRegExp_KindEnum;
-}
-
-@end
-
-void OrgApacheLuceneUtilAutomatonRegExp_KindEnum_initWithNSString_withInt_(OrgApacheLuceneUtilAutomatonRegExp_KindEnum *self, NSString *__name, jint __ordinal) {
-  JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
-}
-
-OrgApacheLuceneUtilAutomatonRegExp_KindEnum *new_OrgApacheLuceneUtilAutomatonRegExp_KindEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  OrgApacheLuceneUtilAutomatonRegExp_KindEnum *self = [OrgApacheLuceneUtilAutomatonRegExp_KindEnum alloc];
-  OrgApacheLuceneUtilAutomatonRegExp_KindEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonRegExp_KindEnum)
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonRegExp_Kind)

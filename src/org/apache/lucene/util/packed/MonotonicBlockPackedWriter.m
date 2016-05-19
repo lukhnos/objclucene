@@ -45,13 +45,13 @@
     maxDelta = JavaLangMath_maxWithLong_withLong_(maxDelta, IOSLongArray_Get(values_, i));
   }
   [((OrgApacheLuceneStoreDataOutput *) nil_chk(out_)) writeZLongWithLong:min];
-  [out_ writeIntWithInt:JavaLangFloat_floatToIntBitsWithFloat_(avg)];
+  [((OrgApacheLuceneStoreDataOutput *) nil_chk(out_)) writeIntWithInt:JavaLangFloat_floatToIntBitsWithFloat_(avg)];
   if (maxDelta == 0) {
-    [out_ writeVIntWithInt:0];
+    [((OrgApacheLuceneStoreDataOutput *) nil_chk(out_)) writeVIntWithInt:0];
   }
   else {
     jint bitsRequired = OrgApacheLuceneUtilPackedPackedInts_bitsRequiredWithLong_(maxDelta);
-    [out_ writeVIntWithInt:bitsRequired];
+    [((OrgApacheLuceneStoreDataOutput *) nil_chk(out_)) writeVIntWithInt:bitsRequired];
     [self writeValuesWithInt:bitsRequired];
   }
   off_ = 0;
@@ -74,9 +74,11 @@ void OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter_initWithOrgApacheLucene
 }
 
 OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter *new_OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter_initWithOrgApacheLuceneStoreDataOutput_withInt_(OrgApacheLuceneStoreDataOutput *outArg, jint blockSize) {
-  OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter *self = [OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter alloc];
-  OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter_initWithOrgApacheLuceneStoreDataOutput_withInt_(self, outArg, blockSize);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter, initWithOrgApacheLuceneStoreDataOutput_withInt_, outArg, blockSize)
+}
+
+OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter *create_OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter_initWithOrgApacheLuceneStoreDataOutput_withInt_(OrgApacheLuceneStoreDataOutput *outArg, jint blockSize) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter, initWithOrgApacheLuceneStoreDataOutput_withInt_, outArg, blockSize)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedMonotonicBlockPackedWriter)

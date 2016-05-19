@@ -5,19 +5,24 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCompoundHyphenationByteVector_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCompoundHyphenationByteVector_RESTRICT
-#define OrgApacheLuceneAnalysisCompoundHyphenationByteVector_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationByteVector")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCompoundHyphenationByteVector
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationByteVector 0
 #else
-#define OrgApacheLuceneAnalysisCompoundHyphenationByteVector_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationByteVector 1
 #endif
-#undef OrgApacheLuceneAnalysisCompoundHyphenationByteVector_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCompoundHyphenationByteVector
 
-#if !defined (_OrgApacheLuceneAnalysisCompoundHyphenationByteVector_) && (OrgApacheLuceneAnalysisCompoundHyphenationByteVector_INCLUDE_ALL || OrgApacheLuceneAnalysisCompoundHyphenationByteVector_INCLUDE)
-#define _OrgApacheLuceneAnalysisCompoundHyphenationByteVector_
+#if !defined (OrgApacheLuceneAnalysisCompoundHyphenationByteVector_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationByteVector || defined(INCLUDE_OrgApacheLuceneAnalysisCompoundHyphenationByteVector))
+#define OrgApacheLuceneAnalysisCompoundHyphenationByteVector_
 
 @class IOSByteArray;
 
+/*!
+ @brief This class implements a simple byte vector with access to the underlying
+ array.
+ This class has been taken from the Apache FOP project (http://xmlgraphics.apache.org/fop/). They have been slightly modified. 
+ */
 @interface OrgApacheLuceneAnalysisCompoundHyphenationByteVector : NSObject
 
 #pragma mark Public
@@ -31,14 +36,24 @@
 
 - (instancetype)initWithInt:(jint)capacity;
 
+/*!
+ @brief This is to implement memory allocation in the array.
+ Like malloc().
+ */
 - (jint)alloc__WithInt:(jint)size OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief returns current capacity of array
+ */
 - (jint)capacity;
 
 - (jbyte)getWithInt:(jint)index;
 
 - (IOSByteArray *)getArray;
 
+/*!
+ @brief return number of items in array
+ */
 - (jint)length;
 
 - (void)putWithInt:(jint)index
@@ -54,20 +69,28 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundHyphenationByteVector_init
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationByteVector *new_OrgApacheLuceneAnalysisCompoundHyphenationByteVector_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationByteVector *create_OrgApacheLuceneAnalysisCompoundHyphenationByteVector_init();
+
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundHyphenationByteVector_initWithInt_(OrgApacheLuceneAnalysisCompoundHyphenationByteVector *self, jint capacity);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationByteVector *new_OrgApacheLuceneAnalysisCompoundHyphenationByteVector_initWithInt_(jint capacity) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationByteVector *create_OrgApacheLuceneAnalysisCompoundHyphenationByteVector_initWithInt_(jint capacity);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundHyphenationByteVector_initWithByteArray_(OrgApacheLuceneAnalysisCompoundHyphenationByteVector *self, IOSByteArray *a);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationByteVector *new_OrgApacheLuceneAnalysisCompoundHyphenationByteVector_initWithByteArray_(IOSByteArray *a) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationByteVector *create_OrgApacheLuceneAnalysisCompoundHyphenationByteVector_initWithByteArray_(IOSByteArray *a);
+
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundHyphenationByteVector_initWithByteArray_withInt_(OrgApacheLuceneAnalysisCompoundHyphenationByteVector *self, IOSByteArray *a, jint capacity);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationByteVector *new_OrgApacheLuceneAnalysisCompoundHyphenationByteVector_initWithByteArray_withInt_(IOSByteArray *a, jint capacity) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationByteVector *create_OrgApacheLuceneAnalysisCompoundHyphenationByteVector_initWithByteArray_withInt_(IOSByteArray *a, jint capacity);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCompoundHyphenationByteVector)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCompoundHyphenationByteVector_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationByteVector")

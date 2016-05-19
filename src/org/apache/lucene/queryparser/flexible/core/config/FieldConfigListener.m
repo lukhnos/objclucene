@@ -4,7 +4,6 @@
 //
 
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/queryparser/flexible/core/config/FieldConfig.h"
 #include "org/apache/lucene/queryparser/flexible/core/config/FieldConfigListener.h"
 
 @interface OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener : NSObject

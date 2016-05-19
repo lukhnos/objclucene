@@ -33,6 +33,9 @@
   IOSLongArray *leafBlockFPs_;
 }
 
+/*!
+ @brief Fast path: this is called when the query rect fully encompasses all cells under this node.
+ */
 - (jint)addAllWithOrgApacheLuceneBkdtreeBKDTreeReader_QueryState:(OrgApacheLuceneBkdtreeBKDTreeReader_QueryState *)state
                                                          withInt:(jint)nodeID;
 
@@ -52,9 +55,7 @@ __attribute__((unused)) static jint OrgApacheLuceneBkdtreeBKDTreeReader_addAllWi
 
 __attribute__((unused)) static jint OrgApacheLuceneBkdtreeBKDTreeReader_intersectWithOrgApacheLuceneBkdtreeBKDTreeReader_QueryState_withInt_withInt_withInt_withInt_withInt_(OrgApacheLuceneBkdtreeBKDTreeReader *self, OrgApacheLuceneBkdtreeBKDTreeReader_QueryState *state, jint nodeID, jint cellLatMinEnc, jint cellLatMaxEnc, jint cellLonMinEnc, jint cellLonMaxEnc);
 
-__attribute__((unused)) static void OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum_initWithNSString_withInt_(OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum *self, NSString *__name, jint __ordinal);
-
-__attribute__((unused)) static OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum *new_OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
+__attribute__((unused)) static void OrgApacheLuceneBkdtreeBKDTreeReader_Relation_initWithNSString_withInt_(OrgApacheLuceneBkdtreeBKDTreeReader_Relation *self, NSString *__name, jint __ordinal);
 
 @interface OrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter : NSObject
 
@@ -98,6 +99,8 @@ __attribute__((unused)) static void OrgApacheLuceneBkdtreeBKDTreeReader_QuerySta
 
 __attribute__((unused)) static OrgApacheLuceneBkdtreeBKDTreeReader_QueryState *new_OrgApacheLuceneBkdtreeBKDTreeReader_QueryState_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withInt_withInt_withInt_withOrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter_withOrgApacheLuceneIndexSortedNumericDocValues_(OrgApacheLuceneStoreIndexInput *inArg, jint maxDoc, jint latMinEnc, jint latMaxEnc, jint lonMinEnc, jint lonMaxEnc, id<OrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter> latLonFilter, OrgApacheLuceneIndexSortedNumericDocValues *sndv) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneBkdtreeBKDTreeReader_QueryState *create_OrgApacheLuceneBkdtreeBKDTreeReader_QueryState_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withInt_withInt_withInt_withOrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter_withOrgApacheLuceneIndexSortedNumericDocValues_(OrgApacheLuceneStoreIndexInput *inArg, jint maxDoc, jint latMinEnc, jint latMaxEnc, jint lonMinEnc, jint lonMaxEnc, id<OrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter> latLonFilter, OrgApacheLuceneIndexSortedNumericDocValues *sndv);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDTreeReader_QueryState)
 
 @implementation OrgApacheLuceneBkdtreeBKDTreeReader
@@ -123,22 +126,22 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDTreeReader_QueryState)
   withOrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter:(id<OrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter>)filter
         withOrgApacheLuceneIndexSortedNumericDocValues:(OrgApacheLuceneIndexSortedNumericDocValues *)sndv {
   if (OrgApacheLuceneBkdtreeBKDTreeWriter_validLatWithDouble_(latMin) == false) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid latMin: ", latMin)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid latMin: ", latMin));
   }
   if (OrgApacheLuceneBkdtreeBKDTreeWriter_validLatWithDouble_(latMax) == false) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid latMax: ", latMax)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid latMax: ", latMax));
   }
   if (OrgApacheLuceneBkdtreeBKDTreeWriter_validLonWithDouble_(lonMin) == false) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid lonMin: ", lonMin)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid lonMin: ", lonMin));
   }
   if (OrgApacheLuceneBkdtreeBKDTreeWriter_validLonWithDouble_(lonMax) == false) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid lonMax: ", lonMax)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid lonMax: ", lonMax));
   }
   jint latMinEnc = OrgApacheLuceneBkdtreeBKDTreeWriter_encodeLatWithDouble_(latMin);
   jint latMaxEnc = OrgApacheLuceneBkdtreeBKDTreeWriter_encodeLatWithDouble_(latMax);
   jint lonMinEnc = OrgApacheLuceneBkdtreeBKDTreeWriter_encodeLonWithDouble_(lonMin);
   jint lonMaxEnc = OrgApacheLuceneBkdtreeBKDTreeWriter_encodeLonWithDouble_(lonMax);
-  OrgApacheLuceneBkdtreeBKDTreeReader_QueryState *state = [new_OrgApacheLuceneBkdtreeBKDTreeReader_QueryState_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withInt_withInt_withInt_withOrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter_withOrgApacheLuceneIndexSortedNumericDocValues_([((OrgApacheLuceneStoreIndexInput *) nil_chk(in_)) clone], maxDoc_, latMinEnc, latMaxEnc, lonMinEnc, lonMaxEnc, filter, sndv) autorelease];
+  OrgApacheLuceneBkdtreeBKDTreeReader_QueryState *state = create_OrgApacheLuceneBkdtreeBKDTreeReader_QueryState_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withInt_withInt_withInt_withOrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter_withOrgApacheLuceneIndexSortedNumericDocValues_([((OrgApacheLuceneStoreIndexInput *) nil_chk(in_)) clone], maxDoc_, latMinEnc, latMaxEnc, lonMinEnc, lonMaxEnc, filter, sndv);
   jint hitCount = OrgApacheLuceneBkdtreeBKDTreeReader_intersectWithOrgApacheLuceneBkdtreeBKDTreeReader_QueryState_withInt_withInt_withInt_withInt_withInt_(self, state, 1, OrgApacheLuceneBkdtreeBKDTreeWriter_encodeLatWithDouble_(-90.0), OrgApacheLuceneBkdtreeBKDTreeWriter_encodeLatWithDouble_(JavaLangMath_nextAfterWithDouble_withDouble_(90.0, JavaLangDouble_POSITIVE_INFINITY)), OrgApacheLuceneBkdtreeBKDTreeWriter_encodeLonWithDouble_(-180.0), OrgApacheLuceneBkdtreeBKDTreeWriter_encodeLonWithDouble_(JavaLangMath_nextAfterWithDouble_withDouble_(180.0, JavaLangDouble_POSITIVE_INFINITY)));
   return [((OrgApacheLuceneUtilDocIdSetBuilder *) nil_chk(state->docs_)) buildWithLong:hitCount];
 }
@@ -180,7 +183,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDTreeReader_QueryState)
     { "addAllWithOrgApacheLuceneBkdtreeBKDTreeReader_QueryState:withInt:", "addAll", "I", 0x2, "Ljava.io.IOException;", NULL },
     { "intersectWithOrgApacheLuceneBkdtreeBKDTreeReader_QueryState:withInt:withInt:withInt:withInt:withInt:", "intersect", "I", 0x2, "Ljava.io.IOException;", NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "splitValues_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
@@ -213,9 +216,11 @@ void OrgApacheLuceneBkdtreeBKDTreeReader_initWithOrgApacheLuceneStoreIndexInput_
 }
 
 OrgApacheLuceneBkdtreeBKDTreeReader *new_OrgApacheLuceneBkdtreeBKDTreeReader_initWithOrgApacheLuceneStoreIndexInput_withInt_(OrgApacheLuceneStoreIndexInput *inArg, jint maxDoc) {
-  OrgApacheLuceneBkdtreeBKDTreeReader *self = [OrgApacheLuceneBkdtreeBKDTreeReader alloc];
-  OrgApacheLuceneBkdtreeBKDTreeReader_initWithOrgApacheLuceneStoreIndexInput_withInt_(self, inArg, maxDoc);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneBkdtreeBKDTreeReader, initWithOrgApacheLuceneStoreIndexInput_withInt_, inArg, maxDoc)
+}
+
+OrgApacheLuceneBkdtreeBKDTreeReader *create_OrgApacheLuceneBkdtreeBKDTreeReader_initWithOrgApacheLuceneStoreIndexInput_withInt_(OrgApacheLuceneStoreIndexInput *inArg, jint maxDoc) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneBkdtreeBKDTreeReader, initWithOrgApacheLuceneStoreIndexInput_withInt_, inArg, maxDoc)
 }
 
 jint OrgApacheLuceneBkdtreeBKDTreeReader_addAllWithOrgApacheLuceneBkdtreeBKDTreeReader_QueryState_withInt_(OrgApacheLuceneBkdtreeBKDTreeReader *self, OrgApacheLuceneBkdtreeBKDTreeReader_QueryState *state, jint nodeID) {
@@ -247,11 +252,11 @@ jint OrgApacheLuceneBkdtreeBKDTreeReader_addAllWithOrgApacheLuceneBkdtreeBKDTree
 jint OrgApacheLuceneBkdtreeBKDTreeReader_intersectWithOrgApacheLuceneBkdtreeBKDTreeReader_QueryState_withInt_withInt_withInt_withInt_withInt_(OrgApacheLuceneBkdtreeBKDTreeReader *self, OrgApacheLuceneBkdtreeBKDTreeReader_QueryState *state, jint nodeID, jint cellLatMinEnc, jint cellLatMaxEnc, jint cellLonMinEnc, jint cellLonMaxEnc) {
   if (((OrgApacheLuceneBkdtreeBKDTreeReader_QueryState *) nil_chk(state))->latLonFilter_ != nil) {
     if (cellLatMinEnc > state->latMinEnc_ || cellLatMaxEnc < state->latMaxEnc_ || cellLonMinEnc > state->lonMinEnc_ || cellLonMaxEnc < state->lonMaxEnc_) {
-      OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum *r = [state->latLonFilter_ compareWithDouble:OrgApacheLuceneBkdtreeBKDTreeWriter_decodeLatWithInt_(cellLatMinEnc) withDouble:OrgApacheLuceneBkdtreeBKDTreeWriter_decodeLatWithInt_(cellLatMaxEnc) withDouble:OrgApacheLuceneBkdtreeBKDTreeWriter_decodeLonWithInt_(cellLonMinEnc) withDouble:OrgApacheLuceneBkdtreeBKDTreeWriter_decodeLonWithInt_(cellLonMaxEnc)];
-      if (r == JreLoadStatic(OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum, OUTSIDE)) {
+      OrgApacheLuceneBkdtreeBKDTreeReader_Relation *r = [state->latLonFilter_ compareWithDouble:OrgApacheLuceneBkdtreeBKDTreeWriter_decodeLatWithInt_(cellLatMinEnc) withDouble:OrgApacheLuceneBkdtreeBKDTreeWriter_decodeLatWithInt_(cellLatMaxEnc) withDouble:OrgApacheLuceneBkdtreeBKDTreeWriter_decodeLonWithInt_(cellLonMinEnc) withDouble:OrgApacheLuceneBkdtreeBKDTreeWriter_decodeLonWithInt_(cellLonMaxEnc)];
+      if (r == JreLoadEnum(OrgApacheLuceneBkdtreeBKDTreeReader_Relation, OUTSIDE)) {
         return 0;
       }
-      else if (r == JreLoadStatic(OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum, INSIDE)) {
+      else if (r == JreLoadEnum(OrgApacheLuceneBkdtreeBKDTreeReader_Relation, INSIDE)) {
         return OrgApacheLuceneBkdtreeBKDTreeReader_addAllWithOrgApacheLuceneBkdtreeBKDTreeReader_QueryState_withInt_(self, state, nodeID);
       }
       else {
@@ -325,35 +330,82 @@ jint OrgApacheLuceneBkdtreeBKDTreeReader_intersectWithOrgApacheLuceneBkdtreeBKDT
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneBkdtreeBKDTreeReader)
 
-J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum)
+J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneBkdtreeBKDTreeReader_Relation)
 
-OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum *OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum_values_[3];
+OrgApacheLuceneBkdtreeBKDTreeReader_Relation *OrgApacheLuceneBkdtreeBKDTreeReader_Relation_values_[3];
 
-@implementation OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum
+@implementation OrgApacheLuceneBkdtreeBKDTreeReader_Relation
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
++ (OrgApacheLuceneBkdtreeBKDTreeReader_Relation *)INSIDE {
+  return JreEnum(OrgApacheLuceneBkdtreeBKDTreeReader_Relation, INSIDE);
 }
 
-IOSObjectArray *OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum_values() {
-  OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum_initialize();
-  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum_values_ count:3 type:OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum_class_()];
++ (OrgApacheLuceneBkdtreeBKDTreeReader_Relation *)CROSSES {
+  return JreEnum(OrgApacheLuceneBkdtreeBKDTreeReader_Relation, CROSSES);
+}
+
++ (OrgApacheLuceneBkdtreeBKDTreeReader_Relation *)OUTSIDE {
+  return JreEnum(OrgApacheLuceneBkdtreeBKDTreeReader_Relation, OUTSIDE);
 }
 
 + (IOSObjectArray *)values {
-  return OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum_values();
+  return OrgApacheLuceneBkdtreeBKDTreeReader_Relation_values();
 }
 
-+ (OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum *)valueOfWithNSString:(NSString *)name {
-  return OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum_valueOfWithNSString_(name);
++ (OrgApacheLuceneBkdtreeBKDTreeReader_Relation *)valueOfWithNSString:(NSString *)name {
+  return OrgApacheLuceneBkdtreeBKDTreeReader_Relation_valueOfWithNSString_(name);
 }
 
-OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum *OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum_valueOfWithNSString_(NSString *name) {
-  OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum_initialize();
+- (OrgApacheLuceneBkdtreeBKDTreeReader_Relation_Enum)toNSEnum {
+  return (OrgApacheLuceneBkdtreeBKDTreeReader_Relation_Enum)[self ordinal];
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+  return self;
+}
+
++ (void)initialize {
+  if (self == [OrgApacheLuceneBkdtreeBKDTreeReader_Relation class]) {
+    size_t objSize = class_getInstanceSize(self);
+    size_t allocSize = 3 * objSize;
+    uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
+    id e;
+    (JreEnum(OrgApacheLuceneBkdtreeBKDTreeReader_Relation, INSIDE) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneBkdtreeBKDTreeReader_Relation_initWithNSString_withInt_(e, @"INSIDE", 0);
+    (JreEnum(OrgApacheLuceneBkdtreeBKDTreeReader_Relation, CROSSES) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneBkdtreeBKDTreeReader_Relation_initWithNSString_withInt_(e, @"CROSSES", 1);
+    (JreEnum(OrgApacheLuceneBkdtreeBKDTreeReader_Relation, OUTSIDE) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneBkdtreeBKDTreeReader_Relation_initWithNSString_withInt_(e, @"OUTSIDE", 2);
+    J2OBJC_SET_INITIALIZED(OrgApacheLuceneBkdtreeBKDTreeReader_Relation)
+  }
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static const J2ObjcFieldInfo fields[] = {
+    { "INSIDE", "INSIDE", 0x4019, "Lorg.apache.lucene.bkdtree.BKDTreeReader$Relation;", &JreEnum(OrgApacheLuceneBkdtreeBKDTreeReader_Relation, INSIDE), NULL, .constantValue.asLong = 0 },
+    { "CROSSES", "CROSSES", 0x4019, "Lorg.apache.lucene.bkdtree.BKDTreeReader$Relation;", &JreEnum(OrgApacheLuceneBkdtreeBKDTreeReader_Relation, CROSSES), NULL, .constantValue.asLong = 0 },
+    { "OUTSIDE", "OUTSIDE", 0x4019, "Lorg.apache.lucene.bkdtree.BKDTreeReader$Relation;", &JreEnum(OrgApacheLuceneBkdtreeBKDTreeReader_Relation, OUTSIDE), NULL, .constantValue.asLong = 0 },
+  };
+  static const char *superclass_type_args[] = {"Lorg.apache.lucene.bkdtree.BKDTreeReader$Relation;"};
+  static const J2ObjcClassInfo _OrgApacheLuceneBkdtreeBKDTreeReader_Relation = { 2, "Relation", "org.apache.lucene.bkdtree", "BKDTreeReader", 0x4018, 0, NULL, 3, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/bkdtree/BKDTreeReader$Relation;>;" };
+  return &_OrgApacheLuceneBkdtreeBKDTreeReader_Relation;
+}
+
+@end
+
+void OrgApacheLuceneBkdtreeBKDTreeReader_Relation_initWithNSString_withInt_(OrgApacheLuceneBkdtreeBKDTreeReader_Relation *self, NSString *__name, jint __ordinal) {
+  JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
+}
+
+IOSObjectArray *OrgApacheLuceneBkdtreeBKDTreeReader_Relation_values() {
+  OrgApacheLuceneBkdtreeBKDTreeReader_Relation_initialize();
+  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneBkdtreeBKDTreeReader_Relation_values_ count:3 type:OrgApacheLuceneBkdtreeBKDTreeReader_Relation_class_()];
+}
+
+OrgApacheLuceneBkdtreeBKDTreeReader_Relation *OrgApacheLuceneBkdtreeBKDTreeReader_Relation_valueOfWithNSString_(NSString *name) {
+  OrgApacheLuceneBkdtreeBKDTreeReader_Relation_initialize();
   for (int i = 0; i < 3; i++) {
-    OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum *e = OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum_values_[i];
+    OrgApacheLuceneBkdtreeBKDTreeReader_Relation *e = OrgApacheLuceneBkdtreeBKDTreeReader_Relation_values_[i];
     if ([name isEqual:[e name]]) {
       return e;
     }
@@ -362,43 +414,15 @@ OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum *OrgApacheLuceneBkdtreeBKDTreeR
   return nil;
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return [self retain];
-}
-
-+ (void)initialize {
-  if (self == [OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum class]) {
-    OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum_INSIDE = new_OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum_initWithNSString_withInt_(@"INSIDE", 0);
-    OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum_CROSSES = new_OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum_initWithNSString_withInt_(@"CROSSES", 1);
-    OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum_OUTSIDE = new_OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum_initWithNSString_withInt_(@"OUTSIDE", 2);
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum)
+OrgApacheLuceneBkdtreeBKDTreeReader_Relation *OrgApacheLuceneBkdtreeBKDTreeReader_Relation_fromOrdinal(NSUInteger ordinal) {
+  OrgApacheLuceneBkdtreeBKDTreeReader_Relation_initialize();
+  if (ordinal >= 3) {
+    return nil;
   }
+  return OrgApacheLuceneBkdtreeBKDTreeReader_Relation_values_[ordinal];
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcFieldInfo fields[] = {
-    { "INSIDE", "INSIDE", 0x4019, "Lorg.apache.lucene.bkdtree.BKDTreeReader$Relation;", &OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum_INSIDE, NULL, .constantValue.asLong = 0 },
-    { "CROSSES", "CROSSES", 0x4019, "Lorg.apache.lucene.bkdtree.BKDTreeReader$Relation;", &OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum_CROSSES, NULL, .constantValue.asLong = 0 },
-    { "OUTSIDE", "OUTSIDE", 0x4019, "Lorg.apache.lucene.bkdtree.BKDTreeReader$Relation;", &OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum_OUTSIDE, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.bkdtree.BKDTreeReader$Relation;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum = { 2, "Relation", "org.apache.lucene.bkdtree", "BKDTreeReader", 0x4018, 0, NULL, 3, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/bkdtree/BKDTreeReader$Relation;>;" };
-  return &_OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum;
-}
-
-@end
-
-void OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum_initWithNSString_withInt_(OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum *self, NSString *__name, jint __ordinal) {
-  JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
-}
-
-OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum *new_OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum *self = [OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum alloc];
-  OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneBkdtreeBKDTreeReader_RelationEnum)
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneBkdtreeBKDTreeReader_Relation)
 
 @implementation OrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter
 
@@ -476,9 +500,11 @@ void OrgApacheLuceneBkdtreeBKDTreeReader_QueryState_initWithOrgApacheLuceneStore
 }
 
 OrgApacheLuceneBkdtreeBKDTreeReader_QueryState *new_OrgApacheLuceneBkdtreeBKDTreeReader_QueryState_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withInt_withInt_withInt_withOrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter_withOrgApacheLuceneIndexSortedNumericDocValues_(OrgApacheLuceneStoreIndexInput *inArg, jint maxDoc, jint latMinEnc, jint latMaxEnc, jint lonMinEnc, jint lonMaxEnc, id<OrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter> latLonFilter, OrgApacheLuceneIndexSortedNumericDocValues *sndv) {
-  OrgApacheLuceneBkdtreeBKDTreeReader_QueryState *self = [OrgApacheLuceneBkdtreeBKDTreeReader_QueryState alloc];
-  OrgApacheLuceneBkdtreeBKDTreeReader_QueryState_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withInt_withInt_withInt_withOrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter_withOrgApacheLuceneIndexSortedNumericDocValues_(self, inArg, maxDoc, latMinEnc, latMaxEnc, lonMinEnc, lonMaxEnc, latLonFilter, sndv);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneBkdtreeBKDTreeReader_QueryState, initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withInt_withInt_withInt_withOrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter_withOrgApacheLuceneIndexSortedNumericDocValues_, inArg, maxDoc, latMinEnc, latMaxEnc, lonMinEnc, lonMaxEnc, latLonFilter, sndv)
+}
+
+OrgApacheLuceneBkdtreeBKDTreeReader_QueryState *create_OrgApacheLuceneBkdtreeBKDTreeReader_QueryState_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withInt_withInt_withInt_withOrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter_withOrgApacheLuceneIndexSortedNumericDocValues_(OrgApacheLuceneStoreIndexInput *inArg, jint maxDoc, jint latMinEnc, jint latMaxEnc, jint lonMinEnc, jint lonMaxEnc, id<OrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter> latLonFilter, OrgApacheLuceneIndexSortedNumericDocValues *sndv) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneBkdtreeBKDTreeReader_QueryState, initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withInt_withInt_withInt_withOrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter_withOrgApacheLuceneIndexSortedNumericDocValues_, inArg, maxDoc, latMinEnc, latMaxEnc, lonMinEnc, lonMaxEnc, latLonFilter, sndv)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneBkdtreeBKDTreeReader_QueryState)

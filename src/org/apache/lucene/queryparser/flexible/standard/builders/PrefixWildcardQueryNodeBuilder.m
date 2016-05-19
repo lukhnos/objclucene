@@ -25,10 +25,10 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneSearchPrefixQuery *)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode {
-  OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode *wildcardNode = (OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode *) check_class_cast(queryNode, [OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode class]);
+  OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode *wildcardNode = (OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode *) cast_chk(queryNode, [OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode class]);
   NSString *text = [((id<JavaLangCharSequence>) nil_chk([((id<JavaLangCharSequence>) nil_chk([((OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode *) nil_chk(wildcardNode)) getText])) subSequenceFrom:0 to:[((id<JavaLangCharSequence>) nil_chk([wildcardNode getText])) length] - 1])) description];
-  OrgApacheLuceneSearchPrefixQuery *q = [new_OrgApacheLuceneSearchPrefixQuery_initWithOrgApacheLuceneIndexTerm_([new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_([wildcardNode getFieldAsString], text) autorelease]) autorelease];
-  OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *method = (OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *) check_class_cast([((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(queryNode)) getTagWithNSString:OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiTermRewriteMethodProcessor_TAG_ID_], [OrgApacheLuceneSearchMultiTermQuery_RewriteMethod class]);
+  OrgApacheLuceneSearchPrefixQuery *q = create_OrgApacheLuceneSearchPrefixQuery_initWithOrgApacheLuceneIndexTerm_(create_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_([wildcardNode getFieldAsString], text));
+  OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *method = (OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *) cast_chk([((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(queryNode)) getTagWithNSString:OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiTermRewriteMethodProcessor_TAG_ID], [OrgApacheLuceneSearchMultiTermQuery_RewriteMethod class]);
   if (method != nil) {
     [q setRewriteMethodWithOrgApacheLuceneSearchMultiTermQuery_RewriteMethod:method];
   }
@@ -51,9 +51,11 @@ void OrgApacheLuceneQueryparserFlexibleStandardBuildersPrefixWildcardQueryNodeBu
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardBuildersPrefixWildcardQueryNodeBuilder *new_OrgApacheLuceneQueryparserFlexibleStandardBuildersPrefixWildcardQueryNodeBuilder_init() {
-  OrgApacheLuceneQueryparserFlexibleStandardBuildersPrefixWildcardQueryNodeBuilder *self = [OrgApacheLuceneQueryparserFlexibleStandardBuildersPrefixWildcardQueryNodeBuilder alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardBuildersPrefixWildcardQueryNodeBuilder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardBuildersPrefixWildcardQueryNodeBuilder, init)
+}
+
+OrgApacheLuceneQueryparserFlexibleStandardBuildersPrefixWildcardQueryNodeBuilder *create_OrgApacheLuceneQueryparserFlexibleStandardBuildersPrefixWildcardQueryNodeBuilder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardBuildersPrefixWildcardQueryNodeBuilder, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleStandardBuildersPrefixWildcardQueryNodeBuilder)

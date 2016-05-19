@@ -5,31 +5,38 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexSortedSetDocValuesTermsEnum_INCLUDE_ALL")
-#if OrgApacheLuceneIndexSortedSetDocValuesTermsEnum_RESTRICT
-#define OrgApacheLuceneIndexSortedSetDocValuesTermsEnum_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexSortedSetDocValuesTermsEnum")
+#ifdef RESTRICT_OrgApacheLuceneIndexSortedSetDocValuesTermsEnum
+#define INCLUDE_ALL_OrgApacheLuceneIndexSortedSetDocValuesTermsEnum 0
 #else
-#define OrgApacheLuceneIndexSortedSetDocValuesTermsEnum_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexSortedSetDocValuesTermsEnum 1
 #endif
-#undef OrgApacheLuceneIndexSortedSetDocValuesTermsEnum_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexSortedSetDocValuesTermsEnum
 
-#if !defined (_OrgApacheLuceneIndexSortedSetDocValuesTermsEnum_) && (OrgApacheLuceneIndexSortedSetDocValuesTermsEnum_INCLUDE_ALL || OrgApacheLuceneIndexSortedSetDocValuesTermsEnum_INCLUDE)
-#define _OrgApacheLuceneIndexSortedSetDocValuesTermsEnum_
+#if !defined (OrgApacheLuceneIndexSortedSetDocValuesTermsEnum_) && (INCLUDE_ALL_OrgApacheLuceneIndexSortedSetDocValuesTermsEnum || defined(INCLUDE_OrgApacheLuceneIndexSortedSetDocValuesTermsEnum))
+#define OrgApacheLuceneIndexSortedSetDocValuesTermsEnum_
 
-#define OrgApacheLuceneIndexTermsEnum_RESTRICT 1
-#define OrgApacheLuceneIndexTermsEnum_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexTermsEnum 1
+#define INCLUDE_OrgApacheLuceneIndexTermsEnum 1
 #include "org/apache/lucene/index/TermsEnum.h"
 
 @class OrgApacheLuceneIndexPostingsEnum;
 @class OrgApacheLuceneIndexSortedSetDocValues;
 @class OrgApacheLuceneIndexTermState;
-@class OrgApacheLuceneIndexTermsEnum_SeekStatusEnum;
+@class OrgApacheLuceneIndexTermsEnum_SeekStatus;
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief Implements a <code>TermsEnum</code> wrapping a provided
+ <code>SortedSetDocValues</code>.
+ */
 @interface OrgApacheLuceneIndexSortedSetDocValuesTermsEnum : OrgApacheLuceneIndexTermsEnum
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new TermsEnum over the provided values
+ */
 - (instancetype)initWithOrgApacheLuceneIndexSortedSetDocValues:(OrgApacheLuceneIndexSortedSetDocValues *)values;
 
 - (jint)docFreq;
@@ -41,7 +48,7 @@
 - (OrgApacheLuceneIndexPostingsEnum *)postingsWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)reuse
                                                                            withInt:(jint)flags;
 
-- (OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *)seekCeilWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)text;
+- (OrgApacheLuceneIndexTermsEnum_SeekStatus *)seekCeilWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)text;
 
 - (jboolean)seekExactWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)text;
 
@@ -64,8 +71,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexSortedSetDocValuesTermsEnum_initWithO
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexSortedSetDocValuesTermsEnum *new_OrgApacheLuceneIndexSortedSetDocValuesTermsEnum_initWithOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneIndexSortedSetDocValues *values) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexSortedSetDocValuesTermsEnum *create_OrgApacheLuceneIndexSortedSetDocValuesTermsEnum_initWithOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneIndexSortedSetDocValues *values);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortedSetDocValuesTermsEnum)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexSortedSetDocValuesTermsEnum_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexSortedSetDocValuesTermsEnum")

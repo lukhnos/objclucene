@@ -5,23 +5,36 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisElGreekStemFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisElGreekStemFilter_RESTRICT
-#define OrgApacheLuceneAnalysisElGreekStemFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisElGreekStemFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisElGreekStemFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisElGreekStemFilter 0
 #else
-#define OrgApacheLuceneAnalysisElGreekStemFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisElGreekStemFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisElGreekStemFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisElGreekStemFilter
 
-#if !defined (_OrgApacheLuceneAnalysisElGreekStemFilter_) && (OrgApacheLuceneAnalysisElGreekStemFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisElGreekStemFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisElGreekStemFilter_
+#if !defined (OrgApacheLuceneAnalysisElGreekStemFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisElGreekStemFilter || defined(INCLUDE_OrgApacheLuceneAnalysisElGreekStemFilter))
+#define OrgApacheLuceneAnalysisElGreekStemFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief A <code>TokenFilter</code> that applies <code>GreekStemmer</code> to stem Greek
+ words.
+ <p>
+ To prevent terms from being stemmed use an instance of
+ <code>SetKeywordMarkerFilter</code> or a custom <code>TokenFilter</code> that sets
+ the <code>KeywordAttribute</code> before this <code>TokenStream</code>.
+ </p>
+ <p>
+ NOTE: Input is expected to be casefolded for Greek (including folding of final
+ sigma to sigma), and with diacritics removed. This can be achieved by using 
+ either <code>GreekLowerCaseFilter</code> or ICUFoldingFilter before GreekStemFilter.
+ */
 @interface OrgApacheLuceneAnalysisElGreekStemFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
@@ -38,8 +51,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisElGreekStemFilter_initWithOrgApach
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisElGreekStemFilter *new_OrgApacheLuceneAnalysisElGreekStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisElGreekStemFilter *create_OrgApacheLuceneAnalysisElGreekStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisElGreekStemFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisElGreekStemFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisElGreekStemFilter")

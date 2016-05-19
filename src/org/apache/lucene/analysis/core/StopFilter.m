@@ -66,9 +66,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCoreStopFilter, termAtt_, id<OrgApach
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisUtilCharArraySet:", "StopFilter", NULL, 0x1, NULL, NULL },
     { "makeStopSetWithNSStringArray:", "makeStopSet", "Lorg.apache.lucene.analysis.util.CharArraySet;", 0x89, NULL, NULL },
-    { "makeStopSetWithJavaUtilList:", "makeStopSet", "Lorg.apache.lucene.analysis.util.CharArraySet;", 0x9, NULL, NULL },
+    { "makeStopSetWithJavaUtilList:", "makeStopSet", "Lorg.apache.lucene.analysis.util.CharArraySet;", 0x9, NULL, "(Ljava/util/List<*>;)Lorg/apache/lucene/analysis/util/CharArraySet;" },
     { "makeStopSetWithNSStringArray:withBoolean:", "makeStopSet", "Lorg.apache.lucene.analysis.util.CharArraySet;", 0x9, NULL, NULL },
-    { "makeStopSetWithJavaUtilList:withBoolean:", "makeStopSet", "Lorg.apache.lucene.analysis.util.CharArraySet;", 0x9, NULL, NULL },
+    { "makeStopSetWithJavaUtilList:withBoolean:", "makeStopSet", "Lorg.apache.lucene.analysis.util.CharArraySet;", 0x9, NULL, "(Ljava/util/List<*>;Z)Lorg/apache/lucene/analysis/util/CharArraySet;" },
     { "accept", NULL, "Z", 0x4, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -88,9 +88,11 @@ void OrgApacheLuceneAnalysisCoreStopFilter_initWithOrgApacheLuceneAnalysisTokenS
 }
 
 OrgApacheLuceneAnalysisCoreStopFilter *new_OrgApacheLuceneAnalysisCoreStopFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisTokenStream *inArg, OrgApacheLuceneAnalysisUtilCharArraySet *stopWords) {
-  OrgApacheLuceneAnalysisCoreStopFilter *self = [OrgApacheLuceneAnalysisCoreStopFilter alloc];
-  OrgApacheLuceneAnalysisCoreStopFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(self, inArg, stopWords);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCoreStopFilter, initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_, inArg, stopWords)
+}
+
+OrgApacheLuceneAnalysisCoreStopFilter *create_OrgApacheLuceneAnalysisCoreStopFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisTokenStream *inArg, OrgApacheLuceneAnalysisUtilCharArraySet *stopWords) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCoreStopFilter, initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_, inArg, stopWords)
 }
 
 OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisCoreStopFilter_makeStopSetWithNSStringArray_(IOSObjectArray *stopWords) {
@@ -105,14 +107,14 @@ OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisCoreStopFilter_m
 
 OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisCoreStopFilter_makeStopSetWithNSStringArray_withBoolean_(IOSObjectArray *stopWords, jboolean ignoreCase) {
   OrgApacheLuceneAnalysisCoreStopFilter_initialize();
-  OrgApacheLuceneAnalysisUtilCharArraySet *stopSet = [new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithInt_withBoolean_(((IOSObjectArray *) nil_chk(stopWords))->size_, ignoreCase) autorelease];
+  OrgApacheLuceneAnalysisUtilCharArraySet *stopSet = create_OrgApacheLuceneAnalysisUtilCharArraySet_initWithInt_withBoolean_(((IOSObjectArray *) nil_chk(stopWords))->size_, ignoreCase);
   [stopSet addAllWithJavaUtilCollection:JavaUtilArrays_asListWithNSObjectArray_(stopWords)];
   return stopSet;
 }
 
 OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisCoreStopFilter_makeStopSetWithJavaUtilList_withBoolean_(id<JavaUtilList> stopWords, jboolean ignoreCase) {
   OrgApacheLuceneAnalysisCoreStopFilter_initialize();
-  OrgApacheLuceneAnalysisUtilCharArraySet *stopSet = [new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithInt_withBoolean_([((id<JavaUtilList>) nil_chk(stopWords)) size], ignoreCase) autorelease];
+  OrgApacheLuceneAnalysisUtilCharArraySet *stopSet = create_OrgApacheLuceneAnalysisUtilCharArraySet_initWithInt_withBoolean_([((id<JavaUtilList>) nil_chk(stopWords)) size], ignoreCase);
   [stopSet addAllWithJavaUtilCollection:stopWords];
   return stopSet;
 }

@@ -23,6 +23,11 @@
 #include "org/apache/lucene/analysis/util/StopwordAnalyzerBase.h"
 #include "org/apache/lucene/util/Version.h"
 
+/*!
+ @brief Atomically loads the DEFAULT_STOP_SET in a lazy fashion once the outer class 
+ accesses the static final set the first time
+ .;
+ */
 @interface OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder : NSObject
 
 - (instancetype)init;
@@ -31,19 +36,30 @@
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder)
 
-static OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder, DEFAULT_STOP_SET_, OrgApacheLuceneAnalysisUtilCharArraySet *)
+inline OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder_get_DEFAULT_STOP_SET();
+static OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder, DEFAULT_STOP_SET, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
 __attribute__((unused)) static void OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder_init(OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder *self);
 
 __attribute__((unused)) static OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder *new_OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder *create_OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder)
 
-NSString *OrgApacheLuceneAnalysisFaPersianAnalyzer_DEFAULT_STOPWORD_FILE_ = @"stopwords.txt";
-NSString *OrgApacheLuceneAnalysisFaPersianAnalyzer_STOPWORDS_COMMENT_ = @"#";
+NSString *OrgApacheLuceneAnalysisFaPersianAnalyzer_DEFAULT_STOPWORD_FILE = @"stopwords.txt";
+NSString *OrgApacheLuceneAnalysisFaPersianAnalyzer_STOPWORDS_COMMENT = @"#";
 
 @implementation OrgApacheLuceneAnalysisFaPersianAnalyzer
+
++ (NSString *)DEFAULT_STOPWORD_FILE {
+  return OrgApacheLuceneAnalysisFaPersianAnalyzer_DEFAULT_STOPWORD_FILE;
+}
+
++ (NSString *)STOPWORDS_COMMENT {
+  return OrgApacheLuceneAnalysisFaPersianAnalyzer_STOPWORDS_COMMENT;
+}
 
 + (OrgApacheLuceneAnalysisUtilCharArraySet *)getDefaultStopSet {
   return OrgApacheLuceneAnalysisFaPersianAnalyzer_getDefaultStopSet();
@@ -63,21 +79,21 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName {
   OrgApacheLuceneAnalysisTokenizer *source;
-  if ([((OrgApacheLuceneUtilVersion *) nil_chk([self getVersion])) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_7_0_)]) {
-    source = [new_OrgApacheLuceneAnalysisStandardStandardTokenizer_init() autorelease];
+  if ([((OrgApacheLuceneUtilVersion *) nil_chk([self getVersion])) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_7_0)]) {
+    source = create_OrgApacheLuceneAnalysisStandardStandardTokenizer_init();
   }
   else {
-    source = [new_OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40_init() autorelease];
+    source = create_OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40_init();
   }
-  OrgApacheLuceneAnalysisTokenStream *result = [new_OrgApacheLuceneAnalysisCoreLowerCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(source) autorelease];
-  result = [new_OrgApacheLuceneAnalysisArArabicNormalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(result) autorelease];
-  result = [new_OrgApacheLuceneAnalysisFaPersianNormalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(result) autorelease];
-  return [new_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(source, [new_OrgApacheLuceneAnalysisCoreStopFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(result, stopwords_) autorelease]) autorelease];
+  OrgApacheLuceneAnalysisTokenStream *result = create_OrgApacheLuceneAnalysisCoreLowerCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(source);
+  result = create_OrgApacheLuceneAnalysisArArabicNormalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(result);
+  result = create_OrgApacheLuceneAnalysisFaPersianNormalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(result);
+  return create_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(source, create_OrgApacheLuceneAnalysisCoreStopFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(result, stopwords_));
 }
 
 - (JavaIoReader *)initReaderWithNSString:(NSString *)fieldName
                         withJavaIoReader:(JavaIoReader *)reader {
-  return [new_OrgApacheLuceneAnalysisFaPersianCharFilter_initWithJavaIoReader_(reader) autorelease];
+  return create_OrgApacheLuceneAnalysisFaPersianCharFilter_initWithJavaIoReader_(reader);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -89,8 +105,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "initReaderWithNSString:withJavaIoReader:", "initReader", "Ljava.io.Reader;", 0x4, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_STOPWORD_FILE_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisFaPersianAnalyzer_DEFAULT_STOPWORD_FILE_, NULL, .constantValue.asLong = 0 },
-    { "STOPWORDS_COMMENT_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisFaPersianAnalyzer_STOPWORDS_COMMENT_, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_STOPWORD_FILE", "DEFAULT_STOPWORD_FILE", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisFaPersianAnalyzer_DEFAULT_STOPWORD_FILE, NULL, .constantValue.asLong = 0 },
+    { "STOPWORDS_COMMENT", "STOPWORDS_COMMENT", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisFaPersianAnalyzer_STOPWORDS_COMMENT, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.analysis.fa.PersianAnalyzer$DefaultSetHolder;"};
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisFaPersianAnalyzer = { 2, "PersianAnalyzer", "org.apache.lucene.analysis.fa", NULL, 0x11, 5, methods, 2, fields, 0, NULL, 1, inner_classes, NULL, NULL };
@@ -101,17 +117,19 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisFaPersianAnalyzer_getDefaultStopSet() {
   OrgApacheLuceneAnalysisFaPersianAnalyzer_initialize();
-  return JreLoadStatic(OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder, DEFAULT_STOP_SET_);
+  return JreLoadStatic(OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder, DEFAULT_STOP_SET);
 }
 
 void OrgApacheLuceneAnalysisFaPersianAnalyzer_init(OrgApacheLuceneAnalysisFaPersianAnalyzer *self) {
-  OrgApacheLuceneAnalysisFaPersianAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, JreLoadStatic(OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder, DEFAULT_STOP_SET_));
+  OrgApacheLuceneAnalysisFaPersianAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, JreLoadStatic(OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder, DEFAULT_STOP_SET));
 }
 
 OrgApacheLuceneAnalysisFaPersianAnalyzer *new_OrgApacheLuceneAnalysisFaPersianAnalyzer_init() {
-  OrgApacheLuceneAnalysisFaPersianAnalyzer *self = [OrgApacheLuceneAnalysisFaPersianAnalyzer alloc];
-  OrgApacheLuceneAnalysisFaPersianAnalyzer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisFaPersianAnalyzer, init)
+}
+
+OrgApacheLuceneAnalysisFaPersianAnalyzer *create_OrgApacheLuceneAnalysisFaPersianAnalyzer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisFaPersianAnalyzer, init)
 }
 
 void OrgApacheLuceneAnalysisFaPersianAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisFaPersianAnalyzer *self, OrgApacheLuceneAnalysisUtilCharArraySet *stopwords) {
@@ -119,9 +137,11 @@ void OrgApacheLuceneAnalysisFaPersianAnalyzer_initWithOrgApacheLuceneAnalysisUti
 }
 
 OrgApacheLuceneAnalysisFaPersianAnalyzer *new_OrgApacheLuceneAnalysisFaPersianAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopwords) {
-  OrgApacheLuceneAnalysisFaPersianAnalyzer *self = [OrgApacheLuceneAnalysisFaPersianAnalyzer alloc];
-  OrgApacheLuceneAnalysisFaPersianAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, stopwords);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisFaPersianAnalyzer, initWithOrgApacheLuceneAnalysisUtilCharArraySet_, stopwords)
+}
+
+OrgApacheLuceneAnalysisFaPersianAnalyzer *create_OrgApacheLuceneAnalysisFaPersianAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopwords) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisFaPersianAnalyzer, initWithOrgApacheLuceneAnalysisUtilCharArraySet_, stopwords)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisFaPersianAnalyzer)
@@ -141,10 +161,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   if (self == [OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder class]) {
     {
       @try {
-        JreStrongAssign(&OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET_, OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_loadStopwordSetWithBoolean_withIOSClass_withNSString_withNSString_(false, OrgApacheLuceneAnalysisFaPersianAnalyzer_class_(), OrgApacheLuceneAnalysisFaPersianAnalyzer_DEFAULT_STOPWORD_FILE_, OrgApacheLuceneAnalysisFaPersianAnalyzer_STOPWORDS_COMMENT_));
+        JreStrongAssign(&OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET, OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_loadStopwordSetWithBoolean_withIOSClass_withNSString_withNSString_(false, OrgApacheLuceneAnalysisFaPersianAnalyzer_class_(), OrgApacheLuceneAnalysisFaPersianAnalyzer_DEFAULT_STOPWORD_FILE, OrgApacheLuceneAnalysisFaPersianAnalyzer_STOPWORDS_COMMENT));
       }
       @catch (JavaIoIOException *ex) {
-        @throw [new_JavaLangRuntimeException_initWithNSString_(@"Unable to load default stopword set") autorelease];
+        @throw create_JavaLangRuntimeException_initWithNSString_(@"Unable to load default stopword set");
       }
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder)
@@ -153,10 +173,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", NULL, NULL, 0x2, NULL, NULL },
+    { "init", "DefaultSetHolder", NULL, 0x2, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_STOP_SET_", NULL, 0x18, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET_, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_STOP_SET", "DEFAULT_STOP_SET", 0x18, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder = { 2, "DefaultSetHolder", "org.apache.lucene.analysis.fa", "PersianAnalyzer", 0xa, 1, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder;
@@ -169,9 +189,11 @@ void OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder_init(OrgApacheLuc
 }
 
 OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder *new_OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder_init() {
-  OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder *self = [OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder alloc];
-  OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder, init)
+}
+
+OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder *create_OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder)

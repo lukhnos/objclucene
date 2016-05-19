@@ -5,31 +5,47 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisNgramNGramTokenizerFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisNgramNGramTokenizerFactory_RESTRICT
-#define OrgApacheLuceneAnalysisNgramNGramTokenizerFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisNgramNGramTokenizerFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisNgramNGramTokenizerFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisNgramNGramTokenizerFactory 0
 #else
-#define OrgApacheLuceneAnalysisNgramNGramTokenizerFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisNgramNGramTokenizerFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisNgramNGramTokenizerFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisNgramNGramTokenizerFactory
 
-#if !defined (_OrgApacheLuceneAnalysisNgramNGramTokenizerFactory_) && (OrgApacheLuceneAnalysisNgramNGramTokenizerFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisNgramNGramTokenizerFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisNgramNGramTokenizerFactory_
+#if !defined (OrgApacheLuceneAnalysisNgramNGramTokenizerFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisNgramNGramTokenizerFactory || defined(INCLUDE_OrgApacheLuceneAnalysisNgramNGramTokenizerFactory))
+#define OrgApacheLuceneAnalysisNgramNGramTokenizerFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenizerFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenizerFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenizerFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenizerFactory 1
 #include "org/apache/lucene/analysis/util/TokenizerFactory.h"
 
 @class OrgApacheLuceneAnalysisTokenizer;
 @class OrgApacheLuceneUtilAttributeFactory;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>NGramTokenizer</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_ngrm" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.NGramTokenizerFactory" minGramSize="1" maxGramSize="2"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisNgramNGramTokenizerFactory : OrgApacheLuceneAnalysisUtilTokenizerFactory
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new NGramTokenizerFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
+/*!
+ @brief Creates the <code>TokenStream</code> of n-grams from the given <code>Reader</code> and <code>AttributeFactory</code>.
+ */
 - (OrgApacheLuceneAnalysisTokenizer *)createWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
 
 @end
@@ -40,8 +56,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisNgramNGramTokenizerFactory_initWit
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisNgramNGramTokenizerFactory *new_OrgApacheLuceneAnalysisNgramNGramTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisNgramNGramTokenizerFactory *create_OrgApacheLuceneAnalysisNgramNGramTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNgramNGramTokenizerFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisNgramNGramTokenizerFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisNgramNGramTokenizerFactory")

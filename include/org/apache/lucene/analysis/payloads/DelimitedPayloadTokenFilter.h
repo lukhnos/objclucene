@@ -5,27 +5,38 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_RESTRICT
-#define OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter 0
 #else
-#define OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter
 
-#if !defined (_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_) && (OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_
+#if !defined (OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter || defined(INCLUDE_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter))
+#define OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol OrgApacheLuceneAnalysisPayloadsPayloadEncoder;
 
-#define OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_DEFAULT_DELIMITER '|'
-
+/*!
+ @brief Characters before the delimiter are the "token", those after are the payload.
+ <p>
+ For example, if the delimiter is '|', then for the string "foo|bar", foo is the token
+ and "bar" is a payload.
+ <p>
+ Note, you can also include a <code>org.apache.lucene.analysis.payloads.PayloadEncoder</code> to convert the payload in an appropriate way (from characters to bytes).
+ <p>
+ Note make sure your Tokenizer doesn't split on the delimiter, or this won't work
+ - seealso: PayloadEncoder
+ */
 @interface OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter : OrgApacheLuceneAnalysisTokenFilter
+
++ (jchar)DEFAULT_DELIMITER;
 
 #pragma mark Public
 
@@ -39,14 +50,18 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter, DEFAULT_DELIMITER, jchar)
+inline jchar OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_get_DEFAULT_DELIMITER();
+#define OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_DEFAULT_DELIMITER '|'
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter, DEFAULT_DELIMITER, jchar)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withChar_withOrgApacheLuceneAnalysisPayloadsPayloadEncoder_(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter *self, OrgApacheLuceneAnalysisTokenStream *input, jchar delimiter, id<OrgApacheLuceneAnalysisPayloadsPayloadEncoder> encoder);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter *new_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withChar_withOrgApacheLuceneAnalysisPayloadsPayloadEncoder_(OrgApacheLuceneAnalysisTokenStream *input, jchar delimiter, id<OrgApacheLuceneAnalysisPayloadsPayloadEncoder> encoder) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter *create_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withChar_withOrgApacheLuceneAnalysisPayloadsPayloadEncoder_(OrgApacheLuceneAnalysisTokenStream *input, jchar delimiter, id<OrgApacheLuceneAnalysisPayloadsPayloadEncoder> encoder);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter")

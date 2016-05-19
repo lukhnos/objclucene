@@ -5,22 +5,22 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame_RESTRICT
-#define OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame")
+#ifdef RESTRICT_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame
+#define INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame 0
 #else
-#define OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame 1
 #endif
-#undef OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame
 
-#if !defined (_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame_) && (OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame_INCLUDE_ALL || OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame_INCLUDE)
-#define _OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame_
+#if !defined (OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame_) && (INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame || defined(INCLUDE_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame))
+#define OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame_
 
 @class IOSByteArray;
 @class IOSLongArray;
 @class OrgApacheLuceneCodecsBlockTermState;
 @class OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum;
-@class OrgApacheLuceneIndexTermsEnum_SeekStatusEnum;
+@class OrgApacheLuceneIndexTermsEnum_SeekStatus;
 @class OrgApacheLuceneStoreByteArrayDataInput;
 @class OrgApacheLuceneUtilBytesRef;
 @class OrgApacheLuceneUtilFstFST_Arc;
@@ -76,14 +76,14 @@
 
 - (void)scanToSubBlockWithLong:(jlong)subFP;
 
-- (OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *)scanToTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)target
+- (OrgApacheLuceneIndexTermsEnum_SeekStatus *)scanToTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)target
+                                                                            withBoolean:(jboolean)exactOnly;
+
+- (OrgApacheLuceneIndexTermsEnum_SeekStatus *)scanToTermLeafWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)target
                                                                                 withBoolean:(jboolean)exactOnly;
 
-- (OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *)scanToTermLeafWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)target
-                                                                                    withBoolean:(jboolean)exactOnly;
-
-- (OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *)scanToTermNonLeafWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)target
-                                                                                       withBoolean:(jboolean)exactOnly;
+- (OrgApacheLuceneIndexTermsEnum_SeekStatus *)scanToTermNonLeafWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)target
+                                                                                   withBoolean:(jboolean)exactOnly;
 
 - (void)setFloorDataWithOrgApacheLuceneStoreByteArrayDataInput:(OrgApacheLuceneStoreByteArrayDataInput *)inArg
                                withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)source;
@@ -116,8 +116,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame_initW
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *new_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame_initWithOrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_withInt_(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *ste, jint ord) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *create_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame_initWithOrgApacheLuceneCodecsBlocktreeSegmentTermsEnum_withInt_(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *ste, jint ord);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame")

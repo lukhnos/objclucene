@@ -15,16 +15,28 @@
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneDocumentGeoPointField)
 
-OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentGeoPointField_TYPE_NOT_STORED_;
-OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentGeoPointField_TYPE_STORED_;
+OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentGeoPointField_TYPE_NOT_STORED;
+OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentGeoPointField_TYPE_STORED;
 
 @implementation OrgApacheLuceneDocumentGeoPointField
+
++ (jint)PRECISION_STEP {
+  return OrgApacheLuceneDocumentGeoPointField_PRECISION_STEP;
+}
+
++ (OrgApacheLuceneDocumentFieldType *)TYPE_NOT_STORED {
+  return OrgApacheLuceneDocumentGeoPointField_TYPE_NOT_STORED;
+}
+
++ (OrgApacheLuceneDocumentFieldType *)TYPE_STORED {
+  return OrgApacheLuceneDocumentGeoPointField_TYPE_STORED;
+}
 
 - (instancetype)initWithNSString:(NSString *)name
                       withDouble:(jdouble)lon
                       withDouble:(jdouble)lat
-withOrgApacheLuceneDocumentField_StoreEnum:(OrgApacheLuceneDocumentField_StoreEnum *)stored {
-  OrgApacheLuceneDocumentGeoPointField_initWithNSString_withDouble_withDouble_withOrgApacheLuceneDocumentField_StoreEnum_(self, name, lon, lat, stored);
+withOrgApacheLuceneDocumentField_Store:(OrgApacheLuceneDocumentField_Store *)stored {
+  OrgApacheLuceneDocumentGeoPointField_initWithNSString_withDouble_withDouble_withOrgApacheLuceneDocumentField_Store_(self, name, lon, lat, stored);
   return self;
 }
 
@@ -38,26 +50,26 @@ withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type {
 
 + (void)initialize {
   if (self == [OrgApacheLuceneDocumentGeoPointField class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneDocumentGeoPointField_TYPE_NOT_STORED_, new_OrgApacheLuceneDocumentFieldType_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneDocumentGeoPointField_TYPE_NOT_STORED, new_OrgApacheLuceneDocumentFieldType_init());
     {
-      [OrgApacheLuceneDocumentGeoPointField_TYPE_NOT_STORED_ setTokenizedWithBoolean:false];
-      [OrgApacheLuceneDocumentGeoPointField_TYPE_NOT_STORED_ setOmitNormsWithBoolean:true];
-      [OrgApacheLuceneDocumentGeoPointField_TYPE_NOT_STORED_ setIndexOptionsWithOrgApacheLuceneIndexIndexOptionsEnum:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS)];
-      [OrgApacheLuceneDocumentGeoPointField_TYPE_NOT_STORED_ setDocValuesTypeWithOrgApacheLuceneIndexDocValuesTypeEnum:JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, SORTED_NUMERIC)];
-      [OrgApacheLuceneDocumentGeoPointField_TYPE_NOT_STORED_ setNumericTypeWithOrgApacheLuceneDocumentFieldType_NumericTypeEnum:JreLoadStatic(OrgApacheLuceneDocumentFieldType_NumericTypeEnum, LONG)];
-      [OrgApacheLuceneDocumentGeoPointField_TYPE_NOT_STORED_ setNumericPrecisionStepWithInt:OrgApacheLuceneDocumentGeoPointField_PRECISION_STEP];
-      [OrgApacheLuceneDocumentGeoPointField_TYPE_NOT_STORED_ freeze];
+      [OrgApacheLuceneDocumentGeoPointField_TYPE_NOT_STORED setTokenizedWithBoolean:false];
+      [OrgApacheLuceneDocumentGeoPointField_TYPE_NOT_STORED setOmitNormsWithBoolean:true];
+      [OrgApacheLuceneDocumentGeoPointField_TYPE_NOT_STORED setIndexOptionsWithOrgApacheLuceneIndexIndexOptions:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS)];
+      [OrgApacheLuceneDocumentGeoPointField_TYPE_NOT_STORED setDocValuesTypeWithOrgApacheLuceneIndexDocValuesType:JreLoadEnum(OrgApacheLuceneIndexDocValuesType, SORTED_NUMERIC)];
+      [OrgApacheLuceneDocumentGeoPointField_TYPE_NOT_STORED setNumericTypeWithOrgApacheLuceneDocumentFieldType_NumericType:JreLoadEnum(OrgApacheLuceneDocumentFieldType_NumericType, LONG)];
+      [OrgApacheLuceneDocumentGeoPointField_TYPE_NOT_STORED setNumericPrecisionStepWithInt:OrgApacheLuceneDocumentGeoPointField_PRECISION_STEP];
+      [OrgApacheLuceneDocumentGeoPointField_TYPE_NOT_STORED freeze];
     }
-    JreStrongAssignAndConsume(&OrgApacheLuceneDocumentGeoPointField_TYPE_STORED_, new_OrgApacheLuceneDocumentFieldType_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneDocumentGeoPointField_TYPE_STORED, new_OrgApacheLuceneDocumentFieldType_init());
     {
-      [OrgApacheLuceneDocumentGeoPointField_TYPE_STORED_ setTokenizedWithBoolean:false];
-      [OrgApacheLuceneDocumentGeoPointField_TYPE_STORED_ setOmitNormsWithBoolean:true];
-      [OrgApacheLuceneDocumentGeoPointField_TYPE_STORED_ setIndexOptionsWithOrgApacheLuceneIndexIndexOptionsEnum:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS)];
-      [OrgApacheLuceneDocumentGeoPointField_TYPE_STORED_ setDocValuesTypeWithOrgApacheLuceneIndexDocValuesTypeEnum:JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, SORTED_NUMERIC)];
-      [OrgApacheLuceneDocumentGeoPointField_TYPE_STORED_ setNumericTypeWithOrgApacheLuceneDocumentFieldType_NumericTypeEnum:JreLoadStatic(OrgApacheLuceneDocumentFieldType_NumericTypeEnum, LONG)];
-      [OrgApacheLuceneDocumentGeoPointField_TYPE_STORED_ setNumericPrecisionStepWithInt:OrgApacheLuceneDocumentGeoPointField_PRECISION_STEP];
-      [OrgApacheLuceneDocumentGeoPointField_TYPE_STORED_ setStoredWithBoolean:true];
-      [OrgApacheLuceneDocumentGeoPointField_TYPE_STORED_ freeze];
+      [OrgApacheLuceneDocumentGeoPointField_TYPE_STORED setTokenizedWithBoolean:false];
+      [OrgApacheLuceneDocumentGeoPointField_TYPE_STORED setOmitNormsWithBoolean:true];
+      [OrgApacheLuceneDocumentGeoPointField_TYPE_STORED setIndexOptionsWithOrgApacheLuceneIndexIndexOptions:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS)];
+      [OrgApacheLuceneDocumentGeoPointField_TYPE_STORED setDocValuesTypeWithOrgApacheLuceneIndexDocValuesType:JreLoadEnum(OrgApacheLuceneIndexDocValuesType, SORTED_NUMERIC)];
+      [OrgApacheLuceneDocumentGeoPointField_TYPE_STORED setNumericTypeWithOrgApacheLuceneDocumentFieldType_NumericType:JreLoadEnum(OrgApacheLuceneDocumentFieldType_NumericType, LONG)];
+      [OrgApacheLuceneDocumentGeoPointField_TYPE_STORED setNumericPrecisionStepWithInt:OrgApacheLuceneDocumentGeoPointField_PRECISION_STEP];
+      [OrgApacheLuceneDocumentGeoPointField_TYPE_STORED setStoredWithBoolean:true];
+      [OrgApacheLuceneDocumentGeoPointField_TYPE_STORED freeze];
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneDocumentGeoPointField)
   }
@@ -65,13 +77,13 @@ withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type {
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withDouble:withDouble:withOrgApacheLuceneDocumentField_StoreEnum:", "GeoPointField", NULL, 0x1, NULL, NULL },
+    { "initWithNSString:withDouble:withDouble:withOrgApacheLuceneDocumentField_Store:", "GeoPointField", NULL, 0x1, NULL, NULL },
     { "initWithNSString:withDouble:withDouble:withOrgApacheLuceneDocumentFieldType:", "GeoPointField", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "PRECISION_STEP", "PRECISION_STEP", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneDocumentGeoPointField_PRECISION_STEP },
-    { "TYPE_NOT_STORED_", NULL, 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentGeoPointField_TYPE_NOT_STORED_, NULL, .constantValue.asLong = 0 },
-    { "TYPE_STORED_", NULL, 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentGeoPointField_TYPE_STORED_, NULL, .constantValue.asLong = 0 },
+    { "TYPE_NOT_STORED", "TYPE_NOT_STORED", 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentGeoPointField_TYPE_NOT_STORED, NULL, .constantValue.asLong = 0 },
+    { "TYPE_STORED", "TYPE_STORED", 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentGeoPointField_TYPE_STORED, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneDocumentGeoPointField = { 2, "GeoPointField", "org.apache.lucene.document", NULL, 0x11, 2, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneDocumentGeoPointField;
@@ -79,29 +91,33 @@ withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type {
 
 @end
 
-void OrgApacheLuceneDocumentGeoPointField_initWithNSString_withDouble_withDouble_withOrgApacheLuceneDocumentField_StoreEnum_(OrgApacheLuceneDocumentGeoPointField *self, NSString *name, jdouble lon, jdouble lat, OrgApacheLuceneDocumentField_StoreEnum *stored) {
-  OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneDocumentFieldType_(self, name, stored == JreLoadStatic(OrgApacheLuceneDocumentField_StoreEnum, YES) ? OrgApacheLuceneDocumentGeoPointField_TYPE_STORED_ : OrgApacheLuceneDocumentGeoPointField_TYPE_NOT_STORED_);
+void OrgApacheLuceneDocumentGeoPointField_initWithNSString_withDouble_withDouble_withOrgApacheLuceneDocumentField_Store_(OrgApacheLuceneDocumentGeoPointField *self, NSString *name, jdouble lon, jdouble lat, OrgApacheLuceneDocumentField_Store *stored) {
+  OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneDocumentFieldType_(self, name, stored == JreLoadEnum(OrgApacheLuceneDocumentField_Store, YES) ? OrgApacheLuceneDocumentGeoPointField_TYPE_STORED : OrgApacheLuceneDocumentGeoPointField_TYPE_NOT_STORED);
   JreStrongAssign(&self->fieldsData_, OrgApacheLuceneUtilGeoUtils_mortonHashWithDouble_withDouble_(lon, lat));
 }
 
-OrgApacheLuceneDocumentGeoPointField *new_OrgApacheLuceneDocumentGeoPointField_initWithNSString_withDouble_withDouble_withOrgApacheLuceneDocumentField_StoreEnum_(NSString *name, jdouble lon, jdouble lat, OrgApacheLuceneDocumentField_StoreEnum *stored) {
-  OrgApacheLuceneDocumentGeoPointField *self = [OrgApacheLuceneDocumentGeoPointField alloc];
-  OrgApacheLuceneDocumentGeoPointField_initWithNSString_withDouble_withDouble_withOrgApacheLuceneDocumentField_StoreEnum_(self, name, lon, lat, stored);
-  return self;
+OrgApacheLuceneDocumentGeoPointField *new_OrgApacheLuceneDocumentGeoPointField_initWithNSString_withDouble_withDouble_withOrgApacheLuceneDocumentField_Store_(NSString *name, jdouble lon, jdouble lat, OrgApacheLuceneDocumentField_Store *stored) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentGeoPointField, initWithNSString_withDouble_withDouble_withOrgApacheLuceneDocumentField_Store_, name, lon, lat, stored)
+}
+
+OrgApacheLuceneDocumentGeoPointField *create_OrgApacheLuceneDocumentGeoPointField_initWithNSString_withDouble_withDouble_withOrgApacheLuceneDocumentField_Store_(NSString *name, jdouble lon, jdouble lat, OrgApacheLuceneDocumentField_Store *stored) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentGeoPointField, initWithNSString_withDouble_withDouble_withOrgApacheLuceneDocumentField_Store_, name, lon, lat, stored)
 }
 
 void OrgApacheLuceneDocumentGeoPointField_initWithNSString_withDouble_withDouble_withOrgApacheLuceneDocumentFieldType_(OrgApacheLuceneDocumentGeoPointField *self, NSString *name, jdouble lon, jdouble lat, OrgApacheLuceneDocumentFieldType *type) {
   OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneDocumentFieldType_(self, name, type);
-  if ([((OrgApacheLuceneDocumentFieldType *) nil_chk(type)) numericType] != JreLoadStatic(OrgApacheLuceneDocumentFieldType_NumericTypeEnum, LONG)) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"type.numericType() must be LONG but got ", [type numericType])) autorelease];
+  if ([((OrgApacheLuceneDocumentFieldType *) nil_chk(type)) numericType] != JreLoadEnum(OrgApacheLuceneDocumentFieldType_NumericType, LONG)) {
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"type.numericType() must be LONG but got ", [type numericType]));
   }
   JreStrongAssign(&self->fieldsData_, OrgApacheLuceneUtilGeoUtils_mortonHashWithDouble_withDouble_(lon, lat));
 }
 
 OrgApacheLuceneDocumentGeoPointField *new_OrgApacheLuceneDocumentGeoPointField_initWithNSString_withDouble_withDouble_withOrgApacheLuceneDocumentFieldType_(NSString *name, jdouble lon, jdouble lat, OrgApacheLuceneDocumentFieldType *type) {
-  OrgApacheLuceneDocumentGeoPointField *self = [OrgApacheLuceneDocumentGeoPointField alloc];
-  OrgApacheLuceneDocumentGeoPointField_initWithNSString_withDouble_withDouble_withOrgApacheLuceneDocumentFieldType_(self, name, lon, lat, type);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentGeoPointField, initWithNSString_withDouble_withDouble_withOrgApacheLuceneDocumentFieldType_, name, lon, lat, type)
+}
+
+OrgApacheLuceneDocumentGeoPointField *create_OrgApacheLuceneDocumentGeoPointField_initWithNSString_withDouble_withDouble_withOrgApacheLuceneDocumentFieldType_(NSString *name, jdouble lon, jdouble lat, OrgApacheLuceneDocumentFieldType *type) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentGeoPointField, initWithNSString_withDouble_withDouble_withOrgApacheLuceneDocumentFieldType_, name, lon, lat, type)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentGeoPointField)

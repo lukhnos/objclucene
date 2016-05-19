@@ -57,9 +57,11 @@ void OrgApacheLuceneAnalysisCompoundHyphenationHyphenation_initWithIntArray_(Org
 }
 
 OrgApacheLuceneAnalysisCompoundHyphenationHyphenation *new_OrgApacheLuceneAnalysisCompoundHyphenationHyphenation_initWithIntArray_(IOSIntArray *points) {
-  OrgApacheLuceneAnalysisCompoundHyphenationHyphenation *self = [OrgApacheLuceneAnalysisCompoundHyphenationHyphenation alloc];
-  OrgApacheLuceneAnalysisCompoundHyphenationHyphenation_initWithIntArray_(self, points);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCompoundHyphenationHyphenation, initWithIntArray_, points)
+}
+
+OrgApacheLuceneAnalysisCompoundHyphenationHyphenation *create_OrgApacheLuceneAnalysisCompoundHyphenationHyphenation_initWithIntArray_(IOSIntArray *points) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCompoundHyphenationHyphenation, initWithIntArray_, points)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCompoundHyphenationHyphenation)

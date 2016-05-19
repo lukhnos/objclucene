@@ -5,23 +5,28 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneStoreByteArrayDataOutput_INCLUDE_ALL")
-#if OrgApacheLuceneStoreByteArrayDataOutput_RESTRICT
-#define OrgApacheLuceneStoreByteArrayDataOutput_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneStoreByteArrayDataOutput")
+#ifdef RESTRICT_OrgApacheLuceneStoreByteArrayDataOutput
+#define INCLUDE_ALL_OrgApacheLuceneStoreByteArrayDataOutput 0
 #else
-#define OrgApacheLuceneStoreByteArrayDataOutput_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneStoreByteArrayDataOutput 1
 #endif
-#undef OrgApacheLuceneStoreByteArrayDataOutput_RESTRICT
+#undef RESTRICT_OrgApacheLuceneStoreByteArrayDataOutput
 
-#if !defined (_OrgApacheLuceneStoreByteArrayDataOutput_) && (OrgApacheLuceneStoreByteArrayDataOutput_INCLUDE_ALL || OrgApacheLuceneStoreByteArrayDataOutput_INCLUDE)
-#define _OrgApacheLuceneStoreByteArrayDataOutput_
+#if !defined (OrgApacheLuceneStoreByteArrayDataOutput_) && (INCLUDE_ALL_OrgApacheLuceneStoreByteArrayDataOutput || defined(INCLUDE_OrgApacheLuceneStoreByteArrayDataOutput))
+#define OrgApacheLuceneStoreByteArrayDataOutput_
 
-#define OrgApacheLuceneStoreDataOutput_RESTRICT 1
-#define OrgApacheLuceneStoreDataOutput_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreDataOutput 1
+#define INCLUDE_OrgApacheLuceneStoreDataOutput 1
 #include "org/apache/lucene/store/DataOutput.h"
 
 @class IOSByteArray;
 
+/*!
+ @brief DataOutput backed by a byte array.
+ <b>WARNING:</b> This class omits most low-level checks,
+ so be sure to test heavily with assertions enabled.
+ */
 @interface OrgApacheLuceneStoreByteArrayDataOutput : OrgApacheLuceneStoreDataOutput
 
 #pragma mark Public
@@ -56,16 +61,22 @@ FOUNDATION_EXPORT void OrgApacheLuceneStoreByteArrayDataOutput_initWithByteArray
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreByteArrayDataOutput *new_OrgApacheLuceneStoreByteArrayDataOutput_initWithByteArray_(IOSByteArray *bytes) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneStoreByteArrayDataOutput *create_OrgApacheLuceneStoreByteArrayDataOutput_initWithByteArray_(IOSByteArray *bytes);
+
 FOUNDATION_EXPORT void OrgApacheLuceneStoreByteArrayDataOutput_initWithByteArray_withInt_withInt_(OrgApacheLuceneStoreByteArrayDataOutput *self, IOSByteArray *bytes, jint offset, jint len);
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreByteArrayDataOutput *new_OrgApacheLuceneStoreByteArrayDataOutput_initWithByteArray_withInt_withInt_(IOSByteArray *bytes, jint offset, jint len) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneStoreByteArrayDataOutput *create_OrgApacheLuceneStoreByteArrayDataOutput_initWithByteArray_withInt_withInt_(IOSByteArray *bytes, jint offset, jint len);
 
 FOUNDATION_EXPORT void OrgApacheLuceneStoreByteArrayDataOutput_init(OrgApacheLuceneStoreByteArrayDataOutput *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreByteArrayDataOutput *new_OrgApacheLuceneStoreByteArrayDataOutput_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneStoreByteArrayDataOutput *create_OrgApacheLuceneStoreByteArrayDataOutput_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreByteArrayDataOutput)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneStoreByteArrayDataOutput_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreByteArrayDataOutput")

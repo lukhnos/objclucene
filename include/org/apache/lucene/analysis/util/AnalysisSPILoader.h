@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisUtilAnalysisSPILoader_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisUtilAnalysisSPILoader_RESTRICT
-#define OrgApacheLuceneAnalysisUtilAnalysisSPILoader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilAnalysisSPILoader")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisUtilAnalysisSPILoader
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisUtilAnalysisSPILoader 0
 #else
-#define OrgApacheLuceneAnalysisUtilAnalysisSPILoader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisUtilAnalysisSPILoader 1
 #endif
-#undef OrgApacheLuceneAnalysisUtilAnalysisSPILoader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisUtilAnalysisSPILoader
 
-#if !defined (_OrgApacheLuceneAnalysisUtilAnalysisSPILoader_) && (OrgApacheLuceneAnalysisUtilAnalysisSPILoader_INCLUDE_ALL || OrgApacheLuceneAnalysisUtilAnalysisSPILoader_INCLUDE)
-#define _OrgApacheLuceneAnalysisUtilAnalysisSPILoader_
+#if !defined (OrgApacheLuceneAnalysisUtilAnalysisSPILoader_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisUtilAnalysisSPILoader || defined(INCLUDE_OrgApacheLuceneAnalysisUtilAnalysisSPILoader))
+#define OrgApacheLuceneAnalysisUtilAnalysisSPILoader_
 
 @class IOSClass;
 @class IOSObjectArray;
@@ -23,6 +23,10 @@
 @protocol JavaUtilMap;
 @protocol JavaUtilSet;
 
+/*!
+ @brief Helper class for loading named SPIs from classpath (e.g.
+ Tokenizers, TokenStreams).
+ */
 @interface OrgApacheLuceneAnalysisUtilAnalysisSPILoader : NSObject
 
 #pragma mark Public
@@ -46,6 +50,15 @@
 - (id)newInstanceWithNSString:(NSString *)name
               withJavaUtilMap:(id<JavaUtilMap>)args OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Reloads the internal SPI list from the given <code>ClassLoader</code>.
+ Changes to the service list are visible after the method ends, all
+ iterators (e.g., from <code>availableServices()</code>,...) stay consistent. 
+ <p><b>NOTE:</b> Only new service providers are added, existing ones are
+ never removed or replaced.
+ <p><em>This method is expensive and should only be called for discovery
+ of new service providers on the given classpath/classloader!</em>
+ */
 - (void)reloadWithJavaLangClassLoader:(JavaLangClassLoader *)classloader;
 
 @end
@@ -56,20 +69,28 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilAnalysisSPILoader_initWithIOSC
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilAnalysisSPILoader *new_OrgApacheLuceneAnalysisUtilAnalysisSPILoader_initWithIOSClass_(IOSClass *clazz) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilAnalysisSPILoader *create_OrgApacheLuceneAnalysisUtilAnalysisSPILoader_initWithIOSClass_(IOSClass *clazz);
+
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilAnalysisSPILoader_initWithIOSClass_withJavaLangClassLoader_(OrgApacheLuceneAnalysisUtilAnalysisSPILoader *self, IOSClass *clazz, JavaLangClassLoader *loader);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilAnalysisSPILoader *new_OrgApacheLuceneAnalysisUtilAnalysisSPILoader_initWithIOSClass_withJavaLangClassLoader_(IOSClass *clazz, JavaLangClassLoader *loader) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilAnalysisSPILoader *create_OrgApacheLuceneAnalysisUtilAnalysisSPILoader_initWithIOSClass_withJavaLangClassLoader_(IOSClass *clazz, JavaLangClassLoader *loader);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilAnalysisSPILoader_initWithIOSClass_withNSStringArray_(OrgApacheLuceneAnalysisUtilAnalysisSPILoader *self, IOSClass *clazz, IOSObjectArray *suffixes);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilAnalysisSPILoader *new_OrgApacheLuceneAnalysisUtilAnalysisSPILoader_initWithIOSClass_withNSStringArray_(IOSClass *clazz, IOSObjectArray *suffixes) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilAnalysisSPILoader *create_OrgApacheLuceneAnalysisUtilAnalysisSPILoader_initWithIOSClass_withNSStringArray_(IOSClass *clazz, IOSObjectArray *suffixes);
+
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilAnalysisSPILoader_initWithIOSClass_withNSStringArray_withJavaLangClassLoader_(OrgApacheLuceneAnalysisUtilAnalysisSPILoader *self, IOSClass *clazz, IOSObjectArray *suffixes, JavaLangClassLoader *classloader);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilAnalysisSPILoader *new_OrgApacheLuceneAnalysisUtilAnalysisSPILoader_initWithIOSClass_withNSStringArray_withJavaLangClassLoader_(IOSClass *clazz, IOSObjectArray *suffixes, JavaLangClassLoader *classloader) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilAnalysisSPILoader *create_OrgApacheLuceneAnalysisUtilAnalysisSPILoader_initWithIOSClass_withNSStringArray_withJavaLangClassLoader_(IOSClass *clazz, IOSObjectArray *suffixes, JavaLangClassLoader *classloader);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilAnalysisSPILoader)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisUtilAnalysisSPILoader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilAnalysisSPILoader")

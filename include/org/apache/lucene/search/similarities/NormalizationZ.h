@@ -5,23 +5,26 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSimilaritiesNormalizationZ_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSimilaritiesNormalizationZ_RESTRICT
-#define OrgApacheLuceneSearchSimilaritiesNormalizationZ_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesNormalizationZ")
+#ifdef RESTRICT_OrgApacheLuceneSearchSimilaritiesNormalizationZ
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesNormalizationZ 0
 #else
-#define OrgApacheLuceneSearchSimilaritiesNormalizationZ_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesNormalizationZ 1
 #endif
-#undef OrgApacheLuceneSearchSimilaritiesNormalizationZ_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSimilaritiesNormalizationZ
 
-#if !defined (_OrgApacheLuceneSearchSimilaritiesNormalizationZ_) && (OrgApacheLuceneSearchSimilaritiesNormalizationZ_INCLUDE_ALL || OrgApacheLuceneSearchSimilaritiesNormalizationZ_INCLUDE)
-#define _OrgApacheLuceneSearchSimilaritiesNormalizationZ_
+#if !defined (OrgApacheLuceneSearchSimilaritiesNormalizationZ_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesNormalizationZ || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesNormalizationZ))
+#define OrgApacheLuceneSearchSimilaritiesNormalizationZ_
 
-#define OrgApacheLuceneSearchSimilaritiesNormalization_RESTRICT 1
-#define OrgApacheLuceneSearchSimilaritiesNormalization_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSimilaritiesNormalization 1
+#define INCLUDE_OrgApacheLuceneSearchSimilaritiesNormalization 1
 #include "org/apache/lucene/search/similarities/Normalization.h"
 
 @class OrgApacheLuceneSearchSimilaritiesBasicStats;
 
+/*!
+ @brief Pareto-Zipf Normalization
+ */
 @interface OrgApacheLuceneSearchSimilaritiesNormalizationZ : OrgApacheLuceneSearchSimilaritiesNormalization {
  @public
   jfloat z_;
@@ -29,10 +32,22 @@
 
 #pragma mark Public
 
+/*!
+ @brief Calls <code>NormalizationZ(0.3)</code>
+ */
 - (instancetype)init;
 
+/*!
+ @brief Creates NormalizationZ with the supplied parameter <code>z</code>.
+ @param z represents <code>A/(A+1)</code> where <code>A</code> 
+ measures the specificity of the language.
+ */
 - (instancetype)initWithFloat:(jfloat)z;
 
+/*!
+ @brief Returns the parameter <code>z</code>
+ - seealso: #NormalizationZ(float)
+ */
 - (jfloat)getZ;
 
 - (jfloat)tfnWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
@@ -49,12 +64,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesNormalizationZ_init(OrgA
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesNormalizationZ *new_OrgApacheLuceneSearchSimilaritiesNormalizationZ_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesNormalizationZ *create_OrgApacheLuceneSearchSimilaritiesNormalizationZ_init();
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesNormalizationZ_initWithFloat_(OrgApacheLuceneSearchSimilaritiesNormalizationZ *self, jfloat z);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesNormalizationZ *new_OrgApacheLuceneSearchSimilaritiesNormalizationZ_initWithFloat_(jfloat z) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesNormalizationZ *create_OrgApacheLuceneSearchSimilaritiesNormalizationZ_initWithFloat_(jfloat z);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesNormalizationZ)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSimilaritiesNormalizationZ_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesNormalizationZ")

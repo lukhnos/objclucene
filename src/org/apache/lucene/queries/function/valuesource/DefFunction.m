@@ -60,6 +60,8 @@ __attribute__((unused)) static void OrgApacheLuceneQueriesFunctionValuesourceDef
 
 __attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceDefFunction_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceDefFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceDefFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_(OrgApacheLuceneQueriesFunctionValuesourceDefFunction *outer$, IOSObjectArray *arg$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceDefFunction_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceDefFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceDefFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_(OrgApacheLuceneQueriesFunctionValuesourceDefFunction *outer$, IOSObjectArray *arg$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceDefFunction_$1)
 
 @implementation OrgApacheLuceneQueriesFunctionValuesourceDefFunction
@@ -75,12 +77,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceDefFunction_
 
 - (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)fcontext
                                  withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext {
-  return [new_OrgApacheLuceneQueriesFunctionValuesourceDefFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceDefFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_(self, OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_valsArrWithJavaUtilList_withJavaUtilMap_withOrgApacheLuceneIndexLeafReaderContext_(sources_, fcontext, readerContext)) autorelease];
+  return create_OrgApacheLuceneQueriesFunctionValuesourceDefFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceDefFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_(self, OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_valsArrWithJavaUtilList_withJavaUtilMap_withOrgApacheLuceneIndexLeafReaderContext_(sources_, fcontext, readerContext));
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:", "DefFunction", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilList:", "DefFunction", NULL, 0x1, NULL, "(Ljava/util/List<Lorg/apache/lucene/queries/function/ValueSource;>;)V" },
     { "name", NULL, "Ljava.lang.String;", 0x4, NULL, NULL },
     { "getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:", "getValues", "Lorg.apache.lucene.queries.function.FunctionValues;", 0x1, "Ljava.io.IOException;", NULL },
   };
@@ -95,9 +97,11 @@ void OrgApacheLuceneQueriesFunctionValuesourceDefFunction_initWithJavaUtilList_(
 }
 
 OrgApacheLuceneQueriesFunctionValuesourceDefFunction *new_OrgApacheLuceneQueriesFunctionValuesourceDefFunction_initWithJavaUtilList_(id<JavaUtilList> sources) {
-  OrgApacheLuceneQueriesFunctionValuesourceDefFunction *self = [OrgApacheLuceneQueriesFunctionValuesourceDefFunction alloc];
-  OrgApacheLuceneQueriesFunctionValuesourceDefFunction_initWithJavaUtilList_(self, sources);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceDefFunction, initWithJavaUtilList_, sources)
+}
+
+OrgApacheLuceneQueriesFunctionValuesourceDefFunction *create_OrgApacheLuceneQueriesFunctionValuesourceDefFunction_initWithJavaUtilList_(id<JavaUtilList> sources) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceDefFunction, initWithJavaUtilList_, sources)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceDefFunction)
@@ -217,9 +221,11 @@ void OrgApacheLuceneQueriesFunctionValuesourceDefFunction_$1_initWithOrgApacheLu
 }
 
 OrgApacheLuceneQueriesFunctionValuesourceDefFunction_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceDefFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceDefFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_(OrgApacheLuceneQueriesFunctionValuesourceDefFunction *outer$, IOSObjectArray *arg$0) {
-  OrgApacheLuceneQueriesFunctionValuesourceDefFunction_$1 *self = [OrgApacheLuceneQueriesFunctionValuesourceDefFunction_$1 alloc];
-  OrgApacheLuceneQueriesFunctionValuesourceDefFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceDefFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_(self, outer$, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceDefFunction_$1, initWithOrgApacheLuceneQueriesFunctionValuesourceDefFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_, outer$, arg$0)
+}
+
+OrgApacheLuceneQueriesFunctionValuesourceDefFunction_$1 *create_OrgApacheLuceneQueriesFunctionValuesourceDefFunction_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceDefFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_(OrgApacheLuceneQueriesFunctionValuesourceDefFunction *outer$, IOSObjectArray *arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceDefFunction_$1, initWithOrgApacheLuceneQueriesFunctionValuesourceDefFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_, outer$, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceDefFunction_$1)

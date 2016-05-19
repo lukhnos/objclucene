@@ -5,41 +5,71 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsTermVectorsReader_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsTermVectorsReader_RESTRICT
-#define OrgApacheLuceneCodecsTermVectorsReader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsTermVectorsReader")
+#ifdef RESTRICT_OrgApacheLuceneCodecsTermVectorsReader
+#define INCLUDE_ALL_OrgApacheLuceneCodecsTermVectorsReader 0
 #else
-#define OrgApacheLuceneCodecsTermVectorsReader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsTermVectorsReader 1
 #endif
-#undef OrgApacheLuceneCodecsTermVectorsReader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsTermVectorsReader
 
-#if !defined (_OrgApacheLuceneCodecsTermVectorsReader_) && (OrgApacheLuceneCodecsTermVectorsReader_INCLUDE_ALL || OrgApacheLuceneCodecsTermVectorsReader_INCLUDE)
-#define _OrgApacheLuceneCodecsTermVectorsReader_
+#if !defined (OrgApacheLuceneCodecsTermVectorsReader_) && (INCLUDE_ALL_OrgApacheLuceneCodecsTermVectorsReader || defined(INCLUDE_OrgApacheLuceneCodecsTermVectorsReader))
+#define OrgApacheLuceneCodecsTermVectorsReader_
 
-#define JavaIoCloseable_RESTRICT 1
-#define JavaIoCloseable_INCLUDE 1
+#define RESTRICT_JavaIoCloseable 1
+#define INCLUDE_JavaIoCloseable 1
 #include "java/io/Closeable.h"
 
-#define OrgApacheLuceneUtilAccountable_RESTRICT 1
-#define OrgApacheLuceneUtilAccountable_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAccountable 1
+#define INCLUDE_OrgApacheLuceneUtilAccountable 1
 #include "org/apache/lucene/util/Accountable.h"
 
 @class OrgApacheLuceneIndexFields;
 
+/*!
+ @brief Codec API for reading term vectors:
+ */
 @interface OrgApacheLuceneCodecsTermVectorsReader : NSObject < NSCopying, JavaIoCloseable, OrgApacheLuceneUtilAccountable >
 
 #pragma mark Public
 
+/*!
+ @brief Checks consistency of this reader.
+ <p>
+ Note that this may be costly in terms of I/O, e.g. 
+ may involve computing a checksum value against large data files.
+ */
 - (void)checkIntegrity;
 
+/*!
+ @brief Create a clone that one caller at a time may use to
+ read term vectors.
+ */
 - (OrgApacheLuceneCodecsTermVectorsReader *)clone;
 
+/*!
+ @brief Returns term vectors for this document, or null if
+ term vectors were not indexed.
+ If offsets are
+ available they are in an <code>OffsetAttribute</code>
+ available from the <code>org.apache.lucene.index.PostingsEnum</code>. 
+ */
 - (OrgApacheLuceneIndexFields *)getWithInt:(jint)doc;
 
+/*!
+ @brief Returns an instance optimized for merging.
+ <p>
+ The default implementation returns <code>this</code> 
+ */
 - (OrgApacheLuceneCodecsTermVectorsReader *)getMergeInstance;
 
 #pragma mark Protected
 
+/*!
+ @brief Sole constructor.
+ (For invocation by subclass 
+ constructors, typically implicit.) 
+ */
 - (instancetype)init;
 
 @end
@@ -52,4 +82,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsTermVectorsReader)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsTermVectorsReader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsTermVectorsReader")

@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsStoredFieldsWriter_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsStoredFieldsWriter_RESTRICT
-#define OrgApacheLuceneCodecsStoredFieldsWriter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsStoredFieldsWriter")
+#ifdef RESTRICT_OrgApacheLuceneCodecsStoredFieldsWriter
+#define INCLUDE_ALL_OrgApacheLuceneCodecsStoredFieldsWriter 0
 #else
-#define OrgApacheLuceneCodecsStoredFieldsWriter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsStoredFieldsWriter 1
 #endif
-#undef OrgApacheLuceneCodecsStoredFieldsWriter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsStoredFieldsWriter
 
-#if !defined (_OrgApacheLuceneCodecsStoredFieldsWriter_) && (OrgApacheLuceneCodecsStoredFieldsWriter_INCLUDE_ALL || OrgApacheLuceneCodecsStoredFieldsWriter_INCLUDE)
-#define _OrgApacheLuceneCodecsStoredFieldsWriter_
+#if !defined (OrgApacheLuceneCodecsStoredFieldsWriter_) && (INCLUDE_ALL_OrgApacheLuceneCodecsStoredFieldsWriter || defined(INCLUDE_OrgApacheLuceneCodecsStoredFieldsWriter))
+#define OrgApacheLuceneCodecsStoredFieldsWriter_
 
-#define JavaIoCloseable_RESTRICT 1
-#define JavaIoCloseable_INCLUDE 1
+#define RESTRICT_JavaIoCloseable 1
+#define INCLUDE_JavaIoCloseable 1
 #include "java/io/Closeable.h"
 
 @class OrgApacheLuceneIndexFieldInfo;
@@ -25,26 +25,74 @@
 @class OrgApacheLuceneIndexMergeState;
 @protocol OrgApacheLuceneIndexIndexableField;
 
+/*!
+ @brief Codec API for writing stored fields:
+ <ol>
+ <li>For every document, <code>startDocument()</code> is called,
+ informing the Codec that a new document has started.
+ <li><code>writeField(FieldInfo,IndexableField)</code> is called for 
+ each field in the document.
+ <li>After all documents have been written, <code>finish(FieldInfos,int)</code> 
+ is called for verification/sanity-checks.
+ <li>Finally the writer is closed (<code>close()</code>)
+ </ol>
+ */
 @interface OrgApacheLuceneCodecsStoredFieldsWriter : NSObject < JavaIoCloseable >
 
 #pragma mark Public
 
 - (void)close;
 
+/*!
+ @brief Called before <code>close()</code>, passing in the number
+ of documents that were written.
+ Note that this is 
+ intentionally redundant (equivalent to the number of
+ calls to <code>startDocument()</code>, but a Codec should
+ check that this is the case to detect the JRE bug described 
+ in LUCENE-1282. 
+ */
 - (void)finishWithOrgApacheLuceneIndexFieldInfos:(OrgApacheLuceneIndexFieldInfos *)fis
                                          withInt:(jint)numDocs;
 
+/*!
+ @brief Called when a document and all its fields have been added.
+ */
 - (void)finishDocument;
 
+/*!
+ @brief Merges in the stored fields from the readers in 
+ <code>mergeState</code>.
+ The default implementation skips
+ over deleted documents, and uses <code>startDocument()</code>,
+ <code>writeField(FieldInfo,IndexableField)</code>, and <code>finish(FieldInfos,int)</code>,
+ returning the number of documents that were written.
+ Implementations can override this method for more sophisticated
+ merging (bulk-byte copying, etc). 
+ */
 - (jint)mergeWithOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState;
 
+/*!
+ @brief Called before writing the stored fields of the document.
+ <code>writeField(FieldInfo,IndexableField)</code> will be called
+ for each stored field. Note that this is
+ called even if the document has no stored fields. 
+ */
 - (void)startDocument;
 
+/*!
+ @brief Writes a single stored field.
+ */
 - (void)writeFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)info
              withOrgApacheLuceneIndexIndexableField:(id<OrgApacheLuceneIndexIndexableField>)field;
 
 #pragma mark Protected
 
+/*!
+ @brief Sole constructor.
+ (For invocation by subclass 
+ constructors, typically implicit.) 
+ */
 - (instancetype)init;
 
 @end
@@ -57,15 +105,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsStoredFieldsWriter)
 
 #endif
 
-#if !defined (_OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor_) && (OrgApacheLuceneCodecsStoredFieldsWriter_INCLUDE_ALL || OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor_INCLUDE)
-#define _OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor_
+#if !defined (OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor_) && (INCLUDE_ALL_OrgApacheLuceneCodecsStoredFieldsWriter || defined(INCLUDE_OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor))
+#define OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor_
 
-#define OrgApacheLuceneIndexStoredFieldVisitor_RESTRICT 1
-#define OrgApacheLuceneIndexStoredFieldVisitor_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexStoredFieldVisitor 1
+#define INCLUDE_OrgApacheLuceneIndexStoredFieldVisitor 1
 #include "org/apache/lucene/index/StoredFieldVisitor.h"
 
-#define OrgApacheLuceneIndexIndexableField_RESTRICT 1
-#define OrgApacheLuceneIndexIndexableField_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexIndexableField 1
+#define INCLUDE_OrgApacheLuceneIndexIndexableField 1
 #include "org/apache/lucene/index/IndexableField.h"
 
 @class IOSByteArray;
@@ -76,10 +124,25 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsStoredFieldsWriter)
 @class OrgApacheLuceneIndexFieldInfo;
 @class OrgApacheLuceneIndexFieldInfos;
 @class OrgApacheLuceneIndexMergeState;
-@class OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum;
+@class OrgApacheLuceneIndexStoredFieldVisitor_Status;
 @class OrgApacheLuceneUtilBytesRef;
 @protocol OrgApacheLuceneIndexIndexableFieldType;
 
+/*!
+ @brief A visitor that adds every field it sees.
+ <p>
+ Use like this:
+ @code
+
+  MergeVisitor visitor = new MergeVisitor(mergeState, readerIndex);
+  for (...) {
+   startDocument();
+   storedFieldsReader.visitDocument(docID, visitor);
+   finishDocument();
+  }
+  
+@endcode
+ */
 @interface OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor : OrgApacheLuceneIndexStoredFieldVisitor < OrgApacheLuceneIndexIndexableField > {
  @public
   OrgApacheLuceneUtilBytesRef *binaryValue_;
@@ -91,6 +154,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsStoredFieldsWriter)
 
 #pragma mark Public
 
+/*!
+ @brief Create new merge visitor.
+ */
 - (instancetype)initWithOrgApacheLuceneCodecsStoredFieldsWriter:(OrgApacheLuceneCodecsStoredFieldsWriter *)outer$
                              withOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState
                                                         withInt:(jint)readerIndex;
@@ -118,7 +184,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsStoredFieldsWriter)
 
 - (NSString *)name;
 
-- (OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum *)needsFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo;
+- (OrgApacheLuceneIndexStoredFieldVisitor_Status *)needsFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo;
 
 - (NSNumber *)numericValue;
 
@@ -152,8 +218,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor_init
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor *new_OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor_initWithOrgApacheLuceneCodecsStoredFieldsWriter_withOrgApacheLuceneIndexMergeState_withInt_(OrgApacheLuceneCodecsStoredFieldsWriter *outer$, OrgApacheLuceneIndexMergeState *mergeState, jint readerIndex) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor *create_OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor_initWithOrgApacheLuceneCodecsStoredFieldsWriter_withOrgApacheLuceneIndexMergeState_withInt_(OrgApacheLuceneCodecsStoredFieldsWriter *outer$, OrgApacheLuceneIndexMergeState *mergeState, jint readerIndex);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsStoredFieldsWriter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsStoredFieldsWriter")

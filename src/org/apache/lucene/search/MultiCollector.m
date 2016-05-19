@@ -34,6 +34,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchMultiCollector_initWith
 
 __attribute__((unused)) static OrgApacheLuceneSearchMultiCollector *new_OrgApacheLuceneSearchMultiCollector_initWithOrgApacheLuceneSearchCollectorArray_(IOSObjectArray *collectors) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchMultiCollector *create_OrgApacheLuceneSearchMultiCollector_initWithOrgApacheLuceneSearchCollectorArray_(IOSObjectArray *collectors);
+
 @interface OrgApacheLuceneSearchMultiCollector_MultiLeafCollector : NSObject < OrgApacheLuceneSearchLeafCollector > {
  @public
   jboolean cacheScores_;
@@ -56,6 +58,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchMultiCollector_MultiLeafCollector, coll
 __attribute__((unused)) static void OrgApacheLuceneSearchMultiCollector_MultiLeafCollector_initWithOrgApacheLuceneSearchLeafCollectorArray_withBoolean_(OrgApacheLuceneSearchMultiCollector_MultiLeafCollector *self, IOSObjectArray *collectors, jboolean cacheScores);
 
 __attribute__((unused)) static OrgApacheLuceneSearchMultiCollector_MultiLeafCollector *new_OrgApacheLuceneSearchMultiCollector_MultiLeafCollector_initWithOrgApacheLuceneSearchLeafCollectorArray_withBoolean_(IOSObjectArray *collectors, jboolean cacheScores) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchMultiCollector_MultiLeafCollector *create_OrgApacheLuceneSearchMultiCollector_MultiLeafCollector_initWithOrgApacheLuceneSearchLeafCollectorArray_withBoolean_(IOSObjectArray *collectors, jboolean cacheScores);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiCollector_MultiLeafCollector)
 
@@ -94,7 +98,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiCollector_MultiLeafCollecto
   for (jint i = 0; i < collectors_->size_; ++i) {
     IOSObjectArray_Set(leafCollectors, i, [((id<OrgApacheLuceneSearchCollector>) nil_chk(IOSObjectArray_Get(collectors_, i))) getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:context]);
   }
-  return [new_OrgApacheLuceneSearchMultiCollector_MultiLeafCollector_initWithOrgApacheLuceneSearchLeafCollectorArray_withBoolean_(leafCollectors, cacheScores_) autorelease];
+  return create_OrgApacheLuceneSearchMultiCollector_MultiLeafCollector_initWithOrgApacheLuceneSearchLeafCollectorArray_withBoolean_(leafCollectors, cacheScores_);
 }
 
 - (void)dealloc {
@@ -105,7 +109,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiCollector_MultiLeafCollecto
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "wrapWithOrgApacheLuceneSearchCollectorArray:", "wrap", "Lorg.apache.lucene.search.Collector;", 0x89, NULL, NULL },
-    { "wrapWithJavaLangIterable:", "wrap", "Lorg.apache.lucene.search.Collector;", 0x9, NULL, NULL },
+    { "wrapWithJavaLangIterable:", "wrap", "Lorg.apache.lucene.search.Collector;", 0x9, NULL, "(Ljava/lang/Iterable<+Lorg/apache/lucene/search/Collector;>;)Lorg/apache/lucene/search/Collector;" },
     { "initWithOrgApacheLuceneSearchCollectorArray:", "MultiCollector", NULL, 0x82, NULL, NULL },
     { "needsScores", NULL, "Z", 0x1, NULL, NULL },
     { "getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:", "getLeafCollector", "Lorg.apache.lucene.search.LeafCollector;", 0x1, "Ljava.io.IOException;", NULL },
@@ -135,7 +139,7 @@ id<OrgApacheLuceneSearchCollector> OrgApacheLuceneSearchMultiCollector_wrapWithJ
     }
   }
   if (n == 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"At least 1 collector must not be null") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"At least 1 collector must not be null");
   }
   else if (n == 1) {
     id<OrgApacheLuceneSearchCollector> col = nil;
@@ -155,7 +159,7 @@ id<OrgApacheLuceneSearchCollector> OrgApacheLuceneSearchMultiCollector_wrapWithJ
         IOSObjectArray_Set(colls, n++, c);
       }
     }
-    return [new_OrgApacheLuceneSearchMultiCollector_initWithOrgApacheLuceneSearchCollectorArray_(colls) autorelease];
+    return create_OrgApacheLuceneSearchMultiCollector_initWithOrgApacheLuceneSearchCollectorArray_(colls);
   }
 }
 
@@ -178,9 +182,11 @@ void OrgApacheLuceneSearchMultiCollector_initWithOrgApacheLuceneSearchCollectorA
 }
 
 OrgApacheLuceneSearchMultiCollector *new_OrgApacheLuceneSearchMultiCollector_initWithOrgApacheLuceneSearchCollectorArray_(IOSObjectArray *collectors) {
-  OrgApacheLuceneSearchMultiCollector *self = [OrgApacheLuceneSearchMultiCollector alloc];
-  OrgApacheLuceneSearchMultiCollector_initWithOrgApacheLuceneSearchCollectorArray_(self, collectors);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchMultiCollector, initWithOrgApacheLuceneSearchCollectorArray_, collectors)
+}
+
+OrgApacheLuceneSearchMultiCollector *create_OrgApacheLuceneSearchMultiCollector_initWithOrgApacheLuceneSearchCollectorArray_(IOSObjectArray *collectors) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchMultiCollector, initWithOrgApacheLuceneSearchCollectorArray_, collectors)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchMultiCollector)
@@ -195,7 +201,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchMultiCollector)
 
 - (void)setScorerWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)scorer {
   if (cacheScores_) {
-    scorer = [new_OrgApacheLuceneSearchScoreCachingWrappingScorer_initWithOrgApacheLuceneSearchScorer_(scorer) autorelease];
+    scorer = create_OrgApacheLuceneSearchScoreCachingWrappingScorer_initWithOrgApacheLuceneSearchScorer_(scorer);
   }
   {
     IOSObjectArray *a__ = collectors_;
@@ -248,9 +254,11 @@ void OrgApacheLuceneSearchMultiCollector_MultiLeafCollector_initWithOrgApacheLuc
 }
 
 OrgApacheLuceneSearchMultiCollector_MultiLeafCollector *new_OrgApacheLuceneSearchMultiCollector_MultiLeafCollector_initWithOrgApacheLuceneSearchLeafCollectorArray_withBoolean_(IOSObjectArray *collectors, jboolean cacheScores) {
-  OrgApacheLuceneSearchMultiCollector_MultiLeafCollector *self = [OrgApacheLuceneSearchMultiCollector_MultiLeafCollector alloc];
-  OrgApacheLuceneSearchMultiCollector_MultiLeafCollector_initWithOrgApacheLuceneSearchLeafCollectorArray_withBoolean_(self, collectors, cacheScores);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchMultiCollector_MultiLeafCollector, initWithOrgApacheLuceneSearchLeafCollectorArray_withBoolean_, collectors, cacheScores)
+}
+
+OrgApacheLuceneSearchMultiCollector_MultiLeafCollector *create_OrgApacheLuceneSearchMultiCollector_MultiLeafCollector_initWithOrgApacheLuceneSearchLeafCollectorArray_withBoolean_(IOSObjectArray *collectors, jboolean cacheScores) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchMultiCollector_MultiLeafCollector, initWithOrgApacheLuceneSearchLeafCollectorArray_withBoolean_, collectors, cacheScores)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchMultiCollector_MultiLeafCollector)

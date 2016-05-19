@@ -17,9 +17,13 @@
 
 @implementation OrgApacheLuceneIndexDocValuesFieldUpdates
 
+/* + (jint)PAGE_SIZE {
+  return OrgApacheLuceneIndexDocValuesFieldUpdates_PAGE_SIZE;
+}*/ // disabled by translate.py
+
 - (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum *)type {
-  OrgApacheLuceneIndexDocValuesFieldUpdates_initWithNSString_withOrgApacheLuceneIndexDocValuesTypeEnum_(self, field, type);
+withOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)type {
+  OrgApacheLuceneIndexDocValuesFieldUpdates_initWithNSString_withOrgApacheLuceneIndexDocValuesType_(self, field, type);
   return self;
 }
 
@@ -64,7 +68,7 @@ withOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withOrgApacheLuceneIndexDocValuesTypeEnum:", "DocValuesFieldUpdates", NULL, 0x4, NULL, NULL },
+    { "initWithNSString:withOrgApacheLuceneIndexDocValuesType:", "DocValuesFieldUpdates", NULL, 0x4, NULL, NULL },
     { "estimateCapacityWithInt:", "estimateCapacity", "I", 0xc, NULL, NULL },
     { "addWithInt:withId:", "add", "V", 0x401, NULL, NULL },
     { "iterator", NULL, "Lorg.apache.lucene.index.DocValuesFieldUpdates$Iterator;", 0x401, NULL, NULL },
@@ -84,11 +88,11 @@ withOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum
 
 @end
 
-void OrgApacheLuceneIndexDocValuesFieldUpdates_initWithNSString_withOrgApacheLuceneIndexDocValuesTypeEnum_(OrgApacheLuceneIndexDocValuesFieldUpdates *self, NSString *field, OrgApacheLuceneIndexDocValuesTypeEnum *type) {
+void OrgApacheLuceneIndexDocValuesFieldUpdates_initWithNSString_withOrgApacheLuceneIndexDocValuesType_(OrgApacheLuceneIndexDocValuesFieldUpdates *self, NSString *field, OrgApacheLuceneIndexDocValuesType *type) {
   NSObject_init(self);
   JreStrongAssign(&self->field_, field);
   if (type == nil) {
-    @throw [new_JavaLangNullPointerException_initWithNSString_(@"DocValuesType cannot be null") autorelease];
+    @throw create_JavaLangNullPointerException_initWithNSString_(@"DocValuesType cannot be null");
   }
   JreStrongAssign(&self->type_, type);
 }
@@ -138,7 +142,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "doc", NULL, "I", 0x400, NULL, NULL },
     { "value", NULL, "Ljava.lang.Object;", 0x400, NULL, NULL },
     { "reset", NULL, "V", 0x400, NULL, NULL },
-    { "init", NULL, NULL, 0x0, NULL, NULL },
+    { "init", "Iterator", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneIndexDocValuesFieldUpdates_Iterator = { 2, "Iterator", "org.apache.lucene.index", "DocValuesFieldUpdates", 0x408, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexDocValuesFieldUpdates_Iterator;
@@ -184,36 +188,36 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocValuesFieldUpdates_Itera
 }
 
 - (OrgApacheLuceneIndexDocValuesFieldUpdates *)getUpdatesWithNSString:(NSString *)field
-                            withOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum *)type {
+                                withOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)type {
   switch ([type ordinal]) {
-    case OrgApacheLuceneIndexDocValuesType_NUMERIC:
+    case OrgApacheLuceneIndexDocValuesType_Enum_NUMERIC:
     return [((id<JavaUtilMap>) nil_chk(numericDVUpdates_)) getWithId:field];
-    case OrgApacheLuceneIndexDocValuesType_BINARY:
+    case OrgApacheLuceneIndexDocValuesType_Enum_BINARY:
     return [((id<JavaUtilMap>) nil_chk(binaryDVUpdates_)) getWithId:field];
     default:
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"unsupported type: ", type)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"unsupported type: ", type));
   }
 }
 
 - (OrgApacheLuceneIndexDocValuesFieldUpdates *)newUpdatesWithNSString:(NSString *)field
-                            withOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum *)type
+                                withOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)type
                                                               withInt:(jint)maxDoc {
   {
     OrgApacheLuceneIndexNumericDocValuesFieldUpdates *numericUpdates;
     OrgApacheLuceneIndexBinaryDocValuesFieldUpdates *binaryUpdates;
     switch ([type ordinal]) {
-      case OrgApacheLuceneIndexDocValuesType_NUMERIC:
+      case OrgApacheLuceneIndexDocValuesType_Enum_NUMERIC:
       JreAssert(([((id<JavaUtilMap>) nil_chk(numericDVUpdates_)) getWithId:field] == nil), (@"org/apache/lucene/index/DocValuesFieldUpdates.java:114 condition failed: assert numericDVUpdates.get(field) == null;"));
-      numericUpdates = [new_OrgApacheLuceneIndexNumericDocValuesFieldUpdates_initWithNSString_withInt_(field, maxDoc) autorelease];
+      numericUpdates = create_OrgApacheLuceneIndexNumericDocValuesFieldUpdates_initWithNSString_withInt_(field, maxDoc);
       [numericDVUpdates_ putWithId:field withId:numericUpdates];
       return numericUpdates;
-      case OrgApacheLuceneIndexDocValuesType_BINARY:
+      case OrgApacheLuceneIndexDocValuesType_Enum_BINARY:
       JreAssert(([((id<JavaUtilMap>) nil_chk(binaryDVUpdates_)) getWithId:field] == nil), (@"org/apache/lucene/index/DocValuesFieldUpdates.java:119 condition failed: assert binaryDVUpdates.get(field) == null;"));
-      binaryUpdates = [new_OrgApacheLuceneIndexBinaryDocValuesFieldUpdates_initWithNSString_withInt_(field, maxDoc) autorelease];
+      binaryUpdates = create_OrgApacheLuceneIndexBinaryDocValuesFieldUpdates_initWithNSString_withInt_(field, maxDoc);
       [binaryDVUpdates_ putWithId:field withId:binaryUpdates];
       return binaryUpdates;
       default:
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"unsupported type: ", type)) autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"unsupported type: ", type));
     }
   }
 }
@@ -240,10 +244,10 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "any", NULL, "Z", 0x0, NULL, NULL },
     { "size", NULL, "I", 0x0, NULL, NULL },
     { "ramBytesPerDoc", NULL, "J", 0x0, NULL, NULL },
-    { "getUpdatesWithNSString:withOrgApacheLuceneIndexDocValuesTypeEnum:", "getUpdates", "Lorg.apache.lucene.index.DocValuesFieldUpdates;", 0x0, NULL, NULL },
-    { "newUpdatesWithNSString:withOrgApacheLuceneIndexDocValuesTypeEnum:withInt:", "newUpdates", "Lorg.apache.lucene.index.DocValuesFieldUpdates;", 0x0, NULL, NULL },
+    { "getUpdatesWithNSString:withOrgApacheLuceneIndexDocValuesType:", "getUpdates", "Lorg.apache.lucene.index.DocValuesFieldUpdates;", 0x0, NULL, NULL },
+    { "newUpdatesWithNSString:withOrgApacheLuceneIndexDocValuesType:withInt:", "newUpdates", "Lorg.apache.lucene.index.DocValuesFieldUpdates;", 0x0, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x0, NULL, NULL },
+    { "init", "Container", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "numericDVUpdates_", NULL, 0x10, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/index/NumericDocValuesFieldUpdates;>;", .constantValue.asLong = 0 },
@@ -262,9 +266,11 @@ void OrgApacheLuceneIndexDocValuesFieldUpdates_Container_init(OrgApacheLuceneInd
 }
 
 OrgApacheLuceneIndexDocValuesFieldUpdates_Container *new_OrgApacheLuceneIndexDocValuesFieldUpdates_Container_init() {
-  OrgApacheLuceneIndexDocValuesFieldUpdates_Container *self = [OrgApacheLuceneIndexDocValuesFieldUpdates_Container alloc];
-  OrgApacheLuceneIndexDocValuesFieldUpdates_Container_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexDocValuesFieldUpdates_Container, init)
+}
+
+OrgApacheLuceneIndexDocValuesFieldUpdates_Container *create_OrgApacheLuceneIndexDocValuesFieldUpdates_Container_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexDocValuesFieldUpdates_Container, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocValuesFieldUpdates_Container)

@@ -12,7 +12,6 @@
 #include "java/lang/Integer.h"
 #include "java/lang/Math.h"
 #include "java/lang/StringBuilder.h"
-#include "java/lang/Throwable.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Collection.h"
@@ -45,39 +44,129 @@
 
 @interface OrgApacheLuceneQueriesMltMoreLikeThis () {
  @public
+  /*!
+   @brief Current set of stop words.
+   */
   id<JavaUtilSet> stopWords_;
+  /*!
+   @brief Analyzer that will be used to parse the doc.
+   */
   OrgApacheLuceneAnalysisAnalyzer *analyzer_;
+  /*!
+   @brief Ignore words less frequent that this.
+   */
   jint minTermFreq_;
+  /*!
+   @brief Ignore words which do not occur in at least this many docs.
+   */
   jint minDocFreq_;
+  /*!
+   @brief Ignore words which occur in more than this many docs.
+   */
   jint maxDocFreq_;
+  /*!
+   @brief Should we apply a boost to the Query based on the scores?
+   */
   jboolean boost_;
+  /*!
+   @brief Field name we'll analyze.
+   */
   IOSObjectArray *fieldNames_;
+  /*!
+   @brief The maximum number of tokens to parse in each example doc field that is not stored with TermVector support
+   */
   jint maxNumTokensParsed_;
+  /*!
+   @brief Ignore words if less than this len.
+   */
   jint minWordLen_;
+  /*!
+   @brief Ignore words if greater than this len.
+   */
   jint maxWordLen_;
+  /*!
+   @brief Don't return a query longer than this.
+   */
   jint maxQueryTerms_;
+  /*!
+   @brief For idf() calculations.
+   */
   OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *similarity_;
+  /*!
+   @brief IndexReader to use
+   */
   OrgApacheLuceneIndexIndexReader *ir_;
+  /*!
+   @brief Boost factor to use when boosting the terms
+   */
   jfloat boostFactor_;
 }
 
+/*!
+ @brief Create the More like query from a PriorityQueue
+ */
 - (OrgApacheLuceneSearchQuery *)createQueryWithOrgApacheLuceneUtilPriorityQueue:(OrgApacheLuceneUtilPriorityQueue *)q;
 
+/*!
+ @brief Create a PriorityQueue from a word-&gt;tf map.
+ @param words a map of words keyed on the word(String) with Int objects as the values.
+ */
 - (OrgApacheLuceneUtilPriorityQueue *)createQueueWithJavaUtilMap:(id<JavaUtilMap>)words;
 
+/*!
+ @brief Find words for a more-like-this query former.
+ @param docNum the id of the lucene document from which to find terms
+ */
 - (OrgApacheLuceneUtilPriorityQueue *)retrieveTermsWithInt:(jint)docNum;
 
 - (OrgApacheLuceneUtilPriorityQueue *)retrieveTermsWithJavaUtilMap:(id<JavaUtilMap>)fields;
 
+/*!
+ @brief Adds terms and frequencies found in vector into the Map termFreqMap
+ @param termFreqMap a Map of terms and their frequencies
+ @param vector List of terms and their frequencies for a doc/field
+ */
 - (void)addTermFrequenciesWithJavaUtilMap:(id<JavaUtilMap>)termFreqMap
             withOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)vector;
 
+/*!
+ @brief Adds term frequencies found by tokenizing text from reader into the Map words
+ @param r a source of text to be tokenized
+ @param termFreqMap a Map of terms and their frequencies
+ @param fieldName Used by analyzer for any special per-field analysis
+ */
 - (void)addTermFrequenciesWithJavaIoReader:(JavaIoReader *)r
                            withJavaUtilMap:(id<JavaUtilMap>)termFreqMap
                               withNSString:(NSString *)fieldName;
 
+/*!
+ @brief determines if the passed term is likely to be of interest in "more like" comparisons
+ @param term The word being considered
+ @return true if should be ignored, false if should be used in further analysis
+ */
 - (jboolean)isNoiseWordWithNSString:(NSString *)term;
 
+/*!
+ @brief Find words for a more-like-this query former.
+ The result is a priority queue of arrays with one entry for <b>every word</b> in the document.
+ Each array has 6 elements.
+ The elements are:
+ <ol>
+ <li> The word (String)
+ <li> The top field that this word comes from (String)
+ <li> The score for this word (Float)
+ <li> The IDF value (Float)
+ <li> The frequency of this word in the index (Integer)
+ <li> The frequency of this word in the source document (Integer)
+ </ol>
+ This is a somewhat "advanced" routine, and in general only the 1st entry in the array is of interest.
+ This method is exposed so that you can identify the "interesting words" in a document.
+ For an easier method to call see <code>retrieveInterestingTerms()</code>.
+ @param r the reader that has the content of the document
+ @param fieldName field passed to the analyzer to use when analyzing the content
+ @return the most interesting words in the document ordered by score, with the highest scoring, or best entry, first
+ - seealso: #retrieveInterestingTerms
+ */
 - (OrgApacheLuceneUtilPriorityQueue *)retrieveTermsWithJavaIoReader:(JavaIoReader *)r
                                                        withNSString:(NSString *)fieldName;
 
@@ -105,6 +194,9 @@ __attribute__((unused)) static jboolean OrgApacheLuceneQueriesMltMoreLikeThis_is
 
 __attribute__((unused)) static OrgApacheLuceneUtilPriorityQueue *OrgApacheLuceneQueriesMltMoreLikeThis_retrieveTermsWithJavaIoReader_withNSString_(OrgApacheLuceneQueriesMltMoreLikeThis *self, JavaIoReader *r, NSString *fieldName);
 
+/*!
+ @brief PriorityQueue that orders words by score.
+ */
 @interface OrgApacheLuceneQueriesMltMoreLikeThis_FreqQ : OrgApacheLuceneUtilPriorityQueue
 
 - (instancetype)initWithInt:(jint)maxSize;
@@ -119,6 +211,8 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesMltMoreLikeThis_FreqQ)
 __attribute__((unused)) static void OrgApacheLuceneQueriesMltMoreLikeThis_FreqQ_initWithInt_(OrgApacheLuceneQueriesMltMoreLikeThis_FreqQ *self, jint maxSize);
 
 __attribute__((unused)) static OrgApacheLuceneQueriesMltMoreLikeThis_FreqQ *new_OrgApacheLuceneQueriesMltMoreLikeThis_FreqQ_initWithInt_(jint maxSize) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneQueriesMltMoreLikeThis_FreqQ *create_OrgApacheLuceneQueriesMltMoreLikeThis_FreqQ_initWithInt_(jint maxSize);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesMltMoreLikeThis_FreqQ)
 
@@ -157,8 +251,13 @@ __attribute__((unused)) static void OrgApacheLuceneQueriesMltMoreLikeThis_ScoreT
 
 __attribute__((unused)) static OrgApacheLuceneQueriesMltMoreLikeThis_ScoreTerm *new_OrgApacheLuceneQueriesMltMoreLikeThis_ScoreTerm_initWithNSString_withNSString_withFloat_withFloat_withInt_withInt_(NSString *word, NSString *topField, jfloat score, jfloat idf, jint docFreq, jint tf) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneQueriesMltMoreLikeThis_ScoreTerm *create_OrgApacheLuceneQueriesMltMoreLikeThis_ScoreTerm_initWithNSString_withNSString_withFloat_withFloat_withInt_withInt_(NSString *word, NSString *topField, jfloat score, jfloat idf, jint docFreq, jint tf);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesMltMoreLikeThis_ScoreTerm)
 
+/*!
+ @brief Use for frequencies and to avoid renewing Integers.
+ */
 @interface OrgApacheLuceneQueriesMltMoreLikeThis_Int : NSObject {
  @public
   jint x_;
@@ -174,14 +273,56 @@ __attribute__((unused)) static void OrgApacheLuceneQueriesMltMoreLikeThis_Int_in
 
 __attribute__((unused)) static OrgApacheLuceneQueriesMltMoreLikeThis_Int *new_OrgApacheLuceneQueriesMltMoreLikeThis_Int_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneQueriesMltMoreLikeThis_Int *create_OrgApacheLuceneQueriesMltMoreLikeThis_Int_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesMltMoreLikeThis_Int)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneQueriesMltMoreLikeThis)
 
-IOSObjectArray *OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_FIELD_NAMES_;
-id<JavaUtilSet> OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_STOP_WORDS_;
+IOSObjectArray *OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_FIELD_NAMES;
+id<JavaUtilSet> OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_STOP_WORDS;
 
 @implementation OrgApacheLuceneQueriesMltMoreLikeThis
+
++ (jint)DEFAULT_MAX_NUM_TOKENS_PARSED {
+  return OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_MAX_NUM_TOKENS_PARSED;
+}
+
++ (jint)DEFAULT_MIN_TERM_FREQ {
+  return OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_MIN_TERM_FREQ;
+}
+
++ (jint)DEFAULT_MIN_DOC_FREQ {
+  return OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_MIN_DOC_FREQ;
+}
+
++ (jint)DEFAULT_MAX_DOC_FREQ {
+  return OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_MAX_DOC_FREQ;
+}
+
++ (jboolean)DEFAULT_BOOST {
+  return OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_BOOST;
+}
+
++ (IOSObjectArray *)DEFAULT_FIELD_NAMES {
+  return OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_FIELD_NAMES;
+}
+
++ (jint)DEFAULT_MIN_WORD_LENGTH {
+  return OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_MIN_WORD_LENGTH;
+}
+
++ (jint)DEFAULT_MAX_WORD_LENGTH {
+  return OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_MAX_WORD_LENGTH;
+}
+
++ (id<JavaUtilSet>)DEFAULT_STOP_WORDS {
+  return OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_STOP_WORDS;
+}
+
++ (jint)DEFAULT_MAX_QUERY_TERMS {
+  return OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_MAX_QUERY_TERMS;
+}
 
 - (jfloat)getBoostFactor {
   return boostFactor_;
@@ -305,7 +446,7 @@ id<JavaUtilSet> OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_STOP_WORDS_;
 - (OrgApacheLuceneSearchQuery *)likeWithInt:(jint)docNum {
   if (fieldNames_ == nil) {
     id<JavaUtilCollection> fields = OrgApacheLuceneIndexMultiFields_getIndexedFieldsWithOrgApacheLuceneIndexIndexReader_(ir_);
-    JreStrongAssign(&fieldNames_, [fields toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[((id<JavaUtilCollection>) nil_chk(fields)) size] type:NSString_class_()]]);
+    JreStrongAssign(&fieldNames_, [((id<JavaUtilCollection>) nil_chk(fields)) toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[fields size] type:NSString_class_()]]);
   }
   return OrgApacheLuceneQueriesMltMoreLikeThis_createQueryWithOrgApacheLuceneUtilPriorityQueue_(self, OrgApacheLuceneQueriesMltMoreLikeThis_retrieveTermsWithInt_(self, docNum));
 }
@@ -313,14 +454,14 @@ id<JavaUtilSet> OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_STOP_WORDS_;
 - (OrgApacheLuceneSearchQuery *)likeWithJavaUtilMap:(id<JavaUtilMap>)filteredDocument {
   if (fieldNames_ == nil) {
     id<JavaUtilCollection> fields = OrgApacheLuceneIndexMultiFields_getIndexedFieldsWithOrgApacheLuceneIndexIndexReader_(ir_);
-    JreStrongAssign(&fieldNames_, [fields toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[((id<JavaUtilCollection>) nil_chk(fields)) size] type:NSString_class_()]]);
+    JreStrongAssign(&fieldNames_, [((id<JavaUtilCollection>) nil_chk(fields)) toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[fields size] type:NSString_class_()]]);
   }
   return OrgApacheLuceneQueriesMltMoreLikeThis_createQueryWithOrgApacheLuceneUtilPriorityQueue_(self, OrgApacheLuceneQueriesMltMoreLikeThis_retrieveTermsWithJavaUtilMap_(self, filteredDocument));
 }
 
 - (OrgApacheLuceneSearchQuery *)likeWithNSString:(NSString *)fieldName
                            withJavaIoReaderArray:(IOSObjectArray *)readers {
-  id<JavaUtilMap> words = [new_JavaUtilHashMap_init() autorelease];
+  id<JavaUtilMap> words = create_JavaUtilHashMap_init();
   {
     IOSObjectArray *a__ = readers;
     JavaIoReader * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
@@ -342,7 +483,7 @@ id<JavaUtilSet> OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_STOP_WORDS_;
 }
 
 - (NSString *)describeParams {
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:@"\t"])) appendWithNSString:@"maxQueryTerms  : "])) appendWithInt:maxQueryTerms_])) appendWithNSString:@"\n"];
   [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:@"\t"])) appendWithNSString:@"minWordLen     : "])) appendWithInt:minWordLen_])) appendWithNSString:@"\n"];
   [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:@"\t"])) appendWithNSString:@"maxWordLen     : "])) appendWithInt:maxWordLen_])) appendWithNSString:@"\n"];
@@ -394,7 +535,7 @@ id<JavaUtilSet> OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_STOP_WORDS_;
 }
 
 - (IOSObjectArray *)retrieveInterestingTermsWithInt:(jint)docNum {
-  JavaUtilArrayList *al = [new_JavaUtilArrayList_initWithInt_(maxQueryTerms_) autorelease];
+  JavaUtilArrayList *al = create_JavaUtilArrayList_initWithInt_(maxQueryTerms_);
   OrgApacheLuceneUtilPriorityQueue *pq = OrgApacheLuceneQueriesMltMoreLikeThis_retrieveTermsWithInt_(self, docNum);
   OrgApacheLuceneQueriesMltMoreLikeThis_ScoreTerm *scoreTerm;
   jint lim = maxQueryTerms_;
@@ -407,7 +548,7 @@ id<JavaUtilSet> OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_STOP_WORDS_;
 
 - (IOSObjectArray *)retrieveInterestingTermsWithJavaIoReader:(JavaIoReader *)r
                                                 withNSString:(NSString *)fieldName {
-  JavaUtilArrayList *al = [new_JavaUtilArrayList_initWithInt_(maxQueryTerms_) autorelease];
+  JavaUtilArrayList *al = create_JavaUtilArrayList_initWithInt_(maxQueryTerms_);
   OrgApacheLuceneUtilPriorityQueue *pq = OrgApacheLuceneQueriesMltMoreLikeThis_retrieveTermsWithJavaIoReader_withNSString_(self, r, fieldName);
   OrgApacheLuceneQueriesMltMoreLikeThis_ScoreTerm *scoreTerm;
   jint lim = maxQueryTerms_;
@@ -429,8 +570,8 @@ id<JavaUtilSet> OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_STOP_WORDS_;
 
 + (void)initialize {
   if (self == [OrgApacheLuceneQueriesMltMoreLikeThis class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_FIELD_NAMES_, [IOSObjectArray newArrayWithObjects:(id[]){ @"contents" } count:1 type:NSString_class_()]);
-    JreStrongAssign(&OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_STOP_WORDS_, nil);
+    JreStrongAssignAndConsume(&OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_FIELD_NAMES, [IOSObjectArray newArrayWithObjects:(id[]){ @"contents" } count:1 type:NSString_class_()]);
+    JreStrongAssign(&OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_STOP_WORDS, nil);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneQueriesMltMoreLikeThis)
   }
 }
@@ -460,24 +601,24 @@ id<JavaUtilSet> OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_STOP_WORDS_;
     { "setMinWordLenWithInt:", "setMinWordLen", "V", 0x1, NULL, NULL },
     { "getMaxWordLen", NULL, "I", 0x1, NULL, NULL },
     { "setMaxWordLenWithInt:", "setMaxWordLen", "V", 0x1, NULL, NULL },
-    { "setStopWordsWithJavaUtilSet:", "setStopWords", "V", 0x1, NULL, NULL },
-    { "getStopWords", NULL, "Ljava.util.Set;", 0x1, NULL, NULL },
+    { "setStopWordsWithJavaUtilSet:", "setStopWords", "V", 0x1, NULL, "(Ljava/util/Set<*>;)V" },
+    { "getStopWords", NULL, "Ljava.util.Set;", 0x1, NULL, "()Ljava/util/Set<*>;" },
     { "getMaxQueryTerms", NULL, "I", 0x1, NULL, NULL },
     { "setMaxQueryTermsWithInt:", "setMaxQueryTerms", "V", 0x1, NULL, NULL },
     { "getMaxNumTokensParsed", NULL, "I", 0x1, NULL, NULL },
     { "setMaxNumTokensParsedWithInt:", "setMaxNumTokensParsed", "V", 0x1, NULL, NULL },
     { "likeWithInt:", "like", "Lorg.apache.lucene.search.Query;", 0x1, "Ljava.io.IOException;", NULL },
-    { "likeWithJavaUtilMap:", "like", "Lorg.apache.lucene.search.Query;", 0x1, "Ljava.io.IOException;", NULL },
+    { "likeWithJavaUtilMap:", "like", "Lorg.apache.lucene.search.Query;", 0x1, "Ljava.io.IOException;", "(Ljava/util/Map<Ljava/lang/String;Ljava/util/Collection<Ljava/lang/Object;>;>;)Lorg/apache/lucene/search/Query;" },
     { "likeWithNSString:withJavaIoReaderArray:", "like", "Lorg.apache.lucene.search.Query;", 0x81, "Ljava.io.IOException;", NULL },
-    { "createQueryWithOrgApacheLuceneUtilPriorityQueue:", "createQuery", "Lorg.apache.lucene.search.Query;", 0x2, NULL, NULL },
-    { "createQueueWithJavaUtilMap:", "createQueue", "Lorg.apache.lucene.util.PriorityQueue;", 0x2, "Ljava.io.IOException;", NULL },
+    { "createQueryWithOrgApacheLuceneUtilPriorityQueue:", "createQuery", "Lorg.apache.lucene.search.Query;", 0x2, NULL, "(Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/queries/mlt/MoreLikeThis$ScoreTerm;>;)Lorg/apache/lucene/search/Query;" },
+    { "createQueueWithJavaUtilMap:", "createQueue", "Lorg.apache.lucene.util.PriorityQueue;", 0x2, "Ljava.io.IOException;", "(Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/queries/mlt/MoreLikeThis$Int;>;)Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/queries/mlt/MoreLikeThis$ScoreTerm;>;" },
     { "describeParams", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "retrieveTermsWithInt:", "retrieveTerms", "Lorg.apache.lucene.util.PriorityQueue;", 0x2, "Ljava.io.IOException;", NULL },
-    { "retrieveTermsWithJavaUtilMap:", "retrieveTerms", "Lorg.apache.lucene.util.PriorityQueue;", 0x2, "Ljava.io.IOException;", NULL },
-    { "addTermFrequenciesWithJavaUtilMap:withOrgApacheLuceneIndexTerms:", "addTermFrequencies", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "addTermFrequenciesWithJavaIoReader:withJavaUtilMap:withNSString:", "addTermFrequencies", "V", 0x2, "Ljava.io.IOException;", NULL },
+    { "retrieveTermsWithInt:", "retrieveTerms", "Lorg.apache.lucene.util.PriorityQueue;", 0x2, "Ljava.io.IOException;", "(I)Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/queries/mlt/MoreLikeThis$ScoreTerm;>;" },
+    { "retrieveTermsWithJavaUtilMap:", "retrieveTerms", "Lorg.apache.lucene.util.PriorityQueue;", 0x2, "Ljava.io.IOException;", "(Ljava/util/Map<Ljava/lang/String;Ljava/util/Collection<Ljava/lang/Object;>;>;)Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/queries/mlt/MoreLikeThis$ScoreTerm;>;" },
+    { "addTermFrequenciesWithJavaUtilMap:withOrgApacheLuceneIndexTerms:", "addTermFrequencies", "V", 0x2, "Ljava.io.IOException;", "(Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/queries/mlt/MoreLikeThis$Int;>;Lorg/apache/lucene/index/Terms;)V" },
+    { "addTermFrequenciesWithJavaIoReader:withJavaUtilMap:withNSString:", "addTermFrequencies", "V", 0x2, "Ljava.io.IOException;", "(Ljava/io/Reader;Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/queries/mlt/MoreLikeThis$Int;>;Ljava/lang/String;)V" },
     { "isNoiseWordWithNSString:", "isNoiseWord", "Z", 0x2, NULL, NULL },
-    { "retrieveTermsWithJavaIoReader:withNSString:", "retrieveTerms", "Lorg.apache.lucene.util.PriorityQueue;", 0x2, "Ljava.io.IOException;", NULL },
+    { "retrieveTermsWithJavaIoReader:withNSString:", "retrieveTerms", "Lorg.apache.lucene.util.PriorityQueue;", 0x2, "Ljava.io.IOException;", "(Ljava/io/Reader;Ljava/lang/String;)Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/queries/mlt/MoreLikeThis$ScoreTerm;>;" },
     { "retrieveInterestingTermsWithInt:", "retrieveInterestingTerms", "[Ljava.lang.String;", 0x1, "Ljava.io.IOException;", NULL },
     { "retrieveInterestingTermsWithJavaIoReader:withNSString:", "retrieveInterestingTerms", "[Ljava.lang.String;", 0x1, "Ljava.io.IOException;", NULL },
   };
@@ -487,10 +628,10 @@ id<JavaUtilSet> OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_STOP_WORDS_;
     { "DEFAULT_MIN_DOC_FREQ", "DEFAULT_MIN_DOC_FREQ", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_MIN_DOC_FREQ },
     { "DEFAULT_MAX_DOC_FREQ", "DEFAULT_MAX_DOC_FREQ", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_MAX_DOC_FREQ },
     { "DEFAULT_BOOST", "DEFAULT_BOOST", 0x19, "Z", NULL, NULL, .constantValue.asBOOL = OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_BOOST },
-    { "DEFAULT_FIELD_NAMES_", NULL, 0x19, "[Ljava.lang.String;", &OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_FIELD_NAMES_, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_FIELD_NAMES", "DEFAULT_FIELD_NAMES", 0x19, "[Ljava.lang.String;", &OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_FIELD_NAMES, NULL, .constantValue.asLong = 0 },
     { "DEFAULT_MIN_WORD_LENGTH", "DEFAULT_MIN_WORD_LENGTH", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_MIN_WORD_LENGTH },
     { "DEFAULT_MAX_WORD_LENGTH", "DEFAULT_MAX_WORD_LENGTH", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_MAX_WORD_LENGTH },
-    { "DEFAULT_STOP_WORDS_", NULL, 0x19, "Ljava.util.Set;", &OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_STOP_WORDS_, "Ljava/util/Set<*>;", .constantValue.asLong = 0 },
+    { "DEFAULT_STOP_WORDS", "DEFAULT_STOP_WORDS", 0x19, "Ljava.util.Set;", &OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_STOP_WORDS, "Ljava/util/Set<*>;", .constantValue.asLong = 0 },
     { "stopWords_", NULL, 0x2, "Ljava.util.Set;", NULL, "Ljava/util/Set<*>;", .constantValue.asLong = 0 },
     { "DEFAULT_MAX_QUERY_TERMS", "DEFAULT_MAX_QUERY_TERMS", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_MAX_QUERY_TERMS },
     { "analyzer_", NULL, 0x2, "Lorg.apache.lucene.analysis.Analyzer;", NULL, NULL, .constantValue.asLong = 0 },
@@ -515,24 +656,26 @@ id<JavaUtilSet> OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_STOP_WORDS_;
 @end
 
 void OrgApacheLuceneQueriesMltMoreLikeThis_initWithOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneQueriesMltMoreLikeThis *self, OrgApacheLuceneIndexIndexReader *ir) {
-  OrgApacheLuceneQueriesMltMoreLikeThis_initWithOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_(self, ir, [new_OrgApacheLuceneSearchSimilaritiesDefaultSimilarity_init() autorelease]);
+  OrgApacheLuceneQueriesMltMoreLikeThis_initWithOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_(self, ir, create_OrgApacheLuceneSearchSimilaritiesDefaultSimilarity_init());
 }
 
 OrgApacheLuceneQueriesMltMoreLikeThis *new_OrgApacheLuceneQueriesMltMoreLikeThis_initWithOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneIndexIndexReader *ir) {
-  OrgApacheLuceneQueriesMltMoreLikeThis *self = [OrgApacheLuceneQueriesMltMoreLikeThis alloc];
-  OrgApacheLuceneQueriesMltMoreLikeThis_initWithOrgApacheLuceneIndexIndexReader_(self, ir);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesMltMoreLikeThis, initWithOrgApacheLuceneIndexIndexReader_, ir)
+}
+
+OrgApacheLuceneQueriesMltMoreLikeThis *create_OrgApacheLuceneQueriesMltMoreLikeThis_initWithOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneIndexIndexReader *ir) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesMltMoreLikeThis, initWithOrgApacheLuceneIndexIndexReader_, ir)
 }
 
 void OrgApacheLuceneQueriesMltMoreLikeThis_initWithOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_(OrgApacheLuceneQueriesMltMoreLikeThis *self, OrgApacheLuceneIndexIndexReader *ir, OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *sim) {
   NSObject_init(self);
-  JreStrongAssign(&self->stopWords_, OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_STOP_WORDS_);
+  JreStrongAssign(&self->stopWords_, OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_STOP_WORDS);
   JreStrongAssign(&self->analyzer_, nil);
   self->minTermFreq_ = OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_MIN_TERM_FREQ;
   self->minDocFreq_ = OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_MIN_DOC_FREQ;
   self->maxDocFreq_ = OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_MAX_DOC_FREQ;
   self->boost_ = OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_BOOST;
-  JreStrongAssign(&self->fieldNames_, OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_FIELD_NAMES_);
+  JreStrongAssign(&self->fieldNames_, OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_FIELD_NAMES);
   self->maxNumTokensParsed_ = OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_MAX_NUM_TOKENS_PARSED;
   self->minWordLen_ = OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_MIN_WORD_LENGTH;
   self->maxWordLen_ = OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_MAX_WORD_LENGTH;
@@ -543,17 +686,19 @@ void OrgApacheLuceneQueriesMltMoreLikeThis_initWithOrgApacheLuceneIndexIndexRead
 }
 
 OrgApacheLuceneQueriesMltMoreLikeThis *new_OrgApacheLuceneQueriesMltMoreLikeThis_initWithOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_(OrgApacheLuceneIndexIndexReader *ir, OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *sim) {
-  OrgApacheLuceneQueriesMltMoreLikeThis *self = [OrgApacheLuceneQueriesMltMoreLikeThis alloc];
-  OrgApacheLuceneQueriesMltMoreLikeThis_initWithOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_(self, ir, sim);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesMltMoreLikeThis, initWithOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_, ir, sim)
+}
+
+OrgApacheLuceneQueriesMltMoreLikeThis *create_OrgApacheLuceneQueriesMltMoreLikeThis_initWithOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_(OrgApacheLuceneIndexIndexReader *ir, OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *sim) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesMltMoreLikeThis, initWithOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_, ir, sim)
 }
 
 OrgApacheLuceneSearchQuery *OrgApacheLuceneQueriesMltMoreLikeThis_createQueryWithOrgApacheLuceneUtilPriorityQueue_(OrgApacheLuceneQueriesMltMoreLikeThis *self, OrgApacheLuceneUtilPriorityQueue *q) {
-  OrgApacheLuceneSearchBooleanQuery_Builder *query = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
+  OrgApacheLuceneSearchBooleanQuery_Builder *query = create_OrgApacheLuceneSearchBooleanQuery_Builder_init();
   OrgApacheLuceneQueriesMltMoreLikeThis_ScoreTerm *scoreTerm;
   jfloat bestScore = -1;
   while ((scoreTerm = [((OrgApacheLuceneUtilPriorityQueue *) nil_chk(q)) pop]) != nil) {
-    OrgApacheLuceneSearchTermQuery *tq = [new_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_([new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(((OrgApacheLuceneQueriesMltMoreLikeThis_ScoreTerm *) nil_chk(scoreTerm))->topField_, scoreTerm->word_) autorelease]) autorelease];
+    OrgApacheLuceneSearchTermQuery *tq = create_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_(create_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(((OrgApacheLuceneQueriesMltMoreLikeThis_ScoreTerm *) nil_chk(scoreTerm))->topField_, scoreTerm->word_));
     if (self->boost_) {
       if (bestScore == -1) {
         bestScore = (scoreTerm->score_);
@@ -562,7 +707,7 @@ OrgApacheLuceneSearchQuery *OrgApacheLuceneQueriesMltMoreLikeThis_createQueryWit
       [tq setBoostWithFloat:self->boostFactor_ * myScore / bestScore];
     }
     @try {
-      [query addWithOrgApacheLuceneSearchQuery:tq withOrgApacheLuceneSearchBooleanClause_OccurEnum:JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD)];
+      [query addWithOrgApacheLuceneSearchQuery:tq withOrgApacheLuceneSearchBooleanClause_Occur:JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD)];
     }
     @catch (OrgApacheLuceneSearchBooleanQuery_TooManyClauses *ignore) {
       break;
@@ -574,7 +719,7 @@ OrgApacheLuceneSearchQuery *OrgApacheLuceneQueriesMltMoreLikeThis_createQueryWit
 OrgApacheLuceneUtilPriorityQueue *OrgApacheLuceneQueriesMltMoreLikeThis_createQueueWithJavaUtilMap_(OrgApacheLuceneQueriesMltMoreLikeThis *self, id<JavaUtilMap> words) {
   jint numDocs = [((OrgApacheLuceneIndexIndexReader *) nil_chk(self->ir_)) numDocs];
   jint limit = JavaLangMath_minWithInt_withInt_(self->maxQueryTerms_, [((id<JavaUtilMap>) nil_chk(words)) size]);
-  OrgApacheLuceneQueriesMltMoreLikeThis_FreqQ *queue = [new_OrgApacheLuceneQueriesMltMoreLikeThis_FreqQ_initWithInt_(limit) autorelease];
+  OrgApacheLuceneQueriesMltMoreLikeThis_FreqQ *queue = create_OrgApacheLuceneQueriesMltMoreLikeThis_FreqQ_initWithInt_(limit);
   for (NSString * __strong word in nil_chk([words keySet])) {
     jint tf = ((OrgApacheLuceneQueriesMltMoreLikeThis_Int *) nil_chk([words getWithId:word]))->x_;
     if (self->minTermFreq_ > 0 && tf < self->minTermFreq_) {
@@ -588,7 +733,7 @@ OrgApacheLuceneUtilPriorityQueue *OrgApacheLuceneQueriesMltMoreLikeThis_createQu
       NSString * const *e__ = b__ + a__->size_;
       while (b__ < e__) {
         NSString *fieldName = *b__++;
-        jint freq = [self->ir_ docFreqWithOrgApacheLuceneIndexTerm:[new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(fieldName, word) autorelease]];
+        jint freq = [self->ir_ docFreqWithOrgApacheLuceneIndexTerm:create_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(fieldName, word)];
         topField = (freq > docFreq) ? fieldName : topField;
         docFreq = (freq > docFreq) ? freq : docFreq;
       }
@@ -605,7 +750,7 @@ OrgApacheLuceneUtilPriorityQueue *OrgApacheLuceneQueriesMltMoreLikeThis_createQu
     jfloat idf = [((OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *) nil_chk(self->similarity_)) idfWithLong:docFreq withLong:numDocs];
     jfloat score = tf * idf;
     if ([queue size] < limit) {
-      [queue addWithId:[new_OrgApacheLuceneQueriesMltMoreLikeThis_ScoreTerm_initWithNSString_withNSString_withFloat_withFloat_withInt_withInt_(word, topField, score, idf, docFreq, tf) autorelease]];
+      [queue addWithId:create_OrgApacheLuceneQueriesMltMoreLikeThis_ScoreTerm_initWithNSString_withNSString_withFloat_withFloat_withInt_withInt_(word, topField, score, idf, docFreq, tf)];
     }
     else {
       OrgApacheLuceneQueriesMltMoreLikeThis_ScoreTerm *term = [queue top];
@@ -619,7 +764,7 @@ OrgApacheLuceneUtilPriorityQueue *OrgApacheLuceneQueriesMltMoreLikeThis_createQu
 }
 
 OrgApacheLuceneUtilPriorityQueue *OrgApacheLuceneQueriesMltMoreLikeThis_retrieveTermsWithInt_(OrgApacheLuceneQueriesMltMoreLikeThis *self, jint docNum) {
-  id<JavaUtilMap> termFreqMap = [new_JavaUtilHashMap_init() autorelease];
+  id<JavaUtilMap> termFreqMap = create_JavaUtilHashMap_init();
   {
     IOSObjectArray *a__ = self->fieldNames_;
     NSString * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
@@ -645,7 +790,7 @@ OrgApacheLuceneUtilPriorityQueue *OrgApacheLuceneQueriesMltMoreLikeThis_retrieve
             id<OrgApacheLuceneIndexIndexableField> field = *b__++;
             NSString *stringValue = [((id<OrgApacheLuceneIndexIndexableField>) nil_chk(field)) stringValue];
             if (stringValue != nil) {
-              OrgApacheLuceneQueriesMltMoreLikeThis_addTermFrequenciesWithJavaIoReader_withJavaUtilMap_withNSString_(self, [new_JavaIoStringReader_initWithNSString_(stringValue) autorelease], termFreqMap, fieldName);
+              OrgApacheLuceneQueriesMltMoreLikeThis_addTermFrequenciesWithJavaIoReader_withJavaUtilMap_withNSString_(self, create_JavaIoStringReader_initWithNSString_(stringValue), termFreqMap, fieldName);
             }
           }
         }
@@ -659,7 +804,7 @@ OrgApacheLuceneUtilPriorityQueue *OrgApacheLuceneQueriesMltMoreLikeThis_retrieve
 }
 
 OrgApacheLuceneUtilPriorityQueue *OrgApacheLuceneQueriesMltMoreLikeThis_retrieveTermsWithJavaUtilMap_(OrgApacheLuceneQueriesMltMoreLikeThis *self, id<JavaUtilMap> fields) {
-  JavaUtilHashMap *termFreqMap = [new_JavaUtilHashMap_init() autorelease];
+  JavaUtilHashMap *termFreqMap = create_JavaUtilHashMap_init();
   {
     IOSObjectArray *a__ = self->fieldNames_;
     NSString * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
@@ -669,9 +814,9 @@ OrgApacheLuceneUtilPriorityQueue *OrgApacheLuceneQueriesMltMoreLikeThis_retrieve
       for (NSString * __strong field in nil_chk([((id<JavaUtilMap>) nil_chk(fields)) keySet])) {
         id<JavaUtilCollection> fieldValues = [fields getWithId:field];
         if (fieldValues == nil) continue;
-        for (id __strong fieldValue in nil_chk(fieldValues)) {
+        for (id __strong fieldValue in fieldValues) {
           if (fieldValue != nil) {
-            OrgApacheLuceneQueriesMltMoreLikeThis_addTermFrequenciesWithJavaIoReader_withJavaUtilMap_withNSString_(self, [new_JavaIoStringReader_initWithNSString_(NSString_valueOf_(fieldValue)) autorelease], termFreqMap, fieldName);
+            OrgApacheLuceneQueriesMltMoreLikeThis_addTermFrequenciesWithJavaIoReader_withJavaUtilMap_withNSString_(self, create_JavaIoStringReader_initWithNSString_(NSString_valueOf_(fieldValue)), termFreqMap, fieldName);
           }
         }
       }
@@ -682,7 +827,7 @@ OrgApacheLuceneUtilPriorityQueue *OrgApacheLuceneQueriesMltMoreLikeThis_retrieve
 
 void OrgApacheLuceneQueriesMltMoreLikeThis_addTermFrequenciesWithJavaUtilMap_withOrgApacheLuceneIndexTerms_(OrgApacheLuceneQueriesMltMoreLikeThis *self, id<JavaUtilMap> termFreqMap, OrgApacheLuceneIndexTerms *vector) {
   OrgApacheLuceneIndexTermsEnum *termsEnum = [((OrgApacheLuceneIndexTerms *) nil_chk(vector)) iterator];
-  OrgApacheLuceneUtilCharsRefBuilder *spare = [new_OrgApacheLuceneUtilCharsRefBuilder_init() autorelease];
+  OrgApacheLuceneUtilCharsRefBuilder *spare = create_OrgApacheLuceneUtilCharsRefBuilder_init();
   OrgApacheLuceneUtilBytesRef *text;
   while ((text = [((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) next]) != nil) {
     [spare copyUTF8BytesWithOrgApacheLuceneUtilBytesRef:text];
@@ -693,7 +838,7 @@ void OrgApacheLuceneQueriesMltMoreLikeThis_addTermFrequenciesWithJavaUtilMap_wit
     jint freq = (jint) [termsEnum totalTermFreq];
     OrgApacheLuceneQueriesMltMoreLikeThis_Int *cnt = [((id<JavaUtilMap>) nil_chk(termFreqMap)) getWithId:term];
     if (cnt == nil) {
-      cnt = [new_OrgApacheLuceneQueriesMltMoreLikeThis_Int_init() autorelease];
+      cnt = create_OrgApacheLuceneQueriesMltMoreLikeThis_Int_init();
       [termFreqMap putWithId:term withId:cnt];
       cnt->x_ = freq;
     }
@@ -705,11 +850,11 @@ void OrgApacheLuceneQueriesMltMoreLikeThis_addTermFrequenciesWithJavaUtilMap_wit
 
 void OrgApacheLuceneQueriesMltMoreLikeThis_addTermFrequenciesWithJavaIoReader_withJavaUtilMap_withNSString_(OrgApacheLuceneQueriesMltMoreLikeThis *self, JavaIoReader *r, id<JavaUtilMap> termFreqMap, NSString *fieldName) {
   if (self->analyzer_ == nil) {
-    @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(@"To use MoreLikeThis without term vectors, you must provide an Analyzer") autorelease];
+    @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"To use MoreLikeThis without term vectors, you must provide an Analyzer");
   }
   {
-    OrgApacheLuceneAnalysisTokenStream *ts = [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(self->analyzer_)) tokenStreamWithNSString:fieldName withJavaIoReader:r];
-    JavaLangThrowable *__primaryException1 = nil;
+    OrgApacheLuceneAnalysisTokenStream *ts = [self->analyzer_ tokenStreamWithNSString:fieldName withJavaIoReader:r];
+    NSException *__primaryException1 = nil;
     @try {
       jint tokenCount = 0;
       id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt = [((OrgApacheLuceneAnalysisTokenStream *) nil_chk(ts)) addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()];
@@ -725,7 +870,7 @@ void OrgApacheLuceneQueriesMltMoreLikeThis_addTermFrequenciesWithJavaIoReader_wi
         }
         OrgApacheLuceneQueriesMltMoreLikeThis_Int *cnt = [((id<JavaUtilMap>) nil_chk(termFreqMap)) getWithId:word];
         if (cnt == nil) {
-          [termFreqMap putWithId:word withId:[new_OrgApacheLuceneQueriesMltMoreLikeThis_Int_init() autorelease]];
+          [termFreqMap putWithId:word withId:create_OrgApacheLuceneQueriesMltMoreLikeThis_Int_init()];
         }
         else {
           cnt->x_++;
@@ -733,7 +878,7 @@ void OrgApacheLuceneQueriesMltMoreLikeThis_addTermFrequenciesWithJavaIoReader_wi
       }
       [ts end];
     }
-    @catch (JavaLangThrowable *e) {
+    @catch (NSException *e) {
       __primaryException1 = e;
       @throw e;
     }
@@ -742,8 +887,8 @@ void OrgApacheLuceneQueriesMltMoreLikeThis_addTermFrequenciesWithJavaIoReader_wi
         if (__primaryException1 != nil) {
           @try {
             [ts close];
-          } @catch (JavaLangThrowable *e) {
-            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          } @catch (NSException *e) {
+            [__primaryException1 addSuppressedWithNSException:e];
           }
         } else {
           [ts close];
@@ -765,7 +910,7 @@ jboolean OrgApacheLuceneQueriesMltMoreLikeThis_isNoiseWordWithNSString_(OrgApach
 }
 
 OrgApacheLuceneUtilPriorityQueue *OrgApacheLuceneQueriesMltMoreLikeThis_retrieveTermsWithJavaIoReader_withNSString_(OrgApacheLuceneQueriesMltMoreLikeThis *self, JavaIoReader *r, NSString *fieldName) {
-  id<JavaUtilMap> words = [new_JavaUtilHashMap_init() autorelease];
+  id<JavaUtilMap> words = create_JavaUtilHashMap_init();
   OrgApacheLuceneQueriesMltMoreLikeThis_addTermFrequenciesWithJavaIoReader_withJavaUtilMap_withNSString_(self, r, words, fieldName);
   return OrgApacheLuceneQueriesMltMoreLikeThis_createQueueWithJavaUtilMap_(self, words);
 }
@@ -787,7 +932,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesMltMoreLikeThis)
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithInt:", "FreqQ", NULL, 0x0, NULL, NULL },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x4, NULL, NULL },
+    { "lessThanWithId:withId:", "lessThan", "Z", 0x4, NULL, "(Lorg/apache/lucene/queries/mlt/MoreLikeThis$ScoreTerm;Lorg/apache/lucene/queries/mlt/MoreLikeThis$ScoreTerm;)Z" },
   };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.queries.mlt.MoreLikeThis$ScoreTerm;"};
   static const J2ObjcClassInfo _OrgApacheLuceneQueriesMltMoreLikeThis_FreqQ = { 2, "FreqQ", "org.apache.lucene.queries.mlt", "MoreLikeThis", 0xa, 2, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/queries/mlt/MoreLikeThis$ScoreTerm;>;" };
@@ -801,9 +946,11 @@ void OrgApacheLuceneQueriesMltMoreLikeThis_FreqQ_initWithInt_(OrgApacheLuceneQue
 }
 
 OrgApacheLuceneQueriesMltMoreLikeThis_FreqQ *new_OrgApacheLuceneQueriesMltMoreLikeThis_FreqQ_initWithInt_(jint maxSize) {
-  OrgApacheLuceneQueriesMltMoreLikeThis_FreqQ *self = [OrgApacheLuceneQueriesMltMoreLikeThis_FreqQ alloc];
-  OrgApacheLuceneQueriesMltMoreLikeThis_FreqQ_initWithInt_(self, maxSize);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesMltMoreLikeThis_FreqQ, initWithInt_, maxSize)
+}
+
+OrgApacheLuceneQueriesMltMoreLikeThis_FreqQ *create_OrgApacheLuceneQueriesMltMoreLikeThis_FreqQ_initWithInt_(jint maxSize) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesMltMoreLikeThis_FreqQ, initWithInt_, maxSize)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesMltMoreLikeThis_FreqQ)
@@ -870,9 +1017,11 @@ void OrgApacheLuceneQueriesMltMoreLikeThis_ScoreTerm_initWithNSString_withNSStri
 }
 
 OrgApacheLuceneQueriesMltMoreLikeThis_ScoreTerm *new_OrgApacheLuceneQueriesMltMoreLikeThis_ScoreTerm_initWithNSString_withNSString_withFloat_withFloat_withInt_withInt_(NSString *word, NSString *topField, jfloat score, jfloat idf, jint docFreq, jint tf) {
-  OrgApacheLuceneQueriesMltMoreLikeThis_ScoreTerm *self = [OrgApacheLuceneQueriesMltMoreLikeThis_ScoreTerm alloc];
-  OrgApacheLuceneQueriesMltMoreLikeThis_ScoreTerm_initWithNSString_withNSString_withFloat_withFloat_withInt_withInt_(self, word, topField, score, idf, docFreq, tf);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesMltMoreLikeThis_ScoreTerm, initWithNSString_withNSString_withFloat_withFloat_withInt_withInt_, word, topField, score, idf, docFreq, tf)
+}
+
+OrgApacheLuceneQueriesMltMoreLikeThis_ScoreTerm *create_OrgApacheLuceneQueriesMltMoreLikeThis_ScoreTerm_initWithNSString_withNSString_withFloat_withFloat_withInt_withInt_(NSString *word, NSString *topField, jfloat score, jfloat idf, jint docFreq, jint tf) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesMltMoreLikeThis_ScoreTerm, initWithNSString_withNSString_withFloat_withFloat_withInt_withInt_, word, topField, score, idf, docFreq, tf)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesMltMoreLikeThis_ScoreTerm)
@@ -905,9 +1054,11 @@ void OrgApacheLuceneQueriesMltMoreLikeThis_Int_init(OrgApacheLuceneQueriesMltMor
 }
 
 OrgApacheLuceneQueriesMltMoreLikeThis_Int *new_OrgApacheLuceneQueriesMltMoreLikeThis_Int_init() {
-  OrgApacheLuceneQueriesMltMoreLikeThis_Int *self = [OrgApacheLuceneQueriesMltMoreLikeThis_Int alloc];
-  OrgApacheLuceneQueriesMltMoreLikeThis_Int_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesMltMoreLikeThis_Int, init)
+}
+
+OrgApacheLuceneQueriesMltMoreLikeThis_Int *create_OrgApacheLuceneQueriesMltMoreLikeThis_Int_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesMltMoreLikeThis_Int, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesMltMoreLikeThis_Int)

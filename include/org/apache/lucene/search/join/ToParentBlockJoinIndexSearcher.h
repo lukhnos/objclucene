@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher_INCLUDE_ALL")
-#if OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher_RESTRICT
-#define OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher")
+#ifdef RESTRICT_OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher
+#define INCLUDE_ALL_OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher 0
 #else
-#define OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher 1
 #endif
-#undef OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher
 
-#if !defined (_OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher_) && (OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher_INCLUDE_ALL || OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher_INCLUDE)
-#define _OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher_
+#if !defined (OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher || defined(INCLUDE_OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher))
+#define OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher_
 
-#define OrgApacheLuceneSearchIndexSearcher_RESTRICT 1
-#define OrgApacheLuceneSearchIndexSearcher_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchIndexSearcher 1
+#define INCLUDE_OrgApacheLuceneSearchIndexSearcher 1
 #include "org/apache/lucene/search/IndexSearcher.h"
 
 @class OrgApacheLuceneIndexIndexReader;
@@ -26,12 +26,26 @@
 @protocol JavaUtilList;
 @protocol OrgApacheLuceneSearchCollector;
 
+/*!
+ @brief An <code>IndexSearcher</code> to use in conjunction with
+ <code>ToParentBlockJoinCollector</code>.
+ */
 @interface OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher : OrgApacheLuceneSearchIndexSearcher
 
 #pragma mark Public
 
+/*!
+ @brief Creates a searcher searching the provided index.
+ - seealso: IndexSearcher#IndexSearcher(IndexReader)
+ */
 - (instancetype)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)r;
 
+/*!
+ @brief Creates a searcher searching the provided index.
+ Search on individual
+ segments will be run in the provided <code>ExecutorService</code>.
+ - seealso: IndexSearcher#IndexSearcher(IndexReader,ExecutorService)
+ */
 - (instancetype)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)r
                   withJavaUtilConcurrentExecutorService:(id<JavaUtilConcurrentExecutorService>)executor;
 
@@ -49,12 +63,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher_i
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher *new_OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher_initWithOrgApacheLuceneIndexIndexReader_withJavaUtilConcurrentExecutorService_(OrgApacheLuceneIndexIndexReader *r, id<JavaUtilConcurrentExecutorService> executor) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher *create_OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher_initWithOrgApacheLuceneIndexIndexReader_withJavaUtilConcurrentExecutorService_(OrgApacheLuceneIndexIndexReader *r, id<JavaUtilConcurrentExecutorService> executor);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher_initWithOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher *self, OrgApacheLuceneIndexIndexReader *r);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher *new_OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher_initWithOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneIndexIndexReader *r) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher *create_OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher_initWithOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneIndexIndexReader *r);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher")

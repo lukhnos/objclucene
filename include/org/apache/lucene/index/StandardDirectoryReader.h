@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexStandardDirectoryReader_INCLUDE_ALL")
-#if OrgApacheLuceneIndexStandardDirectoryReader_RESTRICT
-#define OrgApacheLuceneIndexStandardDirectoryReader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexStandardDirectoryReader")
+#ifdef RESTRICT_OrgApacheLuceneIndexStandardDirectoryReader
+#define INCLUDE_ALL_OrgApacheLuceneIndexStandardDirectoryReader 0
 #else
-#define OrgApacheLuceneIndexStandardDirectoryReader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexStandardDirectoryReader 1
 #endif
-#undef OrgApacheLuceneIndexStandardDirectoryReader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexStandardDirectoryReader
 
-#if !defined (_OrgApacheLuceneIndexStandardDirectoryReader_) && (OrgApacheLuceneIndexStandardDirectoryReader_INCLUDE_ALL || OrgApacheLuceneIndexStandardDirectoryReader_INCLUDE)
-#define _OrgApacheLuceneIndexStandardDirectoryReader_
+#if !defined (OrgApacheLuceneIndexStandardDirectoryReader_) && (INCLUDE_ALL_OrgApacheLuceneIndexStandardDirectoryReader || defined(INCLUDE_OrgApacheLuceneIndexStandardDirectoryReader))
+#define OrgApacheLuceneIndexStandardDirectoryReader_
 
-#define OrgApacheLuceneIndexDirectoryReader_RESTRICT 1
-#define OrgApacheLuceneIndexDirectoryReader_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexDirectoryReader 1
+#define INCLUDE_OrgApacheLuceneIndexDirectoryReader 1
 #include "org/apache/lucene/index/DirectoryReader.h"
 
 @class IOSObjectArray;
@@ -55,6 +55,9 @@
 
 #pragma mark Package-Private
 
+/*!
+ @brief called only from static open() methods
+ */
 - (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
               withOrgApacheLuceneIndexLeafReaderArray:(IOSObjectArray *)readers
                   withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
@@ -63,9 +66,15 @@
 
 - (OrgApacheLuceneIndexDirectoryReader *)doOpenIfChangedWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)infos;
 
+/*!
+ @brief called from DirectoryReader.open(...) methods
+ */
 + (OrgApacheLuceneIndexDirectoryReader *)openWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
                                            withOrgApacheLuceneIndexIndexCommit:(OrgApacheLuceneIndexIndexCommit *)commit;
 
+/*!
+ @brief Used by near real-time search
+ */
 + (OrgApacheLuceneIndexDirectoryReader *)openWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
                                             withOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)infos
                                                                      withBoolean:(jboolean)applyAllDeletes;
@@ -81,6 +90,8 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexStandardDirectoryReader_initWithOrgAp
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexStandardDirectoryReader *new_OrgApacheLuceneIndexStandardDirectoryReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentInfos_withBoolean_(OrgApacheLuceneStoreDirectory *directory, IOSObjectArray *readers, OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexSegmentInfos *sis, jboolean applyAllDeletes) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexStandardDirectoryReader *create_OrgApacheLuceneIndexStandardDirectoryReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentInfos_withBoolean_(OrgApacheLuceneStoreDirectory *directory, IOSObjectArray *readers, OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexSegmentInfos *sis, jboolean applyAllDeletes);
+
 FOUNDATION_EXPORT OrgApacheLuceneIndexDirectoryReader *OrgApacheLuceneIndexStandardDirectoryReader_openWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexCommit_(OrgApacheLuceneStoreDirectory *directory, OrgApacheLuceneIndexIndexCommit *commit);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexDirectoryReader *OrgApacheLuceneIndexStandardDirectoryReader_openWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentInfos_withBoolean_(OrgApacheLuceneIndexIndexWriter *writer, OrgApacheLuceneIndexSegmentInfos *infos, jboolean applyAllDeletes);
@@ -89,11 +100,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexStandardDirectoryReader)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit_) && (OrgApacheLuceneIndexStandardDirectoryReader_INCLUDE_ALL || OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit_INCLUDE)
-#define _OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit_
+#if !defined (OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit_) && (INCLUDE_ALL_OrgApacheLuceneIndexStandardDirectoryReader || defined(INCLUDE_OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit))
+#define OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit_
 
-#define OrgApacheLuceneIndexIndexCommit_RESTRICT 1
-#define OrgApacheLuceneIndexIndexCommit_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexIndexCommit 1
+#define INCLUDE_OrgApacheLuceneIndexIndexCommit 1
 #include "org/apache/lucene/index/IndexCommit.h"
 
 @class OrgApacheLuceneIndexSegmentInfos;
@@ -150,8 +161,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit_
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit *new_OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit_initWithOrgApacheLuceneIndexStandardDirectoryReader_withOrgApacheLuceneIndexSegmentInfos_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexStandardDirectoryReader *reader, OrgApacheLuceneIndexSegmentInfos *infos, OrgApacheLuceneStoreDirectory *dir) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit *create_OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit_initWithOrgApacheLuceneIndexStandardDirectoryReader_withOrgApacheLuceneIndexSegmentInfos_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexStandardDirectoryReader *reader, OrgApacheLuceneIndexSegmentInfos *infos, OrgApacheLuceneStoreDirectory *dir);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexStandardDirectoryReader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexStandardDirectoryReader")

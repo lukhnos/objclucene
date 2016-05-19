@@ -5,29 +5,37 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode_) && (OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode_
+#if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode))
+#define OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode_
 
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode_RESTRICT 1
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode 1
+#define INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/BooleanQueryNode.h"
 
 @protocol JavaLangCharSequence;
 @protocol JavaUtilList;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;
 
+/*!
+ @brief A <code>AndQueryNode</code> represents an AND boolean operation performed on a
+ list of nodes.
+ */
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode
 
 #pragma mark Public
 
+/*!
+ @param clauses
+ - the query nodes to be and'ed
+ */
 - (instancetype)initWithJavaUtilList:(id<JavaUtilList>)clauses;
 
 - (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escapeSyntaxParser;
@@ -42,8 +50,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode_i
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode_initWithJavaUtilList_(id<JavaUtilList> clauses) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode *create_OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode_initWithJavaUtilList_(id<JavaUtilList> clauses);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode")

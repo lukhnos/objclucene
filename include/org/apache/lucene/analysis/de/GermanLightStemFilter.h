@@ -5,23 +5,32 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisDeGermanLightStemFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisDeGermanLightStemFilter_RESTRICT
-#define OrgApacheLuceneAnalysisDeGermanLightStemFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanLightStemFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisDeGermanLightStemFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanLightStemFilter 0
 #else
-#define OrgApacheLuceneAnalysisDeGermanLightStemFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanLightStemFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisDeGermanLightStemFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisDeGermanLightStemFilter
 
-#if !defined (_OrgApacheLuceneAnalysisDeGermanLightStemFilter_) && (OrgApacheLuceneAnalysisDeGermanLightStemFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisDeGermanLightStemFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisDeGermanLightStemFilter_
+#if !defined (OrgApacheLuceneAnalysisDeGermanLightStemFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanLightStemFilter || defined(INCLUDE_OrgApacheLuceneAnalysisDeGermanLightStemFilter))
+#define OrgApacheLuceneAnalysisDeGermanLightStemFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief A <code>TokenFilter</code> that applies <code>GermanLightStemmer</code> to stem German
+ words.
+ <p>
+ To prevent terms from being stemmed use an instance of
+ <code>SetKeywordMarkerFilter</code> or a custom <code>TokenFilter</code> that sets
+ the <code>KeywordAttribute</code> before this <code>TokenStream</code>.
+ </p>
+ */
 @interface OrgApacheLuceneAnalysisDeGermanLightStemFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
@@ -38,8 +47,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisDeGermanLightStemFilter_initWithOr
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisDeGermanLightStemFilter *new_OrgApacheLuceneAnalysisDeGermanLightStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisDeGermanLightStemFilter *create_OrgApacheLuceneAnalysisDeGermanLightStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisDeGermanLightStemFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisDeGermanLightStemFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanLightStemFilter")

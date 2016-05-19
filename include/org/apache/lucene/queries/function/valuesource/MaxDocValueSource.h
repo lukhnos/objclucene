@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource_RESTRICT
-#define OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource 0
 #else
-#define OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource_) && (OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource_
+#if !defined (OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource))
+#define OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource_
 
-#define OrgApacheLuceneQueriesFunctionValueSource_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionValueSource_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionValueSource 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionValueSource 1
 #include "org/apache/lucene/queries/function/ValueSource.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
@@ -25,6 +25,12 @@
 @class OrgApacheLuceneSearchIndexSearcher;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Returns the value of <code>IndexReader.maxDoc()</code>
+ for every document.
+ This is the number of documents
+ including deletions.
+ */
 @interface OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource : OrgApacheLuceneQueriesFunctionValueSource
 
 #pragma mark Public
@@ -53,8 +59,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSourc
 
 FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource *create_OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource")

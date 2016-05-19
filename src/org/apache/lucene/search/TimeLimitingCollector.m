@@ -52,6 +52,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchTimeLimitingCollector_T
 
 __attribute__((unused)) static OrgApacheLuceneSearchTimeLimitingCollector_TimeExceededException *new_OrgApacheLuceneSearchTimeLimitingCollector_TimeExceededException_initWithLong_withLong_withInt_(jlong timeAllowed, jlong timeElapsed, jint lastDocCollected) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchTimeLimitingCollector_TimeExceededException *create_OrgApacheLuceneSearchTimeLimitingCollector_TimeExceededException_initWithLong_withLong_withInt_(jlong timeAllowed, jlong timeElapsed, jint lastDocCollected);
+
 @interface OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder : NSObject
 
 - (instancetype)init;
@@ -60,12 +62,15 @@ __attribute__((unused)) static OrgApacheLuceneSearchTimeLimitingCollector_TimeEx
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder)
 
-static OrgApacheLuceneSearchTimeLimitingCollector_TimerThread *OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder_THREAD_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder, THREAD_, OrgApacheLuceneSearchTimeLimitingCollector_TimerThread *)
+inline OrgApacheLuceneSearchTimeLimitingCollector_TimerThread *OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder_get_THREAD();
+static OrgApacheLuceneSearchTimeLimitingCollector_TimerThread *OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder_THREAD;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder, THREAD, OrgApacheLuceneSearchTimeLimitingCollector_TimerThread *)
 
 __attribute__((unused)) static void OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder_init(OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder *self);
 
 __attribute__((unused)) static OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder *new_OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder_init() NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder *create_OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder_init();
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder)
 
@@ -97,6 +102,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTimeLimitingCollector_$1, this$0_, OrgA
 __attribute__((unused)) static void OrgApacheLuceneSearchTimeLimitingCollector_$1_initWithOrgApacheLuceneSearchTimeLimitingCollector_withOrgApacheLuceneSearchLeafCollector_(OrgApacheLuceneSearchTimeLimitingCollector_$1 *self, OrgApacheLuceneSearchTimeLimitingCollector *outer$, id<OrgApacheLuceneSearchLeafCollector> arg$0);
 
 __attribute__((unused)) static OrgApacheLuceneSearchTimeLimitingCollector_$1 *new_OrgApacheLuceneSearchTimeLimitingCollector_$1_initWithOrgApacheLuceneSearchTimeLimitingCollector_withOrgApacheLuceneSearchLeafCollector_(OrgApacheLuceneSearchTimeLimitingCollector *outer$, id<OrgApacheLuceneSearchLeafCollector> arg$0) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchTimeLimitingCollector_$1 *create_OrgApacheLuceneSearchTimeLimitingCollector_$1_initWithOrgApacheLuceneSearchTimeLimitingCollector_withOrgApacheLuceneSearchLeafCollector_(OrgApacheLuceneSearchTimeLimitingCollector *outer$, id<OrgApacheLuceneSearchLeafCollector> arg$0);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTimeLimitingCollector_$1)
 
@@ -133,9 +140,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTimeLimitingCollector_$1)
   }
   jlong time = [((OrgApacheLuceneUtilCounter *) nil_chk(clock_)) get];
   if (time - timeout_ > 0LL) {
-    @throw [new_OrgApacheLuceneSearchTimeLimitingCollector_TimeExceededException_initWithLong_withLong_withInt_(timeout_ - t0_, time - t0_, -1) autorelease];
+    @throw create_OrgApacheLuceneSearchTimeLimitingCollector_TimeExceededException_initWithLong_withLong_withInt_(timeout_ - t0_, time - t0_, -1);
   }
-  return [new_OrgApacheLuceneSearchTimeLimitingCollector_$1_initWithOrgApacheLuceneSearchTimeLimitingCollector_withOrgApacheLuceneSearchLeafCollector_(self, [((id<OrgApacheLuceneSearchCollector>) nil_chk(collector_)) getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:context]) autorelease];
+  return create_OrgApacheLuceneSearchTimeLimitingCollector_$1_initWithOrgApacheLuceneSearchTimeLimitingCollector_withOrgApacheLuceneSearchLeafCollector_(self, [((id<OrgApacheLuceneSearchCollector>) nil_chk(collector_)) getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:context]);
 }
 
 - (jboolean)needsScores {
@@ -200,19 +207,21 @@ void OrgApacheLuceneSearchTimeLimitingCollector_initWithOrgApacheLuceneSearchCol
 }
 
 OrgApacheLuceneSearchTimeLimitingCollector *new_OrgApacheLuceneSearchTimeLimitingCollector_initWithOrgApacheLuceneSearchCollector_withOrgApacheLuceneUtilCounter_withLong_(id<OrgApacheLuceneSearchCollector> collector, OrgApacheLuceneUtilCounter *clock, jlong ticksAllowed) {
-  OrgApacheLuceneSearchTimeLimitingCollector *self = [OrgApacheLuceneSearchTimeLimitingCollector alloc];
-  OrgApacheLuceneSearchTimeLimitingCollector_initWithOrgApacheLuceneSearchCollector_withOrgApacheLuceneUtilCounter_withLong_(self, collector, clock, ticksAllowed);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTimeLimitingCollector, initWithOrgApacheLuceneSearchCollector_withOrgApacheLuceneUtilCounter_withLong_, collector, clock, ticksAllowed)
+}
+
+OrgApacheLuceneSearchTimeLimitingCollector *create_OrgApacheLuceneSearchTimeLimitingCollector_initWithOrgApacheLuceneSearchCollector_withOrgApacheLuceneUtilCounter_withLong_(id<OrgApacheLuceneSearchCollector> collector, OrgApacheLuceneUtilCounter *clock, jlong ticksAllowed) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTimeLimitingCollector, initWithOrgApacheLuceneSearchCollector_withOrgApacheLuceneUtilCounter_withLong_, collector, clock, ticksAllowed)
 }
 
 OrgApacheLuceneUtilCounter *OrgApacheLuceneSearchTimeLimitingCollector_getGlobalCounter() {
   OrgApacheLuceneSearchTimeLimitingCollector_initialize();
-  return ((OrgApacheLuceneSearchTimeLimitingCollector_TimerThread *) nil_chk(JreLoadStatic(OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder, THREAD_)))->counter_;
+  return ((OrgApacheLuceneSearchTimeLimitingCollector_TimerThread *) nil_chk(JreLoadStatic(OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder, THREAD)))->counter_;
 }
 
 OrgApacheLuceneSearchTimeLimitingCollector_TimerThread *OrgApacheLuceneSearchTimeLimitingCollector_getGlobalTimerThread() {
   OrgApacheLuceneSearchTimeLimitingCollector_initialize();
-  return JreLoadStatic(OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder, THREAD_);
+  return JreLoadStatic(OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder, THREAD);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTimeLimitingCollector)
@@ -264,9 +273,11 @@ void OrgApacheLuceneSearchTimeLimitingCollector_TimeExceededException_initWithLo
 }
 
 OrgApacheLuceneSearchTimeLimitingCollector_TimeExceededException *new_OrgApacheLuceneSearchTimeLimitingCollector_TimeExceededException_initWithLong_withLong_withInt_(jlong timeAllowed, jlong timeElapsed, jint lastDocCollected) {
-  OrgApacheLuceneSearchTimeLimitingCollector_TimeExceededException *self = [OrgApacheLuceneSearchTimeLimitingCollector_TimeExceededException alloc];
-  OrgApacheLuceneSearchTimeLimitingCollector_TimeExceededException_initWithLong_withLong_withInt_(self, timeAllowed, timeElapsed, lastDocCollected);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTimeLimitingCollector_TimeExceededException, initWithLong_withLong_withInt_, timeAllowed, timeElapsed, lastDocCollected)
+}
+
+OrgApacheLuceneSearchTimeLimitingCollector_TimeExceededException *create_OrgApacheLuceneSearchTimeLimitingCollector_TimeExceededException_initWithLong_withLong_withInt_(jlong timeAllowed, jlong timeElapsed, jint lastDocCollected) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTimeLimitingCollector_TimeExceededException, initWithLong_withLong_withInt_, timeAllowed, timeElapsed, lastDocCollected)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTimeLimitingCollector_TimeExceededException)
@@ -285,8 +296,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder class]) {
     {
-      JreStrongAssignAndConsume(&OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder_THREAD_, new_OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_initWithOrgApacheLuceneUtilCounter_(OrgApacheLuceneUtilCounter_newCounterWithBoolean_(true)));
-      [OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder_THREAD_ start];
+      JreStrongAssignAndConsume(&OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder_THREAD, new_OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_initWithOrgApacheLuceneUtilCounter_(OrgApacheLuceneUtilCounter_newCounterWithBoolean_(true)));
+      [OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder_THREAD start];
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder)
   }
@@ -294,10 +305,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", NULL, NULL, 0x2, NULL, NULL },
+    { "init", "TimerThreadHolder", NULL, 0x2, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "THREAD_", NULL, 0x18, "Lorg.apache.lucene.search.TimeLimitingCollector$TimerThread;", &OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder_THREAD_, NULL, .constantValue.asLong = 0 },
+    { "THREAD", "THREAD", 0x18, "Lorg.apache.lucene.search.TimeLimitingCollector$TimerThread;", &OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder_THREAD, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder = { 2, "TimerThreadHolder", "org.apache.lucene.search", "TimeLimitingCollector", 0x1a, 1, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder;
@@ -310,16 +321,26 @@ void OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder_init(OrgApache
 }
 
 OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder *new_OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder_init() {
-  OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder *self = [OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder alloc];
-  OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder, init)
+}
+
+OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder *create_OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder)
 
-NSString *OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_THREAD_NAME_ = @"TimeLimitedCollector timer thread";
+NSString *OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_THREAD_NAME = @"TimeLimitedCollector timer thread";
 
 @implementation OrgApacheLuceneSearchTimeLimitingCollector_TimerThread
+
++ (NSString *)THREAD_NAME {
+  return OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_THREAD_NAME;
+}
+
++ (jint)DEFAULT_RESOLUTION {
+  return OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_DEFAULT_RESOLUTION;
+}
 
 - (instancetype)initWithLong:(jlong)resolution
 withOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)counter {
@@ -339,7 +360,7 @@ withOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)counter {
       JavaLangThread_sleepWithLong_(JreLoadVolatileLong(&resolution_));
     }
     @catch (JavaLangInterruptedException *ie) {
-      @throw [new_OrgApacheLuceneUtilThreadInterruptedException_initWithJavaLangInterruptedException_(ie) autorelease];
+      @throw create_OrgApacheLuceneUtilThreadInterruptedException_initWithJavaLangInterruptedException_(ie);
     }
   }
 }
@@ -376,7 +397,7 @@ withOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)counter {
     { "setResolutionWithLong:", "setResolution", "V", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "THREAD_NAME_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_THREAD_NAME_, NULL, .constantValue.asLong = 0 },
+    { "THREAD_NAME", "THREAD_NAME", 0x19, "Ljava.lang.String;", &OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_THREAD_NAME, NULL, .constantValue.asLong = 0 },
     { "DEFAULT_RESOLUTION", "DEFAULT_RESOLUTION", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_DEFAULT_RESOLUTION },
     { "time_", NULL, 0x42, "J", NULL, NULL, .constantValue.asLong = 0 },
     { "stop_", NULL, 0x42, "Z", NULL, NULL, .constantValue.asLong = 0 },
@@ -390,7 +411,7 @@ withOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)counter {
 @end
 
 void OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_initWithLong_withOrgApacheLuceneUtilCounter_(OrgApacheLuceneSearchTimeLimitingCollector_TimerThread *self, jlong resolution, OrgApacheLuceneUtilCounter *counter) {
-  JavaLangThread_initWithNSString_(self, OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_THREAD_NAME_);
+  JavaLangThread_initWithNSString_(self, OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_THREAD_NAME);
   JreAssignVolatileLong(&self->time_, 0);
   JreAssignVolatileBoolean(&self->stop_, false);
   JreAssignVolatileLong(&self->resolution_, resolution);
@@ -399,9 +420,11 @@ void OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_initWithLong_withOrg
 }
 
 OrgApacheLuceneSearchTimeLimitingCollector_TimerThread *new_OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_initWithLong_withOrgApacheLuceneUtilCounter_(jlong resolution, OrgApacheLuceneUtilCounter *counter) {
-  OrgApacheLuceneSearchTimeLimitingCollector_TimerThread *self = [OrgApacheLuceneSearchTimeLimitingCollector_TimerThread alloc];
-  OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_initWithLong_withOrgApacheLuceneUtilCounter_(self, resolution, counter);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTimeLimitingCollector_TimerThread, initWithLong_withOrgApacheLuceneUtilCounter_, resolution, counter)
+}
+
+OrgApacheLuceneSearchTimeLimitingCollector_TimerThread *create_OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_initWithLong_withOrgApacheLuceneUtilCounter_(jlong resolution, OrgApacheLuceneUtilCounter *counter) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTimeLimitingCollector_TimerThread, initWithLong_withOrgApacheLuceneUtilCounter_, resolution, counter)
 }
 
 void OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_initWithOrgApacheLuceneUtilCounter_(OrgApacheLuceneSearchTimeLimitingCollector_TimerThread *self, OrgApacheLuceneUtilCounter *counter) {
@@ -409,9 +432,11 @@ void OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_initWithOrgApacheLuc
 }
 
 OrgApacheLuceneSearchTimeLimitingCollector_TimerThread *new_OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_initWithOrgApacheLuceneUtilCounter_(OrgApacheLuceneUtilCounter *counter) {
-  OrgApacheLuceneSearchTimeLimitingCollector_TimerThread *self = [OrgApacheLuceneSearchTimeLimitingCollector_TimerThread alloc];
-  OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_initWithOrgApacheLuceneUtilCounter_(self, counter);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTimeLimitingCollector_TimerThread, initWithOrgApacheLuceneUtilCounter_, counter)
+}
+
+OrgApacheLuceneSearchTimeLimitingCollector_TimerThread *create_OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_initWithOrgApacheLuceneUtilCounter_(OrgApacheLuceneUtilCounter *counter) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTimeLimitingCollector_TimerThread, initWithOrgApacheLuceneUtilCounter_, counter)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTimeLimitingCollector_TimerThread)
@@ -424,7 +449,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTimeLimitingCollector_Time
     if (this$0_->greedy_) {
       [((id<OrgApacheLuceneSearchLeafCollector>) nil_chk(in_)) collectWithInt:doc];
     }
-    @throw [new_OrgApacheLuceneSearchTimeLimitingCollector_TimeExceededException_initWithLong_withLong_withInt_(this$0_->timeout_ - this$0_->t0_, time - this$0_->t0_, this$0_->docBase_ + doc) autorelease];
+    @throw create_OrgApacheLuceneSearchTimeLimitingCollector_TimeExceededException_initWithLong_withLong_withInt_(this$0_->timeout_ - this$0_->t0_, time - this$0_->t0_, this$0_->docBase_ + doc);
   }
   [((id<OrgApacheLuceneSearchLeafCollector>) nil_chk(in_)) collectWithInt:doc];
 }
@@ -461,9 +486,11 @@ void OrgApacheLuceneSearchTimeLimitingCollector_$1_initWithOrgApacheLuceneSearch
 }
 
 OrgApacheLuceneSearchTimeLimitingCollector_$1 *new_OrgApacheLuceneSearchTimeLimitingCollector_$1_initWithOrgApacheLuceneSearchTimeLimitingCollector_withOrgApacheLuceneSearchLeafCollector_(OrgApacheLuceneSearchTimeLimitingCollector *outer$, id<OrgApacheLuceneSearchLeafCollector> arg$0) {
-  OrgApacheLuceneSearchTimeLimitingCollector_$1 *self = [OrgApacheLuceneSearchTimeLimitingCollector_$1 alloc];
-  OrgApacheLuceneSearchTimeLimitingCollector_$1_initWithOrgApacheLuceneSearchTimeLimitingCollector_withOrgApacheLuceneSearchLeafCollector_(self, outer$, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchTimeLimitingCollector_$1, initWithOrgApacheLuceneSearchTimeLimitingCollector_withOrgApacheLuceneSearchLeafCollector_, outer$, arg$0)
+}
+
+OrgApacheLuceneSearchTimeLimitingCollector_$1 *create_OrgApacheLuceneSearchTimeLimitingCollector_$1_initWithOrgApacheLuceneSearchTimeLimitingCollector_withOrgApacheLuceneSearchLeafCollector_(OrgApacheLuceneSearchTimeLimitingCollector *outer$, id<OrgApacheLuceneSearchLeafCollector> arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchTimeLimitingCollector_$1, initWithOrgApacheLuceneSearchTimeLimitingCollector_withOrgApacheLuceneSearchLeafCollector_, outer$, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTimeLimitingCollector_$1)

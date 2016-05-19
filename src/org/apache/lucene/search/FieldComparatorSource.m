@@ -29,8 +29,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "newComparatorWithNSString:withInt:withInt:withBoolean:", "newComparator", "Lorg.apache.lucene.search.FieldComparator;", 0x401, "Ljava.io.IOException;", NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "newComparatorWithNSString:withInt:withInt:withBoolean:", "newComparator", "Lorg.apache.lucene.search.FieldComparator;", 0x401, "Ljava.io.IOException;", "(Ljava/lang/String;IIZ)Lorg/apache/lucene/search/FieldComparator<*>;" },
+    { "init", "FieldComparatorSource", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneSearchFieldComparatorSource = { 2, "FieldComparatorSource", "org.apache.lucene.search", NULL, 0x401, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchFieldComparatorSource;

@@ -3,10 +3,8 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/payloads/PayloadEncoder.java
 //
 
-#include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/analysis/payloads/PayloadEncoder.h"
-#include "org/apache/lucene/util/BytesRef.h"
 
 @interface OrgApacheLuceneAnalysisPayloadsPayloadEncoder : NSObject
 

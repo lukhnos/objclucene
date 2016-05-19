@@ -119,7 +119,7 @@ withOrgApacheLuceneIndexFilterDirectoryReader_SubReaderWrapper:(OrgApacheLuceneI
 OrgApacheLuceneIndexDirectoryReader *OrgApacheLuceneIndexFilterDirectoryReader_unwrapWithOrgApacheLuceneIndexDirectoryReader_(OrgApacheLuceneIndexDirectoryReader *reader) {
   OrgApacheLuceneIndexFilterDirectoryReader_initialize();
   while ([reader isKindOfClass:[OrgApacheLuceneIndexFilterDirectoryReader class]]) {
-    reader = ((OrgApacheLuceneIndexFilterDirectoryReader *) nil_chk(((OrgApacheLuceneIndexFilterDirectoryReader *) check_class_cast(reader, [OrgApacheLuceneIndexFilterDirectoryReader class]))))->in_;
+    reader = ((OrgApacheLuceneIndexFilterDirectoryReader *) nil_chk(((OrgApacheLuceneIndexFilterDirectoryReader *) cast_chk(reader, [OrgApacheLuceneIndexFilterDirectoryReader class]))))->in_;
   }
   return reader;
 }
@@ -156,7 +156,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "wrapWithJavaUtilList:", "wrap", "[Lorg.apache.lucene.index.LeafReader;", 0x2, NULL, NULL },
+    { "wrapWithJavaUtilList:", "wrap", "[Lorg.apache.lucene.index.LeafReader;", 0x2, NULL, "(Ljava/util/List<+Lorg/apache/lucene/index/LeafReader;>;)[Lorg/apache/lucene/index/LeafReader;" },
     { "init", "SubReaderWrapper", NULL, 0x1, NULL, NULL },
     { "wrapWithOrgApacheLuceneIndexLeafReader:", "wrap", "Lorg.apache.lucene.index.LeafReader;", 0x401, NULL, NULL },
   };

@@ -5,21 +5,25 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilMutableMutableValue_INCLUDE_ALL")
-#if OrgApacheLuceneUtilMutableMutableValue_RESTRICT
-#define OrgApacheLuceneUtilMutableMutableValue_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValue")
+#ifdef RESTRICT_OrgApacheLuceneUtilMutableMutableValue
+#define INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValue 0
 #else
-#define OrgApacheLuceneUtilMutableMutableValue_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValue 1
 #endif
-#undef OrgApacheLuceneUtilMutableMutableValue_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilMutableMutableValue
 
-#if !defined (_OrgApacheLuceneUtilMutableMutableValue_) && (OrgApacheLuceneUtilMutableMutableValue_INCLUDE_ALL || OrgApacheLuceneUtilMutableMutableValue_INCLUDE)
-#define _OrgApacheLuceneUtilMutableMutableValue_
+#if !defined (OrgApacheLuceneUtilMutableMutableValue_) && (INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValue || defined(INCLUDE_OrgApacheLuceneUtilMutableMutableValue))
+#define OrgApacheLuceneUtilMutableMutableValue_
 
-#define JavaLangComparable_RESTRICT 1
-#define JavaLangComparable_INCLUDE 1
+#define RESTRICT_JavaLangComparable 1
+#define INCLUDE_JavaLangComparable 1
 #include "java/lang/Comparable.h"
 
+/*!
+ @brief Base class for all mutable values.
+  
+ */
 @interface OrgApacheLuceneUtilMutableMutableValue : NSObject < JavaLangComparable > {
  @public
   jboolean exists_;
@@ -59,4 +63,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilMutableMutableValue)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilMutableMutableValue_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilMutableMutableValue")

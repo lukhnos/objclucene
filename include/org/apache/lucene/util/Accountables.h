@@ -5,38 +5,84 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilAccountables_INCLUDE_ALL")
-#if OrgApacheLuceneUtilAccountables_RESTRICT
-#define OrgApacheLuceneUtilAccountables_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilAccountables")
+#ifdef RESTRICT_OrgApacheLuceneUtilAccountables
+#define INCLUDE_ALL_OrgApacheLuceneUtilAccountables 0
 #else
-#define OrgApacheLuceneUtilAccountables_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilAccountables 1
 #endif
-#undef OrgApacheLuceneUtilAccountables_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilAccountables
 
-#if !defined (_OrgApacheLuceneUtilAccountables_) && (OrgApacheLuceneUtilAccountables_INCLUDE_ALL || OrgApacheLuceneUtilAccountables_INCLUDE)
-#define _OrgApacheLuceneUtilAccountables_
+#if !defined (OrgApacheLuceneUtilAccountables_) && (INCLUDE_ALL_OrgApacheLuceneUtilAccountables || defined(INCLUDE_OrgApacheLuceneUtilAccountables))
+#define OrgApacheLuceneUtilAccountables_
 
 @protocol JavaUtilCollection;
 @protocol JavaUtilMap;
 @protocol OrgApacheLuceneUtilAccountable;
 
+/*!
+ @brief Helper methods for constructing nested resource descriptions
+ and debugging RAM usage.
+ <p>
+ <code>toString(Accountable</code>} can be used to quickly debug the nested
+ structure of any Accountable.
+ <p>
+ The <code>namedAccountable</code> and <code>namedAccountables</code> methods return
+ type-safe, point-in-time snapshots of the provided resources.
+ */
 @interface OrgApacheLuceneUtilAccountables : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Augments an existing accountable with the provided description.
+ <p>
+ The resource description is constructed in this format:
+ <code>description [toString()]</code>
+ <p>
+ This is a point-in-time type safe view: consumers 
+ will not be able to cast or manipulate the resource in any way.
+ */
 + (id<OrgApacheLuceneUtilAccountable>)namedAccountableWithNSString:(NSString *)description_
                                 withOrgApacheLuceneUtilAccountable:(id<OrgApacheLuceneUtilAccountable>)inArg;
 
+/*!
+ @brief Returns an accountable with the provided description, children and bytes.
+ <p>
+ The resource descriptions are constructed in this format:
+ <code>description [toString()]</code>
+ <p>
+ This is a point-in-time type safe view: consumers 
+ will not be able to cast or manipulate the resources in any way, provided
+ that the passed in children Accountables (and all their descendants) were created
+ with one of the namedAccountable functions.
+ */
 + (id<OrgApacheLuceneUtilAccountable>)namedAccountableWithNSString:(NSString *)description_
                                             withJavaUtilCollection:(id<JavaUtilCollection>)children
                                                           withLong:(jlong)bytes;
 
+/*!
+ @brief Returns an accountable with the provided description and bytes.
+ */
 + (id<OrgApacheLuceneUtilAccountable>)namedAccountableWithNSString:(NSString *)description_
                                                           withLong:(jlong)bytes;
 
+/*!
+ @brief Converts a map of resources to a collection.
+ <p>
+ The resource descriptions are constructed in this format:
+ <code>prefix 'key' [toString()]</code>
+ <p>
+ This is a point-in-time type safe view: consumers 
+ will not be able to cast or manipulate the resources in any way.
+ */
 + (id<JavaUtilCollection>)namedAccountablesWithNSString:(NSString *)prefix
                                         withJavaUtilMap:(id<JavaUtilMap>)inArg;
 
+/*!
+ @brief Returns a String description of an Accountable and any nested resources.
+ This is intended for development and debugging.
+ */
 + (NSString *)toStringWithOrgApacheLuceneUtilAccountable:(id<OrgApacheLuceneUtilAccountable>)a;
 
 @end
@@ -57,4 +103,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAccountables)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilAccountables_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAccountables")

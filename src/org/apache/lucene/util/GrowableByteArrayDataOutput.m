@@ -61,9 +61,11 @@ void OrgApacheLuceneUtilGrowableByteArrayDataOutput_initWithInt_(OrgApacheLucene
 }
 
 OrgApacheLuceneUtilGrowableByteArrayDataOutput *new_OrgApacheLuceneUtilGrowableByteArrayDataOutput_initWithInt_(jint cp) {
-  OrgApacheLuceneUtilGrowableByteArrayDataOutput *self = [OrgApacheLuceneUtilGrowableByteArrayDataOutput alloc];
-  OrgApacheLuceneUtilGrowableByteArrayDataOutput_initWithInt_(self, cp);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilGrowableByteArrayDataOutput, initWithInt_, cp)
+}
+
+OrgApacheLuceneUtilGrowableByteArrayDataOutput *create_OrgApacheLuceneUtilGrowableByteArrayDataOutput_initWithInt_(jint cp) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilGrowableByteArrayDataOutput, initWithInt_, cp)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilGrowableByteArrayDataOutput)

@@ -4,6 +4,7 @@
 //
 
 #include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
@@ -13,16 +14,19 @@
 #include "java/lang/Deprecated.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/IndexOutOfBoundsException.h"
+#include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/analysis/util/CharacterUtils.h"
 
 @class OrgApacheLuceneAnalysisUtilCharacterUtils_Java4CharacterUtils;
 @class OrgApacheLuceneAnalysisUtilCharacterUtils_Java5CharacterUtils;
 
-static OrgApacheLuceneAnalysisUtilCharacterUtils_Java4CharacterUtils *OrgApacheLuceneAnalysisUtilCharacterUtils_JAVA_4_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisUtilCharacterUtils, JAVA_4_, OrgApacheLuceneAnalysisUtilCharacterUtils_Java4CharacterUtils *)
+inline OrgApacheLuceneAnalysisUtilCharacterUtils_Java4CharacterUtils *OrgApacheLuceneAnalysisUtilCharacterUtils_get_JAVA_4();
+static OrgApacheLuceneAnalysisUtilCharacterUtils_Java4CharacterUtils *OrgApacheLuceneAnalysisUtilCharacterUtils_JAVA_4;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisUtilCharacterUtils, JAVA_4, OrgApacheLuceneAnalysisUtilCharacterUtils_Java4CharacterUtils *)
 
-static OrgApacheLuceneAnalysisUtilCharacterUtils_Java5CharacterUtils *OrgApacheLuceneAnalysisUtilCharacterUtils_JAVA_5_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisUtilCharacterUtils, JAVA_5_, OrgApacheLuceneAnalysisUtilCharacterUtils_Java5CharacterUtils *)
+inline OrgApacheLuceneAnalysisUtilCharacterUtils_Java5CharacterUtils *OrgApacheLuceneAnalysisUtilCharacterUtils_get_JAVA_5();
+static OrgApacheLuceneAnalysisUtilCharacterUtils_Java5CharacterUtils *OrgApacheLuceneAnalysisUtilCharacterUtils_JAVA_5;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisUtilCharacterUtils, JAVA_5, OrgApacheLuceneAnalysisUtilCharacterUtils_Java5CharacterUtils *)
 
 @interface OrgApacheLuceneAnalysisUtilCharacterUtils_Java5CharacterUtils : OrgApacheLuceneAnalysisUtilCharacterUtils
 
@@ -54,6 +58,8 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisUtilCharacterUtils_Java5Characte
 __attribute__((unused)) static void OrgApacheLuceneAnalysisUtilCharacterUtils_Java5CharacterUtils_init(OrgApacheLuceneAnalysisUtilCharacterUtils_Java5CharacterUtils *self);
 
 __attribute__((unused)) static OrgApacheLuceneAnalysisUtilCharacterUtils_Java5CharacterUtils *new_OrgApacheLuceneAnalysisUtilCharacterUtils_Java5CharacterUtils_init() NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneAnalysisUtilCharacterUtils_Java5CharacterUtils *create_OrgApacheLuceneAnalysisUtilCharacterUtils_Java5CharacterUtils_init();
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilCharacterUtils_Java5CharacterUtils)
 
@@ -87,6 +93,8 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisUtilCharacterUtils_Java4Characte
 __attribute__((unused)) static void OrgApacheLuceneAnalysisUtilCharacterUtils_Java4CharacterUtils_init(OrgApacheLuceneAnalysisUtilCharacterUtils_Java4CharacterUtils *self);
 
 __attribute__((unused)) static OrgApacheLuceneAnalysisUtilCharacterUtils_Java4CharacterUtils *new_OrgApacheLuceneAnalysisUtilCharacterUtils_Java4CharacterUtils_init() NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneAnalysisUtilCharacterUtils_Java4CharacterUtils *create_OrgApacheLuceneAnalysisUtilCharacterUtils_Java4CharacterUtils_init();
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilCharacterUtils_Java4CharacterUtils)
 
@@ -164,7 +172,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisUtilCharacterUtils)
                      withIntArray:(IOSIntArray *)dest
                           withInt:(jint)destOff {
   if (srcLen < 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"srcLen must be >= 0") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"srcLen must be >= 0");
   }
   jint codePointCount = 0;
   for (jint i = 0; i < srcLen; ) {
@@ -182,7 +190,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisUtilCharacterUtils)
               withCharArray:(IOSCharArray *)dest
                     withInt:(jint)destOff {
   if (srcLen < 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"srcLen must be >= 0") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"srcLen must be >= 0");
   }
   jint written = 0;
   for (jint i = 0; i < srcLen; ++i) {
@@ -228,16 +236,16 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-+ (void)initialize {
-  if (self == [OrgApacheLuceneAnalysisUtilCharacterUtils class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisUtilCharacterUtils_JAVA_4_, new_OrgApacheLuceneAnalysisUtilCharacterUtils_Java4CharacterUtils_init());
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisUtilCharacterUtils_JAVA_5_, new_OrgApacheLuceneAnalysisUtilCharacterUtils_Java5CharacterUtils_init());
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisUtilCharacterUtils)
-  }
++ (IOSObjectArray *)__annotations_getJava4Instance {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
-+ (IOSObjectArray *)__annotations_getJava4Instance {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
++ (void)initialize {
+  if (self == [OrgApacheLuceneAnalysisUtilCharacterUtils class]) {
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisUtilCharacterUtils_JAVA_4, new_OrgApacheLuceneAnalysisUtilCharacterUtils_Java4CharacterUtils_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisUtilCharacterUtils_JAVA_5, new_OrgApacheLuceneAnalysisUtilCharacterUtils_Java5CharacterUtils_init());
+    J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisUtilCharacterUtils)
+  }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -256,11 +264,11 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "fillWithOrgApacheLuceneAnalysisUtilCharacterUtils_CharacterBuffer:withJavaIoReader:", "fill", "Z", 0x11, "Ljava.io.IOException;", NULL },
     { "offsetByCodePointsWithCharArray:withInt:withInt:withInt:withInt:", "offsetByCodePoints", "I", 0x401, NULL, NULL },
     { "readFullyWithJavaIoReader:withCharArray:withInt:withInt:", "readFully", "I", 0x8, "Ljava.io.IOException;", NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "CharacterUtils", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "JAVA_4_", NULL, 0x1a, "Lorg.apache.lucene.analysis.util.CharacterUtils$Java4CharacterUtils;", &OrgApacheLuceneAnalysisUtilCharacterUtils_JAVA_4_, NULL, .constantValue.asLong = 0 },
-    { "JAVA_5_", NULL, 0x1a, "Lorg.apache.lucene.analysis.util.CharacterUtils$Java5CharacterUtils;", &OrgApacheLuceneAnalysisUtilCharacterUtils_JAVA_5_, NULL, .constantValue.asLong = 0 },
+    { "JAVA_4", "JAVA_4", 0x1a, "Lorg.apache.lucene.analysis.util.CharacterUtils$Java4CharacterUtils;", &OrgApacheLuceneAnalysisUtilCharacterUtils_JAVA_4, NULL, .constantValue.asLong = 0 },
+    { "JAVA_5", "JAVA_5", 0x1a, "Lorg.apache.lucene.analysis.util.CharacterUtils$Java5CharacterUtils;", &OrgApacheLuceneAnalysisUtilCharacterUtils_JAVA_5, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.analysis.util.CharacterUtils$Java5CharacterUtils;", "Lorg.apache.lucene.analysis.util.CharacterUtils$Java4CharacterUtils;", "Lorg.apache.lucene.analysis.util.CharacterUtils$CharacterBuffer;"};
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilCharacterUtils = { 2, "CharacterUtils", "org.apache.lucene.analysis.util", NULL, 0x401, 15, methods, 2, fields, 0, NULL, 3, inner_classes, NULL, NULL };
@@ -271,20 +279,20 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 OrgApacheLuceneAnalysisUtilCharacterUtils *OrgApacheLuceneAnalysisUtilCharacterUtils_getInstance() {
   OrgApacheLuceneAnalysisUtilCharacterUtils_initialize();
-  return OrgApacheLuceneAnalysisUtilCharacterUtils_JAVA_5_;
+  return OrgApacheLuceneAnalysisUtilCharacterUtils_JAVA_5;
 }
 
 OrgApacheLuceneAnalysisUtilCharacterUtils *OrgApacheLuceneAnalysisUtilCharacterUtils_getJava4Instance() {
   OrgApacheLuceneAnalysisUtilCharacterUtils_initialize();
-  return OrgApacheLuceneAnalysisUtilCharacterUtils_JAVA_4_;
+  return OrgApacheLuceneAnalysisUtilCharacterUtils_JAVA_4;
 }
 
 OrgApacheLuceneAnalysisUtilCharacterUtils_CharacterBuffer *OrgApacheLuceneAnalysisUtilCharacterUtils_newCharacterBufferWithInt_(jint bufferSize) {
   OrgApacheLuceneAnalysisUtilCharacterUtils_initialize();
   if (bufferSize < 2) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"buffersize must be >= 2") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"buffersize must be >= 2");
   }
-  return [new_OrgApacheLuceneAnalysisUtilCharacterUtils_CharacterBuffer_initWithCharArray_withInt_withInt_([IOSCharArray arrayWithLength:bufferSize], 0, 0) autorelease];
+  return create_OrgApacheLuceneAnalysisUtilCharacterUtils_CharacterBuffer_initWithCharArray_withInt_withInt_([IOSCharArray arrayWithLength:bufferSize], 0, 0);
 }
 
 jint OrgApacheLuceneAnalysisUtilCharacterUtils_readFullyWithJavaIoReader_withCharArray_withInt_withInt_(JavaIoReader *reader, IOSCharArray *dest, jint offset, jint len) {
@@ -331,7 +339,7 @@ J2OBJC_IGNORE_DESIGNATED_END
                                                                       withInt:(jint)numChars {
   JreAssert((((IOSCharArray *) nil_chk(((OrgApacheLuceneAnalysisUtilCharacterUtils_CharacterBuffer *) nil_chk(buffer))->buffer_))->size_ >= 2), (@"org/apache/lucene/analysis/util/CharacterUtils.java:244 condition failed: assert buffer.buffer.length >= 2;"));
   if (numChars < 2 || numChars > buffer->buffer_->size_) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"numChars must be >= 2 and <= the buffer size") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"numChars must be >= 2 and <= the buffer size");
   }
   IOSCharArray *charBuffer = buffer->buffer_;
   buffer->offset_ = 0;
@@ -388,9 +396,11 @@ void OrgApacheLuceneAnalysisUtilCharacterUtils_Java5CharacterUtils_init(OrgApach
 }
 
 OrgApacheLuceneAnalysisUtilCharacterUtils_Java5CharacterUtils *new_OrgApacheLuceneAnalysisUtilCharacterUtils_Java5CharacterUtils_init() {
-  OrgApacheLuceneAnalysisUtilCharacterUtils_Java5CharacterUtils *self = [OrgApacheLuceneAnalysisUtilCharacterUtils_Java5CharacterUtils alloc];
-  OrgApacheLuceneAnalysisUtilCharacterUtils_Java5CharacterUtils_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisUtilCharacterUtils_Java5CharacterUtils, init)
+}
+
+OrgApacheLuceneAnalysisUtilCharacterUtils_Java5CharacterUtils *create_OrgApacheLuceneAnalysisUtilCharacterUtils_Java5CharacterUtils_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisUtilCharacterUtils_Java5CharacterUtils, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisUtilCharacterUtils_Java5CharacterUtils)
@@ -412,7 +422,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (jint)codePointAtWithCharArray:(IOSCharArray *)chars
                          withInt:(jint)offset
                          withInt:(jint)limit {
-  if (offset >= limit) @throw [new_JavaLangIndexOutOfBoundsException_initWithNSString_(@"offset must be less than limit") autorelease];
+  if (offset >= limit) @throw create_JavaLangIndexOutOfBoundsException_initWithNSString_(@"offset must be less than limit");
   return IOSCharArray_Get(nil_chk(chars), offset);
 }
 
@@ -421,7 +431,7 @@ J2OBJC_IGNORE_DESIGNATED_END
                                                                       withInt:(jint)numChars {
   JreAssert((((IOSCharArray *) nil_chk(((OrgApacheLuceneAnalysisUtilCharacterUtils_CharacterBuffer *) nil_chk(buffer))->buffer_))->size_ >= 1), (@"org/apache/lucene/analysis/util/CharacterUtils.java:307 condition failed: assert buffer.buffer.length >= 1;"));
   if (numChars < 1 || numChars > buffer->buffer_->size_) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"numChars must be >= 1 and <= the buffer size") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"numChars must be >= 1 and <= the buffer size");
   }
   buffer->offset_ = 0;
   jint read = OrgApacheLuceneAnalysisUtilCharacterUtils_readFullyWithJavaIoReader_withCharArray_withInt_withInt_(reader, buffer->buffer_, 0, numChars);
@@ -441,7 +451,7 @@ J2OBJC_IGNORE_DESIGNATED_END
                                 withInt:(jint)offset {
   jint result = index + offset;
   if (result < 0 || result > count) {
-    @throw [new_JavaLangIndexOutOfBoundsException_init() autorelease];
+    @throw create_JavaLangIndexOutOfBoundsException_init();
   }
   return result;
 }
@@ -466,9 +476,11 @@ void OrgApacheLuceneAnalysisUtilCharacterUtils_Java4CharacterUtils_init(OrgApach
 }
 
 OrgApacheLuceneAnalysisUtilCharacterUtils_Java4CharacterUtils *new_OrgApacheLuceneAnalysisUtilCharacterUtils_Java4CharacterUtils_init() {
-  OrgApacheLuceneAnalysisUtilCharacterUtils_Java4CharacterUtils *self = [OrgApacheLuceneAnalysisUtilCharacterUtils_Java4CharacterUtils alloc];
-  OrgApacheLuceneAnalysisUtilCharacterUtils_Java4CharacterUtils_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisUtilCharacterUtils_Java4CharacterUtils, init)
+}
+
+OrgApacheLuceneAnalysisUtilCharacterUtils_Java4CharacterUtils *create_OrgApacheLuceneAnalysisUtilCharacterUtils_Java4CharacterUtils_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisUtilCharacterUtils_Java4CharacterUtils, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisUtilCharacterUtils_Java4CharacterUtils)
@@ -533,9 +545,11 @@ void OrgApacheLuceneAnalysisUtilCharacterUtils_CharacterBuffer_initWithCharArray
 }
 
 OrgApacheLuceneAnalysisUtilCharacterUtils_CharacterBuffer *new_OrgApacheLuceneAnalysisUtilCharacterUtils_CharacterBuffer_initWithCharArray_withInt_withInt_(IOSCharArray *buffer, jint offset, jint length) {
-  OrgApacheLuceneAnalysisUtilCharacterUtils_CharacterBuffer *self = [OrgApacheLuceneAnalysisUtilCharacterUtils_CharacterBuffer alloc];
-  OrgApacheLuceneAnalysisUtilCharacterUtils_CharacterBuffer_initWithCharArray_withInt_withInt_(self, buffer, offset, length);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisUtilCharacterUtils_CharacterBuffer, initWithCharArray_withInt_withInt_, buffer, offset, length)
+}
+
+OrgApacheLuceneAnalysisUtilCharacterUtils_CharacterBuffer *create_OrgApacheLuceneAnalysisUtilCharacterUtils_CharacterBuffer_initWithCharArray_withInt_withInt_(IOSCharArray *buffer, jint offset, jint length) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisUtilCharacterUtils_CharacterBuffer, initWithCharArray_withInt_withInt_, buffer, offset, length)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisUtilCharacterUtils_CharacterBuffer)

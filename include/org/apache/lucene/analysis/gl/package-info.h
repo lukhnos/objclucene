@@ -3,14 +3,17 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/gl/package-info.java
 //
 
+/*!
+ @brief Analyzer for Galician.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisGlPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisGlPackage_info_RESTRICT
-#define OrgApacheLuceneAnalysisGlPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisGlPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisGlPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisGlPackage_info 0
 #else
-#define OrgApacheLuceneAnalysisGlPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisGlPackage_info 1
 #endif
-#undef OrgApacheLuceneAnalysisGlPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisGlPackage_info
 
-#pragma pop_macro("OrgApacheLuceneAnalysisGlPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisGlPackage_info")

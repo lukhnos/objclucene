@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneRangetreeRangeTreeReader_INCLUDE_ALL")
-#if OrgApacheLuceneRangetreeRangeTreeReader_RESTRICT
-#define OrgApacheLuceneRangetreeRangeTreeReader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneRangetreeRangeTreeReader")
+#ifdef RESTRICT_OrgApacheLuceneRangetreeRangeTreeReader
+#define INCLUDE_ALL_OrgApacheLuceneRangetreeRangeTreeReader 0
 #else
-#define OrgApacheLuceneRangetreeRangeTreeReader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneRangetreeRangeTreeReader 1
 #endif
-#undef OrgApacheLuceneRangetreeRangeTreeReader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneRangetreeRangeTreeReader
 
-#if !defined (_OrgApacheLuceneRangetreeRangeTreeReader_) && (OrgApacheLuceneRangetreeRangeTreeReader_INCLUDE_ALL || OrgApacheLuceneRangetreeRangeTreeReader_INCLUDE)
-#define _OrgApacheLuceneRangetreeRangeTreeReader_
+#if !defined (OrgApacheLuceneRangetreeRangeTreeReader_) && (INCLUDE_ALL_OrgApacheLuceneRangetreeRangeTreeReader || defined(INCLUDE_OrgApacheLuceneRangetreeRangeTreeReader))
+#define OrgApacheLuceneRangetreeRangeTreeReader_
 
-#define OrgApacheLuceneUtilAccountable_RESTRICT 1
-#define OrgApacheLuceneUtilAccountable_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAccountable 1
+#define INCLUDE_OrgApacheLuceneUtilAccountable 1
 #include "org/apache/lucene/util/Accountable.h"
 
 @class OrgApacheLuceneIndexSortedNumericDocValues;
@@ -25,6 +25,10 @@
 @class OrgApacheLuceneStoreIndexInput;
 @protocol JavaUtilCollection;
 
+/*!
+ @brief Handles intersection of a range with a numeric tree previously written with <code>RangeTreeWriter</code>.
+  
+ */
 @interface OrgApacheLuceneRangetreeRangeTreeReader : NSObject < OrgApacheLuceneUtilAccountable > {
  @public
   OrgApacheLuceneStoreIndexInput *in_;
@@ -59,8 +63,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneRangetreeRangeTreeReader_initWithOrgApache
 
 FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeReader *new_OrgApacheLuceneRangetreeRangeTreeReader_initWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput *inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeReader *create_OrgApacheLuceneRangetreeRangeTreeReader_initWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput *inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeRangeTreeReader)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneRangetreeRangeTreeReader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneRangetreeRangeTreeReader")

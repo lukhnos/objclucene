@@ -35,7 +35,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisShingleShingleFilterFactory, fillerTo
 }
 
 - (OrgApacheLuceneAnalysisShingleShingleFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  OrgApacheLuceneAnalysisShingleShingleFilter *r = [new_OrgApacheLuceneAnalysisShingleShingleFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(input, minShingleSize_, maxShingleSize_) autorelease];
+  OrgApacheLuceneAnalysisShingleShingleFilter *r = create_OrgApacheLuceneAnalysisShingleShingleFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(input, minShingleSize_, maxShingleSize_);
   [r setOutputUnigramsWithBoolean:outputUnigrams_];
   [r setOutputUnigramsIfNoShinglesWithBoolean:outputUnigramsIfNoShingles_];
   [r setTokenSeparatorWithNSString:tokenSeparator_];
@@ -51,7 +51,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisShingleShingleFilterFactory, fillerTo
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "ShingleFilterFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "ShingleFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.shingle.ShingleFilter;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -72,28 +72,30 @@ void OrgApacheLuceneAnalysisShingleShingleFilterFactory_initWithJavaUtilMap_(Org
   OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
   self->maxShingleSize_ = [self getIntWithJavaUtilMap:args withNSString:@"maxShingleSize" withInt:OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_MAX_SHINGLE_SIZE];
   if (self->maxShingleSize_ < 2) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$", @"Invalid maxShingleSize (", self->maxShingleSize_, @") - must be at least 2")) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$", @"Invalid maxShingleSize (", self->maxShingleSize_, @") - must be at least 2"));
   }
   self->minShingleSize_ = [self getIntWithJavaUtilMap:args withNSString:@"minShingleSize" withInt:OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_MIN_SHINGLE_SIZE];
   if (self->minShingleSize_ < 2) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$", @"Invalid minShingleSize (", self->minShingleSize_, @") - must be at least 2")) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$", @"Invalid minShingleSize (", self->minShingleSize_, @") - must be at least 2"));
   }
   if (self->minShingleSize_ > self->maxShingleSize_) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$IC", @"Invalid minShingleSize (", self->minShingleSize_, @") - must be no greater than maxShingleSize (", self->maxShingleSize_, ')')) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$IC", @"Invalid minShingleSize (", self->minShingleSize_, @") - must be no greater than maxShingleSize (", self->maxShingleSize_, ')'));
   }
   self->outputUnigrams_ = [self getBooleanWithJavaUtilMap:args withNSString:@"outputUnigrams" withBoolean:true];
   self->outputUnigramsIfNoShingles_ = [self getBooleanWithJavaUtilMap:args withNSString:@"outputUnigramsIfNoShingles" withBoolean:false];
-  JreStrongAssign(&self->tokenSeparator_, [self getWithJavaUtilMap:args withNSString:@"tokenSeparator" withNSString:OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_TOKEN_SEPARATOR_]);
-  JreStrongAssign(&self->fillerToken_, [self getWithJavaUtilMap:args withNSString:@"fillerToken" withNSString:OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_FILLER_TOKEN_]);
+  JreStrongAssign(&self->tokenSeparator_, [self getWithJavaUtilMap:args withNSString:@"tokenSeparator" withNSString:OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_TOKEN_SEPARATOR]);
+  JreStrongAssign(&self->fillerToken_, [self getWithJavaUtilMap:args withNSString:@"fillerToken" withNSString:OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_FILLER_TOKEN]);
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisShingleShingleFilterFactory *new_OrgApacheLuceneAnalysisShingleShingleFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisShingleShingleFilterFactory *self = [OrgApacheLuceneAnalysisShingleShingleFilterFactory alloc];
-  OrgApacheLuceneAnalysisShingleShingleFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisShingleShingleFilterFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisShingleShingleFilterFactory *create_OrgApacheLuceneAnalysisShingleShingleFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisShingleShingleFilterFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisShingleShingleFilterFactory)

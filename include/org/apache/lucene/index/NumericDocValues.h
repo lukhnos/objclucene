@@ -5,25 +5,38 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexNumericDocValues_INCLUDE_ALL")
-#if OrgApacheLuceneIndexNumericDocValues_RESTRICT
-#define OrgApacheLuceneIndexNumericDocValues_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexNumericDocValues")
+#ifdef RESTRICT_OrgApacheLuceneIndexNumericDocValues
+#define INCLUDE_ALL_OrgApacheLuceneIndexNumericDocValues 0
 #else
-#define OrgApacheLuceneIndexNumericDocValues_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexNumericDocValues 1
 #endif
-#undef OrgApacheLuceneIndexNumericDocValues_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexNumericDocValues
 
-#if !defined (_OrgApacheLuceneIndexNumericDocValues_) && (OrgApacheLuceneIndexNumericDocValues_INCLUDE_ALL || OrgApacheLuceneIndexNumericDocValues_INCLUDE)
-#define _OrgApacheLuceneIndexNumericDocValues_
+#if !defined (OrgApacheLuceneIndexNumericDocValues_) && (INCLUDE_ALL_OrgApacheLuceneIndexNumericDocValues || defined(INCLUDE_OrgApacheLuceneIndexNumericDocValues))
+#define OrgApacheLuceneIndexNumericDocValues_
 
+/*!
+ @brief A per-document numeric value.
+ */
 @interface OrgApacheLuceneIndexNumericDocValues : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Returns the numeric value for the specified document ID.
+ @param docID document ID to lookup
+ @return numeric value
+ */
 - (jlong)getWithInt:(jint)docID;
 
 #pragma mark Protected
 
+/*!
+ @brief Sole constructor.
+ (For invocation by subclass 
+ constructors, typically implicit.) 
+ */
 - (instancetype)init;
 
 @end
@@ -36,4 +49,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexNumericDocValues)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexNumericDocValues_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexNumericDocValues")

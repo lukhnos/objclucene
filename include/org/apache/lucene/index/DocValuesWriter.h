@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexDocValuesWriter_INCLUDE_ALL")
-#if OrgApacheLuceneIndexDocValuesWriter_RESTRICT
-#define OrgApacheLuceneIndexDocValuesWriter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexDocValuesWriter")
+#ifdef RESTRICT_OrgApacheLuceneIndexDocValuesWriter
+#define INCLUDE_ALL_OrgApacheLuceneIndexDocValuesWriter 0
 #else
-#define OrgApacheLuceneIndexDocValuesWriter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexDocValuesWriter 1
 #endif
-#undef OrgApacheLuceneIndexDocValuesWriter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexDocValuesWriter
 
-#if !defined (_OrgApacheLuceneIndexDocValuesWriter_) && (OrgApacheLuceneIndexDocValuesWriter_INCLUDE_ALL || OrgApacheLuceneIndexDocValuesWriter_INCLUDE)
-#define _OrgApacheLuceneIndexDocValuesWriter_
+#if !defined (OrgApacheLuceneIndexDocValuesWriter_) && (INCLUDE_ALL_OrgApacheLuceneIndexDocValuesWriter || defined(INCLUDE_OrgApacheLuceneIndexDocValuesWriter))
+#define OrgApacheLuceneIndexDocValuesWriter_
 
 @class OrgApacheLuceneCodecsDocValuesConsumer;
 @class OrgApacheLuceneIndexSegmentWriteState;
@@ -40,4 +40,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocValuesWriter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexDocValuesWriter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexDocValuesWriter")

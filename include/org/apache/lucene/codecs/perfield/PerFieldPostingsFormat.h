@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_RESTRICT
-#define OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat")
+#ifdef RESTRICT_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat
+#define INCLUDE_ALL_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat 0
 #else
-#define OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat 1
 #endif
-#undef OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat
 
-#if !defined (_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_) && (OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_INCLUDE_ALL || OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_INCLUDE)
-#define _OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_
+#if !defined (OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_) && (INCLUDE_ALL_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat || defined(INCLUDE_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat))
+#define OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_
 
-#define OrgApacheLuceneCodecsPostingsFormat_RESTRICT 1
-#define OrgApacheLuceneCodecsPostingsFormat_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneCodecsPostingsFormat 1
+#define INCLUDE_OrgApacheLuceneCodecsPostingsFormat 1
 #include "org/apache/lucene/codecs/PostingsFormat.h"
 
 @class OrgApacheLuceneCodecsFieldsConsumer;
@@ -25,16 +25,46 @@
 @class OrgApacheLuceneIndexSegmentReadState;
 @class OrgApacheLuceneIndexSegmentWriteState;
 
+/*!
+ @brief Enables per field postings support.
+ <p>
+ Note, when extending this class, the name (<code>getName</code>) is 
+ written into the index. In order for the field to be read, the
+ name must resolve to your implementation via <code>forName(String)</code>.
+ This method uses Java's 
+ <code>Service Provider Interface</code> to resolve format names.
+ <p>
+ Files written by each posting format have an additional suffix containing the 
+ format name. For example, in a per-field configuration instead of <tt>_1.prx</tt> 
+ filenames would look like <tt>_1_Lucene40_0.prx</tt>.
+ - seealso: ServiceLoader
+ */
 @interface OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat : OrgApacheLuceneCodecsPostingsFormat
+
++ (NSString *)PER_FIELD_NAME;
+
++ (NSString *)PER_FIELD_FORMAT_KEY;
+
++ (NSString *)PER_FIELD_SUFFIX_KEY;
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ */
 - (instancetype)init;
 
 - (OrgApacheLuceneCodecsFieldsConsumer *)fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state;
 
 - (OrgApacheLuceneCodecsFieldsProducer *)fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state;
 
+/*!
+ @brief Returns the postings format that should be used for writing 
+ new segments of <code>field</code>.
+ <p>
+ The field to format mapping is written to the index, so
+ this method is only invoked when writing, not when reading. 
+ */
 - (OrgApacheLuceneCodecsPostingsFormat *)getPostingsFormatForFieldWithNSString:(NSString *)field;
 
 #pragma mark Package-Private
@@ -50,14 +80,31 @@
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_PER_FIELD_NAME_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat, PER_FIELD_NAME_, NSString *)
+/*!
+ @brief Name of this <code>PostingsFormat</code>.
+ */
+inline NSString *OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_get_PER_FIELD_NAME();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_PER_FIELD_NAME;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat, PER_FIELD_NAME, NSString *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_PER_FIELD_FORMAT_KEY_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat, PER_FIELD_FORMAT_KEY_, NSString *)
+/*!
+ @brief <code>FieldInfo</code> attribute name used to store the
+ format name for each field.
+ */
+inline NSString *OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_get_PER_FIELD_FORMAT_KEY();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_PER_FIELD_FORMAT_KEY;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat, PER_FIELD_FORMAT_KEY, NSString *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_PER_FIELD_SUFFIX_KEY_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat, PER_FIELD_SUFFIX_KEY_, NSString *)
+/*!
+ @brief <code>FieldInfo</code> attribute name used to store the
+ segment suffix name for each field.
+ */
+inline NSString *OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_get_PER_FIELD_SUFFIX_KEY();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_PER_FIELD_SUFFIX_KEY;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat, PER_FIELD_SUFFIX_KEY, NSString *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_init(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat *self);
 
@@ -69,16 +116,24 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat)
 
 #endif
 
-#if !defined (_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup_) && (OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_INCLUDE_ALL || OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup_INCLUDE)
-#define _OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup_
+#if !defined (OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup_) && (INCLUDE_ALL_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat || defined(INCLUDE_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup))
+#define OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup_
 
 @class OrgApacheLuceneIndexSegmentWriteState;
 @protocol JavaUtilSet;
 
+/*!
+ @brief Group of fields written by one PostingsFormat
+ */
 @interface OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup : NSObject {
  @public
   id<JavaUtilSet> fields_;
   jint suffix_;
+  /*!
+   @brief Custom SegmentWriteState for this group of fields,
+ with the segmentSuffix uniqueified for this
+ PostingsFormat
+   */
   OrgApacheLuceneIndexSegmentWriteState *state_;
 }
 
@@ -97,8 +152,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_Field
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup *new_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup *create_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat")

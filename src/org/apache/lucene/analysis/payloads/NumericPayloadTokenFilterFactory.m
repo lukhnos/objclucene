@@ -30,7 +30,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilterFact
 }
 
 - (OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  return [new_OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withFloat_withNSString_(input, payload_, typeMatch_) autorelease];
+  return create_OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withFloat_withNSString_(input, payload_, typeMatch_);
 }
 
 - (void)dealloc {
@@ -40,7 +40,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilterFact
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "NumericPayloadTokenFilterFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "NumericPayloadTokenFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.payloads.NumericPayloadTokenFilter;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -58,14 +58,16 @@ void OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilterFactory_initWithJav
   self->payload_ = [self requireFloatWithJavaUtilMap:args withNSString:@"payload"];
   JreStrongAssign(&self->typeMatch_, [self requireWithJavaUtilMap:args withNSString:@"typeMatch"]);
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilterFactory *new_OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilterFactory *self = [OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilterFactory alloc];
-  OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilterFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilterFactory *create_OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilterFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilterFactory)

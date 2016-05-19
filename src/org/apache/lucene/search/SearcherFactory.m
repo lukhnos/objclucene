@@ -14,7 +14,7 @@
 
 - (OrgApacheLuceneSearchIndexSearcher *)newSearcherWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
                                                    withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)previousReader {
-  return [new_OrgApacheLuceneSearchIndexSearcher_initWithOrgApacheLuceneIndexIndexReader_(reader) autorelease];
+  return create_OrgApacheLuceneSearchIndexSearcher_initWithOrgApacheLuceneIndexIndexReader_(reader);
 }
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -27,7 +27,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "newSearcherWithOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneIndexIndexReader:", "newSearcher", "Lorg.apache.lucene.search.IndexSearcher;", 0x1, "Ljava.io.IOException;", NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "SearcherFactory", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneSearchSearcherFactory = { 2, "SearcherFactory", "org.apache.lucene.search", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSearcherFactory;
@@ -40,9 +40,11 @@ void OrgApacheLuceneSearchSearcherFactory_init(OrgApacheLuceneSearchSearcherFact
 }
 
 OrgApacheLuceneSearchSearcherFactory *new_OrgApacheLuceneSearchSearcherFactory_init() {
-  OrgApacheLuceneSearchSearcherFactory *self = [OrgApacheLuceneSearchSearcherFactory alloc];
-  OrgApacheLuceneSearchSearcherFactory_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSearcherFactory, init)
+}
+
+OrgApacheLuceneSearchSearcherFactory *create_OrgApacheLuceneSearchSearcherFactory_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSearcherFactory, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSearcherFactory)

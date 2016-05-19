@@ -93,9 +93,11 @@ void OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues_initWithInt_with
 }
 
 OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues *new_OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues_initWithInt_withOrgApacheLuceneQueriesFunctionValueSource_(jint val, OrgApacheLuceneQueriesFunctionValueSource *parent) {
-  OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues *self = [OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues alloc];
-  OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues_initWithInt_withOrgApacheLuceneQueriesFunctionValueSource_(self, val, parent);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues, initWithInt_withOrgApacheLuceneQueriesFunctionValueSource_, val, parent)
+}
+
+OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues *create_OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues_initWithInt_withOrgApacheLuceneQueriesFunctionValueSource_(jint val, OrgApacheLuceneQueriesFunctionValueSource *parent) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues, initWithInt_withOrgApacheLuceneQueriesFunctionValueSource_, val, parent)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues)
@@ -173,9 +175,11 @@ void OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues_initWithDoubl
 }
 
 OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues *new_OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues_initWithDouble_withOrgApacheLuceneQueriesFunctionValueSource_(jdouble val, OrgApacheLuceneQueriesFunctionValueSource *parent) {
-  OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues *self = [OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues alloc];
-  OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues_initWithDouble_withOrgApacheLuceneQueriesFunctionValueSource_(self, val, parent);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues, initWithDouble_withOrgApacheLuceneQueriesFunctionValueSource_, val, parent)
+}
+
+OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues *create_OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues_initWithDouble_withOrgApacheLuceneQueriesFunctionValueSource_(jdouble val, OrgApacheLuceneQueriesFunctionValueSource *parent) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues, initWithDouble_withOrgApacheLuceneQueriesFunctionValueSource_, val, parent)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues)
@@ -200,9 +204,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceConstD
 
 - (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
                                  withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext {
-  OrgApacheLuceneSearchIndexSearcher *searcher = (OrgApacheLuceneSearchIndexSearcher *) check_class_cast([((id<JavaUtilMap>) nil_chk(context)) getWithId:@"searcher"], [OrgApacheLuceneSearchIndexSearcher class]);
-  jint docfreq = [((OrgApacheLuceneIndexIndexReader *) nil_chk([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getIndexReader])) docFreqWithOrgApacheLuceneIndexTerm:[new_OrgApacheLuceneIndexTerm_initWithNSString_withOrgApacheLuceneUtilBytesRef_(indexedField_, indexedBytes_) autorelease]];
-  return [new_OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues_initWithInt_withOrgApacheLuceneQueriesFunctionValueSource_(docfreq, self) autorelease];
+  OrgApacheLuceneSearchIndexSearcher *searcher = (OrgApacheLuceneSearchIndexSearcher *) cast_chk([((id<JavaUtilMap>) nil_chk(context)) getWithId:@"searcher"], [OrgApacheLuceneSearchIndexSearcher class]);
+  jint docfreq = [((OrgApacheLuceneIndexIndexReader *) nil_chk([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getIndexReader])) docFreqWithOrgApacheLuceneIndexTerm:create_OrgApacheLuceneIndexTerm_initWithNSString_withOrgApacheLuceneUtilBytesRef_(indexedField_, indexedBytes_)];
+  return create_OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues_initWithInt_withOrgApacheLuceneQueriesFunctionValueSource_(docfreq, self);
 }
 
 - (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
@@ -215,8 +219,8 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 }
 
 - (jboolean)isEqual:(id)o {
-  if ([self getClass] != [nil_chk(o) getClass]) return false;
-  OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource *other = (OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource *) check_class_cast(o, [OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource class]);
+  if ([self getClass] != (id) [nil_chk(o) getClass]) return false;
+  OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource *other = (OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource *) cast_chk(o, [OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource class]);
   return [((NSString *) nil_chk(self->indexedField_)) isEqual:other->indexedField_] && [((OrgApacheLuceneUtilBytesRef *) nil_chk(self->indexedBytes_)) isEqual:other->indexedBytes_];
 }
 
@@ -259,9 +263,11 @@ void OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource_initWithNSStrin
 }
 
 OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource_initWithNSString_withNSString_withNSString_withOrgApacheLuceneUtilBytesRef_(NSString *field, NSString *val, NSString *indexedField, OrgApacheLuceneUtilBytesRef *indexedBytes) {
-  OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource *self = [OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource alloc];
-  OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource_initWithNSString_withNSString_withNSString_withOrgApacheLuceneUtilBytesRef_(self, field, val, indexedField, indexedBytes);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource, initWithNSString_withNSString_withNSString_withOrgApacheLuceneUtilBytesRef_, field, val, indexedField, indexedBytes)
+}
+
+OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource *create_OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource_initWithNSString_withNSString_withNSString_withOrgApacheLuceneUtilBytesRef_(NSString *field, NSString *val, NSString *indexedField, OrgApacheLuceneUtilBytesRef *indexedBytes) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource, initWithNSString_withNSString_withNSString_withOrgApacheLuceneUtilBytesRef_, field, val, indexedField, indexedBytes)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource)

@@ -12,7 +12,6 @@
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/NoSuchMethodException.h"
 #include "java/lang/ReflectiveOperationException.h"
-#include "java/lang/Throwable.h"
 #include "org/apache/lucene/util/Attribute.h"
 #include "org/apache/lucene/util/AttributeFactory.h"
 #include "org/apache/lucene/util/AttributeImpl.h"
@@ -23,20 +22,23 @@
 
 @interface OrgApacheLuceneUtilAttributeFactory ()
 
-+ (void)rethrow0WithJavaLangThrowable:(JavaLangThrowable *)t;
++ (void)rethrow0WithNSException:(NSException *)t;
 
 @end
 
-static OrgLukhnosPortmobileInvokeMethodHandles_Lookup *OrgApacheLuceneUtilAttributeFactory_lookup_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilAttributeFactory, lookup_, OrgLukhnosPortmobileInvokeMethodHandles_Lookup *)
+inline OrgLukhnosPortmobileInvokeMethodHandles_Lookup *OrgApacheLuceneUtilAttributeFactory_get_lookup();
+static OrgLukhnosPortmobileInvokeMethodHandles_Lookup *OrgApacheLuceneUtilAttributeFactory_lookup;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilAttributeFactory, lookup, OrgLukhnosPortmobileInvokeMethodHandles_Lookup *)
 
-static OrgLukhnosPortmobileInvokeMethodType *OrgApacheLuceneUtilAttributeFactory_NO_ARG_CTOR_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilAttributeFactory, NO_ARG_CTOR_, OrgLukhnosPortmobileInvokeMethodType *)
+inline OrgLukhnosPortmobileInvokeMethodType *OrgApacheLuceneUtilAttributeFactory_get_NO_ARG_CTOR();
+static OrgLukhnosPortmobileInvokeMethodType *OrgApacheLuceneUtilAttributeFactory_NO_ARG_CTOR;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilAttributeFactory, NO_ARG_CTOR, OrgLukhnosPortmobileInvokeMethodType *)
 
-static OrgLukhnosPortmobileInvokeMethodType *OrgApacheLuceneUtilAttributeFactory_NO_ARG_RETURNING_ATTRIBUTEIMPL_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilAttributeFactory, NO_ARG_RETURNING_ATTRIBUTEIMPL_, OrgLukhnosPortmobileInvokeMethodType *)
+inline OrgLukhnosPortmobileInvokeMethodType *OrgApacheLuceneUtilAttributeFactory_get_NO_ARG_RETURNING_ATTRIBUTEIMPL();
+static OrgLukhnosPortmobileInvokeMethodType *OrgApacheLuceneUtilAttributeFactory_NO_ARG_RETURNING_ATTRIBUTEIMPL;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilAttributeFactory, NO_ARG_RETURNING_ATTRIBUTEIMPL, OrgLukhnosPortmobileInvokeMethodType *)
 
-__attribute__((unused)) static void OrgApacheLuceneUtilAttributeFactory_rethrow0WithJavaLangThrowable_(JavaLangThrowable *t);
+__attribute__((unused)) static void OrgApacheLuceneUtilAttributeFactory_rethrow0WithNSException_(NSException *t);
 
 @interface OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory : OrgApacheLuceneUtilAttributeFactory {
  @public
@@ -58,6 +60,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory,
 __attribute__((unused)) static void OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_init(OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory *self);
 
 __attribute__((unused)) static OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory *new_OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_init() NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory *create_OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_init();
 
 __attribute__((unused)) static IOSClass *OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_findImplClassWithIOSClass_(OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory *self, IOSClass *attClass);
 
@@ -81,6 +85,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_
 __attribute__((unused)) static void OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_$1_initWithOrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_(OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_$1 *self, OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory *outer$);
 
 __attribute__((unused)) static OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_$1 *new_OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_$1_initWithOrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_(OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory *outer$) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_$1 *create_OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_$1_initWithOrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_(OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_$1)
 
@@ -116,13 +122,19 @@ __attribute__((unused)) static void OrgApacheLuceneUtilAttributeFactory_$1_initW
 
 __attribute__((unused)) static OrgApacheLuceneUtilAttributeFactory_$1 *new_OrgApacheLuceneUtilAttributeFactory_$1_initWithOrgLukhnosPortmobileInvokeMethodHandle_withOrgApacheLuceneUtilAttributeFactory_withIOSClass_(OrgLukhnosPortmobileInvokeMethodHandle *capture$0, OrgApacheLuceneUtilAttributeFactory *arg$0, IOSClass *arg$1) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneUtilAttributeFactory_$1 *create_OrgApacheLuceneUtilAttributeFactory_$1_initWithOrgLukhnosPortmobileInvokeMethodHandle_withOrgApacheLuceneUtilAttributeFactory_withIOSClass_(OrgLukhnosPortmobileInvokeMethodHandle *capture$0, OrgApacheLuceneUtilAttributeFactory *arg$0, IOSClass *arg$1);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAttributeFactory_$1)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilAttributeFactory)
 
-OrgApacheLuceneUtilAttributeFactory *OrgApacheLuceneUtilAttributeFactory_DEFAULT_ATTRIBUTE_FACTORY_;
+OrgApacheLuceneUtilAttributeFactory *OrgApacheLuceneUtilAttributeFactory_DEFAULT_ATTRIBUTE_FACTORY;
 
 @implementation OrgApacheLuceneUtilAttributeFactory
+
++ (OrgApacheLuceneUtilAttributeFactory *)DEFAULT_ATTRIBUTE_FACTORY {
+  return OrgApacheLuceneUtilAttributeFactory_DEFAULT_ATTRIBUTE_FACTORY;
+}
 
 - (OrgApacheLuceneUtilAttributeImpl *)createAttributeInstanceWithIOSClass:(IOSClass *)attClass {
   // can't call an abstract method
@@ -139,12 +151,12 @@ OrgApacheLuceneUtilAttributeFactory *OrgApacheLuceneUtilAttributeFactory_DEFAULT
   return OrgApacheLuceneUtilAttributeFactory_getStaticImplementationWithOrgApacheLuceneUtilAttributeFactory_withIOSClass_(delegate, clazz);
 }
 
-+ (void)rethrowWithJavaLangThrowable:(JavaLangThrowable *)t {
-  OrgApacheLuceneUtilAttributeFactory_rethrowWithJavaLangThrowable_(t);
++ (void)rethrowWithNSException:(NSException *)t {
+  OrgApacheLuceneUtilAttributeFactory_rethrowWithNSException_(t);
 }
 
-+ (void)rethrow0WithJavaLangThrowable:(JavaLangThrowable *)t {
-  OrgApacheLuceneUtilAttributeFactory_rethrow0WithJavaLangThrowable_(t);
++ (void)rethrow0WithNSException:(NSException *)t {
+  OrgApacheLuceneUtilAttributeFactory_rethrow0WithNSException_(t);
 }
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -156,28 +168,28 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilAttributeFactory class]) {
-    JreStrongAssign(&OrgApacheLuceneUtilAttributeFactory_lookup_, OrgLukhnosPortmobileInvokeMethodHandles_publicLookup());
-    JreStrongAssign(&OrgApacheLuceneUtilAttributeFactory_NO_ARG_CTOR_, OrgLukhnosPortmobileInvokeMethodType_methodTypeWithIOSClass_([IOSClass voidClass]));
-    JreStrongAssign(&OrgApacheLuceneUtilAttributeFactory_NO_ARG_RETURNING_ATTRIBUTEIMPL_, OrgLukhnosPortmobileInvokeMethodType_methodTypeWithIOSClass_(OrgApacheLuceneUtilAttributeImpl_class_()));
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilAttributeFactory_DEFAULT_ATTRIBUTE_FACTORY_, new_OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_init());
+    JreStrongAssign(&OrgApacheLuceneUtilAttributeFactory_lookup, OrgLukhnosPortmobileInvokeMethodHandles_publicLookup());
+    JreStrongAssign(&OrgApacheLuceneUtilAttributeFactory_NO_ARG_CTOR, OrgLukhnosPortmobileInvokeMethodType_methodTypeWithIOSClass_([IOSClass voidClass]));
+    JreStrongAssign(&OrgApacheLuceneUtilAttributeFactory_NO_ARG_RETURNING_ATTRIBUTEIMPL, OrgLukhnosPortmobileInvokeMethodType_methodTypeWithIOSClass_(OrgApacheLuceneUtilAttributeImpl_class_()));
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilAttributeFactory_DEFAULT_ATTRIBUTE_FACTORY, new_OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilAttributeFactory)
   }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "createAttributeInstanceWithIOSClass:", "createAttributeInstance", "Lorg.apache.lucene.util.AttributeImpl;", 0x401, NULL, NULL },
-    { "findAttributeImplCtorWithIOSClass:", "findAttributeImplCtor", "Lorg.lukhnos.portmobile.invoke.MethodHandle;", 0x18, NULL, NULL },
+    { "createAttributeInstanceWithIOSClass:", "createAttributeInstance", "Lorg.apache.lucene.util.AttributeImpl;", 0x401, NULL, "(Ljava/lang/Class<+Lorg/apache/lucene/util/Attribute;>;)Lorg/apache/lucene/util/AttributeImpl;" },
+    { "findAttributeImplCtorWithIOSClass:", "findAttributeImplCtor", "Lorg.lukhnos.portmobile.invoke.MethodHandle;", 0x18, NULL, "(Ljava/lang/Class<+Lorg/apache/lucene/util/AttributeImpl;>;)Lorg/lukhnos/portmobile/invoke/MethodHandle;" },
     { "getStaticImplementationWithOrgApacheLuceneUtilAttributeFactory:withIOSClass:", "getStaticImplementation", "Lorg.apache.lucene.util.AttributeFactory;", 0x9, NULL, "<A:Lorg/apache/lucene/util/AttributeImpl;>(Lorg/apache/lucene/util/AttributeFactory;Ljava/lang/Class<TA;>;)Lorg/apache/lucene/util/AttributeFactory;" },
-    { "rethrowWithJavaLangThrowable:", "rethrow", "V", 0x8, NULL, NULL },
-    { "rethrow0WithJavaLangThrowable:", "rethrow0", "V", 0xa, "TT;", "<T:Ljava/lang/Throwable;>(Ljava/lang/Throwable;)V" },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "rethrowWithNSException:", "rethrow", "V", 0x8, NULL, NULL },
+    { "rethrow0WithNSException:", "rethrow0", "V", 0xa, "TT;", "<T:Ljava/lang/Throwable;>(Ljava/lang/Throwable;)V" },
+    { "init", "AttributeFactory", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "lookup_", NULL, 0x1a, "Lorg.lukhnos.portmobile.invoke.MethodHandles$Lookup;", &OrgApacheLuceneUtilAttributeFactory_lookup_, NULL, .constantValue.asLong = 0 },
-    { "NO_ARG_CTOR_", NULL, 0x1a, "Lorg.lukhnos.portmobile.invoke.MethodType;", &OrgApacheLuceneUtilAttributeFactory_NO_ARG_CTOR_, NULL, .constantValue.asLong = 0 },
-    { "NO_ARG_RETURNING_ATTRIBUTEIMPL_", NULL, 0x1a, "Lorg.lukhnos.portmobile.invoke.MethodType;", &OrgApacheLuceneUtilAttributeFactory_NO_ARG_RETURNING_ATTRIBUTEIMPL_, NULL, .constantValue.asLong = 0 },
-    { "DEFAULT_ATTRIBUTE_FACTORY_", NULL, 0x19, "Lorg.apache.lucene.util.AttributeFactory;", &OrgApacheLuceneUtilAttributeFactory_DEFAULT_ATTRIBUTE_FACTORY_, NULL, .constantValue.asLong = 0 },
+    { "lookup", "lookup", 0x1a, "Lorg.lukhnos.portmobile.invoke.MethodHandles$Lookup;", &OrgApacheLuceneUtilAttributeFactory_lookup, NULL, .constantValue.asLong = 0 },
+    { "NO_ARG_CTOR", "NO_ARG_CTOR", 0x1a, "Lorg.lukhnos.portmobile.invoke.MethodType;", &OrgApacheLuceneUtilAttributeFactory_NO_ARG_CTOR, NULL, .constantValue.asLong = 0 },
+    { "NO_ARG_RETURNING_ATTRIBUTEIMPL", "NO_ARG_RETURNING_ATTRIBUTEIMPL", 0x1a, "Lorg.lukhnos.portmobile.invoke.MethodType;", &OrgApacheLuceneUtilAttributeFactory_NO_ARG_RETURNING_ATTRIBUTEIMPL, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_ATTRIBUTE_FACTORY", "DEFAULT_ATTRIBUTE_FACTORY", 0x19, "Lorg.apache.lucene.util.AttributeFactory;", &OrgApacheLuceneUtilAttributeFactory_DEFAULT_ATTRIBUTE_FACTORY, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.AttributeFactory$DefaultAttributeFactory;", "Lorg.apache.lucene.util.AttributeFactory$StaticImplementationAttributeFactory;"};
   static const J2ObjcClassInfo _OrgApacheLuceneUtilAttributeFactory = { 2, "AttributeFactory", "org.apache.lucene.util", NULL, 0x401, 6, methods, 4, fields, 0, NULL, 2, inner_classes, NULL, NULL };
@@ -189,33 +201,33 @@ J2OBJC_IGNORE_DESIGNATED_END
 OrgLukhnosPortmobileInvokeMethodHandle *OrgApacheLuceneUtilAttributeFactory_findAttributeImplCtorWithIOSClass_(IOSClass *clazz) {
   OrgApacheLuceneUtilAttributeFactory_initialize();
   @try {
-    return [((OrgLukhnosPortmobileInvokeMethodHandle *) nil_chk([((OrgLukhnosPortmobileInvokeMethodHandles_Lookup *) nil_chk(OrgApacheLuceneUtilAttributeFactory_lookup_)) findConstructorWithIOSClass:clazz withOrgLukhnosPortmobileInvokeMethodType:OrgApacheLuceneUtilAttributeFactory_NO_ARG_CTOR_])) asTypeWithOrgLukhnosPortmobileInvokeMethodType:OrgApacheLuceneUtilAttributeFactory_NO_ARG_RETURNING_ATTRIBUTEIMPL_];
+    return [((OrgLukhnosPortmobileInvokeMethodHandle *) nil_chk([((OrgLukhnosPortmobileInvokeMethodHandles_Lookup *) nil_chk(OrgApacheLuceneUtilAttributeFactory_lookup)) findConstructorWithIOSClass:clazz withOrgLukhnosPortmobileInvokeMethodType:OrgApacheLuceneUtilAttributeFactory_NO_ARG_CTOR])) asTypeWithOrgLukhnosPortmobileInvokeMethodType:OrgApacheLuceneUtilAttributeFactory_NO_ARG_RETURNING_ATTRIBUTEIMPL];
   }
   @catch (JavaLangNoSuchMethodException *e) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_withJavaLangThrowable_(JreStrcat("$$", @"Cannot lookup accessible no-arg constructor for: ", [((IOSClass *) nil_chk(clazz)) getName]), e) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_withNSException_(JreStrcat("$$", @"Cannot lookup accessible no-arg constructor for: ", [((IOSClass *) nil_chk(clazz)) getName]), e);
   }
   @catch (JavaLangIllegalAccessException *e) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_withJavaLangThrowable_(JreStrcat("$$", @"Cannot lookup accessible no-arg constructor for: ", [((IOSClass *) nil_chk(clazz)) getName]), e) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_withNSException_(JreStrcat("$$", @"Cannot lookup accessible no-arg constructor for: ", [((IOSClass *) nil_chk(clazz)) getName]), e);
   }
   @catch (JavaLangReflectiveOperationException *e) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_withJavaLangThrowable_(JreStrcat("$$", @"Cannot lookup accessible no-arg constructor for: ", [((IOSClass *) nil_chk(clazz)) getName]), e) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_withNSException_(JreStrcat("$$", @"Cannot lookup accessible no-arg constructor for: ", [((IOSClass *) nil_chk(clazz)) getName]), e);
   }
 }
 
 OrgApacheLuceneUtilAttributeFactory *OrgApacheLuceneUtilAttributeFactory_getStaticImplementationWithOrgApacheLuceneUtilAttributeFactory_withIOSClass_(OrgApacheLuceneUtilAttributeFactory *delegate, IOSClass *clazz) {
   OrgApacheLuceneUtilAttributeFactory_initialize();
   OrgLukhnosPortmobileInvokeMethodHandle *constr = OrgApacheLuceneUtilAttributeFactory_findAttributeImplCtorWithIOSClass_(clazz);
-  return [new_OrgApacheLuceneUtilAttributeFactory_$1_initWithOrgLukhnosPortmobileInvokeMethodHandle_withOrgApacheLuceneUtilAttributeFactory_withIOSClass_(constr, delegate, clazz) autorelease];
+  return create_OrgApacheLuceneUtilAttributeFactory_$1_initWithOrgLukhnosPortmobileInvokeMethodHandle_withOrgApacheLuceneUtilAttributeFactory_withIOSClass_(constr, delegate, clazz);
 }
 
-void OrgApacheLuceneUtilAttributeFactory_rethrowWithJavaLangThrowable_(JavaLangThrowable *t) {
+void OrgApacheLuceneUtilAttributeFactory_rethrowWithNSException_(NSException *t) {
   OrgApacheLuceneUtilAttributeFactory_initialize();
-  OrgApacheLuceneUtilAttributeFactory_rethrow0WithJavaLangThrowable_(t);
+  OrgApacheLuceneUtilAttributeFactory_rethrow0WithNSException_(t);
 }
 
-void OrgApacheLuceneUtilAttributeFactory_rethrow0WithJavaLangThrowable_(JavaLangThrowable *t) {
+void OrgApacheLuceneUtilAttributeFactory_rethrow0WithNSException_(NSException *t) {
   OrgApacheLuceneUtilAttributeFactory_initialize();
-  @throw (JavaLangThrowable *) check_class_cast(t, [JavaLangThrowable class]);
+  @throw t;
 }
 
 void OrgApacheLuceneUtilAttributeFactory_init(OrgApacheLuceneUtilAttributeFactory *self) {
@@ -235,11 +247,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneUtilAttributeImpl *)createAttributeInstanceWithIOSClass:(IOSClass *)attClass {
   @try {
-    return (OrgApacheLuceneUtilAttributeImpl *) check_class_cast([((OrgLukhnosPortmobileInvokeMethodHandle *) nil_chk([((OrgLukhnosPortmobileLangClassValue *) nil_chk(constructors_)) getWithIOSClass:attClass])) invokeExact], [OrgApacheLuceneUtilAttributeImpl class]);
+    return (OrgApacheLuceneUtilAttributeImpl *) cast_chk([((OrgLukhnosPortmobileInvokeMethodHandle *) nil_chk([((OrgLukhnosPortmobileLangClassValue *) nil_chk(constructors_)) getWithIOSClass:attClass])) invokeExact], [OrgApacheLuceneUtilAttributeImpl class]);
   }
-  @catch (JavaLangThrowable *t) {
-    OrgApacheLuceneUtilAttributeFactory_rethrowWithJavaLangThrowable_(t);
-    @throw [new_JavaLangAssertionError_init() autorelease];
+  @catch (NSException *t) {
+    OrgApacheLuceneUtilAttributeFactory_rethrowWithNSException_(t);
+    @throw create_JavaLangAssertionError_init();
   }
 }
 
@@ -255,8 +267,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "DefaultAttributeFactory", NULL, 0x0, NULL, NULL },
-    { "createAttributeInstanceWithIOSClass:", "createAttributeInstance", "Lorg.apache.lucene.util.AttributeImpl;", 0x1, NULL, NULL },
-    { "findImplClassWithIOSClass:", "findImplClass", "Ljava.lang.Class;", 0x2, NULL, NULL },
+    { "createAttributeInstanceWithIOSClass:", "createAttributeInstance", "Lorg.apache.lucene.util.AttributeImpl;", 0x1, NULL, "(Ljava/lang/Class<+Lorg/apache/lucene/util/Attribute;>;)Lorg/apache/lucene/util/AttributeImpl;" },
+    { "findImplClassWithIOSClass:", "findImplClass", "Ljava.lang.Class;", 0x2, NULL, "(Ljava/lang/Class<+Lorg/apache/lucene/util/Attribute;>;)Ljava/lang/Class<+Lorg/apache/lucene/util/AttributeImpl;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "constructors_", NULL, 0x12, "Lorg.lukhnos.portmobile.lang.ClassValue;", NULL, "Lorg/lukhnos/portmobile/lang/ClassValue<Lorg/lukhnos/portmobile/invoke/MethodHandle;>;", .constantValue.asLong = 0 },
@@ -273,9 +285,11 @@ void OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_init(OrgApacheL
 }
 
 OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory *new_OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_init() {
-  OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory *self = [OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory alloc];
-  OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory, init)
+}
+
+OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory *create_OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory, init)
 }
 
 IOSClass *OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_findImplClassWithIOSClass_(OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory *self, IOSClass *attClass) {
@@ -283,7 +297,7 @@ IOSClass *OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_findImplCl
     return [((IOSClass *) nil_chk(IOSClass_forName_initialize_classLoader_(JreStrcat("$$", [((IOSClass *) nil_chk(attClass)) getName], @"Impl"), true, [attClass getClassLoader]))) asSubclass:OrgApacheLuceneUtilAttributeImpl_class_()];
   }
   @catch (JavaLangClassNotFoundException *cnfe) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$", @"Cannot find implementing class for: ", [((IOSClass *) nil_chk(attClass)) getName])) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$", @"Cannot find implementing class for: ", [attClass getName]));
   }
 }
 
@@ -307,7 +321,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAttributeFactory_DefaultAttr
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "computeValueWithIOSClass:", "computeValue", "Lorg.lukhnos.portmobile.invoke.MethodHandle;", 0x4, NULL, NULL },
+    { "computeValueWithIOSClass:", "computeValue", "Lorg.lukhnos.portmobile.invoke.MethodHandle;", 0x4, NULL, "(Ljava/lang/Class<*>;)Lorg/lukhnos/portmobile/invoke/MethodHandle;" },
     { "initWithOrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory:", "", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -326,9 +340,11 @@ void OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_$1_initWithOrgA
 }
 
 OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_$1 *new_OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_$1_initWithOrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_(OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory *outer$) {
-  OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_$1 *self = [OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_$1 alloc];
-  OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_$1_initWithOrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_(self, outer$);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_$1, initWithOrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_, outer$)
+}
+
+OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_$1 *create_OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_$1_initWithOrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_(OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_$1, initWithOrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_, outer$)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_$1)
@@ -353,9 +369,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAttributeFactory_DefaultAttr
 
 - (jboolean)isEqual:(id)other {
   if (self == other) return true;
-  if (other == nil || [other getClass] != [self getClass]) return false;
-  OrgApacheLuceneUtilAttributeFactory_StaticImplementationAttributeFactory *af = (OrgApacheLuceneUtilAttributeFactory_StaticImplementationAttributeFactory *) check_class_cast(other, [OrgApacheLuceneUtilAttributeFactory_StaticImplementationAttributeFactory class]);
-  return [((OrgApacheLuceneUtilAttributeFactory *) nil_chk(self->delegate_)) isEqual:((OrgApacheLuceneUtilAttributeFactory_StaticImplementationAttributeFactory *) nil_chk(af))->delegate_] && self->clazz_ == af->clazz_;
+  if (other == nil || [other getClass] != (id) [self getClass]) return false;
+  OrgApacheLuceneUtilAttributeFactory_StaticImplementationAttributeFactory *af = (OrgApacheLuceneUtilAttributeFactory_StaticImplementationAttributeFactory *) cast_chk(other, [OrgApacheLuceneUtilAttributeFactory_StaticImplementationAttributeFactory class]);
+  return [((OrgApacheLuceneUtilAttributeFactory *) nil_chk(self->delegate_)) isEqual:af->delegate_] && self->clazz_ == af->clazz_;
 }
 
 - (NSUInteger)hash {
@@ -370,8 +386,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAttributeFactory_DefaultAttr
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilAttributeFactory:withIOSClass:", "StaticImplementationAttributeFactory", NULL, 0x1, NULL, NULL },
-    { "createAttributeInstanceWithIOSClass:", "createAttributeInstance", "Lorg.apache.lucene.util.AttributeImpl;", 0x11, NULL, NULL },
+    { "initWithOrgApacheLuceneUtilAttributeFactory:withIOSClass:", "StaticImplementationAttributeFactory", NULL, 0x1, NULL, "(Lorg/apache/lucene/util/AttributeFactory;Ljava/lang/Class<TA;>;)V" },
+    { "createAttributeInstanceWithIOSClass:", "createAttributeInstance", "Lorg.apache.lucene.util.AttributeImpl;", 0x11, NULL, "(Ljava/lang/Class<+Lorg/apache/lucene/util/Attribute;>;)Lorg/apache/lucene/util/AttributeImpl;" },
     { "createInstance", NULL, "TA;", 0x404, NULL, "()TA;" },
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
@@ -398,11 +414,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAttributeFactory_StaticImple
 
 - (id)createInstance {
   @try {
-    return (OrgApacheLuceneUtilAttributeImpl *) check_class_cast([((OrgLukhnosPortmobileInvokeMethodHandle *) nil_chk(val$constr_)) invokeExact], [OrgApacheLuceneUtilAttributeImpl class]);
+    return (OrgApacheLuceneUtilAttributeImpl *) cast_chk([((OrgLukhnosPortmobileInvokeMethodHandle *) nil_chk(val$constr_)) invokeExact], [OrgApacheLuceneUtilAttributeImpl class]);
   }
-  @catch (JavaLangThrowable *t) {
-    OrgApacheLuceneUtilAttributeFactory_rethrowWithJavaLangThrowable_(t);
-    @throw [new_JavaLangAssertionError_init() autorelease];
+  @catch (NSException *t) {
+    OrgApacheLuceneUtilAttributeFactory_rethrowWithNSException_(t);
+    @throw create_JavaLangAssertionError_init();
   }
 }
 
@@ -421,7 +437,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAttributeFactory_StaticImple
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "createInstance", NULL, "TA;", 0x4, NULL, "()TA;" },
-    { "initWithOrgLukhnosPortmobileInvokeMethodHandle:withOrgApacheLuceneUtilAttributeFactory:withIOSClass:", "", NULL, 0x0, NULL, NULL },
+    { "initWithOrgLukhnosPortmobileInvokeMethodHandle:withOrgApacheLuceneUtilAttributeFactory:withIOSClass:", "", NULL, 0x0, NULL, "(Lorg/lukhnos/portmobile/invoke/MethodHandle;Lorg/apache/lucene/util/AttributeFactory;Ljava/lang/Class<TA;>;)V" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "val$constr_", NULL, 0x1012, "Lorg.lukhnos.portmobile.invoke.MethodHandle;", NULL, NULL, .constantValue.asLong = 0 },
@@ -440,9 +456,11 @@ void OrgApacheLuceneUtilAttributeFactory_$1_initWithOrgLukhnosPortmobileInvokeMe
 }
 
 OrgApacheLuceneUtilAttributeFactory_$1 *new_OrgApacheLuceneUtilAttributeFactory_$1_initWithOrgLukhnosPortmobileInvokeMethodHandle_withOrgApacheLuceneUtilAttributeFactory_withIOSClass_(OrgLukhnosPortmobileInvokeMethodHandle *capture$0, OrgApacheLuceneUtilAttributeFactory *arg$0, IOSClass *arg$1) {
-  OrgApacheLuceneUtilAttributeFactory_$1 *self = [OrgApacheLuceneUtilAttributeFactory_$1 alloc];
-  OrgApacheLuceneUtilAttributeFactory_$1_initWithOrgLukhnosPortmobileInvokeMethodHandle_withOrgApacheLuceneUtilAttributeFactory_withIOSClass_(self, capture$0, arg$0, arg$1);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAttributeFactory_$1, initWithOrgLukhnosPortmobileInvokeMethodHandle_withOrgApacheLuceneUtilAttributeFactory_withIOSClass_, capture$0, arg$0, arg$1)
+}
+
+OrgApacheLuceneUtilAttributeFactory_$1 *create_OrgApacheLuceneUtilAttributeFactory_$1_initWithOrgLukhnosPortmobileInvokeMethodHandle_withOrgApacheLuceneUtilAttributeFactory_withIOSClass_(OrgLukhnosPortmobileInvokeMethodHandle *capture$0, OrgApacheLuceneUtilAttributeFactory *arg$0, IOSClass *arg$1) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAttributeFactory_$1, initWithOrgLukhnosPortmobileInvokeMethodHandle_withOrgApacheLuceneUtilAttributeFactory_withIOSClass_, capture$0, arg$0, arg$1)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAttributeFactory_$1)

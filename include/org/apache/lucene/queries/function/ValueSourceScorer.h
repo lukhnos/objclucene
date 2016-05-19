@@ -5,24 +5,28 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionValueSourceScorer_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionValueSourceScorer_RESTRICT
-#define OrgApacheLuceneQueriesFunctionValueSourceScorer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValueSourceScorer")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionValueSourceScorer
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValueSourceScorer 0
 #else
-#define OrgApacheLuceneQueriesFunctionValueSourceScorer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValueSourceScorer 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionValueSourceScorer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionValueSourceScorer
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValueSourceScorer_) && (OrgApacheLuceneQueriesFunctionValueSourceScorer_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValueSourceScorer_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValueSourceScorer_
+#if !defined (OrgApacheLuceneQueriesFunctionValueSourceScorer_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValueSourceScorer || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValueSourceScorer))
+#define OrgApacheLuceneQueriesFunctionValueSourceScorer_
 
-#define OrgApacheLuceneSearchScorer_RESTRICT 1
-#define OrgApacheLuceneSearchScorer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchScorer 1
+#define INCLUDE_OrgApacheLuceneSearchScorer 1
 #include "org/apache/lucene/search/Scorer.h"
 
 @class OrgApacheLuceneIndexIndexReader;
 @class OrgApacheLuceneQueriesFunctionFunctionValues;
 
+/*!
+ @brief <code>Scorer</code> which returns the result of <code>FunctionValues.floatVal(int)</code> as
+ the score for a document.
+ */
 @interface OrgApacheLuceneQueriesFunctionValueSourceScorer : OrgApacheLuceneSearchScorer {
  @public
   OrgApacheLuceneIndexIndexReader *reader_;
@@ -69,8 +73,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValueSourceScorer_initWithO
 
 FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValueSourceScorer *new_OrgApacheLuceneQueriesFunctionValueSourceScorer_initWithOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneIndexIndexReader *reader, OrgApacheLuceneQueriesFunctionFunctionValues *values) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValueSourceScorer *create_OrgApacheLuceneQueriesFunctionValueSourceScorer_initWithOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneIndexIndexReader *reader, OrgApacheLuceneQueriesFunctionFunctionValues *values);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValueSourceScorer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionValueSourceScorer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValueSourceScorer")

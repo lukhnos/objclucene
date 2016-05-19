@@ -15,11 +15,13 @@
 #include "org/apache/lucene/util/packed/PackedInts.h"
 #include "org/apache/lucene/util/packed/PackedLongValues.h"
 
-static jlong OrgApacheLuceneUtilPackedMonotonicLongValues_BASE_RAM_BYTES_USED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilPackedMonotonicLongValues, BASE_RAM_BYTES_USED_, jlong)
+inline jlong OrgApacheLuceneUtilPackedMonotonicLongValues_get_BASE_RAM_BYTES_USED();
+static jlong OrgApacheLuceneUtilPackedMonotonicLongValues_BASE_RAM_BYTES_USED;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilPackedMonotonicLongValues, BASE_RAM_BYTES_USED, jlong)
 
-static jlong OrgApacheLuceneUtilPackedMonotonicLongValues_Builder_BASE_RAM_BYTES_USED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilPackedMonotonicLongValues_Builder, BASE_RAM_BYTES_USED_, jlong)
+inline jlong OrgApacheLuceneUtilPackedMonotonicLongValues_Builder_get_BASE_RAM_BYTES_USED();
+static jlong OrgApacheLuceneUtilPackedMonotonicLongValues_Builder_BASE_RAM_BYTES_USED;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilPackedMonotonicLongValues_Builder, BASE_RAM_BYTES_USED, jlong)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPackedMonotonicLongValues)
 
@@ -58,7 +60,7 @@ withOrgApacheLuceneUtilPackedPackedInts_ReaderArray:(IOSObjectArray *)values
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilPackedMonotonicLongValues class]) {
-    OrgApacheLuceneUtilPackedMonotonicLongValues_BASE_RAM_BYTES_USED_ = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilPackedMonotonicLongValues_class_());
+    OrgApacheLuceneUtilPackedMonotonicLongValues_BASE_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilPackedMonotonicLongValues_class_());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilPackedMonotonicLongValues)
   }
 }
@@ -70,7 +72,7 @@ withOrgApacheLuceneUtilPackedPackedInts_ReaderArray:(IOSObjectArray *)values
     { "decodeBlockWithInt:withLongArray:", "decodeBlock", "I", 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "BASE_RAM_BYTES_USED_", NULL, 0x1a, "J", &OrgApacheLuceneUtilPackedMonotonicLongValues_BASE_RAM_BYTES_USED_, NULL, .constantValue.asLong = 0 },
+    { "BASE_RAM_BYTES_USED", "BASE_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneUtilPackedMonotonicLongValues_BASE_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
     { "averages_", NULL, 0x10, "[F", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.packed.MonotonicLongValues$Builder;"};
@@ -87,9 +89,11 @@ void OrgApacheLuceneUtilPackedMonotonicLongValues_initWithInt_withInt_withOrgApa
 }
 
 OrgApacheLuceneUtilPackedMonotonicLongValues *new_OrgApacheLuceneUtilPackedMonotonicLongValues_initWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLongArray_withFloatArray_withLong_withLong_(jint pageShift, jint pageMask, IOSObjectArray *values, IOSLongArray *mins, IOSFloatArray *averages, jlong size, jlong ramBytesUsed) {
-  OrgApacheLuceneUtilPackedMonotonicLongValues *self = [OrgApacheLuceneUtilPackedMonotonicLongValues alloc];
-  OrgApacheLuceneUtilPackedMonotonicLongValues_initWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLongArray_withFloatArray_withLong_withLong_(self, pageShift, pageMask, values, mins, averages, size, ramBytesUsed);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedMonotonicLongValues, initWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLongArray_withFloatArray_withLong_withLong_, pageShift, pageMask, values, mins, averages, size, ramBytesUsed)
+}
+
+OrgApacheLuceneUtilPackedMonotonicLongValues *create_OrgApacheLuceneUtilPackedMonotonicLongValues_initWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLongArray_withFloatArray_withLong_withLong_(jint pageShift, jint pageMask, IOSObjectArray *values, IOSLongArray *mins, IOSFloatArray *averages, jlong size, jlong ramBytesUsed) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedMonotonicLongValues, initWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLongArray_withFloatArray_withLong_withLong_, pageShift, pageMask, values, mins, averages, size, ramBytesUsed)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedMonotonicLongValues)
@@ -105,7 +109,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPackedMonotonicLongValues_Builder)
 }
 
 - (jlong)baseRamBytesUsed {
-  return OrgApacheLuceneUtilPackedMonotonicLongValues_Builder_BASE_RAM_BYTES_USED_;
+  return OrgApacheLuceneUtilPackedMonotonicLongValues_Builder_BASE_RAM_BYTES_USED;
 }
 
 - (OrgApacheLuceneUtilPackedMonotonicLongValues *)build {
@@ -114,8 +118,8 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPackedMonotonicLongValues_Builder)
   IOSObjectArray *values = JavaUtilArrays_copyOfWithNSObjectArray_withInt_(self->values_, valuesOff_);
   IOSLongArray *mins = JavaUtilArrays_copyOfWithLongArray_withInt_(self->mins_, valuesOff_);
   IOSFloatArray *averages = JavaUtilArrays_copyOfWithFloatArray_withInt_(self->averages_, valuesOff_);
-  jlong ramBytesUsed = JreLoadStatic(OrgApacheLuceneUtilPackedMonotonicLongValues, BASE_RAM_BYTES_USED_) + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithOrgApacheLuceneUtilAccountableArray_(values) + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithLongArray_(mins) + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithFloatArray_(averages);
-  return [new_OrgApacheLuceneUtilPackedMonotonicLongValues_initWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLongArray_withFloatArray_withLong_withLong_(pageShift_, pageMask_, values, mins, averages, size_, ramBytesUsed) autorelease];
+  jlong ramBytesUsed = JreLoadStatic(OrgApacheLuceneUtilPackedMonotonicLongValues, BASE_RAM_BYTES_USED) + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithOrgApacheLuceneUtilAccountableArray_(values) + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithLongArray_(mins) + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithFloatArray_(averages);
+  return create_OrgApacheLuceneUtilPackedMonotonicLongValues_initWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_ReaderArray_withLongArray_withFloatArray_withLong_withLong_(pageShift_, pageMask_, values, mins, averages, size_, ramBytesUsed);
 }
 
 - (void)packWithLongArray:(IOSLongArray *)values
@@ -144,7 +148,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPackedMonotonicLongValues_Builder)
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilPackedMonotonicLongValues_Builder class]) {
-    OrgApacheLuceneUtilPackedMonotonicLongValues_Builder_BASE_RAM_BYTES_USED_ = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilPackedMonotonicLongValues_Builder_class_());
+    OrgApacheLuceneUtilPackedMonotonicLongValues_Builder_BASE_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilPackedMonotonicLongValues_Builder_class_());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilPackedMonotonicLongValues_Builder)
   }
 }
@@ -158,7 +162,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPackedMonotonicLongValues_Builder)
     { "growWithInt:", "grow", "V", 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "BASE_RAM_BYTES_USED_", NULL, 0x1a, "J", &OrgApacheLuceneUtilPackedMonotonicLongValues_Builder_BASE_RAM_BYTES_USED_, NULL, .constantValue.asLong = 0 },
+    { "BASE_RAM_BYTES_USED", "BASE_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneUtilPackedMonotonicLongValues_Builder_BASE_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
     { "averages_", NULL, 0x0, "[F", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedMonotonicLongValues_Builder = { 2, "Builder", "org.apache.lucene.util.packed", "MonotonicLongValues", 0x8, 5, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
@@ -174,9 +178,11 @@ void OrgApacheLuceneUtilPackedMonotonicLongValues_Builder_initWithInt_withFloat_
 }
 
 OrgApacheLuceneUtilPackedMonotonicLongValues_Builder *new_OrgApacheLuceneUtilPackedMonotonicLongValues_Builder_initWithInt_withFloat_(jint pageSize, jfloat acceptableOverheadRatio) {
-  OrgApacheLuceneUtilPackedMonotonicLongValues_Builder *self = [OrgApacheLuceneUtilPackedMonotonicLongValues_Builder alloc];
-  OrgApacheLuceneUtilPackedMonotonicLongValues_Builder_initWithInt_withFloat_(self, pageSize, acceptableOverheadRatio);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedMonotonicLongValues_Builder, initWithInt_withFloat_, pageSize, acceptableOverheadRatio)
+}
+
+OrgApacheLuceneUtilPackedMonotonicLongValues_Builder *create_OrgApacheLuceneUtilPackedMonotonicLongValues_Builder_initWithInt_withFloat_(jint pageSize, jfloat acceptableOverheadRatio) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedMonotonicLongValues_Builder, initWithInt_withFloat_, pageSize, acceptableOverheadRatio)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedMonotonicLongValues_Builder)

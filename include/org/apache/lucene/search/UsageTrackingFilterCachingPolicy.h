@@ -5,31 +5,49 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_INCLUDE_ALL")
-#if OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_RESTRICT
-#define OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy")
+#ifdef RESTRICT_OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy
+#define INCLUDE_ALL_OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy 0
 #else
-#define OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy 1
 #endif
-#undef OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy
 
-#if !defined (_OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_) && (OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_INCLUDE_ALL || OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_INCLUDE)
-#define _OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_
+#if !defined (OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_) && (INCLUDE_ALL_OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy || defined(INCLUDE_OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy))
+#define OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_
 
-#define OrgApacheLuceneSearchFilterCachingPolicy_RESTRICT 1
-#define OrgApacheLuceneSearchFilterCachingPolicy_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchFilterCachingPolicy 1
+#define INCLUDE_OrgApacheLuceneSearchFilterCachingPolicy 1
 #include "org/apache/lucene/search/FilterCachingPolicy.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneSearchDocIdSet;
 @class OrgApacheLuceneSearchFilter;
 
+/*!
+ @brief A <code>FilterCachingPolicy</code> that tracks usage statistics of recently-used
+ filters in order to decide on which filters are worth caching.
+ It also uses some heuristics on segments, filters and the doc id sets that
+ they produce in order to cache more aggressively when the execution cost
+ significantly outweighs the caching overhead.
+ */
 @interface OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy : NSObject < OrgApacheLuceneSearchFilterCachingPolicy >
 
 #pragma mark Public
 
+/*!
+ @brief Create a new instance with sensible defaults.
+ */
 - (instancetype)init;
 
+/*!
+ @brief Create a new instance.
+ @param minSizeRatio              the minimum size ratio for segments to be cached, see <code>FilterCachingPolicy.CacheOnLargeSegments</code>
+ @param historySize               the number of recently used filters to track
+ @param minFrequencyCostlyFilters how many times filters whose <code>getDocIdSet</code> method is expensive should have been seen before being cached
+ @param minFrequencyCheapFilters  how many times filters that produce <code>DocIdSet</code>s that are cheap to cached should have been seen before being cached
+ @param minFrequencyOtherFilters  how many times other filters should have been seen before being cached
+ */
 - (instancetype)initWithFloat:(jfloat)minSizeRatio
                       withInt:(jint)historySize
                       withInt:(jint)minFrequencyCostlyFilters
@@ -60,12 +78,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_ini
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy *new_OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_initWithFloat_withInt_withInt_withInt_withInt_(jfloat minSizeRatio, jint historySize, jint minFrequencyCostlyFilters, jint minFrequencyCheapFilters, jint minFrequencyOtherFilters) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy *create_OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_initWithFloat_withInt_withInt_withInt_withInt_(jfloat minSizeRatio, jint historySize, jint minFrequencyCostlyFilters, jint minFrequencyCheapFilters, jint minFrequencyOtherFilters);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_init(OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy *new_OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy *create_OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_init();
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy")

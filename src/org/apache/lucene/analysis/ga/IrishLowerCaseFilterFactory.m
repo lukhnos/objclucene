@@ -20,7 +20,7 @@
 }
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  return [new_OrgApacheLuceneAnalysisGaIrishLowerCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(input) autorelease];
+  return create_OrgApacheLuceneAnalysisGaIrishLowerCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(input);
 }
 
 - (OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory *)getMultiTermComponent {
@@ -29,7 +29,7 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "IrishLowerCaseFilterFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "IrishLowerCaseFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenStream;", 0x1, NULL, NULL },
     { "getMultiTermComponent", NULL, "Lorg.apache.lucene.analysis.util.AbstractAnalysisFactory;", 0x1, NULL, NULL },
   };
@@ -42,14 +42,16 @@
 void OrgApacheLuceneAnalysisGaIrishLowerCaseFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisGaIrishLowerCaseFilterFactory *self, id<JavaUtilMap> args) {
   OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisGaIrishLowerCaseFilterFactory *new_OrgApacheLuceneAnalysisGaIrishLowerCaseFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisGaIrishLowerCaseFilterFactory *self = [OrgApacheLuceneAnalysisGaIrishLowerCaseFilterFactory alloc];
-  OrgApacheLuceneAnalysisGaIrishLowerCaseFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisGaIrishLowerCaseFilterFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisGaIrishLowerCaseFilterFactory *create_OrgApacheLuceneAnalysisGaIrishLowerCaseFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisGaIrishLowerCaseFilterFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisGaIrishLowerCaseFilterFactory)

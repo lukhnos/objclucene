@@ -5,25 +5,33 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_INCLUDE_ALL")
-#if OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_RESTRICT
-#define OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper")
+#ifdef RESTRICT_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper
+#define INCLUDE_ALL_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper 0
 #else
-#define OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper 1
 #endif
-#undef OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper
 
-#if !defined (_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_) && (OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_INCLUDE_ALL || OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_INCLUDE)
-#define _OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_
+#if !defined (OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_) && (INCLUDE_ALL_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper || defined(INCLUDE_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper))
+#define OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_
 
-#define OrgApacheLuceneSearchQuery_RESTRICT 1
-#define OrgApacheLuceneSearchQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchQuery 1
+#define INCLUDE_OrgApacheLuceneSearchQuery 1
 #include "org/apache/lucene/search/Query.h"
 
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchMultiTermQuery;
 @class OrgApacheLuceneSearchWeight;
 
+/*!
+ @brief This class also provides the functionality behind
+ <code>MultiTermQuery.CONSTANT_SCORE_REWRITE</code>.
+ It tries to rewrite per-segment as a boolean query
+ that returns a constant score and otherwise fills a
+ bit set with matches and builds a Scorer on top of
+ this bit set.
+ */
 @interface OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper : OrgApacheLuceneSearchQuery {
  @public
   OrgApacheLuceneSearchMultiTermQuery *query_;
@@ -36,6 +44,9 @@
 
 - (jboolean)isEqual:(id)o;
 
+/*!
+ @brief Returns the field name for this query
+ */
 - (NSString *)getField;
 
 - (NSUInteger)hash;
@@ -44,6 +55,9 @@
 
 #pragma mark Protected
 
+/*!
+ @brief Wrap a <code>MultiTermQuery</code> as a Filter.
+ */
 - (instancetype)initWithOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query;
 
 @end
@@ -56,8 +70,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_i
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper *new_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_initWithOrgApacheLuceneSearchMultiTermQuery_(OrgApacheLuceneSearchMultiTermQuery *query) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper *create_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_initWithOrgApacheLuceneSearchMultiTermQuery_(OrgApacheLuceneSearchMultiTermQuery *query);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper")

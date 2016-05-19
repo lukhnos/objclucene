@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSuggestBufferedInputIterator_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSuggestBufferedInputIterator_RESTRICT
-#define OrgApacheLuceneSearchSuggestBufferedInputIterator_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestBufferedInputIterator")
+#ifdef RESTRICT_OrgApacheLuceneSearchSuggestBufferedInputIterator
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestBufferedInputIterator 0
 #else
-#define OrgApacheLuceneSearchSuggestBufferedInputIterator_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestBufferedInputIterator 1
 #endif
-#undef OrgApacheLuceneSearchSuggestBufferedInputIterator_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSuggestBufferedInputIterator
 
-#if !defined (_OrgApacheLuceneSearchSuggestBufferedInputIterator_) && (OrgApacheLuceneSearchSuggestBufferedInputIterator_INCLUDE_ALL || OrgApacheLuceneSearchSuggestBufferedInputIterator_INCLUDE)
-#define _OrgApacheLuceneSearchSuggestBufferedInputIterator_
+#if !defined (OrgApacheLuceneSearchSuggestBufferedInputIterator_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestBufferedInputIterator || defined(INCLUDE_OrgApacheLuceneSearchSuggestBufferedInputIterator))
+#define OrgApacheLuceneSearchSuggestBufferedInputIterator_
 
-#define OrgApacheLuceneSearchSuggestInputIterator_RESTRICT 1
-#define OrgApacheLuceneSearchSuggestInputIterator_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSuggestInputIterator 1
+#define INCLUDE_OrgApacheLuceneSearchSuggestInputIterator 1
 #include "org/apache/lucene/search/suggest/InputIterator.h"
 
 @class IOSLongArray;
@@ -26,17 +26,38 @@
 @protocol JavaUtilList;
 @protocol JavaUtilSet;
 
+/*!
+ @brief This wrapper buffers incoming elements.
+ */
 @interface OrgApacheLuceneSearchSuggestBufferedInputIterator : NSObject < OrgApacheLuceneSearchSuggestInputIterator > {
  @public
+  /*!
+   @brief buffered term entries
+   */
   OrgApacheLuceneUtilBytesRefArray *entries_;
+  /*!
+   @brief buffered payload entries
+   */
   OrgApacheLuceneUtilBytesRefArray *payloads_;
+  /*!
+   @brief buffered context set entries
+   */
   id<JavaUtilList> contextSets_;
+  /*!
+   @brief current buffer position
+   */
   jint curPos_;
+  /*!
+   @brief buffered weights, parallel with <code>entries</code>
+   */
   IOSLongArray *freqs_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new iterator, buffering entries from the specified iterator
+ */
 - (instancetype)initWithOrgApacheLuceneSearchSuggestInputIterator:(id<OrgApacheLuceneSearchSuggestInputIterator>)source;
 
 - (id<JavaUtilSet>)contexts;
@@ -64,8 +85,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestBufferedInputIterator_initWit
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestBufferedInputIterator *new_OrgApacheLuceneSearchSuggestBufferedInputIterator_initWithOrgApacheLuceneSearchSuggestInputIterator_(id<OrgApacheLuceneSearchSuggestInputIterator> source) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestBufferedInputIterator *create_OrgApacheLuceneSearchSuggestBufferedInputIterator_initWithOrgApacheLuceneSearchSuggestInputIterator_(id<OrgApacheLuceneSearchSuggestInputIterator> source);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestBufferedInputIterator)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSuggestBufferedInputIterator_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestBufferedInputIterator")

@@ -16,13 +16,13 @@
 }
 
 - (void)copy__WithOrgApacheLuceneUtilMutableMutableValue:(OrgApacheLuceneUtilMutableMutableValue *)source {
-  OrgApacheLuceneUtilMutableMutableValueFloat *s = (OrgApacheLuceneUtilMutableMutableValueFloat *) check_class_cast(source, [OrgApacheLuceneUtilMutableMutableValueFloat class]);
+  OrgApacheLuceneUtilMutableMutableValueFloat *s = (OrgApacheLuceneUtilMutableMutableValueFloat *) cast_chk(source, [OrgApacheLuceneUtilMutableMutableValueFloat class]);
   value_ = ((OrgApacheLuceneUtilMutableMutableValueFloat *) nil_chk(s))->value_;
   exists_ = s->exists_;
 }
 
 - (OrgApacheLuceneUtilMutableMutableValue *)duplicate {
-  OrgApacheLuceneUtilMutableMutableValueFloat *v = [new_OrgApacheLuceneUtilMutableMutableValueFloat_init() autorelease];
+  OrgApacheLuceneUtilMutableMutableValueFloat *v = create_OrgApacheLuceneUtilMutableMutableValueFloat_init();
   v->value_ = self->value_;
   v->exists_ = self->exists_;
   return v;
@@ -30,13 +30,13 @@
 
 - (jboolean)equalsSameTypeWithId:(id)other {
   JreAssert((exists_ || 0.0f == value_), (@"org/apache/lucene/util/mutable/MutableValueFloat.java:51 condition failed: assert exists || 0.0F == value;"));
-  OrgApacheLuceneUtilMutableMutableValueFloat *b = (OrgApacheLuceneUtilMutableMutableValueFloat *) check_class_cast(other, [OrgApacheLuceneUtilMutableMutableValueFloat class]);
+  OrgApacheLuceneUtilMutableMutableValueFloat *b = (OrgApacheLuceneUtilMutableMutableValueFloat *) cast_chk(other, [OrgApacheLuceneUtilMutableMutableValueFloat class]);
   return value_ == ((OrgApacheLuceneUtilMutableMutableValueFloat *) nil_chk(b))->value_ && exists_ == b->exists_;
 }
 
 - (jint)compareSameTypeWithId:(id)other {
   JreAssert((exists_ || 0.0f == value_), (@"org/apache/lucene/util/mutable/MutableValueFloat.java:58 condition failed: assert exists || 0.0F == value;"));
-  OrgApacheLuceneUtilMutableMutableValueFloat *b = (OrgApacheLuceneUtilMutableMutableValueFloat *) check_class_cast(other, [OrgApacheLuceneUtilMutableMutableValueFloat class]);
+  OrgApacheLuceneUtilMutableMutableValueFloat *b = (OrgApacheLuceneUtilMutableMutableValueFloat *) cast_chk(other, [OrgApacheLuceneUtilMutableMutableValueFloat class]);
   jint c = JavaLangFloat_compareWithFloat_withFloat_(value_, ((OrgApacheLuceneUtilMutableMutableValueFloat *) nil_chk(b))->value_);
   if (c != 0) return c;
   if (exists_ == b->exists_) return 0;
@@ -63,7 +63,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "equalsSameTypeWithId:", "equalsSameType", "Z", 0x1, NULL, NULL },
     { "compareSameTypeWithId:", "compareSameType", "I", 0x1, NULL, NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "MutableValueFloat", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "value_", NULL, 0x1, "F", NULL, NULL, .constantValue.asLong = 0 },
@@ -79,9 +79,11 @@ void OrgApacheLuceneUtilMutableMutableValueFloat_init(OrgApacheLuceneUtilMutable
 }
 
 OrgApacheLuceneUtilMutableMutableValueFloat *new_OrgApacheLuceneUtilMutableMutableValueFloat_init() {
-  OrgApacheLuceneUtilMutableMutableValueFloat *self = [OrgApacheLuceneUtilMutableMutableValueFloat alloc];
-  OrgApacheLuceneUtilMutableMutableValueFloat_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilMutableMutableValueFloat, init)
+}
+
+OrgApacheLuceneUtilMutableMutableValueFloat *create_OrgApacheLuceneUtilMutableMutableValueFloat_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilMutableMutableValueFloat, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilMutableMutableValueFloat)

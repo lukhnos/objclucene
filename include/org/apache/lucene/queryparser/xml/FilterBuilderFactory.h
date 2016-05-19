@@ -5,25 +5,28 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserXmlFilterBuilderFactory_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserXmlFilterBuilderFactory_RESTRICT
-#define OrgApacheLuceneQueryparserXmlFilterBuilderFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlFilterBuilderFactory")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserXmlFilterBuilderFactory
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlFilterBuilderFactory 0
 #else
-#define OrgApacheLuceneQueryparserXmlFilterBuilderFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlFilterBuilderFactory 1
 #endif
-#undef OrgApacheLuceneQueryparserXmlFilterBuilderFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserXmlFilterBuilderFactory
 
-#if !defined (_OrgApacheLuceneQueryparserXmlFilterBuilderFactory_) && (OrgApacheLuceneQueryparserXmlFilterBuilderFactory_INCLUDE_ALL || OrgApacheLuceneQueryparserXmlFilterBuilderFactory_INCLUDE)
-#define _OrgApacheLuceneQueryparserXmlFilterBuilderFactory_
+#if !defined (OrgApacheLuceneQueryparserXmlFilterBuilderFactory_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlFilterBuilderFactory || defined(INCLUDE_OrgApacheLuceneQueryparserXmlFilterBuilderFactory))
+#define OrgApacheLuceneQueryparserXmlFilterBuilderFactory_
 
-#define OrgApacheLuceneQueryparserXmlFilterBuilder_RESTRICT 1
-#define OrgApacheLuceneQueryparserXmlFilterBuilder_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserXmlFilterBuilder 1
+#define INCLUDE_OrgApacheLuceneQueryparserXmlFilterBuilder 1
 #include "org/apache/lucene/queryparser/xml/FilterBuilder.h"
 
 @class JavaUtilHashMap;
 @class OrgApacheLuceneSearchFilter;
 @protocol OrgW3cDomElement;
 
+/*!
+ @brief Factory for <code>FilterBuilder</code>
+ */
 @interface OrgApacheLuceneQueryparserXmlFilterBuilderFactory : NSObject < OrgApacheLuceneQueryparserXmlFilterBuilder > {
  @public
   JavaUtilHashMap *builders_;
@@ -50,8 +53,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlFilterBuilderFactory_init(Or
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlFilterBuilderFactory *new_OrgApacheLuceneQueryparserXmlFilterBuilderFactory_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlFilterBuilderFactory *create_OrgApacheLuceneQueryparserXmlFilterBuilderFactory_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlFilterBuilderFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserXmlFilterBuilderFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlFilterBuilderFactory")

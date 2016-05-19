@@ -33,6 +33,9 @@
 
 @interface OrgApacheLuceneIndexSlowCodecReaderWrapper ()
 
+/*!
+ @brief No instantiation
+ */
 - (instancetype)init;
 
 + (OrgApacheLuceneCodecsNormsProducer *)readerToNormsProducerWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader;
@@ -50,6 +53,8 @@
 __attribute__((unused)) static void OrgApacheLuceneIndexSlowCodecReaderWrapper_init(OrgApacheLuceneIndexSlowCodecReaderWrapper *self);
 
 __attribute__((unused)) static OrgApacheLuceneIndexSlowCodecReaderWrapper *new_OrgApacheLuceneIndexSlowCodecReaderWrapper_init() NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexSlowCodecReaderWrapper *create_OrgApacheLuceneIndexSlowCodecReaderWrapper_init();
 
 __attribute__((unused)) static OrgApacheLuceneCodecsNormsProducer *OrgApacheLuceneIndexSlowCodecReaderWrapper_readerToNormsProducerWithOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneIndexLeafReader *reader);
 
@@ -100,6 +105,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSlowCodecReaderWrapper_$
 
 __attribute__((unused)) static OrgApacheLuceneIndexSlowCodecReaderWrapper_$1 *new_OrgApacheLuceneIndexSlowCodecReaderWrapper_$1_initWithOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneIndexLeafReader *capture$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexSlowCodecReaderWrapper_$1 *create_OrgApacheLuceneIndexSlowCodecReaderWrapper_$1_initWithOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneIndexLeafReader *capture$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSlowCodecReaderWrapper_$1)
 
 @interface OrgApacheLuceneIndexSlowCodecReaderWrapper_$2 : OrgApacheLuceneCodecsNormsProducer {
@@ -128,6 +135,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSlowCodecReaderWrapper_$2, val$reader_, 
 __attribute__((unused)) static void OrgApacheLuceneIndexSlowCodecReaderWrapper_$2_initWithOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneIndexSlowCodecReaderWrapper_$2 *self, OrgApacheLuceneIndexLeafReader *capture$0);
 
 __attribute__((unused)) static OrgApacheLuceneIndexSlowCodecReaderWrapper_$2 *new_OrgApacheLuceneIndexSlowCodecReaderWrapper_$2_initWithOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneIndexLeafReader *capture$0) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexSlowCodecReaderWrapper_$2 *create_OrgApacheLuceneIndexSlowCodecReaderWrapper_$2_initWithOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneIndexLeafReader *capture$0);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSlowCodecReaderWrapper_$2)
 
@@ -168,6 +177,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSlowCodecReaderWrapper_$
 
 __attribute__((unused)) static OrgApacheLuceneIndexSlowCodecReaderWrapper_$3 *new_OrgApacheLuceneIndexSlowCodecReaderWrapper_$3_initWithOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneIndexLeafReader *capture$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexSlowCodecReaderWrapper_$3 *create_OrgApacheLuceneIndexSlowCodecReaderWrapper_$3_initWithOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneIndexLeafReader *capture$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSlowCodecReaderWrapper_$3)
 
 @interface OrgApacheLuceneIndexSlowCodecReaderWrapper_$4 : OrgApacheLuceneCodecsStoredFieldsReader {
@@ -200,6 +211,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSlowCodecReaderWrapper_$
 
 __attribute__((unused)) static OrgApacheLuceneIndexSlowCodecReaderWrapper_$4 *new_OrgApacheLuceneIndexSlowCodecReaderWrapper_$4_initWithOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneIndexLeafReader *capture$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexSlowCodecReaderWrapper_$4 *create_OrgApacheLuceneIndexSlowCodecReaderWrapper_$4_initWithOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneIndexLeafReader *capture$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSlowCodecReaderWrapper_$4)
 
 @interface OrgApacheLuceneIndexSlowCodecReaderWrapper_$5 : OrgApacheLuceneCodecsTermVectorsReader {
@@ -231,6 +244,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSlowCodecReaderWrapper_$
 
 __attribute__((unused)) static OrgApacheLuceneIndexSlowCodecReaderWrapper_$5 *new_OrgApacheLuceneIndexSlowCodecReaderWrapper_$5_initWithOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneIndexLeafReader *capture$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexSlowCodecReaderWrapper_$5 *create_OrgApacheLuceneIndexSlowCodecReaderWrapper_$5_initWithOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneIndexLeafReader *capture$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSlowCodecReaderWrapper_$5)
 
 @interface OrgApacheLuceneIndexSlowCodecReaderWrapper_$6 : OrgApacheLuceneCodecsFieldsProducer {
@@ -254,7 +269,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSlowCodecReaderWrapper_$5)
 
 - (instancetype)initWithOrgApacheLuceneIndexFields:(OrgApacheLuceneIndexFields *)capture$0;
 
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexSlowCodecReaderWrapper_$6)
@@ -264,6 +278,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSlowCodecReaderWrapper_$6, val$fields_, 
 __attribute__((unused)) static void OrgApacheLuceneIndexSlowCodecReaderWrapper_$6_initWithOrgApacheLuceneIndexFields_(OrgApacheLuceneIndexSlowCodecReaderWrapper_$6 *self, OrgApacheLuceneIndexFields *capture$0);
 
 __attribute__((unused)) static OrgApacheLuceneIndexSlowCodecReaderWrapper_$6 *new_OrgApacheLuceneIndexSlowCodecReaderWrapper_$6_initWithOrgApacheLuceneIndexFields_(OrgApacheLuceneIndexFields *capture$0) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexSlowCodecReaderWrapper_$6 *create_OrgApacheLuceneIndexSlowCodecReaderWrapper_$6_initWithOrgApacheLuceneIndexFields_(OrgApacheLuceneIndexFields *capture$0);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSlowCodecReaderWrapper_$6)
 
@@ -321,46 +337,48 @@ void OrgApacheLuceneIndexSlowCodecReaderWrapper_init(OrgApacheLuceneIndexSlowCod
 }
 
 OrgApacheLuceneIndexSlowCodecReaderWrapper *new_OrgApacheLuceneIndexSlowCodecReaderWrapper_init() {
-  OrgApacheLuceneIndexSlowCodecReaderWrapper *self = [OrgApacheLuceneIndexSlowCodecReaderWrapper alloc];
-  OrgApacheLuceneIndexSlowCodecReaderWrapper_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSlowCodecReaderWrapper, init)
+}
+
+OrgApacheLuceneIndexSlowCodecReaderWrapper *create_OrgApacheLuceneIndexSlowCodecReaderWrapper_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSlowCodecReaderWrapper, init)
 }
 
 OrgApacheLuceneIndexCodecReader *OrgApacheLuceneIndexSlowCodecReaderWrapper_wrapWithOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneIndexLeafReader *reader) {
   OrgApacheLuceneIndexSlowCodecReaderWrapper_initialize();
   if ([reader isKindOfClass:[OrgApacheLuceneIndexCodecReader class]]) {
-    return (OrgApacheLuceneIndexCodecReader *) check_class_cast(reader, [OrgApacheLuceneIndexCodecReader class]);
+    return (OrgApacheLuceneIndexCodecReader *) cast_chk(reader, [OrgApacheLuceneIndexCodecReader class]);
   }
   else {
     [((OrgApacheLuceneIndexLeafReader *) nil_chk(reader)) checkIntegrity];
-    return [new_OrgApacheLuceneIndexSlowCodecReaderWrapper_$1_initWithOrgApacheLuceneIndexLeafReader_(reader) autorelease];
+    return create_OrgApacheLuceneIndexSlowCodecReaderWrapper_$1_initWithOrgApacheLuceneIndexLeafReader_(reader);
   }
 }
 
 OrgApacheLuceneCodecsNormsProducer *OrgApacheLuceneIndexSlowCodecReaderWrapper_readerToNormsProducerWithOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneIndexLeafReader *reader) {
   OrgApacheLuceneIndexSlowCodecReaderWrapper_initialize();
-  return [new_OrgApacheLuceneIndexSlowCodecReaderWrapper_$2_initWithOrgApacheLuceneIndexLeafReader_(reader) autorelease];
+  return create_OrgApacheLuceneIndexSlowCodecReaderWrapper_$2_initWithOrgApacheLuceneIndexLeafReader_(reader);
 }
 
 OrgApacheLuceneCodecsDocValuesProducer *OrgApacheLuceneIndexSlowCodecReaderWrapper_readerToDocValuesProducerWithOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneIndexLeafReader *reader) {
   OrgApacheLuceneIndexSlowCodecReaderWrapper_initialize();
-  return [new_OrgApacheLuceneIndexSlowCodecReaderWrapper_$3_initWithOrgApacheLuceneIndexLeafReader_(reader) autorelease];
+  return create_OrgApacheLuceneIndexSlowCodecReaderWrapper_$3_initWithOrgApacheLuceneIndexLeafReader_(reader);
 }
 
 OrgApacheLuceneCodecsStoredFieldsReader *OrgApacheLuceneIndexSlowCodecReaderWrapper_readerToStoredFieldsReaderWithOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneIndexLeafReader *reader) {
   OrgApacheLuceneIndexSlowCodecReaderWrapper_initialize();
-  return [new_OrgApacheLuceneIndexSlowCodecReaderWrapper_$4_initWithOrgApacheLuceneIndexLeafReader_(reader) autorelease];
+  return create_OrgApacheLuceneIndexSlowCodecReaderWrapper_$4_initWithOrgApacheLuceneIndexLeafReader_(reader);
 }
 
 OrgApacheLuceneCodecsTermVectorsReader *OrgApacheLuceneIndexSlowCodecReaderWrapper_readerToTermVectorsReaderWithOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneIndexLeafReader *reader) {
   OrgApacheLuceneIndexSlowCodecReaderWrapper_initialize();
-  return [new_OrgApacheLuceneIndexSlowCodecReaderWrapper_$5_initWithOrgApacheLuceneIndexLeafReader_(reader) autorelease];
+  return create_OrgApacheLuceneIndexSlowCodecReaderWrapper_$5_initWithOrgApacheLuceneIndexLeafReader_(reader);
 }
 
 OrgApacheLuceneCodecsFieldsProducer *OrgApacheLuceneIndexSlowCodecReaderWrapper_readerToFieldsProducerWithOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneIndexLeafReader *reader) {
   OrgApacheLuceneIndexSlowCodecReaderWrapper_initialize();
   OrgApacheLuceneIndexFields *fields = [((OrgApacheLuceneIndexLeafReader *) nil_chk(reader)) fields];
-  return [new_OrgApacheLuceneIndexSlowCodecReaderWrapper_$6_initWithOrgApacheLuceneIndexFields_(fields) autorelease];
+  return create_OrgApacheLuceneIndexSlowCodecReaderWrapper_$6_initWithOrgApacheLuceneIndexFields_(fields);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSlowCodecReaderWrapper)
@@ -393,7 +411,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSlowCodecReaderWrapper)
     return OrgApacheLuceneIndexSlowCodecReaderWrapper_readerToFieldsProducerWithOrgApacheLuceneIndexLeafReader_(val$reader_);
   }
   @catch (JavaIoIOException *bogus) {
-    @throw [new_JavaLangAssertionError_initWithId_(bogus) autorelease];
+    @throw create_JavaLangAssertionError_initWithId_(bogus);
   }
 }
 
@@ -462,9 +480,11 @@ void OrgApacheLuceneIndexSlowCodecReaderWrapper_$1_initWithOrgApacheLuceneIndexL
 }
 
 OrgApacheLuceneIndexSlowCodecReaderWrapper_$1 *new_OrgApacheLuceneIndexSlowCodecReaderWrapper_$1_initWithOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneIndexLeafReader *capture$0) {
-  OrgApacheLuceneIndexSlowCodecReaderWrapper_$1 *self = [OrgApacheLuceneIndexSlowCodecReaderWrapper_$1 alloc];
-  OrgApacheLuceneIndexSlowCodecReaderWrapper_$1_initWithOrgApacheLuceneIndexLeafReader_(self, capture$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSlowCodecReaderWrapper_$1, initWithOrgApacheLuceneIndexLeafReader_, capture$0)
+}
+
+OrgApacheLuceneIndexSlowCodecReaderWrapper_$1 *create_OrgApacheLuceneIndexSlowCodecReaderWrapper_$1_initWithOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneIndexLeafReader *capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSlowCodecReaderWrapper_$1, initWithOrgApacheLuceneIndexLeafReader_, capture$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSlowCodecReaderWrapper_$1)
@@ -505,7 +525,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSlowCodecReaderWrapper_$1)
     { "checkIntegrity", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
     { "close", NULL, "V", 0x1, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
     { "initWithOrgApacheLuceneIndexLeafReader:", "", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -524,9 +544,11 @@ void OrgApacheLuceneIndexSlowCodecReaderWrapper_$2_initWithOrgApacheLuceneIndexL
 }
 
 OrgApacheLuceneIndexSlowCodecReaderWrapper_$2 *new_OrgApacheLuceneIndexSlowCodecReaderWrapper_$2_initWithOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneIndexLeafReader *capture$0) {
-  OrgApacheLuceneIndexSlowCodecReaderWrapper_$2 *self = [OrgApacheLuceneIndexSlowCodecReaderWrapper_$2 alloc];
-  OrgApacheLuceneIndexSlowCodecReaderWrapper_$2_initWithOrgApacheLuceneIndexLeafReader_(self, capture$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSlowCodecReaderWrapper_$2, initWithOrgApacheLuceneIndexLeafReader_, capture$0)
+}
+
+OrgApacheLuceneIndexSlowCodecReaderWrapper_$2 *create_OrgApacheLuceneIndexSlowCodecReaderWrapper_$2_initWithOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneIndexLeafReader *capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSlowCodecReaderWrapper_$2, initWithOrgApacheLuceneIndexLeafReader_, capture$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSlowCodecReaderWrapper_$2)
@@ -592,7 +614,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSlowCodecReaderWrapper_$2)
     { "checkIntegrity", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
     { "close", NULL, "V", 0x1, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
     { "initWithOrgApacheLuceneIndexLeafReader:", "", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -611,9 +633,11 @@ void OrgApacheLuceneIndexSlowCodecReaderWrapper_$3_initWithOrgApacheLuceneIndexL
 }
 
 OrgApacheLuceneIndexSlowCodecReaderWrapper_$3 *new_OrgApacheLuceneIndexSlowCodecReaderWrapper_$3_initWithOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneIndexLeafReader *capture$0) {
-  OrgApacheLuceneIndexSlowCodecReaderWrapper_$3 *self = [OrgApacheLuceneIndexSlowCodecReaderWrapper_$3 alloc];
-  OrgApacheLuceneIndexSlowCodecReaderWrapper_$3_initWithOrgApacheLuceneIndexLeafReader_(self, capture$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSlowCodecReaderWrapper_$3, initWithOrgApacheLuceneIndexLeafReader_, capture$0)
+}
+
+OrgApacheLuceneIndexSlowCodecReaderWrapper_$3 *create_OrgApacheLuceneIndexSlowCodecReaderWrapper_$3_initWithOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneIndexLeafReader *capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSlowCodecReaderWrapper_$3, initWithOrgApacheLuceneIndexLeafReader_, capture$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSlowCodecReaderWrapper_$3)
@@ -660,7 +684,7 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
     { "checkIntegrity", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
     { "close", NULL, "V", 0x1, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
     { "initWithOrgApacheLuceneIndexLeafReader:", "", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -679,9 +703,11 @@ void OrgApacheLuceneIndexSlowCodecReaderWrapper_$4_initWithOrgApacheLuceneIndexL
 }
 
 OrgApacheLuceneIndexSlowCodecReaderWrapper_$4 *new_OrgApacheLuceneIndexSlowCodecReaderWrapper_$4_initWithOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneIndexLeafReader *capture$0) {
-  OrgApacheLuceneIndexSlowCodecReaderWrapper_$4 *self = [OrgApacheLuceneIndexSlowCodecReaderWrapper_$4 alloc];
-  OrgApacheLuceneIndexSlowCodecReaderWrapper_$4_initWithOrgApacheLuceneIndexLeafReader_(self, capture$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSlowCodecReaderWrapper_$4, initWithOrgApacheLuceneIndexLeafReader_, capture$0)
+}
+
+OrgApacheLuceneIndexSlowCodecReaderWrapper_$4 *create_OrgApacheLuceneIndexSlowCodecReaderWrapper_$4_initWithOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneIndexLeafReader *capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSlowCodecReaderWrapper_$4, initWithOrgApacheLuceneIndexLeafReader_, capture$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSlowCodecReaderWrapper_$4)
@@ -727,7 +753,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSlowCodecReaderWrapper_$4)
     { "checkIntegrity", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
     { "close", NULL, "V", 0x1, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
     { "initWithOrgApacheLuceneIndexLeafReader:", "", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -746,9 +772,11 @@ void OrgApacheLuceneIndexSlowCodecReaderWrapper_$5_initWithOrgApacheLuceneIndexL
 }
 
 OrgApacheLuceneIndexSlowCodecReaderWrapper_$5 *new_OrgApacheLuceneIndexSlowCodecReaderWrapper_$5_initWithOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneIndexLeafReader *capture$0) {
-  OrgApacheLuceneIndexSlowCodecReaderWrapper_$5 *self = [OrgApacheLuceneIndexSlowCodecReaderWrapper_$5 alloc];
-  OrgApacheLuceneIndexSlowCodecReaderWrapper_$5_initWithOrgApacheLuceneIndexLeafReader_(self, capture$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSlowCodecReaderWrapper_$5, initWithOrgApacheLuceneIndexLeafReader_, capture$0)
+}
+
+OrgApacheLuceneIndexSlowCodecReaderWrapper_$5 *create_OrgApacheLuceneIndexSlowCodecReaderWrapper_$5_initWithOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneIndexLeafReader *capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSlowCodecReaderWrapper_$5, initWithOrgApacheLuceneIndexLeafReader_, capture$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSlowCodecReaderWrapper_$5)
@@ -786,24 +814,24 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSlowCodecReaderWrapper_$5)
   return self;
 }
 
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
+  return JreDefaultFastEnumeration(self, state, stackbuf, len);
+}
+
 - (void)dealloc {
   RELEASE_(val$fields_);
   [super dealloc];
 }
 
-- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, NULL },
+    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<Ljava/lang/String;>;" },
     { "termsWithNSString:", "terms", "Lorg.apache.lucene.index.Terms;", 0x1, "Ljava.io.IOException;", NULL },
     { "size", NULL, "I", 0x1, NULL, NULL },
     { "checkIntegrity", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
     { "close", NULL, "V", 0x1, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
     { "initWithOrgApacheLuceneIndexFields:", "", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -822,9 +850,11 @@ void OrgApacheLuceneIndexSlowCodecReaderWrapper_$6_initWithOrgApacheLuceneIndexF
 }
 
 OrgApacheLuceneIndexSlowCodecReaderWrapper_$6 *new_OrgApacheLuceneIndexSlowCodecReaderWrapper_$6_initWithOrgApacheLuceneIndexFields_(OrgApacheLuceneIndexFields *capture$0) {
-  OrgApacheLuceneIndexSlowCodecReaderWrapper_$6 *self = [OrgApacheLuceneIndexSlowCodecReaderWrapper_$6 alloc];
-  OrgApacheLuceneIndexSlowCodecReaderWrapper_$6_initWithOrgApacheLuceneIndexFields_(self, capture$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexSlowCodecReaderWrapper_$6, initWithOrgApacheLuceneIndexFields_, capture$0)
+}
+
+OrgApacheLuceneIndexSlowCodecReaderWrapper_$6 *create_OrgApacheLuceneIndexSlowCodecReaderWrapper_$6_initWithOrgApacheLuceneIndexFields_(OrgApacheLuceneIndexFields *capture$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexSlowCodecReaderWrapper_$6, initWithOrgApacheLuceneIndexFields_, capture$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSlowCodecReaderWrapper_$6)

@@ -5,22 +5,22 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame_RESTRICT
-#define OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame")
+#ifdef RESTRICT_OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame
+#define INCLUDE_ALL_OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame 0
 #else
-#define OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame 1
 #endif
-#undef OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame
 
-#if !defined (_OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame_) && (OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame_INCLUDE_ALL || OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame_INCLUDE)
-#define _OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame_
+#if !defined (OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame_) && (INCLUDE_ALL_OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame || defined(INCLUDE_OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame))
+#define OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame_
 
 @class IOSByteArray;
 @class IOSLongArray;
 @class OrgApacheLuceneCodecsBlockTermState;
 @class OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum;
-@class OrgApacheLuceneIndexTermsEnum_SeekStatusEnum;
+@class OrgApacheLuceneIndexTermsEnum_SeekStatus;
 @class OrgApacheLuceneStoreByteArrayDataInput;
 @class OrgApacheLuceneUtilBytesRef;
 @class OrgApacheLuceneUtilFstFST_Arc;
@@ -31,6 +31,9 @@
   jboolean hasTerms_;
   jboolean hasTermsOrig_;
   jboolean isFloor_;
+  /*!
+   @brief Highest version of any term in this block.
+   */
   jlong maxIDVersion_;
   OrgApacheLuceneUtilFstFST_Arc *arc_;
   jlong fp_;
@@ -74,14 +77,14 @@
 
 - (void)scanToSubBlockWithLong:(jlong)subFP;
 
-- (OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *)scanToTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)target
+- (OrgApacheLuceneIndexTermsEnum_SeekStatus *)scanToTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)target
+                                                                            withBoolean:(jboolean)exactOnly;
+
+- (OrgApacheLuceneIndexTermsEnum_SeekStatus *)scanToTermLeafWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)target
                                                                                 withBoolean:(jboolean)exactOnly;
 
-- (OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *)scanToTermLeafWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)target
-                                                                                    withBoolean:(jboolean)exactOnly;
-
-- (OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *)scanToTermNonLeafWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)target
-                                                                                       withBoolean:(jboolean)exactOnly;
+- (OrgApacheLuceneIndexTermsEnum_SeekStatus *)scanToTermNonLeafWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)target
+                                                                                   withBoolean:(jboolean)exactOnly;
 
 - (void)setFloorDataWithOrgApacheLuceneStoreByteArrayDataInput:(OrgApacheLuceneStoreByteArrayDataInput *)inArg
                                withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)source;
@@ -112,8 +115,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFr
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame *new_OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame_initWithOrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum_withInt_(OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum *ste, jint ord) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame *create_OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame_initWithOrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum_withInt_(OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum *ste, jint ord);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame")

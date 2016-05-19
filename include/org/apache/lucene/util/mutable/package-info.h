@@ -3,14 +3,17 @@
 //  source: ./core/src/java/org/apache/lucene/util/mutable/package-info.java
 //
 
+/*!
+ @brief Comparable object wrappers
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilMutablePackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneUtilMutablePackage_info_RESTRICT
-#define OrgApacheLuceneUtilMutablePackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilMutablePackage_info")
+#ifdef RESTRICT_OrgApacheLuceneUtilMutablePackage_info
+#define INCLUDE_ALL_OrgApacheLuceneUtilMutablePackage_info 0
 #else
-#define OrgApacheLuceneUtilMutablePackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilMutablePackage_info 1
 #endif
-#undef OrgApacheLuceneUtilMutablePackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilMutablePackage_info
 
-#pragma pop_macro("OrgApacheLuceneUtilMutablePackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilMutablePackage_info")

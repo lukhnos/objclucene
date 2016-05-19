@@ -15,10 +15,10 @@
 
 @interface OrgApacheLuceneIndexFieldInfo () {
  @public
-  OrgApacheLuceneIndexDocValuesTypeEnum *docValuesType_;
+  OrgApacheLuceneIndexDocValuesType *docValuesType_;
   jboolean storeTermVector_;
   jboolean omitNorms_;
-  OrgApacheLuceneIndexIndexOptionsEnum *indexOptions_;
+  OrgApacheLuceneIndexIndexOptions *indexOptions_;
   jboolean storePayloads_;
   id<JavaUtilMap> attributes_;
   jlong dvGen_;
@@ -26,8 +26,8 @@
 
 @end
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexFieldInfo, docValuesType_, OrgApacheLuceneIndexDocValuesTypeEnum *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexFieldInfo, indexOptions_, OrgApacheLuceneIndexIndexOptionsEnum *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexFieldInfo, docValuesType_, OrgApacheLuceneIndexDocValuesType *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexFieldInfo, indexOptions_, OrgApacheLuceneIndexIndexOptions *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexFieldInfo, attributes_, id<JavaUtilMap>)
 
 @implementation OrgApacheLuceneIndexFieldInfo
@@ -37,33 +37,33 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexFieldInfo, attributes_, id<JavaUtilMap>)
                      withBoolean:(jboolean)storeTermVector
                      withBoolean:(jboolean)omitNorms
                      withBoolean:(jboolean)storePayloads
-withOrgApacheLuceneIndexIndexOptionsEnum:(OrgApacheLuceneIndexIndexOptionsEnum *)indexOptions
-withOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum *)docValues
+withOrgApacheLuceneIndexIndexOptions:(OrgApacheLuceneIndexIndexOptions *)indexOptions
+withOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)docValues
                         withLong:(jlong)dvGen
                  withJavaUtilMap:(id<JavaUtilMap>)attributes {
-  OrgApacheLuceneIndexFieldInfo_initWithNSString_withInt_withBoolean_withBoolean_withBoolean_withOrgApacheLuceneIndexIndexOptionsEnum_withOrgApacheLuceneIndexDocValuesTypeEnum_withLong_withJavaUtilMap_(self, name, number, storeTermVector, omitNorms, storePayloads, indexOptions, docValues, dvGen, attributes);
+  OrgApacheLuceneIndexFieldInfo_initWithNSString_withInt_withBoolean_withBoolean_withBoolean_withOrgApacheLuceneIndexIndexOptions_withOrgApacheLuceneIndexDocValuesType_withLong_withJavaUtilMap_(self, name, number, storeTermVector, omitNorms, storePayloads, indexOptions, docValues, dvGen, attributes);
   return self;
 }
 
 - (jboolean)checkConsistency {
-  if (indexOptions_ != JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE)) {
-    if ([((OrgApacheLuceneIndexIndexOptionsEnum *) nil_chk(indexOptions_)) compareToWithId:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS)] < 0 && storePayloads_) {
-      @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$", @"indexed field '", name_, @"' cannot have payloads without positions")) autorelease];
+  if (indexOptions_ != JreLoadEnum(OrgApacheLuceneIndexIndexOptions, NONE)) {
+    if ([((OrgApacheLuceneIndexIndexOptions *) nil_chk(indexOptions_)) compareToWithId:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS)] < 0 && storePayloads_) {
+      @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$", @"indexed field '", name_, @"' cannot have payloads without positions"));
     }
   }
   else {
     if (storeTermVector_) {
-      @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$", @"non-indexed field '", name_, @"' cannot store term vectors")) autorelease];
+      @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$", @"non-indexed field '", name_, @"' cannot store term vectors"));
     }
     if (storePayloads_) {
-      @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$", @"non-indexed field '", name_, @"' cannot store payloads")) autorelease];
+      @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$", @"non-indexed field '", name_, @"' cannot store payloads"));
     }
     if (omitNorms_) {
-      @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$", @"non-indexed field '", name_, @"' cannot omit norms")) autorelease];
+      @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$", @"non-indexed field '", name_, @"' cannot omit norms"));
     }
   }
-  if (dvGen_ != -1 && docValuesType_ == JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, NONE)) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$", @"field '", name_, @"' cannot have a docvalues update generation without having docvalues")) autorelease];
+  if (dvGen_ != -1 && docValuesType_ == JreLoadEnum(OrgApacheLuceneIndexDocValuesType, NONE)) {
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$", @"field '", name_, @"' cannot have a docvalues update generation without having docvalues"));
   }
   return true;
 }
@@ -71,61 +71,61 @@ withOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum
 - (void)updateWithBoolean:(jboolean)storeTermVector
               withBoolean:(jboolean)omitNorms
               withBoolean:(jboolean)storePayloads
-withOrgApacheLuceneIndexIndexOptionsEnum:(OrgApacheLuceneIndexIndexOptionsEnum *)indexOptions {
+withOrgApacheLuceneIndexIndexOptions:(OrgApacheLuceneIndexIndexOptions *)indexOptions {
   if (indexOptions == nil) {
-    @throw [new_JavaLangNullPointerException_initWithNSString_(JreStrcat("$$$", @"IndexOptions cannot be null (field: \"", name_, @"\")")) autorelease];
+    @throw create_JavaLangNullPointerException_initWithNSString_(JreStrcat("$$$", @"IndexOptions cannot be null (field: \"", name_, @"\")"));
   }
   if (self->indexOptions_ != indexOptions) {
-    if (self->indexOptions_ == JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE)) {
+    if (self->indexOptions_ == JreLoadEnum(OrgApacheLuceneIndexIndexOptions, NONE)) {
       JreStrongAssign(&self->indexOptions_, indexOptions);
     }
-    else if (indexOptions != JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE)) {
-      JreStrongAssign(&self->indexOptions_, [((OrgApacheLuceneIndexIndexOptionsEnum *) nil_chk(self->indexOptions_)) compareToWithId:indexOptions] < 0 ? self->indexOptions_ : indexOptions);
+    else if (indexOptions != JreLoadEnum(OrgApacheLuceneIndexIndexOptions, NONE)) {
+      JreStrongAssign(&self->indexOptions_, [((OrgApacheLuceneIndexIndexOptions *) nil_chk(self->indexOptions_)) compareToWithId:indexOptions] < 0 ? self->indexOptions_ : indexOptions);
     }
   }
-  if (self->indexOptions_ != JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE)) {
+  if (self->indexOptions_ != JreLoadEnum(OrgApacheLuceneIndexIndexOptions, NONE)) {
     self->storeTermVector_ |= storeTermVector;
     self->storePayloads_ |= storePayloads;
-    if (indexOptions != JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE) && self->omitNorms_ != omitNorms) {
+    if (indexOptions != JreLoadEnum(OrgApacheLuceneIndexIndexOptions, NONE) && self->omitNorms_ != omitNorms) {
       self->omitNorms_ = true;
     }
   }
-  if (self->indexOptions_ == JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE) || [((OrgApacheLuceneIndexIndexOptionsEnum *) nil_chk(self->indexOptions_)) compareToWithId:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS)] < 0) {
+  if (self->indexOptions_ == JreLoadEnum(OrgApacheLuceneIndexIndexOptions, NONE) || [((OrgApacheLuceneIndexIndexOptions *) nil_chk(self->indexOptions_)) compareToWithId:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS)] < 0) {
     self->storePayloads_ = false;
   }
   JreAssert(([self checkConsistency]), (@"org/apache/lucene/index/FieldInfo.java:133 condition failed: assert checkConsistency();"));
 }
 
-- (void)setDocValuesTypeWithOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum *)type {
+- (void)setDocValuesTypeWithOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)type {
   if (type == nil) {
-    @throw [new_JavaLangNullPointerException_initWithNSString_(JreStrcat("$$$", @"DocValuesType cannot be null (field: \"", name_, @"\")")) autorelease];
+    @throw create_JavaLangNullPointerException_initWithNSString_(JreStrcat("$$$", @"DocValuesType cannot be null (field: \"", name_, @"\")"));
   }
-  if (docValuesType_ != JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, NONE) && type != JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, NONE) && docValuesType_ != type) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@$@$$C", @"cannot change DocValues type from ", docValuesType_, @" to ", type, @" for field \"", name_, '"')) autorelease];
+  if (docValuesType_ != JreLoadEnum(OrgApacheLuceneIndexDocValuesType, NONE) && type != JreLoadEnum(OrgApacheLuceneIndexDocValuesType, NONE) && docValuesType_ != type) {
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@$@$$C", @"cannot change DocValues type from ", docValuesType_, @" to ", type, @" for field \"", name_, '"'));
   }
   JreStrongAssign(&docValuesType_, type);
   JreAssert(([self checkConsistency]), (@"org/apache/lucene/index/FieldInfo.java:144 condition failed: assert checkConsistency();"));
 }
 
-- (OrgApacheLuceneIndexIndexOptionsEnum *)getIndexOptions {
+- (OrgApacheLuceneIndexIndexOptions *)getIndexOptions {
   return indexOptions_;
 }
 
-- (void)setIndexOptionsWithOrgApacheLuceneIndexIndexOptionsEnum:(OrgApacheLuceneIndexIndexOptionsEnum *)newIndexOptions {
+- (void)setIndexOptionsWithOrgApacheLuceneIndexIndexOptions:(OrgApacheLuceneIndexIndexOptions *)newIndexOptions {
   if (indexOptions_ != newIndexOptions) {
-    if (indexOptions_ == JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE)) {
+    if (indexOptions_ == JreLoadEnum(OrgApacheLuceneIndexIndexOptions, NONE)) {
       JreStrongAssign(&indexOptions_, newIndexOptions);
     }
-    else if (newIndexOptions != JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE)) {
-      JreStrongAssign(&indexOptions_, [((OrgApacheLuceneIndexIndexOptionsEnum *) nil_chk(indexOptions_)) compareToWithId:newIndexOptions] < 0 ? indexOptions_ : newIndexOptions);
+    else if (newIndexOptions != JreLoadEnum(OrgApacheLuceneIndexIndexOptions, NONE)) {
+      JreStrongAssign(&indexOptions_, [((OrgApacheLuceneIndexIndexOptions *) nil_chk(indexOptions_)) compareToWithId:newIndexOptions] < 0 ? indexOptions_ : newIndexOptions);
     }
   }
-  if (indexOptions_ == JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE) || [((OrgApacheLuceneIndexIndexOptionsEnum *) nil_chk(indexOptions_)) compareToWithId:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS)] < 0) {
+  if (indexOptions_ == JreLoadEnum(OrgApacheLuceneIndexIndexOptions, NONE) || [((OrgApacheLuceneIndexIndexOptions *) nil_chk(indexOptions_)) compareToWithId:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS)] < 0) {
     storePayloads_ = false;
   }
 }
 
-- (OrgApacheLuceneIndexDocValuesTypeEnum *)getDocValuesType {
+- (OrgApacheLuceneIndexDocValuesType *)getDocValuesType {
   return docValuesType_;
 }
 
@@ -144,7 +144,7 @@ withOrgApacheLuceneIndexIndexOptionsEnum:(OrgApacheLuceneIndexIndexOptionsEnum *
 }
 
 - (void)setStorePayloads {
-  if (indexOptions_ != JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE) && [((OrgApacheLuceneIndexIndexOptionsEnum *) nil_chk(indexOptions_)) compareToWithId:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS)] >= 0) {
+  if (indexOptions_ != JreLoadEnum(OrgApacheLuceneIndexIndexOptions, NONE) && [((OrgApacheLuceneIndexIndexOptions *) nil_chk(indexOptions_)) compareToWithId:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS)] >= 0) {
     storePayloads_ = true;
   }
   JreAssert(([self checkConsistency]), (@"org/apache/lucene/index/FieldInfo.java:200 condition failed: assert checkConsistency();"));
@@ -155,14 +155,14 @@ withOrgApacheLuceneIndexIndexOptionsEnum:(OrgApacheLuceneIndexIndexOptionsEnum *
 }
 
 - (void)setOmitsNorms {
-  if (indexOptions_ == JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE)) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"cannot omit norms: this field is not indexed") autorelease];
+  if (indexOptions_ == JreLoadEnum(OrgApacheLuceneIndexIndexOptions, NONE)) {
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"cannot omit norms: this field is not indexed");
   }
   omitNorms_ = true;
 }
 
 - (jboolean)hasNorms {
-  return indexOptions_ != JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE) && omitNorms_ == false;
+  return indexOptions_ != JreLoadEnum(OrgApacheLuceneIndexIndexOptions, NONE) && omitNorms_ == false;
 }
 
 - (jboolean)hasPayloads {
@@ -196,12 +196,12 @@ withOrgApacheLuceneIndexIndexOptionsEnum:(OrgApacheLuceneIndexIndexOptionsEnum *
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withInt:withBoolean:withBoolean:withBoolean:withOrgApacheLuceneIndexIndexOptionsEnum:withOrgApacheLuceneIndexDocValuesTypeEnum:withLong:withJavaUtilMap:", "FieldInfo", NULL, 0x1, NULL, NULL },
+    { "initWithNSString:withInt:withBoolean:withBoolean:withBoolean:withOrgApacheLuceneIndexIndexOptions:withOrgApacheLuceneIndexDocValuesType:withLong:withJavaUtilMap:", "FieldInfo", NULL, 0x1, NULL, "(Ljava/lang/String;IZZZLorg/apache/lucene/index/IndexOptions;Lorg/apache/lucene/index/DocValuesType;JLjava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "checkConsistency", NULL, "Z", 0x1, NULL, NULL },
-    { "updateWithBoolean:withBoolean:withBoolean:withOrgApacheLuceneIndexIndexOptionsEnum:", "update", "V", 0x0, NULL, NULL },
-    { "setDocValuesTypeWithOrgApacheLuceneIndexDocValuesTypeEnum:", "setDocValuesType", "V", 0x0, NULL, NULL },
+    { "updateWithBoolean:withBoolean:withBoolean:withOrgApacheLuceneIndexIndexOptions:", "update", "V", 0x0, NULL, NULL },
+    { "setDocValuesTypeWithOrgApacheLuceneIndexDocValuesType:", "setDocValuesType", "V", 0x0, NULL, NULL },
     { "getIndexOptions", NULL, "Lorg.apache.lucene.index.IndexOptions;", 0x1, NULL, NULL },
-    { "setIndexOptionsWithOrgApacheLuceneIndexIndexOptionsEnum:", "setIndexOptions", "V", 0x1, NULL, NULL },
+    { "setIndexOptionsWithOrgApacheLuceneIndexIndexOptions:", "setIndexOptions", "V", 0x1, NULL, NULL },
     { "getDocValuesType", NULL, "Lorg.apache.lucene.index.DocValuesType;", 0x1, NULL, NULL },
     { "setDocValuesGenWithLong:", "setDocValuesGen", "V", 0x0, NULL, NULL },
     { "getDocValuesGen", NULL, "J", 0x1, NULL, NULL },
@@ -214,7 +214,7 @@ withOrgApacheLuceneIndexIndexOptionsEnum:(OrgApacheLuceneIndexIndexOptionsEnum *
     { "hasVectors", NULL, "Z", 0x1, NULL, NULL },
     { "getAttributeWithNSString:", "getAttribute", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "putAttributeWithNSString:withNSString:", "putAttribute", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "attributes", NULL, "Ljava.util.Map;", 0x1, NULL, NULL },
+    { "attributes", NULL, "Ljava.util.Map;", 0x1, NULL, "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "name_", NULL, 0x11, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
@@ -233,15 +233,15 @@ withOrgApacheLuceneIndexIndexOptionsEnum:(OrgApacheLuceneIndexIndexOptionsEnum *
 
 @end
 
-void OrgApacheLuceneIndexFieldInfo_initWithNSString_withInt_withBoolean_withBoolean_withBoolean_withOrgApacheLuceneIndexIndexOptionsEnum_withOrgApacheLuceneIndexDocValuesTypeEnum_withLong_withJavaUtilMap_(OrgApacheLuceneIndexFieldInfo *self, NSString *name, jint number, jboolean storeTermVector, jboolean omitNorms, jboolean storePayloads, OrgApacheLuceneIndexIndexOptionsEnum *indexOptions, OrgApacheLuceneIndexDocValuesTypeEnum *docValues, jlong dvGen, id<JavaUtilMap> attributes) {
+void OrgApacheLuceneIndexFieldInfo_initWithNSString_withInt_withBoolean_withBoolean_withBoolean_withOrgApacheLuceneIndexIndexOptions_withOrgApacheLuceneIndexDocValuesType_withLong_withJavaUtilMap_(OrgApacheLuceneIndexFieldInfo *self, NSString *name, jint number, jboolean storeTermVector, jboolean omitNorms, jboolean storePayloads, OrgApacheLuceneIndexIndexOptions *indexOptions, OrgApacheLuceneIndexDocValuesType *docValues, jlong dvGen, id<JavaUtilMap> attributes) {
   NSObject_init(self);
-  JreStrongAssign(&self->docValuesType_, JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, NONE));
-  JreStrongAssign(&self->indexOptions_, JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE));
+  JreStrongAssign(&self->docValuesType_, JreLoadEnum(OrgApacheLuceneIndexDocValuesType, NONE));
+  JreStrongAssign(&self->indexOptions_, JreLoadEnum(OrgApacheLuceneIndexIndexOptions, NONE));
   JreStrongAssign(&self->name_, OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_(name));
   self->number_ = number;
   JreStrongAssign(&self->docValuesType_, OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_withNSString_(docValues, JreStrcat("$$$", @"DocValuesType cannot be null (field: \"", name, @"\")")));
   JreStrongAssign(&self->indexOptions_, OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_withNSString_(indexOptions, JreStrcat("$$$", @"IndexOptions cannot be null (field: \"", name, @"\")")));
-  if (indexOptions != JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE)) {
+  if (indexOptions != JreLoadEnum(OrgApacheLuceneIndexIndexOptions, NONE)) {
     self->storeTermVector_ = storeTermVector;
     self->storePayloads_ = storePayloads;
     self->omitNorms_ = omitNorms;
@@ -256,10 +256,12 @@ void OrgApacheLuceneIndexFieldInfo_initWithNSString_withInt_withBoolean_withBool
   JreAssert(([self checkConsistency]), (@"org/apache/lucene/index/FieldInfo.java:73 condition failed: assert checkConsistency();"));
 }
 
-OrgApacheLuceneIndexFieldInfo *new_OrgApacheLuceneIndexFieldInfo_initWithNSString_withInt_withBoolean_withBoolean_withBoolean_withOrgApacheLuceneIndexIndexOptionsEnum_withOrgApacheLuceneIndexDocValuesTypeEnum_withLong_withJavaUtilMap_(NSString *name, jint number, jboolean storeTermVector, jboolean omitNorms, jboolean storePayloads, OrgApacheLuceneIndexIndexOptionsEnum *indexOptions, OrgApacheLuceneIndexDocValuesTypeEnum *docValues, jlong dvGen, id<JavaUtilMap> attributes) {
-  OrgApacheLuceneIndexFieldInfo *self = [OrgApacheLuceneIndexFieldInfo alloc];
-  OrgApacheLuceneIndexFieldInfo_initWithNSString_withInt_withBoolean_withBoolean_withBoolean_withOrgApacheLuceneIndexIndexOptionsEnum_withOrgApacheLuceneIndexDocValuesTypeEnum_withLong_withJavaUtilMap_(self, name, number, storeTermVector, omitNorms, storePayloads, indexOptions, docValues, dvGen, attributes);
-  return self;
+OrgApacheLuceneIndexFieldInfo *new_OrgApacheLuceneIndexFieldInfo_initWithNSString_withInt_withBoolean_withBoolean_withBoolean_withOrgApacheLuceneIndexIndexOptions_withOrgApacheLuceneIndexDocValuesType_withLong_withJavaUtilMap_(NSString *name, jint number, jboolean storeTermVector, jboolean omitNorms, jboolean storePayloads, OrgApacheLuceneIndexIndexOptions *indexOptions, OrgApacheLuceneIndexDocValuesType *docValues, jlong dvGen, id<JavaUtilMap> attributes) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexFieldInfo, initWithNSString_withInt_withBoolean_withBoolean_withBoolean_withOrgApacheLuceneIndexIndexOptions_withOrgApacheLuceneIndexDocValuesType_withLong_withJavaUtilMap_, name, number, storeTermVector, omitNorms, storePayloads, indexOptions, docValues, dvGen, attributes)
+}
+
+OrgApacheLuceneIndexFieldInfo *create_OrgApacheLuceneIndexFieldInfo_initWithNSString_withInt_withBoolean_withBoolean_withBoolean_withOrgApacheLuceneIndexIndexOptions_withOrgApacheLuceneIndexDocValuesType_withLong_withJavaUtilMap_(NSString *name, jint number, jboolean storeTermVector, jboolean omitNorms, jboolean storePayloads, OrgApacheLuceneIndexIndexOptions *indexOptions, OrgApacheLuceneIndexDocValuesType *docValues, jlong dvGen, id<JavaUtilMap> attributes) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexFieldInfo, initWithNSString_withInt_withBoolean_withBoolean_withBoolean_withOrgApacheLuceneIndexIndexOptions_withOrgApacheLuceneIndexDocValuesType_withLong_withJavaUtilMap_, name, number, storeTermVector, omitNorms, storePayloads, indexOptions, docValues, dvGen, attributes)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexFieldInfo)

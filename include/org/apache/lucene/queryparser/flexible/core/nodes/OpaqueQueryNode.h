@@ -5,36 +5,54 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode_) && (OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode_
+#if !defined (OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode))
+#define OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode_
 
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_RESTRICT 1
-#define OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl 1
+#define INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNodeImpl.h"
 
 @protocol JavaLangCharSequence;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
 @protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;
 
+/*!
+ @brief A <code>OpaqueQueryNode</code> is used for specify values that are not supposed to
+ be parsed by the parser.
+ For example: and XPATH query in the middle of a
+ query string a b @@xpath:'/bookstore/book[1]/title' c d
+ */
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl
 
 #pragma mark Public
 
+/*!
+ @param schema
+ - schema identifier
+ @param value
+ - value that was not parsed
+ */
 - (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)schema
                     withJavaLangCharSequence:(id<JavaLangCharSequence>)value;
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree;
 
+/*!
+ @return the schema
+ */
 - (id<JavaLangCharSequence>)getSchema;
 
+/*!
+ @return the value
+ */
 - (id<JavaLangCharSequence>)getValue;
 
 - (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escapeSyntaxParser;
@@ -49,8 +67,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNod
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_(id<JavaLangCharSequence> schema, id<JavaLangCharSequence> value) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode *create_OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_(id<JavaLangCharSequence> schema, id<JavaLangCharSequence> value);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode")

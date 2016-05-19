@@ -5,36 +5,60 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisTokenattributesTypeAttribute_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisTokenattributesTypeAttribute_RESTRICT
-#define OrgApacheLuceneAnalysisTokenattributesTypeAttribute_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesTypeAttribute")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisTokenattributesTypeAttribute
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesTypeAttribute 0
 #else
-#define OrgApacheLuceneAnalysisTokenattributesTypeAttribute_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesTypeAttribute 1
 #endif
-#undef OrgApacheLuceneAnalysisTokenattributesTypeAttribute_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisTokenattributesTypeAttribute
 
-#if !defined (_OrgApacheLuceneAnalysisTokenattributesTypeAttribute_) && (OrgApacheLuceneAnalysisTokenattributesTypeAttribute_INCLUDE_ALL || OrgApacheLuceneAnalysisTokenattributesTypeAttribute_INCLUDE)
-#define _OrgApacheLuceneAnalysisTokenattributesTypeAttribute_
+#if !defined (OrgApacheLuceneAnalysisTokenattributesTypeAttribute_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesTypeAttribute || defined(INCLUDE_OrgApacheLuceneAnalysisTokenattributesTypeAttribute))
+#define OrgApacheLuceneAnalysisTokenattributesTypeAttribute_
 
-#define OrgApacheLuceneUtilAttribute_RESTRICT 1
-#define OrgApacheLuceneUtilAttribute_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAttribute 1
+#define INCLUDE_OrgApacheLuceneUtilAttribute 1
 #include "org/apache/lucene/util/Attribute.h"
 
+/*!
+ @brief A Token's lexical type.
+ The Default value is "word". 
+ */
 @protocol OrgApacheLuceneAnalysisTokenattributesTypeAttribute < OrgApacheLuceneUtilAttribute, NSObject, JavaObject >
 
+/*!
+ @brief Returns this Token's lexical type.
+ Defaults to "word". 
+ - seealso: #setType(String)
+ */
 - (NSString *)type;
 
+/*!
+ @brief Set the lexical type.
+ - seealso: #type()
+ */
 - (void)setTypeWithNSString:(NSString *)type;
+
+@end
+
+@interface OrgApacheLuceneAnalysisTokenattributesTypeAttribute : NSObject
+
++ (NSString *)DEFAULT_TYPE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisTokenattributesTypeAttribute)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisTokenattributesTypeAttribute_DEFAULT_TYPE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisTokenattributesTypeAttribute, DEFAULT_TYPE_, NSString *)
+/*!
+ @brief the default type
+ */
+inline NSString *OrgApacheLuceneAnalysisTokenattributesTypeAttribute_get_DEFAULT_TYPE();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisTokenattributesTypeAttribute_DEFAULT_TYPE;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisTokenattributesTypeAttribute, DEFAULT_TYPE, NSString *)
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenattributesTypeAttribute)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisTokenattributesTypeAttribute_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesTypeAttribute")

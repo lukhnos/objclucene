@@ -45,9 +45,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionScorer, filter
                                             withInt:(jint)min
                                             withInt:(jint)max {
   if (!([collector isKindOfClass:[OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector class]])) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"collector is not of type TopSuggestDocsCollector") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"collector is not of type TopSuggestDocsCollector");
   }
-  [((OrgApacheLuceneSearchSuggestDocumentNRTSuggester *) nil_chk(suggester_)) lookupWithOrgApacheLuceneSearchSuggestDocumentCompletionScorer:self withOrgApacheLuceneUtilBits:acceptDocs withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector:((OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *) check_class_cast(collector, [OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector class]))];
+  [((OrgApacheLuceneSearchSuggestDocumentNRTSuggester *) nil_chk(suggester_)) lookupWithOrgApacheLuceneSearchSuggestDocumentCompletionScorer:self withOrgApacheLuceneUtilBits:acceptDocs withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector:((OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *) cast_chk(collector, [OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector class]))];
   return max;
 }
 
@@ -113,9 +113,11 @@ void OrgApacheLuceneSearchSuggestDocumentCompletionScorer_initWithOrgApacheLucen
 }
 
 OrgApacheLuceneSearchSuggestDocumentCompletionScorer *new_OrgApacheLuceneSearchSuggestDocumentCompletionScorer_initWithOrgApacheLuceneSearchSuggestDocumentCompletionWeight_withOrgApacheLuceneSearchSuggestDocumentNRTSuggester_withOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneUtilBits_withBoolean_withOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneSearchSuggestDocumentCompletionWeight *weight, OrgApacheLuceneSearchSuggestDocumentNRTSuggester *suggester, OrgApacheLuceneIndexLeafReader *reader, id<OrgApacheLuceneUtilBits> filterDocs, jboolean filtered, OrgApacheLuceneUtilAutomatonAutomaton *automaton) {
-  OrgApacheLuceneSearchSuggestDocumentCompletionScorer *self = [OrgApacheLuceneSearchSuggestDocumentCompletionScorer alloc];
-  OrgApacheLuceneSearchSuggestDocumentCompletionScorer_initWithOrgApacheLuceneSearchSuggestDocumentCompletionWeight_withOrgApacheLuceneSearchSuggestDocumentNRTSuggester_withOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneUtilBits_withBoolean_withOrgApacheLuceneUtilAutomatonAutomaton_(self, weight, suggester, reader, filterDocs, filtered, automaton);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionScorer, initWithOrgApacheLuceneSearchSuggestDocumentCompletionWeight_withOrgApacheLuceneSearchSuggestDocumentNRTSuggester_withOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneUtilBits_withBoolean_withOrgApacheLuceneUtilAutomatonAutomaton_, weight, suggester, reader, filterDocs, filtered, automaton)
+}
+
+OrgApacheLuceneSearchSuggestDocumentCompletionScorer *create_OrgApacheLuceneSearchSuggestDocumentCompletionScorer_initWithOrgApacheLuceneSearchSuggestDocumentCompletionWeight_withOrgApacheLuceneSearchSuggestDocumentNRTSuggester_withOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneUtilBits_withBoolean_withOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneSearchSuggestDocumentCompletionWeight *weight, OrgApacheLuceneSearchSuggestDocumentNRTSuggester *suggester, OrgApacheLuceneIndexLeafReader *reader, id<OrgApacheLuceneUtilBits> filterDocs, jboolean filtered, OrgApacheLuceneUtilAutomatonAutomaton *automaton) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentCompletionScorer, initWithOrgApacheLuceneSearchSuggestDocumentCompletionWeight_withOrgApacheLuceneSearchSuggestDocumentNRTSuggester_withOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneUtilBits_withBoolean_withOrgApacheLuceneUtilAutomatonAutomaton_, weight, suggester, reader, filterDocs, filtered, automaton)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentCompletionScorer)

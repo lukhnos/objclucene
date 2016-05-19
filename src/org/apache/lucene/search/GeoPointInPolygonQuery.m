@@ -31,6 +31,9 @@
   IOSDoubleArray *y_;
 }
 
+/*!
+ @brief Common constructor, used only internally.
+ */
 - (instancetype)initWithNSString:(NSString *)field
 withOrgApacheLuceneSearchGeoBoundingBox:(OrgApacheLuceneSearchGeoBoundingBox *)bbox
                  withDoubleArray:(IOSDoubleArray *)polyLons
@@ -50,10 +53,16 @@ __attribute__((unused)) static void OrgApacheLuceneSearchGeoPointInPolygonQuery_
 
 __attribute__((unused)) static OrgApacheLuceneSearchGeoPointInPolygonQuery *new_OrgApacheLuceneSearchGeoPointInPolygonQuery_initWithNSString_withOrgApacheLuceneSearchGeoBoundingBox_withDoubleArray_withDoubleArray_(NSString *field, OrgApacheLuceneSearchGeoBoundingBox *bbox, IOSDoubleArray *polyLons, IOSDoubleArray *polyLats) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchGeoPointInPolygonQuery *create_OrgApacheLuceneSearchGeoPointInPolygonQuery_initWithNSString_withOrgApacheLuceneSearchGeoBoundingBox_withDoubleArray_withDoubleArray_(NSString *field, OrgApacheLuceneSearchGeoBoundingBox *bbox, IOSDoubleArray *polyLons, IOSDoubleArray *polyLats);
+
 __attribute__((unused)) static IOSDoubleArray *OrgApacheLuceneSearchGeoPointInPolygonQuery_toleranceConversionWithDoubleArray_(OrgApacheLuceneSearchGeoPointInPolygonQuery *self, IOSDoubleArray *vals);
 
 __attribute__((unused)) static OrgApacheLuceneSearchGeoBoundingBox *OrgApacheLuceneSearchGeoPointInPolygonQuery_computeBBoxWithDoubleArray_withDoubleArray_(IOSDoubleArray *polyLons, IOSDoubleArray *polyLats);
 
+/*!
+ @brief Custom <code>org.apache.lucene.index.TermsEnum</code> that computes morton hash ranges based on the defined edges of
+ the provided polygon.
+ */
 @interface OrgApacheLuceneSearchGeoPointInPolygonQuery_GeoPolygonTermsEnum : OrgApacheLuceneSearchGeoPointTermsEnum {
  @public
   OrgApacheLuceneSearchGeoPointInPolygonQuery *this$0_;
@@ -81,6 +90,14 @@ __attribute__((unused)) static OrgApacheLuceneSearchGeoBoundingBox *OrgApacheLuc
                                withDouble:(jdouble)maxLon
                                withDouble:(jdouble)maxLat;
 
+/*!
+ @brief The two-phase query approach.
+ The parent
+ <code>org.apache.lucene.search.GeoPointTermsEnum.accept</code> method is called to match
+ encoded terms that fall within the bounding box of the polygon. Those documents that pass the initial
+ bounding box filter are then compared to the provided polygon using the
+ <code>org.apache.lucene.util.GeoUtils.pointInPolygon</code> method.
+ */
 - (jboolean)postFilterWithDouble:(jdouble)lon
                       withDouble:(jdouble)lat;
 
@@ -93,6 +110,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchGeoPointInPolygonQuery_GeoPolygonTermsE
 __attribute__((unused)) static void OrgApacheLuceneSearchGeoPointInPolygonQuery_GeoPolygonTermsEnum_initWithOrgApacheLuceneSearchGeoPointInPolygonQuery_withOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoPointInPolygonQuery_GeoPolygonTermsEnum *self, OrgApacheLuceneSearchGeoPointInPolygonQuery *outer$, OrgApacheLuceneIndexTermsEnum *tenum, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat);
 
 __attribute__((unused)) static OrgApacheLuceneSearchGeoPointInPolygonQuery_GeoPolygonTermsEnum *new_OrgApacheLuceneSearchGeoPointInPolygonQuery_GeoPolygonTermsEnum_initWithOrgApacheLuceneSearchGeoPointInPolygonQuery_withOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoPointInPolygonQuery *outer$, OrgApacheLuceneIndexTermsEnum *tenum, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchGeoPointInPolygonQuery_GeoPolygonTermsEnum *create_OrgApacheLuceneSearchGeoPointInPolygonQuery_GeoPolygonTermsEnum_initWithOrgApacheLuceneSearchGeoPointInPolygonQuery_withOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoPointInPolygonQuery *outer$, OrgApacheLuceneIndexTermsEnum *tenum, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchGeoPointInPolygonQuery_GeoPolygonTermsEnum)
 
@@ -119,19 +138,19 @@ withOrgApacheLuceneSearchGeoBoundingBox:(OrgApacheLuceneSearchGeoBoundingBox *)b
 
 - (OrgApacheLuceneIndexTermsEnum *)getTermsEnumWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms
                                       withOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)atts {
-  return [new_OrgApacheLuceneSearchGeoPointInPolygonQuery_GeoPolygonTermsEnum_initWithOrgApacheLuceneSearchGeoPointInPolygonQuery_withOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_(self, [((OrgApacheLuceneIndexTerms *) nil_chk(terms)) iterator], self->minLon_, self->minLat_, self->maxLon_, self->maxLat_) autorelease];
+  return create_OrgApacheLuceneSearchGeoPointInPolygonQuery_GeoPolygonTermsEnum_initWithOrgApacheLuceneSearchGeoPointInPolygonQuery_withOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_(self, [((OrgApacheLuceneIndexTerms *) nil_chk(terms)) iterator], self->minLon_, self->minLat_, self->maxLon_, self->maxLat_);
 }
 
 - (void)setRewriteMethodWithOrgApacheLuceneSearchMultiTermQuery_RewriteMethod:(OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)method {
-  @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(@"cannot change rewrite method") autorelease];
+  @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"cannot change rewrite method");
 }
 
 - (jboolean)isEqual:(id)o {
   if (self == o) return true;
-  if (o == nil || [self getClass] != [o getClass]) return false;
+  if (o == nil || [self getClass] != (id) [o getClass]) return false;
   if (![super isEqual:o]) return false;
-  OrgApacheLuceneSearchGeoPointInPolygonQuery *that = (OrgApacheLuceneSearchGeoPointInPolygonQuery *) check_class_cast(o, [OrgApacheLuceneSearchGeoPointInPolygonQuery class]);
-  if (!JavaUtilArrays_equalsWithDoubleArray_withDoubleArray_(x_, ((OrgApacheLuceneSearchGeoPointInPolygonQuery *) nil_chk(that))->x_)) return false;
+  OrgApacheLuceneSearchGeoPointInPolygonQuery *that = (OrgApacheLuceneSearchGeoPointInPolygonQuery *) cast_chk(o, [OrgApacheLuceneSearchGeoPointInPolygonQuery class]);
+  if (!JavaUtilArrays_equalsWithDoubleArray_withDoubleArray_(x_, that->x_)) return false;
   if (!JavaUtilArrays_equalsWithDoubleArray_withDoubleArray_(y_, that->y_)) return false;
   return true;
 }
@@ -145,7 +164,7 @@ withOrgApacheLuceneSearchGeoBoundingBox:(OrgApacheLuceneSearchGeoBoundingBox *)b
 
 - (NSString *)toStringWithNSString:(NSString *)field {
   JreAssert((((IOSDoubleArray *) nil_chk(x_))->size_ == ((IOSDoubleArray *) nil_chk(y_))->size_), (@"org/apache/lucene/search/GeoPointInPolygonQuery.java:124 condition failed: assert x.length == y.length;"));
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   [sb appendWithNSString:[[self getClass] getSimpleName]];
   [sb appendWithChar:':'];
   if (![((NSString *) nil_chk([self getField])) isEqual:field]) {
@@ -210,33 +229,37 @@ void OrgApacheLuceneSearchGeoPointInPolygonQuery_initWithNSString_withDoubleArra
 }
 
 OrgApacheLuceneSearchGeoPointInPolygonQuery *new_OrgApacheLuceneSearchGeoPointInPolygonQuery_initWithNSString_withDoubleArray_withDoubleArray_(NSString *field, IOSDoubleArray *polyLons, IOSDoubleArray *polyLats) {
-  OrgApacheLuceneSearchGeoPointInPolygonQuery *self = [OrgApacheLuceneSearchGeoPointInPolygonQuery alloc];
-  OrgApacheLuceneSearchGeoPointInPolygonQuery_initWithNSString_withDoubleArray_withDoubleArray_(self, field, polyLons, polyLats);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchGeoPointInPolygonQuery, initWithNSString_withDoubleArray_withDoubleArray_, field, polyLons, polyLats)
+}
+
+OrgApacheLuceneSearchGeoPointInPolygonQuery *create_OrgApacheLuceneSearchGeoPointInPolygonQuery_initWithNSString_withDoubleArray_withDoubleArray_(NSString *field, IOSDoubleArray *polyLons, IOSDoubleArray *polyLats) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchGeoPointInPolygonQuery, initWithNSString_withDoubleArray_withDoubleArray_, field, polyLons, polyLats)
 }
 
 void OrgApacheLuceneSearchGeoPointInPolygonQuery_initWithNSString_withOrgApacheLuceneSearchGeoBoundingBox_withDoubleArray_withDoubleArray_(OrgApacheLuceneSearchGeoPointInPolygonQuery *self, NSString *field, OrgApacheLuceneSearchGeoBoundingBox *bbox, IOSDoubleArray *polyLons, IOSDoubleArray *polyLats) {
   OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_initWithNSString_withDouble_withDouble_withDouble_withDouble_(self, field, ((OrgApacheLuceneSearchGeoBoundingBox *) nil_chk(bbox))->minLon_, bbox->minLat_, bbox->maxLon_, bbox->maxLat_);
   if (((IOSDoubleArray *) nil_chk(polyLats))->size_ != ((IOSDoubleArray *) nil_chk(polyLons))->size_) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"polyLats and polyLons must be equal length") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"polyLats and polyLons must be equal length");
   }
   if (polyLats->size_ < 4) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"at least 4 polygon points required") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"at least 4 polygon points required");
   }
   if (IOSDoubleArray_Get(polyLats, 0) != IOSDoubleArray_Get(polyLats, polyLats->size_ - 1)) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D$I$D", @"first and last points of the polygon must be the same (it must close itself): polyLats[0]=", IOSDoubleArray_Get(polyLats, 0), @" polyLats[", (polyLats->size_ - 1), @"]=", IOSDoubleArray_Get(polyLats, polyLats->size_ - 1))) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D$I$D", @"first and last points of the polygon must be the same (it must close itself): polyLats[0]=", IOSDoubleArray_Get(polyLats, 0), @" polyLats[", (polyLats->size_ - 1), @"]=", IOSDoubleArray_Get(polyLats, polyLats->size_ - 1)));
   }
   if (IOSDoubleArray_Get(polyLons, 0) != IOSDoubleArray_Get(polyLons, polyLons->size_ - 1)) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D$I$D", @"first and last points of the polygon must be the same (it must close itself): polyLons[0]=", IOSDoubleArray_Get(polyLons, 0), @" polyLons[", (polyLons->size_ - 1), @"]=", IOSDoubleArray_Get(polyLons, polyLons->size_ - 1))) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D$I$D", @"first and last points of the polygon must be the same (it must close itself): polyLons[0]=", IOSDoubleArray_Get(polyLons, 0), @" polyLons[", (polyLons->size_ - 1), @"]=", IOSDoubleArray_Get(polyLons, polyLons->size_ - 1)));
   }
   JreStrongAssign(&self->x_, OrgApacheLuceneSearchGeoPointInPolygonQuery_toleranceConversionWithDoubleArray_(self, polyLons));
   JreStrongAssign(&self->y_, OrgApacheLuceneSearchGeoPointInPolygonQuery_toleranceConversionWithDoubleArray_(self, polyLats));
 }
 
 OrgApacheLuceneSearchGeoPointInPolygonQuery *new_OrgApacheLuceneSearchGeoPointInPolygonQuery_initWithNSString_withOrgApacheLuceneSearchGeoBoundingBox_withDoubleArray_withDoubleArray_(NSString *field, OrgApacheLuceneSearchGeoBoundingBox *bbox, IOSDoubleArray *polyLons, IOSDoubleArray *polyLats) {
-  OrgApacheLuceneSearchGeoPointInPolygonQuery *self = [OrgApacheLuceneSearchGeoPointInPolygonQuery alloc];
-  OrgApacheLuceneSearchGeoPointInPolygonQuery_initWithNSString_withOrgApacheLuceneSearchGeoBoundingBox_withDoubleArray_withDoubleArray_(self, field, bbox, polyLons, polyLats);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchGeoPointInPolygonQuery, initWithNSString_withOrgApacheLuceneSearchGeoBoundingBox_withDoubleArray_withDoubleArray_, field, bbox, polyLons, polyLats)
+}
+
+OrgApacheLuceneSearchGeoPointInPolygonQuery *create_OrgApacheLuceneSearchGeoPointInPolygonQuery_initWithNSString_withOrgApacheLuceneSearchGeoBoundingBox_withDoubleArray_withDoubleArray_(NSString *field, OrgApacheLuceneSearchGeoBoundingBox *bbox, IOSDoubleArray *polyLons, IOSDoubleArray *polyLats) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchGeoPointInPolygonQuery, initWithNSString_withOrgApacheLuceneSearchGeoBoundingBox_withDoubleArray_withDoubleArray_, field, bbox, polyLons, polyLats)
 }
 
 IOSDoubleArray *OrgApacheLuceneSearchGeoPointInPolygonQuery_toleranceConversionWithDoubleArray_(OrgApacheLuceneSearchGeoPointInPolygonQuery *self, IOSDoubleArray *vals) {
@@ -249,7 +272,7 @@ IOSDoubleArray *OrgApacheLuceneSearchGeoPointInPolygonQuery_toleranceConversionW
 OrgApacheLuceneSearchGeoBoundingBox *OrgApacheLuceneSearchGeoPointInPolygonQuery_computeBBoxWithDoubleArray_withDoubleArray_(IOSDoubleArray *polyLons, IOSDoubleArray *polyLats) {
   OrgApacheLuceneSearchGeoPointInPolygonQuery_initialize();
   if (((IOSDoubleArray *) nil_chk(polyLons))->size_ != ((IOSDoubleArray *) nil_chk(polyLats))->size_) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"polyLons and polyLats must be equal length") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"polyLons and polyLats must be equal length");
   }
   jdouble minLon = JavaLangDouble_POSITIVE_INFINITY;
   jdouble maxLon = JavaLangDouble_NEGATIVE_INFINITY;
@@ -257,17 +280,17 @@ OrgApacheLuceneSearchGeoBoundingBox *OrgApacheLuceneSearchGeoPointInPolygonQuery
   jdouble maxLat = JavaLangDouble_NEGATIVE_INFINITY;
   for (jint i = 0; i < polyLats->size_; i++) {
     if (OrgApacheLuceneUtilGeoUtils_isValidLonWithDouble_(IOSDoubleArray_Get(polyLons, i)) == false) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$D", @"invalid polyLons[", i, @"]=", IOSDoubleArray_Get(polyLons, i))) autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$D", @"invalid polyLons[", i, @"]=", IOSDoubleArray_Get(polyLons, i)));
     }
     if (OrgApacheLuceneUtilGeoUtils_isValidLatWithDouble_(IOSDoubleArray_Get(polyLats, i)) == false) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$D", @"invalid polyLats[", i, @"]=", IOSDoubleArray_Get(polyLats, i))) autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$D", @"invalid polyLats[", i, @"]=", IOSDoubleArray_Get(polyLats, i)));
     }
     minLon = JavaLangMath_minWithDouble_withDouble_(IOSDoubleArray_Get(polyLons, i), minLon);
     maxLon = JavaLangMath_maxWithDouble_withDouble_(IOSDoubleArray_Get(polyLons, i), maxLon);
     minLat = JavaLangMath_minWithDouble_withDouble_(IOSDoubleArray_Get(polyLats, i), minLat);
     maxLat = JavaLangMath_maxWithDouble_withDouble_(IOSDoubleArray_Get(polyLats, i), maxLat);
   }
-  return [new_OrgApacheLuceneSearchGeoBoundingBox_initWithDouble_withDouble_withDouble_withDouble_(minLon, maxLon, minLat, maxLat) autorelease];
+  return create_OrgApacheLuceneSearchGeoBoundingBox_initWithDouble_withDouble_withDouble_withDouble_(minLon, maxLon, minLat, maxLat);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchGeoPointInPolygonQuery)
@@ -338,9 +361,11 @@ void OrgApacheLuceneSearchGeoPointInPolygonQuery_GeoPolygonTermsEnum_initWithOrg
 }
 
 OrgApacheLuceneSearchGeoPointInPolygonQuery_GeoPolygonTermsEnum *new_OrgApacheLuceneSearchGeoPointInPolygonQuery_GeoPolygonTermsEnum_initWithOrgApacheLuceneSearchGeoPointInPolygonQuery_withOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoPointInPolygonQuery *outer$, OrgApacheLuceneIndexTermsEnum *tenum, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat) {
-  OrgApacheLuceneSearchGeoPointInPolygonQuery_GeoPolygonTermsEnum *self = [OrgApacheLuceneSearchGeoPointInPolygonQuery_GeoPolygonTermsEnum alloc];
-  OrgApacheLuceneSearchGeoPointInPolygonQuery_GeoPolygonTermsEnum_initWithOrgApacheLuceneSearchGeoPointInPolygonQuery_withOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_(self, outer$, tenum, minLon, minLat, maxLon, maxLat);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchGeoPointInPolygonQuery_GeoPolygonTermsEnum, initWithOrgApacheLuceneSearchGeoPointInPolygonQuery_withOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_, outer$, tenum, minLon, minLat, maxLon, maxLat)
+}
+
+OrgApacheLuceneSearchGeoPointInPolygonQuery_GeoPolygonTermsEnum *create_OrgApacheLuceneSearchGeoPointInPolygonQuery_GeoPolygonTermsEnum_initWithOrgApacheLuceneSearchGeoPointInPolygonQuery_withOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoPointInPolygonQuery *outer$, OrgApacheLuceneIndexTermsEnum *tenum, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchGeoPointInPolygonQuery_GeoPolygonTermsEnum, initWithOrgApacheLuceneSearchGeoPointInPolygonQuery_withOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_, outer$, tenum, minLon, minLat, maxLon, maxLat)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchGeoPointInPolygonQuery_GeoPolygonTermsEnum)

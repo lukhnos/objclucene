@@ -54,9 +54,9 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisUtilRollingCharBuffer
     }
     if (count_ == ((IOSCharArray *) nil_chk(buffer_))->size_) {
       IOSCharArray *newBuffer = [IOSCharArray arrayWithLength:OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(1 + count_, OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_CHAR)];
-      JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(buffer_, nextWrite_, newBuffer, 0, buffer_->size_ - nextWrite_);
-      JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(buffer_, 0, newBuffer, buffer_->size_ - nextWrite_, nextWrite_);
-      nextWrite_ = buffer_->size_;
+      JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(buffer_, nextWrite_, newBuffer, 0, ((IOSCharArray *) nil_chk(buffer_))->size_ - nextWrite_);
+      JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(buffer_, 0, newBuffer, ((IOSCharArray *) nil_chk(buffer_))->size_ - nextWrite_, nextWrite_);
+      nextWrite_ = ((IOSCharArray *) nil_chk(buffer_))->size_;
       JreStrongAssign(&buffer_, newBuffer);
     }
     if (nextWrite_ == buffer_->size_) {
@@ -68,7 +68,7 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisUtilRollingCharBuffer
       end_ = true;
       return -1;
     }
-    jint ch = IOSCharArray_Get(buffer_, nextWrite_);
+    jint ch = IOSCharArray_Get(nil_chk(buffer_), nextWrite_);
     nextWrite_ += readCount;
     count_ += readCount;
     nextPos_ += readCount;
@@ -102,7 +102,7 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisUtilRollingCharBuffer
   else {
     jint part1 = ((IOSCharArray *) nil_chk(buffer_))->size_ - startIndex;
     JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(buffer_, startIndex, result, 0, part1);
-    JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(buffer_, 0, result, buffer_->size_ - startIndex, length - part1);
+    JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(buffer_, 0, result, ((IOSCharArray *) nil_chk(buffer_))->size_ - startIndex, length - part1);
   }
   return result;
 }
@@ -137,7 +137,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "getIndexWithInt:", "getIndex", "I", 0x2, NULL, NULL },
     { "getWithInt:withInt:", "get", "[C", 0x1, NULL, NULL },
     { "freeBeforeWithInt:", "freeBefore", "V", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "RollingCharBuffer", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "reader_", NULL, 0x2, "Ljava.io.Reader;", NULL, NULL, .constantValue.asLong = 0 },
@@ -172,9 +172,11 @@ void OrgApacheLuceneAnalysisUtilRollingCharBuffer_init(OrgApacheLuceneAnalysisUt
 }
 
 OrgApacheLuceneAnalysisUtilRollingCharBuffer *new_OrgApacheLuceneAnalysisUtilRollingCharBuffer_init() {
-  OrgApacheLuceneAnalysisUtilRollingCharBuffer *self = [OrgApacheLuceneAnalysisUtilRollingCharBuffer alloc];
-  OrgApacheLuceneAnalysisUtilRollingCharBuffer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisUtilRollingCharBuffer, init)
+}
+
+OrgApacheLuceneAnalysisUtilRollingCharBuffer *create_OrgApacheLuceneAnalysisUtilRollingCharBuffer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisUtilRollingCharBuffer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisUtilRollingCharBuffer)

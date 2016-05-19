@@ -9,39 +9,98 @@
 #include "java/lang/IllegalArgumentException.h"
 #include "org/apache/lucene/index/IndexOptions.h"
 
-__attribute__((unused)) static void OrgApacheLuceneIndexIndexOptionsEnum_initWithNSString_withInt_(OrgApacheLuceneIndexIndexOptionsEnum *self, NSString *__name, jint __ordinal);
+__attribute__((unused)) static void OrgApacheLuceneIndexIndexOptions_initWithNSString_withInt_(OrgApacheLuceneIndexIndexOptions *self, NSString *__name, jint __ordinal);
 
-__attribute__((unused)) static OrgApacheLuceneIndexIndexOptionsEnum *new_OrgApacheLuceneIndexIndexOptionsEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
+J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexIndexOptions)
 
-J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexIndexOptionsEnum)
+OrgApacheLuceneIndexIndexOptions *OrgApacheLuceneIndexIndexOptions_values_[5];
 
-OrgApacheLuceneIndexIndexOptionsEnum *OrgApacheLuceneIndexIndexOptionsEnum_values_[5];
+@implementation OrgApacheLuceneIndexIndexOptions
 
-@implementation OrgApacheLuceneIndexIndexOptionsEnum
-
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgApacheLuceneIndexIndexOptionsEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
++ (OrgApacheLuceneIndexIndexOptions *)NONE {
+  return JreEnum(OrgApacheLuceneIndexIndexOptions, NONE);
 }
 
-IOSObjectArray *OrgApacheLuceneIndexIndexOptionsEnum_values() {
-  OrgApacheLuceneIndexIndexOptionsEnum_initialize();
-  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneIndexIndexOptionsEnum_values_ count:5 type:OrgApacheLuceneIndexIndexOptionsEnum_class_()];
++ (OrgApacheLuceneIndexIndexOptions *)DOCS {
+  return JreEnum(OrgApacheLuceneIndexIndexOptions, DOCS);
+}
+
++ (OrgApacheLuceneIndexIndexOptions *)DOCS_AND_FREQS {
+  return JreEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS);
+}
+
++ (OrgApacheLuceneIndexIndexOptions *)DOCS_AND_FREQS_AND_POSITIONS {
+  return JreEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS);
+}
+
++ (OrgApacheLuceneIndexIndexOptions *)DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS {
+  return JreEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS);
 }
 
 + (IOSObjectArray *)values {
-  return OrgApacheLuceneIndexIndexOptionsEnum_values();
+  return OrgApacheLuceneIndexIndexOptions_values();
 }
 
-+ (OrgApacheLuceneIndexIndexOptionsEnum *)valueOfWithNSString:(NSString *)name {
-  return OrgApacheLuceneIndexIndexOptionsEnum_valueOfWithNSString_(name);
++ (OrgApacheLuceneIndexIndexOptions *)valueOfWithNSString:(NSString *)name {
+  return OrgApacheLuceneIndexIndexOptions_valueOfWithNSString_(name);
 }
 
-OrgApacheLuceneIndexIndexOptionsEnum *OrgApacheLuceneIndexIndexOptionsEnum_valueOfWithNSString_(NSString *name) {
-  OrgApacheLuceneIndexIndexOptionsEnum_initialize();
+- (OrgApacheLuceneIndexIndexOptions_Enum)toNSEnum {
+  return (OrgApacheLuceneIndexIndexOptions_Enum)[self ordinal];
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+  return self;
+}
+
++ (void)initialize {
+  if (self == [OrgApacheLuceneIndexIndexOptions class]) {
+    size_t objSize = class_getInstanceSize(self);
+    size_t allocSize = 5 * objSize;
+    uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
+    id e;
+    (JreEnum(OrgApacheLuceneIndexIndexOptions, NONE) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneIndexIndexOptions_initWithNSString_withInt_(e, @"NONE", 0);
+    (JreEnum(OrgApacheLuceneIndexIndexOptions, DOCS) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneIndexIndexOptions_initWithNSString_withInt_(e, @"DOCS", 1);
+    (JreEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneIndexIndexOptions_initWithNSString_withInt_(e, @"DOCS_AND_FREQS", 2);
+    (JreEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneIndexIndexOptions_initWithNSString_withInt_(e, @"DOCS_AND_FREQS_AND_POSITIONS", 3);
+    (JreEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneIndexIndexOptions_initWithNSString_withInt_(e, @"DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS", 4);
+    J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexIndexOptions)
+  }
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static const J2ObjcFieldInfo fields[] = {
+    { "NONE", "NONE", 0x4019, "Lorg.apache.lucene.index.IndexOptions;", &JreEnum(OrgApacheLuceneIndexIndexOptions, NONE), NULL, .constantValue.asLong = 0 },
+    { "DOCS", "DOCS", 0x4019, "Lorg.apache.lucene.index.IndexOptions;", &JreEnum(OrgApacheLuceneIndexIndexOptions, DOCS), NULL, .constantValue.asLong = 0 },
+    { "DOCS_AND_FREQS", "DOCS_AND_FREQS", 0x4019, "Lorg.apache.lucene.index.IndexOptions;", &JreEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS), NULL, .constantValue.asLong = 0 },
+    { "DOCS_AND_FREQS_AND_POSITIONS", "DOCS_AND_FREQS_AND_POSITIONS", 0x4019, "Lorg.apache.lucene.index.IndexOptions;", &JreEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS), NULL, .constantValue.asLong = 0 },
+    { "DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS", "DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS", 0x4019, "Lorg.apache.lucene.index.IndexOptions;", &JreEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS), NULL, .constantValue.asLong = 0 },
+  };
+  static const char *superclass_type_args[] = {"Lorg.apache.lucene.index.IndexOptions;"};
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexOptions = { 2, "IndexOptions", "org.apache.lucene.index", NULL, 0x4011, 0, NULL, 5, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/index/IndexOptions;>;" };
+  return &_OrgApacheLuceneIndexIndexOptions;
+}
+
+@end
+
+void OrgApacheLuceneIndexIndexOptions_initWithNSString_withInt_(OrgApacheLuceneIndexIndexOptions *self, NSString *__name, jint __ordinal) {
+  JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
+}
+
+IOSObjectArray *OrgApacheLuceneIndexIndexOptions_values() {
+  OrgApacheLuceneIndexIndexOptions_initialize();
+  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneIndexIndexOptions_values_ count:5 type:OrgApacheLuceneIndexIndexOptions_class_()];
+}
+
+OrgApacheLuceneIndexIndexOptions *OrgApacheLuceneIndexIndexOptions_valueOfWithNSString_(NSString *name) {
+  OrgApacheLuceneIndexIndexOptions_initialize();
   for (int i = 0; i < 5; i++) {
-    OrgApacheLuceneIndexIndexOptionsEnum *e = OrgApacheLuceneIndexIndexOptionsEnum_values_[i];
+    OrgApacheLuceneIndexIndexOptions *e = OrgApacheLuceneIndexIndexOptions_values_[i];
     if ([name isEqual:[e name]]) {
       return e;
     }
@@ -50,44 +109,12 @@ OrgApacheLuceneIndexIndexOptionsEnum *OrgApacheLuceneIndexIndexOptionsEnum_value
   return nil;
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return [self retain];
-}
-
-+ (void)initialize {
-  if (self == [OrgApacheLuceneIndexIndexOptionsEnum class]) {
-    OrgApacheLuceneIndexIndexOptionsEnum_NONE = new_OrgApacheLuceneIndexIndexOptionsEnum_initWithNSString_withInt_(@"NONE", 0);
-    OrgApacheLuceneIndexIndexOptionsEnum_DOCS = new_OrgApacheLuceneIndexIndexOptionsEnum_initWithNSString_withInt_(@"DOCS", 1);
-    OrgApacheLuceneIndexIndexOptionsEnum_DOCS_AND_FREQS = new_OrgApacheLuceneIndexIndexOptionsEnum_initWithNSString_withInt_(@"DOCS_AND_FREQS", 2);
-    OrgApacheLuceneIndexIndexOptionsEnum_DOCS_AND_FREQS_AND_POSITIONS = new_OrgApacheLuceneIndexIndexOptionsEnum_initWithNSString_withInt_(@"DOCS_AND_FREQS_AND_POSITIONS", 3);
-    OrgApacheLuceneIndexIndexOptionsEnum_DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS = new_OrgApacheLuceneIndexIndexOptionsEnum_initWithNSString_withInt_(@"DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS", 4);
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexIndexOptionsEnum)
+OrgApacheLuceneIndexIndexOptions *OrgApacheLuceneIndexIndexOptions_fromOrdinal(NSUInteger ordinal) {
+  OrgApacheLuceneIndexIndexOptions_initialize();
+  if (ordinal >= 5) {
+    return nil;
   }
+  return OrgApacheLuceneIndexIndexOptions_values_[ordinal];
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcFieldInfo fields[] = {
-    { "NONE", "NONE", 0x4019, "Lorg.apache.lucene.index.IndexOptions;", &OrgApacheLuceneIndexIndexOptionsEnum_NONE, NULL, .constantValue.asLong = 0 },
-    { "DOCS", "DOCS", 0x4019, "Lorg.apache.lucene.index.IndexOptions;", &OrgApacheLuceneIndexIndexOptionsEnum_DOCS, NULL, .constantValue.asLong = 0 },
-    { "DOCS_AND_FREQS", "DOCS_AND_FREQS", 0x4019, "Lorg.apache.lucene.index.IndexOptions;", &OrgApacheLuceneIndexIndexOptionsEnum_DOCS_AND_FREQS, NULL, .constantValue.asLong = 0 },
-    { "DOCS_AND_FREQS_AND_POSITIONS", "DOCS_AND_FREQS_AND_POSITIONS", 0x4019, "Lorg.apache.lucene.index.IndexOptions;", &OrgApacheLuceneIndexIndexOptionsEnum_DOCS_AND_FREQS_AND_POSITIONS, NULL, .constantValue.asLong = 0 },
-    { "DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS", "DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS", 0x4019, "Lorg.apache.lucene.index.IndexOptions;", &OrgApacheLuceneIndexIndexOptionsEnum_DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.index.IndexOptions;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexOptionsEnum = { 2, "IndexOptions", "org.apache.lucene.index", NULL, 0x4011, 0, NULL, 5, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/index/IndexOptions;>;" };
-  return &_OrgApacheLuceneIndexIndexOptionsEnum;
-}
-
-@end
-
-void OrgApacheLuceneIndexIndexOptionsEnum_initWithNSString_withInt_(OrgApacheLuceneIndexIndexOptionsEnum *self, NSString *__name, jint __ordinal) {
-  JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
-}
-
-OrgApacheLuceneIndexIndexOptionsEnum *new_OrgApacheLuceneIndexIndexOptionsEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  OrgApacheLuceneIndexIndexOptionsEnum *self = [OrgApacheLuceneIndexIndexOptionsEnum alloc];
-  OrgApacheLuceneIndexIndexOptionsEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexIndexOptionsEnum)
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexIndexOptions)

@@ -20,8 +20,8 @@
 @implementation OrgLukhnosPortmobileChannelsUtilsFileChannelUtils
 
 + (JavaNioChannelsFileChannel *)openWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
-             withOrgLukhnosPortmobileFileStandardOpenOptionEnumArray:(IOSObjectArray *)options {
-  return OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_openWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardOpenOptionEnumArray_(path, options);
+                 withOrgLukhnosPortmobileFileStandardOpenOptionArray:(IOSObjectArray *)options {
+  return OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_openWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardOpenOptionArray_(path, options);
 }
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -33,8 +33,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "openWithOrgLukhnosPortmobileFilePath:withOrgLukhnosPortmobileFileStandardOpenOptionEnumArray:", "open", "Ljava.nio.channels.FileChannel;", 0x89, "Ljava.io.IOException;", NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "openWithOrgLukhnosPortmobileFilePath:withOrgLukhnosPortmobileFileStandardOpenOptionArray:", "open", "Ljava.nio.channels.FileChannel;", 0x89, "Ljava.io.IOException;", NULL },
+    { "init", "FileChannelUtils", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgLukhnosPortmobileChannelsUtilsFileChannelUtils = { 2, "FileChannelUtils", "org.lukhnos.portmobile.channels.utils", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgLukhnosPortmobileChannelsUtilsFileChannelUtils;
@@ -42,21 +42,21 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 @end
 
-JavaNioChannelsFileChannel *OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_openWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardOpenOptionEnumArray_(OrgLukhnosPortmobileFilePath *path, IOSObjectArray *options) {
+JavaNioChannelsFileChannel *OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_openWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardOpenOptionArray_(OrgLukhnosPortmobileFilePath *path, IOSObjectArray *options) {
   OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_initialize();
   id<JavaUtilList> optionList = JavaUtilArrays_asListWithNSObjectArray_(options);
-  if ([((id<JavaUtilList>) nil_chk(optionList)) size] == 1 && [optionList containsWithId:JreLoadStatic(OrgLukhnosPortmobileFileStandardOpenOptionEnum, READ)]) {
-    JavaIoRandomAccessFile *raf = [new_JavaIoRandomAccessFile_initWithJavaIoFile_withNSString_([((OrgLukhnosPortmobileFilePath *) nil_chk(path)) toFile], @"r") autorelease];
+  if ([((id<JavaUtilList>) nil_chk(optionList)) size] == 1 && [optionList containsWithId:JreLoadEnum(OrgLukhnosPortmobileFileStandardOpenOption, READ)]) {
+    JavaIoRandomAccessFile *raf = create_JavaIoRandomAccessFile_initWithJavaIoFile_withNSString_([((OrgLukhnosPortmobileFilePath *) nil_chk(path)) toFile], @"r");
     return [raf getChannel];
   }
-  else if ([optionList containsWithId:JreLoadStatic(OrgLukhnosPortmobileFileStandardOpenOptionEnum, WRITE)]) {
-    if (OrgLukhnosPortmobileFileFiles_notExistsWithOrgLukhnosPortmobileFilePath_(path) && [optionList containsWithId:JreLoadStatic(OrgLukhnosPortmobileFileStandardOpenOptionEnum, CREATE)]) {
+  else if ([optionList containsWithId:JreLoadEnum(OrgLukhnosPortmobileFileStandardOpenOption, WRITE)]) {
+    if (OrgLukhnosPortmobileFileFiles_notExistsWithOrgLukhnosPortmobileFilePath_(path) && [optionList containsWithId:JreLoadEnum(OrgLukhnosPortmobileFileStandardOpenOption, CREATE)]) {
       OrgLukhnosPortmobileFileFiles_createFileWithOrgLukhnosPortmobileFilePath_(path);
     }
-    JavaIoRandomAccessFile *raf = [new_JavaIoRandomAccessFile_initWithJavaIoFile_withNSString_([((OrgLukhnosPortmobileFilePath *) nil_chk(path)) toFile], @"rw") autorelease];
+    JavaIoRandomAccessFile *raf = create_JavaIoRandomAccessFile_initWithJavaIoFile_withNSString_([((OrgLukhnosPortmobileFilePath *) nil_chk(path)) toFile], @"rw");
     return [raf getChannel];
   }
-  @throw [new_JavaIoIOException_initWithNSString_(JreStrcat("$@", @"Unknown options: ", options)) autorelease];
+  @throw create_JavaIoIOException_initWithNSString_(JreStrcat("$@", @"Unknown options: ", options));
 }
 
 void OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_init(OrgLukhnosPortmobileChannelsUtilsFileChannelUtils *self) {
@@ -64,9 +64,11 @@ void OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_init(OrgLukhnosPortmobile
 }
 
 OrgLukhnosPortmobileChannelsUtilsFileChannelUtils *new_OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_init() {
-  OrgLukhnosPortmobileChannelsUtilsFileChannelUtils *self = [OrgLukhnosPortmobileChannelsUtilsFileChannelUtils alloc];
-  OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgLukhnosPortmobileChannelsUtilsFileChannelUtils, init)
+}
+
+OrgLukhnosPortmobileChannelsUtilsFileChannelUtils *create_OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_init() {
+  J2OBJC_CREATE_IMPL(OrgLukhnosPortmobileChannelsUtilsFileChannelUtils, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileChannelsUtilsFileChannelUtils)

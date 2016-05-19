@@ -5,31 +5,45 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_RESTRICT
-#define OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser 0
 #else
-#define OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser 1
 #endif
-#undef OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser
 
-#if !defined (_OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_) && (OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_INCLUDE_ALL || OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_INCLUDE)
-#define _OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_
+#if !defined (OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser || defined(INCLUDE_OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser))
+#define OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_
 
-#define OrgApacheLuceneQueryparserXmlCoreParser_RESTRICT 1
-#define OrgApacheLuceneQueryparserXmlCoreParser_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserXmlCoreParser 1
+#define INCLUDE_OrgApacheLuceneQueryparserXmlCoreParser 1
 #include "org/apache/lucene/queryparser/xml/CoreParser.h"
 
 @class OrgApacheLuceneAnalysisAnalyzer;
 @class OrgApacheLuceneQueryparserClassicQueryParser;
 
+/*!
+ @brief Assembles a QueryBuilder which uses Query objects from
+ Lucene's <code>sandbox</code> and <code>queries</code>
+ modules in addition to core queries.
+ */
 @interface OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser : OrgApacheLuceneQueryparserXmlCoreParser
 
 #pragma mark Public
 
+/*!
+ @brief Construct an XML parser that uses a single instance QueryParser for handling
+ UserQuery tags - all parse operations are synchronized on this parser
+ @param parser A QueryParser which will be synchronized on during parse calls.
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
        withOrgApacheLuceneQueryparserClassicQueryParser:(OrgApacheLuceneQueryparserClassicQueryParser *)parser;
 
+/*!
+ @brief Constructs an XML parser that creates a QueryParser for each UserQuery request.
+ @param defaultField The default field name used by QueryParsers constructed for UserQuery tags
+ */
 - (instancetype)initWithNSString:(NSString *)defaultField
 withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
 
@@ -41,12 +55,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_ini
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser *new_OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneQueryparserClassicQueryParser_(OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneQueryparserClassicQueryParser *parser) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser *create_OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneQueryparserClassicQueryParser_(OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneQueryparserClassicQueryParser *parser);
+
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser *self, NSString *defaultField, OrgApacheLuceneAnalysisAnalyzer *analyzer);
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser *new_OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(NSString *defaultField, OrgApacheLuceneAnalysisAnalyzer *analyzer) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser *create_OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(NSString *defaultField, OrgApacheLuceneAnalysisAnalyzer *analyzer);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser")

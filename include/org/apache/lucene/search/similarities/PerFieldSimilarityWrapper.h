@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_RESTRICT
-#define OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper")
+#ifdef RESTRICT_OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper 0
 #else
-#define OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper 1
 #endif
-#undef OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper
 
-#if !defined (_OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_) && (OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_INCLUDE_ALL || OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_INCLUDE)
-#define _OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_
+#if !defined (OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper))
+#define OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_
 
-#define OrgApacheLuceneSearchSimilaritiesSimilarity_RESTRICT 1
-#define OrgApacheLuceneSearchSimilaritiesSimilarity_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSimilaritiesSimilarity 1
+#define INCLUDE_OrgApacheLuceneSearchSimilaritiesSimilarity 1
 #include "org/apache/lucene/search/similarities/Similarity.h"
 
 @class IOSObjectArray;
@@ -27,10 +27,21 @@
 @class OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer;
 @class OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight;
 
+/*!
+ @brief Provides the ability to use a different <code>Similarity</code> for different fields.
+ <p>
+ Subclasses should implement <code>get(String)</code> to return an appropriate
+ Similarity (for example, using field-specific parameter values) for the field.
+ */
 @interface OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper : OrgApacheLuceneSearchSimilaritiesSimilarity
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ (For invocation by subclass 
+ constructors, typically implicit.)
+ */
 - (instancetype)init;
 
 - (jlong)computeNormWithOrgApacheLuceneIndexFieldInvertState:(OrgApacheLuceneIndexFieldInvertState *)state;
@@ -39,6 +50,9 @@
                                     withOrgApacheLuceneSearchCollectionStatistics:(OrgApacheLuceneSearchCollectionStatistics *)collectionStats
                                      withOrgApacheLuceneSearchTermStatisticsArray:(IOSObjectArray *)termStats;
 
+/*!
+ @brief Returns a <code>Similarity</code> for scoring a field.
+ */
 - (OrgApacheLuceneSearchSimilaritiesSimilarity *)getWithNSString:(NSString *)name;
 
 - (OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *)simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:(OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight *)weight
@@ -54,11 +68,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWr
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight_) && (OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_INCLUDE_ALL || OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight_INCLUDE)
-#define _OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight_
+#if !defined (OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight))
+#define OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight_
 
-#define OrgApacheLuceneSearchSimilaritiesSimilarity_RESTRICT 1
-#define OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSimilaritiesSimilarity 1
+#define INCLUDE_OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight 1
 #include "org/apache/lucene/search/similarities/Similarity.h"
 
 @class OrgApacheLuceneSearchSimilaritiesSimilarity;
@@ -91,8 +105,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrappe
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight *new_OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight *create_OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper")

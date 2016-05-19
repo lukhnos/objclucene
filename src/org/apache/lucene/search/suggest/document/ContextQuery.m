@@ -52,9 +52,21 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentContextQuery, contexts_,
 
 __attribute__((unused)) static OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneSearchSuggestDocumentContextQuery_toContextAutomatonWithJavaUtilMap_withBoolean_(id<JavaUtilMap> contexts, jboolean matchAllContexts);
 
+/*!
+ @brief Holder for context value meta data
+ */
 @interface OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextMetaData : NSObject {
  @public
+  /*!
+   @brief Boost associated with a
+ context value
+   */
   jfloat boost_;
+  /*!
+   @brief flag to indicate whether the context
+ value should be treated as an exact
+ value or a context prefix
+   */
   jboolean exact_;
 }
 
@@ -68,6 +80,8 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestDocumentContextQuery_Contex
 __attribute__((unused)) static void OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextMetaData_initWithFloat_withBoolean_(OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextMetaData *self, jfloat boost, jboolean exact);
 
 __attribute__((unused)) static OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextMetaData *new_OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextMetaData_initWithFloat_withBoolean_(jfloat boost, jboolean exact) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextMetaData *create_OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextMetaData_initWithFloat_withBoolean_(jfloat boost, jboolean exact);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextMetaData)
 
@@ -111,6 +125,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSuggestDocumentContextQ
 
 __attribute__((unused)) static OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextCompletionWeight *new_OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextCompletionWeight_initWithOrgApacheLuceneSearchSuggestDocumentContextQuery_withOrgApacheLuceneSearchSuggestDocumentCompletionQuery_withOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneSearchSuggestDocumentCompletionWeight_withJavaUtilMap_withIntArray_(OrgApacheLuceneSearchSuggestDocumentContextQuery *outer$, OrgApacheLuceneSearchSuggestDocumentCompletionQuery *query, OrgApacheLuceneUtilAutomatonAutomaton *automaton, OrgApacheLuceneSearchSuggestDocumentCompletionWeight *innerWeight, id<JavaUtilMap> contextMap, IOSIntArray *contextLengths) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextCompletionWeight *create_OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextCompletionWeight_initWithOrgApacheLuceneSearchSuggestDocumentContextQuery_withOrgApacheLuceneSearchSuggestDocumentCompletionQuery_withOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneSearchSuggestDocumentCompletionWeight_withJavaUtilMap_withIntArray_(OrgApacheLuceneSearchSuggestDocumentContextQuery *outer$, OrgApacheLuceneSearchSuggestDocumentCompletionQuery *query, OrgApacheLuceneUtilAutomatonAutomaton *automaton, OrgApacheLuceneSearchSuggestDocumentCompletionWeight *innerWeight, id<JavaUtilMap> contextMap, IOSIntArray *contextLengths);
+
 __attribute__((unused)) static void OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextCompletionWeight_setInnerWeightWithOrgApacheLuceneUtilIntsRef_withInt_(OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextCompletionWeight *self, OrgApacheLuceneUtilIntsRef *ref, jint offset);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextCompletionWeight)
@@ -135,14 +151,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentContextQuery_Cont
                                  withFloat:(jfloat)boost
                                withBoolean:(jboolean)exact {
   if (boost < 0.0f) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"'boost' must be >= 0") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"'boost' must be >= 0");
   }
   for (jint i = 0; i < [((id<JavaLangCharSequence>) nil_chk(context)) length]; i++) {
     if (OrgApacheLuceneSearchSuggestDocumentContextSuggestField_CONTEXT_SEPARATOR == [context charAtWithInt:i]) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@$$$I$", @"Illegal value [", context, @"] UTF-16 codepoint [0x", JavaLangInteger_toHexStringWithInt_((jint) [context charAtWithInt:i]), @"] at position ", i, @" is a reserved character")) autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@$$$I$", @"Illegal value [", context, @"] UTF-16 codepoint [0x", JavaLangInteger_toHexStringWithInt_((jint) [context charAtWithInt:i]), @"] at position ", i, @" is a reserved character"));
     }
   }
-  [((id<JavaUtilMap>) nil_chk(contexts_)) putWithId:OrgApacheLuceneUtilIntsRef_deepCopyOfWithOrgApacheLuceneUtilIntsRef_(OrgApacheLuceneUtilFstUtil_toIntsRefWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilIntsRefBuilder_([new_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(context) autorelease], scratch_)) withId:[new_OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextMetaData_initWithFloat_withBoolean_(boost, exact) autorelease]];
+  [((id<JavaUtilMap>) nil_chk(contexts_)) putWithId:OrgApacheLuceneUtilIntsRef_deepCopyOfWithOrgApacheLuceneUtilIntsRef_(OrgApacheLuceneUtilFstUtil_toIntsRefWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilIntsRefBuilder_(create_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(context), scratch_)) withId:create_OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextMetaData_initWithFloat_withBoolean_(boost, exact)];
 }
 
 - (void)addAllContexts {
@@ -150,8 +166,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentContextQuery_Cont
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
-  JavaLangStringBuilder *buffer = [new_JavaLangStringBuilder_init() autorelease];
-  OrgApacheLuceneUtilBytesRefBuilder *scratch = [new_OrgApacheLuceneUtilBytesRefBuilder_init() autorelease];
+  JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_init();
+  OrgApacheLuceneUtilBytesRefBuilder *scratch = create_OrgApacheLuceneUtilBytesRefBuilder_init();
   for (OrgApacheLuceneUtilIntsRef * __strong context in nil_chk([((id<JavaUtilMap>) nil_chk(contexts_)) keySet])) {
     if ([buffer length] != 0) {
       [buffer appendWithNSString:@","];
@@ -161,7 +177,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentContextQuery_Cont
       [buffer appendWithNSString:@":["];
     }
     [buffer appendWithNSString:[((OrgApacheLuceneUtilBytesRef *) nil_chk(OrgApacheLuceneUtilFstUtil_toBytesRefWithOrgApacheLuceneUtilIntsRef_withOrgApacheLuceneUtilBytesRefBuilder_(context, scratch))) utf8ToString]];
-    OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextMetaData *metaData = [contexts_ getWithId:context];
+    OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextMetaData *metaData = [((id<JavaUtilMap>) nil_chk(contexts_)) getWithId:context];
     if (((OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextMetaData *) nil_chk(metaData))->exact_ == false) {
       [buffer appendWithNSString:@"*"];
     }
@@ -179,14 +195,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentContextQuery_Cont
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores {
-  OrgApacheLuceneSearchSuggestDocumentCompletionWeight *innerWeight = ((OrgApacheLuceneSearchSuggestDocumentCompletionWeight *) check_class_cast([((OrgApacheLuceneSearchSuggestDocumentCompletionQuery *) nil_chk(innerQuery_)) createWeightWithOrgApacheLuceneSearchIndexSearcher:searcher withBoolean:needsScores], [OrgApacheLuceneSearchSuggestDocumentCompletionWeight class]));
+  OrgApacheLuceneSearchSuggestDocumentCompletionWeight *innerWeight = ((OrgApacheLuceneSearchSuggestDocumentCompletionWeight *) cast_chk([((OrgApacheLuceneSearchSuggestDocumentCompletionQuery *) nil_chk(innerQuery_)) createWeightWithOrgApacheLuceneSearchIndexSearcher:searcher withBoolean:needsScores], [OrgApacheLuceneSearchSuggestDocumentCompletionWeight class]));
   OrgApacheLuceneUtilAutomatonAutomaton *optionalSepLabel = OrgApacheLuceneUtilAutomatonOperations_optionalWithOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonAutomata_makeCharWithInt_(OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_SEP_LABEL));
   OrgApacheLuceneUtilAutomatonAutomaton *prefixAutomaton = OrgApacheLuceneUtilAutomatonOperations_concatenateWithOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneUtilAutomatonAutomaton_(optionalSepLabel, [((OrgApacheLuceneSearchSuggestDocumentCompletionWeight *) nil_chk(innerWeight)) getAutomaton]);
   OrgApacheLuceneUtilAutomatonAutomaton *contextsAutomaton = OrgApacheLuceneUtilAutomatonOperations_concatenateWithOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneSearchSuggestDocumentContextQuery_toContextAutomatonWithJavaUtilMap_withBoolean_(contexts_, matchAllContexts_), prefixAutomaton);
   contextsAutomaton = OrgApacheLuceneUtilAutomatonOperations_determinizeWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(contextsAutomaton, OrgApacheLuceneUtilAutomatonOperations_DEFAULT_MAX_DETERMINIZED_STATES);
-  id<JavaUtilMap> contextMap = [new_JavaUtilHashMap_initWithInt_([((id<JavaUtilMap>) nil_chk(contexts_)) size]) autorelease];
-  JavaUtilTreeSet *contextLengths = [new_JavaUtilTreeSet_init() autorelease];
-  for (id<JavaUtilMap_Entry> __strong entry_ in nil_chk([contexts_ entrySet])) {
+  id<JavaUtilMap> contextMap = create_JavaUtilHashMap_initWithInt_([((id<JavaUtilMap>) nil_chk(contexts_)) size]);
+  JavaUtilTreeSet *contextLengths = create_JavaUtilTreeSet_init();
+  for (id<JavaUtilMap_Entry> __strong entry_ in nil_chk([((id<JavaUtilMap>) nil_chk(contexts_)) entrySet])) {
     OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextMetaData *contextMetaData = [((id<JavaUtilMap_Entry>) nil_chk(entry_)) getValue];
     [contextMap putWithId:[entry_ getKey] withId:JavaLangFloat_valueOfWithFloat_(((OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextMetaData *) nil_chk(contextMetaData))->boost_)];
     [contextLengths addWithId:JavaLangInteger_valueOfWithInt_(((OrgApacheLuceneUtilIntsRef *) nil_chk([entry_ getKey]))->length_)];
@@ -196,7 +212,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentContextQuery_Cont
   for (jint i = 0; [((id<JavaUtilIterator>) nil_chk(iterator)) hasNext]; i++) {
     *IOSIntArray_GetRef(contextLengthArray, i) = [((JavaLangInteger *) nil_chk([iterator next])) intValue];
   }
-  return [new_OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextCompletionWeight_initWithOrgApacheLuceneSearchSuggestDocumentContextQuery_withOrgApacheLuceneSearchSuggestDocumentCompletionQuery_withOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneSearchSuggestDocumentCompletionWeight_withJavaUtilMap_withIntArray_(self, self, contextsAutomaton, innerWeight, contextMap, contextLengthArray) autorelease];
+  return create_OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextCompletionWeight_initWithOrgApacheLuceneSearchSuggestDocumentContextQuery_withOrgApacheLuceneSearchSuggestDocumentCompletionQuery_withOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneSearchSuggestDocumentCompletionWeight_withJavaUtilMap_withIntArray_(self, self, contextsAutomaton, innerWeight, contextMap, contextLengthArray);
 }
 
 + (OrgApacheLuceneUtilAutomatonAutomaton *)toContextAutomatonWithJavaUtilMap:(id<JavaUtilMap>)contexts
@@ -220,7 +236,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentContextQuery_Cont
     { "addAllContexts", NULL, "V", 0x1, NULL, NULL },
     { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:", "createWeight", "Lorg.apache.lucene.search.Weight;", 0x1, "Ljava.io.IOException;", NULL },
-    { "toContextAutomatonWithJavaUtilMap:withBoolean:", "toContextAutomaton", "Lorg.apache.lucene.util.automaton.Automaton;", 0xa, NULL, NULL },
+    { "toContextAutomatonWithJavaUtilMap:withBoolean:", "toContextAutomaton", "Lorg.apache.lucene.util.automaton.Automaton;", 0xa, NULL, "(Ljava/util/Map<Lorg/apache/lucene/util/IntsRef;Lorg/apache/lucene/search/suggest/document/ContextQuery$ContextMetaData;>;Z)Lorg/apache/lucene/util/automaton/Automaton;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "scratch_", NULL, 0x2, "Lorg.apache.lucene.util.IntsRefBuilder;", NULL, NULL, .constantValue.asLong = 0 },
@@ -240,16 +256,18 @@ void OrgApacheLuceneSearchSuggestDocumentContextQuery_initWithOrgApacheLuceneSea
   JreStrongAssignAndConsume(&self->scratch_, new_OrgApacheLuceneUtilIntsRefBuilder_init());
   self->matchAllContexts_ = false;
   if ([query isKindOfClass:[OrgApacheLuceneSearchSuggestDocumentContextQuery class]]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$", @"'query' parameter must not be of type ", [[self getClass] getSimpleName])) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$", @"'query' parameter must not be of type ", [[self getClass] getSimpleName]));
   }
   JreStrongAssign(&self->innerQuery_, query);
   JreStrongAssignAndConsume(&self->contexts_, new_JavaUtilHashMap_init());
 }
 
 OrgApacheLuceneSearchSuggestDocumentContextQuery *new_OrgApacheLuceneSearchSuggestDocumentContextQuery_initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery_(OrgApacheLuceneSearchSuggestDocumentCompletionQuery *query) {
-  OrgApacheLuceneSearchSuggestDocumentContextQuery *self = [OrgApacheLuceneSearchSuggestDocumentContextQuery alloc];
-  OrgApacheLuceneSearchSuggestDocumentContextQuery_initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery_(self, query);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentContextQuery, initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery_, query)
+}
+
+OrgApacheLuceneSearchSuggestDocumentContextQuery *create_OrgApacheLuceneSearchSuggestDocumentContextQuery_initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery_(OrgApacheLuceneSearchSuggestDocumentCompletionQuery *query) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentContextQuery, initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery_, query)
 }
 
 OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneSearchSuggestDocumentContextQuery_toContextAutomatonWithJavaUtilMap_withBoolean_(id<JavaUtilMap> contexts, jboolean matchAllContexts) {
@@ -261,7 +279,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneSearchSuggestDocumentConte
   }
   else {
     OrgApacheLuceneUtilAutomatonAutomaton *contextsAutomaton = nil;
-    for (id<JavaUtilMap_Entry> __strong entry_ in nil_chk([contexts entrySet])) {
+    for (id<JavaUtilMap_Entry> __strong entry_ in nil_chk([((id<JavaUtilMap>) nil_chk(contexts)) entrySet])) {
       OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextMetaData *contextMetaData = [((id<JavaUtilMap_Entry>) nil_chk(entry_)) getValue];
       OrgApacheLuceneUtilIntsRef *ref = [entry_ getKey];
       OrgApacheLuceneUtilAutomatonAutomaton *contextAutomaton = OrgApacheLuceneUtilAutomatonAutomata_makeStringWithIntArray_withInt_withInt_(((OrgApacheLuceneUtilIntsRef *) nil_chk(ref))->ints_, ref->offset_, ref->length_);
@@ -311,9 +329,11 @@ void OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextMetaData_initWithFl
 }
 
 OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextMetaData *new_OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextMetaData_initWithFloat_withBoolean_(jfloat boost, jboolean exact) {
-  OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextMetaData *self = [OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextMetaData alloc];
-  OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextMetaData_initWithFloat_withBoolean_(self, boost, exact);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextMetaData, initWithFloat_withBoolean_, boost, exact)
+}
+
+OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextMetaData *create_OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextMetaData_initWithFloat_withBoolean_(jfloat boost, jboolean exact) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextMetaData, initWithFloat_withBoolean_, boost, exact)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextMetaData)
@@ -379,7 +399,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentContextQuer
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSuggestDocumentContextQuery:withOrgApacheLuceneSearchSuggestDocumentCompletionQuery:withOrgApacheLuceneUtilAutomatonAutomaton:withOrgApacheLuceneSearchSuggestDocumentCompletionWeight:withJavaUtilMap:withIntArray:", "ContextCompletionWeight", NULL, 0x1, NULL, NULL },
+    { "initWithOrgApacheLuceneSearchSuggestDocumentContextQuery:withOrgApacheLuceneSearchSuggestDocumentCompletionQuery:withOrgApacheLuceneUtilAutomatonAutomaton:withOrgApacheLuceneSearchSuggestDocumentCompletionWeight:withJavaUtilMap:withIntArray:", "ContextCompletionWeight", NULL, 0x1, NULL, "(Lorg/apache/lucene/search/suggest/document/ContextQuery;Lorg/apache/lucene/search/suggest/document/CompletionQuery;Lorg/apache/lucene/util/automaton/Automaton;Lorg/apache/lucene/search/suggest/document/CompletionWeight;Ljava/util/Map<Lorg/apache/lucene/util/IntsRef;Ljava/lang/Float;>;[I)V" },
     { "setNextMatchWithOrgApacheLuceneUtilIntsRef:", "setNextMatch", "V", 0x4, NULL, NULL },
     { "setInnerWeightWithOrgApacheLuceneUtilIntsRef:withInt:", "setInnerWeight", "V", 0x2, NULL, NULL },
     { "context", NULL, "Ljava.lang.CharSequence;", 0x4, NULL, NULL },
@@ -408,13 +428,15 @@ void OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextCompletionWeight_in
 }
 
 OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextCompletionWeight *new_OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextCompletionWeight_initWithOrgApacheLuceneSearchSuggestDocumentContextQuery_withOrgApacheLuceneSearchSuggestDocumentCompletionQuery_withOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneSearchSuggestDocumentCompletionWeight_withJavaUtilMap_withIntArray_(OrgApacheLuceneSearchSuggestDocumentContextQuery *outer$, OrgApacheLuceneSearchSuggestDocumentCompletionQuery *query, OrgApacheLuceneUtilAutomatonAutomaton *automaton, OrgApacheLuceneSearchSuggestDocumentCompletionWeight *innerWeight, id<JavaUtilMap> contextMap, IOSIntArray *contextLengths) {
-  OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextCompletionWeight *self = [OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextCompletionWeight alloc];
-  OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextCompletionWeight_initWithOrgApacheLuceneSearchSuggestDocumentContextQuery_withOrgApacheLuceneSearchSuggestDocumentCompletionQuery_withOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneSearchSuggestDocumentCompletionWeight_withJavaUtilMap_withIntArray_(self, outer$, query, automaton, innerWeight, contextMap, contextLengths);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextCompletionWeight, initWithOrgApacheLuceneSearchSuggestDocumentContextQuery_withOrgApacheLuceneSearchSuggestDocumentCompletionQuery_withOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneSearchSuggestDocumentCompletionWeight_withJavaUtilMap_withIntArray_, outer$, query, automaton, innerWeight, contextMap, contextLengths)
+}
+
+OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextCompletionWeight *create_OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextCompletionWeight_initWithOrgApacheLuceneSearchSuggestDocumentContextQuery_withOrgApacheLuceneSearchSuggestDocumentCompletionQuery_withOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneSearchSuggestDocumentCompletionWeight_withJavaUtilMap_withIntArray_(OrgApacheLuceneSearchSuggestDocumentContextQuery *outer$, OrgApacheLuceneSearchSuggestDocumentCompletionQuery *query, OrgApacheLuceneUtilAutomatonAutomaton *automaton, OrgApacheLuceneSearchSuggestDocumentCompletionWeight *innerWeight, id<JavaUtilMap> contextMap, IOSIntArray *contextLengths) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextCompletionWeight, initWithOrgApacheLuceneSearchSuggestDocumentContextQuery_withOrgApacheLuceneSearchSuggestDocumentCompletionQuery_withOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneSearchSuggestDocumentCompletionWeight_withJavaUtilMap_withIntArray_, outer$, query, automaton, innerWeight, contextMap, contextLengths)
 }
 
 void OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextCompletionWeight_setInnerWeightWithOrgApacheLuceneUtilIntsRef_withInt_(OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextCompletionWeight *self, OrgApacheLuceneUtilIntsRef *ref, jint offset) {
-  OrgApacheLuceneUtilIntsRefBuilder *refBuilder = [new_OrgApacheLuceneUtilIntsRefBuilder_init() autorelease];
+  OrgApacheLuceneUtilIntsRefBuilder *refBuilder = create_OrgApacheLuceneUtilIntsRefBuilder_init();
   for (jint i = offset; i < ((OrgApacheLuceneUtilIntsRef *) nil_chk(ref))->length_; i++) {
     if (IOSIntArray_Get(nil_chk(ref->ints_), ref->offset_ + i) == OrgApacheLuceneSearchSuggestDocumentContextSuggestField_CONTEXT_SEPARATOR) {
       if (i > 0) {
@@ -426,7 +448,7 @@ void OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextCompletionWeight_se
       }
       ref->offset_ = ++i;
       JreAssert((ref->offset_ < ref->length_), (@"input should not end with the context separator"));
-      if (IOSIntArray_Get(ref->ints_, i) == OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_SEP_LABEL) {
+      if (IOSIntArray_Get(nil_chk(ref->ints_), i) == OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_SEP_LABEL) {
         ref->offset_++;
         JreAssert((ref->offset_ < ref->length_), (@"input should not end with a context separator followed by SEP_LABEL"));
       }

@@ -31,12 +31,18 @@
 
 - (instancetype)init;
 
+/*!
+ @brief Emit a single state in the <code>dot</code> language.
+ */
 + (void)emitDotStateWithJavaIoWriter:(JavaIoWriter *)outArg
                         withNSString:(NSString *)name
                         withNSString:(NSString *)shape
                         withNSString:(NSString *)color
                         withNSString:(NSString *)label;
 
+/*!
+ @brief Ensures an arc's label is indeed printable (dot uses US-ASCII).
+ */
 + (NSString *)printableLabelWithInt:(jint)label;
 
 @end
@@ -45,10 +51,16 @@ __attribute__((unused)) static void OrgApacheLuceneUtilFstUtil_init(OrgApacheLuc
 
 __attribute__((unused)) static OrgApacheLuceneUtilFstUtil *new_OrgApacheLuceneUtilFstUtil_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneUtilFstUtil *create_OrgApacheLuceneUtilFstUtil_init();
+
 __attribute__((unused)) static void OrgApacheLuceneUtilFstUtil_emitDotStateWithJavaIoWriter_withNSString_withNSString_withNSString_withNSString_(JavaIoWriter *outArg, NSString *name, NSString *shape, NSString *color, NSString *label);
 
 __attribute__((unused)) static NSString *OrgApacheLuceneUtilFstUtil_printableLabelWithInt_(jint label);
 
+/*!
+ @brief Compares first by the provided comparator, and then
+ tie breaks by path.input.
+ */
 @interface OrgApacheLuceneUtilFstUtil_TieBreakByInputComparator : NSObject < JavaUtilComparator > {
  @public
   id<JavaUtilComparator> comparator_;
@@ -68,6 +80,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstUtil_TieBreakByInputComparator, compar
 __attribute__((unused)) static void OrgApacheLuceneUtilFstUtil_TieBreakByInputComparator_initWithJavaUtilComparator_(OrgApacheLuceneUtilFstUtil_TieBreakByInputComparator *self, id<JavaUtilComparator> comparator);
 
 __attribute__((unused)) static OrgApacheLuceneUtilFstUtil_TieBreakByInputComparator *new_OrgApacheLuceneUtilFstUtil_TieBreakByInputComparator_initWithJavaUtilComparator_(id<JavaUtilComparator> comparator) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneUtilFstUtil_TieBreakByInputComparator *create_OrgApacheLuceneUtilFstUtil_TieBreakByInputComparator_initWithJavaUtilComparator_(id<JavaUtilComparator> comparator);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstUtil_TieBreakByInputComparator)
 
@@ -191,8 +205,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "init", "Util", NULL, 0x2, NULL, NULL },
     { "getWithOrgApacheLuceneUtilFstFST:withOrgApacheLuceneUtilIntsRef:", "get", "TT;", 0x9, "Ljava.io.IOException;", "<T:Ljava/lang/Object;>(Lorg/apache/lucene/util/fst/FST<TT;>;Lorg/apache/lucene/util/IntsRef;)TT;" },
     { "getWithOrgApacheLuceneUtilFstFST:withOrgApacheLuceneUtilBytesRef:", "get", "TT;", 0x9, "Ljava.io.IOException;", "<T:Ljava/lang/Object;>(Lorg/apache/lucene/util/fst/FST<TT;>;Lorg/apache/lucene/util/BytesRef;)TT;" },
-    { "getByOutputWithOrgApacheLuceneUtilFstFST:withLong:", "getByOutput", "Lorg.apache.lucene.util.IntsRef;", 0x9, "Ljava.io.IOException;", NULL },
-    { "getByOutputWithOrgApacheLuceneUtilFstFST:withLong:withOrgApacheLuceneUtilFstFST_BytesReader:withOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilIntsRefBuilder:", "getByOutput", "Lorg.apache.lucene.util.IntsRef;", 0x9, "Ljava.io.IOException;", NULL },
+    { "getByOutputWithOrgApacheLuceneUtilFstFST:withLong:", "getByOutput", "Lorg.apache.lucene.util.IntsRef;", 0x9, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/fst/FST<Ljava/lang/Long;>;J)Lorg/apache/lucene/util/IntsRef;" },
+    { "getByOutputWithOrgApacheLuceneUtilFstFST:withLong:withOrgApacheLuceneUtilFstFST_BytesReader:withOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilFstFST_Arc:withOrgApacheLuceneUtilIntsRefBuilder:", "getByOutput", "Lorg.apache.lucene.util.IntsRef;", 0x9, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/fst/FST<Ljava/lang/Long;>;JLorg/apache/lucene/util/fst/FST$BytesReader;Lorg/apache/lucene/util/fst/FST$Arc<Ljava/lang/Long;>;Lorg/apache/lucene/util/fst/FST$Arc<Ljava/lang/Long;>;Lorg/apache/lucene/util/IntsRefBuilder;)Lorg/apache/lucene/util/IntsRef;" },
     { "shortestPathsWithOrgApacheLuceneUtilFstFST:withOrgApacheLuceneUtilFstFST_Arc:withId:withJavaUtilComparator:withInt:withBoolean:", "shortestPaths", "Lorg.apache.lucene.util.fst.Util$TopResults;", 0x9, "Ljava.io.IOException;", "<T:Ljava/lang/Object;>(Lorg/apache/lucene/util/fst/FST<TT;>;Lorg/apache/lucene/util/fst/FST$Arc<TT;>;TT;Ljava/util/Comparator<TT;>;IZ)Lorg/apache/lucene/util/fst/Util$TopResults<TT;>;" },
     { "toDotWithOrgApacheLuceneUtilFstFST:withJavaIoWriter:withBoolean:withBoolean:", "toDot", "V", 0x9, "Ljava.io.IOException;", "<T:Ljava/lang/Object;>(Lorg/apache/lucene/util/fst/FST<TT;>;Ljava/io/Writer;ZZ)V" },
     { "emitDotStateWithJavaIoWriter:withNSString:withNSString:withNSString:withNSString:", "emitDotState", "V", 0xa, "Ljava.io.IOException;", NULL },
@@ -216,24 +230,26 @@ void OrgApacheLuceneUtilFstUtil_init(OrgApacheLuceneUtilFstUtil *self) {
 }
 
 OrgApacheLuceneUtilFstUtil *new_OrgApacheLuceneUtilFstUtil_init() {
-  OrgApacheLuceneUtilFstUtil *self = [OrgApacheLuceneUtilFstUtil alloc];
-  OrgApacheLuceneUtilFstUtil_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFstUtil, init)
+}
+
+OrgApacheLuceneUtilFstUtil *create_OrgApacheLuceneUtilFstUtil_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFstUtil, init)
 }
 
 id OrgApacheLuceneUtilFstUtil_getWithOrgApacheLuceneUtilFstFST_withOrgApacheLuceneUtilIntsRef_(OrgApacheLuceneUtilFstFST *fst, OrgApacheLuceneUtilIntsRef *input) {
   OrgApacheLuceneUtilFstUtil_initialize();
-  OrgApacheLuceneUtilFstFST_Arc *arc = [((OrgApacheLuceneUtilFstFST *) nil_chk(fst)) getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:[new_OrgApacheLuceneUtilFstFST_Arc_init() autorelease]];
+  OrgApacheLuceneUtilFstFST_Arc *arc = [((OrgApacheLuceneUtilFstFST *) nil_chk(fst)) getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:create_OrgApacheLuceneUtilFstFST_Arc_init()];
   OrgApacheLuceneUtilFstFST_BytesReader *fstReader = [fst getBytesReader];
   id output = [((OrgApacheLuceneUtilFstOutputs *) nil_chk(fst->outputs_)) getNoOutput];
   for (jint i = 0; i < ((OrgApacheLuceneUtilIntsRef *) nil_chk(input))->length_; i++) {
     if ([fst findTargetArcWithInt:IOSIntArray_Get(nil_chk(input->ints_), input->offset_ + i) withOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_BytesReader:fstReader] == nil) {
       return nil;
     }
-    output = [fst->outputs_ addWithId:output withId:((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->output_];
+    output = [fst->outputs_ addWithId:output withId:((id) ((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->output_)];
   }
   if ([((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc)) isFinal]) {
-    return [fst->outputs_ addWithId:output withId:arc->nextFinalOutput_];
+    return [fst->outputs_ addWithId:output withId:((id) arc->nextFinalOutput_)];
   }
   else {
     return nil;
@@ -242,18 +258,18 @@ id OrgApacheLuceneUtilFstUtil_getWithOrgApacheLuceneUtilFstFST_withOrgApacheLuce
 
 id OrgApacheLuceneUtilFstUtil_getWithOrgApacheLuceneUtilFstFST_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilFstFST *fst, OrgApacheLuceneUtilBytesRef *input) {
   OrgApacheLuceneUtilFstUtil_initialize();
-  JreAssert((((OrgApacheLuceneUtilFstFST *) nil_chk(fst))->inputType_ == JreLoadStatic(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum, BYTE1)), (@"org/apache/lucene/util/fst/Util.java:73 condition failed: assert fst.inputType == FST.INPUT_TYPE.BYTE1;"));
+  JreAssert((((OrgApacheLuceneUtilFstFST *) nil_chk(fst))->inputType_ == JreLoadEnum(OrgApacheLuceneUtilFstFST_INPUT_TYPE, BYTE1)), (@"org/apache/lucene/util/fst/Util.java:73 condition failed: assert fst.inputType == FST.INPUT_TYPE.BYTE1;"));
   OrgApacheLuceneUtilFstFST_BytesReader *fstReader = [fst getBytesReader];
-  OrgApacheLuceneUtilFstFST_Arc *arc = [fst getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:[new_OrgApacheLuceneUtilFstFST_Arc_init() autorelease]];
+  OrgApacheLuceneUtilFstFST_Arc *arc = [fst getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:create_OrgApacheLuceneUtilFstFST_Arc_init()];
   id output = [((OrgApacheLuceneUtilFstOutputs *) nil_chk(fst->outputs_)) getNoOutput];
   for (jint i = 0; i < ((OrgApacheLuceneUtilBytesRef *) nil_chk(input))->length_; i++) {
     if ([fst findTargetArcWithInt:IOSByteArray_Get(nil_chk(input->bytes_), i + input->offset_) & (jint) 0xFF withOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_BytesReader:fstReader] == nil) {
       return nil;
     }
-    output = [fst->outputs_ addWithId:output withId:((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->output_];
+    output = [fst->outputs_ addWithId:output withId:((id) ((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->output_)];
   }
   if ([((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc)) isFinal]) {
-    return [fst->outputs_ addWithId:output withId:arc->nextFinalOutput_];
+    return [fst->outputs_ addWithId:output withId:((id) arc->nextFinalOutput_)];
   }
   else {
     return nil;
@@ -263,9 +279,9 @@ id OrgApacheLuceneUtilFstUtil_getWithOrgApacheLuceneUtilFstFST_withOrgApacheLuce
 OrgApacheLuceneUtilIntsRef *OrgApacheLuceneUtilFstUtil_getByOutputWithOrgApacheLuceneUtilFstFST_withLong_(OrgApacheLuceneUtilFstFST *fst, jlong targetOutput) {
   OrgApacheLuceneUtilFstUtil_initialize();
   OrgApacheLuceneUtilFstFST_BytesReader *in = [((OrgApacheLuceneUtilFstFST *) nil_chk(fst)) getBytesReader];
-  OrgApacheLuceneUtilFstFST_Arc *arc = [fst getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:[new_OrgApacheLuceneUtilFstFST_Arc_init() autorelease]];
-  OrgApacheLuceneUtilFstFST_Arc *scratchArc = [new_OrgApacheLuceneUtilFstFST_Arc_init() autorelease];
-  OrgApacheLuceneUtilIntsRefBuilder *result = [new_OrgApacheLuceneUtilIntsRefBuilder_init() autorelease];
+  OrgApacheLuceneUtilFstFST_Arc *arc = [fst getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:create_OrgApacheLuceneUtilFstFST_Arc_init()];
+  OrgApacheLuceneUtilFstFST_Arc *scratchArc = create_OrgApacheLuceneUtilFstFST_Arc_init();
+  OrgApacheLuceneUtilIntsRefBuilder *result = create_OrgApacheLuceneUtilIntsRefBuilder_init();
   return OrgApacheLuceneUtilFstUtil_getByOutputWithOrgApacheLuceneUtilFstFST_withLong_withOrgApacheLuceneUtilFstFST_BytesReader_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilIntsRefBuilder_(fst, targetOutput, in, arc, scratchArc, result);
 }
 
@@ -328,12 +344,12 @@ OrgApacheLuceneUtilIntsRef *OrgApacheLuceneUtilFstUtil_getByOutputWithOrgApacheL
         }
         [fst readNextRealArcWithOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_BytesReader:inArg];
         [result setIntAtWithInt:upto++ withInt:arc->label_];
-        output += [((JavaLangLong *) arc->output_) longLongValue];
+        output += [((JavaLangLong *) nil_chk(arc->output_)) longLongValue];
       }
       else {
         OrgApacheLuceneUtilFstFST_Arc *prevArc = nil;
         while (true) {
-          jlong minArcOutput = output + [((JavaLangLong *) arc->output_) longLongValue];
+          jlong minArcOutput = output + [((JavaLangLong *) nil_chk(arc->output_)) longLongValue];
           if (minArcOutput == targetOutput) {
             output = minArcOutput;
             [result setIntAtWithInt:upto++ withInt:arc->label_];
@@ -346,7 +362,7 @@ OrgApacheLuceneUtilIntsRef *OrgApacheLuceneUtilFstUtil_getByOutputWithOrgApacheL
             else {
               [arc copyFromWithOrgApacheLuceneUtilFstFST_Arc:prevArc];
               [result setIntAtWithInt:upto++ withInt:arc->label_];
-              output += [((JavaLangLong *) arc->output_) longLongValue];
+              output += [((JavaLangLong *) nil_chk(arc->output_)) longLongValue];
               break;
             }
           }
@@ -371,20 +387,20 @@ OrgApacheLuceneUtilIntsRef *OrgApacheLuceneUtilFstUtil_getByOutputWithOrgApacheL
 
 OrgApacheLuceneUtilFstUtil_TopResults *OrgApacheLuceneUtilFstUtil_shortestPathsWithOrgApacheLuceneUtilFstFST_withOrgApacheLuceneUtilFstFST_Arc_withId_withJavaUtilComparator_withInt_withBoolean_(OrgApacheLuceneUtilFstFST *fst, OrgApacheLuceneUtilFstFST_Arc *fromNode, id startOutput, id<JavaUtilComparator> comparator, jint topN, jboolean allowEmptyString) {
   OrgApacheLuceneUtilFstUtil_initialize();
-  OrgApacheLuceneUtilFstUtil_TopNSearcher *searcher = [new_OrgApacheLuceneUtilFstUtil_TopNSearcher_initWithOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_(fst, topN, topN, comparator) autorelease];
-  [searcher addStartPathsWithOrgApacheLuceneUtilFstFST_Arc:fromNode withId:startOutput withBoolean:allowEmptyString withOrgApacheLuceneUtilIntsRefBuilder:[new_OrgApacheLuceneUtilIntsRefBuilder_init() autorelease]];
+  OrgApacheLuceneUtilFstUtil_TopNSearcher *searcher = create_OrgApacheLuceneUtilFstUtil_TopNSearcher_initWithOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_(fst, topN, topN, comparator);
+  [searcher addStartPathsWithOrgApacheLuceneUtilFstFST_Arc:fromNode withId:startOutput withBoolean:allowEmptyString withOrgApacheLuceneUtilIntsRefBuilder:create_OrgApacheLuceneUtilIntsRefBuilder_init()];
   return [searcher search];
 }
 
 void OrgApacheLuceneUtilFstUtil_toDotWithOrgApacheLuceneUtilFstFST_withJavaIoWriter_withBoolean_withBoolean_(OrgApacheLuceneUtilFstFST *fst, JavaIoWriter *outArg, jboolean sameRank, jboolean labelStates) {
   OrgApacheLuceneUtilFstUtil_initialize();
   NSString *expandedNodeColor = @"blue";
-  OrgApacheLuceneUtilFstFST_Arc *startArc = [((OrgApacheLuceneUtilFstFST *) nil_chk(fst)) getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:[new_OrgApacheLuceneUtilFstFST_Arc_init() autorelease]];
-  id<JavaUtilList> thisLevelQueue = [new_JavaUtilArrayList_init() autorelease];
-  id<JavaUtilList> nextLevelQueue = [new_JavaUtilArrayList_init() autorelease];
+  OrgApacheLuceneUtilFstFST_Arc *startArc = [((OrgApacheLuceneUtilFstFST *) nil_chk(fst)) getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:create_OrgApacheLuceneUtilFstFST_Arc_init()];
+  id<JavaUtilList> thisLevelQueue = create_JavaUtilArrayList_init();
+  id<JavaUtilList> nextLevelQueue = create_JavaUtilArrayList_init();
   [nextLevelQueue addWithId:startArc];
-  id<JavaUtilList> sameLevelStates = [new_JavaUtilArrayList_init() autorelease];
-  JavaUtilBitSet *seen = [new_JavaUtilBitSet_init() autorelease];
+  id<JavaUtilList> sameLevelStates = create_JavaUtilArrayList_init();
+  JavaUtilBitSet *seen = create_JavaUtilBitSet_init();
   [seen setWithInt:(jint) ((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(startArc))->target_];
   NSString *stateShape = @"circle";
   NSString *finalStateShape = @"doublecircle";
@@ -408,7 +424,7 @@ void OrgApacheLuceneUtilFstUtil_toDotWithOrgApacheLuceneUtilFstFST_withJavaIoWri
     id finalOutput;
     if ([startArc isFinal]) {
       isFinal = true;
-      finalOutput = startArc->nextFinalOutput_ == NO_OUTPUT ? nil : startArc->nextFinalOutput_;
+      finalOutput = startArc->nextFinalOutput_ == NO_OUTPUT ? nil : ((id) startArc->nextFinalOutput_);
     }
     else {
       isFinal = false;
@@ -439,25 +455,25 @@ void OrgApacheLuceneUtilFstUtil_toDotWithOrgApacheLuceneUtilFstFST_withJavaIoWri
             }
             NSString *finalOutput;
             if (arc->nextFinalOutput_ != nil && arc->nextFinalOutput_ != NO_OUTPUT) {
-              finalOutput = [fst->outputs_ outputToStringWithId:arc->nextFinalOutput_];
+              finalOutput = [fst->outputs_ outputToStringWithId:((id) arc->nextFinalOutput_)];
             }
             else {
               finalOutput = @"";
             }
             OrgApacheLuceneUtilFstUtil_emitDotStateWithJavaIoWriter_withNSString_withNSString_withNSString_withNSString_(outArg, JavaLangLong_toStringWithLong_(arc->target_), stateShape, stateColor, finalOutput);
             [seen setWithInt:(jint) arc->target_];
-            [nextLevelQueue addWithId:[((OrgApacheLuceneUtilFstFST_Arc *) [new_OrgApacheLuceneUtilFstFST_Arc_init() autorelease]) copyFromWithOrgApacheLuceneUtilFstFST_Arc:arc]];
+            [nextLevelQueue addWithId:[create_OrgApacheLuceneUtilFstFST_Arc_init() copyFromWithOrgApacheLuceneUtilFstFST_Arc:arc]];
             [sameLevelStates addWithId:JavaLangInteger_valueOfWithInt_((jint) arc->target_)];
           }
           NSString *outs;
           if (arc->output_ != NO_OUTPUT) {
-            outs = JreStrcat("C$", '/', [fst->outputs_ outputToStringWithId:arc->output_]);
+            outs = JreStrcat("C$", '/', [fst->outputs_ outputToStringWithId:((id) arc->output_)]);
           }
           else {
             outs = @"";
           }
           if (!OrgApacheLuceneUtilFstFST_targetHasArcsWithOrgApacheLuceneUtilFstFST_Arc_(arc) && [arc isFinal] && arc->nextFinalOutput_ != NO_OUTPUT) {
-            outs = JreStrcat("$$$C", outs, @"/[", [fst->outputs_ outputToStringWithId:arc->nextFinalOutput_], ']');
+            outs = JreStrcat("$$$C", outs, @"/[", [fst->outputs_ outputToStringWithId:((id) arc->nextFinalOutput_)], ']');
           }
           NSString *arcColor;
           if ([arc flagWithInt:OrgApacheLuceneUtilFstFST_BIT_TARGET_NEXT]) {
@@ -580,7 +596,7 @@ OrgApacheLuceneUtilFstFST_Arc *OrgApacheLuceneUtilFstUtil_readCeilArcWithInt_wit
         arc->nextArc_ = follow->target_;
         arc->node_ = follow->target_;
       }
-      JreStrongAssign(&((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->output_, follow->nextFinalOutput_);
+      JreStrongAssign(&arc->output_, follow->nextFinalOutput_);
       arc->label_ = OrgApacheLuceneUtilFstFST_END_LABEL;
       return arc;
     }
@@ -655,7 +671,7 @@ withOrgApacheLuceneUtilIntsRefBuilder:(OrgApacheLuceneUtilIntsRefBuilder *)input
 
 - (OrgApacheLuceneUtilFstUtil_FSTPath *)newPathWithId:(id)cost
                 withOrgApacheLuceneUtilIntsRefBuilder:(OrgApacheLuceneUtilIntsRefBuilder *)input {
-  return [new_OrgApacheLuceneUtilFstUtil_FSTPath_initWithId_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilIntsRefBuilder_withFloat_withJavaLangCharSequence_(cost, self->arc_, input, self->boost_, self->context_) autorelease];
+  return create_OrgApacheLuceneUtilFstUtil_FSTPath_initWithId_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilIntsRefBuilder_withFloat_withJavaLangCharSequence_(cost, self->arc_, input, self->boost_, self->context_);
 }
 
 - (NSString *)description {
@@ -695,14 +711,16 @@ void OrgApacheLuceneUtilFstUtil_FSTPath_initWithId_withOrgApacheLuceneUtilFstFST
 }
 
 OrgApacheLuceneUtilFstUtil_FSTPath *new_OrgApacheLuceneUtilFstUtil_FSTPath_initWithId_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilIntsRefBuilder_(id cost, OrgApacheLuceneUtilFstFST_Arc *arc, OrgApacheLuceneUtilIntsRefBuilder *input) {
-  OrgApacheLuceneUtilFstUtil_FSTPath *self = [OrgApacheLuceneUtilFstUtil_FSTPath alloc];
-  OrgApacheLuceneUtilFstUtil_FSTPath_initWithId_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilIntsRefBuilder_(self, cost, arc, input);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFstUtil_FSTPath, initWithId_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilIntsRefBuilder_, cost, arc, input)
+}
+
+OrgApacheLuceneUtilFstUtil_FSTPath *create_OrgApacheLuceneUtilFstUtil_FSTPath_initWithId_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilIntsRefBuilder_(id cost, OrgApacheLuceneUtilFstFST_Arc *arc, OrgApacheLuceneUtilIntsRefBuilder *input) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFstUtil_FSTPath, initWithId_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilIntsRefBuilder_, cost, arc, input)
 }
 
 void OrgApacheLuceneUtilFstUtil_FSTPath_initWithId_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilIntsRefBuilder_withFloat_withJavaLangCharSequence_(OrgApacheLuceneUtilFstUtil_FSTPath *self, id cost, OrgApacheLuceneUtilFstFST_Arc *arc, OrgApacheLuceneUtilIntsRefBuilder *input, jfloat boost, id<JavaLangCharSequence> context) {
   NSObject_init(self);
-  JreStrongAssign(&self->arc_, [((OrgApacheLuceneUtilFstFST_Arc *) [new_OrgApacheLuceneUtilFstFST_Arc_init() autorelease]) copyFromWithOrgApacheLuceneUtilFstFST_Arc:arc]);
+  JreStrongAssign(&self->arc_, [create_OrgApacheLuceneUtilFstFST_Arc_init() copyFromWithOrgApacheLuceneUtilFstFST_Arc:arc]);
   JreStrongAssign(&self->cost_, cost);
   JreStrongAssign(&self->input_, input);
   self->boost_ = boost;
@@ -710,9 +728,11 @@ void OrgApacheLuceneUtilFstUtil_FSTPath_initWithId_withOrgApacheLuceneUtilFstFST
 }
 
 OrgApacheLuceneUtilFstUtil_FSTPath *new_OrgApacheLuceneUtilFstUtil_FSTPath_initWithId_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilIntsRefBuilder_withFloat_withJavaLangCharSequence_(id cost, OrgApacheLuceneUtilFstFST_Arc *arc, OrgApacheLuceneUtilIntsRefBuilder *input, jfloat boost, id<JavaLangCharSequence> context) {
-  OrgApacheLuceneUtilFstUtil_FSTPath *self = [OrgApacheLuceneUtilFstUtil_FSTPath alloc];
-  OrgApacheLuceneUtilFstUtil_FSTPath_initWithId_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilIntsRefBuilder_withFloat_withJavaLangCharSequence_(self, cost, arc, input, boost, context);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFstUtil_FSTPath, initWithId_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilIntsRefBuilder_withFloat_withJavaLangCharSequence_, cost, arc, input, boost, context)
+}
+
+OrgApacheLuceneUtilFstUtil_FSTPath *create_OrgApacheLuceneUtilFstUtil_FSTPath_initWithId_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilIntsRefBuilder_withFloat_withJavaLangCharSequence_(id cost, OrgApacheLuceneUtilFstFST_Arc *arc, OrgApacheLuceneUtilIntsRefBuilder *input, jfloat boost, id<JavaLangCharSequence> context) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFstUtil_FSTPath, initWithId_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilIntsRefBuilder_withFloat_withJavaLangCharSequence_, cost, arc, input, boost, context)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUtil_FSTPath)
@@ -726,7 +746,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUtil_FSTPath)
 
 - (jint)compareWithId:(OrgApacheLuceneUtilFstUtil_FSTPath *)a
                withId:(OrgApacheLuceneUtilFstUtil_FSTPath *)b {
-  jint cmp = [((id<JavaUtilComparator>) nil_chk(comparator_)) compareWithId:((OrgApacheLuceneUtilFstUtil_FSTPath *) nil_chk(a))->cost_ withId:((OrgApacheLuceneUtilFstUtil_FSTPath *) nil_chk(b))->cost_];
+  jint cmp = [((id<JavaUtilComparator>) nil_chk(comparator_)) compareWithId:((id) ((OrgApacheLuceneUtilFstUtil_FSTPath *) nil_chk(a))->cost_) withId:((id) ((OrgApacheLuceneUtilFstUtil_FSTPath *) nil_chk(b))->cost_)];
   if (cmp == 0) {
     return [((OrgApacheLuceneUtilIntsRef *) nil_chk([((OrgApacheLuceneUtilIntsRefBuilder *) nil_chk(a->input_)) get])) compareToWithId:[b->input_ get]];
   }
@@ -742,8 +762,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUtil_FSTPath)
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilComparator:", "TieBreakByInputComparator", NULL, 0x1, NULL, NULL },
-    { "compareWithId:withId:", "compare", "I", 0x1, NULL, NULL },
+    { "initWithJavaUtilComparator:", "TieBreakByInputComparator", NULL, 0x1, NULL, "(Ljava/util/Comparator<TT;>;)V" },
+    { "compareWithId:withId:", "compare", "I", 0x1, NULL, "(Lorg/apache/lucene/util/fst/Util$FSTPath<TT;>;Lorg/apache/lucene/util/fst/Util$FSTPath<TT;>;)I" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "comparator_", NULL, 0x12, "Ljava.util.Comparator;", NULL, "Ljava/util/Comparator<TT;>;", .constantValue.asLong = 0 },
@@ -760,9 +780,11 @@ void OrgApacheLuceneUtilFstUtil_TieBreakByInputComparator_initWithJavaUtilCompar
 }
 
 OrgApacheLuceneUtilFstUtil_TieBreakByInputComparator *new_OrgApacheLuceneUtilFstUtil_TieBreakByInputComparator_initWithJavaUtilComparator_(id<JavaUtilComparator> comparator) {
-  OrgApacheLuceneUtilFstUtil_TieBreakByInputComparator *self = [OrgApacheLuceneUtilFstUtil_TieBreakByInputComparator alloc];
-  OrgApacheLuceneUtilFstUtil_TieBreakByInputComparator_initWithJavaUtilComparator_(self, comparator);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFstUtil_TieBreakByInputComparator, initWithJavaUtilComparator_, comparator)
+}
+
+OrgApacheLuceneUtilFstUtil_TieBreakByInputComparator *create_OrgApacheLuceneUtilFstUtil_TieBreakByInputComparator_initWithJavaUtilComparator_(id<JavaUtilComparator> comparator) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFstUtil_TieBreakByInputComparator, initWithJavaUtilComparator_, comparator)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUtil_TieBreakByInputComparator)
@@ -788,15 +810,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUtil_TieBreakByInputCompa
 
 - (void)addIfCompetitiveWithOrgApacheLuceneUtilFstUtil_FSTPath:(OrgApacheLuceneUtilFstUtil_FSTPath *)path {
   JreAssert((queue_ != nil), (@"org/apache/lucene/util/fst/Util.java:340 condition failed: assert queue != null;"));
-  id cost = [((OrgApacheLuceneUtilFstOutputs *) nil_chk(((OrgApacheLuceneUtilFstFST *) nil_chk(fst_))->outputs_)) addWithId:((OrgApacheLuceneUtilFstUtil_FSTPath *) nil_chk(path))->cost_ withId:((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(path->arc_))->output_];
+  id cost = [((OrgApacheLuceneUtilFstOutputs *) nil_chk(((OrgApacheLuceneUtilFstFST *) nil_chk(fst_))->outputs_)) addWithId:((id) ((OrgApacheLuceneUtilFstUtil_FSTPath *) nil_chk(path))->cost_) withId:((id) ((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(path->arc_))->output_)];
   if ([((JavaUtilTreeSet *) nil_chk(queue_)) size] == maxQueueDepth_) {
-    OrgApacheLuceneUtilFstUtil_FSTPath *bottom = [queue_ last];
+    OrgApacheLuceneUtilFstUtil_FSTPath *bottom = [((JavaUtilTreeSet *) nil_chk(queue_)) last];
     jint comp = [((id<JavaUtilComparator>) nil_chk(pathComparator_)) compareWithId:path withId:bottom];
     if (comp > 0) {
       return;
     }
     else if (comp == 0) {
-      [((OrgApacheLuceneUtilIntsRefBuilder *) nil_chk(path->input_)) appendWithInt:path->arc_->label_];
+      [((OrgApacheLuceneUtilIntsRefBuilder *) nil_chk(path->input_)) appendWithInt:((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(path->arc_))->label_];
       jint cmp = [((OrgApacheLuceneUtilIntsRef *) nil_chk([((OrgApacheLuceneUtilFstUtil_FSTPath *) nil_chk(bottom))->input_ get])) compareToWithId:[path->input_ get]];
       [path->input_ setLengthWithInt:[path->input_ length] - 1];
       JreAssert((cmp != 0), (@"org/apache/lucene/util/fst/Util.java:358 condition failed: assert cmp != 0;"));
@@ -807,12 +829,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUtil_TieBreakByInputCompa
   }
   else {
   }
-  OrgApacheLuceneUtilIntsRefBuilder *newInput = [new_OrgApacheLuceneUtilIntsRefBuilder_init() autorelease];
+  OrgApacheLuceneUtilIntsRefBuilder *newInput = create_OrgApacheLuceneUtilIntsRefBuilder_init();
   [newInput copyIntsWithOrgApacheLuceneUtilIntsRef:[((OrgApacheLuceneUtilIntsRefBuilder *) nil_chk(path->input_)) get]];
-  [newInput appendWithInt:path->arc_->label_];
-  [queue_ addWithId:[path newPathWithId:cost withOrgApacheLuceneUtilIntsRefBuilder:newInput]];
-  if ([queue_ size] == maxQueueDepth_ + 1) {
-    [queue_ pollLast];
+  [newInput appendWithInt:((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(path->arc_))->label_];
+  [((JavaUtilTreeSet *) nil_chk(queue_)) addWithId:[path newPathWithId:cost withOrgApacheLuceneUtilIntsRefBuilder:newInput]];
+  if ([((JavaUtilTreeSet *) nil_chk(queue_)) size] == maxQueueDepth_ + 1) {
+    [((JavaUtilTreeSet *) nil_chk(queue_)) pollLast];
   }
 }
 
@@ -829,10 +851,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUtil_TieBreakByInputCompa
                  withOrgApacheLuceneUtilIntsRefBuilder:(OrgApacheLuceneUtilIntsRefBuilder *)input
                                              withFloat:(jfloat)boost
                               withJavaLangCharSequence:(id<JavaLangCharSequence>)context {
-  if ([nil_chk(startOutput) isEqual:[((OrgApacheLuceneUtilFstOutputs *) nil_chk(((OrgApacheLuceneUtilFstFST *) nil_chk(fst_))->outputs_)) getNoOutput]]) {
+  if ([((id) nil_chk(startOutput)) isEqual:[((OrgApacheLuceneUtilFstOutputs *) nil_chk(((OrgApacheLuceneUtilFstFST *) nil_chk(fst_))->outputs_)) getNoOutput]]) {
     startOutput = [fst_->outputs_ getNoOutput];
   }
-  OrgApacheLuceneUtilFstUtil_FSTPath *path = [new_OrgApacheLuceneUtilFstUtil_FSTPath_initWithId_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilIntsRefBuilder_withFloat_withJavaLangCharSequence_(startOutput, node, input, boost, context) autorelease];
+  OrgApacheLuceneUtilFstUtil_FSTPath *path = create_OrgApacheLuceneUtilFstUtil_FSTPath_initWithId_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilIntsRefBuilder_withFloat_withJavaLangCharSequence_(startOutput, node, input, boost, context);
   [fst_ readFirstTargetArcWithOrgApacheLuceneUtilFstFST_Arc:node withOrgApacheLuceneUtilFstFST_Arc:path->arc_ withOrgApacheLuceneUtilFstFST_BytesReader:bytesReader_];
   while (true) {
     if (allowEmptyString || ((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(path->arc_))->label_ != OrgApacheLuceneUtilFstFST_END_LABEL) {
@@ -846,7 +868,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUtil_TieBreakByInputCompa
 }
 
 - (OrgApacheLuceneUtilFstUtil_TopResults *)search {
-  id<JavaUtilList> results = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> results = create_JavaUtilArrayList_init();
   OrgApacheLuceneUtilFstFST_BytesReader *fstReader = [((OrgApacheLuceneUtilFstFST *) nil_chk(fst_)) getBytesReader];
   id NO_OUTPUT = [((OrgApacheLuceneUtilFstOutputs *) nil_chk(fst_->outputs_)) getNoOutput];
   jint rejectCount = 0;
@@ -855,13 +877,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUtil_TieBreakByInputCompa
     if (queue_ == nil) {
       break;
     }
-    path = [((JavaUtilTreeSet *) nil_chk(queue_)) pollFirst];
+    path = [queue_ pollFirst];
     if (path == nil) {
       break;
     }
-    if (((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(((OrgApacheLuceneUtilFstUtil_FSTPath *) nil_chk(path))->arc_))->label_ == OrgApacheLuceneUtilFstFST_END_LABEL) {
-      [path->input_ setLengthWithInt:[((OrgApacheLuceneUtilIntsRefBuilder *) nil_chk(path->input_)) length] - 1];
-      [results addWithId:[new_OrgApacheLuceneUtilFstUtil_Result_initWithOrgApacheLuceneUtilIntsRef_withId_([path->input_ get], path->cost_) autorelease]];
+    if (((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(path->arc_))->label_ == OrgApacheLuceneUtilFstFST_END_LABEL) {
+      [((OrgApacheLuceneUtilIntsRefBuilder *) nil_chk(path->input_)) setLengthWithInt:[path->input_ length] - 1];
+      [results addWithId:create_OrgApacheLuceneUtilFstUtil_Result_initWithOrgApacheLuceneUtilIntsRef_withId_([path->input_ get], ((id) path->cost_))];
       continue;
     }
     if ([results size] == topN_ - 1 && maxQueueDepth_ == topN_) {
@@ -871,7 +893,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUtil_TieBreakByInputCompa
       [fst_ readFirstTargetArcWithOrgApacheLuceneUtilFstFST_Arc:path->arc_ withOrgApacheLuceneUtilFstFST_Arc:path->arc_ withOrgApacheLuceneUtilFstFST_BytesReader:fstReader];
       jboolean foundZero = false;
       while (true) {
-        if ([((id<JavaUtilComparator>) nil_chk(comparator_)) compareWithId:NO_OUTPUT withId:path->arc_->output_] == 0) {
+        if ([((id<JavaUtilComparator>) nil_chk(comparator_)) compareWithId:NO_OUTPUT withId:((id) ((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(path->arc_))->output_)] == 0) {
           if (queue_ == nil) {
             foundZero = true;
             break;
@@ -887,19 +909,19 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUtil_TieBreakByInputCompa
         else if (queue_ != nil) {
           [self addIfCompetitiveWithOrgApacheLuceneUtilFstUtil_FSTPath:path];
         }
-        if ([path->arc_ isLast]) {
+        if ([((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(path->arc_)) isLast]) {
           break;
         }
         [fst_ readNextArcWithOrgApacheLuceneUtilFstFST_Arc:path->arc_ withOrgApacheLuceneUtilFstFST_BytesReader:fstReader];
       }
       JreAssert((foundZero), (@"org/apache/lucene/util/fst/Util.java:505 condition failed: assert foundZero;"));
       if (queue_ != nil) {
-        [path->arc_ copyFromWithOrgApacheLuceneUtilFstFST_Arc:scratchArc_];
+        [((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(path->arc_)) copyFromWithOrgApacheLuceneUtilFstFST_Arc:scratchArc_];
       }
-      if (path->arc_->label_ == OrgApacheLuceneUtilFstFST_END_LABEL) {
-        JreStrongAssign(&path->cost_, [fst_->outputs_ addWithId:path->cost_ withId:path->arc_->output_]);
+      if (((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(path->arc_))->label_ == OrgApacheLuceneUtilFstFST_END_LABEL) {
+        JreStrongAssign(&path->cost_, [fst_->outputs_ addWithId:((id) path->cost_) withId:((id) path->arc_->output_)]);
         if ([self acceptResultWithOrgApacheLuceneUtilFstUtil_FSTPath:path]) {
-          [results addWithId:[new_OrgApacheLuceneUtilFstUtil_Result_initWithOrgApacheLuceneUtilIntsRef_withId_([((OrgApacheLuceneUtilIntsRefBuilder *) nil_chk(path->input_)) get], path->cost_) autorelease]];
+          [results addWithId:create_OrgApacheLuceneUtilFstUtil_Result_initWithOrgApacheLuceneUtilIntsRef_withId_([((OrgApacheLuceneUtilIntsRefBuilder *) nil_chk(path->input_)) get], ((id) path->cost_))];
         }
         else {
           rejectCount++;
@@ -908,15 +930,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUtil_TieBreakByInputCompa
       }
       else {
         [((OrgApacheLuceneUtilIntsRefBuilder *) nil_chk(path->input_)) appendWithInt:path->arc_->label_];
-        JreStrongAssign(&path->cost_, [fst_->outputs_ addWithId:path->cost_ withId:path->arc_->output_]);
+        JreStrongAssign(&path->cost_, [fst_->outputs_ addWithId:((id) path->cost_) withId:((id) ((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(path->arc_))->output_)]);
       }
     }
   }
-  return [new_OrgApacheLuceneUtilFstUtil_TopResults_initWithBoolean_withJavaUtilList_(rejectCount + topN_ <= maxQueueDepth_, results) autorelease];
+  return create_OrgApacheLuceneUtilFstUtil_TopResults_initWithBoolean_withJavaUtilList_(rejectCount + topN_ <= maxQueueDepth_, results);
 }
 
 - (jboolean)acceptResultWithOrgApacheLuceneUtilFstUtil_FSTPath:(OrgApacheLuceneUtilFstUtil_FSTPath *)path {
-  return [self acceptResultWithOrgApacheLuceneUtilIntsRef:[((OrgApacheLuceneUtilIntsRefBuilder *) nil_chk(((OrgApacheLuceneUtilFstUtil_FSTPath *) nil_chk(path))->input_)) get] withId:path->cost_];
+  return [self acceptResultWithOrgApacheLuceneUtilIntsRef:[((OrgApacheLuceneUtilIntsRefBuilder *) nil_chk(((OrgApacheLuceneUtilFstUtil_FSTPath *) nil_chk(path))->input_)) get] withId:((id) path->cost_)];
 }
 
 - (jboolean)acceptResultWithOrgApacheLuceneUtilIntsRef:(OrgApacheLuceneUtilIntsRef *)input
@@ -936,13 +958,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUtil_TieBreakByInputCompa
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilFstFST:withInt:withInt:withJavaUtilComparator:", "TopNSearcher", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilFstFST:withInt:withInt:withJavaUtilComparator:withJavaUtilComparator:", "TopNSearcher", NULL, 0x1, NULL, NULL },
-    { "addIfCompetitiveWithOrgApacheLuceneUtilFstUtil_FSTPath:", "addIfCompetitive", "V", 0x4, NULL, NULL },
+    { "initWithOrgApacheLuceneUtilFstFST:withInt:withInt:withJavaUtilComparator:", "TopNSearcher", NULL, 0x1, NULL, "(Lorg/apache/lucene/util/fst/FST<TT;>;IILjava/util/Comparator<TT;>;)V" },
+    { "initWithOrgApacheLuceneUtilFstFST:withInt:withInt:withJavaUtilComparator:withJavaUtilComparator:", "TopNSearcher", NULL, 0x1, NULL, "(Lorg/apache/lucene/util/fst/FST<TT;>;IILjava/util/Comparator<TT;>;Ljava/util/Comparator<Lorg/apache/lucene/util/fst/Util$FSTPath<TT;>;>;)V" },
+    { "addIfCompetitiveWithOrgApacheLuceneUtilFstUtil_FSTPath:", "addIfCompetitive", "V", 0x4, NULL, "(Lorg/apache/lucene/util/fst/Util$FSTPath<TT;>;)V" },
     { "addStartPathsWithOrgApacheLuceneUtilFstFST_Arc:withId:withBoolean:withOrgApacheLuceneUtilIntsRefBuilder:", "addStartPaths", "V", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/fst/FST$Arc<TT;>;TT;ZLorg/apache/lucene/util/IntsRefBuilder;)V" },
     { "addStartPathsWithOrgApacheLuceneUtilFstFST_Arc:withId:withBoolean:withOrgApacheLuceneUtilIntsRefBuilder:withFloat:withJavaLangCharSequence:", "addStartPaths", "V", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/util/fst/FST$Arc<TT;>;TT;ZLorg/apache/lucene/util/IntsRefBuilder;FLjava/lang/CharSequence;)V" },
-    { "search", NULL, "Lorg.apache.lucene.util.fst.Util$TopResults;", 0x1, "Ljava.io.IOException;", NULL },
-    { "acceptResultWithOrgApacheLuceneUtilFstUtil_FSTPath:", "acceptResult", "Z", 0x4, NULL, NULL },
+    { "search", NULL, "Lorg.apache.lucene.util.fst.Util$TopResults;", 0x1, "Ljava.io.IOException;", "()Lorg/apache/lucene/util/fst/Util$TopResults<TT;>;" },
+    { "acceptResultWithOrgApacheLuceneUtilFstUtil_FSTPath:", "acceptResult", "Z", 0x4, NULL, "(Lorg/apache/lucene/util/fst/Util$FSTPath<TT;>;)Z" },
     { "acceptResultWithOrgApacheLuceneUtilIntsRef:withId:", "acceptResult", "Z", 0x4, NULL, "(Lorg/apache/lucene/util/IntsRef;TT;)Z" },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -962,13 +984,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUtil_TieBreakByInputCompa
 @end
 
 void OrgApacheLuceneUtilFstUtil_TopNSearcher_initWithOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_(OrgApacheLuceneUtilFstUtil_TopNSearcher *self, OrgApacheLuceneUtilFstFST *fst, jint topN, jint maxQueueDepth, id<JavaUtilComparator> comparator) {
-  OrgApacheLuceneUtilFstUtil_TopNSearcher_initWithOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_withJavaUtilComparator_(self, fst, topN, maxQueueDepth, comparator, [new_OrgApacheLuceneUtilFstUtil_TieBreakByInputComparator_initWithJavaUtilComparator_(comparator) autorelease]);
+  OrgApacheLuceneUtilFstUtil_TopNSearcher_initWithOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_withJavaUtilComparator_(self, fst, topN, maxQueueDepth, comparator, create_OrgApacheLuceneUtilFstUtil_TieBreakByInputComparator_initWithJavaUtilComparator_(comparator));
 }
 
 OrgApacheLuceneUtilFstUtil_TopNSearcher *new_OrgApacheLuceneUtilFstUtil_TopNSearcher_initWithOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_(OrgApacheLuceneUtilFstFST *fst, jint topN, jint maxQueueDepth, id<JavaUtilComparator> comparator) {
-  OrgApacheLuceneUtilFstUtil_TopNSearcher *self = [OrgApacheLuceneUtilFstUtil_TopNSearcher alloc];
-  OrgApacheLuceneUtilFstUtil_TopNSearcher_initWithOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_(self, fst, topN, maxQueueDepth, comparator);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFstUtil_TopNSearcher, initWithOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_, fst, topN, maxQueueDepth, comparator)
+}
+
+OrgApacheLuceneUtilFstUtil_TopNSearcher *create_OrgApacheLuceneUtilFstUtil_TopNSearcher_initWithOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_(OrgApacheLuceneUtilFstFST *fst, jint topN, jint maxQueueDepth, id<JavaUtilComparator> comparator) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFstUtil_TopNSearcher, initWithOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_, fst, topN, maxQueueDepth, comparator)
 }
 
 void OrgApacheLuceneUtilFstUtil_TopNSearcher_initWithOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_withJavaUtilComparator_(OrgApacheLuceneUtilFstUtil_TopNSearcher *self, OrgApacheLuceneUtilFstFST *fst, jint topN, jint maxQueueDepth, id<JavaUtilComparator> comparator, id<JavaUtilComparator> pathComparator) {
@@ -985,9 +1009,11 @@ void OrgApacheLuceneUtilFstUtil_TopNSearcher_initWithOrgApacheLuceneUtilFstFST_w
 }
 
 OrgApacheLuceneUtilFstUtil_TopNSearcher *new_OrgApacheLuceneUtilFstUtil_TopNSearcher_initWithOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_withJavaUtilComparator_(OrgApacheLuceneUtilFstFST *fst, jint topN, jint maxQueueDepth, id<JavaUtilComparator> comparator, id<JavaUtilComparator> pathComparator) {
-  OrgApacheLuceneUtilFstUtil_TopNSearcher *self = [OrgApacheLuceneUtilFstUtil_TopNSearcher alloc];
-  OrgApacheLuceneUtilFstUtil_TopNSearcher_initWithOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_withJavaUtilComparator_(self, fst, topN, maxQueueDepth, comparator, pathComparator);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFstUtil_TopNSearcher, initWithOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_withJavaUtilComparator_, fst, topN, maxQueueDepth, comparator, pathComparator)
+}
+
+OrgApacheLuceneUtilFstUtil_TopNSearcher *create_OrgApacheLuceneUtilFstUtil_TopNSearcher_initWithOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_withJavaUtilComparator_(OrgApacheLuceneUtilFstFST *fst, jint topN, jint maxQueueDepth, id<JavaUtilComparator> comparator, id<JavaUtilComparator> pathComparator) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFstUtil_TopNSearcher, initWithOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_withJavaUtilComparator_, fst, topN, maxQueueDepth, comparator, pathComparator)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUtil_TopNSearcher)
@@ -1027,9 +1053,11 @@ void OrgApacheLuceneUtilFstUtil_Result_initWithOrgApacheLuceneUtilIntsRef_withId
 }
 
 OrgApacheLuceneUtilFstUtil_Result *new_OrgApacheLuceneUtilFstUtil_Result_initWithOrgApacheLuceneUtilIntsRef_withId_(OrgApacheLuceneUtilIntsRef *input, id output) {
-  OrgApacheLuceneUtilFstUtil_Result *self = [OrgApacheLuceneUtilFstUtil_Result alloc];
-  OrgApacheLuceneUtilFstUtil_Result_initWithOrgApacheLuceneUtilIntsRef_withId_(self, input, output);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFstUtil_Result, initWithOrgApacheLuceneUtilIntsRef_withId_, input, output)
+}
+
+OrgApacheLuceneUtilFstUtil_Result *create_OrgApacheLuceneUtilFstUtil_Result_initWithOrgApacheLuceneUtilIntsRef_withId_(OrgApacheLuceneUtilIntsRef *input, id output) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFstUtil_Result, initWithOrgApacheLuceneUtilIntsRef_withId_, input, output)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUtil_Result)
@@ -1046,19 +1074,19 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUtil_Result)
   return [((id<JavaUtilList>) nil_chk(topN_)) iterator];
 }
 
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
+  return JreDefaultFastEnumeration(self, state, stackbuf, len);
+}
+
 - (void)dealloc {
   RELEASE_(topN_);
   [super dealloc];
 }
 
-- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithBoolean:withJavaUtilList:", "TopResults", NULL, 0x0, NULL, NULL },
-    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, NULL },
+    { "initWithBoolean:withJavaUtilList:", "TopResults", NULL, 0x0, NULL, "(ZLjava/util/List<Lorg/apache/lucene/util/fst/Util$Result<TT;>;>;)V" },
+    { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, "()Ljava/util/Iterator<Lorg/apache/lucene/util/fst/Util$Result<TT;>;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "isComplete_", NULL, 0x11, "Z", NULL, NULL, .constantValue.asLong = 0 },
@@ -1077,9 +1105,11 @@ void OrgApacheLuceneUtilFstUtil_TopResults_initWithBoolean_withJavaUtilList_(Org
 }
 
 OrgApacheLuceneUtilFstUtil_TopResults *new_OrgApacheLuceneUtilFstUtil_TopResults_initWithBoolean_withJavaUtilList_(jboolean isComplete, id<JavaUtilList> topN) {
-  OrgApacheLuceneUtilFstUtil_TopResults *self = [OrgApacheLuceneUtilFstUtil_TopResults alloc];
-  OrgApacheLuceneUtilFstUtil_TopResults_initWithBoolean_withJavaUtilList_(self, isComplete, topN);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilFstUtil_TopResults, initWithBoolean_withJavaUtilList_, isComplete, topN)
+}
+
+OrgApacheLuceneUtilFstUtil_TopResults *create_OrgApacheLuceneUtilFstUtil_TopResults_initWithBoolean_withJavaUtilList_(jboolean isComplete, id<JavaUtilList> topN) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilFstUtil_TopResults, initWithBoolean_withJavaUtilList_, isComplete, topN)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUtil_TopResults)

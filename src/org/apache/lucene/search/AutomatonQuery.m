@@ -51,15 +51,15 @@
   jint prime = 31;
   jint result = ((jint) [super hash]);
   result = prime * result + ((jint) [((OrgApacheLuceneUtilAutomatonCompiledAutomaton *) nil_chk(compiled_)) hash]);
-  result = prime * result + ((term_ == nil) ? 0 : ((jint) [term_ hash]));
+  result = prime * result + ((term_ == nil) ? 0 : ((jint) [((OrgApacheLuceneIndexTerm *) nil_chk(term_)) hash]));
   return result;
 }
 
 - (jboolean)isEqual:(id)obj {
   if (self == obj) return true;
   if (![super isEqual:obj]) return false;
-  if ([self getClass] != [nil_chk(obj) getClass]) return false;
-  OrgApacheLuceneSearchAutomatonQuery *other = (OrgApacheLuceneSearchAutomatonQuery *) check_class_cast(obj, [OrgApacheLuceneSearchAutomatonQuery class]);
+  if ([self getClass] != (id) [nil_chk(obj) getClass]) return false;
+  OrgApacheLuceneSearchAutomatonQuery *other = (OrgApacheLuceneSearchAutomatonQuery *) cast_chk(obj, [OrgApacheLuceneSearchAutomatonQuery class]);
   if (![((OrgApacheLuceneUtilAutomatonCompiledAutomaton *) nil_chk(compiled_)) isEqual:other->compiled_]) return false;
   if (term_ == nil) {
     if (other->term_ != nil) return false;
@@ -69,7 +69,7 @@
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
-  JavaLangStringBuilder *buffer = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *buffer = create_JavaLangStringBuilder_init();
   if (![((NSString *) nil_chk([((OrgApacheLuceneIndexTerm *) nil_chk(term_)) field])) isEqual:field]) {
     [buffer appendWithNSString:[term_ field]];
     [buffer appendWithNSString:@":"];
@@ -121,9 +121,11 @@ void OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOr
 }
 
 OrgApacheLuceneSearchAutomatonQuery *new_OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneIndexTerm *term, OrgApacheLuceneUtilAutomatonAutomaton *automaton) {
-  OrgApacheLuceneSearchAutomatonQuery *self = [OrgApacheLuceneSearchAutomatonQuery alloc];
-  OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_(self, term, automaton);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchAutomatonQuery, initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_, term, automaton)
+}
+
+OrgApacheLuceneSearchAutomatonQuery *create_OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneIndexTerm *term, OrgApacheLuceneUtilAutomatonAutomaton *automaton) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchAutomatonQuery, initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_, term, automaton)
 }
 
 void OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneSearchAutomatonQuery *self, OrgApacheLuceneIndexTerm *term, OrgApacheLuceneUtilAutomatonAutomaton *automaton, jint maxDeterminizedStates) {
@@ -131,9 +133,11 @@ void OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOr
 }
 
 OrgApacheLuceneSearchAutomatonQuery *new_OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneIndexTerm *term, OrgApacheLuceneUtilAutomatonAutomaton *automaton, jint maxDeterminizedStates) {
-  OrgApacheLuceneSearchAutomatonQuery *self = [OrgApacheLuceneSearchAutomatonQuery alloc];
-  OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_withInt_(self, term, automaton, maxDeterminizedStates);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchAutomatonQuery, initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_withInt_, term, automaton, maxDeterminizedStates)
+}
+
+OrgApacheLuceneSearchAutomatonQuery *create_OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneIndexTerm *term, OrgApacheLuceneUtilAutomatonAutomaton *automaton, jint maxDeterminizedStates) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchAutomatonQuery, initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_withInt_, term, automaton, maxDeterminizedStates)
 }
 
 void OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_withInt_withBoolean_(OrgApacheLuceneSearchAutomatonQuery *self, OrgApacheLuceneIndexTerm *term, OrgApacheLuceneUtilAutomatonAutomaton *automaton, jint maxDeterminizedStates, jboolean isBinary) {
@@ -144,9 +148,11 @@ void OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOr
 }
 
 OrgApacheLuceneSearchAutomatonQuery *new_OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_withInt_withBoolean_(OrgApacheLuceneIndexTerm *term, OrgApacheLuceneUtilAutomatonAutomaton *automaton, jint maxDeterminizedStates, jboolean isBinary) {
-  OrgApacheLuceneSearchAutomatonQuery *self = [OrgApacheLuceneSearchAutomatonQuery alloc];
-  OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_withInt_withBoolean_(self, term, automaton, maxDeterminizedStates, isBinary);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchAutomatonQuery, initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_withInt_withBoolean_, term, automaton, maxDeterminizedStates, isBinary)
+}
+
+OrgApacheLuceneSearchAutomatonQuery *create_OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_withInt_withBoolean_(OrgApacheLuceneIndexTerm *term, OrgApacheLuceneUtilAutomatonAutomaton *automaton, jint maxDeterminizedStates, jboolean isBinary) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchAutomatonQuery, initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_withInt_withBoolean_, term, automaton, maxDeterminizedStates, isBinary)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchAutomatonQuery)

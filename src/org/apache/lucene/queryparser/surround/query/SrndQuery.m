@@ -62,7 +62,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)qf {
   OrgApacheLuceneSearchQuery *q = [self makeLuceneQueryFieldNoBoostWithNSString:fieldName withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:qf];
   if ([self isWeighted]) {
-    [q setBoostWithFloat:[self getWeight] * [((OrgApacheLuceneSearchQuery *) nil_chk(q)) getBoost]];
+    [((OrgApacheLuceneSearchQuery *) nil_chk(q)) setBoostWithFloat:[self getWeight] * [q getBoost]];
   }
   return q;
 }
@@ -86,10 +86,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneQueryparserSurroundQuerySrndQuery *)clone {
   @try {
-    return (OrgApacheLuceneQueryparserSurroundQuerySrndQuery *) check_class_cast([super clone], [OrgApacheLuceneQueryparserSurroundQuerySrndQuery class]);
+    return (OrgApacheLuceneQueryparserSurroundQuerySrndQuery *) cast_chk([super clone], [OrgApacheLuceneQueryparserSurroundQuerySrndQuery class]);
   }
   @catch (JavaLangCloneNotSupportedException *cns) {
-    @throw [new_JavaLangError_initWithJavaLangThrowable_(cns) autorelease];
+    @throw create_JavaLangError_initWithNSException_(cns);
   }
 }
 
@@ -99,7 +99,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (jboolean)isEqual:(id)obj {
   if (obj == nil) return false;
-  if (![[self getClass] isEqual:[nil_chk(obj) getClass]]) return false;
+  if (![[self getClass] isEqual:[obj getClass]]) return false;
   return [((NSString *) nil_chk([self description])) isEqual:[obj description]];
 }
 

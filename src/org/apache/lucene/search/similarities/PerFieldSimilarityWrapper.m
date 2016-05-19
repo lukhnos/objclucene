@@ -29,7 +29,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight *)computeWeightWithFloat:(jfloat)queryBoost
                                     withOrgApacheLuceneSearchCollectionStatistics:(OrgApacheLuceneSearchCollectionStatistics *)collectionStats
                                      withOrgApacheLuceneSearchTermStatisticsArray:(IOSObjectArray *)termStats {
-  OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight *weight = [new_OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight_init() autorelease];
+  OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight *weight = create_OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight_init();
   JreStrongAssign(&weight->delegate_, [self getWithNSString:[((OrgApacheLuceneSearchCollectionStatistics *) nil_chk(collectionStats)) field]]);
   JreStrongAssign(&weight->delegateWeight_, [((OrgApacheLuceneSearchSimilaritiesSimilarity *) nil_chk(weight->delegate_)) computeWeightWithFloat:queryBoost withOrgApacheLuceneSearchCollectionStatistics:collectionStats withOrgApacheLuceneSearchTermStatisticsArray:termStats]);
   return weight;
@@ -37,7 +37,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *)simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:(OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight *)weight
                                                                                     withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
-  OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight *perFieldWeight = (OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight *) check_class_cast(weight, [OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight class]);
+  OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight *perFieldWeight = (OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight *) cast_chk(weight, [OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight class]);
   return [((OrgApacheLuceneSearchSimilaritiesSimilarity *) nil_chk(((OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight *) nil_chk(perFieldWeight))->delegate_)) simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:perFieldWeight->delegateWeight_ withOrgApacheLuceneIndexLeafReaderContext:context];
 }
 
@@ -96,7 +96,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   static const J2ObjcMethodInfo methods[] = {
     { "getValueForNormalization", NULL, "F", 0x1, NULL, NULL },
     { "normalizeWithFloat:withFloat:", "normalize", "V", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x0, NULL, NULL },
+    { "init", "PerFieldSimWeight", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "delegate_", NULL, 0x0, "Lorg.apache.lucene.search.similarities.Similarity;", NULL, NULL, .constantValue.asLong = 0 },
@@ -113,9 +113,11 @@ void OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeigh
 }
 
 OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight *new_OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight_init() {
-  OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight *self = [OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight alloc];
-  OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight, init)
+}
+
+OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight *create_OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight)

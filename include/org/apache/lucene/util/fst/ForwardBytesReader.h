@@ -5,23 +5,26 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilFstForwardBytesReader_INCLUDE_ALL")
-#if OrgApacheLuceneUtilFstForwardBytesReader_RESTRICT
-#define OrgApacheLuceneUtilFstForwardBytesReader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstForwardBytesReader")
+#ifdef RESTRICT_OrgApacheLuceneUtilFstForwardBytesReader
+#define INCLUDE_ALL_OrgApacheLuceneUtilFstForwardBytesReader 0
 #else
-#define OrgApacheLuceneUtilFstForwardBytesReader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilFstForwardBytesReader 1
 #endif
-#undef OrgApacheLuceneUtilFstForwardBytesReader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilFstForwardBytesReader
 
-#if !defined (_OrgApacheLuceneUtilFstForwardBytesReader_) && (OrgApacheLuceneUtilFstForwardBytesReader_INCLUDE_ALL || OrgApacheLuceneUtilFstForwardBytesReader_INCLUDE)
-#define _OrgApacheLuceneUtilFstForwardBytesReader_
+#if !defined (OrgApacheLuceneUtilFstForwardBytesReader_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstForwardBytesReader || defined(INCLUDE_OrgApacheLuceneUtilFstForwardBytesReader))
+#define OrgApacheLuceneUtilFstForwardBytesReader_
 
-#define OrgApacheLuceneUtilFstFST_RESTRICT 1
-#define OrgApacheLuceneUtilFstFST_BytesReader_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilFstFST 1
+#define INCLUDE_OrgApacheLuceneUtilFstFST_BytesReader 1
 #include "org/apache/lucene/util/fst/FST.h"
 
 @class IOSByteArray;
 
+/*!
+ @brief Reads from a single byte[].
+ */
 @interface OrgApacheLuceneUtilFstForwardBytesReader : OrgApacheLuceneUtilFstFST_BytesReader
 
 #pragma mark Public
@@ -50,8 +53,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilFstForwardBytesReader_initWithByteArra
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilFstForwardBytesReader *new_OrgApacheLuceneUtilFstForwardBytesReader_initWithByteArray_(IOSByteArray *bytes) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstForwardBytesReader *create_OrgApacheLuceneUtilFstForwardBytesReader_initWithByteArray_(IOSByteArray *bytes);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstForwardBytesReader)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilFstForwardBytesReader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstForwardBytesReader")

@@ -41,6 +41,8 @@ __attribute__((unused)) static void OrgApacheLuceneStoreSingleInstanceLockFactor
 
 __attribute__((unused)) static OrgApacheLuceneStoreSingleInstanceLockFactory_SingleInstanceLock *new_OrgApacheLuceneStoreSingleInstanceLockFactory_SingleInstanceLock_initWithOrgApacheLuceneStoreSingleInstanceLockFactory_withNSString_(OrgApacheLuceneStoreSingleInstanceLockFactory *outer$, NSString *lockName) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneStoreSingleInstanceLockFactory_SingleInstanceLock *create_OrgApacheLuceneStoreSingleInstanceLockFactory_SingleInstanceLock_initWithOrgApacheLuceneStoreSingleInstanceLockFactory_withNSString_(OrgApacheLuceneStoreSingleInstanceLockFactory *outer$, NSString *lockName);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreSingleInstanceLockFactory_SingleInstanceLock)
 
 @implementation OrgApacheLuceneStoreSingleInstanceLockFactory
@@ -49,10 +51,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreSingleInstanceLockFactory_SingleI
                                                              withNSString:(NSString *)lockName {
   @synchronized(locks_) {
     if ([((JavaUtilHashSet *) nil_chk(locks_)) addWithId:lockName]) {
-      return [new_OrgApacheLuceneStoreSingleInstanceLockFactory_SingleInstanceLock_initWithOrgApacheLuceneStoreSingleInstanceLockFactory_withNSString_(self, lockName) autorelease];
+      return create_OrgApacheLuceneStoreSingleInstanceLockFactory_SingleInstanceLock_initWithOrgApacheLuceneStoreSingleInstanceLockFactory_withNSString_(self, lockName);
     }
     else {
-      @throw [new_OrgApacheLuceneStoreLockObtainFailedException_initWithNSString_(JreStrcat("$@$$C", @"lock instance already obtained: (dir=", dir, @", lockName=", lockName, ')')) autorelease];
+      @throw create_OrgApacheLuceneStoreLockObtainFailedException_initWithNSString_(JreStrcat("$@$$C", @"lock instance already obtained: (dir=", dir, @", lockName=", lockName, ')'));
     }
   }
 }
@@ -72,7 +74,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "obtainLockWithOrgApacheLuceneStoreDirectory:withNSString:", "obtainLock", "Lorg.apache.lucene.store.Lock;", 0x1, "Ljava.io.IOException;", NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "SingleInstanceLockFactory", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "locks_", NULL, 0x10, "Ljava.util.HashSet;", NULL, "Ljava/util/HashSet<Ljava/lang/String;>;", .constantValue.asLong = 0 },
@@ -90,9 +92,11 @@ void OrgApacheLuceneStoreSingleInstanceLockFactory_init(OrgApacheLuceneStoreSing
 }
 
 OrgApacheLuceneStoreSingleInstanceLockFactory *new_OrgApacheLuceneStoreSingleInstanceLockFactory_init() {
-  OrgApacheLuceneStoreSingleInstanceLockFactory *self = [OrgApacheLuceneStoreSingleInstanceLockFactory alloc];
-  OrgApacheLuceneStoreSingleInstanceLockFactory_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreSingleInstanceLockFactory, init)
+}
+
+OrgApacheLuceneStoreSingleInstanceLockFactory *create_OrgApacheLuceneStoreSingleInstanceLockFactory_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreSingleInstanceLockFactory, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreSingleInstanceLockFactory)
@@ -107,11 +111,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreSingleInstanceLockFactory)
 
 - (void)ensureValid {
   if (JreLoadVolatileBoolean(&closed_)) {
-    @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Lock instance already released: ", self)) autorelease];
+    @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Lock instance already released: ", self));
   }
   @synchronized(this$0_->locks_) {
     if (![((JavaUtilHashSet *) nil_chk(this$0_->locks_)) containsWithId:lockName_]) {
-      @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Lock instance was invalidated from map: ", self)) autorelease];
+      @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Lock instance was invalidated from map: ", self));
     }
   }
 }
@@ -124,7 +128,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreSingleInstanceLockFactory)
     @try {
       @synchronized(this$0_->locks_) {
         if (![((JavaUtilHashSet *) nil_chk(this$0_->locks_)) removeWithId:lockName_]) {
-          @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Lock was already released: ", self)) autorelease];
+          @throw create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Lock was already released: ", self));
         }
       }
     }
@@ -169,9 +173,11 @@ void OrgApacheLuceneStoreSingleInstanceLockFactory_SingleInstanceLock_initWithOr
 }
 
 OrgApacheLuceneStoreSingleInstanceLockFactory_SingleInstanceLock *new_OrgApacheLuceneStoreSingleInstanceLockFactory_SingleInstanceLock_initWithOrgApacheLuceneStoreSingleInstanceLockFactory_withNSString_(OrgApacheLuceneStoreSingleInstanceLockFactory *outer$, NSString *lockName) {
-  OrgApacheLuceneStoreSingleInstanceLockFactory_SingleInstanceLock *self = [OrgApacheLuceneStoreSingleInstanceLockFactory_SingleInstanceLock alloc];
-  OrgApacheLuceneStoreSingleInstanceLockFactory_SingleInstanceLock_initWithOrgApacheLuceneStoreSingleInstanceLockFactory_withNSString_(self, outer$, lockName);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreSingleInstanceLockFactory_SingleInstanceLock, initWithOrgApacheLuceneStoreSingleInstanceLockFactory_withNSString_, outer$, lockName)
+}
+
+OrgApacheLuceneStoreSingleInstanceLockFactory_SingleInstanceLock *create_OrgApacheLuceneStoreSingleInstanceLockFactory_SingleInstanceLock_initWithOrgApacheLuceneStoreSingleInstanceLockFactory_withNSString_(OrgApacheLuceneStoreSingleInstanceLockFactory *outer$, NSString *lockName) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreSingleInstanceLockFactory_SingleInstanceLock, initWithOrgApacheLuceneStoreSingleInstanceLockFactory_withNSString_, outer$, lockName)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreSingleInstanceLockFactory_SingleInstanceLock)

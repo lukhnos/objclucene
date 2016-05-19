@@ -32,15 +32,59 @@
 
 @end
 
-NSString *OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_DOC_EXTENSION_ = @"doc";
-NSString *OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_POS_EXTENSION_ = @"pos";
-NSString *OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_PAY_EXTENSION_ = @"pay";
-NSString *OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_TERMS_CODEC_ = @"Lucene50PostingsWriterTerms";
-NSString *OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_DOC_CODEC_ = @"Lucene50PostingsWriterDoc";
-NSString *OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_POS_CODEC_ = @"Lucene50PostingsWriterPos";
-NSString *OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_PAY_CODEC_ = @"Lucene50PostingsWriterPay";
+NSString *OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_DOC_EXTENSION = @"doc";
+NSString *OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_POS_EXTENSION = @"pos";
+NSString *OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_PAY_EXTENSION = @"pay";
+NSString *OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_TERMS_CODEC = @"Lucene50PostingsWriterTerms";
+NSString *OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_DOC_CODEC = @"Lucene50PostingsWriterDoc";
+NSString *OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_POS_CODEC = @"Lucene50PostingsWriterPos";
+NSString *OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_PAY_CODEC = @"Lucene50PostingsWriterPay";
 
 @implementation OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat
+
++ (NSString *)DOC_EXTENSION {
+  return OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_DOC_EXTENSION;
+}
+
++ (NSString *)POS_EXTENSION {
+  return OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_POS_EXTENSION;
+}
+
++ (NSString *)PAY_EXTENSION {
+  return OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_PAY_EXTENSION;
+}
+
++ (jint)MAX_SKIP_LEVELS {
+  return OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_MAX_SKIP_LEVELS;
+}
+
++ (NSString *)TERMS_CODEC {
+  return OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_TERMS_CODEC;
+}
+
++ (NSString *)DOC_CODEC {
+  return OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_DOC_CODEC;
+}
+
++ (NSString *)POS_CODEC {
+  return OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_POS_CODEC;
+}
+
++ (NSString *)PAY_CODEC {
+  return OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_PAY_CODEC;
+}
+
++ (jint)VERSION_START {
+  return OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_VERSION_START;
+}
+
++ (jint)VERSION_CURRENT {
+  return OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_VERSION_CURRENT;
+}
+
++ (jint)BLOCK_SIZE {
+  return OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_BLOCK_SIZE;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -60,10 +104,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (OrgApacheLuceneCodecsFieldsConsumer *)fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state {
-  OrgApacheLuceneCodecsPostingsWriterBase *postingsWriter = [new_OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_initWithOrgApacheLuceneIndexSegmentWriteState_(state) autorelease];
+  OrgApacheLuceneCodecsPostingsWriterBase *postingsWriter = create_OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_initWithOrgApacheLuceneIndexSegmentWriteState_(state);
   jboolean success = false;
   @try {
-    OrgApacheLuceneCodecsFieldsConsumer *ret = [new_OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_initWithOrgApacheLuceneIndexSegmentWriteState_withOrgApacheLuceneCodecsPostingsWriterBase_withInt_withInt_(state, postingsWriter, minTermBlockSize_, maxTermBlockSize_) autorelease];
+    OrgApacheLuceneCodecsFieldsConsumer *ret = create_OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_initWithOrgApacheLuceneIndexSegmentWriteState_withOrgApacheLuceneCodecsPostingsWriterBase_withInt_withInt_(state, postingsWriter, minTermBlockSize_, maxTermBlockSize_);
     success = true;
     return ret;
   }
@@ -75,10 +119,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (OrgApacheLuceneCodecsFieldsProducer *)fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state {
-  OrgApacheLuceneCodecsPostingsReaderBase *postingsReader = [new_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_initWithOrgApacheLuceneIndexSegmentReadState_(state) autorelease];
+  OrgApacheLuceneCodecsPostingsReaderBase *postingsReader = create_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_initWithOrgApacheLuceneIndexSegmentReadState_(state);
   jboolean success = false;
   @try {
-    OrgApacheLuceneCodecsFieldsProducer *ret = [new_OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_initWithOrgApacheLuceneCodecsPostingsReaderBase_withOrgApacheLuceneIndexSegmentReadState_(postingsReader, state) autorelease];
+    OrgApacheLuceneCodecsFieldsProducer *ret = create_OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_initWithOrgApacheLuceneCodecsPostingsReaderBase_withOrgApacheLuceneIndexSegmentReadState_(postingsReader, state);
     success = true;
     return ret;
   }
@@ -98,14 +142,14 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:", "fieldsProducer", "Lorg.apache.lucene.codecs.FieldsProducer;", 0x1, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "DOC_EXTENSION_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_DOC_EXTENSION_, NULL, .constantValue.asLong = 0 },
-    { "POS_EXTENSION_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_POS_EXTENSION_, NULL, .constantValue.asLong = 0 },
-    { "PAY_EXTENSION_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_PAY_EXTENSION_, NULL, .constantValue.asLong = 0 },
+    { "DOC_EXTENSION", "DOC_EXTENSION", 0x19, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_DOC_EXTENSION, NULL, .constantValue.asLong = 0 },
+    { "POS_EXTENSION", "POS_EXTENSION", 0x19, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_POS_EXTENSION, NULL, .constantValue.asLong = 0 },
+    { "PAY_EXTENSION", "PAY_EXTENSION", 0x19, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_PAY_EXTENSION, NULL, .constantValue.asLong = 0 },
     { "MAX_SKIP_LEVELS", "MAX_SKIP_LEVELS", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_MAX_SKIP_LEVELS },
-    { "TERMS_CODEC_", NULL, 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_TERMS_CODEC_, NULL, .constantValue.asLong = 0 },
-    { "DOC_CODEC_", NULL, 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_DOC_CODEC_, NULL, .constantValue.asLong = 0 },
-    { "POS_CODEC_", NULL, 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_POS_CODEC_, NULL, .constantValue.asLong = 0 },
-    { "PAY_CODEC_", NULL, 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_PAY_CODEC_, NULL, .constantValue.asLong = 0 },
+    { "TERMS_CODEC", "TERMS_CODEC", 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_TERMS_CODEC, NULL, .constantValue.asLong = 0 },
+    { "DOC_CODEC", "DOC_CODEC", 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_DOC_CODEC, NULL, .constantValue.asLong = 0 },
+    { "POS_CODEC", "POS_CODEC", 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_POS_CODEC, NULL, .constantValue.asLong = 0 },
+    { "PAY_CODEC", "PAY_CODEC", 0x18, "Ljava.lang.String;", &OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_PAY_CODEC, NULL, .constantValue.asLong = 0 },
     { "VERSION_START", "VERSION_START", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_VERSION_START },
     { "VERSION_CURRENT", "VERSION_CURRENT", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_VERSION_CURRENT },
     { "minTermBlockSize_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
@@ -124,9 +168,11 @@ void OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_init(OrgApacheLuceneCod
 }
 
 OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat *new_OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_init() {
-  OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat *self = [OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat alloc];
-  OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat, init)
+}
+
+OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat *create_OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat, init)
 }
 
 void OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_initWithInt_withInt_(OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat *self, jint minTermBlockSize, jint maxTermBlockSize) {
@@ -137,9 +183,11 @@ void OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_initWithInt_withInt_(Or
 }
 
 OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat *new_OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_initWithInt_withInt_(jint minTermBlockSize, jint maxTermBlockSize) {
-  OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat *self = [OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat alloc];
-  OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_initWithInt_withInt_(self, minTermBlockSize, maxTermBlockSize);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat, initWithInt_withInt_, minTermBlockSize, maxTermBlockSize)
+}
+
+OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat *create_OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_initWithInt_withInt_(jint minTermBlockSize, jint maxTermBlockSize) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat, initWithInt_withInt_, minTermBlockSize, maxTermBlockSize)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat)
@@ -147,14 +195,14 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50PostingsFo
 @implementation OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState
 
 - (OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *)clone {
-  OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *other = [new_OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState_init() autorelease];
+  OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *other = create_OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState_init();
   [other copyFromWithOrgApacheLuceneIndexTermState:self];
   return other;
 }
 
 - (void)copyFromWithOrgApacheLuceneIndexTermState:(OrgApacheLuceneIndexTermState *)_other {
   [super copyFromWithOrgApacheLuceneIndexTermState:_other];
-  OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *other = (OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *) check_class_cast(_other, [OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState class]);
+  OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *other = (OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *) cast_chk(_other, [OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState class]);
   docStartFP_ = ((OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *) nil_chk(other))->docStartFP_;
   posStartFP_ = other->posStartFP_;
   payStartFP_ = other->payStartFP_;
@@ -179,7 +227,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "clone", NULL, "Lorg.apache.lucene.codecs.lucene50.Lucene50PostingsFormat$IntBlockTermState;", 0x1, NULL, NULL },
     { "copyFromWithOrgApacheLuceneIndexTermState:", "copyFrom", "V", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x0, NULL, NULL },
+    { "init", "IntBlockTermState", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "docStartFP_", NULL, 0x0, "J", NULL, NULL, .constantValue.asLong = 0 },
@@ -206,9 +254,11 @@ void OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState_init(
 }
 
 OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *new_OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState_init() {
-  OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *self = [OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState alloc];
-  OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState, init)
+}
+
+OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *create_OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState)

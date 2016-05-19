@@ -5,23 +5,23 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsIdversionVersionFieldReader_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsIdversionVersionFieldReader_RESTRICT
-#define OrgApacheLuceneCodecsIdversionVersionFieldReader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsIdversionVersionFieldReader")
+#ifdef RESTRICT_OrgApacheLuceneCodecsIdversionVersionFieldReader
+#define INCLUDE_ALL_OrgApacheLuceneCodecsIdversionVersionFieldReader 0
 #else
-#define OrgApacheLuceneCodecsIdversionVersionFieldReader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsIdversionVersionFieldReader 1
 #endif
-#undef OrgApacheLuceneCodecsIdversionVersionFieldReader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsIdversionVersionFieldReader
 
-#if !defined (_OrgApacheLuceneCodecsIdversionVersionFieldReader_) && (OrgApacheLuceneCodecsIdversionVersionFieldReader_INCLUDE_ALL || OrgApacheLuceneCodecsIdversionVersionFieldReader_INCLUDE)
-#define _OrgApacheLuceneCodecsIdversionVersionFieldReader_
+#if !defined (OrgApacheLuceneCodecsIdversionVersionFieldReader_) && (INCLUDE_ALL_OrgApacheLuceneCodecsIdversionVersionFieldReader || defined(INCLUDE_OrgApacheLuceneCodecsIdversionVersionFieldReader))
+#define OrgApacheLuceneCodecsIdversionVersionFieldReader_
 
-#define OrgApacheLuceneIndexTerms_RESTRICT 1
-#define OrgApacheLuceneIndexTerms_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexTerms 1
+#define INCLUDE_OrgApacheLuceneIndexTerms 1
 #include "org/apache/lucene/index/Terms.h"
 
-#define OrgApacheLuceneUtilAccountable_RESTRICT 1
-#define OrgApacheLuceneUtilAccountable_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAccountable 1
+#define INCLUDE_OrgApacheLuceneUtilAccountable 1
 #include "org/apache/lucene/util/Accountable.h"
 
 @class OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader;
@@ -33,6 +33,9 @@
 @class OrgApacheLuceneUtilFstPairOutputs_Pair;
 @protocol JavaUtilCollection;
 
+/*!
+ @brief BlockTree's implementation of <code>Terms</code>.
+ */
 @interface OrgApacheLuceneCodecsIdversionVersionFieldReader : OrgApacheLuceneIndexTerms < OrgApacheLuceneUtilAccountable > {
  @public
   jlong numTerms_;
@@ -110,8 +113,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsIdversionVersionFieldReader_initWith
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsIdversionVersionFieldReader *new_OrgApacheLuceneCodecsIdversionVersionFieldReader_initWithOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_withOrgApacheLuceneIndexFieldInfo_withLong_withOrgApacheLuceneUtilFstPairOutputs_Pair_withLong_withLong_withInt_withLong_withInt_withOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader *parent, OrgApacheLuceneIndexFieldInfo *fieldInfo, jlong numTerms, OrgApacheLuceneUtilFstPairOutputs_Pair *rootCode, jlong sumTotalTermFreq, jlong sumDocFreq, jint docCount, jlong indexStartFP, jint longsSize, OrgApacheLuceneStoreIndexInput *indexIn, OrgApacheLuceneUtilBytesRef *minTerm, OrgApacheLuceneUtilBytesRef *maxTerm) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsIdversionVersionFieldReader *create_OrgApacheLuceneCodecsIdversionVersionFieldReader_initWithOrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_withOrgApacheLuceneIndexFieldInfo_withLong_withOrgApacheLuceneUtilFstPairOutputs_Pair_withLong_withLong_withInt_withLong_withInt_withOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader *parent, OrgApacheLuceneIndexFieldInfo *fieldInfo, jlong numTerms, OrgApacheLuceneUtilFstPairOutputs_Pair *rootCode, jlong sumTotalTermFreq, jlong sumDocFreq, jint docCount, jlong indexStartFP, jint longsSize, OrgApacheLuceneStoreIndexInput *indexIn, OrgApacheLuceneUtilBytesRef *minTerm, OrgApacheLuceneUtilBytesRef *maxTerm);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsIdversionVersionFieldReader)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsIdversionVersionFieldReader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsIdversionVersionFieldReader")

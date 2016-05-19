@@ -5,29 +5,44 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisArArabicStemFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisArArabicStemFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisArArabicStemFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisArArabicStemFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisArArabicStemFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisArArabicStemFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisArArabicStemFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisArArabicStemFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisArArabicStemFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisArArabicStemFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisArArabicStemFilterFactory_) && (OrgApacheLuceneAnalysisArArabicStemFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisArArabicStemFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisArArabicStemFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisArArabicStemFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisArArabicStemFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisArArabicStemFilterFactory))
+#define OrgApacheLuceneAnalysisArArabicStemFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
 @class OrgApacheLuceneAnalysisArArabicStemFilter;
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>ArabicStemFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_arstem" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+ &lt;filter class="solr.ArabicNormalizationFilterFactory"/&gt;
+ &lt;filter class="solr.ArabicStemFilterFactory"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ */
 @interface OrgApacheLuceneAnalysisArArabicStemFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new ArabicStemFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisArArabicStemFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -40,8 +55,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisArArabicStemFilterFactory_initWith
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisArArabicStemFilterFactory *new_OrgApacheLuceneAnalysisArArabicStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisArArabicStemFilterFactory *create_OrgApacheLuceneAnalysisArArabicStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisArArabicStemFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisArArabicStemFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisArArabicStemFilterFactory")

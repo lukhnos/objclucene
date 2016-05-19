@@ -5,25 +5,35 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSpellJaroWinklerDistance_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSpellJaroWinklerDistance_RESTRICT
-#define OrgApacheLuceneSearchSpellJaroWinklerDistance_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpellJaroWinklerDistance")
+#ifdef RESTRICT_OrgApacheLuceneSearchSpellJaroWinklerDistance
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpellJaroWinklerDistance 0
 #else
-#define OrgApacheLuceneSearchSpellJaroWinklerDistance_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpellJaroWinklerDistance 1
 #endif
-#undef OrgApacheLuceneSearchSpellJaroWinklerDistance_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSpellJaroWinklerDistance
 
-#if !defined (_OrgApacheLuceneSearchSpellJaroWinklerDistance_) && (OrgApacheLuceneSearchSpellJaroWinklerDistance_INCLUDE_ALL || OrgApacheLuceneSearchSpellJaroWinklerDistance_INCLUDE)
-#define _OrgApacheLuceneSearchSpellJaroWinklerDistance_
+#if !defined (OrgApacheLuceneSearchSpellJaroWinklerDistance_) && (INCLUDE_ALL_OrgApacheLuceneSearchSpellJaroWinklerDistance || defined(INCLUDE_OrgApacheLuceneSearchSpellJaroWinklerDistance))
+#define OrgApacheLuceneSearchSpellJaroWinklerDistance_
 
-#define OrgApacheLuceneSearchSpellStringDistance_RESTRICT 1
-#define OrgApacheLuceneSearchSpellStringDistance_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSpellStringDistance 1
+#define INCLUDE_OrgApacheLuceneSearchSpellStringDistance 1
 #include "org/apache/lucene/search/spell/StringDistance.h"
 
+/*!
+ @brief Similarity measure for short strings such as person names.
+ <p>
+ - seealso: <a href="http://en.wikipedia.org/wiki/Jaro%E2%80%93Winkler_distance">http://en.wikipedia.org/wiki/Jaro%E2%80%93Winkler_distance</a>
+ */
 @interface OrgApacheLuceneSearchSpellJaroWinklerDistance : NSObject < OrgApacheLuceneSearchSpellStringDistance >
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new distance metric with the default threshold
+ for the Jaro Winkler bonus (0.7)
+ - seealso: #setThreshold(float)
+ */
 - (instancetype)init;
 
 - (jboolean)isEqual:(id)obj;
@@ -31,10 +41,20 @@
 - (jfloat)getDistanceWithNSString:(NSString *)s1
                      withNSString:(NSString *)s2;
 
+/*!
+ @brief Returns the current value of the threshold used for adding the Winkler bonus.
+ The default value is 0.7.
+ @return the current value of the threshold
+ */
 - (jfloat)getThreshold;
 
 - (NSUInteger)hash;
 
+/*!
+ @brief Sets the threshold used to determine when Winkler bonus should be used.
+ Set to a negative value to get the Jaro distance.
+ @param threshold the new value of the threshold
+ */
 - (void)setThresholdWithFloat:(jfloat)threshold;
 
 - (NSString *)description;
@@ -47,8 +67,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSpellJaroWinklerDistance_init(OrgApa
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSpellJaroWinklerDistance *new_OrgApacheLuceneSearchSpellJaroWinklerDistance_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpellJaroWinklerDistance *create_OrgApacheLuceneSearchSpellJaroWinklerDistance_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellJaroWinklerDistance)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSpellJaroWinklerDistance_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpellJaroWinklerDistance")

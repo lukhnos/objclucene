@@ -24,6 +24,9 @@
   jboolean needsScores_;
   OrgApacheLuceneSearchDisiPriorityQueue *subScorers_;
   jlong cost_;
+  /*!
+   @brief Linked list of scorers which are on the current doc
+   */
   OrgApacheLuceneSearchDisiWrapper *topScorers_;
 }
 
@@ -52,6 +55,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchDisjunctionScorer_$1_in
 
 __attribute__((unused)) static OrgApacheLuceneSearchDisjunctionScorer_$1 *new_OrgApacheLuceneSearchDisjunctionScorer_$1_initWithOrgApacheLuceneSearchDisjunctionScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchDisjunctionScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchDisjunctionScorer_$1 *create_OrgApacheLuceneSearchDisjunctionScorer_$1_initWithOrgApacheLuceneSearchDisjunctionScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchDisjunctionScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDisjunctionScorer_$1)
 
 @implementation OrgApacheLuceneSearchDisjunctionScorer
@@ -74,7 +79,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDisjunctionScorer_$1)
   if (!hasApproximation) {
     return nil;
   }
-  return [new_OrgApacheLuceneSearchDisjunctionScorer_$1_initWithOrgApacheLuceneSearchDisjunctionScorer_withOrgApacheLuceneSearchDocIdSetIterator_(self, [new_OrgApacheLuceneSearchDisjunctionDISIApproximation_initWithOrgApacheLuceneSearchDisiPriorityQueue_(subScorers_) autorelease]) autorelease];
+  return create_OrgApacheLuceneSearchDisjunctionScorer_$1_initWithOrgApacheLuceneSearchDisjunctionScorer_withOrgApacheLuceneSearchDocIdSetIterator_(self, create_OrgApacheLuceneSearchDisjunctionDISIApproximation_initWithOrgApacheLuceneSearchDisiPriorityQueue_(subScorers_));
 }
 
 - (jlong)cost {
@@ -94,7 +99,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDisjunctionScorer_$1)
     top = [subScorers_ updateTop];
   }
   while (((OrgApacheLuceneSearchDisiWrapper *) nil_chk(top))->doc_ == doc);
-  return ((OrgApacheLuceneSearchDisiWrapper *) nil_chk(top))->doc_;
+  return top->doc_;
 }
 
 - (jint)advanceWithInt:(jint)target {
@@ -105,7 +110,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDisjunctionScorer_$1)
     top = [subScorers_ updateTop];
   }
   while (((OrgApacheLuceneSearchDisiWrapper *) nil_chk(top))->doc_ < target);
-  return ((OrgApacheLuceneSearchDisiWrapper *) nil_chk(top))->doc_;
+  return top->doc_;
 }
 
 - (jint)freq {
@@ -113,7 +118,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDisjunctionScorer_$1)
     JreStrongAssign(&topScorers_, [((OrgApacheLuceneSearchDisiPriorityQueue *) nil_chk(subScorers_)) topList]);
   }
   jint freq = 1;
-  for (OrgApacheLuceneSearchDisiWrapper *w = ((OrgApacheLuceneSearchDisiWrapper *) nil_chk(topScorers_))->next_; w != nil; w = ((OrgApacheLuceneSearchDisiWrapper *) nil_chk(w))->next_) {
+  for (OrgApacheLuceneSearchDisiWrapper *w = ((OrgApacheLuceneSearchDisiWrapper *) nil_chk(topScorers_))->next_; w != nil; w = w->next_) {
     freq += 1;
   }
   return freq;
@@ -133,9 +138,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDisjunctionScorer_$1)
 }
 
 - (id<JavaUtilCollection>)getChildren {
-  JavaUtilArrayList *children = [new_JavaUtilArrayList_init() autorelease];
+  JavaUtilArrayList *children = create_JavaUtilArrayList_init();
   for (OrgApacheLuceneSearchDisiWrapper * __strong scorer in nil_chk(subScorers_)) {
-    [children addWithId:[new_OrgApacheLuceneSearchScorer_ChildScorer_initWithOrgApacheLuceneSearchScorer_withNSString_(((OrgApacheLuceneSearchDisiWrapper *) nil_chk(scorer))->iterator_, @"SHOULD") autorelease]];
+    [children addWithId:create_OrgApacheLuceneSearchScorer_ChildScorer_initWithOrgApacheLuceneSearchScorer_withNSString_(((OrgApacheLuceneSearchScorer *) ((OrgApacheLuceneSearchDisiWrapper *) nil_chk(scorer))->iterator_), @"SHOULD")];
   }
   return children;
 }
@@ -148,7 +153,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDisjunctionScorer_$1)
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchWeight:withJavaUtilList:withBoolean:", "DisjunctionScorer", NULL, 0x4, NULL, NULL },
+    { "initWithOrgApacheLuceneSearchWeight:withJavaUtilList:withBoolean:", "DisjunctionScorer", NULL, 0x4, NULL, "(Lorg/apache/lucene/search/Weight;Ljava/util/List<Lorg/apache/lucene/search/Scorer;>;Z)V" },
     { "asTwoPhaseIterator", NULL, "Lorg.apache.lucene.search.TwoPhaseIterator;", 0x1, NULL, NULL },
     { "cost", NULL, "J", 0x11, NULL, NULL },
     { "docID", NULL, "I", 0x11, NULL, NULL },
@@ -156,8 +161,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDisjunctionScorer_$1)
     { "advanceWithInt:", "advance", "I", 0x11, "Ljava.io.IOException;", NULL },
     { "freq", NULL, "I", 0x11, "Ljava.io.IOException;", NULL },
     { "score", NULL, "F", 0x11, "Ljava.io.IOException;", NULL },
-    { "scoreWithOrgApacheLuceneSearchDisiWrapper:", "score", "F", 0x404, "Ljava.io.IOException;", NULL },
-    { "getChildren", NULL, "Ljava.util.Collection;", 0x11, NULL, NULL },
+    { "scoreWithOrgApacheLuceneSearchDisiWrapper:", "score", "F", 0x404, "Ljava.io.IOException;", "(Lorg/apache/lucene/search/DisiWrapper<Lorg/apache/lucene/search/Scorer;>;)F" },
+    { "getChildren", NULL, "Ljava.util.Collection;", 0x11, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/search/Scorer$ChildScorer;>;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "needsScores_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
@@ -174,12 +179,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDisjunctionScorer_$1)
 void OrgApacheLuceneSearchDisjunctionScorer_initWithOrgApacheLuceneSearchWeight_withJavaUtilList_withBoolean_(OrgApacheLuceneSearchDisjunctionScorer *self, OrgApacheLuceneSearchWeight *weight, id<JavaUtilList> subScorers, jboolean needsScores) {
   OrgApacheLuceneSearchScorer_initWithOrgApacheLuceneSearchWeight_(self, weight);
   if ([((id<JavaUtilList>) nil_chk(subScorers)) size] <= 1) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"There must be at least 2 subScorers") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"There must be at least 2 subScorers");
   }
   JreStrongAssignAndConsume(&self->subScorers_, new_OrgApacheLuceneSearchDisiPriorityQueue_initWithInt_([subScorers size]));
   jlong cost = 0;
   for (OrgApacheLuceneSearchScorer * __strong scorer in subScorers) {
-    OrgApacheLuceneSearchDisiWrapper *w = [new_OrgApacheLuceneSearchDisiWrapper_initWithOrgApacheLuceneSearchDocIdSetIterator_(scorer) autorelease];
+    OrgApacheLuceneSearchDisiWrapper *w = create_OrgApacheLuceneSearchDisiWrapper_initWithOrgApacheLuceneSearchDocIdSetIterator_(scorer);
     cost += w->cost_;
     [self->subScorers_ addWithOrgApacheLuceneSearchDisiWrapper:w];
   }
@@ -201,9 +206,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDisjunctionScorer)
   }
   if (this$0_->needsScores_) {
     OrgApacheLuceneSearchDisiWrapper *previous = topScorers;
-    for (OrgApacheLuceneSearchDisiWrapper *w = ((OrgApacheLuceneSearchDisiWrapper *) nil_chk(topScorers))->next_; w != nil; w = w->next_) {
-      if (((OrgApacheLuceneSearchDisiWrapper *) nil_chk(w))->twoPhaseView_ != nil && ![w->twoPhaseView_ matches]) {
-        JreStrongAssign(&((OrgApacheLuceneSearchDisiWrapper *) nil_chk(previous))->next_, w->next_);
+    for (OrgApacheLuceneSearchDisiWrapper *w = topScorers->next_; w != nil; w = w->next_) {
+      if (w->twoPhaseView_ != nil && ![w->twoPhaseView_ matches]) {
+        JreStrongAssign(&previous->next_, w->next_);
       }
       else {
         previous = w;
@@ -211,7 +216,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDisjunctionScorer)
     }
   }
   else {
-    JreStrongAssign(&((OrgApacheLuceneSearchDisiWrapper *) nil_chk(topScorers))->next_, nil);
+    JreStrongAssign(&topScorers->next_, nil);
   }
   JreStrongAssign(&this$0_->topScorers_, topScorers);
   return true;
@@ -249,9 +254,11 @@ void OrgApacheLuceneSearchDisjunctionScorer_$1_initWithOrgApacheLuceneSearchDisj
 }
 
 OrgApacheLuceneSearchDisjunctionScorer_$1 *new_OrgApacheLuceneSearchDisjunctionScorer_$1_initWithOrgApacheLuceneSearchDisjunctionScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchDisjunctionScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0) {
-  OrgApacheLuceneSearchDisjunctionScorer_$1 *self = [OrgApacheLuceneSearchDisjunctionScorer_$1 alloc];
-  OrgApacheLuceneSearchDisjunctionScorer_$1_initWithOrgApacheLuceneSearchDisjunctionScorer_withOrgApacheLuceneSearchDocIdSetIterator_(self, outer$, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchDisjunctionScorer_$1, initWithOrgApacheLuceneSearchDisjunctionScorer_withOrgApacheLuceneSearchDocIdSetIterator_, outer$, arg$0)
+}
+
+OrgApacheLuceneSearchDisjunctionScorer_$1 *create_OrgApacheLuceneSearchDisjunctionScorer_$1_initWithOrgApacheLuceneSearchDisjunctionScorer_withOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchDisjunctionScorer *outer$, OrgApacheLuceneSearchDocIdSetIterator *arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchDisjunctionScorer_$1, initWithOrgApacheLuceneSearchDisjunctionScorer_withOrgApacheLuceneSearchDocIdSetIterator_, outer$, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDisjunctionScorer_$1)

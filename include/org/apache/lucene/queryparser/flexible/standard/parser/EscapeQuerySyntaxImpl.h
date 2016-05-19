@@ -5,37 +5,47 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_) && (OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_
+#if !defined (OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl))
+#define OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_
 
-#define OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_RESTRICT 1
-#define OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax 1
+#define INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax 1
 #include "org/apache/lucene/queryparser/flexible/core/parser/EscapeQuerySyntax.h"
 
 @class JavaUtilLocale;
-@class OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum;
+@class OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type;
 @class OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence;
 @protocol JavaLangCharSequence;
 
+/*!
+ @brief Implementation of <code>EscapeQuerySyntax</code> for the standard lucene
+ syntax.
+ */
 @interface OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl : NSObject < OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax >
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @brief Returns a String where the escape char has been removed, or kept only once
+ if there was a double escape.
+ Supports escaped unicode characters, e. g. translates <code>A</code> to
+ <code>A</code>.
+ */
 + (OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *)discardEscapeCharWithJavaLangCharSequence:(id<JavaLangCharSequence>)input;
 
 - (id<JavaLangCharSequence>)escapeWithJavaLangCharSequence:(id<JavaLangCharSequence>)text
                                         withJavaUtilLocale:(JavaUtilLocale *)locale
-withOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum:(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum *)type;
+withOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type:(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type *)type;
 
 @end
 
@@ -47,8 +57,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQue
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl *new_OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl *create_OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl")

@@ -11,7 +11,6 @@
 #include "java/lang/Long.h"
 #include "java/lang/RuntimeException.h"
 #include "java/lang/StringBuilder.h"
-#include "java/lang/Throwable.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Collections.h"
 #include "java/util/List.h"
@@ -45,6 +44,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexMergePolicy_OneMerge_$1_
 
 __attribute__((unused)) static OrgApacheLuceneIndexMergePolicy_OneMerge_$1 *new_OrgApacheLuceneIndexMergePolicy_OneMerge_$1_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexMergePolicy_OneMerge_$1 *create_OrgApacheLuceneIndexMergePolicy_OneMerge_$1_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergePolicy_OneMerge_$1)
 
 @interface OrgApacheLuceneIndexMergePolicy_MergeException () {
@@ -57,6 +58,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergePolicy_OneMerge_$1)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMergePolicy_MergeException, dir_, OrgApacheLuceneStoreDirectory *)
 
 @implementation OrgApacheLuceneIndexMergePolicy
+
++ (jdouble)DEFAULT_NO_CFS_RATIO {
+  return OrgApacheLuceneIndexMergePolicy_DEFAULT_NO_CFS_RATIO;
+}
+
++ (jlong)DEFAULT_MAX_CFS_SEGMENT_SIZE {
+  return OrgApacheLuceneIndexMergePolicy_DEFAULT_MAX_CFS_SEGMENT_SIZE;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -71,9 +80,9 @@ J2OBJC_IGNORE_DESIGNATED_END
   return self;
 }
 
-- (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findMergesWithOrgApacheLuceneIndexMergeTriggerEnum:(OrgApacheLuceneIndexMergeTriggerEnum *)mergeTrigger
-                                                                      withOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)segmentInfos
-                                                                       withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer {
+- (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findMergesWithOrgApacheLuceneIndexMergeTrigger:(OrgApacheLuceneIndexMergeTrigger *)mergeTrigger
+                                                                  withOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)segmentInfos
+                                                                   withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
   return 0;
@@ -138,7 +147,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setNoCFSRatioWithDouble:(jdouble)noCFSRatio {
   if (noCFSRatio < 0.0 || noCFSRatio > 1.0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"noCFSRatio must be 0.0 to 1.0 inclusive; got ", noCFSRatio)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"noCFSRatio must be 0.0 to 1.0 inclusive; got ", noCFSRatio));
   }
   self->noCFSRatio_ = noCFSRatio;
 }
@@ -149,7 +158,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setMaxCFSSegmentSizeMBWithDouble:(jdouble)v {
   if (v < 0.0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$DC", @"maxCFSSegmentSizeMB must be >=0 (got ", v, ')')) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$DC", @"maxCFSSegmentSizeMB must be >=0 (got ", v, ')'));
   }
   JreTimesAssignDoubleD(&v, 1024 * 1024);
   self->maxCFSSegmentSize_ = v > JavaLangLong_MAX_VALUE ? JavaLangLong_MAX_VALUE : JreFpToLong(v);
@@ -159,8 +168,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   static const J2ObjcMethodInfo methods[] = {
     { "init", "MergePolicy", NULL, 0x1, NULL, NULL },
     { "initWithDouble:withLong:", "MergePolicy", NULL, 0x4, NULL, NULL },
-    { "findMergesWithOrgApacheLuceneIndexMergeTriggerEnum:withOrgApacheLuceneIndexSegmentInfos:withOrgApacheLuceneIndexIndexWriter:", "findMerges", "Lorg.apache.lucene.index.MergePolicy$MergeSpecification;", 0x401, "Ljava.io.IOException;", NULL },
-    { "findForcedMergesWithOrgApacheLuceneIndexSegmentInfos:withInt:withJavaUtilMap:withOrgApacheLuceneIndexIndexWriter:", "findForcedMerges", "Lorg.apache.lucene.index.MergePolicy$MergeSpecification;", 0x401, "Ljava.io.IOException;", NULL },
+    { "findMergesWithOrgApacheLuceneIndexMergeTrigger:withOrgApacheLuceneIndexSegmentInfos:withOrgApacheLuceneIndexIndexWriter:", "findMerges", "Lorg.apache.lucene.index.MergePolicy$MergeSpecification;", 0x401, "Ljava.io.IOException;", NULL },
+    { "findForcedMergesWithOrgApacheLuceneIndexSegmentInfos:withInt:withJavaUtilMap:withOrgApacheLuceneIndexIndexWriter:", "findForcedMerges", "Lorg.apache.lucene.index.MergePolicy$MergeSpecification;", 0x401, "Ljava.io.IOException;", "(Lorg/apache/lucene/index/SegmentInfos;ILjava/util/Map<Lorg/apache/lucene/index/SegmentCommitInfo;Ljava/lang/Boolean;>;Lorg/apache/lucene/index/IndexWriter;)Lorg/apache/lucene/index/MergePolicy$MergeSpecification;" },
     { "findForcedDeletesMergesWithOrgApacheLuceneIndexSegmentInfos:withOrgApacheLuceneIndexIndexWriter:", "findForcedDeletesMerges", "Lorg.apache.lucene.index.MergePolicy$MergeSpecification;", 0x401, "Ljava.io.IOException;", NULL },
     { "useCompoundFileWithOrgApacheLuceneIndexSegmentInfos:withOrgApacheLuceneIndexSegmentCommitInfo:withOrgApacheLuceneIndexIndexWriter:", "useCompoundFile", "Z", 0x1, "Ljava.io.IOException;", NULL },
     { "sizeWithOrgApacheLuceneIndexSegmentCommitInfo:withOrgApacheLuceneIndexIndexWriter:", "size", "J", 0x4, "Ljava.io.IOException;", NULL },
@@ -217,7 +226,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jboolean)isConsistentWithInt:(jint)maxDoc {
-  OrgApacheLuceneUtilFixedBitSet *targets = [new_OrgApacheLuceneUtilFixedBitSet_initWithInt_(maxDoc) autorelease];
+  OrgApacheLuceneUtilFixedBitSet *targets = create_OrgApacheLuceneUtilFixedBitSet_initWithInt_(maxDoc);
   for (jint i = 0; i < maxDoc; ++i) {
     jint target = [self mapWithInt:i];
     if (target < 0 || target >= maxDoc) {
@@ -262,10 +271,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergePolicy_DocMap)
 
 - (id<JavaUtilList>)getMergeReaders {
   if (readers_ == nil) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"IndexWriter has not initialized readers from the segment infos yet") autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"IndexWriter has not initialized readers from the segment infos yet");
   }
-  id<JavaUtilList> readers = [new_JavaUtilArrayList_initWithInt_([((id<JavaUtilList>) nil_chk(self->readers_)) size]) autorelease];
-  for (OrgApacheLuceneIndexSegmentReader * __strong reader in self->readers_) {
+  id<JavaUtilList> readers = create_JavaUtilArrayList_initWithInt_([self->readers_ size]);
+  for (OrgApacheLuceneIndexSegmentReader * __strong reader in nil_chk(self->readers_)) {
     if ([((OrgApacheLuceneIndexSegmentReader *) nil_chk(reader)) numDocs] > 0) {
       [readers addWithId:reader];
     }
@@ -282,23 +291,23 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergePolicy_DocMap)
 }
 
 - (OrgApacheLuceneIndexMergePolicy_DocMap *)getDocMapWithOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState {
-  return [new_OrgApacheLuceneIndexMergePolicy_OneMerge_$1_init() autorelease];
+  return create_OrgApacheLuceneIndexMergePolicy_OneMerge_$1_init();
 }
 
-- (void)setExceptionWithJavaLangThrowable:(JavaLangThrowable *)error {
+- (void)setExceptionWithNSException:(NSException *)error {
   @synchronized(self) {
     JreStrongAssign(&self->error_, error);
   }
 }
 
-- (JavaLangThrowable *)getException {
+- (NSException *)getException {
   @synchronized(self) {
     return error_;
   }
 }
 
 - (NSString *)segString {
-  JavaLangStringBuilder *b = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *b = create_JavaLangStringBuilder_init();
   jint numSegments = [((id<JavaUtilList>) nil_chk(segments_)) size];
   for (jint i = 0; i < numSegments; i++) {
     if (i > 0) {
@@ -307,7 +316,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergePolicy_DocMap)
     [b appendWithNSString:[((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk([segments_ getWithInt:i])) description]];
   }
   if (info_ != nil) {
-    [((JavaLangStringBuilder *) nil_chk([b appendWithNSString:@" into "])) appendWithNSString:((OrgApacheLuceneIndexSegmentInfo *) nil_chk(info_->info_))->name_];
+    [((JavaLangStringBuilder *) nil_chk([b appendWithNSString:@" into "])) appendWithNSString:((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info_))->info_))->name_];
   }
   if (maxNumSegments_ != -1) {
     [b appendWithNSString:JreStrcat("$IC", @" [maxNumSegments=", maxNumSegments_, ']')];
@@ -331,7 +340,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergePolicy_DocMap)
 }
 
 - (OrgApacheLuceneStoreMergeInfo *)getStoreMergeInfo {
-  return [new_OrgApacheLuceneStoreMergeInfo_initWithInt_withLong_withBoolean_withInt_(totalMaxDoc_, JreLoadVolatileLong(&estimatedMergeBytes_), isExternal_, maxNumSegments_) autorelease];
+  return create_OrgApacheLuceneStoreMergeInfo_initWithInt_withLong_withBoolean_withInt_(totalMaxDoc_, JreLoadVolatileLong(&estimatedMergeBytes_), isExternal_, maxNumSegments_);
 }
 
 - (void)dealloc {
@@ -345,13 +354,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergePolicy_DocMap)
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:", "OneMerge", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilList:", "OneMerge", NULL, 0x1, NULL, "(Ljava/util/List<Lorg/apache/lucene/index/SegmentCommitInfo;>;)V" },
     { "mergeFinished", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "getMergeReaders", NULL, "Ljava.util.List;", 0x1, "Ljava.io.IOException;", NULL },
+    { "getMergeReaders", NULL, "Ljava.util.List;", 0x1, "Ljava.io.IOException;", "()Ljava/util/List<Lorg/apache/lucene/index/CodecReader;>;" },
     { "setMergeInfoWithOrgApacheLuceneIndexSegmentCommitInfo:", "setMergeInfo", "V", 0x1, NULL, NULL },
     { "getMergeInfo", NULL, "Lorg.apache.lucene.index.SegmentCommitInfo;", 0x1, NULL, NULL },
     { "getDocMapWithOrgApacheLuceneIndexMergeState:", "getDocMap", "Lorg.apache.lucene.index.MergePolicy$DocMap;", 0x1, NULL, NULL },
-    { "setExceptionWithJavaLangThrowable:", "setException", "V", 0x20, NULL, NULL },
+    { "setExceptionWithNSException:", "setException", "V", 0x20, NULL, NULL },
     { "getException", NULL, "Ljava.lang.Throwable;", 0x20, NULL, NULL },
     { "segString", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
     { "totalBytesSize", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
@@ -384,7 +393,7 @@ void OrgApacheLuceneIndexMergePolicy_OneMerge_initWithJavaUtilList_(OrgApacheLuc
   self->maxNumSegments_ = -1;
   JreAssignVolatileLong(&self->mergeStartNS_, -1);
   if (0 == [((id<JavaUtilList>) nil_chk(segments)) size]) {
-    @throw [new_JavaLangRuntimeException_initWithNSString_(@"segments must include at least one segment") autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSString_(@"segments must include at least one segment");
   }
   JreStrongAssignAndConsume(&self->segments_, new_JavaUtilArrayList_initWithJavaUtilCollection_(segments));
   jint count = 0;
@@ -396,9 +405,11 @@ void OrgApacheLuceneIndexMergePolicy_OneMerge_initWithJavaUtilList_(OrgApacheLuc
 }
 
 OrgApacheLuceneIndexMergePolicy_OneMerge *new_OrgApacheLuceneIndexMergePolicy_OneMerge_initWithJavaUtilList_(id<JavaUtilList> segments) {
-  OrgApacheLuceneIndexMergePolicy_OneMerge *self = [OrgApacheLuceneIndexMergePolicy_OneMerge alloc];
-  OrgApacheLuceneIndexMergePolicy_OneMerge_initWithJavaUtilList_(self, segments);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMergePolicy_OneMerge, initWithJavaUtilList_, segments)
+}
+
+OrgApacheLuceneIndexMergePolicy_OneMerge *create_OrgApacheLuceneIndexMergePolicy_OneMerge_initWithJavaUtilList_(id<JavaUtilList> segments) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMergePolicy_OneMerge, initWithJavaUtilList_, segments)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergePolicy_OneMerge)
@@ -433,9 +444,11 @@ void OrgApacheLuceneIndexMergePolicy_OneMerge_$1_init(OrgApacheLuceneIndexMergeP
 }
 
 OrgApacheLuceneIndexMergePolicy_OneMerge_$1 *new_OrgApacheLuceneIndexMergePolicy_OneMerge_$1_init() {
-  OrgApacheLuceneIndexMergePolicy_OneMerge_$1 *self = [OrgApacheLuceneIndexMergePolicy_OneMerge_$1 alloc];
-  OrgApacheLuceneIndexMergePolicy_OneMerge_$1_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMergePolicy_OneMerge_$1, init)
+}
+
+OrgApacheLuceneIndexMergePolicy_OneMerge_$1 *create_OrgApacheLuceneIndexMergePolicy_OneMerge_$1_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMergePolicy_OneMerge_$1, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergePolicy_OneMerge_$1)
@@ -454,7 +467,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (NSString *)segStringWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir {
-  JavaLangStringBuilder *b = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *b = create_JavaLangStringBuilder_init();
   [b appendWithNSString:@"MergeSpec:\n"];
   jint count = [((id<JavaUtilList>) nil_chk(merges_)) size];
   for (jint i = 0; i < count; i++) {
@@ -489,9 +502,11 @@ void OrgApacheLuceneIndexMergePolicy_MergeSpecification_init(OrgApacheLuceneInde
 }
 
 OrgApacheLuceneIndexMergePolicy_MergeSpecification *new_OrgApacheLuceneIndexMergePolicy_MergeSpecification_init() {
-  OrgApacheLuceneIndexMergePolicy_MergeSpecification *self = [OrgApacheLuceneIndexMergePolicy_MergeSpecification alloc];
-  OrgApacheLuceneIndexMergePolicy_MergeSpecification_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMergePolicy_MergeSpecification, init)
+}
+
+OrgApacheLuceneIndexMergePolicy_MergeSpecification *create_OrgApacheLuceneIndexMergePolicy_MergeSpecification_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMergePolicy_MergeSpecification, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergePolicy_MergeSpecification)
@@ -504,9 +519,9 @@ withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir {
   return self;
 }
 
-- (instancetype)initWithJavaLangThrowable:(JavaLangThrowable *)exc
-        withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir {
-  OrgApacheLuceneIndexMergePolicy_MergeException_initWithJavaLangThrowable_withOrgApacheLuceneStoreDirectory_(self, exc, dir);
+- (instancetype)initWithNSException:(NSException *)exc
+  withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir {
+  OrgApacheLuceneIndexMergePolicy_MergeException_initWithNSException_withOrgApacheLuceneStoreDirectory_(self, exc, dir);
   return self;
 }
 
@@ -522,7 +537,7 @@ withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir {
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithNSString:withOrgApacheLuceneStoreDirectory:", "MergeException", NULL, 0x1, NULL, NULL },
-    { "initWithJavaLangThrowable:withOrgApacheLuceneStoreDirectory:", "MergeException", NULL, 0x1, NULL, NULL },
+    { "initWithNSException:withOrgApacheLuceneStoreDirectory:", "MergeException", NULL, 0x1, NULL, NULL },
     { "getDirectory", NULL, "Lorg.apache.lucene.store.Directory;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -540,20 +555,24 @@ void OrgApacheLuceneIndexMergePolicy_MergeException_initWithNSString_withOrgApac
 }
 
 OrgApacheLuceneIndexMergePolicy_MergeException *new_OrgApacheLuceneIndexMergePolicy_MergeException_initWithNSString_withOrgApacheLuceneStoreDirectory_(NSString *message, OrgApacheLuceneStoreDirectory *dir) {
-  OrgApacheLuceneIndexMergePolicy_MergeException *self = [OrgApacheLuceneIndexMergePolicy_MergeException alloc];
-  OrgApacheLuceneIndexMergePolicy_MergeException_initWithNSString_withOrgApacheLuceneStoreDirectory_(self, message, dir);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMergePolicy_MergeException, initWithNSString_withOrgApacheLuceneStoreDirectory_, message, dir)
 }
 
-void OrgApacheLuceneIndexMergePolicy_MergeException_initWithJavaLangThrowable_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexMergePolicy_MergeException *self, JavaLangThrowable *exc, OrgApacheLuceneStoreDirectory *dir) {
-  JavaLangRuntimeException_initWithJavaLangThrowable_(self, exc);
+OrgApacheLuceneIndexMergePolicy_MergeException *create_OrgApacheLuceneIndexMergePolicy_MergeException_initWithNSString_withOrgApacheLuceneStoreDirectory_(NSString *message, OrgApacheLuceneStoreDirectory *dir) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMergePolicy_MergeException, initWithNSString_withOrgApacheLuceneStoreDirectory_, message, dir)
+}
+
+void OrgApacheLuceneIndexMergePolicy_MergeException_initWithNSException_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexMergePolicy_MergeException *self, NSException *exc, OrgApacheLuceneStoreDirectory *dir) {
+  JavaLangRuntimeException_initWithNSException_(self, exc);
   JreStrongAssign(&self->dir_, dir);
 }
 
-OrgApacheLuceneIndexMergePolicy_MergeException *new_OrgApacheLuceneIndexMergePolicy_MergeException_initWithJavaLangThrowable_withOrgApacheLuceneStoreDirectory_(JavaLangThrowable *exc, OrgApacheLuceneStoreDirectory *dir) {
-  OrgApacheLuceneIndexMergePolicy_MergeException *self = [OrgApacheLuceneIndexMergePolicy_MergeException alloc];
-  OrgApacheLuceneIndexMergePolicy_MergeException_initWithJavaLangThrowable_withOrgApacheLuceneStoreDirectory_(self, exc, dir);
-  return self;
+OrgApacheLuceneIndexMergePolicy_MergeException *new_OrgApacheLuceneIndexMergePolicy_MergeException_initWithNSException_withOrgApacheLuceneStoreDirectory_(NSException *exc, OrgApacheLuceneStoreDirectory *dir) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMergePolicy_MergeException, initWithNSException_withOrgApacheLuceneStoreDirectory_, exc, dir)
+}
+
+OrgApacheLuceneIndexMergePolicy_MergeException *create_OrgApacheLuceneIndexMergePolicy_MergeException_initWithNSException_withOrgApacheLuceneStoreDirectory_(NSException *exc, OrgApacheLuceneStoreDirectory *dir) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMergePolicy_MergeException, initWithNSException_withOrgApacheLuceneStoreDirectory_, exc, dir)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergePolicy_MergeException)
@@ -588,9 +607,11 @@ void OrgApacheLuceneIndexMergePolicy_MergeAbortedException_init(OrgApacheLuceneI
 }
 
 OrgApacheLuceneIndexMergePolicy_MergeAbortedException *new_OrgApacheLuceneIndexMergePolicy_MergeAbortedException_init() {
-  OrgApacheLuceneIndexMergePolicy_MergeAbortedException *self = [OrgApacheLuceneIndexMergePolicy_MergeAbortedException alloc];
-  OrgApacheLuceneIndexMergePolicy_MergeAbortedException_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMergePolicy_MergeAbortedException, init)
+}
+
+OrgApacheLuceneIndexMergePolicy_MergeAbortedException *create_OrgApacheLuceneIndexMergePolicy_MergeAbortedException_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMergePolicy_MergeAbortedException, init)
 }
 
 void OrgApacheLuceneIndexMergePolicy_MergeAbortedException_initWithNSString_(OrgApacheLuceneIndexMergePolicy_MergeAbortedException *self, NSString *message) {
@@ -598,9 +619,11 @@ void OrgApacheLuceneIndexMergePolicy_MergeAbortedException_initWithNSString_(Org
 }
 
 OrgApacheLuceneIndexMergePolicy_MergeAbortedException *new_OrgApacheLuceneIndexMergePolicy_MergeAbortedException_initWithNSString_(NSString *message) {
-  OrgApacheLuceneIndexMergePolicy_MergeAbortedException *self = [OrgApacheLuceneIndexMergePolicy_MergeAbortedException alloc];
-  OrgApacheLuceneIndexMergePolicy_MergeAbortedException_initWithNSString_(self, message);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMergePolicy_MergeAbortedException, initWithNSString_, message)
+}
+
+OrgApacheLuceneIndexMergePolicy_MergeAbortedException *create_OrgApacheLuceneIndexMergePolicy_MergeAbortedException_initWithNSString_(NSString *message) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexMergePolicy_MergeAbortedException, initWithNSString_, message)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergePolicy_MergeAbortedException)

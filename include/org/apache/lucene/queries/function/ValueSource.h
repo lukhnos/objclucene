@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionValueSource_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionValueSource_RESTRICT
-#define OrgApacheLuceneQueriesFunctionValueSource_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValueSource")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionValueSource
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValueSource 0
 #else
-#define OrgApacheLuceneQueriesFunctionValueSource_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValueSource 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionValueSource_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionValueSource
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValueSource_) && (OrgApacheLuceneQueriesFunctionValueSource_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValueSource_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValueSource_
+#if !defined (OrgApacheLuceneQueriesFunctionValueSource_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValueSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValueSource))
+#define OrgApacheLuceneQueriesFunctionValueSource_
 
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneQueriesFunctionFunctionValues;
@@ -22,26 +22,55 @@
 @class OrgApacheLuceneSearchSortField;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Instantiates <code>FunctionValues</code> for a particular reader.
+ <br>
+ Often used when creating a <code>FunctionQuery</code>.
+ */
 @interface OrgApacheLuceneQueriesFunctionValueSource : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @brief Implementations should propagate createWeight to sub-ValueSources which can optionally store
+ weight info in the context.
+ The context object will be passed to getValues()
+ where this info can be retrieved.
+ */
 - (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
 withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
 
+/*!
+ @brief description of field, used in explain()
+ */
 - (NSString *)description__;
 
 - (jboolean)isEqual:(id)o;
 
+/*!
+ @brief EXPERIMENTAL: This method is subject to change.
+ <p>
+ Get the SortField for this ValueSource.  Uses the <code>getValues(java.util.Map,org.apache.lucene.index.LeafReaderContext)</code>
+ to populate the SortField.
+ @param reverse true if this is a reverse sort.
+ @return The <code>org.apache.lucene.search.SortField</code> for the ValueSource
+ */
 - (OrgApacheLuceneSearchSortField *)getSortFieldWithBoolean:(jboolean)reverse;
 
+/*!
+ @brief Gets the values for this reader and the context that was previously
+ passed to createWeight()
+ */
 - (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
                                  withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
 
 - (NSUInteger)hash;
 
+/*!
+ @brief Returns a new non-threadsafe context map.
+ */
 + (id<JavaUtilMap>)newContextWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher OBJC_METHOD_FAMILY_NONE;
 
 - (NSString *)description;
@@ -58,11 +87,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValueSource)
 
 #endif
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValueSource_ValueSourceSortField_) && (OrgApacheLuceneQueriesFunctionValueSource_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValueSource_ValueSourceSortField_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValueSource_ValueSourceSortField_
+#if !defined (OrgApacheLuceneQueriesFunctionValueSource_ValueSourceSortField_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValueSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValueSource_ValueSourceSortField))
+#define OrgApacheLuceneQueriesFunctionValueSource_ValueSourceSortField_
 
-#define OrgApacheLuceneSearchSortField_RESTRICT 1
-#define OrgApacheLuceneSearchSortField_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSortField 1
+#define INCLUDE_OrgApacheLuceneSearchSortField 1
 #include "org/apache/lucene/search/SortField.h"
 
 @class OrgApacheLuceneQueriesFunctionValueSource;
@@ -85,15 +114,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValueSource_ValueSourceSort
 
 FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValueSource_ValueSourceSortField *new_OrgApacheLuceneQueriesFunctionValueSource_ValueSourceSortField_initWithOrgApacheLuceneQueriesFunctionValueSource_withBoolean_(OrgApacheLuceneQueriesFunctionValueSource *outer$, jboolean reverse) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValueSource_ValueSourceSortField *create_OrgApacheLuceneQueriesFunctionValueSource_ValueSourceSortField_initWithOrgApacheLuceneQueriesFunctionValueSource_withBoolean_(OrgApacheLuceneQueriesFunctionValueSource *outer$, jboolean reverse);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValueSource_ValueSourceSortField)
 
 #endif
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparatorSource_) && (OrgApacheLuceneQueriesFunctionValueSource_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparatorSource_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparatorSource_
+#if !defined (OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparatorSource_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValueSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparatorSource))
+#define OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparatorSource_
 
-#define OrgApacheLuceneSearchFieldComparatorSource_RESTRICT 1
-#define OrgApacheLuceneSearchFieldComparatorSource_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchFieldComparatorSource 1
+#define INCLUDE_OrgApacheLuceneSearchFieldComparatorSource 1
 #include "org/apache/lucene/search/FieldComparatorSource.h"
 
 @class OrgApacheLuceneQueriesFunctionValueSource;
@@ -120,15 +151,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComp
 
 FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparatorSource *new_OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparatorSource_initWithOrgApacheLuceneQueriesFunctionValueSource_withJavaUtilMap_(OrgApacheLuceneQueriesFunctionValueSource *outer$, id<JavaUtilMap> context) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparatorSource *create_OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparatorSource_initWithOrgApacheLuceneQueriesFunctionValueSource_withJavaUtilMap_(OrgApacheLuceneQueriesFunctionValueSource *outer$, id<JavaUtilMap> context);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparatorSource)
 
 #endif
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparator_) && (OrgApacheLuceneQueriesFunctionValueSource_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparator_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparator_
+#if !defined (OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparator_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValueSource || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparator))
+#define OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparator_
 
-#define OrgApacheLuceneSearchSimpleFieldComparator_RESTRICT 1
-#define OrgApacheLuceneSearchSimpleFieldComparator_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSimpleFieldComparator 1
+#define INCLUDE_OrgApacheLuceneSearchSimpleFieldComparator 1
 #include "org/apache/lucene/search/SimpleFieldComparator.h"
 
 @class JavaLangDouble;
@@ -136,6 +169,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValueSource_ValueSource
 @class OrgApacheLuceneQueriesFunctionValueSource;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Implement a <code>org.apache.lucene.search.FieldComparator</code> that works
+ off of the <code>FunctionValues</code> for a ValueSource
+ instead of the normal Lucene FieldComparator that works off of a FieldCache.
+ */
 @interface OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparator : OrgApacheLuceneSearchSimpleFieldComparator
 
 #pragma mark Public
@@ -172,8 +210,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComp
 
 FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparator *new_OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparator_initWithOrgApacheLuceneQueriesFunctionValueSource_withJavaUtilMap_withInt_(OrgApacheLuceneQueriesFunctionValueSource *outer$, id<JavaUtilMap> fcontext, jint numHits) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparator *create_OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparator_initWithOrgApacheLuceneQueriesFunctionValueSource_withJavaUtilMap_withInt_(OrgApacheLuceneQueriesFunctionValueSource *outer$, id<JavaUtilMap> fcontext, jint numHits);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValueSource_ValueSourceComparator)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionValueSource_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValueSource")

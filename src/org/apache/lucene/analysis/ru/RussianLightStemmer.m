@@ -52,7 +52,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "stemWithCharArray:withInt:", "stem", "I", 0x1, NULL, NULL },
     { "normalizeWithCharArray:withInt:", "normalize", "I", 0x2, NULL, NULL },
     { "removeCaseWithCharArray:withInt:", "removeCase", "I", 0x2, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "RussianLightStemmer", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisRuRussianLightStemmer = { 2, "RussianLightStemmer", "org.apache.lucene.analysis.ru", NULL, 0x1, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisRuRussianLightStemmer;
@@ -95,9 +95,11 @@ void OrgApacheLuceneAnalysisRuRussianLightStemmer_init(OrgApacheLuceneAnalysisRu
 }
 
 OrgApacheLuceneAnalysisRuRussianLightStemmer *new_OrgApacheLuceneAnalysisRuRussianLightStemmer_init() {
-  OrgApacheLuceneAnalysisRuRussianLightStemmer *self = [OrgApacheLuceneAnalysisRuRussianLightStemmer alloc];
-  OrgApacheLuceneAnalysisRuRussianLightStemmer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisRuRussianLightStemmer, init)
+}
+
+OrgApacheLuceneAnalysisRuRussianLightStemmer *create_OrgApacheLuceneAnalysisRuRussianLightStemmer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisRuRussianLightStemmer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisRuRussianLightStemmer)

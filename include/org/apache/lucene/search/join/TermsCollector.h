@@ -5,29 +5,32 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchJoinTermsCollector_INCLUDE_ALL")
-#if OrgApacheLuceneSearchJoinTermsCollector_RESTRICT
-#define OrgApacheLuceneSearchJoinTermsCollector_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinTermsCollector")
+#ifdef RESTRICT_OrgApacheLuceneSearchJoinTermsCollector
+#define INCLUDE_ALL_OrgApacheLuceneSearchJoinTermsCollector 0
 #else
-#define OrgApacheLuceneSearchJoinTermsCollector_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchJoinTermsCollector 1
 #endif
-#undef OrgApacheLuceneSearchJoinTermsCollector_RESTRICT
-#if OrgApacheLuceneSearchJoinTermsCollector_SV_INCLUDE
-#define OrgApacheLuceneSearchJoinTermsCollector_INCLUDE 1
+#undef RESTRICT_OrgApacheLuceneSearchJoinTermsCollector
+#ifdef INCLUDE_OrgApacheLuceneSearchJoinTermsCollector_SV
+#define INCLUDE_OrgApacheLuceneSearchJoinTermsCollector 1
 #endif
-#if OrgApacheLuceneSearchJoinTermsCollector_MV_INCLUDE
-#define OrgApacheLuceneSearchJoinTermsCollector_INCLUDE 1
+#ifdef INCLUDE_OrgApacheLuceneSearchJoinTermsCollector_MV
+#define INCLUDE_OrgApacheLuceneSearchJoinTermsCollector 1
 #endif
 
-#if !defined (_OrgApacheLuceneSearchJoinTermsCollector_) && (OrgApacheLuceneSearchJoinTermsCollector_INCLUDE_ALL || OrgApacheLuceneSearchJoinTermsCollector_INCLUDE)
-#define _OrgApacheLuceneSearchJoinTermsCollector_
+#if !defined (OrgApacheLuceneSearchJoinTermsCollector_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinTermsCollector || defined(INCLUDE_OrgApacheLuceneSearchJoinTermsCollector))
+#define OrgApacheLuceneSearchJoinTermsCollector_
 
-#define OrgApacheLuceneSearchSimpleCollector_RESTRICT 1
-#define OrgApacheLuceneSearchSimpleCollector_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSimpleCollector 1
+#define INCLUDE_OrgApacheLuceneSearchSimpleCollector 1
 #include "org/apache/lucene/search/SimpleCollector.h"
 
 @class OrgApacheLuceneUtilBytesRefHash;
 
+/*!
+ @brief A collector that collects all terms from a specified field matching the query.
+ */
 @interface OrgApacheLuceneSearchJoinTermsCollector : OrgApacheLuceneSearchSimpleCollector {
  @public
   NSString *field_;
@@ -44,6 +47,12 @@
 
 - (instancetype)initWithNSString:(NSString *)field;
 
+/*!
+ @brief Chooses the right <code>TermsCollector</code> implementation.
+ @param field                     The field to collect terms for
+ @param multipleValuesPerDocument Whether the field to collect terms for has multiple values per document.
+ @return a <code>TermsCollector</code> instance
+ */
 + (OrgApacheLuceneSearchJoinTermsCollector *)createWithNSString:(NSString *)field
                                                     withBoolean:(jboolean)multipleValuesPerDocument;
 
@@ -62,8 +71,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsCollector)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchJoinTermsCollector_MV_) && (OrgApacheLuceneSearchJoinTermsCollector_INCLUDE_ALL || OrgApacheLuceneSearchJoinTermsCollector_MV_INCLUDE)
-#define _OrgApacheLuceneSearchJoinTermsCollector_MV_
+#if !defined (OrgApacheLuceneSearchJoinTermsCollector_MV_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinTermsCollector || defined(INCLUDE_OrgApacheLuceneSearchJoinTermsCollector_MV))
+#define OrgApacheLuceneSearchJoinTermsCollector_MV_
 
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneUtilBytesRef;
@@ -95,12 +104,14 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinTermsCollector_MV_initWithNSStri
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsCollector_MV *new_OrgApacheLuceneSearchJoinTermsCollector_MV_initWithNSString_(NSString *field) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsCollector_MV *create_OrgApacheLuceneSearchJoinTermsCollector_MV_initWithNSString_(NSString *field);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsCollector_MV)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchJoinTermsCollector_SV_) && (OrgApacheLuceneSearchJoinTermsCollector_INCLUDE_ALL || OrgApacheLuceneSearchJoinTermsCollector_SV_INCLUDE)
-#define _OrgApacheLuceneSearchJoinTermsCollector_SV_
+#if !defined (OrgApacheLuceneSearchJoinTermsCollector_SV_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinTermsCollector || defined(INCLUDE_OrgApacheLuceneSearchJoinTermsCollector_SV))
+#define OrgApacheLuceneSearchJoinTermsCollector_SV_
 
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneUtilBytesRef;
@@ -132,8 +143,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinTermsCollector_SV_initWithNSStri
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsCollector_SV *new_OrgApacheLuceneSearchJoinTermsCollector_SV_initWithNSString_(NSString *field) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsCollector_SV *create_OrgApacheLuceneSearchJoinTermsCollector_SV_initWithNSString_(NSString *field);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsCollector_SV)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchJoinTermsCollector_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinTermsCollector")

@@ -5,25 +5,50 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute_RESTRICT
-#define OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute 0
 #else
-#define OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute 1
 #endif
-#undef OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute
 
-#if !defined (_OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute_) && (OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute_INCLUDE_ALL || OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute_INCLUDE)
-#define _OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute_
+#if !defined (OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute || defined(INCLUDE_OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute))
+#define OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute_
 
-#define OrgApacheLuceneUtilAttribute_RESTRICT 1
-#define OrgApacheLuceneUtilAttribute_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilAttribute 1
+#define INCLUDE_OrgApacheLuceneUtilAttribute 1
 #include "org/apache/lucene/util/Attribute.h"
 
+/*!
+ @brief Determines how many positions this
+ token spans.
+ Very few analyzer components actually
+ produce this attribute, and indexing ignores it, but
+ it's useful to express the graph structure naturally
+ produced by decompounding, word splitting/joining,
+ synonym filtering, etc.
+ <p>NOTE: this is optional, and most analyzers
+ don't change the default value (1). 
+ */
 @protocol OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute < OrgApacheLuceneUtilAttribute, NSObject, JavaObject >
 
+/*!
+ @brief Set the position length of this Token.
+ <p>
+ The default value is one. 
+ @param positionLength how many positions this token
+ spans.
+ @throws IllegalArgumentException if <code>positionLength</code> 
+ is zero or negative.
+ - seealso: #getPositionLength()
+ */
 - (void)setPositionLengthWithInt:(jint)positionLength;
 
+/*!
+ @brief Returns the position length of this Token.
+ - seealso: #setPositionLength
+ */
 - (jint)getPositionLength;
 
 @end
@@ -34,4 +59,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenattributesPositionLengthA
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute")

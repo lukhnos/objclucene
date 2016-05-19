@@ -92,14 +92,14 @@
       jint key = *b__++;
       if (key == emptyVal_) continue;
       jint newSlot = [self getSlotWithInt:key];
-      *IOSIntArray_GetRef(keys_, newSlot) = key;
+      *IOSIntArray_GetRef(nil_chk(keys_), newSlot) = key;
     }
   }
   rehashCount_ = newSize - (JreRShift32(newSize, 2));
 }
 
 - (jlong)ramBytesUsed {
-  return OrgApacheLuceneUtilRamUsageEstimator_alignObjectSizeWithLong_(OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT * 3 + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_)) + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithIntArray_(keys_);
+  return OrgApacheLuceneUtilRamUsageEstimator_alignObjectSizeWithLong_(OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT * 3 + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF)) + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithIntArray_(keys_);
 }
 
 - (void)dealloc {
@@ -146,9 +146,11 @@ void OrgApacheLuceneUtilSentinelIntSet_initWithInt_withInt_(OrgApacheLuceneUtilS
 }
 
 OrgApacheLuceneUtilSentinelIntSet *new_OrgApacheLuceneUtilSentinelIntSet_initWithInt_withInt_(jint size, jint emptyVal) {
-  OrgApacheLuceneUtilSentinelIntSet *self = [OrgApacheLuceneUtilSentinelIntSet alloc];
-  OrgApacheLuceneUtilSentinelIntSet_initWithInt_withInt_(self, size, emptyVal);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilSentinelIntSet, initWithInt_withInt_, size, emptyVal)
+}
+
+OrgApacheLuceneUtilSentinelIntSet *create_OrgApacheLuceneUtilSentinelIntSet_initWithInt_withInt_(jint size, jint emptyVal) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilSentinelIntSet, initWithInt_withInt_, size, emptyVal)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilSentinelIntSet)

@@ -5,27 +5,42 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexBinaryDocValues_INCLUDE_ALL")
-#if OrgApacheLuceneIndexBinaryDocValues_RESTRICT
-#define OrgApacheLuceneIndexBinaryDocValues_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexBinaryDocValues")
+#ifdef RESTRICT_OrgApacheLuceneIndexBinaryDocValues
+#define INCLUDE_ALL_OrgApacheLuceneIndexBinaryDocValues 0
 #else
-#define OrgApacheLuceneIndexBinaryDocValues_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexBinaryDocValues 1
 #endif
-#undef OrgApacheLuceneIndexBinaryDocValues_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexBinaryDocValues
 
-#if !defined (_OrgApacheLuceneIndexBinaryDocValues_) && (OrgApacheLuceneIndexBinaryDocValues_INCLUDE_ALL || OrgApacheLuceneIndexBinaryDocValues_INCLUDE)
-#define _OrgApacheLuceneIndexBinaryDocValues_
+#if !defined (OrgApacheLuceneIndexBinaryDocValues_) && (INCLUDE_ALL_OrgApacheLuceneIndexBinaryDocValues || defined(INCLUDE_OrgApacheLuceneIndexBinaryDocValues))
+#define OrgApacheLuceneIndexBinaryDocValues_
 
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief A per-document byte[]
+ */
 @interface OrgApacheLuceneIndexBinaryDocValues : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Lookup the value for document.
+ The returned <code>BytesRef</code> may be
+ re-used across calls to <code>get(int)</code> so make sure to
+ <code>copy it</code> if you want to keep it
+ around. 
+ */
 - (OrgApacheLuceneUtilBytesRef *)getWithInt:(jint)docID;
 
 #pragma mark Protected
 
+/*!
+ @brief Sole constructor.
+ (For invocation by subclass 
+ constructors, typically implicit.) 
+ */
 - (instancetype)init;
 
 @end
@@ -38,4 +53,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexBinaryDocValues)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexBinaryDocValues_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexBinaryDocValues")

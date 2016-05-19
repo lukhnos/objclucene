@@ -59,7 +59,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter, pr
     JreStrongAssign(&previous_, current);
   }
   exhausted_ = true;
-  if (previous_ == nil || [((NSString *) nil_chk(OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_GRAM_TYPE_)) isEqual:previousType_]) {
+  if (previous_ == nil || [((NSString *) nil_chk(OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_GRAM_TYPE)) isEqual:previousType_]) {
     return false;
   }
   [self restoreStateWithOrgApacheLuceneUtilAttributeSource_State:previous_];
@@ -71,7 +71,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter, pr
 }
 
 - (jboolean)isGramType {
-  return [((NSString *) nil_chk(OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_GRAM_TYPE_)) isEqual:[((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(typeAttribute_)) type]];
+  return [((NSString *) nil_chk(OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_GRAM_TYPE)) isEqual:[((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(typeAttribute_)) type]];
 }
 
 - (void)dealloc {
@@ -109,9 +109,11 @@ void OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter_initWithOrgApacheL
 }
 
 OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter *new_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter_initWithOrgApacheLuceneAnalysisCommongramsCommonGramsFilter_(OrgApacheLuceneAnalysisCommongramsCommonGramsFilter *input) {
-  OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter *self = [OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter alloc];
-  OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter_initWithOrgApacheLuceneAnalysisCommongramsCommonGramsFilter_(self, input);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter, initWithOrgApacheLuceneAnalysisCommongramsCommonGramsFilter_, input)
+}
+
+OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter *create_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter_initWithOrgApacheLuceneAnalysisCommongramsCommonGramsFilter_(OrgApacheLuceneAnalysisCommongramsCommonGramsFilter *input) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter, initWithOrgApacheLuceneAnalysisCommongramsCommonGramsFilter_, input)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter)

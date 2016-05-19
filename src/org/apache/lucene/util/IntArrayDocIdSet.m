@@ -24,8 +24,9 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilIntArrayDocIdSet, docs_, IOSIntArray *)
 
-static jlong OrgApacheLuceneUtilIntArrayDocIdSet_BASE_RAM_BYTES_USED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilIntArrayDocIdSet, BASE_RAM_BYTES_USED_, jlong)
+inline jlong OrgApacheLuceneUtilIntArrayDocIdSet_get_BASE_RAM_BYTES_USED();
+static jlong OrgApacheLuceneUtilIntArrayDocIdSet_BASE_RAM_BYTES_USED;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilIntArrayDocIdSet, BASE_RAM_BYTES_USED, jlong)
 
 @interface OrgApacheLuceneUtilIntArrayDocIdSet_IntArrayDocIdSetIterator () {
  @public
@@ -50,11 +51,11 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilIntArrayDocIdSet)
 }
 
 - (jlong)ramBytesUsed {
-  return OrgApacheLuceneUtilIntArrayDocIdSet_BASE_RAM_BYTES_USED_ + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithIntArray_(docs_);
+  return OrgApacheLuceneUtilIntArrayDocIdSet_BASE_RAM_BYTES_USED + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithIntArray_(docs_);
 }
 
 - (OrgApacheLuceneSearchDocIdSetIterator *)iterator {
-  return [new_OrgApacheLuceneUtilIntArrayDocIdSet_IntArrayDocIdSetIterator_initWithIntArray_withInt_(docs_, length_) autorelease];
+  return create_OrgApacheLuceneUtilIntArrayDocIdSet_IntArrayDocIdSetIterator_initWithIntArray_withInt_(docs_, length_);
 }
 
 - (void)dealloc {
@@ -64,7 +65,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilIntArrayDocIdSet)
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilIntArrayDocIdSet class]) {
-    OrgApacheLuceneUtilIntArrayDocIdSet_BASE_RAM_BYTES_USED_ = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilIntArrayDocIdSet_class_());
+    OrgApacheLuceneUtilIntArrayDocIdSet_BASE_RAM_BYTES_USED = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneUtilIntArrayDocIdSet_class_());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilIntArrayDocIdSet)
   }
 }
@@ -76,7 +77,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilIntArrayDocIdSet)
     { "iterator", NULL, "Lorg.apache.lucene.search.DocIdSetIterator;", 0x1, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "BASE_RAM_BYTES_USED_", NULL, 0x1a, "J", &OrgApacheLuceneUtilIntArrayDocIdSet_BASE_RAM_BYTES_USED_, NULL, .constantValue.asLong = 0 },
+    { "BASE_RAM_BYTES_USED", "BASE_RAM_BYTES_USED", 0x1a, "J", &OrgApacheLuceneUtilIntArrayDocIdSet_BASE_RAM_BYTES_USED, NULL, .constantValue.asLong = 0 },
     { "docs_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
     { "length_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
@@ -90,16 +91,18 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilIntArrayDocIdSet)
 void OrgApacheLuceneUtilIntArrayDocIdSet_initWithIntArray_withInt_(OrgApacheLuceneUtilIntArrayDocIdSet *self, IOSIntArray *docs, jint length) {
   OrgApacheLuceneSearchDocIdSet_init(self);
   if (IOSIntArray_Get(nil_chk(docs), length) != OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS) {
-    @throw [new_JavaLangIllegalArgumentException_init() autorelease];
+    @throw create_JavaLangIllegalArgumentException_init();
   }
   JreStrongAssign(&self->docs_, docs);
   self->length_ = length;
 }
 
 OrgApacheLuceneUtilIntArrayDocIdSet *new_OrgApacheLuceneUtilIntArrayDocIdSet_initWithIntArray_withInt_(IOSIntArray *docs, jint length) {
-  OrgApacheLuceneUtilIntArrayDocIdSet *self = [OrgApacheLuceneUtilIntArrayDocIdSet alloc];
-  OrgApacheLuceneUtilIntArrayDocIdSet_initWithIntArray_withInt_(self, docs, length);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilIntArrayDocIdSet, initWithIntArray_withInt_, docs, length)
+}
+
+OrgApacheLuceneUtilIntArrayDocIdSet *create_OrgApacheLuceneUtilIntArrayDocIdSet_initWithIntArray_withInt_(IOSIntArray *docs, jint length) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilIntArrayDocIdSet, initWithIntArray_withInt_, docs, length)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilIntArrayDocIdSet)
@@ -166,9 +169,11 @@ void OrgApacheLuceneUtilIntArrayDocIdSet_IntArrayDocIdSetIterator_initWithIntArr
 }
 
 OrgApacheLuceneUtilIntArrayDocIdSet_IntArrayDocIdSetIterator *new_OrgApacheLuceneUtilIntArrayDocIdSet_IntArrayDocIdSetIterator_initWithIntArray_withInt_(IOSIntArray *docs, jint length) {
-  OrgApacheLuceneUtilIntArrayDocIdSet_IntArrayDocIdSetIterator *self = [OrgApacheLuceneUtilIntArrayDocIdSet_IntArrayDocIdSetIterator alloc];
-  OrgApacheLuceneUtilIntArrayDocIdSet_IntArrayDocIdSetIterator_initWithIntArray_withInt_(self, docs, length);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilIntArrayDocIdSet_IntArrayDocIdSetIterator, initWithIntArray_withInt_, docs, length)
+}
+
+OrgApacheLuceneUtilIntArrayDocIdSet_IntArrayDocIdSetIterator *create_OrgApacheLuceneUtilIntArrayDocIdSet_IntArrayDocIdSetIterator_initWithIntArray_withInt_(IOSIntArray *docs, jint length) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilIntArrayDocIdSet_IntArrayDocIdSetIterator, initWithIntArray_withInt_, docs, length)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilIntArrayDocIdSet_IntArrayDocIdSetIterator)

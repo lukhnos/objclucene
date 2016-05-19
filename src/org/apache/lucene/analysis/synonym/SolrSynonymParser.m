@@ -12,7 +12,6 @@
 #include "java/io/Reader.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/StringBuilder.h"
-#include "java/lang/Throwable.h"
 #include "java/text/ParseException.h"
 #include "java/util/ArrayList.h"
 #include "org/apache/lucene/analysis/Analyzer.h"
@@ -51,13 +50,13 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer 
 }
 
 - (void)parseWithJavaIoReader:(JavaIoReader *)inArg {
-  JavaIoLineNumberReader *br = [new_JavaIoLineNumberReader_initWithJavaIoReader_(inArg) autorelease];
+  JavaIoLineNumberReader *br = create_JavaIoLineNumberReader_initWithJavaIoReader_(inArg);
   @try {
     OrgApacheLuceneAnalysisSynonymSolrSynonymParser_addInternalWithJavaIoBufferedReader_(self, br);
   }
   @catch (JavaLangIllegalArgumentException *e) {
-    JavaTextParseException *ex = [new_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$I", @"Invalid synonym rule at line ", [br getLineNumber]), 0) autorelease];
-    [ex initCauseWithJavaLangThrowable:e];
+    JavaTextParseException *ex = create_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$I", @"Invalid synonym rule at line ", [br getLineNumber]), 0);
+    [ex initCauseWithNSException:e];
     @throw ex;
   }
   @finally {
@@ -101,9 +100,11 @@ void OrgApacheLuceneAnalysisSynonymSolrSynonymParser_initWithBoolean_withBoolean
 }
 
 OrgApacheLuceneAnalysisSynonymSolrSynonymParser *new_OrgApacheLuceneAnalysisSynonymSolrSynonymParser_initWithBoolean_withBoolean_withOrgApacheLuceneAnalysisAnalyzer_(jboolean dedup, jboolean expand, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
-  OrgApacheLuceneAnalysisSynonymSolrSynonymParser *self = [OrgApacheLuceneAnalysisSynonymSolrSynonymParser alloc];
-  OrgApacheLuceneAnalysisSynonymSolrSynonymParser_initWithBoolean_withBoolean_withOrgApacheLuceneAnalysisAnalyzer_(self, dedup, expand, analyzer);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisSynonymSolrSynonymParser, initWithBoolean_withBoolean_withOrgApacheLuceneAnalysisAnalyzer_, dedup, expand, analyzer)
+}
+
+OrgApacheLuceneAnalysisSynonymSolrSynonymParser *create_OrgApacheLuceneAnalysisSynonymSolrSynonymParser_initWithBoolean_withBoolean_withOrgApacheLuceneAnalysisAnalyzer_(jboolean dedup, jboolean expand, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisSynonymSolrSynonymParser, initWithBoolean_withBoolean_withOrgApacheLuceneAnalysisAnalyzer_, dedup, expand, analyzer)
 }
 
 void OrgApacheLuceneAnalysisSynonymSolrSynonymParser_addInternalWithJavaIoBufferedReader_(OrgApacheLuceneAnalysisSynonymSolrSynonymParser *self, JavaIoBufferedReader *inArg) {
@@ -115,17 +116,17 @@ void OrgApacheLuceneAnalysisSynonymSolrSynonymParser_addInternalWithJavaIoBuffer
     IOSObjectArray *sides = OrgApacheLuceneAnalysisSynonymSolrSynonymParser_splitWithNSString_withNSString_(line, @"=>");
     if (((IOSObjectArray *) nil_chk(sides))->size_ > 1) {
       if (sides->size_ != 2) {
-        @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"more than one explicit mapping specified on the same line") autorelease];
+        @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"more than one explicit mapping specified on the same line");
       }
       IOSObjectArray *inputStrings = OrgApacheLuceneAnalysisSynonymSolrSynonymParser_splitWithNSString_withNSString_(IOSObjectArray_Get(sides, 0), @",");
       IOSObjectArray *inputs = [IOSObjectArray arrayWithLength:((IOSObjectArray *) nil_chk(inputStrings))->size_ type:OrgApacheLuceneUtilCharsRef_class_()];
       for (jint i = 0; i < inputs->size_; i++) {
-        IOSObjectArray_Set(inputs, i, [self analyzeWithNSString:[((NSString *) nil_chk(OrgApacheLuceneAnalysisSynonymSolrSynonymParser_unescapeWithNSString_(self, IOSObjectArray_Get(inputStrings, i)))) trim] withOrgApacheLuceneUtilCharsRefBuilder:[new_OrgApacheLuceneUtilCharsRefBuilder_init() autorelease]]);
+        IOSObjectArray_Set(inputs, i, [self analyzeWithNSString:[((NSString *) nil_chk(OrgApacheLuceneAnalysisSynonymSolrSynonymParser_unescapeWithNSString_(self, IOSObjectArray_Get(inputStrings, i)))) trim] withOrgApacheLuceneUtilCharsRefBuilder:create_OrgApacheLuceneUtilCharsRefBuilder_init()]);
       }
       IOSObjectArray *outputStrings = OrgApacheLuceneAnalysisSynonymSolrSynonymParser_splitWithNSString_withNSString_(IOSObjectArray_Get(sides, 1), @",");
       IOSObjectArray *outputs = [IOSObjectArray arrayWithLength:((IOSObjectArray *) nil_chk(outputStrings))->size_ type:OrgApacheLuceneUtilCharsRef_class_()];
       for (jint i = 0; i < outputs->size_; i++) {
-        IOSObjectArray_Set(outputs, i, [self analyzeWithNSString:[((NSString *) nil_chk(OrgApacheLuceneAnalysisSynonymSolrSynonymParser_unescapeWithNSString_(self, IOSObjectArray_Get(outputStrings, i)))) trim] withOrgApacheLuceneUtilCharsRefBuilder:[new_OrgApacheLuceneUtilCharsRefBuilder_init() autorelease]]);
+        IOSObjectArray_Set(outputs, i, [self analyzeWithNSString:[((NSString *) nil_chk(OrgApacheLuceneAnalysisSynonymSolrSynonymParser_unescapeWithNSString_(self, IOSObjectArray_Get(outputStrings, i)))) trim] withOrgApacheLuceneUtilCharsRefBuilder:create_OrgApacheLuceneUtilCharsRefBuilder_init()]);
       }
       for (jint i = 0; i < inputs->size_; i++) {
         for (jint j = 0; j < outputs->size_; j++) {
@@ -137,7 +138,7 @@ void OrgApacheLuceneAnalysisSynonymSolrSynonymParser_addInternalWithJavaIoBuffer
       IOSObjectArray *inputStrings = OrgApacheLuceneAnalysisSynonymSolrSynonymParser_splitWithNSString_withNSString_(line, @",");
       IOSObjectArray *inputs = [IOSObjectArray arrayWithLength:((IOSObjectArray *) nil_chk(inputStrings))->size_ type:OrgApacheLuceneUtilCharsRef_class_()];
       for (jint i = 0; i < inputs->size_; i++) {
-        IOSObjectArray_Set(inputs, i, [self analyzeWithNSString:[((NSString *) nil_chk(OrgApacheLuceneAnalysisSynonymSolrSynonymParser_unescapeWithNSString_(self, IOSObjectArray_Get(inputStrings, i)))) trim] withOrgApacheLuceneUtilCharsRefBuilder:[new_OrgApacheLuceneUtilCharsRefBuilder_init() autorelease]]);
+        IOSObjectArray_Set(inputs, i, [self analyzeWithNSString:[((NSString *) nil_chk(OrgApacheLuceneAnalysisSynonymSolrSynonymParser_unescapeWithNSString_(self, IOSObjectArray_Get(inputStrings, i)))) trim] withOrgApacheLuceneUtilCharsRefBuilder:create_OrgApacheLuceneUtilCharsRefBuilder_init()]);
       }
       if (self->expand_) {
         for (jint i = 0; i < inputs->size_; i++) {
@@ -159,14 +160,14 @@ void OrgApacheLuceneAnalysisSynonymSolrSynonymParser_addInternalWithJavaIoBuffer
 
 IOSObjectArray *OrgApacheLuceneAnalysisSynonymSolrSynonymParser_splitWithNSString_withNSString_(NSString *s, NSString *separator) {
   OrgApacheLuceneAnalysisSynonymSolrSynonymParser_initialize();
-  JavaUtilArrayList *list = [new_JavaUtilArrayList_initWithInt_(2) autorelease];
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+  JavaUtilArrayList *list = create_JavaUtilArrayList_initWithInt_(2);
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   jint pos = 0, end = ((jint) [((NSString *) nil_chk(s)) length]);
   while (pos < end) {
     if ([s hasPrefix:separator offset:pos]) {
       if ([sb length] > 0) {
         [list addWithId:[sb description]];
-        sb = [new_JavaLangStringBuilder_init() autorelease];
+        sb = create_JavaLangStringBuilder_init();
       }
       pos += ((jint) [((NSString *) nil_chk(separator)) length]);
       continue;
@@ -187,7 +188,7 @@ IOSObjectArray *OrgApacheLuceneAnalysisSynonymSolrSynonymParser_splitWithNSStrin
 
 NSString *OrgApacheLuceneAnalysisSynonymSolrSynonymParser_unescapeWithNSString_(OrgApacheLuceneAnalysisSynonymSolrSynonymParser *self, NSString *s) {
   if ([((NSString *) nil_chk(s)) indexOfString:@"\\"] >= 0) {
-    JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+    JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
     for (jint i = 0; i < ((jint) [s length]); i++) {
       jchar ch = [s charAtWithInt:i];
       if (ch == '\\' && i < ((jint) [s length]) - 1) {

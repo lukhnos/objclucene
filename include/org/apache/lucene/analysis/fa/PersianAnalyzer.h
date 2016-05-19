@@ -5,39 +5,76 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisFaPersianAnalyzer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisFaPersianAnalyzer_RESTRICT
-#define OrgApacheLuceneAnalysisFaPersianAnalyzer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisFaPersianAnalyzer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisFaPersianAnalyzer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisFaPersianAnalyzer 0
 #else
-#define OrgApacheLuceneAnalysisFaPersianAnalyzer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisFaPersianAnalyzer 1
 #endif
-#undef OrgApacheLuceneAnalysisFaPersianAnalyzer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisFaPersianAnalyzer
 
-#if !defined (_OrgApacheLuceneAnalysisFaPersianAnalyzer_) && (OrgApacheLuceneAnalysisFaPersianAnalyzer_INCLUDE_ALL || OrgApacheLuceneAnalysisFaPersianAnalyzer_INCLUDE)
-#define _OrgApacheLuceneAnalysisFaPersianAnalyzer_
+#if !defined (OrgApacheLuceneAnalysisFaPersianAnalyzer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisFaPersianAnalyzer || defined(INCLUDE_OrgApacheLuceneAnalysisFaPersianAnalyzer))
+#define OrgApacheLuceneAnalysisFaPersianAnalyzer_
 
-#define OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase 1
 #include "org/apache/lucene/analysis/util/StopwordAnalyzerBase.h"
 
 @class JavaIoReader;
 @class OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;
 @class OrgApacheLuceneAnalysisUtilCharArraySet;
 
+/*!
+ @brief <code>Analyzer</code> for Persian.
+ <p>
+ This Analyzer uses <code>PersianCharFilter</code> which implies tokenizing around
+ zero-width non-joiner in addition to whitespace. Some persian-specific variant forms (such as farsi
+ yeh and keheh) are standardized. "Stemming" is accomplished via stopwords.
+ </p>
+ */
 @interface OrgApacheLuceneAnalysisFaPersianAnalyzer : OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase
+
++ (NSString *)DEFAULT_STOPWORD_FILE;
+
++ (NSString *)STOPWORDS_COMMENT;
 
 #pragma mark Public
 
+/*!
+ @brief Builds an analyzer with the default stop words:
+ <code>DEFAULT_STOPWORD_FILE</code>.
+ */
 - (instancetype)init;
 
+/*!
+ @brief Builds an analyzer with the given stop words
+ @param stopwords
+ a stopword set
+ */
 - (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords;
 
+/*!
+ @brief Returns an unmodifiable instance of the default stop-words set.
+ @return an unmodifiable instance of the default stop-words set.
+ */
 + (OrgApacheLuceneAnalysisUtilCharArraySet *)getDefaultStopSet;
 
 #pragma mark Protected
 
+/*!
+ @brief Creates
+ <code>org.apache.lucene.analysis.Analyzer.TokenStreamComponents</code>
+ used to tokenize all the text in the provided <code>Reader</code>.
+ @return <code>org.apache.lucene.analysis.Analyzer.TokenStreamComponents</code>
+ built from a <code>StandardTokenizer</code> filtered with
+ <code>LowerCaseFilter</code>, <code>ArabicNormalizationFilter</code>,
+ <code>PersianNormalizationFilter</code> and Persian Stop words
+ */
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName;
 
+/*!
+ @brief Wraps the Reader with <code>PersianCharFilter</code>
+ */
 - (JavaIoReader *)initReaderWithNSString:(NSString *)fieldName
                         withJavaIoReader:(JavaIoReader *)reader OBJC_METHOD_FAMILY_NONE;
 
@@ -45,11 +82,26 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisFaPersianAnalyzer)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisFaPersianAnalyzer_DEFAULT_STOPWORD_FILE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisFaPersianAnalyzer, DEFAULT_STOPWORD_FILE_, NSString *)
+/*!
+ @brief File containing default Persian stopwords.
+ Default stopword list is from
+ http://members.unine.ch/jacques.savoy/clef/index.html The stopword list is
+ BSD-Licensed.
+ */
+inline NSString *OrgApacheLuceneAnalysisFaPersianAnalyzer_get_DEFAULT_STOPWORD_FILE();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisFaPersianAnalyzer_DEFAULT_STOPWORD_FILE;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisFaPersianAnalyzer, DEFAULT_STOPWORD_FILE, NSString *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisFaPersianAnalyzer_STOPWORDS_COMMENT_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisFaPersianAnalyzer, STOPWORDS_COMMENT_, NSString *)
+/*!
+ @brief The comment character in the stopwords file.
+ All lines prefixed with this
+ will be ignored
+ */
+inline NSString *OrgApacheLuceneAnalysisFaPersianAnalyzer_get_STOPWORDS_COMMENT();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisFaPersianAnalyzer_STOPWORDS_COMMENT;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisFaPersianAnalyzer, STOPWORDS_COMMENT, NSString *)
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisFaPersianAnalyzer_getDefaultStopSet();
 
@@ -57,12 +109,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisFaPersianAnalyzer_init(OrgApacheLu
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisFaPersianAnalyzer *new_OrgApacheLuceneAnalysisFaPersianAnalyzer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisFaPersianAnalyzer *create_OrgApacheLuceneAnalysisFaPersianAnalyzer_init();
+
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisFaPersianAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisFaPersianAnalyzer *self, OrgApacheLuceneAnalysisUtilCharArraySet *stopwords);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisFaPersianAnalyzer *new_OrgApacheLuceneAnalysisFaPersianAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopwords) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisFaPersianAnalyzer *create_OrgApacheLuceneAnalysisFaPersianAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopwords);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisFaPersianAnalyzer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisFaPersianAnalyzer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisFaPersianAnalyzer")

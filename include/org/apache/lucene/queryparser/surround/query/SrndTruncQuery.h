@@ -5,25 +5,28 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery_RESTRICT
-#define OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery 0
 #else
-#define OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery 1
 #endif
-#undef OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery
 
-#if !defined (_OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery_) && (OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery_INCLUDE_ALL || OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery_INCLUDE)
-#define _OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery_
+#if !defined (OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery || defined(INCLUDE_OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery))
+#define OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery_
 
-#define OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_RESTRICT 1
-#define OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserSurroundQuerySimpleTerm 1
+#define INCLUDE_OrgApacheLuceneQueryparserSurroundQuerySimpleTerm 1
 #include "org/apache/lucene/queryparser/surround/query/SimpleTerm.h"
 
 @class JavaLangStringBuilder;
 @class OrgApacheLuceneIndexIndexReader;
 @protocol OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor;
 
+/*!
+ @brief Query that matches wildcards
+ */
 @interface OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery : OrgApacheLuceneQueryparserSurroundQuerySimpleTerm
 
 #pragma mark Public
@@ -57,8 +60,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery_ini
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery *new_OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery_initWithNSString_withChar_withChar_(NSString *truncated, jchar unlimited, jchar mask) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery *create_OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery_initWithNSString_withChar_withChar_(NSString *truncated, jchar unlimited, jchar mask);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery")

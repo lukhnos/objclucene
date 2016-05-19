@@ -50,6 +50,14 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisNgramNGramTokenFilter, offsetAtt_, id
 
 @implementation OrgApacheLuceneAnalysisNgramNGramTokenFilter
 
++ (jint)DEFAULT_MIN_NGRAM_SIZE {
+  return OrgApacheLuceneAnalysisNgramNGramTokenFilter_DEFAULT_MIN_NGRAM_SIZE;
+}
+
++ (jint)DEFAULT_MAX_NGRAM_SIZE {
+  return OrgApacheLuceneAnalysisNgramNGramTokenFilter_DEFAULT_MAX_NGRAM_SIZE;
+}
+
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
                                                    withInt:(jint)minGram
                                                    withInt:(jint)maxGram {
@@ -151,15 +159,15 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisNgramNGramTokenFilter, offsetAtt_, id
 @end
 
 void OrgApacheLuceneAnalysisNgramNGramTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(OrgApacheLuceneAnalysisNgramNGramTokenFilter *self, OrgApacheLuceneAnalysisTokenStream *input, jint minGram, jint maxGram) {
-  OrgApacheLuceneAnalysisTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, [new_OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(input, minGram, JavaLangInteger_MAX_VALUE) autorelease]);
+  OrgApacheLuceneAnalysisTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, create_OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(input, minGram, JavaLangInteger_MAX_VALUE));
   JreStrongAssign(&self->termAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()]);
   JreStrongAssign(&self->offsetAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_()]);
   JreStrongAssign(&self->charUtils_, OrgApacheLuceneAnalysisUtilCharacterUtils_getInstance());
   if (minGram < 1) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"minGram must be greater than zero") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"minGram must be greater than zero");
   }
   if (minGram > maxGram) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"minGram must not be greater than maxGram") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"minGram must not be greater than maxGram");
   }
   self->minGram_ = minGram;
   self->maxGram_ = maxGram;
@@ -168,9 +176,11 @@ void OrgApacheLuceneAnalysisNgramNGramTokenFilter_initWithOrgApacheLuceneAnalysi
 }
 
 OrgApacheLuceneAnalysisNgramNGramTokenFilter *new_OrgApacheLuceneAnalysisNgramNGramTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(OrgApacheLuceneAnalysisTokenStream *input, jint minGram, jint maxGram) {
-  OrgApacheLuceneAnalysisNgramNGramTokenFilter *self = [OrgApacheLuceneAnalysisNgramNGramTokenFilter alloc];
-  OrgApacheLuceneAnalysisNgramNGramTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(self, input, minGram, maxGram);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisNgramNGramTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_, input, minGram, maxGram)
+}
+
+OrgApacheLuceneAnalysisNgramNGramTokenFilter *create_OrgApacheLuceneAnalysisNgramNGramTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(OrgApacheLuceneAnalysisTokenStream *input, jint minGram, jint maxGram) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisNgramNGramTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_, input, minGram, maxGram)
 }
 
 void OrgApacheLuceneAnalysisNgramNGramTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisNgramNGramTokenFilter *self, OrgApacheLuceneAnalysisTokenStream *input) {
@@ -178,9 +188,11 @@ void OrgApacheLuceneAnalysisNgramNGramTokenFilter_initWithOrgApacheLuceneAnalysi
 }
 
 OrgApacheLuceneAnalysisNgramNGramTokenFilter *new_OrgApacheLuceneAnalysisNgramNGramTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) {
-  OrgApacheLuceneAnalysisNgramNGramTokenFilter *self = [OrgApacheLuceneAnalysisNgramNGramTokenFilter alloc];
-  OrgApacheLuceneAnalysisNgramNGramTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, input);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisNgramNGramTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_, input)
+}
+
+OrgApacheLuceneAnalysisNgramNGramTokenFilter *create_OrgApacheLuceneAnalysisNgramNGramTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisNgramNGramTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_, input)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisNgramNGramTokenFilter)

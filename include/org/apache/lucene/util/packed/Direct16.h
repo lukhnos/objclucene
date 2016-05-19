@@ -5,25 +5,28 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilPackedDirect16_INCLUDE_ALL")
-#if OrgApacheLuceneUtilPackedDirect16_RESTRICT
-#define OrgApacheLuceneUtilPackedDirect16_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedDirect16")
+#ifdef RESTRICT_OrgApacheLuceneUtilPackedDirect16
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackedDirect16 0
 #else
-#define OrgApacheLuceneUtilPackedDirect16_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackedDirect16 1
 #endif
-#undef OrgApacheLuceneUtilPackedDirect16_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilPackedDirect16
 
-#if !defined (_OrgApacheLuceneUtilPackedDirect16_) && (OrgApacheLuceneUtilPackedDirect16_INCLUDE_ALL || OrgApacheLuceneUtilPackedDirect16_INCLUDE)
-#define _OrgApacheLuceneUtilPackedDirect16_
+#if !defined (OrgApacheLuceneUtilPackedDirect16_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedDirect16 || defined(INCLUDE_OrgApacheLuceneUtilPackedDirect16))
+#define OrgApacheLuceneUtilPackedDirect16_
 
-#define OrgApacheLuceneUtilPackedPackedInts_RESTRICT 1
-#define OrgApacheLuceneUtilPackedPackedInts_MutableImpl_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilPackedPackedInts 1
+#define INCLUDE_OrgApacheLuceneUtilPackedPackedInts_MutableImpl 1
 #include "org/apache/lucene/util/packed/PackedInts.h"
 
 @class IOSLongArray;
 @class IOSShortArray;
 @class OrgApacheLuceneStoreDataInput;
 
+/*!
+ @brief Direct wrapping of 16-bits values to a backing array.
+ */
 @interface OrgApacheLuceneUtilPackedDirect16 : OrgApacheLuceneUtilPackedPackedInts_MutableImpl {
  @public
   IOSShortArray *values_;
@@ -72,12 +75,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedDirect16_initWithInt_(OrgApacheL
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirect16 *new_OrgApacheLuceneUtilPackedDirect16_initWithInt_(jint valueCount) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirect16 *create_OrgApacheLuceneUtilPackedDirect16_initWithInt_(jint valueCount);
+
 FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedDirect16_initWithInt_withOrgApacheLuceneStoreDataInput_withInt_(OrgApacheLuceneUtilPackedDirect16 *self, jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirect16 *new_OrgApacheLuceneUtilPackedDirect16_initWithInt_withOrgApacheLuceneStoreDataInput_withInt_(jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedDirect16 *create_OrgApacheLuceneUtilPackedDirect16_initWithInt_withOrgApacheLuceneStoreDataInput_withInt_(jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedDirect16)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilPackedDirect16_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedDirect16")

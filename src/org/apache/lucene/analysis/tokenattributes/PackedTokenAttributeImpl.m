@@ -39,7 +39,7 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setPositionIncrementWithInt:(jint)positionIncrement {
-  if (positionIncrement < 0) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"Increment must be zero or greater: ", positionIncrement)) autorelease];
+  if (positionIncrement < 0) @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"Increment must be zero or greater: ", positionIncrement));
   self->positionIncrement_ = positionIncrement;
 }
 
@@ -66,7 +66,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)setOffsetWithInt:(jint)startOffset
                  withInt:(jint)endOffset {
   if (startOffset < 0 || endOffset < startOffset) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$I", @"startOffset must be non-negative, and endOffset must be >= startOffset, startOffset=", startOffset, @",endOffset=", endOffset)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$I", @"startOffset must be non-negative, and endOffset must be >= startOffset, startOffset=", startOffset, @",endOffset=", endOffset));
   }
   self->startOffset_ = startOffset;
   self->endOffset_ = endOffset;
@@ -84,17 +84,17 @@ J2OBJC_IGNORE_DESIGNATED_END
   [super clear];
   positionIncrement_ = positionLength_ = 1;
   startOffset_ = endOffset_ = 0;
-  JreStrongAssign(&type_, OrgApacheLuceneAnalysisTokenattributesTypeAttribute_DEFAULT_TYPE_);
+  JreStrongAssign(&type_, OrgApacheLuceneAnalysisTokenattributesTypeAttribute_DEFAULT_TYPE);
 }
 
 - (OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *)clone {
-  return (OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *) check_class_cast([super clone], [OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl class]);
+  return (OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *) cast_chk([super clone], [OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl class]);
 }
 
 - (jboolean)isEqual:(id)obj {
   if (obj == self) return true;
   if ([obj isKindOfClass:[OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl class]]) {
-    OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *other = (OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *) check_class_cast(obj, [OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl class]);
+    OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *other = (OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *) cast_chk(obj, [OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl class]);
     return (startOffset_ == ((OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *) nil_chk(other))->startOffset_ && endOffset_ == other->endOffset_ && positionIncrement_ == other->positionIncrement_ && positionLength_ == other->positionLength_ && (type_ == nil ? other->type_ == nil : [type_ isEqual:other->type_]) && [super isEqual:obj]);
   }
   else return false;
@@ -112,7 +112,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)copyToWithOrgApacheLuceneUtilAttributeImpl:(OrgApacheLuceneUtilAttributeImpl *)target {
   if ([target isKindOfClass:[OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl class]]) {
-    OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *to = (OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *) check_class_cast(target, [OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl class]);
+    OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *to = (OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *) cast_chk(target, [OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl class]);
     [((OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *) nil_chk(to)) copyBufferWithCharArray:[self buffer] withInt:0 withInt:[self length]];
     to->positionIncrement_ = positionIncrement_;
     to->positionLength_ = positionLength_;
@@ -122,10 +122,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
   else {
     [super copyToWithOrgApacheLuceneUtilAttributeImpl:target];
-    [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) check_protocol_cast(target, OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_())))) setOffsetWithInt:startOffset_ withInt:endOffset_];
-    [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) check_protocol_cast(target, OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_class_())))) setPositionIncrementWithInt:positionIncrement_];
-    [((id<OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute>) nil_chk(((id<OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute>) check_protocol_cast(target, OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute_class_())))) setPositionLengthWithInt:positionLength_];
-    [((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) check_protocol_cast(target, OrgApacheLuceneAnalysisTokenattributesTypeAttribute_class_())))) setTypeWithNSString:type_];
+    [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) cast_check(target, OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_())))) setOffsetWithInt:startOffset_ withInt:endOffset_];
+    [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) cast_check(target, OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_class_())))) setPositionIncrementWithInt:positionIncrement_];
+    [((id<OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute>) nil_chk(((id<OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute>) cast_check(target, OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute_class_())))) setPositionLengthWithInt:positionLength_];
+    [((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) cast_check(target, OrgApacheLuceneAnalysisTokenattributesTypeAttribute_class_())))) setTypeWithNSString:type_];
   }
 }
 
@@ -177,15 +177,17 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 void OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl_init(OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *self) {
   OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_init(self);
-  JreStrongAssign(&self->type_, OrgApacheLuceneAnalysisTokenattributesTypeAttribute_DEFAULT_TYPE_);
+  JreStrongAssign(&self->type_, OrgApacheLuceneAnalysisTokenattributesTypeAttribute_DEFAULT_TYPE);
   self->positionIncrement_ = 1;
   self->positionLength_ = 1;
 }
 
 OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *new_OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl_init() {
-  OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *self = [OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl alloc];
-  OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl, init)
+}
+
+OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *create_OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl)

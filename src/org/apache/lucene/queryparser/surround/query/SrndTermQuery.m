@@ -37,7 +37,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery, termTe
 }
 
 - (OrgApacheLuceneIndexTerm *)getLuceneTermWithNSString:(NSString *)fieldName {
-  return [new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(fieldName, [self getTermText]) autorelease];
+  return create_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(fieldName, [self getTermText]);
 }
 
 - (NSString *)toStringUnquoted {
@@ -50,8 +50,8 @@ withOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor:(id<Or
   OrgApacheLuceneIndexTerms *terms = OrgApacheLuceneIndexMultiFields_getTermsWithOrgApacheLuceneIndexIndexReader_withNSString_(reader, fieldName);
   if (terms != nil) {
     OrgApacheLuceneIndexTermsEnum *termsEnum = [terms iterator];
-    OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *status = [((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) seekCeilWithOrgApacheLuceneUtilBytesRef:[new_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_([self getTermText]) autorelease]];
-    if (status == JreLoadStatic(OrgApacheLuceneIndexTermsEnum_SeekStatusEnum, FOUND)) {
+    OrgApacheLuceneIndexTermsEnum_SeekStatus *status = [((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) seekCeilWithOrgApacheLuceneUtilBytesRef:create_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_([self getTermText])];
+    if (status == JreLoadEnum(OrgApacheLuceneIndexTermsEnum_SeekStatus, FOUND)) {
       [((id<OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor>) nil_chk(mtv)) visitMatchingTermWithOrgApacheLuceneIndexTerm:[self getLuceneTermWithNSString:fieldName]];
     }
   }
@@ -85,9 +85,11 @@ void OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery_initWithNSString_withB
 }
 
 OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery *new_OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery_initWithNSString_withBoolean_(NSString *termText, jboolean quoted) {
-  OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery *self = [OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery alloc];
-  OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery_initWithNSString_withBoolean_(self, termText, quoted);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery, initWithNSString_withBoolean_, termText, quoted)
+}
+
+OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery *create_OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery_initWithNSString_withBoolean_(NSString *termText, jboolean quoted) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery, initWithNSString_withBoolean_, termText, quoted)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery)

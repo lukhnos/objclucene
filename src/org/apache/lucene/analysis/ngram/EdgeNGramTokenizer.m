@@ -10,6 +10,14 @@
 
 @implementation OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer
 
++ (jint)DEFAULT_MAX_GRAM_SIZE {
+  return OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer_DEFAULT_MAX_GRAM_SIZE;
+}
+
++ (jint)DEFAULT_MIN_GRAM_SIZE {
+  return OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer_DEFAULT_MIN_GRAM_SIZE;
+}
+
 - (instancetype)initWithInt:(jint)minGram
                     withInt:(jint)maxGram {
   OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer_initWithInt_withInt_(self, minGram, maxGram);
@@ -43,9 +51,11 @@ void OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer_initWithInt_withInt_(OrgApac
 }
 
 OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer *new_OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer_initWithInt_withInt_(jint minGram, jint maxGram) {
-  OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer *self = [OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer alloc];
-  OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer_initWithInt_withInt_(self, minGram, maxGram);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer, initWithInt_withInt_, minGram, maxGram)
+}
+
+OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer *create_OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer_initWithInt_withInt_(jint minGram, jint maxGram) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer, initWithInt_withInt_, minGram, maxGram)
 }
 
 void OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_(OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory, jint minGram, jint maxGram) {
@@ -53,9 +63,11 @@ void OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer_initWithOrgApacheLuceneUtilA
 }
 
 OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer *new_OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_(OrgApacheLuceneUtilAttributeFactory *factory, jint minGram, jint maxGram) {
-  OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer *self = [OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer alloc];
-  OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_(self, factory, minGram, maxGram);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer, initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_, factory, minGram, maxGram)
+}
+
+OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer *create_OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_(OrgApacheLuceneUtilAttributeFactory *factory, jint minGram, jint maxGram) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer, initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_, factory, minGram, maxGram)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer)

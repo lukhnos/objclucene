@@ -63,6 +63,8 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisNumericTokenStream_Nu
 
 __attribute__((unused)) static OrgApacheLuceneAnalysisNumericTokenStream_NumericAttributeFactory *new_OrgApacheLuceneAnalysisNumericTokenStream_NumericAttributeFactory_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneUtilAttributeFactory *delegate) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneAnalysisNumericTokenStream_NumericAttributeFactory *create_OrgApacheLuceneAnalysisNumericTokenStream_NumericAttributeFactory_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneUtilAttributeFactory *delegate);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNumericTokenStream_NumericAttributeFactory)
 
 @interface OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl () {
@@ -76,10 +78,18 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNumericTokenStream_NumericAttr
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl, bytes_, OrgApacheLuceneUtilBytesRefBuilder *)
 
-NSString *OrgApacheLuceneAnalysisNumericTokenStream_TOKEN_TYPE_FULL_PREC_ = @"fullPrecNumeric";
-NSString *OrgApacheLuceneAnalysisNumericTokenStream_TOKEN_TYPE_LOWER_PREC_ = @"lowerPrecNumeric";
+NSString *OrgApacheLuceneAnalysisNumericTokenStream_TOKEN_TYPE_FULL_PREC = @"fullPrecNumeric";
+NSString *OrgApacheLuceneAnalysisNumericTokenStream_TOKEN_TYPE_LOWER_PREC = @"lowerPrecNumeric";
 
 @implementation OrgApacheLuceneAnalysisNumericTokenStream
+
++ (NSString *)TOKEN_TYPE_FULL_PREC {
+  return OrgApacheLuceneAnalysisNumericTokenStream_TOKEN_TYPE_FULL_PREC;
+}
+
++ (NSString *)TOKEN_TYPE_LOWER_PREC {
+  return OrgApacheLuceneAnalysisNumericTokenStream_TOKEN_TYPE_LOWER_PREC;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -120,15 +130,15 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)reset {
-  if (valSize_ == 0) @throw [new_JavaLangIllegalStateException_initWithNSString_(@"call set???Value() before usage") autorelease];
+  if (valSize_ == 0) @throw create_JavaLangIllegalStateException_initWithNSString_(@"call set???Value() before usage");
   [((id<OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttribute>) nil_chk(numericAtt_)) setShiftWithInt:-precisionStep_];
 }
 
 - (jboolean)incrementToken {
-  if (valSize_ == 0) @throw [new_JavaLangIllegalStateException_initWithNSString_(@"call set???Value() before usage") autorelease];
+  if (valSize_ == 0) @throw create_JavaLangIllegalStateException_initWithNSString_(@"call set???Value() before usage");
   [self clearAttributes];
   jint shift = [((id<OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttribute>) nil_chk(numericAtt_)) incShift];
-  [((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(typeAtt_)) setTypeWithNSString:(shift == 0) ? OrgApacheLuceneAnalysisNumericTokenStream_TOKEN_TYPE_FULL_PREC_ : OrgApacheLuceneAnalysisNumericTokenStream_TOKEN_TYPE_LOWER_PREC_];
+  [((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(typeAtt_)) setTypeWithNSString:(shift == 0) ? OrgApacheLuceneAnalysisNumericTokenStream_TOKEN_TYPE_FULL_PREC : OrgApacheLuceneAnalysisNumericTokenStream_TOKEN_TYPE_LOWER_PREC];
   [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncrAtt_)) setPositionIncrementWithInt:(shift == 0) ? 1 : 0];
   return (shift < valSize_);
 }
@@ -163,8 +173,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "TOKEN_TYPE_FULL_PREC_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisNumericTokenStream_TOKEN_TYPE_FULL_PREC_, NULL, .constantValue.asLong = 0 },
-    { "TOKEN_TYPE_LOWER_PREC_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisNumericTokenStream_TOKEN_TYPE_LOWER_PREC_, NULL, .constantValue.asLong = 0 },
+    { "TOKEN_TYPE_FULL_PREC", "TOKEN_TYPE_FULL_PREC", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisNumericTokenStream_TOKEN_TYPE_FULL_PREC, NULL, .constantValue.asLong = 0 },
+    { "TOKEN_TYPE_LOWER_PREC", "TOKEN_TYPE_LOWER_PREC", 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisNumericTokenStream_TOKEN_TYPE_LOWER_PREC, NULL, .constantValue.asLong = 0 },
     { "numericAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.NumericTokenStream$NumericTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
     { "typeAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.TypeAttribute;", NULL, NULL, .constantValue.asLong = 0 },
     { "posIncrAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;", NULL, NULL, .constantValue.asLong = 0 },
@@ -179,40 +189,46 @@ J2OBJC_IGNORE_DESIGNATED_END
 @end
 
 void OrgApacheLuceneAnalysisNumericTokenStream_init(OrgApacheLuceneAnalysisNumericTokenStream *self) {
-  OrgApacheLuceneAnalysisNumericTokenStream_initWithOrgApacheLuceneUtilAttributeFactory_withInt_(self, JreLoadStatic(OrgApacheLuceneUtilAttributeFactory, DEFAULT_ATTRIBUTE_FACTORY_), OrgApacheLuceneUtilNumericUtils_PRECISION_STEP_DEFAULT);
+  OrgApacheLuceneAnalysisNumericTokenStream_initWithOrgApacheLuceneUtilAttributeFactory_withInt_(self, JreLoadStatic(OrgApacheLuceneUtilAttributeFactory, DEFAULT_ATTRIBUTE_FACTORY), OrgApacheLuceneUtilNumericUtils_PRECISION_STEP_DEFAULT);
 }
 
 OrgApacheLuceneAnalysisNumericTokenStream *new_OrgApacheLuceneAnalysisNumericTokenStream_init() {
-  OrgApacheLuceneAnalysisNumericTokenStream *self = [OrgApacheLuceneAnalysisNumericTokenStream alloc];
-  OrgApacheLuceneAnalysisNumericTokenStream_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisNumericTokenStream, init)
+}
+
+OrgApacheLuceneAnalysisNumericTokenStream *create_OrgApacheLuceneAnalysisNumericTokenStream_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisNumericTokenStream, init)
 }
 
 void OrgApacheLuceneAnalysisNumericTokenStream_initWithInt_(OrgApacheLuceneAnalysisNumericTokenStream *self, jint precisionStep) {
-  OrgApacheLuceneAnalysisNumericTokenStream_initWithOrgApacheLuceneUtilAttributeFactory_withInt_(self, JreLoadStatic(OrgApacheLuceneUtilAttributeFactory, DEFAULT_ATTRIBUTE_FACTORY_), precisionStep);
+  OrgApacheLuceneAnalysisNumericTokenStream_initWithOrgApacheLuceneUtilAttributeFactory_withInt_(self, JreLoadStatic(OrgApacheLuceneUtilAttributeFactory, DEFAULT_ATTRIBUTE_FACTORY), precisionStep);
 }
 
 OrgApacheLuceneAnalysisNumericTokenStream *new_OrgApacheLuceneAnalysisNumericTokenStream_initWithInt_(jint precisionStep) {
-  OrgApacheLuceneAnalysisNumericTokenStream *self = [OrgApacheLuceneAnalysisNumericTokenStream alloc];
-  OrgApacheLuceneAnalysisNumericTokenStream_initWithInt_(self, precisionStep);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisNumericTokenStream, initWithInt_, precisionStep)
+}
+
+OrgApacheLuceneAnalysisNumericTokenStream *create_OrgApacheLuceneAnalysisNumericTokenStream_initWithInt_(jint precisionStep) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisNumericTokenStream, initWithInt_, precisionStep)
 }
 
 void OrgApacheLuceneAnalysisNumericTokenStream_initWithOrgApacheLuceneUtilAttributeFactory_withInt_(OrgApacheLuceneAnalysisNumericTokenStream *self, OrgApacheLuceneUtilAttributeFactory *factory, jint precisionStep) {
-  OrgApacheLuceneAnalysisTokenStream_initWithOrgApacheLuceneUtilAttributeFactory_(self, [new_OrgApacheLuceneAnalysisNumericTokenStream_NumericAttributeFactory_initWithOrgApacheLuceneUtilAttributeFactory_(factory) autorelease]);
+  OrgApacheLuceneAnalysisTokenStream_initWithOrgApacheLuceneUtilAttributeFactory_(self, create_OrgApacheLuceneAnalysisNumericTokenStream_NumericAttributeFactory_initWithOrgApacheLuceneUtilAttributeFactory_(factory));
   JreStrongAssign(&self->numericAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttribute_class_()]);
   JreStrongAssign(&self->typeAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesTypeAttribute_class_()]);
   JreStrongAssign(&self->posIncrAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_class_()]);
   self->valSize_ = 0;
-  if (precisionStep < 1) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"precisionStep must be >=1") autorelease];
+  if (precisionStep < 1) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"precisionStep must be >=1");
   self->precisionStep_ = precisionStep;
   [((id<OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttribute>) nil_chk(self->numericAtt_)) setShiftWithInt:-precisionStep];
 }
 
 OrgApacheLuceneAnalysisNumericTokenStream *new_OrgApacheLuceneAnalysisNumericTokenStream_initWithOrgApacheLuceneUtilAttributeFactory_withInt_(OrgApacheLuceneUtilAttributeFactory *factory, jint precisionStep) {
-  OrgApacheLuceneAnalysisNumericTokenStream *self = [OrgApacheLuceneAnalysisNumericTokenStream alloc];
-  OrgApacheLuceneAnalysisNumericTokenStream_initWithOrgApacheLuceneUtilAttributeFactory_withInt_(self, factory, precisionStep);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisNumericTokenStream, initWithOrgApacheLuceneUtilAttributeFactory_withInt_, factory, precisionStep)
+}
+
+OrgApacheLuceneAnalysisNumericTokenStream *create_OrgApacheLuceneAnalysisNumericTokenStream_initWithOrgApacheLuceneUtilAttributeFactory_withInt_(OrgApacheLuceneUtilAttributeFactory *factory, jint precisionStep) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisNumericTokenStream, initWithOrgApacheLuceneUtilAttributeFactory_withInt_, factory, precisionStep)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisNumericTokenStream)
@@ -244,7 +260,7 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisNumericTokenStream_N
 }
 
 - (OrgApacheLuceneUtilAttributeImpl *)createAttributeInstanceWithIOSClass:(IOSClass *)attClass {
-  if ([OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_() isAssignableFrom:attClass]) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"NumericTokenStream does not support CharTermAttribute.") autorelease];
+  if ([OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_() isAssignableFrom:attClass]) @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"NumericTokenStream does not support CharTermAttribute.");
   return [((OrgApacheLuceneUtilAttributeFactory *) nil_chk(delegate_)) createAttributeInstanceWithIOSClass:attClass];
 }
 
@@ -256,7 +272,7 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisNumericTokenStream_N
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneUtilAttributeFactory:", "NumericAttributeFactory", NULL, 0x0, NULL, NULL },
-    { "createAttributeInstanceWithIOSClass:", "createAttributeInstance", "Lorg.apache.lucene.util.AttributeImpl;", 0x1, NULL, NULL },
+    { "createAttributeInstanceWithIOSClass:", "createAttributeInstance", "Lorg.apache.lucene.util.AttributeImpl;", 0x1, NULL, "(Ljava/lang/Class<+Lorg/apache/lucene/util/Attribute;>;)Lorg/apache/lucene/util/AttributeImpl;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "delegate_", NULL, 0x12, "Lorg.apache.lucene.util.AttributeFactory;", NULL, NULL, .constantValue.asLong = 0 },
@@ -273,9 +289,11 @@ void OrgApacheLuceneAnalysisNumericTokenStream_NumericAttributeFactory_initWithO
 }
 
 OrgApacheLuceneAnalysisNumericTokenStream_NumericAttributeFactory *new_OrgApacheLuceneAnalysisNumericTokenStream_NumericAttributeFactory_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneUtilAttributeFactory *delegate) {
-  OrgApacheLuceneAnalysisNumericTokenStream_NumericAttributeFactory *self = [OrgApacheLuceneAnalysisNumericTokenStream_NumericAttributeFactory alloc];
-  OrgApacheLuceneAnalysisNumericTokenStream_NumericAttributeFactory_initWithOrgApacheLuceneUtilAttributeFactory_(self, delegate);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisNumericTokenStream_NumericAttributeFactory, initWithOrgApacheLuceneUtilAttributeFactory_, delegate)
+}
+
+OrgApacheLuceneAnalysisNumericTokenStream_NumericAttributeFactory *create_OrgApacheLuceneAnalysisNumericTokenStream_NumericAttributeFactory_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneUtilAttributeFactory *delegate) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisNumericTokenStream_NumericAttributeFactory, initWithOrgApacheLuceneUtilAttributeFactory_, delegate)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisNumericTokenStream_NumericAttributeFactory)
@@ -341,12 +359,12 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)copyToWithOrgApacheLuceneUtilAttributeImpl:(OrgApacheLuceneUtilAttributeImpl *)target {
-  id<OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttribute> a = (id<OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttribute>) check_protocol_cast(target, OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttribute_class_());
+  id<OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttribute> a = (id<OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttribute>) cast_check(target, OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttribute_class_());
   [((id<OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttribute>) nil_chk(a)) init__WithLong:value_ withInt:valueSize_ withInt:precisionStep_ withInt:shift_];
 }
 
 - (OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl *)clone {
-  OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl *t = (OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl *) check_class_cast([super clone], [OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl class]);
+  OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl *t = (OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl *) cast_chk([super clone], [OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl class]);
   JreStrongAssignAndConsume(&((OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl *) nil_chk(t))->bytes_, new_OrgApacheLuceneUtilBytesRefBuilder_init());
   [t->bytes_ copyBytesWithOrgApacheLuceneUtilBytesRef:[self getBytesRef]];
   return t;
@@ -359,8 +377,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (jboolean)isEqual:(id)obj {
   if (self == obj) return true;
   if (obj == nil) return false;
-  if ([self getClass] != [nil_chk(obj) getClass]) return false;
-  OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl *other = (OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl *) check_class_cast(obj, [OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl class]);
+  if ([self getClass] != (id) [obj getClass]) return false;
+  OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl *other = (OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl *) cast_chk(obj, [OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl class]);
   if (precisionStep_ != other->precisionStep_) return false;
   if (shift_ != other->shift_) return false;
   if (value_ != other->value_) return false;
@@ -413,9 +431,11 @@ void OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl_init(Org
 }
 
 OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl *new_OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl_init() {
-  OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl *self = [OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl alloc];
-  OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl, init)
+}
+
+OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl *create_OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl)

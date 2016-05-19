@@ -4,6 +4,7 @@
 //
 
 #include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
@@ -20,6 +21,7 @@
 #include "java/lang/NullPointerException.h"
 #include "java/lang/Short.h"
 #include "java/lang/StringBuilder.h"
+#include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/analysis/Analyzer.h"
 #include "org/apache/lucene/analysis/NumericTokenStream.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
@@ -39,6 +41,11 @@
   OrgApacheLuceneUtilBytesRef *value_;
 }
 
+/*!
+ @brief Creates a new TokenStream that returns a BytesRef as single token.
+ <p>Warning: Does not initialize the value, you must call
+ <code>setValue(BytesRef)</code> afterwards!
+ */
 - (instancetype)init;
 
 - (void)setValueWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)value;
@@ -60,6 +67,8 @@ __attribute__((unused)) static void OrgApacheLuceneDocumentField_BinaryTokenStre
 
 __attribute__((unused)) static OrgApacheLuceneDocumentField_BinaryTokenStream *new_OrgApacheLuceneDocumentField_BinaryTokenStream_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneDocumentField_BinaryTokenStream *create_OrgApacheLuceneDocumentField_BinaryTokenStream_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentField_BinaryTokenStream)
 
 @interface OrgApacheLuceneDocumentField_StringTokenStream : OrgApacheLuceneAnalysisTokenStream {
@@ -70,8 +79,16 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentField_BinaryTokenStream)
   NSString *value_;
 }
 
+/*!
+ @brief Creates a new TokenStream that returns a String as single token.
+ <p>Warning: Does not initialize the value, you must call
+ <code>setValue(String)</code> afterwards!
+ */
 - (instancetype)init;
 
+/*!
+ @brief Sets the string value.
+ */
 - (void)setValueWithNSString:(NSString *)value;
 
 - (jboolean)incrementToken;
@@ -94,15 +111,15 @@ __attribute__((unused)) static void OrgApacheLuceneDocumentField_StringTokenStre
 
 __attribute__((unused)) static OrgApacheLuceneDocumentField_StringTokenStream *new_OrgApacheLuceneDocumentField_StringTokenStream_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneDocumentField_StringTokenStream *create_OrgApacheLuceneDocumentField_StringTokenStream_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentField_StringTokenStream)
 
-__attribute__((unused)) static void OrgApacheLuceneDocumentField_StoreEnum_initWithNSString_withInt_(OrgApacheLuceneDocumentField_StoreEnum *self, NSString *__name, jint __ordinal);
+__attribute__((unused)) static void OrgApacheLuceneDocumentField_Store_initWithNSString_withInt_(OrgApacheLuceneDocumentField_Store *self, NSString *__name, jint __ordinal);
 
-__attribute__((unused)) static OrgApacheLuceneDocumentField_StoreEnum *new_OrgApacheLuceneDocumentField_StoreEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
+__attribute__((unused)) static void OrgApacheLuceneDocumentField_Index_initWithNSString_withInt_(OrgApacheLuceneDocumentField_Index *self, NSString *__name, jint __ordinal);
 
-__attribute__((unused)) static void OrgApacheLuceneDocumentField_IndexEnum_initWithNSString_withInt_(OrgApacheLuceneDocumentField_IndexEnum *self, NSString *__name, jint __ordinal);
-
-@interface OrgApacheLuceneDocumentField_Index_$1Enum : OrgApacheLuceneDocumentField_IndexEnum < NSCopying >
+@interface OrgApacheLuceneDocumentField_Index_$1 : OrgApacheLuceneDocumentField_Index < NSCopying >
 
 - (jboolean)isIndexed;
 
@@ -112,15 +129,13 @@ __attribute__((unused)) static void OrgApacheLuceneDocumentField_IndexEnum_initW
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneDocumentField_Index_$1Enum)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneDocumentField_Index_$1)
 
-__attribute__((unused)) static void OrgApacheLuceneDocumentField_Index_$1Enum_initWithNSString_withInt_(OrgApacheLuceneDocumentField_Index_$1Enum *self, NSString *__name, jint __ordinal);
+__attribute__((unused)) static void OrgApacheLuceneDocumentField_Index_$1_initWithNSString_withInt_(OrgApacheLuceneDocumentField_Index_$1 *self, NSString *__name, jint __ordinal);
 
-__attribute__((unused)) static OrgApacheLuceneDocumentField_Index_$1Enum *new_OrgApacheLuceneDocumentField_Index_$1Enum_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentField_Index_$1)
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentField_Index_$1Enum)
-
-@interface OrgApacheLuceneDocumentField_Index_$2Enum : OrgApacheLuceneDocumentField_IndexEnum < NSCopying >
+@interface OrgApacheLuceneDocumentField_Index_$2 : OrgApacheLuceneDocumentField_Index < NSCopying >
 
 - (jboolean)isIndexed;
 
@@ -130,15 +145,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentField_Index_$1Enum)
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneDocumentField_Index_$2Enum)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneDocumentField_Index_$2)
 
-__attribute__((unused)) static void OrgApacheLuceneDocumentField_Index_$2Enum_initWithNSString_withInt_(OrgApacheLuceneDocumentField_Index_$2Enum *self, NSString *__name, jint __ordinal);
+__attribute__((unused)) static void OrgApacheLuceneDocumentField_Index_$2_initWithNSString_withInt_(OrgApacheLuceneDocumentField_Index_$2 *self, NSString *__name, jint __ordinal);
 
-__attribute__((unused)) static OrgApacheLuceneDocumentField_Index_$2Enum *new_OrgApacheLuceneDocumentField_Index_$2Enum_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentField_Index_$2)
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentField_Index_$2Enum)
-
-@interface OrgApacheLuceneDocumentField_Index_$3Enum : OrgApacheLuceneDocumentField_IndexEnum < NSCopying >
+@interface OrgApacheLuceneDocumentField_Index_$3 : OrgApacheLuceneDocumentField_Index < NSCopying >
 
 - (jboolean)isIndexed;
 
@@ -148,15 +161,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentField_Index_$2Enum)
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneDocumentField_Index_$3Enum)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneDocumentField_Index_$3)
 
-__attribute__((unused)) static void OrgApacheLuceneDocumentField_Index_$3Enum_initWithNSString_withInt_(OrgApacheLuceneDocumentField_Index_$3Enum *self, NSString *__name, jint __ordinal);
+__attribute__((unused)) static void OrgApacheLuceneDocumentField_Index_$3_initWithNSString_withInt_(OrgApacheLuceneDocumentField_Index_$3 *self, NSString *__name, jint __ordinal);
 
-__attribute__((unused)) static OrgApacheLuceneDocumentField_Index_$3Enum *new_OrgApacheLuceneDocumentField_Index_$3Enum_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentField_Index_$3)
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentField_Index_$3Enum)
-
-@interface OrgApacheLuceneDocumentField_Index_$4Enum : OrgApacheLuceneDocumentField_IndexEnum < NSCopying >
+@interface OrgApacheLuceneDocumentField_Index_$4 : OrgApacheLuceneDocumentField_Index < NSCopying >
 
 - (jboolean)isIndexed;
 
@@ -166,15 +177,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentField_Index_$3Enum)
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneDocumentField_Index_$4Enum)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneDocumentField_Index_$4)
 
-__attribute__((unused)) static void OrgApacheLuceneDocumentField_Index_$4Enum_initWithNSString_withInt_(OrgApacheLuceneDocumentField_Index_$4Enum *self, NSString *__name, jint __ordinal);
+__attribute__((unused)) static void OrgApacheLuceneDocumentField_Index_$4_initWithNSString_withInt_(OrgApacheLuceneDocumentField_Index_$4 *self, NSString *__name, jint __ordinal);
 
-__attribute__((unused)) static OrgApacheLuceneDocumentField_Index_$4Enum *new_OrgApacheLuceneDocumentField_Index_$4Enum_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentField_Index_$4)
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentField_Index_$4Enum)
-
-@interface OrgApacheLuceneDocumentField_Index_$5Enum : OrgApacheLuceneDocumentField_IndexEnum < NSCopying >
+@interface OrgApacheLuceneDocumentField_Index_$5 : OrgApacheLuceneDocumentField_Index < NSCopying >
 
 - (jboolean)isIndexed;
 
@@ -184,17 +193,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentField_Index_$4Enum)
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneDocumentField_Index_$5Enum)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneDocumentField_Index_$5)
 
-__attribute__((unused)) static void OrgApacheLuceneDocumentField_Index_$5Enum_initWithNSString_withInt_(OrgApacheLuceneDocumentField_Index_$5Enum *self, NSString *__name, jint __ordinal);
+__attribute__((unused)) static void OrgApacheLuceneDocumentField_Index_$5_initWithNSString_withInt_(OrgApacheLuceneDocumentField_Index_$5 *self, NSString *__name, jint __ordinal);
 
-__attribute__((unused)) static OrgApacheLuceneDocumentField_Index_$5Enum *new_OrgApacheLuceneDocumentField_Index_$5Enum_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentField_Index_$5)
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentField_Index_$5Enum)
+__attribute__((unused)) static void OrgApacheLuceneDocumentField_TermVector_initWithNSString_withInt_(OrgApacheLuceneDocumentField_TermVector *self, NSString *__name, jint __ordinal);
 
-__attribute__((unused)) static void OrgApacheLuceneDocumentField_TermVectorEnum_initWithNSString_withInt_(OrgApacheLuceneDocumentField_TermVectorEnum *self, NSString *__name, jint __ordinal);
-
-@interface OrgApacheLuceneDocumentField_TermVector_$1Enum : OrgApacheLuceneDocumentField_TermVectorEnum < NSCopying >
+@interface OrgApacheLuceneDocumentField_TermVector_$1 : OrgApacheLuceneDocumentField_TermVector < NSCopying >
 
 - (jboolean)isStored;
 
@@ -204,15 +211,13 @@ __attribute__((unused)) static void OrgApacheLuceneDocumentField_TermVectorEnum_
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneDocumentField_TermVector_$1Enum)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneDocumentField_TermVector_$1)
 
-__attribute__((unused)) static void OrgApacheLuceneDocumentField_TermVector_$1Enum_initWithNSString_withInt_(OrgApacheLuceneDocumentField_TermVector_$1Enum *self, NSString *__name, jint __ordinal);
+__attribute__((unused)) static void OrgApacheLuceneDocumentField_TermVector_$1_initWithNSString_withInt_(OrgApacheLuceneDocumentField_TermVector_$1 *self, NSString *__name, jint __ordinal);
 
-__attribute__((unused)) static OrgApacheLuceneDocumentField_TermVector_$1Enum *new_OrgApacheLuceneDocumentField_TermVector_$1Enum_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentField_TermVector_$1)
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentField_TermVector_$1Enum)
-
-@interface OrgApacheLuceneDocumentField_TermVector_$2Enum : OrgApacheLuceneDocumentField_TermVectorEnum < NSCopying >
+@interface OrgApacheLuceneDocumentField_TermVector_$2 : OrgApacheLuceneDocumentField_TermVector < NSCopying >
 
 - (jboolean)isStored;
 
@@ -222,15 +227,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentField_TermVector_$1Enum)
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneDocumentField_TermVector_$2Enum)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneDocumentField_TermVector_$2)
 
-__attribute__((unused)) static void OrgApacheLuceneDocumentField_TermVector_$2Enum_initWithNSString_withInt_(OrgApacheLuceneDocumentField_TermVector_$2Enum *self, NSString *__name, jint __ordinal);
+__attribute__((unused)) static void OrgApacheLuceneDocumentField_TermVector_$2_initWithNSString_withInt_(OrgApacheLuceneDocumentField_TermVector_$2 *self, NSString *__name, jint __ordinal);
 
-__attribute__((unused)) static OrgApacheLuceneDocumentField_TermVector_$2Enum *new_OrgApacheLuceneDocumentField_TermVector_$2Enum_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentField_TermVector_$2)
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentField_TermVector_$2Enum)
-
-@interface OrgApacheLuceneDocumentField_TermVector_$3Enum : OrgApacheLuceneDocumentField_TermVectorEnum < NSCopying >
+@interface OrgApacheLuceneDocumentField_TermVector_$3 : OrgApacheLuceneDocumentField_TermVector < NSCopying >
 
 - (jboolean)isStored;
 
@@ -240,15 +243,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentField_TermVector_$2Enum)
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneDocumentField_TermVector_$3Enum)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneDocumentField_TermVector_$3)
 
-__attribute__((unused)) static void OrgApacheLuceneDocumentField_TermVector_$3Enum_initWithNSString_withInt_(OrgApacheLuceneDocumentField_TermVector_$3Enum *self, NSString *__name, jint __ordinal);
+__attribute__((unused)) static void OrgApacheLuceneDocumentField_TermVector_$3_initWithNSString_withInt_(OrgApacheLuceneDocumentField_TermVector_$3 *self, NSString *__name, jint __ordinal);
 
-__attribute__((unused)) static OrgApacheLuceneDocumentField_TermVector_$3Enum *new_OrgApacheLuceneDocumentField_TermVector_$3Enum_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentField_TermVector_$3)
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentField_TermVector_$3Enum)
-
-@interface OrgApacheLuceneDocumentField_TermVector_$4Enum : OrgApacheLuceneDocumentField_TermVectorEnum < NSCopying >
+@interface OrgApacheLuceneDocumentField_TermVector_$4 : OrgApacheLuceneDocumentField_TermVector < NSCopying >
 
 - (jboolean)isStored;
 
@@ -258,15 +259,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentField_TermVector_$3Enum)
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneDocumentField_TermVector_$4Enum)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneDocumentField_TermVector_$4)
 
-__attribute__((unused)) static void OrgApacheLuceneDocumentField_TermVector_$4Enum_initWithNSString_withInt_(OrgApacheLuceneDocumentField_TermVector_$4Enum *self, NSString *__name, jint __ordinal);
+__attribute__((unused)) static void OrgApacheLuceneDocumentField_TermVector_$4_initWithNSString_withInt_(OrgApacheLuceneDocumentField_TermVector_$4 *self, NSString *__name, jint __ordinal);
 
-__attribute__((unused)) static OrgApacheLuceneDocumentField_TermVector_$4Enum *new_OrgApacheLuceneDocumentField_TermVector_$4Enum_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentField_TermVector_$4)
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentField_TermVector_$4Enum)
-
-@interface OrgApacheLuceneDocumentField_TermVector_$5Enum : OrgApacheLuceneDocumentField_TermVectorEnum < NSCopying >
+@interface OrgApacheLuceneDocumentField_TermVector_$5 : OrgApacheLuceneDocumentField_TermVector < NSCopying >
 
 - (jboolean)isStored;
 
@@ -276,13 +275,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentField_TermVector_$4Enum)
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneDocumentField_TermVector_$5Enum)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneDocumentField_TermVector_$5)
 
-__attribute__((unused)) static void OrgApacheLuceneDocumentField_TermVector_$5Enum_initWithNSString_withInt_(OrgApacheLuceneDocumentField_TermVector_$5Enum *self, NSString *__name, jint __ordinal);
+__attribute__((unused)) static void OrgApacheLuceneDocumentField_TermVector_$5_initWithNSString_withInt_(OrgApacheLuceneDocumentField_TermVector_$5 *self, NSString *__name, jint __ordinal);
 
-__attribute__((unused)) static OrgApacheLuceneDocumentField_TermVector_$5Enum *new_OrgApacheLuceneDocumentField_TermVector_$5Enum_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentField_TermVector_$5Enum)
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentField_TermVector_$5)
 
 @implementation OrgApacheLuceneDocumentField
 
@@ -346,7 +343,7 @@ withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type {
 }
 
 - (JavaIoReader *)readerValue {
-  return [fieldsData_ isKindOfClass:[JavaIoReader class]] ? (JavaIoReader *) check_class_cast(fieldsData_, [JavaIoReader class]) : nil;
+  return [fieldsData_ isKindOfClass:[JavaIoReader class]] ? (JavaIoReader *) cast_chk(fieldsData_, [JavaIoReader class]) : nil;
 }
 
 - (OrgApacheLuceneAnalysisTokenStream *)tokenStreamValue {
@@ -355,86 +352,86 @@ withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type {
 
 - (void)setStringValueWithNSString:(NSString *)value {
   if (!([fieldsData_ isKindOfClass:[NSString class]])) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"cannot change value type from ", [[nil_chk(fieldsData_) getClass] getSimpleName], @" to String")) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"cannot change value type from ", [[nil_chk(fieldsData_) getClass] getSimpleName], @" to String"));
   }
   if (value == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"value cannot be null") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"value cannot be null");
   }
   JreStrongAssign(&fieldsData_, value);
 }
 
 - (void)setReaderValueWithJavaIoReader:(JavaIoReader *)value {
   if (!([fieldsData_ isKindOfClass:[JavaIoReader class]])) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"cannot change value type from ", [[nil_chk(fieldsData_) getClass] getSimpleName], @" to Reader")) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"cannot change value type from ", [[nil_chk(fieldsData_) getClass] getSimpleName], @" to Reader"));
   }
   JreStrongAssign(&fieldsData_, value);
 }
 
 - (void)setBytesValueWithByteArray:(IOSByteArray *)value {
-  [self setBytesValueWithOrgApacheLuceneUtilBytesRef:[new_OrgApacheLuceneUtilBytesRef_initWithByteArray_(value) autorelease]];
+  [self setBytesValueWithOrgApacheLuceneUtilBytesRef:create_OrgApacheLuceneUtilBytesRef_initWithByteArray_(value)];
 }
 
 - (void)setBytesValueWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)value {
   if (!([fieldsData_ isKindOfClass:[OrgApacheLuceneUtilBytesRef class]])) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"cannot change value type from ", [[nil_chk(fieldsData_) getClass] getSimpleName], @" to BytesRef")) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"cannot change value type from ", [[nil_chk(fieldsData_) getClass] getSimpleName], @" to BytesRef"));
   }
-  if ([((OrgApacheLuceneDocumentFieldType *) nil_chk(type_)) indexOptions] != JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE)) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"cannot set a BytesRef value on an indexed field") autorelease];
+  if ([((OrgApacheLuceneDocumentFieldType *) nil_chk(type_)) indexOptions] != JreLoadEnum(OrgApacheLuceneIndexIndexOptions, NONE)) {
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"cannot set a BytesRef value on an indexed field");
   }
   if (value == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"value cannot be null") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"value cannot be null");
   }
   JreStrongAssign(&fieldsData_, value);
 }
 
 - (void)setByteValueWithByte:(jbyte)value {
   if (!([fieldsData_ isKindOfClass:[JavaLangByte class]])) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"cannot change value type from ", [[nil_chk(fieldsData_) getClass] getSimpleName], @" to Byte")) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"cannot change value type from ", [[nil_chk(fieldsData_) getClass] getSimpleName], @" to Byte"));
   }
   JreStrongAssign(&fieldsData_, JavaLangByte_valueOfWithByte_(value));
 }
 
 - (void)setShortValueWithShort:(jshort)value {
   if (!([fieldsData_ isKindOfClass:[JavaLangShort class]])) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"cannot change value type from ", [[nil_chk(fieldsData_) getClass] getSimpleName], @" to Short")) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"cannot change value type from ", [[nil_chk(fieldsData_) getClass] getSimpleName], @" to Short"));
   }
   JreStrongAssign(&fieldsData_, JavaLangShort_valueOfWithShort_(value));
 }
 
 - (void)setIntValueWithInt:(jint)value {
   if (!([fieldsData_ isKindOfClass:[JavaLangInteger class]])) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"cannot change value type from ", [[nil_chk(fieldsData_) getClass] getSimpleName], @" to Integer")) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"cannot change value type from ", [[nil_chk(fieldsData_) getClass] getSimpleName], @" to Integer"));
   }
   JreStrongAssign(&fieldsData_, JavaLangInteger_valueOfWithInt_(value));
 }
 
 - (void)setLongValueWithLong:(jlong)value {
   if (!([fieldsData_ isKindOfClass:[JavaLangLong class]])) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"cannot change value type from ", [[nil_chk(fieldsData_) getClass] getSimpleName], @" to Long")) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"cannot change value type from ", [[nil_chk(fieldsData_) getClass] getSimpleName], @" to Long"));
   }
   JreStrongAssign(&fieldsData_, JavaLangLong_valueOfWithLong_(value));
 }
 
 - (void)setFloatValueWithFloat:(jfloat)value {
   if (!([fieldsData_ isKindOfClass:[JavaLangFloat class]])) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"cannot change value type from ", [[nil_chk(fieldsData_) getClass] getSimpleName], @" to Float")) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"cannot change value type from ", [[nil_chk(fieldsData_) getClass] getSimpleName], @" to Float"));
   }
   JreStrongAssign(&fieldsData_, JavaLangFloat_valueOfWithFloat_(value));
 }
 
 - (void)setDoubleValueWithDouble:(jdouble)value {
   if (!([fieldsData_ isKindOfClass:[JavaLangDouble class]])) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"cannot change value type from ", [[nil_chk(fieldsData_) getClass] getSimpleName], @" to Double")) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"cannot change value type from ", [[nil_chk(fieldsData_) getClass] getSimpleName], @" to Double"));
   }
   JreStrongAssign(&fieldsData_, JavaLangDouble_valueOfWithDouble_(value));
 }
 
 - (void)setTokenStreamWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream {
-  if ([((OrgApacheLuceneDocumentFieldType *) nil_chk(type_)) indexOptions] == JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE) || ![type_ tokenized]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"TokenStream fields must be indexed and tokenized") autorelease];
+  if ([((OrgApacheLuceneDocumentFieldType *) nil_chk(type_)) indexOptions] == JreLoadEnum(OrgApacheLuceneIndexIndexOptions, NONE) || ![type_ tokenized]) {
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"TokenStream fields must be indexed and tokenized");
   }
   if ([type_ numericType] != nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"cannot set private TokenStream on numeric fields") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"cannot set private TokenStream on numeric fields");
   }
   JreStrongAssign(&self->tokenStream_, tokenStream);
 }
@@ -449,8 +446,8 @@ withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type {
 
 - (void)setBoostWithFloat:(jfloat)boost {
   if (boost != 1.0f) {
-    if ([((OrgApacheLuceneDocumentFieldType *) nil_chk(type_)) indexOptions] == JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE) || [type_ omitNorms]) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"You cannot set an index-time boost on an unindexed field, or one that omits norms") autorelease];
+    if ([((OrgApacheLuceneDocumentFieldType *) nil_chk(type_)) indexOptions] == JreLoadEnum(OrgApacheLuceneIndexIndexOptions, NONE) || [type_ omitNorms]) {
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"You cannot set an index-time boost on an unindexed field, or one that omits norms");
     }
   }
   self->boost_ = boost;
@@ -458,7 +455,7 @@ withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type {
 
 - (NSNumber *)numericValue {
   if ([fieldsData_ isKindOfClass:[NSNumber class]]) {
-    return (NSNumber *) check_class_cast(fieldsData_, [NSNumber class]);
+    return (NSNumber *) cast_chk(fieldsData_, [NSNumber class]);
   }
   else {
     return nil;
@@ -467,7 +464,7 @@ withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type {
 
 - (OrgApacheLuceneUtilBytesRef *)binaryValue {
   if ([fieldsData_ isKindOfClass:[OrgApacheLuceneUtilBytesRef class]]) {
-    return (OrgApacheLuceneUtilBytesRef *) check_class_cast(fieldsData_, [OrgApacheLuceneUtilBytesRef class]);
+    return (OrgApacheLuceneUtilBytesRef *) cast_chk(fieldsData_, [OrgApacheLuceneUtilBytesRef class]);
   }
   else {
     return nil;
@@ -475,7 +472,7 @@ withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type {
 }
 
 - (NSString *)description {
-  JavaLangStringBuilder *result = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *result = create_JavaLangStringBuilder_init();
   [result appendWithNSString:[((OrgApacheLuceneDocumentFieldType *) nil_chk(type_)) description]];
   [result appendWithChar:'<'];
   [result appendWithNSString:name_];
@@ -493,51 +490,51 @@ withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type {
 
 - (OrgApacheLuceneAnalysisTokenStream *)tokenStreamWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
                                                 withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)reuse {
-  if ([((OrgApacheLuceneDocumentFieldType *) nil_chk([self fieldType])) indexOptions] == JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE)) {
+  if ([((OrgApacheLuceneDocumentFieldType *) nil_chk([self fieldType])) indexOptions] == JreLoadEnum(OrgApacheLuceneIndexIndexOptions, NONE)) {
     return nil;
   }
-  OrgApacheLuceneDocumentFieldType_NumericTypeEnum *numericType = [((OrgApacheLuceneDocumentFieldType *) nil_chk([self fieldType])) numericType];
+  OrgApacheLuceneDocumentFieldType_NumericType *numericType = [((OrgApacheLuceneDocumentFieldType *) nil_chk([self fieldType])) numericType];
   if (numericType != nil) {
-    if (!([reuse isKindOfClass:[OrgApacheLuceneAnalysisNumericTokenStream class]] && [((OrgApacheLuceneAnalysisNumericTokenStream *) nil_chk(((OrgApacheLuceneAnalysisNumericTokenStream *) check_class_cast(reuse, [OrgApacheLuceneAnalysisNumericTokenStream class])))) getPrecisionStep] == [((OrgApacheLuceneDocumentFieldType *) nil_chk(type_)) numericPrecisionStep])) {
-      reuse = [new_OrgApacheLuceneAnalysisNumericTokenStream_initWithInt_([type_ numericPrecisionStep]) autorelease];
+    if (!([reuse isKindOfClass:[OrgApacheLuceneAnalysisNumericTokenStream class]] && [((OrgApacheLuceneAnalysisNumericTokenStream *) nil_chk(((OrgApacheLuceneAnalysisNumericTokenStream *) cast_chk(reuse, [OrgApacheLuceneAnalysisNumericTokenStream class])))) getPrecisionStep] == [((OrgApacheLuceneDocumentFieldType *) nil_chk(type_)) numericPrecisionStep])) {
+      reuse = create_OrgApacheLuceneAnalysisNumericTokenStream_initWithInt_([((OrgApacheLuceneDocumentFieldType *) nil_chk(type_)) numericPrecisionStep]);
     }
-    OrgApacheLuceneAnalysisNumericTokenStream *nts = (OrgApacheLuceneAnalysisNumericTokenStream *) check_class_cast(reuse, [OrgApacheLuceneAnalysisNumericTokenStream class]);
-    NSNumber *val = (NSNumber *) check_class_cast(fieldsData_, [NSNumber class]);
+    OrgApacheLuceneAnalysisNumericTokenStream *nts = (OrgApacheLuceneAnalysisNumericTokenStream *) cast_chk(reuse, [OrgApacheLuceneAnalysisNumericTokenStream class]);
+    NSNumber *val = (NSNumber *) cast_chk(fieldsData_, [NSNumber class]);
     switch ([numericType ordinal]) {
-      case OrgApacheLuceneDocumentFieldType_NumericType_INT:
+      case OrgApacheLuceneDocumentFieldType_NumericType_Enum_INT:
       [((OrgApacheLuceneAnalysisNumericTokenStream *) nil_chk(nts)) setIntValueWithInt:[((NSNumber *) nil_chk(val)) intValue]];
       break;
-      case OrgApacheLuceneDocumentFieldType_NumericType_LONG:
+      case OrgApacheLuceneDocumentFieldType_NumericType_Enum_LONG:
       [((OrgApacheLuceneAnalysisNumericTokenStream *) nil_chk(nts)) setLongValueWithLong:[((NSNumber *) nil_chk(val)) longLongValue]];
       break;
-      case OrgApacheLuceneDocumentFieldType_NumericType_FLOAT:
+      case OrgApacheLuceneDocumentFieldType_NumericType_Enum_FLOAT:
       [((OrgApacheLuceneAnalysisNumericTokenStream *) nil_chk(nts)) setFloatValueWithFloat:[((NSNumber *) nil_chk(val)) floatValue]];
       break;
-      case OrgApacheLuceneDocumentFieldType_NumericType_DOUBLE:
+      case OrgApacheLuceneDocumentFieldType_NumericType_Enum_DOUBLE:
       [((OrgApacheLuceneAnalysisNumericTokenStream *) nil_chk(nts)) setDoubleValueWithDouble:[((NSNumber *) nil_chk(val)) doubleValue]];
       break;
       default:
-      @throw [new_JavaLangAssertionError_initWithId_(@"Should never get here") autorelease];
+      @throw create_JavaLangAssertionError_initWithId_(@"Should never get here");
     }
     return reuse;
   }
   if (![((OrgApacheLuceneDocumentFieldType *) nil_chk([self fieldType])) tokenized]) {
     if ([self stringValue] != nil) {
       if (!([reuse isKindOfClass:[OrgApacheLuceneDocumentField_StringTokenStream class]])) {
-        reuse = [new_OrgApacheLuceneDocumentField_StringTokenStream_init() autorelease];
+        reuse = create_OrgApacheLuceneDocumentField_StringTokenStream_init();
       }
-      [((OrgApacheLuceneDocumentField_StringTokenStream *) nil_chk(((OrgApacheLuceneDocumentField_StringTokenStream *) check_class_cast(reuse, [OrgApacheLuceneDocumentField_StringTokenStream class])))) setValueWithNSString:[self stringValue]];
+      [((OrgApacheLuceneDocumentField_StringTokenStream *) nil_chk(((OrgApacheLuceneDocumentField_StringTokenStream *) cast_chk(reuse, [OrgApacheLuceneDocumentField_StringTokenStream class])))) setValueWithNSString:[self stringValue]];
       return reuse;
     }
     else if ([self binaryValue] != nil) {
       if (!([reuse isKindOfClass:[OrgApacheLuceneDocumentField_BinaryTokenStream class]])) {
-        reuse = [new_OrgApacheLuceneDocumentField_BinaryTokenStream_init() autorelease];
+        reuse = create_OrgApacheLuceneDocumentField_BinaryTokenStream_init();
       }
-      [((OrgApacheLuceneDocumentField_BinaryTokenStream *) nil_chk(((OrgApacheLuceneDocumentField_BinaryTokenStream *) check_class_cast(reuse, [OrgApacheLuceneDocumentField_BinaryTokenStream class])))) setValueWithOrgApacheLuceneUtilBytesRef:[self binaryValue]];
+      [((OrgApacheLuceneDocumentField_BinaryTokenStream *) nil_chk(((OrgApacheLuceneDocumentField_BinaryTokenStream *) cast_chk(reuse, [OrgApacheLuceneDocumentField_BinaryTokenStream class])))) setValueWithOrgApacheLuceneUtilBytesRef:[self binaryValue]];
       return reuse;
     }
     else {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"Non-Tokenized Fields must have a String value") autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"Non-Tokenized Fields must have a String value");
     }
   }
   if (tokenStream_ != nil) {
@@ -549,29 +546,29 @@ withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type {
   else if ([self stringValue] != nil) {
     return [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(analyzer)) tokenStreamWithNSString:[self name] withNSString:[self stringValue]];
   }
-  @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Field must have either TokenStream, String, Reader or Number value; got ", self)) autorelease];
+  @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Field must have either TokenStream, String, Reader or Number value; got ", self));
 }
 
-+ (OrgApacheLuceneDocumentFieldType *)translateFieldTypeWithOrgApacheLuceneDocumentField_StoreEnum:(OrgApacheLuceneDocumentField_StoreEnum *)store
-                                                        withOrgApacheLuceneDocumentField_IndexEnum:(OrgApacheLuceneDocumentField_IndexEnum *)index
-                                                   withOrgApacheLuceneDocumentField_TermVectorEnum:(OrgApacheLuceneDocumentField_TermVectorEnum *)termVector {
-  return OrgApacheLuceneDocumentField_translateFieldTypeWithOrgApacheLuceneDocumentField_StoreEnum_withOrgApacheLuceneDocumentField_IndexEnum_withOrgApacheLuceneDocumentField_TermVectorEnum_(store, index, termVector);
++ (OrgApacheLuceneDocumentFieldType *)translateFieldTypeWithOrgApacheLuceneDocumentField_Store:(OrgApacheLuceneDocumentField_Store *)store
+                                                        withOrgApacheLuceneDocumentField_Index:(OrgApacheLuceneDocumentField_Index *)index
+                                                   withOrgApacheLuceneDocumentField_TermVector:(OrgApacheLuceneDocumentField_TermVector *)termVector {
+  return OrgApacheLuceneDocumentField_translateFieldTypeWithOrgApacheLuceneDocumentField_Store_withOrgApacheLuceneDocumentField_Index_withOrgApacheLuceneDocumentField_TermVector_(store, index, termVector);
 }
 
 - (instancetype)initWithNSString:(NSString *)name
                     withNSString:(NSString *)value
-withOrgApacheLuceneDocumentField_StoreEnum:(OrgApacheLuceneDocumentField_StoreEnum *)store
-withOrgApacheLuceneDocumentField_IndexEnum:(OrgApacheLuceneDocumentField_IndexEnum *)index {
-  OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_StoreEnum_withOrgApacheLuceneDocumentField_IndexEnum_(self, name, value, store, index);
+withOrgApacheLuceneDocumentField_Store:(OrgApacheLuceneDocumentField_Store *)store
+withOrgApacheLuceneDocumentField_Index:(OrgApacheLuceneDocumentField_Index *)index {
+  OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_Store_withOrgApacheLuceneDocumentField_Index_(self, name, value, store, index);
   return self;
 }
 
 - (instancetype)initWithNSString:(NSString *)name
                     withNSString:(NSString *)value
-withOrgApacheLuceneDocumentField_StoreEnum:(OrgApacheLuceneDocumentField_StoreEnum *)store
-withOrgApacheLuceneDocumentField_IndexEnum:(OrgApacheLuceneDocumentField_IndexEnum *)index
-withOrgApacheLuceneDocumentField_TermVectorEnum:(OrgApacheLuceneDocumentField_TermVectorEnum *)termVector {
-  OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_StoreEnum_withOrgApacheLuceneDocumentField_IndexEnum_withOrgApacheLuceneDocumentField_TermVectorEnum_(self, name, value, store, index, termVector);
+withOrgApacheLuceneDocumentField_Store:(OrgApacheLuceneDocumentField_Store *)store
+withOrgApacheLuceneDocumentField_Index:(OrgApacheLuceneDocumentField_Index *)index
+withOrgApacheLuceneDocumentField_TermVector:(OrgApacheLuceneDocumentField_TermVector *)termVector {
+  OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_Store_withOrgApacheLuceneDocumentField_Index_withOrgApacheLuceneDocumentField_TermVector_(self, name, value, store, index, termVector);
   return self;
 }
 
@@ -583,8 +580,8 @@ withOrgApacheLuceneDocumentField_TermVectorEnum:(OrgApacheLuceneDocumentField_Te
 
 - (instancetype)initWithNSString:(NSString *)name
                 withJavaIoReader:(JavaIoReader *)reader
-withOrgApacheLuceneDocumentField_TermVectorEnum:(OrgApacheLuceneDocumentField_TermVectorEnum *)termVector {
-  OrgApacheLuceneDocumentField_initWithNSString_withJavaIoReader_withOrgApacheLuceneDocumentField_TermVectorEnum_(self, name, reader, termVector);
+withOrgApacheLuceneDocumentField_TermVector:(OrgApacheLuceneDocumentField_TermVector *)termVector {
+  OrgApacheLuceneDocumentField_initWithNSString_withJavaIoReader_withOrgApacheLuceneDocumentField_TermVector_(self, name, reader, termVector);
   return self;
 }
 
@@ -596,8 +593,8 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tok
 
 - (instancetype)initWithNSString:(NSString *)name
 withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream
-withOrgApacheLuceneDocumentField_TermVectorEnum:(OrgApacheLuceneDocumentField_TermVectorEnum *)termVector {
-  OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneDocumentField_TermVectorEnum_(self, name, tokenStream, termVector);
+withOrgApacheLuceneDocumentField_TermVector:(OrgApacheLuceneDocumentField_TermVector *)termVector {
+  OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneDocumentField_TermVector_(self, name, tokenStream, termVector);
   return self;
 }
 
@@ -615,48 +612,48 @@ withOrgApacheLuceneDocumentField_TermVectorEnum:(OrgApacheLuceneDocumentField_Te
   return self;
 }
 
++ (IOSObjectArray *)__annotations_translateFieldTypeWithOrgApacheLuceneDocumentField_Store_withOrgApacheLuceneDocumentField_Index_withOrgApacheLuceneDocumentField_TermVector_ {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
++ (IOSObjectArray *)__annotations_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_Store_withOrgApacheLuceneDocumentField_Index_ {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
++ (IOSObjectArray *)__annotations_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_Store_withOrgApacheLuceneDocumentField_Index_withOrgApacheLuceneDocumentField_TermVector_ {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
++ (IOSObjectArray *)__annotations_initWithNSString_withJavaIoReader_ {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
++ (IOSObjectArray *)__annotations_initWithNSString_withJavaIoReader_withOrgApacheLuceneDocumentField_TermVector_ {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
++ (IOSObjectArray *)__annotations_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_ {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
++ (IOSObjectArray *)__annotations_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneDocumentField_TermVector_ {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
++ (IOSObjectArray *)__annotations_initWithNSString_withByteArray_ {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
++ (IOSObjectArray *)__annotations_initWithNSString_withByteArray_withInt_withInt_ {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
 - (void)dealloc {
   RELEASE_(type_);
   RELEASE_(name_);
   RELEASE_(fieldsData_);
   RELEASE_(tokenStream_);
   [super dealloc];
-}
-
-+ (IOSObjectArray *)__annotations_translateFieldTypeWithOrgApacheLuceneDocumentField_StoreEnum_withOrgApacheLuceneDocumentField_IndexEnum_withOrgApacheLuceneDocumentField_TermVectorEnum_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_StoreEnum_withOrgApacheLuceneDocumentField_IndexEnum_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_StoreEnum_withOrgApacheLuceneDocumentField_IndexEnum_withOrgApacheLuceneDocumentField_TermVectorEnum_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_initWithNSString_withJavaIoReader_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_initWithNSString_withJavaIoReader_withOrgApacheLuceneDocumentField_TermVectorEnum_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneDocumentField_TermVectorEnum_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_initWithNSString_withByteArray_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_initWithNSString_withByteArray_withInt_withInt_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -690,13 +687,13 @@ withOrgApacheLuceneDocumentField_TermVectorEnum:(OrgApacheLuceneDocumentField_Te
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "fieldType", NULL, "Lorg.apache.lucene.document.FieldType;", 0x1, NULL, NULL },
     { "tokenStreamWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneAnalysisTokenStream:", "tokenStream", "Lorg.apache.lucene.analysis.TokenStream;", 0x1, "Ljava.io.IOException;", NULL },
-    { "translateFieldTypeWithOrgApacheLuceneDocumentField_StoreEnum:withOrgApacheLuceneDocumentField_IndexEnum:withOrgApacheLuceneDocumentField_TermVectorEnum:", "translateFieldType", "Lorg.apache.lucene.document.FieldType;", 0x19, NULL, NULL },
-    { "initWithNSString:withNSString:withOrgApacheLuceneDocumentField_StoreEnum:withOrgApacheLuceneDocumentField_IndexEnum:", "Field", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withNSString:withOrgApacheLuceneDocumentField_StoreEnum:withOrgApacheLuceneDocumentField_IndexEnum:withOrgApacheLuceneDocumentField_TermVectorEnum:", "Field", NULL, 0x1, NULL, NULL },
+    { "translateFieldTypeWithOrgApacheLuceneDocumentField_Store:withOrgApacheLuceneDocumentField_Index:withOrgApacheLuceneDocumentField_TermVector:", "translateFieldType", "Lorg.apache.lucene.document.FieldType;", 0x19, NULL, NULL },
+    { "initWithNSString:withNSString:withOrgApacheLuceneDocumentField_Store:withOrgApacheLuceneDocumentField_Index:", "Field", NULL, 0x1, NULL, NULL },
+    { "initWithNSString:withNSString:withOrgApacheLuceneDocumentField_Store:withOrgApacheLuceneDocumentField_Index:withOrgApacheLuceneDocumentField_TermVector:", "Field", NULL, 0x1, NULL, NULL },
     { "initWithNSString:withJavaIoReader:", "Field", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withJavaIoReader:withOrgApacheLuceneDocumentField_TermVectorEnum:", "Field", NULL, 0x1, NULL, NULL },
+    { "initWithNSString:withJavaIoReader:withOrgApacheLuceneDocumentField_TermVector:", "Field", NULL, 0x1, NULL, NULL },
     { "initWithNSString:withOrgApacheLuceneAnalysisTokenStream:", "Field", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneDocumentField_TermVectorEnum:", "Field", NULL, 0x1, NULL, NULL },
+    { "initWithNSString:withOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneDocumentField_TermVector:", "Field", NULL, 0x1, NULL, NULL },
     { "initWithNSString:withByteArray:", "Field", NULL, 0x1, NULL, NULL },
     { "initWithNSString:withByteArray:withInt:withInt:", "Field", NULL, 0x1, NULL, NULL },
   };
@@ -718,38 +715,40 @@ void OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneDocumentFi
   NSObject_init(self);
   self->boost_ = 1.0f;
   if (name == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"name cannot be null") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"name cannot be null");
   }
   JreStrongAssign(&self->name_, name);
   if (type == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"type cannot be null") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"type cannot be null");
   }
   JreStrongAssign(&self->type_, type);
 }
 
 OrgApacheLuceneDocumentField *new_OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneDocumentFieldType_(NSString *name, OrgApacheLuceneDocumentFieldType *type) {
-  OrgApacheLuceneDocumentField *self = [OrgApacheLuceneDocumentField alloc];
-  OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneDocumentFieldType_(self, name, type);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentField, initWithNSString_withOrgApacheLuceneDocumentFieldType_, name, type)
+}
+
+OrgApacheLuceneDocumentField *create_OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneDocumentFieldType_(NSString *name, OrgApacheLuceneDocumentFieldType *type) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentField, initWithNSString_withOrgApacheLuceneDocumentFieldType_, name, type)
 }
 
 void OrgApacheLuceneDocumentField_initWithNSString_withJavaIoReader_withOrgApacheLuceneDocumentFieldType_(OrgApacheLuceneDocumentField *self, NSString *name, JavaIoReader *reader, OrgApacheLuceneDocumentFieldType *type) {
   NSObject_init(self);
   self->boost_ = 1.0f;
   if (name == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"name cannot be null") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"name cannot be null");
   }
   if (type == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"type cannot be null") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"type cannot be null");
   }
   if (reader == nil) {
-    @throw [new_JavaLangNullPointerException_initWithNSString_(@"reader cannot be null") autorelease];
+    @throw create_JavaLangNullPointerException_initWithNSString_(@"reader cannot be null");
   }
-  if ([((OrgApacheLuceneDocumentFieldType *) nil_chk(type)) stored]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"fields with a Reader value cannot be stored") autorelease];
+  if ([type stored]) {
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"fields with a Reader value cannot be stored");
   }
-  if ([type indexOptions] != JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE) && ![type tokenized]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"non-tokenized fields must use String values") autorelease];
+  if ([type indexOptions] != JreLoadEnum(OrgApacheLuceneIndexIndexOptions, NONE) && ![type tokenized]) {
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"non-tokenized fields must use String values");
   }
   JreStrongAssign(&self->name_, name);
   JreStrongAssign(&self->fieldsData_, reader);
@@ -757,25 +756,27 @@ void OrgApacheLuceneDocumentField_initWithNSString_withJavaIoReader_withOrgApach
 }
 
 OrgApacheLuceneDocumentField *new_OrgApacheLuceneDocumentField_initWithNSString_withJavaIoReader_withOrgApacheLuceneDocumentFieldType_(NSString *name, JavaIoReader *reader, OrgApacheLuceneDocumentFieldType *type) {
-  OrgApacheLuceneDocumentField *self = [OrgApacheLuceneDocumentField alloc];
-  OrgApacheLuceneDocumentField_initWithNSString_withJavaIoReader_withOrgApacheLuceneDocumentFieldType_(self, name, reader, type);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentField, initWithNSString_withJavaIoReader_withOrgApacheLuceneDocumentFieldType_, name, reader, type)
+}
+
+OrgApacheLuceneDocumentField *create_OrgApacheLuceneDocumentField_initWithNSString_withJavaIoReader_withOrgApacheLuceneDocumentFieldType_(NSString *name, JavaIoReader *reader, OrgApacheLuceneDocumentFieldType *type) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentField, initWithNSString_withJavaIoReader_withOrgApacheLuceneDocumentFieldType_, name, reader, type)
 }
 
 void OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneDocumentFieldType_(OrgApacheLuceneDocumentField *self, NSString *name, OrgApacheLuceneAnalysisTokenStream *tokenStream, OrgApacheLuceneDocumentFieldType *type) {
   NSObject_init(self);
   self->boost_ = 1.0f;
   if (name == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"name cannot be null") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"name cannot be null");
   }
   if (tokenStream == nil) {
-    @throw [new_JavaLangNullPointerException_initWithNSString_(@"tokenStream cannot be null") autorelease];
+    @throw create_JavaLangNullPointerException_initWithNSString_(@"tokenStream cannot be null");
   }
-  if ([((OrgApacheLuceneDocumentFieldType *) nil_chk(type)) indexOptions] == JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE) || ![type tokenized]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"TokenStream fields must be indexed and tokenized") autorelease];
+  if ([((OrgApacheLuceneDocumentFieldType *) nil_chk(type)) indexOptions] == JreLoadEnum(OrgApacheLuceneIndexIndexOptions, NONE) || ![type tokenized]) {
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"TokenStream fields must be indexed and tokenized");
   }
   if ([type stored]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"TokenStream fields cannot be stored") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"TokenStream fields cannot be stored");
   }
   JreStrongAssign(&self->name_, name);
   JreStrongAssign(&self->fieldsData_, nil);
@@ -784,9 +785,11 @@ void OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneAnalysisTo
 }
 
 OrgApacheLuceneDocumentField *new_OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneDocumentFieldType_(NSString *name, OrgApacheLuceneAnalysisTokenStream *tokenStream, OrgApacheLuceneDocumentFieldType *type) {
-  OrgApacheLuceneDocumentField *self = [OrgApacheLuceneDocumentField alloc];
-  OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneDocumentFieldType_(self, name, tokenStream, type);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentField, initWithNSString_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneDocumentFieldType_, name, tokenStream, type)
+}
+
+OrgApacheLuceneDocumentField *create_OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneDocumentFieldType_(NSString *name, OrgApacheLuceneAnalysisTokenStream *tokenStream, OrgApacheLuceneDocumentFieldType *type) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentField, initWithNSString_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneDocumentFieldType_, name, tokenStream, type)
 }
 
 void OrgApacheLuceneDocumentField_initWithNSString_withByteArray_withOrgApacheLuceneDocumentFieldType_(OrgApacheLuceneDocumentField *self, NSString *name, IOSByteArray *value, OrgApacheLuceneDocumentFieldType *type) {
@@ -794,29 +797,33 @@ void OrgApacheLuceneDocumentField_initWithNSString_withByteArray_withOrgApacheLu
 }
 
 OrgApacheLuceneDocumentField *new_OrgApacheLuceneDocumentField_initWithNSString_withByteArray_withOrgApacheLuceneDocumentFieldType_(NSString *name, IOSByteArray *value, OrgApacheLuceneDocumentFieldType *type) {
-  OrgApacheLuceneDocumentField *self = [OrgApacheLuceneDocumentField alloc];
-  OrgApacheLuceneDocumentField_initWithNSString_withByteArray_withOrgApacheLuceneDocumentFieldType_(self, name, value, type);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentField, initWithNSString_withByteArray_withOrgApacheLuceneDocumentFieldType_, name, value, type)
+}
+
+OrgApacheLuceneDocumentField *create_OrgApacheLuceneDocumentField_initWithNSString_withByteArray_withOrgApacheLuceneDocumentFieldType_(NSString *name, IOSByteArray *value, OrgApacheLuceneDocumentFieldType *type) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentField, initWithNSString_withByteArray_withOrgApacheLuceneDocumentFieldType_, name, value, type)
 }
 
 void OrgApacheLuceneDocumentField_initWithNSString_withByteArray_withInt_withInt_withOrgApacheLuceneDocumentFieldType_(OrgApacheLuceneDocumentField *self, NSString *name, IOSByteArray *value, jint offset, jint length, OrgApacheLuceneDocumentFieldType *type) {
-  OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneDocumentFieldType_(self, name, [new_OrgApacheLuceneUtilBytesRef_initWithByteArray_withInt_withInt_(value, offset, length) autorelease], type);
+  OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneDocumentFieldType_(self, name, create_OrgApacheLuceneUtilBytesRef_initWithByteArray_withInt_withInt_(value, offset, length), type);
 }
 
 OrgApacheLuceneDocumentField *new_OrgApacheLuceneDocumentField_initWithNSString_withByteArray_withInt_withInt_withOrgApacheLuceneDocumentFieldType_(NSString *name, IOSByteArray *value, jint offset, jint length, OrgApacheLuceneDocumentFieldType *type) {
-  OrgApacheLuceneDocumentField *self = [OrgApacheLuceneDocumentField alloc];
-  OrgApacheLuceneDocumentField_initWithNSString_withByteArray_withInt_withInt_withOrgApacheLuceneDocumentFieldType_(self, name, value, offset, length, type);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentField, initWithNSString_withByteArray_withInt_withInt_withOrgApacheLuceneDocumentFieldType_, name, value, offset, length, type)
+}
+
+OrgApacheLuceneDocumentField *create_OrgApacheLuceneDocumentField_initWithNSString_withByteArray_withInt_withInt_withOrgApacheLuceneDocumentFieldType_(NSString *name, IOSByteArray *value, jint offset, jint length, OrgApacheLuceneDocumentFieldType *type) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentField, initWithNSString_withByteArray_withInt_withInt_withOrgApacheLuceneDocumentFieldType_, name, value, offset, length, type)
 }
 
 void OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneDocumentFieldType_(OrgApacheLuceneDocumentField *self, NSString *name, OrgApacheLuceneUtilBytesRef *bytes, OrgApacheLuceneDocumentFieldType *type) {
   NSObject_init(self);
   self->boost_ = 1.0f;
   if (name == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"name cannot be null") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"name cannot be null");
   }
   if (bytes == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"bytes cannot be null") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"bytes cannot be null");
   }
   JreStrongAssign(&self->fieldsData_, bytes);
   JreStrongAssign(&self->type_, type);
@@ -824,22 +831,24 @@ void OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneUtilBytesR
 }
 
 OrgApacheLuceneDocumentField *new_OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneDocumentFieldType_(NSString *name, OrgApacheLuceneUtilBytesRef *bytes, OrgApacheLuceneDocumentFieldType *type) {
-  OrgApacheLuceneDocumentField *self = [OrgApacheLuceneDocumentField alloc];
-  OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneDocumentFieldType_(self, name, bytes, type);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentField, initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneDocumentFieldType_, name, bytes, type)
+}
+
+OrgApacheLuceneDocumentField *create_OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneDocumentFieldType_(NSString *name, OrgApacheLuceneUtilBytesRef *bytes, OrgApacheLuceneDocumentFieldType *type) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentField, initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneDocumentFieldType_, name, bytes, type)
 }
 
 void OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentFieldType_(OrgApacheLuceneDocumentField *self, NSString *name, NSString *value, OrgApacheLuceneDocumentFieldType *type) {
   NSObject_init(self);
   self->boost_ = 1.0f;
   if (name == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"name cannot be null") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"name cannot be null");
   }
   if (value == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"value cannot be null") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"value cannot be null");
   }
-  if (![((OrgApacheLuceneDocumentFieldType *) nil_chk(type)) stored] && [type indexOptions] == JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE)) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"it doesn't make sense to have a field that is neither indexed nor stored") autorelease];
+  if (![((OrgApacheLuceneDocumentFieldType *) nil_chk(type)) stored] && [type indexOptions] == JreLoadEnum(OrgApacheLuceneIndexIndexOptions, NONE)) {
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"it doesn't make sense to have a field that is neither indexed nor stored");
   }
   JreStrongAssign(&self->type_, type);
   JreStrongAssign(&self->name_, name);
@@ -847,52 +856,54 @@ void OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuc
 }
 
 OrgApacheLuceneDocumentField *new_OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentFieldType_(NSString *name, NSString *value, OrgApacheLuceneDocumentFieldType *type) {
-  OrgApacheLuceneDocumentField *self = [OrgApacheLuceneDocumentField alloc];
-  OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentFieldType_(self, name, value, type);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentField, initWithNSString_withNSString_withOrgApacheLuceneDocumentFieldType_, name, value, type)
 }
 
-OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentField_translateFieldTypeWithOrgApacheLuceneDocumentField_StoreEnum_withOrgApacheLuceneDocumentField_IndexEnum_withOrgApacheLuceneDocumentField_TermVectorEnum_(OrgApacheLuceneDocumentField_StoreEnum *store, OrgApacheLuceneDocumentField_IndexEnum *index, OrgApacheLuceneDocumentField_TermVectorEnum *termVector) {
+OrgApacheLuceneDocumentField *create_OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentFieldType_(NSString *name, NSString *value, OrgApacheLuceneDocumentFieldType *type) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentField, initWithNSString_withNSString_withOrgApacheLuceneDocumentFieldType_, name, value, type)
+}
+
+OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentField_translateFieldTypeWithOrgApacheLuceneDocumentField_Store_withOrgApacheLuceneDocumentField_Index_withOrgApacheLuceneDocumentField_TermVector_(OrgApacheLuceneDocumentField_Store *store, OrgApacheLuceneDocumentField_Index *index, OrgApacheLuceneDocumentField_TermVector *termVector) {
   OrgApacheLuceneDocumentField_initialize();
-  OrgApacheLuceneDocumentFieldType *ft = [new_OrgApacheLuceneDocumentFieldType_init() autorelease];
-  [ft setStoredWithBoolean:store == JreLoadStatic(OrgApacheLuceneDocumentField_StoreEnum, YES)];
+  OrgApacheLuceneDocumentFieldType *ft = create_OrgApacheLuceneDocumentFieldType_init();
+  [ft setStoredWithBoolean:store == JreLoadEnum(OrgApacheLuceneDocumentField_Store, YES)];
   switch ([index ordinal]) {
-    case OrgApacheLuceneDocumentField_Index_ANALYZED:
-    [ft setIndexOptionsWithOrgApacheLuceneIndexIndexOptionsEnum:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS)];
+    case OrgApacheLuceneDocumentField_Index_Enum_ANALYZED:
+    [ft setIndexOptionsWithOrgApacheLuceneIndexIndexOptions:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS)];
     [ft setTokenizedWithBoolean:true];
     break;
-    case OrgApacheLuceneDocumentField_Index_ANALYZED_NO_NORMS:
-    [ft setIndexOptionsWithOrgApacheLuceneIndexIndexOptionsEnum:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS)];
+    case OrgApacheLuceneDocumentField_Index_Enum_ANALYZED_NO_NORMS:
+    [ft setIndexOptionsWithOrgApacheLuceneIndexIndexOptions:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS)];
     [ft setTokenizedWithBoolean:true];
     [ft setOmitNormsWithBoolean:true];
     break;
-    case OrgApacheLuceneDocumentField_Index_NOT_ANALYZED:
-    [ft setIndexOptionsWithOrgApacheLuceneIndexIndexOptionsEnum:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS)];
+    case OrgApacheLuceneDocumentField_Index_Enum_NOT_ANALYZED:
+    [ft setIndexOptionsWithOrgApacheLuceneIndexIndexOptions:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS)];
     [ft setTokenizedWithBoolean:false];
     break;
-    case OrgApacheLuceneDocumentField_Index_NOT_ANALYZED_NO_NORMS:
-    [ft setIndexOptionsWithOrgApacheLuceneIndexIndexOptionsEnum:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS)];
+    case OrgApacheLuceneDocumentField_Index_Enum_NOT_ANALYZED_NO_NORMS:
+    [ft setIndexOptionsWithOrgApacheLuceneIndexIndexOptions:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS)];
     [ft setTokenizedWithBoolean:false];
     [ft setOmitNormsWithBoolean:true];
     break;
-    case OrgApacheLuceneDocumentField_Index_NO:
+    case OrgApacheLuceneDocumentField_Index_Enum_NO:
     break;
   }
   switch ([termVector ordinal]) {
-    case OrgApacheLuceneDocumentField_TermVector_NO:
+    case OrgApacheLuceneDocumentField_TermVector_Enum_NO:
     break;
-    case OrgApacheLuceneDocumentField_TermVector_YES:
+    case OrgApacheLuceneDocumentField_TermVector_Enum_YES:
     [ft setStoreTermVectorsWithBoolean:true];
     break;
-    case OrgApacheLuceneDocumentField_TermVector_WITH_POSITIONS:
+    case OrgApacheLuceneDocumentField_TermVector_Enum_WITH_POSITIONS:
     [ft setStoreTermVectorsWithBoolean:true];
     [ft setStoreTermVectorPositionsWithBoolean:true];
     break;
-    case OrgApacheLuceneDocumentField_TermVector_WITH_OFFSETS:
+    case OrgApacheLuceneDocumentField_TermVector_Enum_WITH_OFFSETS:
     [ft setStoreTermVectorsWithBoolean:true];
     [ft setStoreTermVectorOffsetsWithBoolean:true];
     break;
-    case OrgApacheLuceneDocumentField_TermVector_WITH_POSITIONS_OFFSETS:
+    case OrgApacheLuceneDocumentField_TermVector_Enum_WITH_POSITIONS_OFFSETS:
     [ft setStoreTermVectorsWithBoolean:true];
     [ft setStoreTermVectorPositionsWithBoolean:true];
     [ft setStoreTermVectorOffsetsWithBoolean:true];
@@ -902,84 +913,100 @@ OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentField_translateFieldTyp
   return ft;
 }
 
-void OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_StoreEnum_withOrgApacheLuceneDocumentField_IndexEnum_(OrgApacheLuceneDocumentField *self, NSString *name, NSString *value, OrgApacheLuceneDocumentField_StoreEnum *store, OrgApacheLuceneDocumentField_IndexEnum *index) {
-  OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentFieldType_(self, name, value, OrgApacheLuceneDocumentField_translateFieldTypeWithOrgApacheLuceneDocumentField_StoreEnum_withOrgApacheLuceneDocumentField_IndexEnum_withOrgApacheLuceneDocumentField_TermVectorEnum_(store, index, JreLoadStatic(OrgApacheLuceneDocumentField_TermVectorEnum, NO)));
+void OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_Store_withOrgApacheLuceneDocumentField_Index_(OrgApacheLuceneDocumentField *self, NSString *name, NSString *value, OrgApacheLuceneDocumentField_Store *store, OrgApacheLuceneDocumentField_Index *index) {
+  OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentFieldType_(self, name, value, OrgApacheLuceneDocumentField_translateFieldTypeWithOrgApacheLuceneDocumentField_Store_withOrgApacheLuceneDocumentField_Index_withOrgApacheLuceneDocumentField_TermVector_(store, index, JreLoadEnum(OrgApacheLuceneDocumentField_TermVector, NO)));
 }
 
-OrgApacheLuceneDocumentField *new_OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_StoreEnum_withOrgApacheLuceneDocumentField_IndexEnum_(NSString *name, NSString *value, OrgApacheLuceneDocumentField_StoreEnum *store, OrgApacheLuceneDocumentField_IndexEnum *index) {
-  OrgApacheLuceneDocumentField *self = [OrgApacheLuceneDocumentField alloc];
-  OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_StoreEnum_withOrgApacheLuceneDocumentField_IndexEnum_(self, name, value, store, index);
-  return self;
+OrgApacheLuceneDocumentField *new_OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_Store_withOrgApacheLuceneDocumentField_Index_(NSString *name, NSString *value, OrgApacheLuceneDocumentField_Store *store, OrgApacheLuceneDocumentField_Index *index) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentField, initWithNSString_withNSString_withOrgApacheLuceneDocumentField_Store_withOrgApacheLuceneDocumentField_Index_, name, value, store, index)
 }
 
-void OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_StoreEnum_withOrgApacheLuceneDocumentField_IndexEnum_withOrgApacheLuceneDocumentField_TermVectorEnum_(OrgApacheLuceneDocumentField *self, NSString *name, NSString *value, OrgApacheLuceneDocumentField_StoreEnum *store, OrgApacheLuceneDocumentField_IndexEnum *index, OrgApacheLuceneDocumentField_TermVectorEnum *termVector) {
-  OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentFieldType_(self, name, value, OrgApacheLuceneDocumentField_translateFieldTypeWithOrgApacheLuceneDocumentField_StoreEnum_withOrgApacheLuceneDocumentField_IndexEnum_withOrgApacheLuceneDocumentField_TermVectorEnum_(store, index, termVector));
+OrgApacheLuceneDocumentField *create_OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_Store_withOrgApacheLuceneDocumentField_Index_(NSString *name, NSString *value, OrgApacheLuceneDocumentField_Store *store, OrgApacheLuceneDocumentField_Index *index) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentField, initWithNSString_withNSString_withOrgApacheLuceneDocumentField_Store_withOrgApacheLuceneDocumentField_Index_, name, value, store, index)
 }
 
-OrgApacheLuceneDocumentField *new_OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_StoreEnum_withOrgApacheLuceneDocumentField_IndexEnum_withOrgApacheLuceneDocumentField_TermVectorEnum_(NSString *name, NSString *value, OrgApacheLuceneDocumentField_StoreEnum *store, OrgApacheLuceneDocumentField_IndexEnum *index, OrgApacheLuceneDocumentField_TermVectorEnum *termVector) {
-  OrgApacheLuceneDocumentField *self = [OrgApacheLuceneDocumentField alloc];
-  OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_StoreEnum_withOrgApacheLuceneDocumentField_IndexEnum_withOrgApacheLuceneDocumentField_TermVectorEnum_(self, name, value, store, index, termVector);
-  return self;
+void OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_Store_withOrgApacheLuceneDocumentField_Index_withOrgApacheLuceneDocumentField_TermVector_(OrgApacheLuceneDocumentField *self, NSString *name, NSString *value, OrgApacheLuceneDocumentField_Store *store, OrgApacheLuceneDocumentField_Index *index, OrgApacheLuceneDocumentField_TermVector *termVector) {
+  OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentFieldType_(self, name, value, OrgApacheLuceneDocumentField_translateFieldTypeWithOrgApacheLuceneDocumentField_Store_withOrgApacheLuceneDocumentField_Index_withOrgApacheLuceneDocumentField_TermVector_(store, index, termVector));
+}
+
+OrgApacheLuceneDocumentField *new_OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_Store_withOrgApacheLuceneDocumentField_Index_withOrgApacheLuceneDocumentField_TermVector_(NSString *name, NSString *value, OrgApacheLuceneDocumentField_Store *store, OrgApacheLuceneDocumentField_Index *index, OrgApacheLuceneDocumentField_TermVector *termVector) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentField, initWithNSString_withNSString_withOrgApacheLuceneDocumentField_Store_withOrgApacheLuceneDocumentField_Index_withOrgApacheLuceneDocumentField_TermVector_, name, value, store, index, termVector)
+}
+
+OrgApacheLuceneDocumentField *create_OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_Store_withOrgApacheLuceneDocumentField_Index_withOrgApacheLuceneDocumentField_TermVector_(NSString *name, NSString *value, OrgApacheLuceneDocumentField_Store *store, OrgApacheLuceneDocumentField_Index *index, OrgApacheLuceneDocumentField_TermVector *termVector) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentField, initWithNSString_withNSString_withOrgApacheLuceneDocumentField_Store_withOrgApacheLuceneDocumentField_Index_withOrgApacheLuceneDocumentField_TermVector_, name, value, store, index, termVector)
 }
 
 void OrgApacheLuceneDocumentField_initWithNSString_withJavaIoReader_(OrgApacheLuceneDocumentField *self, NSString *name, JavaIoReader *reader) {
-  OrgApacheLuceneDocumentField_initWithNSString_withJavaIoReader_withOrgApacheLuceneDocumentField_TermVectorEnum_(self, name, reader, JreLoadStatic(OrgApacheLuceneDocumentField_TermVectorEnum, NO));
+  OrgApacheLuceneDocumentField_initWithNSString_withJavaIoReader_withOrgApacheLuceneDocumentField_TermVector_(self, name, reader, JreLoadEnum(OrgApacheLuceneDocumentField_TermVector, NO));
 }
 
 OrgApacheLuceneDocumentField *new_OrgApacheLuceneDocumentField_initWithNSString_withJavaIoReader_(NSString *name, JavaIoReader *reader) {
-  OrgApacheLuceneDocumentField *self = [OrgApacheLuceneDocumentField alloc];
-  OrgApacheLuceneDocumentField_initWithNSString_withJavaIoReader_(self, name, reader);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentField, initWithNSString_withJavaIoReader_, name, reader)
 }
 
-void OrgApacheLuceneDocumentField_initWithNSString_withJavaIoReader_withOrgApacheLuceneDocumentField_TermVectorEnum_(OrgApacheLuceneDocumentField *self, NSString *name, JavaIoReader *reader, OrgApacheLuceneDocumentField_TermVectorEnum *termVector) {
-  OrgApacheLuceneDocumentField_initWithNSString_withJavaIoReader_withOrgApacheLuceneDocumentFieldType_(self, name, reader, OrgApacheLuceneDocumentField_translateFieldTypeWithOrgApacheLuceneDocumentField_StoreEnum_withOrgApacheLuceneDocumentField_IndexEnum_withOrgApacheLuceneDocumentField_TermVectorEnum_(JreLoadStatic(OrgApacheLuceneDocumentField_StoreEnum, NO), JreLoadStatic(OrgApacheLuceneDocumentField_IndexEnum, ANALYZED), termVector));
+OrgApacheLuceneDocumentField *create_OrgApacheLuceneDocumentField_initWithNSString_withJavaIoReader_(NSString *name, JavaIoReader *reader) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentField, initWithNSString_withJavaIoReader_, name, reader)
 }
 
-OrgApacheLuceneDocumentField *new_OrgApacheLuceneDocumentField_initWithNSString_withJavaIoReader_withOrgApacheLuceneDocumentField_TermVectorEnum_(NSString *name, JavaIoReader *reader, OrgApacheLuceneDocumentField_TermVectorEnum *termVector) {
-  OrgApacheLuceneDocumentField *self = [OrgApacheLuceneDocumentField alloc];
-  OrgApacheLuceneDocumentField_initWithNSString_withJavaIoReader_withOrgApacheLuceneDocumentField_TermVectorEnum_(self, name, reader, termVector);
-  return self;
+void OrgApacheLuceneDocumentField_initWithNSString_withJavaIoReader_withOrgApacheLuceneDocumentField_TermVector_(OrgApacheLuceneDocumentField *self, NSString *name, JavaIoReader *reader, OrgApacheLuceneDocumentField_TermVector *termVector) {
+  OrgApacheLuceneDocumentField_initWithNSString_withJavaIoReader_withOrgApacheLuceneDocumentFieldType_(self, name, reader, OrgApacheLuceneDocumentField_translateFieldTypeWithOrgApacheLuceneDocumentField_Store_withOrgApacheLuceneDocumentField_Index_withOrgApacheLuceneDocumentField_TermVector_(JreLoadEnum(OrgApacheLuceneDocumentField_Store, NO), JreLoadEnum(OrgApacheLuceneDocumentField_Index, ANALYZED), termVector));
+}
+
+OrgApacheLuceneDocumentField *new_OrgApacheLuceneDocumentField_initWithNSString_withJavaIoReader_withOrgApacheLuceneDocumentField_TermVector_(NSString *name, JavaIoReader *reader, OrgApacheLuceneDocumentField_TermVector *termVector) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentField, initWithNSString_withJavaIoReader_withOrgApacheLuceneDocumentField_TermVector_, name, reader, termVector)
+}
+
+OrgApacheLuceneDocumentField *create_OrgApacheLuceneDocumentField_initWithNSString_withJavaIoReader_withOrgApacheLuceneDocumentField_TermVector_(NSString *name, JavaIoReader *reader, OrgApacheLuceneDocumentField_TermVector *termVector) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentField, initWithNSString_withJavaIoReader_withOrgApacheLuceneDocumentField_TermVector_, name, reader, termVector)
 }
 
 void OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneDocumentField *self, NSString *name, OrgApacheLuceneAnalysisTokenStream *tokenStream) {
-  OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneDocumentField_TermVectorEnum_(self, name, tokenStream, JreLoadStatic(OrgApacheLuceneDocumentField_TermVectorEnum, NO));
+  OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneDocumentField_TermVector_(self, name, tokenStream, JreLoadEnum(OrgApacheLuceneDocumentField_TermVector, NO));
 }
 
 OrgApacheLuceneDocumentField *new_OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_(NSString *name, OrgApacheLuceneAnalysisTokenStream *tokenStream) {
-  OrgApacheLuceneDocumentField *self = [OrgApacheLuceneDocumentField alloc];
-  OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_(self, name, tokenStream);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentField, initWithNSString_withOrgApacheLuceneAnalysisTokenStream_, name, tokenStream)
 }
 
-void OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneDocumentField_TermVectorEnum_(OrgApacheLuceneDocumentField *self, NSString *name, OrgApacheLuceneAnalysisTokenStream *tokenStream, OrgApacheLuceneDocumentField_TermVectorEnum *termVector) {
-  OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneDocumentFieldType_(self, name, tokenStream, OrgApacheLuceneDocumentField_translateFieldTypeWithOrgApacheLuceneDocumentField_StoreEnum_withOrgApacheLuceneDocumentField_IndexEnum_withOrgApacheLuceneDocumentField_TermVectorEnum_(JreLoadStatic(OrgApacheLuceneDocumentField_StoreEnum, NO), JreLoadStatic(OrgApacheLuceneDocumentField_IndexEnum, ANALYZED), termVector));
+OrgApacheLuceneDocumentField *create_OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_(NSString *name, OrgApacheLuceneAnalysisTokenStream *tokenStream) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentField, initWithNSString_withOrgApacheLuceneAnalysisTokenStream_, name, tokenStream)
 }
 
-OrgApacheLuceneDocumentField *new_OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneDocumentField_TermVectorEnum_(NSString *name, OrgApacheLuceneAnalysisTokenStream *tokenStream, OrgApacheLuceneDocumentField_TermVectorEnum *termVector) {
-  OrgApacheLuceneDocumentField *self = [OrgApacheLuceneDocumentField alloc];
-  OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneDocumentField_TermVectorEnum_(self, name, tokenStream, termVector);
-  return self;
+void OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneDocumentField_TermVector_(OrgApacheLuceneDocumentField *self, NSString *name, OrgApacheLuceneAnalysisTokenStream *tokenStream, OrgApacheLuceneDocumentField_TermVector *termVector) {
+  OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneDocumentFieldType_(self, name, tokenStream, OrgApacheLuceneDocumentField_translateFieldTypeWithOrgApacheLuceneDocumentField_Store_withOrgApacheLuceneDocumentField_Index_withOrgApacheLuceneDocumentField_TermVector_(JreLoadEnum(OrgApacheLuceneDocumentField_Store, NO), JreLoadEnum(OrgApacheLuceneDocumentField_Index, ANALYZED), termVector));
+}
+
+OrgApacheLuceneDocumentField *new_OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneDocumentField_TermVector_(NSString *name, OrgApacheLuceneAnalysisTokenStream *tokenStream, OrgApacheLuceneDocumentField_TermVector *termVector) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentField, initWithNSString_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneDocumentField_TermVector_, name, tokenStream, termVector)
+}
+
+OrgApacheLuceneDocumentField *create_OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneDocumentField_TermVector_(NSString *name, OrgApacheLuceneAnalysisTokenStream *tokenStream, OrgApacheLuceneDocumentField_TermVector *termVector) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentField, initWithNSString_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneDocumentField_TermVector_, name, tokenStream, termVector)
 }
 
 void OrgApacheLuceneDocumentField_initWithNSString_withByteArray_(OrgApacheLuceneDocumentField *self, NSString *name, IOSByteArray *value) {
-  OrgApacheLuceneDocumentField_initWithNSString_withByteArray_withOrgApacheLuceneDocumentFieldType_(self, name, value, OrgApacheLuceneDocumentField_translateFieldTypeWithOrgApacheLuceneDocumentField_StoreEnum_withOrgApacheLuceneDocumentField_IndexEnum_withOrgApacheLuceneDocumentField_TermVectorEnum_(JreLoadStatic(OrgApacheLuceneDocumentField_StoreEnum, YES), JreLoadStatic(OrgApacheLuceneDocumentField_IndexEnum, NO), JreLoadStatic(OrgApacheLuceneDocumentField_TermVectorEnum, NO)));
+  OrgApacheLuceneDocumentField_initWithNSString_withByteArray_withOrgApacheLuceneDocumentFieldType_(self, name, value, OrgApacheLuceneDocumentField_translateFieldTypeWithOrgApacheLuceneDocumentField_Store_withOrgApacheLuceneDocumentField_Index_withOrgApacheLuceneDocumentField_TermVector_(JreLoadEnum(OrgApacheLuceneDocumentField_Store, YES), JreLoadEnum(OrgApacheLuceneDocumentField_Index, NO), JreLoadEnum(OrgApacheLuceneDocumentField_TermVector, NO)));
 }
 
 OrgApacheLuceneDocumentField *new_OrgApacheLuceneDocumentField_initWithNSString_withByteArray_(NSString *name, IOSByteArray *value) {
-  OrgApacheLuceneDocumentField *self = [OrgApacheLuceneDocumentField alloc];
-  OrgApacheLuceneDocumentField_initWithNSString_withByteArray_(self, name, value);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentField, initWithNSString_withByteArray_, name, value)
+}
+
+OrgApacheLuceneDocumentField *create_OrgApacheLuceneDocumentField_initWithNSString_withByteArray_(NSString *name, IOSByteArray *value) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentField, initWithNSString_withByteArray_, name, value)
 }
 
 void OrgApacheLuceneDocumentField_initWithNSString_withByteArray_withInt_withInt_(OrgApacheLuceneDocumentField *self, NSString *name, IOSByteArray *value, jint offset, jint length) {
-  OrgApacheLuceneDocumentField_initWithNSString_withByteArray_withInt_withInt_withOrgApacheLuceneDocumentFieldType_(self, name, value, offset, length, OrgApacheLuceneDocumentField_translateFieldTypeWithOrgApacheLuceneDocumentField_StoreEnum_withOrgApacheLuceneDocumentField_IndexEnum_withOrgApacheLuceneDocumentField_TermVectorEnum_(JreLoadStatic(OrgApacheLuceneDocumentField_StoreEnum, YES), JreLoadStatic(OrgApacheLuceneDocumentField_IndexEnum, NO), JreLoadStatic(OrgApacheLuceneDocumentField_TermVectorEnum, NO)));
+  OrgApacheLuceneDocumentField_initWithNSString_withByteArray_withInt_withInt_withOrgApacheLuceneDocumentFieldType_(self, name, value, offset, length, OrgApacheLuceneDocumentField_translateFieldTypeWithOrgApacheLuceneDocumentField_Store_withOrgApacheLuceneDocumentField_Index_withOrgApacheLuceneDocumentField_TermVector_(JreLoadEnum(OrgApacheLuceneDocumentField_Store, YES), JreLoadEnum(OrgApacheLuceneDocumentField_Index, NO), JreLoadEnum(OrgApacheLuceneDocumentField_TermVector, NO)));
 }
 
 OrgApacheLuceneDocumentField *new_OrgApacheLuceneDocumentField_initWithNSString_withByteArray_withInt_withInt_(NSString *name, IOSByteArray *value, jint offset, jint length) {
-  OrgApacheLuceneDocumentField *self = [OrgApacheLuceneDocumentField alloc];
-  OrgApacheLuceneDocumentField_initWithNSString_withByteArray_withInt_withInt_(self, name, value, offset, length);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentField, initWithNSString_withByteArray_withInt_withInt_, name, value, offset, length)
+}
+
+OrgApacheLuceneDocumentField *create_OrgApacheLuceneDocumentField_initWithNSString_withByteArray_withInt_withInt_(NSString *name, IOSByteArray *value, jint offset, jint length) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentField, initWithNSString_withByteArray_withInt_withInt_, name, value, offset, length)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField)
@@ -1047,9 +1074,11 @@ void OrgApacheLuceneDocumentField_BinaryTokenStream_init(OrgApacheLuceneDocument
 }
 
 OrgApacheLuceneDocumentField_BinaryTokenStream *new_OrgApacheLuceneDocumentField_BinaryTokenStream_init() {
-  OrgApacheLuceneDocumentField_BinaryTokenStream *self = [OrgApacheLuceneDocumentField_BinaryTokenStream alloc];
-  OrgApacheLuceneDocumentField_BinaryTokenStream_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentField_BinaryTokenStream, init)
+}
+
+OrgApacheLuceneDocumentField_BinaryTokenStream *create_OrgApacheLuceneDocumentField_BinaryTokenStream_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentField_BinaryTokenStream, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_BinaryTokenStream)
@@ -1129,42 +1158,84 @@ void OrgApacheLuceneDocumentField_StringTokenStream_init(OrgApacheLuceneDocument
 }
 
 OrgApacheLuceneDocumentField_StringTokenStream *new_OrgApacheLuceneDocumentField_StringTokenStream_init() {
-  OrgApacheLuceneDocumentField_StringTokenStream *self = [OrgApacheLuceneDocumentField_StringTokenStream alloc];
-  OrgApacheLuceneDocumentField_StringTokenStream_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentField_StringTokenStream, init)
+}
+
+OrgApacheLuceneDocumentField_StringTokenStream *create_OrgApacheLuceneDocumentField_StringTokenStream_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentField_StringTokenStream, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_StringTokenStream)
 
-J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneDocumentField_StoreEnum)
+J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneDocumentField_Store)
 
-OrgApacheLuceneDocumentField_StoreEnum *OrgApacheLuceneDocumentField_StoreEnum_values_[2];
+OrgApacheLuceneDocumentField_Store *OrgApacheLuceneDocumentField_Store_values_[2];
 
-@implementation OrgApacheLuceneDocumentField_StoreEnum
+@implementation OrgApacheLuceneDocumentField_Store
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgApacheLuceneDocumentField_StoreEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
++ (OrgApacheLuceneDocumentField_Store *)YES_ {
+  return JreEnum(OrgApacheLuceneDocumentField_Store, YES);
 }
 
-IOSObjectArray *OrgApacheLuceneDocumentField_StoreEnum_values() {
-  OrgApacheLuceneDocumentField_StoreEnum_initialize();
-  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneDocumentField_StoreEnum_values_ count:2 type:OrgApacheLuceneDocumentField_StoreEnum_class_()];
++ (OrgApacheLuceneDocumentField_Store *)NO_ {
+  return JreEnum(OrgApacheLuceneDocumentField_Store, NO);
 }
 
 + (IOSObjectArray *)values {
-  return OrgApacheLuceneDocumentField_StoreEnum_values();
+  return OrgApacheLuceneDocumentField_Store_values();
 }
 
-+ (OrgApacheLuceneDocumentField_StoreEnum *)valueOfWithNSString:(NSString *)name {
-  return OrgApacheLuceneDocumentField_StoreEnum_valueOfWithNSString_(name);
++ (OrgApacheLuceneDocumentField_Store *)valueOfWithNSString:(NSString *)name {
+  return OrgApacheLuceneDocumentField_Store_valueOfWithNSString_(name);
 }
 
-OrgApacheLuceneDocumentField_StoreEnum *OrgApacheLuceneDocumentField_StoreEnum_valueOfWithNSString_(NSString *name) {
-  OrgApacheLuceneDocumentField_StoreEnum_initialize();
+- (OrgApacheLuceneDocumentField_Store_Enum)toNSEnum {
+  return (OrgApacheLuceneDocumentField_Store_Enum)[self ordinal];
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+  return self;
+}
+
++ (void)initialize {
+  if (self == [OrgApacheLuceneDocumentField_Store class]) {
+    size_t objSize = class_getInstanceSize(self);
+    size_t allocSize = 2 * objSize;
+    uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
+    id e;
+    (JreEnum(OrgApacheLuceneDocumentField_Store, YES) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneDocumentField_Store_initWithNSString_withInt_(e, @"YES", 0);
+    (JreEnum(OrgApacheLuceneDocumentField_Store, NO) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneDocumentField_Store_initWithNSString_withInt_(e, @"NO", 1);
+    J2OBJC_SET_INITIALIZED(OrgApacheLuceneDocumentField_Store)
+  }
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static const J2ObjcFieldInfo fields[] = {
+    { "YES", "YES", 0x4019, "Lorg.apache.lucene.document.Field$Store;", &JreEnum(OrgApacheLuceneDocumentField_Store, YES), NULL, .constantValue.asLong = 0 },
+    { "NO", "NO", 0x4019, "Lorg.apache.lucene.document.Field$Store;", &JreEnum(OrgApacheLuceneDocumentField_Store, NO), NULL, .constantValue.asLong = 0 },
+  };
+  static const char *superclass_type_args[] = {"Lorg.apache.lucene.document.Field$Store;"};
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentField_Store = { 2, "Store", "org.apache.lucene.document", "Field", 0x4019, 0, NULL, 2, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/document/Field$Store;>;" };
+  return &_OrgApacheLuceneDocumentField_Store;
+}
+
+@end
+
+void OrgApacheLuceneDocumentField_Store_initWithNSString_withInt_(OrgApacheLuceneDocumentField_Store *self, NSString *__name, jint __ordinal) {
+  JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
+}
+
+IOSObjectArray *OrgApacheLuceneDocumentField_Store_values() {
+  OrgApacheLuceneDocumentField_Store_initialize();
+  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneDocumentField_Store_values_ count:2 type:OrgApacheLuceneDocumentField_Store_class_()];
+}
+
+OrgApacheLuceneDocumentField_Store *OrgApacheLuceneDocumentField_Store_valueOfWithNSString_(NSString *name) {
+  OrgApacheLuceneDocumentField_Store_initialize();
   for (int i = 0; i < 2; i++) {
-    OrgApacheLuceneDocumentField_StoreEnum *e = OrgApacheLuceneDocumentField_StoreEnum_values_[i];
+    OrgApacheLuceneDocumentField_Store *e = OrgApacheLuceneDocumentField_Store_values_[i];
     if ([name isEqual:[e name]]) {
       return e;
     }
@@ -1173,57 +1244,51 @@ OrgApacheLuceneDocumentField_StoreEnum *OrgApacheLuceneDocumentField_StoreEnum_v
   return nil;
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-  return [self retain];
-}
-
-+ (void)initialize {
-  if (self == [OrgApacheLuceneDocumentField_StoreEnum class]) {
-    OrgApacheLuceneDocumentField_StoreEnum_YES = new_OrgApacheLuceneDocumentField_StoreEnum_initWithNSString_withInt_(@"YES", 0);
-    OrgApacheLuceneDocumentField_StoreEnum_NO = new_OrgApacheLuceneDocumentField_StoreEnum_initWithNSString_withInt_(@"NO", 1);
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneDocumentField_StoreEnum)
+OrgApacheLuceneDocumentField_Store *OrgApacheLuceneDocumentField_Store_fromOrdinal(NSUInteger ordinal) {
+  OrgApacheLuceneDocumentField_Store_initialize();
+  if (ordinal >= 2) {
+    return nil;
   }
+  return OrgApacheLuceneDocumentField_Store_values_[ordinal];
 }
 
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcFieldInfo fields[] = {
-    { "YES", "YES", 0x4019, "Lorg.apache.lucene.document.Field$Store;", &OrgApacheLuceneDocumentField_StoreEnum_YES, NULL, .constantValue.asLong = 0 },
-    { "NO", "NO", 0x4019, "Lorg.apache.lucene.document.Field$Store;", &OrgApacheLuceneDocumentField_StoreEnum_NO, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.document.Field$Store;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentField_StoreEnum = { 2, "Store", "org.apache.lucene.document", "Field", 0x4019, 0, NULL, 2, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/document/Field$Store;>;" };
-  return &_OrgApacheLuceneDocumentField_StoreEnum;
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_Store)
+
+J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneDocumentField_Index)
+
+OrgApacheLuceneDocumentField_Index *OrgApacheLuceneDocumentField_Index_values_[5];
+
+@implementation OrgApacheLuceneDocumentField_Index
+
++ (OrgApacheLuceneDocumentField_Index *)NO_ {
+  return JreEnum(OrgApacheLuceneDocumentField_Index, NO);
 }
 
-@end
-
-void OrgApacheLuceneDocumentField_StoreEnum_initWithNSString_withInt_(OrgApacheLuceneDocumentField_StoreEnum *self, NSString *__name, jint __ordinal) {
-  JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
++ (OrgApacheLuceneDocumentField_Index *)ANALYZED {
+  return JreEnum(OrgApacheLuceneDocumentField_Index, ANALYZED);
 }
 
-OrgApacheLuceneDocumentField_StoreEnum *new_OrgApacheLuceneDocumentField_StoreEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  OrgApacheLuceneDocumentField_StoreEnum *self = [OrgApacheLuceneDocumentField_StoreEnum alloc];
-  OrgApacheLuceneDocumentField_StoreEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
++ (OrgApacheLuceneDocumentField_Index *)NOT_ANALYZED {
+  return JreEnum(OrgApacheLuceneDocumentField_Index, NOT_ANALYZED);
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_StoreEnum)
-
-J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneDocumentField_IndexEnum)
-
-OrgApacheLuceneDocumentField_IndexEnum *OrgApacheLuceneDocumentField_IndexEnum_values_[5];
-
-@implementation OrgApacheLuceneDocumentField_IndexEnum
-
-+ (OrgApacheLuceneDocumentField_IndexEnum *)toIndexWithBoolean:(jboolean)indexed
-                                                   withBoolean:(jboolean)analyzed {
-  return OrgApacheLuceneDocumentField_IndexEnum_toIndexWithBoolean_withBoolean_(indexed, analyzed);
++ (OrgApacheLuceneDocumentField_Index *)NOT_ANALYZED_NO_NORMS {
+  return JreEnum(OrgApacheLuceneDocumentField_Index, NOT_ANALYZED_NO_NORMS);
 }
 
-+ (OrgApacheLuceneDocumentField_IndexEnum *)toIndexWithBoolean:(jboolean)indexed
-                                                   withBoolean:(jboolean)analyzed
-                                                   withBoolean:(jboolean)omitNorms {
-  return OrgApacheLuceneDocumentField_IndexEnum_toIndexWithBoolean_withBoolean_withBoolean_(indexed, analyzed, omitNorms);
++ (OrgApacheLuceneDocumentField_Index *)ANALYZED_NO_NORMS {
+  return JreEnum(OrgApacheLuceneDocumentField_Index, ANALYZED_NO_NORMS);
+}
+
++ (OrgApacheLuceneDocumentField_Index *)toIndexWithBoolean:(jboolean)indexed
+                                               withBoolean:(jboolean)analyzed {
+  return OrgApacheLuceneDocumentField_Index_toIndexWithBoolean_withBoolean_(indexed, analyzed);
+}
+
++ (OrgApacheLuceneDocumentField_Index *)toIndexWithBoolean:(jboolean)indexed
+                                               withBoolean:(jboolean)analyzed
+                                               withBoolean:(jboolean)omitNorms {
+  return OrgApacheLuceneDocumentField_Index_toIndexWithBoolean_withBoolean_withBoolean_(indexed, analyzed, omitNorms);
 }
 
 - (jboolean)isIndexed {
@@ -1244,54 +1309,53 @@ OrgApacheLuceneDocumentField_IndexEnum *OrgApacheLuceneDocumentField_IndexEnum_v
   return 0;
 }
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgApacheLuceneDocumentField_IndexEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
-}
-
-IOSObjectArray *OrgApacheLuceneDocumentField_IndexEnum_values() {
-  OrgApacheLuceneDocumentField_IndexEnum_initialize();
-  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneDocumentField_IndexEnum_values_ count:5 type:OrgApacheLuceneDocumentField_IndexEnum_class_()];
++ (IOSObjectArray *)__annotations {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)values {
-  return OrgApacheLuceneDocumentField_IndexEnum_values();
+  return OrgApacheLuceneDocumentField_Index_values();
 }
 
-+ (OrgApacheLuceneDocumentField_IndexEnum *)valueOfWithNSString:(NSString *)name {
-  return OrgApacheLuceneDocumentField_IndexEnum_valueOfWithNSString_(name);
++ (OrgApacheLuceneDocumentField_Index *)valueOfWithNSString:(NSString *)name {
+  return OrgApacheLuceneDocumentField_Index_valueOfWithNSString_(name);
 }
 
-OrgApacheLuceneDocumentField_IndexEnum *OrgApacheLuceneDocumentField_IndexEnum_valueOfWithNSString_(NSString *name) {
-  OrgApacheLuceneDocumentField_IndexEnum_initialize();
-  for (int i = 0; i < 5; i++) {
-    OrgApacheLuceneDocumentField_IndexEnum *e = OrgApacheLuceneDocumentField_IndexEnum_values_[i];
-    if ([name isEqual:[e name]]) {
-      return e;
-    }
-  }
-  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
-  return nil;
+- (OrgApacheLuceneDocumentField_Index_Enum)toNSEnum {
+  return (OrgApacheLuceneDocumentField_Index_Enum)[self ordinal];
 }
 
 - (id)copyWithZone:(NSZone *)zone {
-  return [self retain];
+  return self;
 }
 
 + (void)initialize {
-  if (self == [OrgApacheLuceneDocumentField_IndexEnum class]) {
-    OrgApacheLuceneDocumentField_IndexEnum_NO = new_OrgApacheLuceneDocumentField_Index_$1Enum_initWithNSString_withInt_(@"NO", 0);
-    OrgApacheLuceneDocumentField_IndexEnum_ANALYZED = new_OrgApacheLuceneDocumentField_Index_$2Enum_initWithNSString_withInt_(@"ANALYZED", 1);
-    OrgApacheLuceneDocumentField_IndexEnum_NOT_ANALYZED = new_OrgApacheLuceneDocumentField_Index_$3Enum_initWithNSString_withInt_(@"NOT_ANALYZED", 2);
-    OrgApacheLuceneDocumentField_IndexEnum_NOT_ANALYZED_NO_NORMS = new_OrgApacheLuceneDocumentField_Index_$4Enum_initWithNSString_withInt_(@"NOT_ANALYZED_NO_NORMS", 3);
-    OrgApacheLuceneDocumentField_IndexEnum_ANALYZED_NO_NORMS = new_OrgApacheLuceneDocumentField_Index_$5Enum_initWithNSString_withInt_(@"ANALYZED_NO_NORMS", 4);
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneDocumentField_IndexEnum)
+  if (self == [OrgApacheLuceneDocumentField_Index class]) {
+    size_t allocSize = 0;
+    size_t objSize_NO = class_getInstanceSize([OrgApacheLuceneDocumentField_Index_$1 class]);
+    allocSize += objSize_NO;
+    size_t objSize_ANALYZED = class_getInstanceSize([OrgApacheLuceneDocumentField_Index_$2 class]);
+    allocSize += objSize_ANALYZED;
+    size_t objSize_NOT_ANALYZED = class_getInstanceSize([OrgApacheLuceneDocumentField_Index_$3 class]);
+    allocSize += objSize_NOT_ANALYZED;
+    size_t objSize_NOT_ANALYZED_NO_NORMS = class_getInstanceSize([OrgApacheLuceneDocumentField_Index_$4 class]);
+    allocSize += objSize_NOT_ANALYZED_NO_NORMS;
+    size_t objSize_ANALYZED_NO_NORMS = class_getInstanceSize([OrgApacheLuceneDocumentField_Index_$5 class]);
+    allocSize += objSize_ANALYZED_NO_NORMS;
+    uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
+    id e;
+    (JreEnum(OrgApacheLuceneDocumentField_Index, NO) = e = objc_constructInstance([OrgApacheLuceneDocumentField_Index_$1 class], (void *)ptr), ptr += objSize_NO);
+    OrgApacheLuceneDocumentField_Index_$1_initWithNSString_withInt_(e, @"NO", 0);
+    (JreEnum(OrgApacheLuceneDocumentField_Index, ANALYZED) = e = objc_constructInstance([OrgApacheLuceneDocumentField_Index_$2 class], (void *)ptr), ptr += objSize_ANALYZED);
+    OrgApacheLuceneDocumentField_Index_$2_initWithNSString_withInt_(e, @"ANALYZED", 1);
+    (JreEnum(OrgApacheLuceneDocumentField_Index, NOT_ANALYZED) = e = objc_constructInstance([OrgApacheLuceneDocumentField_Index_$3 class], (void *)ptr), ptr += objSize_NOT_ANALYZED);
+    OrgApacheLuceneDocumentField_Index_$3_initWithNSString_withInt_(e, @"NOT_ANALYZED", 2);
+    (JreEnum(OrgApacheLuceneDocumentField_Index, NOT_ANALYZED_NO_NORMS) = e = objc_constructInstance([OrgApacheLuceneDocumentField_Index_$4 class], (void *)ptr), ptr += objSize_NOT_ANALYZED_NO_NORMS);
+    OrgApacheLuceneDocumentField_Index_$4_initWithNSString_withInt_(e, @"NOT_ANALYZED_NO_NORMS", 3);
+    (JreEnum(OrgApacheLuceneDocumentField_Index, ANALYZED_NO_NORMS) = e = objc_constructInstance([OrgApacheLuceneDocumentField_Index_$5 class], (void *)ptr), ptr += objSize_ANALYZED_NO_NORMS);
+    OrgApacheLuceneDocumentField_Index_$5_initWithNSString_withInt_(e, @"ANALYZED_NO_NORMS", 4);
+    J2OBJC_SET_INITIALIZED(OrgApacheLuceneDocumentField_Index)
   }
-}
-
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -1303,48 +1367,73 @@ OrgApacheLuceneDocumentField_IndexEnum *OrgApacheLuceneDocumentField_IndexEnum_v
     { "omitNorms", NULL, "Z", 0x401, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "NO", "NO", 0x4019, "Lorg.apache.lucene.document.Field$Index;", &OrgApacheLuceneDocumentField_IndexEnum_NO, NULL, .constantValue.asLong = 0 },
-    { "ANALYZED", "ANALYZED", 0x4019, "Lorg.apache.lucene.document.Field$Index;", &OrgApacheLuceneDocumentField_IndexEnum_ANALYZED, NULL, .constantValue.asLong = 0 },
-    { "NOT_ANALYZED", "NOT_ANALYZED", 0x4019, "Lorg.apache.lucene.document.Field$Index;", &OrgApacheLuceneDocumentField_IndexEnum_NOT_ANALYZED, NULL, .constantValue.asLong = 0 },
-    { "NOT_ANALYZED_NO_NORMS", "NOT_ANALYZED_NO_NORMS", 0x4019, "Lorg.apache.lucene.document.Field$Index;", &OrgApacheLuceneDocumentField_IndexEnum_NOT_ANALYZED_NO_NORMS, NULL, .constantValue.asLong = 0 },
-    { "ANALYZED_NO_NORMS", "ANALYZED_NO_NORMS", 0x4019, "Lorg.apache.lucene.document.Field$Index;", &OrgApacheLuceneDocumentField_IndexEnum_ANALYZED_NO_NORMS, NULL, .constantValue.asLong = 0 },
+    { "NO", "NO", 0x4019, "Lorg.apache.lucene.document.Field$Index;", &JreEnum(OrgApacheLuceneDocumentField_Index, NO), NULL, .constantValue.asLong = 0 },
+    { "ANALYZED", "ANALYZED", 0x4019, "Lorg.apache.lucene.document.Field$Index;", &JreEnum(OrgApacheLuceneDocumentField_Index, ANALYZED), NULL, .constantValue.asLong = 0 },
+    { "NOT_ANALYZED", "NOT_ANALYZED", 0x4019, "Lorg.apache.lucene.document.Field$Index;", &JreEnum(OrgApacheLuceneDocumentField_Index, NOT_ANALYZED), NULL, .constantValue.asLong = 0 },
+    { "NOT_ANALYZED_NO_NORMS", "NOT_ANALYZED_NO_NORMS", 0x4019, "Lorg.apache.lucene.document.Field$Index;", &JreEnum(OrgApacheLuceneDocumentField_Index, NOT_ANALYZED_NO_NORMS), NULL, .constantValue.asLong = 0 },
+    { "ANALYZED_NO_NORMS", "ANALYZED_NO_NORMS", 0x4019, "Lorg.apache.lucene.document.Field$Index;", &JreEnum(OrgApacheLuceneDocumentField_Index, ANALYZED_NO_NORMS), NULL, .constantValue.asLong = 0 },
   };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.document.Field$Index;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentField_IndexEnum = { 2, "Index", "org.apache.lucene.document", "Field", 0x4409, 5, methods, 5, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/document/Field$Index;>;" };
-  return &_OrgApacheLuceneDocumentField_IndexEnum;
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentField_Index = { 2, "Index", "org.apache.lucene.document", "Field", 0x4409, 5, methods, 5, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/document/Field$Index;>;" };
+  return &_OrgApacheLuceneDocumentField_Index;
 }
 
 @end
 
-OrgApacheLuceneDocumentField_IndexEnum *OrgApacheLuceneDocumentField_IndexEnum_toIndexWithBoolean_withBoolean_(jboolean indexed, jboolean analyzed) {
-  OrgApacheLuceneDocumentField_IndexEnum_initialize();
-  return OrgApacheLuceneDocumentField_IndexEnum_toIndexWithBoolean_withBoolean_withBoolean_(indexed, analyzed, false);
+OrgApacheLuceneDocumentField_Index *OrgApacheLuceneDocumentField_Index_toIndexWithBoolean_withBoolean_(jboolean indexed, jboolean analyzed) {
+  OrgApacheLuceneDocumentField_Index_initialize();
+  return OrgApacheLuceneDocumentField_Index_toIndexWithBoolean_withBoolean_withBoolean_(indexed, analyzed, false);
 }
 
-OrgApacheLuceneDocumentField_IndexEnum *OrgApacheLuceneDocumentField_IndexEnum_toIndexWithBoolean_withBoolean_withBoolean_(jboolean indexed, jboolean analyzed, jboolean omitNorms) {
-  OrgApacheLuceneDocumentField_IndexEnum_initialize();
+OrgApacheLuceneDocumentField_Index *OrgApacheLuceneDocumentField_Index_toIndexWithBoolean_withBoolean_withBoolean_(jboolean indexed, jboolean analyzed, jboolean omitNorms) {
+  OrgApacheLuceneDocumentField_Index_initialize();
   if (!indexed) {
-    return OrgApacheLuceneDocumentField_IndexEnum_NO;
+    return JreEnum(OrgApacheLuceneDocumentField_Index, NO);
   }
   if (!omitNorms) {
     if (analyzed) {
-      return OrgApacheLuceneDocumentField_IndexEnum_ANALYZED;
+      return JreEnum(OrgApacheLuceneDocumentField_Index, ANALYZED);
     }
-    return OrgApacheLuceneDocumentField_IndexEnum_NOT_ANALYZED;
+    return JreEnum(OrgApacheLuceneDocumentField_Index, NOT_ANALYZED);
   }
   if (analyzed) {
-    return OrgApacheLuceneDocumentField_IndexEnum_ANALYZED_NO_NORMS;
+    return JreEnum(OrgApacheLuceneDocumentField_Index, ANALYZED_NO_NORMS);
   }
-  return OrgApacheLuceneDocumentField_IndexEnum_NOT_ANALYZED_NO_NORMS;
+  return JreEnum(OrgApacheLuceneDocumentField_Index, NOT_ANALYZED_NO_NORMS);
 }
 
-void OrgApacheLuceneDocumentField_IndexEnum_initWithNSString_withInt_(OrgApacheLuceneDocumentField_IndexEnum *self, NSString *__name, jint __ordinal) {
+void OrgApacheLuceneDocumentField_Index_initWithNSString_withInt_(OrgApacheLuceneDocumentField_Index *self, NSString *__name, jint __ordinal) {
   JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_IndexEnum)
+IOSObjectArray *OrgApacheLuceneDocumentField_Index_values() {
+  OrgApacheLuceneDocumentField_Index_initialize();
+  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneDocumentField_Index_values_ count:5 type:OrgApacheLuceneDocumentField_Index_class_()];
+}
 
-@implementation OrgApacheLuceneDocumentField_Index_$1Enum
+OrgApacheLuceneDocumentField_Index *OrgApacheLuceneDocumentField_Index_valueOfWithNSString_(NSString *name) {
+  OrgApacheLuceneDocumentField_Index_initialize();
+  for (int i = 0; i < 5; i++) {
+    OrgApacheLuceneDocumentField_Index *e = OrgApacheLuceneDocumentField_Index_values_[i];
+    if ([name isEqual:[e name]]) {
+      return e;
+    }
+  }
+  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
+  return nil;
+}
+
+OrgApacheLuceneDocumentField_Index *OrgApacheLuceneDocumentField_Index_fromOrdinal(NSUInteger ordinal) {
+  OrgApacheLuceneDocumentField_Index_initialize();
+  if (ordinal >= 5) {
+    return nil;
+  }
+  return OrgApacheLuceneDocumentField_Index_values_[ordinal];
+}
+
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_Index)
+
+@implementation OrgApacheLuceneDocumentField_Index_$1
 
 - (jboolean)isIndexed {
   return false;
@@ -1358,10 +1447,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_IndexEnum)
   return true;
 }
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgApacheLuceneDocumentField_Index_$1Enum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
+- (void)dealloc {
+  JreCheckFinalize(self, [OrgApacheLuceneDocumentField_Index_$1 class]);
+  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -1370,25 +1458,19 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_IndexEnum)
     { "isAnalyzed", NULL, "Z", 0x1, NULL, NULL },
     { "omitNorms", NULL, "Z", 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentField_Index_$1Enum = { 2, "", "org.apache.lucene.document", "Field$Index", 0xc018, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneDocumentField_Index_$1Enum;
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentField_Index_$1 = { 2, "", "org.apache.lucene.document", "Field$Index", 0xc018, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  return &_OrgApacheLuceneDocumentField_Index_$1;
 }
 
 @end
 
-void OrgApacheLuceneDocumentField_Index_$1Enum_initWithNSString_withInt_(OrgApacheLuceneDocumentField_Index_$1Enum *self, NSString *__name, jint __ordinal) {
-  OrgApacheLuceneDocumentField_IndexEnum_initWithNSString_withInt_(self, __name, __ordinal);
+void OrgApacheLuceneDocumentField_Index_$1_initWithNSString_withInt_(OrgApacheLuceneDocumentField_Index_$1 *self, NSString *__name, jint __ordinal) {
+  OrgApacheLuceneDocumentField_Index_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
-OrgApacheLuceneDocumentField_Index_$1Enum *new_OrgApacheLuceneDocumentField_Index_$1Enum_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  OrgApacheLuceneDocumentField_Index_$1Enum *self = [OrgApacheLuceneDocumentField_Index_$1Enum alloc];
-  OrgApacheLuceneDocumentField_Index_$1Enum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
-}
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_Index_$1)
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_Index_$1Enum)
-
-@implementation OrgApacheLuceneDocumentField_Index_$2Enum
+@implementation OrgApacheLuceneDocumentField_Index_$2
 
 - (jboolean)isIndexed {
   return true;
@@ -1402,10 +1484,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_Index_$1Enum)
   return false;
 }
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgApacheLuceneDocumentField_Index_$2Enum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
+- (void)dealloc {
+  JreCheckFinalize(self, [OrgApacheLuceneDocumentField_Index_$2 class]);
+  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -1414,25 +1495,19 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_Index_$1Enum)
     { "isAnalyzed", NULL, "Z", 0x1, NULL, NULL },
     { "omitNorms", NULL, "Z", 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentField_Index_$2Enum = { 2, "", "org.apache.lucene.document", "Field$Index", 0xc018, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneDocumentField_Index_$2Enum;
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentField_Index_$2 = { 2, "", "org.apache.lucene.document", "Field$Index", 0xc018, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  return &_OrgApacheLuceneDocumentField_Index_$2;
 }
 
 @end
 
-void OrgApacheLuceneDocumentField_Index_$2Enum_initWithNSString_withInt_(OrgApacheLuceneDocumentField_Index_$2Enum *self, NSString *__name, jint __ordinal) {
-  OrgApacheLuceneDocumentField_IndexEnum_initWithNSString_withInt_(self, __name, __ordinal);
+void OrgApacheLuceneDocumentField_Index_$2_initWithNSString_withInt_(OrgApacheLuceneDocumentField_Index_$2 *self, NSString *__name, jint __ordinal) {
+  OrgApacheLuceneDocumentField_Index_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
-OrgApacheLuceneDocumentField_Index_$2Enum *new_OrgApacheLuceneDocumentField_Index_$2Enum_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  OrgApacheLuceneDocumentField_Index_$2Enum *self = [OrgApacheLuceneDocumentField_Index_$2Enum alloc];
-  OrgApacheLuceneDocumentField_Index_$2Enum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
-}
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_Index_$2)
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_Index_$2Enum)
-
-@implementation OrgApacheLuceneDocumentField_Index_$3Enum
+@implementation OrgApacheLuceneDocumentField_Index_$3
 
 - (jboolean)isIndexed {
   return true;
@@ -1446,10 +1521,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_Index_$2Enum)
   return false;
 }
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgApacheLuceneDocumentField_Index_$3Enum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
+- (void)dealloc {
+  JreCheckFinalize(self, [OrgApacheLuceneDocumentField_Index_$3 class]);
+  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -1458,25 +1532,19 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_Index_$2Enum)
     { "isAnalyzed", NULL, "Z", 0x1, NULL, NULL },
     { "omitNorms", NULL, "Z", 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentField_Index_$3Enum = { 2, "", "org.apache.lucene.document", "Field$Index", 0xc018, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneDocumentField_Index_$3Enum;
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentField_Index_$3 = { 2, "", "org.apache.lucene.document", "Field$Index", 0xc018, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  return &_OrgApacheLuceneDocumentField_Index_$3;
 }
 
 @end
 
-void OrgApacheLuceneDocumentField_Index_$3Enum_initWithNSString_withInt_(OrgApacheLuceneDocumentField_Index_$3Enum *self, NSString *__name, jint __ordinal) {
-  OrgApacheLuceneDocumentField_IndexEnum_initWithNSString_withInt_(self, __name, __ordinal);
+void OrgApacheLuceneDocumentField_Index_$3_initWithNSString_withInt_(OrgApacheLuceneDocumentField_Index_$3 *self, NSString *__name, jint __ordinal) {
+  OrgApacheLuceneDocumentField_Index_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
-OrgApacheLuceneDocumentField_Index_$3Enum *new_OrgApacheLuceneDocumentField_Index_$3Enum_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  OrgApacheLuceneDocumentField_Index_$3Enum *self = [OrgApacheLuceneDocumentField_Index_$3Enum alloc];
-  OrgApacheLuceneDocumentField_Index_$3Enum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
-}
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_Index_$3)
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_Index_$3Enum)
-
-@implementation OrgApacheLuceneDocumentField_Index_$4Enum
+@implementation OrgApacheLuceneDocumentField_Index_$4
 
 - (jboolean)isIndexed {
   return true;
@@ -1490,10 +1558,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_Index_$3Enum)
   return true;
 }
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgApacheLuceneDocumentField_Index_$4Enum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
+- (void)dealloc {
+  JreCheckFinalize(self, [OrgApacheLuceneDocumentField_Index_$4 class]);
+  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -1502,25 +1569,19 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_Index_$3Enum)
     { "isAnalyzed", NULL, "Z", 0x1, NULL, NULL },
     { "omitNorms", NULL, "Z", 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentField_Index_$4Enum = { 2, "", "org.apache.lucene.document", "Field$Index", 0xc018, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneDocumentField_Index_$4Enum;
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentField_Index_$4 = { 2, "", "org.apache.lucene.document", "Field$Index", 0xc018, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  return &_OrgApacheLuceneDocumentField_Index_$4;
 }
 
 @end
 
-void OrgApacheLuceneDocumentField_Index_$4Enum_initWithNSString_withInt_(OrgApacheLuceneDocumentField_Index_$4Enum *self, NSString *__name, jint __ordinal) {
-  OrgApacheLuceneDocumentField_IndexEnum_initWithNSString_withInt_(self, __name, __ordinal);
+void OrgApacheLuceneDocumentField_Index_$4_initWithNSString_withInt_(OrgApacheLuceneDocumentField_Index_$4 *self, NSString *__name, jint __ordinal) {
+  OrgApacheLuceneDocumentField_Index_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
-OrgApacheLuceneDocumentField_Index_$4Enum *new_OrgApacheLuceneDocumentField_Index_$4Enum_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  OrgApacheLuceneDocumentField_Index_$4Enum *self = [OrgApacheLuceneDocumentField_Index_$4Enum alloc];
-  OrgApacheLuceneDocumentField_Index_$4Enum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
-}
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_Index_$4)
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_Index_$4Enum)
-
-@implementation OrgApacheLuceneDocumentField_Index_$5Enum
+@implementation OrgApacheLuceneDocumentField_Index_$5
 
 - (jboolean)isIndexed {
   return true;
@@ -1534,10 +1595,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_Index_$4Enum)
   return true;
 }
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgApacheLuceneDocumentField_Index_$5Enum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
+- (void)dealloc {
+  JreCheckFinalize(self, [OrgApacheLuceneDocumentField_Index_$5 class]);
+  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -1546,34 +1606,48 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_Index_$4Enum)
     { "isAnalyzed", NULL, "Z", 0x1, NULL, NULL },
     { "omitNorms", NULL, "Z", 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentField_Index_$5Enum = { 2, "", "org.apache.lucene.document", "Field$Index", 0xc018, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneDocumentField_Index_$5Enum;
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentField_Index_$5 = { 2, "", "org.apache.lucene.document", "Field$Index", 0xc018, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  return &_OrgApacheLuceneDocumentField_Index_$5;
 }
 
 @end
 
-void OrgApacheLuceneDocumentField_Index_$5Enum_initWithNSString_withInt_(OrgApacheLuceneDocumentField_Index_$5Enum *self, NSString *__name, jint __ordinal) {
-  OrgApacheLuceneDocumentField_IndexEnum_initWithNSString_withInt_(self, __name, __ordinal);
+void OrgApacheLuceneDocumentField_Index_$5_initWithNSString_withInt_(OrgApacheLuceneDocumentField_Index_$5 *self, NSString *__name, jint __ordinal) {
+  OrgApacheLuceneDocumentField_Index_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
-OrgApacheLuceneDocumentField_Index_$5Enum *new_OrgApacheLuceneDocumentField_Index_$5Enum_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  OrgApacheLuceneDocumentField_Index_$5Enum *self = [OrgApacheLuceneDocumentField_Index_$5Enum alloc];
-  OrgApacheLuceneDocumentField_Index_$5Enum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_Index_$5)
+
+J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneDocumentField_TermVector)
+
+OrgApacheLuceneDocumentField_TermVector *OrgApacheLuceneDocumentField_TermVector_values_[5];
+
+@implementation OrgApacheLuceneDocumentField_TermVector
+
++ (OrgApacheLuceneDocumentField_TermVector *)NO_ {
+  return JreEnum(OrgApacheLuceneDocumentField_TermVector, NO);
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_Index_$5Enum)
++ (OrgApacheLuceneDocumentField_TermVector *)YES_ {
+  return JreEnum(OrgApacheLuceneDocumentField_TermVector, YES);
+}
 
-J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneDocumentField_TermVectorEnum)
++ (OrgApacheLuceneDocumentField_TermVector *)WITH_POSITIONS {
+  return JreEnum(OrgApacheLuceneDocumentField_TermVector, WITH_POSITIONS);
+}
 
-OrgApacheLuceneDocumentField_TermVectorEnum *OrgApacheLuceneDocumentField_TermVectorEnum_values_[5];
++ (OrgApacheLuceneDocumentField_TermVector *)WITH_OFFSETS {
+  return JreEnum(OrgApacheLuceneDocumentField_TermVector, WITH_OFFSETS);
+}
 
-@implementation OrgApacheLuceneDocumentField_TermVectorEnum
++ (OrgApacheLuceneDocumentField_TermVector *)WITH_POSITIONS_OFFSETS {
+  return JreEnum(OrgApacheLuceneDocumentField_TermVector, WITH_POSITIONS_OFFSETS);
+}
 
-+ (OrgApacheLuceneDocumentField_TermVectorEnum *)toTermVectorWithBoolean:(jboolean)stored
-                                                             withBoolean:(jboolean)withOffsets
-                                                             withBoolean:(jboolean)withPositions {
-  return OrgApacheLuceneDocumentField_TermVectorEnum_toTermVectorWithBoolean_withBoolean_withBoolean_(stored, withOffsets, withPositions);
++ (OrgApacheLuceneDocumentField_TermVector *)toTermVectorWithBoolean:(jboolean)stored
+                                                         withBoolean:(jboolean)withOffsets
+                                                         withBoolean:(jboolean)withPositions {
+  return OrgApacheLuceneDocumentField_TermVector_toTermVectorWithBoolean_withBoolean_withBoolean_(stored, withOffsets, withPositions);
 }
 
 - (jboolean)isStored {
@@ -1594,54 +1668,53 @@ OrgApacheLuceneDocumentField_TermVectorEnum *OrgApacheLuceneDocumentField_TermVe
   return 0;
 }
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgApacheLuceneDocumentField_TermVectorEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
-}
-
-IOSObjectArray *OrgApacheLuceneDocumentField_TermVectorEnum_values() {
-  OrgApacheLuceneDocumentField_TermVectorEnum_initialize();
-  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneDocumentField_TermVectorEnum_values_ count:5 type:OrgApacheLuceneDocumentField_TermVectorEnum_class_()];
++ (IOSObjectArray *)__annotations {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)values {
-  return OrgApacheLuceneDocumentField_TermVectorEnum_values();
+  return OrgApacheLuceneDocumentField_TermVector_values();
 }
 
-+ (OrgApacheLuceneDocumentField_TermVectorEnum *)valueOfWithNSString:(NSString *)name {
-  return OrgApacheLuceneDocumentField_TermVectorEnum_valueOfWithNSString_(name);
++ (OrgApacheLuceneDocumentField_TermVector *)valueOfWithNSString:(NSString *)name {
+  return OrgApacheLuceneDocumentField_TermVector_valueOfWithNSString_(name);
 }
 
-OrgApacheLuceneDocumentField_TermVectorEnum *OrgApacheLuceneDocumentField_TermVectorEnum_valueOfWithNSString_(NSString *name) {
-  OrgApacheLuceneDocumentField_TermVectorEnum_initialize();
-  for (int i = 0; i < 5; i++) {
-    OrgApacheLuceneDocumentField_TermVectorEnum *e = OrgApacheLuceneDocumentField_TermVectorEnum_values_[i];
-    if ([name isEqual:[e name]]) {
-      return e;
-    }
-  }
-  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
-  return nil;
+- (OrgApacheLuceneDocumentField_TermVector_Enum)toNSEnum {
+  return (OrgApacheLuceneDocumentField_TermVector_Enum)[self ordinal];
 }
 
 - (id)copyWithZone:(NSZone *)zone {
-  return [self retain];
+  return self;
 }
 
 + (void)initialize {
-  if (self == [OrgApacheLuceneDocumentField_TermVectorEnum class]) {
-    OrgApacheLuceneDocumentField_TermVectorEnum_NO = new_OrgApacheLuceneDocumentField_TermVector_$1Enum_initWithNSString_withInt_(@"NO", 0);
-    OrgApacheLuceneDocumentField_TermVectorEnum_YES = new_OrgApacheLuceneDocumentField_TermVector_$2Enum_initWithNSString_withInt_(@"YES", 1);
-    OrgApacheLuceneDocumentField_TermVectorEnum_WITH_POSITIONS = new_OrgApacheLuceneDocumentField_TermVector_$3Enum_initWithNSString_withInt_(@"WITH_POSITIONS", 2);
-    OrgApacheLuceneDocumentField_TermVectorEnum_WITH_OFFSETS = new_OrgApacheLuceneDocumentField_TermVector_$4Enum_initWithNSString_withInt_(@"WITH_OFFSETS", 3);
-    OrgApacheLuceneDocumentField_TermVectorEnum_WITH_POSITIONS_OFFSETS = new_OrgApacheLuceneDocumentField_TermVector_$5Enum_initWithNSString_withInt_(@"WITH_POSITIONS_OFFSETS", 4);
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneDocumentField_TermVectorEnum)
+  if (self == [OrgApacheLuceneDocumentField_TermVector class]) {
+    size_t allocSize = 0;
+    size_t objSize_NO = class_getInstanceSize([OrgApacheLuceneDocumentField_TermVector_$1 class]);
+    allocSize += objSize_NO;
+    size_t objSize_YES = class_getInstanceSize([OrgApacheLuceneDocumentField_TermVector_$2 class]);
+    allocSize += objSize_YES;
+    size_t objSize_WITH_POSITIONS = class_getInstanceSize([OrgApacheLuceneDocumentField_TermVector_$3 class]);
+    allocSize += objSize_WITH_POSITIONS;
+    size_t objSize_WITH_OFFSETS = class_getInstanceSize([OrgApacheLuceneDocumentField_TermVector_$4 class]);
+    allocSize += objSize_WITH_OFFSETS;
+    size_t objSize_WITH_POSITIONS_OFFSETS = class_getInstanceSize([OrgApacheLuceneDocumentField_TermVector_$5 class]);
+    allocSize += objSize_WITH_POSITIONS_OFFSETS;
+    uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
+    id e;
+    (JreEnum(OrgApacheLuceneDocumentField_TermVector, NO) = e = objc_constructInstance([OrgApacheLuceneDocumentField_TermVector_$1 class], (void *)ptr), ptr += objSize_NO);
+    OrgApacheLuceneDocumentField_TermVector_$1_initWithNSString_withInt_(e, @"NO", 0);
+    (JreEnum(OrgApacheLuceneDocumentField_TermVector, YES) = e = objc_constructInstance([OrgApacheLuceneDocumentField_TermVector_$2 class], (void *)ptr), ptr += objSize_YES);
+    OrgApacheLuceneDocumentField_TermVector_$2_initWithNSString_withInt_(e, @"YES", 1);
+    (JreEnum(OrgApacheLuceneDocumentField_TermVector, WITH_POSITIONS) = e = objc_constructInstance([OrgApacheLuceneDocumentField_TermVector_$3 class], (void *)ptr), ptr += objSize_WITH_POSITIONS);
+    OrgApacheLuceneDocumentField_TermVector_$3_initWithNSString_withInt_(e, @"WITH_POSITIONS", 2);
+    (JreEnum(OrgApacheLuceneDocumentField_TermVector, WITH_OFFSETS) = e = objc_constructInstance([OrgApacheLuceneDocumentField_TermVector_$4 class], (void *)ptr), ptr += objSize_WITH_OFFSETS);
+    OrgApacheLuceneDocumentField_TermVector_$4_initWithNSString_withInt_(e, @"WITH_OFFSETS", 3);
+    (JreEnum(OrgApacheLuceneDocumentField_TermVector, WITH_POSITIONS_OFFSETS) = e = objc_constructInstance([OrgApacheLuceneDocumentField_TermVector_$5 class], (void *)ptr), ptr += objSize_WITH_POSITIONS_OFFSETS);
+    OrgApacheLuceneDocumentField_TermVector_$5_initWithNSString_withInt_(e, @"WITH_POSITIONS_OFFSETS", 4);
+    J2OBJC_SET_INITIALIZED(OrgApacheLuceneDocumentField_TermVector)
   }
-}
-
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -1652,43 +1725,68 @@ OrgApacheLuceneDocumentField_TermVectorEnum *OrgApacheLuceneDocumentField_TermVe
     { "withOffsets", NULL, "Z", 0x401, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "NO", "NO", 0x4019, "Lorg.apache.lucene.document.Field$TermVector;", &OrgApacheLuceneDocumentField_TermVectorEnum_NO, NULL, .constantValue.asLong = 0 },
-    { "YES", "YES", 0x4019, "Lorg.apache.lucene.document.Field$TermVector;", &OrgApacheLuceneDocumentField_TermVectorEnum_YES, NULL, .constantValue.asLong = 0 },
-    { "WITH_POSITIONS", "WITH_POSITIONS", 0x4019, "Lorg.apache.lucene.document.Field$TermVector;", &OrgApacheLuceneDocumentField_TermVectorEnum_WITH_POSITIONS, NULL, .constantValue.asLong = 0 },
-    { "WITH_OFFSETS", "WITH_OFFSETS", 0x4019, "Lorg.apache.lucene.document.Field$TermVector;", &OrgApacheLuceneDocumentField_TermVectorEnum_WITH_OFFSETS, NULL, .constantValue.asLong = 0 },
-    { "WITH_POSITIONS_OFFSETS", "WITH_POSITIONS_OFFSETS", 0x4019, "Lorg.apache.lucene.document.Field$TermVector;", &OrgApacheLuceneDocumentField_TermVectorEnum_WITH_POSITIONS_OFFSETS, NULL, .constantValue.asLong = 0 },
+    { "NO", "NO", 0x4019, "Lorg.apache.lucene.document.Field$TermVector;", &JreEnum(OrgApacheLuceneDocumentField_TermVector, NO), NULL, .constantValue.asLong = 0 },
+    { "YES", "YES", 0x4019, "Lorg.apache.lucene.document.Field$TermVector;", &JreEnum(OrgApacheLuceneDocumentField_TermVector, YES), NULL, .constantValue.asLong = 0 },
+    { "WITH_POSITIONS", "WITH_POSITIONS", 0x4019, "Lorg.apache.lucene.document.Field$TermVector;", &JreEnum(OrgApacheLuceneDocumentField_TermVector, WITH_POSITIONS), NULL, .constantValue.asLong = 0 },
+    { "WITH_OFFSETS", "WITH_OFFSETS", 0x4019, "Lorg.apache.lucene.document.Field$TermVector;", &JreEnum(OrgApacheLuceneDocumentField_TermVector, WITH_OFFSETS), NULL, .constantValue.asLong = 0 },
+    { "WITH_POSITIONS_OFFSETS", "WITH_POSITIONS_OFFSETS", 0x4019, "Lorg.apache.lucene.document.Field$TermVector;", &JreEnum(OrgApacheLuceneDocumentField_TermVector, WITH_POSITIONS_OFFSETS), NULL, .constantValue.asLong = 0 },
   };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.document.Field$TermVector;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentField_TermVectorEnum = { 2, "TermVector", "org.apache.lucene.document", "Field", 0x4409, 4, methods, 5, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/document/Field$TermVector;>;" };
-  return &_OrgApacheLuceneDocumentField_TermVectorEnum;
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentField_TermVector = { 2, "TermVector", "org.apache.lucene.document", "Field", 0x4409, 4, methods, 5, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/document/Field$TermVector;>;" };
+  return &_OrgApacheLuceneDocumentField_TermVector;
 }
 
 @end
 
-OrgApacheLuceneDocumentField_TermVectorEnum *OrgApacheLuceneDocumentField_TermVectorEnum_toTermVectorWithBoolean_withBoolean_withBoolean_(jboolean stored, jboolean withOffsets, jboolean withPositions) {
-  OrgApacheLuceneDocumentField_TermVectorEnum_initialize();
+OrgApacheLuceneDocumentField_TermVector *OrgApacheLuceneDocumentField_TermVector_toTermVectorWithBoolean_withBoolean_withBoolean_(jboolean stored, jboolean withOffsets, jboolean withPositions) {
+  OrgApacheLuceneDocumentField_TermVector_initialize();
   if (!stored) {
-    return OrgApacheLuceneDocumentField_TermVectorEnum_NO;
+    return JreEnum(OrgApacheLuceneDocumentField_TermVector, NO);
   }
   if (withOffsets) {
     if (withPositions) {
-      return OrgApacheLuceneDocumentField_TermVectorEnum_WITH_POSITIONS_OFFSETS;
+      return JreEnum(OrgApacheLuceneDocumentField_TermVector, WITH_POSITIONS_OFFSETS);
     }
-    return OrgApacheLuceneDocumentField_TermVectorEnum_WITH_OFFSETS;
+    return JreEnum(OrgApacheLuceneDocumentField_TermVector, WITH_OFFSETS);
   }
   if (withPositions) {
-    return OrgApacheLuceneDocumentField_TermVectorEnum_WITH_POSITIONS;
+    return JreEnum(OrgApacheLuceneDocumentField_TermVector, WITH_POSITIONS);
   }
-  return OrgApacheLuceneDocumentField_TermVectorEnum_YES;
+  return JreEnum(OrgApacheLuceneDocumentField_TermVector, YES);
 }
 
-void OrgApacheLuceneDocumentField_TermVectorEnum_initWithNSString_withInt_(OrgApacheLuceneDocumentField_TermVectorEnum *self, NSString *__name, jint __ordinal) {
+void OrgApacheLuceneDocumentField_TermVector_initWithNSString_withInt_(OrgApacheLuceneDocumentField_TermVector *self, NSString *__name, jint __ordinal) {
   JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_TermVectorEnum)
+IOSObjectArray *OrgApacheLuceneDocumentField_TermVector_values() {
+  OrgApacheLuceneDocumentField_TermVector_initialize();
+  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneDocumentField_TermVector_values_ count:5 type:OrgApacheLuceneDocumentField_TermVector_class_()];
+}
 
-@implementation OrgApacheLuceneDocumentField_TermVector_$1Enum
+OrgApacheLuceneDocumentField_TermVector *OrgApacheLuceneDocumentField_TermVector_valueOfWithNSString_(NSString *name) {
+  OrgApacheLuceneDocumentField_TermVector_initialize();
+  for (int i = 0; i < 5; i++) {
+    OrgApacheLuceneDocumentField_TermVector *e = OrgApacheLuceneDocumentField_TermVector_values_[i];
+    if ([name isEqual:[e name]]) {
+      return e;
+    }
+  }
+  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
+  return nil;
+}
+
+OrgApacheLuceneDocumentField_TermVector *OrgApacheLuceneDocumentField_TermVector_fromOrdinal(NSUInteger ordinal) {
+  OrgApacheLuceneDocumentField_TermVector_initialize();
+  if (ordinal >= 5) {
+    return nil;
+  }
+  return OrgApacheLuceneDocumentField_TermVector_values_[ordinal];
+}
+
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_TermVector)
+
+@implementation OrgApacheLuceneDocumentField_TermVector_$1
 
 - (jboolean)isStored {
   return false;
@@ -1702,10 +1800,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_TermVectorEnum)
   return false;
 }
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgApacheLuceneDocumentField_TermVector_$1Enum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
+- (void)dealloc {
+  JreCheckFinalize(self, [OrgApacheLuceneDocumentField_TermVector_$1 class]);
+  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -1714,25 +1811,19 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_TermVectorEnum)
     { "withPositions", NULL, "Z", 0x1, NULL, NULL },
     { "withOffsets", NULL, "Z", 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentField_TermVector_$1Enum = { 2, "", "org.apache.lucene.document", "Field$TermVector", 0xc018, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneDocumentField_TermVector_$1Enum;
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentField_TermVector_$1 = { 2, "", "org.apache.lucene.document", "Field$TermVector", 0xc018, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  return &_OrgApacheLuceneDocumentField_TermVector_$1;
 }
 
 @end
 
-void OrgApacheLuceneDocumentField_TermVector_$1Enum_initWithNSString_withInt_(OrgApacheLuceneDocumentField_TermVector_$1Enum *self, NSString *__name, jint __ordinal) {
-  OrgApacheLuceneDocumentField_TermVectorEnum_initWithNSString_withInt_(self, __name, __ordinal);
+void OrgApacheLuceneDocumentField_TermVector_$1_initWithNSString_withInt_(OrgApacheLuceneDocumentField_TermVector_$1 *self, NSString *__name, jint __ordinal) {
+  OrgApacheLuceneDocumentField_TermVector_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
-OrgApacheLuceneDocumentField_TermVector_$1Enum *new_OrgApacheLuceneDocumentField_TermVector_$1Enum_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  OrgApacheLuceneDocumentField_TermVector_$1Enum *self = [OrgApacheLuceneDocumentField_TermVector_$1Enum alloc];
-  OrgApacheLuceneDocumentField_TermVector_$1Enum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
-}
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_TermVector_$1)
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_TermVector_$1Enum)
-
-@implementation OrgApacheLuceneDocumentField_TermVector_$2Enum
+@implementation OrgApacheLuceneDocumentField_TermVector_$2
 
 - (jboolean)isStored {
   return true;
@@ -1746,10 +1837,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_TermVector_$1Enum)
   return false;
 }
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgApacheLuceneDocumentField_TermVector_$2Enum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
+- (void)dealloc {
+  JreCheckFinalize(self, [OrgApacheLuceneDocumentField_TermVector_$2 class]);
+  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -1758,25 +1848,19 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_TermVector_$1Enum)
     { "withPositions", NULL, "Z", 0x1, NULL, NULL },
     { "withOffsets", NULL, "Z", 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentField_TermVector_$2Enum = { 2, "", "org.apache.lucene.document", "Field$TermVector", 0xc018, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneDocumentField_TermVector_$2Enum;
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentField_TermVector_$2 = { 2, "", "org.apache.lucene.document", "Field$TermVector", 0xc018, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  return &_OrgApacheLuceneDocumentField_TermVector_$2;
 }
 
 @end
 
-void OrgApacheLuceneDocumentField_TermVector_$2Enum_initWithNSString_withInt_(OrgApacheLuceneDocumentField_TermVector_$2Enum *self, NSString *__name, jint __ordinal) {
-  OrgApacheLuceneDocumentField_TermVectorEnum_initWithNSString_withInt_(self, __name, __ordinal);
+void OrgApacheLuceneDocumentField_TermVector_$2_initWithNSString_withInt_(OrgApacheLuceneDocumentField_TermVector_$2 *self, NSString *__name, jint __ordinal) {
+  OrgApacheLuceneDocumentField_TermVector_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
-OrgApacheLuceneDocumentField_TermVector_$2Enum *new_OrgApacheLuceneDocumentField_TermVector_$2Enum_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  OrgApacheLuceneDocumentField_TermVector_$2Enum *self = [OrgApacheLuceneDocumentField_TermVector_$2Enum alloc];
-  OrgApacheLuceneDocumentField_TermVector_$2Enum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
-}
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_TermVector_$2)
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_TermVector_$2Enum)
-
-@implementation OrgApacheLuceneDocumentField_TermVector_$3Enum
+@implementation OrgApacheLuceneDocumentField_TermVector_$3
 
 - (jboolean)isStored {
   return true;
@@ -1790,10 +1874,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_TermVector_$2Enum)
   return false;
 }
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgApacheLuceneDocumentField_TermVector_$3Enum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
+- (void)dealloc {
+  JreCheckFinalize(self, [OrgApacheLuceneDocumentField_TermVector_$3 class]);
+  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -1802,25 +1885,19 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_TermVector_$2Enum)
     { "withPositions", NULL, "Z", 0x1, NULL, NULL },
     { "withOffsets", NULL, "Z", 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentField_TermVector_$3Enum = { 2, "", "org.apache.lucene.document", "Field$TermVector", 0xc018, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneDocumentField_TermVector_$3Enum;
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentField_TermVector_$3 = { 2, "", "org.apache.lucene.document", "Field$TermVector", 0xc018, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  return &_OrgApacheLuceneDocumentField_TermVector_$3;
 }
 
 @end
 
-void OrgApacheLuceneDocumentField_TermVector_$3Enum_initWithNSString_withInt_(OrgApacheLuceneDocumentField_TermVector_$3Enum *self, NSString *__name, jint __ordinal) {
-  OrgApacheLuceneDocumentField_TermVectorEnum_initWithNSString_withInt_(self, __name, __ordinal);
+void OrgApacheLuceneDocumentField_TermVector_$3_initWithNSString_withInt_(OrgApacheLuceneDocumentField_TermVector_$3 *self, NSString *__name, jint __ordinal) {
+  OrgApacheLuceneDocumentField_TermVector_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
-OrgApacheLuceneDocumentField_TermVector_$3Enum *new_OrgApacheLuceneDocumentField_TermVector_$3Enum_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  OrgApacheLuceneDocumentField_TermVector_$3Enum *self = [OrgApacheLuceneDocumentField_TermVector_$3Enum alloc];
-  OrgApacheLuceneDocumentField_TermVector_$3Enum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
-}
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_TermVector_$3)
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_TermVector_$3Enum)
-
-@implementation OrgApacheLuceneDocumentField_TermVector_$4Enum
+@implementation OrgApacheLuceneDocumentField_TermVector_$4
 
 - (jboolean)isStored {
   return true;
@@ -1834,10 +1911,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_TermVector_$3Enum)
   return true;
 }
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgApacheLuceneDocumentField_TermVector_$4Enum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
+- (void)dealloc {
+  JreCheckFinalize(self, [OrgApacheLuceneDocumentField_TermVector_$4 class]);
+  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -1846,25 +1922,19 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_TermVector_$3Enum)
     { "withPositions", NULL, "Z", 0x1, NULL, NULL },
     { "withOffsets", NULL, "Z", 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentField_TermVector_$4Enum = { 2, "", "org.apache.lucene.document", "Field$TermVector", 0xc018, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneDocumentField_TermVector_$4Enum;
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentField_TermVector_$4 = { 2, "", "org.apache.lucene.document", "Field$TermVector", 0xc018, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  return &_OrgApacheLuceneDocumentField_TermVector_$4;
 }
 
 @end
 
-void OrgApacheLuceneDocumentField_TermVector_$4Enum_initWithNSString_withInt_(OrgApacheLuceneDocumentField_TermVector_$4Enum *self, NSString *__name, jint __ordinal) {
-  OrgApacheLuceneDocumentField_TermVectorEnum_initWithNSString_withInt_(self, __name, __ordinal);
+void OrgApacheLuceneDocumentField_TermVector_$4_initWithNSString_withInt_(OrgApacheLuceneDocumentField_TermVector_$4 *self, NSString *__name, jint __ordinal) {
+  OrgApacheLuceneDocumentField_TermVector_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
-OrgApacheLuceneDocumentField_TermVector_$4Enum *new_OrgApacheLuceneDocumentField_TermVector_$4Enum_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  OrgApacheLuceneDocumentField_TermVector_$4Enum *self = [OrgApacheLuceneDocumentField_TermVector_$4Enum alloc];
-  OrgApacheLuceneDocumentField_TermVector_$4Enum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
-}
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_TermVector_$4)
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_TermVector_$4Enum)
-
-@implementation OrgApacheLuceneDocumentField_TermVector_$5Enum
+@implementation OrgApacheLuceneDocumentField_TermVector_$5
 
 - (jboolean)isStored {
   return true;
@@ -1878,10 +1948,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_TermVector_$4Enum)
   return true;
 }
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgApacheLuceneDocumentField_TermVector_$5Enum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
+- (void)dealloc {
+  JreCheckFinalize(self, [OrgApacheLuceneDocumentField_TermVector_$5 class]);
+  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -1890,20 +1959,14 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_TermVector_$4Enum)
     { "withPositions", NULL, "Z", 0x1, NULL, NULL },
     { "withOffsets", NULL, "Z", 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentField_TermVector_$5Enum = { 2, "", "org.apache.lucene.document", "Field$TermVector", 0xc018, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneDocumentField_TermVector_$5Enum;
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentField_TermVector_$5 = { 2, "", "org.apache.lucene.document", "Field$TermVector", 0xc018, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  return &_OrgApacheLuceneDocumentField_TermVector_$5;
 }
 
 @end
 
-void OrgApacheLuceneDocumentField_TermVector_$5Enum_initWithNSString_withInt_(OrgApacheLuceneDocumentField_TermVector_$5Enum *self, NSString *__name, jint __ordinal) {
-  OrgApacheLuceneDocumentField_TermVectorEnum_initWithNSString_withInt_(self, __name, __ordinal);
+void OrgApacheLuceneDocumentField_TermVector_$5_initWithNSString_withInt_(OrgApacheLuceneDocumentField_TermVector_$5 *self, NSString *__name, jint __ordinal) {
+  OrgApacheLuceneDocumentField_TermVector_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
-OrgApacheLuceneDocumentField_TermVector_$5Enum *new_OrgApacheLuceneDocumentField_TermVector_$5Enum_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  OrgApacheLuceneDocumentField_TermVector_$5Enum *self = [OrgApacheLuceneDocumentField_TermVector_$5Enum alloc];
-  OrgApacheLuceneDocumentField_TermVector_$5Enum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_TermVector_$5Enum)
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentField_TermVector_$5)

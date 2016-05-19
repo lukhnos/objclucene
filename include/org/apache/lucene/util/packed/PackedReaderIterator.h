@@ -5,31 +5,31 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilPackedPackedReaderIterator_INCLUDE_ALL")
-#if OrgApacheLuceneUtilPackedPackedReaderIterator_RESTRICT
-#define OrgApacheLuceneUtilPackedPackedReaderIterator_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedPackedReaderIterator")
+#ifdef RESTRICT_OrgApacheLuceneUtilPackedPackedReaderIterator
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackedPackedReaderIterator 0
 #else
-#define OrgApacheLuceneUtilPackedPackedReaderIterator_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackedPackedReaderIterator 1
 #endif
-#undef OrgApacheLuceneUtilPackedPackedReaderIterator_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilPackedPackedReaderIterator
 
-#if !defined (_OrgApacheLuceneUtilPackedPackedReaderIterator_) && (OrgApacheLuceneUtilPackedPackedReaderIterator_INCLUDE_ALL || OrgApacheLuceneUtilPackedPackedReaderIterator_INCLUDE)
-#define _OrgApacheLuceneUtilPackedPackedReaderIterator_
+#if !defined (OrgApacheLuceneUtilPackedPackedReaderIterator_) && (INCLUDE_ALL_OrgApacheLuceneUtilPackedPackedReaderIterator || defined(INCLUDE_OrgApacheLuceneUtilPackedPackedReaderIterator))
+#define OrgApacheLuceneUtilPackedPackedReaderIterator_
 
-#define OrgApacheLuceneUtilPackedPackedInts_RESTRICT 1
-#define OrgApacheLuceneUtilPackedPackedInts_ReaderIteratorImpl_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilPackedPackedInts 1
+#define INCLUDE_OrgApacheLuceneUtilPackedPackedInts_ReaderIteratorImpl 1
 #include "org/apache/lucene/util/packed/PackedInts.h"
 
 @class IOSByteArray;
 @class OrgApacheLuceneStoreDataInput;
 @class OrgApacheLuceneUtilLongsRef;
 @class OrgApacheLuceneUtilPackedBulkOperation;
-@class OrgApacheLuceneUtilPackedPackedInts_FormatEnum;
+@class OrgApacheLuceneUtilPackedPackedInts_Format;
 
 @interface OrgApacheLuceneUtilPackedPackedReaderIterator : OrgApacheLuceneUtilPackedPackedInts_ReaderIteratorImpl {
  @public
   jint packedIntsVersion_;
-  OrgApacheLuceneUtilPackedPackedInts_FormatEnum *format_;
+  OrgApacheLuceneUtilPackedPackedInts_Format *format_;
   OrgApacheLuceneUtilPackedBulkOperation *bulkOperation_;
   IOSByteArray *nextBlocks_;
   OrgApacheLuceneUtilLongsRef *nextValues_;
@@ -45,28 +45,30 @@
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum:(OrgApacheLuceneUtilPackedPackedInts_FormatEnum *)format
-                                                               withInt:(jint)packedIntsVersion
-                                                               withInt:(jint)valueCount
-                                                               withInt:(jint)bitsPerValue
-                                     withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
-                                                               withInt:(jint)mem;
+- (instancetype)initWithOrgApacheLuceneUtilPackedPackedInts_Format:(OrgApacheLuceneUtilPackedPackedInts_Format *)format
+                                                           withInt:(jint)packedIntsVersion
+                                                           withInt:(jint)valueCount
+                                                           withInt:(jint)bitsPerValue
+                                 withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
+                                                           withInt:(jint)mem;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilPackedPackedReaderIterator)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedPackedReaderIterator, format_, OrgApacheLuceneUtilPackedPackedInts_FormatEnum *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedPackedReaderIterator, format_, OrgApacheLuceneUtilPackedPackedInts_Format *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedPackedReaderIterator, bulkOperation_, OrgApacheLuceneUtilPackedBulkOperation *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedPackedReaderIterator, nextBlocks_, IOSByteArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedPackedReaderIterator, nextValues_, OrgApacheLuceneUtilLongsRef *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedPackedReaderIterator_initWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_withInt_withOrgApacheLuceneStoreDataInput_withInt_(OrgApacheLuceneUtilPackedPackedReaderIterator *self, OrgApacheLuceneUtilPackedPackedInts_FormatEnum *format, jint packedIntsVersion, jint valueCount, jint bitsPerValue, OrgApacheLuceneStoreDataInput *inArg, jint mem);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedPackedReaderIterator_initWithOrgApacheLuceneUtilPackedPackedInts_Format_withInt_withInt_withInt_withOrgApacheLuceneStoreDataInput_withInt_(OrgApacheLuceneUtilPackedPackedReaderIterator *self, OrgApacheLuceneUtilPackedPackedInts_Format *format, jint packedIntsVersion, jint valueCount, jint bitsPerValue, OrgApacheLuceneStoreDataInput *inArg, jint mem);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedReaderIterator *new_OrgApacheLuceneUtilPackedPackedReaderIterator_initWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_withInt_withOrgApacheLuceneStoreDataInput_withInt_(OrgApacheLuceneUtilPackedPackedInts_FormatEnum *format, jint packedIntsVersion, jint valueCount, jint bitsPerValue, OrgApacheLuceneStoreDataInput *inArg, jint mem) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedReaderIterator *new_OrgApacheLuceneUtilPackedPackedReaderIterator_initWithOrgApacheLuceneUtilPackedPackedInts_Format_withInt_withInt_withInt_withOrgApacheLuceneStoreDataInput_withInt_(OrgApacheLuceneUtilPackedPackedInts_Format *format, jint packedIntsVersion, jint valueCount, jint bitsPerValue, OrgApacheLuceneStoreDataInput *inArg, jint mem) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedReaderIterator *create_OrgApacheLuceneUtilPackedPackedReaderIterator_initWithOrgApacheLuceneUtilPackedPackedInts_Format_withInt_withInt_withInt_withOrgApacheLuceneStoreDataInput_withInt_(OrgApacheLuceneUtilPackedPackedInts_Format *format, jint packedIntsVersion, jint valueCount, jint bitsPerValue, OrgApacheLuceneStoreDataInput *inArg, jint mem);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedReaderIterator)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilPackedPackedReaderIterator_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackedPackedReaderIterator")

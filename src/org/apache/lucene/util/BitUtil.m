@@ -3,11 +3,12 @@
 //  source: ./core/src/java/org/apache/lucene/util/BitUtil.java
 //
 
-#include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/Long.h"
+#include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/util/BitUtil.h"
 
 @interface OrgApacheLuceneUtilBitUtil ()
@@ -16,21 +17,27 @@
 
 @end
 
-static IOSByteArray *OrgApacheLuceneUtilBitUtil_BYTE_COUNTS_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilBitUtil, BYTE_COUNTS_, IOSByteArray *)
+inline IOSByteArray *OrgApacheLuceneUtilBitUtil_get_BYTE_COUNTS();
+static IOSByteArray *OrgApacheLuceneUtilBitUtil_BYTE_COUNTS;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilBitUtil, BYTE_COUNTS, IOSByteArray *)
 
-static IOSIntArray *OrgApacheLuceneUtilBitUtil_BIT_LISTS_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilBitUtil, BIT_LISTS_, IOSIntArray *)
+inline IOSIntArray *OrgApacheLuceneUtilBitUtil_get_BIT_LISTS();
+static IOSIntArray *OrgApacheLuceneUtilBitUtil_BIT_LISTS;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilBitUtil, BIT_LISTS, IOSIntArray *)
 
-static IOSLongArray *OrgApacheLuceneUtilBitUtil_MAGIC_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilBitUtil, MAGIC_, IOSLongArray *)
+inline IOSLongArray *OrgApacheLuceneUtilBitUtil_get_MAGIC();
+static IOSLongArray *OrgApacheLuceneUtilBitUtil_MAGIC;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilBitUtil, MAGIC, IOSLongArray *)
 
-static IOSShortArray *OrgApacheLuceneUtilBitUtil_SHIFT_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilBitUtil, SHIFT_, IOSShortArray *)
+inline IOSShortArray *OrgApacheLuceneUtilBitUtil_get_SHIFT();
+static IOSShortArray *OrgApacheLuceneUtilBitUtil_SHIFT;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilBitUtil, SHIFT, IOSShortArray *)
 
 __attribute__((unused)) static void OrgApacheLuceneUtilBitUtil_init(OrgApacheLuceneUtilBitUtil *self);
 
 __attribute__((unused)) static OrgApacheLuceneUtilBitUtil *new_OrgApacheLuceneUtilBitUtil_init() NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneUtilBitUtil *create_OrgApacheLuceneUtilBitUtil_init();
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilBitUtil)
 
@@ -122,22 +129,22 @@ J2OBJC_IGNORE_DESIGNATED_END
   return OrgApacheLuceneUtilBitUtil_zigZagDecodeWithLong_(l);
 }
 
-+ (void)initialize {
-  if (self == [OrgApacheLuceneUtilBitUtil class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilBitUtil_BYTE_COUNTS_, [IOSByteArray newArrayWithBytes:(jbyte[]){ 0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4, 1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5, 1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5, 2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6, 1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5, 2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6, 2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6, 3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7, 1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5, 2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6, 2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6, 3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7, 2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6, 3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7, 3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7, 4, 5, 5, 6, 5, 6, 6, 7, 5, 6, 6, 7, 6, 7, 7, 8 } count:256]);
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilBitUtil_BIT_LISTS_, [IOSIntArray newArrayWithInts:(jint[]){ (jint) 0x0, (jint) 0x1, (jint) 0x2, (jint) 0x21, (jint) 0x3, (jint) 0x31, (jint) 0x32, (jint) 0x321, (jint) 0x4, (jint) 0x41, (jint) 0x42, (jint) 0x421, (jint) 0x43, (jint) 0x431, (jint) 0x432, (jint) 0x4321, (jint) 0x5, (jint) 0x51, (jint) 0x52, (jint) 0x521, (jint) 0x53, (jint) 0x531, (jint) 0x532, (jint) 0x5321, (jint) 0x54, (jint) 0x541, (jint) 0x542, (jint) 0x5421, (jint) 0x543, (jint) 0x5431, (jint) 0x5432, (jint) 0x54321, (jint) 0x6, (jint) 0x61, (jint) 0x62, (jint) 0x621, (jint) 0x63, (jint) 0x631, (jint) 0x632, (jint) 0x6321, (jint) 0x64, (jint) 0x641, (jint) 0x642, (jint) 0x6421, (jint) 0x643, (jint) 0x6431, (jint) 0x6432, (jint) 0x64321, (jint) 0x65, (jint) 0x651, (jint) 0x652, (jint) 0x6521, (jint) 0x653, (jint) 0x6531, (jint) 0x6532, (jint) 0x65321, (jint) 0x654, (jint) 0x6541, (jint) 0x6542, (jint) 0x65421, (jint) 0x6543, (jint) 0x65431, (jint) 0x65432, (jint) 0x654321, (jint) 0x7, (jint) 0x71, (jint) 0x72, (jint) 0x721, (jint) 0x73, (jint) 0x731, (jint) 0x732, (jint) 0x7321, (jint) 0x74, (jint) 0x741, (jint) 0x742, (jint) 0x7421, (jint) 0x743, (jint) 0x7431, (jint) 0x7432, (jint) 0x74321, (jint) 0x75, (jint) 0x751, (jint) 0x752, (jint) 0x7521, (jint) 0x753, (jint) 0x7531, (jint) 0x7532, (jint) 0x75321, (jint) 0x754, (jint) 0x7541, (jint) 0x7542, (jint) 0x75421, (jint) 0x7543, (jint) 0x75431, (jint) 0x75432, (jint) 0x754321, (jint) 0x76, (jint) 0x761, (jint) 0x762, (jint) 0x7621, (jint) 0x763, (jint) 0x7631, (jint) 0x7632, (jint) 0x76321, (jint) 0x764, (jint) 0x7641, (jint) 0x7642, (jint) 0x76421, (jint) 0x7643, (jint) 0x76431, (jint) 0x76432, (jint) 0x764321, (jint) 0x765, (jint) 0x7651, (jint) 0x7652, (jint) 0x76521, (jint) 0x7653, (jint) 0x76531, (jint) 0x76532, (jint) 0x765321, (jint) 0x7654, (jint) 0x76541, (jint) 0x76542, (jint) 0x765421, (jint) 0x76543, (jint) 0x765431, (jint) 0x765432, (jint) 0x7654321, (jint) 0x8, (jint) 0x81, (jint) 0x82, (jint) 0x821, (jint) 0x83, (jint) 0x831, (jint) 0x832, (jint) 0x8321, (jint) 0x84, (jint) 0x841, (jint) 0x842, (jint) 0x8421, (jint) 0x843, (jint) 0x8431, (jint) 0x8432, (jint) 0x84321, (jint) 0x85, (jint) 0x851, (jint) 0x852, (jint) 0x8521, (jint) 0x853, (jint) 0x8531, (jint) 0x8532, (jint) 0x85321, (jint) 0x854, (jint) 0x8541, (jint) 0x8542, (jint) 0x85421, (jint) 0x8543, (jint) 0x85431, (jint) 0x85432, (jint) 0x854321, (jint) 0x86, (jint) 0x861, (jint) 0x862, (jint) 0x8621, (jint) 0x863, (jint) 0x8631, (jint) 0x8632, (jint) 0x86321, (jint) 0x864, (jint) 0x8641, (jint) 0x8642, (jint) 0x86421, (jint) 0x8643, (jint) 0x86431, (jint) 0x86432, (jint) 0x864321, (jint) 0x865, (jint) 0x8651, (jint) 0x8652, (jint) 0x86521, (jint) 0x8653, (jint) 0x86531, (jint) 0x86532, (jint) 0x865321, (jint) 0x8654, (jint) 0x86541, (jint) 0x86542, (jint) 0x865421, (jint) 0x86543, (jint) 0x865431, (jint) 0x865432, (jint) 0x8654321, (jint) 0x87, (jint) 0x871, (jint) 0x872, (jint) 0x8721, (jint) 0x873, (jint) 0x8731, (jint) 0x8732, (jint) 0x87321, (jint) 0x874, (jint) 0x8741, (jint) 0x8742, (jint) 0x87421, (jint) 0x8743, (jint) 0x87431, (jint) 0x87432, (jint) 0x874321, (jint) 0x875, (jint) 0x8751, (jint) 0x8752, (jint) 0x87521, (jint) 0x8753, (jint) 0x87531, (jint) 0x87532, (jint) 0x875321, (jint) 0x8754, (jint) 0x87541, (jint) 0x87542, (jint) 0x875421, (jint) 0x87543, (jint) 0x875431, (jint) 0x875432, (jint) 0x8754321, (jint) 0x876, (jint) 0x8761, (jint) 0x8762, (jint) 0x87621, (jint) 0x8763, (jint) 0x87631, (jint) 0x87632, (jint) 0x876321, (jint) 0x8764, (jint) 0x87641, (jint) 0x87642, (jint) 0x876421, (jint) 0x87643, (jint) 0x876431, (jint) 0x876432, (jint) 0x8764321, (jint) 0x8765, (jint) 0x87651, (jint) 0x87652, (jint) 0x876521, (jint) 0x87653, (jint) 0x876531, (jint) 0x876532, (jint) 0x8765321, (jint) 0x87654, (jint) 0x876541, (jint) 0x876542, (jint) 0x8765421, (jint) 0x876543, (jint) 0x8765431, (jint) 0x8765432, (jint) 0x87654321 } count:256]);
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilBitUtil_MAGIC_, [IOSLongArray newArrayWithLongs:(jlong[]){ (jlong) 0x5555555555555555LL, (jlong) 0x3333333333333333LL, (jlong) 0x0F0F0F0F0F0F0F0FLL, (jlong) 0x00FF00FF00FF00FFLL, (jlong) 0x0000FFFF0000FFFFLL, (jlong) 0x00000000FFFFFFFFLL, (jlong) 0xAAAAAAAAAAAAAAAALL } count:7]);
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilBitUtil_SHIFT_, [IOSShortArray newArrayWithShorts:(jshort[]){ 1, 2, 4, 8, 16 } count:5]);
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilBitUtil)
-  }
-}
-
 + (IOSObjectArray *)__annotations_bitCountWithByte_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_bitListWithByte_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
++ (void)initialize {
+  if (self == [OrgApacheLuceneUtilBitUtil class]) {
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilBitUtil_BYTE_COUNTS, [IOSByteArray newArrayWithBytes:(jbyte[]){ 0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4, 1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5, 1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5, 2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6, 1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5, 2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6, 2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6, 3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7, 1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5, 2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6, 2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6, 3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7, 2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6, 3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7, 3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7, 4, 5, 5, 6, 5, 6, 6, 7, 5, 6, 6, 7, 6, 7, 7, 8 } count:256]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilBitUtil_BIT_LISTS, [IOSIntArray newArrayWithInts:(jint[]){ (jint) 0x0, (jint) 0x1, (jint) 0x2, (jint) 0x21, (jint) 0x3, (jint) 0x31, (jint) 0x32, (jint) 0x321, (jint) 0x4, (jint) 0x41, (jint) 0x42, (jint) 0x421, (jint) 0x43, (jint) 0x431, (jint) 0x432, (jint) 0x4321, (jint) 0x5, (jint) 0x51, (jint) 0x52, (jint) 0x521, (jint) 0x53, (jint) 0x531, (jint) 0x532, (jint) 0x5321, (jint) 0x54, (jint) 0x541, (jint) 0x542, (jint) 0x5421, (jint) 0x543, (jint) 0x5431, (jint) 0x5432, (jint) 0x54321, (jint) 0x6, (jint) 0x61, (jint) 0x62, (jint) 0x621, (jint) 0x63, (jint) 0x631, (jint) 0x632, (jint) 0x6321, (jint) 0x64, (jint) 0x641, (jint) 0x642, (jint) 0x6421, (jint) 0x643, (jint) 0x6431, (jint) 0x6432, (jint) 0x64321, (jint) 0x65, (jint) 0x651, (jint) 0x652, (jint) 0x6521, (jint) 0x653, (jint) 0x6531, (jint) 0x6532, (jint) 0x65321, (jint) 0x654, (jint) 0x6541, (jint) 0x6542, (jint) 0x65421, (jint) 0x6543, (jint) 0x65431, (jint) 0x65432, (jint) 0x654321, (jint) 0x7, (jint) 0x71, (jint) 0x72, (jint) 0x721, (jint) 0x73, (jint) 0x731, (jint) 0x732, (jint) 0x7321, (jint) 0x74, (jint) 0x741, (jint) 0x742, (jint) 0x7421, (jint) 0x743, (jint) 0x7431, (jint) 0x7432, (jint) 0x74321, (jint) 0x75, (jint) 0x751, (jint) 0x752, (jint) 0x7521, (jint) 0x753, (jint) 0x7531, (jint) 0x7532, (jint) 0x75321, (jint) 0x754, (jint) 0x7541, (jint) 0x7542, (jint) 0x75421, (jint) 0x7543, (jint) 0x75431, (jint) 0x75432, (jint) 0x754321, (jint) 0x76, (jint) 0x761, (jint) 0x762, (jint) 0x7621, (jint) 0x763, (jint) 0x7631, (jint) 0x7632, (jint) 0x76321, (jint) 0x764, (jint) 0x7641, (jint) 0x7642, (jint) 0x76421, (jint) 0x7643, (jint) 0x76431, (jint) 0x76432, (jint) 0x764321, (jint) 0x765, (jint) 0x7651, (jint) 0x7652, (jint) 0x76521, (jint) 0x7653, (jint) 0x76531, (jint) 0x76532, (jint) 0x765321, (jint) 0x7654, (jint) 0x76541, (jint) 0x76542, (jint) 0x765421, (jint) 0x76543, (jint) 0x765431, (jint) 0x765432, (jint) 0x7654321, (jint) 0x8, (jint) 0x81, (jint) 0x82, (jint) 0x821, (jint) 0x83, (jint) 0x831, (jint) 0x832, (jint) 0x8321, (jint) 0x84, (jint) 0x841, (jint) 0x842, (jint) 0x8421, (jint) 0x843, (jint) 0x8431, (jint) 0x8432, (jint) 0x84321, (jint) 0x85, (jint) 0x851, (jint) 0x852, (jint) 0x8521, (jint) 0x853, (jint) 0x8531, (jint) 0x8532, (jint) 0x85321, (jint) 0x854, (jint) 0x8541, (jint) 0x8542, (jint) 0x85421, (jint) 0x8543, (jint) 0x85431, (jint) 0x85432, (jint) 0x854321, (jint) 0x86, (jint) 0x861, (jint) 0x862, (jint) 0x8621, (jint) 0x863, (jint) 0x8631, (jint) 0x8632, (jint) 0x86321, (jint) 0x864, (jint) 0x8641, (jint) 0x8642, (jint) 0x86421, (jint) 0x8643, (jint) 0x86431, (jint) 0x86432, (jint) 0x864321, (jint) 0x865, (jint) 0x8651, (jint) 0x8652, (jint) 0x86521, (jint) 0x8653, (jint) 0x86531, (jint) 0x86532, (jint) 0x865321, (jint) 0x8654, (jint) 0x86541, (jint) 0x86542, (jint) 0x865421, (jint) 0x86543, (jint) 0x865431, (jint) 0x865432, (jint) 0x8654321, (jint) 0x87, (jint) 0x871, (jint) 0x872, (jint) 0x8721, (jint) 0x873, (jint) 0x8731, (jint) 0x8732, (jint) 0x87321, (jint) 0x874, (jint) 0x8741, (jint) 0x8742, (jint) 0x87421, (jint) 0x8743, (jint) 0x87431, (jint) 0x87432, (jint) 0x874321, (jint) 0x875, (jint) 0x8751, (jint) 0x8752, (jint) 0x87521, (jint) 0x8753, (jint) 0x87531, (jint) 0x87532, (jint) 0x875321, (jint) 0x8754, (jint) 0x87541, (jint) 0x87542, (jint) 0x875421, (jint) 0x87543, (jint) 0x875431, (jint) 0x875432, (jint) 0x8754321, (jint) 0x876, (jint) 0x8761, (jint) 0x8762, (jint) 0x87621, (jint) 0x8763, (jint) 0x87631, (jint) 0x87632, (jint) 0x876321, (jint) 0x8764, (jint) 0x87641, (jint) 0x87642, (jint) 0x876421, (jint) 0x87643, (jint) 0x876431, (jint) 0x876432, (jint) 0x8764321, (jint) 0x8765, (jint) 0x87651, (jint) 0x87652, (jint) 0x876521, (jint) 0x87653, (jint) 0x876531, (jint) 0x876532, (jint) 0x8765321, (jint) 0x87654, (jint) 0x876541, (jint) 0x876542, (jint) 0x8765421, (jint) 0x876543, (jint) 0x8765431, (jint) 0x8765432, (jint) 0x87654321 } count:256]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilBitUtil_MAGIC, [IOSLongArray newArrayWithLongs:(jlong[]){ (jlong) 0x5555555555555555LL, (jlong) 0x3333333333333333LL, (jlong) 0x0F0F0F0F0F0F0F0FLL, (jlong) 0x00FF00FF00FF00FFLL, (jlong) 0x0000FFFF0000FFFFLL, (jlong) 0x00000000FFFFFFFFLL, (jlong) 0xAAAAAAAAAAAAAAAALL } count:7]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilBitUtil_SHIFT, [IOSShortArray newArrayWithShorts:(jshort[]){ 1, 2, 4, 8, 16 } count:5]);
+    J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilBitUtil)
+  }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -161,10 +168,10 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "zigZagDecodeWithLong:", "zigZagDecode", "J", 0x9, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "BYTE_COUNTS_", NULL, 0x1a, "[B", &OrgApacheLuceneUtilBitUtil_BYTE_COUNTS_, NULL, .constantValue.asLong = 0 },
-    { "BIT_LISTS_", NULL, 0x1a, "[I", &OrgApacheLuceneUtilBitUtil_BIT_LISTS_, NULL, .constantValue.asLong = 0 },
-    { "MAGIC_", NULL, 0x1a, "[J", &OrgApacheLuceneUtilBitUtil_MAGIC_, NULL, .constantValue.asLong = 0 },
-    { "SHIFT_", NULL, 0x1a, "[S", &OrgApacheLuceneUtilBitUtil_SHIFT_, NULL, .constantValue.asLong = 0 },
+    { "BYTE_COUNTS", "BYTE_COUNTS", 0x1a, "[B", &OrgApacheLuceneUtilBitUtil_BYTE_COUNTS, NULL, .constantValue.asLong = 0 },
+    { "BIT_LISTS", "BIT_LISTS", 0x1a, "[I", &OrgApacheLuceneUtilBitUtil_BIT_LISTS, NULL, .constantValue.asLong = 0 },
+    { "MAGIC", "MAGIC", 0x1a, "[J", &OrgApacheLuceneUtilBitUtil_MAGIC, NULL, .constantValue.asLong = 0 },
+    { "SHIFT", "SHIFT", 0x1a, "[S", &OrgApacheLuceneUtilBitUtil_SHIFT, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneUtilBitUtil = { 2, "BitUtil", "org.apache.lucene.util", NULL, 0x11, 17, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilBitUtil;
@@ -177,19 +184,21 @@ void OrgApacheLuceneUtilBitUtil_init(OrgApacheLuceneUtilBitUtil *self) {
 }
 
 OrgApacheLuceneUtilBitUtil *new_OrgApacheLuceneUtilBitUtil_init() {
-  OrgApacheLuceneUtilBitUtil *self = [OrgApacheLuceneUtilBitUtil alloc];
-  OrgApacheLuceneUtilBitUtil_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilBitUtil, init)
+}
+
+OrgApacheLuceneUtilBitUtil *create_OrgApacheLuceneUtilBitUtil_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilBitUtil, init)
 }
 
 jint OrgApacheLuceneUtilBitUtil_bitCountWithByte_(jbyte b) {
   OrgApacheLuceneUtilBitUtil_initialize();
-  return IOSByteArray_Get(nil_chk(OrgApacheLuceneUtilBitUtil_BYTE_COUNTS_), b & (jint) 0xFF);
+  return IOSByteArray_Get(nil_chk(OrgApacheLuceneUtilBitUtil_BYTE_COUNTS), b & (jint) 0xFF);
 }
 
 jint OrgApacheLuceneUtilBitUtil_bitListWithByte_(jbyte b) {
   OrgApacheLuceneUtilBitUtil_initialize();
-  return IOSIntArray_Get(nil_chk(OrgApacheLuceneUtilBitUtil_BIT_LISTS_), b & (jint) 0xFF);
+  return IOSIntArray_Get(nil_chk(OrgApacheLuceneUtilBitUtil_BIT_LISTS), b & (jint) 0xFF);
 }
 
 jlong OrgApacheLuceneUtilBitUtil_pop_arrayWithLongArray_withInt_withInt_(IOSLongArray *arr, jint wordOffset, jint numWords) {
@@ -264,33 +273,33 @@ jlong OrgApacheLuceneUtilBitUtil_nextHighestPowerOfTwoWithLong_(jlong v) {
 
 jlong OrgApacheLuceneUtilBitUtil_interleaveWithLong_withLong_(jlong v1, jlong v2) {
   OrgApacheLuceneUtilBitUtil_initialize();
-  v1 = (v1 | (JreLShift64(v1, IOSShortArray_Get(nil_chk(OrgApacheLuceneUtilBitUtil_SHIFT_), 4)))) & IOSLongArray_Get(nil_chk(OrgApacheLuceneUtilBitUtil_MAGIC_), 4);
-  v1 = (v1 | (JreLShift64(v1, IOSShortArray_Get(OrgApacheLuceneUtilBitUtil_SHIFT_, 3)))) & IOSLongArray_Get(OrgApacheLuceneUtilBitUtil_MAGIC_, 3);
-  v1 = (v1 | (JreLShift64(v1, IOSShortArray_Get(OrgApacheLuceneUtilBitUtil_SHIFT_, 2)))) & IOSLongArray_Get(OrgApacheLuceneUtilBitUtil_MAGIC_, 2);
-  v1 = (v1 | (JreLShift64(v1, IOSShortArray_Get(OrgApacheLuceneUtilBitUtil_SHIFT_, 1)))) & IOSLongArray_Get(OrgApacheLuceneUtilBitUtil_MAGIC_, 1);
-  v1 = (v1 | (JreLShift64(v1, IOSShortArray_Get(OrgApacheLuceneUtilBitUtil_SHIFT_, 0)))) & IOSLongArray_Get(OrgApacheLuceneUtilBitUtil_MAGIC_, 0);
-  v2 = (v2 | (JreLShift64(v2, IOSShortArray_Get(OrgApacheLuceneUtilBitUtil_SHIFT_, 4)))) & IOSLongArray_Get(OrgApacheLuceneUtilBitUtil_MAGIC_, 4);
-  v2 = (v2 | (JreLShift64(v2, IOSShortArray_Get(OrgApacheLuceneUtilBitUtil_SHIFT_, 3)))) & IOSLongArray_Get(OrgApacheLuceneUtilBitUtil_MAGIC_, 3);
-  v2 = (v2 | (JreLShift64(v2, IOSShortArray_Get(OrgApacheLuceneUtilBitUtil_SHIFT_, 2)))) & IOSLongArray_Get(OrgApacheLuceneUtilBitUtil_MAGIC_, 2);
-  v2 = (v2 | (JreLShift64(v2, IOSShortArray_Get(OrgApacheLuceneUtilBitUtil_SHIFT_, 1)))) & IOSLongArray_Get(OrgApacheLuceneUtilBitUtil_MAGIC_, 1);
-  v2 = (v2 | (JreLShift64(v2, IOSShortArray_Get(OrgApacheLuceneUtilBitUtil_SHIFT_, 0)))) & IOSLongArray_Get(OrgApacheLuceneUtilBitUtil_MAGIC_, 0);
+  v1 = (v1 | (JreLShift64(v1, IOSShortArray_Get(nil_chk(OrgApacheLuceneUtilBitUtil_SHIFT), 4)))) & IOSLongArray_Get(nil_chk(OrgApacheLuceneUtilBitUtil_MAGIC), 4);
+  v1 = (v1 | (JreLShift64(v1, IOSShortArray_Get(OrgApacheLuceneUtilBitUtil_SHIFT, 3)))) & IOSLongArray_Get(OrgApacheLuceneUtilBitUtil_MAGIC, 3);
+  v1 = (v1 | (JreLShift64(v1, IOSShortArray_Get(OrgApacheLuceneUtilBitUtil_SHIFT, 2)))) & IOSLongArray_Get(OrgApacheLuceneUtilBitUtil_MAGIC, 2);
+  v1 = (v1 | (JreLShift64(v1, IOSShortArray_Get(OrgApacheLuceneUtilBitUtil_SHIFT, 1)))) & IOSLongArray_Get(OrgApacheLuceneUtilBitUtil_MAGIC, 1);
+  v1 = (v1 | (JreLShift64(v1, IOSShortArray_Get(OrgApacheLuceneUtilBitUtil_SHIFT, 0)))) & IOSLongArray_Get(OrgApacheLuceneUtilBitUtil_MAGIC, 0);
+  v2 = (v2 | (JreLShift64(v2, IOSShortArray_Get(OrgApacheLuceneUtilBitUtil_SHIFT, 4)))) & IOSLongArray_Get(OrgApacheLuceneUtilBitUtil_MAGIC, 4);
+  v2 = (v2 | (JreLShift64(v2, IOSShortArray_Get(OrgApacheLuceneUtilBitUtil_SHIFT, 3)))) & IOSLongArray_Get(OrgApacheLuceneUtilBitUtil_MAGIC, 3);
+  v2 = (v2 | (JreLShift64(v2, IOSShortArray_Get(OrgApacheLuceneUtilBitUtil_SHIFT, 2)))) & IOSLongArray_Get(OrgApacheLuceneUtilBitUtil_MAGIC, 2);
+  v2 = (v2 | (JreLShift64(v2, IOSShortArray_Get(OrgApacheLuceneUtilBitUtil_SHIFT, 1)))) & IOSLongArray_Get(OrgApacheLuceneUtilBitUtil_MAGIC, 1);
+  v2 = (v2 | (JreLShift64(v2, IOSShortArray_Get(OrgApacheLuceneUtilBitUtil_SHIFT, 0)))) & IOSLongArray_Get(OrgApacheLuceneUtilBitUtil_MAGIC, 0);
   return (JreLShift64(v2, 1)) | v1;
 }
 
 jlong OrgApacheLuceneUtilBitUtil_deinterleaveWithLong_(jlong b) {
   OrgApacheLuceneUtilBitUtil_initialize();
-  b &= IOSLongArray_Get(nil_chk(OrgApacheLuceneUtilBitUtil_MAGIC_), 0);
-  b = (b ^ (JreURShift64(b, IOSShortArray_Get(nil_chk(OrgApacheLuceneUtilBitUtil_SHIFT_), 0)))) & IOSLongArray_Get(OrgApacheLuceneUtilBitUtil_MAGIC_, 1);
-  b = (b ^ (JreURShift64(b, IOSShortArray_Get(OrgApacheLuceneUtilBitUtil_SHIFT_, 1)))) & IOSLongArray_Get(OrgApacheLuceneUtilBitUtil_MAGIC_, 2);
-  b = (b ^ (JreURShift64(b, IOSShortArray_Get(OrgApacheLuceneUtilBitUtil_SHIFT_, 2)))) & IOSLongArray_Get(OrgApacheLuceneUtilBitUtil_MAGIC_, 3);
-  b = (b ^ (JreURShift64(b, IOSShortArray_Get(OrgApacheLuceneUtilBitUtil_SHIFT_, 3)))) & IOSLongArray_Get(OrgApacheLuceneUtilBitUtil_MAGIC_, 4);
-  b = (b ^ (JreURShift64(b, IOSShortArray_Get(OrgApacheLuceneUtilBitUtil_SHIFT_, 4)))) & IOSLongArray_Get(OrgApacheLuceneUtilBitUtil_MAGIC_, 5);
+  b &= IOSLongArray_Get(nil_chk(OrgApacheLuceneUtilBitUtil_MAGIC), 0);
+  b = (b ^ (JreURShift64(b, IOSShortArray_Get(nil_chk(OrgApacheLuceneUtilBitUtil_SHIFT), 0)))) & IOSLongArray_Get(OrgApacheLuceneUtilBitUtil_MAGIC, 1);
+  b = (b ^ (JreURShift64(b, IOSShortArray_Get(OrgApacheLuceneUtilBitUtil_SHIFT, 1)))) & IOSLongArray_Get(OrgApacheLuceneUtilBitUtil_MAGIC, 2);
+  b = (b ^ (JreURShift64(b, IOSShortArray_Get(OrgApacheLuceneUtilBitUtil_SHIFT, 2)))) & IOSLongArray_Get(OrgApacheLuceneUtilBitUtil_MAGIC, 3);
+  b = (b ^ (JreURShift64(b, IOSShortArray_Get(OrgApacheLuceneUtilBitUtil_SHIFT, 3)))) & IOSLongArray_Get(OrgApacheLuceneUtilBitUtil_MAGIC, 4);
+  b = (b ^ (JreURShift64(b, IOSShortArray_Get(OrgApacheLuceneUtilBitUtil_SHIFT, 4)))) & IOSLongArray_Get(OrgApacheLuceneUtilBitUtil_MAGIC, 5);
   return b;
 }
 
 jlong OrgApacheLuceneUtilBitUtil_flipFlopWithLong_(jlong b) {
   OrgApacheLuceneUtilBitUtil_initialize();
-  return (JreURShift64((b & IOSLongArray_Get(nil_chk(OrgApacheLuceneUtilBitUtil_MAGIC_), 6)), 1)) | (JreLShift64((b & IOSLongArray_Get(OrgApacheLuceneUtilBitUtil_MAGIC_, 0)), 1));
+  return (JreURShift64((b & IOSLongArray_Get(nil_chk(OrgApacheLuceneUtilBitUtil_MAGIC), 6)), 1)) | (JreLShift64((b & IOSLongArray_Get(OrgApacheLuceneUtilBitUtil_MAGIC, 0)), 1));
 }
 
 jint OrgApacheLuceneUtilBitUtil_zigZagEncodeWithInt_(jint i) {

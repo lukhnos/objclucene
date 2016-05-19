@@ -135,9 +135,11 @@ void OrgApacheLuceneQueryparserClassicFastCharStream_initWithJavaIoReader_(OrgAp
 }
 
 OrgApacheLuceneQueryparserClassicFastCharStream *new_OrgApacheLuceneQueryparserClassicFastCharStream_initWithJavaIoReader_(JavaIoReader *r) {
-  OrgApacheLuceneQueryparserClassicFastCharStream *self = [OrgApacheLuceneQueryparserClassicFastCharStream alloc];
-  OrgApacheLuceneQueryparserClassicFastCharStream_initWithJavaIoReader_(self, r);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserClassicFastCharStream, initWithJavaIoReader_, r)
+}
+
+OrgApacheLuceneQueryparserClassicFastCharStream *create_OrgApacheLuceneQueryparserClassicFastCharStream_initWithJavaIoReader_(JavaIoReader *r) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserClassicFastCharStream, initWithJavaIoReader_, r)
 }
 
 jchar OrgApacheLuceneQueryparserClassicFastCharStream_readChar(OrgApacheLuceneQueryparserClassicFastCharStream *self) {
@@ -165,7 +167,7 @@ void OrgApacheLuceneQueryparserClassicFastCharStream_refill(OrgApacheLuceneQuery
   self->bufferStart_ += self->tokenStart_;
   self->tokenStart_ = 0;
   jint charsRead = [((JavaIoReader *) nil_chk(self->input_)) readWithCharArray:self->buffer_ withInt:newPosition withInt:((IOSCharArray *) nil_chk(self->buffer_))->size_ - newPosition];
-  if (charsRead == -1) @throw [new_JavaIoIOException_initWithNSString_(@"read past eof") autorelease];
+  if (charsRead == -1) @throw create_JavaIoIOException_initWithNSString_(@"read past eof");
   else self->bufferLength_ += charsRead;
 }
 

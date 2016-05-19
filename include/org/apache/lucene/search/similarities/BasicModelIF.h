@@ -5,27 +5,33 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSimilaritiesBasicModelIF_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSimilaritiesBasicModelIF_RESTRICT
-#define OrgApacheLuceneSearchSimilaritiesBasicModelIF_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicModelIF")
+#ifdef RESTRICT_OrgApacheLuceneSearchSimilaritiesBasicModelIF
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicModelIF 0
 #else
-#define OrgApacheLuceneSearchSimilaritiesBasicModelIF_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicModelIF 1
 #endif
-#undef OrgApacheLuceneSearchSimilaritiesBasicModelIF_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSimilaritiesBasicModelIF
 
-#if !defined (_OrgApacheLuceneSearchSimilaritiesBasicModelIF_) && (OrgApacheLuceneSearchSimilaritiesBasicModelIF_INCLUDE_ALL || OrgApacheLuceneSearchSimilaritiesBasicModelIF_INCLUDE)
-#define _OrgApacheLuceneSearchSimilaritiesBasicModelIF_
+#if !defined (OrgApacheLuceneSearchSimilaritiesBasicModelIF_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicModelIF || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesBasicModelIF))
+#define OrgApacheLuceneSearchSimilaritiesBasicModelIF_
 
-#define OrgApacheLuceneSearchSimilaritiesBasicModel_RESTRICT 1
-#define OrgApacheLuceneSearchSimilaritiesBasicModel_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchSimilaritiesBasicModel 1
+#define INCLUDE_OrgApacheLuceneSearchSimilaritiesBasicModel 1
 #include "org/apache/lucene/search/similarities/BasicModel.h"
 
 @class OrgApacheLuceneSearchSimilaritiesBasicStats;
 
+/*!
+ @brief An approximation of the <em>I(n<sub>e</sub>)</em> model.
+ */
 @interface OrgApacheLuceneSearchSimilaritiesBasicModelIF : OrgApacheLuceneSearchSimilaritiesBasicModel
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor: parameter-free
+ */
 - (instancetype)init;
 
 - (jfloat)scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
@@ -41,8 +47,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesBasicModelIF_init(OrgApa
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesBasicModelIF *new_OrgApacheLuceneSearchSimilaritiesBasicModelIF_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesBasicModelIF *create_OrgApacheLuceneSearchSimilaritiesBasicModelIF_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesBasicModelIF)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSimilaritiesBasicModelIF_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesBasicModelIF")

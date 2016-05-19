@@ -5,23 +5,26 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction_RESTRICT
-#define OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction 0
 #else
-#define OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction_) && (OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction_
+#if !defined (OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction))
+#define OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction_
 
-#define OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction 1
 #include "org/apache/lucene/queries/function/valuesource/MultiFloatFunction.h"
 
 @class IOSObjectArray;
 
+/*!
+ @brief <code>MaxFloatFunction</code> returns the max of its components.
+ */
 @interface OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction : OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction
 
 #pragma mark Public
@@ -30,6 +33,11 @@
 
 #pragma mark Protected
 
+/*!
+ @brief True if <em>any</em> of the specified <code>values</code> 
+ <code>FunctionValues.exists</code> for the specified doc, else false.
+ - seealso: MultiFunction#anyExists
+ */
 - (jboolean)existsWithInt:(jint)doc
 withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)valsArr;
 
@@ -46,8 +54,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction
 
 FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction *new_OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSourceArray_(IOSObjectArray *sources) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction *create_OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSourceArray_(IOSObjectArray *sources);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction")

@@ -5,24 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder_RESTRICT
-#define OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder 0
 #else
-#define OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder 1
 #endif
-#undef OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder
 
-#if !defined (_OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder_) && (OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder_INCLUDE_ALL || OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder_INCLUDE)
-#define _OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder_
+#if !defined (OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder))
+#define OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder_
 
-#define OrgApacheLuceneQueryparserXmlQueryBuilder_RESTRICT 1
-#define OrgApacheLuceneQueryparserXmlQueryBuilder_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserXmlQueryBuilder 1
+#define INCLUDE_OrgApacheLuceneQueryparserXmlQueryBuilder 1
 #include "org/apache/lucene/queryparser/xml/QueryBuilder.h"
 
 @class OrgApacheLuceneSearchQuery;
 @protocol OrgW3cDomElement;
 
+/*!
+ @brief Builder for <code>TermRangeQuery</code>
+ */
 @interface OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder : NSObject < OrgApacheLuceneQueryparserXmlQueryBuilder >
 
 #pragma mark Public
@@ -39,8 +42,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder_in
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder *new_OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder *create_OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersRangeQueryBuilder")

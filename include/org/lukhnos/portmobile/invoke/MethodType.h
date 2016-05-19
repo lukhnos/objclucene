@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgLukhnosPortmobileInvokeMethodType_INCLUDE_ALL")
-#if OrgLukhnosPortmobileInvokeMethodType_RESTRICT
-#define OrgLukhnosPortmobileInvokeMethodType_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgLukhnosPortmobileInvokeMethodType")
+#ifdef RESTRICT_OrgLukhnosPortmobileInvokeMethodType
+#define INCLUDE_ALL_OrgLukhnosPortmobileInvokeMethodType 0
 #else
-#define OrgLukhnosPortmobileInvokeMethodType_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgLukhnosPortmobileInvokeMethodType 1
 #endif
-#undef OrgLukhnosPortmobileInvokeMethodType_RESTRICT
+#undef RESTRICT_OrgLukhnosPortmobileInvokeMethodType
 
-#if !defined (_OrgLukhnosPortmobileInvokeMethodType_) && (OrgLukhnosPortmobileInvokeMethodType_INCLUDE_ALL || OrgLukhnosPortmobileInvokeMethodType_INCLUDE)
-#define _OrgLukhnosPortmobileInvokeMethodType_
+#if !defined (OrgLukhnosPortmobileInvokeMethodType_) && (INCLUDE_ALL_OrgLukhnosPortmobileInvokeMethodType || defined(INCLUDE_OrgLukhnosPortmobileInvokeMethodType))
+#define OrgLukhnosPortmobileInvokeMethodType_
 
 @class IOSClass;
 
@@ -43,10 +43,12 @@ FOUNDATION_EXPORT void OrgLukhnosPortmobileInvokeMethodType_initWithIOSClass_(Or
 
 FOUNDATION_EXPORT OrgLukhnosPortmobileInvokeMethodType *new_OrgLukhnosPortmobileInvokeMethodType_initWithIOSClass_(IOSClass *clazz) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgLukhnosPortmobileInvokeMethodType *create_OrgLukhnosPortmobileInvokeMethodType_initWithIOSClass_(IOSClass *clazz);
+
 FOUNDATION_EXPORT OrgLukhnosPortmobileInvokeMethodType *OrgLukhnosPortmobileInvokeMethodType_methodTypeWithIOSClass_(IOSClass *clazz);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileInvokeMethodType)
 
 #endif
 
-#pragma pop_macro("OrgLukhnosPortmobileInvokeMethodType_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileInvokeMethodType")

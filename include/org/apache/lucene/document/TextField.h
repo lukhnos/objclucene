@@ -5,37 +5,68 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneDocumentTextField_INCLUDE_ALL")
-#if OrgApacheLuceneDocumentTextField_RESTRICT
-#define OrgApacheLuceneDocumentTextField_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneDocumentTextField")
+#ifdef RESTRICT_OrgApacheLuceneDocumentTextField
+#define INCLUDE_ALL_OrgApacheLuceneDocumentTextField 0
 #else
-#define OrgApacheLuceneDocumentTextField_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneDocumentTextField 1
 #endif
-#undef OrgApacheLuceneDocumentTextField_RESTRICT
+#undef RESTRICT_OrgApacheLuceneDocumentTextField
 
-#if !defined (_OrgApacheLuceneDocumentTextField_) && (OrgApacheLuceneDocumentTextField_INCLUDE_ALL || OrgApacheLuceneDocumentTextField_INCLUDE)
-#define _OrgApacheLuceneDocumentTextField_
+#if !defined (OrgApacheLuceneDocumentTextField_) && (INCLUDE_ALL_OrgApacheLuceneDocumentTextField || defined(INCLUDE_OrgApacheLuceneDocumentTextField))
+#define OrgApacheLuceneDocumentTextField_
 
-#define OrgApacheLuceneDocumentField_RESTRICT 1
-#define OrgApacheLuceneDocumentField_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneDocumentField 1
+#define INCLUDE_OrgApacheLuceneDocumentField 1
 #include "org/apache/lucene/document/Field.h"
 
 @class JavaIoReader;
 @class OrgApacheLuceneAnalysisTokenStream;
 @class OrgApacheLuceneDocumentFieldType;
-@class OrgApacheLuceneDocumentField_StoreEnum;
+@class OrgApacheLuceneDocumentField_Store;
 
+/*!
+ @brief A field that is indexed and tokenized, without term
+ vectors.
+ For example this would be used on a 'body'
+ field, that contains the bulk of a document's text. 
+ */
 @interface OrgApacheLuceneDocumentTextField : OrgApacheLuceneDocumentField
+
++ (OrgApacheLuceneDocumentFieldType *)TYPE_NOT_STORED;
+
++ (OrgApacheLuceneDocumentFieldType *)TYPE_STORED;
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new un-stored TextField with Reader value.
+ @param name field name
+ @param reader reader value
+ @throws IllegalArgumentException if the field name is null
+ @throws NullPointerException if the reader is null
+ */
 - (instancetype)initWithNSString:(NSString *)name
                 withJavaIoReader:(JavaIoReader *)reader;
 
+/*!
+ @brief Creates a new TextField with String value.
+ @param name field name
+ @param value string value
+ @param store Store.YES if the content should also be stored
+ @throws IllegalArgumentException if the field name or value is null.
+ */
 - (instancetype)initWithNSString:(NSString *)name
                     withNSString:(NSString *)value
-withOrgApacheLuceneDocumentField_StoreEnum:(OrgApacheLuceneDocumentField_StoreEnum *)store;
+withOrgApacheLuceneDocumentField_Store:(OrgApacheLuceneDocumentField_Store *)store;
 
+/*!
+ @brief Creates a new un-stored TextField with TokenStream value.
+ @param name field name
+ @param stream TokenStream value
+ @throws IllegalArgumentException if the field name is null.
+ @throws NullPointerException if the tokenStream is null
+ */
 - (instancetype)initWithNSString:(NSString *)name
 withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)stream;
 
@@ -43,26 +74,42 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)str
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneDocumentTextField)
 
-FOUNDATION_EXPORT OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentTextField_TYPE_NOT_STORED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneDocumentTextField, TYPE_NOT_STORED_, OrgApacheLuceneDocumentFieldType *)
+/*!
+ @brief Indexed, tokenized, not stored.
+ */
+inline OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentTextField_get_TYPE_NOT_STORED();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentTextField_TYPE_NOT_STORED;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneDocumentTextField, TYPE_NOT_STORED, OrgApacheLuceneDocumentFieldType *)
 
-FOUNDATION_EXPORT OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentTextField_TYPE_STORED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneDocumentTextField, TYPE_STORED_, OrgApacheLuceneDocumentFieldType *)
+/*!
+ @brief Indexed, tokenized, stored.
+ */
+inline OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentTextField_get_TYPE_STORED();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentTextField_TYPE_STORED;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneDocumentTextField, TYPE_STORED, OrgApacheLuceneDocumentFieldType *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneDocumentTextField_initWithNSString_withJavaIoReader_(OrgApacheLuceneDocumentTextField *self, NSString *name, JavaIoReader *reader);
 
 FOUNDATION_EXPORT OrgApacheLuceneDocumentTextField *new_OrgApacheLuceneDocumentTextField_initWithNSString_withJavaIoReader_(NSString *name, JavaIoReader *reader) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT void OrgApacheLuceneDocumentTextField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_StoreEnum_(OrgApacheLuceneDocumentTextField *self, NSString *name, NSString *value, OrgApacheLuceneDocumentField_StoreEnum *store);
+FOUNDATION_EXPORT OrgApacheLuceneDocumentTextField *create_OrgApacheLuceneDocumentTextField_initWithNSString_withJavaIoReader_(NSString *name, JavaIoReader *reader);
 
-FOUNDATION_EXPORT OrgApacheLuceneDocumentTextField *new_OrgApacheLuceneDocumentTextField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_StoreEnum_(NSString *name, NSString *value, OrgApacheLuceneDocumentField_StoreEnum *store) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT void OrgApacheLuceneDocumentTextField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_Store_(OrgApacheLuceneDocumentTextField *self, NSString *name, NSString *value, OrgApacheLuceneDocumentField_Store *store);
+
+FOUNDATION_EXPORT OrgApacheLuceneDocumentTextField *new_OrgApacheLuceneDocumentTextField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_Store_(NSString *name, NSString *value, OrgApacheLuceneDocumentField_Store *store) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneDocumentTextField *create_OrgApacheLuceneDocumentTextField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_Store_(NSString *name, NSString *value, OrgApacheLuceneDocumentField_Store *store);
 
 FOUNDATION_EXPORT void OrgApacheLuceneDocumentTextField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneDocumentTextField *self, NSString *name, OrgApacheLuceneAnalysisTokenStream *stream);
 
 FOUNDATION_EXPORT OrgApacheLuceneDocumentTextField *new_OrgApacheLuceneDocumentTextField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_(NSString *name, OrgApacheLuceneAnalysisTokenStream *stream) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneDocumentTextField *create_OrgApacheLuceneDocumentTextField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_(NSString *name, OrgApacheLuceneAnalysisTokenStream *stream);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentTextField)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneDocumentTextField_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneDocumentTextField")

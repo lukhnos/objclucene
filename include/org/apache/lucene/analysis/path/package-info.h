@@ -3,14 +3,17 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/path/package-info.java
 //
 
+/*!
+ @brief Analysis components for path-like strings such as filenames.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisPathPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisPathPackage_info_RESTRICT
-#define OrgApacheLuceneAnalysisPathPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPathPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisPathPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPathPackage_info 0
 #else
-#define OrgApacheLuceneAnalysisPathPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPathPackage_info 1
 #endif
-#undef OrgApacheLuceneAnalysisPathPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisPathPackage_info
 
-#pragma pop_macro("OrgApacheLuceneAnalysisPathPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPathPackage_info")

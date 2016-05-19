@@ -5,39 +5,79 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSuggestFstFSTCompletion_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSuggestFstFSTCompletion_RESTRICT
-#define OrgApacheLuceneSearchSuggestFstFSTCompletion_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestFstFSTCompletion")
+#ifdef RESTRICT_OrgApacheLuceneSearchSuggestFstFSTCompletion
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestFstFSTCompletion 0
 #else
-#define OrgApacheLuceneSearchSuggestFstFSTCompletion_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestFstFSTCompletion 1
 #endif
-#undef OrgApacheLuceneSearchSuggestFstFSTCompletion_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSuggestFstFSTCompletion
 
-#if !defined (_OrgApacheLuceneSearchSuggestFstFSTCompletion_) && (OrgApacheLuceneSearchSuggestFstFSTCompletion_INCLUDE_ALL || OrgApacheLuceneSearchSuggestFstFSTCompletion_INCLUDE)
-#define _OrgApacheLuceneSearchSuggestFstFSTCompletion_
+#if !defined (OrgApacheLuceneSearchSuggestFstFSTCompletion_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestFstFSTCompletion || defined(INCLUDE_OrgApacheLuceneSearchSuggestFstFSTCompletion))
+#define OrgApacheLuceneSearchSuggestFstFSTCompletion_
 
 @class OrgApacheLuceneUtilFstFST;
 @protocol JavaLangCharSequence;
 @protocol JavaUtilList;
 
-#define OrgApacheLuceneSearchSuggestFstFSTCompletion_DEFAULT_BUCKETS 10
-
+/*!
+ @brief Finite state automata based implementation of "autocomplete" functionality.
+ - seealso: FSTCompletionBuilder
+ */
 @interface OrgApacheLuceneSearchSuggestFstFSTCompletion : NSObject
+
++ (jint)DEFAULT_BUCKETS;
 
 #pragma mark Public
 
+/*!
+ @brief Defaults to higher weights first and exact first.
+ - seealso: #FSTCompletion(FST,boolean,boolean)
+ */
 - (instancetype)initWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)automaton;
 
+/*!
+ @brief Constructs an FSTCompletion, specifying higherWeightsFirst and exactFirst.
+ @param automaton
+ Automaton with completions. See <code>FSTCompletionBuilder</code>.
+ @param higherWeightsFirst
+ Return most popular suggestions first. This is the default
+ behavior for this implementation. Setting it to <code>false</code>
+ has no effect (use constant term weights to sort alphabetically
+ only).
+ @param exactFirst
+ Find and push an exact match to the first position of the result
+ list if found.
+ */
 - (instancetype)initWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)automaton
                                       withBoolean:(jboolean)higherWeightsFirst
                                       withBoolean:(jboolean)exactFirst;
 
+/*!
+ @brief Returns the bucket assigned to a given key (if found) or <code>-1</code> if
+ no exact match exists.
+ */
 - (jint)getBucketWithJavaLangCharSequence:(id<JavaLangCharSequence>)key;
 
+/*!
+ @brief Returns the bucket count (discretization thresholds).
+ */
 - (jint)getBucketCount;
 
+/*!
+ @brief Returns the internal automaton.
+ */
 - (OrgApacheLuceneUtilFstFST *)getFST;
 
+/*!
+ @brief Lookup suggestions to <code>key</code>.
+ @param key
+ The prefix to which suggestions should be sought.
+ @param num
+ At most this number of suggestions will be returned.
+ @return Returns the suggestions, sorted by their approximated weight first
+ (decreasing) and then alphabetically (UTF-8 codepoint order).
+ */
 - (id<JavaUtilList>)lookupWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
                                            withInt:(jint)num;
 
@@ -45,37 +85,58 @@
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSuggestFstFSTCompletion)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSuggestFstFSTCompletion, DEFAULT_BUCKETS, jint)
+/*!
+ @brief Default number of buckets.
+ */
+inline jint OrgApacheLuceneSearchSuggestFstFSTCompletion_get_DEFAULT_BUCKETS();
+#define OrgApacheLuceneSearchSuggestFstFSTCompletion_DEFAULT_BUCKETS 10
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneSearchSuggestFstFSTCompletion, DEFAULT_BUCKETS, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestFstFSTCompletion_initWithOrgApacheLuceneUtilFstFST_withBoolean_withBoolean_(OrgApacheLuceneSearchSuggestFstFSTCompletion *self, OrgApacheLuceneUtilFstFST *automaton, jboolean higherWeightsFirst, jboolean exactFirst);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstFSTCompletion *new_OrgApacheLuceneSearchSuggestFstFSTCompletion_initWithOrgApacheLuceneUtilFstFST_withBoolean_withBoolean_(OrgApacheLuceneUtilFstFST *automaton, jboolean higherWeightsFirst, jboolean exactFirst) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstFSTCompletion *create_OrgApacheLuceneSearchSuggestFstFSTCompletion_initWithOrgApacheLuceneUtilFstFST_withBoolean_withBoolean_(OrgApacheLuceneUtilFstFST *automaton, jboolean higherWeightsFirst, jboolean exactFirst);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestFstFSTCompletion_initWithOrgApacheLuceneUtilFstFST_(OrgApacheLuceneSearchSuggestFstFSTCompletion *self, OrgApacheLuceneUtilFstFST *automaton);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstFSTCompletion *new_OrgApacheLuceneSearchSuggestFstFSTCompletion_initWithOrgApacheLuceneUtilFstFST_(OrgApacheLuceneUtilFstFST *automaton) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstFSTCompletion *create_OrgApacheLuceneSearchSuggestFstFSTCompletion_initWithOrgApacheLuceneUtilFstFST_(OrgApacheLuceneUtilFstFST *automaton);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestFstFSTCompletion)
 
 #endif
 
-#if !defined (_OrgApacheLuceneSearchSuggestFstFSTCompletion_Completion_) && (OrgApacheLuceneSearchSuggestFstFSTCompletion_INCLUDE_ALL || OrgApacheLuceneSearchSuggestFstFSTCompletion_Completion_INCLUDE)
-#define _OrgApacheLuceneSearchSuggestFstFSTCompletion_Completion_
+#if !defined (OrgApacheLuceneSearchSuggestFstFSTCompletion_Completion_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestFstFSTCompletion || defined(INCLUDE_OrgApacheLuceneSearchSuggestFstFSTCompletion_Completion))
+#define OrgApacheLuceneSearchSuggestFstFSTCompletion_Completion_
 
-#define JavaLangComparable_RESTRICT 1
-#define JavaLangComparable_INCLUDE 1
+#define RESTRICT_JavaLangComparable 1
+#define INCLUDE_JavaLangComparable 1
 #include "java/lang/Comparable.h"
 
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief A single completion for a given key.
+ */
 @interface OrgApacheLuceneSearchSuggestFstFSTCompletion_Completion : NSObject < JavaLangComparable > {
  @public
+  /*!
+   @brief UTF-8 bytes of the suggestion
+   */
   OrgApacheLuceneUtilBytesRef *utf8_;
+  /*!
+   @brief source bucket (weight) of the suggestion
+   */
   jint bucket_;
 }
 
 #pragma mark Public
 
+/*!
+ - seealso: BytesRef#compareTo(BytesRef)
+ */
 - (jint)compareToWithId:(OrgApacheLuceneSearchSuggestFstFSTCompletion_Completion *)o;
 
 - (NSString *)description;
@@ -95,8 +156,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestFstFSTCompletion_Completion_i
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstFSTCompletion_Completion *new_OrgApacheLuceneSearchSuggestFstFSTCompletion_Completion_initWithOrgApacheLuceneUtilBytesRef_withInt_(OrgApacheLuceneUtilBytesRef *key, jint bucket) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstFSTCompletion_Completion *create_OrgApacheLuceneSearchSuggestFstFSTCompletion_Completion_initWithOrgApacheLuceneUtilBytesRef_withInt_(OrgApacheLuceneUtilBytesRef *key, jint bucket);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestFstFSTCompletion_Completion)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSuggestFstFSTCompletion_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestFstFSTCompletion")

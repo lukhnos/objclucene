@@ -63,9 +63,13 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter, skipWri
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter)
 
-OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_emptyState_;
+OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_emptyState;
 
 @implementation OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter
+
++ (OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *)emptyState {
+  return OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_emptyState;
+}
 
 - (instancetype)initWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state {
   OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_initWithOrgApacheLuceneIndexSegmentWriteState_(self, state);
@@ -73,19 +77,19 @@ OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *OrgApache
 }
 
 - (OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *)newTermState {
-  return [new_OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState_init() autorelease];
+  return create_OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState_init();
 }
 
 - (void)init__WithOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)termsOut
         withOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state {
-  OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(termsOut, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_TERMS_CODEC_, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_VERSION_CURRENT, [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentWriteState *) nil_chk(state))->segmentInfo_)) getId], state->segmentSuffix_);
+  OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(termsOut, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_TERMS_CODEC, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_VERSION_CURRENT, [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentWriteState *) nil_chk(state))->segmentInfo_)) getId], state->segmentSuffix_);
   [((OrgApacheLuceneStoreIndexOutput *) nil_chk(termsOut)) writeVIntWithInt:OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_BLOCK_SIZE];
 }
 
 - (jint)setFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo {
   [super setFieldWithOrgApacheLuceneIndexFieldInfo:fieldInfo];
   [((OrgApacheLuceneCodecsLucene50Lucene50SkipWriter *) nil_chk(skipWriter_)) setFieldWithBoolean:writePositions_ withBoolean:writeOffsets_ withBoolean:writePayloads_];
-  JreStrongAssign(&lastState_, OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_emptyState_);
+  JreStrongAssign(&lastState_, OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_emptyState);
   if (writePositions_) {
     if (writePayloads_ || writeOffsets_) {
       return 3;
@@ -119,7 +123,7 @@ OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *OrgApache
   }
   jint docDelta = docID - lastDocID_;
   if (docID < 0 || (docCount_ > 0 && docDelta <= 0)) {
-    @throw [new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataOutput_(JreStrcat("$I$I$", @"docs out of order (", docID, @" <= ", lastDocID_, @" )"), docOut_) autorelease];
+    @throw create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataOutput_(JreStrcat("$I$I$", @"docs out of order (", docID, @" <= ", lastDocID_, @" )"), docOut_);
   }
   *IOSIntArray_GetRef(nil_chk(docDeltaBuffer_), docBufferUpto_) = docDelta;
   if (writeFreqs_) {
@@ -143,10 +147,10 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload
                    withInt:(jint)startOffset
                    withInt:(jint)endOffset {
   if (position > OrgApacheLuceneIndexIndexWriter_MAX_POSITION) {
-    @throw [new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataOutput_(JreStrcat("$I$IC", @"position=", position, @" is too large (> IndexWriter.MAX_POSITION=", OrgApacheLuceneIndexIndexWriter_MAX_POSITION, ')'), docOut_) autorelease];
+    @throw create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataOutput_(JreStrcat("$I$IC", @"position=", position, @" is too large (> IndexWriter.MAX_POSITION=", OrgApacheLuceneIndexIndexWriter_MAX_POSITION, ')'), docOut_);
   }
   if (position < 0) {
-    @throw [new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataOutput_(JreStrcat("$I$", @"position=", position, @" is < 0"), docOut_) autorelease];
+    @throw create_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataOutput_(JreStrcat("$I$", @"position=", position, @" is < 0"), docOut_);
   }
   *IOSIntArray_GetRef(nil_chk(posDeltaBuffer_), posBufferUpto_) = position - lastPosition_;
   if (writePayloads_) {
@@ -176,7 +180,7 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload
     if (writePayloads_) {
       [forUtil_ writeBlockWithIntArray:payloadLengthBuffer_ withByteArray:encoded_ withOrgApacheLuceneStoreIndexOutput:payOut_];
       [((OrgApacheLuceneStoreIndexOutput *) nil_chk(payOut_)) writeVIntWithInt:payloadByteUpto_];
-      [payOut_ writeBytesWithByteArray:payloadBytes_ withInt:0 withInt:payloadByteUpto_];
+      [((OrgApacheLuceneStoreIndexOutput *) nil_chk(payOut_)) writeBytesWithByteArray:payloadBytes_ withInt:0 withInt:payloadByteUpto_];
       payloadByteUpto_ = 0;
     }
     if (writeOffsets_) {
@@ -194,7 +198,7 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload
       if (payOut_ != nil) {
         lastBlockPayFP_ = [payOut_ getFilePointer];
       }
-      lastBlockPosFP_ = [posOut_ getFilePointer];
+      lastBlockPosFP_ = [((OrgApacheLuceneStoreIndexOutput *) nil_chk(posOut_)) getFilePointer];
       lastBlockPosBufferUpto_ = posBufferUpto_;
       lastBlockPayloadByteUpto_ = payloadByteUpto_;
     }
@@ -203,7 +207,7 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload
 }
 
 - (void)finishTermWithOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)_state {
-  OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *state = (OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *) check_class_cast(_state, [OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState class]);
+  OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *state = (OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *) cast_chk(_state, [OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState class]);
   JreAssert((((OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *) nil_chk(state))->docFreq_ > 0), (@"org/apache/lucene/codecs/lucene50/Lucene50PostingsWriter.java:325 condition failed: assert state.docFreq > 0;"));
   JreAssert((state->docFreq_ == docCount_), (JreStrcat("I$I", state->docFreq_, @" vs ", docCount_)));
   jint singletonDocID;
@@ -223,7 +227,7 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload
       }
       else {
         [((OrgApacheLuceneStoreIndexOutput *) nil_chk(docOut_)) writeVIntWithInt:JreLShift32(docDelta, 1)];
-        [docOut_ writeVIntWithInt:freq];
+        [((OrgApacheLuceneStoreIndexOutput *) nil_chk(docOut_)) writeVIntWithInt:freq];
       }
     }
   }
@@ -247,7 +251,7 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload
           if (payloadLength != lastPayloadLength) {
             lastPayloadLength = payloadLength;
             [((OrgApacheLuceneStoreIndexOutput *) nil_chk(posOut_)) writeVIntWithInt:(JreLShift32(posDelta, 1)) | 1];
-            [posOut_ writeVIntWithInt:payloadLength];
+            [((OrgApacheLuceneStoreIndexOutput *) nil_chk(posOut_)) writeVIntWithInt:payloadLength];
           }
           else {
             [((OrgApacheLuceneStoreIndexOutput *) nil_chk(posOut_)) writeVIntWithInt:JreLShift32(posDelta, 1)];
@@ -268,7 +272,7 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload
           }
           else {
             [((OrgApacheLuceneStoreIndexOutput *) nil_chk(posOut_)) writeVIntWithInt:(JreLShift32(delta, 1)) | 1];
-            [posOut_ writeVIntWithInt:length];
+            [((OrgApacheLuceneStoreIndexOutput *) nil_chk(posOut_)) writeVIntWithInt:length];
             lastOffsetLength = length;
           }
         }
@@ -306,9 +310,9 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg
 withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
 withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)_state
                     withBoolean:(jboolean)absolute {
-  OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *state = (OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *) check_class_cast(_state, [OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState class]);
+  OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *state = (OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *) cast_chk(_state, [OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState class]);
   if (absolute) {
-    JreStrongAssign(&lastState_, OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_emptyState_);
+    JreStrongAssign(&lastState_, OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_emptyState);
   }
   *IOSLongArray_GetRef(nil_chk(longs), 0) = ((OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *) nil_chk(state))->docStartFP_ - ((OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *) nil_chk(lastState_))->docStartFP_;
   if (writePositions_) {
@@ -376,7 +380,7 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)_
 
 + (void)initialize {
   if (self == [OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_emptyState_, new_OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_emptyState, new_OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter)
   }
 }
@@ -399,7 +403,7 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)_
     { "docOut_", NULL, 0x0, "Lorg.apache.lucene.store.IndexOutput;", NULL, NULL, .constantValue.asLong = 0 },
     { "posOut_", NULL, 0x0, "Lorg.apache.lucene.store.IndexOutput;", NULL, NULL, .constantValue.asLong = 0 },
     { "payOut_", NULL, 0x0, "Lorg.apache.lucene.store.IndexOutput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "emptyState_", NULL, 0x18, "Lorg.apache.lucene.codecs.lucene50.Lucene50PostingsFormat$IntBlockTermState;", &OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_emptyState_, NULL, .constantValue.asLong = 0 },
+    { "emptyState", "emptyState", 0x18, "Lorg.apache.lucene.codecs.lucene50.Lucene50PostingsFormat$IntBlockTermState;", &OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_emptyState, NULL, .constantValue.asLong = 0 },
     { "lastState_", NULL, 0x0, "Lorg.apache.lucene.codecs.lucene50.Lucene50PostingsFormat$IntBlockTermState;", NULL, NULL, .constantValue.asLong = 0 },
     { "docStartFP_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
     { "posStartFP_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
@@ -436,39 +440,39 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)_
 void OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_initWithOrgApacheLuceneIndexSegmentWriteState_(OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter *self, OrgApacheLuceneIndexSegmentWriteState *state) {
   OrgApacheLuceneCodecsPushPostingsWriterBase_init(self);
   jfloat acceptableOverheadRatio = OrgApacheLuceneUtilPackedPackedInts_COMPACT;
-  NSString *docFileName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentWriteState *) nil_chk(state))->segmentInfo_))->name_, state->segmentSuffix_, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_DOC_EXTENSION_);
+  NSString *docFileName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentWriteState *) nil_chk(state))->segmentInfo_))->name_, state->segmentSuffix_, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_DOC_EXTENSION);
   JreStrongAssign(&self->docOut_, [((OrgApacheLuceneStoreDirectory *) nil_chk(state->directory_)) createOutputWithNSString:docFileName withOrgApacheLuceneStoreIOContext:state->context_]);
   OrgApacheLuceneStoreIndexOutput *posOut = nil;
   OrgApacheLuceneStoreIndexOutput *payOut = nil;
   jboolean success = false;
   @try {
-    OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(self->docOut_, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_DOC_CODEC_, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_VERSION_CURRENT, [state->segmentInfo_ getId], state->segmentSuffix_);
+    OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(self->docOut_, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_DOC_CODEC, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_VERSION_CURRENT, [state->segmentInfo_ getId], state->segmentSuffix_);
     JreStrongAssignAndConsume(&self->forUtil_, new_OrgApacheLuceneCodecsLucene50ForUtil_initWithFloat_withOrgApacheLuceneStoreDataOutput_(acceptableOverheadRatio, self->docOut_));
     if ([((OrgApacheLuceneIndexFieldInfos *) nil_chk(state->fieldInfos_)) hasProx]) {
-      JreStrongAssignAndConsume(&self->posDeltaBuffer_, [IOSIntArray newArrayWithLength:JreLoadStatic(OrgApacheLuceneCodecsLucene50ForUtil, MAX_DATA_SIZE_)]);
-      NSString *posFileName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(state->segmentInfo_->name_, state->segmentSuffix_, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_POS_EXTENSION_);
+      JreStrongAssignAndConsume(&self->posDeltaBuffer_, [IOSIntArray newArrayWithLength:JreLoadStatic(OrgApacheLuceneCodecsLucene50ForUtil, MAX_DATA_SIZE)]);
+      NSString *posFileName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(state->segmentInfo_->name_, state->segmentSuffix_, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_POS_EXTENSION);
       posOut = [state->directory_ createOutputWithNSString:posFileName withOrgApacheLuceneStoreIOContext:state->context_];
-      OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(posOut, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_POS_CODEC_, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_VERSION_CURRENT, [state->segmentInfo_ getId], state->segmentSuffix_);
+      OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(posOut, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_POS_CODEC, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_VERSION_CURRENT, [state->segmentInfo_ getId], state->segmentSuffix_);
       if ([state->fieldInfos_ hasPayloads]) {
         JreStrongAssignAndConsume(&self->payloadBytes_, [IOSByteArray newArrayWithLength:128]);
-        JreStrongAssignAndConsume(&self->payloadLengthBuffer_, [IOSIntArray newArrayWithLength:JreLoadStatic(OrgApacheLuceneCodecsLucene50ForUtil, MAX_DATA_SIZE_)]);
+        JreStrongAssignAndConsume(&self->payloadLengthBuffer_, [IOSIntArray newArrayWithLength:JreLoadStatic(OrgApacheLuceneCodecsLucene50ForUtil, MAX_DATA_SIZE)]);
       }
       else {
         JreStrongAssign(&self->payloadBytes_, nil);
         JreStrongAssign(&self->payloadLengthBuffer_, nil);
       }
       if ([state->fieldInfos_ hasOffsets]) {
-        JreStrongAssignAndConsume(&self->offsetStartDeltaBuffer_, [IOSIntArray newArrayWithLength:JreLoadStatic(OrgApacheLuceneCodecsLucene50ForUtil, MAX_DATA_SIZE_)]);
-        JreStrongAssignAndConsume(&self->offsetLengthBuffer_, [IOSIntArray newArrayWithLength:JreLoadStatic(OrgApacheLuceneCodecsLucene50ForUtil, MAX_DATA_SIZE_)]);
+        JreStrongAssignAndConsume(&self->offsetStartDeltaBuffer_, [IOSIntArray newArrayWithLength:JreLoadStatic(OrgApacheLuceneCodecsLucene50ForUtil, MAX_DATA_SIZE)]);
+        JreStrongAssignAndConsume(&self->offsetLengthBuffer_, [IOSIntArray newArrayWithLength:JreLoadStatic(OrgApacheLuceneCodecsLucene50ForUtil, MAX_DATA_SIZE)]);
       }
       else {
         JreStrongAssign(&self->offsetStartDeltaBuffer_, nil);
         JreStrongAssign(&self->offsetLengthBuffer_, nil);
       }
       if ([state->fieldInfos_ hasPayloads] || [state->fieldInfos_ hasOffsets]) {
-        NSString *payFileName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(state->segmentInfo_->name_, state->segmentSuffix_, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_PAY_EXTENSION_);
+        NSString *payFileName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(state->segmentInfo_->name_, state->segmentSuffix_, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_PAY_EXTENSION);
         payOut = [state->directory_ createOutputWithNSString:payFileName withOrgApacheLuceneStoreIOContext:state->context_];
-        OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(payOut, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_PAY_CODEC_, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_VERSION_CURRENT, [state->segmentInfo_ getId], state->segmentSuffix_);
+        OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(payOut, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_PAY_CODEC, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_VERSION_CURRENT, [state->segmentInfo_ getId], state->segmentSuffix_);
       }
     }
     else {
@@ -487,16 +491,18 @@ void OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_initWithOrgApacheLucene
       OrgApacheLuceneUtilIOUtils_closeWhileHandlingExceptionWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ self->docOut_, posOut, payOut } count:3 type:JavaIoCloseable_class_()]);
     }
   }
-  JreStrongAssignAndConsume(&self->docDeltaBuffer_, [IOSIntArray newArrayWithLength:JreLoadStatic(OrgApacheLuceneCodecsLucene50ForUtil, MAX_DATA_SIZE_)]);
-  JreStrongAssignAndConsume(&self->freqBuffer_, [IOSIntArray newArrayWithLength:JreLoadStatic(OrgApacheLuceneCodecsLucene50ForUtil, MAX_DATA_SIZE_)]);
+  JreStrongAssignAndConsume(&self->docDeltaBuffer_, [IOSIntArray newArrayWithLength:JreLoadStatic(OrgApacheLuceneCodecsLucene50ForUtil, MAX_DATA_SIZE)]);
+  JreStrongAssignAndConsume(&self->freqBuffer_, [IOSIntArray newArrayWithLength:JreLoadStatic(OrgApacheLuceneCodecsLucene50ForUtil, MAX_DATA_SIZE)]);
   JreStrongAssignAndConsume(&self->skipWriter_, new_OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_initWithInt_withInt_withInt_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_(OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_MAX_SKIP_LEVELS, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_BLOCK_SIZE, [state->segmentInfo_ maxDoc], self->docOut_, posOut, payOut));
   JreStrongAssignAndConsume(&self->encoded_, [IOSByteArray newArrayWithLength:OrgApacheLuceneCodecsLucene50ForUtil_MAX_ENCODED_SIZE]);
 }
 
 OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter *new_OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_initWithOrgApacheLuceneIndexSegmentWriteState_(OrgApacheLuceneIndexSegmentWriteState *state) {
-  OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter *self = [OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter alloc];
-  OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_initWithOrgApacheLuceneIndexSegmentWriteState_(self, state);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter, initWithOrgApacheLuceneIndexSegmentWriteState_, state)
+}
+
+OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter *create_OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_initWithOrgApacheLuceneIndexSegmentWriteState_(OrgApacheLuceneIndexSegmentWriteState *state) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter, initWithOrgApacheLuceneIndexSegmentWriteState_, state)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter)

@@ -57,9 +57,11 @@ void OrgApacheLuceneSearchFilterCollector_initWithOrgApacheLuceneSearchCollector
 }
 
 OrgApacheLuceneSearchFilterCollector *new_OrgApacheLuceneSearchFilterCollector_initWithOrgApacheLuceneSearchCollector_(id<OrgApacheLuceneSearchCollector> inArg) {
-  OrgApacheLuceneSearchFilterCollector *self = [OrgApacheLuceneSearchFilterCollector alloc];
-  OrgApacheLuceneSearchFilterCollector_initWithOrgApacheLuceneSearchCollector_(self, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchFilterCollector, initWithOrgApacheLuceneSearchCollector_, inArg)
+}
+
+OrgApacheLuceneSearchFilterCollector *create_OrgApacheLuceneSearchFilterCollector_initWithOrgApacheLuceneSearchCollector_(id<OrgApacheLuceneSearchCollector> inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchFilterCollector, initWithOrgApacheLuceneSearchCollector_, inArg)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFilterCollector)

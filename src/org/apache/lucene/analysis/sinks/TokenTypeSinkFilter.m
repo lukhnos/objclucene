@@ -61,9 +61,11 @@ void OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter_initWithNSString_(OrgApache
 }
 
 OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter *new_OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter_initWithNSString_(NSString *typeToMatch) {
-  OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter *self = [OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter alloc];
-  OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter_initWithNSString_(self, typeToMatch);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter, initWithNSString_, typeToMatch)
+}
+
+OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter *create_OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter_initWithNSString_(NSString *typeToMatch) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter, initWithNSString_, typeToMatch)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter)

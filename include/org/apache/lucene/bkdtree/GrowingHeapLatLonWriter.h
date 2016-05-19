@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter_INCLUDE_ALL")
-#if OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter_RESTRICT
-#define OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter")
+#ifdef RESTRICT_OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter
+#define INCLUDE_ALL_OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter 0
 #else
-#define OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter 1
 #endif
-#undef OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter
 
-#if !defined (_OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter_) && (OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter_INCLUDE_ALL || OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter_INCLUDE)
-#define _OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter_
+#if !defined (OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter_) && (INCLUDE_ALL_OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter || defined(INCLUDE_OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter))
+#define OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter_
 
-#define OrgApacheLuceneBkdtreeLatLonWriter_RESTRICT 1
-#define OrgApacheLuceneBkdtreeLatLonWriter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneBkdtreeLatLonWriter 1
+#define INCLUDE_OrgApacheLuceneBkdtreeLatLonWriter 1
 #include "org/apache/lucene/bkdtree/LatLonWriter.h"
 
 @class IOSIntArray;
@@ -63,8 +63,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter_initWithInt
 
 FOUNDATION_EXPORT OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter *new_OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter_initWithInt_(jint maxSize) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter *create_OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter_initWithInt_(jint maxSize);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneBkdtreeGrowingHeapLatLonWriter")

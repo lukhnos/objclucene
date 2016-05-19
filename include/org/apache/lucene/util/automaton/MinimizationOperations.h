@@ -5,23 +5,33 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilAutomatonMinimizationOperations_INCLUDE_ALL")
-#if OrgApacheLuceneUtilAutomatonMinimizationOperations_RESTRICT
-#define OrgApacheLuceneUtilAutomatonMinimizationOperations_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonMinimizationOperations")
+#ifdef RESTRICT_OrgApacheLuceneUtilAutomatonMinimizationOperations
+#define INCLUDE_ALL_OrgApacheLuceneUtilAutomatonMinimizationOperations 0
 #else
-#define OrgApacheLuceneUtilAutomatonMinimizationOperations_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilAutomatonMinimizationOperations 1
 #endif
-#undef OrgApacheLuceneUtilAutomatonMinimizationOperations_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilAutomatonMinimizationOperations
 
-#if !defined (_OrgApacheLuceneUtilAutomatonMinimizationOperations_) && (OrgApacheLuceneUtilAutomatonMinimizationOperations_INCLUDE_ALL || OrgApacheLuceneUtilAutomatonMinimizationOperations_INCLUDE)
-#define _OrgApacheLuceneUtilAutomatonMinimizationOperations_
+#if !defined (OrgApacheLuceneUtilAutomatonMinimizationOperations_) && (INCLUDE_ALL_OrgApacheLuceneUtilAutomatonMinimizationOperations || defined(INCLUDE_OrgApacheLuceneUtilAutomatonMinimizationOperations))
+#define OrgApacheLuceneUtilAutomatonMinimizationOperations_
 
 @class OrgApacheLuceneUtilAutomatonAutomaton;
 
+/*!
+ @brief Operations for minimizing automata.
+ */
 @interface OrgApacheLuceneUtilAutomatonMinimizationOperations : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Minimizes (and determinizes if not already deterministic) the given
+ automaton using Hopcroft's algorighm.
+ @param maxDeterminizedStates maximum number of states determinizing the
+ automaton can result in.  Set higher to allow more complex queries and
+ lower to prevent memory exhaustion.
+ */
 + (OrgApacheLuceneUtilAutomatonAutomaton *)minimizeWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
                                                                                      withInt:(jint)maxDeterminizedStates;
 
@@ -35,8 +45,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonMinimizationOperations)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilAutomatonMinimizationOperations_IntPair_) && (OrgApacheLuceneUtilAutomatonMinimizationOperations_INCLUDE_ALL || OrgApacheLuceneUtilAutomatonMinimizationOperations_IntPair_INCLUDE)
-#define _OrgApacheLuceneUtilAutomatonMinimizationOperations_IntPair_
+#if !defined (OrgApacheLuceneUtilAutomatonMinimizationOperations_IntPair_) && (INCLUDE_ALL_OrgApacheLuceneUtilAutomatonMinimizationOperations || defined(INCLUDE_OrgApacheLuceneUtilAutomatonMinimizationOperations_IntPair))
+#define OrgApacheLuceneUtilAutomatonMinimizationOperations_IntPair_
 
 @interface OrgApacheLuceneUtilAutomatonMinimizationOperations_IntPair : NSObject {
  @public
@@ -56,12 +66,14 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonMinimizationOperations_IntPai
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonMinimizationOperations_IntPair *new_OrgApacheLuceneUtilAutomatonMinimizationOperations_IntPair_initWithInt_withInt_(jint n1, jint n2) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonMinimizationOperations_IntPair *create_OrgApacheLuceneUtilAutomatonMinimizationOperations_IntPair_initWithInt_withInt_(jint n1, jint n2);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonMinimizationOperations_IntPair)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList_) && (OrgApacheLuceneUtilAutomatonMinimizationOperations_INCLUDE_ALL || OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList_INCLUDE)
-#define _OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList_
+#if !defined (OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList_) && (INCLUDE_ALL_OrgApacheLuceneUtilAutomatonMinimizationOperations || defined(INCLUDE_OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList))
+#define OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList_
 
 @class OrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode;
 
@@ -88,12 +100,14 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonMinimizationOperations_StateL
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList *new_OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList *create_OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode_) && (OrgApacheLuceneUtilAutomatonMinimizationOperations_INCLUDE_ALL || OrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode_INCLUDE)
-#define _OrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode_
+#if !defined (OrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode_) && (INCLUDE_ALL_OrgApacheLuceneUtilAutomatonMinimizationOperations || defined(INCLUDE_OrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode))
+#define OrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode_
 
 @class OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList;
 
@@ -123,8 +137,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonMinimizationOperations_StateL
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode *new_OrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode_initWithInt_withOrgApacheLuceneUtilAutomatonMinimizationOperations_StateList_(jint q, OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList *sl) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode *create_OrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode_initWithInt_withOrgApacheLuceneUtilAutomatonMinimizationOperations_StateList_(jint q, OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList *sl);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilAutomatonMinimizationOperations_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonMinimizationOperations")

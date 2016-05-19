@@ -5,24 +5,31 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserClassicFastCharStream_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserClassicFastCharStream_RESTRICT
-#define OrgApacheLuceneQueryparserClassicFastCharStream_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserClassicFastCharStream")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserClassicFastCharStream
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserClassicFastCharStream 0
 #else
-#define OrgApacheLuceneQueryparserClassicFastCharStream_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserClassicFastCharStream 1
 #endif
-#undef OrgApacheLuceneQueryparserClassicFastCharStream_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserClassicFastCharStream
 
-#if !defined (_OrgApacheLuceneQueryparserClassicFastCharStream_) && (OrgApacheLuceneQueryparserClassicFastCharStream_INCLUDE_ALL || OrgApacheLuceneQueryparserClassicFastCharStream_INCLUDE)
-#define _OrgApacheLuceneQueryparserClassicFastCharStream_
+#if !defined (OrgApacheLuceneQueryparserClassicFastCharStream_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserClassicFastCharStream || defined(INCLUDE_OrgApacheLuceneQueryparserClassicFastCharStream))
+#define OrgApacheLuceneQueryparserClassicFastCharStream_
 
-#define OrgApacheLuceneQueryparserClassicCharStream_RESTRICT 1
-#define OrgApacheLuceneQueryparserClassicCharStream_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserClassicCharStream 1
+#define INCLUDE_OrgApacheLuceneQueryparserClassicCharStream 1
 #include "org/apache/lucene/queryparser/classic/CharStream.h"
 
 @class IOSCharArray;
 @class JavaIoReader;
 
+/*!
+ @brief An efficient implementation of JavaCC's CharStream interface.
+ <p>Note that
+ this does not do line-number counting, but instead keeps track of the
+ character position of the token in the input, as required by Lucene's <code>org.apache.lucene.analysis.Token</code>
+  API. 
+ */
 @interface OrgApacheLuceneQueryparserClassicFastCharStream : NSObject < OrgApacheLuceneQueryparserClassicCharStream > {
  @public
   IOSCharArray *buffer_;
@@ -35,6 +42,9 @@
 
 #pragma mark Public
 
+/*!
+ @brief Constructs from a Reader.
+ */
 - (instancetype)initWithJavaIoReader:(JavaIoReader *)r;
 
 - (void)backupWithInt:(jint)amount;
@@ -72,8 +82,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserClassicFastCharStream_initWithJ
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserClassicFastCharStream *new_OrgApacheLuceneQueryparserClassicFastCharStream_initWithJavaIoReader_(JavaIoReader *r) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserClassicFastCharStream *create_OrgApacheLuceneQueryparserClassicFastCharStream_initWithJavaIoReader_(JavaIoReader *r);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserClassicFastCharStream)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserClassicFastCharStream_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserClassicFastCharStream")

@@ -5,25 +5,28 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder_RESTRICT
-#define OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder 0
 #else
-#define OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder 1
 #endif
-#undef OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder
 
-#if !defined (_OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder_) && (OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder_INCLUDE_ALL || OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder_INCLUDE)
-#define _OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder_
+#if !defined (OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder || defined(INCLUDE_OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder))
+#define OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder_
 
-#define OrgApacheLuceneQueryparserXmlQueryBuilder_RESTRICT 1
-#define OrgApacheLuceneQueryparserXmlQueryBuilder_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserXmlQueryBuilder 1
+#define INCLUDE_OrgApacheLuceneQueryparserXmlQueryBuilder 1
 #include "org/apache/lucene/queryparser/xml/QueryBuilder.h"
 
-@class OrgApacheLuceneSearchBooleanClause_OccurEnum;
+@class OrgApacheLuceneSearchBooleanClause_Occur;
 @class OrgApacheLuceneSearchQuery;
 @protocol OrgW3cDomElement;
 
+/*!
+ @brief Builder for <code>BooleanQuery</code>
+ */
 @interface OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder : NSObject < OrgApacheLuceneQueryparserXmlQueryBuilder >
 
 #pragma mark Public
@@ -34,7 +37,7 @@
 
 #pragma mark Package-Private
 
-+ (OrgApacheLuceneSearchBooleanClause_OccurEnum *)getOccursValueWithOrgW3cDomElement:(id<OrgW3cDomElement>)clauseElem;
++ (OrgApacheLuceneSearchBooleanClause_Occur *)getOccursValueWithOrgW3cDomElement:(id<OrgW3cDomElement>)clauseElem;
 
 @end
 
@@ -44,10 +47,12 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder_
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder *new_OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder_initWithOrgApacheLuceneQueryparserXmlQueryBuilder_(id<OrgApacheLuceneQueryparserXmlQueryBuilder> factory) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanClause_OccurEnum *OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder_getOccursValueWithOrgW3cDomElement_(id<OrgW3cDomElement> clauseElem);
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder *create_OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder_initWithOrgApacheLuceneQueryparserXmlQueryBuilder_(id<OrgApacheLuceneQueryparserXmlQueryBuilder> factory);
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanClause_Occur *OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder_getOccursValueWithOrgW3cDomElement_(id<OrgW3cDomElement> clauseElem);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder")

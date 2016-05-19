@@ -5,29 +5,40 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisPtPortugueseStemmer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisPtPortugueseStemmer_RESTRICT
-#define OrgApacheLuceneAnalysisPtPortugueseStemmer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPtPortugueseStemmer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisPtPortugueseStemmer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPtPortugueseStemmer 0
 #else
-#define OrgApacheLuceneAnalysisPtPortugueseStemmer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPtPortugueseStemmer 1
 #endif
-#undef OrgApacheLuceneAnalysisPtPortugueseStemmer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisPtPortugueseStemmer
 
-#if !defined (_OrgApacheLuceneAnalysisPtPortugueseStemmer_) && (OrgApacheLuceneAnalysisPtPortugueseStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisPtPortugueseStemmer_INCLUDE)
-#define _OrgApacheLuceneAnalysisPtPortugueseStemmer_
+#if !defined (OrgApacheLuceneAnalysisPtPortugueseStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPtPortugueseStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisPtPortugueseStemmer))
+#define OrgApacheLuceneAnalysisPtPortugueseStemmer_
 
-#define OrgApacheLuceneAnalysisPtRSLPStemmerBase_RESTRICT 1
-#define OrgApacheLuceneAnalysisPtRSLPStemmerBase_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisPtRSLPStemmerBase 1
+#define INCLUDE_OrgApacheLuceneAnalysisPtRSLPStemmerBase 1
 #include "org/apache/lucene/analysis/pt/RSLPStemmerBase.h"
 
 @class IOSCharArray;
 
+/*!
+ @brief Portuguese stemmer implementing the RSLP (Removedor de Sufixos da Lingua Portuguesa)
+ algorithm.
+ This is sometimes also referred to as the Orengo stemmer.
+ - seealso: RSLPStemmerBase
+ */
 @interface OrgApacheLuceneAnalysisPtPortugueseStemmer : OrgApacheLuceneAnalysisPtRSLPStemmerBase
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @param s buffer, oversized to at least <code>len+1</code>
+ @param len initial valid length of buffer
+ @return new valid length, stemmed
+ */
 - (jint)stemWithCharArray:(IOSCharArray *)s
                   withInt:(jint)len;
 
@@ -39,8 +50,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPtPortugueseStemmer_init(OrgApache
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtPortugueseStemmer *new_OrgApacheLuceneAnalysisPtPortugueseStemmer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtPortugueseStemmer *create_OrgApacheLuceneAnalysisPtPortugueseStemmer_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPtPortugueseStemmer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisPtPortugueseStemmer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPtPortugueseStemmer")

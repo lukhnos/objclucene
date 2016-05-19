@@ -4,12 +4,13 @@
 //
 
 #include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
 #include "java/lang/NumberFormatException.h"
-#include "java/lang/Throwable.h"
+#include "java/lang/annotation/Annotation.h"
 #include "java/text/ParseException.h"
 #include "java/util/Locale.h"
 #include "org/apache/lucene/util/StrictStringTokenizer.h"
@@ -37,58 +38,230 @@ __attribute__((unused)) static void OrgApacheLuceneUtilVersion_initWithInt_withI
 
 __attribute__((unused)) static OrgApacheLuceneUtilVersion *new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(jint major, jint minor, jint bugfix) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneUtilVersion *create_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(jint major, jint minor, jint bugfix);
+
 __attribute__((unused)) static void OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_withInt_(OrgApacheLuceneUtilVersion *self, jint major, jint minor, jint bugfix, jint prerelease);
 
 __attribute__((unused)) static OrgApacheLuceneUtilVersion *new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_withInt_(jint major, jint minor, jint bugfix, jint prerelease) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneUtilVersion *create_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_withInt_(jint major, jint minor, jint bugfix, jint prerelease);
 
 __attribute__((unused)) static jboolean OrgApacheLuceneUtilVersion_encodedIsValid(OrgApacheLuceneUtilVersion *self);
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilVersion)
 
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_0_0_ALPHA_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_0_0_BETA_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_0_0_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_1_0_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_2_0_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_2_1_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_3_0_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_3_1_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_4_0_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_5_0_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_5_1_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_6_0_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_6_1_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_7_0_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_7_1_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_7_2_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_8_0_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_8_1_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_9_0_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_9_1_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_10_0_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_10_1_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_10_2_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_10_3_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_10_4_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_5_0_0_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_5_1_0_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_5_2_0_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_5_2_1_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_5_3_0_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LATEST_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_CURRENT_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_0_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_1_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_2_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_3_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_4_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_5_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_6_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_7_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_8_;
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_9_;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_0_0_ALPHA;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_0_0_BETA;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_0_0;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_1_0;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_2_0;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_2_1;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_3_0;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_3_1;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_4_0;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_5_0;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_5_1;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_6_0;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_6_1;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_7_0;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_7_1;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_7_2;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_8_0;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_8_1;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_9_0;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_9_1;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_10_0;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_10_1;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_10_2;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_10_3;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_10_4;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_5_0_0;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_5_1_0;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_5_2_0;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_5_2_1;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_5_3_0;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LATEST;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_CURRENT;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_0;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_1;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_2;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_3;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_4;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_5;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_6;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_7;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_8;
+OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_9;
 
 @implementation OrgApacheLuceneUtilVersion
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_4_0_0_ALPHA {
+  return OrgApacheLuceneUtilVersion_LUCENE_4_0_0_ALPHA;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_4_0_0_BETA {
+  return OrgApacheLuceneUtilVersion_LUCENE_4_0_0_BETA;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_4_0_0 {
+  return OrgApacheLuceneUtilVersion_LUCENE_4_0_0;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_4_1_0 {
+  return OrgApacheLuceneUtilVersion_LUCENE_4_1_0;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_4_2_0 {
+  return OrgApacheLuceneUtilVersion_LUCENE_4_2_0;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_4_2_1 {
+  return OrgApacheLuceneUtilVersion_LUCENE_4_2_1;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_4_3_0 {
+  return OrgApacheLuceneUtilVersion_LUCENE_4_3_0;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_4_3_1 {
+  return OrgApacheLuceneUtilVersion_LUCENE_4_3_1;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_4_4_0 {
+  return OrgApacheLuceneUtilVersion_LUCENE_4_4_0;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_4_5_0 {
+  return OrgApacheLuceneUtilVersion_LUCENE_4_5_0;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_4_5_1 {
+  return OrgApacheLuceneUtilVersion_LUCENE_4_5_1;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_4_6_0 {
+  return OrgApacheLuceneUtilVersion_LUCENE_4_6_0;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_4_6_1 {
+  return OrgApacheLuceneUtilVersion_LUCENE_4_6_1;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_4_7_0 {
+  return OrgApacheLuceneUtilVersion_LUCENE_4_7_0;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_4_7_1 {
+  return OrgApacheLuceneUtilVersion_LUCENE_4_7_1;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_4_7_2 {
+  return OrgApacheLuceneUtilVersion_LUCENE_4_7_2;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_4_8_0 {
+  return OrgApacheLuceneUtilVersion_LUCENE_4_8_0;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_4_8_1 {
+  return OrgApacheLuceneUtilVersion_LUCENE_4_8_1;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_4_9_0 {
+  return OrgApacheLuceneUtilVersion_LUCENE_4_9_0;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_4_9_1 {
+  return OrgApacheLuceneUtilVersion_LUCENE_4_9_1;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_4_10_0 {
+  return OrgApacheLuceneUtilVersion_LUCENE_4_10_0;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_4_10_1 {
+  return OrgApacheLuceneUtilVersion_LUCENE_4_10_1;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_4_10_2 {
+  return OrgApacheLuceneUtilVersion_LUCENE_4_10_2;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_4_10_3 {
+  return OrgApacheLuceneUtilVersion_LUCENE_4_10_3;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_4_10_4 {
+  return OrgApacheLuceneUtilVersion_LUCENE_4_10_4;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_5_0_0 {
+  return OrgApacheLuceneUtilVersion_LUCENE_5_0_0;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_5_1_0 {
+  return OrgApacheLuceneUtilVersion_LUCENE_5_1_0;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_5_2_0 {
+  return OrgApacheLuceneUtilVersion_LUCENE_5_2_0;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_5_2_1 {
+  return OrgApacheLuceneUtilVersion_LUCENE_5_2_1;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_5_3_0 {
+  return OrgApacheLuceneUtilVersion_LUCENE_5_3_0;
+}
+
++ (OrgApacheLuceneUtilVersion *)LATEST {
+  return OrgApacheLuceneUtilVersion_LATEST;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_CURRENT {
+  return OrgApacheLuceneUtilVersion_LUCENE_CURRENT;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_4_0 {
+  return OrgApacheLuceneUtilVersion_LUCENE_4_0;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_4_1 {
+  return OrgApacheLuceneUtilVersion_LUCENE_4_1;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_4_2 {
+  return OrgApacheLuceneUtilVersion_LUCENE_4_2;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_4_3 {
+  return OrgApacheLuceneUtilVersion_LUCENE_4_3;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_4_4 {
+  return OrgApacheLuceneUtilVersion_LUCENE_4_4;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_4_5 {
+  return OrgApacheLuceneUtilVersion_LUCENE_4_5;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_4_6 {
+  return OrgApacheLuceneUtilVersion_LUCENE_4_6;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_4_7 {
+  return OrgApacheLuceneUtilVersion_LUCENE_4_7;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_4_8 {
+  return OrgApacheLuceneUtilVersion_LUCENE_4_8;
+}
+
++ (OrgApacheLuceneUtilVersion *)LUCENE_4_9 {
+  return OrgApacheLuceneUtilVersion_LUCENE_4_9;
+}
 
 + (OrgApacheLuceneUtilVersion *)parseWithNSString:(NSString *)version_ {
   return OrgApacheLuceneUtilVersion_parseWithNSString_(version_);
@@ -131,7 +304,7 @@ OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_9_;
 }
 
 - (jboolean)isEqual:(id)o {
-  return o != nil && [o isKindOfClass:[OrgApacheLuceneUtilVersion class]] && ((OrgApacheLuceneUtilVersion *) check_class_cast(o, [OrgApacheLuceneUtilVersion class]))->encodedValue_ == encodedValue_;
+  return o != nil && [o isKindOfClass:[OrgApacheLuceneUtilVersion class]] && ((OrgApacheLuceneUtilVersion *) cast_chk(o, [OrgApacheLuceneUtilVersion class]))->encodedValue_ == encodedValue_;
 }
 
 - (jboolean)encodedIsValid {
@@ -142,212 +315,212 @@ OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_9_;
   return encodedValue_;
 }
 
-+ (void)initialize {
-  if (self == [OrgApacheLuceneUtilVersion class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_0_0_ALPHA_, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_withInt_(4, 0, 0, 0));
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_0_0_BETA_, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_withInt_(4, 0, 0, 1));
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_0_0_, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_withInt_(4, 0, 0, 2));
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_1_0_, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 1, 0));
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_2_0_, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 2, 0));
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_2_1_, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 2, 1));
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_3_0_, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 3, 0));
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_3_1_, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 3, 1));
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_4_0_, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 4, 0));
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_5_0_, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 5, 0));
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_5_1_, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 5, 1));
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_6_0_, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 6, 0));
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_6_1_, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 6, 1));
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_7_0_, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 7, 0));
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_7_1_, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 7, 1));
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_7_2_, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 7, 2));
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_8_0_, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 8, 0));
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_8_1_, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 8, 1));
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_9_0_, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 9, 0));
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_9_1_, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 9, 1));
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_10_0_, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 10, 0));
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_10_1_, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 10, 1));
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_10_2_, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 10, 2));
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_10_3_, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 10, 3));
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_10_4_, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 10, 4));
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_5_0_0_, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(5, 0, 0));
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_5_1_0_, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(5, 1, 0));
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_5_2_0_, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(5, 2, 0));
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_5_2_1_, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(5, 2, 1));
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_5_3_0_, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(5, 3, 0));
-    JreStrongAssign(&OrgApacheLuceneUtilVersion_LATEST_, OrgApacheLuceneUtilVersion_LUCENE_5_3_0_);
-    JreStrongAssign(&OrgApacheLuceneUtilVersion_LUCENE_CURRENT_, OrgApacheLuceneUtilVersion_LATEST_);
-    JreStrongAssign(&OrgApacheLuceneUtilVersion_LUCENE_4_0_, OrgApacheLuceneUtilVersion_LUCENE_4_0_0_ALPHA_);
-    JreStrongAssign(&OrgApacheLuceneUtilVersion_LUCENE_4_1_, OrgApacheLuceneUtilVersion_LUCENE_4_1_0_);
-    JreStrongAssign(&OrgApacheLuceneUtilVersion_LUCENE_4_2_, OrgApacheLuceneUtilVersion_LUCENE_4_2_0_);
-    JreStrongAssign(&OrgApacheLuceneUtilVersion_LUCENE_4_3_, OrgApacheLuceneUtilVersion_LUCENE_4_3_0_);
-    JreStrongAssign(&OrgApacheLuceneUtilVersion_LUCENE_4_4_, OrgApacheLuceneUtilVersion_LUCENE_4_4_0_);
-    JreStrongAssign(&OrgApacheLuceneUtilVersion_LUCENE_4_5_, OrgApacheLuceneUtilVersion_LUCENE_4_5_0_);
-    JreStrongAssign(&OrgApacheLuceneUtilVersion_LUCENE_4_6_, OrgApacheLuceneUtilVersion_LUCENE_4_6_0_);
-    JreStrongAssign(&OrgApacheLuceneUtilVersion_LUCENE_4_7_, OrgApacheLuceneUtilVersion_LUCENE_4_7_0_);
-    JreStrongAssign(&OrgApacheLuceneUtilVersion_LUCENE_4_8_, OrgApacheLuceneUtilVersion_LUCENE_4_8_0_);
-    JreStrongAssign(&OrgApacheLuceneUtilVersion_LUCENE_4_9_, OrgApacheLuceneUtilVersion_LUCENE_4_9_0_);
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilVersion)
-  }
-}
-
 + (IOSObjectArray *)__annotations_LUCENE_4_0_0_ALPHA_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_4_0_0_BETA_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_4_0_0_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_4_1_0_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_4_2_0_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_4_2_1_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_4_3_0_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_4_3_1_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_4_4_0_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_4_5_0_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_4_5_1_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_4_6_0_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_4_6_1_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_4_7_0_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_4_7_1_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_4_7_2_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_4_8_0_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_4_8_1_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_4_9_0_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_4_9_1_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_4_10_0_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_4_10_1_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_4_10_2_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_4_10_3_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_4_10_4_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_5_0_0_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_5_1_0_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_5_2_0_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_5_2_1_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_CURRENT_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_4_0_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_4_1_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_4_2_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_4_3_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_4_4_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_4_5_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_4_6_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_4_7_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_4_8_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_LUCENE_4_9_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
++ (void)initialize {
+  if (self == [OrgApacheLuceneUtilVersion class]) {
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_0_0_ALPHA, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_withInt_(4, 0, 0, 0));
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_0_0_BETA, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_withInt_(4, 0, 0, 1));
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_0_0, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_withInt_(4, 0, 0, 2));
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_1_0, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 1, 0));
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_2_0, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 2, 0));
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_2_1, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 2, 1));
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_3_0, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 3, 0));
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_3_1, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 3, 1));
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_4_0, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 4, 0));
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_5_0, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 5, 0));
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_5_1, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 5, 1));
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_6_0, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 6, 0));
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_6_1, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 6, 1));
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_7_0, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 7, 0));
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_7_1, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 7, 1));
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_7_2, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 7, 2));
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_8_0, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 8, 0));
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_8_1, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 8, 1));
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_9_0, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 9, 0));
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_9_1, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 9, 1));
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_10_0, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 10, 0));
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_10_1, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 10, 1));
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_10_2, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 10, 2));
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_10_3, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 10, 3));
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_4_10_4, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(4, 10, 4));
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_5_0_0, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(5, 0, 0));
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_5_1_0, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(5, 1, 0));
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_5_2_0, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(5, 2, 0));
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_5_2_1, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(5, 2, 1));
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilVersion_LUCENE_5_3_0, new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(5, 3, 0));
+    JreStrongAssign(&OrgApacheLuceneUtilVersion_LATEST, OrgApacheLuceneUtilVersion_LUCENE_5_3_0);
+    JreStrongAssign(&OrgApacheLuceneUtilVersion_LUCENE_CURRENT, OrgApacheLuceneUtilVersion_LATEST);
+    JreStrongAssign(&OrgApacheLuceneUtilVersion_LUCENE_4_0, OrgApacheLuceneUtilVersion_LUCENE_4_0_0_ALPHA);
+    JreStrongAssign(&OrgApacheLuceneUtilVersion_LUCENE_4_1, OrgApacheLuceneUtilVersion_LUCENE_4_1_0);
+    JreStrongAssign(&OrgApacheLuceneUtilVersion_LUCENE_4_2, OrgApacheLuceneUtilVersion_LUCENE_4_2_0);
+    JreStrongAssign(&OrgApacheLuceneUtilVersion_LUCENE_4_3, OrgApacheLuceneUtilVersion_LUCENE_4_3_0);
+    JreStrongAssign(&OrgApacheLuceneUtilVersion_LUCENE_4_4, OrgApacheLuceneUtilVersion_LUCENE_4_4_0);
+    JreStrongAssign(&OrgApacheLuceneUtilVersion_LUCENE_4_5, OrgApacheLuceneUtilVersion_LUCENE_4_5_0);
+    JreStrongAssign(&OrgApacheLuceneUtilVersion_LUCENE_4_6, OrgApacheLuceneUtilVersion_LUCENE_4_6_0);
+    JreStrongAssign(&OrgApacheLuceneUtilVersion_LUCENE_4_7, OrgApacheLuceneUtilVersion_LUCENE_4_7_0);
+    JreStrongAssign(&OrgApacheLuceneUtilVersion_LUCENE_4_8, OrgApacheLuceneUtilVersion_LUCENE_4_8_0);
+    JreStrongAssign(&OrgApacheLuceneUtilVersion_LUCENE_4_9, OrgApacheLuceneUtilVersion_LUCENE_4_9_0);
+    J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilVersion)
+  }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -364,48 +537,48 @@ OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_9_;
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "LUCENE_4_0_0_ALPHA_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_0_0_ALPHA_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_4_0_0_BETA_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_0_0_BETA_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_4_0_0_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_0_0_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_4_1_0_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_1_0_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_4_2_0_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_2_0_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_4_2_1_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_2_1_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_4_3_0_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_3_0_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_4_3_1_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_3_1_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_4_4_0_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_4_0_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_4_5_0_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_5_0_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_4_5_1_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_5_1_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_4_6_0_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_6_0_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_4_6_1_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_6_1_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_4_7_0_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_7_0_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_4_7_1_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_7_1_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_4_7_2_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_7_2_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_4_8_0_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_8_0_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_4_8_1_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_8_1_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_4_9_0_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_9_0_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_4_9_1_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_9_1_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_4_10_0_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_10_0_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_4_10_1_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_10_1_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_4_10_2_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_10_2_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_4_10_3_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_10_3_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_4_10_4_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_10_4_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_5_0_0_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_5_0_0_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_5_1_0_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_5_1_0_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_5_2_0_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_5_2_0_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_5_2_1_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_5_2_1_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_5_3_0_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_5_3_0_, NULL, .constantValue.asLong = 0 },
-    { "LATEST_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LATEST_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_CURRENT_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_CURRENT_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_4_0_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_0_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_4_1_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_1_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_4_2_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_2_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_4_3_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_3_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_4_4_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_4_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_4_5_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_5_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_4_6_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_6_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_4_7_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_7_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_4_8_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_8_, NULL, .constantValue.asLong = 0 },
-    { "LUCENE_4_9_", NULL, 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_9_, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_4_0_0_ALPHA", "LUCENE_4_0_0_ALPHA", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_0_0_ALPHA, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_4_0_0_BETA", "LUCENE_4_0_0_BETA", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_0_0_BETA, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_4_0_0", "LUCENE_4_0_0", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_0_0, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_4_1_0", "LUCENE_4_1_0", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_1_0, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_4_2_0", "LUCENE_4_2_0", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_2_0, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_4_2_1", "LUCENE_4_2_1", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_2_1, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_4_3_0", "LUCENE_4_3_0", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_3_0, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_4_3_1", "LUCENE_4_3_1", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_3_1, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_4_4_0", "LUCENE_4_4_0", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_4_0, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_4_5_0", "LUCENE_4_5_0", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_5_0, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_4_5_1", "LUCENE_4_5_1", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_5_1, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_4_6_0", "LUCENE_4_6_0", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_6_0, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_4_6_1", "LUCENE_4_6_1", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_6_1, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_4_7_0", "LUCENE_4_7_0", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_7_0, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_4_7_1", "LUCENE_4_7_1", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_7_1, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_4_7_2", "LUCENE_4_7_2", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_7_2, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_4_8_0", "LUCENE_4_8_0", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_8_0, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_4_8_1", "LUCENE_4_8_1", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_8_1, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_4_9_0", "LUCENE_4_9_0", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_9_0, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_4_9_1", "LUCENE_4_9_1", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_9_1, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_4_10_0", "LUCENE_4_10_0", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_10_0, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_4_10_1", "LUCENE_4_10_1", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_10_1, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_4_10_2", "LUCENE_4_10_2", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_10_2, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_4_10_3", "LUCENE_4_10_3", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_10_3, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_4_10_4", "LUCENE_4_10_4", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_10_4, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_5_0_0", "LUCENE_5_0_0", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_5_0_0, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_5_1_0", "LUCENE_5_1_0", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_5_1_0, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_5_2_0", "LUCENE_5_2_0", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_5_2_0, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_5_2_1", "LUCENE_5_2_1", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_5_2_1, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_5_3_0", "LUCENE_5_3_0", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_5_3_0, NULL, .constantValue.asLong = 0 },
+    { "LATEST", "LATEST", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LATEST, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_CURRENT", "LUCENE_CURRENT", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_CURRENT, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_4_0", "LUCENE_4_0", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_0, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_4_1", "LUCENE_4_1", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_1, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_4_2", "LUCENE_4_2", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_2, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_4_3", "LUCENE_4_3", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_3, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_4_4", "LUCENE_4_4", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_4, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_4_5", "LUCENE_4_5", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_5, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_4_6", "LUCENE_4_6", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_6, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_4_7", "LUCENE_4_7", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_7, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_4_8", "LUCENE_4_8", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_8, NULL, .constantValue.asLong = 0 },
+    { "LUCENE_4_9", "LUCENE_4_9", 0x19, "Lorg.apache.lucene.util.Version;", &OrgApacheLuceneUtilVersion_LUCENE_4_9, NULL, .constantValue.asLong = 0 },
     { "major_", NULL, 0x11, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "minor_", NULL, 0x11, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "bugfix_", NULL, 0x11, "I", NULL, NULL, .constantValue.asLong = 0 },
@@ -420,9 +593,9 @@ OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_9_;
 
 OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_parseWithNSString_(NSString *version_) {
   OrgApacheLuceneUtilVersion_initialize();
-  OrgApacheLuceneUtilStrictStringTokenizer *tokens = [new_OrgApacheLuceneUtilStrictStringTokenizer_initWithNSString_withChar_(version_, '.') autorelease];
+  OrgApacheLuceneUtilStrictStringTokenizer *tokens = create_OrgApacheLuceneUtilStrictStringTokenizer_initWithNSString_withChar_(version_, '.');
   if ([tokens hasMoreTokens] == false) {
-    @throw [new_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$$C", @"Version is not in form major.minor.bugfix(.prerelease) (got: ", version_, ')'), 0) autorelease];
+    @throw create_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$$C", @"Version is not in form major.minor.bugfix(.prerelease) (got: ", version_, ')'), 0);
   }
   jint major;
   NSString *token = [tokens nextToken];
@@ -430,12 +603,12 @@ OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_parseWithNSString_(NSStri
     major = JavaLangInteger_parseIntWithNSString_(token);
   }
   @catch (JavaLangNumberFormatException *nfe) {
-    JavaTextParseException *p = [new_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$$$$C", @"Failed to parse major version from \"", token, @"\" (got: ", version_, ')'), 0) autorelease];
-    [p initCauseWithJavaLangThrowable:nfe];
+    JavaTextParseException *p = create_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$$$$C", @"Failed to parse major version from \"", token, @"\" (got: ", version_, ')'), 0);
+    [p initCauseWithNSException:nfe];
     @throw p;
   }
   if ([tokens hasMoreTokens] == false) {
-    @throw [new_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$$C", @"Version is not in form major.minor.bugfix(.prerelease) (got: ", version_, ')'), 0) autorelease];
+    @throw create_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$$C", @"Version is not in form major.minor.bugfix(.prerelease) (got: ", version_, ')'), 0);
   }
   jint minor;
   token = [tokens nextToken];
@@ -443,8 +616,8 @@ OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_parseWithNSString_(NSStri
     minor = JavaLangInteger_parseIntWithNSString_(token);
   }
   @catch (JavaLangNumberFormatException *nfe) {
-    JavaTextParseException *p = [new_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$$$$C", @"Failed to parse minor version from \"", token, @"\" (got: ", version_, ')'), 0) autorelease];
-    [p initCauseWithJavaLangThrowable:nfe];
+    JavaTextParseException *p = create_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$$$$C", @"Failed to parse minor version from \"", token, @"\" (got: ", version_, ')'), 0);
+    [p initCauseWithNSException:nfe];
     @throw p;
   }
   jint bugfix = 0;
@@ -455,8 +628,8 @@ OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_parseWithNSString_(NSStri
       bugfix = JavaLangInteger_parseIntWithNSString_(token);
     }
     @catch (JavaLangNumberFormatException *nfe) {
-      JavaTextParseException *p = [new_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$$$$C", @"Failed to parse bugfix version from \"", token, @"\" (got: ", version_, ')'), 0) autorelease];
-      [p initCauseWithJavaLangThrowable:nfe];
+      JavaTextParseException *p = create_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$$$$C", @"Failed to parse bugfix version from \"", token, @"\" (got: ", version_, ')'), 0);
+      [p initCauseWithNSException:nfe];
       @throw p;
     }
     if ([tokens hasMoreTokens]) {
@@ -465,24 +638,24 @@ OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_parseWithNSString_(NSStri
         prerelease = JavaLangInteger_parseIntWithNSString_(token);
       }
       @catch (JavaLangNumberFormatException *nfe) {
-        JavaTextParseException *p = [new_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$$$$C", @"Failed to parse prerelease version from \"", token, @"\" (got: ", version_, ')'), 0) autorelease];
-        [p initCauseWithJavaLangThrowable:nfe];
+        JavaTextParseException *p = create_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$$$$C", @"Failed to parse prerelease version from \"", token, @"\" (got: ", version_, ')'), 0);
+        [p initCauseWithNSException:nfe];
         @throw p;
       }
       if (prerelease == 0) {
-        @throw [new_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$I$$C", @"Invalid value ", prerelease, @" for prerelease; should be 1 or 2 (got: ", version_, ')'), 0) autorelease];
+        @throw create_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$I$$C", @"Invalid value ", prerelease, @" for prerelease; should be 1 or 2 (got: ", version_, ')'), 0);
       }
       if ([tokens hasMoreTokens]) {
-        @throw [new_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$$C", @"Version is not in form major.minor.bugfix(.prerelease) (got: ", version_, ')'), 0) autorelease];
+        @throw create_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$$C", @"Version is not in form major.minor.bugfix(.prerelease) (got: ", version_, ')'), 0);
       }
     }
   }
   @try {
-    return [new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_withInt_(major, minor, bugfix, prerelease) autorelease];
+    return create_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_withInt_(major, minor, bugfix, prerelease);
   }
   @catch (JavaLangIllegalArgumentException *iae) {
-    JavaTextParseException *pe = [new_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$$$$", @"failed to parse version string \"", version_, @"\": ", [((JavaLangIllegalArgumentException *) nil_chk(iae)) getMessage]), 0) autorelease];
-    [pe initCauseWithJavaLangThrowable:iae];
+    JavaTextParseException *pe = create_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$$$$", @"failed to parse version string \"", version_, @"\": ", [((JavaLangIllegalArgumentException *) nil_chk(iae)) getMessage]), 0);
+    [pe initCauseWithNSException:iae];
     @throw pe;
   }
 }
@@ -490,28 +663,28 @@ OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_parseWithNSString_(NSStri
 OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_parseLenientlyWithNSString_(NSString *version_) {
   OrgApacheLuceneUtilVersion_initialize();
   NSString *versionOrig = version_;
-  version_ = [((NSString *) nil_chk(version_)) uppercaseStringWithJRELocale:JreLoadStatic(JavaUtilLocale, ROOT_)];
+  version_ = [((NSString *) nil_chk(version_)) uppercaseStringWithJRELocale:JreLoadStatic(JavaUtilLocale, ROOT)];
   {
     NSArray *__caseValues = [NSArray arrayWithObjects:@"LATEST", @"LUCENE_CURRENT", @"LUCENE_4_0_0", @"LUCENE_4_0_0_ALPHA", @"LUCENE_4_0_0_BETA", nil];
     NSUInteger __index = [__caseValues indexOfObject:version_];
     switch (__index) {
       case 0:
       case 1:
-      return OrgApacheLuceneUtilVersion_LATEST_;
+      return OrgApacheLuceneUtilVersion_LATEST;
       case 2:
-      return OrgApacheLuceneUtilVersion_LUCENE_4_0_0_;
+      return OrgApacheLuceneUtilVersion_LUCENE_4_0_0;
       case 3:
-      return OrgApacheLuceneUtilVersion_LUCENE_4_0_0_ALPHA_;
+      return OrgApacheLuceneUtilVersion_LUCENE_4_0_0_ALPHA;
       case 4:
-      return OrgApacheLuceneUtilVersion_LUCENE_4_0_0_BETA_;
+      return OrgApacheLuceneUtilVersion_LUCENE_4_0_0_BETA;
       default:
       version_ = [((NSString *) nil_chk([((NSString *) nil_chk([((NSString *) nil_chk(version_)) replaceFirst:@"^LUCENE_(\\d+)_(\\d+)_(\\d+)$" withReplacement:@"$1.$2.$3"])) replaceFirst:@"^LUCENE_(\\d+)_(\\d+)$" withReplacement:@"$1.$2.0"])) replaceFirst:@"^LUCENE_(\\d)(\\d)$" withReplacement:@"$1.$2.0"];
       @try {
         return OrgApacheLuceneUtilVersion_parseWithNSString_(version_);
       }
       @catch (JavaTextParseException *pe) {
-        JavaTextParseException *pe2 = [new_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$$$$", @"failed to parse lenient version string \"", versionOrig, @"\": ", [((JavaTextParseException *) nil_chk(pe)) getMessage]), 0) autorelease];
-        [pe2 initCauseWithJavaLangThrowable:pe];
+        JavaTextParseException *pe2 = create_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$$$$", @"failed to parse lenient version string \"", versionOrig, @"\": ", [((JavaTextParseException *) nil_chk(pe)) getMessage]), 0);
+        [pe2 initCauseWithNSException:pe];
         @throw pe2;
       }
     }
@@ -520,7 +693,7 @@ OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_parseLenientlyWithNSStrin
 
 OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_fromBitsWithInt_withInt_withInt_(jint major, jint minor, jint bugfix) {
   OrgApacheLuceneUtilVersion_initialize();
-  return [new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(major, minor, bugfix) autorelease];
+  return create_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(major, minor, bugfix);
 }
 
 void OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(OrgApacheLuceneUtilVersion *self, jint major, jint minor, jint bugfix) {
@@ -528,9 +701,11 @@ void OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(OrgApacheLuceneUtil
 }
 
 OrgApacheLuceneUtilVersion *new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(jint major, jint minor, jint bugfix) {
-  OrgApacheLuceneUtilVersion *self = [OrgApacheLuceneUtilVersion alloc];
-  OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(self, major, minor, bugfix);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilVersion, initWithInt_withInt_withInt_, major, minor, bugfix)
+}
+
+OrgApacheLuceneUtilVersion *create_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_(jint major, jint minor, jint bugfix) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilVersion, initWithInt_withInt_withInt_, major, minor, bugfix)
 }
 
 void OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_withInt_(OrgApacheLuceneUtilVersion *self, jint major, jint minor, jint bugfix, jint prerelease) {
@@ -540,28 +715,30 @@ void OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_withInt_(OrgApacheLu
   self->bugfix_ = bugfix;
   self->prerelease_ = prerelease;
   if (major > 255 || major < 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"Illegal major version: ", major)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"Illegal major version: ", major));
   }
   if (minor > 255 || minor < 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"Illegal minor version: ", minor)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"Illegal minor version: ", minor));
   }
   if (bugfix > 255 || bugfix < 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"Illegal bugfix version: ", bugfix)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"Illegal bugfix version: ", bugfix));
   }
   if (prerelease > 2 || prerelease < 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"Illegal prerelease version: ", prerelease)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"Illegal prerelease version: ", prerelease));
   }
   if (prerelease != 0 && (minor != 0 || bugfix != 0)) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$I$IC", @"Prerelease version only supported with major release (got prerelease: ", prerelease, @", minor: ", minor, @", bugfix: ", bugfix, ')')) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$I$IC", @"Prerelease version only supported with major release (got prerelease: ", prerelease, @", minor: ", minor, @", bugfix: ", bugfix, ')'));
   }
   self->encodedValue_ = (JreLShift32(major, 18)) | (JreLShift32(minor, 10)) | (JreLShift32(bugfix, 2)) | prerelease;
   JreAssert((OrgApacheLuceneUtilVersion_encodedIsValid(self)), (@"org/apache/lucene/util/Version.java:482 condition failed: assert encodedIsValid();"));
 }
 
 OrgApacheLuceneUtilVersion *new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_withInt_(jint major, jint minor, jint bugfix, jint prerelease) {
-  OrgApacheLuceneUtilVersion *self = [OrgApacheLuceneUtilVersion alloc];
-  OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_withInt_(self, major, minor, bugfix, prerelease);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilVersion, initWithInt_withInt_withInt_withInt_, major, minor, bugfix, prerelease)
+}
+
+OrgApacheLuceneUtilVersion *create_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_withInt_(jint major, jint minor, jint bugfix, jint prerelease) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilVersion, initWithInt_withInt_withInt_withInt_, major, minor, bugfix, prerelease)
 }
 
 jboolean OrgApacheLuceneUtilVersion_encodedIsValid(OrgApacheLuceneUtilVersion *self) {

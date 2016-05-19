@@ -29,14 +29,14 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (id)getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:(OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey *)key {
   if (key == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"key cannot be null!") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"key cannot be null!");
   }
-  return (id) [((JavaUtilHashMap *) nil_chk(self->configMap_)) getWithId:key];
+  return [((JavaUtilHashMap *) nil_chk(self->configMap_)) getWithId:key];
 }
 
 - (jboolean)hasWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:(OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey *)key {
   if (key == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"key cannot be null!") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"key cannot be null!");
   }
   return [((JavaUtilHashMap *) nil_chk(self->configMap_)) containsKeyWithId:key];
 }
@@ -44,7 +44,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)setWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:(OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey *)key
                                                                      withId:(id)value {
   if (key == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"key cannot be null!") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"key cannot be null!");
   }
   if (value == nil) {
     [self unsetWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:key];
@@ -56,7 +56,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (jboolean)unsetWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:(OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey *)key {
   if (key == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"key cannot be null!") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"key cannot be null!");
   }
   return [((JavaUtilHashMap *) nil_chk(self->configMap_)) removeWithId:key] != nil;
 }

@@ -5,29 +5,30 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_RESTRICT
-#define OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySimpleTerm")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserSurroundQuerySimpleTerm
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySimpleTerm 0
 #else
-#define OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySimpleTerm 1
 #endif
-#undef OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserSurroundQuerySimpleTerm
 
-#if !defined (_OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_) && (OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_INCLUDE_ALL || OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_INCLUDE)
-#define _OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_
+#if !defined (OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySimpleTerm || defined(INCLUDE_OrgApacheLuceneQueryparserSurroundQuerySimpleTerm))
+#define OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_
 
-#define OrgApacheLuceneQueryparserSurroundQuerySrndQuery_RESTRICT 1
-#define OrgApacheLuceneQueryparserSurroundQuerySrndQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserSurroundQuerySrndQuery 1
+#define INCLUDE_OrgApacheLuceneQueryparserSurroundQuerySrndQuery 1
 #include "org/apache/lucene/queryparser/surround/query/SrndQuery.h"
 
-#define OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_RESTRICT 1
-#define OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery 1
+#define INCLUDE_OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery 1
 #include "org/apache/lucene/queryparser/surround/query/DistanceSubQuery.h"
 
-#define JavaLangComparable_RESTRICT 1
-#define JavaLangComparable_INCLUDE 1
+#define RESTRICT_JavaLangComparable 1
+#define INCLUDE_JavaLangComparable 1
 #include "java/lang/Comparable.h"
 
+@class IOSObjectArray;
 @class JavaLangStringBuilder;
 @class OrgApacheLuceneIndexIndexReader;
 @class OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory;
@@ -35,6 +36,9 @@
 @class OrgApacheLuceneSearchQuery;
 @protocol OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor;
 
+/*!
+ @brief Base class for queries that expand to sets of simple terms.
+ */
 @interface OrgApacheLuceneQueryparserSurroundQuerySimpleTerm : OrgApacheLuceneQueryparserSurroundQuerySrndQuery < OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery, JavaLangComparable >
 
 #pragma mark Public
@@ -43,6 +47,8 @@
 
 - (void)addSpanQueriesWithOrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory:(OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory *)sncf;
 
+/*!
+ */
 - (jint)compareToWithId:(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm *)ost;
 
 - (NSString *)distanceSubQueryNotAllowed;
@@ -80,11 +86,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm)
 
 #endif
 
-#if !defined (_OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor_) && (OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_INCLUDE_ALL || OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor_INCLUDE)
-#define _OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor_
+#if !defined (OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySimpleTerm || defined(INCLUDE_OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor))
+#define OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor_
 
 @class OrgApacheLuceneIndexTerm;
 
+/*!
+ @brief Callback to visit each matching term during "rewrite"
+ in <code>visitMatchingTerm(Term)</code>
+ */
 @protocol OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor < NSObject, JavaObject >
 
 - (void)visitMatchingTermWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)t;
@@ -97,4 +107,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_Mat
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQuerySimpleTerm")

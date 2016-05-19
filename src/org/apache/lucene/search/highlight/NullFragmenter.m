@@ -28,7 +28,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   static const J2ObjcMethodInfo methods[] = {
     { "startWithNSString:withOrgApacheLuceneAnalysisTokenStream:", "start", "V", 0x1, NULL, NULL },
     { "isNewFragment", NULL, "Z", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "NullFragmenter", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightNullFragmenter = { 2, "NullFragmenter", "org.apache.lucene.search.highlight", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchHighlightNullFragmenter;
@@ -41,9 +41,11 @@ void OrgApacheLuceneSearchHighlightNullFragmenter_init(OrgApacheLuceneSearchHigh
 }
 
 OrgApacheLuceneSearchHighlightNullFragmenter *new_OrgApacheLuceneSearchHighlightNullFragmenter_init() {
-  OrgApacheLuceneSearchHighlightNullFragmenter *self = [OrgApacheLuceneSearchHighlightNullFragmenter alloc];
-  OrgApacheLuceneSearchHighlightNullFragmenter_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchHighlightNullFragmenter, init)
+}
+
+OrgApacheLuceneSearchHighlightNullFragmenter *create_OrgApacheLuceneSearchHighlightNullFragmenter_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchHighlightNullFragmenter, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchHighlightNullFragmenter)

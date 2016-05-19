@@ -61,6 +61,8 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSpansSpanMultiTermQuery
 
 __attribute__((unused)) static OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite_$1 *new_OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite_$1_initWithInt_(jint arg$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite_$1 *create_OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite_$1_initWithInt_(jint arg$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite_$1)
 
 @interface OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1 : OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod {
@@ -82,6 +84,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1, dele
 __attribute__((unused)) static void OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1_init(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1 *self);
 
 __attribute__((unused)) static OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1 *new_OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1_init() NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1 *create_OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1_init();
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1)
 
@@ -109,13 +113,19 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSpansSpanMultiTermQuery
 
 __attribute__((unused)) static OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1_$1 *new_OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1_$1_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1_$1 *create_OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1_$1_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1_$1)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper)
 
-OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod *OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SCORING_SPAN_QUERY_REWRITE_;
+OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod *OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SCORING_SPAN_QUERY_REWRITE;
 
 @implementation OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper
+
++ (OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod *)SCORING_SPAN_QUERY_REWRITE {
+  return OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SCORING_SPAN_QUERY_REWRITE;
+}
 
 - (instancetype)initWithOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query {
   OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_initWithOrgApacheLuceneSearchMultiTermQuery_(self, query);
@@ -124,8 +134,8 @@ OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod *OrgApache
 
 - (OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod *)getRewriteMethod {
   OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *m = [((OrgApacheLuceneSearchMultiTermQuery *) nil_chk(query_)) getRewriteMethod];
-  if (!([m isKindOfClass:[OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod class]])) @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(@"You can only use SpanMultiTermQueryWrapper with a suitable SpanRewriteMethod.") autorelease];
-  return (OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod *) check_class_cast(m, [OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod class]);
+  if (!([m isKindOfClass:[OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod class]])) @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"You can only use SpanMultiTermQueryWrapper with a suitable SpanRewriteMethod.");
+  return (OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod *) cast_chk(m, [OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod class]);
 }
 
 - (void)setRewriteMethodWithOrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod:(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod *)rewriteMethod {
@@ -138,7 +148,7 @@ OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod *OrgApache
 
 - (OrgApacheLuceneSearchSpansSpanWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                                  withBoolean:(jboolean)needsScores {
-  @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"Rewrite first!") autorelease];
+  @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"Rewrite first!");
 }
 
 - (OrgApacheLuceneSearchQuery *)getWrappedQuery {
@@ -146,7 +156,7 @@ OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod *OrgApache
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
-  JavaLangStringBuilder *builder = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *builder = create_JavaLangStringBuilder_init();
   [builder appendWithNSString:@"SpanMultiTermQueryWrapper("];
   [builder appendWithNSString:[((OrgApacheLuceneSearchMultiTermQuery *) nil_chk(query_)) toStringWithNSString:field]];
   [builder appendWithNSString:@")"];
@@ -159,8 +169,8 @@ OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod *OrgApache
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader {
   OrgApacheLuceneSearchQuery *q = [((OrgApacheLuceneSearchMultiTermQuery *) nil_chk(query_)) rewriteWithOrgApacheLuceneIndexIndexReader:reader];
-  if (!([q isKindOfClass:[OrgApacheLuceneSearchSpansSpanQuery class]])) @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(@"You can only use SpanMultiTermQueryWrapper with a suitable SpanRewriteMethod.") autorelease];
-  [q setBoostWithFloat:[((OrgApacheLuceneSearchQuery *) nil_chk(q)) getBoost] * [self getBoost]];
+  if (!([q isKindOfClass:[OrgApacheLuceneSearchSpansSpanQuery class]])) @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"You can only use SpanMultiTermQueryWrapper with a suitable SpanRewriteMethod.");
+  [((OrgApacheLuceneSearchQuery *) nil_chk(q)) setBoostWithFloat:[q getBoost] * [self getBoost]];
   return q;
 }
 
@@ -175,7 +185,7 @@ OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod *OrgApache
   if (![super isEqual:obj]) {
     return false;
   }
-  OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper *other = (OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper *) check_class_cast(obj, [OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper class]);
+  OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper *other = (OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper *) cast_chk(obj, [OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper class]);
   return [((OrgApacheLuceneSearchMultiTermQuery *) nil_chk(query_)) isEqual:((OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper *) nil_chk(other))->query_];
 }
 
@@ -186,7 +196,7 @@ OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod *OrgApache
 
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SCORING_SPAN_QUERY_REWRITE_, new_OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SCORING_SPAN_QUERY_REWRITE, new_OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper)
   }
 }
@@ -206,7 +216,7 @@ OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod *OrgApache
   };
   static const J2ObjcFieldInfo fields[] = {
     { "query_", NULL, 0x14, "TQ;", NULL, "TQ;", .constantValue.asLong = 0 },
-    { "SCORING_SPAN_QUERY_REWRITE_", NULL, 0x19, "Lorg.apache.lucene.search.spans.SpanMultiTermQueryWrapper$SpanRewriteMethod;", &OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SCORING_SPAN_QUERY_REWRITE_, NULL, .constantValue.asLong = 0 },
+    { "SCORING_SPAN_QUERY_REWRITE", "SCORING_SPAN_QUERY_REWRITE", 0x19, "Lorg.apache.lucene.search.spans.SpanMultiTermQueryWrapper$SpanRewriteMethod;", &OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SCORING_SPAN_QUERY_REWRITE, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.spans.SpanMultiTermQueryWrapper$SpanRewriteMethod;", "Lorg.apache.lucene.search.spans.SpanMultiTermQueryWrapper$TopTermsSpanBooleanQueryRewrite;"};
   static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper = { 2, "SpanMultiTermQueryWrapper", "org.apache.lucene.search.spans", NULL, 0x1, 10, methods, 2, fields, 0, NULL, 2, inner_classes, NULL, "<Q:Lorg/apache/lucene/search/MultiTermQuery;>Lorg/apache/lucene/search/spans/SpanQuery;" };
@@ -220,18 +230,20 @@ void OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_initWithOrgApacheLucene
   JreStrongAssign(&self->query_, OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_(query));
   OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *method = [((OrgApacheLuceneSearchMultiTermQuery *) nil_chk(query)) getRewriteMethod];
   if ([method isKindOfClass:[OrgApacheLuceneSearchTopTermsRewrite class]]) {
-    jint pqsize = [((OrgApacheLuceneSearchTopTermsRewrite *) nil_chk(((OrgApacheLuceneSearchTopTermsRewrite *) check_class_cast(method, [OrgApacheLuceneSearchTopTermsRewrite class])))) getSize];
-    OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_setRewriteMethodWithOrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod_(self, [new_OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite_initWithInt_(pqsize) autorelease]);
+    jint pqsize = [((OrgApacheLuceneSearchTopTermsRewrite *) nil_chk(((OrgApacheLuceneSearchTopTermsRewrite *) cast_chk(method, [OrgApacheLuceneSearchTopTermsRewrite class])))) getSize];
+    OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_setRewriteMethodWithOrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod_(self, create_OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite_initWithInt_(pqsize));
   }
   else {
-    OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_setRewriteMethodWithOrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod_(self, OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SCORING_SPAN_QUERY_REWRITE_);
+    OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_setRewriteMethodWithOrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod_(self, OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SCORING_SPAN_QUERY_REWRITE);
   }
 }
 
 OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper *new_OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_initWithOrgApacheLuceneSearchMultiTermQuery_(OrgApacheLuceneSearchMultiTermQuery *query) {
-  OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper *self = [OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper alloc];
-  OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_initWithOrgApacheLuceneSearchMultiTermQuery_(self, query);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper, initWithOrgApacheLuceneSearchMultiTermQuery_, query)
+}
+
+OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper *create_OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_initWithOrgApacheLuceneSearchMultiTermQuery_(OrgApacheLuceneSearchMultiTermQuery *query) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper, initWithOrgApacheLuceneSearchMultiTermQuery_, query)
 }
 
 void OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_setRewriteMethodWithOrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod_(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper *self, OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod *rewriteMethod) {
@@ -259,7 +271,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "rewriteWithOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneSearchMultiTermQuery:", "rewrite", "Lorg.apache.lucene.search.spans.SpanQuery;", 0x401, "Ljava.io.IOException;", NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "SpanRewriteMethod", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod = { 2, "SpanRewriteMethod", "org.apache.lucene.search.spans", "SpanMultiTermQueryWrapper", 0x409, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod;
@@ -286,7 +298,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanMultiTermQueryWra
 
 - (OrgApacheLuceneSearchSpansSpanQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
                                             withOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query {
-  return (OrgApacheLuceneSearchSpansSpanQuery *) check_class_cast([((OrgApacheLuceneSearchTopTermsRewrite *) nil_chk(delegate_)) rewriteWithOrgApacheLuceneIndexIndexReader:reader withOrgApacheLuceneSearchMultiTermQuery:query], [OrgApacheLuceneSearchSpansSpanQuery class]);
+  return (OrgApacheLuceneSearchSpansSpanQuery *) cast_chk([((OrgApacheLuceneSearchTopTermsRewrite *) nil_chk(delegate_)) rewriteWithOrgApacheLuceneIndexIndexReader:reader withOrgApacheLuceneSearchMultiTermQuery:query], [OrgApacheLuceneSearchSpansSpanQuery class]);
 }
 
 - (NSUInteger)hash {
@@ -296,8 +308,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanMultiTermQueryWra
 - (jboolean)isEqual:(id)obj {
   if (self == obj) return true;
   if (obj == nil) return false;
-  if ([self getClass] != [nil_chk(obj) getClass]) return false;
-  OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite *other = (OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite *) check_class_cast(obj, [OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite class]);
+  if ([self getClass] != (id) [obj getClass]) return false;
+  OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite *other = (OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite *) cast_chk(obj, [OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite class]);
   return [((OrgApacheLuceneSearchTopTermsRewrite *) nil_chk(delegate_)) isEqual:other->delegate_];
 }
 
@@ -329,9 +341,11 @@ void OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQuer
 }
 
 OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite *new_OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite_initWithInt_(jint size) {
-  OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite *self = [OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite alloc];
-  OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite_initWithInt_(self, size);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite, initWithInt_, size)
+}
+
+OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite *create_OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite_initWithInt_(jint size) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite, initWithInt_, size)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite)
@@ -343,7 +357,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanMultiTermQueryWra
 }
 
 - (OrgApacheLuceneSearchSpansSpanOrQuery *)getTopLevelBuilder {
-  return [new_OrgApacheLuceneSearchSpansSpanOrQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_([IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchSpansSpanQuery_class_()]) autorelease];
+  return create_OrgApacheLuceneSearchSpansSpanOrQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_([IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchSpansSpanQuery_class_()]);
 }
 
 - (OrgApacheLuceneSearchQuery *)buildWithId:(OrgApacheLuceneSearchSpansSpanOrQuery *)builder {
@@ -355,7 +369,7 @@ withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
                 withInt:(jint)docFreq
               withFloat:(jfloat)boost
 withOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)states {
-  OrgApacheLuceneSearchSpansSpanTermQuery *q = [new_OrgApacheLuceneSearchSpansSpanTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneIndexTermContext_(term, states) autorelease];
+  OrgApacheLuceneSearchSpansSpanTermQuery *q = create_OrgApacheLuceneSearchSpansSpanTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneIndexTermContext_(term, states);
   [q setBoostWithFloat:boost];
   [((OrgApacheLuceneSearchSpansSpanOrQuery *) nil_chk(topLevel)) addClauseWithOrgApacheLuceneSearchSpansSpanQuery:q];
 }
@@ -386,9 +400,11 @@ void OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQuer
 }
 
 OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite_$1 *new_OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite_$1_initWithInt_(jint arg$0) {
-  OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite_$1 *self = [OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite_$1 alloc];
-  OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite_$1_initWithInt_(self, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite_$1, initWithInt_, arg$0)
+}
+
+OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite_$1 *create_OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite_$1_initWithInt_(jint arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite_$1, initWithInt_, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite_$1)
@@ -397,7 +413,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanMultiTermQueryWra
 
 - (OrgApacheLuceneSearchSpansSpanQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
                                             withOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query {
-  return (OrgApacheLuceneSearchSpansSpanQuery *) check_class_cast([((OrgApacheLuceneSearchScoringRewrite *) nil_chk(delegate_)) rewriteWithOrgApacheLuceneIndexIndexReader:reader withOrgApacheLuceneSearchMultiTermQuery:query], [OrgApacheLuceneSearchSpansSpanQuery class]);
+  return (OrgApacheLuceneSearchSpansSpanQuery *) cast_chk([((OrgApacheLuceneSearchScoringRewrite *) nil_chk(delegate_)) rewriteWithOrgApacheLuceneIndexIndexReader:reader withOrgApacheLuceneSearchMultiTermQuery:query], [OrgApacheLuceneSearchSpansSpanQuery class]);
 }
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -432,9 +448,11 @@ void OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1_init(OrgApacheLucene
 }
 
 OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1 *new_OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1_init() {
-  OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1 *self = [OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1 alloc];
-  OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1, init)
+}
+
+OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1 *create_OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1)
@@ -442,7 +460,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanMultiTermQueryWra
 @implementation OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1_$1
 
 - (OrgApacheLuceneSearchSpansSpanOrQuery *)getTopLevelBuilder {
-  return [new_OrgApacheLuceneSearchSpansSpanOrQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_([IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchSpansSpanQuery_class_()]) autorelease];
+  return create_OrgApacheLuceneSearchSpansSpanOrQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_([IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchSpansSpanQuery_class_()]);
 }
 
 - (OrgApacheLuceneSearchQuery *)buildWithId:(OrgApacheLuceneSearchSpansSpanOrQuery *)builder {
@@ -457,7 +475,7 @@ withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
                 withInt:(jint)docCount
               withFloat:(jfloat)boost
 withOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)states {
-  OrgApacheLuceneSearchSpansSpanTermQuery *q = [new_OrgApacheLuceneSearchSpansSpanTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneIndexTermContext_(term, states) autorelease];
+  OrgApacheLuceneSearchSpansSpanTermQuery *q = create_OrgApacheLuceneSearchSpansSpanTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneIndexTermContext_(term, states);
   [q setBoostWithFloat:boost];
   [((OrgApacheLuceneSearchSpansSpanOrQuery *) nil_chk(topLevel)) addClauseWithOrgApacheLuceneSearchSpansSpanQuery:q];
 }
@@ -489,9 +507,11 @@ void OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1_$1_init(OrgApacheLuc
 }
 
 OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1_$1 *new_OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1_$1_init() {
-  OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1_$1 *self = [OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1_$1 alloc];
-  OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1_$1_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1_$1, init)
+}
+
+OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1_$1 *create_OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1_$1_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1_$1, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1_$1)

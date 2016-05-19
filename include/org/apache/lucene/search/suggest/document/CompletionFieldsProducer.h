@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_RESTRICT
-#define OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer")
+#ifdef RESTRICT_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer 0
 #else
-#define OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer 1
 #endif
-#undef OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer
 
-#if !defined (_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_) && (OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_INCLUDE_ALL || OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_INCLUDE)
-#define _OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_
+#if !defined (OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_) && (INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer || defined(INCLUDE_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer))
+#define OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_
 
-#define OrgApacheLuceneCodecsFieldsProducer_RESTRICT 1
-#define OrgApacheLuceneCodecsFieldsProducer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneCodecsFieldsProducer 1
+#define INCLUDE_OrgApacheLuceneCodecsFieldsProducer 1
 #include "org/apache/lucene/codecs/FieldsProducer.h"
 
 @class OrgApacheLuceneIndexSegmentReadState;
@@ -25,6 +25,20 @@
 @protocol JavaUtilCollection;
 @protocol JavaUtilIterator;
 
+/*!
+ @brief <p>
+ Completion index (.cmp) is opened and read at instantiation to read in <code>SuggestField</code>
+ numbers and their FST offsets in the Completion dictionary (.lkp).
+ </p>
+ <p>
+ Completion dictionary (.lkp) is opened at instantiation and a field's FST is loaded
+ into memory the first time it is requested via <code>terms(String)</code>.
+ </p>
+ <p>
+ NOTE: Only the footer is validated for Completion dictionary (.lkp) and not the checksum due
+ to random access pattern and checksum validation being too costly at instantiation
+ </p>
+ */
 @interface OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer : OrgApacheLuceneCodecsFieldsProducer
 
 #pragma mark Public
@@ -49,7 +63,6 @@
 
 - (instancetype)initWithOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state;
 
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer)
@@ -58,8 +71,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProdu
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer *new_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initWithOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneIndexSegmentReadState *state) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer *create_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initWithOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneIndexSegmentReadState *state);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer")

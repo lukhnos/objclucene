@@ -41,7 +41,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisEnKStemFilter, keywordAtt_, id<OrgApa
   IOSCharArray *term = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAttribute_)) buffer];
   jint len = [termAttribute_ length];
   if ((![((id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>) nil_chk(keywordAtt_)) isKeyword]) && [((OrgApacheLuceneAnalysisEnKStemmer *) nil_chk(stemmer_)) stemWithCharArray:term withInt:len]) {
-    [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk([termAttribute_ setEmpty])) appendWithJavaLangCharSequence:[stemmer_ asCharSequence]];
+    [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk([termAttribute_ setEmpty])) appendWithJavaLangCharSequence:[((OrgApacheLuceneAnalysisEnKStemmer *) nil_chk(stemmer_)) asCharSequence]];
   }
   return true;
 }
@@ -77,9 +77,11 @@ void OrgApacheLuceneAnalysisEnKStemFilter_initWithOrgApacheLuceneAnalysisTokenSt
 }
 
 OrgApacheLuceneAnalysisEnKStemFilter *new_OrgApacheLuceneAnalysisEnKStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) {
-  OrgApacheLuceneAnalysisEnKStemFilter *self = [OrgApacheLuceneAnalysisEnKStemFilter alloc];
-  OrgApacheLuceneAnalysisEnKStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisEnKStemFilter, initWithOrgApacheLuceneAnalysisTokenStream_, inArg)
+}
+
+OrgApacheLuceneAnalysisEnKStemFilter *create_OrgApacheLuceneAnalysisEnKStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisEnKStemFilter, initWithOrgApacheLuceneAnalysisTokenStream_, inArg)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisEnKStemFilter)

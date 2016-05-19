@@ -5,23 +5,32 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisGlGalicianMinimalStemFilter_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisGlGalicianMinimalStemFilter_RESTRICT
-#define OrgApacheLuceneAnalysisGlGalicianMinimalStemFilter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisGlGalicianMinimalStemFilter")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisGlGalicianMinimalStemFilter
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisGlGalicianMinimalStemFilter 0
 #else
-#define OrgApacheLuceneAnalysisGlGalicianMinimalStemFilter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisGlGalicianMinimalStemFilter 1
 #endif
-#undef OrgApacheLuceneAnalysisGlGalicianMinimalStemFilter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisGlGalicianMinimalStemFilter
 
-#if !defined (_OrgApacheLuceneAnalysisGlGalicianMinimalStemFilter_) && (OrgApacheLuceneAnalysisGlGalicianMinimalStemFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisGlGalicianMinimalStemFilter_INCLUDE)
-#define _OrgApacheLuceneAnalysisGlGalicianMinimalStemFilter_
+#if !defined (OrgApacheLuceneAnalysisGlGalicianMinimalStemFilter_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisGlGalicianMinimalStemFilter || defined(INCLUDE_OrgApacheLuceneAnalysisGlGalicianMinimalStemFilter))
+#define OrgApacheLuceneAnalysisGlGalicianMinimalStemFilter_
 
-#define OrgApacheLuceneAnalysisTokenFilter_RESTRICT 1
-#define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisTokenFilter 1
+#define INCLUDE_OrgApacheLuceneAnalysisTokenFilter 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 
+/*!
+ @brief A <code>TokenFilter</code> that applies <code>GalicianMinimalStemmer</code> to stem 
+ Galician words.
+ <p>
+ To prevent terms from being stemmed use an instance of
+ <code>SetKeywordMarkerFilter</code> or a custom <code>TokenFilter</code> that sets
+ the <code>KeywordAttribute</code> before this <code>TokenStream</code>.
+ </p>
+ */
 @interface OrgApacheLuceneAnalysisGlGalicianMinimalStemFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
@@ -38,8 +47,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisGlGalicianMinimalStemFilter_initWi
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisGlGalicianMinimalStemFilter *new_OrgApacheLuceneAnalysisGlGalicianMinimalStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisGlGalicianMinimalStemFilter *create_OrgApacheLuceneAnalysisGlGalicianMinimalStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisGlGalicianMinimalStemFilter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisGlGalicianMinimalStemFilter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisGlGalicianMinimalStemFilter")

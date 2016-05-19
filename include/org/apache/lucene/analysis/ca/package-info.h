@@ -3,14 +3,17 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/ca/package-info.java
 //
 
+/*!
+ @brief Analyzer for Catalan.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCaPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCaPackage_info_RESTRICT
-#define OrgApacheLuceneAnalysisCaPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCaPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCaPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCaPackage_info 0
 #else
-#define OrgApacheLuceneAnalysisCaPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCaPackage_info 1
 #endif
-#undef OrgApacheLuceneAnalysisCaPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCaPackage_info
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCaPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCaPackage_info")

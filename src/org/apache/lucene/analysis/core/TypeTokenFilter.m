@@ -50,8 +50,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCoreTypeTokenFilter, typeAttribute_, 
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withJavaUtilSet:withBoolean:", "TypeTokenFilter", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withJavaUtilSet:", "TypeTokenFilter", NULL, 0x1, NULL, NULL },
+    { "initWithOrgApacheLuceneAnalysisTokenStream:withJavaUtilSet:withBoolean:", "TypeTokenFilter", NULL, 0x1, NULL, "(Lorg/apache/lucene/analysis/TokenStream;Ljava/util/Set<Ljava/lang/String;>;Z)V" },
+    { "initWithOrgApacheLuceneAnalysisTokenStream:withJavaUtilSet:", "TypeTokenFilter", NULL, 0x1, NULL, "(Lorg/apache/lucene/analysis/TokenStream;Ljava/util/Set<Ljava/lang/String;>;)V" },
     { "accept", NULL, "Z", 0x4, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -73,9 +73,11 @@ void OrgApacheLuceneAnalysisCoreTypeTokenFilter_initWithOrgApacheLuceneAnalysisT
 }
 
 OrgApacheLuceneAnalysisCoreTypeTokenFilter *new_OrgApacheLuceneAnalysisCoreTypeTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withJavaUtilSet_withBoolean_(OrgApacheLuceneAnalysisTokenStream *input, id<JavaUtilSet> stopTypes, jboolean useWhiteList) {
-  OrgApacheLuceneAnalysisCoreTypeTokenFilter *self = [OrgApacheLuceneAnalysisCoreTypeTokenFilter alloc];
-  OrgApacheLuceneAnalysisCoreTypeTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withJavaUtilSet_withBoolean_(self, input, stopTypes, useWhiteList);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCoreTypeTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_withJavaUtilSet_withBoolean_, input, stopTypes, useWhiteList)
+}
+
+OrgApacheLuceneAnalysisCoreTypeTokenFilter *create_OrgApacheLuceneAnalysisCoreTypeTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withJavaUtilSet_withBoolean_(OrgApacheLuceneAnalysisTokenStream *input, id<JavaUtilSet> stopTypes, jboolean useWhiteList) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCoreTypeTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_withJavaUtilSet_withBoolean_, input, stopTypes, useWhiteList)
 }
 
 void OrgApacheLuceneAnalysisCoreTypeTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withJavaUtilSet_(OrgApacheLuceneAnalysisCoreTypeTokenFilter *self, OrgApacheLuceneAnalysisTokenStream *input, id<JavaUtilSet> stopTypes) {
@@ -83,9 +85,11 @@ void OrgApacheLuceneAnalysisCoreTypeTokenFilter_initWithOrgApacheLuceneAnalysisT
 }
 
 OrgApacheLuceneAnalysisCoreTypeTokenFilter *new_OrgApacheLuceneAnalysisCoreTypeTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withJavaUtilSet_(OrgApacheLuceneAnalysisTokenStream *input, id<JavaUtilSet> stopTypes) {
-  OrgApacheLuceneAnalysisCoreTypeTokenFilter *self = [OrgApacheLuceneAnalysisCoreTypeTokenFilter alloc];
-  OrgApacheLuceneAnalysisCoreTypeTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withJavaUtilSet_(self, input, stopTypes);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCoreTypeTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_withJavaUtilSet_, input, stopTypes)
+}
+
+OrgApacheLuceneAnalysisCoreTypeTokenFilter *create_OrgApacheLuceneAnalysisCoreTypeTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withJavaUtilSet_(OrgApacheLuceneAnalysisTokenStream *input, id<JavaUtilSet> stopTypes) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCoreTypeTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_withJavaUtilSet_, input, stopTypes)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCoreTypeTokenFilter)

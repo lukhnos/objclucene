@@ -34,7 +34,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCollationCollationAttributeFactory, collator_
 }
 
 - (OrgApacheLuceneCollationTokenattributesCollatedTermAttributeImpl *)createInstance {
-  return [new_OrgApacheLuceneCollationTokenattributesCollatedTermAttributeImpl_initWithJavaTextCollator_(collator_) autorelease];
+  return create_OrgApacheLuceneCollationTokenattributesCollatedTermAttributeImpl_initWithJavaTextCollator_(collator_);
 }
 
 - (void)dealloc {
@@ -46,7 +46,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCollationCollationAttributeFactory, collator_
   static const J2ObjcMethodInfo methods[] = {
     { "initWithJavaTextCollator:", "CollationAttributeFactory", NULL, 0x1, NULL, NULL },
     { "initWithOrgApacheLuceneUtilAttributeFactory:withJavaTextCollator:", "CollationAttributeFactory", NULL, 0x1, NULL, NULL },
-    { "createInstance", NULL, "Lorg.apache.lucene.collation.tokenattributes.CollatedTermAttributeImpl;", 0x1, NULL, NULL },
+    { "createInstance", NULL, "Lorg.apache.lucene.collation.tokenattributes.CollatedTermAttributeImpl;", 0x1, NULL, "()Lorg/apache/lucene/collation/tokenattributes/CollatedTermAttributeImpl;" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "collator_", NULL, 0x12, "Ljava.text.Collator;", NULL, NULL, .constantValue.asLong = 0 },
@@ -59,13 +59,15 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCollationCollationAttributeFactory, collator_
 @end
 
 void OrgApacheLuceneCollationCollationAttributeFactory_initWithJavaTextCollator_(OrgApacheLuceneCollationCollationAttributeFactory *self, JavaTextCollator *collator) {
-  OrgApacheLuceneCollationCollationAttributeFactory_initWithOrgApacheLuceneUtilAttributeFactory_withJavaTextCollator_(self, JreLoadStatic(OrgApacheLuceneAnalysisTokenStream, DEFAULT_TOKEN_ATTRIBUTE_FACTORY_), collator);
+  OrgApacheLuceneCollationCollationAttributeFactory_initWithOrgApacheLuceneUtilAttributeFactory_withJavaTextCollator_(self, JreLoadStatic(OrgApacheLuceneAnalysisTokenStream, DEFAULT_TOKEN_ATTRIBUTE_FACTORY), collator);
 }
 
 OrgApacheLuceneCollationCollationAttributeFactory *new_OrgApacheLuceneCollationCollationAttributeFactory_initWithJavaTextCollator_(JavaTextCollator *collator) {
-  OrgApacheLuceneCollationCollationAttributeFactory *self = [OrgApacheLuceneCollationCollationAttributeFactory alloc];
-  OrgApacheLuceneCollationCollationAttributeFactory_initWithJavaTextCollator_(self, collator);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCollationCollationAttributeFactory, initWithJavaTextCollator_, collator)
+}
+
+OrgApacheLuceneCollationCollationAttributeFactory *create_OrgApacheLuceneCollationCollationAttributeFactory_initWithJavaTextCollator_(JavaTextCollator *collator) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCollationCollationAttributeFactory, initWithJavaTextCollator_, collator)
 }
 
 void OrgApacheLuceneCollationCollationAttributeFactory_initWithOrgApacheLuceneUtilAttributeFactory_withJavaTextCollator_(OrgApacheLuceneCollationCollationAttributeFactory *self, OrgApacheLuceneUtilAttributeFactory *delegate, JavaTextCollator *collator) {
@@ -74,9 +76,11 @@ void OrgApacheLuceneCollationCollationAttributeFactory_initWithOrgApacheLuceneUt
 }
 
 OrgApacheLuceneCollationCollationAttributeFactory *new_OrgApacheLuceneCollationCollationAttributeFactory_initWithOrgApacheLuceneUtilAttributeFactory_withJavaTextCollator_(OrgApacheLuceneUtilAttributeFactory *delegate, JavaTextCollator *collator) {
-  OrgApacheLuceneCollationCollationAttributeFactory *self = [OrgApacheLuceneCollationCollationAttributeFactory alloc];
-  OrgApacheLuceneCollationCollationAttributeFactory_initWithOrgApacheLuceneUtilAttributeFactory_withJavaTextCollator_(self, delegate, collator);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCollationCollationAttributeFactory, initWithOrgApacheLuceneUtilAttributeFactory_withJavaTextCollator_, delegate, collator)
+}
+
+OrgApacheLuceneCollationCollationAttributeFactory *create_OrgApacheLuceneCollationCollationAttributeFactory_initWithOrgApacheLuceneUtilAttributeFactory_withJavaTextCollator_(OrgApacheLuceneUtilAttributeFactory *delegate, JavaTextCollator *collator) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCollationCollationAttributeFactory, initWithOrgApacheLuceneUtilAttributeFactory_withJavaTextCollator_, delegate, collator)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCollationCollationAttributeFactory)

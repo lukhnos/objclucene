@@ -17,9 +17,9 @@
 - (OrgApacheLuceneSearchFilter *)getFilterWithOrgW3cDomElement:(id<OrgW3cDomElement>)n {
   id<OrgApacheLuceneQueryparserXmlFilterBuilder> builder = [((JavaUtilHashMap *) nil_chk(builders_)) getWithId:[((id<OrgW3cDomElement>) nil_chk(n)) getNodeName]];
   if (builder == nil) {
-    @throw [new_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_(JreStrcat("$$", @"No FilterBuilder defined for node ", [n getNodeName])) autorelease];
+    @throw create_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_(JreStrcat("$$", @"No FilterBuilder defined for node ", [n getNodeName]));
   }
-  return [((id<OrgApacheLuceneQueryparserXmlFilterBuilder>) nil_chk(builder)) getFilterWithOrgW3cDomElement:n];
+  return [builder getFilterWithOrgW3cDomElement:n];
 }
 
 - (void)addBuilderWithNSString:(NSString *)nodeName
@@ -48,7 +48,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "getFilterWithOrgW3cDomElement:", "getFilter", "Lorg.apache.lucene.search.Filter;", 0x1, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
     { "addBuilderWithNSString:withOrgApacheLuceneQueryparserXmlFilterBuilder:", "addBuilder", "V", 0x1, NULL, NULL },
     { "getFilterBuilderWithNSString:", "getFilterBuilder", "Lorg.apache.lucene.queryparser.xml.FilterBuilder;", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "FilterBuilderFactory", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "builders_", NULL, 0x0, "Ljava.util.HashMap;", NULL, "Ljava/util/HashMap<Ljava/lang/String;Lorg/apache/lucene/queryparser/xml/FilterBuilder;>;", .constantValue.asLong = 0 },
@@ -65,9 +65,11 @@ void OrgApacheLuceneQueryparserXmlFilterBuilderFactory_init(OrgApacheLuceneQuery
 }
 
 OrgApacheLuceneQueryparserXmlFilterBuilderFactory *new_OrgApacheLuceneQueryparserXmlFilterBuilderFactory_init() {
-  OrgApacheLuceneQueryparserXmlFilterBuilderFactory *self = [OrgApacheLuceneQueryparserXmlFilterBuilderFactory alloc];
-  OrgApacheLuceneQueryparserXmlFilterBuilderFactory_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserXmlFilterBuilderFactory, init)
+}
+
+OrgApacheLuceneQueryparserXmlFilterBuilderFactory *create_OrgApacheLuceneQueryparserXmlFilterBuilderFactory_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserXmlFilterBuilderFactory, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserXmlFilterBuilderFactory)

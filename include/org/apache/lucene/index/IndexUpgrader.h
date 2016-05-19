@@ -5,38 +5,86 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexIndexUpgrader_INCLUDE_ALL")
-#if OrgApacheLuceneIndexIndexUpgrader_RESTRICT
-#define OrgApacheLuceneIndexIndexUpgrader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexIndexUpgrader")
+#ifdef RESTRICT_OrgApacheLuceneIndexIndexUpgrader
+#define INCLUDE_ALL_OrgApacheLuceneIndexIndexUpgrader 0
 #else
-#define OrgApacheLuceneIndexIndexUpgrader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexIndexUpgrader 1
 #endif
-#undef OrgApacheLuceneIndexIndexUpgrader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexIndexUpgrader
 
-#if !defined (_OrgApacheLuceneIndexIndexUpgrader_) && (OrgApacheLuceneIndexIndexUpgrader_INCLUDE_ALL || OrgApacheLuceneIndexIndexUpgrader_INCLUDE)
-#define _OrgApacheLuceneIndexIndexUpgrader_
+#if !defined (OrgApacheLuceneIndexIndexUpgrader_) && (INCLUDE_ALL_OrgApacheLuceneIndexIndexUpgrader || defined(INCLUDE_OrgApacheLuceneIndexIndexUpgrader))
+#define OrgApacheLuceneIndexIndexUpgrader_
 
 @class IOSObjectArray;
 @class OrgApacheLuceneIndexIndexWriterConfig;
 @class OrgApacheLuceneStoreDirectory;
 @class OrgApacheLuceneUtilInfoStream;
 
+/*!
+ @brief This is an easy-to-use tool that upgrades all segments of an index from previous Lucene versions
+ to the current segment file format.
+ It can be used from command line:
+ @code
+
+  java -cp lucene-core.jar org.apache.lucene.index.IndexUpgrader [-delete-prior-commits] [-verbose] indexDir
+  
+@endcode
+ Alternatively this class can be instantiated and <code>upgrade</code> invoked. It uses <code>UpgradeIndexMergePolicy</code>
+ and triggers the upgrade via an forceMerge request to <code>IndexWriter</code>.
+ <p>This tool keeps only the last commit in an index; for this
+ reason, if the incoming index has more than one commit, the tool
+ refuses to run by default. Specify <code>-delete-prior-commits</code>
+ to override this, allowing the tool to delete all but the last commit.
+ From Java code this can be enabled by passing <code>true</code> to
+ <code>IndexUpgrader(Directory,InfoStream,boolean)</code>.
+ <p><b>Warning:</b> This tool may reorder documents if the index was partially
+ upgraded before execution (e.g., documents were added). If your application relies
+ on &quot;monotonicity&quot; of doc IDs (which means that the order in which the documents
+ were added to the index is preserved), do a full forceMerge instead.
+ The <code>MergePolicy</code> set by <code>IndexWriterConfig</code> may also reorder
+ documents.
+ */
 @interface OrgApacheLuceneIndexIndexUpgrader : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Creates index upgrader on the given directory, using an <code>IndexWriter</code> using the given
+ <code>matchVersion</code>.
+ The tool refuses to upgrade indexes with multiple commit points. 
+ */
 - (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
 
+/*!
+ @brief Creates index upgrader on the given directory, using an <code>IndexWriter</code> using the given
+ config.
+ You have the possibility to upgrade indexes with multiple commit points by removing
+ all older ones. 
+ */
 - (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
             withOrgApacheLuceneIndexIndexWriterConfig:(OrgApacheLuceneIndexIndexWriterConfig *)iwc
                                           withBoolean:(jboolean)deletePriorCommits;
 
+/*!
+ @brief Creates index upgrader on the given directory, using an <code>IndexWriter</code> using the given
+ <code>matchVersion</code>.
+ You have the possibility to upgrade indexes with multiple commit points by removing
+ all older ones. If <code>infoStream</code> is not <code>null</code>, all logging output will be sent to this stream. 
+ */
 - (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
                     withOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream
                                           withBoolean:(jboolean)deletePriorCommits;
 
+/*!
+ @brief Main method to run {code IndexUpgrader} from the
+ command-line.
+ */
 + (void)mainWithNSStringArray:(IOSObjectArray *)args;
 
+/*!
+ @brief Perform the upgrade.
+ */
 - (void)upgrade;
 
 #pragma mark Package-Private
@@ -55,16 +103,22 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLucene
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexIndexUpgrader *new_OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *dir) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexIndexUpgrader *create_OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *dir);
+
 FOUNDATION_EXPORT void OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneUtilInfoStream_withBoolean_(OrgApacheLuceneIndexIndexUpgrader *self, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneUtilInfoStream *infoStream, jboolean deletePriorCommits);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexIndexUpgrader *new_OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneUtilInfoStream_withBoolean_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneUtilInfoStream *infoStream, jboolean deletePriorCommits) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneIndexIndexUpgrader *create_OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneUtilInfoStream_withBoolean_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneUtilInfoStream *infoStream, jboolean deletePriorCommits);
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_withBoolean_(OrgApacheLuceneIndexIndexUpgrader *self, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexIndexWriterConfig *iwc, jboolean deletePriorCommits);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexIndexUpgrader *new_OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_withBoolean_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexIndexWriterConfig *iwc, jboolean deletePriorCommits) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexIndexUpgrader *create_OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_withBoolean_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexIndexWriterConfig *iwc, jboolean deletePriorCommits);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexUpgrader)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexIndexUpgrader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexIndexUpgrader")

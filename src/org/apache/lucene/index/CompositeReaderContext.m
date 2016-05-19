@@ -42,6 +42,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexCompositeReaderContext_i
 
 __attribute__((unused)) static OrgApacheLuceneIndexCompositeReaderContext *new_OrgApacheLuceneIndexCompositeReaderContext_initWithOrgApacheLuceneIndexCompositeReaderContext_withOrgApacheLuceneIndexCompositeReader_withInt_withInt_withJavaUtilList_withJavaUtilList_(OrgApacheLuceneIndexCompositeReaderContext *parent, OrgApacheLuceneIndexCompositeReader *reader, jint ordInParent, jint docbaseInParent, id<JavaUtilList> children, id<JavaUtilList> leaves) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneIndexCompositeReaderContext *create_OrgApacheLuceneIndexCompositeReaderContext_initWithOrgApacheLuceneIndexCompositeReaderContext_withOrgApacheLuceneIndexCompositeReader_withInt_withInt_withJavaUtilList_withJavaUtilList_(OrgApacheLuceneIndexCompositeReaderContext *parent, OrgApacheLuceneIndexCompositeReader *reader, jint ordInParent, jint docbaseInParent, id<JavaUtilList> children, id<JavaUtilList> leaves);
+
 @interface OrgApacheLuceneIndexCompositeReaderContext_Builder : NSObject {
  @public
   OrgApacheLuceneIndexCompositeReader *reader_;
@@ -68,6 +70,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCompositeReaderContext_Builder, leaves_,
 __attribute__((unused)) static void OrgApacheLuceneIndexCompositeReaderContext_Builder_initWithOrgApacheLuceneIndexCompositeReader_(OrgApacheLuceneIndexCompositeReaderContext_Builder *self, OrgApacheLuceneIndexCompositeReader *reader);
 
 __attribute__((unused)) static OrgApacheLuceneIndexCompositeReaderContext_Builder *new_OrgApacheLuceneIndexCompositeReaderContext_Builder_initWithOrgApacheLuceneIndexCompositeReader_(OrgApacheLuceneIndexCompositeReader *reader) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexCompositeReaderContext_Builder *create_OrgApacheLuceneIndexCompositeReaderContext_Builder_initWithOrgApacheLuceneIndexCompositeReader_(OrgApacheLuceneIndexCompositeReader *reader);
 
 __attribute__((unused)) static OrgApacheLuceneIndexIndexReaderContext *OrgApacheLuceneIndexCompositeReaderContext_Builder_buildWithOrgApacheLuceneIndexCompositeReaderContext_withOrgApacheLuceneIndexIndexReader_withInt_withInt_(OrgApacheLuceneIndexCompositeReaderContext_Builder *self, OrgApacheLuceneIndexCompositeReaderContext *parent, OrgApacheLuceneIndexIndexReader *reader, jint ord, jint docBase);
 
@@ -106,7 +110,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCompositeReaderContext_Builder)
 }
 
 - (id<JavaUtilList>)leaves {
-  if (!isTopLevel_) @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(@"This is not a top-level context.") autorelease];
+  if (!isTopLevel_) @throw create_JavaLangUnsupportedOperationException_initWithNSString_(@"This is not a top-level context.");
   JreAssert((leaves_ != nil), (@"org/apache/lucene/index/CompositeReaderContext.java:66 condition failed: assert leaves != null;"));
   return leaves_;
 }
@@ -129,11 +133,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCompositeReaderContext_Builder)
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "createWithOrgApacheLuceneIndexCompositeReader:", "create", "Lorg.apache.lucene.index.CompositeReaderContext;", 0x8, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexCompositeReaderContext:withOrgApacheLuceneIndexCompositeReader:withInt:withInt:withJavaUtilList:", "CompositeReaderContext", NULL, 0x0, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexCompositeReader:withJavaUtilList:withJavaUtilList:", "CompositeReaderContext", NULL, 0x0, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexCompositeReaderContext:withOrgApacheLuceneIndexCompositeReader:withInt:withInt:withJavaUtilList:withJavaUtilList:", "CompositeReaderContext", NULL, 0x2, NULL, NULL },
-    { "leaves", NULL, "Ljava.util.List;", 0x1, "Ljava.lang.UnsupportedOperationException;", NULL },
-    { "children", NULL, "Ljava.util.List;", 0x1, NULL, NULL },
+    { "initWithOrgApacheLuceneIndexCompositeReaderContext:withOrgApacheLuceneIndexCompositeReader:withInt:withInt:withJavaUtilList:", "CompositeReaderContext", NULL, 0x0, NULL, "(Lorg/apache/lucene/index/CompositeReaderContext;Lorg/apache/lucene/index/CompositeReader;IILjava/util/List<Lorg/apache/lucene/index/IndexReaderContext;>;)V" },
+    { "initWithOrgApacheLuceneIndexCompositeReader:withJavaUtilList:withJavaUtilList:", "CompositeReaderContext", NULL, 0x0, NULL, "(Lorg/apache/lucene/index/CompositeReader;Ljava/util/List<Lorg/apache/lucene/index/IndexReaderContext;>;Ljava/util/List<Lorg/apache/lucene/index/LeafReaderContext;>;)V" },
+    { "initWithOrgApacheLuceneIndexCompositeReaderContext:withOrgApacheLuceneIndexCompositeReader:withInt:withInt:withJavaUtilList:withJavaUtilList:", "CompositeReaderContext", NULL, 0x2, NULL, "(Lorg/apache/lucene/index/CompositeReaderContext;Lorg/apache/lucene/index/CompositeReader;IILjava/util/List<Lorg/apache/lucene/index/IndexReaderContext;>;Ljava/util/List<Lorg/apache/lucene/index/LeafReaderContext;>;)V" },
+    { "leaves", NULL, "Ljava.util.List;", 0x1, "Ljava.lang.UnsupportedOperationException;", "()Ljava/util/List<Lorg/apache/lucene/index/LeafReaderContext;>;" },
+    { "children", NULL, "Ljava.util.List;", 0x1, NULL, "()Ljava/util/List<Lorg/apache/lucene/index/IndexReaderContext;>;" },
     { "reader", NULL, "Lorg.apache.lucene.index.CompositeReader;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -150,7 +154,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCompositeReaderContext_Builder)
 
 OrgApacheLuceneIndexCompositeReaderContext *OrgApacheLuceneIndexCompositeReaderContext_createWithOrgApacheLuceneIndexCompositeReader_(OrgApacheLuceneIndexCompositeReader *reader) {
   OrgApacheLuceneIndexCompositeReaderContext_initialize();
-  return [((OrgApacheLuceneIndexCompositeReaderContext_Builder *) [new_OrgApacheLuceneIndexCompositeReaderContext_Builder_initWithOrgApacheLuceneIndexCompositeReader_(reader) autorelease]) build];
+  return [create_OrgApacheLuceneIndexCompositeReaderContext_Builder_initWithOrgApacheLuceneIndexCompositeReader_(reader) build];
 }
 
 void OrgApacheLuceneIndexCompositeReaderContext_initWithOrgApacheLuceneIndexCompositeReaderContext_withOrgApacheLuceneIndexCompositeReader_withInt_withInt_withJavaUtilList_(OrgApacheLuceneIndexCompositeReaderContext *self, OrgApacheLuceneIndexCompositeReaderContext *parent, OrgApacheLuceneIndexCompositeReader *reader, jint ordInParent, jint docbaseInParent, id<JavaUtilList> children) {
@@ -158,9 +162,11 @@ void OrgApacheLuceneIndexCompositeReaderContext_initWithOrgApacheLuceneIndexComp
 }
 
 OrgApacheLuceneIndexCompositeReaderContext *new_OrgApacheLuceneIndexCompositeReaderContext_initWithOrgApacheLuceneIndexCompositeReaderContext_withOrgApacheLuceneIndexCompositeReader_withInt_withInt_withJavaUtilList_(OrgApacheLuceneIndexCompositeReaderContext *parent, OrgApacheLuceneIndexCompositeReader *reader, jint ordInParent, jint docbaseInParent, id<JavaUtilList> children) {
-  OrgApacheLuceneIndexCompositeReaderContext *self = [OrgApacheLuceneIndexCompositeReaderContext alloc];
-  OrgApacheLuceneIndexCompositeReaderContext_initWithOrgApacheLuceneIndexCompositeReaderContext_withOrgApacheLuceneIndexCompositeReader_withInt_withInt_withJavaUtilList_(self, parent, reader, ordInParent, docbaseInParent, children);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexCompositeReaderContext, initWithOrgApacheLuceneIndexCompositeReaderContext_withOrgApacheLuceneIndexCompositeReader_withInt_withInt_withJavaUtilList_, parent, reader, ordInParent, docbaseInParent, children)
+}
+
+OrgApacheLuceneIndexCompositeReaderContext *create_OrgApacheLuceneIndexCompositeReaderContext_initWithOrgApacheLuceneIndexCompositeReaderContext_withOrgApacheLuceneIndexCompositeReader_withInt_withInt_withJavaUtilList_(OrgApacheLuceneIndexCompositeReaderContext *parent, OrgApacheLuceneIndexCompositeReader *reader, jint ordInParent, jint docbaseInParent, id<JavaUtilList> children) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexCompositeReaderContext, initWithOrgApacheLuceneIndexCompositeReaderContext_withOrgApacheLuceneIndexCompositeReader_withInt_withInt_withJavaUtilList_, parent, reader, ordInParent, docbaseInParent, children)
 }
 
 void OrgApacheLuceneIndexCompositeReaderContext_initWithOrgApacheLuceneIndexCompositeReader_withJavaUtilList_withJavaUtilList_(OrgApacheLuceneIndexCompositeReaderContext *self, OrgApacheLuceneIndexCompositeReader *reader, id<JavaUtilList> children, id<JavaUtilList> leaves) {
@@ -168,9 +174,11 @@ void OrgApacheLuceneIndexCompositeReaderContext_initWithOrgApacheLuceneIndexComp
 }
 
 OrgApacheLuceneIndexCompositeReaderContext *new_OrgApacheLuceneIndexCompositeReaderContext_initWithOrgApacheLuceneIndexCompositeReader_withJavaUtilList_withJavaUtilList_(OrgApacheLuceneIndexCompositeReader *reader, id<JavaUtilList> children, id<JavaUtilList> leaves) {
-  OrgApacheLuceneIndexCompositeReaderContext *self = [OrgApacheLuceneIndexCompositeReaderContext alloc];
-  OrgApacheLuceneIndexCompositeReaderContext_initWithOrgApacheLuceneIndexCompositeReader_withJavaUtilList_withJavaUtilList_(self, reader, children, leaves);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexCompositeReaderContext, initWithOrgApacheLuceneIndexCompositeReader_withJavaUtilList_withJavaUtilList_, reader, children, leaves)
+}
+
+OrgApacheLuceneIndexCompositeReaderContext *create_OrgApacheLuceneIndexCompositeReaderContext_initWithOrgApacheLuceneIndexCompositeReader_withJavaUtilList_withJavaUtilList_(OrgApacheLuceneIndexCompositeReader *reader, id<JavaUtilList> children, id<JavaUtilList> leaves) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexCompositeReaderContext, initWithOrgApacheLuceneIndexCompositeReader_withJavaUtilList_withJavaUtilList_, reader, children, leaves)
 }
 
 void OrgApacheLuceneIndexCompositeReaderContext_initWithOrgApacheLuceneIndexCompositeReaderContext_withOrgApacheLuceneIndexCompositeReader_withInt_withInt_withJavaUtilList_withJavaUtilList_(OrgApacheLuceneIndexCompositeReaderContext *self, OrgApacheLuceneIndexCompositeReaderContext *parent, OrgApacheLuceneIndexCompositeReader *reader, jint ordInParent, jint docbaseInParent, id<JavaUtilList> children, id<JavaUtilList> leaves) {
@@ -181,9 +189,11 @@ void OrgApacheLuceneIndexCompositeReaderContext_initWithOrgApacheLuceneIndexComp
 }
 
 OrgApacheLuceneIndexCompositeReaderContext *new_OrgApacheLuceneIndexCompositeReaderContext_initWithOrgApacheLuceneIndexCompositeReaderContext_withOrgApacheLuceneIndexCompositeReader_withInt_withInt_withJavaUtilList_withJavaUtilList_(OrgApacheLuceneIndexCompositeReaderContext *parent, OrgApacheLuceneIndexCompositeReader *reader, jint ordInParent, jint docbaseInParent, id<JavaUtilList> children, id<JavaUtilList> leaves) {
-  OrgApacheLuceneIndexCompositeReaderContext *self = [OrgApacheLuceneIndexCompositeReaderContext alloc];
-  OrgApacheLuceneIndexCompositeReaderContext_initWithOrgApacheLuceneIndexCompositeReaderContext_withOrgApacheLuceneIndexCompositeReader_withInt_withInt_withJavaUtilList_withJavaUtilList_(self, parent, reader, ordInParent, docbaseInParent, children, leaves);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexCompositeReaderContext, initWithOrgApacheLuceneIndexCompositeReaderContext_withOrgApacheLuceneIndexCompositeReader_withInt_withInt_withJavaUtilList_withJavaUtilList_, parent, reader, ordInParent, docbaseInParent, children, leaves)
+}
+
+OrgApacheLuceneIndexCompositeReaderContext *create_OrgApacheLuceneIndexCompositeReaderContext_initWithOrgApacheLuceneIndexCompositeReaderContext_withOrgApacheLuceneIndexCompositeReader_withInt_withInt_withJavaUtilList_withJavaUtilList_(OrgApacheLuceneIndexCompositeReaderContext *parent, OrgApacheLuceneIndexCompositeReader *reader, jint ordInParent, jint docbaseInParent, id<JavaUtilList> children, id<JavaUtilList> leaves) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexCompositeReaderContext, initWithOrgApacheLuceneIndexCompositeReaderContext_withOrgApacheLuceneIndexCompositeReader_withInt_withInt_withJavaUtilList_withJavaUtilList_, parent, reader, ordInParent, docbaseInParent, children, leaves)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexCompositeReaderContext)
@@ -196,7 +206,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexCompositeReaderContext)
 }
 
 - (OrgApacheLuceneIndexCompositeReaderContext *)build {
-  return (OrgApacheLuceneIndexCompositeReaderContext *) check_class_cast(OrgApacheLuceneIndexCompositeReaderContext_Builder_buildWithOrgApacheLuceneIndexCompositeReaderContext_withOrgApacheLuceneIndexIndexReader_withInt_withInt_(self, nil, reader_, 0, 0), [OrgApacheLuceneIndexCompositeReaderContext class]);
+  return (OrgApacheLuceneIndexCompositeReaderContext *) cast_chk(OrgApacheLuceneIndexCompositeReaderContext_Builder_buildWithOrgApacheLuceneIndexCompositeReaderContext_withOrgApacheLuceneIndexIndexReader_withInt_withInt_(self, nil, reader_, 0, 0), [OrgApacheLuceneIndexCompositeReaderContext class]);
 }
 
 - (OrgApacheLuceneIndexIndexReaderContext *)buildWithOrgApacheLuceneIndexCompositeReaderContext:(OrgApacheLuceneIndexCompositeReaderContext *)parent
@@ -237,29 +247,31 @@ void OrgApacheLuceneIndexCompositeReaderContext_Builder_initWithOrgApacheLuceneI
 }
 
 OrgApacheLuceneIndexCompositeReaderContext_Builder *new_OrgApacheLuceneIndexCompositeReaderContext_Builder_initWithOrgApacheLuceneIndexCompositeReader_(OrgApacheLuceneIndexCompositeReader *reader) {
-  OrgApacheLuceneIndexCompositeReaderContext_Builder *self = [OrgApacheLuceneIndexCompositeReaderContext_Builder alloc];
-  OrgApacheLuceneIndexCompositeReaderContext_Builder_initWithOrgApacheLuceneIndexCompositeReader_(self, reader);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexCompositeReaderContext_Builder, initWithOrgApacheLuceneIndexCompositeReader_, reader)
+}
+
+OrgApacheLuceneIndexCompositeReaderContext_Builder *create_OrgApacheLuceneIndexCompositeReaderContext_Builder_initWithOrgApacheLuceneIndexCompositeReader_(OrgApacheLuceneIndexCompositeReader *reader) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexCompositeReaderContext_Builder, initWithOrgApacheLuceneIndexCompositeReader_, reader)
 }
 
 OrgApacheLuceneIndexIndexReaderContext *OrgApacheLuceneIndexCompositeReaderContext_Builder_buildWithOrgApacheLuceneIndexCompositeReaderContext_withOrgApacheLuceneIndexIndexReader_withInt_withInt_(OrgApacheLuceneIndexCompositeReaderContext_Builder *self, OrgApacheLuceneIndexCompositeReaderContext *parent, OrgApacheLuceneIndexIndexReader *reader, jint ord, jint docBase) {
   if ([reader isKindOfClass:[OrgApacheLuceneIndexLeafReader class]]) {
-    OrgApacheLuceneIndexLeafReader *ar = (OrgApacheLuceneIndexLeafReader *) check_class_cast(reader, [OrgApacheLuceneIndexLeafReader class]);
-    OrgApacheLuceneIndexLeafReaderContext *atomic = [new_OrgApacheLuceneIndexLeafReaderContext_initWithOrgApacheLuceneIndexCompositeReaderContext_withOrgApacheLuceneIndexLeafReader_withInt_withInt_withInt_withInt_(parent, ar, ord, docBase, [((id<JavaUtilList>) nil_chk(self->leaves_)) size], self->leafDocBase_) autorelease];
+    OrgApacheLuceneIndexLeafReader *ar = (OrgApacheLuceneIndexLeafReader *) cast_chk(reader, [OrgApacheLuceneIndexLeafReader class]);
+    OrgApacheLuceneIndexLeafReaderContext *atomic = create_OrgApacheLuceneIndexLeafReaderContext_initWithOrgApacheLuceneIndexCompositeReaderContext_withOrgApacheLuceneIndexLeafReader_withInt_withInt_withInt_withInt_(parent, ar, ord, docBase, [((id<JavaUtilList>) nil_chk(self->leaves_)) size], self->leafDocBase_);
     [self->leaves_ addWithId:atomic];
     self->leafDocBase_ += [((OrgApacheLuceneIndexIndexReader *) nil_chk(reader)) maxDoc];
     return atomic;
   }
   else {
-    OrgApacheLuceneIndexCompositeReader *cr = (OrgApacheLuceneIndexCompositeReader *) check_class_cast(reader, [OrgApacheLuceneIndexCompositeReader class]);
+    OrgApacheLuceneIndexCompositeReader *cr = (OrgApacheLuceneIndexCompositeReader *) cast_chk(reader, [OrgApacheLuceneIndexCompositeReader class]);
     id<JavaUtilList> sequentialSubReaders = [((OrgApacheLuceneIndexCompositeReader *) nil_chk(cr)) getSequentialSubReaders];
     id<JavaUtilList> children = JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithLength:[((id<JavaUtilList>) nil_chk(sequentialSubReaders)) size] type:OrgApacheLuceneIndexIndexReaderContext_class_()]);
     OrgApacheLuceneIndexCompositeReaderContext *newParent;
     if (parent == nil) {
-      newParent = [new_OrgApacheLuceneIndexCompositeReaderContext_initWithOrgApacheLuceneIndexCompositeReader_withJavaUtilList_withJavaUtilList_(cr, children, self->leaves_) autorelease];
+      newParent = create_OrgApacheLuceneIndexCompositeReaderContext_initWithOrgApacheLuceneIndexCompositeReader_withJavaUtilList_withJavaUtilList_(cr, children, self->leaves_);
     }
     else {
-      newParent = [new_OrgApacheLuceneIndexCompositeReaderContext_initWithOrgApacheLuceneIndexCompositeReaderContext_withOrgApacheLuceneIndexCompositeReader_withInt_withInt_withJavaUtilList_(parent, cr, ord, docBase, children) autorelease];
+      newParent = create_OrgApacheLuceneIndexCompositeReaderContext_initWithOrgApacheLuceneIndexCompositeReaderContext_withOrgApacheLuceneIndexCompositeReader_withInt_withInt_withJavaUtilList_(parent, cr, ord, docBase, children);
     }
     jint newDocBase = 0;
     for (jint i = 0, c = [sequentialSubReaders size]; i < c; i++) {

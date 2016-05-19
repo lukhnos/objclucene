@@ -63,6 +63,8 @@ __attribute__((unused)) static void OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1
 
 __attribute__((unused)) static OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1 *new_OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_initWithOrgApacheLuceneBkdtreeBKDPointInBBoxQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneBkdtreeBKDPointInBBoxQuery *outer$, OrgApacheLuceneSearchQuery *arg$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1 *create_OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_initWithOrgApacheLuceneBkdtreeBKDPointInBBoxQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneBkdtreeBKDPointInBBoxQuery *outer$, OrgApacheLuceneSearchQuery *arg$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1)
 
 @interface OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_$1 : OrgApacheLuceneSearchScorer {
@@ -98,6 +100,8 @@ __attribute__((unused)) static void OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1
 
 __attribute__((unused)) static OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_$1 *new_OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_$1_initWithOrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchWeight_(OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1 *outer$, OrgApacheLuceneSearchDocIdSetIterator *capture$0, OrgApacheLuceneSearchWeight *arg$0) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_$1 *create_OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_$1_initWithOrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchWeight_(OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1 *outer$, OrgApacheLuceneSearchDocIdSetIterator *capture$0, OrgApacheLuceneSearchWeight *arg$0);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_$1)
 
 @implementation OrgApacheLuceneBkdtreeBKDPointInBBoxQuery
@@ -113,19 +117,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_$1)
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores {
-  return [new_OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_initWithOrgApacheLuceneBkdtreeBKDPointInBBoxQuery_withOrgApacheLuceneSearchQuery_(self, self) autorelease];
+  return create_OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_initWithOrgApacheLuceneBkdtreeBKDPointInBBoxQuery_withOrgApacheLuceneSearchQuery_(self, self);
 }
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader {
   if (maxLon_ < minLon_) {
-    OrgApacheLuceneSearchBooleanQuery_Builder *q = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
+    OrgApacheLuceneSearchBooleanQuery_Builder *q = create_OrgApacheLuceneSearchBooleanQuery_Builder_init();
     [q setDisableCoordWithBoolean:true];
-    OrgApacheLuceneBkdtreeBKDPointInBBoxQuery *left = [new_OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_initWithNSString_withDouble_withDouble_withDouble_withDouble_(field_, minLat_, maxLat_, OrgApacheLuceneBkdtreeBKDTreeWriter_MIN_LON_INCL, maxLon_) autorelease];
+    OrgApacheLuceneBkdtreeBKDPointInBBoxQuery *left = create_OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_initWithNSString_withDouble_withDouble_withDouble_withDouble_(field_, minLat_, maxLat_, OrgApacheLuceneBkdtreeBKDTreeWriter_MIN_LON_INCL, maxLon_);
     [left setBoostWithFloat:[self getBoost]];
-    [q addWithOrgApacheLuceneSearchBooleanClause:[new_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_OccurEnum_(left, JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD)) autorelease]];
-    OrgApacheLuceneBkdtreeBKDPointInBBoxQuery *right = [new_OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_initWithNSString_withDouble_withDouble_withDouble_withDouble_(field_, minLat_, maxLat_, minLon_, JreLoadStatic(OrgApacheLuceneBkdtreeBKDTreeWriter, MAX_LON_INCL_)) autorelease];
+    [q addWithOrgApacheLuceneSearchBooleanClause:create_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_Occur_(left, JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD))];
+    OrgApacheLuceneBkdtreeBKDPointInBBoxQuery *right = create_OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_initWithNSString_withDouble_withDouble_withDouble_withDouble_(field_, minLat_, maxLat_, minLon_, JreLoadStatic(OrgApacheLuceneBkdtreeBKDTreeWriter, MAX_LON_INCL));
     [right setBoostWithFloat:[self getBoost]];
-    [q addWithOrgApacheLuceneSearchBooleanClause:[new_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_OccurEnum_(right, JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD)) autorelease]];
+    [q addWithOrgApacheLuceneSearchBooleanClause:create_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_Occur_(right, JreLoadEnum(OrgApacheLuceneSearchBooleanClause_Occur, SHOULD))];
     return [q build];
   }
   else {
@@ -144,14 +148,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_$1)
 
 - (jboolean)isEqual:(id)other {
   if ([super isEqual:other] && [other isKindOfClass:[OrgApacheLuceneBkdtreeBKDPointInBBoxQuery class]]) {
-    OrgApacheLuceneBkdtreeBKDPointInBBoxQuery *q = (OrgApacheLuceneBkdtreeBKDPointInBBoxQuery *) check_class_cast(other, [OrgApacheLuceneBkdtreeBKDPointInBBoxQuery class]);
+    OrgApacheLuceneBkdtreeBKDPointInBBoxQuery *q = (OrgApacheLuceneBkdtreeBKDPointInBBoxQuery *) cast_chk(other, [OrgApacheLuceneBkdtreeBKDPointInBBoxQuery class]);
     return [((NSString *) nil_chk(field_)) isEqual:((OrgApacheLuceneBkdtreeBKDPointInBBoxQuery *) nil_chk(q))->field_] && minLat_ == q->minLat_ && maxLat_ == q->maxLat_ && minLon_ == q->minLon_ && maxLon_ == q->maxLon_;
   }
   return false;
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *sb = create_JavaLangStringBuilder_init();
   [sb appendWithNSString:[[self getClass] getSimpleName]];
   [sb appendWithChar:':'];
   if ([((NSString *) nil_chk(self->field_)) isEqual:field] == false) {
@@ -193,16 +197,16 @@ void OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_initWithNSString_withDouble_withD
   OrgApacheLuceneSearchQuery_init(self);
   JreStrongAssign(&self->field_, field);
   if (OrgApacheLuceneBkdtreeBKDTreeWriter_validLatWithDouble_(minLat) == false) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D$", @"minLat=", minLat, @" is not a valid latitude")) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D$", @"minLat=", minLat, @" is not a valid latitude"));
   }
   if (OrgApacheLuceneBkdtreeBKDTreeWriter_validLatWithDouble_(maxLat) == false) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D$", @"maxLat=", maxLat, @" is not a valid latitude")) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D$", @"maxLat=", maxLat, @" is not a valid latitude"));
   }
   if (OrgApacheLuceneBkdtreeBKDTreeWriter_validLonWithDouble_(minLon) == false) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D$", @"minLon=", minLon, @" is not a valid longitude")) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D$", @"minLon=", minLon, @" is not a valid longitude"));
   }
   if (OrgApacheLuceneBkdtreeBKDTreeWriter_validLonWithDouble_(maxLon) == false) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D$", @"maxLon=", maxLon, @" is not a valid longitude")) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D$", @"maxLon=", maxLon, @" is not a valid longitude"));
   }
   self->minLon_ = minLon;
   self->maxLon_ = maxLon;
@@ -211,9 +215,11 @@ void OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_initWithNSString_withDouble_withD
 }
 
 OrgApacheLuceneBkdtreeBKDPointInBBoxQuery *new_OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_initWithNSString_withDouble_withDouble_withDouble_withDouble_(NSString *field, jdouble minLat, jdouble maxLat, jdouble minLon, jdouble maxLon) {
-  OrgApacheLuceneBkdtreeBKDPointInBBoxQuery *self = [OrgApacheLuceneBkdtreeBKDPointInBBoxQuery alloc];
-  OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_initWithNSString_withDouble_withDouble_withDouble_withDouble_(self, field, minLat, maxLat, minLon, maxLon);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneBkdtreeBKDPointInBBoxQuery, initWithNSString_withDouble_withDouble_withDouble_withDouble_, field, minLat, maxLat, minLon, maxLon)
+}
+
+OrgApacheLuceneBkdtreeBKDPointInBBoxQuery *create_OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_initWithNSString_withDouble_withDouble_withDouble_withDouble_(NSString *field, jdouble minLat, jdouble maxLat, jdouble minLon, jdouble maxLon) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneBkdtreeBKDPointInBBoxQuery, initWithNSString_withDouble_withDouble_withDouble_withDouble_, field, minLat, maxLat, minLon, maxLon)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneBkdtreeBKDPointInBBoxQuery)
@@ -253,13 +259,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneBkdtreeBKDPointInBBoxQuery)
     return nil;
   }
   if ([sdv isKindOfClass:[OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues class]] == false) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$@", @"field \"", this$0_->field_, @"\" was not indexed with BKDTreeDocValuesFormat: got: ", sdv)) autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$@", @"field \"", this$0_->field_, @"\" was not indexed with BKDTreeDocValuesFormat: got: ", sdv));
   }
-  OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues *treeDV = (OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues *) check_class_cast(sdv, [OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues class]);
-  OrgApacheLuceneBkdtreeBKDTreeReader *tree = [((OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues *) nil_chk(treeDV)) getBKDTreeReader];
+  OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues *treeDV = (OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues *) cast_chk(sdv, [OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues class]);
+  OrgApacheLuceneBkdtreeBKDTreeReader *tree = [treeDV getBKDTreeReader];
   OrgApacheLuceneSearchDocIdSet *result = [((OrgApacheLuceneBkdtreeBKDTreeReader *) nil_chk(tree)) intersectWithDouble:this$0_->minLat_ withDouble:this$0_->maxLat_ withDouble:this$0_->minLon_ withDouble:this$0_->maxLon_ withOrgApacheLuceneIndexSortedNumericDocValues:treeDV->delegate_];
   OrgApacheLuceneSearchDocIdSetIterator *disi = [((OrgApacheLuceneSearchDocIdSet *) nil_chk(result)) iterator];
-  return [new_OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_$1_initWithOrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchWeight_(self, disi, self) autorelease];
+  return create_OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_$1_initWithOrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchWeight_(self, disi, self);
 }
 
 - (instancetype)initWithOrgApacheLuceneBkdtreeBKDPointInBBoxQuery:(OrgApacheLuceneBkdtreeBKDPointInBBoxQuery *)outer$
@@ -275,7 +281,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneBkdtreeBKDPointInBBoxQuery)
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x1, NULL, NULL },
+    { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x1, NULL, "(Ljava/util/Set<Lorg/apache/lucene/index/Term;>;)V" },
     { "getValueForNormalization", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
     { "normalizeWithFloat:withFloat:", "normalize", "V", 0x1, NULL, NULL },
     { "explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x1, "Ljava.io.IOException;", NULL },
@@ -300,9 +306,11 @@ void OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_initWithOrgApacheLuceneBkdtree
 }
 
 OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1 *new_OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_initWithOrgApacheLuceneBkdtreeBKDPointInBBoxQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneBkdtreeBKDPointInBBoxQuery *outer$, OrgApacheLuceneSearchQuery *arg$0) {
-  OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1 *self = [OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1 alloc];
-  OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_initWithOrgApacheLuceneBkdtreeBKDPointInBBoxQuery_withOrgApacheLuceneSearchQuery_(self, outer$, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1, initWithOrgApacheLuceneBkdtreeBKDPointInBBoxQuery_withOrgApacheLuceneSearchQuery_, outer$, arg$0)
+}
+
+OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1 *create_OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_initWithOrgApacheLuceneBkdtreeBKDPointInBBoxQuery_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneBkdtreeBKDPointInBBoxQuery *outer$, OrgApacheLuceneSearchQuery *arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1, initWithOrgApacheLuceneBkdtreeBKDPointInBBoxQuery_withOrgApacheLuceneSearchQuery_, outer$, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1)
@@ -374,9 +382,11 @@ void OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_$1_initWithOrgApacheLuceneBkdt
 }
 
 OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_$1 *new_OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_$1_initWithOrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchWeight_(OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1 *outer$, OrgApacheLuceneSearchDocIdSetIterator *capture$0, OrgApacheLuceneSearchWeight *arg$0) {
-  OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_$1 *self = [OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_$1 alloc];
-  OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_$1_initWithOrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchWeight_(self, outer$, capture$0, arg$0);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_$1, initWithOrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchWeight_, outer$, capture$0, arg$0)
+}
+
+OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_$1 *create_OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_$1_initWithOrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchWeight_(OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1 *outer$, OrgApacheLuceneSearchDocIdSetIterator *capture$0, OrgApacheLuceneSearchWeight *arg$0) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_$1, initWithOrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_withOrgApacheLuceneSearchDocIdSetIterator_withOrgApacheLuceneSearchWeight_, outer$, capture$0, arg$0)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_$1)

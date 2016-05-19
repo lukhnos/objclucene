@@ -5,29 +5,45 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory_) && (OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory))
+#define OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilCharFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilCharFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilCharFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilCharFilterFactory 1
 #include "org/apache/lucene/analysis/util/CharFilterFactory.h"
 
 @class JavaIoReader;
 @class OrgApacheLuceneAnalysisCharFilter;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>PatternReplaceCharFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_ptnreplace" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;charFilter class="solr.PatternReplaceCharFilterFactory" 
+ pattern="([^a-z])" replacement=""/&gt;
+ &lt;tokenizer class="solr.KeywordTokenizerFactory"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ @since Solr 3.1
+ */
 @interface OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory : OrgApacheLuceneAnalysisUtilCharFilterFactory
 
 #pragma mark Public
 
+/*!
+ @brief Creates a new PatternReplaceCharFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisCharFilter *)createWithJavaIoReader:(JavaIoReader *)input;
@@ -40,8 +56,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFac
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory *new_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory *create_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory")

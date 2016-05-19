@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_RESTRICT
-#define OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer")
+#ifdef RESTRICT_OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer
+#define INCLUDE_ALL_OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer 0
 #else
-#define OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer 1
 #endif
-#undef OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer
 
-#if !defined (_OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_) && (OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_INCLUDE_ALL || OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_INCLUDE)
-#define _OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_
+#if !defined (OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_) && (INCLUDE_ALL_OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer || defined(INCLUDE_OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer))
+#define OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_
 
-#define OrgApacheLuceneCodecsNormsConsumer_RESTRICT 1
-#define OrgApacheLuceneCodecsNormsConsumer_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneCodecsNormsConsumer 1
+#define INCLUDE_OrgApacheLuceneCodecsNormsConsumer 1
 #include "org/apache/lucene/codecs/NormsConsumer.h"
 
 @class OrgApacheLuceneIndexFieldInfo;
@@ -25,6 +25,9 @@
 @class OrgApacheLuceneStoreIndexOutput;
 @protocol JavaLangIterable;
 
+/*!
+ @brief Writer for <code>Lucene53NormsFormat</code>
+ */
 @interface OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer : OrgApacheLuceneCodecsNormsConsumer {
  @public
   OrgApacheLuceneStoreIndexOutput *data_, *meta_;
@@ -57,8 +60,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_initWi
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer *new_OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_initWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneIndexSegmentWriteState *state, NSString *dataCodec, NSString *dataExtension, NSString *metaCodec, NSString *metaExtension) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer *create_OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_initWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneIndexSegmentWriteState *state, NSString *dataCodec, NSString *dataExtension, NSString *metaCodec, NSString *metaExtension);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer")

@@ -5,23 +5,42 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsLucene50Lucene50SkipReader_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsLucene50Lucene50SkipReader_RESTRICT
-#define OrgApacheLuceneCodecsLucene50Lucene50SkipReader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50SkipReader")
+#ifdef RESTRICT_OrgApacheLuceneCodecsLucene50Lucene50SkipReader
+#define INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50SkipReader 0
 #else
-#define OrgApacheLuceneCodecsLucene50Lucene50SkipReader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50SkipReader 1
 #endif
-#undef OrgApacheLuceneCodecsLucene50Lucene50SkipReader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsLucene50Lucene50SkipReader
 
-#if !defined (_OrgApacheLuceneCodecsLucene50Lucene50SkipReader_) && (OrgApacheLuceneCodecsLucene50Lucene50SkipReader_INCLUDE_ALL || OrgApacheLuceneCodecsLucene50Lucene50SkipReader_INCLUDE)
-#define _OrgApacheLuceneCodecsLucene50Lucene50SkipReader_
+#if !defined (OrgApacheLuceneCodecsLucene50Lucene50SkipReader_) && (INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50SkipReader || defined(INCLUDE_OrgApacheLuceneCodecsLucene50Lucene50SkipReader))
+#define OrgApacheLuceneCodecsLucene50Lucene50SkipReader_
 
-#define OrgApacheLuceneCodecsMultiLevelSkipListReader_RESTRICT 1
-#define OrgApacheLuceneCodecsMultiLevelSkipListReader_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneCodecsMultiLevelSkipListReader 1
+#define INCLUDE_OrgApacheLuceneCodecsMultiLevelSkipListReader 1
 #include "org/apache/lucene/codecs/MultiLevelSkipListReader.h"
 
 @class OrgApacheLuceneStoreIndexInput;
 
+/*!
+ @brief Implements the skip list reader for block postings format
+ that stores positions and payloads.
+ Although this skipper uses MultiLevelSkipListReader as an interface, 
+ its definition of skip position will be a little different. 
+ For example, when skipInterval = blockSize = 3, df = 2*skipInterval = 6, 
+ 0 1 2 3 4 5
+ d d d d d d    (posting list)
+ ^     ^    (skip point in MultiLeveSkipWriter)
+ ^        (skip point in Lucene50SkipWriter)
+ In this case, MultiLevelSkipListReader will use the last document as a skip point, 
+ while Lucene50SkipReader should assume no skip point will comes. 
+ If we use the interface directly in Lucene50SkipReader, it may silly try to read 
+ another skip data after the only skip point is loaded. 
+ To illustrate this, we can call skipTo(d[5]), since skip point d[3] has smaller docId,
+ and numSkipped+blockSize== df, the MultiLevelSkipListReader will assume the skip list
+ isn't exhausted yet, and try to load a non-existed skip point
+ Therefore, we'll trim df before passing it to the interface. see trim(int)
+ */
 @interface OrgApacheLuceneCodecsLucene50Lucene50SkipReader : OrgApacheLuceneCodecsMultiLevelSkipListReader
 
 #pragma mark Public
@@ -32,6 +51,10 @@
                                            withBoolean:(jboolean)hasOffsets
                                            withBoolean:(jboolean)hasPayloads;
 
+/*!
+ @brief Returns the doc pointer of the doc to which the last call of 
+ <code>MultiLevelSkipListReader.skipTo(int)</code> has skipped.
+ */
 - (jlong)getDocPointer;
 
 - (jint)getNextSkipDoc;
@@ -59,6 +82,13 @@ withOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)skipStream;
 
 - (void)setLastSkipDataWithInt:(jint)level;
 
+/*!
+ @brief Trim original docFreq to tell skipReader read proper number of skip points.
+ Since our definition in Lucene50Skip* is a little different from MultiLevelSkip
+ This trimmed docFreq will prevent skipReader from:
+ 1. silly reading a non-existed skip point after the last block boundary
+ 2. moving into the vInt block
+ */
 - (jint)trimWithInt:(jint)df;
 
 @end
@@ -69,8 +99,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsLucene50Lucene50SkipReader_initWithO
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50SkipReader *new_OrgApacheLuceneCodecsLucene50Lucene50SkipReader_initWithOrgApacheLuceneStoreIndexInput_withInt_withBoolean_withBoolean_withBoolean_(OrgApacheLuceneStoreIndexInput *skipStream, jint maxSkipLevels, jboolean hasPos, jboolean hasOffsets, jboolean hasPayloads) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50SkipReader *create_OrgApacheLuceneCodecsLucene50Lucene50SkipReader_initWithOrgApacheLuceneStoreIndexInput_withInt_withBoolean_withBoolean_withBoolean_(OrgApacheLuceneStoreIndexInput *skipStream, jint maxSkipLevels, jboolean hasPos, jboolean hasOffsets, jboolean hasPayloads);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50SkipReader)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsLucene50Lucene50SkipReader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50SkipReader")

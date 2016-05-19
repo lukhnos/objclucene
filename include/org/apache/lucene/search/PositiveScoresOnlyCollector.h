@@ -5,25 +5,30 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchPositiveScoresOnlyCollector_INCLUDE_ALL")
-#if OrgApacheLuceneSearchPositiveScoresOnlyCollector_RESTRICT
-#define OrgApacheLuceneSearchPositiveScoresOnlyCollector_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchPositiveScoresOnlyCollector")
+#ifdef RESTRICT_OrgApacheLuceneSearchPositiveScoresOnlyCollector
+#define INCLUDE_ALL_OrgApacheLuceneSearchPositiveScoresOnlyCollector 0
 #else
-#define OrgApacheLuceneSearchPositiveScoresOnlyCollector_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchPositiveScoresOnlyCollector 1
 #endif
-#undef OrgApacheLuceneSearchPositiveScoresOnlyCollector_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchPositiveScoresOnlyCollector
 
-#if !defined (_OrgApacheLuceneSearchPositiveScoresOnlyCollector_) && (OrgApacheLuceneSearchPositiveScoresOnlyCollector_INCLUDE_ALL || OrgApacheLuceneSearchPositiveScoresOnlyCollector_INCLUDE)
-#define _OrgApacheLuceneSearchPositiveScoresOnlyCollector_
+#if !defined (OrgApacheLuceneSearchPositiveScoresOnlyCollector_) && (INCLUDE_ALL_OrgApacheLuceneSearchPositiveScoresOnlyCollector || defined(INCLUDE_OrgApacheLuceneSearchPositiveScoresOnlyCollector))
+#define OrgApacheLuceneSearchPositiveScoresOnlyCollector_
 
-#define OrgApacheLuceneSearchFilterCollector_RESTRICT 1
-#define OrgApacheLuceneSearchFilterCollector_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchFilterCollector 1
+#define INCLUDE_OrgApacheLuceneSearchFilterCollector 1
 #include "org/apache/lucene/search/FilterCollector.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
 @protocol OrgApacheLuceneSearchCollector;
 @protocol OrgApacheLuceneSearchLeafCollector;
 
+/*!
+ @brief A <code>Collector</code> implementation which wraps another
+ <code>Collector</code> and makes sure only documents with
+ scores &gt; 0 are collected.
+ */
 @interface OrgApacheLuceneSearchPositiveScoresOnlyCollector : OrgApacheLuceneSearchFilterCollector
 
 #pragma mark Public
@@ -40,8 +45,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchPositiveScoresOnlyCollector_initWith
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchPositiveScoresOnlyCollector *new_OrgApacheLuceneSearchPositiveScoresOnlyCollector_initWithOrgApacheLuceneSearchCollector_(id<OrgApacheLuceneSearchCollector> inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchPositiveScoresOnlyCollector *create_OrgApacheLuceneSearchPositiveScoresOnlyCollector_initWithOrgApacheLuceneSearchCollector_(id<OrgApacheLuceneSearchCollector> inArg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPositiveScoresOnlyCollector)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchPositiveScoresOnlyCollector_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchPositiveScoresOnlyCollector")

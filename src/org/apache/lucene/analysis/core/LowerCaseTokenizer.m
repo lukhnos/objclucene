@@ -44,9 +44,11 @@ void OrgApacheLuceneAnalysisCoreLowerCaseTokenizer_init(OrgApacheLuceneAnalysisC
 }
 
 OrgApacheLuceneAnalysisCoreLowerCaseTokenizer *new_OrgApacheLuceneAnalysisCoreLowerCaseTokenizer_init() {
-  OrgApacheLuceneAnalysisCoreLowerCaseTokenizer *self = [OrgApacheLuceneAnalysisCoreLowerCaseTokenizer alloc];
-  OrgApacheLuceneAnalysisCoreLowerCaseTokenizer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCoreLowerCaseTokenizer, init)
+}
+
+OrgApacheLuceneAnalysisCoreLowerCaseTokenizer *create_OrgApacheLuceneAnalysisCoreLowerCaseTokenizer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCoreLowerCaseTokenizer, init)
 }
 
 void OrgApacheLuceneAnalysisCoreLowerCaseTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneAnalysisCoreLowerCaseTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory) {
@@ -54,9 +56,11 @@ void OrgApacheLuceneAnalysisCoreLowerCaseTokenizer_initWithOrgApacheLuceneUtilAt
 }
 
 OrgApacheLuceneAnalysisCoreLowerCaseTokenizer *new_OrgApacheLuceneAnalysisCoreLowerCaseTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneUtilAttributeFactory *factory) {
-  OrgApacheLuceneAnalysisCoreLowerCaseTokenizer *self = [OrgApacheLuceneAnalysisCoreLowerCaseTokenizer alloc];
-  OrgApacheLuceneAnalysisCoreLowerCaseTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(self, factory);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCoreLowerCaseTokenizer, initWithOrgApacheLuceneUtilAttributeFactory_, factory)
+}
+
+OrgApacheLuceneAnalysisCoreLowerCaseTokenizer *create_OrgApacheLuceneAnalysisCoreLowerCaseTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneUtilAttributeFactory *factory) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCoreLowerCaseTokenizer, initWithOrgApacheLuceneUtilAttributeFactory_, factory)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCoreLowerCaseTokenizer)

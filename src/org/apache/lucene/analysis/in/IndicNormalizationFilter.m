@@ -34,7 +34,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisInIndicNormalizationFilter, normalize
 
 - (jboolean)incrementToken {
   if ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
-    [termAtt_ setLengthWithInt:[((OrgApacheLuceneAnalysisInIndicNormalizer *) nil_chk(normalizer_)) normalizeWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer] withInt:[termAtt_ length]]];
+    [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) setLengthWithInt:[((OrgApacheLuceneAnalysisInIndicNormalizer *) nil_chk(normalizer_)) normalizeWithCharArray:[termAtt_ buffer] withInt:[termAtt_ length]]];
     return true;
   }
   else {
@@ -70,9 +70,11 @@ void OrgApacheLuceneAnalysisInIndicNormalizationFilter_initWithOrgApacheLuceneAn
 }
 
 OrgApacheLuceneAnalysisInIndicNormalizationFilter *new_OrgApacheLuceneAnalysisInIndicNormalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) {
-  OrgApacheLuceneAnalysisInIndicNormalizationFilter *self = [OrgApacheLuceneAnalysisInIndicNormalizationFilter alloc];
-  OrgApacheLuceneAnalysisInIndicNormalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, input);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisInIndicNormalizationFilter, initWithOrgApacheLuceneAnalysisTokenStream_, input)
+}
+
+OrgApacheLuceneAnalysisInIndicNormalizationFilter *create_OrgApacheLuceneAnalysisInIndicNormalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisInIndicNormalizationFilter, initWithOrgApacheLuceneAnalysisTokenStream_, input)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisInIndicNormalizationFilter)

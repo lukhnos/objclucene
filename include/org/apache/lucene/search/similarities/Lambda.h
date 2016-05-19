@@ -5,30 +5,53 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSimilaritiesLambda_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSimilaritiesLambda_RESTRICT
-#define OrgApacheLuceneSearchSimilaritiesLambda_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesLambda")
+#ifdef RESTRICT_OrgApacheLuceneSearchSimilaritiesLambda
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesLambda 0
 #else
-#define OrgApacheLuceneSearchSimilaritiesLambda_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesLambda 1
 #endif
-#undef OrgApacheLuceneSearchSimilaritiesLambda_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSimilaritiesLambda
 
-#if !defined (_OrgApacheLuceneSearchSimilaritiesLambda_) && (OrgApacheLuceneSearchSimilaritiesLambda_INCLUDE_ALL || OrgApacheLuceneSearchSimilaritiesLambda_INCLUDE)
-#define _OrgApacheLuceneSearchSimilaritiesLambda_
+#if !defined (OrgApacheLuceneSearchSimilaritiesLambda_) && (INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesLambda || defined(INCLUDE_OrgApacheLuceneSearchSimilaritiesLambda))
+#define OrgApacheLuceneSearchSimilaritiesLambda_
 
 @class OrgApacheLuceneSearchExplanation;
 @class OrgApacheLuceneSearchSimilaritiesBasicStats;
 
+/*!
+ @brief The <em>lambda (&lambda;<sub>w</sub>)</em> parameter in information-based
+ models.
+ - seealso: IBSimilarity
+ */
 @interface OrgApacheLuceneSearchSimilaritiesLambda : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ (For invocation by subclass 
+ constructors, typically implicit.)
+ */
 - (instancetype)init;
 
+/*!
+ @brief Explains the lambda parameter.
+ */
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats;
 
+/*!
+ @brief Computes the lambda parameter.
+ */
 - (jfloat)lambdaWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats;
 
+/*!
+ @brief Subclasses must override this method to return the code of the lambda
+ formula.
+ Since the original paper is not very clear on this matter, and
+ also uses the DFR naming scheme incorrectly, the codes here were chosen
+ arbitrarily.
+ */
 - (NSString *)description;
 
 @end
@@ -41,4 +64,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesLambda)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchSimilaritiesLambda_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSimilaritiesLambda")

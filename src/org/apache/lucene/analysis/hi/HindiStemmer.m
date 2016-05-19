@@ -30,7 +30,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "stemWithCharArray:withInt:", "stem", "I", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "HindiStemmer", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisHiHindiStemmer = { 2, "HindiStemmer", "org.apache.lucene.analysis.hi", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisHiHindiStemmer;
@@ -43,9 +43,11 @@ void OrgApacheLuceneAnalysisHiHindiStemmer_init(OrgApacheLuceneAnalysisHiHindiSt
 }
 
 OrgApacheLuceneAnalysisHiHindiStemmer *new_OrgApacheLuceneAnalysisHiHindiStemmer_init() {
-  OrgApacheLuceneAnalysisHiHindiStemmer *self = [OrgApacheLuceneAnalysisHiHindiStemmer alloc];
-  OrgApacheLuceneAnalysisHiHindiStemmer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisHiHindiStemmer, init)
+}
+
+OrgApacheLuceneAnalysisHiHindiStemmer *create_OrgApacheLuceneAnalysisHiHindiStemmer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisHiHindiStemmer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisHiHindiStemmer)

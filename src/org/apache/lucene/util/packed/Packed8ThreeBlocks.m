@@ -18,6 +18,10 @@
 
 @implementation OrgApacheLuceneUtilPackedPacked8ThreeBlocks
 
++ (jint)MAX_SIZE {
+  return OrgApacheLuceneUtilPackedPacked8ThreeBlocks_MAX_SIZE;
+}
+
 - (instancetype)initWithInt:(jint)valueCount {
   OrgApacheLuceneUtilPackedPacked8ThreeBlocks_initWithInt_(self, valueCount);
   return self;
@@ -92,7 +96,7 @@ withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
 }
 
 - (jlong)ramBytesUsed {
-  return OrgApacheLuceneUtilRamUsageEstimator_alignObjectSizeWithLong_(JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER_) + 2 * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_)) + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithByteArray_(blocks_);
+  return OrgApacheLuceneUtilRamUsageEstimator_alignObjectSizeWithLong_(JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER) + 2 * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF)) + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithByteArray_(blocks_);
 }
 
 - (NSString *)description {
@@ -130,30 +134,34 @@ withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
 void OrgApacheLuceneUtilPackedPacked8ThreeBlocks_initWithInt_(OrgApacheLuceneUtilPackedPacked8ThreeBlocks *self, jint valueCount) {
   OrgApacheLuceneUtilPackedPackedInts_MutableImpl_initWithInt_withInt_(self, valueCount, 24);
   if (valueCount > OrgApacheLuceneUtilPackedPacked8ThreeBlocks_MAX_SIZE) {
-    @throw [new_JavaLangArrayIndexOutOfBoundsException_initWithNSString_(@"MAX_SIZE exceeded") autorelease];
+    @throw create_JavaLangArrayIndexOutOfBoundsException_initWithNSString_(@"MAX_SIZE exceeded");
   }
   JreStrongAssignAndConsume(&self->blocks_, [IOSByteArray newArrayWithLength:valueCount * 3]);
 }
 
 OrgApacheLuceneUtilPackedPacked8ThreeBlocks *new_OrgApacheLuceneUtilPackedPacked8ThreeBlocks_initWithInt_(jint valueCount) {
-  OrgApacheLuceneUtilPackedPacked8ThreeBlocks *self = [OrgApacheLuceneUtilPackedPacked8ThreeBlocks alloc];
-  OrgApacheLuceneUtilPackedPacked8ThreeBlocks_initWithInt_(self, valueCount);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedPacked8ThreeBlocks, initWithInt_, valueCount)
+}
+
+OrgApacheLuceneUtilPackedPacked8ThreeBlocks *create_OrgApacheLuceneUtilPackedPacked8ThreeBlocks_initWithInt_(jint valueCount) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedPacked8ThreeBlocks, initWithInt_, valueCount)
 }
 
 void OrgApacheLuceneUtilPackedPacked8ThreeBlocks_initWithInt_withOrgApacheLuceneStoreDataInput_withInt_(OrgApacheLuceneUtilPackedPacked8ThreeBlocks *self, jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount) {
   OrgApacheLuceneUtilPackedPacked8ThreeBlocks_initWithInt_(self, valueCount);
   [((OrgApacheLuceneStoreDataInput *) nil_chk(inArg)) readBytesWithByteArray:self->blocks_ withInt:0 withInt:3 * valueCount];
-  jint remaining = (jint) ([((OrgApacheLuceneUtilPackedPackedInts_FormatEnum *) nil_chk(JreLoadStatic(OrgApacheLuceneUtilPackedPackedInts_FormatEnum, PACKED))) byteCountWithInt:packedIntsVersion withInt:valueCount withInt:24] - 3LL * valueCount * 1);
+  jint remaining = (jint) ([((OrgApacheLuceneUtilPackedPackedInts_Format *) nil_chk(JreLoadEnum(OrgApacheLuceneUtilPackedPackedInts_Format, PACKED))) byteCountWithInt:packedIntsVersion withInt:valueCount withInt:24] - 3LL * valueCount * 1);
   for (jint i = 0; i < remaining; ++i) {
     [inArg readByte];
   }
 }
 
 OrgApacheLuceneUtilPackedPacked8ThreeBlocks *new_OrgApacheLuceneUtilPackedPacked8ThreeBlocks_initWithInt_withOrgApacheLuceneStoreDataInput_withInt_(jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount) {
-  OrgApacheLuceneUtilPackedPacked8ThreeBlocks *self = [OrgApacheLuceneUtilPackedPacked8ThreeBlocks alloc];
-  OrgApacheLuceneUtilPackedPacked8ThreeBlocks_initWithInt_withOrgApacheLuceneStoreDataInput_withInt_(self, packedIntsVersion, inArg, valueCount);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilPackedPacked8ThreeBlocks, initWithInt_withOrgApacheLuceneStoreDataInput_withInt_, packedIntsVersion, inArg, valueCount)
+}
+
+OrgApacheLuceneUtilPackedPacked8ThreeBlocks *create_OrgApacheLuceneUtilPackedPacked8ThreeBlocks_initWithInt_withOrgApacheLuceneStoreDataInput_withInt_(jint packedIntsVersion, OrgApacheLuceneStoreDataInput *inArg, jint valueCount) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilPackedPacked8ThreeBlocks, initWithInt_withOrgApacheLuceneStoreDataInput_withInt_, packedIntsVersion, inArg, valueCount)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPacked8ThreeBlocks)

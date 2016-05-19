@@ -5,28 +5,36 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchFieldValueQuery_INCLUDE_ALL")
-#if OrgApacheLuceneSearchFieldValueQuery_RESTRICT
-#define OrgApacheLuceneSearchFieldValueQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchFieldValueQuery")
+#ifdef RESTRICT_OrgApacheLuceneSearchFieldValueQuery
+#define INCLUDE_ALL_OrgApacheLuceneSearchFieldValueQuery 0
 #else
-#define OrgApacheLuceneSearchFieldValueQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchFieldValueQuery 1
 #endif
-#undef OrgApacheLuceneSearchFieldValueQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchFieldValueQuery
 
-#if !defined (_OrgApacheLuceneSearchFieldValueQuery_) && (OrgApacheLuceneSearchFieldValueQuery_INCLUDE_ALL || OrgApacheLuceneSearchFieldValueQuery_INCLUDE)
-#define _OrgApacheLuceneSearchFieldValueQuery_
+#if !defined (OrgApacheLuceneSearchFieldValueQuery_) && (INCLUDE_ALL_OrgApacheLuceneSearchFieldValueQuery || defined(INCLUDE_OrgApacheLuceneSearchFieldValueQuery))
+#define OrgApacheLuceneSearchFieldValueQuery_
 
-#define OrgApacheLuceneSearchQuery_RESTRICT 1
-#define OrgApacheLuceneSearchQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneSearchQuery 1
+#define INCLUDE_OrgApacheLuceneSearchQuery 1
 #include "org/apache/lucene/search/Query.h"
 
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchWeight;
 
+/*!
+ @brief A <code>Query</code> that matches documents that have a value for a given field
+ as reported by <code>LeafReader.getDocsWithField(String)</code>.
+ */
 @interface OrgApacheLuceneSearchFieldValueQuery : OrgApacheLuceneSearchQuery
 
 #pragma mark Public
 
+/*!
+ @brief Create a query that will match that have a value for the given
+ <code>field</code>.
+ */
 - (instancetype)initWithNSString:(NSString *)field;
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
@@ -46,8 +54,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchFieldValueQuery_initWithNSString_(Or
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchFieldValueQuery *new_OrgApacheLuceneSearchFieldValueQuery_initWithNSString_(NSString *field) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchFieldValueQuery *create_OrgApacheLuceneSearchFieldValueQuery_initWithNSString_(NSString *field);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldValueQuery)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchFieldValueQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchFieldValueQuery")

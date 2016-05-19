@@ -5,23 +5,23 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserSurroundQueryDistanceQuery_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserSurroundQueryDistanceQuery_RESTRICT
-#define OrgApacheLuceneQueryparserSurroundQueryDistanceQuery_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryDistanceQuery")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserSurroundQueryDistanceQuery
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryDistanceQuery 0
 #else
-#define OrgApacheLuceneQueryparserSurroundQueryDistanceQuery_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryDistanceQuery 1
 #endif
-#undef OrgApacheLuceneQueryparserSurroundQueryDistanceQuery_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserSurroundQueryDistanceQuery
 
-#if !defined (_OrgApacheLuceneQueryparserSurroundQueryDistanceQuery_) && (OrgApacheLuceneQueryparserSurroundQueryDistanceQuery_INCLUDE_ALL || OrgApacheLuceneQueryparserSurroundQueryDistanceQuery_INCLUDE)
-#define _OrgApacheLuceneQueryparserSurroundQueryDistanceQuery_
+#if !defined (OrgApacheLuceneQueryparserSurroundQueryDistanceQuery_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryDistanceQuery || defined(INCLUDE_OrgApacheLuceneQueryparserSurroundQueryDistanceQuery))
+#define OrgApacheLuceneQueryparserSurroundQueryDistanceQuery_
 
-#define OrgApacheLuceneQueryparserSurroundQueryComposedQuery_RESTRICT 1
-#define OrgApacheLuceneQueryparserSurroundQueryComposedQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserSurroundQueryComposedQuery 1
+#define INCLUDE_OrgApacheLuceneQueryparserSurroundQueryComposedQuery 1
 #include "org/apache/lucene/queryparser/surround/query/ComposedQuery.h"
 
-#define OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_RESTRICT 1
-#define OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery 1
+#define INCLUDE_OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery 1
 #include "org/apache/lucene/queryparser/surround/query/DistanceSubQuery.h"
 
 @class OrgApacheLuceneIndexIndexReader;
@@ -30,6 +30,9 @@
 @class OrgApacheLuceneSearchQuery;
 @protocol JavaUtilList;
 
+/*!
+ @brief Factory for NEAR queries
+ */
 @interface OrgApacheLuceneQueryparserSurroundQueryDistanceQuery : OrgApacheLuceneQueryparserSurroundQueryComposedQuery < OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery >
 
 #pragma mark Public
@@ -64,8 +67,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQueryDistanceQuery_init
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQueryDistanceQuery *new_OrgApacheLuceneQueryparserSurroundQueryDistanceQuery_initWithJavaUtilList_withBoolean_withInt_withNSString_withBoolean_(id<JavaUtilList> queries, jboolean infix, jint opDistance, NSString *opName, jboolean ordered) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQueryDistanceQuery *create_OrgApacheLuceneQueryparserSurroundQueryDistanceQuery_initWithJavaUtilList_withBoolean_withInt_withNSString_withBoolean_(id<JavaUtilList> queries, jboolean infix, jint opDistance, NSString *opName, jboolean ordered);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQueryDistanceQuery)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserSurroundQueryDistanceQuery_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserSurroundQueryDistanceQuery")

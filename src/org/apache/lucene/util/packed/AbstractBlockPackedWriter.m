@@ -23,6 +23,22 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPackedAbstractBlockPacked
 
 @implementation OrgApacheLuceneUtilPackedAbstractBlockPackedWriter
 
++ (jint)MIN_BLOCK_SIZE {
+  return OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_MIN_BLOCK_SIZE;
+}
+
++ (jint)MAX_BLOCK_SIZE {
+  return OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_MAX_BLOCK_SIZE;
+}
+
++ (jint)MIN_VALUE_EQUALS_0 {
+  return OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_MIN_VALUE_EQUALS_0;
+}
+
++ (jint)BPV_SHIFT {
+  return OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_BPV_SHIFT;
+}
+
 + (void)writeVLongWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg
                                             withLong:(jlong)i {
   OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_writeVLongWithOrgApacheLuceneStoreDataOutput_withLong_(outArg, i);
@@ -58,7 +74,7 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPackedAbstractBlockPacked
 - (void)addBlockOfZeros {
   OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_checkNotFinished(self);
   if (off_ != 0 && off_ != ((IOSLongArray *) nil_chk(values_))->size_) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("I", off_)) autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("I", off_));
   }
   if (off_ == ((IOSLongArray *) nil_chk(values_))->size_) {
     [self flush];
@@ -86,7 +102,7 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPackedAbstractBlockPacked
 }
 
 - (void)writeValuesWithInt:(jint)bitsRequired {
-  id<OrgApacheLuceneUtilPackedPackedInts_Encoder> encoder = OrgApacheLuceneUtilPackedPackedInts_getEncoderWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_(JreLoadStatic(OrgApacheLuceneUtilPackedPackedInts_FormatEnum, PACKED), OrgApacheLuceneUtilPackedPackedInts_VERSION_CURRENT, bitsRequired);
+  id<OrgApacheLuceneUtilPackedPackedInts_Encoder> encoder = OrgApacheLuceneUtilPackedPackedInts_getEncoderWithOrgApacheLuceneUtilPackedPackedInts_Format_withInt_withInt_(JreLoadEnum(OrgApacheLuceneUtilPackedPackedInts_Format, PACKED), OrgApacheLuceneUtilPackedPackedInts_VERSION_CURRENT, bitsRequired);
   jint iterations = ((IOSLongArray *) nil_chk(values_))->size_ / [((id<OrgApacheLuceneUtilPackedPackedInts_Encoder>) nil_chk(encoder)) byteValueCount];
   jint blockSize = [encoder byteBlockCount] * iterations;
   if (blocks_ == nil || blocks_->size_ < blockSize) {
@@ -96,7 +112,7 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPackedAbstractBlockPacked
     JavaUtilArrays_fillWithLongArray_withInt_withInt_withLong_(values_, off_, values_->size_, 0LL);
   }
   [encoder encodeWithLongArray:values_ withInt:0 withByteArray:blocks_ withInt:0 withInt:iterations];
-  jint blockCount = (jint) [((OrgApacheLuceneUtilPackedPackedInts_FormatEnum *) nil_chk(JreLoadStatic(OrgApacheLuceneUtilPackedPackedInts_FormatEnum, PACKED))) byteCountWithInt:OrgApacheLuceneUtilPackedPackedInts_VERSION_CURRENT withInt:off_ withInt:bitsRequired];
+  jint blockCount = (jint) [((OrgApacheLuceneUtilPackedPackedInts_Format *) nil_chk(JreLoadEnum(OrgApacheLuceneUtilPackedPackedInts_Format, PACKED))) byteCountWithInt:OrgApacheLuceneUtilPackedPackedInts_VERSION_CURRENT withInt:off_ withInt:bitsRequired];
   [((OrgApacheLuceneStoreDataOutput *) nil_chk(out_)) writeBytesWithByteArray:blocks_ withInt:blockCount];
 }
 
@@ -157,7 +173,7 @@ void OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_initWithOrgApacheLuceneS
 
 void OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_checkNotFinished(OrgApacheLuceneUtilPackedAbstractBlockPackedWriter *self) {
   if (self->finished_) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"Already finished") autorelease];
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"Already finished");
   }
 }
 

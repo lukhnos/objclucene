@@ -16,9 +16,13 @@
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory)
 
-JavaUtilRegexPattern *OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory_TAG_NAME_PATTERN_;
+JavaUtilRegexPattern *OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory_TAG_NAME_PATTERN;
 
 @implementation OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory
+
++ (JavaUtilRegexPattern *)TAG_NAME_PATTERN {
+  return OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory_TAG_NAME_PATTERN;
+}
 
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args {
   OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory_initWithJavaUtilMap_(self, args);
@@ -28,10 +32,10 @@ JavaUtilRegexPattern *OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactor
 - (OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter *)createWithJavaIoReader:(JavaIoReader *)input {
   OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter *charFilter;
   if (nil == escapedTags_) {
-    charFilter = [new_OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter_initWithJavaIoReader_(input) autorelease];
+    charFilter = create_OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter_initWithJavaIoReader_(input);
   }
   else {
-    charFilter = [new_OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter_initWithJavaIoReader_withJavaUtilSet_(input, escapedTags_) autorelease];
+    charFilter = create_OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter_initWithJavaIoReader_withJavaUtilSet_(input, escapedTags_);
   }
   return charFilter;
 }
@@ -43,19 +47,19 @@ JavaUtilRegexPattern *OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactor
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory class]) {
-    JreStrongAssign(&OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory_TAG_NAME_PATTERN_, JavaUtilRegexPattern_compileWithNSString_(@"[^\\s,]+"));
+    JreStrongAssign(&OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory_TAG_NAME_PATTERN, JavaUtilRegexPattern_compileWithNSString_(@"[^\\s,]+"));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory)
   }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "HTMLStripCharFilterFactory", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "HTMLStripCharFilterFactory", NULL, 0x1, NULL, "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)V" },
     { "createWithJavaIoReader:", "create", "Lorg.apache.lucene.analysis.charfilter.HTMLStripCharFilter;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "escapedTags_", NULL, 0x10, "Ljava.util.Set;", NULL, "Ljava/util/Set<Ljava/lang/String;>;", .constantValue.asLong = 0 },
-    { "TAG_NAME_PATTERN_", NULL, 0x18, "Ljava.util.regex.Pattern;", &OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory_TAG_NAME_PATTERN_, NULL, .constantValue.asLong = 0 },
+    { "TAG_NAME_PATTERN", "TAG_NAME_PATTERN", 0x18, "Ljava.util.regex.Pattern;", &OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory_TAG_NAME_PATTERN, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory = { 2, "HTMLStripCharFilterFactory", "org.apache.lucene.analysis.charfilter", NULL, 0x1, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory;
@@ -67,14 +71,16 @@ void OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory_initWithJavaUti
   OrgApacheLuceneAnalysisUtilCharFilterFactory_initWithJavaUtilMap_(self, args);
   JreStrongAssign(&self->escapedTags_, [self getSetWithJavaUtilMap:args withNSString:@"escapedTags"]);
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args));
   }
 }
 
 OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory *new_OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory *self = [OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory alloc];
-  OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory, initWithJavaUtilMap_, args)
+}
+
+OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory *create_OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory, initWithJavaUtilMap_, args)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory)

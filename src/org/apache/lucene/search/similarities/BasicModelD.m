@@ -50,9 +50,11 @@ void OrgApacheLuceneSearchSimilaritiesBasicModelD_init(OrgApacheLuceneSearchSimi
 }
 
 OrgApacheLuceneSearchSimilaritiesBasicModelD *new_OrgApacheLuceneSearchSimilaritiesBasicModelD_init() {
-  OrgApacheLuceneSearchSimilaritiesBasicModelD *self = [OrgApacheLuceneSearchSimilaritiesBasicModelD alloc];
-  OrgApacheLuceneSearchSimilaritiesBasicModelD_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSimilaritiesBasicModelD, init)
+}
+
+OrgApacheLuceneSearchSimilaritiesBasicModelD *create_OrgApacheLuceneSearchSimilaritiesBasicModelD_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSimilaritiesBasicModelD, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSimilaritiesBasicModelD)

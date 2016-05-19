@@ -63,11 +63,17 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSuggestFileDictionary_F
 
 __attribute__((unused)) static OrgApacheLuceneSearchSuggestFileDictionary_FileIterator *new_OrgApacheLuceneSearchSuggestFileDictionary_FileIterator_initWithOrgApacheLuceneSearchSuggestFileDictionary_(OrgApacheLuceneSearchSuggestFileDictionary *outer$) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchSuggestFileDictionary_FileIterator *create_OrgApacheLuceneSearchSuggestFileDictionary_FileIterator_initWithOrgApacheLuceneSearchSuggestFileDictionary_(OrgApacheLuceneSearchSuggestFileDictionary *outer$);
+
 __attribute__((unused)) static void OrgApacheLuceneSearchSuggestFileDictionary_FileIterator_readWeightWithNSString_(OrgApacheLuceneSearchSuggestFileDictionary_FileIterator *self, NSString *weight);
 
-NSString *OrgApacheLuceneSearchSuggestFileDictionary_DEFAULT_FIELD_DELIMITER_ = @"\t";
+NSString *OrgApacheLuceneSearchSuggestFileDictionary_DEFAULT_FIELD_DELIMITER = @"\t";
 
 @implementation OrgApacheLuceneSearchSuggestFileDictionary
+
++ (NSString *)DEFAULT_FIELD_DELIMITER {
+  return OrgApacheLuceneSearchSuggestFileDictionary_DEFAULT_FIELD_DELIMITER;
+}
 
 - (instancetype)initWithJavaIoInputStream:(JavaIoInputStream *)dictFile {
   OrgApacheLuceneSearchSuggestFileDictionary_initWithJavaIoInputStream_(self, dictFile);
@@ -93,10 +99,10 @@ NSString *OrgApacheLuceneSearchSuggestFileDictionary_DEFAULT_FIELD_DELIMITER_ = 
 
 - (id<OrgApacheLuceneSearchSuggestInputIterator>)getEntryIterator {
   @try {
-    return [new_OrgApacheLuceneSearchSuggestFileDictionary_FileIterator_initWithOrgApacheLuceneSearchSuggestFileDictionary_(self) autorelease];
+    return create_OrgApacheLuceneSearchSuggestFileDictionary_FileIterator_initWithOrgApacheLuceneSearchSuggestFileDictionary_(self);
   }
   @catch (JavaIoIOException *e) {
-    @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(e) autorelease];
+    @throw create_JavaLangRuntimeException_initWithNSException_(e);
   }
 }
 
@@ -116,7 +122,7 @@ NSString *OrgApacheLuceneSearchSuggestFileDictionary_DEFAULT_FIELD_DELIMITER_ = 
     { "getEntryIterator", NULL, "Lorg.apache.lucene.search.suggest.InputIterator;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "DEFAULT_FIELD_DELIMITER_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneSearchSuggestFileDictionary_DEFAULT_FIELD_DELIMITER_, NULL, .constantValue.asLong = 0 },
+    { "DEFAULT_FIELD_DELIMITER", "DEFAULT_FIELD_DELIMITER", 0x19, "Ljava.lang.String;", &OrgApacheLuceneSearchSuggestFileDictionary_DEFAULT_FIELD_DELIMITER, NULL, .constantValue.asLong = 0 },
     { "in_", NULL, 0x2, "Ljava.io.BufferedReader;", NULL, NULL, .constantValue.asLong = 0 },
     { "line_", NULL, 0x2, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
     { "done_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
@@ -130,23 +136,27 @@ NSString *OrgApacheLuceneSearchSuggestFileDictionary_DEFAULT_FIELD_DELIMITER_ = 
 @end
 
 void OrgApacheLuceneSearchSuggestFileDictionary_initWithJavaIoInputStream_(OrgApacheLuceneSearchSuggestFileDictionary *self, JavaIoInputStream *dictFile) {
-  OrgApacheLuceneSearchSuggestFileDictionary_initWithJavaIoInputStream_withNSString_(self, dictFile, OrgApacheLuceneSearchSuggestFileDictionary_DEFAULT_FIELD_DELIMITER_);
+  OrgApacheLuceneSearchSuggestFileDictionary_initWithJavaIoInputStream_withNSString_(self, dictFile, OrgApacheLuceneSearchSuggestFileDictionary_DEFAULT_FIELD_DELIMITER);
 }
 
 OrgApacheLuceneSearchSuggestFileDictionary *new_OrgApacheLuceneSearchSuggestFileDictionary_initWithJavaIoInputStream_(JavaIoInputStream *dictFile) {
-  OrgApacheLuceneSearchSuggestFileDictionary *self = [OrgApacheLuceneSearchSuggestFileDictionary alloc];
-  OrgApacheLuceneSearchSuggestFileDictionary_initWithJavaIoInputStream_(self, dictFile);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestFileDictionary, initWithJavaIoInputStream_, dictFile)
+}
+
+OrgApacheLuceneSearchSuggestFileDictionary *create_OrgApacheLuceneSearchSuggestFileDictionary_initWithJavaIoInputStream_(JavaIoInputStream *dictFile) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestFileDictionary, initWithJavaIoInputStream_, dictFile)
 }
 
 void OrgApacheLuceneSearchSuggestFileDictionary_initWithJavaIoReader_(OrgApacheLuceneSearchSuggestFileDictionary *self, JavaIoReader *reader) {
-  OrgApacheLuceneSearchSuggestFileDictionary_initWithJavaIoReader_withNSString_(self, reader, OrgApacheLuceneSearchSuggestFileDictionary_DEFAULT_FIELD_DELIMITER_);
+  OrgApacheLuceneSearchSuggestFileDictionary_initWithJavaIoReader_withNSString_(self, reader, OrgApacheLuceneSearchSuggestFileDictionary_DEFAULT_FIELD_DELIMITER);
 }
 
 OrgApacheLuceneSearchSuggestFileDictionary *new_OrgApacheLuceneSearchSuggestFileDictionary_initWithJavaIoReader_(JavaIoReader *reader) {
-  OrgApacheLuceneSearchSuggestFileDictionary *self = [OrgApacheLuceneSearchSuggestFileDictionary alloc];
-  OrgApacheLuceneSearchSuggestFileDictionary_initWithJavaIoReader_(self, reader);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestFileDictionary, initWithJavaIoReader_, reader)
+}
+
+OrgApacheLuceneSearchSuggestFileDictionary *create_OrgApacheLuceneSearchSuggestFileDictionary_initWithJavaIoReader_(JavaIoReader *reader) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestFileDictionary, initWithJavaIoReader_, reader)
 }
 
 void OrgApacheLuceneSearchSuggestFileDictionary_initWithJavaIoReader_withNSString_(OrgApacheLuceneSearchSuggestFileDictionary *self, JavaIoReader *reader, NSString *fieldDelimiter) {
@@ -157,22 +167,26 @@ void OrgApacheLuceneSearchSuggestFileDictionary_initWithJavaIoReader_withNSStrin
 }
 
 OrgApacheLuceneSearchSuggestFileDictionary *new_OrgApacheLuceneSearchSuggestFileDictionary_initWithJavaIoReader_withNSString_(JavaIoReader *reader, NSString *fieldDelimiter) {
-  OrgApacheLuceneSearchSuggestFileDictionary *self = [OrgApacheLuceneSearchSuggestFileDictionary alloc];
-  OrgApacheLuceneSearchSuggestFileDictionary_initWithJavaIoReader_withNSString_(self, reader, fieldDelimiter);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestFileDictionary, initWithJavaIoReader_withNSString_, reader, fieldDelimiter)
+}
+
+OrgApacheLuceneSearchSuggestFileDictionary *create_OrgApacheLuceneSearchSuggestFileDictionary_initWithJavaIoReader_withNSString_(JavaIoReader *reader, NSString *fieldDelimiter) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestFileDictionary, initWithJavaIoReader_withNSString_, reader, fieldDelimiter)
 }
 
 void OrgApacheLuceneSearchSuggestFileDictionary_initWithJavaIoInputStream_withNSString_(OrgApacheLuceneSearchSuggestFileDictionary *self, JavaIoInputStream *dictFile, NSString *fieldDelimiter) {
   NSObject_init(self);
   self->done_ = false;
-  JreStrongAssignAndConsume(&self->in_, new_JavaIoBufferedReader_initWithJavaIoReader_(OrgApacheLuceneUtilIOUtils_getDecodingReaderWithJavaIoInputStream_withJavaNioCharsetCharset_(dictFile, JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8_))));
+  JreStrongAssignAndConsume(&self->in_, new_JavaIoBufferedReader_initWithJavaIoReader_(OrgApacheLuceneUtilIOUtils_getDecodingReaderWithJavaIoInputStream_withJavaNioCharsetCharset_(dictFile, JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8))));
   JreStrongAssign(&self->fieldDelimiter_, fieldDelimiter);
 }
 
 OrgApacheLuceneSearchSuggestFileDictionary *new_OrgApacheLuceneSearchSuggestFileDictionary_initWithJavaIoInputStream_withNSString_(JavaIoInputStream *dictFile, NSString *fieldDelimiter) {
-  OrgApacheLuceneSearchSuggestFileDictionary *self = [OrgApacheLuceneSearchSuggestFileDictionary alloc];
-  OrgApacheLuceneSearchSuggestFileDictionary_initWithJavaIoInputStream_withNSString_(self, dictFile, fieldDelimiter);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestFileDictionary, initWithJavaIoInputStream_withNSString_, dictFile, fieldDelimiter)
+}
+
+OrgApacheLuceneSearchSuggestFileDictionary *create_OrgApacheLuceneSearchSuggestFileDictionary_initWithJavaIoInputStream_withNSString_(JavaIoInputStream *dictFile, NSString *fieldDelimiter) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestFileDictionary, initWithJavaIoInputStream_withNSString_, dictFile, fieldDelimiter)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestFileDictionary)
@@ -200,7 +214,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestFileDictionary)
   if (this$0_->line_ != nil) {
     IOSObjectArray *fields = [this$0_->line_ split:this$0_->fieldDelimiter_];
     if (((IOSObjectArray *) nil_chk(fields))->size_ > 3) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"More than 3 fields in one line") autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"More than 3 fields in one line");
     }
     else if (fields->size_ == 3) {
       [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(spare_)) copyCharsWithJavaLangCharSequence:IOSObjectArray_Get(fields, 0)];
@@ -223,7 +237,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestFileDictionary)
         JreStrongAssignAndConsume(&curPayload_, new_OrgApacheLuceneUtilBytesRefBuilder_init());
       }
     }
-    return [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(spare_)) get];
+    return [spare_ get];
   }
   else {
     this$0_->done_ = true;
@@ -267,7 +281,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestFileDictionary)
     { "payload", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
     { "hasPayloads", NULL, "Z", 0x1, NULL, NULL },
     { "readWeightWithNSString:", "readWeight", "V", 0x2, NULL, NULL },
-    { "contexts", NULL, "Ljava.util.Set;", 0x1, NULL, NULL },
+    { "contexts", NULL, "Ljava.util.Set;", 0x1, NULL, "()Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;" },
     { "hasContexts", NULL, "Z", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -299,13 +313,13 @@ void OrgApacheLuceneSearchSuggestFileDictionary_FileIterator_initWithOrgApacheLu
   else {
     IOSObjectArray *fields = [outer$->line_ split:outer$->fieldDelimiter_];
     if (((IOSObjectArray *) nil_chk(fields))->size_ > 3) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"More than 3 fields in one line") autorelease];
+      @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"More than 3 fields in one line");
     }
     else if (fields->size_ == 3) {
       self->hasPayloads_ = true;
       [self->spare_ copyCharsWithJavaLangCharSequence:IOSObjectArray_Get(fields, 0)];
       OrgApacheLuceneSearchSuggestFileDictionary_FileIterator_readWeightWithNSString_(self, IOSObjectArray_Get(fields, 1));
-      [self->curPayload_ copyCharsWithJavaLangCharSequence:IOSObjectArray_Get(fields, 2)];
+      [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(self->curPayload_)) copyCharsWithJavaLangCharSequence:IOSObjectArray_Get(fields, 2)];
     }
     else if (fields->size_ == 2) {
       [self->spare_ copyCharsWithJavaLangCharSequence:IOSObjectArray_Get(fields, 0)];
@@ -319,9 +333,11 @@ void OrgApacheLuceneSearchSuggestFileDictionary_FileIterator_initWithOrgApacheLu
 }
 
 OrgApacheLuceneSearchSuggestFileDictionary_FileIterator *new_OrgApacheLuceneSearchSuggestFileDictionary_FileIterator_initWithOrgApacheLuceneSearchSuggestFileDictionary_(OrgApacheLuceneSearchSuggestFileDictionary *outer$) {
-  OrgApacheLuceneSearchSuggestFileDictionary_FileIterator *self = [OrgApacheLuceneSearchSuggestFileDictionary_FileIterator alloc];
-  OrgApacheLuceneSearchSuggestFileDictionary_FileIterator_initWithOrgApacheLuceneSearchSuggestFileDictionary_(self, outer$);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSuggestFileDictionary_FileIterator, initWithOrgApacheLuceneSearchSuggestFileDictionary_, outer$)
+}
+
+OrgApacheLuceneSearchSuggestFileDictionary_FileIterator *create_OrgApacheLuceneSearchSuggestFileDictionary_FileIterator_initWithOrgApacheLuceneSearchSuggestFileDictionary_(OrgApacheLuceneSearchSuggestFileDictionary *outer$) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSuggestFileDictionary_FileIterator, initWithOrgApacheLuceneSearchSuggestFileDictionary_, outer$)
 }
 
 void OrgApacheLuceneSearchSuggestFileDictionary_FileIterator_readWeightWithNSString_(OrgApacheLuceneSearchSuggestFileDictionary_FileIterator *self, NSString *weight) {

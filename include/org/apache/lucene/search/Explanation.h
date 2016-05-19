@@ -5,48 +5,87 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchExplanation_INCLUDE_ALL")
-#if OrgApacheLuceneSearchExplanation_RESTRICT
-#define OrgApacheLuceneSearchExplanation_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchExplanation")
+#ifdef RESTRICT_OrgApacheLuceneSearchExplanation
+#define INCLUDE_ALL_OrgApacheLuceneSearchExplanation 0
 #else
-#define OrgApacheLuceneSearchExplanation_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchExplanation 1
 #endif
-#undef OrgApacheLuceneSearchExplanation_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchExplanation
 
-#if !defined (_OrgApacheLuceneSearchExplanation_) && (OrgApacheLuceneSearchExplanation_INCLUDE_ALL || OrgApacheLuceneSearchExplanation_INCLUDE)
-#define _OrgApacheLuceneSearchExplanation_
+#if !defined (OrgApacheLuceneSearchExplanation_) && (INCLUDE_ALL_OrgApacheLuceneSearchExplanation || defined(INCLUDE_OrgApacheLuceneSearchExplanation))
+#define OrgApacheLuceneSearchExplanation_
 
 @class IOSObjectArray;
 @protocol JavaUtilCollection;
 
+/*!
+ @brief Expert: Describes the score computation for document and query.
+ */
 @interface OrgApacheLuceneSearchExplanation : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief A description of this explanation node.
+ */
 - (NSString *)getDescription;
 
+/*!
+ @brief The sub-nodes of this explanation node.
+ */
 - (IOSObjectArray *)getDetails;
 
+/*!
+ @brief The value assigned to this explanation node.
+ */
 - (jfloat)getValue;
 
+/*!
+ @brief Indicates whether or not this Explanation models a match.
+ */
 - (jboolean)isMatch;
 
+/*!
+ @brief Create a new explanation for a match.
+ @param value       the contribution to the score of the document
+ @param description_ how <code>value</code> was computed
+ @param details     sub explanations that contributed to this explanation
+ */
 + (OrgApacheLuceneSearchExplanation *)matchWithFloat:(jfloat)value
                                         withNSString:(NSString *)description_
                               withJavaUtilCollection:(id<JavaUtilCollection>)details;
 
+/*!
+ @brief Create a new explanation for a match.
+ @param value       the contribution to the score of the document
+ @param description_ how <code>value</code> was computed
+ @param details     sub explanations that contributed to this explanation
+ */
 + (OrgApacheLuceneSearchExplanation *)matchWithFloat:(jfloat)value
                                         withNSString:(NSString *)description_
            withOrgApacheLuceneSearchExplanationArray:(IOSObjectArray *)details;
 
+/*!
+ @brief Create a new explanation for a document which does not match.
+ */
 + (OrgApacheLuceneSearchExplanation *)noMatchWithNSString:(NSString *)description_
                                    withJavaUtilCollection:(id<JavaUtilCollection>)details;
 
+/*!
+ @brief Create a new explanation for a document which does not match.
+ */
 + (OrgApacheLuceneSearchExplanation *)noMatchWithNSString:(NSString *)description_
                 withOrgApacheLuceneSearchExplanationArray:(IOSObjectArray *)details;
 
+/*!
+ @brief Render an explanation as HTML.
+ */
 - (NSString *)toHtml;
 
+/*!
+ @brief Render an explanation as text.
+ */
 - (NSString *)description;
 
 @end
@@ -65,4 +104,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchExplanation)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchExplanation_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchExplanation")

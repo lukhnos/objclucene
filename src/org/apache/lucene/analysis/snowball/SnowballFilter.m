@@ -95,9 +95,11 @@ void OrgApacheLuceneAnalysisSnowballSnowballFilter_initWithOrgApacheLuceneAnalys
 }
 
 OrgApacheLuceneAnalysisSnowballSnowballFilter *new_OrgApacheLuceneAnalysisSnowballSnowballFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgTartarusSnowballSnowballProgram_(OrgApacheLuceneAnalysisTokenStream *input, OrgTartarusSnowballSnowballProgram *stemmer) {
-  OrgApacheLuceneAnalysisSnowballSnowballFilter *self = [OrgApacheLuceneAnalysisSnowballSnowballFilter alloc];
-  OrgApacheLuceneAnalysisSnowballSnowballFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgTartarusSnowballSnowballProgram_(self, input, stemmer);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisSnowballSnowballFilter, initWithOrgApacheLuceneAnalysisTokenStream_withOrgTartarusSnowballSnowballProgram_, input, stemmer)
+}
+
+OrgApacheLuceneAnalysisSnowballSnowballFilter *create_OrgApacheLuceneAnalysisSnowballSnowballFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgTartarusSnowballSnowballProgram_(OrgApacheLuceneAnalysisTokenStream *input, OrgTartarusSnowballSnowballProgram *stemmer) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisSnowballSnowballFilter, initWithOrgApacheLuceneAnalysisTokenStream_withOrgTartarusSnowballSnowballProgram_, input, stemmer)
 }
 
 void OrgApacheLuceneAnalysisSnowballSnowballFilter_initWithOrgApacheLuceneAnalysisTokenStream_withNSString_(OrgApacheLuceneAnalysisSnowballSnowballFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg, NSString *name) {
@@ -109,14 +111,16 @@ void OrgApacheLuceneAnalysisSnowballSnowballFilter_initWithOrgApacheLuceneAnalys
     JreStrongAssign(&self->stemmer_, [((IOSClass *) nil_chk(stemClass)) newInstance]);
   }
   @catch (JavaLangException *e) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_withJavaLangThrowable_(JreStrcat("$$", @"Invalid stemmer class specified: ", name), e) autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_withNSException_(JreStrcat("$$", @"Invalid stemmer class specified: ", name), e);
   }
 }
 
 OrgApacheLuceneAnalysisSnowballSnowballFilter *new_OrgApacheLuceneAnalysisSnowballSnowballFilter_initWithOrgApacheLuceneAnalysisTokenStream_withNSString_(OrgApacheLuceneAnalysisTokenStream *inArg, NSString *name) {
-  OrgApacheLuceneAnalysisSnowballSnowballFilter *self = [OrgApacheLuceneAnalysisSnowballSnowballFilter alloc];
-  OrgApacheLuceneAnalysisSnowballSnowballFilter_initWithOrgApacheLuceneAnalysisTokenStream_withNSString_(self, inArg, name);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisSnowballSnowballFilter, initWithOrgApacheLuceneAnalysisTokenStream_withNSString_, inArg, name)
+}
+
+OrgApacheLuceneAnalysisSnowballSnowballFilter *create_OrgApacheLuceneAnalysisSnowballSnowballFilter_initWithOrgApacheLuceneAnalysisTokenStream_withNSString_(OrgApacheLuceneAnalysisTokenStream *inArg, NSString *name) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisSnowballSnowballFilter, initWithOrgApacheLuceneAnalysisTokenStream_withNSString_, inArg, name)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisSnowballSnowballFilter)

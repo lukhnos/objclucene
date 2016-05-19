@@ -37,7 +37,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilMapOfSets, theMap_, id<JavaUtilMap>)
     theSet = [theMap_ getWithId:key];
   }
   else {
-    theSet = [new_JavaUtilHashSet_initWithInt_(23) autorelease];
+    theSet = create_JavaUtilHashSet_initWithInt_(23);
     [theMap_ putWithId:key withId:theSet];
   }
   [((id<JavaUtilSet>) nil_chk(theSet)) addWithId:val];
@@ -51,7 +51,7 @@ withJavaUtilCollection:(id<JavaUtilCollection>)vals {
     theSet = [theMap_ getWithId:key];
   }
   else {
-    theSet = [new_JavaUtilHashSet_initWithInt_(23) autorelease];
+    theSet = create_JavaUtilHashSet_initWithInt_(23);
     [theMap_ putWithId:key withId:theSet];
   }
   [((id<JavaUtilSet>) nil_chk(theSet)) addAllWithJavaUtilCollection:vals];
@@ -65,8 +65,8 @@ withJavaUtilCollection:(id<JavaUtilCollection>)vals {
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "MapOfSets", NULL, 0x1, NULL, NULL },
-    { "getMap", NULL, "Ljava.util.Map;", 0x1, NULL, NULL },
+    { "initWithJavaUtilMap:", "MapOfSets", NULL, 0x1, NULL, "(Ljava/util/Map<TK;Ljava/util/Set<TV;>;>;)V" },
+    { "getMap", NULL, "Ljava.util.Map;", 0x1, NULL, "()Ljava/util/Map<TK;Ljava/util/Set<TV;>;>;" },
     { "putWithId:withId:", "put", "I", 0x1, NULL, "(TK;TV;)I" },
     { "putAllWithId:withJavaUtilCollection:", "putAll", "I", 0x1, NULL, "(TK;Ljava/util/Collection<+TV;>;)I" },
   };
@@ -85,9 +85,11 @@ void OrgApacheLuceneUtilMapOfSets_initWithJavaUtilMap_(OrgApacheLuceneUtilMapOfS
 }
 
 OrgApacheLuceneUtilMapOfSets *new_OrgApacheLuceneUtilMapOfSets_initWithJavaUtilMap_(id<JavaUtilMap> m) {
-  OrgApacheLuceneUtilMapOfSets *self = [OrgApacheLuceneUtilMapOfSets alloc];
-  OrgApacheLuceneUtilMapOfSets_initWithJavaUtilMap_(self, m);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilMapOfSets, initWithJavaUtilMap_, m)
+}
+
+OrgApacheLuceneUtilMapOfSets *create_OrgApacheLuceneUtilMapOfSets_initWithJavaUtilMap_(id<JavaUtilMap> m) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilMapOfSets, initWithJavaUtilMap_, m)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilMapOfSets)

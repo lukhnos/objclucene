@@ -13,15 +13,23 @@
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneDocumentLongField)
 
-OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentLongField_TYPE_NOT_STORED_;
-OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentLongField_TYPE_STORED_;
+OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentLongField_TYPE_NOT_STORED;
+OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentLongField_TYPE_STORED;
 
 @implementation OrgApacheLuceneDocumentLongField
 
++ (OrgApacheLuceneDocumentFieldType *)TYPE_NOT_STORED {
+  return OrgApacheLuceneDocumentLongField_TYPE_NOT_STORED;
+}
+
++ (OrgApacheLuceneDocumentFieldType *)TYPE_STORED {
+  return OrgApacheLuceneDocumentLongField_TYPE_STORED;
+}
+
 - (instancetype)initWithNSString:(NSString *)name
                         withLong:(jlong)value
-withOrgApacheLuceneDocumentField_StoreEnum:(OrgApacheLuceneDocumentField_StoreEnum *)stored {
-  OrgApacheLuceneDocumentLongField_initWithNSString_withLong_withOrgApacheLuceneDocumentField_StoreEnum_(self, name, value, stored);
+withOrgApacheLuceneDocumentField_Store:(OrgApacheLuceneDocumentField_Store *)stored {
+  OrgApacheLuceneDocumentLongField_initWithNSString_withLong_withOrgApacheLuceneDocumentField_Store_(self, name, value, stored);
   return self;
 }
 
@@ -34,22 +42,22 @@ withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type {
 
 + (void)initialize {
   if (self == [OrgApacheLuceneDocumentLongField class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneDocumentLongField_TYPE_NOT_STORED_, new_OrgApacheLuceneDocumentFieldType_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneDocumentLongField_TYPE_NOT_STORED, new_OrgApacheLuceneDocumentFieldType_init());
     {
-      [OrgApacheLuceneDocumentLongField_TYPE_NOT_STORED_ setTokenizedWithBoolean:true];
-      [OrgApacheLuceneDocumentLongField_TYPE_NOT_STORED_ setOmitNormsWithBoolean:true];
-      [OrgApacheLuceneDocumentLongField_TYPE_NOT_STORED_ setIndexOptionsWithOrgApacheLuceneIndexIndexOptionsEnum:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS)];
-      [OrgApacheLuceneDocumentLongField_TYPE_NOT_STORED_ setNumericTypeWithOrgApacheLuceneDocumentFieldType_NumericTypeEnum:JreLoadStatic(OrgApacheLuceneDocumentFieldType_NumericTypeEnum, LONG)];
-      [OrgApacheLuceneDocumentLongField_TYPE_NOT_STORED_ freeze];
+      [OrgApacheLuceneDocumentLongField_TYPE_NOT_STORED setTokenizedWithBoolean:true];
+      [OrgApacheLuceneDocumentLongField_TYPE_NOT_STORED setOmitNormsWithBoolean:true];
+      [OrgApacheLuceneDocumentLongField_TYPE_NOT_STORED setIndexOptionsWithOrgApacheLuceneIndexIndexOptions:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS)];
+      [OrgApacheLuceneDocumentLongField_TYPE_NOT_STORED setNumericTypeWithOrgApacheLuceneDocumentFieldType_NumericType:JreLoadEnum(OrgApacheLuceneDocumentFieldType_NumericType, LONG)];
+      [OrgApacheLuceneDocumentLongField_TYPE_NOT_STORED freeze];
     }
-    JreStrongAssignAndConsume(&OrgApacheLuceneDocumentLongField_TYPE_STORED_, new_OrgApacheLuceneDocumentFieldType_init());
+    JreStrongAssignAndConsume(&OrgApacheLuceneDocumentLongField_TYPE_STORED, new_OrgApacheLuceneDocumentFieldType_init());
     {
-      [OrgApacheLuceneDocumentLongField_TYPE_STORED_ setTokenizedWithBoolean:true];
-      [OrgApacheLuceneDocumentLongField_TYPE_STORED_ setOmitNormsWithBoolean:true];
-      [OrgApacheLuceneDocumentLongField_TYPE_STORED_ setIndexOptionsWithOrgApacheLuceneIndexIndexOptionsEnum:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS)];
-      [OrgApacheLuceneDocumentLongField_TYPE_STORED_ setNumericTypeWithOrgApacheLuceneDocumentFieldType_NumericTypeEnum:JreLoadStatic(OrgApacheLuceneDocumentFieldType_NumericTypeEnum, LONG)];
-      [OrgApacheLuceneDocumentLongField_TYPE_STORED_ setStoredWithBoolean:true];
-      [OrgApacheLuceneDocumentLongField_TYPE_STORED_ freeze];
+      [OrgApacheLuceneDocumentLongField_TYPE_STORED setTokenizedWithBoolean:true];
+      [OrgApacheLuceneDocumentLongField_TYPE_STORED setOmitNormsWithBoolean:true];
+      [OrgApacheLuceneDocumentLongField_TYPE_STORED setIndexOptionsWithOrgApacheLuceneIndexIndexOptions:JreLoadEnum(OrgApacheLuceneIndexIndexOptions, DOCS)];
+      [OrgApacheLuceneDocumentLongField_TYPE_STORED setNumericTypeWithOrgApacheLuceneDocumentFieldType_NumericType:JreLoadEnum(OrgApacheLuceneDocumentFieldType_NumericType, LONG)];
+      [OrgApacheLuceneDocumentLongField_TYPE_STORED setStoredWithBoolean:true];
+      [OrgApacheLuceneDocumentLongField_TYPE_STORED freeze];
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneDocumentLongField)
   }
@@ -57,12 +65,12 @@ withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type {
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withLong:withOrgApacheLuceneDocumentField_StoreEnum:", "LongField", NULL, 0x1, NULL, NULL },
+    { "initWithNSString:withLong:withOrgApacheLuceneDocumentField_Store:", "LongField", NULL, 0x1, NULL, NULL },
     { "initWithNSString:withLong:withOrgApacheLuceneDocumentFieldType:", "LongField", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "TYPE_NOT_STORED_", NULL, 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentLongField_TYPE_NOT_STORED_, NULL, .constantValue.asLong = 0 },
-    { "TYPE_STORED_", NULL, 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentLongField_TYPE_STORED_, NULL, .constantValue.asLong = 0 },
+    { "TYPE_NOT_STORED", "TYPE_NOT_STORED", 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentLongField_TYPE_NOT_STORED, NULL, .constantValue.asLong = 0 },
+    { "TYPE_STORED", "TYPE_STORED", 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentLongField_TYPE_STORED, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneDocumentLongField = { 2, "LongField", "org.apache.lucene.document", NULL, 0x11, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneDocumentLongField;
@@ -70,29 +78,33 @@ withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type {
 
 @end
 
-void OrgApacheLuceneDocumentLongField_initWithNSString_withLong_withOrgApacheLuceneDocumentField_StoreEnum_(OrgApacheLuceneDocumentLongField *self, NSString *name, jlong value, OrgApacheLuceneDocumentField_StoreEnum *stored) {
-  OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneDocumentFieldType_(self, name, stored == JreLoadStatic(OrgApacheLuceneDocumentField_StoreEnum, YES) ? OrgApacheLuceneDocumentLongField_TYPE_STORED_ : OrgApacheLuceneDocumentLongField_TYPE_NOT_STORED_);
+void OrgApacheLuceneDocumentLongField_initWithNSString_withLong_withOrgApacheLuceneDocumentField_Store_(OrgApacheLuceneDocumentLongField *self, NSString *name, jlong value, OrgApacheLuceneDocumentField_Store *stored) {
+  OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneDocumentFieldType_(self, name, stored == JreLoadEnum(OrgApacheLuceneDocumentField_Store, YES) ? OrgApacheLuceneDocumentLongField_TYPE_STORED : OrgApacheLuceneDocumentLongField_TYPE_NOT_STORED);
   JreStrongAssign(&self->fieldsData_, JavaLangLong_valueOfWithLong_(value));
 }
 
-OrgApacheLuceneDocumentLongField *new_OrgApacheLuceneDocumentLongField_initWithNSString_withLong_withOrgApacheLuceneDocumentField_StoreEnum_(NSString *name, jlong value, OrgApacheLuceneDocumentField_StoreEnum *stored) {
-  OrgApacheLuceneDocumentLongField *self = [OrgApacheLuceneDocumentLongField alloc];
-  OrgApacheLuceneDocumentLongField_initWithNSString_withLong_withOrgApacheLuceneDocumentField_StoreEnum_(self, name, value, stored);
-  return self;
+OrgApacheLuceneDocumentLongField *new_OrgApacheLuceneDocumentLongField_initWithNSString_withLong_withOrgApacheLuceneDocumentField_Store_(NSString *name, jlong value, OrgApacheLuceneDocumentField_Store *stored) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentLongField, initWithNSString_withLong_withOrgApacheLuceneDocumentField_Store_, name, value, stored)
+}
+
+OrgApacheLuceneDocumentLongField *create_OrgApacheLuceneDocumentLongField_initWithNSString_withLong_withOrgApacheLuceneDocumentField_Store_(NSString *name, jlong value, OrgApacheLuceneDocumentField_Store *stored) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentLongField, initWithNSString_withLong_withOrgApacheLuceneDocumentField_Store_, name, value, stored)
 }
 
 void OrgApacheLuceneDocumentLongField_initWithNSString_withLong_withOrgApacheLuceneDocumentFieldType_(OrgApacheLuceneDocumentLongField *self, NSString *name, jlong value, OrgApacheLuceneDocumentFieldType *type) {
   OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneDocumentFieldType_(self, name, type);
-  if ([((OrgApacheLuceneDocumentFieldType *) nil_chk(type)) numericType] != JreLoadStatic(OrgApacheLuceneDocumentFieldType_NumericTypeEnum, LONG)) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"type.numericType() must be LONG but got ", [type numericType])) autorelease];
+  if ([((OrgApacheLuceneDocumentFieldType *) nil_chk(type)) numericType] != JreLoadEnum(OrgApacheLuceneDocumentFieldType_NumericType, LONG)) {
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"type.numericType() must be LONG but got ", [type numericType]));
   }
   JreStrongAssign(&self->fieldsData_, JavaLangLong_valueOfWithLong_(value));
 }
 
 OrgApacheLuceneDocumentLongField *new_OrgApacheLuceneDocumentLongField_initWithNSString_withLong_withOrgApacheLuceneDocumentFieldType_(NSString *name, jlong value, OrgApacheLuceneDocumentFieldType *type) {
-  OrgApacheLuceneDocumentLongField *self = [OrgApacheLuceneDocumentLongField alloc];
-  OrgApacheLuceneDocumentLongField_initWithNSString_withLong_withOrgApacheLuceneDocumentFieldType_(self, name, value, type);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneDocumentLongField, initWithNSString_withLong_withOrgApacheLuceneDocumentFieldType_, name, value, type)
+}
+
+OrgApacheLuceneDocumentLongField *create_OrgApacheLuceneDocumentLongField_initWithNSString_withLong_withOrgApacheLuceneDocumentFieldType_(NSString *name, jlong value, OrgApacheLuceneDocumentFieldType *type) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneDocumentLongField, initWithNSString_withLong_withOrgApacheLuceneDocumentFieldType_, name, value, type)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentLongField)

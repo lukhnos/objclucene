@@ -114,19 +114,19 @@ withOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)payOut {
 withOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)skipBuffer {
   jint delta = curDoc_ - IOSIntArray_Get(nil_chk(lastSkipDoc_), level);
   [((OrgApacheLuceneStoreIndexOutput *) nil_chk(skipBuffer)) writeVIntWithInt:delta];
-  *IOSIntArray_GetRef(lastSkipDoc_, level) = curDoc_;
+  *IOSIntArray_GetRef(nil_chk(lastSkipDoc_), level) = curDoc_;
   [skipBuffer writeVLongWithLong:curDocPointer_ - IOSLongArray_Get(nil_chk(lastSkipDocPointer_), level)];
-  *IOSLongArray_GetRef(lastSkipDocPointer_, level) = curDocPointer_;
+  *IOSLongArray_GetRef(nil_chk(lastSkipDocPointer_), level) = curDocPointer_;
   if (fieldHasPositions_) {
     [skipBuffer writeVLongWithLong:curPosPointer_ - IOSLongArray_Get(nil_chk(lastSkipPosPointer_), level)];
-    *IOSLongArray_GetRef(lastSkipPosPointer_, level) = curPosPointer_;
+    *IOSLongArray_GetRef(nil_chk(lastSkipPosPointer_), level) = curPosPointer_;
     [skipBuffer writeVIntWithInt:curPosBufferUpto_];
     if (fieldHasPayloads_) {
       [skipBuffer writeVIntWithInt:curPayloadByteUpto_];
     }
     if (fieldHasOffsets_ || fieldHasPayloads_) {
       [skipBuffer writeVLongWithLong:curPayPointer_ - IOSLongArray_Get(nil_chk(lastSkipPayPointer_), level)];
-      *IOSLongArray_GetRef(lastSkipPayPointer_, level) = curPayPointer_;
+      *IOSLongArray_GetRef(nil_chk(lastSkipPayPointer_), level) = curPayPointer_;
     }
   }
 }
@@ -198,9 +198,11 @@ void OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_initWithInt_withInt_withInt
 }
 
 OrgApacheLuceneCodecsLucene50Lucene50SkipWriter *new_OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_initWithInt_withInt_withInt_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_(jint maxSkipLevels, jint blockSize, jint docCount, OrgApacheLuceneStoreIndexOutput *docOut, OrgApacheLuceneStoreIndexOutput *posOut, OrgApacheLuceneStoreIndexOutput *payOut) {
-  OrgApacheLuceneCodecsLucene50Lucene50SkipWriter *self = [OrgApacheLuceneCodecsLucene50Lucene50SkipWriter alloc];
-  OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_initWithInt_withInt_withInt_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_(self, maxSkipLevels, blockSize, docCount, docOut, posOut, payOut);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneCodecsLucene50Lucene50SkipWriter, initWithInt_withInt_withInt_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_, maxSkipLevels, blockSize, docCount, docOut, posOut, payOut)
+}
+
+OrgApacheLuceneCodecsLucene50Lucene50SkipWriter *create_OrgApacheLuceneCodecsLucene50Lucene50SkipWriter_initWithInt_withInt_withInt_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_(jint maxSkipLevels, jint blockSize, jint docCount, OrgApacheLuceneStoreIndexOutput *docOut, OrgApacheLuceneStoreIndexOutput *posOut, OrgApacheLuceneStoreIndexOutput *payOut) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneCodecsLucene50Lucene50SkipWriter, initWithInt_withInt_withInt_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_withOrgApacheLuceneStoreIndexOutput_, maxSkipLevels, blockSize, docCount, docOut, posOut, payOut)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50SkipWriter)

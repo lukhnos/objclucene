@@ -5,29 +5,53 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilCounter_INCLUDE_ALL")
-#if OrgApacheLuceneUtilCounter_RESTRICT
-#define OrgApacheLuceneUtilCounter_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilCounter")
+#ifdef RESTRICT_OrgApacheLuceneUtilCounter
+#define INCLUDE_ALL_OrgApacheLuceneUtilCounter 0
 #else
-#define OrgApacheLuceneUtilCounter_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilCounter 1
 #endif
-#undef OrgApacheLuceneUtilCounter_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilCounter
 
-#if !defined (_OrgApacheLuceneUtilCounter_) && (OrgApacheLuceneUtilCounter_INCLUDE_ALL || OrgApacheLuceneUtilCounter_INCLUDE)
-#define _OrgApacheLuceneUtilCounter_
+#if !defined (OrgApacheLuceneUtilCounter_) && (INCLUDE_ALL_OrgApacheLuceneUtilCounter || defined(INCLUDE_OrgApacheLuceneUtilCounter))
+#define OrgApacheLuceneUtilCounter_
 
+/*!
+ @brief Simple counter class
+ */
 @interface OrgApacheLuceneUtilCounter : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @brief Adds the given delta to the counters current value
+ @param delta
+ the delta to add
+ @return the counters updated value
+ */
 - (jlong)addAndGetWithLong:(jlong)delta;
 
+/*!
+ @brief Returns the counters current value
+ @return the counters current value
+ */
 - (jlong)get;
 
+/*!
+ @brief Returns a new counter.
+ The returned counter is not thread-safe.
+ */
 + (OrgApacheLuceneUtilCounter *)newCounter OBJC_METHOD_FAMILY_NONE;
 
+/*!
+ @brief Returns a new counter.
+ @param threadSafe
+ <code>true</code> if the returned counter can be used by multiple
+ threads concurrently.
+ @return a new counter.
+ */
 + (OrgApacheLuceneUtilCounter *)newCounterWithBoolean:(jboolean)threadSafe OBJC_METHOD_FAMILY_NONE;
 
 @end
@@ -44,4 +68,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilCounter)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilCounter_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilCounter")

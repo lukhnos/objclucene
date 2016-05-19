@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgLukhnosPortmobileUtilObjects_INCLUDE_ALL")
-#if OrgLukhnosPortmobileUtilObjects_RESTRICT
-#define OrgLukhnosPortmobileUtilObjects_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgLukhnosPortmobileUtilObjects")
+#ifdef RESTRICT_OrgLukhnosPortmobileUtilObjects
+#define INCLUDE_ALL_OrgLukhnosPortmobileUtilObjects 0
 #else
-#define OrgLukhnosPortmobileUtilObjects_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgLukhnosPortmobileUtilObjects 1
 #endif
-#undef OrgLukhnosPortmobileUtilObjects_RESTRICT
+#undef RESTRICT_OrgLukhnosPortmobileUtilObjects
 
-#if !defined (_OrgLukhnosPortmobileUtilObjects_) && (OrgLukhnosPortmobileUtilObjects_INCLUDE_ALL || OrgLukhnosPortmobileUtilObjects_INCLUDE)
-#define _OrgLukhnosPortmobileUtilObjects_
+#if !defined (OrgLukhnosPortmobileUtilObjects_) && (INCLUDE_ALL_OrgLukhnosPortmobileUtilObjects || defined(INCLUDE_OrgLukhnosPortmobileUtilObjects))
+#define OrgLukhnosPortmobileUtilObjects_
 
 @class IOSObjectArray;
 
@@ -58,8 +58,10 @@ FOUNDATION_EXPORT void OrgLukhnosPortmobileUtilObjects_init(OrgLukhnosPortmobile
 
 FOUNDATION_EXPORT OrgLukhnosPortmobileUtilObjects *new_OrgLukhnosPortmobileUtilObjects_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgLukhnosPortmobileUtilObjects *create_OrgLukhnosPortmobileUtilObjects_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileUtilObjects)
 
 #endif
 
-#pragma pop_macro("OrgLukhnosPortmobileUtilObjects_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileUtilObjects")

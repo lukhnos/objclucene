@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionValuesourceSimpleFloatFunction_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionValuesourceSimpleFloatFunction_RESTRICT
-#define OrgApacheLuceneQueriesFunctionValuesourceSimpleFloatFunction_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceSimpleFloatFunction")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceSimpleFloatFunction
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceSimpleFloatFunction 0
 #else
-#define OrgApacheLuceneQueriesFunctionValuesourceSimpleFloatFunction_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceSimpleFloatFunction 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionValuesourceSimpleFloatFunction_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceSimpleFloatFunction
 
-#if !defined (_OrgApacheLuceneQueriesFunctionValuesourceSimpleFloatFunction_) && (OrgApacheLuceneQueriesFunctionValuesourceSimpleFloatFunction_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValuesourceSimpleFloatFunction_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValuesourceSimpleFloatFunction_
+#if !defined (OrgApacheLuceneQueriesFunctionValuesourceSimpleFloatFunction_) && (INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceSimpleFloatFunction || defined(INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceSimpleFloatFunction))
+#define OrgApacheLuceneQueriesFunctionValuesourceSimpleFloatFunction_
 
-#define OrgApacheLuceneQueriesFunctionValuesourceSingleFunction_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionValuesourceSingleFunction_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueriesFunctionValuesourceSingleFunction 1
+#define INCLUDE_OrgApacheLuceneQueriesFunctionValuesourceSingleFunction 1
 #include "org/apache/lucene/queries/function/valuesource/SingleFunction.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
@@ -25,6 +25,9 @@
 @class OrgApacheLuceneQueriesFunctionValueSource;
 @protocol JavaUtilMap;
 
+/*!
+ @brief A simple float function with a single argument
+ */
 @interface OrgApacheLuceneQueriesFunctionValuesourceSimpleFloatFunction : OrgApacheLuceneQueriesFunctionValuesourceSingleFunction
 
 #pragma mark Public
@@ -49,4 +52,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceSimpleFloatF
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionValuesourceSimpleFloatFunction_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionValuesourceSimpleFloatFunction")

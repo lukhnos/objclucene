@@ -43,8 +43,12 @@ withOrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats:(OrgApacheLuceneSe
 
 @end
 
-static IOSFloatArray *OrgApacheLuceneSearchSimilaritiesBM25Similarity_NORM_TABLE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSimilaritiesBM25Similarity, NORM_TABLE_, IOSFloatArray *)
+/*!
+ @brief Cache of decoded bytes.
+ */
+inline IOSFloatArray *OrgApacheLuceneSearchSimilaritiesBM25Similarity_get_NORM_TABLE();
+static IOSFloatArray *OrgApacheLuceneSearchSimilaritiesBM25Similarity_NORM_TABLE;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneSearchSimilaritiesBM25Similarity, NORM_TABLE, IOSFloatArray *)
 
 __attribute__((unused)) static OrgApacheLuceneSearchExplanation *OrgApacheLuceneSearchSimilaritiesBM25Similarity_explainTFNormWithInt_withOrgApacheLuceneSearchExplanation_withOrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats_withOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchSimilaritiesBM25Similarity *self, jint doc, OrgApacheLuceneSearchExplanation *freq, OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats *stats, OrgApacheLuceneIndexNumericDocValues *norms);
 
@@ -89,16 +93,42 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSimilaritiesBM25Similar
 
 __attribute__((unused)) static OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25DocScorer *new_OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25DocScorer_initWithOrgApacheLuceneSearchSimilaritiesBM25Similarity_withOrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats_withOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchSimilaritiesBM25Similarity *outer$, OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats *stats, OrgApacheLuceneIndexNumericDocValues *norms) NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25DocScorer *create_OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25DocScorer_initWithOrgApacheLuceneSearchSimilaritiesBM25Similarity_withOrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats_withOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchSimilaritiesBM25Similarity *outer$, OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats *stats, OrgApacheLuceneIndexNumericDocValues *norms);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25DocScorer)
 
+/*!
+ @brief Collection statistics for the BM25 model.
+ */
 @interface OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats : OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight {
  @public
+  /*!
+   @brief BM25's idf
+   */
   OrgApacheLuceneSearchExplanation *idf_;
+  /*!
+   @brief The average document length.
+   */
   jfloat avgdl_;
+  /*!
+   @brief query's inner boost
+   */
   jfloat queryBoost_;
+  /*!
+   @brief query's outer boost (only for explain)
+   */
   jfloat topLevelBoost_;
+  /*!
+   @brief weight (idf * boost)
+   */
   jfloat weight_;
+  /*!
+   @brief field name, for pulling norms
+   */
   NSString *field_;
+  /*!
+   @brief precomputed norm[256] with k1 * ((1 - b) + b * dl / avgdl)
+   */
   IOSFloatArray *cache_;
 }
 
@@ -124,6 +154,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats, c
 __attribute__((unused)) static void OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats_initWithNSString_withOrgApacheLuceneSearchExplanation_withFloat_withFloat_withFloatArray_(OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats *self, NSString *field, OrgApacheLuceneSearchExplanation *idf, jfloat queryBoost, jfloat avgdl, IOSFloatArray *cache);
 
 __attribute__((unused)) static OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats *new_OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats_initWithNSString_withOrgApacheLuceneSearchExplanation_withFloat_withFloat_withFloatArray_(NSString *field, OrgApacheLuceneSearchExplanation *idf, jfloat queryBoost, jfloat avgdl, IOSFloatArray *cache) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats *create_OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats_initWithNSString_withOrgApacheLuceneSearchExplanation_withFloat_withFloat_withFloatArray_(NSString *field, OrgApacheLuceneSearchExplanation *idf, jfloat queryBoost, jfloat avgdl, IOSFloatArray *cache);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats)
 
@@ -176,7 +208,7 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload {
 }
 
 - (jfloat)decodeNormValueWithByte:(jbyte)b {
-  return IOSFloatArray_Get(nil_chk(OrgApacheLuceneSearchSimilaritiesBM25Similarity_NORM_TABLE_), b & (jint) 0xFF);
+  return IOSFloatArray_Get(nil_chk(OrgApacheLuceneSearchSimilaritiesBM25Similarity_NORM_TABLE), b & (jint) 0xFF);
 }
 
 - (void)setDiscountOverlapsWithBoolean:(jboolean)v {
@@ -189,7 +221,7 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload {
 
 - (jlong)computeNormWithOrgApacheLuceneIndexFieldInvertState:(OrgApacheLuceneIndexFieldInvertState *)state {
   jint numTerms = discountOverlaps_ ? [((OrgApacheLuceneIndexFieldInvertState *) nil_chk(state)) getLength] - [state getNumOverlap] : [((OrgApacheLuceneIndexFieldInvertState *) nil_chk(state)) getLength];
-  return [self encodeNormValueWithFloat:[((OrgApacheLuceneIndexFieldInvertState *) nil_chk(state)) getBoost] withInt:numTerms];
+  return [self encodeNormValueWithFloat:[state getBoost] withInt:numTerms];
 }
 
 - (OrgApacheLuceneSearchExplanation *)idfExplainWithOrgApacheLuceneSearchCollectionStatistics:(OrgApacheLuceneSearchCollectionStatistics *)collectionStats
@@ -204,7 +236,7 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload {
                                                  withOrgApacheLuceneSearchTermStatisticsArray:(IOSObjectArray *)termStats {
   jlong max = [((OrgApacheLuceneSearchCollectionStatistics *) nil_chk(collectionStats)) maxDoc];
   jfloat idf = 0.0f;
-  id<JavaUtilList> details = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> details = create_JavaUtilArrayList_init();
   {
     IOSObjectArray *a__ = termStats;
     OrgApacheLuceneSearchTermStatistics * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
@@ -229,13 +261,13 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload {
   for (jint i = 0; i < cache->size_; i++) {
     *IOSFloatArray_GetRef(cache, i) = k1_ * ((1 - b_) + b_ * [self decodeNormValueWithByte:(jbyte) i] / avgdl);
   }
-  return [new_OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats_initWithNSString_withOrgApacheLuceneSearchExplanation_withFloat_withFloat_withFloatArray_([((OrgApacheLuceneSearchCollectionStatistics *) nil_chk(collectionStats)) field], idf, queryBoost, avgdl, cache) autorelease];
+  return create_OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats_initWithNSString_withOrgApacheLuceneSearchExplanation_withFloat_withFloat_withFloatArray_([((OrgApacheLuceneSearchCollectionStatistics *) nil_chk(collectionStats)) field], idf, queryBoost, avgdl, cache);
 }
 
 - (OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *)simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:(OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight *)stats
                                                                                     withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
-  OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats *bm25stats = (OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats *) check_class_cast(stats, [OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats class]);
-  return [new_OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25DocScorer_initWithOrgApacheLuceneSearchSimilaritiesBM25Similarity_withOrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats_withOrgApacheLuceneIndexNumericDocValues_(self, bm25stats, [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) getNormValuesWithNSString:((OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats *) nil_chk(bm25stats))->field_]) autorelease];
+  OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats *bm25stats = (OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats *) cast_chk(stats, [OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats class]);
+  return create_OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25DocScorer_initWithOrgApacheLuceneSearchSimilaritiesBM25Similarity_withOrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats_withOrgApacheLuceneIndexNumericDocValues_(self, bm25stats, [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) getNormValuesWithNSString:((OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats *) nil_chk(bm25stats))->field_]);
 }
 
 - (OrgApacheLuceneSearchExplanation *)explainTFNormWithInt:(jint)doc
@@ -266,11 +298,11 @@ withOrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats:(OrgApacheLuceneSe
 
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchSimilaritiesBM25Similarity class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneSearchSimilaritiesBM25Similarity_NORM_TABLE_, [IOSFloatArray newArrayWithLength:256]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneSearchSimilaritiesBM25Similarity_NORM_TABLE, [IOSFloatArray newArrayWithLength:256]);
     {
       for (jint i = 0; i < 256; i++) {
         jfloat f = OrgApacheLuceneUtilSmallFloat_byte315ToFloatWithByte_((jbyte) i);
-        *IOSFloatArray_GetRef(OrgApacheLuceneSearchSimilaritiesBM25Similarity_NORM_TABLE_, i) = 1.0f / (f * f);
+        *IOSFloatArray_GetRef(OrgApacheLuceneSearchSimilaritiesBM25Similarity_NORM_TABLE, i) = 1.0f / (f * f);
       }
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSimilaritiesBM25Similarity)
@@ -304,7 +336,7 @@ withOrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats:(OrgApacheLuceneSe
     { "k1_", NULL, 0x12, "F", NULL, NULL, .constantValue.asLong = 0 },
     { "b_", NULL, 0x12, "F", NULL, NULL, .constantValue.asLong = 0 },
     { "discountOverlaps_", NULL, 0x4, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "NORM_TABLE_", NULL, 0x1a, "[F", &OrgApacheLuceneSearchSimilaritiesBM25Similarity_NORM_TABLE_, NULL, .constantValue.asLong = 0 },
+    { "NORM_TABLE", "NORM_TABLE", 0x1a, "[F", &OrgApacheLuceneSearchSimilaritiesBM25Similarity_NORM_TABLE, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.similarities.BM25Similarity$BM25DocScorer;", "Lorg.apache.lucene.search.similarities.BM25Similarity$BM25Stats;"};
   static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesBM25Similarity = { 2, "BM25Similarity", "org.apache.lucene.search.similarities", NULL, 0x1, 20, methods, 4, fields, 0, NULL, 2, inner_classes, NULL, NULL };
@@ -321,9 +353,11 @@ void OrgApacheLuceneSearchSimilaritiesBM25Similarity_initWithFloat_withFloat_(Or
 }
 
 OrgApacheLuceneSearchSimilaritiesBM25Similarity *new_OrgApacheLuceneSearchSimilaritiesBM25Similarity_initWithFloat_withFloat_(jfloat k1, jfloat b) {
-  OrgApacheLuceneSearchSimilaritiesBM25Similarity *self = [OrgApacheLuceneSearchSimilaritiesBM25Similarity alloc];
-  OrgApacheLuceneSearchSimilaritiesBM25Similarity_initWithFloat_withFloat_(self, k1, b);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSimilaritiesBM25Similarity, initWithFloat_withFloat_, k1, b)
+}
+
+OrgApacheLuceneSearchSimilaritiesBM25Similarity *create_OrgApacheLuceneSearchSimilaritiesBM25Similarity_initWithFloat_withFloat_(jfloat k1, jfloat b) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSimilaritiesBM25Similarity, initWithFloat_withFloat_, k1, b)
 }
 
 void OrgApacheLuceneSearchSimilaritiesBM25Similarity_init(OrgApacheLuceneSearchSimilaritiesBM25Similarity *self) {
@@ -334,13 +368,15 @@ void OrgApacheLuceneSearchSimilaritiesBM25Similarity_init(OrgApacheLuceneSearchS
 }
 
 OrgApacheLuceneSearchSimilaritiesBM25Similarity *new_OrgApacheLuceneSearchSimilaritiesBM25Similarity_init() {
-  OrgApacheLuceneSearchSimilaritiesBM25Similarity *self = [OrgApacheLuceneSearchSimilaritiesBM25Similarity alloc];
-  OrgApacheLuceneSearchSimilaritiesBM25Similarity_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSimilaritiesBM25Similarity, init)
+}
+
+OrgApacheLuceneSearchSimilaritiesBM25Similarity *create_OrgApacheLuceneSearchSimilaritiesBM25Similarity_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSimilaritiesBM25Similarity, init)
 }
 
 OrgApacheLuceneSearchExplanation *OrgApacheLuceneSearchSimilaritiesBM25Similarity_explainTFNormWithInt_withOrgApacheLuceneSearchExplanation_withOrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats_withOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchSimilaritiesBM25Similarity *self, jint doc, OrgApacheLuceneSearchExplanation *freq, OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats *stats, OrgApacheLuceneIndexNumericDocValues *norms) {
-  id<JavaUtilList> subs = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> subs = create_JavaUtilArrayList_init();
   [subs addWithId:freq];
   [subs addWithId:OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_(self->k1_, @"parameter k1", [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()])];
   if (norms == nil) {
@@ -358,7 +394,7 @@ OrgApacheLuceneSearchExplanation *OrgApacheLuceneSearchSimilaritiesBM25Similarit
 
 OrgApacheLuceneSearchExplanation *OrgApacheLuceneSearchSimilaritiesBM25Similarity_explainScoreWithInt_withOrgApacheLuceneSearchExplanation_withOrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats_withOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchSimilaritiesBM25Similarity *self, jint doc, OrgApacheLuceneSearchExplanation *freq, OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats *stats, OrgApacheLuceneIndexNumericDocValues *norms) {
   OrgApacheLuceneSearchExplanation *boostExpl = OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_(((OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats *) nil_chk(stats))->queryBoost_ * stats->topLevelBoost_, @"boost", [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]);
-  id<JavaUtilList> subs = [new_JavaUtilArrayList_init() autorelease];
+  id<JavaUtilList> subs = create_JavaUtilArrayList_init();
   if ([((OrgApacheLuceneSearchExplanation *) nil_chk(boostExpl)) getValue] != 1.0f) [subs addWithId:boostExpl];
   [subs addWithId:stats->idf_];
   OrgApacheLuceneSearchExplanation *tfNormExpl = OrgApacheLuceneSearchSimilaritiesBM25Similarity_explainTFNormWithInt_withOrgApacheLuceneSearchExplanation_withOrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats_withOrgApacheLuceneIndexNumericDocValues_(self, doc, freq, stats, norms);
@@ -438,9 +474,11 @@ void OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25DocScorer_initWithOrgAp
 }
 
 OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25DocScorer *new_OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25DocScorer_initWithOrgApacheLuceneSearchSimilaritiesBM25Similarity_withOrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats_withOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchSimilaritiesBM25Similarity *outer$, OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats *stats, OrgApacheLuceneIndexNumericDocValues *norms) {
-  OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25DocScorer *self = [OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25DocScorer alloc];
-  OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25DocScorer_initWithOrgApacheLuceneSearchSimilaritiesBM25Similarity_withOrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats_withOrgApacheLuceneIndexNumericDocValues_(self, outer$, stats, norms);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25DocScorer, initWithOrgApacheLuceneSearchSimilaritiesBM25Similarity_withOrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats_withOrgApacheLuceneIndexNumericDocValues_, outer$, stats, norms)
+}
+
+OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25DocScorer *create_OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25DocScorer_initWithOrgApacheLuceneSearchSimilaritiesBM25Similarity_withOrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats_withOrgApacheLuceneIndexNumericDocValues_(OrgApacheLuceneSearchSimilaritiesBM25Similarity *outer$, OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats *stats, OrgApacheLuceneIndexNumericDocValues *norms) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25DocScorer, initWithOrgApacheLuceneSearchSimilaritiesBM25Similarity_withOrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats_withOrgApacheLuceneIndexNumericDocValues_, outer$, stats, norms)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25DocScorer)
@@ -505,9 +543,11 @@ void OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats_initWithNSString_
 }
 
 OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats *new_OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats_initWithNSString_withOrgApacheLuceneSearchExplanation_withFloat_withFloat_withFloatArray_(NSString *field, OrgApacheLuceneSearchExplanation *idf, jfloat queryBoost, jfloat avgdl, IOSFloatArray *cache) {
-  OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats *self = [OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats alloc];
-  OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats_initWithNSString_withOrgApacheLuceneSearchExplanation_withFloat_withFloat_withFloatArray_(self, field, idf, queryBoost, avgdl, cache);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats, initWithNSString_withOrgApacheLuceneSearchExplanation_withFloat_withFloat_withFloatArray_, field, idf, queryBoost, avgdl, cache)
+}
+
+OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats *create_OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats_initWithNSString_withOrgApacheLuceneSearchExplanation_withFloat_withFloat_withFloatArray_(NSString *field, OrgApacheLuceneSearchExplanation *idf, jfloat queryBoost, jfloat avgdl, IOSFloatArray *cache) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats, initWithNSString_withOrgApacheLuceneSearchExplanation_withFloat_withFloat_withFloatArray_, field, idf, queryBoost, avgdl, cache)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats)

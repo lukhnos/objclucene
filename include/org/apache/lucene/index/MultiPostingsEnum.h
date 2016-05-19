@@ -5,25 +5,29 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexMultiPostingsEnum_INCLUDE_ALL")
-#if OrgApacheLuceneIndexMultiPostingsEnum_RESTRICT
-#define OrgApacheLuceneIndexMultiPostingsEnum_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexMultiPostingsEnum")
+#ifdef RESTRICT_OrgApacheLuceneIndexMultiPostingsEnum
+#define INCLUDE_ALL_OrgApacheLuceneIndexMultiPostingsEnum 0
 #else
-#define OrgApacheLuceneIndexMultiPostingsEnum_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexMultiPostingsEnum 1
 #endif
-#undef OrgApacheLuceneIndexMultiPostingsEnum_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexMultiPostingsEnum
 
-#if !defined (_OrgApacheLuceneIndexMultiPostingsEnum_) && (OrgApacheLuceneIndexMultiPostingsEnum_INCLUDE_ALL || OrgApacheLuceneIndexMultiPostingsEnum_INCLUDE)
-#define _OrgApacheLuceneIndexMultiPostingsEnum_
+#if !defined (OrgApacheLuceneIndexMultiPostingsEnum_) && (INCLUDE_ALL_OrgApacheLuceneIndexMultiPostingsEnum || defined(INCLUDE_OrgApacheLuceneIndexMultiPostingsEnum))
+#define OrgApacheLuceneIndexMultiPostingsEnum_
 
-#define OrgApacheLuceneIndexPostingsEnum_RESTRICT 1
-#define OrgApacheLuceneIndexPostingsEnum_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneIndexPostingsEnum 1
+#define INCLUDE_OrgApacheLuceneIndexPostingsEnum 1
 #include "org/apache/lucene/index/PostingsEnum.h"
 
 @class IOSObjectArray;
 @class OrgApacheLuceneIndexMultiTermsEnum;
 @class OrgApacheLuceneUtilBytesRef;
 
+/*!
+ @brief Exposes <code>PostingsEnum</code>, merged from <code>PostingsEnum</code>
+ API of sub-segments.
+ */
 @interface OrgApacheLuceneIndexMultiPostingsEnum : OrgApacheLuceneIndexPostingsEnum {
  @public
   IOSObjectArray *subPostingsEnums_;
@@ -36,11 +40,20 @@
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ @param parent The <code>MultiTermsEnum</code> that created us.
+ @param subReaderCount How many sub-readers are being merged.
+ */
 - (instancetype)initWithOrgApacheLuceneIndexMultiTermsEnum:(OrgApacheLuceneIndexMultiTermsEnum *)parent
                                                    withInt:(jint)subReaderCount;
 
 - (jint)advanceWithInt:(jint)target;
 
+/*!
+ @brief Returns <code>true</code> if this instance can be reused by
+ the provided <code>MultiTermsEnum</code>.
+ */
 - (jboolean)canReuseWithOrgApacheLuceneIndexMultiTermsEnum:(OrgApacheLuceneIndexMultiTermsEnum *)parent;
 
 - (jlong)cost;
@@ -51,16 +64,26 @@
 
 - (jint)freq;
 
+/*!
+ @brief How many sub-readers we are merging.
+ - seealso: #getSubs
+ */
 - (jint)getNumSubs;
 
 - (OrgApacheLuceneUtilBytesRef *)getPayload;
 
+/*!
+ @brief Returns sub-readers we are merging.
+ */
 - (IOSObjectArray *)getSubs;
 
 - (jint)nextDoc;
 
 - (jint)nextPosition;
 
+/*!
+ @brief Rre-use and reset this instance on the provided slices.
+ */
 - (OrgApacheLuceneIndexMultiPostingsEnum *)resetWithOrgApacheLuceneIndexMultiPostingsEnum_EnumWithSliceArray:(IOSObjectArray *)subs
                                                                                                      withInt:(jint)numSubs;
 
@@ -79,19 +102,32 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexMultiPostingsEnum_initWithOrgApacheLu
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexMultiPostingsEnum *new_OrgApacheLuceneIndexMultiPostingsEnum_initWithOrgApacheLuceneIndexMultiTermsEnum_withInt_(OrgApacheLuceneIndexMultiTermsEnum *parent, jint subReaderCount) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexMultiPostingsEnum *create_OrgApacheLuceneIndexMultiPostingsEnum_initWithOrgApacheLuceneIndexMultiTermsEnum_withInt_(OrgApacheLuceneIndexMultiTermsEnum *parent, jint subReaderCount);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiPostingsEnum)
 
 #endif
 
-#if !defined (_OrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice_) && (OrgApacheLuceneIndexMultiPostingsEnum_INCLUDE_ALL || OrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice_INCLUDE)
-#define _OrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice_
+#if !defined (OrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice_) && (INCLUDE_ALL_OrgApacheLuceneIndexMultiPostingsEnum || defined(INCLUDE_OrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice))
+#define OrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice_
 
 @class OrgApacheLuceneIndexPostingsEnum;
 @class OrgApacheLuceneIndexReaderSlice;
 
+/*!
+ @brief Holds a <code>PostingsEnum</code> along with the
+ corresponding <code>ReaderSlice</code>.
+ */
 @interface OrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice : NSObject {
  @public
+  /*!
+   @brief <code>PostingsEnum</code> for this sub-reader.
+   */
   OrgApacheLuceneIndexPostingsEnum *postingsEnum_;
+  /*!
+   @brief <code>ReaderSlice</code> describing how this sub-reader
+ fits into the composite reader.
+   */
   OrgApacheLuceneIndexReaderSlice *slice_;
 }
 
@@ -114,8 +150,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice_init(
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice *new_OrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice *create_OrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexMultiPostingsEnum_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexMultiPostingsEnum")

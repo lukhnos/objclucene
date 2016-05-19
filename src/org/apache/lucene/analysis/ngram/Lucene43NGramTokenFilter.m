@@ -4,12 +4,14 @@
 //
 
 #include "IOSClass.h"
+#include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
+#include "java/lang/annotation/Annotation.h"
 #include "org/apache/lucene/analysis/TokenFilter.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/miscellaneous/CodepointCountFilter.h"
@@ -65,6 +67,8 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisNgramLucene43NGramTok
 
 __attribute__((unused)) static OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1 *new_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1 *create_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1)
 
 @interface OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2 : NSObject < OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute >
@@ -83,9 +87,19 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisNgramLucene43NGramTok
 
 __attribute__((unused)) static OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2 *new_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2 *create_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2)
 
 @implementation OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter
+
++ (jint)DEFAULT_MIN_NGRAM_SIZE {
+  return OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_DEFAULT_MIN_NGRAM_SIZE;
+}
+
++ (jint)DEFAULT_MAX_NGRAM_SIZE {
+  return OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_DEFAULT_MAX_NGRAM_SIZE;
+}
 
 - (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
                                                    withInt:(jint)minGram
@@ -143,6 +157,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_
   JreStrongAssign(&curTermBuffer_, nil);
 }
 
++ (IOSObjectArray *)__annotations {
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
 - (void)dealloc {
   RELEASE_(curTermBuffer_);
   RELEASE_(charUtils_);
@@ -151,10 +169,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_
   RELEASE_(posLenAtt_);
   RELEASE_(offsetAtt_);
   [super dealloc];
-}
-
-+ (IOSObjectArray *)__annotations {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -192,15 +206,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_
 @end
 
 void OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter *self, OrgApacheLuceneAnalysisTokenStream *input, jint minGram, jint maxGram) {
-  OrgApacheLuceneAnalysisTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, [new_OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(input, minGram, JavaLangInteger_MAX_VALUE) autorelease]);
+  OrgApacheLuceneAnalysisTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, create_OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(input, minGram, JavaLangInteger_MAX_VALUE));
   JreStrongAssign(&self->termAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()]);
   JreStrongAssign(&self->offsetAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_()]);
   JreStrongAssign(&self->charUtils_, OrgApacheLuceneAnalysisUtilCharacterUtils_getJava4Instance());
   if (minGram < 1) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"minGram must be greater than zero") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"minGram must be greater than zero");
   }
   if (minGram > maxGram) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"minGram must not be greater than maxGram") autorelease];
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"minGram must not be greater than maxGram");
   }
   self->minGram_ = minGram;
   self->maxGram_ = maxGram;
@@ -209,9 +223,11 @@ void OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_initWithOrgApacheLucen
 }
 
 OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter *new_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(OrgApacheLuceneAnalysisTokenStream *input, jint minGram, jint maxGram) {
-  OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter *self = [OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter alloc];
-  OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(self, input, minGram, maxGram);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_, input, minGram, maxGram)
+}
+
+OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter *create_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(OrgApacheLuceneAnalysisTokenStream *input, jint minGram, jint maxGram) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_, input, minGram, maxGram)
 }
 
 void OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter *self, OrgApacheLuceneAnalysisTokenStream *input) {
@@ -219,9 +235,11 @@ void OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_initWithOrgApacheLucen
 }
 
 OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter *new_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) {
-  OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter *self = [OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter alloc];
-  OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, input);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_, input)
+}
+
+OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter *create_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter, initWithOrgApacheLuceneAnalysisTokenStream_, input)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter)
@@ -260,9 +278,11 @@ void OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1_init(OrgApacheLucen
 }
 
 OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1 *new_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1_init() {
-  OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1 *self = [OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1 alloc];
-  OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1, init)
+}
+
+OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1 *create_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$1)
@@ -301,9 +321,11 @@ void OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2_init(OrgApacheLucen
 }
 
 OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2 *new_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2_init() {
-  OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2 *self = [OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2 alloc];
-  OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2, init)
+}
+
+OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2 *create_OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisNgramLucene43NGramTokenFilter_$2)

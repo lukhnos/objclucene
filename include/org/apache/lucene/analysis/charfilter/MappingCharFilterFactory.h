@@ -5,27 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory_) && (OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory))
+#define OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilCharFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilCharFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilCharFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilCharFilterFactory 1
 #include "org/apache/lucene/analysis/util/CharFilterFactory.h"
 
-#define OrgApacheLuceneAnalysisUtilResourceLoaderAware_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilResourceLoaderAware_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilResourceLoaderAware 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilResourceLoaderAware 1
 #include "org/apache/lucene/analysis/util/ResourceLoaderAware.h"
 
-#define OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent 1
 #include "org/apache/lucene/analysis/util/MultiTermAwareComponent.h"
 
 @class IOSCharArray;
@@ -38,14 +38,33 @@
 @protocol JavaUtilMap;
 @protocol OrgApacheLuceneAnalysisUtilResourceLoader;
 
+/*!
+ @brief Factory for <code>MappingCharFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_map" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;charFilter class="solr.MappingCharFilterFactory" mapping="mapping.txt"/&gt;
+ &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ @since Solr 1.4
+ */
 @interface OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory : OrgApacheLuceneAnalysisUtilCharFilterFactory < OrgApacheLuceneAnalysisUtilResourceLoaderAware, OrgApacheLuceneAnalysisUtilMultiTermAwareComponent > {
  @public
   OrgApacheLuceneAnalysisCharfilterNormalizeCharMap *normMap_;
   IOSCharArray *out_;
 }
 
++ (JavaUtilRegexPattern *)p;
+
++ (void)setP:(JavaUtilRegexPattern *)value;
+
 #pragma mark Public
 
+/*!
+ @brief Creates a new MappingCharFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (JavaIoReader *)createWithJavaIoReader:(JavaIoReader *)input;
@@ -68,16 +87,20 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory, normMap_, OrgApacheLuceneAnalysisCharfilterNormalizeCharMap *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory, out_, IOSCharArray *)
 
-FOUNDATION_EXPORT JavaUtilRegexPattern *OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory_p_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory, p_, JavaUtilRegexPattern *)
-J2OBJC_STATIC_FIELD_SETTER(OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory, p_, JavaUtilRegexPattern *)
+inline JavaUtilRegexPattern *OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory_get_p();
+inline JavaUtilRegexPattern *OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory_set_p(JavaUtilRegexPattern *value);
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT JavaUtilRegexPattern *OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory_p;
+J2OBJC_STATIC_FIELD_OBJ(OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory, p, JavaUtilRegexPattern *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory *self, id<JavaUtilMap> args);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory *new_OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory *create_OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCharfilterMappingCharFilterFactory")

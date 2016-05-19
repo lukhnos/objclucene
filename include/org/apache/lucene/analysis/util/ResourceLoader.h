@@ -5,27 +5,39 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisUtilResourceLoader_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisUtilResourceLoader_RESTRICT
-#define OrgApacheLuceneAnalysisUtilResourceLoader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilResourceLoader")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisUtilResourceLoader
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisUtilResourceLoader 0
 #else
-#define OrgApacheLuceneAnalysisUtilResourceLoader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisUtilResourceLoader 1
 #endif
-#undef OrgApacheLuceneAnalysisUtilResourceLoader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisUtilResourceLoader
 
-#if !defined (_OrgApacheLuceneAnalysisUtilResourceLoader_) && (OrgApacheLuceneAnalysisUtilResourceLoader_INCLUDE_ALL || OrgApacheLuceneAnalysisUtilResourceLoader_INCLUDE)
-#define _OrgApacheLuceneAnalysisUtilResourceLoader_
+#if !defined (OrgApacheLuceneAnalysisUtilResourceLoader_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisUtilResourceLoader || defined(INCLUDE_OrgApacheLuceneAnalysisUtilResourceLoader))
+#define OrgApacheLuceneAnalysisUtilResourceLoader_
 
 @class IOSClass;
 @class JavaIoInputStream;
 
+/*!
+ @brief Abstraction for loading resources (streams, files, and classes).
+ */
 @protocol OrgApacheLuceneAnalysisUtilResourceLoader < NSObject, JavaObject >
 
+/*!
+ @brief Opens a named resource
+ */
 - (JavaIoInputStream *)openResourceWithNSString:(NSString *)resource;
 
+/*!
+ @brief Finds class of the name and expected type
+ */
 - (IOSClass *)findClassWithNSString:(NSString *)cname
                        withIOSClass:(IOSClass *)expectedType;
 
+/*!
+ @brief Creates an instance of the name and expected type
+ */
 - (id)newInstanceWithNSString:(NSString *)cname
                  withIOSClass:(IOSClass *)expectedType OBJC_METHOD_FAMILY_NONE;
 
@@ -37,4 +49,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilResourceLoader)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisUtilResourceLoader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilResourceLoader")

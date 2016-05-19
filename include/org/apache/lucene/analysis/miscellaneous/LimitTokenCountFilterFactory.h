@@ -5,32 +5,53 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_RESTRICT
-#define OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory 0
 #else
-#define OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory 1
 #endif
-#undef OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory
 
-#if !defined (_OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_) && (OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_INCLUDE_ALL || OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_INCLUDE)
-#define _OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_
+#if !defined (OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory || defined(INCLUDE_OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory))
+#define OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_
 
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_RESTRICT 1
-#define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
+#define INCLUDE_OrgApacheLuceneAnalysisUtilTokenFilterFactory 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
 @class OrgApacheLuceneAnalysisTokenStream;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Factory for <code>LimitTokenCountFilter</code>.
+ <pre class="prettyprint">
+ &lt;fieldType name="text_lngthcnt" class="solr.TextField" positionIncrementGap="100"&gt;
+ &lt;analyzer&gt;
+ &lt;tokenizer class="solr.WhitespaceTokenizerFactory"/&gt;
+ &lt;filter class="solr.LimitTokenCountFilterFactory" maxTokenCount="10" consumeAllTokens="false" /&gt;
+ &lt;/analyzer&gt;
+ 
+@endcode
+ <p>
+ The <code>consumeAllTokens</code> property is optional and defaults to <code>false</code>.  
+ See <code>LimitTokenCountFilter</code> for an explanation of its use.
+ */
 @interface OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory {
  @public
   jint maxTokenCount_;
   jboolean consumeAllTokens_;
 }
 
++ (NSString *)MAX_TOKEN_COUNT_KEY;
+
++ (NSString *)CONSUME_ALL_TOKENS_KEY;
+
 #pragma mark Public
 
+/*!
+ @brief Creates a new LimitTokenCountFilterFactory
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
@@ -39,18 +60,24 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_MAX_TOKEN_COUNT_KEY_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory, MAX_TOKEN_COUNT_KEY_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_get_MAX_TOKEN_COUNT_KEY();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_MAX_TOKEN_COUNT_KEY;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory, MAX_TOKEN_COUNT_KEY, NSString *)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_CONSUME_ALL_TOKENS_KEY_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory, CONSUME_ALL_TOKENS_KEY_, NSString *)
+inline NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_get_CONSUME_ALL_TOKENS_KEY();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_CONSUME_ALL_TOKENS_KEY;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory, CONSUME_ALL_TOKENS_KEY, NSString *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory *self, id<JavaUtilMap> args);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory *create_OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilterFactory")

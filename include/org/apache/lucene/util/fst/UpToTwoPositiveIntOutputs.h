@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_INCLUDE_ALL")
-#if OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_RESTRICT
-#define OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs")
+#ifdef RESTRICT_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs
+#define INCLUDE_ALL_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs 0
 #else
-#define OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs 1
 #endif
-#undef OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs
 
-#if !defined (_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_) && (OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_INCLUDE_ALL || OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_INCLUDE)
-#define _OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_
+#if !defined (OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs || defined(INCLUDE_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs))
+#define OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_
 
-#define OrgApacheLuceneUtilFstOutputs_RESTRICT 1
-#define OrgApacheLuceneUtilFstOutputs_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneUtilFstOutputs 1
+#define INCLUDE_OrgApacheLuceneUtilFstOutputs 1
 #include "org/apache/lucene/util/fst/Outputs.h"
 
 @class JavaLangLong;
@@ -25,6 +25,26 @@
 @class OrgApacheLuceneStoreDataOutput;
 @class OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs;
 
+/*!
+ @brief An FST <code>Outputs</code> implementation where each output
+ is one or two non-negative long values.
+ If it's a
+ single output, Long is returned; else, TwoLongs.  Order
+ is preserved in the TwoLongs case, ie .first is the first
+ input/output added to Builder, and .second is the
+ second.  You cannot store 0 output with this (that's
+ reserved to mean "no output")!
+ <p>NOTE: the only way to create a TwoLongs output is to
+ add the same input to the FST twice in a row.  This is
+ how the FST maps a single input to two outputs (e.g. you
+ cannot pass a TwoLongs to <code>Builder.add</code>.  If you
+ need more than two then use <code>ListOfOutputs</code>, but if
+ you only have at most 2 then this implementation will
+ require fewer bytes as it steals one bit from each long
+ value.
+ <p>NOTE: the resulting FST is not guaranteed to be minimal!
+ See <code>Builder</code>.
+ */
 @interface OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs : OrgApacheLuceneUtilFstOutputs
 
 #pragma mark Public
@@ -69,9 +89,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs_) && (OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_INCLUDE_ALL || OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs_INCLUDE)
-#define _OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs_
+#if !defined (OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs_) && (INCLUDE_ALL_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs || defined(INCLUDE_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs))
+#define OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs_
 
+/*!
+ @brief Holds two long outputs.
+ */
 @interface OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs : NSObject {
  @public
   jlong first_;
@@ -97,8 +120,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs_
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs *new_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs_initWithLong_withLong_(jlong first, jlong second) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs *create_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs_initWithLong_withLong_(jlong first, jlong second);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs")

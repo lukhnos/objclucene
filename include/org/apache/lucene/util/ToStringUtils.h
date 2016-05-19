@@ -5,24 +5,30 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilToStringUtils_INCLUDE_ALL")
-#if OrgApacheLuceneUtilToStringUtils_RESTRICT
-#define OrgApacheLuceneUtilToStringUtils_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilToStringUtils")
+#ifdef RESTRICT_OrgApacheLuceneUtilToStringUtils
+#define INCLUDE_ALL_OrgApacheLuceneUtilToStringUtils 0
 #else
-#define OrgApacheLuceneUtilToStringUtils_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilToStringUtils 1
 #endif
-#undef OrgApacheLuceneUtilToStringUtils_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilToStringUtils
 
-#if !defined (_OrgApacheLuceneUtilToStringUtils_) && (OrgApacheLuceneUtilToStringUtils_INCLUDE_ALL || OrgApacheLuceneUtilToStringUtils_INCLUDE)
-#define _OrgApacheLuceneUtilToStringUtils_
+#if !defined (OrgApacheLuceneUtilToStringUtils_) && (INCLUDE_ALL_OrgApacheLuceneUtilToStringUtils || defined(INCLUDE_OrgApacheLuceneUtilToStringUtils))
+#define OrgApacheLuceneUtilToStringUtils_
 
 @class IOSByteArray;
 @class JavaLangStringBuilder;
 
+/*!
+ @brief Helper methods to ease implementing <code>Object.toString()</code>.
+ */
 @interface OrgApacheLuceneUtilToStringUtils : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief for printing boost only if not 1.0
+ */
 + (NSString *)boostWithFloat:(jfloat)boost;
 
 + (void)byteArrayWithJavaLangStringBuilder:(JavaLangStringBuilder *)buffer
@@ -44,4 +50,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilToStringUtils)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilToStringUtils_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilToStringUtils")

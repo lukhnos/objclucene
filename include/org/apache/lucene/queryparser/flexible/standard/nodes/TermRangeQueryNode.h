@@ -5,27 +5,41 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode_) && (OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode_
+#if !defined (OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode))
+#define OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode_
 
-#define OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode_RESTRICT 1
-#define OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode 1
+#define INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode 1
 #include "org/apache/lucene/queryparser/flexible/standard/nodes/AbstractRangeQueryNode.h"
 
 @class OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode;
 
+/*!
+ @brief This query node represents a range query composed by <code>FieldQueryNode</code>
+ bounds, which means the bound values are strings.
+ - seealso: FieldQueryNode
+ - seealso: AbstractRangeQueryNode
+ */
 @interface OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode : OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode
 
 #pragma mark Public
 
+/*!
+ @brief Constructs a <code>TermRangeQueryNode</code> object using the given
+ <code>FieldQueryNode</code> as its bounds.
+ @param lower the lower bound
+ @param upper the upper bound
+ @param lowerInclusive <code>true</code> if the lower bound is inclusive, otherwise, <code>false</code>
+ @param upperInclusive <code>true</code> if the upper bound is inclusive, otherwise, <code>false</code>
+ */
 - (instancetype)initWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode:(OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *)lower
                     withOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode:(OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *)upper
                                                                       withBoolean:(jboolean)lowerInclusive
@@ -39,8 +53,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQ
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode *new_OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_withOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_withBoolean_withBoolean_(OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *lower, OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *upper, jboolean lowerInclusive, jboolean upperInclusive) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode *create_OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_withOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_withBoolean_withBoolean_(OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *lower, OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *upper, jboolean lowerInclusive, jboolean upperInclusive);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode")

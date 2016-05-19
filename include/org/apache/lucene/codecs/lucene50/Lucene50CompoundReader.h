@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_RESTRICT
-#define OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50CompoundReader")
+#ifdef RESTRICT_OrgApacheLuceneCodecsLucene50Lucene50CompoundReader
+#define INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50CompoundReader 0
 #else
-#define OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50CompoundReader 1
 #endif
-#undef OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsLucene50Lucene50CompoundReader
 
-#if !defined (_OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_) && (OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_INCLUDE_ALL || OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_INCLUDE)
-#define _OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_
+#if !defined (OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_) && (INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50CompoundReader || defined(INCLUDE_OrgApacheLuceneCodecsLucene50Lucene50CompoundReader))
+#define OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_
 
-#define OrgApacheLuceneStoreDirectory_RESTRICT 1
-#define OrgApacheLuceneStoreDirectory_INCLUDE 1
+#define RESTRICT_OrgApacheLuceneStoreDirectory 1
+#define INCLUDE_OrgApacheLuceneStoreDirectory 1
 #include "org/apache/lucene/store/Directory.h"
 
 @class IOSObjectArray;
@@ -28,10 +28,18 @@
 @class OrgApacheLuceneStoreLock;
 @protocol JavaUtilCollection;
 
+/*!
+ @brief Class for accessing a compound stream.
+ This class implements a directory, but is limited to only read operations.
+ Directory methods that would normally modify data throw an exception.
+ */
 @interface OrgApacheLuceneCodecsLucene50Lucene50CompoundReader : OrgApacheLuceneStoreDirectory
 
 #pragma mark Public
 
+/*!
+ @brief Create a new CompoundFileDirectory.
+ */
 - (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
                   withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)si
                     withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
@@ -41,10 +49,21 @@
 - (OrgApacheLuceneStoreIndexOutput *)createOutputWithNSString:(NSString *)name
                             withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
 
+/*!
+ @brief Not implemented
+ @throws UnsupportedOperationException always: not supported by CFS
+ */
 - (void)deleteFileWithNSString:(NSString *)name;
 
+/*!
+ @brief Returns the length of a file in the directory.
+ @throws IOException if the file does not exist
+ */
 - (jlong)fileLengthWithNSString:(NSString *)name;
 
+/*!
+ @brief Returns an array of strings, one for each file in the directory.
+ */
 - (IOSObjectArray *)listAll;
 
 - (OrgApacheLuceneStoreLock *)obtainLockWithNSString:(NSString *)name;
@@ -52,6 +71,10 @@
 - (OrgApacheLuceneStoreIndexInput *)openInputWithNSString:(NSString *)name
                         withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
 
+/*!
+ @brief Not implemented
+ @throws UnsupportedOperationException always: not supported by CFS
+ */
 - (void)renameFileWithNSString:(NSString *)from
                   withNSString:(NSString *)to;
 
@@ -67,13 +90,18 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_initW
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50CompoundReader *new_OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneStoreDirectory *directory, OrgApacheLuceneIndexSegmentInfo *si, OrgApacheLuceneStoreIOContext *context) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50CompoundReader *create_OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneStoreDirectory *directory, OrgApacheLuceneIndexSegmentInfo *si, OrgApacheLuceneStoreIOContext *context);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50CompoundReader)
 
 #endif
 
-#if !defined (_OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_FileEntry_) && (OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_INCLUDE_ALL || OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_FileEntry_INCLUDE)
-#define _OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_FileEntry_
+#if !defined (OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_FileEntry_) && (INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50CompoundReader || defined(INCLUDE_OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_FileEntry))
+#define OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_FileEntry_
 
+/*!
+ @brief Offset/Length for a slice inside of a compound file
+ */
 @interface OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_FileEntry : NSObject {
  @public
   jlong offset_;
@@ -92,8 +120,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_FileE
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_FileEntry *new_OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_FileEntry_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_FileEntry *create_OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_FileEntry_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_FileEntry)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsLucene50Lucene50CompoundReader")

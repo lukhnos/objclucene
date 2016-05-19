@@ -58,7 +58,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer, this$
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores {
-  return [new_OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight_initWithOrgApacheLuceneQueriesFunctionFunctionQuery_withOrgApacheLuceneSearchIndexSearcher_(self, searcher) autorelease];
+  return create_OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight_initWithOrgApacheLuceneQueriesFunctionFunctionQuery_withOrgApacheLuceneSearchIndexSearcher_(self, searcher);
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
@@ -68,7 +68,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer, this$
 
 - (jboolean)isEqual:(id)o {
   if (![OrgApacheLuceneQueriesFunctionFunctionQuery_class_() isInstance:o]) return false;
-  OrgApacheLuceneQueriesFunctionFunctionQuery *other = (OrgApacheLuceneQueriesFunctionFunctionQuery *) check_class_cast(o, [OrgApacheLuceneQueriesFunctionFunctionQuery class]);
+  OrgApacheLuceneQueriesFunctionFunctionQuery *other = (OrgApacheLuceneQueriesFunctionFunctionQuery *) cast_chk(o, [OrgApacheLuceneQueriesFunctionFunctionQuery class]);
   return [super isEqual:o] && [((OrgApacheLuceneQueriesFunctionValueSource *) nil_chk(self->func_)) isEqual:((OrgApacheLuceneQueriesFunctionFunctionQuery *) nil_chk(other))->func_];
 }
 
@@ -107,9 +107,11 @@ void OrgApacheLuceneQueriesFunctionFunctionQuery_initWithOrgApacheLuceneQueriesF
 }
 
 OrgApacheLuceneQueriesFunctionFunctionQuery *new_OrgApacheLuceneQueriesFunctionFunctionQuery_initWithOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValueSource *func) {
-  OrgApacheLuceneQueriesFunctionFunctionQuery *self = [OrgApacheLuceneQueriesFunctionFunctionQuery alloc];
-  OrgApacheLuceneQueriesFunctionFunctionQuery_initWithOrgApacheLuceneQueriesFunctionValueSource_(self, func);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionFunctionQuery, initWithOrgApacheLuceneQueriesFunctionValueSource_, func)
+}
+
+OrgApacheLuceneQueriesFunctionFunctionQuery *create_OrgApacheLuceneQueriesFunctionFunctionQuery_initWithOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValueSource *func) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionFunctionQuery, initWithOrgApacheLuceneQueriesFunctionValueSource_, func)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionFunctionQuery)
@@ -137,12 +139,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionFunctionQuery)
 }
 
 - (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
-  return [new_OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer_initWithOrgApacheLuceneQueriesFunctionFunctionQuery_withOrgApacheLuceneIndexLeafReaderContext_withOrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight_withFloat_(this$0_, context, self, queryWeight_) autorelease];
+  return create_OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer_initWithOrgApacheLuceneQueriesFunctionFunctionQuery_withOrgApacheLuceneIndexLeafReaderContext_withOrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight_withFloat_(this$0_, context, self, queryWeight_);
 }
 
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                                withInt:(jint)doc {
-  return [((OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer *) nil_chk(((OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer *) check_class_cast([self scorerWithOrgApacheLuceneIndexLeafReaderContext:context], [OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer class])))) explainWithInt:doc];
+  return [((OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer *) nil_chk(((OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer *) cast_chk([self scorerWithOrgApacheLuceneIndexLeafReaderContext:context], [OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer class])))) explainWithInt:doc];
 }
 
 - (void)dealloc {
@@ -155,7 +157,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionFunctionQuery)
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneQueriesFunctionFunctionQuery:withOrgApacheLuceneSearchIndexSearcher:", "FunctionWeight", NULL, 0x1, NULL, NULL },
-    { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x1, NULL, NULL },
+    { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x1, NULL, "(Ljava/util/Set<Lorg/apache/lucene/index/Term;>;)V" },
     { "getValueForNormalization", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
     { "normalizeWithFloat:withFloat:", "normalize", "V", 0x1, NULL, NULL },
     { "scorerWithOrgApacheLuceneIndexLeafReaderContext:", "scorer", "Lorg.apache.lucene.search.Scorer;", 0x1, "Ljava.io.IOException;", NULL },
@@ -183,9 +185,11 @@ void OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight_initWithOrgApach
 }
 
 OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight *new_OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight_initWithOrgApacheLuceneQueriesFunctionFunctionQuery_withOrgApacheLuceneSearchIndexSearcher_(OrgApacheLuceneQueriesFunctionFunctionQuery *outer$, OrgApacheLuceneSearchIndexSearcher *searcher) {
-  OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight *self = [OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight alloc];
-  OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight_initWithOrgApacheLuceneQueriesFunctionFunctionQuery_withOrgApacheLuceneSearchIndexSearcher_(self, outer$, searcher);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight, initWithOrgApacheLuceneQueriesFunctionFunctionQuery_withOrgApacheLuceneSearchIndexSearcher_, outer$, searcher)
+}
+
+OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight *create_OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight_initWithOrgApacheLuceneQueriesFunctionFunctionQuery_withOrgApacheLuceneSearchIndexSearcher_(OrgApacheLuceneQueriesFunctionFunctionQuery *outer$, OrgApacheLuceneSearchIndexSearcher *searcher) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight, initWithOrgApacheLuceneQueriesFunctionFunctionQuery_withOrgApacheLuceneSearchIndexSearcher_, outer$, searcher)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight)
@@ -280,9 +284,11 @@ void OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer_initWithOrgApacheLuce
 }
 
 OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer *new_OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer_initWithOrgApacheLuceneQueriesFunctionFunctionQuery_withOrgApacheLuceneIndexLeafReaderContext_withOrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight_withFloat_(OrgApacheLuceneQueriesFunctionFunctionQuery *outer$, OrgApacheLuceneIndexLeafReaderContext *context, OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight *w, jfloat qWeight) {
-  OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer *self = [OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer alloc];
-  OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer_initWithOrgApacheLuceneQueriesFunctionFunctionQuery_withOrgApacheLuceneIndexLeafReaderContext_withOrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight_withFloat_(self, outer$, context, w, qWeight);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer, initWithOrgApacheLuceneQueriesFunctionFunctionQuery_withOrgApacheLuceneIndexLeafReaderContext_withOrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight_withFloat_, outer$, context, w, qWeight)
+}
+
+OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer *create_OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer_initWithOrgApacheLuceneQueriesFunctionFunctionQuery_withOrgApacheLuceneIndexLeafReaderContext_withOrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight_withFloat_(OrgApacheLuceneQueriesFunctionFunctionQuery *outer$, OrgApacheLuceneIndexLeafReaderContext *context, OrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight *w, jfloat qWeight) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer, initWithOrgApacheLuceneQueriesFunctionFunctionQuery_withOrgApacheLuceneIndexLeafReaderContext_withOrgApacheLuceneQueriesFunctionFunctionQuery_FunctionWeight_withFloat_, outer$, context, w, qWeight)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer)

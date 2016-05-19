@@ -71,7 +71,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "stemWithCharArray:withInt:", "stem", "I", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "ItalianLightStemmer", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisItItalianLightStemmer = { 2, "ItalianLightStemmer", "org.apache.lucene.analysis.it", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisItItalianLightStemmer;
@@ -84,9 +84,11 @@ void OrgApacheLuceneAnalysisItItalianLightStemmer_init(OrgApacheLuceneAnalysisIt
 }
 
 OrgApacheLuceneAnalysisItItalianLightStemmer *new_OrgApacheLuceneAnalysisItItalianLightStemmer_init() {
-  OrgApacheLuceneAnalysisItItalianLightStemmer *self = [OrgApacheLuceneAnalysisItItalianLightStemmer alloc];
-  OrgApacheLuceneAnalysisItItalianLightStemmer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisItItalianLightStemmer, init)
+}
+
+OrgApacheLuceneAnalysisItItalianLightStemmer *create_OrgApacheLuceneAnalysisItItalianLightStemmer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisItItalianLightStemmer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisItItalianLightStemmer)
